@@ -10,8 +10,8 @@
 #include <gdk/gdk.h>
 
 #if 0
-#include <gnome-mdi-pouch.h>
-#include <gnome-mdi-roo.h>
+#include "gnome-mdi-pouch.h"
+#include "gnome-mdi-roo.h"
 #endif
 
 #include <config.h>
@@ -27,7 +27,6 @@
 static void             gnome_mdi_class_init     (GnomeMDIClass  *);
 static void             gnome_mdi_init           (GnomeMDI *);
 static void             gnome_mdi_destroy        (GtkObject *);
-static GnomeMDIChild   *gnome_mdi_find_child     (GnomeMDI *, gchar *);
 static void             gnome_mdi_set_active_view(GnomeMDI *, GtkWidget *);
 
 static GtkWidget       *find_item_by_label       (GtkMenuShell *, gchar *);
@@ -91,7 +90,7 @@ enum {
 
 typedef GtkWidget *(*GnomeMDISignal1) (GtkObject *, gpointer, gpointer);
 typedef gboolean   (*GnomeMDISignal2) (GtkObject *, gpointer, gpointer);
-typedef void       (*GnomeMDISignal4) (GtkObject *, gpointer, gpointer);
+typedef void       (*GnomeMDISignal3) (GtkObject *, gpointer, gpointer);
 
 static gint mdi_signals[LAST_SIGNAL];
 
@@ -123,13 +122,13 @@ static void gnome_mdi_marshal_2 (GtkObject	    *object,
   *return_val = (* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
 }
 
-static void gnome_mdi_marshal_4 (GtkObject	    *object,
+static void gnome_mdi_marshal_3 (GtkObject	    *object,
 				 GtkSignalFunc       func,
 				 gpointer	     func_data,
 				 GtkArg	            *args) {
-  GnomeMDISignal4 rfunc;
+  GnomeMDISignal3 rfunc;
 
-  rfunc = (GnomeMDISignal4) func;
+  rfunc = (GnomeMDISignal3) func;
   
   (* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
 }
@@ -202,13 +201,13 @@ static void gnome_mdi_class_init (GnomeMDIClass *class) {
 					     GTK_RUN_LAST,
 					     object_class->type,
 					     GTK_SIGNAL_OFFSET (GnomeMDIClass, child_changed),
-					     gnome_mdi_marshal_4,
+					     gnome_mdi_marshal_3,
 					     GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
   mdi_signals[APP_CREATED] = gtk_signal_new ("app_created",
 					     GTK_RUN_LAST,
 					     object_class->type,
 					     GTK_SIGNAL_OFFSET (GnomeMDIClass, app_created),
-					     gnome_mdi_marshal_4,
+					     gnome_mdi_marshal_3,
 					     GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
 
   gtk_object_class_add_signals (object_class, mdi_signals, LAST_SIGNAL);
@@ -768,7 +767,7 @@ static void app_set_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
   GnomeUIInfo *ui_info;
   gint pos, items;
 
-  /* free previous ui-info */
+  /* free previous child ui-info */
   ui_info = gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY);
   if(ui_info != NULL) {
     free_ui_info_tree(ui_info);
@@ -799,7 +798,7 @@ static void app_set_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
     /* set the title */
     if(mdi->flags & (GNOME_MDI_MODAL | GNOME_MDI_TOPLEVEL)) {
       /* in MODAL and TOPLEVEL modes the window title includes the active
-	 child name */
+	 child name: "child_name - mdi_title" */
       gchar *fullname;
       
       fullname = g_copy_strings(child->name, " - ", mdi->title, NULL);
@@ -908,8 +907,6 @@ static void app_create(GnomeMDI *mdi) {
     ui_info = copy_ui_info_tree(mdi->menu_template);
     gnome_app_create_menus(GNOME_APP(window), ui_info);
     gtk_object_set_data(GTK_OBJECT(window), GNOME_MDI_MENUBAR_INFO_KEY, ui_info);
-
-    menubar = GTK_MENU_BAR(GNOME_APP(window)->menubar);
   }
   else {
     /* we use the (hopefully) supplied create_menus signal handler */
@@ -981,6 +978,11 @@ gint gnome_mdi_add_view(GnomeMDI *mdi, GnomeMDIChild *child) {
   GtkWidget *view;
   gint ret = TRUE;
 
+  g_return_val_if_fail(mdi != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_MDI(mdi), FALSE);
+  g_return_val_if_fail(child != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_MDI_CHILD(child), FALSE);
+
   view = gnome_mdi_child_add_view(child);
 
   if(!view)
@@ -1023,6 +1025,11 @@ gint gnome_mdi_remove_view(GnomeMDI *mdi, GtkWidget *view, gint force) {
   GnomeApp *window;
   GnomeMDIChild *child;
   gint ret = TRUE;
+
+  g_return_val_if_fail(mdi != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_MDI(mdi), FALSE);
+  g_return_val_if_fail(view != NULL, FALSE);
+  g_return_val_if_fail(GTK_IS_WIDGET(view), FALSE);
 
   if(!force)
     gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_VIEW], view, &ret);
@@ -1100,6 +1107,8 @@ gint gnome_mdi_remove_child(GnomeMDI *mdi, GnomeMDIChild *child, gint force) {
   g_return_val_if_fail(child != NULL, FALSE);
   g_return_val_if_fail(GNOME_IS_MDI_CHILD(child), FALSE);
 
+  /* if force is set to TRUE, don't call the remove_child handler (ie there is no way for the
+     user to stop removal of the child) */
   if(!force)
     gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD], child, &ret);
 
@@ -1123,11 +1132,16 @@ gint gnome_mdi_remove_all(GnomeMDI *mdi, gint force) {
   GnomeMDIChild *child;
   gint handler_ret = TRUE;
 
+  g_return_val_if_fail(mdi != NULL, FALSE);
+  g_return_val_if_fail(GNOME_IS_MDI(mdi), FALSE);
+
+  /* first check if removal of any child will be prevented by the remove_child signal handler */
   if(!force) {
     child_node = mdi->children;
     while(child_node) {
       gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD], child_node->data, &handler_ret);
 
+      /* if any of the children may not be removed, none will be */
       if(handler_ret == FALSE)
         return FALSE;
 
@@ -1135,6 +1149,8 @@ gint gnome_mdi_remove_all(GnomeMDI *mdi, gint force) {
     }
   }
 
+  /* remove all the children with force arg set to true so that remove_child handlers
+     are not called again */
   while(mdi->children) {
     child = GNOME_MDI_CHILD(mdi->children->data);
     mdi->children = g_list_next(mdi->children);
@@ -1144,8 +1160,11 @@ gint gnome_mdi_remove_all(GnomeMDI *mdi, gint force) {
   return TRUE;
 }
 
-static GnomeMDIChild *gnome_mdi_find_child(GnomeMDI *mdi, gchar *name) {
+GnomeMDIChild *gnome_mdi_find_child(GnomeMDI *mdi, gchar *name) {
   GList *child;
+
+  g_return_val_if_fail(mdi != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_MDI(mdi), NULL);
 
   child = mdi->children;
   while(child) {
@@ -1162,6 +1181,9 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, gint mode) {
   GtkWidget *view;
   GnomeMDIChild *child;
   GList *child_node, *view_node;
+
+  g_return_if_fail(mdi != NULL);
+  g_return_if_fail(GNOME_IS_MDI(mdi));
 
   if(mode & mdi->flags)
     return;
@@ -1248,6 +1270,9 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, gint mode) {
 }
 
 GnomeMDIChild *gnome_mdi_active_child(GnomeMDI *mdi) {
+  g_return_val_if_fail(mdi != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_MDI(mdi), NULL);
+
   if(mdi->active_view)
     return(VIEW_GET_CHILD(mdi->active_view));
 
@@ -1255,14 +1280,23 @@ GnomeMDIChild *gnome_mdi_active_child(GnomeMDI *mdi) {
 }
 
 void gnome_mdi_set_menu_template(GnomeMDI *mdi, GnomeUIInfo *menu_tmpl) {
+  g_return_if_fail(mdi != NULL);
+  g_return_if_fail(GNOME_IS_MDI(mdi));
+
   mdi->menu_template = menu_tmpl;
 }
 
 void gnome_mdi_set_toolbar_template(GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl) {
+  g_return_if_fail(mdi != NULL);
+  g_return_if_fail(GNOME_IS_MDI(mdi));
+
   mdi->toolbar_template = tbar_tmpl;
 }
 
 void gnome_mdi_set_child_menu_path(GnomeMDI *mdi, gchar *path) {
+  g_return_if_fail(mdi != NULL);
+  g_return_if_fail(GNOME_IS_MDI(mdi));
+
   if(mdi->child_menu_path)
     g_free(mdi->child_menu_path);
 
@@ -1270,8 +1304,12 @@ void gnome_mdi_set_child_menu_path(GnomeMDI *mdi, gchar *path) {
 }
 
 void gnome_mdi_set_child_list_path(GnomeMDI *mdi, gchar *path) {
+  g_return_if_fail(mdi != NULL);
+  g_return_if_fail(GNOME_IS_MDI(mdi));
+
   if(mdi->child_list_path)
     g_free(mdi->child_list_path);
 
   mdi->child_list_path = g_strdup(path);
 }
+

@@ -14,12 +14,12 @@
  * gint remove_child(GnomeMDI *, GnomeMDIChild *)
  * gint remove_view(GnomeMDI *, GtkWidget *)
  *   are called before removing mdi_child or view. the handler should return true if the object
- *   should be removed from MDI
+ *   is to be removed from MDI
  *
  * GtkMenubar *create_menus(GnomeMDI *, GnomeApp *)
  *   should return a GtkMenubar for the GnomeApps when the GnomeUIInfo way with using menu
  *   template is not sufficient. This signal is emitted when a new GnomeApp that
- *   needs new menubar is created but ONLY if the menu template is NULL!
+ *   needs a new menubar is created but ONLY if the menu template is NULL!
  *
  * GtkToolbar *create_toolbar(GnomeMDI *, GnomeApp *)
  *   should return a GtkToolbar for the GnomeApps when the GnomeUIInfo way with using toolbar
@@ -33,7 +33,8 @@
  *
  * void app_created(GnomeMDI *, GnomeApp *)
  *   is called with each newly created GnomeApp to allow the MDI user to customize it.
- *   no contents may be set.
+ *   no contents may be set since GnomeMDI uses them for storing either a view of a child
+ *   or a notebook
  */
 
 #ifndef __GNOME_MDI_H__
@@ -120,12 +121,10 @@ GtkObject     *gnome_mdi_new                (gchar *, gchar *);
 void          gnome_mdi_set_mode            (GnomeMDI *, gint);
 
 /* setting the menu and toolbar stuff */
-void          gnome_mdi_set_menu_template   (GnomeMDI*, GnomeUIInfo *);
-void          gnome_mdi_set_toolbar_template(GnomeMDI*, GnomeUIInfo *);
+void          gnome_mdi_set_menu_template   (GnomeMDI *, GnomeUIInfo *);
+void          gnome_mdi_set_toolbar_template(GnomeMDI *, GnomeUIInfo *);
 void          gnome_mdi_set_child_menu_path (GnomeMDI *, gchar *);
 void          gnome_mdi_set_child_list_path (GnomeMDI *, gchar *);
-
-GnomeMDIChild *gnome_mdi_active_child       (GnomeMDI*);
 
 gint          gnome_mdi_add_view            (GnomeMDI *, GnomeMDIChild *);
 gint          gnome_mdi_remove_view         (GnomeMDI *, GtkWidget *, gint);
@@ -133,6 +132,9 @@ gint          gnome_mdi_remove_view         (GnomeMDI *, GtkWidget *, gint);
 gint          gnome_mdi_add_child           (GnomeMDI *, GnomeMDIChild *);
 gint          gnome_mdi_remove_child        (GnomeMDI *, GnomeMDIChild *, gint);
 gint          gnome_mdi_remove_all          (GnomeMDI *, gint);
+
+GnomeMDIChild *gnome_mdi_active_child       (GnomeMDI *);
+GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *, gchar *);
 
 END_GNOME_DECLS
 
