@@ -1541,27 +1541,17 @@ gnome_dock_band_insert (GnomeDockBand *band,
   if (position < 0 || position > (gint) band->num_children)
     position = band->num_children;
 
+  if (GNOME_IS_DOCK_ITEM (child)
+      && ! gnome_dock_item_set_orientation (GNOME_DOCK_ITEM (child),
+                                            band->orientation))
+      return FALSE;
+
   band_child = g_new (GnomeDockBandChild, 1);
   band_child->widget = child;
   band_child->offset = offset;
   band_child->real_offset = 0;
 
-  if (position == 0)
-    band->children = g_list_prepend (band->children, band_child);
-  else if ((guint) position == band->num_children)
-    band->children = g_list_append (band->children, band_child);
-  else
-    {
-      GList *p;
-
-      p = g_list_nth (band->children, position);
-      g_list_prepend (p, band_child);
-    }
-
-  if (GNOME_IS_DOCK_ITEM (child)
-      && ! gnome_dock_item_set_orientation (GNOME_DOCK_ITEM (child),
-                                            band->orientation))
-      return FALSE;
+  band->children = g_list_insert (band->children, band_child, position);
 
   gtk_widget_set_parent (child, GTK_WIDGET (band));
 

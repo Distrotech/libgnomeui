@@ -1,3 +1,13 @@
+2000-04-08  Ettore Perazzoli  <ettore@helixcode.com>
+
+	[Patch from Nat Friedman <nat@helixcode.com>.
+	* gnome-dock.c (drag_floating): Set the `GTK_IN_REPARENT' flag
+	before reparenting, then set unset it.
+
+	* gnome-dock-band.c (gnome_dock_band_insert): Use
+	`g_list_insert()'.  Also, avoid leaking a `GnomeDockBandChild' if
+	the operation fails.
+
 2000-01-11  Miguel de Icaza  <miguel@gnu.org>
 
 	* gtkpixmapmenuitem.c (gtk_pixmap_menu_item_size_request): Make
@@ -9,6 +19,7 @@
 
 	* gnome-app.c (gnome_app_construct): Added support for geometry
 	specification. 
+
 
 2000-02-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

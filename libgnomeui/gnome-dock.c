@@ -21,6 +21,7 @@
 */
 
 #include <gtk/gtk.h>
+#include <gtk/gtkprivate.h>
 
 #include "gnome-dock.h"
 #include "gnome-dock-band.h"
@@ -904,9 +905,13 @@ drag_floating (GnomeDock *dock,
         {
           gtk_widget_ref (item_widget);
 
+          GTK_PRIVATE_SET_FLAG (item_widget, GTK_IN_REPARENT);
+
           gtk_container_remove (GTK_CONTAINER (item_widget->parent),
                                 item_widget);
           gtk_widget_set_parent (item_widget, dock_widget);
+
+          GTK_PRIVATE_UNSET_FLAG (item_widget, GTK_IN_REPARENT);
 
           dock->floating_children = g_list_prepend (dock->floating_children,
                                                     item);
