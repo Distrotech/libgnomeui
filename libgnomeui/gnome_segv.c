@@ -46,25 +46,26 @@
 #include "gnome-i18nP.h"
 
 enum {
-  RESPONSE_NULL,
+  RESPONSE_CLOSE,
   RESPONSE_BUG_BUDDY,
-  RESPONSE_DEBUG
+  RESPONSE_DEBUG,
+  RESPONSE_RESTART
 };
 
 int main(int argc, char *argv[])
 {
-  GtkWidget *mainwin, *urlbtn;
+  GtkWidget *mainwin;
   gchar* msg;
   struct sigaction sa;
   poptContext ctx;
   const char **args;
-  char *urlstr;
   const char *app_version = NULL;
   int res;
   gchar *appname;
   gchar *bug_buddy_path = NULL;
   const char *debugger = NULL;
   gchar *debugger_path = NULL;
+  gchar *app_path = NULL;
   
   int bb_sm_disable = 0;
 
@@ -107,9 +108,23 @@ int main(int argc, char *argv[])
         }
       else
         {
-          msg = g_strdup_printf(_("Application \"%s\" (process %d) has crashed\ndue to a fatal error.\n(%s)"),
-                                progstr, getppid(), utfstr);
+          char *title;
+          title =  g_strdup_printf(_("The Application \"%s\" has quit unexpectedly."), 
+                                   progstr);
+          if (g_getenv ("GNOME_HACKER") != NULL)
+           {
+              char *procstr;
+              procstr = g_strdup_printf (_("process %d: %s"),getppid(), utfstr);
+              msg = g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>\n%s\n%s",title, procstr, _("You can inform the developers of what happened to help them fix it.  Or you can restart the application right now."));
+              g_free (procstr);
+           }
+         else
+           {
+              msg = g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s", title, _("You can inform the developers of what happened to help them fix it.  Or you can restart the application right now."));
+           }
+         g_free (title);
         }
+
       g_free(progstr);
       g_free(base);
       if(args[2])
@@ -125,19 +140,29 @@ int main(int argc, char *argv[])
       return 1;
     }
   appname = g_strdup(args[0]);
-  mainwin = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
-                                    GTK_MESSAGE_ERROR,
-                                    GTK_BUTTONS_CLOSE,
-                                    msg);
+  mainwin = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL,
+                                                GTK_MESSAGE_ERROR,
+                                                GTK_BUTTONS_NONE,
+                                                msg);
+  gtk_dialog_set_default_response (GTK_DIALOG (mainwin), GTK_RESPONSE_CLOSE);
   g_free(msg);
 
-  gtk_dialog_set_default_response (GTK_DIALOG (mainwin), GTK_RESPONSE_CLOSE);
+  app_path = g_find_program_in_path (appname);
+  if (app_path != NULL)
+    {
+      gtk_dialog_add_button (GTK_DIALOG(mainwin), "Restart Application",
+                             RESPONSE_RESTART); 
+    }
+
+  gtk_dialog_add_button (GTK_DIALOG(mainwin),
+			 GTK_STOCK_CLOSE,
+                         RESPONSE_CLOSE);
   
   bug_buddy_path = g_find_program_in_path ("bug-buddy");
   if (bug_buddy_path != NULL)
     {
-      gtk_dialog_add_button(GTK_DIALOG(mainwin),
-                            _("Submit a bug report"),
+      gtk_dialog_add_button (GTK_DIALOG(mainwin),
+                            _("Inform Developers"),
                             RESPONSE_BUG_BUDDY);
     }
 
@@ -153,21 +178,13 @@ int main(int argc, char *argv[])
       }
   }
   
-  /* Please download http://www.gnome.org/application_crashed-shtml.txt,
-   * translate the plain text, and send the file to webmaster@gnome.org. */
-  urlstr = g_strdup_printf("%s?app=%s%s%s&libsver=%s", 
-		_("http://www.gnome.org/application_crashed.shtml"),
-		args[0],
-		app_version?"&version=":"",
-		app_version?app_version:"",
-		VERSION);
-  urlbtn = gnome_href_new(urlstr,
-                          _("Please visit the GNOME Application Crash page for more information"));
-  gtk_widget_show(urlbtn);
-  gtk_container_add(GTK_CONTAINER(GTK_DIALOG(mainwin)->vbox), urlbtn);
-
-
   res = gtk_dialog_run(GTK_DIALOG(mainwin));
+
+  if (res == RESPONSE_RESTART && (app_path != NULL))
+    {
+      g_spawn_command_line_async (app_path, NULL);
+    }
+
 
   if (res == RESPONSE_BUG_BUDDY && (bug_buddy_path != NULL))
     {

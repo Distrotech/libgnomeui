@@ -1,3 +1,10 @@
+2004-01-20  Fernando Herrera  <fherrera@onirica.com>
+
+	* libgnomeui/gnome_segv.c: (main): Add a button for restarting
+	the crahsed application. Hide pid and signal information
+	unless GNOME_HACKER env variable is set. Rewrote texts based on
+	feedback for bug #127043. Removed bugzilla url.
+
 2004-01-19  Ross Burton  <ross@burtonini.com>
 
 	* libgnomeui/gnome-icon-theme.c (gnome_icon_theme_finalize):
