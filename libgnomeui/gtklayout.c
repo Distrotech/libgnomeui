@@ -187,6 +187,7 @@ gtk_layout_move (GtkLayout     *layout,
       child = tmp_list->data;
       if (child->widget == child_widget)
 	break;
+      tmp_list = g_list_next(tmp_list);
     }
 
   if (tmp_list)

@@ -334,6 +334,15 @@ void
 gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, ...)
 {
 	va_list args;
+	va_start (args, first_arg_name);
+	gnome_canvas_item_set_valist(item,first_arg_name,args);
+	va_end (args);
+}
+
+void 
+gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name,
+			      va_list args)
+{
 	GSList *arg_list;
 	GSList *info_list;
 	char *error;
@@ -344,9 +353,7 @@ gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, ...)
 	arg_list = NULL;
 	info_list = NULL;
 
-	va_start (args, first_arg_name);
 	error = gtk_object_args_collect (GTK_OBJECT_TYPE (item), &arg_list, &info_list, first_arg_name, args);
-	va_end (args);
 
 	if (error) {
 		g_warning ("gnome_canvas_item_set(): %s", error);
@@ -369,6 +376,7 @@ gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, ...)
 		item->canvas->need_repick = TRUE;
 	}
 }
+
 
 void
 gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args)

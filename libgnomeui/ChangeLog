@@ -1,3 +1,15 @@
+1998-08-28  Havoc Pennington  <hp@pobox.com>
+
+	* gtklayout.c (gtk_layout_move): Fix infinite loop (add
+	g_list_next on each iteration).
+
+1998-08-25  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-canvas.h (gnome_canvas_item_set_valist): New function
+	takes a va_list as argument.
+	* gnome-canvas.c (gnome_canvas_item_set): Implement in terms of
+	set_valist.
+
 Wed Aug 26 00:50:27 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-app.c (gnome_app_reparent_handle_box): Declare to avoid

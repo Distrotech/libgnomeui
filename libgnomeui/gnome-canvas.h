@@ -136,6 +136,10 @@ void gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, 
 /* Same as above, with parsed args */
 void gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args);
 
+/* Used only for language wrappers and the like; ignore. */
+void gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name,
+				   va_list var_args);
+
 /* Move an item by the specified amount */
 void gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy);
 
