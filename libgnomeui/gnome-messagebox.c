@@ -73,7 +73,18 @@ gnome_message_box_init (GnomeMessageBox *message_box)
   
 }
 
-
+/**
+ * gnome_message_box_new:
+ * @message: The message to be displayed.
+ * @message_box_type: The type of the message
+ * @...: A NULL terminated list of strings to use in each button.
+ *
+ * Creates a dialog box of type @message_box_type with @message.  A number
+ * of buttons are inserted on it.  You can use the GNOME stock identifiers
+ * to create gnome-stock-buttons.
+ *
+ * Returns a widget that has the dialog box.
+ */
 GtkWidget*
 gnome_message_box_new (const gchar           *message,
 		       const gchar           *message_box_type, ...)
@@ -181,6 +192,18 @@ gnome_message_box_new (const gchar           *message,
 	return GTK_WIDGET (message_box);
 }
 
+/**
+ * gnome_message_box_newv:
+ * @message: The message to be displayed.
+ * @message_box_type: The type of the message
+ * @buttons: a NULL terminated array with the buttons to insert.
+ *
+ * Creates a dialog box of type @message_box_type with @message.  A number
+ * of buttons are inserted on it, the messages come from the @buttons array.
+ * You can use the GNOME stock identifiers to create gnome-stock-buttons.
+ *
+ * Returns a widget that has the dialog box.
+ */
 GtkWidget*
 gnome_message_box_newv (const gchar           *message,
 		        const gchar           *message_box_type,
