@@ -1,3 +1,13 @@
+Wed Sep  3 16:38:59 2003  Owen Taylor  <otaylor@redhat.com>
+
+	* glib-interface-propreties-0.5.patch: Remove excess
+	check that was breaking with current GObject.
+
+	* gtkfilechooser.c (gtk_file_chooser_class_init): 
+	use the new ability to have a class_init function for
+	interfaces to avoid the ugly static gboolean initialized
+	hack.
+
 Wed Sep  3 15:32:26 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* glib-interface-propreties-{0.4,0.5}.patch: Update.
