@@ -16,12 +16,12 @@
  *   are called before removing mdi_child or view. the handler should return true if the object
  *   should be removed from MDI
  *
- * GtkMenubar *create_menus(GnomeMDI *)
+ * GtkMenubar *create_menus(GnomeMDI *, GnomeApp *)
  *   should return a GtkMenubar for the GnomeApps when the GnomeUIInfo way with using menu
  *   template is not sufficient. This signal is emitted when a new GnomeApp that
  *   needs new menubar is created but ONLY if the menu template is NULL!
  *
- * GtkToolbar *create_toolbar(GnomeMDI *)
+ * GtkToolbar *create_toolbar(GnomeMDI *, GnomeApp *)
  *   should return a GtkToolbar for the GnomeApps when the GnomeUIInfo way with using toolbar
  *   template is not sufficient. This signal is emitted when a new GnomeApp that
  *   needs new toolbar is created but ONLY if the toolbar template is NULL!
@@ -103,8 +103,8 @@ struct _GnomeMDIClass
 {
   GtkObjectClass parent_class;
 
-  GtkMenuBar *(*create_menus)(GnomeMDI *);
-  GtkToolbar *(*create_toolbar)(GnomeMDI *);
+  GtkMenuBar *(*create_menus)(GnomeMDI *, GnomeApp *);
+  GtkToolbar *(*create_toolbar)(GnomeMDI *, GnomeApp *);
   gint        (*add_child)(GnomeMDI *, GnomeMDIChild *); 
   gint        (*remove_child)(GnomeMDI *, GnomeMDIChild *); 
   gint        (*add_view)(GnomeMDI *, GtkWidget *); 
@@ -112,6 +112,8 @@ struct _GnomeMDIClass
   void        (*child_changed)(GnomeMDI *, GnomeMDIChild *);
   void        (*app_created)(GnomeMDI *, GnomeApp *);
 };
+
+guint         gnome_mdi_get_type            (void);
 
 GtkObject     *gnome_mdi_new                (gchar *, gchar *);
 

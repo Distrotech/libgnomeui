@@ -89,9 +89,8 @@ enum {
   LAST_SIGNAL
 };
 
-typedef GtkWidget *(*GnomeMDISignal1) (GtkObject *, gpointer);
+typedef GtkWidget *(*GnomeMDISignal1) (GtkObject *, gpointer, gpointer);
 typedef gboolean   (*GnomeMDISignal2) (GtkObject *, gpointer, gpointer);
-typedef void       (*GnomeMDISignal3) (GtkObject *, gpointer, gpointer, gpointer);
 typedef void       (*GnomeMDISignal4) (GtkObject *, gpointer, gpointer);
 
 static gint mdi_signals[LAST_SIGNAL];
@@ -106,9 +105,9 @@ static void gnome_mdi_marshal_1 (GtkObject	    *object,
   gpointer *return_val;
 
   rfunc = (GnomeMDISignal1) func;
-  return_val = GTK_RETLOC_POINTER (args[0]);
+  return_val = GTK_RETLOC_POINTER (args[1]);
   
-  *return_val = (* rfunc)(object, func_data);
+  *return_val = (* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
 }
 
 static void gnome_mdi_marshal_2 (GtkObject	    *object,
@@ -122,17 +121,6 @@ static void gnome_mdi_marshal_2 (GtkObject	    *object,
   return_val = GTK_RETLOC_BOOL (args[1]);
   
   *return_val = (* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
-}
-
-static void gnome_mdi_marshal_3 (GtkObject	    *object,
-				 GtkSignalFunc       func,
-				 gpointer	     func_data,
-				 GtkArg	            *args) {
-  GnomeMDISignal3 rfunc;
-
-  rfunc = (GnomeMDISignal3) func;
-  
-  (* rfunc)(object, GTK_VALUE_POINTER(args[0]), GTK_VALUE_POINTER(args[1]), func_data);
 }
 
 static void gnome_mdi_marshal_4 (GtkObject	    *object,
@@ -179,13 +167,13 @@ static void gnome_mdi_class_init (GnomeMDIClass *class) {
 					      object_class->type,
 					      GTK_SIGNAL_OFFSET (GnomeMDIClass, create_menus),
 					      gnome_mdi_marshal_1,
-					      GTK_TYPE_POINTER, 0);
+					      GTK_TYPE_POINTER, 1, GTK_TYPE_POINTER);
   mdi_signals[CREATE_TOOLBAR] = gtk_signal_new ("create_toolbar",
 						GTK_RUN_LAST,
 						object_class->type,
-						GTK_SIGNAL_OFFSET (GnomeMDIClass, create_menus),
+						GTK_SIGNAL_OFFSET (GnomeMDIClass, create_toolbar),
 						gnome_mdi_marshal_1,
-						GTK_TYPE_POINTER, 0);
+						GTK_TYPE_POINTER, 1, GTK_TYPE_POINTER);
   mdi_signals[ADD_CHILD] = gtk_signal_new ("add_child",
 					   GTK_RUN_LAST,
 					   object_class->type,
@@ -665,6 +653,8 @@ static void rootwin_drop(GtkWidget *rw, GdkEvent *event, GnomeMDI *mdi) {
 
     book_add_view(GTK_NOTEBOOK(new_book), view);
 
+    gtk_window_position(GTK_WINDOW(mdi->active_window), GTK_WIN_POS_MOUSE);
+
     gtk_widget_show(GTK_WIDGET(mdi->active_window));
   }
 }
@@ -923,7 +913,7 @@ static void app_create(GnomeMDI *mdi) {
   }
   else {
     /* we use the (hopefully) supplied create_menus signal handler */
-    gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals[CREATE_MENUS], &menubar);
+    gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals[CREATE_MENUS], window, &menubar);
 
     if(menubar) {
       gtk_widget_show(GTK_WIDGET(menubar));
@@ -940,7 +930,7 @@ static void app_create(GnomeMDI *mdi) {
     gtk_object_set_data(GTK_OBJECT(window), GNOME_MDI_TOOLBAR_INFO_KEY, ui_info);
   }
   else {
-    gtk_signal_emit(GTK_OBJECT (mdi), mdi_signals[CREATE_TOOLBAR], &toolbar);
+    gtk_signal_emit(GTK_OBJECT (mdi), mdi_signals[CREATE_TOOLBAR], window, &toolbar);
 
     if(toolbar) {
       gtk_widget_show(GTK_WIDGET(toolbar));

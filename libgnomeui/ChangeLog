@@ -1,3 +1,13 @@
+1998-07-09  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.[ch]: GnomeMDI's create_menubar and create_toolbar
+	signal handlers now receive additional parameter that holds a
+	pointer to the corresponding GnomeApp widget. This should be
+	useful when, say, calling gnome_stock_pixmap_widget(app, ...)
+	in these handlers.
+	* gnome-mdi.c (rootwin_drop): open the new GnomeApp at the
+	position of the mouse pointer.
+	
 1998-07-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_scroll_to): New public function to
