@@ -900,7 +900,7 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 
 	if (priv->editing_icon && event->type == GDK_BUTTON_PRESS) {
 		gnome_icon_text_item_stop_editing (priv->editing_icon->text, FALSE);
-		priv->editing_icon = FALSE;
+		priv->editing_icon = NULL;
 	}
 
 	switch (priv->selection_mode) {

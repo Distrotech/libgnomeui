@@ -38,8 +38,8 @@ struct _GnomeDruidPrivate
 
 	GtkWidget *bbox;
 
-	gboolean show_finish : 1; /* if TRUE, then we are showing the finish button instead of the next button */
-	gboolean show_help : 1;
+	guint show_finish : 1; /* if TRUE, then we are showing the finish button instead of the next button */
+	guint show_help : 1;
 };
 
 enum {

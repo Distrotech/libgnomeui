@@ -540,7 +540,7 @@ browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 
 	/* the path can be already set */
 	if ((path = gtk_file_chooser_get_filename (fc)) != NULL)
-		setup_preview (fc);
+		setup_preview (GTK_WIDGET(fc));
 
 	g_free (path);
 }

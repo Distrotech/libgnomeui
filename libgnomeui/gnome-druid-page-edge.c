@@ -52,11 +52,11 @@ struct _GnomeDruidPageEdgePrivate
 	GtkWidget *text_label;
 	GtkWidget *contents;
 
-	gboolean background_color_set : 1;
-	gboolean textbox_color_set : 1;
-	gboolean logo_background_color_set : 1;
-	gboolean title_color_set : 1;
-	gboolean text_color_set : 1;
+	guint background_color_set : 1;
+	guint textbox_color_set : 1;
+	guint logo_background_color_set : 1;
+	guint title_color_set : 1;
+	guint text_color_set : 1;
 };
 
 static void gnome_druid_page_edge_destroy 	(GtkObject                      *object);

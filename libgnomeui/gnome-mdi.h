@@ -60,7 +60,7 @@ struct _GnomeMDI {
 	GtkPositionType tab_pos;
 
 	guint signal_id;
-	gint in_drag : 1;
+	guint in_drag : 1;
 
 	gchar *appname, *title;
 

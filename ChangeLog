@@ -1,3 +1,16 @@
+2004-08-25  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-appbar.c: Bitfield warnings
+	* libgnomeui/gnome-druid-page-edge.c: Same
+	* libgnomeui/gnome-druid.c: Same
+	* libgnomeui/gnome-file-entry.c: Same
+	* libgnomeui/gnome-font-picker.c: Same
+	* libgnomeui/gnome-icon-entry.c: (browse_clicked): Add cast.
+	* libgnomeui/gnome-icon-list.c: (if): NULL vs. FALSE
+	* libgnomeui/gnome-icon-theme.c: (gnome_icon_theme_lookup_icon):
+	Fix a leak.
+	* libgnomeui/gnome-mdi.h: Bitfield warnings
+
 2004-08-24  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* file-chooser/gtkfilesystemgnomevfs.c: (directory_load_callback):

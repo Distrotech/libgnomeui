@@ -54,8 +54,8 @@ struct _GnomeFontPickerPrivate {
         GnomeFontPickerMode mode : 2;
 
         /* Only for GNOME_FONT_PICKER_MODE_FONT_INFO */
-        gboolean      use_font_in_label : 1;
-        gboolean      show_size : 1;
+        guint      use_font_in_label : 1;
+        guint      show_size : 1;
 
 	GtkWidget     *font_dialog;
         GtkWidget     *inside;

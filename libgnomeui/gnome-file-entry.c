@@ -66,11 +66,11 @@ struct _GnomeFileEntryPrivate {
 
 	GtkFileChooserAction filechooser_action;
 
-	gboolean is_modal : 1;
+	guint is_modal : 1;
 
-	gboolean directory_entry : 1; /*optional flag to only do directories*/
+	guint directory_entry : 1; /*optional flag to only do directories*/
 
-	gboolean use_filechooser : 1;
+	guint use_filechooser : 1;
 
 	/* FIXME: Non local files!! */
 	/* FIXME: executable_entry as used in gnome_run */

@@ -67,10 +67,10 @@ struct _GnomeAppBarPrivate
    * couldn't be changed. */
 
   GnomePreferencesType interactivity;
-  gboolean interactive : 1; /* This means status is an entry rather than a
+  guint interactive : 1; /* This means status is an entry rather than a
 			       label, for the moment. */
-  gboolean has_progress : 1;
-  gboolean has_status : 1;
+  guint has_progress : 1;
+  guint has_status : 1;
 };
 
 enum {
