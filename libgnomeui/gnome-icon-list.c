@@ -1071,15 +1071,25 @@ static void
 gil_realize (GtkWidget *widget)
 {
 	Gil *gil = GIL (widget);
+	GtkStyle *style;
 
 	gil->frozen++;
+
 	if (GTK_WIDGET_CLASS (parent_class)->realize)
 		(* GTK_WIDGET_CLASS (parent_class)->realize)(widget);
+
 	gil->frozen--;
 	
+	/* Change the style to use the base color as the background */
+
+	style = gtk_style_copy (gtk_widget_get_style (widget));
+	style->bg[GTK_STATE_NORMAL] = style->base[GTK_STATE_NORMAL];
+	gtk_widget_set_style (widget, style);
+
 	if (gil->frozen)
 		return;
-	if (gil->dirty){
+
+	if (gil->dirty) {
 		gil_layout_all_icons (gil);
 		gil_scrollbar_adjust (gil);
 	}
@@ -1501,7 +1511,7 @@ gil_class_init (GilClass *gil_class)
 	
 	widget_class->size_request         = gil_size_request;
 	widget_class->size_allocate        = gil_size_allocate;
-	widget_class->realize              = gil_realize; 
+	widget_class->realize              = gil_realize;
 	widget_class->button_press_event   = gil_button_press;
 	widget_class->button_release_event = gil_button_release;
 	widget_class->motion_notify_event  = gil_motion_notify;

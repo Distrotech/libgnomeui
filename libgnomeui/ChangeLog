@@ -1,3 +1,11 @@
+1999-01-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gil_realize): Set the icon list's background
+	to style->base[GTK_STATE_NORMAL] to be consistent with Gtk lists.
+	We actually change the style instead of just the window background
+	because that is what the canvas wants.  Yes, I need to add
+	background color support to the canvas.
+
 1999-01-19  Felix Bellaby <felix@pooh.u-net.com>
 
 	* gnome-client.c (save_yourself_callback): Handle SM spec 7.2
