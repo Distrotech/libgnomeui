@@ -117,7 +117,7 @@ libgnomeui_la_SOURCES = \
 	gnome-canvas-util.c		\
 	gnome-canvas-widget.c		\
 	gnome-client.c			\
-##	gnome-color-picker.c		\
+	gnome-color-picker.c		\
 	gnome-dateedit.c		\
 ##	gnome-dentry-edit.c		\
 	gnome-dialog.c                  \
@@ -157,6 +157,7 @@ libgnomeui_la_SOURCES = \
 ##	gnome-property-entries.c	\
 	gnome-scores.c			\
 	gnome-stock.c			\
+	gnome-stock-ids.c		\
         gnome-winhints.c		\
         gnome-paper-selector.c		\
 	gnome-procbar.c			\
@@ -225,6 +226,7 @@ gnome_headers = \
 	gnome-pixmap-entry.h		\
 	gnome-scores.h			\
 	gnome-stock.h			\
+	gnome-stock-ids.h		\
 	gnome-types.h			\
 	gnome-uidefs.h			\
         gnome-winhints.h		\
@@ -326,6 +328,7 @@ EXTRA_DIST =					\
 	$(oafinfo_DATA)
 
 libgnomeui_la_LDFLAGS = -version-info 43:0:0 -rpath $(libdir) \
+		-L`cd $(top_builddir); pwd`/gdk-pixbuf/src/.libs -lgdk_pixbuf \
 		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome \
 		-L`cd $(top_builddir); pwd`/libart_lgpl/.libs -lart_lgpl \
 		$(OAF_LIBS)					\

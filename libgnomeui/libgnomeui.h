@@ -90,9 +90,8 @@
 #include "libgnomeui/gnome-procbar.h"
 #include "libgnomeui/gnome-druid.h"
 #include "libgnomeui/gnome-druid-page.h"
-#include "libgnomeui/gnome-druid-page-start.h"
+#include "libgnomeui/gnome-druid-page-edge.h"
 #include "libgnomeui/gnome-druid-page-standard.h"
-/*#include "libgnomeui/gnome-druid-page-finish.h"*/
 #include "libgnomeui/oafgnome.h"
 
 #define GNOMEUI_INIT LIBGNOMEUI_INIT,GNOME_CLIENT_INIT

@@ -6,9 +6,9 @@ BEGIN_GNOME_DECLS
 #include "libgnome/gnomelib-init2.h"
 
 
-
-#define LIBGNOMEUI_PARAM_CRASH_DIALOG "B:libgnomeui/show_crash_dialog"
-#define LIBGNOMEUI_PARAM_DISPLAY "S:libgnomeui/display"
+extern const char libgnomeui_param_crash_dialog[], libgnomeui_param_display[];
+#define LIBGNOMEUI_PARAM_CRASH_DIALOG libgnomeui_param_crash_dialog
+#define LIBGNOMEUI_PARAM_DISPLAY libgnomeui_param_display
 
 extern GnomeModuleInfo libgnomeui_module_info, gtk_module_info;
 

@@ -32,6 +32,9 @@
 
 extern void gnome_type_init (void);
 
+const char libgnomeui_param_crash_dialog[]="B:libgnomeui/show_crash_dialog";
+const char libgnomeui_param_display[]="S:libgnomeui/display";
+
 /******************** gtk proxy module *******************/
 
 static void
@@ -191,7 +194,7 @@ static GdkPixmap *libgnomeui_pixbuf_image_loader(GdkWindow   *window,
                                                  GdkColormap *colormap,
                                                  GdkBitmap  **mask,
                                                  GdkColor    *transparent_color,
-                                                 const gchar *filename);
+                                                 const char *filename);
 static void libgnomeui_segv_setup(gboolean post_arg_parse);
 
 static GnomeModuleRequirement libgnomeui_requirements[] = {
@@ -369,7 +372,7 @@ libgnomeui_pixbuf_image_loader(GdkWindow   *window,
                                GdkColormap *colormap,
                                GdkBitmap  **maskp,
                                GdkColor    *transparent_color,
-                               const gchar *filename)
+                               const char *filename)
 {
 	GdkPixmap *retval = NULL;
         GdkBitmap *mask = NULL;
@@ -512,7 +515,7 @@ static GdkPixmap *imlib_image_loader(GdkWindow   *window,
 				     GdkColormap *colormap,
 				     GdkBitmap  **mask,
 				     GdkColor    *transparent_color,
-				     const gchar *filename);
+				     const char *filename);
 
 /* This isn't conditionally compiled based on USE_SEGV_HANDLE
    because the --disable-crash-dialog option is always accepted,

@@ -40,7 +40,7 @@ static GnomeModuleInfo liboaf_module_info = {
   "liboaf", liboaf_version, "Object Activation Framework",
   liboaf_requirements,
   (GnomeModuleHook)oaf_preinit, (GnomeModuleHook)oaf_postinit,
-  (struct poptOptions *)oaf_popt_options,
+  (struct poptOption *)oaf_popt_options,
   NULL
 };
 
@@ -98,7 +98,8 @@ rootwin_check(const OAFRegistrationLocation *regloc,
 	      const OAFRegistrationCategory *regcat,
 	      int *ret_distance, gpointer user_data)
 {
-  GdkAtom type, fmt;
+  GdkAtom type;
+  int fmt;
   char *ior = NULL;
   gint actual_length;
 
@@ -110,7 +111,7 @@ rootwin_check(const OAFRegistrationLocation *regloc,
 		       gdk_atom_intern("OAFGNOME_AC_IOR", FALSE),
 		       gdk_atom_intern("STRING", FALSE),
 		       0, 99999, FALSE, &type, &fmt, &actual_length,
-		       (guchar *)&ior))
+		       (guchar **)&ior))
     return NULL;
 
   return ior;
