@@ -2043,7 +2043,7 @@ gnome_canvas_scroll_to (GnomeCanvas *canvas, int cx, int cy)
 		cy = 0;
 
 	if (cy > (vupper - canvas->height))
-		cx = vupper - canvas->height;
+		cy = vupper - canvas->height;
 
 	if (cx != (int) canvas->layout.hadjustment->value) {
 		canvas->layout.hadjustment->value = cx;
