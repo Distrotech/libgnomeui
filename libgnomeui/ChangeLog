@@ -1,3 +1,11 @@
+1999-07-22  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (child_list_menu_create, child_list_menu_add_item):
+	append instead of prepending the item: this way the ordering is the
+	same as in notebook tabs.
+	(gnome_mdi_set_mode): when changing to modal mode preserve the
+	non-active views.
+
 1999-07-20  Federico Mena Quintero  <federico@evilplan.org>
 
 	* gnome-icon-list.c (icon_is_in_area): I'm a doofus.  Fix the

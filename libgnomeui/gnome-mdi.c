@@ -472,7 +472,7 @@ static void child_list_menu_create (GnomeMDI *mdi, GnomeApp *app)
 		gtk_object_set_data(GTK_OBJECT(item), GNOME_MDI_CHILD_KEY, child->data);
 		gtk_widget_show(item);
 		
-		gtk_menu_shell_insert(GTK_MENU_SHELL(submenu), item, pos);
+		gtk_menu_shell_append(GTK_MENU_SHELL(submenu), item);
 		
 		child = g_list_next(child);
 	}
@@ -535,7 +535,7 @@ void child_list_menu_add_item (GnomeMDI *mdi, GnomeMDIChild *child)
 			gtk_object_set_data(GTK_OBJECT(item), GNOME_MDI_CHILD_KEY, child);
 			gtk_widget_show(item);
 			
-			gtk_menu_shell_insert(GTK_MENU_SHELL(submenu), item, pos);
+			gtk_menu_shell_append(GTK_MENU_SHELL(submenu), item);
 			gtk_widget_queue_resize(submenu);
 		}
 		
@@ -1654,8 +1654,8 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 
 			/* if we are to change mode to MODAL, destroy all views except
 			   the active one */
-			if( (mode == GNOME_MDI_MODAL) && (view != mdi->active_view) )
-				gnome_mdi_child_remove_view(child, view);
+			/* if( (mode == GNOME_MDI_MODAL) && (view != mdi->active_view) )
+			   gnome_mdi_child_remove_view(child, view); */
 		}
 		child_node = child_node->next;
 	}
