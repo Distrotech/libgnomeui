@@ -3,6 +3,9 @@
 #include <string.h>
 #include <glib.h>
 #include <gdk/gdk.h>
+#include <gtk/gtklabel.h>
+#include <gtk/gtkhbox.h>
+#include "../intl/libintl.h"
 #include "libgnome/gnome-defs.h"
 #include "gnome-stock.h"
 
@@ -14,6 +17,10 @@
 #include "../programs/gtt/tb_paste.xpm"
 #include "../programs/gtt/tb_properties.xpm"
 #include "../programs/gtt/tb_prop_dis.xpm"
+#include "../programs/gtt/tb_unknown.xpm"
+#include "../programs/gtt/tb_exit.xpm"
+#include "gnome-stock-ok.xpm"
+#include "gnome-stock-cancel.xpm"
 
 
 #define STOCK_SEP '.'
@@ -138,6 +145,11 @@ struct _default_entries_data entries_data[] = {
         {GNOME_STOCK_PIXMAP_PASTE, GNOME_STOCK_PIXMAP_REGULAR, tb_paste_xpm},
         {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_REGULAR, tb_properties_xpm},
         {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_DISABLED, tb_prop_dis_xpm},
+        {GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, tb_unknown_xpm},
+        {GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm},
+        {GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm},
+        {GNOME_STOCK_BUTTON_CLOSE, GNOME_STOCK_PIXMAP_REGULAR, tb_exit_xpm},
+        {GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_cancel_xpm},
 };
 static int entries_data_num = sizeof(entries_data) / sizeof(entries_data[0]);
 
@@ -299,3 +311,28 @@ gnome_stock_pixmap_checkfor(char *icon, char *subtype)
 {
         return lookup(icon, subtype);
 }
+
+
+
+GtkWidget *
+gnome_stock_button(char *type)
+{
+        GtkWidget *button, *label, *hbox;
+        GtkWidget *pixmap;
+
+        button = gtk_button_new();
+        hbox = gtk_hbox_new(FALSE, 5);
+        gtk_widget_show(hbox);
+        gtk_container_add(GTK_CONTAINER(button), hbox);
+        label = gtk_label_new(gettext(type));
+        gtk_widget_show(label);
+        gtk_box_pack_start_defaults(GTK_BOX(hbox), label);
+        
+        pixmap = gnome_stock_pixmap_widget(button, type);
+        if (pixmap) {
+                gtk_widget_show(pixmap);
+                gtk_box_pack_end_defaults(GTK_BOX(hbox), pixmap);
+        }
+        return button;
+}
+

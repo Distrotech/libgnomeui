@@ -6,6 +6,7 @@
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkpixmap.h>
 #include <gtk/gtkvbox.h>
+#include <gtk/gtkbutton.h>
 
 
 /* A short description:
@@ -32,6 +33,20 @@
    an uncommon icon, before using it. The only icons an app can rely
    on, are those defined in this haeder file. */
 
+/* State:
+
+   currently implemented:
+     - gnome_stock_pixmap
+     - gnome_stock_pixmap_widget
+     - gnome_stock_pixmap_checkfor
+
+   not fully implemented:
+     - GnomeStockPixmapWidget (usable, but doesn't change the pixmap)
+
+   not implemented:
+     - gnome_stock_pixmap_register
+     - gnome_stock_pixmap_change
+ */
 
 BEGIN_GNOME_DECLS
 
@@ -45,6 +60,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_COPY        "Copy"
 #define GNOME_STOCK_PIXMAP_PASTE       "Paste"
 #define GNOME_STOCK_PIXMAP_PROPERTIES  "Properties"
+#define GNOME_STOCK_PIXMAP_HELP        "Help"
 
 
 /* The basic pixmap version of an icon. */
@@ -157,6 +173,21 @@ gint                   gnome_stock_pixmap_change   (char *icon, char *subtype,
 /* check for the existance of an entry. returns the entry if it
    exists, or NULL otherwise */
 GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (char *icon, char *subtype);
+
+
+
+/*  buttons  */
+
+#define GNOME_STOCK_BUTTON_OK     "Ok"
+#define GNOME_STOCK_BUTTON_CANCEL "Cancel"
+#define GNOME_STOCK_BUTTON_YES    "Yes"
+#define GNOME_STOCK_BUTTON_NO     "No"
+#define GNOME_STOCK_BUTTON_CLOSE  "Close"
+#define GNOME_STOCK_BUTTON_APPLY  "Apply"
+#define GNOME_STOCK_BUTTON_HELP   GNOME_STOCK_PIXMAP_HELP
+
+/* returns a default button widget for dialogs */
+GtkWidget             *gnome_stock_button          (char *type);
 
 END_GNOME_DECLS
 
