@@ -1,5 +1,12 @@
 1999-02-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-scores.c (gnome_scores_set_logo_pixmap): Kill gtk-pixmap
+	and use gnome-pixmap here as well.
+
+	* gnome-icon-entry.c (entry_changed): Use gnome-pixmap instead of
+	gtk-pixmap here
+	(setup_preview): Kill gtk-pixmap here too.
+
 	* gnome-messagebox.c (gnome_message_box_new): Justify labels to
 	the left.
 

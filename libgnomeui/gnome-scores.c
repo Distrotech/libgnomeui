@@ -238,9 +238,7 @@ void gnome_scores_set_logo_widget (GnomeScores *gs, GtkWidget *w)
 
 void gnome_scores_set_logo_pixmap (GnomeScores *gs, gchar *pix_name)
 {
-	GdkPixmap *pixmap;
 	GtkStyle *style;
-	GdkBitmap *mask;
 
 	if(gs->logo) {
 		g_print("Warning: gnome_scores_set_logo_* can be called only once\n");
@@ -249,10 +247,8 @@ void gnome_scores_set_logo_pixmap (GnomeScores *gs, gchar *pix_name)
 
 	style = gtk_widget_get_style( GTK_WIDGET(gs) );
 
-	pixmap = gdk_pixmap_create_from_xpm ( GTK_WIDGET(gs)->window, &mask,
-					      &style->bg[GTK_STATE_NORMAL],
-					      pix_name);
-	gs->logo = gtk_pixmap_new (pixmap, mask);
+
+	gs->logo = gnome_pixmap_new_from_file (pix_name);
 
 	gtk_box_pack_end (GTK_BOX(GNOME_DIALOG(gs)->vbox), gs->logo, TRUE, TRUE, 0);
 	gtk_widget_show (gs->logo);

@@ -76,8 +76,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	char *t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->fentry),
 						 FALSE);
 	GdkImlibImage *im;
-	GdkPixmap *pix;
-	GdkBitmap *mask;
+	GtkWidget *pixmap;
 	GtkWidget *child;
 	int w,h;
 
@@ -107,18 +106,11 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 			h = 48;
 		}
 	}
-	gdk_imlib_render(im,w,h);
-	pix = gdk_imlib_move_image (im);
-	mask = gdk_imlib_move_mask (im);
+	pixmap = gnome_pixmap_new_from_imlib_at_size (im, w, h);
 
-	if(GTK_IS_PIXMAP(child))
-		gtk_pixmap_set(GTK_PIXMAP(child),pix,mask);
-	else {
-		gtk_widget_destroy(child);
-		child = gtk_pixmap_new(pix,mask);
-		gtk_widget_show(child);
-		gtk_container_add(GTK_CONTAINER(ientry->pickbutton),child);
-	}
+	gtk_widget_destroy(child);
+	gtk_widget_show(pixmap);
+	gtk_container_add(GTK_CONTAINER(ientry->pickbutton), pixmap);
 	g_free(t);
 	gdk_imlib_destroy_image(im);
 }
@@ -154,8 +146,6 @@ setup_preview(GtkWidget *widget)
 	GList *l;
 	GtkWidget *pp = NULL;
 	GdkImlibImage *im;
-	GdkPixmap *pix;
-	GdkBitmap *mask;
 	int w,h;
 	GtkWidget *frame = gtk_object_get_data(GTK_OBJECT(widget),"frame");
 	GtkFileSelection *fs = gtk_object_get_data(GTK_OBJECT(frame),"fs");
@@ -186,11 +176,7 @@ setup_preview(GtkWidget *widget)
 			h = 100;
 		}
 	}
-	gdk_imlib_render(im,w,h);
-	pix = gdk_imlib_move_image(im);
-	mask = gdk_imlib_move_mask(im);
-
-	pp = gtk_pixmap_new(pix,mask);
+	pp = gnome_pixmap_new_from_imlib_at_size (im, w, h);
 	gtk_widget_show(pp);
 	gtk_container_add(GTK_CONTAINER(frame),pp);
 
