@@ -30,7 +30,7 @@ message_dlg(GtkWidget *widget, gpointer data)
 	  gtk_signal_connect (GTK_OBJECT (box), "clicked",
 			      GTK_SIGNAL_FUNC (message_dlg_clicked), NULL);
 
-	  gtk_window_set_modal (GNOME_DIALOG(box));
+	  gtk_window_set_modal (GTK_WINDOW(box),TRUE);
 	  gnome_dialog_close_hides(GNOME_DIALOG(box), TRUE);
 	}
 	gtk_widget_show (box);
