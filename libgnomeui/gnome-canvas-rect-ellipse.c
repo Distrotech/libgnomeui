@@ -921,12 +921,12 @@ gnome_canvas_rect_update (GnomeCanvasItem *item, double affine[6], ArtSVP *clip_
 			   and could save time. */
 
 			if (re->width_pixels)
-				halfwidth = re->width * 0.5;
-			else
+				halfwidth = (re->width / item->canvas->pixels_per_unit) * 0.5;
+			else {
 				halfwidth = re->width * item->canvas->pixels_per_unit * 0.5;
-
-			if (halfwidth < 0.25)
-				halfwidth = 0.25;
+				if (halfwidth < 0.25)
+					halfwidth = 0.25;
+			}
 
 			i = 0;
 			vpath[i].code = ART_MOVETO;
