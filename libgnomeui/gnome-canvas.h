@@ -43,7 +43,9 @@ typedef struct _GnomeCanvasGroupClass GnomeCanvasGroupClass;
 
 /* Object flags for items */
 enum {
-	GNOME_CANVAS_ITEM_ALWAYS_REDRAW = 1 << 4
+	GNOME_CANVAS_ITEM_REALIZED      = 1 << 4,
+	GNOME_CANVAS_ITEM_MAPPED        = 1 << 5,
+	GNOME_CANVAS_ITEM_ALWAYS_REDRAW = 1 << 6
 };
 
 #define GNOME_TYPE_CANVAS_ITEM            (gnome_canvas_item_get_type ())

@@ -150,6 +150,8 @@ gnome_canvas_line_destroy (GtkObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_LINE (object));
 
+	line = GNOME_CANVAS_LINE (object);
+
 	if (line->coords)
 		g_free (line->coords);
 

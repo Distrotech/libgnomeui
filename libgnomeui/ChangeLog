@@ -1,3 +1,33 @@
+1998-07-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-line.c (gnome_canvas_line_destroy): Doh, forgot to
+	assign line.
+
+	* gnome-canvas.c (item_post_create_setup): Moved
+	realization/mapping from here to group_add().
+	(group_remove): Unmap/unrealize the child here as well.  This is
+	in preparation for the reparent functions of the canvas.
+
+	* gnome-canvas.h: Added realized and mapped flags for items.
+	Sigh, I thought I would not be needing them.
+
+	* gnome-canvas.c (gnome_canvas_item_shutdown): Only
+	unmap/unrealize the item if appropriate.
+
+	* gnome-canvas.c (gnome_canvas_group_realize): 
+	(gnome_canvas_group_unrealize): 
+	(gnome_canvas_group_map): 
+	(gnome_canvas_group_unmap): Use the realized/mapped flags to see
+	which children to operate on.
+	
+	* gnome-canvas.c (gnome_canvas_item_shutdown): Unmap/unrealize the
+	item before unparenting it.
+	(group_remove): Rewrote for sanity's sake.
+	(gnome_canvas_item_shutdown): Reset the canvas current_item and
+	new_current_item to null.
+	(gnome_canvas_group_destroy): Proper destruction of the list of
+	children.
+
 1998-07-27  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.c (gnome_app_find_menu_pos): fixed a bug with
