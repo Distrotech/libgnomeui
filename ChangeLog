@@ -1,3 +1,10 @@
+2004-02-15  Christian Persch  <chpe@cvs.gnome.org>
+
+	* libgnomeui/gnome-client.c: (gnome_client_module_class_init):
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_class_init): Mark the "sm-connect"
+	and "show-crash-dialog" properties with G_PARAM_CONSTRUCT, so that they are
+	correctly initialised to their defaults on object construction. (Bug #131867).
+
 2004-02-11  Anders Carlsson  <andersca@gnome.org>
 
 	* libgnomeui/gnome-icon-sel.c (sort_file_list): Use strcoll
