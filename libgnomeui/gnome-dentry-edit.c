@@ -557,8 +557,8 @@ gnome_dentry_edit_sync_display(GnomeDEntryEdit *dee,
   gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), 
 		     dentry->tryexec ? dentry->tryexec : "");
 
-  gnome_icon_entry_set_icon(GNOME_ICON_ENTRY(dee->icon_entry),
-			    dentry->icon ? dentry->icon : "");
+  gnome_icon_entry_set_filename(GNOME_ICON_ENTRY(dee->icon_entry),
+				dentry->icon ? dentry->icon : "");
 
   gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), 
 		     dentry->docpath ? dentry->docpath : "");
@@ -781,7 +781,7 @@ gnome_dentry_edit_clear(GnomeDEntryEdit *dee)
   gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), "");  
   gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), "");
   gtk_entry_set_text(GTK_ENTRY(dee->doc_entry), "");
-  gnome_icon_entry_set_icon(GNOME_ICON_ENTRY(dee->icon_entry),"");
+  gnome_icon_entry_set_filename(GNOME_ICON_ENTRY(dee->icon_entry),"");
   gtk_entry_set_text(GTK_ENTRY(dee->transl_lang_entry), "");
   gtk_entry_set_text(GTK_ENTRY(dee->transl_name_entry), "");
   gtk_entry_set_text(GTK_ENTRY(dee->transl_comment_entry), "");

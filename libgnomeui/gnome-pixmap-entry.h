@@ -48,22 +48,15 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_PIXMAP_ENTRY(obj)      GTK_CHECK_TYPE (obj, gnome_pixmap_entry_get_type ())
 
 
-typedef struct _GnomePixmapEntry      GnomePixmapEntry;
-typedef struct _GnomePixmapEntryClass GnomePixmapEntryClass;
+typedef struct _GnomePixmapEntry        GnomePixmapEntry;
+typedef struct _GnomePixmapEntryPrivate GnomePixmapEntryPrivate;
+typedef struct _GnomePixmapEntryClass   GnomePixmapEntryClass;
 
 struct _GnomePixmapEntry {
 	GtkVBox vbox;
-	
-	GtkWidget *fentry;
 
-	GtkWidget *preview;
-	GtkWidget *preview_sw;
-	
-	/*very private*/
-	gchar *last_preview;
-
-	guint32 do_preview : 1; /*put a preview frame with the pixmap next to
-				  the entry*/
+	/*< private >*/
+	GnomePixmapEntryPrivate *_priv;
 };
 
 struct _GnomePixmapEntryClass {
@@ -86,9 +79,15 @@ void       gnome_pixmap_entry_construct   (GnomePixmapEntry *gentry,
 void       gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
 						const gchar *subdir);
 
+/* entry widgets */
 GtkWidget *gnome_pixmap_entry_gnome_file_entry(GnomePixmapEntry *pentry);
 GtkWidget *gnome_pixmap_entry_gnome_entry (GnomePixmapEntry *pentry);
 GtkWidget *gnome_pixmap_entry_gtk_entry   (GnomePixmapEntry *pentry);
+
+/* preview widgets */
+GtkWidget  *gnome_pixmap_entry_scrolled_window(GnomePixmapEntry *pentry);
+GtkWidget  *gnome_pixmap_entry_preview_widget(GnomePixmapEntry *pentry);
+
 
 /*set the preview parameters, if preview is off then the preview frame
   will be hidden*/

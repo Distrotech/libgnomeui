@@ -23,10 +23,10 @@
   @NOTATION@
  */
 
-/* GnomeIconEntry widget - Combo box with "Browse" button for files and
- *			   A pick button which can display a list of icons
- *			   in a current directory, the browse button displays
- *			   same dialog as pixmap-entry
+/* GnomeIconEntry widget - A button with the icon which allows graphical
+ *			   picking of new icons.  The browse dialog is the
+ *			   gnome-icon-sel with a gnome-file-entry which is
+ *			   similiar to gnome-pixmap-entry.
  *
  *
  * Author: George Lebl <jirka@5z.com>
@@ -148,7 +148,7 @@ static void
 gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 {
 	GtkObjectClass *object_class = GTK_OBJECT_CLASS(class);
-	parent_class = gtk_type_class (gtk_hbox_get_type ());
+	parent_class = gtk_type_class (gtk_vbox_get_type ());
 
 	gnome_ientry_signals[CHANGED_SIGNAL] =
 		gtk_signal_new("changed",
@@ -175,23 +175,23 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 
 	gtk_object_add_arg_type("GnomeIconEntry::history_id",
 				GTK_TYPE_POINTER,
-				GTK_ARG_WRITABLE | GTK_ARG_CONSTRUCT,
+				GTK_ARG_WRITABLE,
 				ARG_HISTORY_ID);
 	gtk_object_add_arg_type("GnomeIconEntry::browse_dialog_title",
 				GTK_TYPE_POINTER,
-				GTK_ARG_WRITABLE | GTK_ARG_CONSTRUCT,
+				GTK_ARG_WRITABLE,
 				ARG_BROWSE_DIALOG_TITLE);
 	gtk_object_add_arg_type("GnomeIconEntry::pixmap_subdir",
 				GTK_TYPE_POINTER,
-				GTK_ARG_WRITABLE | GTK_ARG_CONSTRUCT,
+				GTK_ARG_WRITABLE,
 				ARG_PIXMAP_SUBDIR);
 	gtk_object_add_arg_type("GnomeIconEntry::filename",
 				GTK_TYPE_POINTER,
-				GTK_ARG_READWRITE | GTK_ARG_CONSTRUCT,
+				GTK_ARG_READWRITE,
 				ARG_FILENAME);
 	gtk_object_add_arg_type("GnomeIconEntry::pick_dialog",
 				GTK_TYPE_POINTER,
-				GTK_ARG_READABLE | GTK_ARG_CONSTRUCT,
+				GTK_ARG_READABLE,
 				ARG_PICK_DIALOG);
 
 	object_class->set_arg = ientry_set_arg;
@@ -761,9 +761,6 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 
 	gtk_box_set_spacing (GTK_BOX (ientry), 4);
 
-	gtk_signal_connect(GTK_OBJECT(ientry),"destroy",
-			   GTK_SIGNAL_FUNC(ientry_destroy), NULL);
-	
 	ientry->_priv->pick_dialog = NULL;
 	ientry->_priv->pick_dialog_dir = NULL;
 	

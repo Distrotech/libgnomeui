@@ -1,3 +1,14 @@
+Sat Mar 04 20:52:26 2000  George Lebl <jirka@5z.com>
+
+	* gnome-ditem-edit.c,gnome-dentry-edit.c: use the new _set_filename
+	  method of the icon entry rather then the old _set_icon.
+
+	* gnome-icon-entry.c: correct destroy binding, set parent_class to
+	  the vbox class not hbox. correct the top of file comment
+
+	* gnome-pixmap-entry.c: argumentize, make private members truly
+	  private and add accessors to preview and preview_sw
+
 2000-03-01  Cody Russell  <bratsche@dfw.net>
 	* gnome-ditem-edit.c: Fixed a couple typos; gtk_entry -> GTK_ENTRY
 

@@ -51,6 +51,19 @@
 #include "gnome-pixmap-entry.h"
 #include "gnome-pixmap.h"
 
+struct _GnomePixmapEntryPrivate {
+	GtkWidget *fentry;
+
+	GtkWidget *preview;
+	GtkWidget *preview_sw;
+	
+	gchar *last_preview;
+
+	guint32 do_preview : 1; /*put a preview frame with the pixmap next to
+				  the entry*/
+};
+
+
 static void gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class);
 static void gnome_pixmap_entry_init       (GnomePixmapEntry      *pentry);
 static void drag_data_get		  (GtkWidget          *widget,
@@ -67,10 +80,27 @@ static void drag_data_received		  (GtkWidget        *widget,
 					   guint             info,
 					   guint32           time,
 					   GnomePixmapEntry *pentry);
+static void pentry_destroy		  (GtkObject *object);
+static void pentry_set_arg                (GtkObject *object,
+					   GtkArg *arg,
+					   guint arg_id);
+static void pentry_get_arg                (GtkObject *object,
+					   GtkArg *arg,
+					   guint arg_id);
 
 static GtkVBoxClass *parent_class;
 
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
+
+enum {
+	ARG_0,
+	ARG_HISTORY_ID,
+	ARG_BROWSE_DIALOG_TITLE,
+	ARG_DO_PREVIEW,
+	ARG_GNOME_FILE_ENTRY,
+	ARG_GNOME_ENTRY,
+	ARG_GTK_ENTRY
+};
 
 guint
 gnome_pixmap_entry_get_type (void)
@@ -98,7 +128,98 @@ gnome_pixmap_entry_get_type (void)
 static void
 gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)
 {
-	parent_class = gtk_type_class (gtk_hbox_get_type ());
+	GtkObjectClass *object_class = GTK_OBJECT_CLASS(class);
+	parent_class = gtk_type_class (gtk_vbox_get_type ());
+
+	gtk_object_add_arg_type("GnomePixmapEntry::history_id",
+				GTK_TYPE_POINTER,
+				GTK_ARG_WRITABLE,
+				ARG_HISTORY_ID);
+	gtk_object_add_arg_type("GnomePixmapEntry::browse_dialog_title",
+				GTK_TYPE_POINTER,
+				GTK_ARG_WRITABLE,
+				ARG_BROWSE_DIALOG_TITLE);
+	gtk_object_add_arg_type("GnomePixmapEntry::do_preview",
+				GTK_TYPE_BOOL,
+				GTK_ARG_WRITABLE,
+				ARG_DO_PREVIEW);
+	gtk_object_add_arg_type("GnomePixmapEntry::gnome_file_entry",
+				GTK_TYPE_POINTER,
+				GTK_ARG_READABLE,
+				ARG_GNOME_FILE_ENTRY);
+	gtk_object_add_arg_type("GnomePixmapEntry::gnome_entry",
+				GTK_TYPE_POINTER,
+				GTK_ARG_READABLE,
+				ARG_GNOME_ENTRY);
+	gtk_object_add_arg_type("GnomePixmapEntry::gtk_entry",
+				GTK_TYPE_POINTER,
+				GTK_ARG_READABLE,
+				ARG_GTK_ENTRY);
+
+	object_class->destroy = pentry_destroy;
+	object_class->get_arg = pentry_get_arg;
+	object_class->set_arg = pentry_set_arg;
+
+}
+
+static void
+pentry_set_arg (GtkObject *object,
+		GtkArg *arg,
+		guint arg_id)
+{
+	GnomePixmapEntry *self;
+
+	self = GNOME_PIXMAP_ENTRY (object);
+
+	switch (arg_id) {
+	case ARG_HISTORY_ID: {
+		GnomeFileEntry *fentry;
+		GtkWidget *gentry;
+		fentry = GNOME_FILE_ENTRY(self->_priv->fentry);
+		gentry = gnome_file_entry_gnome_entry(fentry);
+		gnome_entry_set_history_id (GNOME_ENTRY(gentry),
+					    GTK_VALUE_POINTER(*arg));
+		gnome_entry_load_history (GNOME_ENTRY(gentry));
+		break;
+	}
+	case ARG_BROWSE_DIALOG_TITLE:
+		gnome_file_entry_set_title (GNOME_FILE_ENTRY(self->_priv->fentry),
+					    GTK_VALUE_POINTER(*arg));
+		break;
+	case ARG_DO_PREVIEW:
+		gnome_pixmap_entry_set_preview(self, GTK_VALUE_BOOL(*arg));
+		break;
+
+	default:
+		break;
+	}
+}
+
+static void
+pentry_get_arg (GtkObject *object,
+		GtkArg *arg,
+		guint arg_id)
+{
+	GnomePixmapEntry *self;
+
+	self = GNOME_PIXMAP_ENTRY (object);
+
+	switch (arg_id) {
+	case ARG_GNOME_FILE_ENTRY:
+		GTK_VALUE_POINTER(*arg) =
+			gnome_pixmap_entry_gnome_file_entry(self);
+		break;
+	case ARG_GNOME_ENTRY:
+		GTK_VALUE_POINTER(*arg) =
+			gnome_pixmap_entry_gnome_entry(self);
+		break;
+	case ARG_GTK_ENTRY:
+		GTK_VALUE_POINTER(*arg) =
+			gnome_pixmap_entry_gtk_entry(self);
+		break;
+	default:
+		break;
+	}
 }
 
 static void
@@ -110,58 +231,60 @@ refresh_preview(GnomePixmapEntry *pentry)
 	g_return_if_fail (pentry != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
 
-	if(!pentry->preview)
+	if(!pentry->_priv->preview)
 		return;
 	
-	t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
+	t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->_priv->fentry),
 					   FALSE);
 
-	if(pentry->last_preview && t && strcmp(t,pentry->last_preview)==0) {
+	if(pentry->_priv->last_preview && t
+	   &&
+	   strcmp(t,pentry->_priv->last_preview)==0) {
 		g_free(t);
 		return;
 	}
 	if(!t || !g_file_test(t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
 	   !(pixbuf = gdk_pixbuf_new_from_file (t))) {
-		if(GNOME_IS_PIXMAP(pentry->preview)) {
-			gtk_drag_source_unset (pentry->preview_sw);
-			gtk_widget_destroy(pentry->preview->parent);
-			pentry->preview = gtk_label_new(_("No Image"));
-			gtk_widget_show(pentry->preview);
-			gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
-							      pentry->preview);
-			g_free(pentry->last_preview);
-			pentry->last_preview = NULL;
+		if(GNOME_IS_PIXMAP(pentry->_priv->preview)) {
+			gtk_drag_source_unset (pentry->_priv->preview_sw);
+			gtk_widget_destroy(pentry->_priv->preview->parent);
+			pentry->_priv->preview = gtk_label_new(_("No Image"));
+			gtk_widget_show(pentry->_priv->preview);
+			gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->_priv->preview_sw),
+							      pentry->_priv->preview);
+			g_free(pentry->_priv->last_preview);
+			pentry->_priv->last_preview = NULL;
 		}
 		g_free(t);
 		return;
 	}
-	if(GNOME_IS_PIXMAP(pentry->preview)) {
-                gnome_pixmap_clear(GNOME_PIXMAP(pentry->preview));
-                gnome_pixmap_set_pixbuf (GNOME_PIXMAP(pentry->preview),
+	if(GNOME_IS_PIXMAP(pentry->_priv->preview)) {
+                gnome_pixmap_clear(GNOME_PIXMAP(pentry->_priv->preview));
+                gnome_pixmap_set_pixbuf (GNOME_PIXMAP(pentry->_priv->preview),
                                          pixbuf);
         } else {
-		gtk_widget_destroy(pentry->preview->parent);
-		pentry->preview = gnome_pixmap_new_from_pixbuf (pixbuf);
-		gtk_widget_show(pentry->preview);
-		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
-						      pentry->preview);
-		if(!GTK_WIDGET_NO_WINDOW(pentry->preview)) {
-			gtk_signal_connect (GTK_OBJECT (pentry->preview), "drag_data_get",
+		gtk_widget_destroy(pentry->_priv->preview->parent);
+		pentry->_priv->preview = gnome_pixmap_new_from_pixbuf (pixbuf);
+		gtk_widget_show(pentry->_priv->preview);
+		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->_priv->preview_sw),
+						      pentry->_priv->preview);
+		if(!GTK_WIDGET_NO_WINDOW(pentry->_priv->preview)) {
+			gtk_signal_connect (GTK_OBJECT (pentry->_priv->preview), "drag_data_get",
 					    GTK_SIGNAL_FUNC (drag_data_get),pentry);
-			gtk_drag_source_set (pentry->preview,
+			gtk_drag_source_set (pentry->_priv->preview,
 					     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 					     drop_types, 1,
 					     GDK_ACTION_COPY);
 		}
-		gtk_signal_connect (GTK_OBJECT (pentry->preview->parent), "drag_data_get",
+		gtk_signal_connect (GTK_OBJECT (pentry->_priv->preview->parent), "drag_data_get",
 				    GTK_SIGNAL_FUNC (drag_data_get),pentry);
-		gtk_drag_source_set (pentry->preview->parent,
+		gtk_drag_source_set (pentry->_priv->preview->parent,
 				     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 				     drop_types, 1,
 				     GDK_ACTION_COPY);
 	}
-	g_free(pentry->last_preview);
-	pentry->last_preview = t;
+	g_free(pentry->_priv->last_preview);
+	pentry->_priv->last_preview = t;
         gdk_pixbuf_unref(pixbuf);
 }
 
@@ -260,15 +383,21 @@ setup_preview(GtkWidget *widget)
 }
 
 static void
-pentry_destroy(GnomePixmapEntry *pentry)
+pentry_destroy(GtkObject *object)
 {
-	g_return_if_fail (pentry != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
+	GnomePixmapEntry *pentry;
 
-	pentry->preview = NULL;
-	g_free(pentry->last_preview);
-	pentry->last_preview = NULL;
-	changed_pentries = g_slist_remove(changed_pentries,pentry);
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (object));
+
+	pentry = GNOME_PIXMAP_ENTRY(object);
+
+	pentry->_priv->preview = NULL;
+	g_free(pentry->_priv->last_preview);
+	pentry->_priv->last_preview = NULL;
+	changed_pentries = g_slist_remove(changed_pentries, pentry);
+
+	g_free(pentry->_priv);
 }
 
 
@@ -359,7 +488,7 @@ drag_data_get  (GtkWidget          *widget,
 	g_return_if_fail (pentry != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
 
-	file = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
+	file = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->_priv->fentry),
 					      TRUE);
 
 	if(!file) {
@@ -378,28 +507,28 @@ drag_data_get  (GtkWidget          *widget,
 static void
 turn_on_previewbox(GnomePixmapEntry *pentry)
 {
-	pentry->preview_sw = gtk_scrolled_window_new(NULL,NULL);
-	gtk_drag_dest_set (GTK_WIDGET (pentry->preview_sw),
+	pentry->_priv->preview_sw = gtk_scrolled_window_new(NULL,NULL);
+	gtk_drag_dest_set (GTK_WIDGET (pentry->_priv->preview_sw),
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
 			   drop_types, 1, GDK_ACTION_COPY);
-	gtk_signal_connect (GTK_OBJECT (pentry->preview_sw), "drag_data_received",
+	gtk_signal_connect (GTK_OBJECT (pentry->_priv->preview_sw), "drag_data_received",
 			    GTK_SIGNAL_FUNC (drag_data_received),pentry);
 	/*for some reason we can't do this*/
-	/*gtk_signal_connect (GTK_OBJECT (pentry->preview_sw), "drag_data_get",
+	/*gtk_signal_connect (GTK_OBJECT (pentry->_priv->preview_sw), "drag_data_get",
 			    GTK_SIGNAL_FUNC (drag_data_get),pentry);*/
-	gtk_box_pack_start (GTK_BOX (pentry), pentry->preview_sw, TRUE, TRUE, 0);
-	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(pentry->preview_sw),
+	gtk_box_pack_start (GTK_BOX (pentry), pentry->_priv->preview_sw, TRUE, TRUE, 0);
+	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(pentry->_priv->preview_sw),
 				       GTK_POLICY_AUTOMATIC,
 				       GTK_POLICY_AUTOMATIC);
-	gtk_widget_set_usize(pentry->preview_sw,100,100);
-	gtk_widget_show (pentry->preview_sw);
+	gtk_widget_set_usize(pentry->_priv->preview_sw,100,100);
+	gtk_widget_show (pentry->_priv->preview_sw);
 
-	pentry->preview = gtk_label_new(_("No Image"));
-	gtk_widget_show(pentry->preview);
-	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
-					      pentry->preview);
+	pentry->_priv->preview = gtk_label_new(_("No Image"));
+	gtk_widget_show(pentry->_priv->preview);
+	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->_priv->preview_sw),
+					      pentry->_priv->preview);
 
 	/*just in case there is a default that is an image*/
 	refresh_preview(pentry);
@@ -413,28 +542,27 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 
 	gtk_box_set_spacing (GTK_BOX (pentry), 4);
 
-	gtk_signal_connect(GTK_OBJECT(pentry),"destroy",
-			   GTK_SIGNAL_FUNC(pentry_destroy), NULL);
+	pentry->_priv = g_new0(GnomePixmapEntryPrivate, 1);
 
-	pentry->do_preview = 1;
+	pentry->_priv->do_preview = 1;
 
-	pentry->last_preview = NULL;
+	pentry->_priv->last_preview = NULL;
 
-	pentry->preview = NULL;
-	pentry->preview_sw = NULL;
+	pentry->_priv->preview = NULL;
+	pentry->_priv->preview_sw = NULL;
 
-	pentry->fentry = gnome_file_entry_new (NULL,NULL);
-	gtk_signal_connect_after(GTK_OBJECT(pentry->fentry),"browse_clicked",
+	pentry->_priv->fentry = gnome_file_entry_new (NULL,NULL);
+	gtk_signal_connect_after(GTK_OBJECT(pentry->_priv->fentry),"browse_clicked",
 				 GTK_SIGNAL_FUNC(browse_clicked),
 				 pentry);
-	gtk_box_pack_end (GTK_BOX (pentry), pentry->fentry, FALSE, FALSE, 0);
-	gtk_widget_show (pentry->fentry);
+	gtk_box_pack_end (GTK_BOX (pentry), pentry->_priv->fentry, FALSE, FALSE, 0);
+	gtk_widget_show (pentry->_priv->fentry);
 
 	p = gnome_pixmap_file(".");
-	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(pentry->fentry),p);
+	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(pentry->_priv->fentry),p);
 	g_free(p);
 
-	w = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(pentry->fentry));
+	w = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(pentry->_priv->fentry));
 	gtk_signal_connect(GTK_OBJECT(w),"changed",
 			   GTK_SIGNAL_FUNC(entry_changed),
 			   pentry);
@@ -459,13 +587,13 @@ gnome_pixmap_entry_construct (GnomePixmapEntry *pentry, const gchar *history_id,
 			      const gchar *browse_dialog_title, gboolean do_preview)
 {
 	GtkWidget *gentry;
-	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry->fentry));
+	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry->_priv->fentry));
 
-	gnome_file_entry_construct (GNOME_FILE_ENTRY (pentry->fentry),
+	gnome_file_entry_construct (GNOME_FILE_ENTRY (pentry->_priv->fentry),
 				    history_id,
 				    browse_dialog_title);
 
-	pentry->do_preview = do_preview?1:0;
+	pentry->_priv->do_preview = do_preview?1:0;
 	if(do_preview)
 		turn_on_previewbox(pentry);
 }
@@ -508,7 +636,7 @@ gnome_pixmap_entry_gnome_file_entry (GnomePixmapEntry *pentry)
 	g_return_val_if_fail (pentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry), NULL);
 
-	return pentry->fentry;
+	return pentry->_priv->fentry;
 }
 
 /**
@@ -526,7 +654,7 @@ gnome_pixmap_entry_gnome_entry (GnomePixmapEntry *pentry)
 	g_return_val_if_fail (pentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry), NULL);
 
-	return gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry->fentry));
+	return gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry->_priv->fentry));
 }
 
 /**
@@ -544,7 +672,45 @@ gnome_pixmap_entry_gtk_entry (GnomePixmapEntry *pentry)
 	g_return_val_if_fail (pentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry), NULL);
 
-	return gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (pentry->fentry));
+	return gnome_file_entry_gtk_entry
+		(GNOME_FILE_ENTRY (pentry->_priv->fentry));
+}
+
+/**
+ * gnome_pixmap_entry_scrolled_window:
+ * @pentry: Pointer to GnomePixmapEntry widget
+ *
+ * Description: Get the #GtkScrolledWindow widget that the preview
+ * is contained in.  Could be %NULL
+ *
+ * Returns: #GtkScrolledWindow widget or %NULL
+ **/
+GtkWidget *
+gnome_pixmap_entry_scrolled_window(GnomePixmapEntry *pentry)
+{
+	g_return_val_if_fail (pentry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry), NULL);
+
+	return pentry->_priv->preview_sw;
+}
+
+/**
+ * gnome_pixmap_entry_preview_widget:
+ * @pentry: Pointer to GnomePixmapEntry widget
+ *
+ * Description: Get the widget that is the preview.  Don't assume any
+ * type of widget.  Currently either #GnomePixmap or #GtkLabel, but it
+ * could change in the future. Could be %NULL
+ *
+ * Returns: the preview widget pointer or %NULL
+ **/
+GtkWidget *
+gnome_pixmap_entry_preview_widget(GnomePixmapEntry *pentry)
+{
+	g_return_val_if_fail (pentry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry), NULL);
+
+	return pentry->_priv->preview;
 }
 
 /**
@@ -570,7 +736,7 @@ gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
 		subdir = ".";
 
 	p = gnome_pixmap_file(subdir);
-	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(pentry->fentry),p);
+	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(pentry->_priv->fentry),p);
 	g_free(p);
 }
 
@@ -592,19 +758,19 @@ gnome_pixmap_entry_set_preview (GnomePixmapEntry *pentry, gboolean do_preview)
 	g_return_if_fail (pentry != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
 
-	if(pentry->do_preview == do_preview?1:0)
+	if(pentry->_priv->do_preview == do_preview?1:0)
 		return;
 
-	pentry->do_preview = do_preview?1:0;
+	pentry->_priv->do_preview = do_preview?1:0;
 
 	if(do_preview) {
-		g_assert(pentry->preview_sw == NULL);
+		g_assert(pentry->_priv->preview_sw == NULL);
 		turn_on_previewbox(pentry);
 	} else {
-		g_assert(pentry->preview_sw != NULL);
-		gtk_widget_destroy(pentry->preview_sw);
-		pentry->preview_sw = NULL;
-		pentry->preview = NULL;
+		g_assert(pentry->_priv->preview_sw != NULL);
+		gtk_widget_destroy(pentry->_priv->preview_sw);
+		pentry->_priv->preview_sw = NULL;
+		pentry->_priv->preview = NULL;
 	}
 }
 
@@ -628,8 +794,9 @@ gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
 	g_return_if_fail (preview_w>=0 && preview_h>=0);
 
-	if(pentry->preview_sw)
-		gtk_widget_set_usize(pentry->preview_sw,preview_w,preview_h);
+	if(pentry->_priv->preview_sw)
+		gtk_widget_set_usize(pentry->_priv->preview_sw,
+				     preview_w,preview_h);
 }
 
 /* Ensures that a pixmap entry is not in the waiting list for a preview update.  */
@@ -671,13 +838,13 @@ gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry)
 	g_return_val_if_fail (pentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry), NULL);
 
-	if (pentry->do_preview) {
+	if (pentry->_priv->do_preview) {
 		ensure_update (pentry);
 
 		/*this happens if it doesn't exist or isn't an image*/
-		if (!GNOME_IS_PIXMAP (pentry->preview))
+		if (!GNOME_IS_PIXMAP (pentry->_priv->preview))
 			return NULL;
 	}
 
-	return gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (pentry->fentry), TRUE);
+	return gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (pentry->_priv->fentry), TRUE);
 }
