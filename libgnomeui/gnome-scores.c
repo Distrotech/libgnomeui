@@ -65,7 +65,7 @@ gnome_scores_new (  guint n_scores,
 	GtkWidget	*label;
 	gchar     	tmp[10];
 	gchar     	*tmp2;
-	unsinged int i;
+	guint i;
 	const gchar * buttons[] = { GNOME_STOCK_BUTTON_OK, NULL };
 
 	gnome_dialog_constructv(GNOME_DIALOG(retval),
