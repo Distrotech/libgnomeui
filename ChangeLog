@@ -1,3 +1,8 @@
+Tue May 21 19:09:39 2002  George Lebl <jirka@5z.com>
+
+	* libgnomeui/gnome-file-entry.c: make sure not to set the file
+	  selection to NULL
+
 2002-05-14  Balamurali Viswanathan  <balamurali.viswanathan@wipro.com>
 
 	Fixes #81150 (patch integrated by Federico Mena Quintero
