@@ -1,3 +1,11 @@
+1998-11-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c: got rid of all the DnD stuff and implemented my own
+	method for dragging notebook pages around. it works much better now
+	and doesn't confuse the children any more.
+	* gnome-mdi.h (struct _GnomeMDI): new mebers signal_id and in_drag
+	to serve the above changes ;).
+
 1998-11-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c: Applied patch by Samuel Solon
