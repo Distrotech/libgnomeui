@@ -142,6 +142,11 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_NOT         "Not"
 #define GNOME_STOCK_PIXMAP_CONVERT     "Convert"
 #define GNOME_STOCK_PIXMAP_JUMP_TO     "Jump To"
+#define GNOME_STOCK_PIXMAP_UP          "Up"
+#define GNOME_STOCK_PIXMAP_DOWN        "Down"
+#define GNOME_STOCK_PIXMAP_TOP         "Top"
+#define GNOME_STOCK_PIXMAP_BOTTOM      "Bottom"
+#define GNOME_STOCK_PIXMAP_EXEC        "Exec"
 
 #define GNOME_STOCK_PIXMAP_EXIT        GNOME_STOCK_PIXMAP_QUIT
 
@@ -399,6 +404,8 @@ void		      gnome_button_can_default    (GtkButton *button,
 #define GNOME_STOCK_BUTTON_HELP   "Button_Help"
 #define GNOME_STOCK_BUTTON_NEXT   "Button_Next"
 #define GNOME_STOCK_BUTTON_PREV   "Button_Prev"
+#define GNOME_STOCK_BUTTON_UP     "Button_Up"
+#define GNOME_STOCK_BUTTON_DOWN   "Button_Down"
 
 /* returns a default button widget for dialogs */
 GtkWidget             *gnome_stock_button          (const char *type);
@@ -461,6 +468,11 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_BOOK_OPEN    "Menu_Book Open"
 #define GNOME_STOCK_MENU_CONVERT      "Menu_Convert"
 #define GNOME_STOCK_MENU_JUMP_TO      "Menu_Jump To"
+#define GNOME_STOCK_MENU_UP           "Menu_Up"
+#define GNOME_STOCK_MENU_DOWN         "Menu_Down"
+#define GNOME_STOCK_MENU_TOP          "Menu_Top"
+#define GNOME_STOCK_MENU_BOTTOM       "Menu_Bottom"
+#define GNOME_STOCK_MENU_EXEC         "Menu_Exec"
 
 #define GNOME_STOCK_MENU_EXIT     GNOME_STOCK_MENU_QUIT
 

@@ -7,10 +7,11 @@ pixmap_DATA = $(BITMAPS)
 # Please update this when you add more `stock_*.png' files
 stock_images = 							   \
 stock_book_blue.png      stock_book_green.png      stock_book_open.png	   \
-stock_book_red.png       stock_book_yellow.png     stock_button_apply.png  \
-stock_button_cancel.png  stock_button_close.png    stock_button_no.png	   \
-stock_button_ok.png      stock_button_yes.png      stock_close.png	   \
-stock_convert.png        stock_copy.png            stock_cut.png	   \
+stock_book_red.png       stock_book_yellow.png     stock_bottom.png	   \
+stock_button_apply.png   stock_button_cancel.png   stock_button_close.png  \
+stock_button_no.png	 stock_button_ok.png       stock_button_yes.png    \
+stock_close.png	         stock_convert.png         stock_copy.png          \
+stock_cut.png	         stock_down_arrow.png      stock_exec.png	   \
 stock_exit.png           stock_first.png           stock_help.png	   \
 stock_home.png           stock_jump_to.png         stock_last.png	   \
 stock_left_arrow.png     stock_line_in.png         stock_mail.png	   \
@@ -24,8 +25,9 @@ stock_refresh.png        stock_revert.png          stock_right_arrow.png   \
 stock_save.png           stock_save_as.png         stock_scores.png	   \
 stock_search.png         stock_search_replace.png  stock_spellcheck.png	   \
 stock_stop.png           stock_timer.png           stock_timer_stopped.png \
-stock_trash.png          stock_trash_full.png      stock_undelete.png	   \
-stock_undo.png           stock_volume.png
+stock_top.png            stock_trash.png           stock_trash_full.png    \
+stock_undelete.png	 stock_undo.png            stock_up_arrow.png	   \
+stock_volume.png
 
 EXTRA_DIST  = $(BITMAPS) $(stock_images)
 

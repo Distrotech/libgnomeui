@@ -1,3 +1,10 @@
+Wed Sep 30 17:09:01 1998  John Ellis  <johne@bellatlantic.net>
+
+	* pixmaps/stock_up_arrow.png, stock_down_arrow.png, stock_top.png,
+	stock_bottom.png, stock_exec.png: New stock images.
+	* pixmaps/Makefile.am: Added above files.
+	* gnome-stock.[ch]: Added references to above images.
+
 1998-09-30  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-animator.c: Turned `GnomeAnimator' into a windowless
