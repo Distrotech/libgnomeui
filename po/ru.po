@@ -5,8 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
-"PO-Revision-Date: 2003-06-18 20:25+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-21 04:52+0100\n"
+"PO-Revision-Date: 2004-01-21 16:23+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -138,6 +139,7 @@ msgstr "О программе \"%s\""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -195,6 +197,7 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Справка"
 
@@ -385,11 +388,11 @@ msgstr "Настроить приложение"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_О программе"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Получить информацию об этой программе"
 
@@ -416,7 +419,7 @@ msgstr "Создать новое окно"
 msgid "_Close This Window"
 msgstr "_Закрыть это окно"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Закрыть текущее окно"
 
@@ -496,23 +499,23 @@ msgstr "_Содержание Справки"
 msgid "View help for this application"
 msgstr "Вызвать справку для этого приложения"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "Текст под значками"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "Текст за значками"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "Только значки"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "Только текст"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Использовать исходные значения рабочего стола (%s)"
@@ -618,14 +621,12 @@ msgstr "Аутентификация требуется"
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " домен %s"
 
 #: libgnomeui/gnome-authentication-manager.c:268
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"Необходимо войти в сеанс, чтобы иметь доступ к \"%s\".\n"
-"%s"
+msgstr "Необходимо войти в сеанс, чтобы иметь доступ к \"%s\"\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1227,11 +1228,11 @@ msgstr "Сообщение"
 
 #: libgnomeui/gnome-password-dialog.c:219
 msgid "_Username:"
-msgstr "И-мя пользователя:"
+msgstr "И_мя пользователя:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "_Домен:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
@@ -1239,11 +1240,11 @@ msgstr "_Пароль:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Запомнить пароль для этого сеанса"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Сохранить пароль в парольном круге"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1330,6 +1331,7 @@ msgstr "Библиотека пользовательского интерфей
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:705
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Возникли множественные ошибки сегментации; невозможно отобразить диалог об "
@@ -1337,6 +1339,7 @@ msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:719
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1392,8 +1395,9 @@ msgstr ""
 "Посетите страницу \"Сбой приложения среды Гном\" для получения "
 "дополнительной информации"
 
-#~ msgid "Exit the test"
-#~ msgstr "Выйти из теста"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Выйти из теста"
 
 #~ msgid "_Credits"
 #~ msgstr "_Авторы"
