@@ -154,7 +154,7 @@ gnome_message_box_new (const gchar           *message,
 	if ( (pixmap == NULL) ||
 	     (GNOME_PIXMAP(pixmap)->pixmap == NULL) ) {
         	if (pixmap) gtk_widget_destroy(pixmap);
-		s = gnome_unconditional_pixmap_file ("gnome-default.png");
+		s = gnome_unconditional_pixmap_file ("gnome-default-dlg.png");
          	if (s) {
 			pixmap = gnome_pixmap_new_from_file(s);
                         g_free(s);

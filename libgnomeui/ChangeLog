@@ -1,3 +1,9 @@
+1999-02-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-messagebox.c (gnome_message_box_new): Use
+	gnome-default-dlg.png, not gnome-default.png (there was a file
+	clash with gnome-core).
+
 1999-02-05  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-app.c (gnome_app_set_statusbar_custom): New function taking
