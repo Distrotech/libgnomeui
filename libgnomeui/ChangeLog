@@ -1,3 +1,9 @@
+1998-11-23  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app.c (gnome_app_configure_toolbar_separators): Combined
+	version of the h/vseparator replacement code to be smaller.  Also
+	changed to work directly on a GtkToolbar to be more generic.
+
 1998-11-23  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-canvas.c, gnome-client.c: Added API doc stubs.

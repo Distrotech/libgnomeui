@@ -8,6 +8,8 @@
  * and I don't know what you other people did :)
  *
  * Even more changes by Federico Mena.
+ *
+ * Toolbar separators and configurable relief by Andrew Veliath.
  */
 
 #include "config.h"
@@ -173,83 +175,47 @@ gnome_app_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
-/* Replace vseparators with hseparators in toolbar */
+/* Configure toolbar separators for orientation */
 static void
-gnome_app_configure_toolbar_hseparators (GnomeApp *app)
+gnome_app_configure_toolbar_separators (GtkToolbar *toolbar)
 {
 	GList *list;
-	GtkToolbar *toolbar;
 	int index;
+	GtkOrientation orientation;
 
-	g_return_if_fail (app != NULL);
+	g_return_if_fail (toolbar != NULL);
+	g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
 
-	if (!app->toolbar)
-		return;
+	orientation = GTK_TOOLBAR (toolbar)->orientation;
 
-	toolbar = GTK_TOOLBAR (app->toolbar);
-	
 	for (index = 0, list = toolbar->children; list; ++index) {
 		GtkToolbarChild *child = list->data;
 		GtkWidget *widget;
-		GtkWidget *separator;		
+		GtkWidget *separator;
 
 		list = list->next;
 		
-		if (child->type != GTK_TOOLBAR_CHILD_WIDGET ||
-		    !child->widget ||
-		    !GTK_IS_VSEPARATOR (child->widget))
+		if (!child || !child->widget ||
+		    child->type != GTK_TOOLBAR_CHILD_WIDGET ||
+		    ((orientation == GTK_ORIENTATION_VERTICAL &&
+		      GTK_IS_HSEPARATOR (child->widget)) ||
+		     (orientation == GTK_ORIENTATION_HORIZONTAL &&
+		      GTK_IS_VSEPARATOR (child->widget))))
 			continue;
 
 		widget = child->widget;
 		
 		/* Remove widget from toolbar */
 		gtk_container_remove (GTK_CONTAINER (toolbar), widget);
-
-		/* Create new separator */
-		separator = gtk_hseparator_new ();
-		gtk_widget_set_usize (separator, GNOME_PAD * 2, 0);
-		gtk_widget_show (separator);
-
-		/* Insert into current position */
-		gtk_toolbar_insert_widget (toolbar, separator, NULL, NULL, index);
-	}
-}
-
-/* Replace hseparators with vseparators in toolbar */
-static void
-gnome_app_configure_toolbar_vseparators (GnomeApp *app)
-{
-	GList *list;
-	GtkToolbar *toolbar;
-	int index;
-
-	g_return_if_fail (app != NULL);
-
-	if (!app->toolbar)
-		return;
-
-	toolbar = GTK_TOOLBAR (app->toolbar);
-	
-	for (index = 0, list = toolbar->children; list; ++index) {
-		GtkToolbarChild *child = list->data;
-		GtkWidget *widget;
-		GtkWidget *separator;		
-
-		list = list->next;
 		
-		if (child->type != GTK_TOOLBAR_CHILD_WIDGET ||
-		    !child->widget ||
-		    !GTK_IS_HSEPARATOR (child->widget))
-			continue;
-
-		widget = child->widget;
-		
-		/* Remove widget from toolbar */
-		gtk_container_remove (GTK_CONTAINER (toolbar), widget);
-
 		/* Create new separator */
-		separator = gtk_vseparator_new ();
-		gtk_widget_set_usize (separator, 0, GNOME_PAD * 2);
+		if (orientation == GTK_ORIENTATION_VERTICAL) {
+			separator = gtk_hseparator_new ();
+			gtk_widget_set_usize (separator, GNOME_PAD * 2, 0);
+		} else {
+			separator = gtk_vseparator_new ();
+			gtk_widget_set_usize (separator, 0, GNOME_PAD * 2);
+		}
 		gtk_widget_show (separator);
 
 		/* Insert into current position */
@@ -299,7 +265,6 @@ gnome_app_configure_positions (GnomeApp *app)
 			offset = 1;
 
 		if ((app->pos_toolbar == GNOME_APP_POS_LEFT) || (app->pos_toolbar == GNOME_APP_POS_RIGHT)) {
-			gnome_app_configure_toolbar_hseparators (app);
 			gtk_table_attach (GTK_TABLE (app->table),
 					  handlebox,
 					  (app->pos_toolbar == GNOME_APP_POS_LEFT) ? 0 : 2,
@@ -311,8 +276,6 @@ gnome_app_configure_positions (GnomeApp *app)
 		} else {
 			gint moffset;
 
-			gnome_app_configure_toolbar_vseparators (app);
-			
 			if (app->pos_menubar == app->pos_toolbar)
 				moffset = (app->pos_toolbar == GNOME_APP_POS_TOP) ? 1 : -1;
 			else
@@ -327,6 +290,7 @@ gnome_app_configure_positions (GnomeApp *app)
 					  0,
 					  0, 0);
 		}
+		gnome_app_configure_toolbar_separators (GTK_TOOLBAR (app->toolbar));
 
 		gtk_widget_show (handlebox);
 		gtk_widget_unref (handlebox);
