@@ -59,6 +59,9 @@ typedef enum {
 #define GNOME_MDI_MENUBAR_INFO_KEY           "MDIMenubarUIInfo"
 #define GNOME_MDI_CHILD_MENU_INFO_KEY        "MDIChildMenuUIInfo"
 
+typedef GtkMenuBar *(* GnomeMDIMenubarCreator)(GnomeMDI *, GnomeApp *);
+typedef GtkToolbar *(* GnomeMDIToolbarCreator)(GnomeMDI *, GnomeApp *);
+
 struct _GnomeMDI {
 	GtkObject object;
 
@@ -71,6 +74,14 @@ struct _GnomeMDI {
 
 	gchar *appname, *title;
 
+	/* how to create custom menus/toolbars: */
+	/* either with custom functions */
+	GnomeMDIMenubarCreator create_menubar;
+	GnomeMDIToolbarCreator create_toolbar;
+	/* or (this is an exclusive or ;) by providing pointers to UIInfo templates */
+	GnomeUIInfo *menu_template;
+	GnomeUIInfo *toolbar_template;
+
     /* probably only one of these would do, but... redundancy rules ;) */
 	GnomeMDIChild *active_child;
 	GtkWidget *active_view;  
@@ -80,9 +91,6 @@ struct _GnomeMDI {
 	GList *children;    /* children - GnomeMDIChild objects*/
 
 	GSList *registered; /* see comment for gnome_mdi_(un)register() functions below for an explanation. */
-
-	GnomeUIInfo *menu_template;
-	GnomeUIInfo *toolbar_template;
 	
     /* paths for insertion of mdi_child specific menus and mdi_child list menu via
        gnome-app-helper routines */
@@ -90,12 +98,9 @@ struct _GnomeMDI {
 	gchar *child_list_path;
 };
 
-struct _GnomeMDIClass
-{
+struct _GnomeMDIClass {
 	GtkObjectClass parent_class;
 
-	GtkMenuBar *(*create_menus)(GnomeMDI *, GnomeApp *);
-	GtkToolbar *(*create_toolbar)(GnomeMDI *, GnomeApp *);
 	gint        (*add_child)(GnomeMDI *, GnomeMDIChild *); 
 	gint        (*remove_child)(GnomeMDI *, GnomeMDIChild *); 
 	gint        (*add_view)(GnomeMDI *, GtkWidget *); 
@@ -154,8 +159,10 @@ void          gnome_mdi_set_mode            (GnomeMDI *, GnomeMDIMode);
 void          gnome_mdi_set_tab_pos         (GnomeMDI *, GtkPositionType);
 
 /* setting the menu and toolbar stuff */
-void          gnome_mdi_set_menu_template   (GnomeMDI *, GnomeUIInfo *);
+void          gnome_mdi_set_menubar_template(GnomeMDI *, GnomeUIInfo *);
 void          gnome_mdi_set_toolbar_template(GnomeMDI *, GnomeUIInfo *);
+void          gnome_mdi_set_menubar_creator (GnomeMDI *, GnomeMDIMenubarCreator);
+void          gnome_mdi_set_toolbar_creator (GnomeMDI *, GnomeMDIToolbarCreator);
 void          gnome_mdi_set_child_menu_path (GnomeMDI *, gchar *);
 void          gnome_mdi_set_child_list_path (GnomeMDI *, gchar *);
 

@@ -67,6 +67,7 @@ libgnomeui_la_SOURCES = \
 	gnome-less.c			\
 	gnome-mdi.c			\
 	gnome-mdi-child.c		\
+	gnome-mdi-generic-child.c       \
 	gnome-mdi-session.c		\
 	gnome-messagebox.c		\
 	gnome-net.c			\
@@ -135,6 +136,7 @@ gnome_headers = \
 	gnome-messagebox.h		\
 	gnome-mdi.h			\
 	gnome-mdi-child.h		\
+	gnome-mdi-generic-child.h	\
 	gnome-mdi-session.h		\
 	gnome-number-entry.h		\
 	gnome-net.h			\

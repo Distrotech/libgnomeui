@@ -27,6 +27,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
+#include "libgnomeui/gnome-app.h"
 #include "libgnomeui/gnome-app-helper.h"
 
 BEGIN_GNOME_DECLS
@@ -51,7 +52,12 @@ struct _GnomeMDIChild
 	GnomeUIInfo *menu_template;
 };
 
-/* note that if you override the set_book_label signal handler, it should return
+typedef GtkWidget *(*GnomeMDIChildViewCreator) (GnomeMDIChild *);
+typedef GList     *(*GnomeMDIChildMenuCreator) (GnomeMDIChild *, GtkWidget *);
+typedef gchar     *(*GnomeMDIChildConfigFunc)  (GnomeMDIChild *);
+typedef GtkWidget *(*GnomeMDIChildLabelFunc)   (GnomeMDIChild *, GtkWidget *);
+
+/* note that if you override the set_book_label virtual function, it should return
  * a new widget if its GtkWidget * parameter is NULL and modify and return the old
  * widget otherwise (see gnome-mdi-child.c/gnome_mdi_child_set_book_label()).
  */
@@ -59,17 +65,17 @@ struct _GnomeMDIChildClass
 {
 	GtkObjectClass parent_class;
 
-	GtkWidget * (*create_view)(GnomeMDIChild *); 
-	GList     * (*create_menus)(GnomeMDIChild *, GtkWidget *); 
-	gchar     * (*get_config_string)(GnomeMDIChild *);
-	GtkWidget * (*set_book_label)(GnomeMDIChild *, GtkWidget *);
+	/* these make no sense as signals, so we'll make them "virtual" functions */
+	GnomeMDIChildViewCreator create_view;
+	GnomeMDIChildMenuCreator create_menus;
+	GnomeMDIChildConfigFunc  get_config_string;
+	GnomeMDIChildLabelFunc   set_book_label;
 };
 
 guint         gnome_mdi_child_get_type         (void);
 
-GnomeMDIChild *gnome_mdi_child_new             (void);
-
 GtkWidget     *gnome_mdi_child_add_view        (GnomeMDIChild *);
+
 void          gnome_mdi_child_remove_view      (GnomeMDIChild *, GtkWidget *view);
 
 void          gnome_mdi_child_set_name         (GnomeMDIChild *, gchar *);

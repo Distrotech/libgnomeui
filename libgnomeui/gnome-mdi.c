@@ -83,6 +83,11 @@ static GnomeUIInfo     *copy_ui_info_tree        (GnomeUIInfo *);
 static void             free_ui_info_tree        (GnomeUIInfo *);
 static gint             count_ui_info_items      (GnomeUIInfo *);
 
+/* convenience functions that call child's "virtual" functions */
+static GtkWidget       *child_create_view        (GnomeMDIChild *);
+static GList           *child_create_menus       (GnomeMDIChild *, GtkWidget *);
+static GtkWidget       *child_set_book_label     (GnomeMDIChild *, GtkWidget *);
+
 /* keys for stuff that we'll assign to our GnomeApps */
 #define MDI_CHILD_KEY              "GnomeMDIChild"
 #define ITEM_COUNT_KEY             "MDIChildMenuItems"
@@ -90,8 +95,6 @@ static gint             count_ui_info_items      (GnomeUIInfo *);
 static GdkCursor *drag_cursor = NULL;
 
 enum {
-	CREATE_MENUS,
-	CREATE_TOOLBAR,
 	ADD_CHILD,
 	REMOVE_CHILD,
 	ADD_VIEW,
@@ -102,9 +105,8 @@ enum {
 	LAST_SIGNAL
 };
 
-typedef GtkWidget *(*GnomeMDISignal1) (GtkObject *, gpointer, gpointer);
-typedef gboolean   (*GnomeMDISignal2) (GtkObject *, gpointer, gpointer);
-typedef void       (*GnomeMDISignal3) (GtkObject *, gpointer, gpointer);
+typedef gboolean   (*GnomeMDISignal1) (GtkObject *, gpointer, gpointer);
+typedef void       (*GnomeMDISignal2) (GtkObject *, gpointer, gpointer);
 
 static gint mdi_signals[LAST_SIGNAL];
 
@@ -115,10 +117,10 @@ static void gnome_mdi_marshal_1 (GtkObject	    *object,
 								 gpointer	     func_data,
 								 GtkArg	            *args) {
 	GnomeMDISignal1 rfunc;
-	gpointer *return_val;
+	gint *return_val;
 	
 	rfunc = (GnomeMDISignal1) func;
-	return_val = GTK_RETLOC_POINTER (args[1]);
+	return_val = GTK_RETLOC_BOOL (args[1]);
 	
 	*return_val = (* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
 }
@@ -128,21 +130,8 @@ static void gnome_mdi_marshal_2 (GtkObject	    *object,
 								 gpointer	     func_data,
 								 GtkArg	            *args) {
 	GnomeMDISignal2 rfunc;
-	gint *return_val;
 	
 	rfunc = (GnomeMDISignal2) func;
-	return_val = GTK_RETLOC_BOOL (args[1]);
-	
-	*return_val = (* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
-}
-
-static void gnome_mdi_marshal_3 (GtkObject	    *object,
-								 GtkSignalFunc       func,
-								 gpointer	     func_data,
-								 GtkArg	            *args) {
-	GnomeMDISignal3 rfunc;
-	
-	rfunc = (GnomeMDISignal3) func;
 	
 	(* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
 }
@@ -175,65 +164,51 @@ static void gnome_mdi_class_init (GnomeMDIClass *class) {
 	
 	object_class->destroy = gnome_mdi_destroy;
 	
-	mdi_signals[CREATE_MENUS] = gtk_signal_new ("create_menus",
-												GTK_RUN_LAST,
-												object_class->type,
-												GTK_SIGNAL_OFFSET (GnomeMDIClass, create_menus),
-												gnome_mdi_marshal_1,
-												gtk_widget_get_type(), 1, gnome_app_get_type());
-	mdi_signals[CREATE_TOOLBAR] = gtk_signal_new ("create_toolbar",
-												  GTK_RUN_LAST,
-												  object_class->type,
-												  GTK_SIGNAL_OFFSET (GnomeMDIClass, create_toolbar),
-												  gnome_mdi_marshal_1,
-												  gtk_widget_get_type(), 1, gnome_app_get_type());
 	mdi_signals[ADD_CHILD] = gtk_signal_new ("add_child",
 											 GTK_RUN_LAST,
 											 object_class->type,
 											 GTK_SIGNAL_OFFSET (GnomeMDIClass, add_child),
-											 gnome_mdi_marshal_2,
+											 gnome_mdi_marshal_1,
 											 GTK_TYPE_BOOL, 1, gnome_mdi_child_get_type());
 	mdi_signals[REMOVE_CHILD] = gtk_signal_new ("remove_child",
 												GTK_RUN_LAST,
 												object_class->type,
 												GTK_SIGNAL_OFFSET (GnomeMDIClass, remove_child),
-												gnome_mdi_marshal_2,
+												gnome_mdi_marshal_1,
 												GTK_TYPE_BOOL, 1, gnome_mdi_child_get_type());
 	mdi_signals[ADD_VIEW] = gtk_signal_new ("add_view",
 											GTK_RUN_LAST,
 											object_class->type,
 											GTK_SIGNAL_OFFSET (GnomeMDIClass, add_view),
-											gnome_mdi_marshal_2,
+											gnome_mdi_marshal_1,
 											GTK_TYPE_BOOL, 1, gtk_widget_get_type());
 	mdi_signals[REMOVE_VIEW] = gtk_signal_new ("remove_view",
 											   GTK_RUN_LAST,
 											   object_class->type,
 											   GTK_SIGNAL_OFFSET (GnomeMDIClass, remove_view),
-											   gnome_mdi_marshal_2,
+											   gnome_mdi_marshal_1,
 											   GTK_TYPE_BOOL, 1, gtk_widget_get_type());
 	mdi_signals[CHILD_CHANGED] = gtk_signal_new ("child_changed",
 												 GTK_RUN_LAST,
 												 object_class->type,
 												 GTK_SIGNAL_OFFSET (GnomeMDIClass, child_changed),
-												 gnome_mdi_marshal_3,
+												 gnome_mdi_marshal_2,
 												 GTK_TYPE_NONE, 1, gnome_mdi_child_get_type());
 	mdi_signals[VIEW_CHANGED] = gtk_signal_new ("view_changed",
 												GTK_RUN_LAST,
 												object_class->type,
 												GTK_SIGNAL_OFFSET(GnomeMDIClass, view_changed),
-												gnome_mdi_marshal_3,
+												gnome_mdi_marshal_2,
 												GTK_TYPE_NONE, 1, gtk_widget_get_type());
 	mdi_signals[APP_CREATED] = gtk_signal_new ("app_created",
 											   GTK_RUN_LAST,
 											   object_class->type,
 											   GTK_SIGNAL_OFFSET (GnomeMDIClass, app_created),
-											   gnome_mdi_marshal_3,
+											   gnome_mdi_marshal_2,
 											   GTK_TYPE_NONE, 1, gnome_app_get_type());
 	
 	gtk_object_class_add_signals (object_class, mdi_signals, LAST_SIGNAL);
 	
-	class->create_menus = NULL;
-	class->create_toolbar = NULL;
 	class->add_child = NULL;
 	class->remove_child = NULL;
 	class->add_view = NULL;
@@ -241,7 +216,7 @@ static void gnome_mdi_class_init (GnomeMDIClass *class) {
 	class->child_changed = NULL;
 	class->view_changed = NULL;
 	class->app_created = NULL;
-	
+
 	parent_class = gtk_type_class (gtk_object_get_type ());
 }
 
@@ -285,6 +260,8 @@ static void gnome_mdi_init (GnomeMDI *mdi) {
 	
 	mdi->menu_template = NULL;
 	mdi->toolbar_template = NULL;
+	mdi->create_menubar = NULL;
+	mdi->create_toolbar = NULL;
 	mdi->child_menu_path = NULL;
 	mdi->child_list_path = NULL;
 }
@@ -298,6 +275,17 @@ GtkObject *gnome_mdi_new(gchar *appname, gchar *title) {
 	mdi->title = g_strdup(title);
 
 	return GTK_OBJECT (mdi);
+}
+
+static GList *child_create_menus(GnomeMDIChild *child, GtkWidget *view) {
+	if(GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_menus)
+		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_menus(child, view);
+
+	return NULL;
+}
+
+static GtkWidget *child_set_book_label(GnomeMDIChild *child, GtkWidget *label) {
+	return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->set_book_label(child, label);
 }
 
 /* the app-helper support routines */
@@ -351,10 +339,15 @@ static void free_ui_info_tree(GnomeUIInfo *root) {
 static void set_page_by_widget(GtkNotebook *book, GtkWidget *child) {
 	GList *page_node;
 	gint i = 0;
+
+#ifdef GNOME_ENABLE_DEBUG
+	g_message("GnomeMDI: set_page_by_widget");
+#endif
 	
 	page_node = book->children;
 	while(page_node) {
-		if( ((GtkNotebookPage *)page_node->data)->child == child ) {
+		if( ((GtkNotebookPage *)page_node->data)->child == child &&
+		    (GtkNotebookPage *)page_node->data != book->cur_page ) {
 			gtk_notebook_set_page(book, i);
 			return;
 		}
@@ -649,11 +642,12 @@ static void book_add_view(GtkNotebook *book, GtkWidget *view) {
 
 	child = gnome_mdi_get_child_from_view(view);
 
-	gtk_signal_emit_by_name(GTK_OBJECT(child), "set_book_label", NULL, &title);
+	title = child_set_book_label(child, NULL);
 
 	gtk_notebook_append_page(book, view, title);
 
-	set_page_by_widget(book, view);  
+	if(g_list_length(book->children) > 1)
+		set_page_by_widget(book, view);
 }
 
 static void book_switch_page(GtkNotebook *book, GtkNotebookPage *page, gint page_num, GnomeMDI *mdi) {
@@ -662,8 +656,8 @@ static void book_switch_page(GtkNotebook *book, GtkNotebookPage *page, gint page
 	g_message("GnomeMDI: switching pages");
 #endif
 	app = GNOME_APP(gtk_widget_get_toplevel(GTK_WIDGET(book)));
-	
-	if(page_num != -1)
+
+	if(page)
 		app_set_view(mdi, app, page->child);
 	else
 		app_set_view(mdi, app, NULL);  
@@ -847,19 +841,22 @@ static void app_set_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
 			gnome_app_insert_menus_with_data(app, mdi->child_menu_path, ui_info, child);
 			gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
 			gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, GINT_TO_POINTER(count_ui_info_items(ui_info)));
+			gtk_widget_queue_resize(app->menubar);
 		}
 		else {
-			gtk_signal_emit_by_name(GTK_OBJECT(child), "create_menus", view, &menu_list);
+			menu_list = child_create_menus(child, view);
 			
 			if(menu_list) {
 				parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
 				
 				if(parent) {
+					GList *menu;
+
 					items = 0;
-					
-					while(menu_list) {
-						gtk_menu_shell_insert(GTK_MENU_SHELL(parent), GTK_WIDGET(menu_list->data), pos);
-						menu_list = g_list_remove(menu_list, menu_list->data);
+					menu = menu_list;					
+					while(menu) {
+						gtk_menu_shell_insert(GTK_MENU_SHELL(parent), GTK_WIDGET(menu->data), pos);
+						menu = menu->next;
 						pos++;
 						items++;
 					}
@@ -868,6 +865,8 @@ static void app_set_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
 					
 					gtk_widget_queue_resize(parent);
 				}
+
+				g_list_free(menu_list);
 			}
 		}
 	}
@@ -935,9 +934,8 @@ static void app_create(GnomeMDI *mdi) {
 		gnome_app_create_menus_with_data(GNOME_APP(window), ui_info, mdi);
 		gtk_object_set_data(GTK_OBJECT(window), GNOME_MDI_MENUBAR_INFO_KEY, ui_info);
 	}
-	else {
-		/* we use the (hopefully) supplied create_menus signal handler */
-		gtk_signal_emit (GTK_OBJECT (mdi), mdi_signals[CREATE_MENUS], window, &menubar);
+	else if(mdi->create_menubar) {
+		menubar = mdi->create_menubar(mdi, window);
 		
 		if(menubar) {
 			gtk_widget_show(GTK_WIDGET(menubar));
@@ -953,8 +951,8 @@ static void app_create(GnomeMDI *mdi) {
 		gnome_app_create_toolbar_with_data(GNOME_APP(window), ui_info, mdi);
 		gtk_object_set_data(GTK_OBJECT(window), GNOME_MDI_TOOLBAR_INFO_KEY, ui_info);
 	}
-	else {
-		gtk_signal_emit(GTK_OBJECT (mdi), mdi_signals[CREATE_TOOLBAR], window, &toolbar);
+	else if(mdi->create_toolbar) {
+		toolbar = mdi->create_toolbar(mdi, window);
 		
 		if(toolbar) {
 			gtk_widget_show(GTK_WIDGET(toolbar));
@@ -1021,6 +1019,10 @@ void gnome_mdi_set_active_view(GnomeMDI *mdi, GtkWidget *view) {
 	g_return_if_fail(GNOME_IS_MDI(mdi));
 	g_return_if_fail(view != NULL);
 	g_return_if_fail(GTK_IS_WIDGET(view));
+
+#ifdef GNOME_ENABLE_DEBUG
+	g_message("GnomeMDI: setting active view");
+#endif
 	
 	window = GTK_WINDOW(gnome_mdi_get_app_from_view(view));
 	
@@ -1286,7 +1288,7 @@ void gnome_mdi_open_toplevel(GnomeMDI *mdi) {
 		app_create(mdi);
 		if(mdi->mode == GNOME_MDI_NOTEBOOK)
 			book_create(mdi);
-
+		
 		gtk_widget_show(GTK_WIDGET(mdi->active_window));
 	}
 }
@@ -1319,7 +1321,7 @@ void gnome_mdi_update_child(GnomeMDI *mdi, GnomeMDIChild *child) {
 
 			page = find_page_by_widget(GTK_NOTEBOOK(view->parent), view);
 			if(page)
-				gtk_signal_emit_by_name(GTK_OBJECT(child), "set_book_label", page->tab_label, &title);
+				title = child_set_book_label(child, page->tab_label);
 		}
 		
 		view_node = g_list_next(view_node);
@@ -1355,8 +1357,11 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, GnomeMDIMode mode) {
 	if(mode == GNOME_MDI_DEFAULT_MODE)
 		mode = gnome_preferences_get_mdi_mode();
 
+#if 0
+	/* this is a relict of the past */
 	if(mdi->windows == NULL)
 		gnome_mdi_open_toplevel(mdi);
+#endif
 
 	if(mode == GNOME_MDI_REDRAW)
 		mode = mdi->mode;
@@ -1477,6 +1482,20 @@ void gnome_mdi_set_toolbar_template(GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl) {
 	g_return_if_fail(GNOME_IS_MDI(mdi));
 
 	mdi->toolbar_template = tbar_tmpl;
+}
+
+void gnome_mdi_set_menubar_creator(GnomeMDI *mdi, GnomeMDIMenubarCreator func) {
+	g_return_if_fail(mdi != NULL);
+	g_return_if_fail(GNOME_IS_MDI(mdi));
+
+	mdi->create_menubar = func;
+}
+
+void gnome_mdi_set_toolbar_creator(GnomeMDI *mdi, GnomeMDIToolbarCreator func) {
+	g_return_if_fail(mdi != NULL);
+	g_return_if_fail(GNOME_IS_MDI(mdi));
+
+	mdi->create_toolbar = func;
 }
 
 void gnome_mdi_set_child_menu_path(GnomeMDI *mdi, gchar *path) {

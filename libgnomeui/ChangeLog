@@ -1,3 +1,24 @@
+1998-11-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi-generic-child.[ch]: new object to allow simple
+	use of GnomeMDI without subclassing GnomeMDIChild.
+	* gnome-mdi-child.h (struct _GnomeMDIChildClass): converted
+	signals to "virtual" functions. they made no sense as signals
+	since all of them return allocated memory.
+	(gnome_mdi_child_new): removed. GnomeMDIChild is now an abstract
+	class.
+	* gnome-mdi-child.c (gnome_mdi_child_new): removed 
+	(gnome_mdi_child_class_init): removed all signals, simply
+	set proper default values for "virtual" function pointers instead.
+	* gnome-mdi.[ch]: converted create_menus and create_toolbar from
+	signals to ordinary function members of GnomeMDI: now you have
+	to set them with gnome_mdi_set_[tool|menu]bar_creator() functions
+	instead of connecting handlers with gtk_signal_connect(). this will
+	probably _BREAK_ each and every app using GnomeMDI. sorry! ;)
+	* gnome-mdi.c (set_page_by_widget): check page != NULL instead of
+	page_num == -1. I know they should be the same, but this somehow
+	makes me more confident ;)
+
 Thu Nov 26 02:53:44 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-{file,icon,pixmap}-entry.c: use the new g_file_test

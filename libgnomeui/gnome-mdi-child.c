@@ -33,80 +33,13 @@ static void       gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
 static void       gnome_mdi_child_init             (GnomeMDIChild *);
 static void       gnome_mdi_child_destroy          (GtkObject *);
 static GtkWidget *gnome_mdi_child_set_book_label   (GnomeMDIChild *, GtkWidget *);
+static GtkWidget *gnome_mdi_child_create_view      (GnomeMDIChild *);
 
 /* declare the functions from gnome-mdi.c that we need but are not public */
 void child_list_menu_remove_item(GnomeMDI *, GnomeMDIChild *);
 void child_list_menu_add_item(GnomeMDI *, GnomeMDIChild *);
 
-enum {
-	CREATE_VIEW,
-	CREATE_MENUS,
-	GET_CONFIG_STRING,
-	SET_BOOK_LABEL,
-	LAST_SIGNAL
-};
-
-typedef GtkWidget *(*GnomeMDIChildSignal1) (GtkObject *, gpointer);
-typedef GList     *(*GnomeMDIChildSignal2) (GtkObject *, gpointer, gpointer);
-typedef gchar     *(*GnomeMDIChildSignal3) (GtkObject *, gpointer);
-typedef GtkWidget *(*GnomeMDIChildSignal4) (GtkObject *, gpointer, gpointer);
-
 static GtkObjectClass *parent_class = NULL;
-
-static gint mdi_child_signals[LAST_SIGNAL];
-
-static void gnome_mdi_child_marshal_1 (GtkObject	*object,
-									   GtkSignalFunc	func,
-									   gpointer		func_data,
-									   GtkArg		*args) {
-	GnomeMDIChildSignal1 rfunc;
-	gpointer *return_val;
-  
-	rfunc = (GnomeMDIChildSignal1) func;
-	return_val = GTK_RETLOC_POINTER (args[0]);
-  
-	*return_val = (* rfunc)(object, func_data);
-}
-
-static void gnome_mdi_child_marshal_2 (GtkObject	*object,
-									   GtkSignalFunc	func,
-									   gpointer		func_data,
-									   GtkArg		*args) {
-	GnomeMDIChildSignal2 rfunc;
-	gpointer *return_val;
-  
-	rfunc = (GnomeMDIChildSignal2) func;
-	return_val = GTK_RETLOC_POINTER (args[1]);
-  
-	*return_val = (* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
-}
-
-static void gnome_mdi_child_marshal_3 (GtkObject	*object,
-									   GtkSignalFunc	func,
-									   gpointer		func_data,
-									   GtkArg		*args) {
-	GnomeMDIChildSignal3 rfunc;
-	gchar **return_val;
-  
-	rfunc = (GnomeMDIChildSignal3) func;
-	return_val = (gchar **)GTK_RETLOC_POINTER (args[0]);
-  
-	*return_val = (* rfunc)(object, func_data);
-}
-
-static void gnome_mdi_child_marshal_4 (GtkObject	*object,
-									   GtkSignalFunc	func,
-									   gpointer		func_data,
-									   GtkArg		*args) {
-	GnomeMDIChildSignal4 rfunc;
-	gpointer *return_val;
-  
-	rfunc = (GnomeMDIChildSignal4) func;
-	return_val = GTK_RETLOC_POINTER (args[1]);
-  
-	*return_val = (* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
-}
-
 
 guint gnome_mdi_child_get_type () {
 	static guint mdi_child_type = 0;
@@ -128,44 +61,17 @@ guint gnome_mdi_child_get_type () {
 	return mdi_child_type;
 }
 
-static void gnome_mdi_child_class_init (GnomeMDIChildClass *class) {
+static void gnome_mdi_child_class_init (GnomeMDIChildClass *klass) {
 	GtkObjectClass *object_class;
 
-	object_class = (GtkObjectClass*) class;
+	object_class = (GtkObjectClass*)klass;
   
 	object_class->destroy = gnome_mdi_child_destroy;
   
-	mdi_child_signals[CREATE_VIEW] = gtk_signal_new ("create_view",
-													 GTK_RUN_LAST,
-													 object_class->type,
-													 GTK_SIGNAL_OFFSET (GnomeMDIChildClass, create_view),
-													 gnome_mdi_child_marshal_1,
-													 gtk_widget_get_type(), 0);
-	mdi_child_signals[CREATE_MENUS] = gtk_signal_new ("create_menus",
-													  GTK_RUN_LAST,
-													  object_class->type,
-													  GTK_SIGNAL_OFFSET (GnomeMDIChildClass, create_menus),
-													  gnome_mdi_child_marshal_2,
-													  GTK_TYPE_POINTER, 1, gtk_widget_get_type());
-	mdi_child_signals[GET_CONFIG_STRING] = gtk_signal_new ("get_config_string",
-														   GTK_RUN_LAST,
-														   object_class->type,
-														   GTK_SIGNAL_OFFSET (GnomeMDIChildClass, get_config_string),
-														   gnome_mdi_child_marshal_3,
-														   GTK_TYPE_POINTER, 0);
-	mdi_child_signals[SET_BOOK_LABEL] = gtk_signal_new ("set_book_label",
-														GTK_RUN_LAST,
-														object_class->type,
-														GTK_SIGNAL_OFFSET (GnomeMDIChildClass, set_book_label),
-														gnome_mdi_child_marshal_4,
-														gtk_widget_get_type(), 1, gtk_widget_get_type());
-
-	gtk_object_class_add_signals (object_class, mdi_child_signals, LAST_SIGNAL);
-
-	class->create_view = NULL;
-	class->create_menus = NULL;
-	class->get_config_string = NULL;
-	class->set_book_label = gnome_mdi_child_set_book_label;
+	klass->create_view = NULL;
+	klass->create_menus = NULL;
+	klass->get_config_string = NULL;
+	klass->set_book_label = gnome_mdi_child_set_book_label;
 
 	parent_class = gtk_type_class (gtk_object_get_type ());
 }
@@ -176,18 +82,10 @@ static void gnome_mdi_child_init (GnomeMDIChild *mdi_child) {
 	mdi_child->views = NULL;
 }
 
-GnomeMDIChild *gnome_mdi_child_new () {
-	GnomeMDIChild *mdi_child;
-
-	mdi_child = gtk_type_new (gnome_mdi_child_get_type ());
-
-	return mdi_child;
-}
-
-/* the default get_label signal handler: returns a GtkLabel with child->name
- * the signal handler should return a new widget if its old_label parameter
- * is NULL and modify and return the old widget otherwise. it should (obviously)
- * NOT call the parent class handler!
+/* the default set_book_label function: returns a GtkLabel with child->name
+ * if you provide your own, it should return a new widget if its old_label
+ * parameter is NULL and modify and return the old widget otherwise. it
+ * should (obviously) NOT call the parent class handler!
  */
 static GtkWidget *gnome_mdi_child_set_book_label(GnomeMDIChild *child, GtkWidget *old_label) {
 #ifdef GNOME_ENABLE_DEBUG
@@ -224,7 +122,7 @@ static void gnome_mdi_child_destroy(GtkObject *obj) {
 GtkWidget *gnome_mdi_child_add_view(GnomeMDIChild *mdi_child) {
 	GtkWidget *view = NULL;
 
-	gtk_signal_emit (GTK_OBJECT (mdi_child), mdi_child_signals[CREATE_VIEW], &view);
+	view = gnome_mdi_child_create_view(mdi_child);
 
 	if(view) {
 		mdi_child->views = g_list_append(mdi_child->views, view);
@@ -262,4 +160,11 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, gchar *name) {
 
 void gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl) {
 	mdi_child->menu_template = menu_tmpl;
+}
+
+static GtkWidget *gnome_mdi_child_create_view(GnomeMDIChild *child) {
+	if(GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view)
+		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view(child);
+
+	return NULL;
 }
