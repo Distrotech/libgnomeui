@@ -1,3 +1,8 @@
+Thu Sep  3 05:47:19 1998  Tim Janik  <timj@gtk.org>
+
+	* gnome-icon-list.c (gnome_icon_list_forall): provide a _forall
+	implementation instead of _foreach.
+
 1998-09-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_root): Changed the return type to

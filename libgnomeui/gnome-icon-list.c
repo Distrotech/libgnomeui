@@ -83,7 +83,8 @@ static gint gnome_icon_list_button_release (GtkWidget          *widget,
 					    GdkEventButton     *event);
 static gint gnome_icon_list_expose         (GtkWidget          *widget,
 					    GdkEventExpose     *event);
-static void gnome_icon_list_foreach        (GtkContainer       *container,
+static void gnome_icon_list_forall         (GtkContainer       *container,
+					    gboolean		include_internals,
 					    GtkCallback         callback,
 					    gpointer            callback_data);
 
@@ -171,7 +172,7 @@ gnome_icon_list_class_init (GnomeIconListClass *class)
 	widget_class->button_release_event = gnome_icon_list_button_release;
 	widget_class->expose_event = gnome_icon_list_expose;
 
-	container_class->foreach = gnome_icon_list_foreach;
+	container_class->forall = gnome_icon_list_forall;
 
 	class->select_icon = real_select_icon;
 	class->unselect_icon = real_unselect_icon;
@@ -1476,7 +1477,10 @@ gnome_icon_list_expose (GtkWidget *widget, GdkEventExpose *event)
 }
 
 static void
-gnome_icon_list_foreach (GtkContainer *container, GtkCallback callback, gpointer callback_data)
+gnome_icon_list_forall (GtkContainer *container,
+			gboolean      include_internals,
+			GtkCallback   callback,
+			gpointer      callback_data)
 {
 	GnomeIconList *ilist;
 
@@ -1486,11 +1490,14 @@ gnome_icon_list_foreach (GtkContainer *container, GtkCallback callback, gpointer
 
 	ilist = GNOME_ICON_LIST (container);
 
-	if (ilist->vscrollbar)
-		(*callback) (ilist->vscrollbar, callback_data);
+	if (include_internals)
+	  {
+	    if (ilist->vscrollbar)
+	      (*callback) (ilist->vscrollbar, callback_data);
 
-	if (ilist->hscrollbar)
-		(*callback) (ilist->hscrollbar, callback_data);
+	    if (ilist->hscrollbar)
+	      (*callback) (ilist->hscrollbar, callback_data);
+	  }
 }
 
 void
