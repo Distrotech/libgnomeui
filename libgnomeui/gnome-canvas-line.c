@@ -44,6 +44,7 @@ enum {
 	ARG_WIDTH_UNITS,
 	ARG_CAP_STYLE,
 	ARG_JOIN_STYLE,
+	ARG_LINE_STYLE,
 	ARG_FIRST_ARROWHEAD,
 	ARG_LAST_ARROWHEAD,
 	ARG_SMOOTH,
@@ -119,6 +120,7 @@ gnome_canvas_line_class_init (GnomeCanvasLineClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasLine::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::cap_style", GTK_TYPE_GDK_CAP_STYLE, GTK_ARG_READWRITE, ARG_CAP_STYLE);
 	gtk_object_add_arg_type ("GnomeCanvasLine::join_style", GTK_TYPE_GDK_JOIN_STYLE, GTK_ARG_READWRITE, ARG_JOIN_STYLE);
+	gtk_object_add_arg_type ("GnomeCanvasLine::line_style", GTK_TYPE_GDK_LINE_STYLE, GTK_ARG_READWRITE, ARG_LINE_STYLE);
 	gtk_object_add_arg_type ("GnomeCanvasLine::first_arrowhead", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_FIRST_ARROWHEAD);
 	gtk_object_add_arg_type ("GnomeCanvasLine::last_arrowhead", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_LAST_ARROWHEAD);
 	gtk_object_add_arg_type ("GnomeCanvasLine::smooth", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_SMOOTH);
@@ -146,6 +148,7 @@ gnome_canvas_line_init (GnomeCanvasLine *line)
 	line->width = 0.0;
 	line->cap = GDK_CAP_BUTT;
 	line->join = GDK_JOIN_MITER;
+	line->line_style = GDK_LINE_SOLID;
 	line->width_pixels = TRUE;
 	line->shape_a = 0.0;
 	line->shape_b = 0.0;
@@ -471,7 +474,7 @@ set_line_gc_width (GnomeCanvasLine *line)
 
 	gdk_gc_set_line_attributes (line->gc,
 				    width,
-				    GDK_LINE_SOLID,
+				    line->line_style,
 				    (line->first_arrow || line->last_arrow) ? GDK_CAP_BUTT : line->cap,
 				    line->join);
 }
@@ -565,6 +568,11 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		line->join = GTK_VALUE_ENUM (*arg);
 		recalc_bounds (line);
 		break;
+	
+	case ARG_LINE_STYLE:
+		line->line_style = GTK_VALUE_ENUM (*arg);
+		recalc_bounds (line);
+		break;
 
 	case ARG_FIRST_ARROWHEAD:
 		line->first_arrow = GTK_VALUE_BOOL (*arg);
@@ -636,6 +644,10 @@ gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	case ARG_JOIN_STYLE:
 		GTK_VALUE_ENUM (*arg) = line->join;
+		break;
+
+	case ARG_LINE_STYLE:
+		GTK_VALUE_ENUM (*arg) = line->line_style;
 		break;
 
 	case ARG_FIRST_ARROWHEAD:

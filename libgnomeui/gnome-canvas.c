@@ -761,8 +761,8 @@ gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, dou
 
 	tx1 = ty1 = tx2 = ty2 = 0.0;
 
-	if (GNOME_CANVAS_ITEM_CLASS (item)->bounds)
-		(* GNOME_CANVAS_ITEM_CLASS (item)->bounds) (item, &tx1, &ty1, &tx2, &ty2);
+	if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->bounds)
+		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->bounds) (item, &tx1, &ty1, &tx2, &ty2);
 
 	if (x1)
 		*x1 = tx1;

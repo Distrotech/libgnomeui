@@ -1,3 +1,19 @@
+Sat Oct  3 23:46:51 EDT 1998 Gregory McLean <gregm@comstar.net>
+	
+	* gnome-canvas.c (gnome_canvas_item_get_bounds):
+	Fixed a whoops in here that was causeing crashes
+	GNOME_CANVAS_ITEM_CLASS (item)->bounds should actually be
+	GNOME_CANVAS_ITEM_CLASS (item->object.klass)->bounds (though
+	yosh says it really should be (item)->klass) :)
+
+	* gnome-canvas-line.h (GnomeCanvasLine): I found myself needing
+	to have some dashed lines as items, it looked like a fairly trival
+	change so I added a GdkLineStyle member to GnomeCanvasLine.
+
+	* gnome-canvas-line.c: Added a line_style arg for drawing dashed
+	lines (gdk can do it so all we are doing is using that functionality)
+	Nothing looks like it broke.
+
 1998-10-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_item_get_bounds): New public

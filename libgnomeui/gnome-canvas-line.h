@@ -84,6 +84,7 @@ struct _GnomeCanvasLine {
 
 	GdkCapStyle cap;	/* Cap style for line */
 	GdkJoinStyle join;	/* Join style for line */
+	GdkLineStyle line_style;/* Style for the line */
 
 	int width_pixels : 1;	/* Is the width specified in pixels or units? */
 	int first_arrow : 1;	/* Draw first arrowhead? */
