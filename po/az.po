@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-11 12:38+0200\n"
 "PO-Revision-Date: 2003-06-22 17:45+0200\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani Turkic <gnome@azitt.com>\n"
@@ -67,11 +68,11 @@ msgstr "Proqram buraxılışı"
 
 #: libgnomeui/gnome-about.c:393
 msgid "Copyright string"
-msgstr "Təlif haqqı qatarı"
+msgstr "tə'lif hüququ qatarı"
 
 #: libgnomeui/gnome-about.c:394
 msgid "Copyright information for the program"
-msgstr "Proqramın təlif haqqı haqqında məlumat"
+msgstr "Proqramın tə'lif hüququ haqqında mə'lumat"
 
 #: libgnomeui/gnome-about.c:401
 msgid "Comments string"
@@ -138,6 +139,7 @@ msgstr "%s Haqqında"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fayl"
 
@@ -195,6 +197,7 @@ msgid "_Game"
 msgstr "_Oyun"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Yardım"
 
@@ -218,7 +221,7 @@ msgstr "_Qeyd Et"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr "Cari faylı qeyd et"
+msgstr "Hazırkı faylı qeyd et"
 
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
@@ -227,7 +230,7 @@ msgstr "_Fərqli Qeyd Et..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Cari faylı başqa adla qeyd et"
+msgstr "Hazırkı faylı başqa adla qeyd et"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
@@ -245,7 +248,7 @@ msgstr "_Çap Et..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr "Cari faylı çap et"
+msgstr "Hazırkı faylı çap et"
 
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
@@ -254,16 +257,16 @@ msgstr "Çap _Köklənməsi..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "Cari çapedicinin qurğularını kökləyin"
+msgstr "Hazırkı çapçının qurğularını kökləyin"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
-msgstr "_Qapat"
+msgstr "_bağla"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr "Cari faylı qapat"
+msgstr "Hazırkı faylı bağla"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
@@ -290,11 +293,11 @@ msgstr "Seçili sahəni kəs"
 #. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
-msgstr "_Köçürt"
+msgstr "_Köçür"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr "Seçili sahəni köçürt"
+msgstr "Seçili sahəni köçür"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
@@ -378,20 +381,20 @@ msgstr "_Xüsusiyyətlər"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
-msgstr "Proqram təminatını sazla"
+msgstr "Proqram tə'minatını sazla"
 
 #. 20
 #.
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Haqqında"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "Proqram təminatı haqqında"
+msgstr "Proqram tə'minatı haqqında"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
@@ -414,11 +417,11 @@ msgstr "Yeni pəncərə yarat"
 
 #: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr "Bu Pəncərəni _Qapat"
+msgstr "Bu Pəncərəni _bağla"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr "Cari pəncərəni qapat"
+msgstr "Hazırkı pəncərəni bağla"
 
 #.
 #. * The "Game" menu
@@ -465,11 +468,11 @@ msgstr "Qaytarılmış gedişi təkrarla"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
-msgstr "_Tövsiyyə"
+msgstr "_Məsləhət"
 
 #: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
-msgstr "Sonrakı gedişin üçün tövsiyyə al"
+msgstr "Sonrakı gediş üçün məsləhət al"
 
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
@@ -486,7 +489,7 @@ msgstr "Oyunu Qu_rtar"
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
-msgstr "Cari oyunu qapat"
+msgstr "Hazırkı oyunu bağla"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
@@ -519,7 +522,7 @@ msgstr "Masa üstü əsaslarını işlət (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
-msgstr " (daxiletməyə bas)"
+msgstr " (enterə bas)"
 
 #: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
@@ -543,15 +546,15 @@ msgstr "x"
 
 #: libgnomeui/gnome-app-util.c:321
 msgid "no"
-msgstr "xeyr"
+msgstr "xeyir"
 
 #: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
-msgstr " (bəli və ya xeyr)"
+msgstr " (bəli və ya xeyir)"
 
 #: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
-msgstr "  - Oldu? (bəli və ya xeyr)"
+msgstr "  - Oldu? (bəli və ya xeyir)"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
@@ -632,7 +635,7 @@ msgstr "PREFIX"
 
 #: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
-msgstr "Gedişat idarəcisinə bağlantıya mane ol"
+msgstr "Gedişat idarəçisinə bağlantıya mane ol"
 
 #: libgnomeui/gnome-client.c:975
 msgid "Session management"
@@ -885,7 +888,7 @@ msgstr "Faylı gəz pəncərəsinin modal olub olmayacağı."
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
-msgstr "Fayl adı"
+msgstr "Fayl Adı"
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
@@ -893,7 +896,7 @@ msgstr "Fayl girişində göstəriləcək fayl adı."
 
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
-msgstr "Əsas cığır"
+msgstr "Əsas Cığır"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
@@ -1130,7 +1133,7 @@ msgstr "Timsalsız"
 
 #: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "hbox tapıla bilmir, normal fayl seçkisi işlədirəm"
+msgstr "hbox tapıla bilmir, normal fayl seçkisi işlədiləcək"
 
 #: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
@@ -1150,7 +1153,7 @@ msgstr "Timsal seçicisi"
 
 #: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
-msgstr "Lütfən istədiyiniz timsalı seçin."
+msgstr "Xahiş edirik istədiyiniz timsalı seçin."
 
 #: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
@@ -1190,7 +1193,7 @@ msgstr "Timsallar Yüklənir..."
 
 #: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
-msgstr "Məlumat"
+msgstr "mə'lumat"
 
 #: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
@@ -1324,11 +1327,11 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"GNOME gedişat idarəcisi (əməliyyat %d) dağıldı.\n"
+"GNOME gedişat idarəçisi (əməliyyat %d) dağıldı.\n"
 "(%s) ölümcül xətasına bağlıdır.\n"
-"Bu xəbər qutusunu qapatdığınız vaxt bütün uyğulamalarınız qurtarılacaq və "
+"Bu xəbər qutusunu bağladığınız vaxt bütün uyğulamalarınız qurtarılacaq və "
 "gedişatdan da çıxılacaq.\n"
-"Lütfən bu qutunu qapatrmadan əvvəl bütün fayllarını qeyd edin."
+"Xahiş edirik bu qutunu bağlarmadan əvvəl bütün fayllarını qeyd edin."
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -1360,8 +1363,9 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
-"Lütfən ətraflı mə'lumat üçün GNOME Proqram tə'minatı Xətası səhifəsini "
+"Xahiş edirik ətraflı mə'lumat üçün GNOME Proqram tə'minatı Xətası səhifəsini "
 "ziyarət edin"
 
-#~ msgid "Exit the test"
-#~ msgstr "Sınaqdan çıx"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Sınaqdan çıx"
