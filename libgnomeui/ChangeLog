@@ -1,3 +1,11 @@
+Sat Jul 18 12:42:09 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.c (gnome_dialog_constructv): Use append_button,
+	not append_buttons without NULL termination. 
+	(gnome_dialog_construct): Same.	
+	(gnome_dialog_new): Reverted last change. Use the construct
+ 	function rather than cut-and-pasting it.
+
 1998-07-18  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.[ch] (gnome_mdi_find_child): made the function

@@ -239,8 +239,8 @@ gnome_dialog_construct (GnomeDialog * dialog,
       break;
     }
     
-    gnome_dialog_append_buttons( dialog, 
-				 button_name);
+    gnome_dialog_append_button( dialog, 
+				button_name);
   };  
 }
 
@@ -261,8 +261,8 @@ void gnome_dialog_constructv (GnomeDialog * dialog,
       break;
     }
     
-    gnome_dialog_append_buttons( dialog, 
-				 button_name);
+    gnome_dialog_append_button( dialog, 
+				button_name);
   };  
 }
 
@@ -273,39 +273,14 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
 {
   va_list ap;
   GnomeDialog *dialog;
-  int count;
-  gchar **buttons;
-  gchar *button_name;
 	
   dialog = gtk_type_new (gnome_dialog_get_type ());
 
   va_start (ap, title);
-  count = 0;
-  while (TRUE) {
-    button_name = va_arg (ap, gchar *);
-    count++;
-    if (button_name == NULL) {
-      break;
-    }
-  }
-  va_end (ap);
   
-  buttons = g_new (gchar *, count);
-  count = 0;
+  gnome_dialog_construct(dialog, title, ap);
 
-  va_start (ap, title);
-  
-  while (TRUE) {
-    buttons[count] = va_arg (ap, gchar *);
-    if (buttons[count] == NULL) {
-      break;
-    }
-    count++;
-  }
-  va_end (ap);
-  
-  gnome_dialog_constructv(dialog, title, (const gchar **)buttons);
-  g_free(buttons);
+  va_end(ap);
 
   return GTK_WIDGET (dialog);
 }
@@ -368,7 +343,7 @@ void       gnome_dialog_append_button (GnomeDialog * dialog,
 }
 
 void       gnome_dialog_append_buttonsv (GnomeDialog * dialog,
-					const gchar ** buttons)
+					 const gchar ** buttons)
 {
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
@@ -813,6 +788,20 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.34  1998/07/18 17:53:31  hp
+
+
+  Um, someone broke every dialog in Gnome without so much as a change log
+  entry. However, the vector constructor is nice.
+
+  Sat Jul 18 12:42:09 1998  Havoc Pennington  <hp@pobox.com>
+
+  * gnome-dialog.c (gnome_dialog_constructv): Use append_button,
+  not append_buttons without NULL termination.
+  (gnome_dialog_construct): Same.
+  (gnome_dialog_new): Reverted last change. Use the construct
+  function rather than cut-and-pasting it.
+
   Revision 1.33  1998/07/17 23:37:03  yacc
   provide ...v-forms of functions using varargs.
 
