@@ -1,3 +1,14 @@
+2001-06-04  Martin Baulig  <baulig@suse.de>
+
+	* gnome-entry-component.c (PROP_IS_FILE_ENTRY): New property.
+	(ensure_properties_handler): Don't call gnome_selector_get_ambient_properties().
+
+	* gnome-image-entry-component.c
+	(PROP_IS_PIXMAP_ENTRY, PROP_PREVIEW_X, PROP_PREVIEW_Y): New properties.
+	(ensure_properties_handler): Don't call gnome_selector_get_ambient_properties().
+
+	* libgnomeui-components.c: Make this work with the new GnomeSelectorWidget.
+
 2001-06-03  Martin Baulig  <baulig@suse.de>
 
 	* gnome-entry-component.[ch]: New files.

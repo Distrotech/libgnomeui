@@ -54,9 +54,9 @@ image_entry_get_object_fn (BonoboItemHandler *h, const char *item_name,
 
 	if (!strcmp (option->key, "type")) {
 	    is_pixmap_entry = !strcmp (option->value, "pixmap");
-	} else if (!strcmp (option->key, "preview_x")) {
+	} else if (!strcmp (option->key, "preview-x")) {
 	    preview_x = atoi (option->value);
-	} else if (!strcmp (option->key, "preview_y")) {
+	} else if (!strcmp (option->key, "preview-y")) {
 	    preview_y = atoi (option->value);
 	} else {
 	    g_warning (G_STRLOC ": unknown option `%s'", option->key);
@@ -82,6 +82,8 @@ image_entry_get_object_fn (BonoboItemHandler *h, const char *item_name,
 
     bonobo_item_options_free (options);
 
+    bonobo_object_dump_interfaces (BONOBO_OBJECT (selector));
+
     return BONOBO_OBJREF (selector);
 }
 
@@ -96,12 +98,18 @@ libgnomeui_components_factory (BonoboGenericFactory *this,
 	initialized = TRUE;             
     }
 
-    if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_IconSelector")) {
+    if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_IconSelectorFactory")) {
 	GnomeSelectorFactory *factory;
 
 	factory = gnome_selector_factory_new (gnome_icon_selector_component_get_type ());
 
 	return BONOBO_OBJECT (factory);
+    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_IconSelector")) {
+	GnomeSelector *selector;
+
+	selector = g_object_new (gnome_icon_selector_component_get_type (), NULL);
+
+	return BONOBO_OBJECT (selector);
     } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_ImageEntry")) {
 	GnomeSelectorFactory *factory;
 
@@ -114,12 +122,24 @@ libgnomeui_components_factory (BonoboGenericFactory *this,
 	item_handler = bonobo_item_handler_new (NULL, image_entry_get_object_fn, NULL);
 
 	return BONOBO_OBJECT (item_handler);
-    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_Entry")) {
+    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_EntryFactory")) {
 	GnomeSelectorFactory *factory;
 
 	factory = gnome_selector_factory_new (gnome_entry_component_get_type ());
 
 	return BONOBO_OBJECT (factory);
+    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_Entry")) {
+	GnomeSelector *selector;
+
+	selector = g_object_new (gnome_entry_component_get_type (), "is-file-entry", FALSE, NULL);
+
+	return BONOBO_OBJECT (selector);
+    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_FileEntry")) {
+	GnomeSelector *selector;
+
+	selector = g_object_new (gnome_entry_component_get_type (), "is-file-entry", TRUE, NULL);
+
+	return BONOBO_OBJECT (selector);
     } else
 	g_warning ("Failing to manufacture a '%s'", object_id);
         
