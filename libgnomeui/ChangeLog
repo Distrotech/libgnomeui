@@ -1,4 +1,4 @@
-1998-06-08  Chris Lahey  <clahey@jennifer.reshall.umich.edu>
+1998-06-08  Chris Lahey  <clahey@umich.edu>
 
 	* gnome-less.h:
 	* gnome-dns.c: Included stdio.h so that it would compile
