@@ -543,6 +543,7 @@ gnome_about_new (gchar	*title,
 	GtkStyle *style;
 
 	gint w,h;
+	char *filename;
 
 	about = gtk_type_new (gnome_about_get_type ());
 
@@ -579,15 +580,21 @@ gnome_about_new (gchar	*title,
 
 	if (logo)
 	{
-		ai->logo = gdk_pixmap_create_from_xpm ( drawing_area->window,
-							&ai->mask, 
-							&style->bg[GTK_STATE_NORMAL],
-							logo);
-		gdk_window_get_size ( (GdkWindow *) ai->logo, &ai->logo_w, &ai->logo_h);
-		h += 4 + ai->logo_h;
-		ai->h = h;
-		ai->w = MAX (w, (ai->logo_w + 6)); 
-		w = ai->w;
+		filename = gnome_pixmap_file (logo);
+		if (filename
+		    && gdk_imlib_load_file_to_pixmap (filename, &ai->logo,
+						      &ai->mask))
+		{
+			gdk_window_get_size ((GdkWindow *) ai->logo,
+					     &ai->logo_w, &ai->logo_h);
+			h += 4 + ai->logo_h;
+			ai->h = h;
+			ai->w = MAX (w, (ai->logo_w + 6)); 
+			w = ai->w;
+		}
+		else
+			ai->logo = NULL;
+		g_free(filename);
 	}
 	else
 		ai->logo = NULL;
