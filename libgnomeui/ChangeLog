@@ -1,3 +1,16 @@
+1998-07-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-line.[ch]: Beginnings of a polyline/curve item for
+	the canvas.  It is not in the compilation process yet.
+
+	* gnome-canvas-util.[ch]: New files with miscellaneous public
+	utility functions for the canvas.
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_rect_draw): Fixed
+	off-by-one error when painting unfilled rectangles.  Stupid X
+	weird semantics.
+	(gnome_canvas_ellipse_draw): Likewise for ellipses.  Gotta hate X.
+
 Thu Jul 16 23:14:00 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-about.h, gnome-about.c (gnome_about_new):

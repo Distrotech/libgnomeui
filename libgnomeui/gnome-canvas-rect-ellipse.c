@@ -367,8 +367,8 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int
 				    FALSE,
 				    x1 - x,
 				    y1 - y,
-				    x2 - x1 + 1,
-				    y2 - y1 + 1);
+				    x2 - x1,
+				    y2 - y1);
 }
 
 static double
@@ -526,8 +526,8 @@ gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, 
 			      TRUE,
 			      x1 - x,
 			      y1 - y,
-			      x2 - x1 + 1,
-			      y2 - y1 + 1,
+			      x2 - x1,
+			      y2 - y1,
 			      0 * 64,
 			      360 * 64);
 
@@ -537,8 +537,8 @@ gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, 
 			      FALSE,
 			      x1 - x,
 			      y1 - y,
-			      x2 - x1 + 1,
-			      y2 - y1 + 1,
+			      x2 - x1,
+			      y2 - y1,
 			      0 * 64,
 			      360 * 64);
 }
