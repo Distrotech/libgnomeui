@@ -1,3 +1,7 @@
+2001-06-21  Jens Finke  <jens@gnome.org>
+
+	* libgnomeui.h: Don't include gnome-animator.h.
+
 2001-06-19  Cody Russell  <bratsche@gnome.org>
 
 	* gnome-animator.[ch]: Removed.
