@@ -1,3 +1,15 @@
+Sun Jun 21 15:09:04 CEST 1998  Eckehard Berns  <eb@berns.pirma.de>
+
+	* gnome-pixmap.[ch] (gnome_pixmap_new_from_imlib): new function
+	(gnome_pixmap_new_from_imlib_at_size): new function
+	(gnome_pixmap_load_imlib): new function
+	(gnome_pixmap_load_imlib_at_size): new function
+	(finish_load): changed to accept `int destroy', which determines
+	whether the GdkImlibImage should be destroyed or not.
+
+	The new functions make it possible to pass valid GdkImlibImages for
+	GnomePixmap creations/updates.
+
 1998-06-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c: Fixed bug where it would crash if you clicked

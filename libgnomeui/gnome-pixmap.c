@@ -214,6 +214,34 @@ gnome_pixmap_new_from_rgb_d_at_size (unsigned char *data, unsigned char *alpha,
 }
 
 GtkWidget *
+gnome_pixmap_new_from_imlib (GdkImlibImage *im)
+{
+	GnomePixmap *gpixmap;
+
+	g_return_val_if_fail(im != NULL, NULL);
+
+	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
+	gnome_pixmap_load_imlib (gpixmap, im);
+
+	return GTK_WIDGET (gpixmap);
+}
+
+GtkWidget *
+gnome_pixmap_new_from_imlib_at_size (GdkImlibImage *im, int width, int height)
+{
+	GnomePixmap *gpixmap;
+
+	g_return_val_if_fail (im != NULL, NULL);
+	g_return_val_if_fail (width > 0, NULL);
+	g_return_val_if_fail (height > 0, NULL);
+
+	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
+	gnome_pixmap_load_imlib_at_size (gpixmap, im, width, height);
+
+	return GTK_WIDGET (gpixmap);
+}
+
+GtkWidget *
 gnome_pixmap_new_from_gnome_pixmap (GnomePixmap *gpixmap_old)
 {
 	GnomePixmap *gpixmap;
@@ -409,7 +437,7 @@ gnome_pixmap_expose (GtkWidget *widget, GdkEventExpose *event)
 }
 
 static void
-finish_load (GnomePixmap *gpixmap, GdkImlibImage *im, int scaled, int width, int height)
+finish_load (GnomePixmap *gpixmap, GdkImlibImage *im, int scaled, int width, int height, int destroy)
 {
 	if (!im)
 		return;
@@ -422,7 +450,8 @@ finish_load (GnomePixmap *gpixmap, GdkImlibImage *im, int scaled, int width, int
 	gpixmap->pixmap = gdk_imlib_copy_image (im);
 	gpixmap->mask = gdk_imlib_copy_mask (im);
 
-	gdk_imlib_destroy_image (im);
+	if (destroy)
+		gdk_imlib_destroy_image (im);
 
 	if (GTK_WIDGET_REALIZED (gpixmap)) {
 		if (GTK_WIDGET_MAPPED (gpixmap))
@@ -446,7 +475,7 @@ load_file (GnomePixmap *gpixmap, const char *filename, int scaled, int width, in
 	free_pixmap_and_mask (gpixmap);
 
 	im = gdk_imlib_load_image (filename);
-	finish_load (gpixmap, im, scaled, width, height);
+	finish_load (gpixmap, im, scaled, width, height, 1);
 }
 
 static void
@@ -457,7 +486,7 @@ load_xpm_d (GnomePixmap *gpixmap, char **xpm_data, int scaled, int width, int he
 	free_pixmap_and_mask (gpixmap);
 
 	im = gdk_imlib_create_image_from_xpm_data (xpm_data);
-	finish_load (gpixmap, im, scaled, width, height);
+	finish_load (gpixmap, im, scaled, width, height, 1);
 }
 
 static void
@@ -470,7 +499,7 @@ load_rgb_d (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
 	free_pixmap_and_mask (gpixmap);
 
 	im = gdk_imlib_create_image_from_data (data, alpha, rgb_width, rgb_height);
-	finish_load (gpixmap, im, scaled, width, height);
+	finish_load (gpixmap, im, scaled, width, height, 1);
 }
 
 static void
@@ -486,7 +515,7 @@ load_rgb_d_shaped (GnomePixmap *gpixmap, unsigned char *data,
 
 	im = gdk_imlib_create_image_from_data (data, alpha, rgb_width, rgb_height);
 	gdk_imlib_set_image_shape (im, shape_color);
-	finish_load (gpixmap, im, scaled, width, height);
+	finish_load (gpixmap, im, scaled, width, height, 1);
 }
 
 void
@@ -577,3 +606,27 @@ gnome_pixmap_load_rgb_d_at_size (GnomePixmap *gpixmap, unsigned char *data, unsi
 
 	load_rgb_d (gpixmap, data, alpha, rgb_width, rgb_height, TRUE, width, height);
 }
+
+void
+gnome_pixmap_load_imlib (GnomePixmap *gpixmap, GdkImlibImage *im)
+{
+	g_return_if_fail (gpixmap != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
+	g_return_if_fail (im != NULL);
+
+	finish_load (gpixmap, im, 0, 0, 0, 0);
+}
+
+void
+gnome_pixmap_load_imlib_at_size (GnomePixmap *gpixmap,
+				 GdkImlibImage *im, int width, int height)
+{
+	g_return_if_fail (gpixmap != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
+	g_return_if_fail (im != NULL);
+	g_return_if_fail (width > 0);
+	g_return_if_fail (height > 0);
+
+	finish_load (gpixmap, im, 1, width, height, 0);
+}
+
