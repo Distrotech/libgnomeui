@@ -243,6 +243,7 @@ gtk_ted_widget_drop (GtkTed *ted, GtkWidget *w, int drop_x, int drop_y)
 	row = (row/2) * 2;
 
 	gtk_widget_hide (w);
+	gtk_widget_ref (w);
 	gtk_widget_reparent (w, GTK_WIDGET (ted));
 	gtk_container_remove (GTK_CONTAINER (ted), w);
 	gtk_widget_show (w);
@@ -258,6 +259,7 @@ gtk_ted_widget_drop (GtkTed *ted, GtkWidget *w, int drop_x, int drop_y)
 	}
 	
 	gtk_ted_attach (ted, w, wi);
+	gtk_widget_unref (w);
 	return 1;
 }
 
@@ -330,9 +332,11 @@ gtk_ted_prepare_editable_widget (struct ted_widget_info *wi, GtkWidget *ted_tabl
 		GtkWidget *eventbox;
 
 		eventbox = gtk_event_box_new ();
+		gtk_widget_ref (window);
 		gtk_container_remove (GTK_CONTAINER (w), window);
 		gtk_container_add (GTK_CONTAINER (eventbox), window);
 		gtk_container_add (GTK_CONTAINER (w), eventbox);
+		gtk_widget_unref (window);
 		gtk_widget_show (eventbox);
 		window = eventbox;
 	}

@@ -1,0 +1,5 @@
+Wed Feb 11 15:06:05 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtk-ted.c (gtk_ted_widget_drop
+	gtk_ted_prepare_editable_widget): refcouting fixes
+
