@@ -1,3 +1,8 @@
+2000-01-10  Havoc Pennington  <hp@redhat.com>
+
+	* gnome-about.c (gnome_about_construct): push visual/cmap when
+	creating the canvas so we can render gdkpixbuf to it reliably
+
 2000-01-10  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-about.[ch] : Complete rewrite using the GnomeCanvas, a new

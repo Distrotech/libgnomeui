@@ -858,7 +858,11 @@ gnome_about_construct (GnomeAbout *about,
 			  GTK_WIDGET(frame));
 	gtk_widget_show (frame);
 
+        gtk_widget_push_visual(gdk_rgb_get_visual());
+        gtk_widget_push_colormap(gdk_rgb_get_cmap());
 	canvas = gnome_canvas_new ();
+        gtk_widget_pop_visual();
+        gtk_widget_pop_colormap();
 	gtk_container_add (GTK_CONTAINER(frame), canvas);
 
 	/* Fill the GnomeAboutInfo */
