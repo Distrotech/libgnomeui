@@ -37,6 +37,15 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
   this is kind of bad. However, changing it would break people's current
   settings.
 
+* gnome-preferences is a mess that's not really thought out yet.
+
+* check for (non)use of "const" throughout the library and fix it when needed.
+
+* Silence everything from -Wall
+
+* Write a "minibuffer" widget which is a statusbar that can take input, a 
+  la Emacs.
+
 ==================== Done or In Progress =========================
 
 * GnomeApp should have an optional status bar. 
@@ -55,7 +64,7 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
   Ideally, however, it would allow setting gtkrc-type things, so 
   editing gtkrc isn't necessary to get flashy color schemes on Gnome apps.
 
-  [gnome-preferences.h]
+  [gnome-preferences.h, not really well-thought-out or finished.]
 
 * gnome-propertybox could be expanded to allow user configuration.
   Some (popular -- see gnome list) ideas are to let the user get rid

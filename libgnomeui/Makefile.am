@@ -21,6 +21,7 @@ libgnomeui_la_SOURCES = \
 	gnome-app-helper.c		\
 	gnome-color-selector.c 		\
 	gnome-dialog.c                  \
+	gnome-dialog-util.c		\
 	gnome-dns.c			\
 	gnome-geometry.c		\
 	gnome-entry.c			\
@@ -57,6 +58,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-app-helper.h		\
 	gnome-color-selector.h 		\
 	gnome-dialog.h                  \
+	gnome-dialog-util.h		\
 	gnome-dns.h			\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
@@ -75,6 +77,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-startup.h			\
 	gnome-rootwin.h			\
 	gnome-stock.h			\
+	gnome-types.h			\
 	gnome-uidefs.h			\
 	gtk-clock.h			\
 	gtk-ted.h			\

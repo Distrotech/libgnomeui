@@ -1,3 +1,17 @@
+Sat May  9 15:55:48 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog-util.h, gnome-dialog-util.c: gnome-app-util had 
+	some internal functions to quickly pop up some common dialogs;
+	so I put them here for anyone to use. Probably bloat, if they 
+	weren't used in gnome-app-util anyway.
+	* gnome-app-util.c: #include without the libgnomeui prefix.
+	 Remove most of the code and put it in gnome-dialog-util.c.
+	* gnome-types.h: New file, for now has a couple of function
+ 	pointer typedefs used in the above stuff.
+	* gnome-app-util.h: Changed to use gnome-types.h
+	* TODO: Updated.
+	* Makefile.am, libgnomeui.h: Include new files.
+
 1998-05-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-client.c (default_client_init): Use the new macro

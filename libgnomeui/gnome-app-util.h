@@ -8,6 +8,7 @@
 #include <gnome.h>
 
 #include <libgnome/gnome-defs.h>
+#include "gnome-types.h"
 
 BEGIN_GNOME_DECLS
 
@@ -44,34 +45,27 @@ void gnome_app_warning (GnomeApp * app, const gchar * warning);
    e.g. by clicking the dialog's "close" button. So don't count on the
    callback ever being called. */
 
-/* reply is one of the above defines. */
-typedef void (* GnomeAppReplyFunc)(gint reply, gpointer data);
-
 /* Ask a yes or no question, and call the callback when it's answered. */
 void gnome_app_question (GnomeApp * app, const gchar * question,
-			 GnomeAppReplyFunc callback, gpointer data);
+			 GnomeReplyCallback callback, gpointer data);
 
 void gnome_app_question_modal (GnomeApp * app, const gchar * question,
-			       GnomeAppReplyFunc callback, gpointer data);
+			       GnomeReplyCallback callback, gpointer data);
 
 /* OK-Cancel question. */
 void gnome_app_ok_cancel (GnomeApp * app, const gchar * message,
-			  GnomeAppReplyFunc callback, gpointer data);
+			  GnomeReplyCallback callback, gpointer data);
 
 void gnome_app_ok_cancel_modal (GnomeApp * app, const gchar * message,
-				GnomeAppReplyFunc callback, gpointer data);
-
-/* string is a g_malloc'd string which should be freed, or NULL if the
-   user cancelled. */
-typedef void (* GnomeAppStringFunc)(gchar * string, gpointer data); 
+				GnomeReplyCallback callback, gpointer data);
 
 /* Get a string. */
 void gnome_app_request_string (GnomeApp * app, const gchar * prompt,
-			       GnomeAppStringFunc callback, gpointer data);
+			       GnomeStringCallback callback, gpointer data);
 
 /* Request a string, but don't echo to the screen. */
 void gnome_app_request_password (GnomeApp * app, const gchar * prompt,
-				 GnomeAppStringFunc callback, gpointer data);
+				 GnomeStringCallback callback, gpointer data);
 
 
 /* ========================================================== */
