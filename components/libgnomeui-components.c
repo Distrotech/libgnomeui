@@ -32,6 +32,7 @@
 #include <bonobo/bonobo-ui-main.h>
 #include <bonobo/bonobo-shlib-factory.h>
 #include <bonobo/bonobo-item-handler.h>
+#include <libgnome/gnome-selector-factory.h>
 #include "gnome-icon-selector-component.h"
 #include "gnome-image-entry-component.h"
 
@@ -99,10 +100,18 @@ libgnomeui_components_factory (BonoboGenericFactory *this,
     g_message (G_STRLOC ": `%s'", object_id);
 
     if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_IconSelector")) {
-	GnomeSelector *selector = g_object_new (gnome_icon_selector_component_get_type (), NULL);
+	GnomeSelectorFactory *factory;
 
-	return BONOBO_OBJECT (selector);
+	factory = gnome_selector_factory_new (gnome_icon_selector_component_get_type ());
+
+	return BONOBO_OBJECT (factory);
     } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_ImageEntry")) {
+	GnomeSelectorFactory *factory;
+
+	factory = gnome_selector_factory_new (gnome_image_entry_component_get_type ());
+
+	return BONOBO_OBJECT (factory);
+    } else if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_ImageEntry_Item")) {
 	BonoboItemHandler *item_handler;
 
 	item_handler = bonobo_item_handler_new (NULL, image_entry_get_object_fn, NULL);
