@@ -44,6 +44,7 @@ struct _GtkDial
   GtkAdjustment *adjustment;
 
   guint policy : 2;
+  guint view_only : 1;
   guint8 button;
 
   /* Dimensions of dial components */
@@ -80,6 +81,8 @@ gfloat         gtk_dial_get_percentage         (GtkDial        *dial);
 gfloat         gtk_dial_set_value              (GtkDial        *dial,
 						gfloat         value);
 gfloat         gtk_dial_get_value              (GtkDial        *dial);
+void           gtk_dial_set_view_only          (GtkDial        *dial,
+						gboolean       view_only);
 
 #ifdef __cplusplus
 }

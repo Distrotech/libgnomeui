@@ -116,6 +116,7 @@ gtk_dial_init (GtkDial *dial)
 {
   dial->button           = 0;
   dial->policy           = GTK_UPDATE_CONTINUOUS;
+  dial->view_only        = FALSE;
   dial->timer            = 0;
   dial->radius           = 0;
   dial->pointer_width    = 0;
@@ -167,6 +168,15 @@ gtk_dial_get_adjustment (GtkDial *dial)
   g_return_val_if_fail (GTK_IS_DIAL (dial), NULL);
 
   return dial->adjustment;
+}
+
+void gtk_dial_set_view_only (GtkDial *dial,
+			     gboolean view_only)
+{
+  g_return_if_fail(dial != NULL);
+  g_return_if_fail(GTK_IS_DIAL (dial));
+
+  dial->view_only = view_only;
 }
 
 void
@@ -525,6 +535,9 @@ gtk_dial_update_mouse (GtkDial *dial, gint x, gint y)
 
   g_return_if_fail (dial != NULL);
   g_return_if_fail (GTK_IS_DIAL (dial));
+
+  if(dial->view_only)
+    return;
 
   xc = GTK_WIDGET(dial)->allocation.width / 2;
   yc = GTK_WIDGET(dial)->allocation.height / 2;
