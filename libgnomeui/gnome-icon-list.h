@@ -35,14 +35,13 @@ typedef struct {
 	GnomeCanvas canvas;
 
 	/* Private data */
-	gpointer priv; /* was GtkAdjustment *adj */
-
-	gpointer pad1; /* was GtkAdjustment *hadj */
+	GtkAdjustment *adj;
+	GtkAdjustment *hadj;
 
 	/* Number of icons in the list */
 	int icons;
 
-	gpointer pad2; /* was GList *icon_list */
+	gpointer priv; /* was GList *icon_list */
 	int pad3; /* was int frozen */
 	int pad4; /* was int dirty */
 	int pad5; /* was int row_spacing */

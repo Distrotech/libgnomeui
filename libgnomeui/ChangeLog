@@ -1,3 +1,8 @@
+1999-07-18  Miguel de Icaza  <miguel@gnu.org>
+
+	* gnome-icon-list.c: Reverted all the changes that made gil->adj
+	and gil->hadj private.  There was existing code that depended on that.
+
 1999-07-19  Matt Wilson  <msw@redhat.com>
 
 	* gnome-icon-list.c (gnome_icon_list_icon_is_visible): check
@@ -247,6 +252,26 @@ Wed Jun 23 14:48:29 1999  Raph Levien  <raph@gimp.org>
 
 1999-06-23  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
 	* added gtkrc.* files for all languages/encodings I know
+
+1999-06-21  Raph Levien  <raph@acm.org>
+
+	* gnome-canvas-util.c (gnome_canvas_render_svp): Duuh, I had RGB
+	reversed (as BGR) in the compositing code.
+
+1999-06-20  Michael Zucchi  <mzucchi@zedzone.mmc.com.au>
+
+	* Makefile.am (INCLUDES): Added AUDIOFILE/ESD_CFLAGS to includes,
+	so that they can be installed in a different prefix.
+
+1999-06-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-text.c: Reverted Elliot's unportable changes.
+	Please do not perform Soptimizations(tm) on the canvas code.
+	* gnome-canvas-rect-ellipse.c: Likewise.
+	* gnome-canvas-line.c: Likewise.
+	* gnome-canvas-image.c: Likewise.
+	* gnome-canvas-util.c: Likewise.
+	* gnome-canvas-widget.c: Likewise.
 
 1999-06-21  Raph Levien  <raph@acm.org>
 
