@@ -946,6 +946,8 @@ gnome_icon_list_clear (GnomeIconList *gil)
 	gil->selection = NULL;
 	gil->icon_list = NULL;
 	gil->icons = 0;
+	gil->last_selected = 0;
+	gil->last_clicked = 0;
 }
 
 static void
