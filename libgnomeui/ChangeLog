@@ -1,3 +1,8 @@
+1998-09-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-app-helper.c (create_menu_item): Set separators as
+	insensitive so that they cannot be selected.
+
 1998-09-21  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.[ch]: added view_changed signal, similar to child_changed.

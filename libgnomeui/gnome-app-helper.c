@@ -200,15 +200,22 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group, Gnome
 		return;
 	}
 
+	/* If it is a separator, set it as insensitive so that it cannot be selected, and return --
+	 * there is nothing left to do.
+	 */
+
+	if (uiinfo->type == GNOME_APP_UI_SEPARATOR) {
+		gtk_widget_set_sensitive (uiinfo->widget, FALSE);
+		return;
+	}
+
 	/* Create the contents of the menu item */
 
-	if (uiinfo->type != GNOME_APP_UI_SEPARATOR) {
-		contents = create_pixmap_and_label (_(uiinfo->label), uiinfo->pixmap_type, uiinfo->pixmap_info,
-						    indent_missing_pixmaps, &label, &keyval);
-		gtk_container_add (GTK_CONTAINER (uiinfo->widget), contents);
+	contents = create_pixmap_and_label (_(uiinfo->label), uiinfo->pixmap_type, uiinfo->pixmap_info,
+					    indent_missing_pixmaps, &label, &keyval);
+	gtk_container_add (GTK_CONTAINER (uiinfo->widget), contents);
 
-		gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (label), uiinfo->widget);
-	}
+	gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (label), uiinfo->widget);
 
 	/* Set toggle information, if appropriate */
 
@@ -218,9 +225,6 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group, Gnome
 	}
 
 	/* Set the accelerators */
-
-	if (uiinfo->type == GNOME_APP_UI_SEPARATOR)
-		return; /* nothing more to do */
 
 	setup_accelerator (accel_group, uiinfo, "activate", GTK_ACCEL_VISIBLE);
 	setup_underlined_accelerator (insert_shortcuts ? accel_group : NULL,
