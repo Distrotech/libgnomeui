@@ -1573,10 +1573,10 @@ gnome_stock_pixmap_gdk (const char    *icon,
 
         pixbuf = gdk_pixbuf_new_from_stock_pixmap_entry(entries[state]);
 
-        gdk_pixbuf_render_pixmap(pixbuf,
-                                 pixmap,
-                                 mask,
-                                 128);
+        gdk_pixbuf_render_pixmap_and_mask(pixbuf,
+                                          pixmap,
+                                          mask,
+                                          128);
 
         gdk_pixbuf_unref(pixbuf);
 }

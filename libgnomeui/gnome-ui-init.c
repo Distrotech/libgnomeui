@@ -385,7 +385,7 @@ libgnomeui_pixbuf_image_loader(GdkWindow   *window,
         if (pixbuf == NULL)
                 return NULL;
 
-        gdk_pixbuf_render_pixmap(pixbuf, &retval, &mask, 128);
+        gdk_pixbuf_render_pixmap_and_mask(pixbuf, &retval, &mask, 128);
 
         gdk_pixbuf_unref(pixbuf);
         
