@@ -440,7 +440,7 @@ create_pixmap_from_path(GnomeStockPixmapEntryPath *data)
 
 
 static void
-build_disabled_pixmap(GtkWidget *window, GnomePixmap **inout_pixmap)
+build_disabled_pixmap(GnomePixmap **inout_pixmap)
 {
         GdkGC *gc;
         GdkWindow *pixmap = (*inout_pixmap)->pixmap;
@@ -454,13 +454,14 @@ build_disabled_pixmap(GtkWidget *window, GnomePixmap **inout_pixmap)
         GdkColormap *cmap;
         gint32 red, green, blue;
 
-	g_return_if_fail(window != NULL);
-        g_return_if_fail(window->window != NULL);
-        style = gtk_widget_get_style(window);
+	if (!GTK_WIDGET_REALIZED(*inout_pixmap))
+		gtk_widget_realize(*inout_pixmap);
+
+        style = gtk_widget_get_style(*inout_pixmap);
         gc = style->bg_gc[GTK_STATE_INSENSITIVE];
         gdk_window_get_size(pixmap, &w, &h);
-        visual = gdk_window_get_visual(window->window);
-        cmap = gdk_window_get_colormap(window->window);
+        visual = gtk_widget_get_visual(*inout_pixmap);
+        cmap = gtk_widget_get_colormap(*inout_pixmap);
         cc = gdk_color_context_new(visual, cmap);
 #ifdef NOT_ALLWAYS_SHADE
         if ((cc->mode != GDK_CC_MODE_TRUE) &&
@@ -559,7 +560,7 @@ gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype)
         /* TODO: should be optimized a bit */
         if ((NULL == lookup(icon, subtype, 0)) && (pixmap) &&
             (0 == strcmp(subtype, GNOME_STOCK_PIXMAP_DISABLED))) {
-                build_disabled_pixmap(window, &pixmap);
+                build_disabled_pixmap(&pixmap);
         }
         return pixmap;
 }

@@ -1,3 +1,17 @@
+1998-02-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-stock.c (build_disabled_pixmap): The style that provides
+	the GC for painting should come from the pixmap, not from the
+	window, to avoid BadMatch problems.  Also, the visual and colormap
+	should come from there.  Eliminated the window argument, as it is
+	no longer needed.
+
+	I still have a problem, though.  The widget needs to be realized
+	to pick its style (for the gc).  So I realize it if it is not
+	realized yet --- this will create a toplevel window if the widget
+	has not been parented yet, and looks extremely ugly, and doesn't
+	work.
+
 1998-02-26  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.[ch]: made gnome-stock use gnome-pixmap.
