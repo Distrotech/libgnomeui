@@ -1,3 +1,8 @@
+2001-06-13  Martin Baulig  <baulig@suse.de>
+
+	* POTFILES.in: Removed components/gnome-image-entry-component.c and
+	libgnomeui/gnome-selector-component.c.
+
 2001-06-12  Martin Baulig  <baulig@suse.de>
 
 	* POTFILES.in: Removed gnome-gconf.c.
