@@ -1,3 +1,8 @@
+2002-02-11  jacob berkman  <jacob@ximian.com>
+
+	* gnome-app-helper.c (do_ui_signal_connect):
+	s/g_signal_connect_full/g_signal_connect_closure_by_id/
+
 2002-02-11  Anders Carlsson  <andersca@gnu.org>
 
 	* pixmaps/stock_menu_about.png: Use nicer icon.

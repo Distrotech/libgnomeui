@@ -1311,14 +1311,14 @@ do_ui_signal_connect (GnomeUIInfo        *uiinfo,
 		saved_data->destroy_func = uibdata->destroy_func;
 		saved_data->user_data = uibdata->data ? uibdata->data : uiinfo->user_data;
 
-		g_signal_connect_full (uiinfo->widget, 
-				       g_signal_lookup (signal_name, G_OBJECT_TYPE (uiinfo->widget)),
-				       0,
-				       g_cclosure_new (
-					       G_CALLBACK (ui_relay_callback),
-					       saved_data,
-					       (GClosureNotify) ui_destroy_callback),
-				       FALSE);
+		g_signal_connect_closure_by_id (uiinfo->widget, 
+						g_signal_lookup (signal_name, G_OBJECT_TYPE (uiinfo->widget)),
+						0,
+						g_cclosure_new (
+							G_CALLBACK (ui_relay_callback),
+							saved_data,
+							(GClosureNotify) ui_destroy_callback),
+						FALSE);
 	
 	} else if (uiinfo->moreinfo)
 		gtk_signal_connect (GTK_OBJECT (uiinfo->widget), 
