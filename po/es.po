@@ -1,3 +1,4 @@
+# traducción de es.po al Spanish
 # translation of es.po to Spanish
 # Translation into spanish of libgnomeui.
 # Copyright © 2001-2003 Free Software Foundation, Inc.
@@ -11,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-05 21:33+0200\n"
-"PO-Revision-Date: 2004-06-05 21:35+0200\n"
+"POT-Creation-Date: 2004-07-08 00:18+0200\n"
+"PO-Revision-Date: 2004-07-08 00:21+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -37,6 +38,30 @@ msgstr "Elemento hijo 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Consejo para el elemento 2"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:855
+msgid "Filesystem"
+msgstr "Sistema de archi_vos"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1517
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Se ha producido un error al guardar el marcador (%s)"
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "No se ha podido obtener información para el archivo «%s»: %s"
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Falló al abrir el archivo «%s»:%s"
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr "Falló al cargar la imagen «%s»: razón no conocida, probablemente un archivo de imagen corrupto"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -1255,23 +1280,31 @@ msgstr "Pregunta"
 msgid "Message"
 msgstr "Mensaje"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "_Usuario:"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "_Dominio:"
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_Contraseña:"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr "Conectar _anónimamente"
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr "Conectar como _usuario:"
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "Recordar la contraseña para esta sesión"
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "Guardar contraseña en el anillo de claves"
 
