@@ -1,3 +1,7 @@
+2001-07-19  Martin Baulig  <baulig@suse.de>
+
+	* testgnome.xml: Use the new Bonobo stock stuff.
+
 2001-07-18  Darin Adler  <darin@bentspoon.com>
 
 	* testgnome.c: (main): Removed gnome_less part, since Martin

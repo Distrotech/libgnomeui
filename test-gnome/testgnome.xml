@@ -1,18 +1,12 @@
 <Root>
 
 <commands>
-        <cmd name="FileTest" _label="Test"
-	_tip="Test" pixtype="stock" pixname="Exit"/>
-        
-        <cmd name="FileClose" _label="Close"
-	_tip="Close the current window" pixtype="stock" pixname="Close"
-	accel="*Control*w"/>
+        <cmd name="FileClose" stockid="gtk-close" _tip="Close the current window"/>
 	
-        <cmd name="FileExit" _label="Exit" _tip="Exit the test"
-           pixtype="stock" pixname="Exit" accel="*Control*q"/>
+        <cmd name="FileExit" stockid="gtk-quit" _tip="Exit the test"/>
 
-        <cmd name="HelpAbout" _label="About..." _tip="About this application"
-	 pixtype="stock" pixname="About"/>
+        <cmd name="HelpAbout" stockid="gnome-stock-pixmap-about" _label="_About"
+		_tip="About this application"/>
 
 </commands>
 
@@ -20,14 +14,9 @@
 
 <submenu name="File" _label="_File">
         
-        <menuitem name="FileTest" verb="" _label="_Test"/>
-        
+        <menuitem name="FileClose" verb=""/>
 	
-	<separator/>
-	
-        <menuitem name="FileClose" verb="" _label="_Close"/>
-	
-        <menuitem name="FileExit" verb="" _label="E_xit"/>
+        <menuitem name="FileExit" verb=""/>
 
 </submenu>
 
@@ -35,7 +24,7 @@
 	
 	<placeholder name="BuiltMenuItems"/>
 
-        <menuitem name="HelpAbout" verb="" _label="_About..."/>
+        <menuitem name="HelpAbout" verb=""/>
 
 </submenu>
 
