@@ -817,12 +817,12 @@ gnome_about_new (const gchar *title,
 		 const gchar *comments,
 		 const gchar *logo)
 {
-    return gnome_about_new_url (title, version, NULL, copyright,
-				authors, NULL, comments, logo);
+    return gnome_about_new_with_url (title, version, NULL, copyright,
+				     authors, NULL, comments, logo);
 }
 
 /**
- * gnome_about_new_url
+ * gnome_about_new_with_url
  * @title: Name of app.
  * @version: version number
  * @url: Application URL
@@ -849,14 +849,14 @@ gnome_about_new (const gchar *title,
  **/
 
 GtkWidget*
-gnome_about_new_url (const gchar *title,
-		     const gchar *version,
-		     const gchar *url,
-		     const gchar *copyright,
-		     const gchar **authors,
-		     const gchar **author_urls,
-		     const gchar *comments,
-		     const gchar *logo)
+gnome_about_new_with_url (const gchar *title,
+			  const gchar *version,
+			  const gchar *url,
+			  const gchar *copyright,
+			  const gchar **authors,
+			  const gchar **author_urls,
+			  const gchar *comments,
+			  const gchar *logo)
 {
     GnomeAbout *about;
     

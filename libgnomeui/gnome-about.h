@@ -63,15 +63,15 @@ GtkWidget* gnome_about_new	(const gchar	*title, /* Name of the application. */
 				 const gchar	*logo /* A logo pixmap file. */
 				 );
 
-GtkWidget* gnome_about_new_url	(const gchar *title, /* Name of the application. */
-				 const gchar *version, /* Version. */
-				 const gchar *url, /* Application URL */
-				 const gchar *copyright, /* Copyright notice (one line.) */
-				 const gchar **authors, /* NULL terminated list of authors. */
-				 const gchar **author_urls, /* NULL terminated list of author URLs */
-				 const gchar *comments, /* Other comments. */
-				 const gchar *logo /* A logo pixmap file. */
-				 );
+GtkWidget* gnome_about_new_with_url	(const gchar *title, /* Name of the application. */
+					 const gchar *version, /* Version. */
+					 const gchar *url, /* Application URL */
+					 const gchar *copyright, /* Copyright notice (one line.) */
+					 const gchar **authors, /* NULL terminated list of authors. */
+					 const gchar **author_urls, /* NULL terminated list of author URLs */
+					 const gchar *comments, /* Other comments. */
+					 const gchar *logo /* A logo pixmap file. */
+					 );
 
 /* Only for use by bindings to languages other than C; don't use
    in applications. */
