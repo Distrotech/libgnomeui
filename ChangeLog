@@ -1,3 +1,7 @@
+2005-02-08  Christian Rose  <menthos@menthos.com>
+
+	* configure.in: Added "xh" to ALL_LINGUAS.
+
 2005-01-31  Federico Mena Quintero  <federico@ximian.com>
 
 	Fixes the libgnomeui part of #164239:
