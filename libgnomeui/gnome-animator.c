@@ -104,9 +104,9 @@ init (GnomeAnimator *animator)
   animator->timeout_id = 0;
   animator->playback_speed = 1.0;
 
-  animator->private = g_new (GnomeAnimatorPrivate, 1);
-  animator->private->offscreen_pixmap = NULL;
-  animator->private->background_pixmap = NULL;
+  animator->privat = g_new (GnomeAnimatorPrivate, 1);
+  animator->privat->offscreen_pixmap = NULL;
+  animator->privat->background_pixmap = NULL;
 
   /* This allows us to "emulate" a transparent window, by making our
      background look exactly like the parent's background.  */
@@ -173,11 +173,11 @@ static void
 prepare_aux_pixmaps (GnomeAnimator *animator)
 {
   GtkWidget *widget = GTK_WIDGET (animator);
-  GnomeAnimatorPrivate *private = animator->private;
+  GnomeAnimatorPrivate *privat = animator->privat;
   gint old_width, old_height;
 
-  if (private->offscreen_pixmap != NULL)
-    gdk_window_get_size (private->offscreen_pixmap, &old_width, &old_height);
+  if (privat->offscreen_pixmap != NULL)
+    gdk_window_get_size (privat->offscreen_pixmap, &old_width, &old_height);
   else
     old_width = old_height = 0;
 
@@ -186,26 +186,26 @@ prepare_aux_pixmaps (GnomeAnimator *animator)
     {
       GdkVisual *visual = gtk_widget_get_visual (widget);
 
-      if (private->offscreen_pixmap != NULL)
+      if (privat->offscreen_pixmap != NULL)
         {
-          gdk_pixmap_unref (private->offscreen_pixmap);
-          private->offscreen_pixmap = NULL;
+          gdk_pixmap_unref (privat->offscreen_pixmap);
+          privat->offscreen_pixmap = NULL;
         }
 
-      if (private->background_pixmap != NULL)
+      if (privat->background_pixmap != NULL)
         {
-          gdk_pixmap_unref (private->background_pixmap);
-          private->background_pixmap = NULL;
+          gdk_pixmap_unref (privat->background_pixmap);
+          privat->background_pixmap = NULL;
         }
 
       if (widget->requisition.width > 0
           && widget->requisition.height > 0)
         {
-          private->offscreen_pixmap = gdk_pixmap_new (widget->window,
+          privat->offscreen_pixmap = gdk_pixmap_new (widget->window,
                                                       widget->requisition.width,
                                                       widget->requisition.height,
                                                       visual->depth);
-          private->background_pixmap = gdk_pixmap_new (widget->window,
+          privat->background_pixmap = gdk_pixmap_new (widget->window,
                                                        widget->requisition.width,
                                                        widget->requisition.height,
                                                        visual->depth);
@@ -220,9 +220,9 @@ prepare_aux_pixmaps (GnomeAnimator *animator)
 static void
 draw_background_pixmap (GnomeAnimator *animator)
 {
-  GnomeAnimatorPrivate *private = animator->private;
+  GnomeAnimatorPrivate *privat = animator->privat;
 
-  if (private->background_pixmap != NULL)
+  if (privat->background_pixmap != NULL)
     {
       GtkWidget *widget;
       GtkStyle *style;
@@ -247,7 +247,7 @@ draw_background_pixmap (GnomeAnimator *animator)
       gdk_window_get_position (widget->window, &x, &y);
       gdk_gc_set_ts_origin (gc, -x, -y);
 
-      gdk_draw_rectangle (private->background_pixmap,
+      gdk_draw_rectangle (privat->background_pixmap,
                           gc,
                           TRUE,
                           0, 0,
@@ -312,19 +312,19 @@ paint (GnomeAnimator *animator, GdkRectangle *area)
     {
       GnomeAnimatorFrame *frame; 
       GtkWidget *widget; 
-      GnomeAnimatorPrivate *private;
+      GnomeAnimatorPrivate *privat;
 
       frame = (animator->frames + animator->current_frame_number);
       widget = GTK_WIDGET (animator);
-      private = animator->private;
+      privat = animator->privat;
       
       /* Update the window using double buffering to make the
          animation as smooth as possible.  */
 
       /* Copy the background into the offscreen pixmap.  */
-      gdk_draw_pixmap (private->offscreen_pixmap,
+      gdk_draw_pixmap (privat->offscreen_pixmap,
                        widget->style->black_gc,
-                       private->background_pixmap,
+                       privat->background_pixmap,
                        0, 0,
                        0, 0,
                        widget->requisition.width,
@@ -334,7 +334,7 @@ paint (GnomeAnimator *animator, GdkRectangle *area)
       gdk_gc_set_clip_mask (widget->style->black_gc, frame->mask);
       gdk_gc_set_clip_origin (widget->style->black_gc,
                               frame->x_offset, frame->y_offset);
-      gdk_draw_image (private->offscreen_pixmap,
+      gdk_draw_image (privat->offscreen_pixmap,
                       widget->style->black_gc,
                       frame->image,
                       area->x, area->y,
@@ -345,7 +345,7 @@ paint (GnomeAnimator *animator, GdkRectangle *area)
       /* Copy the offscreen pixmap into the window.  */
       gdk_draw_pixmap (widget->window,
                        widget->style->black_gc,
-                       private->offscreen_pixmap,
+                       privat->offscreen_pixmap,
                        area->x, area->y,
                        area->x, area->y,
                        area->width, area->height);

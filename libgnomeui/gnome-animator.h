@@ -92,7 +92,7 @@ struct _GnomeAnimator
 
     double playback_speed;
 
-    GnomeAnimatorPrivate *private;
+    GnomeAnimatorPrivate *privat;
   };
 
 struct _GnomeAnimatorClass
