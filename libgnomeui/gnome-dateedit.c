@@ -32,7 +32,11 @@ static void gnome_date_edit_destroy      (GtkObject          *object);
 
 static GtkHBoxClass *parent_class;
 
-
+/**
+ * gnome_date_edit_get_type:
+ *
+ * Returns the GtkType for the GnomeDateEdit widget
+ */
 guint
 gnome_date_edit_get_type (void)
 {
@@ -326,6 +330,14 @@ gnome_date_edit_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+/**
+ * gnome_date_edit_set_time:
+ * @gde: the GnomeDateEdit widget
+ * @the_time: The time and date that should be set on the widget
+ *
+ * Changes the displayed date and time in the GnomeDateEdit widget
+ * to be the one represented by @the_time.
+ */
 void
 gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 {
@@ -357,6 +369,15 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 	}
 }
 
+/**
+ * gnome_date_edit_set_popup_range:
+ * @gde: The GnomeDateEdit widget
+ * @low_hour: low boundary for the time-range display popup.
+ * @up_hour:  upper boundary for the time-range display popup.
+ *
+ * Sets the range of times that will be provide by the time popup
+ * selectors.
+ */
 void
 gnome_date_edit_set_popup_range (GnomeDateEdit *gde, int low_hour, int up_hour)
 {
@@ -449,6 +470,17 @@ create_children (GnomeDateEdit *gde, int show_time)
 	gtk_widget_show (gde->calendar);
 }
 
+/**
+ * gnome_date_edit_new:
+ * @the_time: date and time to be displayed on the widget
+ * @show_time: whether time should be displayed
+ * @use_24_format: whether 24-hour format is desired for the time display.
+ *
+ * Creates a new GnomeDateEdit widget which can be used to provide
+ * an easy to use way for entering dates and times.
+ * 
+ * Returns a GnomeDateEdit widget.
+ */
 GtkWidget *
 gnome_date_edit_new (time_t the_time, int show_time, int use_24_format)
 {
@@ -463,6 +495,12 @@ gnome_date_edit_new (time_t the_time, int show_time, int use_24_format)
 	return GTK_WIDGET (gde);
 }
 
+/**
+ * gnome_date_edit_get_date:
+ * @gde: The GnomeDateEdit widget
+ *
+ * Returns the time entered in the GnomeDateEdit widget
+ */
 time_t
 gnome_date_edit_get_date (GnomeDateEdit *gde)
 {

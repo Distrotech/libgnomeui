@@ -20,6 +20,11 @@
 static void gnome_scores_class_init (GnomeScoresClass *klass);
 static void gnome_scores_init       (GnomeScores      *scores);
 
+/**
+ * gnome_scores_get_type:
+ *
+ * Returns the GtkType for the GnomeScores widget
+ */
 guint
 gnome_scores_get_type ()
 {
