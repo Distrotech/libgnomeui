@@ -788,7 +788,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (gnome_program_get_app_id (gnome_program_get()) == NULL ||
+	if (gnome_program_get_app_id (gnome_program_get ()) == NULL ||
 	    gentry->_priv->history_id == NULL)
 		return;
 
@@ -806,6 +806,8 @@ gnome_entry_save_history (GnomeEntry *gentry)
 			gconf_items = g_slist_prepend (gconf_items, item->text);
 		}
 	}
+
+	gconf_items = g_slist_reverse (gconf_items);
 
 	/* Save the list */
 	gentry->_priv->saving_history = TRUE;
