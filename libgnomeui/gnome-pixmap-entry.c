@@ -89,7 +89,7 @@ refresh_preview(GnomePixmapEntry *pentry)
 
 	if(!pentry->preview)
 		return;
-
+	
 	t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
 					   FALSE);
 
@@ -353,20 +353,8 @@ drag_data_get  (GtkWidget          *widget,
 }
 
 static void
-gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
+turn_on_previewbox(GnomePixmapEntry *pentry)
 {
-	GtkWidget *w;
-	char *p;
-
-	gtk_box_set_spacing (GTK_BOX (pentry), 4);
-
-	gtk_signal_connect(GTK_OBJECT(pentry),"destroy",
-			   GTK_SIGNAL_FUNC(pentry_destroy), NULL);
-
-	pentry->do_preview = TRUE;
-
-	pentry->last_preview = NULL;
-
 	pentry->preview_sw = gtk_scrolled_window_new(NULL,NULL);
 	gtk_drag_dest_set (GTK_WIDGET (pentry->preview_sw),
 			   GTK_DEST_DEFAULT_MOTION |
@@ -390,11 +378,33 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
 					      pentry->preview);
 
+	/*just in case there is a default that is an image*/
+	refresh_preview(pentry);
+}
+
+static void
+gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
+{
+	GtkWidget *w;
+	char *p;
+
+	gtk_box_set_spacing (GTK_BOX (pentry), 4);
+
+	gtk_signal_connect(GTK_OBJECT(pentry),"destroy",
+			   GTK_SIGNAL_FUNC(pentry_destroy), NULL);
+
+	pentry->do_preview = 1;
+
+	pentry->last_preview = NULL;
+
+	pentry->preview = NULL;
+	pentry->preview_sw = NULL;
+
 	pentry->fentry = gnome_file_entry_new (NULL,NULL);
 	gtk_signal_connect_after(GTK_OBJECT(pentry->fentry),"browse_clicked",
 				 GTK_SIGNAL_FUNC(browse_clicked),
 				 pentry);
-	gtk_box_pack_start (GTK_BOX (pentry), pentry->fentry, FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (pentry), pentry->fentry, FALSE, FALSE, 0);
 	gtk_widget_show (pentry->fentry);
 
 	p = gnome_pixmap_file(".");
@@ -417,7 +427,9 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
  * @browse_dialog_title: Title of the browse dialog
  * @do_preview: %TRUE if preview is desired, %FALSE if not.
  *
- * Description: Constructs the @pentry object.
+ * Description: Constructs the @pentry object.  If do_preview is %FALSE,
+ * there is no preview, the files are not loaded and thus are not
+ * checked to be real image files.
  **/
 void
 gnome_pixmap_entry_construct (GnomePixmapEntry *pentry, const gchar *history_id,
@@ -430,10 +442,9 @@ gnome_pixmap_entry_construct (GnomePixmapEntry *pentry, const gchar *history_id,
 	gnome_file_entry_set_title (GNOME_FILE_ENTRY(pentry->fentry),
 				    browse_dialog_title);
 
-	pentry->do_preview = do_preview;
-	if(!do_preview)
-		gtk_widget_hide(pentry->preview_sw);
-
+	pentry->do_preview = do_preview?1:0;
+	if(do_preview)
+		turn_on_previewbox(pentry);
 }
 
 /**
@@ -443,9 +454,8 @@ gnome_pixmap_entry_construct (GnomePixmapEntry *pentry, const gchar *history_id,
  * @do_preview: boolean
  *
  * Description: Creates a new pixmap entry widget, if do_preview is false,
- * the preview is hidden but the files are still loaded so that it's easy
- * to show it. For a pixmap entry without preview, use the
- * #GnomeFileEntry widget..
+ * there is no preview, the files are not loaded and thus are not
+ * checked to be real image files.
  *
  * Returns: New GnomePixmapEntry object.
  **/
@@ -464,10 +474,10 @@ gnome_pixmap_entry_new (const gchar *history_id, const gchar *browse_dialog_titl
  * gnome_pixmap_entry_gnome_file_entry:
  * @pentry: Pointer to GnomePixmapEntry widget
  *
- * Description: Get the GnomeFileEntry component of the
+ * Description: Get the #GnomeFileEntry component of the
  * GnomePixmapEntry widget for lower-level manipulation.
  *
- * Returns: GnomeFileEntry widget
+ * Returns: #GnomeFileEntry widget
  **/
 GtkWidget *
 gnome_pixmap_entry_gnome_file_entry (GnomePixmapEntry *pentry)
@@ -482,10 +492,10 @@ gnome_pixmap_entry_gnome_file_entry (GnomePixmapEntry *pentry)
  * gnome_pixmap_entry_gnome_entry:
  * @pentry: Pointer to GnomePixmapEntry widget
  *
- * Description: Get the GnomeEntry component of the
+ * Description: Get the #GnomeEntry component of the
  * GnomePixmapEntry widget for lower-level manipulation.
  *
- * Returns: GnomeEntry widget
+ * Returns: #GnomeEntry widget
  **/
 GtkWidget *
 gnome_pixmap_entry_gnome_entry (GnomePixmapEntry *pentry)
@@ -500,10 +510,10 @@ gnome_pixmap_entry_gnome_entry (GnomePixmapEntry *pentry)
  * gnome_pixmap_entry_gtk_entry:
  * @pentry: Pointer to GnomePixmapEntry widget
  *
- * Description: Get the GtkEntry component of the
+ * Description: Get the #GtkEntry component of the
  * GnomePixmapEntry for Gtk+-level manipulation.
  *
- * Returns: GtkEntry widget
+ * Returns: #GtkEntry widget
  **/
 GtkWidget *
 gnome_pixmap_entry_gtk_entry (GnomePixmapEntry *pentry)
@@ -544,24 +554,35 @@ gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
 /**
  * gnome_pixmap_entry_set_preview:
  * @pentry: Pointer to GnomePixmapEntry widget
- * @do_preview: %TRUE to show previews, %FALSE to hide.
+ * @do_preview: %TRUE to show previews, %FALSE to not show them.
  *
- * Description: Sets whether or not previews of the currently selected 
- * pixmap should be shown in the file selector.
+ * Description: Sets whether or not the preview box is shown above
+ * the entry.  If the preview is on, we also load the files and check
+ * for them being real images.  If it is off, we don't check files
+ * to be real image files.
  * 
  * Returns:
  **/
 void
-gnome_pixmap_entry_set_preview (GnomePixmapEntry *pentry, int do_preview)
+gnome_pixmap_entry_set_preview (GnomePixmapEntry *pentry, gboolean do_preview)
 {
 	g_return_if_fail (pentry != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
 
-	pentry->do_preview = do_preview;
-	if(do_preview)
-		gtk_widget_show(pentry->preview_sw);
-	else
-		gtk_widget_hide(pentry->preview_sw);
+	if(pentry->do_preview == do_preview?1:0)
+		return;
+
+	pentry->do_preview = do_preview?1:0;
+
+	if(do_preview) {
+		g_assert(pentry->preview_sw == NULL);
+		turn_on_previewbox(pentry);
+	} else {
+		g_assert(pentry->preview_sw != NULL);
+		gtk_widget_destroy(pentry->preview_sw);
+		pentry->preview_sw = NULL;
+		pentry->preview = NULL;
+	}
 }
 
 /**
@@ -571,6 +592,7 @@ gnome_pixmap_entry_set_preview (GnomePixmapEntry *pentry, int do_preview)
  * @preview_h: Preview height in pixels
  *
  * Description: Sets the minimum size of the preview frame in pixels.
+ * This works only if the preview is enabled.
  *
  * Returns:
  **/
@@ -583,7 +605,8 @@ gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,
 	g_return_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry));
 	g_return_if_fail (preview_w>=0 && preview_h>=0);
 
-	gtk_widget_set_usize(pentry->preview_sw,preview_w,preview_h);
+	if(pentry->preview_sw)
+		gtk_widget_set_usize(pentry->preview_sw,preview_w,preview_h);
 }
 
 /* Ensures that a pixmap entry is not in the waiting list for a preview update.  */
@@ -614,7 +637,8 @@ ensure_update (GnomePixmapEntry *pentry)
  * @pentry: Pointer to GnomePixmapEntry widget
  *
  * Description: Gets the filename of the image if the preview
- * successfully loaded.
+ * successfully loaded if preview is disabled.  If the preview is
+ * disabled, the file is only checked if it exists or not.
  *
  * Returns: Newly allocated string containing path, or %NULL on error. 
  **/
@@ -624,11 +648,13 @@ gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry)
 	g_return_val_if_fail (pentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry), NULL);
 
-	ensure_update (pentry);
+	if (pentry->do_preview) {
+		ensure_update (pentry);
 
-	/*this happens if it doesn't exist or isn't an image*/
-	if (!GNOME_IS_PIXMAP (pentry->preview))
-		return NULL;
+		/*this happens if it doesn't exist or isn't an image*/
+		if (!GNOME_IS_PIXMAP (pentry->preview))
+			return NULL;
+	}
 
 	return gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (pentry->fentry), TRUE);
 }

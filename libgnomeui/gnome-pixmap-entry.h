@@ -38,8 +38,8 @@ struct _GnomePixmapEntry {
 	/*very private*/
 	gchar *last_preview;
 
-	gboolean do_preview : 1; /*put a preview frame with the pixmap next to
-			       the entry*/
+	guint32 do_preview : 1; /*put a preview frame with the pixmap next to
+				  the entry*/
 };
 
 struct _GnomePixmapEntryClass {
@@ -74,7 +74,7 @@ void	   gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,
 					       gint preview_w,
 					       gint preview_h);
 
-/*only return a file if it was possible to load it with imlib*/
+/*only return a file if it was possible to load it with gdk-pixbuf*/
 gchar      *gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry);
 
 END_GNOME_DECLS
