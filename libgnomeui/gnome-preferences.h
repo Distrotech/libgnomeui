@@ -27,7 +27,9 @@ struct _GnomePreferences {
   int property_box_buttons_help : 1;
   int statusbar_not_dialog : 1;
   int statusbar_is_interactive : 1;
+  int menubar_detachable : 1;
   int menubar_relief : 1;
+  int toolbar_detachable : 1;
   int toolbar_relief : 1;
   int toolbar_relief_btn : 1;
   int toolbar_lines : 1;
@@ -62,9 +64,17 @@ void              gnome_preferences_set_statusbar_dialog     (gboolean statusbar
 gboolean          gnome_preferences_get_statusbar_interactive(void);
 void              gnome_preferences_set_statusbar_interactive(gboolean b);
 
+/* Whether menubars can be detached */
+gboolean          gnome_preferences_get_menubar_detachable   (void);
+void              gnome_preferences_set_menubar_detachable   (gboolean b);
+
 /* Whether menubars have a beveled edge */
 gboolean          gnome_preferences_get_menubar_relief       (void);
 void              gnome_preferences_set_menubar_relief       (gboolean b);
+
+/* Whether toolbars can be detached */
+gboolean          gnome_preferences_get_toolbar_detachable   (void);
+void              gnome_preferences_set_toolbar_detachable   (gboolean b);
 
 /* Whether toolbars have a beveled edge  */
 gboolean          gnome_preferences_get_toolbar_relief       (void);

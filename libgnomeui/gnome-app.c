@@ -595,6 +595,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 
 	dock_item = gnome_dock_item_new (GNOME_DOCK_ITEM_BEH_EXCLUSIVE
 					 | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
+	gtk_container_set_border_width (GTK_CONTAINER (dock_item), 0);
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (menubar));
 	gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item), GTK_SHADOW_NONE);
 
@@ -642,10 +643,12 @@ gnome_app_set_toolbar (GnomeApp *app,
 	   `GNOME_DOCK_ITEM_BEH_EXCLUSIVE' is not really a
 	   requirement.  We only do this for backwards compatibility.  */
 	dock_item = gnome_dock_item_new (GNOME_DOCK_ITEM_BEH_EXCLUSIVE);
+	gtk_container_set_border_width (GTK_CONTAINER (toolbar), 1);
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (toolbar));
+
 	gnome_dock_add_item (GNOME_DOCK (app->dock), dock_item,
 			     GNOME_DOCK_POS_TOP, 1, 0, 0, TRUE);
-	gtk_container_border_width (GTK_CONTAINER (toolbar), 1);
+
 	if (!gnome_preferences_get_toolbar_relief ())
 		gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item), GTK_SHADOW_NONE);
 
@@ -701,11 +704,11 @@ gnome_app_set_statusbar (GnomeApp *app,
 
 	frame = gtk_frame_new(NULL);
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_OUT);
-	gtk_container_border_width(GTK_CONTAINER(frame), 0);
+	gtk_container_set_border_width(GTK_CONTAINER(frame), 0);
 	gtk_widget_show(frame);
 
 	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_container_border_width(GTK_CONTAINER(hbox), 1);
+	gtk_container_set_border_width(GTK_CONTAINER(hbox), 1);
 	gtk_box_pack_start(GTK_BOX(hbox), statusbar, TRUE, TRUE, 0);
 	gtk_widget_show(hbox);
 

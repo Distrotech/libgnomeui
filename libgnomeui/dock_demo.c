@@ -87,7 +87,7 @@ main (int argc, char **argv)
     {
       toolbars[i] = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL,
                                      GTK_TOOLBAR_ICONS);
-      gtk_container_border_width (GTK_CONTAINER (toolbars[i]), 1);
+      gtk_container_set_border_width (GTK_CONTAINER (toolbars[i]), 1);
 
       gnome_app_fill_toolbar_custom (GTK_TOOLBAR (toolbars[i]),
                                      toolbar_infos[i],
@@ -100,7 +100,7 @@ main (int argc, char **argv)
       else
         dock_items[i] = gnome_dock_item_new (GNOME_DOCK_ITEM_BEH_NORMAL);
 
-      gtk_container_border_width (GTK_CONTAINER (dock_items[i]), 1);
+      gtk_container_set_border_width (GTK_CONTAINER (dock_items[i]), 1);
       gtk_container_add (GTK_CONTAINER (dock_items[i]), toolbars[i]);
 
       if (i < 3)

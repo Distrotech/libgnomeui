@@ -1,3 +1,15 @@
+1998-12-13  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-preferences.[ch]: Resurrect {menubar,toolbar}_handlebox as
+	{menubar,toolbar}_detachable, which should eventually cause the
+	gnome-dock in gnome-app not to have a handle (not functional yet).
+
+	* gnome-app.c, dock_demo.c:
+	s/container_border_width/container_set_border_width/
+
+	* gnome-app.c (gnome_app_set_menus): Set menubar dock item's
+	border width to 0.
+
 Sat Dec 12  Felix Bellaby  <felix@pooh.u-net.com>
 
 	* gnome-client.c (gnome_client_parse_func): set program property so

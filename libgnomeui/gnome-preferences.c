@@ -36,7 +36,9 @@ static GnomePreferences prefs =
   TRUE,               /* PropertyBox has Help */
   FALSE,              /* Use dialogs, not the statusbar */
   FALSE,              /* Statusbar isn't interactive */
+  TRUE,               /* Menubars are detachable */
   TRUE,               /* Menubars are relieved */
+  TRUE,               /* Toolbars are detachable */
   TRUE,               /* Toolbars are relieved */
   FALSE,              /* Toolbar buttons are relieved */
   TRUE,               /* Toolbars show lines for separators */
@@ -114,8 +116,10 @@ static const gchar * const dialog_positions [] = {
 #define STATUSBAR_DIALOG_KEY       "StatusBar_not_Dialog"
 #define STATUSBAR_INTERACTIVE_KEY  "StatusBar_is_Interactive"
 
+#define MENUBAR_DETACHABLE_KEY     "Menubar_detachable"
 #define MENUBAR_RELIEF_KEY         "Menubar_relieved"
 
+#define TOOLBAR_DETACHABLE_KEY     "Toolbar_detachable"
 #define TOOLBAR_RELIEF_KEY         "Toolbar_relieved"
 #define TOOLBAR_RELIEF_BTN_KEY     "Toolbar_relieved_buttons"
 #define TOOLBAR_LINES_KEY          "Toolbar_lines"
@@ -249,9 +253,17 @@ gnome_preferences_load_custom(GnomePreferences *settings)
   gnome_config_pop_prefix();
   gnome_config_push_prefix(APP);
 
+  b = gnome_config_get_bool_with_default(MENUBAR_DETACHABLE_KEY"=true",
+					 NULL);
+  settings->menubar_detachable = b;
+
   b = gnome_config_get_bool_with_default(MENUBAR_RELIEF_KEY"=true",
 					 NULL);
   settings->menubar_relief = b;
+
+  b = gnome_config_get_bool_with_default(TOOLBAR_DETACHABLE_KEY"=true",
+					 NULL);
+  settings->toolbar_detachable = b;
 
   b = gnome_config_get_bool_with_default(TOOLBAR_RELIEF_KEY"=true",
 					 NULL);
@@ -331,8 +343,12 @@ gnome_preferences_save_custom(GnomePreferences *settings)
   gnome_config_pop_prefix();
   gnome_config_push_prefix(APP);
 
+  gnome_config_set_bool(MENUBAR_DETACHABLE_KEY,
+			settings->menubar_detachable);
   gnome_config_set_bool(MENUBAR_RELIEF_KEY,
 			settings->menubar_relief);
+  gnome_config_set_bool(TOOLBAR_DETACHABLE_KEY,
+			settings->toolbar_detachable);
   gnome_config_set_bool(TOOLBAR_RELIEF_KEY,
 			settings->toolbar_relief);
   gnome_config_set_bool(TOOLBAR_RELIEF_BTN_KEY,
@@ -397,6 +413,16 @@ void              gnome_preferences_set_statusbar_interactive(gboolean b)
   prefs.statusbar_is_interactive = b;
 }
 
+gboolean          gnome_preferences_get_menubar_detachable   (void)
+{
+  return prefs.menubar_detachable;
+}
+
+void              gnome_preferences_set_menubar_detachable   (gboolean b)
+{
+  prefs.menubar_detachable = b;
+}
+
 gboolean          gnome_preferences_get_menubar_relief    (void)
 {
   return prefs.menubar_relief;
@@ -405,6 +431,16 @@ gboolean          gnome_preferences_get_menubar_relief    (void)
 void              gnome_preferences_set_menubar_relief    (gboolean b)
 {
   prefs.menubar_relief = b;
+}
+
+gboolean          gnome_preferences_get_toolbar_detachable   (void)
+{
+  return prefs.toolbar_detachable;
+}
+
+void              gnome_preferences_set_toolbar_detachable   (gboolean b)
+{
+  prefs.toolbar_detachable = b;
 }
 
 gboolean          gnome_preferences_get_toolbar_relief    (void)
