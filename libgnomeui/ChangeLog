@@ -1,5 +1,17 @@
 1999-08-22  Havoc Pennington  <hp@pobox.com>
 
+	* gnome-icon-entry.c (gnome_icon_entry_new): Load the entry's
+	history. Doh. We maybe should have a construct() method for
+	GnomeEntry. Added "keep in sync" comment. Fixes bug 1701, fix from
+	Chris Gonnerman <chris.gonnerman@usa.net>
+
+	* gnome-entry.c (gnome_entry_new): Add comment about syncing.
+
+	* gnome-file-entry.c (gnome_file_entry_new): Add comment about
+	syncing these functions.
+	
+1999-08-22  Havoc Pennington  <hp@pobox.com>
+
 	* gnome-icon-list.c (gnome_icon_list_thaw): Show the item on 
 	thaw, even if the dirty flag is not set (so it works if you 
 	freeze then thaw without ever changing anything). Fix from 

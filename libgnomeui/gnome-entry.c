@@ -129,6 +129,10 @@ gnome_entry_new (const gchar *history_id)
 
 	gentry = gtk_type_new (gnome_entry_get_type ());
 
+        /* Keep in sync with gnome_icon_entry_new() - or better yet,
+           add a _construct() method once we are in development
+           branch.  */
+
 	gnome_entry_set_history_id (gentry, history_id);
 	gnome_entry_load_history (gentry);
 	return GTK_WIDGET (gentry);

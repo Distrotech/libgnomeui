@@ -617,9 +617,15 @@ gnome_icon_entry_new (char *history_id, char *browse_dialog_title)
 
 	ientry = gtk_type_new (gnome_icon_entry_get_type ());
 	
+        /* Keep in sync with gnome_entry_new() - or better yet, 
+           add a _construct() method once we are in development
+           branch. 
+        */
+
 	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(ientry->fentry));
 
 	gnome_entry_set_history_id (GNOME_ENTRY (gentry), history_id);
+	gnome_entry_load_history (gentry);
 	gnome_file_entry_set_title (GNOME_FILE_ENTRY(ientry->fentry),
 				    browse_dialog_title);
 	
