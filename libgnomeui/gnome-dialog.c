@@ -753,6 +753,7 @@ gnome_dialog_set_default (GnomeDialog *dialog,
 
   if (list && list->data) {
     gtk_widget_grab_default (GTK_WIDGET (list->data));
+    gtk_widget_grab_focus (GTK_WIDGET (list->data));
     return;
   }
 #ifdef GNOME_ENABLE_DEBUG
