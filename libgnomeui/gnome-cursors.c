@@ -619,7 +619,7 @@ build_cursor_table (void)
 static void
 create_bitmap_and_mask_from_xpm (GdkBitmap **bitmap,
 				 GdkBitmap **mask,
-				 gchar **xpm)
+				 const char **xpm)
 {
 	int height, width, colors;
 	char *pixmap_buffer;
@@ -795,7 +795,7 @@ gnome_stock_cursor_new (const char *cursorname)
                         
                 case GNOME_CURSOR_XPM:
                         create_bitmap_and_mask_from_xpm (&pmap, &mask, 
-                                                         cursor->cursor_data);
+                                                         (const char **)cursor->cursor_data);
                         break;
                 
                 case GNOME_CURSOR_FILE:
@@ -875,7 +875,7 @@ gnome_stock_cursor_register (GnomeStockCursor *cursor)
 		return;
 	}
 
-	g_hash_table_insert (cursortable, cursor->cursorname, cursor);
+	g_hash_table_insert (cursortable, (gpointer)cursor->cursorname, cursor);
 }
 
 /**

@@ -1,3 +1,16 @@
+2000-02-07  Elliot Lee  <sopwith@redhat.com>
+
+	* gnome-helpsys.[ch]: Add gnome_help_view_set_visibility (to
+	determine whether the widget is shown or not), and some
+	convenience callbacks to allow doing 'help on this' from a menu
+	item.
+
+	* gnome-init.[ch]: Add LIBGNOMEUI_PARAM_DEFAULT_ICON.
+	* gnome-app-util.[ch]: Add gnome_window_set_icon() and gnome_window_set_icon_from_file().
+
+	* gnome-app.c: Use LIBGNOMEUI_PARAM_DEFAULT_ICON if available, to
+	set a default icon for GnomeApp windows.
+
 Sat Feb 05 18:29:26 2000  George Lebl <jirka@5z.com>
 
 	* gnome-file-entry.[ch]: use gboolean in places of int for bools

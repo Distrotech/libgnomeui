@@ -5,6 +5,7 @@
   ****/
 
 #include <libgnome/gnome-defs.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-app.h"
 #include "gnome-types.h"
 
@@ -112,6 +113,9 @@ gnome_app_set_progress (GnomeAppProgressKey key, gdouble percent);
    called if progress is cancelled. */
 void 
 gnome_app_progress_done (GnomeAppProgressKey key);
+
+void gnome_window_set_icon(GtkWindow *window, GdkPixbuf *pixbuf, gboolean overwrite);
+void gnome_window_set_icon_from_file(GtkWindow *window, const char *filename, gboolean overwrite);
 
 END_GNOME_DECLS
 

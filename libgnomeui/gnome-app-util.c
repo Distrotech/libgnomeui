@@ -31,6 +31,7 @@
 #include "gnome-preferences.h"
 #include "gnome-appbar.h"
 
+#include <gdk/gdkx.h>
 #include <gtk/gtk.h>
 
 static gboolean 
@@ -885,6 +886,80 @@ void gnome_app_progress_done (GnomeAppProgressKey key)
   g_free(key);
 }
 
+typedef struct {
+  GdkPixmap *icon_pixmap;
+  GdkBitmap *icon_mask;
+  GdkWindow *icon_window;
+} IconInfo;
 
+static void
+gnome_window_realized(GtkWindow *window, IconInfo *pbi)
+{
+  gdk_window_set_icon(GTK_WIDGET(window)->window, pbi->icon_window, pbi->icon_pixmap, pbi->icon_mask);
+}
 
+static void
+gnome_window_destroyed(GtkWindow *window, IconInfo *pbi)
+{
+  gdk_pixmap_unref(pbi->icon_pixmap);
+  gdk_bitmap_unref(pbi->icon_mask);
+  gdk_window_unref(pbi->icon_window);
+  g_free(pbi);
+}
 
+void
+gnome_window_set_icon(GtkWindow *window, GdkPixbuf *pixbuf, gboolean overwrite)
+{
+  gboolean skip_connect = FALSE;
+  IconInfo *pbi;
+
+  pbi = gtk_object_get_data(GTK_OBJECT(window), "WM_HINTS.icon_info");
+  if(pbi && !overwrite)
+    return;
+  if(pbi)
+    {
+      skip_connect = TRUE;
+      gdk_pixmap_unref(pbi->icon_pixmap);
+      gdk_pixmap_unref(pbi->icon_mask);
+      gdk_window_unref(pbi->icon_window);
+    }
+  else
+    pbi = g_new(IconInfo, 1);
+
+  {
+    GdkWindowAttr wa;
+    wa.visual = gdk_rgb_get_visual();
+    wa.colormap = gdk_rgb_get_cmap();
+    pbi->icon_window = gdk_window_new(GDK_ROOT_PARENT(), &wa, GDK_WA_VISUAL|GDK_WA_COLORMAP);
+  }
+  gdk_pixbuf_render_pixmap_and_mask(pixbuf, &pbi->icon_pixmap, &pbi->icon_mask, 128);
+
+  if(!skip_connect)
+    {
+      gtk_object_set_data(GTK_OBJECT(window), "WM_HINTS.icon_info", pbi);
+      gtk_signal_connect_after(GTK_OBJECT(window), "realize", gnome_window_realized, pbi);
+      gtk_signal_connect(GTK_OBJECT(window), "destroy", gnome_window_destroyed, pbi);
+    }
+
+  if(GTK_WIDGET_REALIZED(window))
+    gnome_window_realized(window, pbi);
+}
+
+void
+gnome_window_set_icon_from_file(GtkWindow *window, const char *filename, gboolean overwrite)
+{
+  GdkPixbuf *pb;
+
+  pb = gdk_pixbuf_new_from_file(filename);
+  if(!pb)
+    {
+      filename = gnome_pixmap_file(filename);
+      pb = gdk_pixbuf_new_from_file(filename);
+      g_free((gpointer)filename);
+    }
+  if(!pb)
+    return;
+
+  gnome_window_set_icon(window, pb, overwrite);
+  gdk_pixbuf_unref(pb);
+}

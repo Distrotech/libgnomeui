@@ -49,7 +49,6 @@ static void gnome_help_view_size_request  (GtkWidget      *widget,
 					   GtkRequisition *requisition);
 static void gnome_help_view_size_allocate (GtkWidget      *widget,
 					   GtkAllocation  *allocation);
-static void gnome_help_view_select_help(GtkWidget *btn, GnomeHelpView *help_view);
 static void gnome_help_view_select_style(GtkWidget *btn, GnomeHelpView *help_view);
 static char *gnome_help_view_find_help_id(GnomeHelpView *help_view, const char *widget_id);
 static void gnome_help_view_show_url(GnomeHelpView *help_view, const char *url, HelpURLType type);
@@ -134,7 +133,7 @@ gnome_help_view_init (GnomeHelpView *help_view)
 						_("Show help for a specific region of the application"),
 						NULL,
 						gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_HELP),
-						gnome_help_view_select_help, help_view);
+						gnome_help_view_select_help_cb, help_view);
   help_view->btn_style = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->toolbar), _("Style"),
 						_("Change the way help is displayed"),
 						NULL,
@@ -211,6 +210,21 @@ gnome_help_view_new(GtkWidget *toplevel, GnomeHelpViewStyle app_style,
 				     "app_style", app_style,
 				     "app_style_priority", app_style_priority,
 				     NULL);
+}
+
+void
+gnome_help_view_set_visibility(GnomeHelpView *help_view, gboolean visible)
+{
+  if(visible)
+    {
+      gtk_widget_show(help_view->content);
+      gtk_widget_show(help_view->toolbar);
+    }
+  else
+    {
+      gtk_widget_hide(help_view->content);
+      gtk_widget_hide(help_view->toolbar);
+    }
 }
 
 GnomeHelpView *
@@ -814,8 +828,22 @@ gnome_help_view_process_event(GtkWidget *evbox, GdkEvent *event, GnomeHelpView *
 #endif
 }
 
-static void
-gnome_help_view_select_help(GtkWidget *btn, GnomeHelpView *help_view)
+void
+gnome_help_view_select_help_menu_cb(GtkWidget *widget)
+{
+  GnomeHelpView *hv = gnome_help_view_find(widget);
+
+  if(!hv)
+    {
+      g_warning("Can't find help view for this widget");
+      return;
+    }
+
+  gnome_help_view_select_help_cb(widget, hv);
+}
+
+void
+gnome_help_view_select_help_cb(GtkWidget *ignored, GnomeHelpView *help_view)
 {
   g_return_if_fail(!help_view->evbox->window);
 

@@ -19,14 +19,17 @@
 #include "config.h"
 #include <string.h>
 #include <gtk/gtk.h>
+#include "libgnome/gnomelib-init2.h"
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
-#include "libgnomeui/gnome-uidefs.h"
-#include "libgnomeui/gnome-preferences.h"
-#include "libgnomeui/gnome-dock.h"
-#include "libgnomeui/gnome-helpsys.h"
+#include "gnome-uidefs.h"
+#include "gnome-preferences.h"
+#include "gnome-dock.h"
+#include "gnome-init.h"
+#include "gnome-helpsys.h"
+#include "gnome-app-util.h"
 #include "gnome-app-helper.h"
 
 #include "gnome-app.h"
@@ -161,6 +164,8 @@ gnome_app_get_arg (GtkObject      *object,
 static void
 gnome_app_init (GnomeApp *app)
 {
+	const char *str = NULL;
+
 	app->accel_group = gtk_accel_group_new ();
 	gtk_window_add_accel_group (GTK_WINDOW (app), app->accel_group);
 	
@@ -179,6 +184,9 @@ gnome_app_init (GnomeApp *app)
 	app->layout = gnome_dock_layout_new ();
 
 	app->enable_layout_config = TRUE;
+	gnome_program_attributes_get(gnome_program_get(), LIBGNOMEUI_PARAM_DEFAULT_ICON, &str, NULL);
+	if(str)
+		gnome_window_set_icon_from_file(GTK_WINDOW(app), str, FALSE);
 }
 
 static void

@@ -6,9 +6,10 @@ BEGIN_GNOME_DECLS
 #include "libgnome/gnomelib-init2.h"
 
 
-extern const char libgnomeui_param_crash_dialog[], libgnomeui_param_display[];
+extern const char libgnomeui_param_crash_dialog[], libgnomeui_param_display[], libgnomeui_param_default_icon[];
 #define LIBGNOMEUI_PARAM_CRASH_DIALOG libgnomeui_param_crash_dialog
 #define LIBGNOMEUI_PARAM_DISPLAY libgnomeui_param_display
+#define LIBGNOMEUI_PARAM_DEFAULT_ICON libgnomeui_param_default_icon
 
 extern GnomeModuleInfo libgnomeui_module_info, gtk_module_info;
 

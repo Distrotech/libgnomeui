@@ -50,11 +50,16 @@ GtkType gnome_help_view_get_type(void);
 GtkWidget *gnome_help_view_new(GtkWidget *toplevel, GnomeHelpViewStyle app_style,
 			       GnomeHelpViewStylePriority app_style_priority);
 GnomeHelpView *gnome_help_view_find(GtkWidget *awidget);
+void gnome_help_view_set_visibility(GnomeHelpView *help_view, gboolean visible);
 void gnome_help_view_set_style(GnomeHelpView *help_view, GnomeHelpViewStyle style, GnomeHelpViewStylePriority style_priority);
+void gnome_help_view_select_help_cb(GtkWidget *ignored, GnomeHelpView *help_view);
+
+/* as above, but does a lookup to try and figure out what the help_view is */
+void gnome_help_view_select_help_menu_cb(GtkWidget *widget);
+
 void gnome_help_view_show_help(GnomeHelpView *help_view, const char *help_path, const char *help_type);
 void gnome_help_view_show_help_for(GnomeHelpView *help_view, GtkWidget *widget);
 void gnome_help_view_set_orientation(GnomeHelpView *help_view, GtkOrientation orientation);
-
 void gnome_help_view_display (GnomeHelpView *help_view, const char *help_path);
 void gnome_help_view_display_callback (GtkWidget *widget, const char *help_path);
 
