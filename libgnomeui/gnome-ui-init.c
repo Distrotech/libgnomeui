@@ -13,13 +13,15 @@ static void gnome_rc_parse(gchar *command);
 void
 gnome_init (gint *argc, gchar ***argv)
 {
+        /* GTK's XIM support need setlocale(), so call gnomelib_init()
+	   before gtk_init().  */
+	gnomelib_init (argc, argv);
+	
 	/* now we replace gtk_init() with gnome_init() in our apps */
 	gtk_init(argc, argv);
 	gnome_colors_init();
 	
 	gnome_rc_parse(*argv[0]);
-	
-	gnomelib_init (argc, argv);
 }
 
 /* perhaps this belongs in libgnome.. move it if you like. */
