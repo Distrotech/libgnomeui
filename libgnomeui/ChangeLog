@@ -1,3 +1,7 @@
+2000-05-16  Iain Holmes  <ih@csd.abdn.ac.uk>
+
+	* gnome-canvas-text.c: Add the missing declaration for split_into_lines.
+
 Sat May 13 11:56:35 2000  George Lebl <jirka@5z.com>
 
 	* gnome-scores.c (gnome_scores_new): make the strftime buffer 256

@@ -80,6 +80,7 @@ static double gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y
 static void gnome_canvas_text_bounds (GnomeCanvasItem *item,
 				      double *x1, double *y1, double *x2, double *y2);
 static void gnome_canvas_text_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
+static void split_into_lines (GnomeCanvasText *text);
 
 static GnomeCanvasTextSuckFont *gnome_canvas_suck_font (GdkFont *font);
 static void gnome_canvas_suck_font_free (GnomeCanvasTextSuckFont *suckfont);
