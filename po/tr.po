@@ -1,12 +1,14 @@
+# translation of tr.po to Türkçe
 # Turkish translation of libgnomeui2.
-# Copyright (C) 2001-2003 Free Software Foundation, Inc.
-# Görkem Çetin <gorkem@gelecek.com.tr>, 2001,2002.
-# Ömer Fadıl USTA <omer_fad@hotmail.com>, 2001
+# Copyright (C) 2001-2003, 2004 Free Software Foundation, Inc.
 # Arman Aksoy <armish@linux-sevenler.de, 2003
+# Görkem Çetin <gorkem@gelecek.com.tr>, 2001,2002.
+# Ömer Fadıl USTA <omer_fad@hotmail.com>, 2001.
+# Görkem Çetin <gorkem@kde.org>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui\n"
+"Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-08-30 16:28+0200\n"
 "PO-Revision-Date: 2003-02-08 01:05+0200\n"
@@ -15,6 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -32,20 +35,16 @@ msgstr "2. çocuk öğe"
 msgid "Hint for item 2"
 msgstr "2. öğenin ipucu"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:653
-#, c-format
 msgid "%s is not a folder"
 msgstr ""
 
-#: file-chooser/gtkfilesystemgnomevfs.c:860
-#, fuzzy
 msgid "Filesystem"
-msgstr "_Dosyalar"
+msgstr "Dosya sistemi"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:1524
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "Yer imini kaydederken hata oluştu (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
@@ -55,12 +54,11 @@ msgstr ""
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "'%s' dosyası açılırken bir hata oluıştu: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:198
@@ -80,9 +78,8 @@ msgid "Translated by"
 msgstr "Çeviren"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Geliştirenler"
+msgstr "_Geliştirenler"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -153,8 +150,7 @@ msgid "Translator credits"
 msgstr "Çevirenler"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Programı çevirenler."
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -547,9 +543,9 @@ msgid "Text Only"
 msgstr "Sadece Metin"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Öntanımlı masaüstü kullan (%s)"
+msgstr "Öntanımlı Masaüstü Kullan (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -645,7 +641,7 @@ msgstr ""
 #: libgnomeui/gnome-authentication-manager.c:78
 #: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
-msgstr ""
+msgstr "Kimlik Sınama Gerekiyor"
 
 #: libgnomeui/gnome-authentication-manager.c:299
 #, c-format
@@ -834,14 +830,12 @@ msgstr "Arkaplan rengi oluşturuldu"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "Logo Arkaplan Rengi"
+msgstr "İçerik Arkaplan Rengi"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "Logo Arkaplan rengi"
+msgstr "İçerik Arkaplan Rengi"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 #, fuzzy
@@ -1274,23 +1268,23 @@ msgstr "Mesaj"
 
 #: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
-msgstr ""
+msgstr "_Kullanıcı adı:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
-msgstr ""
+msgstr "_Yetki alanı:"
 
 #: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
-msgstr ""
+msgstr "_Parola:"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "_Anonim olarak bağlan"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "_Kullanıcı olarak bağlan:"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
@@ -1434,7 +1428,7 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr ""
+msgstr "süreç %d: %s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
@@ -1447,112 +1441,14 @@ msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Kullanım: gnome_segv2 uyg_adı sinyal_num\n"
 
 #: libgnomeui/gnome_segv.c:153
-#, fuzzy
 msgid "_Restart Application"
-msgstr "Programdan çık"
+msgstr "_Programı Yeniden Çalıştır"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
-msgstr ""
+msgstr "_Geliştiricilere Haber Ver"
 
 #: libgnomeui/gnome_segv.c:176
-#, fuzzy
 msgid "_Debug"
-msgstr "Hata ayıkla"
+msgstr "_Hata Ayıkla"
 
-#~ msgid "Color Selector"
-#~ msgstr "Renk Seçici"
-
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "\"%s\" uygulaması (%d süreci) ölümcül bir hata\n"
-#~ "yüzünden çöktü\n"
-#~ "(%s)"
-
-#~ msgid "Submit a bug report"
-#~ msgstr "Bir hata raporu gönderin"
-
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#~ msgid "Please visit the GNOME Application Crash page for more information"
-#~ msgstr ""
-#~ "Lütfen ayrıntılı bilgi için Gnome Uygulama göçmesi sayfasını ziyaret edin"
-
-#~ msgid "Exit the test"
-#~ msgstr "Testten çık"
-
-#~ msgid "_Credits"
-#~ msgstr "_Geliştirenler"
-
-#~ msgid "Find _Again"
-#~ msgstr "_Yeniden Bul"
-
-#~ msgid "Both text and icons"
-#~ msgstr "Metin ve simge"
-
-#~ msgid "E_xit"
-#~ msgstr "Çı_k"
-
-#~ msgid "Exit the program"
-#~ msgstr "Programdan çık"
-
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "GConf hata ayrıntıları: %s\n"
-
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Kullanılacak Gdk hata ayıklama bayrakları"
-
-#~ msgid "FLAGS"
-#~ msgstr "BAYRAKLAR"
-
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Kullanılmayacak Gdk hata ayıklama bayrakları"
-
-#~ msgid "Make X calls synchronous"
-#~ msgstr "X çağrılarını eşzamanlı yap"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "X paylaşımlı bellek eklentisini kullanma"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Pencere yöneticisi tarafından kullanılan program adı"
-
-#~ msgid "NAME"
-#~ msgstr "İSİM"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Pencere yöneticisi tarafından kullanılan program sınıfı"
-
-#~ msgid "CLASS"
-#~ msgstr "SINIF"
-
-#~ msgid "HOST"
-#~ msgstr "MAKİNE"
-
-#~ msgid "PORT"
-#~ msgstr "PORT"
-
-#~ msgid "STYLE"
-#~ msgstr "STİL"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Tanımlanacak GTK+ hata ayıklama bayrakları"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Silinecek GTK+ hata ayıklama bayrakları"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "Tüm uyarıları ölümcül olarak göster"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "Ek Gtk modülü yükle"
-
-#~ msgid "MODULE"
-#~ msgstr "MODÜL"
-
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
