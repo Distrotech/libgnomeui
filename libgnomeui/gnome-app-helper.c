@@ -226,12 +226,12 @@ static GnomeUIInfo menu_defaults[] = {
 	/*
 	 * Window menu
 	 */
-        { GNOME_APP_UI_ITEM, N_("_New Window..."),
+        { GNOME_APP_UI_ITEM, N_("Create _New Window"),
           N_("Create a new window"),
           NULL, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,
           GNOME_KEY_NAME_NEW_WINDOW, GNOME_KEY_MOD_NEW_WINDOW, NULL },
-        { GNOME_APP_UI_ITEM, N_("_Close Window..."),
+        { GNOME_APP_UI_ITEM, N_("_Close This Window"),
           N_("Close the current window"),
           NULL, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,

@@ -1,3 +1,8 @@
+1999-03-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-app-helper.c: Removed ellipsis from the "New Window" and
+	"Close Window" entries, and made their names more descriptive.
+
 1999-03-13  Richard Hult <rhult@hem2.passagen.se>
 
 	* gnome-icon-list.c (icon_event): Ignore button clicks above 3 in
