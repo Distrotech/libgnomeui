@@ -32,9 +32,6 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomeDialog        GnomeDialog;
 typedef struct _GnomeDialogClass   GnomeDialogClass;
 
-/* what is this? is it used anywhere? FIXME */
-typedef struct _GnomeDialogButton  GnomeDialogButton;
-
 /* The vbox can be accessed directly; if you fool with anything else,
    you're on your own. */
 struct _GnomeDialog
@@ -79,14 +76,19 @@ void       gnome_dialog_button_connect (GnomeDialog *dialog,
 
 /* Make the dialog modal */
 void       gnome_dialog_set_modal      (GnomeDialog *dialog);
-/* As above, but also run the dialog and return the # of the button
-   that was pressed (-1 for no button). Does not destroy the dialog.
- */
-gint	   gnome_dialog_run_modal      (GnomeDialog *dialog);
+
+/* Block until one of the dialog buttons is clicked. Closing the
+ * dialog via window manager or escape will not be permitted. When a
+ * button is clicked, this function will return the button number. If
+ * the dialog was not already modal, it will not be modal after the
+ * call, only during. Closing/destroying the dialog is up to you -
+ * click_closes will work though, if you call it beforehand. If the
+ * dialog has not been shown, this function will show it. */
+
+gint       gnome_dialog_run_modal      (GnomeDialog *dialog);
 
 /* Set the default button. - it will have a little highlight, 
-   (and maybe pressing return will activate it, eventually, not 
-   coded yet.) */
+   and pressing return will activate it. */
 void       gnome_dialog_set_default    (GnomeDialog *dialog,
 					gint         button);
 /* Set sensitivity of a button */

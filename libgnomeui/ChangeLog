@@ -1,3 +1,22 @@
+Sat May 23 21:55:41 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.c (gnome_dialog_run_modal): Don't call set_modal,
+	leave the dialog in the same state we came to it. Don't call
+	close_hides, leave close behavior up to the caller. Connect a
+	handler to the "close" signal which refuses to close the dialog
+	unless a button has been clicked. Thus -1 will never be
+	returned. Remove signal handlers when a button is clicked. Call
+	gtk_main_quit() when a button is clicked to avoid piling up
+	gtk_main's and cause the function to actually return. Call
+	gtk_widget_show on the dialog if it has not yet been shown. Use a
+	define instead of -1 for invalid button. 
+	(gnome_dialog_set_modal): Make it work if the widget has already
+	been shown.
+	
+	* gnome-dialog.h: Updated a couple of comments.
+	(GnomeDialogButton): Removed unused typedef.
+
+
 Fri May 22 23:26:11 1998  Tom Tromey  <tromey@cygnus.com>
 
 	Some -Wall fixes:
