@@ -337,6 +337,9 @@ gnome_canvas_widget_reconfigure (GnomeCanvasItem *item)
 
 	witem = GNOME_CANVAS_WIDGET (item);
 
+	if (parent_class->reconfigure)
+		(* parent_class->reconfigure) (item);
+
 	if (witem->widget) {
 		if (witem->size_pixels) {
 			witem->cwidth = (int) (witem->width + 0.5);

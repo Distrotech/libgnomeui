@@ -605,6 +605,9 @@ gnome_canvas_line_reconfigure (GnomeCanvasItem *item)
 
 	line = GNOME_CANVAS_LINE (item);
 
+	if (parent_class->reconfigure)
+		(* parent_class->reconfigure) (item);
+
 	if (line->gc) {
 		color.pixel = line->pixel;
 		gdk_gc_set_foreground (line->gc, &color);

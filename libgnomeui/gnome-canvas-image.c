@@ -307,6 +307,9 @@ gnome_canvas_image_reconfigure (GnomeCanvasItem *item)
 
 	image = GNOME_CANVAS_IMAGE (item);
 
+	if (parent_class->reconfigure)
+		(* parent_class->reconfigure) (item);
+
 	free_pixmap_and_mask (image);
 
 	if (image->im) {

@@ -1,3 +1,13 @@
+1998-08-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_reconfigure): 
+	* gnome-canvas-text.c (gnome_canvas_text_reconfigure): 
+	* gnome-canvas-image.c (gnome_canvas_image_reconfigure): 
+	* gnome-canvas-line.c (gnome_canvas_line_reconfigure): 
+	* gnome-canvas-widget.c (gnome_canvas_widget_reconfigure): Call
+	the parent class reconfigure method at the start of the overriden
+	method.
+
 1998-08-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-preferences.[ch]: added MDI preferences.

@@ -261,6 +261,9 @@ gnome_canvas_re_reconfigure (GnomeCanvasItem *item)
 
 	re = GNOME_CANVAS_RE (item);
 
+	if (re_parent_class->reconfigure)
+		(* re_parent_class->reconfigure) (item);
+
 	if (re->fill_gc) {
 		color.pixel = re->fill_pixel;
 		gdk_gc_set_foreground (re->fill_gc, &color);

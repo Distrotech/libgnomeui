@@ -323,6 +323,9 @@ gnome_canvas_text_reconfigure (GnomeCanvasItem *item)
 
 	text = GNOME_CANVAS_TEXT (item);
 
+	if (parent_class->reconfigure)
+		(* parent_class->reconfigure) (item);
+
 	if (text->gc) {
 		color.pixel = text->pixel;
 		gdk_gc_set_foreground (text->gc, &color);
