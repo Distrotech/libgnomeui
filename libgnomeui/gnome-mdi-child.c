@@ -10,6 +10,9 @@ static void gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
 static void gnome_mdi_child_init             (GnomeMDIChild *);
 static void gnome_mdi_child_destroy          (GtkObject *);
 
+void child_list_menu_remove_item(GnomeMDI *, GnomeMDIChild *);
+void child_list_menu_add_item(GnomeMDI *, GnomeMDIChild *);
+
 enum {
   CREATE_VIEW,
   CREATE_MENUS,
@@ -155,13 +158,18 @@ void gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view) {
 void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, gchar *name) {
   gchar *old_name = mdi_child->name;
 
+  if(mdi_child->parent)
+    child_list_menu_remove_item(GNOME_MDI(mdi_child->parent), mdi_child);
+
   mdi_child->name = (gchar *)g_strdup(name);
 
   if(old_name)
     g_free(old_name);
 
-  if(mdi_child->parent)
+  if(mdi_child->parent) {
+    child_list_menu_add_item(GNOME_MDI(mdi_child->parent), mdi_child);
     gnome_mdi_update_child(GNOME_MDI(mdi_child->parent), mdi_child);
+  }
 }
 
 void gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl) {

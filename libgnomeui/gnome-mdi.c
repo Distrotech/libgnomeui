@@ -37,9 +37,9 @@ static void             set_active_view          (GnomeMDI *, GtkWidget *);
 static GtkWidget       *find_item_by_label       (GtkMenuShell *, gchar *);
 
 static void             child_list_menu_create     (GnomeMDI *, GnomeApp *);
-static void             child_list_menu_remove_item(GnomeMDI *, GnomeMDIChild *);
-static void             child_list_menu_add_item   (GnomeMDI *, GnomeMDIChild *);
 static void             child_list_activated_cb    (GtkWidget *, GnomeMDI *);
+void                    child_list_menu_remove_item(GnomeMDI *, GnomeMDIChild *);
+void                    child_list_menu_add_item   (GnomeMDI *, GnomeMDIChild *);
 
 static void             app_create               (GnomeMDI *);
 static void             app_destroy              (GnomeApp *);
@@ -397,20 +397,9 @@ static void child_list_activated_cb(GtkWidget *w, GnomeMDI *mdi) {
 
   if( child && (child != mdi->active_child) ) {
     if(child->views)
-      app_set_view(mdi, gnome_mdi_get_app_from_view(child->views->data), GTK_WIDGET(child->views->data));
+      gnome_mdi_set_active_view(mdi, child->views->data);
     else
       gnome_mdi_add_view(mdi, child);
-
-    window = GTK_WINDOW(gnome_mdi_get_app_from_view(mdi->active_view));
-
-    if(mdi->mode == GNOME_MDI_NOTEBOOK)
-      set_page_by_widget(GTK_NOTEBOOK(GNOME_APP(window)->contents), mdi->active_view);
-    
-    /* TODO: hmmm... I dont know how to give focus to the window, so that it would
-       receive keyboard events */
-    gdk_window_raise(GTK_WIDGET(window)->window);
-    gtk_window_set_focus(window, mdi->active_view);
-    gtk_window_activate_focus(window);
   }
 }
 
@@ -437,7 +426,7 @@ static void child_list_menu_create(GnomeMDI *mdi, GnomeApp *app) {
   gtk_widget_queue_resize(submenu);
 }
 
-static void child_list_menu_remove_item(GnomeMDI *mdi, GnomeMDIChild *child) {
+void child_list_menu_remove_item(GnomeMDI *mdi, GnomeMDIChild *child) {
   GtkWidget *item, *shell;
   GnomeApp *app;
   GList *app_node;
@@ -462,7 +451,7 @@ static void child_list_menu_remove_item(GnomeMDI *mdi, GnomeMDIChild *child) {
   }
 }
 
-static void child_list_menu_add_item(GnomeMDI *mdi, GnomeMDIChild *child) {
+void child_list_menu_add_item(GnomeMDI *mdi, GnomeMDIChild *child) {
   GtkWidget *item, *submenu;
   GnomeApp *app;
   GList *app_node;
@@ -830,7 +819,7 @@ static void app_set_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
     /* create new child-specific menus */
     if( child->menu_template &&
         ( (ui_info = copy_ui_info_tree(child->menu_template)) != NULL) ) {
-      gnome_app_insert_menus(app, mdi->child_menu_path, ui_info);
+      gnome_app_insert_menus_with_data(app, mdi->child_menu_path, ui_info, child);
       gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
       gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, (gpointer)count_ui_info_items(ui_info));
     }
@@ -924,7 +913,7 @@ static void app_create(GnomeMDI *mdi) {
   /* set up menus */
   if(mdi->menu_template) {
     ui_info = copy_ui_info_tree(mdi->menu_template);
-    gnome_app_create_menus(GNOME_APP(window), ui_info);
+    gnome_app_create_menus_with_data(GNOME_APP(window), ui_info, mdi);
     gtk_object_set_data(GTK_OBJECT(window), GNOME_MDI_MENUBAR_INFO_KEY, ui_info);
   }
   else {
@@ -942,7 +931,7 @@ static void app_create(GnomeMDI *mdi) {
   /* create toolbar */
   if(mdi->toolbar_template) {
     ui_info = copy_ui_info_tree(mdi->toolbar_template);
-    gnome_app_create_toolbar(GNOME_APP(window), ui_info);
+    gnome_app_create_toolbar_with_data(GNOME_APP(window), ui_info, mdi);
     gtk_object_set_data(GTK_OBJECT(window), GNOME_MDI_TOOLBAR_INFO_KEY, ui_info);
   }
   else {
@@ -1006,8 +995,13 @@ void gnome_mdi_set_active_view(GnomeMDI *mdi, GtkWidget *view) {
   window = GTK_WINDOW(gnome_mdi_get_app_from_view(mdi->active_view));
 
   if(mdi->mode == GNOME_MDI_NOTEBOOK)
-    set_page_by_widget
-      (GTK_NOTEBOOK(GNOME_APP(window)->contents), mdi->active_view);
+    set_page_by_widget(GTK_NOTEBOOK(GNOME_APP(window)->contents), mdi->active_view);
+
+  /* TODO: hmmm... I dont know how to give focus to the window, so that it would
+     receive keyboard events */
+  gdk_window_raise(GTK_WIDGET(window)->window);
+  gtk_window_set_focus(window, mdi->active_view);
+  gtk_window_activate_focus(window);
 }
 
 gint gnome_mdi_add_view(GnomeMDI *mdi, GnomeMDIChild *child) {
@@ -1197,25 +1191,6 @@ gint gnome_mdi_remove_all(GnomeMDI *mdi, gint force) {
   }
 
   return TRUE;
-}
-
-void gnome_mdi_rename_child(GnomeMDI *mdi, GnomeMDIChild *child, gchar *name) {
-  g_return_if_fail(mdi != NULL);
-  g_return_if_fail(GNOME_IS_MDI(mdi));
-  g_return_if_fail(child != NULL);
-  g_return_if_fail(GNOME_IS_MDI_CHILD(child));
-  g_return_if_fail(name != NULL);
-
-  /* We need to remove the menu item while the child has its old name,
-   * since child->name is required to find this item. */
-  
-  child_list_menu_remove_item(mdi, child);
-
-  gnome_mdi_child_set_name(child, name);
-
-  child_list_menu_add_item(mdi, child);
-
-  gnome_mdi_update_child(mdi, child);
 }
 
 void gnome_mdi_update_child(GnomeMDI *mdi, GnomeMDIChild *child) {

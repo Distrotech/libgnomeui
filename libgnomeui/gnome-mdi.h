@@ -147,7 +147,6 @@ gint          gnome_mdi_add_child           (GnomeMDI *, GnomeMDIChild *);
 gint          gnome_mdi_remove_child        (GnomeMDI *, GnomeMDIChild *, gint);
 gint          gnome_mdi_remove_all          (GnomeMDI *, gint);
 
-void          gnome_mdi_rename_child        (GnomeMDI *, GnomeMDIChild *, gchar *);
 void          gnome_mdi_update_child        (GnomeMDI *, GnomeMDIChild *);
 
 GnomeMDIChild *gnome_mdi_active_child       (GnomeMDI *);

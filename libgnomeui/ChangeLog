@@ -1,3 +1,17 @@
+1998-09-11  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi-child.c (gnome_mdi_child_set_name): moved the
+	gnome_mdi_rename_child()'s functionality here.
+	* gnome-mdi.c (gnome_mdi_rename_child): removed.
+	(child_list_activated_cb, gnome_mdi_set_active_view): moved
+	much of the former to the latter.
+	(app_set_view, app_create): when uisng GnomeUIInfo templates to
+	create menus and the toolbar, the MDI menus and toolbar are now
+	set up with a gnome_app_create_*_with_data() call so that relevant
+	callbacks are passed a pointer to the MDI as data. in a similar
+	manner the child specific menus' callbacks are passed a pointer to
+	the child.
+	
 1998-09-09  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-gtk-utils.h: Cleanup. Added copyright (FSF? I guess so.)
