@@ -1,3 +1,15 @@
+1998-11-21  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app.c (gnome_app_set_toolbar): If toolbar relief is set to
+	none and we are using a detachable toolbar, set handle box shadow
+	type to GTK_SHADOW_NONE.
+
+	* gnome-app-helper.c (create_toolbar_item): Insert a vseparator
+	with spaces if relief is set to none, rather than just a space.
+	(gnome_app_create_toolbar_custom): Set toolbar space size to
+	GNOME_PAD.  If relief is set to none, set border width of toolbar
+	to max (3, GNOME_PAD_SMALL / 2).
+
 Fri Nov 20 01:48:01 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-mdi.c: fix warnings about casting by using the G*_TO_*

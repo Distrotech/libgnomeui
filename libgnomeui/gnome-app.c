@@ -568,6 +568,8 @@ gnome_app_set_toolbar (GnomeApp *app,
 	if ( gnome_preferences_get_toolbar_handlebox() ) {
 	  hb = gtk_handle_box_new ();
 	  gtk_widget_show (hb);
+	  if ( ! gnome_preferences_get_toolbar_relief() )
+	    gtk_handle_box_set_shadow_type (GTK_HANDLE_BOX (hb), GTK_SHADOW_NONE);
 	}
 	else {
 	  hb = gtk_event_box_new();

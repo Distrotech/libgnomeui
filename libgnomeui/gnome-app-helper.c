@@ -35,6 +35,7 @@
 #include "libgnome/gnome-i18n.h"
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
+#include "gnome-uidefs.h"
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"
 #include "gnome-preferences.h"
@@ -610,8 +611,18 @@ create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio, Gtk
 
 	switch (uiinfo->type) {
 	case GNOME_APP_UI_SEPARATOR:
-		gtk_toolbar_append_space (toolbar);
-		uiinfo->widget = NULL; /* no meaningful widget for a space */
+		if (gnome_preferences_get_toolbar_relief ()) {
+			gtk_toolbar_append_space (toolbar);
+			uiinfo->widget = NULL; /* no meaningful widget for a space */
+		} else {
+			GtkWidget *separator = gtk_vseparator_new ();
+			gtk_widget_show (separator);
+			gtk_widget_set_usize (separator, 0, GNOME_PAD_BIG * 2);
+			gtk_toolbar_append_space (toolbar);
+			gtk_toolbar_append_widget (toolbar, separator, NULL, NULL);
+			gtk_toolbar_append_space (toolbar);
+			uiinfo->widget = separator;
+		}
 		break;
 
 	case GNOME_APP_UI_ITEM:
@@ -809,6 +820,14 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
 	g_return_if_fail (uibdata != NULL);
 
 	toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+	gtk_toolbar_set_space_size (GTK_TOOLBAR (toolbar), GNOME_PAD);
+	if (!gnome_preferences_get_toolbar_relief ()) {
+		gint bw = GNOME_PAD_SMALL / 2;
+		if (bw < 3)
+			bw = 3;
+		gtk_container_border_width (GTK_CONTAINER (toolbar), bw);
+	}
+	
 	gnome_app_fill_toolbar_custom (GTK_TOOLBAR (toolbar), uiinfo, uibdata, app->accel_group);
 	gnome_app_set_toolbar (app, GTK_TOOLBAR (toolbar));
 }
