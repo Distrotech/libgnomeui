@@ -1,3 +1,11 @@
+1998-08-02  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (gnome.defs): Simplify rule by using `cd $srcdir'
+	before doing any of the stuff.
+	(gnometypebuiltins{.h,_vars.c,_ids.c,_evals.c}: Likewise.
+	* makeenums.pl (parse_entries): `srcdir' is now not passed in the
+	environment. 
+	
 1998-07-31  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
         * gnome-mdi-child.h: GnomeMDIChild now has a pointer to his

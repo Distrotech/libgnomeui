@@ -70,6 +70,15 @@
    (text-below GNOME_ICON_LIST_TEXT_BELOW)
    (text-right GNOME_ICON_LIST_TEXT_RIGHT))
 
+; enumerations from "./gnome-mdi.h"
+
+(define-enum GnomeMDIMode
+   (ms GNOME_MDI_MS)
+   (notebook GNOME_MDI_NOTEBOOK)
+   (modal GNOME_MDI_MODAL)
+   (toplevel GNOME_MDI_TOPLEVEL)
+   (redraw GNOME_MDI_REDRAW))
+
 ; enumerations from "./gnome-properties.h"
 
 (define-enum GnomePropertyRequest
