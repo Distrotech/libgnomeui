@@ -1,3 +1,7 @@
+Sun Jan 30 16:58:54 2000  George Lebl <jirka@5z.com>
+
+	* gnome-dentry-edit.c: properly cast dentry->exec
+
 Sun Jan 30 15:44:35 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dentry-edit.c: use gnome_config_assemble_vector instead of
