@@ -198,7 +198,8 @@ void gtk_clock_stop(GtkClock *clock)
 {
 	g_return_if_fail(clock != NULL);
 
-	if (clock->timer_id == -1 || clock->type == GTK_CLOCK_REALTIME) return;
+	if (clock->timer_id == -1)
+		return;
 
 	if (clock->type == GTK_CLOCK_INCREASING) {
 		clock->stopped = time(NULL)-clock->seconds;
