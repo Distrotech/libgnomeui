@@ -192,18 +192,19 @@ guint32 gnome_dns_lookup (const char *hostname,
 				break;
 			}
 		if (server < num_servers) {
-			/* found an unused server - give it the request */
-			gnome_dns_server_req (server, hostname);
 			dns_cache[dns_cache_size].server = server;
 		} else {
 			/* no unused servers - fork a new one */
-			dns_cache[dns_cache_size].server = gnome_dns_create_server();
+			server = dns_cache[dns_cache_size].server = gnome_dns_create_server();
 			if (dns_cache[dns_cache_size].server < 0) {
 				g_error ("Unable to fork: %s", g_strerror(errno));
 			}
 			
 		}
 		dns_cache_size++;
+
+		/* found the server - give it the request */
+		gnome_dns_server_req (server, hostname);
 	}
 	
 	if (dns_con_size == dns_con_size_max) {
@@ -280,7 +281,7 @@ static void gnome_dns_callback(gpointer serv_num, gint source,
 	server_num = GPOINTER_TO_INT (serv_num);
 	
 #ifdef VERBOSE    
-	g_printf("callback called!\n");
+	g_print("callback called!\n");
 #endif
 	/* read ip from server.  It's done as a single int rather than a string.
 	 * hopefully it works ok */
@@ -288,7 +289,7 @@ static void gnome_dns_callback(gpointer serv_num, gint source,
 		g_error("reading from pipe: %s\n", g_strerror(errno));
 	
 #ifdef VERBOSE
-	g_printf("ip_addr in callback is %x\n", ip_addr);
+	g_print("ip_addr in callback is %x\n", ip_addr);
 #endif
 	
 	/* write ip address into cache. */
