@@ -1,3 +1,9 @@
+2001-11-22  Mark McLoughlin  <mark@skynet.ie>
+
+	* gnome-app.c: (gnome_app_set_menus), (gnome_app_add_toolbar):
+	update for gtk_accel_groups_from_acceleratable to
+	gtk_accel_groups_from_object.
+
 Tue Nov 20 16:12:09 2001  Owen Taylor  <otaylor@redhat.com>
 
 	* libgnomeuiP.h: Remove excess gobject/* include.
