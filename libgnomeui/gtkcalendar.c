@@ -1141,7 +1141,8 @@ gtk_calendar_select_day (GtkCalendar *calendar, gint day)
     g_return_if_fail (col != -1);
 
     calendar->selected_day = 0;
-    gtk_calendar_paint_day(GTK_WIDGET(calendar), row, col);
+    if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
+      gtk_calendar_paint_day(GTK_WIDGET(calendar), row, col);
   }
 
   calendar->selected_day = day;
@@ -1161,7 +1162,8 @@ gtk_calendar_select_day (GtkCalendar *calendar, gint day)
       g_return_if_fail (row != -1);
       g_return_if_fail (col != -1);
 
-      gtk_calendar_paint_day(GTK_WIDGET(calendar), row, col);
+      if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
+        gtk_calendar_paint_day(GTK_WIDGET(calendar), row, col);
   }
 
   gtk_signal_emit (GTK_OBJECT (calendar), 
