@@ -49,14 +49,17 @@ save_yourself (SmcConn connection, SmPointer client_data, int save_type,
 			  interact_style, fast);
   else
     status = True;
-  SmcSaveYourselfDone (connection, status);
 
-  /* State might have changed while calling SAVER.  Assume that if it
-     has changed, then we are ok.  */
-  /* FIXME: Make it impossible for the user to interact.  */
-  while (info->state == c_save_yourself
-	 && ! gtk_main_iteration ())
-    ;
+  SmcSaveYourselfDone (connection, status);
+  if (shutdown)
+    {
+      /* State might have changed while calling SAVER.  Assume that if
+	 it has changed, then we are ok.  */
+      /* FIXME: Make it impossible for the user to interact.  */
+      while (info->state == c_save_yourself
+	     && ! gtk_main_iteration ())
+	;
+    }
 
   info->state = c_idle;
 }
@@ -75,7 +78,7 @@ die (SmcConn connection, SmPointer client_data)
 static void
 save_complete (SmcConn connection, SmPointer client_data)
 {
-  assert (info->state == c_save_yourself);
+  assert (info->state == c_save_yourself || info->state == c_idle);
   info->state = c_idle;
 }
 
@@ -96,7 +99,6 @@ gnome_session_init (GnomeSaveFunction saver,
 		    char *previous)
 {
 #ifdef HAVE_LIBSM
-  SmcConn connection;
   unsigned long mask;
   SmcCallbacks callbacks;
   char *client_id;
@@ -169,7 +171,6 @@ gnome_session_set_current_directory (char *dir)
 #ifdef HAVE_LIBSM
   SmProp prop, *proplist[1];
   SmPropValue val;
-  int len;
 
   if (! info)
     return;
@@ -191,7 +192,6 @@ gnome_session_set_program (char *name)
 #ifdef HAVE_LIBSM
   SmProp prop, *proplist[1];
   SmPropValue val;
-  int len;
 
   if (! info)
     return;
