@@ -722,8 +722,16 @@ client_save_yourself_callback (SmcConn   smc_conn,
 		   fast,
 		   &ret);
 
+#ifdef BREAK_KDE_SESSION_MANAGER
+  /* <jsh> The KDE session manager actually cares about the `success'
+     field of the SaveYourselfDone message (unlike gnome-session, which
+     totally ignores it. Hence the code below has the effect of making
+     KDE unable to shutdown when any GNOME apps are running that haven't
+     connected to the "save_yourself" signal. */
+
   if (!client->save_yourself_emitted)
     client->save_successfull= FALSE;
+#endif
 
   client_save_yourself_possibly_done (client);
 }

@@ -1,3 +1,21 @@
+2001-01-29  John Harper  <jsh@eazel.com>
+
+	* gnome-client.c (client_save_yourself_callback): commented out
+	the code that sets client->save_successfull (sic) to false if
+	the "save_yourself" signal wasn't emitted.
+
+	Since the KDE session manager actually cares about the
+	`success' field of the SaveYourselfDone message (unlike
+	gnome-session, which totally ignores it), the original logic
+	had the effect of making KDE unable to shutdown when any GNOME
+	apps that haven't connected to the "save_yourself" signal are
+	running.
+
+	Perhaps a better fix would be to set success = False only if
+	"save_session" wasn't emitted _and_ there are functions
+	connected to this signal. But since it makes no difference to
+	gnome-session I'll leave it for now..
+
 2001-01-05  John Harper  <jsh@eazel.com>
 
 	* gnome-canvas.c (gnome_canvas_focus_in,
