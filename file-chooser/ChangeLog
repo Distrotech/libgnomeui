@@ -1,3 +1,74 @@
+2003-10-17  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_get_supports_bookmarks): Removed.
+	(gtk_file_system_gnome_vfs_set_bookmarks): Removed.
+	(gtk_file_system_gnome_vfs_add_bookmark): Implement.
+	(gtk_file_system_gnome_vfs_remove_bookmark): Implement.
+
+	* gtkfilechooserprivate.h (struct _GtkFileChooserIface): Replaced
+	the ::set_shortcut_folders() method with :;add_shortcut_folder()
+	and ::remove_shortcut_folder().
+
+	* gtkfilechooserutils.c (delegate_add_shortcut_folder): New function.
+	(delegate_remove_shortcut_folder): New function.
+	(delegate_list_shortcut_folders): New function.
+
+	* gtkfilechooserimpldefault.c (create_shortcuts_model): Insert the
+	Desktop directory as well.
+	(shortcuts_insert_path): Renamed from shortcuts_append_path; now
+	takes a position index instead of a parent node iter.  Also takes
+	a GError argument.
+	(struct _GtkFileChooserImplDefault): Removed the shortcuts_folder
+	list.  It is all kept in the model now.
+	(shortcuts_append_home): Save whether adding a shortcut for the
+	home directory was successful.
+	(shortcuts_append_desktop): Likewise for the desktop.
+	(shortcuts_append_file_system_roots): Count and save the number of
+	roots added.
+	(shortcuts_append_shortcut_folders): Removed.
+	(gtk_file_chooser_impl_default_add_shortcut_folder): Implement.
+	(shortcuts_append_bookmarks): Now that we don't have a bookmarks
+	parent node, don't expand the tree.
+	(add_bookmark_button_clicked_cb): Use gtk_file_system_add_bookmark().
+	(remove_bookmark_button_clicked_cb): Use gtk_file_system_remove_bookmark().
+	(gtk_file_chooser_impl_default_list_shortcut_folders): Get the
+	folders from the shortcuts model; we no longer keep a separate list.
+
+	* gtkfilesystem.h (struct _GtkFileSystemIface): Oops, there
+	shouldn't be shortcuts-related virtual methods here.
+
+	* gtkfilechooser.c (file_paths_to_strings): New helper function.
+	(gtk_file_chooser_get_filenames): Use file_paths_to_strings().
+	(gtk_file_chooser_get_uris): Likewise.
+	(gtk_file_chooser_set_shortcut_folders): Removed.
+	(gtk_file_chooser_list_shortcut_folders): Return a list of
+	strings, not of GtkFilePath*.
+	(gtk_file_chooser_list_shortcut_folder_uris): New function.
+	(gtk_file_chooser_add_shortcut_folder): New function.
+	(gtk_file_chooser_remove_shortcut_folder): New function.
+	(gtk_file_chooser_add_shortcut_folder_uri): New function.
+	(gtk_file_chooser_remove_shortcut_folder_uri): New function.
+	(_gtk_file_chooser_add_shortcut_folder): New function.
+	(_gtk_file_chooser_remove_shortcut_folder): New function.
+
+	* gtkfilechooser.h: New enum.
+
+	* gtkfilechooser.c (gtk_file_chooser_error_quark): New function.
+
+	* gtkfilesystem.c (gtk_file_system_get_supports_bookmarks): Removed.
+	(gtk_file_system_set_bookmarks): Removed.
+	(gtk_file_system_add_bookmark): New function.
+	(gtk_file_system_remove_bookmark): New function.
+
+	* gtkfilesystemunix.c
+	(gtk_file_system_unix_get_supports_bookmarks): Removed.
+	(gtk_file_system_unix_set_bookmarks): Removed.
+	(gtk_file_system_unix_add_bookmark): Just a stub for now.
+	(gtk_file_system_unix_remove_bookmark): Likewise.
+
+	* testfilechooser.c (main): Add a shortcut for testing purposes.
+
 2003-10-14  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilechooserimpldefault.c (create_shortcuts_tree): Added a
