@@ -1,5 +1,11 @@
 2000-10-03  Martin Baulig  <baulig@suse.de>
 
+	* gnome-ditem-edit.c (fill_easy_page): Connect to the "changed" signal
+	of the GnomeSelector rather than using the no longer existant
+	gnome_icon_entry_gtk_entry().
+
+2000-10-03  Martin Baulig  <baulig@suse.de>
+
 	* gnome-icon-entry.h (GnomeIconEntry): Derive from GnomeFileSelector.
 	(gnome_icon_entry_construct_full): New function.
 	(gnome_icon_entry_get_icon_selector): New function.
