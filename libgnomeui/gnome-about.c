@@ -572,7 +572,7 @@ gnome_about_construct (GnomeAbout *about,
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_IN);
 	gtk_container_set_border_width (GTK_CONTAINER (frame), 4);
 	gtk_container_add (GTK_CONTAINER (GNOME_DIALOG(about)->vbox),
-			   frame);
+			   GTK_WIDGET(frame));
 	gtk_widget_show (frame);
 
 	drawing_area = gtk_drawing_area_new ();
