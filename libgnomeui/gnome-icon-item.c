@@ -96,39 +96,51 @@ iti_get_width (Iti *iti, int *center_offset)
 }
 
 static void
+get_bounds (Iti *iti, int *x1, int *y1, int *x2, int *y2)
+{
+	int w;
+
+	w = iti_get_width (iti, NULL);
+
+	*x1 = iti->x + (iti->width - w) / 2 - MARGIN_X;
+	*y1 = iti->y;
+	*x2 = iti->x + (iti->width - w) / 2 + w + 2 * MARGIN_X;
+	*y2 = 2 * MARGIN_Y + iti->y + (iti->ti ? iti->ti->height : 0);
+}
+
+static void
 recompute_bounding_box (Iti *iti)
 {
 	GnomeCanvasItem *item = GNOME_CANVAS_ITEM (iti);
 	int nx1, ny1, nx2, ny2;
-	int w, height_changed, width_changed;
+	int height_changed, width_changed;
 	double dx, dy;
 
 	dx = dy = 0.0;
 
 	gnome_canvas_item_i2w (item, &dx, &dy);
-	
-	w = iti_get_width (iti, NULL);
-	
-	nx1 = dx + iti->x + (iti->width - w) / 2 - MARGIN_X;
-	ny1 = dy + iti->y;
-	nx2 = dx + iti->x + (iti->width - w) / 2 + w + 2*MARGIN_X + 1;
-	ny2 = dy + 2*MARGIN_Y + (iti->y + (iti->ti ? iti->ti->height : 0) + 1);
-		
+
+	get_bounds (iti, &nx1, &ny1, &nx2, &ny2);
+	nx1 += dx;
+	ny1 += dy;
+	nx2 += dx + 1;
+	ny2 += dy + 1;
+
 	/* See if our dimenssions match the item bounding box */
 	if (!(nx1 != item->x1 || ny1 != item->y1 || nx2 != item->x2 || ny2 != item->y2))
 		return;
 
 	height_changed = (ny2-ny1) != (item->y2-item->y1);
 	width_changed = (nx2-nx1) != (item->x2-item->x1);
-	
+
 	item->x1 = nx1;
 	item->y1 = ny1;
 	item->x2 = nx2;
 	item->y2 = ny2;
-	
+
 	gnome_canvas_group_child_bounds (
 		GNOME_CANVAS_GROUP (item->parent), item);
-	
+
 	if (height_changed && iti->ti)
 		gtk_signal_emit (GTK_OBJECT (iti), iti_signals [HEIGHT_CHANGED]);
 
@@ -686,15 +698,18 @@ static void
 iti_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
 {
 	Iti *iti = ITI (item);
+	int ix1, iy1, ix2, iy2;
 
 	/* If we have not been realized, realize us */
 	if (iti->ti == NULL)
 		iti_realize (item);
-	
-	*x1 = item->x1;
-	*y1 = item->y1;
-	*x2 = item->x2;
-	*y2 = item->y2;
+
+	get_bounds (iti, &ix1, &iy1, &ix2, &iy2);
+
+	*x1 = ix1;
+	*y1 = iy1;
+	*x2 = ix2;
+	*y2 = iy2;
 }
 
 static void
@@ -816,11 +831,6 @@ gnome_icon_text_item_select (GnomeIconTextItem *iti, int sel)
 	iti_queue_redraw (iti);
 }
 
-static void
-iti_init (Iti *iti)
-{
-}
-
 GtkType
 gnome_icon_text_item_get_type (void)
 {
@@ -832,7 +842,7 @@ gnome_icon_text_item_get_type (void)
 			sizeof (GnomeIconTextItem),
 			sizeof (GnomeIconTextItemClass),
 			(GtkClassInitFunc) iti_class_init,
-			(GtkObjectInitFunc) iti_init,
+			(GtkObjectInitFunc) NULL,
 			NULL, /* reserved_1 */
 			NULL, /* reserved_2 */
 			(GtkClassInitFunc) NULL

@@ -1,3 +1,12 @@
+1998-10-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-item.c (get_bounds): New internal function to compute
+	the bounding box of the icon text item.
+	(recompute_bounding_box): Use get_bounds().
+	(gnome_icon_text_item_get_type): The object initialization
+	function did nothing, so removed it and use NULL instead.
+	(iti_bounds): Use get_bounds() and return the correct bounds.
+
 1998-10-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-item.c (iti_bounds): Realize the item if we are asked
