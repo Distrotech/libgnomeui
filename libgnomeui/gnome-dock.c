@@ -1252,6 +1252,13 @@ gnome_dock_get_type (void)
   return dock_type;
 }
 
+/**
+ * gnome_dock_new:
+ * 
+ * Description: Creates a new GnomeDock widget.
+ * 
+ * Return value: The new widget.
+ **/
 GtkWidget *
 gnome_dock_new (void)
 {
@@ -1269,6 +1276,14 @@ gnome_dock_new (void)
   return widget;
 }
 
+/**
+ * gnome_dock_allow_floating_items:
+ * @dock: A pointer to a GnomeDock widget
+ * @enable: Specifies whether floating items are allowed in this dock
+ * 
+ * Description: Enable or disable floating items on @dock, according
+ * to @enable.
+ **/
 void
 gnome_dock_allow_floating_items (GnomeDock *dock,
                                  gboolean enable)
@@ -1276,6 +1291,23 @@ gnome_dock_allow_floating_items (GnomeDock *dock,
   dock->floating_items_allowed = enable;
 }
 
+/**
+ * gnome_dock_add_item:
+ * @dock: A pointer to a GnomeDock widget
+ * @item: The item to add
+ * @placement: Placement for the new item
+ * @band_num: Number of the band the new item must be added to
+ * @position: Position of the item in the specified band
+ * @offset: Offset (in pixels) from the previous item in the same band
+ * @in_new_band: Specifies whether a new band must be created for this item
+ * 
+ * Description: Add @item to @dock.  @placement can be either
+ * %GNOME_DOCK_TOP, %GNOME_DOCK_RIGHT, %GNOME_DOCK_BOTTOM or
+ * %GNOME_DOCK_LEFT, and specifies what area of the dock should
+ * contain the item.  If @in_new_band is %TRUE, a new dock band is
+ * created at the position specified by @band_num; otherwise, the item
+ * is added to the @band_num'th band.
+ **/
 void
 gnome_dock_add_item (GnomeDock *dock,
                      GnomeDockItem *item,
@@ -1356,6 +1388,18 @@ gnome_dock_add_item (GnomeDock *dock,
   gtk_signal_emit (GTK_OBJECT (dock), dock_signals[LAYOUT_CHANGED]);
 }
 
+/**
+ * gnome_dock_add_floating_item:
+ * @dock: A GnomeDock widget
+ * @item: The item to be added
+ * @x: X-coordinate for the floating item
+ * @y: Y-coordinate for the floating item
+ * @orientation: Orientation for the new item.
+ * 
+ * Description: Add @item to @dock and make it floating at the
+ * specified (@x, @y) coordinates (relative to the root window of the
+ * screen).
+ **/
 void
 gnome_dock_add_floating_item (GnomeDock *dock,
                               GnomeDockItem *item,
@@ -1385,6 +1429,13 @@ gnome_dock_add_floating_item (GnomeDock *dock,
   gtk_signal_emit (GTK_OBJECT (dock), dock_signals[LAYOUT_CHANGED]);
 }
 
+/**
+ * gnome_dock_set_client_area:
+ * @dock: A GnomeDock widget
+ * @widget: The widget to be used for the client area.
+ * 
+ * Description: Specify a widget for the dock's client area.
+ **/
 void
 gnome_dock_set_client_area (GnomeDock *dock, GtkWidget *widget)
 {
@@ -1426,12 +1477,41 @@ gnome_dock_set_client_area (GnomeDock *dock, GtkWidget *widget)
     gtk_widget_unref (widget);
 }
 
+/**
+ * gnome_dock_get_client_area:
+ * @dock: A GnomeDock widget.
+ * 
+ * Description: Retrieve the widget being used as the client area in
+ * @dock.
+ * 
+ * Returns: The client area widget.
+ **/
 GtkWidget *
 gnome_dock_get_client_area (GnomeDock *dock)
 {
   return dock->client_area;
 }
 
+/**
+ * gnome_dock_get_item_by_name:
+ * @dock: A GnomeDock widget.
+ * @name: The name of the dock item to retrieve
+ * @placement_return: A pointer to a variable holding the item's placement
+ * @num_band_return: A pointer to a variable holding the band number
+ * @band_position_return: A pointer to a variable holding the position
+ * of the item within the band
+ * @offset_return: A pointer to a variable holding the offset of the item
+ * from the previous item in the same band
+ * 
+ * Description: Retrieve the dock item named @name; information about
+ * its position in the dock is returned via @placement_return,
+ * @num_band_return, @band_position_return and @offset_return.  If
+ * the placement is %GNOME_DOCK_FLOATING *@num_band_return,
+ * *@band_position_return and *@offset_return are not set.
+ * 
+ * Returns: The named GnomeDockItem widget, or %NULL if no item with
+ * such name exists.
+ **/
 GnomeDockItem *
 gnome_dock_get_item_by_name (GnomeDock *dock,
                              const gchar *name,
@@ -1509,6 +1589,14 @@ layout_add_bands (GnomeDock *dock,
     }
 }
 
+/**
+ * gnome_dock_get_layout:
+ * @dock: A GnomeDock widget
+ * 
+ * Description: Retrieve the layout of @dock.
+ * 
+ * Returns: @dock's layout as a GnomeDockLayout object.
+ **/
 GnomeDockLayout *
 gnome_dock_get_layout (GnomeDock *dock)
 {

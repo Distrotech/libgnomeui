@@ -1414,6 +1414,13 @@ dock_empty_right (GnomeDockBand *band,
 
 /* Exported interface.  */
 
+/**
+ * gnome_dock_band_new:
+ * 
+ * Description: Create a new GnomeDockBand widget.
+ * 
+ * Returns: The new GnomeDockBand widget.
+ **/
 GtkWidget *
 gnome_dock_band_new (void)
 {
@@ -1454,6 +1461,13 @@ gnome_dock_band_get_type (void)
   return band_type;
 }
 
+/**
+ * gnome_dock_band_set_orientation:
+ * @band: A GnomeDockBand widget
+ * @orientation: New orientation for @band
+ * 
+ * Description: Set the orientation for @band.
+ **/
 void
 gnome_dock_band_set_orientation (GnomeDockBand *band,
                                  GtkOrientation orientation)
@@ -1464,12 +1478,33 @@ gnome_dock_band_set_orientation (GnomeDockBand *band,
   band->orientation = orientation;
 }
 
+/**
+ * gnome_dock_band_get_orientation:
+ * @band: A GnomeDockBand widget
+ * 
+ * Description: Retrieve the orientation of the specified @band.
+ * 
+ * Returns: The orientation of @band.
+ **/
 GtkOrientation
 gnome_dock_band_get_orientation (GnomeDockBand *band)
 {
   return band->orientation;
 }
 
+/**
+ * gnome_dock_band_insert:
+ * @band: A GnomeDockBand widget
+ * @child: The widget to be added to @band
+ * @offset: Offset from the previous item
+ * @position: Position within the @band
+ * 
+ * Description: Add @child to @band at the specified @position, with
+ * the specified @offset from the previous item (or from the beginning
+ * of the band, if this is the first item).
+ * 
+ * Returns: %TRUE if successful, %FALSE if the operation fails.
+ **/
 gboolean
 gnome_dock_band_insert (GnomeDockBand *band,
                         GtkWidget *child,
@@ -1561,6 +1596,17 @@ gnome_dock_band_move_child (GnomeDockBand *band,
   gtk_widget_queue_resize (GTK_WIDGET (band));
 }
 
+/**
+ * gnome_dock_band_prepend:
+ * @band: A GnomeDockBand widget
+ * @child: A widget to be added to @band
+ * @offset: Offset (in pixels) from the beginning of the band
+ * 
+ * Description: Add @child to @band with the specified @offset as the
+ * first element.
+ * 
+ * Returns: %TRUE if successful, %FALSE if the operation fails.
+ **/
 gboolean
 gnome_dock_band_prepend (GnomeDockBand *band,
                          GtkWidget *child,
@@ -1569,6 +1615,17 @@ gnome_dock_band_prepend (GnomeDockBand *band,
   return gnome_dock_band_insert (band, child, offset, 0);
 }
 
+/**
+ * gnome_dock_band_append:
+ * @band: A GnomeDockBand widget
+ * @child: A widget to be added to @band
+ * @offset: Offset (in pixels) from the last item of the band
+ * 
+ * Description: Add @child to @band with the specified @offset as the
+ * last element.
+ * 
+ * Returns: %TRUE if successful, %FALSE if the operation fails.
+ **/
 gboolean
 gnome_dock_band_append (GnomeDockBand *band,
                         GtkWidget *child,
@@ -1577,6 +1634,14 @@ gnome_dock_band_append (GnomeDockBand *band,
   return gnome_dock_band_insert (band, child, offset, -1);
 }
 
+/**
+ * gnome_dock_band_set_child_offset:
+ * @band: A GnomeDockBand widget
+ * @child: Child of @band whose offset must be changed
+ * @offset: New offset value for @child
+ * 
+ * Description: Set the offset for the specified @child of @band.
+ **/
 void
 gnome_dock_band_set_child_offset (GnomeDockBand *band,
                                   GtkWidget *child,
@@ -1595,6 +1660,15 @@ gnome_dock_band_set_child_offset (GnomeDockBand *band,
     }
 }
 
+/**
+ * gnome_dock_band_get_child_offset:
+ * @band: A GnomeDockBand widget
+ * @child: Child of @band whose offset must be retrieved
+ * 
+ * Description: Retrieve the offset of @child in @band.
+ * 
+ * Returns: The offset of @child.
+ **/
 guint
 gnome_dock_band_get_child_offset (GnomeDockBand *band,
                                   GtkWidget *child)
@@ -1613,6 +1687,14 @@ gnome_dock_band_get_child_offset (GnomeDockBand *band,
   return 0;
 }
 
+/**
+ * gnome_dock_band_get_num_children:
+ * @band: A GnomeDockBand widget
+ * 
+ * Description: Retrieve the number of children in @band.
+ * 
+ * Returns: The number of children in @band.
+ **/
 guint
 gnome_dock_band_get_num_children (GnomeDockBand *band)
 {
@@ -1620,6 +1702,8 @@ gnome_dock_band_get_num_children (GnomeDockBand *band)
 }
 
 
+
+/* Private interface.  */
 
 void
 gnome_dock_band_drag_begin (GnomeDockBand *band, GnomeDockItem *item)
@@ -1769,6 +1853,23 @@ gnome_dock_band_drag_end (GnomeDockBand *band, GnomeDockItem *item)
   band->new_for_drag = FALSE;
 }
 
+
+
+/**
+ * gnome_dock_band_get_item_by_name:
+ * @band: A GnomeDockBand widget
+ * @name: Name of the child to be retrieved
+ * @position_return: Pointer to a variable holding the position of
+ * the named child
+ * @offset_return:  Pointer to a variable holding the offset of the
+ * named child
+ * 
+ * Description: Retrieve a named item from @band, and return its
+ * position and offset in *@position_return and @offset_return.
+ * 
+ * Return value: The child whose name is @name, or %NULL if no child
+ * of @band has such name.
+ **/
 GnomeDockItem *
 gnome_dock_band_get_item_by_name (GnomeDockBand *band,
                                   const char *name,

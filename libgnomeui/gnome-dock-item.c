@@ -977,6 +977,16 @@ gnome_dock_item_delete_event (GtkWidget *widget,
 
 
 
+/**
+ * gnome_dock_item_new:
+ * @name: Name for the new item
+ * @behavior: Behavior for the new item
+ * 
+ * Description: Create a new GnomeDockItem named @name, with the
+ * specified @behavior.
+ * 
+ * Returns: A new GnomeDockItem widget.
+ **/
 GtkWidget*
 gnome_dock_item_new (const gchar *name,
                      GnomeDockItemBehavior behavior)
@@ -991,18 +1001,42 @@ gnome_dock_item_new (const gchar *name,
   return GTK_WIDGET (new);
 }
 
+/**
+ * gnome_dock_item_get_child:
+ * @item: A GnomeDockItem widget
+ * 
+ * Description: Retrieve the child of @item.
+ * 
+ * Returns: The child of @item.
+ **/
 GtkWidget *
 gnome_dock_item_get_child (GnomeDockItem *item)
 {
   return GTK_BIN (item)->child;
 }
 
+/**
+ * gnome_dock_item_get_name:
+ * @item: A GnomeDockItem widget.
+ * 
+ * Description: Retrieve the name of @item.
+ * 
+ * Return value: The name of @item as a malloc()ed zero-terminated
+ * string.
+ **/
 gchar *
 gnome_dock_item_get_name (GnomeDockItem *item)
 {
   return g_strdup (item->name);
 }
 
+/**
+ * gnome_dock_item_set_shadow_type:
+ * @dock_item: A GnomeDockItem widget
+ * @type: The shadow type for @dock_item
+ * 
+ * Description: Set the shadow type for @dock_item.
+ **/
 void
 gnome_dock_item_set_shadow_type (GnomeDockItem  *dock_item,
                                  GtkShadowType  type)
@@ -1020,6 +1054,14 @@ gnome_dock_item_set_shadow_type (GnomeDockItem  *dock_item,
     }
 }
 
+/**
+ * gnome_dock_item_get_shadow_type:
+ * @dock_item: A GnomeDockItem widget.
+ * 
+ * Description: Retrieve the shadow type of @dock_item.
+ * 
+ * Returns: @dock_item's shadow type.
+ **/
 GtkShadowType
 gnome_dock_item_get_shadow_type (GnomeDockItem  *dock_item)
 {
@@ -1029,6 +1071,15 @@ gnome_dock_item_get_shadow_type (GnomeDockItem  *dock_item)
   return dock_item->shadow_type;
 }
 
+/**
+ * gnome_dock_item_set_orientation:
+ * @dock_item: A GnomeDockItem widget
+ * @orientation: New orientation for @dock_item
+ * 
+ * Description: Set the orientation for @dock_item.
+ * 
+ * Returns: %TRUE if the operation succeeds, %FALSE if it fails.
+ **/
 gboolean
 gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
                                  GtkOrientation orientation)
@@ -1058,6 +1109,14 @@ gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
   return TRUE;
 }
 
+/**
+ * gnome_dock_item_get_orientation:
+ * @dock_item: A GnomeDockItem widget.
+ * 
+ * Description: Retrieve the orientation of @dock_item.
+ * 
+ * Returns: The current orientation of @dock_item.
+ **/
 GtkOrientation
 gnome_dock_item_get_orientation (GnomeDockItem *dock_item)
 {
@@ -1069,6 +1128,14 @@ gnome_dock_item_get_orientation (GnomeDockItem *dock_item)
   return dock_item->orientation;
 }
 
+/**
+ * gnome_dock_item_get_behavior:
+ * @dock_item: A GnomeDockItem widget.
+ * 
+ * Description: Retrieve the behavior of @dock_item.
+ * 
+ * Returns: The behavior of @dock_item.
+ **/
 GnomeDockItemBehavior
 gnome_dock_item_get_behavior (GnomeDockItem *dock_item)
 {
@@ -1079,6 +1146,10 @@ gnome_dock_item_get_behavior (GnomeDockItem *dock_item)
 
   return dock_item->behavior;
 }
+
+
+
+/* Private interface.  */
 
 void
 gnome_dock_item_grab_pointer (GnomeDockItem *item)
