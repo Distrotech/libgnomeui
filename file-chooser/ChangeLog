@@ -1,3 +1,26 @@
+2003-09-10  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilechooserimpldefault.c (create_file_list): Connect to
+	"row_activated" on the file list.
+	(list_row_activated): New function.  Changes to folders or emits
+	the "file-activated" signal depending on what type of row was
+	activated.
+	(create_folder_tree): Renamed from create_directory_tree(), since
+	"folder" is the new politically-correct name.
+
+	* gtkfilechooserprivate.h (struct _GtkFileChooserIface): Added a
+	file-activated signal.
+
+	* gtkfilechooser.c (gtk_file_chooser_class_init): Register the
+	signal.
+
+	* gtkfilechooserutils.c (_gtk_file_chooser_set_delegate): Connect
+	to "file-activated" on the delegate.
+	(delegate_file_activated): New function.
+
+	* TODO: Added an API item about Clipart-like folders provided by
+	applications.
+
 2003-09-09  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilechooserimpldefault.c (set_cell_text_bold_if_folder): Use
