@@ -38,9 +38,6 @@ typedef enum {
 					   space (toolbars) */
 	GNOME_APP_UI_HELP,		/* Create a list of help topics, 
 					   used in the Help menu */
-	GNOME_APP_UI_JUSTIFY_RIGHT,	/* Specifies that all subsequent items 
-					   should be right-justified on the 
-					   menubar */
 	GNOME_APP_UI_BUILDER_DATA	/* Specifies the builder data for the 
 					   following entries, see code for 
 					   further info */
@@ -123,10 +120,6 @@ typedef struct {
 #define GNOMEUIINFO_SEPARATOR		{ GNOME_APP_UI_SEPARATOR, NULL, NULL, NULL, NULL, NULL,		\
 					  (GnomeUIPixmapType) 0, NULL, 0, (GdkModifierType) 0, NULL }
 
-/* Specify that all subsequent items should be right-justified in the menu bar */
-#define GNOMEUIINFO_JUSTIFY_RIGHT	{ GNOME_APP_UI_JUSTIFY_RIGHT, NULL, NULL, NULL, NULL, NULL,	\
-					  (GnomeUIPixmapType) 0, NULL, 0, (GdkModifierType) 0, NULL }
-
 /* Insert an item with an inline xpm icon */
 #define GNOMEUIINFO_ITEM(label, tooltip, callback, xpm_data) \
 	{ GNOME_APP_UI_ITEM, label, tooltip, callback, NULL, NULL, \
@@ -173,12 +166,6 @@ typedef struct {
 	{ GNOME_APP_UI_SUBTREE, label, NULL, tree, NULL, NULL, \
 		GNOME_APP_PIXMAP_STOCK, stock_id, 0, (GdkModifierType) 0, NULL }
 
-
-/* Insert a subtree (submenu) menu item */
-#define GNOMEUIINFO_SUBTREE_ITEM_STOCK(label, tree, callback, stock_id)  \
-	{ GNOME_APP_UI_ITEM, label, tooltip, callback, NULL, NULL, \
-		GNOME_APP_PIXMAP_STOCK, stock_id, 0, (GdkModifierType) 0, NULL }
-		
 /* Insert a list of radio items */
 #define GNOMEUIINFO_RADIOLIST(list) \
 	{ GNOME_APP_UI_RADIOITEMS, NULL, NULL, list, NULL, NULL, \
