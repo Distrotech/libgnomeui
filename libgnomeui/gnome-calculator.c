@@ -1120,8 +1120,8 @@ gnome_calculator_init (GnomeCalculator *gc)
 						   but);
 				gtk_object_set_user_data(GTK_OBJECT(w),gc);
 				gtk_widget_show(w);
-				gtk_table_attach_defaults(GTK_TABLE(table),w,
-							  x,x+1,y,y+1);
+				gtk_table_attach(GTK_TABLE(table),w,
+						 x,x+1,y,y+1, GTK_FILL | GTK_EXPAND | GTK_SHRINK, 0, 2, 2);
 			}
 		}
 	}

@@ -1,5 +1,8 @@
 1998-04-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-calculator.c (gnome_calculator_init): Add padding to
+	calculator buttons. 
+
 	* gtkcalendar.c (gtk_calendar_select_day): Call
 	gtk_calendar_compute_days every time when selecting a day and a
 	month.
