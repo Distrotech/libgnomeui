@@ -655,6 +655,8 @@ negate_val(GtkWidget *w, gpointer data)
 			gc->result_string[0]='-';
 	}
 
+	sscanf(gc->result_string,"%lf",&gc->result);
+
 	put_led_font(gc);
 
 	return TRUE;
