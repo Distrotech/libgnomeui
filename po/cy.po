@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "POT-Creation-Date: 2003-05-30 04:52+0200\n"
-"PO-Revision-Date: 2003-05-30 14:14+0100\n"
+"PO-Revision-Date: 2003-05-30 23:38+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Cymraeg <gnome-cy@pengwyn.linux.org.uk>\n"
 "MIME-Version: 1.0\n"
@@ -221,7 +221,7 @@ msgstr "_Cadw"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr "_Cadw ffeil cyfredol"
+msgstr "_Cadw'r ffeil cyfredol"
 
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
@@ -248,7 +248,7 @@ msgstr "_Argraffu..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr "Argraffu y ffeil cyfredol"
+msgstr "Argraffu'r ffeil cyfredol"
 
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
@@ -293,7 +293,7 @@ msgstr "Torri'r dewis"
 #. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
-msgstr "_Copio"
+msgstr "_Copïo"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
@@ -320,20 +320,20 @@ msgstr "Clirio'r dewis"
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
-msgstr "_Dad-wneud"
+msgstr "_Datwneud"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr "Dad-wneud y weithred ddiwethaf"
+msgstr "Datwneud y weithred ddiwethaf"
 
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr "Ail-wneud"
+msgstr "_Ailwneud"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Ail-wneud y weithred ddiwethaf"
+msgstr "Ailwneud y weithred fe ddatwneuthpwyd"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -347,7 +347,7 @@ msgstr "Chwilio am linyn"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "Canfod _Nesa"
+msgstr "Canfod _Nesaf"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -365,7 +365,7 @@ msgstr "Newid llinyn"
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
 msgid "_Properties"
-msgstr "_Priodwedd"
+msgstr "_Priodoleddau"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -432,7 +432,7 @@ msgstr "Gêm _newydd"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr "Dechra gêm newydd"
+msgstr "Dechrau gêm newydd"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
@@ -452,11 +452,11 @@ msgstr "Ailddechrau'r gêm"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
-msgstr "_Dat-wneud symudiad"
+msgstr "_Datwneud symudiad"
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "Dat-wneud y symudiad diwethaf"
+msgstr "Datwneud y symudiad diwethaf"
 
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
@@ -464,7 +464,7 @@ msgstr "_Ailwneud symudiad"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "Ailwneud symudiad a gafodd ei ddat-wneud"
+msgstr "Ailwneud y symudiad fe ddatwneuthpwyd"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
@@ -780,15 +780,16 @@ msgstr "A ydy lliw blaendir y teitl wedi ei osod"
 #: libgnomeui/gnome-druid-page-standard.c:169
 #: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
-msgstr "Lliw Cefndir"
+msgstr "Lliw'r Cefndir"
 
+# TRWSIO
 #: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
-msgstr "Lliw cefndir"
+msgstr "Lliw'r cefndir"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr "Lliw y cefndir fel GdkColor"
+msgstr "Lliw'r cefndir fel GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
@@ -1064,7 +1065,7 @@ msgstr "Yr LAU mae GnomeHRef yn ei weithredu"
 
 #: libgnomeui/gnome-href.c:130
 msgid "Text"
-msgstr "Testyn"
+msgstr "Testun"
 
 #: libgnomeui/gnome-href.c:131
 msgid "The text on the button"
@@ -1205,7 +1206,7 @@ msgstr "Rhybudd"
 
 #: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
-msgstr "Camgymeriad"
+msgstr "Gwall"
 
 #: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
@@ -1296,11 +1297,12 @@ msgstr "Ynghylch y rhaglen"
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
-msgstr "y dangosydd X i'w ddefnyddio"
+msgstr "Y dangosydd X i'w ddefnyddio"
 
+# EFALLAI - angen gwirio'r cyd-destun
 #: libgnomeui/gnome-ui-init.c:113
 msgid "DISPLAY"
-msgstr "DISPLAY"
+msgstr "DANGOSYDD"
 
 #: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
@@ -1356,7 +1358,7 @@ msgstr "Anfon adroddiad nam"
 
 #: libgnomeui/gnome_segv.c:151
 msgid "Debug"
-msgstr "Adchwilennu"
+msgstr "Dadchwilennu"
 
 #: libgnomeui/gnome_segv.c:159
 msgid "http://www.gnome.org/application_crashed.shtml"
