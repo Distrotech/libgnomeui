@@ -1,3 +1,16 @@
+1999-02-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dentry-edit.c (make_page): Use uniform padding for the
+	table.
+	(table_attach_entry): Use better options to pack stuff in the
+	table.
+	(table_attach_label): Likewise.
+	(label_new): Convenience function to create a label with the
+	proper alignment.
+	(fill_easy_page): Align the labels correctly.  Also, use better
+	packing options for the icon and terminal toggle widgets.
+	(fill_advanced_page): Use label_new().
+
 1999-02-12  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-app-helper.c:
