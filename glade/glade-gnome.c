@@ -30,8 +30,7 @@
 #include <string.h>
 #include <glade/glade-init.h>
 #include <glade/glade-build.h>
-
-#include <libgnomeui.h>
+#include <libgnomeui/libgnomeui.h>
 
 static GtkWidget *
 druidpagestandard_find_internal_child(GladeXML *xml, GtkWidget *parent,
