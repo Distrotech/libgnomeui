@@ -7,119 +7,118 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
-"POT-Creation-Date: 2003-03-30 12:30+0200\n"
-"PO-Revision-Date: 2002-12-26 20:19+0100\n"
+"POT-Creation-Date: 2003-05-25 12:44+0200\n"
+"PO-Revision-Date: 2002-05-26 00:07+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:194
+#: libgnomeui/gnome-about.c:198
 msgid "Credits"
 msgstr "Met dank aan"
 
-#: libgnomeui/gnome-about.c:223
+#: libgnomeui/gnome-about.c:230
 msgid "Written by"
 msgstr "Geschreven door"
 
-#: libgnomeui/gnome-about.c:238
+#: libgnomeui/gnome-about.c:245
 msgid "Documented by"
 msgstr "Gedocumenteerd door"
 
-#: libgnomeui/gnome-about.c:253
+#: libgnomeui/gnome-about.c:260
 msgid "Translated by"
 msgstr "Vertaald door"
 
-#. Add the credits button
-#: libgnomeui/gnome-about.c:310
-msgid "_Credits"
-msgstr "_Credits"
+#: libgnomeui/gnome-about.c:323
+msgid "C_redits"
+msgstr "Met _dank aan"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:378
 msgid "Program name"
 msgstr "Programmanaam"
 
-#: libgnomeui/gnome-about.c:353
+#: libgnomeui/gnome-about.c:379
 msgid "The name of the program"
 msgstr "De naam van het programma"
 
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:386
 msgid "Program version"
 msgstr "Programmaversie"
 
-#: libgnomeui/gnome-about.c:361
+#: libgnomeui/gnome-about.c:387
 msgid "The version of the program"
 msgstr "De versie van het programma"
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:393
 msgid "Copyright string"
 msgstr "Copyright-tekenreeks"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:394
 msgid "Copyright information for the program"
 msgstr "Copyrightinformatie voor het programma"
 
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:401
 msgid "Comments string"
 msgstr "Toelichting-tekenreeks"
 
-#: libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:402
 msgid "Comments about the program"
 msgstr "Korte toelichting op het programma"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:408
 msgid "Authors"
 msgstr "Auteurs"
 
-#: libgnomeui/gnome-about.c:383
+#: libgnomeui/gnome-about.c:409
 msgid "List of authors of the programs"
 msgstr "Lijst van auteurs van de programma's"
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:411
 msgid "Author entry"
 msgstr "Auteur-veld"
 
-#: libgnomeui/gnome-about.c:386
+#: libgnomeui/gnome-about.c:412
 msgid "A single author entry"
 msgstr "Een enkele auteur"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:419
 msgid "Documenters"
 msgstr "Documentators"
 
-#: libgnomeui/gnome-about.c:394
+#: libgnomeui/gnome-about.c:420
 msgid "List of people documenting the program"
 msgstr "Lijst van mensen die het programma documenteren"
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:422
 msgid "Documenter entry"
 msgstr "Documentator-veld"
 
-#: libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:423
 msgid "A single documenter entry"
 msgstr "Een enkele documentator"
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
 msgstr "Vertaler-bedankjes"
 
-#: libgnomeui/gnome-about.c:406
+#: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Vermelding van de vertalers. Deze tekenreeks moet als vertaalbaar worden "
 "gemarkeerd."
 
-#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
-#: libgnomeui/gnome-about.c:414
+#: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
 msgstr "Een logo voor het info venster"
 
-#: libgnomeui/gnome-about.c:493
+#: libgnomeui/gnome-about.c:519
 #, c-format
 msgid "About %s"
 msgstr "%s-info"
@@ -148,31 +147,31 @@ msgstr "Interactiviteit"
 msgid "Level of user activity required."
 msgstr "Benodigd niveau van gebruikersactiviteit"
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
 msgstr "Sessiebeheer-ID specificeren"
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:863
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
 msgstr "Geef voorvoegsel van de opgeslagen configuratie"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
 msgstr "VOORVOEGSEL"
 
-#: libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
 msgstr "Verbinding met het sessiebeheer uitschakelen"
 
-#: libgnomeui/gnome-client.c:972
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Sessie-management"
 
-#: libgnomeui/gnome-client.c:2470
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "Afmelden annuleren"
 
@@ -419,14 +418,14 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI-bibliotheek"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:617
+#: libgnomeui/gnome-ui-init.c:619
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Er traden meerdere segmentatiefouten op; kan het fout-dialoogvenster niet "
 "tonen\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:631
+#: libgnomeui/gnome-ui-init.c:633
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1051,23 +1050,23 @@ msgstr ""
 "eigenschap gebruiken om zonodig de GtkEntry op te vragen voor het aanpassen "
 "of opvragen van zijn parameters."
 
-#: libgnomeui/gnome-file-entry.c:528
+#: libgnomeui/gnome-file-entry.c:533
 msgid "Select file"
 msgstr "Kies bestand"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path"
 msgstr "Pad"
 
-#: libgnomeui/gnome-file-entry.c:649
+#: libgnomeui/gnome-file-entry.c:654
 msgid "Path to file"
 msgstr "Pad naar bestand"
 
-#: libgnomeui/gnome-file-entry.c:676
+#: libgnomeui/gnome-file-entry.c:681
 msgid "_Browse..."
 msgstr "_Bladeren..."
 
-#: libgnomeui/gnome-file-entry.c:677
+#: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
 msgstr "Bestandskiezer tonen om een bestand te selecteren"
 
@@ -1210,52 +1209,52 @@ msgstr ""
 "Pictogramkiesvenster. U kunt deze eigenschap gebruiken om zonodig de "
 "GtkDialog op te vragen voor het opvragen of aanpassen van zijn eigenschappen."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "Geen pictogram"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kon geen hbox vinden, gebruik een normale bestandsselectie"
 
-#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Voorbeeld"
 
-#: libgnomeui/gnome-icon-entry.c:754
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
 msgstr "Pictogram-selectievenster"
 
-#: libgnomeui/gnome-icon-entry.c:755
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
 msgstr "Dit dialoogvenster biedt de mogelijkheid een pictogram te selecteren."
 
-#: libgnomeui/gnome-icon-entry.c:761
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
 msgstr "Pictogramkiezer"
 
-#: libgnomeui/gnome-icon-entry.c:762
+#: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
 msgstr "Kies het gewenste pictogram."
 
-#: libgnomeui/gnome-icon-entry.c:986
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "Pictogramkiezer"
 
-#: libgnomeui/gnome-icon-entry.c:987
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr ""
 "Deze knop zal een selectievenster openen voor het kiezen van een pictogram."
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "Bladeren"
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
 msgstr "Pictogram-pad"
 
-#: libgnomeui/gnome-icon-entry.c:1013
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1343,3 +1342,6 @@ msgstr "Sans 14"
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Test afsluiten"
+
+#~ msgid "_Credits"
+#~ msgstr "_Credits"
