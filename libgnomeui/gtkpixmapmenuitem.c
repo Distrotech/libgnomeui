@@ -56,6 +56,16 @@ gtk_pixmap_menu_item_get_type (void)
   return pixmap_menu_item_type;
 }
 
+/**
+ * gtk_pixmap_menu_item_new
+ *
+ * Creates a new pixmap menu item. Use gtk_pixmap_menu_item_set_pixmap() 
+ * to set the pixmap wich is displayed at the left side.
+ *
+ * Returns:
+ * &GtkWidget pointer to new menu item
+ **/
+
 GtkWidget*
 gtk_pixmap_menu_item_new (void)
 {
@@ -129,6 +139,15 @@ gtk_pixmap_menu_item_expose (GtkWidget      *widget,
 
   return FALSE;
 }
+
+/**
+ * gtk_pixmap_menu_item_set_pixmap
+ * @menu_item: Pointer to the pixmap menu item
+ * @pixmap: Pointer to a pixmap widget
+ *
+ * Set the pixmap of the menu item.
+ *
+ **/
 
 void
 gtk_pixmap_menu_item_set_pixmap (GtkPixmapMenuItem *menu_item,
