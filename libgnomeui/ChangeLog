@@ -1,5 +1,11 @@
 1999-08-22  Havoc Pennington  <hp@pobox.com>
 
+	* gnome-icon-sel.c (gnome_icon_selection_show_icons): Check
+	for destroyed or stop_loading on every iteration, instead of 
+	after all events are expired; should fix bug 1883.
+
+1999-08-22  Havoc Pennington  <hp@pobox.com>
+
 	* gnome-icon-entry.c (gnome_icon_entry_new): Load the entry's
 	history. Doh. We maybe should have a construct() method for
 	GnomeEntry. Added "keep in sync" comment. Fixes bug 1701, fix from

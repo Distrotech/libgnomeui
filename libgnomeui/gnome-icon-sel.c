@@ -373,17 +373,20 @@ void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
 	  gtk_progress_bar_update (GTK_PROGRESS_BAR (progressbar),
 				   (float)i / file_count);
 	  while ( gtk_events_pending() ) {
-		  gtk_main_iteration();
+                  gtk_main_iteration();
+
+                  /*if the gis was destroyed from underneath us ... bail out*/
+                  if(was_destroyed) 
+                          return;
+                  
+                  if(gis->stop_loading)
+                          goto out;
 	  }
 	  
-	  /*if the gis was destroyed from underneath us ... bail out*/
-	  if(was_destroyed) return;
-
-	  if(gis->stop_loading)
-		  break;
-
 	  i++;
   }
+
+ out:
   
   gtk_signal_disconnect(GTK_OBJECT(gis),local_dest);
 
