@@ -233,7 +233,7 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group, Gnome
 /* Creates a group of radio menu items */
 static void
 create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata, int right_justify,
-			 GtkAccelGroup *accel_group, int indent_missing_pixmaps, GtkAccelGroup *menu_accel_group)
+			 GtkAccelGroup *accel_group, int indent_missing_pixmaps, GtkAccelGroup *menu_accel_group, gint pos)
 {
 	GSList *group;
 
@@ -252,8 +252,11 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, GnomeUIB
 			if (right_justify)
 				gtk_menu_item_right_justify (GTK_MENU_ITEM (uiinfo->widget));
 
-			gtk_menu_shell_append (menu_shell, uiinfo->widget);
+			gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
+      pos++;
+
 			gtk_widget_show (uiinfo->widget);
+
 			break;
 
 		default:
@@ -277,7 +280,8 @@ free_help_menu_entry (GtkWidget *widget, gpointer data)
 
 /* Creates the menu entries for help topics */
 static void
-create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int right_justify, GtkAccelGroup *menu_accel_group)
+create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int right_justify,
+                     GtkAccelGroup *menu_accel_group, gint pos)
 {
 	char buf[1024];
 	char *topic_file;
@@ -345,7 +349,9 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int right_ju
 		if (right_justify)
 			gtk_menu_item_right_justify (GTK_MENU_ITEM (item));
 
-		gtk_menu_shell_append (menu_shell, item);
+		gtk_menu_shell_insert (menu_shell, item, pos);
+    pos++;
+
 		gtk_widget_show (item);
 	}
 
@@ -389,7 +395,7 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderDat
 
 void
 gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
-		     GtkAccelGroup *accel_group, int insert_shortcuts, int indent_missing_pixmaps)
+		     GtkAccelGroup *accel_group, int insert_shortcuts, int indent_missing_pixmaps, gint pos)
 {
 	GnomeUIBuilderData uibdata;
 
@@ -404,12 +410,12 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 	uibdata.destroy_func = NULL;
 
 	return gnome_app_fill_menu_custom (menu_shell, uiinfo, &uibdata, accel_group, insert_shortcuts,
-					   indent_missing_pixmaps);
+					   indent_missing_pixmaps, pos);
 }
 
 void
 gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata,
-			    GtkAccelGroup *accel_group, int insert_shortcuts, int indent_missing_pixmaps)
+                            GtkAccelGroup *accel_group, int insert_shortcuts, int indent_missing_pixmaps, gint pos)
 {
 	GnomeUIBuilderData *orig_uibdata;
 	GtkAccelGroup *menu_accel_group;
@@ -442,13 +448,13 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, Gnome
 
 		case GNOME_APP_UI_HELP:
 			/* Create entries for the help topics */
-			create_help_entries (menu_shell, uiinfo, right_justify, menu_accel_group);
+			create_help_entries (menu_shell, uiinfo, right_justify, menu_accel_group, pos);
 			break;
 
 		case GNOME_APP_UI_RADIOITEMS:
 			/* Create the radio item group */
 			create_radio_menu_items (menu_shell, uiinfo->moreinfo, uibdata, right_justify, accel_group,
-						 indent_missing_pixmaps, menu_accel_group);
+						 indent_missing_pixmaps, menu_accel_group, pos);
 			break;
 
 		case GNOME_APP_UI_SEPARATOR:
@@ -466,13 +472,15 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, Gnome
 				menu = gtk_menu_new ();
 				gtk_menu_item_set_submenu (GTK_MENU_ITEM (uiinfo->widget), menu);
 				gnome_app_fill_menu_custom (GTK_MENU_SHELL (menu), uiinfo->moreinfo, orig_uibdata,
-							    accel_group, FALSE, TRUE);
+                                    accel_group, FALSE, TRUE, 0);
 			}
 
 			if (right_justify)
 				gtk_menu_item_right_justify (GTK_MENU_ITEM (uiinfo->widget));
 
-			gtk_menu_shell_append (menu_shell, uiinfo->widget);
+			gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
+      pos++;
+
 			gtk_widget_show (uiinfo->widget);
 			break;
 
@@ -551,7 +559,7 @@ gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuilde
 	g_return_if_fail (uibdata != NULL);
 
 	menubar = gtk_menu_bar_new ();
-	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menubar), uiinfo, uibdata, app->accel_group, TRUE, FALSE);
+	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menubar), uiinfo, uibdata, app->accel_group, TRUE, FALSE, 0);
 	gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
 }
 
@@ -797,7 +805,7 @@ gnome_app_find_menu_pos (GtkWidget *parent,
 {
 	GtkBin *item;
 	gchar *label = NULL;
-	GList *children;
+	GList *children, *hbox_children;
 	gchar *name_end;
 	gint p, path_len;
 	
@@ -821,6 +829,7 @@ gnome_app_find_menu_pos (GtkWidget *parent,
 	p = 0;
 	
 	while( children ) {
+    label = NULL;
 		p++;
 		item = GTK_BIN(children->data);
 		
@@ -828,10 +837,15 @@ gnome_app_find_menu_pos (GtkWidget *parent,
 			label = "<Separator>";
 		else if(GTK_IS_LABEL(item->child))  /* a simple item with a label */
 			label = GTK_LABEL (item->child)->label;
-		else if(GTK_IS_HBOX(item->child))   /* an item with a hbox (pixmap + label) */
-			label = GTK_LABEL (g_list_next
-					   (gtk_container_children
-					    (GTK_CONTAINER(item->child)))->data)->label;
+		else if(GTK_IS_HBOX(item->child)) { /* an item with a hbox (pixmap + label) */
+      hbox_children = gtk_container_children(GTK_CONTAINER(item->child));
+      while( hbox_children && (label == NULL) ) {
+        if(GTK_IS_LABEL(hbox_children->data))
+          label = GTK_LABEL(hbox_children->data)->label;
+
+        hbox_children = g_list_next(hbox_children);
+      }
+    }
 		else                                /* something that we just can't handle */
 			label = NULL;
 		
@@ -901,13 +915,10 @@ gnome_app_remove_menus(GnomeApp *app,
 void
 gnome_app_insert_menus_custom (GnomeApp *app,
 			       gchar *path,
-			       GnomeUIInfo *menuinfo,
+			       GnomeUIInfo *uiinfo,
 			       GnomeUIBuilderData *uibdata)
 {
 	GtkWidget *parent;
-#ifndef GTK_HAVE_FEATURES_1_1_0
-	GtkAcceleratorTable *at;
-#endif
 	gint pos;
 	
 	g_return_if_fail (app != NULL);
@@ -922,17 +933,7 @@ gnome_app_insert_menus_custom (GnomeApp *app,
 	}
 	
 	/* create menus and insert them */
-#if 0
-	/* FIXME!!!  This needs to be made to use the new fill_menu routines. */
-	gnome_app_do_menu_creation(app, parent, pos, menuinfo, uibdata);
-#endif
-	
-	/* for the moment we don't set the accelerators */
-#if 0
-	at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");
-	if (at)
-		gtk_window_add_accelerator_table(GTK_WINDOW(app), at);
-#endif
+	gnome_app_fill_menu_custom (GTK_MENU_SHELL (parent), uiinfo, uibdata, app->accel_group, TRUE, FALSE, pos);
 }
 
 void

@@ -1,3 +1,10 @@
+1998-09-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.[ch] (gnome_app_fill_menu_*): added a gint pos
+	argument in order to reimplement broken menu insertion functions.
+	(gnome_app_insert_menus_custom): use gnome_app_fill_menus_custom().
+	(gnome_app_find_menu_pos): fixed to work with Federico's changes.
+
 1998-09-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-app-helper.c (gnome_app_fill_menu_custom): More function

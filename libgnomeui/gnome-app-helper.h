@@ -199,26 +199,27 @@ struct _GnomeUIBuilderData {
 };
 
 
-/* Fills the specified menu shell with items created from the specified info.  If the specified
- * accelgroup is not NULL, then the menu's hotkeys are put into that accelgroup.  If accel_group is
- * non-NULL and insert_shortcuts is TRUE, then the shortcut keys (MOD1 + underlined letters) in the
- * items' labels will be put into the accel group as well.  If indent_missing_pixmaps is TRUE, then
- * an empty pixmap will be used in place of missing pixmaps, otherwise just plain labels will be used.
+/* Fills the specified menu shell with items created from the specified info, inserting them from the
+ * item no. pos on.  If the specified accelgroup is not NULL, then the menu's hotkeys are put into that
+ * accelgroup.  If accel_group is non-NULL and insert_shortcuts is TRUE, then the shortcut keys (MOD1 +
+ * underlined letters) in the items' labels will be put into the accel group as well.  If
+ * indent_missing_pixmaps is TRUE, then an empty pixmap will be used in place of missing pixmaps, otherwise
+ * just plain labels will be used.
  */
 void gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 			  GtkAccelGroup *accel_group, int insert_shortcuts,
-			  int indent_missing_pixmaps);
+			  int indent_missing_pixmaps, gint pos);
 
-/* Fills the specified menu shell with items created from the specified info, using the specified
- * builder data -- this is intended for language bindings.  If the specified accelgroup is not NULL,
- * then the menu's hotkeys are put into that accelgroup.  If accel_group is non-NULL and
- * insert_shortcuts is TRUE, then the shortcut keys (MOD1 + underlined letters) in the items' labels
- * will be put into the accel group as well (this is useful for toplevel menu bars in which you want
- * MOD1-F to activate the "_File" menu, for example).
+/* Fills the specified menu shell with items created from the specified info, inserting them from item
+ * no. pos on and using the specified builder data -- this is intended for language bindings.  If the
+ * specified accelgroup is not NULL, then the menu's hotkeys are put into that accelgroup.  If accel_group
+ * is non-NULL and insert_shortcuts is TRUE, then the shortcut keys (MOD1 + underlined letters) in the
+ * items' labels will be put into the accel group as well (this is useful for toplevel menu bars in which
+ * you want MOD1-F to activate the "_File" menu, for example).
  */
 void gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata,
 				 GtkAccelGroup *accel_group, int insert_shortcuts,
-				 int indent_missing_pixmaps);
+				 int indent_missing_pixmaps, gint pos);
 
 /* Constructs a menu bar and attaches it to the specified application window */
 void gnome_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo);
