@@ -1,20 +1,25 @@
+# translation of libgnomeui.HEAD.mk.po to Macedonian
+# translation of libgnomeui.HEAD.mk.po to
+# translation of libgnomeui.HEAD.mk.po to
 # translation of libgnomeui.HEAD.po to Macedonian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 #  <maraton@petlica>, 2002
-# Bozidar Proevski <bobibobi@freemail.com.mk>, 2002
+# Bozidar Proevski <bobibobi@freemail.com.mk>, 2002,2003
+# Ime Prezime <email@adresa.com>, 2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
-"PO-Revision-Date: 2002-12-15 23:33+0100\n"
-"Last-Translator: Bozidar Proevski <bobibobi@freemail.com.mk>\n"
-"Language-Team: Macedonian <mk@li.org>\n"
+"Project-Id-Version: libgnomeui.HEAD.mk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-13 20:51+0200\n"
+"PO-Revision-Date: 2003-06-15 21:21+0000\n"
+"Last-Translator: Ime Prezime <email@adresa.com>\n"
+"Language-Team: Macedonian <lug@lists.linux.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0beta2\n"
+"X-Generator: KBabel 1.0.1\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -49,7 +54,6 @@ msgid "Translated by"
 msgstr "Преведено од"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
 msgstr "Заслуги"
 
@@ -125,8 +129,7 @@ msgstr ""
 "http://pmf.polygonized.com"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Заслуги за преведувачите"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -144,6 +147,7 @@ msgstr "За%s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Датотека"
 
@@ -201,6 +205,7 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Помош"
 
@@ -332,7 +337,7 @@ msgstr "Врати ја последната акција"
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr "П&втори"
+msgstr "_Повтори"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
@@ -391,11 +396,11 @@ msgstr "Конфигурирај ја апликацијата"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_За"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "За оваа апликација"
 
@@ -422,7 +427,7 @@ msgstr "Креирај нов прозорец"
 msgid "_Close This Window"
 msgstr "_Затвори го Овој Прозор"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Затвори го тековниот прозор"
 
@@ -597,7 +602,7 @@ msgstr "Се бара ниво на корисничка активност"
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Вашиот HTTP Proxy побарува вие да се најавите \n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -605,18 +610,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Вие мора да се најавите за да имате пристап \"%s\".\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Вашата лозинка ке биде испратена не криптирана."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Вашата лозинка ќе биде испратена криптирана."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Потребна е автентикација"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -688,7 +695,7 @@ msgstr "Намали го часот во скок прозорецот за в�
 
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
-msgstr "Зголемиго часот"
+msgstr "Зголеми го часот"
 
 #: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
@@ -729,8 +736,7 @@ msgstr "Селектирај го времето од листа"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_дата_измени_земи_дата смалено, користи gnome_дата_измени_земи_време"
+msgstr "gnome_дата_измени_земи_дата смалено, користи gnome_дата_измени_земи_време"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -885,7 +891,7 @@ msgstr "Модално"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
-msgstr ""
+msgstr "Без оглед на прозорецот за прелистување на датотеки мора да биде модален."
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
@@ -913,6 +919,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
+"GnomeEntry што датотечниот влез го користи за внесување на иминња на "
+"датотеки.  Можеш да го употребиш ова својство за да го добиеш GnomeEntry ако "
+"ти треба да ги модифицираш некои од овие параметри.."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1022,7 +1031,7 @@ msgstr "Прикажи големина во фонт инфо мод"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
-msgstr "GNOME GConf UI Support"
+msgstr "GNOME GConf UI Подршка"
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
@@ -1115,21 +1124,23 @@ msgstr "Директориум што ќе биде пребарува"
 
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
-msgstr ""
+msgstr "Името на датотеката што треба да биде прикажано додека сме во полето на иконта."
 
 #: libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
-msgstr ""
+msgstr "Дијалог за избор"
 
 #: libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
+"Диалог за избор на икони.  Можете да ја користите оваа особина за да "
+"го дообиете GtkDialog доколку е потребно да се извршат промени нанекоји од  овие особини."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
-msgstr ""
+msgstr "Нема икона"
 
 #: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
@@ -1141,27 +1152,27 @@ msgstr "Преглед"
 
 #: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
-msgstr ""
+msgstr "Диалог за избор на икони"
 
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "Овој диалог ви овозможува да изберете икона."
 
 #: libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selector"
-msgstr ""
+msgstr "Избирач за икони"
 
 #: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "Ве молам изберете ја иконата која ја сакате"
 
 #: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
-msgstr ""
+msgstr "Избирач на икони"
 
 #: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "Ова копче ќе ви отвори прозорец кој пак ќе ви овозможи да изберете икона."
 
 #: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
@@ -1169,27 +1180,29 @@ msgstr "Прелистај"
 
 #: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
-msgstr ""
+msgstr "Пат до иконата"
 
 #: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
+"Овде треба да ги внесете името на директориумот каде сликите од иконите се "
+"сместени."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr ""
+msgstr "GnomeIconSelection: '%s' не е присутен или не е директориум"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr ""
+msgstr "GnomeIconSelection: не можам да го отворам директориумот'%s'"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr ""
+msgstr "Ги вчитувам иконите..."
 
 #: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
@@ -1213,35 +1226,35 @@ msgstr "Порака"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "_Корисничко име:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Лозинка:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
-msgstr ""
+msgstr "Прегледај"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr ""
+msgstr "Било да pixmap влезот мора да има преглед."
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
-msgstr ""
+msgstr "Нема слика"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
-msgstr ""
+msgstr "Преглед на слика"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
-msgstr ""
+msgstr "Преглед на сликата која е нагласена"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
-msgstr ""
+msgstr "Врвни десет"
 
 #: libgnomeui/gnome-scores.c:91
 msgid "User"
@@ -1256,11 +1269,11 @@ msgstr "Резултат"
 #.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr ""
+msgstr "%a %b %d %T %Y"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
-msgstr ""
+msgstr "Sans 14"
 
 #: libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
@@ -1284,33 +1297,33 @@ msgstr "Идент"
 
 #: libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
-msgstr ""
+msgstr "Не-идент"
 
 #: libgnomeui/gnome-stock-icons.c:145
 msgid "About"
 msgstr "За"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "X display to use"
 msgstr "X дисплејот да користи"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "DISPLAY"
 msgstr "ДИСПЛЕЈ"
 
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:125
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Библиотека"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Се случја повеќе грешки при сегментација; неможе да се прикаже дијалог "
 "прозорецот за грешки\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:637
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1366,5 +1379,10 @@ msgstr ""
 "Те молам посети ја страната на GNOME за уривање на апликации за повеќе "
 "информации"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Излез од тестот"
+
 #~ msgid "_Credits"
 #~ msgstr "_Заслуги"
+
