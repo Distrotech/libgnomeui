@@ -34,8 +34,8 @@
 
 
 #include <glib.h>
-#include <gtk/gtkcombo.h>
 #include <libgnome/gnome-defs.h>
+#include "gnome-selector.h"
 
 
 BEGIN_GNOME_DECLS
@@ -54,14 +54,14 @@ typedef struct _GnomeEntryPrivate GnomeEntryPrivate;
 typedef struct _GnomeEntryClass   GnomeEntryClass;
 
 struct _GnomeEntry {
-	GtkCombo combo;
+	GnomeSelector selector;
 
 	/*< private >*/
 	GnomeEntryPrivate *_priv;
 };
 
 struct _GnomeEntryClass {
-	GtkComboClass parent_class;
+	GnomeSelectorClass parent_class;
 };
 
 

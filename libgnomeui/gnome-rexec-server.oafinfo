@@ -1,5 +1,0 @@
-<oaf_server iid="OAFIID:gnome-rexec:19991122" type="exe" location="gnome-rexec-server">
-<oaf_attribute name="repo_ids" type="stringv">
-<item value="IDL:GNOME/RemoteExecution:1.0"/>
-</oaf_attribute>
-</oaf_server>

@@ -1,3 +1,19 @@
+2000-08-07  Martin Baulig  <baulig@suse.de>
+
+	We need to try hard to keep as much source compatibility as possible
+	here when we merge this branch back.
+
+	* gnome-entry.h (GnomeEntry): Derive this from GnomeSelector.
+	(gnome_entry_gtk_entry): This function is now deprecated.
+	(gnome_entry_set_history_id): Likewise.
+	(gnome_entry_get_history_id): Likewise.
+	(gnome_entry_prepend_history): Deprecated; use the corresponding
+	GnomeSelector function instead.
+	(gnome_entry_append_history): Likewise.
+	(gnome_entry_load_history): Likewise.
+	(gnome_entry_clear_history): Likewise.
+	(gnome_entry_save_history): Likewise.
+
 2000-08-07  Karl Eichwalder  <ke@suse.de>
 
 	* gnome-ditem-edit.c (fill_dnd_page): Beautify string.
