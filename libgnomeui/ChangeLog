@@ -1,3 +1,9 @@
+2000-04-15  Christopher James Lahey  <clahey@helixcode.com>
+
+	* gnome-color-picker.c: Switch gnome-color-picker to do color
+	mixing instead of using a stipple.  This fixes a visual/colormap
+	bug.
+
 2000-04-15  Miguel de Icaza  <miguel@gnu.org>
 
 	* gnome-druid-page-finish.c (gnome_druid_page_finish_init): Apply

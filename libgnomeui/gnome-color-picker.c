@@ -27,13 +27,6 @@
 #define CHECK_DARK  (1.0 / 3.0)
 #define CHECK_LIGHT (2.0 / 3.0)
 
-/* Stipple for disabled state */
-#define gnome_color_picker_stipple_width 2
-#define gnome_color_picker_stipple_height 2
-static char gnome_color_picker_stipple_bits[] = {
-  0x02, 0x01, };
-
-
 enum {
 	COLOR_SET,
 	LAST_SIGNAL
@@ -61,7 +54,6 @@ static void gnome_color_picker_style_set (GtkWidget *widget, GtkStyle *previous_
 
 
 static guint color_picker_signals[LAST_SIGNAL] = { 0 };
-static GdkPixmap *stipple = NULL;
 
 static GtkButtonClass *parent_class;
 
@@ -151,7 +143,17 @@ render_dither (GnomeColorPicker *cp)
 		dark_b = light_b = (int) (cp->b * 255.0 + 0.5);
 	}
 
-	/* Fill image buffer */
+	if (!GTK_WIDGET_IS_SENSITIVE (cp) && GTK_WIDGET_REALIZED (cp)) {
+		dark_r  = (dark_r + cp->da->style->bg[GTK_STATE_NORMAL].red / 256.0) /2;
+		dark_g  = (dark_g + cp->da->style->bg[GTK_STATE_NORMAL].green / 256.0) /2;
+		dark_b  = (dark_b + cp->da->style->bg[GTK_STATE_NORMAL].blue / 256.0) /2;
+		
+		light_r  = (light_r + cp->da->style->bg[GTK_STATE_NORMAL].red / 256.0) /2;
+		light_g  = (light_g + cp->da->style->bg[GTK_STATE_NORMAL].green / 256.0) /2;
+		light_b  = (light_b + cp->da->style->bg[GTK_STATE_NORMAL].blue / 256.0) /2;
+	}
+	
+        /* Fill image buffer */
 
 	p = cp->im->rgb_data;
 
@@ -208,14 +210,21 @@ render (GnomeColorPicker *cp)
 {
 	GdkColor c;
 	
-
-	if (cp->dither || cp->use_alpha)
+	
+	if (cp->dither || cp->use_alpha) {
 		render_dither (cp);
-	else {
-		c.red   = (gushort) (cp->r * 65535.0 + 0.5);
-		c.green = (gushort) (cp->g * 65535.0 + 0.5);
-		c.blue  = (gushort) (cp->b * 65535.0 + 0.5);
-
+	} else {
+		if (!GTK_WIDGET_IS_SENSITIVE (cp) && GTK_WIDGET_REALIZED (cp)) {
+			c.red   = (gushort) ((guint) (cp->r * 65535.0 + 0.5) + cp->da->style->bg[GTK_STATE_NORMAL].red) /2;
+			c.green   = (gushort) ((guint) (cp->g * 65535.0 + 0.5) + cp->da->style->bg[GTK_STATE_NORMAL].green) /2;
+			c.blue   = (gushort) ((guint) (cp->b * 65535.0 + 0.5) + cp->da->style->bg[GTK_STATE_NORMAL].blue) /2;
+		} else {
+			c.red   = (gushort) (cp->r * 65535.0 + 0.5);
+			c.green = (gushort) (cp->g * 65535.0 + 0.5);
+			c.blue  = (gushort) (cp->b * 65535.0 + 0.5);
+		}
+		
+		
 		gdk_imlib_best_color_get (&c);
 		gdk_gc_set_foreground (cp->gc, &c);
 
@@ -225,17 +234,6 @@ render (GnomeColorPicker *cp)
 				    0, 0,
 				    COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
 	}
-	if (!GTK_WIDGET_IS_SENSITIVE (cp) && GTK_WIDGET_REALIZED (cp)) {
-		gdk_gc_set_stipple (cp->da->style->bg_gc[GTK_STATE_NORMAL], stipple);
-		gdk_gc_set_fill (cp->da->style->bg_gc[GTK_STATE_NORMAL], GDK_STIPPLED);
-		gdk_draw_rectangle (cp->pixmap,
-				    cp->da->style->bg_gc[GTK_STATE_NORMAL],
-				    TRUE,
-				    0, 0,
-				    COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
-		gdk_gc_set_fill (cp->da->style->bg_gc[GTK_STATE_NORMAL], GDK_SOLID);
-	}
-	
 }
 
 /* Handle exposure events for the color picker's drawing area */
@@ -324,12 +322,6 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 	gdk_imlib_render (cp->im, COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
 	cp->pixmap = gdk_imlib_copy_image (cp->im);
 	cp->gc = gdk_gc_new (cp->pixmap);
-	if (stipple == NULL) {
-		stipple = gdk_bitmap_create_from_data (NULL,
-						       gnome_color_picker_stipple_bits,
-						       gnome_color_picker_stipple_width,
-						       gnome_color_picker_stipple_height);
-	}
 	
 	gtk_widget_pop_colormap ();
 	gtk_widget_pop_visual ();
