@@ -1,5 +1,23 @@
 1998-09-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-app-helper.c (gnome_app_fill_menu_custom): More function
+	arguments sanity checks.
+	(gnome_app_create_menus): Likewise.
+	(gnome_app_create_menus_interp): Likewise.
+	(gnome_app_create_menus_with_data): Likewise.
+	(gnome_app_create_menus_custom): Likewise.
+	(setup_accelerator): Added an argument for the signal name.
+	(gnome_app_fill_toolbar gnome_app_fill_toolbar_custom): New public
+	functions to fill toolbars from a GnomeUIInfo array.
+	(gnome_app_create_toolbar): 
+	(gnome_app_create_toolbar_interp): 
+	(gnome_app_create_toolbar_with_data): 
+	(gnome_app_create_toolbar_custom): Make these functions use the
+	new fill_toolbar ones.
+	Removed the old #ifdef'ed functions.
+
+1998-09-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	* gnome-app-helper.c (gnome_app_fill_menu
 	gnome_app_fill_menu_custom): New public functions that are a
 	rewrite of the menu creation code in GnomeAppHelper.  These are

@@ -9,8 +9,6 @@
 
 /* TO-DO list for GnomeAppHelper and friends:
  *
- * - Sanitize toolbar creation.  Allow for toolbar radio items and such.
- *
  * - Find out how to disable on-the-fly hotkey changing for menu items (GtkAccelGroup locking?).
  *
  * - Rewrite gnome-popupmenu.
@@ -50,35 +48,39 @@
 #define MENU_PIXMAP_LABEL_SPACING 2	/* Spacing between pixmap and label in menu items */
 
 
-static void gnome_app_do_menu_creation                 (GnomeApp *app,
-						 GtkWidget *parent_widget,
-						 gint pos,
-						 GnomeUIInfo *menuinfo,
-						 GnomeUIBuilderData *uidata);
-static void gnome_app_do_ui_signal_connect      (GnomeUIInfo *info_item,
-					         gchar *signal_name,
-					         GnomeUIBuilderData *uidata);
-static void gnome_app_do_ui_accelerator_setup   (GnomeApp *app,
-					         gchar *signal_name,
-					         GnomeUIInfo *menuinfo_item);
-static void gnome_app_do_toolbar_creation       (GnomeApp *app,
-					         GtkWidget *parent_widget,
-					         GnomeUIInfo *tbinfo,
-					         GnomeUIBuilderData *uidata);
-static gint gnome_app_add_help_menu_entries     (GnomeApp *app,
-					         GtkWidget *parent_widget,
-					         gint pos,
-						 GnomeUIInfo *menuinfo_item);
-static gint gnome_app_add_radio_menu_entries    (GnomeApp *app,
-					         GtkWidget *parent_widget,
-					         gint pos,
-					         GnomeUIInfo *menuinfo,
-					         GnomeUIBuilderData *uidata);
-static void gnome_app_add_radio_toolbar_entries (GnomeApp *app,
-						 GtkWidget *parent_widget,
-						 GnomeUIInfo *tbinfo,
-						 GnomeUIBuilderData *uidata);
+/* Creates a pixmap appropriate for items.  The window parameter is required by gnome-stock (bleah) */
+static GtkWidget *
+create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, gpointer pixmap_info, int indent_missing_pixmaps)
+{
+	GtkWidget *pixmap;
 
+	pixmap = NULL;
+
+	switch (pixmap_type) {
+	case GNOME_APP_PIXMAP_NONE:
+		if (indent_missing_pixmaps)
+			pixmap = gnome_stock_pixmap_widget (window, GNOME_STOCK_MENU_BLANK);
+
+		break;
+
+	case GNOME_APP_PIXMAP_STOCK:
+		pixmap = gnome_stock_pixmap_widget (window, pixmap_info);
+		break;
+
+	case GNOME_APP_PIXMAP_DATA:
+		pixmap = gnome_pixmap_new_from_xpm_d (pixmap_info);
+		break;
+
+	case GNOME_APP_PIXMAP_FILENAME:
+		pixmap = gnome_pixmap_new_from_file (pixmap_info);
+		break;
+
+	default:
+		g_assert_not_reached ();
+	}
+
+	return pixmap;
+}
 
 /* Creates an hbox with a pixmap and a menu item label in it.  It uses the settings from
  * gnome-preferences to decide whether the menu item should have a pixmap or not.  It returns the
@@ -102,30 +104,7 @@ create_pixmap_and_label (char *label_text, GnomeUIPixmapType pixmap_type, gpoint
 	 * displayed or not
 	 */
 
-	pixmap = NULL; /* Keep gcc happy */
-
-	switch (pixmap_type) {
-	case GNOME_APP_PIXMAP_NONE:
-		if (indent_missing_pixmaps)
-			pixmap = gnome_stock_pixmap_widget (hbox, GNOME_STOCK_MENU_BLANK);
-
-		break;
-
-	case GNOME_APP_PIXMAP_STOCK:
-		pixmap = gnome_stock_pixmap_widget (hbox, pixmap_info);
-		break;
-
-	case GNOME_APP_PIXMAP_DATA:
-		pixmap = gnome_pixmap_new_from_xpm_d (pixmap_info);
-		break;
-
-	case GNOME_APP_PIXMAP_FILENAME:
-		pixmap = gnome_pixmap_new_from_file (pixmap_info);
-		break;
-
-	default:
-		g_assert_not_reached ();
-	}
+	pixmap = create_pixmap (hbox, pixmap_type, pixmap_info, indent_missing_pixmaps);
 
 	if (pixmap) {
 		gtk_box_pack_start (GTK_BOX (hbox), pixmap, FALSE, FALSE, 0);
@@ -151,12 +130,12 @@ create_pixmap_and_label (char *label_text, GnomeUIPixmapType pixmap_type, gpoint
 
 /* Creates the accelerator for the specified uiinfo item's hotkey */
 static void
-setup_accelerator (GtkAccelGroup *accel_group, GnomeUIInfo *uiinfo)
+setup_accelerator (GtkAccelGroup *accel_group, GnomeUIInfo *uiinfo, char *signal_name, int accel_flags)
 {
 	if (uiinfo->accelerator_key != 0)
-		gtk_widget_add_accelerator (uiinfo->widget, "activate", accel_group,
+		gtk_widget_add_accelerator (uiinfo->widget, signal_name, accel_group,
 					    uiinfo->accelerator_key, uiinfo->ac_mods,
-					    GTK_ACCEL_VISIBLE);
+					    accel_flags);
 }
 
 /* Creates the accelerators for the underlined letter in a menu item's label.  The keyval is what
@@ -238,19 +217,17 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group, Gnome
 
 	/* Set the accelerators */
 
-	if (uiinfo->type != GNOME_APP_UI_SEPARATOR) {
-		setup_accelerator (accel_group, uiinfo);
-		setup_underlined_accelerator (insert_shortcuts ? accel_group : NULL,
-					      menu_accel_group, uiinfo->widget, keyval);
-	}
+	if (uiinfo->type == GNOME_APP_UI_SEPARATOR)
+		return; /* nothing more to do */
 
-	/* Set additional information */
+	setup_accelerator (accel_group, uiinfo, "activate", GTK_ACCEL_VISIBLE);
+	setup_underlined_accelerator (insert_shortcuts ? accel_group : NULL,
+				      menu_accel_group, uiinfo->widget, keyval);
 
-	if ((uiinfo->type != GNOME_APP_UI_SUBTREE) && (uiinfo->type != GNOME_APP_UI_SEPARATOR)) {
-		/* Connect to the activation signal */
+	/* Connect to the signal */
 
+	if (uiinfo->type != GNOME_APP_UI_SUBTREE)
 		(* uibdata->connect_func) (uiinfo, "activate", uibdata);
-	}
 }
 
 /* Creates a group of radio menu items */
@@ -280,7 +257,7 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, GnomeUIB
 			break;
 
 		default:
-			g_warning ("GnomeUIInfo element type %d is not valid inside a radio item group",
+			g_warning ("GnomeUIInfo element type %d is not valid inside a menu radio item group",
 				   (int) uiinfo->type);
 		}
 }
@@ -414,17 +391,17 @@ void
 gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 		     GtkAccelGroup *accel_group, int insert_shortcuts, int indent_missing_pixmaps)
 {
-	GnomeUIBuilderData uibdata = {
-		do_ui_signal_connect,
-		NULL,
-		FALSE,
-		NULL,
-		NULL
-	};
+	GnomeUIBuilderData uibdata;
 
 	g_return_if_fail (menu_shell != NULL);
 	g_return_if_fail (GTK_IS_MENU_SHELL (menu_shell));
 	g_return_if_fail (uiinfo != NULL);
+
+	uibdata.connect_func = do_ui_signal_connect;
+	uibdata.data = NULL;
+	uibdata.is_interp = FALSE;
+	uibdata.relay_func = NULL;
+	uibdata.destroy_func = NULL;
 
 	return gnome_app_fill_menu_custom (menu_shell, uiinfo, &uibdata, accel_group, insert_shortcuts,
 					   indent_missing_pixmaps);
@@ -441,6 +418,7 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, Gnome
 	g_return_if_fail (menu_shell != NULL);
 	g_return_if_fail (GTK_IS_MENU_SHELL (menu_shell));
 	g_return_if_fail (uiinfo != NULL);
+	g_return_if_fail (uibdata != NULL);
 
 	/* Store a pointer to the original uibdata so that we can use it for the subtrees */
 
@@ -499,7 +477,7 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, Gnome
 			break;
 
 		default:
-			g_warning ("Unknown GnomeUIInfo element type %d\n", (int) uiinfo->type);
+			g_warning ("Invalid GnomeUIInfo element type %d\n", (int) uiinfo->type);
 		}
 
 	/* Make the end item contain a pointer to the parent menu shell */
@@ -511,6 +489,10 @@ void
 gnome_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo)
 {
 	GnomeUIBuilderData uibdata;
+
+	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
+	g_return_if_fail (uiinfo != NULL);
 
 	uibdata.connect_func = do_ui_signal_connect;
 	uibdata.data = NULL;
@@ -527,6 +509,10 @@ gnome_app_create_menus_interp (GnomeApp *app, GnomeUIInfo *uiinfo, GtkCallbackMa
 {
 	GnomeUIBuilderData uibdata;
 
+	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
+	g_return_if_fail (uiinfo != NULL);
+
 	uibdata.connect_func = do_ui_signal_connect;
 	uibdata.data = data;
 	uibdata.is_interp = TRUE;
@@ -540,6 +526,10 @@ void
 gnome_app_create_menus_with_data (GnomeApp *app, GnomeUIInfo *uiinfo, gpointer user_data)
 {
 	GnomeUIBuilderData uibdata;
+
+	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
+	g_return_if_fail (uiinfo != NULL);
 
 	uibdata.connect_func = do_ui_signal_connect;
 	uibdata.data = user_data;
@@ -555,758 +545,230 @@ gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuilde
 {
 	GtkWidget *menubar;
 
+	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
+	g_return_if_fail (uiinfo != NULL);
+	g_return_if_fail (uibdata != NULL);
+
 	menubar = gtk_menu_bar_new ();
 	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menubar), uiinfo, uibdata, app->accel_group, TRUE, FALSE);
 	gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
 }
 
-
-
-
-
-
-
-
-
-
-
-#if 0
-
-/* I want to have this code around for a bit until I am 100% sure the new versions of these
- * functions need no modifications - Federico
+/* Creates a toolbar item appropriate for the SEPARATOR, ITEM, or TOGGLEITEM types.  If the item is
+ * inside a radio group, then a pointer to the group's trailing widget must be specified as well
+ * (*radio_group must be NULL for the first item!).
  */
-
-void
-gnome_app_do_menu_creation(GnomeApp *app,
-			   GtkWidget *parent_widget,
-			   gint pos,
-			   GnomeUIInfo *menuinfo,
-			   GnomeUIBuilderData *uidata)
-{
-	GnomeUIBuilderData *orig_uidata;
-	int has_stock_pixmaps = FALSE;
-	int right_justify = FALSE;
-	int i;
-	
-	/*
-	 * store a pointer to the original uidata structure to use it for the
-	 * subtrees
-	 */
-	orig_uidata = uidata;
-	
-	/*
-	 * first check if any of them use the stock pixmaps, because if
-	 * they do we need to use gnome_stock_menu_item for all of them
-	 * so the menu text will be justified properly.
-	 */
-	for (i = 0; menuinfo[i].type != GNOME_APP_UI_ENDOFINFO; i++)
-	{
-		if (menuinfo[i].pixmap_type == GNOME_APP_PIXMAP_STOCK)
-		{
-			has_stock_pixmaps = TRUE;
-			break;
-		}
-	}
-	
-	for (i = 0; menuinfo [i].type != GNOME_APP_UI_ENDOFINFO; i++)
-	{
-		switch(menuinfo[i].type)
-		{
-			
-		case GNOME_APP_UI_BUILDER_DATA:
-			/* set the builder data for the following entries.
-			 * this builder data is used with all the
-			 * following items in this GnomeUIInfo array.
-			 * It does not apply to the subtrees nor other
-			 *  GnomeUIInfo arrays on the same level
-			 */
-			uidata = (GnomeUIBuilderData *)menuinfo[i].moreinfo;
-			break;
-			
-		case GNOME_APP_UI_JUSTIFY_RIGHT:
-			right_justify = TRUE;
-			break;
-			
-		case GNOME_APP_UI_HELP:
-			pos = gnome_app_add_help_menu_entries
-				(app, parent_widget, pos, &menuinfo[i]);
-			break;
-			
-		case GNOME_APP_UI_RADIOITEMS:
-			pos = gnome_app_add_radio_menu_entries
-				(app, parent_widget, pos,
-				 menuinfo[i].moreinfo, uidata);
-			break;
-			
-		case GNOME_APP_UI_SEPARATOR:
-		case GNOME_APP_UI_ITEM:
-		case GNOME_APP_UI_TOGGLEITEM:
-		case GNOME_APP_UI_SUBTREE:
-		{
-			if(menuinfo[i].type == GNOME_APP_UI_SEPARATOR)
-				menuinfo[i].widget = gtk_menu_item_new();
-			else if (menuinfo[i].type == GNOME_APP_UI_TOGGLEITEM)
-			{
-				menuinfo[i].widget =
-					gtk_check_menu_item_new_with_label
-					(_(menuinfo[i].label));
-				gtk_check_menu_item_set_show_toggle
-					(GTK_CHECK_MENU_ITEM(menuinfo[i].widget), TRUE);
-				gtk_check_menu_item_set_state
-					(GTK_CHECK_MENU_ITEM(menuinfo[i].widget), FALSE);
-			}
-			else
-			{
-				GtkWidget *pmap = NULL;
-				
-				switch(menuinfo[i].pixmap_type) {
-				case GNOME_APP_PIXMAP_DATA:
-					pmap = gnome_pixmap_new_from_xpm_d
-						(menuinfo[i].pixmap_info);
-					break;
-					
-				case GNOME_APP_PIXMAP_FILENAME:
-					
-					pmap = gnome_pixmap_new_from_file
-						(gnome_pixmap_file
-						 (menuinfo[i].pixmap_info));
-					break;
-					
-				case GNOME_APP_PIXMAP_NONE:
-				case GNOME_APP_PIXMAP_STOCK:
-					if (has_stock_pixmaps)
-						menuinfo[i].widget =
-							gnome_stock_menu_item (menuinfo[i].pixmap_info ?
-									       menuinfo[i].pixmap_info :
-									       GNOME_STOCK_MENU_BLANK,
-									       _(menuinfo[i].label));
-					else
-						menuinfo[i].widget =
-							gtk_menu_item_new_with_label (_(menuinfo[i].label));
-					break;
-				default:
-					g_warning("GNOME_APP_PIXMAP type unknown.");
-					break;
-				}
-				
-				if (pmap){
-					GtkWidget *hbox, *w;
-					
-					hbox = gtk_hbox_new(FALSE, 2);
-					gtk_box_pack_start(GTK_BOX(hbox), pmap, 
-							   FALSE, FALSE, 0);
-					menuinfo[i].widget = gtk_menu_item_new();
-#ifdef	GTK_HAVE_FEATURES_1_1_0
-					w = gtk_accel_label_new (_(menuinfo[i].label));
-					gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (w),
-									  menuinfo[i].widget);
-#else	/* !GTK_HAVE_FEATURES_1_1_0 */
-					w = gtk_label_new(_(menuinfo[i].label));
-#endif	/* !GTK_HAVE_FEATURES_1_1_0 */
-					gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
-					gtk_box_pack_start(GTK_BOX(hbox), w, TRUE, TRUE, 0);
-					gtk_container_add(GTK_CONTAINER(menuinfo[i].widget), hbox);
-					gtk_widget_show_all(hbox);
-					
-				}
-			}
-			
-			gtk_widget_show(menuinfo[i].widget);
-			
-			if(right_justify)
-				gtk_menu_item_right_justify(GTK_MENU_ITEM(menuinfo[i].widget));
-			
-			gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo[i].widget, pos);
-			pos++;
-			
-			/* Only connect the signal if the item is not a subtree */
-			
-			if (menuinfo[i].type != GNOME_APP_UI_SUBTREE)
-				uidata->connect_func(app, &menuinfo[i], "activate", uidata);
-			
-			gnome_app_do_ui_accelerator_setup(app, "activate", &menuinfo[i]);
-			
-			if(menuinfo[i].type == GNOME_APP_UI_SUBTREE)
-			{
-				GtkWidget *submenu = gtk_menu_new();
-				gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuinfo[i].widget), submenu);
-				gnome_app_do_menu_creation(app,
-							   submenu,
-							   0,
-							   menuinfo[i].moreinfo,
-							   orig_uidata);
-			}
-		}
-		break;
-		
-		default:
-			g_error("Unknown UI element type %d\n", menuinfo[i].type);
-			break;
-		}
-	}
-	
-	gtk_widget_queue_resize (parent_widget);
-	
-	menuinfo[i].widget = parent_widget;
-}
-
-static gint
-gnome_app_add_radio_menu_entries(GnomeApp *app,
-				 GtkWidget *parent_widget,
-				 gint pos,
-				 GnomeUIInfo *menuinfo,
-				 GnomeUIBuilderData *uidata)
-{
-	GSList *group = NULL;
-
-	g_return_val_if_fail(menuinfo != NULL, -1);
-	while (menuinfo->type != GNOME_APP_UI_ENDOFINFO)
-	{
-		if (menuinfo->type == GNOME_APP_UI_SEPARATOR) {
-			menuinfo->widget = gtk_menu_item_new();
-			gtk_widget_show(menuinfo->widget);
-			gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo->widget, pos);
-			pos++;
-			menuinfo++;
-		}
-		else if (menuinfo->type == GNOME_APP_UI_BUILDER_DATA)
-			uidata = (GnomeUIBuilderData *)menuinfo->moreinfo;
-		else {
-			menuinfo->widget = gtk_radio_menu_item_new_with_label(group, _(menuinfo->label));
-			group = gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM(menuinfo->widget));
-			
-			gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(menuinfo->widget), TRUE);
-			gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(menuinfo->widget), FALSE);
-			gtk_widget_show(menuinfo->widget);
-			gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo->widget, pos);
-			pos++;
-			
-			uidata->connect_func(app, menuinfo, "activate", uidata);
-			gnome_app_do_ui_accelerator_setup(app, "activate", menuinfo);
-			
-			menuinfo++;
-		}
-	}
-	
-	return pos;
-}
-
-static gint
-gnome_app_add_help_menu_entries(GnomeApp *app,
-				GtkWidget *parent_widget,
-				gint pos,
-				GnomeUIInfo *menuinfo_item)
-{
-	char buf [BUFSIZ];
-	char *topicFile, *s;
-	GnomeHelpMenuEntry *entry;
-	FILE *f;
-	
-	if(!menuinfo_item->moreinfo)
-		menuinfo_item->moreinfo = app->name;
-	
-	topicFile = gnome_help_file_find_file(menuinfo_item->moreinfo, "topic.dat");
-	
-	if (!topicFile || !(f = fopen (topicFile, "r")))
-	{
-		/* FIXME: should throw up a dialog, or perhaps default to */
-		/* some standard help page                             */
-/*      fprintf(stderr, "Unable to open %s\n", (topicFile) ? topicFile : "(null)"); */
-		g_free(topicFile);
-		return -1;
-	}
-	g_free(topicFile);
-	
-	menuinfo_item->accelerator_key = GDK_KP_F1;
-	menuinfo_item->ac_mods = 0;
-	
-	while (fgets(buf, sizeof(buf), f))
-	{
-		s = buf;
-		while (*s && !isspace(*s))
-			s++;
-		
-		*s++ = '\0';
-		
-		while (*s && isspace(*s))
-			s++;
-		
-		s[strlen(s) - 1] = '\0';
-		
-		entry = g_malloc(sizeof(*entry));
-		entry->name = g_strdup(menuinfo_item->moreinfo);
-		entry->path = g_strdup(buf);
-		
-		menuinfo_item->widget = gtk_menu_item_new_with_label(s);
-		gtk_widget_show(menuinfo_item->widget);
-		if(menuinfo_item->accelerator_key)
-		{
-			gnome_app_do_ui_accelerator_setup(app, "activate", menuinfo_item);
-			menuinfo_item->accelerator_key = 0;
-		}
-		gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo_item->widget, pos);
-		pos++;
-		
-		gtk_signal_connect(GTK_OBJECT (menuinfo_item->widget), "activate",
-				   (gpointer) gnome_help_display,
-				   (gpointer) entry);
-	}
-	menuinfo_item->widget = NULL; /* We have a bunch of widgets,
-					 so this is useless ;-) */
-	
-	fclose(f);
-	
-	return pos;
-}
-
-void
-gnome_app_create_menus_custom (GnomeApp *app,
-			       GnomeUIInfo *menuinfo,
-			       GnomeUIBuilderData *uibdata)
-{
-	GtkWidget *menubar;
-#ifdef GTK_HAVE_FEATURES_1_1_0
-	GtkAccelGroup *ag;
-#else
-	GtkAcceleratorTable *at;
-#endif
-	int set_accel;
-	
-	g_return_if_fail (app != NULL);
-	g_return_if_fail (GNOME_IS_APP(app));
-	g_return_if_fail (app->menubar == NULL);
-	
-	menubar = gtk_menu_bar_new ();
-	gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
-#ifdef GTK_HAVE_FEATURES_1_1_0	
-	ag = gtk_object_get_data (GTK_OBJECT (app), "GtkAccelGroup");
-	set_accel = (ag == NULL);
-#else
-	at = gtk_object_get_data (GTK_OBJECT (app), "GtkAcceleratorTable");
-	set_accel = (at == NULL);
-#endif
-	if (menuinfo)
-		gnome_app_do_menu_creation (app, app->menubar, 0, menuinfo, uibdata);
-	if (set_accel) {
-#ifdef GTK_HAVE_FEATURES_1_1_0
-		ag = gtk_object_get_data (GTK_OBJECT (app), "GtkAccelGroup");
-		if (ag && !g_slist_find (gtk_accel_groups_from_object (GTK_OBJECT (app)), ag))
-			gtk_window_add_accel_group (GTK_WINDOW (app), ag);
-#else
-		at = gtk_object_get_data (GTK_OBJECT (app), "GtkAcceleratorTable");
-		if (at)
-			gtk_window_add_accelerator_table (GTK_WINDOW (app), at);
-#endif
-  }
-}
-
-void
-gnome_app_create_menus(GnomeApp *app,
-		       GnomeUIInfo *menuinfo)
-{
-	GnomeUIBuilderData uidata =
-	{
-		GNOME_UISIGFUNC (gnome_app_do_ui_signal_connect),
-		NULL, FALSE, NULL, NULL
-	};
-
-	gnome_app_create_menus_custom (app, menuinfo, &uidata);
-}
-
-void
-gnome_app_create_menus_with_data(GnomeApp *app,
-				 GnomeUIInfo *menuinfo,
-				 gpointer data)
-{
-	GnomeUIBuilderData uidata =
-	{
-		GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-		NULL, FALSE, NULL, NULL
-	};
-	
-	uidata.data = data;
-
-	gnome_app_create_menus_custom (app, menuinfo, &uidata);
-}
-
-void
-gnome_app_create_menus_interp (GnomeApp *app,
-			       GnomeUIInfo *menuinfo,
-			       GtkCallbackMarshal relay_func,
-			       gpointer data,
-			       GtkDestroyNotify destroy_func)
-{
-	GnomeUIBuilderData uidata =
-	{
-		GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-		NULL, FALSE, NULL, NULL
-	};
-	
-	uidata.data = data;
-	uidata.is_interp = TRUE;
-	uidata.relay_func = relay_func;
-	uidata.destroy_func = destroy_func;
-	
-	gnome_app_create_menus_custom (app, menuinfo, &uidata);
-}
-
-#endif
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 static void
-gnome_app_do_toolbar_creation (GnomeApp *app,
-			       GtkWidget *parent_widget,
-			       GnomeUIInfo *tbinfo,
-			       GnomeUIBuilderData *uidata)
+create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio, GtkWidget **radio_group,
+		     GnomeUIBuilderData *uibdata, GtkAccelGroup *accel_group)
 {
-	int i, set_accel;
-	GtkWidget *pmap;
-#ifdef GTK_HAVE_FEATURES_1_1_0
-	GtkAccelGroup *ag;
+	GtkWidget *pixmap;
+	GtkToolbarChildType type;
 
-	set_accel = (NULL == gtk_object_get_data(GTK_OBJECT(app),
-						 "GtkAccelGroup"));
-#else
-	GtkAcceleratorTable *at;
-	
-	set_accel = (NULL == gtk_object_get_data(GTK_OBJECT(app),
-						 "GtkAcceleratorTable"));
-#endif
-
-	if (!GTK_WIDGET (app)->window)
-		gtk_widget_realize (GTK_WIDGET (app));
-	
-	for(i = 0; tbinfo[i].type != GNOME_APP_UI_ENDOFINFO; i++)
-	{
-		switch(tbinfo[i].type)
-		{
-		case GNOME_APP_UI_BUILDER_DATA:
-			/*
-			 * set the builder data for the following entries.
-			 * this builder data is used with all the
-			 * following items in this GnomeUIInfo array.
-			 * It does not apply to the subtrees nor other
-			 * GnomeUIInfo arrays on the same level
-			 */
-			uidata = (GnomeUIBuilderData *)tbinfo[i].moreinfo;
-			break;
-			
-		case GNOME_APP_UI_RADIOITEMS:
-			gnome_app_add_radio_toolbar_entries (
-				app, parent_widget,
-				tbinfo[i].moreinfo, uidata);
-			break;
-			
-		case GNOME_APP_UI_ITEM:
-		case GNOME_APP_UI_TOGGLEITEM:
-		{
-			switch (tbinfo [i].pixmap_type)
-			{
-			case GNOME_APP_PIXMAP_DATA:
-				pmap = gnome_pixmap_new_from_xpm_d (
-					tbinfo[i].pixmap_info);
-				break;
-				
-			case GNOME_APP_PIXMAP_FILENAME:
-				pmap = gnome_pixmap_new_from_file (
-					gnome_pixmap_file (
-						tbinfo[i].pixmap_info));
-				break;
-				
-			case GNOME_APP_PIXMAP_STOCK:
-				pmap = gnome_stock_pixmap_widget_new (
-					GTK_WIDGET (app),
-					tbinfo[i].pixmap_info);
-				break;
-				
-			default:
-				pmap = NULL; break;
-			}
-			
-			tbinfo[i].widget =
-				gtk_toolbar_append_element (
-					GTK_TOOLBAR(parent_widget),
-					tbinfo[i].type == GNOME_APP_UI_ITEM ?
-					GTK_TOOLBAR_CHILD_BUTTON :
-					GTK_TOOLBAR_CHILD_TOGGLEBUTTON,
-					NULL,
-					_(tbinfo[i].label),
-					_(tbinfo[i].hint),
-					NULL,
-					pmap,
-					NULL, NULL);
-			
-			uidata->connect_func (&tbinfo[i], "clicked", uidata);
-			gnome_app_do_ui_accelerator_setup (
-				app, "clicked", &tbinfo[i]);
-		}
+	switch (uiinfo->type) {
+	case GNOME_APP_UI_SEPARATOR:
+		gtk_toolbar_append_space (toolbar);
+		uiinfo->widget = NULL; /* no meaningful widget for a space */
 		break;
-		
-		case GNOME_APP_UI_SEPARATOR:
-			gtk_toolbar_append_space (GTK_TOOLBAR (parent_widget));
-			break;
-			
-		default:
-			g_error ("Unknown or unsupported toolbar item type %d\n",
-				 tbinfo [i].type);
-			break;
-		}
-	}
-	tbinfo [i].widget = parent_widget;
 
-	if (set_accel) {
-#ifdef GTK_HAVE_FEATURES_1_1_0
-		ag = gtk_object_get_data (GTK_OBJECT (app), "GtkAccelGroup");
-		if (ag && !g_slist_find (gtk_accel_groups_from_object (GTK_OBJECT (app)), ag))
-			gtk_window_add_accel_group(GTK_WINDOW(app), ag);
-#else
-		at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");
-		if (at)
-			gtk_window_add_accelerator_table(GTK_WINDOW(app), at);
-#endif
+	case GNOME_APP_UI_ITEM:
+	case GNOME_APP_UI_TOGGLEITEM:
+		/* Create the icon */
+
+		pixmap = create_pixmap (GTK_WIDGET (toolbar), uiinfo->pixmap_type, uiinfo->pixmap_info, TRUE);
+
+		/* Create the toolbar item */
+
+		if (is_radio)
+			type = GTK_TOOLBAR_CHILD_RADIOBUTTON;
+		else if (uiinfo->type == GNOME_APP_UI_ITEM)
+			type = GTK_TOOLBAR_CHILD_BUTTON;
+		else
+			type = GTK_TOOLBAR_CHILD_TOGGLEBUTTON;
+
+		uiinfo->widget =
+			gtk_toolbar_append_element (toolbar,
+						    type,
+						    is_radio ? *radio_group : NULL,
+						    _(uiinfo->label),
+						    _(uiinfo->hint),
+						    NULL,
+						    pixmap,
+						    NULL,
+						    NULL);
+
+		if (is_radio)
+			*radio_group = uiinfo->widget;
+
+		break;
+
+	default:
+		g_warning ("Invalid GnomeUIInfo type %d passed to create_toolbar_item()", (int) uiinfo->type);
+		return;
+	}
+
+	if (uiinfo->type == GNOME_APP_UI_SEPARATOR)
+		return; /* nothing more to do */
+
+	/* Set the accelerator and connect to the signal */
+
+	if (is_radio || (uiinfo->type == GNOME_APP_UI_TOGGLEITEM)) {
+		setup_accelerator (accel_group, uiinfo, "toggled", 0);
+		(* uibdata->connect_func) (uiinfo, "toggled", uibdata);
+	} else {
+		setup_accelerator (accel_group, uiinfo, "clicked", 0);
+		(* uibdata->connect_func) (uiinfo, "clicked", uibdata);
 	}
 }
 
 static void
-gnome_app_add_radio_toolbar_entries (GnomeApp *app,
-				     GtkWidget *parent_widget,
-				     GnomeUIInfo *tbinfo,
-				     GnomeUIBuilderData *uidata)
+create_radio_toolbar_items (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata,
+			    GtkAccelGroup *accel_group)
 {
-	GtkWidget *group = NULL;
-	GtkWidget *pmap;
-	
-	g_return_if_fail (tbinfo != NULL);
-    
-	while (tbinfo->type != GNOME_APP_UI_ENDOFINFO)
-	{
-		if(tbinfo->type == GNOME_APP_UI_BUILDER_DATA)
-			uidata = (GnomeUIBuilderData *)tbinfo->moreinfo;
-		else {
-			switch(tbinfo->pixmap_type) {
-			case GNOME_APP_PIXMAP_DATA:
-				pmap = gnome_pixmap_new_from_xpm_d (
-					tbinfo->pixmap_info);
-				break;
-				
-			case GNOME_APP_PIXMAP_FILENAME:
-				pmap = gnome_pixmap_new_from_file (
-					(char *)gnome_pixmap_file(tbinfo->pixmap_info));
-				break;
-				
-			case GNOME_APP_PIXMAP_STOCK:
-				pmap = gnome_stock_pixmap_widget_new (
-					GTK_WIDGET(app), tbinfo->pixmap_info);
-				break;
-				
-			default:
-				pmap = NULL; break;
-			}
-			
-			group = tbinfo->widget =
-				gtk_toolbar_append_element(
-					GTK_TOOLBAR(parent_widget),
-					GTK_TOOLBAR_CHILD_RADIOBUTTON,
-					group, _(tbinfo->label),
-					_(tbinfo->hint), NULL,
-					pmap, NULL, NULL);
-			
-			uidata->connect_func(tbinfo, "clicked", uidata);
-			
-			gnome_app_do_ui_accelerator_setup(app, "clicked", tbinfo);
-			
-			tbinfo++;
+	GtkWidget *group;
+
+	group = NULL;
+
+	for (; uiinfo->type != GNOME_APP_UI_ENDOFINFO; uiinfo++)
+		switch (uiinfo->type) {
+		case GNOME_APP_UI_BUILDER_DATA:
+			uibdata = uiinfo->moreinfo;
+			break;
+
+		case GNOME_APP_UI_ITEM:
+			create_toolbar_item (toolbar, uiinfo, TRUE, &group, uibdata, accel_group);
+			break;
+
+		default:
+			g_warning ("GnomeUIInfo element type %d is not valid inside a toolbar radio item group",
+				   (int) uiinfo->type);
 		}
-	}
-}
-
-static GtkWidget *
-_gnome_app_create_toolbar_custom (GnomeApp *app,
-				  GnomeUIInfo *tbinfo,
-				  GnomeUIBuilderData *uibdata,
-				  gboolean attach)
-{
-	GtkWidget *tb;
-	
-	g_return_val_if_fail (app != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_APP(app), NULL);
-
-	if (attach)
-		g_return_val_if_fail (app->toolbar == NULL, NULL);
-	
-	tb = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
-	if (attach)
-		gnome_app_set_toolbar (app, GTK_TOOLBAR (tb));
-	
-	if(tbinfo)
-		gnome_app_do_toolbar_creation(app, tb, tbinfo, uibdata);
-
-	return tb;
 }
 
 void
-gnome_app_create_toolbar_custom (GnomeApp *app,
-				 GnomeUIInfo *tbinfo,
-				 GnomeUIBuilderData *uibdata)
+gnome_app_fill_toolbar (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GtkAccelGroup *accel_group)
 {
+	GnomeUIBuilderData uibdata;
+
+	g_return_if_fail (toolbar != NULL);
+	g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
+	g_return_if_fail (uiinfo != NULL);
+
+	uibdata.connect_func = do_ui_signal_connect;
+	uibdata.data = NULL;
+	uibdata.is_interp = FALSE;
+	uibdata.relay_func = NULL;
+	uibdata.destroy_func = NULL;
+
+	gnome_app_fill_toolbar_custom (toolbar, uiinfo, &uibdata, accel_group);
+}
+
+void
+gnome_app_fill_toolbar_custom (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata,
+			       GtkAccelGroup *accel_group)
+{
+	g_return_if_fail (toolbar != NULL);
+	g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
+	g_return_if_fail (uiinfo != NULL);
+	g_return_if_fail (uibdata != NULL);
+
+	for (; uiinfo->type != GNOME_APP_UI_ENDOFINFO; uiinfo++)
+		switch (uiinfo->type) {
+		case GNOME_APP_UI_BUILDER_DATA:
+			/* Set the builder data for subsequent entries in the current uiinfo array */
+			uibdata = uiinfo->moreinfo;
+			break;
+
+		case GNOME_APP_UI_RADIOITEMS:
+			/* Create the radio item group */
+			create_radio_toolbar_items (toolbar, uiinfo->moreinfo, uibdata, accel_group);
+			break;
+
+		case GNOME_APP_UI_SEPARATOR:
+		case GNOME_APP_UI_ITEM:
+		case GNOME_APP_UI_TOGGLEITEM:
+			create_toolbar_item (toolbar, uiinfo, FALSE, NULL, uibdata, accel_group);
+			break;
+
+		default:
+			g_warning ("Invalid GnomeUIInfo element type %d\n", (int) uiinfo->type);
+		}
+
+	/* Make the end item contain a pointer to the parent toolbar */
+
+	uiinfo->widget = GTK_WIDGET (toolbar);
+}
+
+void
+gnome_app_create_toolbar (GnomeApp *app, GnomeUIInfo *uiinfo)
+{
+	GnomeUIBuilderData uibdata;
+
 	g_return_if_fail (app != NULL);
 	g_return_if_fail (GNOME_IS_APP (app));
-	g_return_if_fail (app->toolbar == NULL);
-	
-	_gnome_app_create_toolbar_custom (app, tbinfo, uibdata, TRUE);
-}
+	g_return_if_fail (uiinfo != NULL);
 
-GtkWidget *
-gnome_create_toolbar_custom (GnomeApp *app,
-			      GnomeUIInfo *tbinfo,
-			      GnomeUIBuilderData *uibdata)
-{
-	return _gnome_app_create_toolbar_custom (app, tbinfo, uibdata, FALSE);
-}
+	uibdata.connect_func = do_ui_signal_connect;
+	uibdata.data = NULL;
+	uibdata.is_interp = FALSE;
+	uibdata.relay_func = NULL;
+	uibdata.destroy_func = NULL;
 
-void
-gnome_app_create_toolbar (GnomeApp *app,
-			  GnomeUIInfo *toolbarinfo)
-{
-	GnomeUIBuilderData uidata = {
-		GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-		NULL, FALSE, NULL, NULL
-	};
-	
-	gnome_app_create_toolbar_custom(app, toolbarinfo, &uidata);
+	gnome_app_create_toolbar_custom (app, uiinfo, &uibdata);
 }
 
 void
-gnome_app_create_toolbar_with_data(GnomeApp *app,
-				   GnomeUIInfo *toolbarinfo,
-				   gpointer data)
-{
-	GnomeUIBuilderData uidata =
-	{
-		GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-		NULL, FALSE, NULL, NULL
-	};
-	
-	uidata.data = data;
-	gnome_app_create_toolbar_custom (app, toolbarinfo, &uidata);
-}
-
-GtkWidget *
-gnome_create_toolbar_with_data(GnomeApp *app,
-			       GnomeUIInfo *toolbarinfo,
-			       gpointer data)
-{
-	GnomeUIBuilderData uidata =
-	{
-		GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-		NULL, FALSE, NULL, NULL
-	};
-	
-	uidata.data = data;
-	return _gnome_app_create_toolbar_custom (app, toolbarinfo, &uidata, FALSE);
-}
-
-
-void
-gnome_app_create_toolbar_interp (GnomeApp *app,
-				 GnomeUIInfo *tbinfo,
-				 GtkCallbackMarshal relay_func,
-				 gpointer data,
+gnome_app_create_toolbar_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
+				 GtkCallbackMarshal relay_func, gpointer data,
 				 GtkDestroyNotify destroy_func)
 {
-	GnomeUIBuilderData uidata =
-	{
-		GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-		NULL, FALSE, NULL, NULL
-	};
-	
-	uidata.data = data;
-	uidata.is_interp = TRUE;
-	uidata.relay_func = relay_func;
-	uidata.destroy_func = destroy_func;
-	
-	gnome_app_create_toolbar_custom (app, tbinfo, &uidata);
+	GnomeUIBuilderData uibdata;
+
+	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
+	g_return_if_fail (uiinfo != NULL);
+
+	uibdata.connect_func = do_ui_signal_connect;
+	uibdata.data = data;
+	uibdata.is_interp = TRUE;
+	uibdata.relay_func = relay_func;
+	uibdata.destroy_func = destroy_func;
+
+	gnome_app_create_toolbar_custom (app, uiinfo, &uibdata);
 }
 
-static void
-gnome_app_do_ui_signal_connect (GnomeUIInfo *info_item,
-				gchar *signal_name,
-				GnomeUIBuilderData *uidata)
+void
+gnome_app_create_toolbar_with_data (GnomeApp *app, GnomeUIInfo *uiinfo, gpointer user_data)
 {
-	if (uidata->is_interp)
-		gtk_signal_connect_interp(
-			GTK_OBJECT (info_item->widget),
-			signal_name,
-			uidata->relay_func,
-			uidata->data ? uidata->data : info_item->user_data,
-			uidata->destroy_func,
-			TRUE);
-	else
-		gtk_signal_connect (
-			GTK_OBJECT (info_item->widget), signal_name,
-			info_item->moreinfo,
-			uidata->data ? uidata->data : info_item->user_data);
+	GnomeUIBuilderData uibdata;
+
+	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
+	g_return_if_fail (uiinfo != NULL);
+
+	uibdata.connect_func = do_ui_signal_connect;
+	uibdata.data = user_data;
+	uibdata.is_interp = FALSE;
+	uibdata.relay_func = NULL;
+	uibdata.destroy_func = NULL;
+
+	gnome_app_create_toolbar_custom (app, uiinfo, &uibdata);
 }
 
-static void
-gnome_app_do_ui_accelerator_setup (GnomeApp *app,
-				   gchar *signal_name,
-				   GnomeUIInfo *menuinfo_item)
+void
+gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata)
 {
-#ifdef GTK_HAVE_FEATURES_1_1_0
-	GtkAccelGroup *ag;
-#else
-	GtkAcceleratorTable *at;
-#endif
-	if (menuinfo_item->accelerator_key == 0)
-		return;
-#ifdef GTK_HAVE_FEATURES_1_1_0
-	ag = gtk_object_get_data(GTK_OBJECT(app),
-				 "GtkAccelGroup");
-	if (ag == NULL)
-	{
-		ag = gtk_accel_group_new();
-		gtk_object_set_data(GTK_OBJECT(app),
-				    "GtkAccelGroup",
-				    (gpointer)ag);
-	}
-	
-	gtk_widget_add_accelerator (
-		GTK_WIDGET(menuinfo_item->widget),
-		signal_name,
-		ag,
-		menuinfo_item->accelerator_key,
-		menuinfo_item->ac_mods,
-		GTK_ACCEL_VISIBLE);
-#else
-	at = gtk_object_get_data(GTK_OBJECT(app),
-				 "GtkAcceleratorTable");
-	if (at == NULL)
-	{
-		at = gtk_accelerator_table_new();
-		gtk_object_set_data(GTK_OBJECT(app),
-				    "GtkAcceleratorTable",
-				    (gpointer)at);
-	}
-	
-	gtk_widget_install_accelerator(
-		GTK_WIDGET(menuinfo_item->widget), at,
-		signal_name,
-		menuinfo_item->accelerator_key,
-		menuinfo_item->ac_mods);
-#endif
+	GtkWidget *toolbar;
+
+	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
+	g_return_if_fail (uiinfo != NULL);
+	g_return_if_fail (uibdata != NULL);
+
+	toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+	gnome_app_fill_toolbar_custom (GTK_TOOLBAR (toolbar), uiinfo, uibdata, app->accel_group);
+	gnome_app_set_toolbar (app, GTK_TOOLBAR (toolbar));
 }
 
 /*
@@ -1480,7 +942,7 @@ gnome_app_insert_menus (GnomeApp *app,
 {
 	GnomeUIBuilderData uidata =
 	{
-		GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+		do_ui_signal_connect,
 		NULL, FALSE, NULL, NULL
 	};
 	
@@ -1495,7 +957,7 @@ gnome_app_insert_menus_with_data (GnomeApp *app,
 {
 	GnomeUIBuilderData uidata =
 	{
-		GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+		do_ui_signal_connect,
 		NULL, FALSE, NULL, NULL
 	};
 	
@@ -1514,7 +976,7 @@ gnome_app_insert_menus_interp (GnomeApp *app,
 {
 	GnomeUIBuilderData uidata =
 	{
-		GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+		do_ui_signal_connect,
 		NULL, FALSE, NULL, NULL
 	};
 	

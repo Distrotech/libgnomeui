@@ -198,8 +198,6 @@ struct _GnomeUIBuilderData {
 	GtkDestroyNotify destroy_func;		/* Destroy notification function for language bindings */
 };
 
-#define GNOME_UISIGFUNC(x) ((gpointer) x)
-
 
 /* Fills the specified menu shell with items created from the specified info.  If the specified
  * accelgroup is not NULL, then the menu's hotkeys are put into that accelgroup.  If accel_group is
@@ -242,35 +240,37 @@ void gnome_app_create_menus_with_data (GnomeApp *app, GnomeUIInfo *uiinfo, gpoin
  */
 void gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata);
 
+/* Fills the specified toolbar with buttons created from the specified info.  If accel_group is not
+ * NULL, then the items' accelerator keys are put into it.
+ */
+void gnome_app_fill_toolbar (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GtkAccelGroup *accel_group);
+
+/* Fills the specified toolbar with buttons created from the specified info, using the specified
+ * builder data -- this is intended for language bindings.  If accel_group is not NULL, then the
+ * items' accelerator keys are put into it.
+ */
+void gnome_app_fill_toolbar_custom (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata,
+				    GtkAccelGroup *accel_group);
+
 /* Constructs a toolbar and attaches it to the specified application window */
-void gnome_app_create_toolbar (GnomeApp *app, GnomeUIInfo *toolbarinfo);
+void gnome_app_create_toolbar (GnomeApp *app, GnomeUIInfo *uiinfo);
 
 /* Constructs a toolbar and attaches it to the specified application window -- this version is
  * intended for language bindings.
  */
-void gnome_app_create_toolbar_interp (GnomeApp *app, GnomeUIInfo *tbinfo,
+void gnome_app_create_toolbar_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
 				      GtkCallbackMarshal relay_func, gpointer data,
 				      GtkDestroyNotify destroy_func);
 
 /* Constructs a toolbar, sets all the user data pointers to the specified value, and attaches it to
  * the specified application window.
  */
-void gnome_app_create_toolbar_with_data (GnomeApp *app, GnomeUIInfo *toolbarinfo, gpointer user_data);
+void gnome_app_create_toolbar_with_data (GnomeApp *app, GnomeUIInfo *uiinfo, gpointer user_data);
 
 /* Constructs a toolbar and attaches it to the specified application window, using the specified
  * builder data -- intended for language bindings.
  */
-void gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *tbinfo, GnomeUIBuilderData *uibdata);
-
-/* FIXME: change name */
-GtkWidget *gnome_create_toolbar_with_data (GnomeApp *app,
-					 GnomeUIInfo *toolbarinfo,
-					 gpointer data);
-
-/* FIXME: change name */
-GtkWidget *gnome_create_toolbar_custom  (GnomeApp *app,
-					 GnomeUIInfo *tbinfo,
-					 GnomeUIBuilderData *uibdata);
+void gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata);
 
 /* FIXME: what does it do? */
 GtkWidget *gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos);
