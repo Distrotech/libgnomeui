@@ -1,3 +1,15 @@
+1998-12-18  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-procbar.c (gnome_proc_bar_draw): New static function.
+	(gnome_proc_bar_set_values): Save values in pb->last even if
+	the widget is not realized. Moved actual drawing code into
+	gnome_proc_bar_draw ().
+	(gnome_proc_bar_start): Call the callback here, not only add
+	a timeout for it.
+	(gnome_proc_bar_configure): Call gnome_proc_bar_draw () if the
+	widget is already realized. This fixes the bug that the procbar
+	was displaying garbage until the timeout was run the first time.
+
 1998-12-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.c (gnome_app_find_menu_pos): consider the

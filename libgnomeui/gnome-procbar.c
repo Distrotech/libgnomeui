@@ -36,6 +36,8 @@ static gint gnome_proc_bar_configure (GtkWidget *w, GdkEventConfigure *e, GnomeP
 static void gnome_proc_bar_size_request (GtkWidget *w, GtkRequisition *r, GnomeProcBar *pb);
 static void gnome_proc_bar_finalize (GtkObject *o);
 static void gnome_proc_bar_setup_colors (GnomeProcBar *pb);
+static void gnome_proc_bar_draw (GnomeProcBar *pb, unsigned val []);
+
 
 guint
 gnome_proc_bar_get_type (void)
@@ -193,6 +195,8 @@ gnome_proc_bar_configure (GtkWidget *w, GdkEventConfigure *e,
     gdk_draw_rectangle (w->window, w->style->black_gc, TRUE, 0, 0,
 			w->allocation.width, w->allocation.height);
 
+    gnome_proc_bar_draw (pb, pb->last);
+
     return TRUE;
 }
 
@@ -201,37 +205,20 @@ gnome_proc_bar_configure (GtkWidget *w, GdkEventConfigure *e,
 #define W (pb->bar)
 #define A (pb->bar->allocation)
 
-void
-gnome_proc_bar_set_values (GnomeProcBar *pb, unsigned val [])
+static void
+gnome_proc_bar_draw (GnomeProcBar *pb, unsigned val [])
 {
     unsigned tot = val [0];
     gint i;
-    gint change = 0;
     gint x;
     gint wr, w;
     GdkGC *gc;
 
-    g_return_if_fail (pb != NULL);
-    g_return_if_fail (GNOME_IS_PROC_BAR (pb));
-
-    if (!GTK_WIDGET_REALIZED (pb->bar))
-	return;
-
-    /* check if values changed */
-
-    for (i=0; i<pb->n+1; i++) {
-	if (val[i] != pb->last [i]) {
-	    change = 1;
-	    break;
-	}
-	pb->last [i] = val [i];
-    }
-
-    if (!change || !tot)
-	return;
-
     w = A.width;
     x = 0;
+
+    if (!GTK_WIDGET_REALIZED (pb->bar) || !tot)
+	return;
 
     gc = gdk_gc_new (pb->bar->window);
 
@@ -267,14 +254,48 @@ gnome_proc_bar_set_values (GnomeProcBar *pb, unsigned val [])
 #undef A
 
 void
+gnome_proc_bar_set_values (GnomeProcBar *pb, unsigned val [])
+{
+    unsigned tot = val [0];
+    gint i;
+    gint change = 0;
+
+    g_return_if_fail (pb != NULL);
+    g_return_if_fail (GNOME_IS_PROC_BAR (pb));
+
+    if (!GTK_WIDGET_REALIZED (pb->bar)) {
+	for (i=0; i<pb->n+1; i++)
+	    pb->last [i] = val [i];
+	return;
+    }
+
+    /* check if values changed */
+
+    for (i=0; i<pb->n+1; i++) {
+	if (val[i] != pb->last [i]) {
+	    change = 1;
+	    break;
+	}
+	pb->last [i] = val [i];
+    }
+
+    if (!change || !tot)
+	return;
+
+    gnome_proc_bar_draw (pb, val);
+}
+
+void
 gnome_proc_bar_start (GnomeProcBar *pb, gint time, gpointer data)
 
 {
     g_return_if_fail (pb != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (pb));
 
-    if (pb->cb)
+    if (pb->cb) {
+	pb->cb (data);
 	pb->tag = gtk_timeout_add (time, pb->cb, data);
+    }
 }
 
 void
