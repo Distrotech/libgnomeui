@@ -1,3 +1,8 @@
+1998-12-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.c (gnome_app_find_menu_pos): consider the
+	position after the tear off item to be the topmost one.
+	
 1998-12-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (icon_event): Propagate button-3 events to the
