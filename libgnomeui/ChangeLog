@@ -1,3 +1,8 @@
+1998-10-19  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (book_drop): something seems to have been screwed
+	up during owen's last commit. fixed now.
+
 1998-10-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_init): Set the GTK_CAN_FOCUS flag
