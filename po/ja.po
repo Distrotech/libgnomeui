@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-16 12:19+0900\n"
-"PO-Revision-Date: 2003-08-16 12:16+0900\n"
+"POT-Creation-Date: 2003-08-17 00:08+0900\n"
+"PO-Revision-Date: 2003-08-17 00:06+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -1152,7 +1152,7 @@ msgstr "アイコンの選択"
 
 #: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
-msgstr "アイコンを選んでください。"
+msgstr "アイコンを選んで下さい。"
 
 #: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
@@ -1179,12 +1179,12 @@ msgstr "ここにアイコンの画像を格納しているフォルダ名を入
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: '%s' は存在しないか、ディレクトリではありません"
+msgstr "GnomeIconSelection: '%s' は存在しないか、フォルダではありません"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection: ディレクトリ '%s' を開くことができません"
+msgstr "GnomeIconSelection: フォルダ '%s' を開くことができません"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
