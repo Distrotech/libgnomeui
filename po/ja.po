@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.110.1\n"
-"POT-Creation-Date: 2002-02-11 14:59+0100\n"
+"POT-Creation-Date: 2002-02-13 03:24+0100\n"
 "PO-Revision-Date: 2002-02-07 17:54+0900\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -15,106 +15,106 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:97
+#: libgnomeui/gnome-about.c:187
+msgid "Credits"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:210
 msgid "Written by"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:127
+#: libgnomeui/gnome-about.c:224
 #, fuzzy
 msgid "Documented by"
 msgstr "文書著作者"
 
-#: libgnomeui/gnome-about.c:156
+#: libgnomeui/gnome-about.c:238
 #, fuzzy
 msgid "Translated by"
 msgstr "翻訳者クレジット"
 
-#: libgnomeui/gnome-about.c:186
-msgid "Credits"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:310
+#: libgnomeui/gnome-about.c:335
 msgid "Program name"
 msgstr "プログラム名"
 
-#: libgnomeui/gnome-about.c:311
+#: libgnomeui/gnome-about.c:336
 msgid "The name of the program"
 msgstr "プログラムの名称"
 
-#: libgnomeui/gnome-about.c:318
+#: libgnomeui/gnome-about.c:343
 msgid "Program version"
 msgstr "プログラム バージョン"
 
-#: libgnomeui/gnome-about.c:319
+#: libgnomeui/gnome-about.c:344
 msgid "The version of the program"
 msgstr "プログラムのバージョン"
 
-#: libgnomeui/gnome-about.c:325
+#: libgnomeui/gnome-about.c:350
 msgid "Copyright string"
 msgstr "著作権文字列"
 
-#: libgnomeui/gnome-about.c:326
+#: libgnomeui/gnome-about.c:351
 msgid "Copyright information for the program"
 msgstr "プログラムの著作権情報"
 
-#: libgnomeui/gnome-about.c:333
+#: libgnomeui/gnome-about.c:358
 msgid "Comments string"
 msgstr "コメント文字列"
 
-#: libgnomeui/gnome-about.c:334
+#: libgnomeui/gnome-about.c:359
 msgid "Comments about the program"
 msgstr "プログラムについてのコメント"
 
-#: libgnomeui/gnome-about.c:340
+#: libgnomeui/gnome-about.c:365
 msgid "Authors"
 msgstr "作者一覧"
 
-#: libgnomeui/gnome-about.c:341
+#: libgnomeui/gnome-about.c:366
 msgid "List of authors of the programs"
 msgstr "プログラムの作者の一覧"
 
-#: libgnomeui/gnome-about.c:343
+#: libgnomeui/gnome-about.c:368
 msgid "Author entry"
 msgstr "作者エントリ"
 
-#: libgnomeui/gnome-about.c:344
+#: libgnomeui/gnome-about.c:369
 msgid "A single author entry"
 msgstr "単一作者のエントリ"
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:376
 msgid "Documenters"
 msgstr "文書著作者"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:377
 msgid "List of people documenting the program"
 msgstr "プロウラムの文書化を行った人の一覧"
 
-#: libgnomeui/gnome-about.c:354
+#: libgnomeui/gnome-about.c:379
 msgid "Documenter entry"
 msgstr "文書著作者エントリ"
 
-#: libgnomeui/gnome-about.c:355
+#: libgnomeui/gnome-about.c:380
 msgid "A single documenter entry"
 msgstr "単一の文書著作者のエントリ"
 
-#: libgnomeui/gnome-about.c:363
+#: libgnomeui/gnome-about.c:388
 msgid "Translator credits"
 msgstr "翻訳者クレジット"
 
-#: libgnomeui/gnome-about.c:364
+#: libgnomeui/gnome-about.c:389
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "翻訳者のクレジット。この文字列は翻訳可能としてマークすべきです"
 
-#: libgnomeui/gnome-about.c:371 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "ロゴ"
 
-#: libgnomeui/gnome-about.c:372
+#: libgnomeui/gnome-about.c:397
 msgid "A logo for the about box"
 msgstr "情報ダイアログのロゴ"
 
-#: libgnomeui/gnome-about.c:451
+#: libgnomeui/gnome-about.c:476
 #, c-format
 msgid "About %s"
 msgstr "%s について"
@@ -562,6 +562,7 @@ msgstr "アイテム 2 のヒント"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ファイル(_F)"
 
@@ -619,6 +620,7 @@ msgid "_Game"
 msgstr "ゲーム(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
@@ -809,11 +811,11 @@ msgstr "アプリケーションを設定する"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "情報(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "このアプリケーションに関して"
 
@@ -840,7 +842,7 @@ msgstr "新しいウインドウを開く"
 msgid "_Close This Window"
 msgstr "ウインドウを閉じる(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "現在のウインドウを閉じる"
 
@@ -912,60 +914,60 @@ msgstr "ゲーム終了(_E)"
 msgid "End the current game"
 msgstr "今のゲームを終了する"
 
-#: libgnomeui/gnome-app-helper.c:2573
+#: libgnomeui/gnome-app-helper.c:2578
 msgid "Both text and icons"
 msgstr "テキストとアイコンの両方"
 
-#: libgnomeui/gnome-app-helper.c:2574
+#: libgnomeui/gnome-app-helper.c:2579
 msgid "Icons only"
 msgstr "アイコンのみ"
 
-#: libgnomeui/gnome-app-helper.c:2575
+#: libgnomeui/gnome-app-helper.c:2580
 msgid "Text only"
 msgstr "テキストのみ"
 
-#: libgnomeui/gnome-app-helper.c:2626
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:103
+#: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
 msgstr " (リターンを押してください)"
 
-#: libgnomeui/gnome-app-util.c:147
+#: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
 msgstr "エラー: "
 
-#: libgnomeui/gnome-app-util.c:184
+#: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
 msgstr "警告: "
 
-#: libgnomeui/gnome-app-util.c:322
+#: libgnomeui/gnome-app-util.c:316
 msgid "y"
 msgstr "y"
 
-#: libgnomeui/gnome-app-util.c:323
+#: libgnomeui/gnome-app-util.c:317
 msgid "yes"
 msgstr "はい"
 
-#: libgnomeui/gnome-app-util.c:326
+#: libgnomeui/gnome-app-util.c:320
 msgid "n"
 msgstr "n"
 
-#: libgnomeui/gnome-app-util.c:327
+#: libgnomeui/gnome-app-util.c:321
 msgid "no"
 msgstr "いいえ"
 
-#: libgnomeui/gnome-app-util.c:366
+#: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
 msgstr " (はい か いいえ)"
 
-#: libgnomeui/gnome-app-util.c:367
+#: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
 msgstr " - よろしい? (はい か いいえ)"
 
-#: libgnomeui/gnome-app-util.c:699
+#: libgnomeui/gnome-app-util.c:689
 msgid "Progress"
 msgstr "経過"
 
@@ -1180,6 +1182,11 @@ msgstr "%Y年%m月%d日(%a) %T"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#: test-gnome/testgnome.xml.h:3
+#, fuzzy
+msgid "Exit the test"
+msgstr "プログラムの終了"
 
 #~ msgid "Author"
 #~ msgstr "作者"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 1.102.0\n"
-"POT-Creation-Date: 2002-02-11 14:59+0100\n"
+"POT-Creation-Date: 2002-02-13 03:24+0100\n"
 "PO-Revision-Date: 2001-08-16 14:12+0200\n"
 "Last-Translator: Ömer Fadýl USTA <omer_fad@hotmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -14,104 +14,104 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-9\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:97
-msgid "Written by"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:127
-msgid "Documented by"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:156
-msgid "Translated by"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:186
+#: libgnomeui/gnome-about.c:187
 msgid "Credits"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:310
+#: libgnomeui/gnome-about.c:210
+msgid "Written by"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:224
+msgid "Documented by"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:238
+msgid "Translated by"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:335
 msgid "Program name"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:311
+#: libgnomeui/gnome-about.c:336
 msgid "The name of the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:318
+#: libgnomeui/gnome-about.c:343
 msgid "Program version"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:319
+#: libgnomeui/gnome-about.c:344
 msgid "The version of the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:325
+#: libgnomeui/gnome-about.c:350
 msgid "Copyright string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:326
+#: libgnomeui/gnome-about.c:351
 msgid "Copyright information for the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:333
+#: libgnomeui/gnome-about.c:358
 msgid "Comments string"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:334
+#: libgnomeui/gnome-about.c:359
 msgid "Comments about the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:340
+#: libgnomeui/gnome-about.c:365
 msgid "Authors"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:341
+#: libgnomeui/gnome-about.c:366
 msgid "List of authors of the programs"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:343
+#: libgnomeui/gnome-about.c:368
 msgid "Author entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:344
+#: libgnomeui/gnome-about.c:369
 msgid "A single author entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:376
 msgid "Documenters"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:377
 msgid "List of people documenting the program"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:354
+#: libgnomeui/gnome-about.c:379
 msgid "Documenter entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:355
+#: libgnomeui/gnome-about.c:380
 msgid "A single documenter entry"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:363
+#: libgnomeui/gnome-about.c:388
 msgid "Translator credits"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:364
+#: libgnomeui/gnome-about.c:389
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:371 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:372
+#: libgnomeui/gnome-about.c:397
 msgid "A logo for the about box"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:451
+#: libgnomeui/gnome-about.c:476
 #, fuzzy, c-format
 msgid "About %s"
 msgstr "Hakkýnda"
@@ -547,6 +547,7 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr ""
 
@@ -604,6 +605,7 @@ msgid "_Game"
 msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr ""
 
@@ -795,12 +797,12 @@ msgstr ""
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 #, fuzzy
 msgid "_About"
 msgstr "Hakkýnda"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr ""
 
@@ -827,7 +829,7 @@ msgstr ""
 msgid "_Close This Window"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr ""
 
@@ -899,61 +901,61 @@ msgstr ""
 msgid "End the current game"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2573
+#: libgnomeui/gnome-app-helper.c:2578
 msgid "Both text and icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2574
+#: libgnomeui/gnome-app-helper.c:2579
 msgid "Icons only"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2575
+#: libgnomeui/gnome-app-helper.c:2580
 #, fuzzy
 msgid "Text only"
 msgstr "Metin"
 
-#: libgnomeui/gnome-app-helper.c:2626
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:103
+#: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:147
+#: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:184
+#: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:322
+#: libgnomeui/gnome-app-util.c:316
 msgid "y"
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:323
+#: libgnomeui/gnome-app-util.c:317
 msgid "yes"
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:326
+#: libgnomeui/gnome-app-util.c:320
 msgid "n"
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:327
+#: libgnomeui/gnome-app-util.c:321
 msgid "no"
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:366
+#: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:367
+#: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:699
+#: libgnomeui/gnome-app-util.c:689
 msgid "Progress"
 msgstr ""
 
@@ -1167,6 +1169,10 @@ msgstr ""
 
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
+msgstr ""
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
 msgstr ""
 
 #, fuzzy

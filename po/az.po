@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2002-02-11 14:59+0100\n"
+"POT-Creation-Date: 2002-02-13 03:24+0100\n"
 "PO-Revision-Date: 2001-12-19 19:49GMT+0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkic <linuxaz@azerimail.net>\n"
@@ -14,107 +14,107 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
 
-#: libgnomeui/gnome-about.c:97
+#: libgnomeui/gnome-about.c:187
+msgid "Credits"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:210
 msgid "Written by"
 msgstr ""
 
-#: libgnomeui/gnome-about.c:127
+#: libgnomeui/gnome-about.c:224
 #, fuzzy
 msgid "Documented by"
 msgstr "Sənədləşdirici"
 
-#: libgnomeui/gnome-about.c:156
+#: libgnomeui/gnome-about.c:238
 #, fuzzy
 msgid "Translated by"
 msgstr "Tərcüməçi kreditləri"
 
-#: libgnomeui/gnome-about.c:186
-msgid "Credits"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:310
+#: libgnomeui/gnome-about.c:335
 msgid "Program name"
 msgstr "Proqram adı"
 
-#: libgnomeui/gnome-about.c:311
+#: libgnomeui/gnome-about.c:336
 msgid "The name of the program"
 msgstr "Proqram tə'minatının adı"
 
-#: libgnomeui/gnome-about.c:318
+#: libgnomeui/gnome-about.c:343
 msgid "Program version"
 msgstr "Proqram buraxılışı"
 
-#: libgnomeui/gnome-about.c:319
+#: libgnomeui/gnome-about.c:344
 msgid "The version of the program"
 msgstr "Proqram buraxılışı"
 
-#: libgnomeui/gnome-about.c:325
+#: libgnomeui/gnome-about.c:350
 msgid "Copyright string"
 msgstr "Təlif haqqı qatarı"
 
-#: libgnomeui/gnome-about.c:326
+#: libgnomeui/gnome-about.c:351
 msgid "Copyright information for the program"
 msgstr "Proqramın təlif haqqı haqqında məlumat"
 
-#: libgnomeui/gnome-about.c:333
+#: libgnomeui/gnome-about.c:358
 msgid "Comments string"
 msgstr "Şərhlər qatarı"
 
-#: libgnomeui/gnome-about.c:334
+#: libgnomeui/gnome-about.c:359
 msgid "Comments about the program"
 msgstr "Proqram haqqında şərhlər"
 
-#: libgnomeui/gnome-about.c:340
+#: libgnomeui/gnome-about.c:365
 msgid "Authors"
 msgstr "Müəlliflər"
 
-#: libgnomeui/gnome-about.c:341
+#: libgnomeui/gnome-about.c:366
 msgid "List of authors of the programs"
 msgstr "Proqramların müəlliflərinin siyahısı"
 
-#: libgnomeui/gnome-about.c:343
+#: libgnomeui/gnome-about.c:368
 msgid "Author entry"
 msgstr "Müəllif girişi"
 
-#: libgnomeui/gnome-about.c:344
+#: libgnomeui/gnome-about.c:369
 msgid "A single author entry"
 msgstr "Tək müəllif girişi"
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:376
 msgid "Documenters"
 msgstr "Sənədləşdiricilər"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:377
 msgid "List of people documenting the program"
 msgstr "Proqram sənədlərini hazırlayanların siyahısı"
 
-#: libgnomeui/gnome-about.c:354
+#: libgnomeui/gnome-about.c:379
 msgid "Documenter entry"
 msgstr "Sənədləşdirici girişi"
 
-#: libgnomeui/gnome-about.c:355
+#: libgnomeui/gnome-about.c:380
 msgid "A single documenter entry"
 msgstr "Tək sənədləşdirici girişi"
 
-#: libgnomeui/gnome-about.c:363
+#: libgnomeui/gnome-about.c:388
 msgid "Translator credits"
 msgstr "Tərcüməçi kreditləri"
 
-#: libgnomeui/gnome-about.c:364
+#: libgnomeui/gnome-about.c:389
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Tərcüməçi kreditləri. Bu qatar tərcüməediləbilən olaraq içarələnməlidir"
 
-#: libgnomeui/gnome-about.c:371 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Loqo"
 
-#: libgnomeui/gnome-about.c:372
+#: libgnomeui/gnome-about.c:397
 msgid "A logo for the about box"
 msgstr "Haqqında qutusunun loqosu"
 
-#: libgnomeui/gnome-about.c:451
+#: libgnomeui/gnome-about.c:476
 #, c-format
 msgid "About %s"
 msgstr "%s Haqqında"
@@ -567,6 +567,7 @@ msgstr "İkinci üzv üçün ipucu"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fayl"
 
@@ -624,6 +625,7 @@ msgid "_Game"
 msgstr "_Oyun"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Yardım"
 
@@ -814,11 +816,11 @@ msgstr "Proqram təminatını sazla"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Haqqında"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Proqram təminatı haqqında"
 
@@ -845,7 +847,7 @@ msgstr "Yeni pəncərə yarat"
 msgid "_Close This Window"
 msgstr "Bu Pəncərəni _Qapat"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Cari pəncərəni qapat"
 
@@ -917,61 +919,61 @@ msgstr "Oyunu Qu_rtar"
 msgid "End the current game"
 msgstr "Cari oyunu qapat"
 
-#: libgnomeui/gnome-app-helper.c:2573
+#: libgnomeui/gnome-app-helper.c:2578
 msgid "Both text and icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2574
+#: libgnomeui/gnome-app-helper.c:2579
 msgid "Icons only"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2575
+#: libgnomeui/gnome-app-helper.c:2580
 #, fuzzy
 msgid "Text only"
 msgstr "Mətn"
 
-#: libgnomeui/gnome-app-helper.c:2626
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
 
-#: libgnomeui/gnome-app-util.c:103
+#: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
 msgstr " (daxiletməyə bas)"
 
-#: libgnomeui/gnome-app-util.c:147
+#: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
 msgstr "XƏTA: "
 
-#: libgnomeui/gnome-app-util.c:184
+#: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
 msgstr "Xəbərdarlıq: "
 
-#: libgnomeui/gnome-app-util.c:322
+#: libgnomeui/gnome-app-util.c:316
 msgid "y"
 msgstr "b"
 
-#: libgnomeui/gnome-app-util.c:323
+#: libgnomeui/gnome-app-util.c:317
 msgid "yes"
 msgstr "bəli"
 
-#: libgnomeui/gnome-app-util.c:326
+#: libgnomeui/gnome-app-util.c:320
 msgid "n"
 msgstr "x"
 
-#: libgnomeui/gnome-app-util.c:327
+#: libgnomeui/gnome-app-util.c:321
 msgid "no"
 msgstr "xeyr"
 
-#: libgnomeui/gnome-app-util.c:366
+#: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
 msgstr " (bəli və ya xeyr)"
 
-#: libgnomeui/gnome-app-util.c:367
+#: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
 msgstr "  - Oldu? (bəli və ya xeyr)"
 
-#: libgnomeui/gnome-app-util.c:699
+#: libgnomeui/gnome-app-util.c:689
 msgid "Progress"
 msgstr "Gedişat"
 
@@ -1191,6 +1193,11 @@ msgstr "%a %b %d %T %Y"
 #, fuzzy
 msgid "Sans 14"
 msgstr "sans 12"
+
+#: test-gnome/testgnome.xml.h:3
+#, fuzzy
+msgid "Exit the test"
+msgstr "Proqramdan çıx"
 
 #~ msgid "Author"
 #~ msgstr "Müəllif"
