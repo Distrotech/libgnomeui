@@ -368,20 +368,36 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 	for (i = gde->_priv->lower_hour; i <= gde->_priv->upper_hour; i++){
 		GtkWidget *item, *submenu;
 		hour_info_t *hit;
-		char buffer[40];
+		char buffer [40];
 		char *str_utf8;
 
 		mtm->tm_hour = i;
 		mtm->tm_min  = 0;
 
-		if (strftime (buffer, sizeof (buffer), "%X", mtm) == 0)
-			strcpy (buffer, "???");
-
+		if (gde->_priv->flags & GNOME_DATE_EDIT_24_HR) {
+			if (strftime (buffer, sizeof (buffer),
+				      "%H:00", mtm) == 0)
+				strcpy (buffer, "???");
+		} else {
+			if (strftime (buffer, sizeof (buffer),
+				      "%I:00 %p ", mtm) == 0)
+				strcpy (buffer, "???");
+		}
 		buffer[sizeof(buffer)-1] = '\0';
 		str_utf8 = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
 		item = gtk_menu_item_new_with_label (str_utf8 ? str_utf8 : "");
 		g_free (str_utf8);
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+#if 0
+		hit = g_new (hour_info_t, 1);
+		hit->hour = g_strdup (buffer);
+		hit->gde  = gde;
+		g_signal_connect_data (item, "activate",
+				       G_CALLBACK (set_time),
+				       hit,
+				       (GCallbackNotify) free_resources,
+				       0);
+#endif
 		gtk_widget_show (item);
 
 		submenu = gtk_menu_new ();
@@ -391,9 +407,15 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 
 			mtm->tm_min = j;
 
-			if (strftime (buffer, sizeof (buffer), "%X", mtm) == 0)
-				strcpy (buffer, "???");
-
+			if (gde->_priv->flags & GNOME_DATE_EDIT_24_HR) {
+				if (strftime (buffer, sizeof (buffer),
+					      "%H:%M", mtm) == 0)
+					strcpy (buffer, "???");
+			} else {
+				if (strftime (buffer, sizeof (buffer),
+					      "%I:%M %p", mtm) == 0)
+					strcpy (buffer, "???");
+			}
 			buffer[sizeof(buffer)-1] = '\0';
 			str_utf8 = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
 			mins = gtk_menu_item_new_with_label (str_utf8 ? str_utf8 : "");
@@ -670,9 +692,13 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 	g_free (str_utf8);
 
 	/* Set the time */
-	if (strftime (buffer, sizeof (buffer), "%X", mytm) == 0)
-		strcpy (buffer, "???");
-
+	if (gde->_priv->flags & GNOME_DATE_EDIT_24_HR) {
+		if (strftime (buffer, sizeof (buffer), "%H:%M", mytm) == 0)
+			strcpy (buffer, "???");
+	} else {
+		if (strftime (buffer, sizeof (buffer), "%I:%M %p", mytm) == 0)
+			strcpy (buffer, "???");
+	}
 	buffer[sizeof(buffer)-1] = '\0';
 
 	str_utf8 = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
