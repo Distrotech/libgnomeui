@@ -246,8 +246,8 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 	page = GTK_NOTEBOOK (pbox->notebook)->cur_page->child;
 	g_assert (page != NULL);
 
-	dirty = (gboolean) gtk_object_get_data (GTK_OBJECT (page),
-						GNOME_PROPERTY_BOX_DIRTY);
+	dirty = GPOINTER_TO_INT(gtk_object_get_data (GTK_OBJECT (page),
+						     GNOME_PROPERTY_BOX_DIRTY));
 	
 	/* Choose which style we did */
 	if (pbox->apply_button){
@@ -340,6 +340,8 @@ gnome_property_box_set_modified (GnomePropertyBox *property_box, gboolean state)
 
 	g_return_if_fail (property_box != NULL);
 	g_return_if_fail (GNOME_IS_PROPERTY_BOX (property_box));
+	g_return_if_fail (property_box->notebook);
+	g_return_if_fail (GTK_NOTEBOOK (property_box->notebook)->cur_page);
 	
 	page = GTK_NOTEBOOK (property_box->notebook)->cur_page->child;
 	g_assert (page != NULL);

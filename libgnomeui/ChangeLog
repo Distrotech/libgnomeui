@@ -1,3 +1,9 @@
+Wed Nov 10 20:15:10 1999  George Lebl <jirka@5z.com>
+
+	* gnome-propertybox.c: use GPOINTER_TO_INT to cast from pointer
+	  to int. in _set_modified method use the same assert checks as in
+	  the _changed method.
+
 1999-11-09  Elliot Lee  <sopwith@redhat.com>
 	* gnome-helpsys.[ch]: gnome_widget_set_tooltip()
 	* gnome-popup-menu.[ch]: It works for all widgets (no_window widgets require extra care & feeding :)
