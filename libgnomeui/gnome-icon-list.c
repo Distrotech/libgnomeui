@@ -236,7 +236,10 @@ static void
 icon_get_height (Icon *icon, int *icon_height, int *text_height)
 {
 	double d_icon_height, dy1, dy2;
-	g_object_get (G_OBJECT (icon->image), "height", &d_icon_height, NULL);
+	if (icon->image != NULL)
+		g_object_get (G_OBJECT (icon->image), "height", &d_icon_height, NULL);
+	else
+		d_icon_height = 0.0;
 	gnome_canvas_item_get_bounds (GNOME_CANVAS_ITEM (icon->text), NULL, &dy1, NULL, &dy2);
 	*icon_height = d_icon_height;
 	*text_height = dy2 - dy1;
@@ -284,26 +287,29 @@ gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 
 	priv = gil->_priv;
 
-	g_object_get (G_OBJECT (icon->image), "height", &d_icon_image_height, NULL);
-	icon_image_height = d_icon_image_height;
-	g_assert(icon_image_height != 0);
-	if (icon_height > icon_image_height)
-		y_offset = (icon_height - icon_image_height) / 2;
-	else
-		y_offset = 0;
+	if (icon->image != NULL) {
+		g_object_get (G_OBJECT (icon->image), "height", &d_icon_image_height, NULL);
+		icon_image_height = d_icon_image_height;
+		g_assert(icon_image_height != 0);
+		if (icon_height > icon_image_height)
+			y_offset = (icon_height - icon_image_height) / 2;
+		else
+			y_offset = 0;
 
-	g_object_get (G_OBJECT (icon->image), "width", &d_icon_image_width, NULL);
-	icon_image_width = d_icon_image_width;
-	g_assert(icon_image_width != 0);
-	if (priv->icon_width > icon_image_width)
-		x_offset = (priv->icon_width - icon_image_width) / 2;
-	else
-		x_offset = 0;
+		g_object_get (G_OBJECT (icon->image), "width", &d_icon_image_width, NULL);
+		icon_image_width = d_icon_image_width;
+		g_assert(icon_image_width != 0);
+		if (priv->icon_width > icon_image_width)
+			x_offset = (priv->icon_width - icon_image_width) / 2;
+		else
+			x_offset = 0;
+
+		gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->image),
+				       "x",  (double) (x + x_offset),
+				       "y",  (double) (y + y_offset),
+				       NULL);
+	}
 	
-	gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->image),
-			       "x",  (double) (x + x_offset),
-			       "y",  (double) (y + y_offset),
-			       NULL);
 
 	gnome_icon_text_item_setxy (icon->text,
 				    x,
@@ -962,16 +968,20 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 
 	icon->icon_filename = g_strdup (icon_filename);
 
-	icon->image = GNOME_CANVAS_PIXBUF (gnome_canvas_item_new (
-		GNOME_CANVAS_GROUP (canvas->root),
-		GNOME_TYPE_CANVAS_PIXBUF,
-		"x", 0.0,
-		"y", 0.0,
-		"width", (double) gdk_pixbuf_get_width (im),
-		"height", (double) gdk_pixbuf_get_height (im),
-		"pixbuf", im,
-		"anchor", GTK_ANCHOR_NW,
-		NULL));
+	if (im != NULL) {
+		icon->image = GNOME_CANVAS_PIXBUF (gnome_canvas_item_new (
+			GNOME_CANVAS_GROUP (canvas->root),
+			GNOME_TYPE_CANVAS_PIXBUF,
+			"x", 0.0,
+			"y", 0.0,
+			"width", (double) gdk_pixbuf_get_width (im),
+			"height", (double) gdk_pixbuf_get_height (im),
+			"pixbuf", im,
+			"anchor", GTK_ANCHOR_NW,
+			NULL));
+	} else {
+		icon->image = NULL;
+	}
 
 	icon->text = GNOME_ICON_TEXT_ITEM (gnome_canvas_item_new (
 		GNOME_CANVAS_GROUP (canvas->root),
@@ -982,9 +992,11 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 					0, 0, priv->icon_width, NULL,
 					text, priv->is_editable, priv->static_text);
 	
-	g_signal_connect (G_OBJECT (icon->image), "event",
-			  G_CALLBACK (icon_event),
-			  icon);
+	if (icon->image != NULL) {
+		g_signal_connect (G_OBJECT (icon->image), "event",
+				  G_CALLBACK (icon_event),
+				  icon);
+	}
 	icon->text_event_id = g_signal_connect (G_OBJECT (icon->text), "event",
 						G_CALLBACK (icon_event),
 						icon);
@@ -1193,11 +1205,19 @@ icon_destroy (Icon *icon)
 {
 	if (icon->destroy)
 		(* icon->destroy) (icon->data);
+	icon->destroy = NULL;
+	icon->data = NULL;
 
 	g_free (icon->icon_filename);
+	icon->icon_filename = NULL;
 
-	gtk_object_destroy (GTK_OBJECT (icon->image));
+	if (icon->image != NULL)
+		gtk_object_destroy (GTK_OBJECT (icon->image));
+	icon->image = NULL;
+
 	gtk_object_destroy (GTK_OBJECT (icon->text));
+	icon->text = NULL;
+
 	g_free (icon);
 }
 
@@ -1780,10 +1800,13 @@ icon_is_in_area (Icon *icon, int x1, int y1, int x2, int y2)
 	if (x1 == x2 && y1 == y2)
 		return FALSE;
 
-	gnome_canvas_item_get_bounds (GNOME_CANVAS_ITEM (icon->image), &ix1, &iy1, &ix2, &iy2);
+	if (icon->image != NULL) {
+		gnome_canvas_item_get_bounds (GNOME_CANVAS_ITEM (icon->image),
+					      &ix1, &iy1, &ix2, &iy2);
 
-	if (ix1 <= x2 && iy1 <= y2 && ix2 >= x1 && iy2 >= y1)
-		return TRUE;
+		if (ix1 <= x2 && iy1 <= y2 && ix2 >= x1 && iy2 >= y1)
+			return TRUE;
+	}
 
 	gnome_canvas_item_get_bounds (GNOME_CANVAS_ITEM (icon->text), &ix1, &iy1, &ix2, &iy2);
 
@@ -2854,10 +2877,12 @@ gnome_icon_list_get_icon_at (GnomeIconList *gil, int x, int y)
 
 	for (n = 0; n < priv->icon_list->len; n++) {
 		Icon *icon = g_array_index(priv->icon_list, Icon*, n);
-		GnomeCanvasItem *image = GNOME_CANVAS_ITEM (icon->image);
+		/* Note: this isn't the checking cast, because icon->image
+		 * could be NULL */
+		GnomeCanvasItem *image = (GnomeCanvasItem *) (icon->image);
 		GnomeCanvasItem *text = GNOME_CANVAS_ITEM (icon->text);
 
-		if (wx >= image->x1 && wx <= image->x2 && wy >= image->y1 && wy <= image->y2) {
+		if (image != NULL && wx >= image->x1 && wx <= image->x2 && wy >= image->y1 && wy <= image->y2) {
 			dist = (* GNOME_CANVAS_ITEM_GET_CLASS (image)->point) (
 				image,
 				wx, wy,
