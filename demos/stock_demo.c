@@ -407,6 +407,17 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
 	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_SPELLCHECK));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_SPELLCHECK));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Spellchecker");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_TRASH));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
@@ -510,6 +521,17 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
 	w = gtk_label_new("Mail");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_MAIL_NEW));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_MAIL_NEW));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("New Mail");
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 

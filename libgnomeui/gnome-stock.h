@@ -115,8 +115,10 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_MAIL_SND    "Send Mail"
 #define GNOME_STOCK_PIXMAP_MAIL_RPL    "Reply to Mail"
 #define GNOME_STOCK_PIXMAP_MAIL_FWD    "Forward Mail"
+#define GNOME_STOCK_PIXMAP_MAIL_NEW    "New Mail"
 #define GNOME_STOCK_PIXMAP_TRASH       "Trash"
 #define GNOME_STOCK_PIXMAP_TRASH_FULL  "Trash Full"
+#define GNOME_STOCK_PIXMAP_SPELLCHECK  "Spellchecker"
 #define GNOME_STOCK_PIXMAP_ABOUT       "About"
 #define GNOME_STOCK_PIXMAP_QUIT        "Quit"
 
@@ -338,8 +340,10 @@ GtkWidget             *gnome_stock_or_ordinary_button (char *type);
 #define GNOME_STOCK_MENU_MAIL_SND   "Menu_Send Mail"
 #define GNOME_STOCK_MENU_MAIL_RPL   "Menu_Reply to Mail"
 #define GNOME_STOCK_MENU_MAIL_FWD   "Menu_Forward Mail"
+#define GNOME_STOCK_MENU_MAIL_NEW   "Menu_New Mail"
 #define GNOME_STOCK_MENU_TRASH      "Menu_Trash"
 #define GNOME_STOCK_MENU_TRASH_FULL "Menu_Trash Full"
+#define GNOME_STOCK_MENU_SPELLCHECK "Menu_Spellchecker"
 
 #define GNOME_STOCK_MENU_EXIT     GNOME_STOCK_MENU_QUIT
 
