@@ -1,3 +1,8 @@
+1999-03-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-color-picker.c (gnome_color_picker_init): Use the Imlib
+	visual for the drawing area.
+
 1999-03-29  Owen Taylor  <otaylor@redhat.com>
 
 	[ Fix applied until Raster gets back and we find a better

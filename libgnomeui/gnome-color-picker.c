@@ -298,13 +298,10 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 	gtk_container_add (GTK_CONTAINER (alignment), frame);
 	gtk_widget_show (frame);
 
-	gtk_widget_push_visual (gdk_rgb_get_visual ());
-	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
+	gtk_widget_push_visual (gdk_imlib_get_visual ());
+	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 
 	cp->da = gtk_drawing_area_new ();
-
-	gtk_widget_pop_colormap ();
-	gtk_widget_pop_visual ();
 
 	gtk_drawing_area_size (GTK_DRAWING_AREA (cp->da), COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
 	gtk_signal_connect (GTK_OBJECT (cp->da), "expose_event",
@@ -333,6 +330,9 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 						       gnome_color_picker_stipple_height);
 	}
 	
+	gtk_widget_pop_colormap ();
+	gtk_widget_pop_visual ();
+
 	/* Start with opaque black, dither on, alpha disabled */
 
 	cp->r = 0.0;
