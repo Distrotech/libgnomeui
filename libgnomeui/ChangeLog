@@ -1,3 +1,7 @@
+Mon Apr 13 22:48:11 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.c: added conversions DEG/RAD/GRAD
+
 Mon Apr 13 22:17:02 1998  George Lebl  <jirka@5z.com>
 
 	* Makefile.am: added pixmap subdir
