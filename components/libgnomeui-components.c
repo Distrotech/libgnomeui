@@ -46,8 +46,6 @@ image_entry_get_object_fn (BonoboItemHandler *h, const char *item_name,
     guint preview_x = 0, preview_y = 0;
     GnomeSelector *selector = NULL;
 
-    g_message (G_STRLOC ": `%s' - %d", item_name, only_if_exists);
-
     options = bonobo_item_option_parse (item_name);
 
     for (c = options; c; c = c->next) {
@@ -96,8 +94,6 @@ libgnomeui_components_factory (BonoboGenericFactory *this,
     if (!initialized) {
 	initialized = TRUE;             
     }
-
-    g_message (G_STRLOC ": `%s'", object_id);
 
     if (!strcmp (object_id, "OAFIID:GNOME_UI_Component_IconSelector")) {
 	GnomeSelectorFactory *factory;
