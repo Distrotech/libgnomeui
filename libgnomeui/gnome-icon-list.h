@@ -2,25 +2,30 @@
  *
  * Copyright (C) 1998 The Free Software Foundation
  *
- * Author: Federico Mena <federico@nuclecu.unam.mx>
+ * Authors:
+ *   Federico Mena   <federico@nuclecu.unam.mx>
+ *   Miguel de Icaza <miguel@nuclecu.unam.mx>
  */
 
-#ifndef GNOME_ICON_LIST_H
-#define GNOME_ICON_LIST_H
+#ifndef _GNOME_ICON_LIST_H_
+#define _GNOME_ICON_LIST_H_
 
-#include <gtk/gtkcontainer.h>
+/*
+ * This define should be removed after GnomeLibs 0.40 has been released
+ * and any code depending on the old ICON_LIST code should be fixed by then.
+ */
+#define GNOME_ICON_LIST_VERSION2
+
 #include <libgnome/gnome-defs.h>
+#include <libgnomeui/gnome-canvas.h>
+
 #ifndef __GDK_IMLIB_H__
 #include <gdk_imlib.h>
 #endif
 
-BEGIN_GNOME_DECLS
-
-
-#define GNOME_ICON_LIST(obj)         GTK_CHECK_CAST (obj, gnome_icon_list_get_type (), GnomeIconList)
-#define GNOME_ICON_LIST_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_icon_list_get_type (), GnomeIconListClass)
-#define GNOME_IS_ICON_LIST(obj)      GTK_CHECK_TYPE (obj, gnome_icon_list_get_type ())
-
+#define GNOME_ICON_LIST(obj)     GTK_CHECK_CAST (obj, gnome_icon_list_get_type (), GnomeIconList)
+#define GNOME_ICON_LIST_CLASS(k) GTK_CHECK_CLASS_CAST (k, gnome_icon_list_get_type (), GnomeIconListClass)
+#define GNOME_IS_ICON_LIST(obj)  GTK_CHECK_TYPE (obj, gnome_icon_list_get_type ())
 
 typedef enum {
 	GNOME_ICON_LIST_ICONS,
@@ -28,144 +33,134 @@ typedef enum {
 	GNOME_ICON_LIST_TEXT_RIGHT
 } GnomeIconListMode;
 
-typedef struct _GnomeIconList      GnomeIconList;
-typedef struct _GnomeIconListClass GnomeIconListClass;
+typedef struct {
+	GnomeCanvas canvas;
 
-struct _GnomeIconList {
-	GtkContainer container;
+	GtkAdjustment *adj;	/* The scrolling adjustment we use */
+	
+	int icons;		/* Number of icons in the IconList */
+	GList *icon_list;	/* The list of icons */
+	
+	int frozen;		/* frozen count */
+	int dirty;		/* dirty flag */
 
-	int icons;
-	GList *icon_list;
-	GList *icon_list_end;
-
+	/* Various display spacing configuration */
 	int row_spacing;
 	int col_spacing;
 	int text_spacing;
 	int icon_border;
 
-	int x_offset;
-	int y_offset;
-
-	int max_icon_width;
-	int max_icon_height;
-	int max_pixmap_width;
-	int max_pixmap_height;
-	int max_text_width;
-	int max_text_height;
-
-	int icon_rows;
-	int icon_cols;
-
+	/* Separators used to wrap the text displayed below the icon */
 	char *separators;
 
+	/* Display mode */
 	GnomeIconListMode mode;
-	unsigned int frozen : 1;
-	unsigned int dirty  : 1;
-	GdkWindow *ilist_window;
-	int ilist_window_width;
-	int ilist_window_height;
 
-	GdkGC *fg_gc;
-	GdkGC *bg_gc;
-
-	GtkShadowType border_type;
+	/* Selection  */
 	GtkSelectionMode selection_mode;
 
+	/* A list of integers with the indexes of the current selection */
 	GList *selection;
 
-	GtkWidget *vscrollbar;
-	GtkWidget *hscrollbar;
-	GtkPolicyType vscrollbar_policy;
-	GtkPolicyType hscrollbar_policy;
-	int vscrollbar_width;
-	int hscrollbar_height;
-	int last_selected;
-	int last_clicked;
-	int desired_text_width;
-};
+	/* Internal: used during band-selection */
+	GList *preserve_selection; 
 
-struct _GnomeIconListClass {
-	GtkContainerClass parent_class;
+	int icon_width;		/* The icon width */
+	int is_editable;	/* Whether the icon names are editable or not  */
+	
+	int last_selected;	/* Last icon selected */
+	void *last_clicked;	/* Icon * */
 
-	void (* select_icon)   (GnomeIconList *ilist, gint num, GdkEvent *event);
-	void (* unselect_icon) (GnomeIconList *ilist, gint num, GdkEvent *event);
-};
+	/* Timed scrolling */
+	int timer_tag;		/* timeout tag for autoscrolling */
+	int value_diff;		/* change the adjustment value by this */
+	
+	/* Opaque to the user */
+	GList *lines;
 
-guint          gnome_icon_list_get_type            (void);
-GtkWidget     *gnome_icon_list_new                 (void);
-
-void           gnome_icon_list_set_selection_mode  (GnomeIconList *ilist, GtkSelectionMode mode);
-void           gnome_icon_list_set_policy          (GnomeIconList *ilist,
-						    GtkPolicyType vscrollbar_policy,
-						    GtkPolicyType hscrollbar_policy);
-
-int            gnome_icon_list_append              (GnomeIconList *ilist, const char *icon_filename, const char *text);
-void           gnome_icon_list_insert              (GnomeIconList *ilist, int pos, const char *icon_filename, const char *text);
-void           gnome_icon_list_remove              (GnomeIconList *ilist, int pos);
-
-int            gnome_icon_list_append_imlib        (GnomeIconList *ilist, GdkImlibImage *im, char *text);
-void           gnome_icon_list_clear               (GnomeIconList *ilist);
-
-void           gnome_icon_list_set_icon_data       (GnomeIconList *ilist, int pos, gpointer data);
-void           gnome_icon_list_set_icon_data_full  (GnomeIconList *ilist, int pos, gpointer data,
-						    GtkDestroyNotify destroy);
-gpointer       gnome_icon_list_get_icon_data       (GnomeIconList *ilist, int pos);
-int            gnome_icon_list_find_icon_from_data (GnomeIconList *ilist, gpointer data);
-
-void           gnome_icon_list_select_icon         (GnomeIconList *ilist, int pos);
-void           gnome_icon_list_unselect_icon       (GnomeIconList *ilist, int pos);
-
-void           gnome_icon_list_freeze              (GnomeIconList *ilist);
-void           gnome_icon_list_thaw                (GnomeIconList *ilist);
-
-void           gnome_icon_list_moveto              (GnomeIconList *ilist, int pos, double yalign);
-GtkVisibility  gnome_icon_list_icon_is_visible     (GnomeIconList *ilist, int pos);
-
-void           gnome_icon_list_set_foreground     (GnomeIconList *ilist, int pos, GdkColor *color);
-void           gnome_icon_list_set_background     (GnomeIconList *ilist, int pos, GdkColor *color);
-
-void           gnome_icon_list_set_row_spacing    (GnomeIconList *ilist, int spacing);
-void           gnome_icon_list_set_col_spacing    (GnomeIconList *ilist, int spacing);
-void           gnome_icon_list_set_text_spacing   (GnomeIconList *ilist, int spacing);
-void           gnome_icon_list_set_icon_border    (GnomeIconList *ilist, int spacing);
-
-void           gnome_icon_list_set_separators     (GnomeIconList *ilist, const char *separators);
-
-void           gnome_icon_list_set_mode           (GnomeIconList *ilist, GnomeIconListMode mode);
-void           gnome_icon_list_set_border         (GnomeIconList *ilist, GtkShadowType border);
-
-int            gnome_icon_list_get_icon_at        (GnomeIconList *ilist, int x, int y);
-void           gnome_icon_list_unselect_all       (GnomeIconList *ilist, GdkEvent *event, void *keep);
-
-
-/* Functions to wrap text as for icons, tooltips and such */
+	/* Mouse band selection state */
+	double sel_start_x;
+	double sel_start_y;
+	GnomeCanvasItem *sel_rect;
+} GnomeIconList;
 
 typedef struct {
-	GList *rows;
-	GdkFont *font;
-	int width;
-	int height;
-	int baseline_skip;
-} GnomeIconTextInfo;
+	GnomeCanvasClass parent_class;
 
-/* Frees a GnomeIconTextInfo structure.  You should call this instead of freeing it yourself. */
-void gnome_icon_text_info_free (GnomeIconTextInfo *ti);
+	void     (*select_icon)    (GnomeIconList *gil, gint num, GdkEvent *event);
+	void     (*unselect_icon)  (GnomeIconList *gil, gint num, GdkEvent *event);
+	gboolean (*text_changed)   (GnomeIconList *gil, gint num, const char *new_text);
+} GnomeIconListClass;
 
-/* Wraps the specified text and returns a new GnomeIconTextInfo structure.  The text is word-wrapped
- * as defined by the specified separator characters (or just at spaces if separators is NULL).  The
- * max_width parameter specifies the width at which text will be wrapped.  If a word is too long to
- * be wrapped and confine is TRUE, it will be force-split somewhere in the middle; if confine is
- * FALSE, then the text may exceed the specified max_width.  */
-GnomeIconTextInfo *gnome_icon_layout_text (GdkFont *font, char *text, char *separators,
-					   int max_width, int confine);
+guint          gnome_icon_list_get_type            (void);
+GtkWidget     *gnome_icon_list_new                 (guint         icon_width, 
+						    GtkAdjustment *adj,
+						    gboolean      is_editable);
 
-/* Paints text that was laid out by gnome_icon_layout_text().  The text is painted at the specified
- * coordinates, with the specified justification.
- */
-void gnome_icon_paint_text (GnomeIconTextInfo *ti, GdkDrawable *drawable, GdkGC *gc,
-			    int x, int y, GtkJustification just);
+/* To avoid excesive recomputes during insertion/deletion */
+void           gnome_icon_list_freeze              (GnomeIconList *gil);
+void           gnome_icon_list_thaw                (GnomeIconList *gil);
+
+/* Content manupulation on the Icon List */
+void           gnome_icon_list_insert              (GnomeIconList *gil,
+						    int pos, const char *icon_filename,
+						    const char *text);
+
+void           gnome_icon_list_insert_imlib        (GnomeIconList *gil,
+						    int pos, GdkImlibImage *im,
+						    const char *text);
+
+int            gnome_icon_list_append              (GnomeIconList *gil,
+						    const char *icon_filename,
+						    const char *text);
+int            gnome_icon_list_append_imlib        (GnomeIconList *gil,
+						    GdkImlibImage *im,
+						    char *text);
+void           gnome_icon_list_clear               (GnomeIconList *gil);
+void           gnome_icon_list_remove              (GnomeIconList *gil, int pos);
 
 
-END_GNOME_DECLS
+/* Managing the selection */
+void           gnome_icon_list_set_selection_mode  (GnomeIconList *gil,
+						    GtkSelectionMode mode);
+void           gnome_icon_list_select_icon         (GnomeIconList *gil,
+						    int idx);
+void           gnome_icon_list_unselect_icon       (GnomeIconList *gil,
+						    int pos);
+int            gnome_icon_list_unselect_all        (GnomeIconList *gil,
+						    GdkEvent *event, void *keep);
 
-#endif
+/* Setting the spacing values */
+void           gnome_icon_list_set_icon_width      (GnomeIconList *gil,
+						    int w);
+void           gnome_icon_list_set_row_spacing     (GnomeIconList *gil,
+						    int pixels);
+void           gnome_icon_list_set_col_spacing     (GnomeIconList *gil,
+						    int pixels);
+void           gnome_icon_list_set_text_spacing    (GnomeIconList *gil,
+						    int pixels);
+void           gnome_icon_list_set_icon_border     (GnomeIconList *gil,
+						    int pixels);
+
+/* Attaching information to the icons */
+void           gnome_icon_list_set_icon_data       (GnomeIconList *gil,
+						    int pos, gpointer data);
+void           gnome_icon_list_set_icon_data_full  (GnomeIconList *gil,
+						    int pos, gpointer data,
+						    GtkDestroyNotify destroy);
+int            gnome_icon_list_find_icon_from_data (GnomeIconList *gil,
+						    gpointer data);
+gpointer       gnome_icon_list_get_icon_data       (GnomeIconList *gil,
+						    int pos);
+
+/* Visibility */
+void           gnome_icon_list_moveto              (GnomeIconList *gil,
+						    int pos, double yalign);
+GtkVisibility  gnome_icon_list_is_visible          (GnomeIconList *gil,
+						    int pos);
+
+#endif _GNOME_ICON_LIST_H_
+
+
+
+

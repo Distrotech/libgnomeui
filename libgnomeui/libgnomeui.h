@@ -29,6 +29,7 @@
 #include "libgnomeui/gnome-geometry.h"
 #include "libgnomeui/gnome-gtk-utils.h"
 #include "libgnomeui/gnome-icon-list.h"
+#include "libgnomeui/gnome-icon-item.h"
 #include "libgnomeui/gnome-icon-sel.h"
 #include "libgnomeui/gnome-less.h"
 #include "libgnomeui/gnome-messagebox.h"

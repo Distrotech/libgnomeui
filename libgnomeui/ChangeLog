@@ -1,3 +1,26 @@
+1998-10-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c, gnome-icon-list.h: New implementations of the
+	GnomeIconList.  This GnomeIconList is derived from the GnomeCanvas
+	and has some nice features:  inline name edition of filenames and
+	banding selection of icons as well as a flicker free display.  
+
+	The icon list API is fully documented with the proposed commenting
+	style. 
+
+	The downside is that the constructor API has changed, I will
+	shortly fix the code on CVS to work with the new API. 
+
+	* gnome-icon-item.c, gnome-icon-item.h: New files.  Canvas items
+	that implement text editing in a width-constrained region.  They
+	use a GtkEntry as a hidden backend to handle most of the nasty
+	details of input editing.  This means the edition features of them
+	are very complete. 
+
+	* gnome-icon-text.c, gnome-icon-text.h:  Routines used to layout
+	wrapped text for tooltips and icons is now on their own file.
+	Fully documented as well. 
+
 1998-10-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_window_to_world): New public
@@ -123,7 +146,6 @@ Sat Oct  3 23:46:51 EDT 1998 Gregory McLean <gregm@comstar.net>
 	* gnome-client.c (gnome_client_get_config_prefix): Use
 	`program_invocation_short_name' if `client->program' is NULL.
 
->>>>>>> 1.474
 1998-10-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtklayout.c (gtk_layout_move): Provide a default value. 

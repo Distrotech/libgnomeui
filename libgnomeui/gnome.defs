@@ -87,7 +87,6 @@
    (notebook GNOME_MDI_NOTEBOOK)
    (toplevel GNOME_MDI_TOPLEVEL)
    (modal GNOME_MDI_MODAL)
-   (ms GNOME_MDI_MS)
    (default-mode GNOME_MDI_DEFAULT_MODE)
    (redraw GNOME_MDI_REDRAW))
 

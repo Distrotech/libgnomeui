@@ -1,0 +1,813 @@
+/*
+ * text-item.c: implements the text display and editing Canvas Item
+ * for the Gnome Icon List.
+ *
+ * Author:
+ *   Miguel de Icaza (miguel@gnu.org).
+ *
+ * Fixme: Provide a ref-count fontname caching like thing.
+ */
+#include <gnome.h>
+#include <gdk/gdkkeysyms.h>
+#include <libgnomeui/gnome-icon-item.h>
+
+/* Margins used to display the information */
+#define MARGIN_X 2
+#define MARGIN_Y 2
+
+/* Aliases to minimize screen use in my laptop */
+#define ITI(x)       GNOME_ICON_TEXT_ITEM(x)
+#define ITI_CLASS(x) GNOME_ICON_TEXT_ITEM_CLASS(x)
+#define IS_ITI(x)    GNOME_IS_ICON_TEXT_ITEM(x)
+
+typedef GnomeIconTextItem Iti;
+
+static GnomeCanvasItem *parent_class;
+
+enum {
+	TEXT_CHANGED,
+	HEIGHT_CHANGED,
+	LAST_SIGNAL
+};
+
+static guint iti_signals [LAST_SIGNAL] = { 0 };
+
+static char *
+iti_default_font_name (void)
+{
+	return "-adobe-helvetica-medium-r-normal--*-100-*-*-*-*-*-*";
+}
+
+static void
+font_load (Iti *iti)
+{
+	if (iti->fontname){
+		iti->font = gdk_font_load (iti->fontname);
+		g_free (iti->fontname);
+		iti->fontname = NULL;
+	}
+	
+	if (!iti->font)
+		iti->font = gdk_font_load (iti_default_font_name ());
+}
+
+static void
+iti_queue_redraw (Iti *iti)
+{
+	GnomeCanvasItem *item = GNOME_CANVAS_ITEM (iti);
+	
+	gnome_canvas_request_redraw (
+		item->canvas,
+		item->x1, item->y1,
+		item->x2+1, item->y2+1);
+}
+
+static char *
+iti_separators (Iti *iti)
+{
+	return " \t-.[]#";
+}
+
+static int
+iti_get_width (Iti *iti, int *center_offset)
+{
+	int w, x = 0;
+
+	if (!center_offset)
+		center_offset = &x;
+	
+	if (iti->ti->rows){
+		if (iti->ti->rows->next){
+			*center_offset = 0;
+			w = iti->width;
+		} else {
+			GnomeIconTextInfoRow *row = iti->ti->rows->data;
+			
+			w = iti->ti->width;
+			*center_offset =  (iti->width - row->width) / 2;
+		}
+	} else { 
+		w = 0;
+		*center_offset = iti->width/2 + MARGIN_X;
+	}
+
+	return w;
+}
+
+static void
+recompute_bounding_box (Iti *iti)
+{
+	GnomeCanvasItem *item = GNOME_CANVAS_ITEM (iti);
+	int nx1, ny1, nx2, ny2;
+	int w, size_changed;
+
+	w = iti_get_width (iti, NULL);
+	
+	nx1 = iti->x + (iti->width - w) / 2 - MARGIN_X;
+	ny1 = iti->y;
+	nx2 = iti->x + (iti->width - w) / 2 + w + 2*MARGIN_X + 1;
+	ny2 = 2*MARGIN_Y + (iti->y + iti->ti->height + 1);
+		
+	/* See if our dimenssions match the item bounding box */
+	if (!(nx1 != item->x1 || ny1 != item->y1 || nx2 != item->x2 || ny2 != item->y2))
+		return;
+
+	size_changed = (ny2-ny1) != (item->y2-item->y1);
+	
+	item->x1 = nx1;
+	item->y1 = ny1;
+	item->x2 = nx2;
+	item->y2 = ny2;
+	
+	gnome_canvas_group_child_bounds (
+		GNOME_CANVAS_GROUP (item->parent), item);
+	
+	if (size_changed && iti->ti)
+		gtk_signal_emit (GTK_OBJECT (iti), iti_signals [HEIGHT_CHANGED]);
+}
+
+/*
+ * layout_text:
+ *
+ * Relayouts the text and computes the bounding box
+ */
+static inline void
+layout_text (Iti *iti)
+{
+	char *text;
+	
+	if (iti->ti)
+		gnome_icon_text_info_free (iti->ti);
+
+	if (iti->editing)
+		text = gtk_entry_get_text (iti->entry);
+	else
+
+		text = iti->text;
+	
+	iti->ti = gnome_icon_layout_text (
+		iti->font, text, iti_separators (iti), iti->width, TRUE);
+
+	recompute_bounding_box (iti);
+}
+
+/*
+ * iti_stop_editing
+ *
+ * Puts the Iti on the editing = FALSE state
+ */
+static void
+iti_stop_editing (Iti *iti)
+{
+	iti->editing = FALSE;
+	
+	gtk_widget_destroy (iti->entry_top);
+	iti->entry = NULL;
+	iti->entry_top = NULL;
+
+	iti_queue_redraw (iti);
+}
+
+/*
+ * iti_edition_accept:
+ *
+ * Invoked to carry out all of the changes due to the user
+ * pressing enter while editing, or due to us loosing the focus
+ */
+static void
+iti_edition_accept (Iti *iti)
+{
+	gboolean accept = TRUE;
+	
+	gtk_signal_emit (GTK_OBJECT (iti), iti_signals [TEXT_CHANGED], &accept);
+
+	iti_queue_redraw (iti);
+	if (accept){
+		g_free (iti->text);
+		iti->text = g_strdup (gtk_entry_get_text (iti->entry));
+	}
+
+	iti_stop_editing (iti);
+}
+
+static void
+iti_entry_activate (GtkWidget *entry, Iti *iti)
+{
+	iti_edition_accept (iti);
+}
+
+/*
+ * iti_start_editing
+ *
+ * Puts the Iti on the editing mode
+ */
+static void
+iti_start_editing (Iti *iti)
+{
+	if (iti->editing)
+		return;
+
+	/*
+	 * Trick: The actual edition of the entry takes place in a
+	 * GtkEntry which is placed offscreen.  That way we get all of the
+	 * advantages from GtkEntry without duplicating code.
+	 */
+	iti->entry = (GtkEntry *) gtk_entry_new ();
+	gtk_entry_set_text (iti->entry, iti->text);
+	gtk_signal_connect (GTK_OBJECT (iti->entry), "activate",
+			    GTK_SIGNAL_FUNC (iti_entry_activate), iti);
+	
+	iti->entry_top = gtk_window_new (GTK_WINDOW_POPUP);
+	gtk_container_add (GTK_CONTAINER (iti->entry_top), (GTK_WIDGET (iti->entry)));
+	gtk_widget_set_uposition (iti->entry_top, 20000, 20000);
+	gtk_widget_show_all (iti->entry_top);
+
+	gtk_editable_select_region (GTK_EDITABLE (iti->entry), 0, -1);
+	iti->editing = TRUE;
+}
+
+/*
+ * Allocates the X resources used by the Iti.
+ */
+static void
+iti_realize (GnomeCanvasItem *item)
+{
+	Iti *iti = ITI (item);
+	GdkWindow *window;
+	
+	if (GNOME_CANVAS_ITEM_CLASS (parent_class)->realize)
+		(*GNOME_CANVAS_ITEM_CLASS (parent_class)->realize)(item);
+	
+	window = GTK_WIDGET (item->canvas)->window;
+
+	font_load (iti);
+	layout_text (iti);
+}
+
+/*
+ * iti_unrealize:
+ *
+ * Release the X resources we used
+ */
+static void
+iti_unrealize (GnomeCanvasItem *item)
+{
+	Iti *iti = ITI (item);
+
+	iti_stop_editing (iti);
+	
+	if (iti->font){
+		gdk_font_unref (iti->font);
+		iti->font = NULL;
+	}
+
+	if (iti->ti){
+		gnome_icon_text_info_free (iti->ti);
+		iti->ti = NULL;
+	}
+
+	if (GNOME_CANVAS_ITEM_CLASS (parent_class)->unrealize)
+		(*GNOME_CANVAS_ITEM_CLASS (parent_class)->unrealize)(item);
+}
+
+/*
+ * iti_destroy
+ *
+ * Destructor for Iti objects
+ */
+static void
+iti_destroy (GtkObject *object)
+{
+	Iti *iti = ITI (object);
+
+	if (iti->fontname)
+		g_free (iti->fontname);
+	if (iti->text)
+		g_free (iti->text);
+	
+	if (GTK_OBJECT_CLASS (parent_class)->destroy)
+		(*GTK_OBJECT_CLASS (parent_class)->destroy)(object);
+}
+
+static void
+iti_reconfigure (GnomeCanvasItem *item)
+{
+}
+
+/*
+ * Draw the text
+ */
+static void
+iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y, GtkJustification just)
+{
+	GtkWidget *canvas = GTK_WIDGET (GNOME_CANVAS_ITEM (iti)->canvas);
+        GnomeIconTextInfoRow *row;
+	GnomeIconTextInfo *ti;
+	GtkStyle *style = canvas->style;
+	GdkGC *fg_gc, *bg_gc;
+	GdkGC *gc, *bgc, *sgc, *bsgc;
+        GList *item;
+        int xpos, len;
+	
+	ti = iti->ti;
+	len = 0;
+        y += ti->font->ascent;
+
+	/*
+	 * Pointers to all of the GCs we use
+	 */
+	gc = style->fg_gc [GTK_STATE_NORMAL];
+	bgc = style->bg_gc [GTK_STATE_NORMAL];
+	sgc = style->fg_gc [GTK_STATE_SELECTED];
+	bsgc = style->bg_gc [GTK_STATE_SELECTED];
+
+        for (item = ti->rows; item; item = item->next, len += strlen (row->text)){
+		char *text;
+		
+		row = item->data;
+
+                if (!row)
+			y += ti->baseline_skip / 2;
+		
+		text = row->text;
+		
+		switch (just) {
+		case GTK_JUSTIFY_LEFT:
+			xpos = 0;
+			break;
+			
+		case GTK_JUSTIFY_RIGHT:
+			xpos = ti->width - row->width;
+			break;
+			
+		case GTK_JUSTIFY_CENTER:
+			xpos = (iti->width - row->width) / 2;
+			break;
+			
+		default:
+                                /* Anyone care to implement GTK_JUSTIFY_FILL? */
+			g_warning ("Justification type %d not supported.  Using left-justif
+ication.",
+				   (int) just);
+			xpos = 0;
+		}
+
+		/*
+		 * Draw the insertion cursor if we are in editting mode.
+		 */
+		if (iti->editing){
+			int cursor, offset, i;
+			int sel_start, sel_end;
+
+			sel_start = GTK_EDITABLE (iti->entry)->selection_start_pos - len;
+			sel_end   = GTK_EDITABLE (iti->entry)->selection_end_pos - len;
+			offset = 0;
+			cursor = GTK_EDITABLE (iti->entry)->current_pos - len;
+			for (i = 0; *text; text++, i++){
+				int   size, px;
+				
+				size = gdk_text_width (ti->font, text, 1);
+				
+				if (i >= sel_start && i < sel_end){
+					fg_gc = sgc;
+					bg_gc = bsgc;
+				} else {
+					fg_gc = gc;
+					bg_gc = bgc;
+				}
+
+				px = x + xpos + offset;
+				gdk_draw_rectangle (
+					drawable, bg_gc, TRUE,
+					px, y - ti->font->ascent,
+					size, ti->baseline_skip);
+						    
+				gdk_draw_text (
+					drawable, ti->font, fg_gc,
+					px, y, text, 1);
+
+				if (cursor == i)
+					gdk_draw_line (
+						drawable, gc,
+						px-1, y - ti->font->ascent,
+						px-1, y + ti->font->descent-1);
+
+				offset += size;
+			}
+			if (cursor == i){
+				int px = x + xpos + offset;
+				
+				gdk_draw_line (
+					drawable, gc,
+					px-1, y - ti->font->ascent,
+					px-1, y + ti->font->descent-1);
+			}
+		} else {
+			int xtra = iti->selected ? 2 : 0;
+			fg_gc = iti->selected ? sgc : gc;
+			bg_gc = iti->selected ? bsgc : bgc;
+
+			gdk_draw_rectangle (drawable, bg_gc, TRUE,
+					    x + xpos - xtra,
+					    y - ti->font->ascent - xtra,
+					    gdk_string_width (ti->font, text) + xtra * 2,
+					    ti->baseline_skip + xtra*2);
+			gdk_draw_string (drawable, ti->font, fg_gc, x + xpos, y, text);
+		}
+			
+		y += ti->baseline_skip;
+        }
+}
+
+static void
+iti_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y, int width, int height)
+{
+	Iti *iti = ITI (item);
+	int rx = iti->x - x;
+	int ry = iti->y - y;
+	GtkWidget *canvas = GTK_WIDGET (GNOME_CANVAS_ITEM (iti)->canvas);
+	GdkGC *gc;
+		
+	gc = canvas->style->fg_gc [GTK_STATE_NORMAL];
+	
+	if (iti->editing){
+		int h, w, center_offset;
+
+		h = iti->ti->height;
+		if (!h)
+			h = iti->font->ascent + iti->font->descent;
+
+		w = iti_get_width (iti, &center_offset);
+
+		gdk_draw_rectangle (drawable, gc, FALSE,
+				    rx + center_offset, ry,
+				    w + MARGIN_X*2, h + MARGIN_Y*2);
+	}
+
+	iti_paint_text (iti, drawable,
+			rx + MARGIN_X, ry + MARGIN_Y,
+			GTK_JUSTIFY_CENTER);
+}
+
+static double
+iti_point (GnomeCanvasItem *item, double x, double y, int cx, int cy,
+		 GnomeCanvasItem **actual_item)
+{
+	*actual_item = NULL;
+	
+	if (cx < item->x1 || cy < item->y1)
+		return INT_MAX;
+	if (cx > item->x2 || cy > item->y2)
+		return INT_MAX;
+
+	*actual_item = item;
+	return 0.0;
+}
+
+/*
+ * iti_idx_from_x_y:
+ *
+ * Given X, Y, a mouse position, return a valid index
+ * inside the edited text
+ */
+static int
+iti_idx_from_x_y (Iti *iti, int x, int y)
+{
+        GnomeIconTextInfoRow *row;
+	int lines = g_list_length (iti->ti->rows);
+	int line, col, i, idx;
+	GList *l;
+
+	line = y / iti->ti->baseline_skip;
+	if (lines < line+1)
+		line = lines-1;
+
+	/* Compute the base index for this line */
+	for (l = iti->ti->rows, idx = i = 0; i < line; l = l->next, i++){
+		row = l->data;
+
+		idx += strlen (row->text);
+	}
+	
+	row = g_list_nth (iti->ti->rows, line)->data;
+	col = 0;
+	if (row != NULL){
+		int first_char = (iti->width - row->width)/2;
+		int last_char  = first_char + row->width;
+		
+		if (x < first_char){
+			/* nothing */
+		} else if (x > last_char){
+			col = strlen (row->text);
+		} else {
+			char *s = row->text;
+			int pos = first_char;
+			
+			while (pos < last_char){
+				pos += gdk_text_width (iti->ti->font, s, 1);
+				if (pos > x)
+					break;
+				col++;
+				s++;
+			}
+		}
+	} 
+
+	idx += col;
+
+	g_assert (idx <= GTK_ENTRY (iti->entry)->text_size);
+
+	return idx;
+}
+
+/*
+ * iti_start_selecting:
+ *
+ * Button has been pressed in the Iti: start the selection.
+ */
+static void
+iti_start_selecting (Iti *iti, int idx, guint32 event_time)
+{
+	GtkEditable *e = GTK_EDITABLE (iti->entry);
+	
+	gtk_editable_select_region (e, idx, idx);
+	gtk_editable_set_position (e, idx);
+	gnome_canvas_item_grab (GNOME_CANVAS_ITEM (iti),
+				GDK_BUTTON_RELEASE_MASK |
+				GDK_POINTER_MOTION_MASK,
+				NULL, event_time);
+
+	gtk_editable_select_region (e, idx, idx);
+	e->current_pos = e->selection_start_pos;
+	e->has_selection = TRUE;
+
+	iti_queue_redraw (iti);
+}
+
+/*
+ * iti_stop_selecting
+ *
+ * The user released the button.
+ */
+static void
+iti_stop_selecting (Iti *iti, guint32 event_time)
+{
+	GnomeCanvasItem *item = GNOME_CANVAS_ITEM (iti);
+	GtkEditable *e = GTK_EDITABLE (iti->entry);
+
+	gnome_canvas_item_ungrab (item, event_time);
+	e->has_selection = FALSE;
+
+	iti_queue_redraw (iti);
+}
+
+/*
+ * iti_selection_motion:
+ *
+ * 
+ */
+static void
+iti_selection_motion (Iti *iti, int idx)
+{
+	GtkEditable *e = GTK_EDITABLE (iti->entry);
+
+	if (idx < e->current_pos){
+		e->selection_start_pos = idx;
+		e->selection_end_pos   = e->current_pos;
+	} else {
+		e->selection_start_pos = e->current_pos;
+		e->selection_end_pos  = idx;
+	}
+	
+	iti_queue_redraw (iti);
+}
+
+static void
+iti_translate (GnomeCanvasItem *item, double dx, double dy)
+{
+}
+
+static gint
+iti_event (GnomeCanvasItem *item, GdkEvent *event)
+{
+	Iti *iti = ITI (item);
+	int idx;
+	double x, y;
+
+	switch (event->type){
+	case GDK_KEY_PRESS:
+		if (!iti->editing)
+			return FALSE;
+
+		iti_queue_redraw (iti);
+		if (event->key.keyval == GDK_Escape)
+			iti_stop_editing (iti);
+		else
+			gtk_widget_event (GTK_WIDGET (iti->entry), event);
+
+		layout_text (iti);
+		iti_queue_redraw (iti);
+		return TRUE;
+
+	case GDK_BUTTON_PRESS:
+		if (!iti->is_editable)
+			return FALSE;
+
+		if (!iti->selected)
+			return FALSE;
+		
+		if (!iti->editing){
+			gnome_canvas_item_grab_focus (item);
+			iti_start_editing (iti);
+			iti_queue_redraw (iti);
+		} else {
+			x = event->button.x - item->x1;
+			y = event->button.y - item->y1;
+			idx = iti_idx_from_x_y (iti, x, y);
+			
+			iti_start_selecting (iti, idx, event->button.time); 
+		}
+		break;
+
+	case GDK_MOTION_NOTIFY:
+		if (!iti->is_editable)
+			return FALSE;
+
+		if (!iti->entry)
+			return FALSE;
+
+		if (!GTK_EDITABLE (iti->entry)->has_selection)
+			return FALSE;
+
+		x = event->motion.x - item->x1;
+		y = event->motion.y - item->y1;
+		idx = iti_idx_from_x_y (iti, x, y);
+		iti_selection_motion (iti, idx);
+		break;
+			
+	case GDK_BUTTON_RELEASE:
+		if (!iti->is_editable)
+			return FALSE;
+
+		if (!iti->entry)
+			return FALSE;
+				      
+		iti_stop_selecting (iti, event->button.time);
+		break;
+		
+	case GDK_FOCUS_CHANGE:
+		if (iti->editing && event->focus_change.in == FALSE)
+			iti_edition_accept (iti);
+		break;
+
+	default:
+		return FALSE;
+	}
+	return TRUE;
+}
+
+static void
+iti_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
+{
+	*x1 = item->x1;
+	*y1 = item->y1;
+	*x2 = item->x2;
+	*y2 = item->y2;
+}
+
+static void
+iti_class_init (GnomeIconTextItemClass *text_item_class)
+{
+	GtkObjectClass  *object_class;
+	GnomeCanvasItemClass *item_class;
+
+	parent_class = gtk_type_class (gnome_canvas_item_get_type());
+	
+	object_class = (GtkObjectClass *) text_item_class;
+	item_class   = (GnomeCanvasItemClass *) text_item_class;
+
+	/* object class method overrides */
+	object_class->destroy = iti_destroy;
+	
+	/* GnomeCanvasItem method overrides */
+	item_class->realize     = iti_realize;
+	item_class->unrealize   = iti_unrealize;
+	item_class->reconfigure = iti_reconfigure;
+	item_class->draw        = iti_draw;
+	item_class->point       = iti_point;
+	item_class->translate   = iti_translate;
+	item_class->event       = iti_event;
+	item_class->bounds      = iti_bounds;
+	
+	/* Our signals */
+	iti_signals [TEXT_CHANGED] =
+		gtk_signal_new (
+			"text_changed",
+			GTK_RUN_LAST,
+			object_class->type,
+			GTK_SIGNAL_OFFSET(GnomeIconTextItemClass,text_changed),
+			gtk_marshal_BOOL__NONE,
+			GTK_TYPE_BOOL, 0);
+				
+	iti_signals [HEIGHT_CHANGED] =
+		gtk_signal_new (
+			"height_changed",
+			GTK_RUN_LAST,
+			object_class->type,
+			GTK_SIGNAL_OFFSET(GnomeIconTextItemClass,height_changed),
+			gtk_marshal_NONE__NONE,
+			GTK_TYPE_NONE, 0);
+	
+	gtk_object_class_add_signals (object_class, iti_signals, LAST_SIGNAL);
+}
+
+void
+gnome_icon_text_item_setxy (GnomeIconTextItem *iti, int x, int y)
+{
+	g_return_if_fail (iti != NULL);
+	g_return_if_fail (IS_ITI (iti));
+
+	iti->x = x;
+	iti->y = y;
+
+	iti_queue_redraw (iti);
+	recompute_bounding_box (iti);
+	iti_queue_redraw (iti);
+}
+
+void
+gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
+				int width, const char *fontname,
+				const char *text, gboolean is_editable)
+{
+	g_return_if_fail (iti != NULL);
+	g_return_if_fail (IS_ITI (iti));
+	g_return_if_fail (text != NULL);
+	
+	iti->x = x;
+	iti->y = y;
+	iti->width = width - MARGIN_X * 2;
+	iti->is_editable = is_editable;
+	
+	if (iti->text)
+		g_free (iti->text);
+	iti->text = g_strdup (text);
+	
+	if (iti->fontname)
+		g_free (iti->fontname);
+	iti->fontname = g_strdup (iti_default_font_name ());
+
+	/*
+	 * if iti->font, it means this item is realized, so we have
+	 * to do all of the computations
+	 */
+	if (!iti->font)
+		return;
+
+	gdk_font_unref (iti->font);
+	font_load (iti);
+	layout_text (iti);
+}
+
+void
+gnome_icon_text_item_select (GnomeIconTextItem *iti, int sel)
+{
+	g_return_if_fail (iti != NULL);
+	g_return_if_fail (IS_ITI (iti));
+
+	if (iti->selected == sel)
+		return;
+
+	iti->selected = sel;
+
+	iti_queue_redraw (iti);
+}
+
+static void
+iti_init (Iti *iti)
+{
+}
+
+GtkType
+gnome_icon_text_item_get_type (void)
+{
+	static GtkType iti_type = 0;
+
+	if (!iti_type) {
+		GtkTypeInfo iti_info = {
+			"GnomeIconTextItem",
+			sizeof (GnomeIconTextItem),
+			sizeof (GnomeIconTextItemClass),
+			(GtkClassInitFunc) iti_class_init,
+			(GtkObjectInitFunc) iti_init,
+			NULL, /* reserved_1 */
+			NULL, /* reserved_2 */
+			(GtkClassInitFunc) NULL
+		};
+
+		iti_type = gtk_type_unique (gnome_canvas_item_get_type (), &iti_info);
+	}
+
+	return iti_type;
+}
+

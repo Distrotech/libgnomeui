@@ -65,7 +65,9 @@ libgnomeui_la_SOURCES = \
 	gnome-href.c			\
 	gnome-ice.c			\
 	gnome-icon-list.c		\
+	gnome-icon-item.c		\
 	gnome-icon-sel.c		\
+	gnome-icon-text.c		\
 	gnome-init.c			\
 	gnome-lamp.c			\
 	gnome-less.c			\
@@ -129,7 +131,9 @@ gnome_headers = \
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-list.h		\
+	gnome-icon-item.h		\
 	gnome-icon-sel.h		\
+	gnome-icon-text.h		\
 	gnome-lamp.h			\
 	gnome-less.h			\
 	gnome-messagebox.h		\
