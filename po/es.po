@@ -7,15 +7,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui cvs\n"
-"POT-Creation-Date: 2002-08-06 15:26+0200\n"
-"PO-Revision-Date: 2002-06-02 19:16+0100\n"
+"POT-Creation-Date: 2002-08-27 14:52-0400\n"
+"PO-Revision-Date: 2002-07-24 16:33+0200\n"
 "Last-Translator: Juan Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Germán Poo Caamaño <gpoo@ubiobio.cl>\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 0.9.5\n"
 
 #: libgnomeui/gnome-about.c:194
 msgid "Credits"
@@ -419,14 +419,14 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI Library"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:591
+#: libgnomeui/gnome-ui-init.c:618
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Han ocurrido múltiples errores de segmentación; no se puede mostrar el "
 "diálogo de error\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:605
+#: libgnomeui/gnome-ui-init.c:632
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -526,6 +526,7 @@ msgstr "Consejo para el elemento 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Archivo"
 
@@ -583,6 +584,7 @@ msgid "_Game"
 msgstr "_Juego"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_yuda"
 
@@ -749,9 +751,8 @@ msgstr "Reemplazar una cadena"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-#, fuzzy
 msgid "_Properties"
-msgstr "_Propiedades..."
+msgstr "_Propiedades"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -762,9 +763,8 @@ msgstr "Modificar las propiedades del archivo"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces"
-msgstr "Prefere_ncias..."
+msgstr "Prefere_ncias"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -775,11 +775,11 @@ msgstr "Configurar la aplicación"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Acerca de"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
@@ -806,7 +806,7 @@ msgstr "Crear una nueva ventana"
 msgid "_Close This Window"
 msgstr "_Cerrar esta ventana"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Cerrar la ventana actual"
 
@@ -1340,5 +1340,6 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Salir de la prueba"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Salir de la prueba"
