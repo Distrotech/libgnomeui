@@ -1,3 +1,9 @@
+Fri Apr 19 16:26:41 2002  George Lebl <jirka@5z.com>
+
+	* test-gnome/testgnome.c: add more testing functionality for
+	  gnome-icon-entry so that we may test monitoring of changes and
+	  getting icons and all that fun stuff.
+
 2002-04-19  jacob berkman  <jacob@ximian.com>
 
 	* glade/glade-gnome.c (entry_set_max_saved): 

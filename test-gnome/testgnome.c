@@ -662,17 +662,52 @@ create_file_entry(void)
  * IconEntry
  */
 static void
+icon_entry_changed (GnomeIconEntry *entry, GtkLabel *label)
+{
+	char *file = gnome_icon_entry_get_filename (entry);
+	g_print ("Entry changed, new icon: %s\n",
+		 file ? file : "Nothing selected");
+	g_free (file);
+}
+static void
+get_icon (GtkWidget *button, GnomeIconEntry *entry)
+{
+	GtkLabel *label = g_object_get_data (G_OBJECT (button), "label");
+	char *file = gnome_icon_entry_get_filename (entry);
+	gtk_label_set_text (label, file ? file : "Nothing selected");
+	g_free (file);
+}
+
+static void
 create_icon_entry(void)
 {
 	TestGnomeApp *app;
+	GtkWidget *vbox;
+	GtkWidget *button;
+	GtkWidget *label;
 	GtkWidget *entry;
 
 	app = create_newwin (TRUE, "testGNOME", "Icon Entry");
 
-	entry = gnome_icon_entry_new ("Foo", "Icon");
+	vbox = gtk_vbox_new (FALSE, 5);
 
-	bonobo_window_set_contents (BONOBO_WINDOW (app->app), entry);
-	gtk_widget_show (entry);
+	entry = gnome_icon_entry_new ("Foo", "Icon");
+	gtk_box_pack_start (GTK_BOX (vbox), entry, TRUE, TRUE, 0);
+
+	button = gtk_button_new_with_label ("Update label below");
+	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+
+	label = gtk_label_new ("Nothing selected");
+	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+
+	g_signal_connect (entry, "changed",
+			  G_CALLBACK (icon_entry_changed), NULL);
+	g_signal_connect (button, "clicked",
+			  G_CALLBACK (get_icon), entry);
+	g_object_set_data (G_OBJECT (button), "label", label);
+
+	bonobo_window_set_contents (BONOBO_WINDOW (app->app), vbox);
+	gtk_widget_show_all (vbox);
 	gtk_widget_show (app->app);
 }
 
