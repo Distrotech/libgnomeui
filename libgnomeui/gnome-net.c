@@ -10,6 +10,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdarg.h>
+#include "gnomesupport.h"	/* May have decl. for `gethostname'.  */
 #include "gnome-net.h"
 
 /* `g_string_length' doesn't appear in the CVS version of `gtk+/glib',
@@ -17,7 +18,7 @@
 #define g_string_length(pGString_x) ((pGString_x)->len)
 
 static struct NetSocketData *sockets = NULL;
-static max_sockets = 0;
+static int max_sockets = 0;
 
 gchar *gnome_hostname(void)
 {

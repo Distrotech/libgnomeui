@@ -2,6 +2,8 @@
 
 	* gnome-net.c (make_inetaddr): Use memset/memcpy rather than
 	bzero/bcopy. 
+	(gnomesupport.h): Include.
+	(max_sockets): Specify `int' type.
 
 1998-11-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
