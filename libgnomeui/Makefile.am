@@ -43,22 +43,13 @@ gnome_unknown_built = \
 	gnome-unknown-stubs.c				\
 	gnome-unknown-common.c
 
-history_db_built = \
-	HistoryDB.h \
-	HistoryDB-stubs.c \
-	HistoryDB-skels.c \
-	HistoryDB-common.c
-
 $(gnome_corba_rexec_built): $(top_srcdir)/idl/gnome-corba-rexec.idl
 	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/gnome-corba-rexec.idl
 
 $(gnome_unknown_built): $(top_srcdir)/idl/gnome-unknown.idl
 	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/gnome-unknown.idl
 
-$(history_db_built): $(top_srcdir)/idl/HistoryDB.idl
-	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/HistoryDB.idl
-
-gnorba_built = $(gnome_unknown_built) $(history_db_built) $(gnome_corba_rexec_built)
+gnorba_built = $(gnome_unknown_built) $(gnome_corba_rexec_built)
 
 if COMPILE_GNOME_COMPAT
 libgnomeui10compatincludedir = $(includedir)/libgnomeui/compat10
@@ -241,7 +232,6 @@ gnome_headers = \
 libgnomeuiinclude_HEADERS =		\
 	$(gnome_headers)		\
 	gnome-unknown.h			\
-	HistoryDB.h			\
 	gnome-corba-rexec.h		\
 	gnometypebuiltins.h
 
