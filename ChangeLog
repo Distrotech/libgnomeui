@@ -1,3 +1,8 @@
+2003-02-10  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* libgnomeui/gnome-color-picker.c (gnome_color_picker_clicked):
+	Enable color palette in the dialog. Fixes bug #105730.
+
 2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-entry.c: Fix entry items not being
