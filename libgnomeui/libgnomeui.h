@@ -29,6 +29,11 @@
 
 
 #include <libgnomeui/gnome-uidefs.h>
+
+#include <libgnomeui/gnome-app.h>
+#include <libgnomeui/gnome-app-helper.h>
+#include <libgnomeui/gnome-app-util.h>
+#include <libgnomeui/gnome-appbar.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include <libgnomecanvas/gnome-canvas-line.h>
@@ -39,6 +44,7 @@
 #include <libgnomecanvas/gnome-canvas-widget.h>
 #include <libgnomeui/gnome-color-picker.h>
 #include <libgnomeui/gnome-entry.h>
+#include <libgnomeui/gnome-file-entry.h>
 #include <libgnomeui/gnome-image-entry.h>
 #include <libgnomeui/gnome-image-selector.h>
 
@@ -53,10 +59,13 @@
 #include <libgnomeui/gnometypebuiltins.h>
 #include <libgnomeui/gnome-winhints.h>
 #include <libgnomeui/gnome-href.h>
+#include <libgnomeui/gnome-dialog.h>
+#include <libgnomeui/gnome-dialog-util.h>
 #include <libgnomeui/gnome-druid.h>
 #include <libgnomeui/gnome-druid-page.h>
 #include <libgnomeui/gnome-druid-page-edge.h>
 #include <libgnomeui/gnome-druid-page-standard.h>
+#include <libgnomeui/gnome-messagebox.h>
 #include <libgnomeui/gnome-vfs-util.h>
 
 #ifdef COMPAT_1_0

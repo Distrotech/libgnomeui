@@ -29,6 +29,7 @@
   Convenience UI functions for use with GnomeApp 
   ****/
 
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-app.h"
@@ -139,9 +140,8 @@ gnome_app_set_progress (GnomeAppProgressKey key, gdouble percent);
 void 
 gnome_app_progress_done (GnomeAppProgressKey key);
 
-void gnome_window_set_icon(GtkWindow *window, GdkPixbuf *pixbuf, gboolean overwrite);
-void gnome_window_set_icon_from_file(GtkWindow *window, const char *filename, gboolean overwrite);
-
 G_END_DECLS
+
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */
 
 #endif

@@ -1,3 +1,10 @@
+Sun Aug 26 19:35:04 2001  George Lebl <jirka@5z.com>
+
+	* Makefile.am, gnome-app-helper.[ch], gnome-app-util.[ch],
+	  gnome-app.[ch], libgnomeui.h:  Make gnome-app and friends
+	  compile and all that good stuff.  Not finished, but somewhat
+	  there.  gnome-app-util is deprecated here.
+
 Sun Aug 26 16:37:35 2001  George Lebl <jirka@5z.com>
 
 	* gnome-i18nP.h, gnome-app-util.c, gnome-app.c, gnome-canvas-init.c,

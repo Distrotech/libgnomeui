@@ -735,7 +735,7 @@ void gnome_app_install_menu_hints           (GnomeApp *app,
                                              GnomeUIInfo *uinfo);
 
 void gnome_app_setup_toolbar                (GtkToolbar *toolbar,
-                                             GnomeDockItem *dock_item);
+                                             BonoboDockItem *dock_item);
 
 G_END_DECLS
 

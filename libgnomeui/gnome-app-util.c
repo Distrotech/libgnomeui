@@ -24,19 +24,18 @@
  */
 #include <config.h>
 
-#include "gnome-app-util.h"
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
 
-#include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 
-#include "gnome-stock.h"
+#include "gnome-app-util.h"
+
 #include "gnome-dialog-util.h"
 #include "gnome-dialog.h"
 #include "gnome-uidefs.h"
-#include "gnome-preferences.h"
 #include "gnome-appbar.h"
 
 #include <gdk/gdkx.h>
@@ -59,9 +58,10 @@ gnome_app_has_appbar_status(GnomeApp * app)
 static gboolean
 gnome_app_interactive_statusbar(GnomeApp * app)
 {
- return ( gnome_app_has_appbar_status (app) && 
-	  gnome_preferences_get_statusbar_dialog() &&
-	  gnome_preferences_get_statusbar_interactive() );
+ return ( gnome_app_has_appbar_status (app) && 0
+	  /* FIXME!!!
+	  && gnome_preferences_get_statusbar_dialog()
+	  && gnome_preferences_get_statusbar_interactive() */);
 }
 
 static void gnome_app_activate_statusbar(GnomeApp *app)
@@ -130,8 +130,9 @@ gnome_app_message (GnomeApp * app, const gchar * message)
   g_return_val_if_fail(app != NULL, NULL);
   g_return_val_if_fail(GNOME_IS_APP(app), NULL);
 
-  if ( gnome_preferences_get_statusbar_dialog() &&
-       gnome_app_interactive_statusbar(app) ) {
+  /* FIXME !!! */
+  if ( 0 /*gnome_preferences_get_statusbar_dialog() &&
+       gnome_app_interactive_statusbar(app) */) {
     gnome_app_message_bar ( app, message );
     return NULL;
   }
@@ -207,8 +208,9 @@ gnome_app_warning (GnomeApp * app, const gchar * warning)
   g_return_val_if_fail(GNOME_IS_APP(app), NULL);
   g_return_val_if_fail(warning != NULL, NULL);
 
-  if ( gnome_app_has_appbar_status(app) && 
-       gnome_preferences_get_statusbar_dialog() ) {
+  /* FIXME !!! */
+  if ( 0 /*gnome_app_has_appbar_status(app) && 
+       gnome_preferences_get_statusbar_dialog() */) {
     gnome_app_warning_bar(app, warning);
     return NULL;
   }
@@ -771,7 +773,8 @@ gnome_app_progress_timeout (GnomeApp * app,
   key->data = data;
 
   if ( gnome_app_has_appbar_progress(app) &&
-       gnome_preferences_get_statusbar_dialog() ) {
+  /* FIXME !!! */
+       0 /* gnome_preferences_get_statusbar_dialog() */) {
     progress_bar    (description, key);
   }
   else {
@@ -823,7 +826,8 @@ gnome_app_progress_manual (GnomeApp * app,
   key->timeout_tag = INVALID_TIMEOUT;  
 
   if ( gnome_app_has_appbar_progress(app) &&
-       gnome_preferences_get_statusbar_dialog() ) {
+  /* FIXME !!! */
+       0 /*gnome_preferences_get_statusbar_dialog() */) {
     progress_bar    (description, key);
   }
   else {
@@ -895,94 +899,4 @@ void gnome_app_progress_done (GnomeAppProgressKey key)
   g_free(key);
 }
 
-typedef struct {
-  GdkPixmap *icon_pixmap;
-  GdkBitmap *icon_mask;
-  GdkWindow *icon_window;
-} IconInfo;
-
-static void
-gnome_window_realized(GtkWindow *window, IconInfo *pbi)
-{
-  gdk_window_set_icon(GTK_WIDGET(window)->window, pbi->icon_window, pbi->icon_pixmap, pbi->icon_mask);
-}
-
-static void
-gnome_window_destroyed(GtkWindow *window, IconInfo *pbi)
-{
-  gdk_pixmap_unref(pbi->icon_pixmap);
-  gdk_bitmap_unref(pbi->icon_mask);
-  gdk_window_unref(pbi->icon_window);
-  g_free(pbi);
-}
-
-void
-gnome_window_set_icon(GtkWindow *window, GdkPixbuf *pixbuf, gboolean overwrite)
-{
-  gboolean skip_connect = FALSE;
-  IconInfo *pbi;
-
-  pbi = gtk_object_get_data(GTK_OBJECT(window), "WM_HINTS.icon_info");
-  if(pbi && !overwrite)
-    return;
-  if(pbi)
-    {
-      skip_connect = TRUE;
-      gdk_pixmap_unref(pbi->icon_pixmap);
-      gdk_pixmap_unref(pbi->icon_mask);
-      gdk_window_unref(pbi->icon_window);
-    }
-  else
-    pbi = g_new(IconInfo, 1);
-
-  {
-    GdkWindowAttr wa;
-    wa.visual = gdk_rgb_get_visual();
-    wa.colormap = gdk_rgb_get_cmap();
-    pbi->icon_window = gdk_window_new(GDK_ROOT_PARENT(), &wa, GDK_WA_VISUAL|GDK_WA_COLORMAP);
-  }
-  gdk_pixbuf_render_pixmap_and_mask(pixbuf, &pbi->icon_pixmap, &pbi->icon_mask, 128);
-
-  if(!skip_connect)
-    {
-      gtk_object_set_data(GTK_OBJECT(window), "WM_HINTS.icon_info", pbi);
-      gtk_signal_connect_after(GTK_OBJECT(window), "realize", GTK_SIGNAL_FUNC(gnome_window_realized), pbi);
-      gtk_signal_connect(GTK_OBJECT(window), "destroy", GTK_SIGNAL_FUNC(gnome_window_destroyed), pbi);
-    }
-
-  if(GTK_WIDGET_REALIZED(window))
-    gnome_window_realized(window, pbi);
-}
-
-void
-gnome_window_set_icon_from_file(GtkWindow *window, const char *filename, gboolean overwrite)
-{
-  GdkPixbuf *pb;
-  GError *error;
-
-  error = NULL;
-  pb = gdk_pixbuf_new_from_file(filename, &error);
-  if (error != NULL) {
-      g_warning (error->message);
-      g_error_free (error);
-  }
-  if(!pb)
-    {
-      error = NULL;
-      filename = gnome_program_locate_file (gnome_program_get (),
-					    GNOME_FILE_DOMAIN_PIXMAP,
-					    filename, TRUE, NULL);
-		
-      pb = gdk_pixbuf_new_from_file(filename, &error);
-      if (error != NULL) {
-	g_warning (error->message);
-	g_error_free (error);
-      }
-      g_free((gpointer)filename);
-    }
-  if(!pb)
-    return;
-
-  gnome_window_set_icon(window, pb, overwrite);
-  gdk_pixbuf_unref(pb);
-}
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */

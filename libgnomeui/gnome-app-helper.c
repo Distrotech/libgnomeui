@@ -39,14 +39,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include <libgnome/libgnome.h>
 
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
-#include "gnome-helpsys.h"
-#include "gnome-gconf.h"
 
 /* Note that this file must include gnome-i18n, and not gnome-i18nP, so that 
  * _() is the same as the one seen by the application.  This is moderately 
@@ -57,12 +57,8 @@
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-uidefs.h"
-#include "gnome-stock.h"
-#include "gnome-pixmap.h"
+#include "gnome-stock-icons.h"
 #include <libgnome/gnome-preferences.h>
-#include "gnome-stock.h"
-
-extern const gchar *gnome_user_accels_dir;
 
 /* keys used for get/set_data */
 const char *gnome_app_helper_gconf_client = "gnome-app-helper-gconf-client";
@@ -104,50 +100,50 @@ static GnomeUIInfo menu_defaults[] = {
         /* New */
         { GNOME_APP_UI_ITEM, NULL, NULL,
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_NEW,
           GNOME_KEY_NAME_NEW, GNOME_KEY_MOD_NEW, NULL },
         /* Open */
         { GNOME_APP_UI_ITEM, N_("_Open..."), N_("Open a file"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_OPEN,
           GNOME_KEY_NAME_OPEN, GNOME_KEY_MOD_OPEN, NULL },
 	/* Save */
         { GNOME_APP_UI_ITEM, N_("_Save"), N_("Save the current file"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_SAVE,
           GNOME_KEY_NAME_SAVE, GNOME_KEY_MOD_SAVE, NULL },
 	/* Save As */
         { GNOME_APP_UI_ITEM, N_("Save _As..."),
           N_("Save the current file with a different name"),
           NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS,
+	  GNOME_APP_PIXMAP_STOCK, GTK_STOCK_SAVE_AS,
           GNOME_KEY_NAME_SAVE_AS, GNOME_KEY_MOD_SAVE_AS, NULL },
 	/* Revert */
         { GNOME_APP_UI_ITEM, N_("_Revert"),
           N_("Revert to a saved version of the file"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REVERT,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_REVERT_TO_SAVED,
           0,  (GdkModifierType) 0, NULL },
 	/* Print */
         { GNOME_APP_UI_ITEM, N_("_Print"), N_("Print the current file"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PRINT,
           GNOME_KEY_NAME_PRINT,  GNOME_KEY_MOD_PRINT, NULL },
 	/* Print Setup */
         { GNOME_APP_UI_ITEM, N_("Print S_etup..."),
           N_("Setup the page settings for your current printer"),
           NULL, NULL,
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PRINT,
           GNOME_KEY_NAME_PRINT_SETUP,  GNOME_KEY_MOD_PRINT_SETUP, NULL },
 	/* Close */
         { GNOME_APP_UI_ITEM, N_("_Close"), N_("Close the current file"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_CLOSE,
           GNOME_KEY_NAME_CLOSE, GNOME_KEY_MOD_CLOSE, NULL },
 	/* Exit */
         { GNOME_APP_UI_ITEM, N_("E_xit"), N_("Exit the program"),
           NULL, NULL, NULL, GNOME_APP_PIXMAP_STOCK,
-	  GNOME_STOCK_MENU_EXIT, GNOME_KEY_NAME_EXIT, GNOME_KEY_MOD_EXIT,
+	  GTK_STOCK_QUIT, GNOME_KEY_NAME_EXIT, GNOME_KEY_MOD_EXIT,
 	    NULL },
 	/*
 	 * The "Edit" menu
@@ -155,55 +151,55 @@ static GnomeUIInfo menu_defaults[] = {
 	/* Cut */
         { GNOME_APP_UI_ITEM, N_("C_ut"), N_("Cut the selection"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_CUT,
           GNOME_KEY_NAME_CUT, GNOME_KEY_MOD_CUT, NULL },
 	/* 10 */
 	/* Copy */
         { GNOME_APP_UI_ITEM, N_("_Copy"), N_("Copy the selection"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_COPY,
           GNOME_KEY_NAME_COPY, GNOME_KEY_MOD_COPY, NULL },
 	/* Paste */
         { GNOME_APP_UI_ITEM, N_("_Paste"), N_("Paste the clipboard"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PASTE,
           GNOME_KEY_NAME_PASTE, GNOME_KEY_MOD_PASTE, NULL },
 	/* Clear */
         { GNOME_APP_UI_ITEM, N_("C_lear"), N_("Clear the selection"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_NONE, NULL,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_CLEAR,
           GNOME_KEY_NAME_CLEAR, GNOME_KEY_MOD_CLEAR, NULL },
 	/* Undo */
         { GNOME_APP_UI_ITEM, N_("_Undo"), N_("Undo the last action"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_UNDO,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_UNDO,
           GNOME_KEY_NAME_UNDO, GNOME_KEY_MOD_UNDO, NULL },
 	/* Redo */
         { GNOME_APP_UI_ITEM, N_("_Redo"), N_("Redo the undone action"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REDO,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_REDO,
           GNOME_KEY_NAME_REDO, GNOME_KEY_MOD_REDO, NULL },
 	/* Find */
         { GNOME_APP_UI_ITEM, N_("_Find..."),  N_("Search for a string"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_FIND,
           GNOME_KEY_NAME_FIND, GNOME_KEY_MOD_FIND, NULL },
 	/* Find Again */
         { GNOME_APP_UI_ITEM, N_("Find _Again"),
           N_("Search again for the same string"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_FIND,
           GNOME_KEY_NAME_FIND_AGAIN, GNOME_KEY_MOD_FIND_AGAIN, NULL },
 	/* Replace */
         { GNOME_APP_UI_ITEM, N_("_Replace..."), N_("Replace a string"),
           NULL, NULL, NULL,
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SRCHRPL,
+          GNOME_APP_PIXMAP_STOCK, GTK_STOCK_FIND_AND_REPLACE,
           GNOME_KEY_NAME_REPLACE, GNOME_KEY_MOD_REPLACE, NULL },
 	/* Properties */
         { GNOME_APP_UI_ITEM, N_("_Properties..."),
           N_("Modify the file's properties"),
           NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP,
+	  GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PROPERTIES,
           0,  (GdkModifierType) 0, NULL },
 	/*
 	 * The Settings menu
@@ -212,7 +208,7 @@ static GnomeUIInfo menu_defaults[] = {
         { GNOME_APP_UI_ITEM, N_("_Preferences..."),
           N_("Configure the application"),
           NULL, NULL,
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PREFERENCES,
           0,  (GdkModifierType) 0, NULL },
 	/* 20 */
 	/*
@@ -221,7 +217,7 @@ static GnomeUIInfo menu_defaults[] = {
 	/* About */
         { GNOME_APP_UI_ITEM, N_("_About"),
           N_("About this application"), NULL, NULL,
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_ABOUT,
           0,  (GdkModifierType) 0, NULL },
 	{ GNOME_APP_UI_ITEM, N_("_Select All"),
           N_("Select everything"),
@@ -254,7 +250,7 @@ static GnomeUIInfo menu_defaults[] = {
         { GNOME_APP_UI_ITEM, N_("_Pause game"),
           N_("Pause the game"), 
 	  NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_TIMER_STOP,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_TIMER_STOP,
           GNOME_KEY_NAME_PAUSE_GAME,  GNOME_KEY_MOD_PAUSE_GAME, NULL },
         { GNOME_APP_UI_ITEM, N_("_Restart game"),
           N_("Restart the game"),
@@ -264,12 +260,12 @@ static GnomeUIInfo menu_defaults[] = {
         { GNOME_APP_UI_ITEM, N_("_Undo move"),
           N_("Undo the last move"),
 	  NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_UNDO,
+	  GNOME_APP_PIXMAP_STOCK, GTK_STOCK_UNDO,
           GNOME_KEY_NAME_UNDO_MOVE,  GNOME_KEY_MOD_UNDO_MOVE, NULL },
         { GNOME_APP_UI_ITEM, N_("_Redo move"),
           N_("Redo the undone move"),
 	  NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REDO,
+	  GNOME_APP_PIXMAP_STOCK, GTK_STOCK_REDO,
           GNOME_KEY_NAME_REDO_MOVE,  GNOME_KEY_MOD_REDO_MOVE, NULL },
         { GNOME_APP_UI_ITEM, N_("_Hint"),
           N_("Get a hint for your next move"),
@@ -280,7 +276,7 @@ static GnomeUIInfo menu_defaults[] = {
         { GNOME_APP_UI_ITEM, N_("_Scores..."),
           N_("View the scores"),
 	  NULL, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SCORES,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_SCORES,
           0,  (GdkModifierType) 0, NULL },
         { GNOME_APP_UI_ITEM, N_("_End game"),
           N_("End the current game"),
@@ -333,7 +329,8 @@ static gchar *menu_names[] =
 /* Creates a pixmap appropriate for items.  */
 
 static GtkWidget *
-create_pixmap (GnomeUIPixmapType pixmap_type, gconstpointer pixmap_info)
+create_pixmap (GnomeUIPixmapType pixmap_type, gconstpointer pixmap_info,
+	       GtkIconSize icon_size)
 {
 	GtkWidget *pixmap;
 	char *name;
@@ -341,15 +338,20 @@ create_pixmap (GnomeUIPixmapType pixmap_type, gconstpointer pixmap_info)
 	pixmap = NULL;
 
 	switch (pixmap_type) {
-#ifdef FIXME
 	case GNOME_APP_PIXMAP_STOCK:
-		pixmap = gnome_stock_new_with_icon (pixmap_info);
+		pixmap = gtk_image_new_from_stock (pixmap_info,
+						   icon_size);
 		break;
-#endif
 
 	case GNOME_APP_PIXMAP_DATA:
-		if (pixmap_info)
-			pixmap = gnome_pixmap_new_from_xpm_d ((const char**)pixmap_info);
+		if (pixmap_info != NULL) {
+			GdkPixbuf *pixbuf = gdk_pixbuf_new_from_xpm_data
+				((const char **)pixmap_info);
+			if (pixbuf != NULL) {
+				pixmap = gtk_image_new_from_pixbuf (pixbuf);
+				gdk_pixbuf_unref (pixbuf);
+			}
+		}
 
 		break;
 
@@ -365,7 +367,7 @@ create_pixmap (GnomeUIPixmapType pixmap_type, gconstpointer pixmap_info)
 			g_warning ("Could not find GNOME pixmap file %s", 
 					(char *) pixmap_info);
 		else {
-			pixmap = gnome_pixmap_new_from_file (name);
+			pixmap = gtk_image_new_from_file (name);
 			g_free (name);
 		}
 
@@ -406,13 +408,17 @@ showing_pixmaps_changed_notify(GConfClient            *client,
                 pixmap_info = gtk_object_get_data(GTK_OBJECT(mi),
                                                   gnome_app_helper_pixmap_info);
 
-                pixmap = create_pixmap(pixmap_type, pixmap_info);
+                pixmap = create_pixmap (pixmap_type, pixmap_info,
+					GTK_ICON_SIZE_MENU);
 
-                gtk_widget_show(pixmap);
-                
-		g_object_set(G_OBJECT(mi), "image", pixmap, NULL);
+		if (pixmap != NULL) {
+			gtk_widget_show(pixmap);
+
+			gtk_image_menu_item_set_image
+				(GTK_IMAGE_MENU_ITEM (mi), pixmap);
+		}
         } else if (!new_setting && (mi->image != NULL)) {
-		g_object_set(G_OBJECT(mi), "image", NULL, NULL);
+		gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), NULL);
         }
 }
 
@@ -432,8 +438,8 @@ remove_notify_cb(GtkObject *obj, gpointer data)
 }
 
 static void
-setup_image_menu_item(GtkWidget *mi, GnomeUIPixmapType pixmap_type,
-		      gconstpointer pixmap_info)
+setup_image_menu_item (GtkWidget *mi, GnomeUIPixmapType pixmap_type,
+		       gconstpointer pixmap_info)
 {
         guint notify_id;
         GConfClient *conf;
@@ -458,11 +464,14 @@ setup_image_menu_item(GtkWidget *mi, GnomeUIPixmapType pixmap_type,
                                   NULL)) {
                 GtkWidget *pixmap;
 
-                pixmap = create_pixmap(pixmap_type, pixmap_info);
+                pixmap = create_pixmap (pixmap_type, pixmap_info,
+					GTK_ICON_SIZE_MENU);
 
-                gtk_widget_show(pixmap);
-                
-		g_object_set(G_OBJECT(mi), "image", pixmap, NULL);
+		if (pixmap != NULL) {
+			gtk_widget_show (pixmap);
+			gtk_image_menu_item_set_image
+				(GTK_IMAGE_MENU_ITEM (mi), pixmap);
+		}
         }
 
         notify_id = gconf_client_notify_add(conf,
@@ -963,7 +972,7 @@ create_menu_item (GtkMenuShell       *menu_shell,
 
 	switch (uiinfo->type) {
 	case GNOME_APP_UI_SEPARATOR:
-	        uiinfo->widget = gtk_menu_item_new ();
+	        uiinfo->widget = gtk_separator_menu_item_new ();
 		break;
 	case GNOME_APP_UI_ITEM:
 	case GNOME_APP_UI_SUBTREE:
@@ -976,20 +985,13 @@ create_menu_item (GtkMenuShell       *menu_shell,
 
 		        /* Create the pixmap */
 
-		        /* FIXME: this should later allow for on-the-fly configuration of 
-			 * whether pixmaps are displayed or not ???
-			 */
+			uiinfo->widget = gtk_image_menu_item_new ();
 
-		        if ((uiinfo->pixmap_type != GNOME_APP_PIXMAP_NONE) &&
-			    gnome_preferences_get_menus_have_icons()) {
-			        uiinfo->widget = gtk_image_menu_item_new (NULL,
-									  uiinfo->label ? uiinfo->label : "");
-
-                                setup_image_menu_item(uiinfo->widget,
-						      uiinfo->pixmap_type, 
-						      uiinfo->pixmap_info);
-			} else
-			        uiinfo->widget = gtk_menu_item_new ();
+		        if (uiinfo->pixmap_type != GNOME_APP_PIXMAP_NONE) {
+                                setup_image_menu_item (uiinfo->widget,
+						       uiinfo->pixmap_type, 
+						       uiinfo->pixmap_info);
+			}
 		}
 		break;
 
@@ -1396,6 +1398,8 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 					(GTK_MENU_SHELL (menu), 
 					 uiinfo->moreinfo, orig_uibdata, 
 					 accel_group, uline_accels, 0);
+
+				/* FIXME: make this runtime configurable */ 
 				if (gnome_preferences_get_menus_have_tearoff ()) {
 					tearoff = gtk_tearoff_menu_item_new ();
 					gtk_widget_show (tearoff);
@@ -1589,6 +1593,7 @@ gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo,
 	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menubar), uiinfo, uibdata, 
 				    app->accel_group, TRUE, 0);
 
+	/* FIXME: make this runtime configurable */ 
 	if (gnome_preferences_get_menus_have_tearoff ()) {
 		gchar *app_name;
 
@@ -1622,7 +1627,9 @@ create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio,
 	case GNOME_APP_UI_TOGGLEITEM:
 		/* Create the icon */
 
-		pixmap = create_pixmap (uiinfo->pixmap_type, uiinfo->pixmap_info);
+		pixmap = create_pixmap (uiinfo->pixmap_type, uiinfo->pixmap_info,
+					/* FIXME: what about small toolbar */
+					GTK_ICON_SIZE_LARGE_TOOLBAR);
 
 		/* Create the toolbar item */
 
@@ -1929,7 +1936,12 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
 	g_return_if_fail (uiinfo != NULL);
 	g_return_if_fail (uibdata != NULL);
 
-	toolbar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
+	toolbar = gtk_toolbar_new ();
+	gtk_toolbar_set_orientation (GTK_TOOLBAR (toolbar),
+				     GTK_ORIENTATION_HORIZONTAL);
+	/* FIXME: isn't this set by some of that gtk+2->gconf magic goo? */
+	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar),
+			       GTK_TOOLBAR_BOTH);
 	gnome_app_fill_toolbar_custom(GTK_TOOLBAR (toolbar), uiinfo, uibdata, 
 			app->accel_group);
 	gnome_app_set_toolbar (app, GTK_TOOLBAR (toolbar));
@@ -2325,15 +2337,15 @@ gnome_app_helper_gettext (const gchar *str)
 #endif
 
 static void
-set_bevels(GnomeDockItem *dock_item, gboolean bevels)
+set_bevels(BonoboDockItem *dock_item, gboolean bevels)
 {
         if (bevels) {
                 gtk_container_set_border_width (GTK_CONTAINER (dock_item), 1);
-                gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item),
+                bonobo_dock_item_set_shadow_type (BONOBO_DOCK_ITEM (dock_item),
                                                  GTK_SHADOW_OUT);
         } else {
                 gtk_container_set_border_width (GTK_CONTAINER (dock_item), 0);
-                gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item),
+                bonobo_dock_item_set_shadow_type (BONOBO_DOCK_ITEM (dock_item),
                                                  GTK_SHADOW_NONE);
         }
 }
@@ -2346,7 +2358,7 @@ dockitem_bevels_changed_notify(GConfClient            *client,
 {
         gboolean bevels = TRUE;
         GtkWidget *w = user_data;
-        GnomeDockItem *dock_item = GNOME_DOCK_ITEM(w);
+        BonoboDockItem *dock_item = BONOBO_DOCK_ITEM(w);
 	GConfValue *value = gconf_entry_get_value (entry);
 
         if (value &&
@@ -2518,7 +2530,7 @@ toolbar_style_changed_notify(GConfClient            *client,
 /**
  * gnome_app_setup_toolbar
  * @toolbar: Pointer to #GtkToolbar widget
- * @dock_item: Pointer to a #GnomeDockItem the toolbar is inside, or NULL for none
+ * @dock_item: Pointer to a #BonoboDockItem the toolbar is inside, or NULL for none
  *
  * Description:
  * Sets up a toolbar to use GNOME user preferences
@@ -2526,7 +2538,7 @@ toolbar_style_changed_notify(GConfClient            *client,
 
 void
 gnome_app_setup_toolbar (GtkToolbar *toolbar,
-                         GnomeDockItem *dock_item)
+                         BonoboDockItem *dock_item)
 {
         GConfClient *conf;
 

@@ -41,8 +41,7 @@
 #include <gtk/gtktoolbar.h>
 #include <gtk/gtkwindow.h>
 
-
-#include "gnome-dock.h"
+#include <bonobo/bonobo-dock.h>
 
 G_BEGIN_DECLS
 
@@ -88,7 +87,7 @@ struct _GnomeApp {
 	GtkWidget *contents;
 
 	/* Dock layout.  */
-	GnomeDockLayout *layout;
+	BonoboDockLayout *layout;
 
 	/* Main accelerator group for this window (hotkeys live here).  */
 	GtkAccelGroup *accel_group;
@@ -139,8 +138,8 @@ void gnome_app_set_contents (GnomeApp *app, GtkWidget *contents);
 void gnome_app_add_toolbar (GnomeApp *app,
 			    GtkToolbar *toolbar,
 			    const gchar *name,
-			    GnomeDockItemBehavior behavior,
-			    GnomeDockPlacement placement,
+			    BonoboDockItemBehavior behavior,
+			    BonoboDockPlacement placement,
 			    gint band_num,
 			    gint band_position,
 			    gint offset);
@@ -148,24 +147,24 @@ void gnome_app_add_toolbar (GnomeApp *app,
 GtkWidget *gnome_app_add_docked (GnomeApp *app,
 				 GtkWidget *widget,
 				 const gchar *name,
-				 GnomeDockItemBehavior behavior,
-				 GnomeDockPlacement placement,
+				 BonoboDockItemBehavior behavior,
+				 BonoboDockPlacement placement,
 				 gint band_num,
 				 gint band_position,
 				 gint offset);
 
 void gnome_app_add_dock_item (GnomeApp *app,
-			      GnomeDockItem *item,
-			      GnomeDockPlacement placement,
+			      BonoboDockItem *item,
+			      BonoboDockPlacement placement,
 			      gint band_num,
 			      gint band_position,
 			      gint offset);
 
 void gnome_app_enable_layout_config (GnomeApp *app, gboolean enable);
 
-GnomeDock *gnome_app_get_dock (GnomeApp *app);
+BonoboDock *gnome_app_get_dock (GnomeApp *app);
 
-GnomeDockItem *gnome_app_get_dock_item_by_name (GnomeApp *app,
+BonoboDockItem *gnome_app_get_dock_item_by_name (GnomeApp *app,
 						const gchar *name);
 
 G_END_DECLS

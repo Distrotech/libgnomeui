@@ -34,7 +34,7 @@
  *
  * Toolbar separators and configurable relief by Andrew Veliath.
  *
- * Modified by Ettore Perazzoli to support GnomeDock.
+ * Modified by Ettore Perazzoli to support BonoboDock.
  *
  */
 
@@ -47,14 +47,14 @@
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
 
+
 #include <libgnome/gnome-program.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
 #include <libgnome/gnome-preferences.h>
+#include <bonobo/bonobo-dock.h>
 #include "gnome-app-helper.h"
 #include "gnome-uidefs.h"
-#include "gnome-dock.h"
-#include "gnome-init.h"
 #include "gnome-window.h"
 
 #include "gnome-app.h"
@@ -86,7 +86,7 @@ static void gnome_app_set_property   (GObject       *object,
 
 static gchar *read_layout_config  (GnomeApp      *app);
 static void   write_layout_config (GnomeApp      *app,
-				   GnomeDockLayout *layout);
+				   BonoboDockLayout *layout);
 static void   layout_changed      (GtkWidget     *widget,
 				   gpointer       data);
 
@@ -107,11 +107,11 @@ read_layout_config (GnomeApp *app)
 }
 
 static void
-write_layout_config (GnomeApp *app, GnomeDockLayout *layout)
+write_layout_config (GnomeApp *app, BonoboDockLayout *layout)
 {
 	gchar *s;
 
-	s = gnome_dock_layout_create_string (layout);
+	s = bonobo_dock_layout_create_string (layout);
 	gnome_config_push_prefix (app->prefix);
 	gnome_config_set_string (LAYOUT_CONFIG_PATH, s);
 	gnome_config_pop_prefix ();
@@ -190,8 +190,10 @@ gnome_app_get_property (GObject       *object,
 static void
 gnome_app_init (GnomeApp *app)
 {
+	/* FIXME!!!!!!!
 	const char *str = NULL;
 	GValue value = { 0, };
+	*/
 
 	app->_priv = NULL;
 	/* XXX: when there is some private stuff enable this
@@ -207,7 +209,7 @@ gnome_app_init (GnomeApp *app)
 	app->vbox = gtk_vbox_new (FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (app), app->vbox);
 
-	app->dock = gnome_dock_new ();
+	app->dock = bonobo_dock_new ();
 	gtk_box_pack_start (GTK_BOX (app->vbox), app->dock,
 			    TRUE, TRUE, 0);
 
@@ -216,9 +218,11 @@ gnome_app_init (GnomeApp *app)
 			    GTK_SIGNAL_FUNC (layout_changed),
 			    (gpointer) app);
 
-	app->layout = gnome_dock_layout_new ();
+	app->layout = bonobo_dock_layout_new ();
 
 	app->enable_layout_config = TRUE;
+
+	/* FIXME!!!!!!!
 	g_value_init (&value, G_TYPE_STRING);
 	g_object_get_property (G_OBJECT (gnome_program_get ()),
 			       LIBGNOMEUI_PARAM_DEFAULT_ICON, &value);
@@ -226,6 +230,7 @@ gnome_app_init (GnomeApp *app)
 	if (str != NULL)
 		gnome_window_set_icon_from_file (GTK_WINDOW (app), str, FALSE);
 	g_value_unset (&value);
+	*/
 }
 
 static void
@@ -242,11 +247,11 @@ gnome_app_show (GtkWidget *widget)
 			/* Override the layout with the user's saved
 			   configuration.  */
 			s = read_layout_config (app);
-			gnome_dock_layout_parse_string (app->layout, s);
+			bonobo_dock_layout_parse_string (app->layout, s);
 			g_free (s);
 		}
 
-		gnome_dock_add_from_layout (GNOME_DOCK (app->dock),
+		bonobo_dock_add_from_layout (BONOBO_DOCK (app->dock),
 					    app->layout);
 
 		if (app->enable_layout_config)
@@ -268,14 +273,14 @@ layout_changed (GtkWidget *w, gpointer data)
 	GnomeApp *app;
 
 	g_return_if_fail (GNOME_IS_APP (data));
-	g_return_if_fail (GNOME_IS_DOCK (w));
+	g_return_if_fail (BONOBO_IS_DOCK (w));
 
 	app = GNOME_APP (data);
 
 	if (app->enable_layout_config) {
-		GnomeDockLayout *layout;
+		BonoboDockLayout *layout;
 
-		layout = gnome_dock_get_layout (GNOME_DOCK (app->dock));
+		layout = bonobo_dock_get_layout (BONOBO_DOCK (app->dock));
 		write_layout_config (app, layout);
 		gtk_object_unref (GTK_OBJECT (layout));
 	}
@@ -431,10 +436,10 @@ gnome_app_set_contents (GnomeApp *app, GtkWidget *contents)
 	g_return_if_fail (contents != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (contents));
 
-	gnome_dock_set_client_area (GNOME_DOCK (app->dock), contents);
+	bonobo_dock_set_client_area (BONOBO_DOCK (app->dock), contents);
 
 	/* Re-fetch it in case it did not change */
-	new_contents = gnome_dock_get_client_area (GNOME_DOCK (app->dock));
+	new_contents = bonobo_dock_get_client_area (BONOBO_DOCK (app->dock));
 
 	if (new_contents == contents && new_contents != app->contents) {
 		gtk_widget_show (new_contents);
@@ -460,7 +465,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 {
 	GtkWidget *dock_item;
 	GtkAccelGroup *ag;
-	GnomeDockItemBehavior behavior;
+	BonoboDockItemBehavior behavior;
 
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
@@ -468,13 +473,13 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	g_return_if_fail(menubar != NULL);
 	g_return_if_fail(GTK_IS_MENU_BAR(menubar));
 
-	behavior = (GNOME_DOCK_ITEM_BEH_EXCLUSIVE
-		    | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
+	behavior = (BONOBO_DOCK_ITEM_BEH_EXCLUSIVE
+		    | BONOBO_DOCK_ITEM_BEH_NEVER_VERTICAL);
 	
 	if (!gnome_preferences_get_menubar_detachable())
-		behavior |= GNOME_DOCK_ITEM_BEH_LOCKED;
+		behavior |= BONOBO_DOCK_ITEM_BEH_LOCKED;
 
-	dock_item = gnome_dock_item_new (GNOME_APP_MENUBAR_NAME,
+	dock_item = bonobo_dock_item_new (GNOME_APP_MENUBAR_NAME,
 					 behavior);
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (menubar));
 
@@ -498,25 +503,25 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 		gtk_container_set_border_width (GTK_CONTAINER (app->menubar),
 						border_width);
 	} else
-		gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item),
+		bonobo_dock_item_set_shadow_type (BONOBO_DOCK_ITEM (dock_item),
 						 GTK_SHADOW_NONE);
 
 	if (app->layout != NULL)
-		gnome_dock_layout_add_item (app->layout,
-					    GNOME_DOCK_ITEM (dock_item),
-					    GNOME_DOCK_TOP,
+		bonobo_dock_layout_add_item (app->layout,
+					    BONOBO_DOCK_ITEM (dock_item),
+					    BONOBO_DOCK_TOP,
 					    0, 0, 0);
 	else
-		gnome_dock_add_item(GNOME_DOCK(app->dock),
-				    GNOME_DOCK_ITEM (dock_item),
-				    GNOME_DOCK_TOP,
+		bonobo_dock_add_item(BONOBO_DOCK(app->dock),
+				    BONOBO_DOCK_ITEM (dock_item),
+				    BONOBO_DOCK_TOP,
 				    0, 0, 0, TRUE);
 
 	gtk_widget_show (GTK_WIDGET (menubar));
 	gtk_widget_show (GTK_WIDGET (dock_item));
 
 	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
-	if (ag && !g_slist_find(gtk_accel_groups_from_object (GTK_OBJECT (app)), ag))
+	if (ag && !g_slist_find(gtk_accel_groups_from_object (G_OBJECT (app)), ag))
 	        gtk_window_add_accel_group(GTK_WINDOW(app), ag);
 }
 
@@ -593,7 +598,7 @@ gnome_app_set_statusbar_custom (GnomeApp *app,
  * @offset: Offset from the previous dock item in the band; if there is
  * no previous item, offset from the beginning of the band.
  *
- * Create a new &GnomeDockItem widget containing @toolbar, and add it
+ * Create a new &BonoboDockItem widget containing @toolbar, and add it
  * to @app's dock with the specified layout information.  Notice that,
  * if automatic layout configuration is enabled, the layout is
  * overridden by the saved configuration, if any.
@@ -602,8 +607,8 @@ void
 gnome_app_add_toolbar (GnomeApp *app,
 		       GtkToolbar *toolbar,
 		       const gchar *name,
-		       GnomeDockItemBehavior behavior,
-		       GnomeDockPlacement placement,
+		       BonoboDockItemBehavior behavior,
+		       BonoboDockPlacement placement,
 		       gint band_num,
 		       gint band_position,
 		       gint offset)
@@ -616,21 +621,21 @@ gnome_app_add_toolbar (GnomeApp *app,
 	g_return_if_fail(GNOME_IS_APP(app));
 	g_return_if_fail(toolbar != NULL);
 
-	dock_item = gnome_dock_item_new (name, behavior);
+	dock_item = bonobo_dock_item_new (name, behavior);
 
 	gtk_container_set_border_width (GTK_CONTAINER (toolbar), 1);
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (toolbar));
 
 	if(app->layout)
-		gnome_dock_layout_add_item (app->layout,
-					    GNOME_DOCK_ITEM (dock_item),
+		bonobo_dock_layout_add_item (app->layout,
+					    BONOBO_DOCK_ITEM (dock_item),
 					    placement,
 					    band_num,
 					    band_position,
 					    offset);
 	else
-		gnome_dock_add_item (GNOME_DOCK(app->dock),
-				     GNOME_DOCK_ITEM (dock_item),
+		bonobo_dock_add_item (BONOBO_DOCK(app->dock),
+				     BONOBO_DOCK_ITEM (dock_item),
 				     placement,
 				     band_num,
 				     band_position,
@@ -638,13 +643,13 @@ gnome_app_add_toolbar (GnomeApp *app,
 				     TRUE);
 
 
-	gnome_app_setup_toolbar(toolbar, GNOME_DOCK_ITEM(dock_item));
+	gnome_app_setup_toolbar(toolbar, BONOBO_DOCK_ITEM(dock_item));
 	
 	gtk_widget_show (GTK_WIDGET (toolbar));
 	gtk_widget_show (GTK_WIDGET (dock_item));
 
 	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
-	if (ag && !g_slist_find(gtk_accel_groups_from_object (GTK_OBJECT (app)), ag))
+	if (ag && !g_slist_find(gtk_accel_groups_from_object (G_OBJECT (app)), ag))
 	        gtk_window_add_accel_group(GTK_WINDOW(app), ag);
 }
 
@@ -661,20 +666,20 @@ void
 gnome_app_set_toolbar (GnomeApp *app,
 		       GtkToolbar *toolbar)
 {
-	GnomeDockItemBehavior behavior;
+	BonoboDockItemBehavior behavior;
 
 	/* Making dock items containing toolbars use
-	   `GNOME_DOCK_ITEM_BEH_EXCLUSIVE' is not really a
+	   `BONOBO_DOCK_ITEM_BEH_EXCLUSIVE' is not really a
 	   requirement.  We only do this for backwards compatibility.  */
-	behavior = GNOME_DOCK_ITEM_BEH_EXCLUSIVE;
+	behavior = BONOBO_DOCK_ITEM_BEH_EXCLUSIVE;
 	
 	if (!gnome_preferences_get_toolbar_detachable())
-		behavior |= GNOME_DOCK_ITEM_BEH_LOCKED;
+		behavior |= BONOBO_DOCK_ITEM_BEH_LOCKED;
 	
 	gnome_app_add_toolbar (app, toolbar,
 			       GNOME_APP_TOOLBAR_NAME,
 			       behavior,
-			       GNOME_DOCK_TOP,
+			       BONOBO_DOCK_TOP,
 			       1, 0, 0);
 }
 
@@ -695,22 +700,22 @@ gnome_app_set_toolbar (GnomeApp *app,
  **/
 void
 gnome_app_add_dock_item (GnomeApp *app,
-			 GnomeDockItem *item,
-			 GnomeDockPlacement placement,
+			 BonoboDockItem *item,
+			 BonoboDockPlacement placement,
 			 gint band_num,
 			 gint band_position,
 			 gint offset)
 {
 	if (app->layout)
-		gnome_dock_layout_add_item (app->layout,
-					    GNOME_DOCK_ITEM (item),
+		bonobo_dock_layout_add_item (app->layout,
+					    BONOBO_DOCK_ITEM (item),
 					    placement,
 					    band_num,
 					    band_position,
 					    offset);
 	else
-		gnome_dock_add_item (GNOME_DOCK(app->dock),
-				     GNOME_DOCK_ITEM( item),
+		bonobo_dock_add_item (BONOBO_DOCK(app->dock),
+				     BONOBO_DOCK_ITEM( item),
 				     placement,
 				     band_num,
 				     band_position,
@@ -745,17 +750,17 @@ GtkWidget *
 gnome_app_add_docked (GnomeApp *app,
 		      GtkWidget *widget,
 		      const gchar *name,
-		      GnomeDockItemBehavior behavior,
-		      GnomeDockPlacement placement,
+		      BonoboDockItemBehavior behavior,
+		      BonoboDockPlacement placement,
 		      gint band_num,
 		      gint band_position,
 		      gint offset)
 {
 	GtkWidget *item;
 
-	item = gnome_dock_item_new (name, behavior);
+	item = bonobo_dock_item_new (name, behavior);
 	gtk_container_add (GTK_CONTAINER (item), widget);
-	gnome_app_add_dock_item (app, GNOME_DOCK_ITEM (item),
+	gnome_app_add_dock_item (app, BONOBO_DOCK_ITEM (item),
 				 placement, band_num, band_position, offset);
 
 	return item;
@@ -785,19 +790,19 @@ gnome_app_enable_layout_config (GnomeApp *app, gboolean enable)
  * 
  * Return value: The retrieved dock item.
  **/
-GnomeDockItem *
+BonoboDockItem *
 gnome_app_get_dock_item_by_name (GnomeApp *app,
 				 const gchar *name)
 {
-	GnomeDockItem *item;
+	BonoboDockItem *item;
 
-	item = gnome_dock_get_item_by_name (GNOME_DOCK (app->dock), name,
+	item = bonobo_dock_get_item_by_name (BONOBO_DOCK (app->dock), name,
 					    NULL, NULL, NULL, NULL);
 
 	if (item == NULL && app->layout != NULL) {
-		GnomeDockLayoutItem *i;
+		BonoboDockLayoutItem *i;
 
-		i = gnome_dock_layout_get_item_by_name (app->layout,
+		i = bonobo_dock_layout_get_item_by_name (app->layout,
 							name);
 		if (i == NULL)
 			return NULL;
@@ -812,12 +817,12 @@ gnome_app_get_dock_item_by_name (GnomeApp *app,
  * gnome_app_get_dock:
  * @app: A &GnomeApp widget
  * 
- * Retrieves the &GnomeDock widget contained in the &GnomeApp.
+ * Retrieves the &BonoboDock widget contained in the &GnomeApp.
  * 
- * Returns: The &GnomeDock widget.
+ * Returns: The &BonoboDock widget.
  **/
-GnomeDock *
+BonoboDock *
 gnome_app_get_dock (GnomeApp *app)
 {
-	return GNOME_DOCK (app->dock);
+	return BONOBO_DOCK (app->dock);
 }

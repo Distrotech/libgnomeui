@@ -44,6 +44,10 @@ noinst_HEADERS = \
 libgnomeui_2_la_SOURCES = \
 	gnometypebuiltins.h		\
 	gnometypebuiltins.c		\
+	gnome-app.c			\
+	gnome-app-helper.c		\
+	gnome-app-util.c		\
+	gnome-appbar.c			\
 	gnome-stock-icons.c		\
 	gnome-canvas-init.c		\
 	gnome-client.c			\
@@ -74,6 +78,10 @@ libgnomeui_2_la_SOURCES = \
 
 ## this lists all the non-generated headers
 gnome_headers = \
+	gnome-app.h			\
+	gnome-app-helper.h		\
+	gnome-app-util.h		\
+	gnome-appbar.h			\
 	gnome-canvas-init.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
