@@ -423,7 +423,7 @@ paint_with_pixbuf (GnomePixmap *gpixmap, GdkRectangle *area)
 		guchar *dest_pixels, *c, *a, *original_pixels;
 
 
-		dest_source = gdk_pixbuf_new (ART_PIX_RGB,
+		dest_source = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
 					      FALSE,
 					      gdk_pixbuf_get_bits_per_sample (draw_source),
 					      gdk_pixbuf_get_width (draw_source) - left_clip - right_clip,
@@ -1345,7 +1345,7 @@ saturate_and_pixelate(GdkPixbuf *pixbuf, gfloat saturation, gboolean pixelate)
 		height = gdk_pixbuf_get_height (pixbuf);
 		rowstride = gdk_pixbuf_get_rowstride (pixbuf);
                 
-		target = gdk_pixbuf_new (ART_PIX_RGB,
+		target = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
 					 has_alpha,
 					 gdk_pixbuf_get_bits_per_sample (pixbuf),
 					 width, height);

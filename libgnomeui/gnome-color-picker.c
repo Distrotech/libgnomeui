@@ -341,7 +341,7 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 	 * picker's pixmap.
 	 */
 
-	cp->pixbuf = gdk_pixbuf_new (ART_PIX_RGB, FALSE, 8, COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
+	cp->pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
 
 	cp->gc = NULL;
 	gtk_widget_pop_colormap ();

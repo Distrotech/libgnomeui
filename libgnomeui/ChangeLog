@@ -1,3 +1,10 @@
+2000-04-20  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* gnome-color-picker.c (gnome_color_picker_init): gdk_pixbuf API changes
+
+	* gnome-pixmap.c (saturate_and_pixelate): ditto
+	(paint_with_pixbuf): ditto
+
 2000-04-18  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-about.c (gnome_about_load_logo): Determing the size of the
