@@ -50,7 +50,6 @@ static GdkFilterReturn gtk_socket_filter_func   (GdkXEvent *gdk_xevent,
 static void gtk_window_remove_embedded_xid (GtkWindow *window, guint xid);
 static void gtk_window_add_embedded_xid    (GtkWindow *window, guint xid);
 
-#define DEBUG_PLUGSOCKET
 #ifdef DEBUG_PLUGSOCKET
 #define DPRINTF(arg) g_print arg
 #else
