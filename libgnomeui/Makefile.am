@@ -246,7 +246,7 @@ EXTRA_DIST =					\
 	libgnomeui-2.0.pc.in
 
 libgnomeui_2_la_LDFLAGS = \
-	-version-info $(LIBGNOMEUI_CURRENT:)$(LIBGNOMEUI_REVISION):$(LIBGNOMEUI_AGE) \
+	-version-info $(LIBGNOMEUI_CURRENT):$(LIBGNOMEUI_REVISION):$(LIBGNOMEUI_AGE) \
 	-export-symbols-regex "^[^_].*"
 
 libgnomeui_2_la_LIBADD = \
