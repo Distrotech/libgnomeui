@@ -1,3 +1,7 @@
+1998-12-08  James Henstridge  <james@daa.com.au>
+
+	* gnome-mdi-generic-child.c: added documentation for this widget.
+
 1998-12-07  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.h, gnome-dialog.c 
