@@ -177,6 +177,9 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
 	
 	gtk_object_class_add_signals (object_class, date_edit_signals, LAST_SIGNAL);
+
+	class->date_changed = NULL;
+	class->time_changed = NULL;
 }
 
 static void
@@ -187,7 +190,7 @@ gnome_date_edit_init (GnomeDateEdit *gde)
 	
 	gde->date_entry  = gtk_entry_new ();
 	gtk_widget_set_usize (gde->date_entry, 90, 0);
-	gtk_box_pack_start (GTK_BOX (gde), gde->date_entry, TRUE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (gde), gde->date_entry, TRUE, TRUE, 0);
 	gtk_widget_show (gde->date_entry);
 	
 	gde->date_button = gtk_button_new_with_label (_("Calendar..."));
@@ -198,7 +201,7 @@ gnome_date_edit_init (GnomeDateEdit *gde)
 
 	gde->time_entry = gtk_entry_new_with_max_length (9);
 	gtk_widget_set_usize (gde->time_entry, 88, 0);
-	gtk_box_pack_start (GTK_BOX (gde), gde->time_entry, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (gde), gde->time_entry, TRUE, TRUE, 0);
 	gtk_widget_show (gde->date_entry);
 
 	gde->time_popup = gtk_option_menu_new ();
@@ -211,7 +214,6 @@ gnome_date_edit_init (GnomeDateEdit *gde)
 	 */
 	gtk_signal_connect (GTK_OBJECT (gde), "realize",
 			    GTK_SIGNAL_FUNC (fill_time_popup), gde);
-
 }
 
 void

@@ -1,3 +1,12 @@
+1998-04-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dateedit.c (gnome_date_edit_class_init): Initialize signal
+	handlers.
+	(gnome_date_edit_init): Changed flags passed to
+	gtk_box_pack_start() to make the widget look nicer when resized.
+
+	* gnome-dateedit.h: Fixed the declarations for the class signals.
+
 Tue Apr 14 16:35:40 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h (gnome_apps_menu_new): Now has

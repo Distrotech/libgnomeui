@@ -27,8 +27,8 @@ typedef struct {
 
 typedef struct {
 	GtkHBoxClass parent_class;
-	void (*time_changed) (void *);
-	void (*date_changed) (void *);
+	void (*date_changed) (GnomeDateEdit *gde);
+	void (*time_changed) (GnomeDateEdit *gde);
 } GnomeDateEditClass;
 
 guint     gnome_date_edit_get_type        (void);
