@@ -39,7 +39,8 @@ static void helpwindow_destroy_callback (GtkWidget *widget, gpointer data);
 static void cut_callback (GtkWidget *widget, gpointer data);
 static void copy_callback (GtkWidget *widget, gpointer data);
 static void paste_callback (GtkWidget *widget, gpointer data);
-static GnomeUIInfo *append_ui_info (GnomeUIInfo *base, GnomeUIInfo *info);
+static gint popup_pre_callback (GtkWidget *widget, GdkEventButton *event, GnomeUIInfo *cutptr);
+static GnomeUIInfo *append_ui_info (GnomeUIInfo *base, GnomeUIInfo *info, GnomeUIInfo **cutptr);
 
 static GnomeUIInfo separator[] = {
         {GNOME_APP_UI_SEPARATOR},
@@ -247,7 +248,7 @@ gnome_popup_help_place_window (GtkWidget *helpwindow, GtkWidget *widget, GtkTool
   gtk_widget_show_now (helpwindow);
 }
 static GnomeUIInfo *
-append_ui_info (GnomeUIInfo *base, GnomeUIInfo *info)
+append_ui_info (GnomeUIInfo *base, GnomeUIInfo *info, GnomeUIInfo **cutptr)
 {
         GnomeUIInfo *retval;
         gint j, i = 0;
@@ -255,10 +256,13 @@ append_ui_info (GnomeUIInfo *base, GnomeUIInfo *info)
 	for (retval = base; retval&&retval->type != GNOME_APP_UI_ENDOFINFO; retval++, i++);
 	for (retval = info; retval&&retval->type != GNOME_APP_UI_ENDOFINFO; retval++, i++);
         retval = g_malloc (sizeof (GnomeUIInfo[i+1]));
+
         for (i = 0;base&&base->type != GNOME_APP_UI_ENDOFINFO; base++, i++) {
                 retval[i] = base[0];
         }
 
+        if (info == cutcopymenu)
+                *cutptr = retval + i;
         for (j = 0;info&&info->type != GNOME_APP_UI_ENDOFINFO; info++, j++) {
                 retval[i + j] = info[0];
         }
@@ -357,6 +361,29 @@ help_callback (GtkWidget *menu, gpointer unused)
 
 }
 
+static gint
+popup_pre_callback (GtkWidget *widget, GdkEventButton *event, GnomeUIInfo *cutptr) 
+{
+        if (event->button != 3)
+		return FALSE;
+
+        if (GTK_EDITABLE (widget)->selection_start_pos == GTK_EDITABLE (widget)->selection_end_pos) {
+                gtk_widget_set_sensitive (cutptr[0].widget, FALSE);
+                gtk_widget_set_sensitive (cutptr[1].widget, FALSE);
+        } else {
+                gtk_widget_set_sensitive (cutptr[0].widget, TRUE);
+                gtk_widget_set_sensitive (cutptr[1].widget, TRUE);
+        }
+
+        if (GTK_EDITABLE (widget)->editable)
+                gtk_widget_set_sensitive (cutptr[2].widget, TRUE);
+        else
+                gtk_widget_set_sensitive (cutptr[2].widget, FALSE);
+        
+        return FALSE;
+}
+
+
 static void
 cut_callback (GtkWidget *widget, gpointer data)
 {
@@ -393,6 +420,7 @@ gnome_widget_add_help_with_uidata (GtkWidget *widget,
 {
         GnomeUIInfo *finalmenu = NULL;
         GtkWidget *menu;
+        GnomeUIInfo *cutptr = NULL;
 
         g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (widget));
@@ -400,17 +428,18 @@ gnome_widget_add_help_with_uidata (GtkWidget *widget,
 
         /* set up the menu type */
         if (help != NULL) {
-                finalmenu = append_ui_info (finalmenu, helpmenu);
+                finalmenu = append_ui_info (finalmenu, helpmenu, NULL);
         }
         if (GTK_IS_EDITABLE (widget)) {
                 if (help != NULL)
-                        finalmenu = append_ui_info (finalmenu, separator);
-                finalmenu = append_ui_info (finalmenu, cutcopymenu);
+                        finalmenu = append_ui_info (finalmenu, separator, NULL);
+                finalmenu = append_ui_info (finalmenu, cutcopymenu, &cutptr);
         }
 
         if (menuinfo != NULL) {
-                finalmenu = append_ui_info (finalmenu, separator);
-                finalmenu = append_ui_info (finalmenu, menuinfo);
+                if ((help != NULL) || (GTK_IS_EDITABLE (widget)))
+                        finalmenu = append_ui_info (finalmenu, separator, NULL);
+                finalmenu = append_ui_info (finalmenu, menuinfo, NULL);
         }
         
         if (finalmenu == NULL)
@@ -419,6 +448,12 @@ gnome_widget_add_help_with_uidata (GtkWidget *widget,
                 return;
 
         menu = gnome_popup_menu_new (finalmenu);
+        /* now, we tweak. */
+        if (GTK_IS_EDITABLE (widget)) {
+                gtk_signal_connect (GTK_OBJECT (widget), "button_press_event",
+                                    (GtkSignalFunc) popup_pre_callback,
+                                    cutptr);
+        }
         gnome_popup_menu_attach (menu, widget, user_data);
         
         if (help != NULL) {

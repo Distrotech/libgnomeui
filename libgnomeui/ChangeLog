@@ -1,3 +1,8 @@
+1998-11-20  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-popup-help.c (popup_pre_callback): Now Cut and Copy are
+	disabled if there is no selection.
+
 1998-11-20  Evan Lawrence <evan@worldpath.net>
 
 	* gnome-app-helper.[ch]: Added a gnome_app_remove_menu_range
