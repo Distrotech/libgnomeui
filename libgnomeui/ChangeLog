@@ -1,3 +1,8 @@
+2001-08-07  Darin Adler  <darin@bentspoon.com>
+
+	* oafgnome.c: Remove unnecessary includes of now-nonexistent
+	headers to make things compile.
+
 2001-08-07  Michael Meeks  <michael@ximian.com>
 
 	* oafgnome.c: mostly port to gnome 2.0 and bonobo-activation.
