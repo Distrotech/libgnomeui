@@ -31,6 +31,9 @@ static void gnome_canvas_text_destroy    (GtkObject            *object);
 static void gnome_canvas_text_set_arg    (GtkObject            *object,
 					  GtkArg               *arg,
 					  guint                 arg_id);
+static void gnome_canvas_text_get_arg    (GtkObject            *object,
+					  GtkArg               *arg,
+					  guint                 arg_id);
 
 static void   gnome_canvas_text_reconfigure (GnomeCanvasItem *item);
 static void   gnome_canvas_text_realize     (GnomeCanvasItem *item);
@@ -89,6 +92,7 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 
 	object_class->destroy = gnome_canvas_text_destroy;
 	object_class->set_arg = gnome_canvas_text_set_arg;
+	object_class->get_arg = gnome_canvas_text_get_arg;
 
 	item_class->reconfigure = gnome_canvas_text_reconfigure;
 	item_class->realize = gnome_canvas_text_realize;
@@ -275,6 +279,40 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	if (calc_bounds)
 		recalc_bounds (text);
+}
+
+static void
+gnome_canvas_text_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+{
+	GnomeCanvasText *text;
+
+	text = GNOME_CANVAS_TEXT (object);
+
+	switch (arg_id) {
+	case ARG_TEXT:
+		GTK_VALUE_STRING (*arg) = g_strdup (text->text);
+		break;
+
+	case ARG_X:
+		GTK_VALUE_DOUBLE (*arg) = text->x;
+		break;
+
+	case ARG_Y:
+		GTK_VALUE_DOUBLE (*arg) = text->y;
+		break;
+
+	case ARG_ANCHOR:
+		GTK_VALUE_ENUM (*arg) = text->anchor;
+		break;
+
+	case ARG_JUSTIFICATION:
+		GTK_VALUE_ENUM (*arg) = text->justification;
+		break;
+
+	default:
+		arg->type = GTK_TYPE_INVALID;
+		break;
+	}
 }
 
 static void

@@ -34,6 +34,9 @@ static void gnome_canvas_re_init       (GnomeCanvasRE      *re);
 static void gnome_canvas_re_set_arg    (GtkObject          *object,
 					GtkArg             *arg,
 					guint               arg_id);
+static void gnome_canvas_re_get_arg    (GtkObject          *object,
+					GtkArg             *arg,
+					guint               arg_id);
 
 static void gnome_canvas_re_reconfigure (GnomeCanvasItem *item);
 static void gnome_canvas_re_realize     (GnomeCanvasItem *item);
@@ -74,16 +77,17 @@ gnome_canvas_re_class_init (GnomeCanvasREClass *class)
 	object_class = (GtkObjectClass *) class;
 	item_class = (GnomeCanvasItemClass *) class;
 
-	gtk_object_add_arg_type ("GnomeCanvasRE::x1", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_X1);
-	gtk_object_add_arg_type ("GnomeCanvasRE::y1", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_Y1);
-	gtk_object_add_arg_type ("GnomeCanvasRE::x2", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_X2);
-	gtk_object_add_arg_type ("GnomeCanvasRE::y2", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_Y2);
+	gtk_object_add_arg_type ("GnomeCanvasRE::x1", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X1);
+	gtk_object_add_arg_type ("GnomeCanvasRE::y1", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y1);
+	gtk_object_add_arg_type ("GnomeCanvasRE::x2", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X2);
+	gtk_object_add_arg_type ("GnomeCanvasRE::y2", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y2);
 	gtk_object_add_arg_type ("GnomeCanvasRE::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasRE::outline_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_OUTLINE_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasRE::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
 	gtk_object_add_arg_type ("GnomeCanvasRE::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 
 	object_class->set_arg = gnome_canvas_re_set_arg;
+	object_class->get_arg = gnome_canvas_re_get_arg;
 
 	item_class->reconfigure = gnome_canvas_re_reconfigure;
 	item_class->realize = gnome_canvas_re_realize;
@@ -212,6 +216,36 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	if (calc_bounds)
 		recalc_bounds (re);
+}
+
+static void
+gnome_canvas_re_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+{
+	GnomeCanvasRE *re;
+
+	re = GNOME_CANVAS_RE (object);
+
+	switch (arg_id) {
+	case ARG_X1:
+		GTK_VALUE_DOUBLE (*arg) = re->x1;
+		break;
+
+	case ARG_Y1:
+		GTK_VALUE_DOUBLE (*arg) = re->y1;
+		break;
+
+	case ARG_X2:
+		GTK_VALUE_DOUBLE (*arg) = re->x2;
+		break;
+
+	case ARG_Y2:
+		GTK_VALUE_DOUBLE (*arg) = re->y2;
+		break;
+
+	default:
+		arg->type = GTK_TYPE_INVALID;
+		break;
+	}
 }
 
 static void

@@ -30,6 +30,9 @@ static void gnome_canvas_image_destroy    (GtkObject             *object);
 static void gnome_canvas_image_set_arg    (GtkObject             *object,
 					   GtkArg                *arg,
 					   guint                  arg_id);
+static void gnome_canvas_image_get_arg    (GtkObject             *object,
+					   GtkArg                *arg,
+					   guint                  arg_id);
 
 static void   gnome_canvas_image_reconfigure (GnomeCanvasItem *item);
 static void   gnome_canvas_image_realize     (GnomeCanvasItem *item);
@@ -78,15 +81,16 @@ gnome_canvas_image_class_init (GnomeCanvasImageClass *class)
 
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasImage::image", GTK_TYPE_POINTER, GTK_ARG_WRITABLE, ARG_IMAGE);
-	gtk_object_add_arg_type ("GnomeCanvasImage::x", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_X);
-	gtk_object_add_arg_type ("GnomeCanvasImage::y", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_Y);
-	gtk_object_add_arg_type ("GnomeCanvasImage::width", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH);
-	gtk_object_add_arg_type ("GnomeCanvasImage::height", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_HEIGHT);
-	gtk_object_add_arg_type ("GnomeCanvasImage::anchor", GTK_TYPE_ANCHOR_TYPE, GTK_ARG_WRITABLE, ARG_ANCHOR);
+	gtk_object_add_arg_type ("GnomeCanvasImage::image", GTK_TYPE_POINTER, GTK_ARG_READWRITE, ARG_IMAGE);
+	gtk_object_add_arg_type ("GnomeCanvasImage::x", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X);
+	gtk_object_add_arg_type ("GnomeCanvasImage::y", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y);
+	gtk_object_add_arg_type ("GnomeCanvasImage::width", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_WIDTH);
+	gtk_object_add_arg_type ("GnomeCanvasImage::height", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_HEIGHT);
+	gtk_object_add_arg_type ("GnomeCanvasImage::anchor", GTK_TYPE_ANCHOR_TYPE, GTK_ARG_READWRITE, ARG_ANCHOR);
 
 	object_class->destroy = gnome_canvas_image_destroy;
 	object_class->set_arg = gnome_canvas_image_set_arg;
+	object_class->get_arg = gnome_canvas_image_get_arg;
 
 	item_class->reconfigure = gnome_canvas_image_reconfigure;
 	item_class->realize = gnome_canvas_image_realize;
@@ -256,6 +260,44 @@ gnome_canvas_image_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	if (calc_bounds)
 		recalc_bounds (image);
+}
+
+static void
+gnome_canvas_image_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+{
+	GnomeCanvasImage *image;
+
+	image = GNOME_CANVAS_IMAGE (object);
+
+	switch (arg_id) {
+	case ARG_IMAGE:
+		GTK_VALUE_POINTER (*arg) = image->im;
+		break;
+
+	case ARG_X:
+		GTK_VALUE_DOUBLE (*arg) = image->x;
+		break;
+
+	case ARG_Y:
+		GTK_VALUE_DOUBLE (*arg) = image->y;
+		break;
+
+	case ARG_WIDTH:
+		GTK_VALUE_DOUBLE (*arg) = image->width;
+		break;
+
+	case ARG_HEIGHT:
+		GTK_VALUE_DOUBLE (*arg) = image->height;
+		break;
+
+	case ARG_ANCHOR:
+		GTK_VALUE_ENUM (*arg) = image->anchor;
+		break;
+
+	default:
+		arg->type = GTK_TYPE_INVALID;
+		break;
+	}
 }
 
 static void

@@ -32,6 +32,10 @@
  *
  * - Sane font handling API.
  *
+ * - Get_arg methods for items:
+ *   - How to query colors?
+ *   - How to fetch the outline width and know whether it is in pixels or units?
+ *
  * - Talk Raph into using a very similar API for GtkCaanvas.
  *
  * - item_class->output (item, "postscript")
@@ -649,6 +653,9 @@ static void gnome_canvas_group_init        (GnomeCanvasGroup      *group);
 static void gnome_canvas_group_set_arg     (GtkObject             *object,
 					    GtkArg                *arg,
 					    guint                  arg_id);
+static void gnome_canvas_group_get_arg     (GtkObject             *object,
+					    GtkArg                *arg,
+					    guint                  arg_id);
 static void gnome_canvas_group_destroy     (GtkObject             *object);
 
 static void   gnome_canvas_group_reconfigure (GnomeCanvasItem *item);
@@ -699,10 +706,11 @@ gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 
 	group_parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasGroup::x", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, GROUP_ARG_X);
-	gtk_object_add_arg_type ("GnomeCanvasGroup::y", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, GROUP_ARG_Y);
+	gtk_object_add_arg_type ("GnomeCanvasGroup::x", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, GROUP_ARG_X);
+	gtk_object_add_arg_type ("GnomeCanvasGroup::y", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, GROUP_ARG_Y);
 
 	object_class->set_arg = gnome_canvas_group_set_arg;
+	object_class->get_arg = gnome_canvas_group_get_arg;
 	object_class->destroy = gnome_canvas_group_destroy;
 
 	item_class->reconfigure = gnome_canvas_group_reconfigure;
@@ -754,6 +762,28 @@ gnome_canvas_group_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 		if (item->parent)
 			gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
+	}
+}
+
+static void
+gnome_canvas_group_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+{
+	GnomeCanvasGroup *group;
+
+	group = GNOME_CANVAS_GROUP (object);
+
+	switch (arg_id) {
+	case GROUP_ARG_X:
+		GTK_VALUE_DOUBLE (*arg) = group->xpos;
+		break;
+
+	case GROUP_ARG_Y:
+		GTK_VALUE_DOUBLE (*arg) = group->ypos;
+		break;
+
+	default:
+		arg->type = GTK_TYPE_INVALID;
+		break;
 	}
 }
 

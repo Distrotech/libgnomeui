@@ -59,6 +59,9 @@ static void gnome_canvas_line_destroy    (GtkObject            *object);
 static void gnome_canvas_line_set_arg    (GtkObject            *object,
 					  GtkArg               *arg,
 					  guint                 arg_id);
+static void gnome_canvas_line_get_arg    (GtkObject            *object,
+					  GtkArg               *arg,
+					  guint                 arg_id);
 
 static void   gnome_canvas_line_reconfigure (GnomeCanvasItem *item);
 static void   gnome_canvas_line_realize     (GnomeCanvasItem *item);
@@ -107,22 +110,23 @@ gnome_canvas_line_class_init (GnomeCanvasLineClass *class)
 
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasLine::points", GTK_TYPE_POINTER, GTK_ARG_WRITABLE, ARG_POINTS);
+	gtk_object_add_arg_type ("GnomeCanvasLine::points", GTK_TYPE_POINTER, GTK_ARG_READWRITE, ARG_POINTS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasLine::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
-	gtk_object_add_arg_type ("GnomeCanvasLine::cap_style", GTK_TYPE_GDK_CAP_STYLE, GTK_ARG_WRITABLE, ARG_CAP_STYLE);
-	gtk_object_add_arg_type ("GnomeCanvasLine::join_style", GTK_TYPE_GDK_JOIN_STYLE, GTK_ARG_WRITABLE, ARG_JOIN_STYLE);
-	gtk_object_add_arg_type ("GnomeCanvasLine::first_arrowhead", GTK_TYPE_BOOL, GTK_ARG_WRITABLE, ARG_FIRST_ARROWHEAD);
-	gtk_object_add_arg_type ("GnomeCanvasLine::last_arrowhead", GTK_TYPE_BOOL, GTK_ARG_WRITABLE, ARG_LAST_ARROWHEAD);
-	gtk_object_add_arg_type ("GnomeCanvasLine::smooth", GTK_TYPE_BOOL, GTK_ARG_WRITABLE, ARG_SMOOTH);
-	gtk_object_add_arg_type ("GnomeCanvasLine::spline_steps", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_SPLINE_STEPS);
-	gtk_object_add_arg_type ("GnomeCanvasLine::arrow_shape_a", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_ARROW_SHAPE_A);
-	gtk_object_add_arg_type ("GnomeCanvasLine::arrow_shape_b", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_ARROW_SHAPE_B);
-	gtk_object_add_arg_type ("GnomeCanvasLine::arrow_shape_c", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_ARROW_SHAPE_C);
+	gtk_object_add_arg_type ("GnomeCanvasLine::cap_style", GTK_TYPE_GDK_CAP_STYLE, GTK_ARG_READWRITE, ARG_CAP_STYLE);
+	gtk_object_add_arg_type ("GnomeCanvasLine::join_style", GTK_TYPE_GDK_JOIN_STYLE, GTK_ARG_READWRITE, ARG_JOIN_STYLE);
+	gtk_object_add_arg_type ("GnomeCanvasLine::first_arrowhead", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_FIRST_ARROWHEAD);
+	gtk_object_add_arg_type ("GnomeCanvasLine::last_arrowhead", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_LAST_ARROWHEAD);
+	gtk_object_add_arg_type ("GnomeCanvasLine::smooth", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_SMOOTH);
+	gtk_object_add_arg_type ("GnomeCanvasLine::spline_steps", GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_SPLINE_STEPS);
+	gtk_object_add_arg_type ("GnomeCanvasLine::arrow_shape_a", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_ARROW_SHAPE_A);
+	gtk_object_add_arg_type ("GnomeCanvasLine::arrow_shape_b", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_ARROW_SHAPE_B);
+	gtk_object_add_arg_type ("GnomeCanvasLine::arrow_shape_c", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_ARROW_SHAPE_C);
 
 	object_class->destroy = gnome_canvas_line_destroy;
 	object_class->set_arg = gnome_canvas_line_set_arg;
+	object_class->get_arg = gnome_canvas_line_get_arg;
 
 	item_class->reconfigure = gnome_canvas_line_reconfigure;
 	item_class->realize = gnome_canvas_line_realize;
@@ -347,6 +351,66 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	if (calc_bounds)
 		recalc_bounds (line);
+}
+
+static void
+gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+{
+	GnomeCanvasLine *line;
+	GnomeCanvasPoints *points;
+
+	line = GNOME_CANVAS_LINE (object);
+
+	switch (arg_id) {
+	case ARG_POINTS:
+		if (line->num_points != 0) {
+			points = gnome_canvas_points_new (line->num_points);
+			memcpy (points->coords, line->coords, 2 * line->num_points * sizeof (double));
+			GTK_VALUE_POINTER (*arg) = points;
+		} else
+			GTK_VALUE_POINTER (*arg) = NULL;
+		break;
+
+	case ARG_CAP_STYLE:
+		GTK_VALUE_ENUM (*arg) = line->cap;
+		break;
+
+	case ARG_JOIN_STYLE:
+		GTK_VALUE_ENUM (*arg) = line->join;
+		break;
+
+	case ARG_FIRST_ARROWHEAD:
+		GTK_VALUE_BOOL (*arg) = line->first_arrow;
+		break;
+
+	case ARG_LAST_ARROWHEAD:
+		GTK_VALUE_BOOL (*arg) = line->last_arrow;
+		break;
+
+	case ARG_SMOOTH:
+		GTK_VALUE_BOOL (*arg) = line->smooth;
+		break;
+
+	case ARG_SPLINE_STEPS:
+		GTK_VALUE_UINT (*arg) = line->spline_steps;
+		break;
+
+	case ARG_ARROW_SHAPE_A:
+		GTK_VALUE_DOUBLE (*arg) = line->shape_a;
+		break;
+
+	case ARG_ARROW_SHAPE_B:
+		GTK_VALUE_DOUBLE (*arg) = line->shape_b;
+		break;
+
+	case ARG_ARROW_SHAPE_C:
+		GTK_VALUE_DOUBLE (*arg) = line->shape_c;
+		break;
+
+	default:
+		arg->type = GTK_TYPE_INVALID;
+		break;
+	}
 }
 
 static void

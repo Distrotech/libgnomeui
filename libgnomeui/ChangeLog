@@ -1,5 +1,12 @@
 1998-07-28  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	Added standard Gtk functions for querying object arguments:
+
+	* gnome-canvas.c (gnome_canvas_group_get_arg): New function.
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_get_arg): New function.
+	* gnome-canvas-text.c (gnome_canvas_text_get_arg): New function.
+	* gnome-canvas-line.c (gnome_canvas_line_get_arg): New function.
+
 	* gnome-canvas.c (gnome_canvas_request_redraw): Do not do anything
 	if the widget is not drawable.
 
