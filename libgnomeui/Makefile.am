@@ -128,7 +128,7 @@ gnome_headers = \
 	gnome-dns.h			\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
-        gnome-font-picker.h
+        gnome-font-picker.h		\
 	gnome-font-selector.h 		\
 	gnome-geometry.h		\
 	gnome-gtk-utils.h		\

@@ -1,3 +1,9 @@
+1998-10-15  Mark Galassi  <rosalia@cygnus.com>
+
+	* Makefile.am (gnome_headers): fixed a typo: a \ was missing after
+	gnome-font-picker.h, thus causing several
+	$(prefix)/include/libgnomeui/*.h files to not be installed.
+
 1998-10-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_item_hide): 
