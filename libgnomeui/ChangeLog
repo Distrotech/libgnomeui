@@ -1,3 +1,8 @@
+1999-01-07  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-app.c (gnome_app_set_statusbar): okay -- lets try again.
+	The old spacing wasn't liked so it's now down to 0 pixels.
+
 Wed Jan 06 21:13:54 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-app-helper.h: Added strings for use in menu path

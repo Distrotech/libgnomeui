@@ -357,7 +357,6 @@ void
 gnome_app_set_statusbar (GnomeApp *app,
 		         GtkWidget *statusbar)
 {
-	GtkWidget *frame;
 	GtkWidget *hbox;
 
 	g_return_if_fail(app != NULL);
@@ -368,19 +367,12 @@ gnome_app_set_statusbar (GnomeApp *app,
 	app->statusbar = GTK_WIDGET(statusbar);
 	gtk_widget_show(app->statusbar);
 
-	frame = gtk_frame_new(NULL);
-	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_NONE);
-	gtk_container_set_border_width(GTK_CONTAINER(frame), 0);
-	gtk_widget_show(frame);
-
 	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_container_set_border_width(GTK_CONTAINER(hbox), 2);
+	gtk_container_set_border_width(GTK_CONTAINER(hbox), 0);
 	gtk_box_pack_start(GTK_BOX(hbox), statusbar, TRUE, TRUE, 0);
 	gtk_widget_show(hbox);
 
-	gtk_container_add(GTK_CONTAINER(frame), hbox);
-
-	gtk_box_pack_start (GTK_BOX (app->vbox), frame, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (app->vbox), hbox, FALSE, FALSE, 0);
 }
 
 void
