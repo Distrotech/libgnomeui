@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2002-05-27 16:51+0200\n"
+"POT-Creation-Date: 2002-06-07 11:42+0200\n"
 "PO-Revision-Date: 2002-04-15 19:27+01:00\n"
 "Last-Translator: Hoang Ngoc Tu <hntu@gmx.de>\n"
 "Language-Team: Vietnamese <vi@li.org>\n"
@@ -174,24 +174,24 @@ msgstr "Không nối được với quản lý tác vụ"
 msgid "Session management"
 msgstr "Quản lý tác vụ"
 
-#: libgnomeui/gnome-client.c:2510
+#: libgnomeui/gnome-client.c:2477
 msgid "Cancel Logout"
 msgstr "Bỏ kết thúc"
 
-#: libgnomeui/gnome-color-picker.c:407
+#: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "Chấp nhận số liệu mầu không có giá trị\n"
 
-#: libgnomeui/gnome-color-picker.c:457
+#: libgnomeui/gnome-color-picker.c:464
 #, fuzzy
 msgid "Color Selector"
 msgstr "Xóa phần đã chọn"
 
-#: libgnomeui/gnome-color-picker.c:458
+#: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr ""
 
-#: libgnomeui/gnome-color-picker.c:480
+#: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "Chọn một mầu"
 
@@ -262,7 +262,7 @@ msgstr "Chọn tập tin"
 msgid "Select the time from a list"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:1001
+#: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 
@@ -403,7 +403,7 @@ msgstr "Mầu dùng để kéo nối kết"
 msgid "This button will take you to the URI that it displays."
 msgstr ""
 
-#: libgnomeui/gnome-href.c:392
+#: libgnomeui/gnome-href.c:393
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
@@ -411,27 +411,27 @@ msgstr ""
 "Sai sót xuất hiện khi thử khởi động bộ phận điều khiển URL.\n"
 "Hãy xem lại các thiết đặt trong Trụng tâm Điều khiển xem có sai sót gì không"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
 msgstr "Dùng hiển thị X"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "DISPLAY"
 msgstr "HIỂN THỊ"
 
-#: libgnomeui/gnome-ui-init.c:112
+#: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
 msgstr "Thư viện của GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:563
+#: libgnomeui/gnome-ui-init.c:591
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Nhiều lỗi trong truy cập bộ nhớ xuất hiện; không hiển thị được đối thoại "
 "lỗi\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:577
+#: libgnomeui/gnome-ui-init.c:605
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -530,7 +530,7 @@ msgid "Hint for item 2"
 msgstr "Chỉ dẫn cho mục 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 msgid "_File"
 msgstr "_Tập tin"
 
@@ -538,7 +538,7 @@ msgstr "_Tập tin"
 msgid "_File/"
 msgstr "_Tập tin/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Biên tập"
 
@@ -546,7 +546,7 @@ msgstr "_Biên tập"
 msgid "_Edit/"
 msgstr "_Biên tập/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Xem"
 
@@ -554,7 +554,7 @@ msgstr "_Xem"
 msgid "_View/"
 msgstr "_Xem"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "Điề_u chỉnh"
 
@@ -563,7 +563,7 @@ msgid "_Settings/"
 msgstr "Điề_u chỉnh/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "Mới"
 
@@ -571,7 +571,7 @@ msgstr "Mới"
 msgid "_New/"
 msgstr "Mới/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Các tập tin"
 
@@ -579,15 +579,15 @@ msgstr "Các tập tin"
 msgid "Fi_les/"
 msgstr "Các tập tin"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "Các cửa sổ"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "Trò chơi"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
 msgstr "_Chỉ dẫn"
 
@@ -888,34 +888,34 @@ msgstr "Kết thúc chơi"
 msgid "End the current game"
 msgstr "Kết thúc trò chơi hiện thời"
 
-#: libgnomeui/gnome-app-helper.c:1130
+#: libgnomeui/gnome-app-helper.c:1144
 msgid "_Contents"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:1131
+#: libgnomeui/gnome-app-helper.c:1145
 #, fuzzy
 msgid "View help for this application"
 msgstr "Thông tin về ứng dụng này"
 
-#: libgnomeui/gnome-app-helper.c:2518
+#: libgnomeui/gnome-app-helper.c:2565
 msgid "Text Below Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2519
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Priority Text Beside Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2520
+#: libgnomeui/gnome-app-helper.c:2567
 #, fuzzy
 msgid "Icons Only"
 msgstr "Chỉ có các biểu tượng"
 
-#: libgnomeui/gnome-app-helper.c:2521
+#: libgnomeui/gnome-app-helper.c:2568
 #, fuzzy
 msgid "Text Only"
 msgstr "Chỉ có văn bản"
 
-#: libgnomeui/gnome-app-helper.c:2582
+#: libgnomeui/gnome-app-helper.c:2629
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
@@ -1264,37 +1264,37 @@ msgid ""
 "located."
 msgstr ""
 
-#: libgnomeui/gnome-icon-sel.c:297
+#: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection:'%s' không tồn tại hay không phải là một thư mục"
 
-#: libgnomeui/gnome-icon-sel.c:305
+#: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: Không mở được thư mục '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:407
+#: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
 msgstr "Sự tải các biểu tượng..."
 
-#: libgnomeui/gnome-messagebox.c:110
+#: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
 msgstr "Thông tin"
 
-#: libgnomeui/gnome-messagebox.c:115
+#: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
 msgstr "Cảnh cáo"
 
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
 msgstr "Lỗi"
 
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
 msgstr "Hỏi"
 
-#: libgnomeui/gnome-messagebox.c:132
+#: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Nhắn gửi"
 
@@ -1332,18 +1332,14 @@ msgstr "Người sử dụng"
 msgid "Score"
 msgstr "Điểm"
 
-#. the localized string should fit (after replacing the %a %b
-#. etc) in ~18 chars.
-#. %a is abbreviated weekday, %A is full weekday,
-#. %b %B are abbreviated and full monthname, %Y is year,
-#. %d is day of month, %m is month number, %T full hour,
-#. %H hours, %M minutes, %S seconds
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: libgnomeui/gnome-scores.c:199
+#: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a, %d.%m.%Y, %H.%M"
 
-#: libgnomeui/gnome-scores.c:412
+#: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 

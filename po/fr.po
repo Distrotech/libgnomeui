@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.117.1\n"
-"POT-Creation-Date: 2002-05-27 16:51+0200\n"
+"POT-Creation-Date: 2002-06-07 11:42+0200\n"
 "PO-Revision-Date: 2002-05-23 02:02+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
@@ -171,23 +171,23 @@ msgstr "Désactive la connexion avec le gestionnaire de session"
 msgid "Session management"
 msgstr "Gestion de session"
 
-#: libgnomeui/gnome-client.c:2510
+#: libgnomeui/gnome-client.c:2477
 msgid "Cancel Logout"
 msgstr "Annuler la demande de fin de session"
 
-#: libgnomeui/gnome-color-picker.c:407
+#: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "Donnée de couleur invalide reçue\n"
 
-#: libgnomeui/gnome-color-picker.c:457
+#: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
 msgstr "Sélecteur de couleur"
 
-#: libgnomeui/gnome-color-picker.c:458
+#: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "Ouvre un dialogue pour spécifier la couleur"
 
-#: libgnomeui/gnome-color-picker.c:480
+#: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "Choisissez une couleur"
 
@@ -256,7 +256,7 @@ msgstr "Sélectionner une heure"
 msgid "Select the time from a list"
 msgstr "Sélectionne l'heure depuis une liste"
 
-#: libgnomeui/gnome-dateedit.c:1001
+#: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date déconseillé, utiliser gnome_date_edit_get_time"
@@ -396,7 +396,7 @@ msgstr "Couleur utilisé pour dessiner le lien"
 msgid "This button will take you to the URI that it displays."
 msgstr "Ce bouton vous emmènera à l'URI qui est affichée."
 
-#: libgnomeui/gnome-href.c:392
+#: libgnomeui/gnome-href.c:393
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
@@ -406,27 +406,27 @@ msgstr ""
 "veuillez vérifier les réglages dans le centre de contrôle si ils sont "
 "corrects."
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
 msgstr "Visuel X à utiliser"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "DISPLAY"
 msgstr "VISUEL"
 
-#: libgnomeui/gnome-ui-init.c:112
+#: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
 msgstr "Bibliothèque GNOME d'interface graphique"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:563
+#: libgnomeui/gnome-ui-init.c:591
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Plusieurs erreurs de segmentation sont apparues ; ne peut afficher de "
 "dialogue d'erreur\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:577
+#: libgnomeui/gnome-ui-init.c:605
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -526,7 +526,7 @@ msgid "Hint for item 2"
 msgstr "Astuce pour l'élément fils"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 msgid "_File"
 msgstr "_Fichier"
 
@@ -534,7 +534,7 @@ msgstr "_Fichier"
 msgid "_File/"
 msgstr "_Fichier/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Édition"
 
@@ -542,7 +542,7 @@ msgstr "_Édition"
 msgid "_Edit/"
 msgstr "_Édition/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Vue"
 
@@ -550,7 +550,7 @@ msgstr "_Vue"
 msgid "_View/"
 msgstr "_Vue/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Paramètres"
 
@@ -559,7 +559,7 @@ msgid "_Settings/"
 msgstr "_Paramètres/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Nouveau"
 
@@ -567,7 +567,7 @@ msgstr "_Nouveau"
 msgid "_New/"
 msgstr "_Nouveau/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Fi_chiers"
 
@@ -575,15 +575,15 @@ msgstr "Fi_chiers"
 msgid "Fi_les/"
 msgstr "Fi_chiers/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_Fenêtres"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Jeu"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
 msgstr "_Aide"
 
@@ -877,31 +877,31 @@ msgstr "_Arrêter la partie"
 msgid "End the current game"
 msgstr "Termine la partie en cours"
 
-#: libgnomeui/gnome-app-helper.c:1130
+#: libgnomeui/gnome-app-helper.c:1144
 msgid "_Contents"
 msgstr "Contenu de l'_aide"
 
-#: libgnomeui/gnome-app-helper.c:1131
+#: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr "Affiche l'aide pour cette application"
 
-#: libgnomeui/gnome-app-helper.c:2518
+#: libgnomeui/gnome-app-helper.c:2565
 msgid "Text Below Icons"
 msgstr "Texte sous les icônes"
 
-#: libgnomeui/gnome-app-helper.c:2519
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Priority Text Beside Icons"
 msgstr "Priorité au texte sous les icônes"
 
-#: libgnomeui/gnome-app-helper.c:2520
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Icons Only"
 msgstr "Seulement des icônes"
 
-#: libgnomeui/gnome-app-helper.c:2521
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Text Only"
 msgstr "Seulement du texte"
 
-#: libgnomeui/gnome-app-helper.c:2582
+#: libgnomeui/gnome-app-helper.c:2629
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Utiliser la valeur par défaut (%s)"
@@ -1265,37 +1265,37 @@ msgstr ""
 "Vous devriez saisir ici le nom du répertoire où les images d'icônes sont "
 "situées."
 
-#: libgnomeui/gnome-icon-sel.c:297
+#: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection : « %s » n'existe pas ou n'est pas un répertoire"
 
-#: libgnomeui/gnome-icon-sel.c:305
+#: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection : ne peut ouvrir le répertoire « %s »"
 
-#: libgnomeui/gnome-icon-sel.c:407
+#: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
 msgstr "Chargement des icônes..."
 
-#: libgnomeui/gnome-messagebox.c:110
+#: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
 msgstr "Information"
 
-#: libgnomeui/gnome-messagebox.c:115
+#: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
 msgstr "Avertissement"
 
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
 msgstr "Erreur"
 
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
 msgstr "Question"
 
-#: libgnomeui/gnome-messagebox.c:132
+#: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Message"
 
@@ -1331,18 +1331,14 @@ msgstr "Utilisateur"
 msgid "Score"
 msgstr "Score"
 
-#. the localized string should fit (after replacing the %a %b
-#. etc) in ~18 chars.
-#. %a is abbreviated weekday, %A is full weekday,
-#. %b %B are abbreviated and full monthname, %Y is year,
-#. %d is day of month, %m is month number, %T full hour,
-#. %H hours, %M minutes, %S seconds
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: libgnomeui/gnome-scores.c:199
+#: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %d %b %Y, %T"
 
-#: libgnomeui/gnome-scores.c:412
+#: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 

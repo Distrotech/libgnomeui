@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-05-27 16:51+0200\n"
+"POT-Creation-Date: 2002-06-07 11:42+0200\n"
 "PO-Revision-Date: 2002-05-25 16:07+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -172,23 +172,23 @@ msgstr "Stäng av koppling till sessionshanteraren"
 msgid "Session management"
 msgstr "Sessionshantering"
 
-#: libgnomeui/gnome-client.c:2510
+#: libgnomeui/gnome-client.c:2477
 msgid "Cancel Logout"
 msgstr "Avbryt utloggning"
 
-#: libgnomeui/gnome-color-picker.c:407
+#: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "Mottog ogiltig färgdata\n"
 
-#: libgnomeui/gnome-color-picker.c:457
+#: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
 msgstr "Färgväljare"
 
-#: libgnomeui/gnome-color-picker.c:458
+#: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "Öppna en dialog för att ange färgen"
 
-#: libgnomeui/gnome-color-picker.c:480
+#: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "Välj en färg"
 
@@ -257,7 +257,7 @@ msgstr "Välj tid"
 msgid "Select the time from a list"
 msgstr "Välj tiden från en lista"
 
-#: libgnomeui/gnome-dateedit.c:1001
+#: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date är föråldrat, använd gnome_date_edit_get_time"
 
@@ -396,7 +396,7 @@ msgstr "Färg som används för att rita länken"
 msgid "This button will take you to the URI that it displays."
 msgstr "Denna knapp kommer att ta dig till URI:n som den visar."
 
-#: libgnomeui/gnome-href.c:392
+#: libgnomeui/gnome-href.c:393
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
@@ -404,25 +404,25 @@ msgstr ""
 "Fel uppstod vid körning av URL-hanteraren.\n"
 "Var vänlig och kontrollera att inställningarna i kontrollpanelen är korrekta."
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
 msgstr "X-display som skall användas"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:112
+#: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
 msgstr "GNOME-bibliotek för grafiska användargränssnitt"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:563
+#: libgnomeui/gnome-ui-init.c:591
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flera segmenteringsfel har inträffat; kan inte visa felmeddelande\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:577
+#: libgnomeui/gnome-ui-init.c:605
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -521,7 +521,7 @@ msgid "Hint for item 2"
 msgstr "Tips för objekt 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 msgid "_File"
 msgstr "_Arkiv"
 
@@ -529,7 +529,7 @@ msgstr "_Arkiv"
 msgid "_File/"
 msgstr "_Arkiv/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Redigera"
 
@@ -537,7 +537,7 @@ msgstr "_Redigera"
 msgid "_Edit/"
 msgstr "_Redigera/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Visa"
 
@@ -545,7 +545,7 @@ msgstr "_Visa"
 msgid "_View/"
 msgstr "_Visa/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Inställningar"
 
@@ -554,7 +554,7 @@ msgid "_Settings/"
 msgstr "_Inställningar/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Ny"
 
@@ -562,7 +562,7 @@ msgstr "_Ny"
 msgid "_New/"
 msgstr "_Ny/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Fi_ler"
 
@@ -570,15 +570,15 @@ msgstr "Fi_ler"
 msgid "Fi_les/"
 msgstr "Fi_ler/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_Fönster"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Spel"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
 msgstr "_Hjälp"
 
@@ -872,31 +872,31 @@ msgstr "_Avsluta spelet"
 msgid "End the current game"
 msgstr "Avsluta det aktuella spelet"
 
-#: libgnomeui/gnome-app-helper.c:1130
+#: libgnomeui/gnome-app-helper.c:1144
 msgid "_Contents"
 msgstr "_Innehåll"
 
-#: libgnomeui/gnome-app-helper.c:1131
+#: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr "Visa hjälp för detta program"
 
-#: libgnomeui/gnome-app-helper.c:2518
+#: libgnomeui/gnome-app-helper.c:2565
 msgid "Text Below Icons"
 msgstr "Text under ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2519
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Priority Text Beside Icons"
 msgstr "Prioritetstext bredvid ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2520
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Icons Only"
 msgstr "Endast ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2521
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Text Only"
 msgstr "Endast text"
 
-#: libgnomeui/gnome-app-helper.c:2582
+#: libgnomeui/gnome-app-helper.c:2629
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Använd skrivbordsstandard (%s)"
@@ -1254,37 +1254,37 @@ msgid ""
 "located."
 msgstr "Här bör du ange namnet på katalogen där ikonbilder finns."
 
-#: libgnomeui/gnome-icon-sel.c:297
+#: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: \"%s\" finns inte eller är inte en katalog"
 
-#: libgnomeui/gnome-icon-sel.c:305
+#: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: kunde inte öppna katalogen \"%s\""
 
-#: libgnomeui/gnome-icon-sel.c:407
+#: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
 msgstr "Läser in ikoner..."
 
-#: libgnomeui/gnome-messagebox.c:110
+#: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
 msgstr "Information"
 
-#: libgnomeui/gnome-messagebox.c:115
+#: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
 msgstr "Varning"
 
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
 msgstr "Fel"
 
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
 msgstr "Fråga"
 
-#: libgnomeui/gnome-messagebox.c:132
+#: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Meddelande"
 
@@ -1320,18 +1320,14 @@ msgstr "Användare"
 msgid "Score"
 msgstr "Poäng"
 
-#. the localized string should fit (after replacing the %a %b
-#. etc) in ~18 chars.
-#. %a is abbreviated weekday, %A is full weekday,
-#. %b %B are abbreviated and full monthname, %Y is year,
-#. %d is day of month, %m is month number, %T full hour,
-#. %H hours, %M minutes, %S seconds
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: libgnomeui/gnome-scores.c:199
+#: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %d %b %H.%M %Y"
 
-#: libgnomeui/gnome-scores.c:412
+#: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 

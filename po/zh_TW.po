@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.117.2\n"
-"POT-Creation-Date: 2002-06-04 05:57+0800\n"
+"POT-Creation-Date: 2002-06-07 11:42+0200\n"
 "PO-Revision-Date: 2002-06-05 00:20+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -407,25 +407,25 @@ msgstr ""
 "當嘗試啟動這個 URL 的處理程式時發生錯誤。\n"
 "請檢查在控制中心內的有關設定是否正確。 "
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
 msgstr "準備使用的 X 顯示畫面代號"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "DISPLAY"
 msgstr "顯示畫面"
 
-#: libgnomeui/gnome-ui-init.c:112
+#: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
 msgstr "GNOME 圖形介面函式庫"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:563
+#: libgnomeui/gnome-ui-init.c:591
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "發生了非常嚴重的錯誤；無法顯示錯誤對話盒\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:577
+#: libgnomeui/gnome-ui-init.c:605
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -523,8 +523,7 @@ msgid "Hint for item 2"
 msgstr "項目二的提示"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
-#: test-gnome/testgnome.xml.h:5
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 msgid "_File"
 msgstr "檔案(_F)"
 
@@ -532,7 +531,7 @@ msgstr "檔案(_F)"
 msgid "_File/"
 msgstr "檔案(_F)/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "編輯(_E)"
 
@@ -540,7 +539,7 @@ msgstr "編輯(_E)"
 msgid "_Edit/"
 msgstr "編輯(_E)/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "檢視(_V)"
 
@@ -548,7 +547,7 @@ msgstr "檢視(_V)"
 msgid "_View/"
 msgstr "檢視(_V)/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "設定(_S)"
 
@@ -557,7 +556,7 @@ msgid "_Settings/"
 msgstr "設定(_S)/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "新增(_N)"
 
@@ -565,7 +564,7 @@ msgstr "新增(_N)"
 msgid "_New/"
 msgstr "新增(_N)/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "檔案(_L)"
 
@@ -573,16 +572,15 @@ msgstr "檔案(_L)"
 msgid "Fi_les/"
 msgstr "檔案(_L)/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "視窗(_W)"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "遊戲(_G)"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
-#: test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
 msgstr "說明(_H)"
 
@@ -773,11 +771,11 @@ msgstr "設定此程式"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "關於(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "顯示有關此程式的資訊"
 
@@ -804,7 +802,7 @@ msgstr "建立新的視窗"
 msgid "_Close This Window"
 msgstr "關閉此視窗(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "關閉目前的視窗"
 
@@ -876,31 +874,31 @@ msgstr "結束遊戲(_E)"
 msgid "End the current game"
 msgstr "結束目前的遊戲"
 
-#: libgnomeui/gnome-app-helper.c:1130
+#: libgnomeui/gnome-app-helper.c:1144
 msgid "_Contents"
 msgstr "內容(_C)"
 
-#: libgnomeui/gnome-app-helper.c:1131
+#: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr "顯示有關此程式的說明文件"
 
-#: libgnomeui/gnome-app-helper.c:2520
+#: libgnomeui/gnome-app-helper.c:2565
 msgid "Text Below Icons"
 msgstr "圖示底部加上文字"
 
-#: libgnomeui/gnome-app-helper.c:2521
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Priority Text Beside Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2522
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Icons Only"
 msgstr "只顯示圖示"
 
-#: libgnomeui/gnome-app-helper.c:2523
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Text Only"
 msgstr "只顯示文字"
 
-#: libgnomeui/gnome-app-helper.c:2584
+#: libgnomeui/gnome-app-helper.c:2629
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "使用桌面的預設設定 (%s)"
@@ -1308,17 +1306,19 @@ msgstr "玩者"
 msgid "Score"
 msgstr "分數"
 
-#: libgnomeui/gnome-scores.c:198
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%x(%a) %T"
 
-#: libgnomeui/gnome-scores.c:399
+#: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "結束測試"
+#~ msgid "Exit the test"
+#~ msgstr "結束測試"
 
 #~ msgid "Find _Again"
 #~ msgstr "找下一個 (_A)"

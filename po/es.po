@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui cvs\n"
-"POT-Creation-Date: 2002-06-02 13:22+0200\n"
+"POT-Creation-Date: 2002-06-07 11:42+0200\n"
 "PO-Revision-Date: 2002-06-02 19:16+0100\n"
 "Last-Translator: Juan Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -107,7 +107,8 @@ msgid "Translator credits"
 msgstr "Créditos de los traductores"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos de los traductores. Esta cadena deberia estar marcada como "
 "traducible"
@@ -405,27 +406,27 @@ msgstr ""
 "Ha ocurrido un error mientras se intentaba ejecutar el manejador de URL.\n"
 "Por favor compruebe si la configuración del Centro de control es correcta."
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
 msgstr "display X a usar"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:112
+#: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Library"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:563
+#: libgnomeui/gnome-ui-init.c:591
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Han ocurrido múltiples errores de segmentación; no se puede mostrar el "
 "diálogo de error\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:577
+#: libgnomeui/gnome-ui-init.c:605
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -524,8 +525,7 @@ msgid "Hint for item 2"
 msgstr "Consejo para el elemento 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
-#: test-gnome/testgnome.xml.h:5
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 msgid "_File"
 msgstr "_Archivo"
 
@@ -533,7 +533,7 @@ msgstr "_Archivo"
 msgid "_File/"
 msgstr "_Archivo/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Editar"
 
@@ -541,7 +541,7 @@ msgstr "_Editar"
 msgid "_Edit/"
 msgstr "_Editar/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Vista"
 
@@ -549,7 +549,7 @@ msgstr "_Vista"
 msgid "_View/"
 msgstr "_Vista/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Configuración"
 
@@ -558,7 +558,7 @@ msgid "_Settings/"
 msgstr "_Configuración/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Nuevo"
 
@@ -566,7 +566,7 @@ msgstr "_Nuevo"
 msgid "_New/"
 msgstr "_Nuevo/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Archi_vos"
 
@@ -574,16 +574,15 @@ msgstr "Archi_vos"
 msgid "Fi_les/"
 msgstr "Archi_vos/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_Ventanas"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Juego"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
-#: test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
 msgstr "_Ayuda"
 
@@ -774,11 +773,11 @@ msgstr "Configurar la aplicación"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Acerca de"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
@@ -805,7 +804,7 @@ msgstr "Crear una nueva ventana"
 msgid "_Close This Window"
 msgstr "_Cerrar esta ventana"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Cerrar la ventana actual"
 
@@ -877,31 +876,31 @@ msgstr "_Finalizar juego"
 msgid "End the current game"
 msgstr "Finalizar el juego actual"
 
-#: libgnomeui/gnome-app-helper.c:1130
+#: libgnomeui/gnome-app-helper.c:1144
 msgid "_Contents"
 msgstr "_Contenidos"
 
-#: libgnomeui/gnome-app-helper.c:1131
+#: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr "Ver la ayuda para esta aplicación"
 
-#: libgnomeui/gnome-app-helper.c:2520
+#: libgnomeui/gnome-app-helper.c:2565
 msgid "Text Below Icons"
 msgstr "Texto bajo iconos"
 
-#: libgnomeui/gnome-app-helper.c:2521
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Priority Text Beside Icons"
 msgstr "Texto prioritario al lado de iconos"
 
-#: libgnomeui/gnome-app-helper.c:2522
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Icons Only"
 msgstr "Sólo iconos"
 
-#: libgnomeui/gnome-app-helper.c:2523
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Text Only"
 msgstr "Sólo texto"
 
-#: libgnomeui/gnome-app-helper.c:2584
+#: libgnomeui/gnome-app-helper.c:2629
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Usar escritorio predeterminado (%s)"
@@ -1032,8 +1031,8 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry usa la entrada de archivo para introducir nombres de archivos. "
-" Puede usar esta propiedad para obtener GnomeEntry si necesita modificar o "
+"GnomeEntry usa la entrada de archivo para introducir nombres de archivos.  "
+"Puede usar esta propiedad para obtener GnomeEntry si necesita modificar o "
 "consultar cualquiera de sus parámetros."
 
 #: libgnomeui/gnome-file-entry.c:282
@@ -1046,8 +1045,8 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry que usa la entrada de archivo para introducir nombres de archivos. "
-" Puede usar esta propiedad para obtener GtkEntry si necesita modificar o "
+"GtkEntry que usa la entrada de archivo para introducir nombres de archivos.  "
+"Puede usar esta propiedad para obtener GtkEntry si necesita modificar o "
 "consultar cualquiera de sus parámetros."
 
 #: libgnomeui/gnome-file-entry.c:527
@@ -1124,7 +1123,8 @@ msgstr "Usar tipografías en etiquetas"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr ""
+"Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1327,22 +1327,16 @@ msgstr "Usuario"
 msgid "Score"
 msgstr "Puntuación"
 
-#. the localized string should fit (after replacing the %a %b
-#. etc) in ~18 chars.
-#. %a is abbreviated weekday, %A is full weekday,
-#. %b %B are abbreviated and full monthname, %Y is year,
-#. %d is day of month, %m is month number, %T full hour,
-#. %H hours, %M minutes, %S seconds
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: libgnomeui/gnome-scores.c:198
+#: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
 
-#: libgnomeui/gnome-scores.c:399
+#: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Salir de la prueba"
-
+#~ msgid "Exit the test"
+#~ msgstr "Salir de la prueba"

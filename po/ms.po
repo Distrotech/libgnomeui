@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-05-28 03:54+0800\n"
+"POT-Creation-Date: 2002-06-07 11:42+0200\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -188,25 +188,25 @@ msgid "Session management"
 msgstr "Pengurusan sessi"
 
 # libgnomeui/gnome-client.c:2348
-#: libgnomeui/gnome-client.c:2510
+#: libgnomeui/gnome-client.c:2477
 msgid "Cancel Logout"
 msgstr "Batal Logkeluar"
 
-#: libgnomeui/gnome-color-picker.c:407
+#: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "Menerima data warna tidak sah\n"
 
 # libgnomeui/gnome-app-helper.c:184
-#: libgnomeui/gnome-color-picker.c:457
+#: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
 msgstr "Pemilih Warna"
 
-#: libgnomeui/gnome-color-picker.c:458
+#: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "Buka dialog untuk menyatakan warna"
 
 # libgnomeui/gnome-color-picker.c:313
-#: libgnomeui/gnome-color-picker.c:480
+#: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "Pilih satu warna"
 
@@ -280,7 +280,7 @@ msgstr "Pilih Masa"
 msgid "Select the time from a list"
 msgstr "Pilih masa dari senarai"
 
-#: libgnomeui/gnome-dateedit.c:1001
+#: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date dianaktirikan, guna gnome_date_edit_get_time"
 
@@ -427,7 +427,7 @@ msgstr "Warna digunakan untuk melukis pautan"
 msgid "This button will take you to the URI that it displays."
 msgstr "Butang ini akan membawa anda ke URI yang dipaparkan."
 
-#: libgnomeui/gnome-href.c:392
+#: libgnomeui/gnome-href.c:393
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
@@ -436,29 +436,29 @@ msgstr ""
 "Sila periksa tetapan pada Pusat Kawalan samada ianya betul."
 
 # libgnomeui/gnome-init.c:165
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
 msgstr "Antaramuka X yang hendak diguna"
 
 # libgnomeui/gnome-init.c:165
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:113
 msgid "DISPLAY"
 msgstr "PAPARAN"
 
 # libgnomeui/gnome-init.c:298
-#: libgnomeui/gnome-ui-init.c:112
+#: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
 msgstr "Pustaka GUI GNOME"
 
 # libgnomeui/gnome-init.c:642
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:563
+#: libgnomeui/gnome-ui-init.c:591
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Beberapa ralat segmentasi berlaku; tidak dapat paparkan dialog ralat\n"
 
 # libgnomeui/gnome-init.c:642
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:577
+#: libgnomeui/gnome-ui-init.c:605
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -569,8 +569,7 @@ msgid "Hint for item 2"
 msgstr "Petua item 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
-#: test-gnome/testgnome.xml.h:5
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 msgid "_File"
 msgstr "_Fail"
 
@@ -578,7 +577,7 @@ msgstr "_Fail"
 msgid "_File/"
 msgstr "_Fail/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:524
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Edit"
 
@@ -586,7 +585,7 @@ msgstr "_Edit"
 msgid "_Edit/"
 msgstr "_Edit/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:527
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Lihat"
 
@@ -594,7 +593,7 @@ msgstr "_Lihat"
 msgid "_View/"
 msgstr "_Lihat/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:530
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Tetapan"
 
@@ -603,7 +602,7 @@ msgid "_Settings/"
 msgstr "_Tetapan/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:296
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Baru"
 
@@ -612,7 +611,7 @@ msgid "_New/"
 msgstr "_Baru/"
 
 # libgnomeui/gnome-app-helper.c:88
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:533
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Fai_l"
 
@@ -622,18 +621,17 @@ msgid "Fi_les/"
 msgstr "Fai_l/"
 
 # libgnomeui/gnome-app-helper.c:90
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:536
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "Tet_ingkap"
 
 # libgnomeui/gnome-app-helper.c:91
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:542
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Permainan"
 
 # libgnomeui/gnome-app-helper.c:92
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
-#: test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
 msgstr "_Bantuan"
 
@@ -862,12 +860,12 @@ msgstr "Konfigurasikan aplikasi"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Perihal"
 
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Perihal aplikasi ini"
 
@@ -900,7 +898,7 @@ msgid "_Close This Window"
 msgstr "_Tutup Tetingkap Ini"
 
 # libgnomeui/gnome-app-helper.c:253
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Tutup tetingkap ini"
 
@@ -988,33 +986,33 @@ msgstr "_Tamat permainan"
 msgid "End the current game"
 msgstr "Tamatkan permainan ini"
 
-#: libgnomeui/gnome-app-helper.c:1130
+#: libgnomeui/gnome-app-helper.c:1144
 msgid "_Contents"
 msgstr "_Kandungan"
 
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:1131
+#: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr "Lihat bantuan bagi aplikasi ini"
 
-#: libgnomeui/gnome-app-helper.c:2518
+#: libgnomeui/gnome-app-helper.c:2565
 msgid "Text Below Icons"
 msgstr "Teks di Bawah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2519
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Priority Text Beside Icons"
 msgstr "Teks Prioriti di Sebelah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2520
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Icons Only"
 msgstr "Ikon Sahaja"
 
 # libgnomeui/gnome-stock.c:844
-#: libgnomeui/gnome-app-helper.c:2521
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Text Only"
 msgstr "Teks Sahaja"
 
-#: libgnomeui/gnome-app-helper.c:2582
+#: libgnomeui/gnome-app-helper.c:2629
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Guna default desktop (%s)"
@@ -1400,43 +1398,43 @@ msgid ""
 msgstr ""
 "Di sini anda patut masukkan nama direktori dimana imej ikon diletakkan."
 
-#: libgnomeui/gnome-icon-sel.c:297
+#: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: %s tak wujud atau ianya direktori"
 
-#: libgnomeui/gnome-icon-sel.c:305
+#: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: tak dapat membuka direktori '%s'"
 
 # libgnomeui/gnome-icon-sel.c:348
-#: libgnomeui/gnome-icon-sel.c:407
+#: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
 msgstr "Muatkan Ikon..."
 
 # libgnomeui/gnome-messagebox.c:111 libgnomeui/gnome-messagebox.c:244
-#: libgnomeui/gnome-messagebox.c:110
+#: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
 msgstr "Maklumat"
 
 # libgnomeui/gnome-messagebox.c:120 libgnomeui/gnome-messagebox.c:253
-#: libgnomeui/gnome-messagebox.c:115
+#: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
 msgstr "Amaran"
 
 # libgnomeui/gnome-messagebox.c:129 libgnomeui/gnome-messagebox.c:262
-#: libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
 msgstr "Ralat"
 
 # libgnomeui/gnome-messagebox.c:138 libgnomeui/gnome-messagebox.c:271
-#: libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
 msgstr "Soalan"
 
 # libgnomeui/gnome-messagebox.c:147 libgnomeui/gnome-messagebox.c:280
-#: libgnomeui/gnome-messagebox.c:132
+#: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
 msgstr "Mesej"
 
@@ -1480,25 +1478,20 @@ msgid "Score"
 msgstr "Mata"
 
 # libgnomeui/gnome-scores.c:130
-#. the localized string should fit (after replacing the %a %b
-#. etc) in ~18 chars.
-#. %a is abbreviated weekday, %A is full weekday,
-#. %b %B are abbreviated and full monthname, %Y is year,
-#. %d is day of month, %m is month number, %T full hour,
-#. %H hours, %M minutes, %S seconds
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: libgnomeui/gnome-scores.c:199
+#: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %T %d %b %Y"
 
-#: libgnomeui/gnome-scores.c:412
+#: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 
 # libgnomeui/gnome-app-helper.c:160
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Keluar ujian"
+#~ msgid "Exit the test"
+#~ msgstr "Keluar ujian"
 
 # libgnomeui/gnome-app-helper.c:204
 #~ msgid "Find _Again"
