@@ -834,7 +834,7 @@ msgstr "Das Spiel vorübergehend anhalten"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
-msgstr "Spiel neu_starten"
+msgstr "Spiel neu _starten"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
@@ -858,11 +858,11 @@ msgstr "Den zuletzt rückgängig gemachten Zug wiederherstellen"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
-msgstr "_Tip"
+msgstr "_Tipp"
 
 #: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
-msgstr "Einen Tip für den nächsten Zug abrufen"
+msgstr "Einen Tipp für den nächsten Zug abrufen"
 
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
