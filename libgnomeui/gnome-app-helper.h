@@ -472,28 +472,28 @@ typedef struct {
 
 /* Some standard menus */
 #define GNOMEUIINFO_MENU_FILE_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, D_("_File"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, N_("_File"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_EDIT_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, D_("_Edit"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, N_("_Edit"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_VIEW_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, D_("_View"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, N_("_View"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_SETTINGS_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, D_("_Settings"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, N_("_Settings"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_FILES_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, D_("Fi_les"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, N_("Fi_les"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_WINDOWS_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, D_("_Windows"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, N_("_Windows"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_HELP_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, D_("_Help"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, N_("_Help"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_GAME_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, D_("_Game"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, N_("_Game"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 		
 /*these are strings to be used for paths when working with the menus stuff*/
