@@ -8,16 +8,6 @@ LIB_VERSION_NUM=0.0.0
 #
 # The targets
 #
-noinst_PROGRAMS = \
-	test-recently-used	\
-	test-file-saver		\
-	selector_demo		\
-	stock_demo		\
-	winhints_demo		\
-	dock_demo 		\
-	animator_demo		\
-	mdi_demo
-
 bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap gnome-rexec-server
 lib_LTLIBRARIES = libgnomeui-2.la
 
@@ -310,25 +300,7 @@ gnomemarshal.c: @REBUILD@ stamp-gnomemarshal.h
 
 #######################
 
-test_file_saver_SOURCES = test-file-saver.c \
-	gnome-file-saver.h gnome-file-saver.c  ## here temporarily
-
-test_recently_used_SOURCES = test-recently-used.c \
-	gnome-recently-used.h gnome-recently-used.c  ## here temporarily
-
-selector_demo_SOURCES = selector_demo.c
-
 gnome_segv_SOURCES = gnome_segv.c
-
-stock_demo_SOURCES = stock_demo.c
-
-winhints_demo_SOURCES = winhints_demo.c
-
-animator_demo_SOURCES = animator_demo.c
-
-dock_demo_SOURCES = dock_demo.c
-
-mdi_demo_SOURCES = mdi_demo.c
 
 gtkrcdir = $(datadir)
 gtkrc_DATA = gtkrc gtkrc.el gtkrc.eo gtkrc.he gtkrc.hy gtkrc.ja \

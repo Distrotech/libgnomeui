@@ -1,5 +1,13 @@
 2000-12-08  Martin Baulig  <baulig@suse.de>
 
+	* animator_demo.c, dock_demo.c, mdi_demo.c, stock_demo.c,
+	selector_demo.c, winhints_demo.c: Moved to ../demos/.
+
+	* test-file-saver.c, test-recently-used.c: Moved to
+	../demos/.
+
+2000-12-08  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selectorP.h: Move everything but the prototypes of the
 	functions which are useful for subclasses into gnome-selector.c.
 	This mean that gnome-selectorP.h is now a semi-private header file;
