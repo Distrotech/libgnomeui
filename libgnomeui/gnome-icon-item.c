@@ -542,6 +542,7 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	int w, h;
 	GnomeIconTextItem *iti;
 	GnomeIconTextItemPrivate *priv;
+	GtkStateType state;
 
 	widget = GTK_WIDGET (item->canvas);
 	iti = GNOME_ICON_TEXT_ITEM (item);
@@ -561,12 +562,19 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	text_xofs = xofs - (iti->width - priv->layout_width - 2 * MARGIN_X) / 2;
 	text_yofs = yofs + MARGIN_Y;
 
-	if (iti->selected && !iti->editing)
+
+	if (GTK_WIDGET_HAS_FOCUS (widget))
+		state = GTK_STATE_SELECTED;
+	else
+		state = GTK_STATE_ACTIVE;
+		
+	if (iti->selected && !iti->editing) 
 		gdk_draw_rectangle (drawable,
-				    style->bg_gc[GTK_STATE_SELECTED],
+				    style->bg_gc[state],
 				    TRUE,
 				    xofs + 1, yofs + 1,
 				    w - 2, h - 2);
+	
 	if (iti->focused && ! iti->editing)
 		gtk_draw_focus (style,
 				drawable,
@@ -586,9 +594,7 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	}	
 
 	gdk_draw_layout (drawable,
-			 style->text_gc[(iti->selected
-				       ? GTK_STATE_SELECTED
-				       : GTK_STATE_NORMAL)],
+			 style->text_gc[state],
 			 text_xofs, 
 			 text_yofs,
 			 priv->layout);

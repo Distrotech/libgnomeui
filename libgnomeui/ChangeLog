@@ -1,3 +1,15 @@
+2002-02-11  Jorn Baayen  <jorn@nl.linux.org>
+
+	* libgnomeui/gnome-icon-item.c: use base_gc rather than bg_gc to
+	draw the background color of the selected item.
+
+2002-02-11  Iain Holmes  <iain@ximian.com>
+
+	* gnome-popup-menu.c (gnome_popup_menu_attach): Add GDK_KEY_PRESS_MASK
+	to the ev_widget. Connect to the popup-menu signal.
+	(popup_menu_pressed): Call the real_popup_button_pressed function with
+	ev == NULL.
+
 2002-02-11  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-about.c: Use a separate credits dialog, also fix some bugs.

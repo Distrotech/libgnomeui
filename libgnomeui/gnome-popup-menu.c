@@ -201,6 +201,14 @@ popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
 }
 
 static gint
+popup_menu_pressed (GtkWidget *widget, gpointer data)
+{
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "popup_menu");
+
+	return real_popup_button_pressed (widget, NULL, data);
+}
+
+static gint
 relay_popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
 {
         GtkWidget *new_widget = NULL;
@@ -330,11 +338,15 @@ gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
 	 * shouted by gtk_widget_set_events().
 	 */
 
-	gtk_widget_add_events (ev_widget, GDK_BUTTON_PRESS_MASK);
+	gtk_widget_add_events (ev_widget, GDK_BUTTON_PRESS_MASK |
+			       GDK_KEY_PRESS_MASK);
 
 	gtk_signal_connect (GTK_OBJECT (widget), "button_press_event",
 			    GTK_SIGNAL_FUNC (popup_button_pressed), popup);
 
+	g_signal_connect (G_OBJECT (widget), "popup_menu",
+			  G_CALLBACK (popup_menu_pressed), popup);
+	
 	if (ev_widget != widget)
 	  gtk_signal_connect_while_alive (GTK_OBJECT (ev_widget), "button_press_event",
 					  (GtkSignalFunc) relay_popup_button_pressed,
