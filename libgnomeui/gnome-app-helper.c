@@ -74,7 +74,7 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, gpointer pixmap
 		name = gnome_pixmap_file (pixmap_info);
 
 		if (!name)
-			g_warning ("Could not find GNOME pixmap file %s", pixmap_info);
+			g_warning ("Could not find GNOME pixmap file %s", (char *) pixmap_info);
 		else {
 			pixmap = gnome_pixmap_new_from_file (name);
 			g_free (name);
