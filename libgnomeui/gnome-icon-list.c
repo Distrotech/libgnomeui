@@ -507,19 +507,19 @@ icon_event (Gil *gil, Icon *icon, GdkEvent *event)
 {
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
-		if (icon->text->selected && (event->button.button == 1)){
+		gil->last_clicked = icon;
+		if (icon->text->selected && (event->button.button == 1))
 			gil->last_clicked = icon;
-			return FALSE;
-		} else {
-			toggle_icon (gil, icon, event);
+		else {
 			gil->last_clicked = NULL;
+			toggle_icon (gil, icon, event);
 		}
 		return TRUE;
 
 	case GDK_2BUTTON_PRESS:
-		toggle_icon (gil, gil->last_clicked, event);
 		gil->last_clicked = NULL;
-		return TRUE;
+		toggle_icon (gil, icon, event);
+		return FALSE;
 		
 	case GDK_BUTTON_RELEASE:
 		if (gil->last_clicked == NULL)
