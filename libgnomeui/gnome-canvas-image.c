@@ -149,8 +149,10 @@ gnome_canvas_image_destroy (GtkObject *object)
 
 	free_pixmap_and_mask (image);
 
-	if (image->pixbuf != NULL)
+	if (image->pixbuf) {
 		art_pixbuf_free (image->pixbuf);
+		image->pixbuf = NULL;
+	}
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -383,7 +385,7 @@ gnome_canvas_image_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_p
 	image->cwidth = (int) (image->width * affine[0] + 0.5);
 	image->cheight = (int) (image->height * affine[3] + 0.5);
 
-	if (image->im)
+	if (image->im || image->pixbuf)
 		image->need_recalc = TRUE;
 
 #ifdef OLD_XFORM
@@ -407,6 +409,9 @@ gnome_canvas_image_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_p
 	if (image->im) {
 		w = image->im->rgb_width;
 		h = image->im->rgb_height;
+	} else if (image->pixbuf) {
+		w = image->pixbuf->width;
+		h = image->pixbuf->height;
 	} else
 		w = h = 1;
 
@@ -455,14 +460,16 @@ recalc_if_needed (GnomeCanvasImage *image)
 
 	get_bounds (image, &image->item.x1, &image->item.y1, &image->item.x2, &image->item.y2);
 
-	gdk_imlib_render (image->im, image->cwidth, image->cheight);
-
-	image->pixmap = gdk_imlib_move_image (image->im);
-	g_assert (image->pixmap != NULL);
-	image->mask = gdk_imlib_move_mask (image->im);
-
-	if (image->gc)
-		gdk_gc_set_clip_mask (image->gc, image->mask);
+	if (image->im) {
+		gdk_imlib_render (image->im, image->cwidth, image->cheight);
+		
+		image->pixmap = gdk_imlib_move_image (image->im);
+		g_assert (image->pixmap != NULL);
+		image->mask = gdk_imlib_move_mask (image->im);
+		
+		if (image->gc)
+			gdk_gc_set_clip_mask (image->gc, image->mask);
+	}
 
 	image->need_recalc = FALSE;
 }

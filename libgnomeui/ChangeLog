@@ -1,3 +1,11 @@
+Mon Jul  5 23:48:30 1999  Tim Janik  <timj@gtk.org>
+
+        * gnome-canvas-image.c (recalc_if_needed): only adjust image->pixmap
+        if we have an imlib image.
+
+        * gnome-canvas-image.c (gnome_canvas_image_update): if we don't have
+        image->im, try to feature pure ArtPixBuf instead (raph).
+
 Mon Jul  5 20:11:01 1999  Tim Janik  <timj@gtk.org>
 
 	* gnome-canvas.[hc]: added gnome_canvas_get_color_pixel() to retrive
