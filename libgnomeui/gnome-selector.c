@@ -109,6 +109,7 @@ enum {
     THAW_SIGNAL,
     SET_SELECTION_MODE_SIGNAL,
     GET_SELECTION_SIGNAL,
+    SELECTION_CHANGED_SIGNAL,
     SET_ENTRY_TEXT_SIGNAL,
     GET_ENTRY_TEXT_SIGNAL,
     ACTIVATE_ENTRY_SIGNAL,
@@ -310,6 +311,15 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 					   get_selection),
 			gtk_marshal_POINTER__NONE,
 			GTK_TYPE_POINTER,
+			0);
+    gnome_selector_signals [SELECTION_CHANGED_SIGNAL] =
+	gtk_signal_new ("selection_changed",
+			GTK_RUN_LAST,
+			GTK_CLASS_TYPE (object_class),
+			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+					   selection_changed),
+			gtk_signal_default_marshaller,
+			GTK_TYPE_NONE,
 			0);
     gnome_selector_signals [GET_ENTRY_TEXT_SIGNAL] =
 	gtk_signal_new ("get_entry_text",

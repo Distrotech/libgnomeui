@@ -113,6 +113,7 @@ struct _GnomeSelectorClass {
     void      (*set_selection_mode)        (GnomeSelector *selector,
                                             guint          mode);
     GSList *  (*get_selection)             (GnomeSelector *selector);
+    void      (*selection_changed)         (GnomeSelector *selector);
 
     void      (*history_changed)           (GnomeSelector *selector);
 };
