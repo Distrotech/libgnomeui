@@ -1,3 +1,35 @@
+2003-10-01  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilechooserimpldefault.c (tree_selection_changed): Use enum
+	values instead of plain numbers for the file lists's sort columns.
+	(create_file_list): Likewise.
+	(tree_selection_changed): Make the file list start up sorted by
+	name, and don't specify a default sorting function, so that there
+	is no unsorted order.  This is for consistency with Nautilus.
+	(list_sort_column_changed_cb): Callback; we cache whether the sort
+	order for the file list's name column is ascending or not.
+	(compare_with_folders_first): New helper function to sort
+	directories before files.
+	(name_sort_func): Use compare_with_folders_first().
+	(size_sort_func): Likewise.
+	(mtime_sort_func): Likewise.
+
+	Of course this callback mess would be easy in a real language:
+
+	  (set-sort-func sortable NAME_COLUMN
+	    (make-comparer impl (lambda (a b) (strcmp (get-name a) (get-name b)))))
+	  (set-sort-func sortable SIZE_COLUMN
+	    (make-comparer impl (lambda (a b) (compare (get-size a) (get-size b)))))
+	  ... etc ...
+
+	  (define (make-comparer impl f)
+	    (lambda (a b)
+	      (if (eq (is-dir? a) (is-dir? b))
+	          (f a b)
+		  (if (sort-ascending? impl)
+		      (if (is-dir? a) -1 1)
+		      (if (is-dir? a) 1 -1)))))
+
 2003-09-30  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilechooserimpldefault.c (struct _GtkFileChooserImplDefault):
