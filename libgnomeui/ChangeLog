@@ -1,3 +1,7 @@
+2001-08-09  Michael Meeks  <michael@ximian.com>
+
+	* gnome-paper-selector.[ch]: Kill, now in libgnomeprintui.
+
 2001-08-07  Darin Adler  <darin@bentspoon.com>
 
 	* oafgnome.c: Remove unnecessary includes of now-nonexistent
