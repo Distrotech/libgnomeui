@@ -62,7 +62,7 @@ typedef enum {
   GNOME_MDI_NOTEBOOK,
   GNOME_MDI_MODAL,
   GNOME_MDI_TOPLEVEL,
-  GNOME_MDI_REDRAW = -1		/* do not change mode, just ``redraw'' the display it. */
+  GNOME_MDI_REDRAW = -1		/* do not change mode, just ``redraw'' the display */
 } GnomeMDIMode;
 
 /* the following keys are used to gtk_object_set_data() copies of the appropriate menu and toolbar templates
@@ -79,6 +79,8 @@ struct _GnomeMDI {
   GtkObject object;
 
   GnomeMDIMode mode;
+
+  GtkPositionType tab_pos;
 
   gchar *appname, *title;
   gchar *dnd_type;
@@ -124,15 +126,19 @@ GtkObject     *gnome_mdi_new                (gchar *, gchar *);
 
 void          gnome_mdi_set_mode            (GnomeMDI *, GnomeMDIMode);
 
+void          gnome_mdi_set_tab_pos         (GnomeMDI *, GtkPositionType);
+
 /* setting the menu and toolbar stuff */
 void          gnome_mdi_set_menu_template   (GnomeMDI *, GnomeUIInfo *);
 void          gnome_mdi_set_toolbar_template(GnomeMDI *, GnomeUIInfo *);
 void          gnome_mdi_set_child_menu_path (GnomeMDI *, gchar *);
 void          gnome_mdi_set_child_list_path (GnomeMDI *, gchar *);
 
+/* manipulating views */
 gint          gnome_mdi_add_view            (GnomeMDI *, GnomeMDIChild *);
 gint          gnome_mdi_remove_view         (GnomeMDI *, GtkWidget *, gint);
 
+/* manipulating children */
 gint          gnome_mdi_add_child           (GnomeMDI *, GnomeMDIChild *);
 gint          gnome_mdi_remove_child        (GnomeMDI *, GnomeMDIChild *, gint);
 gint          gnome_mdi_remove_all          (GnomeMDI *, gint);
@@ -146,7 +152,7 @@ GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *, gchar *);
  * the following two functions are here to make life easier if an application opens windows
  * that should "keep the app alive" even if there are no MDI windows open. any such windows
  * should be registered with the MDI: as long as there is a window registered, the MDI will
- * not destroy itself (even if the last of its windows is closed). on the other hand closing
+ * not destroy itself (even if the last of its windows is closed). on the other hand, closing
  * the last MDI window when no other windows are registered with the MDI will result in MDI
  * being gtk_object_destroy()ed.
  */

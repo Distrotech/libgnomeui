@@ -257,6 +257,7 @@ static void gnome_mdi_init (GnomeMDI *mdi) {
   gchar hostname[128] = "\0", pid[12];
 
   mdi->mode = 0;
+  mdi->tab_pos = GTK_POS_TOP;
 
   mdi->children = NULL;
   mdi->windows = NULL;
@@ -491,6 +492,8 @@ static GtkWidget *book_create(GnomeMDI *mdi) {
   GtkWidget *us, *rw;
 
   us = gtk_notebook_new();
+
+  gtk_notebook_set_tab_pos(GTK_NOTEBOOK(us), mdi->tab_pos);
 
   gnome_app_set_contents(mdi->active_window, us);
 
@@ -901,11 +904,11 @@ static void app_create(GnomeMDI *mdi) {
 #endif
 
   gtk_signal_connect(GTK_OBJECT(window), "delete_event",
-		     func, mdi);
+                     func, mdi);
   gtk_signal_connect(GTK_OBJECT(window), "focus_in_event",
-		     GTK_SIGNAL_FUNC(toplevel_focus), mdi);
+                     GTK_SIGNAL_FUNC(toplevel_focus), mdi);
   gtk_signal_connect(GTK_OBJECT(window), "destroy",
-		     GTK_SIGNAL_FUNC(app_destroy), NULL);
+                     GTK_SIGNAL_FUNC(app_destroy), NULL);
 
   /* gtk_window_position (GTK_WINDOW(window), GTK_WIN_POS_MOUSE); */
 
@@ -1375,3 +1378,25 @@ GnomeMDIChild *gnome_mdi_get_child_from_view(GtkWidget *view) {
 GnomeApp *gnome_mdi_get_app_from_view(GtkWidget *view) {
   return GNOME_APP(gtk_widget_get_toplevel(GTK_WIDGET(view)));
 }
+
+void gnome_mdi_set_tab_pos(GnomeMDI *mdi, GtkPositionType pos) {
+  GList *app_node;
+
+  g_return_if_fail(mdi != NULL);
+  g_return_if_fail(GNOME_IS_MDI(mdi));
+
+  if(mdi->tab_pos == pos)
+    return;
+
+  mdi->tab_pos = pos;
+
+  if(mdi->mode != GNOME_MDI_NOTEBOOK)
+    return;
+
+  app_node = mdi->windows;
+  while(app_node) {
+    gtk_notebook_set_tab_pos(GTK_NOTEBOOK(GNOME_APP(app_node->data)->contents), pos);
+    app_node = g_list_next(app_node);
+  }
+}
+

@@ -1,3 +1,11 @@
+1998-08-03  Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.h: new GnomeMDI member tab_pos: stores the desired tab
+	position of MDI notebook widgets.
+	* gnome-mdi.c (gnome_mdi_set_tab_pos): sets the desired tab position
+	for MDI notebook widgets.
+	(book_create): set the desired tab position of created notebook widgets.
+
 1998-08-02  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (gnome.defs): Simplify rule by using `cd $srcdir'
