@@ -44,12 +44,22 @@ struct _GnomePaperSelector {
   GtkWidget *paper;
   GtkWidget *width;
   GtkWidget *height;
+
+  GtkWidget *lmargin;
+  GtkWidget *tmargin;
+  GtkWidget *rmargin;
+  GtkWidget *bmargin;
+
   GtkWidget *unit;
   GtkWidget *unit_label;
 
   gint paper_id;
   gint width_id;
   gint height_id;
+  gint lmargin_id;
+  gint tmargin_id;
+  gint rmargin_id;
+  gint bmargin_id;
 };
 
 struct _GnomePaperSelectorClass {
@@ -62,6 +72,10 @@ GtkWidget	*gnome_paper_selector_new	(void);
 gchar		*gnome_paper_selector_get_name	(GnomePaperSelector *gspaper);
 gfloat		gnome_paper_selector_get_width	(GnomePaperSelector *gspaper);
 gfloat		gnome_paper_selector_get_height	(GnomePaperSelector *gspaper);
+gfloat gnome_paper_selector_get_left_margin (GnomePaperSelector *gspaper);
+gfloat gnome_paper_selector_get_top_margin (GnomePaperSelector *gspaper);
+gfloat gnome_paper_selector_get_right_margin (GnomePaperSelector *gspaper);
+gfloat gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspaper);
 
 
 END_GNOME_DECLS

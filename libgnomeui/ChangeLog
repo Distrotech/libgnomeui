@@ -1,3 +1,9 @@
+1998-10-29  Seth Alves  <alves@hungry.com>
+
+	* gnome-paper-selector.c (set_widgets_from_paper): pulled common
+	code into a subroutine
+	(gnome_paper_selector_init): added widgets for margin sizes
+
 1998-10-29    <jrb@redhat.com>
 
 	* gnome-popup-help.c (gnome_widget_add_help_with_uidata): added some more

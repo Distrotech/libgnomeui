@@ -47,7 +47,8 @@ gnome_paper_selector_get_type (void)
       (GtkArgGetFunc) NULL
     };
     
-    select_paper_type = gtk_type_unique (gtk_vbox_get_type (), &select_paper_info);
+    select_paper_type =
+      gtk_type_unique (gtk_vbox_get_type (), &select_paper_info);
   }
   
   return select_paper_type;
@@ -62,79 +63,139 @@ gnome_paper_selector_class_init (GnomePaperSelectorClass *class)
   parent_class = gtk_type_class (gtk_vbox_get_type ());
 }
 
+static void set_widgets_from_paper (GnomePaperSelector *gspaper,
+				    const Paper *paper,
+				    const Unit *unit)
+{
+  const gchar *paper_name, *unit_name;
+  double paper_width, paper_height;
+  double margin_left, margin_top, margin_right, margin_bottom; 
+  GList	*l;
+
+  paper_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry));
+  unit_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
+  /*unit = gnome_unit_with_name (unit_name);*/
+
+  paper_width = gnome_paper_convert (gnome_paper_pswidth (paper), unit);
+  paper_height = gnome_paper_convert (gnome_paper_psheight (paper), unit);
+  margin_left = gnome_paper_convert (gnome_paper_lmargin (paper), unit);
+  margin_top = gnome_paper_convert (gnome_paper_tmargin (paper), unit);
+  margin_right = gnome_paper_convert (gnome_paper_rmargin (paper), unit);
+  margin_bottom=gnome_paper_convert (gnome_paper_bmargin (paper), unit);
+
+
+  /***/
+  gtk_signal_handler_block (GTK_OBJECT(gspaper->width), gspaper->width_id);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->width),
+			     (gfloat) paper_width);
+  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->width), gspaper->width_id);
+  /***/
+  gtk_signal_handler_block (GTK_OBJECT(gspaper->height), gspaper->height_id);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->height),
+			     (gfloat) paper_height);
+  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->height),
+			      gspaper->height_id);
+  /***/
+  gtk_signal_handler_block (GTK_OBJECT(gspaper->lmargin), gspaper->lmargin_id);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (gspaper->lmargin),
+			     (gfloat) margin_left);
+  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->lmargin),
+			      gspaper->lmargin_id);
+  /***/
+  gtk_signal_handler_block (GTK_OBJECT(gspaper->tmargin), gspaper->tmargin_id);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (gspaper->tmargin),
+			     (gfloat) margin_top);
+  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->tmargin),
+			      gspaper->tmargin_id);
+  /***/
+  gtk_signal_handler_block (GTK_OBJECT(gspaper->rmargin), gspaper->rmargin_id);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (gspaper->rmargin),
+			     (gfloat) margin_right);
+  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->rmargin),
+			      gspaper->rmargin_id);
+  /***/
+  gtk_signal_handler_block (GTK_OBJECT(gspaper->bmargin), gspaper->bmargin_id);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (gspaper->bmargin),
+			     (gfloat) margin_bottom);
+  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->bmargin),
+			      gspaper->bmargin_id);
+
+
+  /*#ifdef DEBUG*/
+  printf ("Selected Paper: %s (%f, %f) "
+	  "margins: (%f, %f, %f, %f) "
+	  "units: %s\n",
+	  paper_name, paper_width, paper_height,
+	  margin_left, margin_top, margin_right, margin_bottom,
+	  unit_name);
+  /*#endif*/
+}
+
+
 static void 
 paper_size_changed (GtkWidget *widget, gpointer data)
 {
   GnomePaperSelector *gspaper;
   gfloat paper_width, paper_height;
-  const Paper	*paper;
+  const Paper *paper;
 
   gspaper = data;
 
-  paper_width  = gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->width));
-  paper_height = gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->height));
+  paper_width =
+    gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->width));
+  paper_height =
+    gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->height));
   
   paper = gnome_paper_with_size ((double)paper_width, (double)paper_height);
 
-  gtk_signal_handler_block (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry), gspaper->paper_id);
+  gtk_signal_handler_block (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry),
+			    gspaper->paper_id);
   if (paper) {
     const char* paper_name = gnome_paper_name (paper);
-    gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry), paper_name); 
+    gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry),
+		       paper_name); 
   }
   else {
     gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry), "custom"); 
   }
-  gtk_signal_handler_unblock (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry), gspaper->paper_id);
+  gtk_signal_handler_unblock (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry),
+			      gspaper->paper_id);
     
 #ifdef DEBUG
   printf ("Paper Size changed to %f, %f\n", paper_width, paper_height);
 #endif
 }
 
+
 static void 
 paper_size_system (GtkWidget *widget, gpointer data)
 {
+  const gchar *paper_name, *unit_name;
   GnomePaperSelector *gspaper;
   const Paper *paper;
   const Unit *unit;
-  const gchar *paper_name, *unit_name;
-  double paper_width, paper_height;
-  GList	*l;
   gspaper = data;
   
   paper_name = gnome_paper_name_default();
-  if (paper_name) {
-    paper = gnome_paper_with_name (paper_name);
+  if (paper_name)
+    {
+      paper = gnome_paper_with_name (paper_name);
 
-    if (paper) {
-      unit_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
-      unit = gnome_unit_with_name (unit_name);
+      if (paper)
+	{
+	  unit_name =
+	    gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
+	  unit = gnome_unit_with_name (unit_name);
 
-      paper_width = gnome_paper_convert (gnome_paper_pswidth (paper), unit);
-      paper_height = gnome_paper_convert (gnome_paper_psheight (paper), unit);
-      
-      gtk_signal_handler_block (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry), gspaper->paper_id);
-      gtk_entry_set_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry), paper_name); 
-      gtk_signal_handler_unblock (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry), gspaper->paper_id);
-
-      gtk_signal_handler_block (GTK_OBJECT(gspaper->width), gspaper->width_id);
-      gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->width), (gfloat) paper_width);
-      gtk_signal_handler_unblock (GTK_OBJECT(gspaper->width), gspaper->width_id);
-      
-      gtk_signal_handler_block (GTK_OBJECT(gspaper->height), gspaper->height_id);
-      gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->height), (gfloat) paper_height);
-      gtk_signal_handler_unblock (GTK_OBJECT(gspaper->height), gspaper->height_id);
-
-#ifdef DEBUG
-      printf ("Selected Paper: %s (%f, %f)\n", paper_name, paper_width, paper_height);
-#endif
+	  set_widgets_from_paper (gspaper, paper, unit);
+	}
     }
-#ifdef DEBUG
-    else 
-      printf ("Paper %s not known to the system\n", paper_name);
-#endif
-  }
+# ifdef DEBUG
+  else 
+    printf ("Paper %s not known to the system\n", paper_name);
+# endif
 }
+
 
 static void 
 paper_changed (GtkWidget *widget, gpointer data)
@@ -144,6 +205,7 @@ paper_changed (GtkWidget *widget, gpointer data)
   const Unit *unit;
   gchar *paper_name, *unit_name;
   double paper_width, paper_height;
+  double margin_left, margin_top, margin_right, margin_bottom;
 
   gspaper = data;
   
@@ -153,21 +215,10 @@ paper_changed (GtkWidget *widget, gpointer data)
   unit_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
   unit = gnome_unit_with_name (unit_name);
 
-  paper_width = gnome_paper_convert (gnome_paper_pswidth (paper), unit);
-  paper_height = gnome_paper_convert (gnome_paper_psheight (paper), unit);
-
-  gtk_signal_handler_block (GTK_OBJECT(gspaper->width), gspaper->width_id);
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->width), (gfloat) paper_width);
-  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->width), gspaper->width_id);
-
-  gtk_signal_handler_block (GTK_OBJECT(gspaper->height), gspaper->height_id);
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->height), (gfloat) paper_height);
-  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->height), gspaper->height_id);
-
-#ifdef DBEUG
-  printf ("Selected Paper: %s (%f, %f)\n", paper_name, paper_width, paper_height);
-#endif
+  if (paper)
+    set_widgets_from_paper (gspaper, paper, unit);
 }
+
 
 static void 
 unit_changed (GtkWidget *widget, gpointer data)
@@ -177,6 +228,7 @@ unit_changed (GtkWidget *widget, gpointer data)
   const Unit *unit;
   gchar *paper_name, *unit_name;
   double paper_width, paper_height;
+  double margin_left, margin_top, margin_right, margin_bottom;
   
   gspaper = data;
 
@@ -188,21 +240,10 @@ unit_changed (GtkWidget *widget, gpointer data)
 
   gtk_label_set (GTK_LABEL(gspaper->unit_label), unit_name);
 
-  paper_width = gnome_paper_convert (gnome_paper_pswidth (paper), unit);
-  paper_height = gnome_paper_convert (gnome_paper_psheight (paper), unit);
-
-  gtk_signal_handler_block (GTK_OBJECT(gspaper->width), gspaper->width_id);
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->width), (gfloat) paper_width);
-  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->width), gspaper->width_id);
-
-  gtk_signal_handler_block (GTK_OBJECT(gspaper->height), gspaper->height_id);
-  gtk_spin_button_set_value (GTK_SPIN_BUTTON(gspaper->height), (gfloat) paper_height);
-  gtk_signal_handler_unblock (GTK_OBJECT(gspaper->height), gspaper->height_id);
-
-#ifdef DEBUG
-  printf ("Unit changed to %s\n", unit_name);
-#endif
+  if (paper)
+    set_widgets_from_paper (gspaper, paper, unit);
 }
+
 
 static void
 gnome_paper_selector_init (GnomePaperSelector *gspaper)
@@ -219,34 +260,38 @@ gnome_paper_selector_init (GnomePaperSelector *gspaper)
   tooltips = gtk_tooltips_new();
   gtk_tooltips_enable (tooltips);
 
-  table = gtk_table_new (4, 3, FALSE);
+  table = gtk_table_new (8, 3, FALSE);
   gtk_container_add (GTK_CONTAINER(gspaper), table); 
   
   /* create the paper entry */
   label = gtk_label_new ("Paper:");
   gtk_widget_show (label);
-  gtk_misc_set_alignment (GTK_MISC(label), 0.0, 0.5);
+  /*gtk_misc_set_alignment (GTK_MISC(label), 0.0, 0.5);*/
   gtk_table_attach_defaults (GTK_TABLE(table), label, 0, 1, 0, 1);
 
   gspaper->paper = gtk_combo_new();
-  gtk_combo_set_popdown_strings (GTK_COMBO(gspaper->paper), gnome_paper_name_list());
+  gtk_combo_set_popdown_strings (GTK_COMBO(gspaper->paper),
+				 gnome_paper_name_list());
   gtk_entry_set_editable(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry), FALSE);
-  gspaper->paper_id = gtk_signal_connect (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry), "changed", 
-					  (GtkSignalFunc) paper_changed,
-					  gspaper);
+  gspaper->paper_id =
+    gtk_signal_connect (GTK_OBJECT(GTK_COMBO(gspaper->paper)->entry),
+			"changed", 
+			(GtkSignalFunc) paper_changed,
+			gspaper);
   gtk_table_attach_defaults (GTK_TABLE (table), gspaper->paper, 1, 3, 0, 1);
   gtk_widget_show (gspaper->paper);
 
   /* create the width entry */
   label = gtk_label_new ("Width:");
   gtk_widget_show (label);
-  gtk_misc_set_alignment (GTK_MISC(label), 0.0, 0.5);
+  /*gtk_misc_set_alignment (GTK_MISC(label), 0.0, 0.5);*/
   gtk_table_attach_defaults (GTK_TABLE(table), label, 0, 1, 1, 2);
 
   adj = (GtkAdjustment *) gtk_adjustment_new (0.0, 0.0, G_MAXFLOAT, 1.0,
 					      5.0, 0.0);
   gspaper->width = gtk_spin_button_new(adj, 5.0, 1);
-  gspaper->width_id = gtk_signal_connect (GTK_OBJECT(gspaper->width), "changed", 
+  gspaper->width_id = gtk_signal_connect (GTK_OBJECT(gspaper->width),
+					  "changed", 
 					  (GtkSignalFunc) paper_size_changed,
 					  gspaper);
   gtk_table_attach_defaults (GTK_TABLE (table), gspaper->width, 1, 2, 1, 2);
@@ -255,21 +300,91 @@ gnome_paper_selector_init (GnomePaperSelector *gspaper)
   /* create the height entry */
   label = gtk_label_new ("Height:");
   gtk_widget_show (label);
-  gtk_misc_set_alignment (GTK_MISC(label), 0.0, 0.5);
+  /*gtk_misc_set_alignment (GTK_MISC(label), 0.0, 0.5);*/
   gtk_table_attach_defaults (GTK_TABLE(table), label, 0, 1, 2, 3);
 
   adj = (GtkAdjustment *) gtk_adjustment_new (0.0, 0.0, G_MAXFLOAT, 1.0,
 					      5.0, 0.0);
   gspaper->height = gtk_spin_button_new(adj, 5.0, 1);
-  gspaper->height_id = gtk_signal_connect (GTK_OBJECT(gspaper->height), "changed", 
+  gspaper->height_id = gtk_signal_connect (GTK_OBJECT(gspaper->height),
+					   "changed", 
 					   (GtkSignalFunc) paper_size_changed,
 					   gspaper);
   gtk_table_attach_defaults (GTK_TABLE (table), gspaper->height, 1, 2, 2, 3);
   gtk_widget_show (gspaper->height);
 
+  /* create the left margin entry */
+  label = gtk_label_new ("Left Margin:");
+  gtk_widget_show (label);
+  /*gtk_misc_set_alignment (GTK_MISC(label), 0.0, 0.5);*/
+  gtk_table_attach_defaults (GTK_TABLE(table), label, 0, 1, 3, 4);
+
+  adj = (GtkAdjustment *) gtk_adjustment_new (0.0, 0.0, G_MAXFLOAT, 1.0,
+					      5.0, 0.0);
+  gspaper->lmargin = gtk_spin_button_new(adj, 5.0, 1);
+  gspaper->lmargin_id = gtk_signal_connect (GTK_OBJECT(gspaper->lmargin),
+					    "changed", 
+					    (GtkSignalFunc) paper_size_changed,
+					    gspaper);
+  gtk_table_attach_defaults (GTK_TABLE (table), gspaper->lmargin, 1, 2, 3, 4);
+  gtk_widget_show (gspaper->lmargin);
+
+
+  /* create the top margin entry */
+  label = gtk_label_new ("Top Margin:");
+  gtk_widget_show (label);
+  /*gtk_misc_set_alignment (GTK_MISC(label), 0.0, 0.5);*/
+  gtk_table_attach_defaults (GTK_TABLE(table), label, 0, 1, 4, 5);
+
+  adj = (GtkAdjustment *) gtk_adjustment_new (0.0, 0.0, G_MAXFLOAT, 1.0,
+					      5.0, 0.0);
+  gspaper->tmargin = gtk_spin_button_new(adj, 5.0, 1);
+  gspaper->tmargin_id = gtk_signal_connect (GTK_OBJECT(gspaper->tmargin),
+					    "changed", 
+					    (GtkSignalFunc) paper_size_changed,
+					    gspaper);
+  gtk_table_attach_defaults (GTK_TABLE (table), gspaper->tmargin, 1, 2, 4, 5);
+  gtk_widget_show (gspaper->tmargin);
+
+
+  /* create the right margin entry */
+  label = gtk_label_new ("Right Margin:");
+  gtk_widget_show (label);
+  /*gtk_misc_set_alignment (GTK_MISC(label), 0.0, 0.5);*/
+  gtk_table_attach_defaults (GTK_TABLE(table), label, 0, 1, 5, 6);
+
+  adj = (GtkAdjustment *) gtk_adjustment_new (0.0, 0.0, G_MAXFLOAT, 1.0,
+					      5.0, 0.0);
+  gspaper->rmargin = gtk_spin_button_new(adj, 5.0, 1);
+  gspaper->rmargin_id = gtk_signal_connect (GTK_OBJECT(gspaper->rmargin),
+					    "changed", 
+					    (GtkSignalFunc) paper_size_changed,
+					    gspaper);
+  gtk_table_attach_defaults (GTK_TABLE (table), gspaper->rmargin, 1, 2, 5, 6);
+  gtk_widget_show (gspaper->rmargin);
+
+
+  /* create the bottom margin entry */
+  label = gtk_label_new ("Bottom Margin:");
+  gtk_widget_show (label);
+  /*gtk_misc_set_alignment (GTK_MISC(label), 0.0, 0.5);*/
+  gtk_table_attach_defaults (GTK_TABLE(table), label, 0, 1, 6, 7);
+
+  adj = (GtkAdjustment *) gtk_adjustment_new (0.0, 0.0, G_MAXFLOAT, 1.0,
+					      5.0, 0.0);
+  gspaper->bmargin = gtk_spin_button_new(adj, 5.0, 1);
+  gspaper->bmargin_id = gtk_signal_connect (GTK_OBJECT(gspaper->bmargin),
+					    "changed", 
+					    (GtkSignalFunc) paper_size_changed,
+					    gspaper);
+  gtk_table_attach_defaults (GTK_TABLE (table), gspaper->bmargin, 1, 2, 6, 7);
+  gtk_widget_show (gspaper->bmargin);
+
+
   /* create the unit entry */
   gspaper->unit = gtk_combo_new();
-  gtk_combo_set_popdown_strings (GTK_COMBO(gspaper->unit), gnome_unit_name_list());
+  gtk_combo_set_popdown_strings (GTK_COMBO(gspaper->unit),
+				 gnome_unit_name_list());
   gtk_entry_set_editable(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry), FALSE);
   gtk_signal_connect (GTK_OBJECT(GTK_COMBO(gspaper->unit)->entry), "changed", 
 		      (GtkSignalFunc) unit_changed,
@@ -277,9 +392,11 @@ gnome_paper_selector_init (GnomePaperSelector *gspaper)
   gtk_table_attach_defaults (GTK_TABLE (table), gspaper->unit, 2, 3, 1, 2);
   gtk_widget_show (gspaper->unit);
 
-  gspaper->unit_label = gtk_label_new ((gchar*)g_list_data(gnome_unit_name_list()));
-  gtk_misc_set_alignment (GTK_MISC(gspaper->unit_label), 0.0, 0.5);
-  gtk_table_attach_defaults (GTK_TABLE (table), gspaper->unit_label, 2, 3, 2, 3);
+  gspaper->unit_label =
+    gtk_label_new ((gchar*)g_list_data(gnome_unit_name_list()));
+  /*gtk_misc_set_alignment (GTK_MISC(gspaper->unit_label), 0.0, 0.5);*/
+  gtk_table_attach_defaults (GTK_TABLE (table),
+			     gspaper->unit_label, 2, 3, 2, 3);
   gtk_widget_show (gspaper->unit_label);
 
   /* buttons for the default settings */
@@ -290,9 +407,10 @@ gnome_paper_selector_init (GnomePaperSelector *gspaper)
   gtk_container_add (GTK_CONTAINER (gspaper), button);
   gtk_tooltips_set_tip(tooltips, button,
 		       "Set the papersize to the value found in $PAPERCONF. "
-		       "If this variable isn´t set, look into the file specified by "
-		       "$PAPERSIZE. If this fails, too, look into the default "
-		       "file /etc/paperconf else fallback to the builtin value", NULL);
+		       "If this variable isn´t set, look into the file "
+		       "specified by $PAPERSIZE. If this fails, too, look "
+		       "into the default file /etc/paperconf else fallback "
+		       "to the builtin value", NULL);
   
   gtk_widget_show (button);
 
@@ -302,23 +420,27 @@ gnome_paper_selector_init (GnomePaperSelector *gspaper)
 
   /* show the whole thing */
   gtk_table_set_col_spacings (GTK_TABLE(table), 10);
-  gtk_table_set_row_spacing (GTK_TABLE(table), 0, 10);
-  gtk_table_set_row_spacing (GTK_TABLE(table), 1, 5);
-  gtk_table_set_row_spacing (GTK_TABLE(table), 2, 10);
+  /*gtk_table_set_row_spacings (GTK_TABLE(table), 10);*/
+
+  gtk_table_set_row_spacing (GTK_TABLE(table), 0, 20);
+  gtk_table_set_row_spacing (GTK_TABLE(table), 1, 10);
+  gtk_table_set_row_spacing (GTK_TABLE(table), 2, 20);
+
   gtk_widget_show (table);
 }
 
 GtkWidget *
 gnome_paper_selector_new (void)
 {
-  return GTK_WIDGET ( gtk_type_new (gnome_paper_selector_get_type ()));
+  return GTK_WIDGET (gtk_type_new (gnome_paper_selector_get_type ()));
 }
 
 gchar *gnome_paper_selector_get_name (GnomePaperSelector *gspaper)
 {
   gchar *paper_name;
 
-  paper_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry));
+  paper_name =
+    gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->paper)->entry));
 
   return paper_name;
 }
@@ -327,7 +449,8 @@ gfloat gnome_paper_selector_get_width (GnomePaperSelector *gspaper)
 {
   gfloat paper_width;
 
-  paper_width = gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->width));
+  paper_width =
+    gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->width));
 
   return paper_width;
 }
@@ -336,7 +459,32 @@ gfloat gnome_paper_selector_get_height (GnomePaperSelector *gspaper)
 {
   gfloat paper_height;
 
-  paper_height = gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->height));
+  paper_height =
+    gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON(gspaper->height));
 
   return paper_height;
+}
+
+gfloat gnome_paper_selector_get_left_margin (GnomePaperSelector *gspaper)
+{
+  return
+    gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON (gspaper->lmargin));
+}
+
+gfloat gnome_paper_selector_get_top_margin (GnomePaperSelector *gspaper)
+{
+  return
+    gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON (gspaper->tmargin));
+}
+
+gfloat gnome_paper_selector_get_right_margin (GnomePaperSelector *gspaper)
+{
+  return
+    gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON (gspaper->rmargin));
+}
+
+gfloat gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspaper)
+{
+  return
+    gtk_spin_button_get_value_as_float (GTK_SPIN_BUTTON (gspaper->bmargin));
 }
