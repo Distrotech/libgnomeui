@@ -241,8 +241,8 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
     gnome_rc_parse(program_invocation_name);
     gnome_preferences_load();
     if (gnome_preferences_get_disable_imlib_cache ()){
-      _gdk_imlib_data->cache.on_image = 0;
-      _gdk_imlib_data->cache.on_pixmap = 0;
+        _gdk_imlib_data->cache.on_image = 1;
+        _gdk_imlib_data->cache.on_pixmap = 0;
     }
     gnome_config_set_set_handler(set_handler,NULL);
     gnome_config_set_sync_handler(sync_handler,NULL);
