@@ -2,6 +2,8 @@
 
 	* gnome-dialog.c (gnome_dialog_button_clicked): no need for saving
 	click_closes as gnome_dialog_clicked() takes care of this.
+	* Makefile.am: changed all references to gdk-pixbuf/src to
+	gdk-pixbuf/gdk-pixbuf.
 	
 1999-12-04  Elliot Lee  <sopwith@redhat.com>
 
@@ -25,7 +27,6 @@ Mon Nov 29 09:17:02 1999  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
 
 	* gnome-pixmap.h: include gdk-pixbuf before gnome-defs, seems to
 	be required for some reason. 
-
 	
         The below is all still wrong; if you have a gdk-pixbuf installed
 	it will probably use the wrong one.

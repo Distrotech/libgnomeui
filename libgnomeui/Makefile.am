@@ -328,7 +328,7 @@ EXTRA_DIST =					\
 	$(oafinfo_DATA)
 
 libgnomeui_la_LDFLAGS = -version-info 43:0:0 -rpath $(libdir) \
-		-L`cd $(top_builddir); pwd`/gdk-pixbuf/src/.libs -lgdk_pixbuf \
+		-L`cd $(top_builddir); pwd`/gdk-pixbuf/gdk-pixbuf/.libs -lgdk_pixbuf \
 		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome \
 		-L`cd $(top_builddir); pwd`/libart_lgpl/.libs -lart_lgpl \
 		$(OAF_LIBS)					\
@@ -339,7 +339,7 @@ gnome_segv_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
+	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
         $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
@@ -348,7 +348,7 @@ stock_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
+	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
@@ -360,7 +360,7 @@ winhints_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
+	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
@@ -368,7 +368,7 @@ winhints_demo_LDADD =	\
 #	libgnomeui.la 					\
 #	$(top_builddir)/libgnome/libgnome.la 		\
 #	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-#	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
+#	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
 #	$(LIBGNOMEUI_LIBS) \
 #	$(INTLLIBS)
 
@@ -376,6 +376,6 @@ dock_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	$(top_builddir)/gdk-pixbuf/src/libgdk_pixbuf.la \
+	$(top_builddir)/gdk-pixbuf/gdk-pixbuf/libgdk_pixbuf.la \
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
