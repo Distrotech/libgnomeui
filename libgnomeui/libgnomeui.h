@@ -38,7 +38,7 @@
 #include "libgnomeui/gnome-net.h"
 #include "libgnomeui/gnome-number-entry.h"
 #ifdef GTK_HAVE_FEATURES_1_1_0
-#include "libgnomeui/gnome-popupmenu.h"
+#include "libgnomeui/gnome-popup-menu.h"
 #endif
 #include "libgnomeui/gnome-pixmap.h"
 #include "libgnomeui/gnome-preferences.h"

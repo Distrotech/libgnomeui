@@ -4,7 +4,7 @@
 /* in my CDROM drive at the time... */
 /* First pass: July 8, 1998 */
 
-/* gnome-popupmenu.h
+/* gnome-popup-menu.c
  * 
  * Copyright (C) 1998, Mark Crichton
  *

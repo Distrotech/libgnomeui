@@ -1,3 +1,9 @@
+1998-09-18  Sebastian Wilhelmi  <wilhelmi@ira.uka.de>
+
+	* libgnomeui.h: corrected gnome-popupmenu.h to gnome-popup-menu.h and
+	the same (but here this is only a typo, not a bug ;-) in
+	gnome-popup-menu.h and gnome-popup-menu.c
+
 1998-09-18  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.[ch] (do_ui_signal_connect): only store

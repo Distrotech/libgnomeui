@@ -3,7 +3,7 @@
 /* Written under the heavy infulence of whatever was playing
  * in my CDROM drive at the time... */
 /* First pass: July 8, 1998 */
-/* gnome-popupmenu.h
+/* gnome-popup-menu.h
  * 
  * Copyright (C) Mark Crichton
  *
