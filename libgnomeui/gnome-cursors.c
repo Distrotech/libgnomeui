@@ -609,7 +609,7 @@ build_cursor_table (void)
         g_assert (cursortable == NULL);
 
 	/* Get the main gnome gconf client */
-        client = gnome_get_gconf_client (); 
+        client = gconf_client_get_default (); 
 
 	cursortable = g_hash_table_new (g_str_hash, g_str_equal);
 	

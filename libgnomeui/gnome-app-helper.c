@@ -448,7 +448,7 @@ setup_pixmap_menu_item(GtkWidget *mi, GnomeUIPixmapType pixmap_type,
                             (gpointer)pixmap_info);
 
         
-        conf = gnome_get_gconf_client();
+        conf = gconf_client_get_default();
 
         g_object_ref (G_OBJECT (conf));
         gtk_object_set_data_full(GTK_OBJECT(mi), gnome_app_helper_gconf_client,
@@ -2525,7 +2525,7 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
 {
         GConfClient *conf;
 
-        conf = gnome_get_gconf_client();
+        conf = gconf_client_get_default();
 
         g_object_ref (G_OBJECT (conf));
         gtk_object_set_data_full(GTK_OBJECT(toolbar), gnome_app_helper_gconf_client,
