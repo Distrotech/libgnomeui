@@ -1,3 +1,7 @@
+2000-03-13  Elliot Lee  <sopwith@redhat.com>
+	* gnome-stock.c: Fix gnome_stock_or_ordinary_button for the ordinary button case.
+	* Makefile.am: Until mdi_demo.c is committed, remove usage thereof
+
 2000-03-13  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-pouch.[ch]: new files; a Window-in-Window style MDI container

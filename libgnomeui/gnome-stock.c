@@ -984,9 +984,6 @@ gnome_stock_button(const char *type)
 	entries = lookup(type);
 
         g_return_val_if_fail(entries != NULL, NULL);
-        
-        if (entries == NULL)
-                return NULL;
 
 	return stock_button_from_entries (type, entries);
 }
@@ -1011,8 +1008,6 @@ gnome_stock_or_ordinary_button (const char *type)
         GnomeStockPixmapEntry **entries;
 
 	entries = lookup(type);
-        
-        g_return_val_if_fail(entries != NULL, NULL);
         
         if (entries == NULL)
                 return gtk_button_new_with_label (type);
