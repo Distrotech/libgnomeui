@@ -27,6 +27,7 @@
 #include "gnome-canvas-rect-ellipse.h"
 #include "gnome-canvas-text.h"
 #include "gnome-canvas-pixbuf.h"
+#include "gnome-cursors.h"
 #include <string.h>
 #include <gtk/gtk.h>
 
@@ -903,7 +904,7 @@ gnome_about_item_cb(GnomeCanvasItem *item, GdkEvent *event,
 	case GDK_ENTER_NOTIFY:
 	    if (url)
 	    {
-		cursor = gdk_cursor_new(GDK_HAND2);
+		cursor = gnome_stock_cursor_new (GNOME_STOCK_CURSOR_POINTING_HAND); 
 		gdk_window_set_cursor(window, cursor);
 		gdk_cursor_destroy(cursor);
 	    }
@@ -911,9 +912,7 @@ gnome_about_item_cb(GnomeCanvasItem *item, GdkEvent *event,
 	case GDK_LEAVE_NOTIFY:
 		if (url)
 		{
-		    cursor = gdk_cursor_new(GDK_LEFT_PTR);
-		    gdk_window_set_cursor(window, cursor);
-		    gdk_cursor_destroy(cursor);
+		    gdk_window_set_cursor(window, NULL);
 		}
 		break;
 	case GDK_BUTTON_PRESS:

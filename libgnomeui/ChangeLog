@@ -1,3 +1,9 @@
+2000-01-11  Iain Holmes  <ih@csd.abdn.ac.uk>
+
+	* gnome-about.c: (gnome_about_item_cb): Changed the cursors to use the
+	gnome-cursor stuff, and to return to the default cursor instead of
+	the GDK_LEFT_PTR when you leave the url.
+
 2000-01-10  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-gconf.[ch]: New module.  Lets you
