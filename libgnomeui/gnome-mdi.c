@@ -497,7 +497,7 @@ static GtkWidget *book_create(GnomeMDI *mdi) {
 		     GTK_SIGNAL_FUNC(book_drag_req), mdi);
   gtk_signal_connect (GTK_OBJECT(us), "drop_data_available_event",
 		      GTK_SIGNAL_FUNC(book_drop), mdi);
-  
+
   /* if DnD icons are not loaded yet, load them */
   if(!drag_page)
     drag_page = gnome_stock_transparent_window (GNOME_STOCK_PIXMAP_NOT, NULL);
@@ -520,6 +520,8 @@ static GtkWidget *book_create(GnomeMDI *mdi) {
   gtk_widget_dnd_drop_set (us, TRUE, &mdi->dnd_type, 1, FALSE);
   gtk_widget_dnd_drag_set (us, TRUE, &mdi->dnd_type, 1);
 
+  gtk_notebook_set_scrollable(GTK_NOTEBOOK(us), TRUE);
+  
   gtk_widget_show(us);
 
   return us;
@@ -549,7 +551,7 @@ static void book_remove_view(GtkWidget *view, GnomeMDI *mdi) {
 static void book_switch_page(GtkNotebook *book, GtkNotebookPage *page, gint page_num, GnomeMDI *mdi) {
   GnomeApp *app;
 
-  printf("MDI: book switches page\n");
+  g_message("GnomeMDI: switching pages");
 
   app = GNOME_APP(gtk_widget_get_toplevel(GTK_WIDGET(book)));
 
@@ -563,7 +565,7 @@ static void toplevel_focus(GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi) {
   /* updates active_view and active_child when a new toplevel receives focus */
   g_return_if_fail(GNOME_IS_APP(app));
 
-  printf("MDI: toplevel receives focus\n");
+  g_message("GnomeMDI: toplevel receiving focus");
 
   mdi->active_window = app;
 
@@ -880,6 +882,8 @@ static void app_create(GnomeMDI *mdi) {
   gtk_window_set_wmclass (GTK_WINDOW (window), mdi->appname, mdi->appname);
 #endif
 
+  gtk_window_set_policy(GTK_WINDOW(window), TRUE, TRUE, FALSE);
+  
   gtk_widget_realize(window);
 
   mdi->windows = g_list_append(mdi->windows, window);

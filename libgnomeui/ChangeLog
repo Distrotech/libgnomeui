@@ -1,3 +1,12 @@
+1998-07-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app.c: don't use GTK_SHRINK flag when attaching toolbar,
+	menubar or statusbar. it seems nicer if these don't shrink when
+	the GnomeApp itself is shrunk.
+	* gnome-mdi.c (book_create): make the notebook scrollable:
+	this fixes the problem with lots of children in notebook mode.
+	(app_create): allow growing and shrinking of GnomeApps.
+
 Fri Jul 24 19:54:43 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-scores.c (gnome_scores_new): Use construct to set 
