@@ -1645,6 +1645,19 @@ real_move_cursor (Gil *gil, GtkDirectionType dir, gboolean clear_selection)
 		if (priv->focus_icon - items_per_line >= 0)
 			new_focus_icon -= items_per_line;
 		break;
+
+	case GTK_SCROLL_START:
+		if (priv->focus_icon != 0) {
+			new_focus_icon = 0;
+		}
+		break;
+
+	case GTK_SCROLL_END:
+		if (priv->focus_icon != (priv->icons -1)) {
+			new_focus_icon = priv->icons -1;
+		}
+		break;
+
 	default:
 		break;
 	}
@@ -1656,7 +1669,7 @@ real_move_cursor (Gil *gil, GtkDirectionType dir, gboolean clear_selection)
 	}
 
 	if (gnome_icon_list_icon_is_visible (gil, new_focus_icon) != GTK_VISIBILITY_FULL &&
-	    (dir == GTK_DIR_UP || dir == GTK_DIR_DOWN))
+	    (dir == GTK_DIR_UP || dir == GTK_DIR_DOWN || GTK_SCROLL_START || GTK_SCROLL_END))
 		gnome_icon_list_moveto (gil, new_focus_icon, dir == GTK_DIR_UP ? 0.0 : 1.0);
 
 	gnome_icon_list_focus_icon (gil, new_focus_icon);
@@ -2316,6 +2329,11 @@ gnome_icon_list_class_init (GilClass *gil_class)
 	add_move_binding (binding_set, GDK_Left, GTK_DIR_LEFT);
 	add_move_binding (binding_set, GDK_Down, GTK_DIR_DOWN);
 	add_move_binding (binding_set, GDK_Up, GTK_DIR_UP);
+
+	add_move_binding (binding_set, GDK_Home, GTK_SCROLL_START);
+	add_move_binding (binding_set, GDK_KP_Home, GTK_SCROLL_START);
+	add_move_binding (binding_set, GDK_End, GTK_SCROLL_END);
+	add_move_binding (binding_set, GDK_KP_End, GTK_SCROLL_END);
 
 	gtk_binding_entry_add_signal (binding_set, GDK_space, 0, "toggle_cursor_selection", 0);
 	gtk_binding_entry_add_signal (binding_set, GDK_space, GDK_CONTROL_MASK, "toggle_cursor_selection", 0);

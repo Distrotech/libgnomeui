@@ -1,3 +1,9 @@
+2004-02-16  Narayana Pattipati <narayana.pattipati@wipro.com>
+
+	* libgnomeui/libgnomeui/gnome-icon-list.c:
+	Implement Home/End keynavigation for GnomeIconList. Bugzilla
+	bug#92938
+
 2004-02-15  Christian Persch  <chpe@cvs.gnome.org>
 
 	* libgnomeui/gnome-client.c: (gnome_client_module_class_init):
