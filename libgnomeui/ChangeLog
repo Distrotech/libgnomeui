@@ -1,3 +1,9 @@
+Sat Apr 18 16:32:09 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.c: catch SIGFPE's and set error, this
+	  catches all the errors (intel doesn't give SIGFPE's
+	  enough, and alpha SIGFPE's all over the place)
+
 Fri Apr 17 19:42:54 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h: #define GNOME_APPS_MENU_DENTRY_DIR_EXTENSION 

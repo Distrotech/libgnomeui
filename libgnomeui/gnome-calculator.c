@@ -8,9 +8,12 @@
 #include <math.h>
 #include <nan.h>
 #include <errno.h>
+#include <signal.h>
 #include <gtk/gtk.h>
 #include "libgnome/libgnome.h"
 #include "gnome-calculator.h"
+
+typedef void (*sighandler_t)(int);
 
 #define FONT_WIDTH 20
 #define FONT_HEIGHT 30
@@ -230,6 +233,14 @@ do_error(GnomeCalculator *gc)
 	put_led_font(gc);
 }
 
+/*we handle sigfpe's so that we can fidn all the errors*/
+static void
+sigfpe_handler(int type)
+{
+	/*most likely, but we don't really care what the value is*/
+	errno = ERANGE;
+}
+
 static void
 reduce_stack(GnomeCalculator *gc)
 {
@@ -279,7 +290,11 @@ reduce_stack(GnomeCalculator *gc)
 
 	errno = 0;
 
-	stack->d.number = (*func)(first,second);
+	{
+		sighandler_t old = signal(SIGFPE,sigfpe_handler);
+		stack->d.number = (*func)(first,second);
+		signal(SIGFPE,old);
+	}
 
 	{
 		/*this will work even on buggy alphas where just
@@ -371,6 +386,7 @@ convert_num(gdouble num, GnomeCalculatorMode from, GnomeCalculatorMode to)
 		else /*RAD*/
 			return (num*M_PI)/200;
 }
+
 static gint
 no_func(GtkWidget *w, gpointer data)
 {
@@ -429,10 +445,14 @@ simple_func(GtkWidget *w, gpointer data)
 					      GNOME_CALCULATOR_RAD);
 
 	errno = 0;
-	if(!gc->invert || invfunc==NULL)
-		stack->d.number = (*func)(stack->d.number);
-	else
-		stack->d.number = (*invfunc)(stack->d.number);
+	{
+		sighandler_t old = signal(SIGFPE,sigfpe_handler);
+		if(!gc->invert || invfunc==NULL)
+			stack->d.number = (*func)(stack->d.number);
+		else
+			stack->d.number = (*invfunc)(stack->d.number);
+		signal(SIGFPE,old);
+	}
 
 	{
 		/*this will work even on buggy alphas where just
