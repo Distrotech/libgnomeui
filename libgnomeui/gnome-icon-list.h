@@ -169,6 +169,8 @@ GtkVisibility  gnome_icon_list_is_visible          (GnomeIconList *gil,
 						    int pos);
 
 int            gnome_icon_list_get_icon_at         (GnomeIconList *gil, int x, int y);
+
+int            gnome_icon_list_get_items_per_line  (GnomeIconList *gil);
 #endif /* _GNOME_ICON_LIST_H_ */
 
 

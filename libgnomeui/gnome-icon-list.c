@@ -83,8 +83,7 @@ icon_get_height (Icon *icon, int *icon_height, int *text_height)
 	*text_height = icon->text->ti->height;
 }
 
-/* Returns the number of icons that fit on a line */
-static int
+int
 gil_get_items_per_line (Gil *gil)
 {
 	GnomeCanvas *canvas = GNOME_CANVAS (gil);
@@ -95,6 +94,21 @@ gil_get_items_per_line (Gil *gil)
 		items_per_line = 1;
 
 	return items_per_line;
+}
+
+/**
+ * gnome_icon_list_get_items_per_line:
+ * @gil: the icon list
+ *
+ * Returns the number of icons that fit in a line
+ */
+int
+gnome_icon_list_get_items_per_line (GnomeIconList *gil)
+{
+	g_return_val_if_fail (gil != NULL, 1);
+	g_return_val_if_fail (IS_GIL (gil));
+
+	return gil_get_items_per_line (gil);
 }
 
 static void

@@ -1,5 +1,8 @@
 1998-10-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-icon-list.c (gnome_icon_list_get_items_per_line): Export
+	this routine.
+
 	* gnome-icon-item.c (iti_unrealize): Only call iti_stop_editing if
 	an editing was in course.
 	(iti_realize): account for the fact that we can be realized before
