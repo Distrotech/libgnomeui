@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2002-03-04 22:19+0100\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 2001-12-19 19:49GMT+0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkic <linuxaz@azerimail.net>\n"
@@ -378,106 +378,33 @@ msgstr ""
 "URL göstəricisini başladırkən xəta oldu.\n"
 "İdarə mərkəzinin qurğularını bir yoxlayın."
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "İstifadə ediləcək X ekranı"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "EKRAN"
 
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Kitabxanası"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Çoxlu parçalanma xətaları meydana geldi: xəta göstəricisini göstərə "
 "bilmirəm\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:578
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "Parçalanma xətası!\n"
 "Xəta dialoqunu göstərə bilmirəm\n"
-
-#: libgnomeui/gnome-ui-init.c:715
-msgid "Gdk debugging flags to set"
-msgstr "Seçiləcək Gdk xəta həlli bayraqları"
-
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
-msgid "FLAGS"
-msgstr "BAYRAQLAR"
-
-#: libgnomeui/gnome-ui-init.c:718
-msgid "Gdk debugging flags to unset"
-msgstr "Seçilməyəcək Gdk xəta həlli bayraqları"
-
-#: libgnomeui/gnome-ui-init.c:726
-msgid "Make X calls synchronous"
-msgstr "X çağrılarını sinxronlaşdır"
-
-#: libgnomeui/gnome-ui-init.c:732
-msgid "Don't use X shared memory extension"
-msgstr "Bölüşülmüş X yaddaşı uzantılarını istifadə etmə"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "Program name as used by the window manager"
-msgstr "Pəncərə idarəcisi tərəfindən istifadə edilən proqram adı"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "NAME"
-msgstr "AD"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "Program class as used by the window manager"
-msgstr "Pəncərə idarəcisi tərəfindən istifadə edilən proqram sinifi"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "CLASS"
-msgstr "SİNİF"
-
-#: libgnomeui/gnome-ui-init.c:743
-msgid "HOST"
-msgstr "QOVŞAQ"
-
-#: libgnomeui/gnome-ui-init.c:747
-msgid "PORT"
-msgstr "QAPI"
-
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
-msgid "STYLE"
-msgstr "TƏRZ"
-
-#: libgnomeui/gnome-ui-init.c:759
-msgid "Gtk+ debugging flags to set"
-msgstr "Seçiləcək Gdk+ xəta həlli bayraqları"
-
-#: libgnomeui/gnome-ui-init.c:762
-msgid "Gtk+ debugging flags to unset"
-msgstr "Seçilməyəcək Gdk+ xəta həlli bayraqları"
-
-#: libgnomeui/gnome-ui-init.c:765
-msgid "Make all warnings fatal"
-msgstr "Bütün xəbərdarlıqları ölümcülləşdir"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "Load an additional Gtk module"
-msgstr "Əlavə Gtk modulu yüklə"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "MODULE"
-msgstr "MODUL"
-
-#: libgnomeui/gnome-ui-init.c:873
-msgid "GTK+"
-msgstr "GTK+"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -505,23 +432,23 @@ msgstr ""
 "Ölümcül xəta oldu.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "İstifadə qaydası: gnome_segv2 proqram-adı nömrəsi\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "Xəta raportunu yolla"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "Həll Et"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "Lütfən ətraflı mə'lumat üçün GNOME Proqram tə'minatı Xətası səhifəsini "
@@ -1120,7 +1047,7 @@ msgstr "Yazı növü adı"
 msgid "Name of the selected font"
 msgstr "Seçili yazı növü adı"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Yazı Növü"
 
@@ -1319,6 +1246,60 @@ msgstr "%a %b %d %T %Y"
 #, fuzzy
 msgid "Sans 14"
 msgstr "sans 12"
+
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "Seçiləcək Gdk xəta həlli bayraqları"
+
+#~ msgid "FLAGS"
+#~ msgstr "BAYRAQLAR"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "Seçilməyəcək Gdk xəta həlli bayraqları"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "X çağrılarını sinxronlaşdır"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "Bölüşülmüş X yaddaşı uzantılarını istifadə etmə"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "Pəncərə idarəcisi tərəfindən istifadə edilən proqram adı"
+
+#~ msgid "NAME"
+#~ msgstr "AD"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "Pəncərə idarəcisi tərəfindən istifadə edilən proqram sinifi"
+
+#~ msgid "CLASS"
+#~ msgstr "SİNİF"
+
+#~ msgid "HOST"
+#~ msgstr "QOVŞAQ"
+
+#~ msgid "PORT"
+#~ msgstr "QAPI"
+
+#~ msgid "STYLE"
+#~ msgstr "TƏRZ"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "Seçiləcək Gdk+ xəta həlli bayraqları"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "Seçilməyəcək Gdk+ xəta həlli bayraqları"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "Bütün xəbərdarlıqları ölümcülləşdir"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "Əlavə Gtk modulu yüklə"
+
+#~ msgid "MODULE"
+#~ msgstr "MODUL"
+
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
 
 #, fuzzy
 #~ msgid "Exit the test"

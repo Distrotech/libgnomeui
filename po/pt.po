@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-03-06 01:46+0000\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 2002-03-06 01:50+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -369,106 +369,33 @@ msgstr ""
 "Ocorreu um erro ao tentar lançar o gestor de URLs.\n"
 "Verifique se as suas definições no Centro de Controlo estão correctas."
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:720
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "Ecrã X a utilizar"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:720
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "ECRA"
 
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr "Biblioteca GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:567
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Ocorreram múltiplas falhas de segmentação; incapaz de mostrar diálogo de "
 "erro\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:581
+#: libgnomeui/gnome-ui-init.c:578
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "Falha de segmentação!\n"
 "Incapaz de mostrar diálogo de crash\n"
-
-#: libgnomeui/gnome-ui-init.c:713
-msgid "Gdk debugging flags to set"
-msgstr "Flags de depuração Gdk a activar"
-
-#: libgnomeui/gnome-ui-init.c:713 libgnomeui/gnome-ui-init.c:716
-#: libgnomeui/gnome-ui-init.c:757 libgnomeui/gnome-ui-init.c:760
-msgid "FLAGS"
-msgstr "FLAGS"
-
-#: libgnomeui/gnome-ui-init.c:716
-msgid "Gdk debugging flags to unset"
-msgstr "Flags de depuração Gdk a desactivar"
-
-#: libgnomeui/gnome-ui-init.c:724
-msgid "Make X calls synchronous"
-msgstr "fazer chamadas X síncronas"
-
-#: libgnomeui/gnome-ui-init.c:730
-msgid "Don't use X shared memory extension"
-msgstr "Não utilizar extensões de memória partilhada X"
-
-#: libgnomeui/gnome-ui-init.c:734
-msgid "Program name as used by the window manager"
-msgstr "Nome da aplicação como utilizado pelo gestor janelas"
-
-#: libgnomeui/gnome-ui-init.c:734
-msgid "NAME"
-msgstr "NOME"
-
-#: libgnomeui/gnome-ui-init.c:737
-msgid "Program class as used by the window manager"
-msgstr "Classe aplicação como utilizada pelo gestor janelas"
-
-#: libgnomeui/gnome-ui-init.c:737
-msgid "CLASS"
-msgstr "CLASSE"
-
-#: libgnomeui/gnome-ui-init.c:741
-msgid "HOST"
-msgstr "SERVIDOR"
-
-#: libgnomeui/gnome-ui-init.c:745
-msgid "PORT"
-msgstr "PORTO"
-
-#: libgnomeui/gnome-ui-init.c:750 libgnomeui/gnome-ui-init.c:753
-msgid "STYLE"
-msgstr "ESTILO"
-
-#: libgnomeui/gnome-ui-init.c:757
-msgid "Gtk+ debugging flags to set"
-msgstr "Flags de depuração Gtk+ a activar"
-
-#: libgnomeui/gnome-ui-init.c:760
-msgid "Gtk+ debugging flags to unset"
-msgstr "Flags de depuração Gtk+ a desactivar"
-
-#: libgnomeui/gnome-ui-init.c:763
-msgid "Make all warnings fatal"
-msgstr "Tornar todos os avisos fatais"
-
-#: libgnomeui/gnome-ui-init.c:766
-msgid "Load an additional Gtk module"
-msgstr "Carregar um módulo Gtk adicional"
-
-#: libgnomeui/gnome-ui-init.c:766
-msgid "MODULE"
-msgstr "MODULO"
-
-#: libgnomeui/gnome-ui-init.c:871
-msgid "GTK+"
-msgstr "GTK+"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -496,23 +423,23 @@ msgstr ""
 "devido a um erro fatal.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Utilização: gnome_segv2 nomeapp numsig\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "Submeter um relatório bug"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "Depurar"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Visite a página Aplicação GNOME Crashou para mais informações"
 
@@ -562,7 +489,6 @@ msgstr "Dica para item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ficheiro"
 
@@ -620,7 +546,6 @@ msgid "_Game"
 msgstr "Jo_go"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -811,11 +736,11 @@ msgstr "Configurar a aplicação"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Sobre"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Sobre esta aplicação"
 
@@ -842,7 +767,7 @@ msgstr "Criar uma nova janela"
 msgid "_Close This Window"
 msgstr "Fe_char Esta Janela"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Fechar a janela actual"
 
@@ -1057,9 +982,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry que a selecção de ficheiros utiliza para inserir nomes de ficheiros. "
-"Pode utilizar esta propriedade para obter a GnomeEntry se necessitar de modificar "
-"ou verificar qualquer um dos seus parâmetros."
+"GnomeEntry que a selecção de ficheiros utiliza para inserir nomes de "
+"ficheiros. Pode utilizar esta propriedade para obter a GnomeEntry se "
+"necessitar de modificar ou verificar qualquer um dos seus parâmetros."
 
 #: libgnomeui/gnome-file-entry.c:252
 msgid "GtkEntry"
@@ -1115,7 +1040,7 @@ msgstr "Nome fonte"
 msgid "Name of the selected font"
 msgstr "Nome da fonte seleccionada"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Fonte"
 
@@ -1191,8 +1116,8 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Identificador único para a entrada de ícone. Será utilizado para gravar a lista "
-"de histórico."
+"Identificador único para a entrada de ícone. Será utilizado para gravar a "
+"lista de histórico."
 
 #: libgnomeui/gnome-icon-entry.c:173
 msgid "Title for the Browse icon dialog."
@@ -1220,7 +1145,8 @@ msgid ""
 "need to modify or query any of its properties."
 msgstr ""
 "Diálogo de selecção de ícone. Pode utilizar esta propriedade para obter o "
-"GtkDialog caso necessite de alterar ou verificar qualquer uma das suas propriedades."
+"GtkDialog caso necessite de alterar ou verificar qualquer uma das suas "
+"propriedades."
 
 #: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
 msgid "No Icon"
@@ -1315,9 +1241,62 @@ msgstr "%a %d %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Sair do teste"
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "Flags de depuração Gdk a activar"
+
+#~ msgid "FLAGS"
+#~ msgstr "FLAGS"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "Flags de depuração Gdk a desactivar"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "fazer chamadas X síncronas"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "Não utilizar extensões de memória partilhada X"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "Nome da aplicação como utilizado pelo gestor janelas"
+
+#~ msgid "NAME"
+#~ msgstr "NOME"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "Classe aplicação como utilizada pelo gestor janelas"
+
+#~ msgid "CLASS"
+#~ msgstr "CLASSE"
+
+#~ msgid "HOST"
+#~ msgstr "SERVIDOR"
+
+#~ msgid "PORT"
+#~ msgstr "PORTO"
+
+#~ msgid "STYLE"
+#~ msgstr "ESTILO"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "Flags de depuração Gtk+ a activar"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "Flags de depuração Gtk+ a desactivar"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "Tornar todos os avisos fatais"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "Carregar um módulo Gtk adicional"
+
+#~ msgid "MODULE"
+#~ msgstr "MODULO"
+
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
+
+#~ msgid "Exit the test"
+#~ msgstr "Sair do teste"
 
 #~ msgid "Author"
 #~ msgstr "Autor"

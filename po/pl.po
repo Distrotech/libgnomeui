@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-03-04 22:19+0100\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 2002-03-03 01:16+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -376,106 +376,33 @@ msgstr ""
 "Przy próbie uruchomienia programu obsługującego URL wystąpił błąd.\n"
 "Sprawdź, czy ustawienia w Centrum Sterowania są poprawne."
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "Wykorzystywany ekran X"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "EKRAN X"
 
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr "Biblioteka GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Kilkakrotnie wystąpiło niepoprawne odwołanie do pamięci; nie można "
 "wyświetlić okna z informacją o błędzie\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:578
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "Naruszenie segmentacji!\n"
 "Nie można wyświetlić okna z informacją o błędzie\n"
-
-#: libgnomeui/gnome-ui-init.c:715
-msgid "Gdk debugging flags to set"
-msgstr "Ustawione znaczniki śledzenia Gdk"
-
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
-msgid "FLAGS"
-msgstr "ZNACZNIKI"
-
-#: libgnomeui/gnome-ui-init.c:718
-msgid "Gdk debugging flags to unset"
-msgstr "Wyczyszczone znaczniki śledzenia Gdk"
-
-#: libgnomeui/gnome-ui-init.c:726
-msgid "Make X calls synchronous"
-msgstr "Synchroniczna komunikacja z serwerem X"
-
-#: libgnomeui/gnome-ui-init.c:732
-msgid "Don't use X shared memory extension"
-msgstr "Bez wykorzystania rozszerzenia X, udostępniającego pamięć dzieloną"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "Program name as used by the window manager"
-msgstr "Nazwa programu wykorzystywana przez menedżera okien"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "NAME"
-msgstr "NAZWA"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "Program class as used by the window manager"
-msgstr "Klasa programu wykorzystywana przez menedżera okien"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "CLASS"
-msgstr "KLASA"
-
-#: libgnomeui/gnome-ui-init.c:743
-msgid "HOST"
-msgstr "HOST"
-
-#: libgnomeui/gnome-ui-init.c:747
-msgid "PORT"
-msgstr "PORT"
-
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
-msgid "STYLE"
-msgstr "STYL"
-
-#: libgnomeui/gnome-ui-init.c:759
-msgid "Gtk+ debugging flags to set"
-msgstr "Ustawione znaczniki śledzenia Gtk+"
-
-#: libgnomeui/gnome-ui-init.c:762
-msgid "Gtk+ debugging flags to unset"
-msgstr "Wyczyszczone znaczniki śledzenia Gtk+"
-
-#: libgnomeui/gnome-ui-init.c:765
-msgid "Make all warnings fatal"
-msgstr "Traktowanie ostrzeżeń jak błędów"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "Load an additional Gtk module"
-msgstr "Wczytuje dodatkowy moduł Gtk"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "MODULE"
-msgstr "MODUŁ"
-
-#: libgnomeui/gnome-ui-init.c:873
-msgid "GTK+"
-msgstr "GTK+"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -503,23 +430,23 @@ msgstr ""
 "z powodu poważnego błędu.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Użycie: gnome_segv2 appname signum\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "Wyślij informację o błędzie"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "Śledzenie"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "Oodwiedź stronę \"GNOME Application Crash\", aby uzyskać więcej informacji"
@@ -1121,7 +1048,7 @@ msgstr "Nazwa czcionki"
 msgid "Name of the selected font"
 msgstr "Nazwa wybranej czcionki"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Czcionka"
 
@@ -1322,6 +1249,60 @@ msgstr "%a %d %b %T %Y"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "Ustawione znaczniki śledzenia Gdk"
+
+#~ msgid "FLAGS"
+#~ msgstr "ZNACZNIKI"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "Wyczyszczone znaczniki śledzenia Gdk"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "Synchroniczna komunikacja z serwerem X"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "Bez wykorzystania rozszerzenia X, udostępniającego pamięć dzieloną"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "Nazwa programu wykorzystywana przez menedżera okien"
+
+#~ msgid "NAME"
+#~ msgstr "NAZWA"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "Klasa programu wykorzystywana przez menedżera okien"
+
+#~ msgid "CLASS"
+#~ msgstr "KLASA"
+
+#~ msgid "HOST"
+#~ msgstr "HOST"
+
+#~ msgid "PORT"
+#~ msgstr "PORT"
+
+#~ msgid "STYLE"
+#~ msgstr "STYL"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "Ustawione znaczniki śledzenia Gtk+"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "Wyczyszczone znaczniki śledzenia Gtk+"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "Traktowanie ostrzeżeń jak błędów"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "Wczytuje dodatkowy moduł Gtk"
+
+#~ msgid "MODULE"
+#~ msgstr "MODUŁ"
+
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
 
 #~ msgid "Exit the test"
 #~ msgstr "Kończy test"

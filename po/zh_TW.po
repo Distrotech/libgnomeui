@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2\n"
-"POT-Creation-Date: 2002-03-04 22:19+0100\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 2001-09-22 11:01+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: Chinese <zh@li.org>\n"
@@ -379,104 +379,31 @@ msgstr ""
 "當嘗試啟動這個 URL 的處理程式時發生錯誤。\n"
 "請檢查在控制中心內的有關設定是否正確。 "
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "所使用的 X 顯示環境"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "顯示環境"
 
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr "GNOME 圖形介面函式庫"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "發生了非常嚴重的錯誤；無法顯示錯誤對話盒\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:578
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "嚴重錯誤！\n"
 "無法顯示錯誤對話盒\n"
-
-#: libgnomeui/gnome-ui-init.c:715
-msgid "Gdk debugging flags to set"
-msgstr "設置 Gdk 除錯選項"
-
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
-msgid "FLAGS"
-msgstr "除錯選項"
-
-#: libgnomeui/gnome-ui-init.c:718
-msgid "Gdk debugging flags to unset"
-msgstr "取消設置 Gdk 除錯選項"
-
-#: libgnomeui/gnome-ui-init.c:726
-msgid "Make X calls synchronous"
-msgstr "將 X 的呼叫同步"
-
-#: libgnomeui/gnome-ui-init.c:732
-msgid "Don't use X shared memory extension"
-msgstr "不要使用 X 的共用延伸記憶體"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "Program name as used by the window manager"
-msgstr "視窗管理員所使用的程式名稱"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "NAME"
-msgstr "程式名稱"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "Program class as used by the window manager"
-msgstr "視窗管理員所使用的程式類別"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "CLASS"
-msgstr "類別"
-
-#: libgnomeui/gnome-ui-init.c:743
-msgid "HOST"
-msgstr "主機名稱"
-
-#: libgnomeui/gnome-ui-init.c:747
-msgid "PORT"
-msgstr "埠號"
-
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
-msgid "STYLE"
-msgstr "樣式"
-
-#: libgnomeui/gnome-ui-init.c:759
-msgid "Gtk+ debugging flags to set"
-msgstr "設置 Gtk+ 除錯選項"
-
-#: libgnomeui/gnome-ui-init.c:762
-msgid "Gtk+ debugging flags to unset"
-msgstr "取消設置 Gtk+ 除錯選項"
-
-#: libgnomeui/gnome-ui-init.c:765
-msgid "Make all warnings fatal"
-msgstr "將所有警告視為嚴重錯誤"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "Load an additional Gtk module"
-msgstr "載入另外的 Gtk 模組"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "MODULE"
-msgstr "模組"
-
-#: libgnomeui/gnome-ui-init.c:873
-msgid "GTK+"
-msgstr "GTK+"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -503,23 +430,23 @@ msgstr ""
 "因為一個嚴重的錯誤。\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法：gnome_segv2 (程式名稱) (錯誤編號)\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "匯報錯誤報告"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "除錯"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "請到 GNOME 程式錯誤網頁讀取更多資訊"
 
@@ -1117,7 +1044,7 @@ msgstr "字型名稱"
 msgid "Name of the selected font"
 msgstr "選定字型的名稱"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "字型"
 
@@ -1312,6 +1239,60 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr ""
+
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "設置 Gdk 除錯選項"
+
+#~ msgid "FLAGS"
+#~ msgstr "除錯選項"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "取消設置 Gdk 除錯選項"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "將 X 的呼叫同步"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "不要使用 X 的共用延伸記憶體"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "視窗管理員所使用的程式名稱"
+
+#~ msgid "NAME"
+#~ msgstr "程式名稱"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "視窗管理員所使用的程式類別"
+
+#~ msgid "CLASS"
+#~ msgstr "類別"
+
+#~ msgid "HOST"
+#~ msgstr "主機名稱"
+
+#~ msgid "PORT"
+#~ msgstr "埠號"
+
+#~ msgid "STYLE"
+#~ msgstr "樣式"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "設置 Gtk+ 除錯選項"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "取消設置 Gtk+ 除錯選項"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "將所有警告視為嚴重錯誤"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "載入另外的 Gtk 模組"
+
+#~ msgid "MODULE"
+#~ msgstr "模組"
+
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
 
 #~ msgid "Exit the test"
 #~ msgstr "結束測試"

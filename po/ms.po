@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-03-10 18:18+0800\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -400,126 +400,35 @@ msgstr ""
 "Sila periksa tetapan pada Pusat Kawalan samada ianya betul."
 
 # libgnomeui/gnome-init.c:165
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "Antaramuka X yang hendak diguna"
 
 # libgnomeui/gnome-init.c:165
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "PAPARAN"
 
 # libgnomeui/gnome-init.c:298
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr "Pustaka GUI GNOME"
 
 # libgnomeui/gnome-init.c:642
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Beberapa ralat segmentasi berlaku; tidak dapat paparkan dialog ralat\n"
 
 # libgnomeui/gnome-init.c:642
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:578
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "Alamak! Ralat segmentasi! \n"
 "tidak dapat paparkan dialog jahanam\n"
-
-# libgnomeui/gnome-init.c:161
-#: libgnomeui/gnome-ui-init.c:715
-msgid "Gdk debugging flags to set"
-msgstr "Flag pepijat gdk yang hendak ditetapkan"
-
-# libgnomeui/gnome-init.c:161 libgnomeui/gnome-init.c:163
-# libgnomeui/gnome-init.c:183 libgnomeui/gnome-init.c:185
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
-msgid "FLAGS"
-msgstr "FLAGS"
-
-# libgnomeui/gnome-init.c:163
-#: libgnomeui/gnome-ui-init.c:718
-msgid "Gdk debugging flags to unset"
-msgstr "Flag pepijat gdk yang hendak dibuang"
-
-# libgnomeui/gnome-init.c:167
-#: libgnomeui/gnome-ui-init.c:726
-msgid "Make X calls synchronous"
-msgstr "Laraskan panggilan X"
-
-# libgnomeui/gnome-init.c:169
-#: libgnomeui/gnome-ui-init.c:732
-msgid "Don't use X shared memory extension"
-msgstr "Jangan gunakan tambahan perkongsian ingatan X"
-
-# libgnomeui/gnome-init.c:171
-#: libgnomeui/gnome-ui-init.c:736
-msgid "Program name as used by the window manager"
-msgstr "Nama aplikasi seperti yang digunakan pelayan tetingkap"
-
-# libgnomeui/gnome-init.c:171
-#: libgnomeui/gnome-ui-init.c:736
-msgid "NAME"
-msgstr "NAMA"
-
-# libgnomeui/gnome-init.c:173
-#: libgnomeui/gnome-ui-init.c:739
-msgid "Program class as used by the window manager"
-msgstr "Kelas aplikasi seperti yang digunakan pelayan tetingkap"
-
-# libgnomeui/gnome-init.c:173
-#: libgnomeui/gnome-ui-init.c:739
-msgid "CLASS"
-msgstr "KELAS"
-
-# libgnomeui/gnome-init.c:175
-#: libgnomeui/gnome-ui-init.c:743
-msgid "HOST"
-msgstr "HOST"
-
-# libgnomeui/gnome-init.c:177
-#: libgnomeui/gnome-ui-init.c:747
-msgid "PORT"
-msgstr "PORT"
-
-# libgnomeui/gnome-init.c:179 libgnomeui/gnome-init.c:181
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
-msgid "STYLE"
-msgstr "GAYA"
-
-# libgnomeui/gnome-init.c:183
-#: libgnomeui/gnome-ui-init.c:759
-msgid "Gtk+ debugging flags to set"
-msgstr "Flag pepijat Gtk+ yang hendak ditetapkan"
-
-# libgnomeui/gnome-init.c:185
-#: libgnomeui/gnome-ui-init.c:762
-msgid "Gtk+ debugging flags to unset"
-msgstr "Flag pepijat Gtk+ yang hendak dibuang"
-
-# libgnomeui/gnome-init.c:187
-#: libgnomeui/gnome-ui-init.c:765
-msgid "Make all warnings fatal"
-msgstr "Jadikan semua amaran berbahaya"
-
-# libgnomeui/gnome-init.c:189
-#: libgnomeui/gnome-ui-init.c:768
-msgid "Load an additional Gtk module"
-msgstr "Muatkan modul Gtk tambahan"
-
-# libgnomeui/gnome-init.c:189
-#: libgnomeui/gnome-ui-init.c:768
-msgid "MODULE"
-msgstr "MODUL"
-
-#: libgnomeui/gnome-ui-init.c:873
-msgid "GTK+"
-msgstr "GTK+"
 
 # libgnomeui/gnome_segv.c:62
 #: libgnomeui/gnome_segv.c:100
@@ -549,27 +458,27 @@ msgstr ""
 "(%s)"
 
 # libgnomeui/gnome_segv.c:80
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Penggunaan: gnome_segv appname signum\n"
 
 # libgnomeui/gnome_segv.c:94
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "Hantar laporan pepijat"
 
 # libgnomeui/gnome_segv.c:104
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "Nyah-pepijat"
 
 # libgnomeui/gnome_segv.c:111
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
 # libgnomeui/gnome_segv.c:117
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Sila lawat laman Aplikasi Musnah GNOME untuk maklumat lanjut"
 
@@ -625,7 +534,6 @@ msgstr "Petua item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -688,7 +596,6 @@ msgstr "_Permainan"
 
 # libgnomeui/gnome-app-helper.c:92
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Ba_ntuan"
 
@@ -918,12 +825,12 @@ msgstr "Tetapkan aturan aturcara"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "Perih_al"
 
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Perihal aplikasi ini"
 
@@ -956,7 +863,7 @@ msgid "_Close This Window"
 msgstr "T_utup Tetingkap Ini"
 
 # libgnomeui/gnome-app-helper.c:253
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Tutup tetingkap ini"
 
@@ -1485,7 +1392,78 @@ msgstr "%a %T %d %b %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
+# libgnomeui/gnome-init.c:161
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "Flag pepijat gdk yang hendak ditetapkan"
+
+# libgnomeui/gnome-init.c:161 libgnomeui/gnome-init.c:163
+# libgnomeui/gnome-init.c:183 libgnomeui/gnome-init.c:185
+#~ msgid "FLAGS"
+#~ msgstr "FLAGS"
+
+# libgnomeui/gnome-init.c:163
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "Flag pepijat gdk yang hendak dibuang"
+
+# libgnomeui/gnome-init.c:167
+#~ msgid "Make X calls synchronous"
+#~ msgstr "Laraskan panggilan X"
+
+# libgnomeui/gnome-init.c:169
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "Jangan gunakan tambahan perkongsian ingatan X"
+
+# libgnomeui/gnome-init.c:171
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "Nama aplikasi seperti yang digunakan pelayan tetingkap"
+
+# libgnomeui/gnome-init.c:171
+#~ msgid "NAME"
+#~ msgstr "NAMA"
+
+# libgnomeui/gnome-init.c:173
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "Kelas aplikasi seperti yang digunakan pelayan tetingkap"
+
+# libgnomeui/gnome-init.c:173
+#~ msgid "CLASS"
+#~ msgstr "KELAS"
+
+# libgnomeui/gnome-init.c:175
+#~ msgid "HOST"
+#~ msgstr "HOST"
+
+# libgnomeui/gnome-init.c:177
+#~ msgid "PORT"
+#~ msgstr "PORT"
+
+# libgnomeui/gnome-init.c:179 libgnomeui/gnome-init.c:181
+#~ msgid "STYLE"
+#~ msgstr "GAYA"
+
+# libgnomeui/gnome-init.c:183
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "Flag pepijat Gtk+ yang hendak ditetapkan"
+
+# libgnomeui/gnome-init.c:185
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "Flag pepijat Gtk+ yang hendak dibuang"
+
+# libgnomeui/gnome-init.c:187
+#~ msgid "Make all warnings fatal"
+#~ msgstr "Jadikan semua amaran berbahaya"
+
+# libgnomeui/gnome-init.c:189
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "Muatkan modul Gtk tambahan"
+
+# libgnomeui/gnome-init.c:189
+#~ msgid "MODULE"
+#~ msgstr "MODUL"
+
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
+
 # libgnomeui/gnome-app-helper.c:160
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Keluar ujian"
+#~ msgid "Exit the test"
+#~ msgstr "Keluar ujian"

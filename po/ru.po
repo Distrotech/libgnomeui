@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-03-14 08:11-0500\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 2002-03-15 14:29+0300\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -384,7 +384,9 @@ msgstr "Библиотека пользовательского интерфейса GNOME"
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Возникли множественные segfault; невозможно отобразить диалог об ошибке\n\n"
+msgstr ""
+"Возникли множественные segfault; невозможно отобразить диалог об ошибке\n"
+"\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:578
@@ -416,25 +418,27 @@ msgstr ""
 "из-за неисправимой ошибки.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Использование: gnome_segv2 appname signum\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "Отправить сообщение об ошибке"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "Отладка"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Посетите страницу \"Сбой приложения GNOME\" для получения дополнительной информации"
+msgstr ""
+"Посетите страницу \"Сбой приложения GNOME\" для получения дополнительной "
+"информации"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -482,7 +486,6 @@ msgstr "Подсказка для элемента 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "Файл"
 
@@ -540,7 +543,6 @@ msgid "_Game"
 msgstr "Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Справка"
 
@@ -731,11 +733,11 @@ msgstr "Настроить приложение"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "О программе"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Об этой программе"
 
@@ -762,7 +764,7 @@ msgstr "Создать новое окно"
 msgid "_Close This Window"
 msgstr "Закрыть это окно"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Закрыть текущее окно"
 
@@ -1217,9 +1219,8 @@ msgstr "%a %d %b"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Выход из теста"
+#~ msgid "Exit the test"
+#~ msgstr "Выход из теста"
 
 #~ msgid "FLAGS"
 #~ msgstr "ФЛАГИ"

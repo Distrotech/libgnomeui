@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
-"POT-Creation-Date: 2002-03-04 22:19+0100\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 2002-03-01 23:31+0900\n"
 "Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -372,106 +372,33 @@ msgstr ""
 "URL ハンドラを起動しようてとしてエラーが発生しました。\n"
 "コントロールセンターで設定が正しいかどうか確認してください。"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "使用する X ディスプレイ"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "ディスプレイ"
 
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI ライブラリ"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "セグメンテーションフォルトが複数回発生しました; エラーダイログを表示できませ"
 "ん\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:578
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "セグメンテーションフォルト!\n"
 "クラッシュダイログを表示できません\n"
-
-#: libgnomeui/gnome-ui-init.c:715
-msgid "Gdk debugging flags to set"
-msgstr "セットする GDK デバッグフラグ"
-
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
-msgid "FLAGS"
-msgstr "フラグ"
-
-#: libgnomeui/gnome-ui-init.c:718
-msgid "Gdk debugging flags to unset"
-msgstr "外す GDK デバッグフラグ"
-
-#: libgnomeui/gnome-ui-init.c:726
-msgid "Make X calls synchronous"
-msgstr "X の呼出を同期モードで行なう"
-
-#: libgnomeui/gnome-ui-init.c:732
-msgid "Don't use X shared memory extension"
-msgstr "X 共有メモリ拡張を使用しない"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "Program name as used by the window manager"
-msgstr "ウィンドウマネージャに指示するプログラム名"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "NAME"
-msgstr "名前"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "Program class as used by the window manager"
-msgstr "ウィンドウマネージャに指示するクラス名"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "CLASS"
-msgstr "クラス"
-
-#: libgnomeui/gnome-ui-init.c:743
-msgid "HOST"
-msgstr "ホスト"
-
-#: libgnomeui/gnome-ui-init.c:747
-msgid "PORT"
-msgstr "ポート"
-
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
-msgid "STYLE"
-msgstr "スタイル"
-
-#: libgnomeui/gnome-ui-init.c:759
-msgid "Gtk+ debugging flags to set"
-msgstr "立てる GTK+ デバッグフラグ"
-
-#: libgnomeui/gnome-ui-init.c:762
-msgid "Gtk+ debugging flags to unset"
-msgstr "下ろす GTK+ デバッグフラグ"
-
-#: libgnomeui/gnome-ui-init.c:765
-msgid "Make all warnings fatal"
-msgstr "すべての警告を致命的にする"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "Load an additional Gtk module"
-msgstr "追加 GTK モジュールの読み込み"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "MODULE"
-msgstr "モジュール"
-
-#: libgnomeui/gnome-ui-init.c:873
-msgid "GTK+"
-msgstr "GTK+"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -499,23 +426,23 @@ msgstr ""
 "致命的なエラーによってクラッシュしました。\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "使用法: gnome_segv2 アプリケーション名 シグナル番号\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "バグレポートを送る"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "デバッグ"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "より詳しい情報は、GNOME アプリケーションクラッシュページを見て下さい"
 
@@ -1112,7 +1039,7 @@ msgstr "フォント名"
 msgid "Name of the selected font"
 msgstr "選択したフォントの名前"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "フォント"
 
@@ -1308,6 +1235,60 @@ msgstr "%Y年%m月%d日(%a) %T"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "セットする GDK デバッグフラグ"
+
+#~ msgid "FLAGS"
+#~ msgstr "フラグ"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "外す GDK デバッグフラグ"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "X の呼出を同期モードで行なう"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "X 共有メモリ拡張を使用しない"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "ウィンドウマネージャに指示するプログラム名"
+
+#~ msgid "NAME"
+#~ msgstr "名前"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "ウィンドウマネージャに指示するクラス名"
+
+#~ msgid "CLASS"
+#~ msgstr "クラス"
+
+#~ msgid "HOST"
+#~ msgstr "ホスト"
+
+#~ msgid "PORT"
+#~ msgstr "ポート"
+
+#~ msgid "STYLE"
+#~ msgstr "スタイル"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "立てる GTK+ デバッグフラグ"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "下ろす GTK+ デバッグフラグ"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "すべての警告を致命的にする"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "追加 GTK モジュールの読み込み"
+
+#~ msgid "MODULE"
+#~ msgstr "モジュール"
+
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
 
 #, fuzzy
 #~ msgid "Exit the test"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 1.102.0\n"
-"POT-Creation-Date: 2002-03-04 22:19+0100\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 2001-08-16 14:12+0200\n"
 "Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -367,102 +367,29 @@ msgid ""
 "Please check the settings in the Control Center if they are correct."
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "Kullanýlacak X görüntüsü"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "GÖRÜNTÜ"
 
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Kütüphanesi"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:578
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
-
-#: libgnomeui/gnome-ui-init.c:715
-msgid "Gdk debugging flags to set"
-msgstr "Kullanýlacak Gdk hata ayýklama bayraklarý"
-
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
-msgid "FLAGS"
-msgstr "BAYRAKLAR"
-
-#: libgnomeui/gnome-ui-init.c:718
-msgid "Gdk debugging flags to unset"
-msgstr "Kullanýlmayacak Gdk hata ayýklama bayraklarý"
-
-#: libgnomeui/gnome-ui-init.c:726
-msgid "Make X calls synchronous"
-msgstr "X çaðrýlarýný eþzamanlý yap"
-
-#: libgnomeui/gnome-ui-init.c:732
-msgid "Don't use X shared memory extension"
-msgstr "X paylaþýmlý bellek eklentisini kullanma"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "Program name as used by the window manager"
-msgstr "Pencere yöneticisi tarafýndan kullanýlan program adý"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "NAME"
-msgstr "ÝSÝM"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "Program class as used by the window manager"
-msgstr "Pencere yöneticisi tarafýndan kullanýlan program sýnýfý"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "CLASS"
-msgstr "SINIF"
-
-#: libgnomeui/gnome-ui-init.c:743
-msgid "HOST"
-msgstr "MAKÝNE"
-
-#: libgnomeui/gnome-ui-init.c:747
-msgid "PORT"
-msgstr "PORT"
-
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
-msgid "STYLE"
-msgstr "STÝL"
-
-#: libgnomeui/gnome-ui-init.c:759
-msgid "Gtk+ debugging flags to set"
-msgstr "Tanýmlanacak GTK+ hata ayýklama bayraklarý"
-
-#: libgnomeui/gnome-ui-init.c:762
-msgid "Gtk+ debugging flags to unset"
-msgstr "Silinecek GTK+ hata ayýklama bayraklarý"
-
-#: libgnomeui/gnome-ui-init.c:765
-msgid "Make all warnings fatal"
-msgstr "Tüm uyarýlarý ölümcül olarak göster"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "Load an additional Gtk module"
-msgstr "Ek Gtk modülü yükle"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "MODULE"
-msgstr "MODÜL"
-
-#: libgnomeui/gnome-ui-init.c:873
-msgid "GTK+"
-msgstr "GTK+"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -482,23 +409,23 @@ msgid ""
 "(%s)"
 msgstr ""
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Kullaným: gnome_segv2 uyg_adý sinyal_num\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "Bir hata raporu gönderin"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "Hata ayýkla"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "Lütfen ayrýntýlý bilgi için Gnome Uygulama göçmesi sayfasýný ziyaret edin"
@@ -1090,7 +1017,7 @@ msgstr "Yazýtipi adý"
 msgid "Name of the selected font"
 msgstr "Seçilen yazýtipinin adý"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Yazýtipi"
 
@@ -1279,6 +1206,60 @@ msgstr "%d %b %a %T %Y"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "Kullanýlacak Gdk hata ayýklama bayraklarý"
+
+#~ msgid "FLAGS"
+#~ msgstr "BAYRAKLAR"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "Kullanýlmayacak Gdk hata ayýklama bayraklarý"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "X çaðrýlarýný eþzamanlý yap"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "X paylaþýmlý bellek eklentisini kullanma"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "Pencere yöneticisi tarafýndan kullanýlan program adý"
+
+#~ msgid "NAME"
+#~ msgstr "ÝSÝM"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "Pencere yöneticisi tarafýndan kullanýlan program sýnýfý"
+
+#~ msgid "CLASS"
+#~ msgstr "SINIF"
+
+#~ msgid "HOST"
+#~ msgstr "MAKÝNE"
+
+#~ msgid "PORT"
+#~ msgstr "PORT"
+
+#~ msgid "STYLE"
+#~ msgstr "STÝL"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "Tanýmlanacak GTK+ hata ayýklama bayraklarý"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "Silinecek GTK+ hata ayýklama bayraklarý"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "Tüm uyarýlarý ölümcül olarak göster"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "Ek Gtk modülü yükle"
+
+#~ msgid "MODULE"
+#~ msgstr "MODÜL"
+
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
 
 #~ msgid "Exit the test"
 #~ msgstr "Testten çýk"

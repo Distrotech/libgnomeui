@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
-"POT-Creation-Date: 2002-03-04 22:19+0100\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 2002-02-27 22:40+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -374,104 +374,31 @@ msgstr ""
 "Virhe tapahtui yrittäessä käynnistää URL-käsittelintä.\n"
 "Tarkista, että Hallintakeskuksen asetukset ovat oikein."
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "Käytettävä X-näyttö"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "NÄYTTÖ"
 
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr "GNOMEn GUI-asetukset"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Monia muistialueen ylityksiä tapahtui: virheikkunaa ei voi näyttää\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:578
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "Muistinkäsittelyvirhe!\n"
 "Ei voi näyttää kaatumisikkunaa\n"
-
-#: libgnomeui/gnome-ui-init.c:715
-msgid "Gdk debugging flags to set"
-msgstr "Asetettavat Gdk:n vianmääritysliput"
-
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
-msgid "FLAGS"
-msgstr "LIPUT"
-
-#: libgnomeui/gnome-ui-init.c:718
-msgid "Gdk debugging flags to unset"
-msgstr "Poistettavat Gdk:n vianmääritysliput"
-
-#: libgnomeui/gnome-ui-init.c:726
-msgid "Make X calls synchronous"
-msgstr "Tee X-kutsuista synkronisia"
-
-#: libgnomeui/gnome-ui-init.c:732
-msgid "Don't use X shared memory extension"
-msgstr "Älä käytä X:n jaettu muisti -laajennusta"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "Program name as used by the window manager"
-msgstr "Ikkunanhallinnan ohjelmasta käyttämä nimi"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "NAME"
-msgstr "NIMI"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "Program class as used by the window manager"
-msgstr "Ikkunanhallinnan ohjelmalle määrittämä luokka"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "CLASS"
-msgstr "LUOKKA"
-
-#: libgnomeui/gnome-ui-init.c:743
-msgid "HOST"
-msgstr "KONE"
-
-#: libgnomeui/gnome-ui-init.c:747
-msgid "PORT"
-msgstr "PORTTI"
-
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
-msgid "STYLE"
-msgstr "TYYLI"
-
-#: libgnomeui/gnome-ui-init.c:759
-msgid "Gtk+ debugging flags to set"
-msgstr "Asetettavat Gtk+:n vianmääritysliput"
-
-#: libgnomeui/gnome-ui-init.c:762
-msgid "Gtk+ debugging flags to unset"
-msgstr "Poistettavat Gtk+:n vianmääritysliput"
-
-#: libgnomeui/gnome-ui-init.c:765
-msgid "Make all warnings fatal"
-msgstr "Tee kaikista varoituksista virheitä"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "Load an additional Gtk module"
-msgstr "Lataa Gtk-lisämoduuli"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "MODULE"
-msgstr "MODUULI"
-
-#: libgnomeui/gnome-ui-init.c:873
-msgid "GTK+"
-msgstr "GTK+"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -499,23 +426,23 @@ msgstr ""
 "Sovellus \"%s\" (prosessi %d) on kaatunut vakavaan virheeseen.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Käyttö: gnome_segv sovellus signaali\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "Täytä virheilmoitus"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "Virheidenetsintä"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Käy katsomassa lisätietoja GNOME Application Crash -sivulta."
 
@@ -1106,7 +1033,7 @@ msgstr "Kirjasimen nimi"
 msgid "Name of the selected font"
 msgstr "Valitun kirjasimen nimi"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Kirjasinlaji"
 
@@ -1303,6 +1230,60 @@ msgstr "%a %d. %b %T %Y"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "Asetettavat Gdk:n vianmääritysliput"
+
+#~ msgid "FLAGS"
+#~ msgstr "LIPUT"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "Poistettavat Gdk:n vianmääritysliput"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "Tee X-kutsuista synkronisia"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "Älä käytä X:n jaettu muisti -laajennusta"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "Ikkunanhallinnan ohjelmasta käyttämä nimi"
+
+#~ msgid "NAME"
+#~ msgstr "NIMI"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "Ikkunanhallinnan ohjelmalle määrittämä luokka"
+
+#~ msgid "CLASS"
+#~ msgstr "LUOKKA"
+
+#~ msgid "HOST"
+#~ msgstr "KONE"
+
+#~ msgid "PORT"
+#~ msgstr "PORTTI"
+
+#~ msgid "STYLE"
+#~ msgstr "TYYLI"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "Asetettavat Gtk+:n vianmääritysliput"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "Poistettavat Gtk+:n vianmääritysliput"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "Tee kaikista varoituksista virheitä"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "Lataa Gtk-lisämoduuli"
+
+#~ msgid "MODULE"
+#~ msgstr "MODUULI"
+
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
 
 #~ msgid "Exit the test"
 #~ msgstr "Lopeta testi"

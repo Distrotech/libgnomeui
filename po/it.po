@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
-"POT-Creation-Date: 2002-03-04 22:19+0100\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 2002-03-03 17:35+0100\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@cgabriel.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -368,106 +368,33 @@ msgid ""
 "Please check the settings in the Control Center if they are correct."
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "Display X da utilizzare"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr "Libreria per la GUI di GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Si sono verificati errori di segmentazione multipli; impossibile "
 "visualizzare la finestre di errore\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:578
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "Errore di segmentazione!\n"
 "Impossibile mostrare la finestre di dialogo relativa\n"
-
-#: libgnomeui/gnome-ui-init.c:715
-msgid "Gdk debugging flags to set"
-msgstr "Parametri di debug per Gdk da utilizzare"
-
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
-msgid "FLAGS"
-msgstr "FLAGS"
-
-#: libgnomeui/gnome-ui-init.c:718
-msgid "Gdk debugging flags to unset"
-msgstr "Parametri di debug per Gdk da non utilizzare"
-
-#: libgnomeui/gnome-ui-init.c:726
-msgid "Make X calls synchronous"
-msgstr "Effettua chiamate X sincrone"
-
-#: libgnomeui/gnome-ui-init.c:732
-msgid "Don't use X shared memory extension"
-msgstr "Non utilizzare le estensioni X per la memoria condivisa"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "Program name as used by the window manager"
-msgstr "Nome del programma utilizzato dal gestore di finestre"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "NAME"
-msgstr "NOME"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "Program class as used by the window manager"
-msgstr "Classe del programma utilizzata dal gestore di finestre"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "CLASS"
-msgstr "CLASS"
-
-#: libgnomeui/gnome-ui-init.c:743
-msgid "HOST"
-msgstr "HOST"
-
-#: libgnomeui/gnome-ui-init.c:747
-msgid "PORT"
-msgstr "PORT"
-
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
-msgid "STYLE"
-msgstr "STYLE"
-
-#: libgnomeui/gnome-ui-init.c:759
-msgid "Gtk+ debugging flags to set"
-msgstr "Parametri di debug di Gtk+ da utilizzare"
-
-#: libgnomeui/gnome-ui-init.c:762
-msgid "Gtk+ debugging flags to unset"
-msgstr "Parametri di debug di Gtk+ da non utilizzare"
-
-#: libgnomeui/gnome-ui-init.c:765
-msgid "Make all warnings fatal"
-msgstr "Rendi tutti gli avvertimenti come errori fatali"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "Load an additional Gtk module"
-msgstr "Carica un modulo Gtk addizionale"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "MODULE"
-msgstr "MODULE"
-
-#: libgnomeui/gnome-ui-init.c:873
-msgid "GTK+"
-msgstr "GTK+"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -490,23 +417,23 @@ msgstr ""
 "a causa di un errore fatale.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Uso: gnome_segv2 nomeapplicazione segnale\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "Invia un bug report"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "Debug"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "Per maggiori informazioni visitare la pagina per il crash delle applicazioni "
@@ -1099,7 +1026,7 @@ msgstr "Nome carattere"
 msgid "Name of the selected font"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Carattere"
 
@@ -1288,6 +1215,60 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr "Sans 14"
+
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "Parametri di debug per Gdk da utilizzare"
+
+#~ msgid "FLAGS"
+#~ msgstr "FLAGS"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "Parametri di debug per Gdk da non utilizzare"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "Effettua chiamate X sincrone"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "Non utilizzare le estensioni X per la memoria condivisa"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "Nome del programma utilizzato dal gestore di finestre"
+
+#~ msgid "NAME"
+#~ msgstr "NOME"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "Classe del programma utilizzata dal gestore di finestre"
+
+#~ msgid "CLASS"
+#~ msgstr "CLASS"
+
+#~ msgid "HOST"
+#~ msgstr "HOST"
+
+#~ msgid "PORT"
+#~ msgstr "PORT"
+
+#~ msgid "STYLE"
+#~ msgstr "STYLE"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "Parametri di debug di Gtk+ da utilizzare"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "Parametri di debug di Gtk+ da non utilizzare"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "Rendi tutti gli avvertimenti come errori fatali"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "Carica un modulo Gtk addizionale"
+
+#~ msgid "MODULE"
+#~ msgstr "MODULE"
+
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
 
 #~ msgid "Exit the test"
 #~ msgstr "Termina il test"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 1.96.0\n"
-"POT-Creation-Date: 2002-03-04 22:19+0100\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 2001-06-16 00:05-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil\n"
@@ -380,103 +380,30 @@ msgstr ""
 "URL ¨¸ôÀ¢Ê¨Â ¦¾¡¼í¸ ÓÂüº¢ò¾ §À¡Ğ À¢¨Æ ¿¨¼¦ÀüÈĞ.\n"
 "Control Center'Â¢ø «¨Á×¸û ºÃ¢Â¡ ±ñÚ À¡÷ì¸×õ."
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "¯À§Â¡¸¢ì¸ §ÅñÊÂ X ¸¡ğº¢"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "¸¡ğº¢"
 
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr ""
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "ÀÄ ÀÌ¾¢Â¡ì¸ø À¢¨Æ¸û ¿¨¼¦ÀüÚûÇÉ; À¢¨Æ ¯¨ÃÂ¡¼¨Ä ¸¡ñÀ¢ì¸ ÓÊÂ¡Ğ\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:578
 #, fuzzy
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr "ÀÄ ÀÌ¾¢Â¡ì¸ø À¢¨Æ¸û ¿¨¼¦ÀüÚûÇÉ; À¢¨Æ ¯¨ÃÂ¡¼¨Ä ¸¡ñÀ¢ì¸ ÓÊÂ¡Ğ\n"
-
-#: libgnomeui/gnome-ui-init.c:715
-msgid "Gdk debugging flags to set"
-msgstr "Gdk À¢¨Æ-¿£ìÌÅ¾ü¸¡¸ «¨Áì¸ §ÅñÊÂ ¦¸¡Ê¸û"
-
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
-msgid "FLAGS"
-msgstr "¦¸¡Ê¸û"
-
-#: libgnomeui/gnome-ui-init.c:718
-msgid "Gdk debugging flags to unset"
-msgstr "Gdk À¢¨Æ-¿£ì¸ ÍÆ¢ôÀÎò¾ §ÅñÊÂ ¦¸¡Ê¸û"
-
-#: libgnomeui/gnome-ui-init.c:726
-msgid "Make X calls synchronous"
-msgstr "X «¨ÆôÒ¸¨Ç ´ò¾¢Âì¸î ¦ºö"
-
-#: libgnomeui/gnome-ui-init.c:732
-msgid "Don't use X shared memory extension"
-msgstr "À¸¢÷-¿¢¨ÉÅ¸ ¿£ğÊô¨À X'Â¢ø ¯À§Â¡¸¢ì¸ §Åñ¼¡õ"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "Program name as used by the window manager"
-msgstr "º¡ÇÃ§ÁÄ¡Ç÷ ÀÂıÀÎòĞõ ¿¢Ãø ¦ÀÂ÷"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "NAME"
-msgstr "¦ÀÂ÷"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "Program class as used by the window manager"
-msgstr "º¡ÇÃ§ÁÄ¡Ç÷ ÀÂıÀÎòĞõ ¿¢Ãø ÅÌôÒ"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "CLASS"
-msgstr "ÅÌôÒ"
-
-#: libgnomeui/gnome-ui-init.c:743
-msgid "HOST"
-msgstr "Å¢Õó§¾¡õÒ"
-
-#: libgnomeui/gnome-ui-init.c:747
-msgid "PORT"
-msgstr "Ğ¨È"
-
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
-msgid "STYLE"
-msgstr "ÀñÒ"
-
-#: libgnomeui/gnome-ui-init.c:759
-msgid "Gtk+ debugging flags to set"
-msgstr "Gtk+ À¢¨Æ ¿£ì¸ «¨Áì¸ §ÅñÊÂ ¦¸¡Ê¸û"
-
-#: libgnomeui/gnome-ui-init.c:762
-msgid "Gtk+ debugging flags to unset"
-msgstr "Gtk+ À¢¨Æ ¿£ì¸ ÍÆ¢ôÀÎò¾ §ÅñÊÂ ¦¸¡Ê¸û"
-
-#: libgnomeui/gnome-ui-init.c:765
-msgid "Make all warnings fatal"
-msgstr "«¨ÉòĞ ±îº¡¢ì¨¸¸¨ÇÔõ ¦¸¡ø À¢¨ÆÂ¡ìÌ"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "Load an additional Gtk module"
-msgstr "§ÁÖõ µ÷ Gtk Ü¨È¨Â ²üÚ"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "MODULE"
-msgstr "ÜÚ"
-
-#: libgnomeui/gnome-ui-init.c:873
-msgid "GTK+"
-msgstr ""
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -499,24 +426,24 @@ msgstr ""
 "ÓÈ¢× «¨¼óĞøÄĞ.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 #, fuzzy
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "¯À§Â¡¸¢ôÒ: gnome_segv ÀÂıÀ¡Î_¦ÀÂ÷ signum\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "À¢¨Æ «È¢ì¨¸ «¼íÌ"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "À¢¨Æ ¿£ìÌ"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr ""
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "¾Â×¦ºöĞ, ¾¸ÅÖìÌ ¸§É¡õ ÀÂıÀ¡Î ÓÈ¢× Àì¸ò¨¾ À¡÷ì¸×õ"
 
@@ -1126,7 +1053,7 @@ msgstr "«î¦ºØòĞ"
 msgid "Name of the selected font"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "«î¦ºØòĞ"
 
@@ -1325,6 +1252,57 @@ msgstr ""
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr ""
+
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "Gdk À¢¨Æ-¿£ìÌÅ¾ü¸¡¸ «¨Áì¸ §ÅñÊÂ ¦¸¡Ê¸û"
+
+#~ msgid "FLAGS"
+#~ msgstr "¦¸¡Ê¸û"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "Gdk À¢¨Æ-¿£ì¸ ÍÆ¢ôÀÎò¾ §ÅñÊÂ ¦¸¡Ê¸û"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "X «¨ÆôÒ¸¨Ç ´ò¾¢Âì¸î ¦ºö"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "À¸¢÷-¿¢¨ÉÅ¸ ¿£ğÊô¨À X'Â¢ø ¯À§Â¡¸¢ì¸ §Åñ¼¡õ"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "º¡ÇÃ§ÁÄ¡Ç÷ ÀÂıÀÎòĞõ ¿¢Ãø ¦ÀÂ÷"
+
+#~ msgid "NAME"
+#~ msgstr "¦ÀÂ÷"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "º¡ÇÃ§ÁÄ¡Ç÷ ÀÂıÀÎòĞõ ¿¢Ãø ÅÌôÒ"
+
+#~ msgid "CLASS"
+#~ msgstr "ÅÌôÒ"
+
+#~ msgid "HOST"
+#~ msgstr "Å¢Õó§¾¡õÒ"
+
+#~ msgid "PORT"
+#~ msgstr "Ğ¨È"
+
+#~ msgid "STYLE"
+#~ msgstr "ÀñÒ"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "Gtk+ À¢¨Æ ¿£ì¸ «¨Áì¸ §ÅñÊÂ ¦¸¡Ê¸û"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "Gtk+ À¢¨Æ ¿£ì¸ ÍÆ¢ôÀÎò¾ §ÅñÊÂ ¦¸¡Ê¸û"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "«¨ÉòĞ ±îº¡¢ì¨¸¸¨ÇÔõ ¦¸¡ø À¢¨ÆÂ¡ìÌ"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "§ÁÖõ µ÷ Gtk Ü¨È¨Â ²üÚ"
+
+#~ msgid "MODULE"
+#~ msgstr "ÜÚ"
 
 #, fuzzy
 #~ msgid "Author"

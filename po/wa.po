@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2002-03-04 22:19+0100\n"
+"POT-Creation-Date: 2002-03-18 15:41+0100\n"
 "PO-Revision-Date: 1999-02-07 17:37+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -385,27 +385,27 @@ msgid ""
 "Please check the settings in the Control Center if they are correct."
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "X display to use"
 msgstr "Håynaedje X a eployî"
 
-#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:104
 msgid "DISPLAY"
 msgstr "HÅYNAEDJE"
 
-#: libgnomeui/gnome-ui-init.c:111
+#: libgnomeui/gnome-ui-init.c:112
 msgid "GNOME GUI Library"
 msgstr ""
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:569
+#: libgnomeui/gnome-ui-init.c:564
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "I gn a yeu pus d' ene aroke di segmentåcion; dji n' pout mostrer li purnea "
 "d' aroke\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:583
+#: libgnomeui/gnome-ui-init.c:578
 #, fuzzy
 msgid ""
 "Segmentation fault!\n"
@@ -413,79 +413,6 @@ msgid ""
 msgstr ""
 "I gn a yeu pus d' ene aroke di segmentåcion; dji n' pout mostrer li purnea "
 "d' aroke\n"
-
-#: libgnomeui/gnome-ui-init.c:715
-msgid "Gdk debugging flags to set"
-msgstr "Drapeas di disbugaedje di Gdk a mete"
-
-#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
-#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
-msgid "FLAGS"
-msgstr "DRAPEAS"
-
-#: libgnomeui/gnome-ui-init.c:718
-msgid "Gdk debugging flags to unset"
-msgstr "Drapeas di disbugaedje di Gdk a dismete"
-
-#: libgnomeui/gnome-ui-init.c:726
-msgid "Make X calls synchronous"
-msgstr "Rinde les houcaedjes di X sincrones"
-
-#: libgnomeui/gnome-ui-init.c:732
-msgid "Don't use X shared memory extension"
-msgstr "Ni nén eployî li stindowe pårteye memwere di X"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "Program name as used by the window manager"
-msgstr "No do programe tel ki li manaedjeu di purnea s' endè sievrè"
-
-#: libgnomeui/gnome-ui-init.c:736
-msgid "NAME"
-msgstr "NO"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "Program class as used by the window manager"
-msgstr "Classe do programe tel ki li manaedjeu di purnea s' endè sievrè"
-
-#: libgnomeui/gnome-ui-init.c:739
-msgid "CLASS"
-msgstr "CLASSE"
-
-#: libgnomeui/gnome-ui-init.c:743
-msgid "HOST"
-msgstr "LODJEU"
-
-#: libgnomeui/gnome-ui-init.c:747
-msgid "PORT"
-msgstr "PÔRT"
-
-#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
-msgid "STYLE"
-msgstr "STÎLE"
-
-#: libgnomeui/gnome-ui-init.c:759
-msgid "Gtk+ debugging flags to set"
-msgstr "Drapeas di disbugaedje di Gtk+ a mete"
-
-#: libgnomeui/gnome-ui-init.c:762
-msgid "Gtk+ debugging flags to unset"
-msgstr "Drapeas di disbugaedje di Gtk+ a dismete"
-
-#: libgnomeui/gnome-ui-init.c:765
-msgid "Make all warnings fatal"
-msgstr "Tos les advertixhmints dvèt esse fatås"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "Load an additional Gtk module"
-msgstr "Tcherdjî eco on module Gtk di pus"
-
-#: libgnomeui/gnome-ui-init.c:768
-msgid "MODULE"
-msgstr "MODULE"
-
-#: libgnomeui/gnome-ui-init.c:873
-msgid "GTK+"
-msgstr ""
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -513,24 +440,24 @@ msgstr ""
 "s' est crashé a cåze d' ene aroke moirt.\n"
 "(%s)"
 
-#: libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:122
 #, fuzzy
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Po s' è siervî: gnome_segv nodiprograme limsign\n"
 
-#: libgnomeui/gnome_segv.c:139
+#: libgnomeui/gnome_segv.c:138
 msgid "Submit a bug report"
 msgstr "Evoyî on rapoirt di bug"
 
-#: libgnomeui/gnome_segv.c:150
+#: libgnomeui/gnome_segv.c:149
 msgid "Debug"
 msgstr "Disbogaedje"
 
-#: libgnomeui/gnome_segv.c:158
+#: libgnomeui/gnome_segv.c:157
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:164
+#: libgnomeui/gnome_segv.c:163
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Loukîz li pådje GNOME Application Crash po pus d' informåcion"
 
@@ -1144,7 +1071,7 @@ msgstr "Fonte"
 msgid "Name of the selected font"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Fonte"
 
@@ -1343,6 +1270,57 @@ msgstr ""
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
 msgstr ""
+
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "Drapeas di disbugaedje di Gdk a mete"
+
+#~ msgid "FLAGS"
+#~ msgstr "DRAPEAS"
+
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "Drapeas di disbugaedje di Gdk a dismete"
+
+#~ msgid "Make X calls synchronous"
+#~ msgstr "Rinde les houcaedjes di X sincrones"
+
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "Ni nén eployî li stindowe pårteye memwere di X"
+
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "No do programe tel ki li manaedjeu di purnea s' endè sievrè"
+
+#~ msgid "NAME"
+#~ msgstr "NO"
+
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "Classe do programe tel ki li manaedjeu di purnea s' endè sievrè"
+
+#~ msgid "CLASS"
+#~ msgstr "CLASSE"
+
+#~ msgid "HOST"
+#~ msgstr "LODJEU"
+
+#~ msgid "PORT"
+#~ msgstr "PÔRT"
+
+#~ msgid "STYLE"
+#~ msgstr "STÎLE"
+
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "Drapeas di disbugaedje di Gtk+ a mete"
+
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "Drapeas di disbugaedje di Gtk+ a dismete"
+
+#~ msgid "Make all warnings fatal"
+#~ msgstr "Tos les advertixhmints dvèt esse fatås"
+
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "Tcherdjî eco on module Gtk di pus"
+
+#~ msgid "MODULE"
+#~ msgstr "MODULE"
 
 #, fuzzy
 #~ msgid "Author"
