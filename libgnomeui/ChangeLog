@@ -1,3 +1,12 @@
+2000-07-26  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-canvas.c: Fix scrolling for the new GtkLayout.
+	(DISPLAY_X1, DISPLAY_Y1): Removed since it's always zero.
+	(gnome_canvas_size_allocate): Use the layout's adjustments
+	in the call to scroll_to() rather than DISPLAY_X1/Y1.
+	(paint): Use the layout's adjustments to compute draw_x1 and
+	draw_y1 rather than DISPLAY_X1/Y1.
+
 2000-07-26  Martin Baulig  <baulig@suse.de>
 
 	* gnome-less.c: Reflect latest GtkTextBuffer changes.
