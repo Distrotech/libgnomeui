@@ -181,34 +181,34 @@ BUILT_SOURCES = \
 	gnometypebuiltins_vars.c
 
 # generate gnome.defs file from gnome-boxed.defs and *.h
-gnome.defs: @MAINT@ makeenums.pl gnome-boxed.defs $(gnome_headers)
+gnome.defs: @REBUILD@ makeenums.pl gnome-boxed.defs $(gnome_headers)
 	cd $(srcdir) \
-	&& perl makeenums.pl defs $(gnome_headers) > gd.tmp \
+	&& $(PERL) makeenums.pl defs $(gnome_headers) > gd.tmp \
 	&& cat gnome-boxed.defs >> gd.tmp \
 	&& mv gd.tmp gnome.defs
 
 # generate type identifier header (GTK_TYPE_WIDGET_FLAGS)
-gnometypebuiltins.h: @MAINT@ gnome.defs maketypes.awk
+gnometypebuiltins.h: @REBUILD@ gnome.defs maketypes.awk
 	cd $(srcdir) \
 	&& $(AWK) -f maketypes.awk gnome.defs macros > gtb.tmp \
 	&& mv gtb.tmp gnometypebuiltins.h
 
 # generate type identifier variables (GTK_TYPE_WIDGET_FLAGS)
-gnometypebuiltins_vars.c: @MAINT@ gnome.defs maketypes.awk
+gnometypebuiltins_vars.c: @REBUILD@ gnome.defs maketypes.awk
 	cd $(srcdir) \
 	&& $(AWK) -f maketypes.awk gnome.defs variables > gtbv.tmp \
 	&& mv gtbv.tmp gnometypebuiltins_vars.c
 
 # generate type entries for type-id registration
-gnometypebuiltins_ids.c: @MAINT@ gnome.defs maketypes.awk
+gnometypebuiltins_ids.c: @REBUILD@ gnome.defs maketypes.awk
 	cd $(srcdir) \
 	&& $(AWK) -f maketypes.awk gnome.defs entries > gtbi.tmp \
 	&& mv gtbi.tmp gnometypebuiltins_ids.c
 
 # generate enum value arrays
-gnometypebuiltins_evals.c: @MAINT@ makeenums.pl gnome.defs
+gnometypebuiltins_evals.c: @REBUILD@ makeenums.pl gnome.defs
 	cd $(srcdir) \
-	&& perl makeenums.pl arrays $(gnome_headers) > gtbe.tmp \
+	&& $(PERL) makeenums.pl arrays $(gnome_headers) > gtbe.tmp \
 	&& mv gtbe.tmp gnometypebuiltins_evals.c
 
 #######################
