@@ -1,3 +1,10 @@
+Fri Jul 10 08:08:45 1998  Tim Janik  <timj@gtk.org>
+
+	* gnome-canvas.c:
+ 	(gnome_canvas_item_new): 
+	(gnome_canvas_item_set): adapted the argument collection and setting
+ 	code to work with the recent gtk changes.
+
 1998-07-09  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.[ch]: GnomeMDI's create_menubar and create_toolbar

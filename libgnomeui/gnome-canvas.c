@@ -50,11 +50,6 @@
 #include "gnome-canvas.h"
 
 
-extern GtkArg* gtk_object_collect_args (guint	*nargs,
-					GtkType (*) (const gchar*),
-					va_list	 args1,
-					va_list	 args2);
-
 
 /*** GnomeCanvasItem ***/
 
@@ -165,10 +160,11 @@ GnomeCanvasItem *
 gnome_canvas_item_new (GnomeCanvas *canvas, GnomeCanvasGroup *parent, GtkType type, ...)
 {
 	GtkObject *obj;
-	va_list args1, args2;
-	guint nargs;
-	GtkArg *args;
 	GnomeCanvasItem *item;
+	va_list var_args;
+	GSList *arg_list = NULL;
+	GSList *info_list = NULL;
+	gchar *error;
 
 	g_return_val_if_fail (canvas != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), NULL);
@@ -182,16 +178,35 @@ gnome_canvas_item_new (GnomeCanvas *canvas, GnomeCanvasGroup *parent, GtkType ty
 	item->canvas = canvas;
 	item->parent = GNOME_CANVAS_ITEM (parent);
 
-	va_start (args1, type);
-	va_start (args2, type);
 
-	args = gtk_object_collect_args (&nargs, gtk_object_get_arg_type, args1, args2);
-	gtk_object_setv (obj, nargs, args);
-	g_free (args);
+	va_start (var_args, type);
+	error = gtk_object_args_collect (GTK_OBJECT_TYPE (obj),
+					 &arg_list,
+					 &info_list,
+					 &var_args);
+	va_end (var_args);
+	if (error)
+	  {
+	    g_warning ("gnome_canvas_item_new(): %s", error);
+	    g_free (error);
+	  }
+	else
+	  {
+	    GSList *slist_arg;
+	    GSList *slist_info;
 
-	va_end (args1);
-	va_end (args2);
+	    slist_arg = arg_list;
+	    slist_info = info_list;
+	    while (slist_arg)
+	      {
+		gtk_object_arg_set (obj, slist_arg->data, slist_info->data);
+		slist_arg = slist_arg->next;
+		slist_info = slist_info->next;
+	      }
+	    gtk_args_collect_cleanup (arg_list, info_list);
+	  }
 
+	
 	item_post_create_setup (item);
 
 	return item;
@@ -267,28 +282,48 @@ gnome_canvas_item_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpoin
 void
 gnome_canvas_item_set (GnomeCanvasItem *item, ...)
 {
-	va_list args1;
-	va_list args2;
-	guint nargs;
-	GtkArg *args;
+	va_list var_args;
+	GSList *arg_list = NULL;
+	GSList *info_list = NULL;
+	gchar *error;
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
 
-	va_start (args1, item);
-	va_start (args2, item);
+	va_start (var_args, item);
+	error = gtk_object_args_collect (GTK_OBJECT_TYPE (item),
+					 &arg_list,
+					 &info_list,
+					 &var_args);
+	va_end (var_args);
 
-	args = gtk_object_collect_args (&nargs, gtk_object_get_arg_type, args1, args2);
+	if (error)
+	  {
+	    g_warning ("gnome_canvas_item_set(): %s", error);
+	    g_free (error);
+	  }
+	else if (arg_list)
+	  {
+	    GSList *slist_arg;
+	    GSList *slist_info;
+	    GtkObject *object;
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
-	gtk_object_setv (GTK_OBJECT (item), nargs, args);
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
-	item->canvas->need_repick = TRUE;
+	    gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 
-	g_free (args);
+	    object = GTK_OBJECT (item);
+	    slist_arg = arg_list;
+	    slist_info = info_list;
+	    while (slist_arg)
+	      {
+		gtk_object_arg_set (object, slist_arg->data, slist_info->data);
+		slist_arg = slist_arg->next;
+		slist_info = slist_info->next;
+	      }
+	    gtk_args_collect_cleanup (arg_list, info_list);
 
-	va_end (args1);
-	va_end (args2);
+	    gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	    item->canvas->need_repick = TRUE;
+	  }
 }
 
 void
