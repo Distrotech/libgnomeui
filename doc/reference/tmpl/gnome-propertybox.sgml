@@ -14,6 +14,9 @@ Create a tabbed dialog for setting properties and preferences.
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT GnomePropertyBox ##### -->
 <para>
 

@@ -14,6 +14,9 @@ Create standard message boxes.
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### MACRO GNOME_MESSAGE_BOX_INFO ##### -->
 <para>
 A constant that can be passed to gnome_message_box_new() to specify the type of

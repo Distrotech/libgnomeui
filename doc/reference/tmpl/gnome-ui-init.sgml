@@ -21,6 +21,9 @@ should enable libgnomeui applications to control their appearance precisely.
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### MACRO LIBGNOMEUI_MODULE ##### -->
 <para>
 A module containing all the information required to initialize libgnomeui and

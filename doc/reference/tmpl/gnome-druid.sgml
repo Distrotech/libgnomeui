@@ -14,6 +14,9 @@ Widget for sequentially stepping through some pages.
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT GnomeDruid ##### -->
 <para>
 The widget which ultimately holds all of the druid's pages and information.

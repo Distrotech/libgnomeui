@@ -14,6 +14,9 @@ Create and display popup and context menus.
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### FUNCTION gnome_popup_menu_new ##### -->
 <para>
 

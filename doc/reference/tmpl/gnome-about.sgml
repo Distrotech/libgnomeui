@@ -18,6 +18,9 @@ appropriate information.
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT GnomeAbout ##### -->
 <para>
 A dialog box widget containing all of the relevant credit information and

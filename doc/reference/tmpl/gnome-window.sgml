@@ -17,6 +17,9 @@ setting window titles may be added.
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### FUNCTION gnome_window_toplevel_set_title ##### -->
 <para>
 

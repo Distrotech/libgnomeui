@@ -21,6 +21,9 @@ bars and use proper editable widgets instead.
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### MACRO GNOME_APPBAR_HAS_STATUS ##### -->
 <para>
 Whether or not the application bar contains a status box.

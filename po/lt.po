@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-04 18:09+0200\n"
+"POT-Creation-Date: 2005-03-07 14:54+0100\n"
 "PO-Revision-Date: 2005-01-31 13:20+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -18,47 +18,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../demos/mdi_demo.c:128
+#: demos/mdi_demo.c:128
 msgid "Child Item 1"
 msgstr "Antrinis elementas 1"
 
-#: ../demos/mdi_demo.c:129
+#: demos/mdi_demo.c:129
 msgid "Hint for item 1"
 msgstr "Patarimas 1-am elementui"
 
-#: ../demos/mdi_demo.c:131
+#: demos/mdi_demo.c:131
 msgid "Child Item 2"
 msgstr "Antrinis elementas 2"
 
-#: ../demos/mdi_demo.c:132
+#: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Patarimas 2-am elementui"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:697
+#: file-chooser/gtkfilesystemgnomevfs.c:697
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nėra aplankas"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:908
+#: file-chooser/gtkfilesystemgnomevfs.c:908
 msgid "Filesystem"
 msgstr "Bylų sistema"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1592
+#: file-chooser/gtkfilesystemgnomevfs.c:1592
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Žymelės išsaugoti nepavyko (%s)"
 
-#: ../file-chooser/testfilechooser.c:176
+#: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "Nepavyko gauti informacijos apie bylą „%s“: %s"
 
-#: ../file-chooser/testfilechooser.c:189
+#: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
 msgstr "Nepavyko atidaryti bylos „%s“: %s"
 
-#: ../file-chooser/testfilechooser.c:228
+#: file-chooser/testfilechooser.c:228
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
@@ -66,250 +66,247 @@ msgstr ""
 "Nepavyko atidaryti paveikslėlio „%s“: priežastis nežinoma, tikriausiai "
 "sugadinta byla"
 
-#: ../libgnomeui/gnome-about.c:198
+#: libgnomeui/gnome-about.c:198
 msgid "Credits"
 msgstr "Padėkos"
 
-#: ../libgnomeui/gnome-about.c:230
+#: libgnomeui/gnome-about.c:230
 msgid "Written by"
 msgstr "Sukūrė"
 
-#: ../libgnomeui/gnome-about.c:245
+#: libgnomeui/gnome-about.c:245
 msgid "Documented by"
 msgstr "Dokumentavo"
 
-#: ../libgnomeui/gnome-about.c:260
+#: libgnomeui/gnome-about.c:260
 msgid "Translated by"
 msgstr "Išvertė"
 
-#: ../libgnomeui/gnome-about.c:323
+#: libgnomeui/gnome-about.c:323
 msgid "C_redits"
 msgstr "_Padėkos"
 
-#: ../libgnomeui/gnome-about.c:378
+#: libgnomeui/gnome-about.c:378
 msgid "Program name"
 msgstr "Programos pavadinimas"
 
-#: ../libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:379
 msgid "The name of the program"
 msgstr "Programos pavadinimas"
 
-#: ../libgnomeui/gnome-about.c:386
+#: libgnomeui/gnome-about.c:386
 msgid "Program version"
 msgstr "Programos versija"
 
-#: ../libgnomeui/gnome-about.c:387
+#: libgnomeui/gnome-about.c:387
 msgid "The version of the program"
 msgstr "Programos versija"
 
-#: ../libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:393
 msgid "Copyright string"
 msgstr "Autorinės teisės"
 
-#: ../libgnomeui/gnome-about.c:394
+#: libgnomeui/gnome-about.c:394
 msgid "Copyright information for the program"
 msgstr "Autorinių teisių informacija apie programą"
 
-#: ../libgnomeui/gnome-about.c:401
+#: libgnomeui/gnome-about.c:401
 msgid "Comments string"
 msgstr "Paaiškinimai"
 
-#: ../libgnomeui/gnome-about.c:402
+#: libgnomeui/gnome-about.c:402
 msgid "Comments about the program"
 msgstr "Paaiškinimas, ką programa daro"
 
-#: ../libgnomeui/gnome-about.c:408
+#: libgnomeui/gnome-about.c:408
 msgid "Authors"
 msgstr "Autoriai"
 
-#: ../libgnomeui/gnome-about.c:409
+#: libgnomeui/gnome-about.c:409
 msgid "List of authors of the programs"
 msgstr "Programos autorių sąrašas"
 
-#: ../libgnomeui/gnome-about.c:411
+#: libgnomeui/gnome-about.c:411
 msgid "Author entry"
 msgstr "Autoriaus laukas"
 
-#: ../libgnomeui/gnome-about.c:412
+#: libgnomeui/gnome-about.c:412
 msgid "A single author entry"
 msgstr "Vieno autoriaus laukas"
 
-#: ../libgnomeui/gnome-about.c:419
+#: libgnomeui/gnome-about.c:419
 msgid "Documenters"
 msgstr "Dokumentuotojai"
 
-#: ../libgnomeui/gnome-about.c:420
+#: libgnomeui/gnome-about.c:420
 msgid "List of people documenting the program"
 msgstr "Sąrašas žmonių, dokumentavusių programą"
 
-#: ../libgnomeui/gnome-about.c:422
+#: libgnomeui/gnome-about.c:422
 msgid "Documenter entry"
 msgstr "Dokumentuotojų laukas"
 
-#: ../libgnomeui/gnome-about.c:423
+#: libgnomeui/gnome-about.c:423
 msgid "A single documenter entry"
 msgstr "Vieno dokumentuotojo laukas"
 
-#: ../libgnomeui/gnome-about.c:431
+#: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
 msgstr "Vertėjai"
 
-#: ../libgnomeui/gnome-about.c:432
+#: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "Padėkos vertėjams. Ši eilutė turi būti pažymėta kaip verčiama"
 
-#: ../libgnomeui/gnome-about.c:439
-#: ../libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
-#: ../libgnomeui/gnome-about.c:440
+#: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
 msgstr "Logotipas „apie“ langui"
 
-#: ../libgnomeui/gnome-about.c:519
+#: libgnomeui/gnome-about.c:519
 #, c-format
 msgid "About %s"
 msgstr "Apie %s"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
-#: ../test-gnome/testgnome.xml.h:5
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 msgid "_File"
 msgstr "_Byla"
 
-#: ../libgnomeui/gnome-app-helper.c:83
+#: libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
 msgstr "_Byla/"
 
-#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Keisti"
 
-#: ../libgnomeui/gnome-app-helper.c:85
+#: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
 msgstr "_Keisti/"
 
-#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Rodyti"
 
-#: ../libgnomeui/gnome-app-helper.c:87
+#: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
 msgstr "_Rodyti/"
 
-#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Nustatymai"
 
-#: ../libgnomeui/gnome-app-helper.c:89
+#: libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
 msgstr "_Nustatymai/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Nauja"
 
-#: ../libgnomeui/gnome-app-helper.c:91
+#: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
 msgstr "_Nauja/"
 
-#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "By_los"
 
-#: ../libgnomeui/gnome-app-helper.c:93
+#: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
 msgstr "By_los/"
 
-#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_Langai"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "Žai_dimas"
 
-#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
-#: ../test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
 msgstr "_Pagalba"
 
-#: ../libgnomeui/gnome-app-helper.c:97
+#: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
 msgstr "_Langai/"
 
 #. Open
-#: ../libgnomeui/gnome-app-helper.c:109
+#: libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
 msgstr "_Atidaryti..."
 
-#: ../libgnomeui/gnome-app-helper.c:109
+#: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
 msgstr "Atidaryti bylą"
 
 #. Save
-#: ../libgnomeui/gnome-app-helper.c:114
+#: libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
 msgstr "Iš_saugoti"
 
-#: ../libgnomeui/gnome-app-helper.c:114
+#: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
 msgstr "Išsaugoti esamą bylą"
 
 #. Save As
-#: ../libgnomeui/gnome-app-helper.c:119
+#: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
 msgstr "Išsaugoti k_aip..."
 
-#: ../libgnomeui/gnome-app-helper.c:120
+#: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
 msgstr "Išsaugoti esamą bylą kitu vardu"
 
 #. Revert
-#: ../libgnomeui/gnome-app-helper.c:125
+#: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
 msgstr "Atsta_tyti"
 
-#: ../libgnomeui/gnome-app-helper.c:126
+#: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
 msgstr "Atstatyti išsaugotą bylos versiją"
 
 #. Print
-#: ../libgnomeui/gnome-app-helper.c:131
+#: libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
 msgstr "S_pausdinti..."
 
-#: ../libgnomeui/gnome-app-helper.c:131
+#: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
 msgstr "Spausdinti esamą bylą"
 
 #. Print Setup
-#: ../libgnomeui/gnome-app-helper.c:136
+#: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
 msgstr "Spausdinimo n_ustatymai..."
 
-#: ../libgnomeui/gnome-app-helper.c:137
+#: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
 msgstr "Nurodyti puslapio parinktis esamam spausdintuvui"
 
 #. Close
-#: ../libgnomeui/gnome-app-helper.c:142
+#: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
 msgstr "_Uždaryti"
 
-#: ../libgnomeui/gnome-app-helper.c:142
+#: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
 msgstr "Uždaryti esamą bylą"
 
 #. Exit
-#: ../libgnomeui/gnome-app-helper.c:147
+#: libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
 msgstr "Iš_eiti"
 
-#: ../libgnomeui/gnome-app-helper.c:147
+#: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
 msgstr "Uždaryti programą"
 
@@ -317,93 +314,93 @@ msgstr "Uždaryti programą"
 #. * The "Edit" menu
 #.
 #. Cut
-#: ../libgnomeui/gnome-app-helper.c:155
+#: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
 msgstr "_Iškirpti"
 
-#: ../libgnomeui/gnome-app-helper.c:155
+#: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
 msgstr "Iškirpti pažymėtą tekstą"
 
 #. 10
 #. Copy
-#: ../libgnomeui/gnome-app-helper.c:161
+#: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
 msgstr "_Kopijuoti"
 
-#: ../libgnomeui/gnome-app-helper.c:161
+#: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
 msgstr "Kopijuoti pažymėjimą"
 
 #. Paste
-#: ../libgnomeui/gnome-app-helper.c:166
+#: libgnomeui/gnome-app-helper.c:166
 msgid "_Paste"
 msgstr "Į_dėti"
 
-#: ../libgnomeui/gnome-app-helper.c:166
+#: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
 msgstr "Įdėti iškarpinės turinį"
 
 #. Clear
-#: ../libgnomeui/gnome-app-helper.c:171
+#: libgnomeui/gnome-app-helper.c:171
 msgid "C_lear"
 msgstr "Išva_lyti"
 
-#: ../libgnomeui/gnome-app-helper.c:171
+#: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
 msgstr "Išvalyti pažymėjimą"
 
 #. Undo
-#: ../libgnomeui/gnome-app-helper.c:176
+#: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
 msgstr "Atša_ukti"
 
-#: ../libgnomeui/gnome-app-helper.c:176
+#: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
 msgstr "Atšaukti paskutinį veiksmą"
 
 #. Redo
-#: ../libgnomeui/gnome-app-helper.c:181
+#: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
 msgstr "_Pakartoti"
 
-#: ../libgnomeui/gnome-app-helper.c:181
+#: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
 msgstr "Pakartoti atšauktą veiksmą"
 
 #. Find
-#: ../libgnomeui/gnome-app-helper.c:186
+#: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
 msgstr "_Rasti..."
 
-#: ../libgnomeui/gnome-app-helper.c:186
+#: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
 msgstr "Ieškoti eilutės"
 
 #. Find Again
-#: ../libgnomeui/gnome-app-helper.c:191
+#: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
 msgstr "Rasti ki_tą"
 
-#: ../libgnomeui/gnome-app-helper.c:192
+#: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
 msgstr "Toliau ieškoti eilutės"
 
 #. Replace
-#: ../libgnomeui/gnome-app-helper.c:197
+#: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
 msgstr "Pak_eisti..."
 
-#: ../libgnomeui/gnome-app-helper.c:197
+#: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
 msgstr "Pakeisti eilutę"
 
 #. Properties
-#: ../libgnomeui/gnome-app-helper.c:202
+#: libgnomeui/gnome-app-helper.c:202
 msgid "_Properties"
 msgstr "_Savybės..."
 
-#: ../libgnomeui/gnome-app-helper.c:203
+#: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
 msgstr "Keisti bylos savybes"
 
@@ -411,11 +408,11 @@ msgstr "Keisti bylos savybes"
 #. * The Settings menu
 #.
 #. Settings
-#: ../libgnomeui/gnome-app-helper.c:211
+#: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
 msgstr "_Nustatymai"
 
-#: ../libgnomeui/gnome-app-helper.c:212
+#: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
 msgstr "Sutvarkyti programą"
 
@@ -424,215 +421,215 @@ msgstr "Sutvarkyti programą"
 #. * And the "Help" menu
 #.
 #. About
-#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Apie"
 
-#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Apie šią programą"
 
-#: ../libgnomeui/gnome-app-helper.c:225
+#: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
 msgstr "Pažymėti _viską"
 
-#: ../libgnomeui/gnome-app-helper.c:226
+#: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
 msgstr "Pažymėti viską"
 
 #.
 #. * Window menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:234
+#: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
 msgstr "Sukurti naują _langą"
 
-#: ../libgnomeui/gnome-app-helper.c:235
+#: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
 msgstr "Sukurti naują langą"
 
-#: ../libgnomeui/gnome-app-helper.c:239
+#: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
 msgstr "_Uždaryti šį langą"
 
-#: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Uždaryti esamą langą"
 
 #.
 #. * The "Game" menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:248
+#: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
 msgstr "_Naujas žaidimas"
 
-#: ../libgnomeui/gnome-app-helper.c:249
+#: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
 msgstr "Pradėti naują žaidimą"
 
-#: ../libgnomeui/gnome-app-helper.c:253
+#: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
 msgstr "_Sustabdyti žaidimą"
 
-#: ../libgnomeui/gnome-app-helper.c:254
+#: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
 msgstr "Sustabdyti žaidimą"
 
-#: ../libgnomeui/gnome-app-helper.c:258
+#: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
 msgstr "_Paleisti iš naujo"
 
-#: ../libgnomeui/gnome-app-helper.c:259
+#: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
 msgstr "Paleisti žaidimą iš naujo"
 
-#: ../libgnomeui/gnome-app-helper.c:263
+#: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
 msgstr "Atša_ukti veiksmą"
 
-#: ../libgnomeui/gnome-app-helper.c:264
+#: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
 msgstr "Atšaukti paskutinį veiksmą"
 
-#: ../libgnomeui/gnome-app-helper.c:268
+#: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
 msgstr "Paka_rtoti veiksmą"
 
-#: ../libgnomeui/gnome-app-helper.c:269
+#: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
 msgstr "Pakartoti atšauktą veiksmą"
 
-#: ../libgnomeui/gnome-app-helper.c:273
+#: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
 msgstr "Patar_imas"
 
-#: ../libgnomeui/gnome-app-helper.c:274
+#: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
 msgstr "Gauti patarimą kitam veiksmui"
 
 #. 30
-#: ../libgnomeui/gnome-app-helper.c:279
+#: libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
 msgstr "_Taškai..."
 
-#: ../libgnomeui/gnome-app-helper.c:280
+#: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
 msgstr "Peržiūrėti taškus"
 
-#: ../libgnomeui/gnome-app-helper.c:284
+#: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
 msgstr "_Baigti žaidimą"
 
-#: ../libgnomeui/gnome-app-helper.c:285
+#: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
 msgstr "Baigti esamą žaidimą"
 
-#: ../libgnomeui/gnome-app-helper.c:1143
+#: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
 msgstr "_Turinys"
 
-#: ../libgnomeui/gnome-app-helper.c:1146
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "Rodyti šios programos žinyną"
 
-#: ../libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Tekstas po piktogramomis"
 
-#: ../libgnomeui/gnome-app-helper.c:2571
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Svarbus tekstas šalia piktogramų"
 
-#: ../libgnomeui/gnome-app-helper.c:2572
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Tik piktogramos"
 
-#: ../libgnomeui/gnome-app-helper.c:2573
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Tik tekstas"
 
-#: ../libgnomeui/gnome-app-helper.c:2634
+#: libgnomeui/gnome-app-helper.c:2634
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Naudoti numatytą aplinkoje (%s)"
 
-#: ../libgnomeui/gnome-app-util.c:99
+#: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
 msgstr " (spauskite enter)"
 
-#: ../libgnomeui/gnome-app-util.c:141
+#: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
 msgstr "KLAIDA: "
 
-#: ../libgnomeui/gnome-app-util.c:178
+#: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
 msgstr "Perspėjimas: "
 
-#: ../libgnomeui/gnome-app-util.c:316
+#: libgnomeui/gnome-app-util.c:316
 msgid "y"
 msgstr "t"
 
-#: ../libgnomeui/gnome-app-util.c:317
+#: libgnomeui/gnome-app-util.c:317
 msgid "yes"
 msgstr "taip"
 
-#: ../libgnomeui/gnome-app-util.c:320
+#: libgnomeui/gnome-app-util.c:320
 msgid "n"
 msgstr "n"
 
-#: ../libgnomeui/gnome-app-util.c:321
+#: libgnomeui/gnome-app-util.c:321
 msgid "no"
 msgstr "ne"
 
-#: ../libgnomeui/gnome-app-util.c:356
+#: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
 msgstr " (taip ar ne)"
 
-#: ../libgnomeui/gnome-app-util.c:357
+#: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
 msgstr " - Gerai? (taip ar ne)"
 
-#: ../libgnomeui/gnome-app-util.c:685
+#: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
 msgstr "Pažanga"
 
-#: ../libgnomeui/gnome-app.c:153
+#: libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr "Programos ID"
 
-#: ../libgnomeui/gnome-app.c:154
+#: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "Programos ID eilutė"
 
-#: ../libgnomeui/gnome-appbar.c:747
+#: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
 msgstr "Rodo pažangą"
 
-#: ../libgnomeui/gnome-appbar.c:748
+#: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
 msgstr "Sukurti pažangos juostą"
 
-#: ../libgnomeui/gnome-appbar.c:755
+#: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
 msgstr "Rodo būseną"
 
-#: ../libgnomeui/gnome-appbar.c:756
+#: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
 msgstr "Sukurti būsenos valdymo elementą."
 
-#: ../libgnomeui/gnome-appbar.c:763
+#: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
 msgstr "Interaktyvumas"
 
-#: ../libgnomeui/gnome-appbar.c:764
+#: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
 msgstr "Naudotojo atsako lygis būtinas"
 
-#: ../libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Prie Jūsų HTTP tarpinio serverio reikia prisijungti.\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:71
+#: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -641,281 +638,281 @@ msgstr ""
 "Norėdami pasiekti „%s“, turite prisijungti.\n"
 "%s"
 
-#: ../libgnomeui/gnome-authentication-manager.c:74
+#: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "Jūsų slaptažodis bus perduotas neužkoduotas."
 
-#: ../libgnomeui/gnome-authentication-manager.c:75
+#: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "Jūsų slaptažodis bus perduotas užkoduotas."
 
-#: ../libgnomeui/gnome-authentication-manager.c:78
-#: ../libgnomeui/gnome-authentication-manager.c:307
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Būtinas autorizavimas"
 
-#: ../libgnomeui/gnome-authentication-manager.c:299
+#: libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Turite užsiregistruoti norėdami pasiekti %s domeną %s\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:301
+#: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Jūs turite užsiregistruoti norėdami pasiekti „%s“\n"
 
-#: ../libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
 msgstr "Nurodyti sesijos tvarkymo ID"
 
-#: ../libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:863
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
 msgstr "Nurodyti išsaugotų nuostatų priešdėlį"
 
-#: ../libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
 msgstr "PRIEŠD"
 
-#: ../libgnomeui/gnome-client.c:869
+#: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
 msgstr "Uždrausti prisijungimą prie sesijos tvarkyklės"
 
-#: ../libgnomeui/gnome-client.c:975
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Sesijos tvarkymas"
 
-#: ../libgnomeui/gnome-client.c:2475
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Atšaukti atsijungimą"
 
-#: ../libgnomeui/gnome-color-picker.c:414
+#: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "Gauti netinkami spalvų duomenys\n"
 
-#: ../libgnomeui/gnome-color-picker.c:465
+#: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "Spalvai parinkti atidarykite langą"
 
-#: ../libgnomeui/gnome-color-picker.c:487
+#: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "Pasirinkite spalvą"
 
-#: ../libgnomeui/gnome-dateedit.c:479 ../libgnomeui/gnome-dateedit.c:776
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
 msgstr "Laikas"
 
-#: ../libgnomeui/gnome-dateedit.c:480
+#: libgnomeui/gnome-dateedit.c:480
 msgid "The time currently selected"
 msgstr "Dabar pasirinktas laikas"
 
-#: ../libgnomeui/gnome-dateedit.c:492
+#: libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
 msgstr "DateEdit požymiai"
 
-#: ../libgnomeui/gnome-dateedit.c:493
+#: libgnomeui/gnome-dateedit.c:493
 msgid "Flags for how DateEdit looks"
 msgstr "Požymiai, lemiantys DateEdit išvaizdą"
 
-#: ../libgnomeui/gnome-dateedit.c:502
+#: libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
 msgstr "Žemiausia valanda"
 
-#: ../libgnomeui/gnome-dateedit.c:503
+#: libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
 msgstr "Mažiausia valandos reikšmė laiko pasirinkimo lange"
 
-#: ../libgnomeui/gnome-dateedit.c:513
+#: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
 msgstr "Didžiausia valanda"
 
-#: ../libgnomeui/gnome-dateedit.c:514
+#: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
 msgstr "Didžiausia valandos reikšmė laiko pasirinkimo lange"
 
-#: ../libgnomeui/gnome-dateedit.c:524
+#: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
 msgstr "Pradinis laikas"
 
-#: ../libgnomeui/gnome-dateedit.c:525
+#: libgnomeui/gnome-dateedit.c:525
 msgid "The initial time"
 msgstr "Pradinė laiko reikšmė"
 
-#: ../libgnomeui/gnome-dateedit.c:739 ../libgnomeui/gnome-scores.c:97
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "Data"
 
-#: ../libgnomeui/gnome-dateedit.c:752
+#: libgnomeui/gnome-dateedit.c:752
 msgid "Select Date"
 msgstr "Pasirinkite datą"
 
-#: ../libgnomeui/gnome-dateedit.c:752
+#: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
 msgstr "Pasirinkti datą iš kalendoriaus"
 
 #. Calendar label, only shown if the date editor has a time field
-#: ../libgnomeui/gnome-dateedit.c:763
+#: libgnomeui/gnome-dateedit.c:763
 msgid "Calendar"
 msgstr "Kalendorius"
 
-#: ../libgnomeui/gnome-dateedit.c:784
+#: libgnomeui/gnome-dateedit.c:784
 msgid "Select Time"
 msgstr "Pasirinkite laiką"
 
-#: ../libgnomeui/gnome-dateedit.c:784
+#: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
 msgstr "Pasirinkti laiką iš sąrašo"
 
-#: ../libgnomeui/gnome-dateedit.c:1003
+#: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date funkcija yra pasenusi, naudokite "
 "gnome_date_edit_get_time"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:121
-#: ../libgnomeui/gnome-font-picker.c:155
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
 msgid "Title"
 msgstr "Pavadinimas"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:122
+#: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
 msgstr "Vedlio pavadinimas"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:130
+#: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
 msgstr "Logo paveikslėlis"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:137
+#: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
 msgstr "Viršutinis vandenženklis"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:138
+#: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
 msgstr "Vandenženklio paveikslėlis viršui"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:145
+#: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
 msgstr "Pavadinimo spalva"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:146
+#: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
 msgstr "Pavadinimo raidžių spalva"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:153
+#: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
 msgstr "Antraštės priekinio plano spalva"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:154
+#: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
 msgstr "Antraštės priekinio plano spalvos GdkColor kodas"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:161
+#: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
 msgstr "Antraštės priekinio plano spalva nurodyta"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:162
+#: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
 msgstr "Antraštės priekinio plano spalva yra nurodyta"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:169
-#: ../libgnomeui/gnome-druid-page-standard.c:177
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
 msgstr "Fono spalva"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:170
+#: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
 msgstr "Fono spalva"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:178
+#: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
 msgstr "Fono spalvos GdkColor kodas"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:185
+#: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
 msgstr "Fono spalva nurodyta"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:186
+#: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
 msgstr "Fono spalva yra nurodyta"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:193
-#: ../libgnomeui/gnome-druid-page-standard.c:201
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Contents Background Color"
 msgstr "Turinio fono spalva"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Contents Background color"
 msgstr "Turinio fono spalva"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Contents Background color as a GdkColor"
 msgstr "Turinio fono spalva kaip GdkColor"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Contents Background color set"
 msgstr "Turinio fono spalva nustatyta"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Contents Background color is set"
 msgstr "Turinio fono spalva yra nustatyta"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:216
-#: ../libgnomeui/gnome-druid-page-standard.c:224
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "Logotipo fono spalva"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:217
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "Logotipo fono spalva"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:225
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Logotipo fono spalvos GdkColor kodas"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:232
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Nustatyta logotipo fono spalva"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:233
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Logotipo fono spalva yra nustatyta"
 
-#: ../libgnomeui/gnome-druid.c:150
+#: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
 msgstr "Rodyti mygtuką „Baigti“"
 
-#: ../libgnomeui/gnome-druid.c:151
+#: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Rodyti mygtuką „Baigti“ vietoje mygtuko „Kitas“"
 
-#: ../libgnomeui/gnome-druid.c:158
+#: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
 msgstr "Rodyti pagalba"
 
-#: ../libgnomeui/gnome-druid.c:159
+#: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
 msgstr "Rodyti mygtuką „Pagalba“"
 
-#: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
+#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "Istorijos id"
 
-#: ../libgnomeui/gnome-entry.c:200
+#: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
 msgstr "GTK įrašas"
 
-#: ../libgnomeui/gnome-entry.c:201
+#: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "GTK įrašas"
 
-#: ../libgnomeui/gnome-file-entry.c:229 ../libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "Istorijos ID"
 
-#: ../libgnomeui/gnome-file-entry.c:230
+#: libgnomeui/gnome-file-entry.c:230
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -923,19 +920,19 @@ msgstr ""
 "Unikalus bylos įrašo identifikatorius. Bus naudojamas išsaugant bylų sąrašą "
 "atmintinėje."
 
-#: ../libgnomeui/gnome-file-entry.c:238 ../libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Pasirinkimo lango antraštė"
 
-#: ../libgnomeui/gnome-file-entry.c:239
+#: libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
 msgstr "Bylų pasirinkimo dialogo pavadinimas"
 
-#: ../libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
 msgstr "Aplanko įrašas"
 
-#: ../libgnomeui/gnome-file-entry.c:247
+#: libgnomeui/gnome-file-entry.c:247
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -943,35 +940,35 @@ msgstr ""
 "Ar bylos vardo įvedimo laukas gali būti naudojamas įvesti katalogų vardus "
 "arba pilnus kelius iki bylų."
 
-#: ../libgnomeui/gnome-file-entry.c:255
+#: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
 msgstr "Modalinis"
 
-#: ../libgnomeui/gnome-file-entry.c:256
+#: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
 msgstr "Ar bylų pasirinkimo langas turi būti nepriklausomas."
 
-#: ../libgnomeui/gnome-file-entry.c:263 ../libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Bylos pavadinimas"
 
-#: ../libgnomeui/gnome-file-entry.c:264
+#: libgnomeui/gnome-file-entry.c:264
 msgid "Filename that should be displayed in the file entry."
 msgstr "Bylos pavadinimas, kuris turi būti rodomas bylos įraše."
 
-#: ../libgnomeui/gnome-file-entry.c:272
+#: libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
 msgstr "Standartinis kelias"
 
-#: ../libgnomeui/gnome-file-entry.c:273
+#: libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
 msgstr "Numatytasis kelias bylos pasirinkimo lange."
 
-#: ../libgnomeui/gnome-file-entry.c:280
+#: libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:281
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -980,11 +977,11 @@ msgstr ""
 "GnomeEntry naudojama įvedant bylų vardus. Galite naudoti šį požymį norėdami "
 "su GnomeEntry pakeisti arba patikrinti kokius nors bylos parametrus."
 
-#: ../libgnomeui/gnome-file-entry.c:291
+#: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:292
+#: libgnomeui/gnome-file-entry.c:292
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -993,11 +990,11 @@ msgstr ""
 "GtkEntry naudojama įvedant bylų vardus. Galite naudoti šį požymį norėdami su "
 "GtkEntry pakeisti arba patikrinti kokius nors bylos parametrus."
 
-#: ../libgnomeui/gnome-file-entry.c:302
+#: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
 msgstr "Naudoti GtkFileChooser"
 
-#: ../libgnomeui/gnome-file-entry.c:303
+#: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
@@ -1005,107 +1002,107 @@ msgstr ""
 "Ar bylų pasirinkimui naudoti naują GtkFileChooser ar seną GtkFileSelection "
 "valdymo elementus."
 
-#: ../libgnomeui/gnome-file-entry.c:626 ../libgnomeui/gnome-file-entry.c:660
+#: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
 msgstr "Pasirinkite bylą"
 
-#: ../libgnomeui/gnome-file-entry.c:786
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path"
 msgstr "Kelias"
 
-#: ../libgnomeui/gnome-file-entry.c:786
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path to file"
 msgstr "Kelias iki bylos"
 
-#: ../libgnomeui/gnome-file-entry.c:813
+#: libgnomeui/gnome-file-entry.c:813
 msgid "_Browse..."
 msgstr "_Naršyti..."
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
 msgstr "Iškviesti bylų pažymėjimo langą bylai parinkti"
 
-#: ../libgnomeui/gnome-font-picker.c:66
+#: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
 msgstr "sans 12"
 
-#: ../libgnomeui/gnome-font-picker.c:67
+#: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaĄąBbCcČčDdEeĘęĖėFfGgHhIiĮįYyJjKkLlMmNnOoPpRrSsŠšTtUuŲųŪūVvZzŽž"
 
-#: ../libgnomeui/gnome-font-picker.c:68
+#: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
 msgstr "Pasirinkite šriftą"
 
-#: ../libgnomeui/gnome-font-picker.c:156
+#: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
 msgstr "Pasirinkimo lango pavadinimas"
 
-#: ../libgnomeui/gnome-font-picker.c:164
+#: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
 msgstr "Veiksena"
 
-#: ../libgnomeui/gnome-font-picker.c:165
+#: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
 msgstr "Šriftų parinkiklio veikimo būdas"
 
-#: ../libgnomeui/gnome-font-picker.c:174
+#: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
 msgstr "Šrifto pavadinimas"
 
-#: ../libgnomeui/gnome-font-picker.c:175
+#: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
 msgstr "Pasirinkto šrifto pavadinimas"
 
-#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Šriftas"
 
-#: ../libgnomeui/gnome-font-picker.c:185
+#: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
 msgstr "Pasirinktas GtkFont"
 
-#: ../libgnomeui/gnome-font-picker.c:192
+#: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
 msgstr "Peržiūros tekstas"
 
-#: ../libgnomeui/gnome-font-picker.c:193
+#: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
 msgstr "Dialoge rodomas peržiūros tekstas"
 
-#: ../libgnomeui/gnome-font-picker.c:201
+#: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
 msgstr "Žymėje naudotinas šriftas"
 
-#: ../libgnomeui/gnome-font-picker.c:202
+#: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
 msgstr "Užraše naudotinas šriftas, esant informacijos apie šriftą veiksenoje"
 
-#: ../libgnomeui/gnome-font-picker.c:210
+#: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
 msgstr "Žymės šrifto dydis"
 
-#: ../libgnomeui/gnome-font-picker.c:211
+#: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
 msgstr "Žymės šrifto dydis, esant informacijos apie šriftą veiksenoje"
 
-#: ../libgnomeui/gnome-font-picker.c:221
+#: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
 msgstr "Parodyti dydį"
 
-#: ../libgnomeui/gnome-font-picker.c:222
+#: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
 msgstr "Rodyti šrifto dydį informacijoje apie jį"
 
-#: ../libgnomeui/gnome-gconf-ui.c:61
+#: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
 msgstr "GNOME GConf UI palaikymas"
 
-#: ../libgnomeui/gnome-gconf-ui.c:96
+#: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
 msgstr "_Išsamiai"
 
-#: ../libgnomeui/gnome-gconf-ui.c:169
+#: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
@@ -1118,7 +1115,7 @@ msgstr ""
 "Dalis pasirinktų nustatymų neveiks arba nebus atstatyti kitą kartą paleidus "
 "programą."
 
-#: ../libgnomeui/gnome-gconf-ui.c:176
+#: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1127,39 +1124,39 @@ msgstr ""
 "Įkeliant arba saugant %s nustatymus įvyko klaida. Dalis nustatymų gali "
 "veikti netvarkingai."
 
-#: ../libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: ../libgnomeui/gnome-href.c:124
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "Nuoroda, kurią aktyvuoja GnomeHRef"
 
-#: ../libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Tekstas"
 
-#: ../libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "Mygtuko tekstas"
 
-#: ../libgnomeui/gnome-href.c:133
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "Baigti pasaulio alkį"
 
-#: ../libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Nuorodos spalva"
 
-#: ../libgnomeui/gnome-href.c:140
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "Spalva naudojama nuorodai piešti"
 
-#: ../libgnomeui/gnome-href.c:171
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Šis mygtukas atvers jame rodomą adresą."
 
-#: ../libgnomeui/gnome-href.c:394
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1168,7 +1165,7 @@ msgstr ""
 "Patikrinkite naršyklės nustatymus valdymo skydelio „Pageidaujamos programos“ "
 "punkte."
 
-#: ../libgnomeui/gnome-icon-entry.c:178
+#: libgnomeui/gnome-icon-entry.c:178
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1176,27 +1173,27 @@ msgstr ""
 "Unikalus ženklo įrašo identifikatorius. Naudosimas išsaugant įrašą "
 "atmintinėje."
 
-#: ../libgnomeui/gnome-icon-entry.c:187
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
 msgstr "Ikonų pasirinkimo lango pavadinimas."
 
-#: ../libgnomeui/gnome-icon-entry.c:194
+#: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
 msgstr "Pixmap aplankas"
 
-#: ../libgnomeui/gnome-icon-entry.c:195
+#: libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
 msgstr "Aplankas, kuriame bus ieškoma ikonų."
 
-#: ../libgnomeui/gnome-icon-entry.c:203
+#: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Bylos pavadinimas, kuris turėtų būti rodomas ikonos įraše."
 
-#: ../libgnomeui/gnome-icon-entry.c:211
+#: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
 msgstr "Pasirinkimo langas"
 
-#: ../libgnomeui/gnome-icon-entry.c:212
+#: libgnomeui/gnome-icon-entry.c:212
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1205,216 +1202,215 @@ msgstr ""
 "iškviesti GtkDialog, kai norite pakeisti arba užklausti kurią nors iš jo "
 "savybių."
 
-#: ../libgnomeui/gnome-icon-entry.c:320 ../libgnomeui/gnome-icon-entry.c:980
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
 msgstr "Ikonos nėra"
 
-#: ../libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
 msgstr "Ikonos pasirinkimo langas"
 
-#: ../libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
 msgstr "Šis dialogas leidžia Jums pasirinkti ikoną."
 
-#: ../libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
 msgstr "Ikonos pasirinkimas"
 
-#: ../libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
 msgstr "Pasirinkite norimą ikoną."
 
-#: ../libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "Icon Selector"
 msgstr "Ikonos pasirinkimas"
 
-#: ../libgnomeui/gnome-icon-entry.c:984
+#: libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
 msgstr "Šis mygtukas atidarys langą, kuriame galėsite pasitinkti ikoną."
 
-#: ../libgnomeui/gnome-icon-entry.c:1007
+#: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
 msgstr "Naršyti"
 
-#: ../libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid "Icon path"
 msgstr "Ikonos kelias"
 
-#: ../libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
 "Čia jūs turėtumėte nurodyti aplanką, kuriame yra saugomi ikonų paveikslėliai."
 
-#: ../libgnomeui/gnome-icon-sel.c:293
+#: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: „%s“ neegzistuoja arba tai nėra aplankas"
 
-#: ../libgnomeui/gnome-icon-sel.c:301
+#: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: nepavyko atidaryti aplanko „%s“"
 
-#: ../libgnomeui/gnome-icon-sel.c:401
+#: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
 msgstr "Įkeliamos ikonos..."
 
-#: ../libgnomeui/gnome-messagebox.c:109
+#: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
 msgstr "Informacija"
 
-#: ../libgnomeui/gnome-messagebox.c:114
+#: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
 msgstr "Perspėjimas"
 
-#: ../libgnomeui/gnome-messagebox.c:120
+#: libgnomeui/gnome-messagebox.c:120
 msgid "Error"
 msgstr "Klaida"
 
-#: ../libgnomeui/gnome-messagebox.c:126
+#: libgnomeui/gnome-messagebox.c:126
 msgid "Question"
 msgstr "Klausimas"
 
-#: ../libgnomeui/gnome-messagebox.c:131
+#: libgnomeui/gnome-messagebox.c:131
 msgid "Message"
 msgstr "Pranešimas"
 
-#: ../libgnomeui/gnome-password-dialog.c:252
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "_Vardas:"
 
-#: ../libgnomeui/gnome-password-dialog.c:254
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "_Domenas:"
 
-#: ../libgnomeui/gnome-password-dialog.c:256
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_Slaptažodis:"
 
-#: ../libgnomeui/gnome-password-dialog.c:330
+#: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
 msgstr "Prisijungti _anonimiškai"
 
-#: ../libgnomeui/gnome-password-dialog.c:335
+#: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
 msgstr "Prisijungti _vartotoju:"
 
-#: ../libgnomeui/gnome-password-dialog.c:433
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "Atsiminti slaptažodį šios sesijos metu"
 
-#: ../libgnomeui/gnome-password-dialog.c:435
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "Išsaugoti slaptažodį raktų rinkinyje"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
 msgstr "Peržiūra"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:115
+#: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Ar ženklų įrašai turi būti su peržiūra."
 
-#: ../libgnomeui/gnome-pixmap-entry.c:189
-#: ../libgnomeui/gnome-pixmap-entry.c:479
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "Jokio paveikslėlio"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:206
+#: libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
 msgstr "Paveikslėlio peržiūra"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:207
+#: libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
 msgstr "Dabar pasirinkto piešinio peržiūra"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:414
+#: libgnomeui/gnome-pixmap-entry.c:414
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Nerastas hbox, naudojamas paprastas bylos pasirinkimas"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:420
+#: libgnomeui/gnome-pixmap-entry.c:420
 msgid "Preview"
 msgstr "Peržiūra"
 
-#: ../libgnomeui/gnome-scores.c:78
+#: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
 msgstr "Pirmi dešimt"
 
-#: ../libgnomeui/gnome-scores.c:91
+#: libgnomeui/gnome-scores.c:91
 msgid "User"
 msgstr "Vartotojas"
 
-#: ../libgnomeui/gnome-scores.c:94
+#: libgnomeui/gnome-scores.c:94
 msgid "Score"
 msgstr "Taškai"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: ../libgnomeui/gnome-scores.c:194
+#: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a, %Y %b %d, %T"
 
-#: ../libgnomeui/gnome-scores.c:395
+#: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: ../libgnomeui/gnome-stock-icons.c:139
+#: libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
 msgstr "Lentelės rėmeliai"
 
-#: ../libgnomeui/gnome-stock-icons.c:140
+#: libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
 msgstr "Lentelės užpildas"
 
-#: ../libgnomeui/gnome-stock-icons.c:141
+#: libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
 msgstr "Sužymėtas sąrašas"
 
-#: ../libgnomeui/gnome-stock-icons.c:142
+#: libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
 msgstr "Numeruotas sąrašas"
 
-#: ../libgnomeui/gnome-stock-icons.c:143
+#: libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
 msgstr "Įtraukti"
 
-#: ../libgnomeui/gnome-stock-icons.c:144
+#: libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
 msgstr "Atitraukti"
 
-#: ../libgnomeui/gnome-stock-icons.c:145
+#: libgnomeui/gnome-stock-icons.c:145
 msgid "About"
 msgstr "Apie"
 
-#: ../libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
 msgstr "Atjungti nulūžimo dialogą"
 
-#: ../libgnomeui/gnome-ui-init.c:119
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "Kurį X'ų ekraną naudoti"
 
-#: ../libgnomeui/gnome-ui-init.c:119
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "EKRANAS"
 
-#: ../libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI biblioteka"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:708
+#: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Įvyko keletas segmentacijos klaidų; nepavyko parodyti klaidos dialogo\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1423,7 +1419,7 @@ msgstr ""
 "Segmentacijos klaida!\n"
 "Nepavyko parodyti nulūžimo dialogo\n"
 
-#: ../libgnomeui/gnome_segv.c:101
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1437,17 +1433,17 @@ msgstr ""
 "Uždarius šį dialogą, visos programos ir sesija bus uždarytos.\n"
 "Prieš uždarydami dialogą išsaugokite visas savo bylas."
 
-#: ../libgnomeui/gnome_segv.c:112
+#: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
 msgstr "Programa „%s“ netikėtai liovėsi veikusi."
 
-#: ../libgnomeui/gnome_segv.c:117
+#: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
 msgstr "procesas %d: %s"
 
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
@@ -1455,22 +1451,21 @@ msgstr ""
 "Galite informuoti kūrėjus apie tai, kas atsitiko, kad jie galėtų pataisyti "
 "klaidą, arba galite tuoj pat paleisti programą iš naujo."
 
-#: ../libgnomeui/gnome_segv.c:137
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Naudojimas: gnome_segv2 programa signalas\n"
 
-#: ../libgnomeui/gnome_segv.c:153
+#: libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
 msgstr "Pe_rleisti programą"
 
-#: ../libgnomeui/gnome_segv.c:165
+#: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
 msgstr "_Informuoti kūrėjus"
 
-#: ../libgnomeui/gnome_segv.c:176
+#: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_Derinti"
 
-#: ../test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Nutraukti bandymą"
+#~ msgid "Exit the test"
+#~ msgstr "Nutraukti bandymą"

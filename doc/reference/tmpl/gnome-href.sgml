@@ -14,6 +14,9 @@ GnomeHRef
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT GnomeHRef ##### -->
 <para>
 
@@ -43,16 +46,6 @@ GnomeHRef
 @url: 
 @text: 
 @Returns: 
-
-
-<!-- ##### FUNCTION gnome_href_construct ##### -->
-<para>
-
-</para>
-
-@href: 
-@url: 
-@text: 
 
 
 <!-- ##### FUNCTION gnome_href_set_url ##### -->

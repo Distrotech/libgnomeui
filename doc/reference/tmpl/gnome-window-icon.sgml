@@ -14,6 +14,9 @@ gnome-window-icon
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### FUNCTION gnome_window_icon_set_from_default ##### -->
 <para>
 

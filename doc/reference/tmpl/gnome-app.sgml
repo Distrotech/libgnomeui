@@ -19,6 +19,9 @@ and start the main loop (with gtk_main()).
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### MACRO GNOME_APP_MENUBAR_NAME ##### -->
 <para>
 The name of the menubar as it is passed to libbonobo.

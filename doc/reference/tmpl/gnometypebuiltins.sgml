@@ -14,6 +14,9 @@ gnometypebuiltins
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### MACRO GNOME_TYPE_UI_INFO_TYPE ##### -->
 <para>
 

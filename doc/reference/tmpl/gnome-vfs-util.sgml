@@ -14,6 +14,9 @@ gnome-vfs-util
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### USER_FUNCTION GnomeGdkPixbufLoadCallback ##### -->
 <para>
 

@@ -14,6 +14,9 @@ GnomeEntry
 
 </para>
 
+<!-- ##### SECTION Stability_Level ##### -->
+
+
 <!-- ##### STRUCT GnomeEntryPrivate ##### -->
 <para>
 
@@ -50,15 +53,6 @@ GnomeEntry
 
 @history_id: 
 @Returns: 
-
-
-<!-- ##### FUNCTION gnome_entry_construct ##### -->
-<para>
-
-</para>
-
-@gentry: 
-@history_id: 
 
 
 <!-- ##### FUNCTION gnome_entry_gtk_entry ##### -->
