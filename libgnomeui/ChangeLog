@@ -1,3 +1,10 @@
+Tue Jul 14 22:47:33 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-app.h, gnome-app.c, gnome-dialog.h, gnome-dialog.c:
+	Added "construct" functions. The gnome-dialog one takes a va_list
+	which is kind of weird; if there's a good alternative I'd like 
+	to use it instead.
+
 1998-07-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (paint): Fixed off-by-one bug in the rectangle

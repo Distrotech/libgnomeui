@@ -103,6 +103,17 @@ gnome_app_init(GnomeApp *app)
 	app->pos_menubar = app->pos_toolbar = GNOME_APP_POS_TOP;
 }
 
+void 
+gnome_app_construct(GnomeApp *app, gchar *appname, char *title)
+{
+	app->name = g_strdup (appname);
+	app->prefix = g_copy_strings ("/", appname, "/", NULL);
+	
+	if (title)
+		gtk_window_set_title(GTK_WINDOW(app), title);
+}
+
+
 GtkWidget *
 gnome_app_new(gchar *appname, char *title)
 {
@@ -112,11 +123,7 @@ gnome_app_new(gchar *appname, char *title)
 	retval = gtk_type_new(gnome_app_get_type());
 	app = GNOME_APP (retval);
 
-	app->name = g_strdup (appname);
-	app->prefix = g_copy_strings ("/", appname, "/", NULL);
-	
-	if (title)
-		gtk_window_set_title(GTK_WINDOW(retval), title);
+	gnome_app_construct(app, appname, title);
 
 	return retval;
 }

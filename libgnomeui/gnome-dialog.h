@@ -27,6 +27,8 @@
 #endif
 #include <libgnome/gnome-defs.h>
 
+#include <stdarg.h>
+
 BEGIN_GNOME_DECLS
 
 #define GNOME_DIALOG(obj)        GTK_CHECK_CAST (obj, gnome_dialog_get_type (), GnomeDialog)
@@ -150,6 +152,13 @@ void       gnome_dialog_set_destroy (GnomeDialog * d, gboolean self_destruct);
 void       gnome_dialog_append_buttons (GnomeDialog * dialog,
 					const gchar * first,
 					...);
+
+/* Don't use this either; it's for bindings to languages other 
+   than C (which makes the varargs kind of lame... feel free to fix)
+   You want _new, see above. */
+void       gnome_dialog_construct (GnomeDialog * dialog,
+				   const gchar * title,
+				   va_list ap);
 
 END_GNOME_DECLS
 

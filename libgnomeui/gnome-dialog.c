@@ -17,7 +17,6 @@
  */
 
 #include <config.h>
-#include <stdarg.h>
 
 #include "gnome-dialog.h"
 #include "libgnome/gnome-util.h"
@@ -222,33 +221,42 @@ gnome_dialog_init (GnomeDialog *dialog)
   gtk_widget_show (dialog->action_area);
 }
 
+void       
+gnome_dialog_construct (GnomeDialog * dialog,
+			const gchar * title,
+			va_list ap)
+{
+  gchar * button_name;
+  
+  if (title)
+    gtk_window_set_title (GTK_WINDOW (dialog), title);
+  
+  while (TRUE) {
+    
+    button_name = va_arg (ap, gchar *);
+    
+    if (button_name == NULL) {
+      break;
+    }
+    
+    gnome_dialog_append_buttons( dialog, 
+				 button_name, 
+				 NULL );
+  };  
+}
+
 
 GtkWidget* gnome_dialog_new            (const gchar * title,
 					...)
 {
   va_list ap;
   GnomeDialog *dialog;
-  gchar * button_name;
 	
   va_start (ap, title);
 	
   dialog = gtk_type_new (gnome_dialog_get_type ());
 
-  if (title)
-    gtk_window_set_title (GTK_WINDOW (dialog), title);
-
-  while (TRUE) {
-
-    button_name = va_arg (ap, gchar *);
-
-    if (button_name == NULL) {
-      break;
-    }
-	  
-    gnome_dialog_append_buttons( dialog, 
-				 button_name, 
-				 NULL );
-  };
+  gnome_dialog_construct(dialog, title, ap);
 
   va_end (ap);
 
@@ -722,6 +730,16 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.32  1998/07/15 03:59:15  hp
+
+
+  Tue Jul 14 22:47:33 1998  Havoc Pennington  <hp@pobox.com>
+
+  * gnome-app.h, gnome-app.c, gnome-dialog.h, gnome-dialog.c:
+  Added "construct" functions. The gnome-dialog one takes a va_list
+  which is kind of weird; if there's a good alternative I'd like
+  to use it instead.
+
   Revision 1.31  1998/07/10 08:53:22  timj
   Fri Jul 10 10:19:38 1998  Tim Janik  <timj@gtk.org>
 

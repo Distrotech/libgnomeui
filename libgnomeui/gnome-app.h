@@ -71,6 +71,9 @@ void gnome_app_toolbar_set_position (GnomeApp *app,
 void gnome_app_menu_set_position    (GnomeApp *app,
 				     GnomeAppWidgetPositionType pos_menu);
 
+/* For use in C++ wrappers, etc. You don't normally need this. */
+void gnome_app_construct      (GnomeApp *app, gchar *appname, char *title);
+
 END_GNOME_DECLS
 
 #endif /* GNOME_APP_H */
