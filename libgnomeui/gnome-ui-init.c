@@ -194,9 +194,15 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 		gtk_rc_set_image_loader(imlib_image_loader);
 		gnome_rc_parse(program_invocation_name);
 		gnome_preferences_load();
+#if 0	  
+/* disable this - this is the most evil thing I've ever seen. There is an 
+ * imlib perefercnes (imlib_config) program to dojust this for every setting 
+ * of imlib - and overriding it like this is not just bad coding but bad
+ * policy since now a users preferences dont count anymore. */	  
 		if (gnome_preferences_get_disable_imlib_cache ())
 			gdk_imlib_set_cache_info (0, 1);
-		
+#endif
+	  
 #ifdef USE_SEGV_HANDLE
 		memset(&sa, 0, sizeof(sa));
 		sa.sa_handler = (gpointer)gnome_segv_handle;
