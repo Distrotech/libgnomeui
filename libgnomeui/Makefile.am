@@ -30,6 +30,7 @@ INCLUDES = -I$(top_srcdir)/gdk-pixbuf			\
 	-I$(top_srcdir)					\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl 	\
 	$(SUPPORTINCS) 					\
+	$(GLIB_CFLAGS) $(GTK_CFLAGS)			\
 	$(OAF_CFLAGS)					\
 	$(LIBART_CFLAGS)				\
         -DGNOMELIBDIR=\""$(libdir)"\" 			\
@@ -38,7 +39,7 @@ INCLUDES = -I$(top_srcdir)/gdk-pixbuf			\
         -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" 	\
         -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
-	$(GTK_CFLAGS) $(ORBIT_CFLAGS)			\
+	$(ORBIT_CFLAGS)					\
 	$(GCONF_CFLAGS)					\
 	-DVERSION=\"$(VERSION)\"
 
