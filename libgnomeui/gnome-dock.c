@@ -550,6 +550,7 @@ gnome_dock_draw (GtkWidget *widget, GdkRectangle *area)
   if (GTK_WIDGET_DRAWABLE (widget))
     {
       GnomeDock *dock;
+      GList *p;
 
       dock = GNOME_DOCK (widget);
 
@@ -559,6 +560,9 @@ gnome_dock_draw (GtkWidget *widget, GdkRectangle *area)
       draw_band_list (dock->bottom_bands, area);
       draw_band_list (dock->left_bands, area);
       draw_band_list (dock->right_bands, area);
+
+      for (p = dock->floating_children; p != NULL; p = p->next)
+	draw_widget (GTK_WIDGET (p->data), area);
     }
 }
 
@@ -836,10 +840,10 @@ drag_new (GnomeDock *dock,
   /* Set the offset of `item' in the band.  */
   if (is_vertical)
     gnome_dock_band_set_child_offset (new_band, GTK_WIDGET (item),
-                                      y - dock->client_rect.y);
+                                      MAX (y - dock->client_rect.y, 0));
   else
     gnome_dock_band_set_child_offset (new_band, GTK_WIDGET (item),
-                                      x - GTK_WIDGET (dock)->allocation.x);
+                                      MAX (x - GTK_WIDGET (dock)->allocation.x, 0));
 
   return TRUE;
 }
@@ -945,7 +949,7 @@ drag_check (GnomeDock *dock,
         {
           alloc = &band->drag_allocation;
 
-          if (x >= alloc->x && x < alloc->x + alloc->width
+          if (x >= alloc->x - 10 && x < alloc->x + alloc->width
               && y >= alloc->y && y < alloc->y + alloc->height)
             {
               if (is_vertical)
@@ -967,7 +971,7 @@ drag_check (GnomeDock *dock,
             }
         }
     }
-  
+
   return FALSE;
 }
 

@@ -1,3 +1,11 @@
+1999-09-17  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dock.c (gnome_dock_draw): Draw all the floating children
+	as well.
+	(drag_check): Added snap factor for dock detaching.
+	(drag_new): Make sure the offset for the new child is not
+	negative.
+
 1999-09-14  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas-text.c (gnome_canvas_text_init): Do not load a
