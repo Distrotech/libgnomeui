@@ -1,3 +1,8 @@
+1998-11-09  Jonathan Blandford  <jrb@aware-of-vacuity.labs.redhat.com>
+
+	* gnome-popup-help.c (gnome_popup_help_expose): added theme'd
+	drawing code back to the popup-window.
+
 1998-11-08  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-canvas.c (gnome_canvas_group_draw): 

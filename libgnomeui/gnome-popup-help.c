@@ -173,31 +173,19 @@ gnome_popup_help_expose (GtkWidget *darea, GdkEventExpose *event, GtkTooltipsDat
                 gap = 2;
         baseline_skip = style->font->ascent + style->font->descent + gap;
 
-/* Put this back in when Gtk-themes is ubiquitous */
-#if 0
         gtk_paint_flat_box(style, darea->window,
                            GTK_STATE_NORMAL, GTK_SHADOW_OUT, 
                            NULL, GTK_WIDGET(darea), "tooltip",
                            0, 0, -1, -1);
-#else
-        gdk_draw_rectangle (darea->window, darea->style->bg_gc[GTK_STATE_NORMAL], TRUE, 0, 0, -1, -1);
-        gdk_draw_rectangle (darea->window, darea->style->black_gc, FALSE, 0, 0, -1, -1);
-#endif
 
         y = style->font->ascent + 4;
   
         for (el = data->row; el; el = el->next) {
                 if (el->data) {
-                        /* Same thing as above; enable it when we have Gtk-themes all over the place */
-#if 0
                         gtk_paint_string (style, darea->window, 
                                           GTK_STATE_NORMAL, 
                                           NULL, GTK_WIDGET(darea), "tooltip",
                                           4, y, el->data);
-#else
-                        gdk_draw_string (darea->window, darea->style->font, darea->style->fg_gc[GTK_STATE_NORMAL],
-                                         4, y, el->data);
-#endif
                         y += baseline_skip;
                 }
                 else
@@ -284,6 +272,7 @@ append_ui_info (GnomeUIInfo *base, GnomeUIInfo *info)
 static void
 helpwindow_click_callback (GtkWidget *widget, gpointer data)
 {
+        g_print ("got a click\n");
         gtk_widget_hide (widget->parent);
         gdk_pointer_ungrab (GDK_CURRENT_TIME);
 
