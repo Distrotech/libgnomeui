@@ -22,8 +22,6 @@ AM_PROG_LEX
 AC_PROG_YACC
 AC_PATH_PROGS(PATH_TO_XRDB, "xrdb")
 
-GNOME_COMPILE_WARNINGS
-
 dnl utility conditional
 AM_CONDITIONAL(FALSE, test "x" = "y")
 
