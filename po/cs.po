@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-23 04:56+0100\n"
-"PO-Revision-Date: 2004-01-23 17:34+0100\n"
+"POT-Creation-Date: 2004-01-24 04:54+0100\n"
+"PO-Revision-Date: 2004-01-27 16:33+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -494,7 +494,7 @@ msgstr "Ukončit současnou hru"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
-msgstr "O_bsah"
+msgstr "_Obsah"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
@@ -1146,7 +1146,7 @@ msgstr "Žádná ikona"
 
 #: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Nelze nalézt prvek hbox, použije se běžný výběr souboru"
+msgstr "Nemohu najít hbox, používám se běžný výběr souboru"
 
 #: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
@@ -1198,7 +1198,7 @@ msgstr "GnomeIconSelection:'%s' neexistuje nebo to není adresář"
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection: nelze otevřít adresář '%s'"
+msgstr "GnomeIconSelection: nemohu otevřítb adresář '%s'"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
@@ -1335,9 +1335,7 @@ msgstr "GNOME GUI knihovna"
 #: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Vyskytlo se několik chyb 'segmentation faults'; nelze zobrazit chybový "
-"dialog\n"
+msgstr "Vyskytlo se několik chyb 'segmentation fault'; nemohu zobrazit chybový dialog\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -1347,7 +1345,7 @@ msgid ""
 "Cannot display crash dialog\n"
 msgstr ""
 "Chyba Segmentation fault!\n"
-"Nelze zobrazit dialog o havárii\n"
+"Nemohu zobrazit dialog o havárii\n"
 
 #: libgnomeui/gnome_segv.c:101
 #, c-format
@@ -1378,7 +1376,9 @@ msgstr "proces %d: %s"
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr "Můžete vývojářům pomoci opravit to tím, že je informujete, co se stalo. Nebo můžete aplikaci hned spustit znovu."
+msgstr ""
+"Můžete vývojářům pomoci opravit to tím, že je informujete, co se stalo. Nebo "
+"můžete aplikaci hned spustit znovu."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
