@@ -1,3 +1,12 @@
+Fri Jan 08 17:10:49 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-init.c: removed all the autosync stuff
+
+	* gnome-entry.c: actually saving was done on destroy only so
+	  added a per file sync there (we don't want to sync everything,
+	  since the app should control when it's data get synced, to be
+	  able to roll back changes)
+
 1999-01-08  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.c: Add documentation.

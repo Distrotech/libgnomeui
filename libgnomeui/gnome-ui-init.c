@@ -56,57 +56,7 @@ static GdkPixmap *imlib_image_loader(GdkWindow   *window,
 /* The master client.  */
 static GnomeClient *client = NULL;
 
-/* handeling of automatic syncing of gnome_config stuff */
-static int config_was_changed = FALSE;
-static int sync_timeout = -1;
 static gboolean gnome_initialized = FALSE;
-
-static int
-sync_timeout_f (gpointer data)
-{
-	sync_timeout = -1;
-	gnome_config_sync ();
-	return FALSE;
-}
-
-/*
- * gnome_config set handler, when we use a _set_* function this is
- * called and it schedhules a sync in 10 seconds
- */
-static void
-set_handler(gpointer data)
-{
-	config_was_changed = TRUE;
-
-	/* timeout already running */
-	if(sync_timeout!=-1)
-		return;
-	/* set a new sync timeout for 10 seconds from now */
-	sync_timeout = gtk_timeout_add (10*1000,sync_timeout_f,NULL);
-}
-
-/* called on every gnome_config_sync */
-static void
-sync_handler(gpointer data)
-{
-	config_was_changed = FALSE;
-	if (sync_timeout > -1)
-		gtk_timeout_remove (sync_timeout);
-	sync_timeout = -1;
-}
-
-/*
- * is called as an atexit handler and synces the config if it was changed
- * but not yet synced
- */
-static void
-atexit_handler(void)
-{
-	/*avoid any further sync_handler calls*/
-	gnome_config_set_sync_handler(NULL,NULL);
-	if (config_was_changed)
-		gnome_config_sync();
-}
 
 static void
 gnome_add_gtk_arg_callback(poptContext con,
@@ -245,10 +195,6 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 		gnome_preferences_load();
 		if (gnome_preferences_get_disable_imlib_cache ())
 			gdk_imlib_set_cache_info (0, 1);
-		
-		gnome_config_set_set_handler(set_handler,NULL);
-		gnome_config_set_sync_handler(sync_handler,NULL);
-		g_atexit(atexit_handler);
 		
 #ifdef USE_SEGV_HANDLE
 		memset(&sa, 0, sizeof(sa));

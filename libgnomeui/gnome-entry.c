@@ -406,4 +406,6 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	}
 
 	gnome_config_pop_prefix ();
+	g_strconcat3_a(prefix,"/",gnome_app_id,NULL);
+	gnome_config_sync_file(prefix);
 }
