@@ -15,7 +15,8 @@ libgnomeui_la_SOURCES = \
 	gnome-pixmap.c			\
 	gnome-toolbar.c			\
 	gnome-colors.c			\
-	gnome-session.c
+	gnome-session.c			\
+	gtk-clock.c
 
 libgnomeuiinclude_HEADERS = 		\
         gnome-actionarea.h     		\
@@ -25,9 +26,9 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-properties.h     		\
 	gnome-pixmap.h			\
 	gnome-toolbar.h			\
-	libgnomeui.h			\
-	gnome-session.h
-
+	gnome-session.h			\
+	gtk-clock.h			\
+	libgnomeui.h
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
 libgnomeui_la_LIBADD = $(GTK_LIBS)

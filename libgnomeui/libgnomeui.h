@@ -9,6 +9,7 @@
 #include "libgnomeui/gnome-pixmap.h"
 #include "libgnomeui/gnome-toolbar.h"
 #include "libgnomeui/gnome-actionarea.h"
+#include "libgnomeui/gtk-clock.h"
 
 BEGIN_GNOME_DECLS
 
