@@ -1064,23 +1064,23 @@ static const CalculatorButton buttons[8][5] = {
 	{
 		{N_("1/x"),(GtkSignalFunc)simple_func,c_inv,NULL,FALSE,{0}},
 		{N_("x^2"),(GtkSignalFunc)simple_func,c_pow2,sqrt,FALSE,{0}},
-		{N_("SQRT"),(GtkSignalFunc)simple_func,sqrt,c_pow2,FALSE,{0}},
-		{N_("CE/C"),(GtkSignalFunc)clear_calc,NULL,NULL,FALSE,{GDK_Clear,0}},
-		{N_("AC"),(GtkSignalFunc)reset_calc,NULL,NULL,FALSE,{0}}
+		{N_("SQRT"),(GtkSignalFunc)simple_func,sqrt,c_pow2,FALSE,{'r','R',0}},
+		{N_("CE/C"),(GtkSignalFunc)clear_calc,NULL,NULL,FALSE,{GDK_Clear,GDK_Backspace,0}},
+		{N_("AC"),(GtkSignalFunc)reset_calc,NULL,NULL,FALSE,{GDK_Escape,0}}
 	},{
 		{NULL,NULL,NULL,NULL}, /*inverse button*/
-		{N_("sin"),(GtkSignalFunc)simple_func,sin,asin,TRUE,{0}},
-		{N_("cos"),(GtkSignalFunc)simple_func,cos,acos,TRUE,{0}},
-		{N_("tan"),(GtkSignalFunc)simple_func,tan,atan,TRUE,{0}},
-		{N_("DEG"),(GtkSignalFunc)drg_toggle,NULL,NULL,FALSE,{0}}
+		{N_("sin"),(GtkSignalFunc)simple_func,sin,asin,TRUE,{'s','S',0}},
+		{N_("cos"),(GtkSignalFunc)simple_func,cos,acos,TRUE,{'c','C',0}},
+		{N_("tan"),(GtkSignalFunc)simple_func,tan,atan,TRUE,{'t','T',0}},
+		{N_("DEG"),(GtkSignalFunc)drg_toggle,NULL,NULL,FALSE,{'d','D',0}}
 	},{
-		{N_("e"),(GtkSignalFunc)set_e,NULL,NULL,FALSE,{0}},
+		{N_("e"),(GtkSignalFunc)set_e,NULL,NULL,FALSE,{'e','E',0}},
 		{N_("EE"),(GtkSignalFunc)add_digit,"e+",NULL,FALSE,{0}},
 		{N_("log"),(GtkSignalFunc)simple_func,log10,c_pow10,FALSE,{0}},
-		{N_("ln"),(GtkSignalFunc)simple_func,log,c_powe,FALSE,{0}},
+		{N_("ln"),(GtkSignalFunc)simple_func,log,c_powe,FALSE,{'l','L',0}},
 		{N_("x^y"),(GtkSignalFunc)math_func,pow,NULL,FALSE,{'^',0}}
 	},{
-		{N_("PI"),(GtkSignalFunc)set_pi,NULL,NULL,FALSE,{0}},
+		{N_("PI"),(GtkSignalFunc)set_pi,NULL,NULL,FALSE,{'p','P',0}},
 		{N_("x!"),(GtkSignalFunc)simple_func,c_fact,NULL,FALSE,{'!',0}},
 		{N_("("),(GtkSignalFunc)add_parenth,NULL,NULL,FALSE,{'(',0}},
 		{N_(")"),(GtkSignalFunc)sub_parenth,NULL,NULL,FALSE,{')',0}},

@@ -1,3 +1,7 @@
+Sun Dec 03 16:37:42 2000  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c:  Add a bunch of xcalc like shortcuts
+
 2000-12-03  Martin Baulig  <baulig@suse.de>
 
 	* Makefile.am (INCLUDES): Added $(WARN_CFLAGS).
