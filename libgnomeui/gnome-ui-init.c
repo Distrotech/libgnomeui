@@ -103,7 +103,7 @@ atexit_handler(void)
 {
 	/*avoid any further sync_handler calls*/
 	gnome_config_set_sync_handler(NULL,NULL);
-	if(config_was_changed)
+	if (config_was_changed)
 		gnome_config_sync();
 }
 
@@ -113,96 +113,99 @@ gnome_add_gtk_arg_callback(poptContext con,
 			   const struct poptOption * opt,
 			   const char * arg, void * data)
 {
-  static int gnome_gtk_initialized = FALSE;
-  static GPtrArray *gtk_args = NULL;
-  char *newstr, *newarg;
-  int final_argc;
-  char **final_argv;
-
-  if(gnome_gtk_initialized) {
-    /* gnome has already been initialized, so app might be making a
-       second pass over the args - just ignore */
-    return;
-  }
-
-  switch(reason) {
-  case POPT_CALLBACK_REASON_PRE:
-    gtk_args = g_ptr_array_new();
-
-    /* Note that the value of argv[0] passed to main() may be
-     * different from the value that this passes to gtk */
-    g_ptr_array_add(gtk_args,
-    		    g_strdup(poptGetInvocationName(con)));
-    break;
-
-  case POPT_CALLBACK_REASON_OPTION:
-    newstr = g_strconcat("--", opt->longName, NULL);
-    g_ptr_array_add(gtk_args, newstr);
-    gnome_client_add_static_arg(client, newstr, NULL);
-
-    if(opt->argInfo == POPT_ARG_STRING) {
-      g_ptr_array_add(gtk_args, (char *)arg);
-      gnome_client_add_static_arg(client, arg, NULL);
-    }
-    break;
-
-  case POPT_CALLBACK_REASON_POST:
-    g_ptr_array_add(gtk_args, NULL);
-    final_argc = gtk_args->len - 1;
-    final_argv = g_memdup(gtk_args->pdata, sizeof(char *) * gtk_args->len);
-
-    gtk_init(&final_argc, &final_argv);
-
-    g_free(final_argv);
+	static int gnome_gtk_initialized = FALSE;
+	static GPtrArray *gtk_args = NULL;
+	char *newstr, *newarg;
+	int final_argc;
+	char **final_argv;
+	
+	if(gnome_gtk_initialized) {
+		/*
+		 * gnome has already been initialized, so app might be making a
+		 * second pass over the args - just ignore
+		 */
+		return;
+	}
+	
+	switch(reason) {
+	case POPT_CALLBACK_REASON_PRE:
+		gtk_args = g_ptr_array_new();
+		
+		/* Note that the value of argv[0] passed to main() may be
+		 * different from the value that this passes to gtk
+		 */
+		g_ptr_array_add(gtk_args,
+				g_strdup(poptGetInvocationName(con)));
+		break;
+		
+	case POPT_CALLBACK_REASON_OPTION:
+		newstr = g_strconcat("--", opt->longName, NULL);
+		g_ptr_array_add(gtk_args, newstr);
+		gnome_client_add_static_arg(client, newstr, NULL);
+		
+		if(opt->argInfo == POPT_ARG_STRING) {
+			g_ptr_array_add(gtk_args, (char *)arg);
+			gnome_client_add_static_arg(client, arg, NULL);
+		}
+		break;
+		
+	case POPT_CALLBACK_REASON_POST:
+		g_ptr_array_add(gtk_args, NULL);
+		final_argc = gtk_args->len - 1;
+		final_argv = g_memdup(gtk_args->pdata, sizeof(char *) * gtk_args->len);
+		
+		gtk_init(&final_argc, &final_argv);
+		
+		g_free(final_argv);
 #ifdef GNOME_CLIENT_WILL_COPY_ARGS
-    g_strfreev(gtk_args->pdata); /* this weirdness is here to eliminate
-					  memory leaks if gtk_init() modifies
-					  argv[] */
-
-    g_ptr_array_free(gtk_args, FALSE);
+		g_strfreev(gtk_args->pdata); /* this weirdness is here to eliminate
+						memory leaks if gtk_init() modifies
+						argv[] */
+		
+		g_ptr_array_free(gtk_args, FALSE);
 #else
-    g_ptr_array_free(gtk_args, TRUE);
+		g_ptr_array_free(gtk_args, TRUE);
 #endif
-    gtk_args = NULL;
-    gnome_gtk_initialized = TRUE;
-    break;
-  }
+		gtk_args = NULL;
+		gnome_gtk_initialized = TRUE;
+		break;
+	}
 }
 
 static const struct poptOption gtk_options [] = {
-  { NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
-    &gnome_add_gtk_arg_callback, 0, NULL},
-  { "gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,
-    N_("Gdk debugging flags to set"), N_("FLAGS")},
-  { "gdk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
-    N_("Gdk debugging flags to unset"), N_("FLAGS")},
-  { "display", '\0', POPT_ARG_STRING, NULL, 0,
-    N_("X display to use"), N_("DISPLAY")},
-  { "sync", '\0', POPT_ARG_NONE, NULL, 0,
-    N_("Make X calls synchronous"), NULL},
-  { "no-xshm", '\0', POPT_ARG_NONE, NULL, 0,
-    N_("Don't use X shared memory extension"), NULL},
-  { "name", '\0', POPT_ARG_STRING, NULL, 0,
-    N_("Program name as used by the window manager"), N_("NAME")},
-  { "class", '\0', POPT_ARG_STRING, NULL, 0,
-    N_("Program class as used by the window manager"), N_("CLASS")},
-  { "gxid_host", '\0', POPT_ARG_STRING, NULL, 0,
-    NULL, N_("HOST")},
-  { "gxid_port", '\0', POPT_ARG_STRING, NULL, 0,
-    NULL, N_("PORT")},
-  { "xim-preedit", '\0', POPT_ARG_STRING, NULL, 0,
-    NULL, N_("STYLE")},
-  { "xim-status", '\0', POPT_ARG_STRING, NULL, 0,
-    NULL, N_("STYLE")},
-  { "gtk-debug", '\0', POPT_ARG_STRING, NULL, 0,
-    N_("Gtk+ debugging flags to set"), N_("FLAGS")},
-  { "gtk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
-    N_("Gtk+ debugging flags to unset"), N_("FLAGS")},
-  { "g-fatal-warnings", '\0', POPT_ARG_NONE, NULL, 0,
-    N_("Make all warnings fatal"), NULL},
-  { "gtk-module", '\0', POPT_ARG_STRING, NULL, 0,
-    N_("Load an additional Gtk module"), N_("MODULE")},
-  { NULL, '\0', 0, NULL, 0}
+	{ NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
+	  &gnome_add_gtk_arg_callback, 0, NULL},
+	{ "gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gdk debugging flags to set"), N_("FLAGS")},
+	{ "gdk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gdk debugging flags to unset"), N_("FLAGS")},
+	{ "display", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("X display to use"), N_("DISPLAY")},
+	{ "sync", '\0', POPT_ARG_NONE, NULL, 0,
+	  N_("Make X calls synchronous"), NULL},
+	{ "no-xshm", '\0', POPT_ARG_NONE, NULL, 0,
+	  N_("Don't use X shared memory extension"), NULL},
+	{ "name", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Program name as used by the window manager"), N_("NAME")},
+	{ "class", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Program class as used by the window manager"), N_("CLASS")},
+	{ "gxid_host", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("HOST")},
+	{ "gxid_port", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("PORT")},
+	{ "xim-preedit", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("STYLE")},
+	{ "xim-status", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("STYLE")},
+	{ "gtk-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gtk+ debugging flags to set"), N_("FLAGS")},
+	{ "gtk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gtk+ debugging flags to unset"), N_("FLAGS")},
+	{ "g-fatal-warnings", '\0', POPT_ARG_NONE, NULL, 0,
+	  N_("Make all warnings fatal"), NULL},
+	{ "gtk-module", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Load an additional Gtk module"), N_("MODULE")},
+	{ NULL, '\0', 0, NULL, 0}
 };
 
 static void
@@ -210,145 +213,165 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 	      const struct poptOption *opt)
 {
 #ifdef USE_SEGV_HANDLE
-  struct sigaction sa;
+	struct sigaction sa;
 #endif
-
-  if(gnome_initialized)
-    return;
-
-  switch(reason) {
-  case POPT_CALLBACK_REASON_PRE:
-
+	
+	if(gnome_initialized)
+		return;
+	
+	switch(reason) {
+	case POPT_CALLBACK_REASON_PRE:
+		
 #ifdef USE_SEGV_HANDLE
-    /* 
-	 * Yes, we do this twice, so if an error occurs before init,
-	 * it will be caught, and if it happens after init, we'll override
-	 * gtk's handler
-	 */
-    memset(&sa, 0, sizeof(sa));
-    sa.sa_handler = (gpointer)gnome_segv_handle;
-    sigaction(SIGSEGV, &sa, NULL);
+		/* 
+		 * Yes, we do this twice, so if an error occurs before init,
+		 * it will be caught, and if it happens after init, we'll override
+		 * gtk's handler
+		 */
+		memset(&sa, 0, sizeof(sa));
+		sa.sa_handler = (gpointer)gnome_segv_handle;
+		sigaction(SIGSEGV, &sa, NULL);
 #endif
-    gtk_set_locale();
-    client = gnome_master_client();
-
-    break;
-  case POPT_CALLBACK_REASON_POST:
-    gdk_imlib_init();
-    gnome_type_init();
-    gtk_rc_set_image_loader(imlib_image_loader);
-    gnome_rc_parse(program_invocation_name);
-    gnome_preferences_load();
-    if (gnome_preferences_get_disable_imlib_cache ())
-	gdk_imlib_set_cache_info (0, 1);
-
-    gnome_config_set_set_handler(set_handler,NULL);
-    gnome_config_set_sync_handler(sync_handler,NULL);
-    g_atexit(atexit_handler);
-    
+		gtk_set_locale();
+		client = gnome_master_client();
+		
+		break;
+	case POPT_CALLBACK_REASON_POST:
+		gdk_imlib_init();
+		gnome_type_init();
+		gtk_rc_set_image_loader(imlib_image_loader);
+		gnome_rc_parse(program_invocation_name);
+		gnome_preferences_load();
+		if (gnome_preferences_get_disable_imlib_cache ())
+			gdk_imlib_set_cache_info (0, 1);
+		
+		gnome_config_set_set_handler(set_handler,NULL);
+		gnome_config_set_sync_handler(sync_handler,NULL);
+		g_atexit(atexit_handler);
+		
 #ifdef USE_SEGV_HANDLE
-    memset(&sa, 0, sizeof(sa));
-    sa.sa_handler = (gpointer)gnome_segv_handle;
-    sigaction(SIGSEGV, &sa, NULL);
+		memset(&sa, 0, sizeof(sa));
+		sa.sa_handler = (gpointer)gnome_segv_handle;
+		sigaction(SIGSEGV, &sa, NULL);
 #endif
-
-    /* lame trigger stuff. This really needs to be sorted out better
-       so that the trigger API is exported more - perhaps there's something
-       hidden in glib that already does this :) */
-       
-    if(gnome_config_get_bool("/sound/system/settings/start_esd=true")
-       && gnome_config_get_bool("/sound/system/settings/event_sounds=true")
-       && gnome_triggerlist_topnode) {
-      int n;
-
-      for(n = 0; n < gnome_triggerlist_topnode->numsubtrees; n++) {
-	if(!strcmp(gnome_triggerlist_topnode->subtrees[n]->nodename,
-		   "gtk-events"))
-	  break;
-      }
-
-      if(n < gnome_triggerlist_topnode->numsubtrees) {
-	GnomeTriggerList* gtk_events_node;
-
-	gtk_events_node = gnome_triggerlist_topnode->subtrees[n];
-	g_assert(gtk_events_node != NULL);
-
-	for(n = 0; n < gtk_events_node->numsubtrees; n++) {
-	  int signums[5];
-	  int nsigs, i;
-	  char *signame;
-	  gpointer hookdata = gtk_events_node->subtrees[n];
-
-	  g_assert(hookdata != NULL);
-
-	  signame = gtk_events_node->subtrees[n]->nodename;
-	  g_assert(signame != NULL);
-
-	  /* XXX this is an incredible hack based on a compile-time knowledge of
-	     what gtk widgets do what, rather than */
-	  if(!strcmp(signame, "activate")) {
-	    gtk_type_class(gtk_menu_item_get_type());
-	    signums[0] = gtk_signal_lookup(signame, gtk_menu_item_get_type());
-
-	    gtk_type_class(gtk_editable_get_type());
-	    signums[1] = gtk_signal_lookup(signame, gtk_editable_get_type());
-	    nsigs = 2;
-	  } else if(!strcmp(signame, "toggled")) {
-	    gtk_type_class(gtk_toggle_button_get_type());
-	    signums[0] = gtk_signal_lookup(signame,
-					   gtk_toggle_button_get_type());
-
-	    gtk_type_class(gtk_check_menu_item_get_type());
-	    signums[1] = gtk_signal_lookup(signame,
-					   gtk_check_menu_item_get_type());
-	    nsigs = 2;
-	  } else if(!strcmp(signame, "clicked")) {
-	    gtk_type_class(gtk_button_get_type());
-	    signums[0] = gtk_signal_lookup(signame, gtk_button_get_type());
-	    nsigs = 1;
-	  } else {
-	    gtk_type_class(gtk_widget_get_type());
-	    signums[0] = gtk_signal_lookup(signame, gtk_widget_get_type());
-	    nsigs = 1;
-	  }
-	  
-	  for(i = 0; i < nsigs; i++)
-	    if(signums[i] > 0)
-	      gtk_signal_add_emission_hook(signums[i],
-					   (GtkEmissionHook)relay_gtk_signal,
-					   hookdata);
+		
+		/* lame trigger stuff. This really needs to be sorted out better
+		   so that the trigger API is exported more - perhaps there's something
+		   hidden in glib that already does this :) */
+		
+		if(gnome_config_get_bool("/sound/system/settings/start_esd=true")
+		   && gnome_config_get_bool("/sound/system/settings/event_sounds=true")
+		   && gnome_triggerlist_topnode) {
+			int n;
+			
+			for(n = 0; n < gnome_triggerlist_topnode->numsubtrees; n++) {
+				if(!strcmp(gnome_triggerlist_topnode->subtrees[n]->nodename,
+					   "gtk-events"))
+					break;
+			}
+			
+			if(n < gnome_triggerlist_topnode->numsubtrees) {
+				GnomeTriggerList* gtk_events_node;
+				
+				gtk_events_node = gnome_triggerlist_topnode->subtrees[n];
+				g_assert(gtk_events_node != NULL);
+				
+				for(n = 0; n < gtk_events_node->numsubtrees; n++) {
+					int signums[5];
+					int nsigs, i;
+					char *signame;
+					gpointer hookdata = gtk_events_node->subtrees[n];
+					
+					g_assert(hookdata != NULL);
+					
+					signame = gtk_events_node->subtrees[n]->nodename;
+					g_assert(signame != NULL);
+					
+					/*
+					 * XXX this is an incredible hack based on a compile-time
+					 * knowledge of what gtk widgets do what, rather than
+					 */
+					if(!strcmp(signame, "activate")) {
+						gtk_type_class(gtk_menu_item_get_type());
+						signums[0] = gtk_signal_lookup(signame, gtk_menu_item_get_type());
+						
+						gtk_type_class(gtk_editable_get_type());
+						signums[1] = gtk_signal_lookup(signame, gtk_editable_get_type());
+						nsigs = 2;
+					} else if(!strcmp(signame, "toggled")) {
+						gtk_type_class(gtk_toggle_button_get_type());
+						signums[0] = gtk_signal_lookup(signame,
+									       gtk_toggle_button_get_type());
+						
+						gtk_type_class(gtk_check_menu_item_get_type());
+						signums[1] = gtk_signal_lookup(signame,
+									       gtk_check_menu_item_get_type());
+						nsigs = 2;
+					} else if(!strcmp(signame, "clicked")) {
+						gtk_type_class(gtk_button_get_type());
+						signums[0] = gtk_signal_lookup(signame, gtk_button_get_type());
+						nsigs = 1;
+					} else {
+						gtk_type_class(gtk_widget_get_type());
+						signums[0] = gtk_signal_lookup(signame, gtk_widget_get_type());
+						nsigs = 1;
+					}
+					
+					for(i = 0; i < nsigs; i++)
+						if(signums[i] > 0)
+							gtk_signal_add_emission_hook(signums[i],
+										     (GtkEmissionHook)relay_gtk_signal,
+										     hookdata);
+				}
+			}
+		}
+		
+		gnome_initialized = TRUE;
+		break;
+	case POPT_CALLBACK_REASON_OPTION:
+		if(opt->val == -1) {
+			g_print ("Gnome %s %s\n", gnome_app_id, gnome_app_version);
+			exit(0);
+			_exit(1);
+		}
+		break;
 	}
-      }
-    }
-
-    gnome_initialized = TRUE;
-    break;
-  case POPT_CALLBACK_REASON_OPTION:
-    if(opt->val == -1) {
-      g_print ("Gnome %s %s\n", gnome_app_id, gnome_app_version);
-      exit(0);
-      _exit(1);
-    }
-    break;
-  }
 }
 
 static const struct poptOption gnome_options[] = {
-  {NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
-   &gnome_init_cb, 0, NULL, NULL},
-  {"version", 'V', POPT_ARG_NONE, NULL, -1},
-  POPT_AUTOHELP
-  {NULL, '\0', 0, NULL, 0}
+	{NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
+	 &gnome_init_cb, 0, NULL, NULL},
+	{"version", 'V', POPT_ARG_NONE, NULL, -1},
+	POPT_AUTOHELP
+	{NULL, '\0', 0, NULL, 0}
 };
 
 static void
 gnome_register_options(void)
 {
-  gnomelib_register_popt_table(gtk_options, "GTK options");
+	gnomelib_register_popt_table(gtk_options, "GTK options");
 
-  gnomelib_register_popt_table(gnome_options, "GNOME GUI options");
+	gnomelib_register_popt_table(gnome_options, "GNOME GUI options");
 }
 
+/**
+ * gnome_init_with_popt_table:
+ * @app_id: Application id.
+ * @app_version: Application version.
+ * @argc: pointer to argc (for example, as received by main)
+ * @argv: pointer to argc (for example, as received by main)
+ * @options: poptOption table with options to parse
+ * @flags: popt flags.
+ * @return_ctx: if non-NULL, the popt context is returned here.
+ *
+ * Initializes the application.  This sets up all of the GNOME
+ * internals and prepares them (imlib, gdk, session-management, triggers,
+ * sound, user preferences)
+ *
+ * Unlike gnome_init, with gnome_init_with_popt_table you can provide
+ * a table of popt options (popt is the command line argument parsing
+ * library).
+ */
 int
 gnome_init_with_popt_table(const char *app_id,
 			   const char *app_version,
@@ -357,32 +380,43 @@ gnome_init_with_popt_table(const char *app_id,
 			   int flags,
 			   poptContext *return_ctx)
 {
-  poptContext ctx;
-  char *appdesc;
-  g_return_val_if_fail(gnome_initialized == FALSE, -1);
-
-  gnomelib_init (app_id, app_version);
-
-  gnome_register_options();
-
-  gnome_client_init();
-
-  if(options) {
-    appdesc = alloca(sizeof(" options") + strlen(app_id));
-    strcpy(appdesc, app_id); strcat(appdesc, " options");
-    gnomelib_register_popt_table(options, appdesc);
-  }
-
-  ctx = gnomelib_parse_args(argc, argv, flags);
-
-  if(return_ctx)
-    *return_ctx = ctx;
-  else
-    poptFreeContext(ctx);
-
-  return 0;
+	poptContext ctx;
+	char *appdesc;
+	g_return_val_if_fail(gnome_initialized == FALSE, -1);
+	
+	gnomelib_init (app_id, app_version);
+	
+	gnome_register_options();
+	
+	gnome_client_init();
+	
+	if(options) {
+		appdesc = alloca(sizeof(" options") + strlen(app_id));
+		strcpy(appdesc, app_id); strcat(appdesc, " options");
+		gnomelib_register_popt_table(options, appdesc);
+	}
+	
+	ctx = gnomelib_parse_args(argc, argv, flags);
+	
+	if(return_ctx)
+		*return_ctx = ctx;
+	else
+		poptFreeContext(ctx);
+	
+	return 0;
 }
 
+/**
+ * gnome_init:
+ * @app_id: Application id.
+ * @app_version: Application version.
+ * @argc: argc (for example, as received by main)
+ * @argv: argv (for example, as received by main)
+ *
+ * Initializes the application.  This sets up all of the GNOME
+ * internals and prepares them (imlib, gdk, session-management, triggers,
+ * sound, user preferences)
+ */
 int
 gnome_init(const char *app_id,
 	   const char *app_version,
