@@ -624,7 +624,7 @@ msgstr " 도메인 %s"
 #: libgnomeui/gnome-authentication-manager.c:268
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr "\"%s\"에 접근하려면 로그인을 해야 합니다."
+msgstr "\"%s\"에 접근하려면 로그인을 해야 합니다\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
