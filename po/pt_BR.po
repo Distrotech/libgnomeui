@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-09 20:31+0100\n"
+"POT-Creation-Date: 2004-03-15 15:25+0100\n"
 "PO-Revision-Date: 2003-10-01 14:07-0400\n"
 "Last-Translator: David Barzilay <barzilay@redhat.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
@@ -140,6 +140,7 @@ msgstr "Sobre %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Arquivo"
 
@@ -197,6 +198,7 @@ msgid "_Game"
 msgstr "_Jogo"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Aj_uda"
 
@@ -387,11 +389,11 @@ msgstr "Configurar a aplicação"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Sobre"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Sobre esta aplicação"
 
@@ -418,7 +420,7 @@ msgstr "Criar uma nova janela"
 msgid "_Close This Window"
 msgstr "Fe_char Esta Janela"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Fechar a janela atual"
 
@@ -853,11 +855,11 @@ msgstr "Entrada GTK"
 msgid "The GTK entry"
 msgstr "A entrada GTK"
 
-#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "ID Histórico"
 
-#: libgnomeui/gnome-file-entry.c:227
+#: libgnomeui/gnome-file-entry.c:230
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -865,19 +867,19 @@ msgstr ""
 "Identificador único para a entrada de arquivo.  Será utilizado para salvar a "
 "lista do histórico."
 
-#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Título do Diálogo Navegar"
 
-#: libgnomeui/gnome-file-entry.c:236
+#: libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
 msgstr "Título para o diálogo de seleção de arquivos."
 
-#: libgnomeui/gnome-file-entry.c:243
+#: libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
 msgstr "Entrada de Diretório"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:247
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -885,35 +887,35 @@ msgstr ""
 "Se a entrada de arquivo está sendo utilizada para introduzir nomes de "
 "diretórios ou nomes completos de arquivos."
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
 msgstr "Modal"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
 msgstr "Se a janela de seleção de arquivos deverá ser modal. "
 
-#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Nome do Arquivo"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:264
 msgid "Filename that should be displayed in the file entry."
 msgstr "Nome do arquivo que deve ser exibido na lista de arquivos"
 
-#: libgnomeui/gnome-file-entry.c:269
+#: libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
 msgstr "Caminho Padrão"
 
-#: libgnomeui/gnome-file-entry.c:270
+#: libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
 msgstr "Caminho padrão para a janela de seleção de arquivos"
 
-#: libgnomeui/gnome-file-entry.c:277
+#: libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:278
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -923,11 +925,11 @@ msgstr ""
 "Você pode utilizar esta propriedade para obter o GnomeEntry  se precisa "
 "modificar ou verificar qualquer um dos seus parâmetros."
 
-#: libgnomeui/gnome-file-entry.c:288
+#: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:289
+#: libgnomeui/gnome-file-entry.c:292
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -937,33 +939,33 @@ msgstr ""
 "Você pode utilizar esta propriedade para obter o GnomeEntry  se precisa "
 "modificar ou verificar qualquer um dos seus parâmetros."
 
-#: libgnomeui/gnome-file-entry.c:299
+#: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:300
+#: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
+#: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
 msgstr "Selecionar arquivo"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path"
 msgstr "Caminho"
 
-#: libgnomeui/gnome-file-entry.c:754
+#: libgnomeui/gnome-file-entry.c:786
 msgid "Path to file"
 msgstr "Caminho para o arquivo"
 
-#: libgnomeui/gnome-file-entry.c:781
+#: libgnomeui/gnome-file-entry.c:813
 msgid "_Browse..."
 msgstr "_Navegar..."
 
-#: libgnomeui/gnome-file-entry.c:782
+#: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
 msgstr "Abrir um selecionador de arquivos para escolher um arquivo"
 
@@ -1405,6 +1407,10 @@ msgstr ""
 msgid "_Debug"
 msgstr "Depurar"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Sair do teste"
+
 #~ msgid "Color Selector"
 #~ msgstr "Selecionador de Cores"
 
@@ -1425,6 +1431,3 @@ msgstr "Depurar"
 
 #~ msgid "Please visit the GNOME Application Crash page for more information"
 #~ msgstr "Consulte a página GNOME Application Crash para mais informações"
-
-#~ msgid "Exit the test"
-#~ msgstr "Sair do teste"
