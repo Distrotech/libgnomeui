@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-08-14 05:14+0200\n"
+"POT-Creation-Date: 2002-08-28 17:50+0200\n"
 "PO-Revision-Date: 2002-08-20 19:55+0300\n"
 "Last-Translator: Peteris Krisjanis <peteris.krisjanis@os.lv>\n"
 "Language-Team: Latvian <ll10nt@os.lv>\n"
@@ -104,7 +104,8 @@ msgid "Translator credits"
 msgstr "Tūlkotājs"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Tūlkotāju kredīti. Šai virknei vajadzētu būt atzīmētai kā tūlkojamai"
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
@@ -255,7 +256,8 @@ msgstr "Izvēlieties laiku no saraksta"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date nesagaidīts, izmantot gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date nesagaidīts, izmantot gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -413,12 +415,13 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI Bibliotēka"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:591
+#: libgnomeui/gnome-ui-init.c:618
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Notikušas vairākas segmentācijas kļūdas: nevaru attēlot kļūdu dialogu\n"
+msgstr ""
+"Notikušas vairākas segmentācijas kļūdas: nevaru attēlot kļūdu dialogu\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:605
+#: libgnomeui/gnome-ui-init.c:632
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -437,8 +440,8 @@ msgid ""
 msgstr ""
 "GNOME Sesijas Pārvaldnieks (process %d) ir avarējis\n"
 "sakarā ar fatālu kļūdu (%s).\n"
-"Kad jūs aizvērsiet šo dialogu, visas aplikācijas aizvērsies un jūsu "
-"sesija tiks beigta.\n"
+"Kad jūs aizvērsiet šo dialogu, visas aplikācijas aizvērsies un jūsu sesija "
+"tiks beigta.\n"
 "Lūdzu saglabājiet visus jūsu failus pirms šī dialoga aizvēršanas."
 
 #: libgnomeui/gnome_segv.c:110
@@ -470,7 +473,9 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Lūdzu apmeklējiet GNOME Aplikāciju Avāriju lapu, lai saņemtu vairāk informācijas"
+msgstr ""
+"Lūdzu apmeklējiet GNOME Aplikāciju Avāriju lapu, lai saņemtu vairāk "
+"informācijas"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -518,7 +523,6 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fails"
 
@@ -576,7 +580,6 @@ msgid "_Game"
 msgstr "_Spēle"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Palīdzība"
 
@@ -767,11 +770,11 @@ msgstr "Konfigurēt šo aplikāciju"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Par"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Par šo aplikāciju"
 
@@ -798,7 +801,7 @@ msgstr "Izveidot jaunu logu"
 msgid "_Close This Window"
 msgstr "_Aizvērt Šo Logu"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Aizvērt pašreizējo logu"
 
@@ -986,8 +989,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Vai faila ievade tiek izmantota lai ievadītu direktoriju nosaukumus vai pilnus "
-"failu nosaukumus."
+"Vai faila ievade tiek izmantota lai ievadītu direktoriju nosaukumus vai "
+"pilnus failu nosaukumus."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1023,9 +1026,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry ir tas, ko faila ievade izmanto lai ievadītu failu nosaukumus. Jūs varat "
-"izmantot šo rekvizītu lai dabūtu GnomeEntry ja jums vajag mainīt vai pārlūkot jebkuru "
-"no tā parametriem."
+"GnomeEntry ir tas, ko faila ievade izmanto lai ievadītu failu nosaukumus. "
+"Jūs varat izmantot šo rekvizītu lai dabūtu GnomeEntry ja jums vajag mainīt "
+"vai pārlūkot jebkuru no tā parametriem."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1037,9 +1040,9 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry ir tas, ko faila ievade izmanto lai ievadītu failu nosaukumus. Jūs varat "
-"izmantot šo rekvizītu lai dabūtu GtkEntry ja jums vajag mainīt vai pārlūkot jebkuru "
-"no tā parametriem."
+"GtkEntry ir tas, ko faila ievade izmanto lai ievadītu failu nosaukumus. Jūs "
+"varat izmantot šo rekvizītu lai dabūtu GtkEntry ja jums vajag mainīt vai "
+"pārlūkot jebkuru no tā parametriem."
 
 #: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
@@ -1160,8 +1163,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Kļūda, ielādējot vai glabājot konfigurācijas informāciju %s. "
-"Daži no konfigurācijas uzstādījumiem varētu nestrādāt, kā nākas."
+"Kļūda, ielādējot vai glabājot konfigurācijas informāciju %s. Daži no "
+"konfigurācijas uzstādījumiem varētu nestrādāt, kā nākas."
 
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
@@ -1194,8 +1197,8 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Ikonu ņēmēja dialogs. Jūs varat lietot šo rekvizītu, lai dabūtu GtkDialog, ja "
-"jums vajag mainīt vai pārlūkots kādu no tā parametriem."
+"Ikonu ņēmēja dialogs. Jūs varat lietot šo rekvizītu, lai dabūtu GtkDialog, "
+"ja jums vajag mainīt vai pārlūkots kādu no tā parametriem."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
@@ -1245,7 +1248,9 @@ msgstr "Ceļš uz ikonām"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "Šeit jums vajadzētu ievadīt direktorijas nosaukumu, kurā atrodas ikonu attēli."
+msgstr ""
+"Šeit jums vajadzētu ievadīt direktorijas nosaukumu, kurā atrodas ikonu "
+"attēli."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1324,7 +1329,5 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Iziet no testa"
-
+#~ msgid "Exit the test"
+#~ msgstr "Iziet no testa"
