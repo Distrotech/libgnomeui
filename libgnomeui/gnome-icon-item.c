@@ -261,6 +261,8 @@ iti_destroy (GtkObject *object)
 	ItiPrivate *priv;
 	GnomeCanvasItem *item;
 
+	/* remember, destroy can be run multiple times! */
+
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (IS_ITI (object));
 
@@ -272,26 +274,33 @@ iti_destroy (GtkObject *object)
 
 	/* Queue redraw of bounding box */
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	if (priv)
+	    gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 
 	/* Free everything */
 
 	if (iti->fontname)
 		g_free (iti->fontname);
+	iti->fontname = NULL;
 
 	if (iti->text && iti->is_text_allocated)
 		g_free (iti->text);
+	iti->text = NULL;
 
 	if (iti->ti)
 		gnome_icon_text_info_free (iti->ti);
+	iti->ti = NULL;
 
-	if (priv->font)
+	if (priv) {
+	    if (priv->font)
 		gdk_font_unref (priv->font);
 
-	if (priv->entry_top)
+	    if (priv->entry_top)
 		gtk_widget_destroy (priv->entry_top);
 
-	g_free (priv);
+	    g_free (priv);
+	    iti->priv = NULL;
+	}
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);

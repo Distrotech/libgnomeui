@@ -219,12 +219,17 @@ gnome_canvas_pixbuf_destroy (GtkObject *object)
 	gcp = (GNOME_CANVAS_PIXBUF (object));
 	priv = gcp->priv;
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	/* remember, destroy can be run multiple times! */
 
-	if (priv->pixbuf)
+	if (priv) {
+	    gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+
+	    if (priv->pixbuf)
 		gdk_pixbuf_unref (priv->pixbuf);
 
-	g_free (priv);
+	    g_free (priv);
+	    gcp->priv = NULL;
+	}
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
