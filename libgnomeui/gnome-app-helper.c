@@ -26,21 +26,6 @@
 #  include <config.h>
 #endif
 
-/* AIX requires this to be the first thing in the file.  */
-#ifndef __GNUC__
-# if HAVE_ALLOCA_H
-#  include <alloca.h>
-# else
-#  ifdef _AIX
- #pragma alloca
-#  else
-#   ifndef alloca /* predefined by HP cc +Olibcalls */
-char *alloca ();
-#   endif
-#  endif
-# endif
-#endif
-
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -1415,6 +1400,8 @@ gnome_app_set_tearoff_menu_titles(GnomeApp *app, GnomeUIInfo *uiinfo,
 {
 	int i;
 	char *ctmp = NULL, *ctmp2;
+
+	g_return_if_fail(above);
 	
 	for(i = 0; uiinfo[i].type != GNOME_APP_UI_ENDOFINFO; i++) {
 		int type;
@@ -1423,14 +1410,15 @@ gnome_app_set_tearoff_menu_titles(GnomeApp *app, GnomeUIInfo *uiinfo,
 
 		if(type == GNOME_APP_UI_INCLUDE)
 		  {
-		    gnome_app_set_tearoff_menu_titles (app, uiinfo->moreinfo, above);
+		    gnome_app_set_tearoff_menu_titles (app, uiinfo[i].moreinfo, above);
 		    continue;
 		  }
 
 		if (type == GNOME_APP_UI_SUBTREE_STOCK)
 			type = GNOME_APP_UI_SUBTREE;
 				
-		if(type != GNOME_APP_UI_SUBTREE)
+		if(type != GNOME_APP_UI_SUBTREE
+		   || !uiinfo[i].widget)
 			continue;
 
 		if(!ctmp)

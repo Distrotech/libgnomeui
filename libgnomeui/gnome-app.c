@@ -36,6 +36,12 @@ static void gnome_app_class_init (GnomeAppClass *class);
 static void gnome_app_init       (GnomeApp      *app);
 static void gnome_app_destroy    (GtkObject     *object);
 static void gnome_app_show       (GtkWidget *widget);
+static void gnome_app_set_arg (GtkObject      *object,
+			       GtkArg         *arg,
+			       guint	      arg_id);
+static void gnome_app_get_arg (GtkObject      *object,
+			       GtkArg         *arg,
+			       guint	      arg_id);
 
 static gchar *read_layout_config  (GnomeApp *app);
 static void   write_layout_config (GnomeApp *app, GnomeDockLayout *layout);
@@ -92,6 +98,11 @@ gnome_app_get_type (void)
 	return gnome_program_type;
 }
 
+enum {
+	ARG_0,
+	ARG_APP_ID
+};
+
 static void
 gnome_app_class_init (GnomeAppClass *class)
 {
@@ -104,8 +115,46 @@ gnome_app_class_init (GnomeAppClass *class)
 	parent_class = gtk_type_class (gtk_window_get_type ());
 
 	object_class->destroy = gnome_app_destroy;
+	object_class->set_arg = gnome_app_set_arg;
+	object_class->get_arg = gnome_app_get_arg;
 
 	widget_class->show = gnome_app_show;
+
+	gtk_object_add_arg_type("GnomeApp::app_id",
+				GTK_TYPE_STRING,
+				GTK_ARG_READWRITE|GTK_ARG_CONSTRUCT,
+				ARG_APP_ID);
+}
+
+static void
+gnome_app_set_arg (GtkObject      *object,
+		   GtkArg         *arg,
+		   guint	      arg_id)
+{
+	GnomeApp *app = (GnomeApp *) object;
+
+	switch(arg_id) {
+	case ARG_APP_ID:
+		g_free(app->name);
+		app->name = g_strdup(GTK_VALUE_STRING(*arg));
+		g_free(app->prefix);
+		app->prefix = g_strconcat("/", app->name, "/", NULL);
+		break;
+	}
+}
+
+static void
+gnome_app_get_arg (GtkObject      *object,
+		   GtkArg         *arg,
+		   guint	      arg_id)
+{
+	GnomeApp *app = (GnomeApp *) object;
+
+	switch(arg_id) {
+	case ARG_APP_ID:
+		GTK_VALUE_STRING(*arg) = app->name;
+		break;
+	}
 }
 
 static void
@@ -202,14 +251,9 @@ layout_changed (GtkWidget *w, gpointer data)
 GtkWidget *
 gnome_app_new(const gchar *appname, const gchar *title)
 {
-	GnomeApp *app;
-
 	g_return_val_if_fail (appname != NULL, NULL);
 		
-	app = GNOME_APP (gtk_type_new (gnome_app_get_type ()));
-	gnome_app_construct (app, appname, title);
-
-	return GTK_WIDGET (app);
+	return GTK_WIDGET(gtk_object_new(gnome_app_get_type(), "app_id", appname, title?"title":NULL, title, NULL));
 }
 
 /**
@@ -227,11 +271,7 @@ gnome_app_construct (GnomeApp *app, const gchar *appname, const gchar *title)
 {
 	g_return_if_fail (appname != NULL);
 
-	app->name = g_strdup (appname);
-	app->prefix = g_strconcat ("/", appname, "/", NULL);
-	
-	if (title)
-		gtk_window_set_title (GTK_WINDOW (app), title);
+	gtk_object_set(GTK_OBJECT(app), "app_id", appname, title?"title":NULL, title, NULL);
 }
 
 static void
