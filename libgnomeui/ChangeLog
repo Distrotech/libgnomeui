@@ -1,3 +1,19 @@
+1998-10-14  David Abilleira  <odaf@nexo.es>
+
+	* gnome-font-picker.[ch] New widget for selecting a font from a
+	simple to use button. This is equivalent to gnome-color-picker but to
+	select fonts.
+
+	* gnome-font-picker-ico.png and .h. Default ico to show inside
+	the button. At this moment header file generation is not
+	automated because I don't want to modify Makefile.am until I
+	know which is the right place to put the icon
+        
+	* libgnomeui.h: Added gnome-font-picker.h to the list of headers.
+
+	* Makefile.am: Added gnome-font-picker.[ch] to the sources.
+
+
 1998-10-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-polygon.[ch]: New polygon item for the canvas.  I

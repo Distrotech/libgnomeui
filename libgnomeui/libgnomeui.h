@@ -26,6 +26,7 @@
 #include "libgnomeui/gnome-dns.h"
 #include "libgnomeui/gnome-entry.h"
 #include "libgnomeui/gnome-file-entry.h"
+#include "libgnomeui/gnome-font-picker.h"
 #include "libgnomeui/gnome-font-selector.h"
 #include "libgnomeui/gnome-geometry.h"
 #include "libgnomeui/gnome-gtk-utils.h"
