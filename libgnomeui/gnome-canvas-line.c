@@ -567,6 +567,7 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GnomeCanvasLine *line;
 	GnomeCanvasPoints *points;
 	GdkColor color;
+	GdkColor *colorp;
 
 	item = GNOME_CANVAS_ITEM (object);
 	line = GNOME_CANVAS_LINE (object);
@@ -627,13 +628,13 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	case ARG_FILL_COLOR_GDK:
-		line->fill_pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
+		colorp = (GdkColor *) GTK_VALUE_BOXED (*arg);
+		line->fill_pixel = colorp->pixel;
 		if (item->canvas->aa) 
-			line->fill_rgba =
-				((color.red & 0xff00) << 16) |
-				((color.green & 0xff00) << 8) |
-				(color.blue & 0xff00) |
-				0xff;
+			line->fill_rgba = (((colorp->red & 0xff00) << 16) |
+					   ((colorp->green & 0xff00) << 8) |
+					   (colorp->blue & 0xff00) |
+					   0xff);
 		else
 			set_line_gc_foreground (line);
 
@@ -642,16 +643,12 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	case ARG_FILL_COLOR_RGBA:
 		line->fill_rgba = GTK_VALUE_UINT (*arg);
-
 		gnome_canvas_item_request_redraw_svp (item, line->fill_svp);
-
 		break;
 
 	case ARG_FILL_STIPPLE:
 		set_stipple (line, GTK_VALUE_BOXED (*arg), FALSE);
-
 		gnome_canvas_item_request_redraw_svp (item, line->fill_svp);
-
 		break;
 
 	case ARG_WIDTH_PIXELS:

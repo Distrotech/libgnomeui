@@ -297,6 +297,7 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GnomeCanvasItem *item;
 	GnomeCanvasRE *re;
 	GdkColor color;
+	GdkColor *colorp;
 
 	item = GNOME_CANVAS_ITEM (object);
 	re = GNOME_CANVAS_RE (object);
@@ -348,24 +349,22 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		}
 
 		gnome_canvas_item_request_redraw_svp (item, re->fill_svp);
-
 		break;
 
 	case ARG_FILL_COLOR_GDK:
 		gnome_canvas_re_set_fill (re, TRUE);
-		re->fill_pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
+		colorp = (GdkColor *) GTK_VALUE_BOXED (*arg);
+		re->fill_pixel = colorp->pixel;
 
 		if (item->canvas->aa)
-			re->fill_color =
-				((color.red & 0xff00) << 16) |
-				((color.green & 0xff00) << 8) |
-				(color.blue & 0xff00) |
-				0xff;
+			re->fill_color = (((colorp->red & 0xff00) << 16) |
+					  ((colorp->green & 0xff00) << 8) |
+					  (colorp->blue & 0xff00) |
+					  0xff);
 		else
 			set_gc_foreground (re->fill_gc, re->fill_pixel);
 
 		gnome_canvas_item_request_redraw_svp (item, re->fill_svp);
-
 		break;
 
 	case ARG_FILL_COLOR_RGBA:
@@ -374,7 +373,6 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		re->fill_color = GTK_VALUE_UINT (*arg);
 
 		gnome_canvas_item_request_redraw_svp (item, re->fill_svp);
-
 		break;
 
 	case ARG_OUTLINE_COLOR:
@@ -398,25 +396,23 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		}
 
 		gnome_canvas_item_request_redraw_svp (item, re->outline_svp);
-
 		break;
 
 	case ARG_OUTLINE_COLOR_GDK:
 		gnome_canvas_re_set_outline (re, TRUE);
+		colorp = (GdkColor *) GTK_VALUE_BOXED (*arg);
 		re->outline_set = TRUE;
-		re->outline_pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
+		re->outline_pixel = colorp->pixel;
 
 		if (item->canvas->aa)
-			re->outline_color =
-				((color.red & 0xff00) << 16) |
-				((color.green & 0xff00) << 8) |
-				(color.blue & 0xff00) |
-				0xff;
+			re->outline_color = (((colorp->red & 0xff00) << 16) |
+					     ((colorp->green & 0xff00) << 8) |
+					     (colorp->blue & 0xff00) |
+					     0xff);
 		else
 			set_gc_foreground (re->outline_gc, re->outline_pixel);
 
 		gnome_canvas_item_request_redraw_svp (item, re->outline_svp);
-
 		break;
 
 	case ARG_OUTLINE_COLOR_RGBA:

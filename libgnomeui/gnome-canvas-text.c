@@ -480,6 +480,7 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GnomeCanvasItem *item;
 	GnomeCanvasText *text;
 	GdkColor color;
+	GdkColor *colorp;
 
 	item = GNOME_CANVAS_ITEM (object);
 	text = GNOME_CANVAS_TEXT (object);
@@ -594,13 +595,13 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	case ARG_FILL_COLOR_GDK:
-		text->pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
+		colorp = (GdkColor *) GTK_VALUE_BOXED (*arg);
+		text->pixel = colorp->pixel;
 		if (item->canvas->aa)
-			text->rgba =
-				((color.red & 0xff00) << 16) |
-				((color.green & 0xff00) << 8) |
-				(color.blue & 0xff00) |
-				0xff;
+			text->rgba = (((colorp->red & 0xff00) << 16) |
+				      ((colorp->green & 0xff00) << 8) |
+				      (colorp->blue & 0xff00) |
+				      0xff);
 		else
 			set_text_gc_foreground (text);
 		break;

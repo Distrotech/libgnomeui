@@ -1,3 +1,12 @@
+1999-01-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_set_arg):
+	Initialize the colorp variable when setting the colors.
+
+	* gnome-canvas-line.c (gnome_canvas_line_set_arg): Likewise.
+
+	* gnome-canvas-text.c (gnome_canvas_text_set_arg): Likewise.
+
 1999-01-11  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* Makefile.am (gtkrc_DATA): Added gtkrc.ja and gtkrc.ko.
