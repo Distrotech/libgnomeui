@@ -20,23 +20,15 @@
 #include <ctype.h>
 #include <gtk/gtk.h>
 
-struct _UIBuilderData {
-  gpointer data;
-  gboolean is_interp;
-  GtkCallbackMarshal relay_func;
-  GtkDestroyNotify destroy_func;
-};
-typedef struct _UIBuilderData *UIBuilderData;
-
 static void gnome_app_do_menu_creation        (GnomeApp *app,
 					       GtkWidget *parent_widget,
 					       GnomeUIInfo *menuinfo,
-					       UIBuilderData uidata);
+					       GnomeUIBuilderData uidata);
 static void gnome_app_do_ui_signal_connect    (GnomeApp *app,
 					       GnomeUIInfo *info_item,
 					       GtkWidget *widget,
 					       gchar *signal_name,
-					       UIBuilderData uidata);
+					       GnomeUIBuilderData uidata);
 static void gnome_app_do_ui_accelerator_setup (GnomeApp *app,
 					       gchar *signal_name,
 					       GtkWidget *widget,
@@ -44,7 +36,7 @@ static void gnome_app_do_ui_accelerator_setup (GnomeApp *app,
 static void gnome_app_do_toolbar_creation     (GnomeApp *app,
 					       GtkWidget *parent_widget,
 					       GnomeUIInfo *tbinfo,
-					       UIBuilderData uidata);
+					       GnomeUIBuilderData uidata);
 static void gnome_app_add_help_menu_entries   (GnomeApp *app,
 					       GtkWidget *parent_widget,
 				               GnomeUIInfo *menuinfo_item);
@@ -53,7 +45,7 @@ static void
 gnome_app_do_menu_creation(GnomeApp *app,
 			   GtkWidget *parent_widget,
 			   GnomeUIInfo *menuinfo,
-			   UIBuilderData uidata)
+			   GnomeUIBuilderData uidata)
 {
   int i;
   int has_stock_pixmaps = FALSE;
@@ -100,11 +92,10 @@ gnome_app_do_menu_creation(GnomeApp *app,
 	    gtk_menu_shell_append(GTK_MENU_SHELL(parent_widget),
 				  menuinfo[i].widget);
 
-	    gnome_app_do_ui_signal_connect(app, 
-					   &menuinfo[i],
-					   menuinfo[i].widget,
-					   "activate",
-					   uidata);
+	    uidata->connect_func(app, 
+				 &menuinfo[i],
+				 "activate",
+				 uidata);
 	    gnome_app_do_ui_accelerator_setup(app,
 					      "activate",
 					      menuinfo[i].widget,
@@ -190,13 +181,11 @@ gnome_app_add_help_menu_entries(GnomeApp *app,
   fclose(f);
 }
 
-void
-gnome_app_create_menus(GnomeApp *app,
-		       GnomeUIInfo *menuinfo)
+void gnome_app_create_menus_custom      (GnomeApp *app,
+					 GnomeUIInfo *menuinfo,
+					 GnomeUIBuilderData uibdata)
 {
   GtkWidget *menubar;
-  struct _UIBuilderData uidata = { NULL, FALSE, NULL, NULL};
-	
   g_return_if_fail(app != NULL);
   g_return_if_fail(GNOME_IS_APP(app));
   g_return_if_fail(app->menubar == NULL);
@@ -205,7 +194,17 @@ gnome_app_create_menus(GnomeApp *app,
   gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
 	
   if(menuinfo)
-    gnome_app_do_menu_creation(app, app->menubar, menuinfo, &uidata);
+    gnome_app_do_menu_creation(app, app->menubar, menuinfo, uibdata);
+}
+
+void
+gnome_app_create_menus(GnomeApp *app,
+		       GnomeUIInfo *menuinfo)
+{
+  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+					NULL, FALSE, NULL, NULL};
+
+  gnome_app_create_menus_custom(app, menuinfo, &uidata);
 }
 
 void
@@ -213,19 +212,12 @@ gnome_app_create_menus_with_data(GnomeApp *app,
 				 GnomeUIInfo *menuinfo,
 				 gpointer data)
 {
-  GtkWidget *menubar;
-  struct _UIBuilderData uidata = { NULL, FALSE, NULL, NULL };
+  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+					NULL, FALSE, NULL, NULL };
 	
-  g_return_if_fail(app != NULL);
-  g_return_if_fail(GNOME_IS_APP(app));
-  g_return_if_fail(app->menubar == NULL);
   uidata.data = data;
 
-  menubar = gtk_menu_bar_new ();
-  gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
-	
-  if(menuinfo)
-    gnome_app_do_menu_creation(app, app->menubar, menuinfo, &uidata);
+  gnome_app_create_menus_custom(app, menuinfo, &uidata);
 }
 
 void gnome_app_create_menus_interp      (GnomeApp *app,
@@ -234,29 +226,22 @@ void gnome_app_create_menus_interp      (GnomeApp *app,
 					 gpointer data,
 					 GtkDestroyNotify destroy_func)
 {
-  GtkWidget *menubar;
-  struct _UIBuilderData uidata = { NULL, FALSE, NULL, NULL };
-	
-  g_return_if_fail(app != NULL);
-  g_return_if_fail(GNOME_IS_APP(app));
-  g_return_if_fail(app->menubar == NULL);
+  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+					NULL, FALSE, NULL, NULL };
+
   uidata.data = data;
   uidata.is_interp = TRUE;
   uidata.relay_func = relay_func;
   uidata.destroy_func = destroy_func;
 
-  menubar = gtk_menu_bar_new ();
-  gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
-	
-  if(menuinfo)
-    gnome_app_do_menu_creation(app, app->menubar, menuinfo, &uidata);
+  gnome_app_create_menus_custom(app, menuinfo, &uidata);
 }
 
 static void
 gnome_app_do_toolbar_creation(GnomeApp *app,
 			      GtkWidget *parent_widget,
 			      GnomeUIInfo *tbinfo,
-			      UIBuilderData uidata)
+			      GnomeUIBuilderData uidata)
 {
   int i;
   GtkWidget *pmap;
@@ -301,11 +286,10 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 					      "clicked",
 					      tbinfo[i].widget,
 					      &tbinfo[i]);
-	    gnome_app_do_ui_signal_connect(app, 
-					   &tbinfo[i],
-					   tbinfo[i].widget,
-					   "clicked",
-					   uidata);
+	    uidata->connect_func(app, 
+				 &tbinfo[i],
+				 "clicked",
+				 uidata);
 	  }
 	  break;
 	case GNOME_APP_UI_SEPARATOR:
@@ -320,11 +304,11 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
   tbinfo[i].widget = parent_widget;
 }
 
-void gnome_app_create_toolbar(GnomeApp *app,
-			      GnomeUIInfo *toolbarinfo)
+void gnome_app_create_toolbar_custom    (GnomeApp *app,
+					 GnomeUIInfo *tbinfo,
+					 GnomeUIBuilderData uibdata)
 {
   GtkWidget *tb;
-  struct _UIBuilderData uidata = {NULL, FALSE, NULL, NULL};
 
   g_return_if_fail(app != NULL);
   g_return_if_fail(GNOME_IS_APP(app));
@@ -332,28 +316,28 @@ void gnome_app_create_toolbar(GnomeApp *app,
 	
   tb = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
   gnome_app_set_toolbar (app, GTK_TOOLBAR (tb));
-	
-  if(toolbarinfo)
-    gnome_app_do_toolbar_creation(app, tb, toolbarinfo, &uidata);
+  if(tbinfo)
+    gnome_app_do_toolbar_creation(app, tb, tbinfo, uibdata);
+}
+
+void gnome_app_create_toolbar(GnomeApp *app,
+			      GnomeUIInfo *toolbarinfo)
+{
+  struct _GnomeUIBuilderData uidata = {GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+				       NULL, FALSE, NULL, NULL};
+
+  gnome_app_create_toolbar_custom(app, toolbarinfo, &uidata);
 }
 
 void gnome_app_create_toolbar_with_data(GnomeApp *app,
 					GnomeUIInfo *toolbarinfo,
 					gpointer data)
 {
-  struct _UIBuilderData uidata = {NULL, FALSE, NULL, NULL};
-  GtkWidget *tb;
+  struct _GnomeUIBuilderData uidata = {GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+				       NULL, FALSE, NULL, NULL};
 
-  g_return_if_fail(app != NULL);
-  g_return_if_fail(GNOME_IS_APP(app));
-  g_return_if_fail(app->toolbar == NULL);
   uidata.data = data;
-	
-  tb = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
-  gnome_app_set_toolbar (app, GTK_TOOLBAR (tb));
-	
-  if(toolbarinfo)
-    gnome_app_do_toolbar_creation(app, app->toolbar, toolbarinfo, &uidata);
+  gnome_app_create_toolbar_custom(app, toolbarinfo, &uidata);
 }
 
 void gnome_app_create_toolbar_interp    (GnomeApp *app,
@@ -362,29 +346,23 @@ void gnome_app_create_toolbar_interp    (GnomeApp *app,
 					 gpointer data,
 					 GtkDestroyNotify destroy_func)
 {
-  struct _UIBuilderData uidata = {NULL, FALSE, NULL, NULL};
-  GtkWidget *tb;
+  struct _GnomeUIBuilderData uidata = {GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+				       NULL, FALSE, NULL, NULL};
 
-  g_return_if_fail(app != NULL);
-  g_return_if_fail(GNOME_IS_APP(app));
-  g_return_if_fail(app->toolbar == NULL);
   uidata.data = data;
   uidata.is_interp = TRUE;
   uidata.relay_func = relay_func;
   uidata.destroy_func = destroy_func;
-	
-  tb = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
-  gnome_app_set_toolbar (app, GTK_TOOLBAR (tb));
-	
-  if(tbinfo)
-    gnome_app_do_toolbar_creation(app, app->toolbar, tbinfo, &uidata);
+
+  gnome_app_create_toolbar_custom(app, tbinfo, &uidata);
 }
 
-static void gnome_app_do_ui_signal_connect    (GnomeApp *app,
-					       GnomeUIInfo *info_item,
-					       GtkWidget *widget,
-					       gchar *signal_name,
-					       UIBuilderData uidata)
+static void
+gnome_app_do_ui_signal_connect    (GnomeApp *app,
+				   GnomeUIInfo *info_item,
+				   GtkWidget *widget,
+				   gchar *signal_name,
+				   GnomeUIBuilderData uidata)
 {
   if(uidata->is_interp)
     gtk_signal_connect_interp(GTK_OBJECT(widget),

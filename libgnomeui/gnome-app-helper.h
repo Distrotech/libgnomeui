@@ -50,6 +50,20 @@ struct _GnomeUIInfo {
 };
 typedef struct _GnomeUIInfo GnomeUIInfo;
 
+typedef struct _GnomeUIBuilderData *GnomeUIBuilderData;
+typedef void (*GnomeUISignalConnectFunc)(GnomeApp *app,
+					 GnomeUIInfo *info_item,
+					 gchar *signal_name,
+					 GnomeUIBuilderData uidata);
+#define GNOME_UISIGFUNC(x) ((void *)x)
+struct _GnomeUIBuilderData {
+  GnomeUISignalConnectFunc connect_func;
+  gpointer data;
+  gboolean is_interp;
+  GtkCallbackMarshal relay_func;
+  GtkDestroyNotify destroy_func;
+};
+
 void gnome_app_create_menus             (GnomeApp *app,
 			                 GnomeUIInfo *menuinfo);
 void gnome_app_create_menus_interp      (GnomeApp *app,
@@ -60,6 +74,9 @@ void gnome_app_create_menus_interp      (GnomeApp *app,
 void gnome_app_create_menus_with_data   (GnomeApp *app,
 			                 GnomeUIInfo *menuinfo,
 				         gpointer data);
+void gnome_app_create_menus_custom      (GnomeApp *app,
+					 GnomeUIInfo *menuinfo,
+					 GnomeUIBuilderData uibdata);
 void gnome_app_create_toolbar           (GnomeApp *app,
 			                 GnomeUIInfo *toolbarinfo);
 void gnome_app_create_toolbar_interp    (GnomeApp *app,
@@ -70,5 +87,7 @@ void gnome_app_create_toolbar_interp    (GnomeApp *app,
 void gnome_app_create_toolbar_with_data (GnomeApp *app,
 			                 GnomeUIInfo *toolbarinfo,
 				         gpointer data);
-
+void gnome_app_create_toolbar_custom    (GnomeApp *app,
+					 GnomeUIInfo *tbinfo,
+					 GnomeUIBuilderData uibdata);
 END_GNOME_DECLS
