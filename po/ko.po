@@ -592,7 +592,7 @@ msgstr "사용자 행동이 필요한 정도."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "설정한 HTTP 프록시는 로그인을 해야 합니다."
+msgstr "설정한 HTTP 프록시는 로그인을 해야 합니다.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
