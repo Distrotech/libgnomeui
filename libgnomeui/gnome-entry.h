@@ -35,10 +35,9 @@
 
 #include <glib.h>
 #include <gtk/gtkcombo.h>
-#include <libgnome/gnome-defs.h>
 
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 
 #define GNOME_TYPE_ENTRY            (gnome_entry_get_type ())
@@ -94,6 +93,6 @@ void         gnome_entry_load_history     (GnomeEntry  *gentry);
 void         gnome_entry_save_history     (GnomeEntry  *gentry);
 void         gnome_entry_clear_history    (GnomeEntry  *gentry);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif

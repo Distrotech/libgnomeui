@@ -1,3 +1,12 @@
+2001-08-24  Darin Adler  <darin@bentspoon.com>
+
+	* gnome-entry.h: Fixed GnomeEntry header to not include the
+	nonexistent gnome-defs.h header.
+
+	* gnome-color-picker.c:  Removed include of <gtk/gtkcompat.h>
+	now that the latest gtk doesn't use that header any more. But
+	this does mean we now require a newer gtk.
+
 2001-08-24  Anders Carlsson  <andersca@codefactory.se>
 
 	* gnome-entry.c: (gnome_entry_get_type), (gnome_entry_class_init),

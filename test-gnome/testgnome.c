@@ -530,7 +530,7 @@ create_entry(void)
 	GtkWidget *entry;
 
 	app = create_newwin(TRUE,"testGNOME","Entry");
-	entry = gnome_entry_new();
+	entry = gnome_entry_new(NULL);
 	g_assert(entry != NULL);
 //	gnome_entry_set_text (GNOME_ENTRY(entry), "Foo");
 	bonobo_window_set_contents(BONOBO_WINDOW(app->app), entry);

@@ -1,3 +1,9 @@
+2001-08-24  Darin Adler  <darin@bentspoon.com>
+
+	reviewed by: <delete if not using a buddy>
+
+	* testgnome.c: (create_entry):
+
 2001-08-01  Anders Carlsson  <andersca@codefactory.se>
 
 	* testgnome.c (verb_HelpAbout_cb): Update for new API.
