@@ -98,7 +98,7 @@ static void gnome_icon_list_marshal_signal_1 (GtkObject     *object,
 
 static GtkContainerClass *parent_class;
 
-static ilist_signals[LAST_SIGNAL] = { 0 };
+static guint ilist_signals[LAST_SIGNAL] = { 0 };
 
 
 guint
@@ -2427,7 +2427,6 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 	GnomeIconTextInfo *ti;
 	GnomeIconTextInfoRow *row;
 	char *row_end;
-	int row_len;
 	char *s, *word_start, *word_end, *old_word_end;
 	char *sub_text;
 	int sub_len;
@@ -2454,8 +2453,6 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 		if (!row_end)
 			row_end = strchr (text, '\0');
 
-		row_len = row_end - text;
-
 		/* Accumulate words from this row until they don't fit in the max_width */
 
 		s = text;
@@ -2463,9 +2460,8 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 		while (s < row_end) {
 			word_start = s;
 			old_word_end = word_end;
-			word_end = word_start + strcspn (word_start, separators);
-			if (word_end == text)
-				word_end++;
+			word_end = word_start + strcspn (word_start, separators) + 1;
+
 			if (word_end > row_end)
 				word_end = row_end;
 
@@ -2520,7 +2516,7 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 					break; /* Stop the loop because we found something that doesn't fit */
 				}
 
-			s = word_end + 1;
+			s = word_end;
 		}
 
 		/* Append row */

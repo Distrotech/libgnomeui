@@ -1,3 +1,10 @@
+1998-05-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_layout_text): I must be stupid or
+	something.  Fixed the bug that caused the ".\n." effect; it was
+	the same bug that put separators on the new row instead of on the
+	row they split.
+
 Mon, 25 May 1998 10:55:37 +0200 Paolo Molaro <lupus@debian.org>
 
 	* gtkspell.[ch]: spell-check widget using ispell.
@@ -100,6 +107,7 @@ Thu May 21 18:43:14 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	parameter.  This is generally useful to have.  It is also required
 	for when the icon list is in GNOME_ICON_LIST_TEXT_RIGHT mode.
 	(draw_icon): Use the proper justification for text.
+	(ilist_signals): Strange, this baby did not have a type (guint).
 
 Wed May 20 17:30:19 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
