@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
-"PO-Revision-Date: 2004-02-18 15:36+0100\n"
+"POT-Creation-Date: 2004-05-03 04:16+0200\n"
+"PO-Revision-Date: 2004-05-03 15:17+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -140,6 +140,7 @@ msgstr "O %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Soubor"
 
@@ -197,6 +198,7 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Nápověda"
 
@@ -387,11 +389,11 @@ msgstr "Nastavit tuto aplikaci"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_O aplikaci"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O této aplikaci"
 
@@ -418,7 +420,7 @@ msgstr "Vytvořit nové okno"
 msgid "_Close This Window"
 msgstr "_Zavřít toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zavřít aktuální okno"
 
@@ -498,26 +500,26 @@ msgstr "_Obsah"
 msgid "View help for this application"
 msgstr "Prohlížet nápovědu pro tuto aplikaci"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Text pod ikonami"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Důležitý text vedle ikon"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Pouze ikony"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Pouze text"
 
-#: libgnomeui/gnome-app-helper.c:2631
+#: libgnomeui/gnome-app-helper.c:2634
 #, c-format
-msgid "Use desktop default (%s)"
-msgstr "Použít výchozí nastavení pracovní plochy (%s)"
+msgid "Use Desktop Default (%s)"
+msgstr "Použít implicitní nastavení pracovní plochy (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -613,16 +615,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Vaše heslo bude přenášeno šifrovaně."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Vyžadována autentizace"
 
 #: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
-msgid " domain %s"
-msgstr " doména %s"
+msgid "You must log in to access %s domain %s\n"
+msgstr "Pro přístup k %s v doméně %s se musíte přihlásit\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Pro přístup k %s se musíte přihlásit\n"
@@ -1070,39 +1072,39 @@ msgstr ""
 "Nastala chyba při nahrávání nebo ukládání informací o vašem nastavení pro %"
 "s. Některé volby vašeho nastavení nemusí fungovat správně."
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "URL, které aktivuje prvek GnomeHRef"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Text"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "Text na tlačítku"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "Ukončit hlad ve světě"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Barva odkazu"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "Barva, kterou se vykresluje odkaz"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Toto tlačítko vás zavede na adresu URI, kterou zobrazuje."
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1404,8 +1406,9 @@ msgstr "_Informovat vývojáře"
 msgid "_Debug"
 msgstr "_Ladit"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ukončit test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukončit test"
 
 #~ msgid "Color Selector"
 #~ msgstr "Výběr barvy"
