@@ -242,10 +242,6 @@ gnome_entry_new (const gchar *history_id)
 	GnomeEntry *gentry;
 
 	gentry = g_object_new (gnome_entry_get_type (),
-			       "use_default_entry_widget", TRUE,
-			       "want_browse_button", FALSE,
-			       "want_clear_button", FALSE,
-			       "want_default_button", FALSE,
 			       "history_id", history_id,
 			       NULL);
 
