@@ -1,3 +1,11 @@
+Fri Apr  3 23:29:11 1998  Havoc Pennington <hp@pobox.com>
+
+	* gnome-messagebox.c, gnome-messagebox.h: Now derived from
+	gnome-dialog.
+	* Makefile.am (libgnomeui_la_SOURCES): Added gnome-dialog.c.
+	(libgnomeuiinclude_HEADERS): Added gnome-dialog.h.
+	* gnome-dialog.c, gnome-dialog.h: New files.
+
 1998-04-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-dateedit.c: #include <string.h>

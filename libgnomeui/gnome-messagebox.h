@@ -17,19 +17,7 @@
 #ifndef __GNOME_MESSAGE_BOX_H__
 #define __GNOME_MESSAGE_BOX_H__
 
-
-#include <gdk/gdk.h>
-#include <gtk/gtkwindow.h>
-#include <libgnome/gnome-defs.h>
-
-
-#define GNOME_MESSAGE_BOX_WIDTH  425
-#define GNOME_MESSAGE_BOX_HEIGHT 125
-#define GNOME_MESSAGE_BOX_BORDER_WIDTH 5
-
-#define GNOME_MESSAGE_BOX_BUTTON_WIDTH 100
-#define GNOME_MESSAGE_BOX_BUTTON_HEIGHT 40
-
+#include "gnome-dialog.h"
 
 BEGIN_GNOME_DECLS
 
@@ -51,24 +39,21 @@ typedef struct _GnomeMessageBoxButton  GnomeMessageBoxButton;
 
 struct _GnomeMessageBox
 {
-  GtkWindow window;
-
-  GList *buttons;
-  int modal : 1;
+  GnomeDialog dialog;
 };
 
 struct _GnomeMessageBoxClass
 {
-  GtkWindowClass parent_class;
-
-  void (* clicked)  (GnomeMessageBox *messagebox, gint button);
+  GnomeDialogClass parent_class;
 };
 
 
 guint      gnome_message_box_get_type       (void);
-GtkWidget* gnome_message_box_new            (gchar           *message,
-					     gchar           *messagebox_type,
-					     ...);
+GtkWidget* gnome_message_box_new (const gchar           *message,
+				  const gchar           *messagebox_type,
+				  ...);
+
+/* Deprecated in favor of gnome_dialog_ variants. Don't use. */
 void       gnome_message_box_set_modal      (GnomeMessageBox *messagebox);
 void       gnome_message_box_set_default    (GnomeMessageBox *messagebox,
 					     gint            button);

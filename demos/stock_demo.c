@@ -470,7 +470,7 @@ fill_table(GtkWidget *window, GtkTable *table)
 
 
 
-void
+int
 main(int argc, char **argv)
 {
 	GtkWidget *window, *hbox, *vbox, *table, *w;
@@ -555,5 +555,6 @@ main(int argc, char **argv)
 			      GTK_TOOLBAR(create_toolbar(window)));
 	gtk_widget_show(window);
 	gtk_main();
+	return 0;
 }
 
