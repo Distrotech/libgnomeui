@@ -1,3 +1,7 @@
+2004-04-16 Iñaki Larrañaga  <dooteo@euskalgnu.org>
+
+	* configure.in: Added "eu" (Basque) to ALL_LINGUAS.
+
 2004-04-16  Alexander Larsson  <alexl@redhat.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c (gtk_file_system_gnome_vfs_init):
