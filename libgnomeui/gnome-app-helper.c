@@ -205,8 +205,9 @@ gnome_app_do_menu_creation(GnomeApp *app,
 				uidata->connect_func(app, &menuinfo[i], "activate", uidata);
 			
 			gnome_app_do_ui_accelerator_setup(app, "activate", &menuinfo[i]);
-			
-			if(menuinfo[i].type == GNOME_APP_UI_SUBTREE)
+
+			g_assert(menuinfo[i].type != NULL);
+			if((menuinfo[i].type == GNOME_APP_UI_SUBTREE) && (menuinfo[i].moreinfo != NULL))
 			{
 				GtkWidget *submenu = gtk_menu_new();
 				gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuinfo[i].widget), submenu);

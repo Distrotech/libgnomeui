@@ -1,3 +1,8 @@
+1998-09-12 Francisco Bustamante <pancho@nuclecu.unam.mx>
+
+	* gnome-app-helper.c (gnome_app_do_menu_creation): added check for
+	NULL moreinfo pointer in a GNOME_APP_UI_SUBTREE case.
+
 1998-09-12  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c, gnome-mdi-child.c: changed some GTK_TYPE_POINTERs
