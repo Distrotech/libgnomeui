@@ -96,7 +96,7 @@ static void                update                  (GnomeAnimator *animator);
 static GnomeAnimatorFrame *append_frame            (GnomeAnimator *animator);
 static void                state_or_style_changed  (GnomeAnimator *animator);
 static void                state_changed           (GtkWidget *widget,
-                                                    guint previous_state);
+                                                    GtkStateType previous_state);
 static void                style_set               (GtkWidget *widget,
                                                     GtkStyle *previous_style);
 static gint                timer_cb                (gpointer data);

@@ -90,7 +90,7 @@ gnome_stock_pixmap_widget_destroy(GtkObject *object)
  * value in prev_state.
  */
 static void
-gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
+gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, GtkStateType prev_state)
 {
 	GnomeStockPixmapWidget *w = GNOME_STOCK_PIXMAP_WIDGET(widget);
 	GnomePixmap *pixmap;
@@ -392,7 +392,7 @@ gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
  * value in prev_state.
  */
 static void
-gnome_stock_state_changed(GtkWidget *widget, guint prev_state)
+gnome_stock_state_changed(GtkWidget *widget, GtkStateType prev_state)
 {
 	GnomeStock *w = GNOME_STOCK(widget);
 	GnomePixmap *pixmap;
