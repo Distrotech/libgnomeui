@@ -1,3 +1,9 @@
+2003-12-05  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-authentication-manager.c:
+	Just show, not show_all. Means we don't show
+	remember checkboxes for old auth dialog.
+
 2003-12-04  Alexander Larsson  <alexl@redhat.com>
 
 	* configure.in:

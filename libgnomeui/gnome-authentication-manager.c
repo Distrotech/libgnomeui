@@ -170,7 +170,7 @@ present_authentication_dialog_nonblocking (CallbackInfo *info)
 	g_signal_connect (dialog, "destroy", 
 			  G_CALLBACK (authentication_dialog_destroyed), info);
 
-	gtk_widget_show_all (GTK_WIDGET (dialog));
+	gtk_widget_show (GTK_WIDGET (dialog));
 
 	return 0;
 }
