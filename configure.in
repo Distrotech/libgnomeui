@@ -70,7 +70,8 @@ AC_PATH_PROGS(PATH_TO_XRDB, "xrdb")
 
 GETTEXT_PACKAGE=libgnomeui-2.0
 AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE")
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",
+                   [Name of gettext translation domain for library])
 
 ALL_LINGUAS="af am ar az be bg bn ca cs cy da de el en_CA en_GB eo es et eu fa fi fr ga gu he hi hr hu id is it ja kn ko li lt lv mi mk ml mn mr ms nl nn no pa pl pt pt_BR ro ru sk sl sq sr sr@ije sr@Latn sv ta th tr uk vi wa yi zh_CN zh_TW"
 AM_GLIB_GNU_GETTEXT
@@ -97,7 +98,7 @@ AC_CHECK_LIB(SM, SmcSaveYourselfDone,
 	$X_LIBS -lICE)
 AC_CHECK_HEADERS(X11/SM/SMlib.h,,GNOME_HAVE_SM=false)
 if test "$GNOME_HAVE_SM" = true; then
-	AC_DEFINE(HAVE_LIBSM)
+	AC_DEFINE(HAVE_LIBSM, 1, [Define to 1 if you have libSM installed])
 fi
 
 AC_SUBST(SM_LIBS)
@@ -113,8 +114,10 @@ dnl
 SOUND_MODULES="esound >= esound_required_version dnl
   audiofile >= audiofile_required_version"
 PKG_CHECK_MODULES(SOUND_TEST, [$SOUND_MODULES], [
-	AC_DEFINE(HAVE_LIBAUDIOFILE)
-	AC_DEFINE(HAVE_ESD)
+	AC_DEFINE(HAVE_LIBAUDIOFILE, 1,
+                  [Define to 1 if you have libaudiofile installed])
+	AC_DEFINE(HAVE_ESD, 1,
+                  [Define to 1 if you have libesd installed])
 	esd_msg=yes
 ],[
 	SOUND_MODULES=""
@@ -132,7 +135,8 @@ dnl
       AC_MSG_WARN(*** (jpeg library not found) ***), -lm)
     if test "$jpeg_ok" = yes; then
       JPEG='jpeg'; LIBJPEG='-ljpeg'
-      AC_DEFINE(HAVE_LIBJPEG)
+      AC_DEFINE(HAVE_LIBJPEG, 1,
+                [Define to 1 if you have libjpeg installed])
     else
      AC_MSG_WARN(*** JPEG thumbnail loader will not be built (jpeg header file not found) ***)
     fi
