@@ -1,3 +1,8 @@
+2000-08-30  Federico Mena Quintero  <federico@helixcode.com>
+
+	* gnome-dock-item.c (gnome_dock_item_size_allocate): Fix unsigned
+	vs. signed confusion, as always.
+
 Wed Aug 30 04:34:07 2000  George Lebl <jirka@5z.com>
 
 	* gnome-href.[ch]: use the gnome-macros.h macros
