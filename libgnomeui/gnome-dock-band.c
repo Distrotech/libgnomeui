@@ -1456,6 +1456,7 @@ gnome_dock_band_insert (GnomeDockBand *band,
   band_child = g_new (GnomeDockBandChild, 1);
   band_child->widget = child;
   band_child->offset = offset;
+  band_child->real_offset = 0;
 
   if (position == 0)
     band->children = g_list_prepend (band->children, band_child);

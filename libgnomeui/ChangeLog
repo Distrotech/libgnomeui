@@ -1,3 +1,9 @@
+1999-01-24  Tomas Ogren  <stric@ing.umu.se>
+
+	* gnome-dock-band.c (gnome_dock_band_get_orientation):
+	fixed initialization of band_child->real_offset to 0 to get rid
+	of an UMR...
+
 1999-01-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-init.c (gnome_init_cb): If gdk_imlib_set_cache_info has
