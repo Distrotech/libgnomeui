@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-06-16 15:33+0200\n"
+"POT-Creation-Date: 2003-01-18 12:33+0100\n"
 "PO-Revision-Date: 2001-07-29 12:32+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -18,16 +18,16 @@ msgid "Credits"
 msgstr "Zasluge"
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
-msgstr "_Pisci"
+msgid "Written by"
+msgstr "Pisci programa"
 
 #: libgnomeui/gnome-about.c:238
-msgid "_Documented by"
-msgstr "_Dokumentatorji"
+msgid "Documented by"
+msgstr "Pisci dokumentacije"
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
-msgstr "_Prevajalci"
+msgid "Translated by"
+msgstr "Prevajalci"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -395,11 +395,11 @@ msgstr "Ta gumb vas bo pripeljal na URI, ki ga kaže."
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Zgodila se je napaka ob poskusu zagona URL upravljalnika.\n"
-"Prosim preglejte pravilnost nastavitev v Kontrolnem centru."
+"Ob poskusu zagona privzetega spletnega brskalnika, se je zgodila napaka.\n"
+"Prosim preglejte svoje nastavitve v nastavitvah Zaželjenih programov."
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
@@ -414,14 +414,14 @@ msgid "GNOME GUI Library"
 msgstr "Knjižnjica grafičnega vmesnika Gnome"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:591
+#: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Zgodilo se je več segmentacijskih napak; ne morem prikazati dialoga z "
 "napako\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:605
+#: libgnomeui/gnome-ui-init.c:631
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -745,8 +745,8 @@ msgstr "Zamenjaj niz"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
-msgstr "_Lastnosti..."
+msgid "_Properties"
+msgstr "_Lastnosti"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -757,8 +757,8 @@ msgstr "Spremeni lastnosti datoteke"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
-msgstr "_Nastavitve..."
+msgid "Prefere_nces"
+msgstr "_Nastavitve"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -872,27 +872,31 @@ msgstr "_Končaj igro"
 msgid "End the current game"
 msgstr "Končaj trenutno igro"
 
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr "_Vsebina"
+
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "Glej pomoč za ta program"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr "Besedilo pod ikonami"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr "Prednostno besedilo poleg ikon"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
 msgstr "Le ikone"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
 msgstr "Le besedilo"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Privzeto po namizju (%s)"
@@ -957,7 +961,7 @@ msgstr "GTK vnos"
 msgid "The GTK entry"
 msgstr "GTK vnos"
 
-#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:175
+#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
 msgstr "Id zgodovine"
 
@@ -969,7 +973,7 @@ msgstr ""
 "Edinstven identifikator za ta vnos datoteke.  To bo uporabljeno za "
 "shranjevanje seznama zgodovine."
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:184
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr "Naziv brskalnega dialoga"
 
@@ -997,7 +1001,7 @@ msgstr "Na vrhu"
 msgid "Whether the Browse file window should be modal."
 msgstr "Ali naj bo okno brskalnika datotek na vrhu."
 
-#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:200
+#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "Ime datoteke"
 
@@ -1163,7 +1167,7 @@ msgstr ""
 "Med nalaganjem ali shranjevanjem podatkov za %s se je zgodila napaka. Možno "
 "je, da nekatere nastavitve ne bodo delovale pravilno."
 
-#: libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1171,27 +1175,27 @@ msgstr ""
 "Edinstven identifikator za vnos ikone.  To bo uporabljeno za shranitev "
 "seznama zgodovine."
 
-#: libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
 msgstr "Naziv dialoga za brksanje ikon."
 
-#: libgnomeui/gnome-icon-entry.c:192
+#: libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
 msgstr "Imenik slik"
 
-#: libgnomeui/gnome-icon-entry.c:193
+#: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
 msgstr "Imenik v katerem naj se iščejo ikone."
 
-#: libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Ime datoteke, ki naj bo prikazano v vnosu ikone."
 
-#: libgnomeui/gnome-icon-entry.c:209
+#: libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
 msgstr "Dialog izbirnika"
 
-#: libgnomeui/gnome-icon-entry.c:210
+#: libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1200,51 +1204,51 @@ msgstr ""
 "GtkDialog, če morate spremeniti ali poizvedeti po katerikoli od njegovih "
 "lastnosti."
 
-#: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:981
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
 msgstr "Brez"
 
-#: libgnomeui/gnome-icon-entry.c:530 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Ne najdem hbox-a, uporabljam običajno izbiranje datotek"
 
-#: libgnomeui/gnome-icon-entry.c:536 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Predogled"
 
-#: libgnomeui/gnome-icon-entry.c:752
+#: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
 msgstr "Dialog izbire ikone"
 
-#: libgnomeui/gnome-icon-entry.c:753
+#: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
 msgstr "Ta dialog vam omogoča izbrati ikono."
 
-#: libgnomeui/gnome-icon-entry.c:759
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
 msgstr "Izbirnik ikone"
 
-#: libgnomeui/gnome-icon-entry.c:760
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
 msgstr "Prosim, izberite ikono, ki jo želite."
 
-#: libgnomeui/gnome-icon-entry.c:984
+#: libgnomeui/gnome-icon-entry.c:982
 msgid "Icon Selector"
 msgstr "Izbirnik ikone"
 
-#: libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "This button will open a window to let you select an icon."
 msgstr "Ta gumb bo odpru okno, ki vam omogoča izbrati ikono."
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1006
 msgid "Browse"
 msgstr "Brskaj"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
 msgstr "Pot do ikon"
 
-#: libgnomeui/gnome-icon-entry.c:1011
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1330,9 +1334,6 @@ msgstr "Sans 14"
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Izhod iz preizkusa"
-
-#~ msgid "_Contents"
-#~ msgstr "_Vsebina"
 
 #~ msgid "Find _Again"
 #~ msgstr "Poišči z_nova"
