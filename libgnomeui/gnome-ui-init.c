@@ -632,7 +632,7 @@ static void gnome_segv_handle(int signum)
                 _exit(1);
         } else if (in_segv > 1) {
                 /* dialog display isn't working out */
-                fprintf(stderr, _("Giving up on displaying error dialog"));
+                fprintf(stderr, _("Multiple segmentation faults occurred; can't display error dialog\n"));
                 _exit(1);
         }
 
