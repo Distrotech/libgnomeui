@@ -1,3 +1,21 @@
+2000-10-03  Martin Baulig  <baulig@suse.de>
+
+	* gnome-entry.h (GnomeEntry): Derive this from GnomeSelector and
+	exclude all deprecated functions is GNOME_EXCLUDE_DEPRECATED is
+	defined.
+	(gnome_entry_gtk_entry): This function is now deprecated.
+	(gnome_entry_set_history_id): Likewise.
+	(gnome_entry_get_history_id): Likewise.
+	(gnome_entry_prepend_history): Deprecated; use the corresponding
+	GnomeSelector function instead.
+	(gnome_entry_append_history): Likewise.
+	(gnome_entry_load_history): Likewise.
+	(gnome_entry_clear_history): Likewise.
+	(gnome_entry_save_history): Likewise.
+
+	* gnome-entry.c (gnome_entry_new_flags): New function.
+	(gnome_entry_construct_full): New function.
+
 2000-09-30  Martin Baulig  <baulig@suse.de>
 
 	* gnome-stock.c: Switch to inline pixbufs.

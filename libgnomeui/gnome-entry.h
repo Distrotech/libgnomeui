@@ -34,8 +34,8 @@
 
 
 #include <glib.h>
-#include <gtk/gtkcombo.h>
 #include <libgnome/gnome-defs.h>
+#include "gnome-selector.h"
 
 
 BEGIN_GNOME_DECLS
@@ -54,23 +54,35 @@ typedef struct _GnomeEntryPrivate GnomeEntryPrivate;
 typedef struct _GnomeEntryClass   GnomeEntryClass;
 
 struct _GnomeEntry {
-	GtkCombo combo;
+	GnomeSelector selector;
 
 	/*< private >*/
 	GnomeEntryPrivate *_priv;
 };
 
 struct _GnomeEntryClass {
-	GtkComboClass parent_class;
+	GnomeSelectorClass parent_class;
 };
 
 
 guint        gnome_entry_get_type         (void) G_GNUC_CONST;
 GtkWidget   *gnome_entry_new              (const gchar *history_id);
+GtkWidget   *gnome_entry_new_flags        (const gchar *history_id,
+                                           guint32      flags);
 
 /* for language bindings and subclassing, use gnome_entry_new */
 void         gnome_entry_construct        (GnomeEntry  *gentry, 
                                            const gchar *history_id);
+
+void         gnome_entry_construct_full   (GnomeEntry  *gentry,
+                                           const gchar *history_id,
+                                           const gchar *dialog_title,
+                                           GtkWidget   *entry_widget,
+                                           GtkWidget   *selector_widget,
+                                           GtkWidget   *browse_dialog,
+                                           guint32      flags);
+
+#ifndef GNOME_EXCLUDE_DEPRECATED
 
 GtkWidget   *gnome_entry_gtk_entry        (GnomeEntry  *gentry);
 
@@ -93,6 +105,8 @@ void         gnome_entry_append_history   (GnomeEntry  *gentry,
 void         gnome_entry_load_history     (GnomeEntry  *gentry);
 void         gnome_entry_save_history     (GnomeEntry  *gentry);
 void         gnome_entry_clear_history    (GnomeEntry  *gentry);
+
+#endif /* not GNOME_EXCLUDE_DEPRECATED */
 
 END_GNOME_DECLS
 
