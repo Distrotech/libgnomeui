@@ -32,7 +32,9 @@ stock_images = \
 	stock_volume.png \
 	stock_midi.png
 
-EXTRA_DIST  = $(stock_images)
+EXTRA_DIST = \
+	$(stock_images)	\
+	copyright.txt
 
 noinst_HEADERS = gnome-stock-pixbufs.h
 BUILT_SOURCES = gnome-stock-pixbufs.h

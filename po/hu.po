@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2002-01-27 07:45+0100\n"
+"POT-Creation-Date: 2002-01-29 12:22+0100\n"
 "PO-Revision-Date: 2002-01-28 20:35+0100\n"
 "Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
@@ -215,7 +215,9 @@ msgstr "Naptár"
 
 #: libgnomeui/gnome-dateedit.c:959
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "a gnome_date_edit_get_date már elavult, használd a gnome_date_edit_get_time-ot"
+msgstr ""
+"a gnome_date_edit_get_date már elavult, használd a gnome_date_edit_get_time-"
+"ot"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -371,7 +373,8 @@ msgstr "GNOME GUI programkönyvtár"
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:592
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Többszörös szegmentációs hiba; hibapárbeszéd megjelenítése sikertelen\n"
+msgstr ""
+"Többszörös szegmentációs hiba; hibapárbeszéd megjelenítése sikertelen\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:606
@@ -499,7 +502,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:155
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Kérlek további információért látogass el a GNOME Application Crash oldalra"
+msgstr ""
+"Kérlek további információért látogass el a GNOME Application Crash oldalra"
 
 #: libgnomeui/gnome-stock-icons.c:135
 msgid "Table Borders"
@@ -1065,14 +1069,20 @@ msgid ""
 "administrator or operating system vendor does not allow you to change. Some "
 "of the settings you have selected may not take effect, or may not be "
 "restored next time you use this application (%s)."
-msgstr "Megpróbáltad megváltoztatni a beállításokat, de a rendszergazda vagy az operációs rendszer terjesztője letiltotta ezt a lehetőséget. A kiválasztott beállítások közül egyeseket nem lehet alkalmazni, vagy nem lehet ezeket legözelebb ezzel az alkalmazással visszaállítani (%s)."
+msgstr ""
+"Megpróbáltad megváltoztatni a beállításokat, de a rendszergazda vagy az "
+"operációs rendszer terjesztője letiltotta ezt a lehetőséget. A kiválasztott "
+"beállítások közül egyeseket nem lehet alkalmazni, vagy nem lehet ezeket "
+"legözelebb ezzel az alkalmazással visszaállítani (%s)."
 
 #: libgnomeui/gnome-gconf-ui.c:115
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
-msgstr "Hiba történt a %s beállításainak betöltése vagy mentése során. Egyes beállítások az elvárttól eltérően működhetnek."
+msgstr ""
+"Hiba történt a %s beállításainak betöltése vagy mentése során. Egyes "
+"beállítások az elvárttól eltérően működhetnek."
 
 #: libgnomeui/gnome-gconf-ui.c:139
 #, c-format

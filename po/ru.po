@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-01-16 01:22+0100\n"
+"POT-Creation-Date: 2002-01-29 12:22+0100\n"
 "PO-Revision-Date: 2001-10-14 16:10+0400\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -13,97 +13,97 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. Authors
-#: libgnomeui/gnome-about.c:95
+#: libgnomeui/gnome-about.c:94
 msgid "Author"
 msgstr "Автор"
 
-#: libgnomeui/gnome-about.c:95 libgnomeui/gnome-about.c:271
+#: libgnomeui/gnome-about.c:94 libgnomeui/gnome-about.c:270
 msgid "Authors"
 msgstr "Авторы"
 
-#: libgnomeui/gnome-about.c:119
+#: libgnomeui/gnome-about.c:118
 msgid "Documenter"
 msgstr "Автор документации"
 
-#: libgnomeui/gnome-about.c:119 libgnomeui/gnome-about.c:282
+#: libgnomeui/gnome-about.c:118 libgnomeui/gnome-about.c:281
 msgid "Documenters"
 msgstr "Авторы документации"
 
-#: libgnomeui/gnome-about.c:147 libgnomeui/gnome-about.c:294
+#: libgnomeui/gnome-about.c:146 libgnomeui/gnome-about.c:293
 msgid "Translator credits"
 msgstr "Благодарности переводчику"
 
-#: libgnomeui/gnome-about.c:241
+#: libgnomeui/gnome-about.c:240
 msgid "Program name"
 msgstr "Название программы"
 
-#: libgnomeui/gnome-about.c:242
+#: libgnomeui/gnome-about.c:241
 msgid "The name of the program"
 msgstr "Название программы"
 
-#: libgnomeui/gnome-about.c:249
+#: libgnomeui/gnome-about.c:248
 msgid "Program version"
 msgstr "Версия программы"
 
-#: libgnomeui/gnome-about.c:250
+#: libgnomeui/gnome-about.c:249
 msgid "The version of the program"
 msgstr "Версия программы"
 
-#: libgnomeui/gnome-about.c:256
+#: libgnomeui/gnome-about.c:255
 msgid "Copyright string"
 msgstr "Авторское право"
 
-#: libgnomeui/gnome-about.c:257
+#: libgnomeui/gnome-about.c:256
 msgid "Copyright information for the program"
 msgstr "Информация об авторских правах на программу"
 
-#: libgnomeui/gnome-about.c:264
+#: libgnomeui/gnome-about.c:263
 msgid "Comments string"
 msgstr "Строка комментария"
 
-#: libgnomeui/gnome-about.c:265
+#: libgnomeui/gnome-about.c:264
 msgid "Comments about the program"
 msgstr "Комментарий о программе"
 
-#: libgnomeui/gnome-about.c:272
+#: libgnomeui/gnome-about.c:271
 msgid "List of authors of the programs"
 msgstr "Список авторов программы"
 
-#: libgnomeui/gnome-about.c:274
+#: libgnomeui/gnome-about.c:273
 msgid "Author entry"
 msgstr "Автор"
 
-#: libgnomeui/gnome-about.c:275
+#: libgnomeui/gnome-about.c:274
 msgid "A single author entry"
 msgstr "Автор программы"
 
-#: libgnomeui/gnome-about.c:283
+#: libgnomeui/gnome-about.c:282
 msgid "List of people documenting the program"
 msgstr "Список людей задокументировавших программу"
 
-#: libgnomeui/gnome-about.c:285
+#: libgnomeui/gnome-about.c:284
 msgid "Documenter entry"
 msgstr "Автор документации"
 
-#: libgnomeui/gnome-about.c:286
+#: libgnomeui/gnome-about.c:285
 msgid "A single documenter entry"
 msgstr "Автор документации к программе"
 
-#: libgnomeui/gnome-about.c:295
+#: libgnomeui/gnome-about.c:294
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Благодарности переводчикам. Эта строка должна быть помечена для перевода"
 
-#: libgnomeui/gnome-about.c:302 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:301 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Эмблема"
 
-#: libgnomeui/gnome-about.c:303
+#: libgnomeui/gnome-about.c:302
 msgid "A logo for the about box"
 msgstr "Эмблема для окна \"О программе\""
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:365
 #, c-format
 msgid "About %s"
 msgstr "О программе %s"
@@ -135,31 +135,31 @@ msgstr ""
 msgid "Level of user activity required."
 msgstr ""
 
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:832
 msgid "Specify session management ID"
 msgstr ""
 
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:832
 msgid "ID"
 msgstr ""
 
-#: libgnomeui/gnome-client.c:838
+#: libgnomeui/gnome-client.c:835
 msgid "Specify prefix of saved configuration"
 msgstr ""
 
-#: libgnomeui/gnome-client.c:838
+#: libgnomeui/gnome-client.c:835
 msgid "PREFIX"
 msgstr "ПРЕФИКС"
 
-#: libgnomeui/gnome-client.c:841
+#: libgnomeui/gnome-client.c:838
 msgid "Disable connection to session manager"
 msgstr "Отключить соединение с диспетчером сеанса"
 
-#: libgnomeui/gnome-client.c:947
+#: libgnomeui/gnome-client.c:944
 msgid "Session management"
 msgstr "Управление сеансом"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2478
 msgid "Cancel Logout"
 msgstr "Отменить выход"
 
@@ -171,59 +171,59 @@ msgstr "Получены неправильные данные цвета\n"
 msgid "Pick a color"
 msgstr "Выбрать цвет"
 
-#: libgnomeui/gnome-dateedit.c:436
+#: libgnomeui/gnome-dateedit.c:435
 msgid "Time"
 msgstr "Время"
 
-#: libgnomeui/gnome-dateedit.c:437
+#: libgnomeui/gnome-dateedit.c:436
 #, fuzzy
 msgid "The time currently selected"
 msgstr "Сохранить текущий файл"
 
-#: libgnomeui/gnome-dateedit.c:449
+#: libgnomeui/gnome-dateedit.c:448
 msgid "DateEdit Flags"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:450
+#: libgnomeui/gnome-dateedit.c:449
 msgid "Flags for how DateEdit looks"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:459
+#: libgnomeui/gnome-dateedit.c:458
 msgid "Lower Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:460
+#: libgnomeui/gnome-dateedit.c:459
 msgid "Lower hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:470
+#: libgnomeui/gnome-dateedit.c:469
 msgid "Upper Hour"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:471
+#: libgnomeui/gnome-dateedit.c:470
 msgid "Upper hour in the time popup selector"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:481
+#: libgnomeui/gnome-dateedit.c:480
 msgid "Initial Time"
 msgstr ""
 
-#: libgnomeui/gnome-dateedit.c:482
+#: libgnomeui/gnome-dateedit.c:481
 msgid "The initial time"
 msgstr ""
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:728
+#: libgnomeui/gnome-dateedit.c:727
 msgid "Calendar"
 msgstr "Календарь"
 
-#: libgnomeui/gnome-dateedit.c:960
+#: libgnomeui/gnome-dateedit.c:959
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date устарело, используйте gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:156
+#: libgnomeui/gnome-font-picker.c:155
 msgid "Title"
 msgstr "Заголовок"
 
@@ -540,140 +540,140 @@ msgid "Hint for item 2"
 msgstr ""
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:83 libgnomeui/gnome-app-helper.h:513
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
 msgid "_File"
 msgstr "Файл"
 
-#: libgnomeui/gnome-app-helper.c:84
+#: libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
 msgstr "Файл/"
 
-#: libgnomeui/gnome-app-helper.c:85 libgnomeui/gnome-app-helper.h:516
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
 msgid "_Edit"
 msgstr "Правка"
 
-#: libgnomeui/gnome-app-helper.c:86
+#: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
 msgstr "Правка/"
 
-#: libgnomeui/gnome-app-helper.c:87 libgnomeui/gnome-app-helper.h:519
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
 msgid "_View"
 msgstr "Вид"
 
-#: libgnomeui/gnome-app-helper.c:88
+#: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
 msgstr "Вид/"
 
-#: libgnomeui/gnome-app-helper.c:89 libgnomeui/gnome-app-helper.h:522
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
 msgid "_Settings"
 msgstr "Установки"
 
-#: libgnomeui/gnome-app-helper.c:90
+#: libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
 msgstr "Установки/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:91 libgnomeui/gnome-app-helper.h:295
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
 msgid "_New"
 msgstr "Новый"
 
-#: libgnomeui/gnome-app-helper.c:92
+#: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
 msgstr "Новый/"
 
-#: libgnomeui/gnome-app-helper.c:93 libgnomeui/gnome-app-helper.h:525
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
 msgid "Fi_les"
 msgstr "Файлы"
 
-#: libgnomeui/gnome-app-helper.c:94
+#: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
 msgstr "Файлы/"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:528
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
 msgid "_Windows"
 msgstr "Окна"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:534
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
 msgid "_Game"
 msgstr "Игра"
 
-#: libgnomeui/gnome-app-helper.c:97 libgnomeui/gnome-app-helper.h:531
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 msgid "_Help"
 msgstr "Справка"
 
-#: libgnomeui/gnome-app-helper.c:98
+#: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
 msgstr "Окна/"
 
 #. Open
-#: libgnomeui/gnome-app-helper.c:110
+#: libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
 msgstr "Открыть..."
 
-#: libgnomeui/gnome-app-helper.c:110
+#: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
 msgstr "Открыть файл"
 
 #. Save
-#: libgnomeui/gnome-app-helper.c:115
+#: libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
 msgstr "Сохранить"
 
-#: libgnomeui/gnome-app-helper.c:115
+#: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
 msgstr "Сохранить текущий файл"
 
 #. Save As
-#: libgnomeui/gnome-app-helper.c:120
+#: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
 msgstr "Сохранить как..."
 
-#: libgnomeui/gnome-app-helper.c:121
+#: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
 msgstr "Сохранить текущий файл под другим именем"
 
 #. Revert
-#: libgnomeui/gnome-app-helper.c:126
+#: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
 msgstr "Восстановить"
 
-#: libgnomeui/gnome-app-helper.c:127
+#: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
 msgstr "Восстановить из сохранённой версии файла"
 
 #. Print
-#: libgnomeui/gnome-app-helper.c:132
+#: libgnomeui/gnome-app-helper.c:131
 msgid "_Print"
 msgstr "Печать"
 
-#: libgnomeui/gnome-app-helper.c:132
+#: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
 msgstr "Напечатать текущий файл"
 
 #. Print Setup
-#: libgnomeui/gnome-app-helper.c:137
+#: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
 msgstr "Настройка печати..."
 
-#: libgnomeui/gnome-app-helper.c:138
+#: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
 msgstr "Установка настроек страницы для вашего текущего принтера"
 
 #. Close
-#: libgnomeui/gnome-app-helper.c:143
+#: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
 msgstr "Закрыть"
 
-#: libgnomeui/gnome-app-helper.c:143
+#: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
 msgstr "Закрыть текущий файл"
 
 #. Exit
-#: libgnomeui/gnome-app-helper.c:148
+#: libgnomeui/gnome-app-helper.c:147
 msgid "E_xit"
 msgstr "Выход"
 
-#: libgnomeui/gnome-app-helper.c:148
+#: libgnomeui/gnome-app-helper.c:147
 msgid "Exit the program"
 msgstr "Выйти из программы"
 
@@ -681,93 +681,93 @@ msgstr "Выйти из программы"
 #. * The "Edit" menu
 #.
 #. Cut
-#: libgnomeui/gnome-app-helper.c:156
+#: libgnomeui/gnome-app-helper.c:155
 msgid "C_ut"
 msgstr "Вырезать"
 
-#: libgnomeui/gnome-app-helper.c:156
+#: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
 msgstr "Вырезать выделение"
 
 #. 10
 #. Copy
-#: libgnomeui/gnome-app-helper.c:162
+#: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
 msgstr "Скопировать"
 
-#: libgnomeui/gnome-app-helper.c:162
+#: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
 msgstr "Скопировать выделение"
 
 #. Paste
-#: libgnomeui/gnome-app-helper.c:167
+#: libgnomeui/gnome-app-helper.c:166
 msgid "_Paste"
 msgstr "Вставить"
 
-#: libgnomeui/gnome-app-helper.c:167
+#: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
 msgstr "Вставить в буфер обмена"
 
 #. Clear
-#: libgnomeui/gnome-app-helper.c:172
+#: libgnomeui/gnome-app-helper.c:171
 msgid "C_lear"
 msgstr "Очистить"
 
-#: libgnomeui/gnome-app-helper.c:172
+#: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
 msgstr "Очистить выделение"
 
 #. Undo
-#: libgnomeui/gnome-app-helper.c:177
+#: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
 msgstr "Откат"
 
-#: libgnomeui/gnome-app-helper.c:177
+#: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
 msgstr "Отменить последнее действие"
 
 #. Redo
-#: libgnomeui/gnome-app-helper.c:182
+#: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
 msgstr "Возврат"
 
-#: libgnomeui/gnome-app-helper.c:182
+#: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
 msgstr "Повторить отменённое действие"
 
 #. Find
-#: libgnomeui/gnome-app-helper.c:187
+#: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
 msgstr "Найти..."
 
-#: libgnomeui/gnome-app-helper.c:187
+#: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
 msgstr "Поиск строки"
 
 #. Find Again
-#: libgnomeui/gnome-app-helper.c:192
+#: libgnomeui/gnome-app-helper.c:191
 msgid "Find _Again"
 msgstr "Искать снова"
 
-#: libgnomeui/gnome-app-helper.c:193
+#: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
 msgstr "Повторный поиск той же строки"
 
 #. Replace
-#: libgnomeui/gnome-app-helper.c:198
+#: libgnomeui/gnome-app-helper.c:197
 msgid "_Replace..."
 msgstr "Заменить..."
 
-#: libgnomeui/gnome-app-helper.c:198
+#: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
 msgstr "Заменить строку"
 
 #. Properties
-#: libgnomeui/gnome-app-helper.c:203
+#: libgnomeui/gnome-app-helper.c:202
 msgid "_Properties..."
 msgstr "Свойства..."
 
-#: libgnomeui/gnome-app-helper.c:204
+#: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
 msgstr "Изменить свойства файла"
 
@@ -775,11 +775,11 @@ msgstr "Изменить свойства файла"
 #. * The Settings menu
 #.
 #. Settings
-#: libgnomeui/gnome-app-helper.c:212
+#: libgnomeui/gnome-app-helper.c:211
 msgid "_Preferences..."
 msgstr "Настройки..."
 
-#: libgnomeui/gnome-app-helper.c:213
+#: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
 msgstr "Настроить приложение"
 
@@ -788,123 +788,123 @@ msgstr "Настроить приложение"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "О программе"
 
-#: libgnomeui/gnome-app-helper.c:223
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Об этой программе"
 
-#: libgnomeui/gnome-app-helper.c:226
+#: libgnomeui/gnome-app-helper.c:225
 msgid "_Select All"
 msgstr "Выделить все"
 
-#: libgnomeui/gnome-app-helper.c:227
+#: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
 msgstr "Выделить все"
 
 #.
 #. * Window menu
 #.
-#: libgnomeui/gnome-app-helper.c:235
+#: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
 msgstr "Создать новое окно"
 
-#: libgnomeui/gnome-app-helper.c:236
+#: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
 msgstr "Создать новое окно"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
 msgstr "Закрыть это окно"
 
-#: libgnomeui/gnome-app-helper.c:241
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Закрыть текущее окно"
 
 #.
 #. * The "Game" menu
 #.
-#: libgnomeui/gnome-app-helper.c:249
+#: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
 msgstr "Новая игра"
 
-#: libgnomeui/gnome-app-helper.c:250
+#: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
 msgstr "Запустить новую игру"
 
-#: libgnomeui/gnome-app-helper.c:254
+#: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
 msgstr "Пауза в игре"
 
-#: libgnomeui/gnome-app-helper.c:255
+#: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
 msgstr "Приостановить игру"
 
-#: libgnomeui/gnome-app-helper.c:259
+#: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
 msgstr "Перезапустить игру"
 
-#: libgnomeui/gnome-app-helper.c:260
+#: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
 msgstr "Перезапустить игру"
 
-#: libgnomeui/gnome-app-helper.c:264
+#: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
 msgstr "Отменить ход"
 
-#: libgnomeui/gnome-app-helper.c:265
+#: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
 msgstr "Отменить последний ход"
 
-#: libgnomeui/gnome-app-helper.c:269
+#: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
 msgstr "Вернуть ход"
 
-#: libgnomeui/gnome-app-helper.c:270
+#: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
 msgstr "Вернуть отменённый ход"
 
-#: libgnomeui/gnome-app-helper.c:274
+#: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
 msgstr "Совет"
 
-#: libgnomeui/gnome-app-helper.c:275
+#: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
 msgstr "Получить подсказку для следующего хода"
 
 #. 30
-#: libgnomeui/gnome-app-helper.c:280
+#: libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
 msgstr "Очки..."
 
-#: libgnomeui/gnome-app-helper.c:281
+#: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
 msgstr "Просмотр очков"
 
-#: libgnomeui/gnome-app-helper.c:285
+#: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
 msgstr "Конец игры"
 
-#: libgnomeui/gnome-app-helper.c:286
+#: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
 msgstr "Конец текущей игры"
 
-#: libgnomeui/gnome-app-helper.c:2574
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Both text and icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2575
+#: libgnomeui/gnome-app-helper.c:2574
 msgid "Icons only"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2576
+#: libgnomeui/gnome-app-helper.c:2575
 #, fuzzy
 msgid "Text only"
 msgstr "Текст"
 
-#: libgnomeui/gnome-app-helper.c:2627
+#: libgnomeui/gnome-app-helper.c:2626
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
@@ -977,76 +977,76 @@ msgstr "Выбрать файл"
 msgid "Browse..."
 msgstr "Просмотр..."
 
-#: libgnomeui/gnome-font-picker.c:67
+#: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:68
+#: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "В чащах юга жил-был цитрус. Да, но фальшивый экземпляръ!"
 
-#: libgnomeui/gnome-font-picker.c:69
+#: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
 msgstr "Выбрать шрифт"
 
-#: libgnomeui/gnome-font-picker.c:157
+#: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
 msgstr "Заголовок диалога выбора"
 
-#: libgnomeui/gnome-font-picker.c:165
+#: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
 msgstr "Режим"
 
-#: libgnomeui/gnome-font-picker.c:166
+#: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
 msgstr "Режим действия выбора шрифта"
 
-#: libgnomeui/gnome-font-picker.c:175
+#: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
 msgstr "Название шрифта"
 
-#: libgnomeui/gnome-font-picker.c:176
+#: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
 msgstr "Название выбранного шрифта"
 
-#: libgnomeui/gnome-font-picker.c:185 libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
 msgid "Font"
 msgstr "Шрифт"
 
-#: libgnomeui/gnome-font-picker.c:186
+#: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:193
+#: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
 msgstr "Текст для просмотра"
 
-#: libgnomeui/gnome-font-picker.c:194
+#: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
 msgstr "Текст показываемый в строке просмотра"
 
-#: libgnomeui/gnome-font-picker.c:202
+#: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:203
+#: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:211
+#: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:212
+#: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
 msgstr ""
 
-#: libgnomeui/gnome-font-picker.c:222
+#: libgnomeui/gnome-font-picker.c:221
 #, fuzzy
 msgid "Show size"
 msgstr "Показать размер шрифта"
 
-#: libgnomeui/gnome-font-picker.c:223
+#: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
 msgstr ""
 
