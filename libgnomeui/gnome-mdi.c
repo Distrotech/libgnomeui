@@ -1040,10 +1040,6 @@ static void set_active_view (GnomeMDI *mdi, GtkWidget *view)
 	GnomeMDIChild *old_child;
 	GtkWidget *old_view;
 
-#ifdef GNOME_ENABLE_DEBUG
-	g_message("setting active_view to %08lx\n", view);
-#endif
-
 	old_child = mdi->active_child;
 	old_view = mdi->active_view;
 

@@ -569,9 +569,9 @@ install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
 
   if (uiinfo->hint)
     {
-      g_object_set_data (uiinfo->widget,
+      g_object_set_data (G_OBJECT (uiinfo->widget),
 			 apphelper_statusbar_hint,
-			 L_(uiinfo->hint));
+			 (gpointer)(L_(uiinfo->hint)));
 
       g_signal_connect (G_OBJECT (uiinfo->widget),
 			"select",
