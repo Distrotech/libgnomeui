@@ -21,6 +21,5 @@ libgnomeui/gnome-paper-selector.c
 libgnomeui/gnome-popup-help.c
 libgnomeui/gnome-pouch.c
 libgnomeui/gnome-recently-used.c
-libgnomeui/gnome-selector.c
 libgnomeui/gnome_segv.c
 libgnomeui/oafgnome.c
