@@ -1,3 +1,13 @@
+Fri Sep 15 18:49:34 2000  George Lebl <jirka@5z.com>
+
+	* gnome-animator.c, gnome-helpsys.c, gnome-selector.c: don't set
+	  parent_class again, it's set in get_type in the boilerplates
+
+	* gnome-ditem-edit.c: use boilerplates, remove PanelApplet type
+	  from the default set of types.  1) it's not supported natively
+	  by gnome-libs, and 2) it may go away in 2.0 panel, depending
+	  on how these things will be handled
+
 Thu Sep 14 19:44:26 2000  George Lebl <jirka@5z.com>
 
 	* gnome-app.c: use GParam

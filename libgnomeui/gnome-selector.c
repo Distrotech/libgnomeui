@@ -158,8 +158,6 @@ gnome_selector_class_init (GnomeSelectorClass *class)
     object_class = (GtkObjectClass *) class;
     gobject_class = (GObjectClass *) class;
 
-    parent_class = gtk_type_class (gtk_vbox_get_type ());
-
     gnome_selector_signals [CHANGED_SIGNAL] =
 	gtk_signal_new ("changed",
 			GTK_RUN_LAST,

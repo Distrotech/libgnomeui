@@ -156,7 +156,6 @@ gnome_help_view_class_init (GnomeHelpViewClass *class)
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
 	widget_class = (GtkWidgetClass *) class;
-	parent_class = gtk_type_class(gtk_type_parent(GTK_CLASS_TYPE(object_class)));
 
 	object_class->destroy = gnome_help_view_destroy;
 

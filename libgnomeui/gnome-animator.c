@@ -131,8 +131,6 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
   gobject_class = (GObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
 
-  parent_class = gtk_type_class (gtk_misc_get_type ());
-
   g_object_class_install_param (gobject_class,
 				PARAM_LOOP_TYPE,
 				g_param_spec_enum ("loop_type",
