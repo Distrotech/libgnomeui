@@ -35,7 +35,6 @@
 #include "testgnome.h"
 #include "bomb.xpm"
 
-#ifdef FIXME
 static const gchar *authors[] = {
 	"Richard Hestilow",
 	"Federico Mena",
@@ -47,7 +46,6 @@ static const gchar *authors[] = {
 	"Martin Baulig",
 	NULL
 };
-#endif
 
 static void
 test_exit (TestGnomeApp *app)
@@ -88,16 +86,15 @@ verb_FileExit_cb (BonoboUIComponent *uic, gpointer user_data, const char *cname)
 static void
 verb_HelpAbout_cb (BonoboUIComponent *uic, gpointer user_data, const char *cname)
 {
-#ifdef FIXME
+	const char *documentors[] = { "Documentor1", "Documentor2", NULL };
 	GtkWidget *about = gnome_about_new ("GNOME Test Program", VERSION,
 					    "(C) 1998-2001 The Free Software Foundation",
 					    "Program to display GNOME functions.",
 					    authors,
-					    NULL,
+					    documentors,
 					    NULL,
 					    NULL);
 	gtk_widget_show (about);
-#endif
 }
 
 static BonoboUIVerb verbs[] = {
@@ -115,6 +112,34 @@ quit_test (GtkWidget *caller, GdkEvent *event, TestGnomeApp *app)
 
         return TRUE;
 }
+
+/* The bonobo version is a bit fucked by ignoring absolute filenames,
+ * so this just deals with those */
+static void
+our_bonobo_ui_util_set_ui (BonoboUIComponent *component,
+			   const char        *app_prefix,
+			   const char        *file_name,
+			   const char        *app_name)
+{
+	char *ui;
+	BonoboUINode *node;
+
+	if (bonobo_ui_component_get_container (component) == CORBA_OBJECT_NIL) {
+		g_warning ("Component must be associated with a container first "
+			   "see bonobo_component_set_container");
+		return;
+	}
+	
+	node = bonobo_ui_util_new_ui (component, file_name, app_prefix, app_name);
+
+	ui = bonobo_ui_node_to_string (node, TRUE);
+
+	bonobo_ui_node_free (node);
+
+	if (ui)
+		bonobo_ui_component_set (component, "/", ui, NULL);
+}
+
 
 static TestGnomeApp *
 create_newwin(gboolean normal, gchar *appname, gchar *title)
@@ -134,7 +159,11 @@ create_newwin(gboolean normal, gchar *appname, gchar *title)
 	bonobo_ui_component_set_container (app->ui_component,
 					   BONOBO_OBJREF(app->ui_container),
 					   NULL);
-	bonobo_ui_util_set_ui (app->ui_component, GNOMEUIDATADIR, "testgnome.xml", appname);
+	if (g_file_test ("testgnome.xml", G_FILE_TEST_EXISTS)) {
+		our_bonobo_ui_util_set_ui (app->ui_component, GNOMEUIDATADIR, "testgnome.xml", appname);
+	} else {
+		bonobo_ui_util_set_ui (app->ui_component, GNOMEUIDATADIR, "testgnome.xml", appname);
+	}
 	bonobo_ui_component_add_verb_list_with_data (app->ui_component, verbs, app);
 	
 	return app;
@@ -620,6 +649,43 @@ create_file_entry(void)
 }
 
 /*
+ * IconEntry
+ */
+static void
+create_icon_entry(void)
+{
+	TestGnomeApp *app;
+	GtkWidget *entry;
+
+	app = create_newwin (TRUE, "testGNOME", "Icon Entry");
+
+	entry = gnome_icon_entry_new ("Foo", "Icon");
+
+	bonobo_window_set_contents (BONOBO_WINDOW (app->app), entry);
+	gtk_widget_show (entry);
+	gtk_widget_show (app->app);
+}
+
+/*
+ * PixmapEntry
+ */
+static void
+create_pixmap_entry(void)
+{
+	TestGnomeApp *app;
+	GtkWidget *entry;
+
+	app = create_newwin (TRUE, "testGNOME", "Pixmap Entry");
+
+	entry = gnome_pixmap_entry_new ("Foo", "Pixmap", TRUE);
+
+	bonobo_window_set_contents (BONOBO_WINDOW (app->app), entry);
+	gtk_widget_show (entry);
+	gtk_widget_show (app->app);
+}
+
+
+/*
  * FontPicker
  */
 #if 0
@@ -971,7 +1037,6 @@ create_unit_spinner (void)
 static void
 create_about_box (void)
 {
-	const char *authors[] = { "Author1", "Author2", "Author3", NULL };
 	const char *documentors[] = { "Documentor1", "Documentor2", NULL };
 	GtkWidget *about_box = gnome_about_new ("Test GNOME",
 						VERSION,
@@ -998,6 +1063,8 @@ main (int argc, char **argv)
 /*		{ "druid", create_druid }, */
 		{ "entry", create_entry },
 		{ "file entry", create_file_entry },
+		{ "pixmap entry", create_pixmap_entry },
+		{ "icon entry", create_icon_entry },
 /*		{ "font picker", create_font_picker },*/
 		{ "href", create_href },
 		{ "icon list", create_icon_list },

@@ -1,3 +1,10 @@
+Sat Sep 29 15:51:17 2001  George Lebl <jirka@5z.com>
+
+	* testgnome.c: cut-n-paste a bonobo function so that we can
+	  load the ui from the current directory.  Also add test cases for
+	  the icon entry, the pixmap entry, and make the about menu item
+	  work
+
 Tue Sep 04 19:11:54 2001  George Lebl <jirka@5z.com>
 
 	* testgnome.c: add a testcase for gnome-about
