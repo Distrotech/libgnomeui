@@ -1,14 +1,16 @@
-# Gnome yn Gymraeg.
+# lignomeui yn Gymraeg.
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
 # www.gyfieithu.co.uk <kyfieithu@dotmon.com>, 2003
 # and gnome-cy@pengwyn.linux.org.uk mailing list.
+# Dafydd Harries <daf@parnassus.ath.cx>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2003-05-30 23:38+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-19 02:57+0100\n"
+"PO-Revision-Date: 2003-08-14 21:27+0100\n"
 "Last-Translator: Dafydd Harries <daf@parnassus.ath.cx>\n"
 "Language-Team: Cymraeg <gnome-cy@pengwyn.linux.org.uk>\n"
 "MIME-Version: 1.0\n"
@@ -139,6 +141,7 @@ msgstr "Ynghylch %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ffeil"
 
@@ -156,7 +159,7 @@ msgstr "_Golygu/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "_Gweld"
+msgstr "_Golwg"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
@@ -196,6 +199,7 @@ msgid "_Game"
 msgstr "_Gêm"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Cymorth"
 
@@ -255,7 +259,7 @@ msgstr "Gosod _Argraffydd..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "Newid y gosodiadau tudalen ar gyfer eich argraffydd cyfredol"
+msgstr "Newid y cyfluniad tudalen ar gyfer eich argraffydd cyfredol"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
@@ -363,7 +367,7 @@ msgstr "Newid llinyn"
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
 msgid "_Properties"
-msgstr "_Priodoleddau"
+msgstr "_Priodweddau"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -379,18 +383,18 @@ msgstr "_Hoffterau"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
-msgstr "Ffurfweddi'r rhaglen"
+msgstr "Cyflunio'r rhaglen"
 
 #. 20
 #.
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Ynghylch"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Ynghylch y rhaglen hwn"
 
@@ -417,7 +421,7 @@ msgstr "Creu ffenest newydd"
 msgid "_Close This Window"
 msgstr "_Cau'r Ffenest Hwn"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Cau y ffenest yma"
 
@@ -516,7 +520,7 @@ msgstr "Testun yn Unig"
 #: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
-msgstr "Defnyddio rhagosodiad y bwrdd gwaith (%s)"
+msgstr "Defnyddio rhagosodiad y penbwrdd (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -626,7 +630,7 @@ msgstr "ID"
 
 #: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
-msgstr "Penodi rhagosodiad ffurfweddiad wedi ei gadw"
+msgstr "Penodi rhgddodiad cyfluniad wedi ei gadw"
 
 #: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
@@ -888,7 +892,7 @@ msgstr "A ddylau'r ffenest ffeil Pori for yn fodal."
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
-msgstr "Enw ffeil"
+msgstr "Enw Ffeil"
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
@@ -1039,9 +1043,9 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"Fe geisiodd y rhaglen \"%s\" newid agwedd o'ch ffurfweddiad mae gweinydd "
+"Fe geisiodd y rhaglen \"%s\" newid agwedd o'ch cyfluniad mae gweinyddwr "
 "eich system neu gwerthwr eich system weithredu wedi eich gwahardd rhag "
-"newid. Efallai ni fydd rhai o'ch gosodiadau yn cymryd effaith, neu ni cant "
+"newid. Efallai ni fydd rhai o'ch gosodiadau yn cymryd effaith, neu ni chaent "
 "eu adfer y tro nesaf rydych yn defnyddio'r rhaglen."
 
 #: libgnomeui/gnome-gconf-ui.c:176
@@ -1050,7 +1054,7 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Roedd gwall wrth lwytho neu gadw gwybodaeth ffurfweddiad ar gyfer %s. "
+"Roedd gwall wrth lwytho neu gadw gwybodaeth cyfluniad ar gyfer %s. "
 "Efallai ni fydd rhai gosodiadau yn gweithio'n gywir."
 
 #: libgnomeui/gnome-href.c:122
@@ -1139,7 +1143,7 @@ msgstr "Methu canfod hbox, defnyddio dewisydd ffeil arferol"
 
 #: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
-msgstr "Rhagweld"
+msgstr "Rhagolwg"
 
 #: libgnomeui/gnome-icon-entry.c:756
 msgid "Icon selection dialog"
@@ -1348,7 +1352,7 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Defnydd: gnome_segv2 enw_rhaglen rhif_signal\n"
+msgstr "Defnydd: gnome_segv2 enwrhaglen rhifsignal\n"
 
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
@@ -1356,7 +1360,7 @@ msgstr "Anfon adroddiad nam"
 
 #: libgnomeui/gnome_segv.c:151
 msgid "Debug"
-msgstr "Dadchwilennu"
+msgstr "Datnamu"
 
 #: libgnomeui/gnome_segv.c:159
 msgid "http://www.gnome.org/application_crashed.shtml"
@@ -1366,8 +1370,9 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Ymwelwch a'r dudalen Chwal Rhaglen GNOME ar gyfer mwy o wybodaeth"
 
-#~ msgid "Exit the test"
-#~ msgstr "Gadael y prawf"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Gadael y prawf"
 
 #~ msgid "_Credits"
 #~ msgstr "_Diolchiadau"
