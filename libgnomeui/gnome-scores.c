@@ -12,6 +12,7 @@
 #include "libgnome/gnome-config.h"
 #include "libgnome/gnome-score.h"
 #include "libgnome/gnome-string.h"
+#include <gnome.h>
 
 #include "gtk/gtk.h"
 
@@ -128,7 +129,7 @@ gnome_scores_new (  guint n_scores,
   	}
 	gtk_widget_show (GTK_WIDGET(table));
 
-	button1 = gtk_button_new_with_label ( _("OK") );
+	button1 = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
 	gtk_signal_connect_object (GTK_OBJECT (button1), "clicked",
 				   GTK_SIGNAL_FUNC (gtk_widget_destroy),
 				   GTK_OBJECT (gs));
@@ -239,7 +240,7 @@ void gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 	else 
 		fo = "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-iso8859-1";
 
-	if( f = gdk_fontset_load ( fo ) )
+	if(( f = gdk_fontset_load ( fo ) ))
 		s->font = f;
 
 	gs->logo = gtk_label_new(txt);
