@@ -55,6 +55,7 @@
 #include "libgnomeui/gtkdial.h"
 #include "libgnomeui/gtk-ted.h"
 #include "libgnomeui/gtkspell.h"
+#include "libgnomeui/gtkpixmapmenuitem.h"
 #include "libgnomeui/gnome-dateedit.h"
 #include "libgnomeui/gnome-calculator.h"
 #include "libgnomeui/gnome-mdi.h"
