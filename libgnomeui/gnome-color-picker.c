@@ -690,7 +690,8 @@ gnome_color_picker_clicked (GtkButton *button)
 		if (gtk_grab_get_current())
 			gtk_window_set_modal(GTK_WINDOW(cp->_priv->cs_dialog),TRUE);
 	}
-	gtk_color_selection_set_use_opacity (GTK_COLOR_SELECTION (csd->colorsel), cp->_priv->use_alpha);
+	gtk_color_selection_set_has_opacity_control (GTK_COLOR_SELECTION (csd->colorsel),
+						     cp->_priv->use_alpha);
 
 	color[0] = cp->_priv->r;
 	color[1] = cp->_priv->g;
