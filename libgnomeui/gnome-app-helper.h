@@ -233,6 +233,10 @@ typedef struct {
         { GNOME_APP_UI_ITEM, N_("_Open..."), NULL, cb, data, NULL, \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,           \
           GNOME_KEY_NAME_OPEN, GNOME_KEY_MOD_OPEN, NULL }
+#define GNOMEUIINFO_MENU_REVERT_ITEM(cb, data)                       \
+        { GNOME_APP_UI_ITEM, N_("_Revert"), NULL, cb, data, NULL,    \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REVERT,           \
+          0,  (GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_PREFERENCES_ITEM(cb, data)                       \
         { GNOME_APP_UI_ITEM, N_("Preferences..."), NULL, cb, data, NULL,  \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREFERENCES,           \
