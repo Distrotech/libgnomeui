@@ -19,6 +19,9 @@ typedef struct {
 	GtkWidget *time_entry;
 	GtkWidget *time_popup;
 
+	GtkWidget *cal_popup;
+	GtkWidget *calendar;
+
 	int       lower_hour;
 	int       upper_hour;
 	

@@ -1,3 +1,9 @@
+1998-04-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dateedit.c (select_clicked): The date editor widget now
+	has a real popup for the calendar, and generally does the calendar
+	stuff in a saner way.
+
 Wed Apr 15 00:57:30 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.c: I got a working panel-like menu out of

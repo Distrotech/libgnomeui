@@ -7,11 +7,13 @@
 #include <config.h>
 #include <string.h>
 #include <time.h>
+#include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 #include "gnome-dateedit.h"
 #include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gtkcalendar.h>
 #include <libgnomeui/gnome-stock.h>
+
 
 enum {
 	DATE_CHANGED,
@@ -21,8 +23,14 @@ enum {
 
 static gint date_edit_signals [LAST_SIGNAL] = { 0 };
 
-static void gnome_date_edit_init       (GnomeDateEdit *gde);
-static void gnome_date_edit_class_init (GnomeDateEditClass *class);
+
+static void gnome_date_edit_init         (GnomeDateEdit      *gde);
+static void gnome_date_edit_class_init   (GnomeDateEditClass *class);
+static void gnome_date_edit_destroy      (GtkObject          *object);
+
+
+static GtkHBoxClass *parent_class;
+
 
 guint
 gnome_date_edit_get_type (void)
@@ -47,36 +55,135 @@ gnome_date_edit_get_type (void)
 }
 
 static void
+hide_popup (GnomeDateEdit *gde)
+{
+	gtk_widget_hide (gde->cal_popup);
+	gtk_grab_remove (gde->cal_popup);
+	gdk_pointer_ungrab (GDK_CURRENT_TIME);
+}
+
+static void
 day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 {
 	char buffer [40];
 	gint year, month, day;
 
+	hide_popup (gde);
+
 	gtk_calendar_get_date (calendar, &year, &month, &day);
 
 	sprintf (buffer, "%d/%d/%d", month + 1, day, year); /* FIXME: internationalize this - strftime()*/
 	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
-	gtk_widget_destroy (gtk_widget_get_toplevel (GTK_WIDGET (calendar)));
 	gtk_signal_emit (GTK_OBJECT (gde), date_edit_signals [DATE_CHANGED]);
+}
+
+static gint
+delete_popup (GtkWidget *widget, gpointer data)
+{
+	GnomeDateEdit *gde;
+
+	gde = data;
+	hide_popup (gde);
+
+	return TRUE;
+}
+
+static gint
+key_press_popup (GtkWidget *widget, GdkEventKey *event, gpointer data)
+{
+	GnomeDateEdit *gde;
+
+	if (event->keyval != GDK_Escape)
+		return FALSE;
+
+	gde = data;
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "key_press_event");
+	hide_popup (gde);
+
+	return TRUE;
+}
+
+/* This function is yanked from gtkcombo.c */
+static gint
+button_press_popup (GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+	GnomeDateEdit *gde;
+	GtkWidget *child;
+
+	gde = data;
+
+	child = gtk_get_event_widget ((GdkEvent *) event);
+
+	/* We don't ask for button press events on the grab widget, so
+	 *  if an event is reported directly to the grab widget, it must
+	 *  be on a window outside the application (and thus we remove
+	 *  the popup window). Otherwise, we check if the widget is a child
+	 *  of the grab widget, and only remove the popup window if it
+	 *  is not.
+	 */
+	if (child != widget) {
+		while (child) {
+			if (child == widget)
+				return FALSE;
+			child = child->parent;
+		}
+	}
+
+	hide_popup (gde);
+
+	return TRUE;
+}
+
+static void
+position_popup (GnomeDateEdit *gde)
+{
+	gint x, y;
+	gint bwidth, bheight;
+
+	gtk_widget_size_request (gde->cal_popup, &gde->cal_popup->requisition);
+
+	gdk_window_get_origin (gde->date_button->window, &x, &y);
+	gdk_window_get_size (gde->date_button->window, &bwidth, &bheight);
+
+	x += bwidth - gde->cal_popup->requisition.width;
+	y += bheight;
+
+	if (x < 0)
+		x = 0;
+
+	if (y < 0)
+		y = 0;
+
+	gtk_widget_set_uposition (gde->cal_popup, x, y);
 }
 
 static void
 select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 {
-	GtkWidget *cal_win;
-	GtkCalendar *calendar;
 	struct tm *mtm;
+	GdkCursor *cursor;
 
-	cal_win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	mtm = localtime (&gde->initial_time);
-	calendar = (GtkCalendar *) gtk_calendar_new ();
-	
-	gtk_calendar_select_month (calendar, mtm->tm_mon, 1900 + mtm->tm_year);
-	gtk_calendar_display_options (calendar, GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_HEADING);
-	gtk_signal_connect (GTK_OBJECT (calendar), "day_selected",
-			    GTK_SIGNAL_FUNC (day_selected), gde);
-	gtk_container_add (GTK_CONTAINER (cal_win), (GtkWidget *) calendar);
-	gtk_widget_show_all (cal_win);
+
+	/* FIXME: this would be better if we set the date from what is displayed */
+	gtk_calendar_select_month (GTK_CALENDAR (gde->calendar), mtm->tm_mon, 1900 + mtm->tm_year);
+
+	position_popup (gde);
+
+	gtk_widget_realize (gde->cal_popup);
+	gtk_widget_show (gde->cal_popup);
+	gtk_widget_grab_focus (gde->cal_popup);
+	gtk_grab_add (gde->cal_popup);
+
+	cursor = gdk_cursor_new (GDK_ARROW);
+
+	gdk_pointer_grab (gde->cal_popup->window, TRUE,
+			  (GDK_BUTTON_PRESS_MASK
+			   | GDK_BUTTON_RELEASE_MASK
+			   | GDK_POINTER_MOTION_MASK),
+			  NULL, cursor, GDK_CURRENT_TIME);
+
+	gdk_cursor_destroy (cursor);
 }
 
 typedef struct {
@@ -166,6 +273,8 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 
 	object_class = (GtkObjectClass*) class;
+
+	parent_class = gtk_type_class (gtk_hbox_get_type ());
 	
 	date_edit_signals [TIME_CHANGED] =
 		gtk_signal_new ("time_changed",
@@ -181,6 +290,8 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 	
 	gtk_object_class_add_signals (object_class, date_edit_signals, LAST_SIGNAL);
 
+	object_class->destroy = gnome_date_edit_destroy;
+
 	class->date_changed = NULL;
 	class->time_changed = NULL;
 }
@@ -188,6 +299,8 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 static void
 gnome_date_edit_init (GnomeDateEdit *gde)
 {
+	GtkWidget *frame;
+
 	gde->lower_hour = 7;
 	gde->upper_hour = 19;
 	
@@ -217,6 +330,48 @@ gnome_date_edit_init (GnomeDateEdit *gde)
 	 */
 	gtk_signal_connect (GTK_OBJECT (gde), "realize",
 			    GTK_SIGNAL_FUNC (fill_time_popup), gde);
+
+	gde->cal_popup = gtk_window_new (GTK_WINDOW_POPUP);
+	gtk_widget_set_events (gde->cal_popup, gtk_widget_get_events (gde->cal_popup) | GDK_KEY_PRESS_MASK);
+	gtk_signal_connect (GTK_OBJECT (gde->cal_popup), "delete_event",
+			    (GtkSignalFunc) delete_popup,
+			    gde);
+	gtk_signal_connect (GTK_OBJECT (gde->cal_popup), "key_press_event",
+			    (GtkSignalFunc) key_press_popup,
+			    gde);
+	gtk_signal_connect (GTK_OBJECT (gde->cal_popup), "button_press_event",
+			    (GtkSignalFunc) button_press_popup,
+			    gde);
+	gtk_window_set_policy (GTK_WINDOW (gde->cal_popup), FALSE, FALSE, TRUE);
+
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
+	gtk_container_add (GTK_CONTAINER (gde->cal_popup), frame);
+	gtk_widget_show (frame);
+
+	gde->calendar = gtk_calendar_new ();
+	gtk_calendar_display_options (GTK_CALENDAR (gde->calendar),
+				      GTK_CALENDAR_SHOW_DAY_NAMES | GTK_CALENDAR_SHOW_HEADING);
+	gtk_signal_connect (GTK_OBJECT (gde->calendar), "day_selected",
+			    GTK_SIGNAL_FUNC (day_selected), gde);
+	gtk_container_add (GTK_CONTAINER (frame), gde->calendar);
+	gtk_widget_show (gde->calendar);
+}
+
+static void
+gnome_date_edit_destroy (GtkObject *object)
+{
+	GnomeDateEdit *gde;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_DATE_EDIT (object));
+
+	gde = GNOME_DATE_EDIT (object);
+
+	gtk_widget_destroy (gde->cal_popup);
+
+	if (GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
 void
