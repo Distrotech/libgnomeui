@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-04-24 01:23+0200\n"
+"POT-Creation-Date: 2002-04-25 19:53+0200\n"
 "PO-Revision-Date: 2001-07-29 12:32+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -1094,16 +1094,17 @@ msgid "_Details"
 msgstr "_Podrobnosti"
 
 #: libgnomeui/gnome-gconf-ui.c:169
+#, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"Program \"%s\" je poskušal spremeniti nastavitve, ki vam jih vaš sistemski administrator "
-"ali prodajalec operacijskega sistema ne dovoli spremeniti. Nekatere od "
-"izbranih nastavitev morda ne bodo upoštevane ali pa ob naslednjem zagonu tega "
-"programa ne bodo obnovljene."
+"Program \"%s\" je poskušal spremeniti nastavitve, ki vam jih vaš sistemski "
+"administrator ali prodajalec operacijskega sistema ne dovoli spremeniti. "
+"Nekatere od izbranih nastavitev morda ne bodo upoštevane ali pa ob "
+"naslednjem zagonu tega programa ne bodo obnovljene."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
