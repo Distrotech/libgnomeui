@@ -28,7 +28,7 @@ typedef struct {
 	/* Flags */
 	unsigned int editing:1; /* true if it is being edited */
 	unsigned int selected:1;/* true if it should be displayed as selected */
-	
+
 	/* Hack: create an offscreen window, and place the entry there */
 	GtkEntry  *entry;
 	GtkWidget *entry_top;

@@ -243,13 +243,10 @@ static void
 iti_realize (GnomeCanvasItem *item)
 {
 	Iti *iti = ITI (item);
-	GdkWindow *window;
 	
 	if (GNOME_CANVAS_ITEM_CLASS (parent_class)->realize)
 		(*GNOME_CANVAS_ITEM_CLASS (parent_class)->realize)(item);
 	
-	window = GTK_WIDGET (item->canvas)->window;
-
 	/* We can be realized before we are configured */
 	if (!iti->text)
 		return;
