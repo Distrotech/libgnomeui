@@ -106,7 +106,7 @@ int
 gnome_icon_list_get_items_per_line (GnomeIconList *gil)
 {
 	g_return_val_if_fail (gil != NULL, 1);
-	g_return_val_if_fail (IS_GIL (gil));
+	g_return_val_if_fail (IS_GIL (gil), 1);
 
 	return gil_get_items_per_line (gil);
 }
@@ -1806,7 +1806,7 @@ gnome_icon_list_moveto (GnomeIconList *gil, int pos, double yalign)
  * Returns GTK_VISIBILITY_FULL if the icon is completely visible
  */
 GtkVisibility
-gnome_icon_list_is_visible (GnomeIconList *gil, int pos)
+gnome_icon_list_icon_is_visible (GnomeIconList *gil, int pos)
 {
 	IconLine *il;
 	GList *l;

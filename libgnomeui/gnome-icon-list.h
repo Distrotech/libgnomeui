@@ -165,7 +165,7 @@ gpointer       gnome_icon_list_get_icon_data       (GnomeIconList *gil,
 /* Visibility */
 void           gnome_icon_list_moveto              (GnomeIconList *gil,
 						    int pos, double yalign);
-GtkVisibility  gnome_icon_list_is_visible          (GnomeIconList *gil,
+GtkVisibility  gnome_icon_list_icon_is_visible     (GnomeIconList *gil,
 						    int pos);
 
 int            gnome_icon_list_get_icon_at         (GnomeIconList *gil, int x, int y);

@@ -1,5 +1,9 @@
 1998-10-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	(gnome_icon_list_icon_is_visible):  Small name function name
+	change, for compatibility with the older code.  Somehow it got
+	dropped. 
+	
 	* gnome-icon-list.c (gnome_icon_list_get_items_per_line): Export
 	this routine.
 
