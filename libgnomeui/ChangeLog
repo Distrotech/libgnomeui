@@ -1,3 +1,24 @@
+1999-02-07  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dock.c (drag_new): Avoid re-grabbing the pointer, as
+ 	suggested by Jaka.
+	(drag_new): No longer subtract the drag offsets from the current
+ 	coordinates.
+	(drag_to): Likewise.
+	(drag_floating): Likewise.
+
+	* gnome-dock-item.c (gnome_dock_item_grab_pointer): Do not return
+ 	until the grab is successful.
+	(gnome_dock_item_init): Do not initialize `grab_on_map_event'
+ 	anymore.
+	(gnome_dock_item_button_changed): Likewise.
+	(gnome_dock_item_map_event): Do not attempt a grab anymore.
+	(gnome_dock_item_motion): Subtract the drag offset from the new
+ 	coordinates before emitting them.
+
+	* gnome-dock-item.h (struct _GnomeDockItem): Member
+	`grab_on_map_event' removed.
+
 1999-02-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-pixmap-entry.c (gnome_pixmap_entry_get_filename): Test for

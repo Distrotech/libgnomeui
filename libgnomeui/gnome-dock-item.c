@@ -209,8 +209,6 @@ gnome_dock_item_init (GnomeDockItem *dock_item)
   dock_item->is_floating = FALSE;
   dock_item->in_drag = FALSE;
 
-  dock_item->grab_on_map_event = FALSE;
-
   dock_item->dragoff_x = 0;
   dock_item->dragoff_y = 0;
 
@@ -311,15 +309,18 @@ static gint
 gnome_dock_item_map_event (GtkWidget *widget,
                            GdkEventAny *event)
 {
+#if 0
   GnomeDockItem *dock_item;
 
   g_return_val_if_fail (widget != NULL, FALSE);
   g_return_val_if_fail (GNOME_IS_DOCK_ITEM (widget), FALSE);
 
   dock_item = GNOME_DOCK_ITEM (widget);
-  if (dock_item->grab_on_map_event)
+  if (dock_item->grab_on_map_event > 0)
     {
       gint x, y;
+
+      dock_item->grab_on_map_event--;
 
       if (dock_item->is_floating)
         {
@@ -333,6 +334,7 @@ gnome_dock_item_map_event (GtkWidget *widget,
 
       gnome_dock_item_grab_pointer (dock_item);
     }
+#endif
 
   return TRUE;
 }
@@ -846,7 +848,6 @@ gnome_dock_item_button_changed (GtkWidget      *widget,
       gtk_grab_remove (widget);
       
       di->in_drag = FALSE;
-      di->grab_on_map_event = FALSE;
 
       gtk_signal_emit (GTK_OBJECT (widget),
                        dock_item_signals[DOCK_DRAG_END]);
@@ -879,10 +880,8 @@ gnome_dock_item_motion (GtkWidget      *widget,
 
   gdk_window_get_pointer (NULL, &new_x, &new_y, NULL);
   
-#if 0
   new_x -= di->dragoff_x;
   new_y -= di->dragoff_y;
-#endif
 
   gtk_signal_emit (GTK_OBJECT (widget),
                    dock_item_signals[DOCK_DRAG_MOTION],
@@ -1158,17 +1157,15 @@ gnome_dock_item_grab_pointer (GnomeDockItem *item)
 
   fleur = gdk_cursor_new (GDK_FLEUR);
 
-  if (gdk_pointer_grab (item->bin_window,
+  /* Hm, not sure this is the right thing to do, but it seems to work.  */
+  while (gdk_pointer_grab (item->bin_window,
                         FALSE,
                         (GDK_BUTTON1_MOTION_MASK |
                          GDK_POINTER_MOTION_HINT_MASK |
                          GDK_BUTTON_RELEASE_MASK),
                         NULL,
                         fleur,
-                        GDK_CURRENT_TIME) != 0)
-    item->grab_on_map_event = TRUE; /* Delay until we are mapped.  */
-  else
-    item->grab_on_map_event = FALSE;
+                        GDK_CURRENT_TIME) != 0);
 
   gdk_cursor_destroy (fleur);
 }

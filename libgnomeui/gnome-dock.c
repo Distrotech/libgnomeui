@@ -749,9 +749,6 @@ drag_new (GnomeDock *dock,
 
   DEBUG (("entering function"));
 
-  x -= item->dragoff_x;
-  y -= item->dragoff_y;
-
   new_band = NULL;
 
   /* We need a new band next to `where', but we try to re-use the band
@@ -811,9 +808,6 @@ drag_new (GnomeDock *dock,
   /* Prepare the band for dragging of `item'.  */
   gnome_dock_band_drag_begin (new_band, item);
 
-  /* Reparenting will remove the grab, so we need to redo it.  */
-  gnome_dock_item_grab_pointer (item);
-
   /* Set the offset of `item' in the band.  */
   if (is_vertical)
     gnome_dock_band_set_child_offset (new_band, GTK_WIDGET (item),
@@ -833,9 +827,6 @@ drag_to (GnomeDock *dock,
          gint x, gint y,
          gboolean is_vertical)
 {
-  x -= item->dragoff_x;
-  y -= item->dragoff_y;
-
   DEBUG (("x %d y %d", x, y));
 
   return gnome_dock_band_drag_to (GNOME_DOCK_BAND (where->data), item, x, y);
@@ -854,11 +845,6 @@ drag_floating (GnomeDock *dock,
 
   item_widget = GTK_WIDGET (item);
   dock_widget = GTK_WIDGET (dock);
-
-  x -= item->dragoff_x;
-  y -= item->dragoff_y;
-  rel_x -= item->dragoff_x;
-  rel_y -= item->dragoff_y;
 
   if (item_widget->parent != dock_widget)
     {

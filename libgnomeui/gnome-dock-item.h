@@ -75,14 +75,14 @@ struct _GnomeDockItem
   guint                 is_floating : 1;
   guint                 in_drag : 1;
 
-  /* If TRUE, the pointer must be grabbed on "map_event".  */
-  guint                 grab_on_map_event : 1;
-
   /* Start drag position (wrt widget->window).  */
   gint                  dragoff_x, dragoff_y;
 
   /* Position of the floating window.  */
   gint                  float_x, float_y;
+
+  /* If TRUE, the pointer must be grabbed on "map_event".  */
+  guint                 grab_on_map_event;
 };
 
 struct _GnomeDockItemClass
