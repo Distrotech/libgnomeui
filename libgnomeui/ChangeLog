@@ -1,5 +1,9 @@
 1999-09-02  Jonathan Blandford  <jrb@redhat.com>
 
+	* gnome-druid-page-standard.c
+	(gnome_druid_page_standard_set_bg_color): set the color of the
+	outside frame.
+
 	* gnome-druid-page.c (gnome_druid_page_paint): Add paint
 	function.  Now redraw problem is gone.
 

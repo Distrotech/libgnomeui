@@ -38,6 +38,7 @@ static GnomeDruidPageClass *parent_class = NULL;
 #define LOGO_WIDTH 50.0
 #define DRUID_PAGE_HEIGHT 318
 #define DRUID_PAGE_WIDTH 516
+#define DRUID_PAGE_LEFT_WIDTH 100
 
 GtkType
 gnome_druid_page_start_get_type (void)

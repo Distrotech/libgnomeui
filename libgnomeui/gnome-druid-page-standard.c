@@ -266,7 +266,7 @@ gnome_druid_page_standard_new_with_vals (const gchar *title, GdkImlibImage *logo
 }
 void
 gnome_druid_page_standard_set_bg_color      (GnomeDruidPageStandard *druid_page_standard,
-					  GdkColor *color)
+					     GdkColor *color)
 {
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
@@ -281,11 +281,36 @@ gnome_druid_page_standard_set_bg_color      (GnomeDruidPageStandard *druid_page_
 	druid_page_standard->background_color.blue = color->blue;
 
 	if (GTK_WIDGET_REALIZED (druid_page_standard)) {
+		GtkStyle *style;
 		GdkColormap *cmap = gdk_imlib_get_colormap ();
+
 		gdk_colormap_alloc_color (cmap, &druid_page_standard->background_color, FALSE, TRUE);
+
+		style = gtk_style_copy (gtk_widget_get_style (druid_page_standard->side_bar));
+		style->bg[GTK_STATE_NORMAL].red = color->red;
+		style->bg[GTK_STATE_NORMAL].green = color->green;
+		style->bg[GTK_STATE_NORMAL].blue = color->blue;
+		gtk_widget_set_style (druid_page_standard->side_bar, style);
+		gtk_widget_set_style (druid_page_standard->bottom_bar, style);
+		gtk_widget_set_style (druid_page_standard->right_bar, style);
+
 		gnome_canvas_item_set (druid_page_standard->background_item,
 				       "fill_color_gdk", &druid_page_standard->background_color,
 				       NULL);
+	} else {
+		GtkRcStyle *rc_style;
+
+		rc_style = gtk_rc_style_new ();
+		rc_style->bg[GTK_STATE_NORMAL].red = color->red;
+		rc_style->bg[GTK_STATE_NORMAL].green = color->green;
+		rc_style->bg[GTK_STATE_NORMAL].blue = color->blue;
+		rc_style->color_flags[GTK_STATE_NORMAL] = GTK_RC_BG;
+		gtk_rc_style_ref (rc_style);
+		gtk_widget_modify_style (druid_page_standard->side_bar, rc_style);
+		gtk_rc_style_ref (rc_style);
+		gtk_widget_modify_style (druid_page_standard->bottom_bar, rc_style);
+		gtk_rc_style_ref (rc_style);
+		gtk_widget_modify_style (druid_page_standard->right_bar, rc_style);
 	}
 }
 void
