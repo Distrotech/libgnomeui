@@ -1,3 +1,8 @@
+Fri May  8 10:06:01 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-client.c (default_client_init): Call gtk_type_init and
+	gtk_signal_init.
+
 Thu May  7 21:46:24 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog.c: Take out debug printfs.

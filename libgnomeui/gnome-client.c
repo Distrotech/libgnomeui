@@ -210,6 +210,10 @@ default_client_disconnect (GnomeClient *client,
 static void
 default_client_init (void)
 {
+  /* Make sure Gtk type system initialized.  */
+  gtk_type_init ();
+  gtk_signal_init ();
+
   default_client= gnome_client_new_without_connection ();
 
   if (default_client)
