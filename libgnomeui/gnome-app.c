@@ -300,9 +300,20 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 
 	dock_item = gnome_dock_item_new (GNOME_APP_MENUBAR_NAME,
 					 behavior);
-	gtk_container_set_border_width (GTK_CONTAINER (dock_item), 0);
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (menubar));
-	gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item), GTK_SHADOW_NONE);
+
+	app->menubar = GTK_WIDGET (menubar);
+
+	/* To have menubar relief agree with the toolbar (and have the relief outside of
+	 * smaller handles), substitute the dock item's relief for the menubar's relief,
+	 * but don't change the size of the menubar in the process. */
+	gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (app->menubar), GTK_SHADOW_NONE);
+	if (gnome_preferences_get_menubar_relief ()) {
+		gtk_container_set_border_width (GTK_CONTAINER (dock_item), 2);
+		gtk_container_set_border_width (GTK_CONTAINER (app->menubar),
+						GTK_CONTAINER (app->menubar)->border_width - 2);
+	} else
+		gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item), GTK_SHADOW_NONE);
 
 	if (app->layout != NULL)
 		gnome_dock_layout_add_item (app->layout,
@@ -315,15 +326,8 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 				    GNOME_DOCK_TOP,
 				    -1, 0, 0, FALSE);
 
-	app->menubar = GTK_WIDGET (menubar);
-
 	gtk_widget_show (GTK_WIDGET (menubar));
 	gtk_widget_show (GTK_WIDGET (dock_item));
-
-	/* Configure menu to gnome preferences, if possible.
-	 * (sync to gnome-app-helper.c:gnome_app_fill_menu_custom) */
-	if (!gnome_preferences_get_menubar_relief ())
-		gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (app->menubar), GTK_SHADOW_NONE);
 
 	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
 	if (ag && !g_slist_find(gtk_accel_groups_from_object (GTK_OBJECT (app)), ag))

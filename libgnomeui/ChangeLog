@@ -1,3 +1,9 @@
+1998-12-17  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app.c (gnome_app_set_menus): Make menubar relief agree
+	with with toolbar relief (relief on the dock item, around
+	handles).
+
 Wed Dec 16 17:53:48 1998  Raph Levien  <raph@gimp.org>
 
 	So far, no changes that affect canvas users or xlib custom items.
