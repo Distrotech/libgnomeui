@@ -3402,6 +3402,12 @@ impl_initialize (AtkObject *accessible, gpointer data)
 {
 	GnomeIconList *gil;
 
+	/*
+	 * We may have created an accessible object when gail is not loaded
+	 */
+        if (!GTK_IS_ACCESSIBLE (accessible))
+		return;
+
 	ATK_OBJECT_CLASS (accessible_parent_class)->initialize (accessible, data);
 
 	gil = GNOME_ICON_LIST (GTK_ACCESSIBLE (accessible)->widget);
