@@ -37,6 +37,7 @@ BEGIN_GNOME_DECLS
  * x			double			RW		X coordinate of anchor point
  * y			double			RW		Y coordinate of anchor point
  * font			string			W		X logical font descriptor
+ * fontset		string			W		X logical fontset descriptor
  * font_gdk		GdkFont*		RW		Pointer to a GdkFont
  * anchor		GtkAnchorType		RW		Anchor side for the text
  * justification	GtkJustification	RW		Justification for multiline text

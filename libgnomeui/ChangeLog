@@ -2,6 +2,7 @@
 
         * gnome-canvas-text.c (gnome_canvas_text_set_arg): fontset
         can be used now to configure font of the canvas text.
+        * gnome-canvas-text.h: Updated list of object arguments
 
 1999-02-16  Ulrich Drepper  <drepper@cygnus.com>
 
