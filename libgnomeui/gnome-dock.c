@@ -706,7 +706,10 @@ drag_new (GnomeDock *dock,
   GnomeDockChild *new;
   GList *next;
 
-  DEBUG (("entering function"));
+  DEBUG (("drag_new"));
+
+  x -= item->dragoff_x;
+  y -= item->dragoff_y;
 
   new = NULL;
 
@@ -745,10 +748,6 @@ drag_new (GnomeDock *dock,
                                        (is_vertical
                                         ? GTK_ORIENTATION_VERTICAL
                                         : GTK_ORIENTATION_HORIZONTAL));
-
-      /* This is mostly to remember that `drag_allocation' for this
-         child is bogus, as it was not previously allocated.  */
-      new->new_for_drag = TRUE;
 
       if (where == NULL)
         *area = where = g_list_prepend (*area, new);
@@ -793,6 +792,9 @@ drag_to (GnomeDock *dock,
 {
   GnomeDockChild *child;
 
+  x -= item->dragoff_x;
+  y -= item->dragoff_y;
+
   DEBUG (("x %d y %d", x, y));
   child = (GnomeDockChild *) where->data;
 
@@ -812,6 +814,11 @@ drag_floating (GnomeDock *dock,
 
   item_widget = GTK_WIDGET (item);
   dock_widget = GTK_WIDGET (dock);
+
+  x -= item->dragoff_x;
+  y -= item->dragoff_y;
+  rel_x -= item->dragoff_x;
+  rel_y -= item->dragoff_y;
 
   if (item_widget->parent != dock_widget)
     {
@@ -872,6 +879,7 @@ drag_check (GnomeDock *dock,
             gint x, gint y,
             gboolean is_vertical)
 {
+#define NEW_BAND_SNAP 4
   GList *lp;
   GnomeDockChild *child;
   GtkAllocation *alloc;
@@ -880,31 +888,28 @@ drag_check (GnomeDock *dock,
     {
       child = (GnomeDockChild *) lp->data;
 
-      if (! child->new_for_drag)
-        {
-          alloc = &child->drag_allocation;
+      alloc = &(GTK_WIDGET(child->band)->allocation);
 
-          if (x >= alloc->x && x < alloc->x + alloc->width
-              && y >= alloc->y && y < alloc->y + alloc->height)
-            {
-              if (is_vertical)
-                {
-                  if (x > alloc->x + alloc->width / 2)
-                    return drag_new (dock, item, area, lp, x, y, TRUE);
-                  else
-                    return drag_to (dock, item, lp, x, y, TRUE);
-                }
-              else
-                {
-                  if (y > alloc->y + alloc->height / 2)
-                    return drag_new (dock, item, area, lp, x, y, FALSE);
-                  else
-                    return drag_to (dock, item, lp, x, y, FALSE);
-                }
-            }
-        }
+      if (x >= alloc->x && x < alloc->x + alloc->width &&
+	  y >= alloc->y && y < alloc->y + alloc->height)
+	{
+	  if (is_vertical)
+	    {
+	      if (x > alloc->x + alloc->width - NEW_BAND_SNAP)
+		return drag_new (dock, item, area, lp, x, y, TRUE);
+	      else
+		return drag_to (dock, item, lp, x, y, TRUE);
+	    }
+	  else
+	    {
+	      if (y > alloc->y + alloc->height  - NEW_BAND_SNAP)
+		return drag_new (dock, item, area, lp, x, y, FALSE);
+	      else
+		return drag_to (dock, item, lp, x, y, FALSE);
+	    }
+	}
     }
-
+  
   return FALSE;
 }
 
@@ -925,7 +930,9 @@ drag_begin_foreach_func (gpointer data, gpointer user_data)
      because we actually decide what docking action happens depending
      on it, instead of using the current allocation (which might be
      constantly changing while the user drags things around).  */
+#if 0
   child->drag_allocation = widget->allocation;
+#endif
 
   /* Tell the band that this child is being dragged.  The function
      will simply ignore the information if the item is not the band's
@@ -973,7 +980,9 @@ drag_end_bands (GList **list, GnomeDockItem *item)
 
       gnome_dock_band_drag_end (child->band, item);
 
+#if 0
       child->new_for_drag = FALSE;
+#endif
 
       if (gnome_dock_band_get_num_children (child->band) == 0)
         {
@@ -1262,8 +1271,8 @@ gnome_dock_add_item (GnomeDock *dock,
   GList **band_ptr;
   GList *p;
 
-  DEBUG (("side %d band_num %d offset %d position %d in_new_band %d",
-          side, band_num, offset, position, in_new_band));
+  DEBUG (("band_num %d offset %d position %d in_new_band %d",
+          band_num, offset, position, in_new_band));
 
   switch (placement)
     {
@@ -1297,7 +1306,9 @@ gnome_dock_add_item (GnomeDock *dock,
 
       new_child = g_new (GnomeDockChild, 1);
       new_child->band = GNOME_DOCK_BAND (new_band);
+#if 0
       new_child->new_for_drag = FALSE;
+#endif
 
       /* FIXME: slow.  */
       if (in_new_band)

@@ -879,8 +879,10 @@ gnome_dock_item_motion (GtkWidget      *widget,
   gdk_window_get_pointer (di->float_window, &new_x, &new_y, NULL);
   new_x += ox;
   new_y += oy;
+#if 0
   new_x -= di->dragoff_x;
   new_y -= di->dragoff_y;
+#endif
 
   gtk_signal_emit (GTK_OBJECT (widget),
                    dock_item_signals[DOCK_DRAG_MOTION],

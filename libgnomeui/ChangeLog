@@ -1,3 +1,17 @@
+1999-01-02  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-dock-item.c (gnome_dock_item_motion): don't subtract
+	item->dragoff_? from pointer coordinates before emiting signal
+	as this confuses gnome-dock.c/drag_check().
+	* gnome-dock.c (drag_new, drag_to, drag_floating): subtract
+	item->dragoff_? from pointer coordinates here instead in the
+	above function.
+	(drag_check): a small fix to handling drags in new bands.
+	use band's current allocation and NOT its drag_allocation.
+	this seems fine and properly handles new bands.
+	#if 0'ed out all references to GnomeDockChild members
+	new_for_drag and drag_allocation.
+	
 1999-01-02  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-app-helper.c:
