@@ -282,6 +282,10 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 	    signums[1] = gtk_signal_lookup(signame,
 					   gtk_check_menu_item_get_type());
 	    nsigs = 2;
+	  } else if(!strcmp(signame, "clicked")) {
+	    gtk_type_class(gtk_button_get_type());
+	    signums[0] = gtk_signal_lookup(signame, gtk_button_get_type());
+	    nsigs = 1;
 	  } else {
 	    gtk_type_class(gtk_widget_get_type());
 	    signums[0] = gtk_signal_lookup(signame, gtk_widget_get_type());
@@ -525,9 +529,10 @@ static gboolean
 relay_gtk_signal(GtkObject *object,
 		 guint signal_id, GnomeTriggerList *t)
 {
+#ifdef HAVE_ESD
   /* Yes, this short circuits the rest of the triggers mechanism. It's
      easy to fix if we need to, though. */
-  if(gnome_sound_connection < 0) return FALSE;
+  if(gnome_sound_connection < 0) return TRUE;
 
   if(t->actions[0]->u.media.cache_id == -1) {
     char *buf = alloca(strlen(t->nodename) + sizeof("gtk-events/"));
@@ -544,5 +549,6 @@ relay_gtk_signal(GtkObject *object,
   if(t->actions[0]->u.media.cache_id >= 0)
     esd_sample_play(gnome_sound_connection, t->actions[0]->u.media.cache_id);
 
-  return FALSE;
+  return TRUE;
+#endif
 }
