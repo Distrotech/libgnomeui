@@ -703,6 +703,8 @@ gtk_ted_load_layout (GtkTed *ted)
 	char *full, *sec_name, *layout;
 	void *iter;
 	int  len = strlen (ted->dialog_name);
+	char *p;
+			
 	
 	full = gnome_datadir_file (name);
 	g_free (name);
@@ -718,10 +720,15 @@ gtk_ted_load_layout (GtkTed *ted)
 	while ((iter = gnome_config_iterator_next (iter, &sec_name, NULL)) != NULL){
 		if (strncmp (sec_name, ted->dialog_name, len))
 			continue;
-		
+
 		if (strncmp (sec_name+len+1, "Widget-", 7) == 0){
+			if (p = strchr (sec_name+len+8, '|') != NULL)
+				*p = 0;
+
 			wi = gtk_ted_load_widget (ted, layout, sec_name+len+1);
 			g_hash_table_insert (ted->widgets, wi->name, wi);
+			if (p)
+				*p = '|';
 		}
 		printf ("section name: %s\n", sec_name);
 	}
@@ -941,13 +948,18 @@ gtk_ted_widget_control_new (GtkTed *ted, GtkWidget *widget, char *name)
 }
 
 void
-gtk_ted_add (GtkTed *ted, GtkWidget *widget, char *name)
+gtk_ted_add (GtkTed *ted, GtkWidget *widget, char *original_name)
 {
 	struct ted_widget_info *wi;
-	
+	char *name = g_strdup (original_name), *p;
+
+	if ((p = strchr (name, '|')) != NULL){
+		*p = 0;
+	}
 	if ((wi = g_hash_table_lookup (ted->widgets, name)) != NULL){
 		wi->widget = widget;
 		gtk_object_set_data (GTK_OBJECT (widget), "ted_widget_info", wi);
+		g_free (name);
 		return;
 	} else {
 		ted->need_gui = 1;
@@ -961,6 +973,7 @@ gtk_ted_add (GtkTed *ted, GtkWidget *widget, char *name)
 		gtk_ted_prepare_editable_widget (wi, GTK_WIDGET (ted), name);
 		gtk_ted_widget_control_new (ted, wi->widget, name);
 	}
+	g_free (name);
 }
 
 static void
@@ -969,6 +982,12 @@ gtk_ted_prepare_widgets_edit (gpointer key, gpointer value, gpointer user_data)
 	GtkTed *ted = user_data;
 	struct ted_widget_info *wi = value;
 
+	/* This is a widget that had layout information, but does not exist in this
+	 * instance of the execution
+	 */
+	if (wi->widget == 0)
+		return;
+	
 	gtk_ted_prepare_editable_widget (wi, GTK_WIDGET (ted), key);
 	gtk_ted_widget_control_new (ted, wi->widget, key);
 }
