@@ -19,9 +19,11 @@ enum {
 	ARG_X,
 	ARG_Y,
 	ARG_FONT,
+	ARG_FONT_GDK,
 	ARG_ANCHOR,
 	ARG_JUSTIFICATION,
-	ARG_FILL_COLOR
+	ARG_FILL_COLOR,
+	ARG_FILL_COLOR_GDK
 };
 
 
@@ -86,9 +88,11 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasText::x", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_X);
 	gtk_object_add_arg_type ("GnomeCanvasText::y", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_Y);
 	gtk_object_add_arg_type ("GnomeCanvasText::font", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FONT);
+	gtk_object_add_arg_type ("GnomeCanvasText::font_gdk", GTK_TYPE_GDK_FONT_TYPE, GTK_ARG_WRITABLE, ARG_FONT_GDK);
 	gtk_object_add_arg_type ("GnomeCanvasText::anchor", GTK_TYPE_ANCHOR_TYPE, GTK_ARG_WRITABLE, ARG_ANCHOR);
 	gtk_object_add_arg_type ("GnomeCanvasText::justification", GTK_TYPE_JUSTIFICATION, GTK_ARG_WRITABLE, ARG_JUSTIFICATION);
 	gtk_object_add_arg_type ("GnomeCanvasText::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
+	gtk_object_add_arg_type ("GnomeCanvasText::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_WRITABLE, ARG_FILL_COLOR_GDK);
 
 	object_class->destroy = gnome_canvas_text_destroy;
 	object_class->set_arg = gnome_canvas_text_set_arg;
@@ -252,6 +256,15 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		calc_bounds = TRUE;
 		break;
 
+	case ARG_FONT_GDK:
+		if (text->font)
+			gdk_font_unref (text->font);
+
+		text->font = GTK_VALUE_BOXED (*arg);
+		gdk_font_ref (text->font);
+		calc_bounds = TRUE;
+		break;
+
 	case ARG_ANCHOR:
 		text->anchor = GTK_VALUE_ENUM (*arg);
 		calc_bounds = TRUE;
@@ -267,6 +280,11 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		else
 			text->pixel = 0;
 
+		calc_gcs = TRUE;
+		break;
+
+	case ARG_FILL_COLOR_GDK:
+		text->pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
 		calc_gcs = TRUE;
 		break;
 

@@ -1,3 +1,16 @@
+1998-08-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_set_arg): Added
+	fill_color_gdk and outline_color_gdk arguments.  The argument's
+	value is a pointer to an already-allocated GdkColor.
+
+	* gnome-canvas-text.c (gnome_canvas_text_set_arg): Added font_gdk
+	and fill_color_gdk arguments.  The argument values are a pointer
+	to a GdkFont and an already-allocated GdkColor, respectively.
+
+	* gnome-canvas-line.c (gnome_canvas_line_set_arg): Added
+	fill_color_gdk argument.
+
 Sun Aug 09 14:37:58 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-about.c: draw the pixmap with the correct clip mask
