@@ -157,8 +157,6 @@ free_all_frames (GnomeAnimator *animator)
 
       if (p->pixmap != NULL)
         gdk_imlib_free_pixmap (p->pixmap);
-      if (p->mask != NULL)
-        gdk_imlib_free_bitmap (p->mask);
 
       pnext = p->next;
       g_free (p);
@@ -890,7 +888,7 @@ gnome_animator_append_frames_from_imlib_at_size (GnomeAnimator *animator,
 
   if (tmp_mask != NULL)
     {
-      gdk_imlib_free_bitmap (tmp_mask);
+      /* Imlib already freed the mask, so don't free it again */
       gdk_gc_unref (mask_gc);
     }
 

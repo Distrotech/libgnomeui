@@ -1,5 +1,9 @@
 1999-08-19  Federico Mena Quintero  <federico@redhat.com>
 
+	* gnome-animator.c (free_all_frames): Don't free the mask, since
+	it has already been freed by imlib.
+	(gnome_animator_append_frames_from_imlib_at_size): Likewise.
+
 	* gnome-canvas-image.c (free_pixmap_and_mask): Sigh.  Tell imlib
 	to *only* free the pixmap, not the mask as well.  When you tell
 	imlib to free a pixmap, it will also free its associated mask.  Is
