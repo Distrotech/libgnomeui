@@ -1583,6 +1583,7 @@ gil_realize (GtkWidget *widget)
 	Gil *gil;
 	GnomeIconListPrivate *priv;
 	GtkStyle *style;
+	GdkColor color;
 
 	gil = GIL (widget);
 	priv = gil->_priv;
@@ -1597,8 +1598,9 @@ gil_realize (GtkWidget *widget)
 	/* Change the style to use the base color as the background */
 
 	style = gtk_style_copy (gtk_widget_get_style (widget));
-	style->bg[GTK_STATE_NORMAL] = style->base[GTK_STATE_NORMAL];
-	gtk_widget_set_style (widget, style);
+    
+	color = style->base[GTK_STATE_NORMAL];
+	gtk_widget_modify_bg (widget, GTK_STATE_NORMAL, &color);
 
 	gdk_window_set_background (GTK_LAYOUT (gil)->bin_window,
 				   &widget->style->bg[GTK_STATE_NORMAL]);
@@ -2192,6 +2194,48 @@ gil_get_accessible (GtkWidget *widget)
 }
 
 static void
+gil_style_set (GtkWidget *widget, GtkStyle *prev_style)
+{
+
+	Gil *gil;
+	GnomeIconListPrivate *priv;
+	GtkStyle *style;
+	GnomeIconTextItem *item;
+	int item_count;
+
+	gil = GIL (widget);
+	priv = gil->_priv;
+
+	if (priv->icons) {
+		char *file_name;
+		char *font_name;
+
+		style = gtk_widget_get_style (GTK_WIDGET(widget));
+		font_name = pango_font_description_to_string (style->font_desc);
+		
+		for (item_count=0; item_count < priv->icons; item_count++) {
+			item = gnome_icon_list_get_icon_text_item (gil, item_count);
+			file_name = g_strdup (item->text);
+			gnome_icon_text_item_configure (item, 0, 0, 
+											priv->icon_width, font_name,
+											file_name, priv->is_editable, 
+											priv->static_text);
+
+			g_free (file_name);
+		}
+		g_free (font_name);
+
+	}
+
+
+	if (GTK_WIDGET_CLASS (parent_class)->style_set)
+		(* GTK_WIDGET_CLASS (parent_class)->style_set) (widget, prev_style);
+
+}
+
+
+
+static void
 gnome_icon_list_class_init (GilClass *gil_class)
 {
 	GtkObjectClass *object_class;
@@ -2296,6 +2340,7 @@ gnome_icon_list_class_init (GilClass *gil_class)
 	widget_class->key_press_event = gil_key_press;
 	widget_class->scroll_event = gil_scroll;
 	widget_class->get_accessible = gil_get_accessible;
+    widget_class->style_set = gil_style_set;
 
 	/* we override GtkLayout's set_scroll_adjustments signal instead
 	 * of creating a new signal so as to keep binary compatibility.
