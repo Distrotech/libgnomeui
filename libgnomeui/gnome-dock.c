@@ -1310,6 +1310,8 @@ gnome_dock_add_item (GnomeDock *dock,
   gnome_dock_band_insert (c->band, GTK_WIDGET(item), offset, position);
 
   connect_drag_signals (dock, GTK_WIDGET(item));
+
+  gtk_signal_emit (GTK_OBJECT (dock), dock_signals[LAYOUT_CHANGED]);
 }
 
 void
@@ -1337,6 +1339,8 @@ gnome_dock_add_floating_item (GnomeDock *dock,
   connect_drag_signals (dock, widget);
 
   gtk_widget_unref (widget);
+
+  gtk_signal_emit (GTK_OBJECT (dock), dock_signals[LAYOUT_CHANGED]);
 }
 
 void

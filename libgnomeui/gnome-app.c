@@ -309,15 +309,11 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 																			GNOME_DOCK_ITEM (dock_item),
 																			GNOME_DOCK_TOP,
 																			-1, 0, 0);
-	else {
+	else
 					gnome_dock_add_item(GNOME_DOCK(app->dock),
 															GNOME_DOCK_ITEM (dock_item),
 															GNOME_DOCK_TOP,
 															-1, 0, 0, FALSE);
-					gtk_signal_emit_by_name (GTK_OBJECT (app->dock),
-																	 "layout_changed",
-																	 (gpointer) app);
-	}
 
 	app->menubar = GTK_WIDGET (menubar);
 
@@ -404,7 +400,7 @@ gnome_app_add_toolbar (GnomeApp *app,
 																			band_num,
 																			band_position,
 																			offset);
-	else {
+	else
 					gnome_dock_add_item (GNOME_DOCK(app->dock),
 															 GNOME_DOCK_ITEM (dock_item),
 															 placement,
@@ -412,10 +408,6 @@ gnome_app_add_toolbar (GnomeApp *app,
 															 band_position,
 															 offset,
 															 FALSE);
-					gtk_signal_emit_by_name (GTK_OBJECT (app->dock),
-																	 "layout_changed",
-																	 (gpointer) app);
-	}
 
 	if (gnome_preferences_get_toolbar_relief ()) {
 		gtk_container_set_border_width (GTK_CONTAINER (dock_item), 1);
@@ -498,7 +490,7 @@ gnome_app_add_docked (GnomeApp *app,
 																			band_num,
 																			band_position,
 																			offset);
-	else {
+	else
 					gnome_dock_add_item (GNOME_DOCK(app->dock),
 															 GNOME_DOCK_ITEM( item),
 															 placement,
@@ -506,10 +498,6 @@ gnome_app_add_docked (GnomeApp *app,
 															 band_position,
 															 offset,
 															 FALSE);
-					gtk_signal_emit_by_name (GTK_OBJECT (app->dock),
-																	 "layout_changed",
-																	 (gpointer) app);
-	}
 }
 
 void

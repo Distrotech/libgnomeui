@@ -1,3 +1,10 @@
+1998-12-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app.c (gnome_app_set_*): removed "layout_changed" signal
+	emissions after calling gnome_dock_add_item().
+	* gnome-dock.c (gnome_dock_add_item, gnome_dock_add_floating_item):
+	emit "layout_changed" signal.
+
 1998-12-15  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-procbar.c (gnome_proc_bar_set_orient): New function.
