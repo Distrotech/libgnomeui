@@ -2,11 +2,16 @@
 GnomeApp
 
 <!-- ##### SECTION Short_Description ##### -->
-
+The main application widget.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+The @GnomeApp widget and associated functions provides the easiest way to
+create an almost complete GNOME application in libgnomeui. Simple create an
+instance of the widget, append any menus, toolbar(s) and a status bar, as
+required (this will probably be done with some functions from the following
+pages). Then fill in the main contents with a call to gnome_app_set_contents()
+and start the main loop (with gtk_main()).
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
@@ -16,21 +21,23 @@ GnomeApp
 
 <!-- ##### MACRO GNOME_APP_MENUBAR_NAME ##### -->
 <para>
-
+The name of the menubar as it is passed to libbonobo.
 </para>
 
 
 
 <!-- ##### MACRO GNOME_APP_TOOLBAR_NAME ##### -->
 <para>
-
+The name of the default toolbar that is added to the application widget by
+default.
 </para>
 
 
 
-<!-- ##### STRUCT GnomeAppPrivate ##### -->
+<!-- ##### STRUCT GnomeApp ##### -->
 <para>
-
+A widget representing an entire GNOME application, including the main window,
+menus, toolbar(s) and status bar.
 </para>
 
 

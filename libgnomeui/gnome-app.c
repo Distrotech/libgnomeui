@@ -338,16 +338,15 @@ layout_changed (GtkWidget *w, gpointer data)
 
 /**
  * gnome_app_new
- * @appname: Name of program, using in file names and paths.
+ * @appname: Name of program, used in file names and paths.
  * @title: Window title for application.
  *
  * Description:
- * Create a new (empty) application window.  You must specify the
- * application's name (used internally as an identifier).
- * @title can be left as NULL, in which case the window's title will
- * not be set.
+ * Create a new (empty) application window. You must specify the @appname (used
+ * internally as an identifier).  The @title param can be left as NULL, in
+ * which case the window's title will not be set.
  *
- * Returns: Pointer to new GNOME app object.
+ * Returns: Pointer to new #GnomeApp object.
  **/
 
 GtkWidget *
@@ -372,7 +371,7 @@ gnome_app_new (const gchar *appname, const gchar *title)
 
 /**
  * gnome_app_construct
- * @app: Pointer to newly-created GNOME app object.
+ * @app: A newly created #GnomeApp object.
  * @appname: Name of program, using in file names and paths.
  * @title: Window title for application.
  *
@@ -463,11 +462,11 @@ contents_parent_set (GtkWidget *widget, GtkWidget *previous_parent, gpointer dat
 
 /**
  * gnome_app_set_contents
- * @app: Pointer to GNOME app object.
+ * @app: A #GnomeApp instance.
  * @contents: Widget to be application content area.
  *
  * Description:
- * Sets the content area of the GNOME app's main window.
+ * Sets the content area of the main window of @app.
  **/
 void
 gnome_app_set_contents (GnomeApp *app, GtkWidget *contents)
@@ -497,8 +496,8 @@ gnome_app_set_contents (GnomeApp *app, GtkWidget *contents)
 
 /**
  * gnome_app_set_menus
- * @app: Pointer to GNOME app object.
- * @menubar: Menu bar widget for main app window.
+ * @app: A #GnomeApp instance.
+ * @menubar: Menu bar widget for main application window.
  *
  * Description:
  * Sets the menu bar of the application window.
@@ -555,7 +554,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 
 /**
  * gnome_app_set_statusbar
- * @app: Pointer to GNOME app object
+ * @app: A #GnomeApp instance
  * @statusbar: Statusbar widget for main app window
  *
  * Description:
@@ -586,7 +585,7 @@ gnome_app_set_statusbar (GnomeApp *app,
 
 /**
  * gnome_app_set_statusbar_custom
- * @app: Pointer to GNOME app object
+ * @app: A #GnomeApp instance
  * @container: container widget containing the statusbar
  * @statusbar: Statusbar widget for main app window
  *
@@ -615,7 +614,7 @@ gnome_app_set_statusbar_custom (GnomeApp *app,
 
 /**
  * gnome_app_add_toolbar:
- * @app: A &GnomeApp widget
+ * @app: A #GnomeApp widget
  * @toolbar: Toolbar to be added to @app's dock
  * @name: Name for the dock item that will contain @toolbar
  * @behavior: Behavior for the new dock item
@@ -625,7 +624,7 @@ gnome_app_set_statusbar_custom (GnomeApp *app,
  * @offset: Offset from the previous dock item in the band; if there is
  * no previous item, offset from the beginning of the band.
  *
- * Create a new &BonoboDockItem widget containing @toolbar, and add it
+ * Create a new #BonoboDockItem widget containing @toolbar, and add it
  * to @app's dock with the specified layout information.  Notice that,
  * if automatic layout configuration is enabled, the layout is
  * overridden by the saved configuration, if any.
@@ -683,7 +682,7 @@ gnome_app_add_toolbar (GnomeApp *app,
 
 /**
  * gnome_app_set_toolbar
- * @app: Pointer to GNOME app object.
+ * @app: A #GnomeApp instance.
  * @toolbar: Toolbar widget for main app window.
  *
  * Description:
@@ -714,11 +713,11 @@ gnome_app_set_toolbar (GnomeApp *app,
 
 /**
  * gnome_app_add_dock_item:
- * @app: A &GnomeApp widget
+ * @app: A &GnomeApp widget.
  * @item: Dock item to be added to @app's dock.
- * @placement: Placement for the dock item
- * @band_num: Number of the band where the dock item should be placed
- * @band_position: Position of the dock item in band @band_num
+ * @placement: Placement for the dock item.
+ * @band_num: Number of the band where the dock item should be placed.
+ * @band_position: Position of the dock item in band @band_num.
  * @offset: Offset from the previous dock item in the band; if there is
  * no previous item, offset from the beginning of the band.
  * 
@@ -755,22 +754,22 @@ gnome_app_add_dock_item (GnomeApp *app,
 
 /**
  * gnome_app_add_docked:
- * @app: A &GnomeApp widget
- * @widget: Widget to be added to the &GnomeApp
- * @name: Name for the new dock item
- * @behavior: Behavior for the new dock item
- * @placement: Placement for the new dock item
- * @band_num: Number of the band where the dock item should be placed
- * @band_position: Position of the new dock item in band @band_num
+ * @app: A #GnomeApp widget.
+ * @widget: Widget to be added to the #GnomeApp.
+ * @name: Name for the new dock item.
+ * @behavior: Behavior for the new dock item.
+ * @placement: Placement for the new dock item.
+ * @band_num: Number of the band where the dock item should be placed.
+ * @band_position: Position of the new dock item in band @band_num.
  * @offset: Offset from the previous dock item in the band; if there is
  * no previous item, offset from the beginning of the band.
- *
- * Returns: The dock item used to contain the widget.
  * 
  * Add @widget as a dock item according to the specified layout
  * information.  Notice that, if automatic layout configuration is
  * enabled, the layout is overridden by the saved configuration, if
  * any.
+ *
+ * Returns: The dock item used to contain the widget.
  **/
 GtkWidget *
 gnome_app_add_docked (GnomeApp *app,
@@ -795,9 +794,9 @@ gnome_app_add_docked (GnomeApp *app,
 
 /**
  * gnome_app_enable_layout_config:
- * @app: A &GnomeApp widget
+ * @app: A #GnomeApp widget.
  * @enable: Boolean specifying whether automatic configuration saving
- * is enabled
+ * is enabled.
  * 
  * Specify whether @app should automatically save the dock's
  * layout configuration via gnome-config whenever it changes or not.
@@ -810,12 +809,12 @@ gnome_app_enable_layout_config (GnomeApp *app, gboolean enable)
 
 /**
  * gnome_app_get_dock_item_by_name:
- * @app: A &GnomeApp widget
- * @name: Name of the dock item to retrieve
+ * @app: A #GnomeApp widget.
+ * @name: Name of the dock item to retrieve.
  * 
  * Retrieve the dock item whose name matches @name.
  * 
- * Return value: The retrieved dock item.
+ * Returns: The retrieved dock item.
  **/
 BonoboDockItem *
 gnome_app_get_dock_item_by_name (GnomeApp *app,
@@ -842,11 +841,11 @@ gnome_app_get_dock_item_by_name (GnomeApp *app,
 
 /**
  * gnome_app_get_dock:
- * @app: A &GnomeApp widget
+ * @app: A #GnomeApp widget
  * 
- * Retrieves the &BonoboDock widget contained in the &GnomeApp.
+ * Retrieves the #BonoboDock widget contained in @app.
  * 
- * Returns: The &BonoboDock widget.
+ * Returns: The relevant #BonoboDock widget.
  **/
 BonoboDock *
 gnome_app_get_dock (GnomeApp *app)

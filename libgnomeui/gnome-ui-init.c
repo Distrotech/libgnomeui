@@ -456,7 +456,7 @@ libgnomeui_arg_callback(poptContext con,
  * It provides good consistancy (you always know the rc file will be
  * the same name as the executable), and it's easy for the programmer.
  * 
- * If you don't like it.. give me a good reason.  Symlin
+ * If you don't like it.. give me a good reason.
  */
 static void
 libgnomeui_rc_parse (GnomeProgram *program, const gchar *command)
