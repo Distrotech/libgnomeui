@@ -1,3 +1,7 @@
+1999-05-31  Nat Friedman  <nat@gnome-support.com>
+
+	* gnome-popup-menu.c: Include gtk/gtkcompat.h.
+
 1999-05-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gnome_icon_list_new_flags): Fixed the format
