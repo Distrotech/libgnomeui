@@ -33,6 +33,25 @@
 #include "gtkpixmapmenuitem.h"
 #include "gnome-stock.h"
 
+struct _GnomeFileSaverPrivate {
+        GtkWidget *filename_entry;
+
+        GtkWidget *location_option;
+        GtkWidget *location_menu;
+        
+        GConfClient *conf;
+        guint        conf_notify;
+
+        GSList      *locations;
+
+        GtkWidget   *type_option;
+        GtkWidget   *type_menu;
+        GtkWidget   *type_pixmap;
+        GtkWidget   *type_label;
+};
+
+
+
 enum {
         FINISHED,
         LAST_SIGNAL
@@ -102,11 +121,16 @@ gnome_file_saver_class_init (GnomeFileSaverClass* klass)
                                 GTK_RUN_LAST,
                                 GTK_CLASS_TYPE (object_class),
                                 GTK_SIGNAL_OFFSET (GnomeFileSaverClass, finished),
-                                gtk_marshal_NONE__POINTER,
-                                GTK_TYPE_NONE, 1, GTK_TYPE_STRING);
+                                gtk_marshal_NONE__POINTER_POINTER,
+                                GTK_TYPE_NONE,
+				2,
+				GTK_TYPE_STRING,
+				GTK_TYPE_STRING);
         
         gtk_object_class_add_signals (object_class, signals, 
                                       LAST_SIGNAL);
+
+	klass->finished = NULL;
         
         object_class->set_arg = gnome_file_saver_set_arg;
         object_class->get_arg = gnome_file_saver_get_arg;
@@ -128,6 +152,8 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
         GtkWidget *vbox;
         gchar *icon;
 
+	file_saver->_priv = g_new0(GnomeFileSaverPrivate, 1);
+
         gtk_window_set_policy(GTK_WINDOW(file_saver), FALSE, TRUE, FALSE);
         
         dialog = GNOME_DIALOG(file_saver);
@@ -141,16 +167,16 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
         icon = gnome_pixmap_file("mc/i-regular.png");
 
         if (icon)
-                file_saver->type_pixmap = gnome_pixmap_new_from_file (icon);
+                file_saver->_priv->type_pixmap = gnome_pixmap_new_from_file (icon);
         else
-                file_saver->type_pixmap = gnome_pixmap_new ();
+                file_saver->_priv->type_pixmap = gnome_pixmap_new ();
 
         g_free (icon);
         
         frame = gtk_frame_new (NULL);
         vbox = gtk_vbox_new (FALSE, 0);
         gtk_container_add (GTK_CONTAINER (vbox), frame);
-        gtk_container_add (GTK_CONTAINER (frame), file_saver->type_pixmap);
+        gtk_container_add (GTK_CONTAINER (frame), file_saver->_priv->type_pixmap);
         
         gtk_box_pack_start (GTK_BOX(hbox),
                             vbox,
@@ -178,24 +204,24 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
                           1, 2,
                           GTK_FILL, GTK_FILL, 3, 3);
 
-        file_saver->type_label =  gtk_label_new(_("Save As Type:"));
-        gtk_misc_set_alignment(GTK_MISC(file_saver->type_label), 0.0, 0.5);
+        file_saver->_priv->type_label =  gtk_label_new(_("Save As Type:"));
+        gtk_misc_set_alignment(GTK_MISC(file_saver->_priv->type_label), 0.0, 0.5);
         gtk_table_attach (GTK_TABLE(table),
-                          file_saver->type_label,
+                          file_saver->_priv->type_label,
                           0, 1,
                           2, 3,
                           GTK_FILL, GTK_FILL, 3, 3);
         
-        file_saver->filename_entry = gtk_entry_new();
+        file_saver->_priv->filename_entry = gtk_entry_new();
 
-        file_saver->location_option = gtk_option_menu_new();        
-        file_saver->location_menu = gtk_menu_new();
+        file_saver->_priv->location_option = gtk_option_menu_new();        
+        file_saver->_priv->location_menu = gtk_menu_new();
 
-        file_saver->type_option = gtk_option_menu_new();        
-        file_saver->type_menu = gtk_menu_new();
+        file_saver->_priv->type_option = gtk_option_menu_new();        
+        file_saver->_priv->type_menu = gtk_menu_new();
         
         gtk_table_attach (GTK_TABLE(table),
-                          file_saver->filename_entry,
+                          file_saver->_priv->filename_entry,
                           1, 2,
                           0, 1,
                           GTK_FILL | GTK_EXPAND,
@@ -203,7 +229,7 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
                           3, 3);
 
         gtk_table_attach (GTK_TABLE(table),
-                          file_saver->location_option,
+                          file_saver->_priv->location_option,
                           1, 2,
                           1, 2,
                           GTK_FILL | GTK_EXPAND,
@@ -211,7 +237,7 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
                           3, 3);
 
         gtk_table_attach (GTK_TABLE(table),
-                          file_saver->type_option,
+                          file_saver->_priv->type_option,
                           1, 2,
                           2, 3,
                           GTK_FILL | GTK_EXPAND,
@@ -222,9 +248,9 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
          * Get the GConfClient object
          */ 
         
-        file_saver->conf = gnome_get_gconf_client();
+        file_saver->_priv->conf = gnome_get_gconf_client();
 
-        gtk_object_ref(GTK_OBJECT(file_saver->conf));
+        gtk_object_ref(GTK_OBJECT(file_saver->_priv->conf));
 
         /*
          * Fill in the Location menu
@@ -232,12 +258,12 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
         
         /* No preload because the explicit all_entries call below
            effectively results in a preload. */
-        gconf_client_add_dir(file_saver->conf,
+        gconf_client_add_dir(file_saver->_priv->conf,
                              "/desktop/standard/save-locations",
                              GCONF_CLIENT_PRELOAD_NONE, NULL);
 
         all_entries =
-                gconf_client_all_entries(file_saver->conf,
+                gconf_client_all_entries(file_saver->_priv->conf,
                                          "/desktop/standard/save-locations",
                                          NULL);
 
@@ -261,29 +287,29 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
         }
         g_slist_free(all_entries);
         
-        file_saver->conf_notify =
-                gconf_client_notify_add(file_saver->conf,
+        file_saver->_priv->conf_notify =
+                gconf_client_notify_add(file_saver->_priv->conf,
                                         "/desktop/standard/save-locations",
                                         locations_changed_notify,
                                         file_saver, NULL, NULL);
 
-        gtk_widget_show(file_saver->location_menu);
+        gtk_widget_show(file_saver->_priv->location_menu);
         
         /* Must do _after_ filling the menu */
-        gtk_option_menu_set_menu(GTK_OPTION_MENU(file_saver->location_option),
-                                 file_saver->location_menu);
+        gtk_option_menu_set_menu(GTK_OPTION_MENU(file_saver->_priv->location_option),
+                                 file_saver->_priv->location_menu);
 
-        gtk_widget_show(file_saver->type_menu);
+        gtk_widget_show(file_saver->_priv->type_menu);
         
         /* Must do _after_ filling the menu */
-        gtk_option_menu_set_menu(GTK_OPTION_MENU(file_saver->type_option),
-                                 file_saver->type_menu);
+        gtk_option_menu_set_menu(GTK_OPTION_MENU(file_saver->_priv->type_option),
+                                 file_saver->_priv->type_menu);
 
         gtk_widget_show_all(hbox);
 
         /* Now hide the type stuff until we get mime types added */
-        gtk_widget_hide(file_saver->type_label);
-        gtk_widget_hide(file_saver->type_option);
+        gtk_widget_hide(file_saver->_priv->type_label);
+        gtk_widget_hide(file_saver->_priv->type_option);
 
         gnome_dialog_append_buttons (GNOME_DIALOG (file_saver),
                                      GNOME_STOCK_BUTTON_OK,
@@ -310,16 +336,17 @@ gnome_file_saver_destroy (GtkObject* object)
 
         file_saver = GNOME_FILE_SAVER (object);
         
-        if (file_saver->conf_notify != 0) {
-                gconf_client_notify_remove(file_saver->conf,
-                                           file_saver->conf_notify);
-                file_saver->conf_notify = 0;
+        if (file_saver->_priv->conf_notify != 0) {
+                gconf_client_notify_remove(file_saver->_priv->conf,
+                                           file_saver->_priv->conf_notify);
+                file_saver->_priv->conf_notify = 0;
         }
 
-        gconf_client_remove_dir(file_saver->conf,
+        gconf_client_remove_dir(file_saver->_priv->conf,
                                 "/desktop/standard/save-locations");
         
-        gtk_object_unref(GTK_OBJECT(file_saver->conf));
+        gtk_object_unref(GTK_OBJECT(file_saver->_priv->conf));
+        file_saver->_priv->conf = NULL;
         
         (* GTK_OBJECT_CLASS(parent_class)->destroy) (object);
 }
@@ -331,6 +358,8 @@ gnome_file_saver_finalize (GObject* object)
 
         file_saver = GNOME_FILE_SAVER (object);
 
+	g_free(file_saver->_priv);
+	file_saver->_priv = NULL;
 
         (* G_OBJECT_CLASS(parent_class)->finalize) (object);
 }
@@ -398,12 +427,12 @@ type_chosen_cb(GtkWidget* mi, GnomeFileSaver* file_saver)
 
         if (pixbuf) {
                 printf("loaded ok\n");
-                gnome_pixmap_set_pixbuf (GNOME_PIXMAP(file_saver->type_pixmap),
+                gnome_pixmap_set_pixbuf (GNOME_PIXMAP(file_saver->_priv->type_pixmap),
                                          pixbuf);
                 gdk_pixbuf_unref(pixbuf);
         } else {
                 printf("no load\n");
-                gnome_pixmap_clear (GNOME_PIXMAP(file_saver->type_pixmap));
+                gnome_pixmap_clear (GNOME_PIXMAP(file_saver->_priv->type_pixmap));
         }
                 
         g_free(freeme);
@@ -420,8 +449,8 @@ gnome_file_saver_add_mime_type(GnomeFileSaver *file_saver,
         const gchar* desc;
         GtkWidget *label;
 
-        gtk_widget_show(file_saver->type_option);
-        gtk_widget_show(file_saver->type_label);
+        gtk_widget_show(file_saver->_priv->type_option);
+        gtk_widget_show(file_saver->_priv->type_label);
         
         icon_file = gnome_mime_get_value(mime_type, "icon-filename");
         desc = gnome_mime_description(mime_type);
@@ -460,7 +489,7 @@ gnome_file_saver_add_mime_type(GnomeFileSaver *file_saver,
         
         gtk_widget_show_all(mi);
 
-        gtk_menu_append(GTK_MENU(file_saver->type_menu),
+        gtk_menu_append(GTK_MENU(file_saver->_priv->type_menu),
                         mi);        
 }
 
@@ -563,15 +592,15 @@ gnome_file_saver_remove_location(GnomeFileSaver* file_saver,
         /* This function does NOT assume the location
            is actually in the current list */
         
-        found = g_slist_find_custom(file_saver->locations,
+        found = g_slist_find_custom(file_saver->_priv->locations,
                                     (gchar*)gconf_key,
                                     location_compare_gconf_func);
 
         mi = found ? found->data : NULL;
         
         if (mi != NULL) {
-                file_saver->locations = g_slist_remove(file_saver->locations,
-                                                       mi);
+                file_saver->_priv->locations =
+			g_slist_remove(file_saver->_priv->locations, mi);
                 gtk_widget_destroy(mi);
         }
 }
@@ -617,7 +646,7 @@ gnome_file_saver_update_location(GnomeFileSaver* file_saver,
                 return;
         }
 
-        found = g_slist_find_custom(file_saver->locations,
+        found = g_slist_find_custom(file_saver->_priv->locations,
                                     (gchar*)key,
                                     location_compare_gconf_func);
 
@@ -635,7 +664,7 @@ gnome_file_saver_update_location(GnomeFileSaver* file_saver,
                    need to sync with the menu */
 
                 count = 0;
-                iter = file_saver->locations;
+                iter = file_saver->_priv->locations;
                 while (iter != NULL) {
                         GtkWidget *old_mi = iter->data;
                         const gchar* old_human_name;
@@ -651,10 +680,11 @@ gnome_file_saver_update_location(GnomeFileSaver* file_saver,
                         iter = g_slist_next(iter);
                 }
 
-                file_saver->locations = g_slist_insert(file_saver->locations,
-                                                       mi, count);
+                file_saver->_priv->locations =
+			g_slist_insert(file_saver->_priv->locations,
+				       mi, count);
 
-                gtk_menu_insert(GTK_MENU(file_saver->location_menu),
+                gtk_menu_insert(GTK_MENU(file_saver->_priv->location_menu),
                                 mi, count);
         }
 }

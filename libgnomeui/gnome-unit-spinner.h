@@ -41,7 +41,11 @@ typedef struct _GnomeUnitSpinnerClass GnomeUnitSpinnerClass;
 struct _GnomeUnitSpinner {
   GtkSpinButton parent;
 
+  /*< public >*/
   const GnomeUnit *adj_unit;
+
+  /*< private >*/
+  gpointer _priv; /* reserved for a future private pointer */
 };
 
 struct _GnomeUnitSpinnerClass {
@@ -50,6 +54,10 @@ struct _GnomeUnitSpinnerClass {
 
 GtkType    gnome_unit_spinner_get_type     (void);
 GtkWidget *gnome_unit_spinner_new          (GtkAdjustment *adjustment,
+					    guint digits,
+					    const GnomeUnit *adj_unit);
+void       gnome_unit_spinner_construct    (GnomeUnitSpinner *self,
+					    GtkAdjustment *adjustment,
 					    guint digits,
 					    const GnomeUnit *adj_unit);
 void       gnome_unit_spinner_set_value    (GnomeUnitSpinner *self,

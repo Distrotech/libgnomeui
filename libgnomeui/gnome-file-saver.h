@@ -26,12 +26,11 @@
 #ifndef GNOME_FILE_SAVER_H
 #define GNOME_FILE_SAVER_H
 
+#include <libgnome/gnome-defs.h>
 #include <libgnomeui/gnome-dialog.h>
 #include <libgnomeui/gnome-gconf.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+BEGIN_GNOME_DECLS
 
 #define GNOME_TYPE_FILE_SAVER            (gnome_file_saver_get_type())
 #define GNOME_FILE_SAVER(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_FILE_SAVER, GnomeFileSaver))
@@ -40,28 +39,15 @@ extern "C" {
 #define GNOME_IS_FILE_SAVER_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_FILE_SAVER))
 #define GNOME_FILE_SAVER_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_FILE_SAVER, GnomeFileSaverClass))
 
-typedef struct _GnomeFileSaver GnomeFileSaver;
-typedef struct _GnomeFileSaverClass GnomeFileSaverClass;
+typedef struct _GnomeFileSaver        GnomeFileSaver;
+typedef struct _GnomeFileSaverPrivate GnomeFileSaverPrivate;
+typedef struct _GnomeFileSaverClass   GnomeFileSaverClass;
 
 struct _GnomeFileSaver {
         GnomeDialog parent_instance;
-        
-        /* all private, don't even think about it */
 
-        GtkWidget *filename_entry;
-
-        GtkWidget *location_option;
-        GtkWidget *location_menu;
-        
-        GConfClient *conf;
-        guint        conf_notify;
-
-        GSList      *locations;
-
-        GtkWidget   *type_option;
-        GtkWidget   *type_menu;
-        GtkWidget   *type_pixmap;
-        GtkWidget   *type_label;
+	/*< private >*/
+	GnomeFileSaverPrivate *_priv;
 };
 
 struct _GnomeFileSaverClass {
@@ -84,8 +70,6 @@ void            gnome_file_saver_add_mime_type(GnomeFileSaver *file_saver,
 void            gnome_file_saver_add_mime_types(GnomeFileSaver *file_saver,
                                                 const gchar    *mime_types[]);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+END_GNOME_DECLS
 
 #endif

@@ -26,11 +26,10 @@
 #ifndef GNOME_RECENTLY_USED_H
 #define GNOME_RECENTLY_USED_H
 
+#include <libgnome/gnome-defs.h>
 #include <libgnomeui/gnome-gconf.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+BEGIN_GNOME_DECLS
 
 typedef struct _GnomeRecentDocument GnomeRecentDocument;
 
@@ -41,19 +40,15 @@ typedef struct _GnomeRecentDocument GnomeRecentDocument;
 #define GNOME_IS_RECENTLY_USED_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_RECENTLY_USED))
 #define GNOME_RECENTLY_USED_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_RECENTLY_USED, GnomeRecentlyUsedClass))
 
-typedef struct _GnomeRecentlyUsed GnomeRecentlyUsed;
-typedef struct _GnomeRecentlyUsedClass GnomeRecentlyUsedClass;
+typedef struct _GnomeRecentlyUsed        GnomeRecentlyUsed;
+typedef struct _GnomeRecentlyUsedPrivate GnomeRecentlyUsedPrivate;
+typedef struct _GnomeRecentlyUsedClass   GnomeRecentlyUsedClass;
 
 struct _GnomeRecentlyUsed {
         GtkObject parent_instance;
 
-        /* Private! Private! */
-        GHashTable *hash;
-        GConfClient *conf;
-        guint conf_notify;
-        GSList *add_list;
-        gchar *key_root;
-        gboolean app_specific;
+	/*< private >*/
+	GnomeRecentlyUsedPrivate *_priv;
 };
 
 struct _GnomeRecentlyUsedClass {
@@ -89,7 +84,7 @@ void                 gnome_recently_used_add_simple       (GnomeRecentlyUsed   *
 
 
 GnomeRecentDocument* gnome_recent_document_new            (void);
-void                 gnome_recent_document_ref            (GnomeRecentDocument *doc);
+GnomeRecentDocument* gnome_recent_document_ref            (GnomeRecentDocument *doc);
 void                 gnome_recent_document_unref          (GnomeRecentDocument *doc);
 
 /* Available args:
@@ -113,8 +108,6 @@ const gchar*         gnome_recent_document_get            (GnomeRecentDocument *
 GTime                gnome_recent_document_get_creation_time (GnomeRecentDocument *doc);
 
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+END_GNOME_DECLS
 
 #endif

@@ -52,15 +52,9 @@ struct _GnomeDialog
   GtkWindow window;
   /*< public >*/
   GtkWidget * vbox;
+  GList *buttons;
   /*< private >*/
   GnomeDialogPrivate *_priv;
-  GtkWidget * action_area; /* A button box, not an hbox */
-
-  GList *buttons;
-  GtkAccelGroup * accelerators;
-
-  unsigned int click_closes : 1;
-  unsigned int just_hide : 1;
 };
 
 struct _GnomeDialogClass
@@ -182,6 +176,7 @@ void       gnome_dialog_construct  (GnomeDialog * dialog,
 void       gnome_dialog_constructv (GnomeDialog * dialog,
 				    const gchar * title,
 				    const gchar **buttons);
+
 
 END_GNOME_DECLS
 

@@ -26,6 +26,7 @@
 
 #include <config.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <gtk/gtkdrawingarea.h>
 #include <gtk/gtkframe.h>
@@ -33,7 +34,27 @@
 #include <gtk/gtksignal.h>
 #include "gnome-procbar.h"
 
-#define A (w->allocation)
+struct _GnomeProcBarPrivate {
+	GtkWidget *bar;
+	GtkWidget *label;
+	GtkWidget *frame;
+
+	GdkPixmap *bs;
+	GdkColor *colors;
+
+	gboolean (*cb)(gpointer);
+	gpointer cb_data;
+
+	unsigned int *last;
+
+	gint colors_allocated;
+	gint first_request;
+	gint n;
+	gint tag;
+
+	gboolean vertical : 1;
+};
+
 
 static void gnome_proc_bar_class_init (GnomeProcBarClass *class);
 static void gnome_proc_bar_init       (GnomeProcBar      *pb);
@@ -44,7 +65,8 @@ static gint gnome_proc_bar_expose (GtkWidget *w, GdkEventExpose *e, GnomeProcBar
 static gint gnome_proc_bar_configure (GtkWidget *w, GdkEventConfigure *e, GnomeProcBar *pb);
 static void gnome_proc_bar_size_request (GtkWidget *w, GtkRequisition *r, GnomeProcBar *pb);
 static void gnome_proc_bar_finalize (GObject *o);
-static void gnome_proc_bar_setup_colors (GnomeProcBar *pb);
+static void gnome_proc_bar_alloc_colors (GnomeProcBar *pb);
+static void gnome_proc_bar_free_colors (GnomeProcBar *pb);
 static void gnome_proc_bar_draw (GnomeProcBar *pb, const guint val []);
 static void gnome_proc_bar_destroy (GtkObject *obj);
 static gint gnome_proc_bar_timeout (gpointer data);
@@ -93,10 +115,14 @@ gnome_proc_bar_destroy (GtkObject *obj)
 {
   GnomeProcBar *pb = GNOME_PROC_BAR (obj);
 
-  if (pb->tag != -1) {
-    gtk_timeout_remove (pb->tag);
-    pb->tag = -1;
+  if (pb->_priv->tag != -1) {
+    gtk_timeout_remove (pb->_priv->tag);
+    pb->_priv->tag = -1;
   }
+
+  gnome_proc_bar_free_colors (pb);
+  g_free(pb->_priv->colors);
+  pb->_priv->colors = NULL;
 
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (obj);
@@ -105,8 +131,16 @@ gnome_proc_bar_destroy (GtkObject *obj)
 static void
 gnome_proc_bar_finalize (GObject *o)
 {
+    GnomeProcBar *pb;
+
     g_return_if_fail (o != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (o));
+
+    pb = GNOME_PROC_BAR(o);
+
+    g_free(pb->_priv);
+    pb->_priv = NULL;
+
 
     (* G_OBJECT_CLASS (parent_class)->finalize) (o);
 }
@@ -114,10 +148,12 @@ gnome_proc_bar_finalize (GObject *o)
 static void
 gnome_proc_bar_init (GnomeProcBar *pb)
 {
+	pb->_priv = g_new0(GnomeProcBarPrivate, 1);
+	pb->_priv->colors_allocated = 0;
 }
 
 /**
- * gnome_proc_bar_new:
+ * gnome_proc_bar_construct:
  * @pb: A #GnomeProBar object to construct
  * @label: Either %NULL or a #GtkWidget that will be shown at the left
  * side of the process bar.
@@ -133,55 +169,56 @@ gnome_proc_bar_init (GnomeProcBar *pb)
  * #gnome_proc_bar_start with the time interval and the data argument
  * that will be passed to the callback to actually start executing the
  * timer.
+ * Note a change from 1.x behaviour.  Now the @colors argument is copied so
+ * you are responsible for freeing it on your end.
  *
  */
 void
-gnome_proc_bar_construct (GnomeProcBar *pb, GtkWidget *label, gint n, GdkColor *colors, gint (*cb)())
+gnome_proc_bar_construct (GnomeProcBar *pb, GtkWidget *label, gint n, const GdkColor *colors, gboolean (*cb)(gpointer))
 {
     g_return_if_fail (pb != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (pb));
+    g_return_if_fail (colors != NULL);
     
-    pb->cb = cb;
-    pb->n = n;
-    pb->colors = colors;
-    pb->vertical = FALSE;
+    pb->_priv->cb = cb;
+    pb->_priv->n = n;
+    pb->_priv->colors = g_new(GdkColor, n);
+    memcpy(pb->_priv->colors, colors, n * sizeof(GdkColor));
 
-    pb->tag = -1;
-    pb->first_request = 1;
-    pb->colors_allocated = 0;
+    pb->_priv->vertical = FALSE;
 
-    pb->last = g_new (unsigned, pb->n+1);
-    pb->last [0] = 0;
+    pb->_priv->last = g_new (unsigned, pb->_priv->n+1);
+    pb->_priv->last [0] = 0;
 
-    pb->bar = gtk_drawing_area_new ();
-    pb->frame = gtk_frame_new (NULL);
+    pb->_priv->bar = gtk_drawing_area_new ();
+    pb->_priv->frame = gtk_frame_new (NULL);
 
-    pb->bs = NULL;
+    pb->_priv->bs = NULL;
 
-    gtk_frame_set_shadow_type (GTK_FRAME (pb->frame), GTK_SHADOW_IN);
+    gtk_frame_set_shadow_type (GTK_FRAME (pb->_priv->frame), GTK_SHADOW_IN);
 
-    gtk_container_add (GTK_CONTAINER (pb->frame), pb->bar);
+    gtk_container_add (GTK_CONTAINER (pb->_priv->frame), pb->_priv->bar);
 
-    pb->label = label;
+    pb->_priv->label = label;
 
     if (label) {
 	gtk_box_pack_start (GTK_BOX (pb), label, FALSE, TRUE, 0);
-	gtk_widget_show (pb->label);
+	gtk_widget_show (label);
     }
 
-    gtk_widget_set_events (pb->bar, GDK_EXPOSURE_MASK | gtk_widget_get_events (pb->bar));
+    gtk_widget_set_events (pb->_priv->bar, GDK_EXPOSURE_MASK | gtk_widget_get_events (pb->_priv->bar));
 
-    gtk_signal_connect (GTK_OBJECT (pb->bar), "expose_event",
+    gtk_signal_connect (GTK_OBJECT (pb->_priv->bar), "expose_event",
 			(GtkSignalFunc) gnome_proc_bar_expose, pb);
-    gtk_signal_connect (GTK_OBJECT (pb->bar), "configure_event",
+    gtk_signal_connect (GTK_OBJECT (pb->_priv->bar), "configure_event",
 			(GtkSignalFunc) gnome_proc_bar_configure, pb);
-    gtk_signal_connect (GTK_OBJECT (pb->bar), "size_request",
+    gtk_signal_connect (GTK_OBJECT (pb->_priv->bar), "size_request",
 			(GtkSignalFunc) gnome_proc_bar_size_request, pb);
 
-    gtk_box_pack_start_defaults (GTK_BOX (pb), pb->frame);
+    gtk_box_pack_start_defaults (GTK_BOX (pb), pb->_priv->frame);
 
-    gtk_widget_show (pb->frame);
-    gtk_widget_show (pb->bar);
+    gtk_widget_show (pb->_priv->frame);
+    gtk_widget_show (pb->_priv->bar);
 
 }
 
@@ -200,11 +237,13 @@ gnome_proc_bar_construct (GnomeProcBar *pb, GtkWidget *label, gint n, GdkColor *
  * called. You need to call #gnome_proc_bar_start with the time interval and
  * the data argument that will be passed to the callback to actually start
  * executing the timer.
+ * Note a change from 1.x behaviour.  Now the @colors argument is copied so
+ * you are responsible for freeing it on your end.
  *
  * Returns: The newly created #GnomeProcBar widget.
  */
 GtkWidget *
-gnome_proc_bar_new (GtkWidget *label, gint n, GdkColor *colors, gint (*cb)())
+gnome_proc_bar_new (GtkWidget *label, gint n, const GdkColor *colors, gboolean (*cb)(gpointer))
 {
     GnomeProcBar *pb;
 
@@ -217,11 +256,11 @@ gnome_proc_bar_new (GtkWidget *label, gint n, GdkColor *colors, gint (*cb)())
 static gint
 gnome_proc_bar_expose (GtkWidget *w, GdkEventExpose *e, GnomeProcBar *pb)
 {
-    if (pb->bs)
+    if (pb->_priv->bs)
 	gdk_window_copy_area (w->window,
 			      w->style->black_gc,
 			      e->area.x, e->area.y,
-			      pb->bs,
+			      pb->_priv->bs,
 			      e->area.x, e->area.y,
 			      e->area.width, e->area.height);
 
@@ -231,43 +270,66 @@ gnome_proc_bar_expose (GtkWidget *w, GdkEventExpose *e, GnomeProcBar *pb)
 static void
 gnome_proc_bar_size_request (GtkWidget *w, GtkRequisition *r, GnomeProcBar *pb)
 {
-    if (!pb->first_request) {
+    /* FIXME: first_request is always 0, plus this seems incredibly hackish */
+    if (!pb->_priv->first_request) {
 	r->width = w->allocation.width;
 	r->height = w->allocation.height;
     }
-    pb->first_request = 0;
+    pb->_priv->first_request = 0;
 }
 
 static void
-gnome_proc_bar_setup_colors (GnomeProcBar *pb)
+gnome_proc_bar_alloc_colors (GnomeProcBar *pb)
 {
-    GdkColormap *cmap;
-    gint i;
-
     g_return_if_fail (pb != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (pb));
-    g_return_if_fail (pb->bar != NULL);
-    g_return_if_fail (pb->bar->window != NULL);
+    g_return_if_fail (pb->_priv->bar != NULL);
+    g_return_if_fail (pb->_priv->bar->window != NULL);
 
-    cmap = gdk_window_get_colormap (pb->bar->window);
-    for (i=0; i<pb->n; i++)
-	gdk_color_alloc (cmap, &pb->colors [i]);
+    if( ! pb->_priv->colors_allocated) {
+	    GdkColormap *cmap;
+	    gboolean *success = g_new(gboolean, pb->_priv->n);
+	    cmap = gdk_window_get_colormap (pb->_priv->bar->window);
+	    gdk_colormap_alloc_colors (cmap,
+				       pb->_priv->colors,
+				       pb->_priv->n,
+				       FALSE, TRUE, success);
+	    /* FIXME: We should do something on failiure */
+	    g_free(success);
+    }
 
-    pb->colors_allocated = 1;
+    pb->_priv->colors_allocated = 1;
+}
+
+static void
+gnome_proc_bar_free_colors (GnomeProcBar *pb)
+{
+    g_return_if_fail (pb != NULL);
+    g_return_if_fail (GNOME_IS_PROC_BAR (pb));
+    g_return_if_fail (pb->_priv->bar != NULL);
+    g_return_if_fail (pb->_priv->bar->window != NULL);
+
+    if(pb->_priv->colors_allocated) {
+	    GdkColormap *cmap;
+	    cmap = gdk_window_get_colormap (pb->_priv->bar->window);
+	    gdk_colormap_free_colors(cmap, pb->_priv->colors, pb->_priv->n);
+    }
+
+    pb->_priv->colors_allocated = 0;
 }
 
 static gint
 gnome_proc_bar_configure (GtkWidget *w, GdkEventConfigure *e,
 			  GnomeProcBar *pb)
 {
-    gnome_proc_bar_setup_colors (pb);
+    gnome_proc_bar_alloc_colors (pb);
 
-    if (pb->bs) {
-	gdk_pixmap_unref (pb->bs);
-	pb->bs = NULL;
+    if (pb->_priv->bs) {
+	gdk_pixmap_unref (pb->_priv->bs);
+	pb->_priv->bs = NULL;
     }
 
-    pb->bs = gdk_pixmap_new (w->window,
+    pb->_priv->bs = gdk_pixmap_new (w->window,
 			     w->allocation.width,
 			     w->allocation.height,
 			     -1);
@@ -275,15 +337,10 @@ gnome_proc_bar_configure (GtkWidget *w, GdkEventConfigure *e,
     gdk_draw_rectangle (w->window, w->style->black_gc, TRUE, 0, 0,
 			w->allocation.width, w->allocation.height);
 
-    gnome_proc_bar_draw (pb, pb->last);
+    gnome_proc_bar_draw (pb, pb->_priv->last);
 
     return TRUE;
 }
-
-#undef A
-
-#define W (pb->bar)
-#define A (pb->bar->allocation)
 
 static void
 gnome_proc_bar_draw (GnomeProcBar *pb, const guint val [])
@@ -294,54 +351,58 @@ gnome_proc_bar_draw (GnomeProcBar *pb, const guint val [])
     gint wr, w;
     GdkGC *gc;
 
-    w = pb->vertical ? A.height : A.width;
+    w = pb->_priv->vertical ?
+	    pb->_priv->bar->allocation.height :
+	    pb->_priv->bar->allocation.width;
     x = 0;
 
-    for (i=0; i<pb->n; i++)
+    for (i=0; i<pb->_priv->n; i++)
 	tot += val [i+1];
 
-    if (!GTK_WIDGET_REALIZED (pb->bar) || !tot)
+    if (!GTK_WIDGET_REALIZED (pb->_priv->bar) || !tot)
 	return;
 
-    gc = gdk_gc_new (pb->bar->window);
+    gc = gdk_gc_new (pb->_priv->bar->window);
 
-    for (i=0; i<pb->n; i++) {
-	if (i<pb->n-1)
+    for (i=0; i<pb->_priv->n; i++) {
+	if (i<pb->_priv->n-1)
 	    wr = (unsigned) w * ((float)val [i+1]/tot);
 	else
-	    wr = (pb->vertical ? A.height : A.width) - x;
+	    wr = (pb->_priv->vertical ?
+		  pb->_priv->bar->allocation.height :
+		  pb->_priv->bar->allocation.width) - x;
 
 	gdk_gc_set_foreground (gc,
-			       &pb->colors [i]);
+			       &pb->_priv->colors [i]);
 
-	if (pb->vertical)
-	    gdk_draw_rectangle (pb->bs,
+	if (pb->_priv->vertical)
+	    gdk_draw_rectangle (pb->_priv->bs,
 				gc,
 				TRUE,
-				0, A.height - x - wr,
-				A.width, wr);
+				0,
+				pb->_priv->bar->allocation.height - x - wr,
+				pb->_priv->bar->allocation.width,
+				wr);
 	else
-	    gdk_draw_rectangle (pb->bs,
+	    gdk_draw_rectangle (pb->_priv->bs,
 				gc,
 				TRUE,
 				x, 0,
-				wr, A.height);
+				wr, pb->_priv->bar->allocation.height);
 	
 	x += wr;
     }
 		
-    gdk_window_copy_area (pb->bar->window,
+    gdk_window_copy_area (pb->_priv->bar->window,
 			  gc,
 			  0, 0,
-			  pb->bs,
+			  pb->_priv->bs,
 			  0, 0,
-			  A.width, A.height);
+			  pb->_priv->bar->allocation.width,
+			  pb->_priv->bar->allocation.height);
 
     gdk_gc_destroy (gc);
 }
-
-#undef W
-#undef A
 
 static gint
 gnome_proc_bar_timeout (gpointer data)
@@ -350,7 +411,7 @@ gnome_proc_bar_timeout (gpointer data)
 	gint result;
 
 	GDK_THREADS_ENTER ();
-	result = pb->cb (pb->cb_data);
+	result = pb->_priv->cb (pb->_priv->cb_data);
 	GDK_THREADS_LEAVE ();
 
 	return result;
@@ -359,7 +420,7 @@ gnome_proc_bar_timeout (gpointer data)
 /**
  * gnome_proc_bar_set_values:
  * @pb: Pointer to a #GnomeProcBar object
- * @val: pointer to an array of @pb->n integers
+ * @val: pointer to an array of @pb->_priv->n integers
  *
  * Description: Set the values of @pb to @val and redraw it. You will
  * probably call this function in the callback to update the values.
@@ -375,20 +436,20 @@ gnome_proc_bar_set_values (GnomeProcBar *pb, const guint val [])
     g_return_if_fail (pb != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (pb));
 
-    if (!GTK_WIDGET_REALIZED (pb->bar)) {
-	for (i=0; i<pb->n+1; i++)
-	    pb->last [i] = val [i];
+    if (!GTK_WIDGET_REALIZED (pb->_priv->bar)) {
+	for (i=0; i<pb->_priv->n+1; i++)
+	    pb->_priv->last [i] = val [i];
 	return;
     }
 
     /* check if values changed */
 
-    for (i=0; i<pb->n+1; i++) {
-	if (val[i] != pb->last [i]) {
+    for (i=0; i<pb->_priv->n+1; i++) {
+	if (val[i] != pb->_priv->last [i]) {
 	    change = 1;
 	    break;
 	}
-	pb->last [i] = val [i];
+	pb->_priv->last [i] = val [i];
     }
 
     gnome_proc_bar_draw (pb, val);
@@ -412,13 +473,15 @@ gnome_proc_bar_start (GnomeProcBar *pb, gint gtime, gpointer data)
     g_return_if_fail (pb != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (pb));
 
-    if (pb->tag != -1)
-      gtk_timeout_remove (pb->tag);
+    if (pb->_priv->tag != -1) {
+      gtk_timeout_remove (pb->_priv->tag);
+      pb->_priv->tag = -1;
+    }
 
-    if (pb->cb) {
-	pb->cb (data);
-        pb->cb_data = data;
-	pb->tag = gtk_timeout_add (gtime, gnome_proc_bar_timeout, pb);
+    if (pb->_priv->cb) {
+	pb->_priv->cb (data);
+        pb->_priv->cb_data = data;
+	pb->_priv->tag = gtk_timeout_add (gtime, gnome_proc_bar_timeout, pb);
     }
 }
 
@@ -437,16 +500,16 @@ gnome_proc_bar_stop (GnomeProcBar *pb)
     g_return_if_fail (pb != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (pb));
 
-    if (pb->tag != -1)
-	gtk_timeout_remove (pb->tag);
+    if (pb->_priv->tag != -1)
+	gtk_timeout_remove (pb->_priv->tag);
 
-    pb->tag = -1;
+    pb->_priv->tag = -1;
 }
 
 /**
  * gnome_proc_bar_update:
  * @pb: Pointer to a #GnomeProcBar object
- * @colors: Pointer to an array of @pb->n #GdkColor elements
+ * @colors: Pointer to an array of @pb->_priv->n #GdkColor elements
  *
  * Description: Update @pb with @colors. @pb is not redrawn,
  * it is only redrawn when you call #gnome_proc_bar_set_values
@@ -454,22 +517,15 @@ gnome_proc_bar_stop (GnomeProcBar *pb)
  * Returns:
  */
 void
-gnome_proc_bar_update (GnomeProcBar *pb, GdkColor *colors)
+gnome_proc_bar_update (GnomeProcBar *pb, const GdkColor *colors)
 {
-    char tmp [BUFSIZ];
-    gint i;
-
     g_return_if_fail (pb != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (pb));
+    g_return_if_fail (colors != NULL);
 
-    for (i=0;i<pb->n;i++) {
-	sprintf (tmp, "#%04x%04x%04x",
-		 colors [i].red, colors [i].green,
-		 colors [i].blue);
-	gdk_color_parse (tmp, &pb->colors [i]);
-    }
-
-    gnome_proc_bar_setup_colors (pb);
+    gnome_proc_bar_free_colors (pb);
+    memcpy(pb->_priv->colors, colors, sizeof(GdkColor) * pb->_priv->n);
+    gnome_proc_bar_alloc_colors (pb);
 }
 
 /**
@@ -488,5 +544,5 @@ gnome_proc_bar_set_orient (GnomeProcBar *pb, gboolean vertical)
     g_return_if_fail (pb != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (pb));
 
-    pb->vertical = vertical;
+    pb->_priv->vertical = vertical;
 }

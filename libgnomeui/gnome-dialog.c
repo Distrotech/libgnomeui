@@ -35,7 +35,6 @@
 struct _GnomeDialogPrivate {
   GtkWidget      *action_area; /* A button box, not an hbox */
 
-  GList          *buttons;
   GtkAccelGroup  *accelerators;
 
   unsigned int    click_closes : 1;
@@ -187,7 +186,7 @@ gnome_dialog_init (GnomeDialog *dialog)
 
   dialog->_priv->just_hide = FALSE;
   dialog->_priv->click_closes = FALSE;
-  dialog->_priv->buttons = NULL;
+  dialog->buttons = NULL;
   
   GTK_WINDOW(dialog)->type = gnome_preferences_get_dialog_type();
   gtk_window_set_position(GTK_WINDOW(dialog), 
@@ -489,7 +488,7 @@ void       gnome_dialog_append_button (GnomeDialog * dialog,
 			      (GtkSignalFunc) gnome_dialog_button_clicked,
 			      dialog);
     
-    dialog->_priv->buttons = g_list_append (dialog->_priv->buttons, button);
+    dialog->buttons = g_list_append (dialog->buttons, button);
   }
 }
 
@@ -534,7 +533,7 @@ void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
 			      (GtkSignalFunc) gnome_dialog_button_clicked,
 			      dialog);
     
-    dialog->_priv->buttons = g_list_append (dialog->_priv->buttons, button);
+    dialog->buttons = g_list_append (dialog->buttons, button);
   }
 }
 
@@ -772,7 +771,7 @@ gnome_dialog_set_default (GnomeDialog *dialog,
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  list = g_list_nth (dialog->_priv->buttons, button);
+  list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
     gtk_widget_grab_default (GTK_WIDGET (list->data));
@@ -846,7 +845,7 @@ void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  list = g_list_nth (dialog->_priv->buttons, button);
+  list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
     gtk_widget_set_sensitive(GTK_WIDGET(list->data), setting);
@@ -878,7 +877,7 @@ void       gnome_dialog_button_connect (GnomeDialog *dialog,
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  list = g_list_nth (dialog->_priv->buttons, button);
+  list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
     gtk_signal_connect(GTK_OBJECT(list->data), "clicked",
@@ -911,7 +910,7 @@ void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  list = g_list_nth (dialog->_priv->buttons, button);
+  list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
     gtk_signal_connect_object (GTK_OBJECT(list->data), "clicked",
@@ -944,7 +943,7 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  list = g_list_nth (dialog->_priv->buttons, button);
+  list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
     /*FIXME*/
@@ -999,7 +998,7 @@ gnome_dialog_button_clicked (GtkWidget   *button,
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  list = GNOME_DIALOG (dialog)->_priv->buttons;
+  list = GNOME_DIALOG (dialog)->buttons;
 
   while (list){
     if (list->data == button) {
@@ -1079,8 +1078,8 @@ static void gnome_dialog_destroy (GtkObject *object)
 
   dialog = GNOME_DIALOG(object);
 
-  g_list_free(dialog->_priv->buttons);
-  dialog->_priv->buttons = NULL;
+  g_list_free(dialog->buttons);
+  dialog->buttons = NULL;
 
   g_free(dialog->_priv);
   dialog->_priv = NULL;
@@ -1137,4 +1136,3 @@ static void gnome_dialog_show (GtkWidget * d)
   if (GTK_WIDGET_CLASS(parent_class)->show)
     (* (GTK_WIDGET_CLASS(parent_class)->show))(d);
 }
-

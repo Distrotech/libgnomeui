@@ -41,30 +41,15 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_PROC_BAR_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PROC_BAR))
 #define GNOME_PROC_BAR_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_PROC_BAR, GnomeProcBarClass))
 
-typedef struct _GnomeProcBar GnomeProcBar;
-typedef struct _GnomeProcBarClass GnomeProcBarClass;
+typedef struct _GnomeProcBar        GnomeProcBar;
+typedef struct _GnomeProcBarPrivate GnomeProcBarPrivate;
+typedef struct _GnomeProcBarClass   GnomeProcBarClass;
 
 struct _GnomeProcBar {
 	GtkHBox hbox;
 
-	GtkWidget *bar;
-	GtkWidget *label;
-	GtkWidget *frame;
-
-	GdkPixmap *bs;
-	GdkColor *colors;
-
-	gint (*cb)();
-	gpointer cb_data;
-
-	unsigned int *last;
-
-	gint colors_allocated;
-	gint first_request;
-	gint n;
-	gint tag;
-
-	gboolean vertical : 1;
+	/*< private >*/
+	GnomeProcBarPrivate *_priv;
 };
 
 struct _GnomeProcBarClass {
@@ -73,17 +58,17 @@ struct _GnomeProcBarClass {
 
 guint       gnome_proc_bar_get_type        (void);
 GtkWidget * gnome_proc_bar_new             (GtkWidget *label,
-					    gint n, GdkColor *colors,
-					    gint (*cb)());
+					    gint n, const GdkColor *colors,
+					    gboolean (*cb)(gpointer));
 void        gnome_proc_bar_construct       (GnomeProcBar *pb,
 					    GtkWidget *label,
-					    gint n, GdkColor *colors,
-					    gint (*cb)());
+					    gint n, const GdkColor *colors,
+					    gboolean (*cb)(gpointer));
 void        gnome_proc_bar_set_values      (GnomeProcBar *pb, const guint val []);
 void        gnome_proc_bar_set_orient      (GnomeProcBar *pb, gboolean vertical);
 void        gnome_proc_bar_start           (GnomeProcBar *pb, gint gtime, gpointer data);
 void        gnome_proc_bar_stop            (GnomeProcBar *pb);
-void        gnome_proc_bar_update          (GnomeProcBar *pb, GdkColor *colors);
+void        gnome_proc_bar_update          (GnomeProcBar *pb, const GdkColor *colors);
 
 END_GNOME_DECLS
 

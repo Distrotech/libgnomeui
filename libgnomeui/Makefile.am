@@ -68,7 +68,6 @@ libgnomeui_1_compat_2_a_SOURCES =\
 	gnome-spell.c			\
 	gnome-startup.c			\
 	gtkcauldron.c			\
-	gnome-canvas-image.c		\
 	gnomeui10-compat.c		\
 	gnome-dns.c			\
 	gnome-dentry-edit.c		\
@@ -76,6 +75,9 @@ libgnomeui_1_compat_2_a_SOURCES =\
 	gnome-druid-page-finish.c	\
 	gnome-properties.c		\
 	gnome-property-entries.c
+
+# This probably won't work right
+#	gnome-canvas-image.c
 
 libgnomeui10compatinclude_HEADERS = \
 	libgnomeui-compat-1.0.h		\
@@ -85,7 +87,6 @@ libgnomeui10compatinclude_HEADERS = \
 	gnome-startup.h			\
 	gtkcauldron.h			\
 	gnome-dentry-edit.h		\
-	gnome-canvas-image.h		\
 	gnomeui10-compat.h		\
 	gnome-dns.h			\
 	gnome-druid-page-start.h	\
@@ -93,6 +94,8 @@ libgnomeui10compatinclude_HEADERS = \
 	gnome-properties.h		\
 	gnome-property-entries.h
 
+# This probably won't work right
+#	gnome-canvas-image.h
 endif
 
 EXTRA_HEADERS = 

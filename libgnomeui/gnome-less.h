@@ -1,4 +1,3 @@
-/* DEPRECATED */
 /* gnome-less.h:
  * Copyright (C) 1998 Free Software Foundation
  * All rights reserved.

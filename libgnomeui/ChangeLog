@@ -1,3 +1,39 @@
+Fri Jul 14 01:00:44 2000  George Lebl <jirka@5z.com>
+
+	* Makefile.am:  Move gnome-canvas-image.[ch] out of the build as it
+	  depends on imlib and imlib appears not to compile with gtk/glib 2.0
+	  anyway.
+
+	* gnome-dialog.[ch]:  doh! I left in the private stuff in the header.
+	  correct for that.  make the buttons list public, it is used outside
+	  of gnome-dialog.  Since this widget will get some GtkDialog action
+	  later, the api doesn't need to be anal for now.
+
+	* gnome-file-saver.[ch]: Add a private structure, and correct the
+	  signal signature, though the signal doesn't seem to get emitted
+	  ever
+
+	* gnome-procbar.[ch]:  Add a private structure and remove the
+	  incredibly ugly single letter defines to make the code more
+	  readable.  Stop leaking colors by allocating, freeing them
+	  correctly.  Add a construct function which does what new_flags
+	  does.  The new/construct functions COPY the colors argument now
+	  instead of just keeping a reference to it (that was ugly).  The
+	  callback pointer has a full prototype now.
+
+	* gnome-propertybox.h: add a gpointer reserved field for a future
+	  possible private pointer.
+
+	* gnome-recently-used.[ch]: add a private structure, return a pointer
+	  from the document ref function
+
+	* gnome-unit-spinner.[ch]:  Add a construct method, and correct
+	  setting the adj_unit
+
+	* libgnomeui-compat-1.0.h, libgnomeui.h:  Move the headers which
+	  are actually in the compat lib to the compat header
+	
+
 Thu Jul 13 19:12:38 2000  George Lebl <jirka@5z.com>
 
 	* gnome-appbar.[ch]:  Add a private pointer and structure and move

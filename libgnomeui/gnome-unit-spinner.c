@@ -114,7 +114,7 @@ gnome_unit_spinner_init(GnomeUnitSpinner *self)
 		       (gpointer) self);
   }
 
-  if (!default_unit)
+  if ( ! default_unit)
     default_unit = gnome_unit_with_name("centimeter");
 
   self->adj_unit = default_unit;
@@ -140,6 +140,27 @@ gnome_unit_spinner_new(GtkAdjustment *adjustment, guint digits,
   GnomeUnitSpinner *self;
 
   self = gtk_type_new(gnome_unit_spinner_get_type());
+
+  gnome_unit_spinner_construct(self, adjustment, digits, adj_unit);
+
+  return GTK_WIDGET(self);
+}
+
+/**
+ * gnome_unit_spinner_construct:
+ * @self: The object to construct
+ * @adjustment: the adjustment specifying the range of the spinner
+ * @digits: The number of decimal digits to display
+ * @adj_unit: the default unit for the spinner.
+ * 
+ * Constructor for language bindings or subclassing only, for C
+ * use #gnome_unit_spinner_new
+ **/
+void
+gnome_unit_spinner_construct(GnomeUnitSpinner *self,
+			     GtkAdjustment *adjustment, guint digits,
+			     const GnomeUnit *adj_unit)
+{
   gtk_spin_button_configure(GTK_SPIN_BUTTON(self), adjustment, 0.0, digits);
 
   if (adjustment) {
@@ -150,10 +171,8 @@ gnome_unit_spinner_new(GtkAdjustment *adjustment, guint digits,
 		       (gpointer) self);
   }
 
-  if (self->adj_unit)
+  if (adj_unit)
     self->adj_unit = adj_unit;
-
-  return GTK_WIDGET(self);
 }
 
 /**

@@ -36,6 +36,15 @@
 #include <errno.h>
 #include <libgnome/gnome-i18nP.h>
 
+struct _GnomeRecentlyUsedPrivate {
+        GHashTable   *hash;
+        GConfClient  *conf;
+        guint         conf_notify;
+        GSList       *add_list;
+        gchar        *key_root;
+        gboolean      app_specific;
+};
+
 
 enum {
         DOCUMENT_ADDED,
@@ -158,6 +167,7 @@ gnome_recently_used_class_init (GnomeRecentlyUsedClass* klass)
 void
 gnome_recently_used_init (GnomeRecentlyUsed* recently_used)
 {
+	recently_used->_priv = g_new0(GnomeRecentlyUsedPrivate, 1);
 
 }
 
@@ -168,35 +178,35 @@ gnome_recently_used_construct (GnomeRecentlyUsed *recently_used,
         GSList *all_entries;
         GSList *iter;
         
-        g_return_if_fail(recently_used->conf == NULL);
+        g_return_if_fail(recently_used->_priv->conf == NULL);
         
-        recently_used->app_specific = !!app_specific;
+        recently_used->_priv->app_specific = app_specific ? TRUE : FALSE;
         
         if (app_specific) {
-                recently_used->key_root = g_strconcat("/apps/gnome-settings/",
-                                                      gnome_program_get_name(gnome_program_get()),
-                                                      "/recent-documents",
-                                                      NULL);
-        } else {
-                recently_used->key_root = g_strdup("/desktop/standard/recent-documents");
+                recently_used->_priv->key_root = g_strconcat("/apps/gnome-settings/",
+							     gnome_program_get_name(gnome_program_get()),
+							     "/recent-documents",
+							     NULL);
+	} else {
+                recently_used->_priv->key_root = g_strdup("/desktop/standard/recent-documents");
         }
         
-        recently_used->conf = gnome_get_gconf_client();
+        recently_used->_priv->conf = gnome_get_gconf_client();
 
-        gtk_object_ref(GTK_OBJECT(recently_used->conf));
+        gtk_object_ref(GTK_OBJECT(recently_used->_priv->conf));
         
         /* No preload because the explicit all_entries call below
            effectively results in a preload. */
-        gconf_client_add_dir(recently_used->conf,
-                             recently_used->key_root,
+        gconf_client_add_dir(recently_used->_priv->conf,
+                             recently_used->_priv->key_root,
                              GCONF_CLIENT_PRELOAD_NONE, NULL);
         
         all_entries =
-                gconf_client_all_entries(recently_used->conf,
-                                         recently_used->key_root,
+                gconf_client_all_entries(recently_used->_priv->conf,
+                                         recently_used->_priv->key_root,
                                          NULL);
 
-        recently_used->hash = g_hash_table_new(g_str_hash, g_str_equal);
+        recently_used->_priv->hash = g_hash_table_new(g_str_hash, g_str_equal);
         
         iter = all_entries;
         while (iter != NULL) {
@@ -204,7 +214,7 @@ gnome_recently_used_construct (GnomeRecentlyUsed *recently_used,
                 gchar* full_key;
                 GnomeRecentDocument *doc;
                 
-                full_key = gconf_concat_key_and_dir(recently_used->key_root,
+                full_key = gconf_concat_key_and_dir(recently_used->_priv->key_root,
                                                     gconf_entry_key(entry));
 
                 doc = gnome_recent_document_from_gconf_value(gconf_entry_value(entry));
@@ -213,7 +223,7 @@ gnome_recently_used_construct (GnomeRecentlyUsed *recently_used,
                         gnome_recent_document_ref(doc);
                         gnome_recent_document_set_gconf_key(doc, full_key);
                         
-                        g_hash_table_insert(recently_used->hash,
+                        g_hash_table_insert(recently_used->_priv->hash,
                                             (gchar*)gnome_recent_document_get_gconf_key(doc),
                                             doc);
                 }
@@ -225,9 +235,9 @@ gnome_recently_used_construct (GnomeRecentlyUsed *recently_used,
         }
         g_slist_free(all_entries);
         
-        recently_used->conf_notify =
-                gconf_client_notify_add(recently_used->conf,
-                                        recently_used->key_root,
+        recently_used->_priv->conf_notify =
+                gconf_client_notify_add(recently_used->_priv->conf,
+                                        recently_used->_priv->key_root,
                                         documents_changed_notify,
                                         recently_used, NULL, NULL);
 }
@@ -286,7 +296,7 @@ gnome_recently_used_get_arg (GtkObject *object,
 
         switch (arg_id) {
         case ARG_APP_SPECIFIC:
-                GTK_VALUE_BOOL(*arg) = recently_used->app_specific;
+                GTK_VALUE_BOOL(*arg) = recently_used->_priv->app_specific;
                 break;
 
         default:
@@ -321,32 +331,38 @@ gnome_recently_used_finalize (GObject* object)
         
         recently_used = GNOME_RECENTLY_USED (object);
 
-        if (recently_used->conf_notify != 0) {
-                gconf_client_notify_remove(recently_used->conf,
-                                           recently_used->conf_notify);
-                recently_used->conf_notify = 0;
+        if (recently_used->_priv->conf_notify != 0) {
+                gconf_client_notify_remove(recently_used->_priv->conf,
+                                           recently_used->_priv->conf_notify);
+                recently_used->_priv->conf_notify = 0;
         }
 
-        gconf_client_remove_dir(recently_used->conf,
-                                recently_used->key_root);
+        gconf_client_remove_dir(recently_used->_priv->conf,
+                                recently_used->_priv->key_root);
 
         
-        iter = recently_used->add_list;
+        iter = recently_used->_priv->add_list;
         while (iter != NULL) {
                 gnome_recent_document_unref(iter->data);
                 
                 iter = g_slist_next(iter);
         }
 
-        g_slist_free(recently_used->add_list);
+        g_slist_free(recently_used->_priv->add_list);
+        recently_used->_priv->add_list = NULL;
         
-        g_hash_table_foreach(recently_used->hash,
+        g_hash_table_foreach(recently_used->_priv->hash,
                              destroy_foreach,
                              recently_used);
 
-        g_hash_table_destroy(recently_used->hash);
+        g_hash_table_destroy(recently_used->_priv->hash);
+        recently_used->_priv->hash = NULL;
         
-        gtk_object_unref(GTK_OBJECT(recently_used->conf));
+        gtk_object_unref(GTK_OBJECT(recently_used->_priv->conf));
+        recently_used->_priv->conf = NULL;
+
+	g_free(recently_used->_priv);
+	recently_used->_priv = NULL;
         
         (* G_OBJECT_CLASS(parent_class)->finalize) (object);
 }
@@ -367,7 +383,7 @@ gnome_recently_used_add (GnomeRecentlyUsed   *recently_used,
 
         key = gconf_unique_key();
 
-        full_key = gconf_concat_key_and_dir(recently_used->key_root,
+        full_key = gconf_concat_key_and_dir(recently_used->_priv->key_root,
                                             key);
 
         g_free(key);
@@ -376,7 +392,7 @@ gnome_recently_used_add (GnomeRecentlyUsed   *recently_used,
 
         val = gnome_recent_document_to_gconf_value(doc);
         
-        gconf_client_set(recently_used->conf,
+        gconf_client_set(recently_used->_priv->conf,
                          full_key,
                          val,
                          NULL);
@@ -391,7 +407,7 @@ gnome_recently_used_add (GnomeRecentlyUsed   *recently_used,
            another one when we get that notification.
         */
         gnome_recent_document_ref(doc);
-        recently_used->add_list = g_slist_prepend(recently_used->add_list, doc);
+        recently_used->_priv->add_list = g_slist_prepend(recently_used->_priv->add_list, doc);
 }
 
 void
@@ -400,7 +416,7 @@ gnome_recently_used_remove (GnomeRecentlyUsed   *recently_used,
 {
         g_return_if_fail(GNOME_IS_RECENTLY_USED(recently_used));
         
-        gconf_client_unset(recently_used->conf,
+        gconf_client_unset(recently_used->_priv->conf,
                            gnome_recent_document_get_gconf_key(doc),
                            NULL);
 }
@@ -438,7 +454,7 @@ gnome_recently_used_get_all (GnomeRecentlyUsed   *recently_used)
         g_return_val_if_fail(GNOME_IS_RECENTLY_USED(recently_used), NULL);
 
         /* FIXME sort this list by creation time */
-        g_hash_table_foreach(recently_used->hash, listize_foreach, &list);
+        g_hash_table_foreach(recently_used->_priv->hash, listize_foreach, &list);
 
         /* Sort from newest to oldest */
         list = g_slist_sort(list, descending_chronological_compare_func);
@@ -458,11 +474,11 @@ gnome_recently_used_document_changed (GnomeRecentlyUsed   *recently_used,
         key = gnome_recent_document_get_gconf_key(doc);
 
         g_return_if_fail(key != NULL);
-        g_return_if_fail(g_hash_table_lookup(recently_used->hash, key) == NULL);
+        g_return_if_fail(g_hash_table_lookup(recently_used->_priv->hash, key) == NULL);
         
         val = gnome_recent_document_to_gconf_value(doc);
         
-        gconf_client_set(recently_used->conf,
+        gconf_client_set(recently_used->_priv->conf,
                          key,
                          val,
                          NULL);
@@ -482,7 +498,7 @@ documents_changed_notify(GConfClient* client, guint cnxn_id,
         
         recently_used = GNOME_RECENTLY_USED(user_data);
 
-        doc = g_hash_table_lookup(recently_used->hash,
+        doc = g_hash_table_lookup(recently_used->_priv->hash,
                                   key);
 
         if (doc != NULL) {
@@ -494,7 +510,7 @@ documents_changed_notify(GConfClient* client, guint cnxn_id,
 
                         gnome_recent_document_unref(doc);
                         
-                        g_hash_table_remove(recently_used->hash, key);
+                        g_hash_table_remove(recently_used->_priv->hash, key);
                         
                         return;
                 } else {
@@ -523,7 +539,7 @@ documents_changed_notify(GConfClient* client, guint cnxn_id,
                    same process (and more importantly maintain the
                    mapping of one GnomeRecentDocument per gconf key) */
 
-                iter = recently_used->add_list;
+                iter = recently_used->_priv->add_list;
 
                 while (iter != NULL) {
                         const gchar* this_key;
@@ -545,10 +561,10 @@ documents_changed_notify(GConfClient* client, guint cnxn_id,
                            as the value we sent (since we don't fill_from_value)
                            which isn't necessarily true but is a lot faster
                            and will pretty much always be true */
-                        recently_used->add_list = g_slist_remove(recently_used->add_list,
-                                                                 doc);
+                        recently_used->_priv->add_list = g_slist_remove(recently_used->_priv->add_list,
+									doc);
 
-                        g_hash_table_insert(recently_used->hash,
+                        g_hash_table_insert(recently_used->_priv->hash,
                                             (gchar*)gnome_recent_document_get_gconf_key(doc),
                                             doc);
                 } else {
@@ -560,7 +576,7 @@ documents_changed_notify(GConfClient* client, guint cnxn_id,
                         }
                         
                         gnome_recent_document_set_gconf_key(doc, key);
-                        g_hash_table_insert(recently_used->hash,
+                        g_hash_table_insert(recently_used->_priv->hash,
                                             (gchar*)gnome_recent_document_get_gconf_key(doc),
                                             doc);
                 }
@@ -651,12 +667,14 @@ gnome_recent_document_new (void)
         return doc;
 }
 
-void
+GnomeRecentDocument *
 gnome_recent_document_ref (GnomeRecentDocument *doc)
 {
-        g_return_if_fail(doc != NULL);
+        g_return_val_if_fail(doc != NULL, NULL);
 
         doc->refcount += 1;
+
+	return doc;
 }
 
 static void
@@ -693,6 +711,7 @@ gnome_recent_document_unref (GnomeRecentDocument *doc)
         if (doc->refcount == 0) {
                 clear_doc(doc);
                 g_free(doc->gconf_key);
+                doc->gconf_key = NULL;
                 g_free(doc);
         }
 }

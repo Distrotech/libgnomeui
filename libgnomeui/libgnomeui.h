@@ -52,7 +52,6 @@
 #include "libgnomeui/gnome-canvas-widget.h"
 #include "libgnomeui/gnome-color-picker.h"
 #include "libgnomeui/gnome-cursors.h"
-#include "libgnomeui/gnome-dentry-edit.h"
 #include "libgnomeui/gnome-dialog.h"
 #include "libgnomeui/gnome-dialog-util.h"
 /* There are nice third-party libs for this; 
@@ -95,12 +94,6 @@
 #include "libgnomeui/gnome-preferences.h"
 #endif
 #include "libgnomeui/gnome-propertybox.h"
-/* The gnome-properties and gnome-property-entries modules should be finished or
- * deprecated by gnome-2.0 */
-#ifndef GNOME_EXCLUDE_DEPRECATED
-#include "libgnomeui/gnome-properties.h"
-#include "libgnomeui/gnome-property-entries.h"
-#endif
 #include "libgnomeui/gnome-scores.h"
 #include "libgnomeui/gnome-types.h"
 #include "libgnomeui/gnome-stock.h"
