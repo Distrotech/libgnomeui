@@ -155,11 +155,24 @@ restore_window (GnomeMDI *mdi, const gchar *section, GPtrArray *child_list,
 	g_free (string);
 	if (ret != 4) return;
 
-	for (j = 0; j < child_list->len; j++)
-		restore_window_child (mdi, child_hash, child_windows,
-				      child_views, view_hash, window_hash,
-				      window, (glong) child_list->pdata [j],
-				      &init, x, y, w, h);
+	if(child_list->len == 0) {	
+		gnome_mdi_open_toplevel (mdi);
+
+		gtk_widget_set_usize (GTK_WIDGET (mdi->active_window), w, h);
+
+		gtk_widget_set_uposition (GTK_WIDGET (mdi->active_window),
+					  x, y);
+
+		g_hash_table_insert (window_hash, (gpointer) window,
+				     mdi->active_window);
+ 	}
+	else
+		for (j = 0; j < child_list->len; j++)
+			restore_window_child (mdi, child_hash, child_windows,
+					      child_views, view_hash,
+					      window_hash, window,
+					      (glong) child_list->pdata [j],
+					      &init, x, y, w, h);
 
 	g_snprintf (key, sizeof(key), "%s/mdi_window_layout_%lx", section, window);
 	string = gnome_config_get_string (key);
