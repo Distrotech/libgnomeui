@@ -101,6 +101,7 @@ gnome_popup_menu_new_with_accelgroup (GnomeUIInfo *uiinfo,
 	gint i, length;
 
 	g_return_val_if_fail (uiinfo != NULL, NULL);
+	g_return_val_if_fail (accelgroup != NULL, NULL);
 
 	/* We use our own callback marshaller so that it can fetch the
 	 * popup user data from the popup menu and pass it on to the
@@ -113,16 +114,12 @@ gnome_popup_menu_new_with_accelgroup (GnomeUIInfo *uiinfo,
 	uibdata.relay_func = popup_marshal_func;
 	uibdata.destroy_func = NULL;
 
-	for( length = 0; uiinfo[length].type != GNOME_APP_UI_ENDOFINFO;
-	     length ++ )
-	  {
-	    if ( uiinfo[length].type == GNOME_APP_UI_ITEM_CONFIGURABLE )
-	      gnome_app_ui_configure_configurable( uiinfo + length );
-	  }
-
-	length ++;
+	for (length = 0; uiinfo[length].type != GNOME_APP_UI_ENDOFINFO; length++)
+		if (uiinfo[length].type == GNOME_APP_UI_ITEM_CONFIGURABLE)
+			gnome_app_ui_configure_configurable (uiinfo + length);
 
 	menu = gtk_menu_new ();
+	gtk_menu_set_accel_group (GTK_MENU (menu), accelgroup);
         global_menushell_hack = menu;
 	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menu), uiinfo,
 				    &uibdata, accelgroup, FALSE, 0);
@@ -154,7 +151,7 @@ gnome_popup_menu_new (GnomeUIInfo *uiinfo)
   
 	menu = gnome_popup_menu_new_with_accelgroup(uiinfo, accelgroup);
 
-	gtk_accel_group_attach(accelgroup, GTK_OBJECT (menu));
+	gtk_accel_group_unref (accelgroup);
 
 	return menu;
 }
@@ -171,21 +168,10 @@ gnome_popup_menu_new (GnomeUIInfo *uiinfo)
 GtkAccelGroup *
 gnome_popup_menu_get_accel_group(GtkMenu *menu)
 {
-	GSList *accel_group_list;
+	g_return_val_if_fail (menu != NULL, NULL);
+        g_return_val_if_fail (GTK_IS_MENU (menu), NULL);
 
-	accel_group_list = gtk_accel_groups_from_object(GTK_OBJECT (menu));
-
-	if (accel_group_list == NULL)
-		return NULL;
-
-	/*
-	 * It is ok to just return the first element in the list, because
-	 * we attach the accelgroup to the menu just after the menu is
-	 * created (in gnome_popup_menu_new), and the accelgroup we
-	 * created is always going to be the first one.
-	 *
-	 */
-	return (GtkAccelGroup *) (accel_group_list->data);
+        return gtk_menu_get_accel_group (menu);
 }
 
 /* Callback used when a button is pressed in a widget attached to a popup menu.  It decides whether

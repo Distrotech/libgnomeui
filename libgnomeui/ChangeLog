@@ -1,3 +1,13 @@
+1999-03-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-popup-menu.c (gnome_popup_menu_new): Unref the accel group
+	instead of attaching it.
+	(gnome_popup_menu_new_with_accelgroup): Check that the accelgroup
+	is not NULL.  Also, set the accelgroup once we create the menu.
+	(gnome_popup_menu_get_accel_group): Fetch the accelgroup
+	correctly.
+	This whole patch is courtesy of Tim Janik (timj@gimp.org).
+
 Tue Mar 23 19:33:52 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-font-selector.c: stuff that got allocated with g_malloc needs
