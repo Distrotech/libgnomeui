@@ -42,6 +42,7 @@ struct _GnomeCanvasImage {
 	GtkAnchorType anchor;		/* Anchor side for image */
 
 	int cx, cy;			/* Top-left canvas coordinates for display */
+	int cwidth, cheight;		/* Rendered size in pixels */
 	GdkGC *gc;			/* GC for drawing image */
 };
 

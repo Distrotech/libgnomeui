@@ -1,3 +1,20 @@
+1998-07-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_group_point): Fixed * and /
+	confusion when coverting coordinates.
+
+	* gnome-canvas-image.c (dist_to_mask): New function, calculates
+	the distance in pixels from a point to a mask.  The point is
+	considered to be "inside" the mask if it is on a white pixel.
+
+	* gnome-canvas.c (emit_event): Convert event coordinates to world
+	coordinates before emitting.
+
+	* gnome-canvas-image.c: Scale the image properly; it wasn't working.
+
+	* gnome-canvas-image.h (GnomeCanvasImage): New fields cwidth and
+	cheight.  These represent the rendered size of the image in pixels.
+
 1998-07-07  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c: fixed updating of active_view and active_child

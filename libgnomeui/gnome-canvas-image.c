@@ -152,13 +152,13 @@ recalc_bounds (GnomeCanvasImage *image)
 	case GTK_ANCHOR_N:
 	case GTK_ANCHOR_CENTER:
 	case GTK_ANCHOR_S:
-		image->cx -= image->im ? (image->im->rgb_width / 2) : 0;
+		image->cx -= image->cwidth / 2;
 		break;
 
 	case GTK_ANCHOR_NE:
 	case GTK_ANCHOR_E:
 	case GTK_ANCHOR_SE:
-		image->cx -= image->im ? image->im->rgb_width : 0;
+		image->cx -= image->cwidth;
 		break;
 	}
 
@@ -171,13 +171,13 @@ recalc_bounds (GnomeCanvasImage *image)
 	case GTK_ANCHOR_W:
 	case GTK_ANCHOR_CENTER:
 	case GTK_ANCHOR_E:
-		image->cy -= image->im ? (image->im->rgb_height / 2) : 0;
+		image->cy -= image->cheight / 2;
 		break;
 
 	case GTK_ANCHOR_SW:
 	case GTK_ANCHOR_S:
 	case GTK_ANCHOR_SE:
-		image->cy -= image->im ? image->im->rgb_height : 0;
+		image->cy -= image->cheight;
 		break;
 	}
 
@@ -185,8 +185,8 @@ recalc_bounds (GnomeCanvasImage *image)
 
 	item->x1 = image->cx;
 	item->y1 = image->cy;
-	item->x2 = image->cx + (image->im ? image->im->rgb_width : 0);
-	item->y2 = image->cy + (image->im ? image->im->rgb_height : 0);
+	item->x2 = image->cx + image->cwidth;
+	item->y2 = image->cy + image->cheight;
 
 	gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
 }
@@ -267,10 +267,10 @@ gnome_canvas_image_reconfigure (GnomeCanvasItem *item)
 	free_pixmap_and_mask (image);
 
 	if (image->im) {
-		image->im->rgb_width = image->width * item->canvas->pixels_per_unit;
-		image->im->rgb_height = image->height * item->canvas->pixels_per_unit;
+		image->cwidth = (int) (image->width * item->canvas->pixels_per_unit + 0.5);
+		image->cheight = (int) (image->height * item->canvas->pixels_per_unit + 0.5);
 
-		gdk_imlib_render (image->im, image->im->rgb_width, image->im->rgb_height);
+		gdk_imlib_render (image->im, image->cwidth, image->cheight);
 
 		image->pixmap = gdk_imlib_move_image (image->im);
 		g_assert (image->pixmap != NULL);
@@ -278,7 +278,8 @@ gnome_canvas_image_reconfigure (GnomeCanvasItem *item)
 
 		if (image->gc)
 			gdk_gc_set_clip_mask (image->gc, image->mask);
-	}
+	} else
+		image->cwidth = image->cheight = 0;
 
 	recalc_bounds (image);
 }
@@ -324,8 +325,65 @@ gnome_canvas_image_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 			 0, 0,
 			 image->cx - x,
 			 image->cy - y,
-			 image->im->rgb_width,
-			 image->im->rgb_height);
+			 image->cwidth,
+			 image->cheight);
+}
+
+static double
+dist_to_mask (GnomeCanvasImage *image, int cx, int cy)
+{
+	GnomeCanvasItem *item;
+	GdkImage *gimage;
+	GdkRectangle a, b, dest;
+	int x, y, tx, ty;
+	double dist, best;
+
+	item = GNOME_CANVAS_ITEM (image);
+
+	/* Trivial case:  if there is no mask, we are inside */
+
+	if (!image->mask)
+		return 0.0;
+
+	/* Rectangle that we need */
+
+	cx -= image->cx;
+	cy -= image->cy;
+
+	a.x = cx - item->canvas->close_enough;
+	a.y = cy - item->canvas->close_enough;
+	a.width = 2 * item->canvas->close_enough + 1;
+	a.height = 2 * item->canvas->close_enough + 1;
+
+	/* Image rectangle */
+
+	b.x = 0;
+	b.y = 0;
+	b.width = image->cwidth;
+	b.height = image->cheight;
+
+	if (!gdk_rectangle_intersect (&a, &b, &dest))
+		return a.width * a.height; /* "big" value */
+
+	gimage = gdk_image_get (image->mask, dest.x, dest.y, dest.width, dest.height);
+
+	/* Find the closest pixel */
+
+	best = a.width * a.height; /* start with a "big" value */
+
+	for (y = 0; y < dest.height; y++)
+		for (x = 0; x < dest.width; x++)
+			if (gdk_image_get_pixel (gimage, x, y)) {
+				tx = x + dest.x - cx;
+				ty = y + dest.y - cy;
+
+				dist = sqrt (tx * tx + ty * ty);
+				if (dist < best)
+					best = dist;
+			}
+
+	gdk_image_destroy (gimage);
+	return best;
 }
 
 static double
@@ -333,83 +391,45 @@ gnome_canvas_image_point (GnomeCanvasItem *item, double x, double y,
 			  int cx, int cy, GnomeCanvasItem **actual_item)
 {
 	GnomeCanvasImage *image;
-	double x1, y1, x2, y2;
-	double dx, dy;
+	int x1, y1, x2, y2;
+	int dx, dy;
 
 	image = GNOME_CANVAS_IMAGE (item);
 
 	*actual_item = item;
 
-	/* FIXME: really, we should be taking the mask into account.  I am too lazy to figure it out
-	 * right now, so sue me.
-	 */
+	x1 = image->cx - item->canvas->close_enough;
+	y1 = image->cy - item->canvas->close_enough;
+	x2 = image->cx + image->cwidth - 1 + item->canvas->close_enough;
+	y2 = image->cy + image->cheight - 1 + item->canvas->close_enough;
 
-	x1 = image->x;
-	y1 = image->y;
+	/* Hard case: is point inside image's gravity region? */
 
-	switch (image->anchor) {
-	case GTK_ANCHOR_NW:
-	case GTK_ANCHOR_W:
-	case GTK_ANCHOR_SW:
-		break;
-
-	case GTK_ANCHOR_N:
-	case GTK_ANCHOR_CENTER:
-	case GTK_ANCHOR_S:
-		x1 -= image->width / 2.0;
-		break;
-
-	case GTK_ANCHOR_NE:
-	case GTK_ANCHOR_E:
-	case GTK_ANCHOR_SE:
-		x1 -= image->width;
-		break;
-	}
-
-	switch (image->anchor) {
-	case GTK_ANCHOR_NW:
-	case GTK_ANCHOR_N:
-	case GTK_ANCHOR_NE:
-		break;
-
-	case GTK_ANCHOR_W:
-	case GTK_ANCHOR_CENTER:
-	case GTK_ANCHOR_E:
-		y1 -= image->height / 2.0;
-		break;
-
-	case GTK_ANCHOR_SW:
-	case GTK_ANCHOR_S:
-	case GTK_ANCHOR_SE:
-		y1 -= image->height;
-		break;
-	}
-
-	x2 = x1 + image->width;
-	y2 = y1 + image->height;
-
-	/* Is point inside image? */
-
-	if ((x >= x1) && (y >= y1) && (x <= x2) && (y <= y2))
-		return 0.0;
+	if ((cx >= x1) && (cy >= y1) && (cx <= x2) && (cy <= y2))
+		return dist_to_mask (image, cx, cy) / item->canvas->pixels_per_unit;
 
 	/* Point is outside image */
 
-	if (x < x1)
-		dx = x1 - x;
-	else if (x > x2)
-		dx = x - x2;
-	else
-		dx = 0.0;
+	x1 += item->canvas->close_enough;
+	y1 += item->canvas->close_enough;
+	x2 -= item->canvas->close_enough;
+	y2 -= item->canvas->close_enough;
 
-	if (y < y1)
-		dy = y1 - y;
-	else if (y > y2)
-		dy = y - y2;
+	if (cx < x1)
+		dx = x1 - cx;
+	else if (cx > x2)
+		dx = cx - x2;
 	else
-		dy = 0.0;
+		dx = 0;
 
-	return sqrt (dx * dx + dy * dy);
+	if (cy < y1)
+		dy = y1 - cy;
+	else if (cy > y2)
+		dy = cy - y2;
+	else
+		dy = 0;
+
+	return sqrt (dx * dx + dy * dy) / item->canvas->pixels_per_unit;
 }
 
 static void

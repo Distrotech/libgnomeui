@@ -102,7 +102,9 @@ struct _GnomeCanvasItemClass {
 	/* Move an item by the specified amount */
 	void (* translate) (GnomeCanvasItem *item, double dx, double dy);
 
-	/* Signal: an event ocurred for an item of this type */
+	/* Signal: an event ocurred for an item of this type.  The (x, y) coordinates are in the
+	 * canvas world coordinate system.
+	 */
 	gint (* event) (GnomeCanvasItem *item, GdkEvent *event);
 };
 

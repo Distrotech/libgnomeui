@@ -634,7 +634,7 @@ gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int
 
 		if (has_point
 		    && point_item
-		    && ((int) (dist / item->canvas->pixels_per_unit + 0.5) <= item->canvas->close_enough)) {
+		    && ((int) (dist * item->canvas->pixels_per_unit + 0.5) <= item->canvas->close_enough)) {
 			best = dist;
 			*actual_item = point_item;
 		}
@@ -1118,10 +1118,39 @@ gnome_canvas_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 }
 
 static void
+window_to_world (GnomeCanvas *canvas, double *x, double *y)
+{
+	*x = canvas->scroll_x1 + (*x + canvas->display_x1) / canvas->pixels_per_unit;
+	*y = canvas->scroll_y1 + (*y + canvas->display_y1) / canvas->pixels_per_unit;
+}
+
+static void
 emit_event (GnomeCanvas *canvas, GdkEvent *event)
 {
+	GdkEvent ev;
 	gint finished;
 	GnomeCanvasItem *item;
+
+	ev = *event;
+
+	/* Convert to world coordinates -- we have two cases because of diferent offsets of the
+	 * fields in the event structures.
+	 */
+
+	switch (ev.type) {
+	case GDK_ENTER_NOTIFY:
+	case GDK_LEAVE_NOTIFY:
+		window_to_world (canvas, &ev.crossing.x, &ev.crossing.y);
+		break;
+		
+	case GDK_MOTION_NOTIFY:
+	case GDK_BUTTON_PRESS:
+	case GDK_2BUTTON_PRESS:
+	case GDK_3BUTTON_PRESS:
+	case GDK_BUTTON_RELEASE:
+		window_to_world (canvas, &ev.motion.x, &ev.motion.y);
+		break;
+	}
 
 	/* The event is propagated up the hierarchy (for if someone connected to a group instead of
 	 * a leaf event), and emission is stopped if a handler returns TRUE, just like for GtkWidget
@@ -1130,7 +1159,7 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 
 	for (finished = FALSE, item = canvas->current_item; item && !finished; item = item->parent)
 		gtk_signal_emit (GTK_OBJECT (item), item_signals[ITEM_EVENT],
-				 event,
+				 &ev,
 				 &finished);
 }
 
