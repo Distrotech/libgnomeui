@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2002-02-13 03:24+0100\n"
+"POT-Creation-Date: 2002-03-04 22:19+0100\n"
 "PO-Revision-Date: 2002-01-28 20:35+0100\n"
 "Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
@@ -30,6 +30,12 @@ msgstr "Dokumentáció írója"
 #, fuzzy
 msgid "Translated by"
 msgstr "Fordítók"
+
+#. Add the credits button
+#: libgnomeui/gnome-about.c:295
+#, fuzzy
+msgid "_Credits"
+msgstr "_Szerkesztés"
 
 #: libgnomeui/gnome-about.c:335
 msgid "Program name"
@@ -141,35 +147,35 @@ msgstr "Interaktivitás"
 msgid "Level of user activity required."
 msgstr "A felhasználótól elvárható aktivitás"
 
-#: libgnomeui/gnome-client.c:832
+#: libgnomeui/gnome-client.c:833
 msgid "Specify session management ID"
 msgstr "A munkafolyamat ID-jének megadása"
 
-#: libgnomeui/gnome-client.c:832
+#: libgnomeui/gnome-client.c:833
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:836
 msgid "Specify prefix of saved configuration"
 msgstr "Az elmentett beállítások prefixének megadása"
 
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:836
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:838
+#: libgnomeui/gnome-client.c:839
 msgid "Disable connection to session manager"
 msgstr "A munkafolyamatkezelőhőz való csatlakozás tiltása"
 
-#: libgnomeui/gnome-client.c:944
+#: libgnomeui/gnome-client.c:945
 msgid "Session management"
 msgstr "Munkafolyamat kezelés"
 
-#: libgnomeui/gnome-client.c:2478
+#: libgnomeui/gnome-client.c:2483
 msgid "Cancel Logout"
 msgstr "Mégsem lép ki"
 
-#: libgnomeui/gnome-color-picker.c:404
+#: libgnomeui/gnome-color-picker.c:405
 msgid "Received invalid color data\n"
 msgstr "Érvénytelen szín adat\n"
 
@@ -177,43 +183,43 @@ msgstr "Érvénytelen szín adat\n"
 msgid "Pick a color"
 msgstr "Válassz egy színt"
 
-#: libgnomeui/gnome-dateedit.c:430
+#: libgnomeui/gnome-dateedit.c:428
 msgid "Time"
 msgstr "Idő"
 
-#: libgnomeui/gnome-dateedit.c:431
+#: libgnomeui/gnome-dateedit.c:429
 msgid "The time currently selected"
 msgstr "A jelenleg kijelölt idő"
 
-#: libgnomeui/gnome-dateedit.c:443
+#: libgnomeui/gnome-dateedit.c:441
 msgid "DateEdit Flags"
 msgstr "DateEdit Flagek"
 
-#: libgnomeui/gnome-dateedit.c:444
+#: libgnomeui/gnome-dateedit.c:442
 msgid "Flags for how DateEdit looks"
 msgstr "Flagek a DateEdit kinézetéhez"
 
-#: libgnomeui/gnome-dateedit.c:453
+#: libgnomeui/gnome-dateedit.c:451
 msgid "Lower Hour"
 msgstr "Alsó óra"
 
-#: libgnomeui/gnome-dateedit.c:454
+#: libgnomeui/gnome-dateedit.c:452
 msgid "Lower hour in the time popup selector"
 msgstr "A felbukkanó időkiválasztó alsó órája"
 
-#: libgnomeui/gnome-dateedit.c:464
+#: libgnomeui/gnome-dateedit.c:462
 msgid "Upper Hour"
 msgstr "Felső óra"
 
-#: libgnomeui/gnome-dateedit.c:465
+#: libgnomeui/gnome-dateedit.c:463
 msgid "Upper hour in the time popup selector"
 msgstr "A felbukkanó időkiválasztó felső órája"
 
-#: libgnomeui/gnome-dateedit.c:475
+#: libgnomeui/gnome-dateedit.c:473
 msgid "Initial Time"
 msgstr "Kezdeti idő"
 
-#: libgnomeui/gnome-dateedit.c:476
+#: libgnomeui/gnome-dateedit.c:474
 msgid "The initial time"
 msgstr "A kezdeti idő"
 
@@ -222,7 +228,7 @@ msgstr "A kezdeti idő"
 msgid "Calendar"
 msgstr "Naptár"
 
-#: libgnomeui/gnome-dateedit.c:935
+#: libgnomeui/gnome-dateedit.c:933
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "a gnome_date_edit_get_date már elavult, használd a gnome_date_edit_get_time-"
@@ -315,19 +321,19 @@ msgstr "Logó háttérszíne beállítva"
 msgid "Logo Background color is set"
 msgstr "A logó háttérszíne be van állítva"
 
-#: libgnomeui/gnome-druid.c:148
+#: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
 msgstr "Befejezés mutatása"
 
-#: libgnomeui/gnome-druid.c:149
+#: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "'Befejezés' gomb mutatása a 'Következő' helyett"
 
-#: libgnomeui/gnome-druid.c:156
+#: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
 msgstr "Súgó mutatása"
 
-#: libgnomeui/gnome-druid.c:157
+#: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
 msgstr "A 'Súgó' gomb mutatása"
 
@@ -560,7 +566,6 @@ msgstr "Hint a 2. gyermek elemhez"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fájl"
 
@@ -618,7 +623,6 @@ msgid "_Game"
 msgstr "_Játék"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Sú_gó"
 
@@ -809,11 +813,11 @@ msgstr "Az alkalmazás beállításai"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Névjegy"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Az alkalmazás névjegye"
 
@@ -840,7 +844,7 @@ msgstr "Új ablakot hoz létre"
 msgid "_Close This Window"
 msgstr "_Ablak bezárása"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "A jelenlegi ablak bezárása"
 
@@ -912,19 +916,19 @@ msgstr "Játék be_fejezése"
 msgid "End the current game"
 msgstr "A jelenlegi játék befejezése"
 
-#: libgnomeui/gnome-app-helper.c:2578
+#: libgnomeui/gnome-app-helper.c:2563
 msgid "Both text and icons"
 msgstr "Szöveg és ikon"
 
-#: libgnomeui/gnome-app-helper.c:2579
+#: libgnomeui/gnome-app-helper.c:2564
 msgid "Icons only"
 msgstr "Csak ikon"
 
-#: libgnomeui/gnome-app-helper.c:2580
+#: libgnomeui/gnome-app-helper.c:2565
 msgid "Text only"
 msgstr "Czak szöveg"
 
-#: libgnomeui/gnome-app-helper.c:2631
+#: libgnomeui/gnome-app-helper.c:2616
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "A munkafelülethez tartozó alapértelmezés használata (%s)"
@@ -965,7 +969,7 @@ msgstr " (igen vagy nem)"
 msgid "  - OK? (yes or no)"
 msgstr " - OK? (igen vagy nem)"
 
-#: libgnomeui/gnome-app-util.c:689
+#: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
 msgstr "Folyamatjelző"
 
@@ -977,23 +981,102 @@ msgstr "App ID"
 msgid "The application ID string"
 msgstr "Az alkalmazás ID-je"
 
-#: libgnomeui/gnome-entry.c:169 libgnomeui/gnome-entry.c:170
+#: libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
 msgid "History id"
 msgstr "Előzmény ID"
 
-#: libgnomeui/gnome-entry.c:176
+#: libgnomeui/gnome-entry.c:178
 msgid "GTK entry"
 msgstr "GTK entry"
 
-#: libgnomeui/gnome-entry.c:177
+#: libgnomeui/gnome-entry.c:179
 msgid "The GTK entry"
 msgstr "A GTK entry"
 
-#: libgnomeui/gnome-file-entry.c:347
+#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
+#, fuzzy
+msgid "History ID"
+msgstr "Előzmény ID"
+
+#: libgnomeui/gnome-file-entry.c:191
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
+msgid "Browse Dialog Title"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:200
+#, fuzzy
+msgid "Title for the Browse file dialog."
+msgstr "A kiválasztó párbeszédablak címe"
+
+#: libgnomeui/gnome-file-entry.c:207
+msgid "Directory Entry"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:208
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:216
+#, fuzzy
+msgid "Modal"
+msgstr "Mód"
+
+#: libgnomeui/gnome-file-entry.c:217
+msgid "Whether the Browse file window should be modal."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
+#, fuzzy
+msgid "Filename"
+msgstr "_Fájl"
+
+#: libgnomeui/gnome-file-entry.c:225
+msgid "Filename that should be displayed in the file entry."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:233
+msgid "Default Path"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:234
+msgid "Default path for the Browse file window."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:241
+#, fuzzy
+msgid "GnomeEntry"
+msgstr "GTK entry"
+
+#: libgnomeui/gnome-file-entry.c:242
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:252
+msgid "GtkEntry"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:253
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:418
 msgid "Select file"
 msgstr "Fájl kiválasztása"
 
-#: libgnomeui/gnome-file-entry.c:523
+#: libgnomeui/gnome-file-entry.c:592
 msgid "Browse..."
 msgstr "Keresés..."
 
@@ -1100,33 +1183,67 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "GConf hiba részletei: %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:861
+#: libgnomeui/gnome-icon-entry.c:164
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:173
+#, fuzzy
+msgid "Title for the Browse icon dialog."
+msgstr "A kiválasztó párbeszédablak címe"
+
+#: libgnomeui/gnome-icon-entry.c:180
+msgid "Pixmap Directory"
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:181
+msgid "Directory that will be searched for icons."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:189
+msgid "Filename that should be displayed in the icon entry."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:197
+#, fuzzy
+msgid "Picker dialog"
+msgstr "Válassz egy színt"
+
+#: libgnomeui/gnome-icon-entry.c:198
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
 msgid "No Icon"
 msgstr "Nincs ikon"
 
-#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:378
+#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "hbox nem található, szokásos fájlkiválasztás alkalmazása"
 
-#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:384
+#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Előnézet"
 
-#: libgnomeui/gnome-icon-entry.c:882
+#: libgnomeui/gnome-icon-entry.c:930
 msgid "Browse"
 msgstr "Keresés"
 
-#: libgnomeui/gnome-icon-sel.c:297
+#: libgnomeui/gnome-icon-sel.c:296
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: '%s' nem létezik vagy nem könyvtár"
 
-#: libgnomeui/gnome-icon-sel.c:305
+#: libgnomeui/gnome-icon-sel.c:304
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: '%s' könyvtár megnyitása sikertelen"
 
-#: libgnomeui/gnome-icon-sel.c:414
+#: libgnomeui/gnome-icon-sel.c:411
 msgid "Loading Icons..."
 msgstr "Ikonok betöltése..."
 
@@ -1150,7 +1267,16 @@ msgstr "Kérdés"
 msgid "Message"
 msgstr "Üzenet"
 
-#: libgnomeui/gnome-pixmap-entry.c:184 libgnomeui/gnome-pixmap-entry.c:496
+#: libgnomeui/gnome-pixmap-entry.c:114
+#, fuzzy
+msgid "Do Preview"
+msgstr "Előnézet"
+
+#: libgnomeui/gnome-pixmap-entry.c:115
+msgid "Whether the pixmap entry should have a preview."
+msgstr ""
+
+#: libgnomeui/gnome-pixmap-entry.c:192 libgnomeui/gnome-pixmap-entry.c:504
 msgid "No Image"
 msgstr "Nincs kép"
 
@@ -1185,10 +1311,9 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
 #, fuzzy
-msgid "Exit the test"
-msgstr "Kilépés a programból"
+#~ msgid "Exit the test"
+#~ msgstr "Kilépés a programból"
 
 #~ msgid "Author"
 #~ msgstr "Szerző"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2001-11-25 02:36+0100\n"
+"POT-Creation-Date: 2002-03-04 22:19+0100\n"
 "PO-Revision-Date: 2001-07-29 12:32+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -105,8 +105,7 @@ msgstr "Zasluge prevajalca"
 #: libgnomeui/gnome-about.c:389
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Zasluge prevajalcev. Ta niz bi moral biti označen kot prevedljiv"
+msgstr "Zasluge prevajalcev. Ta niz bi moral biti označen kot prevedljiv"
 
 #: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -228,7 +227,8 @@ msgstr "Koledar"
 
 #: libgnomeui/gnome-dateedit.c:933
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date ni zaželjen, uporabite gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date ni zaželjen, uporabite gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -365,7 +365,9 @@ msgstr "Barva uporabljena za izris povezave"
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
-msgstr "Zgodila se je napaka ob poskusu zagona URL upravljalnika.\nProsim preglejte pravilnost nastavitev v Kontrolnem centru."
+msgstr ""
+"Zgodila se je napaka ob poskusu zagona URL upravljalnika.\n"
+"Prosim preglejte pravilnost nastavitev v Kontrolnem centru."
 
 #: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
 msgid "X display to use"
@@ -382,14 +384,18 @@ msgstr "Knjižnjica grafičnega vmesnika Gnome"
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:569
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Zgodilo se je več segmentacijskih napak; ne morem prikazati dialoga z napako\n"
+msgstr ""
+"Zgodilo se je več segmentacijskih napak; ne morem prikazati dialoga z "
+"napako\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:583
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
-msgstr "Segmentacijska napaka!\nNe morem prikazati dialoga z napako\n"
+msgstr ""
+"Segmentacijska napaka!\n"
+"Ne morem prikazati dialoga z napako\n"
 
 #: libgnomeui/gnome-ui-init.c:715
 msgid "Gdk debugging flags to set"
@@ -472,7 +478,11 @@ msgid ""
 "When you close this dialog, all applications will close and your session "
 "will exit.\n"
 "Please save all your files before closing this dialog."
-msgstr "GNOME upravljalnik sej (proces %d) se je sesul\nzaradi usodne napake (%s).\nKo zaprete ta dialog se bodo zaprle vse aplikacije in seja se bo končala.\nProsim, shranite vse svoje datoteke preden zaprete ta dialog."
+msgstr ""
+"GNOME upravljalnik sej (proces %d) se je sesul\n"
+"zaradi usodne napake (%s).\n"
+"Ko zaprete ta dialog se bodo zaprle vse aplikacije in seja se bo končala.\n"
+"Prosim, shranite vse svoje datoteke preden zaprete ta dialog."
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -480,7 +490,10 @@ msgid ""
 "Application \"%s\" (process %d) has crashed\n"
 "due to a fatal error.\n"
 "(%s)"
-msgstr "Program \"%s\" (proces %d) se je zaradi\n usodne napake sesul.\n(%s)"
+msgstr ""
+"Program \"%s\" (proces %d) se je zaradi\n"
+" usodne napake sesul.\n"
+"(%s)"
 
 #: libgnomeui/gnome_segv.c:123
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -548,7 +561,6 @@ msgstr "Namig za predmet 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -606,7 +618,6 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoč"
 
@@ -797,11 +808,11 @@ msgstr "Nastavi program"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_O"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "O tem programu"
 
@@ -828,7 +839,7 @@ msgstr "Ustvari novo okno"
 msgid "_Close This Window"
 msgstr "_Zapri to okno"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Zapri trenutno okno"
 
@@ -986,7 +997,8 @@ msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Edinstven identifikator za ta vnos datoteke.  To bo uporabljeno za shranjevanje seznama zgodovine."
+"Edinstven identifikator za ta vnos datoteke.  To bo uporabljeno za "
+"shranjevanje seznama zgodovine."
 
 #: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
 msgid "Browse Dialog Title"
@@ -1005,7 +1017,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Ali je vnos datoteke namenjen za vnos imen imenikov ali popolnih imen datotek."
+"Ali je vnos datoteke namenjen za vnos imen imenikov ali popolnih imen "
+"datotek."
 
 #: libgnomeui/gnome-file-entry.c:216
 msgid "Modal"
@@ -1041,8 +1054,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeVnos, ki ga vnos datoteke uporablja za vnašanje imen datotek. To lastnost "
-"lahko uporabite za pridobitev GnomeVnos, če morate spremeniti ali poizvedeti po njegovih parametrih."
+"GnomeVnos, ki ga vnos datoteke uporablja za vnašanje imen datotek. To "
+"lastnost lahko uporabite za pridobitev GnomeVnos, če morate spremeniti ali "
+"poizvedeti po njegovih parametrih."
 
 #: libgnomeui/gnome-file-entry.c:252
 msgid "GtkEntry"
@@ -1055,7 +1069,8 @@ msgid ""
 "parameters."
 msgstr ""
 "GtkVnos, ki ga vnos datoteke uporablja za vnašanje imen datotek. To lastnost "
-"lahko uporabite za pridobitev GtkVnos, če morate spremeniti ali poizvedeti po njegovih parametrih."
+"lahko uporabite za pridobitev GtkVnos, če morate spremeniti ali poizvedeti "
+"po njegovih parametrih."
 
 #: libgnomeui/gnome-file-entry.c:418
 msgid "Select file"
@@ -1148,14 +1163,20 @@ msgid ""
 "administrator or operating system vendor does not allow you to change. Some "
 "of the settings you have selected may not take effect, or may not be "
 "restored next time you use this application (%s)."
-msgstr "Poskusili ste spremeniti nastavitve, ki vam jih vaš sistemski administrator ali prodajalec operacijskega sistema ne dovoli spremeniti. Nekatere od izbranih nastavitev morda ne bodo upoštevane ali pa ob naslednjem zagonu te aplikacije ne bodo obnovljene (%s)."
+msgstr ""
+"Poskusili ste spremeniti nastavitve, ki vam jih vaš sistemski administrator "
+"ali prodajalec operacijskega sistema ne dovoli spremeniti. Nekatere od "
+"izbranih nastavitev morda ne bodo upoštevane ali pa ob naslednjem zagonu te "
+"aplikacije ne bodo obnovljene (%s)."
 
 #: libgnomeui/gnome-gconf-ui.c:115
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
-msgstr "Med nalaganjem ali shranjevanjem podatkov za %s se je zgodila napaka. Možno je, da nekatere nastavitve ne bodo delovale pravilno."
+msgstr ""
+"Med nalaganjem ali shranjevanjem podatkov za %s se je zgodila napaka. Možno "
+"je, da nekatere nastavitve ne bodo delovale pravilno."
 
 #: libgnomeui/gnome-gconf-ui.c:139
 #, c-format
@@ -1167,7 +1188,8 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Edinstven identifikator za vnos ikone.  To bo uporabljeno za shranitev seznama zgodovine."
+"Edinstven identifikator za vnos ikone.  To bo uporabljeno za shranitev "
+"seznama zgodovine."
 
 #: libgnomeui/gnome-icon-entry.c:173
 msgid "Title for the Browse icon dialog."
@@ -1194,8 +1216,9 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Dialog izbirnika ikone.  To lastnost lahko uporabite za pridobitev GtkDialog, če "
-"morate spremeniti ali poizvedeti po katerikoli od njegovih lastnosti."
+"Dialog izbirnika ikone.  To lastnost lahko uporabite za pridobitev "
+"GtkDialog, če morate spremeniti ali poizvedeti po katerikoli od njegovih "
+"lastnosti."
 
 #: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
 msgid "No Icon"
@@ -1290,17 +1313,5 @@ msgstr "%a %d %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Izhod iz preizkusa"
-
-
-# Smart report:
-# Total untranslated messages in file: 293 
-# Translations made:
-# full: 217
-# smart: 6
-# cond: 87
-# total: 310 ; distinct: 197
-
-
+#~ msgid "Exit the test"
+#~ msgstr "Izhod iz preizkusa"

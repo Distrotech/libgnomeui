@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-03-02 18:07+0200\n"
+"POT-Creation-Date: 2002-03-04 22:19+0100\n"
 "PO-Revision-Date: 2002-03-02 18:42+0200\n"
 "Last-Translator: Tõivo Leedjärv <leedjarv@interest.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -105,8 +105,7 @@ msgstr "Tõlkijad"
 #: libgnomeui/gnome-about.c:389
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Programmi tõlkijad. Selle stringi peaks tõlgitavaks märkima"
+msgstr "Programmi tõlkijad. Selle stringi peaks tõlgitavaks märkima"
 
 #: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -546,7 +545,8 @@ msgstr ""
 msgid "Hint for item 2"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:82 test-gnome/testgnome.xml.h:5
+#. Some standard menus
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
 msgid "_File"
 msgstr "_Fail"
 
@@ -554,7 +554,7 @@ msgstr "_Fail"
 msgid "_File/"
 msgstr "_Fail/"
 
-#: libgnomeui/gnome-app-helper.c:84
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
 msgid "_Edit"
 msgstr "_Redaktor"
 
@@ -562,7 +562,7 @@ msgstr "_Redaktor"
 msgid "_Edit/"
 msgstr "_Redaktor/"
 
-#: libgnomeui/gnome-app-helper.c:86
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
 msgid "_View"
 msgstr "_Vaade"
 
@@ -570,7 +570,7 @@ msgstr "_Vaade"
 msgid "_View/"
 msgstr "_Vaade/"
 
-#: libgnomeui/gnome-app-helper.c:88
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
 msgid "_Settings"
 msgstr "_Sätted"
 
@@ -578,7 +578,8 @@ msgstr "_Sätted"
 msgid "_Settings/"
 msgstr "_Sätted/"
 
-#: libgnomeui/gnome-app-helper.c:90
+#. If you have more then one New type, use this tree
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
 msgid "_New"
 msgstr "_Uus"
 
@@ -586,7 +587,7 @@ msgstr "_Uus"
 msgid "_New/"
 msgstr "_Uus/"
 
-#: libgnomeui/gnome-app-helper.c:92
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
 msgid "Fi_les"
 msgstr "Fai_lid"
 
@@ -594,15 +595,15 @@ msgstr "Fai_lid"
 msgid "Fi_les/"
 msgstr "Fai_lid/"
 
-#: libgnomeui/gnome-app-helper.c:94
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
 msgid "_Windows"
 msgstr "A_knad"
 
-#: libgnomeui/gnome-app-helper.c:95
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
 msgid "_Game"
 msgstr "_Mäng"
 
-#: libgnomeui/gnome-app-helper.c:96 test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 msgid "_Help"
 msgstr "_Abi"
 
@@ -793,11 +794,11 @@ msgstr "Programmi häälestus"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Info selle programmi kohta"
 
@@ -824,7 +825,7 @@ msgstr ""
 msgid "_Close This Window"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr ""
 
@@ -1055,6 +1056,19 @@ msgstr "Vali fail"
 msgid "Browse..."
 msgstr "Vali..."
 
+#: libgnomeui/gnome-font-picker.c:66
+msgid "sans 12"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:67
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:68
+#, fuzzy
+msgid "Pick a Font"
+msgstr "Vali värv"
+
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
 msgstr ""
@@ -1263,8 +1277,4 @@ msgstr "%d. %b %Y %H:%M"
 
 #: libgnomeui/gnome-scores.c:412
 msgid "Sans 14"
-msgstr ""
-
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
 msgstr ""

@@ -99,14 +99,11 @@
 </para>
 
 
-<!-- ##### SIGNAL GnomeIconList::move-cursor ##### -->
+<!-- ##### ARG GnomePixmapEntry:do-preview ##### -->
 <para>
 
 </para>
 
-@iconlist: the object which received the signal.
-@arg1: 
-@arg2: 
 
 <!-- ##### FUNCTION gnome_appbar_construct ##### -->
 <para>

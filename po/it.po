@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
-"POT-Creation-Date: 2002-03-03 16:53+0100\n"
+"POT-Creation-Date: 2002-03-04 22:19+0100\n"
 "PO-Revision-Date: 2002-03-03 17:35+0100\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@cgabriel.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -105,7 +105,8 @@ msgstr "Traduzione"
 #: libgnomeui/gnome-about.c:389
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr "Lista dei traduttori. Questa stringa deve essere marcata come traducibile"
+msgstr ""
+"Lista dei traduttori. Questa stringa deve essere marcata come traducibile"
 
 #: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -227,7 +228,8 @@ msgstr "Calendario"
 
 #: libgnomeui/gnome-dateedit.c:933
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date è obsoleta, usare piuttosto gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date è obsoleta, usare piuttosto gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -381,7 +383,9 @@ msgstr "Libreria per la GUI di GNOME"
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:569
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Si sono verificati errori di segmentazione multipli; impossibile visualizzare la finestre di errore\n"
+msgstr ""
+"Si sono verificati errori di segmentazione multipli; impossibile "
+"visualizzare la finestre di errore\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:583
@@ -504,7 +508,9 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:164
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Per maggiori informazioni visitare la pagina per il crash delle applicazioni GNOME"
+msgstr ""
+"Per maggiori informazioni visitare la pagina per il crash delle applicazioni "
+"GNOME"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -552,7 +558,6 @@ msgstr "Oggetto Figlio 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -610,7 +615,6 @@ msgid "_Game"
 msgstr "_Gioco"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aiuto"
 
@@ -801,11 +805,11 @@ msgstr "Configura l'applicazione"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Informazioni"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Su questa applicazione"
 
@@ -832,7 +836,7 @@ msgstr "Crea una nuova finestra"
 msgid "_Close This Window"
 msgstr "_Chiudi questa finestra"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Chiude la finestra corrente"
 
@@ -1285,7 +1289,5 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Termina il test"
-
+#~ msgid "Exit the test"
+#~ msgstr "Termina il test"

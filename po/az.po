@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2002-02-13 03:24+0100\n"
+"POT-Creation-Date: 2002-03-04 22:19+0100\n"
 "PO-Revision-Date: 2001-12-19 19:49GMT+0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkic <linuxaz@azerimail.net>\n"
@@ -31,6 +31,12 @@ msgstr "Sənədləşdirici"
 #, fuzzy
 msgid "Translated by"
 msgstr "Tərcüməçi kreditləri"
+
+#. Add the credits button
+#: libgnomeui/gnome-about.c:295
+#, fuzzy
+msgid "_Credits"
+msgstr "_Düzəlt"
 
 #: libgnomeui/gnome-about.c:335
 msgid "Program name"
@@ -146,35 +152,35 @@ msgstr ""
 msgid "Level of user activity required."
 msgstr ""
 
-#: libgnomeui/gnome-client.c:832
+#: libgnomeui/gnome-client.c:833
 msgid "Specify session management ID"
 msgstr "Gedişat IDsini göstər"
 
-#: libgnomeui/gnome-client.c:832
+#: libgnomeui/gnome-client.c:833
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:836
 msgid "Specify prefix of saved configuration"
 msgstr "Qeyd edilmiş qurğuların prefiksini göstər"
 
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:836
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:838
+#: libgnomeui/gnome-client.c:839
 msgid "Disable connection to session manager"
 msgstr "Gedişat idarəcisinə bağlantıya mane ol"
 
-#: libgnomeui/gnome-client.c:944
+#: libgnomeui/gnome-client.c:945
 msgid "Session management"
 msgstr "Gedişat idarəsi"
 
-#: libgnomeui/gnome-client.c:2478
+#: libgnomeui/gnome-client.c:2483
 msgid "Cancel Logout"
 msgstr "Çıxışı Ləğv Et"
 
-#: libgnomeui/gnome-color-picker.c:404
+#: libgnomeui/gnome-color-picker.c:405
 msgid "Received invalid color data\n"
 msgstr "Xətalı rəng mə'lumatı alındı\n"
 
@@ -182,44 +188,44 @@ msgstr "Xətalı rəng mə'lumatı alındı\n"
 msgid "Pick a color"
 msgstr "Rəng Seç"
 
-#: libgnomeui/gnome-dateedit.c:430
+#: libgnomeui/gnome-dateedit.c:428
 msgid "Time"
 msgstr "Zaman"
 
-#: libgnomeui/gnome-dateedit.c:431
+#: libgnomeui/gnome-dateedit.c:429
 #, fuzzy
 msgid "The time currently selected"
 msgstr "Hal hazırkı vaxt"
 
-#: libgnomeui/gnome-dateedit.c:443
+#: libgnomeui/gnome-dateedit.c:441
 msgid "DateEdit Flags"
 msgstr "DataEdit bayraqları"
 
-#: libgnomeui/gnome-dateedit.c:444
+#: libgnomeui/gnome-dateedit.c:442
 msgid "Flags for how DateEdit looks"
 msgstr "DataEdit görünüşü üçün bayraqlar"
 
-#: libgnomeui/gnome-dateedit.c:453
+#: libgnomeui/gnome-dateedit.c:451
 msgid "Lower Hour"
 msgstr "Aşağı Saat"
 
-#: libgnomeui/gnome-dateedit.c:454
+#: libgnomeui/gnome-dateedit.c:452
 msgid "Lower hour in the time popup selector"
 msgstr "Vaxt sıçrama seçicisində ən aşağı saat"
 
-#: libgnomeui/gnome-dateedit.c:464
+#: libgnomeui/gnome-dateedit.c:462
 msgid "Upper Hour"
 msgstr "Üst Saat"
 
-#: libgnomeui/gnome-dateedit.c:465
+#: libgnomeui/gnome-dateedit.c:463
 msgid "Upper hour in the time popup selector"
 msgstr "Vaxt sıçrama seçicisində ən yuxarı saat"
 
-#: libgnomeui/gnome-dateedit.c:475
+#: libgnomeui/gnome-dateedit.c:473
 msgid "Initial Time"
 msgstr "Başlanğıç Vaxtı"
 
-#: libgnomeui/gnome-dateedit.c:476
+#: libgnomeui/gnome-dateedit.c:474
 msgid "The initial time"
 msgstr "Başlanğıc vaxtı"
 
@@ -228,7 +234,7 @@ msgstr "Başlanğıc vaxtı"
 msgid "Calendar"
 msgstr "Təqvim"
 
-#: libgnomeui/gnome-dateedit.c:935
+#: libgnomeui/gnome-dateedit.c:933
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date olmadı, gnome_date_edit_get_time istifadə edin"
@@ -320,19 +326,19 @@ msgstr "Loqo Arxa Plan rəngi seçilməsi"
 msgid "Logo Background color is set"
 msgstr "Loqo Arxa Plan rəngi seçildi"
 
-#: libgnomeui/gnome-druid.c:148
+#: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
 msgstr "Qurtarı Göstər"
 
-#: libgnomeui/gnome-druid.c:149
+#: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "'Sonrakı' yerinə 'Qurtar' düyməsini göstər"
 
-#: libgnomeui/gnome-druid.c:156
+#: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
 msgstr "Yardımı Göstər"
 
-#: libgnomeui/gnome-druid.c:157
+#: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
 msgstr "'Yardım' düyməsini göstər"
 
@@ -567,7 +573,6 @@ msgstr "İkinci üzv üçün ipucu"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fayl"
 
@@ -625,7 +630,6 @@ msgid "_Game"
 msgstr "_Oyun"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Yardım"
 
@@ -816,11 +820,11 @@ msgstr "Proqram təminatını sazla"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Haqqında"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Proqram təminatı haqqında"
 
@@ -847,7 +851,7 @@ msgstr "Yeni pəncərə yarat"
 msgid "_Close This Window"
 msgstr "Bu Pəncərəni _Qapat"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Cari pəncərəni qapat"
 
@@ -919,20 +923,20 @@ msgstr "Oyunu Qu_rtar"
 msgid "End the current game"
 msgstr "Cari oyunu qapat"
 
-#: libgnomeui/gnome-app-helper.c:2578
+#: libgnomeui/gnome-app-helper.c:2563
 msgid "Both text and icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2579
+#: libgnomeui/gnome-app-helper.c:2564
 msgid "Icons only"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2580
+#: libgnomeui/gnome-app-helper.c:2565
 #, fuzzy
 msgid "Text only"
 msgstr "Mətn"
 
-#: libgnomeui/gnome-app-helper.c:2631
+#: libgnomeui/gnome-app-helper.c:2616
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr ""
@@ -973,7 +977,7 @@ msgstr " (bəli və ya xeyr)"
 msgid "  - OK? (yes or no)"
 msgstr "  - Oldu? (bəli və ya xeyr)"
 
-#: libgnomeui/gnome-app-util.c:689
+#: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
 msgstr "Gedişat"
 
@@ -985,23 +989,102 @@ msgstr "Prq ID"
 msgid "The application ID string"
 msgstr "Proqram "
 
-#: libgnomeui/gnome-entry.c:169 libgnomeui/gnome-entry.c:170
+#: libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
 msgid "History id"
 msgstr "Keçmiş id"
 
-#: libgnomeui/gnome-entry.c:176
+#: libgnomeui/gnome-entry.c:178
 msgid "GTK entry"
 msgstr "GTK girişi"
 
-#: libgnomeui/gnome-entry.c:177
+#: libgnomeui/gnome-entry.c:179
 msgid "The GTK entry"
 msgstr "GTK girişi"
 
-#: libgnomeui/gnome-file-entry.c:347
+#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
+#, fuzzy
+msgid "History ID"
+msgstr "Keçmiş id"
+
+#: libgnomeui/gnome-file-entry.c:191
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
+msgid "Browse Dialog Title"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:200
+#, fuzzy
+msgid "Title for the Browse file dialog."
+msgstr "Seçki dialoq qutusu başlığı"
+
+#: libgnomeui/gnome-file-entry.c:207
+msgid "Directory Entry"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:208
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:216
+#, fuzzy
+msgid "Modal"
+msgstr "Mod"
+
+#: libgnomeui/gnome-file-entry.c:217
+msgid "Whether the Browse file window should be modal."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
+#, fuzzy
+msgid "Filename"
+msgstr "_Fayl"
+
+#: libgnomeui/gnome-file-entry.c:225
+msgid "Filename that should be displayed in the file entry."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:233
+msgid "Default Path"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:234
+msgid "Default path for the Browse file window."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:241
+#, fuzzy
+msgid "GnomeEntry"
+msgstr "GTK girişi"
+
+#: libgnomeui/gnome-file-entry.c:242
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:252
+msgid "GtkEntry"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:253
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:418
 msgid "Select file"
 msgstr "Fayl seç"
 
-#: libgnomeui/gnome-file-entry.c:523
+#: libgnomeui/gnome-file-entry.c:592
 msgid "Browse..."
 msgstr "Gəz..."
 
@@ -1108,33 +1191,67 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "GConf xəta mündəricatı: %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:861
+#: libgnomeui/gnome-icon-entry.c:164
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:173
+#, fuzzy
+msgid "Title for the Browse icon dialog."
+msgstr "Seçki dialoq qutusu başlığı"
+
+#: libgnomeui/gnome-icon-entry.c:180
+msgid "Pixmap Directory"
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:181
+msgid "Directory that will be searched for icons."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:189
+msgid "Filename that should be displayed in the icon entry."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:197
+#, fuzzy
+msgid "Picker dialog"
+msgstr "Rəng Seç"
+
+#: libgnomeui/gnome-icon-entry.c:198
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
 msgid "No Icon"
 msgstr "Timsalsız"
 
-#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:378
+#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "hbox tapıla bilmir, normal fayl seçkisi işlədirəm"
 
-#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:384
+#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Nümayiş"
 
-#: libgnomeui/gnome-icon-entry.c:882
+#: libgnomeui/gnome-icon-entry.c:930
 msgid "Browse"
 msgstr "Gəz"
 
-#: libgnomeui/gnome-icon-sel.c:297
+#: libgnomeui/gnome-icon-sel.c:296
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: '%s' ya mövcud deyil ya da cərgə deyildir"
 
-#: libgnomeui/gnome-icon-sel.c:305
+#: libgnomeui/gnome-icon-sel.c:304
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: '%s' cərgəsi açıla bilmir"
 
-#: libgnomeui/gnome-icon-sel.c:414
+#: libgnomeui/gnome-icon-sel.c:411
 msgid "Loading Icons..."
 msgstr "Timsallar Yüklənir..."
 
@@ -1158,7 +1275,16 @@ msgstr "Sual"
 msgid "Message"
 msgstr "İsmarıc"
 
-#: libgnomeui/gnome-pixmap-entry.c:184 libgnomeui/gnome-pixmap-entry.c:496
+#: libgnomeui/gnome-pixmap-entry.c:114
+#, fuzzy
+msgid "Do Preview"
+msgstr "Nümayiş"
+
+#: libgnomeui/gnome-pixmap-entry.c:115
+msgid "Whether the pixmap entry should have a preview."
+msgstr ""
+
+#: libgnomeui/gnome-pixmap-entry.c:192 libgnomeui/gnome-pixmap-entry.c:504
 msgid "No Image"
 msgstr "Görünüş Yoxdur"
 
@@ -1194,10 +1320,9 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "sans 12"
 
-#: test-gnome/testgnome.xml.h:3
 #, fuzzy
-msgid "Exit the test"
-msgstr "Proqramdan çıx"
+#~ msgid "Exit the test"
+#~ msgstr "Proqramdan çıx"
 
 #~ msgid "Author"
 #~ msgstr "Müəllif"

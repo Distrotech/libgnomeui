@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 1.102.0\n"
-"POT-Creation-Date: 2002-03-02 09:26-0500\n"
+"POT-Creation-Date: 2002-03-04 22:19+0100\n"
 "PO-Revision-Date: 2001-08-16 14:12+0200\n"
 "Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -117,6 +117,7 @@ msgid "A logo for the about box"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:476
+#, c-format
 msgid "About %s"
 msgstr "%s Hakkýnda"
 
@@ -548,7 +549,6 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Dosya"
 
@@ -606,7 +606,6 @@ msgid "_Game"
 msgstr "_Oyun"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Yardým"
 
@@ -797,11 +796,11 @@ msgstr "Uygulamayý yapýlandýr"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Hakkýnda"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Bu program hakkýnda"
 
@@ -828,7 +827,7 @@ msgstr "Yeni bir pencere oluþturur"
 msgid "_Close This Window"
 msgstr "_Bu Pencereyi Kapat"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Pencereyi kapat"
 
@@ -1281,6 +1280,5 @@ msgstr "%d %b %a %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Testten çýk"
+#~ msgid "Exit the test"
+#~ msgstr "Testten çýk"
