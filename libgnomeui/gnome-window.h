@@ -38,6 +38,8 @@ void gnome_window_set_icon_from_file (GtkWindow *window,
 				      const char *filename,
 				      gboolean overwrite);
 
+void gnome_window_set_icon_from_default (GtkWindow *w);
+
 G_END_DECLS
 
 #endif /* GNOME_WINDOW_H */

@@ -31,6 +31,7 @@
 #include <gdk/gdkx.h>
 
 #include "gnome-window.h"
+#include "gnome-init.h"
 
 /**
  * gnome_window_toplevel_set_title:
@@ -162,3 +163,22 @@ gnome_window_set_icon_from_file (GtkWindow *window, const char *filename, gboole
     gnome_window_set_icon (window, pb, overwrite);
     gdk_pixbuf_unref (pb);
 }
+
+/**
+ * gnome_window_icon_set_from_default:
+ * @w: the #GtkWidget to set the icon on
+ *
+ * Description: Makes the #GtkWindow @w use the default icon.
+ */
+void
+gnome_window_set_icon_from_default (GtkWindow *w)
+{
+	GnomeProgram *program;
+	const gchar *default_icon = NULL;
+
+	program = gnome_program_get ();
+	g_object_get (G_OBJECT (program), LIBGNOMEUI_PARAM_DEFAULT_ICON, &default_icon);
+	if (default_icon)
+		gnome_window_set_icon_from_file (w, default_icon, FALSE);
+}
+

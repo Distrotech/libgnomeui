@@ -1,5 +1,9 @@
 2001-06-13  Martin Baulig  <baulig@suse.de>
 
+	* gnome-window.c (gnome_window_set_icon_from_default): New function.
+
+2001-06-13  Martin Baulig  <baulig@suse.de>
+
 	* Makefile.am: Install libgnomeui.h in `$(includedir)/gnome/2' to make it
 	consistent with Bonobo.
 
