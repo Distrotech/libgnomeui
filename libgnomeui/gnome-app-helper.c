@@ -182,7 +182,7 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group, Gnome
 		  GtkAccelGroup *menu_accel_group)
 {
 	GtkWidget *contents;
-	GtkWidget *label;
+	GtkWidget *label, *i8l_label;
 	guint keyval;
 
 	/* Create the menu item */
@@ -219,7 +219,11 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group, Gnome
 
 	/* Create the contents of the menu item */
 
-	contents = create_pixmap_and_label (_(uiinfo->label), uiinfo->pixmap_type, uiinfo->pixmap_info,
+	/* Don't use gettext on the empty string since gettext will map
+	 * the empty string to the header at the beginning of the .pot file. */
+
+	i8l_label = (uiinfo->label [0] == '\0') ? "" : _(uiinfo->label);
+	contents = create_pixmap_and_label (i8l_label, uiinfo->pixmap_type, uiinfo->pixmap_info,
 					    indent_missing_pixmaps, &label, &keyval);
 	gtk_container_add (GTK_CONTAINER (uiinfo->widget), contents);
 
