@@ -47,7 +47,7 @@ static void gnome_dialog_init             (GnomeDialog * dialog);
 static void gnome_dialog_init_action_area (GnomeDialog * dialog);
 
 
-static void gnome_dialog_button_clicked (GtkWidget   *button, 
+static void gnome_dialog_button_clicked (GtkWidget   *button,
 					 GtkWidget   *messagebox);
 static gint gnome_dialog_key_pressed (GtkWidget * d, GdkEventKey * e);
 static gint gnome_dialog_delete_event (GtkWidget * d, GdkEventAny * e);
@@ -66,19 +66,23 @@ gnome_dialog_get_type (void)
 
   if (!dialog_type)
     {
-      GtkTypeInfo dialog_info =
+      static const GTypeInfo dialog_info =
       {
-	"GnomeDialog",
-	sizeof (GnomeDialog),
 	sizeof (GnomeDialogClass),
-	(GtkClassInitFunc) gnome_dialog_class_init,
-	(GtkObjectInitFunc) gnome_dialog_init,
-	NULL,
-	NULL,
-	NULL
+        (GBaseInitFunc) NULL,
+        (GBaseFinalizeFunc) NULL,
+	(GClassInitFunc) gnome_dialog_class_init,
+        (GClassFinalizeFunc) NULL,
+        NULL,			/* class_data */
+	sizeof (GnomeDialog),
+	0,			/* n_preallocs */
+	(GInstanceInitFunc) gnome_dialog_init,
+	NULL			/* value_table */
       };
 
-      dialog_type = gtk_type_unique (GTK_TYPE_WINDOW, &dialog_info);
+      dialog_type = g_type_register_static (GTK_TYPE_WINDOW,
+					    "GnomeDialog",
+					    &dialog_info, 0);
     }
 
   return dialog_type;
@@ -97,23 +101,26 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
   widget_class = (GtkWidgetClass*) klass;
   window_class = (GtkWindowClass*) klass;
 
-  parent_class = gtk_type_class (GTK_TYPE_WINDOW);
+  parent_class = g_type_class_peek_parent (klass);
 
   dialog_signals[CLOSE] =
-    gtk_signal_new ("close",
-		    GTK_RUN_LAST,
-		    GTK_CLASS_TYPE (object_class),
-		    GTK_SIGNAL_OFFSET (GnomeDialogClass, close),
-		    _gnome_marshal_INT__VOID,
-		    GTK_TYPE_INT, 0);
+    g_signal_new ("close",
+		  G_TYPE_FROM_CLASS (gobject_class),
+		  G_SIGNAL_RUN_LAST,
+		  G_STRUCT_OFFSET (GnomeDialogClass, close),
+		  NULL, NULL,
+		  _gnome_marshal_BOOLEAN__VOID,
+		  G_TYPE_BOOLEAN, 0);
 
   dialog_signals[CLICKED] =
-    gtk_signal_new ("clicked",
-		    GTK_RUN_LAST,
-		    GTK_CLASS_TYPE (object_class),
-		    GTK_SIGNAL_OFFSET (GnomeDialogClass, clicked),
-		    gtk_marshal_VOID__INT,
-		    GTK_TYPE_NONE, 1, GTK_TYPE_INT);
+    g_signal_new ("clicked",
+		  G_TYPE_FROM_CLASS (gobject_class),
+		  G_SIGNAL_RUN_LAST,
+		  G_STRUCT_OFFSET (GnomeDialogClass, clicked),
+		  NULL, NULL,
+		  g_cclosure_marshal_VOID__INT,
+		  G_TYPE_NONE, 1,
+		  G_TYPE_INT);
 
   klass->clicked = NULL;
   klass->close = NULL;
@@ -139,28 +146,27 @@ gnome_dialog_init (GnomeDialog *dialog)
   /* FIXME:!!!!!!!!!!!!!! */
   GTK_WINDOW(dialog)->type = 1;
   gtk_window_set_position(GTK_WINDOW(dialog), 1);
-  
+
   /*
   GTK_WINDOW(dialog)->type = gnome_preferences_get_dialog_type();
-  gtk_window_set_position(GTK_WINDOW(dialog), 
+  gtk_window_set_position(GTK_WINDOW(dialog),
 		      gnome_preferences_get_dialog_position());
 		      */
-  
+
   dialog->accelerators = gtk_accel_group_new();
-  gtk_window_add_accel_group (GTK_WINDOW(dialog), 
+  gtk_window_add_accel_group (GTK_WINDOW(dialog),
 			      dialog->accelerators);
 
   vbox = gtk_vbox_new(FALSE, GNOME_PAD);
-  gtk_container_set_border_width (GTK_CONTAINER (vbox), 
+  gtk_container_set_border_width (GTK_CONTAINER (vbox),
 			      GNOME_PAD_SMALL);
   gtk_container_add(GTK_CONTAINER(dialog), vbox);
   gtk_widget_show(vbox);
 
-  gtk_window_set_policy (GTK_WINDOW (dialog), FALSE, 
-			 FALSE, FALSE);
+  gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 
   dialog->vbox = gtk_vbox_new(FALSE, GNOME_PAD);
-  gtk_box_pack_start (GTK_BOX (vbox), dialog->vbox, 
+  gtk_box_pack_start (GTK_BOX (vbox), dialog->vbox,
 		      TRUE, TRUE,
 		      GNOME_PAD_SMALL);
   gtk_widget_show(dialog->vbox);
@@ -175,18 +181,15 @@ gnome_dialog_init_action_area (GnomeDialog * dialog)
     return;
 
   dialog->action_area = gtk_hbutton_box_new ();
-  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog->action_area), 
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog->action_area),
 			     GTK_BUTTONBOX_END);
 
-  gtk_button_box_set_spacing (GTK_BOX (dialog->action_area), 
-			      GNOME_PAD);
-
-  gtk_box_pack_end (GTK_BOX (dialog->vbox), dialog->action_area, 
+  gtk_box_pack_end (GTK_BOX (dialog->vbox), dialog->action_area,
 		    FALSE, TRUE, 0);
   gtk_widget_show (dialog->action_area);
 
   separator = gtk_hseparator_new ();
-  gtk_box_pack_end (GTK_BOX (dialog->vbox), separator, 
+  gtk_box_pack_end (GTK_BOX (dialog->vbox), separator,
 		      FALSE, TRUE,
 		      GNOME_PAD_SMALL);
   gtk_widget_show (separator);
@@ -198,27 +201,27 @@ gnome_dialog_init_action_area (GnomeDialog * dialog)
  * @dialog: Dialog to construct.
  * @title: Title of the dialog.
  * @ap: va_list of buttons, NULL-terminated.
- * 
+ *
  * See gnome_dialog_new().
  **/
-void       
+void
 gnome_dialog_construct (GnomeDialog * dialog,
 			const gchar * title,
 			va_list ap)
 {
   gchar * button_name;
-  
+
   if (title)
     gtk_window_set_title (GTK_WINDOW (dialog), title);
-  
+
   while (TRUE) {
     button_name = va_arg (ap, gchar *);
-      
+
     if (button_name == NULL) {
       break;
     }
-    
-    gnome_dialog_append_button( dialog, 
+
+    gnome_dialog_append_button( dialog,
 				  button_name);
   }
 
@@ -232,7 +235,7 @@ gnome_dialog_construct (GnomeDialog * dialog,
  * @dialog: Dialog to construct.
  * @title: Title of the dialog.
  * @buttons: NULL-terminated array of buttons.
- * 
+ *
  * See gnome_dialog_new().
  **/
 void gnome_dialog_constructv (GnomeDialog * dialog,
@@ -240,20 +243,20 @@ void gnome_dialog_constructv (GnomeDialog * dialog,
 			      const gchar ** buttons)
 {
   const gchar * button_name;
-  
+
   if (title)
     gtk_window_set_title (GTK_WINDOW (dialog), title);
-  
+
   if (buttons) {
     while (TRUE) {
-      
+
       button_name = *buttons++;
-      
+
       if (button_name == NULL) {
 	break;
       }
-      
-      gnome_dialog_append_button( dialog, 
+
+      gnome_dialog_append_button( dialog,
 				  button_name);
     };
   }
@@ -269,11 +272,11 @@ void gnome_dialog_constructv (GnomeDialog * dialog,
  * gnome_dialog_new: Create a new #GnomeDialog.
  * @title: The title of the dialog; appears in window titlebar.
  * @...: NULL-terminated varargs list of button names or GNOME_STOCK_BUTTON_* defines.
- * 
- * Creates a new #GnomeDialog, with the given title, and any button names 
+ *
+ * Creates a new #GnomeDialog, with the given title, and any button names
  * in the arg list. Buttons can be simple names, such as _("My Button"),
  * or gnome-stock defines such as %GNOME_STOCK_BUTTON_OK, etc. The last
- * argument should be NULL to terminate the list.  
+ * argument should be NULL to terminate the list.
  *
  * Buttons passed to this function are numbered from left to right,
  * starting with 0. So the first button in the arglist is button 0,
@@ -287,11 +290,11 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
 {
   va_list ap;
   GnomeDialog *dialog;
-	
-  dialog = gtk_type_new (GNOME_TYPE_DIALOG);
+
+  dialog = g_object_new (GNOME_TYPE_DIALOG, NULL);
 
   va_start (ap, title);
-  
+
   gnome_dialog_construct(dialog, title, ap);
 
   va_end(ap);
@@ -303,18 +306,18 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
  * gnome_dialog_newv: Create a new #GnomeDialog.
  * @title: Title of the dialog.
  * @buttons: NULL-terminated vector of buttons names.
- * 
+ *
  * See gnome_dialog_new(), this function is identical but does not use
  * varargs.
- * 
+ *
  * Return value: The new #GnomeDialog.
  **/
 GtkWidget* gnome_dialog_newv            (const gchar * title,
 					 const gchar ** buttons)
 {
   GnomeDialog *dialog;
-	
-  dialog = gtk_type_new (GNOME_TYPE_DIALOG);
+
+  dialog = g_object_new (GNOME_TYPE_DIALOG, NULL);
 
   gnome_dialog_constructv(dialog, title, buttons);
 
@@ -325,14 +328,14 @@ GtkWidget* gnome_dialog_newv            (const gchar * title,
  * gnome_dialog_set_parent: Set the logical parent window of a #GnomeDialog.
  * @dialog: #GnomeDialog to set the parent of.
  * @parent: Parent #GtkWindow.
- * 
- * Dialogs have "parents," usually the main application window which spawned 
+ *
+ * Dialogs have "parents," usually the main application window which spawned
  * them. This function will let the window manager know about the parent-child
  * relationship. Usually this means the dialog must stay on top of the parent,
- * and will be minimized when the parent is. Gnome also allows users to 
+ * and will be minimized when the parent is. Gnome also allows users to
  * request dialog placement above the parent window (vs. at the mouse position,
  * or at a default window manger location).
- * 
+ *
  **/
 void       gnome_dialog_set_parent     (GnomeDialog * dialog,
 					GtkWindow   * parent)
@@ -367,13 +370,13 @@ void       gnome_dialog_set_parent     (GnomeDialog * dialog,
     gdk_drawable_get_size   (GTK_WIDGET(parent)->window, &w, &h);
 
     /* The problem here is we don't know how big the dialog is.
-       So "centered" isn't really true. We'll go with 
+       So "centered" isn't really true. We'll go with
        "kind of more or less on top" */
 
     dialog_x = x + w/4;
     dialog_y = y + h/4;
 
-    gtk_widget_set_uposition(GTK_WIDGET(dialog), dialog_x, dialog_y); 
+    gtk_window_move (GTK_WINDOW (dialog), dialog_x, dialog_y);
   }
 }
 
@@ -383,11 +386,11 @@ void       gnome_dialog_set_parent     (GnomeDialog * dialog,
  * @dialog: #GnomeDialog to add buttons to.
  * @first: First button to add.
  * @...: varargs list of additional buttons, NULL-terminated.
- * 
+ *
  * This function is mostly for internal library use. You should use
  * gnome_dialog_new() instead. See that function for a description of
  * the button arguments.
- * 
+ *
  **/
 void       gnome_dialog_append_buttons (GnomeDialog * dialog,
 					const gchar * first,
@@ -412,11 +415,11 @@ void       gnome_dialog_append_buttons (GnomeDialog * dialog,
  * gnome_dialog_append_button: Add a button to a dialog after its initial construction.
  * @dialog: #GnomeDialog to add button to.
  * @button_name: Button to add.
- * 
+ *
  * This function is mostly for internal library use. You should use
  * gnome_dialog_new() instead. See that function for a description of
  * the button argument.
- * 
+ *
  **/
 void       gnome_dialog_append_button (GnomeDialog * dialog,
 				       const gchar * button_name)
@@ -427,7 +430,7 @@ void       gnome_dialog_append_button (GnomeDialog * dialog,
   if (button_name != NULL) {
     GtkWidget *button;
 
-    gnome_dialog_init_action_area (dialog);    
+    gnome_dialog_init_action_area (dialog);
 
     button = gtk_button_new_from_stock (button_name);
     GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
@@ -435,11 +438,10 @@ void       gnome_dialog_append_button (GnomeDialog * dialog,
 
     gtk_widget_grab_default (button);
     gtk_widget_show (button);
-    
-    gtk_signal_connect_after (GTK_OBJECT (button), "clicked",
-			      (GtkSignalFunc) gnome_dialog_button_clicked,
-			      dialog);
-    
+
+    g_signal_connect_after (button, "clicked",
+			    G_CALLBACK (gnome_dialog_button_clicked), dialog);
+
     dialog->buttons = g_list_append (dialog->buttons, button);
   }
 }
@@ -492,10 +494,10 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
  * @dialog: #GnomeDialog to add the button to.
  * @button_name: Name of the button, or stock button #define.
  * @pixmap_name: Stock pixmap name.
- * 
- * gnome_dialog_new() does not permit custom buttons with pixmaps, so if you 
+ *
+ * gnome_dialog_new() does not permit custom buttons with pixmaps, so if you
  * want one of those you need to use this function.
- * 
+ *
  **/
 void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
 						   const gchar * button_name,
@@ -509,25 +511,24 @@ void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
 
     if (pixmap_name != NULL) {
       GtkWidget *pixmap;
- 
+
       pixmap = gtk_image_new_from_stock (pixmap_name, GTK_ICON_SIZE_BUTTON);
-      button = gnome_pixmap_button (pixmap, button_name);    
+      button = gnome_pixmap_button (pixmap, button_name);
     } else {
       button = gtk_button_new_from_stock (button_name);
     }
 
-    gnome_dialog_init_action_area (dialog);    
+    gnome_dialog_init_action_area (dialog);
 
     GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
     gtk_box_pack_start (GTK_BOX (dialog->action_area), button, TRUE, TRUE, 0);
 
     gtk_widget_grab_default (button);
     gtk_widget_show (button);
-    
-    gtk_signal_connect_after (GTK_OBJECT (button), "clicked",
-			      (GtkSignalFunc) gnome_dialog_button_clicked,
-			      dialog);
-    
+
+    g_signal_connect_after (button, "clicked",
+			    G_CALLBACK (gnome_dialog_button_clicked), dialog);
+
     dialog->buttons = g_list_append (dialog->buttons, button);
   }
 }
@@ -536,9 +537,9 @@ void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
  * gnome_dialog_append_buttonsv: Like gnome_dialog_append_buttons(), but with a vector arg instead of a varargs list.
  * @dialog: #GnomeDialog to append to.
  * @buttons: NULL-terminated vector of buttons to append.
- * 
+ *
  * For internal use, language bindings, etc. Use gnome_dialog_new() instead.
- * 
+ *
  **/
 void       gnome_dialog_append_buttonsv (GnomeDialog * dialog,
 					 const gchar ** buttons)
@@ -557,9 +558,9 @@ void       gnome_dialog_append_buttonsv (GnomeDialog * dialog,
  * @dialog: #GnomeDialog to append to.
  * @names: NULL-terminated vector of button names.
  * @pixmaps: NULL-terminated vector of pixmap names.
- * 
+ *
  * Simply calls gnome_dialog_append_button_with_pixmap() repeatedly.
- * 
+ *
  **/
 void       gnome_dialog_append_buttons_with_pixmaps (GnomeDialog * dialog,
 						     const gchar **names,
@@ -585,14 +586,11 @@ static void
 gnome_dialog_shutdown_run(GnomeDialog* dialog,
                           struct GnomeDialogRunInfo* runinfo)
 {
-  if (!runinfo->destroyed) 
+  if (!runinfo->destroyed)
     {
-      
-      gtk_signal_disconnect(GTK_OBJECT(dialog),
-                            runinfo->close_id);
-      gtk_signal_disconnect(GTK_OBJECT(dialog),
-                            runinfo->clicked_id);
-  
+      g_signal_handler_disconnect(dialog, runinfo->close_id);
+      g_signal_handler_disconnect(dialog, runinfo->clicked_id);
+
       runinfo->close_id = runinfo->clicked_id = -1;
     }
 
@@ -657,19 +655,16 @@ gnome_dialog_run_real(GnomeDialog* dialog, gboolean close_after)
      need to handle them all: click, delete_event, close, destroy */
 
   ri.clicked_id =
-    gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
-		       GTK_SIGNAL_FUNC(gnome_dialog_setbutton_callback),
-		       &ri);
+    g_signal_connect(dialog, "clicked",
+		     G_CALLBACK (gnome_dialog_setbutton_callback), &ri);
 
   ri.close_id =
-    gtk_signal_connect(GTK_OBJECT(dialog), "close",
-		       GTK_SIGNAL_FUNC(gnome_dialog_quit_run),
-		       &ri);
+    g_signal_connect(dialog, "close",
+		     G_CALLBACK (gnome_dialog_quit_run), &ri);
 
-  ri.destroy_id = 
-    gtk_signal_connect(GTK_OBJECT(dialog), "destroy",
-                       GTK_SIGNAL_FUNC(gnome_dialog_mark_destroy),
-                       &ri);
+  ri.destroy_id =
+    g_signal_connect(dialog, "destroy",
+		     G_CALLBACK(gnome_dialog_mark_destroy), &ri);
 
   if ( ! GTK_WIDGET_VISIBLE(GTK_WIDGET(dialog)) )
     gtk_widget_show(GTK_WIDGET(dialog));
@@ -678,20 +673,20 @@ gnome_dialog_run_real(GnomeDialog* dialog, gboolean close_after)
   g_main_loop_run (ri.mainloop);
 
   g_assert(ri.mainloop == NULL);
-  
+
   if(!ri.destroyed) {
 
-    gtk_signal_disconnect(GTK_OBJECT(dialog), ri.destroy_id);
+    g_signal_handler_disconnect(dialog, ri.destroy_id);
 
     if(!was_modal)
       {
 	gtk_window_set_modal(GTK_WINDOW(dialog),FALSE);
       }
-    
+
     if(ri.close_id >= 0) /* We didn't shut down the run? */
       {
-	gtk_signal_disconnect(GTK_OBJECT(dialog), ri.close_id);
-	gtk_signal_disconnect(GTK_OBJECT(dialog), ri.clicked_id);
+	g_signal_handler_disconnect(dialog, ri.close_id);
+	g_signal_handler_disconnect(dialog, ri.clicked_id);
       }
 
     if (close_after)
@@ -706,10 +701,10 @@ gnome_dialog_run_real(GnomeDialog* dialog, gboolean close_after)
 /**
  * gnome_dialog_run: Make the dialog modal and block waiting for user response.
  * @dialog: #GnomeDialog to use.
- * 
- * Blocks until the user clicks a button, or closes the dialog with the 
+ *
+ * Blocks until the user clicks a button, or closes the dialog with the
  * window manager's close decoration (or by pressing Escape).
- * 
+ *
  * You need to set up the dialog to do the right thing when a button
  * is clicked or delete_event is received; you must consider both of
  * those possibilities so that you know the status of the dialog when
@@ -735,13 +730,13 @@ gnome_dialog_run(GnomeDialog *dialog)
 /**
  * gnome_dialog_run_and_close: Like gnome_dialog_run(), but force-closes the dialog after the run, iff the dialog was not closed already.
  * @dialog: #GnomeDialog to use.
- * 
- * See gnome_dialog_run(). The only difference is that this function calls 
+ *
+ * See gnome_dialog_run(). The only difference is that this function calls
  * gnome_dialog_close() before returning, if the dialog was not already closed.
- * 
+ *
  * Return value: If a button was pressed, the button number. Otherwise -1.
  **/
-gint 
+gint
 gnome_dialog_run_and_close(GnomeDialog* dialog)
 {
   return gnome_dialog_run_real(dialog,TRUE);
@@ -751,11 +746,11 @@ gnome_dialog_run_and_close(GnomeDialog* dialog)
  * gnome_dialog_set_default: Set the default button for the dialog. The Enter key activates the default button.
  * @dialog: #GnomeDialog to affect.
  * @button: Number of the default button.
- * 
+ *
  * The default button will be activated if the user just presses return.
  * Usually you should make the least-destructive button the default.
  * Otherwise, the most commonly-used button.
- * 
+ *
  **/
 void
 gnome_dialog_set_default (GnomeDialog *dialog,
@@ -774,7 +769,7 @@ gnome_dialog_set_default (GnomeDialog *dialog,
   }
 #ifdef GNOME_ENABLE_DEBUG
   /* If we didn't find the button, complain */
-  g_warning("Button number %d does not appear to exist\n", button); 
+  g_warning("Button number %d does not appear to exist\n", button);
 #endif
 }
 
@@ -782,9 +777,9 @@ gnome_dialog_set_default (GnomeDialog *dialog,
  * gnome_dialog_grab_focus: Makes a button grab the focus. T
  * @dialog: #GnomeDialog to affect.
  * @button: Number of the default button.
- * 
+ *
  * The button @button will grab the focus.  Use this for dialogs
- * Where only buttons are displayed and you want to change the 
+ * Where only buttons are displayed and you want to change the
  * default button.
  **/
 void
@@ -803,7 +798,7 @@ gnome_dialog_grab_focus (GnomeDialog *dialog, gint button)
   }
 #ifdef GNOME_ENABLE_DEBUG
   /* If we didn't find the button, complain */
-  g_warning("Button number %d does not appear to exist\n", button); 
+  g_warning("Button number %d does not appear to exist\n", button);
 #endif
 }
 
@@ -811,14 +806,14 @@ gnome_dialog_grab_focus (GnomeDialog *dialog, gint button)
  * gnome_dialog_set_close: Whether to call gnome_dialog_close() when a button is clicked.
  * @dialog: #GnomeDialog to affect.
  * @click_closes: TRUE if clicking any button should call gnome_dialog_close().
- * 
+ *
  * This is a convenience function so you don't have to connect callbacks
- * to each button just to close the dialog. By default, #GnomeDialog 
+ * to each button just to close the dialog. By default, #GnomeDialog
  * has this parameter set the FALSE and it will not close on any click.
  * (This was a design error.) However, almost all the #GnomeDialog subclasses,
  * such as #GnomeMessageBox and #GnomePropertyBox, have this parameter set to
  * TRUE by default.
- * 
+ *
  **/
 void       gnome_dialog_set_close    (GnomeDialog * dialog,
 				      gboolean click_closes)
@@ -833,15 +828,15 @@ void       gnome_dialog_set_close    (GnomeDialog * dialog,
  * gnome_dialog_close_hides: gnome_dialog_close() can destroy or hide the dialog; toggle this behavior.
  * @dialog: #GnomeDialog to affect.
  * @just_hide: If TRUE, gnome_dialog_close() calls gtk_widget_hide() instead of gtk_widget_destroy().
- * 
- * Some dialogs are expensive to create, so you want to keep them around and just 
- * gtk_widget_show() them when they are opened, and gtk_widget_hide() them when 
- * they're closed. Other dialogs are expensive to keep around, so you want to 
- * gtk_widget_destroy() them when they're closed. It's a judgment call you 
+ *
+ * Some dialogs are expensive to create, so you want to keep them around and just
+ * gtk_widget_show() them when they are opened, and gtk_widget_hide() them when
+ * they're closed. Other dialogs are expensive to keep around, so you want to
+ * gtk_widget_destroy() them when they're closed. It's a judgment call you
  * will need to make for each dialog.
- * 
+ *
  **/
-void       gnome_dialog_close_hides (GnomeDialog * dialog, 
+void       gnome_dialog_close_hides (GnomeDialog * dialog,
 				     gboolean just_hide)
 {
   g_return_if_fail(dialog != NULL);
@@ -855,8 +850,8 @@ void       gnome_dialog_close_hides (GnomeDialog * dialog,
  * @dialog: #GnomeDialog to affect.
  * @button: Which button to affect.
  * @setting: TRUE means it's sensitive.
- * 
- * Calls gtk_widget_set_sensitive() on the specified button number. 
+ *
+ * Calls gtk_widget_set_sensitive() on the specified button number.
  *
  **/
 void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
@@ -876,7 +871,7 @@ void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
   }
 #ifdef GNOME_ENABLE_DEBUG
   /* If we didn't find the button, complain */
-  g_warning("Button number %d does not appear to exist\n", button); 
+  g_warning("Button number %d does not appear to exist\n", button);
 #endif
 }
 
@@ -886,13 +881,13 @@ void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
  * @button: Button number.
  * @callback: A standard Gtk callback.
  * @data: Callback data.
- * 
- * Simply gtk_signal_connect() to the "clicked" signal of the specified button.
- * 
+ *
+ * Simply g_signal_connect() to the "clicked" signal of the specified button.
+ *
  **/
 void       gnome_dialog_button_connect (GnomeDialog *dialog,
 					gint button,
-					GtkSignalFunc callback,
+					GCallback callback,
 					gpointer data)
 {
   GList * list;
@@ -903,29 +898,29 @@ void       gnome_dialog_button_connect (GnomeDialog *dialog,
   list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
-    gtk_signal_connect(GTK_OBJECT(list->data), "clicked",
-		       callback, data);
+    g_signal_connect(list->data, "clicked",
+		     callback, data);
     return;
   }
 #ifdef GNOME_ENABLE_DEBUG
   /* If we didn't find the button, complain */
-  g_warning("Button number %d does not appear to exist\n", button); 
+  g_warning("Button number %d does not appear to exist\n", button);
 #endif
 }
 
 /**
- * gnome_dialog_button_connect_object: gtk_signal_connect_object() to a button.
+ * gnome_dialog_button_connect_object: g_signal_connect_swapped() to a button.
  * @dialog: #GnomeDialog to affect.
  * @button: Button to connect to.
  * @callback: Callback.
- * @obj: As for gtk_signal_connect_object().
- * 
- * gtk_signal_connect_object() to the "clicked" signal of the given button.
- * 
+ * @obj: As for g_signal_connect_swapped().
+ *
+ * g_signal_connect_swapped() to the "clicked" signal of the given button.
+ *
  **/
 void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
 					       gint button,
-					       GtkSignalFunc callback,
+					       GCallback callback,
 					       GtkObject * obj)
 {
   GList * list;
@@ -936,13 +931,13 @@ void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
   list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
-    gtk_signal_connect_object (GTK_OBJECT(list->data), "clicked",
-			       callback, obj);
+    g_signal_connect_swapped (list->data, "clicked",
+			      callback, obj);
     return;
   }
 #ifdef GNOME_ENABLE_DEBUG
   /* If we didn't find the button, complain */
-  g_warning("Button number %d does not appear to exist\n", button); 
+  g_warning("Button number %d does not appear to exist\n", button);
 #endif
 }
 
@@ -953,8 +948,8 @@ void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
  * @button: Button number.
  * @accelerator_key: Key for the accelerator.
  * @accelerator_mods: Modifier.
- * 
- * 
+ *
+ *
  **/
 void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
 					gint button,
@@ -976,12 +971,12 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
 			       accelerator_key,
 			       accelerator_mods,
 			       GTK_ACCEL_VISIBLE);
-    
+
     return;
   }
 #ifdef GNOME_ENABLE_DEBUG
   /* If we didn't find the button, complain */
-  g_warning("Button number %d does not appear to exist\n", button); 
+  g_warning("Button number %d does not appear to exist\n", button);
 #endif
 }
 
@@ -989,13 +984,13 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
  * gnome_dialog_editable_enters: Make the "activate" signal of an editable click the default dialog button.
  * @dialog: #GnomeDialog to affect.
  * @editable: Editable to affect.
- * 
+ *
  * Normally if there's an editable widget (such as #GtkEntry) in your
  * dialog, pressing Enter will activate the editable rather than the
  * default dialog button. However, in most cases, the user expects to
- * type something in and then press enter to close the dialog. This 
+ * type something in and then press enter to close the dialog. This
  * function enables that behavior.
- * 
+ *
  **/
 void       gnome_dialog_editable_enters   (GnomeDialog * dialog,
 					   GtkEditable * editable)
@@ -1005,14 +1000,14 @@ void       gnome_dialog_editable_enters   (GnomeDialog * dialog,
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
   g_return_if_fail(GTK_IS_EDITABLE(editable));
 
-  gtk_signal_connect_object(GTK_OBJECT(editable), "activate",
-			    GTK_SIGNAL_FUNC(gtk_window_activate_default), 
-			    GTK_OBJECT(dialog));
+  g_signal_connect_swapped(editable, "activate",
+			   G_CALLBACK(gtk_window_activate_default),
+			   dialog);
 }
 
 
 static void
-gnome_dialog_button_clicked (GtkWidget   *button, 
+gnome_dialog_button_clicked (GtkWidget   *button,
 			     GtkWidget   *dialog)
 {
   GList *list;
@@ -1026,11 +1021,11 @@ gnome_dialog_button_clicked (GtkWidget   *button,
   while (list){
     if (list->data == button) {
 	      gboolean click_closes;
-  
+
 	      click_closes = GNOME_DIALOG(dialog)->click_closes;
 
-	      gtk_signal_emit (GTK_OBJECT (dialog), dialog_signals[CLICKED], 
-			       which);
+	      g_signal_emit (dialog, dialog_signals[CLICKED], 0,
+			     which);
 
 	      /* The dialog may have been destroyed by the clicked signal, which
 		 is why we had to save the click_closes flag.  Users should be
@@ -1058,9 +1053,9 @@ static gint gnome_dialog_key_pressed (GtkWidget * d, GdkEventKey * e)
       gnome_dialog_close(GNOME_DIALOG(d));
 
       return TRUE; /* Stop the event? is this TRUE or FALSE? */
-    } 
+    }
 
-  /* Have to call parent's handler, or the widget wouldn't get any 
+  /* Have to call parent's handler, or the widget wouldn't get any
      key press events. Note that this is NOT done if the dialog
      may have been destroyed. */
   if (GTK_WIDGET_CLASS(parent_class)->key_press_event)
@@ -1069,7 +1064,7 @@ static gint gnome_dialog_key_pressed (GtkWidget * d, GdkEventKey * e)
 }
 
 static gint gnome_dialog_delete_event (GtkWidget * d, GdkEventAny * e)
-{  
+{
   gnome_dialog_close(GNOME_DIALOG(d));
   return TRUE; /* We handled it. */
 }
@@ -1121,14 +1116,14 @@ void gnome_dialog_close_real(GnomeDialog * dialog)
 /**
  * gnome_dialog_close: Close (hide or destroy) the dialog.
  * @dialog: #GnomeDialog to close.
- * 
+ *
  * See also gnome_dialog_close_hides(). This function emits the
  * "close" signal, which either hides or destroys the dialog (destroy
  * by default). If you connect to the "close" signal, and your
  * callback returns TRUE, the hide or destroy will be blocked. You can
  * do this to avoid closing the dialog if the user gives invalid
  * input, for example.
- * 
+ *
  * Using gnome_dialog_close() in place of gtk_widget_hide() or
  * gtk_widget_destroy() allows you to easily catch all sources of
  * dialog closure, including delete_event and button clicks, and
@@ -1141,8 +1136,8 @@ void gnome_dialog_close(GnomeDialog * dialog)
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  gtk_signal_emit (GTK_OBJECT(dialog), dialog_signals[CLOSE],
-		   &close_handled);
+  g_signal_emit (dialog, dialog_signals[CLOSE], 0,
+		 &close_handled);
 
   if ( ! close_handled ) {
     gnome_dialog_close_real(dialog);
@@ -1150,7 +1145,7 @@ void gnome_dialog_close(GnomeDialog * dialog)
 }
 
 static void gnome_dialog_show (GtkWidget * d)
-{  
+{
   if (GTK_WIDGET_CLASS(parent_class)->show)
     (* (GTK_WIDGET_CLASS(parent_class)->show))(d);
 }
