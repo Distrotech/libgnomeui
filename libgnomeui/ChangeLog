@@ -1,6 +1,12 @@
+1998-02-25  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnome-app.c (gnome_app_new): Use "" instead of NULL.  Friendler
+	to systems where `strlen(NULL)' is broken.
+
 1998-02-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
-	* gnome-pixmap.c (gnome_pixmap_init): GnomePixmap is a GTK_BASIC widget.
+	* gnome-pixmap.c (gnome_pixmap_init): GnomePixmap is a GTK_BASIC
+	widget.
 
 1998-02-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 

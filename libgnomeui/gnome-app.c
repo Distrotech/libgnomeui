@@ -93,7 +93,7 @@ gnome_app_new(gchar *appname, char *title)
       app->prefix = g_copy_strings ("/", appname, "/", NULL);
     }
   else
-    app->name = app->prefix = NULL;
+    app->name = app->prefix = "";
 	
   if (title)
     gtk_window_set_title(GTK_WINDOW(retval), title);
