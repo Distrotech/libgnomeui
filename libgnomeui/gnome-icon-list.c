@@ -1339,6 +1339,7 @@ gnome_icon_list_clear (GnomeIconList *gil)
 	priv->selection = NULL;
 	g_array_set_size(priv->icon_list, 0);
 	priv->icons = 0;
+	priv->focus_icon = -1;
 	priv->last_selected_idx = -1;
 	priv->last_selected_icon = NULL;
 
