@@ -740,7 +740,7 @@ msgid "Authentication Required"
 msgstr "Authentikasi Diperlukan"
 
 #: libgnomeui/gnome-authentication-manager.c:299
-#, c-format
+#, fuzzy, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Anda mesti log masuk untuk mengakses domain %s\n"
 
