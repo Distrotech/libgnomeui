@@ -347,7 +347,7 @@ setup_window_and_style (GnomePixmap *gpixmap)
 		gdk_window_set_user_data (widget->window, widget);
 
 		if (gpixmap->mask)
-			gdk_window_shape_combine_mask (widget->window, gpixmap->mask, 0, 0);
+			gtk_widget_shape_combine_mask (widget, gpixmap->mask, 0, 0);
 	} else {
 		GTK_WIDGET_SET_FLAGS (widget, GTK_NO_WINDOW);
 		if (widget->parent) {

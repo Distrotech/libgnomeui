@@ -37,7 +37,7 @@ struct _GnomeIconSelection {
 
   GtkWidget * box;
 
-  GtkWidget * clist;
+  GtkWidget * gil;
 
   GList * file_list;
 };
@@ -60,8 +60,9 @@ void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
 /* Loads and displays the icons that were added using gnome_icon_selection_add_* */
 void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis);
 
-/* Clear all icons */
-void  gnome_icon_selection_clear          (GnomeIconSelection * gis);
+/* Clear all icons (even the non shown ones if not_shown is set)*/
+void  gnome_icon_selection_clear          (GnomeIconSelection * gis,
+					   gboolean not_shown);
 
 /* if (full_path) return the whole filename, otherwise just the 
    last component */

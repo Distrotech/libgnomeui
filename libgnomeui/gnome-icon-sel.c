@@ -20,10 +20,11 @@
 
 #include <config.h>
 
+#include <gdk_imlib.h>
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
 #include "gnome-uidefs.h"
-#include "gnome-pixmap.h"
+#include "gnome-icon-list.h"
 
 #include <unistd.h> 
 #include <sys/stat.h>
@@ -81,31 +82,46 @@ gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
 static void
 gnome_icon_selection_init (GnomeIconSelection *gis)
 {
-  GtkWidget *scrolled;
+	GtkWidget *box;
+	GtkWidget *sb;
+	gis->box = gtk_vbox_new(FALSE, 0);
 
-  gis->box = gtk_vbox_new(FALSE, 0);
+	gtk_container_add(GTK_CONTAINER(gis), gis->box);
 
-  gtk_container_add(GTK_CONTAINER(gis), gis->box);
+	gtk_widget_show(gis->box);
 
-  gtk_widget_show(gis->box);
+	box = gtk_hbox_new(FALSE, 5);
 
-  scrolled = gtk_scrolled_window_new(NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW(scrolled),
-			   GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS);
-  gtk_box_pack_end(GTK_BOX(gis->box), scrolled, TRUE, TRUE, 0);
-  gtk_widget_show(scrolled);
+	gtk_box_pack_end(GTK_BOX(gis->box), box, TRUE, TRUE, 0);
+	gtk_widget_show(box);
+	
+	sb = gtk_vscrollbar_new(NULL);
+	gtk_box_pack_end(GTK_BOX(box),sb,FALSE,FALSE,0);
+	gtk_widget_show(sb);
 
-  gis->clist = gtk_clist_new(1);
-  gtk_clist_set_row_height(GTK_CLIST(gis->clist), 
-			   ICON_SIZE + GNOME_PAD_SMALL);
-  gtk_container_add(GTK_CONTAINER(scrolled), gis->clist);
+	gis->gil = gnome_icon_list_new(ICON_SIZE+30,
+				       gtk_range_get_adjustment(GTK_RANGE(sb)),
+				       FALSE);
+	gtk_widget_set_usize(gis->gil,350,300);
+	gnome_icon_list_set_selection_mode(GNOME_ICON_LIST(gis->gil),
+					   GTK_SELECTION_SINGLE);
+	gnome_icon_list_thaw(GNOME_ICON_LIST(gis->gil));
+	gtk_box_pack_start(GTK_BOX(box),gis->gil,TRUE,TRUE,0);
 
-  gtk_widget_show(gis->clist);
+	gtk_widget_show(gis->gil);
 
-  gis->file_list = NULL;
+	gis->file_list = NULL;
 }
 
 
+/**
+ * gnome_icon_selection_new:
+ *
+ * Description: Creates a new icon selection widget, it uses GnomeIconList
+ * for the listing of icons
+ *
+ * Returns: Returns the new object
+ **/
 GtkWidget* gnome_icon_selection_new (void)
 {
   GnomeIconSelection * gis;
@@ -115,17 +131,37 @@ GtkWidget* gnome_icon_selection_new (void)
   return GTK_WIDGET (gis);
 }
 
-static void gnome_icon_selection_destroy (GtkObject *gis)
+static void gnome_icon_selection_destroy (GtkObject *o)
 {
-  g_return_if_fail(gis != NULL);
-  g_return_if_fail(GNOME_IS_ICON_SELECTION(gis));
+	GnomeIconSelection *gis;
+	g_return_if_fail(o != NULL);
+	g_return_if_fail(GNOME_IS_ICON_SELECTION(o));
+	
+	gis = GNOME_ICON_SELECTION(o);
 
-  /* FIXME Does nothing, should come out */
+	/* FIXME Does nothing, should come out */
 
-  if (GTK_OBJECT_CLASS(parent_class)->destroy)
-    (* (GTK_OBJECT_CLASS(parent_class)->destroy))(gis);
+	/*clear our data if we have some*/
+	if(gis->file_list) {
+		g_list_foreach(gis->file_list,(GFunc)g_free,NULL);
+		g_list_free(gis->file_list);
+		gis->file_list = NULL;
+	}
+
+	if (GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* (GTK_OBJECT_CLASS(parent_class)->destroy))(o);
 }
 
+/**
+ * gnome_icon_selection_add_defaults:
+ * @gis: GnomeIconSelection to work with
+ *
+ * Description: Adds the default pixmap directory into the selection
+ * widget. It doesn't show the icons in the selection until you
+ * do #gnome_icon_selection_show_icons.
+ *
+ * Returns:
+ **/
 void  gnome_icon_selection_add_defaults   (GnomeIconSelection * gis)
 {
   gchar *pixmap_dir;
@@ -142,49 +178,57 @@ void  gnome_icon_selection_add_defaults   (GnomeIconSelection * gis)
 static void 
 append_an_icon(GnomeIconSelection * gis, const gchar * path)
 {
-  GtkWidget * pixmap;
-  gint row;
-  gchar * useless[] = { NULL };
-
-#ifdef GNOME_ENABLE_DEBUG
-  g_print("Loading: %s\n", path);
-#endif
-  pixmap = gnome_pixmap_new_from_file (path);
-  
-  /* distorts things */
-  /*
-    pixmap = gnome_pixmap_new_from_file_at_size(path, ICON_SIZE, 
-    ICON_SIZE);
-    */
-
-  /* If we can't load it, we just ignore it. */  
-  if (pixmap) {
-    row = GTK_CLIST(gis->clist)->rows; /* new row number */
-    
-    gtk_clist_insert(GTK_CLIST(gis->clist), row, useless);
-
-    gtk_clist_set_pixtext (GTK_CLIST(gis->clist), row, 0, 
-			   g_filename_pointer(path), GNOME_PAD_SMALL,
-			   GNOME_PIXMAP(pixmap)->pixmap, 
-			   GNOME_PIXMAP(pixmap)->mask);
-
-    gtk_clist_set_row_data_full ( GTK_CLIST(gis->clist),
-				  row, 
-				  g_strdup(path),
-				  (GtkDestroyNotify) g_free );
-  }
-#ifdef GNOME_ENABLE_DEBUG
-  else {
-    g_print("Failed to load icon.\n");
-  }
-#endif
+	GdkImlibImage *iml;
+	GdkImlibImage *im;
+	int pos;
+	int w,h;
+	
+	iml = gdk_imlib_load_image((char *)path);
+	/*if I can't load it, ignore it*/
+	if(!iml)
+		return;
+	
+	w = iml->rgb_width;
+	h = iml->rgb_height;
+	if(w>h) {
+		if(w>ICON_SIZE) {
+			h = h*((double)ICON_SIZE/w);
+			w = ICON_SIZE;
+		}
+	} else {
+		if(h>ICON_SIZE) {
+			w = w*((double)ICON_SIZE/h);
+			h = ICON_SIZE;
+		}
+	}
+	
+	im = gdk_imlib_clone_scaled_image(iml,w,h);
+	gdk_imlib_destroy_image(iml);
+	
+	pos = gnome_icon_list_append_imlib(GNOME_ICON_LIST(gis->gil),im,
+					   g_basename(path));
+	gnome_icon_list_set_icon_data_full(GNOME_ICON_LIST(gis->gil), pos, 
+					   g_strdup(path),
+					   (GtkDestroyNotify) g_free );
+	gdk_imlib_destroy_image(im);
 }
 
 static int sort_file_list( gconstpointer a, gconstpointer b)
 {
-  return strcmp( (gchar *)a, (gchar *)b );
+	return strcmp( (gchar *)a, (gchar *)b );
 }
 
+/**
+ * gnome_icon_selection_add_directory:
+ * @gis: GnomeIconSelection to work with
+ * @dir: directory with pixmaps
+ *
+ * Description: Adds the icons from the directory @dir to the
+ * selection widget. It doesn't show the icons in the selection
+ * until you do #gnome_icon_selection_show_icons.
+ *
+ * Returns:
+ **/
 void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
 					   const gchar * dir)
 {
@@ -237,6 +281,18 @@ void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
   closedir(dp);
 }
 
+/**
+ * gnome_icon_selection_show_icons:
+ * @gis: GnomeIconSelection to work with
+ *
+ * Description: Shows the icons inside the widget that
+ * were added with #gnome_icon_selection_add_defaults and
+ * #gnome_icon_selection_add_directory. Before this function
+ * is called the icons aren't actually added to the listing 
+ * and can't be picked by the user.
+ *
+ * Returns:
+ **/
 void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
 {
   GList * list;
@@ -260,15 +316,18 @@ void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
   file_count = g_list_length(list);
   i = 0;
   
-  gtk_clist_freeze(GTK_CLIST(gis->clist));
+  gnome_icon_list_freeze(GNOME_ICON_LIST(gis->gil));
 
   while (list) {
     append_an_icon(gis, list->data);
     g_free(list->data);
     list = list->next;
-    gtk_progress_bar_update (GTK_PROGRESS_BAR (progressbar), (float)i / file_count);
-    while ( gtk_events_pending() ) {
-      gtk_main_iteration();
+    /*only do this for every 5th to save some time*/
+    if(i%5==0) {
+	    gtk_progress_bar_update (GTK_PROGRESS_BAR (progressbar), (float)i / file_count);
+	    while ( gtk_events_pending() ) {
+		    gtk_main_iteration();
+	    }
     }
     i++;
   }
@@ -276,20 +335,51 @@ void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
   g_list_free(gis->file_list);
   gis->file_list = NULL;
 
-  gtk_clist_thaw(GTK_CLIST(gis->clist));
+  gnome_icon_list_thaw(GNOME_ICON_LIST(gis->gil));
 
   gtk_widget_destroy(progressbar);
   gtk_widget_destroy(label);
 }
 
 
-void  gnome_icon_selection_clear          (GnomeIconSelection * gis)
+/**
+ * gnome_icon_selection_clear:
+ * @gis: GnomeIconSelection to work with
+ * @not_shown: boolean
+ *
+ * Description: Clear the currently shown icons, the ones
+ * that weren't shown yet are not cleared unless the not_shown
+ * parameter is given, in which case even those are cleared.
+ *
+ * Returns:
+ **/
+void  gnome_icon_selection_clear          (GnomeIconSelection * gis,
+					   gboolean not_shown)
 {
-  g_return_if_fail(gis != NULL);
+	g_return_if_fail(gis != NULL);
 
-  gtk_clist_clear(GTK_CLIST(gis->clist));
+	/*clear our data if we have some and not_shown is set*/
+	if(not_shown && gis->file_list) {
+		g_list_foreach(gis->file_list,(GFunc)g_free,NULL);
+		g_list_free(gis->file_list);
+		gis->file_list = NULL;
+	}
+
+	gnome_icon_list_clear(GNOME_ICON_LIST(gis->gil));
 }
 
+/**
+ * gnome_icon_selection_get_icon:
+ * @gis: GnomeIconSelection to work with
+ * @full_path: boolean
+ *
+ * Description: Gets the currently selected icon name, if
+ * full_path is true, it returns the full path to the icon,
+ * if none is selected it returns NULL
+ *
+ * Returns: internal string, it must not be changed or freed
+ * or NULL
+ **/
 const gchar * 
 gnome_icon_selection_get_icon     (GnomeIconSelection * gis,
 				   gboolean full_path)
@@ -298,39 +388,47 @@ gnome_icon_selection_get_icon     (GnomeIconSelection * gis,
 
   g_return_val_if_fail(gis != NULL, NULL);
 
-  sel = GTK_CLIST(gis->clist)->selection;
+  sel = GNOME_ICON_LIST(gis->gil)->selection;
   if ( sel ) {
     gchar * p;
-    gint row = (gint)sel->data;
-    p = gtk_clist_get_row_data(GTK_CLIST(gis->clist),
-			       row);
+    gint pos = GPOINTER_TO_INT(sel->data);
+    p = gnome_icon_list_get_icon_data(GNOME_ICON_LIST(gis->gil), pos);
     if (full_path) return p;
     else return g_filename_pointer(p);
   }
   else return NULL;
 }
 
+/**
+ * gnome_icon_selection_select_icon:
+ * @gis: GnomeIconSelection to work with
+ * @filename: icon filename
+ *
+ * Description: Selects the icon @filename. This icon must have
+ * already been added and shown * (see @gnome_icon_selection_show_icons)
+ *
+ * Returns:
+ **/
 void  gnome_icon_selection_select_icon    (GnomeIconSelection * gis,
 					   const gchar * filename)
 {
-  gint row;
-  gint num_rows;
+  gint pos;
+  gint icons;
   
   g_return_if_fail(gis != NULL);
   g_return_if_fail(filename != NULL);
 
-  num_rows = GTK_CLIST(gis->clist)->rows;
-  row = 0;
+  icons = GNOME_ICON_LIST(gis->gil)->icons;
+  pos = 0;
 
-  while ( row < num_rows ) {
+  while ( pos < icons ) {
     gchar * file = 
-      gtk_clist_get_row_data(GTK_CLIST(gis->clist),
-			     row);
+      gnome_icon_list_get_icon_data(GNOME_ICON_LIST(gis->gil),pos);
     if ( strcmp(g_filename_pointer(file),filename) == 0 ) {
-      gtk_clist_select_row(GTK_CLIST(gis->clist), row, 0);
+      gnome_icon_list_select_icon(GNOME_ICON_LIST(gis->gil), pos);
       return;
     }
 
-    ++row;
+    ++pos;
   }
 }

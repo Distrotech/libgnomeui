@@ -11,6 +11,7 @@
  */
 #include <config.h>
 #include <gdk_imlib.h>
+#include <unistd.h> /*getcwd*/
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
@@ -290,8 +291,6 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 						   ientry->pick_dialog_dir);
 
 
-		gtk_widget_set_usize(GNOME_ICON_SELECTION(iconsel)->clist , 250, 350);
-
 		gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(ientry->pick_dialog)->vbox),
 				  iconsel);
 
@@ -361,6 +360,15 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 	entry_changed(w,ientry);
 }
 
+/**
+ * gnome_icon_entry_new:
+ * @history_id: the id given to #gnome_entry_new
+ * @browse_dialog_title: title of the browse dialog and icon selection dialog
+ *
+ * Description: Creates a new icon entry widget
+ *
+ * Returns: Returns the new object
+ **/
 GtkWidget *
 gnome_icon_entry_new (char *history_id, char *browse_dialog_title)
 {
@@ -378,6 +386,14 @@ gnome_icon_entry_new (char *history_id, char *browse_dialog_title)
 	return GTK_WIDGET (ientry);
 }
 
+/**
+ * gnome_icon_entry_gnome_file_entry:
+ * @ientry: the GnomeIconEntry to work with
+ *
+ * Description: Get the GnomeFileEntry widget that's part of the entry
+ *
+ * Returns: Returns GnomeFileEntry widget
+ **/
 GtkWidget *
 gnome_icon_entry_gnome_file_entry (GnomeIconEntry *ientry)
 {
@@ -387,6 +403,14 @@ gnome_icon_entry_gnome_file_entry (GnomeIconEntry *ientry)
 	return ientry->fentry;
 }
 
+/**
+ * gnome_icon_entry_gnome_entry:
+ * @ientry: the GnomeIconEntry to work with
+ *
+ * Description: Get the GnomeEntry widget that's part of the entry
+ *
+ * Returns: Returns GnomeEntry widget
+ **/
 GtkWidget *
 gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry)
 {
@@ -396,6 +420,14 @@ gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry)
 	return gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(ientry->fentry));
 }
 
+/**
+ * gnome_icon_entry_gtk_entry:
+ * @ientry: the GnomeIconEntry to work with
+ *
+ * Description: Get the GtkEntry widget that's part of the entry
+ *
+ * Returns: Returns GtkEntry widget
+ **/
 GtkWidget *
 gnome_icon_entry_gtk_entry (GnomeIconEntry *ientry)
 {
@@ -405,9 +437,20 @@ gnome_icon_entry_gtk_entry (GnomeIconEntry *ientry)
 	return gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->fentry));
 }
 
+/**
+ * gnome_icon_entry_set_pixmap_subdir:
+ * @ientry: the GnomeIconEntry to work with
+ * @subdir: sbudirectory
+ *
+ * Description: Sets the subdirectory below gnome's default
+ * pixmap directory to use as the default path for the file
+ * entry
+ *
+ * Returns:
+ **/
 void
 gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
-				     const char *subdir)
+				   const char *subdir)
 {
 	char *p;
 	g_return_if_fail (ientry != NULL);
@@ -421,6 +464,16 @@ gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
 	g_free(p);
 }
 
+/**
+ * gnome_icon_entry_get_filaname:
+ * @ientry: the GnomeIconEntry to work with
+ *
+ * Description: Gets the file name of the image if it was possible
+ * to load it into the preview
+ *
+ * Returns: a newly allocated string with the path or NULL if it
+ * couldn't load the file
+ **/
 char *
 gnome_icon_entry_get_filename(GnomeIconEntry *ientry)
 {

@@ -1,3 +1,18 @@
+Sat Nov 28 21:30:09 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-sel.c: use GnomeIconList instead of CList, fixed
+	  minor possible leak with non-shown icons, and made _clear
+	  take an extra parameter as a boolean wheather the non shown
+	  icons are also cleared or not. Also documented the widget's
+	  functions
+
+	* gnome-icon-entry.c: fixed a small assumption about internals
+	  of icon-sel and documented the functions in icon-entry
+
+	* gnome-pixmap.c: do gtk_widget_combine_mask instead of the gdk
+	  function, this fixes pixmap problems with themes in case an
+	  x window is used
+
 1998-11-28  Justin Maurer  <justin@openprojects.net>
 
 	* gnome-app-helper.h: removed GNOMEUIINFO_SUBTREE_ITEM_STOCK macro 
