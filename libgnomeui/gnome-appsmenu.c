@@ -25,6 +25,61 @@
 #include <errno.h>
 #include "libgnome/gnome-util.h"
 
+#define DEBUG 1
+
+#ifdef DEBUG
+static gboolean gnome_apps_menu_check(GnomeAppsMenu * gam)
+{
+  GnomeAppsMenu * sub;
+  GList * submenus;
+
+  if ( gam == NULL ) {g_warning("GnomeAppsMenu is null"); return FALSE;}
+
+  /* Only directories have submenus. */
+  if ( ! ( ((gam->submenus == NULL) && (!gam->is_directory)) || 
+	   gam->is_directory ) ) {
+    g_warning("Non-directory GnomeAppsMenu has submenus");
+    return FALSE;
+  }
+    
+  /* Should always be an extension. */
+  if ( gam->extension == NULL ) {
+    g_warning("GnomeAppsMenu has no extension");
+    return FALSE; 
+  }
+
+  submenus = gam->submenus;
+  
+  while (submenus) {
+    sub = (GnomeAppsMenu *)submenus->data;
+
+    if ( ! gnome_apps_menu_check(sub) ) 
+      {
+	g_warning("Submenu failed validity check");
+	return FALSE;
+      }
+
+    /* We should be the parent of any submenus. */
+    if ( sub->parent != gam ) {
+      g_warning("Submenu has wrong parent");
+      return FALSE;
+    }
+
+    submenus = submenus->next;
+  }
+
+  return TRUE;
+}
+#else
+#define gnome_apps_menu_check(x) TRUE
+#endif
+
+/* Things that should always be true once the GnomeAppsMenu is
+   initialized */
+#define GNOME_APPS_MENU_INVARIANTS(x) g_assert( gnome_apps_menu_check(x) )
+
+GnomeAppsMenu * gnome_apps_menu_new_empty(void);
+
 /* Use a dotfile, so people won't try to edit manually
    unless they really know what they're doing. */
 /* Alternatively, use "apps" to be consistent with share/apps? */
@@ -71,7 +126,6 @@ gnome_apps_menu_register_variety( gboolean is_directory,
 				  GnomeAppsMenuGtkMenuItemFunc menu_item_func )
 {
   GnomeAppsMenuVariety * v;
-  GList * which;
 
   v = gnome_apps_menu_variety_new(extension, load_func, 
 				  menu_item_func);
@@ -80,10 +134,13 @@ gnome_apps_menu_register_variety( gboolean is_directory,
     g_warning("AppsMenuVariety registration failed");
     return;
   }
-
-  which = is_directory ? dir_varieties : file_varieties;
-
-  g_list_append(which, v);
+  
+  if(is_directory) {
+    dir_varieties = g_list_append(dir_varieties, v);
+  }
+  else {
+    file_varieties = g_list_append(file_varieties, v);
+  }
 }
 
 
@@ -132,12 +189,18 @@ static GtkWidget * gtk_menu_item_new_from_dentry(GnomeAppsMenu * gam)
 
 static void make_default_varieties(void)
 {
-  gnome_apps_menu_register_variety( FALSE, GNOME_APPS_MENU_DENTRY_EXTENSION,
-				    gnome_desktop_entry_load,
-				    gtk_menu_item_new_from_dentry );
-  gnome_apps_menu_register_variety( TRUE, "directory",
-				    gnome_desktop_entry_load,
-				    gtk_menu_item_new_from_dentry );
+  static gboolean already_made = FALSE;
+
+  if ( ! already_made ) {
+    gnome_apps_menu_register_variety( FALSE, 
+				      GNOME_APPS_MENU_DENTRY_EXTENSION,
+				      gnome_desktop_entry_load,
+				      gtk_menu_item_new_from_dentry );
+    gnome_apps_menu_register_variety( TRUE, "directory",
+				      gnome_desktop_entry_load,
+				      gtk_menu_item_new_from_dentry );
+    already_made = TRUE;
+  }
 }
 
 static GnomeAppsMenuVariety * 
@@ -151,9 +214,13 @@ find_variety(GnomeAppsMenu * gam)
 
   list = GNOME_APPS_MENU_IS_DIR(gam) ? dir_varieties : file_varieties;
   
+  g_return_val_if_fail(list != NULL, NULL);
+
   while ( list ) {
     v = (GnomeAppsMenuVariety *)list->data;
     g_assert ( v != NULL );
+
+    g_print("Comparing %s with\n %s\n", gam->extension, v->extension);
 
     if ( strcmp (gam->extension, v->extension) == 0 ) {
       return v;
@@ -195,18 +262,6 @@ get_load_func_and_init_apps_menu( const gchar * filename,
     return NULL;
   }
 
-  /* Decide if it's a directory info file or not.  The above loop left
-   filename[len] == '.', remember. */
-  if ( len == 0 ) {
-    dest->is_directory = TRUE; /* filename starts with . */
-  }
-  else if ( filename[len - 1] == '/' ) {
-    dest->is_directory = TRUE;
-  }
-  else {
-    dest->is_directory = FALSE;
-  }
-
   /* set extension */
   dest->extension = g_strdup(extension);
 
@@ -219,14 +274,24 @@ get_load_func_and_init_apps_menu( const gchar * filename,
   else return NULL;
 }
 
-/* Function based on panel code, Miguel de Icaza and Federico Mena 
-   (The lame parts are probably mine. :) */
-
-GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
+static void free_filename_list(gchar ** list)
 {
-  GnomeAppsMenu * root_apps_menu = NULL;
-  struct dirent * dir_entry;
-  DIR * dir;
+  gchar ** start = list;
+  while ( *list ) {
+    g_free ( *list );
+    ++list;
+  }
+  g_free(start);
+}
+
+
+static gchar ** get_filename_list(const gchar * directory)
+{
+  gint max_filenames = 100;
+  gchar ** filename_list = NULL;
+  struct dirent * dir_entry = NULL;
+  DIR * dir = NULL;
+  gint next = 0;
 
   dir = opendir(directory);
 
@@ -236,16 +301,10 @@ GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
     return NULL;
   }
 
-  /* FIXME for the moment, this loop assumes that the .directory
-     dotfile will be encountered before other kinds of files.  Is this
-     guaranteed or even likely? If it isn't I have to fix it. */
+  filename_list = g_malloc(sizeof(gchar *) * max_filenames);
 
   while ( (dir_entry = readdir(dir)) != NULL) {
-    GnomeAppsMenuLoadFunc load_func;
     gchar * thisfile;
-    GnomeAppsMenu * sub_apps_menu;
-    gchar * filename;
-    struct stat s;
 
     thisfile = dir_entry->d_name;
 
@@ -257,10 +316,125 @@ GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
       continue;
     }
 
-    filename = g_concat_dir_and_file(directory, thisfile);
+    filename_list[next] = g_concat_dir_and_file(directory, thisfile);
+    ++next;
+    if ( next > max_filenames ) {
+      filename_list = g_realloc(filename_list, sizeof(gchar *)*100);
+      max_filenames += 100;
+    }
+  }
+  filename_list[next] = NULL;
+  return filename_list;
+}
 
+static gboolean is_dotfile(const gchar * filename)
+{
+  gint len;
+  if (filename[0] == '.') return TRUE;
+  len = strlen(filename);
+  while ( len > 0 ) {
+    if (filename[len] == '.') break;
+    --len;
+  }
+  if ( len == 0 ) return FALSE; /* no dots */
+  /* len is indexing the . */
+  if (filename[len - 1] == '/') return TRUE;
+  else return FALSE;
+}
+
+/* Get the directory info from this filename list */
+static GnomeAppsMenu * load_directory_info(gchar ** filename_list)
+{
+  GnomeAppsMenu * dir_menu = NULL;
+
+  while ( *filename_list ) {
+    GnomeAppsMenuLoadFunc load_func = NULL;
+    gchar * filename;
+    
+    filename = *filename_list;
+    ++filename_list;
+
+    /* ignore anything that's not a dotfile */
+    if ( ! is_dotfile(filename) ) continue;
+
+    dir_menu = gnome_apps_menu_new_empty();
+    dir_menu->is_directory = TRUE;
+    load_func = get_load_func_and_init_apps_menu( filename, 
+						  dir_menu ); 
+      
+    if ( load_func != NULL ) {
+      dir_menu->data = load_func(filename);
+    }
+      
+    /* if load_func == NULL this will be true too, 
+       because of the default initialization of AppsMenu 
+       in _new() */
+    /* This situation means the file type was unrecognized,
+       perhaps belonging to another app, so we want 
+       to ignore this file. */
+    if ( dir_menu->data == NULL ) {
+      gnome_apps_menu_destroy(dir_menu);
+      dir_menu = NULL;
+      continue;
+    }
+
+    break; /* If we haven't continued, we have what we wanted.  All
+	    dotfiles after the first are ignored, (unless we didn't
+	    know how to load the first.) */
+  }
+
+  return dir_menu;
+}
+
+
+/* Function based on panel code, Miguel de Icaza and Federico Mena 
+   (The lame parts are probably mine. :) */
+
+GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
+{
+  GnomeAppsMenu * root_apps_menu = NULL;
+  gchar ** filename_list;
+  gchar ** filename_list_start;
+
+  make_default_varieties();
+
+  filename_list_start = filename_list = get_filename_list(directory);
+
+  if ( filename_list == NULL ) return NULL;
+
+#ifdef DEBUG
+  while ( *filename_list ) {
+    g_print("%s\n", *filename_list);
+    ++filename_list;
+  }
+  filename_list = filename_list_start;
+#endif
+
+  root_apps_menu = load_directory_info(filename_list);
+
+  if (root_apps_menu == NULL) {
+    g_warning("No information for directory %s", directory);
+    free_filename_list(filename_list_start);
+    return NULL;
+  }
+
+  while (*filename_list) {
+    GnomeAppsMenuLoadFunc load_func = NULL;
+    GnomeAppsMenu * sub_apps_menu = NULL;
+    gchar * filename;
+    struct stat s;
+
+    filename = *filename_list;
+    ++filename_list;
+
+    /* Ignore all dotfiles -- they're meant to describe the 
+       directory, not items in it. */
+    if ( is_dotfile(filename) ) {
+      continue;
+    }
+
+    /* Be sure we can read the file */
     if (stat (filename, &s) == -1) {
-      g_free(filename);
       g_warning("gnome-appsmenu: error on file %s: %s\n", 
 		filename, g_unix_error_string(errno));
       continue;
@@ -273,22 +447,20 @@ GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
       
       /* Recursive load failed for some reason. */
       if ( sub_apps_menu == NULL ) {
-	g_free(filename);
 	continue;
       }      
     }
 
-    /* At this point, filename could be a directory dotfile 
-       or a more standard menu item */
+    /* Otherwise load the info. */
     else {
-      sub_apps_menu = gnome_apps_menu_new();
+      sub_apps_menu = gnome_apps_menu_new_empty();
       load_func = get_load_func_and_init_apps_menu( filename, 
 						    sub_apps_menu ); 
-
+      
       if ( load_func != NULL ) {
 	sub_apps_menu->data = load_func(filename);
       }
-
+      
       /* if load_func == NULL this will be true too, 
 	 because of the default initialization of AppsMenu 
 	 in _new() */
@@ -298,56 +470,28 @@ GnomeAppsMenu * gnome_apps_menu_load(const gchar * directory)
       if ( sub_apps_menu->data == NULL ) {
 	gnome_apps_menu_destroy(sub_apps_menu);
 	sub_apps_menu = NULL;
-	g_free(filename);
 	continue;
       }
+    }
 
-      /* Note two identical code blocks above and below. FIXME */
-
-      if ( GNOME_APPS_MENU_IS_DIR(sub_apps_menu) ) {
-	if (root_apps_menu) {
-	  g_warning("Extra directory information file, %s, in directory %s",
-		    filename, directory);
-	  gnome_apps_menu_destroy(sub_apps_menu);
-	  sub_apps_menu = NULL;
-	  g_free(filename);
-	  continue;
-	}
-
-	/* if there's no root menu yet, make this the root menu we're
-           working in */
-	root_apps_menu = sub_apps_menu;
-	sub_apps_menu = NULL;
-	
-      } /* if it's a dir */
-      else {
-	if ( root_apps_menu ) {
-	  gnome_apps_menu_append( root_apps_menu,
-				  sub_apps_menu );
-	}
-	else {
-	  g_warning("Didn't find a directory information file in directory %s",
-		    directory);
-	  g_free (filename);
-	  break;
-	}
-      } /* else it's not a dir */
-    } /* If it's an info file to load in */
-
-    g_free(filename);
+    gnome_apps_menu_append( root_apps_menu,
+			    sub_apps_menu );      
     
-  } /* while (there are files in the directory) */
-
-  closedir(dir);
+  } /* while (there are files in the list) */
 
   /* The panel code destroyed the directory menu if it was empty,
      may want to do that.
 
-     if ( root_apps_menu->submenus == NULL ) {
+     if ( root_apps_menu->submenus == NULL && 
+     GNOME_APPS_MENU_IS_DIR(root_apps_menu)) {
      gnome_apps_menu_destroy(root_apps_menu);
      return NULL;
      }
      */
+
+  free_filename_list(filename_list_start);
+  
+  if(root_apps_menu) GNOME_APPS_MENU_INVARIANTS(root_apps_menu);
 
   /* Could be NULL, note */
   return root_apps_menu;
@@ -435,7 +579,8 @@ GtkWidget * gtk_menu_item_new_from_apps_menu(GnomeAppsMenu * gam)
   menu_item_func = get_menu_item_func(gam);
   
   if (menu_item_func == NULL) {
-    /* This kind of thing shouldn't show up on menus. */
+    /* This kind of thing shouldn't show up on menus, because
+       it has no function to make it show up.*/
     return NULL;
   }
   
@@ -466,17 +611,36 @@ GtkWidget * gtk_menu_new_from_apps_menu(GnomeAppsMenu * gam)
   trees. Don't relate to config files. 
   *******************************************/
 
-GnomeAppsMenu * gnome_apps_menu_new(void)
+GnomeAppsMenu * gnome_apps_menu_new_empty(void)
 {
   GnomeAppsMenu * gam = g_new(GnomeAppsMenu, 1);
 
+  gam->is_directory = FALSE;
   gam->extension = NULL;
   gam->data = NULL;
   gam->submenus = NULL;
+  gam->parent = NULL;
   gam->in_destroy = FALSE;
   
   return gam;
 }
+
+GnomeAppsMenu * gnome_apps_menu_new(gboolean is_directory,
+				    const gchar * extension,
+				    gpointer data)
+{
+  GnomeAppsMenu * gam;
+  
+  gam = gnome_apps_menu_new_empty();
+  gam->is_directory = is_directory;
+  gam->extension = g_strdup(extension);
+  gam->data = data;
+
+  GNOME_APPS_MENU_INVARIANTS(gam);
+
+  return gam;
+}
+
 
 /* GFunc for the g_list_foreach() call  */
 static void gnome_apps_menu_destroy_one ( gpointer menu, 
@@ -525,6 +689,9 @@ void gnome_apps_menu_append(GnomeAppsMenu * dir,
   dir->submenus = 
     g_list_append( dir->submenus,
 		   sub );
+
+  GNOME_APPS_MENU_INVARIANTS(dir);
+  GNOME_APPS_MENU_INVARIANTS(sub);
 }
 
 
@@ -543,6 +710,9 @@ void gnome_apps_menu_prepend(GnomeAppsMenu * dir,
   dir->submenus = 
     g_list_prepend( dir->submenus,
 		    sub );
+
+  GNOME_APPS_MENU_INVARIANTS(dir);
+  GNOME_APPS_MENU_INVARIANTS(sub);
 }
 
 void gnome_apps_menu_remove(GnomeAppsMenu * dir,
@@ -565,6 +735,9 @@ void gnome_apps_menu_remove(GnomeAppsMenu * dir,
 
   /* Set submenu's parent to NULL */
   sub->parent = NULL;
+
+  GNOME_APPS_MENU_INVARIANTS(dir);
+  GNOME_APPS_MENU_INVARIANTS(sub);
 }
 
 void gnome_apps_menu_insert_after(GnomeAppsMenu * dir,
@@ -596,6 +769,10 @@ void gnome_apps_menu_insert_after(GnomeAppsMenu * dir,
  
   /* after_me should be at 0 in `where', so we put our menu at 1 */
   g_list_insert(where, sub, 1);
+
+  GNOME_APPS_MENU_INVARIANTS(dir);
+  GNOME_APPS_MENU_INVARIANTS(sub);
+  GNOME_APPS_MENU_INVARIANTS(after_me);
 }
 
 void gnome_apps_menu_foreach(GnomeAppsMenu * dir,
@@ -614,6 +791,8 @@ void gnome_apps_menu_foreach(GnomeAppsMenu * dir,
   
   (* func)(dir, data);
 
+  GNOME_APPS_MENU_INVARIANTS(dir);
+
   submenus = dir->submenus;
 
   while (submenus) {
@@ -627,4 +806,3 @@ void gnome_apps_menu_foreach(GnomeAppsMenu * dir,
     submenus = g_list_next(submenus);
   }
 }
-    

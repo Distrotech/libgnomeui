@@ -100,8 +100,9 @@ struct _GnomeAppsMenu {
 	"Directory" ) == 0 ) )
 	*/
 
-/* Just allocate a new one */
-GnomeAppsMenu * gnome_apps_menu_new(void);
+GnomeAppsMenu * gnome_apps_menu_new(gboolean is_directory,
+				    const gchar * extension,
+				    gpointer data);
 
 /* Recursively destroy the menu, calling g_free on 
    ALL non-null fields; the AppsMenu owns anything you 

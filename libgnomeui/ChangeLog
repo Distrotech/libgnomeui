@@ -1,3 +1,11 @@
+Tue Apr 14 16:35:40 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appsmenu.h (gnome_apps_menu_new): Now has
+	arguments.
+	* gnome-appsmenu.c: Added lots of debugging stuff to
+	check invariants. Broke gnome_apps_menu_load() apart
+	into lots of little functions and it seems to work now.
+
 Tue Apr 14 00:34:54 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.c: added parenthesis and factorial,
