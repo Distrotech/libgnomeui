@@ -10,8 +10,6 @@
  *	Written by: Havoc Pennington, based on code by John Ellis.
  */
 #include <config.h>
-#include <sys/stat.h> /*stat*/
-#include <unistd.h> /*stat*/
 #include <gdk_imlib.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
@@ -67,17 +65,6 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
 }
 
-static int
-my_g_is_file (const char *filename)
-{
-	struct stat s;
-	
-	if(stat (filename, &s) != 0 ||
-	   S_ISDIR (s.st_mode))
-		return FALSE;
-	return TRUE;
-}
-
 static void
 entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 {
@@ -91,7 +78,8 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	
 	child = GTK_BIN(ientry->pickbutton)->child;
 	
-	if(!t || !my_g_is_file(t) || !(im = gdk_imlib_load_image (t))) {
+	if(!t || !g_file_test(t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
+	   !(im = gdk_imlib_load_image (t))) {
 		if(GTK_IS_PIXMAP(child)) {
 			gtk_widget_destroy(child);
 			child = gtk_label_new(_("No Icon"));
@@ -152,7 +140,8 @@ setup_preview(GtkWidget *widget)
 		gtk_widget_destroy(pp);
 	
 	p = gtk_file_selection_get_filename(fs);
-	if(!p || !my_g_is_file(p) || !(im = gdk_imlib_load_image (p)))
+	if(!p || !g_file_test(p,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
+	   !(im = gdk_imlib_load_image (p)))
 		return;
 
 	w = im->rgb_width;
@@ -226,17 +215,6 @@ browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 				       GTK_OBJECT(fs));
 }
 
-static int
-my_g_is_directory (const char *filename)
-{
-	struct stat s;
-	
-	if(stat (filename, &s) != 0 ||
-	   !S_ISDIR (s.st_mode))
-		return FALSE;
-	return TRUE;
-}
-
 static void
 icon_selected_cb(GtkButton * button, GnomeIconEntry * ientry)
 {
@@ -271,12 +249,12 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 	}
 
 	/*figure out the directory*/
-	if(!my_g_is_directory(p)) {
+	if(!g_file_test(p,G_FILE_TEST_ISDIR)) {
 		char *d;
 		d = g_dirname(p);
 		g_free(p);
 		p = d;
-		if(!my_g_is_directory(p)) {
+		if(!g_file_test(p,G_FILE_TEST_ISDIR)) {
 			g_free(p);
 			return;
 		}

@@ -1,3 +1,9 @@
+Thu Nov 26 02:53:44 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-{file,icon,pixmap}-entry.c: use the new g_file_test
+	  function instead of custom ones, reduces codesize by 44 lines
+	  yay! :)
+
 Thu Nov 26 01:56:38 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-pixmap-entry.c: actually make preview work with the new

@@ -6,7 +6,6 @@
  */
 #include <config.h>
 #include <unistd.h> /*getcwd*/
-#include <sys/stat.h> /*stat*/
 #include <sys/param.h> /*realpath*/
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
@@ -86,18 +85,6 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	
 	class->browse_clicked = browse_clicked;
 }
-
-static int
-my_g_is_directory (const char *filename)
-{
-	struct stat s;
-	
-	if(stat (filename, &s) != 0 ||
-	   !S_ISDIR (s.st_mode))
-		return FALSE;
-	return TRUE;
-}
-
 
 static void
 browse_dialog_ok (GtkWidget *widget, gpointer data)
@@ -347,11 +334,11 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry,
 	if(file_must_exist) {
 		if(fentry->directory_entry) {
 			char *d;
-			if(my_g_is_directory(p))
+			if(g_file_test(p,G_FILE_TEST_ISDIR))
 				return p;
 			d = g_dirname(p);
 			g_free(p);
-			if(my_g_is_directory(d))
+			if(g_file_test(d,G_FILE_TEST_ISDIR))
 				return d;
 			p = d;
 		} else if(g_file_exists(p))

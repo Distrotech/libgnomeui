@@ -61,17 +61,6 @@ gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)
 	parent_class = gtk_type_class (gtk_hbox_get_type ());
 }
 
-static int
-my_g_is_file (const char *filename)
-{
-	struct stat s;
-	
-	if(stat (filename, &s) != 0 ||
-	   S_ISDIR (s.st_mode))
-		return FALSE;
-	return TRUE;
-}
-
 static void
 entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 {
@@ -83,7 +72,8 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 	
 	if(!pentry->preview)
 		return;
-	if(!t || !my_g_is_file(t) || !(im = gdk_imlib_load_image (t))) {
+	if(!t || !g_file_test(t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
+	   !(im = gdk_imlib_load_image (t))) {
 		if(GTK_IS_PIXMAP(pentry->preview)) {
 			gtk_widget_destroy(pentry->preview->parent);
 			pentry->preview = gtk_label_new(_("No Image"));
@@ -132,7 +122,8 @@ setup_preview(GtkWidget *widget)
 		gtk_widget_destroy(pp);
 	
 	p = gtk_file_selection_get_filename(fs);
-	if(!p || !my_g_is_file(p) || !(im = gdk_imlib_load_image (p)))
+	if(!p || !g_file_test(p,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
+	   !(im = gdk_imlib_load_image (p)))
 		return;
 
 	w = im->rgb_width;
