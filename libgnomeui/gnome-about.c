@@ -20,7 +20,7 @@
 #include <config.h>
 #include "gnome-about.h"
 #include "libgnome/gnome-util.h"
-#include "libgnome/gnome-i18n.h"
+#include "libgnome/gnome-i18nP.h"
 #include "gnome-stock.h"
 #include <strings.h>
 #include <gtk/gtk.h>
