@@ -1,6 +1,5 @@
 /* gnome-client.h - Session management support for Gnome apps. */
 /* Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de */
-/* $Id$ */
 
 #ifndef GNOME_CLIENT_H
 #define GNOME_CLIENT_H
