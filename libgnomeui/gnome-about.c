@@ -417,7 +417,7 @@ gnome_fill_info (GtkWidget *widget,
 		 const gchar   *logo)
 {
 	GnomeAboutInfo *gai;
-	GdkColor light_green = {0, 51914, 64764, 44718};
+	static GdkColor light_green = {0, 30208, 41216, 33792};
 	GtkStyle *style;
 
 	/* alloc mem for struct */

@@ -335,6 +335,9 @@ void	     gnome_client_request_save (GnomeClient	       *client,
    you want to make sure get committed.  */
 void         gnome_client_flush (GnomeClient *client);
 
+void         gnome_client_init(void); /* For use by gnome-init upon
+					 program startup */
+
 END_GNOME_DECLS
 
 #endif /* GNOME_CLIENT_H */
