@@ -10,3 +10,7 @@
   gnome_canvas_points_free
 )
 
+(define-boxed GnomeSelectorAsyncHandle
+  gnome_selector_async_handle_ref
+  gnome_selector_async_handle_unref
+)

@@ -50,9 +50,20 @@ BEGIN_GNOME_DECLS
 #define GNOME_SELECTOR_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_SELECTOR, GnomeSelectorClass))
 
 
-typedef struct _GnomeSelector         GnomeSelector;
-typedef struct _GnomeSelectorPrivate  GnomeSelectorPrivate;
-typedef struct _GnomeSelectorClass    GnomeSelectorClass;
+typedef struct _GnomeSelector             GnomeSelector;
+typedef struct _GnomeSelectorPrivate      GnomeSelectorPrivate;
+typedef struct _GnomeSelectorClass        GnomeSelectorClass;
+
+typedef struct _GnomeSelectorAsyncHandle  GnomeSelectorAsyncHandle;
+typedef gint                              GnomeSelectorAsyncType;
+
+typedef void (*GnomeSelectorAsyncFunc)   (GnomeSelector            *selector,
+                                          GnomeSelectorAsyncHandle *async_handle,
+					  GnomeSelectorAsyncType    async_type,
+                                          const char               *uri,
+					  GError                   *error,
+                                          gboolean                  success,
+                                          gpointer                  user_data);
 
 enum {
     GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET    = 1 << 0,
@@ -108,42 +119,31 @@ struct _GnomeSelectorClass {
 
     void      (*history_changed)           (GnomeSelector *selector);
 
-    /* these two functions are synchronous and thus may block. */
-    gboolean  (*check_filename)            (GnomeSelector *selector,
-                                            const gchar   *filename);
-    gboolean  (*check_directory)           (GnomeSelector *selector,
-                                            const gchar   *directory);
+    /* Check whether it's ok to add the file/directory to the selector. */
+    void      (*check_filename)            (GnomeSelector            *selector,
+                                            const gchar              *filename,
+					    GnomeSelectorAsyncHandle *async_handle);
+    void      (*check_directory)           (GnomeSelector            *selector,
+                                            const gchar              *directory,
+					    GnomeSelectorAsyncHandle *async_handle);
 
-    /* the following operations check whether it's ok to add the
-     * requested file/directory and emit the corresponding "do_add"
-     * signal in an async handler. */
-    void      (*add_file)                  (GnomeSelector *selector,
-                                            const gchar   *filename,
-                                            gint           position);
-    void      (*add_file_default)          (GnomeSelector *selector,
-                                            const gchar   *filename,
-                                            gint           position);
-    void      (*add_directory)             (GnomeSelector *selector,
-                                            const gchar   *directory,
-                                            gint           position);
-    void      (*add_directory_default)     (GnomeSelector *selector,
-                                            const gchar   *directory,
-                                            gint           position);
-
-    /* the following operations are async. */
-    void      (*do_add_file)               (GnomeSelector *selector,
-                                            const gchar   *uri,
-                                            gint           position);
-    void      (*do_add_file_default)       (GnomeSelector *selector,
-                                            const gchar   *uri,
-                                            gint           position);
-    void      (*do_add_directory)          (GnomeSelector *selector,
-                                            const gchar   *uri,
-                                            gint           position);
-    void      (*do_add_directory_default)  (GnomeSelector *selector,
-                                            const gchar   *uri,
-                                            gint           position);
-    void      (*stop_loading)              (GnomeSelector *selector);
+    /* Add a file/directory to the selector. */
+    void      (*add_file)                  (GnomeSelector            *selector,
+                                            const gchar              *filename,
+                                            gint                      position,
+					    GnomeSelectorAsyncHandle *async_handle);
+    void      (*add_file_default)          (GnomeSelector            *selector,
+                                            const gchar              *filename,
+                                            gint                      position,
+					    GnomeSelectorAsyncHandle *async_handle);
+    void      (*add_directory)             (GnomeSelector            *selector,
+                                            const gchar              *directory,
+                                            gint                      position,
+					    GnomeSelectorAsyncHandle *async_handle);
+    void      (*add_directory_default)     (GnomeSelector            *selector,
+                                            const gchar              *directory,
+                                            gint                      position,
+					    GnomeSelectorAsyncHandle *async_handle);
 };
 
 
@@ -163,22 +163,34 @@ void         gnome_selector_construct          (GnomeSelector *selector,
 /*only return a file if the `check_filename' method succeeded. */
 gchar       *gnome_selector_get_filename       (GnomeSelector *selector);
 
-/* checks whether this is a valid filename. */
-gboolean     gnome_selector_check_filename     (GnomeSelector *selector,
-                                                const gchar   *filename);
+/* checks whether this is a valid filename/directory. */
+void         gnome_selector_check_filename     (GnomeSelector             *selector,
+                                                GnomeSelectorAsyncHandle **async_handle_return,
+                                                const gchar               *filename,
+                                                GnomeSelectorAsyncFunc     async_func,
+                                                gpointer                   user_data);
+void         gnome_selector_check_directory    (GnomeSelector             *selector,
+                                                GnomeSelectorAsyncHandle **async_handle_return,
+                                                const gchar               *directory,
+                                                GnomeSelectorAsyncFunc     async_func,
+                                                gpointer                   user_data);
 
-/* Append/prepend filename to file list, return TRUE on success. */
-gboolean     gnome_selector_prepend_file       (GnomeSelector *selector,
-                                                const gchar   *filename,
-                                                gboolean       defaultp);
-gboolean     gnome_selector_append_file        (GnomeSelector *selector,
-                                                const gchar   *filename,
-                                                gboolean       defaultp);
+/* Add file/directory. */
+void         gnome_selector_add_file           (GnomeSelector             *selector,
+                                                GnomeSelectorAsyncHandle **async_handle_return,
+                                                const gchar               *filename,
+                                                gint                       position,
+                                                gboolean                   defaultp,
+                                                GnomeSelectorAsyncFunc     async_func,
+                                                gpointer                   user_data);
 
-gboolean     gnome_selector_add_file           (GnomeSelector *selector,
-                                                const gchar   *filename,
-                                                gint           position,
-                                                gboolean       defaultp);
+void         gnome_selector_add_directory      (GnomeSelector             *selector,
+                                                GnomeSelectorAsyncHandle **async_handle_return,
+                                                const gchar               *directory,
+                                                gint                       position,
+                                                gboolean                   defaultp,
+                                                GnomeSelectorAsyncFunc     async_func,
+                                                gpointer                   user_data);
 
 /* Get/set file list (set will replace the old file list). */
 GSList *     gnome_selector_get_file_list      (GnomeSelector *selector,
@@ -194,23 +206,6 @@ gboolean     gnome_selector_set_filename       (GnomeSelector *selector,
 
 /* Remove all entries from the selector. */
 void         gnome_selector_clear              (GnomeSelector *selector,
-                                                gboolean       defaultp);
-
-/* Checks whether it's ok to add this directory. */
-gboolean     gnome_selector_check_directory    (GnomeSelector *selector,
-                                                const gchar   *directory);
-
-/* Append/prepend directory to directory list, return TRUE on success. */
-gboolean     gnome_selector_prepend_directory  (GnomeSelector *selector,
-                                                const gchar   *directory,
-                                                gboolean       defaultp);
-gboolean     gnome_selector_append_directory   (GnomeSelector *selector,
-                                                const gchar   *directory,
-                                                gboolean       defaultp);
-
-gboolean     gnome_selector_add_directory      (GnomeSelector *selector,
-                                                const gchar   *directory,
-                                                gint           position,
                                                 gboolean       defaultp);
 
 /* Get/set directory list (set will replace the old directory list). */
@@ -278,6 +273,14 @@ void         gnome_selector_clear_history      (GnomeSelector *selector);
 
 /* Set the selector contents to the default values. */
 void         gnome_selector_set_to_defaults    (GnomeSelector *selector);
+
+/* Async operations. */
+void         gnome_selector_cancel_async_operation  (GnomeSelector             *selector,
+                                                     GnomeSelectorAsyncHandle  *async_handle);
+
+void         gnome_selector_async_handle_ref        (GnomeSelectorAsyncHandle  *async_handle);
+
+void         gnome_selector_async_handle_unref      (GnomeSelectorAsyncHandle  *async_handle);
 
 END_GNOME_DECLS
 

@@ -175,9 +175,11 @@ set_filename_handler (GnomeSelector *selector, const gchar *uri)
 
     ientry = GNOME_ICON_ENTRY (selector);
 
+#if 0
     /* Must be valid if it's not NULL */
     if (uri && !gnome_selector_check_filename (selector, uri))
 	return FALSE;
+#endif
 
     if (ientry->_priv->current_icon)
 	g_free (ientry->_priv->current_icon);

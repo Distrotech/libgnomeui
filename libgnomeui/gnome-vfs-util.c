@@ -202,7 +202,6 @@ file_read_callback (GnomeVFSAsyncHandle *vfs_handle,
 		    gpointer callback_data)
 {
     GnomeGdkPixbufAsyncHandle *handle;
-    GdkPixbuf *pixbuf;
 
     handle = callback_data;
     g_assert (handle->vfs_handle == vfs_handle);
@@ -223,13 +222,21 @@ file_read_callback (GnomeVFSAsyncHandle *vfs_handle,
 	return;
     }
 
-    if (result != GNOME_VFS_OK) {
-	pixbuf = NULL;
-    } else {
-	pixbuf = gdk_pixbuf_loader_get_pixbuf (handle->loader);
-    }
+    switch (result) {
+    case GNOME_VFS_OK:
+	break;
+    case GNOME_VFS_ERROR_EOF:
+	{
+	    GdkPixbuf *pixbuf;
 
-    load_done (handle, result, pixbuf);
+	    pixbuf = gdk_pixbuf_loader_get_pixbuf (handle->loader);
+	    load_done (handle, pixbuf ? GNOME_VFS_OK : result, pixbuf);
+	}
+	break;
+    default:
+	load_done (handle, result, NULL);
+	break;
+    }
 }
 
 static void

@@ -76,6 +76,8 @@ struct _GnomeSelectorPrivate {
     guint32      dirty : 1;
 
     guint        frozen;
+
+    GList       *async_ops;
 };
 
 typedef struct _GnomeSelectorHistoryItem GnomeSelectorHistoryItem;
@@ -85,8 +87,65 @@ struct _GnomeSelectorHistoryItem {
     gchar *text;
 };
 
-void         _gnome_selector_load_all          (GnomeSelector *selector);
-void         _gnome_selector_save_all          (GnomeSelector *selector);
+enum {
+    GNOME_SELECTOR_ASYNC_TYPE_CHECK_FILENAME = 1,
+    GNOME_SELECTOR_ASYNC_TYPE_CHECK_DIRECTORY,
+    GNOME_SELECTOR_ASYNC_TYPE_ADD_FILE,
+    GNOME_SELECTOR_ASYNC_TYPE_ADD_DIRECTORY,
+    GNOME_SELECTOR_ASYNC_TYPE_LAST
+};
+
+typedef struct _GnomeSelectorAsyncData GnomeSelectorAsyncData;
+
+struct _GnomeSelectorAsyncData {
+    gpointer async_data;
+    GDestroyNotify async_data_destroy;
+};
+
+struct _GnomeSelectorAsyncHandle {
+    int refcount;
+
+    GnomeSelectorAsyncType async_type;
+
+    GnomeSelector *selector;
+    GnomeSelectorAsyncFunc async_func;
+    gpointer user_data;
+
+    GError *error;
+
+    gboolean destroyed;
+    gboolean completed;
+
+    gchar *uri;
+
+    GSList *async_data_list;
+};
+
+void         _gnome_selector_load_all           (GnomeSelector *selector);
+void         _gnome_selector_save_all           (GnomeSelector *selector);
+
+GnomeSelectorAsyncHandle *
+_gnome_selector_async_handle_get                (GnomeSelector            *selector,
+                                                 GnomeSelectorAsyncType    async_type,
+                                                 const char               *uri,
+                                                 GnomeSelectorAsyncFunc    async_func,
+                                                 gpointer                  async_data);
+
+void
+_gnome_selector_async_handle_add                (GnomeSelectorAsyncHandle *async_handle,
+						 gpointer                  async_data,
+						 GDestroyNotify            async_data_destroy);
+
+void
+_gnome_selector_async_handle_completed          (GnomeSelectorAsyncHandle *async_handle,
+                                                 gboolean                  success);
+
+void
+_gnome_selector_async_handle_remove             (GnomeSelectorAsyncHandle *async_handle);
+
+void
+_gnome_selector_async_handle_set_error          (GnomeSelectorAsyncHandle *async_handle,
+                                                 GError                   *error);
 
 END_GNOME_DECLS
 

@@ -50,6 +50,7 @@
 
 #include "libgnomeuiP.h"
 
+
 static void gnome_selector_class_init          (GnomeSelectorClass *class);
 static void gnome_selector_init                (GnomeSelector      *selector);
 static void gnome_selector_destroy             (GtkObject          *object);
@@ -74,22 +75,24 @@ static void     clear_default_handler          (GnomeSelector   *selector);
 static gchar   *get_filename_handler           (GnomeSelector   *selector);
 static gboolean set_filename_handler           (GnomeSelector   *selector,
                                                 const gchar     *filename);
-static gboolean check_filename_handler         (GnomeSelector   *selector,
-                                                const gchar     *filename);
-static void     do_add_file_handler            (GnomeSelector   *selector,
-                                                const gchar     *filename,
-                                                gint             position);
-static void     do_add_file_default_handler    (GnomeSelector   *selector,
-                                                const gchar     *filename,
-                                                gint             position);
-static gboolean check_directory_handler        (GnomeSelector   *selector,
-                                                const gchar     *filename);
-static void     do_add_dir_handler             (GnomeSelector   *selector,
-                                                const gchar     *directory,
-                                                gint             position);
-static void     do_add_dir_default_handler     (GnomeSelector   *selector,
-                                                const gchar     *directory,
-                                                gint             position);
+
+static void     add_file_handler               (GnomeSelector            *selector,
+                                                const gchar              *filename,
+                                                gint                      position,
+						GnomeSelectorAsyncHandle *async_handle);
+static void     add_file_default_handler       (GnomeSelector            *selector,
+                                                const gchar              *filename,
+                                                gint                      position,
+						GnomeSelectorAsyncHandle *async_handle);
+static void     add_dir_handler                (GnomeSelector            *selector,
+                                                const gchar              *directory,
+                                                gint                      position,
+						GnomeSelectorAsyncHandle *async_handle);
+static void     add_dir_default_handler        (GnomeSelector            *selector,
+                                                const gchar              *directory,
+                                                gint                      position,
+						GnomeSelectorAsyncHandle *async_handle);
+
 static GSList  *get_file_list_handler          (GnomeSelector   *selector,
                                                 gboolean         directory_listp,
                                                 gboolean         defaultp);
@@ -129,11 +132,6 @@ enum {
     ACTIVATE_ENTRY_SIGNAL,
     HISTORY_CHANGED_SIGNAL,
     GET_FILE_LIST_SIGNAL,
-    DO_ADD_FILE_SIGNAL,
-    DO_ADD_FILE_DEFAULT_SIGNAL,
-    DO_ADD_DIRECTORY_SIGNAL,
-    DO_ADD_DIRECTORY_DEFAULT_SIGNAL,
-    STOP_LOADING_SIGNAL,
     LAST_SIGNAL
 };
 
@@ -221,15 +219,6 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gtk_signal_default_marshaller,
 			GTK_TYPE_NONE,
 			0);
-    gnome_selector_signals [CHECK_FILENAME_SIGNAL] =
-	gtk_signal_new ("check_filename",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   check_filename),
-			gtk_marshal_BOOLEAN__POINTER,
-			GTK_TYPE_BOOL, 1,
-			GTK_TYPE_STRING);
     gnome_selector_signals [GET_FILENAME_SIGNAL] =
 	gtk_signal_new ("get_filename",
 			GTK_RUN_LAST,
@@ -254,45 +243,40 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_file),
-			gtk_marshal_VOID__POINTER_INT,
-			GTK_TYPE_NONE, 2,
-			GTK_TYPE_STRING, GTK_TYPE_INT);
+			gnome_marshal_VOID__POINTER_INT_BOXED,
+			GTK_TYPE_NONE, 3,
+			GTK_TYPE_STRING, GTK_TYPE_INT,
+			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [ADD_FILE_DEFAULT_SIGNAL] =
 	gtk_signal_new ("add_file_default",
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_file_default),
-			gtk_marshal_VOID__POINTER_INT,
-			GTK_TYPE_NONE, 2,
-			GTK_TYPE_STRING, GTK_TYPE_INT);
-    gnome_selector_signals [CHECK_DIRECTORY_SIGNAL] =
-	gtk_signal_new ("check_directory",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   check_directory),
-			gtk_marshal_BOOLEAN__POINTER,
-			GTK_TYPE_BOOL, 1,
-			GTK_TYPE_STRING);
+			gnome_marshal_VOID__POINTER_INT_BOXED,
+			GTK_TYPE_NONE, 3,
+			GTK_TYPE_STRING, GTK_TYPE_INT,
+			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [ADD_DIRECTORY_SIGNAL] =
 	gtk_signal_new ("add_directory",
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_directory),
-			gtk_marshal_VOID__POINTER_INT,
-			GTK_TYPE_NONE, 2,
-			GTK_TYPE_STRING, GTK_TYPE_INT);
+			gnome_marshal_VOID__POINTER_INT_BOXED,
+			GTK_TYPE_NONE, 3,
+			GTK_TYPE_STRING, GTK_TYPE_INT,
+			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [ADD_DIRECTORY_DEFAULT_SIGNAL] =
 	gtk_signal_new ("add_directory_default",
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_directory_default),
-			gtk_marshal_VOID__POINTER_INT,
-			GTK_TYPE_NONE, 2,
-			GTK_TYPE_STRING, GTK_TYPE_INT);
+			gnome_marshal_VOID__POINTER_INT_BOXED,
+			GTK_TYPE_NONE, 3,
+			GTK_TYPE_STRING, GTK_TYPE_INT,
+			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
     gnome_selector_signals [UPDATE_FILE_LIST_SIGNAL] =
 	gtk_signal_new ("update_file_list",
 			GTK_RUN_LAST,
@@ -375,51 +359,24 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gnome_marshal_POINTER__INT_INT,
 			GTK_TYPE_POINTER,
 			2, GTK_TYPE_BOOL, GTK_TYPE_BOOL);
-    gnome_selector_signals [DO_ADD_FILE_SIGNAL] =
-	gtk_signal_new ("do_add_file",
+    gnome_selector_signals [CHECK_FILENAME_SIGNAL] =
+	gtk_signal_new ("check_filename",
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   do_add_file),
-			gnome_marshal_VOID__INT_POINTER,
-			GTK_TYPE_NONE,
-			2, GTK_TYPE_STRING, GTK_TYPE_INT);
-    gnome_selector_signals [DO_ADD_FILE_DEFAULT_SIGNAL] =
-	gtk_signal_new ("do_add_file_default",
+					   check_filename),
+			gtk_marshal_VOID__POINTER_POINTER,
+			GTK_TYPE_NONE, 2,
+			GTK_TYPE_STRING, GTK_TYPE_POINTER);
+    gnome_selector_signals [CHECK_DIRECTORY_SIGNAL] =
+	gtk_signal_new ("check_directory",
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   do_add_file_default),
-			gnome_marshal_VOID__INT_POINTER,
-			GTK_TYPE_NONE,
-			2, GTK_TYPE_STRING, GTK_TYPE_INT);
-    gnome_selector_signals [DO_ADD_DIRECTORY_SIGNAL] =
-	gtk_signal_new ("do_add_directory",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   do_add_directory),
-			gnome_marshal_VOID__INT_POINTER,
-			GTK_TYPE_NONE,
-			2, GTK_TYPE_STRING, GTK_TYPE_INT);
-    gnome_selector_signals [DO_ADD_DIRECTORY_DEFAULT_SIGNAL] =
-	gtk_signal_new ("do_add_directory_default",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   do_add_directory_default),
-			gnome_marshal_VOID__INT_POINTER,
-			GTK_TYPE_NONE,
-			2, GTK_TYPE_STRING, GTK_TYPE_INT);
-    gnome_selector_signals [STOP_LOADING_SIGNAL] =
-	gtk_signal_new ("stop_loading",
-			GTK_RUN_LAST,
-			GTK_CLASS_TYPE (object_class),
-			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   stop_loading),
-			gtk_signal_default_marshaller,
-			GTK_TYPE_NONE,
-			0);
+					   check_directory),
+			gtk_marshal_VOID__POINTER_POINTER,
+			GTK_TYPE_NONE, 2,
+			GTK_TYPE_STRING, GTK_TYPE_POINTER);
     gtk_object_class_add_signals (object_class,
 				  gnome_selector_signals,
 				  LAST_SIGNAL);
@@ -434,15 +391,14 @@ gnome_selector_class_init (GnomeSelectorClass *class)
     class->clear_default = clear_default_handler;
     class->update = update_handler;
 
-    class->check_filename = check_filename_handler;
     class->get_filename = get_filename_handler;
     class->set_filename = set_filename_handler;
-    class->check_directory = check_directory_handler;
 
-    class->do_add_file = do_add_file_handler;
-    class->do_add_file_default = do_add_file_default_handler;
-    class->do_add_directory = do_add_dir_handler;
-    class->do_add_directory_default = do_add_dir_default_handler;
+    class->add_file = add_file_handler;
+    class->add_file_default = add_file_default_handler;
+    class->add_directory = add_dir_handler;
+    class->add_directory_default = add_dir_default_handler;
+
     class->get_file_list = get_file_list_handler;
 }
 
@@ -573,18 +529,6 @@ clear_default_handler (GnomeSelector *selector)
     selector->_priv->default_file_list = NULL;
 }
 
-static gboolean
-check_filename_handler (GnomeSelector *selector, const gchar *filename)
-{
-    g_return_val_if_fail (selector != NULL, FALSE);
-    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (filename != NULL, FALSE);
-
-    g_message (G_STRLOC ": '%s'", filename);
-
-    return TRUE;
-}
-
 static gchar *
 get_filename_handler (GnomeSelector *selector)
 {
@@ -608,8 +552,10 @@ set_filename_handler (GnomeSelector *selector, const gchar *filename)
 
     g_message (G_STRLOC ": '%s'", filename);
 
+#if 0
     if (!gnome_selector_check_filename (selector, filename))
 	return FALSE;
+#endif
 
     gnome_selector_set_entry_text (selector, filename);
     gnome_selector_activate_entry (selector);
@@ -617,21 +563,9 @@ set_filename_handler (GnomeSelector *selector, const gchar *filename)
     return TRUE;
 }
 
-static gboolean
-check_directory_handler (GnomeSelector *selector, const gchar *directory)
-{
-    g_return_val_if_fail (selector != NULL, FALSE);
-    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (directory != NULL, FALSE);
-
-    g_message (G_STRLOC ": '%s'", directory);
-
-    return TRUE;
-}
-
 static void
-do_add_file_handler (GnomeSelector *selector, const gchar *filename,
-		     gint position)
+add_file_handler (GnomeSelector *selector, const gchar *filename, gint position,
+		  GnomeSelectorAsyncHandle *async_handle)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
@@ -645,11 +579,14 @@ do_add_file_handler (GnomeSelector *selector, const gchar *filename,
 	selector->_priv->file_list = g_slist_insert
 	    (selector->_priv->file_list, g_strdup (filename),
 	     position);
+
+    if (async_handle != NULL)
+	_gnome_selector_async_handle_completed (async_handle, TRUE);
 }
 
 static void
-do_add_file_default_handler (GnomeSelector *selector, const gchar *filename,
-			     gint position)
+add_file_default_handler (GnomeSelector *selector, const gchar *filename, gint position,
+			  GnomeSelectorAsyncHandle *async_handle)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
@@ -663,11 +600,14 @@ do_add_file_default_handler (GnomeSelector *selector, const gchar *filename,
 	selector->_priv->default_file_list = g_slist_insert
 	    (selector->_priv->default_file_list, g_strdup (filename),
 	     position);
+
+    if (async_handle != NULL)
+	_gnome_selector_async_handle_completed (async_handle, TRUE);
 }
 
 static void
-do_add_dir_handler (GnomeSelector *selector, const gchar *directory,
-		    gint position)
+add_dir_handler (GnomeSelector *selector, const gchar *directory, gint position,
+		 GnomeSelectorAsyncHandle *async_handle)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
@@ -681,11 +621,14 @@ do_add_dir_handler (GnomeSelector *selector, const gchar *directory,
 	selector->_priv->dir_list = g_slist_insert
 	    (selector->_priv->dir_list, g_strdup (directory),
 	     position);
+
+    if (async_handle != NULL)
+	_gnome_selector_async_handle_completed (async_handle, TRUE);
 }
 
 static void
-do_add_dir_default_handler (GnomeSelector *selector, const gchar *directory,
-			    gint position)
+add_dir_default_handler (GnomeSelector *selector, const gchar *directory, gint position,
+			 GnomeSelectorAsyncHandle *async_handle)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
@@ -699,6 +642,9 @@ do_add_dir_default_handler (GnomeSelector *selector, const gchar *directory,
 	selector->_priv->default_dir_list = g_slist_insert
 	    (selector->_priv->default_dir_list, g_strdup (directory),
 	     position);
+
+    if (async_handle != NULL)
+	_gnome_selector_async_handle_completed (async_handle, TRUE);
 }
 
 static GSList *
@@ -1001,186 +947,6 @@ gnome_selector_set_dialog_title (GnomeSelector *selector,
     selector->_priv->dialog_title = g_strdup (dialog_title);
 }
 
-
-/**
- * gnome_selector_check_directory
- * @selector: Pointer to GnomeSelector object.
- * @filename: Directory to check.
- *
- * Description: Asks the derived class whether @directory is a
- *    valid directory for this kind of selector.
- *
- * Returns: #TRUE if the directory is ok or #FALSE if not.
- */
-gboolean
-gnome_selector_check_directory (GnomeSelector *selector,
-				const gchar *directory)
-{
-    gboolean ok;
-
-    g_return_val_if_fail (selector != NULL, FALSE);
-    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (directory != NULL, FALSE);
-
-    gtk_signal_emit (GTK_OBJECT (selector),
-		     gnome_selector_signals [CHECK_DIRECTORY_SIGNAL],
-		     directory, &ok);
-
-    return ok;
-}
-
-
-
-/**
- * gnome_selector_prepend_directory
- * @selector: Pointer to GnomeSelector object.
- * @directory: The directory to add.
- *
- * Description: Prepends @directory to the directory list.
- *
- * Returns:
- */
-gboolean
-gnome_selector_prepend_directory (GnomeSelector *selector,
-				  const gchar *directory,
-				  gboolean defaultp)
-{
-    g_return_val_if_fail (selector != NULL, FALSE);
-    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (directory != NULL, FALSE);
-
-    return gnome_selector_add_directory (selector, directory, 0,
-					 defaultp);
-}
-
-
-/**
- * gnome_selector_append_directory
- * @selector: Pointer to GnomeSelector object.
- * @directory: The directory to add.
- *
- * Description: Append @directory to the directory list.
- *
- * Returns:
- */
-gboolean
-gnome_selector_append_directory (GnomeSelector *selector,
-				 const gchar *directory,
-				 gboolean defaultp)
-{
-    g_return_val_if_fail (selector != NULL, FALSE);
-    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (directory != NULL, FALSE);
-
-    return gnome_selector_add_directory (selector, directory, -1,
-					 defaultp);
-}
-
-
-/**
- * gnome_selector_add_directory
- * @selector: Pointer to GnomeSelector object.
- * @directory: The directory to add.
- *
- * Description:
- *
- * Returns:
- */
-gboolean
-gnome_selector_add_directory (GnomeSelector *selector, const gchar *directory,
-			      gint position, gboolean defaultp)
-{
-    g_return_val_if_fail (selector != NULL, FALSE);
-    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (directory != NULL, FALSE);
-    g_return_val_if_fail (position >= -1, FALSE);
-
-    if (defaultp)
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [ADD_DIRECTORY_DEFAULT_SIGNAL],
-			 directory, position);
-    else
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [ADD_DIRECTORY_SIGNAL],
-			 directory, position);
-
-    return TRUE;
-}
-
-
-/**
- * gnome_selector_prepend_file
- * @selector: Pointer to GnomeSelector object.
- * @directory: The file to add.
- *
- * Description: Prepends @filename to the file list.
- *
- * Returns:
- */
-gboolean
-gnome_selector_prepend_file (GnomeSelector *selector,
-			     const gchar *filename,
-			     gboolean defaultp)
-{
-    g_return_val_if_fail (selector != NULL, FALSE);
-    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (filename != NULL, FALSE);
-
-    return gnome_selector_add_file (selector, filename, 0, defaultp);
-}
-
-
-/**
- * gnome_selector_append_file
- * @selector: Pointer to GnomeSelector object.
- * @directory: The file to add.
- *
- * Description: Appends @filename to the file list.
- *
- * Returns:
- */
-gboolean
-gnome_selector_append_file (GnomeSelector *selector,
-			    const gchar *filename,
-			    gboolean defaultp)
-{
-    g_return_val_if_fail (selector != NULL, FALSE);
-    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (filename != NULL, FALSE);
-
-    return gnome_selector_add_file (selector, filename, -1, defaultp);
-}
-
-/**
- * gnome_selector_add_file
- * @selector: Pointer to GnomeSelector object.
- * @filename: The file to add.
- *
- * Description:
- *
- * Returns:
- */
-gboolean
-gnome_selector_add_file (GnomeSelector *selector, const gchar *filename,
-			 gint position, gboolean defaultp)
-{
-    g_return_val_if_fail (selector != NULL, FALSE);
-    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (filename != NULL, FALSE);
-    g_return_val_if_fail (position >= -1, FALSE);
-
-    if (defaultp)
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [ADD_FILE_DEFAULT_SIGNAL],
-			 filename, position);
-    else
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [ADD_FILE_SIGNAL],
-			 filename, position);
-
-    return TRUE;
-}
-
 GSList *
 gnome_selector_get_file_list (GnomeSelector *selector,
 			      gboolean directory_listp,
@@ -1277,38 +1043,6 @@ gnome_selector_clear (GnomeSelector *selector, gboolean defaultp)
     else
 	gnome_selector_update (selector);
 }
-
-
-/**
- * gnome_selector_check_filename
- * @selector: Pointer to GnomeSelector object.
- * @filename: Filename to check.
- *
- * Description: Asks the derived class whether @filename is a
- *    valid file for this kind of selector.
- *
- * This can be used in derived classes to only allow certain
- * file types, for instance images, in the selector.
- *
- * Returns: #TRUE if the filename is ok or #FALSE if not.
- */
-gboolean
-gnome_selector_check_filename (GnomeSelector *selector,
-			       const gchar *filename)
-{
-    gboolean ok;
-
-    g_return_val_if_fail (selector != NULL, FALSE);
-    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
-    g_return_val_if_fail (filename != NULL, FALSE);
-
-    gtk_signal_emit (GTK_OBJECT (selector),
-		     gnome_selector_signals [CHECK_FILENAME_SIGNAL],
-		     filename, &ok);
-
-    return ok;
-}
-
 
 /**
  * gnome_selector_get_filename
@@ -1831,3 +1565,277 @@ _gnome_selector_load_all (GnomeSelector *selector)
     else
 	gnome_selector_update (selector);
 }
+
+GnomeSelectorAsyncHandle *
+_gnome_selector_async_handle_get (GnomeSelector *selector,
+				  GnomeSelectorAsyncType async_type,
+				  const char *uri,
+				  GnomeSelectorAsyncFunc async_func,
+				  gpointer async_data)
+{
+    GnomeSelectorAsyncHandle *async_handle;
+
+    g_return_val_if_fail (selector != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
+
+    async_handle = g_new0 (GnomeSelectorAsyncHandle, 1);
+    async_handle->refcount = 1;
+    async_handle->selector = selector;
+    async_handle->async_type = async_type;
+    async_handle->async_func = async_func;
+    async_handle->user_data = async_data;
+    async_handle->uri = g_strdup (uri);
+
+    gtk_object_ref (GTK_OBJECT (async_handle->selector));
+
+    selector->_priv->async_ops = g_list_prepend (selector->_priv->async_ops,
+						 async_handle);
+
+    return async_handle;
+}
+
+void
+_gnome_selector_async_handle_add (GnomeSelectorAsyncHandle *async_handle,
+				  gpointer async_data,
+				  GDestroyNotify async_data_destroy)
+{
+    GnomeSelector *selector;
+    GnomeSelectorAsyncData *data;
+
+    g_return_if_fail (async_handle != NULL);
+    g_assert (GNOME_IS_SELECTOR (async_handle->selector));
+    g_assert (!async_handle->destroyed && !async_handle->completed);
+
+    selector = async_handle->selector;
+
+    data = g_new0 (GnomeSelectorAsyncData, 1);
+    data->async_data = async_data;
+    data->async_data_destroy = async_data_destroy;
+
+    async_handle->async_data_list = g_slist_prepend
+	(async_handle->async_data_list, data);
+}
+
+void
+_gnome_selector_async_handle_completed (GnomeSelectorAsyncHandle *async_handle,
+					gboolean success)
+{
+    GnomeSelector *selector;
+
+    g_return_if_fail (async_handle != NULL);
+    g_assert (GNOME_IS_SELECTOR (async_handle->selector));
+
+    selector = async_handle->selector;
+
+    if (!async_handle->completed && async_handle->async_func)
+	async_handle->async_func (selector, async_handle,
+				  async_handle->async_type, async_handle->uri,
+				  async_handle->error, success,
+				  async_handle->user_data);
+
+    async_handle->completed = TRUE;
+
+    _gnome_selector_async_handle_remove (async_handle);
+}
+
+void
+_gnome_selector_async_handle_remove (GnomeSelectorAsyncHandle *async_handle)
+{
+    GnomeSelector *selector;
+
+    g_return_if_fail (async_handle != NULL);
+    g_assert (GNOME_IS_SELECTOR (async_handle->selector));
+
+    selector = async_handle->selector;
+
+    if (!async_handle->completed && async_handle->async_func)
+	async_handle->async_func (selector, async_handle,
+				  async_handle->async_type, async_handle->uri,
+				  async_handle->error, FALSE,
+				  async_handle->user_data);
+
+    selector->_priv->async_ops = g_list_remove (selector->_priv->async_ops,
+						async_handle);
+
+    async_handle->destroyed = TRUE;
+
+    gnome_selector_async_handle_unref (async_handle);
+}
+
+void
+_gnome_selector_async_handle_set_error (GnomeSelectorAsyncHandle *async_handle, GError *error)
+{
+    g_return_if_fail (async_handle != NULL);
+    g_assert (GNOME_IS_SELECTOR (async_handle->selector));
+
+    /* Don't override. */
+    if (async_handle->error != NULL)
+	return;
+
+    async_handle->error = g_error_copy (error);
+}
+
+void
+gnome_selector_async_handle_ref (GnomeSelectorAsyncHandle *async_handle)
+{
+    g_return_if_fail (async_handle != NULL);
+    g_assert (GNOME_IS_SELECTOR (async_handle->selector));
+
+    async_handle->refcount++;
+}
+
+void
+gnome_selector_async_handle_unref (GnomeSelectorAsyncHandle *async_handle)
+{
+    GnomeSelector *selector;
+
+    g_return_if_fail (async_handle != NULL);
+    g_assert (GNOME_IS_SELECTOR (async_handle->selector));
+
+    selector = async_handle->selector;
+
+    async_handle->refcount--;
+    if (async_handle->refcount <= 0) {
+	GSList *c;
+
+	for (c = async_handle->async_data_list; c; c = c->next) {
+	    GnomeSelectorAsyncData *async_data = c->data;
+
+	    if (async_data->async_data_destroy)
+		async_data->async_data_destroy (async_data->async_data);
+	}
+
+	g_slist_foreach (async_handle->async_data_list, (GFunc) g_free, NULL);
+	g_slist_free (async_handle->async_data_list);
+	async_handle->async_data_list = NULL;
+
+	if (async_handle->error)
+	    g_error_free (async_handle->error);
+
+	gtk_object_unref (GTK_OBJECT (async_handle->selector));
+	g_assert (async_handle->destroyed);
+
+	g_free (async_handle->uri);
+	g_free (async_handle);
+    }
+}
+
+void
+gnome_selector_check_filename (GnomeSelector *selector,
+			       GnomeSelectorAsyncHandle **async_handle_return,
+			       const gchar *filename,
+			       GnomeSelectorAsyncFunc async_func,
+			       gpointer user_data)
+{
+    GnomeSelectorAsyncHandle *async_handle;
+
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+    g_return_if_fail (filename != NULL);
+    g_return_if_fail (async_func != NULL);
+
+    async_handle = _gnome_selector_async_handle_get
+	(selector, GNOME_SELECTOR_ASYNC_TYPE_CHECK_FILENAME,
+	 filename, async_func, user_data);
+    if (async_handle_return != NULL)
+	*async_handle_return = async_handle;
+
+    gtk_signal_emit (GTK_OBJECT (selector),
+		     gnome_selector_signals [CHECK_FILENAME_SIGNAL],
+		     filename, async_handle);
+}
+
+void
+gnome_selector_check_directory (GnomeSelector *selector,
+				GnomeSelectorAsyncHandle **async_handle_return,
+				const gchar *directory,
+				GnomeSelectorAsyncFunc async_func,
+				gpointer user_data)
+{
+    GnomeSelectorAsyncHandle *async_handle;
+
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+    g_return_if_fail (directory != NULL);
+    g_return_if_fail (async_func != NULL);
+
+    async_handle = _gnome_selector_async_handle_get
+	(selector, GNOME_SELECTOR_ASYNC_TYPE_CHECK_DIRECTORY,
+	 directory, async_func, user_data);
+    if (async_handle_return != NULL)
+	*async_handle_return = async_handle;
+
+    gtk_signal_emit (GTK_OBJECT (selector),
+		     gnome_selector_signals [CHECK_DIRECTORY_SIGNAL],
+		     directory, async_handle);
+
+}
+
+void
+gnome_selector_add_file (GnomeSelector *selector,
+			 GnomeSelectorAsyncHandle **async_handle_return,
+			 const gchar *filename, gint position, gboolean defaultp,
+			 GnomeSelectorAsyncFunc async_func,
+			 gpointer user_data)
+{
+    GnomeSelectorAsyncHandle *async_handle;
+
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+    g_return_if_fail (filename != NULL);
+
+    async_handle = _gnome_selector_async_handle_get
+	(selector, GNOME_SELECTOR_ASYNC_TYPE_ADD_FILE,
+	 filename, async_func, user_data);
+    if (async_handle_return != NULL)
+	*async_handle_return = async_handle;
+
+    if (defaultp)
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [ADD_FILE_DEFAULT_SIGNAL],
+			 filename, position, async_handle);
+    else
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [ADD_FILE_SIGNAL],
+			 filename, position, async_handle);
+}
+
+void
+gnome_selector_add_directory (GnomeSelector *selector,
+			      GnomeSelectorAsyncHandle **async_handle_return,
+			      const gchar *directory, gint position, gboolean defaultp,
+			      GnomeSelectorAsyncFunc async_func,
+			      gpointer user_data)
+{
+    GnomeSelectorAsyncHandle *async_handle;
+
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+    g_return_if_fail (directory != NULL);
+
+    async_handle = _gnome_selector_async_handle_get
+	(selector, GNOME_SELECTOR_ASYNC_TYPE_ADD_DIRECTORY,
+	 directory, async_func, user_data);
+    if (async_handle_return != NULL)
+	*async_handle_return = async_handle;
+
+    if (defaultp)
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [ADD_DIRECTORY_DEFAULT_SIGNAL],
+			 directory, position, async_handle);
+    else
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [ADD_DIRECTORY_SIGNAL],
+			 directory, position, async_handle);
+}
+
+void
+gnome_selector_cancel_async_operation (GnomeSelector *selector, GnomeSelectorAsyncHandle *async_handle)
+{
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+    g_return_if_fail (async_handle != NULL);
+
+    _gnome_selector_async_handle_remove (async_handle);
+}
+

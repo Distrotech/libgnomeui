@@ -1,3 +1,40 @@
+2000-12-04  Martin Baulig  <baulig@suse.de>
+
+	Started to make GnomeSelector fully asynchronous.
+
+	* gnome-boxed.defs (GnomeSelectorAsyncHandle): Added.
+
+	* gnome-selector.h (GnomeSelectorAsyncHandle): New type.
+	(GnomeSelectorAsyncType, GnomeSelectorAsyncFunc): New types.
+	(GnomeSelector): Changed the return type of the "check_filename"
+	and "check_directory" signals to void; added additional
+	GnomeSelectorAsyncHandle parameter to the "check_filename",
+	"check_directory", "add_file" and "add_file_default", "add_directory"
+	and "add_directory_default" signals; removed the "do_add_*" signals.
+	(gnome_selector_check_filename, gnome_selector_check_directory,
+	gnome_selector_add_file, gnome_selector_add_directory): Changed return
+	type to void; added three new arguments for async handling.
+	(gnome_selector_prepend_file, gnome_selector_append_file,
+	gnome_selector_prepend_director, gnome_selector_append_directory):
+	Removed.
+	(gnome_selector_cancel_async_operation): New global function.
+	(gnome_selector_async_handle_ref, gnome_selector_async_handle_unref):
+	New global functions.
+
+	* gnome-selectorP.h (GnomeSelectorPrivate): Added `async_ops' field.
+	(_gnome_selector_async_handle_get, _gnome_selector_async_handle_add):
+	New internal functions.
+	(_gnome_selector_async_handle_completed): New internal function.
+	(_gnome_selector_async_handle_remove): Likewise.
+	(_gnome_selector_async_handle_set_error): Likewise.
+
+	* gnome-icon-entry.c (set_filename_handler): Comment out call to
+	gnome_selector_check_filename [FIXME].
+
+	* gnome-vfs-util.c (file_read_callback): Ignore GNOME_VFS_OK since
+	this may be called multiple times; on GNOME_VFS_ERROR_EOF, get the
+	pixbuf and call load_done(GNOME_VFS_OK).
+
 Sun Dec 03 16:37:42 2000  George Lebl <jirka@5z.com>
 
 	* gnome-calculator.c:  Add a bunch of xcalc like shortcuts
