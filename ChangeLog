@@ -1,3 +1,10 @@
+Sun Mar 14 01:05:29 2004  Jonathan Blandford  <jrb@gnome.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_parse): We don't really want to strip
+	whitespace off the end of the string.  This is not the right place
+	to editorialize on the appropriateness of such filenames.
+
 2004-03-13  Mark McLoughlin  <mark@skynet.ie>
 
 	Add a new "filechooser-action" property so we can use file

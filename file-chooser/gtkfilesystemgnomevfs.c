@@ -1078,11 +1078,9 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
   gboolean result = FALSE;
 
   /* Strip off leading whitespaces (since they can't be part of a valid
-   * uri). Strip off trailing whitespaces too because filenames with
-   * trailing whitespace are crack (We want to avoid letting the
-   * user accidentally create such filenames for the save dialog.)
+   * uri).
    */
-  stripped = g_strstrip (g_strdup (str));
+  stripped = g_strchug (g_strdup (str));
 
   last_slash = strrchr (stripped, '/');
   if (!last_slash)
@@ -1845,7 +1843,7 @@ list_children_foreach (gpointer key,
 {
   FolderChild *child = value;
   GSList **list = user_data;
-
+  
   *list = g_slist_prepend (*list, gtk_file_path_new_dup (child->uri));
 }
 
