@@ -529,7 +529,7 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, int file_must_exist)
 			g_free (t);
 		}
 	} else {
-		char *cwd = getcwd (NULL, -1);
+		gchar *cwd = g_get_current_dir ();
 
 		p = g_concat_dir_and_file (cwd, t);
 		free (cwd);

@@ -376,7 +376,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 			p = g_strdup(fe->default_path);
 		else {
 			/*get around the g_free/free issue*/
-			gchar *cwd = getcwd(NULL,0);
+			gchar *cwd = g_get_current_dir ();
 			p = g_strdup(cwd);
 			free(cwd);
 		}
@@ -396,7 +396,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 				p = g_strdup(fe->default_path);
 			else {
 				/*get around the g_free/free issue*/
-				gchar *cwd = getcwd(NULL,0);
+				gchar *cwd = g_get_current_dir ();
 				p = g_strdup(cwd);
 				free(cwd);
 			}
