@@ -1,11 +1,12 @@
 /* My vague and ugly attempt at adding popup menus to GnomeUI */
 /* By: Mark Crichton <mcrichto@purdue.edu> */
-/* Written under the heavy infulence of whatever was playing
- * in my CDROM drive at the time... */
+/* Written under the heavy infulence of whatever was playing */
+/* in my CDROM drive at the time... */
 /* First pass: July 8, 1998 */
+
 /* gnome-popupmenu.h
  * 
- * Copyright (C)  FIXME FIXME FIXME (FSF or Mark Crichton)
+ * Copyright (C) 1998, Mark Crichton
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -21,9 +22,6 @@
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-
-
-#ifdef GTK_HAVE_ACCEL_GROUP /* Does NOT work w/o GTK 1.1 */
 
 #include <config.h>
 #include <gdk/gdkkeysyms.h>
@@ -69,17 +67,16 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 		  		     GnomeUIBuilderData *uibdata)
 
 {
+
+#ifdef GTK_HAVE_ACCEL_GROUP
+
 	GtkWidget *menubar;
 	GtkWidget *oldparent;
 	GtkWidget *eb;
 	GtkArg	  *temparg;
 	guint	  nargs = 0;
 
-#ifdef GTK_HAVE_ACCEL_GROUP
 	GtkAccelGroup *ag;
-#else
-	GtkAcceleratorTable *at;
-#endif
 	int set_accel;
 	
 	g_return_if_fail(app !=NULL);
@@ -100,6 +97,7 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 	/* first, get all the args needed for the new child */
 
 	temparg = gtk_container_query_child_args(GTK_WIDGET_TYPE(oldparent), NULL, &nargs);
+	gtk_container_child_getv(oldparent, child, nargs, temparg);
 
 	/* Now we can remove the child */
 
@@ -110,13 +108,14 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 	/* SLICK...thanks Tim Janik! */
 
 	gtk_container_add(GTK_CONTAINER(oldparent), eb);
-	gtk_container_add(GTK_CONTAINER(eb), child);
+	gtk_widget_reparent(GTK_WIDGET(eb), child);
 	gtk_container_child_setv(GTK_CONTAINER(oldparent), eb, nargs, temparg);
 
 	gtk_widget_show(eb);
 	gtk_widget_show(child);
 
 	gtk_widget_unref(child); 
+	g_free (temparg);
 
 	/* Now fill the keys... */
 
@@ -126,21 +125,19 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 
 	if (menuinfo)
 		gnome_app_do_menu_creation(app, menubar, 0, menuinfo, uibdata);
+#endif /* GTK_HAVE_ACCEL_GROUP */
 }
 
 void
 gnome_app_create_popup_menus (GnomeApp *app, GtkWidget *child,
 			      GnomeUIInfo *menudata, gpointer *handler)
 {
+#if GTK_HAVE_ACCEL_GROUP
+
 	GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
 				      NULL, FALSE, NULL, NULL };
 
 	gnome_app_create_popup_menus_custom(app, child, menudata, handler,
 					    &uidata);
+#endif
 }
-#endif /* GTK_HAVE_ACCEL_GROUP */
-
-
-
-
-
