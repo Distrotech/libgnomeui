@@ -1315,7 +1315,7 @@ toggle_icon (GnomeIconList *ilist, int num, GdkEvent *event)
 		if ( selected_icon && (selected_icon->state == GTK_STATE_SELECTED) && (event->button.button == 1) )
 			gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[UNSELECT_ICON],
 					 num, event);
-		else
+		else if (event->button.button == 1)
 			gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[SELECT_ICON],
 					 num, event);
 
@@ -1332,8 +1332,9 @@ toggle_icon (GnomeIconList *ilist, int num, GdkEvent *event)
 			i++;
 		}
 
-		gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[SELECT_ICON],
-				 num, event);
+		if  (event->button.button == 1)
+		    gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[SELECT_ICON],
+				     num, event);
 
 		break;
 
