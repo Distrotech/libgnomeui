@@ -1,3 +1,7 @@
+Mon Oct 13 17:45:16 2003  Jonathan Blandford  <jrb@redhat.com>
+
+	* libgnomeui/gnome-dateedit.h: undeprecate.
+
 Mon Oct 13 17:32:40 2003  Jonathan Blandford  <jrb@redhat.com>
 
 	* libgnomeui/gnome-window.h: deprecated
