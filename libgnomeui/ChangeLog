@@ -1,3 +1,11 @@
+Sat Sep 01 17:41:16 2001  George Lebl <jirka@5z.com>
+
+	* gnome-dialog.[ch]: bring to strict 1.0 API level, dump clicked
+	  method and add grab_focus
+
+	* gnome-messagebox.[ch]: bring to strict 1.0 API leve, dump the
+	  public construct method
+
 2001-09-01  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-window.c, gnome-window.h:

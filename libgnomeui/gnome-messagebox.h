@@ -70,11 +70,6 @@ GtkWidget* gnome_message_box_newv       (const gchar           *message,
 					 const gchar           *messagebox_type,
 					 const gchar          **buttons);
 
-void       gnome_message_box_construct  (GnomeMessageBox       *messagebox,
-					 const gchar           *message,
-					 const gchar           *messagebox_type,
-					 const gchar 	      **buttons);
-
 G_END_DECLS
 
 #endif /* GNOME_DISABLE_DEPRECATED */
