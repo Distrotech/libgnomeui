@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
  * All rights reserved.
@@ -33,10 +33,12 @@
 #define GNOME_ENTRY_H
 
 
-#include <libgnomeui/gnome-component-widget.h>
+#include <glib.h>
+#include <gtk/gtkcombo.h>
+#include <libgnome/gnome-defs.h>
 
 
-G_BEGIN_DECLS
+BEGIN_GNOME_DECLS
 
 
 #define GNOME_TYPE_ENTRY            (gnome_entry_get_type ())
@@ -52,28 +54,46 @@ typedef struct _GnomeEntryPrivate GnomeEntryPrivate;
 typedef struct _GnomeEntryClass   GnomeEntryClass;
 
 struct _GnomeEntry {
-    GnomeComponentWidget widget;
+	GtkCombo combo;
 
-    /*< private >*/
-    GnomeEntryPrivate *_priv;
+	/*< private >*/
+	GnomeEntryPrivate *_priv;
 };
 
 struct _GnomeEntryClass {
-    GnomeComponentWidgetClass parent_class;
+	GtkComboClass parent_class;
 };
 
 
-GType        gnome_entry_get_type               (void) G_GNUC_CONST;
+guint        gnome_entry_get_type         (void) G_GNUC_CONST;
+GtkWidget   *gnome_entry_new              (const gchar *history_id);
 
-GtkWidget   *gnome_entry_new                    (void);
+/* for language bindings and subclassing, use gnome_entry_new */
+void         gnome_entry_construct        (GnomeEntry  *gentry, 
+                                           const gchar *history_id);
 
-GtkWidget   *gnome_file_entry_new               (void);
+GtkWidget   *gnome_entry_gtk_entry        (GnomeEntry  *gentry);
 
-gchar       *gnome_entry_get_text               (GnomeEntry         *gentry);
+const gchar *gnome_entry_get_history_id   (GnomeEntry  *gentry);
 
-void         gnome_entry_set_text               (GnomeEntry         *gentry,
-                                                 const gchar        *text);
+void         gnome_entry_set_history_id   (GnomeEntry  *gentry,
+					   const gchar *history_id);
+const gchar *gnome_entry_get_history_id   (GnomeEntry  *gentry);
 
-G_END_DECLS
+void         gnome_entry_set_max_saved    (GnomeEntry  *gentry,
+					   guint        max_saved);
+guint        gnome_entry_get_max_saved    (GnomeEntry  *gentry);
+
+void         gnome_entry_prepend_history  (GnomeEntry  *gentry,
+					   gboolean    save,
+					   const gchar *text);
+void         gnome_entry_append_history   (GnomeEntry  *gentry,
+					   gboolean     save,
+					   const gchar *text);
+void         gnome_entry_load_history     (GnomeEntry  *gentry);
+void         gnome_entry_save_history     (GnomeEntry  *gentry);
+void         gnome_entry_clear_history    (GnomeEntry  *gentry);
+
+END_GNOME_DECLS
 
 #endif

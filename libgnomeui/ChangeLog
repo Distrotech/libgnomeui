@@ -1,3 +1,21 @@
+2001-08-24  Anders Carlsson  <andersca@codefactory.se>
+
+	* gnome-entry.c: (gnome_entry_get_type), (gnome_entry_class_init),
+	(gnome_entry_get_property), (gnome_entry_set_property),
+	(entry_changed), (entry_activated), (gnome_entry_init),
+	(gnome_entry_construct), (gnome_entry_new), (free_item),
+	(free_items), (gnome_entry_destroy), (gnome_entry_finalize),
+	(gnome_entry_gtk_entry), (gnome_entry_set_history_id),
+	(gnome_entry_get_history_id), (gnome_entry_set_max_saved),
+	(gnome_entry_get_max_saved), (build_prefix),
+	(gnome_entry_add_history), (gnome_entry_prepend_history),
+	(gnome_entry_append_history), (set_combo_items),
+	(gnome_entry_load_history), (gnome_entry_clear_history),
+	(check_for_duplicates), (gnome_entry_save_history):
+	* gnome-entry.h:
+
+	Bring back the old GnomeEntry widget.
+	
 Fri Aug 24 07:57:50 2001  George Lebl <jirka@5z.com>
 
 	* gnome-color-picker.c, gnome-font-picker.c: use gnome-macros.h
