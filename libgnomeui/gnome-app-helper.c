@@ -498,6 +498,16 @@ install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
     }
 }
 
+
+/**
+ * gnome_app_install_statusbar_menu_hints
+ * @bar: Pointer to Gtk+ status bar object
+ * @uiinfo: Gnome UI info for the menu to be changed
+ *
+ * Description:
+ * Install menu hints for the given status bar.
+ */
+
 void 
 gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
                                         GnomeUIInfo* uiinfo)
@@ -594,6 +604,17 @@ install_menuitem_hint_to_appbar(GnomeUIInfo* uiinfo, GnomeAppBar* bar)
     }
 }
 
+
+/**
+ * gnome_app_ui_configure_configurable
+ * @uiinfo: Pointer to GNOME UI menu/toolbar info
+ * 
+ * Description:
+ * Configure all user-configurable elements in the given UI info 
+ * structure.  This includes loading and setting previously-set options from
+ * GNOME config files.
+ */
+
 void
 gnome_app_ui_configure_configurable (GnomeUIInfo* uiinfo)
 {
@@ -669,6 +690,16 @@ gnome_app_ui_configure_configurable (GnomeUIInfo* uiinfo)
   }
 }
 
+
+/**
+ * gnome_app_install_appbar_menu_hints
+ * @appbar: Pointer to GNOME app bar object.
+ * @uiinfo: GNOME UI info for menu
+ *
+ * Description:
+ * Install menu hints for the given GNOME app bar object.
+ */
+
 void
 gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
                                      GnomeUIInfo* uiinfo)
@@ -707,6 +738,16 @@ gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
 		++uiinfo;
 	}
 }
+
+
+/**
+ * gnome_app_install_menu_hints
+ * @app: Pointer to GNOME app object
+ * @uiinfo: GNOME UI menu for which hints will be set
+ *
+ * Description:
+ * Set menu hints for the GNOME app object's attached status bar.
+ */
 
 void
 gnome_app_install_menu_hints (GnomeApp *app,
