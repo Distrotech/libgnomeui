@@ -1,5 +1,8 @@
 1998-04-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-calculator.c (gnome_calculator_init): Added
+	internationalization. 
+
 	* gnome-app-helper.h (GNOMEUIINFO_ITEM_STOCK): New macro, this one
 	uses STOCK pixmaps.
 
