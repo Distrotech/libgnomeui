@@ -1,6 +1,11 @@
+Wed Aug 19 18:21:24 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gtk-socket.c: Don't process focus requests when we don't have 
+	have a plug.
+
 Wed Aug 19 13:33:31 EDT 1998 The Rasterman <raster@redhat.com>
 	* gnome-rootwin.c - removed lots of unecessary event mask entries for
-	the root window widget - mad it have dummy (do nothing) draw and
+	the root window widget - made it have dummy (do nothing) draw and
 	expose handlers. Now it works correctly with themes.
 
 1998-08-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>

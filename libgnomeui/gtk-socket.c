@@ -317,7 +317,7 @@ gtk_socket_focus_in_event (GtkWidget *widget, GdkEventFocus *event)
 
   DPRINTF (( "Got focus\n"));
 
-  if (socket->focus_in)
+  if (socket->focus_in && socket->plug_window)
     XSetInputFocus (GDK_DISPLAY (),
 		    GDK_WINDOW_XWINDOW (socket->plug_window),
 		    RevertToParent, GDK_CURRENT_TIME);
@@ -376,7 +376,7 @@ gtk_socket_focus (GtkContainer *container, GtkDirectionType direction)
   
   socket = GTK_SOCKET (container);
 
-  if (!socket->focus_in)
+  if (!socket->focus_in && socket->plug_window)
     {
       XEvent xevent;
 
