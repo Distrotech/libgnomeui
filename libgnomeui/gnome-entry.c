@@ -115,15 +115,12 @@ gnome_entry_init (GnomeEntry *gentry)
  * gnome_entry_new
  * @history_id: If not %NULL, the text id under which history data is stored
  *
- * Description:
- * Creates a new gnome-entry widget.  If  @history_id is
+ * Description: Creates a new GnomeEntry widget.  If  @history_id is
  * not %NULL, then the history list will be saved and restored between
  * uses under the given id.
  *
- * Returns:
- * Newly-created gnome-entry widget.
+ * Returns: Newly-created GnomeEntry widget.
  */
-
 GtkWidget *
 gnome_entry_new (const gchar *history_id)
 {
@@ -195,15 +192,12 @@ gnome_entry_destroy (GtkObject *object)
 
 /**
  * gnome_entry_gtk_entry
- * @gentry: Pointer to GNOME entry object.
+ * @gentry: Pointer to GnomeEntry object.
  *
- * Description:
- * Obtain pointer to GNOME entry's internal text entry widget.
+ * Description: Obtain pointer to GnomeEntry's internal text entry
  *
- * Returns:
- * Pointer to gtk-entry widget.
+ * Returns: Pointer to GtkEntry widget.
  */
-
 GtkWidget *
 gnome_entry_gtk_entry (GnomeEntry *gentry)
 {
@@ -216,15 +210,15 @@ gnome_entry_gtk_entry (GnomeEntry *gentry)
 
 /**
  * gnome_entry_set_history_id
- * @gentry: Pointer to GNOME entry object.
+ * @gentry: Pointer to GnomeEntry object.
  * @history_id: If not %NULL, the text id under which history data is stored
  *
- * Description:
- * Set or clear the history id of the GNOME entry widget.  If
+ * Description: Set or clear the history id of the GnomeEntry widget.  If
  * @history_id is %NULL, the widget's history id is cleared.  Otherwise,
  * the given id replaces the previous widget history id.
+ *
+ * Returns:
  */
-
 void
 gnome_entry_set_history_id (GnomeEntry *gentry, const gchar *history_id)
 {
@@ -240,16 +234,16 @@ gnome_entry_set_history_id (GnomeEntry *gentry, const gchar *history_id)
 
 /**
  * gnome_entry_set_max_saved
- * @gentry: Pointer to GNOME entry object.
+ * @gentry: Pointer to GnomeEntry object.
  * @max_saved: Maximum number of history items to save
  *
- * Description:
- * Set internal limit on number of history items saved to the config
- * file, when gnome_entry_save_history() is called.  Zero is an
- * acceptable value for @max_saved, but the same thing is accomplished
- * by setting the history id of @gentry to %NULL.
+ * Description: Set internal limit on number of history items saved
+ * to the config file, when #gnome_entry_save_history() is called.
+ * Zero is an acceptable value for @max_saved, but the same thing is
+ * accomplished by setting the history id of @gentry to %NULL.
+ *
+ * Returns:
  */
-
 void
 gnome_entry_set_max_saved (GnomeEntry *gentry, guint max_saved)
 {
@@ -316,16 +310,17 @@ gnome_entry_add_history (GnomeEntry *gentry, gboolean save,
 
 /**
  * gnome_entry_prepend_history
- * @gentry: Pointer to GNOME entry object.
+ * @gentry: Pointer to GnomeEntry object.
  * @save: If %TRUE, history entry will be saved to config file
+ * @text: Text to add
  *
- * Description:
- * Adds a history item of the given @text to the head of the history
- * list inside @gentry.
- * If @save is %TRUE, the history item will be saved in the config file
- * (assuming that @gentry's history id is not %NULL).
+ * Description: Adds a history item of the given @text to the head of
+ * the history list inside @gentry.  If @save is %TRUE, the history
+ * item will be saved in the config file (assuming that @gentry's
+ * history id is not %NULL).
+ *
+ * Returns:
  */
-
 void
 gnome_entry_prepend_history (GnomeEntry *gentry, gboolean save,
 			     const gchar *text)
@@ -336,16 +331,17 @@ gnome_entry_prepend_history (GnomeEntry *gentry, gboolean save,
 
 /**
  * gnome_entry_append_history
- * @gentry: Pointer to GNOME entry object.
+ * @gentry: Pointer to GnomeEntry object.
  * @save: If %TRUE, history entry will be saved to config file
+ * @text: Text to add
  *
- * Description:
- * Adds a history item of the given @text to the tail of the history
- * list inside @gentry.
- * If @save is %TRUE, the history item will be saved in the config file
- * (assuming that @gentry's history id is not %NULL).
+ * Description: Adds a history item of the given @text to the tail
+ * of the history list inside @gentry.  If @save is %TRUE, the
+ * history item will be saved in the config file (assuming that
+ * @gentry's history id is not %NULL).
+ *
+ * Returns:
  */
-
 void
 gnome_entry_append_history (GnomeEntry *gentry, gboolean save,
 			    const gchar *text)
@@ -400,13 +396,14 @@ set_combo_items (GnomeEntry *gentry)
 
 /**
  * gnome_entry_load_history
- * @gentry: Pointer to GNOME entry object.
+ * @gentry: Pointer to GnomeEntry object.
  *
- * Description:
- * Loads a stored history list from the GNOME config file, if one is
- * available.  If the history id of @gentry is %NULL, nothing occurs.
+ * Description: Loads a stored history list from the GNOME config file,
+ * if one is available.  If the history id of @gentry is %NULL,
+ * nothing occurs.
+ *
+ * Returns:
  */
-
 void
 gnome_entry_load_history (GnomeEntry *gentry)
 {
@@ -461,14 +458,15 @@ check_for_duplicates (struct item **final_items, gint n,
 
 
 /**
- * gnome_entry_load_history
- * @gentry: Pointer to GNOME entry object.
+ * gnome_entry_save_history
+ * @gentry: Pointer to GnomeEntry object.
  *
- * Description:
- * Loads a stored history list from the GNOME config file, if one is
- * available.  If the history id of @gentry is %NULL, nothing occurs.
+ * Description: Force the history items of the widget to be stored
+ * in a configuration file.  If the history id of @gentry is %NULL,
+ * nothing occurs.
+ *
+ * Returns:
  */
-
 void
 gnome_entry_save_history (GnomeEntry *gentry)
 {

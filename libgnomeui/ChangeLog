@@ -1,3 +1,11 @@
+Fri Jul 09 06:57:07 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.c: add inline docs
+
+	* gnome-entry.c: fixup inline docs
+
+	* gnome-icon-entry.c: fixup inline docs
+
 Wed Jul 07 07:42:23 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.c: correctly fix "leading zero/string of zeros"

@@ -681,12 +681,13 @@ gnome_icon_entry_gtk_entry (GnomeIconEntry *ientry)
 /**
  * gnome_icon_entry_set_pixmap_subdir:
  * @ientry: the GnomeIconEntry to work with
- * @subdir: sbudirectory
+ * @subdir: subdirectory
  *
  * Description: Sets the subdirectory below gnome's default
  * pixmap directory to use as the default path for the file
- * entry
+ * entry.
  *
+ * Returns:
  **/
 void
 gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
@@ -703,12 +704,14 @@ gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
 	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->fentry),p);
 	g_free(p);
 }
+
 /**
  * gnome_icon_entry_set_icon:
- * @filename: 
+ * @ientry: the GnomeIconEntry to work with
+ * @filename: a filename
  * 
  * Description: Sets the icon of GnomeIconEntry to be the one pointed to by
- * filename.
+ * @filename (in the current subdirectory).
  *
  * Returns:
  **/
@@ -728,13 +731,14 @@ gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
 }
 
 /**
- * gnome_icon_entry_get_filaname:
+ * gnome_icon_entry_get_filename:
  * @ientry: the GnomeIconEntry to work with
  *
  * Description: Gets the file name of the image if it was possible
- * to load it into the preview
+ * to load it into the preview. That is, it will only return a filename
+ * if the image exists and it was possible to load it as an image.
  *
- * Returns: a newly allocated string with the path or NULL if it
+ * Returns: a newly allocated string with the path or %NULL if it
  * couldn't load the file
  **/
 char *

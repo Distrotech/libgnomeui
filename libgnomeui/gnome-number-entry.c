@@ -85,6 +85,14 @@ calc_dialog_clicked (GtkWidget *widget, int button, gpointer data)
 	gtk_widget_destroy (widget);
 }
 
+/**
+ * gnome_number_entry_get_number:
+ * @nentry: The GnomeNumberEntry to work with
+ *
+ * Description: Get the current number from the entry
+ *
+ * Returns: Returns a double value
+ **/
 gdouble
 gnome_number_entry_get_number(GnomeNumberEntry *nentry)
 {
@@ -219,6 +227,15 @@ gnome_number_entry_finalize (GtkObject *object)
 	(* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
+/**
+ * gnome_number_entry_new:
+ * @history_id: the id given to #gnome_entry_new
+ * @calc_dialog_title: title of the calculator dialog
+ *
+ * Description: Creates a new number entry widget
+ *
+ * Returns: Returns the new object
+ **/
 GtkWidget *
 gnome_number_entry_new (char *history_id, char *calc_dialog_title)
 {
@@ -232,6 +249,14 @@ gnome_number_entry_new (char *history_id, char *calc_dialog_title)
 	return GTK_WIDGET (nentry);
 }
 
+/**
+ * gnome_number_entry_gnome_entry:
+ * @nentry: the GnomeNumberEntry to work with
+ *
+ * Description: Get the GnomeEntry widget that's part of the entry
+ *
+ * Returns: Returns GnomeEntry widget
+ **/
 GtkWidget *
 gnome_number_entry_gnome_entry (GnomeNumberEntry *nentry)
 {
@@ -241,6 +266,14 @@ gnome_number_entry_gnome_entry (GnomeNumberEntry *nentry)
 	return nentry->gentry;
 }
 
+/**
+ * gnome_number_entry_gtk_entry:
+ * @nentry: the GnomeNumberEntry to work with
+ *
+ * Description: Get the GtkEntry widget that's part of the entry
+ *
+ * Returns: Returns GtkEntry widget
+ **/
 GtkWidget *
 gnome_number_entry_gtk_entry (GnomeNumberEntry *nentry)
 {
@@ -250,6 +283,16 @@ gnome_number_entry_gtk_entry (GnomeNumberEntry *nentry)
 	return gnome_entry_gtk_entry (GNOME_ENTRY (nentry->gentry));
 }
 
+/**
+ * gnome_number_entry_set_title:
+ * @nentry: the GnomeNumberEntry to work with
+ * @calc_dialog_title: the title
+ *
+ * Description: Set the title of the calculator dialog to @calc_dialog_title,
+ * this will go into effect the next time the calculator button is pressed
+ *
+ * Returns:
+ **/
 void
 gnome_number_entry_set_title (GnomeNumberEntry *nentry, char *calc_dialog_title)
 {
