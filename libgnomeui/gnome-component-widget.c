@@ -337,7 +337,8 @@ gnome_selector_client_construct (GnomeSelectorClient *client, const gchar *monik
 
     client->_priv->pbag = bonobo_property_bag_new (NULL, NULL, NULL);
 
-    bonobo_property_bag_add_gtk_args (client->_priv->pbag, G_OBJECT (client));
+    if (G_OBJECT_TYPE (client) != GNOME_TYPE_SELECTOR_CLIENT)
+	bonobo_property_bag_add_gtk_args (client->_priv->pbag, G_OBJECT (client));
 
     new_moniker = create_moniker_string (client, moniker);
 
