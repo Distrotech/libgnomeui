@@ -1,3 +1,40 @@
+2002-02-01  Dave Camp  <dave@ximian.com>
+
+	* configure.in: Bump the version number to 1.110.1.
+
+	* libgnomeui/gnome-icon-item.c: Added editing support based on the
+	NautilusIconTextItem object in nautilus.
+	(draw_pixbuf_aa), (gnome_icon_text_item_render),
+	(iti_entry_activate), (iti_handle_arrow_key_event), 
+	(get_layout_index), (iti_selection_motion), 
+	(iti_entry_text_changed_by_clipboard),
+	(iti_start_selecting), (iti_stop_selecting),
+	(iti_ensure_focus), (send_focus_event),
+	(gnome_icon_text_item_get_editable): New functions.
+	(update_pango_layout): If editing, use the GtkEntry's text instead
+	of the item's text.
+	(gnome_icon_text_item_event), (iti_start_editing), 
+	(iti_stop_editing), (iti_edition_accept): Implemented.
+	(gnome_icon_text_item_draw): Draw the selection if text is selected,
+	and draw text with the text_gc instead of fg_gc.
+	(gnome_icon_text_item_class_init): Initialize the render member.
+	(gnome_icon_text_item_configure):  Stop editing here.
+	(gnome_icon_text_item_get_text): Return the text in the entry if
+	the item is editing.
+	(gnome_icon_text_item_start_editing): Call iti_ensure_focus instead
+	of gnome_canvas_item_grab_focus.
+	(recompute_bounding_box): Use gnome_canvas_item_i2w and
+	gnome_canvase_w3c_d to simplify the operation, and only ask for 
+	a bounding box big enough to display the text size.
+
+	* libgnomeui/gnome-icon-item.h: Added a create_entry virtual
+	function and removed one of the padding items, and added
+	gnome_icon_text_item_get_editable().
+	
+	* libgnomeui/gnome-icon-list.c: (selection_one_icon_event),
+	(selection_many_icon_event): Save the editing icon and
+	don't try to process events meant for the editing widget.
+
 2002-01-31  Federico Mena Quintero  <federico@ximian.com>
 
 	* libgnomeui/gnome-icon-list.c (real_move_cursor): Fixed

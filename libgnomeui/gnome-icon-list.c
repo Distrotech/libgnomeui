@@ -139,6 +139,8 @@ struct _GnomeIconListPrivate {
 	/* List of rows of icons */
 	GList *lines;
 
+	Icon *editing_icon;
+
 	/* Separators used to wrap the text below icons */
 	char *separators;
 
@@ -648,7 +650,7 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 				emit_select (gil, TRUE, idx, event);
 		}
 
-		retval = TRUE;
+		retval = TRUE;		
 		break;
 
 	case GDK_2BUTTON_PRESS:
@@ -659,6 +661,7 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 
 	case GDK_BUTTON_RELEASE:
 		if (priv->edit_pending) {
+			priv->editing_icon = icon;
 			gnome_icon_text_item_start_editing (text);
 			priv->edit_pending = FALSE;
 		}
@@ -830,6 +833,7 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 		}
 
 		if (priv->edit_pending) {
+			priv->editing_icon = icon;
 			gnome_icon_text_item_start_editing (text);
 			priv->edit_pending = FALSE;
 			retval = TRUE;
@@ -867,6 +871,17 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 	priv = gil->_priv;
 	idx = gil_icon_to_index (gil, icon);
 	on_text = item == GNOME_CANVAS_ITEM (icon->text);
+
+	/* Don't handle events meant for editing text items */
+	if (on_text && priv->is_editable
+	    && GNOME_ICON_TEXT_ITEM (item)->editing) {
+		return FALSE;
+	}
+
+	if (priv->editing_icon && event->type == GDK_BUTTON_PRESS) {
+		gnome_icon_text_item_stop_editing (priv->editing_icon->text, FALSE);
+		priv->editing_icon = FALSE;
+	}
 
 	switch (priv->selection_mode) {
 	case GTK_SELECTION_SINGLE:
