@@ -1,3 +1,8 @@
+1999-11-04  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-app-helper.c: Patch from Eric Gillespie,
+	Jr. (epg@pobox.com).  The About item should not have ellipsis.
+
 1999-11-03  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas.c (gnome_canvas_item_get_bounds): Fixed ordering of

@@ -214,7 +214,7 @@ static GnomeUIInfo menu_defaults[] = {
 	 * And the "Help" menu
 	 */
 	/* About */
-        { GNOME_APP_UI_ITEM, N_("_About..."),
+        { GNOME_APP_UI_ITEM, N_("_About"),
           N_("About this application"), NULL, NULL,
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
           0,  (GdkModifierType) 0, NULL },
