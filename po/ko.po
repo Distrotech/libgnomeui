@@ -5,117 +5,117 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.1\n"
-"POT-Creation-Date: 2002-04-09 19:44+0900\n"
-"PO-Revision-Date: 2002-04-09 19:47+0900\n"
-"Last-Translator: Changwoo Ryu <cwryu@adam.kaist.ac.kr>\n"
-"Language-Team: Korean <ko@li.org>\n"
+"POT-Creation-Date: 2002-04-22 12:30+0900\n"
+"PO-Revision-Date: 2002-04-22 12:33+0900\n"
+"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
+"Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:187
+#: libgnomeui/gnome-about.c:194
 msgid "Credits"
 msgstr "만든 사람"
 
-#: libgnomeui/gnome-about.c:210
-msgid "Written by"
-msgstr "개발한 사람"
+#: libgnomeui/gnome-about.c:222
+msgid "_Written by"
+msgstr "개발(_W)"
 
-#: libgnomeui/gnome-about.c:224
-msgid "Documented by"
-msgstr "문서를 작성한 사람"
+#: libgnomeui/gnome-about.c:237
+msgid "_Documented by"
+msgstr "문서화(_D)"
 
-#: libgnomeui/gnome-about.c:238
-msgid "Translated by"
-msgstr "번역한 사람"
+#: libgnomeui/gnome-about.c:252
+msgid "_Translated by"
+msgstr "번역(_T)"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:295
+#: libgnomeui/gnome-about.c:309
 msgid "_Credits"
 msgstr "만든 사람(_C)"
 
-#: libgnomeui/gnome-about.c:335
+#: libgnomeui/gnome-about.c:351
 msgid "Program name"
 msgstr "프로그램 이름"
 
-#: libgnomeui/gnome-about.c:336
+#: libgnomeui/gnome-about.c:352
 msgid "The name of the program"
 msgstr "이 프로그램의 이름"
 
-#: libgnomeui/gnome-about.c:343
+#: libgnomeui/gnome-about.c:359
 msgid "Program version"
 msgstr "프로그램 버전"
 
-#: libgnomeui/gnome-about.c:344
+#: libgnomeui/gnome-about.c:360
 msgid "The version of the program"
 msgstr "이 프로그램의 버전"
 
-#: libgnomeui/gnome-about.c:350
+#: libgnomeui/gnome-about.c:366
 msgid "Copyright string"
 msgstr "저작권 문자열"
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:367
 msgid "Copyright information for the program"
 msgstr "이 프로그램에 관한 저작권 정보"
 
-#: libgnomeui/gnome-about.c:358
+#: libgnomeui/gnome-about.c:374
 msgid "Comments string"
 msgstr "설명 문자열"
 
-#: libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:375
 msgid "Comments about the program"
 msgstr "이 프로그램에 관한 살명"
 
-#: libgnomeui/gnome-about.c:365
+#: libgnomeui/gnome-about.c:381
 msgid "Authors"
 msgstr "만든이"
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:382
 msgid "List of authors of the programs"
 msgstr "이 프로그램을 만든 사람들의 목록"
 
-#: libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:384
 msgid "Author entry"
 msgstr "만든이 항목"
 
-#: libgnomeui/gnome-about.c:369
+#: libgnomeui/gnome-about.c:385
 msgid "A single author entry"
 msgstr "만든이 한 사람 항목"
 
-#: libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:392
 msgid "Documenters"
 msgstr "문서 작성자"
 
-#: libgnomeui/gnome-about.c:377
+#: libgnomeui/gnome-about.c:393
 msgid "List of people documenting the program"
 msgstr "이 프로그램의 문서를 작성한 사람들의 목록"
 
-#: libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:395
 msgid "Documenter entry"
 msgstr "문서 작성자 항목"
 
-#: libgnomeui/gnome-about.c:380
+#: libgnomeui/gnome-about.c:396
 msgid "A single documenter entry"
 msgstr "이 프로그램의 문서를 작성한 한 사람 항목"
 
-#: libgnomeui/gnome-about.c:388
+#: libgnomeui/gnome-about.c:404
 msgid "Translator credits"
 msgstr "번역자 크레디트"
 
-#: libgnomeui/gnome-about.c:389
+#: libgnomeui/gnome-about.c:405
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "번역자의 크레디트. 이 문자열은 번역 가능하도록 표시해야 합니다"
 
-#: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "로고"
 
-#: libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:413
 msgid "A logo for the about box"
 msgstr "프로그램 정보 상자의 로고"
 
-#: libgnomeui/gnome-about.c:476
+#: libgnomeui/gnome-about.c:492
 #, c-format
 msgid "About %s"
 msgstr "%s 정보"
@@ -471,7 +471,7 @@ msgstr "들이기-취소"
 
 #: libgnomeui/gnome-stock-icons.c:143
 msgid "About"
-msgstr "이 프로그램은"
+msgstr "정보"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -742,11 +742,11 @@ msgstr "프로그램 설정하기"
 #. About
 #: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "이 프로그램은(_A)"
+msgstr "정보(_A)"
 
 #: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "이 프로그램에 대하여"
+msgstr "이 프로그램에 대한 정보"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "_Select All"
@@ -924,11 +924,11 @@ msgstr "GTK 엔트리"
 msgid "The GTK entry"
 msgstr "GTK 엔트리"
 
-#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
+#: libgnomeui/gnome-file-entry.c:194 libgnomeui/gnome-icon-entry.c:170
 msgid "History ID"
 msgstr "히스토리 ID"
 
-#: libgnomeui/gnome-file-entry.c:191
+#: libgnomeui/gnome-file-entry.c:195
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -936,19 +936,19 @@ msgstr ""
 "파일 엔트리의 유일하게 구별 가능한 ID.  이 ID는 히스토리를 저장하는 데 쓰입니"
 "다."
 
-#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
+#: libgnomeui/gnome-file-entry.c:203 libgnomeui/gnome-icon-entry.c:179
 msgid "Browse Dialog Title"
 msgstr "찾아보기 대화 상자 제목"
 
-#: libgnomeui/gnome-file-entry.c:200
+#: libgnomeui/gnome-file-entry.c:204
 msgid "Title for the Browse file dialog."
 msgstr "찾아보기 대화 상자의 제목"
 
-#: libgnomeui/gnome-file-entry.c:207
+#: libgnomeui/gnome-file-entry.c:211
 msgid "Directory Entry"
 msgstr "폴더 엔트리"
 
-#: libgnomeui/gnome-file-entry.c:208
+#: libgnomeui/gnome-file-entry.c:212
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -956,19 +956,19 @@ msgstr ""
 "파일 엔트리를 폴더 이름을 입력하는 데 사용할 지 아니면 파일이름을 입력하는 "
 "데 사용할 지."
 
-#: libgnomeui/gnome-file-entry.c:216
+#: libgnomeui/gnome-file-entry.c:220
 msgid "Modal"
 msgstr "모달"
 
-#: libgnomeui/gnome-file-entry.c:217
+#: libgnomeui/gnome-file-entry.c:221
 msgid "Whether the Browse file window should be modal."
 msgstr "찾아보기 파일 창이 모달인지 여부."
 
-#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-file-entry.c:228 libgnomeui/gnome-icon-entry.c:195
 msgid "Filename"
 msgstr "파일이름"
 
-#: libgnomeui/gnome-file-entry.c:225
+#: libgnomeui/gnome-file-entry.c:229
 msgid "Filename that should be displayed in the file entry."
 msgstr "파일이름 엔트리에 표시할 파일이름."
 
@@ -978,19 +978,19 @@ msgstr "파일이름 엔트리에 표시할 파일이름."
 # 시간이 남아돌면서 번역할 메세지가 이거밖에 없다면 몰라도, 쓸데없는 일에
 # 시간을 낭비하고 싶지는 않다.
 #
-#: libgnomeui/gnome-file-entry.c:233
+#: libgnomeui/gnome-file-entry.c:237
 msgid "Default Path"
 msgstr "기본 경로"
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:238
 msgid "Default path for the Browse file window."
 msgstr "찾아보기 파일 창의 기본 경로."
 
-#: libgnomeui/gnome-file-entry.c:241
+#: libgnomeui/gnome-file-entry.c:245
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:242
+#: libgnomeui/gnome-file-entry.c:246
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -999,11 +999,11 @@ msgstr ""
 "파일 엔트리가 파일이름의 입력에 사용하는 GnomeEntry.  이 등록 정보를 사용해 "
 "GnomeEntry를 얻어 내 그 매개 변수의 값을 알아보거나 변경할 수 있습니다."
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:256
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:257
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1012,11 +1012,11 @@ msgstr ""
 "파일 엔트리가 파일이름의 입력에 사용하는 GnomeEntry.  이 등록 정보를 사용해 "
 "GtkEntry를 얻어 내 그 매개 변수의 값을 알아보거나 변경할 수 있습니다."
 
-#: libgnomeui/gnome-file-entry.c:418
+#: libgnomeui/gnome-file-entry.c:489
 msgid "Select file"
 msgstr "파일 선택"
 
-#: libgnomeui/gnome-file-entry.c:592
+#: libgnomeui/gnome-file-entry.c:627
 msgid "_Browse..."
 msgstr "찾아보기(_B)..."
 
@@ -1123,7 +1123,7 @@ msgstr ""
 "%s에 대한 설정 정보를 읽어들이거나 저장하는 도중에 오류가 발생했습니다. 설정 "
 "사항의 일부가 올바르게 동작하지 않을 수 있습니다."
 
-#: libgnomeui/gnome-icon-entry.c:164
+#: libgnomeui/gnome-icon-entry.c:171
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1131,27 +1131,27 @@ msgstr ""
 "아이콘 엔트리의 유일하게 구별 가능한 ID.  이 ID는 히스토리를 저장하는 데 쓰입"
 "니다."
 
-#: libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-icon-entry.c:180
 msgid "Title for the Browse icon dialog."
 msgstr "찾아보기 아이콘 대화 상자의 제목."
 
-#: libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Pixmap Directory"
 msgstr "픽스맵 폴더"
 
-#: libgnomeui/gnome-icon-entry.c:181
+#: libgnomeui/gnome-icon-entry.c:188
 msgid "Directory that will be searched for icons."
 msgstr "아이콘을 찾을 폴더."
 
-#: libgnomeui/gnome-icon-entry.c:189
+#: libgnomeui/gnome-icon-entry.c:196
 msgid "Filename that should be displayed in the icon entry."
 msgstr "아이콘 엔트리에 표시해야 할 파일이름."
 
-#: libgnomeui/gnome-icon-entry.c:197
+#: libgnomeui/gnome-icon-entry.c:204
 msgid "Picker dialog"
 msgstr "선택 대화상자"
 
-#: libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-icon-entry.c:205
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1159,19 +1159,19 @@ msgstr ""
 "아이콘 선택 대화 상자.  이 등록 정보를 사용해 GtkDialog를 얻어 내 그 파라미터"
 "의 값을 알아보거나 변경할 수 있습니다."
 
-#: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
+#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:927
 msgid "No Icon"
 msgstr "아이콘 없음"
 
-#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:522 libgnomeui/gnome-pixmap-entry.c:387
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "hbox를 찾을 수 없음, 보통 파일 선택을 사용함"
 
-#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:528 libgnomeui/gnome-pixmap-entry.c:393
 msgid "Preview"
 msgstr "미리 보기"
 
-#: libgnomeui/gnome-icon-entry.c:930
+#: libgnomeui/gnome-icon-entry.c:949
 msgid "Browse"
 msgstr "찾아보기"
 
