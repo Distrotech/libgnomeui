@@ -1,3 +1,21 @@
+1999-07-05 Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>
+	
+	* gnome-icon-text.h:
+	* gnome-icon-item.c (iti_paint_text):
+	* gnome-icon-item.c (iti_idx_from_x_y):
+	* gnome-icon-text.c (free_row):
+	* gnome-icon-text.c (gnome_icon_layout_text):
+	* gnome-icon-text.c (gnome_icon_paint_text): Use wide characters
+	internally so that we handle character boundaries correctly for
+	multi-byte strings.
+
+	* gnome-icon-item.c (iti_idx_from_x_y): Avoid SIGSEGV when
+	icon text is empty.
+
+	* gnome-icon-item.c (gnome_icon_text_item_configure): Use
+	get_default_font() if fontname is NULL. This fixes the problem
+	that gmc consumes memory.
+
 Mon Jul  5 23:48:30 1999  Tim Janik  <timj@gtk.org>
 
         * gnome-canvas-image.c (recalc_if_needed): only adjust image->pixmap

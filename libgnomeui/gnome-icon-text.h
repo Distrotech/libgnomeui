@@ -8,6 +8,8 @@ BEGIN_GNOME_DECLS
 typedef struct {
 	char *text;
 	int width;
+	GdkWChar *text_wc;	/* text in wide characters */
+	int text_length;	/* number of characters */
 } GnomeIconTextInfoRow;
 
 typedef struct {

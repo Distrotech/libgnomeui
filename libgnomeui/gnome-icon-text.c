@@ -18,6 +18,7 @@ free_row (gpointer data, gpointer user_data)
 	if (data) {
 		row = data;
 		g_free (row->text);
+		g_free (row->text_wc);
 		g_free (row);
 	}
 }
@@ -63,11 +64,12 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 {
 	GnomeIconTextInfo *ti;
 	GnomeIconTextInfoRow *row;
-	char *row_end;
-	char *s, *word_start, *word_end, *old_word_end;
-	char *sub_text;
-	int sub_len;
+	GdkWChar *row_end;
+	GdkWChar *s, *word_start, *word_end, *old_word_end;
+	GdkWChar *sub_text;
 	int i, w_len, w;
+	GdkWChar *text_wc, *text_iter, *separators_wc;
+	int text_len_wc, separators_len_wc;
 
 	g_return_val_if_fail (font != NULL, NULL);
 	g_return_val_if_fail (text != NULL, NULL);
@@ -75,6 +77,16 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 	if (!separators)
 		separators = " ";
 
+	text_wc = g_new (GdkWChar, strlen (text) + 1);
+	text_len_wc = gdk_mbstowcs (text_wc, text, strlen (text));
+	if (text_len_wc < 0) text_len_wc = 0;
+	text_wc[text_len_wc] = 0;
+
+	separators_wc = g_new (GdkWChar, strlen (separators) + 1);
+	separators_len_wc = gdk_mbstowcs (separators_wc, separators, strlen (separators));
+	if (separators_len_wc < 0) separators_len_wc = 0;
+	separators_wc[separators_len_wc] = 0;
+	
 	ti = g_new (GnomeIconTextInfo, 1);
 
 	ti->rows = NULL;
@@ -85,25 +97,30 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 
 	word_end = NULL;
 
-	while (*text) {
-		row_end = strchr (text, '\n');
-		if (!row_end)
-			row_end = strchr (text, '\0');
+	text_iter = text_wc;
+	while (*text_iter) {
+		for (row_end = text_iter; *row_end != 0 && *row_end != '\n'; row_end++);
 
 		/* Accumulate words from this row until they don't fit in the max_width */
 
-		s = text;
+		s = text_iter;
 
 		while (s < row_end) {
 			word_start = s;
 			old_word_end = word_end;
-			word_end = word_start + strcspn (word_start, separators) + 1;
+			for (word_end = word_start; *word_end; word_end++) {
+				GdkWChar *p;
+				for (p = separators_wc; *p; p++) {
+					if (*word_end == *p)
+						goto found;
+				}
+			}
+		  found:
+			if (word_end < row_end)
+				word_end++;
 
-			if (word_end > row_end)
-				word_end = row_end;
-
-			if (gdk_text_width (font, text, word_end - text) > max_width) {
-				if (word_start == text) {
+			if (gdk_text_width_wc (font, text_iter, word_end - text_iter) > max_width) {
+				if (word_start == text_iter) {
 					if (confine) {
 						/* We must force-split the word.  Look for a proper
                                                  * place to do it.
@@ -112,7 +129,7 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 						w_len = word_end - word_start;
 
 						for (i = 1; i < w_len; i++) {
-							w = gdk_text_width (font, word_start, i);
+							w = gdk_text_width_wc (font, word_start, i);
 							if (w > max_width) {
 								if (i == 1)
 									/* Shit, not even a single character fits */
@@ -124,13 +141,17 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 
 						/* Create sub-row with the chars that fit */
 
-						sub_text = g_malloc (i * sizeof (char));
-						memcpy (sub_text, word_start, (i - 1) * sizeof (char));
+						sub_text = g_new (GdkWChar, i);
+						memcpy (sub_text, word_start, (i - 1) * sizeof (GdkWChar));
 						sub_text[i - 1] = 0;
-
+						
 						row = g_new (GnomeIconTextInfoRow, 1);
-						row->text = sub_text;
-						row->width = gdk_string_width (font, sub_text);
+						row->text_wc = sub_text;
+						row->text_length = i - 1;
+						row->width = gdk_text_width_wc (font, sub_text, i - 1);
+						row->text = gdk_wcstombs(sub_text);
+						if (row->text == NULL)
+							row->text = g_strdup("");
 
 						ti->rows = g_list_append (ti->rows, row);
 
@@ -141,12 +162,12 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 
 						/* Bump the text pointer */
 
-						text += i - 1;
-						s = text;
+						text_iter += i - 1;
+						s = text_iter;
 
 						continue;
 					} else
-						max_width = gdk_text_width (font, word_start, word_end - word_start);
+						max_width = gdk_text_width_wc (font, word_start, word_end - word_start);
 
 					continue; /* Retry split */
 				} else {
@@ -160,7 +181,7 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 
 		/* Append row */
 
-		if (text == row_end) {
+		if (text_iter == row_end) {
 			/* We are on a newline, so append an empty row */
 
 			ti->rows = g_list_append (ti->rows, NULL);
@@ -168,19 +189,24 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 
 			/* Next! */
 
-			text = row_end + 1;
+			text_iter = row_end + 1;
 		} else {
 			/* Create subrow and append it to the list */
 
-			sub_len = word_end - text;
+			int sub_len;
+			sub_len = word_end - text_iter;
 
-			sub_text = g_malloc ((sub_len + 1) * sizeof (char));
-			memcpy (sub_text, text, sub_len * sizeof (char));
+			sub_text = g_new (GdkWChar, sub_len + 1);
+			memcpy (sub_text, text_iter, sub_len * sizeof (GdkWChar));
 			sub_text[sub_len] = 0;
 
 			row = g_new (GnomeIconTextInfoRow, 1);
-			row->text = sub_text;
-			row->width = gdk_string_width (font, sub_text);
+			row->text_wc = sub_text;
+			row->text_length = sub_len;
+			row->width = gdk_text_width_wc (font, sub_text, sub_len);
+			row->text = gdk_wcstombs(sub_text);
+			if (row->text == NULL)
+				row->text = g_strdup("");
 
 			ti->rows = g_list_append (ti->rows, row);
 
@@ -191,10 +217,12 @@ gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_wid
 
 			/* Next! */
 
-			text = word_end;
+			text_iter = word_end;
 		}
 	}
 
+	g_free (text_wc);
+	g_free (separators_wc);
 	return ti;
 }
 
@@ -249,7 +277,7 @@ gnome_icon_paint_text (GnomeIconTextInfo *ti, GdkDrawable *drawable, GdkGC *gc,
 				xpos = 0;
 			}
 
-			gdk_draw_string (drawable, ti->font, gc, x + xpos, y, row->text);
+			gdk_draw_text_wc (drawable, ti->font, gc, x + xpos, y, row->text_wc, row->text_length);
 
 			y += ti->baseline_skip;
 		} else

@@ -384,8 +384,9 @@ iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y)
 	sgc = style->fg_gc [GTK_STATE_SELECTED];
 	bsgc = style->bg_gc [GTK_STATE_SELECTED];
 
-        for (item = ti->rows; item; item = item->next, len += (row ? strlen (row->text) : 0)) {
-		char *text;
+        for (item = ti->rows; item; item = item->next, len += (row ? row->text_length : 0)) {
+		GdkWChar *text_wc;
+		int text_length;
 		int cursor, offset, i;
 		int sel_start, sel_end;
 
@@ -396,7 +397,8 @@ iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y)
 			continue;
 		}
 
-		text = row->text;
+		text_wc = row->text_wc;
+		text_length = row->text_length;
 
 		xpos = (ti->width - row->width) / 2;
 
@@ -405,10 +407,10 @@ iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y)
 		offset = 0;
 		cursor = GTK_EDITABLE (priv->entry)->current_pos - len;
 
-		for (i = 0; *text; text++, i++) {
+		for (i = 0; *text_wc; text_wc++, i++) {
 			int size, px;
 
-			size = gdk_text_width (ti->font, text, 1);
+			size = gdk_text_width_wc (ti->font, text_wc, 1);
 
 			if (i >= sel_start && i < sel_end) {
 				fg_gc = sgc;
@@ -426,11 +428,11 @@ iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y)
 					    y - ti->font->ascent,
 					    size, ti->baseline_skip);
 
-			gdk_draw_text (drawable,
-				       ti->font,
-				       fg_gc,
-				       px, y,
-				       text, 1);
+			gdk_draw_text_wc (drawable,
+					  ti->font,
+					  fg_gc,
+					  px, y,
+					  text_wc, 1);
 
 			if (cursor == i)
 				gdk_draw_line (drawable,
@@ -545,6 +547,9 @@ iti_idx_from_x_y (Iti *iti, int x, int y)
 
 	priv = iti->priv;
 
+	if (iti->ti->rows == NULL)
+		return 0;
+
 	lines = g_list_length (iti->ti->rows);
 	line = y / iti->ti->baseline_skip;
 
@@ -556,7 +561,7 @@ iti_idx_from_x_y (Iti *iti, int x, int y)
 	/* Compute the base index for this line */
 	for (l = iti->ti->rows, idx = i = 0; i < line; l = l->next, i++) {
 		row = l->data;
-		idx += strlen (row->text);
+		idx += row->text_length;
 	}
 
 	row = g_list_nth (iti->ti->rows, line)->data;
@@ -571,13 +576,13 @@ iti_idx_from_x_y (Iti *iti, int x, int y)
 		if (x < first_char) {
 			/* nothing */
 		} else if (x > last_char) {
-			col = strlen (row->text);
+			col = row->text_length;
 		} else {
-			char *s = row->text;
+			GdkWChar *s = row->text_wc;
 			int pos = first_char;
 
 			while (pos < last_char) {
-				pos += gdk_text_width (iti->ti->font, s, 1);
+				pos += gdk_text_width_wc (iti->ti->font, s, 1);
 				if (pos > x)
 					break;
 				col++;
@@ -929,9 +934,6 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 
 	priv = iti->priv;
 
-	if (!fontname)
-		fontname = DEFAULT_FONT_NAME;
-
 	iti->x = x;
 	iti->y = y;
 	iti->width = width;
@@ -951,7 +953,7 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 	if (iti->fontname)
 		g_free (iti->fontname);
 
-	iti->fontname = g_strdup (fontname);
+	iti->fontname = g_strdup (fontname ? fontname : DEFAULT_FONT_NAME);
 
 	/* FIXME: We update the font and layout here instead of in the
 	 * ::update() method because the stupid icon list makes use of iti->ti
@@ -962,7 +964,9 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 	if (priv->font)
 		gdk_font_unref (priv->font);
 
-	priv->font = gdk_fontset_load (iti->fontname);
+	priv->font = NULL;
+	if (fontname)
+		priv->font = gdk_fontset_load (iti->fontname);
 	if (!priv->font)
 		priv->font = get_default_font ();
 
