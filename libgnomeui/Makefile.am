@@ -213,6 +213,9 @@ $(srcdir)/gnome-marshal.c: @REBUILD@ Makefile.am gnome-marshal.list
 
 gnome-marshal-main.c: $(srcdir)/gnome-marshal.c $(srcdir)/gnome-marshal.h
 
+BUILT_SOURCES =					\
+	gnome-marshal-main.c
+
 EXTRA_DIST =					\
 	AUTHORS					\
 	gnome-marshal.list			\

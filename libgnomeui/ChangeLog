@@ -1,3 +1,7 @@
+2001-12-11  Ettore Perazzoli  <ettore@ximian.com>
+
+	* Makefile.am: Add `gnome-marshal-main.c' to `BUILT_SOURCES'.
+
 2001-12-11  jacob berkman  <jacob@ximian.com>
 
 	* gnome-mdi.c (gnome_mdi_class_init): use our private marshaller,
