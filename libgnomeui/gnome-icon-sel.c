@@ -300,7 +300,7 @@ gnome_icon_selection_add_directory (GnomeIconSelection * gis,
     mimetype = gnome_vfs_mime_type_from_name(de->d_name);
     if (mimetype != NULL &&
 	strncmp(mimetype, "image", strlen("image")) == 0 ) {
-      gchar * full_path = g_concat_dir_and_file(dir, de->d_name);
+      gchar * full_path = g_build_filename (dir, de->d_name, NULL);
 #ifdef GNOME_ENABLE_DEBUG
       g_print("Full path: %s\n", full_path);
 #endif

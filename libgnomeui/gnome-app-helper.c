@@ -938,8 +938,9 @@ gnome_save_accels (gpointer data)
 {
 	gchar *file_name;
 
-	file_name = g_concat_dir_and_file (gnome_user_accels_dir_get (),
-					   gnome_program_get_app_id (gnome_program_get()));
+	file_name = g_build_filename (gnome_user_accels_dir_get (),
+				      gnome_program_get_app_id (gnome_program_get()),
+				      NULL);
 	gtk_item_factory_dump_rc (file_name, NULL, TRUE);
 	g_free (file_name);
 
@@ -1163,7 +1164,6 @@ static char *
 quote_string (const char *string)
 {
 	GString *new_string = g_string_new ("'");
-	char *ret;
 	int i;
 
 	for (i = 0; string[i] != '\0'; i++) {
@@ -1175,9 +1175,7 @@ quote_string (const char *string)
 	}
 	g_string_append_c (new_string, '\'');
 
-	ret = new_string->str;
-	g_string_free (new_string, FALSE);
-	return ret;
+	return g_string_free (new_string, FALSE);
 }
 
 static char *

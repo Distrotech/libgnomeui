@@ -343,7 +343,7 @@ browse_clicked(GnomeFileEntry *fentry)
 					 ! fentry->_priv->directory_entry);
 		p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
 		if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
-			char *dp = g_concat_dir_and_file (fentry->default_path, p);
+			char *dp = g_build_filename (fentry->default_path, p, NULL);
 			gtk_file_selection_set_filename (fs, dp);
 			g_free(dp);
 		} else {
@@ -395,7 +395,7 @@ browse_clicked(GnomeFileEntry *fentry)
 
 	p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
 	if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
-		char *dp = g_concat_dir_and_file (fentry->default_path, p);
+		char *dp = g_build_filename (fentry->default_path, p, NULL);
 		gtk_file_selection_set_filename (fs, dp);
 		g_free(dp);
 	} else {
@@ -788,7 +788,7 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 		p = tilde_expand (t);
 		g_free (t);
 	} else if (fentry->default_path) {
-		p = g_concat_dir_and_file (fentry->default_path, t);
+		p = g_build_filename (fentry->default_path, t, NULL);
 		g_free (t);
 		if (*p == '~') {
 			t = p;
@@ -798,7 +798,7 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 	} else {
 		gchar *cwd = g_get_current_dir ();
 
-		p = g_concat_dir_and_file (cwd, t);
+		p = g_build_filename (cwd, t, NULL);
 		g_free (cwd);
 		g_free (t);
 	}

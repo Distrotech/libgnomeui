@@ -1,3 +1,12 @@
+Tue Sep 18 20:44:26 2001  George Lebl <jirka@5z.com>
+
+	* gnome-app-helper.c, gnome-file-entry.c, gnome-icon-sel.c: use
+	  g_build_filename instead of g_concat_dir_and_file
+
+	* gnome-app-helper.c, gnome-font-picker.c: g_string_free now has
+	  a nice return value, where so we can avoid a temporary and have
+	  nicer code
+
 Tue Sep 18 17:40:59 2001  George Lebl <jirka@5z.com>
 
 	* Makefile.am, gnome-gconf-ui.[ch], gnome-app-helper.c,

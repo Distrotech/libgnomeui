@@ -923,7 +923,6 @@ static char *
 gnome_font_picker_font_extract_attr (const gchar *font_name, gint i)
 {
 	const char *pTmp;
-	char *cstr;
 	GString *str = g_string_new (NULL);
 
 	/* Search paramether */
@@ -940,9 +939,7 @@ gnome_font_picker_font_extract_attr (const gchar *font_name, gint i)
 		g_string_assign (str, _("Unknown"));
 	}
 
-	cstr = str->str;
-	g_string_free (str, FALSE);
-	return cstr;
+	return g_string_free (str, FALSE);
 } /* gnome_font_picker_font_extract_attr */
 
 static void gnome_font_picker_font_set_attr(gchar **font_name,
