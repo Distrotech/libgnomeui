@@ -105,8 +105,8 @@ static GnomeModuleRequirement gtk_requirements [] = {
 
 GnomeModuleInfo gtk_module_info = {
 	"gtk", GTK_VERSION, "GTK+",
-	gtk_requirements,
-	gtk_pre_args_parse, gtk_post_args_parse, NULL,
+	gtk_requirements, NULL,
+	gtk_pre_args_parse, gtk_post_args_parse, gtk_options,
 	NULL,
 	NULL, NULL, NULL
 };
