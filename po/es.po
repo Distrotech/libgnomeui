@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
-"PO-Revision-Date: 2004-03-06 20:13+0100\n"
+"POT-Creation-Date: 2004-05-13 20:37+0200\n"
+"PO-Revision-Date: 2004-05-13 20:38+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -147,6 +147,7 @@ msgstr "Acerca de %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Archivo"
 
@@ -204,6 +205,7 @@ msgid "_Game"
 msgstr "_Juego"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_yuda"
 
@@ -394,11 +396,11 @@ msgstr "Configura la aplicación"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "A_cerca de"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
@@ -425,7 +427,7 @@ msgstr "Crear una ventana nueva"
 msgid "_Close This Window"
 msgstr "_Cerrar esta ventana"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Cierra la ventana actual"
 
@@ -505,25 +507,25 @@ msgstr "_Índice"
 msgid "View help for this application"
 msgstr "Ver la ayuda para esta aplicación"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Texto bajo iconos"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Texto prioritario al lado de iconos"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Sólo iconos"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Sólo texto"
 
-#: libgnomeui/gnome-app-helper.c:2631
+#: libgnomeui/gnome-app-helper.c:2634
 #, c-format
-msgid "Use desktop default (%s)"
+msgid "Use Desktop Default (%s)"
 msgstr "Usar lo preestablecido en el escritorio (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -620,16 +622,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Su contraseña se transmitirá cifrada."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Se necesita autentificación"
 
 #: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
-msgid " domain %s"
-msgstr " dominio %s"
+msgid "You must log in to access %s domain %s\n"
+msgstr "Debe iniciar sesión para acceder a %s en el dominio %s.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Debe iniciar sesión para acceder a %s.\n"
@@ -1078,39 +1080,39 @@ msgstr ""
 "configuración para %s. Puede que algunas de las opciones de configuración no "
 "funcionen."
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "La URL que activa GnomeHRef"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Texto"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "El texto del botón"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "Acabar con el hambre mundial"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Color del enlace"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "Color usado para dibujar el enlace"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Este botón le llevará a la URI que muestra."
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1415,8 +1417,12 @@ msgstr "_Informar a los desarrolladores"
 msgid "_Debug"
 msgstr "_Depurar"
 
-#~ msgid "Exit the test"
-#~ msgstr "Salir del test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Salir del test"
+
+#~ msgid " domain %s"
+#~ msgstr " dominio %s"
 
 #~ msgid "Color Selector"
 #~ msgstr "Selector de color"
