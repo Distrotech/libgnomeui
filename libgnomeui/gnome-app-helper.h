@@ -240,14 +240,14 @@ typedef struct {
         { GNOME_APP_UI_ITEM, N_("_Print"), N_("Print the current file"),    \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT,                   \
-          0,  (GdkModifierType) 0, NULL }
+          GNOME_KEY_NAME_PRINT,  GNOME_KEY_NAME_PRINT_SETUP, NULL }
 
 #define GNOMEUIINFO_MENU_PRINT_SETUP_ITEM(cb, data)                         \
         { GNOME_APP_UI_ITEM, N_("Print S_etup..."),                         \
           N_("Setup the page settings for your current printer"),           \
           cb, (gpointer)(data),                                             \
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT,             \
-          0,  (GdkModifierType) 0, NULL }
+          GNOME_KEY_NAME_PRINT_SETUP,  GNOME_KEY_MOD_PRINT_SETUP, NULL }
 
 #define GNOMEUIINFO_MENU_PREFERENCES_ITEM(cb, data)                         \
         { GNOME_APP_UI_ITEM, N_("Preferences..."),                          \

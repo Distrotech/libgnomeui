@@ -1,5 +1,14 @@
 1999-01-06  Nat Friedman  <nat@nat.org>
 
+	* gnome-uidefs.h
+ 	(GNOME_KEY_NAME_PRINT), (GNOME_KEY_MOD_PRINT_SETUP): Added
+ 	standard hotkeys for printing.
+
+	* gnome-app-helper.h (GNOMEUIINFO_MENU_PRINT_ITEM),
+	(GNOMEUIINFO_MENU_PRINT_SETUP_ITEM): Use the new standard hotkeys.
+
+1999-01-06  Nat Friedman  <nat@nat.org>
+
 	* gnome-app-helper.h (GNOMEUIINFO_MENU_NEW_ITEM): Add another
  	parameter for the menu item description.
 	(GNOMEUIINFO_MENU_UNDO_ITEM): Removed an extra parameter.
