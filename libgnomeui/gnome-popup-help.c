@@ -408,6 +408,9 @@ gnome_widget_add_help_with_uidata (GtkWidget *widget,
 
         g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (widget));
+	g_return_if_fail (GTK_IS_WIDGET (widget));
+        g_return_if_fail (!GTK_WIDGET_NO_WINDOW (widget));
+  
 
         /* set up the menu type */
         if (help != NULL) {

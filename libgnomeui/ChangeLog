@@ -1,3 +1,8 @@
+1998-10-29    <jrb@redhat.com>
+
+	* gnome-popup-help.c (gnome_widget_add_help_with_uidata): added some more
+	sanity checking.
+
 1998-10-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-popup-menu.c (gnome_popup_menu_attach): Use
