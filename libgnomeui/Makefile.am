@@ -64,7 +64,9 @@ unused_SOURCES = \
 	gnome-pouch.h			\
 	gnome-roo.h			\
 	gnome-helpsys.h			\
-	gnome-textfu.h
+	gnome-textfu.h			\
+	gnome-icon-selector.c		\
+	gnome-ditem-edit.c
 
 libgnomeui_2_la_SOURCES = \
 	gnome-stock-icons.c		\
@@ -75,7 +77,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-color-picker.c		\
 	gnome-cursors.c			\
 	gnome-dateedit.c		\
-	gnome-ditem-edit.c		\
 	gnome-druid.c			\
 	gnome-druid-page.c		\
 	gnome-druid-page-edge.c		\
@@ -83,12 +84,12 @@ libgnomeui_2_la_SOURCES = \
 	gnome-geometry.c		\
 	gnome-selector-client.c		\
 	gnome-entry.c			\
-	gnome-icon-selector.c		\
-	gnome-file-selector.c		\
+	gnome-file-entry.c		\
+	gnome-image-entry.c		\
+	gnome-image-entry-component.c	\
         gnome-font-picker.c		\
 	gnome-href.c			\
 	gnome-ice.c			\
-	gnome-icon-entry.c		\
 	gnome-init.c			\
 	gnome-less.c			\
 	gnome-pixmap.c			\
@@ -121,13 +122,14 @@ gnome_headers = \
 	gnome-druid-page-edge.h		\
 	gnome-druid-page-standard.h	\
 	gnome-entry.h			\
-	gnome-file-selector.h		\
+	gnome-file-entry.h		\
+	gnome-image-entry.h		\
+	gnome-image-entry-component.h	\
         gnome-font-picker.h		\
 	gnome-gconf.h			\
 	gnome-geometry.h		\
 	gnome-href.h			\
 	gnome-ice.h			\
-	gnome-icon-entry.h		\
 	gnome-icon-item.h		\
 	gnome-icon-list.h		\
 	gnome-icon-selector.h		\
@@ -137,7 +139,6 @@ gnome_headers = \
 	gnome-macros.h			\
         gnome-paper-selector.h		\
 	gnome-pixmap.h			\
-	gnome-selector.h		\
 	gnome-stock-icons.h		\
 	gnome-types.h			\
 	gnome-uidefs.h			\

@@ -42,6 +42,8 @@
 #include <libgnomeui/gnome-color-picker.h>
 #include <libgnomeui/gnome-cursors.h>
 #include <libgnomeui/gnome-entry.h>
+#include <libgnomeui/gnome-file-entry.h>
+#include <libgnomeui/gnome-image-entry.h>
 #include <libgnomeui/gnome-font-picker.h>
 #include <libgnomeui/gnome-gconf.h>
 #include <libgnomeui/gnome-geometry.h>
@@ -49,7 +51,6 @@
 #include <libgnomeui/gnome-icon-list.h>
 #include <libgnomeui/gnome-icon-item.h>
 #include <libgnomeui/gnome-icon-selector.h>
-#include <libgnomeui/gnome-icon-entry.h>
 #include <libgnomeui/gnome-canvas-init.h>
 #include <libgnomeui/gnome-init.h>
 #include <libgnomeui/gnome-less.h>
