@@ -333,9 +333,10 @@ gnome_canvas_text_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	case ARG_FILL_COLOR_GDK:
-		color = GTK_VALUE_BOXED (*arg);
+		color = g_new (GdkColor, 1);
 		color->pixel = text->pixel;
 		gdk_color_context_query_color (text->item.canvas->cc, color);
+		GTK_VALUE_BOXED (*arg) = color;
 		break;
 
 	default:

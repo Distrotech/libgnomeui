@@ -402,9 +402,10 @@ gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	case ARG_FILL_COLOR_GDK:
-		color = GTK_VALUE_BOXED (*arg);
+		color = g_new (GdkColor, 1);
 		color->pixel = line->pixel;
 		gdk_color_context_query_color (line->item.canvas->cc, color);
+		GTK_VALUE_BOXED (*arg) = color;
 		break;
 
 	case ARG_CAP_STYLE:

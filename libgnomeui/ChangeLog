@@ -1,3 +1,10 @@
+1998-08-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-line.c (gnome_canvas_line_get_arg):
+	* gnome-canvas-text.c (gnome_canvas_text_get_arg):
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_get_arg): Return a
+	malloc()ed color for the color arguments.
+
 Tue Aug 18 06:41:47 1998  Tim Janik  <timj@gtk.org>
 
 	* gnome-init.c (our_gtk_options): added --gtk-module, and a few
