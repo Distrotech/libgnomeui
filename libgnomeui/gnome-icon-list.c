@@ -44,8 +44,8 @@
 #include <gtk/gtk.h>
 #include "gnome-icon-list.h"
 #include "gnome-icon-item.h"
-#include "gnome-canvas-pixbuf.h"
-#include "gnome-canvas-rect-ellipse.h"
+#include <libgnomecanvas/gnome-canvas-pixbuf.h>
+#include <libgnomecanvas/gnome-canvas-rect-ellipse.h>
 
 #include "libgnomeuiP.h"
 

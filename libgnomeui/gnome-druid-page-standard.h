@@ -24,7 +24,7 @@
 #define __GNOME_DRUID_PAGE_STANDARD_H__
 
 #include <gtk/gtk.h>
-#include "gnome-canvas.h"
+#include <libgnomecanvas/gnome-canvas.h>
 #include "gnome-druid-page.h"
 
 BEGIN_GNOME_DECLS
