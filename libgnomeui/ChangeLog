@@ -1,3 +1,26 @@
+1999-01-19  Felix Bellaby <felix@pooh.u-net.com>
+
+	* gnome-client.c (save_yourself_callback): Handle SM spec 7.2
+	messages specially to cover bug in xsm and speed start up.
+	Release active grabs to avoid deadlocks on widget grab.
+	(master_client_[dis]connect): use new functions in gdk.
+	(gnome_client_init): initialise ice using gnome-ice.c code.
+	(gnome_client_connect): pass client as ICE context so gnome-ice.c 
+	can handle io error disconnections.
+	(gnome_process_ice_messages): replaced by code in gnome-ice.c.
+	(gnome_client_request_interaction_internal): append keys so that
+	the interact requests are handled in FIFO order.
+
+	* gnome-client.h (GnomeClientState): state for SM spec 7.2 SaveYourself
+	
+	* gnome-ice.c (process_ice_messages): close the ice connection
+	and disconnect the GnomeClient following an io error.
+	(new_ice_connection): use watch_data to reference the gdk_input_id.
+	(gnome_ice_io_error_handler): replaces the default ICE handler 
+	so we can close the connection instead of doing an exit(1).
+	(gnome_ice_init): install the new io error handler.
+
+
 1999-01-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (shutdown_transients): Remove the idle handler

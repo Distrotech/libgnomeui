@@ -75,7 +75,8 @@ typedef enum
   GNOME_CLIENT_WAITING_FOR_PHASE_2,
   GNOME_CLIENT_SAVING_PHASE_2,
   GNOME_CLIENT_FROZEN,
-  GNOME_CLIENT_DISCONNECTED
+  GNOME_CLIENT_DISCONNECTED,
+  GNOME_CLIENT_REGISTERING
 } GnomeClientState;
 
 typedef enum
@@ -105,10 +106,10 @@ struct _GnomeClient
   /* Previous client id of this client.  */
   gchar		     *previous_id;
 
-  /* Prefix for per client configuration files.  */
+  /* Prefix for per save configuration files.  */
   gchar              *config_prefix;
 
-  /* Prefix for configuration files.  */
+  /* Prefix for app configuration files.  */
   gchar              *global_config_prefix;
 
   /* Static command line options.  */

@@ -13,51 +13,41 @@
 #include <gtk/gtk.h>
 #include "gnome-ice.h"
 
-
-typedef struct _GnomeIceInternal
-{
-  gint input_id;
-} GnomeIceInternal;
-
-static GnomeIceInternal*
-malloc_gnome_ice_internal ()
-{
-  GnomeIceInternal *gnome_ice_internal = g_malloc (sizeof (GnomeIceInternal));
-  gnome_ice_internal->input_id = 0;
-  return gnome_ice_internal;
-}
-
-static void
-free_gnome_ice_internal (GnomeIceInternal *gnome_ice_internal)
-{
-  g_assert (gnome_ice_internal != NULL);
-  g_free (gnome_ice_internal);
-}
-
-/* map IceConn pointers to GnomeIceInternal pointers */
-static GHashTable *__gnome_ice_internal_hash = NULL;
-
-
 #ifdef HAVE_LIBSM
 
-static void new_ice_connection (IceConn connection, IcePointer client_data, Bool opening, IcePointer *watch_data);
+static void gnome_ice_io_error_handler (IceConn connection);
+
+static void new_ice_connection (IceConn connection, IcePointer client_data, 
+				Bool opening, IcePointer *watch_data);
 
 /* This is called when data is available on an ICE connection.  */
 static gboolean
 process_ice_messages (gpointer client_data, gint source,
 		      GdkInputCondition condition)
 {
-  IceProcessMessagesStatus status;
   IceConn connection = (IceConn) client_data;
-
-  if(condition & GDK_INPUT_EXCEPTION) {
-    new_ice_connection(connection, NULL, FALSE, NULL);
-    return FALSE;
-  }
+  IceProcessMessagesStatus status;
 
   status = IceProcessMessages (connection, NULL, NULL);
 
-  /* FIXME: handle case when status==closed.  */
+  if (status == IceProcessMessagesIOError)
+    {
+      IcePointer context = IceGetConnectionContext (connection);
+
+      if (context && GTK_IS_OBJECT (context))
+	{
+	  guint disconnect_id = gtk_signal_lookup ("disconnect", 
+						   GTK_OBJECT_TYPE (context));
+
+	  if (disconnect_id > 0)
+	    gtk_signal_emit (GTK_OBJECT (context), disconnect_id);
+	}
+      else
+	{
+	  IceSetShutdownNegotiation (connection, False);
+	  IceCloseConnection (connection);
+	}
+    }
 
   return TRUE;
 }
@@ -68,45 +58,40 @@ static void
 new_ice_connection (IceConn connection, IcePointer client_data, Bool opening,
 		    IcePointer *watch_data)
 {
-  GnomeIceInternal *gnome_ice_internal;
+  gint input_id;
 
   if (opening)
     {
-      gnome_ice_internal = g_hash_table_lookup (__gnome_ice_internal_hash, connection);
-      if (gnome_ice_internal)
-	{
-	  gdk_input_remove (gnome_ice_internal->input_id);
-	  gnome_ice_internal->input_id = 0;
-	}
-      else
-	{
-	  gnome_ice_internal = malloc_gnome_ice_internal ();
-	  g_hash_table_insert (__gnome_ice_internal_hash, connection, gnome_ice_internal);
-	}
-
       /* Make sure we don't pass on these file descriptors to any
          exec'ed children */
-       fcntl(IceConnectionNumber(connection),F_SETFD,
-	     fcntl(IceConnectionNumber(connection),F_GETFD,0) | FD_CLOEXEC);
-       gnome_ice_internal->input_id = 
-	 gdk_input_add (IceConnectionNumber (connection),
-			GDK_INPUT_READ|GDK_INPUT_EXCEPTION,
-			(GdkInputFunction)process_ice_messages,
-			(gpointer) connection);
+      fcntl(IceConnectionNumber(connection),F_SETFD,
+	    fcntl(IceConnectionNumber(connection),F_GETFD,0) | FD_CLOEXEC);
+
+      input_id = gdk_input_add (IceConnectionNumber (connection),
+				GDK_INPUT_READ|GDK_INPUT_EXCEPTION,
+				(GdkInputFunction)process_ice_messages,
+				(gpointer) connection);
+
+      *watch_data = (IcePointer) GINT_TO_POINTER (input_id);
     }
   else 
     {
-      gnome_ice_internal = g_hash_table_lookup (__gnome_ice_internal_hash, connection);
-      if (! gnome_ice_internal)
-	{
-	  return;
-	}
+      input_id = GPOINTER_TO_INT ((gpointer) *watch_data);
 
-      gdk_input_remove (gnome_ice_internal->input_id);
-      g_hash_table_remove (__gnome_ice_internal_hash, connection);
-      free_gnome_ice_internal (gnome_ice_internal);
+      gdk_input_remove (input_id);
     }
 }
+
+static IceIOErrorHandler gnome_ice_installed_handler;
+
+/* We call any handler installed before (or after) gnome_ice_init but 
+   avoid calling the default libICE handler which does an exit() */
+static void
+gnome_ice_io_error_handler (IceConn connection)
+{
+    if (gnome_ice_installed_handler)
+      (*gnome_ice_installed_handler) (connection);
+}    
 
 #endif /* HAVE_LIBSM */
 
@@ -118,10 +103,15 @@ gnome_ice_init (void)
   if (! ice_init)
     {
 #ifdef HAVE_LIBSM
-      IceAddConnectionWatch (new_ice_connection, NULL);
+      IceIOErrorHandler default_handler;
 
-      /* map IceConn pointers to GnomeIceInternal pointers */
-      __gnome_ice_internal_hash = g_hash_table_new (g_direct_hash, NULL);
+      gnome_ice_installed_handler = IceSetIOErrorHandler (NULL);
+      default_handler = IceSetIOErrorHandler (gnome_ice_io_error_handler);
+
+      if (gnome_ice_installed_handler == default_handler)
+	gnome_ice_installed_handler = NULL;
+
+      IceAddConnectionWatch (new_ice_connection, NULL);
 #endif /* HAVE_LIBSM */
 
       ice_init = TRUE;

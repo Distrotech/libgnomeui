@@ -84,14 +84,6 @@ static void gnome_real_client_connect            (GnomeClient      *client,
 						  gint              restarted);
 static void gnome_real_client_disconnect         (GnomeClient      *client);
 
-#ifdef HAVE_LIBSM
-
-static void gnome_process_ice_messages (gpointer client_data, 
-					gint source,
-					GdkInputCondition condition);
-
-#endif /* HAVE_LIBSM */
-
 static void   client_unset_config_prefix    (GnomeClient *client);
 
 static gchar** array_init_from_arg           (gint argc, 
@@ -581,6 +573,46 @@ client_save_yourself_callback (SmcConn   smc_conn,
   gchar *name, *prefix;
   int fd;
 
+  if (!client_grab_widget)
+    client_grab_widget = gtk_widget_new (gtk_widget_get_type(), NULL);
+
+  /* The first SaveYourself after registering for the first time
+   * is a special case (SM specs 7.2).
+   *
+   * This SaveYourself seems to be included in the protocol to
+   * ask the client to specify its initial SmProperties since 
+   * there is little point saving a copy of the initial state.
+   *
+   * A bug in xsm means that it does not send us a SaveComplete 
+   * in response to this initial SaveYourself. Therefore, we 
+   * must not set a grab because it would never be released.
+   * Indeed, even telling the app that this SaveYourself has
+   * arrived is hazardous as the app may take its own steps
+   * to freeze its WM state while waiting for the SaveComplete.
+   *
+   * Fortunately, we have already set the SmProperties during
+   * gnome_client_connect so there is little lost in simply
+   * returning immediately.
+   *
+   * Apps which really want to save their initial states can 
+   * do so safely using gnome_client_save_yourself_request. */
+
+  if (client->state == GNOME_CLIENT_REGISTERING)
+    {
+      client_set_state (client, GNOME_CLIENT_IDLE);
+
+      /* Double check that this is a section 7.2 SaveYourself: */
+      
+      if (save_style == SmSaveLocal && 
+	  interact_style == SmInteractStyleNone &&
+	  !shutdown && !fast)
+	{
+	  /* The protocol requires this even if xsm ignores it. */
+	  SmcSaveYourselfDone ((SmcConn) client->smc_conn, TRUE);
+	  return;
+	}
+    }
+
   switch (save_style)
     {
     case SmSaveGlobal:
@@ -620,9 +652,8 @@ client_save_yourself_callback (SmcConn   smc_conn,
 
   client_set_state (client, GNOME_CLIENT_SAVING_PHASE_1);
 
-  if (!client_grab_widget) {
-    client_grab_widget = gtk_widget_new (gtk_widget_get_type(), NULL);
-  }
+  gdk_pointer_ungrab (GDK_CURRENT_TIME);
+  gdk_keyboard_ungrab (GDK_CURRENT_TIME);
   gtk_grab_add (client_grab_widget);
 
   name = client->program;
@@ -841,14 +872,7 @@ master_client_connect (GnomeClient *client,
 		       gint         restarted,
 		       gpointer     client_data)
 {
-  char *client_id= gnome_client_get_id (client);
-  
-  /* FIXME: Should be moved into gdk. */
-  XChangeProperty (gdk_display, gdk_leader_window,
-		   XInternAtom(gdk_display, sm_client_id_prop, False),
-		   XA_STRING, 8, GDK_PROP_MODE_REPLACE,
-		   (unsigned char *) client_id,
-		   strlen(client_id));
+  gdk_set_sm_client_id (gnome_client_get_id (client));
 
   g_atexit (master_client_clean_up);
 }
@@ -857,8 +881,7 @@ static void
 master_client_disconnect (GnomeClient *client,
 			  gpointer client_data)
 {
-  XDeleteProperty(gdk_display, gdk_leader_window,
-		  XInternAtom(gdk_display, sm_client_id_prop, False));
+  gdk_set_sm_client_id (NULL);
 }
 
 
@@ -874,7 +897,7 @@ gnome_client_init (void)
   gint i;
   gchar *buffer= NULL;
 
-  /* This function must not be, if there allready exists a master client.  */
+  /* This function must not be called more than once.  */
   g_return_if_fail (master_client == NULL);
   
   /* Make sure the Gtk+ type system is initialized.  */
@@ -884,6 +907,9 @@ gnome_client_init (void)
   /* Create the master client.  */
   master_client= gnome_client_new_without_connection ();
   g_assert (master_client);
+
+  /* Initialise ICE */
+  gnome_ice_init ();
 
   /* Connect the master client's default signals.  */
   gtk_signal_connect (GTK_OBJECT (master_client), "connect",
@@ -1263,7 +1289,6 @@ void
 gnome_client_connect (GnomeClient *client)
 {
 #ifdef HAVE_LIBSM
-  static SmPointer  context;
   SmcCallbacks      callbacks;
   gchar            *client_id;
 #endif /* HAVE_LIBSM */
@@ -1290,7 +1315,7 @@ gnome_client_connect (GnomeClient *client)
       gchar error_string_ret[ERROR_STRING_LENGTH] = "";
       
       client->smc_conn= (gpointer)
-	SmcOpenConnection (NULL, &context, 
+	SmcOpenConnection (NULL, client, 
 			   SmProtoMajor, SmProtoMinor,
 			   SmcSaveYourselfProcMask | SmcDieProcMask |
 			   SmcSaveCompleteProcMask | 
@@ -1316,14 +1341,9 @@ gnome_client_connect (GnomeClient *client)
       restarted= (client->previous_id && 
 		  !strcmp (client->previous_id, client_id));
       
-      /* Lets call 'gnome_process_ice_messages' if new data arrives.  */
-      ice_conn = SmcGetIceConnection ((SmcConn) client->smc_conn);
-      client->input_id= gdk_input_add (IceConnectionNumber (ice_conn),
-				       GDK_INPUT_READ, 
-				       gnome_process_ice_messages,
-				       (gpointer) client);
-
-      client_set_state (client, GNOME_CLIENT_IDLE);
+      client_set_state (client, (restarted ? 
+				 GNOME_CLIENT_IDLE : 
+				 GNOME_CLIENT_REGISTERING));
 
       /* Let all the world know, that we have a connection to a
          session manager.  */
@@ -1347,9 +1367,11 @@ gnome_client_disconnect (GnomeClient *client)
 {
   g_return_if_fail (client != NULL);
 
-  gnome_client_flush (client);
   if (GNOME_CLIENT_CONNECTED (client))
-    gtk_signal_emit (GTK_OBJECT (client), client_signals[DISCONNECT]);
+    {
+      gnome_client_flush (client);
+      gtk_signal_emit (GTK_OBJECT (client), client_signals[DISCONNECT]);
+    }
 }
 
 /*****************************************************************************/
@@ -2115,12 +2137,6 @@ gnome_real_client_disconnect (GnomeClient *client)
       client->smc_conn = NULL;
     }
   
-  if (client->input_id)
-    {
-      gdk_input_remove (client->input_id);
-      client->input_id = 0;
-    }
-
   client_set_state (client, GNOME_CLIENT_DISCONNECTED);
 
   /* Free all interation keys but the one in use.  */
@@ -2184,7 +2200,7 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
   
   if (status)
     {
-        client->interaction_keys = g_slist_prepend (client->interaction_keys, 
+        client->interaction_keys = g_slist_append (client->interaction_keys, 
 						   key);
     }
   else
@@ -2483,32 +2499,6 @@ gnome_interaction_key_return (gint     tag,
   client_save_yourself_possibly_done (client);
 #endif /* HAVE_LIBSM */
 }
-
-/*****************************************************************************/
-
-
-#ifdef HAVE_LIBSM
-
-static void 
-gnome_process_ice_messages (gpointer client_data, 
-			    gint source,
-			    GdkInputCondition condition)
-{
-  IceProcessMessagesStatus  status;
-  GnomeClient              *client = (GnomeClient*) client_data;
-  
-  status = IceProcessMessages 
-    (SmcGetIceConnection ((SmcConn) client->smc_conn), NULL, NULL);
-
-  if (status == IceProcessMessagesIOError)
-    {
-      gnome_client_disconnect (client);
-      /* FIXME: sent error messages */
-    }
-}
-
-#endif /* HAVE_LIBSM */
-
 
 /*****************************************************************************/
 
