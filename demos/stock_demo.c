@@ -4,6 +4,23 @@
 
 
 static void
+message_dlg(GtkWidget *widget, gpointer data)
+{
+	GnomeMessageBox *box;
+
+	box = gnome_message_box_new ("Really quit?", "question",
+				     GNOME_STOCK_BUTTON_YES,
+				     GNOME_STOCK_BUTTON_NO,
+				     NULL);
+	/* Quit no matter what.  */
+	gtk_signal_connect (GTK_OBJECT (box), "clicked",
+			    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
+
+	gnome_message_box_set_modal (box);
+	gtk_widget_show (GTK_WIDGET (box));
+}
+
+static void
 prop_dlg(GtkWidget *widget, gpointer data)
 {
 	GnomePropertyBox *box;
@@ -108,7 +125,7 @@ create_menu(GtkWidget *window)
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_QUIT, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 	gtk_signal_connect_object(GTK_OBJECT(w), "activate",
-				  (GtkSignalFunc)gtk_widget_destroy,
+				  (GtkSignalFunc)message_dlg,
 				  GTK_OBJECT(window));
         gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;

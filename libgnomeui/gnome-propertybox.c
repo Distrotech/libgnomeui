@@ -218,7 +218,10 @@ gnome_property_box_new (void)
 
 	/* FIXME: connect delete_event to run just_close?  */
 
-	hbox = gtk_hbox_new (FALSE, GNOME_PAD);
+	hbox = gtk_hbutton_box_new ();
+	gtk_button_box_set_layout (GTK_BUTTON_BOX (hbox),
+				   GTK_BUTTONBOX_END);
+	gtk_button_box_set_spacing (GTK_BUTTON_BOX (hbox), GNOME_PAD);
 	gtk_container_border_width (GTK_CONTAINER (hbox), GNOME_PAD);
 
 	bf = gtk_frame_new (NULL);
@@ -230,14 +233,10 @@ gnome_property_box_new (void)
 	gtk_box_pack_start (GTK_BOX (vbox), property_box->notebook,
 			    FALSE, FALSE, 0);
 
-	gtk_box_pack_end (GTK_BOX (hbox), property_box->help_button,
-			  FALSE, FALSE, 0);
-	gtk_box_pack_end (GTK_BOX (hbox), property_box->cancel_button,
-			  FALSE, FALSE, 0);
-	gtk_box_pack_end (GTK_BOX (hbox), property_box->apply_button,
-			  FALSE, FALSE, 0);
-	gtk_box_pack_end (GTK_BOX (hbox), property_box->ok_button,
-			  FALSE, FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (hbox), property_box->ok_button);
+	gtk_container_add (GTK_CONTAINER (hbox), property_box->apply_button);
+	gtk_container_add (GTK_CONTAINER (hbox), property_box->cancel_button);
+	gtk_container_add (GTK_CONTAINER (hbox), property_box->help_button);
 
 	gtk_container_add (GTK_CONTAINER (bf), hbox);
 	gtk_box_pack_start (GTK_BOX (vbox), bf, FALSE, FALSE, 0);

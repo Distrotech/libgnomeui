@@ -1,3 +1,15 @@
+Tue Mar 24 01:07:14 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* stock_demo.c (message_dlg): New function to test
+	gnome-messagebox.  (This could be moved elsewhere; it is just a
+	hack.)
+
+	* gnome-propertybox.c (gnome_property_box_new): Buttons now kept
+	in a button box.
+	* gnome-messagebox.c (gnome_message_box_new): Buttons now kept in
+	a button box.
+	(GNOME_PAD): Define.
+
 Sun Mar 23 02:24:44 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.c: fixed some segfaults when clicking on empty

@@ -24,6 +24,10 @@
 #include <gtk/gtk.h>
 #include "libgnomeui/gnome-stock.h"
 
+/* FIXME: define more globally.  */
+#define GNOME_PAD 10
+
+
 /* Library must use dgettext, not gettext.  */
 #ifdef ENABLE_NLS
 #    include <libintl.h>
@@ -209,7 +213,7 @@ gnome_message_box_new (gchar           *message,
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 10);
 	gtk_widget_show (hbox);
-  
+
 	if (pixmap)
 	{
 		pixmapwid = gtk_pixmap_new (pixmap, mask);
@@ -226,7 +230,10 @@ gnome_message_box_new (gchar           *message,
 			    GNOME_MESSAGE_BOX_BORDER_WIDTH);
 	gtk_widget_show (separator);
 
-	hbox = gtk_hbox_new (FALSE, 0);
+	hbox = gtk_hbutton_box_new ();
+	gtk_button_box_set_layout (GTK_BUTTON_BOX (hbox),
+				   GTK_BUTTONBOX_END);
+	gtk_button_box_set_spacing (GTK_BUTTON_BOX (hbox), GNOME_PAD);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
 	gtk_widget_show (hbox);
 
@@ -242,10 +249,10 @@ gnome_message_box_new (gchar           *message,
 		GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
 		gtk_widget_set_usize (button, GNOME_MESSAGE_BOX_BUTTON_WIDTH,
 				      GNOME_MESSAGE_BOX_BUTTON_HEIGHT);
-		gtk_box_pack_start (GTK_BOX (hbox), button, TRUE, FALSE, 0);
+		gtk_container_add (GTK_CONTAINER (hbox), button);
 		gtk_widget_grab_default (button);
 		gtk_widget_show (button);
-		
+
 		gtk_signal_connect (GTK_OBJECT (button), "clicked",
 				    (GtkSignalFunc) gnome_message_box_button_clicked,
 				    message_box);
