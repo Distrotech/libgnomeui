@@ -1,3 +1,10 @@
+2000-01-12  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-gconf.c (gnome_gconf_client_get): Add a global
+	GConfClient, and init stuff for creating it and setting up 
+	GConf. Not yet added to GNOMEUI_INIT macro; wondering 
+	if we want this stuff for _every_ gnome app. Probably we do.
+
 2000-01-11  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-messagebox.c (gnome_message_box_new): 
