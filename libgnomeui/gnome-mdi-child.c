@@ -4,6 +4,7 @@
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-mdi-child.h"
+#include "gnome-mdi.h"
 
 static void gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
 static void gnome_mdi_child_init             (GnomeMDIChild *);
@@ -98,6 +99,7 @@ static void gnome_mdi_child_class_init (GnomeMDIChildClass *class) {
 
 static void gnome_mdi_child_init (GnomeMDIChild *mdi_child) {
   mdi_child->name = NULL;
+  mdi_child->parent = NULL;
   mdi_child->views = NULL;
 }
 
@@ -157,6 +159,9 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, gchar *name) {
 
   if(old_name)
     g_free(old_name);
+
+  if(mdi_child->parent)
+    gnome_mdi_update_child(GNOME_MDI(mdi_child->parent), mdi_child);
 }
 
 void gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl) {

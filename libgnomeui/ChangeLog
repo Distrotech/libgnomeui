@@ -1,3 +1,15 @@
+1998-07-31  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+        * gnome-mdi-child.h: GnomeMDIChild now has a pointer to his
+	parent MDI [if it exists].
+	* gnome-mdi.[ch] (gnome_mdi_update_child): new public function.
+	for now all it updates are the children's names.
+	* gnome-mdi.c (gnome_mdi_add_child, gnome_mdi_remove_child):
+	take care of updating the child's parent pointer.
+	(find_page_by_widget): new private convenience function.
+	* gnome-mdi-child.c (gnome_mdi_child_set_name): call
+	gnome_mdi_update_child().
+	
 1998-07-30  Mark Crichton  <crichton@expert.cc.purdue.edu>
 
 	* gnome-popupmenu.c (gnome_app_create_popup_menus_custom):

@@ -51,6 +51,7 @@ static gint             app_close_ms             (GnomeApp *, GdkEventAny *, Gno
 #endif
 
 static void             set_page_by_widget       (GtkNotebook *, GtkWidget *);
+static GtkNotebookPage *find_page_by_widget      (GtkNotebook *, GtkWidget *);
 
 static GtkWidget       *book_create              (GnomeMDI *);
 static void             book_switch_page         (GtkNotebook *, GtkNotebookPage *,
@@ -342,7 +343,7 @@ static void set_page_by_widget(GtkNotebook *book, GtkWidget *child) {
 
   page_node = book->children;
   while(page_node) {
-    if( ((GtkNotebookPage *)page_node->data)->child == child) {
+    if( ((GtkNotebookPage *)page_node->data)->child == child ) {
       gtk_notebook_set_page(book, i);
       return;
     }
@@ -353,6 +354,21 @@ static void set_page_by_widget(GtkNotebook *book, GtkWidget *child) {
 
   return;
 }
+
+static GtkNotebookPage *find_page_by_widget(GtkNotebook *book, GtkWidget *child) {
+  GList *page_node;
+
+  page_node = book->children;
+  while(page_node) {
+    if( ((GtkNotebookPage *)page_node->data)->child == child )
+      return ((GtkNotebookPage *)page_node->data);
+
+    page_node = g_list_next(page_node);
+  }
+
+  return NULL;
+}
+
 static GtkWidget *find_item_by_label(GtkMenuShell *shell, gchar *label) {
   GList *child;
   GtkWidget *grandchild;
@@ -1082,6 +1098,8 @@ gint gnome_mdi_add_child(GnomeMDI *mdi, GnomeMDIChild *child) {
   if(ret == FALSE)
     return FALSE;
 
+  child->parent = GTK_OBJECT(mdi);
+
   mdi->children = g_list_append(mdi->children, child);
 
   child_list_menu_add_item(mdi, child);
@@ -1104,6 +1122,8 @@ gint gnome_mdi_remove_child(GnomeMDI *mdi, GnomeMDIChild *child, gint force) {
 
   if(ret == FALSE)
     return FALSE;
+
+  child->parent = NULL;
 
   while(child->views)
     gnome_mdi_remove_view(mdi, GTK_WIDGET(child->views->data), TRUE);
@@ -1150,18 +1170,53 @@ gint gnome_mdi_remove_all(GnomeMDI *mdi, gint force) {
   return TRUE;
 }
 
+void gnome_mdi_update_child(GnomeMDI *mdi, GnomeMDIChild *child) {
+  GtkWidget *view;
+  GList *view_node;
+
+  g_return_if_fail(mdi != NULL);
+  g_return_if_fail(GNOME_IS_MDI(mdi));
+  g_return_if_fail(child != NULL);
+  g_return_if_fail(GNOME_IS_MDI_CHILD(child));
+
+  view_node = child->views;
+  while(view_node) {
+    view = GTK_WIDGET(view_node->data);
+
+    /* for the time being all that update_child() does is update the children's names */
+    if( (mdi->mode == GNOME_MDI_MODAL) || (mdi->mode == GNOME_MDI_TOPLEVEL) ) {
+      /* in MODAL and TOPLEVEL modes the window title includes the active
+	 child name: "child_name - mdi_title" */
+      gchar *fullname;
+      
+      fullname = g_copy_strings(child->name, " - ", mdi->title, NULL);
+      gtk_window_set_title(GTK_WINDOW(gnome_mdi_get_app_from_view(view)), fullname);
+      g_free(fullname);
+    }
+    else if(mdi->mode == GNOME_MDI_NOTEBOOK) {
+      GtkNotebookPage *page;
+
+      page = find_page_by_widget(GTK_NOTEBOOK(view->parent), view);
+      if(page)
+	gtk_label_set(GTK_LABEL(page->tab_label), child->name);
+    }
+
+    view_node = g_list_next(view_node);
+  }
+}
+
 GnomeMDIChild *gnome_mdi_find_child(GnomeMDI *mdi, gchar *name) {
-  GList *child;
+  GList *child_node;
 
   g_return_val_if_fail(mdi != NULL, NULL);
   g_return_val_if_fail(GNOME_IS_MDI(mdi), NULL);
 
-  child = mdi->children;
-  while(child) {
-    if(strcmp(GNOME_MDI_CHILD(child->data)->name, name) == 0)
-      return GNOME_MDI_CHILD(child->data);
+  child_node = mdi->children;
+  while(child_node) {
+    if(strcmp(GNOME_MDI_CHILD(child_node->data)->name, name) == 0)
+      return GNOME_MDI_CHILD(child_node->data);
 
-    child = g_list_next(child);
+    child_node = g_list_next(child_node);
   }
 
   return NULL;

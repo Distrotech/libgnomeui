@@ -24,6 +24,8 @@ struct _GnomeMDIChild
 {
   GtkObject object;
 
+  GtkObject *parent;
+
   gchar *name;
 
   GList *views;

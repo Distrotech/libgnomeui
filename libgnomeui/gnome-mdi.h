@@ -28,7 +28,7 @@
  *
  * void child_changed(GnomeMDI *, GnomeMDIChild *)
  *   gets called each time when active child is changed with the second argument
- *   pointing to the new active child (or NULL if no child wil be active). mdi->active_view
+ *   pointing to the new active child (or NULL if no child will be active). mdi->active_view
  *   and mdi->active_child still hold old values.
  *
  * void app_created(GnomeMDI *, GnomeApp *)
@@ -136,6 +136,8 @@ gint          gnome_mdi_remove_view         (GnomeMDI *, GtkWidget *, gint);
 gint          gnome_mdi_add_child           (GnomeMDI *, GnomeMDIChild *);
 gint          gnome_mdi_remove_child        (GnomeMDI *, GnomeMDIChild *, gint);
 gint          gnome_mdi_remove_all          (GnomeMDI *, gint);
+
+void          gnome_mdi_update_child        (GnomeMDI *, GnomeMDIChild *);
 
 GnomeMDIChild *gnome_mdi_active_child       (GnomeMDI *);
 GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *, gchar *);
