@@ -74,8 +74,7 @@ static void gnome_druid_page_standard_realize       (GtkWidget                  
 static void gnome_druid_page_standard_style_set     (GtkWidget                   *widget,
 						     GtkStyle                    *old_style);
 static void gnome_druid_page_standard_prepare       (GnomeDruidPage              *page,
-						     GtkWidget                   *druid,
-						     gpointer                    *data);
+						     GtkWidget                   *druid);
 static void gnome_druid_page_standard_size_allocate (GtkWidget                   *widget,
 						     GtkAllocation               *allocation);
 static void gnome_druid_page_standard_layout_setup  (GnomeDruidPageStandard      *druid_page_standard);
@@ -522,8 +521,7 @@ gnome_druid_page_standard_style_set (GtkWidget *widget,
 
 static void
 gnome_druid_page_standard_prepare (GnomeDruidPage *page,
-				   GtkWidget *druid,
-				   gpointer *data)
+				   GtkWidget *druid)
 {
 	gnome_druid_set_buttons_sensitive (GNOME_DRUID (druid), TRUE, TRUE, TRUE, TRUE);
 	gnome_druid_set_show_finish (GNOME_DRUID (druid), FALSE);
