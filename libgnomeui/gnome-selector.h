@@ -35,6 +35,7 @@
 #define GNOME_SELECTOR_H
 
 
+#include <gtk/gtkhbox.h>
 #include <gtk/gtkvbox.h>
 #include <libgnome/gnome-defs.h>
 
