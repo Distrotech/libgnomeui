@@ -41,7 +41,6 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomeDockBand GnomeDockBand;
 typedef struct _GnomeDockBandClass GnomeDockBandClass;
 typedef struct _GnomeDockBandChild GnomeDockBandChild;
-typedef enum _GnomeDockBandChildStatus GnomeDockBandChildStatus;
 
 struct _GnomeDockBand
 {
