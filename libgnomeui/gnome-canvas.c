@@ -1150,6 +1150,9 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	case GDK_BUTTON_RELEASE:
 		window_to_world (canvas, &ev.motion.x, &ev.motion.y);
 		break;
+
+	default:
+		break;
 	}
 
 	/* The event is propagated up the hierarchy (for if someone connected to a group instead of
@@ -1614,6 +1617,18 @@ gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height)
 	canvas->height = height;
 
 	gtk_widget_queue_resize (GTK_WIDGET (canvas));
+}
+
+void
+gnome_canvas_scroll_to (GnomeCanvas *canvas, int x, int y)
+{
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+	canvas->display_x1 = x;
+	canvas->display_y1 = y;
+
+	gtk_widget_draw (GTK_WIDGET (canvas), NULL);
 }
 
 void

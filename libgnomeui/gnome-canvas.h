@@ -287,6 +287,9 @@ void gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n);
 /* Sets the size in pixels of the canvas */
 void gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height);
 
+/* Scrolls the canvas so that (x, y) canvas pixel coordinate is on the top-left corner of the window */
+void gnome_canvas_scroll_to (GnomeCanvas *canvas, int x, int y);
+
 /* Requests that the canvas be repainted immediately instead of in the idle loop. */
 void gnome_canvas_update_now (GnomeCanvas *canvas);
 

@@ -1,3 +1,8 @@
+1998-07-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_scroll_to): New public function to
+	set the top-left display coordinates of the canvas.
+
 1998-07-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_group_point): Fixed * and /
