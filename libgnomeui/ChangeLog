@@ -1,3 +1,25 @@
+1998-09-30  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-color-picker.h, gnome-color-picker.c: Type fix-fest for
+	the benefit of C++. 
+	(struct _GnomeColorPicker): Store stuff as gdouble.
+	(struct _GnomeColorPickerClass): color_set emits a guint;
+	should be gushort, but there is no GTK_VALUE_USHORT for some
+	reason.
+	(gnome_color_picker_set_i8, gnome_color_picker_get_i8): Use
+	guint8; remove range checking.
+	(gnome_color_picker_set_i16, gnome_color_picker_set_i16): Use
+	gushort; remove range checking (FIXME may need to check range on
+	some platforms? Gives a warning on Intel if check.)
+	(gnome_color_picker_get_d, gnome_color_picker_set_d): Use gdouble.
+	(gnome_color_picker_set_dither, gnome_color_picker_user_alpha):
+	Use gboolean.
+	(gnome_color_picker_set_title): const on the char*
+	(gnome_color_picker_class_init): color_set args are guint.
+	(cs_ok_clicked): Use gushort and gdouble.
+	(gnome_color_picker_clicked): gdouble
+	(gnome_color_picker_marshal_signal_1): GTK_VALUE_UINT
+
 Wed Sep 30 17:09:01 1998  John Ellis  <johne@bellatlantic.net>
 
 	* pixmaps/stock_up_arrow.png, stock_down_arrow.png, stock_top.png,

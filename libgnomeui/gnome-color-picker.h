@@ -37,7 +37,7 @@ typedef struct _GnomeColorPickerClass GnomeColorPickerClass;
 struct _GnomeColorPicker {
 	GtkButton button;
 
-	double r, g, b, a;	/* Red, green, blue, and alpha values */
+	gdouble r, g, b, a;	/* Red, green, blue, and alpha values */
 
 	GdkImlibImage *im;	/* Imlib image for rendering dithered sample */
 	GdkPixmap *pixmap;	/* Pixmap with the sample contents */
@@ -59,7 +59,8 @@ struct _GnomeColorPickerClass {
 	 * range.  If you need a different color format, use the provided functions to get the
 	 * values from the color picker.
 	 */
-	void (* color_set) (GnomeColorPicker *cp, gint r, gint g, gint b, gint a);
+        /*  (should be gushort, but Gtk can't marshal that.) */
+	void (* color_set) (GnomeColorPicker *cp, guint r, guint g, guint b, gushort a);
 };
 
 
@@ -70,25 +71,25 @@ GtkType gnome_color_picker_get_type (void);
 GtkWidget *gnome_color_picker_new (void);
 
 /* Set/get the color in the picker.  Values are in [0.0, 1.0] */
-void gnome_color_picker_set_d (GnomeColorPicker *cp, double r, double g, double b, double a);
-void gnome_color_picker_get_d (GnomeColorPicker *cp, double *r, double *g, double *b, double *a);
+void gnome_color_picker_set_d (GnomeColorPicker *cp, gdouble r, gdouble g, gdouble b, gdouble a);
+void gnome_color_picker_get_d (GnomeColorPicker *cp, gdouble *r, gdouble *g, gdouble *b, gdouble *a);
 
 /* Set/get the color in the picker.  Values are in [0, 255] */
-void gnome_color_picker_set_i8 (GnomeColorPicker *cp, int r, int g, int b, int a);
-void gnome_color_picker_get_i8 (GnomeColorPicker *cp, int *r, int *g, int *b, int *a);
+void gnome_color_picker_set_i8 (GnomeColorPicker *cp, guint8 r, guint8 g, guint8 b, guint8 a);
+void gnome_color_picker_get_i8 (GnomeColorPicker *cp, guint8 *r, guint8 *g, guint8 *b, guint8 *a);
 
 /* Set/get the color in the picker.  Values are in [0, 65535] */
-void gnome_color_picker_set_i16 (GnomeColorPicker *cp, int r, int g, int b, int a);
-void gnome_color_picker_get_i16 (GnomeColorPicker *cp, int *r, int *g, int *b, int *a);
+void gnome_color_picker_set_i16 (GnomeColorPicker *cp, gushort r, gushort g, gushort b, gushort a);
+void gnome_color_picker_get_i16 (GnomeColorPicker *cp, gushort *r, gushort *g, gushort *b, gushort *a);
 
 /* Sets whether the picker should dither the color sample or just paint a solid rectangle */
-void gnome_color_picker_set_dither (GnomeColorPicker *cp, int dither);
+void gnome_color_picker_set_dither (GnomeColorPicker *cp, gboolean dither);
 
 /* Sets whether the picker should use the alpha channel or not */
-void gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, int use_alpha);
+void gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, gboolean use_alpha);
 
 /* Sets the title for the color selection dialog */
-void gnome_color_picker_set_title (GnomeColorPicker *cp, char *title);
+void gnome_color_picker_set_title (GnomeColorPicker *cp, const char *title);
 
 
 END_GNOME_DECLS

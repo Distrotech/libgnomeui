@@ -96,10 +96,10 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
 				GTK_SIGNAL_OFFSET (GnomeColorPickerClass, color_set),
 				gnome_color_picker_marshal_signal_1,
 				GTK_TYPE_NONE, 4,
-				GTK_TYPE_INT,
-				GTK_TYPE_INT,
-				GTK_TYPE_INT,
-				GTK_TYPE_INT);
+				GTK_TYPE_UINT,
+				GTK_TYPE_UINT,
+				GTK_TYPE_UINT,
+				GTK_TYPE_UINT);
 
 	gtk_object_class_add_signals (object_class, color_picker_signals, LAST_SIGNAL);
 
@@ -346,8 +346,8 @@ static void
 cs_ok_clicked (GtkWidget *widget, gpointer data)
 {
 	GnomeColorPicker *cp;
-	double color[4];
-	int r, g, b, a;
+	gdouble color[4];
+	gushort r, g, b, a;
 
 	cp = data;
 
@@ -385,7 +385,7 @@ gnome_color_picker_clicked (GtkButton *button)
 {
 	GnomeColorPicker *cp;
 	GtkColorSelectionDialog *csd;
-	double color[4];
+	gdouble color[4];
 
 	g_return_if_fail (button != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (button));
@@ -427,7 +427,7 @@ gnome_color_picker_clicked (GtkButton *button)
 }
 
 void
-gnome_color_picker_set_d (GnomeColorPicker *cp, double r, double g, double b, double a)
+gnome_color_picker_set_d (GnomeColorPicker *cp, gdouble r, gdouble g, gdouble b, gdouble a)
 {
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
@@ -446,7 +446,7 @@ gnome_color_picker_set_d (GnomeColorPicker *cp, double r, double g, double b, do
 }
 
 void
-gnome_color_picker_get_d (GnomeColorPicker *cp, double *r, double *g, double *b, double *a)
+gnome_color_picker_get_d (GnomeColorPicker *cp, gdouble *r, gdouble *g, gdouble *b, gdouble *a)
 {
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
@@ -465,14 +465,11 @@ gnome_color_picker_get_d (GnomeColorPicker *cp, double *r, double *g, double *b,
 }
 
 void
-gnome_color_picker_set_i8 (GnomeColorPicker *cp, int r, int g, int b, int a)
+gnome_color_picker_set_i8 (GnomeColorPicker *cp, guint8 r, guint8 g, guint8 b, guint8 a)
 {
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
-	g_return_if_fail ((r >=	0) && (r <= 255));
-	g_return_if_fail ((g >=	0) && (g <= 255));
-	g_return_if_fail ((b >=	0) && (b <= 255));
-	g_return_if_fail ((a >=	0) && (a <= 255));
+	/* Don't check range of r,g,b,a since it's a 8 bit unsigned type. */
 
 	cp->r = r / 255.0;
 	cp->g = g / 255.0;
@@ -484,33 +481,30 @@ gnome_color_picker_set_i8 (GnomeColorPicker *cp, int r, int g, int b, int a)
 }
 
 void
-gnome_color_picker_get_i8 (GnomeColorPicker *cp, int *r, int *g, int *b, int *a)
+gnome_color_picker_get_i8 (GnomeColorPicker *cp, guint8 *r, guint8 *g, guint8 *b, guint8 *a)
 {
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
 
 	if (r)
-		*r = (int) (cp->r * 255.0 + 0.5);
+		*r = (guint8) (cp->r * 255.0 + 0.5);
 
 	if (g)
-		*g = (int) (cp->g * 255.0 + 0.5);
+		*g = (guint8) (cp->g * 255.0 + 0.5);
 
 	if (b)
-		*b = (int) (cp->b * 255.0 + 0.5);
+		*b = (guint8) (cp->b * 255.0 + 0.5);
 
 	if (a)
-		*a = (int) (cp->a * 255.0 + 0.5);
+		*a = (guint8) (cp->a * 255.0 + 0.5);
 }
 
 void
-gnome_color_picker_set_i16 (GnomeColorPicker *cp, int r, int g, int b, int a)
+gnome_color_picker_set_i16 (GnomeColorPicker *cp, gushort r, gushort g, gushort b, gushort a)
 {
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
-	g_return_if_fail ((r >=	0) && (r <= 65535));
-	g_return_if_fail ((g >=	0) && (g <= 65535));
-	g_return_if_fail ((b >=	0) && (b <= 65535));
-	g_return_if_fail ((a >=	0) && (a <= 65535));
+	/* Don't check range of r,g,b,a since it's a 16 bit unsigned type. */
 
 	cp->r = r / 65535.0;
 	cp->g = g / 65535.0;
@@ -522,26 +516,26 @@ gnome_color_picker_set_i16 (GnomeColorPicker *cp, int r, int g, int b, int a)
 }
 
 void
-gnome_color_picker_get_i16 (GnomeColorPicker *cp, int *r, int *g, int *b, int *a)
+gnome_color_picker_get_i16 (GnomeColorPicker *cp, gushort *r, gushort *g, gushort *b, gushort *a)
 {
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
 
 	if (r)
-		*r = (int) (cp->r * 65535.0 + 0.5);
+		*r = (gushort) (cp->r * 65535.0 + 0.5);
 
 	if (g)
-		*g = (int) (cp->g * 65535.0 + 0.5);
+		*g = (gushort) (cp->g * 65535.0 + 0.5);
 
 	if (b)
-		*b = (int) (cp->b * 65535.0 + 0.5);
+		*b = (gushort) (cp->b * 65535.0 + 0.5);
 
 	if (a)
-		*a = (int) (cp->a * 65535.0 + 0.5);
+		*a = (gushort) (cp->a * 65535.0 + 0.5);
 }
 
 void
-gnome_color_picker_set_dither (GnomeColorPicker *cp, int dither)
+gnome_color_picker_set_dither (GnomeColorPicker *cp, gboolean dither)
 {
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
@@ -553,7 +547,7 @@ gnome_color_picker_set_dither (GnomeColorPicker *cp, int dither)
 }
 
 void
-gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, int use_alpha)
+gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, gboolean use_alpha)
 {
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
@@ -565,7 +559,7 @@ gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, int use_alpha)
 }
 
 void
-gnome_color_picker_set_title (GnomeColorPicker *cp, char *title)
+gnome_color_picker_set_title (GnomeColorPicker *cp, const char *title)
 {
 	g_return_if_fail (cp != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (cp));
@@ -583,9 +577,13 @@ gnome_color_picker_marshal_signal_1 (GtkObject *object, GtkSignalFunc func, gpoi
 
 	rfunc = (GnomeColorPickerSignal1) func;
 	(* rfunc) (object,
-		   GTK_VALUE_INT (args[0]),
-		   GTK_VALUE_INT (args[1]),
-		   GTK_VALUE_INT (args[2]),
-		   GTK_VALUE_INT (args[3]),
+		   GTK_VALUE_UINT (args[0]),
+		   GTK_VALUE_UINT (args[1]),
+		   GTK_VALUE_UINT (args[2]),
+		   GTK_VALUE_UINT (args[3]),
 		   func_data);
 }
+
+
+
+
