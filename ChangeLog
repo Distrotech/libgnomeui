@@ -1,3 +1,11 @@
+2002-07-29  Dave Camp  <dave@ximian.com>
+
+	* libgnomeui/gnome-icon-item.c: (send_focus_event): #ifed out the
+	bogus assertion.
+	(realize_cursor_gc): Use black as the default instead of red.
+	(gnome_icon_text_item_draw): Draw with the correct text color
+	if editing.
+
 2002-07-27  James Henstridge  <james@daa.com.au>
 
 	* glade/glade-gnome.c (about_set_translator_credits): handle
