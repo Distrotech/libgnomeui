@@ -416,7 +416,9 @@ draw_icons_area (GnomeIconList *ilist, GdkRectangle *area)
 
 		x = startx;
 
-		for (n = (num % ilist->icon_cols); (n < ilist->icon_cols) && list; n++) {
+		for (n = (num % ilist->icon_cols);
+		     (n < ilist->icon_cols) && list && (x < (iarea.x + iarea.width));
+		     n++) {
 			draw_icon (ilist, list->data, x, y, &iarea);
 			list = list->next;
 
@@ -996,7 +998,7 @@ adjust_scrollbars (GnomeIconList *ilist)
 
 	adj->page_size      = ilist->ilist_window_height;
 	adj->page_increment = ilist->ilist_window_height / 2;
-	adj->step_increment = ilist->max_icon_height / 2;
+	adj->step_increment = (ilist->max_icon_height + ilist->row_spacing) / 2;
 	adj->lower          = 0;
 	adj->upper          = ilist_height;
 
@@ -1011,7 +1013,7 @@ adjust_scrollbars (GnomeIconList *ilist)
 
 	adj->page_size      = ilist->ilist_window_width;
 	adj->page_increment = ilist->ilist_window_width / 2;
-	adj->step_increment = ilist->max_icon_width / 2;
+	adj->step_increment = (ilist->max_icon_width + ilist->col_spacing) / 2;
 	adj->lower          = 0;
 	adj->upper          = ilist_width;
 

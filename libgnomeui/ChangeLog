@@ -1,3 +1,9 @@
+1998-03-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (draw_icons_area): Only paint icons within
+	exposure area width.
+	(adjust_scrollbars): Use better values for step_increment in adjustments.
+
 1998-03-27  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome_segv.c: included "config.h"
