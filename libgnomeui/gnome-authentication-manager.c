@@ -41,6 +41,7 @@
 #include <libgnomevfs/gnome-vfs-module-callback.h>
 #include <libgnomevfs/gnome-vfs-standard-callbacks.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
+#include <gnome-keyring.h>
 
 
 #if 0
@@ -239,6 +240,440 @@ vfs_authentication_callback (gconstpointer in, size_t in_size,
 	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
 }
 
+static GnomePasswordDialog *
+construct_full_password_dialog (const GnomeVFSModuleCallbackFullAuthenticationIn *in_args)
+{
+	char *message;
+	GnomePasswordDialog *dialog;
+	GString *name;
+	
+	/* Generic case: */
+	name = g_string_new (NULL);
+	if (in_args->username != NULL) {
+		g_string_append_printf (name, "%s@", in_args->username);
+	}
+	if (in_args->server != NULL) {
+		g_string_append (name, in_args->server);
+	}
+	if (in_args->port != 0) {
+		g_string_append_printf (name, ":%d", in_args->port);
+	}
+	if (in_args->object != NULL) {
+		g_string_append_printf (name, "/%s", in_args->object);
+	}
+	if (in_args->domain != NULL) {
+		g_string_append_printf (name, _(" domain %s"), in_args->domain);
+	}
+
+	message = g_strdup_printf (_("You must log in to access %s\n"), name->str);
+	g_string_free (name, TRUE);
+		
+	dialog = GNOME_PASSWORD_DIALOG (gnome_password_dialog_new (
+								   _("Authentication Required"),
+								   message,
+								   in_args->default_user,
+								   "",
+								   FALSE));
+	g_free (message);
+
+	gnome_password_dialog_set_domain (dialog, in_args->default_domain);
+	gnome_password_dialog_set_show_username (dialog, 
+						 in_args->flags & GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION_NEED_USERNAME);
+	gnome_password_dialog_set_show_domain (dialog, 
+					       in_args->flags & GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION_NEED_DOMAIN);
+	gnome_password_dialog_set_show_password (dialog, 
+						 in_args->flags & GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION_NEED_PASSWORD);
+	gnome_password_dialog_set_show_remember (dialog, gnome_keyring_is_availible ());
+
+	return dialog;
+}
+
+
+static void
+full_auth_get_result_from_dialog (GnomePasswordDialog *dialog,
+				  GnomeVFSModuleCallbackFullAuthenticationOut *out_args,
+				  gboolean result)
+{
+	GnomePasswordDialogRemember remember;
+	if (result) {
+		out_args->abort_auth = FALSE;
+		out_args->username = gnome_password_dialog_get_username (dialog);
+		out_args->domain = gnome_password_dialog_get_domain (dialog);
+		out_args->password = gnome_password_dialog_get_password (dialog);
+
+		remember = gnome_password_dialog_get_remember (dialog);
+		if (remember == GNOME_PASSWORD_DIALOG_REMEMBER_SESSION) {
+			out_args->save_password = TRUE;
+			out_args->keyring = g_strdup ("session");
+		} else if (remember == GNOME_PASSWORD_DIALOG_REMEMBER_FOREVER) {
+			out_args->save_password = TRUE;
+			out_args->keyring = NULL;
+		} else {
+			out_args->save_password = FALSE;
+			out_args->keyring = NULL;
+		}
+	} else {
+		out_args->abort_auth = TRUE;
+	}
+}
+
+static void
+present_full_authentication_dialog_blocking (const GnomeVFSModuleCallbackFullAuthenticationIn * in_args,
+					     GnomeVFSModuleCallbackFullAuthenticationOut *out_args)
+{
+	GnomePasswordDialog *dialog;
+	gboolean dialog_result;
+	
+	dialog = construct_full_password_dialog (in_args);
+
+	dialog_result = gnome_password_dialog_run_and_block (dialog);
+
+	full_auth_get_result_from_dialog (dialog, out_args, dialog_result);
+
+	gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+typedef struct {
+	const GnomeVFSModuleCallbackFullAuthenticationIn	*in_args;
+	GnomeVFSModuleCallbackFullAuthenticationOut	*out_args;
+
+	GnomeVFSModuleCallbackResponse response;
+	gpointer response_data;
+} FullCallbackInfo;
+
+static void
+full_authentication_dialog_button_clicked (GtkDialog *dialog, 
+					   gint button_number, 
+					   FullCallbackInfo *info)
+{
+	DEBUG_MSG (("+%s button: %d\n", G_GNUC_FUNCTION, button_number));
+
+	full_auth_get_result_from_dialog (GNOME_PASSWORD_DIALOG (dialog),
+					  info->out_args,
+					  button_number == GTK_RESPONSE_OK);
+
+	gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+static void
+full_authentication_dialog_destroyed (GtkDialog *dialog, FullCallbackInfo *info)
+{
+	DEBUG_MSG (("+%s\n", G_GNUC_FUNCTION));
+
+	info->response (info->response_data);
+	g_free (info);
+}
+
+static gint /* GtkFunction */
+present_full_authentication_dialog_nonblocking (FullCallbackInfo *info)
+{
+	GnomePasswordDialog *dialog;
+
+	g_return_val_if_fail (info != NULL, 0);
+
+	dialog = construct_full_password_dialog (info->in_args);
+
+	gtk_window_set_modal (GTK_WINDOW (dialog), FALSE);
+
+	g_signal_connect (dialog, "response", 
+			  G_CALLBACK (full_authentication_dialog_button_clicked), info);
+
+	g_signal_connect (dialog, "close", 
+			  G_CALLBACK (authentication_dialog_closed), info);
+
+	g_signal_connect (dialog, "destroy", 
+			  G_CALLBACK (full_authentication_dialog_destroyed), info);
+
+	gtk_widget_show (GTK_WIDGET (dialog));
+
+	return 0;
+}
+
+static void /* GnomeVFSAsyncModuleCallback */
+vfs_async_full_authentication_callback (gconstpointer in, size_t in_size, 
+					gpointer out, size_t out_size, 
+					gpointer user_data,
+					GnomeVFSModuleCallbackResponse response,
+					gpointer response_data)
+{
+	GnomeVFSModuleCallbackFullAuthenticationIn *in_real;
+	GnomeVFSModuleCallbackFullAuthenticationOut *out_real;
+	FullCallbackInfo *info;
+	
+	g_return_if_fail (sizeof (GnomeVFSModuleCallbackFullAuthenticationIn) == in_size
+		&& sizeof (GnomeVFSModuleCallbackFullAuthenticationOut) == out_size);
+
+	g_return_if_fail (in != NULL);
+	g_return_if_fail (out != NULL);
+
+	in_real = (GnomeVFSModuleCallbackFullAuthenticationIn *)in;
+	out_real = (GnomeVFSModuleCallbackFullAuthenticationOut *)out;
+
+	DEBUG_MSG (("+%s uri:'%s' \n", G_GNUC_FUNCTION, in_real->uri));
+
+	info = g_new (FullCallbackInfo, 1);
+
+	info->in_args = in_real;
+	info->out_args = out_real;
+	info->response = response;
+	info->response_data = response_data;
+
+	present_full_authentication_dialog_nonblocking (info);
+
+	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+}
+
+static void /* GnomeVFSModuleCallback */
+vfs_full_authentication_callback (gconstpointer in, size_t in_size, 
+				  gpointer out, size_t out_size, 
+				  gpointer user_data)
+{
+	GnomeVFSModuleCallbackFullAuthenticationIn *in_real;
+	GnomeVFSModuleCallbackFullAuthenticationOut *out_real;
+	
+	g_return_if_fail (sizeof (GnomeVFSModuleCallbackFullAuthenticationIn) == in_size
+		&& sizeof (GnomeVFSModuleCallbackFullAuthenticationOut) == out_size);
+
+	g_return_if_fail (in != NULL);
+	g_return_if_fail (out != NULL);
+
+	in_real = (GnomeVFSModuleCallbackFullAuthenticationIn *)in;
+	out_real = (GnomeVFSModuleCallbackFullAuthenticationOut *)out;
+
+	DEBUG_MSG (("+%s uri:'%s'\n", G_GNUC_FUNCTION, in_real->uri));
+
+	present_full_authentication_dialog_blocking (in_real, out_real);
+
+	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+}
+
+
+typedef struct {
+	const GnomeVFSModuleCallbackFillAuthenticationIn	*in_args;
+	GnomeVFSModuleCallbackFillAuthenticationOut	*out_args;
+
+	GnomeVFSModuleCallbackResponse response;
+	gpointer response_data;
+} FillCallbackInfo;
+
+
+static void
+fill_auth_callback (GnomeKeyringResult result,
+		    GList             *list,
+		    gpointer           data)
+{
+	FillCallbackInfo *info;
+	GnomeKeyringNetworkPasswordData *pwd_data;;
+	
+	info = data;
+
+	if (result != GNOME_KEYRING_RESULT_OK ||
+	    list == NULL) {
+		info->out_args->valid = FALSE;
+	} else {
+		/* We use the first result, which is the least specific match */
+		pwd_data = list->data;
+		info->out_args->valid = TRUE;
+		info->out_args->username = g_strdup (pwd_data->user);
+		info->out_args->domain = g_strdup (pwd_data->domain);
+		info->out_args->password = g_strdup (pwd_data->password);
+	}
+	info->response (info->response_data);
+}
+
+static void /* GnomeVFSAsyncModuleCallback */
+vfs_async_fill_authentication_callback (gconstpointer in, size_t in_size, 
+					gpointer out, size_t out_size, 
+					gpointer user_data,
+					GnomeVFSModuleCallbackResponse response,
+					gpointer response_data)
+{
+	GnomeVFSModuleCallbackFillAuthenticationIn *in_real;
+	GnomeVFSModuleCallbackFillAuthenticationOut *out_real;
+	gpointer request;
+	FillCallbackInfo *info;
+	
+	g_return_if_fail (sizeof (GnomeVFSModuleCallbackFillAuthenticationIn) == in_size
+		&& sizeof (GnomeVFSModuleCallbackFillAuthenticationOut) == out_size);
+
+	g_return_if_fail (in != NULL);
+	g_return_if_fail (out != NULL);
+
+	in_real = (GnomeVFSModuleCallbackFillAuthenticationIn *)in;
+	out_real = (GnomeVFSModuleCallbackFillAuthenticationOut *)out;
+
+	DEBUG_MSG (("+%s uri:'%s' \n", G_GNUC_FUNCTION, in_real->uri));
+
+	info = g_new (FillCallbackInfo, 1);
+
+	info->in_args = in_real;
+	info->out_args = out_real;
+	info->response = response;
+	info->response_data = response_data;
+	
+	request = gnome_keyring_find_network_password (in_real->username,
+						       in_real->domain,
+						       in_real->server,
+						       in_real->object,
+						       in_real->protocol,
+						       in_real->authtype,
+						       in_real->port,
+						       fill_auth_callback,
+						       info, g_free);
+
+	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+}
+
+static void /* GnomeVFSModuleCallback */
+vfs_fill_authentication_callback (gconstpointer in, size_t in_size, 
+				  gpointer out, size_t out_size, 
+				  gpointer user_data)
+{
+	GnomeVFSModuleCallbackFillAuthenticationIn *in_real;
+	GnomeVFSModuleCallbackFillAuthenticationOut *out_real;
+	GnomeKeyringNetworkPasswordData *pwd_data;
+	GList *list;
+	GnomeKeyringResult result;
+	
+	g_return_if_fail (sizeof (GnomeVFSModuleCallbackFillAuthenticationIn) == in_size
+		&& sizeof (GnomeVFSModuleCallbackFillAuthenticationOut) == out_size);
+
+	g_return_if_fail (in != NULL);
+	g_return_if_fail (out != NULL);
+
+	in_real = (GnomeVFSModuleCallbackFillAuthenticationIn *)in;
+	out_real = (GnomeVFSModuleCallbackFillAuthenticationOut *)out;
+
+	DEBUG_MSG (("+%s uri:'%s' \n", G_GNUC_FUNCTION, in_real->uri));
+
+	result = gnome_keyring_find_network_password_sync (in_real->username,
+							   in_real->domain,
+							   in_real->server,
+							   in_real->object,
+							   in_real->protocol,
+							   in_real->authtype,
+							   in_real->port,
+							   &list);
+	
+	if (result != GNOME_KEYRING_RESULT_OK ||
+	    list == NULL) {
+		out_real->valid = FALSE;
+	} else {
+		/* We use the first result, which is the least specific match */
+		pwd_data = list->data;
+
+		out_real->valid = TRUE;
+		out_real->username = g_strdup (pwd_data->user);
+		out_real->domain = g_strdup (pwd_data->domain);
+		out_real->password = g_strdup (pwd_data->password);
+		
+		gnome_keyring_network_password_list_free (list);
+	}
+
+	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+}
+
+typedef struct {
+	const GnomeVFSModuleCallbackSaveAuthenticationIn	*in_args;
+	GnomeVFSModuleCallbackSaveAuthenticationOut	*out_args;
+
+	GnomeVFSModuleCallbackResponse response;
+	gpointer response_data;
+} SaveCallbackInfo;
+
+
+static void
+save_auth_callback (GnomeKeyringResult result,
+		    guint32            item_id,
+		    gpointer           data)
+{
+	SaveCallbackInfo *info;
+	
+	info = data;
+
+	info->response (info->response_data);
+}
+
+static void /* GnomeVFSAsyncModuleCallback */
+vfs_async_save_authentication_callback (gconstpointer in, size_t in_size, 
+					gpointer out, size_t out_size, 
+					gpointer user_data,
+					GnomeVFSModuleCallbackResponse response,
+					gpointer response_data)
+{
+	GnomeVFSModuleCallbackSaveAuthenticationIn *in_real;
+	GnomeVFSModuleCallbackSaveAuthenticationOut *out_real;
+	gpointer request;
+	SaveCallbackInfo *info;
+	
+	g_return_if_fail (sizeof (GnomeVFSModuleCallbackSaveAuthenticationIn) == in_size
+		&& sizeof (GnomeVFSModuleCallbackSaveAuthenticationOut) == out_size);
+
+	g_return_if_fail (in != NULL);
+	g_return_if_fail (out != NULL);
+
+	in_real = (GnomeVFSModuleCallbackSaveAuthenticationIn *)in;
+	out_real = (GnomeVFSModuleCallbackSaveAuthenticationOut *)out;
+
+	DEBUG_MSG (("+%s uri:'%s' \n", G_GNUC_FUNCTION, in_real->uri));
+
+	info = g_new (SaveCallbackInfo, 1);
+
+	info->in_args = in_real;
+	info->out_args = out_real;
+	info->response = response;
+	info->response_data = response_data;
+	
+	request = gnome_keyring_set_network_password (in_real->keyring,
+						      in_real->username,
+						      in_real->domain,
+						      in_real->server,
+						      in_real->object,
+						      in_real->protocol,
+						      in_real->authtype,
+						      in_real->port,
+						      in_real->password,
+						      save_auth_callback,
+						      info, g_free);
+
+	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+}
+
+static void /* GnomeVFSModuleCallback */
+vfs_save_authentication_callback (gconstpointer in, size_t in_size, 
+				  gpointer out, size_t out_size, 
+				  gpointer user_data)
+{
+	GnomeVFSModuleCallbackSaveAuthenticationIn *in_real;
+	GnomeVFSModuleCallbackSaveAuthenticationOut *out_real;
+	GnomeKeyringResult result;
+	guint32 item;
+	
+	g_return_if_fail (sizeof (GnomeVFSModuleCallbackSaveAuthenticationIn) == in_size
+		&& sizeof (GnomeVFSModuleCallbackSaveAuthenticationOut) == out_size);
+
+	g_return_if_fail (in != NULL);
+	g_return_if_fail (out != NULL);
+
+	in_real = (GnomeVFSModuleCallbackSaveAuthenticationIn *)in;
+	out_real = (GnomeVFSModuleCallbackSaveAuthenticationOut *)out;
+
+	DEBUG_MSG (("+%s uri:'%s' \n", G_GNUC_FUNCTION, in_real->uri));
+
+	result = gnome_keyring_set_network_password_sync (in_real->keyring,
+							  in_real->username,
+							  in_real->domain,
+							  in_real->server,
+							  in_real->object,
+							  in_real->protocol,
+							  in_real->authtype,
+							  in_real->port,
+							  in_real->password,
+							  &item);
+
+	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+}
+
 void
 gnome_authentication_manager_init (void)
 {
@@ -255,6 +690,19 @@ gnome_authentication_manager_init (void)
 						     GINT_TO_POINTER (1),
 						     NULL);
 
+	gnome_vfs_async_module_callback_set_default (GNOME_VFS_MODULE_CALLBACK_FILL_AUTHENTICATION,
+						     vfs_async_fill_authentication_callback, 
+						     GINT_TO_POINTER (0),
+						     NULL);
+	gnome_vfs_async_module_callback_set_default (GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION,
+						     vfs_async_full_authentication_callback, 
+						     GINT_TO_POINTER (0),
+						     NULL);
+	gnome_vfs_async_module_callback_set_default (GNOME_VFS_MODULE_CALLBACK_SAVE_AUTHENTICATION,
+						     vfs_async_save_authentication_callback, 
+						     GINT_TO_POINTER (0),
+						     NULL);
+
 	/* These are in case someone makes a synchronous http call for
 	 * some reason. 
 	 */
@@ -267,4 +715,18 @@ gnome_authentication_manager_init (void)
 					       vfs_authentication_callback, 
 					       GINT_TO_POINTER (1),
 					       NULL);
+
+	gnome_vfs_module_callback_set_default (GNOME_VFS_MODULE_CALLBACK_FILL_AUTHENTICATION,
+					       vfs_fill_authentication_callback, 
+					       GINT_TO_POINTER (0),
+					       NULL);
+	gnome_vfs_module_callback_set_default (GNOME_VFS_MODULE_CALLBACK_FULL_AUTHENTICATION,
+					       vfs_full_authentication_callback, 
+					       GINT_TO_POINTER (0),
+					       NULL);
+	gnome_vfs_module_callback_set_default (GNOME_VFS_MODULE_CALLBACK_SAVE_AUTHENTICATION,
+					       vfs_save_authentication_callback, 
+					       GINT_TO_POINTER (0),
+					       NULL);
+
 }
