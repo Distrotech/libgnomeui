@@ -1,5 +1,5 @@
 /* GNOME GUI Library
- * Copyright (C) Free Software Foundation
+ * Copyright (C) Red Hat Software
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
  * License as published by the Free Software Foundation; either
@@ -31,6 +31,9 @@ BEGIN_GNOME_DECLS
  *	         Returns the GtkHBox
 */
 GtkWidget *gnome_build_labelled_widget(char *labelstr, GtkWidget *child);
+
+/* same as above, but does widget+label instead of label+widget */
+GtkWidget *gnome_build_widget_labelled(GtkWidget *child, const char *labelstr);
 
 END_GNOME_DECLS
 

@@ -84,7 +84,6 @@ static GtkEnumValue _gnome_mdi_mode_values[] = {
   { GNOME_MDI_NOTEBOOK, "GNOME_MDI_NOTEBOOK", "notebook" },
   { GNOME_MDI_TOPLEVEL, "GNOME_MDI_TOPLEVEL", "toplevel" },
   { GNOME_MDI_MODAL, "GNOME_MDI_MODAL", "modal" },
-  { GNOME_MDI_MS, "GNOME_MDI_MS", "ms" },
   { GNOME_MDI_DEFAULT_MODE, "GNOME_MDI_DEFAULT_MODE", "default-mode" },
   { GNOME_MDI_REDRAW, "GNOME_MDI_REDRAW", "redraw" },
   { 0, NULL, NULL }

@@ -44,3 +44,20 @@ GtkWidget *gnome_build_labelled_widget(char *labelstr, GtkWidget *child)
 
   return hbox;
 }
+
+/* same as above, but does widget+label instead of label+widget */
+GtkWidget *gnome_build_widget_labelled(GtkWidget *child, const char *labelstr)
+{
+  GtkWidget *hbox, *label;
+
+  hbox = gtk_hbox_new(FALSE, GNOME_PAD_SMALL);
+
+  gtk_widget_show(child);
+  gtk_container_add(GTK_CONTAINER(hbox), child);
+
+  label = gtk_label_new(labelstr);
+  gtk_widget_show(label);
+  gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+  return hbox;
+}
