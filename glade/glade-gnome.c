@@ -246,9 +246,9 @@ gnome_add_dock_item (GladeXML *xml,
 
 	child = glade_xml_build_widget (xml, childinfo->child);
 
-	toplevel = glade_xml_get_toplevel (xml);
+	toplevel = gtk_widget_get_ancestor (parent, GNOME_TYPE_APP);
 
-	if (GNOME_IS_APP (toplevel)) {
+	if (toplevel != NULL) {
 	    gnome_app_add_dock_item (
 		GNOME_APP (toplevel),
 		BONOBO_DOCK_ITEM (child),
@@ -328,7 +328,7 @@ dialog_build_children(GladeXML *self, GtkWidget *w,
 }
 
 static void
-app_build_children (GladeXML *self, GtkWidget *parent,
+app_build_children (GladeXML *xml, GtkWidget *parent,
 		    GladeWidgetInfo *info)
 {
     int i;
@@ -339,30 +339,29 @@ app_build_children (GladeXML *self, GtkWidget *parent,
 
 	cinfo = &info->children[i];
 
-	child = glade_xml_build_widget (self, cinfo->child);
-
-	g_object_ref (G_OBJECT (child));
-	gtk_widget_freeze_child_notify (child);
-
 	if (cinfo->internal_child) {
-	    if (!strcmp (cinfo->internal_child, "appbar"))
+	    /* not quite proper handling of appbar, but ... */
+	    if (!strcmp (cinfo->internal_child, "appbar")) {
+		child = glade_xml_build_widget (xml, cinfo->child);
 		gnome_app_set_statusbar (GNOME_APP (parent), child);
+	    } else {
+		glade_xml_handle_internal_child (xml, parent, cinfo);
+	    }
+	} else {
+	    child = glade_xml_build_widget (xml, cinfo->child);
+
 #if 0
-	    else if (!strcmp (cinfo->internal_child, "dock"))
-		build_dock (self, GNOME_APP (parent), BONOBO_DOCK (child), cinfo->child);
+	    g_object_ref (G_OBJECT (child));
+	    gtk_widget_freeze_child_notify (child);
+	    for (j = 0; j < info->children[i].n_properties; j++)
+		glade_xml_set_packing_property (
+			xml, GNOME_APP (parent)->vbox, child,
+			cinfo->properties[j].name,
+			cinfo->properties[j].value);
+	    gtk_widget_thaw_child_notify(child);
+	    g_object_unref(G_OBJECT(child));
 #endif
 	}
-
-#if 0
-	for (j = 0; j < info->children[i].n_properties; j++)
-	    glade_xml_set_packing_property (
-		self, GNOME_APP (parent)->vbox, child,
-		cinfo->properties[j].name,
-		cinfo->properties[j].value);
-#endif
-	gtk_widget_thaw_child_notify(child);
-	g_object_unref(G_OBJECT(child));
-
     }
 }
 

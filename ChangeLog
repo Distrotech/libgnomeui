@@ -1,3 +1,10 @@
+2001-12-12  James Henstridge  <james@daa.com.au>
+
+	* glade/glade-gnome.c (app_build_children): correctly handle
+	internal children in GnomeApps.
+	(gnome_add_dock_item): use gtk_widget_get_ancestor() instead of
+	glade_xml_get_toplevel() now that app_build_children is working.
+
 2001-12-10  jacob berkman  <jacob@ximian.com>
 
 	* tests/Makefile.am: there is no
