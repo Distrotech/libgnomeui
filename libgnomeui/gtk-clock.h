@@ -71,6 +71,7 @@ struct _GtkClockClass {
 
 guint gtk_clock_get_type(void);
 GtkWidget *gtk_clock_new(GtkClockType type);
+void gtk_clock_construct(GtkClock *gclock, GtkClockType type);
 void gtk_clock_set_format(GtkClock *gclock, const gchar *fmt);
 void gtk_clock_set_seconds(GtkClock *gclock, time_t seconds);
 void gtk_clock_set_update_interval(GtkClock *gclock, gint seconds);

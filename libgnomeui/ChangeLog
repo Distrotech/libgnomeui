@@ -1,3 +1,7 @@
+Wed May 17 12:59:39 2000  George Lebl <jirka@5z.com>
+
+	* gtk-clock.[ch]: add a construct method
+
 Sat May 13 11:56:35 2000  George Lebl <jirka@5z.com>
 
 	* gnome-scores.c (gnome_scores_new): make the strftime buffer 256

@@ -146,26 +146,32 @@ static gint gtk_clock_timer_first_callback(gpointer data)
 	return FALSE;
 }
 
+void gtk_clock_construct(GtkClock *gclock, GtkClockType type)
+{
+	g_return_if_fail(gclock != NULL);
+	g_return_if_fail(GTK_IS_CLOCK(gclock));
+
+	gclock->type = type;
+	
+	if (type == GTK_CLOCK_REALTIME) {
+		gclock->fmt = g_strdup("%H:%M");
+		gclock->update_interval = 60;
+		gclock->tm = localtime(&gclock->seconds);
+		gclock->timer_id = gtk_timeout_add(1000*(60-gclock->tm->tm_sec),
+						   gtk_clock_timer_first_callback, gclock);
+	} else {
+		gclock->fmt = g_strdup("%H:%M:%S");
+		gclock->tm = g_new(struct tm, 1);
+		memset(gclock->tm, 0, sizeof(struct tm));
+		gclock->update_interval = 1;
+	}
+
+	gtk_clock_gen_str(gclock);
+}
+
 GtkWidget *gtk_clock_new(GtkClockType type)
 {
 	GtkClock *clock = gtk_type_new(gtk_clock_get_type());
-
-	clock->type = type;
-	
-	if (type == GTK_CLOCK_REALTIME) {
-		clock->fmt = g_strdup("%H:%M");
-		clock->update_interval = 60;
-		clock->tm = localtime(&clock->seconds);
-		clock->timer_id = gtk_timeout_add(1000*(60-clock->tm->tm_sec),
-						  gtk_clock_timer_first_callback, clock);
-	} else {
-		clock->fmt = g_strdup("%H:%M:%S");
-		clock->tm = g_new(struct tm, 1);
-		memset(clock->tm, 0, sizeof(struct tm));
-		clock->update_interval = 1;
-	}
-
-	gtk_clock_gen_str(clock);
 
 	return GTK_WIDGET(clock);
 }
