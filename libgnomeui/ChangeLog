@@ -1,3 +1,8 @@
+1998-09-27  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-actionarea.h, gnome-actionarea.c: Removed.
+	* Makefile.am, libgnomeui.h: Changed accordingly.
+
 1998-09-27  Raja R Harinath  <harinath@cs.umn.edu>
 
 	`automake' 1.3b and older have a bug with handling continuation 
