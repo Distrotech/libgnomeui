@@ -768,7 +768,14 @@ stock_button_new(GladeXML *xml, GladeWidgetInfo *info)
                 }
         }
         if (string != NULL) {
-                button = gtk_button_new_with_label(_(string));
+		guint key;
+                button = gtk_button_new_with_label("");
+		key = gtk_label_parse_uline(GTK_LABEL(GTK_BIN(button)->child),
+					    _(string));
+		if (key)
+			gtk_widget_add_accelerator(button, "clicked",
+						   glade_xml_ensure_accel(xml),
+						   key, GDK_MOD1_MASK, 0);
         } else if (stock != NULL) {
 		const char *tmp = get_stock_name(stock);
 		if (tmp)
