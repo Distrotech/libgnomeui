@@ -678,7 +678,7 @@ static gint book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer 
 
 static GtkWidget *book_create (GnomeMDI *mdi)
 {
-	GtkWidget *us, *rw;
+	GtkWidget *us;
 	
 	us = gtk_notebook_new();
 
@@ -770,8 +770,6 @@ static void app_clone(GnomeMDI *mdi, GnomeApp *app)
 static gint app_close_top (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 {
 	GnomeMDIChild *child = NULL;
-	GList *child_node;
-	gint handler_ret = TRUE;
 	
 	if(g_list_length(mdi->windows) == 1) {
 		if(!gnome_mdi_remove_all(mdi, FALSE))
@@ -945,6 +943,8 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 					
 					g_list_free(menu_list);
 				}
+				else
+					gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(items));
 			}
 		}
 	}
@@ -985,8 +985,6 @@ static void app_create (GnomeMDI *mdi, gchar *layout_string)
 {
 	GtkWidget *window;
 	GnomeApp *app;
-	GtkMenuBar *menubar = NULL;
-	GtkToolbar *toolbar = NULL;
 	GtkSignalFunc func = NULL;
 	GnomeUIInfo *ui_info;
 	
@@ -1475,7 +1473,6 @@ gint gnome_mdi_remove_child (GnomeMDI *mdi, GnomeMDIChild *child, gint force)
 gint gnome_mdi_remove_all (GnomeMDI *mdi, gint force)
 {
 	GList *child_node;
-	GnomeMDIChild *child;
 	gint handler_ret = TRUE;
 
 	g_return_val_if_fail(mdi != NULL, FALSE);

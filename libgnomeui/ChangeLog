@@ -1,3 +1,9 @@
+1999-07-10  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (app_set_view): fixed a problem with 
+	GNOME_MDI_ITEM_COUNT_KEY not being set to NULL when it should be.
+	removed some unused variables.
+
 1999-07-09  Miguel de Icaza  <miguel@gnu.org>
 
 	* gnome-font-picker.c (gnome_font_picker_label_use_font_in_label):
