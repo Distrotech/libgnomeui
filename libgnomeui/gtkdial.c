@@ -41,8 +41,6 @@ static gint gtk_dial_expose                   (GtkWidget         *widget,
 					       GdkEventExpose    *event);
 static void gtk_dial_make_pixmap              (GtkDial           *dial);
 static void gtk_dial_paint                    (GtkDial           *dial);
-static gint gtk_dial_configure_event          (GtkWidget         *widget,
-					       GdkEventConfigure *event); 
 static gint gtk_dial_button_press             (GtkWidget         *widget,
 					       GdkEventButton    *event);
 static gint gtk_dial_button_release           (GtkWidget         *widget,
@@ -105,7 +103,6 @@ gtk_dial_class_init (GtkDialClass *class)
   widget_class->size_request = gtk_dial_size_request;
   widget_class->size_allocate = gtk_dial_size_allocate;
   /* Widget events */
-  widget_class->configure_event = gtk_dial_configure_event;
   widget_class->button_press_event = gtk_dial_button_press;
   widget_class->button_release_event = gtk_dial_button_release;
   widget_class->motion_notify_event = gtk_dial_motion_notify;
@@ -357,12 +354,6 @@ gtk_dial_size_allocate (GtkWidget     *widget,
   dial->pointer_width = dial->radius / 5;
   gtk_dial_make_pixmap (GTK_DIAL (widget));
 
-}
-
-static gint
-gtk_dial_configure_event (GtkWidget *widget, GdkEventConfigure *event)
-{
-  g_print ("Configure event called.\n");
 }
 
 static gint
