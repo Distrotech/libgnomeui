@@ -88,7 +88,7 @@ static GnomeModuleRequirement libbonoboui_requirements[] = {
 
 GnomeModuleInfo libbonoboui_module_info = {
         "libbonoboui", VERSION, N_("Bonobo UI"),
-        libbonoboui_requirements,
+        libbonoboui_requirements, NULL,
         libbonoboui_pre_args_parse, libbonoboui_post_args_parse,
         NULL, NULL, NULL, NULL, NULL
 };
@@ -101,9 +101,9 @@ static void libgnomeui_arg_callback(poptContext con,
                                     enum poptCallbackReason reason,
                                     const struct poptOption * opt,
                                     const char * arg, void * data);
-static void libgnomeui_constructor(GType type, guint n_construct_properties,
-                                   GObjectConstructParam *construct_properties,
-                                   const GnomeModuleInfo *mod_info);
+static void libgnomeui_init_pass(const GnomeModuleInfo *mod_info);
+static void libgnomeui_class_init(GnomeProgramClass *klass, const GnomeModuleInfo *mod_info);
+static void libgnomeui_instance_init(GnomeProgram *program, GnomeModuleInfo *mod_info);
 static void libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 static void libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 static void libgnomeui_rc_parse (gchar *command);
@@ -135,17 +135,32 @@ static struct poptOption libgnomeui_options[] = {
 
 GnomeModuleInfo libgnomeui_module_info = {
         "libgnomeui", VERSION, "GNOME GUI Library",
-        libgnomeui_requirements,
+        libgnomeui_requirements, libgnomeui_instance_init,
         libgnomeui_pre_args_parse, libgnomeui_post_args_parse,
         libgnomeui_options,
-        NULL, libgnomeui_constructor,
+        libgnomeui_init_pass, libgnomeui_class_init,
         NULL, NULL
 };
+
+typedef struct {
+        guint crash_dialog_id;
+        guint display_id;
+        guint default_icon_id;
+} GnomeProgramClass_libgnomeui;
+
+typedef struct {
+        gboolean constructed;
+} GnomeProgramPrivate_libgnomeui;
+
+static GQuark quark_gnome_program_private_libgnomeui = 0;
+static GQuark quark_gnome_program_class_libgnomeui = 0;
 
 static void
 libgnomeui_get_property (GObject *object, guint param_id, GValue *value,
                          GParamSpec *pspec)
 {
+        GnomeProgramClass_libgnomeui *cdata;
+        GnomeProgramPrivate_libgnomeui *priv;
         GnomeProgram *program;
 
         g_return_if_fail(object != NULL);
@@ -153,24 +168,27 @@ libgnomeui_get_property (GObject *object, guint param_id, GValue *value,
 
         program = GNOME_PROGRAM(object);
 
-        switch(param_id) {
-        default:
-                g_message(G_STRLOC);
-                G_OBJECT_WARN_INVALID_PROPERTY_ID(object, param_id, pspec);
-                break;
-        }
+        cdata = g_type_get_qdata(G_OBJECT_TYPE(program), quark_gnome_program_class_libgnomeui);
+        priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
+
+        G_OBJECT_WARN_INVALID_PROPERTY_ID(object, param_id, pspec);
 }
 
 static void
 libgnomeui_set_property (GObject *object, guint param_id,
                          const GValue *value, GParamSpec *pspec)
 {
+        GnomeProgramClass_libgnomeui *cdata;
+        GnomeProgramPrivate_libgnomeui *priv;
         GnomeProgram *program;
 
         g_return_if_fail(object != NULL);
         g_return_if_fail(GNOME_IS_PROGRAM (object));
 
         program = GNOME_PROGRAM(object);
+
+        cdata = g_type_get_qdata(G_OBJECT_TYPE(program), quark_gnome_program_class_libgnomeui);
+        priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
 
         switch(param_id) {
         default:
@@ -181,36 +199,54 @@ libgnomeui_set_property (GObject *object, guint param_id,
 }
 
 static void
-libgnomeui_constructor (GType type, guint n_construct_properties,
-                        GObjectConstructParam *construct_properties,
-                        const GnomeModuleInfo *mod_info)
+libgnomeui_init_pass (const GnomeModuleInfo *mod_info)
 {
-        GnomeProgramClass *pclass;
+    if (!quark_gnome_program_private_libgnomeui)
+	quark_gnome_program_private_libgnomeui = g_quark_from_static_string
+	    ("gnome-program-private:libgnomeui");
 
-        pclass = GNOME_PROGRAM_CLASS(g_type_class_peek(type));
+    if (!quark_gnome_program_class_libgnomeui)
+	quark_gnome_program_class_libgnomeui = g_quark_from_static_string
+	    ("gnome-program-class:libgnomeui");
+}
 
-        gnome_program_install_property (
-                pclass,
+static void
+libgnomeui_class_init (GnomeProgramClass *klass, const GnomeModuleInfo *mod_info)
+{
+        GnomeProgramClass_libgnomeui *cdata = g_new0 (GnomeProgramClass_libgnomeui, 1);
+
+        g_type_set_qdata (G_OBJECT_CLASS_TYPE (klass), quark_gnome_program_class_libgnomeui, cdata);
+
+        cdata->crash_dialog_id = gnome_program_install_property (
+                klass,
                 libgnomeui_get_property,
                 libgnomeui_set_property,
                 g_param_spec_boolean (LIBGNOMEUI_PARAM_CRASH_DIALOG, NULL, NULL,
                                       TRUE, (G_PARAM_READABLE | G_PARAM_WRITABLE |
                                              G_PARAM_CONSTRUCT_ONLY)));
-        gnome_program_install_property (
-                pclass,
+        cdata->display_id = gnome_program_install_property (
+                klass,
                 libgnomeui_get_property,
                 libgnomeui_set_property,
                 g_param_spec_string (LIBGNOMEUI_PARAM_DISPLAY, NULL, NULL, NULL,
                                      (G_PARAM_READABLE | G_PARAM_WRITABLE |
                                       G_PARAM_CONSTRUCT_ONLY)));
 
-        gnome_program_install_property (
-                pclass,
+        cdata->default_icon_id = gnome_program_install_property (
+                klass,
                 libgnomeui_get_property,
                 libgnomeui_set_property,
                 g_param_spec_string (LIBGNOMEUI_PARAM_DEFAULT_ICON, NULL, NULL, NULL,
                                      (G_PARAM_READABLE | G_PARAM_WRITABLE |
                                       G_PARAM_CONSTRUCT_ONLY)));
+}
+
+static void
+libgnomeui_instance_init (GnomeProgram *program, GnomeModuleInfo *mod_info)
+{
+    GnomeProgramPrivate_libgnomeui *priv = g_new0 (GnomeProgramPrivate_libgnomeui, 1);
+
+    g_object_set_qdata (G_OBJECT (program), quark_gnome_program_private_libgnomeui, priv);
 }
 
 static void
@@ -259,14 +295,19 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 }
 
 static void
-libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
+libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
 {
+        GnomeProgramPrivate_libgnomeui *priv = g_new0(GnomeProgramPrivate_libgnomeui, 1);
+
         gnome_type_init();
         gtk_rc_set_image_loader(libgnomeui_pixbuf_image_loader);
         libgnomeui_rc_parse(program_invocation_name);
         gnome_preferences_load();
 
         libgnomeui_segv_setup(TRUE);
+
+        priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
+        priv->constructed = TRUE;
 }
 
 static void
@@ -505,9 +546,9 @@ int gnome_init_with_popt_table(const char *app_id,
 			       int flags,
 			       poptContext *return_ctx)
 {
-        gnome_program_init(app_id, app_version, argc, argv,
-                           GNOME_PARAM_MODULE_INFO,
-                           libgnomeui_module_info,
+        gnome_program_init(app_id, app_version,
+                           &libgnomeui_module_info,
+                           argc, argv,
                            GNOME_PARAM_POPT_TABLE, options,
                            GNOME_PARAM_POPT_FLAGS, flags,
                            NULL);

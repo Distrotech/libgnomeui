@@ -1,3 +1,7 @@
+2001-04-24  Martin Baulig  <baulig@suse.de>
+
+	* gnome-init.c: Reflect latests GnomeProgram API changes.
+
 2001-04-19  Michael Meeks  <michael@ximian.com>
 
 	* gnome-init.c (libgnomeui_constructor): setup the properties to
