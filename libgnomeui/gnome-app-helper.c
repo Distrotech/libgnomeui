@@ -183,7 +183,7 @@ gnome_app_add_help_menu_entries(GnomeApp *app,
     {
       /* XXX should throw up a dialog, or perhaps default to */
       /* some standard help page                             */
-      fprintf(stderr, "Unable to open %s\n", topicFile);
+      fprintf(stderr, "Unable to open %s\n", (topicFile) ? topicFile : "(null)");
       g_free(topicFile);
       return;
     }
