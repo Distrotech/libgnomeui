@@ -1,5 +1,9 @@
 2001-03-24  Martin Baulig  <baulig@suse.de>
 
+	* configure.in (GNOME_MAKETYPES, GNOME_MAKEENUMS): Check
+	for the `gnome-maketypes.awk' and `gnome-makeenums.pl'
+	scripts which are installed by libgnome-2 and AC_SUBST them.
+
 	* demos/: New directory. This was copied here from
 	gnome-libs/demos with the full CVS history.
 
