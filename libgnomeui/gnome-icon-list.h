@@ -97,11 +97,6 @@ typedef struct {
 
 guint          gnome_icon_list_get_type            (void);
 
-/*
- * Note that gnome_icon_list_new returns an IconList in frozen state
- * you have to call gnome_icon_list_thaw at least once, or use the
- * gnome_icon_list_new_thawed.
- */
 GtkWidget     *gnome_icon_list_new                 (guint         icon_width, 
 						    GtkAdjustment *adj,
 						    gboolean      is_editable);

@@ -831,7 +831,7 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (!(pos < 0) || (pos >= gil->icons));
+	g_return_if_fail (pos >= 0 && pos < gil->icons);
 
 	was_selected = FALSE;
 
@@ -979,7 +979,7 @@ gnome_icon_list_select_icon (GnomeIconList *gil, int pos)
 {
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (!(pos < 0) || (pos >= gil->icons));
+	g_return_if_fail (pos >= 0 && pos < gil->icons);
 
 	select_icon (gil, pos, NULL);
 }
@@ -1015,7 +1015,7 @@ gnome_icon_list_unselect_icon (GnomeIconList *gil, int pos)
 {
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (!(pos < 0) || (pos >= gil->icons));
+	g_return_if_fail (pos >= 0 && pos < gil->icons);
 
 	unselect_icon (gil, pos, NULL);
 }
@@ -1066,14 +1066,13 @@ real_select_icon (Gil *gil, gint num, GdkEvent *event)
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (!(num < 0) || (num >= gil->icons));
+	g_return_if_fail (num >= 0 && num < gil->icons);
 
 	icon = g_list_nth (gil->icon_list, num)->data;
 
 	if (!icon->text->selected){
 		gnome_icon_text_item_select (icon->text, 1);
 		gil->selection = g_list_append (gil->selection, GINT_TO_POINTER (num));
-		
 	}
 }
 
@@ -1084,7 +1083,7 @@ real_unselect_icon (Gil *gil, gint num, GdkEvent *event)
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (!(num < 0) || (num >= gil->icons));
+	g_return_if_fail (num >= 0 && num < gil->icons);
 
 	icon = g_list_nth (gil->icon_list, num)->data;
 
@@ -1738,7 +1737,7 @@ gnome_icon_list_set_icon_data_full (GnomeIconList *gil,
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (!(pos < 0) || (pos >= gil->icons));
+	g_return_if_fail (pos >= 0 && pos < gil->icons);
 
 	icon = g_list_nth (gil->icon_list, pos)->data;
 	icon->data = data;
@@ -1773,7 +1772,7 @@ gnome_icon_list_get_icon_data (GnomeIconList *gil, int pos)
 
 	g_return_val_if_fail (gil != NULL, NULL);
 	g_return_val_if_fail (IS_GIL (gil), NULL);
-	g_return_val_if_fail (!(pos < 0) || (pos >= gil->icons), NULL);
+	g_return_val_if_fail (pos >= 0 && pos < gil->icons, NULL);
 	
 	icon = g_list_nth (gil->icon_list, pos)->data;
 	return icon->data;
@@ -1926,7 +1925,7 @@ gnome_icon_list_moveto (GnomeIconList *gil, int pos, double yalign)
 	
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
-	g_return_if_fail (!(pos < 0) || (pos >= gil->icons));
+	g_return_if_fail (pos >= 0 && pos < gil->icons);
 	g_return_if_fail (yalign >= 0.0 && yalign <= 1.0);
 	g_return_if_fail (gil->lines != NULL);
 	
@@ -1962,7 +1961,7 @@ gnome_icon_list_icon_is_visible (GnomeIconList *gil, int pos)
 	
 	g_return_val_if_fail (gil != NULL, GTK_VISIBILITY_NONE);
 	g_return_val_if_fail (IS_GIL (gil), GTK_VISIBILITY_NONE);
-	g_return_val_if_fail (!(pos < 0) || (pos >= gil->icons), GTK_VISIBILITY_NONE);
+	g_return_val_if_fail (pos >= 0 && pos < gil->icons, GTK_VISIBILITY_NONE);
 
 	if (gil->lines == NULL)
 		return GTK_VISIBILITY_NONE;

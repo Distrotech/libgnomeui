@@ -1,3 +1,11 @@
+1998-11-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.h: Removed obsolete comment about
+	gnome_icon_list_new_thawed().
+
+	* gnome-icon-list.c: All the assertions that checked for the
+	number of icons in the ilist were wrong.  Fixed them.
+
 1998-11-29  Justin Maurer  <justin@openprojects.net>
 
 	* gnome-app-helper.c: voila! done. small scattered bugfixes.
