@@ -13,6 +13,7 @@
 #include "libgnomeui/gnome-actionarea.h"
 #include "libgnomeui/gnome-scores.h"
 #include "libgnomeui/gnome-stock.h"
+#include "libgnomeui/gnome-session.h"
 #include "libgnomeui/gtk-clock.h"
 
 BEGIN_GNOME_DECLS
