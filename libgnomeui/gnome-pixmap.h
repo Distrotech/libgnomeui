@@ -1,5 +1,6 @@
 #ifndef __GNOME_PIXMAP_H__
 #define __GNOME_PIXMAP_H__
+#include <libgnome/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

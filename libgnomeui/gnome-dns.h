@@ -1,6 +1,8 @@
 #ifndef __GNOME_DNS_H__
 #define __GNOME_DNS_H__
 
+#include <libgnome/gnome-defs.h>
+
 BEGIN_GNOME_DECLS
 
 /*

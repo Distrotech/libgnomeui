@@ -20,6 +20,7 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtkwindow.h>
+#include <libgnome/gnome-defs.h>
 
 
 #define GNOME_MESSAGEBOX_WIDTH  425

@@ -6,6 +6,7 @@
 
 #include <unistd.h>
 #include <gtk/gtkobject.h>
+#include <libgnome/gnome-defs.h>
 
 /* If we don't have libSM, then we just define bogus values for the
    things we need from SMlib.h.  The values don't matter because this

@@ -22,6 +22,7 @@
 #define __GNOME_FONT_SELECTOR_H__
 
 #include <gtk/gtk.h>
+#include <libgnome/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

@@ -4,6 +4,7 @@
 #define GNOME_APP_H
 
 #include <gtk/gtk.h>
+#include <libgnome/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

@@ -6,6 +6,8 @@
 #ifndef GNOME_COLOR_SELECTOR_H
 #define GNOME_COLOR_SELECTOR_H
 
+#include <libgnome/gnome-defs.h>
+
 BEGIN_GNOME_DECLS
 
 typedef struct _GnomeColorSelector GnomeColorSelector;

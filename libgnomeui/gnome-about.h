@@ -1,26 +1,20 @@
-/* GNOME GUI Library
- * Copyright (C) 1998 Cesar Miquel <miquel@df.uba.ar>
- * Based in gnome-about, copyright (C) 1998 Horacio J. Peña
+/* 
+ * "About..." Widget
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * AUTHOR:
+ * Cesar Miquel <miquel@df.uba.ar>
  *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the Free
- * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * DESCRIPTION:
+ *	A very specialized widget to display "About this program"-like
+ * boxes.
  */
+
 #ifndef __GNOME_ABOUT_H__
 #define __GNOME_ABOUT_H__
 
 #include <gdk/gdk.h>
 #include <gtk/gtkwindow.h>
+#include <libgnome/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 
@@ -48,12 +42,28 @@ struct _GnomeAboutClass
 
 
 guint      gnome_about_get_type       (void);
-GtkWidget* gnome_about_new            (gchar	*title,
-					gchar	*version,
-					gchar	*copyright,
-					gchar	**authors,
-					gchar	*comments,
-					gchar	*logo);
+/* Main routine that creates the widget 
+ *
+ * USAGE:
+ *
+ *	gchar *authors[] = {"author1", "author2", ..., NULL};
+ *
+ *	GtkWidget *about = gnome_about_new ( _("GnoApp"), "1.2b",
+ *				_("Copyrigth FSF (C) 1998"),
+ *				authors,
+ *				"Comment line 1\nLine 2",
+ *				"/usr/local/share/pixmaps/gnoapp-logo.xpm");
+ *	gtk_widget_show (about);		
+ */
+GtkWidget* gnome_about_new	(gchar	*title, /* Name of the application. */
+				gchar	*version, /* Version. */
+				gchar	*copyright, /* Copyright notice (one
+							line.) */
+				gchar	**authors, /* NULL terminated list of
+							authors. */
+				gchar	*comments, /* Other comments. */
+				gchar	*logo /* A logo pixmap file. */
+				);
 
 END_GNOME_DECLS
 

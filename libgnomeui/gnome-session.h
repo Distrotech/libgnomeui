@@ -2,6 +2,7 @@
 
 #ifndef GNOME_SESSION_H
 #define GNOME_SESSION_H
+#include <libgnome/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 
