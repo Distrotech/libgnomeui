@@ -60,7 +60,7 @@ struct _GnomeFontPickerClass {
 	GtkButtonClass parent_class;
 
 	/* font_set signal is emitted when font is choosed */
-	void (* font_set) (GnomeFontPicker *gfp, gchar *font_name);
+	void (* font_set) (GnomeFontPicker *gfp, const gchar *font_name);
 
 	/* It is possible we may need more signals */
 	gpointer padding1;

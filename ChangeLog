@@ -1,3 +1,8 @@
+2001-12-08  Murray Cumming  <murrayc@usa.net>
+
+	* libgnomeui/gnome-font-picker.h: font_set default signal
+	handler's char* arg corrected to  const char*.
+
 2001-12-08  Glynn Foster  <glynn.foster@sun.com>
 
 	* libgnomeui/Makefile.am: Build fix.
