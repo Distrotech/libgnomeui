@@ -231,7 +231,7 @@ gnome_property_box_new (void)
 	gtk_container_add (GTK_CONTAINER (property_box), vbox);
 
 	gtk_box_pack_start (GTK_BOX (vbox), property_box->notebook,
-			    FALSE, FALSE, 0);
+			    TRUE, TRUE, 0);
 
 	gtk_container_add (GTK_CONTAINER (hbox), property_box->ok_button);
 	gtk_container_add (GTK_CONTAINER (hbox), property_box->apply_button);
@@ -239,7 +239,7 @@ gnome_property_box_new (void)
 	gtk_container_add (GTK_CONTAINER (hbox), property_box->help_button);
 
 	gtk_container_add (GTK_CONTAINER (bf), hbox);
-	gtk_box_pack_start (GTK_BOX (vbox), bf, FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (vbox), bf, FALSE, FALSE, 0);
 
 	gtk_widget_show (property_box->ok_button);
 	gtk_widget_show (property_box->apply_button);
@@ -327,7 +327,12 @@ help (GtkObject *button, GnomePropertyBox *property_box)
 static void
 just_close (GtkObject *button, GnomePropertyBox *property_box)
 {
-	gtk_signal_emit_by_name (GTK_OBJECT (property_box), "delete_event");
+	int delete_handled = FALSE;
+
+	gtk_signal_emit_by_name (GTK_OBJECT (property_box), "delete_event",
+				 NULL, &delete_handled);
+	if (!delete_handled)
+		gtk_widget_destroy (GTK_WIDGET (property_box));
 }
 
 /* This is connected to the OK button.  */

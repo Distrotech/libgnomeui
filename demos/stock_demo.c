@@ -3,15 +3,17 @@
 #include <string.h>
 
 
+
 static void
 message_dlg(GtkWidget *widget, gpointer data)
 {
 	GnomeMessageBox *box;
 
-	box = gnome_message_box_new ("Really quit?", "question",
-				     GNOME_STOCK_BUTTON_YES,
-				     GNOME_STOCK_BUTTON_NO,
-				     NULL);
+	box = GNOME_MESSAGE_BOX (gnome_message_box_new ("Really quit?",
+							"question",
+				     			GNOME_STOCK_BUTTON_YES,
+				     			GNOME_STOCK_BUTTON_NO,
+				     			NULL));
 	/* Quit no matter what.  */
 	gtk_signal_connect (GTK_OBJECT (box), "clicked",
 			    GTK_SIGNAL_FUNC (gtk_main_quit), NULL);
@@ -19,6 +21,21 @@ message_dlg(GtkWidget *widget, gpointer data)
 	gnome_message_box_set_modal (box);
 	gtk_widget_show (GTK_WIDGET (box));
 }
+
+
+
+static void
+prop_apply(GtkWidget *box, int n)
+{
+	char s[256];
+
+	if (n != -1) {
+		sprintf(s, "Applied changed on page #%d", n + 1);
+		gtk_widget_show(gnome_message_box_new(s, "info",
+				GNOME_STOCK_BUTTON_OK, NULL));
+	}
+}
+
 
 static void
 prop_dlg(GtkWidget *widget, gpointer data)
@@ -43,12 +60,8 @@ prop_dlg(GtkWidget *widget, gpointer data)
 	label = gtk_label_new("Page #2");
 	gtk_widget_show(label);
 	gnome_property_box_append_page(box, w, label);
-	gtk_signal_connect_object(GTK_OBJECT(box->cancel_button), "clicked",
-				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
-				  GTK_OBJECT(box));
-	gtk_signal_connect_object(GTK_OBJECT(box->ok_button), "clicked",
-				  GTK_SIGNAL_FUNC(gtk_widget_destroy),
-				  GTK_OBJECT(box));
+	gtk_signal_connect(GTK_OBJECT(box), "apply",
+			   (GtkSignalFunc)prop_apply, NULL);
 	gtk_widget_show(GTK_WIDGET(box));
 }
 
@@ -60,179 +73,179 @@ static GtkWidget *
 create_menu(GtkWidget *window)
 {
 	void gnome_stock_menu_accel_dlg(char *);
-        GtkWidget *menubar, *w, *menu;
-        GtkAcceleratorTable *accel;
+	GtkWidget *menubar, *w, *menu;
+	GtkAcceleratorTable *accel;
 	int i = 0;
 	guchar key;
 	guint8 mod;
 
-        accel = gtk_accelerator_table_new();
-        menubar = gtk_menu_bar_new();
-        gtk_widget_show(menubar);
+	accel = gtk_accelerator_table_new();
+	menubar = gtk_menu_bar_new();
+	gtk_widget_show(menubar);
 
-        menu = gtk_menu_new();
+	menu = gtk_menu_new();
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_NEW, _("New..."));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_NEW, _("New..."));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_NEW, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_OPEN, _("Open..."));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_OPEN, _("Open..."));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_OPEN, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_SAVE, _("Save"));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_SAVE, _("Save"));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_SAVE, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_SAVE_AS, _("Save as..."));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_SAVE_AS, _("Save as..."));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_SAVE_AS, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
 	w = gtk_menu_item_new();
 	gtk_widget_show(w);
 	gtk_menu_append(GTK_MENU(menu), w);
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_PRINT, _("Print..."));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_PRINT, _("Print..."));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PRINT, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Setup Page..."));
-        gtk_widget_show(w);
-        gtk_menu_append(GTK_MENU(menu), w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Setup Page..."));
+	gtk_widget_show(w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
 	w = gtk_menu_item_new();
 	gtk_widget_show(w);
 	gtk_menu_append(GTK_MENU(menu), w);
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_QUIT, _("Quit"));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_QUIT, _("Quit"));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_QUIT, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 	gtk_signal_connect_object(GTK_OBJECT(w), "activate",
 				  (GtkSignalFunc)message_dlg,
 				  GTK_OBJECT(window));
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gtk_menu_item_new_with_label(_("File"));
-        gtk_widget_show(w);
-        gtk_menu_item_set_submenu(GTK_MENU_ITEM(w), menu);
-        gtk_menu_bar_append(GTK_MENU_BAR(menubar), w);
+	w = gtk_menu_item_new_with_label(_("File"));
+	gtk_widget_show(w);
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(w), menu);
+	gtk_menu_bar_append(GTK_MENU_BAR(menubar), w);
 	
-        menu = gtk_menu_new();
+	menu = gtk_menu_new();
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_UNDO, _("Undo"));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_UNDO, _("Undo"));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_UNDO, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Redo"));
-        gtk_widget_show(w);
-        gtk_menu_append(GTK_MENU(menu), w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Redo"));
+	gtk_widget_show(w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
 	w = gtk_menu_item_new();
 	gtk_widget_show(w);
 	gtk_menu_append(GTK_MENU(menu), w);
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Delete"));
-        gtk_widget_show(w);
-        gtk_menu_append(GTK_MENU(menu), w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_BLANK, _("Delete"));
+	gtk_widget_show(w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_CUT, _("Cut"));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_CUT, _("Cut"));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_CUT, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_COPY, _("Copy"));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_COPY, _("Copy"));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_COPY, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_PASTE, _("Paste"));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_PASTE, _("Paste"));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PASTE, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
 	w = gtk_menu_item_new();
 	gtk_widget_show(w);
 	gtk_menu_append(GTK_MENU(menu), w);
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_PROP, _("Properties..."));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_PROP, _("Properties..."));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PROP, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 	gtk_signal_connect(GTK_OBJECT(w), "activate",
 			   GTK_SIGNAL_FUNC(prop_dlg), NULL);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_PREF, _("Preferences..."));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_PREF, _("Preferences..."));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_PREF, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
 	gtk_signal_connect_object(GTK_OBJECT(w), "activate",
 				  GTK_SIGNAL_FUNC(gnome_stock_menu_accel_dlg),
 				  NULL);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
 	w = gtk_menu_item_new();
 	gtk_widget_show(w);
 	gtk_menu_append(GTK_MENU(menu), w);
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_SCORES, _("Scores..."));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_SCORES, _("Scores..."));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_SCORES, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gtk_menu_item_new_with_label(_("Edit"));
-        gtk_widget_show(w);
-        gtk_menu_item_set_submenu(GTK_MENU_ITEM(w), menu);
+	w = gtk_menu_item_new_with_label(_("Edit"));
+	gtk_widget_show(w);
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(w), menu);
 	gtk_menu_item_right_justify(GTK_MENU_ITEM(w));
-        gtk_menu_bar_append(GTK_MENU_BAR(menubar), w);
+	gtk_menu_bar_append(GTK_MENU_BAR(menubar), w);
 
-        menu = gtk_menu_new();
+	menu = gtk_menu_new();
 
-        w = gnome_stock_menu_item(GNOME_STOCK_MENU_ABOUT, _("About"));
-        gtk_widget_show(w);
+	w = gnome_stock_menu_item(GNOME_STOCK_MENU_ABOUT, _("About"));
+	gtk_widget_show(w);
 	if (gnome_stock_menu_accel(GNOME_STOCK_MENU_ABOUT, &key, &mod))
 		gtk_widget_install_accelerator(w, accel, "activate", key, mod);
-        gtk_menu_append(GTK_MENU(menu), w);
+	gtk_menu_append(GTK_MENU(menu), w);
 	menu_items[i++] = w;
 
-        w = gtk_menu_item_new_with_label(_("Help"));
-        gtk_widget_show(w);
-        gtk_menu_item_set_submenu(GTK_MENU_ITEM(w), menu);
+	w = gtk_menu_item_new_with_label(_("Help"));
+	gtk_widget_show(w);
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(w), menu);
 	gtk_menu_item_right_justify(GTK_MENU_ITEM(w));
-        gtk_menu_bar_append(GTK_MENU_BAR(menubar), w);
+	gtk_menu_bar_append(GTK_MENU_BAR(menubar), w);
 
 	menu_items[i] = NULL;
 	/* g_print("%d menu items\n", i); */

@@ -1,3 +1,11 @@
+Tue Mar 24 19:16:55 CET 1998  Eckeherad Berns  <eb@berns.prima.de>
+
+	* stock_demo.c, gnome-stock.c: use GnomePropertyBox's own signals.
+
+	* gnome-propertybox.c: fix some box-packing (to allow window resizing).
+	(just_close): fix "delete_event" (segfaulted if someone realy catched
+	the signal)
+
 Tue Mar 24 01:07:14 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* stock_demo.c (message_dlg): New function to test

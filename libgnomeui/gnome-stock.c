@@ -1076,12 +1076,13 @@ gnome_stock_menu_accel_parse(char *section)
 #include <libgnomeui/gnome-propertybox.h>
 
 static void
-accel_dlg_apply(GtkWidget *box)
+accel_dlg_apply(GtkWidget *box, int n)
 {
 	GtkCList *clist;
 	char *section, *key, *s;
 	int i;
 
+	if (n != 0) return;
 	clist = gtk_object_get_data(GTK_OBJECT(box), "clist");
 	section = gtk_object_get_data(GTK_OBJECT(box), "section");
 	for (i = 0; i < clist->rows; i++) {
@@ -1097,16 +1098,7 @@ accel_dlg_apply(GtkWidget *box)
 
 
 static void
-accel_dlg_ok(GtkWidget *box)
-{
-	accel_dlg_apply(box);
-	gtk_widget_destroy(box);
-}
-
-
-
-static void
-accel_dlg_help(GtkWidget *box)
+accel_dlg_help(GtkWidget *box, int n)
 {
 	GtkWidget *w;
 	
@@ -1294,18 +1286,10 @@ gnome_stock_menu_accel_dlg(char *section)
 		 * config */
 	}
 
-	gtk_signal_connect_object(GTK_OBJECT(box->ok_button), "clicked",
-				  (GtkSignalFunc)accel_dlg_ok,
-				  GTK_OBJECT(box));
-	gtk_signal_connect_object(GTK_OBJECT(box->cancel_button), "clicked",
-				  (GtkSignalFunc)gtk_widget_destroy,
-				  GTK_OBJECT(box));
-	gtk_signal_connect_object(GTK_OBJECT(box->apply_button), "clicked",
-				  (GtkSignalFunc)accel_dlg_apply,
-				  GTK_OBJECT(box));
-	gtk_signal_connect_object(GTK_OBJECT(box->help_button), "clicked",
-				  (GtkSignalFunc)accel_dlg_help,
-				  GTK_OBJECT(box));
+	gtk_signal_connect(GTK_OBJECT(box), "apply",
+			  (GtkSignalFunc)accel_dlg_apply, NULL);
+	gtk_signal_connect(GTK_OBJECT(box), "help",
+			  (GtkSignalFunc)accel_dlg_help, NULL);
 
 	gtk_widget_show(GTK_WIDGET(box));
 }
