@@ -78,7 +78,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	
 	child = GTK_BIN(ientry->pickbutton)->child;
 	
-	if(!t || !g_file_test(t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
+	if(!t || !g_file_test (t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
 	   !(im = gdk_imlib_load_image (t))) {
 		if(GTK_IS_PIXMAP(child)) {
 			gtk_widget_destroy(child);
@@ -140,7 +140,7 @@ setup_preview(GtkWidget *widget)
 		gtk_widget_destroy(pp);
 	
 	p = gtk_file_selection_get_filename(fs);
-	if(!p || !g_file_test(p,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
+	if(!p || !g_file_test (p,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
 	   !(im = gdk_imlib_load_image (p)))
 		return;
 
@@ -249,13 +249,13 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 	}
 
 	/*figure out the directory*/
-	if(!g_file_test(p,G_FILE_TEST_ISDIR)) {
+	if(!g_file_test (p,G_FILE_TEST_ISDIR)) {
 		char *d;
-		d = g_dirname(p);
-		g_free(p);
+		d = g_dirname (p);
+		g_free (p);
 		p = d;
-		if(!g_file_test(p,G_FILE_TEST_ISDIR)) {
-			g_free(p);
+		if(!g_file_test (p,G_FILE_TEST_ISDIR)) {
+			g_free (p);
 			return;
 		}
 	}

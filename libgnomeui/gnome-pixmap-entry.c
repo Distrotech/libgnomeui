@@ -7,8 +7,8 @@
  * Author: George Lebl <jirka@5z.com>
  */
 #include <config.h>
-#include <sys/stat.h> /*stat*/
-#include <unistd.h> /*stat*/
+#include <sys/stat.h>
+#include <unistd.h>
 #include <gdk_imlib.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>

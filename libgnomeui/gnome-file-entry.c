@@ -37,7 +37,7 @@ gnome_file_entry_get_type (void)
 {
 	static guint file_entry_type = 0;
 
-	if (!file_entry_type) {
+	if (!file_entry_type){
 		GtkTypeInfo file_entry_info = {
 			"GnomeFileEntry",
 			sizeof (GnomeFileEntry),
@@ -331,22 +331,22 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry,
 		p = g_concat_dir_and_file (cwd, t);
 		free(cwd);
 	}
-	if(file_must_exist) {
-		if(fentry->directory_entry) {
+	if (file_must_exist) {
+		if (fentry->directory_entry) {
 			char *d;
-			if(g_file_test(p,G_FILE_TEST_ISDIR))
+			if (g_file_test (p,G_FILE_TEST_ISDIR))
 				return p;
-			d = g_dirname(p);
-			g_free(p);
-			if(g_file_test(d,G_FILE_TEST_ISDIR))
+			d = g_dirname (p);
+			g_free (p);
+			if (g_file_test (d,G_FILE_TEST_ISDIR))
 				return d;
 			p = d;
-		} else if(g_file_exists(p))
+		} else if (g_file_exists (p))
 			return p;
 	} else 
 		return p;
-	/*bad file, return NULL*/
-	g_free(p);
+
+	g_free (p);
 	return NULL;
 }
 
