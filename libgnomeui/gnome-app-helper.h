@@ -471,7 +471,7 @@ typedef struct {
 
 char * gnome_app_helper_gettext (char *string);
 
-#define D_(x) gnome_app_helper_dgettext("gnome-libs", x)
+#define D_(x) gnome_app_helper_gettext(x)
 
 /* Some standard menus */
 #define GNOMEUIINFO_MENU_FILE_TREE(tree) \
@@ -508,8 +508,8 @@ char * gnome_app_helper_gettext (char *string);
 #define GNOME_MENU_VIEW_PATH D_("_View/")
 #define GNOME_MENU_SETTINGS_STRING D_("_Settings")
 #define GNOME_MENU_SETTINGS_PATH D_("_Settings/")
-#define GNOME_MENU_FILES_STRING D_("File_s")
-#define GNOME_MENU_FILES_PATH D_("File_s/")
+#define GNOME_MENU_FILES_STRING D_("Fi_les")
+#define GNOME_MENU_FILES_PATH D_("Fi_les/")
 #define GNOME_MENU_WINDOWS_STRING D_("_Windows")
 #define GNOME_MENU_WINDOWS_PATH D_("_Windows/")
 

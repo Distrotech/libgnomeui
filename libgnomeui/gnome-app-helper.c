@@ -82,8 +82,8 @@ static const char strings [] = {
 	N_("_View/"),
 	N_("_Settings"),
 	N_("_Settings/"),
-	N_("File_s"),
-	N_("File_s/"),
+	N_("Fi_les"),
+	N_("Fi_les/"),
 	N_("_Windows"),
 	N_("_Game"), 
 	N_("_Help"), 
@@ -2094,17 +2094,17 @@ gnome_app_insert_menus_interp (GnomeApp *app, gchar *path,
 }
 
 char *
-gnome_app_helper_dgettext (char *package, char *str)
+gnome_app_helper_gettext (char *str)
 {
 	char *s;
+
 #ifdef ENABLE_NLS
 	s = dgettext (PACKAGE, str);
-	printf ("DGetText: %s a %s\n", str, dgettext (PACKAGE, str));
-	printf ("GetText:  %s a %s\n", str, gettext (str));
 #else
 	s = str;
 #endif
 
 	return s;
 }
+
 
