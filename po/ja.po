@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
-"POT-Creation-Date: 2003-03-16 22:20+0900\n"
-"PO-Revision-Date: 2003-03-11 17:22+0900\n"
+"POT-Creation-Date: 2003-03-21 16:16+0900\n"
+"PO-Revision-Date: 2003-03-18 11:19+0900\n"
 "Last-Translator: KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -612,7 +612,7 @@ msgstr "現在のファイルを保存"
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "名前をつけて保存(_A)..."
+msgstr "別名で保存(_A)..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
