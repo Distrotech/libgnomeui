@@ -73,3 +73,7 @@ stock_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
 	$(GTK_LIBS) $(X_LIBS) $(x_libs) $(INTLLIBS) $(DL_LIB)
+
+dist-hook:
+	mkdir $(distdir)/pixmaps
+	cp $(srcdir)/pixmaps/*.xpm $(distdir)/pixmaps

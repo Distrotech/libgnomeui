@@ -35,15 +35,15 @@
 #ifdef USE_GDK_IMLIB
 #include "gnome-stock-imlib.h"
 #else /* not USE_GDK_IMLIB */
-#include "../programs/gtt/tb_new.xpm"
-#include "../programs/gtt/tb_save.xpm"
-#include "../programs/gtt/tb_open.xpm"
-#include "../programs/gtt/tb_cut.xpm"
-#include "../programs/gtt/tb_copy.xpm"
-#include "../programs/gtt/tb_paste.xpm"
-#include "../programs/gtt/tb_properties.xpm"
-#include "../programs/gtt/tb_unknown.xpm"
-#include "../programs/gtt/tb_exit.xpm"
+#include "pixmaps/tb_new.xpm"
+#include "pixmaps/tb_save.xpm"
+#include "pixmaps/tb_open.xpm"
+#include "pixmaps/tb_cut.xpm"
+#include "pixmaps/tb_copy.xpm"
+#include "pixmaps/tb_paste.xpm"
+#include "pixmaps/tb_properties.xpm"
+#include "pixmaps/tb_unknown.xpm"
+#include "pixmaps/tb_exit.xpm"
 #include "gnome-stock-xpm.h"
 #endif /* not USE_GDK_IMLIB */
 
