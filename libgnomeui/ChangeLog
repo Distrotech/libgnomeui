@@ -1,3 +1,8 @@
+2000-05-11  Jacob Berkman  <jacob@helixcode.com>
+
+	* gnome-window-icon.c (icon_set): don't pass a gint16 where a gint
+	is expected
+
 2000-05-10  Karl Eichwalder  <ke@suse.de>
 
 	* Makefile.am (gnometypebuiltins.h, gnometypebuiltins_vars.c,

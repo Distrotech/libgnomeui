@@ -119,7 +119,7 @@ icon_set (GtkWindow *w, IconData *icon_data)
 
 	if (!idata->window) {
 		GdkWindowAttr wa;
-
+		gint height, width;
 		/*
 		 * According to ICCCM, we should be using the root window's visual and
 		 * the default colormap.  This does not work very well on multi-depth
@@ -127,14 +127,16 @@ icon_set (GtkWindow *w, IconData *icon_data)
 		 * work most places.
 		 *
 		 * See http://www.tronche.com/gui/x/icccm/sec-4.html#s-4.1.9
-		 */
 
+		 */
+		gdk_window_get_size (idata->pixmap, &width, &height);
 		wa.visual      = gdk_imlib_get_visual   (); /* gdk_window_get_visual (GDK_ROOT_PARENT ()); */
 		wa.colormap    = gdk_imlib_get_colormap (); /* gdk_colormap_get_system (); */
 		wa.window_type = GDK_WINDOW_CHILD;
 		wa.wclass      = GDK_INPUT_OUTPUT;
 		wa.event_mask  = GDK_EXPOSURE_MASK;
-		gdk_window_get_size (idata->pixmap, &wa.width, &wa.height);
+		wa.width       = width;
+		wa.height      = height;
 
 		idata->window = gdk_window_new (GDK_ROOT_PARENT (), &wa, 
 						GDK_WA_VISUAL | GDK_WA_COLORMAP);
