@@ -8,19 +8,21 @@
 # kostas: 305 messages,10Aug2003, updated translation for Gnome 2.4x
 # Nikos: 304 messages, 26Jan2004, fixes for 2.6x
 # Simos Xenitellis <simos74@gmx.net>, 2002,2003.
-# Kostas Papadimas <pkst@gmx.net>, 2002,2003.
 # Nikos Charonitakis <frolix68@yahoo.gr>, 2004.
+# Kostas Papadimas <pkst@gnome.org>, 2002,2003,2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
-"POT-Creation-Date: 2004-02-03 11:16+0100\n"
-"PO-Revision-Date: 2004-01-26 23:09-0200\n"
-"Last-Translator: Nikos Charonitakis <charosn@her.fothnet.gr>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-23 17:58+0200\n"
+"PO-Revision-Date: 2004-02-23 18:08+0200\n"
+"Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -130,8 +132,7 @@ msgid "Translator credits"
 msgstr "Μνεία μεταφραστών"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Μνεία στους μεταφραστές. Αυτό το αλφαριθμητικό θα πρέπει να σημειωθεί ως "
 "μεταφράσιμο."
@@ -169,6 +170,7 @@ msgstr "Περί %s"
 #
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Αρχείο"
 
@@ -300,6 +302,7 @@ msgstr "_Παιχνίδι"
 # #-#-#-#-#  gnomemeeting-el.po (gnomemeeting 0.12.2)  #-#-#-#-#
 #
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Βοήθεια"
 
@@ -693,7 +696,7 @@ msgstr "Ρύθμιση της εφαρμογής"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "Π_ερί"
 
@@ -704,7 +707,7 @@ msgstr "Π_ερί"
 #
 # #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Περί αυτής της εφαρμογής"
 
@@ -748,7 +751,7 @@ msgstr "_Κλείσιμο Αυτού Του Παραθύρου"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Κλείσιμο του τρέχοντος παραθύρου"
 
@@ -1064,11 +1067,6 @@ msgstr "Ακύρωση Τερματισμού Συνεδρίας"
 msgid "Received invalid color data\n"
 msgstr "Λήφθησαν μη έγκυρα δεδομένα χρώματος\n"
 
-#
-#: libgnomeui/gnome-color-picker.c:464
-msgid "Color Selector"
-msgstr "Επιλογέας Χρώματος"
-
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "Άνοιγμα διαλόγου για τον καθορισμό του χρώματος"
@@ -1314,11 +1312,11 @@ msgstr "Καταχώρηση GTK "
 msgid "The GTK entry"
 msgstr "Η καταχώρηση GTK"
 
-#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "ID Ιστορικού"
 
-#: libgnomeui/gnome-file-entry.c:221
+#: libgnomeui/gnome-file-entry.c:227
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -1326,19 +1324,19 @@ msgstr ""
 "Μοναδικό αναγνωριστικό για την καταχώρηση αρχείου. Αυτό θα χρησιμοποιηθεί "
 "από τη λίστα ιστορικού."
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Τίτλος Διαλόγου Περιήγησης"
 
-#: libgnomeui/gnome-file-entry.c:230
+#: libgnomeui/gnome-file-entry.c:236
 msgid "Title for the Browse file dialog."
 msgstr "Τίτλος για το διάλογο Περιήγησης αρχείου."
 
-#: libgnomeui/gnome-file-entry.c:237
+#: libgnomeui/gnome-file-entry.c:243
 msgid "Directory Entry"
 msgstr "Καταχώρηση Καταλόγου"
 
-#: libgnomeui/gnome-file-entry.c:238
+#: libgnomeui/gnome-file-entry.c:244
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -1349,11 +1347,11 @@ msgstr ""
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 # #-#-#-#-#  gtop-el.po (gtop 1.0.9)  #-#-#-#-#
 #
-#: libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:252
 msgid "Modal"
 msgstr "Αποκλειστικό"
 
-#: libgnomeui/gnome-file-entry.c:247
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Whether the Browse file window should be modal."
 msgstr "Αν το παράθυρο Περιήγησης αρχείου να είναι αποκλειστικό."
 
@@ -1362,27 +1360,27 @@ msgstr "Αν το παράθυρο Περιήγησης αρχείου να εί
 #
 # #-#-#-#-#  gtop-el.po (gtop 1.0.9)  #-#-#-#-#
 #
-#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Όνομα αρχείου"
 
-#: libgnomeui/gnome-file-entry.c:255
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Filename that should be displayed in the file entry."
 msgstr "Όνομα αρχείου που θα προβάλλεται στην καταχώρηση αρχείου."
 
-#: libgnomeui/gnome-file-entry.c:263
+#: libgnomeui/gnome-file-entry.c:269
 msgid "Default Path"
 msgstr "Προεπιλεγμένη Διαδρομή"
 
-#: libgnomeui/gnome-file-entry.c:264
+#: libgnomeui/gnome-file-entry.c:270
 msgid "Default path for the Browse file window."
 msgstr "Προεπιλεγμένη διαδρομή για το παράθυρο Περιήγησης αρχείου."
 
-#: libgnomeui/gnome-file-entry.c:271
+#: libgnomeui/gnome-file-entry.c:277
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:272
+#: libgnomeui/gnome-file-entry.c:278
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1393,11 +1391,11 @@ msgstr ""
 "GnomeEntry αν χρειάζεται να τροποιήσετε ή να εξερευνήσετε κάποια από τις "
 "παραμέτρους του."
 
-#: libgnomeui/gnome-file-entry.c:282
+#: libgnomeui/gnome-file-entry.c:288
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:283
+#: libgnomeui/gnome-file-entry.c:289
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1407,9 +1405,21 @@ msgstr ""
 "αρχείου. Μπορείτε να χρησιμοποιήσετε αυτήν την ιδιότητα για το GtkEntry αν "
 "χρειάζεται να τροποιήσετε ή να εξερευνήσετε κάποια από τις παραμέτρους του."
 
+#: libgnomeui/gnome-file-entry.c:299
+msgid "Use GtkFileChooser"
+msgstr "Χρήση επιλογέα αρχείων Gtk"
+
+#: libgnomeui/gnome-file-entry.c:300
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+"Αν θα χρησιμοποιείται το νέο γραφικό συστατικό επιλογέα αρχείου Gtk ή το γραφικό "
+"συστατικό  GtkFileSelection για την επιλογή αρχείων."
+
 # #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
 #
-#: libgnomeui/gnome-file-entry.c:535
+#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
 msgstr "Επιλογή αρχείου"
 
@@ -1420,7 +1430,7 @@ msgstr "Επιλογή αρχείου"
 #
 # #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
 #
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path"
 msgstr "Διαδρομή"
 
@@ -1429,15 +1439,15 @@ msgstr "Διαδρομή"
 #
 # #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-#
 #
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path to file"
 msgstr "Διαδρομή στο αρχείο"
 
-#: libgnomeui/gnome-file-entry.c:683
+#: libgnomeui/gnome-file-entry.c:775
 msgid "_Browse..."
 msgstr "_Περιήγηση..."
 
-#: libgnomeui/gnome-file-entry.c:684
+#: libgnomeui/gnome-file-entry.c:776
 msgid "Pop up a file selector to choose a file"
 msgstr "Ανάδυση ενός Επιλογέα αρχείου για την επιλογή αρχείου"
 
@@ -1528,8 +1538,7 @@ msgstr "Μέγεθος γραμματοσειράς για την ετικέτα
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr ""
-"Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
+msgstr "Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -1635,7 +1644,7 @@ msgstr ""
 "ιστοσελίδων.\n"
 "Ελέγξτε τις ρυθμίσεις σας στο εργαλείο προτιμήσεων 'Προτιμώμενες Εφαρμογές'."
 
-#: libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-icon-entry.c:178
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1643,27 +1652,27 @@ msgstr ""
 "Μοναδικό αναγνωριστικό για την καταχώρηση εικονιδίου. Αυτό θα "
 "χρησιμοποιείται για τη λίστα ιστορικού."
 
-#: libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
 msgstr "Τίτλος για το διάλογο εικονιδίου Περιήγησης."
 
-#: libgnomeui/gnome-icon-entry.c:193
+#: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
 msgstr "Κατάλογος Pixmap "
 
-#: libgnomeui/gnome-icon-entry.c:194
+#: libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
 msgstr "Κατάλογος ο οποίος θα εξερευνείται για εικονίδια."
 
-#: libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Όνομα αρχείου που θα προβάλλεται στην καταχώρηση εικονοδίου."
 
-#: libgnomeui/gnome-icon-entry.c:210
+#: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
 msgstr "Διάλογος επιλογέα"
 
-#: libgnomeui/gnome-icon-entry.c:211
+#: libgnomeui/gnome-icon-entry.c:212
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1673,55 +1682,31 @@ msgstr ""
 "κάποια από τις ιδιότητες του."
 
 #
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
 msgstr "Δίχως Εικονίδιο"
 
-# #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
-# #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
-#
-#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Δε βρέθηκε hbox, χρήση απλού επιλογέα αρχείων"
-
-# #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
-# #-#-#-#-#  bombermaze-el.po (bombermaze 1.0)  #-#-#-#-#
-#
-# #-#-#-#-#  galeon-el.po (galeon 1.0)  #-#-#-#-#
-#
-# #-#-#-#-#  gimp-el.po (gimp 1.3.2)  #-#-#-#-#
-#
-# #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
-#
-# #-#-#-#-#  gimp-print-el.po (gimp-print 1.0)  #-#-#-#-#
-#
-# #-#-#-#-#  screem-el.po (screem 1.0)  #-#-#-#-#
-#
-#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
-msgid "Preview"
-msgstr "Προεπισκόπηση"
-
-#: libgnomeui/gnome-icon-entry.c:756
+#: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
 msgstr "Διάλογος επιλογής εικονιδίου"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
 msgstr "Αυτό το κουτί διαλόγου σάς επιτρέπει να επιλέξετε ένα εικονίδιο."
 
-#: libgnomeui/gnome-icon-entry.c:763
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
 msgstr "Επιλογέας εικονιδίου"
 
-#: libgnomeui/gnome-icon-entry.c:764
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
 msgstr "Παρακαλώ επιλέξτε το εικονίδιο που επιθυμείτε."
 
-#: libgnomeui/gnome-icon-entry.c:988
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "Icon Selector"
 msgstr "Επιλογέας Εικονιδίου"
 
-#: libgnomeui/gnome-icon-entry.c:989
+#: libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
 msgstr ""
 "Αυτό το κουμπί θα ανοίξει ένα παράθυρα που θα σας επιτρέψει να επιλέξετε ένα "
@@ -1738,15 +1723,15 @@ msgstr ""
 #
 # #-#-#-#-#  screem-el.po (screem 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
 msgstr "Εξερεύνηση"
 
-#: libgnomeui/gnome-icon-entry.c:1014
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid "Icon path"
 msgstr "Διαδρομή εικονιδίου"
 
-#: libgnomeui/gnome-icon-entry.c:1015
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1782,7 +1767,7 @@ msgstr "Ανάγνωση Εικονιδίων..."
 #
 # #-#-#-#-#  screem-el.po (screem 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-messagebox.c:108
+#: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
 msgstr "Πληροφορία"
 
@@ -1791,7 +1776,7 @@ msgstr "Πληροφορία"
 #
 # #-#-#-#-#  toutdoux-el.po (toutdoux 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-messagebox.c:113
+#: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
 msgstr "Προειδοποιήση"
 
@@ -1813,7 +1798,7 @@ msgstr "Προειδοποιήση"
 #
 # #-#-#-#-#  gaim-el.po (gaim 0.48)  #-#-#-#-#
 #
-#: libgnomeui/gnome-messagebox.c:119
+#: libgnomeui/gnome-messagebox.c:120
 msgid "Error"
 msgstr "Σφάλμα"
 
@@ -1823,7 +1808,7 @@ msgstr "Σφάλμα"
 #
 # #-#-#-#-#  toutdoux-el.po (toutdoux 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-messagebox.c:125
+#: libgnomeui/gnome-messagebox.c:126
 msgid "Question"
 msgstr "Ερώτηση"
 
@@ -1833,7 +1818,7 @@ msgstr "Ερώτηση"
 #
 # #-#-#-#-#  gaim-el.po (gaim 0.48)  #-#-#-#-#
 #
-#: libgnomeui/gnome-messagebox.c:130
+#: libgnomeui/gnome-messagebox.c:131
 msgid "Message"
 msgstr "Μήνυμα"
 
@@ -1851,22 +1836,22 @@ msgstr "_Κωδικός:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Απομνημόνευση κωδικού για αυτή την συνεδρία"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Αποθήκευση κωδικού στο  keyring"
 
-#: libgnomeui/gnome-pixmap-entry.c:113
+#: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
 msgstr "Να γίνει Προεπισκόπηση"
 
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Αν η καταχώρηση pixmap θα έχει προεπισκόπηση."
 
 #
-#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "Δίχως Εικόνα"
 
@@ -1883,13 +1868,37 @@ msgstr "Δίχως Εικόνα"
 #
 # #-#-#-#-#  screem-el.po (screem 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-pixmap-entry.c:205
+#: libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
 msgstr "Προεπισκόπηση Εικόνας"
 
-#: libgnomeui/gnome-pixmap-entry.c:206
+#: libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
 msgstr "Προεπισκόπηση της καθορισμένης εικόνας"
+
+# #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
+# #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
+#
+#: libgnomeui/gnome-pixmap-entry.c:414
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Δε βρέθηκε hbox, χρήση απλού επιλογέα αρχείων"
+
+# #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
+# #-#-#-#-#  bombermaze-el.po (bombermaze 1.0)  #-#-#-#-#
+#
+# #-#-#-#-#  galeon-el.po (galeon 1.0)  #-#-#-#-#
+#
+# #-#-#-#-#  gimp-el.po (gimp 1.3.2)  #-#-#-#-#
+#
+# #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
+#
+# #-#-#-#-#  gimp-print-el.po (gimp-print 1.0)  #-#-#-#-#
+#
+# #-#-#-#-#  screem-el.po (screem 1.0)  #-#-#-#-#
+#
+#: libgnomeui/gnome-pixmap-entry.c:420
+msgid "Preview"
+msgstr "Προεπισκόπηση"
 
 #
 #: libgnomeui/gnome-scores.c:78
@@ -1994,7 +2003,7 @@ msgstr "Περί"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "Απενεργοποίηση διαλόγου κολλήματος"
 
 #
 #: libgnomeui/gnome-ui-init.c:119
@@ -2014,8 +2023,7 @@ msgstr "Βιβλιοθήκη GNOME GUI"
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
+msgstr "Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -2044,37 +2052,44 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr ""
+msgstr "Η εφαρμογή \"%s\" τερματίστηκε απρόσμενα."
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr ""
+msgstr "διεργασία  %d: %s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
+"Μπορείτε να ενημερώσετε τους προγραμματιστές της εφαρμογής για να τους βοηθήσετε να "
+"το διορθώσουν. Ή να επανεκκινήσετε την εφαρμογή αμέσως τώρα."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Χρήση: gnome_segv2 όνομαΕφαρμογής αριθμόςΣήματος\n"
 
+# #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
+# #-#-#-#-#  galeon-el.po (galeon 1.0)  #-#-#-#-#
+# #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-##
+# #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-##
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "Επανε_κκίνηση της εφαρμογής"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
-msgstr ""
+msgid "_Inform Developers"
+msgstr "Ενημέ_ρωση των προγραμματιστών"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 # #-#-#-#-#  anjuta-el.po (anjuta 0.1.9)  #-#-#-#-#
-#
-# #-#-#-#-#  balsa-el.po (balsa 0.9.3.1)  #-#-#-#-#
-#
-# #-#-#-#-#  toutdoux-el.po (toutdoux 1.0)  #-#-#-#-#
-#
+# #-#-#-#-#  balsa-el.po (balsa 0.9.3.1)  #-#-#-#-##
+# #-#-#-#-#  toutdoux-el.po (toutdoux 1.0)  #-#-#-#-##
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
-msgstr "Εκσφαλμάτωση"
+msgid "_Debug"
+msgstr "Εκσ_φαλμάτωση"
 
 # #-#-#-#-#  bonobo-el.po (bonobo 0.34)  #-#-#-#-#
 #
@@ -2086,5 +2101,11 @@ msgstr "Εκσφαλμάτωση"
 #
 # #-#-#-#-#  achtung-el.po (achtung 0.99.0)  #-#-#-#-#
 #
-#~ msgid "Exit the test"
-#~ msgstr "Έξοδος από τη δοκιμή"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Έξοδος από τη δοκιμή"
+
+#
+#~ msgid "Color Selector"
+#~ msgstr "Επιλογέας Χρώματος"
+
