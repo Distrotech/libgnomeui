@@ -204,6 +204,8 @@ set_filename_handler (GnomeSelector *selector, const gchar *uri)
 
     child = GTK_BIN (ientry->_priv->browse_button)->child;
 
+    gtk_drag_source_unset (ientry->_priv->browse_button);
+
     if (uri) {
 	GdkPixbuf *pixbuf;
 	int w, h;
@@ -211,7 +213,6 @@ set_filename_handler (GnomeSelector *selector, const gchar *uri)
 	pixbuf = gnome_gdk_pixbuf_new_from_uri (uri);
 	if (!pixbuf) {
 	    if (GNOME_IS_PIXMAP (child)) {
-		gtk_drag_source_unset (ientry->_priv->browse_button);
 		gtk_widget_destroy (child);
 		child = gtk_label_new (_("No Icon"));
 		gtk_widget_show (child);
@@ -239,7 +240,6 @@ set_filename_handler (GnomeSelector *selector, const gchar *uri)
 	}
 
 	if (GNOME_IS_PIXMAP (child)) {
-	    gtk_drag_source_unset (ientry->_priv->browse_button);
 	    gnome_pixmap_clear (GNOME_PIXMAP (child));
 	    gnome_pixmap_set_pixbuf (GNOME_PIXMAP(child), pixbuf);
 	    gnome_pixmap_set_pixbuf_size (GNOME_PIXMAP (child), w, h);
@@ -267,7 +267,6 @@ set_filename_handler (GnomeSelector *selector, const gchar *uri)
 			     GDK_ACTION_COPY);
     } else {
 	if (GNOME_IS_PIXMAP (child)) {
-	    gtk_drag_source_unset (ientry->_priv->browse_button);
 	    gtk_widget_destroy (child);
 	    child = gtk_label_new (_("No Icon"));
 	    gtk_widget_show (child);
@@ -544,6 +543,24 @@ gnome_icon_entry_destroy (GtkObject *object)
 
     ientry = GNOME_ICON_ENTRY (object);
 
+    if (ientry->_priv) {
+	if (ientry->_priv->browse_dialog)
+	    gtk_object_unref (GTK_OBJECT (ientry->_priv->browse_dialog));
+	ientry->_priv->browse_dialog = NULL;
+	ientry->_priv->icon_selector = NULL;
+
+	if (ientry->_priv->browse_button) {
+	    GtkWidget *child;
+
+	    child = GTK_BIN (ientry->_priv->browse_button)->child;
+	    gtk_widget_destroy (child);
+	}
+	ientry->_priv->browse_button = NULL;
+
+	g_free (ientry->_priv->current_icon);
+	ientry->_priv->current_icon = NULL;
+    }
+
     if (GTK_OBJECT_CLASS (parent_class)->destroy)
 	(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
@@ -557,11 +574,6 @@ gnome_icon_entry_finalize (GObject *object)
     g_return_if_fail (GNOME_IS_ICON_ENTRY (object));
 
     ientry = GNOME_ICON_ENTRY (object);
-
-    if (ientry->_priv) {
-	gtk_object_unref (GTK_OBJECT (ientry->_priv->browse_dialog));
-	g_free (ientry->_priv->current_icon);
-    }
 
     g_free (ientry->_priv);
     ientry->_priv = NULL;
