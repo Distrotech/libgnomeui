@@ -95,52 +95,50 @@ propertybox_find_internal_child(GladeXML *xml, GtkWidget *parent,
 }
 
 
-static GladeWidgetBuildData widget_data[] = {
-    { "GnomeApp", glade_standard_build_widget, glade_standard_build_children,
-      gnome_app_get_type },
-    { "GnomeAppBar", glade_standard_build_widget, NULL,
-      gnome_appbar_get_type },
-    { "GnomeColorPicker", glade_standard_build_widget, NULL,
-      gnome_color_picker_get_type },
-    { "GnomeDateEdit", glade_standard_build_widget, NULL,
-      gnome_date_edit_get_type },
-    { "GnomeDialog", glade_standard_build_widget, NULL,
-      gnome_dialog_get_type, 0, dialog_find_internal_child },
-    { "GnomeDruid", glade_standard_build_widget, glade_standard_build_children,
-      gnome_druid_get_type },
-    { "GnomeDruidPage", glade_standard_build_widget, glade_standard_build_children,
-      gnome_druid_page_get_type },
-    { "GnomeDruidPageEdge", glade_standard_build_widget, NULL,
-      gnome_druid_page_edge_get_type },
-    { "GnomeDruidPageStandard", glade_standard_build_widget, glade_standard_build_children,
-      gnome_druid_page_standard_get_type, 0, druidpagestandard_find_internal_child },
-    { "GnomeEntry", glade_standard_build_widget, glade_standard_build_children,
-      gnome_entry_get_type, 0, entry_find_internal_child },
-    { "GnomeFileEntry", glade_standard_build_widget, glade_standard_build_children,
-      gnome_file_entry_get_type, 0, file_entry_find_internal_chid },
-    { "GnomeHRef", glade_standard_build_widget, NULL,
-      gnome_href_get_type },
-    { "GnomeIconEntry", glade_standard_build_widget, NULL,
-      gnome_icon_entry_get_type },
-    { "GnomeIconList", glade_standard_build_widget, NULL,
-      gnome_icon_list_get_type },
-    { "GnomeIconSelection", glade_standard_build_widget, NULL,
-      gnome_icon_selection_get_type },
-    { "GnomePixmapEntry", glade_standard_build_widget, NULL,
-      gnome_pixmap_entry_get_type },
-    { "GnomePropertyBox", glade_standard_build_widget, glade_standard_build_children,
-      gnome_property_box_get_type, 0, propertybox_find_internal_child },
-    { "GnomeScores", glade_standard_build_widget, NULL,
-      gnome_scores_get_type },
-    { NULL, NULL, NULL, 0, 0 }
-};
-
 /* this macro puts a version check function into the module */
 GLADE_MODULE_CHECK_INIT
 
 void
 glade_module_register_widgets (void)
 {
+    glade_require ("bonobo");
+
+    glade_register_widget (GNOME_TYPE_APP, glade_standard_build_widget,
+			   glade_standard_build_children, NULL);
+    glade_register_widget (GNOME_TYPE_APPBAR, glade_standard_build_widget,
+			   NULL, NULL);
+    glade_register_widget (GNOME_TYPE_COLOR_PICKER,glade_standard_build_widget,
+			   NULL, NULL);
+    glade_register_widget (GNOME_TYPE_DATE_EDIT, glade_standard_build_widget,
+			   NULL, NULL);
+    glade_register_widget (GNOME_TYPE_DIALOG, glade_standard_build_widget,
+			   glade_standard_build_children, dialog_find_internal_child);
+    glade_register_widget (GNOME_TYPE_DRUID, glade_standard_build_widget,
+			   glade_standard_build_children, NULL);
+    glade_register_widget (GNOME_TYPE_DRUID_PAGE, glade_standard_build_widget,
+			   glade_standard_build_children, NULL);
+    glade_register_widget (GNOME_TYPE_DRUID_PAGE_EDGE, glade_standard_build_widget,
+			   NULL, NULL);
+    glade_register_widget (GNOME_TYPE_DRUID_PAGE_STANDARD, glade_standard_build_widget,
+			   glade_standard_build_children, druidpagestandard_find_internal_child);
+    glade_register_widget (GNOME_TYPE_ENTRY, glade_standard_build_widget,
+			   glade_standard_build_children, entry_find_internal_child);
+    glade_register_widget (GNOME_TYPE_FILE_ENTRY, glade_standard_build_widget,
+			   glade_standard_build_children, file_entry_find_internal_child);
+    glade_register_widget (GNOME_TYPE_HREF, glade_standard_build_widget,
+			   NULL, NULL);
+    glade_register_widget (GNOME_TYPE_ICON_ENTRY, glade_standard_build_widget,
+			   NULL, NULL);
+    glade_register_widget (GNOME_TYPE_ICON_LIST, glade_standard_build_widget,
+			   NULL, NULL);
+    glade_register_widget (GNOME_TYPE_ICON_SELECTION, glade_standard_build_widget,
+			   NULL, NULL);
+    glade_register_widget (GNOME_TYPE_PIXMAP_ENTRY, glade_standard_build_widget,
+			   NULL, NULL);
+    glade_register_widget (GNOME_TYPE_PROPERTY_BOX, glade_standard_build_widget,
+			   glade_standard_build_children, propertybox_find_internal_child);
+    glade_register_widget (GNOME_TYPE_SCORES, glade_standard_build_widget,
+			   NULL, NULL);
+
     glade_provide ("gnome");
-    glade_register_widgets (widget_data);
 }
