@@ -27,6 +27,7 @@ static GnomeCanvasItem *parent_class;
 enum {
 	TEXT_CHANGED,
 	HEIGHT_CHANGED,
+	WIDTH_CHANGED,
 	LAST_SIGNAL
 };
 
@@ -99,7 +100,7 @@ recompute_bounding_box (Iti *iti)
 {
 	GnomeCanvasItem *item = GNOME_CANVAS_ITEM (iti);
 	int nx1, ny1, nx2, ny2;
-	int w, size_changed;
+	int w, height_changed, width_changed;
 
 	w = iti_get_width (iti, NULL);
 	
@@ -112,7 +113,8 @@ recompute_bounding_box (Iti *iti)
 	if (!(nx1 != item->x1 || ny1 != item->y1 || nx2 != item->x2 || ny2 != item->y2))
 		return;
 
-	size_changed = (ny2-ny1) != (item->y2-item->y1);
+	height_changed = (ny2-ny1) != (item->y2-item->y1);
+	width_changed = (nx2-nx1) != (item->x2-item->x1);
 	
 	item->x1 = nx1;
 	item->y1 = ny1;
@@ -122,8 +124,11 @@ recompute_bounding_box (Iti *iti)
 	gnome_canvas_group_child_bounds (
 		GNOME_CANVAS_GROUP (item->parent), item);
 	
-	if (size_changed && iti->ti)
+	if (height_changed && iti->ti)
 		gtk_signal_emit (GTK_OBJECT (iti), iti_signals [HEIGHT_CHANGED]);
+
+	if (width_changed && iti->ti)
+		gtk_signal_emit (GTK_OBJECT (iti), iti_signals [WIDTH_CHANGED]);
 }
 
 /*
@@ -720,6 +725,15 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_RUN_LAST,
 			object_class->type,
 			GTK_SIGNAL_OFFSET(GnomeIconTextItemClass,height_changed),
+			gtk_marshal_NONE__NONE,
+			GTK_TYPE_NONE, 0);
+
+	iti_signals [WIDTH_CHANGED] =
+		gtk_signal_new (
+			"width_changed",
+			GTK_RUN_LAST,
+			object_class->type,
+			GTK_SIGNAL_OFFSET(GnomeIconTextItemClass,width_changed),
 			gtk_marshal_NONE__NONE,
 			GTK_TYPE_NONE, 0);
 	

@@ -1,5 +1,7 @@
 1998-10-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-icon-item.c: Add width_changed signal to icon-text-item.
+
 	* gnome-icon-list.c: (toggle_icon): Make sure we emit a signal
 	with the correct index.
 	(icon_event): Generate events for button-2 and 3

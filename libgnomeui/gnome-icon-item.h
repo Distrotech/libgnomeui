@@ -48,6 +48,7 @@ typedef struct {
 	/* Signals we emit */
 	int  (*text_changed)     (GnomeIconTextItem *);
 	void (*height_changed)   (GnomeIconTextItem *);
+	void (*width_changed)    (GnomeIconTextItem *);
 } GnomeIconTextItemClass;
 
 GtkType  gnome_icon_text_item_get_type  (void);
