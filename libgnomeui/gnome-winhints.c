@@ -528,3 +528,37 @@ gnome_win_hints_wm_exists(void)
   return FALSE;
 }
 
+GList*
+gnome_win_hints_get_client_window_ids(void)
+{
+  GList *tmp_list;
+  Window *wlist;
+  int i;
+  Atom r_type;
+  int r_format;
+  GdkWindowPrivate *priv;
+  unsigned long count;
+  unsigned long bytes_remain;
+  unsigned char *prop;
+  
+  if (XGetWindowProperty(GDK_DISPLAY(), GDK_ROOT_WINDOW(), 
+			 _XA_WIN_CLIENT_LIST, 0, 1,
+			 False, XA_CARDINAL, &r_type, &r_format,
+			 &count, &bytes_remain, &prop) == Success)
+    {
+      if (r_type == XA_CARDINAL && r_format == 32)
+	{
+	  tmp_list = NULL;
+	  
+	  wlist = (Window *)prop;
+	  for(i=0; i<count; i++)
+	    {
+	      tmp_list = g_list_append(tmp_list, (gpointer)wlist[i]);
+	    }  
+	  XFree(prop);
+	  return tmp_list;
+	}
+      XFree(prop);
+    }
+  return NULL;
+}

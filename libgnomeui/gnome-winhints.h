@@ -178,6 +178,10 @@ gnome_win_hints_set_moving(GtkWidget *window, gboolean moving);
 
 gboolean
 gnome_win_hints_wm_exists(void);
+
+GList*
+gnome_win_hints_get_client_window_ids(void);
+
 END_GNOME_DECLS
 
 #endif
