@@ -19,9 +19,8 @@ test-file-saver
 mdi_demo
 gnome.defs
 gnometypebuiltins.h
-gnometypebuiltins_evals.c
-gnometypebuiltins_ids.c
-gnometypebuiltins_vars.c
+gnometypebuiltins.c
+gnometypebuiltins.c
 gnome-unknown-stubs.c
 gnome-unknown-skels.c
 gnome-unknown-common.c

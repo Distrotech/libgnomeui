@@ -1,3 +1,7 @@
+2001-07-14  Peter Williams  <peterw@ximian.com>
+
+	* .cvsignore: Update for new generated type files.
+
 2001-07-08  Peter Williams  <peterw@ximian.com>
 
 	* Makefile.am ($(srcdir)/gnome.defs): Add $(srcdir)/
