@@ -876,6 +876,8 @@ gtk_file_system_gnome_vfs_set_bookmarks (GtkFileSystem *file_system,
       path = l->data;
       str = gtk_file_path_get_string (path);
 
+      /* FIXME: this should be a list of GConfValue */
+
       list = g_slist_prepend (list, (gpointer) str);
     }
 
