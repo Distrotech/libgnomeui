@@ -864,11 +864,15 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 	/* remove old child-specific menus */
 	items = GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY));
 	if(items > 0 && parent) {
+		GtkWidget *widget;
+
 		/* remove items */
 		children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos);
 		while(children && items > 0) {
-			gtk_container_remove(GTK_CONTAINER(parent), GTK_WIDGET(children->data));
-			children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos);
+			widget = GTK_WIDGET(children->data);
+			children = children->next;
+			gtk_container_remove(GTK_CONTAINER(parent), widget);
+			gtk_widget_destroy(widget);
 			items--;
 		}
 	}

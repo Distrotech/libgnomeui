@@ -1357,8 +1357,8 @@ gnome_app_remove_menus(GnomeApp *app, gchar *path, gint items)
 	parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
 	
 	/* in case of path ".../" remove the first item */
-	if(pos == 0)
-		pos = 1;
+  if(path[strlen(path) - 1] == '/')
+    pos++;
 	
 	if( parent == NULL ) {
 		g_warning("gnome_app_remove_menus: couldn't find first item to"
@@ -1370,10 +1370,9 @@ gnome_app_remove_menus(GnomeApp *app, gchar *path, gint items)
 	children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
 	while(children && items > 0) {
 		child = GTK_WIDGET(children->data);
-		/* children = g_list_next(children); */
+		children = children->next;
 		gtk_container_remove(GTK_CONTAINER(parent), child);
-		children = g_list_nth(GTK_MENU_SHELL(parent)->children, 
-				pos - 1);
+    gtk_widget_destroy(child);
 		items--;
 	}
 	
@@ -1409,8 +1408,8 @@ gnome_app_remove_menu_range (GnomeApp *app, gchar *path, gint start, gint items)
   parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
 
   /* in case of path ".../" remove the first item */
-  if(pos == 0)
-    pos = 1;
+  if(path[strlen(path) - 1] == '/')
+    pos++;
 
   pos += start;
   
@@ -1423,9 +1422,9 @@ gnome_app_remove_menu_range (GnomeApp *app, gchar *path, gint start, gint items)
   children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
   while(children && items > 0) {
     child = GTK_WIDGET(children->data);
-    /* children = g_list_next(children); */
+    children = children->next;
     gtk_container_remove(GTK_CONTAINER(parent), child);
-    children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
+    gtk_widget_destroy(child);
     items--;
   }
 

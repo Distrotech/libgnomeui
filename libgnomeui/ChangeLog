@@ -1,3 +1,13 @@
+1998-12-18  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (app_set_view): enhance removing of menus and
+	explicitly destroy the widget after removing it from the
+	menu shell. I guess this has to do with menu refcounting.
+	* gnome-app-helper.c(gnome_app_remove_menus,
+	gnome_app_remove_menu_range): optimize menu removal; explicitly
+	destroy removed widgets. small fix to make removal of first
+	item work properly with tearoff menus.
+	
 1998-12-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gnome_icon_list_freeze): Hide the root of the
