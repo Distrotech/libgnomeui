@@ -310,6 +310,18 @@ typedef struct {
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REDO,                    \
           GNOME_KEY_NAME_REDO, GNOME_KEY_MOD_REDO, NULL }
 
+#define GNOMEUIINFO_MENU_FIND_ITEM(cb, data)                                \
+        { GNOME_APP_UI_ITEM, N_("_Find..."),  N_("Search for a string"),    \
+          cb, (gpointer)(data), NULL,                                       \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH,                  \
+          GNOME_KEY_NAME_FIND, GNOME_KEY_MOD_FIND, NULL }
+
+#define GNOMEUIINFO_MENU_REPLACE_ITEM(cb, data)                             \
+        { GNOME_APP_UI_ITEM, N_("_Replace..."), N_("Replace a string"),     \
+          cb, (gpointer)(data), NULL,                                       \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SRCHRPL,               \
+          GNOME_KEY_NAME_REPLACE, GNOME_KEY_MOD_REPLACE, NULL }
+
 #define GNOMEUIINFO_MENU_PROPERTIES_ITEM(cb, data)                          \
         { GNOME_APP_UI_ITEM, N_("Properties..."),                           \
           N_("Modify the file's properties"),                               \

@@ -1,3 +1,8 @@
+Wed Jan 06 21:36:16 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-uidefs.h,gnome-app-helper.h: added Find and Replace items
+	  and default keybindings for those
+
 1999-01-07  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-app.c (gnome_app_set_statusbar): okay -- lets try again.
