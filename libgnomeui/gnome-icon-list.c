@@ -120,10 +120,17 @@ gnome_icon_list_get_items_per_line (GnomeIconList *gil)
 static void
 gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 {
+	int y_offset;
+	
+	if (icon_height > icon->image->height)
+		y_offset = (icon_height - icon->image->height) / 2;
+	else
+		y_offset = 0;
+	
 	gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->image),
 			       "x",  (double) x + gil->icon_width/2,
-			       "y",  (double) y,
-			       "anchor", GTK_ANCHOR_CENTER,
+			       "y",  (double) y + y_offset,
+			       "anchor", GTK_ANCHOR_N,
 			       NULL);
 	gnome_icon_text_item_setxy (
 		icon->text, x,
@@ -1094,6 +1101,105 @@ real_unselect_icon (Gil *gil, gint num, GdkEvent *event)
 	}
 }
 
+/*
+ * This routine could use some enhancements, for example, we could invoke
+ * the item->point method to figure out if the rectangle is actually touching
+ * a non-transparent pixel on the image. 
+ */
+static int
+touches_item (GnomeCanvasItem *item, double x1, double y1, double x2, double y2)
+{
+	double ix1, iy1, ix2, iy2;
+	
+	gnome_canvas_item_get_bounds (item, &ix1, &iy1, &ix2, &iy2);
+
+	return (MAX (x1, ix1) <= MIN (x2, ix2) && MAX (y1, iy1) <= MIN (y2, iy2));
+}
+
+static GList *
+gil_get_icons_in_region (Gil *gil, double x1, double y1, double x2, double y2)
+{
+	GList *icons, *l;
+
+	icons = NULL;
+	
+	for (l = gil->icon_list; l; l = l->next){
+		Icon *icon = l->data;
+		GnomeCanvasItem *image = GNOME_CANVAS_ITEM (icon->image);
+		GnomeCanvasItem *text = GNOME_CANVAS_ITEM (icon->text);
+		
+		if (touches_item (image, x1, y1, x2, y2) ||
+		    touches_item (text,  x1, y1, x2, y2)){
+			icons = g_list_prepend (icons, icon);
+
+		}
+	}
+	
+	return icons;
+}
+
+static void
+gil_mark_region (Gil *gil, GdkEvent *event, double x, double y)
+{
+	GList *icons, *l;
+	double x1, x2, y1, y2;
+	int idx;
+	
+	x1 = MIN (gil->sel_start_x, x);
+	y1 = MIN (gil->sel_start_y, y);
+	x2 = MAX (gil->sel_start_x, x);
+	y2 = MAX (gil->sel_start_y, y);
+
+	if (x1 < 0)
+		x1 = 0;
+
+	if (y1 < 0)
+		y1 = 0;
+
+	if (x2 >= gil->canvas.width)
+		x2 = gil->canvas.width - 1;
+
+	gnome_canvas_item_set (gil->sel_rect,
+			       "x1", x1,
+			       "y1", y1,
+			       "x2", x2,
+			       "y2", y2,
+			       NULL);
+
+
+	icons = gil_get_icons_in_region (gil, x1, y1, x2, y2);
+		
+	for (l = gil->icon_list, idx = 0; l; l = l->next, idx++){
+		Icon *icon = l->data;
+
+		if (icons && g_list_find (icons, icon)){
+			if (!icon->text->selected)
+				gtk_signal_emit (
+					GTK_OBJECT (gil),
+					gil_signals [SELECT_ICON],
+					idx, event);
+			
+		} else if (icon->text->selected){
+			int deselect = FALSE;
+			
+			if (gil->preserve_selection){
+				void *v = GINT_TO_POINTER (idx);
+				
+				if (!g_list_find (gil->preserve_selection, v))
+					deselect = TRUE;
+			} else
+				deselect = TRUE;
+
+			if (deselect)
+				gtk_signal_emit (
+					GTK_OBJECT (gil),
+					gil_signals [UNSELECT_ICON],
+					idx, event);
+		}
+	}
+	g_list_free (icons);
+}
+
 #define gray50_width 2
 #define gray50_height 2
 static const char gray50_bits[] = {
@@ -1158,15 +1264,13 @@ static gint
 gil_button_release (GtkWidget *widget, GdkEventButton *event)
 {
 	Gil *gil = GIL (widget);
-	int v;
-	
-	if (!gil->sel_rect){
-		v = FALSE;
-	} else {
+
+
+	if (gil->sel_rect){
+		gil_mark_region (gil, (GdkEvent *) event, event->x, event->y);
 		gnome_canvas_item_ungrab (gil->sel_rect, event->time);
 		gtk_object_destroy (GTK_OBJECT (gil->sel_rect));
 		gil->sel_rect = NULL;
-		v = TRUE;
 	}
 
 	g_list_free (gil->preserve_selection);
@@ -1179,106 +1283,7 @@ gil_button_release (GtkWidget *widget, GdkEventButton *event)
 	
 	(*GTK_WIDGET_CLASS (parent_class)->button_release_event) (widget, event);
 
-	return v;
-}
-
-/*
- * This routine could use some enhancements, for example, we could invoke
- * the item->point method to figure out if the rectangle is actually touching
- * a non-transparent pixel on the image. 
- */
-static int
-touches_item (GnomeCanvasItem *item, double x1, double y1, double x2, double y2)
-{
-	double ix1, iy1, ix2, iy2;
-	
-	gnome_canvas_item_get_bounds (item, &ix1, &iy1, &ix2, &iy2);
-
-	return (MAX (x1, ix1) <= MIN (x2, ix2) && MAX (y1, iy1) <= MIN (y2, iy2));
-}
-
-static GList *
-gil_get_icons_in_region (Gil *gil, double x1, double y1, double x2, double y2)
-{
-	GList *icons, *l;
-
-	icons = NULL;
-	
-	for (l = gil->icon_list; l; l = l->next){
-		Icon *icon = l->data;
-		GnomeCanvasItem *image = GNOME_CANVAS_ITEM (icon->image);
-		GnomeCanvasItem *text = GNOME_CANVAS_ITEM (icon->text);
-		
-		if (touches_item (image, x1, y1, x2, y2) ||
-		    touches_item (text,  x1, y1, x2, y2)){
-			icons = g_list_prepend (icons, icon);
-
-		}
-	}
-	
-	return icons;
-}
-
-static void
-gil_mark_region (Gil *gil, GdkEventMotion *event, double x, double y)
-{
-	GList *icons, *l;
-	double x1, x2, y1, y2;
-	int idx;
-	
-	x1 = MIN (gil->sel_start_x, x);
-	y1 = MIN (gil->sel_start_y, y);
-	x2 = MAX (gil->sel_start_x, x);
-	y2 = MAX (gil->sel_start_y, y);
-
-	if (x1 < 0)
-		x1 = 0;
-
-	if (y1 < 0)
-		y1 = 0;
-
-	if (x2 >= gil->canvas.width)
-		x2 = gil->canvas.width - 1;
-
-	gnome_canvas_item_set (gil->sel_rect,
-			       "x1", x1,
-			       "y1", y1,
-			       "x2", x2,
-			       "y2", y2,
-			       NULL);
-
-
-	icons = gil_get_icons_in_region (gil, x1, y1, x2, y2);
-		
-	for (l = gil->icon_list, idx = 0; l; l = l->next, idx++){
-		Icon *icon = l->data;
-
-		if (icons && g_list_find (icons, icon)){
-			if (!icon->text->selected)
-				gtk_signal_emit (
-					GTK_OBJECT (gil),
-					gil_signals [SELECT_ICON],
-					idx, event);
-			
-		} else if (icon->text->selected){
-			int deselect = FALSE;
-			
-			if (gil->preserve_selection){
-				void *v = GINT_TO_POINTER (idx);
-				
-				if (!g_list_find (gil->preserve_selection, v))
-					deselect = TRUE;
-			} else
-				deselect = TRUE;
-
-			if (deselect)
-				gtk_signal_emit (
-					GTK_OBJECT (gil),
-					gil_signals [UNSELECT_ICON],
-					idx, event);
-		}
-	}
-	g_list_free (icons);
+	return TRUE;
 }
 
 static gint
@@ -1308,7 +1313,7 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 		return FALSE;
 
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil), event->x, event->y, &x, &y);
-	gil_mark_region (gil, event, x, y);
+	gil_mark_region (gil, (GdkEvent *) event, x, y);
 	
 	/*
 	 * If we are out of bounds, schedule a timeout that will do
