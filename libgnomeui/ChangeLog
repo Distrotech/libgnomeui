@@ -1,3 +1,13 @@
+Thu Aug 30 14:38:35 2001  George Lebl <jirka@5z.com>
+
+	* gnome-pixmap-entry.[ch], libgnomeui.h, Makefile.am:  Add back the
+	  pixmap entry.  Still needs a little bit of love but pretty much
+	  there and sane
+
+	* gnome-image-selector.[ch], gnome-image-entry.[ch], Makefile.am,
+	  libgnomeui.h:  This is an uncontraversial change, this this now
+	  should live in bonobo extra apparently.
+
 2001-08-30  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-href.c (gnome_href_class_init): Make the properties 

@@ -46,8 +46,6 @@
 #include <libgnomeui/gnome-entry.h>
 #include <libgnomeui/gnome-file-entry.h>
 #include <libgnomeui/gnome-gconf-ui.h>
-#include <libgnomeui/gnome-image-entry.h>
-#include <libgnomeui/gnome-image-selector.h>
 
 #include <libgnomeui/gnome-icon-entry.h>
 #include <libgnomeui/gnome-icon-list.h>
@@ -70,6 +68,7 @@
 #include <libgnomeui/gnome-messagebox.h>
 #include <libgnomeui/gnome-vfs-util.h>
 #include <libgnomeui/gnome-pixmap.h>
+#include <libgnomeui/gnome-pixmap-entry.h>
 
 #ifdef COMPAT_1_0
 #include "compat/1.0/libgnomeui-compat-1.0.h"

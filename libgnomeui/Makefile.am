@@ -63,13 +63,12 @@ libgnomeui_2_la_SOURCES = \
 	gnome-entry.c			\
 	gnome-file-entry.c		\
 	gnome-gconf-ui.c		\
-	gnome-image-entry.c		\
-	gnome-image-selector.c		\
 	gnome-href.c			\
 	gnome-ice.c			\
 	gnome-i18nP.h			\
 	gnome-messagebox.c		\
 	gnome-pixmap.c			\
+	gnome-pixmap-entry.c		\
 	gnome-ui-init.c			\
 	gnometypes.c			\
 	gnome-icon-entry.c		\
@@ -99,8 +98,6 @@ gnome_headers = \
 	gnome-entry.h			\
 	gnome-file-entry.h		\
 	gnome-gconf-ui.h		\
-	gnome-image-entry.h		\
-	gnome-image-selector.h		\
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-entry.h		\
@@ -109,6 +106,7 @@ gnome_headers = \
 	gnome-macros.h			\
 	gnome-messagebox.h		\
 	gnome-pixmap.h			\
+	gnome-pixmap-entry.h		\
 	gnome-ui-init.h			\
 	gnome-stock-icons.h		\
 	gnome-types.h			\
