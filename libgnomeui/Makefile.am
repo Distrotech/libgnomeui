@@ -72,6 +72,7 @@ libgnomeui10compat_a_SOURCES =\
 	gnome-canvas-image.c		\
 	gnome-canvas-load.c		\
 	gnomeui10-compat.c		\
+	gnome-druid-page-start.c	\
 	gnome-druid-page-finish.c	\
 	gnome-icon-list.c		\
 	gnome-icon-item.c		\
@@ -88,6 +89,7 @@ libgnomeui10compatinclude_HEADERS = \
 	gnome-canvas-image.h		\
 	gnome-canvas-load.h		\
 	gnomeui10-compat.h		\
+	gnome-druid-page-start.h	\
 	gnome-druid-page-finish.h	\
 	gnome-icon-list.h		\
 	gnome-icon-item.h		\
@@ -117,7 +119,7 @@ libgnomeui_la_SOURCES = \
 	gnome-client.c			\
 ##	gnome-color-picker.c		\
 	gnome-dateedit.c		\
-	gnome-dentry-edit.c		\
+##	gnome-dentry-edit.c		\
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
@@ -127,7 +129,7 @@ libgnomeui_la_SOURCES = \
 	gnome-dock-layout.c		\
 	gnome-druid.c			\
 	gnome-druid-page.c		\
-	gnome-druid-page-start.c	\
+	gnome-druid-page-edge.c	\
 	gnome-druid-page-standard.c	\
 	gnome-geometry.c		\
 	gnome-entry.c			\
@@ -185,7 +187,7 @@ gnome_headers = \
 	gnome-client.h			\
 	gnome-color-picker.h		\
 	gnome-dateedit.h		\
-	gnome-dentry-edit.h		\
+##	gnome-dentry-edit.h		\
 	gnome-dialog.h                  \
 	gnome-dialog-util.h		\
 	gnome-dns.h			\
@@ -195,7 +197,7 @@ gnome_headers = \
 	gnome-dock-layout.h		\
 	gnome-druid.h			\
 	gnome-druid-page.h		\
-	gnome-druid-page-start.h	\
+	gnome-druid-page-edge.h	\
 	gnome-druid-page-standard.h	\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
