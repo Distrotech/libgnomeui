@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
-"PO-Revision-Date: 2004-03-18 07:41+0300\n"
+"POT-Creation-Date: 2004-07-08 08:21+0400\n"
+"PO-Revision-Date: 2004-07-08 08:30+0400\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,6 +29,33 @@ msgstr "Дочерний элемент 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Подсказка для элемента 2"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:855
+msgid "Filesystem"
+msgstr "Файловая система"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1517
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Произошёл сбой при сохранении закладки (%s)"
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "Не удалось получить информацию о файле \"%s\": %s"
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Произошёл сбой при открытии файла \"%s\": %s"
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Произошёл сбой при загрузке изображения \"%s\": причина неизвестна, "
+"возможно, файл изображения повреждён"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -139,6 +166,7 @@ msgstr "О программе \"%s\""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -196,6 +224,7 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Справка"
 
@@ -386,11 +415,11 @@ msgstr "Изменить настройки приложения"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_О программе"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Получить информацию об этой программе"
 
@@ -417,7 +446,7 @@ msgstr "Создать новое окно"
 msgid "_Close This Window"
 msgstr "_Закрыть это окно"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Закрыть текущее окно"
 
@@ -514,9 +543,9 @@ msgid "Text Only"
 msgstr "Только текст"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Использовать исходные значения рабочего стола (%s)"
+msgstr "Использовать исходное значение рабочего стола (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -617,9 +646,9 @@ msgid "Authentication Required"
 msgstr "Аутентификация требуется"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "Необходимо войти в сеанс, чтобы иметь доступ к \"%s\"\n"
+msgstr "Необходимо войти в сеанс, чтобы иметь доступ к \"%s\" домена \"%s\"\n"
 
 #: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
@@ -805,22 +834,43 @@ msgstr "Цвет фона установлен"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Цвет содержимого фона"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Цвет содержимого фона"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Цвет содержимого фона в формате GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Набор цветов содержимого фона"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Цвет содержимого фона установлен"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "Цвет фона эмблемы"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "Цвет фона эмблемы"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Цвет фона эмблемы в формате GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Набор цветов фона эмблемы"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Цвет фона эмблемы установлен"
 
@@ -1224,25 +1274,33 @@ msgstr "Вопрос"
 msgid "Message"
 msgstr "Сообщение"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "И_мя пользователя:"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "_Домен:"
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_Пароль:"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr "Подсоединиться _анонимно"
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr "Подсоединиться _как пользователь:"
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "Запомнить пароль для этого сеанса"
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
-msgstr "Сохранить пароль в парольном круге"
+msgstr "Сохранить пароль в брелке"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1250,7 +1308,7 @@ msgstr "Показывать образец"
 
 #: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Надо ли показывать образец изображения"
+msgstr "Надо ли показывать образец изображения."
 
 #: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
@@ -1347,7 +1405,6 @@ msgstr ""
 "Возникли множественные ошибки сегментации; невозможно отобразить диалог об "
 "ошибке\n"
 
-#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
@@ -1406,11 +1463,12 @@ msgstr "_Сообщить разработчикам"
 msgid "_Debug"
 msgstr "_Отладить"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Выйти из теста"
+
 #~ msgid " domain %s"
 #~ msgstr " домен %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "Выйти из теста"
 
 #~ msgid "Color Selector"
 #~ msgstr "Выбор цвета"
