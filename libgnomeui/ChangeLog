@@ -1,3 +1,10 @@
+1998-12-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-number-entry.c (calc_dialog_destroyed): Fix signal
+	signature. 
+
+	* gnome-init.c (relay_gtk_signal): Return a value.
+
 Wed Dec 16 17:53:48 1998  Raph Levien  <raph@gimp.org>
 
 	So far, no changes that affect canvas users or xlib custom items.

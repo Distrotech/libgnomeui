@@ -102,7 +102,7 @@ gnome_number_entry_get_number(GnomeNumberEntry *nentry)
 	return r;
 }
 
-static int
+static void
 calc_dialog_destroyed(GtkWidget *w, GnomeNumberEntry *nentry)
 {
 	nentry->calc_dlg = NULL;

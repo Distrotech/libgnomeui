@@ -113,7 +113,7 @@ gnome_add_gtk_arg_callback(poptContext con,
 			   const struct poptOption * opt,
 			   const char * arg, void * data)
 {
-  static gnome_gtk_initialized = FALSE;
+  static int gnome_gtk_initialized = FALSE;
   static GPtrArray *gtk_args = NULL;
   char *newstr, *newarg;
   int final_argc;
@@ -572,6 +572,6 @@ relay_gtk_signal(GtkObject *object,
   if(t->actions[0]->u.media.cache_id >= 0)
     esd_sample_play(gnome_sound_connection, t->actions[0]->u.media.cache_id);
 
-  return TRUE;
 #endif
+  return TRUE;
 }
