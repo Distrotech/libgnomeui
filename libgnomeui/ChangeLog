@@ -1,3 +1,9 @@
+1998-09-12  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-mdi.c: Use the gnome_app_*_menus() calls instead of their
+	gnome_app_*_menus_with_data() equivalents to allow users to pass
+	their own data.
+
 Sat Sep 12 13:50:29 1998 Paul Sheer <psheer@obsidian.co.za>
 
 	* gtkcauldron.c: Added inline labels: specified as text between
