@@ -1,5 +1,10 @@
 2001-05-20  Martin Baulig  <baulig@suse.de>
 
+	* gnome-image-entry-component.c: Removed all properties and use
+	our client's property bag.
+
+2001-05-20  Martin Baulig  <baulig@suse.de>
+
 	* libgnomeui-components.c: Use GnomeSelectorFactory
 
 2001-05-19  Martin Baulig  <baulig@suse.de>
