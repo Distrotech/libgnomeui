@@ -732,7 +732,7 @@ create_children (GnomeDateEdit *gde)
 		gtk_widget_show (gde->_priv->cal_label);
 
 	arrow = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT);
-	gtk_box_pack_start (GTK_BOX (hbox), arrow, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), arrow, TRUE, FALSE, 0);
 	gtk_widget_show (arrow);
 
 	gtk_widget_show (gde->_priv->date_button);
