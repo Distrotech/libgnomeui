@@ -2099,7 +2099,7 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
   
   if (status)
     {
-        client->interaction_key= g_slist_prepend (client->interaction_keys, 
+        client->interaction_keys = g_slist_prepend (client->interaction_keys, 
 						   key);
     }
   else

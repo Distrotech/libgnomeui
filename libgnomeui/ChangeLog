@@ -1,3 +1,7 @@
+Sun Dec 13 20:50:06 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-client.c: fix typo interaction_key -> interaction_keys
+
 1998-12-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-init.c 	(gnome_init_cb): Change of strategy.  Pixmaps are
