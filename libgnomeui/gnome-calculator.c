@@ -422,6 +422,13 @@ no_func(GtkWidget *w, gpointer data)
 		return;
 
 	push_input(gc);
+
+	/* if no stack, nothing happens */
+	if(!gc->stack) {
+		unselect_invert(gc);
+		return;
+	}
+
 	reduce_stack_prec(gc,NULL);
 	if(gc->error) return;
 	set_result(gc);
@@ -550,15 +557,22 @@ reset_calc(GtkWidget *w, gpointer data)
 		stack_pop(&gc->stack);
 
 	gc->result = 0;
-	strcpy(gc->result_string,"0");
+	strcpy(gc->result_string, " 0");
 	gc->memory = 0;
-	gc->mode = GNOME_CALCULATOR_DEG;
+	/* FIXME: We can't currently reset the
+	 * mode as we'd need to change the label, but we have no
+	 * way of getting at it from here */
+	/*gc->mode = GNOME_CALCULATOR_DEG;*/
 	gc->invert = FALSE;
 	gc->error = FALSE;
 
 	gc->add_digit = TRUE;
-	push_input(gc);
-	set_result(gc);
+
+	gtk_widget_queue_draw (gc->display);
+
+	gtk_signal_emit(GTK_OBJECT(gc),
+			gnome_calculator_signals[RESULT_CHANGED_SIGNAL],
+			gc->result);
 
 	unselect_invert(gc);
 }
@@ -570,14 +584,25 @@ clear_calc(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
+	/* if in add digit mode, just clear the number, otherwise clear
+	 * state as well */
+	if(!gc->add_digit) {
+		while(gc->stack)
+			stack_pop(&gc->stack);
+	}
+
 	gc->result = 0;
-	strcpy(gc->result_string,"0");
+	strcpy(gc->result_string, " 0");
 	gc->error = FALSE;
 	gc->invert = FALSE;
 
 	gc->add_digit = TRUE;
-	push_input(gc);
-	set_result(gc);
+
+	gtk_widget_queue_draw (gc->display);
+
+	gtk_signal_emit(GTK_OBJECT(gc),
+			gnome_calculator_signals[RESULT_CHANGED_SIGNAL],
+			gc->result);
 
 	unselect_invert(gc);
 }
@@ -1196,11 +1221,11 @@ gnome_calculator_init (GnomeCalculator *gc)
 
 	gc->stack = NULL;
 	gc->result = 0;
-	strcpy(gc->result_string,"0");
+	strcpy(gc->result_string," 0");
 	gc->memory = 0;
 	gc->mode = GNOME_CALCULATOR_DEG;
 	gc->invert = FALSE;
-	gc->add_digit = FALSE;
+	gc->add_digit = TRUE;
 	gc->accel = gtk_accel_group_new();
 
 	table = gtk_table_new(8,5,TRUE);

@@ -1,3 +1,9 @@
+Sun Apr 30 00:16:08 2000  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c: fix segfault when pressing equals on no stack,
+	  fix corrupt stack on reset/clear, make reset/clear behave properly.
+	  clear now does exactly what xcalc does (which is CE/C)
+
 2000-04-29  Jason Leach  <leach@wam.umd.edu>
 
 	* gnome-about.c (gnome_about_construct): allow the possability of
