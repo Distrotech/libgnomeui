@@ -1282,25 +1282,13 @@ gnome_client_connect (GnomeClient *client)
     {
       IceConn ice_conn;
       gint    restarted = FALSE;
-      
-      if (client->client_id == NULL)
-	{
-	  client->client_id = client_id;
 
-	  client_unset_config_prefix (client);
-	}
-      else if (strcmp (client->client_id, client_id) != 0)
+      if (client->client_id != NULL)
 	{
+	  restarted = !strcmp (client->client_id, client_id);
 	  g_free (client->client_id);
-	  client->client_id = client_id;
-
-	  client_unset_config_prefix (client);
 	}
-      else
-	{
-	  g_free (client_id);
-	  restarted = TRUE;
-	}
+      client->client_id = client_id;
       
       /* Lets call 'gnome_process_ice_messages' if new data arrives.  */
       ice_conn = SmcGetIceConnection ((SmcConn) client->smc_conn);
@@ -1802,8 +1790,6 @@ gnome_client_set_id (GnomeClient *client, const gchar *id)
 
   g_free (client->client_id);
   client->client_id= g_strdup (id);
-
-  client_unset_config_prefix (client);
 }
 
 
@@ -1870,10 +1856,9 @@ static gchar* config_prefix = NULL;
 /**
  * gnome_client_set_global_config_prefix
  * @client: Pointer to GNOME session client object.
+ * @prefix: Prefix for saving the global configuration
  *
  * Description:
- *
- * Returns:  Pointer to
  **/
 
 void
@@ -1884,7 +1869,7 @@ gnome_client_set_global_config_prefix (GnomeClient *client, gchar* prefix)
       config_prefix= g_strdup (prefix);
     }
 
-  g_return_val_if_fail (GNOME_IS_CLIENT (client), NULL);
+  g_return_if_fail (GNOME_IS_CLIENT (client));
   
   client->global_config_prefix = g_strdup (prefix);
 }
@@ -2436,7 +2421,7 @@ gnome_process_ice_messages (gpointer client_data,
   
   status = IceProcessMessages 
     (SmcGetIceConnection ((SmcConn) client->smc_conn), NULL, NULL);
-  
+
   if (status == IceProcessMessagesIOError)
     {
       gnome_client_disconnect (client);

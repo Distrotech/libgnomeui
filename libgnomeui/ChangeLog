@@ -1,3 +1,7 @@
+Thu Dec 17  Felix Bellaby  <felix@pooh.u-net.com>
+	* gnome-client.c (gnome_client_connect, gnome_client_set_id): remove
+	some code left over from old config file nameing scheme.
+
 Wed Dec 16 11:51:23 1998  Raph Levien  <raph@gimp.org>
 
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_render): Added
