@@ -40,7 +40,6 @@ Mon Oct 19 19:33:18 1998  Owen Taylor  <otaylor@redhat.com>
         * gnome-color-selector.c: Now it creates a modal dialog box only when
         there is another modal window yet.
         
->>>>>>> 1.522
 1998-10-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-item.c: Add width_changed signal to icon-text-item.
@@ -99,7 +98,6 @@ Mon Oct 19 19:33:18 1998  Owen Taylor  <otaylor@redhat.com>
 	ev.focus_change.window field to the canvas's bin window.
 	(emit_event): Rearranged some of the focusing tests.
 
->>>>>>> 1.516
 Mon Oct 19 11:57:51 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-mdi.c: Change "drag_data_received" callback
