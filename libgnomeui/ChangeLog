@@ -1,3 +1,7 @@
+Tue Nov 20 16:12:09 2001  Owen Taylor  <otaylor@redhat.com>
+
+	* libgnomeuiP.h: Remove excess gobject/* include.
+
 Sun Nov 18 2001  Miles Lane <miles@megapathdsl.net>
 
 	* libgnomeui/Makefile.am: replace <gobject/genums.h>

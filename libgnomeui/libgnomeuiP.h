@@ -28,7 +28,6 @@
 #define LIBGNOMEUIP_H
 
 #include <glib.h>
-#include <gobject/gsignal.h>
 #include <gtk/gtktypeutils.h>
 
 
