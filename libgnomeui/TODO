@@ -44,7 +44,7 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
 * Silence everything from -Wall
   [ This is largely done for libgnome and libgnomeui
     The remaining warnings were left in to remind people to fix the
-    actual underlying problem.
+    actual underlying problem. ]
 
 * Write a "minibuffer" widget which is a statusbar that can take input, a 
   la Emacs.
