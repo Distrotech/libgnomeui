@@ -27,6 +27,7 @@
 #ifndef LIBGNOMEUI_H
 #define LIBGNOMEUI_H
 
+/* XXX: hmm this should be defined by the app I guess */
 #define GNOME_EXCLUDE_DEPRECATED 1
 
 #include "libgnome/gnome-defs.h"
@@ -96,8 +97,10 @@
 #include "libgnomeui/gnome-propertybox.h"
 /* The gnome-properties and gnome-property-entries modules should be finished or
  * deprecated by gnome-2.0 */
+#ifndef GNOME_EXCLUDE_DEPRECATED
 #include "libgnomeui/gnome-properties.h"
 #include "libgnomeui/gnome-property-entries.h"
+#endif
 #include "libgnomeui/gnome-scores.h"
 #include "libgnomeui/gnome-types.h"
 #include "libgnomeui/gnome-stock.h"

@@ -45,29 +45,19 @@ typedef enum {
 #define GNOME_IS_FONT_PICKER_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_FONT_PICKER))
 #define GNOME_FONT_PICKER_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_FONT_PICKER, GnomeFontPickerClass))
 
-typedef struct _GnomeFontPicker GnomeFontPicker;
-typedef struct _GnomeFontPickerClass GnomeFontPickerClass;
+typedef struct _GnomeFontPicker        GnomeFontPicker;
+typedef struct _GnomeFontPickerPrivate GnomeFontPickerPrivate;
+typedef struct _GnomeFontPickerClass   GnomeFontPickerClass;
 
 struct _GnomeFontPicker {
         GtkButton button;
     
 	GtkWidget     *font_dialog;
         GtkWidget     *inside;
-        GtkWidget     *font_label,*vsep,*size_label;
+        GtkWidget     *font_label, *vsep, *size_label;
 
-
-        /* Do not change, use set/get functions */
-        gchar         *title;
-        
-        gchar         *font_name;
-        gchar         *preview_text;
-
-        GnomeFontPickerMode mode : 2;
-
-        /* Only for GNOME_FONT_PICKER_MODE_FONT_INFO */
-        gboolean      use_font_in_label : 1;
-        gboolean      use_font_in_label_size : 1;
-        gboolean      show_size : 1;
+	/*< private >*/
+	GnomeFontPickerPrivate *_priv;
 };
 
 struct _GnomeFontPickerClass {
@@ -85,7 +75,9 @@ GtkType gnome_font_picker_get_type (void);
 GtkWidget *gnome_font_picker_new (void);
 
 /* Sets the title for the font selection dialog */
-void gnome_font_picker_set_title (GnomeFontPicker *gfp, const gchar *title);
+void       gnome_font_picker_set_title       (GnomeFontPicker *gfp,
+					      const gchar *title);
+const gchar * gnome_font_picker_get_title    (GnomeFontPicker *gfp);
 
 /* Button mode */
 GnomeFontPickerMode
@@ -108,7 +100,7 @@ void       gnome_font_picker_uw_set_widget    (GnomeFontPicker *gfp,
                                                GtkWidget       *widget);
 
 /* Functions to interface with GtkFontSelectionDialog */
-const gchar* gnome_font_picker_get_font_name    (GnomeFontPicker *gfp);
+const gchar* gnome_font_picker_get_font_name  (GnomeFontPicker *gfp);
 
 GdkFont*   gnome_font_picker_get_font	      (GnomeFontPicker *gfp);
 

@@ -1,3 +1,15 @@
+Wed Jul 12 16:59:10 2000  George Lebl <jirka@5z.com>
+
+	* gnome-file-entry.h, gnome-icon-entry.h: hide deprecated functions
+	  behind #ifndef GNOME_EXCLUDE_DEPRECATED
+
+	* gnome-font-picker.[ch]:  Add accessor for title, use a private
+	  pointer, add GtkArg stuff, plus some cleanup
+
+	* libgnomeui.h: since gnome-properties.h and gnome-property-entries.h
+	  are 1) unmaintained 2) marked deprecated, hide them with
+	  #ifndef GNOME_EXCLUDE_DEPRECATED
+
 Wed Jul 12 15:56:58 2000  George Lebl <jirka@5z.com>
 
 	* gnome-helpsys.c: minor documentation fix

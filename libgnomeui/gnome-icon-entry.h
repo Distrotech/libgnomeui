@@ -101,6 +101,7 @@ void       gnome_icon_entry_set_history_id(GnomeIconEntry *ientry,
 
 GtkWidget *gnome_icon_entry_pick_dialog	(GnomeIconEntry *ientry);
 
+#ifndef GNOME_EXCLUDE_DEPRECATED
 /* DEPRECATED routines left for compatibility only, will disapear in
  * some very distant future */
 /* this is deprecated in favour of the above */
@@ -109,6 +110,7 @@ void       gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
 GtkWidget *gnome_icon_entry_gnome_file_entry(GnomeIconEntry *ientry);
 GtkWidget *gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry);
 GtkWidget *gnome_icon_entry_gtk_entry   (GnomeIconEntry *ientry);
+#endif
 
 
 END_GNOME_DECLS
