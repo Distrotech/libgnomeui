@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.107.0\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2002-12-02 21:48+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -168,7 +168,7 @@ msgstr "Fjern forbindelse til sesjonsbehandler"
 msgid "Session management"
 msgstr "Sesjonshåndtering"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Avbryt utlogging"
 
@@ -1040,23 +1040,23 @@ msgstr ""
 "egenskapen til å hente GtkEntry hvis du trenger å endre den eller spørre på "
 "noen av dens parametere."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Velg fil"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Sti"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Sti til fil"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Bla gjennom..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Vis en filvelger for å velge en fil"
 
@@ -1198,7 +1198,7 @@ msgstr ""
 "Ikonvelgerdialog. Du kan bruke denne egenskapen for å finne GtkDialog hvis "
 "du trenger å endre eller spørre på noen av egenskapene."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Uten ikon"
 
@@ -1210,39 +1210,39 @@ msgstr "Kan ikke finne en hbox, med vanlig filutvalg"
 msgid "Preview"
 msgstr "Forhåndsvis"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Dialog for ikonvalg"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Denne dialogen lar deg velge et ikon."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Ikonvalg"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Vennligst velg ikonet du ønsker."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Ikonvalg"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Denne knappen vil åpne et vindu som lar deg velge et ikon."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Bla gjennom"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Ikonsti"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

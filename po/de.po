@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.2\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2002-12-20 17:48+0100\n"
 "Last-Translator: Christian Meyer <chrisime@gnome,org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -173,7 +173,7 @@ msgstr "Verbindung zum Sitzungsmanager deaktivieren"
 msgid "Session management"
 msgstr "Sitzungsverwaltung"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Abmelden abbrechen"
 
@@ -1056,23 +1056,23 @@ msgstr ""
 "können diese Eigenschaft verwenden, um den GtkEntry zu erhalten, falls Sie "
 "seine Parameter verändern oder abfragen müssen."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Datei auswählen"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Pfad"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Pfad zur Datei"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Auswählen..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Dateiauswahl aufklappen um eine Datei zu wählen"
 
@@ -1219,7 +1219,7 @@ msgstr ""
 "GtkDialog zu erhalten, falls Sie seine Eigenschfaten verändern oder abfragen "
 "müssen."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Kein Symbol"
 
@@ -1232,39 +1232,39 @@ msgstr ""
 msgid "Preview"
 msgstr "Voransicht"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Symbolauswahl-Dialog"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Dieser Auswahldialog lässt Sie ein Symbol auswählen."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Symbolauswahl"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Wählen Sie das gewünschte Symbol."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Symbolauswahl"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Diese Schaltfläche öffnet das Auswahlfenster für Symbole."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Auswählen"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Pfad zum Symbol"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2002-12-04 15:47+0100\n"
 "Last-Translator: Szabolcs Ban <shooby@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
@@ -169,7 +169,7 @@ msgstr "A munkamenet-kezelőhöz való csatlakozás tiltása"
 msgid "Session management"
 msgstr "Munkamenet-kezelés"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Mégsem lép ki"
 
@@ -1045,23 +1045,23 @@ msgstr ""
 "tulajdonságot GtkEntry készítésekor, ha módosítani akarod a lekérést vagy "
 "bármely paraméterét."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Fájl kiválasztása"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Útvonal"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Útvonal a fájlhoz"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Keresés..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "A fájlkezelő ablakot dobja fel egy fájl kiválasztásához"
 
@@ -1202,7 +1202,7 @@ msgstr ""
 "Ikonválasztó-ablak. Használatával egy GtkDialog-ot kapsz, ha módosítani "
 "akarod a lekérést vagy bármely paraméterét."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr ""
 "Nincs\n"
@@ -1216,39 +1216,39 @@ msgstr "hbox nem található, szokásos fájlkiválasztás alkalmazása"
 msgid "Preview"
 msgstr "Előnézet"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Ikonválasztó párbeszédablak"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Ez a párbeszédablak egy ikon kiválasztásában segít."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Ikonválasztó"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Kérlek válassz ki egy ikont."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Ikonválasztó"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Ez a gomb egy ikonválasztó párbeszédablakot nyit meg."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Keresés"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Ikon elérési útja"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

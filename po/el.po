@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.4\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-01-05 12:19+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -186,7 +186,7 @@ msgid "Session management"
 msgstr "Διαχείριση συνεδρίας"
 
 #
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Ακύρωση Τερματισμού Συνεδρίας"
 
@@ -1585,7 +1585,7 @@ msgstr ""
 
 # #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
 #
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Επιλογή αρχείου"
 
@@ -1596,7 +1596,7 @@ msgstr "Επιλογή αρχείου"
 #
 # #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
 #
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Διαδρομή"
 
@@ -1605,15 +1605,15 @@ msgstr "Διαδρομή"
 #
 # #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-#
 #
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Διαδρομή στο αρχείο"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Εξερεύνηση..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Ανάδυση ενός Επιλογέα αρχείου για την επιλογή αρχείου"
 
@@ -1784,7 +1784,7 @@ msgstr ""
 "κάποια από τις ιδιότητες του."
 
 #
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Δίχως Εικονίδιο"
 
@@ -1812,27 +1812,27 @@ msgstr "Δε βρέθηκε hbox, χρήση απλού επιλογέα αρχ�
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Διάλογος επιλογής εικονιδίου"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Αυτό το κουτί διαλόγου σάς επιτρέπει να επιλέξετε ένα εικονίδιο."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Επιλογέας εικονιδίου"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Παρακαλώ επιλέξτε το εικονίδιο που επιθυμείτε."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Επιλογέας Εικονιδίου"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr ""
 "Αυτό το κουμπί θα ανοίξει ένα παράθυρα που θα σας επιτρέψει να επιλέξετε ένα "
@@ -1849,15 +1849,15 @@ msgstr ""
 #
 # #-#-#-#-#  screem-el.po (screem 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Εξερεύνηση"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Διαδρομή εικονιδίου"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-01-18 14:10+0300\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -169,7 +169,7 @@ msgstr "Отключить соединение с диспетчером сеа
 msgid "Session management"
 msgstr "Управление сеансом"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Отменить завершение сеанса"
 
@@ -1049,23 +1049,23 @@ msgstr ""
 "Можно использовать это свойство для получения строки GtkEntry, если "
 "необходимо модифицировать или запросить любой из параметров."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Выбрать файл"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Путь"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Путь к файлу"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "П_росмотреть..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Вызвать диалог для выбора файла"
 
@@ -1207,7 +1207,7 @@ msgstr ""
 "Диалог выбора значков.Можно использовать это свойство для получения  диалога "
 "GtkDialog, если необходимо изменить или запросить любое из свойств."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Нет значка"
 
@@ -1219,39 +1219,39 @@ msgstr "Невозможно найти hbox, используется обыч�
 msgid "Preview"
 msgstr "Образец"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Диалог выбора значков"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Этот диалог позволяет выбрать значок."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Выбор значков"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Выберите желаемый значок."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Выбор значков"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Эта кнопка откроет окно, позволяющее выбрать значок."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Просмотреть"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Путь к значку"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

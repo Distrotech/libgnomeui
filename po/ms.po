@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -188,7 +188,7 @@ msgid "Session management"
 msgstr "Pengurusan sessi"
 
 # libgnomeui/gnome-client.c:2348
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Batal Logkeluar"
 
@@ -1172,27 +1172,27 @@ msgstr ""
 "mengubahsuai atau kueri sebarang parameternya."
 
 # libgnomeui/gnome-file-entry.c:152
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Pilih fail"
 
 # libgnomeui/gnome-app-helper.c:179 libgnomeui/gnome-popup-help.c:62
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Path"
 
 # libgnomeui/gnome-app-helper.c:127
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Path ke fail"
 
 # libgnomeui/gnome-file-entry.c:282 libgnomeui/gnome-spell.c:619
 # libgnomeui/gnome-spell.c:636 libgnomeui/gnome-spell.c:653
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Lungsur..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Popupkan pemilih fail untuk memilih fail"
 
@@ -1343,7 +1343,7 @@ msgstr ""
 "GtkDialoj jika and aingin mengubahsuai atau kueri sebarang ciri-cirinya."
 
 # libgnomeui/gnome-icon-entry.c:111 libgnomeui/gnome-icon-entry.c:556
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Tiada Ikon"
 
@@ -1357,41 +1357,41 @@ msgstr "Tidak dapat mencari hbox, gunakan pilihan fail biasa"
 msgid "Preview"
 msgstr "Prebiu"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Dialog pemilih ikon"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Kekotak dialog ini membolehkan anda memilih ikon."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Pemilih ikon"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Sila pilih ikon yang anda mahu."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Pemilih Ikon"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Butang ini akan membuka tetingkap supaya membolehkan and memilih ikon"
 
 # libgnomeui/gnome-file-entry.c:282 libgnomeui/gnome-spell.c:619
 # libgnomeui/gnome-spell.c:636 libgnomeui/gnome-spell.c:653
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Lungsur"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Path ikon"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

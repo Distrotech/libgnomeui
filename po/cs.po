@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-02-25 20:23+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-02-22 23:55+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -168,7 +168,7 @@ msgstr "Vypnout napojení na správce sezení"
 msgid "Session management"
 msgstr "Správa sezení"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Zrušit odhlášení"
 
@@ -523,7 +523,6 @@ msgstr "Rada pro položku 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Soubor"
 
@@ -581,7 +580,6 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Nápověda"
 
@@ -772,11 +770,11 @@ msgstr "Nastavit tuto aplikaci"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_O aplikaci"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "O této aplikaci"
 
@@ -803,7 +801,7 @@ msgstr "Vytvořit nové okno"
 msgid "_Close This Window"
 msgstr "_Zavřít toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Zavřít aktuální okno"
 
@@ -1048,23 +1046,23 @@ msgstr ""
 "atribut lze použít k získání prvku GtkEntry, chcete-li měnit nebo zjistit "
 "jeho parametry."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Vyber soubor"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Cesta"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Cesta k souboru"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Probírat..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Zobrazí dialog pro výběr souboru"
 
@@ -1206,7 +1204,7 @@ msgstr ""
 "Dialog pro výběr ikony. Můžete použít tento atribut, chcete-li získat prvek "
 "GtkDialog a měnit nebo zjistit jeho parametry."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Žádná ikona"
 
@@ -1218,39 +1216,39 @@ msgstr "Nelze nalézt prvek hbox, použije se běžný výběr souboru"
 msgid "Preview"
 msgstr "Náhled"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Dialog výběru ikony"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Toto dialogové okno vám umožní vybrat ikonu."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Výběr ikony"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Vyberte prosím ikonu, kterou chcete."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Výběr ikony"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Toto tlačítko otevře okno, ve kterém budete moci vybrat ikonu."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Probírat"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Cesta k ikonám"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1333,6 +1331,5 @@ msgstr "%T %a %d. %b %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Ukončit test"
+#~ msgid "Exit the test"
+#~ msgstr "Ukončit test"

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui cvs\n"
-"POT-Creation-Date: 2003-01-29 12:15+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-01-07 09:56GMT\n"
 "Last-Translator: Juan Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -107,7 +107,8 @@ msgid "Translator credits"
 msgstr "Créditos de los traductores"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos de los traductores. Esta cadena debería estar marcada como "
 "traducible"
@@ -173,7 +174,7 @@ msgstr "Deshabilitar la conexión al administrador de sesiones"
 msgid "Session management"
 msgstr "Administración de sesiones"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Cancelar cierre de sesión"
 
@@ -478,7 +479,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Para obtener más información visite la página «Error en Aplicaciones GNOME»"
+msgstr ""
+"Para obtener más información visite la página «Error en Aplicaciones GNOME»"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -526,7 +528,6 @@ msgstr "Consejo para el elemento 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Archivo"
 
@@ -584,7 +585,6 @@ msgid "_Game"
 msgstr "_Juego"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_yuda"
 
@@ -775,11 +775,11 @@ msgstr "Configura la aplicación"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Acerca de"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
@@ -806,7 +806,7 @@ msgstr "Crear una ventana nueva"
 msgid "_Close This Window"
 msgstr "_Cerrar esta ventana"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Cerrar la ventana actual"
 
@@ -1051,23 +1051,23 @@ msgstr ""
 "Puede usar esta propiedad para obtener GtkEntry si necesita modificar o "
 "consultar cualquiera de sus parámetros."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Seleccionar archivo"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Ruta"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Ruta al archivo"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "E_xaminar..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Aparece un selector de archivo para elegir un archivo."
 
@@ -1125,7 +1125,8 @@ msgstr "Usar tipografías en etiquetas"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr ""
+"Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1210,7 +1211,7 @@ msgstr ""
 "Diálogo selector de iconos.  Puede usar esta propiedad para mostrar un "
 "GtkDialog si necesita modificar o consultar alguna de sus propiedades."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Sin icono"
 
@@ -1222,39 +1223,39 @@ msgstr "No se puede encontrar un hbox, usando una selección de archivos normal"
 msgid "Preview"
 msgstr "Vista preliminar"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Diálogo de selección de icono"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Este cuadro de diálogo permite seleccionar un icono."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Selector de icono"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Por favor, seleccione el icono que quiera."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Selector de icono"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Este botón abrirá una ventana para permitirle seleccionar un icono."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Examinar"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Ruta del icono"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1339,7 +1340,5 @@ msgstr "%a, %d de %b de %Y, %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Salir del test"
-
+#~ msgid "Exit the test"
+#~ msgstr "Salir del test"

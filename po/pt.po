@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.2\n"
-"POT-Creation-Date: 2003-02-02 14:51+0000\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-02-02 14:52+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -145,31 +145,31 @@ msgstr "Interactividade"
 msgid "Level of user activity required."
 msgstr "Nível de interactividade do utilizador requerida."
 
-#: libgnomeui/gnome-client.c:864
+#: libgnomeui/gnome-client.c:860
 msgid "Specify session management ID"
 msgstr "Especificar ID de gestão de sessão"
 
-#: libgnomeui/gnome-client.c:864
+#: libgnomeui/gnome-client.c:860
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:867
+#: libgnomeui/gnome-client.c:863
 msgid "Specify prefix of saved configuration"
 msgstr "Especificar prefixo da configuração gravada"
 
-#: libgnomeui/gnome-client.c:867
+#: libgnomeui/gnome-client.c:863
 msgid "PREFIX"
 msgstr "PREFIXO"
 
-#: libgnomeui/gnome-client.c:870
+#: libgnomeui/gnome-client.c:866
 msgid "Disable connection to session manager"
 msgstr "Desabilitar ligação ao gestor de sessão"
 
-#: libgnomeui/gnome-client.c:976
+#: libgnomeui/gnome-client.c:972
 msgid "Session management"
 msgstr "Gestão de sessão"
 
-#: libgnomeui/gnome-client.c:2481
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Cacelar terminar Sessão"
 
@@ -399,7 +399,8 @@ msgid ""
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Ocorreu um erro ao tentar lançar o we browser por omissão.\n"
-"Verifique se as suas definições na ferramenta de preferências 'Aplicações Preferidas'."
+"Verifique se as suas definições na ferramenta de preferências 'Aplicações "
+"Preferidas'."
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
@@ -521,7 +522,6 @@ msgstr "Dica para item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ficheiro"
 
@@ -579,7 +579,6 @@ msgid "_Game"
 msgstr "Jo_go"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -770,11 +769,11 @@ msgstr "Configurar a aplicação"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Sobre"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Sobre esta aplicação"
 
@@ -801,7 +800,7 @@ msgstr "Criar uma nova janela"
 msgid "_Close This Window"
 msgstr "Fe_char Esta Janela"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Fechar a janela actual"
 
@@ -1046,23 +1045,23 @@ msgstr ""
 "utilizar esta propriedade para obter a GtkEntry caso necessite de modificar "
 "ou verificar qualquer um dos seus parâmetros."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Seleccionar ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Caminho"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Caminho para o ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Navegar..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Surge um selecctor de ficheiro para seleccionar um"
 
@@ -1205,7 +1204,7 @@ msgstr ""
 "GtkDialog caso necessite de alterar ou verificar qualquer uma das suas "
 "propriedades."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Sem Ícone"
 
@@ -1217,39 +1216,39 @@ msgstr "Incapaz de encontrar uma hbox, a utilizar selecção de ficheiro normal"
 msgid "Preview"
 msgstr "Prever"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Diálogo de selecção ícone"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Este diálogo permite-lhe seleccionar um ícone."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Selector Ícones"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Seleccione o ícone que deseja."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Selector Ícones"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Este botão irá abrir uma janela que lhe permitir seleccionar um ícone."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Navegar"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Caminho ícones"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1334,9 +1333,8 @@ msgstr "%a %d %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Sair do teste"
+#~ msgid "Exit the test"
+#~ msgstr "Sair do teste"
 
 #~ msgid "Find _Again"
 #~ msgstr "Procurar _Novamente"

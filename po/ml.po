@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.2.x\n"
-"POT-Creation-Date: 2003-03-10 05:20+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-03-05 10:29+0530\n"
 "Last-Translator: FSF-India <locale@gnu.org.in>\n"
 "Language-Team: Malayalam <locale@gnu.org.in>\n"
@@ -509,7 +509,6 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ശേഖരം"
 
@@ -567,7 +566,6 @@ msgid "_Game"
 msgstr "കളി"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "സഹായം"
 
@@ -758,11 +756,11 @@ msgstr "പ്രയോഗത്തെ അനുരൂപമാക്കുക"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "കുറിപ്പ്"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "ഈ പ്രയോഗത്തെക്കുറിച്ച്"
 
@@ -789,7 +787,7 @@ msgstr "പുതിയ ഒരു ജാലകം ഉണ്ടാക്കുക
 msgid "_Close This Window"
 msgstr "ഈ ജാലകം അടയ്‍ക്കുക"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "നിലവിലുള്ള ശേഖരം അടയ്‍ക്കുക"
 
@@ -1025,23 +1023,23 @@ msgid ""
 "parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "രചന തെരഞ്ഞെടുക്കുക"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "വഴി"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "രചനയിലേക്കുള്ള വഴി"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "അന്വേഷണം..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr ""
 
@@ -1302,7 +1300,3 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "സാന്‌സ് 12"
-
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr ""

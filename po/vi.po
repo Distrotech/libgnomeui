@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-01-10 22:03+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@linuxmail.org>\n"
 "Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
@@ -170,7 +170,7 @@ msgstr "Tắt kết nối với trình quản lý phiên làm việc"
 msgid "Session management"
 msgstr "Quản lý phiên làm việc"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Bỏ qua việc Thoát ra"
 
@@ -1045,23 +1045,23 @@ msgstr ""
 "GtkEntry là mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng nó để "
 "nhận GtkEntry khi bạn cần thay đổi hay tra vấn bất kỳ một tham số nào của nó."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Chọn tập tin"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Đường dẫn"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Đường dẫn tới tập tin"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Duyệt..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Bật lên một trình chọn tập tin để chọn một tập tin"
 
@@ -1203,7 +1203,7 @@ msgstr ""
 "Đối thoại chọn biểu tượng. Bạn có thể dùng tích chất này để lấy GtkDialog "
 "nếu bạn cần để sửa đổi hoặc hỏi đáp các tính chất của nó."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Không biểu tượng"
 
@@ -1215,39 +1215,39 @@ msgstr "Không tìm thấy hbox, hãy chọn một tập tin bình thường"
 msgid "Preview"
 msgstr "Xem trước"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Thoại chọn Biểu tượng"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Hộp thoại này để bạn chọn biểu tượng."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Trình chọn Biểu tượng"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Hãy chọn biểu tượng bạn muốn."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Trình Chọn Biểu Tượng"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Nút này sẽ mở một cửa sổ để bạn chọn biểu tượng."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Tìm"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Đường dẫn của biểu tượng"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

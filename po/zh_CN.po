@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-01-22 21:37+0800\n"
 "Last-Translator: Wang Li <charles@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -177,7 +177,7 @@ msgstr "禁止连接到会话管理器"
 msgid "Session management"
 msgstr "会话管理"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "放弃注销"
 
@@ -1083,27 +1083,27 @@ msgstr ""
 "文件项用来输入文件名的 GtkEntry。如果您需要修改或查询 GtkEntry 的任何参数，可"
 "以使用此属性来获得GtkEntry。"
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "选择文件"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "路径"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "文件路径"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "浏览(_B)..."
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "弹出用于选择文件的文件选择器"
 
@@ -1250,7 +1250,7 @@ msgstr ""
 "图标选取器对话框。如果您需要修改或查询 GtkDialog 的任何参数，可以使用此属性来"
 "获得 GtkDialog。"
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "无图标"
 
@@ -1263,46 +1263,46 @@ msgid "Preview"
 msgstr "预览"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "图标选择对话框"
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "您可以通过此对话框选择图标。"
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "图标选择器"
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "请选取需要的图标。"
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "图标选择器"
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "此按钮将打开一个窗口，您可以从中选择图标。"
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "浏览..."
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "图标路径"
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

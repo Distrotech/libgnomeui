@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-01-24 11:05+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-01-25 14:06+0100\n"
 "Last-Translator: Samúel Jón Gunnarsson <sammi@techattack.nu>\n"
 "Language-Team: icelandic <gnome@techattack.nu>\n"
@@ -104,11 +104,11 @@ msgid "Translator credits"
 msgstr "Þakkir til þýðanda"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Þakkir til þýðanda. Þessi strengur ætti að vera merktur sem þýðanlegur"
 
-#: libgnomeui/gnome-about.c:413
-#: libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Lógó"
 
@@ -169,7 +169,7 @@ msgstr "Afvirkja tengingu við setustjóra"
 msgid "Session management"
 msgstr "Setustýring"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Hætta við afskráningu"
 
@@ -189,8 +189,7 @@ msgstr "Opna glugga til að tilgreina lit"
 msgid "Pick a color"
 msgstr "Veldu lit"
 
-#: libgnomeui/gnome-dateedit.c:479
-#: libgnomeui/gnome-dateedit.c:776
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
 msgstr "Tími"
 
@@ -230,8 +229,7 @@ msgstr "Upphafleg tímasetning"
 msgid "The initial time"
 msgstr "Upphaflega tímasetning"
 
-#: libgnomeui/gnome-dateedit.c:739
-#: libgnomeui/gnome-scores.c:97
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "Dagsetning"
 
@@ -396,10 +394,13 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Þessi hnappur mun taka til þeirrar slóð  sem hann sýnir."
 
 #: libgnomeui/gnome-href.c:393
-msgid "An error has occured while trying to launch the default web browser.\n"
+msgid ""
+"An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
-msgstr "Villa átti sér stað meðan að ræsingu sjálfgefins vefvafrara stóð.\n"
-"Vinsamlegast athugaðu stillingarnar í 'Uppáhalds forrit' stillingarverkfærinu."
+msgstr ""
+"Villa átti sér stað meðan að ræsingu sjálfgefins vefvafrara stóð.\n"
+"Vinsamlegast athugaðu stillingarnar í 'Uppáhalds forrit' "
+"stillingarverkfærinu."
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
@@ -416,13 +417,16 @@ msgstr "GNOME GUI safn"
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Fjölþætt frumskiptingarvilla átti sér stað; tókst ekki að ræsa villuglugga\n"
+msgstr ""
+"Fjölþætt frumskiptingarvilla átti sér stað; tókst ekki að ræsa villuglugga\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:631
-msgid "Segmentation fault!\n"
+msgid ""
+"Segmentation fault!\n"
 "Cannot display crash dialog\n"
-msgstr "Frumskiptingarvilla!\n"
+msgstr ""
+"Frumskiptingarvilla!\n"
 "Ekki tóskt að sýna hvað olli hruni\n"
 
 #: libgnomeui/gnome_segv.c:100
@@ -430,7 +434,8 @@ msgstr "Frumskiptingarvilla!\n"
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session will exit.\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
 "GNOME setustjórin (process %d) hrundi\n"
@@ -467,7 +472,9 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Vinsamlegast heimsækið GNOME síðuna 'forrit hrundi'  fyrir frekari upplýsingar"
+msgstr ""
+"Vinsamlegast heimsækið GNOME síðuna 'forrit hrundi'  fyrir frekari "
+"upplýsingar"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -514,9 +521,7 @@ msgid "Hint for item 2"
 msgstr "Vísbending fyrir hlut 2"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82
-#: libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 msgid "_File"
 msgstr "_Skrá"
 
@@ -524,8 +529,7 @@ msgstr "_Skrá"
 msgid "_File/"
 msgstr "_Skrá/"
 
-#: libgnomeui/gnome-app-helper.c:84
-#: libgnomeui/gnome-app-helper.h:554
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "Br_eyta"
 
@@ -533,8 +537,7 @@ msgstr "Br_eyta"
 msgid "_Edit/"
 msgstr "Br_eyta/"
 
-#: libgnomeui/gnome-app-helper.c:86
-#: libgnomeui/gnome-app-helper.h:557
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "Sý_n"
 
@@ -542,8 +545,7 @@ msgstr "Sý_n"
 msgid "_View/"
 msgstr "Sý_n/"
 
-#: libgnomeui/gnome-app-helper.c:88
-#: libgnomeui/gnome-app-helper.h:560
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "S_tillingar"
 
@@ -552,8 +554,7 @@ msgid "_Settings/"
 msgstr "S_tillingar/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90
-#: libgnomeui/gnome-app-helper.h:326
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Ný"
 
@@ -561,8 +562,7 @@ msgstr "_Ný"
 msgid "_New/"
 msgstr "_Ný/"
 
-#: libgnomeui/gnome-app-helper.c:92
-#: libgnomeui/gnome-app-helper.h:563
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "S_krár"
 
@@ -570,19 +570,15 @@ msgstr "S_krár"
 msgid "Fi_les/"
 msgstr "S_krár/"
 
-#: libgnomeui/gnome-app-helper.c:94
-#: libgnomeui/gnome-app-helper.h:566
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_Gluggar"
 
-#: libgnomeui/gnome-app-helper.c:95
-#: libgnomeui/gnome-app-helper.h:572
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Leikur"
 
-#: libgnomeui/gnome-app-helper.c:96
-#: libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
 msgstr "_Hjálp"
 
@@ -758,6 +754,10 @@ msgstr "Breyta eiginleikum skráarinnar"
 
 #  * The Settings menu
 #  Settings
+#.
+#. * The Settings menu
+#.
+#. Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
 msgstr "Dálæti"
@@ -769,13 +769,16 @@ msgstr "Stilla forrit"
 #  20
 #  * And the "Help" menu
 #  About
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
 #: libgnomeui/gnome-app-helper.c:221
-#: test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Um"
 
 #: libgnomeui/gnome-app-helper.c:222
-#: test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Um þetta forrit"
 
@@ -803,7 +806,6 @@ msgid "_Close This Window"
 msgstr "_Loka þessum glugga"
 
 #: libgnomeui/gnome-app-helper.c:240
-#: test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Loka núverandi glugga"
 
@@ -952,8 +954,7 @@ msgstr "Auðkenni forrits"
 msgid "The application ID string"
 msgstr "Auðkennigarstrengur forrits"
 
-#: libgnomeui/gnome-entry.c:193
-#: libgnomeui/gnome-entry.c:194
+#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "Ferils auðkenni"
 
@@ -965,17 +966,18 @@ msgstr "GTK færsla"
 msgid "The GTK entry"
 msgstr "GTK færslan"
 
-#: libgnomeui/gnome-file-entry.c:220
-#: libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
 msgstr "Ferils auðkenni"
 
 #: libgnomeui/gnome-file-entry.c:221
-msgid "Unique identifier for the file entry.  This will be used to save the history list."
-msgstr "Einstakt auðkenni fyrir skráarfærslu. Verður notað til vistunar á ferilskrá."
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Einstakt auðkenni fyrir skráarfærslu. Verður notað til vistunar á ferilskrá."
 
-#: libgnomeui/gnome-file-entry.c:229
-#: libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr "Titill skráarvafra"
 
@@ -988,8 +990,12 @@ msgid "Directory Entry"
 msgstr "Möppu færsla"
 
 #: libgnomeui/gnome-file-entry.c:238
-msgid "Whether the file entry is being used to enter directory names or complete filenames."
-msgstr "Hvort að skráarfærslan eigi að nýtast til að slá inn nafn á möppum eða heilum skráarnöfnum."
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+"Hvort að skráarfærslan eigi að nýtast til að slá inn nafn á möppum eða "
+"heilum skráarnöfnum."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -999,8 +1005,7 @@ msgstr "Formlegt"
 msgid "Whether the Browse file window should be modal."
 msgstr "Hvort skráarvafri eigi að vera með  formlegum hætti."
 
-#: libgnomeui/gnome-file-entry.c:254
-#: libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "Skráarnafn"
 
@@ -1021,34 +1026,46 @@ msgid "GnomeEntry"
 msgstr "Gnomefærsla"
 
 #: libgnomeui/gnome-file-entry.c:272
-msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
-msgstr "Skráarfærsla nýtir Gnomefærslu  til að slá inn skráarnöfn. Þú getur notað þennan eiginleika til að sækja Gnomefærsluna ef þú þarft að breyta eða spyrja um stöður breyta."
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+"Skráarfærsla nýtir Gnomefærslu  til að slá inn skráarnöfn. Þú getur notað "
+"þennan eiginleika til að sækja Gnomefærsluna ef þú þarft að breyta eða "
+"spyrja um stöður breyta."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
 msgstr "Gtk færsla"
 
 #: libgnomeui/gnome-file-entry.c:283
-msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
-msgstr "Skráarfærsla nýtir Gtkfærslu til að slá inn skráarnöfn. Þú getur notað þennan eignleika til að nálgast Gtkfærsluna ef þú þarft að breyta eða spyrja um stöður breyta. "
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+"Skráarfærsla nýtir Gtkfærslu til að slá inn skráarnöfn. Þú getur notað "
+"þennan eignleika til að nálgast Gtkfærsluna ef þú þarft að breyta eða spyrja "
+"um stöður breyta. "
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Veldu skrá"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Stígur"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Stígur að skrá"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Flakka..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Hoppa upp með möguleika á að velja skrá"
 
@@ -1084,8 +1101,7 @@ msgstr "Nafn leturs"
 msgid "Name of the selected font"
 msgstr "Nafn á völdu letri"
 
-#: libgnomeui/gnome-font-picker.c:184
-#: libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Letur"
 
@@ -1135,17 +1151,33 @@ msgstr "Í_tarleg atriði"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
-msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
-msgstr "Forritið \"%s\" reyndi að breyta vissum þáttum í stillingum sem annaðhvort kerfisstjóri eða stýrikerfið sjálft gerir þér ekki kleift að gera. Sumar stillingar munu ekki taka gildi eða munu jafnvel ekki verða endurheimtar næst þegar þú notar forritið."
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr ""
+"Forritið \"%s\" reyndi að breyta vissum þáttum í stillingum sem annaðhvort "
+"kerfisstjóri eða stýrikerfið sjálft gerir þér ekki kleift að gera. Sumar "
+"stillingar munu ekki taka gildi eða munu jafnvel ekki verða endurheimtar "
+"næst þegar þú notar forritið."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
-msgid "An error occurred while loading or saving configuration information for %s. Some of your configuration settings may not work properly."
-msgstr "Villa átti sér stað við hleðslu eða vistun á stillingarupplýsingum fyrir %s. Það er hugsanlegt að stillingarskráin muni ekki virka rétt."
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"Villa átti sér stað við hleðslu eða vistun á stillingarupplýsingum fyrir %s. "
+"Það er hugsanlegt að stillingarskráin muni ekki virka rétt."
 
 #: libgnomeui/gnome-icon-entry.c:177
-msgid "Unique identifier for the icon entry.  This will be used to save the history list."
-msgstr "Einstakt auðkenni fyrir táknmyndafærslu.  Þetta mun nýtast við að vistun  ferilskrár."
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Einstakt auðkenni fyrir táknmyndafærslu.  Þetta mun nýtast við að vistun  "
+"ferilskrár."
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
@@ -1168,64 +1200,69 @@ msgid "Picker dialog"
 msgstr "Valgluggi"
 
 #: libgnomeui/gnome-icon-entry.c:211
-msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
-msgstr "Valgluggi tákmynda. Þú getur notað eiginleika hans til að nálgast GtkDialog ef þú þarft að breyta eða spyrja um eiginleika"
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"Valgluggi tákmynda. Þú getur notað eiginleika hans til að nálgast GtkDialog "
+"ef þú þarft að breyta eða spyrja um eiginleika"
 
-#: libgnomeui/gnome-icon-entry.c:320
-#: libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Engin táknmynd"
 
-#: libgnomeui/gnome-icon-entry.c:531
-#: libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Ekki tókst að finna hbox, nota venjulegt val á skrám"
 
-#: libgnomeui/gnome-icon-entry.c:537
-#: libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Forsýn"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Táknmynda valgluggi"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Þetta gluggi gerir þér kleift að velja táknmynd"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Val á táknmynd"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Vinsamlegast veldu þér táknmynd."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Val á táknmynd"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Þessi hnappur mun opna glugga sem gerir þér kleift að velja táknmynd."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Flakka"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Stígur að táknmynd"
 
-#: libgnomeui/gnome-icon-entry.c:1009
-msgid "Here you should enter the name of the directory where icon images are located."
+#: libgnomeui/gnome-icon-entry.c:1013
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
 msgstr "Hér ættir þú að slá inn nafnið á möppu þar sem táknmyndir eru geymdar."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: '%s' finnst annaðhvort ekki eða er ekki innan þessarar möppu"
+msgstr ""
+"GnomeIconSelection: '%s' finnst annaðhvort ekki eða er ekki innan þessarar "
+"möppu"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
@@ -1264,8 +1301,7 @@ msgstr "Forsýna"
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Hvort virkja eigi forsýn á pixmap mynda-færslu"
 
-#: libgnomeui/gnome-pixmap-entry.c:188
-#: libgnomeui/gnome-pixmap-entry.c:450
+#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
 msgstr "Engin mynd"
 
@@ -1291,6 +1327,9 @@ msgstr "Stig"
 
 #  TRANSLATORS NOTE: Date format used when showing scores in games.
 #  * Please refer to manpage of strftime(3) for complete reference.
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
@@ -1299,7 +1338,5 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Ljúka prufu"
-
+#~ msgid "Exit the test"
+#~ msgstr "Ljúka prufu"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-02-03 10:16+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
@@ -169,7 +169,7 @@ msgstr "ለአስተዳደሩ ጉባኤ ግንኙነቱን አቋርጥ "
 msgid "Session management"
 msgstr "የመምሪያው ጉባኤ"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "መዝጊያውን ይሰርዙ"
 
@@ -1035,23 +1035,23 @@ msgstr ""
 "GtkEntryን ፋይል ማስገቢያው የፋይል ስሞችን ለማስገባት ይጠቀምበታል። ይህንን አካል የፋይሎችን አቀማመጥ ለማሻሻል "
 "ወይንም ለመጠየቅ መጠቀም ይችላሉ።"
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "ፋይል ምረጡ"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "መንገድ"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "መንግድ ወደ ፋይል"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_ቃኝ..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "የፋይል መምረጫ ፋይል ለመምረጥ አሳይ"
 
@@ -1190,7 +1190,7 @@ msgstr ""
 "የምልክት መራጭ መምረጫ። በGtkDialog ውስጥ ያለውን ማንኛውንም ነገር ለማሻሻል ወይንም ለመጠየቅ ከፈለጉ ይህንን "
 "መምረጫ መጠቀም ይችላሉ።"
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "ምልክት የለም"
 
@@ -1202,39 +1202,39 @@ msgstr "መደበኛ የሆነውን የፋይል አመራረጥ በመጠቀ�
 msgid "Preview"
 msgstr "ቅድመ ዕይታ"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "የምልክቶች ምርጫ መምረጫ"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "ይህ የመምረጫ ሳጥን ምልክቶችን ያስመርጥዎታል።"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "የቁልፍ መራጭ"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "እባክዎ የሚፈልጉትን ቁልፍ ይምረጡ።"
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "የቁልፍ መራጭ"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "ይህ ቁልፍ ምልክቶችን እንድትመርጡ መስኮቱን ይከፍታል።"
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "ቃኝ"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "የቁልፉ መተላለፊያ"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-01-14 15:27+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
@@ -175,7 +175,7 @@ msgstr "Essocter l' adjondaedje å manaedjeu di sessions"
 msgid "Session management"
 msgstr "Manaedjmint des sessions"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Rinoncî a moussî foû"
 
@@ -1040,23 +1040,23 @@ msgid ""
 "parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Tchoezi fitchî"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Tchimin"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Tchimin po-z ariver å fitchî"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Foyter..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Drovi on purnea po tchoezi les fitchîs"
 
@@ -1189,7 +1189,7 @@ msgid ""
 "need to modify or query any of its properties."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Nole imådjete"
 
@@ -1201,39 +1201,39 @@ msgstr "Dji n' trove nou hbox; dji prind ene tchuze di fitchîs normåle"
 msgid "Preview"
 msgstr "Vey divant"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Purnea di tchoezixhaedje des imådjetes"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Ci purnea chal vos permete di tchoezi ene imådjete."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Tchoezixheu d' imådjetes"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Tchoezixhoz l' imådjete ki vos vloz, s' i vs plait."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Tchoezixheu d' imådjetes"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Ci boton chal drovrè on purnea por vos tchoezi ene imådjete."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Foyter"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Tchimin del imådjete"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

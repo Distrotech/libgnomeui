@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-02-07 12:07+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-02-08 01:05+0200\n"
 "Last-Translator: Arman Aksoy (Armish) <armish@linux-sevenler.de>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -105,7 +105,8 @@ msgid "Translator credits"
 msgstr "Çevirenler"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Programı çevirenler."
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
@@ -169,7 +170,7 @@ msgstr "Oturum yöneticisine bağlantıyı iptal et"
 msgid "Session management"
 msgstr "Oturum yönetimi"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Çıkmayı İptal Et"
 
@@ -471,7 +472,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Lütfen ayrıntılı bilgi için Gnome Uygulama göçmesi sayfasını ziyaret edin"
+msgstr ""
+"Lütfen ayrıntılı bilgi için Gnome Uygulama göçmesi sayfasını ziyaret edin"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -519,7 +521,6 @@ msgstr "2. öğenin ipucu"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Dosya"
 
@@ -577,7 +578,6 @@ msgid "_Game"
 msgstr "_Oyun"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Yardım"
 
@@ -768,11 +768,11 @@ msgstr "Uygulamayı yapılandır"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Hakkında"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Bu program hakkında"
 
@@ -799,7 +799,7 @@ msgstr "Yeni bir pencere oluşturur"
 msgid "_Close This Window"
 msgstr "_Bu Pencereyi Kapat"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Pencereyi kapat"
 
@@ -1025,7 +1025,8 @@ msgid ""
 "its parameters."
 msgstr ""
 "Dosyalara girmek için kullanılan GnomeGirdisi. Eğer bir argüman sorgulamak "
-"veya değiştirmek istiyorsanız GnomeGirdisini için bu özelliği kullanabilirsiniz."
+"veya değiştirmek istiyorsanız GnomeGirdisini için bu özelliği "
+"kullanabilirsiniz."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1038,25 +1039,26 @@ msgid ""
 "parameters."
 msgstr ""
 "Dosyalara girmek için kullanılan GtkGirdisi. Eğer bir argüman sorgulamak "
-"veya değiştirmek istiyorsanız GtkGirdisini için bu özelliği kullanabilirsiniz."
+"veya değiştirmek istiyorsanız GtkGirdisini için bu özelliği "
+"kullanabilirsiniz."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Dosya seçin"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Yol"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Dosyanın yolu"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Gözat..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Bir dosya seçmek için ek pencere aö"
 
@@ -1148,8 +1150,8 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"\"%s\" uygulaması sistem yöneticisinin size değiştirmek için izin vermediği bir "
-"ayarı değiştirmek istedi. Değiştirdiğiniz bazı ayarlar programı yeniden "
+"\"%s\" uygulaması sistem yöneticisinin size değiştirmek için izin vermediği "
+"bir ayarı değiştirmek istedi. Değiştirdiğiniz bazı ayarlar programı yeniden "
 "başlattığınızda etkin olmayabilir."
 
 #: libgnomeui/gnome-gconf-ui.c:176
@@ -1158,8 +1160,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"%s için ayarlar saklanırken bir hata oluştu. Ayarlarınızın bazıları "
-"düzgün uygulanmayabilir."
+"%s için ayarlar saklanırken bir hata oluştu. Ayarlarınızın bazıları düzgün "
+"uygulanmayabilir."
 
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
@@ -1194,10 +1196,10 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Simge seçici penceresi. Eğer ayarlarını değiştirmek veya sorgulamak isterseniz "
-"GtkDialog'u başlatmak için bu özelliği kullanabilirsiniz."
+"Simge seçici penceresi. Eğer ayarlarını değiştirmek veya sorgulamak "
+"isterseniz GtkDialog'u başlatmak için bu özelliği kullanabilirsiniz."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Simge Yok"
 
@@ -1209,39 +1211,39 @@ msgstr "Bir hbox bulunamadı, normal dosya seçimi kullanılıyor"
 msgid "Preview"
 msgstr "Önizleme"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Simge seçim penceresi"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Bu pencere bir simge seçmeniz içindir"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Simge seçici"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Lütfen istediğiniz bir simgeyi seçin"
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Simge Seçici"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Bu buton simge seçmeniz için bir pencere açacaktır."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Gözat"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Simge yolu"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1324,9 +1326,8 @@ msgstr "%d %b %a %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Testten çık"
+#~ msgid "Exit the test"
+#~ msgstr "Testten çık"
 
 #~ msgid "Find _Again"
 #~ msgstr "_Yeniden Bul"
@@ -1396,4 +1397,3 @@ msgstr "Testten çık"
 
 #~ msgid "GTK+"
 #~ msgstr "GTK+"
-

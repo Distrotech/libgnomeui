@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2002-05-31 19:19-0300\n"
 "Last-Translator: Isam Bayazidi <bayazidi@arabeyes.org>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -173,7 +173,7 @@ msgstr "عطّل الاتصال بمدير الجلسة"
 msgid "Session management"
 msgstr "إدارة الجلسة"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "إلغاء الخروج"
 
@@ -1045,23 +1045,23 @@ msgstr ""
 "استخدام هذه الخاصية للحصول على GtkEntry إذا أردت تعديل أو الاستعلام عن أي "
 "واحد من عواملها."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "اختر ملفا"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "المسار"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "مسار الملف"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "تصفح..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "اعرض منتقي ملفات لاختيار ملف"
 
@@ -1200,7 +1200,7 @@ msgstr ""
 "مربع حوار منتقي اﻷيقونات. باستطاعتك استخدام هذه الخاصية للحصول على GtkDialog "
 "إذا أردت تعديل أو الاستعلام عن أي واحد من خواصها."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "لا أيقونة"
 
@@ -1212,39 +1212,39 @@ msgstr "لم أحصل على hbox، سأستخدم اختيار الملفات �
 msgid "Preview"
 msgstr "معاينة"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "مربع حوار اختيار اﻷيقونة"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "يسمح لك صندوق مربع الحوار هذا باختيار أيقونة."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "منتقي اﻷيقونة"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "رجاء اختر اﻷيقونة التي تريدها."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "منتقي اﻷيقونة"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "سيفتح هذا الزر نافذة تسمح لك بانتقاء أيقونة."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "تصفح"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "مسار اﻷيقونة"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.2.0.1\n"
-"POT-Creation-Date: 2003-02-01 00:07+0800\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-02-01 02:13+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -169,7 +169,7 @@ msgstr "不連接到作業階段管理程式"
 msgid "Session management"
 msgstr "作業階段管理"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "取消登出"
 
@@ -518,7 +518,6 @@ msgstr "項目二的提示"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "檔案(_F)"
 
@@ -576,7 +575,6 @@ msgid "_Game"
 msgstr "遊戲(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "求助(_H)"
 
@@ -767,11 +765,11 @@ msgstr "修改有關本程式的設定"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "關於(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "顯示有關本程式的資訊"
 
@@ -798,7 +796,7 @@ msgstr "顯示新的視窗"
 msgid "_Close This Window"
 msgstr "關閉本視窗(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "關閉目前的視窗"
 
@@ -1037,23 +1035,23 @@ msgstr ""
 "表示用來輸入檔案名稱的檔案欄位的 GtkEntry。如果閣下想修改或查詢任何有關該 "
 "GtkEntry 的參數，可以透過本屬性進行。"
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "選取檔案"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "路徑"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "檔案的路徑"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "瀏覽(_B)..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "開啟檔案選擇視窗來選取檔案"
 
@@ -1189,7 +1187,7 @@ msgstr ""
 "圖示選擇窗。如果閣下想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進"
 "行。"
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "沒有圖示"
 
@@ -1201,39 +1199,39 @@ msgstr "無法找到水平容器元件，使用一般的檔案選取對話盒"
 msgid "Preview"
 msgstr "預覽"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "圖示選擇窗"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "本對話窗可用來選取圖示。"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "圖示選擇元件"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "請選取希望使用的圖示。"
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "圖示選擇元件"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "此按鈕可開啟用來選取圖示的視窗。"
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "瀏覽"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "圖示的路徑"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1316,9 +1314,8 @@ msgstr "%x(%a) %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "結束測試"
+#~ msgid "Exit the test"
+#~ msgstr "結束測試"
 
 #~ msgid "E_xit"
 #~ msgstr "結束(_X)"

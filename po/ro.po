@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.1\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-01-22 21:22+0300\n"
 "Last-Translator: Marius Andreiana <marius galuna.ro>\n"
 "Language-Team: română <ro@li.org>\n"
@@ -170,7 +170,7 @@ msgstr "Dezactivează conexiunea la managerul de sesiune"
 msgid "Session management"
 msgstr "Managementul sesiunii"
 
-#: libgnomeui/gnome-client.c:2477
+#: libgnomeui/gnome-client.c:2470
 msgid "Cancel Logout"
 msgstr "Anulează logout"
 
@@ -1047,23 +1047,23 @@ msgstr ""
 "fişierelor. Puteţi folosi această proprietate pentru a afla GtkEntry dacă "
 "aveţi nevoie să modificaţi sau să interogaţi oricare dintre parametrii săi."
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "Selectaţi fişier"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "Cale"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "Calea către fişier"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "_Navigare..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "Deschide un selector de fişiere pentru a alege un fişier"
 
@@ -1207,7 +1207,7 @@ msgstr ""
 "a obţine GtkDialog dacă aveţi nevoie de modificarea sau interogarea "
 "oricăreia dintre proprietăţile sale."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
 msgid "No Icon"
 msgstr "Fără icon"
 
@@ -1219,39 +1219,39 @@ msgstr "Nu pot găsi un hbox, folosind o selecţie normală de fişier"
 msgid "Preview"
 msgstr "Previzualizare"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:754
 msgid "Icon selection dialog"
 msgstr "Dialogul de selectare al iconului"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
 msgstr "Acest dialog vă oferă posibilitatea de a selecta un icon."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
 msgstr "Selector icon"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Please pick the icon you want."
 msgstr "Vă rugăm alegeţi iconul dorit."
 
-#: libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:986
 msgid "Icon Selector"
 msgstr "Selector icon"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:987
 msgid "This button will open a window to let you select an icon."
 msgstr "Acest buton va deschide o fereastră pentru a selecta un icon."
 
-#: libgnomeui/gnome-icon-entry.c:1006
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Browse"
 msgstr "Navighează"
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Cale icon"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."

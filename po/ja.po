@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
-"POT-Creation-Date: 2003-03-21 16:16+0900\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-03-18 11:19+0900\n"
 "Last-Translator: KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -525,7 +525,6 @@ msgstr "アイテム 2 のヒント"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ファイル(_F)"
 
@@ -583,7 +582,6 @@ msgid "_Game"
 msgstr "ゲーム(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
@@ -774,11 +772,11 @@ msgstr "アプリケーションを設定する"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "情報(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "このアプリケーションに関して"
 
@@ -805,7 +803,7 @@ msgstr "新しいウインドウを開く"
 msgid "_Close This Window"
 msgstr "ウインドウを閉じる(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "現在のウインドウを閉じる"
 
@@ -1046,23 +1044,23 @@ msgstr ""
 "ファイル名入力に使用される GtkEntry。GtkEntry のパラメータを変更したり取得す"
 "るのが必要な場合に、このプロパティで GtkEntry を参照できます。"
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr "ファイルの選択"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr "パス"
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr "ファイルのパス"
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr "参照(_B)..."
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr "ファイルを選ぶ「ファイル選択」をポップアップ"
 
@@ -1329,9 +1327,8 @@ msgstr "%Y年%m月%d日(%a) %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "テストの終了"
+#~ msgid "Exit the test"
+#~ msgstr "テストの終了"
 
 #~ msgid "_Print"
 #~ msgstr "印刷(_P)"

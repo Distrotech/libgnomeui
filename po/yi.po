@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2003-03-19 14:08-0500\n"
+"POT-Creation-Date: 2003-03-27 13:52+0100\n"
 "PO-Revision-Date: 2003-03-19\n"
 "Last-Translator: Raphael Finkel <raphael@cs.uky.edu>\n"
 "Language-Team: Yiddish <raphael@cs.uky.edu>\n"
@@ -506,7 +506,6 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr ""
 
@@ -564,7 +563,6 @@ msgid "_Game"
 msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "געהילף"
 
@@ -755,11 +753,11 @@ msgstr ""
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr ""
 
@@ -786,7 +784,7 @@ msgstr ""
 msgid "_Close This Window"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr ""
 
@@ -1021,23 +1019,23 @@ msgid ""
 "parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:527
+#: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:645
+#: libgnomeui/gnome-file-entry.c:649
 msgid "Path to file"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:672
+#: libgnomeui/gnome-file-entry.c:676
 msgid "_Browse..."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:673
+#: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
 msgstr ""
 
@@ -1294,8 +1292,4 @@ msgstr ""
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
-msgstr ""
-
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
 msgstr ""
