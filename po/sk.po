@@ -2,12 +2,14 @@
 # Copyright (C) 2002, 2003, 2004 Free Software Foundation, Inc.
 # Marcel Telka <marcel@telka.sk>, 2002, 2003, 2004.
 #
+# $Id$
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
-"PO-Revision-Date: 2004-06-13 15:44+0200\n"
+"POT-Creation-Date: 2004-08-07 17:13+0200\n"
+"PO-Revision-Date: 2004-08-07 17:17+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -30,31 +32,36 @@ msgstr "Detská položka 2"
 msgid "Hint for item 2"
 msgstr "Rada pre položku 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:856
-#, fuzzy
-msgid "Filesystem"
-msgstr "Sú_bory"
+#: file-chooser/gtkfilesystemgnomevfs.c:650
+#, c-format
+msgid "%s is not a folder"
+msgstr "%s nie je priečinok"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:857
+msgid "Filesystem"
+msgstr "Súborový systém"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1521
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "Ukladanie záložky zlyhalo (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "Nepodarilo sa získať informácie pre súbor '%s': %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "Zlyhalo otvorenie súboru '%s': %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
+"Zlyhalo nahratie obrazu '%s': dôvod nie je známy, pravdepodobne poškodený súbor obrazu"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -165,6 +172,7 @@ msgstr "O programe %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "Súbo_r"
 
@@ -222,6 +230,7 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomocník"
 
@@ -412,11 +421,11 @@ msgstr "Konfigurovať aplikáciu"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "O progr_ame"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informácie o tomto programe"
 
@@ -443,7 +452,7 @@ msgstr "Vytvoriť nové okno"
 msgid "_Close This Window"
 msgstr "_Zatvoriť toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvoriť aktuálne okno"
 
@@ -1282,11 +1291,11 @@ msgstr "_Heslo:"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Pripojiť _anonymne"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "Pripojiť ako _používateľ:"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
@@ -1393,6 +1402,7 @@ msgstr "Knižnica GNOME GUI"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Vyskytli sa viacnásobné chyby segmentácie; nemôžem zobraziť dialógové okno s "
@@ -1400,6 +1410,7 @@ msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1456,5 +1467,6 @@ msgstr "_Informovať vývojárov"
 msgid "_Debug"
 msgstr "_Ladiť"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ukončiť test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukončiť test"
