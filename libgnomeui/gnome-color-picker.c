@@ -49,6 +49,8 @@
 
 #include <libgnomeuiP.h>
 
+#include "libgnomeui-access.h"
+
 /* These are the dimensions of the color sample in the color picker */
 #define COLOR_PICKER_WIDTH  20
 #define COLOR_PICKER_HEIGHT 12
@@ -444,9 +446,16 @@ gnome_color_picker_instance_init (GnomeColorPicker *cp)
 {
 	GtkWidget *alignment;
 	GtkWidget *frame;
-	/* Create the widgets */
 
+	/* Create the widgets */
 	cp->_priv = g_new0(GnomeColorPickerPrivate, 1);
+
+	/*
+	 * The application may very well override these.
+	 */
+	_add_atk_name_desc (GTK_WIDGET (cp),
+			    _("Color Selector"),
+			    _("Open a dialog to specify the color"));
 
 	alignment = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
 	gtk_container_set_border_width (GTK_CONTAINER (alignment), COLOR_PICKER_PAD);
