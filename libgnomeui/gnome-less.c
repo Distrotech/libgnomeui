@@ -315,7 +315,7 @@ void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed)
     /* I'm told that "fixed" is the standard X font, but
        "fixed" doesn't appear to be fixed-width; courier does though. */
     font = gdk_fontset_load(
-	"-*-courier-medium-r-normal-*-12-*-*-*-*-*-*-*"
+	"-*-courier-medium-r-normal-*-12-*-*-*-*-*-*-*,"
 	"-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*,*");
     
     if ( font == NULL ) {
