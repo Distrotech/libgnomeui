@@ -566,6 +566,22 @@ gil_unselect_all (GnomeIconList *gil, GdkEvent *event, gpointer keep)
 }
 
 /**
+ * gnome_icon_list_select_all:
+ * @gil:   An icon list.
+ */
+void
+gnome_icon_list_select_all (GnomeIconList *gil)
+{
+	uint i;
+	
+	g_return_val_if_fail (gil != NULL, 0);
+	g_return_val_if_fail (IS_GIL (gil), 0);
+	
+	for (i = 0; i < gnome_icon_list_get_num_icons (gil); i++)
+		gnome_icon_list_select_icon (gil, i);
+}
+
+/**
  * gnome_icon_list_unselect_all:
  * @gil:   An icon list.
  *

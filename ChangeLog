@@ -1,3 +1,10 @@
+2004-05-02  Anders Carlsson  <andersca@gnome.org>
+
+	* libgnomeui/gnome-icon-list.c: (gnome_icon_list_select_all):
+	* libgnomeui/gnome-icon-list.h:
+	Add gnome_icon_list_select_all.
+	(#138553, Laurent Sansonetti)
+	
 2004-05-02  Fernando Herrera  <fherrera@onirica.com>
  
  	* libgnomeui/gnome-thumbnail.c:

@@ -155,6 +155,7 @@ void           gnome_icon_list_select_icon         (GnomeIconList *gil,
 						    int pos);
 void           gnome_icon_list_unselect_icon       (GnomeIconList *gil,
 						    int pos);
+void           gnome_icon_list_select_all          (GnomeIconList *gil);
 int            gnome_icon_list_unselect_all        (GnomeIconList *gil);
 GList *        gnome_icon_list_get_selection       (GnomeIconList *gil);
 
