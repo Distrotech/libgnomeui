@@ -1,5 +1,11 @@
 2003-09-09  Federico Mena Quintero  <federico@ximian.com>
 
+	* gtkfilechooserimpldefault.c (set_cell_text_bold_if_folder): Use
+	the cell renderer's "text" and "weight" properties rather than
+	"markup".
+
+2003-09-09  Federico Mena Quintero  <federico@ximian.com>
+
 	* gtkfilechooserimpldefault.c (tree_selection_changed): Make the
 	list model read in directory information as well.
 	(set_cell_text_bold_if_folder): New utility function.  Sets a
