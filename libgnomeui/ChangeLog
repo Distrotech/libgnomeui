@@ -1,5 +1,8 @@
 1998-10-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-canvas-text.c (gnome_canvas_text_draw): Fixed stupid bug,
+	do not try to draw empty lines.
+
 	* gnome-canvas-text.c (gnome_canvas_text_bounds): Fixed a little
 	y1->x1 confusion.
 

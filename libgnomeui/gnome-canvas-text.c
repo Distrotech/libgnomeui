@@ -625,15 +625,17 @@ gnome_canvas_text_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	ypos = text->cy + text->font->ascent;
 
 	for (i = 0; i < text->num_lines; i++) {
-		xpos = get_line_xpos (text, lines);
+		if (lines->length != 0) {
+			xpos = get_line_xpos (text, lines);
 
-		gdk_draw_text (drawable,
-			       text->font,
-			       text->gc,
-			       xpos - x,
-			       ypos - y,
-			       lines->text,
-			       lines->length);
+			gdk_draw_text (drawable,
+				       text->font,
+				       text->gc,
+				       xpos - x,
+				       ypos - y,
+				       lines->text,
+				       lines->length);
+		}
 
 		ypos += text->font->ascent + text->font->descent;
 		lines++;
