@@ -1,5 +1,8 @@
 1999-08-17  Jonathan Blandford  <jrb@redhat.com>
 
+	* gnome-popup-help.c (helpwindow_destroy_callback): remove
+	debugging statements.
+
 	* gnome-druid.c (gnome_druid_remove): many changes to make us act
 	as a nicer container.
 

@@ -280,7 +280,6 @@ append_ui_info (GnomeUIInfo *base, GnomeUIInfo *info, GnomeUIInfo **cutptr)
 static void
 helpwindow_click_callback (GtkWidget *widget, gpointer data)
 {
-        g_print ("got a click\n");
         gtk_widget_hide (widget->parent);
         gdk_pointer_ungrab (GDK_CURRENT_TIME);
 
@@ -289,8 +288,6 @@ helpwindow_click_callback (GtkWidget *widget, gpointer data)
 static void
 helpwindow_destroy_callback (GtkWidget *widget, gpointer data)
 {
-        g_print ("in helpwindow_destroy_callback\n");
-        g_print ("%s\n",(gchar*) data);
         g_free ((gchar*) data);
 }
 
