@@ -57,7 +57,7 @@ struct _GnomeHelpView {
   GtkWidget *toplevel;
   GtkWidget *toolbar, *content, *btn_help, *btn_style, *evbox;
 
-  GnomeURLDisplayContext url_ctx;
+  GnomeURLDisplayContext *url_ctx;
 
   GtkOrientation orientation;
 

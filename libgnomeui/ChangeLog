@@ -1,3 +1,9 @@
+Fri Jul 14 01:43:06 2000  George Lebl <jirka@5z.com>
+
+	* gnome-helpsys.h: The url context is a pointer now
+
+	* libgnomeui.h, libgnomeui-compat-1.0.h: more header cleanup
+
 Fri Jul 14 01:00:44 2000  George Lebl <jirka@5z.com>
 
 	* Makefile.am:  Move gnome-canvas-image.[ch] out of the build as it

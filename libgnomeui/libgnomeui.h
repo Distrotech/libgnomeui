@@ -41,10 +41,8 @@
 #include "libgnomeui/gnome-app-util.h"
 #endif
 #include "libgnomeui/gnome-canvas.h"
-/* #include "libgnomeui/gnome-canvas-image.h" */
 #include "libgnomeui/gnome-canvas-pixbuf.h"
 #include "libgnomeui/gnome-canvas-line.h"
-/* #include "libgnomeui/gnome-canvas-load.h" */
 #include "libgnomeui/gnome-canvas-rect-ellipse.h"
 #include "libgnomeui/gnome-canvas-polygon.h"
 #include "libgnomeui/gnome-canvas-text.h"
@@ -71,9 +69,6 @@
 #include "libgnomeui/gnome-geometry.h"
 #include "libgnomeui/gnome-helpsys.h"
 
-#ifndef GNOME_EXCLUDE_DEPRECATED
-#include "libgnomeui/gnome-guru.h"
-#endif
 #include "libgnomeui/gnome-icon-list.h"
 #include "libgnomeui/gnome-icon-item.h"
 #include "libgnomeui/gnome-icon-sel.h"
