@@ -36,19 +36,19 @@ msgstr ""
 
 #: libgnomeui/gnome-about.c:352
 msgid "Program name"
-msgstr ""
+msgstr "Ainm an Clár"
 
 #: libgnomeui/gnome-about.c:353
 msgid "The name of the program"
-msgstr ""
+msgstr "An ainm atá ag an Clár"
 
 #: libgnomeui/gnome-about.c:360
 msgid "Program version"
-msgstr ""
+msgstr "Leagan an Clár"
 
 #: libgnomeui/gnome-about.c:361
 msgid "The version of the program"
-msgstr ""
+msgstr "An Leangan atá ag an Clár"
 
 #: libgnomeui/gnome-about.c:367
 msgid "Copyright string"
@@ -109,7 +109,7 @@ msgstr ""
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
-msgstr ""
+msgstr "Siombail"
 
 #: libgnomeui/gnome-about.c:414
 msgid "A logo for the about box"
@@ -186,11 +186,11 @@ msgstr ""
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
-msgstr ""
+msgstr "Pioc dáth"
 
 #: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
-msgstr ""
+msgstr "Am"
 
 #: libgnomeui/gnome-dateedit.c:480
 msgid "The time currently selected"
@@ -247,7 +247,7 @@ msgstr "Feilire"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select Time"
-msgstr ""
+msgstr "Pioc an Am"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
@@ -515,19 +515,19 @@ msgstr "_Comhad/"
 
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr ""
+msgstr "_Eagar"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
-msgstr ""
+msgstr "_Eagar/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "_Feic"
+msgstr "_Féach"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr "_Feic/"
+msgstr "_Féach/"
 
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
@@ -544,15 +544,15 @@ msgstr "_Nua"
 
 #: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
-msgstr "_Nua"
+msgstr "_Nua/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr ""
+msgstr "Comha_daí"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr ""
+msgstr "Comha_daí/"
 
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
@@ -600,7 +600,7 @@ msgstr "Sábháil an comhad seo le ainm eile"
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
-msgstr ""
+msgstr "Iom_paigh"
 
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
@@ -627,11 +627,11 @@ msgstr ""
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
-msgstr ""
+msgstr "_Dún"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr ""
+msgstr "Dún an comhad seo"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
@@ -658,7 +658,7 @@ msgstr ""
 #. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
-msgstr ""
+msgstr "_Cóip"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
@@ -676,7 +676,7 @@ msgstr ""
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
 msgid "C_lear"
-msgstr ""
+msgstr "G_lan"
 
 #: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
