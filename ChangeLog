@@ -1,3 +1,8 @@
+2005-01-25  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-app.c: (gnome_app_instance_init):
+	Merge fix for bug #164948.
+
 2005-01-24  Kjartan Maraas  <kmaraas@gnome.org>
 
 	configure.in: Merge fix for bug #154969.
