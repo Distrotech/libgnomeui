@@ -1,5 +1,10 @@
 1999-05-16  Robert Brady <rwb197@ecs.soton.ac.uk>
 
+	* gnome-calculator.c (c_fact): The second fixes the calculator
+	widget so it can do factorials of almost-integer numbers (thereby
+	letting people do 2, square root, square, factorial). This
+	resolves bug #1267.
+	
 	* gnome-spell.c: Avoid infinite loop.
 
 1999-05-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
