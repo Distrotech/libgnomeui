@@ -1,3 +1,6 @@
+Tue Aug 11 23:35:58 1998  Jonathan Blandford <jrb@mit.edu>
+	* gnome-app.c: added GTK_SHRINK to the x/y options.
+
 1998-08-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_item_grab): Set the

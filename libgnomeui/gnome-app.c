@@ -168,7 +168,7 @@ gnome_app_configure_positions (GnomeApp *app)
 				 0, 3,
 				 (app->pos_menubar == GNOME_APP_POS_TOP)?0:2,
 				 (app->pos_menubar == GNOME_APP_POS_TOP)?1:3,
-				 GTK_EXPAND | GTK_FILL,
+				 GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 				 0,
 				 0, 0);
 		gtk_widget_show (handlebox);
@@ -198,7 +198,7 @@ gnome_app_configure_positions (GnomeApp *app)
 					 (app->pos_toolbar==GNOME_APP_POS_LEFT)?1:3,
 					 offset, 3,
 					 0,
-					 GTK_EXPAND | GTK_FILL,
+					 GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 					 0, 0);
 		}
 		else
@@ -214,7 +214,7 @@ gnome_app_configure_positions (GnomeApp *app)
 					 0, 3,
 					 ((app->pos_toolbar==GNOME_APP_POS_TOP)?0:2) + moffset,
 					 ((app->pos_toolbar==GNOME_APP_POS_TOP)?1:3) + moffset,
-					 GTK_EXPAND | GTK_FILL,
+					 GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 					 0,
 					 0, 0);
 		}
@@ -332,8 +332,8 @@ gnome_app_set_contents(GnomeApp *app, GtkWidget *contents)
 			  endxs[app->pos_menubar][app->pos_toolbar],
 			  startys[app->pos_menubar][app->pos_toolbar],
 			  endys[app->pos_menubar][app->pos_toolbar],
-			  GTK_EXPAND | GTK_FILL,
-			  GTK_EXPAND | GTK_FILL,
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
 	app->contents = contents;
 	gtk_widget_show (contents);
@@ -625,7 +625,7 @@ gnome_app_set_statusbar (GnomeApp *app,
 			  app->statusbar,
 			  0, 3,
 			  3, 4,
-			  GTK_EXPAND | GTK_FILL,
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0,
 			  0, 0);
 }
