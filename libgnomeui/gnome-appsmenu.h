@@ -32,7 +32,8 @@
    directory is a submenu. This is just like share/apps is now. I
    imagine this will be rooted in .gnome/AppsMenu or somewhere. Each
    directory also contains a desktop entry for itself, in case users
-   want to customize folder icons or whatever.
+   want to customize folder icons or whatever. (Might also save
+   info about separators and the order of the items, eventually.)
 
    Applications can register their own types of apps menu items by
    providing an extension other than .desktop, and a function to load
@@ -56,6 +57,7 @@
 
 #include <gtk/gtk.h>
 #include "libgnome/gnome-defs.h"
+#include "libgnome/gnome-dentry.h"
 
 BEGIN_GNOME_DECLS
 
@@ -72,12 +74,45 @@ typedef struct {
   gchar * extension; /* The file extension, without the period.
 			This implies the type of the data field. */
   gpointer data;     /* Data loaded from the file */
+  /* Private after here - don't use, they should be moved 
+     somewhere nicer eventually */
   GList * submenus;  /* NULL if there are none */
+  GnomeAppsMenu * parent;
+  guint in_destroy : 1;
 } GnomeAppsMenu;
 
 #define GNOME_APPS_MENU_IS_DENTRY(x) \
 (strcmp ( (gchar *)(((GnomeAppsMenu *)x)->extension), \
 	  GNOME_APPS_MENU_DENTRY_EXTENSION ) == 0)
+
+#define GNOME_APPS_MENU_IS_DIR(x) \
+(GNOME_APPS_MENU_IS_DENTRY(x) && \
+ (strcmp ( ((GnomeDesktopEntry *)((GnomeAppsMenu *)x)->data)->type, \
+	   "Directory" ) == 0 ) )
+
+/* Just allocate a new one */
+GnomeAppsMenu * gnome_apps_menu_new(void);
+
+/* Recursively destroy the menu, calling g_free on 
+   ALL non-null fields; the AppsMenu owns anything you 
+   put in it. */
+void gnome_apps_menu_destroy(GnomeAppsMenu *); 
+
+/* Manipulate apps menu directories - it's basically going to 
+   be an error to call these on non-directories */
+void gnome_apps_menu_append(GnomeAppsMenu * dir,
+			    GnomeAppsMenu * sub);
+void gnome_apps_menu_prepend(GnomeAppsMenu * dir,
+			     GnomeAppsMenu * sub);
+/* Removing does not destroy! */
+void gnome_apps_menu_remove(GnomeAppsMenu * dir,
+			    GnomeAppsMenu * sub);
+void gnome_apps_menu_insert_after(GnomeAppsMenu * dir,
+				  GnomeAppsMenu * sub,
+				  GnomeAppsMenu * after_me);
+/* Recursive foreach. For non-recursive, just use the GList */
+void gnome_apps_menu_foreach(GnomeAppsMenu * dir,
+			     GFunc func, gpointer data);
 
 /* The load func takes a filename as argument and returns 
    whatever should go in the data field, above */
@@ -115,7 +150,7 @@ GnomeAppsMenu * gnome_apps_menu_load(gchar * directory);
 
 GtkWidget * gtk_menu_new_from_apps_menu(GnomeAppsMenu * gam);
 
-/* Functions to change and save GnomeAppsMenu to be added. */
+/* Functions to save GnomeAppsMenu to be added. */
 
 END_GNOME_DECLS
    
