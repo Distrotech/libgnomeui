@@ -1687,8 +1687,6 @@ static void gnome_canvas_realize        (GtkWidget        *widget);
 static void gnome_canvas_unrealize      (GtkWidget        *widget);
 static void gnome_canvas_draw           (GtkWidget        *widget,
 					 GdkRectangle     *area);
-static void gnome_canvas_size_request   (GtkWidget        *widget,
-					 GtkRequisition   *requisition);
 static void gnome_canvas_size_allocate  (GtkWidget        *widget,
 					 GtkAllocation    *allocation);
 static gint gnome_canvas_button         (GtkWidget        *widget,
@@ -1762,7 +1760,6 @@ gnome_canvas_class_init (GnomeCanvasClass *class)
 	widget_class->realize = gnome_canvas_realize;
 	widget_class->unrealize = gnome_canvas_unrealize;
 	widget_class->draw = gnome_canvas_draw;
-	widget_class->size_request = gnome_canvas_size_request;
 	widget_class->size_allocate = gnome_canvas_size_allocate;
 	widget_class->button_press_event = gnome_canvas_button;
 	widget_class->button_release_event = gnome_canvas_button;
@@ -1795,9 +1792,6 @@ gnome_canvas_init (GnomeCanvas *canvas)
 	canvas->scroll_y2 = canvas->layout.height;
 
 	canvas->pixels_per_unit = 1.0;
-
-	canvas->width  = 100; /* default window size */
-	canvas->height = 100;
 
 	gtk_layout_set_hadjustment (GTK_LAYOUT (canvas), NULL);
 	gtk_layout_set_vadjustment (GTK_LAYOUT (canvas), NULL);
@@ -1995,33 +1989,16 @@ gnome_canvas_draw (GtkWidget *widget, GdkRectangle *area)
 }
 
 static void
-gnome_canvas_size_request (GtkWidget *widget, GtkRequisition *requisition)
-{
-	GnomeCanvas *canvas;
-
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GNOME_IS_CANVAS (widget));
-	g_return_if_fail (requisition != NULL);
-
-	if (GTK_WIDGET_CLASS (canvas_parent_class)->size_request)
-		(* GTK_WIDGET_CLASS (canvas_parent_class)->size_request) (widget, requisition);
-
-	canvas = GNOME_CANVAS (widget);
-
-	if (requisition->width < canvas->width)
-		requisition->width = canvas->width;
-
-	if (requisition->height < canvas->height)
-		requisition->height = canvas->height;
-}
-
-static void
 scroll_to (GnomeCanvas *canvas, int cx, int cy)
 {
 	int scroll_maxx, scroll_maxy;
 	int right_limit, bottom_limit;
 	int old_zoom_xofs, old_zoom_yofs;
 	int changed, changed_x, changed_y;
+	int canvas_width, canvas_height;
+
+	canvas_width = GTK_WIDGET (canvas)->allocation.width;
+	canvas_height = GTK_WIDGET (canvas)->allocation.height;
 
 	/*
 	 * Adjust the scrolling offset and the zoom offset to keep as much as possible of the canvas
@@ -2030,16 +2007,16 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 
 	gnome_canvas_w2c (canvas, canvas->scroll_x2, canvas->scroll_y2, &scroll_maxx, &scroll_maxy);
 
-	right_limit = scroll_maxx - canvas->width;
-	bottom_limit = scroll_maxy - canvas->height;
+	right_limit = scroll_maxx - canvas_width;
+	bottom_limit = scroll_maxy - canvas_height;
 
 	old_zoom_xofs = canvas->zoom_xofs;
 	old_zoom_yofs = canvas->zoom_yofs;
 
 	if (right_limit < 0) {
 		cx = 0;
-		canvas->zoom_xofs = (canvas->width - scroll_maxx) / 2;
-		scroll_maxx = canvas->width;
+		canvas->zoom_xofs = (canvas_width - scroll_maxx) / 2;
+		scroll_maxx = canvas_width;
 	} else if (cx < 0) {
 		cx = 0;
 		canvas->zoom_xofs = 0;
@@ -2051,8 +2028,8 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 
 	if (bottom_limit < 0) {
 		cy = 0;
-		canvas->zoom_yofs = (canvas->height - scroll_maxy) / 2;
-		scroll_maxy = canvas->height;
+		canvas->zoom_yofs = (canvas_height - scroll_maxy) / 2;
+		scroll_maxy = canvas_height;
 	} else if (cy < 0) {
 		cy = 0;
 		canvas->zoom_yofs = 0;
@@ -2102,9 +2079,6 @@ gnome_canvas_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 		(* GTK_WIDGET_CLASS (canvas_parent_class)->size_allocate) (widget, allocation);
 
 	canvas = GNOME_CANVAS (widget);
-
-	canvas->width = allocation->width;
-	canvas->height = allocation->height;
 
 	/* Recenter the view, if appropriate */
 
@@ -2580,8 +2554,8 @@ paint (GnomeCanvas *canvas)
 
 		draw_x1 = DISPLAY_X1 (canvas) - canvas->zoom_xofs;
 		draw_y1 = DISPLAY_Y1 (canvas) - canvas->zoom_yofs;
-		draw_x2 = draw_x1 + canvas->width;
-		draw_y2 = draw_y1 + canvas->height;
+		draw_x2 = draw_x1 + GTK_WIDGET (canvas)->allocation.width;
+		draw_y2 = draw_y1 + GTK_WIDGET (canvas)->allocation.height;
 
 		if (canvas->redraw_x1 > draw_x1)
 			draw_x1 = canvas->redraw_x1;
@@ -2827,24 +2801,28 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 {
 	double cx, cy;
 	int x1, y1;
+	int canvas_width, canvas_height;
 
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 	g_return_if_fail (n > GNOME_CANVAS_EPSILON);
 
+	canvas_width = GTK_WIDGET (canvas)->allocation.width;
+	canvas_height = GTK_WIDGET (canvas)->allocation.height;
+
 	/* Re-center view */
 
 	gnome_canvas_c2w (canvas,
-			  DISPLAY_X1 (canvas) - canvas->zoom_xofs + canvas->width / 2,
-			  DISPLAY_Y1 (canvas) - canvas->zoom_yofs + canvas->height / 2,
+			  DISPLAY_X1 (canvas) - canvas->zoom_xofs + canvas_width / 2,
+			  DISPLAY_Y1 (canvas) - canvas->zoom_yofs + canvas_height / 2,
 			  &cx,
 			  &cy);
 
 	canvas->pixels_per_unit = n;
 
 	gnome_canvas_w2c (canvas,
-			  cx - (canvas->width / (2.0 * n)),
-			  cy - (canvas->height / (2.0 * n)),
+			  cx - (canvas_width / (2.0 * n)),
+			  cy - (canvas_height / (2.0 * n)),
 			  &x1, &y1);
 
 	gtk_layout_freeze (GTK_LAYOUT (canvas));
@@ -2855,30 +2833,6 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->reconfigure) (canvas->root);
 
 	gtk_layout_thaw (GTK_LAYOUT (canvas));
-}
-
-
-/**
- * gnome_canvas_set_size:
- * @canvas: The canvas to set the window size for.
- * @width: Width of the canvas window.
- * @height: Height of the canvas window.
- * 
- * Sets the size of the canvas window.  Typically only called before the canvas is shown for
- * the first time.
- **/
-void
-gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height)
-{
-	g_return_if_fail (canvas != NULL);
-	g_return_if_fail (GNOME_IS_CANVAS (canvas));
-	g_return_if_fail (width > 0);
-	g_return_if_fail (height > 0);
-
-	canvas->width = width;
-	canvas->height = height;
-
-	gtk_widget_queue_resize (GTK_WIDGET (canvas));
 }
 
 
@@ -3031,8 +2985,8 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 
 	visible.x0 = DISPLAY_X1 (canvas) - canvas->zoom_xofs;
 	visible.y0 = DISPLAY_Y1 (canvas) - canvas->zoom_yofs;
-	visible.x1 = visible.x0 + canvas->width;
-	visible.y1 = visible.y0 + canvas->height;
+	visible.x1 = visible.x0 + GTK_WIDGET (canvas)->allocation.width;
+	visible.y1 = visible.y0 + GTK_WIDGET (canvas)->allocation.height;
 
 	art_irect_intersect (&clip, &bbox, &visible);
 

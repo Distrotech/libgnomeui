@@ -92,10 +92,9 @@ icon_get_height (Icon *icon, int *icon_height, int *text_height)
 static int
 gil_get_items_per_line (Gil *gil)
 {
-	GnomeCanvas *canvas = GNOME_CANVAS (gil);
 	int items_per_line;
 	
-	items_per_line = canvas->width / (gil->icon_width + gil->col_spacing);
+	items_per_line = GTK_WIDGET (gil)->allocation.width / (gil->icon_width + gil->col_spacing);
 	if (items_per_line == 0)
 		items_per_line = 1;
 
@@ -1156,8 +1155,8 @@ gil_mark_region (Gil *gil, GdkEvent *event, double x, double y)
 	if (y1 < 0)
 		y1 = 0;
 
-	if (x2 >= gil->canvas.width)
-		x2 = gil->canvas.width - 1;
+	if (x2 >= GTK_WIDGET (gil)->allocation.width)
+		x2 = GTK_WIDGET (gil)->allocation.width - 1;
 
 	gnome_canvas_item_set (gil->sel_rect,
 			       "x1", x1,

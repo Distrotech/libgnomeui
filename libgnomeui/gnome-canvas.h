@@ -331,8 +331,6 @@ struct _GnomeCanvas {
 
 	int zoom_xofs, zoom_yofs; 		/* Internal pixel offsets for when zoomed out */
 
-	int width, height;			/* Size of canvas window in pixels */
-
 	int state;				/* Last known modifier state, for deferred repick
 						 * when a button is down
 						 */
@@ -392,9 +390,6 @@ void gnome_canvas_get_scroll_region (GnomeCanvas *canvas, double *x1, double *y1
 
 /* Sets the number of pixels that correspond to one unit in world coordinates */
 void gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n);
-
-/* Sets the size in pixels of the canvas window */
-void gnome_canvas_set_size (GnomeCanvas *canvas, int width, int height);
 
 /* Scrolls the canvas to the specified offsets, given in canvas pixel coordinates */
 void gnome_canvas_scroll_to (GnomeCanvas *canvas, int cx, int cy);

@@ -1,3 +1,16 @@
+1998-12-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gil_get_items_per_line): Fetch the widget
+	width from the allocation, not the canvas.
+	(gil_mark_region): Likewise.
+
+	* gnome-canvas.c: Removed the gnome_canvas_set_size() function.
+	People can use gtk_widget_set_usize() now.  Also, removed
+	gnome_canvas_size_request().
+
+	* gnome-canvas.h (GnomeCanvas): Removed the width and height
+	fields, since they were the size of the allocation anyways.
+
 Mon Dec 14 10:19:59 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-canvas.c: Add idle handlers at GTK_PRIORITY_INTERNAL,
