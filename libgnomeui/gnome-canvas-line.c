@@ -211,7 +211,7 @@ recalc_bounds (GnomeCanvasLine *line)
 	 */
 
 	if (line->join == GDK_JOIN_MITER)
-		for (i = 0, coords = line->coords; i < (line->num_points - 3); i++, coords += 2) {
+		for (i = line->num_points, coords = line->coords; i >= 3; i--, coords += 2) {
 			double mx1, my1, mx2, my2;
 
 			if (gnome_canvas_get_miter_points (coords[0], coords[1],
@@ -248,6 +248,8 @@ recalc_bounds (GnomeCanvasLine *line)
 	item->y1--;
 	item->x2++;
 	item->y2++;
+
+	gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
 }
 
 static void
