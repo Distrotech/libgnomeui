@@ -1,3 +1,14 @@
+1998-03-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-file-entry.h: New files gnome-file-entry.[ch].  This is a
+	combo box widget with an extra "Browse" button to enter file
+	names.  All places in Gnome where an entry widget is being used to
+	get a filename should use the GnomeFileEntry widget instead.
+
+	* libgnomeui.h: Added gnome-file-entry.h to the includes.
+
+	* Makefile.am: Added gnome-file-entry.[ch] to the file lists.
+
 Tue Mar 17 22:45:47 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock/stock_demo: added "Save As" icon.
