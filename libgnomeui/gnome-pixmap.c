@@ -113,6 +113,13 @@ gnome_pixmap_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+/**
+ * gnome_pixmap_new_from_file:
+ * @filename: The name of a file containing a graphics image
+ *
+ * Returns a widget that contains the image, or NULL if it fails to
+ * load the image.
+ */
 GtkWidget *
 gnome_pixmap_new_from_file (const char *filename)
 {
@@ -126,6 +133,15 @@ gnome_pixmap_new_from_file (const char *filename)
 	return GTK_WIDGET (gpixmap);
 }
 
+/**
+ * gnome_pixmap_new_from_file_at_size:
+ * @filename: The name of a file containing a graphics image
+ * @width: desired widht
+ * @height: desired height.
+ *
+ * Returns a widget that contains the image scaled to @widht and @height pixels,
+ * or NULL if it fails to load the image.
+ */
 GtkWidget *
 gnome_pixmap_new_from_file_at_size (const char *filename, int width, int height)
 {
@@ -139,6 +155,13 @@ gnome_pixmap_new_from_file_at_size (const char *filename, int width, int height)
 	return GTK_WIDGET (gpixmap);
 }
 
+/**
+ * gnome_pixmap_new_from_xpm_d:
+ * @xpm_data: A pointer to an inlined xpm image.
+ *
+ * Returns a widget that contains the image, or NULL if it fails to
+ * create the image
+ */
 GtkWidget *
 gnome_pixmap_new_from_xpm_d (char **xpm_data)
 {
@@ -152,6 +175,15 @@ gnome_pixmap_new_from_xpm_d (char **xpm_data)
 	return GTK_WIDGET (gpixmap);
 }
 
+/**
+ * gnome_pixmap_new_from_xpm_d_at_size:
+ * @xpm_data: A pointer to an inlined xpm image.
+ * @width: desired widht
+ * @height: desired height.
+ *
+ * Returns a widget that contains the image scaled to @widht and @height pixels,
+ * or NULL if it fails to load the image.
+ */
 GtkWidget *
 gnome_pixmap_new_from_xpm_d_at_size (char **xpm_data, int width, int height)
 {
@@ -165,6 +197,13 @@ gnome_pixmap_new_from_xpm_d_at_size (char **xpm_data, int width, int height)
 	return GTK_WIDGET (gpixmap);
 }
 
+/**
+ * gnome_pixmap_new_from_rgb_d:
+ * @data: A pointer to an inlined rgb image.
+ *
+ * Returns a widget that contains the image, or NULL if it fails to
+ * create the image
+ */
 GtkWidget *
 gnome_pixmap_new_from_rgb_d (unsigned char *data, unsigned char *alpha,
 			     int rgb_width, int rgb_height)
@@ -180,6 +219,17 @@ gnome_pixmap_new_from_rgb_d (unsigned char *data, unsigned char *alpha,
 	return GTK_WIDGET (gpixmap);
 }
 
+/**
+ * gnome_pixmap_new_from_rgb_d_shaped:
+ * @data: A pointer to an inlined rgb image
+ * @alpha: pointer to the alpha channel.
+ * @rgb_width: width of the rgb data
+ * @rgb_height: height of the rgb data.
+ * @shape_color: which color encodes the transparency
+ *
+ * Returns a widget that contains the image scaled to @widht and
+ * @height pixels, or NULL if it fails to load the image.
+ */
 GtkWidget *
 gnome_pixmap_new_from_rgb_d_shaped (unsigned char *data, unsigned char *alpha,
 				    int rgb_width, int rgb_height,
@@ -197,6 +247,18 @@ gnome_pixmap_new_from_rgb_d_shaped (unsigned char *data, unsigned char *alpha,
 	return GTK_WIDGET (gpixmap);
 }
 
+/**
+ * gnome_pixmap_new_from_rgb_d_at_size:
+ * @data: A pointer to an inlined rgb image.
+ * @alpha:
+ * @rgb_width: the width of the rgb image.
+ * @rgb_height: the height of the rgb image.
+ * @width: desired widht.
+ * @height: desired height.
+ *
+ * Returns a widget that contains the image scaled to @widht and @height pixels,
+ * or NULL if it fails to load the image.
+ */
 GtkWidget *
 gnome_pixmap_new_from_rgb_d_at_size (unsigned char *data, unsigned char *alpha,
 				     int rgb_width, int rgb_height,
