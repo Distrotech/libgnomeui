@@ -1,5 +1,12 @@
 2001-04-24  Martin Baulig  <baulig@suse.de>
 
+	* gnome-dock-item.c, gnome-dock-layout.c: Don't use gnome-macros.h.
+
+	* gnome-dock-item.c (gnome_dock_item_grab_pointer): Use gdk_cursor_new().
+	instead of gnome_stock_cursor_new().
+
+2001-04-24  Martin Baulig  <baulig@suse.de>
+
 	* gnome-init.c: Reflect latests GnomeProgram API changes.
 
 2001-04-19  Michael Meeks  <michael@ximian.com>

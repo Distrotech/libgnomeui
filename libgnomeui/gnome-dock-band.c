@@ -25,7 +25,6 @@
 #include "gnome-dock.h"
 #include "gnome-dock-band.h"
 #include "gnome-dock-item.h"
-#include "gnome-macros.h"
 
 
 

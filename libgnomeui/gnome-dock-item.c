@@ -31,9 +31,7 @@
 #include <gtk/gtkwindow.h>
 
 #include "gnome-dock-item.h"
-#include "gnome-cursors.h"
 #include <libgnome/gnome-i18n.h>
-#include "gnome-macros.h"
 
 struct _GnomeDockItemPrivate
 {
@@ -872,9 +870,8 @@ gnome_dock_item_expose (GtkWidget      *widget,
     {
       gnome_dock_item_paint (widget, event);
 
-      return GNOME_CALL_PARENT_HANDLER_WITH_DEFAULT (GTK_WIDGET_CLASS,
-						     expose_event,
-						     (widget, event), FALSE);
+      return GTK_WIDGET_CLASS (parent_class)->expose_event ?
+	  GTK_WIDGET_CLASS (parent_class)->expose_event (widget, event) : FALSE;
     }
 
   return FALSE;
@@ -1285,7 +1282,7 @@ gnome_dock_item_grab_pointer (GnomeDockItem *item)
 {
   GdkCursor *fleur;
 
-  fleur = gnome_stock_cursor_new (GNOME_STOCK_CURSOR_FLEUR);
+  fleur = gdk_cursor_new (GDK_FLEUR);
 
   /* Hm, not sure this is the right thing to do, but it seems to work.  */
   while (gdk_pointer_grab (item->bin_window,
