@@ -86,10 +86,14 @@ guint gnome_app_get_type    (void);
 GtkWidget *gnome_app_new    (gchar *appname);
 /* You can OR the various enums here to have more than one piece
    created at once */
-void gnome_app_create_menu   (GnomeApp *app,
+void gnome_app_create_menus  (GnomeApp *app,
 			      GnomeMenuInfo *menuinfo);
 void gnome_app_create_toolbar(GnomeApp *app,
 			      GnomeToolbarInfo *tbinfo);
+void gnome_app_set_menus     (GnomeApp *app,
+			      GtkMenuBar *menubar);
+void gnome_app_set_toolbar   (GnomeApp *app,
+			      GtkToolbar *toolbar);
 void gnome_app_set_contents  (GnomeApp *app, GtkWidget *contents);
 void gnome_app_set_positions (GnomeApp *app,
 			      GnomeAppWidgetPositionType pos_menubar,

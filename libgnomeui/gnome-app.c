@@ -2,6 +2,7 @@
 #include "gnome-app.h"
 #include "gnome-pixmap.h"
 #include <string.h>
+#include <gtk/gtk.h>
 
 static void gnome_app_class_init(GnomeAppClass *klass);
 static void gnome_app_init(GnomeApp *app);
@@ -10,6 +11,11 @@ static void gnome_app_do_menu_creation(GtkWidget *parent_widget,
 static void gnome_app_do_toolbar_creation(GnomeApp *app,
 					  GtkWidget *parent_widget,
 					  GnomeToolbarInfo *tbinfo);
+static void gnome_app_rightclick_event(GtkWidget *widget,
+				       GdkEventButton *event,
+				       GnomeApp *app);
+static void gnome_app_setpos_activate(GtkMenuItem *menu_item,
+				      GnomeApp *app);
 
 guint
 gnome_app_get_type(void)
@@ -86,11 +92,10 @@ gnome_app_do_menu_creation(GtkWidget *parent_widget,
 }
 
 void
-gnome_app_create_menu(GnomeApp *app,
-		      GnomeMenuInfo *menuinfo)
+gnome_app_create_menus(GnomeApp *app,
+		       GnomeMenuInfo *menuinfo)
 {
   GtkWidget *hb;
-  int i;
 
   g_return_if_fail(app != NULL);
   g_return_if_fail(GNOME_IS_APP(app));
@@ -100,6 +105,9 @@ gnome_app_create_menu(GnomeApp *app,
   hb = gtk_handle_box_new();
   gtk_widget_show(hb);
   app->menubar = gtk_menu_bar_new();
+
+  gtk_signal_connect(GTK_OBJECT(app->menubar), "button_press_event",
+		     GTK_SIGNAL_FUNC(gnome_app_rightclick_event), app);
   gtk_widget_show(app->menubar);
   gtk_container_add(GTK_CONTAINER(hb), app->menubar);
 
@@ -163,6 +171,8 @@ void gnome_app_create_toolbar(GnomeApp *app,
   gtk_widget_show(hb);
   app->toolbar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
 				 GTK_TOOLBAR_BOTH);
+  gtk_signal_connect(GTK_OBJECT(app->toolbar), "button_press_event",
+		     GTK_SIGNAL_FUNC(gnome_app_rightclick_event), app);
   gtk_widget_show(app->toolbar);
   gtk_container_add(GTK_CONTAINER(hb), app->toolbar);
 
@@ -196,11 +206,6 @@ gnome_app_set_positions(GnomeApp *app,
 			     app->menubar->parent);
       /* Obviously the menu bar can't have vertical orientation,
 	 so we don't support POS_LEFT or POS_RIGHT. */
-      g_print("Menu bar goes from %d x %d to %d x %d\n",
-	      0,
-	      (pos_menubar==POS_TOP)?0:2,
-	      3,
-	      (pos_menubar==POS_TOP)?1:3);	      
       gtk_table_attach_defaults(GTK_TABLE(app->table),
 				app->menubar->parent,
 				0, 3,
@@ -281,11 +286,6 @@ gnome_app_set_contents(GnomeApp *app, GtkWidget *contents)
   
   /* Is this going to work at all? I'll wager not
      XXX oops it worked, my mistake :) */
-  g_print("Contents go from %d x %d to %d x %d\n",
-			    startxs[app->pos_menubar][app->pos_toolbar],
-			    startys[app->pos_menubar][app->pos_toolbar],
-			    endxs[app->pos_menubar][app->pos_toolbar],
-			    endys[app->pos_menubar][app->pos_toolbar]);
   gtk_table_attach_defaults(GTK_TABLE(app->table),
 			    contents,
 			    startxs[app->pos_menubar][app->pos_toolbar],
@@ -294,4 +294,144 @@ gnome_app_set_contents(GnomeApp *app, GtkWidget *contents)
 			    endys[app->pos_menubar][app->pos_toolbar]);
   app->contents = contents;
   gtk_widget_show(contents);
+}
+
+static GtkWidget *rmb_menu = NULL, *clicked_widget = NULL;
+static GtkWidget *menuitems[4];
+
+static void make_rmb_menu(GnomeApp *app)
+{
+  int i;
+
+  rmb_menu = gtk_menu_new();
+
+  menuitems[0] = gtk_menu_item_new_with_label("Top");
+  menuitems[1] = gtk_menu_item_new_with_label("Bottom");
+  menuitems[2] = gtk_menu_item_new_with_label("Left");
+  menuitems[3] = gtk_menu_item_new_with_label("Right");
+  for(i = 0; i < 4; i++)
+    {
+      gtk_widget_show(menuitems[i]);
+      gtk_menu_append(GTK_MENU(rmb_menu), menuitems[i]);
+      gtk_signal_connect(GTK_OBJECT(menuitems[i]), "activate",
+			 GTK_SIGNAL_FUNC(gnome_app_setpos_activate), app);
+    }
+}
+
+static void gnome_app_rightclick_event(GtkWidget *widget,
+				       GdkEventButton *event,
+				       GnomeApp *app)
+{
+  int i;
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+
+  if(rmb_menu == NULL) make_rmb_menu(app);
+
+  if(GTK_WIDGET_VISIBLE(rmb_menu))
+    gtk_menu_popdown(GTK_MENU(rmb_menu));
+
+  if(event->button != 3)
+    return;
+
+  if(widget == app->menubar)
+    {
+      for(i = 0; i < 4; i++)
+	gtk_widget_set_sensitive(menuitems[i],
+				 (i >= 2)?FALSE:(!(app->pos_menubar==i)));
+    }
+  else
+    {
+      for(i = 0; i < 4; i++)
+	gtk_widget_set_sensitive(menuitems[0],
+				 !(app->pos_toolbar==i));
+    }
+  gtk_menu_popup(GTK_MENU(rmb_menu),
+		 NULL, NULL, NULL, NULL,
+		 event->button,
+		 GDK_CURRENT_TIME);
+  clicked_widget = widget;
+}
+
+static void
+gnome_app_setpos_activate(GtkMenuItem *menu_item,
+			  GnomeApp *app)
+{
+  int i;
+  g_return_if_fail(clicked_widget != NULL);
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+
+  gtk_menu_popdown(GTK_MENU(rmb_menu));
+  if(clicked_widget == app->menubar)
+    {
+      for(i = 0; i < 2; i++) /* We only go through the 1st two
+				since a menubar can only go top
+				or bottom */
+	if((gpointer)menu_item == (gpointer)menuitems[i])
+	  {
+	    gnome_app_set_positions(app, i, POS_NOCHANGE);
+	    break;
+	  }
+    }
+  else if(clicked_widget == app->toolbar)
+    {
+      for(i = 0; i < 4; i++)
+	if((gpointer)menu_item == (gpointer)menuitems[i])
+	  {
+	    gnome_app_set_positions(app, POS_NOCHANGE, i);
+	    break;
+	  }
+    }
+
+  clicked_widget = NULL;
+}
+
+void gnome_app_set_menus     (GnomeApp *app,
+			      GtkMenuBar *menubar)
+{
+  GtkWidget *hb;
+
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+  g_return_if_fail(app->menubar == NULL);
+  g_return_if_fail(menubar != NULL);
+  g_return_if_fail(GTK_IS_MENU_BAR(menubar));
+
+  hb = gtk_handle_box_new();
+  gtk_widget_show(hb);
+  app->menubar = GTK_WIDGET(menubar);
+
+  gtk_signal_connect(GTK_OBJECT(app->menubar), "button_press_event",
+		     GTK_SIGNAL_FUNC(gnome_app_rightclick_event), app);
+  gtk_widget_show(app->menubar);
+  gtk_container_add(GTK_CONTAINER(hb), app->menubar);
+
+  gnome_app_set_positions(app,
+			  POS_TOP,
+			  POS_NOCHANGE);  
+}
+
+void gnome_app_set_toolbar   (GnomeApp *app,
+			      GtkToolbar *toolbar)
+{
+  GtkWidget *hb;
+
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+  g_return_if_fail(toolbar != NULL);
+  g_return_if_fail(app->toolbar == NULL);
+  g_return_if_fail(GTK_IS_TOOLBAR(toolbar));
+
+  hb = gtk_handle_box_new();
+  gtk_widget_show(hb);
+  app->toolbar = GTK_WIDGET(toolbar);
+  gtk_signal_connect(GTK_OBJECT(app->toolbar), "button_press_event",
+		     GTK_SIGNAL_FUNC(gnome_app_rightclick_event), app);
+  gtk_widget_show(app->toolbar);
+  gtk_container_add(GTK_CONTAINER(hb), app->toolbar);
+
+  gnome_app_set_positions(app,
+			  POS_NOCHANGE,
+			  POS_BOTTOM);  
 }
