@@ -1,3 +1,9 @@
+2001-10-28  jacob berkman  <jacob@ximian.com>
+
+	* gnome-ui-init.c (libgnomeui_segv_handle): pass
+	program_invocation_name to gnome_segv, as this is what it actually
+	expects
+
 2001-10-27  jacob berkman  <jacob@ximian.com>
 
 	* gnome-vfs-util.c (gnome_gdk_pixbuf_new_from_uri_async): update

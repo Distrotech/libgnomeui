@@ -505,11 +505,11 @@ static void libgnomeui_segv_handle(int signum)
 
 		/* Child process */
 		execl (GNOMEUIBINDIR "/gnome_segv2", GNOMEUIBINDIR "/gnome_segv",
-		       gnome_program_get_app_id (program), buf,
+		       program_invocation_name, buf,
 		       gnome_program_get_app_version (program), NULL);
 
                 execlp ("gnome_segv2", "gnome_segv2",
-			gnome_program_get_app_id (program), buf,
+			program_invocation_name, buf,
 			gnome_program_get_app_version (program), NULL);
 
                 _exit(99);
