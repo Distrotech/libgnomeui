@@ -14,7 +14,7 @@ style "GnomeScores_CurrentPlayer_style"
 
 style "GnomeScores_Logo_style"
 {
-  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-jisx0208.1983-0"
+  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*"
   fg[NORMAL] = {0.0, 0.0, 1.0}
 }
 
@@ -25,27 +25,27 @@ style "GnomeAbout_DrawingArea_style"
 
 style "GnomeAbout_Title_style"
 {
-  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-jisx0208.1983-0"
+  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*"
 }
 
 style "GnomeAbout_Copyright_style"
 {
-  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-jisx0208.1983-0"
+  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*"
 }
 
 style "GnomeAbout_Author_style"
 {
-  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-jisx0208.1983-0"
+  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*"
 }
 
 style "GnomeAbout_Names_style"
 {
-  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-jisx0208.1983-0"
+  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*"
 }
 
 style "GnomeAbout_Comments_style"
 {
-  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-jisx0208.1983-0"
+  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*"
 }
 
 style "GnomeHRef_Label_style"
@@ -58,7 +58,7 @@ style "GnomeHRef_Label_style"
 
 style "GnomeGuru_PageTitle_style" 
 {
-  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-jisx0208.1983-0"
+  fontset = "-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*"
 }
 
 
