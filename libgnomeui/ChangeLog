@@ -1,3 +1,22 @@
+1999-01-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gil_get_icons_in_region): Return an empty
+	list if the rectangle is empty.  Also, return the list in sorted
+	order.
+	(gil_mark_region): Make it a little less inefficient by not
+	searching through the icons-in-region list, but traversing it only
+	once instead.  This whole function could be made to run in linear
+	time if it used a selection mechanism like that in
+	mc/gnome/gdesktop.c (it is still doing a g_list_find() for each
+	element in the preserve_selection list).  Selection needs fixing,
+	anyway, because it is inconsistent with the way icons are selected
+	in the desktop (which is done the right way).
+	(gnome_icon_list_get_icon_at): Call the ::point() method of the
+	items directly so that we can get an ideal "point-inside" test.
+
+	* gnome-canvas.c (gnome_canvas_get_item_at): New public function
+	to fetch the item at the specified coordinates.
+
 1999-01-19  Nat Friedman  <nat@nat.org>
 
 	* gnome-popup-menu.c (gnome_popup_new_with_accelgroup):

@@ -3400,6 +3400,36 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 	gdk_flush (); /* flush the X queue to ensure repaint */
 }
 
+/**
+ * gnome_canvas_get_item_at:
+ * @canvas: The canvas from which to get the item
+ * @x: X position in world coordinates
+ * @y: Y position in world coordinates
+ * 
+ * Looks for the item that is under the specified position (given in world
+ * coordinates).
+ * 
+ * Return value: The sought item, or NULL if no item is at the specified
+ * coordinates.
+ **/
+GnomeCanvasItem *
+gnome_canvas_get_item_at (GnomeCanvas *canvas, double x, double y)
+{
+	GnomeCanvasItem *item;
+	double dist;
+	int cx, cy;
+
+	g_return_val_if_fail (canvas != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), NULL);
+
+	gnome_canvas_w2c (canvas, x, y, &cx, &cy);
+
+	dist = gnome_canvas_item_invoke_point (canvas->root, x, y, cx, cy, &item);
+	if ((int) (dist * canvas->pixels_per_unit + 0.5) <= canvas->close_enough)
+		return item;
+	else
+		return NULL;
+}
 
 /**
  * gnome_canvas_request_update

@@ -475,6 +475,11 @@ void gnome_canvas_get_scroll_offsets (GnomeCanvas *canvas, int *cx, int *cy);
 /* Requests that the canvas be repainted immediately instead of in the idle loop. */
 void gnome_canvas_update_now (GnomeCanvas *canvas);
 
+/* Returns the item that is at the specified position in world coordinates, or
+ * NULL if no item is there.
+ */
+GnomeCanvasItem *gnome_canvas_get_item_at (GnomeCanvas *canvas, double x, double y);
+
 /* For use only by item type implementations. Request that the canvas eventually redraw the
  * specified region. The region is specified as a microtile array. This function takes over
  * responsibility for freeing the uta argument.

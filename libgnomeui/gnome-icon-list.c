@@ -1154,6 +1154,9 @@ gil_get_icons_in_region (Gil *gil, double x1, double y1, double x2, double y2)
 	GList *icons, *l;
 
 	icons = NULL;
+
+	if (x1 == x2 || y1 == y2)
+		return icons;
 	
 	for (l = gil->icon_list; l; l = l->next){
 		Icon *icon = l->data;
@@ -1161,19 +1164,17 @@ gil_get_icons_in_region (Gil *gil, double x1, double y1, double x2, double y2)
 		GnomeCanvasItem *text = GNOME_CANVAS_ITEM (icon->text);
 		
 		if (touches_item (image, x1, y1, x2, y2) ||
-		    touches_item (text,  x1, y1, x2, y2)){
+		    touches_item (text,  x1, y1, x2, y2))
 			icons = g_list_prepend (icons, icon);
-
-		}
 	}
 	
-	return icons;
+	return g_list_reverse (icons); /* return it in sorted order */
 }
 
 static void
 gil_mark_region (Gil *gil, GdkEvent *event, double x, double y)
 {
-	GList *icons, *l;
+	GList *icons, *i, *l;
 	double x1, x2, y1, y2;
 	int idx;
 	
@@ -1203,16 +1204,16 @@ gil_mark_region (Gil *gil, GdkEvent *event, double x, double y)
 
 	icons = gil_get_icons_in_region (gil, x1, y1, x2, y2);
 		
-	for (l = gil->icon_list, idx = 0; l; l = l->next, idx++){
+	for (l = gil->icon_list, i = icons, idx = 0; l; l = l->next, idx++){
 		Icon *icon = l->data;
 
-		if (icons && g_list_find (icons, icon)){
+		if (i && i->data == icon){
 			if (!icon->text->selected)
 				gtk_signal_emit (
 					GTK_OBJECT (gil),
 					gil_signals [SELECT_ICON],
 					idx, event);
-			
+			i = i->next;
 		} else if (icon->text->selected){
 			int deselect = FALSE;
 			
@@ -2086,28 +2087,51 @@ int
 gnome_icon_list_get_icon_at (GnomeIconList *gil, int x, int y)
 {
 	GList *l;
-	double dx, dy;
 	double wx, wy;
+	double dx, dy;
+	int cx, cy;
 	int n;
-	
+	GnomeCanvasItem *item;
+	double dist;
+
 	g_return_val_if_fail (gil != NULL, -1);
 	g_return_val_if_fail (IS_GIL (gil), -1);
 
 	dx = x;
 	dy = y;
-	
+
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil), dx, dy, &wx, &wy);
+	gnome_canvas_w2c (GNOME_CANVAS (gil), wx, wy, &cx, &cy);
 
 	for (n = 0, l = gil->icon_list; l; l = l->next, n++){
 		Icon *icon = l->data;
 		GnomeCanvasItem *image = GNOME_CANVAS_ITEM (icon->image);
 		GnomeCanvasItem *text  = GNOME_CANVAS_ITEM (icon->text);
 
-		if (touches_item (image, wx, wy, wx, wy) ||
-		    touches_item (text, wx, wy, wx, wy))
-			return n;
+		if (wx >= image->x1 && wx <= image->x2 && wy >= image->y1 && wy <= image->y2) {
+			dist = (* GNOME_CANVAS_ITEM_CLASS (image->object.klass)->point) (
+				image,
+				wx, wy,
+				cx, cy,
+				&item);
+
+			if ((int) (dist * GNOME_CANVAS (gil)->pixels_per_unit + 0.5)
+			    <= GNOME_CANVAS (gil)->close_enough)
+				return n;
+		}
+
+		if (wx >= text->x1 && wx <= text->x2 && wy >= text->y1 && wy <= text->y2) {
+			dist = (* GNOME_CANVAS_ITEM_CLASS (text->object.klass)->point) (
+				text,
+				wx, wy,
+				cx, cy,
+				&item);
+
+			if ((int) (dist * GNOME_CANVAS (gil)->pixels_per_unit + 0.5)
+			    <= GNOME_CANVAS (gil)->close_enough)
+				return n;
+		}
 	}
 
 	return -1;
 }
-
