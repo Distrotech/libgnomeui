@@ -41,7 +41,7 @@ enum {
     HORIZONTAL
 };
 
-#define CAULDRON_FMT_OPTIONS "xfpseocrdqjhvagn"
+#define CAULDRON_FMT_OPTIONS "xfpsieocrdqjhvaugn"
 
 struct cauldron_result {
     void (*get_result) (GtkWidget *, void *);
@@ -366,6 +366,7 @@ static gint key_press_event (GtkWidget * window, GdkEventKey * event, struct key
 	(l)->w = (w);						\
 	(l)->result = (void *) (d);
 
+static gchar *convert_label_with_ampersand (gchar * label, gint * accelerator_key, gint * underbar_pos);
 
 static void user_callbacks (GtkWidget * w, gchar * p, GtkCauldronNextArgCallback next_arg, gpointer user_data, GtkAccelGroup * accel_table)
 {
@@ -379,6 +380,18 @@ static void user_callbacks (GtkWidget * w, gchar * p, GtkCauldronNextArgCallback
 	next_arg (GTK_CAULDRON_TYPE_INT, user_data, &mods);
 	gtk_widget_add_accelerator (w, signal, accel_table, key, mods, GTK_ACCEL_VISIBLE);
     }
+    npresent = option_is_present (p, 'u');
+    for (i = 0; i < npresent; i++) {
+	gchar *signal, *label;
+	gint mods;
+	gint underbar_pos = -1, accelerator_key = 0;
+	next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &signal);
+	next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
+	next_arg (GTK_CAULDRON_TYPE_INT, user_data, &mods);
+	label = convert_label_with_ampersand (label, &accelerator_key, &underbar_pos);
+	gtk_widget_add_accelerator (w, signal, accel_table, accelerator_key, mods, GTK_ACCEL_VISIBLE);
+	free (label);
+    }
     if (option_is_present (p, 'c')) {
 	GtkCauldronCustomCallback fud;
 	gpointer fud_user_data;
@@ -388,12 +401,100 @@ static void user_callbacks (GtkWidget * w, gchar * p, GtkCauldronNextArgCallback
     }
 }
 
+/* result must be free'd */
+static gchar *convert_label_with_ampersand (gchar * label, gint * accelerator_key, gint * underbar_pos)
+{
+    gchar *p;
+    label = strdup (label);
+    for (p = label;; p++) {
+	if (!*p)
+	    break;
+	if (!p[1])
+	    break;
+	if (*p == '&') {
+	    memcpy (p, p + 1, strlen (p));
+	    if (*p == '&')	/* use && for an actual & */
+		continue;
+	    *underbar_pos = (unsigned long) p - (unsigned long) label;
+	    *accelerator_key = *p;
+	    return label;
+	}
+    }
+    return label;
+}
+
+struct find_label_data {
+    gchar *label, *pattern;
+};
+
+/* recurse into widget to find a label. when found, set the
+   pattern to one with an underbar underneath the hotkey. */
+static void find_label (GtkWidget * widget, gpointer data)
+{
+    struct find_label_data *d;
+    d = (struct find_label_data *) data;
+    if (GTK_IS_LABEL (widget)) {
+	GtkLabel *label;
+	label = GTK_LABEL (widget);
+	if (!strcmp (label->label, d->label))
+	    if (strchr (d->pattern, '_'))
+		gtk_label_set_pattern (label, d->pattern);
+    } else if (GTK_IS_CONTAINER (widget)) {
+	gtk_container_forall (GTK_CONTAINER (widget), find_label, data);
+    }
+}
+
+static void get_child_entry (GtkWidget * widget, gpointer data)
+{
+    GtkWidget **d = (GtkWidget **) data;
+    if (GTK_IS_ENTRY (widget)) {
+	*d = widget;
+    } else if (GTK_IS_CONTAINER (widget)) {
+	gtk_container_forall (GTK_CONTAINER (widget), get_child_entry, data);
+    }
+}
+
+gchar *create_label_pattern (gchar * label, gint underbar_pos)
+{
+    gchar *pattern;
+    pattern = strdup (label);
+    memset (pattern, ' ', strlen (label));
+    if (underbar_pos < strlen (pattern) && underbar_pos >= 0)
+	pattern[underbar_pos] = '_';
+    return pattern;
+}
+
+static void add_accelerator_with_underbar (GtkWidget * widget, GtkAccelGroup * accel_table, gint accelerator_key, gchar * label, gint underbar_pos)
+{
+    struct find_label_data d;
+    d.label = label;
+    d.pattern = create_label_pattern (label, underbar_pos);
+    find_label (widget, (void *) &d);
+    gtk_widget_add_accelerator (widget, "clicked",
+	 accel_table, accelerator_key, GDK_MOD1_MASK, GTK_ACCEL_VISIBLE);
+    free (d.pattern);
+}
+
+GtkWidget *gtk_label_new_with_ampersand (gchar * label)
+{
+    GtkWidget *widget;
+    gchar *pattern;
+    gint accelerator_key = 0, underbar_pos = -1;
+    label = convert_label_with_ampersand (label, &accelerator_key, &underbar_pos);
+    pattern = create_label_pattern (label, underbar_pos);
+    widget = gtk_label_new (label);
+    if (underbar_pos != -1)
+	gtk_label_set_pattern (GTK_LABEL (widget), pattern);
+    free (label);
+    return widget;
+}
+
 #define MAX_TEXT_WIDGETS 64
 
 gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * format,
 		 GtkCauldronNextArgCallback next_arg, gpointer user_data)
 {
-    GtkWidget *w = 0, *window;
+    GtkWidget *w = 0, *window, *f = 0;
     GSList *radio_group = 0;
     gchar *p, *return_result = 0, *fmt;
     gint pixels_per_space = 3;
@@ -426,7 +527,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
     else if (options & GTK_CAULDRON_POPUP)
 	how = GTK_WINDOW_POPUP;
     window = gtk_window_new (how);
-    gtk_window_position (window, GTK_WIN_POS_MOUSE);
+    gtk_window_position (GTK_WINDOW (window), GTK_WIN_POS_MOUSE);
     accel_table = gtk_accel_group_new ();
     gtk_window_add_accel_group (GTK_WINDOW (window), accel_table);
 
@@ -505,7 +606,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    return 0;
 		}
 		*(strchr (label, ')')) = '\0';
-		w = gtk_label_new (label);
+		w = gtk_label_new_with_ampersand (label);
 		free (label);
 		user_callbacks (w, p + 1, next_arg, user_data, accel_table);
 		gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
@@ -528,7 +629,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 	    case 'L':{
 		    gchar *label;
 		    next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
-		    w = gtk_label_new (label);
+		    w = gtk_label_new_with_ampersand (label);
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
 		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
@@ -539,6 +640,8 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    GtkWidget *hscrollbar = 0, *vscrollbar = 0, *table = 0;
 		    int cols = 1, rows = 1;
 		    w = gtk_text_new (NULL, NULL);
+		    if (option_is_present (p + 1, 'o'))
+			f = w;
 		    next_arg (GTK_CAULDRON_TYPE_CHAR_P_P, user_data, &result);
 		    if (option_is_present (p + 1, 'e')) {
 			new_result (r, get_text_result, w, result);
@@ -651,6 +754,10 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    if (*result)
 			gtk_entry_set_text (GTK_ENTRY (w), *result);
 #endif
+		    if (option_is_present (p + 1, 'o')) {
+			f = 0;
+			get_child_entry (w, &f);
+		    }
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
 		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
@@ -658,8 +765,12 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		}
 	    case 'B':{
 		    gchar *label;
+		    gint accelerator_key = 0, underbar_pos = -1;
 		    next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
+		    b[ncauldron_button].label = label;
+		    b[ncauldron_button].result = &return_result;
 		    if (label) {
+			label = convert_label_with_ampersand (label, &accelerator_key, &underbar_pos);
 #ifdef HAVE_GNOME
 			if (option_is_present (p + 1, 'g'))
 			    w = gnome_stock_button (label);
@@ -668,8 +779,12 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 			    w = gtk_button_new_with_label (label);
 		    } else
 			w = gtk_button_new ();
-		    b[ncauldron_button].label = label;
-		    b[ncauldron_button].result = &return_result;
+		    if (option_is_present (p + 1, 'o'))
+			f = w;
+		    if (accelerator_key)
+			add_accelerator_with_underbar (w, accel_table, accelerator_key, label, underbar_pos);
+		    if (label)
+			free (label);
 		    if (option_is_present (p + 1, 'r'))
 			b[ncauldron_button].r = r;
 		    else
@@ -689,18 +804,26 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		}
 	    case 'C':{
 		    gchar *label;
+		    gint accelerator_key = 0, underbar_pos = -1;
 		    int *result;
 		    next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
-		    if (label)
+		    if (label) {
+			label = convert_label_with_ampersand (label, &accelerator_key, &underbar_pos);
 			w = gtk_check_button_new_with_label (label);
-		    else
+		    } else
 			w = gtk_check_button_new ();
+		    if (option_is_present (p + 1, 'o'))
+			f = w;
+		    if (accelerator_key)
+			add_accelerator_with_underbar (w, accel_table, accelerator_key, label, underbar_pos);
 		    next_arg (GTK_CAULDRON_TYPE_INT_P, user_data, &result);
 		    GTK_TOGGLE_BUTTON (w)->active = *result;
 		    new_result (r, get_check_result, w, result);
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
 		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
+		    if (label)
+			free (label);
 		    break;
 		}
 	    case 'S':
@@ -727,6 +850,8 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    } else {
 			w = gtk_spin_button_new (0, climb_rate, digits);
 		    }
+		    if (option_is_present (p + 1, 'o'))
+			f = w;
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
 		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
@@ -743,12 +868,18 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		break;
 	    case 'R':{
 		    gchar *label;
-		    int *result;
+		    gint *result;
+		    gint accelerator_key = 0, underbar_pos = -1;
 		    next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
-		    if (label)
+		    if (label) {
+			label = convert_label_with_ampersand (label, &accelerator_key, &underbar_pos);
 			w = gtk_radio_button_new_with_label (radio_group, label);
-		    else
+		    } else
 			w = gtk_radio_button_new (radio_group);
+		    if (option_is_present (p + 1, 'o'))
+			f = w;
+		    if (accelerator_key)
+			add_accelerator_with_underbar (w, accel_table, accelerator_key, label, underbar_pos);
 		    radio_group = gtk_radio_button_group (GTK_RADIO_BUTTON (w));
 		    next_arg (GTK_CAULDRON_TYPE_INT_P, user_data, &result);
 		    gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (w), *result);
@@ -756,6 +887,8 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    user_callbacks (w, p + 1, next_arg, user_data, accel_table);
 		    gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 		    gtk_widget_show (w);
+		    if (label)
+			free (label);
 		    break;
 		}
 	    case 'X':{
@@ -764,6 +897,8 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		    next_arg (GTK_CAULDRON_TYPE_CALLBACK, user_data, &func);
 		    next_arg (GTK_CAULDRON_TYPE_USERDATA_P, user_data, &data);
 		    w = (*func) (window, data);		/* `window' is just to fill the first arg and shouldn't be needed by the user */
+		    if (option_is_present (p + 1, 'o'))
+			f = w;
 		    if (w) {
 			gtk_cauldron_box_add (widget_stack_top (stack), w, &p, pixels_per_space);
 			gtk_widget_show (w);
@@ -802,7 +937,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		}
 		next_arg (GTK_CAULDRON_TYPE_CHAR_P, user_data, &label);
 		user_callbacks (w, p + 1, next_arg, user_data, accel_table);
-		gtk_notebook_append_page (GTK_NOTEBOOK (widget_stack_top (stack)), w, gtk_label_new (label));
+		gtk_notebook_append_page (GTK_NOTEBOOK (widget_stack_top (stack)), w, gtk_label_new_with_ampersand (label));
 	    } else if (option_is_present (p + 1, 'v') || option_is_present (p + 1, 'h')) {
 		GtkWidget *scrolled_window;
 		scrolled_window = gtk_scrolled_window_new (NULL, NULL);
@@ -845,6 +980,10 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 
     if (options & GTK_CAULDRON_GRAB)
 	gtk_grab_add (window);
+
+    if (f)
+	gtk_widget_grab_focus (f);
+
     gtk_main ();
 
     gtk_window_remove_accel_group (GTK_WINDOW (window), accel_table);
