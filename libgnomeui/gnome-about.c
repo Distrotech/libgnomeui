@@ -36,6 +36,30 @@
 #define GNOME_ABOUT_MAX_WIDTH                   600
 #define BASE_LINE_SKIP                          0
 
+#define GNOME_ABOUT_PADDING_X 1
+#define GNOME_ABOUT_PADDING_Y 1
+
+#define GNOME_ABOUT_LOGO_PADDING_X 2
+#define GNOME_ABOUT_LOGO_PADDING_Y 0
+
+#define GNOME_ABOUT_TITLE_PADDING_X 1
+#define GNOME_ABOUT_TITLE_PADDING_Y 1
+#define GNOME_ABOUT_TITLE_PADDING_UP 6
+#define GNOME_ABOUT_TITLE_PADDING_DOWN 7
+
+#define GNOME_ABOUT_CONTENT_PADDING_X GNOME_ABOUT_TITLE_PADDING_X
+#define GNOME_ABOUT_CONTENT_PADDING_Y GNOME_ABOUT_TITLE_PADDING_Y
+#define GNOME_ABOUT_CONTENT_SPACING 2
+#define GNOME_ABOUT_CONTENT_INDENT 3
+
+#define GNOME_ABOUT_COPYRIGHT_PADDING_UP 2
+#define GNOME_ABOUT_COPYRIGHT_PADDING_DOWN 4
+
+#define GNOME_ABOUT_AUTHORS_PADDING_Y 3
+#define GNOME_ABOUT_AUTHORS_INDENT 10
+
+#define GNOME_ABOUT_COMMENTS_INDENT 3
+
 typedef struct
 {
 	gchar	*title;
@@ -56,6 +80,9 @@ typedef struct
 
 static void gnome_about_class_init (GnomeAboutClass *klass);
 static void gnome_about_init       (GnomeAbout      *about);
+
+static void gnome_about_calc_size (GnomeAboutInfo *ai);
+
 static void gnome_about_repaint    (GtkWidget *w, 
 				    GdkEventExpose *,
 				    GnomeAboutInfo *data);
@@ -118,19 +145,19 @@ gnome_about_repaint (GtkWidget *widget,
 	GdkColor *light_green = &gai->light_green;
 	GList *name;
 	static GdkGC *gc = NULL;
-	int h, y, x;
+	int h, w, y, x = 0;
 
 	if (gc == NULL)
 		gc = gdk_gc_new (win);
 
 	gdk_window_clear (win);
-	
+
 	/* Draw pixmap first */
-	y = 1;
+	y = GNOME_ABOUT_PADDING_Y;
 	if (gai->logo)
 	{
-		y += 2;
-		x = (gai->w - gai->logo_w) / 2;
+		y += GNOME_ABOUT_LOGO_PADDING_Y;
+		x = (gai->w - gai->logo_w) / 2 + GNOME_ABOUT_LOGO_PADDING_X;
 		if (gai->mask) {
 			gdk_gc_set_clip_mask (gc, gai->mask);
 			gdk_gc_set_clip_origin (gc, x, y);
@@ -142,53 +169,78 @@ gnome_about_repaint (GtkWidget *widget,
 			gdk_gc_set_clip_mask (gc, NULL);
 			gdk_gc_set_clip_origin (gc, 0, 0);
 		}
-		y += 2 + gai->logo_h;
+		y += GNOME_ABOUT_LOGO_PADDING_Y + gai->logo_h;
 	}
       
 	/* Draw title */
-	h = gai->font_title->descent + gai->font_title->ascent + 13;
+	h =
+		(gai->font_title->descent + GNOME_ABOUT_TITLE_PADDING_DOWN) +
+		(gai->font_title->ascent + GNOME_ABOUT_TITLE_PADDING_UP);
 	if (gai->title)
 	{
-		y += 2;
+		y += GNOME_ABOUT_TITLE_PADDING_Y;
+		x = GNOME_ABOUT_PADDING_X + GNOME_ABOUT_TITLE_PADDING_X;
+		w = gai->w - (2 * (GNOME_ABOUT_TITLE_PADDING_X + GNOME_ABOUT_PADDING_X));
+		
 		gdk_gc_set_foreground (gc, black);
 		gdk_gc_set_background (gc, black);
-		gdk_draw_rectangle (win, gc, TRUE, 2, y, gai->w - 5, h);
-		y += h - 7 - gai->font_title->descent;
+		gdk_draw_rectangle (win, gc, TRUE, x, y, w, h);
+
+		y += (gai->font_title->ascent + GNOME_ABOUT_TITLE_PADDING_UP);
 		x = (gai->w - gdk_string_measure (gai->font_title, gai->title)) / 2;
 		gdk_gc_set_foreground (gc, white);
 		gdk_draw_string (win, gai->font_title, gc, 
 				 x, y, 
 				 gai->title);
-		y += 7 + gai->font_title->descent + 2;
+		y += (gai->font_title->descent + GNOME_ABOUT_TITLE_PADDING_DOWN) +
+			GNOME_ABOUT_TITLE_PADDING_Y;
 	}
 
 	if (gai->copyright || gai->names || gai->comments)
 	{
+		y += GNOME_ABOUT_CONTENT_PADDING_Y;
+		x = GNOME_ABOUT_PADDING_X +
+			GNOME_ABOUT_CONTENT_PADDING_X;
+		w = gai->w - (2 * (GNOME_ABOUT_CONTENT_PADDING_X +
+				   GNOME_ABOUT_PADDING_X));
+		h = gai->h - y - (GNOME_ABOUT_CONTENT_PADDING_Y +
+				  GNOME_ABOUT_PADDING_Y);
+		
+		
 		gdk_gc_set_foreground (gc, light_green);
 		gdk_gc_set_background (gc, light_green);
 		gdk_draw_rectangle (win, gc, TRUE, 
-				    2, y, 
-				    gai->w-5, gai->h - y - 3);
+				    x, y, 
+				    w, h);
 	}
 
 	gdk_gc_set_foreground (gc, black);
 
 	if (gai->copyright)
 	{
-		y += 4 + gai->font_copyright->ascent;
-		gdk_draw_string (win, gai->font_copyright, gc, 5, y, gai->copyright);
-		y += gai->font_copyright->descent + 4;
+		x = GNOME_ABOUT_PADDING_X +
+			GNOME_ABOUT_CONTENT_PADDING_X +
+			GNOME_ABOUT_CONTENT_INDENT;
+		y += GNOME_ABOUT_CONTENT_SPACING +
+			GNOME_ABOUT_COPYRIGHT_PADDING_UP +
+			gai->font_copyright->ascent;
+		gdk_draw_string (win, gai->font_copyright, gc, x, y, gai->copyright);
+		y += gai->font_copyright->descent + GNOME_ABOUT_COPYRIGHT_PADDING_DOWN;
 	}
 
 	if (gai->names)
 	{
-		y += 2 + gai->font_author->ascent;
+		y += GNOME_ABOUT_CONTENT_SPACING + gai->font_author->ascent;
+		x = GNOME_ABOUT_PADDING_X +
+			GNOME_ABOUT_CONTENT_PADDING_X +
+			GNOME_ABOUT_CONTENT_INDENT;
 		if (g_list_length (gai->names) == 1)
-			gdk_draw_string (win, gai->font_author, gc, 5, y, _("Author:") );
+			gdk_draw_string (win, gai->font_author, gc, x, y, _("Author:") );
 		else
-			gdk_draw_string (win, gai->font_author, gc, 5, y, _("Authors:") );
+			gdk_draw_string (win, gai->font_author, gc, x, y, _("Authors:") );
 	}
-	x = 5 + gdk_string_measure (gai->font_author, _("Authors:")) + 10;
+	x += gdk_string_measure (gai->font_author, _("Authors:")) +
+		GNOME_ABOUT_AUTHORS_INDENT;
 
 	name = g_list_first (gai->names);
 	while (name)
@@ -202,9 +254,13 @@ gnome_about_repaint (GtkWidget *widget,
 
 	if (gai->comments)
 	{
-		y += 2 + 2 * gai->font_comments->ascent;
+		x = GNOME_ABOUT_PADDING_X +
+			GNOME_ABOUT_CONTENT_PADDING_X +
+			GNOME_ABOUT_CONTENT_INDENT +
+			GNOME_ABOUT_COMMENTS_INDENT; /* 8 */
+		y += GNOME_ABOUT_CONTENT_SPACING + 2 * gai->font_comments->ascent;
 		gnome_about_display_comments (win, gai->font_comments, gc, 
-					      8, y, gai->w, 
+					      x, y, gai->w, 
 					      gai->comments);
 	}
 
@@ -312,49 +368,71 @@ gnome_about_display_comments (GdkWindow *win,
    ---------------------------------------------------------------------- */
 
 static void
-gnome_about_calc_size (GnomeAboutInfo *gai)
+gnome_about_calc_size (GnomeAboutInfo *ai)
 {
 	GList *name;
-	gint num_pars, i, h, w, len[4], tmpl;
+	gint num_pars, i, h, w, len[4], tmpl, pw;
 	const gchar *p;
 	gfloat maxlen;
 
 	w = GNOME_ABOUT_DEFAULT_WIDTH;
-	h = 1;
+	h = GNOME_ABOUT_PADDING_Y;
 
-	if (gai->title)
+	pw = 0; /* Maximum of title and content padding */
+	
+	if (ai->title)
 	{
-		len[0] = gdk_string_measure (gai->font_title, gai->title);
-		h += 4 + gai->font_title->descent + gai->font_title->ascent + 14;
+		h += GNOME_ABOUT_TITLE_PADDING_Y;
+		len[0] = gdk_string_measure (ai->font_title,
+					     ai->title);
+		h += (ai->font_title->descent + GNOME_ABOUT_TITLE_PADDING_DOWN) +
+			(ai->font_title->ascent + GNOME_ABOUT_TITLE_PADDING_UP) +
+			GNOME_ABOUT_TITLE_PADDING_Y;
+		pw = GNOME_ABOUT_TITLE_PADDING_X;
 	}
 	else
 		len[0] = 0;
 
-	if (gai->copyright)
+	if (ai->copyright || ai->names || ai->comments)
 	{
-		h += gai->font_copyright->descent + gai->font_copyright->ascent + 8;
-		len[1] = gdk_string_measure (gai->font_copyright, gai->copyright);
+		h += 2 * GNOME_ABOUT_CONTENT_PADDING_Y;
+		pw = MAX(pw, GNOME_ABOUT_CONTENT_PADDING_X);
+	}
+	if (ai->copyright)
+	{
+		h += ai->font_copyright->descent +
+			ai->font_copyright->ascent +
+			GNOME_ABOUT_COPYRIGHT_PADDING_UP +
+			GNOME_ABOUT_COPYRIGHT_PADDING_DOWN +
+			GNOME_ABOUT_CONTENT_SPACING;
+		len[1] = gdk_string_measure (ai->font_copyright, ai->copyright);
 	}
 	else
 		len[1] = 0;
 
 	len[2] = 0;
-	if (gai->names)
+	if (ai->names)
 	{
-		name = g_list_first (gai->names);
+		name = g_list_first (ai->names);
 		while (name)
 		{
-			tmpl = gdk_string_measure (gai->font_names, name->data);
+			tmpl = gdk_string_measure (ai->font_names, name->data);
 			if (tmpl > len[2])
 				len[2] = tmpl;
 			name = name->next;
 		}
-		tmpl = gdk_string_measure (gai->font_names, _("Authors: "));
-		len[2] += tmpl + 15;
-		h += g_list_length (gai->names) * 
-			(gai->font_names->descent + 
-			 gai->font_names->ascent + 
-			 BASE_LINE_SKIP ) + 4;
+		tmpl = gdk_string_measure (ai->font_names, _("Authors: "));
+		len[2] += tmpl +
+			GNOME_ABOUT_PADDING_X +
+			GNOME_ABOUT_CONTENT_PADDING_X +
+			GNOME_ABOUT_CONTENT_INDENT +
+			GNOME_ABOUT_AUTHORS_INDENT;
+		h += g_list_length (ai->names) * 
+			(ai->font_names->descent + 
+			 ai->font_names->ascent + 
+			 BASE_LINE_SKIP ) +
+			GNOME_ABOUT_AUTHORS_PADDING_Y +
+			GNOME_ABOUT_CONTENT_SPACING;
 	}
 
 	maxlen = (gfloat) w;
@@ -366,10 +444,11 @@ gnome_about_calc_size (GnomeAboutInfo *gai)
 	if ( w > GNOME_ABOUT_MAX_WIDTH )
 		w = GNOME_ABOUT_MAX_WIDTH;
 
-	if (gai->comments)
+	if (ai->comments)
 	{
+		h += GNOME_ABOUT_CONTENT_SPACING;
 		num_pars = 1;
-		p = gai->comments;
+		p = ai->comments;
 		while (*p != '\0')
 		{
 			if (*p == '\n')
@@ -377,14 +456,14 @@ gnome_about_calc_size (GnomeAboutInfo *gai)
 			p++;
 		}
       
-		i = gdk_string_measure (gai->font_comments, gai->comments);
+		i = gdk_string_measure (ai->font_comments, ai->comments);
 		i /= w - 16;
 		i += 1 + num_pars;;
-		h += i * (gai->font_comments->descent + gai->font_comments->ascent);
+		h += i * (ai->font_comments->descent + ai->font_comments->ascent);
 	}
 
-	gai->w = w+4;
-	gai->h = h+3;
+	ai->w = w + 2 * (GNOME_ABOUT_PADDING_X + pw);
+	ai->h = h + GNOME_ABOUT_PADDING_Y;
 
 	return;
 }  
@@ -396,8 +475,8 @@ gnome_about_calc_size (GnomeAboutInfo *gai)
 
 static GnomeAboutInfo*
 gnome_fill_info (GtkWidget *widget,
-		 const gchar	*title,
-		 const gchar	*version,
+		 const gchar   *title,
+		 const gchar   *version,
 		 const gchar   *copyright,
 		 const gchar   **authors,
 		 const gchar   *comments,
@@ -447,7 +526,7 @@ gnome_fill_info (GtkWidget *widget,
 	  gai->title = g_strconcat (title, " ", version ? version : "", NULL);
 	else
 	  gai->title = NULL;
-  
+
 	gai->copyright = g_strdup(copyright);
   
 	gai->comments = g_strdup(comments);
@@ -583,8 +662,8 @@ gnome_about_construct (GnomeAbout *about,
 	GtkWidget *drawing_area;
 	GtkStyle *style;
 
-	gint w,h;
-	char *filename;
+	gint x, y, w, h;
+	gchar *filename;
 
 
 	gtk_window_set_title (GTK_WINDOW (about), _("About"));
@@ -613,7 +692,7 @@ gnome_about_construct (GnomeAbout *about,
 	style = gtk_widget_get_style (drawing_area);
 
 	ai = gnome_fill_info (drawing_area,
-			      title, version, 
+			      title, version,
 			      copyright, authors, 
 			      comments, logo);
 	gtk_signal_connect(GTK_OBJECT(about),"destroy",
@@ -627,7 +706,8 @@ gnome_about_construct (GnomeAbout *about,
 	if (logo)
 	{
 		filename = gnome_pixmap_file (logo);
-		if (filename != NULL) {
+		if (filename != NULL)
+		{
                         GdkPixbuf *pixbuf;
                         pixbuf = gdk_pixbuf_new_from_file(filename);
                         if (pixbuf != NULL) {
@@ -644,7 +724,7 @@ gnome_about_construct (GnomeAbout *about,
                                 ai->h = h;
                                 ai->w = MAX (w, (ai->logo_w + 6)); 
                                 w = ai->w;
-                        }
+			}
 		}
 		else
 			ai->logo = NULL;
@@ -652,8 +732,8 @@ gnome_about_construct (GnomeAbout *about,
 		g_free(filename);
 	} else {
 		ai->logo = NULL;
-        }
-                
+	}
+	
 	gtk_widget_set_usize ( GTK_WIDGET (drawing_area), w, h);
 	gtk_widget_set_events (drawing_area, GDK_EXPOSURE_MASK);
 
@@ -661,10 +741,11 @@ gnome_about_construct (GnomeAbout *about,
 			    (GtkSignalFunc) gnome_about_repaint, (gpointer) ai);
 
 	gtk_widget_show (drawing_area);
-                                                 
+	
 	gnome_dialog_append_button ( GNOME_DIALOG(about),
 				     GNOME_STOCK_BUTTON_OK);
 
 	gnome_dialog_set_close( GNOME_DIALOG(about),
 				TRUE );
 }
+

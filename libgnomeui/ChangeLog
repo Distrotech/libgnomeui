@@ -1,3 +1,9 @@
+2000-01-05  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* gnome-about.c: Removed all the hardcoded layout constants and
+	used #define's instead. Next step is a complete rewrite using
+	GnomeCanvas.
+
 Sat Jan 01 18:58:12 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dentry-edit.c: use LC_MESSAGES category instead of LC_ALL
