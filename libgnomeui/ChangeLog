@@ -1,3 +1,10 @@
+2000-07-29  Martin Baulig  <baulig@suse.de>
+
+	* gnome-glade.c: Copied here from libglade/glade/glade-gnome.c
+	and modified for gnome-libs HEAD (the file was copied directly
+	in CVS to preserve its histroy, so don't be surprised if there's
+	no log message).
+
 2000-07-27  Martin Baulig  <baulig@suse.de>
 
 	* gnome-canvas.c (gnome_canvas_destroy): Destroy may run

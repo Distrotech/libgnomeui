@@ -23,9 +23,7 @@
 
 /* this file is only built if GNOME support is enabled */
 
-#ifdef HAVE_CONFIG_H
 #include "config.h"
-#endif
 
 #include <stdlib.h>
 #include <string.h>
@@ -33,7 +31,10 @@
 #include <glade/glade-build.h>
 #include <glade/glade-private.h>
 
-#include <gnome.h>
+#include "libgnome/libgnomeP.h"
+
+#include "libgnomeui.h"
+#include "libgnomeui/gnome-preferences.h"
 
 #ifndef ENABLE_NLS
 /* a slight optimisation when gettext is off */
@@ -586,8 +587,8 @@ pixmap_entry_build_children (GladeXML *xml, GtkWidget *w,
 		else if (!strcmp(attr->name, "title"))
 			gnome_file_entry_set_title(entry, attr->value);
 		else if (!strcmp(attr->name, "directory"))
-			gnome_file_entry_set_directory(entry,
-						       attr->value[0] == 'T');
+			gnome_file_entry_set_directory_entry(entry,
+							     attr->value[0] == 'T');
 		else if (!strcmp(attr->name, "modal"))
 			gnome_file_entry_set_modal(entry, attr->value[0]=='T');
 	}
@@ -772,12 +773,10 @@ static const gnome_map_t gnome_stock_pixmap_mapping [] = {
 	{ "CONVERT", GNOME_STOCK_PIXMAP_CONVERT },
 	{ "COPY", GNOME_STOCK_PIXMAP_COPY },
 	{ "CUT", GNOME_STOCK_PIXMAP_CUT },
-	{ "DISABLED", GNOME_STOCK_PIXMAP_DISABLED },
 	{ "DOWN", GNOME_STOCK_PIXMAP_DOWN },
 	{ "EXEC", GNOME_STOCK_PIXMAP_EXEC },
 	{ "EXIT", GNOME_STOCK_PIXMAP_QUIT },
 	{ "FIRST", GNOME_STOCK_PIXMAP_FIRST },
-	{ "FOCUSED", GNOME_STOCK_PIXMAP_FOCUSED },
 	{ "FONT", GNOME_STOCK_PIXMAP_FONT },
 	{ "FORWARD", GNOME_STOCK_PIXMAP_FORWARD },
 	{ "HELP", GNOME_STOCK_PIXMAP_HELP },
@@ -807,7 +806,6 @@ static const gnome_map_t gnome_stock_pixmap_mapping [] = {
 	{ "QUIT", GNOME_STOCK_PIXMAP_QUIT },
 	{ "REDO", GNOME_STOCK_PIXMAP_REDO },
 	{ "REFRESH", GNOME_STOCK_PIXMAP_REFRESH },
-	{ "REGULAR", GNOME_STOCK_PIXMAP_REGULAR },
 	{ "REMOVE", GNOME_STOCK_PIXMAP_REMOVE },
 	{ "REVERT", GNOME_STOCK_PIXMAP_REVERT },
 	{ "SAVE", GNOME_STOCK_PIXMAP_SAVE },
@@ -1173,11 +1171,13 @@ iconentry_new(GladeXML *xml, GladeWidgetInfo *info)
 			saved = strtol(attr->value, NULL, 0);
 	}
 	wid = gnome_icon_entry_new(hid, title);
+#ifdef FIXME
 	if (saved > 0)
 		gnome_entry_set_max_saved(
 			GNOME_ENTRY(gnome_icon_entry_gnome_entry(
 					 GNOME_ICON_ENTRY(wid))),
 			saved);
+#endif
 	return wid;
 }
 
@@ -1243,7 +1243,7 @@ file_entry_new(GladeXML *xml, GladeWidgetInfo *info)
 			modal = (attr->value[0] == 'T');
 	}
 	wid = gnome_file_entry_new(history_id, _(title));
-	gnome_file_entry_set_directory(GNOME_FILE_ENTRY(wid), directory);
+	gnome_file_entry_set_directory_entry(GNOME_FILE_ENTRY(wid), directory);
 	gnome_file_entry_set_modal(GNOME_FILE_ENTRY(wid), modal);
 	return wid;
 }
@@ -1370,8 +1370,7 @@ less_new(GladeXML *xml, GladeWidgetInfo *info)
 		GladeAttribute *attr = tmp->data;
 		
 		if (!strcmp(attr->name, "font"))
-			gnome_less_set_font(GNOME_LESS(wid),
-					    gdk_font_load(attr->value));
+			gnome_less_set_font_string(GNOME_LESS(wid),attr->value);
 	}
 	return wid;
 }
@@ -1386,12 +1385,6 @@ static GtkWidget *
 paper_selector_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	return gnome_paper_selector_new();
-}
-
-static GtkWidget *
-spell_new(GladeXML *xml, GladeWidgetInfo *info)
-{
-	return gnome_spell_new();
 }
 
 static GtkWidget *
@@ -1440,16 +1433,10 @@ canvas_new(GladeXML *xml, GladeWidgetInfo *info)
 			pixels_per_unit = g_strtod(attr->value, NULL);
 	}
 	if (aa) {
-		gtk_widget_push_colormap(gdk_rgb_get_cmap());
-		gtk_widget_push_visual(gdk_rgb_get_visual());
 		wid = gnome_canvas_new_aa();
 	} else {
-		gtk_widget_push_colormap(gdk_imlib_get_colormap());
-		gtk_widget_push_visual(gdk_imlib_get_visual());
 		wid = gnome_canvas_new();
 	}
-	gtk_widget_pop_visual();
-	gtk_widget_pop_colormap();
 	gnome_canvas_set_scroll_region(GNOME_CANVAS(wid), sx1, sy1, sx2, sy2);
 	gnome_canvas_set_pixels_per_unit(GNOME_CANVAS(wid), pixels_per_unit);
 	return wid;
@@ -1747,7 +1734,7 @@ about_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
 	GList *tmp;
-	gchar *title = gnome_app_id, *version = gnome_app_version;
+	const gchar *title = gnome_app_id, *version = gnome_app_version;
 	gchar *copyright = NULL;
 	gchar **authors = NULL;
 	gchar *comments = NULL, *logo = NULL;
@@ -1916,94 +1903,6 @@ parse_colour(GtkWidget *wid, const gchar *tuple) {
 }
 
 static GtkWidget *
-druidpagestart_new(GladeXML *xml, GladeWidgetInfo *info)
-{
-	GtkWidget *wid = gnome_druid_page_start_new();
-	GnomeDruidPageStart *page = GNOME_DRUID_PAGE_START(wid);
-	GList *tmp;
-
-	for (tmp = info->attributes; tmp; tmp = tmp->next) {
-		GladeAttribute *attr = tmp->data;
-
-		if (!strcmp(attr->name, "title"))
-			gnome_druid_page_start_set_title(page, _(attr->value));
-		else if (!strcmp(attr->name, "text"))
-			gnome_druid_page_start_set_text(page, _(attr->value));
-		else if (!strcmp(attr->name, "title_color"))
-			gnome_druid_page_start_set_title_color(page,
-					parse_colour(wid, attr->value));
-		else if (!strcmp(attr->name, "text_color"))
-			gnome_druid_page_start_set_text_color(page,
-					parse_colour(wid, attr->value));
-		else if (!strcmp(attr->name, "background_color"))
-			gnome_druid_page_start_set_bg_color(page,
-					parse_colour(wid, attr->value));
-		else if (!strcmp(attr->name, "logo_background_color"))
-			gnome_druid_page_start_set_logo_bg_color(page,
-					parse_colour(wid, attr->value));
-		else if (!strcmp(attr->name, "textbox_color"))
-			gnome_druid_page_start_set_textbox_color(page,
-					parse_colour(wid, attr->value));
-		else if (!strcmp(attr->name, "logo_image")) {
-			gchar *image =glade_xml_relative_file(xml,attr->value);
-			gnome_druid_page_start_set_logo(page,
-					gdk_imlib_load_image(image));
-			g_free(image);
-		} else if (!strcmp(attr->name, "watermark_image")) {
-			gchar *image =glade_xml_relative_file(xml,attr->value);
-			gnome_druid_page_start_set_watermark(page,
-					gdk_imlib_load_image(image));
-			g_free(image);
-		}
-	}
-	return wid;
-}
-
-static GtkWidget *
-druidpagefinish_new(GladeXML *xml, GladeWidgetInfo *info)
-{
-	GtkWidget *wid = gnome_druid_page_finish_new();
-	GnomeDruidPageFinish *page = GNOME_DRUID_PAGE_FINISH(wid);
-	GList *tmp;
-
-	for (tmp = info->attributes; tmp; tmp = tmp->next) {
-		GladeAttribute *attr = tmp->data;
-
-		if (!strcmp(attr->name, "title"))
-			gnome_druid_page_finish_set_title(page,_(attr->value));
-		else if (!strcmp(attr->name, "text"))
-			gnome_druid_page_finish_set_text(page, _(attr->value));
-		else if (!strcmp(attr->name, "title_color"))
-			gnome_druid_page_finish_set_title_color(page,
-					parse_colour(wid, attr->value));
-		else if (!strcmp(attr->name, "text_color"))
-			gnome_druid_page_finish_set_text_color(page,
-					parse_colour(wid, attr->value));
-		else if (!strcmp(attr->name, "background_color"))
-			gnome_druid_page_finish_set_bg_color(page,
-					parse_colour(wid, attr->value));
-		else if (!strcmp(attr->name, "logo_background_color"))
-			gnome_druid_page_finish_set_logo_bg_color(page,
-					parse_colour(wid, attr->value));
-		else if (!strcmp(attr->name, "textbox_color"))
-			gnome_druid_page_finish_set_textbox_color(page,
-					parse_colour(wid, attr->value));
-		else if (!strcmp(attr->name, "logo_image")) {
-			gchar *image =glade_xml_relative_file(xml,attr->value);
-			gnome_druid_page_finish_set_logo(page,
-					gdk_imlib_load_image(image));
-			g_free(image);
-		} else if (!strcmp(attr->name, "watermark_image")) {
-			gchar *image =glade_xml_relative_file(xml,attr->value);
-			gnome_druid_page_finish_set_watermark(page,
-					gdk_imlib_load_image(image));
-			g_free(image);
-		}
-	}
-	return wid;
-}
-
-static GtkWidget *
 druidpagestandard_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid = gnome_druid_page_standard_new();
@@ -2028,7 +1927,7 @@ druidpagestandard_new(GladeXML *xml, GladeWidgetInfo *info)
 		else if (!strcmp(attr->name, "logo_image")) {
 			gchar *image =glade_xml_relative_file(xml,attr->value);
 			gnome_druid_page_standard_set_logo(page,
-					gdk_imlib_load_image(image));
+					gdk_pixbuf_new_from_file(image));
 			g_free(image);
 		}
 	}
@@ -2055,7 +1954,6 @@ static const GladeWidgetBuildData widget_data [] = {
 	{ "GnomeLess",          less_new,           NULL },
 	{ "GnomeCalculator",    calculator_new,     NULL },
 	{ "GnomePaperSelector", paper_selector_new, NULL },
-	{ "GnomeSpell",         spell_new,          NULL },
 	{ "GtkDial",            dial_new,           NULL },
 	{ "GnomeCanvas",        canvas_new,         NULL },
 	{ "GnomeIconList",      iconlist_new,       NULL },
@@ -2077,8 +1975,6 @@ static const GladeWidgetBuildData widget_data [] = {
 	{ "GnomePropertyBox",   propbox_new,        propbox_build_children},
 
 	{ "GnomeDruid",         druid_new,          druid_build_children},
-	{ "GnomeDruidPageStart",druidpagestart_new, NULL },
-	{ "GnomeDruidPageFinish", druidpagefinish_new, NULL },
 	{ "GnomeDruidPageStandard", druidpagestandard_new,
 	  druidpage_build_children},
 	{ NULL, NULL, NULL }
