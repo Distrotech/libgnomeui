@@ -88,6 +88,7 @@
 #include "libgnomeui/gnome-druid-page-start.h"
 #include "libgnomeui/gnome-druid-page-standard.h"
 #include "libgnomeui/gnome-druid-page-finish.h"
+#include "libgnomeui/oafgnome.h"
 
 #define GNOMEUI_INIT LIBGNOMEUI_INIT,GNOME_CLIENT_INIT
 

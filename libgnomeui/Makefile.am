@@ -6,7 +6,7 @@ SUBDIRS = pixmaps
 # The targets
 #
 noinst_PROGRAMS = stock_demo winhints_demo animator_demo dock_demo
-bin_PROGRAMS    = gnome_segv
+bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap
 lib_LTLIBRARIES = libgnomeui.la
 
 if COMPILE_GNOME_COMPAT
@@ -18,15 +18,47 @@ endif
 #
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
-INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) \
-	-I$(top_srcdir)/intl -I$(top_builddir)/intl \
-	-I$(includedir) $(GDK_IMLIB_CFLAGS) \
-        -DGNOMELIBDIR=\""$(libdir)"\" \
-        -DGNOMEDATADIR=\""$(datadir)"\" \
-        -DGNOMEBINDIR=\""$(bindir)"\" \
-        -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" \
-        -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" \
-	-DG_LOG_DOMAIN=\"GnomeUI\"
+INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) 		\
+	-I$(top_srcdir)/oaf -I$(top_builddir)/oaf	\
+	-I$(top_srcdir)/intl -I$(top_builddir)/intl 	\
+	$(GDK_IMLIB_CFLAGS)				\
+        -DGNOMELIBDIR=\""$(libdir)"\" 			\
+        -DGNOMEDATADIR=\""$(datadir)"\" 		\
+        -DGNOMEBINDIR=\""$(bindir)"\" 			\
+        -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" 	\
+        -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" 	\
+	-DG_LOG_DOMAIN=\"GnomeUI\"			\
+	$(GTK_CFLAGS) $(ORBIT_CFLAGS)			\
+	-DVERSION=\"$(VERSION)\"
+
+gnome_factory_built=\
+	gnome-factory.h 				\
+	gnome-factory-skels.c 				\
+	gnome-factory-stubs.c 				\
+	gnome-factory-common.c
+
+gnome_unknown_built = \
+	gnome-unknown.h					\
+	gnome-unknown-skels.c				\
+	gnome-unknown-stubs.c				\
+	gnome-unknown-common.c
+
+history_db_built = \
+	HistoryDB.h \
+	HistoryDB-stubs.c \
+	HistoryDB-skels.c \
+	HistoryDB-common.c
+
+$(gnome_factory_built): $(top_srcdir)/idl/gnome-factory.idl
+	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/gnome-factory.idl
+
+$(gnome_unknown_built): $(top_srcdir)/idl/gnome-unknown.idl
+	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/gnome-unknown.idl
+
+$(history_db_built): $(top_srcdir)/idl/HistoryDB.idl
+	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/HistoryDB.idl
+
+gnorba_built = $(gnome_factory_built) $(gnome_unknown_built) $(history_db_built)
 
 if COMPILE_GNOME_COMPAT
 libgnomeui10compatincludedir = $(includedir)/libgnomeui/compat10
@@ -120,7 +152,9 @@ libgnomeui_la_SOURCES = \
 	gnometypes.c			\
 	gtk-clock.c			\
 	gtkdial.c			\
-	gtkpixmapmenuitem.c
+	gtkpixmapmenuitem.c		\
+	oafgnome.c			\
+	$(gnorba_built)
 
 ## this lists all the non-generated headers
 gnome_headers = \
@@ -194,18 +228,29 @@ gnome_headers = \
 	gtkdial.h			\
 	gtk-clock.h			\
 	gtkpixmapmenuitem.h		\
-	libgnomeui.h
+	libgnomeui.h			\
+	oafgnome.h
 
-libgnomeuiinclude_HEADERS = \
-	$(gnome_headers)	\
+libgnomeuiinclude_HEADERS =		\
+	$(gnome_headers)		\
+	gnome-unknown.h			\
+	gnome-factory.h			\
+	HistoryDB.h			\
 	gnometypebuiltins.h
 
+ORBIT_IDL=orbit-idl
+
+IDL_FLAGS=-D__LIBOAFGNOME_COMPILATION
+
+gnome_remote_bootstrap_SOURCES=gnome-remote-bootstrap.c
+gnome_remote_bootstrap_LDADD=../libgnome/libgnome.la
 
 BUILT_SOURCES = \
 	gnometypebuiltins.h		\
 	gnometypebuiltins_evals.c	\
 	gnometypebuiltins_ids.c		\
-	gnometypebuiltins_vars.c
+	gnometypebuiltins_vars.c	\
+	$(gnorba_built)
 
 # generate gnome.defs file from gnome-boxed.defs and *.h
 gnome.defs: @REBUILD@ makeenums.pl gnome-boxed.defs $(gnome_headers)
@@ -268,22 +313,28 @@ EXTRA_DIST =					\
 	gnometypebuiltins_ids.c			\
 	gnometypebuiltins_evals.c
 
-libgnomeui_la_LDFLAGS = -version-info 43:0:0 -rpath $(libdir)
+libgnomeui_la_LDFLAGS = -version-info 43:0:0 -rpath $(libdir) \
+		-L`cd $(top_builddir); pwd`/oaf/liboaf/.libs -loaf \
+		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome \
+		-L`cd $(top_builddir); pwd`/libart_lgpl/.libs -lart_lgpl \
+		$(LIBGNOMEUI_LIBS)
 libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 gnome_segv_LDADD =	\
 	libgnomeui.la 					\
-	$(top_builddir)/libgnome/libgnome.la 		\
-	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
+
+#	$(top_builddir)/libgnome/libgnome.la 		\
+#	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+#	$(LIBGNOMEUI_LIBS)
 
 stock_demo_LDADD =	\
 	libgnomeui.la 					\
-	$(top_builddir)/libgnome/libgnome.la 		\
-	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
+
+#	$(top_builddir)/libgnome/libgnome.la 		\
+#	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+#	$(LIBGNOMEUI_LIBS)
 
 winhints_demo_LDADD =	\
 	libgnomeui.la 					\
