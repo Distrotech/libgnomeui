@@ -189,20 +189,57 @@ void
 gnome_entry_construct (GnomeEntry *gentry, 
 		       const gchar *history_id)
 {
+	guint32 flags;
+
 	g_return_if_fail (gentry != NULL);
 
 	gentry->_priv->history_id = g_strdup (history_id);
-	gentry->_priv->combo = gtk_combo_new ();
-	gentry->_priv->entry = GTK_COMBO (gentry->_priv->combo)->entry;
 
-	gtk_combo_disable_activate (GTK_COMBO (gentry->_priv->combo));
-	gtk_combo_set_case_sensitive (GTK_COMBO (gentry->_priv->combo), TRUE);
+	flags = GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET;
 
-	gtk_signal_connect (GTK_OBJECT (gentry->_priv->entry),
-			    "activate", entry_activated_cb, gentry);
+	gnome_entry_construct_full (gentry, history_id, NULL, 
+				    gentry->_priv->combo, NULL, NULL,
+				    flags);
+}
 
-	gnome_selector_construct (GNOME_SELECTOR (gentry), history_id, NULL,
-				  gentry->_priv->combo, NULL, NULL, 0);
+void
+gnome_entry_construct_full (GnomeEntry *gentry,
+			    const gchar *history_id,
+			    const gchar *dialog_title,
+			    GtkWidget *entry_widget,
+			    GtkWidget *selector_widget,
+			    GtkWidget *browse_dialog,
+			    guint32 flags)
+{
+	g_return_if_fail (gentry != NULL);
+
+	/* Create the default selector widget if requested. */
+	if (flags & GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET) {
+		if (entry_widget != NULL) {
+			g_warning (G_STRLOC ": It makes no sense to use "
+				   "GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET "
+				   "and pass a `entry_widget' as well.");
+			return;
+		}
+
+		entry_widget = gtk_combo_new ();
+
+		gentry->_priv->combo = entry_widget;
+		gentry->_priv->entry = GTK_COMBO (entry_widget)->entry;
+
+		gtk_combo_disable_activate (GTK_COMBO (entry_widget));
+		gtk_combo_set_case_sensitive (GTK_COMBO (entry_widget), TRUE);
+
+		gtk_signal_connect (GTK_OBJECT (gentry->_priv->entry),
+				    "activate", entry_activated_cb, gentry);
+
+		flags &= ~GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET;
+	}
+
+	gnome_selector_construct (GNOME_SELECTOR (gentry),
+				  history_id, dialog_title,
+				  entry_widget, selector_widget,
+				  browse_dialog, flags);
 }
 
 
@@ -352,6 +389,8 @@ entry_activated_cb (GtkWidget *widget, gpointer data)
 	gnome_selector_activate_entry (GNOME_SELECTOR (data));
 }
 
+
+#ifndef GNOME_EXCLUDE_DEPRECATED
 
 /**
  * gnome_entry_gtk_entry
@@ -567,3 +606,5 @@ gnome_entry_save_history (GnomeEntry *gentry)
 
 	gnome_selector_save_history (GNOME_SELECTOR (gentry));
 }
+
+#endif /* not GNOME_EXCLUDE_DEPRECATED */
