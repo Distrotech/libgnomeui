@@ -1,3 +1,4 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * GnomeApp widget (C) 1998 Red Hat Software, The Free Software Foundation,
  * Miguel de Icaza, Federico Menu, Chris Toshok.
@@ -60,16 +61,22 @@ struct _GnomeApp {
 	char *name;			/* Application name */
 	char *prefix;			/* Prefix for gnome-config */
 
+        /* FIXME: Most of this stuff will have to be removed.  */
 	GtkWidget *menubar;		/* The Menubar */
 	GtkWidget *toolbar;		/* The Toolbar */
         GtkWidget *statusbar;		/* The Statusbar */
-	GtkWidget *contents;		/* The contents */
-	GtkWidget *table;		/* The table widget that ties them all */
+	GtkWidget *contents;		/* The contents (dock->client_area) */
+
+	GtkWidget *vbox;	        /* The vbox widget that ties them all */
 
 	GtkAccelGroup *accel_group;	/* Main accelerator group for this window (hotkeys live here)*/
 
+        /* FIXME: this will be removed.  */
 	/* Positions for the menubar and the toolbar */
 	GnomeAppWidgetPositionType pos_menubar, pos_toolbar;
+
+        /* The main dock widget.  */
+        GtkWidget *dock;
 };
 
 struct _GnomeAppClass {

@@ -46,72 +46,84 @@
 
 
 
-static void gnome_dock_class_init (GnomeDockClass *class);
-static void gnome_dock_init (GnomeDock *app);
-static void gnome_dock_destroy (GtkObject *object);
-static void gnome_dock_size_request (GtkWidget *widget,
-                                     GtkRequisition *requisition);
-static void gnome_dock_size_allocate (GtkWidget *widget,
-                                      GtkAllocation *allocation);
-static void gnome_dock_map (GtkWidget *widget);
-static void gnome_dock_draw (GtkWidget *widget,
-                             GdkRectangle *area);
-static gint gnome_dock_expose (GtkWidget *widget,
-                               GdkEventExpose *event);
-static void gnome_dock_add (GtkContainer *container,
-                            GtkWidget *child);
-static void gnome_dock_remove (GtkContainer *container,
-                               GtkWidget *widget);
+static void     gnome_dock_class_init    (GnomeDockClass *class);
+static void     gnome_dock_init          (GnomeDock *app);
+static void     gnome_dock_size_request  (GtkWidget *widget,
+                                          GtkRequisition *requisition);
+static void     gnome_dock_size_allocate (GtkWidget *widget,
+                                          GtkAllocation *allocation);
+static void     gnome_dock_map           (GtkWidget *widget);
+static void     gnome_dock_draw          (GtkWidget *widget,
+                                          GdkRectangle *area);
+static gint     gnome_dock_expose        (GtkWidget *widget,
+                                          GdkEventExpose *event);
+static void     gnome_dock_add           (GtkContainer *container,
+                                          GtkWidget *child);
+static void     gnome_dock_remove        (GtkContainer *container,
+                                          GtkWidget *widget);
+static void     gnome_dock_forall        (GtkContainer *container,
+                                          gboolean include_internals,
+                                          GtkCallback callback,
+                                          gpointer callback_data);
+    
+static void     size_request_v           (GList *list,
+                                          GtkRequisition *requisition);
+static void     size_request_h           (GList *list,
+                                          GtkRequisition *requisition);
+static gint     size_allocate_v          (GList *list,
+                                          gint start_x, gint start_y,
+                                          guint width, gint direction);
+static gint     size_allocate_h          (GList *list,
+                                          gint start_x, gint start_y,
+                                          guint width, gint direction);
+static void     map_widget               (GtkWidget *w);
+static void     map_widget_foreach       (gpointer data,
+                                          gpointer user_data);
+static void     map_band_list            (GList *list);
+static void     draw_widget              (GtkWidget *widget,
+                                          GdkRectangle *area);
+static void     draw_band_list           (GList *list,
+                                          GdkRectangle *area);
+static void     expose_widget            (GtkWidget *widget,
+                                          GdkEventExpose *event);
+static void     expose_band_list         (GList *list,
+                                          GdkEventExpose *event);
+static gboolean remove_from_band_list    (GList **list,
+                                          GnomeDockBand *child);
+static void     forall_helper            (GList *list,
+                                          GtkCallback callback,
+                                          gpointer callback_data);
 
-static void size_request_v (GList *list,
-                            GtkRequisition *requisition);
-static void size_request_h (GList *list,
-                            GtkRequisition *requisition);
-static gint size_allocate_v (GList *list,
-                             gint start_x, gint start_y,
-                             guint width, gint direction);
-static gint size_allocate_h (GList *list, gint start_x, gint start_y,
-                             guint width, gint direction);
-static void map_widget (GtkWidget *w);
-static void map_list (GList *list);
-static void draw_widget (GtkWidget *widget,
-                         GdkRectangle *area);
-static void draw_list (GList *list,
-                       GdkRectangle *area);
-static void expose_widget (GtkWidget *widget,
-                           GdkEventExpose *event);
-static void expose_list (GList *list,
-                         GdkEventExpose *event);
-static gboolean remove_from_band_list (GList **list,
-                                       GtkWidget *child);
-
-static void drag_begin_foreach_func (gpointer data,
-                                     gpointer user_data);
-static void drag_begin (GtkWidget *widget,
-                        gpointer data);
-static void drag_end_bands (GList **list,
-                            GnomeDockItem *item);
-static void drag_end (GtkWidget *widget,
-                      gpointer data);
-static void drag_new (GnomeDock *dock,
-                      GnomeDockItem *item,
-                      GList **area,
-                      GList *where,
-                      gint x, gint y,
-                      gboolean is_vertical);
-static void drag_to (GnomeDock *dock,
-                     GnomeDockItem *item,
-                     GList *where,
-                     gint x, gint y,
-                     gboolean is_vertical);
-static void drag_floating (GnomeDock *dock, GnomeDockItem *item,
-                           gint x, gint y);
-static gboolean drag_check (GnomeDock *dock, GnomeDockItem *item,
-                            GList **area,
-                            gint x, gint y,
-                            gboolean is_vertical);
-static void drag_motion (GtkWidget *widget, gint x, gint y,
-                         gpointer data);
+static void     drag_begin_foreach_func  (gpointer data,
+                                          gpointer user_data);
+static void     drag_begin               (GtkWidget *widget,
+                                          gpointer data);
+static void     drag_end_bands           (GList **list,
+                                          GnomeDockItem *item);
+static void     drag_end                 (GtkWidget *widget,
+                                          gpointer data);
+static void     drag_new                 (GnomeDock *dock,
+                                          GnomeDockItem *item,
+                                          GList **area,
+                                          GList *where,
+                                          gint x, gint y,
+                                          gboolean is_vertical);
+static void     drag_to                  (GnomeDock *dock,
+                                          GnomeDockItem *item,
+                                          GList *where,
+                                          gint x, gint y,
+                                          gboolean is_vertical);
+static void     drag_floating            (GnomeDock *dock,
+                                          GnomeDockItem *item,
+                                          gint x, gint y);
+static gboolean drag_check               (GnomeDock *dock,
+                                          GnomeDockItem *item,
+                                          GList **area,
+                                          gint x, gint y,
+                                          gboolean is_vertical);
+static void     drag_motion              (GtkWidget *widget,
+                                          gint x, gint y,
+                                          gpointer data);
 
 
 
@@ -132,8 +144,6 @@ gnome_dock_class_init (GnomeDockClass *class)
 
   parent_class = gtk_type_class (gtk_container_get_type ());
 
-  object_class->destroy = gnome_dock_destroy;
-
   widget_class->size_request = gnome_dock_size_request;
   widget_class->size_allocate = gnome_dock_size_allocate;
   widget_class->map = gnome_dock_map;
@@ -142,6 +152,7 @@ gnome_dock_class_init (GnomeDockClass *class)
 
   container_class->add = gnome_dock_add;
   container_class->remove = gnome_dock_remove;
+  container_class->forall = gnome_dock_forall;
 }
 
 static void
@@ -151,44 +162,12 @@ gnome_dock_init (GnomeDock *dock)
 
   dock->client_area = NULL;
 
-  dock->undocked_children = NULL;
   dock->top_bands = NULL;
   dock->bottom_bands = NULL;
   dock->right_bands = NULL;
   dock->left_bands = NULL;
-}
 
-
-
-static void
-destroy_foreach_func (gpointer data, gpointer user_data)
-{
-  GnomeDockChild *child;
-  GtkWidget *w;
-
-  child = (GnomeDockChild *) data;
-  w = GTK_WIDGET (child->band);
-
-  gtk_widget_ref (w);
-  gtk_widget_unparent (w);
-  gtk_widget_destroy (w);
-  gtk_widget_unref (w);
-}
-
-static void
-gnome_dock_destroy (GtkObject *object)
-{
-  GnomeDock *dock;
-
-  dock = GNOME_DOCK (object);
-  g_list_foreach (dock->top_bands, destroy_foreach_func, NULL);
-  g_list_foreach (dock->bottom_bands, destroy_foreach_func, NULL);
-  g_list_foreach (dock->right_bands, destroy_foreach_func, NULL);
-  g_list_foreach (dock->left_bands, destroy_foreach_func, NULL);
-  g_list_foreach (dock->undocked_children, destroy_foreach_func, NULL);
-
-  if (GTK_OBJECT_CLASS (parent_class)->destroy != NULL)
-    (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+  dock->undocked_children = NULL;
 }
 
 
@@ -388,7 +367,14 @@ map_widget (GtkWidget *w)
 }
 
 static void
-map_list (GList *list)
+map_widget_foreach (gpointer data,
+                    gpointer user_data)
+{
+  map_widget (GTK_WIDGET (data));
+}
+
+static void
+map_band_list (GList *list)
 {
   while (list != NULL)
     {
@@ -415,12 +401,12 @@ gnome_dock_map (GtkWidget *widget)
 
   map_widget (dock->client_area);
 
-  map_list (dock->top_bands);
-  map_list (dock->bottom_bands);
-  map_list (dock->left_bands);
-  map_list (dock->right_bands);
+  map_band_list (dock->top_bands);
+  map_band_list (dock->bottom_bands);
+  map_band_list (dock->left_bands);
+  map_band_list (dock->right_bands);
 
-  map_list (dock->undocked_children);
+  g_list_foreach (dock->undocked_children, map_widget_foreach, NULL);
 }
 
 
@@ -435,7 +421,7 @@ draw_widget (GtkWidget *widget, GdkRectangle *area)
 }
 
 static void
-draw_list (GList *list, GdkRectangle *area)
+draw_band_list (GList *list, GdkRectangle *area)
 {
   while (list != NULL)
     {
@@ -461,10 +447,10 @@ gnome_dock_draw (GtkWidget *widget, GdkRectangle *area)
 
       draw_widget (dock->client_area, area);
 
-      draw_list (dock->top_bands, area);
-      draw_list (dock->bottom_bands, area);
-      draw_list (dock->left_bands, area);
-      draw_list (dock->right_bands, area);
+      draw_band_list (dock->top_bands, area);
+      draw_band_list (dock->bottom_bands, area);
+      draw_band_list (dock->left_bands, area);
+      draw_band_list (dock->right_bands, area);
     }
 }
 
@@ -484,7 +470,7 @@ expose_widget (GtkWidget *widget, GdkEventExpose *event)
 }
 
 static void
-expose_list (GList *list, GdkEventExpose *event)
+expose_band_list (GList *list, GdkEventExpose *event)
 {
   while (list != NULL)
     {
@@ -508,10 +494,10 @@ gnome_dock_expose (GtkWidget *widget, GdkEventExpose *event)
 
       expose_widget (dock->client_area, event);
 
-      expose_list (dock->top_bands, event);
-      expose_list (dock->bottom_bands, event);
-      expose_list (dock->left_bands, event);
-      expose_list (dock->right_bands, event);
+      expose_band_list (dock->top_bands, event);
+      expose_band_list (dock->bottom_bands, event);
+      expose_band_list (dock->left_bands, event);
+      expose_band_list (dock->right_bands, event);
     }
 
   return FALSE;
@@ -527,13 +513,11 @@ gnome_dock_add (GtkContainer *container, GtkWidget *child)
   GnomeDock *dock;
 
   dock = GNOME_DOCK (container);
-  gnome_dock_add_item (dock, child, GNOME_DOCK_POS_TOP, 0, 0, 0);
+  gnome_dock_add_item (dock, child, GNOME_DOCK_POS_TOP, 0, 0, 0, TRUE);
 }
 
-/* Helper for the `remove' method: search for `child' in `list' and,
-   if found, remove it and return TRUE.  Otherwise, return FALSE.  */
 static gboolean
-remove_from_band_list (GList **list, GtkWidget *child)
+remove_from_band_list (GList **list, GnomeDockBand *child)
 {
   GList *lp;
 
@@ -542,17 +526,11 @@ remove_from_band_list (GList **list, GtkWidget *child)
       GnomeDockChild *c;
 
       c = (GnomeDockChild *) lp->data;
-      if (c->band == GNOME_DOCK_BAND (child))
+      if (c->band == child)
         {
-          GList *next;
-          gboolean was_visible;
-
-          was_visible = GTK_WIDGET_VISIBLE (child);
-          gtk_widget_unparent (child);
-
-          next = lp->next;
+          gtk_widget_unparent (GTK_WIDGET (child));
           *list = g_list_remove_link (*list, lp);
-          g_free (lp->data);
+          g_free (c);
           g_list_free (lp);
 
           return TRUE;
@@ -575,22 +553,97 @@ gnome_dock_remove (GtkContainer *container, GtkWidget *widget)
       dock->client_area = NULL;
       gtk_widget_queue_resize (GTK_WIDGET (dock));
     }
-  else if (! GNOME_IS_DOCK_BAND (widget))
-    {
-      /* FIXME: This is wrong.  */
-      widget->parent = NULL;
-    }
   else
     {
-      if (remove_from_band_list (&dock->top_bands, widget)
-          || remove_from_band_list (&dock->bottom_bands, widget)
-          || remove_from_band_list (&dock->left_bands, widget)
-          || remove_from_band_list (&dock->right_bands, widget))
-        {
-          gtk_widget_queue_resize (GTK_WIDGET (dock));
-          return;
-        }
+      /* Check if it's a detached child.  */
+      {
+        GList *lp;
+
+        lp = dock->undocked_children;
+        while (lp != NULL)
+          {
+            GtkWidget *w;
+
+            w = lp->data;
+            if (w == widget)
+              {
+                gtk_widget_unparent (w);
+                dock->undocked_children
+                  = g_list_remove_link (dock->undocked_children, lp);
+                g_list_free (lp);
+                return;
+              }
+
+            lp = lp->next;
+          }
+      }
+
+      /* Then it must be one of the bands.  */
+      {
+        GnomeDockBand *band;
+
+        g_return_if_fail (GNOME_IS_DOCK_BAND (widget));
+
+        band = GNOME_DOCK_BAND (widget);
+        if (remove_from_band_list (&dock->top_bands, band)
+            || remove_from_band_list (&dock->bottom_bands, band)
+            || remove_from_band_list (&dock->left_bands, band)
+            || remove_from_band_list (&dock->right_bands, band))
+          {
+            gtk_widget_queue_resize (GTK_WIDGET (dock));
+            return;
+          }
+      }
     }
+}
+
+static void
+forall_helper (GList *list,
+               GtkCallback callback,
+               gpointer callback_data)
+{
+  while (list != NULL)
+    {
+      GnomeDockChild *c;
+
+      c = list->data;
+      list = list->next;
+      (* callback) (GTK_WIDGET (c->band), callback_data);
+    }
+}
+
+static void
+gnome_dock_forall (GtkContainer *container,
+                   gboolean include_internals,
+                   GtkCallback callback,
+                   gpointer callback_data)
+{
+  GnomeDock *dock;
+  GList *lp;
+
+  g_return_if_fail (container != NULL);
+  g_return_if_fail (GNOME_IS_DOCK (container));
+  g_return_if_fail (callback != NULL);
+
+  dock = GNOME_DOCK (container);
+
+  forall_helper (dock->top_bands, callback, callback_data);
+  forall_helper (dock->bottom_bands, callback, callback_data);
+  forall_helper (dock->left_bands, callback, callback_data);
+  forall_helper (dock->right_bands, callback, callback_data);
+
+  lp = dock->undocked_children;
+  while (lp != NULL)
+    {
+      GtkWidget *w;
+
+      w = lp->data;
+      lp = lp->next;
+      (* callback) (w, callback_data);
+    }
+
+  if (dock->client_area != NULL)
+    (* callback) (dock->client_area, callback_data);
 }
 
 
@@ -723,11 +776,20 @@ drag_floating (GnomeDock *dock,
 
   if (item_widget->parent != dock_widget)
     {
+      GnomeDockChild *new;
+
       /* The item is currently not floating (so it is not our child).
          Make it so.  */
+      
+      gtk_widget_ref (item_widget);
+
       gnome_dock_item_detach (item, x, y);
       gtk_container_remove (GTK_CONTAINER (item_widget->parent), item_widget);
       gtk_widget_set_parent (item_widget, dock_widget);
+      dock->undocked_children = g_list_prepend (dock->undocked_children,
+                                                item);
+
+      gtk_widget_unref (item_widget);
     }
   else
     {
@@ -1043,7 +1105,8 @@ gnome_dock_add_item (GnomeDock *dock,
                      GnomeDockPositionType edge,
                      guint band_num,
                      guint offset,
-                     gint position)
+                     gint position,
+                     gboolean in_new_band)
 {
   GnomeDockChild *c;
   GList **band_ptr;
@@ -1059,10 +1122,10 @@ gnome_dock_add_item (GnomeDock *dock,
       break;
     case GNOME_DOCK_POS_LEFT:
       band_ptr = &dock->left_bands;
-      return;
+      break;
     case GNOME_DOCK_POS_RIGHT:
       band_ptr = &dock->right_bands;
-      return;
+      break;
     case GNOME_DOCK_POS_DETACHED:
       g_warning ("Detached dock items not supported (yet).");
       return;
@@ -1072,8 +1135,7 @@ gnome_dock_add_item (GnomeDock *dock,
     }
 
   p = g_list_nth (*band_ptr, band_num);
-
-  if (p == NULL)
+  if (in_new_band || p == NULL)
     {
       GtkWidget *new_band;
       GnomeDockChild *new_child;
@@ -1084,8 +1146,19 @@ gnome_dock_add_item (GnomeDock *dock,
       new_child->band = GNOME_DOCK_BAND (new_band);
       new_child->new_for_drag = FALSE;
 
-      *band_ptr = g_list_append (*band_ptr, new_child);
-      p = g_list_last (*band_ptr); /* FIXME slow */
+      /* FIXME: slow.  */
+      if (in_new_band)
+        {
+          *band_ptr = g_list_insert (*band_ptr, new_child, band_num);
+          p = g_list_nth (*band_ptr, band_num);
+          if (p == NULL)
+            p = g_list_last (*band_ptr);
+        }
+      else
+        {
+          *band_ptr = g_list_append (*band_ptr, new_child);
+          p = g_list_last (*band_ptr);
+        }
 
       gtk_widget_set_parent (new_band, GTK_WIDGET (dock));
       gtk_widget_show (new_band);
@@ -1111,22 +1184,39 @@ void
 gnome_dock_set_client_area (GnomeDock *dock, GtkWidget *widget)
 {
   g_return_if_fail (dock != NULL);
-  g_return_if_fail (dock->client_area == NULL);
 
-  gtk_widget_set_parent (widget, GTK_WIDGET (dock));
-  dock->client_area = widget;
+  if (widget != NULL)
+      gtk_widget_ref (widget);
 
-  if (GTK_WIDGET_VISIBLE (widget->parent))
+  if (dock->client_area != NULL)
+    gtk_widget_unparent (dock->client_area);
+
+  if (widget != NULL)
     {
-      if (GTK_WIDGET_REALIZED (widget->parent) &&
-	  !GTK_WIDGET_REALIZED (widget))
-	gtk_widget_realize (widget);
+      gtk_widget_set_parent (widget, GTK_WIDGET (dock));
+      dock->client_area = widget;
+
+      if (GTK_WIDGET_VISIBLE (widget->parent))
+        {
+          if (GTK_WIDGET_REALIZED (widget->parent) &&
+              !GTK_WIDGET_REALIZED (widget))
+            gtk_widget_realize (widget);
       
-      if (GTK_WIDGET_MAPPED (widget->parent) &&
-	  !GTK_WIDGET_MAPPED (widget))
-	gtk_widget_map (widget);
-    }
+          if (GTK_WIDGET_MAPPED (widget->parent) &&
+              !GTK_WIDGET_MAPPED (widget))
+            gtk_widget_map (widget);
+        }
   
-  if (GTK_WIDGET_VISIBLE (widget) && GTK_WIDGET_VISIBLE (dock))
-    gtk_widget_queue_resize (widget);
+      if (GTK_WIDGET_VISIBLE (widget) && GTK_WIDGET_VISIBLE (dock))
+        gtk_widget_queue_resize (widget);
+    }
+  else
+    {
+      if (dock->client_area != NULL && GTK_WIDGET_VISIBLE (dock))
+        gtk_widget_queue_resize (GTK_WIDGET (dock));
+      dock->client_area = NULL;
+    }
+
+  if (widget != NULL)
+    gtk_widget_unref (widget);
 }

@@ -1,3 +1,4 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * GnomeApp widget (C) 1998 Red Hat Software, The Free Software Foundation,
  * Miguel de Icaza, Federico Menu, Chris Toshok.
@@ -10,6 +11,9 @@
  * Even more changes by Federico Mena.
  *
  * Toolbar separators and configurable relief by Andrew Veliath.
+ *
+ * Half-rewritten by Ettore Perazzoli to support GnomeDock.
+ *
  */
 
 #include "config.h"
@@ -21,6 +25,8 @@
 #include "libgnome/gnome-config.h"
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-preferences.h"
+#include "libgnomeui/gnome-dock.h"
+
 #include "gnome-app.h"
 
 static void gnome_app_class_init (GnomeAppClass *class);
@@ -97,16 +103,21 @@ gnome_app_class_init (GnomeAppClass *class)
 static void
 gnome_app_init (GnomeApp *app)
 {
-	app->table = gtk_table_new (4, 3, FALSE);
-	gtk_container_add (GTK_CONTAINER (app), app->table);
-	gtk_widget_show (app->table);
-
 	app->accel_group = gtk_accel_group_new ();
 	gtk_window_add_accel_group (GTK_WINDOW (app), app->accel_group);
 	
 	app->pos_menubar = app->pos_toolbar = GNOME_APP_POS_TOP;
-}
 
+	app->vbox = gtk_vbox_new (FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (app), app->vbox);
+
+	app->dock = gnome_dock_new ();
+	gtk_box_pack_start (GTK_BOX (app->vbox), app->dock,
+			    TRUE, TRUE, 0);
+
+	gtk_widget_show (app->dock);
+	gtk_widget_show (app->vbox);
+}
 
 /**
  * gnome_app_new
@@ -175,6 +186,7 @@ gnome_app_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+#if 0
 /* Rearranges the children of the application window to their newly- configured positions */
 static void
 gnome_app_configure_positions (GnomeApp *app)
@@ -251,7 +263,7 @@ gnome_app_configure_positions (GnomeApp *app)
 	if (app->contents)
 		gnome_app_set_contents(app, app->contents);
 }
-
+#endif
 
 /**
  * gnome_app_menu_set_position
@@ -268,6 +280,7 @@ gnome_app_configure_positions (GnomeApp *app)
 void
 gnome_app_menu_set_position (GnomeApp *app, GnomeAppWidgetPositionType pos_menubar)
 {
+#if 0
 	g_return_if_fail (app != NULL);
 	g_return_if_fail (GNOME_IS_APP (app));
 	g_return_if_fail (app->menubar != NULL);
@@ -283,6 +296,9 @@ gnome_app_menu_set_position (GnomeApp *app, GnomeAppWidgetPositionType pos_menub
 	gnome_config_set_string ("Placement/Menu", locations [pos_menubar]);
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
+#else
+	g_message ("gnome_app_menu_set_position is deprecated.");
+#endif
 }
 
 
@@ -301,6 +317,7 @@ gnome_app_menu_set_position (GnomeApp *app, GnomeAppWidgetPositionType pos_menub
 void
 gnome_app_toolbar_set_position (GnomeApp *app, GnomeAppWidgetPositionType pos_toolbar)
 {
+#if 0
 	g_return_if_fail (app != NULL);
 	g_return_if_fail (GNOME_IS_APP (app));
 	g_return_if_fail (app->toolbar != NULL);
@@ -321,6 +338,9 @@ gnome_app_toolbar_set_position (GnomeApp *app, GnomeAppWidgetPositionType pos_to
 	gnome_config_set_string ("Placement/Toolbar", locations [pos_toolbar]);
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
+#else
+	g_message ("gnome_app_toolbar_set_position is deprecated.");
+#endif
 }
 
 /* These are used for knowing where to pack the contents into the
@@ -365,34 +385,18 @@ gnome_app_set_contents (GnomeApp *app, GtkWidget *contents)
 {
 	g_return_if_fail (app != NULL);
 	g_return_if_fail (GNOME_IS_APP(app));
+	g_return_if_fail (app->dock != NULL);
 
-	/* We ref the contents in case app->contents == contents, so that the container_remove will
-	 * not destroy the widget.
-	 */
+	gnome_dock_set_client_area (GNOME_DOCK (app->dock), contents);
 
-	if (contents)
-		gtk_widget_ref (contents);
-
-	if (app->contents != NULL)
-		gtk_container_remove (GTK_CONTAINER (app->table), app->contents);
-
-	if (contents) {
-		gtk_table_attach (GTK_TABLE (app->table),
-				  contents,
-				  startxs[app->pos_menubar][app->pos_toolbar],
-				  endxs[app->pos_menubar][app->pos_toolbar],
-				  startys[app->pos_menubar][app->pos_toolbar],
-				  endys[app->pos_menubar][app->pos_toolbar],
-				  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
-				  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
-				  0, 0);
+	if (contents != NULL)
 		gtk_widget_show (contents);
-		gtk_widget_unref (contents);
-	}
 
 	app->contents = contents;
 }
 
+/* FIXME: To be cleaned up.  */
+#if 0
 /* The global menus for setting the toolbar and menu bar position */
 
 static GtkWidget *toolbar_menu = NULL;
@@ -566,6 +570,7 @@ gnome_app_setpos_activate_toolbar (GtkWidget *menu_item, GnomeApp *app)
 		}
 }
 
+#endif
 
 /**
  * gnome_app_set_menus
@@ -579,9 +584,7 @@ gnome_app_setpos_activate_toolbar (GtkWidget *menu_item, GnomeApp *app)
 void
 gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 {
-	GnomeAppWidgetPositionType pos = GNOME_APP_POS_TOP;
-	char *location = NULL;
-	GtkWidget *hb;
+	GtkWidget *dock_item;
 	GtkAccelGroup *ag;
 
 	g_return_if_fail(app != NULL);
@@ -590,41 +593,22 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	g_return_if_fail(menubar != NULL);
 	g_return_if_fail(GTK_IS_MENU_BAR(menubar));
 
-	if (gnome_preferences_get_menubar_handlebox()){
-		hb = gtk_handle_box_new();
-		gtk_widget_show(hb);
-	} else {
-		hb = gtk_event_box_new();
-		gtk_widget_set_events(hb, GDK_BUTTON_PRESS_MASK);
-	}
+	dock_item = gnome_dock_item_new (GNOME_DOCK_ITEM_BEH_EXCLUSIVE
+					 | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
+	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (menubar));
 
-	app->menubar = GTK_WIDGET(menubar);
+	gnome_dock_add_item (GNOME_DOCK (app->dock), dock_item,
+			     GNOME_DOCK_POS_TOP, 0, 0, 0, TRUE);
+
+	app->menubar = GTK_WIDGET (menubar);
+
+	gtk_widget_show (GTK_WIDGET (menubar));
+	gtk_widget_show (GTK_WIDGET (dock_item));
 
 	/* Configure menu to gnome preferences, if possible.
 	 * (sync to gnome-app-helper.c:gnome_app_fill_menu_custom) */
 	if (!gnome_preferences_get_menubar_relief ())
 		gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (app->menubar), GTK_SHADOW_NONE);
-	
-	gtk_signal_connect(GTK_OBJECT(hb), "button_press_event",
-			   GTK_SIGNAL_FUNC(gnome_app_rightclick_menubar), app);
-	gtk_widget_show(app->menubar);
-	gtk_container_add(GTK_CONTAINER(hb), app->menubar);
-
-	/* Load the position from the configuration file */
-	if (app->prefix){
-		gnome_config_push_prefix (app->prefix);
-		location = gnome_config_get_string ("Placement/Menu=top");
-		pos = get_orientation (location);
-	}
-
-	/* Menus can not go on left or right */
-	if (pos != GNOME_APP_POS_TOP && pos != GNOME_APP_POS_BOTTOM)
-		pos = GNOME_APP_POS_TOP;
-	gnome_app_menu_set_position (app, pos);
-	if (app->prefix){
-		g_free (location);
-		gnome_config_pop_prefix ();
-	}
 
 	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
 	if (ag && !g_slist_find(gtk_accel_groups_from_object (GTK_OBJECT (app)), ag))
@@ -645,9 +629,7 @@ void
 gnome_app_set_toolbar (GnomeApp *app,
 		       GtkToolbar *toolbar)
 {
-	GnomeAppWidgetPositionType pos = GNOME_APP_POS_TOP;
-	GtkWidget *hb;
-	char *location;
+	GtkWidget *dock_item;
 	GtkAccelGroup *ag;
 
 	g_return_if_fail(app != NULL);
@@ -655,29 +637,23 @@ gnome_app_set_toolbar (GnomeApp *app,
 	g_return_if_fail(toolbar != NULL);
 	g_return_if_fail(app->toolbar == NULL);
 
-	if ( gnome_preferences_get_toolbar_handlebox() ) {
-	  hb = gtk_handle_box_new ();
-	  gtk_widget_show (hb);
-	  if ( gnome_preferences_get_toolbar_flat() )
-		  gtk_handle_box_set_shadow_type (GTK_HANDLE_BOX (hb), GTK_SHADOW_NONE);
-	  else if ( ! gnome_preferences_get_toolbar_relief() ) {
-		  /* Avoid relief overlap with flat buttons + handlebox relief */
-		  gtk_container_set_border_width (GTK_CONTAINER (hb), 2);
-	  }
-	}
-	else {
-   	  /* Non-detachable toolbars are always flat */
-	  hb = gtk_event_box_new();
-	  gtk_widget_set_events(hb, GDK_BUTTON_PRESS_MASK);
-	}
+	/* Having dock items containing toolbars use
+	   `GNOME_DOCK_ITEM_BEH_EXCLUSIVE' is not really a
+	   requirement.  We only do this for backwards compatibility.  */
+	dock_item = gnome_dock_item_new (GNOME_DOCK_ITEM_BEH_EXCLUSIVE);
+	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (toolbar));
+	gnome_dock_add_item (GNOME_DOCK (app->dock), dock_item,
+			     GNOME_DOCK_POS_TOP, 1, 0, 0, TRUE);
+	gtk_container_border_width (GTK_CONTAINER (toolbar), 1);
 
-	/* Configure toolbar to gnome preferences, if possible.
-	 * (sync to gnome_app_helper.c:gnome_app_toolbar_custom) */
+	/* Configure toolbar to gnome preferences, if possible.  (Sync
+	   to gnome_app_helper.c:gnome_app_toolbar_custom.)  */
 	if (gnome_preferences_get_toolbar_lines ()) {
 		gtk_toolbar_set_space_style (toolbar, GTK_TOOLBAR_SPACE_LINE);
 		gtk_toolbar_set_space_size (toolbar, GNOME_PAD * 2);
-	} else
+	} else {
 		gtk_toolbar_set_space_size (toolbar, GNOME_PAD);
+	}
 
 	if (!gnome_preferences_get_toolbar_relief ())
 		gtk_toolbar_set_button_relief(toolbar, GTK_RELIEF_NONE);
@@ -686,23 +662,9 @@ gnome_app_set_toolbar (GnomeApp *app,
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
 	
 	app->toolbar = GTK_WIDGET (toolbar);
-	gtk_signal_connect (GTK_OBJECT(hb), "button_press_event",
-			    GTK_SIGNAL_FUNC (gnome_app_rightclick_toolbar), app);
-	gtk_widget_show(app->toolbar);
-	gtk_container_add(GTK_CONTAINER(hb), app->toolbar);
 
-	/* Load the position from the configuration file */
-	if (app->prefix)
-	{
-		gnome_config_push_prefix (app->prefix);
-		location = gnome_config_get_string ("Placement/Toolbar=top");
-		pos = get_orientation (location);
-		gnome_app_toolbar_set_position (app, pos);
-		g_free (location);
-		gnome_config_pop_prefix ();
-	}
-	else
-		gnome_app_toolbar_set_position (app, pos);
+	gtk_widget_show (GTK_WIDGET (toolbar));
+	gtk_widget_show (GTK_WIDGET (dock_item));
 
 	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
 	if (ag && !g_slist_find(gtk_accel_groups_from_object (GTK_OBJECT (app)), ag))
@@ -746,11 +708,5 @@ gnome_app_set_statusbar (GnomeApp *app,
 
 	gtk_container_add(GTK_CONTAINER(frame), hbox);
 
-	gtk_table_attach (GTK_TABLE (app->table),
-			  frame,
-			  0, 3,
-			  3, 4,
-			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
-			  0,
-			  0, 0);
+	gtk_box_pack_start (GTK_BOX (app->vbox), frame, FALSE, FALSE, 0);
 }

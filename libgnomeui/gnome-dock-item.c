@@ -198,7 +198,12 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
 static void
 gnome_dock_item_init (GnomeDockItem *dock_item)
 {
+  GtkContainer *container;
+
   GTK_WIDGET_UNSET_FLAGS (dock_item, GTK_NO_WINDOW);
+
+  container = GTK_CONTAINER (dock_item);
+  container->border_width = 1;
 
   dock_item->bin_window = NULL;
   dock_item->float_window = NULL;

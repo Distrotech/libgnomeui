@@ -71,7 +71,7 @@ struct _GnomeDock
   GList *left_bands;            /* GnomeDockChild */
 
   /* Children that are currently not docked.  */
-  GList *undocked_children;     /* GnomeDockChild */
+  GList *undocked_children;     /* GtkWidget * */
 
   /* Client rectangle before drag.  */
   GtkAllocation client_rect;
@@ -84,13 +84,20 @@ struct _GnomeDockClass
 
 GtkWidget *gnome_dock_new             (void);
 guint      gnome_dock_get_type        (void);
-void       gnome_dock_prepend_band    (GnomeDock *dock, GtkWidget *band);
-void       gnome_dock_add_item        (GnomeDock *dock, GtkWidget *item,
-                                       GnomeDockPositionType edge,
-                                       guint band_num,
-                                       guint offset,
-                                       gint position);
-void       gnome_dock_set_client_area (GnomeDock *dock, GtkWidget *widget);
+
+void       gnome_dock_prepend_band    (GnomeDock             *dock,
+                                       GtkWidget             *band);
+
+void       gnome_dock_add_item        (GnomeDock             *dock,
+                                       GtkWidget             *item,
+                                       GnomeDockPositionType  edge,
+                                       guint                  band_num,
+                                       guint                  offset,
+                                       gint                   position,
+                                       gboolean               in_new_band);
+
+void       gnome_dock_set_client_area (GnomeDock             *dock,
+                                       GtkWidget             *widget);
 
 END_GNOME_DECLS
 

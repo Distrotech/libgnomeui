@@ -1,3 +1,47 @@
+1998-12-09  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* dock_demo.c (main): Updated calls to `gnome_dock_add_item()'.
+	Set a default window size instead of forcing a minimum size.
+
+	* gnome-app.c: #Include "libgnomeui/gnome-dock.h".
+	(gnome_app_init): Create `dock' and `vbox', and make `dock' child
+ 	of `vbox'.
+	(gnome_app_configure_positions): `#if 0'ed out.
+	(gnome_app_menu_set_position): Deprecated.
+	(gnome_app_toolbar_set_position): Deprecated.
+	(gnome_app_set_contents): Set `contents' as the `dock''s
+ 	`client_area'.
+	(make_button_menubar): `#if 0'ed out.
+	(configure_toolbar): `#if 0'ed out.
+	(make_button_toolbar): `#if 0'ed out.
+	(gnome_app_rightclick_menubar): `#if 0'ed out.
+	(gnome_app_reparent_handle_box): `#if 0'ed out.
+	(gnome_app_rightclick_toolbar): `#if 0'ed out.
+	(gnome_app_setpos_activate_menubar): `#if 0'ed out.
+	(gnome_app_setpos_activate_toolbar): `#if 0'ed out.
+	(gnome_app_set_menus): Add the bar to the `GnomeDock'.  Removed
+ 	right-click menu and position handling.
+	(gnome_app_set_toolbar): Likewise with the toolbar.
+
+	* gnome-dock.c (gnome_dock_set_client_area): If we already have a
+ 	`client_area', unparent it.  Passing NULL as `widget' now removes
+ 	the `client_area'.
+	(gnome_dock_add_item): Replaced `return's with `break's in switch.
+  	New parameter `in_new_band'.  If TRUE, it always adds a new band
+ 	to the specified edge.
+ 	(gnome_dock_add): Updated to the new `gnome_dock_add_item()'.
+	(gnome_dock_forall): New function, implementing the `forall'
+ 	GtkContainer method.
+	(gnome_dock_class_init): Install it.
+	(gnome_dock_destroy): Now useless, removed.
+	(drag_floating): Add the widget to the `undocked_children' list.
+	(gnome_dock_remove): Handle the case when the child is a detached
+ 	item.
+	(gnome_dock_map): Handle detached children.
+
+	* gnome-app.h (struct _GnomeApp): New member `dock'.  `table'
+	replaced by `vbox'.
+
 1998-12-09  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-init.c (gnome_init_cb):
