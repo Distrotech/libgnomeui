@@ -365,9 +365,11 @@ static gboolean
 check_for_duplicates (struct item **final_items, gint n, struct item *item)
 {
 	int i;
-	for (i = 0; i < n; i++)
-		if (!strcmp (item->text, final_items[i]->text))
+	for (i = 0; i < n; i++) {
+		if (final_items[i] &&
+		    !strcmp (item->text, final_items[i]->text))
 			return FALSE;
+	}
 	return TRUE;
 }
 void
@@ -400,6 +402,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	for (n = 0, items = gentry->items; items && n < DEFAULT_MAX_HISTORY_SAVED; items = items->next, n++) {
 		item = items->data;
 
+		final_items [n] = NULL;
 		if (item->save) {
 			if (check_for_duplicates (final_items, n, item)) {
 				final_items [n] = item;

@@ -1,3 +1,8 @@
+Thu Jan 21 14:31:46 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-entry.c: fixed segfaults with gnome-entry, when an
+	  actual history item was used
+
 1999-01-21  Sebastian Wilhelmi  <wilhelmi@ira.uka.de>
 
 	* Makefile.am (INCLUDES): s%$(datadir)/locale%$(gnomelocaledir)%
