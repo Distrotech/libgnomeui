@@ -46,11 +46,17 @@ struct _GnomeHRefClass {
   GtkButtonClass parent_class;
 };
 
+/*
+ * GNOME href class methods
+ */
+
 guint gnome_href_get_type(void);
-GtkWidget *gnome_href_new(gchar *url, gchar *label);
-void gnome_href_set_url(GnomeHRef *href, gchar *url);
+GtkWidget *gnome_href_new(const gchar *url, const gchar *label);
+
+void gnome_href_set_url(GnomeHRef *href, const gchar *url);
 gchar *gnome_href_get_url(GnomeHRef *href);
-void gnome_href_set_label(GnomeHRef *href, gchar *label);
+
+void gnome_href_set_label(GnomeHRef *href, const gchar *label);
 gchar *gnome_href_get_label(GnomeHRef *href);
 
 /* the label can be accessed with gtk_label_get and gtk_label_get */
