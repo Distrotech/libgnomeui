@@ -57,7 +57,7 @@ enum {
     HORIZONTAL
 };
 
-#define CAULDRON_FMT_OPTIONS "xfpsieocrdqjhvaugn"
+#define CAULDRON_FMT_OPTIONS "xfpsieocrdqjhvaugnt"
 
 struct cauldron_result {
     void (*get_result) (GtkWidget *, void *);
@@ -282,6 +282,8 @@ static int option_is_present (gchar * p, gchar c)
 static int gtk_cauldron_box_add (GtkWidget * b, GtkWidget * w, gchar ** p, gint pixels_per_space)
 {
     gint expand = FALSE, fill = FALSE, padding = 0, shadow = -1;
+    if (option_is_present (1 + *p, 't'))
+	gtk_widget_set_sensitive (w, 0);
     if (option_is_present (1 + *p, 'd')) {	/* 'd' for 'd'efault values */
 	gtk_container_add (GTK_CONTAINER (b), w);
 	while ((*p)[1] && strchr (CAULDRON_FMT_OPTIONS, (*p)[1]))
@@ -758,9 +760,11 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 			vscrollbar = gtk_vscrollbar_new (GTK_TEXT (w)->vadj);
 		    }
 		    if (hscrollbar || vscrollbar) {
-			table = gtk_table_new (cols, rows, FALSE);
-			gtk_table_set_row_spacing (GTK_TABLE (table), 0, 2);
-			gtk_table_set_col_spacing (GTK_TABLE (table), 0, 2);
+			table = gtk_table_new (rows, cols, FALSE);
+			if (rows >= 2)
+			    gtk_table_set_row_spacing (GTK_TABLE (table), 0, 2);
+			if (cols >= 2)
+			    gtk_table_set_col_spacing (GTK_TABLE (table), 0, 2);
 		    }
 		    if (hscrollbar) {
 			gtk_table_attach (GTK_TABLE (table), hscrollbar, 0, 1, 1, 2,
