@@ -110,7 +110,7 @@ void           gnome_icon_list_unselect_icon       (GnomeIconList *ilist, int po
 void           gnome_icon_list_freeze              (GnomeIconList *ilist);
 void           gnome_icon_list_thaw                (GnomeIconList *ilist);
 
-void           gnome_icon_list_moveto              (GnomeIconList *ilist, int pos, double xalign, double yalign);
+void           gnome_icon_list_moveto              (GnomeIconList *ilist, int pos, double yalign);
 GtkVisibility  gnome_icon_list_icon_is_visible     (GnomeIconList *ilist, int pos);
 
 void           gnome_icon_list_set_foreground     (GnomeIconList *ilist, int pos, GdkColor *color);
@@ -123,6 +123,8 @@ void           gnome_icon_list_set_icon_border    (GnomeIconList *ilist, int spa
 
 void           gnome_icon_list_set_mode           (GnomeIconList *ilist, GnomeIconListMode mode);
 void           gnome_icon_list_set_border         (GnomeIconList *ilist, GtkShadowType border);
+
+int            gnome_icon_list_get_icon_at        (GnomeIconList *ilist, int x, int y);
 
 
 END_GNOME_DECLS

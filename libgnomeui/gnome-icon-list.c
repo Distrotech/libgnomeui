@@ -77,11 +77,16 @@ static void gnome_icon_list_size_allocate (GtkWidget          *widget,
 					   GtkAllocation      *allocation);
 static void gnome_icon_list_draw          (GtkWidget          *widget,
 					   GdkRectangle       *area);
+static gint gnome_icon_list_button_press  (GtkWidget          *widget,
+					   GdkEventButton     *event);
 static gint gnome_icon_list_expose        (GtkWidget          *widget,
 					   GdkEventExpose     *event);
 static void gnome_icon_list_foreach       (GtkContainer       *container,
 					   GtkCallback         callback,
 					   gpointer            callback_data);
+
+static void real_select_icon (GnomeIconList *ilist, gint num, GdkEvent *event);
+static void real_unselect_icon (GnomeIconList *ilist, gint num, GdkEvent *event);
 
 static void gnome_icon_list_marshal_signal_1 (GtkObject     *object,
 					      GtkSignalFunc  func,
@@ -160,12 +165,13 @@ gnome_icon_list_class_init (GnomeIconListClass *class)
 	widget_class->size_request = gnome_icon_list_size_request;
 	widget_class->size_allocate = gnome_icon_list_size_allocate;
 	widget_class->draw = gnome_icon_list_draw;
+	widget_class->button_press_event = gnome_icon_list_button_press;
 	widget_class->expose_event = gnome_icon_list_expose;
 
 	container_class->foreach = gnome_icon_list_foreach;
 
-	class->select_icon = NULL; /* FIXME */
-	class->unselect_icon = NULL; /* FIXME */
+	class->select_icon = real_select_icon;
+	class->unselect_icon = real_unselect_icon;
 }
 
 static void
@@ -195,17 +201,17 @@ get_icon_num_from_xy (GnomeIconList *ilist, int x, int y, int *num, int *on_spac
 	col = x / width;
 	row = y / height;
 
-	if ((row == ilist->icon_rows)
+	if ((row == (ilist->icon_rows - 1))
 	    && ((ilist->icons % ilist->icon_cols) != 0)
-	    && (col > (ilist->icons % ilist->icon_cols))) {
+	    && (col >= (ilist->icons % ilist->icon_cols))) {
 		*num = -1;
 		*on_spacing = TRUE;
 	}
 
 	*num = row * ilist->icon_cols + col;
 
-	if (((x % width) > ilist->max_icon_width)
-	    || ((y % height) > ilist->max_icon_height))
+	if ((x >= (col * width + ilist->max_icon_width))
+	    || (y >= (row * height + ilist->max_icon_height)))
 		*on_spacing = TRUE;
 	else
 		*on_spacing = FALSE;
@@ -389,12 +395,10 @@ draw_icons_area (GnomeIconList *ilist, GdkRectangle *area)
 		iarea.height = ilist->ilist_window_height;
 	}
 
-	/* Clear area */
+	if ((iarea.width == 0) || (iarea.height == 0))
+		return;
 
-	gdk_draw_rectangle (ilist->ilist_window,
-			    style->bg_gc[GTK_STATE_PRELIGHT],
-			    TRUE,
-			    iarea.x, iarea.y, iarea.width, iarea.height);
+	gdk_window_clear_area (ilist->ilist_window, iarea.x, iarea.y, iarea.width, iarea.height);
 
 	/* Calc initial icon */
 
@@ -945,7 +949,7 @@ gnome_icon_list_size_request (GtkWidget *widget, GtkRequisition *requisition)
 
 	/* Vscrollbar */
 
-	if ((ilist->vscrollbar_policy == GTK_POLICY_ALWAYS)
+	if ((ilist->vscrollbar_policy == GTK_POLICY_AUTOMATIC)
 	    || GTK_WIDGET_VISIBLE (ilist->vscrollbar)) {
 		gtk_widget_size_request (ilist->vscrollbar, &ilist->vscrollbar->requisition);
 
@@ -957,7 +961,7 @@ gnome_icon_list_size_request (GtkWidget *widget, GtkRequisition *requisition)
 
 	/* Hscrollbar */
 
-	if ((ilist->hscrollbar_policy == GTK_POLICY_ALWAYS)
+	if ((ilist->hscrollbar_policy == GTK_POLICY_AUTOMATIC)
 	    || GTK_WIDGET_VISIBLE (ilist->hscrollbar)) {
 		gtk_widget_size_request (ilist->hscrollbar, &ilist->hscrollbar->requisition);
 
@@ -1216,6 +1220,99 @@ gnome_icon_list_draw (GtkWidget *widget, GdkRectangle *area)
 	/* FIXME: need to draw scrollbars? */
 }
 
+static void
+toggle_icon (GnomeIconList *ilist, int num, GdkEvent *event)
+{
+	gint i;
+	GList *list;
+	Icon *icon, *selected_icon;
+
+	i = 0;
+	selected_icon = NULL;
+
+	switch (ilist->selection_mode) {
+	case GTK_SELECTION_SINGLE:
+		for (list = ilist->icon_list; list; list = list->next) {
+			icon = list->data;
+
+			if (i == num)
+				selected_icon = icon;
+			else if (icon->state == GTK_STATE_SELECTED)
+				gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[UNSELECT_ICON],
+						 i, event);
+
+			i++;
+		}
+
+		if (selected_icon && (selected_icon->state == GTK_STATE_SELECTED))
+			gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[UNSELECT_ICON],
+					 num, event);
+		else
+			gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[SELECT_ICON],
+					 num, event);
+
+		break;
+
+	case GTK_SELECTION_BROWSE:
+		for (list = ilist->icon_list; list; list = list->next) {
+			icon = list->data;
+
+			if ((i != num) && (icon->state == GTK_STATE_SELECTED))
+				gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[UNSELECT_ICON],
+						 i, event);
+
+			i++;
+		}
+
+		gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[SELECT_ICON],
+				 num, event);
+
+		break;
+
+	case GTK_SELECTION_MULTIPLE:
+		icon = g_list_nth (ilist->icon_list, num)->data;
+
+		if (icon->state == GTK_STATE_SELECTED)
+			gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[UNSELECT_ICON],
+					 num, event);
+		else
+			gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[SELECT_ICON],
+					 num, event);
+
+		break;
+
+	case GTK_SELECTION_EXTENDED:
+		break;
+
+	default:
+		break;
+	}
+}
+
+static gint
+gnome_icon_list_button_press (GtkWidget *widget, GdkEventButton *event)
+{
+	GnomeIconList *ilist;
+	int num, on_spacing;
+
+	g_return_val_if_fail (widget != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_ICON_LIST (widget), FALSE);
+	g_return_val_if_fail (event != NULL, FALSE);
+
+	ilist = GNOME_ICON_LIST (widget);
+
+	if (event->window != ilist->ilist_window)
+		return FALSE;
+
+	get_icon_num_from_xy (ilist, event->x, event->y, &num, &on_spacing);
+
+	if (on_spacing)
+		return FALSE;
+
+	toggle_icon (ilist, num, (GdkEvent *) event);
+	return FALSE;
+}
+
 static gint
 gnome_icon_list_expose (GtkWidget *widget, GdkEventExpose *event)
 {
@@ -1389,6 +1486,23 @@ gnome_icon_list_append (GnomeIconList *ilist, char *icon_filename, char *text)
 static void
 sync_selection (GnomeIconList *ilist, int pos, SyncType type)
 {
+	GList *list;
+
+	for (list = ilist->icon_list; list; list = list->next) {
+		if ((int) list->data >= pos)
+			switch (type) {
+			case SYNC_INSERT:
+				list->data = (gpointer) ((int) list->data + 1);
+				break;
+
+			case SYNC_REMOVE:
+				list->data = (gpointer) ((int) list->data - 1);
+				break;
+
+			default:
+				g_assert_not_reached ();
+			}
+	}
 }
 
 void
@@ -1481,6 +1595,9 @@ gnome_icon_list_remove (GnomeIconList *ilist, int pos)
 
 	icon_destroy (ilist, icon);
 
+	if (GTK_WIDGET_REALIZED (ilist))
+		recalc_max_icon_size (ilist);
+
 	if (!ilist->frozen) {
 		adjust_scrollbars (ilist);
 		draw_icons_area (ilist, NULL);
@@ -1505,6 +1622,9 @@ gnome_icon_list_clear (GnomeIconList *ilist)
 	ilist->icon_list_end = NULL;
 	ilist->selection = NULL;
 	ilist->icons = 0;
+
+	if (GTK_WIDGET_REALIZED (ilist))
+		recalc_max_icon_size (ilist);
 
 	if (ilist->vscrollbar) {
 		GTK_RANGE (ilist->vscrollbar)->adjustment->value = 0.0;
@@ -1584,7 +1704,41 @@ gnome_icon_list_find_icon_from_data (GnomeIconList *ilist, gpointer data)
 static void
 select_icon (GnomeIconList *ilist, int pos, GdkEvent *event)
 {
-	/* FIXME */
+	gint i;
+	GList *list;
+	Icon *icon;
+
+	switch (ilist->selection_mode) {
+	case GTK_SELECTION_SINGLE:
+	case GTK_SELECTION_BROWSE:
+		i = 0;
+
+		for (list = ilist->icon_list; list; list = list->next) {
+			icon = list->data;
+
+			if ((i != pos) && (icon->state == GTK_STATE_SELECTED))
+				gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[UNSELECT_ICON],
+						 i, event);
+
+			i++;
+		}
+
+		gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[SELECT_ICON],
+				 pos, event);
+
+		break;
+
+	case GTK_SELECTION_MULTIPLE:
+		gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[SELECT_ICON],
+				 pos, event);
+		break;
+
+	case GTK_SELECTION_EXTENDED:
+		break;
+
+	default:
+		break;
+	}
 }
 
 void
@@ -1602,7 +1756,20 @@ gnome_icon_list_select_icon (GnomeIconList *ilist, int pos)
 static void
 unselect_icon (GnomeIconList *ilist, int pos, GdkEvent *event)
 {
-	/* FIXME */
+	switch (ilist->selection_mode) {
+	case GTK_SELECTION_SINGLE:
+	case GTK_SELECTION_BROWSE:
+	case GTK_SELECTION_MULTIPLE:
+		gtk_signal_emit (GTK_OBJECT (ilist), ilist_signals[UNSELECT_ICON],
+				 pos, event);
+		break;
+
+	case GTK_SELECTION_EXTENDED:
+		break;
+
+	default:
+		break;
+	}
 }
 
 void
@@ -1639,12 +1806,36 @@ gnome_icon_list_thaw (GnomeIconList *ilist)
 }
 
 void
-gnome_icon_list_moveto (GnomeIconList *ilist, int pos, double xalign, double yalign)
+gnome_icon_list_moveto (GnomeIconList *ilist, int pos, double yalign)
 {
+	int xpos, ypos;
+	int y;
+	GtkAdjustment *adj;
+
 	g_return_if_fail (ilist != NULL);
 	g_return_if_fail (GNOME_IS_ICON_LIST (ilist));
 
-	/* FIXME */
+	if ((pos < 0) || (pos >= ilist->icons))
+		return;
+
+	yalign = CLAMP (yalign, 0.0, 1.0);
+
+	get_icon_xy_from_num (ilist, pos, &xpos, &ypos);
+
+	ypos += ilist->y_offset;
+
+	y = ypos - yalign * (ilist->ilist_window_height - ilist->max_icon_height);
+
+	adj = GTK_RANGE (ilist->vscrollbar)->adjustment;
+
+	if (y < 0)
+		adj->value = 0.0;
+	else if (y > (ILIST_HEIGHT (ilist) - ilist->ilist_window_height))
+		adj->value = ILIST_HEIGHT (ilist) - ilist->ilist_window_height;
+	else
+		adj->value = y;
+
+	gtk_signal_emit_by_name (GTK_OBJECT (adj), "value_changed");
 }
 
 GtkVisibility
@@ -1812,6 +2003,71 @@ gnome_icon_list_set_border (GnomeIconList *ilist, GtkShadowType border)
 
 	if (GTK_WIDGET_VISIBLE (ilist))
 		gtk_widget_queue_resize (GTK_WIDGET (ilist));
+}
+
+int
+gnome_icon_list_get_icon_at (GnomeIconList *ilist, int x, int y)
+{
+	int num, on_spacing;
+
+	g_return_val_if_fail (ilist != NULL, -1);
+	g_return_val_if_fail (GNOME_IS_ICON_LIST (ilist), -1);
+
+	if ((x < 0) || (y < 0) || (x >= ilist->ilist_window_width) || (y >= ilist->ilist_window_height))
+		return -1;
+
+	get_icon_num_from_xy (ilist, x, y, &num, &on_spacing);
+
+	if ((num == -1) || on_spacing)
+		return -1;
+
+	return num;
+}
+
+static void
+real_select_icon (GnomeIconList *ilist, gint num, GdkEvent *event)
+{
+	Icon *icon;
+
+	g_return_if_fail (ilist != NULL);
+	g_return_if_fail (GNOME_IS_ICON_LIST (ilist));
+
+	if ((num < 0) || (num >= ilist->icons))
+		return;
+
+	icon = g_list_nth (ilist->icon_list, num)->data;
+
+	if (icon->state == GTK_STATE_NORMAL) {
+		icon->state = GTK_STATE_SELECTED;
+		ilist->selection = g_list_append (ilist->selection, (gpointer) num);
+
+		if (!ilist->frozen
+		    && (gnome_icon_list_icon_is_visible (ilist, num) != GTK_VISIBILITY_NONE))
+			draw_icon_by_num (ilist, icon, num);
+	}
+}
+
+static void
+real_unselect_icon (GnomeIconList *ilist, gint num, GdkEvent *event)
+{
+	Icon *icon;
+
+	g_return_if_fail (ilist != NULL);
+	g_return_if_fail (GNOME_IS_ICON_LIST (ilist));
+
+	if ((num < 0) || (num >= ilist->icons))
+		return;
+
+	icon = g_list_nth (ilist->icon_list, num)->data;
+
+	if (icon->state == GTK_STATE_SELECTED) {
+		icon->state = GTK_STATE_NORMAL;
+		ilist->selection = g_list_remove (ilist->selection, (gpointer) num);
+
+		if (!ilist->frozen
+		    && (gnome_icon_list_icon_is_visible (ilist, num) != GTK_VISIBILITY_NONE))
+			draw_icon_by_num (ilist, icon, num);
+	}
 }
 
 static void

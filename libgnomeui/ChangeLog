@@ -1,3 +1,22 @@
+1998-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_list_moveto): Finished
+	implementing moveto routine.  It only supports vertical alignment,
+	as the icon list tries to display only whole columns and thus
+	disable horizontal scrolling.
+
+	* gnome-icon-list.h: New function gnome_icon_list_get_icon_at().
+	Returns the index of the icon that is under the specified
+	coordinates, or -1 if the coordinates are over white space.
+
+	* gnome-icon-list.c: Added missing functionality regarding
+	selecting/unselecting of icons.
+
+1998-03-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (draw_icon): Only try to set the masks if the pixmap exists.
+	(get_icon_num_from_xy): Fixed a couple of off-by-one errors.
+
 Sat Mar 28 18:12:33 CET 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock{,-imlib}.[ch], stock_demo.c: Added more of tigert's
