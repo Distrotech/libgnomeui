@@ -1,3 +1,9 @@
+1998-02-15  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.h: Two arguments were named 'id'.  This broke
+	the objectiv-c interface, so I named them 'client_id' and 
+	'user_id'.
+
 1998-02-14  Christoph Toshok <toshok@hungry.com>
 	* gnome-app-helper.c (gnome_app_create_menus_with_data): new
 	function, to handle the (common) case of creating an entire menu
