@@ -415,7 +415,6 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
 	GObjectClass *gobject_class = (GObjectClass *) class;
-	GtkContainerClass *container_class = (GtkContainerClass *) class;
 
 	object_class = (GtkObjectClass*) class;
 
