@@ -58,6 +58,13 @@
 #include <gtk/gtkmain.h>
 #include <gtk/gtkaccelmap.h>
 
+/* for sound events */
+#include <gtk/gtkmenuitem.h>
+#include <gtk/gtkbutton.h>
+#include <gtk/gtkentry.h>
+#include <gtk/gtktogglebutton.h>
+#include <gtk/gtkcheckmenuitem.h>
+
 /*****************************************************************************
  * libgnomeui
  *****************************************************************************/
@@ -300,6 +307,116 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
         /* End hack */
 }
 
+static gboolean
+relay_gtk_signal(GSignalInvocationHint *hint,
+		 guint n_param_values,
+		 const GValue *param_values,
+		 gchar *signame)
+{
+#ifdef HAVE_ESD
+  char *pieces[3] = {"gtk-events", NULL, NULL};
+  static GQuark disable_sound_quark = 0;
+  GObject *object = g_value_get_object (&param_values[0]);
+
+  pieces[1] = signame;
+
+  if(!disable_sound_quark)
+    disable_sound_quark = g_quark_from_static_string("gnome_disable_sound_events");
+
+  if(g_object_get_qdata (object, disable_sound_quark))
+    return TRUE;
+
+  if(GTK_IS_WIDGET(object)) {
+    if(!GTK_WIDGET_DRAWABLE(object))
+      return TRUE;
+
+    if(GTK_IS_MENU_ITEM(object) && GTK_MENU_ITEM(object)->submenu)
+      return TRUE;
+  }
+
+  gnome_triggers_vdo("", NULL, (const char **)pieces);
+
+  return TRUE;
+#else
+  return FALSE; /* this shouldn't even happen... */
+#endif
+}
+
+static void
+initialize_gtk_signal_relay (void)
+{
+#ifdef HAVE_ESD
+	gpointer iter_signames;
+	char *signame;
+	char *ctmp, *ctmp2;
+	
+	if (gnome_sound_connection_get () < 0)
+		return;
+	
+	if (!gnome_config_get_bool ("/sound/system/settings/event_sounds=true"))
+		return;
+	
+	ctmp = gnome_config_file ("/sound/events/gtk-events.soundlist");
+	ctmp2 = g_strconcat ("=", ctmp, "=", NULL);
+	g_free (ctmp);
+	iter_signames = gnome_config_init_iterator_sections (ctmp2);
+	gnome_config_push_prefix (ctmp2);
+	g_free (ctmp2);
+	
+	while ((iter_signames = gnome_config_iterator_next (iter_signames,
+							    &signame, NULL))) {
+		int signums [5];
+		int nsigs, i;
+		gboolean used_signame;
+
+		/*
+		 * XXX this is an incredible hack based on a compile-time
+		 * knowledge of what gtk widgets do what, rather than
+		 * anything based on the info available at runtime.
+		 */
+		if(!strcmp (signame, "activate")){
+			g_type_class_unref (g_type_class_ref (gtk_menu_item_get_type ()));
+			signums [0] = g_signal_lookup (signame, gtk_menu_item_get_type ());
+			
+			g_type_class_unref (g_type_class_ref (gtk_entry_get_type ()));
+			signums [1] = g_signal_lookup (signame, gtk_entry_get_type ());
+			nsigs = 2;
+		} else if(!strcmp(signame, "toggled")){
+			g_type_class_unref (g_type_class_ref (gtk_toggle_button_get_type ()));
+			signums [0] = g_signal_lookup (signame,
+							 gtk_toggle_button_get_type ());
+			
+			g_type_class_unref (g_type_class_ref (gtk_check_menu_item_get_type ()));
+			signums [1] = g_signal_lookup (signame,
+							 gtk_check_menu_item_get_type ());
+			nsigs = 2;
+		} else if (!strcmp (signame, "clicked")){
+			g_type_class_unref (g_type_class_ref (gtk_button_get_type ()));
+			signums [0] = g_signal_lookup (signame, gtk_button_get_type ());
+			nsigs = 1;
+		} else {
+			g_type_class_unref (g_type_class_ref (gtk_widget_get_type ()));
+			signums [0] = g_signal_lookup (signame, gtk_widget_get_type ());
+			nsigs = 1;
+		}
+
+		used_signame = FALSE;
+		for(i = 0; i < nsigs; i++) {
+			if (signums [i] > 0) {
+				g_signal_add_emission_hook (signums [i], 0,
+							      (GSignalEmissionHook)relay_gtk_signal,
+							      signame, NULL);
+                                used_signame = TRUE;
+                        }
+                }
+
+                if(!used_signame)
+                        g_free(signame);
+	}
+	gnome_config_pop_prefix ();
+#endif
+}
+
 static void
 libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
 {
@@ -325,7 +442,8 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         g_free (filename);
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
-	//bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	/*bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");*/
+	initialize_gtk_signal_relay ();
 }
 
 static void

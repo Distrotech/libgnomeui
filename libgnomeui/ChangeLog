@@ -1,3 +1,7 @@
+2002-01-08  Richard Hestilow  <hestilow@ximian.com>
+
+	* gnome-ui-init.c: Re-added gtk+/sound event bridge code.
+
 2002-01-08  jacob berkman  <jacob@ximian.com>
 
 	* gnome-dialog.c (gnome_dialog_init): remove declaration of 'bf'
@@ -16,6 +20,7 @@
 
         * gnome-dateedit.c: Fixed a small i18n glitch
 
+>>>>>>> 1.1768
 2001-12-28  jacob berkman  <jacob@ximian.com>
 
 	* gnome-vfs-util.h: gnome-vfs-types.h is deprecated, use
