@@ -56,6 +56,20 @@ CPPFLAGS="$sm_save_cppflags"
 dnl
 dnl Start of pkg-config checks
 dnl
+
+dnl We first check for esound and audiofile (which has conditional
+dnl support built in)
+dnl
+AUDIOFILE_MODULE="audiofile >= 0.2.2"
+ESOUND_MODULE="esound >= 0.2.23"
+PKG_CHECK_MODULES(SOUND_TEST, $ESOUND_MODULE $AUDIOFILE_MODULE, [
+	AC_DEFINE(HAVE_LIBAUDIOFILE)
+	AC_DEFINE(HAVE_ESD)
+],[
+	AUDIOFILE_MODULE=""
+	ESOUND_MODULE=""
+])
+
 GNOMEUI_MODULES="libgnome-2.0 >= 1.108.0 libgnomecanvas-2.0 >= 1.108.0 libbonoboui-2.0 >= 1.108.1 gconf-2.0 >= 1.1.1"
 PKG_CHECK_MODULES(LIBGNOMEUI, $GNOMEUI_MODULES gnome-vfs-module-2.0 >= 1.9.3)
 AC_SUBST(LIBGNOMEUI_CFLAGS)
