@@ -535,6 +535,9 @@ get_current_frame (GnomeAnimator *animator, int *x_offset, int *y_offset)
 	*x_offset = 0;
 	*y_offset = 0;
 
+	if (animator->_priv->current_frame == NULL)
+		return NULL;
+
 	frame = animator->_priv->current_frame;
 	if(frame->prev == NULL ||
 	   frame->prev->action == GDK_PIXBUF_FRAME_DISPOSE) {
@@ -614,6 +617,16 @@ paint (GnomeAnimator * animator, GdkRectangle * area)
   _priv = animator->_priv;
 
   draw_source = get_current_frame (animator, &x_off, &y_off);
+
+  if (draw_source == NULL) {
+	  gdk_draw_rectangle (widget->window,
+			      widget->style->black_gc,
+			      TRUE,
+			      0, 0,
+			      widget->allocation.width,
+			      widget->allocation.height);
+	  return;
+  }
 
   width = gdk_pixbuf_get_width (draw_source);
   height = gdk_pixbuf_get_height (draw_source);

@@ -1,3 +1,7 @@
+Wed Dec 06 02:57:06 2000  George Lebl <jirka@5z.com>
+
+	* gnome-animator.c: check for nulls.  If no current frame draw black.
+
 Wed Dec 06 01:55:24 2000  George Lebl <jirka@5z.com>
 
 	* gnome-animamtor.c, gnome-canvas.c, gnome-dock-band.c, 
