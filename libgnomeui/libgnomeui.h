@@ -31,6 +31,7 @@
 #include "libgnomeui/gtk-socket.h"
 #include "libgnomeui/gtkcalendar.h"
 #include "libgnomeui/gnome-dateedit.h"
+#include "libgnomeui/gnome-calculator.h"
 
 BEGIN_GNOME_DECLS
 

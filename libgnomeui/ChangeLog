@@ -1,3 +1,12 @@
+Sun Apr 12 17:24:39 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.[ch]: added the beginnings of a
+	  double precision calculator widget modeled after
+	  xcalc
+
+	* libgnomeui.h, Makefile.am: added gnome-calculator
+	  references
+
 Sat Apr 11 14:20:26 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h, gnome-appsmenu.c: Began implementing
