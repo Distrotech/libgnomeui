@@ -1,23 +1,25 @@
+# translation of el.po to Greek
 # Greek translation of libgnomeui.
 # Copyright (C) 2002 Free Software Foundation.
-# Simos Xenitellis <simos74@gmx.net>, 2002,2003.
-# Kostas Papadimas <pkst@gmx.net>, 2002,2003.
 #
 # simos: 159 messages, 22Apr2002, initial translation.
 # kostas: 298 messages, 22Apr2002, initial translation.
 # kostas: 298 messages, 05Jan2003, reviewed and updated translation for Gnome 2.1x.
+# kostas: 305 messages,10Aug2003, updated translation for Gnome 2.4x
+# Simos Xenitellis <simos74@gmx.net>, 2002,2003.
+# Kostas Papadimas <pkst@gmx.net>, 2002,2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.0.4\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2003-01-05 12:19+0200\n"
+"Project-Id-Version: el\n"
+"POT-Creation-Date: 2003-08-10 18:42+0300\n"
+"PO-Revision-Date: 2003-08-10 18:47+0300\n"
 "Last-Translator: Kostas Papadimas <pkst@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 1.0\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -54,11 +56,9 @@ msgid "Translated by"
 msgstr "Μεταφράστηκε από"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
-#
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Μνεία"
+msgstr "Μ_νεία"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -129,8 +129,7 @@ msgid "Translator credits"
 msgstr "Μνεία μεταφραστών"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Μνεία στους μεταφραστές. Αυτό το αλφαριθμητικό θα πρέπει να σημειωυεί ως "
 "μετφράσιμο."
@@ -168,6 +167,7 @@ msgstr "Περί %s"
 #
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Αρχείο"
 
@@ -299,6 +299,7 @@ msgstr "_Παιχνίδι"
 # #-#-#-#-#  gnomemeeting-el.po (gnomemeeting 0.12.2)  #-#-#-#-#
 #
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Βοήθεια"
 
@@ -692,7 +693,7 @@ msgstr "Ρύθμιση της εφαρμογής"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Περί"
 
@@ -703,7 +704,7 @@ msgstr "_Περί"
 #
 # #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Περί αυτής της εφαρμογής"
 
@@ -747,7 +748,7 @@ msgstr "_Κλείσιμο Αυτού Του Παραθύρου"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Κλείσιμο του τρέχοντος παραθύρου"
 
@@ -989,7 +990,7 @@ msgstr "Επίπεδο δραστηριότητας χρήστη που απαι
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Ο διαμεσολαβητής σας HTTP απαιτεί από εσάς να συνδεθείτε.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -997,18 +998,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Θα πρέπει να συνθεθείτε για να έχετε πρόσβαση στο \"%s\".\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Ο κωδικός σας θα αποσταλεί χωρίς κρυπτογράφηση."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Ο κωδικός σας θα αποσταλεί με κρυπτογράφηση."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Απαιτείται πιστοποίηση"
 
 #
 #: libgnomeui/gnome-client.c:863
@@ -1514,8 +1517,7 @@ msgstr "Μέγεθος γραμματοσειράς για την ετικέτα
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr ""
-"Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
+msgstr "Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -1824,11 +1826,11 @@ msgstr "Μήνυμα"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "'Ο_νομα χρήστη:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Κωδικός:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1983,8 +1985,7 @@ msgstr "Βιβλιοθήκη GNOME GUI"
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
+msgstr "Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:719
@@ -2054,9 +2055,6 @@ msgstr ""
 "Παρακαλώ επισκεφτείτε τη σελίδα Κολλήματος Εφαρμογών του GNOME για "
 "περισσότερες πληροφορίες"
 
-#~ msgid "_Credits"
-#~ msgstr "_Μνεία"
-
 # #-#-#-#-#  bonobo-el.po (bonobo 0.34)  #-#-#-#-#
 #
 # #-#-#-#-#  galeon-el.po (galeon 1.0)  #-#-#-#-#
@@ -2067,5 +2065,10 @@ msgstr ""
 #
 # #-#-#-#-#  achtung-el.po (achtung 0.99.0)  #-#-#-#-#
 #
-#~ msgid "Exit the test"
-#~ msgstr "Έξοδος από τη δοκιμή"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Έξοδος από τη δοκιμή"
+
+#~ msgid "_Credits"
+#~ msgstr "_Μνεία"
+
