@@ -1252,7 +1252,7 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 
 	v = (*GTK_WIDGET_CLASS (parent_class)->button_press_event) (widget, event);
 
-	if (v)
+	if (v || event->button != 1)
 		return TRUE;
 
 	if (gil->selection_mode != GTK_SELECTION_MULTIPLE)
@@ -1261,19 +1261,18 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 	if (gil->sel_rect)     /* Already selecting */
 	        return FALSE;
 
-	gnome_canvas_window_to_world (
-		GNOME_CANVAS (gil),
-		event->x, event->y, 
-		&gil->sel_start_x, &gil->sel_start_y);
+	gnome_canvas_window_to_world (GNOME_CANVAS (gil),
+				      event->x, event->y, 
+				      &gil->sel_start_x, &gil->sel_start_y);
 
 	/*
 	 * If the Shift or control keys are pressed, then keep a list
 	 * of the current selection
 	 */
-	if (event->state & (GDK_SHIFT_MASK|GDK_CONTROL_MASK)){
+	if (event->state & (GDK_SHIFT_MASK|GDK_CONTROL_MASK)) {
 		GList *l = NULL;
 
-		for (l = gil->selection; l; l = l->next){
+		for (l = gil->selection; l; l = l->next) {
 			void *data = l->data;
 			
 			gil->preserve_selection = g_list_prepend (gil->preserve_selection, data);
@@ -1281,20 +1280,20 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 	}
 
 	stipple = gdk_bitmap_create_from_data (NULL, gray50_bits, gray50_width, gray50_height);
-	gil->sel_rect = gnome_canvas_item_new (
-		gnome_canvas_root (GNOME_CANVAS (gil)),
-		gnome_canvas_rect_get_type (),
-		"x1", (double) event->x,
-		"y1", (double) event->y,
-		"x2", (double) event->x,
-		"y2", (double) event->y,
-		"outline_color", "black",
-		"width_pixels", 1,
-		"outline_stipple", stipple,
-		NULL);
+	gil->sel_rect = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (gil)),
+					       gnome_canvas_rect_get_type (),
+					       "x1", (double) event->x,
+					       "y1", (double) event->y,
+					       "x2", (double) event->x,
+					       "y2", (double) event->y,
+					       "outline_color", "black",
+					       "width_pixels", 1,
+					       "outline_stipple", stipple,
+					       NULL);
 	gdk_bitmap_unref (stipple);
 
-	gnome_canvas_item_grab (gil->sel_rect, GDK_POINTER_MOTION_MASK | GDK_BUTTON_RELEASE_MASK, NULL, event->time);
+	gnome_canvas_item_grab (gil->sel_rect, GDK_POINTER_MOTION_MASK | GDK_BUTTON_RELEASE_MASK,
+				NULL, event->time);
 	return TRUE;
 }
 

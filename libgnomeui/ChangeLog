@@ -1,3 +1,8 @@
+1999-02-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gil_button_press): Do nothing if the button
+	is different from 1.
+
 1999-02-09  Chris Lahey  <clahey@umich.edu>
 
 	* gnome-paper-selector.h, gnome-paper-selector.c: Added
