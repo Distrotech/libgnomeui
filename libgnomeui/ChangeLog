@@ -1,3 +1,8 @@
+1999-01-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-canvas-line.c (gnome_canvas_line_draw): Remove warning
+	just inserted by Elliot, as the leak does not exist.
+
 1999-01-20  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-client.c: Added translation domain to table of options.
