@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
-"PO-Revision-Date: 2004-05-08 12:02+0200\n"
+"POT-Creation-Date: 2004-06-05 15:59+0200\n"
+"PO-Revision-Date: 2004-06-04 12:11+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -140,6 +140,7 @@ msgstr "Informacione mbi %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -197,6 +198,7 @@ msgid "_Game"
 msgstr "_Loja"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ndihmë"
 
@@ -387,11 +389,11 @@ msgstr "Konfiguro programin"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Informacione"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informacione mbi këtë program"
 
@@ -418,7 +420,7 @@ msgstr "Krijo një dritare të re"
 msgid "_Close This Window"
 msgstr "_Mbylle këtë dritare"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Mbyll dritaren aktuale"
 
@@ -806,22 +808,43 @@ msgstr "Ngjyra e sfondit është vendosur"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Ngjyra e Sfondit të Përmbajtjes"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Ngjyra e sfondit të përmbajtjes"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Ngjyra e Sfondit të Përmbajtjes si GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Rregullimi i ngjyrës së sfondit të përmbajtjes"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Ngjyra e sfondit të përmbajtjes u vendos"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "Ngjyra e Sfondit të logo"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "Ngjyra e sfondit të logo"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Ngjyra e sfondit të logo si GDkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Ngjyra e sfondit të logo të vendosur"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Ngjyra e sfondit të logo është vendosur"
 
@@ -1407,5 +1430,6 @@ msgstr "_Informo zhvilluesit"
 msgid "_Debug"
 msgstr "_Debug"
 
-#~ msgid "Exit the test"
-#~ msgstr "Përfundo provën"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Përfundo provën"
