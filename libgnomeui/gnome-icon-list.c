@@ -83,7 +83,7 @@ icon_get_height (Icon *icon, int *icon_height, int *text_height)
 	*text_height = icon->text->ti->height;
 }
 
-int
+static int
 gil_get_items_per_line (Gil *gil)
 {
 	GnomeCanvas *canvas = GNOME_CANVAS (gil);
@@ -498,6 +498,8 @@ icon_event (Gil *gil, Icon *icon, GdkEvent *event)
 		return TRUE;
 
 	case GDK_2BUTTON_PRESS:
+		toggle_icon (gil, gil->last_clicked, event);
+		gil->last_clicked = NULL;
 		return TRUE;
 		
 	case GDK_BUTTON_RELEASE:
