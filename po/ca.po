@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.6.0\n"
+"Project-Id-Version: libgnomeui 2.7.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
-"PO-Revision-Date: 2004-03-23 15:53+0100\n"
+"POT-Creation-Date: 2004-08-02 19:56+0200\n"
+"PO-Revision-Date: 2004-08-02 20:02+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,31 +31,35 @@ msgstr "Element fill 2"
 msgid "Hint for item 2"
 msgstr "Pista per a l'element 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:856
-#, fuzzy
-msgid "Filesystem"
-msgstr "Fit_xers"
+#: file-chooser/gtkfilesystemgnomevfs.c:650
+#, c-format
+msgid "%s is not a folder"
+msgstr "%s no és una carpeta"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:857
+msgid "Filesystem"
+msgstr "Sistema de fitxers"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1521
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "Ha fallat el desament de l'adreça d'interès (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "No s'ha pogut obtenir informació per al fitxer «%s»: %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "No s'ha pogut obrir «%s»: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
+msgstr "No s'ha pogut carregar la imatge «%s»: es desconeix la raó, probablement és una imatge corrompuda"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -167,6 +171,7 @@ msgstr "Quant a %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitxer"
 
@@ -224,6 +229,7 @@ msgid "_Game"
 msgstr "_Joc"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_juda"
 
@@ -319,11 +325,11 @@ msgstr "Retalla la selecció"
 #. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
-msgstr "_Còpia"
+msgstr "_Copia"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr "Còpia la selecció"
+msgstr "Copia la selecció"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
@@ -414,11 +420,11 @@ msgstr "Configura l'aplicació"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Quant a"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Quant a aquesta aplicació"
 
@@ -445,7 +451,7 @@ msgstr "Crea una nova finestra"
 msgid "_Close This Window"
 msgstr "_Tanca aquesta finestra"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Tanca la finestra actual"
 
@@ -542,9 +548,9 @@ msgid "Text Only"
 msgstr "Només el text"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Utilitza l'escriptori per defecte (%s)"
+msgstr "Utilitza el predeterminat de l'escriptori (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -646,9 +652,9 @@ msgid "Authentication Required"
 msgstr "Es requereix autenticació"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "Heu d'identificar-vos per a accedir a %s\n"
+msgstr "Heu d'identificar-vos per a accedir a %s domini %s\n"
 
 #: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
@@ -833,29 +839,24 @@ msgstr "El color de fons s'ha definit"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "Logo del color de fons"
+msgstr "Color de fons del contingut"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "Logo del color de fons"
+msgstr "Color de fons del contingut"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr "Color de fons com un GdkColor"
+msgstr "Color de fons del contingut com un GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "Color de fons definit"
+msgstr "Color de fons del contingut definit"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "El color de fons s'ha definit"
+msgstr "El color de fons del contingut s'ha definit"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -1301,11 +1302,11 @@ msgstr "_Contrasenya:"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Connecta _anònimament"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "Connecta com a _usuari:"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
@@ -1414,6 +1415,7 @@ msgstr "Biblioteca GNOME GUI"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Han ocorregut múltiples violacions de segment; no es pot mostrar el diàleg "
@@ -1421,6 +1423,7 @@ msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1477,11 +1480,12 @@ msgstr "_Informa els desenvolupadors"
 msgid "_Debug"
 msgstr "_Depuració"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Surt del test"
+
 #~ msgid " domain %s"
 #~ msgstr " domini %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "Surt del test"
 
 #~ msgid "Color Selector"
 #~ msgstr "Seleccionador de color"
