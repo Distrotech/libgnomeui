@@ -18,6 +18,8 @@
 #ifndef GNOME_ACTIONAREA_H
 #define GNOME_ACTIONAREA_H
 
+#include <gtk/gtkdialog.h>
+
 typedef void (*GnomeActionCallback) (GtkWidget *, gpointer);
 
 typedef struct {
