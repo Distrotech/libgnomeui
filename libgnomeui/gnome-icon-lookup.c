@@ -26,17 +26,17 @@
 
 #include <string.h>
 
-#define ICON_NAME_BLOCK_DEVICE          "file-blockdev"
-#define ICON_NAME_BROKEN_SYMBOLIC_LINK  "file-symlink"
-#define ICON_NAME_CHARACTER_DEVICE      "file-chardev"
-#define ICON_NAME_DIRECTORY             "file-directory"
-#define ICON_NAME_EXECUTABLE            "file-executable"
-#define ICON_NAME_FIFO                  "file-fifo"
-#define ICON_NAME_REGULAR               "file-regular"
-#define ICON_NAME_SEARCH_RESULTS        "file-search"
-#define ICON_NAME_SOCKET                "file-sock"
+#define ICON_NAME_BLOCK_DEVICE          "gnome-fs-blockdev"
+#define ICON_NAME_BROKEN_SYMBOLIC_LINK  "gnome-fs-symlink"
+#define ICON_NAME_CHARACTER_DEVICE      "gnome-fs-chardev"
+#define ICON_NAME_DIRECTORY             "gnome-fs-directory"
+#define ICON_NAME_EXECUTABLE            "gnome-fs-executable"
+#define ICON_NAME_FIFO                  "gnome-fs-fifo"
+#define ICON_NAME_REGULAR               "gnome-fs-regular"
+#define ICON_NAME_SEARCH_RESULTS        "gnome-fs-search"
+#define ICON_NAME_SOCKET                "gnome-fs-socket"
 
-#define ICON_NAME_MIME_PREFIX           "mime-"
+#define ICON_NAME_MIME_PREFIX           "gnome-mime-"
 
 #define SELF_THUMBNAIL_SIZE_THRESHOLD   16384
 
