@@ -1008,32 +1008,6 @@ theme_lookup_icon (IconTheme *theme,
   gboolean smaller, has_larger;
   IconSuffix suffix;
 
-  l = theme->dirs;
-  while (l != NULL)
-    {
-      dir = l->data;
-
-      if (theme_dir_size_difference (dir, size, &smaller) == 0)
-	{
-	  suffix = GPOINTER_TO_INT (g_hash_table_lookup (dir->icons, icon_name));
-	  if (suffix != ICON_SUFFIX_NONE) {
-	    file = g_strconcat (icon_name, string_from_suffix (suffix), NULL);
-	    absolute_file = g_build_filename (dir->dir, file, NULL);
-	    g_free (file);
-
-	    if (icon_data && dir->icon_data != NULL)
-	      *icon_data = g_hash_table_lookup (dir->icon_data, icon_name);
-
-	    if (base_size)
-	      *base_size = dir->size;
-	    
-	    return absolute_file;
-	  }
-	}
-      
-      l = l->next;
-    }
-
   min_difference = G_MAXINT;
   min_dir = NULL;
   has_larger = FALSE;
@@ -1042,27 +1016,36 @@ theme_lookup_icon (IconTheme *theme,
     {
       dir = l->data;
 
-      difference = theme_dir_size_difference (dir, size, &smaller);
-      if (!has_larger)
+      if (g_hash_table_lookup (dir->icons, icon_name) != ICON_SUFFIX_NONE)
 	{
-	  if ((difference < min_difference || smaller) &&
-	      g_hash_table_lookup (dir->icons, icon_name) != ICON_SUFFIX_NONE)
+	  difference = theme_dir_size_difference (dir, size, &smaller);
+
+	  if (difference == 0)
 	    {
-	      min_difference = difference;
 	      min_dir = dir;
-	      has_larger = smaller;
+	      break;
 	    }
-	}
-      else
-	{
-	  if ((difference < min_difference && smaller) &&
-	      g_hash_table_lookup (dir->icons, icon_name) != ICON_SUFFIX_NONE)
+
+	  if (!has_larger)
 	    {
-	      min_difference = difference;
-	      min_dir = dir;
+	      if (difference < min_difference || smaller)
+		{
+		  min_difference = difference;
+		  min_dir = dir;
+		  has_larger = smaller;
+		}
 	    }
+	  else
+	    {
+	      if (difference < min_difference && smaller)
+		{
+		  min_difference = difference;
+		  min_dir = dir;
+		}
+	    }
+
 	}
-      
+
       l = l->next;
     }
 

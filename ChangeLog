@@ -1,3 +1,9 @@
+2003-04-07  Mark McLoughlin  <mark@skynet.ie>
+
+	* libgnomeui/gnome-icon-theme.c: (theme_lookup_icon):
+	Merge the two seperate iterations of the theme's directory
+	list into a single iteration.
+
 2003-04-02  Loban A Rahman <loban@earthling.net>
 
 	* libgnomeui/gnome-color-picker.h: Fixed bug #106154,
