@@ -1,3 +1,9 @@
+1999-03-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_item_get_bounds): Un-transform the
+	bounding box so that it is returned in the coordinate system of
+	the item's parent.
+
 1999-03-09  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-messagebox.c (gnome_message_box_new): Adjust the

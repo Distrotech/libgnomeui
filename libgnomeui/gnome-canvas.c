@@ -102,10 +102,8 @@ static void gnome_canvas_item_realize   (GnomeCanvasItem *item);
 static void gnome_canvas_item_unrealize (GnomeCanvasItem *item);
 static void gnome_canvas_item_map       (GnomeCanvasItem *item);
 static void gnome_canvas_item_unmap     (GnomeCanvasItem *item);
-static void gnome_canvas_item_update    (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
-static void gnome_canvas_item_invoke_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
-static double gnome_canvas_item_invoke_point (GnomeCanvasItem *item, double x, double y, int cx, int cy,
-					      GnomeCanvasItem **actual_item);
+static void gnome_canvas_item_update    (GnomeCanvasItem *item, double *affine,
+					 ArtSVP *clip_path, int flags);
 
 static int emit_event (GnomeCanvas *canvas, GdkEvent *event);
 
@@ -117,7 +115,8 @@ static GtkObjectClass *item_parent_class;
 /**
  * gnome_canvas_item_get_type:
  *
- * Registers the &GnomeCanvasItem class if necessary, and returns the type ID associated to it.
+ * Registers the &GnomeCanvasItem class if necessary, and returns the type ID
+ * associated to it.
  * 
  * Return value:  The type ID of the &GnomeCanvasItem class.
  **/
@@ -144,6 +143,7 @@ gnome_canvas_item_get_type (void)
 	return canvas_item_type;
 }
 
+/* Class initialization function for GnomeCanvasItemClass */
 static void
 gnome_canvas_item_class_init (GnomeCanvasItemClass *class)
 {
@@ -173,12 +173,12 @@ gnome_canvas_item_class_init (GnomeCanvasItemClass *class)
 	class->update = gnome_canvas_item_update;
 }
 
+/* Object initialization function for GnomeCanvasItem */
 static void
 gnome_canvas_item_init (GnomeCanvasItem *item)
 {
 	item->object.flags |= GNOME_CANVAS_ITEM_VISIBLE;
 }
-
 
 /**
  * gnome_canvas_item_new:
@@ -216,7 +216,6 @@ gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, const gchar *firs
 	return item;
 }
 
-
 /**
  * gnome_canvas_item_newv:
  * @parent: The parent group for the new item.
@@ -224,10 +223,11 @@ gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, const gchar *firs
  * @nargs: The number of arguments used to configure the item.
  * @args: The list of arguments used to configure the item.
  * 
- * Creates a new canvas item with @parent as its parent group.  The item is created at the top of
- * its parent's stack, and starts up as visible.  The item is of the specified @type, for example,
- * it can be gnome_canvas_rect_get_type().  The list of object arguments is used to configure the
- * item.
+ * Creates a new canvas item with @parent as its parent group.  The item is
+ * created at the top of its parent's stack, and starts up as visible.  The item
+ * is of the specified @type, for example, it can be
+ * gnome_canvas_rect_get_type().  The list of object arguments is used to
+ * configure the item.
  * 
  * Return value: The newly-created item.
  **/
@@ -247,6 +247,9 @@ gnome_canvas_item_newv (GnomeCanvasGroup *parent, GtkType type, guint nargs, Gtk
 	return item;
 }
 
+/* Performs post-creation operations on a canvas item (adding it to its parent
+ * group, etc.)
+ */
 static void
 item_post_create_setup (GnomeCanvasItem *item)
 {
@@ -260,7 +263,6 @@ item_post_create_setup (GnomeCanvasItem *item)
 	item->canvas->need_repick = TRUE;
 }
 
-
 /**
  * gnome_canvas_item_construct:
  * @item: The item to construct.
@@ -271,7 +273,8 @@ item_post_create_setup (GnomeCanvasItem *item)
  * Constructs a canvas item; meant for use only by item implementations.
  **/
 void
-gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent, const gchar *first_arg_name, va_list args)
+gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent,
+			     const gchar *first_arg_name, va_list args)
 {
         GtkObject *obj;
 	GSList *arg_list;
@@ -289,7 +292,8 @@ gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent, co
 	arg_list = NULL;
 	info_list = NULL;
 
-	error = gtk_object_args_collect (GTK_OBJECT_TYPE (obj), &arg_list, &info_list, first_arg_name, args);
+	error = gtk_object_args_collect (GTK_OBJECT_TYPE (obj), &arg_list, &info_list,
+					 first_arg_name, args);
 
 	if (error) {
 		g_warning ("gnome_canvas_item_construct(): %s", error);
@@ -305,7 +309,6 @@ gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent, co
 
 	item_post_create_setup (item);
 }
- 
 
 /**
  * gnome_canvas_item_constructv:
@@ -317,7 +320,8 @@ gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent, co
  * Constructs a canvas item; meant for use only by item implementations.
  **/
 void
-gnome_canvas_item_constructv(GnomeCanvasItem *item, GnomeCanvasGroup *parent, guint nargs, GtkArg *args)
+gnome_canvas_item_constructv(GnomeCanvasItem *item, GnomeCanvasGroup *parent,
+			     guint nargs, GtkArg *args)
 {
 	GtkObject *obj;
 
@@ -1352,21 +1356,68 @@ gnome_canvas_item_grab_focus (GnomeCanvasItem *item)
  * @x2: If non-NULL, returns the rightmost edge of the bounding box.
  * @y2: If non-NULL, returns the lower edge of the bounding box.
  * 
- * Queries the bounding box of the specified item.  The bounds are returned in item-relative
- * coordinates.
+ * Queries the bounding box of the specified item.  The bounds are returned in
+ * the coordinate system of the item's parent.
  **/
 void
 gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
 {
 	double tx1, ty1, tx2, ty2;
+	double mx1, my1, mx2, my2;
+	ArtPoint p1, p2, p3, p4;
+	ArtPoint q1, q2, q3, q4;
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
 
 	tx1 = ty1 = tx2 = ty2 = 0.0;
 
+	/* Get the item's bounds in its coordinate system */
+
 	if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->bounds)
 		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->bounds) (item, &tx1, &ty1, &tx2, &ty2);
+
+	/* Make the bounds relative to the item's parent coordinate system */
+
+	if (item->object.flags & GNOME_CANVAS_ITEM_AFFINE_FULL) {
+		p1.x = p2.x = tx1;
+		p1.y = p4.y = ty1;
+		p3.x = p4.x = tx2;
+		p2.y = p3.y = ty2;
+
+		art_affine_point (&q1, &p1, item->xform);
+		art_affine_point (&q2, &p2, item->xform);
+		art_affine_point (&q3, &p3, item->xform);
+		art_affine_point (&q4, &p4, item->xform);
+
+		mx1 = MIN (q1.x, q2.x);
+		my1 = MIN (q1.y, q2.y);
+		mx2 = MIN (q3.x, q4.x);
+		my2 = MIN (q4.x, q4.y);
+
+		if (mx1 < mx2) {
+			tx1 = mx1;
+			tx2 = mx2;
+		} else {
+			tx1 = mx2;
+			tx2 = mx1;
+		}
+
+		if (my1 < my2) {
+			ty1 = my1;
+			ty2 = my2;
+		} else {
+			ty1 = my2;
+			ty2 = my1;
+		}
+	} else if (item->xform) {
+		tx1 += item->xform[0];
+		ty1 += item->xform[1];
+		tx2 += item->xform[0];
+		ty2 += item->xform[1];
+	}
+
+	/* Return the values */
 
 	if (x1)
 		*x1 = tx1;
@@ -1877,13 +1928,14 @@ gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double
 		}
 	}
 
-	/* If there were no visible items, return the group's origin */
+	/* If there were no visible items, return an empty bounding box */
 
 	if (!set) {
 #ifdef OLD_XFORM
 		*x1 = *x2 = group->xpos;
 		*y1 = *y2 = group->ypos;
 #endif
+		*x1 = *y1 = *x2 = *y2 = 0.0;
 		return;
 	}
 
@@ -1910,16 +1962,16 @@ gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double
 			maxy = ty2;
 	}
 
+#ifdef OLD_XFORM
 	/* Make the bounds be relative to our parent's coordinate system */
 
 	if (item->parent) {
-#ifdef OLD_XFORM
 		minx += group->xpos;
 		miny += group->ypos;
 		maxx += group->xpos;
 		maxy += group->ypos;
-#endif
 	}
+#endif
 
 	*x1 = minx;
 	*y1 = miny;
