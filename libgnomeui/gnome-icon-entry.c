@@ -627,8 +627,20 @@ dialog_response (GtkWidget *dialog, gint response_id, gpointer data)
 		/* This catches cancel and delete event */
 		cancel_pressed (ientry);
 		gtk_widget_hide (dialog);
+
 		break;
 	}
+}
+
+static gint
+delete_event_handler (GtkWidget   *widget,
+		      GdkEventAny *event,
+		      gpointer     user_data)
+{
+	gtk_dialog_response (GTK_DIALOG (widget), GTK_RESPONSE_DELETE_EVENT);
+	
+	/* Don't destroy the dialog since we want to keep it around. */
+	return TRUE;
 }
 
 static void
@@ -704,6 +716,8 @@ ientry_browse(GnomeIconEntry *ientry)
 						     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 						     GTK_STOCK_OK, GTK_RESPONSE_OK,
 						     NULL);
+		g_signal_connect (priv->pick_dialog, "delete_event",
+				  G_CALLBACK (delete_event_handler), priv->pick_dialog);
 		g_signal_connect (priv->pick_dialog, "destroy",
 				  G_CALLBACK (gtk_widget_destroyed),
 				  &priv->pick_dialog);
