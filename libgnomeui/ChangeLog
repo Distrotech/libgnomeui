@@ -1,3 +1,7 @@
+1999-11-24  Elliot Lee  <sopwith@redhat.com>
+
+	* gnome-app.c (gnome_app_add_dock_item): emit the "layout_changed" signal even if adding the dock item to app->layout.
+
 1999-11-23  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-druid-page-edge.c (gnome_druid_page_edge_new): new
