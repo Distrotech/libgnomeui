@@ -73,7 +73,7 @@ static void gtk_clock_gen_str(GtkClock *clock)
 	}
 	
 	strftime(timestr, 64, clock->fmt, clock->tm);
-	gtk_label_set(GTK_LABEL(clock), timestr);
+	gtk_label_set_text(GTK_LABEL(clock), timestr);
 }
 
 static gint gtk_clock_timer_callback(gpointer data)

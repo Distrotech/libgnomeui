@@ -187,7 +187,7 @@ unit_changed (GtkWidget *widget, gpointer data)
   unit_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
   unit = gnome_unit_with_name (unit_name);
 
-  gtk_label_set (GTK_LABEL(gspaper->unit_label), unit_name);
+  gtk_label_set_text (GTK_LABEL(gspaper->unit_label), unit_name);
 
   paper_width = gnome_paper_convert (gnome_paper_pswidth (paper), unit);
   paper_height = gnome_paper_convert (gnome_paper_psheight (paper), unit);

@@ -514,7 +514,7 @@ gnome_appbar_set_status       (GnomeAppBar * appbar,
   if (appbar->interactive) 
     gtk_entry_set_text(GTK_ENTRY(appbar->status), status);
   else
-    gtk_label_set(GTK_LABEL(appbar->status), status);
+    gtk_label_set_text(GTK_LABEL(appbar->status), status);
 }
 
 

@@ -994,9 +994,9 @@ gtk_ted_update_position (struct ted_widget_info *wi)
 		gtk_widget_unref (wi->widget);
 
 		g_snprintf (buf, sizeof(buf), "%d", wi->col_span);
-		gtk_label_set (GTK_LABEL (wi->label_span_x), buf);
+		gtk_label_set_text (GTK_LABEL (wi->label_span_x), buf);
 		g_snprintf (buf, sizeof(buf), "%d", wi->row_span);
-		gtk_label_set (GTK_LABEL (wi->label_span_y), buf);
+		gtk_label_set_text (GTK_LABEL (wi->label_span_y), buf);
 	}
 }
 

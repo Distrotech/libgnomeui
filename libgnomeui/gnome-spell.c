@@ -256,7 +256,7 @@ gnome_spell_ask(gchar* word) {
 		gtk_container_add(GTK_CONTAINER(GTK_DIALOG(ask_dialog)->action_area), button);
 		gtk_widget_show(button);
 	}
-	gtk_label_set(GTK_LABEL(ask_label), buf);
+	gtk_label_set_text(GTK_LABEL(ask_label), buf);
 	gtk_widget_show(ask_dialog);
 	gtk_grab_add(ask_dialog);
 }

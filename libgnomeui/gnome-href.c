@@ -185,7 +185,7 @@ void gnome_href_set_label(GnomeHRef *self, const gchar *label) {
 
   /* pattern used to set underline for string */
   pattern = g_strnfill(strlen(label), '_');
-  gtk_label_set(GTK_LABEL(self->label), label);
+  gtk_label_set_text(GTK_LABEL(self->label), label);
   gtk_label_set_pattern(GTK_LABEL(self->label), pattern);
   g_free(pattern);
 }
