@@ -1,3 +1,8 @@
+2002-04-08  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-dateedit.c: Revert Richard's patch so that keynav works
+	again.
+
 2002-03-11  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-icon-item.c (gnome_icon_text_item_configure): Set the
