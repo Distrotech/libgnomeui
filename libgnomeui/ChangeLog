@@ -1,3 +1,10 @@
+Sat May 06 16:52:27 2000  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c (set_result) (add_digit) (negate_val):
+	  setlocale to "C" and then back to original whenever we are reading
+	  and writing floats.  this is because we can't deal with strings
+	  of any locale yet.
+
 Fri May 05 19:23:20 2000  George Lebl <jirka@5z.com>
 
 	* gnome-about.c: make an error dialog if gnome_url_show fails

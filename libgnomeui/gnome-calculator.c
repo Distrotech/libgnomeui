@@ -39,8 +39,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <errno.h>
-#include <signal.h>
+#include <errno.h> /* errno */
+#include <signal.h> /* signal() */
+#include <locale.h> /* setlocale() */
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include "libgnome/libgnomeP.h"
@@ -379,6 +380,7 @@ set_result(GnomeCalculator *gc)
 	gchar buf[80];
 	gchar format[20];
 	gint i;
+	char *old_locale;
 
 	g_return_if_fail(gc!=NULL);
 
@@ -391,12 +393,18 @@ set_result(GnomeCalculator *gc)
 
 	gc->result = stack->d.number;
 
+        /* make sure put values in a consistent manner */
+	/* XXX: perhaps we can make sure the calculator works on all locales,
+	 * but currently it will lose precision if we don't do this */
+        old_locale = setlocale (LC_NUMERIC, "C");
 	for(i=12;i>0;i--) {
-		g_snprintf(format, sizeof(format), "%c .%dlg", '%', i);
+		g_snprintf(format, sizeof(format), "%c .%dg", '%', i);
 		g_snprintf(buf, sizeof(buf), format, gc->result);
 		if(strlen(buf)<=12)
 			break;
 	}
+        setlocale (LC_NUMERIC, old_locale);
+
 	strncpy(gc->result_string,buf,12);
 	gc->result_string[12]='\0';
 
@@ -673,6 +681,7 @@ add_digit(GtkWidget *w, gpointer data)
 	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
 	CalculatorButton *but = data;
 	gchar *digit = but->name;
+	char *old_locale;
 
 	if(gc->error)
 		return;
@@ -722,7 +731,10 @@ add_digit(GtkWidget *w, gpointer data)
 
 	gtk_widget_queue_draw (gc->display);
 
-	sscanf(gc->result_string,"%lf",&gc->result);
+        /* make sure get values in a consistent manner */
+        old_locale = setlocale (LC_NUMERIC, "C");
+	sscanf(gc->result_string, "%lf", &gc->result);
+        setlocale (LC_NUMERIC, old_locale);
 }
 
 static gdouble
@@ -737,6 +749,7 @@ negate_val(GtkWidget *w, gpointer data)
 {
 	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
 	char *p;
+	char *old_locale;
 
 	g_return_if_fail(gc!=NULL);
 
@@ -763,7 +776,10 @@ negate_val(GtkWidget *w, gpointer data)
 			gc->result_string[0]='-';
 	}
 
-	sscanf(gc->result_string,"%lf",&gc->result);
+        /* make sure get values in a consistent manner */
+        old_locale = setlocale (LC_NUMERIC, "C");
+	sscanf(gc->result_string, "%lf", &gc->result);
+        setlocale (LC_NUMERIC, old_locale);
 
 	gtk_widget_queue_draw (gc->display);
 }
