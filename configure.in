@@ -140,6 +140,16 @@ AC_PATH_PROG(LIBGLADE_CONVERT, libglade-convert)
 if test -z "$LIBGLADE_CONVERT" ; then
 	AC_MSG_WARN([libglade-convert (from libglade 2.0) is needed for the checks in the tests directory.])
 fi
+
+dnl File Chooser stuff
+PKG_CHECK_MODULES(FILE_SYSTEM, gtk+-2.0 >= 2.3.2 gnome-vfs-2.0 >= 2.5.3)
+GTK_VERSION=`$PKG_CONFIG --variable=gtk_binary_version gtk+-2.0`
+AC_SUBST(FILE_SYSTEM_CFLAGS)
+AC_SUBST(FILE_SYSTEM_LIBS)
+AC_SUBST(GTK_VERSION)
+
+GTK_VERSION=`$PKG_CONFIG --variable=gtk_binary_version gtk+-2.0`
+AC_SUBST(GTK_VERSION)
 	
 dnl
 dnl Check for gtk-doc
@@ -258,6 +268,7 @@ po/Makefile.in
 libgnomeui/Makefile
 libgnomeui/libgnomeui-2.0.pc
 libgnomeui/pixmaps/Makefile
+file-chooser/Makefile
 glade/Makefile
 images/Makefile
 demos/Makefile

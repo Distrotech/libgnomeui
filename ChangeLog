@@ -1,5 +1,14 @@
 2004-02-24  Anders Carlsson  <andersca@gnome.org>
 
+	* Makefile.am:
+	* configure.in:
+	* file-chooser/ChangeLog:
+	* file-chooser/Makefile.am:
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	Move over the file system backend from gnome-vfs.
+
+2004-02-24  Anders Carlsson  <andersca@gnome.org>
+
 	* configure.in: Release 2.5.90
 
 2004-02-20  Christian Rose  <menthos@menthos.com>

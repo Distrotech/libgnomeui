@@ -1,2 +1,2 @@
-SUBDIRS = libgnomeui glade images demos test-gnome doc po #tests
+SUBDIRS = libgnomeui file-chooser glade images demos test-gnome doc po #tests
 
