@@ -110,6 +110,11 @@ struct _GtkCalendar
   gint highlight_col;
 
   gint max_char_width;
+  /* flags */
+  unsigned int dirty:1;
+  unsigned int frozen;
+
+  char grow_space [32];
 };
 
 struct _GtkCalendarClass
@@ -152,7 +157,8 @@ void	   gtk_calendar_display_options (GtkCalendar *calendar,
                                          GtkCalendarDisplayOptions flags);
 
 void       gtk_calendar_get_date        (GtkCalendar *calendar, gint *year, gint *month, gint *day);
-
+void       gtk_calendar_freeze          (GtkCalendar *calendar);
+void       gtk_calendar_thaw            (GtkCalendar *calendar);
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

@@ -304,6 +304,8 @@ gtk_calendar_init (GtkCalendar *gcal)
       max_char_width = str_width;
   };
   gcal->max_char_width = max_char_width;
+  gcal->dirty = 1;
+  gcal->frozen = 0;
 }
 
 GtkWidget*
@@ -1008,7 +1010,9 @@ gtk_calendar_paint_main (GtkWidget *widget)
   g_return_if_fail (GTK_IS_CALENDAR (widget));
 
   calendar = GTK_CALENDAR (widget);
-
+  if (calendar->frozen)
+    return;
+  calendar->dirty = 0;
   gdk_window_clear (calendar->main_win);
 
   gtk_calendar_compute_days(calendar); /* REMOVE later */
@@ -1182,8 +1186,10 @@ gtk_calendar_clear_marks (GtkCalendar *calendar)
     calendar->marked_date[day] = FALSE;
   }
 
-  if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
+  if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar))){
+    calendar->dirty = 1;
     gtk_calendar_paint_main(GTK_WIDGET(calendar));
+  }
 }
 
 gint
@@ -1194,8 +1200,10 @@ gtk_calendar_mark_day (GtkCalendar *calendar, gint day)
   if (day>=1 && day <=31)  
     calendar->marked_date[day-1] = TRUE;
 
-  if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
+  if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar))){
+    calendar->dirty = 1;	  
     gtk_calendar_paint_main(GTK_WIDGET(calendar));
+  }
   return TRUE;
 }
 
@@ -1207,8 +1215,10 @@ gtk_calendar_unmark_day (GtkCalendar *calendar, gint day)
   if (day>=1 && day <=31)
     calendar->marked_date[day-1] = FALSE;
 
-  if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
+  if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar))){
+    calendar->dirty = 1;
     gtk_calendar_paint_main(GTK_WIDGET(calendar));
+  }
   return TRUE;
 }
 
@@ -1412,3 +1422,24 @@ gtk_calendar_paint_arrow (GtkWidget *widget, guint arrow)
   return FALSE;   
 }
 
+void
+gtk_calendar_freeze (GtkCalendar *calendar)
+{
+  g_return_val_if_fail (GTK_IS_CALENDAR (calendar), FALSE);
+  calendar->frozen++;
+}
+
+void
+gtk_calendar_thaw (GtkCalendar *calendar)
+{
+  g_return_val_if_fail (GTK_IS_CALENDAR (calendar), FALSE);
+  if (calendar->frozen){
+      calendar->frozen--;
+      if (calendar->frozen)
+        return;
+      if (calendar->dirty){
+	if (GTK_WIDGET_DRAWABLE (calendar))
+	  gtk_calendar_paint_main (GTK_WIDGET (calendar));
+      }
+  }
+}
