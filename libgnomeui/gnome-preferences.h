@@ -48,22 +48,22 @@ void              gnome_preferences_set_toolbar_relief       (gboolean b);
 /* Whether to try to center dialogs over their parent window.
    If it's possible, dialog_position is ignored. If not,
    fall back to dialog_position. */
-gboolean          gnome_preferences_get_dialog_centered      ();
+gboolean          gnome_preferences_get_dialog_centered      (void);
 void              gnome_preferences_set_dialog_centered      (gboolean b);
 
 /* Whether dialogs are GTK_WINDOW_DIALOG or GTK_WINDOW_TOPLEVEL */
-GtkWindowType     gnome_preferences_get_dialog_type          ();
+GtkWindowType     gnome_preferences_get_dialog_type          (void);
 void              gnome_preferences_set_dialog_type          (GtkWindowType t);
 
 /* Whether dialogs are GTK_WIN_POS_NONE, GTK_WIN_POS_CENTER,
    GTK_WIN_POS_MOUSE */
-GtkWindowPosition gnome_preferences_get_dialog_position      ();
+GtkWindowPosition gnome_preferences_get_dialog_position      (void);
 void              gnome_preferences_set_dialog_position      (GtkWindowPosition p);
 
 /* default MDI mode and MDI notebook tab position */
-GnomeMDIMode      gnome_preferences_get_mdi_mode             ();
+GnomeMDIMode      gnome_preferences_get_mdi_mode             (void);
 void              gnome_preferences_set_mdi_mode             (GnomeMDIMode m);
-GtkPositionType   gnome_preferences_get_mdi_tab_pos          ();
+GtkPositionType   gnome_preferences_get_mdi_tab_pos          (void);
 void              gnome_preferences_set_mdi_tab_pos          (GtkPositionType p);
 
 END_GNOME_DECLS
