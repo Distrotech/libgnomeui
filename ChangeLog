@@ -1,3 +1,10 @@
+2003-07-10  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Bump version
+	* libgnomeui/gnome-app-helper.h: Fix typos
+	* libgnomeui/gnome-client.h: Fix typos
+	* libgnomeui/gnome-propertybox.h: Fix typos
+
 2003-07-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* fix a typo in configure.in that broke the build.
