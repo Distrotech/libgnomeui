@@ -99,7 +99,6 @@ struct _GnomeApp {
 	GtkWidget *menubar;	/* The MenuBar */
 	GtkWidget *toolbar;	/* The Toolbar */
 	GtkWidget *contents;	/* The contents */
-	
 	GtkWidget *table;	/* The table widget that ties them all */
 	
 	/* Positions for the menubar and the toolbar */
