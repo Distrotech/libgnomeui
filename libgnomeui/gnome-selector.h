@@ -1,3 +1,4 @@
+/* -*- Mode: C; c-set-style: gnu indent-tabs-mode: t; c-basic-offset: 4; tab-width: 8 -*- */
 /*
  * Copyright (C) 2000 SuSE GmbH
  * Author: Martin Baulig <baulig@suse.de>
@@ -54,56 +55,56 @@ typedef struct _GnomeSelectorPrivate  GnomeSelectorPrivate;
 typedef struct _GnomeSelectorClass    GnomeSelectorClass;
 
 enum {
-        GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET     = 1 << 0,
-        GNOME_SELECTOR_DEFAULT_SELECTOR_WIDGET  = 1 << 1,
-        GNOME_SELECTOR_DEFAULT_BROWSE_DIALOG    = 1 << 2,
-        GNOME_SELECTOR_WANT_BROWSE_BUTTON       = 1 << 3,
-        GNOME_SELECTOR_WANT_CLEAR_BUTTON        = 1 << 4
+    GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET     = 1 << 0,
+    GNOME_SELECTOR_DEFAULT_SELECTOR_WIDGET  = 1 << 1,
+    GNOME_SELECTOR_DEFAULT_BROWSE_DIALOG    = 1 << 2,
+    GNOME_SELECTOR_WANT_BROWSE_BUTTON       = 1 << 3,
+    GNOME_SELECTOR_WANT_CLEAR_BUTTON        = 1 << 4
 };
 
 struct _GnomeSelector {
-        GtkVBox vbox;
+    GtkVBox vbox;
         
-        /*< private >*/
-        GnomeSelectorPrivate *_priv;
+    /*< private >*/
+    GnomeSelectorPrivate *_priv;
 };
 
 struct _GnomeSelectorClass {
-        GtkVBoxClass parent_class;
+    GtkVBoxClass parent_class;
 
-        void      (*changed)                   (GnomeSelector *selector);
-        void      (*browse)                    (GnomeSelector *selector);
-        void      (*clear)                     (GnomeSelector *selector);
+    void      (*changed)                   (GnomeSelector *selector);
+    void      (*browse)                    (GnomeSelector *selector);
+    void      (*clear)                     (GnomeSelector *selector);
 
-        void      (*freeze)                    (GnomeSelector *selector);
-        void      (*update)                    (GnomeSelector *selector);
-        void      (*thaw)                      (GnomeSelector *selector);
+    void      (*freeze)                    (GnomeSelector *selector);
+    void      (*update)                    (GnomeSelector *selector);
+    void      (*thaw)                      (GnomeSelector *selector);
 
-        gboolean  (*set_filename)              (GnomeSelector *selector,
-						const gchar   *filename);
+    gboolean  (*set_filename)              (GnomeSelector *selector,
+                                            const gchar   *filename);
 
-        gchar *   (*get_entry_text)            (GnomeSelector *selector);
-        void      (*set_entry_text)            (GnomeSelector *selector,
-						const gchar   *text);
-        void      (*activate_entry)            (GnomeSelector *selector);
+    gchar *   (*get_entry_text)            (GnomeSelector *selector);
+    void      (*set_entry_text)            (GnomeSelector *selector,
+                                            const gchar   *text);
+    void      (*activate_entry)            (GnomeSelector *selector);
 
-        gboolean  (*check_filename)            (GnomeSelector *selector,
-						const gchar   *filename);
-        void      (*add_file)                  (GnomeSelector *selector,
-						const gchar   *filename);
+    gboolean  (*check_filename)            (GnomeSelector *selector,
+                                            const gchar   *filename);
+    void      (*add_file)                  (GnomeSelector *selector,
+                                            const gchar   *filename);
 
-        gboolean  (*check_directory)           (GnomeSelector *selector,
-                                                const gchar   *directory);
-        void      (*add_directory)             (GnomeSelector *selector,
-						const gchar   *directory);
+    gboolean  (*check_directory)           (GnomeSelector *selector,
+                                            const gchar   *directory);
+    void      (*add_directory)             (GnomeSelector *selector,
+                                            const gchar   *directory);
 
-        void      (*update_file_list)          (GnomeSelector *selector);
+    void      (*update_file_list)          (GnomeSelector *selector);
 
-        void      (*set_selection_mode)        (GnomeSelector *selector,
-						guint          mode);
-        GSList *  (*get_selection)             (GnomeSelector *selector);
+    void      (*set_selection_mode)        (GnomeSelector *selector,
+                                            guint          mode);
+    GSList *  (*get_selection)             (GnomeSelector *selector);
 
-	void      (*history_changed)           (GnomeSelector *selector);
+    void      (*history_changed)           (GnomeSelector *selector);
 };
 
 

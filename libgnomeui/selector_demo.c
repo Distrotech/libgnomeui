@@ -1,3 +1,4 @@
+/* -*- Mode: C; c-set-style: gnu indent-tabs-mode: t; c-basic-offset: 4; tab-width: 8 -*- */
 /*
  * Copyright (C) 2000 SuSE GmbH
  * Author: Martin Baulig <baulig@suse.de>
@@ -30,70 +31,70 @@ static GtkWidget *iselector;
 static void
 quit_cb (void)
 {
-        gtk_main_quit ();
+    gtk_main_quit ();
 }
 
 static void
 file_list_cb (void)
 {
-	GSList *list, *c;
+    GSList *list, *c;
 
-	list = gnome_selector_get_file_list (GNOME_SELECTOR (iselector), TRUE);
+    list = gnome_selector_get_file_list (GNOME_SELECTOR (iselector), TRUE);
 
-	for (c = list; c; c = c->next) {
-		g_print ("FILE: `%s'\n", (gchar *) c->data);
-	}
+    for (c = list; c; c = c->next) {
+	g_print ("FILE: `%s'\n", (gchar *) c->data);
+    }
 }
 
 static void
 selection_cb (void)
 {
-	GSList *list, *c;
+    GSList *list, *c;
 
-	list = gnome_selector_get_selection (GNOME_SELECTOR (iselector));
+    list = gnome_selector_get_selection (GNOME_SELECTOR (iselector));
 
-	for (c = list; c; c = c->next) {
-		g_print ("SELECTION: `%s'\n", (gchar *) c->data);
-	}
+    for (c = list; c; c = c->next) {
+	g_print ("SELECTION: `%s'\n", (gchar *) c->data);
+    }
 }
 
 static void
 load_history_cb (void)
 {
-	gnome_selector_load_history (GNOME_SELECTOR (iselector));
+    gnome_selector_load_history (GNOME_SELECTOR (iselector));
 }
 
 static void
 save_history_cb (void)
 {
-	gnome_selector_save_history (GNOME_SELECTOR (iselector));
+    gnome_selector_save_history (GNOME_SELECTOR (iselector));
 }
 
 static GnomeUIInfo file_menu[] = {
-	{ GNOME_APP_UI_ITEM, "Exit", NULL, quit_cb, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT, 'X',
-	  GDK_CONTROL_MASK, NULL },
-        { GNOME_APP_UI_ENDOFINFO }
+    { GNOME_APP_UI_ITEM, "Exit", NULL, quit_cb, NULL, NULL,
+      GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT, 'X',
+      GDK_CONTROL_MASK, NULL },
+    { GNOME_APP_UI_ENDOFINFO }
 };
 
 static GnomeUIInfo test_menu[] = {
-	{ GNOME_APP_UI_ITEM, "Display file list", NULL, file_list_cb, NULL,
-	  NULL, GNOME_APP_PIXMAP_NONE, NULL, 'f', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, "Display selection", NULL, selection_cb, NULL,
-	  NULL, GNOME_APP_PIXMAP_NONE, NULL, 'l', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, "Save history", NULL, save_history_cb, NULL,
-	  NULL, GNOME_APP_PIXMAP_NONE, NULL, 's', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, "Load history", NULL, load_history_cb, NULL,
-	  NULL, GNOME_APP_PIXMAP_NONE, NULL, 'l', GDK_CONTROL_MASK, NULL },
-        { GNOME_APP_UI_ENDOFINFO }
+    { GNOME_APP_UI_ITEM, "Display file list", NULL, file_list_cb, NULL,
+      NULL, GNOME_APP_PIXMAP_NONE, NULL, 'f', GDK_CONTROL_MASK, NULL },
+    { GNOME_APP_UI_ITEM, "Display selection", NULL, selection_cb, NULL,
+      NULL, GNOME_APP_PIXMAP_NONE, NULL, 'l', GDK_CONTROL_MASK, NULL },
+    { GNOME_APP_UI_ITEM, "Save history", NULL, save_history_cb, NULL,
+      NULL, GNOME_APP_PIXMAP_NONE, NULL, 's', GDK_CONTROL_MASK, NULL },
+    { GNOME_APP_UI_ITEM, "Load history", NULL, load_history_cb, NULL,
+      NULL, GNOME_APP_PIXMAP_NONE, NULL, 'l', GDK_CONTROL_MASK, NULL },
+    { GNOME_APP_UI_ENDOFINFO }
 };
 
 static GnomeUIInfo main_menu[] = {
-        { GNOME_APP_UI_SUBTREE, ("File"), NULL, file_menu, NULL, NULL,
-	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-        { GNOME_APP_UI_SUBTREE, ("Test"), NULL, test_menu, NULL, NULL,
-	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-        { GNOME_APP_UI_ENDOFINFO }
+    { GNOME_APP_UI_SUBTREE, ("File"), NULL, file_menu, NULL, NULL,
+      GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+    { GNOME_APP_UI_SUBTREE, ("Test"), NULL, test_menu, NULL, NULL,
+      GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+    { GNOME_APP_UI_ENDOFINFO }
 };
 
 
@@ -102,10 +103,10 @@ static GnomeUIInfo main_menu[] = {
 static void
 test_cb (GtkWidget *button, gpointer data)
 {
-	GnomeCanvas *canvas = GNOME_CANVAS (data);
+    GnomeCanvas *canvas = GNOME_CANVAS (data);
 
-	gnome_canvas_scroll_to (canvas, 100, 100);
-	gnome_canvas_update_now (canvas);
+    gnome_canvas_scroll_to (canvas, 100, 100);
+    gnome_canvas_update_now (canvas);
 }
 
 static void
