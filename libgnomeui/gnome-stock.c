@@ -18,7 +18,6 @@
 #include "../programs/gtt/tb_copy.xpm"
 #include "../programs/gtt/tb_paste.xpm"
 #include "../programs/gtt/tb_properties.xpm"
-/* #include "../programs/gtt/tb_prop_dis.xpm" */
 #include "../programs/gtt/tb_unknown.xpm"
 #include "../programs/gtt/tb_exit.xpm"
 #include "gnome-stock-ok.xpm"
@@ -27,6 +26,19 @@
 
 #define STOCK_SEP '.'
 #define STOCK_SEP_STR "."
+
+/* The stock buttons suck at this time. So maybe we should undefine
+   BUTTON_WANT_ICON. If it is undefined, the stock buttons will not
+   include a pixmap. I leave this defined, so that ppl see a
+   difference between stock buttons and application buttons. */
+#define BUTTON_WANT_ICON
+
+/* Hmmm, I'm not sure, if using color context can consume to much
+   colors, so one can define this here. If defined, all color context
+   modes other then true/pseudo color and gray lead to the old shading
+   method for insensitive pixmaps. If undefined, the newer method will
+   allways be used */
+#undef NOT_ALLWAYS_SHADE
 
 
 /**************************/
@@ -63,6 +75,11 @@ gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
         GnomeStockPixmapWidget *w = GNOME_STOCK_PIXMAP_WIDGET(widget);
         GtkPixmap *pixmap;
 
+#ifdef DEBUG
+        g_return_if_fail(GTK_WIDGET_REALIZED(widget));
+#else /* DEBUG */
+        if (!GTK_WIDGET_REALIZED(widget)) return;
+#endif /* DEBUG */
         pixmap = NULL;
         if (GTK_WIDGET_HAS_FOCUS(widget)) {
                 if (!w->focused) {
@@ -106,14 +123,9 @@ gnome_stock_pixmap_widget_realize(GtkWidget *widget)
         if (parent_class)
                 (* GTK_WIDGET_CLASS(parent_class)->realize)(widget);
         p = GNOME_STOCK_PIXMAP_WIDGET(widget);
-        if (p->regular) return;
+        if (p->pixmap) return;
         g_return_if_fail(p->window != NULL);
-        p->pixmap = gnome_stock_pixmap(p->window, p->icon,
-                                       GNOME_STOCK_PIXMAP_REGULAR);
-        p->regular = p->pixmap;
-        g_return_if_fail(p->pixmap != NULL);
-        gtk_widget_show(GTK_WIDGET(p->pixmap));
-        gtk_container_add(GTK_CONTAINER(p), GTK_WIDGET(p->pixmap));
+        gnome_stock_pixmap_widget_state_changed(widget, 0);
 }
 
 
@@ -262,7 +274,7 @@ stock_pixmaps(void)
 
 
 static GnomeStockPixmapEntry *
-lookup(char *icon, char *subtype)
+lookup(char *icon, char *subtype, int fallback)
 {
         char *s;
         GHashTable *hash = stock_pixmaps();
@@ -271,6 +283,7 @@ lookup(char *icon, char *subtype)
         s = build_hash_key(icon, subtype);
         entry = (GnomeStockPixmapEntry *)g_hash_table_lookup(hash, s);
         if (!entry) {
+                if (!fallback) return NULL;
                 g_free(s);
                 s = build_hash_key(icon, GNOME_STOCK_PIXMAP_REGULAR);
                 entry = (GnomeStockPixmapEntry *)
@@ -301,17 +314,63 @@ build_disabled_pixmap(GtkWidget *window, GtkPixmap **inout_pixmap)
         GdkWindow *pixmap = (*inout_pixmap)->pixmap;
         GtkStyle *style;
         gint w, h, x, y;
+        GdkGCValues vals;
+        GdkVisual *visual;
+        GdkImage *image;
+        GdkColorContext *cc;
+        GdkColor color;
+        GdkColormap *cmap;
+        gint32 red, green, blue;
 
+        g_return_if_fail(window->window != NULL);
         style = gtk_widget_get_style(window);
-        g_assert(style != NULL);
         gc = style->bg_gc[GTK_STATE_INSENSITIVE];
-        g_assert(gc != NULL);
         gdk_window_get_size(pixmap, &w, &h);
-        for (y = 0; y < h; y ++) {
-                for (x = y % 2; x < w; x += 2) {
-                        gdk_draw_point(pixmap, gc, x, y);
+        visual = gdk_window_get_visual(window->window);
+        cmap = gdk_window_get_colormap(window->window);
+        cc = gdk_color_context_new(visual, cmap);
+#ifdef NOT_ALLWAYS_SHADE
+        if ((cc->mode != GDK_CC_MODE_TRUE) &&
+            (cc->mode != GDK_CC_MODE_MY_GRAY)) {
+                /* preserve colors */
+                gdk_color_context_free(cc);
+                for (y = 0; y < h; y ++) {
+                        for (x = y % 2; x < w; x += 2) {
+                                gdk_draw_point(pixmap, gc, x, y);
+                        }
+                }
+                return;
+        }
+#endif
+        image = gdk_image_get(pixmap, 0, 0, w, h);
+        gdk_gc_get_values(gc, &vals);
+        color.pixel = vals.foreground.pixel;
+        gdk_color_context_query_color(cc, &color);
+        red = color.red;
+        green = color.green;
+        blue = color.blue;
+        for (y = 0; y < h; y++) {
+                for (x = 0; x < w; x++) {
+                        GdkColor c;
+                        int failed;
+                        c.pixel = gdk_image_get_pixel(image, x, y);
+                        gdk_color_context_query_color(cc, &c);
+                        c.red = (((gint32)c.red - red) >> 1)
+                                + red;
+                        c.green = (((gint32)c.green - green) >> 1)
+                                + green;
+                        c.blue = (((gint32)c.blue - blue) >> 1)
+                                + blue;
+                        c.pixel = gdk_color_context_get_pixel(cc, c.red,
+                                                              c.green,
+                                                              c.blue,
+                                                              &failed);
+                        gdk_image_put_pixel(image, x, y, c.pixel);
                 }
         }
+        gdk_draw_image(pixmap, gc, image, 0, 0, 0, 0, w, h);
+        gdk_image_destroy(image);
+        gdk_color_context_free(cc);
 }
 
 
@@ -333,7 +392,7 @@ gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype)
         g_return_val_if_fail(GTK_IS_WIDGET(window), NULL);
         /* subtype can be NULL, so not checked */
 
-        entry = lookup(icon, subtype);
+        entry = lookup(icon, subtype, TRUE);
         if (!entry) return NULL;
         pixmap = NULL;
         switch (entry->type) {
@@ -346,8 +405,7 @@ gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype)
         }
         /* check if we have to draw our own disabled pixmap */
         /* TODO: should be optimized a bit */
-        if ((entry == lookup(icon, GNOME_STOCK_PIXMAP_REGULAR)) &&
-            (pixmap) &&
+        if ((NULL == lookup(icon, subtype, 0)) && (pixmap) &&
             (0 == strcmp(subtype, GNOME_STOCK_PIXMAP_DISABLED))) {
                 build_disabled_pixmap(window, &pixmap);
         }
@@ -370,8 +428,11 @@ gint
 gnome_stock_pixmap_register(char *icon, char *subtype,
                             GnomeStockPixmapEntry *entry)
 {
-        g_assert_not_reached();
-        return 0;
+        g_return_val_if_fail(NULL == lookup(icon, subtype, 0), 0);
+        g_return_val_if_fail(entry != NULL, 0);
+        g_hash_table_insert(stock_pixmaps(), build_hash_key(icon, subtype),
+                            entry);
+        return 1;
 }
 
 
@@ -380,8 +441,18 @@ gint
 gnome_stock_pixmap_change(char *icon, char *subtype,
                           GnomeStockPixmapEntry *entry)
 {
-        g_assert_not_reached();
-        return 0;
+        GHashTable *hash;
+        char *key;
+
+        g_return_val_if_fail(NULL != lookup(icon, subtype, 0), 0);
+        g_return_val_if_fail(entry != NULL, 0);
+        hash = stock_pixmaps();
+        key = build_hash_key(icon, subtype);
+        g_hash_table_remove(hash, key);
+        g_hash_table_insert(hash, key, entry);
+        /* TODO: add some method to change all pixmaps (or at least
+           the pixmap_widgets) to the new icon */
+        return 1;
 }
 
 
@@ -389,35 +460,33 @@ gnome_stock_pixmap_change(char *icon, char *subtype,
 GnomeStockPixmapEntry *
 gnome_stock_pixmap_checkfor(char *icon, char *subtype)
 {
-        return lookup(icon, subtype);
+        return lookup(icon, subtype, 0);
 }
 
 
-
-#define WANT_ICON
 
 GtkWidget *
 gnome_stock_button(char *type)
 {
         GtkWidget *button, *label, *hbox;
-#ifdef WANT_ICON
+#ifdef BUTTON_WANT_ICON
         GtkWidget *pixmap;
-#endif /* WANT_ICON */
+#endif /* BUTTON_WANT_ICON */
 
         button = gtk_button_new();
-        hbox = gtk_hbox_new(FALSE, 5);
+        hbox = gtk_hbox_new(FALSE, 0);
         gtk_widget_show(hbox);
         gtk_container_add(GTK_CONTAINER(button), hbox);
         label = gtk_label_new(gettext(type));
         gtk_widget_show(label);
-        gtk_box_pack_end_defaults(GTK_BOX(hbox), label);
+        gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 7);
 
-#ifdef WANT_ICON
+#ifdef BUTTON_WANT_ICON
         pixmap = gnome_stock_pixmap_widget(button, type);
         if (pixmap) {
                 gtk_widget_show(pixmap);
                 gtk_box_pack_start_defaults(GTK_BOX(hbox), pixmap);
         }
-#endif /* WANT_ICON */
+#endif /* BUTTON_WANT_ICON */
         return button;
 }

@@ -36,7 +36,15 @@
    We now have stock buttons too. To use them, just replace any
    gtk_button_new{_with_label} with
    gnome_stock_button(GNOME_STOCK_BUTTON_...).  This function returns
-   a GtkButton with a gettexted default text and an icon. */
+   a GtkButton with a gettexted default text and an icon.
+
+   There's an additional feature, which might be interesting. If an
+   application calls gnome_stock_pixmap_register and uses it by
+   calling gnome_stock_pixmap_widget, it doesn't have to care about
+   the state_changed signal to display the appropriate pixmap
+   itself. Additionally gnome-stock generates a disabled version of a
+   pixmap automatically, when no pixmap for a disabled state is
+   provided. */
 
 /* State:
 
@@ -46,16 +54,16 @@
      - gnome_stock_pixmap_checkfor
      - GnomeStockPixmapWidget
      - gnome_stock_button
+     - gnome_stock_pixmap_register
 
    not implemented:
-     - gnome_stock_pixmap_register
      - gnome_stock_pixmap_change
  */
 
 BEGIN_GNOME_DECLS
 
-/* The names of `well known' icons. I define these strings basically
-   to prevent errors due to typos. */
+/* The names of `well known' icons. I define these strings mainly to
+   prevent errors due to typos. */
 
 #define GNOME_STOCK_PIXMAP_NEW         "New"
 #define GNOME_STOCK_PIXMAP_OPEN        "Open"
