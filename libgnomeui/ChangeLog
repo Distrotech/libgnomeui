@@ -1,3 +1,9 @@
+1998-10-08  James Henstridge  <james@daa.com.au>
+
+	* gnome-href.[ch]:  Added a simple widget for embedding hyperlinks
+	into a GUI.  This uses my gnome-url code in libgnome.
+	* gtkrc:  Added some lines to make href text blue.
+
 1998-10-05  Raja R Harinath  <harinath@cs.umn.edu>
 
 	Changes to parallel `gtk+'.
