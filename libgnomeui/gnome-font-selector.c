@@ -1179,7 +1179,7 @@ text_get_xlfd (gdouble     size,
 	  break;
 	}
 
-      return g_copy_strings("-", foundry,
+      return g_strconcat("-", foundry,
 			    "-", family,
 			    "-", weight,
 			    "-", slant,

@@ -855,7 +855,7 @@ static const int entries_data_num = sizeof(entries_data) / sizeof(entries_data[0
 static char *
 build_hash_key(const char *icon, const char *subtype)
 {
-	return g_copy_strings(icon, STOCK_SEP_STR, subtype ? subtype : GNOME_STOCK_PIXMAP_REGULAR, NULL);
+	return g_strconcat(icon, STOCK_SEP_STR, subtype ? subtype : GNOME_STOCK_PIXMAP_REGULAR, NULL);
 }
 
 
@@ -1546,7 +1546,7 @@ accel_read_rc(gpointer key, gpointer value, gpointer data)
 	AccelEntry *entry = value;
 	gboolean got_default;
 
-	path = g_copy_strings(data, key, "=", accel_to_string(value), NULL);
+	path = g_strconcat(data, key, "=", accel_to_string(value), NULL);
 	s = gnome_config_get_string_with_default(path, &got_default);
 	g_free(path);
 	if (got_default) {
@@ -1618,7 +1618,7 @@ accel_dlg_apply(GtkWidget *box, int n)
 	section = gtk_object_get_data(GTK_OBJECT(box), "section");
 	for (i = 0; i < clist->rows; i++) {
 		gtk_clist_get_text(clist, i, 0, &s);
-		key = g_copy_strings(section, s, NULL);
+		key = g_strconcat(section, s, NULL);
 		gtk_clist_get_text(clist, i, 1, &s);
 		gnome_config_set_string(key, s);
 		g_free(key);
@@ -1712,7 +1712,7 @@ accel_dlg_select(GtkCList *widget, gint row, gint col, GdkEventButton *event)
 			  GTK_WIDGET(table));
 
 	gtk_clist_get_text(GTK_CLIST(widget), row, 0, &s);
-	s = g_copy_strings("Accelerator for ", s, NULL);
+	s = g_strconcat("Accelerator for ", s, NULL);
 	w = gtk_label_new(s);
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 0, 2, 0, 1);

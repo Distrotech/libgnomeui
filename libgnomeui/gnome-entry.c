@@ -195,7 +195,7 @@ gnome_entry_set_history_id (GnomeEntry *gentry, char *history_id)
 static char *
 build_prefix (GnomeEntry *gentry, int trailing_slash)
 {
-	return g_copy_strings ("/",
+	return g_strconcat ("/",
 			       gnome_app_id,
 			       "/History: ",
 			       gentry->history_id,

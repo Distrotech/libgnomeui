@@ -728,7 +728,7 @@ gtk_ted_save (GtkWidget *widget, GtkTed *ted)
 			break;
 		}
 
-		key = g_copy_strings ("=", filename, "=/", ted->dialog_name, "-", kind, "-", wi->name, "/", NULL);
+		key = g_strconcat ("=", filename, "=/", ted->dialog_name, "-", kind, "-", wi->name, "/", NULL);
 		gnome_config_push_prefix (key);
 		g_snprintf (buffer, sizeof(buffer), "%d,%d,%d,%d",
 			    wi->start_col, wi->start_row,
@@ -844,7 +844,7 @@ gtk_ted_parse_flags (char *str, int *orientation)
 static struct ted_widget_info *
 gtk_ted_load_widget (GtkTed *ted, char *prefix, char *secname)
 {
-	char *full = g_copy_strings (prefix, "/", ted->dialog_name, "-", secname, "/", NULL);
+	char *full = g_strconcat (prefix, "/", ted->dialog_name, "-", secname, "/", NULL);
 	struct ted_widget_info *wi = g_new (struct ted_widget_info, 1);
 	char *str, *s;
 	
@@ -879,7 +879,7 @@ static struct ted_widget_info *
 gtk_ted_load_frame (GtkTed *ted, char *prefix, char *secname)
 {
 	GtkWidget *w;
-	char *full = g_copy_strings (prefix, "/", ted->dialog_name, "-", secname, "/", NULL);
+	char *full = g_strconcat (prefix, "/", ted->dialog_name, "-", secname, "/", NULL);
 	struct ted_widget_info *wi = g_new (struct ted_widget_info, 1);
 	char *str, *p;
 	
@@ -905,7 +905,7 @@ gtk_ted_load_frame (GtkTed *ted, char *prefix, char *secname)
 static struct ted_widget_info *
 gtk_ted_load_label (GtkTed *ted, char *prefix, char *secname)
 {
-	char *full = g_copy_strings (prefix, "/", ted->dialog_name, "-", secname, "/", NULL);
+	char *full = g_strconcat (prefix, "/", ted->dialog_name, "-", secname, "/", NULL);
 	struct ted_widget_info *wi = g_new (struct ted_widget_info, 1);
 	char *str, *p;
 	
@@ -941,13 +941,13 @@ gtk_ted_load_layout (GtkTed *ted, char *layout_file)
 	if (layout_file)
 		full = layout_file;
 	else {
-		name = g_copy_strings ("layout/", app_name, NULL);
+		name = g_strconcat ("layout/", app_name, NULL);
 		full = gnome_datadir_file (name);
 		g_free (name);
 	}
 	
 	if (g_file_exists (full)){
-		layout = g_copy_strings ("=", full, "=", NULL);
+		layout = g_strconcat ("=", full, "=", NULL);
 	} else {
 		layout = g_strdup ("=./layout=");
 	}

@@ -616,7 +616,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
   if ((prefix = strrchr (name, '/')))
     name = prefix + 1;
 
-  prefix = g_copy_strings ("/", name, "-XXXXX", "/", NULL);
+  prefix = g_strconcat ("/", name, "-XXXXX", "/", NULL);
   name = gnome_config_get_real_path (prefix);
   
   free (prefix);
@@ -628,7 +628,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
     {
       unlink (name);
       close (fd);
-      client->config_prefix = g_copy_strings (strrchr (name, '/'), "/", NULL);
+      client->config_prefix = g_strconcat (strrchr (name, '/'), "/", NULL);
     }
   free (name);
 
@@ -1889,7 +1889,7 @@ gnome_client_get_global_config_prefix (GnomeClient *client)
   if (client == NULL)
     {
       if (!config_prefix)
-	config_prefix= g_copy_strings ("/", program_invocation_short_name, "/",
+	config_prefix= g_strconcat ("/", program_invocation_short_name, "/",
 				       NULL);
 
       return config_prefix;
@@ -1904,7 +1904,7 @@ gnome_client_get_global_config_prefix (GnomeClient *client)
 
       name= name ? (name+1) : client->program;
             
-      client->global_config_prefix= g_copy_strings ("/", name, "/", NULL);
+      client->global_config_prefix= g_strconcat ("/", name, "/", NULL);
     }
 
   return client->global_config_prefix;

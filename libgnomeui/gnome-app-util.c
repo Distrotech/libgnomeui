@@ -90,7 +90,7 @@ ack_clear_prompt_cb(GnomeAppBar * bar, gpointer data)
 
 static void gnome_app_message_bar (GnomeApp * app, const gchar * message)
 {
-  gchar * prompt = g_copy_strings(message, _(" (press return)"), NULL);
+  gchar * prompt = g_strconcat(message, _(" (press return)"), NULL);
   gnome_appbar_set_prompt(GNOME_APPBAR(app->statusbar), prompt, FALSE);
   gnome_app_activate_statusbar(app);
   g_free(prompt);
@@ -133,7 +133,7 @@ gnome_app_message (GnomeApp * app, const gchar * message)
 static void 
 gnome_app_error_bar(GnomeApp * app, const gchar * error)
 {
-  gchar * s = g_copy_strings(_("ERROR: "), error, NULL);
+  gchar * s = g_strconcat(_("ERROR: "), error, NULL);
   gdk_beep();
   gnome_app_message_bar(app, s);
   g_free(s);
@@ -170,7 +170,7 @@ gnome_app_error (GnomeApp * app, const gchar * error)
 
 static void gnome_app_warning_bar (GnomeApp * app, const gchar * warning)
 {
-  gchar * s = g_copy_strings(_("Warning: "), warning, NULL);
+  gchar * s = g_strconcat(_("Warning: "), warning, NULL);
   gdk_beep();
   gnome_app_flash(app, s);
   g_free(s);
@@ -346,7 +346,7 @@ gnome_app_reply_bar(GnomeApp * app, const gchar * question,
   gchar * prompt;
   ReplyInfo * ri;
 
-  prompt = g_copy_strings(question, yes_or_ok ? _(" (yes or no)") : 
+  prompt = g_strconcat(question, yes_or_ok ? _(" (yes or no)") : 
 			  _("  - OK? (yes or no)"), NULL);
   gnome_appbar_set_prompt(GNOME_APPBAR(app->statusbar), prompt, modal);
   gnome_app_activate_statusbar(app);

@@ -442,8 +442,7 @@ gnome_fill_info (GtkWidget *widget,
 
 	/* fill struct */
 	if(title) 
-	  gai->title = g_copy_strings (title, " ",
-				       version ? version : "", NULL);
+	  gai->title = g_strconcat (title, " ", version ? version : "", NULL);
 	else
 	  gai->title = NULL;
   

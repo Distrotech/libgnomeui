@@ -225,7 +225,7 @@ gnome_app_construct (GnomeApp *app, gchar *appname, char *title)
 	g_return_if_fail (appname != NULL);
 
 	app->name = g_strdup (appname);
-	app->prefix = g_copy_strings ("/", appname, "/", NULL);
+	app->prefix = g_strconcat ("/", appname, "/", NULL);
 	
 	if (title)
 		gtk_window_set_title (GTK_WINDOW (app), title);

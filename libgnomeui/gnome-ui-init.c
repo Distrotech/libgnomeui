@@ -136,7 +136,7 @@ gnome_add_gtk_arg_callback(poptContext con,
     break;
 
   case POPT_CALLBACK_REASON_OPTION:
-    newstr = g_copy_strings("--", opt->longName, NULL);
+    newstr = g_strconcat("--", opt->longName, NULL);
     g_ptr_array_add(gtk_args, newstr);
     gnome_client_add_static_arg(client, newstr, NULL);
 

@@ -909,7 +909,7 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 			   child name: "child_name - mdi_title" */
 			gchar *fullname;
 			
-			fullname = g_copy_strings(child->name, " - ", mdi->title, NULL);
+			fullname = g_strconcat(child->name, " - ", mdi->title, NULL);
 			gtk_window_set_title(GTK_WINDOW(app), fullname);
 			g_free(fullname);
 		}
@@ -1561,7 +1561,7 @@ void gnome_mdi_update_child (GnomeMDI *mdi, GnomeMDIChild *child)
 			   child name: "child_name - mdi_title" */
 			gchar *fullname;
       
-			fullname = g_copy_strings(child->name, " - ", mdi->title, NULL);
+			fullname = g_strconcat(child->name, " - ", mdi->title, NULL);
 			gtk_window_set_title(GTK_WINDOW(gnome_mdi_get_app_from_view(view)),
 								 fullname);
 			g_free(fullname);

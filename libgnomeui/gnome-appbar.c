@@ -389,7 +389,7 @@ gnome_appbar_set_prompt (GnomeAppBar * appbar,
     gnome_appbar_clear_prompt(appbar);
   }
 
-  appbar->prompt = g_copy_strings(prompt, "  ", NULL);
+  appbar->prompt = g_strconcat(prompt, "  ", NULL);
 
   if (modal) gtk_grab_add(appbar->status);
 
