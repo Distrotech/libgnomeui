@@ -1,3 +1,8 @@
+Wed Dec 16 11:51:23 1998  Raph Levien  <raph@gimp.org>
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_render): Added
+	alphagamma arg to rendering calls.
+
 1998-12-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.[ch]: Misc. updates to accomodate the new rendering
