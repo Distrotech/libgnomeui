@@ -1,3 +1,23 @@
+2002-10-08  Paolo Maggi  <maggi@athena.polito.it>
+
+	* libgnomeui/gnome-entry.h: removed duplicated gnome_entry_get_history_id
+	entry
+
+	* libgnomeui/gnome-entry.c (entry_activated): don't save the history, it is
+	already saved by gnome_entry_prepend_history
+	(gnome_entry_set_history_id: added documentation and a warning in the case
+	the user tries to modify an already existing id
+	(gnome_entry_get_history_id)(gnome_entry_set_max_saved): fixed doc
+	(gnome_entry_add_history): remove duplicates and save the history list if
+	needed
+	(gnome_entry_prepend_history)(gnome_entry_append_history): fixed doc,
+	check parameters
+	(gnome_entry_load_history)(gnome_entry_save_history): s/g_assert/g_return_if_fail
+	(gnome_entry_clear_history): fixed doc, save the history list
+
+	Bug #91780 fixed.
+	Bug #87377 partially fixed.
+
 2002-10-09  Dave Camp  <dave@ximian.com>
 
 	* libgnomeui/gnome-druid.c (gnome_druid_instance_init): Grab the

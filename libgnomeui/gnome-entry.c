@@ -274,7 +274,6 @@ entry_activated (GtkWidget *widget, gpointer data)
 	}
 
 	g_signal_emit (gentry, gnome_entry_signals[ACTIVATE_SIGNAL], 0);
-	gnome_entry_save_history (gentry);
 }
 
 static void
@@ -435,6 +434,15 @@ gnome_entry_history_changed (GConfClient* client,
 }
 
 /* FIXME: Make this static */
+
+/**
+ * gnome_entry_set_history_id
+ * @gentry: Pointer to GnomeEntry object.
+ * @history_id: the text id under which history data is stored
+ *
+ * Description: Set the id of the history list. This function cannot be
+ * used to change and already existing id.
+ */
 void
 gnome_entry_set_history_id (GnomeEntry *gentry, const gchar *history_id)
 {
@@ -442,8 +450,15 @@ gnome_entry_set_history_id (GnomeEntry *gentry, const gchar *history_id)
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
-	g_return_if_fail (gentry->_priv->history_id == NULL);
 
+	if (gentry->_priv->history_id != NULL) {
+		g_warning ("The program is trying to change an existing "
+			   "GnomeEntry history id. This operation is "
+			   "not allowed.");
+
+		return;
+	}
+				
 	if (history_id == NULL)
 		return;
 
@@ -493,7 +508,7 @@ gnome_entry_get_history_id (GnomeEntry *gentry)
  * @max_saved: Maximum number of history items to save
  *
  * Description: Set internal limit on number of history items saved
- * to the config file, when #gnome_entry_save_history() is called.
+ * to the config file.
  * Zero is an acceptable value for @max_saved, but the same thing is
  * accomplished by setting the history id of @gentry to %NULL.
  */
@@ -511,7 +526,7 @@ gnome_entry_set_max_saved (GnomeEntry *gentry, guint max_saved)
  * @gentry: Pointer to GnomeEntry object.
  *
  * Description: Get internal limit on number of history items saved
- * to the config file, when #gnome_entry_save_history() is called.
+ * to the config file
  * See #gnome_entry_set_max_saved().
  *
  * Returns: An unsigned integer
@@ -591,6 +606,8 @@ gnome_entry_add_history (GnomeEntry *gentry, gboolean save,
 {
 	GnomeEntryPrivate *priv;
 	struct item *item;
+	GList *list;
+	gboolean changed;
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
@@ -602,12 +619,36 @@ gnome_entry_add_history (GnomeEntry *gentry, gboolean save,
 	item->save = save;
 	item->text = g_strdup (text);
 
+	/* Remove duplicates */
+	changed = FALSE;
+	list = priv->items;
+	
+	while (list != NULL) {
+		struct item * data = list->data;
+			
+		if (strcmp (data->text, text) == 0) {
+			free_item (data, NULL);
+			priv->items = g_list_delete_link (priv->items, list);
+			
+			changed = TRUE;
+			break;
+		}
+
+		list = g_list_next (list);
+	}
+
+	/* Really add the history item */
 	if (append)
 		priv->items = g_list_append (priv->items, item);
 	else
 		priv->items = g_list_prepend (priv->items, item);
 
+	/* Update combo list */
 	set_combo_items (gentry);
+
+	/* Save the history if needed */
+	if (changed || save)
+		gnome_entry_save_history (gentry);
 }
 
 
@@ -622,12 +663,18 @@ gnome_entry_add_history (GnomeEntry *gentry, gboolean save,
  * the history list inside @gentry.  If @save is %TRUE, the history
  * item will be saved in the config file (assuming that @gentry's
  * history id is not %NULL).
+ * Duplicates are automatically removed from the history list.
+ * The history list is automatically saved if needed.
  */
 void
 gnome_entry_prepend_history (GnomeEntry *gentry, gboolean save,
 			     const gchar *text)
 {
-  gnome_entry_add_history (gentry, save, text, FALSE);
+	g_return_if_fail (gentry != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (gentry));
+	g_return_if_fail (text != NULL); /* FIXME: should we just return without warning? */
+	
+	gnome_entry_add_history (gentry, save, text, FALSE);
 }
 
 
@@ -641,11 +688,17 @@ gnome_entry_prepend_history (GnomeEntry *gentry, gboolean save,
  * of the history list inside @gentry.  If @save is %TRUE, the
  * history item will be saved in the config file (assuming that
  * @gentry's history id is not %NULL).
+ * Duplicates are automatically removed from the history list.
+ * The history list is automatically saved if needed.
  */
 void
 gnome_entry_append_history (GnomeEntry *gentry, gboolean save,
 			    const gchar *text)
 {
+	g_return_if_fail (gentry != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (gentry));
+	g_return_if_fail (text != NULL); /* FIXME: should we just return without warning? */
+
 	gnome_entry_add_history (gentry, save, text, TRUE);
 }
 
@@ -664,7 +717,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	    gentry->_priv->history_id == NULL)
 		return;
 
-	g_assert (gentry->_priv->gconf_client != NULL);
+	g_return_if_fail (gentry->_priv->gconf_client != NULL);
 
 	free_items (gentry);
 
@@ -692,8 +745,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
  * gnome_entry_clear_history
  * @gentry: Pointer to GnomeEntry object.
  *
- * Description:  Clears the history, you should call #gnome_entry_save_history
- * To make the change permanent.
+ * Description:  Clears the history.
  */
 void
 gnome_entry_clear_history (GnomeEntry *gentry)
@@ -704,6 +756,8 @@ gnome_entry_clear_history (GnomeEntry *gentry)
 	free_items (gentry);
 
 	set_combo_items (gentry);
+
+	gnome_entry_save_history (gentry);
 }
 
 static gboolean
@@ -738,7 +792,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	    gentry->_priv->history_id == NULL)
 		return;
 
-	g_assert (gentry->_priv->gconf_client != NULL);
+	g_return_if_fail (gentry->_priv->gconf_client != NULL);
 
 	key = build_gconf_key (gentry);
 	gconf_items = NULL;

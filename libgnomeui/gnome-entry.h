@@ -89,7 +89,6 @@ const gchar *gnome_entry_get_history_id   (GnomeEntry  *gentry);
 
 void         gnome_entry_set_history_id   (GnomeEntry  *gentry,
 					   const gchar *history_id);
-const gchar *gnome_entry_get_history_id   (GnomeEntry  *gentry);
 
 void         gnome_entry_set_max_saved    (GnomeEntry  *gentry,
 					   guint        max_saved);
