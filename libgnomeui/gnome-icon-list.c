@@ -1843,8 +1843,6 @@ gnome_icon_list_icon_is_visible (GnomeIconList *gil, int pos)
 	if (y1 > gil->adj->value + GTK_WIDGET (gil)->allocation.height)
 		return GTK_VISIBILITY_NONE;
 	
-	if (y1 >= gil->adj->value)
-		return GTK_VISIBILITY_FULL;
 	if (y2 <= gil->adj->value + GTK_WIDGET (gil)->allocation.height)
 		return GTK_VISIBILITY_FULL;
 

@@ -1,3 +1,8 @@
+1998-10-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (gnome_icon_list_icon_is_visible): Fix wrong
+	return value. 
+
 1998-10-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (icon_event): call toggle_icon on double click
