@@ -1462,7 +1462,7 @@ gnome_app_remove_menus(GnomeApp *app, gchar *path, gint items)
 
 
 /**
- * gnome_app_remove_menus
+ * gnome_app_remove_menu_range
  * @app: Pointer to GNOME app object.
  * @path:
  * @start:
