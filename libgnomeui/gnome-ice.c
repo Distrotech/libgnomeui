@@ -38,16 +38,23 @@ static GHashTable *__gnome_ice_internal_hash = NULL;
 #ifdef HAVE_LIBSM
 
 /* This is called when data is available on an ICE connection.  */
-static void
+static gboolean
 process_ice_messages (gpointer client_data, gint source,
 		      GdkInputCondition condition)
 {
   IceProcessMessagesStatus status;
   IceConn connection = (IceConn) client_data;
 
+  if(condition & GDK_INPUT_EXCEPTION) {
+    new_ice_connection(connection, NULL, FALSE, NULL);
+    return FALSE;
+  }
+
   status = IceProcessMessages (connection, NULL, NULL);
 
   /* FIXME: handle case when status==closed.  */
+
+  return TRUE;
 }
 
 /* This is called when a new ICE connection is made.  It arranges for
@@ -75,7 +82,8 @@ new_ice_connection (IceConn connection, IcePointer client_data, Bool opening,
 
        gnome_ice_internal->input_id = 
 	 gdk_input_add (IceConnectionNumber (connection),
-			GDK_INPUT_READ, process_ice_messages,
+			GDK_INPUT_READ|GDK_INPUT_EXCEPTION,
+			process_ice_messages,
 			(gpointer) connection);
     }
   else 
