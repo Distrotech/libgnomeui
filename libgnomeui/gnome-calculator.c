@@ -85,6 +85,31 @@ gnome_calculator_class_init (GnomeCalculatorClass *class)
 	object_class->destroy = gnome_calculator_destroy;
 }
 
+#if 0 /*only used for debugging*/
+static void
+dump_stack(GnomeCalculator *gc)
+{
+	CalculatorStack *stack;
+	GList *list;
+
+	puts("STACK_DUMP start");
+	for(list = gc->stack;list!=NULL;list = g_list_next(list)) {
+		stack = list->data;
+		if(stack == NULL)
+			puts("NULL");
+		else if(stack->type == CALCULATOR_PARENTHESIS)
+			puts("(");
+		else if(stack->type == CALCULATOR_NUMBER)
+			printf("% .12lg\n", stack->d.number);
+		else if(stack->type == CALCULATOR_FUNCTION)
+			puts("FUNCTION");
+		else
+			puts("UNKNOWN");
+	}
+	puts("STACK_DUMP end");
+}
+#endif
+
 static void
 put_led_font(GnomeCalculator *gc)
 {
@@ -472,21 +497,21 @@ add_digit(GtkWidget *w, gpointer data)
 
 	if(digit[0]=='e') {
 		if(strchr(gc->result_string,'e'))
-			return;
+			return TRUE;
 		if(strlen(gc->result_string)>9)
-			return;
+			return TRUE;
 		if(gc->result_string[0]=='\0')
 			strcpy(gc->result_string," 1");
 	} else if(digit[0]=='.') {
 		if(strchr(gc->result_string,'.'))
-			return;
+			return TRUE;
 		if(strlen(gc->result_string)>10)
-			return;
+			return TRUE;
 		if(gc->result_string[0]=='\0')
 			strcpy(gc->result_string," 0");
 	} else {
 		if(strlen(gc->result_string)>11)
-			return;
+			return TRUE;
 		if(gc->result_string[0]=='\0')
 			strcpy(gc->result_string," ");
 	}
@@ -534,6 +559,8 @@ negate_val(GtkWidget *w, gpointer data)
 	}
 
 	put_led_font(gc);
+
+	return TRUE;
 }
 
 static void
@@ -601,7 +628,21 @@ c_powe(gdouble arg1)
 static gdouble
 c_fact(gdouble arg1)
 {
-	return 0; /*FIXME: factorial*/
+	int i;
+	gdouble r;
+	if(arg1<0) {
+		do_error();
+		return 0;
+	}
+	i = (int)arg1;
+	if(arg1!=i) {
+		do_error();
+		return 0;
+	}
+	for(r=1;i>0;i--)
+		r*=i;
+
+	return r;
 }
 
 static gdouble
@@ -679,7 +720,6 @@ static gint
 exchange_m(GtkWidget *w, gpointer data)
 {
 	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
-	gdouble tmp;
 
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
@@ -781,6 +821,17 @@ add_parenth(GtkWidget *w, gpointer data)
 
 	g_return_val_if_fail(gc!=NULL,TRUE);
 
+	if(gc->stack &&
+	   ((CalculatorStack *)gc->stack->data)->type==CALCULATOR_NUMBER)
+		((CalculatorStack *)gc->stack->data)->type =
+			CALCULATOR_PARENTHESIS;
+	else {
+		CalculatorStack *stack;
+		stack = g_new(CalculatorStack,1);
+		stack->type = CALCULATOR_PARENTHESIS;
+		gc->stack = g_list_prepend(gc->stack,stack);
+	}
+
 	unselect_invert(gc);
 
 	return TRUE;
@@ -790,8 +841,23 @@ static gint
 sub_parenth(GtkWidget *w, gpointer data)
 {
 	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
-
 	g_return_val_if_fail(gc!=NULL,TRUE);
+
+	push_input(gc);
+	reduce_stack(gc);
+	set_result(gc);
+
+	if(gc->stack) {
+		CalculatorStack *stack = gc->stack->data;
+		if(stack->type==CALCULATOR_PARENTHESIS)
+			stack_pop(&gc->stack);
+		else if(g_list_next(gc->stack)) {
+			stack = g_list_next(gc->stack)->data;
+			if(stack->type==CALCULATOR_PARENTHESIS)
+				gc->stack = g_list_remove_link(gc->stack,
+						       g_list_next(gc->stack));
+		}
+	}
 
 	unselect_invert(gc);
 
@@ -889,7 +955,7 @@ static CalculatorButton buttons[8][5] = {
 static void
 gnome_calculator_init (GnomeCalculator *gc)
 {
-	gint x,y,n;
+	gint x,y;
 	GtkWidget *table;
 	GtkWidget *w;
 
