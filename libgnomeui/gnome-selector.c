@@ -52,6 +52,81 @@
 
 #undef DEBUG_ASYNC_HANDLE
 
+typedef struct _GnomeSelectorHistoryItem GnomeSelectorHistoryItem;
+typedef struct _GnomeSelectorAsyncData GnomeSelectorAsyncData;
+
+struct _GnomeSelectorPrivate {
+    GConfClient *client;
+
+    gchar       *history_id;
+    gchar       *dialog_title;
+
+    gchar       *gconf_history_dir;
+    gchar       *gconf_history_key;
+    gchar       *gconf_uri_list_key;
+    gchar       *gconf_default_uri_list_key;
+
+    GSList      *default_uri_list;
+    GSList      *uri_list;
+
+    GSList      *history;
+    guint        max_history_length;
+
+    GtkWidget   *entry_widget;
+    GtkWidget   *selector_widget;
+    GtkWidget   *browse_dialog;
+
+    GtkWidget   *box;
+    GtkWidget   *hbox;
+    GtkWidget   *browse_button;
+    GtkWidget   *clear_button;
+    GtkWidget   *default_button;
+
+    guint32      flags;
+
+    guint32      changed : 1;
+    guint32      history_changed : 1;
+    guint32      need_rebuild : 1;
+    guint32      dirty : 1;
+
+    guint        frozen;
+
+    GList       *async_ops;
+};
+
+struct _GnomeSelectorHistoryItem {
+    gboolean save;
+    gchar *text;
+};
+
+struct _GnomeSelectorAsyncData {
+    gpointer async_data;
+    GDestroyNotify async_data_destroy;
+};
+
+struct _GnomeSelectorAsyncHandle {
+    int refcount;
+
+    GnomeSelectorAsyncType async_type;
+
+    GnomeSelector *selector;
+    GnomeSelectorAsyncFunc async_func;
+    gpointer user_data;
+
+    GError *error;
+
+    gboolean success;
+    gboolean destroyed;
+    gboolean completed;
+
+    gchar *uri;
+
+    GSList *async_data_list;
+};
+
+static void gnome_selector_load_all            (GnomeSelector *selector);
+static void gnome_selector_save_all            (GnomeSelector *selector);
+
 static void gnome_selector_class_init          (GnomeSelectorClass *class);
 static void gnome_selector_init                (GnomeSelector      *selector);
 static void gnome_selector_destroy             (GtkObject          *object);
@@ -767,7 +842,7 @@ gnome_selector_construct (GnomeSelector *selector,
 	gnome_selector_load_history (selector);
 
     if (priv->flags & GNOME_SELECTOR_AUTO_SAVE_ALL)
-	_gnome_selector_load_all (selector);
+	gnome_selector_load_all (selector);
 }
 
 
@@ -785,7 +860,7 @@ gnome_selector_destroy (GtkObject *object)
 
     if (selector->_priv->client) {
 	if (selector->_priv->flags & GNOME_SELECTOR_AUTO_SAVE_ALL)
-	    _gnome_selector_save_all (selector);
+	    gnome_selector_save_all (selector);
 
 	if (selector->_priv->gconf_history_dir)
 	    gconf_client_remove_dir
@@ -1454,8 +1529,8 @@ gnome_selector_set_to_defaults (GnomeSelector *selector)
     g_warning (G_STRLOC ": this function is not yet implemented.");
 }
 
-void
-_gnome_selector_save_all (GnomeSelector *selector)
+static void
+gnome_selector_save_all (GnomeSelector *selector)
 {
     GSList *default_uri_list, *uri_list;
     gboolean result;
@@ -1484,8 +1559,8 @@ _gnome_selector_save_all (GnomeSelector *selector)
     _gnome_selector_free_list (uri_list);
 }
 
-void
-_gnome_selector_load_all (GnomeSelector *selector)
+static void
+gnome_selector_load_all (GnomeSelector *selector)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
