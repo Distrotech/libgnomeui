@@ -34,6 +34,7 @@
 struct _GnomeSelectorClientPrivate {
     GNOME_Selector selector;
     Bonobo_EventSource_ListenerId listener_id;
+    GnomeAsyncContext *async_ctx;
 
     gchar *browse_dialog_moniker;
 
@@ -62,7 +63,7 @@ gnome_selector_client_event_cb (BonoboListener    *listener,
 
 static BonoboWidgetClass *gnome_selector_client_parent_class;
 
-static GNOME_Selector_AsyncID last_async_id = 0;
+static GNOME_Selector_AsyncID last_async_id G_GNUC_UNUSED = 0;
 
 enum {
     PROP_0,
@@ -403,6 +404,8 @@ gnome_selector_client_construct_from_objref (GnomeSelectorClient *client,
 
     CORBA_exception_init (&ev);
 
+    client->_priv->async_ctx = gnome_async_context_new ();
+
     client->_priv->selector = bonobo_object_dup_ref (corba_selector, &ev);
     if (BONOBO_EX (&ev)) {
 	g_object_unref (G_OBJECT (client));
@@ -476,6 +479,25 @@ gnome_selector_client_new_from_objref (GNOME_Selector corba_selector, Bonobo_UIC
     return gnome_selector_client_construct_from_objref (client, corba_selector, uic);
 }
 
+static GNOME_Selector_AsyncData *
+gnome_selector_client_create_async_data (GnomeSelectorClient *client, const gchar *uri,
+					 GnomeAsyncHandle *async_handle)
+{
+    GNOME_Selector_AsyncData *async_data;
+
+    g_return_val_if_fail (client != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_SELECTOR_CLIENT (client), NULL);
+
+    async_data = GNOME_Selector_AsyncData__alloc ();
+    async_data->client_id = client->_priv->client_id;
+    async_data->async_id = ++last_async_id;
+    async_data->user_data._type = TC_null;
+
+    g_hash_table_insert (client->_priv->async_ops, GINT_TO_POINTER (async_data->async_id), async_handle);
+
+    return async_data;
+}
+
 gchar *
 gnome_selector_client_get_entry_text (GnomeSelectorClient *client)
 {
@@ -525,68 +547,13 @@ gnome_selector_client_activate_entry (GnomeSelectorClient *client)
     CORBA_exception_free (&ev);
 }
 
-struct _GnomeSelectorClientAsyncHandle {
-    GNOME_Selector_AsyncContext  *async_ctx;
-    GnomeSelectorClient          *client;
-    guint                         timeout_msec;
-    GnomeSelectorClientAsyncFunc  async_func;
-    gpointer                      user_data;
-    GDestroyNotify                destroy_fn;
-};
-
-static GnomeSelectorClientAsyncHandle *
-_gnome_selector_client_async_handle_get (GnomeSelectorClient *client,
-					 GnomeSelectorClientAsyncFunc async_func,
-					 gpointer user_data, GDestroyNotify destroy_fn)
-{
-    GnomeSelectorClientAsyncHandle *async_handle;
-
-    g_return_val_if_fail (client != NULL, NULL);
-    g_return_val_if_fail (GNOME_IS_SELECTOR_CLIENT (client), NULL);
-
-    async_handle = g_new0 (GnomeSelectorClientAsyncHandle, 1);
-    async_handle->client = client;
-    async_handle->async_func = async_func;
-    async_handle->user_data = user_data;
-    async_handle->destroy_fn = destroy_fn;
-
-    async_handle->async_ctx = GNOME_Selector_AsyncContext__alloc ();
-    async_handle->async_ctx->client_id = client->_priv->client_id;
-    async_handle->async_ctx->async_id = ++last_async_id;
-    async_handle->async_ctx->user_data._type = TC_null;
-
-    g_object_ref (G_OBJECT (async_handle->client));
-
-    g_hash_table_insert (client->_priv->async_ops, GINT_TO_POINTER (last_async_id), async_handle);
-
-    return async_handle;
-}
-
-static void
-_gnome_selector_client_async_handle_free (GnomeSelectorClientAsyncHandle *async_handle)
-{
-    g_return_if_fail (async_handle != NULL);
-    g_return_if_fail (async_handle->client != NULL);
-    g_return_if_fail (GNOME_IS_SELECTOR_CLIENT (async_handle->client));
-
-    g_hash_table_remove (async_handle->client->_priv->async_ops,
-			 GINT_TO_POINTER (async_handle->async_ctx->async_id));
-
-    if (async_handle->destroy_fn)
-	async_handle->destroy_fn (async_handle->user_data);
-
-    g_object_unref (G_OBJECT (async_handle->client));
-    CORBA_free (async_handle->async_ctx);
-    g_free (async_handle);
-}
-
 static void
 gnome_selector_client_event_cb (BonoboListener *listener, char *event_name, 
 				CORBA_any *any, CORBA_Environment *ev, gpointer user_data)
 {
     GnomeSelectorClient *client;
     GNOME_Selector_AsyncReply *async_reply;
-    GnomeSelectorClientAsyncHandle *async_handle;
+    GnomeAsyncHandle *async_handle;
 
     g_return_if_fail (user_data != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR_CLIENT (user_data));
@@ -598,25 +565,20 @@ gnome_selector_client_event_cb (BonoboListener *listener, char *event_name,
     async_reply = any->_value;
 
     /* Is the event for us ? */
-    if (async_reply->ctx.client_id != client->_priv->client_id)
+    if (async_reply->async_data.client_id != client->_priv->client_id)
 	return;
 
     async_handle = g_hash_table_lookup (client->_priv->async_ops,
-					GINT_TO_POINTER (async_reply->ctx.async_id));
+					GINT_TO_POINTER (async_reply->async_data.async_id));
 
     g_message (G_STRLOC ": %p - `%s' - (%d,%d) - `%s' - %d - %p", client, event_name,
-	       async_reply->ctx.client_id, async_reply->ctx.async_id, async_reply->uri,
-	       async_reply->success, async_handle);
+	       async_reply->async_data.client_id, async_reply->async_data.async_id,
+	       async_reply->uri, async_reply->success, async_handle);
 
     if (!async_handle)
 	return;
 
-    if (async_handle->async_func)
-	async_handle->async_func (client, async_handle, async_reply->type,
-				  async_reply->uri, async_reply->error, async_reply->success,
-				  async_handle->user_data);
-
-    _gnome_selector_client_async_handle_free (async_handle);
+    gnome_async_handle_completed (async_handle, async_reply->success);
 }
 
 gchar *
@@ -638,25 +600,63 @@ gnome_selector_client_get_uri (GnomeSelectorClient *client)
 }
 
 void
-gnome_selector_client_set_uri (GnomeSelectorClient             *client,
-			       GnomeSelectorClientAsyncHandle **async_handle_return,
-                               const gchar                     *uri,
-                               guint                            timeout_msec,
-                               GnomeSelectorClientAsyncFunc     async_func,
-			       gpointer                         user_data,
-			       GDestroyNotify                   destroy_fn)
+gnome_selector_client_set_uri (GnomeSelectorClient  *client,
+			       GnomeAsyncHandle    **async_handle_return,
+                               const gchar          *uri,
+                               guint                 timeout_msec,
+                               GnomeAsyncFunc        async_func,
+			       gpointer              user_data)
 {
     CORBA_Environment ev;
-    GnomeSelectorClientAsyncHandle *async_handle;
+    GnomeAsyncHandle *async_handle;
+    GNOME_Selector_AsyncData *async_data;
 
     g_return_if_fail (client != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR_CLIENT (client));
 
-    async_handle = _gnome_selector_client_async_handle_get (client, async_func, user_data, destroy_fn);
-    if (async_handle_return)
+    async_handle = gnome_async_context_get (client->_priv->async_ctx, GNOME_ASYNC_TYPE_SET_URI, 
+					    async_func, G_OBJECT (client), uri, user_data,
+					    NULL);
+    if (async_handle_return) {
 	*async_handle_return = async_handle;
+	gnome_async_handle_ref (async_handle);
+    }
+
+    async_data = gnome_selector_client_create_async_data (client, uri, async_handle);
 
     CORBA_exception_init (&ev);
-    GNOME_Selector_setURI (client->_priv->selector, uri, async_handle->async_ctx, &ev);
+    GNOME_Selector_setURI (client->_priv->selector, uri, async_data, &ev);
+    CORBA_exception_free (&ev);
+}
+
+void
+gnome_selector_client_add_uri (GnomeSelectorClient  *client,
+			       GnomeAsyncHandle    **async_handle_return,
+                               const gchar          *uri,
+			       glong                 position,
+			       guint                 list_id,
+                               guint                 timeout_msec,
+                               GnomeAsyncFunc        async_func,
+			       gpointer              user_data)
+{
+    CORBA_Environment ev;
+    GnomeAsyncHandle *async_handle;
+    GNOME_Selector_AsyncData *async_data;
+
+    g_return_if_fail (client != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR_CLIENT (client));
+
+    async_handle = gnome_async_context_get (client->_priv->async_ctx, GNOME_ASYNC_TYPE_ADD_URI, 
+					    async_func, G_OBJECT (client), uri, user_data,
+					    NULL);
+    if (async_handle_return) {
+	*async_handle_return = async_handle;
+	gnome_async_handle_ref (async_handle);
+    }
+
+    async_data = gnome_selector_client_create_async_data (client, uri, async_handle);
+
+    CORBA_exception_init (&ev);
+    GNOME_Selector_addURI (client->_priv->selector, uri, position, list_id, async_data, &ev);
     CORBA_exception_free (&ev);
 }
