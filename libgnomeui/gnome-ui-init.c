@@ -27,7 +27,6 @@
 #include "gnome-preferences.h"
 #include "libgnomeui/gnome-client.h"
 #include "libgnomeui/gnome-init.h"
-#include <gdk_imlib_private.h>
 
 static gboolean
 relay_gtk_signal(GtkObject *object,
@@ -240,10 +239,9 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
     gtk_rc_set_image_loader(imlib_image_loader);
     gnome_rc_parse(program_invocation_name);
     gnome_preferences_load();
-    if (gnome_preferences_get_disable_imlib_cache ()){
-        _gdk_imlib_data->cache.on_image = 1;
-        _gdk_imlib_data->cache.on_pixmap = 0;
-    }
+    if (gnome_preferences_get_disable_imlib_cache ())
+	gdk_imlib_set_cache_info (0, 1);
+
     gnome_config_set_set_handler(set_handler,NULL);
     gnome_config_set_sync_handler(sync_handler,NULL);
     g_atexit(atexit_handler);

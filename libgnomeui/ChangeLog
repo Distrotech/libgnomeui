@@ -1,3 +1,8 @@
+1998-12-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-init.c: Do not use imlib private data, use the new
+	exported routines instead.
+
 1998-12-15  Martin Baulig  <baulig@merkur.uni-trier.de>
 
 	* pixmaps/Makefile.am (CLEANFILES): Add $(BUILT_SOURCES) here.
