@@ -54,7 +54,7 @@ gnome_property_configurator_request (GnomePropertyConfigurator *th,
 		  gtk_notebook_current_page (GTK_NOTEBOOK (th->notebook)))->data);
 
 
-	// printf ("request %d %x\n", gtk_notebook_current_page (th->notebook), cb);
+	/* printf ("request %d %x\n", gtk_notebook_current_page (th->notebook), cb); */
 
 	if (cb)
 		return (*cb) (r);
