@@ -4,12 +4,8 @@
 #include <libintl.h>
 #include <glib.h>
 #include <gdk/gdk.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkhbox.h>
-#include <gtk/gtkvbox.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkwindow.h>
-#include <gtk/gtkpixmap.h>
+#include <gtk/gtk.h>
+
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-i18n.h"
 #include "gnome-stock.h"
