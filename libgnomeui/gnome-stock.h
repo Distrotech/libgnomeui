@@ -1,5 +1,5 @@
-#ifndef __GNOME_PIXMAP_H__
-#define __GNOME_PIXMAP_H__
+#ifndef __GNOME_STOCK_H__
+#define __GNOME_STOCK_H__
 
 
 #include <libgnome/gnome-defs.h>
@@ -196,4 +196,4 @@ GtkWidget             *gnome_stock_button          (char *type);
 
 END_GNOME_DECLS
 
-#endif
+#endif /* GNOME_STOCK_H */

@@ -6,9 +6,13 @@
 #include <gdk/gdk.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtkhbox.h>
+#include <gtk/gtkvbox.h>
 #include <gtk/gtksignal.h>
+#include <gtk/gtkwindow.h>
+#include <gtk/gtkpixmap.h>
 #include "libgnome/gnome-defs.h"
 #include "gnome-stock.h"
+#include "gnome-pixmap.h"
 
 #include "../programs/gtt/tb_new.xpm"
 #include "../programs/gtt/tb_save.xpm"
@@ -97,12 +101,35 @@ gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
 
 
 static void
+gnome_stock_pixmap_widget_realize(GtkWidget *widget)
+{
+        GnomeStockPixmapWidget *p;
+
+        g_return_if_fail(widget != NULL);
+        if (parent_class)
+                (* GTK_WIDGET_CLASS(parent_class)->realize)(widget);
+        p = GNOME_STOCK_PIXMAP_WIDGET(widget);
+        if (p->regular) return;
+        g_return_if_fail(p->window != NULL);
+        p->pixmap = gnome_stock_pixmap(p->window, p->icon,
+                                       GNOME_STOCK_PIXMAP_REGULAR);
+        p->regular = p->pixmap;
+        g_return_if_fail(p->pixmap != NULL);
+        gtk_widget_show(GTK_WIDGET(p->pixmap));
+        gtk_container_add(GTK_CONTAINER(p), GTK_WIDGET(p->pixmap));
+}
+
+
+
+static void
 gnome_stock_pixmap_widget_class_init(GnomeStockPixmapWidgetClass *klass)
 {
 	GtkObjectClass *object_class = GTK_OBJECT_CLASS(klass);
 	object_class->destroy = gnome_stock_pixmap_widget_destroy;
         ((GtkWidgetClass *)klass)->state_changed =
                 gnome_stock_pixmap_widget_state_changed;
+        ((GtkWidgetClass *)klass)->realize =
+                gnome_stock_pixmap_widget_realize;
 }
 
 
@@ -161,12 +188,6 @@ gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon)
         p = GNOME_STOCK_PIXMAP_WIDGET(w);
         p->icon = g_strdup(icon);
         p->window = window;
-
-        p->pixmap = gnome_stock_pixmap(window, icon,
-                                       GNOME_STOCK_PIXMAP_REGULAR);
-        p->regular = p->pixmap;
-        gtk_widget_show(GTK_WIDGET(p->pixmap));
-        gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(p->pixmap));
 
 	return w;
 }
@@ -268,22 +289,9 @@ static GtkPixmap *
 create_pixmap_from_data(GtkWidget *window, GnomeStockPixmapEntryData *data)
 {
         GtkPixmap *pixmap;
-        GdkPixmap *pmap;
-        GdkBitmap *bmap;
-        GtkStyle *style;
-        GdkWindow *gwin;
 
-        if (window) {
-                style = gtk_widget_get_style(window);
-                gwin = window->window;
-        } else {
-                style = gtk_widget_get_default_style();
-                gwin = NULL;
-        }
-        pmap = gdk_pixmap_create_from_xpm_d(gwin, &bmap,
-                                            &style->bg[GTK_STATE_NORMAL],
-                                            data->xpm_data);
-	pixmap = (GtkPixmap *)gtk_pixmap_new(pmap, bmap);
+	pixmap = GTK_PIXMAP(gnome_create_pixmap_widget_d(window, window,
+                                                         data->xpm_data));
         return pixmap;
 }
 
@@ -292,10 +300,15 @@ create_pixmap_from_data(GtkWidget *window, GnomeStockPixmapEntryData *data)
 static void
 build_disabled_pixmap(GtkWidget *window, GtkPixmap **inout_pixmap)
 {
-        GdkGC *gc = window->style->bg_gc[0];
+        GdkGC *gc;
         GdkWindow *pixmap = (*inout_pixmap)->pixmap;
+        GtkStyle *style;
         gint w, h, x, y;
 
+        style = gtk_widget_get_style(window);
+        g_assert(style != NULL);
+        gc = style->bg_gc[GTK_STATE_INSENSITIVE];
+        g_assert(gc != NULL);
         gdk_window_get_size(pixmap, &w, &h);
         for (y = 0; y < h; y ++) {
                 for (x = y % 2; x < w; x += 2) {
@@ -319,10 +332,9 @@ gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype)
         GtkPixmap *pixmap;
 
         g_return_val_if_fail(icon != NULL, NULL);
+        g_return_val_if_fail(window != NULL, NULL);
+        g_return_val_if_fail(GTK_IS_WIDGET(window), NULL);
         /* subtype can be NULL, so not checked */
-        /* window can be NULL, but if not, window has to be GtkWidget */
-        if (window)
-                g_return_val_if_fail(GTK_IS_WIDGET(window), NULL);
 
         entry = lookup(icon, subtype);
         if (!entry) return NULL;
@@ -335,7 +347,7 @@ gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype)
                 g_assert_not_reached();
                 break;
         }
-        /* check if we have to draw our own diabled pixmap */
+        /* check if we have to draw our own disabled pixmap */
         /* TODO: should be optimized a bit */
         if ((entry == lookup(icon, GNOME_STOCK_PIXMAP_REGULAR)) &&
             (pixmap) &&
@@ -361,7 +373,7 @@ gint
 gnome_stock_pixmap_register(char *icon, char *subtype,
                             GnomeStockPixmapEntry *entry)
 {
-        g_print(__FILE__ "gnome_stock_pixmap_register: not implemented yet\n");
+        g_assert_not_reached();
         return 0;
 }
 
@@ -371,7 +383,7 @@ gint
 gnome_stock_pixmap_change(char *icon, char *subtype,
                           GnomeStockPixmapEntry *entry)
 {
-        g_print(__FILE__ "gnome_stock_pixmap_change: not implemented yet\n");
+        g_assert_not_reached();
         return 0;
 }
 
@@ -385,11 +397,15 @@ gnome_stock_pixmap_checkfor(char *icon, char *subtype)
 
 
 
+#define WANT_ICON
+
 GtkWidget *
 gnome_stock_button(char *type)
 {
         GtkWidget *button, *label, *hbox;
+#ifdef WANT_ICON
         GtkWidget *pixmap;
+#endif /* WANT_ICON */
 
         button = gtk_button_new();
         hbox = gtk_hbox_new(FALSE, 5);
@@ -397,13 +413,14 @@ gnome_stock_button(char *type)
         gtk_container_add(GTK_CONTAINER(button), hbox);
         label = gtk_label_new(gettext(type));
         gtk_widget_show(label);
-        gtk_box_pack_start_defaults(GTK_BOX(hbox), label);
-        
+        gtk_box_pack_end_defaults(GTK_BOX(hbox), label);
+
+#ifdef WANT_ICON
         pixmap = gnome_stock_pixmap_widget(button, type);
         if (pixmap) {
                 gtk_widget_show(pixmap);
-                gtk_box_pack_end_defaults(GTK_BOX(hbox), pixmap);
+                gtk_box_pack_start_defaults(GTK_BOX(hbox), pixmap);
         }
+#endif /* WANT_ICON */
         return button;
 }
-
