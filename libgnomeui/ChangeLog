@@ -1,5 +1,11 @@
 1998-02-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-about.c (gnome_fill_info): Made gdk_color_alloc() use the
+	widget default colormap instead of the system colormap.  This is
+	actually not the right way to do it; the about box should do all
+	color allocation via a GdkColorContext.  The cc structure should
+	reside in the GnomeAboutClass so that all about boxes can share it.
+
 	* gnome-stock.c (gnome_stock_pixmap_widget_state_changed): Added
 	gtk_widget_ref() when a new pixmap is created, because later they
 	may get gtk_container_remove()d.

@@ -478,7 +478,12 @@ GnomeAboutInfo
 
   /* Add color */
   memcpy (&gai->light_green, &light_green, sizeof (GdkColor));
-  gdk_color_alloc (gdk_colormap_get_system (), &gai->light_green);
+/*   gdk_color_alloc (gdk_colormap_get_system (), &gai->light_green); */
+
+  /* FIXME: this should use a GdkColorContext for allocation.  The cc structure
+   * should reside in the GnomeAboutClass so that all about boxes share it.
+   */
+  gdk_color_alloc (gtk_widget_get_default_colormap (), &gai->light_green);
 
   /* fill struct */
   if(title) 
