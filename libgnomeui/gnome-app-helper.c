@@ -43,8 +43,11 @@
 #include <gconf/gconf-client.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
 
 #include <libgnome/gnome-util.h>
+#include <libgnome/gnome-help.h>
 #include <libgnome/gnome-config.h>
 
 /* Note that this file must include gnome-i18n, and not gnome-i18nP, so that 
@@ -1155,6 +1158,153 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 	return pos;
 }
 
+static char *
+quote_string (const char *string)
+{
+	GString *new_string = g_string_new ("'");
+	char *ret;
+	int i;
+
+	for (i = 0; string[i] != '\0'; i++) {
+		if (string[i] == '\'') {
+			g_string_append (new_string, "'\\''");
+		} else {
+			g_string_append_c (new_string, string[i]);
+		}
+	}
+	g_string_append_c (new_string, '\'');
+
+	ret = new_string->str;
+	g_string_free (new_string, FALSE);
+	return ret;
+}
+
+static char *
+get_toc_location (const char *locale, const char *docname)
+{
+	char *cmd;
+	char *quoted;
+	char toc_location[PATH_MAX + 1];
+	FILE *fp;
+	int bytes;
+
+	quoted = quote_string (docname);
+	cmd = g_strdup_printf ("scrollkeeper-get-toc-from-docpath %s/%s",
+			       locale, quoted);
+	g_free (quoted);
+
+	fp = popen (cmd, "r");
+
+	g_free (cmd);
+
+	bytes = fread ((void *)toc_location, sizeof(char), PATH_MAX, fp);
+	if (pclose (fp) == 0 &&
+	    bytes > 0) {
+		/* cut the trailing '\n', and make
+		 * sure there is a null char */
+		toc_location[bytes - 1] = '\0';
+		return g_strdup (toc_location);
+	} else {
+		return NULL;
+	}
+}
+
+static char *
+get_best_toc_location (const char *docname)
+{
+	const GList *list = gnome_i18n_get_language_list ("LC_MESSAGES");
+
+	while (list != NULL) {
+		const char *locale = list->data;
+		char *ret = get_toc_location (locale, docname);
+		if (ret != NULL)
+			return ret;
+
+		list = list->next;
+	}
+
+	return NULL;
+}
+
+static GSList *
+get_topics (const char *docname)
+{
+	xmlDocPtr toc_doc;
+	GSList *list = NULL;
+	xmlNodePtr next_child;
+	errorSAXFunc xml_error_handler;
+    	warningSAXFunc xml_warning_handler;
+    	fatalErrorSAXFunc xml_fatal_error_handler;
+
+	char *toc_location = get_best_toc_location (docname);
+
+	if (toc_location == NULL)
+		return NULL;
+
+	/* Evil thing stolen from nautilus, this just looks
+	 * so evil it's not even pretty */
+	xml_error_handler = xmlDefaultSAXHandler.error;
+	xmlDefaultSAXHandler.error = NULL;
+	xml_warning_handler = xmlDefaultSAXHandler.warning;
+	xmlDefaultSAXHandler.warning = NULL;
+	xml_fatal_error_handler = xmlDefaultSAXHandler.fatalError;
+	xmlDefaultSAXHandler.fatalError = NULL;
+	toc_doc = xmlParseFile (toc_location);
+	xmlDefaultSAXHandler.error = xml_error_handler;
+    	xmlDefaultSAXHandler.warning = xml_warning_handler;
+    	xmlDefaultSAXHandler.fatalError = xml_fatal_error_handler;
+
+	if (toc_doc == NULL) {
+		g_free (toc_location);
+		return NULL;
+	}
+
+	/* FIXME: this is a TREE!!!! we only read toplevels */
+	for (next_child = toc_doc->xmlRootNode->xmlChildrenNode;
+	     next_child != NULL;
+	     next_child = next_child->next) {
+		if (g_ascii_strncasecmp (next_child->name,
+					 "tocsect", strlen ("tocsect")) == 0) {
+			char *content = xmlNodeGetContent (next_child);
+			char *linkid = xmlGetProp (next_child, "linkid");
+
+			if (content != NULL &&
+			    linkid != NULL) {
+				list = g_slist_append (list,
+						       g_strdup (content));
+				list = g_slist_append (list,
+						       g_strdup (linkid));
+			}
+
+			if (content != NULL)
+				xmlFree (content);
+		}
+	}
+
+	xmlFreeDoc (toc_doc);
+
+	return list;
+}
+
+static void
+help_view_display_callback (GtkWidget *w, gpointer data)
+{
+	char *section = data;
+	char *docname = gtk_object_get_data
+		(GTK_OBJECT (w), "docname");
+
+	/* FIXME: handle errors somehow */
+	if (docname == NULL ||
+	    section == NULL)
+		return;
+
+	/* FIXME: handle errors somehow */
+	gnome_help_display (gnome_program_get (),
+			    docname,
+			    section,
+			    NULL /* error */);
+}
+
 /* Creates the menu entries for help topics.  Returns the updated position 
  * value. */
 static int
@@ -1171,38 +1321,39 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 		return pos;
 	}
 
-	/* #warning FIXME: this needs to use helpsys!!!! */
-	topics = NULL;
-	/* topics = gnome_help_app_topics ((const char *)uiinfo->moreinfo);*/
+	topics = get_topics ((const char *)uiinfo->moreinfo);
 
-	for (cur = topics; cur && cur->next; cur = cur->next->next)
-	  {
-	    GtkWidget *item;
-	    GtkWidget *label;
-	    guint keyval;
+	for (cur = topics; cur && cur->next; cur = cur->next->next) {
+		GtkWidget *item;
+		GtkWidget *label;
+		guint keyval;
 
-	    item = gtk_menu_item_new ();
-	    label = create_label (cur->data, &keyval);
-	    g_free(cur->data);
+		item = gtk_menu_item_new ();
+		label = create_label (cur->data, &keyval);
+		g_free(cur->data);
+		cur->data = NULL;
 
-	    gtk_container_add (GTK_CONTAINER (item), label);
-	    setup_uline_accel (menu_shell, NULL, item, keyval);
-	    gtk_widget_lock_accelerators (item);
+		gtk_container_add (GTK_CONTAINER (item), label);
+		setup_uline_accel (menu_shell, NULL, item, keyval);
+		gtk_widget_lock_accelerators (item);
 
-	    /* #warning FIXME: this needs to use helpsys!!!! */
-	    /*
-	    gtk_signal_connect_full (GTK_OBJECT (item), "activate",
-				     (GtkSignalFunc) gnome_help_view_display_callback, NULL,
-				     cur->next->data, g_free,
-				     FALSE, FALSE);
-				     */
+		gtk_object_set_data_full (GTK_OBJECT (item), "docname",
+					  g_strdup (uiinfo->moreinfo),
+					  g_free);
 
-	    gtk_menu_shell_insert (menu_shell, item, pos);
-	    pos++;
+		gtk_signal_connect_full
+			(GTK_OBJECT (item), "activate",
+			 GTK_SIGNAL_FUNC (help_view_display_callback), NULL,
+			 cur->next->data, g_free,
+			 FALSE, FALSE);
+		cur->next->data = NULL;
 
-	    gtk_widget_show (item);
+		gtk_menu_shell_insert (menu_shell, item, pos);
+		pos++;
 
-	  }
+		gtk_widget_show (item);
+
+	}
 	g_slist_free(topics);
 
 	return pos;

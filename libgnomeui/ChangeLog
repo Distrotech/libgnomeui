@@ -1,3 +1,10 @@
+Fri Sep 07 14:15:18 2001  George Lebl <jirka@5z.com>
+
+	* Makefile.am: libgnomeui.h installs in the libgnomeui prefix now
+
+	* gnome-app-helper.c: add some scrollkeeper magic to build the help
+	  menu
+
 2001-09-07  jacob berkman  <jacob@ximian.com>
 
 	* gnome_segv.c: 
