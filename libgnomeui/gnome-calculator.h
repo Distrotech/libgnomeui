@@ -14,7 +14,7 @@
 BEGIN_GNOME_DECLS
 
 
-#define GNOME_CALCULATOR(obj)         GTK_CHECK_CAST (obj, gnome_entry_get_type (), GnomeCalculator)
+#define GNOME_CALCULATOR(obj)         GTK_CHECK_CAST (obj, gnome_calculator_get_type (), GnomeCalculator)
 #define GNOME_CALCULATOR_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_calculator_get_type (), GnomeCalculatorClass)
 #define GNOME_IS_CALCULATOR(obj)      GTK_CHECK_TYPE (obj, gnome_calculator_get_type ())
 
@@ -22,19 +22,29 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomeCalculator      GnomeCalculator;
 typedef struct _GnomeCalculatorClass GnomeCalculatorClass;
 
+typedef enum {
+	GNOME_CALCULATOR_DEG,
+	GNOME_CALCULATOR_RAD,
+	GNOME_CALCULATOR_GRAD,
+} GnomeCalculatorMode;
+
 struct _GnomeCalculator {
 	GtkVBox vbox;
 
+	gdouble result;
+	gchar result_string[13];
+	gdouble memory;
+
 	GtkWidget *display;
 
-	gdouble result;
-	gchar result_string[16];
+	GnomeCalculatorMode mode;
 
 	gint add_digit;		/*add a digit instead of starting a new
 				  number*/
-	gdouble memory;
+	gint inverse;
 
 	GList *stack;
+
 };
 
 struct _GnomeCalculatorClass {
