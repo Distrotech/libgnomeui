@@ -1,3 +1,9 @@
+1998-09-03  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-font-selector.c (gnome_font_select_with_default): New
+	function. Same as gnome_font_select () but let you give a
+	default font.
+
 Thu Sep  3 05:47:19 1998  Tim Janik  <timj@gtk.org>
 
 	* gnome-icon-list.c (gnome_icon_list_forall): provide a _forall

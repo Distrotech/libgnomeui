@@ -100,6 +100,7 @@ gchar *gnome_font_selector_get_selected(GnomeFontSelector *text_tool);
 /* Basically runs a modal-dialog version of this, and returns
    the string that id's the selected font. */
 gchar *gnome_font_select(void);
+gchar *gnome_font_select_with_default(const gchar *);
 
 END_GNOME_DECLS
 

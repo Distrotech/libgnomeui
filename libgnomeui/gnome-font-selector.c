@@ -1330,3 +1330,168 @@ gchar *gnome_font_select(void)
 
   return retval;
 }
+
+gchar *gnome_font_select_with_default(const gchar *default_font)
+{
+  GnomeFontSelector *text_tool;
+  gchar *retval = NULL;
+  text_tool = GNOME_FONT_SELECTOR(gnome_font_selector_new());
+
+  /* If it is a valid font name ... */
+  if (default_font && text_is_xlfd_font_name (default_font)) {
+    char *foundry, *family, *weight, *slant, *set_width, *spacing;
+    char *pixel_size, *point_size;
+    int old_value, old_size, i;
+
+    GnomeFontSelectorClass *klass =
+      GNOME_FONT_SELECTOR_CLASS (GTK_OBJECT (text_tool)->klass);
+
+    foundry	= text_get_field (default_font, FOUNDRY);
+    family	= text_get_field (default_font, FAMILY);
+    weight	= text_get_field (default_font, WEIGHT);
+    slant	= text_get_field (default_font, SLANT);
+    set_width	= text_get_field (default_font, SET_WIDTH);
+    pixel_size	= text_get_field (default_font, 6);
+    point_size	= text_get_field (default_font, 7);
+    spacing	= text_get_field (default_font, SPACING);
+
+    /* set family. */
+
+    old_value	= text_tool->font_index;
+    
+    for (i = 0; i < klass->nfonts; i++)
+      if (!strcmp (family, klass->font_info[i]->family)) {
+	text_tool->font_index = i;
+	break;
+      }
+
+    if (!text_load_font (text_tool))
+      text_tool->font_index = old_value;
+
+    gtk_list_select_item (GTK_LIST (text_tool->font_list), text_tool->font_index);
+
+    /* set foundry. */
+
+    old_value	= text_tool->foundry;
+
+    text_tool->foundry = text_field_to_index
+      (klass->foundry_array, klass->nfoundries, foundry);
+    
+    text_validate_combo (text_tool, 0);
+
+    if (!text_load_font (text_tool))
+      text_tool->foundry = old_value;
+
+    gtk_option_menu_set_history
+      (GTK_OPTION_MENU (text_tool->option_menus [0]), text_tool->foundry);
+
+    /* set weight. */
+
+    old_value	= text_tool->weight;
+
+    text_tool->weight = text_field_to_index
+      (klass->weight_array, klass->nweights, weight);
+
+    text_validate_combo (text_tool, 1);
+
+    if (!text_load_font (text_tool))
+      text_tool->weight = old_value;
+
+    gtk_option_menu_set_history
+      (GTK_OPTION_MENU (text_tool->option_menus [1]), text_tool->weight);
+
+    /* set slant. */
+
+    old_value	= text_tool->slant;
+
+    text_tool->slant = text_field_to_index
+      (klass->slant_array, klass->nslants, slant);
+
+    text_validate_combo (text_tool, 2);
+
+    if (!text_load_font (text_tool))
+      text_tool->slant = old_value;
+
+    gtk_option_menu_set_history
+      (GTK_OPTION_MENU (text_tool->option_menus [2]), text_tool->slant);
+
+    /* set width. */
+
+    old_value	= text_tool->set_width;
+
+    text_tool->set_width = text_field_to_index
+      (klass->set_width_array, klass->nset_widths, set_width);
+
+    text_validate_combo (text_tool, 3);
+
+    if (!text_load_font (text_tool))
+      text_tool->set_width = old_value;
+
+    gtk_option_menu_set_history
+      (GTK_OPTION_MENU (text_tool->option_menus [3]), text_tool->set_width);
+
+    /* set spacing. */
+
+    old_value	= text_tool->spacing;
+
+    text_tool->spacing = text_field_to_index
+      (klass->spacing_array, klass->nspacings, spacing);
+
+    text_validate_combo (text_tool, 4);
+
+    if (!text_load_font (text_tool))
+      text_tool->spacing = old_value;
+
+    gtk_option_menu_set_history
+      (GTK_OPTION_MENU (text_tool->option_menus [4]), text_tool->spacing);
+
+    /* first we try to set the pixel size and then the point size. */
+
+    old_value	= text_tool->size_type;
+    old_size	= atoi (gtk_entry_get_text
+			(GTK_ENTRY (text_tool->size_text)));
+
+    if (strcmp (pixel_size, "*") && strcmp (pixel_size, "(nil)")) {
+      text_tool->size_type = PIXELS;
+      
+      gtk_entry_set_text (GTK_ENTRY (text_tool->size_text), pixel_size);
+      
+      if (!text_load_font (text_tool)) {
+	char buffer [BUFSIZ];
+	
+	text_tool->size_type = old_value;
+	
+	sprintf (buffer, "%d", old_size);
+	gtk_entry_set_text (GTK_ENTRY (text_tool->size_text), buffer);
+      }
+    }
+  }
+
+  gtk_signal_connect(GTK_OBJECT(text_tool->ok_button),
+		     "clicked", GTK_SIGNAL_FUNC(gnome_font_select_quit),
+		     text_tool);
+
+  gtk_signal_connect(GTK_OBJECT(text_tool->cancel_button),
+		     "clicked", GTK_SIGNAL_FUNC(gnome_font_select_quit),
+		     text_tool);
+
+  gtk_signal_connect(GTK_OBJECT(text_tool),
+		     "delete_event",
+		     GTK_SIGNAL_FUNC(gnome_font_select_quit),
+		     text_tool);
+
+  gtk_widget_show(GTK_WIDGET(text_tool));
+  gtk_grab_add(GTK_WIDGET(text_tool));
+  gtk_main();
+  gtk_widget_hide(GTK_WIDGET(text_tool));
+  gtk_grab_remove(GTK_WIDGET(text_tool));
+
+  if(gtk_object_get_data(GTK_OBJECT(text_tool),
+			 "gnome_font_select_quit widget")
+     == text_tool->ok_button)
+    retval = gnome_font_selector_get_selected(text_tool);
+
+  gtk_widget_destroy(GTK_WIDGET(text_tool));
+
+  return retval;
+}
