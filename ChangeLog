@@ -1,5 +1,18 @@
 2002-02-01  Dave Camp  <dave@ximian.com>
 
+	* libgnomeui/gnome-icon-item.c: (realize_cursor_gc),
+	(gnome_icon_text_item_realize), (gnome_icon_text_item_unrealize),
+	(iti_draw_cursor) : New functions to handle creating and drawing a
+	cursor with the right GC.
+	(iti_start_editing): Call realize_cursor_gc if the canvas is
+	realized.
+	(gnome_icon_text_item_draw): Call iti_draw_cursor.
+	(gnome_icon_text_item_destroy): New function.
+	(gnome_icon_text_item_class_init): Initialize destroy, realize,
+	and unrealize.
+
+2002-02-01  Dave Camp  <dave@ximian.com>
+
 	* configure.in: Bump the version number to 1.110.1.
 
 	* libgnomeui/gnome-icon-item.c: Added editing support based on the
