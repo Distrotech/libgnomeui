@@ -290,7 +290,7 @@ gtk_dial_set_percentage (GtkDial *dial, gfloat percent)
   g_return_val_if_fail (dial != NULL, 0.0);
   g_return_val_if_fail (GTK_IS_DIAL (dial), 0.0);
 
-  if (percent < 1.0)
+  if (percent <= 1.0)
     {
       dial->percentage = percent;
       dial->adjustment->value = percent * dial->adjustment->upper;
@@ -350,7 +350,7 @@ gtk_dial_set_value (GtkDial *dial, gfloat value)
   g_return_val_if_fail (dial != NULL, 0.0);
   g_return_val_if_fail (GTK_IS_DIAL (dial), 0.0);
 
-  if (value < dial->adjustment->upper)
+  if (value <= dial->adjustment->upper)
     {
       dial->adjustment->value = value;
       dial->percentage = value / dial->adjustment->upper;

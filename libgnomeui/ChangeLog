@@ -1,3 +1,8 @@
+1999-09-26  Martin Baulig  <martin@home-of-linux.org>
+
+	* gtkdial.c (gtk_dial_set_percentage, gtk_dial_set_value): Allow
+ 	you to set the upper limit as well (use <= instead of <).
+
 1999-09-24  Morten Welinder  <terra@diku.dk>
 
 	* gnome-dock-layout.c (gnome_dock_layout_destroy): Don't walk and
