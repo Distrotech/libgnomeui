@@ -88,7 +88,7 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasText::x", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_X);
 	gtk_object_add_arg_type ("GnomeCanvasText::y", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_Y);
 	gtk_object_add_arg_type ("GnomeCanvasText::font", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FONT);
-	gtk_object_add_arg_type ("GnomeCanvasText::font_gdk", GTK_TYPE_GDK_FONT_TYPE, GTK_ARG_WRITABLE, ARG_FONT_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasText::font_gdk", GTK_TYPE_GDK_FONT, GTK_ARG_WRITABLE, ARG_FONT_GDK);
 	gtk_object_add_arg_type ("GnomeCanvasText::anchor", GTK_TYPE_ANCHOR_TYPE, GTK_ARG_WRITABLE, ARG_ANCHOR);
 	gtk_object_add_arg_type ("GnomeCanvasText::justification", GTK_TYPE_JUSTIFICATION, GTK_ARG_WRITABLE, ARG_JUSTIFICATION);
 	gtk_object_add_arg_type ("GnomeCanvasText::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
