@@ -1,6 +1,6 @@
 pixmapdir = $(datadir)/pixmaps
 
-BITMAPS = calculator-font.xpm
+BITMAPS = calculator-font.png
 
 pixmap_DATA = $(BITMAPS)
 

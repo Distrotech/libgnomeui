@@ -1,3 +1,11 @@
+Sun Sep 20 18:40:44 1998  John Ellis  <johne@bellatlantic.net>
+
+	* pixmaps/calculator-font.xpm: Changed to png
+	* pixmaps/Makefile.am: Changed reference to above.
+	* gnome-calculator.c: Changed to use the png file.
+	* Makefile.am: Changed gnome-stock-imlib.h to
+	pixmaps/gnome-stock-imlib.h
+
 Mon Sep 21 00:03:03 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.c: removed some compiler warnings.

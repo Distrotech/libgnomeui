@@ -12,6 +12,7 @@
 #include <gtk/gtk.h>
 #include "libgnome/libgnomeP.h"
 #include "gnome-calculator.h"
+#include "gnome-pixmap.h"
 
 typedef void (*sighandler_t)(int);
 
@@ -46,7 +47,7 @@ static void gnome_calculator_destroy	(GtkObject		*object);
 
 static GtkVBoxClass *parent_class;
 
-static GdkPixmap * font_pixmap=NULL;
+static GtkWidget * font_pixmap=NULL;
 
 typedef struct _CalculatorButton CalculatorButton;
 struct _CalculatorButton {
@@ -175,32 +176,32 @@ put_led_font(GnomeCalculator *gc)
 	gdk_draw_rectangle(p, style->black_gc, 1, 0, 0, -1, -1);
 
 	if(gc->memory!=0) {
-		gdk_draw_pixmap(p, style->white_gc, font_pixmap, 13*FONT_WIDTH,
+		gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap, 13*FONT_WIDTH,
 				0, 0, 0, FONT_WIDTH, FONT_HEIGHT);
 	}
 	for(x=12,i=strlen(text)-1;i>=0;x--,i--) {
 		if(text[i]>='0' && text[i]<='9')
-			gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
 					(text[i]-'0')*FONT_WIDTH, 0, 
 					x*FONT_WIDTH, 0,
 					FONT_WIDTH, FONT_HEIGHT);
 		else if(text[i]=='.')
-			gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
 					10*FONT_WIDTH, 0, 
 					x*FONT_WIDTH, 0,
 					FONT_WIDTH, FONT_HEIGHT);
 		else if(text[i]=='+')
-			gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
 					11*FONT_WIDTH, 0, 
 					x*FONT_WIDTH, 0,
 					FONT_WIDTH, FONT_HEIGHT);
 		else if(text[i]=='-')
-			gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
 					12*FONT_WIDTH, 0, 
 					x*FONT_WIDTH, 0,
 					FONT_WIDTH, FONT_HEIGHT);
 		else if(text[i]=='e')
-			gdk_draw_pixmap(p, style->white_gc, font_pixmap,
+			gdk_draw_pixmap(p, style->white_gc, GNOME_PIXMAP(font_pixmap)->pixmap,
 					14*FONT_WIDTH, 0, 
 					x*FONT_WIDTH, 0,
 					FONT_WIDTH, FONT_HEIGHT);
@@ -1023,18 +1024,14 @@ gnome_calculator_realized(GtkWidget *w, gpointer data)
 	GnomeCalculator *gc = GNOME_CALCULATOR(w);
 
 	if(!font_pixmap) {
-		GdkColor black;
 		gchar *file =
-			gnome_unconditional_pixmap_file("calculator-font.xpm");
+			gnome_unconditional_pixmap_file("calculator-font.png");
 
 		if(!file) {
-			g_warning("Can't find calculator-font.xpm");
+			g_warning("Can't find calculator-font.png");
 			return FALSE;
 		}
-		gdk_color_black(gtk_widget_get_colormap(GTK_WIDGET(gc)),
-							&black);
-		font_pixmap = gdk_pixmap_create_from_xpm(GTK_WIDGET(gc)->window,
-							 NULL, &black, file);
+		font_pixmap = gnome_pixmap_new_from_file(file);
 		g_free(file);
 	}
 
