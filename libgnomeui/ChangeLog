@@ -15,6 +15,7 @@
 	to set them with gnome_mdi_set_[tool|menu]bar_creator() functions
 	instead of connecting handlers with gtk_signal_connect(). this will
 	probably _BREAK_ each and every app using GnomeMDI. sorry! ;)
+	(gnome_mdi_set_menu_template): is now gnome_mdi_set_menubar_template()
 	* gnome-mdi.c (set_page_by_widget): check page != NULL instead of
 	page_num == -1. I know they should be the same, but this somehow
 	makes me more confident ;)

@@ -1470,7 +1470,7 @@ GnomeApp *gnome_mdi_active_window(GnomeMDI *mdi) {
 	return mdi->active_window;
 }
 
-void gnome_mdi_set_menu_template(GnomeMDI *mdi, GnomeUIInfo *menu_tmpl) {
+void gnome_mdi_set_menubar_template(GnomeMDI *mdi, GnomeUIInfo *menu_tmpl) {
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));
 
