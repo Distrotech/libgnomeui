@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
+"POT-Creation-Date: 2003-07-04 11:05+0200\n"
 "PO-Revision-Date: 2002-12-20 01:37+0200\n"
 "Last-Translator: Artis Trops <hornet@navigator.lv>\n"
 "Language-Team: Latvian <ll10nt@os.lv>\n"
@@ -1288,26 +1288,26 @@ msgstr "Ne-Atkāpe"
 msgid "About"
 msgstr "Par"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
 msgstr "Lietojamais X displejs"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Bibliotēka"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Notikušas vairākas segmentācijas kļūdas: nevaru attēlot kļūdu dialogu\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:719
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
+"POT-Creation-Date: 2003-07-04 11:05+0200\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -1438,29 +1438,29 @@ msgid "About"
 msgstr "Perihal"
 
 # libgnomeui/gnome-init.c:165
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
 msgstr "Antaramuka X yang hendak diguna"
 
 # libgnomeui/gnome-init.c:165
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
 msgstr "PAPARAN"
 
 # libgnomeui/gnome-init.c:298
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
 msgstr "Pustaka GUI GNOME"
 
 # libgnomeui/gnome-init.c:642
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Beberapa ralat segmentasi berlaku; tidak dapat paparkan dialog ralat\n"
 
 # libgnomeui/gnome-init.c:642
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:719
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

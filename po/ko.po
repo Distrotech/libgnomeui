@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.1.90\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
+"POT-Creation-Date: 2003-07-04 11:05+0200\n"
 "PO-Revision-Date: 2003-01-15 12:44+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@mizi.com>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
@@ -1286,26 +1286,26 @@ msgstr "들이기-취소"
 msgid "About"
 msgstr "정보"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
 msgstr "사용할 X display"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
 msgstr "<디스플레이>"
 
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
 msgstr "그놈 GUI 라이브러리"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "여러 개의 세그먼테이션 오류가 발생했습니다; 애러 창을 보여줄 수 없습니다\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:719
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

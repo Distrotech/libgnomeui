@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.1\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
+"POT-Creation-Date: 2003-07-04 11:05+0200\n"
 "PO-Revision-Date: 2003-01-22 21:22+0300\n"
 "Last-Translator: Marius Andreiana <marius galuna.ro>\n"
 "Language-Team: română <ro@li.org>\n"
@@ -1291,27 +1291,27 @@ msgstr "Deindentare"
 msgid "About"
 msgstr "Despre"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
 msgstr "Afişajul X de folosit"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
 msgstr "Librăria GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Mai multe erori de segmentare au intervenit; nu pot afişa dialogul de "
 "eroare\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:719
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"

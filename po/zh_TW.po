@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
-"POT-Creation-Date: 2003-06-12 08:15+0800\n"
+"POT-Creation-Date: 2003-07-04 11:05+0200\n"
 "PO-Revision-Date: 2003-06-12 08:21+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -138,7 +138,6 @@ msgstr "關於 %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "檔案(_F)"
 
@@ -196,7 +195,6 @@ msgid "_Game"
 msgstr "遊戲(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "求助(_H)"
 
@@ -387,11 +385,11 @@ msgstr "修改有關本程式的設定"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "關於(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "顯示有關本程式的資訊"
 
@@ -418,7 +416,7 @@ msgstr "顯示新的視窗"
 msgid "_Close This Window"
 msgstr "關閉本視窗(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "關閉目前的視窗"
 
@@ -1277,25 +1275,25 @@ msgstr "減少縮排"
 msgid "About"
 msgstr "關於"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
 msgstr "準備使用的 X 畫面代號"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
 msgstr "畫面代號"
 
-#: libgnomeui/gnome-ui-init.c:125
+#: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
 msgstr "GNOME 圖形界面函式庫"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "發生了非常嚴重的錯誤；無法顯示錯誤訊息對話方塊\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:637
+#: libgnomeui/gnome-ui-init.c:719
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1348,9 +1346,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "請到 GNOME 程式錯誤網頁獲取更多資訊"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "結束測試"
+#~ msgid "Exit the test"
+#~ msgstr "結束測試"
 
 #~ msgid "_Credits"
 #~ msgstr "鳴謝(_C)"

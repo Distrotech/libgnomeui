@@ -11,14 +11,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.mk\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-13 20:51+0200\n"
+"POT-Creation-Date: 2003-07-04 11:05+0200\n"
 "PO-Revision-Date: 2003-06-15 21:21+0000\n"
 "Last-Translator: Ime Prezime <email@adresa.com>\n"
 "Language-Team: Macedonian <lug@lists.linux.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0.1\n"
 
 #: demos/mdi_demo.c:128
@@ -129,7 +129,8 @@ msgstr ""
 "http://pmf.polygonized.com"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Заслуги за преведувачите"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -147,7 +148,6 @@ msgstr "За%s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Датотека"
 
@@ -205,7 +205,6 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Помош"
 
@@ -396,11 +395,11 @@ msgstr "Конфигурирај ја апликацијата"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_За"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "За оваа апликација"
 
@@ -427,7 +426,7 @@ msgstr "Креирај нов прозорец"
 msgid "_Close This Window"
 msgstr "_Затвори го Овој Прозор"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Затвори го тековниот прозор"
 
@@ -736,7 +735,8 @@ msgstr "Селектирај го времето од листа"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_дата_измени_земи_дата смалено, користи gnome_дата_измени_земи_време"
+msgstr ""
+"gnome_дата_измени_земи_дата смалено, користи gnome_дата_измени_земи_време"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -891,7 +891,8 @@ msgstr "Модално"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
-msgstr "Без оглед на прозорецот за прелистување на датотеки мора да биде модален."
+msgstr ""
+"Без оглед на прозорецот за прелистување на датотеки мора да биде модален."
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
@@ -1124,7 +1125,9 @@ msgstr "Директориум што ќе биде пребарува"
 
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
-msgstr "Името на датотеката што треба да биде прикажано додека сме во полето на иконта."
+msgstr ""
+"Името на датотеката што треба да биде прикажано додека сме во полето на "
+"иконта."
 
 #: libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
@@ -1135,8 +1138,9 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Диалог за избор на икони.  Можете да ја користите оваа особина за да "
-"го дообиете GtkDialog доколку е потребно да се извршат промени нанекоји од  овие особини."
+"Диалог за избор на икони.  Можете да ја користите оваа особина за да го "
+"дообиете GtkDialog доколку е потребно да се извршат промени нанекоји од  "
+"овие особини."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
@@ -1172,7 +1176,8 @@ msgstr "Избирач на икони"
 
 #: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
-msgstr "Ова копче ќе ви отвори прозорец кој пак ќе ви овозможи да изберете икона."
+msgstr ""
+"Ова копче ќе ви отвори прозорец кој пак ќе ви овозможи да изберете икона."
 
 #: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
@@ -1303,27 +1308,27 @@ msgstr "Не-идент"
 msgid "About"
 msgstr "За"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
 msgstr "X дисплејот да користи"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
 msgstr "ДИСПЛЕЈ"
 
-#: libgnomeui/gnome-ui-init.c:125
+#: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Библиотека"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Се случја повеќе грешки при сегментација; неможе да се прикаже дијалог "
 "прозорецот за грешки\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:637
+#: libgnomeui/gnome-ui-init.c:719
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1379,10 +1384,8 @@ msgstr ""
 "Те молам посети ја страната на GNOME за уривање на апликации за повеќе "
 "информации"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Излез од тестот"
+#~ msgid "Exit the test"
+#~ msgstr "Излез од тестот"
 
 #~ msgid "_Credits"
 #~ msgstr "_Заслуги"
-

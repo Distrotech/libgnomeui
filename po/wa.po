@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2003-06-29 11:41+0200\n"
+"POT-Creation-Date: 2003-07-04 11:05+0200\n"
 "PO-Revision-Date: 2003-01-14 15:27+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
@@ -145,7 +145,6 @@ msgstr "Å dfait di %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitchî"
 
@@ -203,7 +202,6 @@ msgid "_Game"
 msgstr "_Djeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aidance"
 
@@ -394,11 +392,11 @@ msgstr "Apontyî li programe"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "Å _dfait"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Å dfait di ç' programe chal"
 
@@ -425,7 +423,7 @@ msgstr "Fé on novea purnea"
 msgid "_Close This Window"
 msgstr "_Clôre ci purnea chal"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Clôre ci purnea chal"
 
@@ -1284,27 +1282,27 @@ msgstr "Disfé li Ritrait"
 msgid "About"
 msgstr "Å dfait"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
 msgstr "Håynaedje X a eployî"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
 msgstr "HÅYNAEDJE"
 
-#: libgnomeui/gnome-ui-init.c:125
+#: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
 msgstr "Livreye di l' eterface grafike di GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "I gn a yeu pus d' ene aroke di segmentåcion; dji n' pou mostrer li purnea "
 "d' aroke\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:637
+#: libgnomeui/gnome-ui-init.c:719
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1358,9 +1356,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Loukîz li pådje GNOME Application Crash po pus d' informåcion"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Moussî foû do sayaedje"
+#~ msgid "Exit the test"
+#~ msgstr "Moussî foû do sayaedje"
 
 #~ msgid "_Credits"
 #~ msgstr "_Gråces"

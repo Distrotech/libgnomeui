@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
-"POT-Creation-Date: 2003-06-08 18:16+0200\n"
+"POT-Creation-Date: 2003-07-04 11:05+0200\n"
 "PO-Revision-Date: 2003-06-08 18:28+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <tradgnome@softcatala.org>\n"
@@ -140,7 +140,6 @@ msgstr "Quant a %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitxer"
 
@@ -198,7 +197,6 @@ msgid "_Game"
 msgstr "_Joc"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_juda"
 
@@ -389,11 +387,11 @@ msgstr "Configura l'aplicació"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Quant a"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Quant a aquesta aplicació"
 
@@ -420,7 +418,7 @@ msgstr "Crea una nova finestra"
 msgid "_Close This Window"
 msgstr "_Tanca aquesta finestra"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Tanca la finestra actual"
 
@@ -1306,27 +1304,27 @@ msgstr "Desagnat"
 msgid "About"
 msgstr "Quant a"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
 msgstr "Pantalla X per utilitzar"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
 msgstr "VISUALITZACIÓ"
 
-#: libgnomeui/gnome-ui-init.c:125
+#: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
 msgstr "Biblioteca GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Han ocorregut múltiples violacions de segment; no es pot mostrar el diàleg "
 "d'error\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:637
+#: libgnomeui/gnome-ui-init.c:719
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1382,9 +1380,8 @@ msgstr ""
 "Si us plau, visiteu la pàgina de Fallades d'Aplicació del GNOME per més "
 "informació"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Surt del test"
+#~ msgid "Exit the test"
+#~ msgstr "Surt del test"
 
 #~ msgid "_Credits"
 #~ msgstr "_Crèdits"

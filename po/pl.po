@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-06-27 21:57+0200\n"
+"POT-Creation-Date: 2003-07-04 11:05+0200\n"
 "PO-Revision-Date: 2003-06-27 21:59--100\n"
 "Last-Translator: Gnome PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -141,7 +141,6 @@ msgstr "Informacje o programie %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Plik"
 
@@ -199,7 +198,6 @@ msgid "_Game"
 msgstr "_Gra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Pomo_c"
 
@@ -390,11 +388,11 @@ msgstr "Konfiguruje aplikację"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Informacje o"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Informacje o programie"
 
@@ -421,7 +419,7 @@ msgstr "Tworzy nowe okno"
 msgid "_Close This Window"
 msgstr "Za_mknij okno"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Zamyka bieżące okno"
 
@@ -1300,27 +1298,27 @@ msgstr "Cofnij wcięcie"
 msgid "About"
 msgstr "Informacje o"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
 msgstr "Wykorzystywany ekran X"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
 msgstr "EKRAN X"
 
-#: libgnomeui/gnome-ui-init.c:125
+#: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
 msgstr "Biblioteka GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Kilkakrotnie wystąpiło niepoprawne odwołanie do pamięci; nie można "
 "wyświetlić okna z informacją o błędzie\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:637
+#: libgnomeui/gnome-ui-init.c:719
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1375,6 +1373,5 @@ msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "Odwiedź stronę \"GNOME Application Crash\", aby uzyskać więcej informacji"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Kończy test"
+#~ msgid "Exit the test"
+#~ msgstr "Kończy test"
