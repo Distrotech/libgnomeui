@@ -1,5 +1,13 @@
 Mon May 22  Martijn van Beers  <martijn@earthling.net>
 
+	* gnome-gconf.c (gnome_gconf_color_picker_get): actually save the
+	                                                alpha
+	  (gnome_gconf_gnome_icon_entry_set): don't use the gtk entry
+	                                      anymore, but set the icon
+					      directly, so the icon gets set
+
+Mon May 22  Martijn van Beers  <martijn@earthling.net>
+
 	* gnome-gconf.c (gnome_gconf_*_set): added a value != check
 	  (gnome_gconf_spin_button_get): initialize retval
 	  (gnome_gconf_gtk_radio_button_set): fix ending condition in for loop
