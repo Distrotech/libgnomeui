@@ -136,21 +136,12 @@ gnome_win_hints_set_state(GtkWidget *window, GnomeWinState state)
     }
   else
     {
-      CARD32 data[2];
+      CARD32 data[1];
       
-      data[0] = (CARD32)(WIN_STATE_STICKY |
-			 WIN_STATE_MAXIMIZED_VERT |
-			 WIN_STATE_MAXIMIZED_HORIZ |
-			 WIN_STATE_HIDDEN |
-			 WIN_STATE_SHADED |
-			 WIN_STATE_HID_WORKSPACE |
-			 WIN_STATE_HID_TRANSIENT |
-			 WIN_STATE_FIXED_POSITION |
-			 WIN_STATE_ARRANGE_IGNORE);
-      data[1] = (CARD32)state;
+      data[0] = (CARD32)state;
       XChangeProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_STATE,
 		      XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data,
-		      2);
+		      1);
     }
 }
 
@@ -209,16 +200,12 @@ gnome_win_hints_set_hints(GtkWidget *window,  GnomeWinHints skip)
     }
   else
     {
-      CARD32 data[2];
+      CARD32 data[1];
       
-      data[0] = (CARD32)(WIN_HINTS_SKIP_FOCUS |
-			 WIN_HINTS_SKIP_WINLIST |
-			 WIN_HINTS_SKIP_TASKBAR |
-			 WIN_HINTS_GROUP_TRANSIENT);
-      data[1] = (CARD32)skip;
+      data[0] = (CARD32)skip;
       XChangeProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_HINTS,
 		      XA_CARDINAL, 32, PropModeReplace, (unsigned char *)data,
-		      2);
+		      1);
     }
 }
 
