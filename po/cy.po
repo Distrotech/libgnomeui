@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-26 00:45+0100\n"
-"PO-Revision-Date: 2005-01-30 21:30+0000\n"
+"PO-Revision-Date: 2005-01-31 07:30+0000\n"
 "Last-Translator: Rhys Jones <rhys@sucs.org>\n"
 "Language-Team: Cymraeg <gnome-cy@pengwyn.linux.org.uk>\n"
 "MIME-Version: 1.0\n"
@@ -82,11 +82,11 @@ msgstr "Dogfennaeth gan"
 
 #: libgnomeui/gnome-about.c:260
 msgid "Translated by"
-msgstr "Cyfieithiwyd gan"
+msgstr "Cyfieithwyd gan"
 
 #: libgnomeui/gnome-about.c:323
 msgid "C_redits"
-msgstr "Rhestr _Clod"
+msgstr "Rhestr _Glod"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
