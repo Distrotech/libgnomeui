@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-02 12:38+0200\n"
 "PO-Revision-Date: 2003-03-19 14:41+0000\n"
 "Last-Translator: Paul Duffy <dubhthach@zion.nuigalway.ie>\n"
 "Language-Team: Irish\n"
@@ -15,19 +16,19 @@ msgstr ""
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr ""
+msgstr "Mír Paisti a 1"
 
 #: demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr ""
+msgstr "Leathfhocal le haighaidh mír a 1"
 
 #: demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr ""
+msgstr "Mír Paisti a 2"
 
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr ""
+msgstr "Leathfhocal le haighaidh mír a 2"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -46,25 +47,24 @@ msgid "Translated by"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "_Eagar"
+msgstr ""
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
-msgstr "Ainm an Clár"
+msgstr "Ainm an ClÃ¡r"
 
 #: libgnomeui/gnome-about.c:379
 msgid "The name of the program"
-msgstr "An ainm atá ag an Clár"
+msgstr "An ainm atÃ¡ ag an ClÃ¡r"
 
 #: libgnomeui/gnome-about.c:386
 msgid "Program version"
-msgstr "Leagan an Clár"
+msgstr "Leagan an ClÃ¡r"
 
 #: libgnomeui/gnome-about.c:387
 msgid "The version of the program"
-msgstr "An Leangan atá ag an Clár"
+msgstr "An Leangan atÃ¡ ag an ClÃ¡r"
 
 #: libgnomeui/gnome-about.c:393
 msgid "Copyright string"
@@ -129,7 +129,7 @@ msgstr "Siombail"
 
 #: libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
-msgstr ""
+msgstr "Siombail le haighaidh an \"bosca faoi\""
 
 #: libgnomeui/gnome-about.c:519
 #, c-format
@@ -138,6 +138,7 @@ msgstr "Faoi %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Comhad"
 
@@ -155,11 +156,11 @@ msgstr "_Eagar/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "_Féach"
+msgstr "_FÃ©ach ar"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr "_Féach/"
+msgstr "_FÃ©ach ar/"
 
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
@@ -180,11 +181,11 @@ msgstr "_Nua/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr "Comha_daí"
+msgstr "Comha_daÃ­"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr "Comha_daí/"
+msgstr "Comha_daÃ­/"
 
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
@@ -195,6 +196,7 @@ msgid "_Game"
 msgstr "_Cluiche"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "Cab_hair"
 
@@ -214,20 +216,20 @@ msgstr "Oscail Comhad"
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
-msgstr "_Sábháil"
+msgstr "_SÃ¡bhÃ¡il"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr "Sábháil an comhad seo"
+msgstr "SÃ¡bhÃ¡il an comhad seo"
 
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Sábháil M_ar..."
+msgstr "SÃ¡bhÃ¡il M_ar..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Sábháil an comhad seo le ainm eile"
+msgstr "SÃ¡bhÃ¡il an comhad seo le ainm eile"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
@@ -241,16 +243,16 @@ msgstr ""
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
-msgstr ""
+msgstr "C_lóbhuail..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr ""
+msgstr "Clóbhuial an comhad láithreach"
 
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr ""
+msgstr "Socrú an Clódoir..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
@@ -259,11 +261,11 @@ msgstr ""
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
-msgstr "_Dún"
+msgstr "_DÃºn"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr "Dún an comhad seo"
+msgstr "DÃºn an comhad seo"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
@@ -272,7 +274,7 @@ msgstr "_Ealu"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
-msgstr "Ealu as an chlár seo "
+msgstr "Ealu as an chlÃ¡r seo "
 
 #.
 #. * The "Edit" menu
@@ -284,17 +286,17 @@ msgstr "Gea_rr"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr ""
+msgstr "Gearr an toghadh"
 
 #. 10
 #. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
-msgstr "_Cóip"
+msgstr "_CÃ³ip"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr ""
+msgstr "Cóipail an toghadh"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
@@ -312,7 +314,7 @@ msgstr "G_lan"
 
 #: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
-msgstr ""
+msgstr "Glan an toghadh"
 
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
@@ -326,7 +328,7 @@ msgstr ""
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
-msgstr ""
+msgstr "A_thdhéan"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
@@ -339,25 +341,25 @@ msgstr "_Cuardaigh..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
-msgstr ""
+msgstr "Cuardaigh le haighaidh téad"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr ""
+msgstr "Cuardaigh an chead rud eile"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr ""
+msgstr "Cuardaigh aréis le haighaidh an téad céanna"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr ""
+msgstr "Athchu_ir..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
-msgstr ""
+msgstr "Athchuir téad"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
@@ -385,13 +387,13 @@ msgstr ""
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "F_aoi"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "Faoi an Clár seo"
+msgstr "Faoi an ClÃ¡r seo"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
@@ -416,7 +418,7 @@ msgstr "Oscail Fhuinneog nua"
 msgid "_Close This Window"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr ""
 
@@ -482,11 +484,11 @@ msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
-msgstr ""
+msgstr "_Criochtnaigh an cluiche"
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
-msgstr ""
+msgstr "Criochtnaigh an cluiche seo"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
@@ -494,11 +496,11 @@ msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
-msgstr ""
+msgstr "Feach ar Cabhair le haighaidh an feidhmchlár seo"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
-msgstr ""
+msgstr "Téasc faoi na Dealbhanna"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
@@ -506,11 +508,11 @@ msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
-msgstr ""
+msgstr "Dealbhanna Amháin"
 
 #: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
-msgstr ""
+msgstr "Téasc Amháin"
 
 #: libgnomeui/gnome-app-helper.c:2630
 #, c-format
@@ -519,7 +521,7 @@ msgstr ""
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
-msgstr ""
+msgstr " (brúigh athchas)"
 
 #: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
@@ -531,35 +533,35 @@ msgstr "Aire:"
 
 #: libgnomeui/gnome-app-util.c:316
 msgid "y"
-msgstr ""
+msgstr "s"
 
 #: libgnomeui/gnome-app-util.c:317
 msgid "yes"
-msgstr ""
+msgstr "sea"
 
 #: libgnomeui/gnome-app-util.c:320
 msgid "n"
-msgstr ""
+msgstr "n"
 
 #: libgnomeui/gnome-app-util.c:321
 msgid "no"
-msgstr ""
+msgstr "ní shea"
 
 #: libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
-msgstr ""
+msgstr " (sea nó ní shea)"
 
 #: libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
-msgstr ""
+msgstr " - Ceart go leoir? (sea nó ní shea)"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
-msgstr ""
+msgstr "Foras"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr ""
+msgstr "ID an Clár"
 
 #: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
@@ -599,6 +601,9 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Caithfidh tú logáil isteach chun \"%s\" a rochtain.\n"
+"%s"
+  
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
@@ -618,7 +623,7 @@ msgstr ""
 
 #: libgnomeui/gnome-client.c:863
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
@@ -626,7 +631,7 @@ msgstr ""
 
 #: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
-msgstr ""
+msgstr "RÉIMÍR"
 
 #: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
@@ -634,11 +639,11 @@ msgstr ""
 
 #: libgnomeui/gnome-client.c:975
 msgid "Session management"
-msgstr ""
+msgstr "Bainisteoireacht an Seisiún"
 
 #: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
-msgstr ""
+msgstr "Cealaigh an logáil amach"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
@@ -654,7 +659,7 @@ msgstr ""
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
-msgstr "Pioc dáth"
+msgstr "Pioc dÃ¡th"
 
 #: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
@@ -662,7 +667,7 @@ msgstr "Am"
 
 #: libgnomeui/gnome-dateedit.c:480
 msgid "The time currently selected"
-msgstr ""
+msgstr "An t'Am atá roghnach anois"
 
 #: libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
@@ -690,11 +695,11 @@ msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
-msgstr ""
+msgstr "An t'Am ar thus"
 
 #: libgnomeui/gnome-dateedit.c:525
 msgid "The initial time"
-msgstr ""
+msgstr "An t'Am ar thus"
 
 #: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
 msgid "Date"
@@ -702,11 +707,11 @@ msgstr "Data"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select Date"
-msgstr ""
+msgstr "Roghnaigh Data"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Roghnaigh an data ó an féilire "
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -773,11 +778,11 @@ msgstr ""
 #: libgnomeui/gnome-druid-page-standard.c:169
 #: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
-msgstr ""
+msgstr "Dáth an Cúlra"
 
 #: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
-msgstr ""
+msgstr "Dáth an Cúlra"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
@@ -794,15 +799,15 @@ msgstr ""
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Logo Background Color"
-msgstr ""
+msgstr "Dáth an Cúlra atá ag an Siombail"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Logo Background color"
-msgstr ""
+msgstr "Dáth an Cúlra atá ag an Siombail"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Logo Background color as a GdkColor"
-msgstr ""
+msgstr "Dáth an Cúlra atá ag an Siombail mar GdlDáth"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Logo Background color set"
@@ -822,11 +827,11 @@ msgstr ""
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
-msgstr ""
+msgstr "Taispeáin Cabhair"
 
 #: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
-msgstr ""
+msgstr "Taispeáin an cnaipe le haighaidh 'Cabhair'"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
@@ -834,11 +839,11 @@ msgstr "Stair id"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
-msgstr ""
+msgstr "Iontráil GTK"
 
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
-msgstr ""
+msgstr "An iontráil GTK"
 
 #: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
@@ -860,7 +865,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
-msgstr ""
+msgstr "Iontráil an Comhadlann"
 
 #: libgnomeui/gnome-file-entry.c:238
 msgid ""
@@ -886,7 +891,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
-msgstr ""
+msgstr "An bealach loiceadh"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
@@ -894,7 +899,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
-msgstr ""
+msgstr "GnomeEntry"
 
 #: libgnomeui/gnome-file-entry.c:272
 msgid ""
@@ -924,7 +929,7 @@ msgstr "Bealach"
 
 #: libgnomeui/gnome-file-entry.c:654
 msgid "Path to file"
-msgstr "Bealach go dtí comhad"
+msgstr "Bealach go dtÃ­ comhad"
 
 #: libgnomeui/gnome-file-entry.c:681
 msgid "_Browse..."
@@ -944,7 +949,7 @@ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
-msgstr ""
+msgstr "Pioc Clófhoireann"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
@@ -952,7 +957,7 @@ msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
-msgstr ""
+msgstr "Módh"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
@@ -960,19 +965,19 @@ msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
-msgstr ""
+msgstr "Ainm an Clófhoireann"
 
 #: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr ""
+msgstr "Ainm an clófhoireann atá roghnach"
 
 #: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
-msgstr ""
+msgstr "Clófhoireann"
 
 #: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr ""
+msgstr "An GtkClófhoireann atá roghnach"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
@@ -1032,7 +1037,7 @@ msgstr ""
 
 #: libgnomeui/gnome-href.c:122
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: libgnomeui/gnome-href.c:123
 msgid "The URL that GnomeHRef activates"
@@ -1040,11 +1045,11 @@ msgstr ""
 
 #: libgnomeui/gnome-href.c:130
 msgid "Text"
-msgstr ""
+msgstr "Téasc"
 
 #: libgnomeui/gnome-href.c:131
 msgid "The text on the button"
-msgstr ""
+msgstr "An téasc ar an cnaipe"
 
 #: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
@@ -1052,7 +1057,7 @@ msgstr ""
 
 #: libgnomeui/gnome-href.c:138
 msgid "Link color"
-msgstr ""
+msgstr "Dáth an Ceangal"
 
 #: libgnomeui/gnome-href.c:139
 msgid "Color used to draw the link"
@@ -1102,7 +1107,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
-msgstr ""
+msgstr "Níl aon Dealbh"
 
 #: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
@@ -1126,7 +1131,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "Pioc an dealbh atá tú ag iarraidh."
 
 #: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
@@ -1134,7 +1139,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "Oscail an cnaipe seo fhuinneog agus beidh tú in ann dealbh a roghnaigh."
 
 #: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
@@ -1142,13 +1147,14 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
-msgstr ""
+msgstr "bealach and Dealbh"
 
 #: libgnomeui/gnome-icon-entry.c:1015
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
+"Sa áit seo chuir isteach an ainm do an comhadlann a bhfuil na dealbhanna."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1158,11 +1164,11 @@ msgstr ""
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr ""
+msgstr "GnomeIconSelection: theip ag lódáil comhadlann '%s'"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr ""
+msgstr "Ag lódál Dealbhanna..."
 
 #: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
@@ -1182,15 +1188,15 @@ msgstr "Ceist"
 
 #: libgnomeui/gnome-messagebox.c:130
 msgid "Message"
-msgstr ""
+msgstr "Teachtaireacht"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "_Úsáideoir"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Passfhocal:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1202,7 +1208,7 @@ msgstr ""
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
-msgstr ""
+msgstr "Níl aon Íomha"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
@@ -1214,15 +1220,15 @@ msgstr ""
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
-msgstr ""
+msgstr "An Deich is Mó"
 
 #: libgnomeui/gnome-scores.c:91
 msgid "User"
-msgstr ""
+msgstr "Úsáideoir"
 
 #: libgnomeui/gnome-scores.c:94
 msgid "Score"
-msgstr ""
+msgstr "Scór"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
@@ -1273,7 +1279,7 @@ msgstr ""
 
 #: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
-msgstr ""
+msgstr "Leabharlann GUI le haighaidh GNOME"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:705
@@ -1304,6 +1310,9 @@ msgid ""
 "due to a fatal error.\n"
 "(%s)"
 msgstr ""
+"Tá an feidhclár \"%s\" (proseáil %d) taréis tuairt a dhéanamh\n"
+"mar bhí earraid marfach.\n"
+"(%s)"
 
 #: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1319,8 +1328,12 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:159
 msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr ""
+msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ealu as an scrúdu"
