@@ -174,8 +174,8 @@ gnome_dialog_init (GnomeDialog *dialog)
   dialog->click_closes = FALSE;
   dialog->buttons = NULL;
 
-  dialog->accelerators = gtk_accelerator_table_new();
-  gtk_window_add_accelerator_table (GTK_WINDOW(dialog), 
+  dialog->accelerators = gtk_accel_group_new();
+  gtk_window_add_accel_group (GTK_WINDOW(dialog), 
 				    dialog->accelerators);
 
   bf = gtk_frame_new (NULL);
@@ -496,12 +496,12 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
   list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
-
-    gtk_widget_install_accelerator(GTK_WIDGET(list->data),
-				   dialog->accelerators,
+/*FIXME*/
+    gtk_widget_add_accelerator(GTK_WIDGET(list->data),
 				   "clicked",
+				   dialog->accelerators,
 				   accelerator_key,
-				   accelerator_mods);
+				   accelerator_mods,0);
     
     return;
   }
@@ -592,7 +592,7 @@ static void gnome_dialog_destroy (GtkObject *dialog)
   g_list_free(GNOME_DIALOG (dialog)->buttons);
 
   if (GNOME_DIALOG(dialog)->accelerators) 
-    gtk_accelerator_table_unref(GNOME_DIALOG(dialog)->accelerators);
+    gtk_window_remove_accel_group(GTK_WINDOW(dialog), GNOME_DIALOG(dialog)->accelerators);
 
   if (GTK_OBJECT_CLASS(parent_class)->destroy)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dialog);
@@ -645,6 +645,14 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.26  1998/06/07 17:58:21  pavlov
+  updates to make gnome-libs compile with new gtk1.1
+
+  i havn't tested this yet, other than knowing it compiles.  i will in a minute,
+  but my gtk is fooed at the moment, and button's arn't showing labels :)
+
+  -pav
+
   Revision 1.25  1998/05/25 16:31:18  sopwith
   Move log msgs to bottom
 

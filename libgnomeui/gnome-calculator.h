@@ -47,7 +47,7 @@ struct _GnomeCalculator {
 
 	GList *stack;
 
-	GtkAcceleratorTable *accel;
+	GtkAccelGroup *accel;
 };
 
 struct _GnomeCalculatorClass {

@@ -42,7 +42,7 @@ struct _GnomeDialog
   GtkWidget * action_area; /* A button box, not an hbox */
 
   GList *buttons;
-  GtkAcceleratorTable * accelerators;
+  GtkAccelGroup * accelerators;
   int modal : 1;
   int click_closes : 1;
   int just_hide : 1;
