@@ -55,12 +55,16 @@ struct _GnomePropertyBoxClass
 	void (* help)  (GnomePropertyBox *propertybox, gint page_num);
 };
 
-guint     gnome_property_box_get_type (void);
-GtkWidget *gnome_property_box_new (void);
+guint     gnome_property_box_get_type    (void);
+GtkWidget *gnome_property_box_new        (void);
 
-/* Call this when the user changes something in the current page of
-   the notebook.  */
-void      gnome_property_box_changed (GnomePropertyBox *property_box);
+/*
+ * Call this when the user changes something in the current page of
+ * the notebook.
+ */
+void      gnome_property_box_changed     (GnomePropertyBox *property_box);
+void      gnome_property_box_set_state   (GnomePropertyBox *property_box,
+					  gboolean state);
 
 gint	  gnome_property_box_append_page (GnomePropertyBox *property_box,
 					  GtkWidget *child,
