@@ -1,3 +1,7 @@
+2002-04-14  Abigail Brady  <morwen@evilmagic.org>
+
+	* configure.in: Added en_GB.
+
 2002-04-09  Jeroen Zwartepoorte  <jeroen@xs4all.nl>
 
 	* libgnomeui/gnome-dateedit.c: (gnome_date_edit_class_init): Removed
