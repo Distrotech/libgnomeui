@@ -175,7 +175,7 @@ void         gnome_client_disconnect             (GnomeClient *client);
 /* Set the client id.  This is only possible, if the client is not
    connected to a session manager.  */
 void         gnome_client_set_id                 (GnomeClient *client,
-						  const gchar *id);
+						  const gchar *client_id);
 
 /* Get the client id of a session management client object.  If this
    object has never been connected to a session manager and a client
@@ -218,7 +218,7 @@ void         gnome_client_set_restart_style      (GnomeClient *client,
 void         gnome_client_set_shutdown_command   (GnomeClient *client,
 						  gint argc, gchar *argv[]);
 void         gnome_client_set_user_id            (GnomeClient *client,
-						  const gchar *id);
+						  const gchar *user_id);
 
 
 /* The following function can be used, if you want that the
