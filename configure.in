@@ -71,8 +71,28 @@ PKG_CHECK_MODULES(SOUND_TEST, $ESOUND_MODULE $AUDIOFILE_MODULE, [
 	esd_msg=no
 ])
 
+dnl
+dnl libjpeg
+dnl
+  if test -z "$LIBJPEG"; then
+    AC_CHECK_LIB(jpeg, jpeg_start_decompress,
+      [AC_CHECK_HEADER(jpeglib.h,
+        jpeg_ok=yes,
+        jpeg_ok=no)],
+      AC_MSG_WARN(*** (jpeg library not found) ***), -lm)
+    if test "$jpeg_ok" = yes; then
+      JPEG='jpeg'; LIBJPEG='-ljpeg'
+      AC_DEFINE(HAVE_LIBJPEG)
+    else
+     AC_MSG_WARN(*** JPEG thumbnail loader will not be built (jpeg header file not found) ***)
+    fi
+  fi
+
+AC_SUBST(LIBJPEG)
+
 GNOMEUI_MODULES="libgnome-2.0 >= 2.0.0 libgnomecanvas-2.0 >= 2.0.0 libbonoboui-2.0 >= 2.0.0 gconf-2.0 >= 1.1.11"
 PKG_CHECK_MODULES(LIBGNOMEUI, $GNOMEUI_MODULES)
+LIBGNOMEUI_LIBS="$LIBGNOMEUI_LIBS $LIBJPEG"
 AC_SUBST(LIBGNOMEUI_CFLAGS)
 AC_SUBST(LIBGNOMEUI_LIBS)
 
@@ -91,7 +111,7 @@ AC_PATH_PROG(LIBGLADE_CONVERT, libglade-convert)
 if test -z "$LIBGLADE_CONVERT" ; then
 	AC_MSG_WARN([libglade-convert (from libglade 2.0) is needed for the checks in the tests directory.])
 fi
-
+	
 dnl
 dnl Check for gtk-doc
 dnl

@@ -53,6 +53,9 @@
 #include <libgnomeui/gnome-icon-sel.h>
 #include <libgnomeui/gnome-ui-init.h>
 #include <libgnomeui/gnome-types.h>
+#include <libgnomeui/gnome-icon-theme.h>
+#include <libgnomeui/gnome-thumbnail.h>
+#include <libgnomeui/gnome-icon-lookup.h>
 #include <libgnomeui/gnome-stock-icons.h>
 #include <libgnomeui/gnome-scores.h>
 #include <libgnomeui/gnome-client.h>

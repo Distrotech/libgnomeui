@@ -39,6 +39,7 @@
 #include <libgnome/gnome-macros.h>
 #include <libgnome/gnome-init.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
+#include "gnome-vfs-util.h"
 #include "gnome-thumbnail.h"
 
 #ifdef HAVE_LIBJPEG
@@ -787,7 +788,7 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
 	pixbuf = _gnome_thumbnail_load_scaled_jpeg (uri, size, size);
       else
 #endif
-	pixbuf = gnome_thumbnail_load_pixbuf (uri);
+	pixbuf = gnome_gdk_pixbuf_new_from_uri (uri);
     }
       
   if (pixbuf == NULL)

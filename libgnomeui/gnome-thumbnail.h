@@ -101,8 +101,6 @@ GdkPixbuf *gnome_thumbnail_scale_down_pixbuf (GdkPixbuf          *pixbuf,
 					      int                 dest_width,
 					      int                 dest_height);
 
-GdkPixbuf *gnome_thumbnail_load_pixbuf       (const char         *uri);
-
 G_END_DECLS
 
 #endif /* GNOME_THUMBNAIL_H */

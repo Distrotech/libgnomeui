@@ -189,7 +189,7 @@ mimetype_supported_by_gdk_pixbuf (const char *mime_type)
 
 /**
  * gnome_icon_lookup:
- * @icon_loader: a #GnomeIconLoader
+ * @icon_theme: a #GnomeIconTheme
  * @thumbnail_factory: an optional #GnomeThumbnailFactory used to look up thumbnails
  * @file_uri: the uri of the file
  * @custom_icon: optionally the name of a custom icon to try
@@ -198,7 +198,7 @@ mimetype_supported_by_gdk_pixbuf (const char *mime_type)
  * @flags: flags that affect the result of the lookup
  * @result: optionally result flags of the lookups are stored here
  *
- * This function tries to locate an icon in @icon_loader that can be used
+ * This function tries to locate an icon in @icon_theme that can be used
  * to represent the file passed. It can optionally also look for existing
  * thumbnails. It does no I/O, so the lookup should be relatively fast.
  * 
@@ -222,7 +222,7 @@ mimetype_supported_by_gdk_pixbuf (const char *mime_type)
  *               use for the file.
  **/
 char *
-gnome_icon_lookup (GnomeIconLoader            *icon_loader,
+gnome_icon_lookup (GnomeIconTheme             *icon_theme,
 		   GnomeThumbnailFactory      *thumbnail_factory,
 		   const char                 *file_uri,
 		   const char                 *custom_icon,
@@ -244,7 +244,7 @@ gnome_icon_lookup (GnomeIconLoader            *icon_loader,
     {
       /* WARNING: Does I/O for abs custom icons! */
       if ((custom_icon[0] == '/' && g_file_test (custom_icon, G_FILE_TEST_IS_REGULAR)) ||
-	  gnome_icon_loader_has_icon (icon_loader, custom_icon))
+	  gnome_icon_theme_has_icon (icon_theme, custom_icon))
 	return g_strdup (custom_icon);
     }
 
@@ -253,7 +253,7 @@ gnome_icon_lookup (GnomeIconLoader            *icon_loader,
       if (flags & GNOME_ICON_LOOKUP_FLAGS_SHOW_SMALL_IMAGES_AS_THEMSELVES &&
 	  (mimetype_supported_by_gdk_pixbuf (mime_type) ||
 	   (strcmp (mime_type, "image/svg") == 0 &&
-	    gnome_icon_loader_get_allow_svg (icon_loader)))  &&
+	    gnome_icon_theme_get_allow_svg (icon_theme)))  &&
 	  strncmp (file_uri, "file:/", 6) == 0 &&
 	  file_info && file_info->size < SELF_THUMBNAIL_SIZE_THRESHOLD)
 	return gnome_vfs_get_local_path_from_uri (file_uri);
@@ -276,23 +276,23 @@ gnome_icon_lookup (GnomeIconLoader            *icon_loader,
   if (mime_type)
     {
       mime_name = get_vfs_mime_name (mime_type);
-      if (mime_name && gnome_icon_loader_has_icon (icon_loader, mime_name))
+      if (mime_name && gnome_icon_theme_has_icon (icon_theme, mime_name))
 	return mime_name;
       g_free (mime_name);
       
       mime_name = make_mime_name (mime_type);
-      if (mime_name && gnome_icon_loader_has_icon (icon_loader, mime_name))
+      if (mime_name && gnome_icon_theme_has_icon (icon_theme, mime_name))
 	return mime_name;
       g_free (mime_name);
       
       mime_name = make_generic_mime_name (mime_type);
-      if (mime_name && gnome_icon_loader_has_icon (icon_loader, mime_name))
+      if (mime_name && gnome_icon_theme_has_icon (icon_theme, mime_name))
 	return mime_name;
       g_free (mime_name);
     }
       
   icon_name = get_icon_name (file_uri, file_info, mime_type, flags);
-  if (icon_name && gnome_icon_loader_has_icon (icon_loader, icon_name))
+  if (icon_name && gnome_icon_theme_has_icon (icon_theme, icon_name))
     return icon_name;
   g_free (icon_name);
 
@@ -301,21 +301,21 @@ gnome_icon_lookup (GnomeIconLoader            *icon_loader,
 
 /**
  * gnome_icon_lookup:
- * @icon_loader: a #GnomeIconLoader
+ * @icon_theme: a #GnomeIconTheme
  * @thumbnail_factory: an optional #GnomeThumbnailFactory used to look up thumbnails
  * @file_uri: the uri of the file
  * @custom_icon: optionally the name of a custom icon to try
  * @flags: flags that affect the result of the lookup
  * @result: optionally result flags of the lookups are stored here
  *
- * This function tries to locate an icon in @icon_loader that can be used
+ * This function tries to locate an icon in @icon_theme that can be used
  * to represent the file passed. See gnome_icon_lookup() for more information.
  * 
  * Return value: the name of an icon or an absolute filename of an image to
  *               use for the file.
  */
 char *
-gnome_icon_lookup_sync (GnomeIconLoader         *icon_loader,
+gnome_icon_lookup_sync (GnomeIconTheme          *icon_theme,
 			GnomeThumbnailFactory   *thumbnail_factory,
 			const char              *file_uri,
 			const char              *custom_icon,
@@ -337,7 +337,7 @@ gnome_icon_lookup_sync (GnomeIconLoader         *icon_loader,
     mime_type = file_info->mime_type;
 
 
-  res = gnome_icon_lookup (icon_loader,
+  res = gnome_icon_lookup (icon_theme,
 			   thumbnail_factory,
 			   file_uri,
 			   custom_icon,

@@ -116,7 +116,6 @@ static void   theme_subdir_load            (GnomeIconTheme      *icon_theme,
 					    GnomeThemeFile       *theme_file,
 					    char                 *subdir);
 static void   blow_themes                  (GnomeIconThemePrivate *priv);
-static void   gnome_icon_data_free         (GnomeIconData         *icon_data);
 
 static IconSuffix suffix_from_name         (const char           *name);
 
@@ -266,8 +265,8 @@ gnome_icon_theme_init (GnomeIconTheme *icon_theme)
   priv->search_path[0] = g_build_filename (g_get_home_dir (),
 					     ".icons",
 					     NULL);
-  priv->search_path[1] = g_strdup (GNOME_DESKTOP_PIXMAPDIR);
-  priv->search_path[2] = g_strdup (GNOME_DESKTOP_ICONDIR);
+  priv->search_path[1] = g_strdup (GNOMEUIPIXMAPDIR);
+  priv->search_path[2] = g_strdup (GNOMEUIICONDIR);
   priv->search_path[3] = g_strdup ("/usr/share/icons");
   priv->search_path[4] = g_strdup ("/usr/share/pixmaps");
   priv->search_path_len = 5;
@@ -598,6 +597,8 @@ load_themes (GnomeIconTheme *icon_theme)
   priv->all_icons = g_hash_table_new (g_str_hash, g_str_equal);
   
   insert_theme (icon_theme, priv->current_theme);
+  /* Always look in the "default" icon theme */
+  insert_theme (icon_theme, "default");
   priv->themes = g_list_reverse (priv->themes);
   
   priv->unthemed_icons = g_hash_table_new_full (g_str_hash, g_str_equal,
@@ -1058,7 +1059,8 @@ load_icon_data (IconThemeDir *dir, const char *path, const char *name)
 	      while (split[i] != NULL)
 		i++;
 
-	      data->n_attach_points = MIN (i, GNOME_ICON_DATA_MAX_ATTACH_POINTS);
+	      data->n_attach_points = i;
+	      data->attach_points = g_malloc (sizeof (GnomeIconDataPoint) * i);
 
 	      i = 0;
 	      while (split[i] != NULL && i < data->n_attach_points)
@@ -1244,15 +1246,17 @@ gnome_icon_data_free (GnomeIconData *icon_data)
 }
 
 GnomeIconData *
-gnome_icon_data_dup (GnomeIconData *icon_data)
+gnome_icon_data_dup (const GnomeIconData *icon_data)
 {
   GnomeIconData *copy;
 
-  *copy = *icon_data;
+  copy = g_memdup (icon_data, sizeof (GnomeIconData));
+  
   copy->display_name = g_strdup (copy->display_name);
   
   if (copy->attach_points)
     copy->attach_points = g_memdup (copy->attach_points,
 				    copy->n_attach_points * sizeof (GnomeIconDataPoint));
+  return copy;
 }
 

@@ -94,7 +94,7 @@ GList *         gnome_icon_theme_list_icons            (GnomeIconTheme       *th
 char *          gnome_icon_theme_get_example_icon_name (GnomeIconTheme       *theme);
 gboolean        gnome_icon_theme_rescan_if_needed      (GnomeIconTheme       *theme);
 
-GnomeIconData * gnome_icon_data_dup                    (GnomeIconData        *icon_data);
+GnomeIconData * gnome_icon_data_dup                    (const GnomeIconData  *icon_data);
 void            gnome_icon_data_free                   (GnomeIconData        *icon_data);
 
 

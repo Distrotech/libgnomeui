@@ -1,3 +1,24 @@
+2002-09-27  Alexander Larsson  <alexl@redhat.com>
+
+	* acconfig.h:
+	* configure.in:
+	Look for libjpeg
+	
+	* libgnomeui/Makefile.am:
+	* libgnomeui/gnome-icon-lookup.[ch]:
+	* libgnomeui/gnome-icon-theme.[ch]:
+	* libgnomeui/gnome-thumbnail-pixbuf-utils.c:
+	* libgnomeui/gnome-thumbnail.[ch]:
+	* libgnomeui/gnome-theme-parser.[ch]:
+	New code.
+	
+	* libgnomeui/libgnomeui.h:
+	Add includes
+	
+	* tests/Makefile.am:
+	* tests/test-icon-theme.c:
+	Small testcase
+
 2002-09-25  Anders Carlsson  <andersca@gnu.org>
 
 	* libgnomeui/gnome-client.c (client_save_yourself_callback): 

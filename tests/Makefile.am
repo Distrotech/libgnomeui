@@ -1,5 +1,6 @@
 check_PROGRAMS = \
 	test-libglade-gnome	\
+	test-icon-theme	\
 	test-libglade-gnome-noupgrade
 
 check_DATA = \
@@ -38,6 +39,7 @@ LDFLAGS = -export-dynamic
 
 test_libglade_gnome_SOURCE = test-libglade-gnome.c
 test_libglade_gnome_noupgrade_SOURCE = test-libglade-gnome-noupgrade.c
+test_icon_theme_SOURCE = test-icon-theme.c
 
 EXTRA_DIST = \
 	test-libglade-gnome.glade

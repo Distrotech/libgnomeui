@@ -23,7 +23,7 @@
 #ifndef GNOME_ICON_LOOKUP_H
 #define GNOME_ICON_LOOKUP_H
 
-#include <libgnome/gnome-icon-loader.h>
+#include <libgnomeui/gnome-icon-theme.h>
 #include <libgnomevfs/gnome-vfs-file-info.h>
 #include "gnome-thumbnail.h"
 
@@ -41,7 +41,7 @@ typedef enum {
 } GnomeIconLookupResultFlags;
 
 
-char *gnome_icon_lookup      (GnomeIconLoader            *icon_loader,
+char *gnome_icon_lookup      (GnomeIconTheme             *icon_theme,
 			      GnomeThumbnailFactory      *thumbnail_factory,
 			      const char                 *file_uri,
 			      const char                 *custom_icon,
@@ -49,7 +49,7 @@ char *gnome_icon_lookup      (GnomeIconLoader            *icon_loader,
 			      const char                 *mime_type,
 			      GnomeIconLookupFlags        flags,
 			      GnomeIconLookupResultFlags *result);
-char *gnome_icon_lookup_sync (GnomeIconLoader            *icon_loader,
+char *gnome_icon_lookup_sync (GnomeIconTheme             *icon_theme,
 			      GnomeThumbnailFactory      *thumbnail_factory,
 			      const char                 *file_uri,
 			      const char                 *custom_icon,
