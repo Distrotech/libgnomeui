@@ -1,5 +1,10 @@
 1998-10-13  Havoc Pennington  <hp@pobox.com>
 
+	* gnome-canvas.h, gnome-canvas.c (gnome_canvas_world_to_window):
+	New function, inverse of gnome_canvas_window_to_world.
+
+1998-10-13  Havoc Pennington  <hp@pobox.com>
+
 	* gnome-icon-list.h, gnome-icon-list.c: Add
 	gnome_icon_list_construct function, and use it in _new.
 

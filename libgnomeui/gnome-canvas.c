@@ -2507,6 +2507,23 @@ gnome_canvas_window_to_world (GnomeCanvas *canvas, double winx, double winy, dou
 		*worldy = canvas->scroll_y1 + (winy + DISPLAY_Y1 (canvas) - canvas->zoom_yofs) / canvas->pixels_per_unit;
 }
 
+
+void
+gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double worldy, double *winx, double *winy)
+{
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+	if (winx)
+		*winx = (canvas->pixels_per_unit)*(worldx - canvas->scroll_x1) -
+		  DISPLAY_X1(canvas) + canvas->zoom_xofs;
+
+	if (winy)
+		*winy = (canvas->pixels_per_unit)*(worldy - canvas->scroll_y1) -
+		  DISPLAY_Y1(canvas) + canvas->zoom_yofs;
+}
+
+
 int
 gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color)
 {

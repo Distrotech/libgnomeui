@@ -373,6 +373,9 @@ void gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *
  */
 void gnome_canvas_window_to_world (GnomeCanvas *canvas, double winx, double winy, double *worldx, double *worldy);
 
+/* This is the inverse of gnome_canvas_window_to_world */
+void gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double worldy, double *winx, double *winy);
+
 /* Takes a string specification for a color and allocates it into the specified GdkColor.  If the
  * string is null, then it returns FALSE. Otherwise, it returns TRUE.
  */
