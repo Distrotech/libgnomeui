@@ -1,3 +1,15 @@
+Wed Apr 15 00:57:30 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appsmenu.c: I got a working panel-like menu out of
+ 	share/apps, so that's progress. Many rough edges remain. Changes:
+ 	use G_DISABLE_CHECKS; implemented function to create GtkMenuItem
+ 	from the menu structure, complete with pixmaps; took out some
+ 	unused code
+
+	* gnome-appsmenu.h (GNOME_APPS_MENU_IS_DENTRY): Removed unused
+ 	macros for identifying .desktop-based menus, according to new "no
+ 	special cases" policy.	
+
 1998-04-15  Arturo Espinosa Aldama  <arturo@nuclecu.unam.mx>
 
 	* gtkcalendar.c (gtk_calendar_size_allocate): just an if to

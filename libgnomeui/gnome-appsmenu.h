@@ -85,20 +85,8 @@ struct _GnomeAppsMenu {
   guint in_destroy : 1;
 };
 
-#define GNOME_APPS_MENU_IS_DENTRY(x) \
-(strcmp ( (gchar *)(((GnomeAppsMenu *)x)->extension), \
-	  GNOME_APPS_MENU_DENTRY_EXTENSION ) == 0)
-
 #define GNOME_APPS_MENU_IS_DIR(x) \
 (((GnomeAppsMenu *)x)->is_directory)
-
-     /* Consider taking this out */
-#define GNOME_APPS_MENU_IS_DENTRY_DIR(x) \
-(GNOME_APPS_MENU_IS_DENTRY(x) && GNOME_APPS_MENU_IS_DIR(x))
-     /* This should also be true:
-	(strcmp ( ((GnomeDesktopEntry *)((GnomeAppsMenu *)x)->data)->type, \
-	"Directory" ) == 0 ) )
-	*/
 
 GnomeAppsMenu * gnome_apps_menu_new(gboolean is_directory,
 				    const gchar * extension,

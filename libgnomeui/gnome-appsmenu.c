@@ -24,10 +24,9 @@
 #include <dirent.h>
 #include <errno.h>
 #include "libgnome/gnome-util.h"
+#include "gnome-pixmap.h"
 
-#define DEBUG 1
-
-#ifdef DEBUG
+#ifndef G_DISABLE_CHECKS
 static gboolean gnome_apps_menu_check(GnomeAppsMenu * gam)
 {
   GnomeAppsMenu * sub;
@@ -70,13 +69,13 @@ static gboolean gnome_apps_menu_check(GnomeAppsMenu * gam)
 
   return TRUE;
 }
-#else
-#define gnome_apps_menu_check(x) TRUE
-#endif
 
 /* Things that should always be true once the GnomeAppsMenu is
    initialized */
 #define GNOME_APPS_MENU_INVARIANTS(x) g_assert( gnome_apps_menu_check(x) )
+#else
+#define GNOME_APPS_MENU_INVARIANTS(x)
+#endif
 
 GnomeAppsMenu * gnome_apps_menu_new_empty(void);
 
@@ -180,11 +179,92 @@ static void clear_varieties(void)
   }
 }
 
-
-static GtkWidget * gtk_menu_item_new_from_dentry(GnomeAppsMenu * gam)
+static void dentry_launch_cb(GtkWidget * menuitem, gpointer gam)
 {
-  g_warning("not implemented");
-  return NULL;
+  gnome_desktop_entry_launch( (GnomeDesktopEntry *)
+			      ((GnomeAppsMenu *)gam)->data );
+}
+
+#define MENU_ICON_SIZE 20
+
+static GtkWidget * gtk_menu_item_new_from_dentry (GnomeAppsMenu * gam)
+{
+  GtkWidget * menuitem;
+  GtkWidget * pixmap;
+  gchar * pixmap_name, * menu_name;
+  GtkWidget * subdir, *subitem;
+  GList * submenus;
+  GtkWidget *label, *hbox, *align;
+
+  g_return_val_if_fail(gam != NULL, NULL);
+
+  menu_name = ((GnomeDesktopEntry *)gam->data)->name;
+  pixmap_name = ((GnomeDesktopEntry *)gam->data)->icon;
+
+  if ( pixmap_name && g_file_exists(pixmap_name) ) {
+    pixmap = gnome_pixmap_new_from_file_at_size (pixmap_name,
+						 MENU_ICON_SIZE,
+						 MENU_ICON_SIZE);
+    /* For now gnome_pixmap_* don't ever return NULL, AFAICT. This is
+       still a bug in the panel/menu.c code */
+  }
+  else pixmap = NULL;
+  
+  menuitem = gtk_menu_item_new();
+
+  label = gtk_label_new (menu_name);
+  gtk_misc_set_alignment (GTK_MISC(label), 0.0, 0.5);
+	
+  hbox = gtk_hbox_new (FALSE, 0);
+	
+  align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
+  gtk_container_border_width (GTK_CONTAINER (align), 1);
+
+  gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
+  
+  gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 4);
+  gtk_container_add (GTK_CONTAINER (menuitem), hbox);
+  
+  if (pixmap) gtk_container_add (GTK_CONTAINER (align), pixmap);
+  gtk_widget_set_usize (align, 22, 16);
+
+  /* At this point panel/menu.c saves the pixmap in a list,
+     and it is not quickly clear to me why. I need to look 
+     at it better and consider doing the same. */
+  
+  gtk_widget_show (align);
+  gtk_widget_show (hbox);
+  gtk_widget_show (label);
+  if (pixmap) gtk_widget_show (pixmap);
+      
+  if ( GNOME_APPS_MENU_IS_DIR(gam) ) {
+
+    subdir = gtk_menu_new();
+    gtk_widget_show(subdir);
+
+    gtk_menu_item_set_submenu ( GTK_MENU_ITEM(menuitem), subdir );
+    
+    submenus = gam->submenus;
+
+    while ( submenus ) {
+      
+      subitem = gtk_menu_item_new_from_dentry ( (GnomeAppsMenu *)(submenus->data));
+      if (subitem) {
+	gtk_menu_append(GTK_MENU(subdir), subitem);
+	gtk_widget_show(subitem);
+      }
+
+      submenus = g_slist_next(submenus);
+    }
+  }
+  else {
+    /* Connect callback if it's not a directory */
+    gtk_signal_connect ( GTK_OBJECT(menuitem), "activate",
+			 GTK_SIGNAL_FUNC(dentry_launch_cb),
+			 gam );
+  }
+
+  return menuitem;
 }
 
 static void make_default_varieties(void)
@@ -526,33 +606,6 @@ GnomeAppsMenu * gnome_apps_menu_load_system(void)
   g_free(s);
 
   return gam;
-}
-
-GtkWidget * gtk_menu_item_new_from_directory(GnomeAppsMenu * gam)
-{
-  GtkWidget * menuitem;
-  GtkWidget * submenu = NULL;
-  GtkWidget * submenuitem = NULL;
-  GList * list = NULL;
-  
-  menuitem = 
-    gtk_menu_item_new_with_label(((GnomeDesktopEntry *)gam->data)->name );
-  if (gam->submenus) {
-    submenu = gtk_menu_new();
-    gtk_menu_item_set_submenu ( GTK_MENU_ITEM(menuitem), submenu );
-    list = gam->submenus;
-    
-    while (list) {
-      submenuitem = 
-	gtk_menu_item_new_from_apps_menu((GnomeAppsMenu *)list->data);
-					
-      gtk_menu_append( GTK_MENU(submenu), submenuitem );
-      gtk_widget_show(submenuitem);
-      list = g_list_next(list);
-    }
-    gtk_widget_show(submenu);
-  }
-  return menuitem; 
 }
 
 GnomeAppsMenuGtkMenuItemFunc
