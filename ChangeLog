@@ -1,3 +1,8 @@
+2002-06-02  Christian Rose  <menthos@menthos.com>
+
+	* configure.in: Added "ca" to ALL_LINGUAS again. Updated and fixed
+	ca.po is added.
+
 2002-06-02  Malcolm Tredinnick <malcolm@commsecure.com.au>
 	* doc/reference/tmpl/gnome-client.sgml,
 	  libgnomeui/gnome-client.c,
