@@ -50,6 +50,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include <errno.h>
+
 #define GCONF_PREFIX "/desktop/gnome/gnome-file-selector-dialog"
 
 #define GLADE_FILE_GCONF GCONF_PREFIX "/glade-file"
@@ -75,6 +77,7 @@ struct _GnomeFileSelectorDialogPrivate {
 	gchar *directory;
 	gchar *home_directory;
 
+	gboolean directory_changed : 1;
 	gboolean auto_dir_select : 1;
 };
 	
@@ -227,6 +230,11 @@ chdir_to_current_selection (GnomeFileSelectorDialog *fsdialog)
 
 	g_free (fsdialog->_priv->directory);
 	fsdialog->_priv->directory = normalized;
+	fsdialog->_priv->directory_changed = TRUE;
+
+	g_free (fsdialog->_priv->cur_selection);
+	fsdialog->_priv->cur_selection = NULL;
+	fsdialog->_priv->is_dir_selection = FALSE;
 
 	return TRUE;
 }
@@ -246,20 +254,16 @@ directory_list_select_cb (GtkWidget *widget, gpointer data)
 
 	dir = GTK_LABEL (GTK_BIN (widget)->child)->label;
 
-	g_print ("SELECT: `%s'", dir);
-
 	if (fsdialog->_priv->cur_selection)
 		g_free (fsdialog->_priv->cur_selection);
 	fsdialog->_priv->cur_selection = g_filename_from_utf8 (dir);
 	fsdialog->_priv->is_dir_selection = TRUE;
 
-	if (fsdialog->_priv->auto_dir_select) {
+	if (fsdialog->_priv->auto_dir_select)
 		if (!chdir_to_current_selection (fsdialog))
 			gdk_beep ();
-		else
-			gnome_file_selector_dialog_update (fsdialog);
-	}
 
+	gnome_file_selector_dialog_update (fsdialog);
 }
 
 static void
@@ -277,13 +281,61 @@ directory_list_deselect_cb (GtkWidget *widget, gpointer data)
 
 	dir = GTK_LABEL (GTK_BIN (widget)->child)->label;
 
-	g_print ("DESELECT: `%s'", dir);
+	if (fsdialog->_priv->cur_selection)
+		g_free (fsdialog->_priv->cur_selection);
+	fsdialog->_priv->cur_selection = NULL;
+	fsdialog->_priv->is_dir_selection = FALSE;
+
+	gnome_file_selector_dialog_update (fsdialog);
+}
+
+static void
+directory_list_select_row_cb (GtkWidget *widget, gint row, gint col,
+			      GdkEventButton *bevent, gpointer data)
+{
+	GnomeFileSelectorDialog *fsdialog;
+	gchar *temp = NULL;
+
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (GNOME_IS_FILE_SELECTOR_DIALOG (data));
+
+	fsdialog = GNOME_FILE_SELECTOR_DIALOG (data);
+
+	gtk_clist_get_text (GTK_CLIST (fsdialog->_priv->dir_list_widget),
+			    row, 0, &temp);
+
+	if (fsdialog->_priv->cur_selection)
+		g_free (fsdialog->_priv->cur_selection);
+	fsdialog->_priv->cur_selection = g_filename_from_utf8 (temp);
+	fsdialog->_priv->is_dir_selection = TRUE;
+
+	if ((bevent && (bevent->type == GDK_2BUTTON_PRESS)) ||
+	    fsdialog->_priv->auto_dir_select)
+		if (!chdir_to_current_selection (fsdialog))
+			gdk_beep ();
+
+	gnome_file_selector_dialog_update (fsdialog);
+}
+
+static void
+directory_list_unselect_row_cb (GtkWidget *widget, gint row, gint col,
+				GdkEventButton *bevent, gpointer data)
+{
+	GnomeFileSelectorDialog *fsdialog;
+
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (GNOME_IS_FILE_SELECTOR_DIALOG (data));
+
+	fsdialog = GNOME_FILE_SELECTOR_DIALOG (data);
 
 	if (fsdialog->_priv->cur_selection)
 		g_free (fsdialog->_priv->cur_selection);
 	fsdialog->_priv->cur_selection = NULL;
 	fsdialog->_priv->is_dir_selection = FALSE;
+
+	gnome_file_selector_dialog_update (fsdialog);
 }
+
 
 static void
 update_directory_list (GnomeFileSelectorDialog *fsdialog, GtkWidget *widget,
@@ -311,19 +363,21 @@ update_directory_list (GnomeFileSelectorDialog *fsdialog, GtkWidget *widget,
 
 	xdir = g_filename_from_utf8 (dir_name);
 	directory = opendir (xdir);
-	g_free (xdir);
 
-	if (!directory) return;
+	if (!directory) {
+		g_free (xdir);
+		return;
+	}
 
 	while ((dirent_ptr = readdir (directory)) != NULL) {
 		gchar *filename, *path_name;
 		struct stat statb;
 
-		fprintf (stderr, "TEST: |%s|\n", dirent_ptr->d_name);
-
 		path_name = g_concat_dir_and_file (xdir, dirent_ptr->d_name);
 
 		if (stat (path_name, &statb)) {
+			g_warning (G_STRLOC ": stat (%s): %s", path_name,
+				   g_strerror (errno));
 			g_free (path_name);
 			continue;
 		}
@@ -380,6 +434,7 @@ update_directory_list (GnomeFileSelectorDialog *fsdialog, GtkWidget *widget,
 
 	g_list_foreach (entries, (GFunc) g_free, NULL);
 	g_list_free (entries);
+	g_free (xdir);
 }
 
 static void
@@ -392,13 +447,25 @@ update_handler (GnomeFileSelectorDialog *fsdialog)
 
 	priv = fsdialog->_priv;
 
-	if (priv->current_dir_widget)
-		set_widget_text (priv->current_dir_widget,
-				 priv->directory, "current-dir-widget");
+	if (priv->current_dir_widget) {
+		gchar *text;
 
-	if (priv->dir_list_widget) {
+		if (priv->cur_selection)
+			text = g_concat_dir_and_file (priv->directory,
+						      priv->cur_selection);
+		else
+			text = g_strdup (priv->directory);
+
+		set_widget_text (priv->current_dir_widget,
+				 text, "current-dir-widget");
+
+		g_free (text);
+	}
+
+	if (priv->dir_list_widget && priv->directory_changed) {
 		update_directory_list (fsdialog, priv->dir_list_widget,
 				       priv->directory, "directory-list");
+		priv->directory_changed = FALSE;
 	}
 }
 
@@ -525,6 +592,16 @@ gnome_file_selector_dialog_construct (GnomeFileSelectorDialog *fsdialog,
 	fsdialog->_priv->dir_list_widget = glade_xml_get_widget
 		(fsdialog->_priv->xml, "directory-list");
 
+	if (fsdialog->_priv->dir_list_widget &&
+	    (GTK_IS_CLIST (fsdialog->_priv->dir_list_widget))) {
+		gtk_signal_connect (GTK_OBJECT (fsdialog->_priv->dir_list_widget),
+				    "select_row", directory_list_select_row_cb,
+				    fsdialog);
+		gtk_signal_connect (GTK_OBJECT (fsdialog->_priv->dir_list_widget),
+				    "unselect_row", directory_list_unselect_row_cb,
+				    fsdialog);
+	}
+
 	fsdialog->_priv->auto_dir_select = TRUE;
 }
 
@@ -603,6 +680,7 @@ gnome_file_selector_dialog_set_dir (GnomeFileSelectorDialog *fsdialog,
 		g_free (fsdialog->_priv->directory);
 
 	fsdialog->_priv->directory = g_strdup (directory);
+	fsdialog->_priv->directory_changed = TRUE;
 }
 
 const gchar *
