@@ -36,6 +36,7 @@
 #include <gtk/gtkdnd.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtkbutton.h>
+#include <gtk/gtkscrolledwindow.h>
 #include <gtk/gtksignal.h>
 #include <gtk/gtkalignment.h>
 #include "libgnome/gnome-defs.h"
@@ -66,18 +67,27 @@ struct _GnomeIconEntryAsyncData {
 };
 
 struct _GnomeIconEntryPrivate {
-    GtkWidget *browse_button;
     GtkWidget *browse_dialog;
     GtkWidget *icon_selector;
+
+    GtkWidget *preview;
+    GtkWidget *preview_container;
 
     gchar *current_icon;
 
     gboolean constructed;
+
+    gboolean is_pixmap_entry;
     guint preview_x, preview_y;
 };
 	
 enum {
     PROP_0,
+
+    /* Construction properties */
+    PROP_IS_PIXMAP_ENTRY,
+
+    /* Normal properties */
     PROP_PREVIEW_X,
     PROP_PREVIEW_Y
 };
@@ -155,6 +165,16 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
     gobject_class->get_property = gnome_icon_entry_get_property;
     gobject_class->set_property = gnome_icon_entry_set_property;
 
+    /* Construction properties */
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_IS_PIXMAP_ENTRY,
+	 g_param_spec_boolean ("is_pixmap_entry", NULL, NULL,
+			       FALSE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
+
+    /* Normal properties */
     g_object_class_install_property
 	(gobject_class,
 	 PROP_PREVIEW_X,
@@ -162,7 +182,6 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 			    0, G_MAXINT, ICON_SIZE,
 			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
 			     G_PARAM_CONSTRUCT)));
-
     g_object_class_install_property
 	(gobject_class,
 	 PROP_PREVIEW_Y,
@@ -188,13 +207,13 @@ gnome_icon_entry_update_preview (GnomeIconEntry *ientry)
     g_return_if_fail (ientry != NULL);
     g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
 
-    if (ientry->_priv->browse_button == NULL) {
+    if (ientry->_priv->preview == NULL) {
 	g_warning (G_STRLOC ": Can't change preview size if we aren't using "
 		   " the default browse button.");
 	return;
     }
 
-    gtk_widget_set_usize (ientry->_priv->browse_button,
+    gtk_widget_set_usize (ientry->_priv->preview,
 			  ientry->_priv->preview_x + 12,
 			  ientry->_priv->preview_y + 12);
 }
@@ -212,6 +231,10 @@ gnome_icon_entry_set_property (GObject *object, guint param_id,
     ientry = GNOME_ICON_ENTRY (object);
 
     switch (param_id) {
+    case PROP_IS_PIXMAP_ENTRY:
+	g_assert (!ientry->_priv->constructed);
+	ientry->_priv->is_pixmap_entry = g_value_get_boolean (value);
+	break;
     case PROP_PREVIEW_X:
 	ientry->_priv->preview_x = g_value_get_uint (value);
 	if (ientry->_priv->constructed)
@@ -240,6 +263,9 @@ gnome_icon_entry_get_property (GObject *object, guint param_id, GValue *value,
     ientry = GNOME_ICON_ENTRY (object);
 
     switch (param_id) {
+    case PROP_IS_PIXMAP_ENTRY:
+	g_value_set_boolean (value, ientry->_priv->is_pixmap_entry);
+	break;
     case PROP_PREVIEW_X:
 	g_value_set_uint (value, ientry->_priv->preview_x);
 	break;
@@ -304,7 +330,6 @@ set_uri_async_cb (GnomeGdkPixbufAsyncHandle *handle,
 {
     GnomeIconEntryAsyncData *async_data = callback_data;
     GnomeIconEntry *ientry;
-    GtkWidget *child;
     int w, h;
 
     g_return_if_fail (async_data != NULL);
@@ -318,17 +343,15 @@ set_uri_async_cb (GnomeGdkPixbufAsyncHandle *handle,
 	g_free (ientry->_priv->current_icon);
     ientry->_priv->current_icon = NULL;
 
-    child = GTK_BIN (ientry->_priv->browse_button)->child;
-
-    gtk_drag_source_unset (ientry->_priv->browse_button);
+    gtk_drag_source_unset (ientry->_priv->preview);
 
     if ((error != GNOME_VFS_OK) || ((pixbuf == NULL))) {
-	if (GNOME_IS_PIXMAP (child)) {
-	    gtk_widget_destroy (child);
-	    child = gtk_label_new (_("No Icon"));
-	    gtk_widget_show (child);
-	    gtk_container_add (GTK_CONTAINER (ientry->_priv->browse_button),
-			       child);
+	if (GNOME_IS_PIXMAP (ientry->_priv->preview)) {
+	    gtk_widget_destroy (ientry->_priv->preview);
+	    ientry->_priv->preview = gtk_label_new (_("No Icon"));
+	    gtk_widget_show (ientry->_priv->preview);
+	    gtk_container_add (GTK_CONTAINER (ientry->_priv->preview_container),
+			       ientry->_priv->preview);
 	}
 
 	_gnome_selector_async_handle_completed (async_data->async_handle, FALSE);
@@ -341,43 +364,41 @@ set_uri_async_cb (GnomeGdkPixbufAsyncHandle *handle,
     w = gdk_pixbuf_get_width (pixbuf);
     h = gdk_pixbuf_get_height (pixbuf);
 
-    if (w > h) {
-	if (w > ientry->_priv->preview_x) {
-	    h = h * ((double) ientry->_priv->preview_x / w);
-	    w = ientry->_priv->preview_x;
-	}
-    } else {
-	if (h > ientry->_priv->preview_y) {
-	    w = w * ((double) ientry->_priv->preview_y / h);
-	    h = ientry->_priv->preview_y;
+    if (!ientry->_priv->is_pixmap_entry) {
+	if (w > h) {
+	    if (w > ientry->_priv->preview_x) {
+		h = h * ((double) ientry->_priv->preview_x / w);
+		w = ientry->_priv->preview_x;
+	    }
+	} else {
+	    if (h > ientry->_priv->preview_y) {
+		w = w * ((double) ientry->_priv->preview_y / h);
+		h = ientry->_priv->preview_y;
+	    }
 	}
     }
 
-    if (GNOME_IS_PIXMAP (child)) {
-	gnome_pixmap_clear (GNOME_PIXMAP (child));
-	gnome_pixmap_set_pixbuf (GNOME_PIXMAP(child), pixbuf);
-	gnome_pixmap_set_pixbuf_size (GNOME_PIXMAP (child), w, h);
+    if (GNOME_IS_PIXMAP (ientry->_priv->preview)) {
+	gnome_pixmap_clear (GNOME_PIXMAP (ientry->_priv->preview));
+	gnome_pixmap_set_pixbuf (GNOME_PIXMAP (ientry->_priv->preview), pixbuf);
+	gnome_pixmap_set_pixbuf_size (GNOME_PIXMAP (ientry->_priv->preview), w, h);
     } else {
-	gtk_widget_destroy (child);
-	child = gnome_pixmap_new_from_pixbuf_at_size (pixbuf, w, h);
-	gtk_widget_show (child);
-	gtk_container_add (GTK_CONTAINER (ientry->_priv->browse_button),
-			   child);
+	gtk_widget_destroy (ientry->_priv->preview);
+	ientry->_priv->preview = gnome_pixmap_new_from_pixbuf_at_size (pixbuf, w, h);
+	gtk_widget_show (ientry->_priv->preview);
+	gtk_container_add (GTK_CONTAINER (ientry->_priv->preview_container),
+			   ientry->_priv->preview);
 
-	if (!GTK_WIDGET_NO_WINDOW (child)) {
-	    gtk_signal_connect (GTK_OBJECT (child), "drag_data_get",
+	if (!GTK_WIDGET_NO_WINDOW (ientry->_priv->preview)) {
+	    gtk_signal_connect (GTK_OBJECT (ientry->_priv->preview),
+				"drag_data_get",
 				GTK_SIGNAL_FUNC (drag_data_get), ientry);
-	    gtk_drag_source_set (child,
+	    gtk_drag_source_set (ientry->_priv->preview,
 				 GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 				 drop_types, 1,
 				 GDK_ACTION_COPY);
 	}
     }
-
-    gtk_drag_source_set (ientry->_priv->browse_button,
-			 GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
-			 drop_types, 1,
-			 GDK_ACTION_COPY);
 
     /* This will be freed by our caller; we must set it to NULL here to avoid
      * that add_file_async_done_cb() attempts to free this. */
@@ -598,20 +619,32 @@ do_construct_handler (GnomeSelector *selector)
     ientry = GNOME_ICON_ENTRY (selector);
 
     if (get_value_boolean (ientry, "want_default_behaviour")) {
-	g_object_set (G_OBJECT (ientry),
-		      "want_default_behaviour", FALSE,
-		      "use_default_entry_widget", TRUE,
-		      "use_default_selector_widget", FALSE,
-		      "use_default_browse_dialog", TRUE,
-		      "want_browse_button", FALSE,
-		      "want_clear_button", FALSE,
-		      "want_default_button", FALSE,
-		      NULL);
+	if (ientry->_priv->is_pixmap_entry)
+	    g_object_set (G_OBJECT (ientry),
+			  "want_default_behaviour", FALSE,
+			  "use_default_entry_widget", TRUE,
+			  "use_default_selector_widget", TRUE,
+			  "use_default_browse_dialog", TRUE,
+			  "want_browse_button", TRUE,
+			  "want_clear_button", FALSE,
+			  "want_default_button", FALSE,
+			  NULL);
+	else
+	    g_object_set (G_OBJECT (ientry),
+			  "want_default_behaviour", FALSE,
+			  "use_default_entry_widget", FALSE,
+			  "use_default_selector_widget", TRUE,
+			  "use_default_browse_dialog", TRUE,
+			  "want_browse_button", FALSE,
+			  "want_clear_button", FALSE,
+			  "want_default_button", FALSE,
+			  NULL);
     }
 
     /* Create the default browser dialog if requested. */
     if (get_value_boolean (ientry, "use_default_browse_dialog") &&
-	!has_value_widget (ientry, "browse_dialog")) {
+	!has_value_widget (ientry, "browse_dialog") &&
+	!ientry->_priv->is_pixmap_entry) {
 	GtkWidget *browse_dialog;
 	gchar *dialog_title, *history_id;
 	GValue value = { 0, };
@@ -671,45 +704,72 @@ do_construct_handler (GnomeSelector *selector)
     }
 
     /* Create the default entry widget if requested. */
-    if (get_value_boolean (ientry, "use_default_entry_widget") &&
-	!has_value_widget (ientry, "entry_widget")) {
-	GtkWidget *entry_widget, *w;
+    if (get_value_boolean (ientry, "use_default_selector_widget") &&
+	!has_value_widget (ientry, "selector_widget")) {
+	GtkWidget *selector_widget, *w;
 	GValue value = { 0, };
 
-	g_message (G_STRLOC ": default entry widget");
+	g_message (G_STRLOC ": default selector widget");
 
-	entry_widget = gtk_hbox_new (FALSE, 4);
+	if (ientry->_priv->is_pixmap_entry) {
+	    selector_widget = gtk_scrolled_window_new (NULL, NULL);
+	    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (selector_widget),
+					    GTK_POLICY_AUTOMATIC,
+					    GTK_POLICY_AUTOMATIC);
 
-	w = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-	gtk_box_pack_start (GTK_BOX (entry_widget), w, TRUE, FALSE, 0);
+	    ientry->_priv->preview = gtk_label_new (_("No Icon"));
 
-	ientry->_priv->browse_button = gtk_button_new_with_label (_("No Icon"));
-	gtk_drag_dest_set (GTK_WIDGET (ientry->_priv->browse_button),
+	    gtk_scrolled_window_add_with_viewport
+		(GTK_SCROLLED_WINDOW (selector_widget),
+		 ientry->_priv->preview);
+
+	    ientry->_priv->preview_container = ientry->_priv->preview->parent;
+
+	    gtk_widget_set_usize (selector_widget,
+				  ientry->_priv->preview_x + 12,
+				  ientry->_priv->preview_y + 12);
+	} else {
+	    selector_widget = gtk_hbox_new (FALSE, 4);
+
+	    w = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
+	    gtk_box_pack_start (GTK_BOX (selector_widget), w, TRUE, FALSE, 0);
+
+	    ientry->_priv->preview_container = gtk_button_new_with_label (_("No Icon"));
+	    ientry->_priv->preview = GTK_BIN (ientry->_priv->preview_container)->child;
+
+	    gtk_widget_set_usize (ientry->_priv->preview,
+				  ientry->_priv->preview_x + 12,
+				  ientry->_priv->preview_y + 12);
+
+	    gtk_container_add (GTK_CONTAINER (w),
+			       ientry->_priv->preview_container);
+	}
+
+	gtk_drag_dest_set (GTK_WIDGET (ientry->_priv->preview),
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
 			   drop_types, 1, GDK_ACTION_COPY);
-	gtk_signal_connect (GTK_OBJECT (ientry->_priv->browse_button),
+	gtk_signal_connect (GTK_OBJECT (ientry->_priv->preview),
 			    "drag_data_received",
 			    GTK_SIGNAL_FUNC (drag_data_received), ientry);
-	gtk_signal_connect (GTK_OBJECT (ientry->_priv->browse_button),
+	gtk_signal_connect (GTK_OBJECT (ientry->_priv->preview),
 			    "drag_data_get", GTK_SIGNAL_FUNC (drag_data_get),
 			    ientry);
-	gtk_signal_connect_object (GTK_OBJECT (ientry->_priv->browse_button),
-				   "clicked", GTK_SIGNAL_FUNC (show_icon_selection),
-				   GTK_OBJECT (ientry));
 
-	/*FIXME: 60x60 is just larger then default 48x48, though icon sizes
-	  are supposed to be selectable I guess*/
-	gtk_widget_set_usize (ientry->_priv->browse_button,
-			      ientry->_priv->preview_x + 12,
-			      ientry->_priv->preview_y + 12);
-	gtk_container_add (GTK_CONTAINER (w), ientry->_priv->browse_button);
-	gtk_widget_show_all (ientry->_priv->browse_button);
+	if (!ientry->_priv->is_pixmap_entry)
+	    gtk_signal_connect_object
+		(GTK_OBJECT (ientry->_priv->preview_container),
+		 "clicked", GTK_SIGNAL_FUNC (show_icon_selection),
+		 GTK_OBJECT (ientry));
+
+	gtk_widget_ref (ientry->_priv->preview_container);
+
+	gtk_widget_show_all (selector_widget);
 
 	g_value_init (&value, GTK_TYPE_WIDGET);
-	g_value_set_object (&value, G_OBJECT (entry_widget));
-	g_object_set_property (G_OBJECT (ientry), "entry_widget", &value);
+	g_value_set_object (&value, G_OBJECT (selector_widget));
+	g_object_set_property (G_OBJECT (ientry), "selector_widget", &value);
 	g_value_unset (&value);
     }
 
@@ -766,12 +826,6 @@ gnome_icon_entry_new (const gchar *history_id, const gchar *dialog_title)
     GnomeIconEntry *ientry;
 
     ientry = g_object_new (gnome_icon_entry_get_type (),
-			   "use_default_entry_widget", TRUE,
-			   "use_default_selector_widget", FALSE,
-			   "use_default_browse_dialog", TRUE,
-			   "want_browse_button", FALSE,
-			   "want_clear_button", FALSE,
-			   "want_default_button", FALSE,
 			   "history_id", history_id,
 			   "dialog_title", dialog_title,
 			   NULL);
@@ -797,13 +851,9 @@ gnome_icon_entry_destroy (GtkObject *object)
 	ientry->_priv->browse_dialog = NULL;
 	ientry->_priv->icon_selector = NULL;
 
-	if (ientry->_priv->browse_button) {
-	    GtkWidget *child;
-
-	    child = GTK_BIN (ientry->_priv->browse_button)->child;
-	    gtk_widget_destroy (child);
-	}
-	ientry->_priv->browse_button = NULL;
+	if (ientry->_priv->preview_container)
+	    gtk_widget_unref (ientry->_priv->preview_container);
+	ientry->_priv->preview_container = NULL;
 
 	g_free (ientry->_priv->current_icon);
 	ientry->_priv->current_icon = NULL;

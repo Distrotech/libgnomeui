@@ -1,5 +1,11 @@
 2001-02-26  Martin Baulig  <baulig@suse.de>
 
+	* gnome-icon-entry.c (PROP_IS_PIXMAP_ENTRY): New boolean construction
+	only property. If this is true, the widget will have the look&feel of
+	the old GnomePixmapEntry.
+
+2001-02-26  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selector.c (PROP_WANT_DEFAULT_BEHAVIOUR): New boolean property.
 	If it's set, then each of the GnomeSelector subclasses will show its
 	default behaviour, ie. whether it'll have a "Browse" button etc.
