@@ -1,3 +1,9 @@
+Sat Nov 21 19:08:01 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-color-picker.c: catch destroy event on the dialog, don't
+	  start a new dialog when one was started already, kill a couple
+	  of redundunt functions (destroy_cs,cancel)
+
 1998-11-21  Andrew T. Veliath  <andrewtv@usa.net>
 
 	* gnome-app.c (gnome_app_configure_toolbar_hseparators): New

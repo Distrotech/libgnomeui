@@ -321,24 +321,17 @@ gnome_color_picker_new (void)
 	return GTK_WIDGET (gtk_type_new (gnome_color_picker_get_type ()));
 }
 
-/* Generic function to destroy the color selection dialog and reset the picker to its normal state */
-static void
-cs_destroy (GnomeColorPicker *cp)
-{
-	gtk_widget_destroy (cp->cs_dialog);
-	cp->cs_dialog = NULL;
-}
-
-/* Callback used when the color selection dialog is deleted */
+/* Callback used when the color selection dialog is destroyed */
 static gint
-cs_delete_event (GtkWidget *widget, GdkEvent *event, gpointer data)
+cs_destroy (GtkWidget *widget, gpointer data)
 {
 	GnomeColorPicker *cp;
 
 	cp = data;
 
-	cs_destroy (cp);
-	return TRUE;
+	cp->cs_dialog = NULL;
+
+	return FALSE;
 }
 
 /* Callback for when the OK button in the color selection dialog is clicked */
@@ -353,7 +346,7 @@ cs_ok_clicked (GtkWidget *widget, gpointer data)
 
 	gtk_color_selection_get_color (GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (cp->cs_dialog)->colorsel),
 				       color);
-	cs_destroy (cp);
+	gtk_widget_destroy (cp->cs_dialog);
 
 	cp->r = color[0];
 	cp->g = color[1];
@@ -370,16 +363,6 @@ cs_ok_clicked (GtkWidget *widget, gpointer data)
 			 r, g, b, a);
 }
 
-/* Callback for when the Cancel button in the color selection dialog is clicked */
-static void
-cs_cancel_clicked (GtkWidget *widget, gpointer data)
-{
-	GnomeColorPicker *cp;
-
-	cp = data;
-	cs_destroy (cp);
-}
-
 static void
 gnome_color_picker_clicked (GtkButton *button)
 {
@@ -391,6 +374,14 @@ gnome_color_picker_clicked (GtkButton *button)
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (button));
 
 	cp = GNOME_COLOR_PICKER (button);
+	
+	/*if dialog already exists, make sure it's shown and raised*/
+	if(cp->cs_dialog) {
+		gtk_widget_show(cp->cs_dialog);
+		if(cp->cs_dialog->window)
+			gdk_window_raise(cp->cs_dialog->window);
+		return;
+	}
 
 	/* Create the dialog and connects its buttons */
 
@@ -407,17 +398,17 @@ gnome_color_picker_clicked (GtkButton *button)
 	gtk_color_selection_set_color (GTK_COLOR_SELECTION (csd->colorsel), color);
 	gtk_color_selection_set_color (GTK_COLOR_SELECTION (csd->colorsel), color);
 
-	gtk_signal_connect (GTK_OBJECT (cp->cs_dialog), "delete_event",
-			    (GtkSignalFunc) cs_delete_event,
+	gtk_signal_connect (GTK_OBJECT (cp->cs_dialog), "destroy",
+			    (GtkSignalFunc) cs_destroy,
 			    cp);
 
 	gtk_signal_connect (GTK_OBJECT (csd->ok_button), "clicked",
 			    (GtkSignalFunc) cs_ok_clicked,
 			    cp);
 
-	gtk_signal_connect (GTK_OBJECT (csd->cancel_button), "clicked",
-			    (GtkSignalFunc) cs_cancel_clicked,
-			    cp);
+	gtk_signal_connect_object (GTK_OBJECT (csd->cancel_button), "clicked",
+				   (GtkSignalFunc) gtk_widget_destroy,
+				   GTK_OBJECT(cp->cs_dialog));
 
 	/* FIXME: do something about the help button */
 
