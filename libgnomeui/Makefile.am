@@ -17,6 +17,7 @@ libgnomeui_la_SOURCES = \
 	gnome-ice.c			\
 	gnome-init.c			\
 	gnome-messagebox.c		\
+	gnome-about.c			\
 	gnome-pixmap.c			\
 	gnome-properties.c		\
 	gnome-session.c			\
@@ -32,6 +33,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-colors.h         		\
 	gnome-ice.h			\
 	gnome-messagebox.h		\
+	gnome-about.h			\
 	gnome-properties.h     		\
 	gnome-pixmap.h			\
 	gnome-session.h			\
@@ -45,7 +47,7 @@ EXTRA_DIST = \
 	gnome-stock-cancel.xpm
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
-libgnomeui_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(x_libs)
+libgnomeui_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(x_libs) $(INTLLIBS)
 
 files:
         @files=`ls $(DISTFILES) 2> /dev/null `; for p in $$files; do \
