@@ -9,6 +9,7 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtkvbox.h>
+#include <gtk/gtkfeatures.h>
 #include <libgnome/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
@@ -46,7 +47,7 @@ struct _GnomeCalculator {
 	GtkWidget *invert_button;
 
 	GList *stack;
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
 	GtkAccelGroup *accel;
 #else
 	GtkAcceleratorTable *accel;

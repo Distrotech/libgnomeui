@@ -456,7 +456,7 @@ gnome_app_set_menus (GnomeApp *app,
 	GnomeAppWidgetPositionType pos = GNOME_APP_POS_TOP;
 	char *location = NULL;
 	GtkWidget *hb;
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
 	GtkAccelGroup *ag;
 #else
 	GtkAcceleratorTable *at;
@@ -493,7 +493,7 @@ gnome_app_set_menus (GnomeApp *app,
 		g_free (location);
 		gnome_config_pop_prefix ();
 	}
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
 	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
 /* FIXME */
 /*	if(ag && !g_list_find(GTK_WINDOW(app)->accelerator_groups, ag)) */
@@ -513,7 +513,7 @@ gnome_app_set_toolbar (GnomeApp *app,
 	GnomeAppWidgetPositionType pos = GNOME_APP_POS_TOP;
 	GtkWidget *hb;
 	char *location;
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
 	GtkAccelGroup *ag;
 #else
 	GtkAcceleratorTable *at;
@@ -543,7 +543,7 @@ gnome_app_set_toolbar (GnomeApp *app,
 	}
 	else
 		gnome_app_toolbar_set_position (app, pos);
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
 	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
 	/* FIXME
 	if(ag && !g_list_find(GTK_WINDOW(app)->accelerator_groups, ag))

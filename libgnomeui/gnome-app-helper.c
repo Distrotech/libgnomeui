@@ -290,7 +290,7 @@ gnome_app_create_menus_custom (GnomeApp *app,
 			       GnomeUIBuilderData uibdata)
 {
   GtkWidget *menubar;
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
   GtkAccelGroup *ag;
 #else
   GtkAcceleratorTable *at;
@@ -303,7 +303,7 @@ gnome_app_create_menus_custom (GnomeApp *app,
 
   menubar = gtk_menu_bar_new ();
   gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
-#ifdef HAVE_DEVGTK	
+#ifdef GTK_HAVE_ACCEL_GROUP	
   ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
   set_accel = (ag == NULL);
 #else
@@ -313,7 +313,7 @@ gnome_app_create_menus_custom (GnomeApp *app,
   if (menuinfo)
     gnome_app_do_menu_creation(app, app->menubar, 0, menuinfo, uibdata);
   if (set_accel) {
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
     ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
     if (ag)
       gtk_window_add_accel_group(GTK_WINDOW(app), ag);
@@ -374,7 +374,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 {
   int i, set_accel;
   GtkWidget *pmap;
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
   GtkAccelGroup *ag;
 
   set_accel = (NULL == gtk_object_get_data(GTK_OBJECT(app),
@@ -445,7 +445,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
     }
   tbinfo[i].widget = parent_widget;
   if (set_accel) {
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
     ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
     if (ag)
       gtk_window_add_accel_group(GTK_WINDOW(app), ag);
@@ -584,14 +584,14 @@ gnome_app_do_ui_accelerator_setup (GnomeApp *app,
 				   gchar *signal_name,
 				   GnomeUIInfo *menuinfo_item)
 {
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
   GtkAccelGroup *ag;
 #else
   GtkAcceleratorTable *at;
 #endif
   if (menuinfo_item->accelerator_key == 0)
     return;
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
   ag = gtk_object_get_data(GTK_OBJECT(app),
 			   "GtkAccelGroup");
   if (ag == NULL)
@@ -755,7 +755,7 @@ gnome_app_insert_menus_custom (GnomeApp *app,
 			       GnomeUIBuilderData uibdata)
 {
   GtkWidget *parent;
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
   GtkAccelGroup *ag;
 #else
   GtkAcceleratorTable *at;

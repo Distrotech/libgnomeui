@@ -1102,7 +1102,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 	gc->mode = GNOME_CALCULATOR_DEG;
 	gc->invert = FALSE;
 	gc->add_digit = FALSE;
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
 	gc->accel = gtk_accel_group_new();
 #else
 	gc->accel = gtk_accelerator_table_new();
@@ -1125,7 +1125,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 				gtk_signal_connect(GTK_OBJECT(w),"clicked",
 						   but->signal_func,
 						   but);
-#ifdef HAVE_DEVGTK
+#ifdef GTK_HAVE_ACCEL_GROUP
 				if(but->key) {
 					gtk_widget_add_accelerator(w,
 						"clicked",

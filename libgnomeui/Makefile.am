@@ -16,8 +16,9 @@ bin_PROGRAMS    = gnome_segv
 lib_LTLIBRARIES = libgnomeui.la
 
 # these files are `autoconf'ed in.
-EXTRA_libgnomeui_la_SOURCES = gnome-canvas.c gnome-canvas.h \
-		gnome-canvas-rect-ellipse.c
+EXTRA_libgnomeui_la_SOURCES = gnome-canvas.c gnome-canvas-rect-ellipse.c
+
+EXTRA_HEADERS = gnome-canvas.h
 
 libgnomeui_la_DEPENDENCIES = @GNOME_CANVAS_OBJS@
 
