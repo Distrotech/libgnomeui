@@ -1,0 +1,61 @@
+#ifndef GNOME_HELPSYS_H
+#define GNOME_HELPSYS_H 1
+
+#include <libgnome/gnome-defs.h>
+
+#include <gtk/gtk.h>
+#include <libgnomeui/gnome-dock-item.h>
+#include <libgnome/gnome-help.h>
+
+BEGIN_GNOME_DECLS
+
+#define GNOME_HELP_VIEW(obj) GTK_CHECK_CAST(obj, gnome_help_view_get_type(), GnomeHelpView)
+#define GNOME_HELP_VIEW_CLASS(class) GTK_CHECK_CLASS_CAST(class, gnome_help_view_get_type(), GnomeHelpViewClass)
+#define GNOME_IS_HELP_VIEW(obj) GTK_CHECK_TYPE(obj, gnome_help_view_get_type())
+
+typedef enum { GNOME_HELP_POPUP, GNOME_HELP_EMBEDDED, GNOME_HELP_BROWSER } GnomeHelpViewStyle;
+typedef int GnomeHelpViewStylePriority; /* Use the G_PRIORITY_* system */
+
+typedef struct _GnomeHelpViewClass GnomeHelpViewClass;
+typedef struct _GnomeHelpView GnomeHelpView;
+
+struct _GnomeHelpView {
+  GtkBox parent_object;
+
+  GtkOrientation orientation;
+
+  GnomeHelpViewStyle style;
+  GnomeHelpViewStylePriority style_prio;
+
+  GnomeHelpViewStyle app_style; /* Used to properly handle object args for style & prio */ 
+  GnomeHelpViewStylePriority app_style_priority;
+
+  GtkWidget *toplevel;
+  GtkWidget *toolbar, *content, *btn_help, *btn_style, *btn_contribute;
+};
+
+struct _GnomeHelpViewClass {
+  GtkBoxClass parent_class;
+  GtkWidget *popup_menu;
+};
+
+GtkType gnome_help_view_get_type(void);
+GtkWidget *gnome_help_view_new(GtkWidget *toplevel, GnomeHelpViewStyle app_style,
+			       GnomeHelpViewStylePriority app_style_priority);
+void gnome_help_view_set_style(GnomeHelpView *help_view, GnomeHelpViewStyle style, GnomeHelpViewStylePriority style_priority);
+void gnome_help_view_show_help(GnomeHelpView *help_view, const char *help_path);
+void gnome_help_view_show_help_for(GnomeHelpView *help_view, GtkWidget *widget);
+void gnome_help_view_set_orientation(GnomeHelpView *help_view, GtkOrientation orientation);
+void gnome_help_view_display(gpointer ignore, GnomeHelpMenuEntry *ent);
+
+/* Object data on toplevel, name */
+#define GNOME_APP_HELP_VIEW_NAME "HelpView"
+
+/*------*/
+GtkWidget *gnome_widget_set_name(GtkWidget *widget, const char *name);
+
+#define H_(widget, help_id) gnome_widget_set_name((widget), (help_id))
+
+END_GNOME_DECLS
+
+#endif
