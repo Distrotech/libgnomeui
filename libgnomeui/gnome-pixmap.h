@@ -78,5 +78,8 @@ GtkWidget *gnome_pixmap_new_from_xpm_d_at_size (gchar **xpm_data, gint width, gi
 
 END_GNOME_DECLS
 
+/* PRIVATE INTERNAL FUNCTION DO NOT USE */
+/* FIXME create a private header and move this there. */
+ArtPixBuf *gnome_pixbuf_scale(ArtPixBuf* pixbuf, gint w, gint h);
 
 #endif /* __GNOME_PIXMAP_H__ */

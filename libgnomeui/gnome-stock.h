@@ -44,6 +44,9 @@ typedef struct _GnomeStockClass  GnomeStockClass;
 
 struct _GnomeStock {
 	GnomePixmap pixmap;
+
+        /*< private >*/
+        
         char *icon;
 };
 
@@ -55,96 +58,18 @@ guint         gnome_stock_get_type(void);
 GtkWidget    *gnome_stock_new(void);
 GtkWidget    *gnome_stock_new_with_icon(const char *icon);
 GtkWidget    *gnome_stock_new_with_icon_at_size(const char *icon, int width, int height);
-gboolean      gnome_stock_set_icon(GnomeStock *stock, const char *icon);
-gboolean      gnome_stock_set_icon_at_size(GnomeStock *stock, const char *icon, int width, int height);
-
-
-
-
-
-/* Structures for the internal stock image hash table entries */
-
-typedef struct _GnomeStockPixmapEntryAny     GnomeStockPixmapEntryAny;
-typedef struct _GnomeStockPixmapEntryData    GnomeStockPixmapEntryData;
-typedef struct _GnomeStockPixmapEntryFile    GnomeStockPixmapEntryFile;
-typedef struct _GnomeStockPixmapEntryPath    GnomeStockPixmapEntryPath;
-typedef struct _GnomeStockPixmapEntryWidget  GnomeStockPixmapEntryWidget;
-typedef struct _GnomeStockPixmapEntryGPixmap GnomeStockPixmapEntryGPixmap;
-typedef union  _GnomeStockPixmapEntry        GnomeStockPixmapEntry;
-
-typedef enum {
-        GNOME_STOCK_PIXMAP_TYPE_NONE,
-        GNOME_STOCK_PIXMAP_TYPE_DATA,
-        GNOME_STOCK_PIXMAP_TYPE_FILE,
-        GNOME_STOCK_PIXMAP_TYPE_PATH,
-        GNOME_STOCK_PIXMAP_TYPE_WIDGET,
-	GNOME_STOCK_PIXMAP_TYPE_GPIXMAP
-} GnomeStockPixmapType;
-
-
-/* a data entry holds a hardcoded pixmap */
-struct _GnomeStockPixmapEntryData {
-        GnomeStockPixmapType type;
-	int width, height;
-	char *label;
-        const gchar **xpm_data;
-};
-
-/* a file entry holds a filename (no path) to the pixamp. this pixmap
-   will be seached for using gnome_pixmap_file */
-struct _GnomeStockPixmapEntryFile {
-        GnomeStockPixmapType type;
-	int width, height;
-	char *label;
-        gchar *filename;
-};
-
-/* a path entry holds the complete (absolut) path to the pixmap file */
-struct _GnomeStockPixmapEntryPath {
-        GnomeStockPixmapType type;
-	int width, height;
-	char *label;
-        gchar *pathname;
-};
-
-/* a widget entry holds a GnomeStockPixmapWidget. This kind of icon can be
- * used by a theme to completely change the handling of a stock icon. */
-struct _GnomeStockPixmapEntryWidget {
-        GnomeStockPixmapType type;
-	int width, height;
-	char *label;
-        GtkWidget *widget;
-};
-
-/* a GnomePixmap */
-struct _GnomeStockPixmapEntryGPixmap {
-        GnomeStockPixmapType type;
-	int width, height;
-	char *label;
-        GnomePixmap *pixmap;
-};
-
-struct _GnomeStockPixmapEntryAny {
-        GnomeStockPixmapType type;
-	int width, height;
-	char *label;
-};
-
-union _GnomeStockPixmapEntry {
-        GnomeStockPixmapType type;
-        GnomeStockPixmapEntryAny any;
-        GnomeStockPixmapEntryData data;
-        GnomeStockPixmapEntryFile file;
-        GnomeStockPixmapEntryPath path;
-        GnomeStockPixmapEntryWidget widget;
-        GnomeStockPixmapEntryGPixmap gpixmap;
-};
-
-
-
+void          gnome_stock_set_icon(GnomeStock *stock, const char *icon);
+void          gnome_stock_set_icon_at_size(GnomeStock *stock, const char *icon, int width, int height);
 
 /*
  * The stock pixmap hash table
+ */
+
+/* forward declaration for opaque datatype. */
+typedef union  _GnomeStockPixmapEntry        GnomeStockPixmapEntry;
+
+/*
+ * Hash table manipulation
  */
 
 /* register a pixmap. returns non-zero, if successful */
@@ -169,9 +94,27 @@ void gnome_stock_pixmap_gdk (const char *icon,
 			     GdkPixmap **mask);
 
 
+/*
+ * Hash entry datatype operations
+ */
 
+void gnome_stock_pixmap_entry_destroy (GnomeStockPixmapEntry* entry);
 
+GnomeStockPixmapEntry *gnome_stock_pixmap_entry_new_from_gdk_pixbuf (GdkPixbuf *pixbuf,
+                                                                     const gchar* label);
 
+GnomeStockPixmapEntry *gnome_stock_pixmap_entry_new_from_gdk_pixbuf_at_size (GdkPixbuf *pixbuf,
+                                                                             const gchar* label,
+                                                                             gint width, gint height);
+
+GnomeStockPixmapEntry *gnome_stock_pixmap_entry_new_from_filename (const gchar* filename,
+                                                                   const gchar* label);
+
+GnomeStockPixmapEntry *gnome_stock_pixmap_entry_new_from_pathname (const gchar* pathname,
+                                                                   const gchar* label);
+
+GnomeStockPixmapEntry *gnome_stock_pixmap_entry_new_from_xpm_data (const gchar** xpm_data,
+                                                                   const gchar* label);
 
 /*
  * Utility functions to retrieve buttons

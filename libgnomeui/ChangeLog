@@ -1,4 +1,34 @@
+1999-11-04  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-stock.c: Remove GnomeStockPixmapEntryWidget and 
+	GnomeStockPixmapEntryGPixmap; these no longer make any sense.
+
+	* gnome-stock.h: GnomeStockPixmapEntry made opaque, all struct
+	contents moved to gnome-stock.c. Added new constructors and
+	destructors for creating a GnomeStockPixmapEntry.
+	
+	* gnome-stock.c: Removed functions I removed from the header last
+	week (deprecated stuff that had been spewing warnings or not
+	compiled at all).
+	
+	* gnome-stock.h: GnomeStockPixmapEntryRGB,
+	GnomeStockPixmapEntryRGBScaled added to replace Imlib versions
+	
+	* gnome-pixmap.c (gnome_pixbuf_scale): Add this here; it's
+	scale_down originally in gnome-stock.c. We no longer handle 
+	the magic alpha color, and we do handle full alpha.
+
+	* gnome-stock.c (gnome_stock_set_icon): Don't return success or
+	failure; if the icon doesn't exist, spew warnings.
+	(gnome_stock_set_icon_at_size): ditto
+	(gnome_stock_new_with_icon): don't check return val from set_icon
+	(gnome_stock_set_icon): Check whether the new icon is the same as
+	the old right at the start of the function.
+	(scale_down): mostly moved to gnome-pixmap.c as gnome_pixbuf_scale()	
+	
 1999-10-25  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.c: set parent_class to NULL 
 
 	* gnome-stock.h: Further enhance the gnome-stock header. Remove
 	all functions that spew "don't use me" when used; group things

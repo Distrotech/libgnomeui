@@ -18,7 +18,7 @@ static void clear_old_images           (GnomePixmap *gpixmap);
 static void build_insensitive_pixbuf      (GnomePixmap *gpixmap);
 static void build_insensitive_pixmap      (GnomePixmap *gpixmap);
 
-static GtkMiscClass *parent_class;
+static GtkMiscClass *parent_class = NULL;
 
 /**
  * gnome_pixmap_get_type:
@@ -797,4 +797,159 @@ build_insensitive_pixmap      (GnomePixmap *gpixmap)
         gdk_gc_destroy(gc);
 }
 
+/*
+ * This really should not be here; but it is until we write the filtered affine
+ * transformer for libart
+ */
 
+#if 0
+/* code snippet to copy for getting base_color from a window */
+/* 
+	if (window) {
+		GtkStyle *style = gtk_widget_get_style(window);
+		scale_base.r = style->bg[state].red >> 8;
+		scale_base.g = style->bg[state].green >> 8;
+		scale_base.b = style->bg[state].blue >> 8;
+	}
+*/
+#endif
+
+static void
+free_buffer (gpointer user_data, gpointer data)
+{
+        g_return_if_fail (data != NULL);
+        g_return_if_fail (user_data == NULL);
+	g_free (data);
+}
+
+ArtPixBuf*
+gnome_pixbuf_scale(ArtPixBuf* pixbuf,
+                   gint w, gint h)
+{
+        ArtPixbuf* retval;
+	unsigned char *data, *p, *p2, *p3, *data_old;
+        long w_old, h_old;
+        long rowstride_old;
+	long x, y, w2, h2, x_old, y_old, w_old3, x2, y2, i, x3, y3;
+	long yw, xw, ww, hw, r, g, b, a, r2, g2, b2, a2;
+	int new_channels;
+	int new_rowstride;
+
+        
+	g_return_val_if_fail (pixbuf != NULL, NULL);	
+	g_return_val_if_fail (pixbuf->format == ART_PIX_RGB, NULL);
+	g_return_val_if_fail (pixbuf->n_channels == 3 || pixbuf->n_channels == 4, NULL);
+	g_return_val_if_fail (pixbuf->bits_per_sample == 8, NULL);
+        g_return_val_if_fail (w > 0);
+        g_return_val_if_fail (h > 0);
+        
+        w_old = pixbuf->width;
+        h_old = pixbuf->height;
+        rowstride_old = pixbuf->rowstride;
+        data_old = pixbuf->pixels;
+        
+        if (base_color != NULL) {
+                scale_base.r = base_color->red >> 8;
+                scale_base.g = base_color->green >> 8;
+                scale_base.b = base_color->blue >> 8;
+        }
+        
+	/* Always align rows to 32-bit boundaries */
+
+	new_channels = pixbuf->has_alpha ? 4 : 3;
+	new_rowstride = 4 * ((new_channels * w + 3) / 4);
+
+        data = g_malloc (h * rowstride);
+
+        if (pixbuf->has_alpha)
+		retval = art_pixbuf_new_rgba_dnotify (data, w, h, new_rowstride,
+                                                      NULL, free_buffer);
+	else
+                retval = art_pixbuf_new_rgb_dnotify (data, w, h, new_rowstride,
+                                                     NULL, free_buffer);
+        
+	p = data;
+
+        /* Multiply stuff by 256 to avoid floating point. */
+        
+	ww = (w_old << 8) / w;  /* old-width-per-new-width * 256 */
+	hw = (h_old << 8) / h;  /* old-height-per-new-height * 256 */
+	h2 = h << 8;
+	w2 = w << 8;
+
+	for (y = 0; y < h2; y += 0x100) {
+		y_old = (y * h_old) / h;
+		y2 = y_old & 0xff;
+		y_old >>= 8;
+		for (x = 0; x < w2; x += 0x100) {
+			x_old = (x * w_old) / w;
+			x2 = x_old & 0xff;
+			x_old >>= 8;
+			i = x_old + (y_old * w_old);
+			p2 = data_old + (i * 3);
+
+			r2 = g2 = b2 = 0;
+			yw = hw;
+			y3 = y2;
+			while (yw) {
+				xw = ww;
+				x3 = x2;
+				p3 = p2;
+				r = g = b = a = 0;
+				while (xw) {
+
+					if ((0x100 - x3) < xw)
+						i = 0x100 - x3;
+					else
+						i = xw;
+
+
+                                        r += p3[0] * i;
+                                        g += p3[1] * i;
+                                        b += p3[2] * i;
+
+                                        if (pixbuf->has_alpha) {
+                                                a += p3[3] * i;
+                                        }
+                                        
+					p3 += pixbuf->n_channels;
+					xw -= i;
+					x3 = 0;
+				}
+				if ((0x100 - y3) < yw) {
+					r2 += r * (0x100 - y3);
+					g2 += g * (0x100 - y3);
+					b2 += b * (0x100 - y3);
+                                        if (pixbuf->has_alpha) {
+                                                a2 += a * (0x100 - y3);
+                                        }
+					yw -= 0x100 - y3;
+				} else {
+					r2 += r * yw;
+					g2 += g * yw;
+					b2 += b * yw;
+                                        if (pixbuf->has_alpha) {
+                                                a2 += a * yw;
+                                        }
+					yw = 0;
+				}
+				y3 = 0;
+				p2 += rowstride_old;
+			}
+                        r2 /= ww * hw;
+                        g2 /= ww * hw;
+                        b2 /= ww * hw;
+
+                        *(p++) = r2 & 0xff;
+                        *(p++) = g2 & 0xff;
+                        *(p++) = b2 & 0xff;
+                        
+                        if (pixbuf->has_alpha) {
+                                a2 /= ww * hw;
+                                *(p++) = a2 & 0xff;
+                        }
+		}
+	}
+
+	return retval;
+}
