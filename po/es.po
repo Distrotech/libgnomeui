@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-12 16:47+0100\n"
-"PO-Revision-Date: 2004-02-12 16:48+0100\n"
+"POT-Creation-Date: 2004-02-19 02:11+0100\n"
+"PO-Revision-Date: 2004-02-19 02:11+0100\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -656,11 +656,11 @@ msgstr "PREFIJO"
 msgid "Disable connection to session manager"
 msgstr "Deshabilitar la conexión al administrador de sesiones"
 
-#: libgnomeui/gnome-client.c:974
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Administración de sesiones"
 
-#: libgnomeui/gnome-client.c:2474
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Cancelar cierre de sesión"
 
@@ -952,7 +952,9 @@ msgstr "Usar GtkFileChooser"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "Indica si se debe usar el widget GtkFilechooser o el antiguo GtkFileSelection para seleccionar archivos."
+msgstr ""
+"Indica si se debe usar el widget GtkFilechooser o el antiguo "
+"GtkFileSelection para seleccionar archivos."
 
 #: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
@@ -1349,7 +1351,7 @@ msgid "GNOME GUI Library"
 msgstr "Biblioteca GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:707
+#: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1357,7 +1359,7 @@ msgstr ""
 "diálogo de error\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:721
+#: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1403,13 +1405,17 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Uso: gnome_segv2 nombre_de_aplicación número_de_señal\n"
 
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "_Reiniciar la aplicación"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
-msgstr "Informar a los desarrolladores"
+msgid "_Inform Developers"
+msgstr "_Informar a los desarrolladores"
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
-msgstr "Depurar"
+msgid "_Debug"
+msgstr "_Depurar"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
