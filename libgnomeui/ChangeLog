@@ -1,3 +1,9 @@
+Mon Jun  8 19:10:24 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-geometry.h, gnome-geometry.c (gnome_geometry_string): 
+	New function gets a geometry string which describes a GdkWindow.
+	Code comes from gnomecal.
+	
 1998-06-08 Arturo Espinosa Aldama <arturo@nuclecu.unam.mx>
 
 	* gnome-app-helper.c (gnome_app_do_menu_creation): The support for
