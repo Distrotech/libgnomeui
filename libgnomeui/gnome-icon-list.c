@@ -18,7 +18,7 @@
 #define DEFAULT_ROW_SPACING  6
 #define DEFAULT_COL_SPACING  6
 #define DEFAULT_TEXT_SPACING 4
-#define DEFAULT_ICON_BORDER  4
+#define DEFAULT_ICON_BORDER  6
 #define DEFAULT_WIDTH        70
 #define SCROLLBAR_SPACING    5 /* this is the same value as in GtkCList */
 
@@ -234,6 +234,43 @@ get_icon_xy_from_num (GnomeIconList *ilist, int pos, int *x, int *y)
 }
 
 static void
+draw_rounded_box (GnomeIconList *ilist, GdkGC *bg_gc, Icon *icon,
+		  int x, int y, int width, int height)
+{
+	const int border = ilist->icon_border;
+
+	/* Rounded corners */
+	gdk_draw_arc (ilist->ilist_window, bg_gc, TRUE,
+		      x,  y, border * 2, border * 2, 
+		      90 * 64, 90 * 64);
+	gdk_draw_arc (ilist->ilist_window, bg_gc, TRUE,
+		      x + width  - border * 2,
+		      y, 
+		      border * 2, border * 2, 
+		      0 * 64, 90 * 64);
+	gdk_draw_arc (ilist->ilist_window, bg_gc, TRUE,
+		      x,  y + height - border * 2,
+		      border * 2, border * 2, 
+		      180 * 64, 90 * 64);
+	gdk_draw_arc (ilist->ilist_window, bg_gc, TRUE,
+		      x + width - border * 2,  y + height - border * 2,
+		      border * 2, border * 2, 
+		      270 * 64, 90 * 64);
+	/* Big rectangle */
+	gdk_draw_rectangle (ilist->ilist_window, bg_gc, TRUE,
+			    x + ilist->icon_border,
+			    y,
+			    icon->ti->width,
+			    icon->ti->height + border * 2);
+	/* Small one */
+	gdk_draw_rectangle (ilist->ilist_window, bg_gc, TRUE,
+			    x,
+			    y + ilist->icon_border,
+			    icon->ti->width  + border * 2,
+			    icon->ti->height);
+}
+ 
+static void
 draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 {
 	int xpix, ypix;
@@ -283,14 +320,6 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 			bg_gc = style->bg_gc[GTK_STATE_PRELIGHT];
 	}
 
-	/* Background */
-
-	gdk_draw_rectangle (ilist->ilist_window,
-			    bg_gc,
-			    TRUE,
-			    aarea.x, aarea.y,
-			    aarea.width, aarea.height);
-
 	/* Calculate positions */
 
 	width = icon->im ? icon->im->rgb_width : 0;
@@ -302,6 +331,10 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 		ypix = (ilist->max_icon_height - height) / 2;
 		xtext = 0;
 		ytext = 0;
+		/* Background */
+		gdk_draw_rectangle (ilist->ilist_window, bg_gc, TRUE,
+				    aarea.x,aarea.y,aarea.width, aarea.height);
+
 		break;
 
 	case GNOME_ICON_LIST_TEXT_BELOW:
@@ -309,7 +342,11 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 		ypix = ilist->icon_border + (ilist->max_pixmap_height - height) / 2;
 		xtext = (ilist->max_icon_width - icon->ti->width) / 2;
 		ytext = ilist->icon_border + ilist->max_pixmap_height + ilist->text_spacing;
-
+		draw_rounded_box (ilist, bg_gc, icon,
+				  x + xtext - ilist->icon_border,
+				  y + ytext - ilist->icon_border,
+				  icon->ti->width  + ilist->icon_border * 2,
+				  icon->ti->height + ilist->icon_border * 2);
 		break;
 
 	case GNOME_ICON_LIST_TEXT_RIGHT:
@@ -317,6 +354,10 @@ draw_icon (GnomeIconList *ilist, Icon *icon, int x, int y, GdkRectangle *area)
 		ypix = (ilist->max_icon_height - height) / 2;
 		xtext = ilist->icon_border + ilist->max_pixmap_width + ilist->text_spacing;
 		ytext = (ilist->max_icon_height - icon->ti->height) / 2;
+
+		/* Background */
+		gdk_draw_rectangle (ilist->ilist_window, bg_gc, TRUE,
+				    aarea.x, aarea.y,aarea.width,aarea.height);
 
 		break;
 

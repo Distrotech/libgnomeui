@@ -1,3 +1,8 @@
+1998-06-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-icon-list.c (draw_rounded_box): Now we show marked files
+	with a rounded box instead of a box.
+
 Sun Jun 07 17:24:15 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-mdi.h,gnome-mdi-child.h: fix the cplusplus stuff,and
