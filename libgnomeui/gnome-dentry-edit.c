@@ -566,6 +566,7 @@ gnome_dentry_edit_sync_display(GnomeDEntryEdit *dee,
 			       dentry->terminal);
   
   /*set the names and comments from our i18n list*/
+  gtk_clist_clear (GTK_CLIST(dee->translations));
   i18n_list = gnome_desktop_entry_get_i18n_list (dentry);
   for (li=i18n_list; li; li=li->next) {
     char *text[3];
