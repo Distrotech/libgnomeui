@@ -2154,6 +2154,8 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
 
 	  child = folder_child_new (uri, vfs_info);
 
+	  g_free (uri);
+
 	  if (!g_hash_table_lookup (folder_vfs->children, child->uri))
 	    new = TRUE;
 
