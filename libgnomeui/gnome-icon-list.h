@@ -8,10 +8,11 @@
 #ifndef GNOME_ICON_LIST_H
 #define GNOME_ICON_LIST_H
 
-
 #include <gtk/gtkcontainer.h>
 #include <libgnome/gnome-defs.h>
-
+#ifndef __GDK_IMLIB_H__
+#include <gdk_imlib.h>
+#endif
 
 BEGIN_GNOME_DECLS
 
