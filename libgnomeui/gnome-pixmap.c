@@ -734,7 +734,7 @@ gnome_pixmap_load_file (GnomePixmap *gpixmap, const char *filename)
 }
 
 /**
- * gnome_pixmap_load_file:
+ * gnome_pixmap_load_file_at_size:
  * @gpixmap: the #GnomePixmap widget
  * @filename: a new filename
  * @width: desired width.

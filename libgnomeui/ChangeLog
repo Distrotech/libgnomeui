@@ -1,3 +1,7 @@
+Sat Aug 21 12:47:28 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap.c: fix docs for gnome_pixmap_load_file_at_size
+
 Sat Aug 21 12:45:09 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-pixmap.c: pretty up the inline docs and divide
