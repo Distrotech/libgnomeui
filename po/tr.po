@@ -1,23 +1,23 @@
-# translation of tr.po to Türkçe
 # Turkish translation of libgnomeui2.
 # Copyright (C) 2001-2003, 2004 Free Software Foundation, Inc.
 # Arman Aksoy <armish@linux-sevenler.de, 2003
 # Görkem Çetin <gorkem@gelecek.com.tr>, 2001,2002.
 # Ömer Fadıl USTA <omer_fad@hotmail.com>, 2001.
 # Görkem Çetin <gorkem@kde.org>, 2004.
+# Baris Cicek <baris@teamforce.name.tr>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: tr\n"
+"Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-30 16:28+0200\n"
-"PO-Revision-Date: 2003-02-08 01:05+0200\n"
-"Last-Translator: Arman Aksoy (Armish) <armish@linux-sevenler.de>\n"
+"POT-Creation-Date: 2004-09-09 22:27+0300\n"
+"PO-Revision-Date: 2004-09-09 22:21+0300\n"
+"Last-Translator: Baris Cicek <baris@teamforce.name.tr>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms:  nplurals=1; plural=0;\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -35,13 +35,16 @@ msgstr "2. çocuk öğe"
 msgid "Hint for item 2"
 msgstr "2. öğenin ipucu"
 
+#: file-chooser/gtkfilesystemgnomevfs.c:668
+#, c-format
 msgid "%s is not a folder"
-msgstr ""
+msgstr "%s bir klasör değil"
 
+#: file-chooser/gtkfilesystemgnomevfs.c:875
 msgid "Filesystem"
 msgstr "Dosya sistemi"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1524
+#: file-chooser/gtkfilesystemgnomevfs.c:1539
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Yer imini kaydederken hata oluştu (%s)"
@@ -49,7 +52,7 @@ msgstr "Yer imini kaydederken hata oluştu (%s)"
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "'%s' dosyası için bilgi alınamadı: %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
@@ -58,8 +61,10 @@ msgstr "'%s' dosyası açılırken bir hata oluıştu: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
+"'%s' resmi yüklenemedi: sebebi bilinmiyor, belki bozuk resim dosyasıdır"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -150,7 +155,8 @@ msgid "Translator credits"
 msgstr "Çevirenler"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Programı çevirenler."
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -168,6 +174,7 @@ msgstr "%s Hakkında"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Dosya"
 
@@ -225,6 +232,7 @@ msgid "_Game"
 msgstr "_Oyun"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Yardım"
 
@@ -415,11 +423,11 @@ msgstr "Uygulamayı yapılandır"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Hakkında"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Bu program hakkında"
 
@@ -446,7 +454,7 @@ msgstr "Yeni bir pencere oluşturur"
 msgid "_Close This Window"
 msgstr "_Bu Pencereyi Kapat"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Pencereyi kapat"
 
@@ -621,7 +629,7 @@ msgstr "Kullanıcı faaliyet seviyesi gerekli."
 
 #: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "HTTP Vekiliniz giriş yapmanızı gerektiriyor.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
@@ -629,14 +637,16 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"\"%s\" erişmek için giriş yapmanız gerekiyor.\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Parolanız şifrelenmeden iletilecek."
 
 #: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Parolanız şifrelenerek iletilecek."
 
 #: libgnomeui/gnome-authentication-manager.c:78
 #: libgnomeui/gnome-authentication-manager.c:307
@@ -646,12 +656,12 @@ msgstr "Kimlik Sınama Gerekiyor"
 #: libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr ""
+msgstr "%s alan %s erişmeniz için giriş yapmanız gerekiyor\n"
 
 #: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
+msgstr "%s erişmeniz için giriş yapmanız gerekiyor\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -838,19 +848,16 @@ msgid "Contents Background color"
 msgstr "İçerik Arkaplan Rengi"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr "Arkaplan rengi (GdkColor)"
+msgstr "GdkColor olarak içeriklerin Arkaplan rengi"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "Arkaplan renk seti"
+msgstr "İçeriklerin Arkaplan renk kümesi"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "Arkaplan rengi oluşturuldu"
+msgstr "İçeriklerin Arkaplan rengi atandı"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -985,13 +992,15 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "GtkFileChooser Kullan"
 
 #: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
+"Yeni GtkFileChooser parçacığının ya da GtkFileSelection parçacığının "
+"dosyaları seçmek için kullanılması."
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1288,11 +1297,11 @@ msgstr "_Kullanıcı olarak bağlan:"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Bu oturum için parolayı hatırla"
 
 #: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Parolayı anahtar halkasına kayder"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1375,7 +1384,7 @@ msgstr "Hakkında"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "Çakma Penceresini Etkinsizleştir"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
@@ -1423,7 +1432,7 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr ""
+msgstr "\"%s\" uygulaması beklenmedik bir şekilde çıktı."
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
@@ -1435,10 +1444,12 @@ msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
+"Düzeltebilmeleri için geliştiricileri bu konu hakkında "
+"bilgilendirebilirsiniz.  Ya da uygulamayı şu anda yeniden başlatabilirsiniz."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Kullanım: gnome_segv2 uyg_adı sinyal_num\n"
+msgstr "Kullanım: gnome_segv2 uygadı signum\n"
 
 #: libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
@@ -1452,3 +1463,6 @@ msgstr "_Geliştiricilere Haber Ver"
 msgid "_Debug"
 msgstr "_Hata Ayıkla"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Testten çıkış"
