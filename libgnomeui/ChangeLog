@@ -1,3 +1,9 @@
+1999-05-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_item_shutdown): Free the
+	transformation matrix if it exists.  Thanks to Morten Welinder for
+	reporting this.
+
 1999-05-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-image.c (gnome_canvas_image_set_arg): Queue an

@@ -376,7 +376,7 @@ gnome_canvas_item_shutdown (GtkObject *object)
 		gdk_pointer_ungrab (GDK_CURRENT_TIME);
 	}
 
-	if (item == item->canvas->focused_item) 
+	if (item == item->canvas->focused_item)
 		item->canvas->focused_item = NULL;
 	
 	/* Normal destroy stuff */
@@ -389,6 +389,9 @@ gnome_canvas_item_shutdown (GtkObject *object)
 
 	if (item->parent)
 		group_remove (GNOME_CANVAS_GROUP (item->parent), item);
+
+	if (item->xform)
+		g_free (item->xform);
 
 	if (GTK_OBJECT_CLASS (item_parent_class)->shutdown)
 		(* GTK_OBJECT_CLASS (item_parent_class)->shutdown) (object);
