@@ -54,46 +54,46 @@ typedef void (*GnomeMessageBoxSignal1) (GtkObject *object,
 				        gint       arg1,
 				        gpointer   data);
 
-static void gnome_messagebox_marshal_signal_1 (GtkObject         *object,
-					       GtkSignalFunc      func,
-					       gpointer           func_data,
-					       GtkArg            *args);
+static void gnome_message_box_marshal_signal_1 (GtkObject         *object,
+						GtkSignalFunc      func,
+						gpointer           func_data,
+						GtkArg            *args);
 
-static void gnome_messagebox_class_init (GnomeMessageBoxClass *klass);
-static void gnome_messagebox_init       (GnomeMessageBox      *messagebox);
+static void gnome_message_box_class_init (GnomeMessageBoxClass *klass);
+static void gnome_message_box_init       (GnomeMessageBox      *messagebox);
 
-static void gnome_messagebox_button_clicked (GtkWidget   *button, 
-					     GtkWidget   *messagebox);
+static void gnome_message_box_button_clicked (GtkWidget   *button, 
+					      GtkWidget   *messagebox);
 
 static GtkWindowClass *parent_class;
-static gint messagebox_signals[LAST_SIGNAL] = { 0 };
+static gint message_box_signals[LAST_SIGNAL] = { 0 };
 
 guint
-gnome_messagebox_get_type ()
+gnome_message_box_get_type ()
 {
-	static guint messagebox_type = 0;
+	static guint message_box_type = 0;
 
-	if (!messagebox_type)
+	if (!message_box_type)
 	{
-		GtkTypeInfo messagebox_info =
+		GtkTypeInfo message_box_info =
 		{
 			"GnomeMessageBox",
 			sizeof (GnomeMessageBox),
 			sizeof (GnomeMessageBoxClass),
-			(GtkClassInitFunc) gnome_messagebox_class_init,
-			(GtkObjectInitFunc) gnome_messagebox_init,
+			(GtkClassInitFunc) gnome_message_box_class_init,
+			(GtkObjectInitFunc) gnome_message_box_init,
 			(GtkArgSetFunc) NULL,
 			(GtkArgGetFunc) NULL,
 		};
 
-		messagebox_type = gtk_type_unique (gtk_window_get_type (), &messagebox_info);
+		message_box_type = gtk_type_unique (gtk_window_get_type (), &message_box_info);
 	}
 
-	return messagebox_type;
+	return message_box_type;
 }
 
 static void
-gnome_messagebox_class_init (GnomeMessageBoxClass *klass)
+gnome_message_box_class_init (GnomeMessageBoxClass *klass)
 {
 	GtkObjectClass *object_class;
 	GtkWidgetClass *widget_class;
@@ -105,20 +105,20 @@ gnome_messagebox_class_init (GnomeMessageBoxClass *klass)
 
 	parent_class = gtk_type_class (gtk_window_get_type ());
 
-	messagebox_signals[CLICKED] =
+	message_box_signals[CLICKED] =
 		gtk_signal_new ("clicked",
 				GTK_RUN_LAST,
 				object_class->type,
 				GTK_SIGNAL_OFFSET (GnomeMessageBoxClass, clicked),
-				gnome_messagebox_marshal_signal_1,
+				gnome_message_box_marshal_signal_1,
 				GTK_TYPE_NONE, 1, GTK_TYPE_INT);
 
-	gtk_object_class_add_signals (object_class, messagebox_signals, LAST_SIGNAL);
+	gtk_object_class_add_signals (object_class, message_box_signals, LAST_SIGNAL);
 
 }
 
 static void
-gnome_messagebox_marshal_signal_1 (GtkObject      *object,
+gnome_message_box_marshal_signal_1 (GtkObject      *object,
 			           GtkSignalFunc   func,
 			           gpointer        func_data,
 			           GtkArg         *args)
@@ -131,17 +131,17 @@ gnome_messagebox_marshal_signal_1 (GtkObject      *object,
 }
 
 static void
-gnome_messagebox_init (GnomeMessageBox *messagebox)
+gnome_message_box_init (GnomeMessageBox *message_box)
 {
-	messagebox->modal = FALSE;
+	message_box->modal = FALSE;
 }
 
 GtkWidget*
-gnome_messagebox_new (gchar           *message,
-		      gchar           *messagebox_type, ...)
+gnome_message_box_new (gchar           *message,
+		      gchar           *message_box_type, ...)
 {
 	va_list ap;
-	GnomeMessageBox *messagebox;
+	GnomeMessageBox *message_box;
 	GtkWidget *hbox;
 	GtkWidget *vbox;
 	GtkWidget *label;
@@ -152,58 +152,58 @@ gnome_messagebox_new (gchar           *message,
 	GdkBitmap *mask;                 
 	GtkStyle *style;
 
-	va_start (ap, messagebox_type);
+	va_start (ap, message_box_type);
 	
-	messagebox = gtk_type_new (gnome_messagebox_get_type ());
+	message_box = gtk_type_new (gnome_message_box_get_type ());
 
-	gtk_window_set_policy (GTK_WINDOW (messagebox), FALSE, FALSE, FALSE);
-	gtk_widget_set_usize (GTK_WIDGET (messagebox), GNOME_MESSAGEBOX_WIDTH,
-			      GNOME_MESSAGEBOX_HEIGHT);
-	gtk_container_border_width (GTK_CONTAINER (messagebox), 
-				    GNOME_MESSAGEBOX_BORDER_WIDTH);
+	gtk_window_set_policy (GTK_WINDOW (message_box), FALSE, FALSE, FALSE);
+	gtk_widget_set_usize (GTK_WIDGET (message_box), GNOME_MESSAGE_BOX_WIDTH,
+			      GNOME_MESSAGE_BOX_HEIGHT);
+	gtk_container_border_width (GTK_CONTAINER (message_box), 
+				    GNOME_MESSAGE_BOX_BORDER_WIDTH);
 
-	style = gtk_widget_get_style (GTK_WIDGET (messagebox));
+	style = gtk_widget_get_style (GTK_WIDGET (message_box));
 
-	if (strcmp(GNOME_MESSAGEBOX_INFO, messagebox_type) == 0)
+	if (strcmp(GNOME_MESSAGE_BOX_INFO, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (messagebox), _("Information"));
-		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (messagebox)->window, 
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Information"));
+		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (message_box)->window, 
 						     &mask, 
 						     &style->bg[GTK_STATE_NORMAL],
 						     "bomb.xpm");
 	}
-	else if (strcmp(GNOME_MESSAGEBOX_WARNING, messagebox_type) == 0)
+	else if (strcmp(GNOME_MESSAGE_BOX_WARNING, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (messagebox), _("Warning"));
-		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (messagebox)->window,
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Warning"));
+		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (message_box)->window,
 						     &mask, 
 						     &style->bg[GTK_STATE_NORMAL],
 						     "bomb.xpm");
 	}
-	else if (strcmp(GNOME_MESSAGEBOX_ERROR, messagebox_type) == 0)
+	else if (strcmp(GNOME_MESSAGE_BOX_ERROR, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (messagebox), _("Error"));
-		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (messagebox)->window, 
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Error"));
+		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (message_box)->window, 
 						     &mask, 
 						     &style->bg[GTK_STATE_NORMAL],
 						     "bomb.xpm");
 	}
-	else if (strcmp(GNOME_MESSAGEBOX_QUESTION, messagebox_type) == 0)
+	else if (strcmp(GNOME_MESSAGE_BOX_QUESTION, message_box_type) == 0)
 	{
-		gtk_window_set_title (GTK_WINDOW (messagebox), _("Question"));
-		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (messagebox)->window, 
+		gtk_window_set_title (GTK_WINDOW (message_box), _("Question"));
+		pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (message_box)->window, 
 						     &mask, 
 						     &style->bg[GTK_STATE_NORMAL],
 						     "bomb.xpm");
 	}
 	else
 	{
-		gtk_window_set_title (GTK_WINDOW (messagebox), "");
+		gtk_window_set_title (GTK_WINDOW (message_box), "");
 		pixmap = NULL;
 	}
 
 	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (messagebox), vbox);
+	gtk_container_add (GTK_CONTAINER (message_box), vbox);
 	gtk_widget_show (vbox);
 
 	hbox = gtk_hbox_new (FALSE, 0);
@@ -223,14 +223,14 @@ gnome_messagebox_new (gchar           *message,
 
 	separator = gtk_hseparator_new ();
 	gtk_box_pack_start (GTK_BOX (vbox), separator, FALSE, TRUE,
-			    GNOME_MESSAGEBOX_BORDER_WIDTH);
+			    GNOME_MESSAGE_BOX_BORDER_WIDTH);
 	gtk_widget_show (separator);
 
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
 	gtk_widget_show (hbox);
 
-	messagebox->buttons = NULL;
+	message_box->buttons = NULL;
 	for (;;) {
 		GtkWidget *button;
 		char *text = va_arg (ap, char *);
@@ -240,55 +240,55 @@ gnome_messagebox_new (gchar           *message,
 
 		button = gnome_stock_or_ordinary_button (text);
 		GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
-		gtk_widget_set_usize (button, GNOME_MESSAGEBOX_BUTTON_WIDTH,
-				      GNOME_MESSAGEBOX_BUTTON_HEIGHT);
+		gtk_widget_set_usize (button, GNOME_MESSAGE_BOX_BUTTON_WIDTH,
+				      GNOME_MESSAGE_BOX_BUTTON_HEIGHT);
 		gtk_box_pack_start (GTK_BOX (hbox), button, TRUE, FALSE, 0);
 		gtk_widget_grab_default (button);
 		gtk_widget_show (button);
 		
 		gtk_signal_connect (GTK_OBJECT (button), "clicked",
-				    (GtkSignalFunc) gnome_messagebox_button_clicked,
-				    messagebox);
+				    (GtkSignalFunc) gnome_message_box_button_clicked,
+				    message_box);
 
-		messagebox->buttons = g_list_append (messagebox->buttons, button);
+		message_box->buttons = g_list_append (message_box->buttons, button);
 	}
 
 	va_end (ap);
 
-	return GTK_WIDGET (messagebox);
+	return GTK_WIDGET (message_box);
 }
 
 void
-gnome_messagebox_set_modal (GnomeMessageBox     *messagebox)
+gnome_message_box_set_modal (GnomeMessageBox     *message_box)
 {
-	messagebox->modal = TRUE;
-	gtk_grab_add (GTK_WIDGET (messagebox));
+	message_box->modal = TRUE;
+	gtk_grab_add (GTK_WIDGET (message_box));
 }
 
 void
-gnome_messagebox_set_default (GnomeMessageBox     *messagebox,
+gnome_message_box_set_default (GnomeMessageBox     *message_box,
                               gint                button)
 {
-	GList *list = g_list_nth (messagebox->buttons, button);
+	GList *list = g_list_nth (message_box->buttons, button);
 
 	if (list && list->data)
 		gtk_widget_grab_default (GTK_WIDGET (list->data));
 }
 
 static void
-gnome_messagebox_button_clicked (GtkWidget   *button, 
-			         GtkWidget   *messagebox)
+gnome_message_box_button_clicked (GtkWidget   *button, 
+			         GtkWidget   *message_box)
 {
-	GList *list = GNOME_MESSAGEBOX (messagebox)->buttons;
+	GList *list = GNOME_MESSAGE_BOX (message_box)->buttons;
 	int which = 0;
 
 	while (list){
 		if (list->data == button)
-			gtk_signal_emit (GTK_OBJECT (messagebox), messagebox_signals[CLICKED], which);	
+			gtk_signal_emit (GTK_OBJECT (message_box), message_box_signals[CLICKED], which);	
 		list = list->next;
 		which ++;
 	}
 
-	g_list_free (GNOME_MESSAGEBOX (messagebox)->buttons);
-	gtk_widget_destroy (messagebox);
+	g_list_free (GNOME_MESSAGE_BOX (message_box)->buttons);
+	gtk_widget_destroy (message_box);
 }

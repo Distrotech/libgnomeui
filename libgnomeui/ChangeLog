@@ -1,5 +1,9 @@
 Sat Mar 21 00:45:10 1998  Tom Tromey  <tromey@cygnus.com>
 
+	* gnome-messagebox.c: Changed all names from gnome_messagebox_* to
+	gnome_message_box_*.  The latter mathches Gtk style, and works
+	better with gnome.defs/gen-typeinfo.
+
 	Somewhat modified patch from Havoc Pennington:
 	* gnome-messagebox.c (gnome_messagebox_new): Initialize buttons
 	element to NULL, not to a new list.  Call va_end.
