@@ -90,7 +90,7 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 static void
 entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 {
-	char *t;
+	gchar *t;
 	GdkImlibImage *im;
 	GtkWidget *child;
 	int w,h;
@@ -188,7 +188,7 @@ entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
 static void
 setup_preview(GtkWidget *widget)
 {
-	char *p;
+	gchar *p;
 	GList *l;
 	GtkWidget *pp = NULL;
 	GdkImlibImage *im;
@@ -355,8 +355,8 @@ static void
 show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 {
 	GnomeFileEntry *fe;
-	char *p;
-	char *curfile;
+	gchar *p;
+	gchar *curfile;
 	GtkWidget *tl;
 
 	g_return_if_fail (b != NULL);
@@ -376,7 +376,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 			p = g_strdup(fe->default_path);
 		else {
 			/*get around the g_free/free issue*/
-			char *cwd = getcwd(NULL,0);
+			gchar *cwd = getcwd(NULL,0);
 			p = g_strdup(cwd);
 			free(cwd);
 		}
@@ -386,7 +386,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 
 	/*figure out the directory*/
 	if(!g_file_test (p,G_FILE_TEST_ISDIR)) {
-		char *d;
+		gchar *d;
 		d = g_dirname (p);
 		g_free (p);
 		p = d;
@@ -396,7 +396,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 				p = g_strdup(fe->default_path);
 			else {
 				/*get around the g_free/free issue*/
-				char *cwd = getcwd(NULL,0);
+				gchar *cwd = getcwd(NULL,0);
 				p = g_strdup(cwd);
 				free(cwd);
 			}
@@ -513,8 +513,8 @@ drag_data_get  (GtkWidget          *widget,
 		guint               time,
 		GnomeIconEntry     *ientry)
 {
-	char *string;
-	char *file;
+	gchar *string;
+	gchar *file;
 
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
@@ -540,7 +540,7 @@ static void
 gnome_icon_entry_init (GnomeIconEntry *ientry)
 {
 	GtkWidget *w;
-	char *p;
+	gchar *p;
 
 	gtk_box_set_spacing (GTK_BOX (ientry), 4);
 	
@@ -610,7 +610,7 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
  * Returns: Returns the new object
  **/
 GtkWidget *
-gnome_icon_entry_new (char *history_id, char *browse_dialog_title)
+gnome_icon_entry_new (const gchar *history_id, const gchar *browse_dialog_title)
 {
 	GnomeIconEntry *ientry;
 	GtkWidget *gentry;
@@ -696,9 +696,9 @@ gnome_icon_entry_gtk_entry (GnomeIconEntry *ientry)
  **/
 void
 gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
-				   const char *subdir)
+				   const gchar *subdir)
 {
-	char *p;
+	gchar *p;
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
 	
@@ -722,7 +722,7 @@ gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
  **/
 void
 gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
-			  const char *filename)
+			  const gchar *filename)
 {
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
@@ -746,7 +746,7 @@ gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
  * Returns: a newly allocated string with the path or %NULL if it
  * couldn't load the file
  **/
-char *
+gchar *
 gnome_icon_entry_get_filename(GnomeIconEntry *ientry)
 {
 	GtkWidget *child;

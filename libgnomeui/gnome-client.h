@@ -216,7 +216,7 @@ gchar*       gnome_client_get_global_config_prefix (GnomeClient *client);
    would ensure that all your session save files or directories would
    be gathered together into the app.d directory. */
 void         gnome_client_set_global_config_prefix (GnomeClient *client,
-						    gchar* prefix);
+						    const gchar* prefix);
 
 /* Returns some flags, that give additional information about this
    client.  Right now, the following flags are supported:

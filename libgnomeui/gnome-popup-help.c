@@ -439,7 +439,7 @@ paste_callback (GtkWidget *widget, gpointer data)
 /* public function. */
 void
 gnome_widget_add_help_with_uidata (GtkWidget *widget,
-				   gchar *help,
+				   const gchar *help,
 				   GnomeUIInfo *menuinfo,
                                    gpointer user_data)
 {

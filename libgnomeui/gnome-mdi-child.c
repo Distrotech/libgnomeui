@@ -201,7 +201,7 @@ void gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view)
  * in @mdi_child. If @mdi_child has already been added to GnomeMDI,
  * it also takes care of updating it.
  **/
-void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, gchar *name)
+void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, const gchar *name)
 {
 	gchar *old_name = mdi_child->name;
 

@@ -2081,7 +2081,7 @@ static gchar* config_prefix = NULL;
  **/
 
 void
-gnome_client_set_global_config_prefix (GnomeClient *client, gchar* prefix)
+gnome_client_set_global_config_prefix (GnomeClient *client, const gchar* prefix)
 {
   if (client == NULL)
     {

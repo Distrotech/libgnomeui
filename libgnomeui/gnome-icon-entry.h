@@ -38,7 +38,7 @@ struct _GnomeIconEntry {
 	GtkWidget *pickbutton;
 	
 	GtkWidget *pick_dialog;
-	char *pick_dialog_dir;
+	gchar *pick_dialog_dir;
 };
 
 struct _GnomeIconEntryClass {
@@ -47,22 +47,22 @@ struct _GnomeIconEntryClass {
 
 
 guint      gnome_icon_entry_get_type    (void);
-GtkWidget *gnome_icon_entry_new         (char *history_id,
-					 char *browse_dialog_title);
+GtkWidget *gnome_icon_entry_new         (const gchar *history_id,
+					 const gchar *browse_dialog_title);
 
 /*by default gnome_pixmap entry sets the default directory to the
   gnome pixmap directory, this will set it to a subdirectory of that,
   or one would use the file_entry functions for any other path*/
 void       gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
-					      const char *subdir);
+					      const gchar *subdir);
 void       gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
-				     const char *filename);
+				     const gchar *filename);
 GtkWidget *gnome_icon_entry_gnome_file_entry(GnomeIconEntry *ientry);
 GtkWidget *gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry);
 GtkWidget *gnome_icon_entry_gtk_entry   (GnomeIconEntry *ientry);
 
 /*only return a file if it was possible to load it with imlib*/
-char      *gnome_icon_entry_get_filename(GnomeIconEntry *ientry);
+gchar      *gnome_icon_entry_get_filename(GnomeIconEntry *ientry);
 
 END_GNOME_DECLS
 

@@ -267,7 +267,7 @@ gnome_druid_page_finish_new (void)
 	return retval;
 }
 GtkWidget *
-gnome_druid_page_finish_new_with_vals (gchar *title, gchar* text, GdkImlibImage *logo, GdkImlibImage *watermark)
+gnome_druid_page_finish_new_with_vals (const gchar *title, const gchar* text, GdkImlibImage *logo, GdkImlibImage *watermark)
 {
 	GtkWidget *retval =  gnome_druid_page_finish_new ();
 	GNOME_DRUID_PAGE_FINISH (retval)->title = g_strdup (title);
@@ -404,7 +404,7 @@ gnome_druid_page_finish_set_text_color    (GnomeDruidPageFinish *druid_page_fini
 }
 void
 gnome_druid_page_finish_set_text          (GnomeDruidPageFinish *druid_page_finish,
-					  gchar *text)
+					  const gchar *text)
 {
 	g_return_if_fail (druid_page_finish != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_FINISH (druid_page_finish));
@@ -417,7 +417,7 @@ gnome_druid_page_finish_set_text          (GnomeDruidPageFinish *druid_page_fini
 }
 void
 gnome_druid_page_finish_set_title         (GnomeDruidPageFinish *druid_page_finish,
-					  gchar *title)
+					  const gchar *title)
 {
 	g_return_if_fail (druid_page_finish != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_FINISH (druid_page_finish));

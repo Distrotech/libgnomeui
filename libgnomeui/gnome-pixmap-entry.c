@@ -423,7 +423,7 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
  * Returns: Returns the new object
  **/
 GtkWidget *
-gnome_pixmap_entry_new (char *history_id, char *browse_dialog_title, int do_preview)
+gnome_pixmap_entry_new (const gchar *history_id, const gchar *browse_dialog_title, gboolean do_preview)
 {
 	GnomePixmapEntry *pentry;
 	GtkWidget *gentry;
@@ -507,7 +507,7 @@ gnome_pixmap_entry_gtk_entry (GnomePixmapEntry *pentry)
  **/
 void
 gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
-				     const char *subdir)
+				     const gchar *subdir)
 {
 	char *p;
 	g_return_if_fail (pentry != NULL);

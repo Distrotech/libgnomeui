@@ -69,8 +69,8 @@ struct _GnomeDruidPageFinishClass
 
 GtkType    gnome_druid_page_finish_get_type    (void);
 GtkWidget *gnome_druid_page_finish_new         (void);
-GtkWidget *gnome_druid_page_finish_new_with_vals(gchar *title,
-					       gchar* text,
+GtkWidget *gnome_druid_page_finish_new_with_vals(const gchar *title,
+					       const gchar* text,
 					       GdkImlibImage *logo,
 					       GdkImlibImage *watermark);
 void gnome_druid_page_finish_set_bg_color      (GnomeDruidPageFinish *druid_page_finish,
@@ -84,9 +84,9 @@ void gnome_druid_page_finish_set_title_color   (GnomeDruidPageFinish *druid_page
 void gnome_druid_page_finish_set_text_color    (GnomeDruidPageFinish *druid_page_finish,
 					       GdkColor *color);
 void gnome_druid_page_finish_set_text          (GnomeDruidPageFinish *druid_page_finish,
-					       gchar *text);
+					       const gchar *text);
 void gnome_druid_page_finish_set_title         (GnomeDruidPageFinish *druid_page_finish,
-					       gchar *title);
+					       const gchar *title);
 void gnome_druid_page_finish_set_logo          (GnomeDruidPageFinish *druid_page_finish,
 					       GdkImlibImage *logo_image);
 void gnome_druid_page_finish_set_watermark     (GnomeDruidPageFinish *druid_page_finish,

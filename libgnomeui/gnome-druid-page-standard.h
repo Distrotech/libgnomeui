@@ -66,7 +66,7 @@ struct _GnomeDruidPageStandardClass
 
 GtkType    gnome_druid_page_standard_get_type      (void);
 GtkWidget *gnome_druid_page_standard_new           (void);
-GtkWidget *gnome_druid_page_standard_new_with_vals (gchar *title, GdkImlibImage *logo);
+GtkWidget *gnome_druid_page_standard_new_with_vals (const gchar *title, GdkImlibImage *logo);
 void gnome_druid_page_standard_set_bg_color        (GnomeDruidPageStandard *druid_page_standard,
 						    GdkColor *color);
 void gnome_druid_page_standard_set_logo_bg_color   (GnomeDruidPageStandard *druid_page_standard,
@@ -74,7 +74,7 @@ void gnome_druid_page_standard_set_logo_bg_color   (GnomeDruidPageStandard *drui
 void gnome_druid_page_standard_set_title_color     (GnomeDruidPageStandard *druid_page_standard,
 						    GdkColor *color);
 void gnome_druid_page_standard_set_title           (GnomeDruidPageStandard *druid_page_standard,
-						    gchar *title);
+						    const gchar *title);
 void gnome_druid_page_standard_set_logo            (GnomeDruidPageStandard *druid_page_standard,
 						    GdkImlibImage *logo_image);
 

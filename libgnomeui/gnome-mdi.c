@@ -311,7 +311,7 @@ static void gnome_mdi_init (GnomeMDI *mdi)
  * Return value:
  * A pointer to a new GnomeMDI object.
  **/
-GtkObject *gnome_mdi_new(gchar *appname, gchar *title) {
+GtkObject *gnome_mdi_new(const gchar *appname, const gchar *title) {
 	GnomeMDI *mdi;
 	
 	mdi = gtk_type_new (gnome_mdi_get_type ());
@@ -1588,7 +1588,7 @@ void gnome_mdi_update_child (GnomeMDI *mdi, GnomeMDIChild *child)
  * A pointer to the GnomeMDIChild object if the child was found and NULL
  * otherwise.
  **/
-GnomeMDIChild *gnome_mdi_find_child (GnomeMDI *mdi, gchar *name)
+GnomeMDIChild *gnome_mdi_find_child (GnomeMDI *mdi, const gchar *name)
 {
 	GList *child_node;
 

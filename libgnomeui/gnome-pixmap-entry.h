@@ -32,13 +32,13 @@ struct _GnomePixmapEntry {
 	
 	GtkWidget *fentry;
 
-	int do_preview; /*put a preview frame with the pixmap next to
-			  the entry*/
+	gboolean do_preview; /*put a preview frame with the pixmap next to
+			       the entry*/
 	GtkWidget *preview;
 	GtkWidget *preview_sw;
 	
 	/*very private*/
-	char *last_preview;
+	gchar *last_preview;
 };
 
 struct _GnomePixmapEntryClass {
@@ -47,15 +47,15 @@ struct _GnomePixmapEntryClass {
 
 
 guint      gnome_pixmap_entry_get_type    (void);
-GtkWidget *gnome_pixmap_entry_new         (char *history_id,
-					   char *browse_dialog_title,
-					   int do_preview);
+GtkWidget *gnome_pixmap_entry_new         (const gchar *history_id,
+					   const gchar *browse_dialog_title,
+					   gboolean do_preview);
 
 /*by default gnome_pixmap entry sets the default directory to the
   gnome pixmap directory, this will set it to a subdirectory of that,
   or one would use the file_entry functions for any other path*/
 void       gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
-						const char *subdir);
+						const gchar *subdir);
 
 GtkWidget *gnome_pixmap_entry_gnome_file_entry(GnomePixmapEntry *pentry);
 GtkWidget *gnome_pixmap_entry_gnome_entry (GnomePixmapEntry *pentry);
@@ -64,13 +64,13 @@ GtkWidget *gnome_pixmap_entry_gtk_entry   (GnomePixmapEntry *pentry);
 /*set the preview parameters, if preview is off then the preview frame
   will be hidden*/
 void       gnome_pixmap_entry_set_preview (GnomePixmapEntry *pentry,
-					   int do_preview);
+					   gboolean do_preview);
 void	   gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,
-					       int preview_w,
-					       int preview_h);
+					       gint preview_w,
+					       gint preview_h);
 
 /*only return a file if it was possible to load it with imlib*/
-char      *gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry);
+gchar      *gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry);
 
 END_GNOME_DECLS
 

@@ -115,7 +115,7 @@ static void gnome_mdi_generic_child_init (GnomeMDIGenericChild *child)
  * 
  * Return value: A newly created &GnomeMDIGenericChild object.
  **/
-GnomeMDIGenericChild *gnome_mdi_generic_child_new (gchar *name)
+GnomeMDIGenericChild *gnome_mdi_generic_child_new (const gchar *name)
 {
 	GnomeMDIGenericChild *child;
 

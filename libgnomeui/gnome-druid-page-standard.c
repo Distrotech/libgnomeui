@@ -253,7 +253,7 @@ gnome_druid_page_standard_new (void)
 	return retval;
 }
 GtkWidget *
-gnome_druid_page_standard_new_with_vals (gchar *title, GdkImlibImage *logo)
+gnome_druid_page_standard_new_with_vals (const gchar *title, GdkImlibImage *logo)
 {
 	GtkWidget *retval = GTK_WIDGET (gtk_type_new (gnome_druid_page_standard_get_type ()));
 	GNOME_DRUID_PAGE_STANDARD (retval)->title = g_strdup (title);
@@ -336,7 +336,7 @@ gnome_druid_page_standard_set_title_color   (GnomeDruidPageStandard *druid_page_
 }
 void
 gnome_druid_page_standard_set_title         (GnomeDruidPageStandard *druid_page_standard,
-					  gchar *title)
+					  const gchar *title)
 {
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));

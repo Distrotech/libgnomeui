@@ -288,7 +288,8 @@ gnome_druid_page_start_new (void)
  * Return value: GtkWidget pointer to new GnomeDruidPageStart.
  **/
 GtkWidget *
-gnome_druid_page_start_new_with_vals (gchar *title, gchar* text, GdkImlibImage *logo, GdkImlibImage *watermark)
+gnome_druid_page_start_new_with_vals (const gchar *title, const gchar* text,
+				      GdkImlibImage *logo, GdkImlibImage *watermark)
 {
 	GtkWidget *retval =  gnome_druid_page_start_new ();
 	GNOME_DRUID_PAGE_START (retval)->title = g_strdup (title);
@@ -435,7 +436,7 @@ gnome_druid_page_start_set_text_color    (GnomeDruidPageStart *druid_page_start,
 }
 void
 gnome_druid_page_start_set_text          (GnomeDruidPageStart *druid_page_start,
-					  gchar *text)
+					  const gchar *text)
 {
 	g_return_if_fail (druid_page_start != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_START (druid_page_start));
@@ -448,7 +449,7 @@ gnome_druid_page_start_set_text          (GnomeDruidPageStart *druid_page_start,
 }
 void
 gnome_druid_page_start_set_title         (GnomeDruidPageStart *druid_page_start,
-					  gchar *title)
+					  const gchar *title)
 {
 	g_return_if_fail (druid_page_start != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_START (druid_page_start));

@@ -1,3 +1,12 @@
+1999-08-23  Herbert Valerio Riedel  <hvr@hvrlab.dhs.org>
+
+	* gtk-ted.[ch], gnome-spell.[ch], gnome-popup-help.[ch], 
+	gnome-pixmap-entry.[ch], gnome-number-entry.[ch], gnome-mdi.[ch],
+	gnome-mdi-generic-child.[ch], gnome-mdi-child.[ch], gnome-entry.[ch],
+	gnome-icon-text.[ch], gnome-icon-entry.[ch], gnome-druid-page-start.[ch],
+	gnome-druid-page-standard.[ch], gnome-druid-page-finish.[ch], 
+	gnome-client.[ch]: marked some more char* args const
+
 1999-08-22  Herbert Valerio Riedel  <hvr@hvrlab.dhs.org>
 
 	* gnome-icon-entry.c (gnome_icon_entry_new): added missing GNOME_ENTRY

@@ -97,7 +97,7 @@ gdouble
 gnome_number_entry_get_number(GnomeNumberEntry *nentry)
 {
 	GtkWidget *entry;
-	char *text;
+	gchar *text;
 	gdouble r;
 
 	g_return_val_if_fail (nentry != NULL,0.0);
@@ -237,7 +237,7 @@ gnome_number_entry_finalize (GtkObject *object)
  * Returns: Returns the new object
  **/
 GtkWidget *
-gnome_number_entry_new (char *history_id, char *calc_dialog_title)
+gnome_number_entry_new (const gchar *history_id, const gchar *calc_dialog_title)
 {
 	GnomeNumberEntry *nentry;
 
@@ -294,7 +294,7 @@ gnome_number_entry_gtk_entry (GnomeNumberEntry *nentry)
  * Returns:
  **/
 void
-gnome_number_entry_set_title (GnomeNumberEntry *nentry, char *calc_dialog_title)
+gnome_number_entry_set_title (GnomeNumberEntry *nentry, const gchar *calc_dialog_title)
 {
 	g_return_if_fail (nentry != NULL);
 	g_return_if_fail (GNOME_IS_NUMBER_ENTRY (nentry));

@@ -953,10 +953,10 @@ gnome_spell_fill_info(GnomeSpellInfo* sp, gchar* src) {
  **/
 
 gint
-gnome_spell_check(GnomeSpell* spell, gchar* str) {
+gnome_spell_check(GnomeSpell* spell, const gchar* str) {
 	GnomeSpellInfo *sp;
-	char* buf;
-	char* result;
+	gchar* buf;
+	gchar* result;
 
 	g_return_val_if_fail(spell != NULL, 0);
 	g_return_val_if_fail(str != NULL, 0);
@@ -1031,7 +1031,7 @@ check_word(const gchar* s) {
  **/
 
 void
-gnome_spell_accept(GnomeSpell *spell, gchar* word) {
+gnome_spell_accept(GnomeSpell *spell, const gchar* word) {
 	gchar* buf;
 	
 	g_return_if_fail(spell != NULL);
@@ -1060,7 +1060,7 @@ gnome_spell_accept(GnomeSpell *spell, gchar* word) {
  **/
 
 void
-gnome_spell_insert(GnomeSpell* spell, gchar* word, gint lowercase) {
+gnome_spell_insert(GnomeSpell* spell, const gchar* word, gboolean lowercase) {
 	gchar* w;
 	gchar* buf;
 

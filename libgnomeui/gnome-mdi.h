@@ -124,7 +124,7 @@ struct _GnomeMDIClass {
 
 guint         gnome_mdi_get_type            (void);
 
-GtkObject     *gnome_mdi_new                (gchar *appname, gchar *title);
+GtkObject     *gnome_mdi_new                (const gchar *appname, const gchar *title);
 
 void          gnome_mdi_set_mode            (GnomeMDI *mdi, GnomeMDIMode mode);
 
@@ -152,7 +152,7 @@ void          gnome_mdi_open_toplevel       (GnomeMDI *mdi);
 void          gnome_mdi_update_child        (GnomeMDI *mdi, GnomeMDIChild *child);
 
 GnomeMDIChild *gnome_mdi_get_active_child   (GnomeMDI *mdi);
-GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *mdi, gchar *name);
+GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *mdi, const gchar *name);
 
 GnomeApp      *gnome_mdi_get_active_window  (GnomeMDI *mdi);
 
