@@ -1,0 +1,68 @@
+/* GnomeIconEntry widget - Combo box with "Browse" button for files and
+ *			   A pick button which can display a list of icons
+ *			   in a current directory, the browse button displays
+ *			   same dialog as pixmap-entry
+ *
+ * Copyright (C) 1998 The Free Software Foundation
+ *
+ * Author: George Lebl <jirka@5z.com>
+ * icon selection based on original dentry-edit code which was:
+ *	Written by: Havoc Pennington, based on code by John Ellis.
+ */
+
+#ifndef GNOME_ICON_ENTRY_H
+#define GNOME_ICON_ENTRY_H
+
+
+#include <gtk/gtkvbox.h>
+#include <libgnome/gnome-defs.h>
+#include <libgnomeui/gnome-file-entry.h>
+
+
+BEGIN_GNOME_DECLS
+
+
+#define GNOME_ICON_ENTRY(obj)         GTK_CHECK_CAST (obj, gnome_icon_entry_get_type (), GnomeIconEntry)
+#define GNOME_ICON_ENTRY_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_icon_entry_get_type (), GnomeIconEntryClass)
+#define GNOME_IS_ICON_ENTRY(obj)      GTK_CHECK_TYPE (obj, gnome_icon_entry_get_type ())
+
+
+typedef struct _GnomeIconEntry      GnomeIconEntry;
+typedef struct _GnomeIconEntryClass GnomeIconEntryClass;
+
+struct _GnomeIconEntry {
+	GtkVBox vbox;
+	
+	GtkWidget *fentry;
+
+	GtkWidget *pickbutton;
+	
+	GtkWidget *pick_dialog;
+	char *pick_dialog_dir;
+};
+
+struct _GnomeIconEntryClass {
+	GtkVBoxClass parent_class;
+};
+
+
+guint      gnome_icon_entry_get_type    (void);
+GtkWidget *gnome_icon_entry_new         (char *history_id,
+					 char *browse_dialog_title);
+
+/*by default gnome_pixmap entry sets the default directory to the
+  gnome pixmap directory, this will set it to a subdirectory of that,
+  or one would use the file_entry functions for any other path*/
+void       gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
+					      const char *subdir);
+
+GtkWidget *gnome_icon_entry_gnome_file_entry(GnomeIconEntry *ientry);
+GtkWidget *gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry);
+GtkWidget *gnome_icon_entry_gtk_entry   (GnomeIconEntry *ientry);
+
+/*only return a file if it was possible to load it with imlib*/
+char      *gnome_icon_entry_get_filename(GnomeIconEntry *ientry);
+
+END_GNOME_DECLS
+
+#endif

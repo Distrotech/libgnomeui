@@ -1,3 +1,14 @@
+Tue Nov 24 01:56:28 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-entry.[ch]: new files, new widget for handeling
+	  of picking an icon, basically somewhat like pixmap-entry,
+	  but uses a picker button similiar to what was in dentry-edit,
+	  but this will allow both typing of a filename in a file selection
+	  widget for those keyboard people like me or picking an icon
+	  out of a list
+
+	* Makefile.am,libgnomeui.h: update for the above
+
 Mon Nov 23 23:55:41 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* libgnomeui.h Makefile.am gtk{-plug,-socket,layout}.{c,h}

@@ -33,6 +33,7 @@
 #include "libgnomeui/gnome-icon-list.h"
 #include "libgnomeui/gnome-icon-item.h"
 #include "libgnomeui/gnome-icon-sel.h"
+#include "libgnomeui/gnome-icon-entry.h"
 #include "libgnomeui/gnome-init.h"
 #include "libgnomeui/gnome-less.h"
 #include "libgnomeui/gnome-messagebox.h"
