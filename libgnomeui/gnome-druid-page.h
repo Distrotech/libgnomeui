@@ -43,6 +43,8 @@ typedef struct _GnomeDruidPageClass   GnomeDruidPageClass;
 struct _GnomeDruidPage
 {
 	GtkBin parent;
+
+	/*< private >*/
 	GnomeDruidPagePrivate *_priv;
 };
 struct _GnomeDruidPageClass

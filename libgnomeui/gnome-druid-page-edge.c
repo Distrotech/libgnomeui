@@ -68,10 +68,8 @@ gnome_druid_page_edge_get_type (void)
 {
 	static GtkType druid_page_edge_type = 0;
 
-	if (!druid_page_edge_type)
-	{
-		static const GtkTypeInfo druid_page_edge_info =
-		{
+	if (druid_page_edge_type == 0) {
+		static const GtkTypeInfo druid_page_edge_info = {
 			"GnomeDruidPageEdge",
 			sizeof (GnomeDruidPageEdge),
 			sizeof (GnomeDruidPageEdgeClass),
@@ -79,10 +77,12 @@ gnome_druid_page_edge_get_type (void)
 			(GtkObjectInitFunc) gnome_druid_page_edge_init,
 			/* reserved_1 */ NULL,
 			/* reserved_2 */ NULL,
-			(GtkClassInitFunc) NULL,
+			(GtkClassInitFunc) NULL
 		};
 
-		druid_page_edge_type = gtk_type_unique (gnome_druid_page_get_type (), &druid_page_edge_info);
+		druid_page_edge_type =
+			gtk_type_unique (gnome_druid_page_get_type (),
+					 &druid_page_edge_info);
 	}
 
 	return druid_page_edge_type;
@@ -139,7 +139,22 @@ gnome_druid_page_edge_init (GnomeDruidPageEdge *druid_page_edge)
 static void
 gnome_druid_page_edge_destroy(GtkObject *object)
 {
+	GnomeDruidPageEdge *druid_page_edge = GNOME_DRUID_PAGE_EDGE(object);
+
 	/* remember, destroy can be run multiple times! */
+
+	if (druid_page_edge->logo_image != NULL)
+		gdk_pixbuf_unref (druid_page_edge->logo_image);
+	druid_page_edge->logo_image = NULL;
+
+	if (druid_page_edge->watermark_image != NULL)
+		gdk_pixbuf_unref (druid_page_edge->watermark_image);
+	druid_page_edge->watermark_image = NULL;
+
+	g_free (druid_page_edge->text);
+	druid_page_edge->text = NULL;
+	g_free (druid_page_edge->title);
+	druid_page_edge->title = NULL;
 
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
@@ -270,7 +285,6 @@ gnome_druid_page_edge_construct (GnomeDruidPageEdge *druid_page_edge)
 				       gnome_canvas_text_get_type (),
 				       "text", druid_page_edge->title,
 				       "fill_color_rgba", fill_color,
-				       "font", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"),
 				       "fontset", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"),
 				       NULL);
 
@@ -280,7 +294,6 @@ gnome_druid_page_edge_construct (GnomeDruidPageEdge *druid_page_edge)
 				       gnome_canvas_text_get_type (),
 				       "text", druid_page_edge->text,
 				       "justification", GTK_JUSTIFY_LEFT,
-				       "font", _("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*"),
 				       "fontset", _("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"),
 				       "fill_color_rgba", fill_color,
 				       NULL);
@@ -328,29 +341,6 @@ gnome_druid_page_edge_size_allocate   (GtkWidget               *widget,
 					      allocation->height);
 }
 
-#if 0
-{
-/* Fragment left behind by CVS.  Don't get it. */
-gnome_canvas_item_set (druid_page_edge->_priv->background_item,
-		       "fill_color_gdk", &(druid_page_edge->background_color),
-		       NULL);
-gnome_canvas_item_set (druid_page_edge->_priv->textbox_item,
-		       "fill_color_gdk", &(druid_page_edge->textbox_color),
-		       "outline_color_gdk", &(druid_page_edge->background_color),
-		       NULL);
-gnome_canvas_item_set (druid_page_edge->_priv->logoframe_item,
-		       "fill_color_gdk", &druid_page_edge->logo_background_color,
-		       NULL);
-gnome_canvas_item_set (druid_page_edge->_priv->title_item,
-		       "fill_color_gdk", &druid_page_edge->title_color,
-		       NULL);
-gnome_canvas_item_set (druid_page_edge->_priv->text_item,
-		       "fill_color_gdk", &druid_page_edge->text_color,
-		       NULL);
-GTK_WIDGET_CLASS (parent_class)->realize (widget);
-}
-#endif
-
 /**
  * gnome_druid_page_edge_new:
  *
@@ -362,15 +352,22 @@ GTK_WIDGET_CLASS (parent_class)->realize (widget);
 GtkWidget *
 gnome_druid_page_edge_new (GnomeEdgePosition position)
 {
-	GtkWidget *retval =  GTK_WIDGET (gtk_type_new (gnome_druid_page_edge_get_type ()));
+	GnomeDruidPageEdge *retval;
 
-	GNOME_DRUID_PAGE_EDGE (retval)->position = position;
-	GNOME_DRUID_PAGE_EDGE (retval)->title = g_strdup ("");
-	GNOME_DRUID_PAGE_EDGE (retval)->text = g_strdup ("");
-	GNOME_DRUID_PAGE_EDGE (retval)->logo_image = NULL;
-	GNOME_DRUID_PAGE_EDGE (retval)->watermark_image = NULL;
-	gnome_druid_page_edge_construct (GNOME_DRUID_PAGE_EDGE (retval));
-	return retval;
+	g_return_val_if_fail (position >= GNOME_EDGE_START &&
+			      position < GNOME_EDGE_LAST, NULL);
+
+	retval = gtk_type_new (gnome_druid_page_edge_get_type ());
+
+	retval->position = position;
+	retval->title = g_strdup ("");
+	retval->text = g_strdup ("");
+	retval->logo_image = NULL;
+	retval->watermark_image = NULL;
+
+	gnome_druid_page_edge_construct (retval);
+
+	return GTK_WIDGET (retval);
 }
 /**
  * gnome_druid_page_edge_new_with_vals:
@@ -391,21 +388,26 @@ gnome_druid_page_edge_new_with_vals (GnomeEdgePosition position,
 				     GdkPixbuf *logo,
 				     GdkPixbuf *watermark)
 {
-	GtkWidget *retval =  GTK_WIDGET (gtk_type_new (gnome_druid_page_edge_get_type ()));
+	GnomeDruidPageEdge *retval;
 
-	GNOME_DRUID_PAGE_EDGE (retval)->position = position;
-	GNOME_DRUID_PAGE_EDGE (retval)->title = g_strdup (title);
-	GNOME_DRUID_PAGE_EDGE (retval)->text = g_strdup (text);
+	g_return_val_if_fail (position >= GNOME_EDGE_START &&
+			      position < GNOME_EDGE_LAST, NULL);
 
-	if (logo)
+	retval = gtk_type_new (gnome_druid_page_edge_get_type ());
+
+	retval->position = position;
+	retval->title = g_strdup (title ? title : "");
+	retval->text = g_strdup (text ? text : "");
+
+	if (logo != NULL)
 		gdk_pixbuf_ref (logo);
-	GNOME_DRUID_PAGE_EDGE (retval)->logo_image = logo;
+	retval->logo_image = logo;
 
-	if (watermark)
+	if (watermark != NULL)
 		gdk_pixbuf_ref (watermark);
-	GNOME_DRUID_PAGE_EDGE (retval)->watermark_image = watermark;
-	gnome_druid_page_edge_construct (GNOME_DRUID_PAGE_EDGE (retval));
-	return retval;
+	retval->watermark_image = watermark;
+	gnome_druid_page_edge_construct (retval);
+	return GTK_WIDGET (retval);
 }
 
 /**
@@ -425,6 +427,7 @@ gnome_druid_page_edge_set_bg_color      (GnomeDruidPageEdge *druid_page_edge,
 
 	g_return_if_fail (druid_page_edge != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
+	g_return_if_fail (color != NULL);
 
 	druid_page_edge->background_color.red = color->red;
 	druid_page_edge->background_color.green = color->green;
@@ -448,6 +451,7 @@ gnome_druid_page_edge_set_textbox_color (GnomeDruidPageEdge *druid_page_edge,
 
 	g_return_if_fail (druid_page_edge != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
+	g_return_if_fail (color != NULL);
 
 	druid_page_edge->textbox_color.red = color->red;
 	druid_page_edge->textbox_color.green = color->green;
@@ -467,6 +471,7 @@ gnome_druid_page_edge_set_logo_bg_color (GnomeDruidPageEdge *druid_page_edge,
 
 	g_return_if_fail (druid_page_edge != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
+	g_return_if_fail (color != NULL);
 
 	druid_page_edge->logo_background_color.red = color->red;
 	druid_page_edge->logo_background_color.green = color->green;
@@ -485,6 +490,7 @@ gnome_druid_page_edge_set_title_color   (GnomeDruidPageEdge *druid_page_edge,
 
 	g_return_if_fail (druid_page_edge != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
+	g_return_if_fail (color != NULL);
 
 	druid_page_edge->title_color.red = color->red;
 	druid_page_edge->title_color.green = color->green;
@@ -503,6 +509,7 @@ gnome_druid_page_edge_set_text_color    (GnomeDruidPageEdge *druid_page_edge,
 
 	g_return_if_fail (druid_page_edge != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
+	g_return_if_fail (color != NULL);
 
 	druid_page_edge->text_color.red = color->red;
 	druid_page_edge->text_color.green = color->green;
@@ -521,7 +528,7 @@ gnome_druid_page_edge_set_text          (GnomeDruidPageEdge *druid_page_edge,
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
 
 	g_free (druid_page_edge->text);
-	druid_page_edge->text = g_strdup (text);
+	druid_page_edge->text = g_strdup (text ? text : "");
 	gnome_canvas_item_set (druid_page_edge->_priv->text_item,
 			       "text", druid_page_edge->text,
 			       NULL);
@@ -534,7 +541,7 @@ gnome_druid_page_edge_set_title         (GnomeDruidPageEdge *druid_page_edge,
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
 
 	g_free (druid_page_edge->title);
-	druid_page_edge->title = g_strdup (title);
+	druid_page_edge->title = g_strdup (title ? title : "");
 	gnome_canvas_item_set (druid_page_edge->_priv->title_item,
 			       "text", druid_page_edge->title,
 			       NULL);
@@ -545,12 +552,14 @@ gnome_druid_page_edge_set_logo          (GnomeDruidPageEdge *druid_page_edge,
 {
 	g_return_if_fail (druid_page_edge != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
+	g_return_if_fail (logo_image != NULL);
 
-	if (druid_page_edge->logo_image)
+	if (druid_page_edge->logo_image != NULL)
 		gdk_pixbuf_unref (druid_page_edge->logo_image);
 
 	druid_page_edge->logo_image = logo_image;
-	gdk_pixbuf_ref (logo_image);
+	if (logo_image != NULL )
+		gdk_pixbuf_ref (logo_image);
 	gnome_canvas_item_set (druid_page_edge->_priv->logo_item,
 			       "pixbuf", druid_page_edge->logo_image, NULL);
 }
@@ -560,12 +569,14 @@ gnome_druid_page_edge_set_watermark     (GnomeDruidPageEdge *druid_page_edge,
 {
 	g_return_if_fail (druid_page_edge != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_EDGE (druid_page_edge));
+	g_return_if_fail (watermark != NULL);
 
-	if (druid_page_edge->watermark_image)
+	if (druid_page_edge->watermark_image != NULL)
 		gdk_pixbuf_unref (druid_page_edge->watermark_image);
 
 	druid_page_edge->watermark_image = watermark;
-	gdk_pixbuf_ref (watermark);
+	if (watermark != NULL )
+		gdk_pixbuf_ref (watermark);
 	gnome_canvas_item_set (druid_page_edge->_priv->watermark_item,
 			       "pixbuf", druid_page_edge->watermark_image, NULL);
 }

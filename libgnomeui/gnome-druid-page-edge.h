@@ -41,7 +41,8 @@ typedef enum {
   /* update structure when adding enums */
 	GNOME_EDGE_START,
 	GNOME_EDGE_FINISH,
-	GNOME_EDGE_OTHER
+	GNOME_EDGE_OTHER,
+	GNOME_EDGE_LAST /* for counting purposes */
 } GnomeEdgePosition;
 
 

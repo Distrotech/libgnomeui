@@ -1,3 +1,10 @@
+Tue Aug 22 19:15:15 2000  George Lebl <jirka@5z.com>
+
+	* gnome-druid*.[ch]: Minor cleanups, fix memory leaks on pages,
+	  use "fontset" only, add more precondition checks, make text
+	  always be valid.  Probably doesn't compile, I'll fix it up later
+	  or martin will.  (Not that gnome-libs really compiles now anyway)
+
 Sun Aug 13 17:07:15 2000  George Lebl <jirka@5z.com>
 
 	* gnome-animator.c: Add REVERT and RETAIN modes of animation.

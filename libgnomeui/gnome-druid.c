@@ -68,6 +68,7 @@ static void gnome_druid_next_callback   (GtkWidget               *button,
 					 GnomeDruid              *druid);
 static void gnome_druid_cancel_callback (GtkWidget               *button,
 					 GtkWidget               *druid);
+
 static GtkContainerClass *parent_class = NULL;
 static guint druid_signals[LAST_SIGNAL] = { 0 };
 
@@ -75,26 +76,25 @@ static guint druid_signals[LAST_SIGNAL] = { 0 };
 GtkType
 gnome_druid_get_type (void)
 {
-  static GtkType druid_type = 0;
+	static GtkType druid_type = 0;
 
-  if (!druid_type)
-    {
-      static const GtkTypeInfo druid_info =
-      {
-        "GnomeDruid",
-        sizeof (GnomeDruid),
-        sizeof (GnomeDruidClass),
-        (GtkClassInitFunc) gnome_druid_class_init,
-        (GtkObjectInitFunc) gnome_druid_init,
-        /* reserved_1 */ NULL,
-        /* reserved_2 */ NULL,
-        (GtkClassInitFunc) NULL,
-      };
+	if (druid_type == 0) {
+		static const GtkTypeInfo druid_info = {
+			"GnomeDruid",
+			sizeof (GnomeDruid),
+			sizeof (GnomeDruidClass),
+			(GtkClassInitFunc) gnome_druid_class_init,
+			(GtkObjectInitFunc) gnome_druid_init,
+			/* reserved_1 */ NULL,
+			/* reserved_2 */ NULL,
+			(GtkClassInitFunc) NULL
+		};
 
-      druid_type = gtk_type_unique (gtk_container_get_type (), &druid_info);
-    }
+		druid_type = gtk_type_unique (gtk_container_get_type (),
+					      &druid_info);
+	}
 
-  return druid_type;
+	return druid_type;
 }
 
 static void
@@ -217,9 +217,13 @@ gnome_druid_destroy (GtkObject *object)
 		gtk_widget_destroy (druid->finish);
 		druid->finish = NULL;
 	}
-	if(druid->_priv->children) {
-		g_list_free (druid->_priv->children);
-		druid->_priv->children = NULL;
+
+	/* Remove all children, we set current to NULL so
+	 * that the remove code doesn't try to do anything funny */
+	druid->_priv->current = NULL;
+	while (druid->_priv->children != NULL) {
+		GnomeDruidPage *child = druid->_priv->children->data;
+		gnome_druid_remove (druid, child);
 	}
 
         if(GTK_OBJECT_CLASS(parent_class)->destroy)
@@ -329,9 +333,6 @@ gnome_druid_size_allocate (GtkWidget *widget,
 
 	druid = GNOME_DRUID (widget);
 	widget->allocation = *allocation;
-
-		
-		
 
 	/* deal with the buttons */
 	child_allocation.width = child_allocation.height = 0;

@@ -65,26 +65,26 @@ static GnomeDruidPageClass *parent_class = NULL;
 GtkType
 gnome_druid_page_standard_get_type (void)
 {
-  static GtkType druid_page_standard_type = 0;
+	static GtkType druid_page_standard_type = 0;
 
-  if (!druid_page_standard_type)
-    {
-      static const GtkTypeInfo druid_page_standard_info =
-      {
-        "GnomeDruidPageStandard",
-        sizeof (GnomeDruidPageStandard),
-        sizeof (GnomeDruidPageStandardClass),
-        (GtkClassInitFunc) gnome_druid_page_standard_class_init,
-        (GtkObjectInitFunc) gnome_druid_page_standard_init,
-        /* reserved_1 */ NULL,
-        /* reserved_2 */ NULL,
-        (GtkClassInitFunc) NULL,
-      };
+	if (druid_page_standard_type == 0) {
+		static const GtkTypeInfo druid_page_standard_info = {
+			"GnomeDruidPageStandard",
+			sizeof (GnomeDruidPageStandard),
+			sizeof (GnomeDruidPageStandardClass),
+			(GtkClassInitFunc) gnome_druid_page_standard_class_init,
+			(GtkObjectInitFunc) gnome_druid_page_standard_init,
+			/* reserved_1 */ NULL,
+			/* reserved_2 */ NULL,
+			(GtkClassInitFunc) NULL
+		};
 
-      druid_page_standard_type = gtk_type_unique (gnome_druid_page_get_type (), &druid_page_standard_info);
-    }
+		druid_page_standard_type =
+			gtk_type_unique (gnome_druid_page_get_type (),
+					 &druid_page_standard_info);
+	}
 
-  return druid_page_standard_type;
+	return druid_page_standard_type;
 }
 
 static void
@@ -172,7 +172,17 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 static void
 gnome_druid_page_standard_destroy(GtkObject *object)
 {
+	GnomeDruidPageStandard *druid_page_standard = GNOME_DRUID_PAGE_STANDARD(object);
+
 	/* remember, destroy can be run multiple times! */
+
+	if (druid_page_standard->logo_image != NULL)
+		gdk_pixbuf_unref (druid_page_standard->logo_image);
+	druid_page_standard->logo_image = NULL;
+
+	g_free (druid_page_standard->title);
+	druid_page_standard->title = NULL;
+
 	if (GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
 }
@@ -181,9 +191,6 @@ static void
 gnome_druid_page_standard_finalize (GObject *object)
 {
 	GnomeDruidPageStandard *druid_page_standard = GNOME_DRUID_PAGE_STANDARD(object);
-
-	g_free (druid_page_standard->title);
-	druid_page_standard->title = NULL;
 
 	g_free(druid_page_standard->_priv);
 	druid_page_standard->_priv = NULL;
@@ -251,7 +258,6 @@ gnome_druid_page_standard_construct (GnomeDruidPageStandard *druid_page_standard
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->_priv->canvas)),
 				       gnome_canvas_text_get_type (),
 				       "text", druid_page_standard->title,
-				       "font", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"),
 				       "fontset", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"),
 				       "fill_color_rgba", fill_color,
 				       NULL);
@@ -296,20 +302,32 @@ gnome_druid_page_standard_size_allocate (GtkWidget *widget,
 GtkWidget *
 gnome_druid_page_standard_new (void)
 {
-	GtkWidget *retval = GTK_WIDGET (gtk_type_new (gnome_druid_page_standard_get_type ()));
-	GNOME_DRUID_PAGE_STANDARD (retval)->title = g_strdup ("");
-	GNOME_DRUID_PAGE_STANDARD (retval)->logo_image = NULL;
-	gnome_druid_page_standard_construct (GNOME_DRUID_PAGE_STANDARD (retval));
-	return retval;
+	GnomeDruidPageStandard *retval;
+
+	retval = gtk_type_new (gnome_druid_page_standard_get_type ());
+
+	retval->title = g_strdup ("");
+	retval->logo_image = NULL;
+
+	gnome_druid_page_standard_construct (retval);
+
+	return GTK_WIDGET (retval);
 }
 GtkWidget *
 gnome_druid_page_standard_new_with_vals (const gchar *title, GdkPixbuf *logo)
 {
-	GtkWidget *retval = GTK_WIDGET (gtk_type_new (gnome_druid_page_standard_get_type ()));
-	GNOME_DRUID_PAGE_STANDARD (retval)->title = g_strdup (title);
-	GNOME_DRUID_PAGE_STANDARD (retval)->logo_image = logo;
-	gnome_druid_page_standard_construct (GNOME_DRUID_PAGE_STANDARD (retval));
-	return retval;
+	GnomeDruidPageStandard *retval;
+
+	retval = gtk_type_new (gnome_druid_page_standard_get_type ());
+
+	retval->title = g_strdup (title ? title : "");
+	if (logo != NULL)
+		gdk_pixbuf_ref (logo);
+	retval->logo_image = logo;
+
+	gnome_druid_page_standard_construct (retval);
+
+	return GTK_WIDGET (retval);
 }
 void
 gnome_druid_page_standard_set_bg_color      (GnomeDruidPageStandard *druid_page_standard,
@@ -319,6 +337,7 @@ gnome_druid_page_standard_set_bg_color      (GnomeDruidPageStandard *druid_page_
 
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
+	g_return_if_fail (color != NULL);
 
 	druid_page_standard->background_color.red = color->red;
 	druid_page_standard->background_color.green = color->green;
@@ -360,12 +379,13 @@ gnome_druid_page_standard_set_bg_color      (GnomeDruidPageStandard *druid_page_
 
 void
 gnome_druid_page_standard_set_logo_bg_color (GnomeDruidPageStandard *druid_page_standard,
-					  GdkColor *color)
+					     GdkColor *color)
 {
 	guint32 fill_color;
 
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
+	g_return_if_fail (color != NULL);
 
 	druid_page_standard->logo_background_color.red = color->red;
 	druid_page_standard->logo_background_color.green = color->green;
@@ -384,6 +404,7 @@ gnome_druid_page_standard_set_title_color   (GnomeDruidPageStandard *druid_page_
 
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
+	g_return_if_fail (color != NULL);
 
 	druid_page_standard->title_color.red = color->red;
 	druid_page_standard->title_color.green = color->green;
@@ -397,13 +418,13 @@ gnome_druid_page_standard_set_title_color   (GnomeDruidPageStandard *druid_page_
 
 void
 gnome_druid_page_standard_set_title         (GnomeDruidPageStandard *druid_page_standard,
-					  const gchar *title)
+					     const gchar *title)
 {
 	g_return_if_fail (druid_page_standard != NULL);
 	g_return_if_fail (GNOME_IS_DRUID_PAGE_STANDARD (druid_page_standard));
 
 	g_free (druid_page_standard->title);
-	druid_page_standard->title = g_strdup (title);
+	druid_page_standard->title = g_strdup (title ? title : "");
 	gnome_canvas_item_set (druid_page_standard->_priv->title_item,
 			       "text", druid_page_standard->title,
 			       NULL);
@@ -419,7 +440,8 @@ gnome_druid_page_standard_set_logo          (GnomeDruidPageStandard *druid_page_
 		gdk_pixbuf_unref (druid_page_standard->logo_image);
 
 	druid_page_standard->logo_image = logo_image;
-	gdk_pixbuf_ref (logo_image);
+	if (logo_image != NULL)
+		gdk_pixbuf_ref (logo_image);
 	gnome_canvas_item_set (druid_page_standard->_priv->logo_item,
 			       "pixbuf", druid_page_standard->logo_image, NULL);
 }

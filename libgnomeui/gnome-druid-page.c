@@ -56,9 +56,8 @@ gnome_druid_page_get_type (void)
 {
 	static GtkType druid_page_type = 0;
 
-	if (!druid_page_type) {
-		static const GtkTypeInfo druid_page_info =
-		{
+	if (druid_page_type == 0) {
+		static const GtkTypeInfo druid_page_info = {
 			"GnomeDruidPage",
 			sizeof (GnomeDruidPage),
 			sizeof (GnomeDruidPageClass),
@@ -66,7 +65,7 @@ gnome_druid_page_get_type (void)
 			(GtkObjectInitFunc) gnome_druid_page_init,
 			/* reserved_1 */ NULL,
 			/* reserved_2 */ NULL,
-			(GtkClassInitFunc) NULL,
+			(GtkClassInitFunc) NULL
 		};
 
 		druid_page_type = gtk_type_unique (gtk_bin_get_type (), &druid_page_info);
