@@ -68,7 +68,7 @@ paper_size_changed (GtkWidget *widget, gpointer data)
 {
   GnomePaperSelector *gspaper;
   gfloat paper_width, paper_height;
-  const Paper	*paper;
+  const GnomePaper	*paper;
 
   gspaper = data;
 
@@ -96,8 +96,8 @@ static void
 paper_size_system (GtkWidget *widget, gpointer data)
 {
   GnomePaperSelector *gspaper;
-  const Paper *paper;
-  const Unit *unit;
+  const GnomePaper *paper;
+  const GnomeUnit *unit;
   const gchar *paper_name, *unit_name;
   double paper_width, paper_height;
   GList	*l;
@@ -141,8 +141,8 @@ static void
 paper_changed (GtkWidget *widget, gpointer data)
 {
   GnomePaperSelector *gspaper;
-  const Paper *paper;
-  const Unit *unit;
+  const GnomePaper *paper;
+  const GnomeUnit *unit;
   gchar *paper_name, *unit_name;
   double paper_width, paper_height;
 
@@ -174,8 +174,8 @@ static void
 unit_changed (GtkWidget *widget, gpointer data)
 {
   GnomePaperSelector *gspaper;
-  const Paper *paper;
-  const Unit *unit;
+  const GnomePaper *paper;
+  const GnomeUnit *unit;
   gchar *paper_name, *unit_name;
   double paper_width, paper_height;
   
@@ -211,8 +211,8 @@ gnome_paper_selector_init (GnomePaperSelector *gspaper)
   GtkWidget *table, *label, *button;
   GtkTooltips *tooltips;
   GtkAdjustment *adj;
-  const Paper *paper;
-  const Unit *unit;
+  const GnomePaper *paper;
+  const GnomeUnit *unit;
   const char *paper_name, *unitname;
   
   gint i,j;
@@ -327,7 +327,7 @@ gchar *gnome_paper_selector_get_name (GnomePaperSelector *gspaper)
 
 gfloat gnome_paper_selector_get_width (GnomePaperSelector *gspaper)
 {
-  const Unit *unit;
+  const GnomeUnit *unit;
   gchar *unit_name;
   gdouble paper_width;
   gdouble in_unit_width;
@@ -344,7 +344,7 @@ gfloat gnome_paper_selector_get_width (GnomePaperSelector *gspaper)
 
 gfloat gnome_paper_selector_get_height (GnomePaperSelector *gspaper)
 {
-  const Unit *unit;
+  const GnomeUnit *unit;
   gchar *unit_name;
   gdouble paper_height;
   gdouble in_unit_height;
@@ -361,7 +361,7 @@ gfloat gnome_paper_selector_get_height (GnomePaperSelector *gspaper)
 
 gfloat gnome_paper_selector_get_left_margin (GnomePaperSelector *gspaper)
 {
-  const Paper *paper;
+  const GnomePaper *paper;
   gchar *paper_name;
   gdouble paper_lmargin;
 
@@ -375,7 +375,7 @@ gfloat gnome_paper_selector_get_left_margin (GnomePaperSelector *gspaper)
 
 gfloat gnome_paper_selector_get_right_margin (GnomePaperSelector *gspaper)
 {
-  const Paper *paper;
+  const GnomePaper *paper;
   gchar *paper_name;
   gdouble paper_rmargin;
 
@@ -389,7 +389,7 @@ gfloat gnome_paper_selector_get_right_margin (GnomePaperSelector *gspaper)
 
 gfloat gnome_paper_selector_get_top_margin (GnomePaperSelector *gspaper)
 {
-  const Paper *paper;
+  const GnomePaper *paper;
   gchar *paper_name;
   gdouble paper_tmargin;
 
@@ -403,7 +403,7 @@ gfloat gnome_paper_selector_get_top_margin (GnomePaperSelector *gspaper)
 
 gfloat gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspaper)
 {
-  const Paper *paper;
+  const GnomePaper *paper;
   gchar *paper_name;
   gdouble paper_bmargin;
 
@@ -419,8 +419,8 @@ void
 gnome_paper_selector_set_name	(GnomePaperSelector *gspaper,
 				 gchar *name)
 {
-  const Paper *paper;
-  const Unit *unit;
+  const GnomePaper *paper;
+  const GnomeUnit *unit;
   gchar *unit_name;
   double paper_width, paper_height;
   
@@ -447,8 +447,8 @@ gnome_paper_selector_set_width	(GnomePaperSelector *gspaper,
 				 gfloat width)
 {
   gfloat paper_width, paper_height, height;
-  const Paper	*paper;
-  const Unit    *unit;
+  const GnomePaper	*paper;
+  const GnomeUnit    *unit;
   gchar *unit_name;
 
   unit_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
@@ -478,8 +478,8 @@ gnome_paper_selector_set_height	(GnomePaperSelector *gspaper,
 				 gfloat height)
 {
   gfloat paper_width, paper_height, width;
-  const Paper	*paper;
-  const Unit    *unit;
+  const GnomePaper	*paper;
+  const GnomeUnit    *unit;
   gchar *unit_name;
 
   unit_name = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(gspaper->unit)->entry));
