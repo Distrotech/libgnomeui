@@ -1,3 +1,9 @@
+Sun Oct 21 13:27:07 2001  George Lebl <jirka@5z.com>
+
+	* gnome-font-picker.h: add padding to class structure.  There are
+	  no worries about bincompat, this widget wasn't part of the build
+	  until yesterday.
+
 Sun Oct 21 13:26:08 2001  George Lebl <jirka@5z.com>
 
 	* gnome-mdi.[ch]: mistakenly this was not marked deprecated when it

@@ -61,6 +61,10 @@ struct _GnomeFontPickerClass {
 
 	/* font_set signal is emitted when font is choosed */
 	void (* font_set) (GnomeFontPicker *gfp, gchar *font_name);
+
+	/* It is possible we may need more signals */
+	gpointer padding1;
+	gpointer padding2;
 };
 
 
