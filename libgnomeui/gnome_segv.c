@@ -53,6 +53,9 @@ int main(int argc, char *argv[])
   int res;
   gchar *appname;
   gchar *bug_buddy_path = NULL;
+  gchar *debugger = NULL;
+  gchar *debugger_path = NULL;
+  
   int bb_sm_disable = 0;
 
   /* We do this twice to make sure we don't start running ourselves... :) */
@@ -78,7 +81,11 @@ int main(int argc, char *argv[])
     {
       if (strcmp(g_basename (args[0]), "gnome-session") == 0)
         {
-          msg = g_strdup_printf(_("The GNOME Session Manager (process %d) has crashed\ndue to a fatal error (%s).\nWhen you close this dialog, all applications will close and your session will exit.\nPlease save all your files before closing this dialog."),
+          msg = g_strdup_printf(_("The GNOME Session Manager (process %d) has crashed\n"
+                                  "due to a fatal error (%s).\n"
+                                  "When you close this dialog, all applications will close"
+                                  "and your session will exit.\nPlease save all your files "
+                                  "before closing this dialog."),
                                 getppid(), g_strsignal(atoi(args[1])));
           bb_sm_disable = 1;
         }
@@ -108,6 +115,17 @@ int main(int argc, char *argv[])
       gnome_dialog_append_button(GNOME_DIALOG(mainwin),
                                  _("Submit a bug report"));
     }
+
+  debugger = getenv("GNOME_DEBUGGER");
+  if (debugger && strlen(debugger)>0)
+  {
+    debugger_path = gnome_is_program_in_path (debugger);
+    if (debugger_path != NULL)
+      {
+        gnome_dialog_append_button(GNOME_DIALOG(mainwin),
+                                   _("Debug"));
+      }
+  }
   
   /* Please download http://www.gnome.org/application_crashed-shtml.txt,
    * translate the plain text, and send the file to webmaster@gnome.org. */
@@ -126,7 +144,7 @@ int main(int argc, char *argv[])
 
   res = gnome_dialog_run(GNOME_DIALOG(mainwin));
 
-  if (res == 1)
+  if (res == 1 && (bug_buddy_path != NULL))
     {
       gchar *exec_str;
       int retval;
@@ -143,6 +161,25 @@ int main(int argc, char *argv[])
       if (retval == -1 || retval == 127)
         {
           g_warning("Couldn't run bug-buddy: %s", g_strerror(errno));
+        }
+    }
+  else if (res == 2 || (res == 1 && (bug_buddy_path == NULL)))
+    {
+      gchar *exec_str;
+      int retval;
+
+      g_assert (debugger_path);
+      exec_str = g_strdup_printf("%s --appname=\"%s\" --pid=%d "
+                                 "--package-ver=\"%s\" %s", 
+                                 debugger_path, appname, getppid(), 
+                                 app_version, bb_sm_disable 
+                                 ? "--sm-disable" : "");
+
+      retval = system(exec_str);
+      g_free(exec_str);
+      if (retval == -1 || retval == 127)
+        {
+          g_warning("Couldn't run debugger: %s", g_strerror(errno));
         }
     }
 

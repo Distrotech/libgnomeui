@@ -1,3 +1,8 @@
+2000-07-07  Chema Celorio  <chema@celorio.com>
+ 
+ 	* gnome_segv.c: add a "DEBUG" button to the segv dialog if the program
+ 	pointed by the enviromental variable "GNOME_DEBUGGER" is
+
 Tue Jul 04 01:44:21 2000  George Lebl <jirka@5z.com>
 
 	* gnome-color-picker.c:  Excorcise imlib reference from a label :)
