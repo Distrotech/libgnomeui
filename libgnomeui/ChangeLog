@@ -1,3 +1,35 @@
+2001-01-15  Darin Adler  <darin@eazel.com>
+
+	* gnome-canvas.h: Fixed comment that was "improved" back
+	in June 1999 to say the coordinates are world coordinates, when they
+	are actually canvas coordinates (code and Havoc's book both say so).
+
+	* gnome-init.c: (gnome_register_options):
+	Mark names of sections of the popt table with _() for translation.
+	(gnome_init_with_popt_table): Use a _("%s options") template for
+	the main option section by default. This is better than what we had
+	before, translation-wise, bug not perfect. A real fix should change
+	the API of gnome_init_with_popt_table so that the entire
+	"xxx options" string would be localized in the main program.
+
+2001-02-06  Alexander Larsson  <alexl@redhat.com>
+
+	* gnome-canvas-text.[ch]:
+	Pango port of gnome-canvas-text. Death to SuckFont, use the pango
+	freetype module instead.
+
+2001-02-15  Darin Adler  <darin@eazel.com>
+
+	* gnome-init.c: (gnome_register_options): Use N_, not
+	_, for the popt table names. 
+	(gnome_init_with_popt_table): Remove g_free that screws up the
+	popt option section.
+
+2001-02-23  Martin Baulig  <baulig@suse.de>
+
+	* gnome-init.c (gtk_pre_args_parse): Comment out setting
+	of `gtk_debug_flags' which has gone from GTK+.
+
 2001-01-29  John Harper  <jsh@eazel.com>
 
 	* gnome-client.c (client_save_yourself_callback): commented out
