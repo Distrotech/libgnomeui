@@ -65,7 +65,6 @@
 	(gnome_pixmap_set_pixbufs_at_state): call set_pixbuf_size()
 	instead of manually calculating the requisition
 	
->>>>>>> 1.1242
 Sat Jan 15 00:04:00 2000  George Lebl <jirka@5z.com>
 
 	* gnome-helpsys.c: fix gnome_help_view_get_arg by initializing the
