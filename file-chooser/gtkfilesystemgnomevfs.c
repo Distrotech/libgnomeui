@@ -1270,7 +1270,10 @@ static GtkFilePath *
 gtk_file_system_gnome_vfs_uri_to_path (GtkFileSystem *file_system,
 				       const gchar   *uri)
 {
-  return gtk_file_path_new_dup (uri);
+  gchar *canonical;
+
+  canonical = make_uri_canonical (uri);
+  return gtk_file_path_new_steal (canonical);
 }
 
 static GtkFilePath *
@@ -1279,7 +1282,14 @@ gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem *file_system,
 {
   gchar *uri = gnome_vfs_get_uri_from_local_path (filename);
   if (uri)
-    return gtk_file_path_new_steal (uri);
+    {
+      gchar *canonical;
+
+      canonical = make_uri_canonical (uri);
+      g_free (uri);
+
+      return gtk_file_path_new_steal (canonical);
+    }
   else
     return NULL;
 }
@@ -1819,9 +1829,10 @@ lookup_vfs_info_in_folder (GtkFileFolder     *folder,
 			   GError           **error)
 {
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
-  const gchar *uri = gtk_file_path_get_string (path);
+  const gchar *uri;
   FolderChild *child;
 
+  uri = make_uri_canonical (gtk_file_path_get_string (path));
   child = g_hash_table_lookup (folder_vfs->children, uri);
   if (!child)
     {

@@ -1,3 +1,14 @@
+2004-06-22  Federico Mena Quintero  <federico@ximian.com>
+
+	Fixes the libgnomeui part of #142308:
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(lookup_vfs_info_in_folder): Canonicalize the URI before looking
+	it up in the folder's hash table.
+	(gtk_file_system_gnome_vfs_filename_to_path): Canonicalize the
+	URI.
+	(gtk_file_system_gnome_vfs_uri_to_path): Likewise.
+
 2004-06-01  Rodney Dawes  <dobey@novell.com>
 
 	* libgnomeui/gnome-druid-page-edge.c (gnome_druid_page_edge_set_color):
