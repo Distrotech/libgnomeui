@@ -347,6 +347,9 @@ gnome_dialog_quit_run(GnomeDialog *dialog,
 gint
 gnome_dialog_run_modal(GnomeDialog *dialog)
 {
+  g_return_val_if_fail(dialog != NULL, -1);
+  g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
+
   gnome_dialog_set_modal(dialog);
   return gnome_dialog_run(dialog);
 }
@@ -361,8 +364,7 @@ gnome_dialog_run(GnomeDialog *dialog)
   g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
 
   was_modal = dialog->modal;
-  gnome_dialog_set_modal(dialog);
-  gnome_dialog_close_hides(dialog, TRUE);
+  if (!was_modal) gnome_dialog_set_modal(dialog);
 
   ri.clicked_id =
     gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
@@ -379,8 +381,6 @@ gnome_dialog_run(GnomeDialog *dialog)
 
   gtk_main();
 
-  gtk_widget_hide(GTK_WIDGET(dialog));
-
   if(!was_modal)
     {
       /* It would be nicer if gnome_dialog_set_modal() took a
@@ -396,6 +396,38 @@ gnome_dialog_run(GnomeDialog *dialog)
     }
 
   return ri.button_number;
+}
+
+gint
+gnome_dialog_run_and_hide (GnomeDialog * dialog)
+{
+  gint r;
+
+  g_return_val_if_fail(dialog != NULL, -1);
+  g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);  
+
+  gnome_dialog_close_hides(dialog, TRUE);
+
+  r = gnome_dialog_run(dialog);
+
+  gnome_dialog_close(dialog); /* Causes a hide. */
+  return r;
+}
+
+gint 
+gnome_dialog_run_and_die (GnomeDialog * dialog)
+{
+  gint r;
+
+  g_return_val_if_fail(dialog != NULL, -1);
+  g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);  
+
+  gnome_dialog_close_hides(dialog, FALSE);
+
+  r = gnome_dialog_run(dialog);
+
+  gnome_dialog_close(dialog); /* Causes a destroy. */
+  return r;
 }
 
 void
@@ -488,6 +520,30 @@ void       gnome_dialog_button_connect (GnomeDialog *dialog,
   g_warning("Button number %d does not appear to exist\n", button); 
 #endif
 }
+
+void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
+					       gint button,
+					       GtkSignalFunc callback,
+					       GtkObject * obj)
+{
+  GList * list;
+
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  list = g_list_nth (dialog->buttons, button);
+
+  if (list && list->data) {
+    gtk_signal_connect_object (GTK_OBJECT(list->data), "clicked",
+			       callback, obj);
+    return;
+  }
+#ifdef GNOME_ENABLE_DEBUG
+  /* If we didn't find the button, complain */
+  g_warning("Button number %d does not appear to exist\n", button); 
+#endif
+}
+
 
 void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
 					gint button,
@@ -665,6 +721,38 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.29  1998/06/29 08:06:27  hp
+
+
+  I think Elliot and I talked about the dialog changes this time, and there
+  are now two functions to make both of us happy. The other change allows
+  turning off the handlebox for the menubar and toolbar, I think that was
+  mentioned recently.
+
+  Mon Jun 29 03:04:30 1998  Havoc Pennington  <hp@pobox.com>
+
+  * TODO: Updated a little.
+
+  Mon Jun 29 02:58:15 1998  Havoc Pennington  <hp@pobox.com>
+
+  * gnome-preferences.h, gnome-preferences.c
+  (gnome_preferences_get_toolbar_handlebox,
+  gnome_preferences_set_toolbar_handlebox,
+  gnome_preferences_get_menubar_handlebox,
+  gnome_preferences_set_menubar_handlebox): New functions.
+
+  * gnome-app.c (gnome_app_set_menus): Obey preferences for
+  handlebox.
+  (gnome_app_set_toolbar): Obey handlebox prefs.
+
+  Mon Jun 29 02:52:10 1998  Havoc Pennington  <hp@pobox.com>
+
+  * gnome-dialog.h, gnome-dialog.c (gnome_dialog_run): Take out the
+  hide stuff.
+  (gnome_dialog_run_and_hide): Do what gnome_dialog_run used to do.
+  (gnome_dialog_run_and_die):  Run and then destroy the dialog.
+  (gnome_dialog_button_connect_object): Someone requested this.
+
   Revision 1.28  1998/06/11 02:26:50  yosh
   changed things to use GTK_HAVE_ACCEL_GROUP instead of HAVE_DEVGTK...
   installed headers depending on config.h stuff is bad.

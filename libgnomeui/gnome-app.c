@@ -494,8 +494,15 @@ gnome_app_set_menus (GnomeApp *app,
 	g_return_if_fail(menubar != NULL);
 	g_return_if_fail(GTK_IS_MENU_BAR(menubar));
 
-	hb = gtk_handle_box_new();
-	gtk_widget_show(hb);
+	if ( gnome_preferences_get_menubar_handlebox() ) {
+	  hb = gtk_handle_box_new();
+	  gtk_widget_show(hb);
+	}
+	else {
+	  hb = gtk_event_box_new();
+	  gtk_widget_set_events(hb, GDK_BUTTON_PRESS_MASK);
+	}
+
 	app->menubar = GTK_WIDGET(menubar);
 
 	gtk_signal_connect(GTK_OBJECT(hb), "button_press_event",
@@ -550,8 +557,14 @@ gnome_app_set_toolbar (GnomeApp *app,
 	g_return_if_fail(toolbar != NULL);
 	g_return_if_fail(app->toolbar == NULL);
 
-	hb = gtk_handle_box_new ();
-	gtk_widget_show (hb);
+	if ( gnome_preferences_get_toolbar_handlebox() ) {
+	  hb = gtk_handle_box_new ();
+	  gtk_widget_show (hb);
+	}
+	else {
+	  hb = gtk_event_box_new();
+	  gtk_widget_set_events(hb, GDK_BUTTON_PRESS_MASK);
+	}
 	app->toolbar = GTK_WIDGET (toolbar);
 	gtk_signal_connect (GTK_OBJECT(hb), "button_press_event",
 			    GTK_SIGNAL_FUNC (gnome_app_rightclick_toolbar), app);

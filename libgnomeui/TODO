@@ -18,8 +18,6 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
 * It would be even cooler if the API enforced policy on the locations of
   the menu items: on which menu, in which order.
 
-* gnome-app-helper stuff should right-justify the Help menu.
-
 * Stock accelerators should be configurable, this would be one use for
   the above config mechanism. Gtk already lets you config accelerators,
   but only on an app-by-app basis. This would be global.
@@ -33,12 +31,6 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
   could be useful; so changing GtkFileSelection to allow sharing its
   code might be necessary.
 
-* gnome-app.c uses its own config keys, rather than gnome-preferences; 
-  this is kind of bad. However, changing it would break people's current
-  settings.
-
-* gnome-preferences is a mess that's not really thought out yet.
-
 * check for (non)use of "const" throughout the library and fix it when needed.
 
 * Silence everything from -Wall
@@ -47,7 +39,7 @@ Some of this may be libgnome rather than libgnomeui, but close enough.
     actual underlying problem. ]
 
 * Write a "minibuffer" widget which is a statusbar that can take input, a 
-  la Emacs.
+  la Emacs. Enable gnome-app-util.[hc] to use it.
 
 ==================== Done or In Progress =========================
 

@@ -33,6 +33,13 @@ void              gnome_preferences_set_statusbar_dialog     (gboolean statusbar
 gboolean          gnome_preferences_get_statusbar_interactive(void);
 void              gnome_preferences_set_statusbar_interactive(gboolean b);
 
+/* Whether to have handleboxes on the various parts of GnomeApp */
+gboolean          gnome_preferences_get_toolbar_handlebox    (void);
+void              gnome_preferences_set_toolbar_handlebox    (gboolean b);
+gboolean          gnome_preferences_get_menubar_handlebox    (void);
+void              gnome_preferences_set_menubar_handlebox    (gboolean b);
+
+
 END_GNOME_DECLS
 
 #endif

@@ -32,6 +32,8 @@ struct _GnomePreferences {
   int property_box_buttons_help : 1;
   int statusbar_not_dialog : 1;
   int statusbar_is_interactive : 1;
+  int toolbar_handlebox : 1;
+  int menubar_handlebox : 1;
 };
 
 /* 
@@ -47,7 +49,9 @@ static GnomePreferences prefs =
   TRUE,               /* PropertyBox has Close */
   TRUE,               /* PropertyBox has Help */
   FALSE,              /* Use dialogs, not the statusbar */
-  FALSE               /* Statusbar isn't interactive */
+  FALSE,              /* Statusbar isn't interactive */
+  TRUE,               /* Toolbar has handlebox */
+  TRUE                /* Menubar has handlebox */
 };
 
 /* Tons of defines for where to store the preferences. */
@@ -85,10 +89,13 @@ static const gchar * const dialog_button_styles [] = {
 #define PROPERTY_BOX_BUTTONS_CLOSE_KEY _PROPERTY_BOX_BUTTONS"Close"
 #define PROPERTY_BOX_BUTTONS_HELP_KEY _PROPERTY_BOX_BUTTONS"Help"
 
-/* =========== GnomeApp statusbar ============================ */
+/* =========== GnomeApp ============================ */
 
 #define STATUSBAR_DIALOG_KEY       "StatusBar_not_Dialog"
 #define STATUSBAR_INTERACTIVE_KEY  "StatusBar_is_Interactive"
+
+#define TOOLBAR_HANDLEBOX_KEY      "Toolbar_has_Handlebox"
+#define MENUBAR_HANDLEBOX_KEY      "Menubar_had_Handlebox"
 
 void gnome_preferences_load(void)
 {
@@ -156,6 +163,16 @@ void gnome_preferences_load(void)
 					 NULL);
   prefs.statusbar_is_interactive = b;
 
+  b = gnome_config_get_bool_with_default(TOOLBAR_HANDLEBOX_KEY"=true",
+					 NULL);
+  
+  prefs.toolbar_handlebox = b;
+
+  b = gnome_config_get_bool_with_default(MENUBAR_HANDLEBOX_KEY"=true",
+					 NULL);
+  
+  prefs.menubar_handlebox = b;
+
   gnome_config_pop_prefix();
 }
 
@@ -174,6 +191,10 @@ void gnome_preferences_save(void)
 			prefs.statusbar_not_dialog);
   gnome_config_set_bool(STATUSBAR_INTERACTIVE_KEY,
 			prefs.statusbar_is_interactive);
+  gnome_config_set_bool(TOOLBAR_HANDLEBOX_KEY,
+			prefs.toolbar_handlebox);
+  gnome_config_set_bool(MENUBAR_HANDLEBOX_KEY,
+			prefs.menubar_handlebox);
 
   gnome_config_pop_prefix();
   gnome_config_sync();
@@ -208,4 +229,24 @@ gboolean          gnome_preferences_get_statusbar_interactive(void)
 void              gnome_preferences_set_statusbar_interactive(gboolean b)
 {
   prefs.statusbar_is_interactive = b;
+}
+
+gboolean          gnome_preferences_get_toolbar_handlebox    (void)
+{
+  return prefs.toolbar_handlebox;
+}
+
+void              gnome_preferences_set_toolbar_handlebox    (gboolean b)
+{
+  prefs.toolbar_handlebox = b;
+}
+
+gboolean          gnome_preferences_get_menubar_handlebox    (void)
+{
+  return prefs.menubar_handlebox;
+}
+
+void              gnome_preferences_set_menubar_handlebox    (gboolean b)
+{
+  prefs.menubar_handlebox = b;
 }

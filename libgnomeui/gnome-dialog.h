@@ -81,15 +81,25 @@ void       gnome_dialog_button_connect (GnomeDialog *dialog,
 					gint button,
 					GtkSignalFunc callback,
 					gpointer data);
+/* Connect the object to the "clicked" signal of a single button */
+void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
+					       gint button,
+					       GtkSignalFunc callback,
+					       GtkObject * obj);
 
 /* Make the dialog modal */
 void       gnome_dialog_set_modal      (GnomeDialog *dialog);
 
 /* Run the dialog, return the button # that was pressed or -1 if none.
  */
-gint       gnome_dialog_run_modal      (GnomeDialog *dialog);
-/* Like run_modal, but does not call set_modal before run */
 gint       gnome_dialog_run	       (GnomeDialog *dialog);
+
+/* Run the dialog with gnome_dialog_run, and also call set_modal */
+gint       gnome_dialog_run_modal      (GnomeDialog *dialog);
+/* Run the dialog, and hide it afterwards */
+gint       gnome_dialog_run_and_hide (GnomeDialog * dialog);
+/* Run the dialog, and destroy it afterwards */
+gint       gnome_dialog_run_and_die  (GnomeDialog * dialog);
 
 /* Set the default button. - it will have a little highlight, 
    and pressing return will activate it. */

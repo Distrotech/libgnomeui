@@ -1,3 +1,28 @@
+Mon Jun 29 03:04:30 1998  Havoc Pennington  <hp@pobox.com>
+
+	* TODO: Updated a little.
+
+Mon Jun 29 02:58:15 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-preferences.h, gnome-preferences.c 
+	(gnome_preferences_get_toolbar_handlebox,
+	gnome_preferences_set_toolbar_handlebox,
+	gnome_preferences_get_menubar_handlebox,
+	gnome_preferences_set_menubar_handlebox): New functions.
+
+	* gnome-app.c (gnome_app_set_menus): Obey preferences for
+	handlebox.
+	(gnome_app_set_toolbar): Obey handlebox prefs.
+
+Mon Jun 29 02:52:10 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.h, gnome-dialog.c (gnome_dialog_run): Take out the
+	hide stuff.
+	(gnome_dialog_run_and_hide): Do what gnome_dialog_run used to do.
+	(gnome_dialog_run_and_die):  Run and then destroy the dialog.
+	(gnome_dialog_button_connect_object): Someone requested this.
+
+
 Sun Jun 28 10:50:01 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* libgnomeui.h: Include libgnome/gnome-parse.h, so libgnomeui.h
