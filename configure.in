@@ -41,7 +41,7 @@ GNOME_HAVE_SM=true
 AC_CHECK_LIB(SM, SmcSaveYourselfDone,
 	[SM_LIBS="-lSM -lICE"],GNOME_HAVE_SM=false,
 	$X_LIBS -lICE)
-AC_CHECK_HEADERS(X11/SM/SMlib.h,GNOME_HAVE_SM=false)
+AC_CHECK_HEADERS(X11/SM/SMlib.h,,GNOME_HAVE_SM=false)
 if test "$GNOME_HAVE_SM" = true; then
 	AC_DEFINE(HAVE_LIBSM)
 fi
