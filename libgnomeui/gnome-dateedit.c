@@ -12,21 +12,17 @@
 #include <libgnomeui/gtkcalendar.h>
 #include <libgnomeui/gnome-stock.h>
 
-typedef struct {
-	GnomeDateEdit gde;
-	
-	time_t time;
-} GnomeDateEditPrivate;
-
 enum {
 	DATE_CHANGED,
+	TIME_CHANGED,
 	LAST_SIGNAL
 };
 
 static GtkHBoxClass *parent_class;
 static gint date_edit_signals [LAST_SIGNAL] = { 0 };
 
-static void gnome_date_edit_init (GnomeDateEdit *gde);
+static void gnome_date_edit_init       (GnomeDateEdit *gde);
+static void gnome_date_edit_class_init (GnomeDateEditClass *class);
 
 guint
 gnome_date_edit_get_type ()
@@ -36,9 +32,9 @@ gnome_date_edit_get_type ()
 	if (!date_edit_type){
 		GtkTypeInfo date_edit_info = {
 			"GnomeDateEdit",
-			sizeof (GnomeDateEditPrivate),
+			sizeof (GnomeDateEdit),
 			sizeof (GnomeDateEditClass),
-			NULL,
+			(GtkClassInitFunc) gnome_date_edit_class_init,
 			(GtkObjectInitFunc) gnome_date_edit_init,
 			NULL,
 			NULL,
@@ -58,18 +54,18 @@ day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 	sprintf (buffer, "%d/%d/%d", calendar->month, calendar->selected_day, calendar->year);
 	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
 	gtk_widget_destroy (gtk_widget_get_toplevel (GTK_WIDGET (calendar)));
+	gtk_signal_emit (GTK_OBJECT (gde), date_edit_signals [DATE_CHANGED]);
 }
 
 static void
-select_clicked (GtkWidget *widget, GnomeDateEdit *_gde)
+select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 {
-	GnomeDateEditPrivate *gde = (GnomeDateEditPrivate *) _gde;
 	GtkWidget *cal_win;
 	GtkCalendar *calendar;
 	struct tm *mtm;
 
 	cal_win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	mtm = localtime (&gde->time);
+	mtm = localtime (&gde->initial_time);
 	calendar = (GtkCalendar *) gtk_calendar_new ();
 	
 	gtk_calendar_select_month (calendar, mtm->tm_mon, mtm->tm_year);
@@ -89,6 +85,7 @@ static void
 set_time (GtkWidget *widget, hour_info_t *hit)
 {
 	gtk_entry_set_text (GTK_ENTRY (hit->gde->time_entry), hit->hour);
+	gtk_signal_emit (GTK_OBJECT (hit->gde), date_edit_signals [TIME_CHANGED]);
 }
 
 static void
@@ -130,8 +127,10 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 
 		item = gtk_menu_item_new_with_label (buffer);
 		gtk_menu_append (GTK_MENU (menu), item);
+#if 0
 		gtk_signal_connect (GTK_OBJECT (item), "activate",
 				    GTK_SIGNAL_FUNC (set_time), hit);
+#endif
 		gtk_signal_connect (GTK_OBJECT (item), "destroy",
 				    GTK_SIGNAL_FUNC (free_resources), hit);
 		gtk_widget_show (item);
@@ -156,6 +155,28 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 			gtk_widget_show (mins);
 		}
 	}
+}
+
+static void
+gnome_date_edit_class_init (GnomeDateEditClass *class)
+{
+	GtkObjectClass *object_class = (GtkObjectClass *) class;
+
+	object_class = (GtkObjectClass*) class;
+	
+	date_edit_signals [TIME_CHANGED] =
+		gtk_signal_new ("time_changed",
+				GTK_RUN_FIRST, object_class->type, 
+				GTK_SIGNAL_OFFSET (GnomeDateEditClass, time_changed),
+				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
+	
+	date_edit_signals [DATE_CHANGED] =
+		gtk_signal_new ("date_changed",
+				GTK_RUN_FIRST, object_class->type, 
+				GTK_SIGNAL_OFFSET (GnomeDateEditClass, date_changed),
+				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
+	
+	gtk_object_class_add_signals (object_class, date_edit_signals, LAST_SIGNAL);
 }
 
 static void
@@ -190,29 +211,29 @@ gnome_date_edit_init (GnomeDateEdit *gde)
 	 */
 	gtk_signal_connect (GTK_OBJECT (gde), "realize",
 			    GTK_SIGNAL_FUNC (fill_time_popup), gde);
+
 }
 
 void
-gnome_date_edit_set_time (GnomeDateEdit *_gde, time_t the_time)
+gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 {
-	GnomeDateEditPrivate *gde = (GnomeDateEditPrivate *) _gde;
 	struct tm *mytm;
 	char buffer [40];
 	char *ct;
 	
 	if (the_time == 0)
 		the_time = time (NULL);
-	gde->time = the_time;
+	gde->initial_time = the_time;
 
 	mytm = localtime (&the_time);
 
 	/* Set the date */
-	sprintf (buffer, "%d/%d/%d", mytm->tm_mon, mytm->tm_mday, mytm->tm_year);
-	gtk_entry_set_text (GTK_ENTRY (_gde->date_entry), buffer);
+	sprintf (buffer, "%d/%d/%d", mytm->tm_mon+1, mytm->tm_mday, mytm->tm_year);
+	gtk_entry_set_text (GTK_ENTRY (gde->date_entry), buffer);
 
 	/* Set the time */
 	strftime (buffer, sizeof (buffer), "%I:00 %p", mytm);
-	gtk_entry_set_text (GTK_ENTRY (_gde->time_entry), buffer);
+	gtk_entry_set_text (GTK_ENTRY (gde->time_entry), buffer);
 }
 
 void
@@ -232,3 +253,33 @@ gnome_date_edit_new (time_t the_time)
 
 	return GTK_WIDGET (gde);
 }
+
+time_t
+gnome_date_edit_get_date (GnomeDateEdit *gde)
+{
+	struct tm tm;
+	char *str, *flags;
+	
+	sscanf (gtk_entry_get_text (GTK_ENTRY (gde->date_entry)), "%d/%d/%d",
+		&tm.tm_mon, &tm.tm_mday, &tm.tm_year);
+
+	tm.tm_mon--;
+	if (tm.tm_year > 1900)
+		tm.tm_year -= 1900;
+
+	str = g_strdup (gtk_entry_get_text (GTK_ENTRY (gde->time_entry)));
+	tm.tm_hour = atoi (strtok (str, ":"));
+	tm.tm_min  = atoi (strtok (NULL, ": "));
+	flags = strtok (NULL, ":");
+
+	if (flags && (strcasecmp (flags, "PM") == 0)){
+		if (tm.tm_hour < 12)
+			tm.tm_hour += 12;
+	}
+	g_free (str);
+	tm.tm_sec = 0;
+	tm.tm_isdst = -1;
+
+	return mktime (&tm);
+}
+
