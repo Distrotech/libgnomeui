@@ -1,3 +1,8 @@
+1999-08-17  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid.c (gnome_druid_remove): many changes to make us act
+	as a nicer container.
+
 1999-08-16  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-druid.c (gnome_druid_destroy): chain up to parent's

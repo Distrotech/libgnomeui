@@ -30,10 +30,13 @@ static void gnome_druid_size_request    (GtkWidget               *widget,
 					 GtkRequisition          *requisition);
 static void gnome_druid_size_allocate   (GtkWidget               *widget,
 					 GtkAllocation           *allocation);
+static GtkType gnome_druid_child_type   (GtkContainer *container);
 static void gnome_druid_map             (GtkWidget               *widget);
 static void gnome_druid_unmap           (GtkWidget               *widget);
 static void gnome_druid_add             (GtkContainer            *widget,
 					 GtkWidget               *page);
+static void gnome_druid_remove          (GtkContainer            *widget,
+					 GtkWidget               *child);
 static void gnome_druid_forall          (GtkContainer            *container,
 					 gboolean                include_internals,
 					 GtkCallback             callback,
@@ -103,6 +106,8 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 
 	container_class->forall = gnome_druid_forall;
 	container_class->add = gnome_druid_add;
+	container_class->remove = gnome_druid_remove;
+	container_class->child_type = gnome_druid_child_type;
 }
 
 static void
@@ -164,10 +169,15 @@ gnome_druid_destroy (GtkObject *object)
 	g_return_if_fail (GNOME_IS_DRUID (object));
 
 	druid = GNOME_DRUID (object);
+        GTK_OBJECT_CLASS(parent_class)->destroy(object);
+
+	gtk_widget_destroy (druid->back);
+	gtk_widget_destroy (druid->next);
+	gtk_widget_destroy (druid->cancel);
+	gtk_widget_destroy (druid->finish);
 	g_list_free (druid->children);
         druid->children = NULL;
 
-        GTK_OBJECT_CLASS(parent_class)->destroy(object);
 }
 
 static void
@@ -298,6 +308,12 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	}
 }
 
+static GtkType
+gnome_druid_child_type (GtkContainer *container)
+{
+	return gnome_druid_page_get_type ();
+}
+
 static void
 gnome_druid_map (GtkWidget *widget)
 {
@@ -354,6 +370,14 @@ gnome_druid_add (GtkContainer *widget,
 	g_return_if_fail (GNOME_IS_DRUID_PAGE (page));
 
 	gnome_druid_append_page (GNOME_DRUID (widget), GNOME_DRUID_PAGE (page));
+}
+static void
+gnome_druid_remove (GtkContainer *widget,
+		    GtkWidget *child)
+{
+	GnomeDruid *druid = GNOME_DRUID (widget);
+	druid->children = g_list_remove (druid->children, child);
+	gtk_widget_unparent (child);
 }
 
 static void

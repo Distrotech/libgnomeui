@@ -114,8 +114,11 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 	rc_style->bg[GTK_STATE_NORMAL].green = 6400;
 	rc_style->bg[GTK_STATE_NORMAL].blue = 28672;
 	rc_style->color_flags[GTK_STATE_NORMAL] = GTK_RC_BG;
+	gtk_rc_style_ref (rc_style);
 	gtk_widget_modify_style (druid_page_standard->side_bar, rc_style);
+	gtk_rc_style_ref (rc_style);
 	gtk_widget_modify_style (druid_page_standard->bottom_bar, rc_style);
+	gtk_rc_style_ref (rc_style);
 	gtk_widget_modify_style (druid_page_standard->right_bar, rc_style);
 
 	/* FIXME: can I just ref the old style? */
@@ -355,3 +358,4 @@ gnome_druid_page_standard_set_logo          (GnomeDruidPageStandard *druid_page_
 	gnome_canvas_item_set (druid_page_standard->logo_item,
 			       "image", druid_page_standard->logo_image, NULL);
 }
+
