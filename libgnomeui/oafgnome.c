@@ -1,6 +1,7 @@
 #include "oafgnome.h"
 #include <signal.h>
 #include <popt.h>
+#include <errno.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -151,6 +152,7 @@ typedef struct {
   char iorbuf[4096];
 
   int infd, outfd;
+  GString *in_buf;
   FILE *in_fh, *out_fh;
 
   guint out_tag;
@@ -173,17 +175,33 @@ item_send_val(gchar *string, gpointer data)
   gtk_main_quit();
 }
 
-/* What a stupid replacement for expect. It will break if anything isn't working exactly right. oh well :\ */
+/* What a stupid replacement for expect. It will break if anything isn't working exactly right. Oh well :\ */
 static void
 rcmd_handle_connecting(RCMDRunInfo *ri)
 {
   char aline[4096];
+  int nchars;
 
-  if(!fgets(aline, sizeof(aline), ri->out_fh))
+ retry:
+  nchars = read(ri->outfd, aline, sizeof(aline) - 1);
+  if(nchars < 0)
     {
-      gtk_main_quit();
+      switch(errno)
+	{
+	case EAGAIN:
+	  goto retry;
+	  break;
+	default:
+	  gtk_main_quit();
+	  return;
+	  break;
+	}
       return;
     }
+  aline[nchars] = '\0';
+  g_string_append(ri->in_buf, aline);
+
+  /* Now, see if we have timed out or got a whole line */
 
   if(strstr(aline, "login:"))
     {
@@ -365,6 +383,7 @@ rcmd_run(const OAFRegistrationCategory *regcat, const char **argv, int argc, con
   ri.infd = pipes_in[1];
   ri.in_fh = fdopen(ri.infd, "w");
   ri.outfd = pipes_out[0];
+  fcntl(ri.outfd, F_SETFL, O_NONBLOCK);
   ri.out_fh = fdopen(ri.outfd, "r");
 
   {
