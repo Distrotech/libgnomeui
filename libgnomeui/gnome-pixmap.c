@@ -153,7 +153,7 @@ paint_with_pixbuf (GnomePixmap *gpixmap, GdkRectangle *area)
         if (draw_source != NULL) {
                 /* Draw the image */                
                 gint x, y;
-          
+
                 x = (widget->allocation.x * (1.0 - misc->xalign) +
                      (widget->allocation.x + widget->allocation.width
                       - (widget->requisition.width - misc->xpad * 2)) *
@@ -168,8 +168,16 @@ paint_with_pixbuf (GnomePixmap *gpixmap, GdkRectangle *area)
                         gdk_gc_set_clip_origin (widget->style->black_gc, x, y);
                 }
 
-                /* FIXME draw the pixbuf */
-
+                gdk_pixbuf_render_to_drawable(draw_source,
+                                              widget->window,
+                                              widget->style->black_gc,
+                                              0, 0,
+                                              x, y,
+                                              gdk_pixbuf_get_width(draw_source),
+                                              gdk_pixbuf_get_height(draw_source),
+                                              GDK_RGB_DITHER_NORMAL,
+                                              0, 0);
+                                              
                 if (draw_mask) {
                         gdk_gc_set_clip_mask (widget->style->black_gc, NULL);
                         gdk_gc_set_clip_origin (widget->style->black_gc, 0, 0);
@@ -218,7 +226,7 @@ paint_with_pixmap (GnomePixmap *gpixmap, GdkRectangle *area)
         if (draw_source != NULL) {
                 /* Draw the image */
                 gint x, y;
-          
+
                 x = (widget->allocation.x * (1.0 - misc->xalign) +
                      (widget->allocation.x + widget->allocation.width
                       - (widget->requisition.width - misc->xpad * 2)) *
@@ -248,7 +256,6 @@ paint_with_pixmap (GnomePixmap *gpixmap, GdkRectangle *area)
 
         } else {
                 /* Draw nothing */
-
         }
 }
 
@@ -274,7 +281,7 @@ gnome_pixmap_expose (GtkWidget *widget, GdkEventExpose *event)
 	g_return_val_if_fail (widget != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_PIXMAP (widget), FALSE);
 	g_return_val_if_fail (event != NULL, FALSE);
-	
+
 	if (GTK_WIDGET_DRAWABLE (widget))
 		paint (GNOME_PIXMAP (widget), &event->area);
 
@@ -332,19 +339,16 @@ clear_image(GnomePixmap *gpixmap, GtkStateType state)
         if (gpixmap->image_data[state].pixbuf != NULL) {
                 gdk_pixbuf_unref(gpixmap->image_data[state].pixbuf);
                 gpixmap->image_data[state].pixbuf = NULL;
-                printf("Clearing pixbuf\n");
         }
 
         if (gpixmap->image_data[state].pixmap != NULL) {
                 gdk_pixmap_unref(gpixmap->image_data[state].pixmap);
                 gpixmap->image_data[state].pixmap = NULL;
-                printf("Clearing pixmap\n");
         }
 
         if (gpixmap->image_data[state].mask != NULL) {
                 gdk_bitmap_unref(gpixmap->image_data[state].mask);
                 gpixmap->image_data[state].mask = NULL;
-                printf("Clearing mask\n");
         }
 
 }
@@ -400,7 +404,7 @@ resize_to_fit(GnomePixmap *gpixmap)
                         gdk_window_get_size (pix, &width, &height);
                 }
 
-        } else if (gpixmap->flags & GNOME_PIXMAP_USE_PIXMAP) {
+        } else if (gpixmap->flags & GNOME_PIXMAP_USE_PIXBUF) {
 
                 GdkPixbuf *pix = NULL;
 
@@ -924,16 +928,23 @@ gnome_pixbuf_scale(GdkPixbuf* gdk_pixbuf,
         /* optimization if no scaling is needed */
         if (w_old == w && h_old == h) {
                 GdkPixbuf *copy;
+                guchar* data_copy;
 
-                copy = gdk_pixbuf_new(gdk_pixbuf_get_format(gdk_pixbuf),
-                                      gdk_pixbuf_get_has_alpha(gdk_pixbuf),
-                                      gdk_pixbuf_get_bits_per_sample(gdk_pixbuf),
-                                      gdk_pixbuf_get_width(gdk_pixbuf),
-                                      gdk_pixbuf_get_height(gdk_pixbuf));
+                data_copy = g_malloc(gdk_pixbuf_get_height(gdk_pixbuf) *
+                                     gdk_pixbuf_get_rowstride(gdk_pixbuf));
 
-                memcpy(copy->art_pixbuf->pixels,
+                
+                memcpy(data_copy,
                        gdk_pixbuf->art_pixbuf->pixels,
-                       copy->art_pixbuf->height * copy->art_pixbuf->rowstride);
+                       gdk_pixbuf->art_pixbuf->height * gdk_pixbuf->art_pixbuf->rowstride);
+                
+                copy = gdk_pixbuf_new_from_data(data_copy,
+                                                gdk_pixbuf_get_format(gdk_pixbuf),
+                                                gdk_pixbuf_get_has_alpha(gdk_pixbuf),
+                                                gdk_pixbuf_get_width(gdk_pixbuf),
+                                                gdk_pixbuf_get_height(gdk_pixbuf),
+                                                gdk_pixbuf_get_rowstride(gdk_pixbuf),
+                                                free_buffer, NULL);
 
                 return copy;
         }
@@ -944,7 +955,8 @@ gnome_pixbuf_scale(GdkPixbuf* gdk_pixbuf,
 	/* Always align rows to 32-bit boundaries */
 
 	new_channels = pixbuf->has_alpha ? 4 : 3;
-	new_rowstride = 4 * ((new_channels * w + 3) / 4);
+        /* for debugging just use the simple rowstride */
+	new_rowstride = w * new_channels; /* 4 * ((new_channels * w + 3) / 4); */
 
         data = g_malloc (h * new_rowstride);
 
@@ -964,16 +976,16 @@ gnome_pixbuf_scale(GdkPixbuf* gdk_pixbuf,
 	h2 = h << 8;
 	w2 = w << 8;
 
-	for (y = 0; y < h2; y += 0x100) {
+	for (y = 0; y < h2; y += 256) {
 		y_old = (y * h_old) / h;
 		y2 = y_old & 0xff;
 		y_old >>= 8;
-		for (x = 0; x < w2; x += 0x100) {
+		for (x = 0; x < w2; x += 256) {
 			x_old = (x * w_old) / w;
 			x2 = x_old & 0xff;
 			x_old >>= 8;
-			i = x_old + (y_old * w_old);
-			p2 = data_old + (i * 3);
+			i = x_old * (pixbuf->has_alpha ? 4 : 3) + (y_old * rowstride_old);
+			p2 = data_old + i;
 
 			r2 = g2 = b2 = a2 = 0;
 			yw = hw;
@@ -985,8 +997,8 @@ gnome_pixbuf_scale(GdkPixbuf* gdk_pixbuf,
 				r = g = b = a = 0;
 				while (xw) {
 
-					if ((0x100 - x3) < xw)
-						i = 0x100 - x3;
+					if ((256 - x3) < xw)
+						i = 256 - x3;
 					else
 						i = xw;
 
@@ -1003,14 +1015,14 @@ gnome_pixbuf_scale(GdkPixbuf* gdk_pixbuf,
 					xw -= i;
 					x3 = 0;
 				}
-				if ((0x100 - y3) < yw) {
-					r2 += r * (0x100 - y3);
-					g2 += g * (0x100 - y3);
-					b2 += b * (0x100 - y3);
+				if ((256 - y3) < yw) {
+					r2 += r * (256 - y3);
+					g2 += g * (256 - y3);
+					b2 += b * (256 - y3);
                                         if (pixbuf->has_alpha) {
-                                                a2 += a * (0x100 - y3);
+                                                a2 += a * (256 - y3);
                                         }
-					yw -= 0x100 - y3;
+					yw -= 256 - y3;
 				} else {
 					r2 += r * yw;
 					g2 += g * yw;

@@ -1,3 +1,19 @@
+1999-11-08  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.c (gnome_pixbuf_scale): fix no-scaling-needed case
+	to work properly. Some other bug fixes
+
+	* gnome-stock.c (stock_pixmaps): specify that the rgb data has no
+	alpha for now (since it doesn't)
+
+	* gnome-init.c (gtk_post_args_parse): gdk_rgb_init()
+
+	* gnome-pixmap.c (resize_to_fit): fix typo, s/PIXMAP/PIXBUF/
+	(paint_with_pixbuf): Um, actually draw the pixbuf.
+
+	* gnome-stock.c (gnome_stock_init): Set the pixmap mode here, not 
+	in specific constructors.
+
 Sat Nov 06 13:12:11 1999  George Lebl <jirka@5z.com>
 
 	* gnome-calculator.c: count active widgets and after we destroy

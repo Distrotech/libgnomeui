@@ -79,6 +79,10 @@ static void
 gnome_stock_init(GnomeStock *stock)
 {
 	stock->icon = NULL;
+
+        /* we cache the pixbufs for stock icons, plus some of them contain shared
+           read-only data, so it's typically more efficient to keep the pixbuf */
+        gnome_pixmap_set_mode(GNOME_PIXMAP(stock), GNOME_PIXMAP_KEEP_PIXBUF);
 }
 
 /**
@@ -116,9 +120,7 @@ gnome_stock_new(void)
 {
         GnomeStock *stock;
 	stock = gtk_type_new(gnome_stock_get_type());
-        /* we cache the pixbufs for stock icons, plus some of them contain shared
-           read-only data, so it's typically more efficient to keep the pixbuf */
-        gnome_pixmap_set_mode(GNOME_PIXMAP(stock), GNOME_PIXMAP_KEEP_PIXBUF);
+
         return GTK_WIDGET(stock);
 }
 
@@ -182,7 +184,7 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
                                                     0, 0, 0, 0,
                                                     gdk_pixbuf_get_width(pixbufs[i]),
                                                     gdk_pixbuf_get_height(pixbufs[i]),
-                                                    1); /* 1 means only alpha = 0 is excluded by the mask */
+                                                    128); /* clip at 50% alpha */
           }
           ++i;
         }
@@ -810,7 +812,8 @@ stock_pixmaps(void)
                                                     TRUE,
                                                     entries_data[i].width,
                                                     entries_data[i].height,
-                                                    entries_data[i].width, /* rowstride */
+                                                    /* rowstride */
+                                                    entries_data[i].width * 4,
                                                     NULL, /* don't destroy data */
                                                     NULL );
                 
@@ -1514,7 +1517,7 @@ gnome_stock_transparent_window (const char *icon, GtkStateType state)
                                                   0, 0, 0, 0,
                                                   gdk_pixbuf_get_width(pixbuf),
                                                   gdk_pixbuf_get_height(pixbuf),
-                                                  1); /* 1 means only alpha = 0 is excluded by the mask */
+                                                  128); /* 50% alpha */
         }
 
         /* Draw to a pixmap */

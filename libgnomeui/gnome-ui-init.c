@@ -130,6 +130,8 @@ gtk_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
         final_argv = g_memdup(gnome_gtk_init_info.gtk_args->pdata, sizeof(char *) * gnome_gtk_init_info.gtk_args->len);
         gtk_init(&final_argc, &final_argv);
 
+        gdk_rgb_init();
+        
         accels_rc_filename = g_concat_dir_and_file (gnome_user_accels_dir, gnome_program_get_name(gnome_program_get()));
         gtk_item_factory_parse_rc(accels_rc_filename);
         g_free(accels_rc_filename);
