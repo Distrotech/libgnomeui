@@ -1,3 +1,9 @@
+1999-05-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-image.c (gnome_canvas_image_set_arg): Queue an
+	update when the image's anchor point changes.  I don't think Raph
+	ever tested this.
+
 1999-05-16  Robert Brady <rwb197@ecs.soton.ac.uk>
 
 	* gnome-calculator.c (c_fact): The second fixes the calculator

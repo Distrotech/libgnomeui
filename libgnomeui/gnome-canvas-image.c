@@ -282,17 +282,17 @@ gnome_canvas_image_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 				art_pixbuf_free (image->pixbuf);
 			image->pixbuf = pixbuf_from_imlib_image (image->im);
 		}
-	update = TRUE;
+		update = TRUE;
 		break;
 
 	case ARG_X:
 		image->x = GTK_VALUE_DOUBLE (*arg);
-		calc_bounds = TRUE;
+		update = TRUE;
 		break;
 
 	case ARG_Y:
 		image->y = GTK_VALUE_DOUBLE (*arg);
-		calc_bounds = TRUE;
+		update = TRUE;
 		break;
 
 	case ARG_WIDTH:
