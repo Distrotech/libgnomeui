@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 23:58+0200\n"
-"PO-Revision-Date: 2004-02-18 00:17+0100\n"
+"POT-Creation-Date: 2004-07-06 20:20+0200\n"
+"PO-Revision-Date: 2004-07-06 20:22+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -33,6 +33,31 @@ msgstr "Afkom-element 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Tip til element 2"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:855
+msgid "Filesystem"
+msgstr "Filsystem"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1517
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Bogmærkegemning mislykkedes (%s)"
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "Kunne ikke skaffe oplysninger om fil '%s': %s"
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Kunne ikke åbne fil '%s': %s"
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr "Kunne ikke indlæse billede '%s': grund ikke kendt, formodentlig en ødelagt billedfil"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -142,6 +167,7 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -199,6 +225,7 @@ msgid "_Game"
 msgstr "_Spil"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjælp"
 
@@ -389,11 +416,11 @@ msgstr "Konfigurér programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om dette program"
 
@@ -420,7 +447,7 @@ msgstr "Opret et nyt vindue"
 msgid "_Close This Window"
 msgstr "L_uk dette vindue"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Luk det aktuelle vindue"
 
@@ -517,9 +544,9 @@ msgid "Text Only"
 msgstr "Kun tekst"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Brug skrivebordsstandarden (%s)"
+msgstr "Benyt forvalgt for skrivebord (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -620,9 +647,9 @@ msgid "Authentication Required"
 msgstr "Brugerverifikation krævet"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "Du skal logge på for at tilgå %s\n"
+msgstr "Du skal logge på for at tilgå %s domæne %s\n"
 
 #: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
@@ -807,22 +834,43 @@ msgstr "Baggrundsfarve er sat"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Indholdsbaggrundsfarve"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Indholdsbaggrundsfarve"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Indholdsbaggrundsfarve som en GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Indholdsbaggrundsfarve sat"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Indholdsbaggrundsfarve er sat"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "Logobaggrundsfarve"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "Logobaggrundsfarve"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Baggrundsfarve for logo som en GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Baggrundsfarve for logo sat"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Baggrundsfarve for logo er sat"
 
@@ -1229,23 +1277,31 @@ msgstr "Spørgsmål"
 msgid "Message"
 msgstr "Besked"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "_Brugernavn:"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "_Domæne:"
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_Adgangskode:"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr "Tilslut _anonymt"
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr "Tilslut som _bruger:"
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "Husk adgangskode for denne session"
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "Gem adgangskode i nøglering"
 
@@ -1412,11 +1468,12 @@ msgstr "_Informér udviklere"
 msgid "_Debug"
 msgstr "_Fejlanalysering"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Afslut testprogrammet"
+
 #~ msgid " domain %s"
 #~ msgstr " domæne %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "Afslut testprogrammet"
 
 #~ msgid "Color Selector"
 #~ msgstr "Farvevælger"
