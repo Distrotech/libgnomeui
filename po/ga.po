@@ -509,11 +509,11 @@ msgstr ""
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 #: test-gnome/testgnome.xml.h:5
 msgid "_File"
-msgstr ""
+msgstr "_Comhad"
 
 #: libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
-msgstr ""
+msgstr "_Comhad/"
 
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
@@ -542,11 +542,11 @@ msgstr ""
 #. If you have more then one New type, use this tree
 #: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
-msgstr ""
+msgstr "_Nua"
 
 #: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
-msgstr ""
+msgstr "_Nua"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
@@ -562,12 +562,12 @@ msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
-msgstr ""
+msgstr "_Cluiche"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 #: test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr ""
+msgstr "Cab_hair"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
@@ -576,11 +576,11 @@ msgstr ""
 #. Open
 #: libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
-msgstr ""
+msgstr "_Oscail..."
 
 #: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
-msgstr ""
+msgstr "Oscail Comhad"
 
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
@@ -1236,7 +1236,7 @@ msgstr ""
 
 #: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
-msgstr ""
+msgstr "Eolas"
 
 #: libgnomeui/gnome-messagebox.c:113
 msgid "Warning"
@@ -1244,7 +1244,7 @@ msgstr ""
 
 #: libgnomeui/gnome-messagebox.c:119
 msgid "Error"
-msgstr ""
+msgstr "Earraid"
 
 #: libgnomeui/gnome-messagebox.c:125
 msgid "Question"
@@ -1291,11 +1291,11 @@ msgstr ""
 #.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr ""
+msgstr "%a %b %d %T %Y"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
-msgstr ""
+msgstr "Sans 14"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
