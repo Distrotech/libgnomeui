@@ -957,7 +957,7 @@ static void app_create(GnomeMDI *mdi) {
 
   /* create toolbar */
   if(mdi->toolbar_template) {
-    ui_info = copy_ui_info_tree(mdi->menu_template);
+    ui_info = copy_ui_info_tree(mdi->toolbar_template);
     gnome_app_create_toolbar(GNOME_APP(window), ui_info);
     gtk_object_set_data(GTK_OBJECT(window), TOOLBAR_INFO_KEY, ui_info);
   }

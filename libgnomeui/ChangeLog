@@ -1,8 +1,11 @@
+1998-07-05  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* gnome-mdi.c (app_create): Fixed a typo.
+
 1998-07-04  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
 
 	* gnome-app-helper.h (GNOMEUIINFO_JUSTIFY_RIGHT): Fixed a wrong
 	order of GnomeUIInfo fields, which caused a compile error.
-	
 
 1998-07-03  Chris Lahey  <clahey@umich.edu>
 
