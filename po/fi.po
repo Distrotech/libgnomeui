@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
+"POT-Creation-Date: 2003-08-25 20:29+0200\n"
 "PO-Revision-Date: 2003-06-16 20:50+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Gnome Finnish Translation Team <gnome-fi-laatu@lists."

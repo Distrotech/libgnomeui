@@ -5,14 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-16 01:39+0200\n"
+"POT-Creation-Date: 2003-08-25 20:29+0200\n"
 "PO-Revision-Date: 2001-07-29 12:32+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -138,7 +138,6 @@ msgstr "O %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -196,7 +195,6 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoč"
 
@@ -387,11 +385,11 @@ msgstr "Nastavi program"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_O"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "O tem programu"
 
@@ -418,7 +416,7 @@ msgstr "Ustvari novo okno"
 msgid "_Close This Window"
 msgstr "_Zapri to okno"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Zapri trenutno okno"
 
@@ -1291,27 +1289,27 @@ msgstr "Razveljavi zamik"
 msgid "About"
 msgstr "O"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "X display to use"
 msgstr "Zaslon X za uporabo"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:118
 msgid "DISPLAY"
 msgstr "ZASLON"
 
-#: libgnomeui/gnome-ui-init.c:125
+#: libgnomeui/gnome-ui-init.c:126
 msgid "GNOME GUI Library"
 msgstr "Knjižnjica grafičnega vmesnika Gnome"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:623
+#: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Zgodilo se je več segmentacijskih napak; ne morem prikazati dialoga z "
 "napako\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:637
+#: libgnomeui/gnome-ui-init.c:719
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1364,9 +1362,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Za več informacij prosimo obiščite stran Sesutje programov GNOME"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Izhod iz preizkusa"
+#~ msgid "Exit the test"
+#~ msgstr "Izhod iz preizkusa"
 
 #~ msgid "_Credits"
 #~ msgstr "_Zasluge"

@@ -14,7 +14,7 @@ LIBGNOMEUI_MICRO_VERSION=0
 LIBGNOMEUI_INTERFACE_AGE=0
 # If you need a modifier for the version number. 
 # Normally empty, but can be used to make "fixup" releases.
-LIBGNOMEUI_EXTRAVERSION=
+LIBGNOMEUI_EXTRAVERSION=.1
 
 dnl libtool versioning from libgnome
 

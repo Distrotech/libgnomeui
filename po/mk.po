@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
+"POT-Creation-Date: 2003-08-25 20:29+0200\n"
 "PO-Revision-Date: 2003-09-04 15:42+0200\n"
 "Last-Translator: Ivan Stojmirov <stojmir@linux.net.mk>\n"
 "Language-Team: Macedonian <gnomk-main@lists.sourceforge.net>\n"
@@ -131,7 +131,8 @@ msgstr ""
 "http://pmf.polygonized.com"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Заслуги за преведувачите"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -736,7 +737,8 @@ msgstr "Селектирај го времето од листа"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_дата_измени_земи_дата смалено, користи gnome_дата_измени_земи_време"
+msgstr ""
+"gnome_дата_измени_земи_дата смалено, користи gnome_дата_измени_земи_време"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -891,7 +893,8 @@ msgstr "Модално"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
-msgstr "Без оглед на прозорецот за прелистување на датотеки мора да биде модален."
+msgstr ""
+"Без оглед на прозорецот за прелистување на датотеки мора да биде модален."
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
@@ -1175,7 +1178,8 @@ msgstr "Избирач на икони"
 
 #: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
-msgstr "Ова копче ќе ви отвори прозорец кој пак ќе ви овозможи да изберете икона."
+msgstr ""
+"Ова копче ќе ви отвори прозорец кој пак ќе ви овозможи да изберете икона."
 
 #: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
@@ -1387,4 +1391,3 @@ msgstr ""
 
 #~ msgid "_Credits"
 #~ msgstr "_Заслуги"
-
