@@ -24,10 +24,13 @@
 #include "libgnome/gnome-i18nP.h"
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
-#include <gdk/gdkkeysyms.h>
 #include "libgnomeui/gnome-stock.h"
 #include "libgnomeui/gnome-uidefs.h"
 
+#define GNOME_DIALOG_BUTTON_WIDTH 100
+#define GNOME_DIALOG_BUTTON_HEIGHT 40
+
+#define GNOME_DIALOG_BORDER_WIDTH 5
 
 enum {
   CLICKED,
@@ -48,7 +51,6 @@ static void gnome_dialog_init       (GnomeDialog      *messagebox);
 
 static void gnome_dialog_button_clicked (GtkWidget   *button, 
 					 GtkWidget   *messagebox);
-static gint gnome_dialog_key_pressed (GtkWidget * d, GdkEventKey * e);
 static void gnome_dialog_destroy (GtkObject *dialog);
 
 static GtkWindowClass *parent_class;
@@ -104,7 +106,6 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
 
   klass->clicked = NULL;
   object_class->destroy = gnome_dialog_destroy;
-  widget_class->key_press_event = gnome_dialog_key_pressed;
 }
 
 static void
@@ -133,11 +134,7 @@ gnome_dialog_init (GnomeDialog *dialog)
   dialog->modal = FALSE;
   dialog->self_destruct = FALSE;
   dialog->buttons = NULL;
-
-  dialog->accelerators = gtk_accelerator_table_new();
-  gtk_window_add_accelerator_table (GTK_WINDOW(dialog), 
-				    dialog->accelerators);
-
+  
   bf = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (bf), GTK_SHADOW_OUT);
   gtk_container_add(GTK_CONTAINER(dialog), bf);
@@ -145,7 +142,7 @@ gnome_dialog_init (GnomeDialog *dialog)
 
   vbox = gtk_vbox_new(FALSE, GNOME_PAD);
   gtk_container_border_width (GTK_CONTAINER (vbox), 
-			      GNOME_PAD_SMALL);
+			      GNOME_DIALOG_BORDER_WIDTH);
   gtk_container_add(GTK_CONTAINER(bf), vbox);
   gtk_widget_show(vbox);
 
@@ -155,13 +152,13 @@ gnome_dialog_init (GnomeDialog *dialog)
   dialog->vbox = gtk_vbox_new(FALSE, GNOME_PAD);
   gtk_box_pack_start (GTK_BOX (vbox), dialog->vbox, 
 		      TRUE, TRUE,
-		      GNOME_PAD_SMALL);
+		      GNOME_DIALOG_BORDER_WIDTH);
   gtk_widget_show(dialog->vbox);
 
   separator = gtk_hseparator_new ();
   gtk_box_pack_start (GTK_BOX (vbox), separator, 
 		      FALSE, TRUE,
-		      GNOME_PAD_SMALL);
+		      GNOME_DIALOG_BORDER_WIDTH);
   gtk_widget_show (separator);
 
   dialog->action_area = gtk_hbutton_box_new ();
@@ -225,8 +222,8 @@ void       gnome_dialog_append_buttons (GnomeDialog * dialog,
     
     button = gnome_stock_or_ordinary_button (button_name);
     GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
-    gtk_widget_set_usize (button, GNOME_BUTTON_WIDTH,
-			  GNOME_BUTTON_HEIGHT);
+    gtk_widget_set_usize (button, GNOME_DIALOG_BUTTON_WIDTH,
+			  GNOME_DIALOG_BUTTON_HEIGHT);
     gtk_container_add (GTK_CONTAINER(dialog->action_area), 
 		       button);
     gtk_widget_grab_default (button);
@@ -327,34 +324,6 @@ void       gnome_dialog_button_connect (GnomeDialog *dialog,
 #endif
 }
 
-void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
-					gint button,
-					const guchar accelerator_key,
-					guint8       accelerator_mods)
-{
-  GList * list;
-
-  g_return_if_fail(dialog != NULL);
-  g_return_if_fail(GNOME_IS_DIALOG(dialog));
-
-  list = g_list_nth (dialog->buttons, button);
-
-  if (list && list->data) {
-
-    gtk_widget_install_accelerator(GTK_WIDGET(list->data),
-				   dialog->accelerators,
-				   "clicked",
-				   accelerator_key,
-				   accelerator_mods);
-    
-    return;
-  }
-#ifdef GNOME_ENABLE_DEBUG
-  /* If we didn't find the button, complain */
-  g_warning("Button number %d does not appear to exist\n", button); 
-#endif
-}
-
 
 static void
 gnome_dialog_button_clicked (GtkWidget   *button, 
@@ -386,41 +355,8 @@ gnome_dialog_button_clicked (GtkWidget   *button,
      and then destroy the dialog themselves too. */
 
   if (self_destruct) {
-#ifdef GNOME_ENABLE_DEBUG
-    g_print("self_destruct set, closing dialog.\n");
-    fflush(stdout);
-#endif
-#if 0
-    gnome_dialog_close(GNOME_DIALOG(dialog));
-#endif
-    gtk_widget_hide(dialog);
     gtk_widget_destroy(dialog);
   }
-}
-
-static gint gnome_dialog_key_pressed (GtkWidget * d, GdkEventKey * e)
-{
-  g_return_val_if_fail(GNOME_IS_DIALOG(d), TRUE);
-
-  if(e->keyval == GDK_Escape)
-    {
-#ifdef GNOME_ENABLE_DEBUG
-      g_print("Escape pressed, closing dialog\n");
-      fflush(stdout);
-#endif
-      g_warning("Escape accelerator temporarily disabled.\n");
-#if 0
-      gnome_dialog_close(GNOME_DIALOG(d));
-#endif
-      return TRUE; /* Stop the event? is this TRUE or FALSE? */
-    } 
-
-  /* Have to call parent's handler, or the widget wouldn't get any 
-     key press events. Note that this is NOT done if the dialog
-     may have been destroyed. */
-  if (GTK_WIDGET_CLASS(parent_class)->key_press_event)
-    return (* (GTK_WIDGET_CLASS(parent_class)->key_press_event))(d, e);
-  else return FALSE; /* ??? */
 }
 
 static void gnome_dialog_destroy (GtkObject *dialog)
@@ -430,31 +366,10 @@ static void gnome_dialog_destroy (GtkObject *dialog)
 
   g_list_free(GNOME_DIALOG (dialog)->buttons);
 
-  if (GNOME_DIALOG(dialog)->accelerators) 
-    gtk_accelerator_table_unref(GNOME_DIALOG(dialog)->accelerators);
-
   if (GTK_OBJECT_CLASS(parent_class)->destroy)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dialog);
 }
 
-void gnome_dialog_close(GnomeDialog * dialog)
-{
-  gboolean delete_handled = FALSE;
-  
-  g_return_if_fail(dialog != NULL);
-  g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  gtk_signal_emit_by_name (GTK_OBJECT (dialog), "delete_event",
-			   NULL, &delete_handled);
-
-  if (!delete_handled) {
-#ifdef GNOME_ENABLE_DEBUG
-    g_print("delete_event not handled, destroying dialog.\n");
-    fflush(stdout);
-#endif
-    gtk_widget_hide(GTK_WIDGET(dialog));
-    gtk_widget_destroy (GTK_WIDGET (dialog));
-  }
-}
 
 

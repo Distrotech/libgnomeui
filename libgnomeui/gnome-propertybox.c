@@ -311,7 +311,13 @@ help (GnomePropertyBox *property_box)
 static void
 just_close (GnomePropertyBox *property_box)
 {
-  gnome_dialog_close(GNOME_DIALOG(property_box));
+	int delete_handled = FALSE;
+
+	gtk_signal_emit_by_name (GTK_OBJECT (property_box), "delete_event",
+				 NULL, &delete_handled);
+	if (!delete_handled) {
+		gtk_widget_destroy (GTK_WIDGET (property_box));
+	}
 }
 
 static void
