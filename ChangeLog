@@ -1,3 +1,9 @@
+2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-app.c (gnome_app_add_toolbar): Fix this
+	to have consistent toolbar sizes. Patch from Rodney Dawes
+	(dobey at free fr). Fixes bug #106342
+	
 2003-05-19  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-ui-init.c: (libgnomeui_segv_handle): Install
