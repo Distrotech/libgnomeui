@@ -363,10 +363,36 @@ void
 gnome_canvas_render_svp (GnomeCanvasBuf *buf, ArtSVP *svp, guint32 rgba)
 {
 	guint32 fg_color, bg_color;
+	int alpha;
 
 	if (buf->is_bg) {
 		bg_color = buf->bg_color;
-		fg_color = rgba >> 8; /* FIXME: this needs to be a composite */
+		alpha = rgba & 0xff;
+		if (alpha == 0xff)
+			fg_color = rgba >> 8;
+		else {
+			/* composite over background color */
+			int bg_r, bg_g, bg_b;
+			int fg_r, fg_g, fg_b;
+			int tmp;
+
+			bg_r = bg_color & 0xff;
+			fg_r = (rgba >> 8) & 0xff;
+			tmp = (fg_r - bg_r) * alpha;
+			fg_r = bg_r + ((tmp + (tmp >> 8) + 0x80) >> 8);
+
+			bg_g = (bg_color >> 8) & 0xff;
+			fg_g = (rgba >> 16) & 0xff;
+			tmp = (fg_g - bg_g) * alpha;
+			fg_g = bg_g + ((tmp + (tmp >> 8) + 0x80) >> 8);
+
+			bg_b = (bg_color >> 16) & 0xff;
+			fg_b = (rgba >> 24) & 0xff;
+			tmp = (fg_b - bg_b) * alpha;
+			fg_b = bg_b + ((tmp + (tmp >> 8) + 0x80) >> 8);
+
+			fg_color = (fg_r << 16) | (fg_g << 8) | fg_b;
+		}
 		art_rgb_svp_aa (svp,
 				buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
 				fg_color, bg_color,
