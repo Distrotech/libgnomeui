@@ -1,3 +1,8 @@
+Sun Apr 30 01:21:16 2000  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.c:  push result after reset/calc so that double
+	  clicking CE/C actually clears state.  plus it's nicer code.
+
 Sun Apr 30 00:16:08 2000  George Lebl <jirka@5z.com>
 
 	* gnome-calculator.c: fix segfault when pressing equals on no stack,

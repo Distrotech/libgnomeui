@@ -567,12 +567,8 @@ reset_calc(GtkWidget *w, gpointer data)
 	gc->error = FALSE;
 
 	gc->add_digit = TRUE;
-
-	gtk_widget_queue_draw (gc->display);
-
-	gtk_signal_emit(GTK_OBJECT(gc),
-			gnome_calculator_signals[RESULT_CHANGED_SIGNAL],
-			gc->result);
+	push_input(gc);
+	set_result(gc);
 
 	unselect_invert(gc);
 }
@@ -586,7 +582,13 @@ clear_calc(GtkWidget *w, gpointer data)
 
 	/* if in add digit mode, just clear the number, otherwise clear
 	 * state as well */
-	if(!gc->add_digit) {
+	if(gc->add_digit) {
+		if(gc->stack) {
+			CalculatorStack *stack=gc->stack->data;
+			if(stack->type == CALCULATOR_NUMBER)
+				stack_pop(&gc->stack);
+		}
+	} else {
 		while(gc->stack)
 			stack_pop(&gc->stack);
 	}
@@ -597,12 +599,8 @@ clear_calc(GtkWidget *w, gpointer data)
 	gc->invert = FALSE;
 
 	gc->add_digit = TRUE;
-
-	gtk_widget_queue_draw (gc->display);
-
-	gtk_signal_emit(GTK_OBJECT(gc),
-			gnome_calculator_signals[RESULT_CHANGED_SIGNAL],
-			gc->result);
+	push_input(gc);
+	set_result(gc);
 
 	unselect_invert(gc);
 }
