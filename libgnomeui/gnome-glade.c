@@ -602,6 +602,45 @@ pbox_change_page(GtkWidget *child, GtkNotebook *notebook)
 }
 
 static void
+pbox_page_mapped (GtkWidget *page, GtkAccelGroup *accel_group)
+{
+	GtkWidget *dialog = gtk_widget_get_toplevel (GTK_WIDGET (page));
+
+	gtk_window_add_accel_group (GTK_WINDOW (dialog), accel_group);
+}
+
+static void
+pbox_page_unmapped (GtkWidget *page, GtkAccelGroup *accel_group)
+{
+	GtkWidget *dialog = gtk_widget_get_toplevel (GTK_WIDGET (page));
+
+	gtk_window_remove_accel_group (GTK_WINDOW (dialog), accel_group);
+}
+
+static void
+pbox_page_destroyed (GtkWidget *page, GtkAccelGroup *accel_group)
+{
+	gtk_accel_group_unref (accel_group);
+}
+
+static void pbox_page_setup_signals (GtkWidget *page, GtkAccelGroup *accel)
+{
+	gtk_signal_connect (GTK_OBJECT (page),
+			    "map",
+			    GTK_SIGNAL_FUNC (pbox_page_mapped),
+			    accel);
+	gtk_signal_connect (GTK_OBJECT (page),
+			    "unmap",
+			    GTK_SIGNAL_FUNC (pbox_page_unmapped),
+			    accel);
+	gtk_signal_connect (GTK_OBJECT (page),
+			    "destroy",
+			    GTK_SIGNAL_FUNC (pbox_page_destroyed),
+			    accel);
+}
+
+
+static void
 propbox_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 			const char *longname)
 {
@@ -617,10 +656,15 @@ propbox_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 
 	for (tmp = ninfo->children; tmp; tmp = tmp->next) {
 		GladeWidgetInfo *cinfo = tmp->data;
-		GtkWidget *child = glade_xml_build_widget (xml,cinfo,longname);
+		GtkWidget *child;
 		GList *tmp2;
-		GladeAttribute *attr = NULL;;
+		GladeAttribute *attr = NULL;
+		GtkAccelGroup *accel;
 
+		accel = glade_xml_push_accel(xml);
+		child = glade_xml_build_widget (xml,cinfo,longname);
+		pbox_page_setup_signals(child, accel);
+		glade_xml_pop_accel(xml);
 		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
 			attr = tmp2->data;
 			if (!strcmp(attr->name, "child_name"))
