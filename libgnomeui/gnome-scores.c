@@ -89,6 +89,8 @@ gnome_scores_new (  guint n_scores,
 	gchar     	*tmp2;
 	int i;
 
+  	gtk_window_set_policy (GTK_WINDOW(gs), FALSE, FALSE, TRUE);
+  
 	gs->logo = 0;
 	gs->but_clear = 0;
 	gs->n_scores = n_scores;

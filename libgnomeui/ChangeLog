@@ -1,5 +1,10 @@
 1998-02-26 Arturo Espinosa  <arturo@nuclecu.unam.mx>
 
+        * gnome-scores.c: Set window policy for the score dialog so that it
+	                  doesn't shrink nor grow.
+
+1998-02-26 Arturo Espinosa  <arturo@nuclecu.unam.mx>
+
         * gnome-scores.c: The scores dialog now uses a stock button for OK.
 
 1998-02-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
