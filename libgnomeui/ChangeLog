@@ -1,3 +1,8 @@
+2001-12-21  jacob berkman  <jacob@ximian.com>
+
+	* gnome_segv.c (main): export an env var to tell bug-buddy that we
+	are a gnome 2 app.
+
 2001-12-21  Mark McLoughlin  <mark@skynet.ie>
 
 	* gnome-entry.c: (build_gconf_key): escape app_id before

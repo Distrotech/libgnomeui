@@ -26,8 +26,8 @@
 
 /* needed for sigaction and friends under 'gcc -ansi -pedantic' on 
  * GNU/Linux */
-#ifndef _POSIX_SOURCE
-#  define _POSIX_SOURCE 1
+#ifndef _GNU_SOURCE
+#  define _GNU_SOURCE 1
 #endif
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -171,7 +171,11 @@ int main(int argc, char *argv[])
                                  bug_buddy_path, appname, getppid(), 
                                  app_version, bb_sm_disable 
                                  ? "--sm-disable" : "");
-
+#ifdef HAVE_SETENV
+      setenv ("BUG_BUDDY_GNOME_VERSION", "2.0 (" VERSION ")", 1);
+#else
+      putenv ("BUG_BUDDY_GNOME_VERSION=2.0 (" VERSION ")");
+#endif
       retval = system(exec_str);
       g_free(exec_str);
       if (retval == -1 || retval == 127)
