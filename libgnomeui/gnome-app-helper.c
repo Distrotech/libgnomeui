@@ -144,9 +144,9 @@ static GnomeUIInfo menu_defaults[] = {
           GNOME_APP_PIXMAP_STOCK, GTK_STOCK_CLOSE,
           GNOME_KEY_NAME_CLOSE, GNOME_KEY_MOD_CLOSE, NULL },
 	/* Exit */
-        { GNOME_APP_UI_ITEM, N_("E_xit"), N_("Exit the program"),
+        { GNOME_APP_UI_ITEM, N_("_Quit"), N_("Quit the application"),
           NULL, NULL, NULL, GNOME_APP_PIXMAP_STOCK,
-	  GTK_STOCK_QUIT, GNOME_KEY_NAME_EXIT, GNOME_KEY_MOD_EXIT,
+	  GTK_STOCK_QUIT, GNOME_KEY_NAME_QUIT, GNOME_KEY_MOD_QUIT,
 	    NULL },
 	/*
 	 * The "Edit" menu
@@ -299,7 +299,7 @@ static gchar *menu_names[] =
   "print",
   "print-setup",
   "close",
-  "exit",
+  "quit",
   "cut",
   /* 10 */
   "copy",

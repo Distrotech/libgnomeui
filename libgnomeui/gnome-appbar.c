@@ -312,7 +312,6 @@ gnome_appbar_get_response    (GnomeAppBar * appbar)
 {
   g_return_val_if_fail(appbar != NULL, NULL);
   g_return_val_if_fail(appbar->_priv->interactive, NULL);
-  g_return_val_if_fail(appbar->_priv->prompt != NULL, NULL);
 
   /* This returns an allocated string. */
   return gtk_editable_get_chars(GTK_EDITABLE(appbar->_priv->status),

@@ -52,8 +52,17 @@
 /* These are keybindings, in GnomeUIInfo format. USE THEM OR DIE! 
    Add to the list as well..
 */
-#define GNOME_KEY_NAME_EXIT 	        'q'
-#define GNOME_KEY_MOD_EXIT	        (GDK_CONTROL_MASK)
+
+#define GNOME_KEY_NAME_QUIT 	        'q'
+#define GNOME_KEY_MOD_QUIT	        (GDK_CONTROL_MASK)
+
+#ifndef GNOME_DISABLE_DEPRECATED
+
+#define GNOME_KEY_NAME_EXIT	GNOME_KEY_NAME_QUIT
+#define GNOME_KEY_MOD_EXIT	GNOME_KEY_MOD_QUIT
+
+#endif
+
 #define GNOME_KEY_NAME_CLOSE 	        'w'
 #define	GNOME_KEY_MOD_CLOSE	        (GDK_CONTROL_MASK)
 

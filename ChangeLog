@@ -1,3 +1,14 @@
+2002-04-29  Glynn Foster  <glynn.foster@sun.com>
+
+	* libgnomeui/gnome-app-helper.c: Change to use the HIG
+	  recommendation of Quit instead of Exit.
+	* libgnomeui/gnome-app-helper.h: Add compatibility defines
+	  for above changes.
+	* libgnomeui/gnome-uidefs.h:  Add compatibility defines for
+	  above changes.
+	* libgnomeui/gnome-appbar.c: (gnome_appbar_get_response): 
+	  Remove an g_return_val_if_fail which is not needed.
+
 2002-04-27  Simos Xenitellis  <simos@hellug.gr>
 
 	* configure.in: Added Greek (el) to ALL_LINGUAS. 
