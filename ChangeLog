@@ -1,3 +1,8 @@
+2003-01-06  Arvind Samptur <arvind.samptur@wipro.com>
+	* libgnomeui/gnome-icon-entry.c:
+	(gnome_icon_entry_instance_init) Don't set the modality
+	for file entry. 
+
 2002-12-24  Sebastian Rittau  <srittau@jroger.in-berlin.de>
 
 	* libgnomeui/gnome-app.c (gnome_app_class_init): Make app_id a

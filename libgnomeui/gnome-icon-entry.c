@@ -1008,9 +1008,6 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 			    _("Icon path"),
 			    _("Here you should enter the name of the directory "
 			      "where icon images are located."));
-	/*BORPORP */
-	gnome_file_entry_set_modal (GNOME_FILE_ENTRY (ientry->_priv->fentry),
-				    TRUE);
 	gtk_widget_ref (ientry->_priv->fentry);
 	g_signal_connect_after (ientry->_priv->fentry, "browse_clicked",
 				G_CALLBACK (browse_clicked),
