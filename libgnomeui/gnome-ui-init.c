@@ -68,23 +68,31 @@ static void gnome_rc_parse(gchar *command)
 	
 	/* <gnomedatadir>/gtkrc */
 	file = gnome_datadir_file("gtkrc");
-	gtk_rc_parse (file);
-	g_free (file);
+	if (file){
+		gtk_rc_parse (file);
+		g_free (file);
+	}
 
 	/* <gnomedatadir>/<progname> */
 	file = gnome_datadir_file(apprc);
-	gtk_rc_parse (file);
-	g_free (file);
+	if (file){
+		gtk_rc_parse (file);
+		g_free (file);
+	}
 	
 	/* ~/.gnome/gtkrc */
 	file = gnome_util_home_file("gtkrc");
-	gtk_rc_parse (file);
-	g_free (file);
+	if (file){
+		gtk_rc_parse (file);
+		g_free (file);
+	}
 	
 	/* ~/.gnome/<progname> */
 	file = gnome_util_home_file(apprc);
-	gtk_rc_parse (file);
-	g_free (file);
+	if (file){
+		gtk_rc_parse (file);
+		g_free (file);
+	}
 	
 	g_free (apprc);
 }
