@@ -86,8 +86,8 @@ typedef struct _GnomeUIInfo GnomeUIInfo;
                                NULL, NULL, (GnomeUIPixmapType)0, NULL, 0, \
                                (GdkModifierType)0, NULL}
 #define GNOMEUIINFO_JUSTIFY_RIGHT   {GNOME_APP_UI_JUSTIFY_RIGHT, \
-                                     NULL, NULL, NULL, NULL, NULL, 0,\
-                                     (GnomeUIPixmapType)0, '\0',       \
+                                     NULL, NULL, NULL, NULL, NULL, \
+                                     (GnomeUIPixmapType)0, NULL, 0, \
                                      (GdkModifierType)0, NULL}
 
 #define GNOMEUIINFO_ITEM(label, tip, cb, xpm) \
