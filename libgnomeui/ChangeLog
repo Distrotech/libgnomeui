@@ -1,5 +1,10 @@
 1999-04-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-init.c (gnome_add_gtk_arg_callback): Use the macro correctly.
+
+	* gnome-popup-menu.c (gnome_popup_menu_get_accel_group): Only use
+	GTK 1.2.1 features if we have GTK 1.2.1
+
 	* gnome-app-helper.c (create_help_entries): g_free temporary
 	variable. 
 

@@ -171,7 +171,11 @@ gnome_popup_menu_get_accel_group(GtkMenu *menu)
 	g_return_val_if_fail (menu != NULL, NULL);
         g_return_val_if_fail (GTK_IS_MENU (menu), NULL);
 
+#ifdef GTK_CHECK_VERSION(1,2,1)
         return gtk_menu_get_accel_group (menu);
+#else
+	return NULL;
+#endif
 }
 
 /* Callback used when a button is pressed in a widget attached to a popup menu.  It decides whether
