@@ -94,8 +94,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-less.c			\
 	gnome-pixmap.c			\
         gnome-winhints.c		\
-        gnome-paper-selector.c		\
-	gnome-unit-spinner.c		\
 	gnometypes.c			\
 	gtk-clock.c			\
 	gtkdial.c			\
@@ -139,12 +137,10 @@ gnome_headers = \
 	gnome-init.h			\
 	gnome-less.h			\
 	gnome-macros.h			\
-        gnome-paper-selector.h		\
 	gnome-pixmap.h			\
 	gnome-stock-icons.h		\
 	gnome-types.h			\
 	gnome-uidefs.h			\
-	gnome-unit-spinner.h		\
         gnome-winhints.h		\
 	gtkdial.h			\
 	gtk-clock.h			\

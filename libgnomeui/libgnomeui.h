@@ -54,10 +54,6 @@
 #include <libgnomeui/gnome-init.h>
 #include <libgnomeui/gnome-less.h>
 #include <libgnomeui/gnome-macros.h>
-/* Considering moving this to gnome-print, so this file 
-   is deprecated but the API isn't */
-#include <libgnomeui/gnome-paper-selector.h>
-#include <libgnomeui/gnome-unit-spinner.h>
 #include <libgnomeui/gnome-pixmap.h>
 #include <libgnomeui/gnome-types.h>
 #include <libgnomeui/gnome-stock-icons.h>
