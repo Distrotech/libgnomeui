@@ -41,6 +41,9 @@
 #include <libgnomevfs/gnome-vfs-utils.h>
 #include "gnome-vfs-util.h"
 #include "gnome-thumbnail.h"
+#include "gnome-gconf-ui.h"
+#include <gconf/gconf.h>
+#include <gconf/gconf-client.h>
 
 #ifdef HAVE_LIBJPEG
 GdkPixbuf * _gnome_thumbnail_load_scaled_jpeg (const char *uri,
@@ -73,6 +76,8 @@ struct _GnomeThumbnailFactoryPrivate {
   pthread_mutex_t lock;
 
   GHashTable *scripts_hash;
+  guint thumbnailers_notify;
+  guint reread_scheduled;
 };
 
 struct ThumbnailInfo {
@@ -105,6 +110,7 @@ gnome_thumbnail_factory_finalize (GObject *object)
 {
   GnomeThumbnailFactory *factory;
   GnomeThumbnailFactoryPrivate *priv;
+  GConfClient *client;
   
   factory = GNOME_THUMBNAIL_FACTORY (object);
 
@@ -112,6 +118,18 @@ gnome_thumbnail_factory_finalize (GObject *object)
   
   g_free (priv->application);
   priv->application = NULL;
+
+  if (priv->reread_scheduled != 0) {
+    g_source_remove (priv->reread_scheduled);
+    priv->reread_scheduled = 0;
+  }
+
+  if (priv->thumbnailers_notify != 0) {
+    client = gconf_client_get_default ();
+    gconf_client_notify_remove (client, priv->thumbnailers_notify);
+    priv->thumbnailers_notify = 0;
+    g_object_unref (client);
+  }
   
   if (priv->existing_thumbs)
     {
@@ -163,84 +181,169 @@ md5_equal (gconstpointer  a,
   return TRUE;
 }
 
-static void
-read_scripts_file (GnomeThumbnailFactory *factory, const char *file)
-{
-  FILE *f;
-  char buf[1024];
-  char *p;
-  gchar **mime_types;
-  int i;
-    
-  f = fopen (file, "r");
-
-  if (f)
-    {
-      while (fgets (buf, 1024, f) != NULL)
-	{
-	  if (buf[0] == '#')
-	    continue;
-
-	  p = strchr (buf, ':');
-
-	  if (p == NULL)
-	    continue;
-
-	  *p++ = 0;
-	  while (g_ascii_isspace (*p))
-	    p++;
-	  
-	  mime_types = g_strsplit (buf, ",", 0);
-
-	  for (i = 0; mime_types[i] != NULL; i++)
-	    g_hash_table_insert (factory->priv->scripts_hash,
-				 mime_types[i], g_strdup (p));
-
-	  /* The mimetype strings are owned by the hash table now */
-	  g_free (mime_types);
-	}
-      fclose (f);
-    }
-}
-
-static void
-read_scripts (GnomeThumbnailFactory *factory)
+/* Must be called on main thread */
+static GHashTable *
+read_scripts (void)
 {
   char *file;
-  
-  read_scripts_file (factory, SYSCONFDIR "/gnome/thumbnailrc");
+  GHashTable *scripts_hash;
+  GConfClient *client;
+  GSList *subdirs, *l;
+  char *subdir, *enable, *escape, *commandkey, *command, *mimetype;
 
-  file = g_build_filename (g_get_home_dir (),
-			   GNOME_DOT_GNOME,
-			   "thumbnailrc",
-			   NULL);
-  read_scripts_file (factory, file);
-  g_free (file);
+  client = gconf_client_get_default ();
+
+  if (gconf_client_get_bool (client,
+			     "/desktop/gnome/thumbnailers/disable_all",
+			     NULL))
+    {
+      g_object_unref (G_OBJECT (client));
+      return NULL;
+    }
+  
+  scripts_hash = g_hash_table_new_full (g_str_hash,
+					g_str_equal,
+					g_free, g_free);
+
+  
+  subdirs = gconf_client_all_dirs (client, "/desktop/gnome/thumbnailers", NULL);
+
+  for (l = subdirs; l != NULL; l = l->next)
+    {
+      subdir = l->data;
+
+      enable = g_strdup_printf ("%s/enable", subdir);
+      if (gconf_client_get_bool (client,
+				 enable,
+				 NULL))
+	{
+	  commandkey = g_strdup_printf ("%s/command", subdir);
+	  command = gconf_client_get_string (client, commandkey, NULL);
+	  g_free (commandkey);
+
+	  if (command != NULL) {
+	    mimetype = strrchr (subdir, '/');
+	    if (mimetype != NULL)
+	      {
+		mimetype++; /* skip past slash */
+		
+		/* Convert '@' to slash in mimetype */
+		escape = strchr (mimetype, '@');
+		if (escape != NULL)
+		  *escape = '/';
+		
+		g_hash_table_insert (scripts_hash,
+				     g_strdup (mimetype), command);
+	      }
+	    else
+	      {
+		g_free (command);
+	      }
+	  }
+	}
+      g_free (enable);
+      
+      g_free (subdir);
+    }
+  
+  g_slist_free(subdirs);
+
+  g_object_unref (G_OBJECT (client));
+  
+  return scripts_hash;
 }
+
+
+/* Must be called on main thread */
+static void
+gnome_thumbnail_factory_reread_scripts (GnomeThumbnailFactory *factory)
+{
+  GnomeThumbnailFactoryPrivate *priv = factory->priv;
+  GHashTable *scripts_hash;
+
+  scripts_hash = read_scripts ();
+
+  pthread_mutex_lock (&priv->lock);
+
+  if (priv->scripts_hash != NULL)
+    g_hash_table_destroy (priv->scripts_hash);
+  
+  priv->scripts_hash = scripts_hash;
+  
+  pthread_mutex_unlock (&priv->lock);
+}
+
+static gboolean
+reread_idle_callback (gpointer user_data)
+{
+  GnomeThumbnailFactory *factory = user_data;
+  GnomeThumbnailFactoryPrivate *priv = factory->priv;
+
+  gnome_thumbnail_factory_reread_scripts (factory);
+
+  pthread_mutex_lock (&priv->lock);
+  priv->reread_scheduled = 0;
+  pthread_mutex_unlock (&priv->lock);
+   
+  return FALSE;
+}
+
+static void
+schedule_reread (GConfClient* client,
+		 guint cnxn_id,
+		 GConfEntry *entry,
+		 gpointer user_data)
+{
+  GnomeThumbnailFactory *factory = user_data;
+  GnomeThumbnailFactoryPrivate *priv = factory->priv;
+
+  pthread_mutex_lock (&priv->lock);
+
+  if (priv->reread_scheduled == 0)
+    {
+      priv->reread_scheduled = g_idle_add (reread_idle_callback,
+					   factory);
+    }
+  
+  pthread_mutex_unlock (&priv->lock);
+}
+
 
 static void
 gnome_thumbnail_factory_instance_init (GnomeThumbnailFactory *factory)
 {
+  GConfClient *client;
+  GnomeThumbnailFactoryPrivate *priv;
+  
   factory->priv = g_new0 (GnomeThumbnailFactoryPrivate, 1);
 
-  factory->priv->size = GNOME_THUMBNAIL_SIZE_NORMAL;
-  factory->priv->application = g_strdup ("gnome-thumbnail-factory");
-  
-  factory->priv->existing_thumbs = g_hash_table_new_full (md5_hash,
-							  md5_equal,
-							  g_free, thumbnail_info_free);
-  factory->priv->failed_thumbs = g_hash_table_new_full (md5_hash,
-							md5_equal,
-							g_free, NULL);
-  
-  factory->priv->scripts_hash = g_hash_table_new_full (g_str_hash,
-						       g_str_equal,
-						       g_free, g_free);
+  priv = factory->priv;
 
-
-  read_scripts (factory);
+  priv->size = GNOME_THUMBNAIL_SIZE_NORMAL;
+  priv->application = g_strdup ("gnome-thumbnail-factory");
+  
+  priv->existing_thumbs = g_hash_table_new_full (md5_hash,
+						 md5_equal,
+						 g_free, thumbnail_info_free);
+  priv->failed_thumbs = g_hash_table_new_full (md5_hash,
+					       md5_equal,
+					       g_free, NULL);
+  
+  priv->scripts_hash = NULL;
   
   pthread_mutex_init (&factory->priv->lock, NULL);
+
+  _gnomeui_gconf_lazy_init ();
+
+  gnome_thumbnail_factory_reread_scripts (factory);
+
+  client = gconf_client_get_default ();
+
+  priv->thumbnailers_notify = gconf_client_notify_add (client, "/desktop/gnome/thumbnailers",
+						       schedule_reread, factory, NULL,
+						       NULL);
+
+  g_object_unref (G_OBJECT (client));
 }
 
 static void
@@ -259,6 +362,8 @@ gnome_thumbnail_factory_class_init (GnomeThumbnailFactoryClass *class)
  *
  * Creates a new #GnomeThumbnailFactory.
  *
+ * This function must be called on the main thread.
+ * 
  * Return value: a new #GnomeThumbnailFactory
  **/
 GnomeThumbnailFactory *
@@ -643,7 +748,8 @@ gnome_thumbnail_factory_can_thumbnail (GnomeThumbnailFactory *factory,
   
   if (mime_type != NULL &&
       (mimetype_supported_by_gdk_pixbuf (mime_type) ||
-       g_hash_table_lookup (factory->priv->scripts_hash, mime_type)))
+       (factory->priv->scripts_hash != NULL &&
+	g_hash_table_lookup (factory->priv->scripts_hash, mime_type))))
     {
       return !gnome_thumbnail_factory_has_valid_failed_thumbnail (factory,
 								  uri,
@@ -754,8 +860,11 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
     size = 256;
 
   pixbuf = NULL;
+
+  script = NULL;
+  if (factory->priv->scripts_hash != NULL)
+    script = g_hash_table_lookup (factory->priv->scripts_hash, mime_type);
   
-  script = g_hash_table_lookup (factory->priv->scripts_hash, mime_type);
   if (script)
     {
       int fd;

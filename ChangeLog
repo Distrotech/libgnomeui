@@ -1,3 +1,8 @@
+2003-01-07  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-thumbnail.c:
+	Move thumbnail config to gconf.
+
 2003-01-06  Arvind Samptur <arvind.samptur@wipro.com>
 	* libgnomeui/gnome-icon-entry.c:
 	(gnome_icon_entry_instance_init) Don't set the modality
