@@ -214,7 +214,7 @@ position_popup (GnomeDateEdit *gde)
 	gint bwidth, bheight;
 	GtkRequisition req;
 
-	gtk_widget_get_child_requisition (gde->_priv->cal_popup, &req);
+	gtk_widget_size_request (gde->_priv->cal_popup, &req);
 
 	gdk_window_get_origin (gde->_priv->date_button->window, &x, &y);
 	gdk_window_get_size (gde->_priv->date_button->window, &bwidth, &bheight);
@@ -234,12 +234,15 @@ position_popup (GnomeDateEdit *gde)
 static void
 select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 {
-	struct tm mtm;
+	struct tm mtm = {0};
 	GdkCursor *cursor;
 
         /* This code is pretty much just copied from gtk_date_edit_get_date */
       	sscanf (gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry)), "%d/%d/%d",
 		&mtm.tm_mon, &mtm.tm_mday, &mtm.tm_year); /* FIXME: internationalize this - strptime()*/
+
+	mtm.tm_mon = CLAMP (mtm.tm_mon, 1, 12);
+	mtm.tm_mday = CLAMP (mtm.tm_mday, 1, 31);
         
         mtm.tm_mon--;
 
@@ -760,6 +763,9 @@ gnome_date_edit_get_time (GnomeDateEdit *gde)
 	
 	sscanf (gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry)), "%d/%d/%d",
 		&tm.tm_mon, &tm.tm_mday, &tm.tm_year); /* FIXME: internationalize this - strptime()*/
+
+	tm.tm_mon = CLAMP (tm.tm_mon, 1, 12);
+	tm.tm_mday = CLAMP (tm.tm_mday, 1, 31);
 
 	tm.tm_mon--;
 

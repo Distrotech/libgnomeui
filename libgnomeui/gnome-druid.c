@@ -594,10 +594,20 @@ gnome_druid_next_callback (GtkWidget *button, GnomeDruid *druid)
 			return;
 
 		/* Make sure that we have a next list item */
-		/* FIXME: we want to find the next VISIBLE one... */
-		list = g_list_find (druid->_priv->children, druid->_priv->current);
-		g_return_if_fail (list->next != NULL);
-		gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->next->data));
+		list = g_list_find (druid->_priv->children,
+				    druid->_priv->current);
+		/* this would be a bug */
+		g_assert (list != NULL);
+
+		list = list->next;
+		while (list != NULL &&
+		        ! GTK_WIDGET_VISIBLE (list->data))
+			list = list->next;
+
+		if ( ! list)
+			return;
+
+		gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->data));
 	} else {
 		gnome_druid_page_finish (druid->_priv->current);
 	}

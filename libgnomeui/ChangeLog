@@ -1,3 +1,12 @@
+Sun Sep 10 03:29:56 2000  George Lebl <jirka@5z.com>
+
+	* gnome-dateedit.c:  Make sure that input to gtkcalendar is legal
+	  to avoid warnings.  Also use gtk_widget_size_request for the
+	  calendar to make sure that the size is always querried.
+
+	* gnome-druid.c:  When going to the next page find the next
+	  visible page, rather then just any old next page.
+
 2000-09-06  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector.c: Removed all references to actual files and
