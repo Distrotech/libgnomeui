@@ -159,7 +159,7 @@ $(srcdir)/stamp-libgnomeui.defs: @REBUILD@ Makefile.am libgnomeui.defs libgnomeu
 	&& rm -f xgen-gdef \
 	&& echo timestamp > $(@F)
 
-$(srcdir)/gnometypebuiltins.c: @REBUILD@ Makefile.am $(gnome_headers)
+$(srcdir)/gnometypebuiltins.c: @REBUILD@ Makefile.am $(gnome_headers) gnometypebuiltins.h
 	cd $(srcdir) \
 	&& glib-mkenums \
 			--fhead "#include <gobject/genums.h>\n" \
