@@ -5,6 +5,7 @@
 #include <gdk/gdk.h>
 #include <gtk/gtklabel.h>
 #include <gtk/gtkhbox.h>
+#include <gtk/gtksignal.h>
 #include "../intl/libintl.h"
 #include "libgnome/gnome-defs.h"
 #include "gnome-stock.h"
@@ -16,7 +17,7 @@
 #include "../programs/gtt/tb_copy.xpm"
 #include "../programs/gtt/tb_paste.xpm"
 #include "../programs/gtt/tb_properties.xpm"
-#include "../programs/gtt/tb_prop_dis.xpm"
+/* #include "../programs/gtt/tb_prop_dis.xpm" */
 #include "../programs/gtt/tb_unknown.xpm"
 #include "../programs/gtt/tb_exit.xpm"
 #include "gnome-stock-ok.xpm"
@@ -44,7 +45,9 @@ gnome_stock_pixmap_widget_destroy(GtkObject *object)
 	w = GNOME_STOCK_PIXMAP_WIDGET (object);
 	
 	/* free resources */
-	if (w->pixmap) gtk_widget_destroy(GTK_WIDGET(w->pixmap));
+	if (w->regular) gtk_widget_destroy(GTK_WIDGET(w->regular));
+	if (w->disabled) gtk_widget_destroy(GTK_WIDGET(w->disabled));
+	if (w->focused) gtk_widget_destroy(GTK_WIDGET(w->focused));
         if (w->icon) g_free(w->icon);
 
 	if (GTK_OBJECT_CLASS(parent_class)->destroy)
@@ -54,10 +57,52 @@ gnome_stock_pixmap_widget_destroy(GtkObject *object)
 
 
 static void
+gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
+{
+        GnomeStockPixmapWidget *w = GNOME_STOCK_PIXMAP_WIDGET(widget);
+        GtkPixmap *pixmap;
+
+        pixmap = NULL;
+        if (GTK_WIDGET_HAS_FOCUS(widget)) {
+                if (!w->focused) {
+                        w->focused = gnome_stock_pixmap(w->window, w->icon, GNOME_STOCK_PIXMAP_FOCUSED);
+                        gtk_widget_show(GTK_WIDGET(w->focused));
+                }
+                pixmap = w->focused;
+        } else if (!GTK_WIDGET_IS_SENSITIVE(widget)) {
+                if (!w->disabled) {
+                        w->disabled = gnome_stock_pixmap(w->window, w->icon, GNOME_STOCK_PIXMAP_DISABLED);
+                        gtk_widget_show(GTK_WIDGET(w->disabled));
+                }
+                pixmap = w->disabled;
+        } else {
+                if (!w->regular) {
+                        w->regular = gnome_stock_pixmap(w->window, w->icon, GNOME_STOCK_PIXMAP_REGULAR);
+                        gtk_widget_show(GTK_WIDGET(w->regular));
+                }
+                pixmap = w->regular;
+        }
+        if (pixmap == w->pixmap) return;
+        if (w->pixmap) {
+                gtk_container_remove(GTK_CONTAINER(w), GTK_WIDGET(w->pixmap));
+                gtk_widget_queue_draw(widget);
+        }
+        w->pixmap = pixmap;
+        if (pixmap) {
+                gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(w->pixmap));
+                gtk_widget_queue_draw(widget);
+        }
+}
+
+
+
+static void
 gnome_stock_pixmap_widget_class_init(GnomeStockPixmapWidgetClass *klass)
 {
 	GtkObjectClass *object_class = GTK_OBJECT_CLASS(klass);
 	object_class->destroy = gnome_stock_pixmap_widget_destroy;
+        ((GtkWidgetClass *)klass)->state_changed =
+                gnome_stock_pixmap_widget_state_changed;
 }
 
 
@@ -72,8 +117,11 @@ gnome_stock_pixmap_widget_init(GtkObject *obj)
 
         w = GNOME_STOCK_PIXMAP_WIDGET(obj);
         w->icon = NULL;
-        w->pixmap = NULL;
         w->window = NULL;
+        w->pixmap = NULL;
+        w->regular = NULL;
+        w->disabled = NULL;
+        w->focused = NULL;
 }
 
 
@@ -114,10 +162,9 @@ gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon)
         p->icon = g_strdup(icon);
         p->window = window;
 
-        /* TODO: for now I just show the regular pixmap at init time
-           and that's it */
         p->pixmap = gnome_stock_pixmap(window, icon,
                                        GNOME_STOCK_PIXMAP_REGULAR);
+        p->regular = p->pixmap;
         gtk_widget_show(GTK_WIDGET(p->pixmap));
         gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(p->pixmap));
 
@@ -144,7 +191,7 @@ struct _default_entries_data entries_data[] = {
         {GNOME_STOCK_PIXMAP_COPY, GNOME_STOCK_PIXMAP_REGULAR, tb_copy_xpm},
         {GNOME_STOCK_PIXMAP_PASTE, GNOME_STOCK_PIXMAP_REGULAR, tb_paste_xpm},
         {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_REGULAR, tb_properties_xpm},
-        {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_DISABLED, tb_prop_dis_xpm},
+/*         {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_DISABLED, tb_prop_dis_xpm}, */
         {GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, tb_unknown_xpm},
         {GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm},
         {GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm},
@@ -242,6 +289,23 @@ create_pixmap_from_data(GtkWidget *window, GnomeStockPixmapEntryData *data)
 
 
 
+static void
+build_disabled_pixmap(GtkWidget *window, GtkPixmap **inout_pixmap)
+{
+        GdkGC *gc = window->style->bg_gc[0];
+        GdkWindow *pixmap = (*inout_pixmap)->pixmap;
+        gint w, h, x, y;
+
+        gdk_window_get_size(pixmap, &w, &h);
+        for (y = 0; y < h; y ++) {
+                for (x = y % 2; x < w; x += 2) {
+                        gdk_draw_point(pixmap, gc, x, y);
+                }
+        }
+}
+
+
+
 /**********************/
 /* utitlity functions */
 /**********************/
@@ -270,6 +334,13 @@ gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype)
         default:
                 g_assert_not_reached();
                 break;
+        }
+        /* check if we have to draw our own diabled pixmap */
+        /* TODO: should be optimized a bit */
+        if ((entry == lookup(icon, GNOME_STOCK_PIXMAP_REGULAR)) &&
+            (pixmap) &&
+            (0 == strcmp(subtype, GNOME_STOCK_PIXMAP_DISABLED))) {
+                build_disabled_pixmap(window, &pixmap);
         }
         return pixmap;
 }

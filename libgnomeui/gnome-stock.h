@@ -140,6 +140,7 @@ struct _GnomeStockPixmapWidget {
         char *icon;
         GtkWidget *window;    /* needed for style and gdk_pixmap_create... */
         GtkPixmap *pixmap;    /* the pixmap currently shown */
+        GtkPixmap *regular, *disabled, *focused;  /* pixmap cache */
 };
 
 struct _GnomeStockPixmapWidgetClass {
