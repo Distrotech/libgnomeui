@@ -67,11 +67,11 @@ static void gnome_about_display_comments (GdkWindow *win,
 					  const gchar *comments);
 
 
-/* ----------------------------------------------------------------------
-   NAME:	gnome_about_get_type
-   DESCRIPTION:	
-   ---------------------------------------------------------------------- */
-
+/**
+ * gnome_about_get_type:
+ *
+ * Returns the GtkType for the GnomeAbout widget.
+ */
 guint
 gnome_about_get_type ()
 {
@@ -96,32 +96,17 @@ gnome_about_get_type ()
 	return about_type;
 }
 
-/* ----------------------------------------------------------------------
-   NAME:	gnome_about_class_init
-   DESCRIPTION:	
-   ---------------------------------------------------------------------- */
-
 static void
 gnome_about_class_init (GnomeAboutClass *klass)
 {
 }
-
-/* ----------------------------------------------------------------------
-   NAME:	gnome_about_init
-   DESCRIPTION:	
-   ---------------------------------------------------------------------- */
 
 static void
 gnome_about_init (GnomeAbout *about)
 {
 }
 
-/* ----------------------------------------------------------------------
-   NAME:	gnome_about_repaint
-   DESCRIPTION:	
-   ---------------------------------------------------------------------- */
-
-void
+static void
 gnome_about_repaint (GtkWidget *widget, 
 		     GdkEventExpose *event,
 		     GnomeAboutInfo *gai)
@@ -227,7 +212,7 @@ gnome_about_repaint (GtkWidget *widget,
 
 }
 
-void
+static void
 gnome_about_display_comments (GdkWindow *win, 
 			      GdkFont *font,
 			      GdkGC *gc, 
@@ -544,6 +529,13 @@ gnome_about_new (const gchar	*title,
 {
 	GnomeAbout *about;
 
+	g_return_val_if_fail (title != NULL, NULL);
+	g_return_val_if_fail (version != NULL, NULL);
+	g_return_val_if_fail (copyright != NULL, NULL);
+	g_return_val_if_fail (authors != NULL, NULL);
+	g_return_val_if_fail (comments != NULL, NULL);
+	g_return_val_if_fail (logo != NULL, NULL);
+	
 	about = gtk_type_new (gnome_about_get_type ());
 
 	gnome_about_construct(about, title, version, copyright,
