@@ -35,7 +35,7 @@ static void gnome_canvas_image_get_arg    (GtkObject             *object,
 					   GtkArg                *arg,
 					   guint                  arg_id);
 
-static void   gnome_canvas_image_reconfigure (GnomeCanvasItem *item);
+static void   gnome_canvas_image_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static void   gnome_canvas_image_realize     (GnomeCanvasItem *item);
 static void   gnome_canvas_image_unrealize   (GnomeCanvasItem *item);
 static void   gnome_canvas_image_draw        (GnomeCanvasItem *item, GdkDrawable *drawable,
@@ -94,7 +94,7 @@ gnome_canvas_image_class_init (GnomeCanvasImageClass *class)
 	object_class->set_arg = gnome_canvas_image_set_arg;
 	object_class->get_arg = gnome_canvas_image_get_arg;
 
-	item_class->reconfigure = gnome_canvas_image_reconfigure;
+	item_class->update = gnome_canvas_image_update;
 	item_class->realize = gnome_canvas_image_realize;
 	item_class->unrealize = gnome_canvas_image_unrealize;
 	item_class->draw = gnome_canvas_image_draw;
@@ -263,7 +263,7 @@ gnome_canvas_image_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	}
 
 	if (update)
-		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
 
 	if (calc_bounds)
 		recalc_bounds (image);
@@ -308,14 +308,14 @@ gnome_canvas_image_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 }
 
 static void
-gnome_canvas_image_reconfigure (GnomeCanvasItem *item)
+gnome_canvas_image_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
 	GnomeCanvasImage *image;
 
 	image = GNOME_CANVAS_IMAGE (item);
 
-	if (parent_class->reconfigure)
-		(* parent_class->reconfigure) (item);
+	if (parent_class->update)
+		(* parent_class->update) (item, affine, clip_path, flags);
 
 	free_pixmap_and_mask (image);
 
@@ -340,7 +340,7 @@ gnome_canvas_image_realize (GnomeCanvasItem *item)
 		(* parent_class->realize) (item);
 
 	image->gc = gdk_gc_new (item->canvas->layout.bin_window);
-	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
 }
 
 static void

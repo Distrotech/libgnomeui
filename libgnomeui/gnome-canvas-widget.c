@@ -36,7 +36,7 @@ static void gnome_canvas_widget_get_arg    (GtkObject              *object,
 					    GtkArg                 *arg,
 					    guint                   arg_id);
 
-static void   gnome_canvas_widget_reconfigure (GnomeCanvasItem *item);
+static void   gnome_canvas_widget_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static double gnome_canvas_widget_point       (GnomeCanvasItem *item, double x, double y,
 					       int cx, int cy, GnomeCanvasItem **actual_item);
 static void   gnome_canvas_widget_translate   (GnomeCanvasItem *item, double dx, double dy);
@@ -92,7 +92,7 @@ gnome_canvas_widget_class_init (GnomeCanvasWidgetClass *class)
 	object_class->set_arg = gnome_canvas_widget_set_arg;
 	object_class->get_arg = gnome_canvas_widget_get_arg;
 
-	item_class->reconfigure = gnome_canvas_widget_reconfigure;
+	item_class->update = gnome_canvas_widget_update;
 	item_class->point = gnome_canvas_widget_point;
 	item_class->translate = gnome_canvas_widget_translate;
 	item_class->bounds = gnome_canvas_widget_bounds;
@@ -284,7 +284,7 @@ gnome_canvas_widget_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	}
 
 	if (update)
-		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
 
 	if (calc_bounds)
 		recalc_bounds (witem);
@@ -333,14 +333,14 @@ gnome_canvas_widget_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 }
 
 static void
-gnome_canvas_widget_reconfigure (GnomeCanvasItem *item)
+gnome_canvas_widget_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
 	GnomeCanvasWidget *witem;
 
 	witem = GNOME_CANVAS_WIDGET (item);
 
-	if (parent_class->reconfigure)
-		(* parent_class->reconfigure) (item);
+	if (parent_class->update)
+		(* parent_class->update) (item, affine, clip_path, flags);
 
 	if (witem->widget) {
 		if (witem->size_pixels) {

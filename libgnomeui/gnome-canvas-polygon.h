@@ -65,6 +65,9 @@ struct _GnomeCanvasPolygon {
 
 	double width;			/* Width of polygon's outline */
 
+	guint fill_color;		/* Fill color, RGBA */
+	guint outline_color;		/* Outline color, RGBA */
+
 	gulong fill_pixel;		/* Color for fill */
 	gulong outline_pixel;		/* Color for outline */
 

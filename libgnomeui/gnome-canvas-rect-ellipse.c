@@ -47,7 +47,7 @@ static void gnome_canvas_re_get_arg    (GtkObject          *object,
 					GtkArg             *arg,
 					guint               arg_id);
 
-static void gnome_canvas_re_reconfigure (GnomeCanvasItem *item);
+static void gnome_canvas_re_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static void gnome_canvas_re_realize     (GnomeCanvasItem *item);
 static void gnome_canvas_re_unrealize   (GnomeCanvasItem *item);
 static void gnome_canvas_re_translate   (GnomeCanvasItem *item, double dx, double dy);
@@ -110,7 +110,7 @@ gnome_canvas_re_class_init (GnomeCanvasREClass *class)
 	object_class->set_arg = gnome_canvas_re_set_arg;
 	object_class->get_arg = gnome_canvas_re_get_arg;
 
-	item_class->reconfigure = gnome_canvas_re_reconfigure;
+	item_class->update = gnome_canvas_re_update;
 	item_class->realize = gnome_canvas_re_realize;
 	item_class->unrealize = gnome_canvas_re_unrealize;
 	item_class->translate = gnome_canvas_re_translate;
@@ -156,6 +156,7 @@ recalc_bounds (GnomeCanvasRE *re)
 {
 	GnomeCanvasItem *item;
 	double x1, y1, x2, y2;
+	int cx1, cy1, cx2, cy2;
 	double hwidth;
 
 	item = GNOME_CANVAS_ITEM (re);
@@ -172,8 +173,12 @@ recalc_bounds (GnomeCanvasRE *re)
 
 	gnome_canvas_item_i2w (item, &x1, &y1);
 	gnome_canvas_item_i2w (item, &x2, &y2);
-	gnome_canvas_w2c (item->canvas, x1 - hwidth, y1 - hwidth, &item->x1, &item->y1);
-	gnome_canvas_w2c (item->canvas, x2 + hwidth, y2 + hwidth, &item->x2, &item->y2);
+	gnome_canvas_w2c (item->canvas, x1 - hwidth, y1 - hwidth, &cx1, &cy1);
+	gnome_canvas_w2c (item->canvas, x2 + hwidth, y2 + hwidth, &cx2, &cy2);
+	item->x1 = cx1;
+	item->y1 = cy1;
+	item->x2 = cx2;
+	item->y2 = cy2;
 
 	/* Some safety fudging */
 
@@ -275,7 +280,7 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			re->fill_set = TRUE;
 			re->fill_pixel = color.pixel;
 			if (item->canvas->aa)
-				re->fill_rgba =
+				re->fill_color =
 					((color.red & 0xff00) << 16) |
 					((color.green & 0xff00) << 8) |
 					(color.blue & 0xff00) |
@@ -284,7 +289,7 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 				set_gc_foreground (re->fill_gc, re->fill_pixel);
 		} else {
 			re->fill_set = FALSE;
-			re->fill_rgba = 0;
+			re->fill_color = 0;
 		}
 
 		if (item->canvas->aa)
@@ -303,7 +308,7 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			re->outline_set = TRUE;
 			re->outline_pixel = color.pixel;
 			if (item->canvas->aa)
-				re->outline_rgba =
+				re->outline_color =
 					((color.red & 0xff00) << 16) |
 					((color.green & 0xff00) << 8) |
 					(color.blue & 0xff00) |
@@ -312,7 +317,7 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 				set_gc_foreground (re->outline_gc, re->outline_pixel);
 		} else {
 			re->outline_set = FALSE;
-			re->outline_rgba = 0;
+			re->outline_color = 0;
 		}
 
 		break;
@@ -411,14 +416,14 @@ gnome_canvas_re_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 }
 
 static void
-gnome_canvas_re_reconfigure (GnomeCanvasItem *item)
+gnome_canvas_re_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
 	GnomeCanvasRE *re;
 
 	re = GNOME_CANVAS_RE (item);
 
-	if (re_parent_class->reconfigure)
-		(* re_parent_class->reconfigure) (item);
+	if (re_parent_class->update)
+		(* re_parent_class->update) (item, affine, clip_path, flags);
 
 	if (!item->canvas->aa) {
 		set_gc_foreground (re->fill_gc, re->fill_pixel);
@@ -444,7 +449,7 @@ gnome_canvas_re_realize (GnomeCanvasItem *item)
 	re->fill_gc = gdk_gc_new (item->canvas->layout.bin_window);
 	re->outline_gc = gdk_gc_new (item->canvas->layout.bin_window);
 
-	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
 }
 
 static void
@@ -508,7 +513,7 @@ gnome_canvas_re_render (GnomeCanvasItem *item,
 
 		if (buf->is_bg) {
 			bg_color = buf->bg_color;
-			fg_color = re->fill_rgba >> 8; /* FIXME: this needs to be a composite */
+			fg_color = re->fill_color >> 8; /* FIXME: this needs to be a composite */
 			art_rgb_svp_aa (re->fill_svp,
 					buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
 					fg_color, bg_color,
@@ -518,7 +523,7 @@ gnome_canvas_re_render (GnomeCanvasItem *item,
 		} else {
 			art_rgb_svp_alpha (re->fill_svp,
 					   buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
-					   re->fill_rgba,
+					   re->fill_color,
 					   buf->buf, buf->buf_rowstride);
 		}
 	}
@@ -527,7 +532,7 @@ gnome_canvas_re_render (GnomeCanvasItem *item,
 
 		if (buf->is_bg) {
 			bg_color = buf->bg_color;
-			fg_color = re->outline_rgba >> 8; /* FIXME: this needs to be a composite */
+			fg_color = re->outline_color >> 8; /* FIXME: this needs to be a composite */
 			art_rgb_svp_aa (re->outline_svp,
 					buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
 					fg_color, bg_color,
@@ -537,7 +542,7 @@ gnome_canvas_re_render (GnomeCanvasItem *item,
 		} else {
 			art_rgb_svp_alpha (re->outline_svp,
 					   buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
-					   re->outline_rgba,
+					   re->outline_color,
 					   buf->buf, buf->buf_rowstride);
 		}
 	}
@@ -551,7 +556,6 @@ static void gnome_canvas_rect_class_init (GnomeCanvasRectClass *class);
 static void   gnome_canvas_rect_draw   (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y, int width, int height);
 static double gnome_canvas_rect_point  (GnomeCanvasItem *item, double x, double y, int cx, int cy,
 				        GnomeCanvasItem **actual_item);
-static void   gnome_canvas_rect_update (GnomeCanvasItem *item);
 
 
 GtkType
@@ -586,7 +590,6 @@ gnome_canvas_rect_class_init (GnomeCanvasRectClass *class)
 
 	item_class->draw = gnome_canvas_rect_draw;
 	item_class->point = gnome_canvas_rect_point;
-	item_class->update = gnome_canvas_rect_update;
 }
 
 static void
@@ -714,7 +717,7 @@ gnome_canvas_rect_point (GnomeCanvasItem *item, double x, double y, int cx, int 
 	return sqrt (dx * dx + dy * dy);
 }
 
-
+#if 0
 static void
 gnome_canvas_rect_update (GnomeCanvasItem *item)
 {
@@ -827,6 +830,7 @@ gnome_canvas_rect_update (GnomeCanvasItem *item)
 
 	/* FIXME: request repaint */
 }
+#endif
 
 /* Ellipse item */
 
@@ -837,7 +841,6 @@ static void   gnome_canvas_ellipse_draw   (GnomeCanvasItem *item, GdkDrawable *d
 					   int width, int height);
 static double gnome_canvas_ellipse_point  (GnomeCanvasItem *item, double x, double y, int cx, int cy,
 					   GnomeCanvasItem **actual_item);
-static void   gnome_canvas_ellipse_update (GnomeCanvasItem *item);
 
 
 GtkType
@@ -872,7 +875,6 @@ gnome_canvas_ellipse_class_init (GnomeCanvasEllipseClass *class)
 
 	item_class->draw = gnome_canvas_ellipse_draw;
 	item_class->point = gnome_canvas_ellipse_point;
-	item_class->update = gnome_canvas_ellipse_update;
 }
 
 static void
@@ -1014,7 +1016,7 @@ gnome_canvas_gen_ellipse (ArtVpath *vpath, double x0, double y0,
 		vpath[i].y = (y0 + y1) * 0.5 - (y1 - y0) * 0.5 * sin (th);
 	}
 }
-
+#if 0
 static void
 gnome_canvas_ellipse_update (GnomeCanvasItem *item)
 {
@@ -1079,4 +1081,4 @@ gnome_canvas_ellipse_update (GnomeCanvasItem *item)
 
 	/* FIXME: request repaint */
 }
-
+#endif

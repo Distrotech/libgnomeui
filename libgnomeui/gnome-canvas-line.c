@@ -67,7 +67,7 @@ static void gnome_canvas_line_get_arg    (GtkObject            *object,
 					  GtkArg               *arg,
 					  guint                 arg_id);
 
-static void   gnome_canvas_line_reconfigure (GnomeCanvasItem *item);
+static void   gnome_canvas_line_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static void   gnome_canvas_line_realize     (GnomeCanvasItem *item);
 static void   gnome_canvas_line_unrealize   (GnomeCanvasItem *item);
 static void   gnome_canvas_line_draw        (GnomeCanvasItem *item, GdkDrawable *drawable,
@@ -136,7 +136,7 @@ gnome_canvas_line_class_init (GnomeCanvasLineClass *class)
 	object_class->set_arg = gnome_canvas_line_set_arg;
 	object_class->get_arg = gnome_canvas_line_get_arg;
 
-	item_class->reconfigure = gnome_canvas_line_reconfigure;
+	item_class->update = gnome_canvas_line_update;
 	item_class->realize = gnome_canvas_line_realize;
 	item_class->unrealize = gnome_canvas_line_unrealize;
 	item_class->draw = gnome_canvas_line_draw;
@@ -256,6 +256,7 @@ recalc_bounds (GnomeCanvasLine *line)
 {
 	GnomeCanvasItem *item;
 	double x1, y1, x2, y2;
+	int cx1, cx2, cy1, cy2;
 	double dx, dy;
 
 	item = GNOME_CANVAS_ITEM (line);
@@ -274,8 +275,12 @@ recalc_bounds (GnomeCanvasLine *line)
 	dx = dy = 0.0;
 	gnome_canvas_item_i2w (item, &dx, &dy);
 
-	gnome_canvas_w2c (item->canvas, x1 + dx, y1 + dy, &item->x1, &item->y1);
-	gnome_canvas_w2c (item->canvas, x2 + dx, y2 + dy, &item->x2, &item->y2);
+	gnome_canvas_w2c (item->canvas, x1 + dx, y1 + dy, &cx1, &cy1);
+	gnome_canvas_w2c (item->canvas, x2 + dx, y2 + dy, &cx2, &cy2);
+	item->x1 = cx1;
+	item->y1 = cy1;
+	item->x2 = cx2;
+	item->y2 = cy2;
 
 	/* Some safety fudging */
 
@@ -458,7 +463,7 @@ set_line_gc_foreground (GnomeCanvasLine *line)
 	if (!line->gc)
 		return;
 
-	c.pixel = line->pixel;
+	c.pixel = line->fill_pixel;
 	gdk_gc_set_foreground (line->gc, &c);
 }
 
@@ -560,12 +565,12 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	case ARG_FILL_COLOR:
 		gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color);
-		line->pixel = color.pixel;
+		line->fill_pixel = color.pixel;
 		set_line_gc_foreground (line);
 		break;
 
 	case ARG_FILL_COLOR_GDK:
-		line->pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
+		line->fill_pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
 		set_line_gc_foreground (line);
 		break;
 
@@ -661,7 +666,7 @@ gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	case ARG_FILL_COLOR_GDK:
 		color = g_new (GdkColor, 1);
-		color->pixel = line->pixel;
+		color->pixel = line->fill_pixel;
 		gdk_color_context_query_color (line->item.canvas->cc, color);
 		GTK_VALUE_BOXED (*arg) = color;
 		break;
@@ -717,14 +722,14 @@ gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 }
 
 static void
-gnome_canvas_line_reconfigure (GnomeCanvasItem *item)
+gnome_canvas_line_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
 	GnomeCanvasLine *line;
 
 	line = GNOME_CANVAS_LINE (item);
 
-	if (parent_class->reconfigure)
-		(* parent_class->reconfigure) (item);
+	if (parent_class->update)
+		(* parent_class->update) (item, affine, clip_path, flags);
 
 	set_line_gc_foreground (line);
 	set_line_gc_width (line);
@@ -744,7 +749,7 @@ gnome_canvas_line_realize (GnomeCanvasItem *item)
 
 	line->gc = gdk_gc_new (item->canvas->layout.bin_window);
 
-	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
 }
 
 static void

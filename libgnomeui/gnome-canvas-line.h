@@ -82,18 +82,15 @@ struct _GnomeCanvasLine {
 
 	double width;		/* Width of the line */
 
-	gulong pixel;		/* Color for line */
+	guint fill_color;	/* Fill color, RGBA */
+
+	gulong fill_pixel;	/* Color for line */
 
 	GdkBitmap *stipple;	/* Stipple pattern */
 
 	GdkCapStyle cap;	/* Cap style for line */
 	GdkJoinStyle join;	/* Join style for line */
 	GdkLineStyle line_style;/* Style for the line */
-
-	guint width_pixels : 1;	/* Is the width specified in pixels or units? */
-	guint first_arrow : 1;	/* Draw first arrowhead? */
-	guint last_arrow : 1;	/* Draw last arrowhead? */
-	guint smooth : 1;	/* Smooth line (with parabolic splines)? */
 
 	double shape_a;		/* Distance from tip of arrowhead to center */
 	double shape_b;		/* Distance from tip of arrowhead to trailing point, measured along shaft */
@@ -105,6 +102,12 @@ struct _GnomeCanvasLine {
 	int spline_steps;	/* Number of steps in each spline segment */
 
 	GdkGC *gc;		/* GC for drawing line */
+
+	guint width_pixels : 1;	/* Is the width specified in pixels or units? */
+	guint first_arrow : 1;	/* Draw first arrowhead? */
+	guint last_arrow : 1;	/* Draw last arrowhead? */
+	guint smooth : 1;	/* Smooth line (with parabolic splines)? */
+
 };
 
 struct _GnomeCanvasLineClass {

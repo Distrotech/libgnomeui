@@ -59,9 +59,8 @@ struct _GnomeCanvasRE {
 	double x1, y1, x2, y2;		/* Corners of item */
 	double width;			/* Outline width */
 
-	unsigned int fill_set : 1;	/* Is fill color set? */
-	unsigned int outline_set : 1;	/* Is outline color set? */
-	unsigned int width_pixels : 1;	/* Is outline width specified in pixels or units? */
+	guint fill_color;		/* Fill color, RGBA */
+	guint outline_color;		/* Outline color, RGBA */
 
 	gulong fill_pixel;		/* Fill color */
 	gulong outline_pixel;		/* Outline color */
@@ -73,10 +72,15 @@ struct _GnomeCanvasRE {
 	GdkGC *outline_gc;		/* GC for outline */
 
 	/* Antialiased specific stuff follows */
-	guint32 fill_rgba;		/* RGBA color for filling */
+
 	ArtSVP *fill_svp;		/* The SVP for the filled shape */
-	guint32 outline_rgba;		/* RGBA color for outline */
 	ArtSVP *outline_svp;		/* The SVP for the outline shape */
+
+	/* Configuration flags */
+
+	unsigned int fill_set : 1;	/* Is fill color set? */
+	unsigned int outline_set : 1;	/* Is outline color set? */
+	unsigned int width_pixels : 1;	/* Is outline width specified in pixels or units? */
 };
 
 struct _GnomeCanvasREClass {

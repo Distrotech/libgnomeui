@@ -318,7 +318,7 @@ iti_destroy (GtkObject *object)
 }
 
 static void
-iti_reconfigure (GnomeCanvasItem *item)
+iti_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
 }
 
@@ -743,7 +743,7 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 	/* GnomeCanvasItem method overrides */
 	item_class->realize     = iti_realize;
 	item_class->unrealize   = iti_unrealize;
-	item_class->reconfigure = iti_reconfigure;
+	item_class->update      = iti_update;
 	item_class->draw        = iti_draw;
 	item_class->point       = iti_point;
 	item_class->translate   = iti_translate;

@@ -52,7 +52,7 @@ static void gnome_canvas_text_get_arg    (GtkObject            *object,
 					  GtkArg               *arg,
 					  guint                 arg_id);
 
-static void   gnome_canvas_text_reconfigure (GnomeCanvasItem *item);
+static void   gnome_canvas_text_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static void   gnome_canvas_text_realize     (GnomeCanvasItem *item);
 static void   gnome_canvas_text_unrealize   (GnomeCanvasItem *item);
 static void   gnome_canvas_text_draw        (GnomeCanvasItem *item, GdkDrawable *drawable,
@@ -122,7 +122,7 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 	object_class->set_arg = gnome_canvas_text_set_arg;
 	object_class->get_arg = gnome_canvas_text_get_arg;
 
-	item_class->reconfigure = gnome_canvas_text_reconfigure;
+	item_class->update = gnome_canvas_text_update;
 	item_class->realize = gnome_canvas_text_realize;
 	item_class->unrealize = gnome_canvas_text_unrealize;
 	item_class->draw = gnome_canvas_text_draw;
@@ -560,14 +560,14 @@ gnome_canvas_text_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 }
 
 static void
-gnome_canvas_text_reconfigure (GnomeCanvasItem *item)
+gnome_canvas_text_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
 	GnomeCanvasText *text;
 
 	text = GNOME_CANVAS_TEXT (item);
 
-	if (parent_class->reconfigure)
-		(* parent_class->reconfigure) (item);
+	if (parent_class->update)
+		(* parent_class->update) (item, affine, clip_path, flags);
 
 	set_text_gc_foreground (text);
 	set_stipple (text, text->stipple, TRUE);
@@ -587,7 +587,7 @@ gnome_canvas_text_realize (GnomeCanvasItem *item)
 
 	text->gc = gdk_gc_new (item->canvas->layout.bin_window);
 
-	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
 }
 
 static void

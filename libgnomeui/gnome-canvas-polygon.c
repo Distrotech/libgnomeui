@@ -58,7 +58,7 @@ static void gnome_canvas_polygon_get_arg    (GtkObject               *object,
 					     GtkArg                  *arg,
 					     guint                    arg_id);
 
-static void   gnome_canvas_polygon_reconfigure (GnomeCanvasItem *item);
+static void   gnome_canvas_polygon_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static void   gnome_canvas_polygon_realize     (GnomeCanvasItem *item);
 static void   gnome_canvas_polygon_unrealize   (GnomeCanvasItem *item);
 static void   gnome_canvas_polygon_draw        (GnomeCanvasItem *item, GdkDrawable *drawable,
@@ -120,7 +120,7 @@ gnome_canvas_polygon_class_init (GnomeCanvasPolygonClass *class)
 	object_class->set_arg = gnome_canvas_polygon_set_arg;
 	object_class->get_arg = gnome_canvas_polygon_get_arg;
 
-	item_class->reconfigure = gnome_canvas_polygon_reconfigure;
+	item_class->update = gnome_canvas_polygon_update;
 	item_class->realize = gnome_canvas_polygon_realize;
 	item_class->unrealize = gnome_canvas_polygon_unrealize;
 	item_class->draw = gnome_canvas_polygon_draw;
@@ -205,6 +205,7 @@ recalc_bounds (GnomeCanvasPolygon *poly)
 {
 	GnomeCanvasItem *item;
 	double x1, y1, x2, y2;
+	int cx1, cy1, cx2, cy2;
 	double dx, dy;
 
 	item = GNOME_CANVAS_ITEM (poly);
@@ -223,8 +224,12 @@ recalc_bounds (GnomeCanvasPolygon *poly)
 	dx = dy = 0.0;
 	gnome_canvas_item_i2w (item, &dx, &dy);
 
-	gnome_canvas_w2c (item->canvas, x1 + dx, y1 + dy, &item->x1, &item->y1);
-	gnome_canvas_w2c (item->canvas, x2 + dx, y2 + dy, &item->x2, &item->y2);
+	gnome_canvas_w2c (item->canvas, x1 + dx, y1 + dy, &cx1, &cy1);
+	gnome_canvas_w2c (item->canvas, x2 + dx, y2 + dy, &cx2, &cy2);
+	item->x1 = cx1;
+	item->y1 = cy1;
+	item->x2 = cx2;
+	item->y2 = cy2;
 
 	/* Some safety fudging */
 
@@ -456,14 +461,14 @@ gnome_canvas_polygon_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 }
 
 static void
-gnome_canvas_polygon_reconfigure (GnomeCanvasItem *item)
+gnome_canvas_polygon_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
 	GnomeCanvasPolygon *poly;
 
 	poly = GNOME_CANVAS_POLYGON (item);
 
-	if (parent_class->reconfigure)
-		(* parent_class->reconfigure) (item);
+	if (parent_class->update)
+		(* parent_class->update) (item, affine, clip_path, flags);
 
 	set_gc_foreground (poly->fill_gc, poly->fill_pixel);
 	set_gc_foreground (poly->outline_gc, poly->outline_pixel);
@@ -487,7 +492,7 @@ gnome_canvas_polygon_realize (GnomeCanvasItem *item)
 	poly->fill_gc = gdk_gc_new (item->canvas->layout.bin_window);
 	poly->outline_gc = gdk_gc_new (item->canvas->layout.bin_window);
 
-	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
 }
 
 static void

@@ -6,8 +6,8 @@
  *
  * Copyright (C) 1998 The Free Software Foundation
  *
- * Author:
- *   Federico Mena <federico@nuclecu.unam.mx>
+ * Authors: Federico Mena <federico@nuclecu.unam.mx>
+ *          Raph Levien <raph@gimp.org>
  */
 
 /*
@@ -38,6 +38,7 @@
  *
  * - Multiple exposure event compression; this may need to be in Gtk/Gdk instead.
  */
+
 #include <stdio.h>
 #include <config.h>
 #include <math.h>
@@ -161,13 +162,15 @@ gnome_canvas_item_init (GnomeCanvasItem *item)
  * gnome_canvas_item_new:
  * @parent: The parent group for the new item.
  * @type: The object type of the item.
- * @first_arg_name: A list of object argument name/value pairs, NULL-terminated, used to configure
- * the item.  For example, "fill_color", "black", "width_units", 5.0, NULL.
+ * @first_arg_name: A list of object argument name/value pairs, NULL-terminated,
+ * used to configure the item.  For example, "fill_color", "black",
+ * "width_units", 5.0, NULL.
  * 
- * Creates a new canvas item with @parent as its parent group.  The item is created at the top of
- * its parent's stack, and starts up as visible.  The item is of the specified @type, for example,
- * it can be gnome_canvas_rect_get_type().  The list of object arguments/value pairs is used to
- * configure the item.
+ * Creates a new canvas item with @parent as its parent group.  The item is
+ * created at the top of its parent's stack, and starts up as visible.  The item
+ * is of the specified @type, for example, it can be
+ * gnome_canvas_rect_get_type().  The list of object arguments/value pairs is
+ * used to configure the item.
  * 
  * Return value: The newly-created item.
  **/
@@ -1064,7 +1067,7 @@ static void gnome_canvas_group_get_arg     (GtkObject             *object,
 					    guint                  arg_id);
 static void gnome_canvas_group_destroy     (GtkObject             *object);
 
-static void   gnome_canvas_group_reconfigure (GnomeCanvasItem *item);
+static void   gnome_canvas_group_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static void   gnome_canvas_group_realize     (GnomeCanvasItem *item);
 static void   gnome_canvas_group_unrealize   (GnomeCanvasItem *item);
 static void   gnome_canvas_group_map         (GnomeCanvasItem *item);
@@ -1075,7 +1078,6 @@ static double gnome_canvas_group_point       (GnomeCanvasItem *item, double x, d
 					      GnomeCanvasItem **actual_item);
 static void   gnome_canvas_group_translate   (GnomeCanvasItem *item, double dx, double dy);
 static void   gnome_canvas_group_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
-static void   gnome_canvas_group_update      (GnomeCanvasItem *item);
 static void   gnome_canvas_group_render      (GnomeCanvasItem *item,
 					      GnomeCanvasBuf *buf);
 
@@ -1130,17 +1132,16 @@ gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 	object_class->get_arg = gnome_canvas_group_get_arg;
 	object_class->destroy = gnome_canvas_group_destroy;
 
-	item_class->reconfigure = gnome_canvas_group_reconfigure;
+	item_class->update = gnome_canvas_group_update;
 	item_class->realize = gnome_canvas_group_realize;
 	item_class->unrealize = gnome_canvas_group_unrealize;
 	item_class->map = gnome_canvas_group_map;
 	item_class->unmap = gnome_canvas_group_unmap;
 	item_class->draw = gnome_canvas_group_draw;
+	item_class->render = gnome_canvas_group_render;
 	item_class->point = gnome_canvas_group_point;
 	item_class->translate = gnome_canvas_group_translate;
 	item_class->bounds = gnome_canvas_group_bounds;
-	item_class->update = gnome_canvas_group_update;
-	item_class->render = gnome_canvas_group_render;
 }
 
 static void
@@ -1232,7 +1233,7 @@ gnome_canvas_group_destroy (GtkObject *object)
 }
 
 static void
-gnome_canvas_group_reconfigure (GnomeCanvasItem *item)
+gnome_canvas_group_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
 	GnomeCanvasGroup *group;
 	GList *list;
@@ -1243,8 +1244,8 @@ gnome_canvas_group_reconfigure (GnomeCanvasItem *item)
 	for (list = group->item_list; list; list = list->next) {
 		i = list->data;
 
-		if (GNOME_CANVAS_ITEM_CLASS (i->object.klass)->reconfigure)
-			(* GNOME_CANVAS_ITEM_CLASS (i->object.klass)->reconfigure) (i);
+		if (GNOME_CANVAS_ITEM_CLASS (i->object.klass)->update)
+			(* GNOME_CANVAS_ITEM_CLASS (i->object.klass)->update) (i, affine, clip_path, flags);
 	}
 }
 
@@ -1495,25 +1496,6 @@ gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double
 }
 
 static void
-gnome_canvas_group_update (GnomeCanvasItem *item)
-{
-	GnomeCanvasGroup *group;
-	GnomeCanvasItem *child;
-	GList *list;
-
-	group = GNOME_CANVAS_GROUP (item);
-
-	for (list = group->item_list; list; list = list->next) {
-		child = list->data;
-
-		if (child->object.flags & GNOME_CANVAS_ITEM_NEED_UPDATE) {
-			(* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->update) (child);
-			child->object.flags &= ~GNOME_CANVAS_ITEM_NEED_UPDATE;
-		}
-	}
-}
-
-static void
 gnome_canvas_group_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 {
 	GnomeCanvasGroup *group;
@@ -1649,8 +1631,8 @@ gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 
 			if (GNOME_IS_CANVAS_GROUP (item))
 				gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item), NULL);
-			else if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure)
-					(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+			else if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update)
+					(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
 
 			if (first) {
 				gitem->x1 = item->x1;
@@ -2526,7 +2508,7 @@ paint (GnomeCanvas *canvas)
 	gint n_rects, i;
 
 	if (canvas->need_update) {
-		(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (canvas->root);
+		(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (canvas->root, NULL, NULL, 0);
 
 		canvas->root->object.flags &= ~GNOME_CANVAS_ITEM_NEED_UPDATE;
 		canvas->need_update = FALSE;
@@ -2752,7 +2734,7 @@ gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, doubl
 	scroll_to (canvas, xofs, yofs);
 
 	canvas->need_repick = TRUE;
-	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->reconfigure) (canvas->root);
+	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (canvas->root, NULL, NULL, 0);
 
 	gtk_layout_thaw (GTK_LAYOUT (canvas));
 }
@@ -2830,7 +2812,7 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 	scroll_to (canvas, x1, y1);
 
 	canvas->need_repick = TRUE;
-	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->reconfigure) (canvas->root);
+	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (canvas->root, NULL, NULL, 0);
 
 	gtk_layout_thaw (GTK_LAYOUT (canvas));
 }

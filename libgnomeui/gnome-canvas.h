@@ -1,11 +1,13 @@
 /* GnomeCanvas widget - Tk-like canvas widget for Gnome
  *
- * GnomeCanvas is basically a port of the Tk toolkit's most excellent canvas widget.  Tk is
- * copyrighted by the Regents of the University of California, Sun Microsystems, and other parties.
+ * GnomeCanvas is basically a port of the Tk toolkit's most excellent canvas
+ * widget.  Tk is copyrighted by the Regents of the University of California,
+ * Sun Microsystems, and other parties.
  *
  * Copyright (C) 1998 The Free Software Foundation
  *
- * Author: Federico Mena <federico@nuclecu.unam.mx>
+ * Authors: Federico Mena <federico@nuclecu.unam.mx>
+ *          Raph Levien <raph@gimp.org>
  */
 
 #ifndef GNOME_CANVAS_H
@@ -16,6 +18,7 @@
 #include <stdarg.h>
 #include <libart_lgpl/art_misc.h>
 #include <libart_lgpl/art_rect.h>
+#include <libart_lgpl/art_svp.h>
 #include <libart_lgpl/art_uta.h>
 
 BEGIN_GNOME_DECLS
@@ -23,6 +26,19 @@ BEGIN_GNOME_DECLS
 
 /* "Small" value used by canvas stuff */
 #define GNOME_CANVAS_EPSILON 1e-10
+
+
+/* Macros for building colors.  The values are in [0, 255] */
+
+#define GNOME_CANVAS_COLOR(r, g, b) ((((int) (r) & 0xff) << 24)	\
+				     | (((int) (g) & 0xff) << 16)	\
+				     | (((int) (b) & 0xff) << 8)	\
+				     | 0xff)
+
+#define GNOME_CANVAS_COLOR_A(r, g, b, a) ((((int) (r) & 0xff) << 24)	\
+					  | (((int) (g) & 0xff) << 16)	\
+					  | (((int) (b) & 0xff) << 8)	\
+					  | ((int) (a) & 0xff))
 
 
 typedef struct _GnomeCanvas           GnomeCanvas;
@@ -55,6 +71,35 @@ enum {
 	GNOME_CANVAS_ITEM_NEED_UPDATE	= 1 << 8
 };
 
+/* Update flags for items */
+enum {
+	GNOME_CANVAS_UPDATE_REQUESTED  = 1 << 0,
+	GNOME_CANVAS_UPDATE_AFFINE     = 1 << 1,
+	GNOME_CANVAS_UPDATE_CLIP       = 1 << 2,
+	GNOME_CANVAS_UPDATE_VISIBILITY = 1 << 3
+};
+
+/* Data for rendering in antialiased mode */
+
+struct _GnomeCanvasBuf {
+	guchar *buf;			/* 24 bit RGB buffer for rendering */
+	int buf_rowstride;		/* The rowstride for buf */
+	ArtIRect rect;			/* The rectangle describing the
+					 * rendering area.
+					 */
+	guint32 bg_color;		/* The background color in 0xrrggbb */
+
+	/* Invariant: at least one of the following flags is true. */
+
+	unsigned int is_bg : 1;		/* Set when the render rectangle area is
+					 * the solid color bg_color.
+					 */
+	unsigned int is_buf : 1;	/* Set when the render rectangle area is
+					 * represented by the buf
+					 */
+};
+
+
 #define GNOME_TYPE_CANVAS_ITEM            (gnome_canvas_item_get_type ())
 #define GNOME_CANVAS_ITEM(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_CANVAS_ITEM, GnomeCanvasItem))
 #define GNOME_CANVAS_ITEM_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CANVAS_ITEM, GnomeCanvasItemClass))
@@ -71,7 +116,7 @@ struct _GnomeCanvasItem {
 	GnomeCanvas *canvas;		/* The parent canvas for this item */
 	GnomeCanvasItem *parent;	/* The parent canvas group (of type GnomeCanvasGroup) */
 
-	int x1, y1, x2, y2;		/* Bounding box for this item, in canvas pixel coordinates.
+	double x1, y1, x2, y2;		/* Bounding box for this item, in canvas pixel coordinates.
 					 * The bounding box contains (x1, y1) but not (x2, y2).
 					 */
 };
@@ -79,8 +124,12 @@ struct _GnomeCanvasItem {
 struct _GnomeCanvasItemClass {
 	GtkObjectClass parent_class;
 
-	/* Reconfigure an item -- fixup GCs, recalc bounds, etc. */
-	void (* reconfigure) (GnomeCanvasItem *item);
+	/* Tell the item to update itself.  The flags are from the update flags
+	 * defined above.  The item should update its internal state from its
+	 * queued state, recompute and request its repaint area, etc.  The
+	 * affine, if used, is a pointer to a 6-element array of doubles.
+	 */
+	void (* update) (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 
 	/* Realize an item -- create GCs, etc. */
 	void (* realize) (GnomeCanvasItem *item);
@@ -94,6 +143,9 @@ struct _GnomeCanvasItemClass {
 	/* Unmap an item */
 	void (* unmap) (GnomeCanvasItem *item);
 
+	/* Return the microtile coverage of the item */
+	ArtUta *(* coverage) (GnomeCanvasItem *item);
+
 	/* Draw an item of this type.  (x, y) are the upper-left canvas pixel coordinates of the *
 	 * drawable, a temporary pixmap, where things get drawn.  (width, height) are the dimensions
 	 * of the drawable.
@@ -101,12 +153,23 @@ struct _GnomeCanvasItemClass {
 	void (* draw) (GnomeCanvasItem *item, GdkDrawable *drawable,
 		       int x, int y, int width, int height);
 
+	/* Render the item over the buffer given.  The buf data structure
+	 * contains both a pointer to a packed 24-bit RGB array, and the
+	 * coordinates.  This method is only used for libart-based canvases.
+	 *
+	 * TODO: figure out where affine transforms and clip paths fit into the
+	 * rendering framework.
+	 */
+	void (* render) (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
+
 	/* Calculate the distance from an item to the specified point.  It also returns a canvas
          * item which is the item itself in the case of the object being an actual leaf item, or a
          * child in case of the object being a canvas group.  (cx, cy) are the canvas pixel
          * coordinates that correspond to the item-relative coordinates (x, y).
 	 */
 	double (* point) (GnomeCanvasItem *item, double x, double y, int cx, int cy, GnomeCanvasItem **actual_item);
+
+/* FIXME: remove ::translate and ::bounds */
 
 	/* Move an item by the specified amount */
 	void (* translate) (GnomeCanvasItem *item, double dx, double dy);
@@ -118,20 +181,6 @@ struct _GnomeCanvasItemClass {
 	 * canvas world coordinate system.
 	 */
 	gint (* event) (GnomeCanvasItem *item, GdkEvent *event);
-
-	/* Do an update operation. It's not required to do anything, but it's an excellent place
-	 * to handle queued state changes, calculate the repaint area, and preprocess things for
-	 * rendering.
-	 */
-	void (* update) (GnomeCanvasItem *item);
-
-	/* Render the item over the buffer given. The buf data structure contains both a pointer
-	 * to a packed 24-bit RGB array, and the coordinates.
-	 *
-	 * TODO: figure out where affine transforms and clip paths fit into the rendering
-	 * framework.
-	 */
-	void (* render) (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
 };
 
 
@@ -164,6 +213,15 @@ void gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg
 
 /* Move an item by the specified amount */
 void gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy);
+
+/* Scale an item about a point by the specified factors */
+void gnome_canvas_item_scale (GnomeCanvasItem *item, double x, double y, double scale_x, double scale_y);
+
+/* Rotate an item about a point by the specified number of degrees */
+void gnome_canvas_item_rotate (GnomeCanvasItem *item, double x, double y, double angle);
+
+/* Apply the specified transformation matrix to an item */
+void gnome_canvas_item_transform (GnomeCanvasItem *item, double *affine);
 
 /* Raise an item in the z-order of its parent group by the specified
  * number of positions.  The specified number must be larger than or
@@ -279,22 +337,6 @@ GtkType gnome_canvas_group_get_type (void);
  * then propagates the bounds change upwards in the hierarchy.
  */
 void gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *item);
-
-
-/* GnomeCanvasBuf - data for rendering in antialiased mode.
- */
-
-struct _GnomeCanvasBuf {
-	guchar *buf;			/* 24 bit RGB buffer for rendering */
-	gint buf_rowstride;		/* The rowstride for buf */
-	ArtIRect rect;			/* The rectangle describing the rendering area */
-	guint32 bg_color;		/* The background color in 0xrrggbb */
-
-	/* Invariant: at least one of the following flags is true. */
-	unsigned int is_bg : 1;		/* Set when the render rectangle area is the solid color bg_color */
-	unsigned int is_buf : 1;	/* Set when the render rectangle area is represented by the buf */
-};
-
 
 
 /*** GnomeCanvas ***/

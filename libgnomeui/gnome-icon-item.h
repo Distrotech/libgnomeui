@@ -25,14 +25,6 @@ typedef struct {
 	char     *fontname;	/* Font in which we display */
 	gboolean is_editable;	/* Is this editable? */
 
-	/* Flags */
-	unsigned int editing:1; /* true if it is being edited */
-	unsigned int selected:1;/* true if it should be displayed as selected */
-        /* true if current click is on unselected icon */
-	unsigned int unselected_click:1;
-        /* true if current selecting text with mouse */
-	unsigned int selecting:1;
-
 	/* Hack: create an offscreen window, and place the entry there */
 	GtkEntry  *entry;
 	GtkWidget *entry_top;
@@ -44,6 +36,14 @@ typedef struct {
 
 	/* Layed out information */
 	GnomeIconTextInfo *ti;
+
+	/* Flags */
+	unsigned int editing:1; /* true if it is being edited */
+	unsigned int selected:1;/* true if it should be displayed as selected */
+        /* true if current click is on unselected icon */
+	unsigned int unselected_click:1;
+        /* true if current selecting text with mouse */
+	unsigned int selecting:1;
 } GnomeIconTextItem;
 
 typedef struct {

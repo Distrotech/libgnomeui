@@ -1,3 +1,15 @@
+1998-12-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.[ch]: Misc. updates to accomodate the new rendering
+	and propagation model.
+	* gnome-canvas-rect-ellipse.c: Likewise.
+	* gnome-canvas-image.c: Likewise.
+	* gnome-canvas-text.c: Likewise.
+	* gnome-canvas-line.c: Likewise.
+	* gnome-canvas-polygon.c: Likewise.
+	* gnome-canvas-widget.c: Likewise.
+	* gnome-icon-item.c: Likewise.
+
 1998-12-16  Yukihiro Nakai <Nakai@abricot.co.jp>
 
 	* Added gtkrc.ja. The original gtkrc is not good for
