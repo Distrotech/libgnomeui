@@ -66,6 +66,18 @@ GtkWidget *gnome_about_new (const gchar  *name,
 			    const gchar  *translator_credits,
 			    GdkPixbuf    *logo_pixbuf);
 
+/* Only for use by bindings to languages other than C; don't use
+   in applications. */
+void gnome_about_construct (GnomeAbout *about,
+			    const gchar  *name,
+			    const gchar  *version,
+			    const gchar  *copyright,
+			    const gchar  *comments,
+			    const gchar **authors,
+			    const gchar **documenters,
+			    const gchar  *translator_credits,
+			    GdkPixbuf    *logo_pixbuf);
+
 G_END_DECLS
 
 #endif /* __GNOME_ABOUT_H__ */

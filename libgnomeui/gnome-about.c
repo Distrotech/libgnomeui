@@ -1165,14 +1165,33 @@ gnome_about_new (const gchar  *name,
 		 GdkPixbuf    *logo_pixbuf)
 {
 	GnomeAbout *about;
-	GValueArray *authors_array;
-	GValueArray *documenters_array;
-	static GdkPixbuf *background_pixbuf = NULL;
-	gint i;
 	
 	g_return_val_if_fail (authors != NULL, NULL);
 	
 	about = g_object_new (GNOME_TYPE_ABOUT, NULL);
+        gnome_about_construct(about, 
+			      name, version, copyright, 
+			      comments, authors, documenters, 
+			      translator_credits, logo_pixbuf);
+
+	return GTK_WIDGET(about);
+}
+
+void
+gnome_about_construct (GnomeAbout *about,
+		       const gchar  *name,
+		       const gchar  *version,
+		       const gchar  *copyright,
+		       const gchar  *comments,
+		       const gchar **authors,
+		       const gchar **documenters,
+		       const gchar  *translator_credits,
+		       GdkPixbuf    *logo_pixbuf)
+{
+	GValueArray *authors_array;
+	GValueArray *documenters_array;
+	static GdkPixbuf *background_pixbuf = NULL;
+	gint i;
 
 	authors_array = g_value_array_new (0);
 	
@@ -1224,8 +1243,6 @@ gnome_about_new (const gchar  *name,
 	}
 
 	gtk_window_set_resizable (GTK_WINDOW (about), FALSE);
-	
-	return GTK_WIDGET (about);
 }
 
 static void
