@@ -42,12 +42,29 @@ show_ok_box(const gchar * message, const gchar * type, GtkWindow * parent)
 
 
 /* A little OK box */
+/**
+ * gnome_ok_dialog:
+ * @message: Message to display
+ *
+ * Description:  Creates and shows a simple message dialog.
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_ok_dialog (const gchar * message)
 {
   return show_ok_box (message, GNOME_MESSAGE_BOX_INFO, NULL);
 }
 
+/**
+ * gnome_ok_dialog_parented:
+ * @message: Message to display
+ * @parent: Parent window
+ *
+ * Description:  Creates and shows a simple message dialog.
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_ok_dialog_parented (const gchar * message, GtkWindow * parent)
 {
@@ -55,12 +72,31 @@ gnome_ok_dialog_parented (const gchar * message, GtkWindow * parent)
 }
 
 /* Operation failed fatally. In an OK dialog. */
+/**
+ * gnome_error_dialog:
+ * @error: Message to display
+ *
+ * Description:  Creates and shows a error dialog.  This is an OK
+ * dialog to display on fatally failed operations.
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_error_dialog (const gchar * error)
 {
   return show_ok_box(error, GNOME_MESSAGE_BOX_ERROR, NULL);
 }
 
+/**
+ * gnome_error_dialog_parented:
+ * @warning: Message to display
+ * @parent: Parent window
+ *
+ * Description:  Creates and shows a error dialog.  This is an OK
+ * dialog to display on fatally failed operations.
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_error_dialog_parented (const gchar * error, GtkWindow * parent)
 {
@@ -68,12 +104,31 @@ gnome_error_dialog_parented (const gchar * error, GtkWindow * parent)
 }
 
 /* Just a warning. */
+/**
+ * gnome_warning_dialog:
+ * @warning: Message to display
+ *
+ * Description:  Creates and shows a warning dialog.  For non-fatal
+ * warnings.
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_warning_dialog (const gchar * warning)
 {
   return show_ok_box(warning, GNOME_MESSAGE_BOX_WARNING, NULL);
 }
 
+/**
+ * gnome_warning_dialog_parented:
+ * @warning: Message to display
+ * @parent: Parent window
+ *
+ * Description:  Creates and shows a warning dialog.  For non-fatal
+ * warnings.
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_warning_dialog_parented (const gchar * warning, GtkWindow * parent)
 {
@@ -138,6 +193,21 @@ reply_dialog (const gchar * question, GnomeReplyCallback callback, gpointer data
 
 
 /* Ask a yes or no question, and call the callback when it's answered. */
+
+/**
+ * gnome_question_dialog:
+ * @question: Question to ask
+ * @callback: Callback function for handling dialog results
+ * @data: Data to pass to callback
+ *
+ * Description:  Creates a question dialog and calls @callback
+ * when user answers the button number is passed onto 'reply'.
+ * 0 is for 'Yes', 1 for 'No'
+ *
+ * void (* GnomeReplyCallback)(gint reply, gpointer data); 
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_question_dialog (const gchar * question,
 		       GnomeReplyCallback callback, gpointer data)
@@ -145,6 +215,21 @@ gnome_question_dialog (const gchar * question,
   return reply_dialog(question, callback, data, TRUE, FALSE, NULL);
 }
 
+/**
+ * gnome_question_dialog_parented:
+ * @question: Question to ask
+ * @callback: Callback function for handling dialog results
+ * @data: Data to pass to callback
+ * @parent: Parent window
+ *
+ * Description:  Creates a question dialog and calls @callback
+ * when user answers the button number is passed onto 'reply'.
+ * 0 is for 'Yes', 1 for 'No'
+ *
+ * void (* GnomeReplyCallback)(gint reply, gpointer data); 
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_question_dialog_parented (const gchar * question,
 				GnomeReplyCallback callback, gpointer data,
@@ -153,12 +238,43 @@ gnome_question_dialog_parented (const gchar * question,
   return reply_dialog(question, callback, data, TRUE, FALSE, parent);
 }
 
+/**
+ * gnome_question_dialog_modal:
+ * @question: Question to ask
+ * @callback: Callback function for handling dialog results
+ * @data: Data to pass to callback
+ *
+ * Description:  Creates a question dialog and calls @callback
+ * when user answers the button number is passed onto 'reply'.
+ * 0 is for 'Yes', 1 for 'No'.  The dialog is created as a modal
+ * dialog and the user will have to answer this before proceeding.
+ *
+ * void (* GnomeReplyCallback)(gint reply, gpointer data); 
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_question_dialog_modal (const gchar * question, GnomeReplyCallback callback, gpointer data)
 {
   return reply_dialog(question, callback, data, TRUE, TRUE, NULL);
 }
 
+/**
+ * gnome_question_dialog_modal_parented:
+ * @question: Question to ask
+ * @callback: Callback function for handling dialog results
+ * @data: Data to pass to callback
+ * @parent: Parent window
+ *
+ * Description:  Creates a question dialog and calls @callback
+ * when user answers the button number is passed onto 'reply'.
+ * 0 is for 'Yes', 1 for 'No'.  The dialog is created as a modal
+ * dialog and the user will have to answer this before proceeding.
+ *
+ * void (* GnomeReplyCallback)(gint reply, gpointer data); 
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_question_dialog_modal_parented (const gchar * question,
 				      GnomeReplyCallback callback, gpointer data,
@@ -169,6 +285,21 @@ gnome_question_dialog_modal_parented (const gchar * question,
 
 
 /* OK-Cancel question. */
+
+/**
+ * gnome_ok_cancel_dialog:
+ * @message: Message to display
+ * @callback: Callback function for handling dialog results
+ * @data: Data to pass to callback
+ *
+ * Description:  Creates an OK/Cancel dialog and calls @callback
+ * when user answers the button number is passed onto 'reply'.
+ * 0 is for 'OK', 1 for 'Cancel'.
+ *
+ * void (* GnomeReplyCallback)(gint reply, gpointer data); 
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_ok_cancel_dialog (const gchar * message,
 			GnomeReplyCallback callback, gpointer data)
@@ -176,6 +307,21 @@ gnome_ok_cancel_dialog (const gchar * message,
   return reply_dialog(message, callback, data, FALSE, FALSE, NULL);
 }
 
+/**
+ * gnome_ok_cancel_dialog_parented:
+ * @message: Message to display
+ * @callback: Callback function for handling dialog results
+ * @data: Data to pass to callback
+ * @parent: Parent window
+ *
+ * Description:  Creates an OK/Cancel dialog and calls @callback
+ * when user answers the button number is passed onto 'reply'.
+ * 0 is for 'OK', 1 for 'Cancel'.
+ *
+ * void (* GnomeReplyCallback)(gint reply, gpointer data); 
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_ok_cancel_dialog_parented (const gchar * message,
 				 GnomeReplyCallback callback, gpointer data,
@@ -184,6 +330,21 @@ gnome_ok_cancel_dialog_parented (const gchar * message,
   return reply_dialog(message, callback, data, FALSE, FALSE, parent);
 }
 
+/**
+ * gnome_ok_cancel_dialog_modal:
+ * @message: Message to display
+ * @callback: Callback function for handling dialog results
+ * @data: Data to pass to callback
+ *
+ * Description:  Creates an OK/Cancel dialog and calls @callback
+ * when user answers the button number is passed onto 'reply'.
+ * 0 is for 'OK', 1 for 'Cancel'.  The dialog is created as a modal
+ * dialog and the user will have to answer this before proceeding.
+ *
+ * void (* GnomeReplyCallback)(gint reply, gpointer data); 
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_ok_cancel_dialog_modal (const gchar * message,
 			      GnomeReplyCallback callback, gpointer data)
@@ -191,6 +352,22 @@ gnome_ok_cancel_dialog_modal (const gchar * message,
   return reply_dialog(message, callback, data, FALSE, TRUE, NULL);
 }
 
+/**
+ * gnome_ok_cancel_dialog_modal_parented:
+ * @message: Message to display
+ * @callback: Callback function for handling dialog results
+ * @data: Data to pass to callback
+ * @parent: Parent window
+ *
+ * Description:  Creates and shows an OK/Cancel dialog and calls @callback
+ * when user answers the button number is passed onto 'reply'.
+ * 0 is for 'OK', 1 for 'Cancel'.  The dialog is created as a modal
+ * dialog and the user will have to answer this before proceeding.
+ *
+ * void (* GnomeReplyCallback)(gint reply, gpointer data); 
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
 GtkWidget *
 gnome_ok_cancel_dialog_modal_parented (const gchar * message,
 				       GnomeReplyCallback callback, gpointer data,
@@ -269,6 +446,11 @@ request_dialog (const gchar * request, const gchar * default_text, const guint16
 
 
 /* Get a string. */
+/**
+ * gnome_request_string_dialog:
+ *
+ * Description:  Deprecated, use #gnome_request_dialog
+ **/
 GtkWidget *
 gnome_request_string_dialog  (const gchar * prompt,
 			      GnomeStringCallback callback, gpointer data)
@@ -277,6 +459,11 @@ gnome_request_string_dialog  (const gchar * prompt,
   return request_dialog (prompt, NULL, 0, callback, data, FALSE, NULL);
 }
 
+/**
+ * gnome_request_string_dialog_parented:
+ *
+ * Description:  Deprecated, use #gnome_request_dialog
+ **/
 GtkWidget *
 gnome_request_string_dialog_parented (const gchar * prompt,
 				      GnomeStringCallback callback, gpointer data,
@@ -287,6 +474,11 @@ gnome_request_string_dialog_parented (const gchar * prompt,
 }
 
 /* Request a string, but don't echo to the screen. */
+/**
+ * gnome_request_password_dialog:
+ *
+ * Description:  Deprecated, use #gnome_request_dialog
+ **/
 GtkWidget *
 gnome_request_password_dialog (const gchar * prompt, GnomeStringCallback callback, gpointer data)
 {
@@ -294,6 +486,11 @@ gnome_request_password_dialog (const gchar * prompt, GnomeStringCallback callbac
   return request_dialog (prompt, NULL, 0, callback, data, TRUE, NULL);
 }
 
+/**
+ * gnome_request_password_dialog_parented:
+ *
+ * Description:  Deprecated, use #gnome_request_dialog
+ **/
 GtkWidget *
 gnome_request_password_dialog_parented (const gchar * prompt,
 					GnomeStringCallback callback, gpointer data,
@@ -304,23 +501,23 @@ gnome_request_password_dialog_parented (const gchar * prompt,
 }
 
 /**
- * gnome_request_dialog
+ * gnome_request_dialog:
  * @password: %TRUE if on-screen text input is masked
  * @prompt: Text of the prompt to be displayed
  * @default_text: Default text in entry widget, %NULL if none
  * @max_length: Maximum input chars allowed
  * @callback: Callback function for handling dialog results
+ * @data: Data passed to the callback
  * @parent: Parent window, or %NULL for no parent.
  *
- * Description:  Creates a GNOME text entry request dialog.  @callback
- * is called when the dialog closes, passing the text entry input or
- * %NULL if the user cancelled.  @callback is defined as
+ * Description:  Creates and shows a GNOME text entry request dialog.
+ * @callback is called when the dialog closes, passing the text entry
+ * input or %NULL if the user cancelled.  @callback is defined as
  *
  * void (* GnomeStringCallback)(gchar * string, gpointer data); 
  *
  * Returns:  Pointer to new GNOME dialog object.
  **/
-
 GtkWidget *
 gnome_request_dialog (gboolean password, const gchar * prompt,
 		      const gchar * default_text, const guint16 max_length,
