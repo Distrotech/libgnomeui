@@ -992,7 +992,9 @@ gnome_client_object_init (GnomeClient *client)
 	if (pwd)
 	  {
 	    client->user_id= g_strdup (pwd->pw_name);
-	    g_free (pwd);
+	    /* FIXME: getpwuid() shouldn't be pointing to static memory,
+	              but free()ing pwd consistantly segfaults */
+	    /* g_free (pwd); */
 	  }
 	else
 	  client->user_id= "";
