@@ -253,6 +253,8 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
        && gnome_config_get_bool("/sound/system/settings/event_sounds=true")) {
       int n;
 
+      g_assert(gnome_triggerlist_topnode != NULL);
+
       for(n = 0; n < gnome_triggerlist_topnode->numsubtrees; n++) {
 	if(!strcmp(gnome_triggerlist_topnode->subtrees[n]->nodename,
 		   "gtk-events"))
@@ -263,12 +265,18 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 	GnomeTriggerList* gtk_events_node;
 
 	gtk_events_node = gnome_triggerlist_topnode->subtrees[n];
+	g_assert(gtk_events_node != NULL);
 
 	for(n = 0; n < gtk_events_node->numsubtrees; n++) {
 	  int signums[5];
 	  int nsigs, i;
-	  char *signame = gtk_events_node->subtrees[n]->nodename;
+	  char *signame;
 	  gpointer hookdata = gtk_events_node->subtrees[n];
+
+	  g_assert(hookdata != NULL);
+
+	  signame = gtk_events_node->subtrees[n]->nodename;
+	  g_assert(signame != NULL);
 
 	  /* XXX this is an incredible hack based on a compile-time knowledge of
 	     what gtk widgets do what, rather than */
