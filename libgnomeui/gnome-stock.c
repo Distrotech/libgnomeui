@@ -38,14 +38,6 @@
 
 
 /*
- * If BUTTON_SET_SIZE is enabled, all gnome buttons created here will at least
- * be the size of GNOME_BUTTON_WIDTH x GNOME_BUTTON_HEIGHT. But since that
- * results is pretty big buttons (if they're not GTK_CAN_DEFAULT), I leave
- * this configurable
- */
-#define BUTTON_SET_SIZE
-
-/*
  * BUTTON_DEFBRD_WIDTH/HEIGHT is the value that is added to GNOME_BUTTON_WIDTH
  * and GNOME_BUTTON_HEIGHT to emulate the real visual width and height of
  * buttons without the GTK_CAN_DEFAULT flag.
@@ -156,12 +148,10 @@ gnome_stock_pixmap_widget_state_changed(GtkWidget *widget, guint prev_state)
 	if (pixmap == w->pixmap) return;
 	if (w->pixmap) {
 		gtk_container_remove(GTK_CONTAINER(w), GTK_WIDGET(w->pixmap));
-		/* gtk_widget_queue_draw(widget); */
 	}
 	w->pixmap = pixmap;
 	if (pixmap) {
 		gtk_container_add(GTK_CONTAINER(w), GTK_WIDGET(w->pixmap));
-		/* gtk_widget_queue_draw(widget); */
 	}
 }
 
@@ -787,6 +777,9 @@ gnome_stock_pixmap(GtkWidget *window, const char *icon, const char *subtype)
 	 case GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED:
 		pixmap = create_pixmap_from_imlib_scaled(window, &entry->imlib_s);
 		break;
+	 case GNOME_STOCK_PIXMAP_TYPE_GPIXMAP:
+		pixmap = GNOME_PIXMAP(gnome_pixmap_new_from_gnome_pixmap(entry->gpixmap.pixmap));
+		break;
 	 default:
 		g_assert_not_reached();
 		break;
@@ -857,13 +850,41 @@ gnome_stock_pixmap_checkfor(const char *icon, const char *subtype)
 /*  stock buttons  */
 /*******************/
 
+void
+gnome_button_can_default(GtkButton *button, gboolean can_default)
+{
+	GtkRequisition req;
+
+	g_return_if_fail(button != NULL);
+	g_return_if_fail(GTK_IS_BUTTON(button));
+
+	if (can_default) {
+		GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
+		gtk_widget_size_request(GTK_WIDGET(button), &req);
+		if (req.width < GNOME_BUTTON_WIDTH)
+			req.width = GNOME_BUTTON_WIDTH;
+		if (req.height < GNOME_BUTTON_HEIGHT)
+			req.height = GNOME_BUTTON_HEIGHT;
+	} else {
+		GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
+		gtk_widget_size_request(GTK_WIDGET(button), &req);
+		if (req.width < GNOME_BUTTON_WIDTH + BUTTON_DEFBRD_WIDTH)
+			req.width = GNOME_BUTTON_WIDTH + BUTTON_DEFBRD_WIDTH;
+		if (req.height < GNOME_BUTTON_HEIGHT + BUTTON_DEFBRD_HEIGHT)
+			req.height = GNOME_BUTTON_HEIGHT + BUTTON_DEFBRD_HEIGHT;
+	}
+	gtk_widget_set_usize(GTK_WIDGET(button), req.width, req.height);
+}
+
+
 GtkWidget *
 gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 {
 	GtkWidget *button, *label, *hbox, *w;
-#ifdef BUTTON_SET_SIZE
 	GtkRequisition req;
-#endif
+	gboolean use_icon, use_label;
+
+	g_return_val_if_fail(text != NULL, NULL);
 
 	button = gtk_button_new();
 	hbox = gtk_hbox_new(FALSE, 0);
@@ -874,32 +895,49 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 	gtk_widget_show(hbox);
 	gtk_box_pack_start(GTK_BOX(w), hbox, TRUE, FALSE, 7);
 
-	label = gtk_label_new(text);
-	gtk_widget_show(label);
-	gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 7);
+	use_icon = gnome_config_get_bool("/Gnome/Icons/ButtonUseIcons=true");
+	use_label = gnome_config_get_bool("/Gnome/Icons/ButtonUseLabels=true");
 
-	if ((gnome_config_get_bool("/Gnome/Icons/ButtonsUseIcons=true")) &&
-	    (pixmap)) {
+	if ((use_label) || (!use_icon) || (!pixmap)) {
+		label = gtk_label_new(text);
+		gtk_widget_show(label);
+		gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 7);
+	}
+
+	if ((use_icon) && (pixmap)) {
 		/* assign the created button as the container widget to the
 		 * GnomeStockPixmap (see comment in stock_button_from_entry)
 		 */
 		if ((GNOME_IS_STOCK_PIXMAP_WIDGET(pixmap)) &&
 		    (pixmap->window == NULL))
 			GNOME_STOCK_PIXMAP_WIDGET(pixmap)->window = button;
+		if (GNOME_IS_PIXMAP(pixmap)) {
+			GnomeStockPixmapEntry *entry;
+			char s[32];
+
+			entry = g_malloc(sizeof(GnomeStockPixmapEntry));
+			entry->type = GNOME_STOCK_PIXMAP_TYPE_GPIXMAP;
+			gtk_widget_size_request(pixmap, &req);
+			entry->any.width = req.width;
+			entry->any.height = req.height;
+			entry->any.label = NULL;
+			entry->gpixmap.pixmap = GNOME_PIXMAP(pixmap);
+			sprintf(s, "%lx", (long)pixmap);
+			gnome_stock_pixmap_register(s, GNOME_STOCK_PIXMAP_REGULAR, entry);
+			pixmap = gnome_stock_pixmap_widget(button, s);
+		}
 
 		gtk_widget_show(pixmap);
 		gtk_box_pack_start(GTK_BOX(hbox), pixmap,
 				   FALSE, FALSE, 0);
 	}
 
-#ifdef BUTTON_SET_SIZE
 	gtk_widget_size_request(button, &req);
-	if (req.width < GNOME_BUTTON_WIDTH)
+	if (req.width < GNOME_BUTTON_WIDTH + BUTTON_DEFBRD_WIDTH)
 		req.width = GNOME_BUTTON_WIDTH + BUTTON_DEFBRD_WIDTH;
-	if (req.height < GNOME_BUTTON_HEIGHT)
+	if (req.height < GNOME_BUTTON_HEIGHT + BUTTON_DEFBRD_HEIGHT)
 		req.height = GNOME_BUTTON_HEIGHT + BUTTON_DEFBRD_HEIGHT;
 	gtk_widget_set_usize(GTK_WIDGET(button), req.width, req.height);
-#endif
 
 	return button;
 }
@@ -915,7 +953,7 @@ stock_button_from_entry (const char *type, GnomeStockPixmapEntry *entry)
 	else
 		text = dgettext(PACKAGE, type);
 	/* Don't give the container widget (that is used for color calculation
-	 * etc.) */
+	 * etc., e.g. in build_disabled_pixmap) */
 	pixmap = gnome_stock_pixmap_widget(NULL, type);
 	return gnome_pixmap_button(pixmap, text);
 }

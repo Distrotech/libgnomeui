@@ -1,3 +1,20 @@
+Wed May 20 17:30:19 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-pixmap.[ch] (gnome_pixmap_new_from_gnome_pixmap): new
+	function. I need that to get a copy of a pixmap to work with.
+
+	* gnome-stock.c (gnome_pixmap_button): added check for GnomePixmap to
+	build a GnomeStockPixmapWidget to get the functionality to gray it out
+	if it's unsensitive.
+
+	* gnome-stock.[ch]: added GNOME_STOCK_PIXMAP_TYPE_GPIXMAP to be able
+	to use GnomePixmaps as stock pixmaps.
+	(gnome_pixmap_button): added check for ButtonsUseLabels (don't know if
+	this is usefull though).
+
+	* gnome-dialog.c (gnome_dialog_append_button): use
+	gnome_button_can_default.
+
 1998-05-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (relayout_icon): New function; recals the text

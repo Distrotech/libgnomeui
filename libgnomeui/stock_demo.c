@@ -681,6 +681,19 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
+#if 1
+	column++;
+	w = gnome_pixmap_new_from_file(gnome_pixmap_file("gnome-unknown.png"));
+	w = gnome_pixmap_button(w, "Test");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = gnome_pixmap_new_from_file(gnome_pixmap_file("gnome-unknown.png"));
+	w = gnome_pixmap_button(w, "Test #2");
+	gtk_widget_set_sensitive(w, FALSE);
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+#endif
+
 	gtk_table_set_col_spacings(table, 10);
 	gtk_table_set_row_spacing(table, 2, 10);
 	gtk_table_set_row_spacing(table, 5, 10);

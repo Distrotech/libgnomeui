@@ -25,6 +25,7 @@ static void gnome_pixmap_draw          (GtkWidget        *widget,
 					GdkRectangle     *area);
 static gint gnome_pixmap_expose        (GtkWidget        *widget,
 					GdkEventExpose   *event);
+static void setup_window_and_style     (GnomePixmap *gpixmap);
 
 
 static GtkWidgetClass *parent_class;
@@ -196,18 +197,35 @@ gnome_pixmap_new_from_rgb_d_shaped (unsigned char *data, unsigned char *alpha,
 }
 
 GtkWidget *
-gnome_pixmap_new_from_rgb_d_at_size (char *data, unsigned char *alpha,
-				     int rgb_width, int rgb_height,
-				     int width, int height)
+gnome_pixmap_new_from_gnome_pixmap (GnomePixmap *gpixmap_old)
 {
 	GnomePixmap *gpixmap;
+	GtkRequisition req;
+	GdkVisual *visual;
+	GdkGC *gc;
 
-	g_return_val_if_fail(data != NULL, NULL);
+	g_return_val_if_fail(gpixmap_old != NULL, NULL);
+	g_return_val_if_fail(GNOME_IS_PIXMAP(gpixmap_old), NULL);
 
 	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_rgb_d_at_size (gpixmap, data, alpha,
-					 rgb_width, rgb_height,
-					 width, height);
+	gtk_widget_size_request (GTK_WIDGET(gpixmap_old), &req);
+	if (GTK_WIDGET(gpixmap_old)->window)
+		visual = gdk_window_get_visual (GTK_WIDGET(gpixmap_old)->window);
+	else
+		visual = gdk_imlib_get_visual();
+	gpixmap->pixmap = gdk_pixmap_new (gpixmap_old->pixmap,
+					  req.width, req.height,
+					  visual->depth);
+	gc = gdk_gc_new (gpixmap->pixmap);
+	gdk_draw_pixmap (gpixmap->pixmap, gc, gpixmap_old->pixmap, 0, 0, 0, 0,
+			 req.width, req.height);
+	gdk_gc_destroy (gc);
+	gpixmap->mask = gdk_pixmap_new (gpixmap_old->mask,
+					req.width, req.height, 1);
+	gc = gdk_gc_new (gpixmap->mask);
+	gdk_draw_pixmap (gpixmap->mask, gc, gpixmap_old->mask, 0, 0, 0, 0,
+			 req.width, req.height);
+	gdk_gc_destroy (gc);
 
 	return GTK_WIDGET (gpixmap);
 }

@@ -264,9 +264,7 @@ void       gnome_dialog_append_buttons (GnomeDialog * dialog,
     GtkWidget *button;
     
     button = gnome_stock_or_ordinary_button (button_name);
-    GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
-    gtk_widget_set_usize (button, GNOME_BUTTON_WIDTH,
-			  GNOME_BUTTON_HEIGHT);
+    gnome_button_can_default (GTK_BUTTON(button), TRUE);
     gtk_container_add (GTK_CONTAINER(dialog->action_area), 
 		       button);
     gtk_widget_grab_default (button);

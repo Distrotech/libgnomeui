@@ -148,6 +148,7 @@ typedef struct _GnomeStockPixmapEntryData    GnomeStockPixmapEntryData;
 typedef struct _GnomeStockPixmapEntryFile    GnomeStockPixmapEntryFile;
 typedef struct _GnomeStockPixmapEntryPath    GnomeStockPixmapEntryPath;
 typedef struct _GnomeStockPixmapEntryWidget  GnomeStockPixmapEntryWidget;
+typedef struct _GnomeStockPixmapEntryGPixmap GnomeStockPixmapEntryGPixmap;
 typedef union  _GnomeStockPixmapEntry        GnomeStockPixmapEntry;
 
 typedef enum {
@@ -157,7 +158,8 @@ typedef enum {
         GNOME_STOCK_PIXMAP_TYPE_PATH,
         GNOME_STOCK_PIXMAP_TYPE_WIDGET,
 	GNOME_STOCK_PIXMAP_TYPE_IMLIB,
-	GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED
+	GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED,
+	GNOME_STOCK_PIXMAP_TYPE_GPIXMAP
 } GnomeStockPixmapType;
 
 
@@ -216,6 +218,14 @@ struct _GnomeStockPixmapEntryWidget {
         GtkWidget *widget;
 };
 
+/* a GnomePixmap */
+struct _GnomeStockPixmapEntryGPixmap {
+        GnomeStockPixmapType type;
+	int width, height;
+	char *label;
+        GnomePixmap *pixmap;
+};
+
 struct _GnomeStockPixmapEntryAny {
         GnomeStockPixmapType type;
 	int width, height;
@@ -231,6 +241,7 @@ union _GnomeStockPixmapEntry {
         GnomeStockPixmapEntryWidget widget;
 	GnomeStockPixmapEntryImlib imlib;
 	GnomeStockPixmapEntryImlibScaled imlib_s;
+        GnomeStockPixmapEntryGPixmap gpixmap;
 };
 
 
@@ -310,6 +321,8 @@ GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (const char *icon,
 
 GtkWidget            *gnome_pixmap_button         (GtkWidget *pixmap,
 						   const char *text);
+void		      gnome_button_can_default    (GtkButton *button,
+						   gboolean can_default);
 
 #define GNOME_STOCK_BUTTON_OK     "Button_Ok"
 #define GNOME_STOCK_BUTTON_CANCEL "Button_Cancel"

@@ -44,6 +44,7 @@ GtkWidget *gnome_pixmap_new_from_rgb_d_shaped  (unsigned char *data, unsigned ch
 GtkWidget *gnome_pixmap_new_from_rgb_d_at_size (char *data, unsigned char *alpha,
 						int rgb_width, int rgb_height,
 						int width, int height);
+GtkWidget *gnome_pixmap_new_from_gnome_pixmap  (GnomePixmap *gpixmap);
 
 void       gnome_pixmap_load_file              (GnomePixmap *gpixmap, char *filename);
 void       gnome_pixmap_load_file_at_size      (GnomePixmap *gpixmap, char *filename, int width, int height);
