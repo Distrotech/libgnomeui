@@ -794,7 +794,7 @@ about_set_documentors (GladeXML *xml, GtkWidget *w,
 	documentors_array = g_value_array_append (documentors_array, &value);
     }
 
-    g_object_set (G_OBJECT (w), "documentors", documentors_array, NULL);
+    g_object_set (G_OBJECT (w), "documenters", documentors_array, NULL);
 
     g_value_array_free (documentors_array);
 
@@ -834,8 +834,8 @@ glade_module_register_widgets (void)
     glade_register_custom_prop (GNOME_TYPE_MESSAGE_BOX, "message", custom_noop);
     glade_register_custom_prop (GNOME_TYPE_MESSAGE_BOX, "message_box_type", custom_noop);
     glade_register_custom_prop (GNOME_TYPE_ABOUT, "authors", about_set_authors);
-    glade_register_custom_prop (GNOME_TYPE_ABOUT, "translator_credirs", about_set_translator_credits);
-    glade_register_custom_prop (GNOME_TYPE_ABOUT, "documentors", about_set_documentors);
+    glade_register_custom_prop (GNOME_TYPE_ABOUT, "translator_credits", about_set_translator_credits);
+    glade_register_custom_prop (GNOME_TYPE_ABOUT, "documenters", about_set_documentors);
     glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "title", custom_noop);
     glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "text", custom_noop);
     glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "title_color", custom_noop);

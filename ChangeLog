@@ -1,3 +1,9 @@
+2003-12-26  Fernando Herrera  <fherrera@onirica.com>
+
+	* glade/glade-gnome.c: Show documenters in gnome-about dialog and only show 
+	translators if they exist. (Fix two typos, bugzilla #119382 and #11934).
+	Patches from Jon Willeke.
+
 2003-12-19  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-icon-lookup.h:
