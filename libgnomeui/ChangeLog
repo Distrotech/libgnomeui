@@ -1,3 +1,8 @@
+1998-03-09  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnome-init.c (gnome_init): Only set `program_invocation_name'
+	and `program_invocation_short_name' if they are not already set.
+
 Mon Mar  9 23:21:22 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* stock_demo.c: added stock icon properties,

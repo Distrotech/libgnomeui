@@ -136,22 +136,22 @@ gnome_init (char *app_id, struct argp *app_args,
 	    int argc, char **argv,
 	    unsigned int flags, int *arg_index)
 {
-	char *arg;
-
 	/* now we replace gtk_init() with gnome_init() in our apps */
 	gtk_set_locale();
 
 	gnomelib_register_arguments ();
 	gnomeui_register_arguments ();
 
-	program_invocation_name = argv[0];
-
-	arg = strrchr (argv[0], '/');
-	if (arg)
-		program_invocation_short_name = arg + 1;
-	else
-		program_invocation_short_name = program_invocation_name;
-
+	/* On non-glibc systems, this is not set up for us.  */
+	if (!program_invocation_name) {
+		char *arg;
+	  
+		program_invocation_name = argv[0];
+		arg = strrchr (argv[0], '/');
+		program_invocation_short_name =
+		  arg ? (arg + 1) : program_invocation_name;
+	}
+	
 	gnomelib_init (app_id);
 
 	if (! argp_program_version_hook)
@@ -168,7 +168,7 @@ gnome_init (char *app_id, struct argp *app_args,
  * Parse:
  * $gnomedatadir/gtkrc
  * $gnomedatadir/$apprc
- * ~/.ghome/gtkrc
+ * ~/.gnome/gtkrc
  * ~/.gnome/$apprc
  *
  * appname is derived from argv[0].  IMHO this is a great solution.
