@@ -1,3 +1,7 @@
+1998-06-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-init.c: Add a new argument handled by Gtk+.  Reindent.
+
 1998-06-23  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.[ch]: new member child_menu_label and function

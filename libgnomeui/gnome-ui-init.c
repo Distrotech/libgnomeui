@@ -30,31 +30,34 @@ static GdkPixmap *imlib_image_loader(GdkWindow   *window,
 
 
 /* This describes all the arguments understood by Gtk.  We parse them
-   out and put them into our own private argv, which we then feed to
-   Gtk once the command line has been successfully parsed.  Yes, this
-   is a total hack.  FIXME: should hidden options really be visible?
-
-   Note that the key numbers must start at -1 and decrease by 1.  The
-   key number is used to look up the argument name we supply to Gtk.  */
+ * out and put them into our own private argv, which we then feed to
+ * Gtk once the command line has been successfully parsed.  Yes, this
+ * is a total hack.  FIXME: should hidden options really be visible?
+ *
+ * Note that the key numbers must start at -1 and decrease by 1.  The
+ * key number is used to look up the argument name we supply to Gtk.
+ */
 static struct argp_option our_gtk_options[] =
 {
 	{ N_("\nGtk toolkit options"), -1, NULL, OPTION_DOC,   NULL, -3 },
-	{ "gdk-debug",    -1, NULL,          OPTION_HIDDEN,    NULL, -2 },
-	{ "gdk-no-debug", -2, NULL,          OPTION_HIDDEN, NULL, 0 },
-	{ "display",      -3, N_("DISPLAY"), 0,	  N_("X display to use"), 0 },
-	{ "sync",         -4, NULL,          OPTION_HIDDEN, 	  NULL, 0 },
-	{ "no-xshm",      -5, NULL,          0,	  N_("Don't use X shared memory extension"), 0 },
-	{ "name",         -6, N_("NAME"),    0,	  N_("FIXME"), 0 },
-	{ "class",        -7, N_("CLASS"),   0,	  N_("FIXME"), 0 },
-	{ "gxid_host",    -8, N_("HOST"),    0,	  N_("FIXME"), 0 },
-	{ "gxid_port",    -9, N_("PORT"),    0,	  N_("FIXME"), 0 },
-	{ "xim-preedit", -10, N_("STYLE"),   0,	  N_("FIXME"), 0 },
-	{ "xim-status",  -11, N_("STYLE"),   0,	  N_("FIXME"), 0 },
+	{ "gdk-debug",         -1, NULL,          OPTION_HIDDEN,    NULL, -2 },
+	{ "gdk-no-debug",      -2, NULL,          OPTION_HIDDEN, NULL, 0 },
+	{ "display",           -3, N_("DISPLAY"), 0,	  N_("X display to use"), 0 },
+	{ "sync",              -4, NULL,          OPTION_HIDDEN, 	  NULL, 0 },
+	{ "no-xshm",           -5, NULL,          0,	  N_("Don't use X shared memory extension"), 0 },
+	{ "name",              -6, N_("NAME"),    0,	  N_("FIXME"), 0 },
+	{ "class",             -7, N_("CLASS"),   0,	  N_("FIXME"), 0 },
+	{ "gxid_host",         -8, N_("HOST"),    0,	  N_("FIXME"), 0 },
+	{ "gxid_port",         -9, N_("PORT"),    0,	  N_("FIXME"), 0 },
+	{ "xim-preedit",      -10, N_("STYLE"),   0,	  N_("FIXME"), 0 },
+	{ "xim-status",       -11, N_("STYLE"),   0,	  N_("FIXME"), 0 },
+	{ "g-fatal-warnings", -12, NULL,          OPTION_HIDDEN, NULL, 0 },
 	{ NULL, 0, NULL, 0, NULL, 0 }
 };
 
 /* Index of next free slot in the argument vector we construct for
-   Gtk.  */
+ * Gtk.
+ */
 static int our_argc;
 
 /* Argument vector we construct.  */
@@ -70,11 +73,12 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 	if (key < 0)
 	{
 		/* This is some argument we defined.  We handle it by pushing
-		   the flag, and possibly the argument, onto our saved argument
-		   vector.  Later this is passed to gtk_init.
-
-		   Add our arguments as static argument to the master
-		   client.  */
+		 * the flag, and possibly the argument, onto our saved argument
+		 * vector.  Later this is passed to gtk_init.
+		 *
+		 * Add our arguments as static argument to the master
+		 * client.
+		 */
 		our_argv[our_argc] = g_strconcat ("--",
 						    our_gtk_options[- key - 1].name,
 						    NULL);
@@ -90,15 +94,17 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 	else if (key == ARGP_KEY_INIT)
 	{
 		/* We use twice the amount of space you'd think we need,
-		   because the user might write all options as
-		   `--foo=bar', but we always split into two arguments,
-		   like `-foo bar'.  */
+		 * because the user might write all options as
+		 * `--foo=bar', but we always split into two arguments,
+		 * like `-foo bar'.
+		 */
 		our_argv = (char **) g_malloc (2 * (state->argc + 1) * sizeof (char *));
 		our_argc = 0;
 		our_argv[our_argc++] = g_strdup (state->argv[0]);
 
 		/* Get the master client.  It must be defined, when
-                   processing 'ARGP_KEY_INIT'.  */
+		 * processing 'ARGP_KEY_INIT'.
+		 */
 		client= gnome_master_client ();
 	}
 	else if (key == ARGP_KEY_SUCCESS)
@@ -149,53 +155,61 @@ gnomeui_register_arguments (void)
 
 
 /* The default version hook tells everybody that this is a free Gnome
-   program.  You must override if that is incorrect.  */
+ * program.  You must override if that is incorrect.
+ */
 static void
 default_version_func (FILE *stream, struct argp_state *state)
 {
 	fprintf (stream, "Gnome %s %s\n", gnome_app_id,
 		 argp_program_version ? argp_program_version : "");
+	
 	/* FIXME: define a way to set copyright date so we can print it
-	   here?  */
+	 * here?
+	 */
 }
 
-/*handeling of automatic syncing of gnome_config stuff*/
+/* handeling of automatic syncing of gnome_config stuff */
 static int config_was_changed = FALSE;
 static int sync_timeout = -1;
 
 static int
-sync_timeout_f(gpointer data)
+sync_timeout_f (gpointer data)
 {
 	sync_timeout = -1;
-	gnome_config_sync();
+	gnome_config_sync ();
 	return FALSE;
 }
 
-/* gnome_config set handler, when we use a _set_* function this is
-   called and it schedhules a sync in 10 seconds*/
+/*
+ * gnome_config set handler, when we use a _set_* function this is
+ * called and it schedhules a sync in 10 seconds
+ */
 static void
 set_handler(gpointer data)
 {
 	config_was_changed = TRUE;
-	/*timeout already running*/
+
+	/* timeout already running */
 	if(sync_timeout!=-1)
 		return;
-	/*set a new sync timeout for 10 seconds from now*/
-	sync_timeout = gtk_timeout_add(10*1000,sync_timeout_f,NULL);
+	/* set a new sync timeout for 10 seconds from now */
+	sync_timeout = gtk_timeout_add (10*1000,sync_timeout_f,NULL);
 }
 
-/*called on every gnome_config_sync*/
+/* called on every gnome_config_sync */
 static void
 sync_handler(gpointer data)
 {
 	config_was_changed = FALSE;
-	if(sync_timeout>-1)
-		gtk_timeout_remove(sync_timeout);
+	if (sync_timeout > -1)
+		gtk_timeout_remove (sync_timeout);
 	sync_timeout = -1;
 }
 
-/*is called as an atexit handler and synces the config if it was changed
-  but not yet synced*/
+/*
+ * is called as an atexit handler and synces the config if it was changed
+ * but not yet synced
+ */
 static void
 atexit_handler(void)
 {
@@ -217,10 +231,11 @@ gnome_init (char *app_id, struct argp *app_args,
 
 	/* Debugging segv when you have a pointer grab is less than
 	 * useful, Sop instead of removing the above #if 0, fix the DND
+	 *
+	 * Yes, we do this twice, so if an error occurs before init,
+	 * it will be caught, and if it happens after init, we'll override
+	 * gtk's handler
 	 */
-	/* Yes, we do this twice, so if an error occurs before init,
-	   it will be caught, and if it happens after init, we'll override
-	   gtk's handler */
 	memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = (gpointer)gnome_segv_handle;
 	sigaction(SIGSEGV, &sa, NULL);
@@ -344,54 +359,58 @@ gnome_rc_parse (gchar *command)
 
 static void gnome_segv_handle(int signum)
 {
-  static int in_segv = 0;
-  void *eip = NULL;
-  pid_t pid;
-
+	static int in_segv = 0;
+	void *eip = NULL;
+	pid_t pid;
+	
 #if 0
-  /* Is there any way to do this portably? */
+	/* Is there any way to do this portably? */
 #ifdef linux
 #if defined(__i386__)
-  eip = sc->eip;
+	eip = sc->eip;
 #elif defined(__ppc__)
-  eip = sc->nc_ip;
+	eip = sc->nc_ip;
 #elif defined(__sparc__)
-  eip = sc->sigc_pc;
+	eip = sc->sigc_pc;
 #endif
 #endif
-
+	
 #endif /* #if 0 */
-
-  if(in_segv)
-    return;
-
-  in_segv++;
-
-  pid = fork();
-
-  if(pid)
-    {
-      int estatus;
-      pid_t eret;
-      eret = waitpid(pid, &estatus, 0);
-      /* We only do a zap-em if the user specifically requested it
-	 - if an error happens getting user decision, we carry on.
-         "Failsafe" is the idea */
-      if(WIFEXITED(estatus) && WEXITSTATUS(estatus) == 0)
-	exit(0);
-      else if(WIFEXITED(estatus) && WEXITSTATUS(estatus) == 99)
-	return; /* We don't decrement the in_segv lock
-		   - basically the user wants to ignore all future segv's */
-    }
-  else
-    {
-      char buf[32];
-      snprintf(buf, sizeof(buf), "%ld", eip);
-      /* Child process */
-      execl(GNOMEBINDIR "/gnome_segv", GNOMEBINDIR "/gnome_segv",
-	    program_invocation_name, buf, NULL);
-    }
-  in_segv--;
+	
+	if(in_segv)
+		return;
+	
+	in_segv++;
+	
+	pid = fork();
+	
+	if (pid){
+		int estatus;
+		pid_t eret;
+		
+		eret = waitpid(pid, &estatus, 0);
+		
+		/* We only do a zap-em if the user specifically requested it
+		 * - if an error happens getting user decision, we carry on.
+		 * "Failsafe" is the idea
+		 */
+		if (WIFEXITED(estatus) && WEXITSTATUS(estatus) == 0)
+			exit(0);
+		else if (WIFEXITED(estatus) && WEXITSTATUS(estatus) == 99){
+			
+			/* We don't decrement the in_segv lock
+			 * - basically the user wants to ignore all future segv's
+			 */
+			return;
+		}
+	} else {
+		char buf[32];
+		snprintf(buf, sizeof(buf), "%ld", eip);
+		/* Child process */
+		execl(GNOMEBINDIR "/gnome_segv", GNOMEBINDIR "/gnome_segv",
+		      program_invocation_name, buf, NULL);
+	}
+	in_segv--;
 }
 
 static GdkPixmap *
@@ -401,9 +420,10 @@ imlib_image_loader(GdkWindow   *window,
 		   GdkColor    *transparent_color,
 		   const gchar *filename)
 {
-  GdkPixmap *retval;
-  if(gdk_imlib_load_file_to_pixmap((char *)filename, &retval, mask))
-    return retval;
-  else
-    return NULL;
+	GdkPixmap *retval;
+	
+	if (gdk_imlib_load_file_to_pixmap ((char *) filename, &retval, mask))
+		return retval;
+	else
+		return NULL;
 }
