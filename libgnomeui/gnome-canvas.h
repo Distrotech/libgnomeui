@@ -131,6 +131,17 @@ void gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args);
 /* Move an item by the specified amount */
 void gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy);
 
+/* Grab the mouse for the specified item.  Only the events in event_mask will be reported.  If
+ * cursor is non-NULL, it will be used during the duration of the grab.  Time is a proper X event
+ * time parameter.  Returns the same values as XGrabPointer().
+ */
+int gnome_canvas_item_grab (GnomeCanvasItem *item, unsigned int event_mask, GdkCursor *cursor, guint32 time);
+
+/* Ungrabs the mouse -- the specified item must be the same that was passed to
+ * gnome_canvas_item_grab().  Time is a proper X event time parameter.
+ */
+void gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 time);
+
 /* These functions convert from a coordinate system to another.  "w" is world coordinates and "i" is
  * item coordinates.
  */
@@ -201,6 +212,7 @@ struct _GnomeCanvas {
 	guint idle_id;				/* Idle handler ID */
 
 	GnomeCanvasItem *root;			/* root canvas group */
+	guint root_destroy_id;			/* Signal handler ID for destruction of root item */
 
 	double scroll_x1, scroll_y1;		/* scrolling limit */
 	double scroll_x2, scroll_y2;
@@ -226,6 +238,8 @@ struct _GnomeCanvas {
 	GnomeCanvasItem *new_current_item;	/* Item that is about to become current
 						 * (used to track deletions and such)
 						 */
+	GnomeCanvasItem *grabbed_item;		/* Item that holds a pointer grab, or NULL if none */
+	unsigned int grabbed_event_mask;	/* Event mask specified when grabbing an item */
 
 	GdkEvent pick_event;			/* Event on which selection of current item is based */
 

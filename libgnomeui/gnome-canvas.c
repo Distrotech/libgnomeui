@@ -16,8 +16,6 @@
  *
  * - Stipple for filling items.
  *
- * - Fix item sets and recursive argument settings once Tim fixes the GtkArg mechanism.
- *
  * - Line/Curve item.
  *
  * - Polygon item.
@@ -45,6 +43,7 @@
 #include <config.h>
 #include <math.h>
 #include <stdarg.h>
+#include <gdk/gdkprivate.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
 #include "gnome-canvas.h"
@@ -143,9 +142,6 @@ item_post_create_setup (GnomeCanvasItem *item)
 
 	obj = GTK_OBJECT (item);
 
-	gtk_object_ref (obj);
-	gtk_object_sink (obj);
-
 	group_add (GNOME_CANVAS_GROUP (item->parent), item);
 
 	if (GTK_WIDGET_REALIZED (item->canvas) && GNOME_CANVAS_ITEM_CLASS (obj->klass)->realize)
@@ -243,10 +239,13 @@ gnome_canvas_item_shutdown (GtkObject *object)
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	item->canvas->need_repick = TRUE;
 
-	if (item->parent) {
-		group_remove (GNOME_CANVAS_GROUP (item->parent), item);
-		gtk_object_unref (object);
+	if (item->canvas->grabbed_item == item) {
+		item->canvas->grabbed_item = NULL;
+		gdk_pointer_ungrab (GDK_CURRENT_TIME);
 	}
+
+	if (item->parent)
+		group_remove (GNOME_CANVAS_GROUP (item->parent), item);
 
 	if (GTK_WIDGET_MAPPED (item->canvas) && GNOME_CANVAS_ITEM_CLASS (item->object.klass)->unmap)
 		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->unmap) (item);
@@ -337,6 +336,41 @@ gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->translate) (item, dx, dy);
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	item->canvas->need_repick = TRUE;
+}
+
+int
+gnome_canvas_item_grab (GnomeCanvasItem *item, unsigned int event_mask, GdkCursor *cursor, guint32 time)
+{
+	g_return_val_if_fail (item != NULL, GrabNotViewable);
+	g_return_val_if_fail (GNOME_IS_CANVAS_ITEM (item), GrabNotViewable);
+	g_return_val_if_fail (GTK_WIDGET_MAPPED (item->canvas), GrabNotViewable);
+
+	if (item->canvas->grabbed_item)
+		return AlreadyGrabbed;
+
+	item->canvas->grabbed_item = item;
+	item->canvas->grabbed_event_mask = event_mask;
+
+	return gdk_pointer_grab (GTK_WIDGET (item->canvas)->window,
+				 FALSE,
+				 event_mask,
+				 NULL,
+				 cursor,
+				 time);
+}
+
+void
+gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 time)
+{
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+
+	if (item->canvas->grabbed_item != item)
+		return;
+
+	item->canvas->grabbed_item = NULL;
+
+	gdk_pointer_ungrab (time);
 }
 
 void
@@ -703,7 +737,8 @@ gnome_canvas_group_translate (GnomeCanvasItem *item, double dx, double dy)
 static void
 group_add (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 {
-	/* FIXME: should we reference the item? */
+	gtk_object_ref (GTK_OBJECT (item));
+	gtk_object_sink (GTK_OBJECT (item));
 
 	if (!group->item_list) {
 		group->item_list = g_list_append (group->item_list, item);
@@ -731,6 +766,8 @@ group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 		group->item_list_end = list_item->prev;
 
 	group->item_list = g_list_remove_link (group->item_list, list_item);
+
+	gtk_object_unref (GTK_OBJECT (item));
 }
 
 void
@@ -913,7 +950,8 @@ gnome_canvas_destroy (GtkObject *object)
 
 	canvas = GNOME_CANVAS (object);
 
-	gtk_object_destroy (GTK_OBJECT (canvas->root));
+	gtk_signal_disconnect (GTK_OBJECT (canvas->root), canvas->root_destroy_id);
+	gtk_object_unref (GTK_OBJECT (canvas->root));
 
 	if (GTK_OBJECT_CLASS (canvas_parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (canvas_parent_class)->destroy) (object);
@@ -932,6 +970,12 @@ gnome_canvas_new (GdkVisual *visual, GdkColormap *colormap)
 	return GTK_WIDGET (canvas);
 }
 
+static void
+panic_root_destroyed (GtkObject *object, gpointer data)
+{
+	g_error ("Eeeek, root item %p of canvas %p was destroyed!", object, data);
+}
+
 void
 gnome_canvas_construct (GnomeCanvas *canvas, GdkVisual *visual, GdkColormap *colormap)
 {
@@ -948,6 +992,14 @@ gnome_canvas_construct (GnomeCanvas *canvas, GdkVisual *visual, GdkColormap *col
 
 	canvas->root = GNOME_CANVAS_ITEM (gtk_type_new (gnome_canvas_group_get_type ()));
 	canvas->root->canvas = canvas;
+
+	gtk_object_ref (GTK_OBJECT (canvas->root));
+	gtk_object_sink (GTK_OBJECT (canvas->root));
+
+	canvas->root_destroy_id = gtk_signal_connect (GTK_OBJECT (canvas->root), "destroy",
+						      (GtkSignalFunc) panic_root_destroyed,
+						      canvas);
+
 	canvas->need_repick = TRUE;
 }
 
@@ -976,6 +1028,24 @@ gnome_canvas_map (GtkWidget *widget)
 }
 
 static void
+shutdown_transients (GnomeCanvas *canvas)
+{
+	if (canvas->need_redraw) {
+		canvas->need_redraw = FALSE;
+		canvas->redraw_x1 = 0;
+		canvas->redraw_y1 = 0;
+		canvas->redraw_x2 = 0;
+		canvas->redraw_y2 = 0;
+		gtk_idle_remove (canvas->idle_id);
+	}
+
+	if (canvas->grabbed_item) {
+		canvas->grabbed_item = NULL;
+		gdk_pointer_ungrab (GDK_CURRENT_TIME);
+	}
+}
+
+static void
 gnome_canvas_unmap (GtkWidget *widget)
 {
 	GnomeCanvas *canvas;
@@ -985,14 +1055,7 @@ gnome_canvas_unmap (GtkWidget *widget)
 
 	canvas = GNOME_CANVAS (widget);
 
-	if (canvas->need_redraw) {
-		canvas->need_redraw = FALSE;
-		canvas->redraw_x1 = 0;
-		canvas->redraw_y1 = 0;
-		canvas->redraw_x2 = 0;
-		canvas->redraw_y2 = 0;
-		gtk_idle_remove (canvas->idle_id);
-	}
+	shutdown_transients (canvas);
 
 	/* Unmap items */
 
@@ -1073,6 +1136,8 @@ gnome_canvas_unrealize (GtkWidget *widget)
 	g_return_if_fail (GNOME_IS_CANVAS (widget));
 
 	canvas = GNOME_CANVAS (widget);
+
+	shutdown_transients (canvas);
 
 	/* Unrealize items */
 
@@ -1179,12 +1244,60 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	GdkEvent ev;
 	gint finished;
 	GnomeCanvasItem *item;
+	unsigned int mask;
 
-	ev = *event;
+	/* Perform checks for grabbed items */
+
+	if (canvas->grabbed_item && (canvas->grabbed_item != canvas->current_item))
+		return;
+
+	if (canvas->grabbed_item) {
+		switch (event->type) {
+		case GDK_ENTER_NOTIFY:
+			mask = GDK_ENTER_NOTIFY_MASK;
+			break;
+
+		case GDK_LEAVE_NOTIFY:
+			mask = GDK_LEAVE_NOTIFY_MASK;
+			break;
+
+		case GDK_MOTION_NOTIFY:
+			mask = GDK_POINTER_MOTION_MASK;
+			break;
+
+		case GDK_BUTTON_PRESS:
+		case GDK_2BUTTON_PRESS:
+		case GDK_3BUTTON_PRESS:
+			mask = GDK_BUTTON_PRESS_MASK;
+			break;
+
+		case GDK_BUTTON_RELEASE:
+			mask = GDK_BUTTON_RELEASE_MASK;
+			break;
+
+		case GDK_KEY_PRESS:
+			mask = GDK_KEY_PRESS_MASK;
+			break;
+
+		case GDK_KEY_RELEASE:
+			mask = GDK_KEY_RELEASE_MASK;
+			break;
+
+		default:
+			mask = 0;
+			break;
+		}
+
+		if (!(mask & canvas->grabbed_event_mask))
+			return;
+
+	}
 
 	/* Convert to world coordinates -- we have two cases because of diferent offsets of the
 	 * fields in the event structures.
 	 */
+
+	ev = *event;
 
 	switch (ev.type) {
 	case GDK_ENTER_NOTIFY:

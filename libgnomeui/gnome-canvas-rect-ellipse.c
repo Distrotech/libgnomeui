@@ -195,14 +195,12 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		re->width = GTK_VALUE_UINT (*arg);
 		re->width_pixels = TRUE;
 		calc_gcs = TRUE;
-		calc_bounds = TRUE;
 		break;
 
 	case ARG_WIDTH_UNITS:
 		re->width = fabs (GTK_VALUE_DOUBLE (*arg));
 		re->width_pixels = FALSE;
 		calc_gcs = TRUE;
-		calc_bounds = TRUE;
 		break;
 
 	default:

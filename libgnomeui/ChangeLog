@@ -1,3 +1,43 @@
+1998-07-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.h (GnomeCanvas): New field, grabbed_item, points to
+	the item that holds the active pointer grab.
+
+	* gnome-canvas.c (gnome_canvas_item_grab
+	gnome_canvas_item_ungrab): New public functions; perform a mouse
+	grab on the specified item.  These are pretty much like
+	XGrabPointer() and XUngrabPointer(), respectively.
+
+	* gnome-canvas.c (emit_event): If there is a grabbed item, check
+	that it is the current item for emission.
+
+	* gnome-canvas.c (shutdown_transients): New function, remove the
+	idle handler and ungrab the mouse.
+
+	* gnome-canvas.c (gnome_canvas_unmap): Use shutdown_transients().
+	* gnome-canvas.c (gnome_canvas_unrealize): Likewise.
+
+	* gnome-canvas-image.h (GnomeCanvasImage): New need_recalc flag --
+	specifies whether we need to rescale the image when needed.
+
+	* gnome-canvas-image.c (gnome_canvas_image_reconfigure): Just turn
+	on the need_recalc flag, do not actually do the rescaling work here.
+
+	* gnome-canvas-image.c (recalc_if_needed): Rescale the image and
+	fetch the pixmap/mask if needed.
+
+	* gnome-canvas-image.c (gnome_canvas_image_draw): Use recalc_if_needed().
+	* gnome-canvas-image.c (gnome_canvas_image_point): Likewise.
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_set_arg): Do not
+	recalc bounds unnecessarily.
+	* gnome-canvas-image.c (gnome_canvas_image_set_arg): Likewise.
+
+	* gnome-canvas.c (gnome_canvas_construct): Ref/sink root item.
+	(group_add): Ref/sink item.
+	(group_remove): Unref item.
+	(gnome_canvas_destroy): Unref root item.
+
 Tue Jul 14 22:47:33 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-app.h, gnome-app.c, gnome-dialog.h, gnome-dialog.c:

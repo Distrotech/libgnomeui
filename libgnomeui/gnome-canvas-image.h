@@ -44,6 +44,8 @@ struct _GnomeCanvasImage {
 	int cx, cy;			/* Top-left canvas coordinates for display */
 	int cwidth, cheight;		/* Rendered size in pixels */
 	GdkGC *gc;			/* GC for drawing image */
+
+	int need_recalc : 1;		/* Do we need to rescale the image? */
 };
 
 struct _GnomeCanvasImageClass {

@@ -112,6 +112,8 @@ free_pixmap_and_mask (GnomeCanvasImage *image)
 
 	image->pixmap = NULL;
 	image->mask = NULL;
+	image->cwidth = 0;
+	image->cheight = 0;
 }
 
 static void
@@ -203,6 +205,7 @@ gnome_canvas_image_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	image = GNOME_CANVAS_IMAGE (object);
 
 	update = FALSE;
+	calc_bounds = FALSE;
 
 	switch (arg_id) {
 	case ARG_IMAGE:
@@ -211,11 +214,12 @@ gnome_canvas_image_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		if (image->im) {
 			image->width = image->im->rgb_width / item->canvas->pixels_per_unit;
 			image->height = image->im->rgb_height / item->canvas->pixels_per_unit;
-		} else
-			image->width = image->height = 0.0;
+		} else {
+			image->width = 0.0;
+			image->height = 0.0;
+		}
 
 		update = TRUE;
-		calc_bounds = TRUE;
 		break;
 
 	case ARG_X:
@@ -231,19 +235,16 @@ gnome_canvas_image_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	case ARG_WIDTH:
 		image->width = GTK_VALUE_DOUBLE (*arg);
 		update = TRUE;
-		calc_bounds = TRUE;
 		break;
 
 	case ARG_HEIGHT:
 		image->height = GTK_VALUE_DOUBLE (*arg);
 		update = TRUE;
-		calc_bounds = TRUE;
 		break;
 
 	case ARG_ANCHOR:
 		image->anchor = GTK_VALUE_ENUM (*arg);
 		update = TRUE;
-		calc_bounds = TRUE;
 		break;
 
 	default:
@@ -270,16 +271,8 @@ gnome_canvas_image_reconfigure (GnomeCanvasItem *item)
 		image->cwidth = (int) (image->width * item->canvas->pixels_per_unit + 0.5);
 		image->cheight = (int) (image->height * item->canvas->pixels_per_unit + 0.5);
 
-		gdk_imlib_render (image->im, image->cwidth, image->cheight);
-
-		image->pixmap = gdk_imlib_move_image (image->im);
-		g_assert (image->pixmap != NULL);
-		image->mask = gdk_imlib_move_mask (image->im);
-
-		if (image->gc)
-			gdk_gc_set_clip_mask (image->gc, image->mask);
-	} else
-		image->cwidth = image->cheight = 0;
+		image->need_recalc = TRUE;
+	}
 
 	recalc_bounds (image);
 }
@@ -306,6 +299,24 @@ gnome_canvas_image_unrealize (GnomeCanvasItem *item)
 }
 
 static void
+recalc_if_needed (GnomeCanvasImage *image)
+{
+	if (!image->need_recalc)
+		return;
+
+	gdk_imlib_render (image->im, image->cwidth, image->cheight);
+
+	image->pixmap = gdk_imlib_move_image (image->im);
+	g_assert (image->pixmap != NULL);
+	image->mask = gdk_imlib_move_mask (image->im);
+
+	if (image->gc)
+		gdk_gc_set_clip_mask (image->gc, image->mask);
+
+	image->need_recalc = FALSE;
+}
+
+static void
 gnome_canvas_image_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 			 int x, int y, int width, int height)
 {
@@ -315,6 +326,8 @@ gnome_canvas_image_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 	if (!image->im)
 		return;
+
+	recalc_if_needed (image);
 
 	if (image->mask)
 		gdk_gc_set_clip_origin (image->gc, image->cx - x, image->cy - y);
@@ -397,6 +410,8 @@ gnome_canvas_image_point (GnomeCanvasItem *item, double x, double y,
 	image = GNOME_CANVAS_IMAGE (item);
 
 	*actual_item = item;
+
+	recalc_if_needed (image);
 
 	x1 = image->cx - item->canvas->close_enough;
 	y1 = image->cy - item->canvas->close_enough;
