@@ -26,7 +26,7 @@
 
 #include "gnome-druid-page.h"
 
-#include "libgnomeuiP.h"
+#include <libgnomeuiP.h>
 
 enum {
 	NEXT,

@@ -28,7 +28,7 @@
 
 #include <gdk/gdk.h>
 #include <gtk/gtkwidget.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include "gnome-pixmap.h"
 
 BEGIN_GNOME_DECLS

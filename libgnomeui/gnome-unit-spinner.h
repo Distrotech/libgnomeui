@@ -23,7 +23,7 @@
 #define GNOME_UNIT_SPINNER_H
 
 #include <gtk/gtk.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <libgnome/gnome-paper.h>
 
 BEGIN_GNOME_DECLS

@@ -52,6 +52,6 @@
 #    define N_(String) (String)
 #endif
 
-#include "libgnome/gnome-i18n.h"
+#include <libgnomebase/gnome-i18n.h>
 
 #endif /* __GNOME_I18NP_H__ */

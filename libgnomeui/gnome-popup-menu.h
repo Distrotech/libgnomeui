@@ -27,7 +27,7 @@
 #ifndef GNOME_POPUPMENU_H
 #define GNOME_POPUPMENU_H
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <gtk/gtkmenu.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>

@@ -21,7 +21,7 @@
 #ifndef __GNOME_STOCK_H__
 #define __GNOME_STOCK_H__
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkpixmap.h>
 #include <gtk/gtkvbox.h>

@@ -26,7 +26,7 @@
 #ifndef GNOME_POPUP_HELP_H
 #define GNOME_POPUP_HELP_H
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
 

@@ -43,7 +43,7 @@
 #include <gdk/gdkprivate.h>
 #include <X11/Xatom.h>
 
-#include "libgnomeuiP.h"
+#include <libgnomeuiP.h>
 
 extern char *program_invocation_name;
 extern char *program_invocation_short_name;

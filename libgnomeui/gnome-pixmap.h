@@ -30,7 +30,7 @@
 #include <gtk/gtkmisc.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-#include "libgnome/gnome-defs.h"
+#include <libgnomebase/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

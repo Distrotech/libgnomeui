@@ -22,7 +22,7 @@
 #include <config.h>
 
 #include "gnome-dialog.h"
-#include "libgnome/gnome-util.h"
+#include <libgnome/gnome-util.h>
 #include "gnome-i18nP.h"
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
@@ -32,7 +32,7 @@
 #include "gnome-preferences.h"
 #include "gnome-dialog-util.h"
 
-#include "libgnomeuiP.h"
+#include <libgnomeuiP.h>
 
 struct _GnomeDialogPrivate {
   GtkWidget      *action_area; /* A button box, not an hbox */

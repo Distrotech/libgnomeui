@@ -48,7 +48,7 @@
 #include "gnome-uidefs.h"
 #include "gnome-gconf.h"
 
-#include "libgnomeuiP.h"
+#include <libgnomeuiP.h>
 
 #undef DEBUG_ASYNC_HANDLE
 

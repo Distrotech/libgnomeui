@@ -42,7 +42,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkbutton.h>
 
-#include "libgnomeuiP.h"
+#include <libgnomeuiP.h>
 
 /* These are the dimensions of the color sample in the color picker */
 #define COLOR_PICKER_WIDTH  20

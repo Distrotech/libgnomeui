@@ -1,6 +1,6 @@
 #include <config.h>
 #include <gtk/gtktypeutils.h>
-#include "libgnomeui.h"
+#include <libgnomeui.h>
 
 #include "gnometypebuiltins_vars.c"
 #include "gnometypebuiltins_evals.c"

@@ -21,9 +21,9 @@
 
 #include <config.h>
 
-#include "libgnome/gnome-util.h"
+#include <libgnome/gnome-util.h>
 #include "gnome-i18nP.h"
-#include "libgnome/gnome-config.h"
+#include <libgnome/gnome-config.h>
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"
 #include "gnome-uidefs.h"

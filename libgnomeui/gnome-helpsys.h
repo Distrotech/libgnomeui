@@ -26,7 +26,7 @@
 #ifndef GNOME_HELPSYS_H
 #define GNOME_HELPSYS_H 1
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <libgnome/gnome-url.h>
 
 #include <gtk/gtk.h>

@@ -32,7 +32,7 @@
 #include <gdk/gdk.h>
 #include <gtk/gtkbin.h>
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

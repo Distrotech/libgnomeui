@@ -26,7 +26,7 @@
 #define GNOME_PAPER_SELECTOR_H
 
 #include <gtk/gtk.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <libgnome/gnome-paper.h>
 
 BEGIN_GNOME_DECLS

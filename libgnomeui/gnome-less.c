@@ -28,11 +28,11 @@
 #include "gnome-less.h"
 
 
-#include "libgnome/gnome-util.h"
+#include <libgnome/gnome-util.h>
 
 #include "gnome-i18nP.h"
 
-#include "libgnomeui/gnome-uidefs.h"
+#include <libgnomeui/gnome-uidefs.h>
 
 #include <unistd.h>
 #include <time.h>

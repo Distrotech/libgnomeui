@@ -27,7 +27,7 @@
 #define __GNOME_DATE_EDIT_H_ 
 
 #include <gtk/gtkhbox.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
  
 BEGIN_GNOME_DECLS
 

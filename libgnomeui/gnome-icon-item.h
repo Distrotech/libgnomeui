@@ -33,7 +33,7 @@
 #ifndef _GNOME_ICON_TEXT_ITEM_H_
 #define _GNOME_ICON_TEXT_ITEM_H_
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <gtk/gtkentry.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomeui/gnome-icon-text.h>

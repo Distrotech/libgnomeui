@@ -40,7 +40,7 @@
 #include <gtk/gtkmenubar.h>
 #include <gtk/gtktoolbar.h>
 #include <gtk/gtkwindow.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 
 #include "gnome-dock.h"
 

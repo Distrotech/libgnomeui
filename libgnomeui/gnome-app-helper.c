@@ -41,10 +41,10 @@
 #include <ctype.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
-#include "libgnome/libgnome.h"
-#include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-util.h"
-#include "libgnome/gnome-config.h"
+#include <libgnome/libgnome.h>
+#include <libgnomebase/gnome-defs.h>
+#include <libgnome/gnome-util.h>
+#include <libgnome/gnome-config.h>
 #include "gnome-helpsys.h"
 #include "gnome-gconf.h"
 
@@ -53,7 +53,7 @@
  * bogus; we should just call gettext() directly here.
  */
 
-#include "libgnome/gnome-i18n.h"
+#include <libgnomebase/gnome-i18n.h>
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-uidefs.h"

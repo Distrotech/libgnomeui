@@ -30,7 +30,7 @@
 #include "libart_lgpl/art_affine.h"
 #include "libart_lgpl/art_rgb_affine.h"
 #include "libart_lgpl/art_rgb_rgba_affine.h"
-#include "libgnomeuiP.h"
+#include <libgnomeuiP.h>
 
 static void gnome_pixmap_class_init    (GnomePixmapClass *class);
 static void gnome_pixmap_init          (GnomePixmap      *gpixmap);

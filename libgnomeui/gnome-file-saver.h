@@ -26,7 +26,7 @@
 #ifndef GNOME_FILE_SAVER_H
 #define GNOME_FILE_SAVER_H
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <libgnomeui/gnome-dialog.h>
 #include <libgnomeui/gnome-gconf.h>
 

@@ -26,7 +26,7 @@
 #ifndef GNOME_ICON_TEXT_H
 #define GNOME_ICON_TEXT_H
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

@@ -34,7 +34,7 @@
 
 
 #include <glib.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include "gnome-selector.h"
 
 

@@ -47,7 +47,7 @@
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include <libgnomecanvas/gnome-canvas-rect-ellipse.h>
 
-#include "libgnomeuiP.h"
+#include <libgnomeuiP.h>
 
 /* Aliases to minimize screen use in my laptop */
 #define GIL(x)       GNOME_ICON_LIST(x)

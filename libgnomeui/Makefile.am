@@ -35,8 +35,7 @@ INCLUDES = \
 EXTRA_HEADERS = 
 
 noinst_HEADERS = \
-	libgnomeuiP.h			\
-	gnome-i18nP.h
+	libgnomeuiP.h
 
 libgnomeui_2_la_SOURCES = \
 	gnome-about.c			\

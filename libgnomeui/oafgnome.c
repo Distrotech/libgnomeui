@@ -33,7 +33,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <gtk/gtk.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include "gnome-i18nP.h"
 #include <libgnome/gnome-config.h>
 #include <liboaf/liboaf.h>

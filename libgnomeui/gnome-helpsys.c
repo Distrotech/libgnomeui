@@ -35,7 +35,7 @@
 
 #include <glib.h>
 #include <ctype.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <libgnome/gnome-url.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
@@ -49,7 +49,7 @@
 #include "wap-textfu.h"
 #include "gnome-cursors.h"
 #include "gnome-dialog-util.h"
-#include <libgnome/gnome-program.h>
+#include <libgnomebase/gnome-program.h>
 #include <gdk/gdkx.h>
 
 #include <stdio.h>

@@ -31,7 +31,7 @@
 #include <gtk/gtkhbox.h>
 #include <gtk/gtkprogress.h>
 
-#include "libgnome/gnome-defs.h"
+#include <libgnomebase/gnome-defs.h>
 #include "gnome-types.h"
 
 BEGIN_GNOME_DECLS

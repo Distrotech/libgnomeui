@@ -22,7 +22,7 @@
 #define GNOME_FONT_PICKER_H
 
 #include <gtk/gtkbutton.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

@@ -27,7 +27,7 @@
 #ifndef GNOME_VFS_UTIL_H
 #define GNOME_VFS_UTIL_H
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <libgnomevfs/gnome-vfs-types.h>

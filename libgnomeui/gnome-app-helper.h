@@ -39,7 +39,7 @@
 #define GNOME_APP_HELPER_H
 
 #include <gtk/gtkstatusbar.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <libgnomeui/gnome-appbar.h>
 #include <libgnomeui/gnome-app.h>
 

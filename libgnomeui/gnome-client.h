@@ -29,8 +29,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <gtk/gtkobject.h>
-#include <libgnome/gnome-defs.h>
-#include <libgnome/gnome-program.h>
+#include <libgnomebase/gnome-defs.h>
+#include <libgnomebase/gnome-program.h>
 #include <libgnomeui/gnome-dialog.h>
 
 BEGIN_GNOME_DECLS

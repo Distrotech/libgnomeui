@@ -26,7 +26,7 @@
 #ifndef GNOME_RECENTLY_USED_H
 #define GNOME_RECENTLY_USED_H
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <libgnomeui/gnome-gconf.h>
 
 BEGIN_GNOME_DECLS

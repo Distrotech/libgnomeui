@@ -30,7 +30,7 @@
 #ifndef _GNOME_DOCK_H
 #define _GNOME_DOCK_H
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

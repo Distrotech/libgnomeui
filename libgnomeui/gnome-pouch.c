@@ -25,13 +25,13 @@
 #include <gdk/gdk.h>
 
 #include <config.h>
-#include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-config.h"
+#include <libgnomebase/gnome-defs.h>
+#include <libgnome/gnome-config.h>
 #include "gnome-i18nP.h"
-#include "libgnome/gnome-util.h"
-#include "libgnomeui/gnome-app.h"
-#include "libgnomeui/gnome-app-helper.h"
-#include "libgnomeui/gnome-popup-menu.h"
+#include <libgnome/gnome-util.h>
+#include <libgnomeui/gnome-app.h>
+#include <libgnomeui/gnome-app-helper.h>
+#include <libgnomeui/gnome-popup-menu.h>
 #include "gnome-pouch.h"
 #include "gnome-roo.h"
 #include "gnome-pouchP.h"

@@ -43,11 +43,11 @@
 
 #include <string.h>
 #include <gtk/gtk.h>
-#include "libgnome/gnome-program.h"
-#include "libgnome/gnome-defs.h"
+#include <libgnomebase/gnome-program.h>
+#include <libgnomebase/gnome-defs.h>
 #include "gnome-i18nP.h"
-#include "libgnome/gnome-util.h"
-#include "libgnome/gnome-config.h"
+#include <libgnome/gnome-util.h>
+#include <libgnome/gnome-config.h>
 #include "gnome-uidefs.h"
 #include "gnome-preferences.h"
 #include "gnome-dock.h"

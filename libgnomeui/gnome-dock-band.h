@@ -29,7 +29,7 @@
 #ifndef _GNOME_DOCK_BAND_H
 #define _GNOME_DOCK_BAND_H
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

@@ -28,7 +28,7 @@
 #ifndef GNOME_LESS_H
 #define GNOME_LESS_H
 
-#include "libgnome/gnome-defs.h"
+#include <libgnomebase/gnome-defs.h>
 #include <gtk/gtk.h>
 #include <stdio.h>
 

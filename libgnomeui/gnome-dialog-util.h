@@ -35,7 +35,7 @@
   instead of a dialog.
   ****/
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include "gnome-types.h"
 
 BEGIN_GNOME_DECLS

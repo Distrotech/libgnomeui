@@ -29,7 +29,7 @@
   Convenience UI functions for use with GnomeApp 
   ****/
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-app.h"
 #include "gnome-types.h"

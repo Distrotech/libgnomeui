@@ -31,7 +31,7 @@
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkeditable.h>
 #include <gtk/gtkentry.h>
-#include "libgnome/gnome-defs.h"
+#include <libgnomebase/gnome-defs.h>
 #include "gnome-i18nP.h"
 #include "gnome-app.h"
 #include "gnome-app-helper.h"

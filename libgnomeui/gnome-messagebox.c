@@ -23,14 +23,14 @@
 #include <config.h>
 #include <stdarg.h>
 #include "gnome-messagebox.h"
-#include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-triggers.h"
-#include "libgnome/gnome-util.h"
+#include <libgnomebase/gnome-defs.h>
+#include <libgnome/gnome-triggers.h>
+#include <libgnome/gnome-util.h>
 #include "gnome-i18nP.h"
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
-#include "libgnomeui/gnome-stock.h"
-#include "libgnomeui/gnome-uidefs.h"
+#include <libgnomeui/gnome-stock.h>
+#include <libgnomeui/gnome-uidefs.h>
 #include <libgnome/libgnome.h>
 
 #define GNOME_MESSAGE_BOX_WIDTH  425

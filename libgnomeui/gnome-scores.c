@@ -31,10 +31,10 @@
 #include <config.h>
 #include <string.h>
 #include "gnome-scores.h"
-#include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-util.h"
-#include "libgnome/gnome-config.h"
-#include "libgnome/gnome-score.h"
+#include <libgnomebase/gnome-defs.h>
+#include <libgnome/gnome-util.h>
+#include <libgnome/gnome-config.h>
+#include <libgnome/gnome-score.h>
 #include "gnome-i18nP.h"
 #include "gnome-stock.h"
 #include "gtk/gtk.h"

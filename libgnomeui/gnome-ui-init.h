@@ -28,7 +28,7 @@
 
 BEGIN_GNOME_DECLS
 
-#include <libgnome/gnome-program.h>
+#include <libgnomebase/gnome-program.h>
 
 #define LIBGNOMEUI_PARAM_CRASH_DIALOG	"crash-dialog"
 #define LIBGNOMEUI_PARAM_DISPLAY	"display"

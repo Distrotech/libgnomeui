@@ -22,7 +22,7 @@
  */
 
 #include <liboaf/liboaf.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <libgnome/gnome-exec.h>
 #include <errno.h>
 #include "gnome-corba-rexec.h"

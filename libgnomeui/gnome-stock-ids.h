@@ -26,7 +26,7 @@
 #ifndef __GNOME_STOCK_IDS_H__
 #define __GNOME_STOCK_IDS_H__
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

@@ -31,8 +31,8 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#include "libgnomeui/gnome-app.h"
-#include "libgnomeui/gnome-app-helper.h"
+#include <libgnomeui/gnome-app.h>
+#include <libgnomeui/gnome-app-helper.h>
 
 BEGIN_GNOME_DECLS
 

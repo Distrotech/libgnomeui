@@ -29,10 +29,10 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-config.h"
+#include <libgnomebase/gnome-defs.h>
+#include <libgnome/gnome-config.h>
 #include "gnome-i18nP.h"
-#include "libgnome/gnome-util.h"
+#include <libgnome/gnome-util.h>
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-cursors.h"
@@ -46,7 +46,7 @@
 #include "gnome-mdi-child.h"
 #include "gnome-mdiP.h"
 
-#include "libgnomeuiP.h"
+#include <libgnomeuiP.h>
 
 #include <unistd.h>
 #include <stdio.h>

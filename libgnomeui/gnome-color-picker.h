@@ -30,7 +30,7 @@
 #ifndef GNOME_COLOR_PICKER_H
 #define GNOME_COLOR_PICKER_H
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <gtk/gtkbutton.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 

@@ -55,7 +55,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-pixmap.h"
 
-#include "libgnomeuiP.h"
+#include <libgnomeuiP.h>
 
 const char libgnomeui_param_crash_dialog[]="B:libgnomeui/show_crash_dialog";
 const char libgnomeui_param_display[]="S:libgnomeui/display";

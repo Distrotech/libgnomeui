@@ -40,7 +40,7 @@
           directly, instead.
 **************/
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <gtk/gtkbbox.h>
 
 #include "gnome-mdi.h"

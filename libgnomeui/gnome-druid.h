@@ -26,7 +26,7 @@
 
 #include <gtk/gtk.h>
 #include "gnome-druid-page.h"
-#include "libgnome/gnome-defs.h"
+#include <libgnomebase/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

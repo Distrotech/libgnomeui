@@ -25,7 +25,7 @@
 #define __GNOME_PROPERTY_BOX_H__
 
 #include "gnome-dialog.h"
-#include "libgnome/gnome-defs.h"
+#include <libgnomebase/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 

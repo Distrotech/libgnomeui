@@ -39,7 +39,7 @@
 #ifndef __GNOME_ABOUT_H__
 #define __GNOME_ABOUT_H__
 
-#include "libgnome/gnome-defs.h"
+#include <libgnomebase/gnome-defs.h>
 #include "gnome-dialog.h"
 
 BEGIN_GNOME_DECLS

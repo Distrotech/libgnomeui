@@ -34,7 +34,7 @@
 
 #include <string.h>
 
-#include "libgnomeui/gnome-mdi.h"
+#include <libgnomeui/gnome-mdi.h>
 
 BEGIN_GNOME_DECLS
 

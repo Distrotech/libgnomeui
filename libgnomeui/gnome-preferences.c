@@ -23,7 +23,7 @@
 
 #include <config.h>
 #include "gnome-preferences.h"
-#include "libgnome/gnome-config.h"
+#include <libgnome/gnome-config.h>
 #include <string.h>
 
 

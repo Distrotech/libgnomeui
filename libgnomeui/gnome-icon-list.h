@@ -35,7 +35,7 @@
 #ifndef _GNOME_ICON_LIST_H_
 #define _GNOME_ICON_LIST_H_
 
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 

@@ -33,7 +33,7 @@
 
 
 #include <gtk/gtkwindow.h>
-#include <libgnome/gnome-defs.h>
+#include <libgnomebase/gnome-defs.h>
 
 
 BEGIN_GNOME_DECLS
