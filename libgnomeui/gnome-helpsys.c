@@ -71,10 +71,11 @@ struct _GnomeHelpViewPrivate {
 };
 
 enum {
-  ARG_0 = 0,
-  ARG_APP_STYLE,
-  ARG_APP_STYLE_PRIORITY,
-  ARG_TOPLEVEL
+  PARAM_0 = 0,
+  PARAM_APP_STYLE,
+  PARAM_APP_STYLE_PRIORITY,
+  PARAM_ORIENTATION,
+  PARAM_TOPLEVEL
 };
 
 typedef enum {
@@ -87,8 +88,16 @@ static void gnome_help_view_class_init (GnomeHelpViewClass *class);
 static void gnome_help_view_init (GnomeHelpView *help_view);
 static void gnome_help_view_destroy (GtkObject *obj);
 static void gnome_help_view_finalize (GObject *obj);
-static void gnome_help_view_set_arg (GtkObject *obj, GtkArg *arg, guint arg_id);
-static void gnome_help_view_get_arg (GtkObject *obj, GtkArg *arg, guint arg_id);
+static void gnome_help_view_get_param	(GObject *object,
+					 guint param_id,
+					 GValue *value,
+					 GParamSpec * pspec,
+					 const gchar *trailer);
+static void gnome_help_view_set_param	(GObject *object,
+					 guint param_id,
+					 GValue * value,
+					 GParamSpec * pspec,
+					 const gchar * trailer);
 static void gnome_help_view_size_request  (GtkWidget      *widget,
 					   GtkRequisition *requisition);
 static void gnome_help_view_size_allocate (GtkWidget      *widget,
@@ -121,31 +130,14 @@ static GnomeUIInfo popup_style_menu[] = {
 
 static GdkCursor *choose_cursor = NULL;
 
-GtkType
-gnome_help_view_get_type(void)
-{
-  static GtkType gnome_help_view_type = 0;
-
-  if (!gnome_help_view_type)
-    {
-      GtkTypeInfo gnome_help_view_info = {
-	"GnomeHelpView",
-	sizeof (GnomeHelpView),
-	sizeof (GnomeHelpViewClass),
-	(GtkClassInitFunc) gnome_help_view_class_init,
-	(GtkObjectInitFunc) gnome_help_view_init,
-	NULL,
-	NULL,
-	NULL
-      };
-
-      gnome_help_view_type = gtk_type_unique (gtk_box_get_type(), &gnome_help_view_info);
-    }
-
-  return gnome_help_view_type;
-}
-
-static GtkObjectClass *parent_class = NULL;
+/**
+ * gnome_href_get_type
+ *
+ * Returns the type assigned to the GNOME href widget.
+ **/
+/* The following defines the get_type */
+GNOME_CLASS_BOILERPLATE (GnomeHelpView, gnome_help_view,
+			 GtkBox, gtk_box)
 
 /* UNUSED
 static GdkAtom atom_explain_query = 0, atom_explain_request = 0, atom_explain_query_reply = 0;
@@ -154,40 +146,62 @@ static GdkAtom atom_explain_query = 0, atom_explain_request = 0, atom_explain_qu
 static void
 gnome_help_view_class_init (GnomeHelpViewClass *class)
 {
-  GtkObjectClass *object_class;
-  GObjectClass *gobject_class;
-  GtkWidgetClass *widget_class;
+	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
+	GtkWidgetClass *widget_class;
 
-  object_class = (GtkObjectClass *) class;
-  gobject_class = (GObjectClass *) class;
-  widget_class = (GtkWidgetClass *) class;
-  parent_class = gtk_type_class(gtk_type_parent(GTK_CLASS_TYPE(object_class)));
+	object_class = (GtkObjectClass *) class;
+	gobject_class = (GObjectClass *) class;
+	widget_class = (GtkWidgetClass *) class;
+	parent_class = gtk_type_class(gtk_type_parent(GTK_CLASS_TYPE(object_class)));
 
-  object_class->get_arg = gnome_help_view_get_arg;
-  object_class->set_arg = gnome_help_view_set_arg;
-  object_class->destroy = gnome_help_view_destroy;
+	object_class->destroy = gnome_help_view_destroy;
 
-  gobject_class->finalize = gnome_help_view_finalize;
+	gobject_class->finalize = gnome_help_view_finalize;
+	gobject_class->set_param = gnome_help_view_set_param;
+	gobject_class->get_param = gnome_help_view_get_param;
 
-  widget_class->size_request = gnome_help_view_size_request;
-  widget_class->size_allocate = gnome_help_view_size_allocate;
+	widget_class->size_request = gnome_help_view_size_request;
+	widget_class->size_allocate = gnome_help_view_size_allocate;
 
-  /* while these are used mainly for construction, they are not
-   * GTK_ARG_CONSTRUCT because all that GTK_ARG_CONSTRUCT does is
-   * make sure they are called with a zero argument, which is
-   * quite useless in our case */
-  gtk_object_add_arg_type ("GnomeHelpView::app_style",
-			   GTK_TYPE_ENUM,
-			   GTK_ARG_READWRITE,
-			   ARG_APP_STYLE);
-  gtk_object_add_arg_type ("GnomeHelpView::app_style_priority",
-			   GTK_TYPE_INT,
-			   GTK_ARG_READWRITE,
-			   ARG_APP_STYLE_PRIORITY);
-  gtk_object_add_arg_type ("GnomeHelpView::toplevel",
-			   GTK_TYPE_OBJECT,
-			   GTK_ARG_READWRITE,
-			   ARG_TOPLEVEL);
+	g_object_class_install_param (gobject_class,
+				      PARAM_APP_STYLE,
+				      g_param_spec_enum ("app_style",
+							 _("App style"),
+							 _("The style of GnomeHelpView"),
+							 GTK_TYPE_ENUM,
+							 GNOME_HELP_BROWSER,
+							 (G_PARAM_READABLE |
+							  G_PARAM_WRITABLE)));
+
+	g_object_class_install_param (gobject_class,
+				      PARAM_APP_STYLE_PRIORITY,
+				      g_param_spec_enum ("app_style_priority",
+							 _("App style priority"),
+							 _("The priority of style of GnomeHelpView"),
+							 GTK_TYPE_ENUM,
+							 G_PRIORITY_LOW,
+							 (G_PARAM_READABLE |
+							  G_PARAM_WRITABLE)));
+
+	g_object_class_install_param (gobject_class,
+				      PARAM_ORIENTATION,
+				      g_param_spec_enum ("orientation",
+							 _("Orientation"),
+							 _("Orientation"),
+							 GTK_TYPE_ENUM,
+							 GTK_ORIENTATION_HORIZONTAL,
+							 (G_PARAM_READABLE |
+							  G_PARAM_WRITABLE)));
+
+	g_object_class_install_param (gobject_class,
+				      PARAM_TOPLEVEL,
+				      g_param_spec_enum ("toplevel",
+							 _("Toplevel"),
+							 _("The toplevel widget"),
+							 GTK_TYPE_WIDGET,
+							 (G_PARAM_READABLE |
+							  G_PARAM_WRITABLE)));
 }
 
 static void
@@ -230,24 +244,23 @@ gnome_help_view_init (GnomeHelpView *help_view)
 static void
 gnome_help_view_destroy (GtkObject *obj)
 {
-  GnomeHelpView *help_view = (GnomeHelpView *)obj;
+	GnomeHelpView *help_view = (GnomeHelpView *)obj;
 
-  /* remember, destroy can be run multiple times! */
+	/* remember, destroy can be run multiple times! */
 
-  if(help_view->_priv->popup_menu != NULL) {
-	  gtk_widget_destroy(help_view->_priv->popup_menu);
-	  help_view->_priv->popup_menu = NULL;
-  }
+	if(help_view->_priv->popup_menu != NULL) {
+		gtk_widget_destroy(help_view->_priv->popup_menu);
+		help_view->_priv->popup_menu = NULL;
+	}
 
-  if(help_view->_priv->toplevel != NULL) {
-	  gtk_object_remove_data(GTK_OBJECT(help_view->_priv->toplevel),
-				 GNOME_APP_HELP_VIEW_NAME);
-	  gtk_object_unref(GTK_OBJECT(help_view->_priv->toplevel));
-	  help_view->_priv->toplevel = NULL;
-  }
+	if(help_view->_priv->toplevel != NULL) {
+		gtk_object_remove_data(GTK_OBJECT(help_view->_priv->toplevel),
+				       GNOME_APP_HELP_VIEW_NAME);
+		gtk_object_unref(GTK_OBJECT(help_view->_priv->toplevel));
+		help_view->_priv->toplevel = NULL;
+	}
 
-  if (GTK_OBJECT_CLASS (parent_class)->destroy)
-    (* GTK_OBJECT_CLASS (parent_class)->destroy) (obj);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (obj));
 }
 
 static void
@@ -263,44 +276,76 @@ gnome_help_view_finalize (GObject *obj)
 		choose_cursor = NULL;
 	}
 
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (obj);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (obj));
 }
 
 static void
-gnome_help_view_set_arg (GtkObject *obj, GtkArg *arg, guint arg_id)
+gnome_help_view_set_param (GObject *object,
+			   guint param_id,
+			   GValue * value,
+			   GParamSpec * pspec,
+			   const gchar * trailer)
 {
-  GnomeHelpView *help_view = (GnomeHelpView *)obj;
+	static gboolean set_style = FALSE;
+	static gboolean set_priority = FALSE;
+	static GnomeHelpViewStyle style = GNOME_HELP_BROWSER;
+	static GnomeHelpViewStylePriority priority = G_PRIORITY_LOW;
 
-  switch(arg_id)
-    {
-    case ARG_APP_STYLE:
-      help_view->_priv->app_style = GTK_VALUE_ENUM(*arg);
-      break;
-    case ARG_APP_STYLE_PRIORITY:
-      help_view->_priv->app_style_priority = GTK_VALUE_ENUM(*arg);
-      break;
-    case ARG_TOPLEVEL:
-      gnome_help_view_set_toplevel(help_view,
-				   GTK_WIDGET(GTK_VALUE_OBJECT(*arg)));
-      break;
-    }
+	GnomeHelpView *help_view = (GnomeHelpView *)obj;
+
+	switch(param_id) {
+	case PARAM_APP_STYLE:
+		style = g_value_get_enum (value);
+		set_style = TRUE;
+		break;
+	case PARAM_APP_STYLE_PRIORITY:
+		priority = g_value_get_enum (value);
+		set_priority = TRUE;
+		break;
+	case PARAM_ORIENTATION:
+		gnome_help_view_set_orientation (help_view, 
+						 g_value_get_enum (value));
+		break;
+	case PARAM_TOPLEVEL:
+		gnome_help_view_set_toplevel (help_view,
+					      g_value_get_object (value));
+		break;
+	}
+
+	/* A bad hack, style and priority need to be set at the same
+	 * time, this is ugly, should be somehow gotten rid of, by
+	 * redesigning the priority beast
+	 * -George */
+	if (set_style && set_priority) {
+		gnome_help_view_set_style(help_view, style, priority);
+		set_style = FALSE;
+		set_priority = FALSE;
+	}
 }
 
 static void
-gnome_help_view_get_arg (GtkObject *obj, GtkArg *arg, guint arg_id)
+gnome_help_view_get_param (GObject *object,
+			   guint param_id,
+			   GValue *value,
+			   GParamSpec * pspec,
+			   const gchar *trailer)
 {
-  GnomeHelpView *help_view = GNOME_HELP_VIEW(obj);
+	GnomeHelpView *help_view = GNOME_HELP_VIEW(obj);
 
-  switch(arg_id)
-    {
-    case ARG_APP_STYLE:
-      GTK_VALUE_ENUM(*arg) = help_view->_priv->style;
-      break;
-    case ARG_APP_STYLE_PRIORITY:
-      GTK_VALUE_INT(*arg) = help_view->_priv->style_priority;
-      break;
-    }
+	switch(param_id) {
+	case PARAM_APP_STYLE:
+		g_value_set_enum (value, help_view->_priv->style);
+		break;
+	case PARAM_APP_STYLE_PRIORITY:
+		g_value_set_enum (value, help_view->_priv->style_priority);
+		break;
+	case PARAM_ORIENTATION:
+		g_value_set_enum (value, help_view->_priv->orientation);
+		break;
+	case PARAM_TOPLEVEL:
+		g_value_set_object (value, help_view->_priv->toplevel);
+		break;
+	}
 }
 
 GtkWidget *

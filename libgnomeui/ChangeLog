@@ -1,3 +1,9 @@
+Wed Sep 13 00:45:34 2000  George Lebl <jirka@5z.com>
+
+	* gnome-helpsys.c: Switch to GParam, some reformatting, a hack
+	  for getting style/priority right with the GParam (they need to
+	  be set in unison).  Also used the boilerplate macros
+
 2000-09-12  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector.c: Switch to GParam and use the boilerplate
