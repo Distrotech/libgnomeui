@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
-"PO-Revision-Date: 2004-05-27 00:50+0200\n"
+"POT-Creation-Date: 2004-07-28 18:36+0200\n"
+"PO-Revision-Date: 2004-07-28 18:38+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -30,31 +30,35 @@ msgstr "Avkom-oppføring 2"
 msgid "Hint for item 2"
 msgstr "Hint for oppføring 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:856
-#, fuzzy
-msgid "Filesystem"
-msgstr "Fi_ler"
+#: file-chooser/gtkfilesystemgnomevfs.c:650
+#, c-format
+msgid "%s is not a folder"
+msgstr "%s er ikke en mappe"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:857
+msgid "Filesystem"
+msgstr "Filsystem"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1524
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "Lagring av bokmerke feilet (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "Kunne ikke finne informasjon om fil «%s»: %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "Kunne ikke åpne filen «%s»: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
+msgstr "Kunne ikke åpne bildet «%s»: årsak ukjent. Sannsynligvis en korrupt bildefil"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -164,6 +168,7 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -221,6 +226,7 @@ msgid "_Game"
 msgstr "_Spill"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjelp"
 
@@ -411,11 +417,11 @@ msgstr "Konfigurer applikasjonen"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om denne applikasjonen"
 
@@ -442,7 +448,7 @@ msgstr "Opprett et nytt vindu"
 msgid "_Close This Window"
 msgstr "L_ukk dette vinduet"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Lukk aktivt vindu"
 
@@ -828,29 +834,24 @@ msgstr "Bakgrunnsfarge er satt"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "Bakgrunnsfarge for logo"
+msgstr "Bakgrunnsfarge for innhold"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "Bakgrunnsfarge for logo"
+msgstr "Bakgrunnsfarge for innhold"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr "Bakgrunnsfarge som en GdkColor"
+msgstr "Bakgrunnsfarge for innhold som en GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "Bakgrunnsfarge satt"
+msgstr "Bakgrunnsfarge for innhold satt"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "Bakgrunnsfarge er satt"
+msgstr "Bakgrunnsfarge for innhold er satt"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -1285,11 +1286,11 @@ msgstr "_Passord:"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Koble til _anonymt"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "Koble til som br_uker:"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
@@ -1396,11 +1397,13 @@ msgstr "GNOME GUI-bibliotek"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flere segmenteringsfeil oppstod; kan ikke vise feildialogen\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1457,8 +1460,6 @@ msgstr "_Informer utviklerene"
 msgid "_Debug"
 msgstr "_Feilsøk"
 
-#~ msgid "Exit the test"
-#~ msgstr "Avslutt testprogrammet"
-
-#~ msgid " domain %s"
-#~ msgstr " domene %s"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Avslutt testprogrammet"
