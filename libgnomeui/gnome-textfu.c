@@ -122,7 +122,7 @@ gnome_textfu_resolve_filename(GnomeTextFu *textfu, char *in_filename, const char
   if (in_filename[slen] == '"')
     in_filename[slen] = '\0';
 
-  if (g_file_exists (in_filename))
+  if (g_file_test (in_filename, G_FILE_TEST_EXISTS))
     return g_strdup (in_filename);
   else if(in_filename[0] == '/')
     return gnome_help_path_resolve(in_filename, type);

@@ -215,8 +215,8 @@ gnome_less_append_file(GnomeLess * gl, const gchar * path)
   g_return_val_if_fail(GNOME_IS_LESS(gl), FALSE);
   g_return_val_if_fail(path != NULL, FALSE);
 
-  if ( ! g_file_exists(path) ) {
-    /* Leave errno from the stat in g_file_exists */
+  if ( ! g_file_test(path, G_FILE_TEST_EXISTS) ) {
+    /* Leave errno from the stat in g_file_test */
     return FALSE;
   }
 

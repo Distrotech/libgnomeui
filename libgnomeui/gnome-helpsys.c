@@ -1126,7 +1126,7 @@ gnome_help_view_find_help_id(GnomeHelpView *help_view, const char *widget_id)
   
   if(filename == NULL) {
     /* Search the current directory as well */
-    if (g_file_exists ("widget-help-map.txt"))
+    if (g_file_test ("widget-help-map.txt", G_FILE_TEST_EXISTS))
       filename = g_strdup ("widget-help-map.txt");
     else
       return NULL;

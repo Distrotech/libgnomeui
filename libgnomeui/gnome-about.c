@@ -729,7 +729,7 @@ gnome_about_load_logo(GnomeAboutPrivate *priv,
 	gchar *filename;
 
 	if (logo && GNOME_ABOUT_SHOW_LOGO) {
-		if (g_path_is_absolute (logo) && g_file_exists (logo))
+		if (g_path_is_absolute (logo) && g_file_test (logo, G_FILE_TEST_EXISTS))
 			filename = g_strdup (logo);
 		else
 			filename = gnome_pixmap_file (logo);
