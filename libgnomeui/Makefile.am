@@ -199,10 +199,16 @@ SGML =	\
 gtkrcdir = $(datadir)
 gtkrc_DATA = gtkrc
 
-EXTRA_DIST = \
-	$(SGML)				\
-	$(gtkrc_DATA)			\
-	AUTHORS
+EXTRA_DIST =					\
+	$(SGML)					\
+	$(gtkrc_DATA)				\
+	AUTHORS					\
+	gnome.defs 				\
+	maketypes.awk				\
+	makeenums.pl				\
+	gnometypebuiltins_vars.c		\
+	gnometypebuiltins_ids.c			\
+	gnometypebuiltins_evals.c
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
 libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS) @GNOME_CANVAS_OBJS@
