@@ -402,28 +402,38 @@ gnome_dentry_edit_sync_dentry(GnomeDEntryEdit *dee,
   g_free(dentry->name);
   if (text[0] != '\0')
     dentry->name = g_strdup(text);
+  else
+    dentry->name = NULL;
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->comment_entry));
   g_free(dentry->comment);
   if (text[0] != '\0')
     dentry->comment = g_strdup(text);
+  else
+    dentry->comment = NULL;
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->exec_entry));
   g_strfreev(dentry->exec);
   if (text[0] != '\0')
     gnome_config_make_vector(text, &dentry->exec_length, &dentry->exec);
-  else
+  else {
     dentry->exec_length = 0;
+    dentry->exec = NULL;
+  }
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->tryexec_entry));
   g_free(dentry->tryexec);
   if (text[0] != '\0')
     dentry->tryexec = g_strdup(text);
+  else
+    dentry->tryexec = NULL;
   
   text = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(dee->type_combo)->entry));
   g_free(dentry->type);
   if (text[0] != '\0')
     dentry->type = g_strdup(text);
+  else
+    dentry->type = NULL;
   
   g_free(dentry->icon);
   dentry->icon = gnome_icon_entry_get_filename(GNOME_ICON_ENTRY(dee->icon_entry));
@@ -432,6 +442,8 @@ gnome_dentry_edit_sync_dentry(GnomeDEntryEdit *dee,
   g_free(dentry->docpath);
   if (text[0] != '\0')
     dentry->docpath = g_strdup(text);
+  else
+    dentry->docpath = NULL;
 
   dentry->terminal = GTK_TOGGLE_BUTTON(dee->terminal_button)->active;
 

@@ -1,3 +1,8 @@
+Sat Apr 24 14:04:26 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dentry-edit.c: when syncing a dentry to the display,
+	  null fields which have been freed if they are emptied
+
 1999-04-23  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* animator_demo.c (main): Removed Tux animation.
