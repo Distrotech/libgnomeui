@@ -92,8 +92,8 @@ int main(int argc, char *argv[])
       char *base = g_path_get_basename (args[0]);
       gsize bytes_read;
       gsize bytes_written;
-      gchar* utfstr=g_locale_to_utf8(g_strsignal(atoi(args[1])),-1,&bytes_read,&bytes_written,NULL);
-      gchar* progstr=g_locale_to_utf8(args[0], -1, &bytes_read, &bytes_written, NULL);
+      const char *utfstr = g_strsignal (atoi (args[1]));
+      char *progstr = g_locale_to_utf8 (args[0], -1, &bytes_read, &bytes_written, NULL);
       
       if (strcmp(base, "gnome-session") == 0)
         {
@@ -111,7 +111,6 @@ int main(int argc, char *argv[])
                                 progstr, getppid(), utfstr);
         }
       g_free(progstr);
-      g_free(utfstr);
       g_free(base);
       if(args[2])
 	app_version = args[2];

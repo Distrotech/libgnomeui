@@ -1,3 +1,8 @@
+2002-03-18  Zbigniew Chyla  <cyba@gnome.pl>
+
+	* libgnomeui/gnome_segv.c (main):
+	g_strsignal returns UTF-8 string, don't try to convert it again.
+
 2002-03-13  Michael Meeks  <michael@ximian.com>
 
 	* libgnomeui/gnome-ui-init.c
