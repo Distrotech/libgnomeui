@@ -10,10 +10,10 @@ LIB_VERSION_NUM=0.0.0
 #
 noinst_PROGRAMS = test-recently-used test-file-saver stock_demo winhints_demo  dock_demo animator_demo
 bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap gnome-rexec-server
-lib_LTLIBRARIES = libgnomeui-2.0.la
+lib_LTLIBRARIES = libgnomeui-2.la
 
 if COMPILE_GNOME_COMPAT
-lib_LIBRARIES = libgnomeui-1.0-compat-2.0.a
+lib_LIBRARIES = libgnomeui-1-compat-2.a
 endif
 
 #
@@ -58,20 +58,22 @@ $(gnome_unknown_built): $(top_srcdir)/idl/gnome-unknown.idl
 gnorba_built = $(gnome_unknown_built) $(gnome_corba_rexec_built)
 
 if COMPILE_GNOME_COMPAT
-libgnomeui10compatincludedir = $(libgnomeuiincludedir)/compat/1.0
+libgnomeui10compatincludedir = $(libgnomeuiincludedir)/compat/1
 
-libgnomeui_1_0_compat_2_0_a_SOURCES =\
+libgnomeui_1_compat_2_a_SOURCES =\
 	gnome-font-selector.c 		\
 	gnome-guru.c			\
 	gnome-spell.c			\
 	gnome-startup.c			\
 	gtkcauldron.c			\
 	gnome-canvas-image.c		\
-	gnome-canvas-load.c		\
 	gnomeui10-compat.c		\
 	gnome-dns.c			\
+	gnome-dentry-edit.c		\
 	gnome-druid-page-start.c	\
-	gnome-druid-page-finish.c
+	gnome-druid-page-finish.c	\
+	gnome-properties.c		\
+	gnome-property-entries.c
 
 libgnomeui10compatinclude_HEADERS = \
 	libgnomeui-compat-1.0.h		\
@@ -80,22 +82,20 @@ libgnomeui10compatinclude_HEADERS = \
 	gnome-spell.h			\
 	gnome-startup.h			\
 	gtkcauldron.h			\
+	gnome-dentry-edit.h		\
 	gnome-canvas-image.h		\
-	gnome-canvas-load.h		\
 	gnomeui10-compat.h		\
 	gnome-dns.h			\
 	gnome-druid-page-start.h	\
 	gnome-druid-page-finish.h	\
-	gnome-icon-list.h		\
-	gnome-icon-item.h		\
-	gnome-icon-sel.h		\
-	gnome-icon-text.h
+	gnome-properties.h		\
+	gnome-property-entries.h
 
 endif
 
 EXTRA_HEADERS = 
 
-libgnomeui_2_0_la_SOURCES = \
+libgnomeui_2_la_SOURCES = \
 	gnome-about.c			\
 	gnome-animator.c		\
 	gnome-app.c			\
@@ -138,6 +138,7 @@ libgnomeui_2_0_la_SOURCES = \
 	gnome-init.c			\
 	gnome-less.c			\
 	gnome-mdi.c			\
+	gnome-mdiP.h			\
 	gnome-mdi-child.c		\
 	gnome-mdi-generic-child.c       \
 	gnome-mdi-session.c		\
@@ -149,8 +150,6 @@ libgnomeui_2_0_la_SOURCES = \
 	gnome-popup-help.c		\
 	gnome-preferences.c		\
 	gnome-propertybox.c		\
-##	gnome-properties.c		\
-##	gnome-property-entries.c	\
 	gnome-scores.c			\
 	gnome-stock.c			\
 	gnome-stock-ids.c		\
@@ -210,7 +209,7 @@ gnome_headers = \
 	gnome-helpsys.h			\
 	gnome-href.h			\
 	gnome-ice.h			\
-##	gnome-icon-entry.h		\
+	gnome-icon-entry.h		\
 	gnome-init.h			\
 	gnome-less.h			\
 	gnome-messagebox.h		\
@@ -241,6 +240,10 @@ gnome_headers = \
 	gtkpixmapmenuitem.h		\
 	libgnomeui.h			\
 	oafgnome.h			\
+	gnome-icon-list.h		\
+	gnome-icon-item.h		\
+	gnome-icon-sel.h		\
+	gnome-icon-text.h		\
 	gnome-textfu.h
 
 libgnomeuiinclude_HEADERS =		\
@@ -339,7 +342,7 @@ EXTRA_DIST =					\
 	landscape.xpm				\
 	$(oafinfo_DATA)
 
-libgnomeui_2_0_la_LDFLAGS = -version-info $(LIB_VERSION)				\
+libgnomeui_2_la_LDFLAGS = -version-info $(LIB_VERSION)				\
 		$(GDK_PIXBUF_LIBS)							\
 		$(OAF_LIBS)								\
 		$(GCONF_LIBS)					\
@@ -347,7 +350,7 @@ libgnomeui_2_0_la_LDFLAGS = -version-info $(LIB_VERSION)				\
 
 #		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome-$(GNOME_INTERFACE_VERSION)
 
-libgnomeui_2_0_la_LIBADD = $(LIBGNOMEUI_LIBS)
+libgnomeui_2_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 gnome_segv_LDADD =	\
 	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\

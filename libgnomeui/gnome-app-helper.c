@@ -1,4 +1,3 @@
-/*
 /* Copyright (C) 1998 Red Hat Software, Miguel de Icaza, Federico Mena, 
  * Chris Toshok.
  * All rights reserved.
