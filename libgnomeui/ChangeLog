@@ -1,3 +1,8 @@
+1998-12-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_destroy): Release
+	the outline_svp and the fill_svp.
+
 1998-12-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-app.c: Remove gnome_app_add().  You cannot just override
