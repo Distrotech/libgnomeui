@@ -56,7 +56,7 @@
  *  calling gnome_stock_pixmap_change. An application should check (by
  *  calling gnome_stock_pixmap_checkfor), if the current theme supports
  *  an uncommon icon, before using it. The only icons an app can rely
- *  on, are those defined in this haeder file.
+ *  on, are those defined in this header file.
  *
  *  We now have stock buttons too. To use them, just replace any
  *  gtk_button_new{_with_label} with
