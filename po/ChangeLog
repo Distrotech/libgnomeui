@@ -1,3 +1,7 @@
+Mon Sep 03 17:28:21 2001  George Lebl <jirka@5z.com>
+
+	* POTFILES.in: remove the canvas init file
+
 Mon Sep 03 05:32:28 2001  George Lebl <jirka@5z.com>
 
 	* POTFILES.in: add missing files
