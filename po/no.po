@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
 "POT-Creation-Date: 2001-11-30 11:16+0100\n"
-"PO-Revision-Date: 2001-11-11 14:17+0100\n"
+"PO-Revision-Date: 2001-12-01 15:36+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -424,7 +424,6 @@ msgid "Link colour"
 msgstr "Lenkefarge"
 
 #: libgnomeui/gnome-href.c:135
-#, fuzzy
 msgid "Colour used to draw the link"
 msgstr "Farge brukt til å tegne lenken"
 
