@@ -19,6 +19,7 @@
 
 #include <gtk/gtk.h>
 #include "gtkcauldron.h"
+#define HAVE_GNOME
 #ifdef HAVE_GNOME
 #include <gnome.h>
 #endif

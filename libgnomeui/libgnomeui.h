@@ -49,6 +49,7 @@
 #include "libgnomeui/gtk-plug.h"
 #include "libgnomeui/gtk-socket.h"
 #include "libgnomeui/gtkcalendar.h"
+#include "libgnomeui/gtkcauldron.h"
 #include "libgnomeui/gtkspell.h"
 #include "libgnomeui/gnome-dateedit.h"
 #include "libgnomeui/gnome-calculator.h"
