@@ -199,7 +199,7 @@ static GnomeUIInfo menu_defaults[] = {
           GNOME_APP_PIXMAP_STOCK, GTK_STOCK_FIND_AND_REPLACE,
           GNOME_KEY_NAME_REPLACE, GNOME_KEY_MOD_REPLACE, NULL },
 	/* Properties */
-        { GNOME_APP_UI_ITEM, N_("_Properties..."),
+        { GNOME_APP_UI_ITEM, N_("_Properties"),
           N_("Modify the file's properties"),
           NULL, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PROPERTIES,
@@ -208,7 +208,7 @@ static GnomeUIInfo menu_defaults[] = {
 	 * The Settings menu
 	 */
 	/* Settings */
-        { GNOME_APP_UI_ITEM, N_("Prefere_nces..."),
+        { GNOME_APP_UI_ITEM, N_("Prefere_nces"),
           N_("Configure the application"),
           NULL, NULL,
 	  NULL, GNOME_APP_PIXMAP_STOCK, GTK_STOCK_PREFERENCES,

@@ -1,3 +1,8 @@
+2002-07-16  Rajkumar Sivasamy <rajkumar.siva@wipro.com>
+
+	* gnome-app-helper.c: Removed the ellipses for "Properties" and 
+	"Preferences" menu items. Fixes #88325
+
 2002-06-27  Yanko Kaneti <yaneti@declera.com>
 
 	* configure.in: (ALL_LINGUAS) Added Bulgarian (bg).
