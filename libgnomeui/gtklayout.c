@@ -176,7 +176,7 @@ gtk_layout_move (GtkLayout     *layout,
 		 gint           y)
 {
   GList *tmp_list;
-  GtkLayoutChild *child;
+  GtkLayoutChild *child = NULL;
   
   g_return_if_fail (layout != NULL);
   g_return_if_fail (GTK_IS_LAYOUT (layout));

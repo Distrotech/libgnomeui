@@ -1,14 +1,17 @@
-/* GnomeCanvas widget - Tk-like canvas widget for Gnome
+/*
+ * GnomeCanvas widget - Tk-like canvas widget for Gnome
  *
  * GnomeCanvas is basically a port of the Tk toolkit's most excellent canvas widget.  Tk is
  * copyrighted by the Regents of the University of California, Sun Microsystems, and other parties.
  *
  * Copyright (C) 1998 The Free Software Foundation
  *
- * Author: Federico Mena <federico@nuclecu.unam.mx>
+ * Author:
+ *   Federico Mena <federico@nuclecu.unam.mx>
  */
 
-/* TO-DO list for the canvas:
+/*
+ * TO-DO list for the canvas:
  *
  * - Implement hiding/showing of items (visibility flag).
  *
@@ -47,7 +50,8 @@
  *
  * - item_class->output (item, "bridge_to_raph's_canvas")
  *
- * - Multiple exposure event compression; this may need to be in Gtk/Gdk instead.  */
+ * - Multiple exposure event compression; this may need to be in Gtk/Gdk instead.
+ */
 #include <stdio.h>
 #include <config.h>
 #include <math.h>
@@ -87,6 +91,7 @@ static void gnome_canvas_item_unrealize (GnomeCanvasItem *item);
 static void gnome_canvas_item_map       (GnomeCanvasItem *item);
 static void gnome_canvas_item_unmap     (GnomeCanvasItem *item);
 
+static void emit_event                  (GnomeCanvas *canvas, GdkEvent *event);
 
 static guint item_signals[ITEM_LAST_SIGNAL] = { 0 };
 
@@ -282,6 +287,10 @@ gnome_canvas_item_shutdown (GtkObject *object)
 		gdk_pointer_ungrab (GDK_CURRENT_TIME);
 	}
 
+	if (item == item->canvas->focused_item) 
+		item->canvas->focused_item = NULL;
+
+	
 	/* Normal destroy stuff */
 
 	if (item->object.flags & GNOME_CANVAS_ITEM_MAPPED)
@@ -659,6 +668,45 @@ is_descendant (GnomeCanvasItem *item, GnomeCanvasItem *parent)
 	return FALSE;
 }
 
+/*
+ * gnome_canvas_item_grab_focus:
+ * @item: the item that is grabbing the focus
+ *
+ * Grabs the keyboard focus
+ */
+void
+gnome_canvas_item_grab_focus (GnomeCanvasItem *item)
+{
+	GnomeCanvasItem *focused_item;
+	GdkEvent ev;
+	gint finished;
+	
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+	g_return_if_fail (GTK_WIDGET_CAN_FOCUS (GTK_WIDGET (item->canvas)));
+	
+	focused_item = item->canvas->focused_item;
+	
+	if (focused_item){
+		ev.type = GDK_FOCUS_CHANGE;
+		ev.focus_change.send_event = FALSE;
+		ev.focus_change.in = FALSE;
+
+		emit_event (item->canvas, &ev);
+	}
+
+	item->canvas->focused_item = item;
+	gtk_widget_grab_focus (GTK_WIDGET (item->canvas));
+}
+
+/*
+ * gnome_canvas_item_reparent:
+ * @item:      Item to reparent
+ * @new_group: New group where the item is moved to
+ *
+ * This moves the item from its current group to the group specified
+ * in NEW_GROUP.
+ */
 void
 gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 {
@@ -673,7 +721,8 @@ gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 
 	g_return_if_fail (item->canvas == GNOME_CANVAS_ITEM (new_group)->canvas);
 
-	/* The group cannot be an inferior of the item or be the item itself -- this also takes care
+	/*
+	 * The group cannot be an inferior of the item or be the item itself -- this also takes care
 	 * of the case where the item is the root item of the canvas.
 	 */
 
@@ -691,7 +740,8 @@ gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 	item->parent = GNOME_CANVAS_ITEM (new_group);
 	group_add (new_group, item);
 
-	/* Rebuild the new parent group's bounds.  This will take care of reconfiguring the item and
+	/*
+	 * Rebuild the new parent group's bounds.  This will take care of reconfiguring the item and
 	 * all its children.
 	 */
 
@@ -1217,6 +1267,10 @@ static gint gnome_canvas_key            (GtkWidget        *widget,
 static gint gnome_canvas_crossing       (GtkWidget        *widget,
 					 GdkEventCrossing *event);
 
+static gint gnome_canvas_focus_in       (GtkWidget        *widget,
+					 GdkEventFocus    *event);
+static gint gnome_canvas_focus_out      (GtkWidget        *widget,
+					 GdkEventFocus    *event);
 
 static GtkLayoutClass *canvas_parent_class;
 
@@ -1275,6 +1329,8 @@ gnome_canvas_class_init (GnomeCanvasClass *class)
 	widget_class->key_release_event = gnome_canvas_key;
 	widget_class->enter_notify_event = gnome_canvas_crossing;
 	widget_class->leave_notify_event = gnome_canvas_crossing;
+	widget_class->focus_in_event = gnome_canvas_focus_in;
+	widget_class->focus_out_event = gnome_canvas_focus_out;
 }
 
 static void
@@ -1428,7 +1484,8 @@ gnome_canvas_realize (GtkWidget *widget)
 				 | GDK_KEY_PRESS_MASK
 				 | GDK_KEY_RELEASE_MASK
 				 | GDK_ENTER_NOTIFY_MASK
-				 | GDK_LEAVE_NOTIFY_MASK));
+				 | GDK_LEAVE_NOTIFY_MASK
+				 | GDK_FOCUS_CHANGE_MASK));
 
 	/* Create our own temporary pixmap gc and realize all the items */
 
@@ -1509,7 +1566,8 @@ scroll_to (GnomeCanvas *canvas, int cx, int cy)
 	int old_zoom_xofs, old_zoom_yofs;
 	int changed, changed_x, changed_y;
 
-	/* Adjust the scrolling offset and the zoom offset to keep as much as possible of the canvas
+	/*
+	 * Adjust the scrolling offset and the zoom offset to keep as much as possible of the canvas
 	 * scrolling region in view.
 	 */
 
@@ -1666,7 +1724,8 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 
 	}
 
-	/* Convert to world coordinates -- we have two cases because of diferent offsets of the
+	/*
+	 * Convert to world coordinates -- we have two cases because of diferent offsets of the
 	 * fields in the event structures.
 	 */
 
@@ -1690,7 +1749,17 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 		break;
 	}
 
-	/* The event is propagated up the hierarchy (for if someone connected to a group instead of
+	/*
+	 * Choose where do we send the event
+	 */
+	item = canvas->current_item;
+	
+	if (event->type == GDK_KEY_PRESS || event->type == GDK_KEY_RELEASE || event->type == GDK_FOCUS_CHANGE)
+		if (canvas->focused_item)
+			item = canvas->focused_item;
+	    
+	/*
+	 * The event is propagated up the hierarchy (for if someone connected to a group instead of
 	 * a leaf event), and emission is stopped if a handler returns TRUE, just like for GtkWidget
 	 * events.
 	 */
@@ -1709,8 +1778,10 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 	double x, y;
 	int cx, cy;
 
-	/* If a button is down, we'll perform enter and leave events on the current item, but not
-	 * enter on any other item.  This is more or less like X pointer grabbing for canvas items.  */
+	/*
+	 * If a button is down, we'll perform enter and leave events on the current item, but not
+	 * enter on any other item.  This is more or less like X pointer grabbing for canvas items.
+	 */
 
 	button_down = canvas->state & (GDK_BUTTON1_MASK
 				       | GDK_BUTTON2_MASK
@@ -1720,7 +1791,8 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 	if (!button_down)
 		canvas->left_grabbed_item = FALSE;
 
-	/* Save the event in the canvas.  This is used to synthesize enter and leave events in case
+	/*
+	 * Save the event in the canvas.  This is used to synthesize enter and leave events in case
 	 * the current item changes.  It is also used to re-pick the current item if the current one
 	 * gets deleted.  Also, synthesize an enter event.
 	 */
@@ -1871,8 +1943,10 @@ gnome_canvas_button (GtkWidget *widget, GdkEventButton *event)
 	case GDK_BUTTON_PRESS:
 	case GDK_2BUTTON_PRESS:
 	case GDK_3BUTTON_PRESS:
-		/* Pick the current item as if the button were not pressed, and then process the
-		 * event.  */
+		/*
+		 * Pick the current item as if the button were not pressed, and then process the
+		 * event.
+		 */
 
 		canvas->state = event->state;
 		pick_current_item (canvas, (GdkEvent *) event);
@@ -1881,7 +1955,8 @@ gnome_canvas_button (GtkWidget *widget, GdkEventButton *event)
 		break;
 
 	case GDK_BUTTON_RELEASE:
-		/* Process the event as if the button were pressed, then repick after the button has
+		/*
+		 * Process the event as if the button were pressed, then repick after the button has
 		 * been released
 		 */
 		
@@ -1983,6 +2058,35 @@ gnome_canvas_crossing (GtkWidget *widget, GdkEventCrossing *event)
 	return FALSE;
 }
 
+static gint
+gnome_canvas_focus_in (GtkWidget *widget, GdkEventFocus *event)
+{
+	GnomeCanvas *canvas;
+	
+	canvas = GNOME_CANVAS (widget);
+
+	if (canvas->focused_item){
+		emit_event (canvas, (GdkEvent *) event);
+
+		return TRUE;
+	}
+	return FALSE;
+}
+
+static gint
+gnome_canvas_focus_out (GtkWidget *widget, GdkEventFocus *event)
+{
+	GnomeCanvas *canvas;
+	
+	canvas = GNOME_CANVAS (widget);
+	if (canvas->focused_item){
+		emit_event (canvas, (GdkEvent *) event);
+		return TRUE;
+	}
+	
+	return FALSE;
+}
+
 static void
 paint (GnomeCanvas *canvas)
 {
@@ -1997,7 +2101,8 @@ paint (GnomeCanvas *canvas)
 
 	widget = GTK_WIDGET (canvas);
 
-	/* Compute the intersection between the viewport and the area that needs redrawing.  We
+	/*
+	 * Compute the intersection between the viewport and the area that needs redrawing.  We
 	 * can't simply do this with gdk_rectangle_intersect() because a GdkRectangle only stores
 	 * 16-bit values.
 	 */
@@ -2112,7 +2217,8 @@ gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, doubl
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
-	/* Set the new scrolling region.  If possible, do not move the visible contents of the
+	/*
+	 * Set the new scrolling region.  If possible, do not move the visible contents of the
 	 * canvas.
 	 */
 

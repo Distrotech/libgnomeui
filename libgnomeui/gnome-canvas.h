@@ -296,6 +296,8 @@ struct _GnomeCanvas {
 	int need_repick : 1;			/* Will repick current item at next idle loop iteration */
 	int left_grabbed_item : 1;		/* For use by the internal pick_event function */
 	int in_repick : 1;			/* For use by the internal pick_event function */
+
+	GnomeCanvasItem *focused_item;          /* If non-NULL the currently focused item  */
 };
 
 struct _GnomeCanvasClass {
@@ -360,6 +362,11 @@ void gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *
  */
 int gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color);
 
+/*
+ * Used to send all of the keystroke events to a specific item as well as GDK_FOCUS_CHANGE
+ * events.
+ */
+void gnome_canvas_item_grab_focus (GnomeCanvasItem *item);
 
 END_GNOME_DECLS
 

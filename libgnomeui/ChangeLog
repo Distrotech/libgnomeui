@@ -1,3 +1,18 @@
+1998-10-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtklayout.c (gtk_layout_move): Provide a default value. 
+
+	* gnome-canvas.c (gnome_canvas_realize): Added
+	GDK_FOCUS_CHANGE_MASK to the events the canvas gets. 
+	(gnome_canvas_item_shutdown): clear the focus is the killed item
+	had it. 
+	(gnome_canvas_focus_in, gnome_canvas_focus_out,
+	gnome_canvas_item_grab_focus): New functions to implement focus in
+	a canvas.
+	
+	* gnome-canvas.h: Add new flag.  GNOME_CANVAS_ITEM_CAN_FOCUS. 
+	GnomeCanvas: New field:  focused_item. 
+
 Fri Oct  2 09:21:47 CEST 1998  Eckehard Berns  <eb@berns.i-s-o.net>
 
 	* gnome-stock.c (create_pixmap_from_imlib_scaled): free the scaled_down
