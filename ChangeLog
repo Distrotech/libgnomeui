@@ -1,3 +1,7 @@
+2003-02-21  Roozbeh Pournader  <roozbeh@sharif.edu>
+
+	* configure.in: Added "fa" to ALL_LINGUAS.
+
 2003-02-13  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnome/gnome-font-picker.c
