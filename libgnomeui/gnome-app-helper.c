@@ -670,8 +670,8 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name,
 
 void
 gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
-		GtkAccelGroup *accel_group, gboolean insert_shortcuts, 
-		gint pos)
+		     GtkAccelGroup *accel_group, gboolean insert_shortcuts, 
+		     gint pos)
 {
 	GnomeUIBuilderData uibdata;
 
@@ -715,8 +715,9 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 
 void
 gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
-		GnomeUIBuilderData *uibdata, GtkAccelGroup *accel_group, 
-		gboolean insert_shortcuts, gint pos)
+			    GnomeUIBuilderData *uibdata,
+			    GtkAccelGroup *accel_group, 
+			    gboolean insert_shortcuts, gint pos)
 {
 	GnomeUIBuilderData *orig_uibdata;
 	GtkAccelGroup *menu_accel_group;

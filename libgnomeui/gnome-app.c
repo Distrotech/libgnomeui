@@ -92,6 +92,14 @@ gnome_app_get_type (void)
 }
 
 static void
+gnome_app_add (GtkContainer *container, GtkWidget *widget)
+{
+	GnomeApp *gnome_app = GNOME_APP (container);
+
+	gnome_app_set_contents (gnome_app, widget);
+}
+
+static void
 gnome_app_class_init (GnomeAppClass *class)
 {
 	GtkObjectClass *object_class;
