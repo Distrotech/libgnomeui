@@ -174,11 +174,11 @@ msgstr "_Beállítások/"
 #. If you have more then one New type, use this tree
 #: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
-msgstr "_Új"
+msgstr "Ú_j"
 
 #: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
-msgstr "_Új/"
+msgstr "Ú_j/"
 
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
@@ -226,7 +226,7 @@ msgstr "Az aktuális fájl mentése"
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Me_ntés másként..."
+msgstr "Men_tés másként..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
