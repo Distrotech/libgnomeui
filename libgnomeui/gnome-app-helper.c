@@ -469,7 +469,8 @@ setup_pixmap_menu_item(GtkWidget *mi, GnomeUIPixmapType pixmap_type,
                                             mi, NULL, NULL);
 
         gtk_signal_connect(GTK_OBJECT(mi), "destroy",
-                           remove_notify_cb, GINT_TO_POINTER(notify_id));
+                           GTK_SIGNAL_FUNC(remove_notify_cb),
+			   GINT_TO_POINTER(notify_id));
 }
 
 /* Creates  a menu item label. It will also return the underlined 
@@ -2541,7 +2542,8 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                                                     dock_item, NULL, NULL);
                 
                 gtk_signal_connect(GTK_OBJECT(dock_item), "destroy",
-                                   remove_notify_cb, GINT_TO_POINTER(notify_id));
+                                   GTK_SIGNAL_FUNC(remove_notify_cb),
+				   GINT_TO_POINTER(notify_id));
 
                 set_bevels(dock_item, bevels);
         }
@@ -2560,7 +2562,8 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                                                     toolbar, NULL, NULL);
 
                 gtk_signal_connect(GTK_OBJECT(toolbar), "destroy",
-                                   remove_notify_cb, GINT_TO_POINTER(notify_id));
+                                   GTK_SIGNAL_FUNC(remove_notify_cb),
+				   GINT_TO_POINTER(notify_id));
 
                 set_separators(toolbar, separators);
         }
@@ -2587,7 +2590,8 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                                                     toolbar, NULL, NULL);
 
                 gtk_signal_connect(GTK_OBJECT(toolbar), "destroy",
-                                   remove_notify_cb, GINT_TO_POINTER(notify_id));
+                                   GTK_SIGNAL_FUNC(remove_notify_cb),
+				   GINT_TO_POINTER(notify_id));
 
                 gtk_toolbar_set_button_relief (toolbar, relief_style);
         }
@@ -2639,7 +2643,8 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                                                     toolbar, NULL, NULL);
 
                 gtk_signal_connect(GTK_OBJECT(toolbar), "destroy",
-                                   remove_notify_cb, GINT_TO_POINTER(notify_id));
+                                   GTK_SIGNAL_FUNC(remove_notify_cb),
+				   GINT_TO_POINTER(notify_id));
 
                 notify_id = gconf_client_notify_add(conf,
                                                     per_app_key,
@@ -2647,7 +2652,8 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                                                     toolbar, NULL, NULL);
 
                 gtk_signal_connect(GTK_OBJECT(toolbar), "destroy",
-                                   remove_notify_cb, GINT_TO_POINTER(notify_id));
+                                   GTK_SIGNAL_FUNC(remove_notify_cb),
+				   GINT_TO_POINTER(notify_id));
                 
                 g_free(per_app_key);
                 
