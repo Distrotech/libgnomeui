@@ -21,6 +21,8 @@ static void gnome_pixmap_size_request  (GtkWidget        *widget,
 					GtkRequisition   *requisition);
 static void gnome_pixmap_size_allocate (GtkWidget        *widget,
 					GtkAllocation    *allocation);
+static void gnome_pixmap_draw          (GtkWidget        *widget,
+					GdkRectangle     *area);
 static gint gnome_pixmap_expose        (GtkWidget        *widget,
 					GdkEventExpose   *event);
 
@@ -73,6 +75,7 @@ gnome_pixmap_class_init (GnomePixmapClass *class)
 	widget_class->realize = gnome_pixmap_realize;
 	widget_class->size_request = gnome_pixmap_size_request;
 	widget_class->size_allocate = gnome_pixmap_size_allocate;
+	widget_class->draw = gnome_pixmap_draw;
 	widget_class->expose_event = gnome_pixmap_expose;
 
 	object_class->destroy = gnome_pixmap_destroy;
@@ -283,30 +286,60 @@ gnome_pixmap_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 				 allocation->y + (allocation->height - widget->requisition.height) / 2);
 }
 
-static gint
-gnome_pixmap_expose (GtkWidget *widget, GdkEventExpose *event)
+static void
+paint (GnomePixmap *gpixmap, GdkRectangle *area)
+{
+	if (gpixmap->pixmap)
+		gdk_draw_pixmap (gpixmap->widget.window,
+				 gpixmap->widget.style->black_gc,
+				 gpixmap->pixmap,
+				 area->x, area->y,
+				 area->x, area->y,
+				 area->width, area->height);
+	else
+		gdk_window_clear_area (gpixmap->widget.window,
+				       area->x, area->y,
+				       area->width, area->height);
+}
+
+static void
+gnome_pixmap_draw (GtkWidget *widget, GdkRectangle *area)
 {
 	GnomePixmap *gpixmap;
+	GdkRectangle w_area;
+	GdkRectangle p_area;
 
-	g_return_val_if_fail (widget != NULL, FALSE);
-	g_return_val_if_fail (GNOME_IS_PIXMAP (widget), FALSE);
-	g_return_val_if_fail (event != NULL, FALSE);
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GNOME_IS_PIXMAP (widget));
+	g_return_if_fail (area != NULL);
 
 	if (GTK_WIDGET_DRAWABLE (widget)) {
 		gpixmap = GNOME_PIXMAP (widget);
 
-		if (gpixmap->pixmap)
-			gdk_draw_pixmap (widget->window,
-					 widget->style->black_gc,
-					 gpixmap->pixmap,
-					 event->area.x, event->area.y,
-					 event->area.x, event->area.y,
-					 event->area.width, event->area.height);
-		else
-			gdk_window_clear_area (widget->window,
-					       event->area.x, event->area.y,
-					       event->area.width, event->area.height);
+		/* Offset the area because the window does not fill the allocation */
+
+		area->x -= widget->allocation.x + (widget->allocation.width - widget->requisition.width) / 2;
+		area->y -= widget->allocation.y + (widget->allocation.height - widget->requisition.height) / 2;
+
+		w_area.x = 0;
+		w_area.y = 0;
+		w_area.width = widget->requisition.width;
+		w_area.height = widget->requisition.height;
+
+		if (gdk_rectangle_intersect (area, &w_area, &p_area))
+			paint (gpixmap, &p_area);
 	}
+}
+
+static gint
+gnome_pixmap_expose (GtkWidget *widget, GdkEventExpose *event)
+{
+	g_return_val_if_fail (widget != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_PIXMAP (widget), FALSE);
+	g_return_val_if_fail (event != NULL, FALSE);
+
+	if (GTK_WIDGET_DRAWABLE (widget))
+		paint (GNOME_PIXMAP (widget), &event->area);
 
 	return FALSE;
 }
@@ -507,6 +540,8 @@ load_pixmap(GdkWindow *window, GdkPixmap **pixmap, GdkBitmap **mask, GdkColor *t
 void
 gnome_create_pixmap_gdk (GdkWindow *window, GdkPixmap **pixmap, GdkBitmap **mask, GdkColor *transparent, char *file)
 {
+	printf ("gnome_create_pixmap_gdk: this function is obsolete and evil; please use gdk_imlib instead\n");
+
 	g_assert(window != NULL);
 	g_assert(pixmap != NULL);
 	g_assert(mask != NULL);
@@ -526,6 +561,8 @@ gnome_create_pixmap_gtk (GtkWidget *window, GdkPixmap **pixmap, GdkBitmap **mask
 {
 	GtkStyle *style;
 	
+	printf ("gnome_create_pixmap_gtk: this function is obsolete and evil; please use gdk_imlib instead\n");
+
 	g_assert(window != NULL);
 	g_assert(pixmap != NULL);
 	g_assert(mask != NULL);
@@ -553,6 +590,8 @@ gnome_create_pixmap_gtk_d (GtkWidget *window, GdkPixmap **pixmap, GdkBitmap **ma
 {
 	GtkStyle *style;
 	
+	printf ("gnome_create_pixmap_gtk_d: this function is obsolete and evil; please use gdk_imlib instead\n");
+
 	g_assert(window != NULL);
 	g_assert(pixmap != NULL);
 	g_assert(mask != NULL);
@@ -572,6 +611,8 @@ gnome_create_pixmap_widget (GtkWidget *window, GtkWidget *holder, char *file)
 	GdkPixmap *pixmap;
 	GdkBitmap *mask;
 
+	printf ("gnome_create_pixmap_widget: this function is obsolete and evil; please use GnomePixmap instead\n");
+
 	if (!file || !g_file_exists(file))
 		return NULL;
 
@@ -586,6 +627,8 @@ gnome_create_pixmap_widget_d (GtkWidget *window, GtkWidget *holder, char **data)
 	GdkPixmap *pixmap;
 	GdkBitmap *mask;
 
+	printf ("gnome_create_pixmap_widget_d: this function is obsolete and evil; please use GnomePixmap instead\n");
+
 	gnome_create_pixmap_gtk_d(window, &pixmap, &mask, holder, data);
 
 	return gtk_pixmap_new(pixmap, mask);
@@ -596,6 +639,8 @@ gnome_set_pixmap_widget (GtkPixmap *pixmap, GtkWidget *window, GtkWidget *holder
 {
 	GdkPixmap *gpixmap;
 	GdkBitmap *mask;
+
+	printf ("gnome_set_pixmap_widget: this function is obsolete and evil; please use gdk_imlib instead\n");
 	
 	g_assert (pixmap != NULL);
 
@@ -612,6 +657,8 @@ gnome_set_pixmap_widget_d (GtkPixmap *pixmap, GtkWidget *window, GtkWidget *hold
 {
 	GdkPixmap *gpixmap;
 	GdkBitmap *mask;
+	
+	printf ("gnome_set_pixmap_widget_d: this function is obsolete and evil; please use gdk_imlib instead\n");
 	
 	g_assert (pixmap != NULL);
 

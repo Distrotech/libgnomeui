@@ -1,3 +1,13 @@
+1998-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-pixmap.c: Added warnings of "don't use me" to all the
+	obsolete functions.
+	(gnome_pixmap_draw): Added proper widget draw function.  We need a
+	special draw function because a GnomePixmap's window may not be as
+	big as its allocation.
+	(paint): New function that actually paints the stuff.
+	(gnome_pixmap_expose): Use the paint() function.
+
 Tue Mar 10 22:27:31 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-client.c (gnome_client_flush): New function.
