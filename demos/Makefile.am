@@ -21,15 +21,12 @@ LDADD =	\
 
 noinst_PROGRAMS = \
 	selector_demo		\
-	stock_demo		\
 	winhints_demo		\
 	dock_demo 		\
 	animator_demo		\
 	mdi_demo
 
 selector_demo_SOURCES = selector_demo.c
-
-stock_demo_SOURCES = stock_demo.c
 
 winhints_demo_SOURCES = winhints_demo.c
 

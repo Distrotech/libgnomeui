@@ -1,3 +1,8 @@
+2001-04-26  Martin Baulig  <baulig@suse.de>
+
+	* Makefile.am: Don't compile the stock_demo as the GnomeStock is
+	deprecated and will be moved to libcompat.
+
 2001-02-26  Martin Baulig  <baulig@suse.de>
 
 	* selector_demo.c: Added example for the new pixmap selector mode
