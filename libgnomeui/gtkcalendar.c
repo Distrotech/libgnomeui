@@ -552,6 +552,23 @@ gtk_calendar_realize (GtkWidget *widget)
       attributes.width = gcal->arrow_width;
       attributes.height = gcal->header_h - 7;
       for (i = 0; i < 4; i++) {
+	switch (i)
+	  {
+	  case ARROW_MONTH_LEFT:
+	    attributes.x = 3;
+	    break;
+	  case ARROW_MONTH_RIGHT:
+	    attributes.x = gcal->arrow_width + gcal->max_month_width;
+	    break;
+	  case ARROW_YEAR_LEFT:
+	    attributes.x = widget->allocation.width - 
+                            (3 + 2*gcal->arrow_width + gcal->max_year_width);
+	    break;
+	  case ARROW_YEAR_RIGHT:
+	    attributes.x = widget->allocation.width - 3 - gcal->arrow_width;
+	    break;
+	  }
+
         gcal->arrow_win[i] = gdk_window_new (gcal->header_win, 
 					    &attributes, attributes_mask);
         gcal->arrow_state[i] = GTK_STATE_NORMAL;
@@ -574,7 +591,7 @@ gtk_calendar_realize (GtkWidget *widget)
   if ( gcal->display_flags & GTK_CALENDAR_SHOW_DAY_NAMES)
     {
       attributes.x = 0;
-      attributes.y = gcal->header_h + 1;
+      attributes.y = gcal->header_h;
       attributes.width = widget->allocation.width;
       attributes.height = gcal->day_name_h;
       gcal->day_name_win = gdk_window_new (widget->window, 
@@ -678,14 +695,12 @@ gtk_calendar_size_allocate (GtkWidget     *widget,
   
   widget->allocation = *allocation;
 
-
+  cal = GTK_CALENDAR (widget);
+  
+  cal->day_width = (allocation->width - (CALENDAR_MARGIN * 2) - (DAY_XSEP * 6))/7;
+  
   if (GTK_WIDGET_REALIZED (widget))
     {
-      cal = GTK_CALENDAR (widget);
-      
-      cal->day_width = (allocation->width - (CALENDAR_MARGIN * 2) - (DAY_XSEP * 6))/7;
-      y_arrow = (cal->header_h - 8) / 2;
-
       gdk_window_move_resize (widget->window,
 			      allocation->x, allocation->y,
                               allocation->width, allocation->height);
