@@ -178,7 +178,11 @@ entry_insert_text_cb  (GtkEditable    *entry,
   if (ab->prompt == NULL) return; /* not prompting, so don't 
 				     interfere. */
 
+#ifdef HAVE_GTK_EDITABLE_GET_POSITION
   pos = gtk_editable_get_position(entry);
+#else
+  pos = GTK_EDITABLE(entry)->current_pos;
+#endif
 
 #ifdef GNOME_ENABLE_DEBUG
     g_print("Position is %d, start of editable is %d\n", 
