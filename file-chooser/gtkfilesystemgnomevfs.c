@@ -87,6 +87,7 @@ struct _GtkFileSystemGnomeVFS
 #endif
 
   char *desktop_uri;
+  char *home_uri;
   guint locale_encoded_filenames : 1;
 };
 
@@ -347,6 +348,9 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
   system_vfs->desktop_uri = (char *)gtk_file_system_filename_to_path (GTK_FILE_SYSTEM (system_vfs),
 								      name);
   g_free (name);
+  system_vfs->home_uri = (char *)gtk_file_system_filename_to_path (GTK_FILE_SYSTEM (system_vfs),
+								   g_get_home_dir ());
+  
   system_vfs->locale_encoded_filenames = (getenv ("G_BROKEN_FILENAMES") != NULL);
   system_vfs->folders = g_hash_table_new (g_str_hash, g_str_equal);
 
@@ -388,6 +392,7 @@ gtk_file_system_gnome_vfs_finalize (GObject *object)
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (object);
 
   g_free (system_vfs->desktop_uri);
+  g_free (system_vfs->home_uri);
   g_hash_table_destroy (system_vfs->folders);
 
 #ifdef USE_GCONF
@@ -926,6 +931,8 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
 	icon_name = g_strdup ("gnome-fs-blockdev");
       else if (strcmp (uri, system_vfs->desktop_uri) == 0)
 	icon_name = g_strdup ("gnome-fs-desktop");
+      else if (strcmp (uri, system_vfs->home_uri) == 0)
+	icon_name = g_strdup ("gnome-fs-home");
       else
 	icon_name = gnome_vfs_volume_get_icon (GNOME_VFS_VOLUME (volume));
       g_free (uri);
@@ -1313,7 +1320,9 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
   uri = gtk_file_path_get_string (path);
   if (strcmp (uri, system_vfs->desktop_uri) == 0)
     icon_name = g_strdup ("gnome-fs-desktop");
-  else  
+  else if (strcmp (uri, system_vfs->home_uri) == 0)
+    icon_name = g_strdup ("gnome-fs-home");
+  else
     icon_name = gnome_icon_lookup (icon_theme,
 				   NULL,
 				   uri,

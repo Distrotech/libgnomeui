@@ -1,3 +1,12 @@
+2004-03-08  Anders Carlsson  <andersca@gnome.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_init),
+	(gtk_file_system_gnome_vfs_finalize),
+	(gtk_file_system_gnome_vfs_volume_render_icon),
+	(gtk_file_system_gnome_vfs_render_icon):
+	Use an icon for the home directory.
+	
 2004-03-06  Dennis Cranston <dennis_cranston at yahoo com>
 
 	* libgnomeui/gnome-file-entry.c: (browse_clicked):  get the
