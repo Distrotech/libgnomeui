@@ -1,4 +1,4 @@
-# libgnomeui fr.po
+# French translation of libgnomeui.
 # Copyright (C) 2001-2002 Free Software Foundation, Inc.
 # maintainer: Christophe Merlet (RedFox) <christophe@merlet.net>, 2001-2002.
 # Christophe Fergeau <teuf@users.sourceforge.net>, 2002
@@ -6,9 +6,9 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.0.1\n"
-"POT-Creation-Date: 2002-08-06 15:26+0200\n"
-"PO-Revision-Date: 2002-07-28 12:31+0200\n"
+"Project-Id-Version: libgnomeui 2.0.3\n"
+"POT-Creation-Date: 2002-08-14 10:28+0200\n"
+"PO-Revision-Date: 2002-08-14 10:16+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -527,6 +527,7 @@ msgstr "Astuce pour l'élément 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fichier"
 
@@ -584,6 +585,7 @@ msgid "_Game"
 msgstr "_Jeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aide"
 
@@ -774,11 +776,11 @@ msgstr "Configure l'application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "À _propos"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "À propos de cette application"
 
@@ -805,7 +807,7 @@ msgstr "Crée une nouvelle fenêtre"
 msgid "_Close This Window"
 msgstr "_Fermer cette fenêtre"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Ferme la fenêtre courante"
 
@@ -879,7 +881,7 @@ msgstr "Termine la partie en cours"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
-msgstr "Contenu de l'_aide"
+msgstr "_Contenu"
 
 #: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
@@ -891,7 +893,7 @@ msgstr "Texte sous les icônes"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
-msgstr "Priorité au texte sous les icônes"
+msgstr "Priorité au texte a coté des icônes"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
@@ -1052,7 +1054,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
-msgstr "Sélectionner un fichier"
+msgstr "Sélectionnez un fichier"
 
 #: libgnomeui/gnome-file-entry.c:645
 msgid "Path"
@@ -1219,7 +1221,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "hbox introuvable, utilisation d'une sélection de fichier normale"
+msgstr "hbox introuvable, utilisation d'un sélecteur de fichier normal"
 
 #: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
@@ -1261,9 +1263,7 @@ msgstr "Chemin de l'icône"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
-"Vous devez saisir ici le nom du répertoire où les images d'icônes sont "
-"situées."
+msgstr "Vous devez saisir ici le nom du répertoire où les icônes sont situées."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1309,11 +1309,11 @@ msgstr "Définit si l'entrée de pixmap doit avoir un aperçu."
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
-msgstr "Aucune d'image"
+msgstr "Aucune image"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
-msgstr "Aperçu d'image"
+msgstr "Aperçu de l'image"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
@@ -1342,8 +1342,9 @@ msgstr "%a %d %b %Y, %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Quitter le test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Quitter le test"
 
 #~ msgid "Find _Again"
 #~ msgstr "Rechercher à _nouveau"
