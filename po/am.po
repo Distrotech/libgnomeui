@@ -271,7 +271,7 @@ msgstr "የድሩይድ አርእስት"
 
 #: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
-msgstr "የአርማ ገጽታ"
+msgstr "የአርማ ምስል"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
@@ -279,7 +279,7 @@ msgstr "የመለያውን ምልክት ከላይ አድርግ"
 
 #: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
-msgstr "ለላይኛው የመለያ ምልክት ገጽታ"
+msgstr "ለላይኛው የመለያ ምልክት ምስል"
 
 #: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
@@ -1289,15 +1289,15 @@ msgstr "የቆሻብቀሮቆ መግቢያ ቅድመ እይታ ሊኖረው ይ�
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
-msgstr "ገጽታ የለም"
+msgstr "ምስል የለም"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
-msgstr "የገጽታው ቅድመ እይታ"
+msgstr "የምስሉ ቅድመ እይታ"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
-msgstr "አሁን ለተጠቀሰው ገጽታ ቅድመ እይታ"
+msgstr "አሁን ለተጠቀሰው ምስል ቅድመ እይታ"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
