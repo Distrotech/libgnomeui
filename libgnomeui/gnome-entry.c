@@ -19,8 +19,8 @@
 
 
 struct item {
-	int   save;
-	char *text;
+	gboolean save;
+	gchar *text;
 };
 
 
@@ -79,7 +79,7 @@ static void
 entry_activated (GtkWidget *widget, gpointer data)
 {
 	GnomeEntry *gentry;
-	char *text;
+	gchar *text;
 
 	gentry = data;
 
@@ -99,6 +99,7 @@ gnome_entry_init (GnomeEntry *gentry)
 	gentry->changed    = FALSE;
 	gentry->history_id = NULL;
 	gentry->items      = NULL;
+	gentry->max_saved  = DEFAULT_MAX_HISTORY_SAVED;
 
 	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (gentry)), "changed",
 			    (GtkSignalFunc) entry_changed,
@@ -109,8 +110,22 @@ gnome_entry_init (GnomeEntry *gentry)
 	gtk_combo_disable_activate (GTK_COMBO (gentry));
 }
 
+
+/**
+ * gnome_entry_new
+ * @history_id: If not %NULL, the text id under which history data is stored
+ *
+ * Description:
+ * Creates a new gnome-entry widget.  If  @history_id is
+ * not %NULL, then the history list will be saved and restored between
+ * uses under the given id.
+ *
+ * Returns:
+ * Newly-created gnome-entry widget.
+ */
+
 GtkWidget *
-gnome_entry_new (char *history_id)
+gnome_entry_new (const gchar *history_id)
 {
 	GnomeEntry *gentry;
 
@@ -146,7 +161,7 @@ gnome_entry_destroy (GtkObject *object)
 {
 	GnomeEntry *gentry;
 	GtkWidget *entry;
-	char *text;
+	gchar *text;
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (object));
@@ -177,6 +192,18 @@ gnome_entry_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+
+/**
+ * gnome_entry_gtk_entry
+ * @gentry: Pointer to GNOME entry object.
+ *
+ * Description:
+ * Obtain pointer to GNOME entry's internal text entry widget.
+ *
+ * Returns:
+ * Pointer to gtk-entry widget.
+ */
+
 GtkWidget *
 gnome_entry_gtk_entry (GnomeEntry *gentry)
 {
@@ -186,8 +213,20 @@ gnome_entry_gtk_entry (GnomeEntry *gentry)
 	return GTK_COMBO (gentry)->entry;
 }
 
+
+/**
+ * gnome_entry_set_history_id
+ * @gentry: Pointer to GNOME entry object.
+ * @history_id: If not %NULL, the text id under which history data is stored
+ *
+ * Description:
+ * Set or clear the history id of the GNOME entry widget.  If
+ * @history_id is %NULL, the widget's history id is cleared.  Otherwise,
+ * the given id replaces the previous widget history id.
+ */
+
 void
-gnome_entry_set_history_id (GnomeEntry *gentry, char *history_id)
+gnome_entry_set_history_id (GnomeEntry *gentry, const gchar *history_id)
 {
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
@@ -198,8 +237,31 @@ gnome_entry_set_history_id (GnomeEntry *gentry, char *history_id)
 	gentry->history_id = g_strdup (history_id); /* this handles NULL correctly */
 }
 
+
+/**
+ * gnome_entry_set_max_saved
+ * @gentry: Pointer to GNOME entry object.
+ * @max_saved: Maximum number of history items to save
+ *
+ * Description:
+ * Set internal limit on number of history items saved to the config
+ * file, when gnome_entry_save_history() is called.  Zero is an
+ * acceptable value for @max_saved, but the same thing is accomplished
+ * by setting the history id of @gentry to %NULL.
+ */
+
+void
+gnome_entry_set_max_saved (GnomeEntry *gentry, guint max_saved)
+{
+	g_return_if_fail (gentry != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (gentry));
+
+	gentry->max_saved = max_saved;
+}
+
+
 static char *
-build_prefix (GnomeEntry *gentry, int trailing_slash)
+build_prefix (GnomeEntry *gentry, gboolean trailing_slash)
 {
 	return g_strconcat ("/",
 			       gnome_app_id,
@@ -209,14 +271,15 @@ build_prefix (GnomeEntry *gentry, int trailing_slash)
 			       NULL);
 }
 
-void
-gnome_entry_prepend_history (GnomeEntry *gentry, int save, char *text)
+static void
+gnome_entry_add_history (GnomeEntry *gentry, gboolean save,
+			 const gchar *text, gboolean append)
 {
 	struct item *item;
 	GList *gitem;
 	GtkWidget *li;
 	GtkWidget *entry;
-	char *tmp;
+	gchar *tmp;
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
@@ -235,7 +298,11 @@ gnome_entry_prepend_history (GnomeEntry *gentry, int save, char *text)
 	gtk_widget_show (li);
 
 	gitem = g_list_append (NULL, li);
-	gtk_list_prepend_items (GTK_LIST (GTK_COMBO (gentry)->list), gitem);
+
+	if (append)
+	  gtk_list_prepend_items (GTK_LIST (GTK_COMBO (gentry)->list), gitem);
+	else
+	  gtk_list_append_items (GTK_LIST (GTK_COMBO (gentry)->list), gitem);
 
 	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
 	g_free (tmp);
@@ -244,41 +311,49 @@ gnome_entry_prepend_history (GnomeEntry *gentry, int save, char *text)
 	   to undo the effect */
 	gentry->changed = FALSE;
 }
+
+
+
+/**
+ * gnome_entry_prepend_history
+ * @gentry: Pointer to GNOME entry object.
+ * @save: If %TRUE, history entry will be saved to config file
+ *
+ * Description:
+ * Adds a history item of the given @text to the head of the history
+ * list inside @gentry.
+ * If @save is %TRUE, the history item will be saved in the config file
+ * (assuming that @gentry's history id is not %NULL).
+ */
 
 void
-gnome_entry_append_history (GnomeEntry *gentry, int save, char *text)
+gnome_entry_prepend_history (GnomeEntry *gentry, gboolean save,
+			     const gchar *text)
 {
-	struct item *item;
-	GList *gitem;
-	GtkWidget *li;
-	GtkWidget *entry;
-	char *tmp;
-
-	g_return_if_fail (gentry != NULL);
-	g_return_if_fail (GNOME_IS_ENTRY (gentry));
-	g_return_if_fail (text != NULL); /* FIXME: shoudl we just return without warning? */
-
-	entry = gnome_entry_gtk_entry (gentry);
-	tmp = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
-	
-	item = g_new (struct item, 1);
-	item->save = save;
-	item->text = g_strdup (text);
-
-	gentry->items = g_list_append (gentry->items, item);
-
-	li = gtk_list_item_new_with_label (text);
-	gtk_widget_show (li);
-
-	gitem = g_list_append (NULL, li);
-	gtk_list_append_items (GTK_LIST (GTK_COMBO (gentry)->list), gitem);
-
-	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
-	g_free (tmp);
-	/* gtk_entry_set_text runs our 'entry_changed' routine, so we have
-	   to undo the effect */
-	gentry->changed = FALSE;
+  gnome_entry_add_history (gentry, save, text, FALSE);
 }
+
+
+/**
+ * gnome_entry_append_history
+ * @gentry: Pointer to GNOME entry object.
+ * @save: If %TRUE, history entry will be saved to config file
+ *
+ * Description:
+ * Adds a history item of the given @text to the tail of the history
+ * list inside @gentry.
+ * If @save is %TRUE, the history item will be saved in the config file
+ * (assuming that @gentry's history id is not %NULL).
+ */
+
+void
+gnome_entry_append_history (GnomeEntry *gentry, gboolean save,
+			    const gchar *text)
+{
+  gnome_entry_add_history (gentry, save, text, TRUE);
+}
+
+
 
 static void
 set_combo_items (GnomeEntry *gentry)
@@ -289,7 +364,7 @@ set_combo_items (GnomeEntry *gentry)
 	struct item *item;
 	GtkWidget *li;
 	GtkWidget *entry;
-	char *tmp;
+	gchar *tmp;
 
 	gtklist = GTK_LIST (GTK_COMBO (gentry)->list);
 
@@ -322,14 +397,24 @@ set_combo_items (GnomeEntry *gentry)
 	gentry->changed = FALSE;
 }
 
+
+/**
+ * gnome_entry_load_history
+ * @gentry: Pointer to GNOME entry object.
+ *
+ * Description:
+ * Loads a stored history list from the GNOME config file, if one is
+ * available.  If the history id of @gentry is %NULL, nothing occurs.
+ */
+
 void
 gnome_entry_load_history (GnomeEntry *gentry)
 {
-	char *prefix;
+	gchar *prefix;
 	struct item *item;
-	int n;
-	char key[13];
-	char *value;
+	gint n;
+	gchar key[13];
+	gchar *value;
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
@@ -362,9 +447,10 @@ gnome_entry_load_history (GnomeEntry *gentry)
 }
 
 static gboolean
-check_for_duplicates (struct item **final_items, gint n, struct item *item)
+check_for_duplicates (struct item **final_items, gint n,
+		      const struct item *item)
 {
-	int i;
+	gint i;
 	for (i = 0; i < n; i++) {
 		if (final_items[i] &&
 		    !strcmp (item->text, final_items[i]->text))
@@ -372,15 +458,26 @@ check_for_duplicates (struct item **final_items, gint n, struct item *item)
 	}
 	return TRUE;
 }
+
+
+/**
+ * gnome_entry_load_history
+ * @gentry: Pointer to GNOME entry object.
+ *
+ * Description:
+ * Loads a stored history list from the GNOME config file, if one is
+ * available.  If the history id of @gentry is %NULL, nothing occurs.
+ */
+
 void
 gnome_entry_save_history (GnomeEntry *gentry)
 {
-	char *prefix;
+	gchar *prefix;
 	GList *items;
 	struct item *final_items[DEFAULT_MAX_HISTORY_SAVED];
 	struct item *item;
-	int n;
-	char key[13];
+	gint n;
+	gchar key[13];
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
@@ -399,7 +496,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	gnome_config_push_prefix (prefix);
 	g_free (prefix);
 
-	for (n = 0, items = gentry->items; items && n < DEFAULT_MAX_HISTORY_SAVED; items = items->next, n++) {
+	for (n = 0, items = gentry->items; items && n < gentry->max_saved; items = items->next, n++) {
 		item = items->data;
 
 		final_items [n] = NULL;
