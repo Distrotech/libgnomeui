@@ -298,7 +298,7 @@ gnome_dialog_run_clicked(GnomeDialog *dialog,
   *setme = button_number;
 }
 
-char *
+gint
 gnome_dialog_run_modal(GnomeDialog *dialog)
 {
   gint button_num = -1;
@@ -317,10 +317,7 @@ gnome_dialog_run_modal(GnomeDialog *dialog)
 
   gtk_grab_remove(GTK_WIDGET(dialog));
 
-  if(button_num >= 0)
-    gtk_label_get(GTK_LABEL(GTK_BUTTON(g_list_nth(dialog->buttons, button_num))->child), &retval);
-
-  return retval;
+  return button_num;
 }
 
 void
