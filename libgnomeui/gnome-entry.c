@@ -659,6 +659,7 @@ gnome_entry_clear_history (GnomeEntry *gentry)
 	set_combo_items (gentry);
 }
 
+#ifdef FIXME
 static gboolean
 check_for_duplicates (struct item **final_items, gint n,
 		      const struct item *item)
@@ -671,6 +672,7 @@ check_for_duplicates (struct item **final_items, gint n,
 	}
 	return TRUE;
 }
+#endif
 
 
 /**

@@ -1,3 +1,17 @@
+Fri Aug 24 23:31:39 2001  George Lebl <jirka@5z.com>
+
+	Note: we now require most up to date gnome-vfs from CVS
+
+	* gnome-file-entry.[ch]:  Bring back the file entry, use macros in it
+	  make it use gnome-vfs uri functions (only local files for now),
+	  also make it a vbox with an hbox packed inside it so that preview
+	  can be added by gnome-pixmap-entry and it can be derived from
+	  gnome-file-entry. I think this should be propagated to
+	  gnome-entry somehow maybe.  Move more stuff into the private
+	  structure as well.
+
+	* gnome-entry.c: fix warning
+
 2001-08-24  Darin Adler  <darin@bentspoon.com>
 
 	* gnome-entry.h: Fixed GnomeEntry header to not include the
