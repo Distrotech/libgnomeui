@@ -1,5 +1,10 @@
 2004-02-23  Alexander Larsson  <alexl@redhat.com>
 
+	* gtkfilesystemgnomevfs.c:
+	More get_file_info fixups.
+	
+2004-02-23  Alexander Larsson  <alexl@redhat.com>
+
 	* gtkfilesystemgnomevfs.c (lookup_vfs_info_in_folder):
 	Don't access NULL child.
 

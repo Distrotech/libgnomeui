@@ -1780,8 +1780,10 @@ lookup_vfs_info_in_folder (GtkFileFolder     *folder,
       
       gnome_vfs_file_info_unref (vfs_info);
 
-      return child->info;
     }
+
+  if (child)
+    return child->info;
   
   return NULL;
 }
@@ -1793,12 +1795,23 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
   const gchar *uri = gtk_file_path_get_string (path);
   GnomeVFSFileInfo *info;
-
+  GtkFileInfo *file_info;
+  
   info = lookup_vfs_info_in_folder (folder, path, error);
   if (info)
-    return info_from_vfs_info (uri, info, folder_vfs->types);
-  else
-    return NULL;
+    gnome_vfs_file_info_ref (info);
+
+  if (info == NULL)
+    {
+      info = gnome_vfs_file_info_new ();
+      gnome_vfs_get_file_info (uri, info, get_options (folder_vfs->types));
+    }
+  
+  file_info = info_from_vfs_info (uri, info, folder_vfs->types);
+  
+  gnome_vfs_file_info_unref (info);
+  
+  return file_info;
 }
 
 static void
