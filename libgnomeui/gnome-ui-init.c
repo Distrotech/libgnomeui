@@ -647,21 +647,13 @@ static struct poptOption gtk_options [] = {
 static void
 gtk_pre_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
 {
-	struct poptOption *options, *ptr;
 	gnome_gtk_init_info *init_info = g_new0 (gnome_gtk_init_info, 1);
-	guint count = 1;
-
-	for (ptr = gtk_options;
-	     (ptr->argInfo != POPT_ARG_NONE) || (ptr->descrip != NULL);
-	     ptr++)
-		count++;
-
-	options = g_memdup (gtk_options, sizeof (struct poptOption) * count);
-	options->descrip = (const char *) init_info;
 
 	init_info->gtk_args = g_ptr_array_new ();
 
-	mod_info->options = options;
+	g_object_set_data (G_OBJECT (program),
+			   "Libgnomeui-Gtk-Module-init-info",
+			   init_info);
 }
 
 static void
@@ -670,8 +662,10 @@ gtk_post_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
 	gnome_gtk_init_info *init_info;
 	int final_argc;
 	char **final_argv;
+	int i;
 
-	init_info = (gnome_gtk_init_info *) mod_info->options [0].descrip;
+	init_info = g_object_get_data (G_OBJECT (program),
+				       "Libgnomeui-Gtk-Module-init-info");
 
 	g_ptr_array_add (init_info->gtk_args, NULL);
 
@@ -681,13 +675,23 @@ gtk_post_args_parse (GnomeProgram *program, GnomeModuleInfo *mod_info)
 
 	gtk_init (&final_argc, &final_argv);
 
+	g_free (final_argv);
+
+	/* FIXME: is this still needed */
 	gdk_rgb_init();
 
-	g_free (mod_info->options);
-	mod_info->options = NULL;
+	for (i = 0; g_ptr_array_index (init_info->gtk_args, i) != NULL; i++) {
+		g_free (g_ptr_array_index (init_info->gtk_args, i));
+		g_ptr_array_index (init_info->gtk_args, i) = NULL;
+	}
 
 	g_ptr_array_free (init_info->gtk_args, TRUE);
+	init_info->gtk_args = NULL;
 	g_free (init_info);
+
+	g_object_set_data (G_OBJECT (program),
+			   "Libgnomeui-Gtk-Module-init-info",
+			   NULL);
 }
 
 

@@ -1,3 +1,9 @@
+Sun Oct 14 18:03:38 2001  George Lebl <jirka@5z.com>
+
+	* gnome-ui-init.c: Fix an INCREDIBLE hack, and a couple of leaks
+	  in the gtk init stuff.  All runtime data needs to be stored
+	  with the GnomeProgram and NOT the GnomeModuleInfo.
+
 2001-10-13  Seth Nickell  <snickell@stanford.edu>
 
 	* libgnomeui.h:
