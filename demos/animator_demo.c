@@ -37,9 +37,8 @@ main (int argc, char *argv[])
   GdkPixbuf *pixbuf;
   char *s;
 
-  gnome_program_init ("gnome-animator", VERSION, argc, argv,
-		      GNOME_PARAM_MODULE_INFO, &libgnomeui_module_info,
-		      NULL);
+  gnome_program_init ("gnome-animator", VERSION, &libgnomeui_module_info,
+		      argc, argv, NULL);
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_realize (window);

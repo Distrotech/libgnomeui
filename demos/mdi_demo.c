@@ -197,9 +197,8 @@ GnomeUIInfo main_menu[] =
 int
 main(int argc, char **argv)
 {
-  gnome_program_init ("mdi_demo", "2.0", argc, argv,
-					  GNOME_PARAM_MODULE_INFO, &libgnomeui_module_info,
-					  NULL);
+  gnome_program_init ("mdi_demo", "2.0", &libgnomeui_module_info,
+					  argc, argv, NULL);
 
   mdi = gnome_mdi_new("MDIDemo", "MDI Demo");
   gnome_mdi_set_mode(mdi, GNOME_MDI_TOPLEVEL);
