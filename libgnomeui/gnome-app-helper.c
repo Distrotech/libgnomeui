@@ -72,6 +72,26 @@ static gint g_strncmp_ignore_char( gchar *first, gchar *second,
 				   gint length, gchar ignored );
 
 
+#ifdef NEVER_DEFINED
+static const char strings [] = {
+	N_("_File"),
+	N_("_File/"),
+	N_("_Edit"),
+	N_("_Edit/"),
+	N_("_View"),
+	N_("_View/"),
+	N_("_Settings"),
+	N_("_Settings/"),
+	N_("File_s"),
+	N_("File_s/"),
+	N_("_Windows"),
+	N_("_Game"), 
+	N_("_Help"), 
+	N_("_Windows/")
+};
+
+#endif
+
 static GnomeUIInfo menu_defaults[] = {
         /* New */
         { GNOME_APP_UI_ITEM, NULL, NULL,

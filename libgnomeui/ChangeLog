@@ -1,3 +1,8 @@
+1999-01-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-app-helper.c, gnome-app-helper.h: Changes to make the
+	strings localizable.
+
 1999-01-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-pixmap-entry.c (entry_changed): Use GNOME pixmap here to

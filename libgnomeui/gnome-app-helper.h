@@ -464,45 +464,51 @@ typedef struct {
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
           GNOME_APP_CONFIGURABLE_ITEM_END_GAME, (GdkModifierType) 0, NULL }
 	  
+#ifdef ENABLE_NLS
+#   define D_(x) dgettext("gnome-libs", x)
+#else
+#   define D_(x) (x)
+#endif
+
 /* Some standard menus */
 #define GNOMEUIINFO_MENU_FILE_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_File"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, D_("_File"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_EDIT_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_Edit"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, D_("_Edit"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_VIEW_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_View"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, D_("_View"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_SETTINGS_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_Settings"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, D_("_Settings"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_FILES_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("Fi_les"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, D_("Fi_les"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_WINDOWS_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_Windows"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, D_("_Windows"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_HELP_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_Help"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, D_("_Help"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_GAME_TREE(tree) \
-	{ GNOME_APP_UI_SUBTREE, N_("_Game"), NULL, tree, NULL, NULL, \
+	{ GNOME_APP_UI_SUBTREE, D_("_Game"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 		
 /*these are strings to be used for paths when working with the menus stuff*/
-#define GNOME_MENU_FILE_STRING _("_File")
-#define GNOME_MENU_FILE_PATH _("_File/")
-#define GNOME_MENU_EDIT_STRING _("_Edit")
-#define GNOME_MENU_EDIT_PATH _("_Edit/")
-#define GNOME_MENU_VIEW_STRING _("_View")
-#define GNOME_MENU_VIEW_PATH _("_View/")
-#define GNOME_MENU_SETTINGS_STRING _("_Settings")
-#define GNOME_MENU_SETTINGS_PATH _("_Settings/")
-#define GNOME_MENU_FILES_STRING _("File_s")
-#define GNOME_MENU_FILES_PATH _("File_s/")
-#define GNOME_MENU_WINDOWS_STRING _("_Windows")
-#define GNOME_MENU_WINDOWS_PATH _("_Windows/")
+#define GNOME_MENU_FILE_STRING D_("_File")
+#define GNOME_MENU_FILE_PATH D_("_File/")
+#define GNOME_MENU_EDIT_STRING D_("_Edit")
+#define GNOME_MENU_EDIT_PATH D_("_Edit/")
+#define GNOME_MENU_VIEW_STRING D_("_View")
+#define GNOME_MENU_VIEW_PATH D_("_View/")
+#define GNOME_MENU_SETTINGS_STRING D_("_Settings")
+#define GNOME_MENU_SETTINGS_PATH D_("_Settings/")
+#define GNOME_MENU_FILES_STRING D_("File_s")
+#define GNOME_MENU_FILES_PATH D_("File_s/")
+#define GNOME_MENU_WINDOWS_STRING D_("_Windows")
+#define GNOME_MENU_WINDOWS_PATH D_("_Windows/")
 
 
 /* Types useful to language bindings */
