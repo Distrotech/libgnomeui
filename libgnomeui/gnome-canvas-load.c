@@ -22,7 +22,7 @@ gnome_canvas_load_alpha (char *file)
 {
 	g_return_val_if_fail (file != NULL, NULL);
 
-	return gdk_imlib_loader_alpha (file);
+	return gdk_imlib_load_alpha (file);
 }
 
 void
