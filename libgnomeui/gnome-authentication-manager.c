@@ -176,8 +176,6 @@ present_authentication_dialog_nonblocking (CallbackInfo *info)
 		gtk_window_set_modal (GTK_WINDOW (dialog), FALSE);
 	}
 
-	gtk_window_set_modal (GTK_WINDOW (dialog), FALSE);
-
 	g_signal_connect (dialog, "response", 
 			  G_CALLBACK (authentication_dialog_button_clicked), info);
 
