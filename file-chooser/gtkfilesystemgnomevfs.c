@@ -1,5 +1,6 @@
 /* GTK - The GIMP Toolkit
  * gtkfilesystemgnomevfs.c: Implementation of GtkFileSystem for gnome-vfs
+ * Copyright (C) 2003, Novell, Inc.
  * Copyright (C) 2003, Red Hat, Inc.
  * Copyright (C) 1999, 2000 Eazel, Inc.
  *
@@ -19,6 +20,7 @@
  * Boston, MA 02111-1307, USA.
  *
  * Authors: Owen Taylor <otaylor@redhat.com>
+ *          Federico Mena-Quintero <federico@ximian.com>
  *
  * portions come from eel-vfs-extensions.c:
  *
@@ -31,6 +33,8 @@
 #include "gtkfilesystemgnomevfs.h"
 
 #include <libgnomevfs/gnome-vfs.h>
+#include <libgnomevfs/gnome-vfs-volume-monitor.h>
+#include <libgnomevfs/gnome-vfs-drive.h>
 #include <gconf/gconf-client.h>
 #include <libgnomeui/gnome-icon-lookup.h>
 
@@ -56,6 +60,8 @@ struct _GtkFileSystemGnomeVFS
   GHashTable *folders;
   GSList *roots;
   GtkFileFolder *local_root;
+
+  GnomeVFSVolumeMonitor *volume_monitor;
 
   GConfClient *client;
   guint client_notify_id;
@@ -113,6 +119,7 @@ static void gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface         *if
 static void gtk_file_system_gnome_vfs_init       (GtkFileSystemGnomeVFS      *impl);
 static void gtk_file_system_gnome_vfs_finalize   (GObject                    *object);
 
+static GSList *       gtk_file_system_gnome_vfs_list_volumes  (GtkFileSystem      *file_system);
 static GSList *       gtk_file_system_gnome_vfs_list_roots    (GtkFileSystem      *file_system);
 static GtkFileInfo *  gtk_file_system_gnome_vfs_get_root_info (GtkFileSystem      *file_system,
 							       const GtkFilePath  *path,
@@ -125,6 +132,24 @@ static GtkFileFolder *gtk_file_system_gnome_vfs_get_folder    (GtkFileSystem    
 static gboolean       gtk_file_system_gnome_vfs_create_folder (GtkFileSystem      *file_system,
 							       const GtkFilePath  *path,
 							       GError            **error);
+
+static void         gtk_file_system_gnome_vfs_volume_free             (GtkFileSystem       *file_system,
+								       GtkFileSystemVolume *volume);
+static GtkFilePath *gtk_file_system_gnome_vfs_volume_get_base_path    (GtkFileSystem       *file_system,
+								       GtkFileSystemVolume *volume);
+static gboolean     gtk_file_system_gnome_vfs_volume_get_is_mounted   (GtkFileSystem       *file_system,
+								       GtkFileSystemVolume *volume);
+static gboolean     gtk_file_system_gnome_vfs_volume_mount            (GtkFileSystem       *file_system,
+								       GtkFileSystemVolume *volume,
+								       GError             **error);
+static gchar *      gtk_file_system_gnome_vfs_volume_get_display_name (GtkFileSystem       *file_system,
+								       GtkFileSystemVolume *volume);
+static GdkPixbuf *  gtk_file_system_gnome_vfs_volume_render_icon      (GtkFileSystem        *file_system,
+								       GtkFileSystemVolume  *volume,
+								       GtkWidget            *widget,
+								       gint                  pixel_size,
+								       GError              **error);
+
 static gboolean       gtk_file_system_gnome_vfs_get_parent    (GtkFileSystem      *file_system,
 							       const GtkFilePath  *path,
 							       GtkFilePath       **parent,
@@ -180,6 +205,13 @@ static GtkFileInfo *           info_from_vfs_info (const gchar      *uri,
 						   GnomeVFSFileInfo *vfs_info,
 						   GtkFileInfoType   types);
 static GnomeVFSFileInfoOptions get_options        (GtkFileInfoType   types);
+
+static void volume_mount_unmount_cb (GnomeVFSVolumeMonitor *monitor,
+				     GnomeVFSVolume        *volume,
+				     GtkFileSystemGnomeVFS *system_vfs);
+static void drive_connect_disconnect_cb (GnomeVFSVolumeMonitor *monitor,
+					 GnomeVFSDrive         *drive,
+					 GtkFileSystemGnomeVFS *system_vfs);
 
 static void directory_load_callback (GnomeVFSAsyncHandle      *handle,
 				     GnomeVFSResult            result,
@@ -288,7 +320,7 @@ gtk_file_system_gnome_vfs_new (void)
 						       NULL);
   g_assert (system_vfs->local_root);
   gtk_file_path_free (local_path);
-  
+
   return GTK_FILE_SYSTEM (system_vfs);
 }
 
@@ -305,10 +337,17 @@ gtk_file_system_gnome_vfs_class_init (GtkFileSystemGnomeVFSClass *class)
 static void
 gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
 {
+  iface->list_volumes = gtk_file_system_gnome_vfs_list_volumes;
   iface->list_roots = gtk_file_system_gnome_vfs_list_roots;
   iface->get_folder = gtk_file_system_gnome_vfs_get_folder;
   iface->get_root_info = gtk_file_system_gnome_vfs_get_root_info;
   iface->create_folder = gtk_file_system_gnome_vfs_create_folder;
+  iface->volume_free = gtk_file_system_gnome_vfs_volume_free;
+  iface->volume_get_base_path = gtk_file_system_gnome_vfs_volume_get_base_path;
+  iface->volume_get_is_mounted = gtk_file_system_gnome_vfs_volume_get_is_mounted;
+  iface->volume_mount = gtk_file_system_gnome_vfs_volume_mount;
+  iface->volume_get_display_name = gtk_file_system_gnome_vfs_volume_get_display_name;
+  iface->volume_render_icon = gtk_file_system_gnome_vfs_volume_render_icon;
   iface->get_parent = gtk_file_system_gnome_vfs_get_parent;
   iface->make_path = gtk_file_system_gnome_vfs_make_path;
   iface->parse = gtk_file_system_gnome_vfs_parse;
@@ -326,6 +365,7 @@ static void
 gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 {
   GConfValue *value;
+  GList *list, *l;
 
   system_vfs->client = gconf_client_get_default ();
   system_vfs->bookmarks = NULL;
@@ -347,6 +387,93 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 
   system_vfs->icon_theme = gnome_icon_theme_new ();
   /* FIXME: listen for the "changed" signal in the icon theme? */
+
+  system_vfs->volume_monitor = gnome_vfs_volume_monitor_ref (gnome_vfs_get_volume_monitor ());
+  g_signal_connect (system_vfs->volume_monitor, "volume-mounted",
+		    G_CALLBACK (volume_mount_unmount_cb), system_vfs);
+  g_signal_connect (system_vfs->volume_monitor, "volume-unmounted",
+		    G_CALLBACK (volume_mount_unmount_cb), system_vfs);
+  g_signal_connect (system_vfs->volume_monitor, "drive-connected",
+		    G_CALLBACK (drive_connect_disconnect_cb), system_vfs);
+  g_signal_connect (system_vfs->volume_monitor, "drive-disconnected",
+		    G_CALLBACK (drive_connect_disconnect_cb), system_vfs);
+
+  list = gnome_vfs_volume_monitor_get_connected_drives (system_vfs->volume_monitor);
+
+  for (l = list; l; l = l->next)
+    {
+      GnomeVFSDrive *drive;
+      GnomeVFSVolume *volume;
+      char *device_path;
+      char *activation_uri;
+      char *display_name;
+
+      drive = l->data;
+      device_path = gnome_vfs_drive_get_device_path (drive);
+      activation_uri = gnome_vfs_drive_get_activation_uri (drive);
+      display_name = gnome_vfs_drive_get_display_name (drive);
+      g_print ("Drive device path %s\n"
+	       "\tactivation URI %s\n"
+	       "\tdisplay name %s\n"
+	       "\tuser visible? %s\n",
+	       device_path, activation_uri, display_name,
+	       gnome_vfs_drive_is_user_visible (drive) ? "YES" : "NO");
+      g_free (device_path);
+      g_free (activation_uri);
+      g_free (display_name);
+
+      volume = gnome_vfs_drive_get_mounted_volume (drive);
+      if (volume)
+	{
+	  device_path = gnome_vfs_volume_get_device_path (volume);
+	  activation_uri = gnome_vfs_volume_get_activation_uri (volume);
+	  display_name = gnome_vfs_volume_get_display_name (volume);
+	  g_print ("\tVolume device path %s\n"
+		   "\tVolume activation URI %s\n"
+		   "\tVolume display name %s\n"
+		   "\tVolume user visible? %s\n",
+		   device_path, activation_uri, display_name,
+		   gnome_vfs_volume_is_user_visible (volume) ? "YES" : "NO");
+	  g_free (device_path);
+	  g_free (activation_uri);
+	  g_free (display_name);
+	  gnome_vfs_volume_unref (volume);
+	}
+      else
+	g_print ("\tNo volume\n");
+
+      gnome_vfs_drive_unref (drive);
+    }
+
+  g_list_free (list);
+
+  list = gnome_vfs_volume_monitor_get_mounted_volumes (system_vfs->volume_monitor);
+
+  for (l = list; l; l = l->next)
+    {
+      GnomeVFSVolume *volume;
+      char *device_path;
+      char *activation_uri;
+      char *display_name;
+
+      volume = l->data;
+
+      device_path = gnome_vfs_volume_get_device_path (volume);
+      activation_uri = gnome_vfs_volume_get_activation_uri (volume);
+      display_name = gnome_vfs_volume_get_display_name (volume);
+      g_print ("Volume device path %s\n"
+	       "\tactivation URI %s\n"
+	       "\tdisplay name %s\n"
+	       "\tuser visible? %s\n",
+	       device_path, activation_uri, display_name,
+	       gnome_vfs_volume_is_user_visible (volume) ? "YES" : "NO");
+      g_free (device_path);
+      g_free (activation_uri);
+      g_free (display_name);
+      gnome_vfs_volume_unref (volume);
+    }
+
+  g_list_free (list);
 }
 
 static void
@@ -363,9 +490,67 @@ gtk_file_system_gnome_vfs_finalize (GObject *object)
 
   g_object_unref (system_vfs->icon_theme);
 
+  gnome_vfs_volume_monitor_unref (system_vfs->volume_monitor);
+
   /* XXX Assert ->roots and ->folders should be empty
    */
   system_parent_class->finalize (object);
+}
+
+static GSList *
+gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
+{
+  GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
+  GSList *result;
+  GList *list;
+  GList *l;
+
+  result = NULL;
+
+  /* User-visible drives */
+
+  list = gnome_vfs_volume_monitor_get_connected_drives (system_vfs->volume_monitor);
+  for (l = list; l; l = l->next)
+    {
+      GnomeVFSDrive *drive;
+
+      drive = GNOME_VFS_DRIVE (l->data);
+
+      if (gnome_vfs_drive_is_user_visible (drive))
+	result = g_slist_prepend (result, drive);
+      else
+	gnome_vfs_drive_unref (drive);
+    }
+
+  g_list_free (list);
+
+  /* User-visible volumes with no corresponding drives */
+
+  list = gnome_vfs_volume_monitor_get_mounted_volumes (system_vfs->volume_monitor);
+  for (l = list; l; l = l->next)
+    {
+      GnomeVFSVolume *volume;
+      GnomeVFSDrive *drive;
+
+      volume = GNOME_VFS_VOLUME (l->data);
+      drive = gnome_vfs_volume_get_drive (volume);
+
+      if (!drive && gnome_vfs_volume_is_user_visible (volume))
+	  result = g_slist_prepend (result, volume);
+      else
+	{
+	  gnome_vfs_drive_unref (drive);
+	  gnome_vfs_volume_unref (volume);
+	}
+    }
+
+  g_list_free (list);
+
+  /* Done */
+
+  result = g_slist_reverse (result);
+
+  return result;
 }
 
 static GSList *
@@ -568,6 +753,239 @@ gtk_file_system_gnome_vfs_create_folder (GtkFileSystem     *file_system,
     }
 
   return TRUE;
+}
+
+static void
+gtk_file_system_gnome_vfs_volume_free (GtkFileSystem        *file_system,
+				       GtkFileSystemVolume  *volume)
+{
+  if (GNOME_IS_VFS_DRIVE (volume))
+    gnome_vfs_drive_unref (GNOME_VFS_DRIVE (volume));
+  else if (GNOME_IS_VFS_VOLUME (volume))
+    gnome_vfs_volume_unref (GNOME_VFS_VOLUME (volume));
+  else
+    g_warning ("%p is not a valid volume", volume);
+}
+
+static GtkFilePath *
+gtk_file_system_gnome_vfs_volume_get_base_path (GtkFileSystem        *file_system,
+						GtkFileSystemVolume  *volume)
+{
+  char *uri;
+
+  if (GNOME_IS_VFS_DRIVE (volume))
+    uri = gnome_vfs_drive_get_activation_uri (GNOME_VFS_DRIVE (volume));
+  else if (GNOME_IS_VFS_VOLUME (volume))
+    uri = gnome_vfs_volume_get_activation_uri (GNOME_VFS_VOLUME (volume));
+  else
+    {
+      g_warning ("%p is not a valid volume", volume);
+      return NULL;
+    }
+
+  return gtk_file_path_new_steal (uri);
+}
+
+static gboolean
+gtk_file_system_gnome_vfs_volume_get_is_mounted (GtkFileSystem        *file_system,
+						 GtkFileSystemVolume  *volume)
+{
+  if (GNOME_IS_VFS_DRIVE (volume))
+    return gnome_vfs_drive_is_mounted (GNOME_VFS_DRIVE (volume));
+  else if (GNOME_IS_VFS_VOLUME (volume))
+    return gnome_vfs_volume_is_mounted (GNOME_VFS_VOLUME (volume));
+  else
+    {
+      g_warning ("%p is not a valid volume", volume);
+      return FALSE;
+    }
+}
+
+struct mount_closure {
+  GtkFileSystemGnomeVFS *system_vfs;
+  GMainLoop *loop;
+  gboolean succeeded;
+  char *error;
+  char *detailed_error;
+};
+
+/* Used from gnome_vfs_{volume,drive}_mount() */
+static void
+volume_mount_cb (gboolean succeeded,
+		 char    *error,
+		 char    *detailed_error,
+		 gpointer data)
+{
+  struct mount_closure *closure;
+
+  closure = data;
+
+  closure->succeeded = succeeded;
+
+  if (!succeeded)
+    {
+      closure->error = g_strdup (error);
+      closure->detailed_error = g_strdup (detailed_error);
+    }
+
+  g_main_loop_quit (closure->loop);
+}
+
+static gboolean
+gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem        *file_system, 
+					GtkFileSystemVolume  *volume,
+					GError              **error)
+{
+  GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
+
+  if (GNOME_IS_VFS_DRIVE (volume))
+    {
+      struct mount_closure closure;
+
+      closure.system_vfs = system_vfs;
+      closure.loop = g_main_loop_new (NULL, FALSE);
+      gnome_vfs_drive_mount (GNOME_VFS_DRIVE (volume), volume_mount_cb, &closure);
+
+      GDK_THREADS_LEAVE ();
+      g_main_loop_run (closure.loop);
+      GDK_THREADS_ENTER ();
+      g_main_loop_unref (closure.loop);
+
+      if (closure.succeeded)
+	return TRUE;
+      else
+	{
+	  g_set_error (error,
+		       GTK_FILE_SYSTEM_ERROR,
+		       GTK_FILE_SYSTEM_ERROR_FAILED,
+		       "%s:\n%s",
+		       closure.error,
+		       closure.detailed_error);
+	  g_free (closure.error);
+	  g_free (closure.detailed_error);
+	  return FALSE;
+	}
+    }
+  else if (GNOME_IS_VFS_VOLUME (volume))
+    return TRUE; /* It is already mounted */
+  else
+    {
+      g_warning ("%p is not a valid volume", volume);
+      return FALSE;
+    }
+}
+
+static gchar *
+gtk_file_system_gnome_vfs_volume_get_display_name (GtkFileSystem       *file_system,
+						   GtkFileSystemVolume *volume)
+{
+  if (GNOME_IS_VFS_DRIVE (volume))
+    return gnome_vfs_drive_get_display_name (GNOME_VFS_DRIVE (volume));
+  else if (GNOME_IS_VFS_VOLUME (volume))
+    return gnome_vfs_volume_get_display_name (GNOME_VFS_VOLUME (volume));
+  else
+    {
+      g_warning ("%p is not a valid volume", volume);
+      return NULL;
+    }
+}
+
+/* Gets an icon from its standard icon name */
+static GdkPixbuf *
+get_icon_from_name (GtkFileSystemGnomeVFS *system_vfs,
+		    const char            *icon_name,
+		    GtkWidget             *widget,
+		    gint                   pixel_size,
+		    GError               **error)
+{
+  GdkPixbuf *pixbuf;
+  GdkPixbuf *unscaled;
+  char *real_icon_name;
+
+  if (!icon_name)
+    return NULL;
+
+  if (icon_name[0] != '/')
+    real_icon_name = gnome_icon_theme_lookup_icon (system_vfs->icon_theme,
+						   icon_name,
+						   pixel_size,
+						   NULL,
+						   NULL);
+  else
+    real_icon_name = (char *) icon_name;
+
+  /* FIXME: Use a cache */
+  unscaled = gdk_pixbuf_new_from_file (icon_name, error);
+
+  if (real_icon_name != (char *) icon_name)
+    g_free (real_icon_name);
+
+  if (unscaled)
+    {
+      int uw, uh;
+
+      uw = gdk_pixbuf_get_width (unscaled);
+      uh = gdk_pixbuf_get_height (unscaled);
+
+      if (uw <= pixel_size && uh <= pixel_size)
+	pixbuf = unscaled;
+      else
+	{
+	  int w, h;
+
+	  w = pixel_size;
+	  h = floor ((double) (uh * w) / uw + 0.5);
+
+	  if (h > pixel_size)
+	    {
+	      h = pixel_size;
+	      w = floor ((double) (uw * h) / uh + 0.5);
+	    }
+
+	  g_assert (w <= pixel_size && h <= pixel_size);
+
+	  pixbuf = gdk_pixbuf_scale_simple (unscaled, w, h, GDK_INTERP_BILINEAR);
+	  gdk_pixbuf_unref (unscaled);
+	}
+    }
+  else
+    pixbuf = unscaled;
+
+  return pixbuf;
+}
+
+static GdkPixbuf *
+gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
+					      GtkFileSystemVolume  *volume,
+					      GtkWidget            *widget,
+					      gint                  pixel_size,
+					      GError              **error)
+{
+  GtkFileSystemGnomeVFS *system_vfs;
+  char *icon_name;
+  GdkPixbuf *pixbuf;
+
+  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
+
+  if (GNOME_IS_VFS_DRIVE (volume))
+    icon_name = gnome_vfs_drive_get_icon (GNOME_VFS_DRIVE (volume));
+  else if (GNOME_IS_VFS_VOLUME (volume))
+    icon_name = gnome_vfs_volume_get_icon (GNOME_VFS_VOLUME (volume));
+  else
+    {
+      g_warning ("%p is not a valid volume", volume);
+      return NULL;
+    }
+
+  if (icon_name)
+    {
+      pixbuf = get_icon_from_name (system_vfs, icon_name, widget, pixel_size, error);
+      g_free (icon_name);
+    }
+  else
+    pixbuf = NULL;
+
+  return pixbuf;
 }
 
 static gboolean
@@ -891,54 +1309,11 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
 				      NULL);
   if (icon_name)
     {
-      GdkPixbuf *unscaled;
-
-      if (icon_name[0] != '/')
-	{
-	  char *lookup;
-
-	  lookup = gnome_icon_theme_lookup_icon (system_vfs->icon_theme,
-						 icon_name,
-						 pixel_size,
-						 NULL,
-						 NULL);
-	  g_free (icon_name);
-	  icon_name = lookup;
-	}
-
-      /* FIXME: Use a cache */
-      unscaled = gdk_pixbuf_new_from_file (icon_name, error);
+      pixbuf = get_icon_from_name (system_vfs, icon_name, widget, pixel_size, error);
       g_free (icon_name);
-
-      if (unscaled)
-	{
-	  int uw, uh;
-
-	  uw = gdk_pixbuf_get_width (unscaled);
-	  uh = gdk_pixbuf_get_height (unscaled);
-
-	  if (uw <= pixel_size && uh <= pixel_size)
-	    pixbuf = unscaled;
-	  else
-	    {
-	      int w, h;
-
-	      w = pixel_size;
-	      h = floor ((double) (uh * w) / uw + 0.5);
-
-	      if (h > pixel_size)
-		{
-		  h = pixel_size;
-		  w = floor ((double) (uw * h) / uh + 0.5);
-		}
-
-	      g_assert (w <= pixel_size && h <= pixel_size);
-
-	      pixbuf = gdk_pixbuf_scale_simple (unscaled, w, h, GDK_INTERP_BILINEAR);
-	      gdk_pixbuf_unref (unscaled);
-	    }
-	}
     }
+  else
+    pixbuf = NULL;
 
   return pixbuf;
 }
@@ -1353,6 +1728,24 @@ set_vfs_error (GnomeVFSResult result,
 		   "VFS error: %s",
 		   gnome_vfs_result_to_string (result));
     }
+}
+
+/* Callback used when a volume gets mounted or unmounted */
+static void
+volume_mount_unmount_cb (GnomeVFSVolumeMonitor *monitor,
+			 GnomeVFSVolume        *volume,
+			 GtkFileSystemGnomeVFS *system_vfs)
+{
+  g_signal_emit_by_name (system_vfs, "roots-changed");
+}
+
+/* Callback used when a drive gets connected or disconnected */
+static void
+drive_connect_disconnect_cb (GnomeVFSVolumeMonitor *monitor,
+			     GnomeVFSDrive         *drive,
+			     GtkFileSystemGnomeVFS *system_vfs)
+{
+  g_signal_emit_by_name (system_vfs, "roots-changed");
 }
 
 static void

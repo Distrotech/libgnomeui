@@ -1,3 +1,24 @@
+2003-12-22  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystemgnomevfs.c: Add Novell copyright.
+	(struct _GtkFileSystemGnomeVFS): Added a field for a GnomeVFSVolumeMonitor.
+	(gtk_file_system_gnome_vfs_init): Create a volume monitor and
+	connect to its signals.
+	(gtk_file_system_gnome_vfs_finalize): Unref the volume monitor.
+	(volume_mount_unmount_cb): New callback.
+	(drive_connect_disconnect_cb): New callback.
+	(gtk_file_system_gnome_vfs_list_volumes): Implement.
+	(gtk_file_system_gnome_vfs_volume_free): Implement.
+	(gtk_file_system_gnome_vfs_volume_get_base_path): Implement.
+	(gtk_file_system_gnome_vfs_volume_get_is_mounted): Implement.
+	(gtk_file_system_gnome_vfs_volume_mount): Implement.
+	(gtk_file_system_gnome_vfs_volume_get_display_name): Implement.
+	(get_icon_from_name): New function, code from gtk_file_system_unix_render_icon().
+	(gtk_file_system_gnome_vfs_volume_render_icon): Implement.
+	(gtk_file_system_gnome_vfs_render_icon): Use get_icon_from_name().
+	(get_icon_from_name): Oops, handle the case where the icon file
+	could not be loaded.
+
 2003-12-10  Federico Mena Quintero  <federico@ximian.com>
 
 	* testfilechooser.c (main): Dramatically improved the usability of
