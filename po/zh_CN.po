@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
-"PO-Revision-Date: 2004-03-01 10:07+0800\n"
+"POT-Creation-Date: 2004-05-07 15:22+0200\n"
+"PO-Revision-Date: 2004-05-10 01:10+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -147,6 +147,7 @@ msgstr "关于 %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "文件(_F)"
 
@@ -204,6 +205,7 @@ msgid "_Game"
 msgstr "游戏(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "帮助(_H)"
 
@@ -400,11 +402,11 @@ msgstr "配置应用程序"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "关于(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "关于此应用程序"
 
@@ -432,7 +434,7 @@ msgstr "创建一个新窗口"
 msgid "_Close This Window"
 msgstr "关闭此窗口(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "关闭当前窗口"
 
@@ -514,28 +516,28 @@ msgid "View help for this application"
 msgstr "查看此应用程序的帮助"
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "文字在图标之下"
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "文字在图标之后"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "仅有图标"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "仅有文字"
 
-#: libgnomeui/gnome-app-helper.c:2631
+#: libgnomeui/gnome-app-helper.c:2634
 #, c-format
-msgid "Use desktop default (%s)"
+msgid "Use Desktop Default (%s)"
 msgstr "使用桌面默认值(%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -632,19 +634,19 @@ msgid "Your password will be transmitted encrypted."
 msgstr "您的密码将加密传送。"
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "需要身份认证"
 
 #: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
-msgid " domain %s"
-msgstr " 域 %s"
+msgid "You must log in to access %s domain %s\n"
+msgstr "您必须登录才能访问 %s 域 %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr "您必须登录才能访问“%s”。\n"
+msgstr "您必须登录才能访问“%s”\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1110,41 +1112,41 @@ msgid ""
 msgstr ""
 "在为 %s 装入或保存配置信息时发生错误。您的某些配置设置可能不能正常工作。"
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "GnomeHRef 激活的 URL"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "文本"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "按钮上的文本"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "终结这世界上的饥饿"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "链接颜色"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "用于绘制链接的颜色"
 
 # SUN NEW TRANSLATION
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "此按钮将把您定向到它显示的 URI。"
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1461,8 +1463,12 @@ msgstr "通知开发者(_I)"
 msgid "_Debug"
 msgstr "调试(_D)"
 
-#~ msgid "Exit the test"
-#~ msgstr "退出测试"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "退出测试"
+
+#~ msgid " domain %s"
+#~ msgstr " 域 %s"
 
 # SUN CHANGED MESSAGE
 #~ msgid "Color Selector"
