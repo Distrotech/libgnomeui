@@ -1,5 +1,8 @@
 1998-11-27  Jeff Garzik  <jgarzik@pobox.com>
 
+	* gnome-dialog-util: (gnome_question_dialog*, gnome_ok_cancel*):
+	NULL callbacks now supported.
+
 	* gnome-geometry.c:
 	Added API docs.
 

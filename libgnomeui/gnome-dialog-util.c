@@ -113,14 +113,16 @@ static GtkWidget * reply_dialog (const gchar * question,
 				 GNOME_STOCK_BUTTON_CANCEL, NULL);
   }
 
-  info = g_new(callback_info, 1);
+  if (callback != NULL) {
+    info = g_new(callback_info, 1);
 
-  info->function = callback;
-  info->data = data;
+    info->function = callback;
+    info->data = data;
 
-  gtk_signal_connect(GTK_OBJECT(mbox), "clicked",
-		     GTK_SIGNAL_FUNC(dialog_reply_callback),
-		     info);
+    gtk_signal_connect(GTK_OBJECT(mbox), "clicked",
+		       GTK_SIGNAL_FUNC(dialog_reply_callback),
+		       info);
+  }
 
   if (modal) {
     gtk_window_set_modal(GTK_WINDOW(mbox),TRUE);
