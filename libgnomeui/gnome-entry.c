@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  * Copyright (C) 1997, 1998, 1999, 2000 Free Software Foundation
  * All rights reserved.
@@ -44,9 +44,9 @@
 #include "gnome-entry.h"
 
 struct _GnomeEntryPrivate {
-	gboolean constructed;
+    gboolean constructed;
 
-	gboolean is_file_entry;
+    gboolean is_file_entry;
 };
 	
 
@@ -208,55 +208,55 @@ GtkWidget *
 gnome_entry_new_from_selector (GNOME_Selector     corba_selector,
 			       Bonobo_UIContainer uic)
 {
-	GnomeEntry *entry;
+    GnomeEntry *entry;
 
-	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
+    g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
 
-	entry = g_object_new (gnome_entry_get_type (), NULL);
+    entry = g_object_new (gnome_entry_get_type (), NULL);
 
-	return (GtkWidget *) gnome_selector_client_construct_from_objref
-		(GNOME_SELECTOR_CLIENT (entry), corba_selector, uic);
+    return (GtkWidget *) gnome_selector_client_construct_from_objref
+	(GNOME_SELECTOR_CLIENT (entry), corba_selector, uic);
 }
 
 static void
 gnome_entry_finalize (GObject *object)
 {
-	GnomeEntry *gentry;
+    GnomeEntry *gentry;
 
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_ENTRY (object));
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_ENTRY (object));
 
-	gentry = GNOME_ENTRY (object);
+    gentry = GNOME_ENTRY (object);
 
-	g_free (gentry->_priv);
-	gentry->_priv = NULL;
+    g_free (gentry->_priv);
+    gentry->_priv = NULL;
 
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+    if (G_OBJECT_CLASS (parent_class)->finalize)
+	(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
 gchar *
 gnome_entry_get_text (GnomeEntry *gentry)
 {
-	g_return_val_if_fail (gentry != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
+    g_return_val_if_fail (gentry != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
 
 #ifdef FIXME
-	return gnome_selector_client_get_entry_text (GNOME_SELECTOR_CLIENT (gentry));
+    return gnome_selector_client_get_entry_text (GNOME_SELECTOR_CLIENT (gentry));
 #else
-	return NULL;
+    return NULL;
 #endif
 }
 
 void
 gnome_entry_set_text (GnomeEntry *gentry, const gchar *text)
 {
-	g_return_if_fail (gentry != NULL);
-	g_return_if_fail (GNOME_IS_ENTRY (gentry));
+    g_return_if_fail (gentry != NULL);
+    g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
 #ifdef FIXME
-	gnome_selector_client_set_entry_text (GNOME_SELECTOR_CLIENT (gentry),
-					      text);
+    gnome_selector_client_set_entry_text (GNOME_SELECTOR_CLIENT (gentry),
+					  text);
 #endif
 }
 
