@@ -1,3 +1,7 @@
+1999-12-04  Elliot Lee  <sopwith@redhat.com>
+
+	* gtkpixmapmenuitem.c: Fix size_request/size_allocate - was HORRIBLY broken before.
+
 1999-12-01  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-canvas-pixbuf.h, gnome-canvas-pixbuf.c: Copy latest
