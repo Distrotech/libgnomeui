@@ -1,3 +1,8 @@
+2003-01-14  Pablo Saratxaga  <pablo@mandrakesoft.com>
+
+	* vi.po,wa.po: Updated Vietnamese and Walloon files
+	* hi.po: fixed syntax errors
+
 2003-01-12  Marcel Telka  <marcel@telka.sk>
 
 	* sk.po: Updated Slovak translation.

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2003-01-08 10:16+0100\n"
-"PO-Revision-Date: 2002-08-31 18:20+0700\n"
+"POT-Creation-Date: 2003-01-10 12:00+0100\n"
+"PO-Revision-Date: 2003-01-10 22:03+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@linuxmail.org>\n"
 "Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -19,19 +19,16 @@ msgid "Credits"
 msgstr "Đóng góp"
 
 #: libgnomeui/gnome-about.c:223
-#, fuzzy
 msgid "Written by"
-msgstr "Tác _giả"
+msgstr "Được viết bởi"
 
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "Documented by"
-msgstr "Người cung cấp _tư liệu"
+msgstr "Tài liệu được tạo bởi"
 
 #: libgnomeui/gnome-about.c:253
-#, fuzzy
 msgid "Translated by"
-msgstr "Người _dịch"
+msgstr "Được dịch bởi"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -399,13 +396,12 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Nút này đưa bạn tới URI đang hiển thị."
 
 #: libgnomeui/gnome-href.c:393
-#, fuzzy
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Sai sót xuất hiện khi thử khởi động bộ phận điều khiển URL.\n"
-"Hãy xem lại các thiết đặt trong Trụng tâm Điều khiển xem có sai sót gì không"
+"Lỗi khi thử khởi động trình duyệt web mặc định.\n"
+"Vui lòng xem lại các thiết đặt trong phần 'Các ứng dụng ưa thích' của công cụ cấu hình."
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
@@ -527,6 +523,7 @@ msgstr "Chỉ dẫn cho mục 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tệp"
 
@@ -584,6 +581,7 @@ msgid "_Game"
 msgstr "Trò chơi"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Chỉ dẫn"
 
@@ -774,11 +772,11 @@ msgstr "Điều chỉnh cấu hình ứng dụng"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "Về"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Thông tin về ứng dụng này"
 
@@ -805,7 +803,7 @@ msgstr "Mở một Cửa sổ mới"
 msgid "_Close This Window"
 msgstr "Đóng cửa sổ"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Đóng cửa sổ hiện thời"
 
@@ -1333,8 +1331,9 @@ msgstr "%a, %d.%m.%Y, %H.%M"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Kết thúc thử"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Kết thúc thử"
 
 #~ msgid "Find _Again"
 #~ msgstr "Tìm thêm"

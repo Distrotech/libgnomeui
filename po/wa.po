@@ -1,17 +1,17 @@
 # Translation into the walloon language.
 #
-# Si vos voloz donner on côp di spale pol ratoûrnaedje di Gnome (ou des
-# ôtes libes programes) sicrijhoz-mu a l' adresse emile
+# Si vos voloz donner on côp di spale pol ratournaedje di Gnome (ou des
+# ôtes libes programes) sicrijhoz mu a l' adresse emile
 # <srtxg@chanae.alphanet.ch>; nos avans co bråmint di l' ovraedje a fé.
 #
 # Copyright (C) 2001 Free Software Foundation, Inc.
-# Pablo Saratxaga <srtxg@chanae.alphanet.ch> 2001-2002
+# Pablo Saratxaga <srtxg@chanae.alphanet.ch> 2001-2003
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
 "POT-Creation-Date: 2003-01-08 10:16+0100\n"
-"PO-Revision-Date: 2002-05-25 23:28MET\n"
+"PO-Revision-Date: 2003-01-14 15:27+0100\n"
 "Last-Translator: Pablo Saratxaga <pablo@mandrakesoft.com>\n"
 "Language-Team: Walon <linux-wa@chanae.alphanet.ch>\n"
 "MIME-Version: 1.0\n"
@@ -23,19 +23,16 @@ msgid "Credits"
 msgstr "Gråces"
 
 #: libgnomeui/gnome-about.c:223
-#, fuzzy
 msgid "Written by"
-msgstr "_Sicrît pa"
+msgstr "Sicrît pa"
 
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "Documented by"
-msgstr "_Documinté pa"
+msgstr "Documinté pa"
 
 #: libgnomeui/gnome-about.c:253
-#, fuzzy
 msgid "Translated by"
-msgstr "_Ratourné pa"
+msgstr "Ratourné pa"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -108,12 +105,11 @@ msgstr "Ene intrêye po on fjheu d' documintåcion"
 
 #: libgnomeui/gnome-about.c:405
 msgid "Translator credits"
-msgstr ""
+msgstr "Gråces po les ratourneus"
 
 #: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "Gråces po les ratourneus. Cisse tchinne chal doet esse metowe come ratournåve."
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -182,7 +178,7 @@ msgstr "Rinoncî a moussî foû"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
-msgstr ""
+msgstr "Dinêye di coleur nén valide di rçuvowe\n"
 
 #: libgnomeui/gnome-color-picker.c:464
 msgid "Color Selector"
@@ -190,7 +186,7 @@ msgstr "Tchoezixheu di coleurs"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "Drovi on purnea po tchoezi l' coleur"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -202,7 +198,7 @@ msgstr "Eure"
 
 #: libgnomeui/gnome-dateedit.c:480
 msgid "The time currently selected"
-msgstr ""
+msgstr "L' eure tchoezeye pol moumint"
 
 #: libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
@@ -370,11 +366,11 @@ msgstr "Mostrer li boton «Aidance»"
 
 #: libgnomeui/gnome-href.c:122
 msgid "URL"
-msgstr "Hårdeye"
+msgstr "Hårdêye"
 
 #: libgnomeui/gnome-href.c:123
 msgid "The URL that GnomeHRef activates"
-msgstr ""
+msgstr "Li hårdêye ki GnomeHRef mete en alaedje"
 
 #: libgnomeui/gnome-href.c:130
 msgid "Text"
@@ -386,7 +382,7 @@ msgstr "Li tecse el boton"
 
 #: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
-msgstr ""
+msgstr "Fini avou l' fwin dins l' monde"
 
 #: libgnomeui/gnome-href.c:138
 msgid "Link color"
@@ -398,7 +394,7 @@ msgstr "Coleur eployeye po dessiner l' loyén"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
-msgstr ""
+msgstr "Ci boton chal vos frè potchî al hårdêye k' i mostere."
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
@@ -422,7 +418,7 @@ msgstr "Livreye di l' eterface grafike di GNOME"
 #: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
-"I gn a yeu pus d' ene aroke di segmentåcion; dji n' pout mostrer li purnea "
+"I gn a yeu pus d' ene aroke di segmentåcion; dji n' pou mostrer li purnea "
 "d' aroke\n"
 
 #. Eeeek! Can't show dialog
@@ -432,7 +428,7 @@ msgid ""
 "Cannot display crash dialog\n"
 msgstr ""
 "I gn a yeu pus d' ene aroke di segmentåcion!\n"
-"Dji n' pout mostrer li purnea d' aroke\n"
+"Dji n' pou mostrer li purnea d' aroke\n"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -741,7 +737,7 @@ msgstr "Cweri co on côp li minme tchinne"
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr ""
+msgstr "R_eplaecî..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
@@ -903,7 +899,7 @@ msgstr "Rén kel tecse"
 #: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
-msgstr ""
+msgstr "Eployî les prémetowès valixhances do scribanne (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -985,13 +981,13 @@ msgstr "Tite pol purnea di foytaedje di fitchîs."
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
-msgstr ""
+msgstr "Intrêye po ridants"
 
 #: libgnomeui/gnome-file-entry.c:238
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
+msgstr "Definixh si l' tchamp d' intrêye po les fitchîs pout esse eployî po taper des nos d' ridants ou rén k' des nos d' fitchî."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -999,7 +995,7 @@ msgstr "Modå"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
-msgstr ""
+msgstr "Definixh si l' purnea di foytaedje di fitchîs doet esse modå."
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
@@ -1007,7 +1003,7 @@ msgstr "No do fitchî"
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Filename that should be displayed in the file entry."
-msgstr ""
+msgstr "No do fitchî ki doet esse håyné dins l' intrêye do fitchî"
 
 #: libgnomeui/gnome-file-entry.c:263
 msgid "Default Path"
@@ -1019,7 +1015,7 @@ msgstr "Li prémetou tchmin pol purnea di foytaedje des fitchîs."
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
-msgstr ""
+msgstr "GnomeEntry"
 
 #: libgnomeui/gnome-file-entry.c:272
 msgid ""
@@ -1030,7 +1026,7 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
-msgstr ""
+msgstr "GtkEntry"
 
 #: libgnomeui/gnome-file-entry.c:283
 msgid ""
@@ -1057,7 +1053,7 @@ msgstr "_Foyter..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "Drovi on purnea po tchoezi les fitchîs"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1065,8 +1061,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-"Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
+msgstr "Mi trûte a les balzins, co pés ki l' grijhe cawe di m' pôve fayé vexhåd!"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1138,7 +1133,7 @@ msgstr ""
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr ""
+msgstr "_Detays"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
@@ -1222,7 +1217,7 @@ msgstr "Tchoezixheu d' imådjetes"
 
 #: libgnomeui/gnome-icon-entry.c:983
 msgid "This button will open a window to let you select an icon."
-msgstr "Ci boton chal drovrè on prunea por vos tchoezi ene imådjete."
+msgstr "Ci boton chal drovrè on purnea por vos tchoezi ene imådjete."
 
 #: libgnomeui/gnome-icon-entry.c:1006
 msgid "Browse"
@@ -1236,17 +1231,17 @@ msgstr "Tchimin del imådjete"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
+msgstr "Chal vos dvoz mete li no do ridant ki les imådjetes sont-st å dvins."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: «%s» n' egzisteye nén oudobén c' est nén on ridant"
+msgstr "GnomeIconSelection: «%s» n' egzistêye nén oudonbén c' est nén on ridant"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr ""
+msgstr "GnomeIconSelection: dji n' a savou drovi l' ridant «%s»"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
@@ -1274,24 +1269,23 @@ msgstr "Messaedje"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
-msgstr ""
+msgstr "Permete li vey divant"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr ""
+msgstr "Definixh s' i fåt permete di vey divant dins l' boesse d' intrêye po ls imådjes."
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
 msgstr "Nole Imådje"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
-#, fuzzy
 msgid "Image Preview"
 msgstr "Vey divant"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
-msgstr ""
+msgstr "Vey divant l' imådje tchoezeye"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"

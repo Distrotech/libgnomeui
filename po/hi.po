@@ -5,7 +5,7 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: libgnomeui HEAD\n"
 "POT-Creation-Date: 2003-01-08 10:16+0100\n"
 "PO-Revision-Date: 2002-06-08 14:30+0530\n"
 "Last-Translator: Anurag Seetha <anuragseetha@yahoo.com>\n"
@@ -14,41 +14,34 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# libgnomeui/gnome-about.c:187
 #: libgnomeui/gnome-about.c:194
 msgid "Credits"
 msgstr "श्रेय"
 
-# libgnomeui/gnome-about.c:210
 #: libgnomeui/gnome-about.c:223
 #, fuzzy
 msgid "Written by"
 msgstr "लेखक"
 
-# libgnomeui/gnome-about.c:224
 #: libgnomeui/gnome-about.c:238
 #, fuzzy
 msgid "Documented by"
 msgstr "दस्तावेज लेखक"
 
-# libgnomeui/gnome-about.c:238
 #: libgnomeui/gnome-about.c:253
 #, fuzzy
 msgid "Translated by"
 msgstr "अनुवादक"
 
-# libgnomeui/gnome-about.c:295
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
 msgid "_Credits"
 msgstr "श्रेय"
 
-# libgnomeui/gnome-about.c:335
 #: libgnomeui/gnome-about.c:352
 msgid "Program name"
 msgstr "प्रोग्राम का नाम"
 
-# libgnomeui/gnome-about.c:336
 #: libgnomeui/gnome-about.c:353
 msgid "The name of the program"
 msgstr "प्रोग्राम का नाम"
@@ -493,7 +486,6 @@ msgstr "लिंक के लिए प्रयुक्त रंग"
 msgid "This button will take you to the URI that it displays."
 msgstr ""
 
-# libgnomeui/gnome-href.c:396
 #: libgnomeui/gnome-href.c:393
 #, fuzzy
 msgid ""
@@ -503,28 +495,23 @@ msgstr ""
 "URL नियंत्रणकर्ता को प्रस्तुत करने में त्रुटि किरपया कंट्रोल सेन्टर को समायोजन की जांच करें कि "
 "वह सही हो"
 
-# libgnomeui/gnome-ui-init.c:104
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
 msgstr "X डिस्ले का प्रयोग करें"
 
-# libgnomeui/gnome-ui-init.c:104
 #: libgnomeui/gnome-ui-init.c:113
 msgid "DISPLAY"
 msgstr "प्रदर्शित करें"
 
-# libgnomeui/gnome-ui-init.c:112
 #: libgnomeui/gnome-ui-init.c:121
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI लाइब्रेरी"
 
-# libgnomeui/gnome-ui-init.c:564
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "कई हिस्सों में एक साथ खराबी त्रुटि संदेश नहीं दिए जा सकते\n"
 
-# libgnomeui/gnome-ui-init.c:578
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:631
 msgid ""
@@ -532,9 +519,8 @@ msgid ""
 "Cannot display crash dialog\n"
 msgstr "प्रोग्राम के एक भाग में खराबी संदेश बाक्स प्रदर्शित नहीं किया जा सकता\n"
 
-# libgnomeui/gnome_segv.c:100
 #: libgnomeui/gnome_segv.c:100
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
@@ -546,56 +532,46 @@ msgstr ""
 "को बंद करेंगे तब सभी अनुप्रयोग बंद हो जायेंगे तथा आपका सत्र समाप्त लो जाएगा। इस डायलाग "
 "बाक्स को बंद करने से पूर्व किरपया अपनी सभी फाइलों को संग्रहित कर लें।"
 
-# libgnomeui/gnome_segv.c:110
 #: libgnomeui/gnome_segv.c:110
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Application \"%s\" (process %d) has crashed\n"
 "due to a fatal error.\n"
 "(%s)"
 msgstr "महत्वपूर्ण त्रुटि के कारण अनुप्रयोग \"%s\" (प्रोसेस %d) खराब हो गया है"
 
-# libgnomeui/gnome_segv.c:122
 #: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr ""
 
-# libgnomeui/gnome_segv.c:138
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
 msgstr "त्रुटि रिपोर्ट जमा करें"
 
-# libgnomeui/gnome_segv.c:149
 #: libgnomeui/gnome_segv.c:151
 msgid "Debug"
 msgstr "त्रुटि सुधार"
 
-# libgnomeui/gnome_segv.c:157
 #: libgnomeui/gnome_segv.c:159
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-# libgnomeui/gnome_segv.c:163
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "अधिक जानकारी के लिए गनोम अनुप्रयोग क्रैश पेज पर जाएं"
 
-# libgnomeui/gnome-stock-icons.c:137
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
 msgstr "टेबल बार्डर"
 
-# libgnomeui/gnome-stock-icons.c:138
 #: libgnomeui/gnome-stock-icons.c:138
 msgid "Table Fill"
 msgstr "टेबल में भरें"
 
-# libgnomeui/gnome-stock-icons.c:139
 #: libgnomeui/gnome-stock-icons.c:139
 msgid "Bulleted List"
 msgstr "बिन्दुवार सूची"
 
-# libgnomeui/gnome-stock-icons.c:140
 #: libgnomeui/gnome-stock-icons.c:140
 msgid "Numbered List"
 msgstr "संख्यादार सूची"
