@@ -5,13 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.7\n"
-"POT-Creation-Date: 2001-08-14 16:53+0200\n"
-"PO-Revision-Date: 2001-04-21 14:57-04:00\n"
-"Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
-"Language-Team: Norwegian <no@li.org>\n"
+"POT-Creation-Date: 2001-08-22 04:45+0200\n"
+"PO-Revision-Date: 2001-08-22 04:54GMT\n"
+"Last-Translator: Roy-Magne Mo <rmo@sunnmore.net>\n"
+"Language-Team: nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
-"Content-Transfer-Encoding: 8-bit\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.5\n"
 
 #: demos/winhints_demo.c:49
 msgid "wmhints-test"
@@ -239,9 +240,8 @@ msgid "Disable connection to session manager"
 msgstr "Fjern forbindelse til sesjonsbehandler"
 
 #: libgnomeui/gnome-client.c:852
-#, fuzzy
 msgid "Session management"
-msgstr "Alternativer for sesjonskontroll"
+msgstr "Sesjonskontroll"
 
 #: libgnomeui/gnome-client.c:2343
 msgid "Cancel Logout"
@@ -249,7 +249,7 @@ msgstr "Avbryt utlogging"
 
 #: libgnomeui/gnome-color-picker.c:421
 msgid "Received invalid color data\n"
-msgstr ""
+msgstr "Mottok ugyldig farge data\n"
 
 #: libgnomeui/gnome-color-picker.c:485
 msgid "Pick a color"
@@ -257,43 +257,43 @@ msgstr "Velg en farge"
 
 #: libgnomeui/gnome-dateedit.c:407
 msgid "Time"
-msgstr ""
+msgstr "Tid"
 
 #: libgnomeui/gnome-dateedit.c:408
 msgid "The time currentlyselected"
-msgstr ""
+msgstr "Den aktive tida"
 
 #: libgnomeui/gnome-dateedit.c:419
 msgid "DateEdit Flags"
-msgstr ""
+msgstr "DateEdit flagg"
 
 #: libgnomeui/gnome-dateedit.c:420
 msgid "Flags for how DateEdit looks"
-msgstr ""
+msgstr "Flagg for korleis DateEdit ser ut"
 
 #: libgnomeui/gnome-dateedit.c:429
 msgid "Lower Hour"
-msgstr ""
+msgstr "Lavaste time"
 
 #: libgnomeui/gnome-dateedit.c:430
 msgid "Lower hour in the time popup selector"
-msgstr ""
+msgstr "Lavaste time i velgaren"
 
 #: libgnomeui/gnome-dateedit.c:440
 msgid "Upper Hour"
-msgstr ""
+msgstr "Øvre time"
 
 #: libgnomeui/gnome-dateedit.c:441
 msgid "Upper hour in the time popup selector"
-msgstr ""
+msgstr "Øvre time i velgaren"
 
 #: libgnomeui/gnome-dateedit.c:451
 msgid "Initial Time"
-msgstr ""
+msgstr "Opprinneleg time"
 
 #: libgnomeui/gnome-dateedit.c:452
 msgid "The initial time"
-msgstr ""
+msgstr "Opprinneleg tid"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:696
@@ -302,66 +302,64 @@ msgstr "Kalender"
 
 #: libgnomeui/gnome-dateedit.c:922
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
+msgstr "gnome_date_edit_get_date er utdatert, bruk gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-edge.c:352
 #: libgnomeui/gnome-druid-page-standard.c:301
 msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-msgstr ""
+msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
 
 #: libgnomeui/gnome-druid-page-edge.c:361
 msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
-msgstr ""
+msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 
 #: libgnomeui/gnome-druid.c:128
-#, fuzzy
 msgid "Show Finish"
-msgstr "Fullfør"
+msgstr "Vis Fullfør"
 
 #: libgnomeui/gnome-druid.c:129
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr ""
+msgstr "Vis 'Fullfør' knappen i staden for 'Neste' knappen"
 
 #: libgnomeui/gnome-druid.c:136
-#, fuzzy
 msgid "Show Help"
-msgstr "Hjelp"
+msgstr "Vis hjelp"
 
 #: libgnomeui/gnome-druid.c:137
 msgid "Show the 'Help' button"
-msgstr ""
+msgstr "Vis 'Hjelp' Knappen"
 
 #: libgnomeui/gnome-href.c:110
-#, fuzzy
 msgid "URL"
-msgstr "RCL"
+msgstr "URL"
 
 #: libgnomeui/gnome-href.c:111
 msgid "The URL that GnomeHRef activates"
-msgstr ""
+msgstr "URLen som GnomeHRef aktiverar"
 
 #: libgnomeui/gnome-href.c:118
-#, fuzzy
 msgid "Text"
-msgstr "Neste"
+msgstr "Tekst"
 
 #: libgnomeui/gnome-href.c:119
 msgid "The text on the button"
-msgstr ""
+msgstr "Teksta på knappen"
 
 #: libgnomeui/gnome-href.c:120
 msgid "End World Hunger"
-msgstr ""
+msgstr "Gjer slutt på verdssvolten"
 
 #: libgnomeui/gnome-href.c:397
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
 msgstr ""
+"Ein feil oppstod ved forsøk på å starta URL handteraren.\n"
+"Sjekk om instillingane i Kontrollpanelet stemmer."
 
 #: libgnomeui/gnome-ui-init.c:90
 msgid "Bonobo UI"
-msgstr ""
+msgstr "Bonobo bg/UI"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:465
@@ -438,550 +436,3 @@ msgstr "Rykk inn"
 msgid "Un-Indent"
 msgstr "Fjern innrykk"
 
-#~ msgid "New..."
-#~ msgstr "Ny..."
-
-#~ msgid "Open..."
-#~ msgstr "Åpne..."
-
-#~ msgid "Save"
-#~ msgstr "Lagre"
-
-#~ msgid "Save as..."
-#~ msgstr "Lagre som..."
-
-#~ msgid "Close"
-#~ msgstr "Lukk"
-
-#~ msgid "Print..."
-#~ msgstr "Skriv ut..."
-
-#~ msgid "Setup Page..."
-#~ msgstr "Sideoppsett..."
-
-#~ msgid "Quit"
-#~ msgstr "Avslutt"
-
-#~ msgid "File"
-#~ msgstr "Fil"
-
-#~ msgid "Undo"
-#~ msgstr "Angre"
-
-#~ msgid "Redo"
-#~ msgstr "Gjenopprett"
-
-#~ msgid "Delete"
-#~ msgstr "Slett"
-
-#~ msgid "Cut"
-#~ msgstr "Klipp ut"
-
-#~ msgid "Copy"
-#~ msgstr "Kopier"
-
-#~ msgid "Paste"
-#~ msgstr "Lim inn"
-
-#~ msgid "Properties..."
-#~ msgstr "Egenskaper..."
-
-#~ msgid "Preferences..."
-#~ msgstr "Brukervalg..."
-
-#~ msgid "Scores..."
-#~ msgstr "Poengsummer..."
-
-#~ msgid "Edit"
-#~ msgstr "Rediger"
-
-#~ msgid "Author:"
-#~ msgstr "Forfatter:"
-
-#~ msgid "Authors:"
-#~ msgstr "Forfattere:"
-
-#~ msgid "Authors: "
-#~ msgstr "Forfattere: "
-
-#, fuzzy
-#~ msgid "Animation direction"
-#~ msgstr "Hovedordbok:"
-
-#, fuzzy
-#~ msgid "Current frame"
-#~ msgstr "Avslutt aktivt spill"
-
-#, fuzzy
-#~ msgid "Speed"
-#~ msgstr "Stav"
-
-#~ msgid "_File"
-#~ msgstr "_Fil"
-
-#~ msgid "_File/"
-#~ msgstr "_Fil/"
-
-#~ msgid "_Edit"
-#~ msgstr "R_ediger"
-
-#~ msgid "_Edit/"
-#~ msgstr "R_ediger/"
-
-#~ msgid "_View"
-#~ msgstr "_Vis"
-
-#~ msgid "_View/"
-#~ msgstr "_Vis/"
-
-#~ msgid "_Settings"
-#~ msgstr "_Innstillinger"
-
-#~ msgid "_Settings/"
-#~ msgstr "_Innstillinger/"
-
-#~ msgid "_New"
-#~ msgstr "_Ny"
-
-#~ msgid "_New/"
-#~ msgstr "_Ny/"
-
-#~ msgid "Fi_les"
-#~ msgstr "Fi_ler"
-
-#~ msgid "Fi_les/"
-#~ msgstr "Fi_ler/"
-
-#~ msgid "_Windows"
-#~ msgstr "Vin_duer"
-
-#~ msgid "_Game"
-#~ msgstr "_Spill"
-
-#~ msgid "_Help"
-#~ msgstr "_Hjelp"
-
-#~ msgid "_Windows/"
-#~ msgstr "Vin_duer/"
-
-#~ msgid "_Open..."
-#~ msgstr "_Åpne..."
-
-#~ msgid "Open a file"
-#~ msgstr "Åpne en fil"
-
-#~ msgid "_Save"
-#~ msgstr "_Lagre"
-
-#~ msgid "Save the current file"
-#~ msgstr "Lagre aktiv fil"
-
-#~ msgid "Save _As..."
-#~ msgstr "L_agre som..."
-
-#~ msgid "Save the current file with a different name"
-#~ msgstr "Lagre aktiv fil med et nytt navn"
-
-#~ msgid "_Revert"
-#~ msgstr "_Gå tilbake"
-
-#~ msgid "Revert to a saved version of the file"
-#~ msgstr "Gå tilbake til lagret versjon av filen"
-
-#~ msgid "_Print"
-#~ msgstr "S_kriv ut"
-
-#~ msgid "Print the current file"
-#~ msgstr "Skriv ut aktiv fil"
-
-#~ msgid "Print S_etup..."
-#~ msgstr "Skriveropps_ett"
-
-#~ msgid "Setup the page settings for your current printer"
-#~ msgstr "Oppsett av sideinnstillingene for din nåværende skriver"
-
-#~ msgid "_Close"
-#~ msgstr "L_ukk"
-
-#~ msgid "Close the current file"
-#~ msgstr "Lukk aktiv fil"
-
-#~ msgid "E_xit"
-#~ msgstr "_Avslutt"
-
-#~ msgid "Exit the program"
-#~ msgstr "Avslutt programmet"
-
-#~ msgid "C_ut"
-#~ msgstr "Klipp _ut"
-
-#~ msgid "Cut the selection"
-#~ msgstr "Klipp ut utvalget"
-
-#~ msgid "_Copy"
-#~ msgstr "_Kopier"
-
-#~ msgid "Copy the selection"
-#~ msgstr "Kopier utvalget"
-
-#~ msgid "_Paste"
-#~ msgstr "_Lim inn"
-
-#~ msgid "Paste the clipboard"
-#~ msgstr "Lim inn fra utklippstavlen"
-
-#~ msgid "C_lear"
-#~ msgstr "_Slett"
-
-#~ msgid "Clear the selection"
-#~ msgstr "Slett utvalget"
-
-#~ msgid "_Undo"
-#~ msgstr "A_ngre"
-
-#~ msgid "Undo the last action"
-#~ msgstr "Angre siste handling"
-
-#~ msgid "_Redo"
-#~ msgstr "_Gjenopprett"
-
-#~ msgid "Redo the undone action"
-#~ msgstr "Gjenopprett den angrede handlingen"
-
-#~ msgid "_Find..."
-#~ msgstr "_Finn..."
-
-#~ msgid "Search for a string"
-#~ msgstr "Søk etter en tekststreng"
-
-#~ msgid "Find _Again"
-#~ msgstr "Finn _igjen"
-
-#~ msgid "Search again for the same string"
-#~ msgstr "Søk på nytt etter den samme tekststrengen"
-
-#~ msgid "_Replace..."
-#~ msgstr "E_rstatt"
-
-#~ msgid "Replace a string"
-#~ msgstr "Erstatt en tekststreng"
-
-#~ msgid "_Properties..."
-#~ msgstr "E_genskaper..."
-
-#~ msgid "Modify the file's properties"
-#~ msgstr "Modifiser filens egenskaper"
-
-#~ msgid "_Preferences..."
-#~ msgstr "_Brukervalg..."
-
-#~ msgid "Configure the application"
-#~ msgstr "Konfigurer applikasjonen"
-
-#, fuzzy
-#~ msgid "_About"
-#~ msgstr "Om"
-
-#~ msgid "About this application"
-#~ msgstr "Om denne applikasjonen"
-
-#~ msgid "_Select All"
-#~ msgstr "_Velg alt"
-
-#~ msgid "Select everything"
-#~ msgstr "Velg alt"
-
-#~ msgid "Create New _Window"
-#~ msgstr "Opprett nytt _vindu"
-
-#~ msgid "Create a new window"
-#~ msgstr "Opprett et nytt vindu"
-
-#~ msgid "_Close This Window"
-#~ msgstr "L_ukk dette vinduet"
-
-#~ msgid "Close the current window"
-#~ msgstr "Lukk aktivt vindu"
-
-#~ msgid "_New game"
-#~ msgstr "_Nytt spill"
-
-#~ msgid "Start a new game"
-#~ msgstr "Start et nytt spill"
-
-#~ msgid "_Pause game"
-#~ msgstr "_Pause spillet"
-
-#~ msgid "Pause the game"
-#~ msgstr "Pause spillet"
-
-#~ msgid "_Restart game"
-#~ msgstr "Sta_rt spillet på nytt"
-
-#~ msgid "Restart the game"
-#~ msgstr "Start spillet på nytt"
-
-#~ msgid "_Undo move"
-#~ msgstr "An_gre trekk"
-
-#~ msgid "Undo the last move"
-#~ msgstr "Angre siste trekk"
-
-#~ msgid "_Redo move"
-#~ msgstr "Gjenopp_rett trekk"
-
-#~ msgid "Redo the undone move"
-#~ msgstr "Gjenopprett siste angrede trekk"
-
-#~ msgid "_Hint"
-#~ msgstr "_Hint"
-
-#~ msgid "Get a hint for your next move"
-#~ msgstr "Gi et hint for ditt neste trekk"
-
-#~ msgid "_Scores..."
-#~ msgstr "Poeng_summer..."
-
-#~ msgid "View the scores"
-#~ msgstr "Se på poengsummene"
-
-#~ msgid "_End game"
-#~ msgstr "_Avslutt spillet"
-
-#~ msgid "End the current game"
-#~ msgstr "Avslutt aktivt spill"
-
-#~ msgid " (press return)"
-#~ msgstr " (trykk linjeskift)"
-
-#~ msgid "ERROR: "
-#~ msgstr "FEIL: "
-
-#~ msgid "Warning: "
-#~ msgstr "Advarsel:"
-
-#~ msgid "y"
-#~ msgstr "j"
-
-#~ msgid "yes"
-#~ msgstr "ja"
-
-#~ msgid "n"
-#~ msgstr "n"
-
-#~ msgid "no"
-#~ msgstr "nei"
-
-#~ msgid " (yes or no)"
-#~ msgstr " (ja eller nei)"
-
-#~ msgid "  - OK? (yes or no)"
-#~ msgstr "  - OK? (ja eller nei)"
-
-#~ msgid "Progress"
-#~ msgstr "Fremgang"
-
-#~ msgid "Name:"
-#~ msgstr "Navn:"
-
-#~ msgid "Comment:"
-#~ msgstr "Kommentar:"
-
-#~ msgid "Command:"
-#~ msgstr "Kommando:"
-
-#~ msgid "Type:"
-#~ msgstr "Type:"
-
-#~ msgid "Icon:"
-#~ msgstr "Ikon:"
-
-#~ msgid "Choose an icon"
-#~ msgstr "Velg et ikon"
-
-#~ msgid "Run in Terminal"
-#~ msgstr "Kjør i terminalvindu"
-
-#~ msgid "Try this before using:"
-#~ msgstr "Prøv dette før bruk:"
-
-#~ msgid "Documentation:"
-#~ msgstr "Dokumentasjon:"
-
-#~ msgid "Name/Comment translations:"
-#~ msgstr "Navngi/Kommenter oversettelsene:"
-
-#~ msgid "Language"
-#~ msgstr "Språk"
-
-#~ msgid "Name"
-#~ msgstr "Navn"
-
-#~ msgid "Comment"
-#~ msgstr "Kommentar"
-
-#~ msgid "Add/Set"
-#~ msgstr "Legg til/sett"
-
-#~ msgid "Remove"
-#~ msgstr "Fjern"
-
-#~ msgid "Basic"
-#~ msgstr "Enkel"
-
-#~ msgid "Advanced"
-#~ msgstr "Avansert"
-
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "Dokumentasjon:"
-
-#~ msgid "Back"
-#~ msgstr "Tilbake"
-
-#, fuzzy
-#~ msgid "File Name:"
-#~ msgstr "Navn:"
-
-#, fuzzy
-#~ msgid "Location:"
-#~ msgstr "Dokumentasjon:"
-
-#~ msgid "Font"
-#~ msgstr "Skrifttype"
-
-#, fuzzy
-#~ msgid "Show help inside the application window"
-#~ msgstr "Konfigurer applikasjonen"
-
-#, fuzzy
-#~ msgid "_Browser"
-#~ msgstr "Bla gjennom..."
-
-#~ msgid "No Icon"
-#~ msgstr "Uten ikon"
-
-#~ msgid "Information"
-#~ msgstr "Informasjon"
-
-#~ msgid "Warning"
-#~ msgstr "Advarsel"
-
-#~ msgid "Error"
-#~ msgstr "Feil"
-
-#~ msgid "Question"
-#~ msgstr "Spørsmål"
-
-#~ msgid "Message"
-#~ msgstr "Beskjed"
-
-#, fuzzy
-#~ msgid "Top:"
-#~ msgstr "Type:"
-
-#~ msgid "_Help with this"
-#~ msgstr "_Hjelp om dette"
-
-#~ msgid "Cu_t"
-#~ msgstr "K_lipp"
-
-#, fuzzy
-#~ msgid "Top left"
-#~ msgstr "Topp ti"
-
-#, fuzzy
-#~ msgid "Horizontal"
-#~ msgstr "Maksimert horisontalt"
-
-#, fuzzy
-#~ msgid "Vertical"
-#~ msgstr "Maksimert vertikalt"
-
-#, fuzzy
-#~ msgid "Icon orientation"
-#~ msgstr "Informasjon"
-
-#, fuzzy
-#~ msgid "Is this list application specific"
-#~ msgstr "Om denne applikasjonen"
-
-#~ msgid "Top Ten"
-#~ msgstr "Topp ti"
-
-#~ msgid "User"
-#~ msgstr "Bruker"
-
-#~ msgid "Score"
-#~ msgstr "Poengsum"
-
-#~ msgid "Date"
-#~ msgstr "Dato"
-
-#~ msgid "%a %b %d %T %Y"
-#~ msgstr "%a %b %d %T %Y"
-
-#~ msgid "Browse..."
-#~ msgstr "Bla gjennom..."
-
-#, fuzzy
-#~ msgid "Default..."
-#~ msgstr "Kalkulator..."
-
-#, fuzzy
-#~ msgid "Clear..."
-#~ msgstr "Slett"
-
-#~ msgid "Add"
-#~ msgstr "Legg til"
-
-#~ msgid "Clear"
-#~ msgstr "Slett"
-
-#~ msgid "Select Color"
-#~ msgstr "Velg farge"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "Apply"
-#~ msgstr "Bruk"
-
-#~ msgid "Cancel"
-#~ msgstr "Avbryt"
-
-#~ msgid "Yes"
-#~ msgstr "Ja"
-
-#~ msgid "No"
-#~ msgstr "Nei"
-
-#~ msgid "Next"
-#~ msgstr "Neste"
-
-#~ msgid "Prev"
-#~ msgstr "Forrige"
-
-#~ msgid "Up"
-#~ msgstr "Opp"
-
-#~ msgid "Down"
-#~ msgstr "Ned"
-
-#~ msgid "Menu Accelerator Keys"
-#~ msgstr "Taster for menyakselleratorer"
-
-#~ msgid "Global"
-#~ msgstr "Global"
-
-#~ msgid "Menu Item"
-#~ msgstr "Menyvalg"
-
-#~ msgid "Accelerator"
-#~ msgstr "Aksellerator"
-
-#~ msgid "Username:"
-#~ msgstr "Brukernamn:"
-
-#~ msgid "Password:"
-#~ msgstr "Passord:"
