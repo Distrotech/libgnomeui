@@ -7,9 +7,7 @@
 #include "libgnome/gnome-defs.h"
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-about.h"
-#ifndef GNOME_EXCLUDE_EXPERIMENTAL
-/* #include "libgnomeui/gnome-animator.h" */
-#endif
+#include "libgnomeui/gnome-animator.h"
 #include "libgnomeui/gnome-app.h"
 #include "libgnomeui/gnome-appbar.h"
 #include "libgnomeui/gnome-app-helper.h"

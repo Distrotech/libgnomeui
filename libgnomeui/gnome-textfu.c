@@ -123,42 +123,51 @@ gnome_textfu_resolve_filename(GnomeTextFu *textfu, char *in_filename, const char
     }
 }
 
-static GnomeTextFuItem *
-handler_document(GnomeTextFu *textfu, const char *tag, guint16 tag_id, char **attrs)
+#define IMPL_CTAG(x) static GnomeTextFuItem *handler_##x(GnomeTextFu *textfu, const char *tag, guint16 tag_id, char **attrs) \
+{ \
+GnomeTextFuItemContainer *retval; \
+retval = gnome_textfu_item_container_new(); \
+retval->subitems_newpara = TEXTFU_FALSE
+
+#define END_CTAG return (GnomeTextFuItem *)retval; }
+
+#define DUMMY_TAG(x) IMPL_CTAG(x); END_CTAG
+
+IMPL_CTAG(popup);
+retval->subitems_newpara = TEXTFU_TRUE;
+END_CTAG
+
+
+IMPL_CTAG(sect1);
+retval->subitems_newpara = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(title);
+retval->subitems_bold = TEXTFU_TRUE;
+retval->subitems_font_size = 16;
+END_CTAG
+
+
+IMPL_CTAG(sect2);
+retval->subitems_left_indent = 10;
+retval->subitems_right_indent = 10;
+END_CTAG
+
+
+IMPL_CTAG(para);
+END_CTAG
+
+IMPL_CTAG(ulink);
 {
-  GnomeTextFuItemContainer * retval;
-
-  retval = gnome_textfu_item_container_new();
-  retval->subitems_newpara = TEXTFU_TRUE;
-
-  return (GnomeTextFuItem *)retval;
-}
-
-static GnomeTextFuItem *
-handler_p(GnomeTextFu *textfu, const char *tag, guint16 tag_id, char **attrs)
-{
-  GnomeTextFuItemContainer * retval;
   int i;
-
-  retval = gnome_textfu_item_container_new();
-  retval->subitems_newpara = TEXTFU_FALSE;
-
   for(i = 0; attrs[i]; i++)
     {
-      if(!strncmp(attrs[i], "indent=", strlen("indent=")))
-	retval->subitems_left_indent = retval->subitems_right_indent = atoi(attrs[i] + strlen("indent="));
-      else if(!strcmp(attrs[i], "bold"))
-	retval->subitems_bold = TEXTFU_TRUE;
-      else if(!strcmp(attrs[i], "italic"))
-	retval->subitems_italic = TEXTFU_TRUE;
-      else if(!strcmp(attrs[i], "bullet"))
-	retval->subitems_bullet = TEXTFU_TRUE;
-      else if(!strncmp(attrs[i], "link=", strlen("link=")))
+      if(!strncasecmp(attrs[i], "url=", strlen("url=")))
 	{
 	  char *link_ptr;
 	  int slen;
 
-	  link_ptr = attrs[i] + strlen("link=");
+	  link_ptr = attrs[i] + strlen("url=");
 	  if(*link_ptr == '"')
 	    link_ptr++;
 	  slen = strlen(link_ptr) - 1;
@@ -168,9 +177,81 @@ handler_p(GnomeTextFu *textfu, const char *tag, guint16 tag_id, char **attrs)
 	  retval->link_to = g_strdup(link_ptr);
 	}
     }
-
-  return (GnomeTextFuItem *)retval;
 }
+END_CTAG
+
+
+IMPL_CTAG(itemizedlist);
+retval->subitems_bullet = TEXTFU_TRUE;
+retval->subitems_newpara = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(listitem);
+END_CTAG
+
+IMPL_CTAG(application);
+retval->font_name = "fixed";
+END_CTAG
+
+IMPL_CTAG(guibutton);
+retval->subitems_bold = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(guiicon);
+retval->subitems_bold = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(guilabel);
+retval->font_name = "fixed";
+retval->subitems_bold = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(guimenu);
+retval->subitems_bold = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(guimenuitem);
+retval->subitems_bold = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(guisubmenu);
+retval->subitems_bold = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(keycap);
+retval->subitems_bold = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(keycombo);
+retval->subitems_bold = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(mousebutton);
+retval->subitems_italic = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(citetitle);
+retval->subitems_italic = TEXTFU_TRUE;
+END_CTAG
+
+IMPL_CTAG(authorgroup);
+retval->subitems_ignore = TRUE;
+END_CTAG
+
+DUMMY_TAG(author)
+DUMMY_TAG(honorific)
+DUMMY_TAG(firstname)
+DUMMY_TAG(surname)
+DUMMY_TAG(othername)
+DUMMY_TAG(affiliation)
+DUMMY_TAG(orgname)
+DUMMY_TAG(jobtitle)
+DUMMY_TAG(email)
+DUMMY_TAG(copyright)
+DUMMY_TAG(revhistory)
+DUMMY_TAG(revision)
+DUMMY_TAG(revnumber)
+DUMMY_TAG(date)
 
 static GnomeTextFuItem *
 handler_img(GnomeTextFu *textfu, const char *tag, guint16 tag_id, char **attrs)
@@ -254,9 +335,42 @@ gnome_textfu_class_init (GnomeTextFuClass *klass)
   klass->activate_uri = gnome_real_textfu_activate_uri;
   klass->tag_handlers = g_hash_table_new(g_str_hash, g_str_equal);
 
-  gnome_textfu_tagid_alloc("p", handler_p);
-  gnome_textfu_tagid_alloc("img", handler_img);
-  gnome_textfu_tagid_alloc("document", handler_document);
+#define HA(x) gnome_textfu_tagid_alloc(#x, handler_##x)
+  HA(img);
+  HA(popup);
+  HA(sect1);
+  HA(title);
+  HA(sect2);
+  HA(para);
+  HA(ulink);
+  HA(itemizedlist);
+  HA(listitem);
+  HA(application);
+  HA(guibutton);
+  HA(guiicon);
+  HA(guilabel);
+  HA(guimenu);
+  HA(guimenuitem);
+  HA(guisubmenu);
+  HA(keycap);
+  HA(keycombo);
+  HA(mousebutton);
+  HA(citetitle);
+  HA(authorgroup);
+  HA(author);
+  HA(honorific);
+  HA(firstname);
+  HA(surname);
+  HA(othername);
+  HA(affiliation);
+  HA(orgname);
+  HA(jobtitle);
+  HA(email);
+  HA(copyright);
+  HA(revhistory);
+  HA(revnumber);
+  HA(revision);
+  HA(date);
 
   widget_class->realize = gnome_textfu_realize;
   widget_class->unrealize = gnome_textfu_unrealize;
@@ -424,7 +538,7 @@ typedef struct {
   gboolean bullet : 1;
   gboolean newpara : 1;
 
-  char *link_to;
+  char *link_to, *font_name;
 } SizingState;
 
 static void gnome_textfu_determine_size(GnomeTextFu *textfu, GtkRequisition *requisition, gboolean do_drawing);
@@ -500,7 +614,8 @@ gnome_textfu_get_font(GnomeTextFu *textfu, GnomeTextFuItem *item, SizingState *s
 
   if(!citem->font)
     {
-
+      if(ss->font_name)
+	family = ss->font_name;
       if(ss->italic)
 	slant = "o";
       if(ss->bold)
@@ -529,6 +644,9 @@ gnome_textfu_container_determine_size(GnomeTextFu *textfu, GnomeTextFuItemContai
   citem->item.x = ss->global.xpos;
   citem->item.y = ss->global.ypos;
 
+  if(citem->subitems_ignore)
+    return;
+
   if(citem->subitems_left_indent > 0)
     ss->left_indent += citem->subitems_left_indent;
   if(citem->subitems_right_indent > 0)
@@ -542,6 +660,8 @@ gnome_textfu_container_determine_size(GnomeTextFu *textfu, GnomeTextFuItemContai
 	ss->italic = citem->subitems_italic;
       if(citem->subitems_font_size > 0)
 	ss->font_size = citem->subitems_font_size;
+      if(citem->font_name)
+	ss->font_name = citem->font_name;
       if(citem->link_to)
 	ss->link_to = citem->link_to;
     }
@@ -996,6 +1116,7 @@ handle_tag(GnomeTextFu *textfu, GHashTable *tag_handlers,
 	    if(container->subitems_italic == TEXTFU_UNKNOWN
 	       && container->subitems_bold == TEXTFU_UNKNOWN
 	       && container->subitems_font_size <= 0
+	       && !container->font_name
 	       && !container->link_to)
 	      container->inherited_font = TRUE;
 
@@ -1109,6 +1230,7 @@ gnome_textfu_parse(GnomeTextFu *textfu)
   container = ((GnomeTextFuItemContainer *)retval);
   /* Set document defaults */
   container->subitems_font_size = 0;
+  container->font_name = "helvetica";
   container->subitems_left_indent = 10;
   container->subitems_right_indent = 10;
   container->subitems_newpara = TEXTFU_TRUE;

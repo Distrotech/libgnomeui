@@ -758,23 +758,27 @@ static GdkCursor *choose_cursor = NULL;
 static GdkFilterReturn
 gnome_help_view_process_event(GdkXEvent *xevent, GdkEvent *event, GnomeHelpView *help_view)
 {
+  GdkFilterReturn retval = GDK_FILTER_CONTINUE;
   XEvent *xev = (XEvent *)xevent;
-
-  gtk_signal_emit_stop_by_name(GTK_OBJECT(btn), "event");
 
   switch(xev->type)
     {
     case ClientMessage:
       if(!atom_explain_query_reply)
 	atom_explain_query_reply = gdk_atom_intern("_EXPLAIN_QUERY_REPLY", FALSE);
+      retval = GDK_FILTER_REMOVE;
       break;
     case MotionNotify:
-      break;
-    case ButtonPress:
+      retval = GDK_FILTER_REMOVE;
       break;
     case ButtonRelease:
+      retval = GDK_FILTER_REMOVE;
+      break;
+    default:
       break;
     }
+
+  return retval;
 }
 #else
 static gint

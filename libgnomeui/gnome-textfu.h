@@ -68,7 +68,7 @@ typedef struct {
 
   /* For use to modify various specific subitems that we might encounter */
 
-  char *link_to;
+  char *link_to, *font_name;
 
   GdkFont *font; /* internal */
 
@@ -78,6 +78,8 @@ typedef struct {
   GnomeTextFuTruthValue subitems_italic : 2;
   GnomeTextFuTruthValue subitems_bold : 2;
   GnomeTextFuTruthValue subitems_bullet : 2;
+
+  gboolean subitems_ignore : 1;
 
   gboolean inherited_font : 1; /* internal */
 } GnomeTextFuItemContainer;
