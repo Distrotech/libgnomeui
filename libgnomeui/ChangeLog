@@ -1,3 +1,10 @@
+1998-09-09  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-gtk-utils.h: Cleanup. Added copyright (FSF? I guess so.)
+	Added GNOME_BEGIN_DECLS (took me an hour to figure out that was
+	causing gnome-- breakage). Made include guards consistent with
+	other headers.
+
 1998-09-09  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* gnome-dentry-edit.c: Protect inclusion of `gnomesupport.h' with
