@@ -1,3 +1,17 @@
+2000-04-15  Miguel de Icaza  <miguel@gnu.org>
+
+	* gnome-animator.c (gnome_animator_new_with_size): Use imlib
+	visuals/colormaps, as these are internally used by the widget.
+
+2000-04-10  Christopher James Lahey  <clahey@helixcode.com>
+
+	* gnome-canvas.c: Added proper keyboard focus handling.
+
+2000-01-11  Miguel de Icaza  <miguel@gnu.org>
+
+	* gtkpixmapmenuitem.c (gtk_pixmap_menu_item_size_request): Make
+	the code ANSI C.
+
 2000-04-08  Ettore Perazzoli  <ettore@helixcode.com>
 
 	[Patch from Nat Friedman <nat@helixcode.com>.
@@ -19,7 +33,6 @@
 
 	* gnome-app.c (gnome_app_construct): Added support for geometry
 	specification. 
-
 
 2000-02-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

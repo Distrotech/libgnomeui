@@ -732,8 +732,13 @@ pixbuf_from_imlib_image (GdkImlibImage *im)
 	art_u8 xr, xg, xb;
 
 	if (im->alpha_data) {
-		/* image has alpha data (not presently implemented in imlib as
-		   of 15 Dec 1998, but should happen soon. */
+		/*
+		 * image has alpha data (not presently implemented in imlib as
+		 * of 15 Dec 1998, but should happen soon.
+		 *
+		 * Unless you use the special gnome_canvas_load which is a wrapper
+		 * to fix Imlib.
+		 */
 		width = im->rgb_width;
 		height = im->rgb_height;
 		rowstride = width * 4;

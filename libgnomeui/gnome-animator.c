@@ -532,7 +532,12 @@ gnome_animator_new_with_size (guint width, guint height)
   GnomeAnimator *animator;
   GtkWidget *widget;
 
+  gtk_widget_push_visual (gdk_imlib_get_visual ());
+  gtk_widget_push_colormap (gdk_imlib_get_colormap ());
   animator = gtk_type_new (gnome_animator_get_type ());
+  gtk_widget_pop_colormap ();
+  gtk_widget_pop_visual ();
+  
   widget = GTK_WIDGET (animator);
 
   widget->requisition.width = width;
