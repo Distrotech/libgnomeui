@@ -21,6 +21,7 @@
   @NOTATION@
 */
 #include <config.h>
+#include "gnome-macros.h"
 
 #include "gnome-druid.h"
 #include "gnome-stock.h"
@@ -69,33 +70,10 @@ static void gnome_druid_next_callback   (GtkWidget               *button,
 static void gnome_druid_cancel_callback (GtkWidget               *button,
 					 GtkWidget               *druid);
 
-static GtkContainerClass *parent_class = NULL;
 static guint druid_signals[LAST_SIGNAL] = { 0 };
 
-
-GtkType
-gnome_druid_get_type (void)
-{
-	static GtkType druid_type = 0;
-
-	if (druid_type == 0) {
-		static const GtkTypeInfo druid_info = {
-			"GnomeDruid",
-			sizeof (GnomeDruid),
-			sizeof (GnomeDruidClass),
-			(GtkClassInitFunc) gnome_druid_class_init,
-			(GtkObjectInitFunc) gnome_druid_init,
-			/* reserved_1 */ NULL,
-			/* reserved_2 */ NULL,
-			(GtkClassInitFunc) NULL
-		};
-
-		druid_type = gtk_type_unique (gtk_container_get_type (),
-					      &druid_info);
-	}
-
-	return druid_type;
-}
+/* define the _get_type method and parent_class */
+GNOME_CLASS_BOILERPLATE(GnomeDruid, gnome_druid, GtkContainer, gtk_container)
 
 static void
 gnome_druid_class_init (GnomeDruidClass *klass)
@@ -109,7 +87,6 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 	gobject_class = (GObjectClass*) klass;
 	widget_class = (GtkWidgetClass*) klass;
 	container_class = (GtkContainerClass*) klass;
-	parent_class = gtk_type_class (gtk_container_get_type ());
 
 	druid_signals[CANCEL] = 
 		gtk_signal_new ("cancel",
@@ -142,6 +119,9 @@ gnome_druid_init (GnomeDruid *druid)
 	GtkWidget *pixmap;
 
 	druid->_priv = g_new0(GnomeDruidPrivate, 1);
+
+	/* set the default border width */
+	GTK_CONTAINER (druid)->border_width = GNOME_PAD_SMALL;
 
 	/* set up the buttons */
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (druid), GTK_NO_WINDOW);
@@ -226,9 +206,7 @@ gnome_druid_destroy (GtkObject *object)
 		gtk_container_remove (GTK_CONTAINER (druid), GTK_WIDGET(child));
 	}
 
-        if(GTK_OBJECT_CLASS(parent_class)->destroy)
-        	GTK_OBJECT_CLASS(parent_class)->destroy(object);
-
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -244,8 +222,7 @@ gnome_druid_finalize (GObject *object)
 	g_free(druid->_priv);
 	druid->_priv = NULL;
 
-        if(G_OBJECT_CLASS(parent_class)->finalize)
-        	G_OBJECT_CLASS(parent_class)->finalize(object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void
@@ -257,12 +234,15 @@ gnome_druid_size_request (GtkWidget *widget,
 	GnomeDruid *druid;
 	GtkRequisition child_requisition;
 	GnomeDruidPage *child;
+	int border;
 	
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GNOME_IS_DRUID (widget));
 
 	druid = GNOME_DRUID (widget);
 	temp_height = temp_width = 0;
+
+	border = GTK_CONTAINER(widget)->border_width;
 
 	/* We find the maximum size of all children widgets */
 	for (list = druid->_priv->children; list; list = list->next) {
@@ -276,8 +256,8 @@ gnome_druid_size_request (GtkWidget *widget,
 		}
 	}
 	
-        requisition->width = temp_width + 2 * GNOME_PAD_SMALL;
-        requisition->height = temp_height + 2 * GNOME_PAD_SMALL;
+        requisition->width = temp_width + 2 * border;
+        requisition->height = temp_height + 2 * border;
 
 	/* In an Attempt to show how the widgets are packed,
 	 * here's a little diagram.
@@ -308,17 +288,16 @@ gnome_druid_size_request (GtkWidget *widget,
 	temp_width = MAX (temp_width, child_requisition.width);
 	temp_height = MAX (temp_height, child_requisition.height);
 
-	temp_width += GNOME_PAD_SMALL * 2;
+	temp_width += border * 2;
 	temp_height += GNOME_PAD_SMALL;
-	/* FIXME. do we need to do something with the buttons requisition? */
+
 	temp_width = temp_width * 17/4  + GNOME_PAD_SMALL * 3;
 
 	/* pick which is bigger, the buttons, or the GnomeDruidPages */
 	requisition->width = MAX (temp_width, requisition->width);
 	requisition->height += temp_height + GNOME_PAD_SMALL * 2;
-	/* And finally, put the side padding in */
-	requisition->width += GNOME_PAD_SMALL *2;
 }
+
 static void
 gnome_druid_size_allocate (GtkWidget *widget,
 			   GtkAllocation *allocation)
@@ -327,12 +306,15 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	GtkAllocation child_allocation;
 	gint button_height;
 	GList *list;
+	int border;
 	
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GNOME_IS_DRUID (widget));
 
 	druid = GNOME_DRUID (widget);
 	widget->allocation = *allocation;
+
+	border = GTK_CONTAINER(widget)->border_width;
 
 	/* deal with the buttons */
 	child_allocation.width = child_allocation.height = 0;
@@ -360,17 +342,18 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	gtk_widget_size_allocate (druid->back, &child_allocation);
 
 	/* Put up the GnomeDruidPage */
-	child_allocation.x = allocation->x + GNOME_PAD_SMALL;
-	child_allocation.y = allocation->y + GNOME_PAD_SMALL;
+	child_allocation.x = allocation->x + border;
+	child_allocation.y = allocation->y + border;
 	child_allocation.width =
-		((allocation->width - 2* GNOME_PAD_SMALL) > 0) ?
-		(allocation->width - 2* GNOME_PAD_SMALL):0;
+		((allocation->width - 2 * border) > 0) ?
+		(allocation->width - 2 * border):0;
 	child_allocation.height =
-		((allocation->height - 3 * GNOME_PAD_SMALL - button_height) > 0) ?
-		(allocation->height - 3 * GNOME_PAD_SMALL - button_height):0;
+		((allocation->height - 2 * border - GNOME_PAD_SMALL - button_height) > 0) ?
+		(allocation->height - 2 * border - GNOME_PAD_SMALL - button_height):0;
 	for (list = druid->_priv->children; list; list=list->next) {
-		if (GTK_WIDGET_VISIBLE (list->data)) {
-			gtk_widget_size_allocate (GTK_WIDGET (list->data), &child_allocation);
+		GtkWidget *widget = GTK_WIDGET (list->data);
+		if (GTK_WIDGET_VISIBLE (widget)) {
+			gtk_widget_size_allocate (widget, &child_allocation);
 		}
 	}
 }
@@ -733,9 +716,9 @@ gnome_druid_insert_page (GnomeDruid *druid,
 	g_return_if_fail (GNOME_IS_DRUID_PAGE (page));
 
 	list = g_list_find (druid->_priv->children, back_page);
-	if (list == NULL)
+	if (list == NULL) {
 		druid->_priv->children = g_list_prepend (druid->_priv->children, page);
-	else {
+	} else {
 		GList *new_el = g_list_alloc ();
 		new_el->next = list->next;
 		new_el->prev = list;

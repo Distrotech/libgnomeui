@@ -183,10 +183,8 @@ gnome_headers = \
 	gnome-druid-page-edge.h		\
 	gnome-druid-page-standard.h	\
 	gnome-entry.h			\
-	gnome-selector.h		\
-	gnome-icon-selector.h		\
-	gnome-file-selector.h		\
 	gnome-file-entry.h		\
+	gnome-file-selector.h		\
         gnome-font-picker.h		\
 	gnome-gconf.h			\
 	gnome-geometry.h		\
@@ -194,8 +192,14 @@ gnome_headers = \
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-entry.h		\
+	gnome-icon-item.h		\
+	gnome-icon-list.h		\
+	gnome-icon-sel.h		\
+	gnome-icon-selector.h		\
+	gnome-icon-text.h		\
 	gnome-init.h			\
 	gnome-less.h			\
+	gnome-macros.h			\
 	gnome-messagebox.h		\
 	gnome-mdi.h			\
 	gnome-mdi-child.h		\
@@ -205,29 +209,26 @@ gnome_headers = \
 	gnome-popup-menu.h		\
 	gnome-popup-help.h		\
 	gnome-pouch.h			\
+        gnome-paper-selector.h		\
 	gnome-preferences.h		\
 	gnome-propertybox.h		\
 	gnome-pixmap.h			\
 	gnome-pixmap-entry.h		\
 	gnome-roo.h			\
 	gnome-scores.h			\
+	gnome-selector.h		\
 	gnome-stock.h			\
 	gnome-stock-ids.h		\
+	gnome-textfu.h			\
 	gnome-types.h			\
 	gnome-uidefs.h			\
-        gnome-winhints.h		\
-        gnome-paper-selector.h		\
 	gnome-unit-spinner.h		\
+        gnome-winhints.h		\
 	gtkdial.h			\
 	gtk-clock.h			\
 	gtkpixmapmenuitem.h		\
 	libgnomeui.h			\
-	oafgnome.h			\
-	gnome-icon-list.h		\
-	gnome-icon-item.h		\
-	gnome-icon-sel.h		\
-	gnome-icon-text.h		\
-	gnome-textfu.h
+	oafgnome.h
 
 libgnomeuiinclude_HEADERS =		\
 	$(gnome_headers)		\

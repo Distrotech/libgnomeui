@@ -1,3 +1,22 @@
+Wed Aug 30 03:51:08 2000  George Lebl <jirka@5z.com>
+
+	* gnome-druid.c: in size_allocate/size_request, use the border_width
+	  of the container as the actual border width.
+
+	* gnome-macros.h, Makefile.am, gnome-about.[ch],
+	  gnome-calculator.[ch], gnome-less.[ch], gnome-druid.c,
+	  gnome-druid-page.c, gnome-druid-page-edge.c,
+	  gnome-druid-page-standard.c:
+	  Steal ideas from nautilus about the standard boilerplate macros,
+	  and use them in a few objects.  These promote consistent
+	  implementation of the _get_type functions, the presence of
+	  parent_class, always checking for implementation of a method before
+	  dereferencing it, and most of all prevent typos.  Just to prove a
+	  point, one such typo/problem was fixed in GnomeLess.  Also while
+	  I was at it I made these files only include the neccessary headers
+	  instead of <gnome.h>, to make more fine grained dependencies to
+	  speed the build up and prevent unneccessary rebuilds.
+
 Fri Aug 25 02:14:34 2000  George Lebl <jirka@5z.com>
 
 	* gnome-druid-page.[ch], gnome-druid-page-standard.[ch],

@@ -29,6 +29,8 @@
 
 #include <config.h>
 
+#include "gnome-macros.h"
+
 /* needed for values of M_E and M_PI under 'gcc -ansi -pedantic'
  * on GNU/Linux */
 #ifndef _BSD_SOURCE
@@ -47,7 +49,6 @@
 #include "libgnome/libgnomeP.h"
 #include "gnome-calculator.h"
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include "gnome-pixmap.h"
 
 typedef void (*sighandler_t)(int);
 
@@ -103,8 +104,6 @@ static void gnome_calculator_init	(GnomeCalculator	*gc);
 static void gnome_calculator_destroy	(GtkObject		*object);
 static void gnome_calculator_finalize	(GObject		*object);
 
-static GtkVBoxClass *parent_class;
-
 /* The calculator font and our own reference count for it */
 static GdkPixmap *calc_font;
 static int calc_font_ref_count;
@@ -132,6 +131,10 @@ enum {
 
 static gint gnome_calculator_signals[LAST_SIGNAL] = {0};
 
+
+GNOME_CLASS_BOILERPLATE (GnomeCalculator, gnome_calculator,
+			 GtkVBox, gtk_vbox)
+
 static void
 gnome_calculator_marshal_signal_result_changed (GtkObject * object,
 						GtkSignalFunc func,
@@ -146,30 +149,6 @@ gnome_calculator_marshal_signal_result_changed (GtkObject * object,
 		  func_data);
 }
 
-guint
-gnome_calculator_get_type (void)
-{
-	static guint calculator_type = 0;
-
-	if (!calculator_type) {
-		GtkTypeInfo calculator_info = {
-			"GnomeCalculator",
-			sizeof (GnomeCalculator),
-			sizeof (GnomeCalculatorClass),
-			(GtkClassInitFunc) gnome_calculator_class_init,
-			(GtkObjectInitFunc) gnome_calculator_init,
-			NULL,
-			NULL,
-			NULL
-		};
-
-		calculator_type = gtk_type_unique (gtk_vbox_get_type (),
-						   &calculator_info);
-	}
-
-	return calculator_type;
-}
-
 static void
 gnome_calculator_class_init (GnomeCalculatorClass *class)
 {
@@ -178,7 +157,6 @@ gnome_calculator_class_init (GnomeCalculatorClass *class)
 
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
 	object_class->destroy = gnome_calculator_destroy;
 	gobject_class->finalize = gnome_calculator_finalize;
 
@@ -1404,8 +1382,7 @@ gnome_calculator_destroy (GtkObject *object)
 	while(gc->_priv->stack)
 		stack_pop(&gc->_priv->stack);
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -1425,8 +1402,7 @@ gnome_calculator_finalize (GObject *object)
 		gc->_priv = NULL;
 	}
 
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 /**

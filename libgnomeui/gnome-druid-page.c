@@ -22,8 +22,8 @@
 */
 
 #include <config.h>
+#include "gnome-macros.h"
 
-#include <gnome.h>
 #include "gnome-druid-page.h"
 
 enum {
@@ -51,32 +51,10 @@ static gint gnome_druid_page_expose             (GtkWidget               *widget
 static void gnome_druid_page_realize            (GtkWidget		 *widget);
 
 
-static GtkBinClass *parent_class = NULL;
 static guint druid_page_signals[LAST_SIGNAL] = { 0 };
 
-
-GtkType
-gnome_druid_page_get_type (void)
-{
-	static GtkType druid_page_type = 0;
-
-	if (druid_page_type == 0) {
-		static const GtkTypeInfo druid_page_info = {
-			"GnomeDruidPage",
-			sizeof (GnomeDruidPage),
-			sizeof (GnomeDruidPageClass),
-			(GtkClassInitFunc) gnome_druid_page_class_init,
-			(GtkObjectInitFunc) gnome_druid_page_init,
-			/* reserved_1 */ NULL,
-			/* reserved_2 */ NULL,
-			(GtkClassInitFunc) NULL
-		};
-
-		druid_page_type = gtk_type_unique (gtk_bin_get_type (), &druid_page_info);
-	}
-
-	return druid_page_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeDruidPage, gnome_druid_page,
+			 GtkBin, gtk_bin)
 
 static void
 gnome_druid_page_class_init (GnomeDruidPageClass *klass)
@@ -88,7 +66,6 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 	object_class = (GtkObjectClass*) klass;
 	gobject_class = (GObjectClass*) klass;
 	widget_class = (GtkWidgetClass*) klass;
-	parent_class = gtk_type_class (gtk_bin_get_type ());
 
 	druid_page_signals[NEXT] = 
 		gtk_signal_new ("next",
@@ -163,8 +140,7 @@ gnome_druid_page_destroy (GtkObject *object)
 {
 	/* remember, destroy can be run multiple times! */
 
-	if (GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -176,8 +152,7 @@ gnome_druid_page_finalize (GObject *object)
 	/*g_free(druid_page->_priv);
 	druid_page->_priv = NULL;*/
 
-	if (G_OBJECT_CLASS(parent_class)->finalize)
-		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void

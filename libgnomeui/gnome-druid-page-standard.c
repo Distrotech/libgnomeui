@@ -22,11 +22,16 @@
 */
 
 #include <config.h>
+#include "gnome-macros.h"
 
-#include <gnome.h>
 #include "gnome-druid.h"
-#include "gnome-druid-page-standard.h"
 #include "gnome-canvas-pixbuf.h"
+#include "gnome-canvas-rect-ellipse.h"
+#include "gnome-canvas-text.h"
+#include "gnome-uidefs.h"
+#include <libgnome/gnome-i18nP.h>
+
+#include "gnome-druid-page-standard.h"
 
 struct _GnomeDruidPageStandardPrivate
 {
@@ -52,36 +57,12 @@ static void gnome_druid_page_standard_prepare       (GnomeDruidPage             
 
 static void gnome_druid_page_standard_configure_canvas (GnomeDruidPageStandard	     *druid_page_standard);
 
-static GnomeDruidPageClass *parent_class = NULL;
-
 #define LOGO_WIDTH 50.0
 #define DRUID_PAGE_WIDTH 516
 #define GDK_COLOR_TO_RGBA(color) GNOME_CANVAS_COLOR ((color).red/256, (color).green/256, (color).blue/256)
 
-GtkType
-gnome_druid_page_standard_get_type (void)
-{
-	static GtkType druid_page_standard_type = 0;
-
-	if (druid_page_standard_type == 0) {
-		static const GtkTypeInfo druid_page_standard_info = {
-			"GnomeDruidPageStandard",
-			sizeof (GnomeDruidPageStandard),
-			sizeof (GnomeDruidPageStandardClass),
-			(GtkClassInitFunc) gnome_druid_page_standard_class_init,
-			(GtkObjectInitFunc) gnome_druid_page_standard_init,
-			/* reserved_1 */ NULL,
-			/* reserved_2 */ NULL,
-			(GtkClassInitFunc) NULL
-		};
-
-		druid_page_standard_type =
-			gtk_type_unique (gnome_druid_page_get_type (),
-					 &druid_page_standard_info);
-	}
-
-	return druid_page_standard_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeDruidPageStandard, gnome_druid_page_standard,
+			 GnomeDruidPage, gnome_druid_page)
 
 static void
 gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *klass)
@@ -93,8 +74,6 @@ gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *klass)
 	object_class = (GtkObjectClass*) klass;
 	gobject_class = (GObjectClass*) klass;
 	widget_class = (GtkWidgetClass*) klass;
-
-	parent_class = gtk_type_class (gnome_druid_page_get_type ());
 
 	object_class->destroy = gnome_druid_page_standard_destroy;
 	gobject_class->finalize = gnome_druid_page_standard_finalize;
@@ -196,8 +175,7 @@ gnome_druid_page_standard_destroy(GtkObject *object)
 	g_free (druid_page_standard->title);
 	druid_page_standard->title = NULL;
 
-	if (GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -208,8 +186,7 @@ gnome_druid_page_standard_finalize (GObject *object)
 	g_free(druid_page_standard->_priv);
 	druid_page_standard->_priv = NULL;
 
-	if (G_OBJECT_CLASS(parent_class)->finalize)
-		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 
@@ -316,7 +293,8 @@ gnome_druid_page_standard_size_allocate (GtkWidget *widget,
 
 	canvas = GNOME_DRUID_PAGE_STANDARD (widget)->_priv->canvas;
 
-	GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
+	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, size_allocate,
+				   (widget, allocation));
 
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (canvas),
 					0.0, 0.0,

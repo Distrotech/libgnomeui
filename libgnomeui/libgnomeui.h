@@ -77,6 +77,7 @@
 #include "libgnomeui/gnome-icon-entry.h"
 #include "libgnomeui/gnome-init.h"
 #include "libgnomeui/gnome-less.h"
+#include "libgnomeui/gnome-macros.h"
 #include "libgnomeui/gnome-messagebox.h"
 #include "libgnomeui/gnome-number-entry.h"
 /* Considering moving this to gnome-print, so this file 

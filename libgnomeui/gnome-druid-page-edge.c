@@ -23,11 +23,16 @@
 */
 
 #include <config.h>
+#include "gnome-macros.h"
 
-#include <gnome.h>
-#include "gnome-druid-page-edge.h"
 #include "gnome-canvas-pixbuf.h"
+#include "gnome-canvas-rect-ellipse.h"
+#include "gnome-canvas-text.h"
 #include "gnome-druid.h"
+#include "gnome-uidefs.h"
+#include <libgnome/gnome-i18nP.h>
+
+#include "gnome-druid-page-edge.h"
 
 struct _GnomeDruidPageEdgePrivate
 {
@@ -53,39 +58,14 @@ static void gnome_druid_page_edge_prepare	(GnomeDruidPage		        *page,
 						 GtkWidget                      *druid,
 						 gpointer 			*data);
 
-static GnomeDruidPageClass *parent_class = NULL;
-
 #define LOGO_WIDTH 50.0
 #define DRUID_PAGE_HEIGHT 318
 #define DRUID_PAGE_WIDTH 516
 #define DRUID_PAGE_LEFT_WIDTH 100.0
 #define GDK_COLOR_TO_RGBA(color) GNOME_CANVAS_COLOR ((color).red/256, (color).green/256, (color).blue/256)
 
-
-GtkType
-gnome_druid_page_edge_get_type (void)
-{
-	static GtkType druid_page_edge_type = 0;
-
-	if (druid_page_edge_type == 0) {
-		static const GtkTypeInfo druid_page_edge_info = {
-			"GnomeDruidPageEdge",
-			sizeof (GnomeDruidPageEdge),
-			sizeof (GnomeDruidPageEdgeClass),
-			(GtkClassInitFunc) gnome_druid_page_edge_class_init,
-			(GtkObjectInitFunc) gnome_druid_page_edge_init,
-			/* reserved_1 */ NULL,
-			/* reserved_2 */ NULL,
-			(GtkClassInitFunc) NULL
-		};
-
-		druid_page_edge_type =
-			gtk_type_unique (gnome_druid_page_get_type (),
-					 &druid_page_edge_info);
-	}
-
-	return druid_page_edge_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeDruidPageEdge, gnome_druid_page_edge,
+			 GnomeDruidPage, gnome_druid_page);
 
 static void
 gnome_druid_page_edge_class_init (GnomeDruidPageEdgeClass *klass)
@@ -97,8 +77,6 @@ gnome_druid_page_edge_class_init (GnomeDruidPageEdgeClass *klass)
 	object_class = (GtkObjectClass*) klass;
 	gobject_class = (GObjectClass*) klass;
 	widget_class = (GtkWidgetClass*) klass;
-
-	parent_class = gtk_type_class (gnome_druid_page_get_type ());
 
 	object_class->destroy = gnome_druid_page_edge_destroy;
 	gobject_class->finalize = gnome_druid_page_edge_finalize;
@@ -196,8 +174,7 @@ gnome_druid_page_edge_destroy(GtkObject *object)
 	g_free (druid_page_edge->title);
 	druid_page_edge->title = NULL;
 
-	if(GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -208,8 +185,7 @@ gnome_druid_page_edge_finalize(GObject *object)
 	g_free(druid_page_edge->_priv);
 	druid_page_edge->_priv = NULL;
 
-	if(G_OBJECT_CLASS(parent_class)->finalize)
-		(* G_OBJECT_CLASS(parent_class)->finalize)(object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void
@@ -384,7 +360,8 @@ gnome_druid_page_edge_size_allocate   (GtkWidget               *widget,
 
 	druid_page_edge = GNOME_DRUID_PAGE_EDGE (widget);
 
-	GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
+	GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS, size_allocate,
+				   (widget, allocation));
 
 	gnome_canvas_set_scroll_region (GNOME_CANVAS(druid_page_edge->_priv->canvas),
 					0.0, 0.0,

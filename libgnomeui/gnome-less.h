@@ -46,7 +46,7 @@ typedef struct _GnomeLessClass   GnomeLessClass;
 #define GNOME_LESS_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_LESS, GnomeLessClass))
 
 struct _GnomeLess {
-	GtkHBox vbox;
+	GtkHBox hbox;
 
 	/*< public >*/
 	GtkTextView *text_view; 
@@ -60,7 +60,7 @@ struct _GnomeLessClass {
 	GtkHBoxClass parent_class;
 };
 
-guint    gnome_less_get_type		(void);
+GtkType  gnome_less_get_type		(void);
 
 GtkWidget * gnome_less_new		(void);
 

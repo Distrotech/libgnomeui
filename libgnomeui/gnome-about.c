@@ -26,12 +26,15 @@
  */
 
 #include <config.h>
-#include <gnome.h>
+#include "gnome-macros.h"
+
 #include "gnome-about.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-url.h"
-#include "gnome-stock.h"
+#include "gnome-dialog.h"
+#include "gnome-dialog-util.h"
+#include "gnome-gconf.h"
 #include "gnome-canvas.h"
 #include "gnome-canvas-line.h"
 #include "gnome-canvas-rect-ellipse.h"
@@ -39,6 +42,7 @@
 #include "gnome-canvas-pixbuf.h"
 #include "gnome-canvas-util.h"
 #include "gnome-cursors.h"
+#include "gnome-stock.h"
 #include <gconf/gconf-client.h>
 #include <string.h>
 #include <gtk/gtk.h>
@@ -114,8 +118,6 @@ struct _GnomeAboutPrivate {
 	GnomeAboutInfo *ai;
 };
 
-static GnomeDialogClass *parent_class = NULL;
-
 static void gnome_about_class_init (GnomeAboutClass *klass);
 static void gnome_about_init       (GnomeAbout      *about);
 static void gnome_about_destroy    (GtkObject       *object);
@@ -145,31 +147,9 @@ static void gnome_about_fill_options (GtkWidget *widget,
  *
  * Returns the GtkType for the GnomeAbout widget.
  **/
-
-guint
-gnome_about_get_type (void)
-{
-	static guint about_type = 0;
-
-	if (!about_type)
-	{
-		GtkTypeInfo about_info =
-		{
-			"GnomeAbout",
-			sizeof (GnomeAbout),
-			sizeof (GnomeAboutClass),
-			(GtkClassInitFunc) gnome_about_class_init,
-			(GtkObjectInitFunc) gnome_about_init,
-			NULL,
-			NULL,
-			NULL
-		};
-
-		about_type = gtk_type_unique (gnome_dialog_get_type (), &about_info);
-	}
-
-	return about_type;
-}
+/* here the get_type will be defined */
+GNOME_CLASS_BOILERPLATE (GnomeAbout, gnome_about,
+			 GnomeDialog, gnome_dialog)
 
 static void
 gnome_about_class_init (GnomeAboutClass *klass)
@@ -179,7 +159,6 @@ gnome_about_class_init (GnomeAboutClass *klass)
 
 	object_class = (GtkObjectClass *) klass;
 	gobject_class = (GObjectClass *) klass;
-	parent_class = gtk_type_class (gnome_dialog_get_type ());
 
 	object_class->destroy = gnome_about_destroy;
 	gobject_class->finalize = gnome_about_finalize;
@@ -916,8 +895,7 @@ gnome_about_destroy (GtkObject *object)
 		self->_priv->ai = NULL;
 	}
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -928,8 +906,7 @@ gnome_about_finalize (GObject *object)
 	g_free (self->_priv);
 	self->_priv = NULL;
 
-	if (G_OBJECT_CLASS (parent_class)->finalize)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 /**

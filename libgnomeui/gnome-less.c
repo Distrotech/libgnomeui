@@ -22,9 +22,11 @@
   @NOTATION@
 */
 
+#include <config.h>
+#include "gnome-macros.h"
+
 #include "gnome-less.h"
 
-#include <config.h>
 
 #include "libgnome/gnome-util.h"
 
@@ -54,32 +56,8 @@ static void gnome_less_init       (GnomeLess      *messagebox);
 static void gnome_less_destroy    (GtkObject      *object);
 static void gnome_less_finalize   (GObject        *object);
 
-static GtkWindowClass *parent_class;
-
-guint
-gnome_less_get_type (void)
-{
-  static guint gl_type = 0;
-
-  if (!gl_type)
-    {
-      GtkTypeInfo gl_info =
-      {
-	"GnomeLess",
-	sizeof (GnomeLess),
-	sizeof (GnomeLessClass),
-	(GtkClassInitFunc) gnome_less_class_init,
-	(GtkObjectInitFunc) gnome_less_init,
-	NULL,
-	NULL,
-	NULL
-      };
-
-      gl_type = gtk_type_unique (gtk_hbox_get_type (), &gl_info);
-    }
-
-  return gl_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeLess, gnome_less,
+			 GtkHBox, gtk_hbox)
 
 static void
 gnome_less_class_init (GnomeLessClass *klass)
@@ -89,8 +67,6 @@ gnome_less_class_init (GnomeLessClass *klass)
 
   object_class = (GtkObjectClass*) klass;
   gobject_class = (GObjectClass*) klass;
-
-  parent_class = gtk_type_class (gtk_hbox_get_type ());
 
   object_class->destroy = gnome_less_destroy;
   gobject_class->finalize = gnome_less_finalize;
@@ -205,8 +181,7 @@ static void gnome_less_destroy (GtkObject *object)
 		pango_font_description_free(gl->_priv->font_desc);
 	gl->_priv->font_desc = NULL;
 
-	if (GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* (GTK_OBJECT_CLASS(parent_class)->destroy))(object);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void gnome_less_finalize (GObject *object)
@@ -221,8 +196,7 @@ static void gnome_less_finalize (GObject *object)
 	g_free(gl->_priv);
 	gl->_priv = NULL;
 
-	if (G_OBJECT_CLASS(parent_class)->finalize)
-		(* (G_OBJECT_CLASS(parent_class)->finalize))(object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 /**
