@@ -174,7 +174,7 @@ gnome_recently_used_construct (GnomeRecentlyUsed *recently_used,
                 recently_used->key_root = g_strdup("/desktop/standard/recent-documents");
         }
         
-        recently_used->conf = gnome_gconf_client_get();
+        recently_used->conf = gnome_get_gconf_client();
 
         gtk_object_ref(GTK_OBJECT(recently_used->conf));
         

@@ -1,5 +1,16 @@
 2000-01-30  Havoc Pennington  <hp@pobox.com>
 
+	* gnome-file-saver.c (gnome_file_saver_init): use
+	gnome_get_gconf_client()
+
+	* gnome-recently-used.c (gnome_recently_used_construct): Use new
+	name gnome_get_gconf_client()
+
+	* gnome-gconf.c (gnome_gconf_client_get): Rename to
+	gnome_get_gconf_client()
+
+2000-01-30  Havoc Pennington  <hp@pobox.com>
+
 	* gnome-dialog.c (gnome_dialog_run_real): Create a new GMainLoop
 	to avoid problems with quitting the wrong mainloop with
 	gtk_main()/gtk_main_quit()

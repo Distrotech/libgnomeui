@@ -216,7 +216,7 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
          * Get the GConfClient object
          */ 
         
-        file_saver->conf = gnome_gconf_client_get();
+        file_saver->conf = gnome_get_gconf_client();
 
         gtk_object_ref(GTK_OBJECT(file_saver->conf));
 
