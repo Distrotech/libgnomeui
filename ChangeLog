@@ -1,3 +1,11 @@
+2004-04-06  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c (fs_module_init): Ref the
+	type class that we register so that the module won't get unloaded.
+	I'd rather do this with g_module_make_resident(), but at this
+	point in the code we don't have access to the GModule.  Fixes
+	#139254.
+
 2004-03-31  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added "af" to ALL_LINGUAS.

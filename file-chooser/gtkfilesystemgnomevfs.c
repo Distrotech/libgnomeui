@@ -2346,6 +2346,15 @@ fs_module_init (GTypeModule    *module)
 				 GTK_TYPE_FILE_FOLDER,
 				 &file_folder_info);
   }
+
+  /* We ref the class so that the module won't get unloaded.  We need this
+   * because gnome_icon_lookup() will cause GnomeIconTheme to get registered,
+   * and we cannot unload that properly.  I'd prefer to do this via
+   * g_module_make_resident(), but here we don't have access to the GModule.
+   * See bug #139254 for reference. [federico]
+   */
+
+  g_type_class_ref (type_gtk_file_system_gnome_vfs);
 }
 
 void 
