@@ -51,20 +51,23 @@ G_BEGIN_DECLS
 #define GNOME_IS_PIXMAP_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PIXMAP_ENTRY))
 #define GNOME_PIXMAP_ENTRY_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_PIXMAP_ENTRY, GnomePixmapEntryClass))
 
+/* Note:  This derives from GnomeFileEntry and thus supports GtkEditable
+ * interface */
+
 
 typedef struct _GnomePixmapEntry        GnomePixmapEntry;
 typedef struct _GnomePixmapEntryPrivate GnomePixmapEntryPrivate;
 typedef struct _GnomePixmapEntryClass   GnomePixmapEntryClass;
 
 struct _GnomePixmapEntry {
-	GtkVBox vbox;
+	GnomeFileEntry fentry;
 
 	/*< private >*/
 	GnomePixmapEntryPrivate *_priv;
 };
 
 struct _GnomePixmapEntryClass {
-	GtkVBoxClass parent_class;
+	GnomeFileEntryClass parent_class;
 };
 
 
@@ -84,9 +87,13 @@ void       gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
 						const gchar *subdir);
 
 /* entry widgets */
+
+/* This is now derived from GnomeFileEntry, so use it's methods */
+#ifndef GNOME_DISABLE_DEPRECATED
 GtkWidget *gnome_pixmap_entry_gnome_file_entry(GnomePixmapEntry *pentry);
 GtkWidget *gnome_pixmap_entry_gnome_entry (GnomePixmapEntry *pentry);
 GtkWidget *gnome_pixmap_entry_gtk_entry   (GnomePixmapEntry *pentry);
+#endif
 
 /* preview widgets */
 GtkWidget  *gnome_pixmap_entry_scrolled_window(GnomePixmapEntry *pentry);

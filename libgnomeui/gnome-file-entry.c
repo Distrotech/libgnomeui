@@ -88,6 +88,8 @@ static void fentry_set_arg                (GtkObject *object,
 static void fentry_get_arg                (GtkObject *object,
 					   GtkArg *arg,
 					   guint arg_id);
+static void gnome_file_entry_editable_init (GtkEditableClass *iface);
+
 enum {
 	ARG_0,
 	ARG_HISTORY_ID,
@@ -100,11 +102,46 @@ enum {
 	ARG_GTK_ENTRY
 };
 
-GNOME_CLASS_BOILERPLATE (GnomeFileEntry, gnome_file_entry,
-			 GtkVBox, gtk_vbox)
+/* Note, can't use boilerplate with interfaces yet,
+ * should get sorted out */
+static GtkVBoxClass *parent_class = NULL;
+GtkType
+gnome_file_entry_get_type (void)
+{
+	static GtkType object_type = 0;
+	if (object_type == 0) {
+		GtkType type_of_parent;
+		static const GtkTypeInfo object_info = {
+			"GnomeFileEntry",
+			sizeof (GnomeFileEntry),
+			sizeof (GnomeFileEntryClass),
+			(GtkClassInitFunc) gnome_file_entry_class_init,
+			(GtkObjectInitFunc) gnome_file_entry_init,
+			/* reserved_1 */ NULL,
+			/* reserved_2 */ NULL,
+			(GtkClassInitFunc) NULL
+		};
+		static const GInterfaceInfo editable_info =
+		{
+			(GInterfaceInitFunc) gnome_file_entry_editable_init,	 /* interface_init */
+			NULL,			                         	 /* interface_finalize */
+			NULL			                         	 /* interface_data */
+		};
+		type_of_parent = gtk_vbox_get_type ();
+		object_type = gtk_type_unique (type_of_parent, &object_info);
+		parent_class = gtk_type_class (type_of_parent);
+
+		g_type_add_interface_static (object_type,
+					     GTK_TYPE_EDITABLE,
+					     &editable_info);
+	}
+	return object_type;
+}
 
 enum {
 	BROWSE_CLICKED_SIGNAL,
+	CHANGED_SIGNAL,
+	ACTIVATE_SIGNAL,
 	LAST_SIGNAL
 };
 
@@ -125,6 +162,24 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 			       GTK_CLASS_TYPE (object_class),
 			       GTK_SIGNAL_OFFSET(GnomeFileEntryClass,
 			       			 browse_clicked),
+			       gtk_signal_default_marshaller,
+			       GTK_TYPE_NONE,
+			       0);
+	gnome_file_entry_signals[CHANGED_SIGNAL] =
+		gtk_signal_new("changed",
+			       GTK_RUN_LAST,
+			       GTK_CLASS_TYPE (object_class),
+			       GTK_SIGNAL_OFFSET(GnomeFileEntryClass,
+			       			 changed),
+			       gtk_signal_default_marshaller,
+			       GTK_TYPE_NONE,
+			       0);
+	gnome_file_entry_signals[ACTIVATE_SIGNAL] =
+		gtk_signal_new("activate",
+			       GTK_RUN_LAST,
+			       GTK_CLASS_TYPE (object_class),
+			       GTK_SIGNAL_OFFSET(GnomeFileEntryClass,
+			       			 activate),
 			       gtk_signal_default_marshaller,
 			       GTK_TYPE_NONE,
 			       0);
@@ -168,6 +223,8 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	object_class->set_arg = fentry_set_arg;
 
 	class->browse_clicked = browse_clicked;
+	class->changed = NULL;
+	class->activate = NULL;
 }
 
 static void
@@ -366,10 +423,24 @@ browse_clicked(GnomeFileEntry *fentry)
 }
 
 static void
-browse_clicked_signal(GtkWidget *widget, gpointer data)
+browse_clicked_signal (GtkWidget *widget, gpointer data)
 {
-	gtk_signal_emit(GTK_OBJECT(data),
-			gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL]);
+	gtk_signal_emit (GTK_OBJECT (data),
+			 gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL]);
+}
+
+static void
+entry_changed_signal (GtkWidget *widget, gpointer data)
+{
+	gtk_signal_emit (GTK_OBJECT (data),
+			 gnome_file_entry_signals[CHANGED_SIGNAL]);
+}
+
+static void
+entry_activate_signal (GtkWidget *widget, gpointer data)
+{
+	gtk_signal_emit (GTK_OBJECT (data),
+			 gnome_file_entry_signals[ACTIVATE_SIGNAL]);
 }
 
 static void
@@ -439,6 +510,13 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 
 	fentry->_priv->gentry = gnome_entry_new (NULL);
 	the_gtk_entry = gnome_file_entry_gtk_entry (fentry);
+
+	gtk_signal_connect (GTK_OBJECT (the_gtk_entry), "changed",
+			    (GtkSignalFunc) entry_changed_signal,
+			    fentry);
+	gtk_signal_connect (GTK_OBJECT (the_gtk_entry), "activate",
+			    (GtkSignalFunc) entry_activate_signal,
+			    fentry);
 
 	gtk_drag_dest_set (GTK_WIDGET (the_gtk_entry),
 			   GTK_DEST_DEFAULT_MOTION |
@@ -866,3 +944,89 @@ gnome_file_entry_set_directory(GnomeFileEntry *fentry, gboolean directory_entry)
 	gnome_file_entry_set_directory_entry(fentry, directory_entry);
 }
 #endif /* GNOME_DISABLE_DEPRECATED_SOURCE */
+
+static void
+insert_text (GtkEditable    *editable,
+	     const gchar    *text,
+	     gint            length,
+	     gint           *position)
+{
+	GtkWidget *entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (editable));
+	gtk_editable_insert_text (GTK_EDITABLE (entry),
+				  text,
+				  length,
+				  position);
+}
+
+static void
+delete_text (GtkEditable    *editable,
+	     gint            start_pos,
+	     gint            end_pos)
+{
+	GtkWidget *entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (editable));
+	gtk_editable_delete_text (GTK_EDITABLE (entry),
+				  start_pos,
+				  end_pos);
+}
+
+static gchar*
+get_chars (GtkEditable    *editable,
+	   gint            start_pos,
+	   gint            end_pos)
+{
+	GtkWidget *entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (editable));
+	return gtk_editable_get_chars (GTK_EDITABLE (entry),
+				       start_pos,
+				       end_pos);
+}
+
+static void
+set_selection_bounds (GtkEditable    *editable,
+		      gint            start_pos,
+		      gint            end_pos)
+{
+	GtkWidget *entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (editable));
+	gtk_editable_select_region (GTK_EDITABLE (entry),
+				    start_pos,
+				    end_pos);
+}
+
+static gboolean
+get_selection_bounds (GtkEditable    *editable,
+		      gint           *start_pos,
+		      gint           *end_pos)
+{
+	GtkWidget *entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (editable));
+	return gtk_editable_get_selection_bounds (GTK_EDITABLE (entry),
+						  start_pos,
+						  end_pos);
+}
+
+static void
+set_position (GtkEditable    *editable,
+	      gint            position)
+{
+	GtkWidget *entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (editable));
+	gtk_editable_set_position (GTK_EDITABLE (entry),
+				   position);
+}
+
+static gint
+get_position (GtkEditable    *editable)
+{
+	GtkWidget *entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (editable));
+	return gtk_editable_get_position (GTK_EDITABLE (entry));
+}
+
+static void
+gnome_file_entry_editable_init (GtkEditableClass *iface)
+{
+	/* Just proxy to the GtkEntry */
+	iface->insert_text = insert_text;
+	iface->delete_text = delete_text;
+	iface->get_chars = get_chars;
+	iface->set_selection_bounds = set_selection_bounds;
+	iface->get_selection_bounds = get_selection_bounds;
+	iface->set_position = set_position;
+	iface->get_position = get_position;
+}

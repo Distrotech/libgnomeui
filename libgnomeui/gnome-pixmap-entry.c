@@ -31,6 +31,8 @@
  * Author: George Lebl <jirka@5z.com>
  */
 #include <config.h>
+#include "gnome-macros.h"
+
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
@@ -92,75 +94,26 @@ static void pentry_get_arg                (GtkObject *object,
 					   GtkArg *arg,
 					   guint arg_id);
 
-static GtkVBoxClass *parent_class;
-
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
 enum {
 	ARG_0,
-	ARG_HISTORY_ID,
-	ARG_BROWSE_DIALOG_TITLE,
-	ARG_DO_PREVIEW,
-	ARG_GNOME_FILE_ENTRY,
-	ARG_GNOME_ENTRY,
-	ARG_GTK_ENTRY
+	ARG_DO_PREVIEW
 };
 
-guint
-gnome_pixmap_entry_get_type (void)
-{
-	static guint pixmap_entry_type = 0;
-
-	if (!pixmap_entry_type) {
-		GtkTypeInfo pixmap_entry_info = {
-			"GnomePixmapEntry",
-			sizeof (GnomePixmapEntry),
-			sizeof (GnomePixmapEntryClass),
-			(GtkClassInitFunc) gnome_pixmap_entry_class_init,
-			(GtkObjectInitFunc) gnome_pixmap_entry_init,
-			NULL,
-			NULL,
-			NULL
-		};
-
-		pixmap_entry_type = gtk_type_unique (gtk_vbox_get_type (),
-						     &pixmap_entry_info);
-	}
-
-	return pixmap_entry_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomePixmapEntry, gnome_pixmap_entry,
+			 GnomeFileEntry, gnome_file_entry)
 
 static void
 gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class)
 {
 	GtkObjectClass *object_class = GTK_OBJECT_CLASS(class);
 	GObjectClass *gobject_class = G_OBJECT_CLASS(class);
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
 
-	gtk_object_add_arg_type("GnomePixmapEntry::history_id",
-				GTK_TYPE_STRING,
-				GTK_ARG_WRITABLE,
-				ARG_HISTORY_ID);
-	gtk_object_add_arg_type("GnomePixmapEntry::browse_dialog_title",
-				GTK_TYPE_STRING,
-				GTK_ARG_WRITABLE,
-				ARG_BROWSE_DIALOG_TITLE);
 	gtk_object_add_arg_type("GnomePixmapEntry::do_preview",
 				GTK_TYPE_BOOL,
-				GTK_ARG_WRITABLE,
+				GTK_ARG_READWRITE,
 				ARG_DO_PREVIEW);
-	gtk_object_add_arg_type("GnomePixmapEntry::gnome_file_entry",
-				GTK_TYPE_POINTER,
-				GTK_ARG_READABLE,
-				ARG_GNOME_FILE_ENTRY);
-	gtk_object_add_arg_type("GnomePixmapEntry::gnome_entry",
-				GTK_TYPE_POINTER,
-				GTK_ARG_READABLE,
-				ARG_GNOME_ENTRY);
-	gtk_object_add_arg_type("GnomePixmapEntry::gtk_entry",
-				GTK_TYPE_POINTER,
-				GTK_ARG_READABLE,
-				ARG_GTK_ENTRY);
 
 	object_class->destroy = pentry_destroy;
 	gobject_class->finalize = pentry_finalize;
@@ -179,20 +132,6 @@ pentry_set_arg (GtkObject *object,
 	self = GNOME_PIXMAP_ENTRY (object);
 
 	switch (arg_id) {
-	case ARG_HISTORY_ID: {
-		GnomeFileEntry *fentry;
-		GtkWidget *gentry;
-		fentry = GNOME_FILE_ENTRY(self->_priv->fentry);
-		gentry = gnome_file_entry_gnome_entry(fentry);
-		gnome_entry_set_history_id (GNOME_ENTRY(gentry),
-					    GTK_VALUE_STRING(*arg));
-		gnome_entry_load_history (GNOME_ENTRY(gentry));
-		break;
-	}
-	case ARG_BROWSE_DIALOG_TITLE:
-		gnome_file_entry_set_title (GNOME_FILE_ENTRY(self->_priv->fentry),
-					    GTK_VALUE_STRING(*arg));
-		break;
 	case ARG_DO_PREVIEW:
 		gnome_pixmap_entry_set_preview(self, GTK_VALUE_BOOL(*arg));
 		break;
@@ -212,17 +151,8 @@ pentry_get_arg (GtkObject *object,
 	self = GNOME_PIXMAP_ENTRY (object);
 
 	switch (arg_id) {
-	case ARG_GNOME_FILE_ENTRY:
-		GTK_VALUE_POINTER(*arg) =
-			gnome_pixmap_entry_gnome_file_entry(self);
-		break;
-	case ARG_GNOME_ENTRY:
-		GTK_VALUE_POINTER(*arg) =
-			gnome_pixmap_entry_gnome_entry(self);
-		break;
-	case ARG_GTK_ENTRY:
-		GTK_VALUE_POINTER(*arg) =
-			gnome_pixmap_entry_gtk_entry(self);
+	case ARG_DO_PREVIEW:
+		GTK_VALUE_BOOL(*arg) = self->_priv->do_preview;
 		break;
 	default:
 		break;
@@ -607,22 +537,19 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 	pentry->_priv->preview = NULL;
 	pentry->_priv->preview_sw = NULL;
 
-	pentry->_priv->fentry = gnome_file_entry_new (NULL,NULL);
-	gtk_signal_connect_after(GTK_OBJECT(pentry->_priv->fentry),"browse_clicked",
+	gtk_signal_connect_after(GTK_OBJECT(pentry),"browse_clicked",
 				 GTK_SIGNAL_FUNC(browse_clicked),
 				 pentry);
-	gtk_box_pack_end (GTK_BOX (pentry), pentry->_priv->fentry, FALSE, FALSE, 0);
-	gtk_widget_show (pentry->_priv->fentry);
 
 	p = gnome_program_locate_file (NULL /* program */,
 				       GNOME_FILE_DOMAIN_PIXMAP,
 				       ".",
 				       FALSE /* only_if_exists */,
 				       NULL /* ret_locations */);
-	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(pentry->_priv->fentry),p);
+	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(pentry),p);
 	g_free(p);
 
-	w = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(pentry->_priv->fentry));
+	w = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(pentry));
 	gtk_signal_connect(GTK_OBJECT(w),"changed",
 			   GTK_SIGNAL_FUNC(entry_changed),
 			   pentry);
@@ -647,9 +574,9 @@ gnome_pixmap_entry_construct (GnomePixmapEntry *pentry, const gchar *history_id,
 			      const gchar *browse_dialog_title, gboolean do_preview)
 {
 	GtkWidget *gentry;
-	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry->_priv->fentry));
+	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry));
 
-	gnome_file_entry_construct (GNOME_FILE_ENTRY (pentry->_priv->fentry),
+	gnome_file_entry_construct (GNOME_FILE_ENTRY (pentry),
 				    history_id,
 				    browse_dialog_title);
 
@@ -681,6 +608,7 @@ gnome_pixmap_entry_new (const gchar *history_id, const gchar *browse_dialog_titl
 	return GTK_WIDGET (pentry);
 }
 
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 /**
  * gnome_pixmap_entry_gnome_file_entry:
  * @pentry: Pointer to GnomePixmapEntry widget
@@ -696,7 +624,7 @@ gnome_pixmap_entry_gnome_file_entry (GnomePixmapEntry *pentry)
 	g_return_val_if_fail (pentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry), NULL);
 
-	return pentry->_priv->fentry;
+	return GTK_WIDGET (pentry);
 }
 
 /**
@@ -714,7 +642,7 @@ gnome_pixmap_entry_gnome_entry (GnomePixmapEntry *pentry)
 	g_return_val_if_fail (pentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry), NULL);
 
-	return gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry->_priv->fentry));
+	return gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry));
 }
 
 /**
@@ -733,8 +661,9 @@ gnome_pixmap_entry_gtk_entry (GnomePixmapEntry *pentry)
 	g_return_val_if_fail (GNOME_IS_PIXMAP_ENTRY (pentry), NULL);
 
 	return gnome_file_entry_gtk_entry
-		(GNOME_FILE_ENTRY (pentry->_priv->fentry));
+		(GNOME_FILE_ENTRY (pentry));
 }
+#endif /* GNOME_DISABLE_DEPRECATED_SOURCE */
 
 /**
  * gnome_pixmap_entry_scrolled_window:
@@ -800,7 +729,7 @@ gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
 				       subdir,
 				       FALSE /* only_if_exists */,
 				       NULL /* ret_locations */);
-	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(pentry->_priv->fentry),p);
+	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(pentry),p);
 	g_free(p);
 }
 
@@ -916,5 +845,5 @@ gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry)
 			return NULL;
 	}
 
-	return gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (pentry->_priv->fentry), TRUE);
+	return gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (pentry), TRUE);
 }

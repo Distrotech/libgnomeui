@@ -48,6 +48,7 @@ G_BEGIN_DECLS
 #define GNOME_IS_FILE_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_FILE_ENTRY))
 #define GNOME_FILE_ENTRY_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_FILE_ENTRY, GnomeFileEntryClass))
 
+/* Note:  This supports GtkEditable interface */
 
 typedef struct _GnomeFileEntry        GnomeFileEntry;
 typedef struct _GnomeFileEntryPrivate GnomeFileEntryPrivate;
@@ -77,7 +78,11 @@ struct _GnomeFileEntryClass {
 	  connect_after and modify object->fsw, or you could just
 	  create your own and set it to object->fsw in a normally
 	  connected handler, it has to be a gtk_file_selection though*/
-	void (* browse_clicked)(GnomeFileEntry *fentry);
+	void (* browse_clicked) (GnomeFileEntry *fentry);
+
+	/* Like in GtkEntry */
+	void (* changed) (GnomeFileEntry *fentry);
+	void (* activate) (GnomeFileEntry *fentry);
 };
 
 
