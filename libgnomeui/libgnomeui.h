@@ -73,4 +73,8 @@
 #include "libgnomeui/gnome-href.h"
 #include "libgnomeui/gnome-procbar.h"
 #include "libgnomeui/gnome-druid.h"
+#include "libgnomeui/gnome-druid-page.h"
+#include "libgnomeui/gnome-druid-page-start.h"
+#include "libgnomeui/gnome-druid-page-standard.h"
+#include "libgnomeui/gnome-druid-page-finish.h"
 #endif

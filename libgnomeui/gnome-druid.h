@@ -20,7 +20,7 @@
 #define __GNOME_DRUID_H__
 
 #include <gtk/gtk.h>
-#include "gnome-druid-page.h"
+#include "libgnomeui/gnome-druid-page.h"
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */

@@ -1,3 +1,9 @@
+1999-07-12  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* libgnomeui.h: Include rest of `gnome-druid-page*.h' headers.
+	* gnome-druid.h: Include "libgnome/gnome-druid-page.h" instead of
+	"gnome-druid-page.h". 
+
 Mon Jul 12 06:20:39 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-dentry-edit.c: add inline docs
