@@ -43,7 +43,8 @@
 
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-program.h>
-#include <libgnome/gnome-gconf.h>
+
+#include "gnome-gconf-ui.h"
 
 #include "gnome-entry.h"
 
@@ -334,7 +335,7 @@ gnome_entry_finalize (GObject *object)
 
 	gentry = GNOME_ENTRY (object);
 
-	gnome_gconf_lazy_init ();
+	gnomeui_gconf_lazy_init ();
 	client = gconf_client_get_default ();
 	key = build_gconf_key (gentry);
 	gconf_client_remove_dir (client, key, NULL);
@@ -401,7 +402,7 @@ gnome_entry_set_history_id (GnomeEntry *gentry, const gchar *history_id)
 
 	/* Register with gconf */
 	key = build_gconf_key (gentry);
-	gnome_gconf_lazy_init ();
+	gnomeui_gconf_lazy_init ();
 	client = gconf_client_get_default ();
 
 	gconf_client_add_dir (client,
@@ -634,7 +635,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 
 	key = build_gconf_key (gentry);
 
-	gnome_gconf_lazy_init ();
+	gnomeui_gconf_lazy_init ();
 	client = gconf_client_get_default ();
 	
 	gconf_items = gconf_client_get_list (client, key, GCONF_VALUE_STRING, NULL);
@@ -707,7 +708,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 		return;
 
 	key = build_gconf_key (gentry);
-	gnome_gconf_lazy_init ();
+	gnomeui_gconf_lazy_init ();
 	client = gconf_client_get_default ();
 
 	gconf_items = NULL;

@@ -40,6 +40,7 @@ EXTRA_HEADERS =
 
 noinst_HEADERS = \
 	gnome-i18nP.h			\
+	gnome-gconf-ui.h		\
 	libgnomeuiP.h
 
 libgnomeui_2_la_SOURCES = \
@@ -63,7 +64,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-entry.c			\
 	gnome-file-entry.c		\
 	gnome-gconf-ui.c		\
-	gnome-gconf-ui.h		\
 	gnome-href.c			\
 	gnome-ice.c			\
 	gnome-messagebox.c		\
@@ -208,10 +208,12 @@ EXTRA_DIST =					\
 	libgnomeui-2.0.pc.in
 
 libgnomeui_2_la_LDFLAGS = \
-	-version-info $(LIB_VERSION)
+	-version-info $(LIB_VERSION)		\
+	-export-symbols-regex "^[^_].*"
 
 libgnomeui_2_la_LIBADD = \
-	$(LIBGNOMEUI_LIBS) $(SM_LIBS)
+	$(LIBGNOMEUI_LIBS)			\
+	$(SM_LIBS)
 
 LDADD = \
 	libgnomeui-2.la

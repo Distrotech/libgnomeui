@@ -31,14 +31,17 @@
  */
 
 #include <libgnome/gnome-program.h>
+#include <libgnome/gnome-gconf.h>
 
 /* GNOME GConf UI module; basically what this builds on
    the GConf module from libgnome, adding a GUI error box,
    etc..
 */
-const GnomeModuleInfo * gnome_gconf_ui_module_info_get (void) G_GNUC_CONST;
 
-#endif
+#define gnome_gconf_ui_module_info_get _gnome_gconf_ui_module_info_get
+const GnomeModuleInfo * _gnome_gconf_ui_module_info_get	(void) G_GNUC_CONST;
 
+#define gnomeui_gconf_lazy_init _gnomeui_gconf_lazy_init
+void			_gnomeui_gconf_lazy_init	(void);
 
-
+#endif /* GNOME_GCONF_UI_H */

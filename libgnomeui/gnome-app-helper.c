@@ -56,13 +56,14 @@
  */
 
 #include <libgnome/gnome-i18n.h>
-#include <libgnome/gnome-gconf.h>
 #include <libgnome/gnome-program.h>
+#include <libgnome/gnome-gconf.h>
 #include <libgnome/gnome-init.h>
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
 #include "gnome-uidefs.h"
 #include "gnome-stock-icons.h"
+#include "gnome-gconf-ui.h"
 #include <libgnome/gnome-preferences.h>
 
 /* keys used for get/set_data */
@@ -458,7 +459,7 @@ setup_image_menu_item (GtkWidget *mi, GnomeUIPixmapType pixmap_type,
 
 
 	/* make sure that things are all ready for us */
-	gnome_gconf_lazy_init ();
+	gnomeui_gconf_lazy_init ();
         
         conf = gconf_client_get_default();
 
@@ -2696,7 +2697,7 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
         GConfClient *conf;
 
 	/* make sure that things are all ready for us */
-	gnome_gconf_lazy_init ();
+	gnomeui_gconf_lazy_init ();
 
         conf = gconf_client_get_default();
 

@@ -27,6 +27,7 @@
 #include <config.h>
 #include <stdlib.h>
 
+#define GCONF_ENABLE_INTERNALS
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
 
@@ -52,11 +53,11 @@ gnome_gconf_ui_pre_args_parse (GnomeProgram *app, GnomeModuleInfo *mod_info)
 }
 
 const GnomeModuleInfo *
-gnome_gconf_ui_module_info_get (void)
+_gnome_gconf_ui_module_info_get (void)
 {
 	static GnomeModuleInfo module_info = {
 		"gnome-gconf-ui",
-		/* FIXME: figure out how to snarfe this from gconf */"1.1.1",
+		gconf_version,
 		N_("GNOME GConf UI Support"),
 		NULL,
 		NULL /* instance init */,
@@ -171,3 +172,43 @@ gnome_default_gconf_client_error_handler (GConfClient                  *client,
         }
 }
 
+/**
+ * gnomeui_gconf_lazy_init:
+ *
+ * Description:  Internal libgnome/ui routine.  You never have
+ * to do this from your code.  But all places in libgnome/ui
+ * that need gconf should call this before calling any gconf
+ * calls.
+ **/
+void
+_gnomeui_gconf_lazy_init (void)
+{
+	/* Note this is the same as in libgnome/libgnome/gnome-gconf.c, keep
+	 * this in sync (it's called gnome_gconf_lazy_init) */
+	char *argv [] = { "dummy", NULL };
+        gchar *settings_dir;
+	GConfClient* client = NULL;
+	static gboolean initialized = FALSE;
+
+	if (initialized)
+		return;
+
+	initialized = TRUE;
+
+	gconf_init (1, argv, NULL);
+
+        client = gconf_client_get_default ();
+
+        gconf_client_add_dir (client,
+			      "/desktop/gnome",
+			      GCONF_CLIENT_PRELOAD_NONE, NULL);
+
+        settings_dir = gnome_gconf_get_gnome_libs_settings_relative ("");
+
+        gconf_client_add_dir (client,
+			      settings_dir,
+			      /* Possibly we should turn preload on for this */
+			      GCONF_CLIENT_PRELOAD_NONE,
+			      NULL);
+        g_free (settings_dir);
+}
