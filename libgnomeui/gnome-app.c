@@ -44,6 +44,9 @@
 #include <string.h>
 #include <gtk/gtk.h>
 
+/* This is for bonobo_dock_item_set_locked */
+#define BONOBO_UI_INTERNAL
+
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
 
