@@ -224,9 +224,7 @@ render (GnomeColorPicker *cp)
 				    0, 0,
 				    COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
 	}
-	g_print ("in render\n");
 	if (!GTK_WIDGET_IS_SENSITIVE (cp)) {
-		g_print ("******** STIPPLE ********\n");
 		gdk_gc_set_stipple (GTK_WIDGET(cp)->style->bg_gc[GTK_STATE_NORMAL], stipple);
 		gdk_gc_set_fill (GTK_WIDGET(cp)->style->bg_gc[GTK_STATE_NORMAL], GDK_STIPPLED);
 		gdk_draw_rectangle (cp->pixmap,
