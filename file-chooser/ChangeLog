@@ -1,3 +1,11 @@
+Tue Oct 21 15:15:20 2003  Owen Taylor  <otaylor@redhat.com>
+
+	* glib-interface-properties-0.5.patch README: Removed. Now in
+	GObject.
+
+	* prop-editor.c (properties_from_type): Adjust to changes
+	in interface property APIs.
+
 2003-10-20  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystem.c (gtk_file_info_free): Free the info itself.

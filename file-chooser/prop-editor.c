@@ -655,18 +655,18 @@ properties_from_type (GObject     *object,
   GtkWidget *sw;
   GtkWidget *vbox;
   GtkWidget *table;
-  GObjectClass *class;
   GParamSpec **specs;
   gint n_specs;
   int i;
 
   if (G_TYPE_IS_INTERFACE (type))
     {
-      specs = g_object_interface_list_properties (type, &n_specs);
+      gpointer vtable = g_type_default_interface_peek (type);
+      specs = g_object_interface_list_properties (vtable, &n_specs);
     }
   else
     {
-      class = G_OBJECT_CLASS (g_type_class_peek (type));
+      GObjectClass *class = G_OBJECT_CLASS (g_type_class_peek (type));
       specs = g_object_class_list_properties (class, &n_specs);
     }
         
