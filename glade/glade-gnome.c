@@ -573,14 +573,14 @@ static void
 druidpage_build_children(GladeXML *xml, GtkWidget *w,
 			 GladeWidgetInfo *info, const char *longname)
 {
-	GList *tmp;
 	GladeWidgetInfo *cinfo = info->children->data;
-	GtkBox *vbox= GTK_BOX(GNOME_DRUID_PAGE_STANDARD(w)->vbox);
+	GtkWidget *vbox= GNOME_DRUID_PAGE_STANDARD(w)->vbox;
 
 	glade_xml_set_common_params(xml, vbox, cinfo, longname);
 }
 
-static void pbox_change_page(GtkWidget *child, GtkNotebook *notebook)
+static void
+pbox_change_page(GtkWidget *child, GtkNotebook *notebook)
 {
 	gint page = gtk_notebook_page_num(notebook, child);
 
@@ -1466,7 +1466,6 @@ dockitem_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *wid;
 	GList *tmp;
-	char *name = NULL;
 	GnomeDockItemBehavior behaviour = GNOME_DOCK_ITEM_BEH_NORMAL;
 	GtkShadowType shadow_type = GTK_SHADOW_OUT;
 	
@@ -1485,9 +1484,7 @@ dockitem_new(GladeXML *xml, GladeWidgetInfo *info)
 					behaviour |= GNOME_DOCK_ITEM_BEH_LOCKED;
 			break;
 		case 'n':
-			if (!strcmp(attr->name, "name"))
-				name = attr->value;
-			else if (!strcmp(attr->name, "never_floating")) {
+			if (!strcmp(attr->name, "never_floating")) {
 				if (attr->value[0] == 'T')
 					behaviour |= GNOME_DOCK_ITEM_BEH_NEVER_FLOATING;
 			} else if (!strcmp(attr->name, "never_vertical")) {
@@ -1506,7 +1503,7 @@ dockitem_new(GladeXML *xml, GladeWidgetInfo *info)
 			break;
 		}
 	}
-	wid = gnome_dock_item_new(name, behaviour);
+	wid = gnome_dock_item_new(info->name, behaviour);
 	gnome_dock_item_set_shadow_type(GNOME_DOCK_ITEM(wid), shadow_type);
 	return wid;
 }
@@ -1594,7 +1591,6 @@ toolbar_new(GladeXML *xml, GladeWidgetInfo *info)
 	GtkWidget *tool;
 	GList *tmp;
 	GtkOrientation orient = GTK_ORIENTATION_HORIZONTAL;
-	GtkToolbarStyle style = GTK_TOOLBAR_BOTH;
 	GtkToolbarSpaceStyle spaces = GTK_TOOLBAR_SPACE_EMPTY;
 	int space_size = 5;
 	gboolean tooltips = TRUE;
@@ -1617,15 +1613,14 @@ toolbar_new(GladeXML *xml, GladeWidgetInfo *info)
 					attr->value);
 			break;
 		case 't':
-			if (!strcmp(attr->name, "type"))
-				style = glade_enum_from_string(
-					GTK_TYPE_TOOLBAR_STYLE, attr->value);
-			else if (!strcmp(attr->name, "tooltips"))
+			if (!strcmp(attr->name, "tooltips"))
 				tooltips = attr->value[0] == 'T';
 			break;
 		}
 	}
-	tool = gtk_toolbar_new(orient, style);
+	tool = gtk_toolbar_new(orient,
+			       gnome_preferences_get_toolbar_labels()?
+			       GTK_TOOLBAR_BOTH : GTK_TOOLBAR_ICONS);
 	gtk_toolbar_set_space_size(GTK_TOOLBAR(tool), space_size);
 	gtk_toolbar_set_space_style(GTK_TOOLBAR(tool), spaces);
 	gtk_toolbar_set_tooltips(GTK_TOOLBAR(tool), tooltips);
