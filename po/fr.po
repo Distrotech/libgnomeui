@@ -8,10 +8,10 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.5.90.1\n"
+"Project-Id-Version: libgnomeui 2.8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-13 18:30+0200\n"
-"PO-Revision-Date: 2004-03-07 15:08+0100\n"
+"POT-Creation-Date: 2004-10-10 15:20+0200\n"
+"PO-Revision-Date: 2004-10-10 15:15+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -37,33 +37,34 @@ msgstr "Astuce pour l'élément 2"
 #: file-chooser/gtkfilesystemgnomevfs.c:668
 #, c-format
 msgid "%s is not a folder"
-msgstr ""
+msgstr "%s n'est pas un dossier"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:875
-#, fuzzy
 msgid "Filesystem"
-msgstr "_Fichiers"
+msgstr "Système de fichiers"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1539
+#: file-chooser/gtkfilesystemgnomevfs.c:1556
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "L'enregistrement des signets a échoué (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "Impossible d'obtenir les informations pour le fichier « %s » : %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "L'ouverture du fichier « %s » a échoué : %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
+"Le chargement de l'image « %s » a échoué : raison inconnue, probablement un "
+"fichier d'image corrompu"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -175,6 +176,7 @@ msgstr "À propos de %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fichier"
 
@@ -232,6 +234,7 @@ msgid "_Game"
 msgstr "_Jeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aide"
 
@@ -422,11 +425,11 @@ msgstr "Configure l'application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "À _propos"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "À propos de cette application"
 
@@ -453,7 +456,7 @@ msgstr "Crée une nouvelle fenêtre"
 msgid "_Close This Window"
 msgstr "_Fermer cette fenêtre"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Ferme la fenêtre courante"
 
@@ -550,7 +553,7 @@ msgid "Text Only"
 msgstr "Texte seulement"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Utiliser la valeur par défaut du bureau (%s)"
 
@@ -653,9 +656,9 @@ msgid "Authentication Required"
 msgstr "Authentification requise"
 
 #: libgnomeui/gnome-authentication-manager.c:299
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "Vous devez vous connecter pour accéder à %s\n"
+msgstr "Vous devez vous connecter pour accéder à %s dans le domaine %s\n"
 
 #: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
@@ -840,29 +843,24 @@ msgstr "La couleur d'arrière-plan est définie"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "Couleur d'arrière-plan du logo"
+msgstr "Couleur d'arrière-plan du contenu"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "Couleur d'arrière-plan du logo"
+msgstr "Couleur d'arrière-plan du contenu"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr "Couleur d'arrère-plan en tant que GdkColor"
+msgstr "Couleur d'arrière-plan en tant que GdkColor du contenu"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "Couleur d'arrère-plan définie"
+msgstr "Couleur d'arrière-plan du contenu définie"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "La couleur d'arrière-plan est définie"
+msgstr "La couleur d'arrière-plan du contenu est définie"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -1305,11 +1303,11 @@ msgstr "_Mot de passe :"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Se connecter _anonymement"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "Se connecter en tant qu'_utilisateur :"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
@@ -1423,7 +1421,6 @@ msgstr ""
 "Plusieurs erreurs de segmentation sont survenues ; impossible d'afficher la "
 "boîte de dialogue d'erreur\n"
 
-#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
@@ -1484,8 +1481,6 @@ msgstr "_Informer les développeurs"
 msgid "_Debug"
 msgstr "_Débogage"
 
-#~ msgid " domain %s"
-#~ msgstr " domaine %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "Quitter le test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Quitter le test"
