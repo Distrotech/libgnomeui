@@ -221,6 +221,8 @@ static gboolean     gtk_file_folder_gnome_vfs_list_children (GtkFileFolder      
 							     GSList            **children,
 							     GError            **error);
 
+static gboolean     gtk_file_folder_gnome_vfs_is_finished_loading (GtkFileFolder *folder);
+
 static GtkFileInfo *           info_from_vfs_info (const gchar      *uri,
 						   GnomeVFSFileInfo *vfs_info,
 						   GtkFileInfoType   types);
@@ -1760,6 +1762,7 @@ gtk_file_folder_gnome_vfs_iface_init (GtkFileFolderIface *iface)
 {
   iface->get_info = gtk_file_folder_gnome_vfs_get_info;
   iface->list_children = gtk_file_folder_gnome_vfs_list_children;
+  iface->is_finished_loading = gtk_file_folder_gnome_vfs_is_finished_loading;
 }
 
 static void
@@ -1905,6 +1908,14 @@ gtk_file_folder_gnome_vfs_list_children (GtkFileFolder  *folder,
   *children = g_slist_reverse (*children);
 
   return TRUE;
+}
+
+static gboolean
+gtk_file_folder_gnome_vfs_is_finished_loading (GtkFileFolder *folder)
+{
+  GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
+
+  return (folder_vfs->async_handle == NULL);
 }
 
 
@@ -2114,7 +2125,11 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
     }
 
   if (result != GNOME_VFS_OK)
-    folder_vfs->async_handle = NULL;
+    {
+      folder_vfs->async_handle = NULL;
+
+      g_signal_emit_by_name (folder_vfs, "finished-loading");
+    }
 }
 
 static void

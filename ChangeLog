@@ -1,3 +1,12 @@
+2004-03-29  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_folder_gnome_vfs_iface_init): Add the implementation of
+	::is_finished_loading().
+	(gtk_file_folder_gnome_vfs_is_finished_loading): Implement.
+	(directory_load_callback): Emit the "finished-loading" signal when
+	we are done.
+
 2004-03-24  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-authentication-manager.c (present_authentication_dialog_nonblocking):
