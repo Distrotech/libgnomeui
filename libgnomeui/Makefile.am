@@ -218,7 +218,6 @@ gnome_headers = \
 	gnome-selector.h		\
 	gnome-stock.h			\
 	gnome-stock-ids.h		\
-	gnome-textfu.h			\
 	gnome-types.h			\
 	gnome-uidefs.h			\
 	gnome-unit-spinner.h		\
