@@ -5,24 +5,26 @@
 # simos: 159 messages, 22Apr2002, initial translation.
 # kostas: 298 messages, 22Apr2002, initial translation.
 # kostas: 298 messages, 05Jan2003, reviewed and updated translation for Gnome 2.1x.
-# kostas: 305 messages,10Aug2003, updated translation for Gnome 2.4x
-# Nikos: 304 messages, 26Jan2004, fixes for 2.6x
-# Simos Xenitellis <simos74@gmx.net>, 2002,2003.
-# Nikos Charonitakis <frolix68@yahoo.gr>, 2004.
-# Kostas Papadimas <pkst@gnome.org>, 2002,2003,2004.
+# kostas: 305 messages,10Aug2003, updated translation for Gnome 2.4.x
+# Nikos: 304 messages, 26Jan2004, fixes for 2.6.x
+# Nikos: 325 messages, 25Aug2004, updated translation for 2.8.x
+#
+# Simos Xenitellis <simos74@gmx.net>, 2002, 2003.
+# Kostas Papadimas <pkst@gnome.org>, 2002, 2003, 2004.
+# Nikos Charonitakis <charosn@her.forthnet.gr>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-16 13:40+0200\n"
-"PO-Revision-Date: 2004-02-23 18:08+0200\n"
-"Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
-"Language-Team: Greek <nls@tux.hellug.gr>\n"
+"POT-Creation-Date: 2004-08-25 16:59-0300\n"
+"PO-Revision-Date: 2004-08-25 17:23-0300\n"
+"Last-Translator: Nikos Charonitakis <charosn@her.forthnet.gr>\n"
+"Language-Team:  <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
+"X-Generator: KBabel 1.3.1\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -40,37 +42,35 @@ msgstr "Child Item 2"
 msgid "Hint for item 2"
 msgstr "Hint for item 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:652
+#: file-chooser/gtkfilesystemgnomevfs.c:653
 #, c-format
 msgid "%s is not a folder"
-msgstr ""
+msgstr "δεν είναι φάκελος το %s"
 
 #
-#: file-chooser/gtkfilesystemgnomevfs.c:859
-#, fuzzy
+#: file-chooser/gtkfilesystemgnomevfs.c:860
 msgid "Filesystem"
-msgstr "Αρ_χεία"
+msgstr "Σύστημα Αρχείων"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1523
+#: file-chooser/gtkfilesystemgnomevfs.c:1524
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "Αποτυχία αποθήκευσης σελιδοδείκτη (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "Αδυναμία λήψης πληροφορίας για το αρχείο '%s': %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "Αποτυχία ανοίγματος του αρχείου '%s': %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr "Αποτυχία φόρτωσης εικόνας '%s': άγνωστη αιτία, πιθανό να είναι αλλοιωμένο το αρχείο της εικόνας"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
@@ -164,8 +164,7 @@ msgid "Translator credits"
 msgstr "Μνεία μεταφραστών"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Μνεία στους μεταφραστές. Αυτό το αλφαριθμητικό θα πρέπει να σημειωθεί ως "
 "μεταφράσιμο."
@@ -203,6 +202,7 @@ msgstr "Περί %s"
 #
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Αρχείο"
 
@@ -334,6 +334,7 @@ msgstr "_Παιχνίδι"
 # #-#-#-#-#  gnomemeeting-el.po (gnomemeeting 0.12.2)  #-#-#-#-#
 #
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Βοήθεια"
 
@@ -452,7 +453,7 @@ msgstr "Εκτύπωση του τρέχοντος αρχείου"
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "Εκτύπωση _Ρυθμίσεων..."
+msgstr " _Ρυθμίση Εκτύπωσης..."
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 # #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
@@ -727,7 +728,7 @@ msgstr "Ρύθμιση της εφαρμογής"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "Π_ερί"
 
@@ -738,7 +739,7 @@ msgstr "Π_ερί"
 #
 # #-#-#-#-#  mrproject-el.po (mrproject 0.5)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Περί αυτής της εφαρμογής"
 
@@ -764,7 +765,7 @@ msgstr "Επιλογή όλων"
 #.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
-msgstr "Δημιουργία _Νέου Παραθύρου"
+msgstr "Δημιουργία Νέου _Παραθύρου"
 
 # #-#-#-#-#  galeon-el.po (galeon 1.0)  #-#-#-#-#
 #
@@ -782,7 +783,7 @@ msgstr "_Κλείσιμο Αυτού Του Παραθύρου"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Κλείσιμο του τρέχοντος παραθύρου"
 
@@ -856,7 +857,7 @@ msgstr "Λήψη υπόδειξης για την επόμενη κίνηση"
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
-msgstr "_Βαθμολογία..."
+msgstr "_Βαθμολογίες..."
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 # #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
@@ -868,7 +869,7 @@ msgstr "Προβολή πίνακα βαθμολογίας"
 #
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
-msgstr "_Τέλος παιχνιδιού"
+msgstr "_Τερματισμός παιχνιδιού"
 
 #
 #: libgnomeui/gnome-app-helper.c:285
@@ -909,9 +910,9 @@ msgid "Text Only"
 msgstr "Μόνο Κείμενο"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Χρήση προεπιλεγμένης επιφάνειας εργασίας (%s)"
+msgstr "Χρήση Προεπιλεγμένης Επιφάνειας Εργασίας (%s)"
 
 #
 #: libgnomeui/gnome-app-util.c:99
@@ -1022,11 +1023,11 @@ msgstr "Διαδραστικότητα"
 msgid "Level of user activity required."
 msgstr "Επίπεδο δραστηριότητας χρήστη που απαιτείται."
 
-#: libgnomeui/gnome-authentication-manager.c:62
+#: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Ο διαμεσολαβητής σας HTTP απαιτεί από εσάς να συνδεθείτε.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:63
+#: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -1035,25 +1036,26 @@ msgstr ""
 "Θα πρέπει να συνδεθείτε για να έχετε πρόσβαση στο \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:66
+#: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "Ο κωδικός σας θα αποσταλεί χωρίς κρυπτογράφηση."
 
-#: libgnomeui/gnome-authentication-manager.c:67
+#: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "Ο κωδικός σας θα αποσταλεί με κρυπτογράφηση."
 
-#: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Απαιτείται πιστοποίηση"
 
-#: libgnomeui/gnome-authentication-manager.c:288
-#, fuzzy, c-format
+#: libgnomeui/gnome-authentication-manager.c:299
+#, c-format
+#, fuzzy
 msgid "You must log in to access %s domain %s\n"
-msgstr "Θα πρέπει να συνδεθείτε για να έχετε πρόσβαση στο %s\n"
+msgstr "Θα πρέπει να συνδεθείτε για να έχετε πρόσβαση στον τομέα %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Θα πρέπει να συνδεθείτε για να έχετε πρόσβαση στο %s\n"
@@ -1092,7 +1094,7 @@ msgstr "Διαχείριση συνεδρίας"
 #
 #: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
-msgstr "Ακύρωση Τερματισμού Συνεδρίας"
+msgstr "Ακύρωση Αποσύνδεσης"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
@@ -1296,29 +1298,24 @@ msgstr "Το χρώμα παρασκηνίου καθορίσθηκε"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "Χρώμα Παρασκηνίου Λογοτύπου"
+msgstr "Χρώμα Παρασκηνίου Περιεχομένων"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "Χρώμα Παρασκηνίου λογοτύπου"
+msgstr "Χρώμα παρασκηνίου Περιεχομένων"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr "Χρώμα παρασκηνίου ως GdkColor"
+msgstr "Χρώμα παρασκηνίου περιεχομένων ως GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "Ορισμός χρώματος παρασκηνίου"
+msgstr "Ορισμός χρώματος παρασκηνίου περιεχομένων"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "Το χρώμα παρασκηνίου καθορίσθηκε"
+msgstr "Το χρώμα παρασκηνίου περιεχομένων καθορίσθηκε"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -1363,7 +1360,7 @@ msgstr "id ιστορικού"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
-msgstr "Καταχώρηση GTK "
+msgstr "Καταχώρηση GTK"
 
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
@@ -1595,8 +1592,7 @@ msgstr "Μέγεθος γραμματοσειράς για την ετικέτα
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr ""
-"Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
+msgstr "Μέγεθος γραμματοσειράς για την ετικέτα σε κατάσταση πληροφ. γραμματοσειράς"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -1622,7 +1618,7 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"Η εφαρμογή  \"%s\" προσπάθησε να αλλάξει ένα μέρος των ρυθμίσεων, στις "
+"Η εφαρμογή  \"%s\" προσπάθησε να αλλάξει ένα μέρος των ρυθμίσεων σας, στις "
 "οποίες δεν επιτρέπονται αλλαγές από τον διαχειριστή του συστήματος ή από τον "
 "διανομέα του λειτουργικού συστήματος. Κάποιες από τις ρυθμίσεις που "
 "επιλέξατε δε θα πραγματοποιηθούν, ή θα επανέλθουν στην προηγούμενή τους "
@@ -1742,7 +1738,7 @@ msgstr ""
 #
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
-msgstr "Δίχως Εικονίδιο"
+msgstr "Χωρίς Εικονίδιο"
 
 #: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
@@ -1894,11 +1890,11 @@ msgstr "_Κωδικός:"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "_Ανώνυμη σύνδεση"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "Σύνδεση ως _χρήστης:"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
@@ -1919,7 +1915,7 @@ msgstr "Αν η καταχώρηση pixmap θα έχει προεπισκόπη
 #
 #: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
-msgstr "Δίχως Εικόνα"
+msgstr "Χωρίς Εικόνα"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 # #-#-#-#-#  bombermaze-el.po (bombermaze 1.0)  #-#-#-#-#
@@ -2090,8 +2086,7 @@ msgstr "Βιβλιοθήκη GNOME GUI"
 #: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
+msgstr "Πολλαπλά σφάλματα κατάτμησης· είναι αδύνατη η εμφάνιση διαλόγου σφάλματος\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -2160,9 +2155,6 @@ msgstr "Ενημέ_ρωση των προγραμματιστών"
 msgid "_Debug"
 msgstr "Εκσ_φαλμάτωση"
 
-#~ msgid " domain %s"
-#~ msgstr "τομέας %s"
-
 # #-#-#-#-#  bonobo-el.po (bonobo 0.34)  #-#-#-#-#
 #
 # #-#-#-#-#  galeon-el.po (galeon 1.0)  #-#-#-#-#
@@ -2173,9 +2165,7 @@ msgstr "Εκσ_φαλμάτωση"
 #
 # #-#-#-#-#  achtung-el.po (achtung 0.99.0)  #-#-#-#-#
 #
-#~ msgid "Exit the test"
-#~ msgstr "Έξοδος από τη δοκιμή"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Έξοδος από τη δοκιμή"
 
-#
-#~ msgid "Color Selector"
-#~ msgstr "Επιλογέας Χρώματος"
