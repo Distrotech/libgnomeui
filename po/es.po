@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui cvs\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
+"POT-Creation-Date: 2003-01-29 12:15+0100\n"
 "PO-Revision-Date: 2003-01-07 09:56GMT\n"
 "Last-Translator: Juan Manuel García Molina <juanma_gm@wanadoo.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
@@ -107,8 +107,7 @@ msgid "Translator credits"
 msgstr "Créditos de los traductores"
 
 #: libgnomeui/gnome-about.c:406
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos de los traductores. Esta cadena debería estar marcada como "
 "traducible"
@@ -479,8 +478,7 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
-"Para obtener más información visite la página «Error en Aplicaciones GNOME»"
+msgstr "Para obtener más información visite la página «Error en Aplicaciones GNOME»"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -528,6 +526,7 @@ msgstr "Consejo para el elemento 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Archivo"
 
@@ -585,6 +584,7 @@ msgid "_Game"
 msgstr "_Juego"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_yuda"
 
@@ -775,11 +775,11 @@ msgstr "Configura la aplicación"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Acerca de"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Acerca de esta aplicación"
 
@@ -806,7 +806,7 @@ msgstr "Crear una ventana nueva"
 msgid "_Close This Window"
 msgstr "_Cerrar esta ventana"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Cerrar la ventana actual"
 
@@ -1065,7 +1065,7 @@ msgstr "Ruta al archivo"
 
 #: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
-msgstr "_Examinar..."
+msgstr "E_xaminar..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
@@ -1125,8 +1125,7 @@ msgstr "Usar tipografías en etiquetas"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr ""
-"Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1340,5 +1339,7 @@ msgstr "%a, %d de %b de %Y, %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Salir del test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Salir del test"
+
