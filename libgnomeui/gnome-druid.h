@@ -60,6 +60,10 @@ struct _GnomeDruidClass
 	
 	void     (*cancel)	(GnomeDruid *druid);
 	void     (*help)	(GnomeDruid *druid);
+
+	/* Padding for possible expansion */
+	gpointer padding1;
+	gpointer padding2;
 };
 
 

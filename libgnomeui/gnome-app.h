@@ -102,6 +102,10 @@ struct _GnomeApp {
 
 struct _GnomeAppClass {
 	GtkWindowClass parent_class;
+
+	/* Padding for possible expansion */
+	gpointer padding1;
+	gpointer padding2;
 };
 
 

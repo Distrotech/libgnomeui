@@ -49,6 +49,10 @@ struct _GnomeAbout {
 
 struct _GnomeAboutClass {
 	GtkDialogClass parent_class;
+
+	/* Padding for possible expansion */
+	gpointer padding1;
+	gpointer padding2;
 };
 
 GType gnome_about_get_type (void) G_GNUC_CONST;

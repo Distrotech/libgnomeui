@@ -50,6 +50,10 @@ struct _GnomeHRef {
 
 struct _GnomeHRefClass {
   GtkButtonClass parent_class;
+
+  /* Padding for possible expansion */
+  gpointer padding1;
+  gpointer padding2;
 };
 
 /*

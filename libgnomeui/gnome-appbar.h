@@ -68,6 +68,10 @@ struct _GnomeAppBarClass
   void (* user_response) (GnomeAppBar * ab);
   /* Emitted when the prompt is cleared. */
   void (* clear_prompt)  (GnomeAppBar * ab);
+
+  /* Padding for possible expansion */
+  gpointer padding1;
+  gpointer padding2;
 };
 
 #define GNOME_APPBAR_INTERACTIVE(ab) ((ab) ? (ab)->interactive : FALSE)

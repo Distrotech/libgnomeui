@@ -74,6 +74,10 @@ struct _GnomeScores
 struct _GnomeScoresClass
 {
   GtkDialogClass parent_class;
+
+  /* Padding for possible expansion */
+  gpointer padding1;
+  gpointer padding2;
 };
 
 GType      gnome_scores_get_type (void) G_GNUC_CONST;

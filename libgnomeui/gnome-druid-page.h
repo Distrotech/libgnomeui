@@ -64,6 +64,10 @@ struct _GnomeDruidPageClass
 	/* virtual */
 	void	 (*set_sidebar_shown) (GnomeDruidPage *druid_page,
 				       gboolean sidebar_shown);
+
+	/* Padding for possible expansion */
+	gpointer padding1;
+	gpointer padding2;
 };
 
 

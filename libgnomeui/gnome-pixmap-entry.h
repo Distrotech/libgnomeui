@@ -67,6 +67,10 @@ struct _GnomePixmapEntry {
 
 struct _GnomePixmapEntryClass {
 	GnomeFileEntryClass parent_class;
+
+	/* Padding for possible expansion */
+	gpointer padding1;
+	gpointer padding2;
 };
 
 

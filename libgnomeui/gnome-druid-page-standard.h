@@ -61,6 +61,10 @@ struct _GnomeDruidPageStandard
 struct _GnomeDruidPageStandardClass
 {
 	GnomeDruidPageClass parent_class;
+
+	/* Padding for possible expansion */
+	gpointer padding1;
+	gpointer padding2;
 };
 
 #ifndef GNOME_DISABLE_DEPRECATED

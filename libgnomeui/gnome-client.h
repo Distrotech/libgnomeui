@@ -180,6 +180,10 @@ struct _GnomeClientClass
   void (* connect)            (GnomeClient        *client,
 			       gint                restarted);
   void (* disconnect)         (GnomeClient        *client);
+
+  /* Padding for possible expansion */
+  gpointer padding1;
+  gpointer padding2;
 };
 
 #define GNOME_CLIENT_MODULE gnome_client_module_info_get()

@@ -50,6 +50,10 @@ struct _GnomeIconSelection {
 
 struct _GnomeIconSelectionClass {
   GtkVBoxClass parent_class;
+
+  /* Padding for possible expansion */
+  gpointer padding1;
+  gpointer padding2;
 };
 
 GType gnome_icon_selection_get_type     (void) G_GNUC_CONST;

@@ -70,6 +70,10 @@ struct _GnomeIconEntryClass {
 
 	void (*changed) (GnomeIconEntry *ientry);
 	void (*browse) (GnomeIconEntry *ientry);
+
+	/* Padding for possible expansion */
+	gpointer padding1;
+	gpointer padding2;
 };
 
 

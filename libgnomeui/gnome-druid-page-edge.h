@@ -76,6 +76,10 @@ struct _GnomeDruidPageEdge
 struct _GnomeDruidPageEdgeClass
 {
 	GnomeDruidPageClass parent_class;
+
+	/* Padding for possible expansion */
+	gpointer padding1;
+	gpointer padding2;
 };
 
 GType      gnome_druid_page_edge_get_type          (void) G_GNUC_CONST;

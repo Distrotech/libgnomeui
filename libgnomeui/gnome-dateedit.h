@@ -62,6 +62,10 @@ struct _GnomeDateEditClass {
 
 	void (*date_changed) (GnomeDateEdit *gde);
 	void (*time_changed) (GnomeDateEdit *gde);
+
+	/* Padding for possible expansion */
+	gpointer padding1;
+	gpointer padding2;
 };
 
 GType      gnome_date_edit_get_type        (void) G_GNUC_CONST;

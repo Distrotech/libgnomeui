@@ -76,6 +76,10 @@ struct _GnomeIconListClass {
 	void     (*select_icon)    (GnomeIconList *gil, gint num, GdkEvent *event);
 	void     (*unselect_icon)  (GnomeIconList *gil, gint num, GdkEvent *event);
 	gboolean (*text_changed)   (GnomeIconList *gil, gint num, const char *new_text);
+
+	/* Padding for possible expansion */
+	gpointer padding1;
+	gpointer padding2;
 };
 
 enum {
