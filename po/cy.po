@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-30 16:28+0200\n"
-"PO-Revision-Date: 2003-08-14 21:27+0100\n"
+"POT-Creation-Date: 2004-09-12 04:24+0100\n"
+"PO-Revision-Date: 2004-09-12 04:31+0100\n"
 "Last-Translator: Dafydd Harries <daf@muse.19inch.net>\n"
 "Language-Team: Cymraeg <gnome-cy@pengwyn.linux.org.uk>\n"
 "MIME-Version: 1.0\n"
@@ -32,36 +32,37 @@ msgstr "Eitem Plentyn 1"
 msgid "Hint for item 2"
 msgstr "Awgrymiadau ynghylch eitem 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:653
+#: file-chooser/gtkfilesystemgnomevfs.c:668
 #, c-format
 msgid "%s is not a folder"
-msgstr ""
+msgstr "Nid yw %s yn blygell"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:860
-#, fuzzy
+#: file-chooser/gtkfilesystemgnomevfs.c:875
 msgid "Filesystem"
-msgstr "_Ffeiliau"
+msgstr "System Ffeiliau"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1524
+#: file-chooser/gtkfilesystemgnomevfs.c:1539
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "Methodd arbed llyfrnodau (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "Methwyd cyrchu gwybodaeth ar gyfer ffeil '%s': %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "Methwyd agor ffeil '%s': %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
+"Methwyd llwytho delwedd '%s': rheswm anhysbys, ffeil dewlwedd llygredig, "
+"mae'n debyg"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -171,6 +172,7 @@ msgstr "Ynghylch %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ffeil"
 
@@ -228,6 +230,7 @@ msgid "_Game"
 msgstr "_Gêm"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Cymorth"
 
@@ -418,11 +421,11 @@ msgstr "Cyflunio'r rhaglen"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Ynghylch"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Ynghylch y rhaglen hwn"
 
@@ -449,7 +452,7 @@ msgstr "Creu ffenest newydd"
 msgid "_Close This Window"
 msgstr "_Cau'r Ffenest Hwn"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Cau y ffenest yma"
 
@@ -546,9 +549,9 @@ msgid "Text Only"
 msgstr "Testun yn Unig"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Defnyddio rhagosodiad y penbwrdd (%s)"
+msgstr "Defnyddio Rhagosodiad y Penbwrdd (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -650,9 +653,9 @@ msgid "Authentication Required"
 msgstr "Mynnir Dilyisad"
 
 #: libgnomeui/gnome-authentication-manager.c:299
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "Mae'n rhaid i chi fewngofnodi er mwyn cyrchu %s.\n"
+msgstr "Mae'n rhaid i chi fewngofnodi er mwyn cyrchu %s parth %s.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
@@ -838,29 +841,24 @@ msgstr "A ydy lliw y cefndir wedi ei osod"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "Lliw Cefndir y Logo"
+msgstr "Lliw Cefndir y Cynnwys"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "Lliw Cefndir y Logo"
+msgstr "Lliw Cefndir y cynnwys"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr "Lliw'r cefndir fel GdkColor"
+msgstr "Lliw Cefndir y Cynnwys fel GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "Gosodwyd lliw cefndir"
+msgstr "Lliw Cefndir Cynnwys wedi gosod"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "A ydy lliw y cefndir wedi ei osod"
+msgstr "A ydy Lliw y Cefndir y Cynnwys wedi ei osod"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -877,7 +875,7 @@ msgstr "Lliw Cefndir y Logo fel GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
-msgstr "Gosodwyd Lliw Cefndir y Logo"
+msgstr "Lliw Cefndir y Logo wedi ei osod"
 
 #: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
@@ -1297,11 +1295,11 @@ msgstr "_Cyfrinair:"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Cysylltu'n _ddienw"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "Cysylltu fel d_efnyddiwr:"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
@@ -1472,11 +1470,12 @@ msgstr "_Cysylltu a'r Datblygwyr"
 msgid "_Debug"
 msgstr "_Datnamu"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Gadael y prawf"
+
 #~ msgid " domain %s"
 #~ msgstr " parth %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "Gadael y prawf"
 
 #~ msgid "Color Selector"
 #~ msgstr "Dewisydd Lliw"
