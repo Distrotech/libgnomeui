@@ -1,3 +1,10 @@
+1999-01-25  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-propertybox.h, gnome-propertybox.c: Rename 
+	gnome_property_box_set_state() to
+	gnome_property_box_set_modified();
+	leave old name for compatibility.
+
 1999-01-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-popup-menu.c (popup_connect_func): Do not test for the

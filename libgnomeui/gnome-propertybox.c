@@ -312,14 +312,15 @@ gnome_property_box_changed (GnomePropertyBox *property_box)
 }
 
 /**
- * gnome_property_box_set_state:
+ * gnome_property_box_set_modified:
  * @property_box: The GnomePropertyBox that contains the changed data
  * @state:        The state.  TRUE means modified, FALSE means unmodified.
  *
- * This sets the state of the GnomePropertyBox to the value in @state.
+ * This sets the modified flag of the GnomePropertyBox to the value in @state.
+ * Affects whether the OK/Apply buttons are sensitive.
  */
 void
-gnome_property_box_set_state (GnomePropertyBox *property_box, gboolean state)
+gnome_property_box_set_modified (GnomePropertyBox *property_box, gboolean state)
 {
 	GtkWidget *page;
 
@@ -334,6 +335,16 @@ gnome_property_box_set_state (GnomePropertyBox *property_box, gboolean state)
 			    GINT_TO_POINTER(state ? 1 : 0));
 
 	set_sensitive (property_box, state);
+}
+
+/* Deprecated */
+void
+gnome_property_box_set_state (GnomePropertyBox *property_box, gboolean state)
+{
+#ifdef GNOME_ENABLE_DEBUG
+        g_warning("s/gnome_property_box_set_state/gnome_property_box_set_modified/g");
+#endif
+        gnome_property_box_set_modified (property_box, state);
 }
 
 static void

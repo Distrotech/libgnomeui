@@ -63,12 +63,18 @@ GtkWidget *gnome_property_box_new        (void);
  * the notebook.
  */
 void      gnome_property_box_changed     (GnomePropertyBox *property_box);
-void      gnome_property_box_set_state   (GnomePropertyBox *property_box,
+
+void      gnome_property_box_set_modified(GnomePropertyBox *property_box,
 					  gboolean state);
+
 
 gint	  gnome_property_box_append_page (GnomePropertyBox *property_box,
 					  GtkWidget *child,
 					  GtkWidget *tab_label);
+
+/* Deprecated, use set_modified */
+void      gnome_property_box_set_state   (GnomePropertyBox *property_box,
+					  gboolean state);
 
 END_GNOME_DECLS
 
