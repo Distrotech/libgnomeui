@@ -139,6 +139,7 @@ static GtkEnumValue _gnome_win_hints_values[] = {
   { WIN_HINTS_SKIP_WINLIST, "WIN_HINTS_SKIP_WINLIST", "skip-winlist" },
   { WIN_HINTS_SKIP_TASKBAR, "WIN_HINTS_SKIP_TASKBAR", "skip-taskbar" },
   { WIN_HINTS_GROUP_TRANSIENT, "WIN_HINTS_GROUP_TRANSIENT", "group-transient" },
+  { WIN_HINTS_FOCUS_ON_CLICK, "WIN_HINTS_FOCUS_ON_CLICK", "focus-on-click" },
   { 0, NULL, NULL }
 };
 static GtkEnumValue _gnome_win_app_state_values[] = {

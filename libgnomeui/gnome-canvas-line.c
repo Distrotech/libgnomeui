@@ -149,7 +149,6 @@ gnome_canvas_line_init (GnomeCanvasLine *line)
 	line->cap = GDK_CAP_BUTT;
 	line->join = GDK_JOIN_MITER;
 	line->line_style = GDK_LINE_SOLID;
-	line->width_pixels = TRUE;
 	line->shape_a = 0.0;
 	line->shape_b = 0.0;
 	line->shape_c = 0.0;
