@@ -17,7 +17,6 @@ libgnomeui_la_SOURCES = \
 	gnome-pixmap.c			\
 	gnome-properties.c		\
 	gnome-session.c			\
-	gnome-toolbar.c			\
 	gtk-clock.c
 
 libgnomeuiinclude_HEADERS = 		\
@@ -29,7 +28,6 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-messagebox.h		\
 	gnome-properties.h     		\
 	gnome-pixmap.h			\
-	gnome-toolbar.h			\
 	gnome-session.h			\
 	gtk-clock.h			\
 	libgnomeui.h
