@@ -244,7 +244,7 @@ gnome_property_box_changed (GnomePropertyBox *property_box)
 {
 	GtkWidget *page;
 
-	page = GTK_NOTEBOOK (property_box->notebook)->cur_page;
+	page = GTK_NOTEBOOK (property_box->notebook)->cur_page->child;
 	g_assert (page != NULL);
 	
 	gtk_object_set_data(GTK_OBJECT(page),
@@ -268,11 +268,12 @@ global_apply (GnomePropertyBox *property_box)
 		/* FIXME: there should be a way to report an error
 		   during Apply.  That way we could prevent closing
 		   the window if there were a problem.  */
-		if (gtk_object_get_data(GTK_OBJECT(list->data),
+		GtkNotebookPage *page = list->data;
+		if (gtk_object_get_data(GTK_OBJECT(page->child),
 					GNOME_PROPERTY_BOX_DIRTY)) {
 			gtk_signal_emit (GTK_OBJECT (property_box),
 					 property_box_signals[APPLY], n);
-			gtk_object_set_data(GTK_OBJECT(list->data),
+			gtk_object_set_data(GTK_OBJECT(page->child),
 					    GNOME_PROPERTY_BOX_DIRTY,
 					    GINT_TO_POINTER(0));
 		}

@@ -1,3 +1,8 @@
+Sun Jul 19 23:07:38 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-propertybox.c: fix the {set,get}_data calls, they now use
+	  the proper object
+
 1998-07-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_item_construct
