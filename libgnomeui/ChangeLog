@@ -1,3 +1,7 @@
+1998-11-30  Jonathan Blandford  <jrb@aware-of-vacuity.labs.redhat.com>
+
+	* gnome-popup-help.c (gnome_popup_help_place_window): quick buglet fix
+
 1998-11-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.h: Removed obsolete comment about
