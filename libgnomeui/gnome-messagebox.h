@@ -26,9 +26,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_MESSAGE_BOX(obj)        GTK_CHECK_CAST (obj, gnome_message_box_get_type (), GnomeMessageBox)
-#define GNOME_MESSAGE_BOX_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_message_box_get_type (), GnomeMessageBoxClass)
-#define GNOME_IS_MESSAGE_BOX(obj)       GTK_CHECK_TYPE (obj, gnome_message_box_get_type ())
+#define GNOME_TYPE_MESSAGE_BOX            (gnome_message_box_get_type ())
+#define GNOME_MESSAGE_BOX(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_MESSAGE_BOX, GnomeMessageBox))
+#define GNOME_MESSAGE_BOX_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_MESSAGE_BOX, GnomeMessageBoxClass))
+#define GNOME_IS_MESSAGE_BOX(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_MESSAGE_BOX))
+#define GNOME_IS_MESSAGE_BOX_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_MESSAGE_BOX))
 
 
 #define GNOME_MESSAGE_BOX_INFO      "info"

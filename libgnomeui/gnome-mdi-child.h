@@ -36,9 +36,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_MDI_CHILD(obj)          GTK_CHECK_CAST (obj, gnome_mdi_child_get_type (), GnomeMDIChild)
-#define GNOME_MDI_CHILD_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_mdi_child_get_type (), GnomeMDIChildClass)
-#define GNOME_IS_MDI_CHILD(obj)       GTK_CHECK_TYPE (obj, gnome_mdi_child_get_type ())
+#define GNOME_TYPE_MDI_CHILD            (gnome_mdi_child_get_type ())
+#define GNOME_MDI_CHILD(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_MDI_CHILD, GnomeMDIChild))
+#define GNOME_MDI_CHILD_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_MDI_CHILD, GnomeMDIChildClass))
+#define GNOME_IS_MDI_CHILD(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_MDI_CHILD))
+#define GNOME_IS_MDI_CHILD_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_MDI_CHILD))
 
 typedef struct _GnomeMDIChild       GnomeMDIChild;
 typedef struct _GnomeMDIChildClass  GnomeMDIChildClass;

@@ -28,11 +28,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_TYPE_DRUID_PAGE			(gnome_druid_page_get_type ())
-#define GNOME_DRUID_PAGE(obj)			(GTK_CHECK_CAST ((obj), GNOME_TYPE_DRUID_PAGE, GnomeDruidPage))
-#define GNOME_DRUID_PAGE_CLASS(klass)		(GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DRUID_PAGE, GnomeDruidPageClass))
-#define GNOME_IS_DRUID_PAGE(obj)		(GTK_CHECK_TYPE ((obj), GNOME_TYPE_DRUID_PAGE))
-#define GNOME_IS_DRUID_PAGE_CLASS(klass)	(GTK_CHECK_CLASS_TYPE ((obj), GNOME_TYPE_DRUID_PAGE))
+#define GNOME_TYPE_DRUID_PAGE            (gnome_druid_page_get_type ())
+#define GNOME_DRUID_PAGE(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DRUID_PAGE, GnomeDruidPage))
+#define GNOME_DRUID_PAGE_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DRUID_PAGE, GnomeDruidPageClass))
+#define GNOME_IS_DRUID_PAGE(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DRUID_PAGE))
+#define GNOME_IS_DRUID_PAGE_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID_PAGE))
 
 
 typedef struct _GnomeDruidPage       GnomeDruidPage;

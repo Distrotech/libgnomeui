@@ -40,9 +40,11 @@ typedef enum {
 	GNOME_PIXMAP_COLOR   /* */
 } GnomePixmapDrawMode;
 
-#define GNOME_PIXMAP(obj)         GTK_CHECK_CAST (obj, gnome_pixmap_get_type (), GnomePixmap)
-#define GNOME_PIXMAP_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_pixmap_get_type (), GnomePixmapClass)
-#define GNOME_IS_PIXMAP(obj)      GTK_CHECK_TYPE (obj, gnome_pixmap_get_type ())
+#define GNOME_TYPE_PIXMAP            (gnome_pixmap_get_type ())
+#define GNOME_PIXMAP(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_PIXMAP, GnomePixmap))
+#define GNOME_PIXMAP_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PIXMAP, GnomePixmapClass))
+#define GNOME_IS_PIXMAP(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_PIXMAP))
+#define GNOME_IS_PIXMAP_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PIXMAP))
 
 
 typedef struct _GnomePixmap GnomePixmap;

@@ -1,3 +1,9 @@
+Sat May 20  Martijn van Beers  <martijn@earthling.net>
+
+	* (every GtkObject).h: make sure every object has GNOME_TYPE_
+	  and GNOME_IS_*_CLASS macros, and format them consistently
+	  with each other and gtk+
+
 Fri May 19 18:56:48 2000  George Lebl <jirka@5z.com>
 
 	* gnome-stock.[ch]: added refcount to the entries to make wrapping

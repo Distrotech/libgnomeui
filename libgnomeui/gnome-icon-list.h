@@ -41,9 +41,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_ICON_LIST(obj)     GTK_CHECK_CAST (obj, gnome_icon_list_get_type (), GnomeIconList)
-#define GNOME_ICON_LIST_CLASS(k) GTK_CHECK_CLASS_CAST (k, gnome_icon_list_get_type (), GnomeIconListClass)
-#define GNOME_IS_ICON_LIST(obj)  GTK_CHECK_TYPE (obj, gnome_icon_list_get_type ())
+#define GNOME_TYPE_ICON_LIST            (gnome_icon_list_get_type ())
+#define GNOME_ICON_LIST(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ICON_LIST, GnomeIconList))
+#define GNOME_ICON_LIST_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ICON_LIST, GnomeIconListClass))
+#define GNOME_IS_ICON_LIST(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ICON_LIST))
+#define GNOME_IS_ICON_LIST_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ICON_LIST))
 
 typedef enum {
 	GNOME_ICON_LIST_ICONS,

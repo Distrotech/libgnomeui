@@ -52,9 +52,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_SCORES(obj)          GTK_CHECK_CAST (obj, gnome_scores_get_type (), GnomeScores)
-#define GNOME_SCORES_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_scores_get_type (), GnomeScoresClass)
-#define GNOME_IS_SCORES(obj)       GTK_CHECK_TYPE (obj, gnome_scores_get_type ())
+#define GNOME_TYPE_SCORES            (gnome_scores_get_type ())
+#define GNOME_SCORES(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_SCORES, GnomeScores))
+#define GNOME_SCORES_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_SCORES, GnomeScoresClass))
+#define GNOME_IS_SCORES(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_SCORES))
+#define GNOME_IS_SCORES_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_SCORES))
 
 typedef struct _GnomeScores        GnomeScores;
 typedef struct _GnomeScoresClass   GnomeScoresClass;

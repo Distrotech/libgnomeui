@@ -34,9 +34,11 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomeIconSelection GnomeIconSelection;
 typedef struct _GnomeIconSelectionClass GnomeIconSelectionClass;
 
-#define GNOME_ICON_SELECTION(obj) GTK_CHECK_CAST (obj, gnome_icon_selection_get_type (), GnomeIconSelection)
-#define GNOME_ICON_SELECTION_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_icon_selection_get_type (), GnomeIconSelectionClass)
-#define GNOME_IS_ICON_SELECTION(obj)  GTK_CHECK_TYPE (obj, gnome_icon_selection_get_type ())
+#define GNOME_TYPE_ICON_SELECTION            (gnome_icon_selection_get_type ())
+#define GNOME_ICON_SELECTION(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ICON_SELECTION, GnomeIconSelection))
+#define GNOME_ICON_SELECTION_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ICON_SELECTION, GnomeIconSelectionClass))
+#define GNOME_IS_ICON_SELECTION(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ICON_SELECTION))
+#define GNOME_IS_ICON_SELECTION_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ICON_SELECTION))
 
 struct _GnomeIconSelection {
   GtkVBox vbox;

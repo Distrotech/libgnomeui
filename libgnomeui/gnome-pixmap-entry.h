@@ -43,9 +43,11 @@
 BEGIN_GNOME_DECLS
 
 
-#define GNOME_PIXMAP_ENTRY(obj)         GTK_CHECK_CAST (obj, gnome_pixmap_entry_get_type (), GnomePixmapEntry)
-#define GNOME_PIXMAP_ENTRY_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_pixmap_entry_get_type (), GnomePixmapEntryClass)
-#define GNOME_IS_PIXMAP_ENTRY(obj)      GTK_CHECK_TYPE (obj, gnome_pixmap_entry_get_type ())
+#define GNOME_TYPE_PIXMAP_ENTRY            (gnome_pixmap_entry_get_type ())
+#define GNOME_PIXMAP_ENTRY(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_PIXMAP_ENTRY, GnomePixmapEntry))
+#define GNOME_PIXMAP_ENTRY_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PIXMAP_ENTRY, GnomePixmapEntryClass))
+#define GNOME_IS_PIXMAP_ENTRY(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_PIXMAP_ENTRY))
+#define GNOME_IS_PIXMAP_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PIXMAP_ENTRY))
 
 
 typedef struct _GnomePixmapEntry        GnomePixmapEntry;

@@ -39,9 +39,11 @@ typedef enum {
 } GnomeDateEditFlags;
 
 
-#define GNOME_DATE_EDIT(obj)          GTK_CHECK_CAST (obj, gnome_date_edit_get_type(), GnomeDateEdit)
-#define GNOME_DATE_EDIT_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_date_edit_get_type(), GnomeDateEditClass)
-#define GNOME_IS_DATE_EDIT(obj)       GTK_CHECK_TYPE (obj, gnome_date_edit_get_type ())
+#define GNOME_TYPE_DATE_EDIT            (gnome_date_edit_get_type ())
+#define GNOME_DATE_EDIT(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DATE_EDIT, GnomeDateEdit))
+#define GNOME_DATE_EDIT_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DATE_EDIT, GnomeDateEditClass))
+#define GNOME_IS_DATE_EDIT(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DATE_EDIT))
+#define GNOME_IS_DATE_EDIT_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DATE_EDIT))
 
 typedef struct {
 	GtkHBox hbox;

@@ -34,9 +34,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_DIALOG(obj)        GTK_CHECK_CAST (obj, gnome_dialog_get_type (), GnomeDialog)
-#define GNOME_DIALOG_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_dialog_get_type (), GnomeDialogClass)
-#define GNOME_IS_DIALOG(obj)       GTK_CHECK_TYPE (obj, gnome_dialog_get_type ())
+#define GNOME_TYPE_DIALOG            (gnome_dialog_get_type ())
+#define GNOME_DIALOG(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DIALOG, GnomeDialog))
+#define GNOME_DIALOG_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DIALOG, GnomeDialogClass))
+#define GNOME_IS_DIALOG(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DIALOG))
+#define GNOME_IS_DIALOG_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DIALOG))
 
 typedef struct _GnomeDialog        GnomeDialog;
 typedef struct _GnomeDialogClass   GnomeDialogClass;

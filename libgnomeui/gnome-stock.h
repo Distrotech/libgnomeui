@@ -42,9 +42,11 @@ BEGIN_GNOME_DECLS
  */
 
 
-#define GNOME_STOCK(obj)         GTK_CHECK_CAST(obj, gnome_stock_get_type(), GnomeStock)
-#define GNOME_STOCK_CLASS(klass) GTK_CHECK_CAST_CLASS(obj, gnome_stock_get_type(), GnomeStock)
-#define GNOME_IS_STOCK(obj)      GTK_CHECK_TYPE(obj, gnome_stock_get_type())
+#define GNOME_TYPE_STOCK            (gnome_stock_get_type ())
+#define GNOME_STOCK(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_STOCK, GnomeStock))
+#define GNOME_STOCK_CLASS(klass)    (GTK_CHECK_CAST_CLASS ((klass), GNOME_TYPE_STOCK, GnomeStock))
+#define GNOME_IS_STOCK(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_STOCK))
+#define GNOME_IS_STOCK_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_STOCK))
 
 typedef struct _GnomeStock       GnomeStock;
 typedef struct _GnomeStockClass  GnomeStockClass;

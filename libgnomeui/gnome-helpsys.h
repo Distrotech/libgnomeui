@@ -34,9 +34,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_HELP_VIEW(obj) GTK_CHECK_CAST(obj, gnome_help_view_get_type(), GnomeHelpView)
-#define GNOME_HELP_VIEW_CLASS(class) GTK_CHECK_CLASS_CAST(class, gnome_help_view_get_type(), GnomeHelpViewClass)
-#define GNOME_IS_HELP_VIEW(obj) GTK_CHECK_TYPE(obj, gnome_help_view_get_type())
+#define GNOME_TYPE_HELP_VIEW            (gnome_help_view_get_type ())
+#define GNOME_HELP_VIEW(obj)            (GTK_CHECK_CAST((obj), GNOME_TYPE_HELP_VIEW, GnomeHelpView))
+#define GNOME_HELP_VIEW_CLASS(klass)    (GTK_CHECK_CLASS_CAST((klass), GNOME_TYPE_HELP_VIEW, GnomeHelpViewClass))
+#define GNOME_IS_HELP_VIEW(obj)         (GTK_CHECK_TYPE((obj), GNOME_TYPE_HELP_VIEW))
+#define GNOME_IS_HELP_VIEW_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_HELP_VIEW))
 
 typedef enum {
 	GNOME_HELP_POPUP,

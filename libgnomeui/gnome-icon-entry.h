@@ -45,9 +45,11 @@
 BEGIN_GNOME_DECLS
 
 
-#define GNOME_ICON_ENTRY(obj)         GTK_CHECK_CAST (obj, gnome_icon_entry_get_type (), GnomeIconEntry)
-#define GNOME_ICON_ENTRY_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_icon_entry_get_type (), GnomeIconEntryClass)
-#define GNOME_IS_ICON_ENTRY(obj)      GTK_CHECK_TYPE (obj, gnome_icon_entry_get_type ())
+#define GNOME_TYPE_ICON_ENTRY            (gnome_icon_entry_get_type ())
+#define GNOME_ICON_ENTRY(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ICON_ENTRY, GnomeIconEntry))
+#define GNOME_ICON_ENTRY_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ICON_ENTRY, GnomeIconEntryClass))
+#define GNOME_IS_ICON_ENTRY(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ICON_ENTRY))
+#define GNOME_IS_ICON_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ICON_ENTRY))
 
 
 typedef struct _GnomeIconEntry         GnomeIconEntry;

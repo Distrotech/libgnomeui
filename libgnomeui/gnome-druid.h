@@ -30,11 +30,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_TYPE_DRUID			(gnome_druid_get_type ())
-#define GNOME_DRUID(obj)			(GTK_CHECK_CAST ((obj), GNOME_TYPE_DRUID, GnomeDruid))
-#define GNOME_DRUID_CLASS(klass)		(GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DRUID, GnomeDruidClass))
-#define GNOME_IS_DRUID(obj)			(GTK_CHECK_TYPE ((obj), GNOME_TYPE_DRUID))
-#define GNOME_IS_DRUID_CLASS(klass)		(GTK_CHECK_CLASS_TYPE ((obj), GNOME_TYPE_DRUID))
+#define GNOME_TYPE_DRUID            (gnome_druid_get_type ())
+#define GNOME_DRUID(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_DRUID, GnomeDruid))
+#define GNOME_DRUID_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DRUID, GnomeDruidClass))
+#define GNOME_IS_DRUID(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DRUID))
+#define GNOME_IS_DRUID_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID))
 
 
 typedef struct _GnomeDruid       GnomeDruid;

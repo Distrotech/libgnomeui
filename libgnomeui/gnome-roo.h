@@ -31,9 +31,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_ROO(obj)          GTK_CHECK_CAST (obj, gnome_roo_get_type (), GnomeRoo)
-#define GNOME_ROO_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_roo_get_type (), GnomeRooClass)
-#define GNOME_IS_ROO(obj)       GTK_CHECK_TYPE (obj, gnome_roo_get_type ())
+#define GNOME_TYPE_ROO            (gnome_roo_get_type ())
+#define GNOME_ROO(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ROO, GnomeRoo))
+#define GNOME_ROO_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ROO, GnomeRooClass))
+#define GNOME_IS_ROO(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ROO))
+#define GNOME_IS_ROO_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ROO))
 
 typedef struct _GnomeRoo       GnomeRoo;
 typedef struct _GnomeRooClass  GnomeRooClass;

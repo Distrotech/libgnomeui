@@ -31,13 +31,10 @@ BEGIN_GNOME_DECLS
 
 
 #define GNOME_TYPE_CANVAS_PIXBUF            (gnome_canvas_pixbuf_get_type ())
-#define GNOME_CANVAS_PIXBUF(obj)            (GTK_CHECK_CAST ((obj),		\
-					     GNOME_TYPE_CANVAS_PIXBUF, GnomeCanvasPixbuf))
-#define GNOME_CANVAS_PIXBUF_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass),	\
-					     GNOME_TYPE_CANVAS_PIXBUF, GnomeCanvasPixbufClass))
+#define GNOME_CANVAS_PIXBUF(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_CANVAS_PIXBUF, GnomeCanvasPixbuf))
+#define GNOME_CANVAS_PIXBUF_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CANVAS_PIXBUF, GnomeCanvasPixbufClass))
 #define GNOME_IS_CANVAS_PIXBUF(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_CANVAS_PIXBUF))
-#define GNOME_IS_CANVAS_PIXBUF_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass),	\
-					     GNOME_TYPE_CANVAS_PIXBUF))
+#define GNOME_IS_CANVAS_PIXBUF_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_CANVAS_PIXBUF))
 
 
 typedef struct _GnomeCanvasPixbuf GnomeCanvasPixbuf;

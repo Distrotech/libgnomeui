@@ -40,12 +40,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_ICON_TEXT_ITEM(obj)     (GTK_CHECK_CAST((obj), \
-        gnome_icon_text_item_get_type (), GnomeIconTextItem))
-#define GNOME_ICON_TEXT_ITEM_CLASS(k) (GTK_CHECK_CLASS_CAST ((k),\
-	gnome_icon_text_item_get_type ()))
-#define GNOME_IS_ICON_TEXT_ITEM(o)    (GTK_CHECK_TYPE((o), \
-	gnome_icon_text_item_get_type ()))
+#define GNOME_TYPE_ICON_TEXT_ITEM            (gnome_icon_text_item_get_type ())
+#define GNOME_ICON_TEXT_ITEM(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ICON_TEXT_ITEM, GnomeIconTextItem))
+#define GNOME_ICON_TEXT_ITEM_CLASS(k)        (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ICON_TEXT_ITEM))
+#define GNOME_IS_ICON_TEXT_ITEM(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ICON_TEXT_ITEM))
+#define GNOME_IS_ICON_TEXT_ITEM_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ICON_TEXT_ITEM))
 
 /* This structure has been converted to use public and private parts.  To avoid
  * breaking binary compatibility, the slots for private fields have been

@@ -38,9 +38,11 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomeLess GnomeLess;
 typedef struct _GnomeLessClass GnomeLessClass;
 
-#define GNOME_LESS(obj)          GTK_CHECK_CAST (obj, gnome_less_get_type (), GnomeLess)
-#define GNOME_LESS_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_less_get_type (), GnomeLessClass)
-#define GNOME_IS_LESS(obj)       GTK_CHECK_TYPE (obj, gnome_less_get_type ())
+#define GNOME_TYPE_LESS            (gnome_less_get_type ())
+#define GNOME_LESS(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_LESS, GnomeLess))
+#define GNOME_LESS_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_LESS, GnomeLessClass))
+#define GNOME_IS_LESS(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_LESS))
+#define GNOME_IS_LESS_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_LESS))
 
 struct _GnomeLess {
   GtkVBox vbox;

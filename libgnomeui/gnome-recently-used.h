@@ -34,11 +34,11 @@ extern "C" {
 
 typedef struct _GnomeRecentDocument GnomeRecentDocument;
 
-#define GNOME_TYPE_RECENTLY_USED (gnome_recently_used_get_type())
-#define GNOME_RECENTLY_USED(obj)  (GTK_CHECK_CAST ((obj), GNOME_TYPE_RECENTLY_USED, GnomeRecentlyUsed))
-#define GNOME_RECENTLY_USED_CLASS(klass)  (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_RECENTLY_USED, GnomeRecentlyUsedClass))
-#define GNOME_IS_RECENTLY_USED(obj)  (GTK_CHECK_TYPE ((obj), GNOME_TYPE_RECENTLY_USED))
-#define GNOME_IS_RECENTLY_USED_CLASS(klass)  (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_RECENTLY_USED))
+#define GNOME_TYPE_RECENTLY_USED            (gnome_recently_used_get_type())
+#define GNOME_RECENTLY_USED(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_RECENTLY_USED, GnomeRecentlyUsed))
+#define GNOME_RECENTLY_USED_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_RECENTLY_USED, GnomeRecentlyUsedClass))
+#define GNOME_IS_RECENTLY_USED(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_RECENTLY_USED))
+#define GNOME_IS_RECENTLY_USED_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_RECENTLY_USED))
 
 typedef struct _GnomeRecentlyUsed GnomeRecentlyUsed;
 typedef struct _GnomeRecentlyUsedClass GnomeRecentlyUsedClass;

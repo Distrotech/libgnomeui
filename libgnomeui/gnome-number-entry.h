@@ -40,9 +40,11 @@
 BEGIN_GNOME_DECLS
 
 
-#define GNOME_NUMBER_ENTRY(obj)         GTK_CHECK_CAST (obj, gnome_number_entry_get_type (), GnomeNumberEntry)
-#define GNOME_NUMBER_ENTRY_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_number_entry_get_type (), GnomeNumberEntryClass)
-#define GNOME_IS_NUMBER_ENTRY(obj)      GTK_CHECK_TYPE (obj, gnome_number_entry_get_type ())
+#define GNOME_TYPE_NUMBER_ENTRY            (gnome_number_entry_get_type ())
+#define GNOME_NUMBER_ENTRY(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_NUMBER_ENTRY, GnomeNumberEntry))
+#define GNOME_NUMBER_ENTRY_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_NUMBER_ENTRY, GnomeNumberEntryClass))
+#define GNOME_IS_NUMBER_ENTRY(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_NUMBER_ENTRY))
+#define GNOME_IS_NUMBER_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_NUMBER_ENTRY))
 
 
 typedef struct _GnomeNumberEntry      GnomeNumberEntry;

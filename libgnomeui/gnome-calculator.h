@@ -39,9 +39,11 @@
 BEGIN_GNOME_DECLS
 
 
-#define GNOME_CALCULATOR(obj)         GTK_CHECK_CAST (obj, gnome_calculator_get_type (), GnomeCalculator)
-#define GNOME_CALCULATOR_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_calculator_get_type (), GnomeCalculatorClass)
-#define GNOME_IS_CALCULATOR(obj)      GTK_CHECK_TYPE (obj, gnome_calculator_get_type ())
+#define GNOME_TYPE_CALCULATOR            (gnome_calculator_get_type ())
+#define GNOME_CALCULATOR(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_CALCULATOR, GnomeCalculator))
+#define GNOME_CALCULATOR_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CALCULATOR, GnomeCalculatorClass))
+#define GNOME_IS_CALCULATOR(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_CALCULATOR))
+#define GNOME_IS_CALCULATOR_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_CALCULATOR))
 
 
 typedef struct _GnomeCalculator      GnomeCalculator;

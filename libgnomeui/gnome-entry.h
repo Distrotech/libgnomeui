@@ -40,9 +40,11 @@
 BEGIN_GNOME_DECLS
 
 
-#define GNOME_ENTRY(obj)         GTK_CHECK_CAST (obj, gnome_entry_get_type (), GnomeEntry)
-#define GNOME_ENTRY_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_entry_get_type (), GnomeEntryClass)
-#define GNOME_IS_ENTRY(obj)      GTK_CHECK_TYPE (obj, gnome_entry_get_type ())
+#define GNOME_TYPE_ENTRY            (gnome_entry_get_type ())
+#define GNOME_ENTRY(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ENTRY, GnomeEntry))
+#define GNOME_ENTRY_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ENTRY, GnomeEntryClass))
+#define GNOME_IS_ENTRY(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ENTRY))
+#define GNOME_IS_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ENTRY))
 
 
 typedef struct _GnomeEntry      GnomeEntry;

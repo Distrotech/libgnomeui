@@ -31,9 +31,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_HREF(obj) GTK_CHECK_CAST(obj, gnome_href_get_type(), GnomeHRef)
-#define GNOME_HREF_CLASS(klass) GTK_CHECK_CLASS_CAST(klass, gnome_href_get_type, GnomeHRefClass)
-#define GNOME_IS_HREF(obj) GTK_CHECK_TYPE(obj, gnome_href_get_type())
+#define GNOME_TYPE_HREF            (gnome_href_get_type ())
+#define GNOME_HREF(obj)            (GTK_CHECK_CAST((obj), GNOME_TYPE_HREF, GnomeHRef))
+#define GNOME_HREF_CLASS(klass)    (GTK_CHECK_CLASS_CAST((klass), GNOME_TYPE_HREF, GnomeHRefClass))
+#define GNOME_IS_HREF(obj)         (GTK_CHECK_TYPE((obj), GNOME_TYPE_HREF))
+#define GNOME_IS_HREF_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_HREF))
 
 typedef struct _GnomeHRef GnomeHRef;
 typedef struct _GnomeHRefClass GnomeHRefClass;

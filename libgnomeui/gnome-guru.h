@@ -36,9 +36,11 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomeGuru GnomeGuru;
 typedef struct _GnomeGuruClass GnomeGuruClass;
 
-#define GNOME_GURU(obj) GTK_CHECK_CAST (obj, gnome_guru_get_type (), GnomeGuru)
-#define GNOME_GURU_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_guru_get_type (), GnomeGuruClass)
-#define GNOME_IS_GURU(obj)  GTK_CHECK_TYPE (obj, gnome_guru_get_type ())
+#define GNOME_TYPE_GURU            (gnome_guru_get_type ())
+#define GNOME_GURU(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_GURU, GnomeGuru))
+#define GNOME_GURU_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_GURU, GnomeGuruClass))
+#define GNOME_IS_GURU(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_GURU))
+#define GNOME_IS_GURU_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_GURU))
 
 struct _GnomeGuruPage;
 
