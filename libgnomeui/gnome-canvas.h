@@ -120,6 +120,12 @@ GnomeCanvasItem *gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, 
 /* Same as above, with parsed args */
 GnomeCanvasItem *gnome_canvas_item_newv (GnomeCanvasGroup *parent, GtkType type, guint nargs, GtkArg *args);
 
+/* Constructors for use in derived classes and language wrappers */
+void gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent, va_list args);
+
+void gnome_canvas_item_constructv (GnomeCanvasItem *item, GnomeCanvasGroup *parent,
+				   guint nargs, GtkArg *args);
+
 /* Configure an item using the standard Gtk argument mechanism */
 void gnome_canvas_item_set (GnomeCanvasItem *item, ...);
 
@@ -326,12 +332,6 @@ void gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *
  */
 int gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color);
 
-/* Constructors for use in language bindings. Don't use otherwise. */
-void gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent,
-				  GtkType type, va_list args);
-
-void gnome_canvas_item_constructv(GnomeCanvasItem *item, GnomeCanvasGroup *parent,
-				  GtkType type, guint nargs, GtkArg *args);
 
 END_GNOME_DECLS
 

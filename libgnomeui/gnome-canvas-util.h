@@ -33,6 +33,16 @@ GnomeCanvasPoints *gnome_canvas_points_new (int num_points);
 /* Free a points structure */
 void gnome_canvas_points_free (GnomeCanvasPoints *points);
 
+/* Given three points forming an angle, compute the coordinates of the inside and outside points of
+ * the mitered corner formed by a line of a given width at that angle.
+ *
+ * If the angle is less than 11 degrees, then FALSE is returned and the return points are not
+ * modified.  Otherwise, TRUE is returned.
+ */
+int gnome_canvas_get_miter_points (double x1, double y1, double x2, double y2, double x3, double y3,
+				   double width,
+				   double *mx1, double *my1, double *mx2, double *my2);
+
 
 END_GNOME_DECLS
 

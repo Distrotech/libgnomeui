@@ -16,6 +16,23 @@
 
 
 #define DEFAULT_SPLINE_STEPS 12		/* this is what Tk uses */
+#define NUM_ARROW_POINTS     6		/* number of points in an arrowhead */
+#define NUM_STATIC_POINTS    32		/* number of static points to use to avoid allocating arrays */
+
+
+#define GROW_BOUNDS(bx1, by1, bx2, by2, x, y) {	\
+	if (x < bx1)				\
+		bx1 = x;			\
+						\
+	if (x > bx2)				\
+		bx2 = x;			\
+						\
+	if (y < by1)				\
+		by1 = y;			\
+						\
+	if (y > by2)				\
+		by2 = y;			\
+}
 
 
 enum {
@@ -133,7 +150,14 @@ gnome_canvas_line_destroy (GtkObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_LINE (object));
 
-	/* FIXME */
+	if (line->coords)
+		g_free (line->coords);
+
+	if (line->first_coords)
+		g_free (line->first_coords);
+
+	if (line->last_coords)
+		g_free (line->last_coords);
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -143,10 +167,87 @@ static void
 recalc_bounds (GnomeCanvasLine *line)
 {
 	GnomeCanvasItem *item;
+	double x1, y1, x2, y2;
+	double width;
+	double dx, dy;
+	int i;
 
 	item = GNOME_CANVAS_ITEM (line);
 
-	
+	if (line->num_points == 0) {
+		item->x1 = item->y1 = item->x2 = item->y2 = 0;
+		return;
+	}
+
+	/* Find bounding box of line's points */
+
+	x1 = x2 = line->coords[0];
+	y1 = y2 = line->coords[1];
+
+	for (i = 1; i < line->num_points; i++)
+		GROW_BOUNDS (x1, y1, x2, y2, line->coords[2 * i], line->coords[2 * i + 1]);
+
+	/* Add possible over-estimate for wide lines */
+
+	if (line->width_pixels)
+		width = line->width / item->canvas->pixels_per_unit;
+	else
+		width = line->width;
+
+	x1 -= width;
+	y1 -= width;
+	x2 += width;
+	y2 += width;
+
+	/* For mitered lines, make a second pass through all the points.  Compute the location of
+	 * the two miter vertex points and add them to the bounding box.
+	 */
+
+	if (line->join == GDK_JOIN_MITER)
+		for (i = 0; i < line->num_points; i++) {
+			double mx1, my1, mx2, my2;
+
+			if (gnome_canvas_get_miter_points (line->coords[2 * i],
+							   line->coords[2 * i + 1],
+							   line->coords[2 * i + 2],
+							   line->coords[2 * i + 3],
+							   line->coords[2 * i + 4],
+							   line->coords[2 * i + 5],
+							   width,
+							   &mx1, &my1, &mx2, &my2)) {
+				GROW_BOUNDS (x1, y1, x2, y2, mx1, my1);
+				GROW_BOUNDS (x1, y1, x2, y2, mx2, my2);
+			}
+		}
+
+	/* Add the arrow points, if any */
+
+	if (line->first_arrow)
+		for (i = 0; i < NUM_ARROW_POINTS; i++)
+			GROW_BOUNDS (x1, y1, x2, y2,
+				     line->first_coords[2 * i],
+				     line->first_coords[2 * i + 1]);
+
+	if (line->last_arrow)
+		for (i = 0; i < NUM_ARROW_POINTS; i++)
+			GROW_BOUNDS (x1, y1, x2, y2,
+				     line->last_coords[2 * i],
+				     line->last_coords[2 * i + 1]);
+
+	/* Convert to canvas pixel coords */
+
+	dx = dy = 0.0;
+	gnome_canvas_item_i2w (item, &dx, &dy);
+
+	gnome_canvas_w2c (item->canvas, x1 + dx, y1 + dy, &item->x1, &item->y1);
+	gnome_canvas_w2c (item->canvas, x2 + dx, y2 + dy, &item->x2, &item->y2);
+
+	/* Some safety fudging */
+
+	item->x1--;
+	item->y1--;
+	item->x2++;
+	item->y2++;
 }
 
 static void
@@ -310,6 +411,7 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 			int x, int y, int width, int height)
 {
 	GnomeCanvasLine *line;
+	GdkPoint static_points[NUM_STATIC_POINTS];
 	GdkPoint *points;
 	int i;
 	int cx, cy;
@@ -322,10 +424,12 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 	/* Build array of canvas pixel coordinates */
 
-	points = g_new (GdkPoint, line->num_points);
+	if (line->num_points <= NUM_STATIC_POINTS)
+		points = static_points;
+	else
+		points = g_new (GdkPoint, line->num_points);
 
-	dx = 0.0;
-	dy = 0.0;
+	dx = dy = 0.0;
 	gnome_canvas_item_i2w (item, &dx, &dy);
 
 	for (i = 0; i < line->num_points; i++) {
@@ -339,7 +443,8 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 	gdk_draw_lines (drawable, line->gc, points, line->num_points);
 
-	g_free (points);
+	if (points != static_points)
+		g_free (points);
 }
 
 static double

@@ -1,3 +1,19 @@
+1998-07-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_item_construct
+	gnome_canvas_item_constructv): Removed the unused type parameter.
+
+	* gnome-canvas-line.c (recalc_bounds): Implemented the
+	bounds-calculation routine.
+
+	* gnome-canvas-util.c (gnome_canvas_get_miter_points): New public
+	function to compute the miter points of a line's corner.
+
+	* gnome-canvas-line.c (gnome_canvas_line_destroy): Free line
+	structure's fields properly.
+	(gnome_canvas_line_draw): Optimization: use a static array of
+	points instead of allocating one, when possible.
+
 Sun Jul 19 22:54:12 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-canvas.h, gnome-canvas-c: Added
