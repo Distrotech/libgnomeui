@@ -74,11 +74,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-icon-entry.c		\
 	gnome-init.c			\
 	gnome-less.c			\
-	gnome-mdi.c			\
-	gnome-mdiP.h			\
-	gnome-mdi-child.c		\
-	gnome-mdi-generic-child.c       \
-	gnome-mdi-session.c		\
 	gnome-pixmap.c			\
 	gnome-popup-menu.c		\
 	gnome-popup-help.c		\

@@ -1,5 +1,15 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	Temporarily remove GnomeMDI from the build so that we can
+	get rid of gnome-app.[ch] and gnome-app-helper.[ch].
+
+	As a weekend hack project, someone needs to make GnomeMDI
+	use the Bonobo UI code; contact me if you want to work on
+	this, I can help you with it and I may even have some
+	experimental code on my hard disk.
+
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
 	* gnome-preferences.[ch]: Removed. This is now in libgnome
 	and using bonobo-conf.
 
