@@ -23,17 +23,7 @@ INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) \
         -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
-if HAVE_GTKCAL
-gtkcal_sources =
-gtkcal_headers =
-else
-gtkcal_sources = gtkcalendar.c
-gtkcal_headers = gtkcalendar.h
-endif
-
 EXTRA_HEADERS = 
-
-EXTRA_libgnomeui_la_SOURCES = gtkcalendar.h gtkcalendar.c
 
 libgnomeui_la_SOURCES = \
 	gnome-about.c			\
@@ -100,8 +90,7 @@ libgnomeui_la_SOURCES = \
 	gtk-plug.c			\
 	gtk-socket.c			\
 	gtk-ted.c			\
-	gtkdial.c			\
-	$(gtkcal_sources)
+	gtkdial.c
 
 ## this lists all the non-generated headers
 gnome_headers = \
@@ -171,8 +160,7 @@ gnome_headers = \
 	gtk-ted.h			\
 	gtk-plug.h			\
 	gtk-socket.h			\
-	libgnomeui.h			\
-	$(gtkcal_headers)
+	libgnomeui.h
 
 libgnomeuiinclude_HEADERS = \
 	$(gnome_headers)	\

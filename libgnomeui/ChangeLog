@@ -4,6 +4,14 @@ Wed Nov  4 11:31:57 1998  Owen Taylor  <otaylor@redhat.com>
 	gdk_window_destroy_notify() on a DestroyNotify, so
 	that the window gets removed from the XID table.
 
+1998-11-09  Jeff Garzik  <jgarzik@pobox.com>
+
+        * libgnomeui/Makefile.am,
+          libgnomeui/gnome-dateedit.c, libgnomeui/gtkcalendar.c,
+          libgnomeui/gtkcalendar.h, libgnomeui/libgnomeui.h:
+
+                Removed gtkcalendar module.
+
 1998-11-09  Jonathan Blandford  <jrb@aware-of-vacuity.labs.redhat.com>
 
 	* gnome-popup-help.c (gnome_popup_help_expose): added theme'd
