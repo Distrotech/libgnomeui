@@ -254,7 +254,7 @@ typedef struct {
         { GNOME_APP_UI_ITEM_CONFIGURABLE, label, tip,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_NEW, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_NEW, (GdkModifierType) 0, NULL }
 
 /* If you have more then one New type, use this tree */
 #define GNOMEUIINFO_MENU_NEW_SUBTREE(tree)                                  \
@@ -266,49 +266,49 @@ typedef struct {
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_OPEN, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_OPEN, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_SAVE_ITEM(cb, data)                                \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_SAVE, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_SAVE, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_SAVE_AS_ITEM(cb, data)                             \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_SAVE_AS, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_SAVE_AS, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_REVERT_ITEM(cb, data)                              \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_REVERT, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_REVERT, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_PRINT_ITEM(cb, data)                               \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_PRINT, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_PRINT, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_PRINT_SETUP_ITEM(cb, data)                         \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_PRINT_SETUP, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_PRINT_SETUP, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_CLOSE_ITEM(cb, data)                               \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_CLOSE, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_CLOSE, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_EXIT_ITEM(cb, data)                                \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_EXIT, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_EXIT, (GdkModifierType) 0, NULL }
 /*
  * The "Edit" menu
  */
@@ -317,67 +317,67 @@ typedef struct {
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_CUT, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_CUT, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_COPY_ITEM(cb, data)                                \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_COPY, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_COPY, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_PASTE_ITEM(cb, data)                               \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_PASTE, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_PASTE, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_SELECT_ALL_ITEM(cb, data)                          \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_SELECT_ALL, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_SELECT_ALL, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_CLEAR_ITEM(cb, data)                               \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_CLEAR, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_CLEAR, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_UNDO_ITEM(cb, data)                                \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_UNDO, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_UNDO, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_REDO_ITEM(cb, data)                                \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_REDO, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_REDO, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_FIND_ITEM(cb, data)                                \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_FIND, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_FIND, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(cb, data)                          \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_FIND_AGAIN, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_FIND_AGAIN, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_REPLACE_ITEM(cb, data)                             \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_REPLACE, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_REPLACE, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_PROPERTIES_ITEM(cb, data)                          \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_PROPERTIES, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_PROPERTIES, (GdkModifierType) 0, NULL }
 
 /*
  * The Settings menu
@@ -386,7 +386,7 @@ typedef struct {
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_PREFERENCES, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_PREFERENCES, (GdkModifierType) 0, NULL }
 
 /*
  * The Windows menu
@@ -395,13 +395,13 @@ typedef struct {
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_NEW_WINDOW, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_NEW_WINDOW, (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM(cb, data)                        \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_CLOSE_WINDOW, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_CLOSE_WINDOW, (GdkModifierType) 0, NULL }
 
 /*
  * And the "Help" menu
@@ -410,7 +410,7 @@ typedef struct {
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_ABOUT, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_ABOUT, (GdkModifierType) 0, NULL }
 
 /* 
  * The "Game" menu
@@ -420,49 +420,49 @@ typedef struct {
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_NEW_GAME, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_NEW_GAME, (GdkModifierType) 0, NULL }
 	  
 #define GNOMEUIINFO_MENU_PAUSE_GAME_ITEM(cb, data)                            \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_PAUSE_GAME, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_PAUSE_GAME, (GdkModifierType) 0, NULL }
 	  
 #define GNOMEUIINFO_MENU_RESTART_GAME_ITEM(cb, data)                            \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_RESTART_GAME, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_RESTART_GAME, (GdkModifierType) 0, NULL }
 	  
 #define GNOMEUIINFO_MENU_UNDO_MOVE_ITEM(cb, data)                            \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_UNDO_MOVE, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_UNDO_MOVE, (GdkModifierType) 0, NULL }
 	  
 #define GNOMEUIINFO_MENU_REDO_MOVE_ITEM(cb, data)                            \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_REDO_MOVE, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_REDO_MOVE, (GdkModifierType) 0, NULL }
 	  
 #define GNOMEUIINFO_MENU_HINT_ITEM(cb, data)                            \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_HINT, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_HINT, (GdkModifierType) 0, NULL }
 	  
 #define GNOMEUIINFO_MENU_SCORES_ITEM(cb, data)                            \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_SCORES, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_SCORES, (GdkModifierType) 0, NULL }
 	  
 #define GNOMEUIINFO_MENU_END_GAME_ITEM(cb, data)                            \
         { GNOME_APP_UI_ITEM_CONFIGURABLE, NULL, NULL,                       \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_NONE, NULL,                                      \
-          GNOME_APP_CONFIGURABLE_ITEM_END_GAME, 0, NULL }
+          GNOME_APP_CONFIGURABLE_ITEM_END_GAME, (GdkModifierType) 0, NULL }
 	  
 /* Some standard menus */
 #define GNOMEUIINFO_MENU_FILE_TREE(tree) \

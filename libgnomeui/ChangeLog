@@ -1,3 +1,8 @@
+1999-01-26  Radek Doulik  <rodo@aquarius>
+
+	* gnome-app-helper.h: added some casts to (GdkModifierType) to
+	avoid compiler warnings
+
 1999-01-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-preferences.c (gnome_preferences_load_custom): Fix.  Put
