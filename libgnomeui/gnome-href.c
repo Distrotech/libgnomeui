@@ -109,7 +109,7 @@ GtkWidget *gnome_href_new(const gchar *url, const gchar *label) {
 
 /**
  * gnome_href_get_url
- * @self: Pointer to GNOME href object.
+ * @self: Pointer to GnomeHRef widget
  *
  * Description:
  * Returns the pointer to the URL associated with the @self href object.
@@ -126,7 +126,7 @@ gchar *gnome_href_get_url(GnomeHRef *self) {
 
 /**
  * gnome_href_set_url
- * @self: Pointer to GNOME href object.
+ * @self: Pointer to GnomeHRef widget
  * @url: String containing the URL to be stored within @self.
  *
  * Description:
@@ -146,13 +146,13 @@ void gnome_href_set_url(GnomeHRef *self, const gchar *url) {
 
 /**
  * gnome_href_get_label
- * @self: Pointer to GNOME href object.
+ * @self: Pointer to GnomeHRef widget
  *
  * Description:
- * Returns the value of the label widget used to display the URL link
+ * Returns the contents of the label widget used to display the link
  * text.
  *
- * Returns:  Pointer to value of label widget's text.
+ * Returns:  Pointer to text contained in the label widget.
  **/
 
 gchar *gnome_href_get_label(GnomeHRef *self) {
@@ -168,7 +168,7 @@ gchar *gnome_href_get_label(GnomeHRef *self) {
 
 /**
  * gnome_href_set_label
- * @self: Pointer to GNOME href object.
+ * @self: Pointer to GnomeHRef widget
  * @label: New link text for the href object.
  *
  * Description:

@@ -1054,6 +1054,7 @@ gnome_spell_accept(GnomeSpell *spell, const gchar* word) {
  * gnome_spell_insert
  * @spell: Pointer to GNOME spell checker object.
  * @word: Word to be added to private dictionary.
+ * @lowercase: %TRUE if the added word should be changed to lowercase, %FALSE if not.
  *
  * Description:
  * Adds a single word to the spelling checker's private dictionary.
@@ -1091,11 +1092,12 @@ gnome_spell_insert(GnomeSpell* spell, const gchar* word, gboolean lowercase) {
 /**
  * gnome_spell_next
  * @spell: Pointer to GNOME spell checker object.
- * @word: Word to be ignored.
  *
  * Description:
  * Adds a single word to the runtime list of words that the spelling
  * checker should ignore.
+ * 
+ * Returns: %TRUE on success, %FALSE on failure.
  **/
 
 int 

@@ -254,8 +254,8 @@ gnome_number_entry_new (const gchar *history_id, const gchar *calc_dialog_title)
  * gnome_number_entry_gnome_entry:
  * @nentry: Pointer to GnomeNumberEntry widget
  *
- * Description: Get the GnomeEntry widget component of the
- * GnomeNumberEntry widget for lower-level manipulation.
+ * Description: Get the GnomeEntry component of the
+ * GnomeNumberEntry for lower-level manipulation.
  *
  * Returns: GnomeEntry widget
  **/
@@ -272,8 +272,8 @@ gnome_number_entry_gnome_entry (GnomeNumberEntry *nentry)
  * gnome_number_entry_gtk_entry:
  * @nentry: Pointer to GnomeNumberEntry widget
  *
- * Description: Get the GtkEntry widget component of the
- * GnomeNumberEntry widget for Gtk+-level manipulation.
+ * Description: Get the GtkEntry component of the
+ * GnomeNumberEntry for Gtk+-level manipulation.
  *
  * Returns: GtkEntry widget
  **/

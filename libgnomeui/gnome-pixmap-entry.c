@@ -412,11 +412,11 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 /**
  * gnome_pixmap_entry_construct:
  * @pentry: A #GnomePixmapEntry object to construct
- * @history_id: the id given to #gnome_entry_new
- * @browse_dialog_title: title of the browse dialog
- * @do_preview: boolean
+ * @history_id: The id given to #gnome_entry_new
+ * @browse_dialog_title: Title of the browse dialog
+ * @do_preview: %TRUE if preview is desired, %FALSE if not.
  *
- * Description: Constructs the @gentry object.
+ * Description: Constructs the @pentry object.
  **/
 void
 gnome_pixmap_entry_construct (GnomePixmapEntry *pentry, const gchar *history_id,
@@ -437,16 +437,16 @@ gnome_pixmap_entry_construct (GnomePixmapEntry *pentry, const gchar *history_id,
 
 /**
  * gnome_pixmap_entry_new:
- * @history_id: the id given to #gnome_entry_new
- * @browse_dialog_title: title of the browse dialog
+ * @history_id: The id given to #gnome_entry_new
+ * @browse_dialog_title: Title of the browse dialog
  * @do_preview: boolean
  *
  * Description: Creates a new pixmap entry widget, if do_preview is false,
  * the preview is hidden but the files are still loaded so that it's easy
- * to show it. If you need a pixmap entry without the preview you just
- * use the GnomeFileEntry
+ * to show it. For a pixmap entry without preview, use the
+ * #GnomeFileEntry widget..
  *
- * Returns: Returns the new object
+ * Returns: New GnomePixmapEntry object.
  **/
 GtkWidget *
 gnome_pixmap_entry_new (const gchar *history_id, const gchar *browse_dialog_title, gboolean do_preview)
@@ -461,11 +461,12 @@ gnome_pixmap_entry_new (const gchar *history_id, const gchar *browse_dialog_titl
 
 /**
  * gnome_pixmap_entry_gnome_file_entry:
- * @pentry: the GnomePixmapEntry to work with
+ * @pentry: Pointer to GnomePixmapEntry widget
  *
- * Description: Get the GnomeFileEntry widget that's part of the entry
+ * Description: Get the GnomeFileEntry component of the
+ * GnomePixmapEntry widget for lower-level manipulation.
  *
- * Returns: Returns GnomeFileEntry widget
+ * Returns: GnomeFileEntry widget
  **/
 GtkWidget *
 gnome_pixmap_entry_gnome_file_entry (GnomePixmapEntry *pentry)
@@ -478,11 +479,12 @@ gnome_pixmap_entry_gnome_file_entry (GnomePixmapEntry *pentry)
 
 /**
  * gnome_pixmap_entry_gnome_entry:
- * @pentry: the GnomePixmapEntry to work with
+ * @pentry: Pointer to GnomePixmapEntry widget
  *
- * Description: Get the GnomeEntry widget that's part of the entry
+ * Description: Get the GnomeEntry component of the
+ * GnomePixmapEntry widget for lower-level manipulation.
  *
- * Returns: Returns GnomeEntry widget
+ * Returns: GnomeEntry widget
  **/
 GtkWidget *
 gnome_pixmap_entry_gnome_entry (GnomePixmapEntry *pentry)
@@ -495,11 +497,12 @@ gnome_pixmap_entry_gnome_entry (GnomePixmapEntry *pentry)
 
 /**
  * gnome_pixmap_entry_gtk_entry:
- * @pentry: the GnomePixmapEntry to work with
+ * @pentry: Pointer to GnomePixmapEntry widget
  *
- * Description: Get the GtkEntry widget that's part of the entry
+ * Description: Get the GtkEntry component of the
+ * GnomePixmapEntry for Gtk+-level manipulation.
  *
- * Returns: Returns GtkEntry widget
+ * Returns: GtkEntry widget
  **/
 GtkWidget *
 gnome_pixmap_entry_gtk_entry (GnomePixmapEntry *pentry)
@@ -512,12 +515,12 @@ gnome_pixmap_entry_gtk_entry (GnomePixmapEntry *pentry)
 
 /**
  * gnome_pixmap_entry_set_pixmap_subdir:
- * @pentry: the GnomePixmapEntry to work with
- * @subdir: sbudirectory
+ * @pentry: Pointer to GnomePixmapEntry widget
+ * @subdir: Subdirectory
  *
- * Description: Sets the subdirectory below gnome's default
- * pixmap directory to use as the default path for the file
- * entry
+ * Description: Sets the default path for the file entry. The new
+ * subdirectory should be specified relative to the default GNOME
+ * pixmap directory.
  *
  * Returns:
  **/
@@ -539,12 +542,12 @@ gnome_pixmap_entry_set_pixmap_subdir(GnomePixmapEntry *pentry,
 
 /**
  * gnome_pixmap_entry_set_preview:
- * @pentry: the GnomePixmapEntry to work with
- * @do_preview: bool
+ * @pentry: Pointer to GnomePixmapEntry widget
+ * @do_preview: %TRUE to show previews, %FALSE to hide.
  *
- * Description: Sets if the preview should be shown or hidden, the files will
- * be loaded anyhow, so it doesn't make the thing any more faster
- *
+ * Description: Sets whether or not previews of the currently selected 
+ * pixmap should be shown in the file selector.
+ * 
  * Returns:
  **/
 void
@@ -562,11 +565,11 @@ gnome_pixmap_entry_set_preview (GnomePixmapEntry *pentry, int do_preview)
 
 /**
  * gnome_pixmap_entry_set_preview_size:
- * @pentry: the GnomePixmapEntry to work with
- * @preview_w: preview width
- * @preview_h: preview height
+ * @pentry: Pointer to GnomePixmapEntry widget
+ * @preview_w: Preview width in pixels
+ * @preview_h: Preview height in pixels
  *
- * Description: Sets the minimum size of the preview frame
+ * Description: Sets the minimum size of the preview frame in pixels.
  *
  * Returns:
  **/
@@ -607,13 +610,12 @@ ensure_update (GnomePixmapEntry *pentry)
 
 /**
  * gnome_pixmap_entry_get_filename:
- * @pentry: the GnomePixmapEntry to work with
+ * @pentry: Pointer to GnomePixmapEntry widget
  *
- * Description: Gets the file name of the image if it was possible
- * to load it into the preview
+ * Description: Gets the filename of the image if the preview
+ * successfully loaded.
  *
- * Returns: a newly allocated string with the path or NULL if it
- * couldn't load the file
+ * Returns: Newly allocated string containing path, or %NULL on error. 
  **/
 char *
 gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry)

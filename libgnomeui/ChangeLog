@@ -1,3 +1,9 @@
+1999-09-04  Tim Gerla  <timg@means.net>
+
+	* gnome-pixmap-entry.c (gnome_pixmap_entry_new): Docs
+	* gnome-spell.c: Doc updates
+	* gnome-href.c: Doc updates
+
 1999-09-04  Tim Gerla 	<timg@means.net>
 
 	* gnome-color-picker.c: Doc updates
