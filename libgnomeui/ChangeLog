@@ -1,3 +1,9 @@
+Wed Nov  4 11:31:57 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gtk-socket.c (gtk_socket_filter_func): Call 
+	gdk_window_destroy_notify() on a DestroyNotify, so
+	that the window gets removed from the XID table.
+
 1998-11-09  Jonathan Blandford  <jrb@aware-of-vacuity.labs.redhat.com>
 
 	* gnome-popup-help.c (gnome_popup_help_expose): added theme'd
@@ -250,6 +256,7 @@
 	(iti_realize): Remove unused Window
 	parameter. 
 
+>>>>>>> 1.556
 Mon Oct 26 16:53:04 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gnome-stock.c: Use gtk_widget_shape_combine_mask() instead
