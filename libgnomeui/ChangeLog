@@ -1,5 +1,12 @@
 2001-02-23  Martin Baulig  <baulig@suse.de>
 
+	* gnome-entry.c (gnome_entry_set_text, gnome_entry_get_text):
+	New convenience functions; we need to add them to gnome-libs stable
+	shortly after GNOME 1.4 as well so that people can start to smoothly
+	migrate their apps to the new API.
+
+2001-02-23  Martin Baulig  <baulig@suse.de>
+
 	* libgnomeui-2.0.pc.in: New file.
 	* Makefile.am: Install pkg-config file.
 

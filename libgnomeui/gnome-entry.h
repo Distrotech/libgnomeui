@@ -82,6 +82,11 @@ void         gnome_entry_construct_full   (GnomeEntry  *gentry,
                                            GtkWidget   *browse_dialog,
                                            guint32      flags);
 
+gchar       *gnome_entry_get_text         (GnomeEntry  *gentry);
+
+void         gnome_entry_set_text         (GnomeEntry  *gentry,
+					   const gchar *text);
+
 #ifndef GNOME_EXCLUDE_DEPRECATED
 
 GtkWidget   *gnome_entry_gtk_entry        (GnomeEntry  *gentry);

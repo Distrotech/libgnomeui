@@ -341,6 +341,25 @@ entry_activated_cb (GtkWidget *widget, gpointer data)
 	gnome_selector_activate_entry (GNOME_SELECTOR (data));
 }
 
+gchar *
+gnome_entry_get_text (GnomeEntry *gentry)
+{
+	g_return_val_if_fail (gentry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
+
+	return gnome_selector_get_uri (GNOME_SELECTOR (gentry));
+}
+
+void
+gnome_entry_set_text (GnomeEntry *gentry, const gchar *text)
+{
+	g_return_if_fail (gentry != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (gentry));
+
+	gnome_selector_set_uri (GNOME_SELECTOR (gentry), NULL,
+				text, NULL, NULL);
+}
+
 #ifndef GNOME_EXCLUDE_DEPRECATED_SOURCE
 
 /**
