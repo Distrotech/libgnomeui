@@ -157,39 +157,7 @@ gnome_property_box_marshal_signal (GtkObject *object,
 static void
 gnome_property_box_init (GnomePropertyBox *property_box)
 {
-	property_box->notebook = property_box->ok_button = NULL;
-	property_box->apply_button = property_box->cancel_button = NULL;
-	property_box->help_button = NULL;
-	property_box->items = NULL;
-}
-
-static void
-gnome_property_box_destroy (GtkObject *object)
-{
-	GnomePropertyBox *property_box;
-	GList *list;
-
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_PROPERTY_BOX (object));
-
-	property_box = GNOME_PROPERTY_BOX (object);
-
-	for (list = property_box->items; list; list = list->next) {
-		g_free ((GnomePropertyBoxItem *) list->data);
-	}
-	g_list_free (property_box->items);
-
-	GTK_OBJECT_CLASS (parent_class)->destroy (object);
-}
-
-GtkWidget *
-gnome_property_box_new (void)
-{
-	GtkWidget *ret, *vbox, *hbox, *bf;
-	GnomePropertyBox *property_box;
-
-	ret = gtk_type_new (gnome_property_box_get_type ());
-	property_box = GNOME_PROPERTY_BOX (ret);
+	GtkWidget *vbox, *hbox, *bf;
 
 	property_box->notebook = gtk_notebook_new ();
 
@@ -250,8 +218,31 @@ gnome_property_box_new (void)
 	gtk_widget_show (bf);
 	gtk_widget_show (property_box->notebook);
 	gtk_widget_show (vbox);
+}
 
-	return ret;
+static void
+gnome_property_box_destroy (GtkObject *object)
+{
+	GnomePropertyBox *property_box;
+	GList *list;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BOX (object));
+
+	property_box = GNOME_PROPERTY_BOX (object);
+
+	for (list = property_box->items; list; list = list->next) {
+		g_free ((GnomePropertyBoxItem *) list->data);
+	}
+	g_list_free (property_box->items);
+
+	GTK_OBJECT_CLASS (parent_class)->destroy (object);
+}
+
+GtkWidget *
+gnome_property_box_new (void)
+{
+	return gtk_type_new (gnome_property_box_get_type ());
 }
 
 static void
