@@ -554,7 +554,7 @@ load_dir (GtkFileFolderGnomeVFS *folder_vfs)
 			       remove_all, NULL);
   gnome_authentication_manager_push_async ();
 
-  if (gnome_vfs_uri_is_local (folder_vfs->uri))
+  if (g_str_has_prefix (folder_vfs->uri, "file:"))
     num_items = ITEMS_PER_LOCAL_NOTIFICATION;
   else
     num_items = ITEMS_PER_REMOTE_NOTIFICATION;
