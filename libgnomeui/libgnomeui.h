@@ -41,6 +41,7 @@
 #endif
 #include "libgnomeui/gnome-canvas.h"
 /* #include "libgnomeui/gnome-canvas-image.h" */
+#include "libgnomeui/gnome-canvas-pixbuf.h"
 #include "libgnomeui/gnome-canvas-line.h"
 /* #include "libgnomeui/gnome-canvas-load.h" */
 #include "libgnomeui/gnome-canvas-rect-ellipse.h"

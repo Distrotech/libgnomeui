@@ -43,6 +43,7 @@ typedef enum {
 #define GNOME_FONT_PICKER_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_FONT_PICKER, GnomeFontPickerClass))
 #define GNOME_IS_FONT_PICKER(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_FONT_PICKER))
 #define GNOME_IS_FONT_PICKER_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_FONT_PICKER))
+#define GNOME_FONT_PICKER_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_FONT_PICKER, GnomeFontPickerClass))
 
 typedef struct _GnomeFontPicker GnomeFontPicker;
 typedef struct _GnomeFontPickerClass GnomeFontPickerClass;

@@ -38,6 +38,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_DOCK_BAND_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DOCK_BAND, GnomeDockBandClass))
 #define GNOME_IS_DOCK_BAND(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DOCK_BAND))
 #define GNOME_IS_DOCK_BAND_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DOCK_BAND))
+#define GNOME_DOCK_BAND_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DOCK_BAND, GnomeDockBandClass))
 
 typedef struct _GnomeDockBand GnomeDockBand;
 typedef struct _GnomeDockBandPrivate GnomeDockBandPrivate;

@@ -68,8 +68,9 @@ gnome_less_get_type ()
 	sizeof (GnomeLessClass),
 	(GtkClassInitFunc) gnome_less_class_init,
 	(GtkObjectInitFunc) gnome_less_init,
-	(GtkArgSetFunc) NULL,
-	(GtkArgGetFunc) NULL,
+	NULL,
+	NULL,
+	NULL
       };
 
       gl_type = gtk_type_unique (gtk_vbox_get_type (), &gl_info);

@@ -41,6 +41,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_MDI_GENERIC_CHILD_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_MDI_GENERIC_CHILD, GnomeMDIGenericChildClass))
 #define GNOME_IS_MDI_GENERIC_CHILD(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_MDI_GENERIC_CHILD))
 #define GNOME_IS_MDI_GENERIC_CHILD_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_MDI_GENERIC_CHILD))
+#define GNOME_MDI_GENERIC_CHILD_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_MDI_GENERIC_CHILD, GnomeMDIGenericChildClass))
 /* The source backward-compatibility macro GNOME_IS_MDI_MDI_CHILD(obj)
    is in gnome-compat.h.  */
 

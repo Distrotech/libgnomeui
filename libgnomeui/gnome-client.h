@@ -40,6 +40,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_CLIENT_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CLIENT, GnomeClientClass))
 #define GNOME_IS_CLIENT(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_CLIENT))
 #define GNOME_IS_CLIENT_CLASS(klass) (GTK_CHECK_CLASS_TYPE (((klass), GNOME_TYPE_CLIENT))
+#define GNOME_CLIENT_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_CLIENT, GnomeClientClass))
 
 #define GNOME_CLIENT_CONNECTED(obj) (GNOME_CLIENT (obj)->smc_conn)
 

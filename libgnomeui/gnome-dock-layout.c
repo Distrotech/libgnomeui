@@ -202,8 +202,9 @@ gnome_dock_layout_get_type (void)
         sizeof (GnomeDockLayoutClass),
         (GtkClassInitFunc) gnome_dock_layout_class_init,
         (GtkObjectInitFunc) gnome_dock_layout_init,
-        (GtkArgSetFunc) NULL,
-        (GtkArgGetFunc) NULL,
+        NULL,
+        NULL,
+	NULL
       };
 		
       layout_type = gtk_type_unique (gtk_object_get_type (), &layout_info);

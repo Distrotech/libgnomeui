@@ -41,6 +41,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_APPBAR_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_APPBAR, GnomeAppBarClass))
 #define GNOME_IS_APPBAR(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_APPBAR))
 #define GNOME_IS_APPBAR_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_APPBAR))
+#define GNOME_APPBAR_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_APPBAR, GnomeAppBarClass))
 
 /* Used in gnome-app-util to determine the capabilities of the appbar */
 #define GNOME_APPBAR_HAS_STATUS(appbar) (GNOME_APPBAR(appbar)->status != NULL)

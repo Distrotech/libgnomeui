@@ -85,8 +85,9 @@ gnome_property_box_get_type (void)
 			sizeof (GnomePropertyBoxClass),
 			(GtkClassInitFunc) gnome_property_box_class_init,
 			(GtkObjectInitFunc) gnome_property_box_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL,
+			NULL
 		};
 
 		property_box_type = gtk_type_unique (gnome_dialog_get_type (),
@@ -114,7 +115,7 @@ gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 	property_box_signals[APPLY] =
 		gtk_signal_new ("apply",
 				GTK_RUN_LAST,
-				object_class->type,
+				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomePropertyBoxClass,
 						   apply),
 				gnome_property_box_marshal_signal,
@@ -122,7 +123,7 @@ gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 	property_box_signals[HELP] =
 		gtk_signal_new ("help",
 				GTK_RUN_LAST,
-				object_class->type,
+				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomePropertyBoxClass,
 						   help),
 				gnome_property_box_marshal_signal,

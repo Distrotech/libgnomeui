@@ -45,8 +45,9 @@ gnome_unit_spinner_get_type(void)
       sizeof(GnomeUnitSpinnerClass),
       (GtkClassInitFunc) gnome_unit_spinner_class_init,
       (GtkObjectInitFunc) gnome_unit_spinner_init,
-      (GtkArgSetFunc) NULL,
-      (GtkArgGetFunc) NULL
+      NULL,
+      NULL,
+      NULL
     };
     us_type = gtk_type_unique(gtk_spin_button_get_type(), &us_info);
   }

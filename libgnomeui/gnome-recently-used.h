@@ -39,6 +39,7 @@ typedef struct _GnomeRecentDocument GnomeRecentDocument;
 #define GNOME_RECENTLY_USED_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_RECENTLY_USED, GnomeRecentlyUsedClass))
 #define GNOME_IS_RECENTLY_USED(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_RECENTLY_USED))
 #define GNOME_IS_RECENTLY_USED_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_RECENTLY_USED))
+#define GNOME_RECENTLY_USED_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_RECENTLY_USED, GnomeRecentlyUsedClass))
 
 typedef struct _GnomeRecentlyUsed GnomeRecentlyUsed;
 typedef struct _GnomeRecentlyUsedClass GnomeRecentlyUsedClass;

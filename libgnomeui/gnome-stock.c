@@ -102,9 +102,9 @@ gnome_stock_get_type(void)
 			sizeof(GnomeStockClass),
 			(GtkClassInitFunc)gnome_stock_class_init,
 			(GtkObjectInitFunc)gnome_stock_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL,
-			(GtkClassInitFunc) NULL
+			NULL,
+			NULL,
+			NULL
 		};
 		new_type = gtk_type_unique(gnome_pixmap_get_type(), &type_info);
 	}
@@ -1560,11 +1560,9 @@ gnome_stock_transparent_window (const char *icon, GtkStateType state)
                 return NULL;
         
 	/* Create the window on GdkRGB's visual */
-	gtk_widget_push_visual (gdk_rgb_get_visual ());
 	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
 	window = gtk_window_new (GTK_WINDOW_POPUP);
 	gtk_widget_pop_colormap ();
-	gtk_widget_pop_visual ();
 
 	/* Force realization */
 	gtk_widget_realize (window);

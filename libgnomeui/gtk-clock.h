@@ -44,6 +44,7 @@ BEGIN_GNOME_DECLS
 #define GTK_CLOCK_CLASS(klass)    (GTK_CHECK_CAST_CLASS((klass), GTK_TYPE_CLOCK, GtkClockClass))
 #define GTK_IS_CLOCK(obj)         (GTK_CHECK_TYPE((obj), GTK_TYPE_CLOCK))
 #define GTK_IS_CLOCK_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GTK_TYPE_CLOCK))
+#define GTK_CLOCK_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GTK_TYPE_CLOCK, GtkClockClass))
 	
 typedef struct _GtkClock GtkClock;
 typedef struct _GtkClockClass GtkClockClass;

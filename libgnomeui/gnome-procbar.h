@@ -39,6 +39,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_PROC_BAR__CLASS(klass)   (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PROC_BAR, GnomeProcBarClass))
 #define GNOME_IS_PROC_BAR(obj)	       (GTK_CHECK_TYPE ((obj), GNOME_TYPE_PROC_BAR))
 #define GNOME_IS_PROC_BAR_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PROC_BAR))
+#define GNOME_PROC_BAR_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_PROC_BAR, GnomeProcBarClass))
 
 typedef struct _GnomeProcBar GnomeProcBar;
 typedef struct _GnomeProcBarClass GnomeProcBarClass;

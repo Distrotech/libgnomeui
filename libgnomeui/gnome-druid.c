@@ -111,7 +111,7 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 	druid_signals[CANCEL] = 
 		gtk_signal_new ("cancel",
 				GTK_RUN_LAST,
-				object_class->type,
+				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDruidClass, cancel),
 				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE, 0);

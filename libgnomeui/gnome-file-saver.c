@@ -46,7 +46,7 @@ enum {
 static void gnome_file_saver_init (GnomeFileSaver* file_saver);
 static void gnome_file_saver_class_init (GnomeFileSaverClass* klass);
 static void gnome_file_saver_destroy (GtkObject* object);
-static void gnome_file_saver_finalize (GtkObject* object);
+static void gnome_file_saver_finalize (GObject* object);
 static void gnome_file_saver_set_arg (GtkObject* object, GtkArg* arg, guint arg_id);
 static void gnome_file_saver_get_arg (GtkObject* object, GtkArg* arg, guint arg_id);
 
@@ -90,15 +90,17 @@ static void
 gnome_file_saver_class_init (GnomeFileSaverClass* klass)
 {
         GtkObjectClass* object_class;
+        GObjectClass* gobject_class;
 
         object_class = (GtkObjectClass*) klass;
+        gobject_class = (GObjectClass*) klass;
 
         parent_class = gtk_type_class (gnome_dialog_get_type());
 
         signals[FINISHED] =
                 gtk_signal_new ("finished",
                                 GTK_RUN_LAST,
-                                object_class->type,
+                                GTK_CLASS_TYPE (object_class),
                                 GTK_SIGNAL_OFFSET (GnomeFileSaverClass, finished),
                                 gtk_marshal_NONE__POINTER,
                                 GTK_TYPE_NONE, 1, GTK_TYPE_STRING);
@@ -110,7 +112,7 @@ gnome_file_saver_class_init (GnomeFileSaverClass* klass)
         object_class->get_arg = gnome_file_saver_get_arg;
 
         object_class->destroy = gnome_file_saver_destroy;
-        object_class->finalize = gnome_file_saver_finalize;
+        gobject_class->finalize = gnome_file_saver_finalize;
 }
 
 void
@@ -323,14 +325,14 @@ gnome_file_saver_destroy (GtkObject* object)
 }
 
 static void
-gnome_file_saver_finalize (GtkObject* object)
+gnome_file_saver_finalize (GObject* object)
 {
         GnomeFileSaver* file_saver;
 
         file_saver = GNOME_FILE_SAVER (object);
 
 
-        (* GTK_OBJECT_CLASS(parent_class)->finalize) (object);
+        (* G_OBJECT_CLASS(parent_class)->finalize) (object);
 }
 
 static void

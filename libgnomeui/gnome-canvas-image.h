@@ -65,6 +65,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_CANVAS_IMAGE_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CANVAS_IMAGE, GnomeCanvasImageClass))
 #define GNOME_IS_CANVAS_IMAGE(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_CANVAS_IMAGE))
 #define GNOME_IS_CANVAS_IMAGE_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_CANVAS_IMAGE))
+#define GNOME_CANVAS_IMAGE_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_CANVAS_IMAGE, GnomeCanvasImageClass))
 
 
 typedef struct _GnomeCanvasImage GnomeCanvasImage;

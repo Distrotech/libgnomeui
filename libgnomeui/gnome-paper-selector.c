@@ -67,8 +67,9 @@ gnome_paper_selector_get_type(void)
       sizeof(GnomePaperSelectorClass),
       (GtkClassInitFunc) gnome_paper_selector_class_init,
       (GtkObjectInitFunc) gnome_paper_selector_init,
-      (GtkArgSetFunc) NULL,
-      (GtkArgGetFunc) NULL
+      NULL,
+      NULL,
+      NULL
     };
     ps_type = gtk_type_unique(gtk_table_get_type(), &ps_info);
   }
@@ -86,14 +87,14 @@ gnome_paper_selector_class_init(GnomePaperSelectorClass *class)
   ps_signals[CHANGED] =
     gtk_signal_new("changed",
 		   GTK_RUN_FIRST,
-		   object_class->type,
+		   GTK_CLASS_TYPE(object_class),
 		   GTK_SIGNAL_OFFSET(GnomePaperSelectorClass, changed),
 		   gtk_signal_default_marshaller,
 		   GTK_TYPE_NONE, 0);
   ps_signals[FITTOPAGE] =
     gtk_signal_new("fittopage",
 		   GTK_RUN_FIRST,
-		   object_class->type,
+		   GTK_CLASS_TYPE(object_class),
 		   GTK_SIGNAL_OFFSET(GnomePaperSelectorClass, fittopage),
 		   gtk_signal_default_marshaller,
 		   GTK_TYPE_NONE, 0);

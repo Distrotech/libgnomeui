@@ -79,8 +79,9 @@ gnome_entry_get_type (void)
 			sizeof (GnomeEntryClass),
 			(GtkClassInitFunc) gnome_entry_class_init,
 			(GtkObjectInitFunc) gnome_entry_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL,
+			NULL
 		};
 
 		entry_type = gtk_type_unique (gtk_combo_get_type (), &entry_info);

@@ -33,6 +33,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_UNIT_SPINNER_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_UNIT_SPINNER, GnomeUnitSpinnerClass))
 #define GNOME_IS_UNIT_SPINNER(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_UNIT_SPINNER))
 #define GNOME_IS_UNIT_SPINNER_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_UNIT_SPINNER))
+#define GNOME_UNIT_SPINNER_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_UNIT_SPINNER, GnomeUnitSpinnerClass))
 
 typedef struct _GnomeUnitSpinner GnomeUnitSpinner;
 typedef struct _GnomeUnitSpinnerClass GnomeUnitSpinnerClass;

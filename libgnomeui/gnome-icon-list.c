@@ -1908,7 +1908,7 @@ gil_class_init (GilClass *gil_class)
 		gtk_signal_new (
 			"select_icon",
 			GTK_RUN_FIRST,
-			object_class->type,
+			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconListClass, select_icon),
 			gtk_marshal_NONE__INT_POINTER,
 			GTK_TYPE_NONE, 2,
@@ -1919,7 +1919,7 @@ gil_class_init (GilClass *gil_class)
 		gtk_signal_new (
 			"unselect_icon",
 			GTK_RUN_FIRST,
-			object_class->type,
+			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconListClass, unselect_icon),
 			gtk_marshal_NONE__INT_POINTER,
 			GTK_TYPE_NONE, 2,
@@ -1930,7 +1930,7 @@ gil_class_init (GilClass *gil_class)
 		gtk_signal_new (
 			"text_changed",
 			GTK_RUN_LAST,
-			object_class->type,
+			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeIconListClass, text_changed),
 			xgtk_marshal_BOOL__INT_POINTER,
 			GTK_TYPE_BOOL, 2,
@@ -2003,8 +2003,9 @@ gnome_icon_list_get_type (void)
 			sizeof (GnomeIconListClass),
 			(GtkClassInitFunc) gil_class_init,
 			(GtkObjectInitFunc) gil_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL,
+			NULL
 		};
 
 		gil_type = gtk_type_unique (gnome_canvas_get_type (),
@@ -2213,10 +2214,8 @@ gnome_icon_list_new_flags (guint icon_width, GtkAdjustment *adj, int flags)
 {
 	Gil *gil;
 
-	gtk_widget_push_visual (gdk_rgb_get_visual ());
 	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
 	gil = GIL (gtk_type_new (gnome_icon_list_get_type ()));
-	gtk_widget_pop_visual ();
 	gtk_widget_pop_colormap ();
 
 	gnome_icon_list_construct (gil, icon_width, adj, flags);
@@ -2681,7 +2680,7 @@ gnome_icon_list_get_icon_at (GnomeIconList *gil, int x, int y)
 		GnomeCanvasItem *text = GNOME_CANVAS_ITEM (icon->text);
 
 		if (wx >= image->x1 && wx <= image->x2 && wy >= image->y1 && wy <= image->y2) {
-			dist = (* GNOME_CANVAS_ITEM_CLASS (image->object.klass)->point) (
+			dist = (* GNOME_CANVAS_ITEM_GET_CLASS (image)->point) (
 				image,
 				wx, wy,
 				cx, cy,
@@ -2693,7 +2692,7 @@ gnome_icon_list_get_icon_at (GnomeIconList *gil, int x, int y)
 		}
 
 		if (wx >= text->x1 && wx <= text->x2 && wy >= text->y1 && wy <= text->y2) {
-			dist = (* GNOME_CANVAS_ITEM_CLASS (text->object.klass)->point) (
+			dist = (* GNOME_CANVAS_ITEM_GET_CLASS (text)->point) (
 				text,
 				wx, wy,
 				cx, cy,

@@ -159,8 +159,9 @@ gnome_about_get_type (void)
 			sizeof (GnomeAboutClass),
 			(GtkClassInitFunc) gnome_about_class_init,
 			(GtkObjectInitFunc) gnome_about_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL,
+			NULL,
+			NULL,
+			NULL
 		};
 
 		about_type = gtk_type_unique (gnome_dialog_get_type (), &about_info);
@@ -1058,10 +1059,8 @@ gnome_about_construct (GnomeAbout *about,
 			  GTK_WIDGET(frame));
 	gtk_widget_show (frame);
 
-        gtk_widget_push_visual(gdk_rgb_get_visual());
         gtk_widget_push_colormap(gdk_rgb_get_cmap());
 	canvas = gnome_canvas_new ();
-        gtk_widget_pop_visual();
         gtk_widget_pop_colormap();
 	gtk_container_add (GTK_CONTAINER(frame), canvas);
 

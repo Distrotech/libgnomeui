@@ -88,7 +88,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 	druid_page_signals[NEXT] = 
 		gtk_signal_new ("next",
 				GTK_RUN_LAST,
-				object_class->type,
+				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, next),
 				gtk_marshal_BOOL__POINTER,
 				GTK_TYPE_BOOL, 1,
@@ -96,7 +96,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 	druid_page_signals[PREPARE] = 
 		gtk_signal_new ("prepare",
 				GTK_RUN_LAST,
-				object_class->type,
+				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, prepare),
 				gtk_marshal_NONE__POINTER,
 				GTK_TYPE_NONE, 1,
@@ -104,7 +104,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 	druid_page_signals[BACK] = 
 		gtk_signal_new ("back",
 				GTK_RUN_LAST,
-				object_class->type,
+				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, back),
 				gtk_marshal_BOOL__POINTER,
 				GTK_TYPE_BOOL, 1,
@@ -112,7 +112,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 	druid_page_signals[FINISH] = 
 		gtk_signal_new ("finish",
 				GTK_RUN_LAST,
-				object_class->type,
+				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, finish),
 				gtk_marshal_NONE__POINTER,
 				GTK_TYPE_NONE, 1,
@@ -120,7 +120,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 	druid_page_signals[CANCEL] = 
 		gtk_signal_new ("cancel",
 				GTK_RUN_LAST,
-				object_class->type,
+				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, cancel),
 				gtk_marshal_BOOL__POINTER,
 				GTK_TYPE_BOOL, 1,

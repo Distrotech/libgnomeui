@@ -38,6 +38,7 @@ extern "C" {
 #define GNOME_FILE_SAVER_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_FILE_SAVER, GnomeFileSaverClass))
 #define GNOME_IS_FILE_SAVER(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_FILE_SAVER))
 #define GNOME_IS_FILE_SAVER_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_FILE_SAVER))
+#define GNOME_FILE_SAVER_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_FILE_SAVER, GnomeFileSaverClass))
 
 typedef struct _GnomeFileSaver GnomeFileSaver;
 typedef struct _GnomeFileSaverClass GnomeFileSaverClass;

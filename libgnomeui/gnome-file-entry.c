@@ -102,8 +102,9 @@ gnome_file_entry_get_type (void)
 			sizeof (GnomeFileEntryClass),
 			(GtkClassInitFunc) gnome_file_entry_class_init,
 			(GtkObjectInitFunc) gnome_file_entry_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL,
+			NULL
 		};
 
 		file_entry_type = gtk_type_unique (gtk_hbox_get_type (), &file_entry_info);
@@ -130,7 +131,7 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	gnome_file_entry_signals[BROWSE_CLICKED_SIGNAL] =
 		gtk_signal_new("browse_clicked",
 			       GTK_RUN_LAST,
-			       object_class->type,
+			       GTK_CLASS_TYPE (object_class),
 			       GTK_SIGNAL_OFFSET(GnomeFileEntryClass,
 			       			 browse_clicked),
 			       gtk_signal_default_marshaller,

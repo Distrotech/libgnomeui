@@ -38,7 +38,7 @@ static void        gnome_mdi_generic_child_destroy           (GtkObject *);
 
 static GtkWidget   *gnome_mdi_generic_child_create_view      (GnomeMDIGenericChild *child);
 static GList       *gnome_mdi_generic_child_create_menus     (GnomeMDIGenericChild *child,
-															  GtkWidget            *view);
+							      GtkWidget            *view);
 static gchar       *gnome_mdi_generic_child_get_config_string(GnomeMDIGenericChild *child);
 static GtkWidget   *gnome_mdi_generic_child_set_label        (GnomeMDIGenericChild *child,
 															  GtkWidget *old_label);
@@ -56,8 +56,9 @@ guint gnome_mdi_generic_child_get_type()
 			sizeof (GnomeMDIGenericChildClass),
 			(GtkClassInitFunc) gnome_mdi_generic_child_class_init,
 			(GtkObjectInitFunc) gnome_mdi_generic_child_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL,
+			NULL,
+			NULL,
+			NULL
 		};
     
 		mdi_gen_child_type = gtk_type_unique (gnome_mdi_child_get_type (), &mdi_gen_child_info);

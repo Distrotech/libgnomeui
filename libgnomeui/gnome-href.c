@@ -101,8 +101,9 @@ guint gnome_href_get_type(void) {
       sizeof(GnomeHRefClass),
       (GtkClassInitFunc) gnome_href_class_init,
       (GtkObjectInitFunc) gnome_href_init,
-      (GtkArgSetFunc) NULL,
-      (GtkArgGetFunc) NULL,
+      NULL,
+      NULL,
+      NULL
     };
     href_type = gtk_type_unique(gtk_button_get_type(), &href_info);
   }

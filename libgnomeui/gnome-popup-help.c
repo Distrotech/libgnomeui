@@ -69,6 +69,16 @@ static GnomeUIInfo cutcopymenu[] = {
          GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL}
 };
 
+/* Note: Taken mostly from GtkTooltipsData from GTK+ 1.2 */
+typedef struct _PopupData PopupData;
+struct _PopupData
+{
+  GdkFont *font;
+  gint width;
+  GList *row;
+};
+
+
 static void
 gtk_tooltips_free_string (gpointer data, gpointer user_data)
 {
@@ -77,7 +87,7 @@ gtk_tooltips_free_string (gpointer data, gpointer user_data)
 }
 
 static void
-gnome_popup_help_layout_text (GtkWidget *helpwindow, GtkTooltipsData *data, gchar* text)
+gnome_popup_help_layout_text (GtkWidget *helpwindow, PopupData *data, gchar* text)
      /* Swiped from gtktooltips.c  (: */
 {
   gchar *row_end, *row_text, *break_pos;
@@ -168,7 +178,7 @@ gnome_popup_help_layout_text (GtkWidget *helpwindow, GtkTooltipsData *data, gcha
 }
 
 static gint
-gnome_popup_help_expose (GtkWidget *darea, GdkEventExpose *event, GtkTooltipsData *data)
+gnome_popup_help_expose (GtkWidget *darea, GdkEventExpose *event, PopupData *data)
 {
         GtkStyle *style;
         gint y, baseline_skip, gap;
@@ -203,7 +213,7 @@ gnome_popup_help_expose (GtkWidget *darea, GdkEventExpose *event, GtkTooltipsDat
 }
 
 static void
-gnome_popup_help_size_window (GtkWidget *helpwindow, GtkTooltipsData *data, gint *h, gint *w)
+gnome_popup_help_size_window (GtkWidget *helpwindow, PopupData *data, gint *h, gint *w)
 {
   GtkStyle *style;
   gint gap, baseline_skip;
@@ -229,7 +239,7 @@ gnome_popup_help_size_window (GtkWidget *helpwindow, GtkTooltipsData *data, gint
 }
 
 static void
-gnome_popup_help_place_window (GtkWidget *helpwindow, GtkWidget *widget, GtkTooltipsData *data, gint h, gint w)
+gnome_popup_help_place_window (GtkWidget *helpwindow, GtkWidget *widget, PopupData *data, gint h, gint w)
 {
   gint x, y, scr_w, scr_h;
 
@@ -299,7 +309,7 @@ helpwindow_destroy_callback (GtkWidget *widget, gpointer data)
 static void
 help_callback (GtkWidget *menu, gpointer unused)
 {
-        GtkTooltipsData *data;
+        PopupData *data;
         gint h, w;
         GtkWidget *widget, *helpwindow, *darea;
 
@@ -316,7 +326,7 @@ help_callback (GtkWidget *menu, gpointer unused)
         data = gtk_object_get_data (GTK_OBJECT (menu->parent), 
                                     "gnome_popup_help_data");
         if (helpwindow == NULL) {
-                data = g_malloc (sizeof (GtkTooltipsData));
+                data = g_new0 (PopupData, 1);
                 data->row = NULL;
 
                 helpwindow = gtk_window_new (GTK_WINDOW_POPUP);

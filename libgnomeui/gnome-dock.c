@@ -200,7 +200,7 @@ gnome_dock_class_init (GnomeDockClass *class)
   dock_signals[LAYOUT_CHANGED] =
     gtk_signal_new ("layout_changed",
                     GTK_RUN_LAST,
-                    object_class->type,
+                    GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (GnomeDockClass, layout_changed),
                     gtk_marshal_NONE__NONE,
                     GTK_TYPE_NONE, 0);

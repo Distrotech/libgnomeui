@@ -44,6 +44,7 @@ typedef struct _GnomeLessClass   GnomeLessClass;
 #define GNOME_LESS_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_LESS, GnomeLessClass))
 #define GNOME_IS_LESS(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_LESS))
 #define GNOME_IS_LESS_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_LESS))
+#define GNOME_LESS_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_LESS, GnomeLessClass))
 
 struct _GnomeLess {
   GtkVBox vbox;

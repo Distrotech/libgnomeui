@@ -37,6 +37,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_POUCH_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_POUCH, GnomePouchClass))
 #define GNOME_IS_POUCH(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_POUCH))
 #define GNOME_IS_POUCH_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_POUCH))
+#define GNOME_POUCH_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_POUCH, GnomePouchClass))
 
 typedef struct _GnomePouch       GnomePouch;
 typedef struct _GnomePouchClass  GnomePouchClass;

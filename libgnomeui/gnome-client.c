@@ -1045,8 +1045,9 @@ gnome_client_get_type (void)
 	sizeof (GnomeClientClass),
 	(GtkClassInitFunc) gnome_client_class_init,
 	(GtkObjectInitFunc) gnome_client_object_init,
-	(GtkArgSetFunc) NULL,
-	(GtkArgGetFunc) NULL
+	NULL,
+	NULL,
+	NULL
       };
 
       client_type = gtk_type_unique (gtk_object_get_type (), &client_info);
@@ -1066,7 +1067,7 @@ gnome_client_class_init (GnomeClientClass *klass)
   client_signals[SAVE_YOURSELF] =
     gtk_signal_new ("save_yourself",
 		    GTK_RUN_LAST,
-		    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeClientClass, save_yourself),
 		    gnome_client_marshal_signal_1,
 		    GTK_TYPE_BOOL, 5,
@@ -1078,28 +1079,28 @@ gnome_client_class_init (GnomeClientClass *klass)
   client_signals[DIE] =
     gtk_signal_new ("die",
 		    GTK_RUN_LAST,
-		    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeClientClass, die),
 		    gtk_signal_default_marshaller,
 		    GTK_TYPE_NONE, 0);
   client_signals[SAVE_COMPLETE] =
     gtk_signal_new ("save_complete",
 		    GTK_RUN_FIRST,
-		    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeClientClass, save_complete),
 		    gtk_signal_default_marshaller,
 		    GTK_TYPE_NONE, 0);
   client_signals[SHUTDOWN_CANCELLED] =
     gtk_signal_new ("shutdown_cancelled",
 		    GTK_RUN_FIRST,
-		    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeClientClass, shutdown_cancelled),
 		    gtk_signal_default_marshaller,
 		    GTK_TYPE_NONE, 0);
   client_signals[CONNECT] =
     gtk_signal_new ("connect",
 		    GTK_RUN_FIRST,
-		    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeClientClass, connect),
 		    gnome_client_marshal_signal_2,
 		    GTK_TYPE_NONE, 1,
@@ -1107,7 +1108,7 @@ gnome_client_class_init (GnomeClientClass *klass)
   client_signals[DISCONNECT] =
     gtk_signal_new ("disconnect",
 		    GTK_RUN_FIRST,
-		    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeClientClass, disconnect),
 		    gtk_signal_default_marshaller,
 		    GTK_TYPE_NONE, 0);

@@ -50,8 +50,9 @@ guint gtk_clock_get_type(void)
 			sizeof(GtkClockClass),
 			(GtkClassInitFunc) gtk_clock_class_init,
 			(GtkObjectInitFunc) gtk_clock_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL,
+			NULL,
+			NULL,
+			NULL
 		};
 		gtkclock_type = gtk_type_unique(gtk_label_get_type(), &gtkclock_info);
 	}

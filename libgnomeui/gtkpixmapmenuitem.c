@@ -340,18 +340,18 @@ static void
 changed_have_pixmap_status (GtkPixmapMenuItem *menu_item)
 {
   if (menu_item->pixmap != NULL) {
-    GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->have_pixmap_count += 1;
+    GTK_PIXMAP_MENU_ITEM_GET_CLASS(menu_item)->have_pixmap_count += 1;
 
-    if (GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->have_pixmap_count == 1) {
+    if (GTK_PIXMAP_MENU_ITEM_GET_CLASS(menu_item)->have_pixmap_count == 1) {
       /* Install pixmap toggle size */
-      GTK_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->toggle_size = MAX(GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->orig_toggle_size, PMAP_WIDTH);
+      GTK_MENU_ITEM_GET_CLASS(menu_item)->toggle_size = MAX(GTK_PIXMAP_MENU_ITEM_GET_CLASS(menu_item)->orig_toggle_size, PMAP_WIDTH);
     }
   } else {
-    GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->have_pixmap_count -= 1;
+    GTK_PIXMAP_MENU_ITEM_GET_CLASS(menu_item)->have_pixmap_count -= 1;
 
-    if (GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->have_pixmap_count == 0) {
+    if (GTK_PIXMAP_MENU_ITEM_GET_CLASS(menu_item)->have_pixmap_count == 0) {
       /* Install normal toggle size */
-      GTK_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->toggle_size = GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->orig_toggle_size;    
+      GTK_MENU_ITEM_GET_CLASS(menu_item)->toggle_size = GTK_PIXMAP_MENU_ITEM_GET_CLASS(menu_item)->orig_toggle_size;    
     }
   }
 

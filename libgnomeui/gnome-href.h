@@ -36,6 +36,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_HREF_CLASS(klass)    (GTK_CHECK_CLASS_CAST((klass), GNOME_TYPE_HREF, GnomeHRefClass))
 #define GNOME_IS_HREF(obj)         (GTK_CHECK_TYPE((obj), GNOME_TYPE_HREF))
 #define GNOME_IS_HREF_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_HREF))
+#define GNOME_HREF_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_HREF, GnomeHRefClass))
 
 typedef struct _GnomeHRef        GnomeHRef;
 typedef struct _GnomeHRefPrivate GnomeHRefPrivate;

@@ -53,7 +53,7 @@ enum {
 static void                 gnome_recently_used_init               (GnomeRecentlyUsed      *recently_used);
 static void                 gnome_recently_used_class_init         (GnomeRecentlyUsedClass *klass);
 static void                 gnome_recently_used_destroy            (GtkObject              *object);
-static void                 gnome_recently_used_finalize           (GtkObject              *object);
+static void                 gnome_recently_used_finalize           (GObject                *object);
 
 static void                 gnome_recently_used_set_arg          (GtkObject              *object,
                                                                     GtkArg                 *arg,
@@ -110,8 +110,10 @@ static void
 gnome_recently_used_class_init (GnomeRecentlyUsedClass* klass)
 {
         GtkObjectClass* object_class;
+        GObjectClass* gobject_class;
 
         object_class = (GtkObjectClass*) klass;
+        gobject_class = (GObjectClass*) klass;
 
         parent_class = gtk_type_class (GTK_TYPE_OBJECT);
         
@@ -123,7 +125,7 @@ gnome_recently_used_class_init (GnomeRecentlyUsedClass* klass)
         signals[DOCUMENT_ADDED] =
                 gtk_signal_new ("document_added",
                                 GTK_RUN_FIRST,
-                                object_class->type,
+                                GTK_CLASS_TYPE (object_class),
                                 GTK_SIGNAL_OFFSET (GnomeRecentlyUsedClass, document_added),
                                 gtk_marshal_NONE__POINTER,
                                 GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
@@ -131,7 +133,7 @@ gnome_recently_used_class_init (GnomeRecentlyUsedClass* klass)
         signals[DOCUMENT_REMOVED] =
                 gtk_signal_new ("document_removed",
                                 GTK_RUN_FIRST,
-                                object_class->type,
+                                GTK_CLASS_TYPE (object_class),
                                 GTK_SIGNAL_OFFSET (GnomeRecentlyUsedClass, document_removed),
                                 gtk_marshal_NONE__POINTER,
                                 GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
@@ -139,7 +141,7 @@ gnome_recently_used_class_init (GnomeRecentlyUsedClass* klass)
         signals[DOCUMENT_CHANGED] =
                 gtk_signal_new ("document_changed",
                                 GTK_RUN_FIRST,
-                                object_class->type,
+                                GTK_CLASS_TYPE (object_class),
                                 GTK_SIGNAL_OFFSET (GnomeRecentlyUsedClass, document_changed),
                                 gtk_marshal_NONE__POINTER,
                                 GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
@@ -150,7 +152,7 @@ gnome_recently_used_class_init (GnomeRecentlyUsedClass* klass)
         object_class->get_arg = gnome_recently_used_get_arg;
         
         object_class->destroy = gnome_recently_used_destroy;
-        object_class->finalize = gnome_recently_used_finalize;
+        gobject_class->finalize = gnome_recently_used_finalize;
 }
 
 void
@@ -312,7 +314,7 @@ gnome_recently_used_destroy (GtkObject* object)
 }
 
 static void
-gnome_recently_used_finalize (GtkObject* object)
+gnome_recently_used_finalize (GObject* object)
 {
         GnomeRecentlyUsed* recently_used;
         GSList *iter;
@@ -346,7 +348,7 @@ gnome_recently_used_finalize (GtkObject* object)
         
         gtk_object_unref(GTK_OBJECT(recently_used->conf));
         
-        (* parent_class->finalize) (object);
+        (* G_OBJECT_CLASS(parent_class)->finalize) (object);
 }
 
 /*

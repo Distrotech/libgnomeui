@@ -132,7 +132,7 @@ gnome_help_view_class_init (GnomeHelpViewClass *class)
 
   object_class = (GtkObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
-  parent_class = gtk_type_class(gtk_type_parent(object_class->type));
+  parent_class = gtk_type_class(gtk_type_parent(GTK_CLASS_TYPE(object_class)));
 
   object_class->get_arg = gnome_help_view_get_arg;
   object_class->set_arg = gnome_help_view_set_arg;
@@ -279,10 +279,10 @@ gnome_help_view_size_request  (GtkWidget      *widget,
   GList *children;
   gint nvis_children;
   gint length;
-  guint16 *primary_axis = NULL;
-  guint16 *secondary_axis = NULL;
-  guint16 *primary_axis_child = NULL;
-  guint16 *secondary_axis_child = NULL;
+  gint *primary_axis = NULL;
+  gint *secondary_axis = NULL;
+  gint *primary_axis_child = NULL;
+  gint *secondary_axis_child = NULL;
   GnomeHelpView *help_view;
   GtkRequisition child_requisition;
 
@@ -368,12 +368,12 @@ gnome_help_view_size_allocate (GtkWidget      *widget,
   gint dimension;
   gint extra;
   gint position;
-  gint16 *primary_axis_child = NULL, *secondary_axis_child = NULL;
-  guint16 *primary_size_child = NULL, *secondary_size_child = NULL;
-  guint16 *primary_req_size_child = NULL, *secondary_req_size_child = NULL;
-  gint16 *primary_axis = NULL, *secondary_axis = NULL;
-  guint16 *primary_size = NULL, *secondary_size = NULL;
-  guint16 *primary_req_size = NULL, *secondary_req_size = NULL;
+  gint *primary_axis_child = NULL, *secondary_axis_child = NULL;
+  gint *primary_size_child = NULL, *secondary_size_child = NULL;
+  gint *primary_req_size_child = NULL, *secondary_req_size_child = NULL;
+  gint *primary_axis = NULL, *secondary_axis = NULL;
+  gint *primary_size = NULL, *secondary_size = NULL;
+  gint *primary_req_size = NULL, *secondary_req_size = NULL;
   GtkRequisition child_requisition;
   GnomeHelpView *help_view;
   gboolean got_req = FALSE;
@@ -925,7 +925,7 @@ popup_set_selection (GnomeHelpView *help_view)
 static void
 gnome_help_view_select_style(GtkWidget *btn, GnomeHelpView *help_view)
 {
-  GnomeHelpViewClass *class = GNOME_HELP_VIEW_CLASS(GTK_OBJECT(help_view)->klass);
+  GnomeHelpViewClass *class = GNOME_HELP_VIEW_GET_CLASS(help_view);
 
   gnome_popup_menu_do_popup(class->popup_menu, NULL, NULL, NULL, help_view, btn);
 }

@@ -334,13 +334,13 @@ gnome_date_edit_class_init (GnomeDateEditClass *class)
 	
 	date_edit_signals [TIME_CHANGED] =
 		gtk_signal_new ("time_changed",
-				GTK_RUN_FIRST, object_class->type, 
+				GTK_RUN_FIRST, GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDateEditClass, time_changed),
 				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
 	
 	date_edit_signals [DATE_CHANGED] =
 		gtk_signal_new ("date_changed",
-				GTK_RUN_FIRST, object_class->type, 
+				GTK_RUN_FIRST, GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDateEditClass, date_changed),
 				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
 	

@@ -71,8 +71,9 @@ gnome_number_entry_get_type (void)
 			sizeof (GnomeNumberEntryClass),
 			(GtkClassInitFunc) gnome_number_entry_class_init,
 			(GtkObjectInitFunc) gnome_number_entry_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL,
+			NULL
 		};
 
 		number_entry_type = gtk_type_unique (gtk_hbox_get_type (), &number_entry_info);

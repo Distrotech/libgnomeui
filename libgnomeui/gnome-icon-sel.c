@@ -73,8 +73,9 @@ gnome_icon_selection_get_type ()
 	sizeof (GnomeIconSelectionClass),
 	(GtkClassInitFunc) gnome_icon_selection_class_init,
 	(GtkObjectInitFunc) gnome_icon_selection_init,
-	(GtkArgSetFunc) NULL,
-	(GtkArgGetFunc) NULL,
+	NULL,
+	NULL,
+	NULL
       };
 
       gis_type = gtk_type_unique (gtk_vbox_get_type (), &gis_info);

@@ -67,8 +67,9 @@ gnome_appbar_get_type ()
         sizeof (GnomeAppBarClass),
         (GtkClassInitFunc) gnome_appbar_class_init,
         (GtkObjectInitFunc) gnome_appbar_init,
-        (GtkArgSetFunc) NULL,
-        (GtkArgGetFunc) NULL,
+        NULL,
+        NULL,
+	NULL
       };
 
       ab_type = gtk_type_unique (gtk_hbox_get_type (), &ab_info);
@@ -91,7 +92,7 @@ gnome_appbar_class_init (GnomeAppBarClass *class)
   appbar_signals[USER_RESPONSE] =
     gtk_signal_new ("user_response",
 		    GTK_RUN_LAST,
-		    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeAppBarClass, user_response),
 		    gtk_signal_default_marshaller,
 		    GTK_TYPE_NONE, 0);
@@ -99,7 +100,7 @@ gnome_appbar_class_init (GnomeAppBarClass *class)
   appbar_signals[CLEAR_PROMPT] =
     gtk_signal_new ("clear_prompt",
 		    GTK_RUN_LAST,
-		    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeAppBarClass, clear_prompt),
 		    gtk_signal_default_marshaller,
 		    GTK_TYPE_NONE, 0);
@@ -676,7 +677,7 @@ gnome_appbar_destroy (GtkObject *object)
   g_return_if_fail (GNOME_IS_APPBAR (object));
 
   ab = GNOME_APPBAR (object);
-  class = GNOME_APPBAR_CLASS (GTK_OBJECT (ab)->klass);
+  class = GNOME_APPBAR_GET_CLASS (ab);
 
   gnome_appbar_clear_stack(ab);
   /* g_free checks if these are NULL */

@@ -99,8 +99,9 @@ guint gnome_pouch_get_type()
 			sizeof(GnomePouchClass),
 			(GtkClassInitFunc) gnome_pouch_class_init,
 			(GtkObjectInitFunc) gnome_pouch_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL,
+			NULL,
+			NULL,
+			NULL
 		};
 		pouch_type = gtk_type_unique(gtk_fixed_get_type(), &pouch_info);
 	}
@@ -118,41 +119,48 @@ static void gnome_pouch_class_init(GnomePouchClass *klass)
 	widget_class = GTK_WIDGET_CLASS(klass);
 	object_class = GTK_OBJECT_CLASS(klass);
 
-	pouch_signals[CLOSE_CHILD] = gtk_signal_new ("close-child",
-												 GTK_RUN_LAST,
-												 object_class->type,
-												 GTK_SIGNAL_OFFSET (GnomePouchClass, close_child),
-												 gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
-	pouch_signals[ICONIFY_CHILD] = gtk_signal_new ("iconify-child",
-												   GTK_RUN_FIRST,
-												   object_class->type,
-												   GTK_SIGNAL_OFFSET (GnomePouchClass, iconify_child),
-												   gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
-	pouch_signals[UNICONIFY_CHILD] = gtk_signal_new ("uniconify-child",
-													 GTK_RUN_FIRST,
-													 object_class->type,
-													 GTK_SIGNAL_OFFSET (GnomePouchClass, uniconify_child),
-													 gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
-	pouch_signals[MAXIMIZE_CHILD] = gtk_signal_new ("maximize-child",
-													GTK_RUN_FIRST,
-													object_class->type,
-													GTK_SIGNAL_OFFSET (GnomePouchClass, maximize_child),
-													gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
-	pouch_signals[UNMAXIMIZE_CHILD] = gtk_signal_new ("unmaximize-child",
-													  GTK_RUN_FIRST,
-													  object_class->type,
-													  GTK_SIGNAL_OFFSET (GnomePouchClass, unmaximize_child),
-													  gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
-	pouch_signals[SELECT_CHILD] = gtk_signal_new ("select-child",
-												  GTK_RUN_FIRST,
-												  object_class->type,
-												  GTK_SIGNAL_OFFSET (GnomePouchClass, select_child),
-												  gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
-	pouch_signals[UNSELECT_CHILD] = gtk_signal_new ("unselect-child",
-													GTK_RUN_FIRST,
-													object_class->type,
-													GTK_SIGNAL_OFFSET (GnomePouchClass, unselect_child),
-													gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
+	pouch_signals[CLOSE_CHILD] =
+		gtk_signal_new ("close-child",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomePouchClass, close_child),
+				gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
+	pouch_signals[ICONIFY_CHILD] =
+		gtk_signal_new ("iconify-child",
+				GTK_RUN_FIRST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomePouchClass, iconify_child),
+				gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
+	pouch_signals[UNICONIFY_CHILD] =
+		gtk_signal_new ("uniconify-child",
+				GTK_RUN_FIRST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomePouchClass, uniconify_child),
+				gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
+	pouch_signals[MAXIMIZE_CHILD] =
+		gtk_signal_new ("maximize-child",
+				GTK_RUN_FIRST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomePouchClass, maximize_child),
+				gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
+	pouch_signals[UNMAXIMIZE_CHILD] =
+		gtk_signal_new ("unmaximize-child",
+				GTK_RUN_FIRST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomePouchClass, unmaximize_child),
+				gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
+	pouch_signals[SELECT_CHILD] =
+		gtk_signal_new ("select-child",
+				GTK_RUN_FIRST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomePouchClass, select_child),
+				gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
+	pouch_signals[UNSELECT_CHILD] =
+		gtk_signal_new ("unselect-child",
+				GTK_RUN_FIRST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomePouchClass, unselect_child),
+				gnome_pouch_marshal, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
 
 	gtk_object_class_add_signals(object_class, pouch_signals, LAST_SIGNAL);
 

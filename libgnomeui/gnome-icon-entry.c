@@ -133,8 +133,9 @@ gnome_icon_entry_get_type (void)
 			sizeof (GnomeIconEntryClass),
 			(GtkClassInitFunc) gnome_icon_entry_class_init,
 			(GtkObjectInitFunc) gnome_icon_entry_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL,
+			NULL
 		};
 
 		icon_entry_type = gtk_type_unique (gtk_vbox_get_type (),
@@ -153,7 +154,7 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 	gnome_ientry_signals[CHANGED_SIGNAL] =
 		gtk_signal_new("changed",
 			       GTK_RUN_LAST,
-			       object_class->type,
+			       GTK_CLASS_TYPE(object_class),
 			       GTK_SIGNAL_OFFSET(GnomeIconEntryClass,
 			       			 changed),
 			       gtk_signal_default_marshaller,
@@ -161,7 +162,7 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 	gnome_ientry_signals[BROWSE_SIGNAL] =
 		gtk_signal_new("browse",
 			       GTK_RUN_LAST,
-			       object_class->type,
+			       GTK_CLASS_TYPE(object_class),
 			       GTK_SIGNAL_OFFSET(GnomeIconEntryClass,
 			       			 browse),
 			       gtk_signal_default_marshaller,

@@ -43,7 +43,7 @@ static GtkHBoxClass *parent_class;
 static gint gnome_proc_bar_expose (GtkWidget *w, GdkEventExpose *e, GnomeProcBar *pb);
 static gint gnome_proc_bar_configure (GtkWidget *w, GdkEventConfigure *e, GnomeProcBar *pb);
 static void gnome_proc_bar_size_request (GtkWidget *w, GtkRequisition *r, GnomeProcBar *pb);
-static void gnome_proc_bar_finalize (GtkObject *o);
+static void gnome_proc_bar_finalize (GObject *o);
 static void gnome_proc_bar_setup_colors (GnomeProcBar *pb);
 static void gnome_proc_bar_draw (GnomeProcBar *pb, const guint val []);
 static void gnome_proc_bar_destroy (GtkObject *obj);
@@ -61,8 +61,9 @@ gnome_proc_bar_get_type (void)
 	    sizeof (GnomeProcBarClass),
 	    (GtkClassInitFunc) gnome_proc_bar_class_init,
 	    (GtkObjectInitFunc) gnome_proc_bar_init,
-	    (GtkArgSetFunc) NULL,
-	    (GtkArgGetFunc) NULL
+	    NULL,
+	    NULL,
+	    NULL
 	};
 
 	proc_bar_type = gtk_type_unique (gtk_hbox_get_type (), &proc_bar_info);
@@ -75,12 +76,14 @@ static void
 gnome_proc_bar_class_init (GnomeProcBarClass *class)
 {
     GtkObjectClass *object_class;
+    GObjectClass *gobject_class;
 
     object_class = (GtkObjectClass *) class;
+    gobject_class = (GObjectClass *) class;
 
     parent_class = gtk_type_class (gtk_hbox_get_type ());
 
-    object_class->finalize = gnome_proc_bar_finalize;
+    gobject_class->finalize = gnome_proc_bar_finalize;
 
     object_class->destroy = gnome_proc_bar_destroy;
 }
@@ -100,12 +103,12 @@ gnome_proc_bar_destroy (GtkObject *obj)
 }
 
 static void
-gnome_proc_bar_finalize (GtkObject *o)
+gnome_proc_bar_finalize (GObject *o)
 {
     g_return_if_fail (o != NULL);
     g_return_if_fail (GNOME_IS_PROC_BAR (o));
 
-    (* GTK_OBJECT_CLASS (parent_class)->finalize) (o);
+    (* G_OBJECT_CLASS (parent_class)->finalize) (o);
 }
 
 static void

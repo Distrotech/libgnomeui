@@ -36,9 +36,10 @@ BEGIN_GNOME_DECLS
 
 #define GNOME_TYPE_SPELL            (gnome_spell_get_type ())
 #define GNOME_SPELL(obj)	    (GTK_CHECK_CAST((obj), GNOME_TYPE_SPELL, GnomeSpell))
-#define GNOME_SPELL_CLASS(klass)    (GTK_CHECK_CLASS_CAST((klass), GNOME_TYPE_SPELL, GnomeSpelliClass))
+#define GNOME_SPELL_CLASS(klass)    (GTK_CHECK_CLASS_CAST((klass), GNOME_TYPE_SPELL, GnomeSpellClass))
 #define GNOME_IS_SPELL(obj)	    (GTK_CHECK_TYPE((obj), GNOME_TYPE_SPELL))
 #define GNOME_IS_SPELL_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_SPELL))
+#define GNOME_SPELL_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_SPELL, GnomeSpellClass))
 
 typedef struct _GnomeSpell GnomeSpell;
 typedef struct _GnomeSpellClass GnomeSpellClass;

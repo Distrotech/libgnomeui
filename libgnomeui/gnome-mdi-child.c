@@ -39,7 +39,7 @@
 static void       gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
 static void       gnome_mdi_child_init             (GnomeMDIChild *);
 static void       gnome_mdi_child_destroy          (GtkObject *);
-static void       gnome_mdi_child_finalize         (GtkObject *);
+static void       gnome_mdi_child_finalize         (GObject *);
 
 static GtkWidget *gnome_mdi_child_set_label        (GnomeMDIChild *, GtkWidget *, gpointer);
 static GtkWidget *gnome_mdi_child_create_view      (GnomeMDIChild *);
@@ -57,8 +57,9 @@ guint gnome_mdi_child_get_type ()
 			sizeof (GnomeMDIChildClass),
 			(GtkClassInitFunc) gnome_mdi_child_class_init,
 			(GtkObjectInitFunc) gnome_mdi_child_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL,
+			NULL,
+			NULL,
+			NULL
 		};
     
 		mdi_child_type = gtk_type_unique (gtk_object_get_type (), &mdi_child_info);
@@ -70,11 +71,13 @@ guint gnome_mdi_child_get_type ()
 static void gnome_mdi_child_class_init (GnomeMDIChildClass *klass)
 {
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 
 	object_class = (GtkObjectClass*)klass;
+	gobject_class = (GObjectClass*)klass;
   
 	object_class->destroy = gnome_mdi_child_destroy;
-	object_class->finalize = gnome_mdi_child_finalize;
+	gobject_class->finalize = gnome_mdi_child_finalize;
   
 	klass->create_view = NULL;
 	klass->create_menus = NULL;
@@ -99,8 +102,8 @@ static void gnome_mdi_child_init (GnomeMDIChild *mdi_child)
 
 static GtkWidget *gnome_mdi_child_create_view (GnomeMDIChild *child)
 {
-	if(GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view)
-		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->create_view(child, NULL);
+	if(GNOME_MDI_CHILD_GET_CLASS(child)->create_view)
+		return GNOME_MDI_CHILD_GET_CLASS(child)->create_view(child, NULL);
 
 	return NULL;
 }
@@ -130,7 +133,7 @@ static GtkWidget *gnome_mdi_child_set_label (GnomeMDIChild *child, GtkWidget *ol
 	}
 }
 
-static void gnome_mdi_child_finalize (GtkObject *obj)
+static void gnome_mdi_child_finalize (GObject *obj)
 {
 	GnomeMDIChild *mdi_child;
 
@@ -143,8 +146,8 @@ static void gnome_mdi_child_finalize (GtkObject *obj)
 	if(mdi_child->name)
 		g_free(mdi_child->name);
 
-	if(GTK_OBJECT_CLASS(parent_class)->finalize)
-		(* GTK_OBJECT_CLASS(parent_class)->finalize)(obj);
+	if(G_OBJECT_CLASS(parent_class)->finalize)
+		(* G_OBJECT_CLASS(parent_class)->finalize)(obj);
 }
 
 static void gnome_mdi_child_destroy (GtkObject *obj)

@@ -52,8 +52,8 @@ static gpointer		view_window_func	(gpointer);
 static gchar *
 gnome_mdi_child_get_config_string (GnomeMDIChild *child)
 {
-	if(GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->get_config_string)
-		return GNOME_MDI_CHILD_CLASS(GTK_OBJECT(child)->klass)->get_config_string(child, NULL);
+	if(GNOME_MDI_CHILD_GET_CLASS(child)->get_config_string)
+		return GNOME_MDI_CHILD_GET_CLASS(child)->get_config_string(child, NULL);
 
 	return NULL;
 }

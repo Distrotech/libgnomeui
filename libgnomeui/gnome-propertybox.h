@@ -34,6 +34,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_PROPERTY_BOX_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PROPERTY_BOX, GnomePropertyBoxClass))
 #define GNOME_IS_PROPERTY_BOX(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_PROPERTY_BOX))
 #define GNOME_IS_PROPERTY_BOX_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PROPERTY_BOX))
+#define GNOME_PROPERTY_BOX_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_PROPERTY_BOX, GnomePropertyBoxClass))
 
 /*the flag used on the notebook pages to see if a change happened on a certain page or not*/
 #define GNOME_PROPERTY_BOX_DIRTY	"gnome_property_box_dirty"

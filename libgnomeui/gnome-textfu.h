@@ -35,6 +35,7 @@ extern "C" {
 #define GNOME_TEXTFU_CLASS(klass)		(GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_TEXTFU, GnomeTextFuClass))
 #define GNOME_IS_TEXTFU(obj)			(GTK_CHECK_TYPE ((obj), GNOME_TYPE_TEXTFU))
 #define GNOME_IS_TEXTFU_CLASS(klass)		(GTK_CHECK_CLASS_TYPE ((obj), GNOME_TYPE_TEXTFU))
+#define GNOME_TEXTFU_GET_CLASS(obj)             (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_TEXTFU, GnomeTextFuClass))
 
 
 typedef enum {

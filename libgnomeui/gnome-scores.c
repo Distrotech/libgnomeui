@@ -80,8 +80,9 @@ gnome_scores_get_type (void)
 			sizeof (GnomeScoresClass),
 			(GtkClassInitFunc) gnome_scores_class_init,
 			(GtkObjectInitFunc) gnome_scores_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL,
+			NULL,
+			NULL,
+			NULL
 		};
 
 		scores_type = gtk_type_unique (gnome_dialog_get_type (), 

@@ -152,7 +152,7 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
   dock_item_signals[DOCK_DRAG_BEGIN] =
     gtk_signal_new ("dock_drag_begin",
                     GTK_RUN_LAST,
-                    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (GnomeDockItemClass, dock_drag_begin),
                     gtk_marshal_NONE__NONE,
                     GTK_TYPE_NONE, 0);
@@ -160,7 +160,7 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
   dock_item_signals[DOCK_DRAG_MOTION] =
     gtk_signal_new ("dock_drag_motion",
                     GTK_RUN_LAST,
-                    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (GnomeDockItemClass, dock_drag_motion),
                     gtk_marshal_NONE__INT_INT,
                     GTK_TYPE_NONE, 2,
@@ -170,7 +170,7 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
   dock_item_signals[DOCK_DRAG_END] =
     gtk_signal_new ("dock_drag_end",
                     GTK_RUN_LAST,
-                    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (GnomeDockItemClass, dock_drag_end),
                     gtk_marshal_NONE__NONE,
                     GTK_TYPE_NONE, 0);
@@ -178,7 +178,7 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
   dock_item_signals[DOCK_DETACH] =
     gtk_signal_new ("dock_detach",
                     GTK_RUN_LAST,
-                    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (GnomeDockItemClass, dock_detach),
                     gtk_marshal_NONE__NONE,
                     GTK_TYPE_NONE, 0);
@@ -186,7 +186,7 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
   dock_item_signals[ORIENTATION_CHANGED] =
     gtk_signal_new ("orientation_changed",
 		    GTK_RUN_LAST,
-		    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeDockItemClass, orientation_changed),
 		    gtk_marshal_NONE__ENUM,
 		    GTK_TYPE_NONE, 0, GTK_TYPE_ENUM);

@@ -49,6 +49,8 @@ BEGIN_GNOME_DECLS
 #define GNOME_ABOUT_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ABOUT, GnomeAboutClass))
 #define GNOME_IS_ABOUT(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ABOUT))
 #define GNOME_IS_ABOUT_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ABOUT))
+#define GNOME_ABOUT_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_ABOUT, GnomeAboutClass))
+
 
 typedef struct _GnomeAbout        GnomeAbout;
 typedef struct _GnomeAboutPrivate GnomeAboutPrivate;

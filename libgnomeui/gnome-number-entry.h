@@ -45,6 +45,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_NUMBER_ENTRY_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_NUMBER_ENTRY, GnomeNumberEntryClass))
 #define GNOME_IS_NUMBER_ENTRY(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_NUMBER_ENTRY))
 #define GNOME_IS_NUMBER_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_NUMBER_ENTRY))
+#define GNOME_NUMBER_ENTRY_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_NUMBER_ENTRY, GnomeNumberEntryClass))
 
 
 typedef struct _GnomeNumberEntry        GnomeNumberEntry;

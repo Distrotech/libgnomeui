@@ -45,6 +45,9 @@
 #include <libart_lgpl/art_uta.h>
 #include <libart_lgpl/art_affine.h>
 
+/* EEK!, gdk leaks some Xlib stuff, such as the grab success codes */
+#include <X11/X.h>
+
 BEGIN_GNOME_DECLS
 
 
@@ -140,6 +143,7 @@ typedef struct {
 #define GNOME_CANVAS_ITEM_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CANVAS_ITEM, GnomeCanvasItemClass))
 #define GNOME_IS_CANVAS_ITEM(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_CANVAS_ITEM))
 #define GNOME_IS_CANVAS_ITEM_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_CANVAS_ITEM))
+#define GNOME_CANVAS_ITEM_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_CANVAS_ITEM, GnomeCanvasItemClass))
 
 
 struct _GnomeCanvasItem {
@@ -387,6 +391,7 @@ void gnome_canvas_item_request_update (GnomeCanvasItem *item);
 #define GNOME_CANVAS_GROUP_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CANVAS_GROUP, GnomeCanvasGroupClass))
 #define GNOME_IS_CANVAS_GROUP(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_CANVAS_GROUP))
 #define GNOME_IS_CANVAS_GROUP_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_CANVAS_GROUP))
+#define GNOME_CANVAS_GROUP_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_CANVAS_GROUP, GnomeCanvasGroupClass))
 
 
 struct _GnomeCanvasGroup {
@@ -422,6 +427,7 @@ void gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *
 #define GNOME_CANVAS_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CANVAS, GnomeCanvasClass))
 #define GNOME_IS_CANVAS(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_CANVAS))
 #define GNOME_IS_CANVAS_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_CANVAS))
+#define GNOME_CANVAS_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_CANVAS, GnomeCanvasClass))
 
 
 struct _GnomeCanvas {

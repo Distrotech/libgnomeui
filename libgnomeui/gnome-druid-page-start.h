@@ -30,6 +30,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_DRUID_PAGE_START_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DRUID_PAGE_START, GnomeDruidPageStartClass))
 #define GNOME_IS_DRUID_PAGE_START(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DRUID_PAGE_START))
 #define GNOME_IS_DRUID_PAGE_START_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DRUID_PAGE_START))
+#define GNOME_DRUID_PAGE_START_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DRUID_PAGE_START, GnomePageStartClass))
 
 
 typedef struct _GnomeDruidPageStart        GnomeDruidPageStart;

@@ -47,6 +47,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_CLASS(klass)    (GTK_CHECK_CAST_CLASS ((klass), GNOME_TYPE_STOCK, GnomeStock))
 #define GNOME_IS_STOCK(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_STOCK))
 #define GNOME_IS_STOCK_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_STOCK))
+#define GNOME_STOCK_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_STOCK, GnomeStockClass))
 
 typedef struct _GnomeStock       GnomeStock;
 typedef struct _GnomeStockClass  GnomeStockClass;

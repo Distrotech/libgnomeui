@@ -35,6 +35,7 @@ BEGIN_GNOME_DECLS
 #define GTK_DIAL_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GTK_TYPE_DIAL, GtkDialClass))
 #define GTK_IS_DIAL(obj)         (GTK_CHECK_TYPE ((obj), GTK_TYPE_DIAL))
 #define GTK_IS_DIAL_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GTK_TYPE_DIAL))
+#define GTK_DIAL_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GTK_TYPE_DIAL, GtkDialClass))
 
 
 typedef struct _GtkDial        GtkDial;

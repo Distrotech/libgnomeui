@@ -45,6 +45,7 @@ typedef struct _GnomeDEntryEditClass GnomeDEntryEditClass;
 #define GNOME_DENTRY_EDIT_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DENTRY_EDIT, GnomeDEntryEditClass))
 #define GNOME_IS_DENTRY_EDIT(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DENTRY_EDIT))
 #define GNOME_IS_DENTRY_EDIT_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DENTRY_EDIT))
+#define GNOME_DENTRY_EDIT_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DENTRY_EDIT, GnomeDEntryEditClass))
 
 struct _GnomeDEntryEdit {
   GtkObject object;

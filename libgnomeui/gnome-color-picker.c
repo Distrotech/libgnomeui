@@ -28,8 +28,10 @@
  */
 
 #include <config.h>
+#include <gtk/gtkmain.h>
 #include <gtk/gtkalignment.h>
 #include <gtk/gtkcolorsel.h>
+#include <gtk/gtkcolorseldialog.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkdrawingarea.h>
 #include <gtk/gtkframe.h>
@@ -166,7 +168,7 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
 	color_picker_signals[COLOR_SET] =
 		gtk_signal_new ("color_set",
 				GTK_RUN_FIRST,
-				object_class->type,
+				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeColorPickerClass, color_set),
 				gnome_color_picker_marshal_signal_1,
 				GTK_TYPE_NONE, 4,
@@ -457,7 +459,6 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 	gtk_container_add (GTK_CONTAINER (alignment), frame);
 	gtk_widget_show (frame);
 
-	gtk_widget_push_visual (gdk_rgb_get_visual ());
 	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
 
 	cp->_priv->drawing_area = gtk_drawing_area_new ();
@@ -479,7 +480,6 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 
 	cp->_priv->gc = NULL;
 	gtk_widget_pop_colormap ();
-	gtk_widget_pop_visual ();
 
 	/* Start with opaque black, dither on, alpha disabled */
 
@@ -660,7 +660,7 @@ gnome_color_picker_clicked (GtkButton *button)
 		if (gtk_grab_get_current())
 			gtk_window_set_modal(GTK_WINDOW(cp->_priv->cs_dialog),TRUE);
 	}
-	gtk_color_selection_set_opacity (GTK_COLOR_SELECTION (csd->colorsel), cp->_priv->use_alpha);
+	gtk_color_selection_set_use_opacity (GTK_COLOR_SELECTION (csd->colorsel), cp->_priv->use_alpha);
 
 	color[0] = cp->_priv->r;
 	color[1] = cp->_priv->g;

@@ -41,6 +41,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_DOCK_ITEM_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DOCK_ITEM, GnomeDockItemClass))
 #define GNOME_IS_DOCK_ITEM(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DOCK_ITEM))
 #define GNOME_IS_DOCK_ITEM_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DOCK_ITEM))
+#define GNOME_DOCK_ITEM_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DOCK_ITEM, GnomeDockItemClass))
 
 typedef enum
 {

@@ -114,8 +114,9 @@ gnome_pixmap_entry_get_type (void)
 			sizeof (GnomePixmapEntryClass),
 			(GtkClassInitFunc) gnome_pixmap_entry_class_init,
 			(GtkObjectInitFunc) gnome_pixmap_entry_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL,
+			NULL
 		};
 
 		pixmap_entry_type = gtk_type_unique (gtk_vbox_get_type (),

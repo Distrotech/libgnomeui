@@ -157,8 +157,9 @@ gnome_calculator_get_type (void)
 			sizeof (GnomeCalculatorClass),
 			(GtkClassInitFunc) gnome_calculator_class_init,
 			(GtkObjectInitFunc) gnome_calculator_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			NULL,
+			NULL,
+			NULL
 		};
 
 		calculator_type = gtk_type_unique (gtk_vbox_get_type (),
@@ -180,7 +181,7 @@ gnome_calculator_class_init (GnomeCalculatorClass *class)
 	gnome_calculator_signals[RESULT_CHANGED_SIGNAL] =
 		gtk_signal_new("result_changed",
 			       GTK_RUN_LAST,
-			       object_class->type,
+			       GTK_CLASS_TYPE(object_class),
 			       GTK_SIGNAL_OFFSET(GnomeCalculatorClass,
 			       			 result_changed),
 			       gnome_calculator_marshal_signal_result_changed,
@@ -1322,14 +1323,12 @@ gnome_calculator_init (GnomeCalculator *gc)
 
 	ref_font ();
 
-	gtk_widget_push_visual (gdk_rgb_get_visual ());
 	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
 
 	gc->_priv->display = gtk_drawing_area_new ();
 	gtk_drawing_area_size (GTK_DRAWING_AREA (gc->_priv->display), DISPLAY_LEN * FONT_WIDTH, FONT_HEIGHT);
 
 	gtk_widget_pop_colormap ();
-	gtk_widget_pop_visual ();
 
 	gtk_signal_connect (GTK_OBJECT (gc->_priv->display), "expose_event",
 			    GTK_SIGNAL_FUNC (display_expose),

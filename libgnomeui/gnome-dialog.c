@@ -94,8 +94,9 @@ gnome_dialog_get_type (void)
 	sizeof (GnomeDialogClass),
 	(GtkClassInitFunc) gnome_dialog_class_init,
 	(GtkObjectInitFunc) gnome_dialog_init,
-	(GtkArgSetFunc) NULL,
-	(GtkArgGetFunc) NULL,
+	NULL,
+	NULL,
+	NULL
       };
 
       dialog_type = gtk_type_unique (gtk_window_get_type (), &dialog_info);
@@ -120,7 +121,7 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
   dialog_signals[CLOSE] =
     gtk_signal_new ("close",
 		    GTK_RUN_LAST,
-		    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeDialogClass, close),
 		    gnome_dialog_marshal_signal_2,
 		    GTK_TYPE_INT, 0);
@@ -128,7 +129,7 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
   dialog_signals[CLICKED] =
     gtk_signal_new ("clicked",
 		    GTK_RUN_LAST,
-		    object_class->type,
+		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeDialogClass, clicked),
 		    gnome_dialog_marshal_signal_1,
 		    GTK_TYPE_NONE, 1, GTK_TYPE_INT);

@@ -324,12 +324,12 @@ gnome_textfu_class_init (GnomeTextFuClass *klass)
 
   widget_class = (GtkWidgetClass*) klass;
 
-  parent_class = gtk_type_parent_class(object_class->type);
+  parent_class = gtk_type_class(g_type_parent(GTK_CLASS_TYPE(object_class)));
 
   textfu_signals[ACTIVATE_URI] = 
     gtk_signal_new ("activate_uri",
                     GTK_RUN_FIRST,
-                    object_class->type,
+                    GTK_CLASS_TYPE (object_class),
                     GTK_SIGNAL_OFFSET (GnomeTextFuClass, activate_uri),
                     gtk_marshal_NONE__STRING,
                     GTK_TYPE_NONE, 1, GTK_TYPE_STRING);
@@ -734,10 +734,15 @@ gnome_textfu_text_set_region(GnomeTextFu *textfu, GnomeTextFuItemText *item, cha
   item->link_region = info;
 }
 
-#define REGION_ADD_RECT(rx, ry, rwidth, rheight) { GdkRegion *new_region; GdkRectangle rect; \
-rect.x = rx; rect.y = ry; rect.width = rwidth; rect.height = rheight; \
-new_region = gdk_region_union_with_rect(link_region, &rect); \
-gdk_region_destroy(link_region); link_region = new_region; }
+#define REGION_ADD_RECT(rx, ry, rwidth, rheight)		\
+	{							\
+		GdkRectangle rect;				\
+		rect.x = rx;					\
+		rect.y = ry;					\
+		rect.width = rwidth;				\
+		rect.height = rheight;				\
+		gdk_region_union_with_rect(link_region, &rect);	\
+	}
 
 static void
 gnome_textfu_text_determine_size(GnomeTextFu *textfu, GnomeTextFuItemText *item, SizingState *ss)
@@ -1215,7 +1220,7 @@ gnome_textfu_parse(GnomeTextFu *textfu)
   GnomeTextFuItem *stack[1024];
   int stack_cur = 0;
 
-  tag_handlers = GNOME_TEXTFU_CLASS(GTK_OBJECT(textfu)->klass)->tag_handlers;
+  tag_handlers = GNOME_TEXTFU_GET_CLASS(textfu)->tag_handlers;
 
   fd = open(textfu->cur_filename, O_RDONLY);
   if(fd < 0)

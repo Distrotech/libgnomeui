@@ -38,6 +38,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_ANIMATOR_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ANIMATOR, GnomeAnimatorClass))
 #define GNOME_IS_ANIMATOR(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ANIMATOR))
 #define GNOME_IS_ANIMATOR_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ANIMATOR))
+#define GNOME_ANIMATOR_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_ANIMATOR, GnomeAnimatorClass))
 
 /* Current animator status.  */
 typedef enum

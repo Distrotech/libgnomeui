@@ -324,7 +324,7 @@ gnome_canvas_widget_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	}
 
 	if (update)
-		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
+		(* GNOME_CANVAS_ITEM_GET_CLASS (item)->update) (item, NULL, NULL, 0);
 
 	if (calc_bounds)
 		recalc_bounds (witem);

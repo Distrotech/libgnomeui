@@ -45,6 +45,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_FILE_ENTRY_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_FILE_ENTRY, GnomeFileEntryClass))
 #define GNOME_IS_FILE_ENTRY(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_FILE_ENTRY))
 #define GNOME_IS_FILE_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_FILE_ENTRY))
+#define GNOME_FILE_ENTRY_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_FILE_ENTRY, GnomeFileEntryClass))
 
 
 typedef struct _GnomeFileEntry        GnomeFileEntry;

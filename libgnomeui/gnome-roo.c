@@ -70,7 +70,7 @@ typedef enum
 
 static void gnome_roo_class_init(GnomeRooClass *klass);
 static void gnome_roo_init(GnomeRoo *roo);
-static void gnome_roo_finalize(GtkObject *object);
+static void gnome_roo_finalize(GObject *object);
 static void gnome_roo_size_request(GtkWidget *w, GtkRequisition *req);
 static void gnome_roo_realize(GtkWidget *w);
 static void gnome_roo_unrealize(GtkWidget *w);
@@ -133,8 +133,9 @@ guint gnome_roo_get_type()
 			sizeof(GnomeRooClass),
 			(GtkClassInitFunc) gnome_roo_class_init,
 			(GtkObjectInitFunc) gnome_roo_init,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL,
+			NULL,
+			NULL,
+			NULL
 		};
 		roo_type = gtk_type_unique(gtk_bin_get_type(), &roo_info);
 	}
@@ -145,50 +146,59 @@ static void gnome_roo_class_init(GnomeRooClass *klass)
 {
 	GtkWidgetClass *widget_class;
 	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 
 	parent_class = GTK_OBJECT_CLASS(gtk_type_class(gtk_bin_get_type()));
 	widget_class = GTK_WIDGET_CLASS(klass);
 	object_class = GTK_OBJECT_CLASS(klass);
+	gobject_class = G_OBJECT_CLASS(klass);
 
-	roo_signals[CLOSE] = gtk_signal_new ("close",
-												GTK_RUN_LAST,
-												object_class->type,
-												GTK_SIGNAL_OFFSET (GnomeRooClass, close),
-												gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
-	roo_signals[ICONIFY] = gtk_signal_new ("iconify",
-												GTK_RUN_LAST,
-												object_class->type,
-												GTK_SIGNAL_OFFSET (GnomeRooClass, iconify),
-												gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
-	roo_signals[UNICONIFY] = gtk_signal_new ("uniconify",
-												GTK_RUN_LAST,
-												object_class->type,
-												GTK_SIGNAL_OFFSET (GnomeRooClass, uniconify),
-												gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
-	roo_signals[MAXIMIZE] = gtk_signal_new ("maximize",
-												GTK_RUN_LAST,
-												object_class->type,
-												GTK_SIGNAL_OFFSET (GnomeRooClass, maximize),
-												gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
-	roo_signals[UNMAXIMIZE] = gtk_signal_new ("unmaximize",
-												GTK_RUN_LAST,
-												object_class->type,
-												GTK_SIGNAL_OFFSET (GnomeRooClass, unmaximize),
-												gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
-	roo_signals[SELECT] = gtk_signal_new ("select",
-												 GTK_RUN_LAST,
-												 object_class->type,
-												 GTK_SIGNAL_OFFSET (GnomeRooClass, select),
-												 gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
-	roo_signals[DESELECT] = gtk_signal_new ("deselect",
-												   GTK_RUN_LAST,
-												   object_class->type,
-												   GTK_SIGNAL_OFFSET (GnomeRooClass, deselect),
-												   gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
+	roo_signals[CLOSE] =
+		gtk_signal_new ("close",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeRooClass, close),
+				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
+	roo_signals[ICONIFY] =
+		gtk_signal_new ("iconify",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeRooClass, iconify),
+				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
+	roo_signals[UNICONIFY] =
+		gtk_signal_new ("uniconify",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeRooClass, uniconify),
+				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
+	roo_signals[MAXIMIZE] =
+		gtk_signal_new ("maximize",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeRooClass, maximize),
+				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
+	roo_signals[UNMAXIMIZE] =
+		gtk_signal_new ("unmaximize",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeRooClass, unmaximize),
+				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
+	roo_signals[SELECT] =
+		gtk_signal_new ("select",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeRooClass, select),
+				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
+	roo_signals[DESELECT] =
+		gtk_signal_new ("deselect",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeRooClass, deselect),
+				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
 
 	gtk_object_class_add_signals(object_class, roo_signals, LAST_SIGNAL);
 
-	object_class->finalize = gnome_roo_finalize;
+	gobject_class->finalize = gnome_roo_finalize;
 
 	widget_class->realize = gnome_roo_realize;
 	widget_class->unrealize = gnome_roo_unrealize;
@@ -226,7 +236,7 @@ static void gnome_roo_init(GnomeRoo *roo)
 	GTK_CONTAINER(roo)->border_width = 2;
 }
 
-static void gnome_roo_finalize(GtkObject *object)
+static void gnome_roo_finalize(GObject *object)
 {
 	GnomeRoo *roo = GNOME_ROO(object);
 
@@ -236,6 +246,10 @@ static void gnome_roo_finalize(GtkObject *object)
 
 	if(roo->title)
 		g_free(roo->title);
+	roo->title = NULL;
+
+	if(G_OBJECT_CLASS(parent_class)->finalize)
+		G_OBJECT_CLASS(parent_class)->finalize(object);
 }
 
 static void gnome_roo_parent_set(GtkWidget *widget, GtkWidget *old_parent)
@@ -249,7 +263,7 @@ static void gnome_roo_parent_set(GtkWidget *widget, GtkWidget *old_parent)
 
 static gboolean in_title_bar(GnomeRoo *roo, guint x, guint y)
 {
-	if(y < roo->title_bar_height - 1 + GTK_WIDGET(roo)->style->klass->ythickness)
+	if(y < roo->title_bar_height - 1 + GTK_WIDGET(roo)->style->ythickness)
 		return TRUE;
 
 	return FALSE;
@@ -398,10 +412,8 @@ static void calculate_size(GnomeRoo *roo, guint *rw, guint *rh)
 	GtkWidget *w = GTK_WIDGET(roo);
 
 	guint16 width, height, bw;
-	GtkStyleClass *style_class;
 	GtkRequisition child_req;
 
-	style_class = w->style->klass;
 	width = 4;
 	height = 4;
 	if(!(roo->flags & ROO_ICONIFIED)) {

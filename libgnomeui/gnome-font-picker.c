@@ -132,7 +132,7 @@ gnome_font_picker_class_init (GnomeFontPickerClass *class)
 	font_picker_signals[FONT_SET] =
 		gtk_signal_new ("font_set",
 				GTK_RUN_FIRST,
-				object_class->type,
+				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeFontPickerClass, font_set),
 				gnome_font_picker_marshal_signal_1,
 				GTK_TYPE_NONE, 1,

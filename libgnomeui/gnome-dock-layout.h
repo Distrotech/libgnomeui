@@ -39,6 +39,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_DOCK_LAYOUT_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_DOCK_LAYOUT, GnomeDockLayoutClass))
 #define GNOME_IS_DOCK_LAYOUT(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_DOCK_LAYOUT))
 #define GNOME_IS_DOCK_LAYOUT_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DOCK_LAYOUT))
+#define GNOME_DOCK_LAYOUT_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DOCK_LAYOUT, GnomeDockLayoutClass))
 
 typedef struct _GnomeDockLayoutItem    GnomeDockLayoutItem;
 typedef struct _GnomeDockLayoutClass   GnomeDockLayoutClass;
