@@ -990,11 +990,11 @@ msgstr "A kiválasztott GtkFont"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "Szöveg előnézete"
+msgstr "Mintaszöveg"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "A párbeszédablakban megjelenített előnézeti szöveg"
+msgstr "A párbeszédablakban megjelenített mintaszöveg"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
