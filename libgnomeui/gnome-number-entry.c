@@ -87,11 +87,11 @@ calc_dialog_clicked (GtkWidget *widget, int button, gpointer data)
 
 /**
  * gnome_number_entry_get_number:
- * @nentry: The GnomeNumberEntry to work with
+ * @nentry: Pointer to GnomeNumberEntry widget
  *
  * Description: Get the current number from the entry
  *
- * Returns: Returns a double value
+ * Returns: Value currently in the entry.
  **/
 gdouble
 gnome_number_entry_get_number(GnomeNumberEntry *nentry)
@@ -229,12 +229,13 @@ gnome_number_entry_finalize (GtkObject *object)
 
 /**
  * gnome_number_entry_new:
- * @history_id: the id given to #gnome_entry_new
- * @calc_dialog_title: title of the calculator dialog
+ * @history_id: The history id given to #gnome_entry_new
+ * @calc_dialog_title: Title of the calculator dialog
  *
- * Description: Creates a new number entry widget
+ * Description: Creates a new number entry widget, with a history id
+ * and title for the calculator dialog.
  *
- * Returns: Returns the new object
+ * Returns: New widget
  **/
 GtkWidget *
 gnome_number_entry_new (const gchar *history_id, const gchar *calc_dialog_title)
@@ -251,11 +252,12 @@ gnome_number_entry_new (const gchar *history_id, const gchar *calc_dialog_title)
 
 /**
  * gnome_number_entry_gnome_entry:
- * @nentry: the GnomeNumberEntry to work with
+ * @nentry: Pointer to GnomeNumberEntry widget
  *
- * Description: Get the GnomeEntry widget that's part of the entry
+ * Description: Get the GnomeEntry widget component of the
+ * GnomeNumberEntry widget for lower-level manipulation.
  *
- * Returns: Returns GnomeEntry widget
+ * Returns: GnomeEntry widget
  **/
 GtkWidget *
 gnome_number_entry_gnome_entry (GnomeNumberEntry *nentry)
@@ -268,11 +270,12 @@ gnome_number_entry_gnome_entry (GnomeNumberEntry *nentry)
 
 /**
  * gnome_number_entry_gtk_entry:
- * @nentry: the GnomeNumberEntry to work with
+ * @nentry: Pointer to GnomeNumberEntry widget
  *
- * Description: Get the GtkEntry widget that's part of the entry
+ * Description: Get the GtkEntry widget component of the
+ * GnomeNumberEntry widget for Gtk+-level manipulation.
  *
- * Returns: Returns GtkEntry widget
+ * Returns: GtkEntry widget
  **/
 GtkWidget *
 gnome_number_entry_gtk_entry (GnomeNumberEntry *nentry)
@@ -285,11 +288,11 @@ gnome_number_entry_gtk_entry (GnomeNumberEntry *nentry)
 
 /**
  * gnome_number_entry_set_title:
- * @nentry: the GnomeNumberEntry to work with
- * @calc_dialog_title: the title
+ * @nentry: Pointer to GnomeNumberEntry widget
+ * @calc_dialog_title: New title
  *
- * Description: Set the title of the calculator dialog to @calc_dialog_title,
- * this will go into effect the next time the calculator button is pressed
+ * Description: Set the title of the calculator dialog to @calc_dialog_title.
+ * Takes effect the next time the calculator button is pressed.
  *
  * Returns:
  **/

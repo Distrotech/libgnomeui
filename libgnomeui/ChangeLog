@@ -1,6 +1,7 @@
 1999-09-04  Tim Gerla 	<timg@means.net>
 
 	* gnome-color-picker.c: Doc updates
+	* gnome-number-entry.c: More docs
 
 1999-09-03  Jonathan Blandford  <jrb@redhat.com>
 
