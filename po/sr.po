@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-20 22:55+0200\n"
-"PO-Revision-Date: 2004-06-20 22:57+0200\n"
+"POT-Creation-Date: 2004-06-29 19:00+0200\n"
+"PO-Revision-Date: 2004-06-29 19:00+0200\n"
 "Last-Translator: Bojan Suzic <bojans@teol.net>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgstr "Савет за 2. ставку"
 msgid "Filesystem"
 msgstr "Систем датотека"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1507
+#: file-chooser/gtkfilesystemgnomevfs.c:1517
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Неуспешно снимање обележивача (%s)"
@@ -58,7 +58,9 @@ msgstr "Неуспешно отварање датотеке „%s“: %s"
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Неуспешно учитавање слике „%s“: разлог непознат, вероватно неисправна датотека слике"
+msgstr ""
+"Неуспешно учитавање слике „%s“: разлог непознат, вероватно неисправна "
+"датотека слике"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -1277,23 +1279,31 @@ msgstr "Питање"
 msgid "Message"
 msgstr "Порука"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "_Корисничко име:"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "_Домен:"
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_Лозинка:"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr "Повежи се _анонимно"
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr "Повежи се као _корисник:"
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "Запамти лозинку за ову сесију"
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "Сачувај лозинку у прстену кључева"
 
