@@ -1,3 +1,27 @@
+2000-09-16  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-file-selector.c: Started to asyncify this file.
+	(gnome_file_selector_add_filter): New function; this lets you
+	specify a GnomeVFSDirectoryFilter which is used when adding
+	files etc.
+	(gnome_file_selector_clear_filter): New function; removes the
+	filter again.
+	(add_file_handler): Implement handler for the "add_file" signal
+	of the GnomeFileSelector; call gnome_vfs_async_get_file_info()
+	with `add_file_async_cb' as async callback function.
+	(add_file_async_cb): New static function;
+	- if the URI is a directory, gnome_selector_add_directory() it.
+	- otherwise, apply the filter to it and, if it passes, emit the
+	"do_add" signal.
+	(add_directory_handler): Implement handler for the "add_directory"
+	signal; call gnome_vfs_async_load_directory_uri() on it with
+	`add_directory_async_cb' as async callback function.
+	(add_directory_async_cb): New static function; apply the filter
+	to each of the files and emit the "add_file" signal for those who
+	pass it [FIXME: at this point we already have the GnomeVFSFileInfo
+	for the files, so basically we can filter here and emit "do_add"
+	directly  ....?].
+
 2000-09-16  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector.h (GnomeSelector):
