@@ -1,3 +1,9 @@
+Sat Jan 09 01:42:15 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-dialog.[ch]: do the Motif thing with default buttons
+	  so that we are more consistent. it tracks the default button
+	  if you use tab to switch focus on buttons
+
 1999-01-08  Nat Friedman  <nat@nat.org>
 
 	* gnome-app-helper.h (GNOMEUIINFO_MENU_PREFERENCES_ITEM): Added
