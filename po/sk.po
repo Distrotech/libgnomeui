@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-04-22 12:30+0200\n"
-"PO-Revision-Date: 2002-04-10 08:09+0200\n"
+"POT-Creation-Date: 2002-04-22 08:14+0200\n"
+"PO-Revision-Date: 2002-04-22 08:18+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -18,19 +18,16 @@ msgid "Credits"
 msgstr "Poïakovanie"
 
 #: libgnomeui/gnome-about.c:222
-#, fuzzy
 msgid "_Written by"
-msgstr "Napísal"
+msgstr "_Napísal"
 
 #: libgnomeui/gnome-about.c:237
-#, fuzzy
 msgid "_Documented by"
-msgstr "Autor dokumentácie"
+msgstr "Autor _dokumentácie"
 
 #: libgnomeui/gnome-about.c:252
-#, fuzzy
 msgid "_Translated by"
-msgstr "Prekladateµ"
+msgstr "_Prekladateµ"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:309
@@ -493,6 +490,7 @@ msgstr "Rada pre polo¾ku 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "Súbo_r"
 
@@ -550,6 +548,7 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomocník"
 
@@ -740,11 +739,11 @@ msgstr "Konfigurova» aplikáciu"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "O progr_ame"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informácie o tomto programe"
 
@@ -771,7 +770,7 @@ msgstr "Vytvori» nové okno"
 msgid "_Close This Window"
 msgstr "_Zatvori» toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvori» aktuálne okno"
 
@@ -1154,7 +1153,7 @@ msgstr ""
 "Dialógové okno výberu ikony. Mô¾ete pou¾i» túto vlastnos», aby ste získali "
 "GtkDialog, ak potrebujete zmeni» alebo zisti» niektoré z jeho vlastností."
 
-#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:941
+#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:927
 msgid "No Icon"
 msgstr "Bez ikony"
 
@@ -1166,7 +1165,7 @@ msgstr "Nemô¾em nájs» hbox, pou¾ijem normálny výber písma"
 msgid "Preview"
 msgstr "Náhµad"
 
-#: libgnomeui/gnome-icon-entry.c:963
+#: libgnomeui/gnome-icon-entry.c:949
 msgid "Browse"
 msgstr "Prezera»"
 
@@ -1247,5 +1246,6 @@ msgstr "%a %d.%m.%Y %H:%M"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ukonèi» test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukonèi» test"
