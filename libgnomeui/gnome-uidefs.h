@@ -21,8 +21,16 @@
 /* This file defines standard sizes, spacings, and whatever
    else seems standardizable via simple defines. */
 
+/* All-purpose padding. If you always use these instead of making up 
+   some arbitrary padding number that looks good on your screen, 
+   people can change the "spaciousness" of the GUI globally. */
 #define GNOME_PAD          8
 #define GNOME_PAD_SMALL    4
 #define GNOME_PAD_BIG      12
+
+/* Standard button size; if button size doesn't matter, use these, just
+   for a nice uniform look. */
+#define GNOME_BUTTON_WIDTH 100
+#define GNOME_BUTTON_HEIGHT 40
 
 #endif

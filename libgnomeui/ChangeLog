@@ -1,3 +1,11 @@
+Thu Apr 30 00:48:54 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-less.h, gnome-less.c: Added simple widget to display a
+ 	file or command output. GtkText wrapper. Not included in Makefile
+	due to feature freeze. 
+	* gnome-uidefs.h: Added GNOME_BUTTON_WIDTH, GNOME_BUTTON_HEIGHT.
+	Shouldn't break anything.
+	
 1998-04-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-color-selector.c (gnome_color_selector_button_clicked):
