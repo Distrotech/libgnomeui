@@ -91,6 +91,7 @@ libgnomeui/pixmaps/Makefile
 components/Makefile
 images/Makefile
 demos/Makefile
+test-gnome/Makefile
 doc/Makefile
 ])
 

@@ -1,4 +1,4 @@
-SUBDIRS = libgnomeui components images demos doc po intl
+SUBDIRS = libgnomeui components images demos test-gnome doc po intl
 
 EXTRA_DIST = message-of-doom
 

@@ -1,0 +1,44 @@
+<Root>
+
+<commands>
+        <cmd name="FileTest" _label="Test"
+	_tip="Test" pixtype="stock" pixname="Exit"/>
+        
+        <cmd name="FileClose" _label="Close"
+	_tip="Close the current window" pixtype="stock" pixname="Close"
+	accel="*Control*w"/>
+	
+        <cmd name="FileExit" _label="Exit" _tip="Exit the test"
+           pixtype="stock" pixname="Exit" accel="*Control*q"/>
+
+        <cmd name="HelpAbout" _label="About..." _tip="About this application"
+	 pixtype="stock" pixname="About"/>
+
+</commands>
+
+<menu>
+
+<submenu name="File" _label="_File">
+        
+        <menuitem name="FileTest" verb="" _label="_Test"/>
+        
+	
+	<separator/>
+	
+        <menuitem name="FileClose" verb="" _label="_Close"/>
+	
+        <menuitem name="FileExit" verb="" _label="E_xit"/>
+
+</submenu>
+
+<submenu name="Help" _label="_Help">
+	
+	<placeholder name="BuiltMenuItems"/>
+
+        <menuitem name="HelpAbout" verb="" _label="_About..."/>
+
+</submenu>
+
+</menu>
+
+</Root>
