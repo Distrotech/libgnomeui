@@ -572,7 +572,7 @@ static GnomeStockCursor default_cursors[] = {
 		WHITE, /* foreground */
 		BLACK, /* background */
 		0, 0,  /* hotspot */
-		-1, -1 /* w x h */
+		-1, -1, /* w x h */
 		0,     /* alpha */
 		GNOME_CURSOR_XPM /* type */
 	},
