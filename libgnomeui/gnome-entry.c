@@ -8,6 +8,7 @@
 #include <gtk/gtkentry.h>
 #include <gtk/gtklist.h>
 #include <gtk/gtklistitem.h>
+#include <gtk/gtksignal.h>
 #include "libgnome/libgnome.h"
 #include "gnome-entry.h"
 
@@ -64,10 +65,45 @@ gnome_entry_class_init (GnomeEntryClass *class)
 }
 
 static void
+entry_changed (GtkWidget *widget, gpointer data)
+{
+	GnomeEntry *gentry;
+
+	gentry = data;
+	gentry->changed = TRUE;
+}
+
+static void
+entry_activated (GtkWidget *widget, gpointer data)
+{
+	GnomeEntry *gentry;
+	char *text;
+
+	gentry = data;
+
+	text = gtk_entry_get_text (GTK_ENTRY (widget));
+
+	if (!gentry->changed || (strcmp (text, "") == 0)) {
+		gentry->changed = FALSE;
+		return;
+	}
+
+	gnome_entry_prepend_history (gentry, TRUE, gtk_entry_get_text (GTK_ENTRY (widget)));
+}
+
+static void
 gnome_entry_init (GnomeEntry *gentry)
 {
+	gentry->changed    = FALSE;
 	gentry->history_id = NULL;
 	gentry->items      = NULL;
+
+	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (gentry)), "changed",
+			    (GtkSignalFunc) entry_changed,
+			    gentry);
+	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (gentry)), "activate",
+			    (GtkSignalFunc) entry_activated,
+			    gentry);
 }
 
 GtkWidget *

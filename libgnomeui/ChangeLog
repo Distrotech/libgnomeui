@@ -1,6 +1,15 @@
 1998-02-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
-	* gnome-entry.c: First usable version of the GnomeEntry widget.
+	* gnome-entry.c (entry_activated): Now the GnomeEntry pushes a
+	history item if the entry field was activated (via return key, for
+	example).  We do proper checks to see if it is not an empty string
+	and such (in which case a history item does not need to be pushed).
+
+	* gnome-entry.h: Added changed field.  This is set to true if the
+	entry field has changed but it has not been put into the history
+	list.  False otherwise.
+
+	* Gnome-entry.c: First usable version of the GnomeEntry widget.
 
 	* gnome-startup.c: 
 	* gnome-client.c: Added #include <string.h>
