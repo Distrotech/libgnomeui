@@ -82,8 +82,6 @@ typedef enum {
 
 enum {
 	ARG_0,
-	ARG_HADJUSTMENT,
-	ARG_VADJUSTMENT
 };
 
 static guint gil_signals[LAST_SIGNAL] = { 0 };
@@ -277,7 +275,6 @@ gil_place_icon (Gil *gil, Icon *icon, int x, int y, int icon_height)
 		x_offset = 0;
 
 	gnome_canvas_item_set (GNOME_CANVAS_ITEM (icon->image),
-			       // "x",  (double) (x + priv->icon_width / 2),
 			       "x",  (double) (x + x_offset),
 			       "y",  (double) (y + y_offset),
 			       "x_set", TRUE,
@@ -455,8 +452,9 @@ static void
 gil_scrollbar_adjust (Gil *gil)
 {
 	GnomeIconListPrivate *priv;
+	GtkAdjustment *adj;
 	GList *l;
-	double wx, wy;
+	double wx, wy, wx1, wy1, wx2, wy2;
 	int height, step_increment;
 
 	priv = gil->_priv;
@@ -480,20 +478,31 @@ gil_scrollbar_adjust (Gil *gil)
 
 	priv->total_height = MAX (height, GTK_WIDGET (gil)->allocation.height);
 
+	gnome_canvas_c2w (GNOME_CANVAS (gil), 0, 0, &wx1, &wy1);
+	gnome_canvas_c2w (GNOME_CANVAS (gil),
+			  GTK_WIDGET (gil)->allocation.width,
+			  priv->total_height,
+			  &wx2, &wy2);
+
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (gil),
+					wx1, wy1, wx2, wy2);
+
 	wx = wy = 0;
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil), 0, 0, &wx, &wy);
 
-	gil->adj->upper = height;
-	gil->adj->step_increment = step_increment;
-	gil->adj->page_increment = GTK_WIDGET (gil)->allocation.height;
-	gil->adj->page_size = GTK_WIDGET (gil)->allocation.height;
+	adj = gtk_layout_get_vadjustment (GTK_LAYOUT (gil));
 
-	if (wy > gil->adj->upper - gil->adj->page_size)
-		wy = gil->adj->upper - gil->adj->page_size;
+	adj->upper = priv->total_height;
+	adj->step_increment = step_increment;
+	adj->page_increment = GTK_WIDGET (gil)->allocation.height;
+	adj->page_size = GTK_WIDGET (gil)->allocation.height;
 
-	gil->adj->value = wy;
+	if (wy > adj->upper - adj->page_size)
+		wy = adj->upper - adj->page_size;
 
-	gtk_adjustment_changed (gil->adj);
+	adj->value = wy;
+
+	gtk_adjustment_changed (adj);
 }
 
 /* Emits the select_icon or unselect_icon signals as appropriate */
@@ -1324,14 +1333,6 @@ gil_destroy (GtkObject *object)
 		gil->_priv->timer_tag = 0;
 	}
 
-	if (gil->adj)
-		gtk_object_unref (GTK_OBJECT (gil->adj));
-	gil->adj = NULL;
-
-	if (gil->hadj)
-		gtk_object_unref (GTK_OBJECT (gil->hadj));
-	gil->hadj = NULL;
-
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(*GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
@@ -1462,7 +1463,6 @@ gil_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 		return;
 
 	gil_layout_all_icons (gil);
-	gil_scrollbar_adjust (gil);
 }
 
 static void
@@ -1763,6 +1763,7 @@ scroll_timeout (gpointer data)
 {
 	Gil *gil;
 	GnomeIconListPrivate *priv;
+	GtkAdjustment *adj;
 	double x, y;
 	int value;
 
@@ -1771,11 +1772,13 @@ scroll_timeout (gpointer data)
 
 	GDK_THREADS_ENTER ();
 
-	value = gil->adj->value + priv->value_diff;
-	if (value > gil->adj->upper - gil->adj->page_size)
-		value = gil->adj->upper - gil->adj->page_size;
+	adj = gtk_layout_get_vadjustment (GTK_LAYOUT (gil));
 
-	gtk_adjustment_set_value (gil->adj, value);
+	value = adj->value + priv->value_diff;
+	if (value > adj->upper - adj->page_size)
+		value = adj->upper - adj->page_size;
+
+	gtk_adjustment_set_value (adj, value);
 
 	gnome_canvas_window_to_world (GNOME_CANVAS (gil),
 				      priv->event_last_x, priv->event_last_y,
@@ -1831,17 +1834,6 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 	return TRUE;
 }
 
-static void
-gil_set_scroll_adjustments (GtkLayout *layout,
-			    GtkAdjustment *hadjustment,
-			    GtkAdjustment *vadjustment)
-{
-	Gil *gil = GIL (layout);
-
-	gnome_icon_list_set_hadjustment (gil, hadjustment);
-	gnome_icon_list_set_vadjustment (gil, vadjustment);
-}
-
 typedef gboolean (*xGtkSignal_BOOL__INT_POINTER) (GtkObject * object,
 						  gint     arg1,
 						  gpointer arg2,
@@ -1865,21 +1857,10 @@ static void
 gil_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeIconList *gil;
-	GtkAdjustment *adjustment;
 
 	gil = GNOME_ICON_LIST (object);
 
 	switch (arg_id) {
-	case ARG_HADJUSTMENT:
-		adjustment = GTK_VALUE_POINTER (*arg);
-		gnome_icon_list_set_hadjustment (gil, adjustment);
-		break;
-
-	case ARG_VADJUSTMENT:
-		adjustment = GTK_VALUE_POINTER (*arg);
-		gnome_icon_list_set_vadjustment (gil, adjustment);
-		break;
-
 	default:
 		break;
 	}
@@ -1895,14 +1876,6 @@ gil_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	priv = gil->_priv;
 
 	switch (arg_id) {
-	case ARG_HADJUSTMENT:
-		GTK_VALUE_POINTER (*arg) = gil->hadj;
-		break;
-
-	case ARG_VADJUSTMENT:
-		GTK_VALUE_POINTER (*arg) = gil->adj;
-		break;
-
 	default:
 		arg->type = GTK_TYPE_INVALID;
 		break;
@@ -1925,15 +1898,6 @@ gil_class_init (GilClass *gil_class)
 	canvas_class = (GnomeCanvasClass *) gil_class;
 
 	parent_class = gtk_type_class (gnome_canvas_get_type ());
-
-	gtk_object_add_arg_type ("GnomeIconList::hadjustment",
-				 GTK_TYPE_ADJUSTMENT,
-				 GTK_ARG_READWRITE,
-				 ARG_HADJUSTMENT);
-	gtk_object_add_arg_type ("GnomeIconList::vadjustment",
-				 GTK_TYPE_ADJUSTMENT,
-				 GTK_ARG_READWRITE,
-				 ARG_VADJUSTMENT);
 
 	gil_signals[SELECT_ICON] =
 		gtk_signal_new (
@@ -1982,12 +1946,6 @@ gil_class_init (GilClass *gil_class)
 	widget_class->button_release_event = gil_button_release;
 	widget_class->motion_notify_event = gil_motion_notify;
 
-	/* we override GtkLayout's set_scroll_adjustments signal instead
-	 * of creating a new signal so as to keep binary compatibility.
-	 * Anyway, a widget class only needs one of these signals, and
-	 * this gives the correct implementation for GnomeIconList */
-	layout_class->set_scroll_adjustments = gil_set_scroll_adjustments;
-
 	gil_class->select_icon = real_select_icon;
 	gil_class->unselect_icon = real_unselect_icon;
 }
@@ -2007,7 +1965,6 @@ gil_init (Gil *gil)
 	gil->_priv->selection_mode = GTK_SELECTION_SINGLE;
 	gil->_priv->dirty = TRUE;
 
-	/* FIXME:  Make the icon list use the normal canvas/layout adjustments */
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (gil), 0.0, 0.0, 1000000.0, 1000000.0);
 	gnome_canvas_scroll_to (GNOME_CANVAS (gil), 0, 0);
 }
@@ -2073,112 +2030,6 @@ gnome_icon_list_set_icon_width (GnomeIconList *gil, int w)
 	gil_scrollbar_adjust (gil);
 }
 
-static void
-gil_adj_value_changed (GtkAdjustment *adj, Gil *gil)
-{
-	gnome_canvas_scroll_to (GNOME_CANVAS (gil), 0, adj->value);
-}
-
-/**
- * gnome_icon_list_set_hadjustment:
- * @gil: An icon list.
- * @hadj: Adjustment to be used for horizontal scrolling.
- *
- * Sets the adjustment to be used for horizontal scrolling.  This is normally
- * not required, as the icon list can be simply inserted in a &GtkScrolledWindow
- * and scrolling will be handled automatically.
- **/
-void
-gnome_icon_list_set_hadjustment (GnomeIconList *gil, GtkAdjustment *hadj)
-{
-	GnomeIconListPrivate *priv;
-	GtkAdjustment *old_adjustment;
-
-	/* hadj isn't used but is here for compatibility with GtkScrolledWindow */
-
-	g_return_if_fail (gil != NULL);
-	g_return_if_fail (IS_GIL (gil));
-
-	if (hadj)
-		g_return_if_fail (GTK_IS_ADJUSTMENT (hadj));
-
-	priv = gil->_priv;
-
-	if (gil->hadj == hadj)
-		return;
-
-	old_adjustment = gil->hadj;
-
-	if (gil->hadj)
-		gtk_object_unref (GTK_OBJECT (gil->hadj));
-
-	gil->hadj = hadj;
-
-	if (gil->hadj) {
-		gtk_object_ref (GTK_OBJECT (gil->hadj));
-		/* The horizontal adjustment is not used, so set some default
-		 * values to indicate that everything is visible horizontally.
-		 */
-		gil->hadj->lower = 0.0;
-		gil->hadj->upper = 1.0;
-		gil->hadj->value = 0.0;
-		gil->hadj->step_increment = 1.0;
-		gil->hadj->page_increment = 1.0;
-		gil->hadj->page_size = 1.0;
-		gtk_adjustment_changed (gil->hadj);
-	}
-
-	if (!gil->hadj || !old_adjustment)
-		gtk_widget_queue_resize (GTK_WIDGET (gil));
-}
-
-/**
- * gnome_icon_list_set_vadjustment:
- * @gil: An icon list.
- * @hadj: Adjustment to be used for horizontal scrolling.
- *
- * Sets the adjustment to be used for vertical scrolling.  This is normally not
- * required, as the icon list can be simply inserted in a &GtkScrolledWindow and
- * scrolling will be handled automatically.
- **/
-void
-gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
-{
-	GnomeIconListPrivate *priv;
-	GtkAdjustment *old_adjustment;
-
-	g_return_if_fail (gil != NULL);
-	g_return_if_fail (IS_GIL (gil));
-
-	if (vadj)
-		g_return_if_fail (GTK_IS_ADJUSTMENT (vadj));
-
-	priv = gil->_priv;
-
-	if (gil->adj == vadj)
-		return;
-
-	old_adjustment = gil->adj;
-
-	if (gil->adj) {
-		gtk_signal_disconnect_by_data (GTK_OBJECT (gil->adj), gil);
-		gtk_object_unref (GTK_OBJECT (gil->adj));
-	}
-
-	gil->adj = vadj;
-
-	if (gil->adj) {
-		gtk_object_ref (GTK_OBJECT (gil->adj));
-		gtk_object_sink (GTK_OBJECT (gil->adj));
-		gtk_signal_connect (GTK_OBJECT (gil->adj), "value_changed",
-				    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
-		gtk_signal_connect (GTK_OBJECT (gil->adj), "changed",
-				    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
-	}
-
-	if (!gil->adj || !old_adjustment)
-		gtk_widget_queue_resize (GTK_WIDGET (gil));
-}
 
 /**
  * gnome_icon_list_construct:
@@ -2206,8 +2057,7 @@ gnome_icon_list_construct (GnomeIconList *gil, guint icon_width, GtkAdjustment *
 	if (!adj)
 		adj = GTK_ADJUSTMENT (gtk_adjustment_new (0, 0, 1, 0.1, 0.1, 0.1));
 
-	gnome_icon_list_set_vadjustment (gil, adj);
-
+	gtk_layout_set_vadjustment (GTK_LAYOUT (gil), adj);
 }
 
 
@@ -2576,6 +2426,7 @@ void
 gnome_icon_list_moveto (GnomeIconList *gil, int pos, double yalign)
 {
 	GnomeIconListPrivate *priv;
+	GtkAdjustment *adj;
 	IconLine *il;
 	GList *l;
 	int i, y, uh, line;
@@ -2600,7 +2451,8 @@ gnome_icon_list_moveto (GnomeIconList *gil, int pos, double yalign)
 	il = l->data;
 
 	uh = GTK_WIDGET (gil)->allocation.height - icon_line_height (gil,il);
-	gtk_adjustment_set_value (gil->adj, y - uh * yalign);
+	adj = gtk_layout_get_vadjustment (GTK_LAYOUT (gil));
+	gtk_adjustment_set_value (adj, y - uh * yalign);
 }
 
 /**
@@ -2617,6 +2469,7 @@ GtkVisibility
 gnome_icon_list_icon_is_visible (GnomeIconList *gil, int pos)
 {
 	GnomeIconListPrivate *priv;
+	GtkAdjustment *adj;
 	IconLine *il;
 	GList *l;
 	int line, y1, y2, i;
@@ -2639,14 +2492,16 @@ gnome_icon_list_icon_is_visible (GnomeIconList *gil, int pos)
 
 	y2 = y1 + icon_line_height (gil, (IconLine *) l->data);
 
-	if (y2 < gil->adj->value)
+	adj = gtk_layout_get_vadjustment (GTK_LAYOUT (gil));
+
+	if (y2 < adj->value)
 		return GTK_VISIBILITY_NONE;
 
-	if (y1 > gil->adj->value + GTK_WIDGET (gil)->allocation.height)
+	if (y1 > adj->value + GTK_WIDGET (gil)->allocation.height)
 		return GTK_VISIBILITY_NONE;
 
-	if (y2 <= gil->adj->value + GTK_WIDGET (gil)->allocation.height &&
-	    y1 >= gil->adj->value)
+	if (y2 <= adj->value + GTK_WIDGET (gil)->allocation.height &&
+	    y1 >= adj->value)
 		return GTK_VISIBILITY_FULL;
 
 	return GTK_VISIBILITY_PARTIAL;

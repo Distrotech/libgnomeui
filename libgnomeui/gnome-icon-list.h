@@ -68,10 +68,6 @@ struct _GnomeIconList {
 
 	/*< public >*/
 
-	/* Scroll adjustments */
-	GtkAdjustment *adj;
-	GtkAdjustment *hadj;
-
 	/* A list of integers with the indices of the currently selected icons */
 	GList *selection;
 
@@ -106,11 +102,6 @@ void           gnome_icon_list_construct           (GnomeIconList *gil,
 						    GtkAdjustment *adj,
 						    int flags);
 
-void           gnome_icon_list_set_hadjustment    (GnomeIconList *gil,
-						   GtkAdjustment *hadj);
-
-void           gnome_icon_list_set_vadjustment    (GnomeIconList *gil,
-						   GtkAdjustment *vadj);
 
 /* To avoid excesive recomputes during insertion/deletion */
 void           gnome_icon_list_freeze              (GnomeIconList *gil);
