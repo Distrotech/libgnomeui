@@ -35,7 +35,7 @@ EXTRA_DIST  = $(BITMAPS) $(stock_images)
 noinst_HEADERS = gnome-stock-imlib.h
 BUILT_SOURCES = gnome-stock-imlib.h
 
-gnome-stock-imlib.h: $(stock_images) $(CONVERTRGB)
+gnome-stock-imlib.h: $(stock_images) $(CONVERTRGB) Makefile.am
 	@echo "creating gnome-stock-imlib.h"
 	@echo "/* gnome stock icons in Imlib usable rgb data" >gnome-stock-imlib.h
 	@echo " *" >>gnome-stock-imlib.h

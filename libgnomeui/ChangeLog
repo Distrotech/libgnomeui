@@ -1,3 +1,8 @@
+1998-10-24  Martin Baulig  <martin@home-of-linux.org>
+
+	* pixmaps/Makefile.am: Make `gnome-stock-imlib.h' depend upon
+	the Makefile.am so it will be rebuild if you add new files.
+
 Sat Oct 24 13:09:50 CEST 1998  Eckehard Berns  <eb@berns.i-s-o.net>
 
 	* pixmaps/stock_font.png: new stock icon
