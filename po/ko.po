@@ -1,13 +1,13 @@
-# Korean messages for libgnomeui
-# Copyright (C) 1998, 1999, 2002 Free Software Foundation, Inc.
-# Changwoo Ryu <cwryu@debian.org>, 1998-2002.
+# Changwoo Ryu <cwryu@debian.org>, 1998-2003
+# Young-Ho, Cha <ganadist@mizi.com>, 2002
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.1.90\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2003-01-15 12:44+0900\n"
-"Last-Translator: Young-Ho, Cha <ganadist@mizi.com>\n"
+"Project-Id-Version: libgnomeui 2.3.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-07-20 21:58+0900\n"
+"PO-Revision-Date: 2003-07-20 22:04+0900\n"
+"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,9 +46,8 @@ msgid "Translated by"
 msgstr "번역"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "만든 사람"
+msgstr "만든 사람(_R)"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -138,6 +137,7 @@ msgstr "%s 정보"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "파일(_F)"
 
@@ -195,6 +195,7 @@ msgid "_Game"
 msgstr "게임(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "도움말(_H)"
 
@@ -385,11 +386,11 @@ msgstr "프로그램을 설정합니다"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "정보(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "이 프로그램에 대한 정보"
 
@@ -416,7 +417,7 @@ msgstr "새로운 창을 만듭니다"
 msgid "_Close This Window"
 msgstr "창 닫기(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "현재 창을 닫습니다"
 
@@ -583,7 +584,7 @@ msgstr "상태 표시줄을 만듭니다."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
-msgstr "대화형"
+msgstr "상호작용 정도"
 
 #: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
@@ -591,7 +592,7 @@ msgstr "사용자 행동이 필요한 정도."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "설정한 HTTP 프록시는 로그인을 해야 합니다."
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -599,18 +600,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"\"%s\"에 접근하려면 로그인을 해야 합니다.\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "비밀번호가 암호화되지 않은 상태로 전송됩니다."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "비밀번호가 암호화된 상태로 전송됩니다."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "인증이 필요합니다"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -618,7 +621,7 @@ msgstr "세션 관리 id 지정"
 
 #: libgnomeui/gnome-client.c:863
 msgid "ID"
-msgstr "ID"
+msgstr "<ID>"
 
 #: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
@@ -626,7 +629,7 @@ msgstr "이미 저장된 설정의 앞부분을 지정"
 
 #: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
-msgstr "PREFIX"
+msgstr "<접두어>"
 
 #: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
@@ -1209,11 +1212,11 @@ msgstr "메시지"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "사용자이름(_U):"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "비밀번호(_P):"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1360,14 +1363,12 @@ msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "자세한 정보는 그놈 응용프로그램의 비정상 종료 안내 웹페이지에 있습니다."
 
-#~ msgid "_Credits"
-#~ msgstr "만든 사람(_C)"
-
 # 테스트 프로그램의 번역?
 #
 # 테스트 프로그램은 번역할 필요가 없다.  왜냐하면 설치되지 않으니까.
 # 시간이 남아돌면서 번역할 메세지가 이거밖에 없다면 몰라도, 쓸데없는 일에
 # 시간을 낭비하고 싶지는 않다.
 #
-#~ msgid "Exit the test"
-#~ msgstr "테스트 나감"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "테스트 나감"
