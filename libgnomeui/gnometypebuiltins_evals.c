@@ -79,9 +79,10 @@ static const GtkEnumValue _gnome_dock_placement_values[] = {
 static const GtkEnumValue _gnome_dock_item_behavior_values[] = {
   { GNOME_DOCK_ITEM_BEH_NORMAL, "GNOME_DOCK_ITEM_BEH_NORMAL", "normal" },
   { GNOME_DOCK_ITEM_BEH_EXCLUSIVE, "GNOME_DOCK_ITEM_BEH_EXCLUSIVE", "exclusive" },
-  { GNOME_DOCK_ITEM_BEH_NEVER_DETACH, "GNOME_DOCK_ITEM_BEH_NEVER_DETACH", "never-detach" },
+  { GNOME_DOCK_ITEM_BEH_NEVER_FLOATING, "GNOME_DOCK_ITEM_BEH_NEVER_FLOATING", "never-floating" },
   { GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL, "GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL", "never-vertical" },
   { GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL, "GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL", "never-horizontal" },
+  { GNOME_DOCK_ITEM_BEH_LOCKED, "GNOME_DOCK_ITEM_BEH_LOCKED", "locked" },
   { 0, NULL, NULL }
 };
 static const GtkEnumValue _gnome_font_picker_mode_values[] = {

@@ -1,0 +1,16 @@
+#ifndef GNOME_CANVAS_LOAD_H
+#define GNOME_CANVAS_LOAD_H
+
+#include <libgnome/gnome-defs.h>
+#include <gdk_imlib.h>
+
+BEGIN_GNOME_DECLS
+
+GdkImlibImage *gnome_canvas_load_png (char *file);
+
+void gnome_canvas_destroy_image (GdkImlibImage *image);
+
+END_GNOME_DECLS
+
+#endif
+

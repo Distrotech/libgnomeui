@@ -35,6 +35,7 @@ libgnomeui_la_SOURCES = \
 	gnome-calculator.c              \
 	gnome-canvas.c			\
 	gnome-canvas-image.c		\
+	gnome-canvas-load.c		\
 	gnome-canvas-line.c		\
 	gnome-canvas-rect-ellipse.c	\
 	gnome-canvas-polygon.c		\
@@ -107,6 +108,7 @@ gnome_headers = \
 	gnome-canvas.h			\
 	gnome-canvas-image.h		\
 	gnome-canvas-line.h		\
+	gnome-canvas-load.h		\
 	gnome-canvas-rect-ellipse.h	\
 	gnome-canvas-polygon.h		\
 	gnome-canvas-text.h		\
@@ -240,7 +242,7 @@ EXTRA_DIST =					\
 	gnometypebuiltins_ids.c			\
 	gnometypebuiltins_evals.c
 
-libgnomeui_la_LDFLAGS = -version-info 31:0:0 -rpath $(libdir)
+libgnomeui_la_LDFLAGS = -version-info 32:0:1 -rpath $(libdir)
 libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 gnome_segv_LDADD =	\

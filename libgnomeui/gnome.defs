@@ -81,9 +81,10 @@
 (define-flags GnomeDockItemBehavior
    (normal GNOME_DOCK_ITEM_BEH_NORMAL)
    (exclusive GNOME_DOCK_ITEM_BEH_EXCLUSIVE)
-   (never-detach GNOME_DOCK_ITEM_BEH_NEVER_DETACH)
+   (never-floating GNOME_DOCK_ITEM_BEH_NEVER_FLOATING)
    (never-vertical GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL)
-   (never-horizontal GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL))
+   (never-horizontal GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL)
+   (locked GNOME_DOCK_ITEM_BEH_LOCKED))
 
 ; enumerations from "gnome-font-picker.h"
 
