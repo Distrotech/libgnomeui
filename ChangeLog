@@ -1,3 +1,7 @@
+2004-02-28  Paisa Seeluangsawat  <paisa@users.sf.net>
+
+	* configure.in: Added "th" (Thai) to ALL_LINGUAS.
+
 2004-02-27  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c
@@ -11,7 +15,7 @@ Thu Feb 26 20:01:03 2004  Jonathan Blandford  <jrb@gnome.org>
 	* libgnomeui/gnome-file-entry.c (browse_clicked): use modified
 	gtkfilechooser API.
 
-2004-02-25  Danilo ≈†egan  <dsegan@gmx.net>
+2004-02-25  Danilo Ö≈Ö†egan  <dsegan@gmx.net>
 
 	* configure.in: Added sr@ije to ALL_LINGUAS.
 
@@ -570,7 +574,7 @@ Wed Jun 04 15:54:18 2003  George Lebl <jirka@5z.com>
 	add -no-undefined which is necessary for building shared library
 	on some platforms (e.g. Win32, BeOS).
 
-2003-05-06  Danilo ≈†egan  <dsegan@gmx.net>
+2003-05-06  Danilo Ö≈Ö†egan  <dsegan@gmx.net>
 
 	* configure.in: Added "sr" and "sr@Latn" to ALL_LINGUAS.
 
@@ -701,7 +705,7 @@ Wed Jun 04 15:54:18 2003  George Lebl <jirka@5z.com>
         GNOME_ICON_LOOKUP_FLAGS_EMBEDDING_TEXT is set. 
         This enables top-left text for nautilus.
 
-2003-01-25  Sam√∫el J√≥n Gunnarsson  <sammi@techattack.nu>
+2003-01-25  SamÖ√Ö∫el JÖ√Ö≥n Gunnarsson  <sammi@techattack.nu>
 
 	* configure.in: Added "is" to ALL_LINUGAS.
 
@@ -1346,8 +1350,8 @@ Fri Jul 19 03:14:27 2002  Kristian Rietveld  <kris@gtk.org>
 
 2002-05-22  Federico Mena Quintero  <federico@ximian.com>
 
-	[Falta ver qu√© pasa con "activate" en el entry del GnomeFileEntry,
-	porque emite esa se√±al cuando dan double-click en el file selector
+	[Falta ver quÖ√Ö© pasa con "activate" en el entry del GnomeFileEntry,
+	porque emite esa seÖ√Ö±al cuando dan double-click en el file selector
 	o pican OK]
 
 	* libgnomeui/gnome-icon-entry.c (browse_clicked): Connect to
@@ -1794,7 +1798,7 @@ Sat Mar  2 19:50:24 2002  Owen Taylor  <otaylor@redhat.com>
 	* configure.in: Add $X_LIBS into $SM_LIBS since we no
 	longer inherit them from GTK+.
 
-2002-03-02  T√µivo Leedj√§rv  <leedjarv@interest.ee>
+2002-03-02  TÖ√Öµivo LeedjÖ√Ö§rv  <leedjarv@interest.ee>
 
 	* configure.in: Added et to ALL_LINGUAS.
 
@@ -3932,7 +3936,7 @@ Fri Aug 24 07:16:18 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/Makefile.am: Install gnome-macros.h
 
-2001-08-20  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+2001-08-20  Carlos PerellÖ√Ö≥ MarÖ√Ö≠n <carlos@gnome-db.org>
 
 	* configure.in: /s/libgnomeui-2/libgnomeui2/
 
@@ -4106,7 +4110,7 @@ Sun Aug 12 11:22:03 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-stock-icons.[ch]: Cleaned this up.
 
-2001-07-22  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+2001-07-22  Carlos PerellÖ√Ö≥ MarÖ√Ö≠n <carlos@gnome-db.org>
 
 	* test-gnome/testgnome.c: Removed all the references to gnome_less.
 
@@ -4180,7 +4184,7 @@ Sun Aug 12 11:22:03 2001  George Lebl <jirka@5z.com>
 
 	* libgnomeui/.cvsignore: Update for new generated files.
 
-2001-07-15  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+2001-07-15  Carlos PerellÖ√Ö≥ MarÖ√Ö≠n <carlos@gnome-db.org>
 
 	* libgnomeui/Makefile.am (gnometypebuiltins.c): It depends on gnometypebuiltins.h
 
@@ -4230,7 +4234,7 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 	* libgnomeui/gnome-init.c (libgnomeui_rc_parse): removed #warning, as
 	gtk_rc_init is dead.
 
-2001-07-02  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+2001-07-02  Carlos PerellÖ√Ö≥ MarÖ√Ö≠n <carlos@gnome-db.org>
 
 	* test-gnome/testgnome.[ch]: Some cleanup, but it does not run now :-?. I think
 	that is not my fault, but I'm not sure...
@@ -4240,7 +4244,7 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 	* libgnomeui/gnome-init.c (libgnomeui_post_args_parse): remove
 	gtk_rc_set_image_loader
 	(libgnomeui_pixbuf_image_loader): kill.
-	[ thanks to: Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org> ]
+	[ thanks to: Carlos PerellÖ√Ö≥ MarÖ√Ö≠n <carlos@gnome-db.org> ]
 	(libgnomeui_rc_parse): remove gtk_rc_init.
 
 	* libgnomeui/pixmaps/Makefile.am (gnome-stock-pixbufs.h): update the stock
@@ -4293,7 +4297,7 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 
 	* libgnomeui/libgnomeui.h: Don't include gnome-animator.h.
 
-2001-06-19  H√©ctor Garc√≠a √Ålvarez <hector@scouts-es.org>
+2001-06-19  HÖ√Ö©ctor GarcÖ√Ö≠a Ö√Ålvarez <hector@scouts-es.org>
 
 	* configure.in: added "es" for Spanish to $ALL_LINGUAS
 
@@ -4303,7 +4307,7 @@ Sat Jun 30 20:31:22 2001  Jonathan Blandford  <jrb@webwynk.net>
 
 	* libgnomeui/Makefile.am: Removed gnome-animator
 
-2001-06-17  Carlos Perell√≥ Mar√≠n <carlos@gnome-db.org>
+2001-06-17  Carlos PerellÖ√Ö≥ MarÖ√Ö≠n <carlos@gnome-db.org>
 
 	* test-gnome/Started the port to Gnome 2.0
 
@@ -8319,7 +8323,7 @@ Mon Oct 18 21:51:43 1999  George Lebl  <jirka@5z.com>
 	* test-gnome/testgnome.c:
 	s/gtk_container_border_width/gtk_container_set_border_width/
 
-1999-01-15  Szekeres Istv√°n <szekeres@cyberspace.mht.bme.hu>
+1999-01-15  Szekeres IstvÖ√Ö°n <szekeres@cyberspace.mht.bme.hu>
         * testgnome.c: as gtk-clock is corrected, it will work here well so
         we can enable it.
 
