@@ -17,7 +17,7 @@
 
 #define DEFAULT_SPLINE_STEPS 12		/* this is what Tk uses */
 #define NUM_ARROW_POINTS     6		/* number of points in an arrowhead */
-#define NUM_STATIC_POINTS    200	/* number of static points to use to avoid allocating arrays */
+#define NUM_STATIC_POINTS    256	/* number of static points to use to avoid allocating arrays */
 
 
 #define GROW_BOUNDS(bx1, by1, bx2, by2, x, y) {	\
@@ -143,6 +143,9 @@ gnome_canvas_line_init (GnomeCanvasLine *line)
 	line->cap = GDK_CAP_BUTT;
 	line->join = GDK_JOIN_MITER;
 	line->width_pixels = TRUE;
+	line->shape_a = 0.0;
+	line->shape_b = 0.0;
+	line->shape_c = 0.0;
 	line->spline_steps = DEFAULT_SPLINE_STEPS;
 }
 
@@ -258,7 +261,7 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GnomeCanvasItem *item;
 	GnomeCanvasLine *line;
 	int calc_bounds;
-	int calc_gcs;
+	int recalc;
 	GnomeCanvasPoints *points;
 	GdkColor color;
 
@@ -266,7 +269,7 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	line = GNOME_CANVAS_LINE (object);
 
 	calc_bounds = FALSE;
-	calc_gcs = FALSE;
+	recalc = FALSE;
 
 	switch (arg_id) {
 	case ARG_POINTS:
@@ -291,37 +294,39 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	case ARG_FILL_COLOR:
 		gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color);
 		line->pixel = color.pixel;
-		calc_gcs = TRUE;
+		recalc = TRUE;
 		break;
 
 	case ARG_WIDTH_PIXELS:
 		line->width = GTK_VALUE_UINT (*arg);
 		line->width_pixels = TRUE;
-		calc_gcs = TRUE;
+		recalc = TRUE;
 		break;
 
 	case ARG_WIDTH_UNITS:
 		line->width = fabs (GTK_VALUE_DOUBLE (*arg));
 		line->width_pixels = FALSE;
-		calc_gcs = TRUE;
+		recalc = TRUE;
 		break;
 
 	case ARG_CAP_STYLE:
 		line->cap = GTK_VALUE_ENUM (*arg);
-		calc_gcs = TRUE;
+		recalc = TRUE;
 		break;
 
 	case ARG_JOIN_STYLE:
 		line->join = GTK_VALUE_ENUM (*arg);
-		calc_gcs = TRUE;
+		recalc = TRUE;
 		break;
 
 	case ARG_FIRST_ARROWHEAD:
-		/* FIXME */
+		line->first_arrow = GTK_VALUE_BOOL (*arg);
+		recalc = TRUE;
 		break;
 
 	case ARG_LAST_ARROWHEAD:
-		/* FIXME */
+		line->last_arrow = GTK_VALUE_BOOL (*arg);
+		recalc = TRUE;
 		break;
 
 	case ARG_SMOOTH:
@@ -333,22 +338,25 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	case ARG_ARROW_SHAPE_A:
-		/* FIXME */
+		line->shape_a = fabs (GTK_VALUE_DOUBLE (*arg));
+		recalc = TRUE;
 		break;
 
 	case ARG_ARROW_SHAPE_B:
-		/* FIXME */
+		line->shape_b = fabs (GTK_VALUE_DOUBLE (*arg));
+		recalc = TRUE;
 		break;
 
 	case ARG_ARROW_SHAPE_C:
-		/* FIXME */
+		line->shape_c = fabs (GTK_VALUE_DOUBLE (*arg));
+		recalc = TRUE;
 		break;
 
 	default:
 		break;
 	}
 
-	if (calc_gcs)
+	if (recalc)
 		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 
 	if (calc_bounds)
@@ -416,6 +424,154 @@ gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 }
 
 static void
+reconfigure_arrows (GnomeCanvasLine *line)
+{
+	double *poly, *coords;
+	double dx, dy, length;
+	double sin_theta, cos_theta, tmp;
+	double frac_height;	/* Line width as fraction of arrowhead width */
+	double backup;		/* Distance to backup end points so the line ends in the middle of the arrowhead */
+	double vx, vy;		/* Position of arrowhead vertex */
+	double shape_a, shape_b, shape_c;
+	double width;
+	int i;
+
+	/* Set up things */
+
+	if (line->first_arrow) {
+		if (line->first_coords) {
+			line->coords[0] = line->first_coords[0];
+			line->coords[1] = line->first_coords[1];
+		} else
+			line->first_coords = g_new (double, 2 * NUM_ARROW_POINTS);
+	} else if (line->first_coords) {
+		line->coords[0] = line->first_coords[0];
+		line->coords[1] = line->first_coords[1];
+
+		g_free (line->first_coords);
+		line->first_coords = NULL;
+	}
+
+	i = 2 * (line->num_points - 1);
+
+	if (line->last_arrow) {
+		if (line->last_coords) {
+			line->coords[i] = line->last_coords[0];
+			line->coords[i + 1] = line->last_coords[1];
+		} else
+			line->last_coords = g_new (double, 2 * NUM_ARROW_POINTS);
+	} else if (line->last_coords) {
+		line->coords[i] = line->last_coords[0];
+		line->coords[i + 1] = line->last_coords[1];
+
+		g_free (line->last_coords);
+		line->last_coords = NULL;
+	}
+
+	if (!line->first_arrow && !line->last_arrow)
+		return;
+
+	if (line->width_pixels)
+		width = line->width / line->item.canvas->pixels_per_unit;
+	else
+		width = line->width;
+
+	/* Add fudge value for better-looking results */
+
+	shape_a = line->shape_a + 0.001;
+	shape_b = line->shape_b + 0.001;
+	shape_c = line->shape_c + width / 2.0 + 0.001;
+
+	/* Compute the polygon for the first arrowhead and adjust the first point in the line so
+	 * that the line does not stick out past the leading edge of the arrowhead.
+	 */
+
+	frac_height = (line->width / 2.0) / shape_c;
+	backup = frac_height * shape_b + shape_a * (1.0 - frac_height) / 2.0;
+
+	if (line->first_arrow) {
+		poly = line->first_coords;
+		poly[0] = poly[10] = line->coords[0];
+		poly[1] = poly[11] = line->coords[1];
+
+		dx = poly[0] - line->coords[2];
+		dy = poly[1] - line->coords[3];
+		length = sqrt (dx * dx + dy * dy);
+		if (length < GNOME_CANVAS_EPSILON)
+			sin_theta = cos_theta = 0.0;
+		else {
+			sin_theta = dy / length;
+			cos_theta = dx / length;
+		}
+
+		vx = poly[0] - shape_a * cos_theta;
+		vy = poly[1] - shape_a * sin_theta;
+
+		tmp = shape_c * sin_theta;
+
+		poly[2] = poly[0] - shape_b * cos_theta + tmp;
+		poly[8] = poly[2] - 2.0 * tmp;
+
+		tmp = shape_c * cos_theta;
+
+		poly[3] = poly[1] - shape_b * sin_theta - tmp;
+		poly[9] = poly[3] + 2.0 * tmp;
+
+		poly[4] = poly[2] * frac_height + vx * (1.0 - frac_height);
+		poly[5] = poly[3] * frac_height + vy * (1.0 - frac_height);
+		poly[6] = poly[8] * frac_height + vx * (1.0 - frac_height);
+		poly[7] = poly[9] * frac_height + vy * (1.0 - frac_height);
+
+		/* Move the first point towards the second so that the corners at the end of the
+		 * line are inside the arrowhead.
+		 */
+
+		line->coords[0] = poly[0] - backup * cos_theta;
+		line->coords[1] = poly[1] - backup * sin_theta;
+	}
+
+	/* Same process for last arrowhead */
+
+	if (line->last_arrow) {
+		coords = line->coords + 2 * (line->num_points - 2);
+		poly = line->last_coords;
+		poly[0] = poly[10] = coords[2];
+		poly[1] = poly[11] = coords[3];
+
+		dx = poly[0] - coords[0];
+		dy = poly[1] - coords[1];
+		length = sqrt (dx * dx + dy * dy);
+		if (length < GNOME_CANVAS_EPSILON)
+			sin_theta = cos_theta = 0.0;
+		else {
+			sin_theta = dy / length;
+			cos_theta = dx / length;
+		}
+
+		vx = poly[0] - shape_a * cos_theta;
+		vy = poly[1] - shape_a * sin_theta;
+
+		tmp = shape_c * sin_theta;
+
+		poly[2] = poly[0] - shape_b * cos_theta + tmp;
+		poly[8] = poly[2] - 2.0 * tmp;
+
+		tmp = shape_c * cos_theta;
+
+		poly[3] = poly[1] - shape_b * sin_theta - tmp;
+		poly[9] = poly[3] + 2.0 * tmp;
+
+		poly[4] = poly[2] * frac_height + vx * (1.0 - frac_height);
+		poly[5] = poly[3] * frac_height + vy * (1.0 - frac_height);
+		poly[6] = poly[8] * frac_height + vx * (1.0 - frac_height);
+		poly[7] = poly[9] * frac_height + vy * (1.0 - frac_height);
+
+		coords[2] = poly[0] - backup * cos_theta;
+		coords[3] = poly[1] - backup * sin_theta;
+	}
+}
+
+static void
 gnome_canvas_line_reconfigure (GnomeCanvasItem *item)
 {
 	GnomeCanvasLine *line;
@@ -440,6 +596,8 @@ gnome_canvas_line_reconfigure (GnomeCanvasItem *item)
 					    (line->first_arrow || line->last_arrow) ? GDK_CAP_BUTT : line->cap,
 					    line->join);
 	}
+
+	reconfigure_arrows (line);
 
 	recalc_bounds (line);
 }
@@ -469,15 +627,26 @@ gnome_canvas_line_unrealize (GnomeCanvasItem *item)
 }
 
 static void
+item_to_canvas (GnomeCanvas *canvas, double *item_coords, GdkPoint *canvas_coords, int num_points,
+		double wdx, double wdy, int cdx, int cdy)
+{
+	int i;
+	int cx, cy;
+
+	for (i = 0; i < num_points; i++, item_coords += 2, canvas_coords++) {
+		gnome_canvas_w2c (canvas, wdx + item_coords[0], wdy + item_coords[1], &cx, &cy);
+		canvas_coords->x = cx - cdx;
+		canvas_coords->y = cy - cdy;
+	}
+}
+
+static void
 gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 			int x, int y, int width, int height)
 {
 	GnomeCanvasLine *line;
 	GdkPoint static_points[NUM_STATIC_POINTS];
 	GdkPoint *points;
-	double *coords;
-	int i;
-	int cx, cy;
 	double dx, dy;
 
 	line = GNOME_CANVAS_LINE (item);
@@ -495,19 +664,25 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	dx = dy = 0.0;
 	gnome_canvas_item_i2w (item, &dx, &dy);
 
-	for (i = 0, coords = line->coords; i < line->num_points; i++, coords += 2) {
-		gnome_canvas_w2c (item->canvas,
-				  dx + coords[0],
-				  dy + coords[1],
-				  &cx, &cy);
-		points[i].x = cx - x;
-		points[i].y = cy - y;
-	}
-
+	item_to_canvas (item->canvas, line->coords, points, line->num_points, dx, dy, x, y);
 	gdk_draw_lines (drawable, line->gc, points, line->num_points);
 
 	if (points != static_points)
 		g_free (points);
+
+	/* Draw arrowheads */
+
+	points = static_points;
+
+	if (line->first_arrow) {
+		item_to_canvas (item->canvas, line->first_coords, points, NUM_ARROW_POINTS, dx, dy, x, y);
+		gdk_draw_polygon (drawable, line->gc, TRUE, points, NUM_ARROW_POINTS);
+	}
+
+	if (line->last_arrow) {
+		item_to_canvas (item->canvas, line->last_coords, points, NUM_ARROW_POINTS, dx, dy, x, y);
+		gdk_draw_polygon (drawable, line->gc, TRUE, points, NUM_ARROW_POINTS);
+	}
 }
 
 static double
