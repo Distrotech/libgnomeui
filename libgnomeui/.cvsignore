@@ -1,10 +1,11 @@
-Makefile.in
-Makefile
-.deps
 *.la
 *.lo
-_libs
+.deps
 .libs
+Makefile
+Makefile.in
+_libs
+gnome_segv
 so_locations
-ted_demo
 stock_demo
+ted_demo
