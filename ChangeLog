@@ -1,8 +1,8 @@
 2003-12-18  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-icon-lookup.c: 
-	* libgnomeui/gnome-icon-theme.c:
-	* libgnomeui/gnome-icon-theme.h:
+	* libgnomeui/gnome-icon-theme.[ch]:
+	Remove/Internalize some new api I accidentally added
 
 2003-12-18  Alexander Larsson  <alexl@redhat.com>
 
