@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.4\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
+"POT-Creation-Date: 2003-08-23 18:32+0200\n"
 "PO-Revision-Date: 2003-07-08 21:17+0200\n"
 "Last-Translator: Bojan Živanović <bojanz@panet.co.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
@@ -142,6 +142,7 @@ msgstr "O programu „%s“"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -151,11 +152,11 @@ msgstr "_Datoteka/"
 
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr "_Uredi"
+msgstr "_Uređivanje"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
-msgstr "_Uredi/"
+msgstr "_Uređivanje/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoć"
 
@@ -227,7 +229,7 @@ msgstr "Sačuvaj tekuću datoteku"
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Sačuvaj k_ao..."
+msgstr "Sačuvaj _kao..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
@@ -245,7 +247,7 @@ msgstr "Povrati snimljeno izdanje datoteke"
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
-msgstr "Štam_paj..."
+msgstr "_Štampaj..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -284,7 +286,7 @@ msgstr "Izađi iz programa"
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
-msgstr "I_seci"
+msgstr "_Iseci"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
@@ -339,7 +341,7 @@ msgstr "Ponovi poništenu akciju"
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
-msgstr "Na_đi..."
+msgstr "_Pronađi..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
@@ -348,7 +350,7 @@ msgstr "Pronađi tekst"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "Nađi _sledeći"
+msgstr "Nađi sle_deći"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -382,18 +384,18 @@ msgstr "_Postavke"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
-msgstr "Podesi aplikaciju"
+msgstr "Podesi program"
 
 #. 20
 #.
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "O _programu"
+msgstr "_O programu"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O ovom programu"
 
@@ -420,7 +422,7 @@ msgstr "Otvori novi prozor"
 msgid "_Close This Window"
 msgstr "_Zatvori ovaj prozor"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvori tekući prozor"
 
@@ -916,9 +918,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry koji se koristi kao polje za unos imena datoteka. Možete "
-"koristiti ovu osobinu za dobijanje GnomeEntry-a ukoliko želite da saznate "
-"ili izmenite neke njegove parametre."
+"GnomeEntry koji se koristi kao polje za unos imena datoteka. Možete koristiti "
+"ovu osobinu za dobijanje GnomeEntry-a ukoliko želite da saznate ili izmenite "
+"neke njegove parametre."
 
 #: libgnomeui/gnome-file-entry.c:282
 msgid "GtkEntry"
@@ -1043,8 +1045,8 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "Program „%s“ je pokušao da izmeni podešavanja sistema za koja vaš "
-"administrator ili proizvođač operativnog sistema ne dozvoljavaju izmene. "
-"Neka od izabranih postavki neće imati uticaja, ili se neće koristiti i pri "
+"administrator ili proizvođač operativnog sistema ne dozvoljavaju izmene. Neka "
+"od izabranih postavki neće imati uticaja, ili se neće koristiti i pri "
 "narednom pokretanju programa."
 
 #: libgnomeui/gnome-gconf-ui.c:176
@@ -1053,8 +1055,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Došlo je do greške pri učitavanju ili snimanju podataka o podešavanjima za %"
-"s. Neka od vaših postavki možda neće ispravno raditi."
+"Došlo je do greške pri učitavanju ili snimanju podataka o podešavanjima za %s. "
+"Neka od vaših postavki možda neće ispravno raditi."
 
 #: libgnomeui/gnome-href.c:122
 msgid "URL"
@@ -1369,5 +1371,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Posetite Gnomovu stranicu za pukle programe za dodatne informacije"
 
-#~ msgid "Exit the test"
-#~ msgstr "Napustite probu"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Napustite probu"

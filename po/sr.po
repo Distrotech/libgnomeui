@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.4\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
+"POT-Creation-Date: 2003-08-23 18:32+0200\n"
 "PO-Revision-Date: 2003-07-08 21:17+0200\n"
 "Last-Translator: Бојан Живановић <bojanz@panet.co.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
@@ -142,6 +142,7 @@ msgstr "О програму „%s“"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Датотека"
 
@@ -151,11 +152,11 @@ msgstr "_Датотека/"
 
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr "_Уреди"
+msgstr "_Уређивање"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
-msgstr "_Уреди/"
+msgstr "_Уређивање/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Помоћ"
 
@@ -227,7 +229,7 @@ msgstr "Сачувај текућу датотеку"
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Сачувај к_ао..."
+msgstr "Сачувај _као..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
@@ -245,7 +247,7 @@ msgstr "Поврати снимљено издање датотеке"
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
-msgstr "Штам_пај..."
+msgstr "_Штампај..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -284,7 +286,7 @@ msgstr "Изађи из програма"
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
-msgstr "И_сеци"
+msgstr "_Исеци"
 
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
@@ -339,7 +341,7 @@ msgstr "Понови поништену акцију"
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
-msgstr "На_ђи..."
+msgstr "_Пронађи..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
@@ -348,7 +350,7 @@ msgstr "Пронађи текст"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "Нађи _следећи"
+msgstr "Нађи сле_дећи"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -382,18 +384,18 @@ msgstr "_Поставке"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
-msgstr "Подеси апликацију"
+msgstr "Подеси програм"
 
 #. 20
 #.
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "О _програму"
+msgstr "_О програму"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "О овом програму"
 
@@ -420,7 +422,7 @@ msgstr "Отвори нови прозор"
 msgid "_Close This Window"
 msgstr "_Затвори овај прозор"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Затвори текући прозор"
 
@@ -1369,5 +1371,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Посетите Гномову страницу за пукле програме за додатне информације"
 
-#~ msgid "Exit the test"
-#~ msgstr "Напустите пробу"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Напустите пробу"
