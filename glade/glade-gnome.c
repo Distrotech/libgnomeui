@@ -46,6 +46,21 @@ static gboolean get_stock_uiinfo (const char *stock_name, GnomeUIInfo *info);
 /* -- routines to build the children for containers -- */
 
 static void
+button_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
+		       const char *longname)
+{
+	GtkWidget *child = glade_xml_build_widget(xml,
+			(GladeWidgetInfo *)info->children->data, longname);
+	guint key = glade_xml_get_parent_accel(xml);
+
+	gtk_container_add(GTK_CONTAINER(w), child);
+	if (key)
+		gtk_widget_add_accelerator(w, "clicked",
+					   glade_xml_ensure_accel(xml),
+					   key, GDK_MOD1_MASK, 0);
+}
+
+static void
 gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 			    const char *longname)
 {
@@ -580,6 +595,13 @@ druidpage_build_children(GladeXML *xml, GtkWidget *w,
 	g_free(vboxname);
 }
 
+static void pbox_change_page(GtkWidget *child, GtkNotebook *notebook)
+{
+	gint page = gtk_notebook_page_num(notebook, child);
+
+	gtk_notebook_set_page(notebook, page);
+}
+
 static void
 propbox_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 			const char *longname)
@@ -609,10 +631,20 @@ propbox_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 			pages = g_list_append (pages, child);
 		else {
 			GtkWidget *page = pages->data;
+			guint key = glade_xml_get_parent_accel(xml);
 
 			pages = g_list_remove (pages, page);
 			gnome_property_box_append_page (GNOME_PROPERTY_BOX(w),
 							page, child);
+			if (key) {
+				gtk_widget_add_accelerator(page, "grab_focus",
+					     glade_xml_ensure_accel(xml),
+					     key, GDK_MOD1_MASK, 0);
+				gtk_signal_connect(GTK_OBJECT(page),
+					"grab_focus",
+					GTK_SIGNAL_FUNC(pbox_change_page),
+					GNOME_PROPERTY_BOX(w)->notebook);
+			}
 		}
 	}
 }
@@ -1808,7 +1840,10 @@ app_new(GladeXML *xml, GladeWidgetInfo *info)
 static GtkWidget *
 propbox_new(GladeXML *xml, GladeWidgetInfo *info)
 {
-	return gnome_property_box_new();
+	GtkWidget *pbox = gnome_property_box_new();
+
+	glade_xml_set_toplevel(xml, GTK_WINDOW(pbox));
+	return pbox;
 }
 
 static GtkWidget *
@@ -1957,7 +1992,7 @@ druidpagestandard_new(GladeXML *xml, GladeWidgetInfo *info)
 /* -- routines to initialise these widgets with libglade -- */
 
 static const GladeWidgetBuildData widget_data [] = {
-	{ "GtkButton",        stock_button_new, glade_standard_build_children},
+	{ "GtkButton",          stock_button_new,   button_build_children},
 
 	{ "GnomeColorPicker",   color_picker_new,   NULL },
 	{ "GnomeFontPicker",    font_picker_new,    NULL },
