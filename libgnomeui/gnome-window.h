@@ -30,6 +30,13 @@ void gnome_window_toplevel_set_title (GtkWindow *w,
 				      const gchar *app_name,
 				      const gchar *extension);
 
+void gnome_window_set_icon (GtkWindow *window,
+			    GdkPixbuf *pixbuf,
+			    gboolean overwrite);
+
+void gnome_window_set_icon_from_file (GtkWindow *window,
+				      const char *filename,
+				      gboolean overwrite);
 
 G_END_DECLS
 
