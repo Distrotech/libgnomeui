@@ -8,7 +8,7 @@ LIB_VERSION_NUM=0.0.0
 #
 # The targets
 #
-noinst_PROGRAMS = test-recently-used test-file-saver stock_demo winhints_demo  dock_demo #animator_demo
+noinst_PROGRAMS = test-recently-used test-file-saver stock_demo winhints_demo  dock_demo animator_demo
 bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap gnome-rexec-server
 lib_LTLIBRARIES = libgnomeui-2.0.la
 
@@ -95,7 +95,7 @@ EXTRA_HEADERS =
 
 libgnomeui_2_0_la_SOURCES = \
 	gnome-about.c			\
-##	gnome-animator.c		\
+	gnome-animator.c		\
 	gnome-app.c			\
 	gnome-appbar.c			\
 	gnome-app-helper.c		\
@@ -172,7 +172,7 @@ libgnomeui_2_0_la_SOURCES = \
 ## this lists all the non-generated headers
 gnome_headers = \
 	gnome-about.h			\
-##        gnome-animator.h		\
+        gnome-animator.h		\
 	gnome-app.h			\
 	gnome-appbar.h			\
 	gnome-app-helper.h		\
@@ -311,7 +311,7 @@ stock_demo_SOURCES = stock_demo.c
 
 winhints_demo_SOURCES = winhints_demo.c
 
-#animator_demo_SOURCES = animator_demo.c
+animator_demo_SOURCES = animator_demo.c
 
 dock_demo_SOURCES = dock_demo.c
 
@@ -388,12 +388,12 @@ winhints_demo_LDADD =	\
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
-#animator_demo_LDADD =	\
-#	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
-#	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-#	$(GDK_PIXBUF_LIBS) \
-#	$(LIBGNOMEUI_LIBS) \
-#	$(INTLLIBS)
+animator_demo_LDADD =	\
+	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
+	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
+	$(GDK_PIXBUF_LIBS) \
+	$(LIBGNOMEUI_LIBS) \
+	$(INTLLIBS)
 
 dock_demo_LDADD =	\
 	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\

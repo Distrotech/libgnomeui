@@ -1,3 +1,12 @@
+2000-02-05  Cody Russell  <bratsche@dfw.net>
+	* gnome-animator.[ch]: Rewrote much of GnomeAnimator in order to
+	use GdkPixbuf instead of GdkImlib. Much of this is untested, and
+	I'm still hacking away on it.
+
+	* animator_demo.c: Rewritten.
+
+	* Makefile.am: Re-enable GnomeAnimator and animator_demo.
+
 2000-02-01  Iain Holmes  <ih@csd.abdn.ac.uk>
 
 	* gnome-dateedit.c (select_clicked): Changed to use 
