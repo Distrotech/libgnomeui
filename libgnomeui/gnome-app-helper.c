@@ -561,6 +561,10 @@ gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
 	while (uiinfo->type != GNOME_APP_UI_ENDOFINFO)
 	{
 		switch (uiinfo->type) {
+		case GNOME_APP_UI_INCLUDE:
+			gnome_app_install_statusbar_menu_hints(bar, uiinfo->moreinfo);
+			break;
+
 		case GNOME_APP_UI_SUBTREE:
 		case GNOME_APP_UI_SUBTREE_STOCK:
 			gnome_app_install_statusbar_menu_hints(bar, uiinfo->moreinfo);
@@ -759,6 +763,10 @@ gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
 			gnome_app_ui_configure_configurable( uiinfo );
 		}
 		switch (uiinfo->type) {
+		case GNOME_APP_UI_INCLUDE:
+			gnome_app_install_appbar_menu_hints(appbar, uiinfo->moreinfo);
+			break;
+
 		case GNOME_APP_UI_SUBTREE:
 		case GNOME_APP_UI_SUBTREE_STOCK:
 			gnome_app_install_appbar_menu_hints(appbar, uiinfo->moreinfo);
@@ -1289,6 +1297,13 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 			pos++;
 			break;
 
+		case GNOME_APP_UI_INCLUDE:
+		        gnome_app_fill_menu_custom
+			  (menu_shell, 
+			   uiinfo->moreinfo, orig_uibdata,
+			   accel_group, uline_accels, pos);
+			break;
+
 		default:
 			g_warning ("Invalid GnomeUIInfo element type %d\n", 
 					(int) uiinfo->type);
@@ -1405,15 +1420,22 @@ gnome_app_set_tearoff_menu_titles(GnomeApp *app, GnomeUIInfo *uiinfo,
 		int type;
 		
 		type = uiinfo[i].type;
+
+		if(type == GNOME_APP_UI_INCLUDE)
+		  {
+		    gnome_app_set_tearoff_menu_titles (app, uiinfo->moreinfo, above);
+		    continue;
+		  }
+
 		if (type == GNOME_APP_UI_SUBTREE_STOCK)
 			type = GNOME_APP_UI_SUBTREE;
 				
 		if(type != GNOME_APP_UI_SUBTREE)
 			continue;
-		
+
 		if(!ctmp)
-			ctmp = alloca(strlen(above) + sizeof(" : ") + strlen(uiinfo[i].label)
-				      + 75 /* eek! Hope noone uses huge menu item names! */);
+			ctmp = g_alloca(strlen(above) + sizeof(" : ") + strlen(uiinfo[i].label)
+					+ 75 /* eek! Hope noone uses huge menu item names! */);
 		strcpy(ctmp, above);
 		strcat(ctmp, " : ");
 		strcat(ctmp, uiinfo[i].label);
@@ -1541,6 +1563,7 @@ create_radio_toolbar_items (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 		GnomeUIBuilderData *uibdata, GtkAccelGroup *accel_group)
 {
 	GtkWidget *group;
+	gpointer orig_uibdata = uibdata;
 
 	group = NULL;
 
@@ -1554,6 +1577,10 @@ create_radio_toolbar_items (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 			create_toolbar_item (toolbar, uiinfo, TRUE, &group, 
 					uibdata, accel_group);
 			break;
+
+		case GNOME_APP_UI_INCLUDE:
+		        create_radio_toolbar_items (toolbar, uiinfo->moreinfo, orig_uibdata, accel_group);
+		        break;
 
 		default:
 			g_warning ("GnomeUIInfo element type %d is not valid "
@@ -1643,6 +1670,10 @@ gnome_app_fill_toolbar_custom (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 
 	for (; uiinfo->type != GNOME_APP_UI_ENDOFINFO; uiinfo++)
 		switch (uiinfo->type) {
+		case GNOME_APP_UI_INCLUDE:
+		        gnome_app_fill_toolbar_custom (toolbar, uiinfo->moreinfo, uibdata, accel_group);
+		        break;
+
 		case GNOME_APP_UI_BUILDER_DATA:
 			/* Set the builder data for subsequent entries in the 
 			 * current uiinfo array */

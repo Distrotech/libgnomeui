@@ -934,3 +934,21 @@ gnome_widget_set_name(GtkWidget *widget, const char *name)
 
   return widget;
 }
+
+/**
+ * gnome_widget_set_tooltip:
+ * @widget: A widget
+ * @tiptext: The text to be placed in the tooltip
+ *
+ * Returns:
+ */
+void
+gnome_widget_set_tooltip (GtkWidget *widget, const char *tiptext)
+{
+  static GtkTooltips *tips = NULL;
+
+  if(!tips)
+    tips = gtk_tooltips_new();
+
+  gtk_tooltips_set_tip(tips, widget, tiptext, NULL);
+}

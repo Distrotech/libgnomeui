@@ -1,4 +1,8 @@
 1999-11-09  Elliot Lee  <sopwith@redhat.com>
+	* gnome-helpsys.[ch]: gnome_widget_set_tooltip()
+	* gnome-popup-menu.[ch]: It works for all widgets (no_window widgets require extra care & feeding :)
+
+	* gnome-app-helper.[ch]: Add GNOME_APP_UI_INCLUDE type to include another GnomeUIInfo table inline.
 
 	* gnome-init.[ch]: Add LIBGNOMEUI_PARAM_DISPLAY.
 

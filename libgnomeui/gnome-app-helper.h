@@ -53,11 +53,13 @@ typedef enum {
 	 * GnomeUIInfo arrays containing GNOME_APP_UI_BUILDER_DATA items since 
 	 * their GnomeUIBuilderData structures completely override the ones 
 	 * generated or supplied by the above functions. */
-	GNOME_APP_UI_SUBTREE_STOCK	/* Item that defines a 
+	GNOME_APP_UI_SUBTREE_STOCK,	/* Item that defines a 
 					   subtree/submenu, same as GNOME_APP_UI_SUBTREE,
 					   but the texts should be looked up in the
 					   gnome-libs catalog
 					*/
+	GNOME_APP_UI_INCLUDE            /* almost like SUBTREE, but inserts items into the current menu/whatever. instead of
+					   making a submenu */
 } GnomeUIInfoType;
 
 /* If you insert a value into this enum it'll break configurations all
@@ -225,6 +227,10 @@ typedef struct {
 #define GNOMEUIINFO_SUBTREE_STOCK(label, tree, stock_id) \
 	{ GNOME_APP_UI_SUBTREE, label, NULL, tree, NULL, NULL, \
 		GNOME_APP_PIXMAP_STOCK, stock_id, 0, (GdkModifierType) 0, NULL }
+
+#define GNOMEUIINFO_INCLUDE(tree) \
+	{ GNOME_APP_UI_INCLUDE, NULL, NULL, tree, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 
 /* Insert a list of radio items */
 #define GNOMEUIINFO_RADIOLIST(list) \

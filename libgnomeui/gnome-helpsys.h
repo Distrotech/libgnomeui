@@ -53,7 +53,7 @@ void gnome_help_view_set_orientation(GnomeHelpView *help_view, GtkOrientation or
 void gnome_help_view_display (GnomeHelpView *help_view, const char *help_path);
 void gnome_help_view_display_callback (GtkWidget *widget, const char *help_path);
 
-/* Non-widget routines */
+/*** Non-widget routines ***/
 
 /* Turns a help path into a full URL */
 char *gnome_help_path_resolve(const char *path, const char *file_type);
@@ -62,9 +62,11 @@ GSList *gnome_help_app_topics(const char *app_id);
 /* Object data on toplevel, name */
 #define GNOME_APP_HELP_VIEW_NAME "HelpView"
 
-/*------*/
+/*** Utility routines ***/
+void gnome_widget_set_tooltip (GtkWidget *widget, const char *tiptext);
 GtkWidget *gnome_widget_set_name(GtkWidget *widget, const char *name);
 
+#define TT_(widget, text) gnome_widget_set_tooltip((widget), (text))
 #define H_(widget, help_id) gnome_widget_set_name((widget), (help_id))
 
 END_GNOME_DECLS

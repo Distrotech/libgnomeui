@@ -22,6 +22,7 @@ static const GtkEnumValue _gnome_ui_info_type_values[] = {
   { GNOME_APP_UI_BUILDER_DATA, "GNOME_APP_UI_BUILDER_DATA", "builder-data" },
   { GNOME_APP_UI_ITEM_CONFIGURABLE, "GNOME_APP_UI_ITEM_CONFIGURABLE", "item-configurable" },
   { GNOME_APP_UI_SUBTREE_STOCK, "GNOME_APP_UI_SUBTREE_STOCK", "subtree-stock" },
+  { GNOME_APP_UI_INCLUDE, "GNOME_APP_UI_INCLUDE", "include" },
   { 0, NULL, NULL }
 };
 static const GtkEnumValue _gnome_ui_info_configurable_types_values[] = {

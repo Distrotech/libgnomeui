@@ -182,27 +182,86 @@ gnome_popup_menu_get_accel_group(GtkMenu *menu)
  * the menu should be popped up and does the appropriate stuff.
  */
 static gint
-popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
+real_popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
 {
 	GtkWidget *popup;
 	gpointer user_data;
 
-	if (event->button != 3)
-		return FALSE;
-
 	popup = data;
 
-	/* Fetch the attachment user data from the widget and install it in the popup menu -- it
-	 * will be used by the callback mashaller to pass the data to the callbacks.
+	/*
+	 * Fetch the attachment user data from the widget and install
+	 * it in the popup menu -- it will be used by the callback
+	 * mashaller to pass the data to the callbacks.
+	 *
 	 */
 
 	user_data = gtk_object_get_data (GTK_OBJECT (widget), "gnome_popup_menu_attach_user_data");
 
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "button_press_event");
-
 	gnome_popup_menu_do_popup (popup, NULL, NULL, event, user_data);
+
 	return TRUE;
 }
+
+static gint
+popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+	if (event->button != 3)
+		return FALSE;
+
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "button_press_event");
+
+	return real_popup_button_pressed (widget, event, data);
+}
+
+typedef struct {
+  
+} RelayInfo;
+
+static gint
+relay_popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+	if (event->button != 3)
+		return FALSE;
+
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "button_press_event");
+
+	if (GTK_IS_CONTAINER(widget))
+	  {
+	    do {
+	      GList *children;
+
+	      for (children = gtk_container_children(GTK_CONTAINER(widget)), widget = NULL;
+		   children; children = children->next)
+		{
+		  GtkWidget *cur;
+		  
+		  cur = (GtkWidget *)children->data;
+		  
+		  if(! GTK_WIDGET_NO_WINDOW(cur) )
+		    continue;
+		  
+		  if(cur->allocation.x <= event->x
+		     && cur->allocation.y <= event->y
+		     && (cur->allocation.x + cur->allocation.width) > event->x
+		     && (cur->allocation.y + cur->allocation.height) > event->y
+		     && gtk_object_get_data (GTK_OBJECT(cur), "gnome_popup_menu_nowindow"))
+		    {
+		      widget = cur;
+		      break;
+		    }
+		}
+	    } while(widget && GTK_IS_CONTAINER (widget) && GTK_WIDGET_NO_WINDOW(widget));
+
+	    if(!widget)
+	      {
+		return TRUE;
+	      }
+	  }
+
+	return real_popup_button_pressed (widget, event, data);
+}
+
 
 /* Callback used to unref the popup menu when the widget it is attached to gets destroyed */
 static void
@@ -236,15 +295,28 @@ popup_attach_widget_destroyed (GtkWidget *widget, gpointer data)
  * time.  A reference count is kept on the popup menu; when all the
  * widgets it is attached to are destroyed, the popup menu will be
  * destroyed as well.
+ *
+ * Under the current implementation, setting a popup menu for a NO_WINDOW widget and then reparenting
+ * that widget will cause Bad Things to happen.
  */
 void
 gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
 			 gpointer user_data)
 {
+        GtkWidget *ev_widget;
+
 	g_return_if_fail (popup != NULL);
 	g_return_if_fail (GTK_IS_MENU (popup));
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (widget));
+
+	/* This operation can fail if someone is trying to set a popup on e.g. an uncontained label, so we do it first. */
+	for(ev_widget = widget; ev_widget && GTK_WIDGET_NO_WINDOW(ev_widget); ev_widget = ev_widget->parent)
+	  {
+	    gtk_object_set_data (GTK_OBJECT (ev_widget), "gnome_popup_menu_nowindow", GUINT_TO_POINTER(1));
+	  }
+
+	g_return_if_fail (ev_widget);
 
 	/* Ref/sink the popup menu so that we take "ownership" of it */
 
@@ -261,14 +333,17 @@ gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
 	 * shouted by gtk_widget_set_events().
 	 */
 
-	gtk_widget_add_events (widget, GDK_BUTTON_PRESS_MASK);
+	gtk_widget_add_events (ev_widget, GDK_BUTTON_PRESS_MASK);
 
-	gtk_signal_connect (GTK_OBJECT (widget), "button_press_event",
-			    (GtkSignalFunc) popup_button_pressed,
-			    popup);
+	  gtk_signal_connect (GTK_OBJECT (widget), "button_press_event",
+			      GTK_SIGNAL_FUNC (popup_button_pressed), popup);
+
+	if (ev_widget != widget)
+	  gtk_signal_connect_while_alive (GTK_OBJECT (ev_widget), "button_press_event",
+					  (GtkSignalFunc) relay_popup_button_pressed,
+					  popup, GTK_OBJECT(widget));
 
 	/* This callback will unref the popup menu when the widget it is attached to gets destroyed. */
-
 	gtk_signal_connect (GTK_OBJECT (widget), "destroy",
 			    (GtkSignalFunc) popup_attach_widget_destroyed,
 			    popup);
