@@ -1,3 +1,8 @@
+2000-01-12  Martijn van Beers  <martijn@earthling.net>
+
+        * gnome-gconf.[ch]: added get/set functions for
+        Gnome(File|Icon|Pixmap)?Entry
+
 2000-01-11  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-gconf.c (gnome_gconf_gnome_color_picker_get): added new
