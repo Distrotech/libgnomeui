@@ -1,3 +1,20 @@
+1998-07-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-line.c (gnome_canvas_line_point): Finished
+	implementing distance-to-point method.  It is a bit buggy, I will
+	test it tomorrow.
+
+	* gnome-canvas-util.c (gnome_canvas_get_miter_points): New public
+	function to calculate the butt points of a line segment.
+	(gnome_canvas_polygon_to_point): New public function to compute
+	the distance between a polygon and a point.
+
+	* gnome-canvas-line.c (recalc_bounds): We can only calculate
+	mitered points up to (line->num_points - 3).
+	(gnome_canvas_line_draw): Use pointer arithmetic instead of
+	calculating indices explicitly.
+	(recalc_bounds): Likewise.
+
 Mon Jul 20 22:41:29 1998  John Ellis  <johne@bellatlantic.net>
 
 	* gnome-dentry-edit.c (gnome_dentry_edit_sync_display): fix segfault

@@ -12,6 +12,10 @@
  *
  * - Fix refcounting and destruction of items.
  *
+ * - Have the canvas carry a list of areas to repaint.  If a request_repaint is made for an area
+ *   that does not touch any of the areas of the list, queue the new area.  Else, grow the existing,
+ *   touched area (see Gnumeric for reasons).
+ *
  * - GC put functions for items.
  *
  * - Stipple for filling items.
@@ -37,8 +41,7 @@
  * - Multiple exposure event compression; this may need to be in Gtk/Gdk instead.
  *
  * - Make gnome_canvas_scroll_to() use XCopyArea instead of repainting everything.
- *   Or use the Mozilla scrolling code for when we have widgets in the canvas.
- */
+ *   Or use the Mozilla scrolling code for when we have widgets in the canvas.  */
 
 #include <config.h>
 #include <math.h>

@@ -43,6 +43,32 @@ int gnome_canvas_get_miter_points (double x1, double y1, double x2, double y2, d
 				   double width,
 				   double *mx1, double *my1, double *mx2, double *my2);
 
+/* Compute the butt points of a line segment.  If project is FALSE, then the results are as follows:
+ *
+ *            -------------------* (bx1, by1)
+ *                               |
+ *   (x1, y1) *------------------* (x2, y2)
+ *                               |
+ *            -------------------* (bx2, by2)
+ *
+ * that is, the line is not projected beyond (x2, y2).  If project is TRUE, then the results are as
+ * follows:
+ *
+ *            -------------------* (bx1, by1)
+ *                      (x2, y2) |
+ *   (x1, y1) *-------------*    |
+ *                               |
+ *            -------------------* (bx2, by2)
+ */
+void gnome_canvas_get_butt_points (double x1, double y1, double x2, double y2,
+				   double width, int project,
+				   double *bx1, double *by1, double *bx2, double *by2);
+
+/* Calculate the distance from a polygon to a point.  The polygon's X coordinates are in the even
+ * indices of the poly array, and the Y coordinates are in the odd indices.
+ */
+double gnome_canvas_polygon_to_point (double *poly, int num_points, double x, double y);
+
 
 END_GNOME_DECLS
 
