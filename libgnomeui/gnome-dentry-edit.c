@@ -215,6 +215,7 @@ fill_easy_page(GnomeDEntryEdit * dee, GtkWidget * table)
 
   types = g_list_prepend(types, "Application");
   types = g_list_prepend(types, "Directory");
+  types = g_list_prepend(types, "URL");
   dee->type_combo = gtk_combo_new();
   gtk_combo_set_popdown_strings(GTK_COMBO(dee->type_combo), types);
   g_list_free(types);

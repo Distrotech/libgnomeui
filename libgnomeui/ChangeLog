@@ -1,3 +1,8 @@
+Fri Sep 15 18:54:18 2000  George Lebl <jirka@5z.com>
+
+	* gnome-dentry-edit.c: Add "URL" to the list of standard entry
+	  types in the combo.
+
 Sun Sep 10 14:30:33 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dateedit.c:  Make sure that input to gtkcalendar is legal
