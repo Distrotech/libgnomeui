@@ -270,7 +270,7 @@ static void gnome_mdi_destroy (GtkObject *object)
 	   destruction of toplevel windows: it unrefs itself,
 	   thus taking care of the initial reference added
 	   upon mdi creation. */
-	if(object->ref_count > 0)
+	if(object->ref_count > 0 && !GTK_OBJECT_DESTROYED(object))
 		gtk_object_unref(object);
 
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
