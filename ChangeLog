@@ -1,5 +1,10 @@
 2002-04-17  Federico Mena Quintero  <federico@ximian.com>
 
+	* libgnomeui/gnome-href.c (gnome_href_instance_init): Add
+	accessible name/description to the HRef.
+
+2002-04-17  Federico Mena Quintero  <federico@ximian.com>
+
 	* libgnomeui/gnome-about.c (gnome_about_display_credits_dialog):
 	Add mnemonics to the notebook tab labels.
 

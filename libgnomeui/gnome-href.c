@@ -31,6 +31,7 @@
 #include <gtk/gtk.h>
 #include <libgnome/gnome-url.h>
 #include "gnome-href.h"
+#include "libgnomeui-access.h"
 
 struct _GnomeHRefPrivate {
 	gchar *url;
@@ -159,6 +160,14 @@ gnome_href_instance_init (GnomeHRef *href)
 	/* the source dest is set on set_url */
 	g_signal_connect (href, "drag_data_get",
 			  G_CALLBACK (drag_data_get), NULL);
+
+	/* Set our accessible description.  We don't set the name as we want it
+	 * to be the contents of the label, which is the default anyways.
+	 */
+
+	_add_atk_name_desc (GTK_WIDGET (href),
+			    NULL,
+			    _("This button will take you to the URI that it displays."));
 }
 
 static void
