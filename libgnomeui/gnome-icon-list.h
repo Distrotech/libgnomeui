@@ -34,14 +34,16 @@ typedef enum {
 typedef struct {
 	GnomeCanvas canvas;
 
-	/* Private data */
+	/* Scroll adjustments */
 	GtkAdjustment *adj;
 	GtkAdjustment *hadj;
 
 	/* Number of icons in the list */
 	int icons;
 
+	/* Private data */
 	gpointer priv; /* was GList *icon_list */
+
 	int pad3; /* was int frozen */
 	int pad4; /* was int dirty */
 	int pad5; /* was int row_spacing */
@@ -50,7 +52,6 @@ typedef struct {
 	int pad8; /* was int icon_border */
 	gpointer pad9; /* was char *separators */
 	GnomeIconListMode pad10; /* was GnomeIconListMode mode */
-
 	GtkSelectionMode pad11; /* was GtkSelectionMode selection_mode */
 
 	/* A list of integers with the indices of the currently selected icons */
