@@ -296,6 +296,8 @@ gnome_preferences_load_custom(GnomePreferences *settings)
 					  NULL);
   settings->menus_have_icons = b;
 
+  gnome_config_pop_prefix ();
+  gnome_config_push_prefix (CACHE);
   b = gnome_config_get_bool_with_default (DISABLE_IMLIB_CACHE_KEY"=true",
 					  NULL);
   settings->disable_imlib_cache = b;

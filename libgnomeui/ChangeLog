@@ -1,3 +1,12 @@
+1999-01-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-preferences.c (gnome_preferences_load_custom): Fix.  Put
+	the Cache information in the right configuration section.
+
+1999-01-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-init.c (gnome_init_cb): use the setting for "images".
+
 Mon Jan 25 11:08:46 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-dialog.[ch]: remove the default migration patch as it's
