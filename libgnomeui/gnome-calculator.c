@@ -214,6 +214,9 @@ static void
 set_result(GnomeCalculator *gc)
 {
 	CalculatorStack *stack;
+	gchar buf[80];
+	gchar format[20];
+	gint i;
 
 	g_return_if_fail(gc!=NULL);
 
@@ -226,7 +229,15 @@ set_result(GnomeCalculator *gc)
 
 	gc->result = stack->d.number;
 
-	g_snprintf(gc->result_string,13,"% 12.12lg",gc->result);
+	for(i=12;i>0;i--) {
+		g_snprintf(format,20,"%c .%dlg",'%',i);
+		g_snprintf(buf,80,format,gc->result);
+		if(strlen(buf)<12)
+			break;
+	}
+	strncpy(gc->result_string,buf,12);
+	gc->result_string[12]='\0';
+
 	put_led_font(gc);
 }
 
@@ -675,7 +686,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 	table = gtk_table_new(8,5,TRUE);
 	gtk_widget_show(table);
 
-	gtk_box_pack_end(GTK_BOX(gc),table,FALSE,FALSE,0);
+	gtk_box_pack_end(GTK_BOX(gc),table,TRUE,TRUE,0);
 
 	w=gtk_button_new_with_label("1/x");
 	gtk_signal_connect(GTK_OBJECT(w),"clicked",

@@ -1,3 +1,7 @@
+Mon Apr 13 00:43:32 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.c: fixed display
+
 Sun Apr 12 23:43:11 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.c: added e and PI buttons and made
