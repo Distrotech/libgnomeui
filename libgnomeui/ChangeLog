@@ -1,3 +1,8 @@
+1998-11-30  Justin Maurer  <justin@openprojects.net>
+
+	* gnome-paper-selector: merge old code with new, add in seth's
+	changes. sloppy. will test more.
+
 1998-11-30  Jonathan Blandford  <jrb@aware-of-vacuity.labs.redhat.com>
 
 	* gnome-popup-help.c (gnome_popup_help_place_window): quick buglet fix
