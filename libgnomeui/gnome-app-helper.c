@@ -360,19 +360,18 @@ void gnome_app_create_toolbar_interp    (GnomeApp *app,
 static void
 gnome_app_do_ui_signal_connect    (GnomeApp *app,
 				   GnomeUIInfo *info_item,
-				   GtkWidget *widget,
 				   gchar *signal_name,
 				   GnomeUIBuilderData uidata)
 {
   if(uidata->is_interp)
-    gtk_signal_connect_interp(GTK_OBJECT(widget),
+    gtk_signal_connect_interp(GTK_OBJECT(info_item->widget),
 			      signal_name,
 			      uidata->relay_func,
 			      uidata->data?uidata->data:info_item->moreinfo,
 			      uidata->destroy_func,
 			      TRUE);
   else
-    gtk_signal_connect(GTK_OBJECT(widget), signal_name,
+    gtk_signal_connect(GTK_OBJECT(info_item->widget), signal_name,
 		       info_item->moreinfo,
 		       uidata->data);
 }
