@@ -1,3 +1,9 @@
+1998-06-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.c: Fixed bug where it would crash if you clicked
+	on an empty icon list.  Thanks to James Henstridge
+	<james@quoll.daa.com.au> for the patch.
+
 Thu Jun 18 23:52:04 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-init.c: set up config autosyncing during gnome_init

@@ -186,6 +186,7 @@ get_icon_num_from_xy (GnomeIconList *ilist, int x, int y, int *num, int *on_spac
 	if (ilist->icons == 0) {
 		*num = -1;
 		*on_spacing = TRUE;
+		return;
 	}
 
 	x += ilist->x_offset;
@@ -1430,8 +1431,10 @@ gnome_icon_list_button_press (GtkWidget *widget, GdkEventButton *event)
 
 	get_icon_num_from_xy (ilist, event->x, event->y, &num, &on_spacing);
 
-	if (on_spacing)
+	if (on_spacing) {
+		ilist->last_clicked = -1;
 		return FALSE;
+	}
 
 	icon = g_list_nth (ilist->icon_list, num)->data;
 	if (icon->state == GTK_STATE_SELECTED && event->type != GDK_2BUTTON_PRESS && (event->button == 1) ){
