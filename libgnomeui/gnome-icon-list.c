@@ -586,7 +586,7 @@ height_changed (GnomeCanvasItem *item, Icon *icon)
 	if (!GTK_WIDGET_REALIZED (gil))
 		return;
 
-	if (gil->frozen){
+	if (gil->frozen > 0){
 		gil->dirty = TRUE;
 		return;
 	}
@@ -672,7 +672,7 @@ icon_list_append (Gil *gil, Icon *icon)
 		break;
 	}
 
-	if (!gil->frozen){
+	if (!gil->frozen > 0){
 		/* FIXME: this should only layout the last line */
 		gil_layout_all_icons (gil);
 		gil_scrollbar_adjust (gil);
@@ -701,7 +701,7 @@ icon_list_insert (Gil *gil, int pos, Icon *icon)
 		break;
 	}
 
-	if (!gil->frozen){
+	if (!gil->frozen > 0){
 		/*
 		 * FIXME: this should only layout the lines from then
 		 * one containing the Icon to the end.
@@ -875,7 +875,7 @@ gnome_icon_list_remove (GnomeIconList *gil, int pos)
 
 	icon_destroy (icon);
 
-	if (!gil->frozen) {
+	if (!gil->frozen > 0) {
 		/*
 		 * FIXME: Optimize, only re-layout from pos to end
 		 */
@@ -1035,7 +1035,7 @@ gil_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 	if (GTK_WIDGET_CLASS (parent_class)->size_allocate)
 		(* GTK_WIDGET_CLASS (parent_class)->size_allocate)
 			(widget, allocation);
-	if (gil->frozen)
+	if (gil->frozen > 0)
 		return;
 	gil_layout_all_icons (gil);
 	gil_scrollbar_adjust (gil);
@@ -1051,7 +1051,7 @@ gil_realize (GtkWidget *widget)
 		(* GTK_WIDGET_CLASS (parent_class)->realize)(widget);
 	gil->frozen--;
 	
-	if (gil->frozen)
+	if (gil->frozen > 0)
 		return;
 	if (gil->dirty){
 		gil_layout_all_icons (gil);
@@ -1461,7 +1461,7 @@ gil_init (Gil *gil)
 
 	gil->mode = GNOME_ICON_LIST_TEXT_BELOW;
 	gil->selection_mode = GTK_SELECTION_SINGLE;
-	gil->frozen = 1;	/* starts frozen! */
+	gil->frozen = 0;
 	gil->dirty  = TRUE;
 	gil->timer_tag = -1;
 
@@ -1517,7 +1517,7 @@ gnome_icon_list_set_icon_width (GnomeIconList *gil, int w)
 
 	gil->icon_width  = w;
 
-	if (gil->frozen){
+	if (gil->frozen > 0){
 		gil->dirty = TRUE;
 		return;
 	}
@@ -1653,28 +1653,6 @@ gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, gboolean is_editable)
 }
 
 /**
- * gnome_icon_list_new_thawed: [constructor]
- * @icon_width:  Icon width.
- * @adj:         Scrolling adjustment.
- * @is_editable: whether editing changes can be made to this icon_list.
- *
- * Create a new GnomeIconList.  See the description for gnome_icon_list_new
- * for details.
- *
- * The only difference with gnome_icon_list_new is that the widget is
- * returned in thawed state.
- */
-GtkWidget *
-gnome_icon_list_new_thawed (guint icon_width, GtkAdjustment *adj, gboolean is_editable)
-{
-	GtkWidget *w = gnome_icon_list_new (icon_width, adj, is_editable);
-
-	gnome_icon_list_thaw (GIL (w));
-
-	return w;
-}
-
-/**
  * gnome_icon_list_freeze:
  * @gil:  The GnomeIconList
  *
@@ -1712,7 +1690,7 @@ gnome_icon_list_thaw (GnomeIconList *gil)
 
 	gil->frozen--;
 
-	if (gil->frozen)
+	if (gil->frozen > 0)
 		return;
 	
 	if (!gil->dirty)
@@ -1843,7 +1821,7 @@ gil_set_if (Gil *gil, int n, int offset)
 
 	*v = n;
 
-	if (!gil->frozen){
+	if (!gil->frozen > 0){
 		gil_layout_all_icons (gil);
 		gil_scrollbar_adjust (gil);
 	} else
@@ -1921,7 +1899,7 @@ gnome_icon_list_set_separators (GnomeIconList *gil, const char *sep)
 		g_free (gil->separators);
 	gil->separators = g_strdup (sep);
 
-	if (gil->frozen){
+	if (gil->frozen > 0){
 		gil->dirty = TRUE;
 		return;
 	}
@@ -1986,6 +1964,9 @@ gnome_icon_list_icon_is_visible (GnomeIconList *gil, int pos)
 	g_return_val_if_fail (IS_GIL (gil), GTK_VISIBILITY_NONE);
 	g_return_val_if_fail (!(pos < 0) || (pos >= gil->icons), GTK_VISIBILITY_NONE);
 
+	if (gil->lines == NULL)
+		return GTK_VISIBILITY_NONE;
+	
 	line = pos / gil_get_items_per_line (gil);
 	y1 = 0;
 	for (i = 0, l = gil->lines; l && i < line; l = l->next, i++){

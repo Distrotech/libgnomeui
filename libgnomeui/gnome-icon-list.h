@@ -105,10 +105,6 @@ guint          gnome_icon_list_get_type            (void);
 GtkWidget     *gnome_icon_list_new                 (guint         icon_width, 
 						    GtkAdjustment *adj,
 						    gboolean      is_editable);
-GtkWidget     *gnome_icon_list_new_thawed          (guint icon_width,
-						    GtkAdjustment *adj,
-						    gboolean is_editable);
-
 void           gnome_icon_list_construct           (GnomeIconList *gil,
 						    guint icon_width,
 						    GtkAdjustment *adj,
