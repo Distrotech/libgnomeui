@@ -18,7 +18,9 @@
  */
 
 #include <config.h>
-#include "libgnome/gnome-i18n.h"
+/*
+ * #include "libgnome/gnome-i18n.h"
+ */
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
 #include "gnome-about.h"
@@ -324,7 +326,7 @@ gnome_about_display_comments (GdkWindow *win,
 
 free_list:
 	/* Free list memory */
-	g_list_foreach(par, g_free, NULL);
+	g_list_foreach(par, (GFunc)g_free, NULL);
 	g_list_free (par);
 	g_free (buffer);
 
@@ -436,7 +438,7 @@ gnome_fill_info (GtkWidget *widget,
 	GtkStyle *style;
 
 	/* alloc mem for struct */
-	gai = g_new (GnomeAboutInfo);
+	gai = g_new (GnomeAboutInfo, 1);
 
 	/* Create fonts */
 	/* FIXME: dirty hack, but it solves i18n problem without rewriting the
@@ -526,7 +528,7 @@ gnome_destroy_about (GtkWidget *widget, gpointer *data)
 	gdk_font_unref (gai->font_comments);
 
 	/* Free memory used for authors */
-	g_list_foreach(gai->names, g_free, NULL);
+	g_list_foreach(gai->names, (GFunc)g_free, NULL);
 	g_list_free (tmp);
 
 }
