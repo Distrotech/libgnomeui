@@ -1,3 +1,11 @@
+2001-03-21  Martin Baulig  <baulig@suse.de>
+
+	Tagged gnome-canvas*.[ch] `BEFORE_LIBGNOMECANVAS_2_SPLIT'.
+	If you do any changes to the canvas in the stable branch,
+	please also commit them to libgnomecanvas-2/libgnomecanvas/
+	and move the `gnome_libs_latest_1_0_merge' tag here. You can
+	also send me a diff of your changes and I'll do it for you.
+
 2001-02-22  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* gnome-property-entries.c: use _() instead of gettext().
