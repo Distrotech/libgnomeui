@@ -468,3 +468,8 @@ gnome_app_add_docked (GnomeApp *app,
 				    offset);
 }
 
+void
+gnome_app_enable_layout_config (GnomeApp *app, gboolean enable)
+{
+	app->enable_layout_config = enable;
+}

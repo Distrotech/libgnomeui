@@ -115,6 +115,9 @@ void gnome_app_add_docked (GnomeApp *app,
 			   gint band_num,
 			   gint band_position,
 			   gint offset);
+
+void gnome_app_enable_layout_config (GnomeApp *app, gboolean enable);
+
 END_GNOME_DECLS
 
 #endif /* GNOME_APP_H */
