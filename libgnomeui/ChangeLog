@@ -1,3 +1,8 @@
+1999-01-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (gnome_mdi_remove_child): set parent to NULL just
+	before unreferencing.
+	
 1999-01-14  Felix Bellaby <felix@pooh.u-net.com>
 
 	* gnome-client.c (client_set_ghash): do not set null properties.

@@ -1434,8 +1434,6 @@ gint gnome_mdi_remove_child (GnomeMDI *mdi, GnomeMDIChild *child, gint force)
 	if(ret == FALSE)
 		return FALSE;
 
-	child->parent = NULL;
-
 	view_node = child->views;
 	while(view_node) {
 		view = GTK_WIDGET(view_node->data);
@@ -1449,6 +1447,8 @@ gint gnome_mdi_remove_child (GnomeMDI *mdi, GnomeMDIChild *child, gint force)
 
 	if(child == mdi->active_child)
 		mdi->active_child = NULL;
+
+	child->parent = NULL;
 
 	gtk_object_unref(GTK_OBJECT(child));
 
