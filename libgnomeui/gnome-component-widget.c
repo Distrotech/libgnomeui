@@ -431,7 +431,8 @@ gnome_selector_client_construct (GnomeSelectorClient *client, const gchar *monik
 			     "want-clear-button", PROP_WANT_CLEAR_BUTTON,
 			     BONOBO_ARG_BOOLEAN, NULL, NULL, BONOBO_PROPERTY_READABLE);
 
-    bonobo_property_bag_add_gtk_args (client->_priv->pbag, G_OBJECT (client));
+    if (G_OBJECT_TYPE (client) != GNOME_TYPE_SELECTOR_CLIENT)
+	bonobo_property_bag_add_gtk_args (client->_priv->pbag, G_OBJECT (client));
 
     factory = bonobo_get_object (moniker, "GNOME/SelectorFactory", &ev);
     if (BONOBO_EX (&ev) || (factory == CORBA_OBJECT_NIL)) {
