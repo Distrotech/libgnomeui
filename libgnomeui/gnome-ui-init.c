@@ -714,7 +714,6 @@ relay_gtk_signal(GtkObject *object,
       return TRUE;
   }
 
-
   gnome_triggers_vdo("", NULL, (const char **)pieces);
 
   return TRUE;
@@ -785,7 +784,6 @@ initialize_gtk_signal_relay (void)
 				gtk_signal_add_emission_hook (signums [i],
 							      (GtkEmissionHook)relay_gtk_signal,
 							      signame);
-                g_free (signame);
 	}
 	gnome_config_pop_prefix ();
 	
