@@ -70,6 +70,10 @@ static gboolean check_filename_handler (GnomeSelector   *selector,
 static void     add_directory_handler  (GnomeSelector   *selector,
                                         const gchar     *directory);
 
+static void     free_entry_func        (gpointer         data,
+					gpointer         user_data);
+
+
 static GtkVBoxClass *parent_class;
 
 enum {
@@ -82,7 +86,9 @@ enum {
 	CHECK_FILENAME_SIGNAL,
 	SET_FILENAME_SIGNAL,
 	ADD_DIRECTORY_SIGNAL,
-	UPDATE_FILELIST_SIGNAL,
+	FREEZE_SIGNAL,
+	UPDATE_SIGNAL,
+	THAW_SIGNAL,
 	LAST_SIGNAL
 };
 
@@ -141,12 +147,30 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 				gtk_signal_default_marshaller,
 				GTK_TYPE_NONE,
 				0);
-	gnome_selector_signals [UPDATE_FILELIST_SIGNAL] =
-		gtk_signal_new ("update_filelist",
+	gnome_selector_signals [FREEZE_SIGNAL] =
+		gtk_signal_new ("freeze",
 				GTK_RUN_LAST,
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-						   update_filelist),
+						   freeze),
+				gtk_signal_default_marshaller,
+				GTK_TYPE_NONE,
+				0);
+	gnome_selector_signals [UPDATE_SIGNAL] =
+		gtk_signal_new ("update",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+						   update),
+				gtk_signal_default_marshaller,
+				GTK_TYPE_NONE,
+				0);
+	gnome_selector_signals [THAW_SIGNAL] =
+		gtk_signal_new ("thaw",
+				GTK_RUN_LAST,
+				GTK_CLASS_TYPE (object_class),
+				GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+						   thaw),
 				gtk_signal_default_marshaller,
 				GTK_TYPE_NONE,
 				0);
@@ -344,7 +368,12 @@ add_directory_handler (GnomeSelector *selector, const gchar *directory)
 #ifdef GNOME_ENABLE_DEBUG
 		g_print ("File: %s\n", de->d_name);
 #endif
-		if (*(de->d_name) == '.') continue; /* skip dotfiles */
+
+		/* skip dotfiles */
+		if (*(de->d_name) == '.') {
+		    g_free (full_path);
+		    continue;
+		}
 
 		if (!g_file_test (full_path, G_FILE_TEST_ISFILE)) {
 			g_free (full_path);
@@ -387,7 +416,6 @@ static void
 clear_clicked_cb (GtkWidget *widget, gpointer data)
 {
 	gnome_selector_clear (GNOME_SELECTOR (data));
-	gnome_selector_update_file_list (GNOME_SELECTOR (data));
 }
 
 static void
@@ -403,7 +431,6 @@ entry_activated (GtkWidget *widget, gpointer data)
 
 	if (g_file_test (text, G_FILE_TEST_ISDIR)) {
 		gnome_selector_add_directory (selector, text);
-		gnome_selector_update_file_list (selector);
 	}
 }
 
@@ -515,6 +542,12 @@ gnome_selector_destroy (GtkObject *object)
 		selector->_priv->browse_dialog = NULL;
 	}
 
+	if (selector->_priv->gentry) {
+	    gtk_widget_destroy (selector->_priv->gentry);
+	    selector->_priv->gentry = NULL;
+	    selector->_priv->entry = NULL;
+	}
+
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
@@ -528,6 +561,14 @@ gnome_selector_finalize (GObject *object)
 	g_return_if_fail (GNOME_IS_SELECTOR (object));
 
 	selector = GNOME_SELECTOR (object);
+
+	if (selector->_priv) {
+		g_slist_foreach (selector->_priv->dir_list,
+				 free_entry_func, selector);
+		g_slist_foreach (selector->_priv->file_list,
+				 free_entry_func, selector);
+		g_free (selector->_priv->dialog_title);
+	}
 
 	g_free (selector->_priv);
 	selector->_priv = NULL;
@@ -621,11 +662,16 @@ gnome_selector_add_directory (GnomeSelector *selector,
 	gtk_signal_emit (GTK_OBJECT (selector),
 			 gnome_selector_signals [ADD_DIRECTORY_SIGNAL],
 			 directory);
+
+	if (selector->_priv->frozen)
+		selector->_priv->dirty = TRUE;
+	else
+		gnome_selector_update (selector);
 }
 
 
 /**
- * gnome_selector_update_file_list
+ * gnome_selector_update
  * @selector: Pointer to GnomeSelector object.
  *
  * Description: Updates the file list.
@@ -633,13 +679,13 @@ gnome_selector_add_directory (GnomeSelector *selector,
  * Returns:
  */
 void
-gnome_selector_update_file_list (GnomeSelector *selector)
+gnome_selector_update (GnomeSelector *selector)
 {
 	g_return_if_fail (selector != NULL);
 	g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
 	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [UPDATE_FILELIST_SIGNAL]);
+			 gnome_selector_signals [UPDATE_SIGNAL]);
 
 }
 
@@ -660,6 +706,11 @@ gnome_selector_clear (GnomeSelector *selector)
 
 	gtk_signal_emit (GTK_OBJECT (selector),
 			 gnome_selector_signals [CLEAR_SIGNAL]);
+
+	if (selector->_priv->frozen)
+		selector->_priv->dirty = TRUE;
+	else
+		gnome_selector_update (selector);
 }
 
 
@@ -720,6 +771,84 @@ gnome_selector_set_filename (GnomeSelector *selector,
 			 gnome_selector_signals [SET_FILENAME_SIGNAL],
 			 filename, &ok);
 
+	if (selector->_priv->frozen)
+		selector->_priv->dirty = TRUE;
+	else
+		gnome_selector_update (selector);
+
 	return ok;
 }
 
+
+/**
+ * gnome_selector_freeze
+ * @selector: Pointer to GnomeSelector object.
+ *
+ * Description:
+ *
+ * Returns:
+ */
+void
+gnome_selector_freeze (GnomeSelector *selector)
+{
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	selector->_priv->frozen++;
+
+	/* Note that we only emit the signal once. */
+	if (selector->_priv->frozen == 1)
+		gtk_signal_emit (GTK_OBJECT (selector),
+				 gnome_selector_signals [FREEZE_SIGNAL]);
+}
+
+/**
+ * gnome_selector_is_frozen
+ * @selector: Pointer to GnomeSelector object.
+ *
+ * Description:
+ *
+ * Returns:
+ */
+gboolean
+gnome_selector_is_frozen (GnomeSelector *selector)
+{
+	g_return_val_if_fail (selector != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
+
+	return selector->_priv->frozen ? TRUE : FALSE;
+}
+
+
+/**
+ * gnome_selector_thaw
+ * @selector: Pointer to GnomeSelector object.
+ *
+ * Description:
+ *
+ * Returns:
+ */
+void
+gnome_selector_thaw (GnomeSelector *selector)
+{
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+	g_return_if_fail (selector->_priv->frozen > 0);
+
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [THAW_SIGNAL]);
+
+	selector->_priv->frozen--;
+
+	/* Note that we only emit the signal once. */
+	if (selector->_priv->frozen == 0) {
+		gtk_signal_emit (GTK_OBJECT (selector),
+				 gnome_selector_signals [THAW_SIGNAL]);
+
+		if (selector->_priv->dirty) {
+			selector->_priv->dirty = FALSE;
+			gnome_selector_update (selector);
+		}
+	}
+}

@@ -67,7 +67,10 @@ struct _GnomeSelectorClass {
 	void (*browse) (GnomeSelector *selector);
 	void (*clear) (GnomeSelector *selector);
 
-	void (*update_filelist) (GnomeSelector *selector);
+	void (*freeze) (GnomeSelector *selector);
+	void (*update) (GnomeSelector *selector);
+	void (*thaw) (GnomeSelector *selector);
+
 	gboolean (*check_filename) (GnomeSelector *selector,
 				    const gchar *filename);
 	gboolean (*set_filename) (GnomeSelector *selector,
@@ -106,8 +109,13 @@ void         gnome_selector_clear            (GnomeSelector *selector);
 void         gnome_selector_add_directory    (GnomeSelector *selector,
 					      const gchar *directory);
 
-/* Update file list. */
-void         gnome_selector_update_file_list (GnomeSelector *selector);
+/* To avoid excesive recomputes during insertion/deletion */
+void         gnome_selector_freeze           (GnomeSelector *selector);
+gboolean     gnome_selector_is_frozen        (GnomeSelector *selector);
+void         gnome_selector_thaw             (GnomeSelector *selector);
+
+/* Perform an update (also works in frozen state). */
+void         gnome_selector_update           (GnomeSelector *selector);
 
 /* get/set the dialog title. */
 const gchar *gnome_selector_get_dialog_title (GnomeSelector *selector);

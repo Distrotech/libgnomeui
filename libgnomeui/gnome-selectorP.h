@@ -54,6 +54,9 @@ struct _GnomeSelectorPrivate {
 	GtkWidget   *clear_button;
 
 	guint32      changed : 1;
+
+	guint        frozen;
+	gboolean     dirty;
 };
 	
 END_GNOME_DECLS
