@@ -2304,7 +2304,12 @@ gnome_canvas_map (GtkWidget *widget)
 static void
 shutdown_transients (GnomeCanvas *canvas)
 {
-	if (canvas->need_redraw) {
+	if (canvas->need_redraw || canvas->need_update) {
+		/* We do not turn off the need_update flag so that if the canvas
+		 * is mapped again, it will run the update methods of the items
+		 * that need it.  We do turn need_redraw off because the flag
+		 * will be turned on, anyway, if the canvas is exposed.
+		 */
 		canvas->need_redraw = FALSE;
 		canvas->redraw_x1 = 0;
 		canvas->redraw_y1 = 0;

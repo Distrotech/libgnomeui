@@ -1,3 +1,9 @@
+1999-01-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (shutdown_transients): Remove the idle handler
+	also if the canvas->need_update flag is turned on.  But leave the
+	need_update flag as it is, for if the canvas is mapped again.
+
 1999-01-19  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-app-helper.h (GNOMEUIINFO_RADIOITEM): hmm,
