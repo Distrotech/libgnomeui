@@ -7,7 +7,8 @@ static void		config_set_list		(const gchar *, GList *,
 						 gpointer (*)(gpointer));
 static void		restore_window_child	(GnomeMDI *, GHashTable *,
 						 GHashTable *, glong, glong,
-						 gboolean *, gint, gint);
+						 gboolean *, gint, gint,
+						 gint, gint);
 static void		restore_window		(GnomeMDI *, const gchar *,
 						 GPtrArray *, GHashTable *,
 						 GHashTable *, glong);
@@ -71,7 +72,7 @@ config_set_list (const gchar *key, GList *list, gpointer (*func)(gpointer))
 static void
 restore_window_child (GnomeMDI *mdi, GHashTable *child_hash,
 		      GHashTable *child_windows, glong window, glong child,
-		      gboolean *init, gint width, gint height)
+		      gboolean *init, gint x, gint y, gint width, gint height)
 {
 	GPtrArray *windows;
 	GnomeMDIChild *mdi_child;
@@ -95,6 +96,9 @@ restore_window_child (GnomeMDI *mdi, GHashTable *child_hash,
 			gtk_widget_set_usize
 				(GTK_WIDGET (mdi->active_window),
 				 width, height);
+
+			gtk_widget_set_uposition
+				(GTK_WIDGET (mdi->active_window), x, y);
 			
 			*init = TRUE;
 		}
@@ -124,7 +128,7 @@ restore_window (GnomeMDI *mdi, const gchar *section, GPtrArray *child_list,
 	for (j = 0; j < child_list->len; j++)
 		restore_window_child (mdi, child_hash, child_windows,
 				      window, (glong) child_list->pdata [j],
-				      &init, w, h);
+				      &init, x, y, w, h);
 }
 
 gboolean
@@ -261,6 +265,8 @@ gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 
 		gdk_window_get_geometry (GTK_WIDGET (app)->window,
 					 &x, &y, &w, &h, NULL);
+
+		gdk_window_get_position (GTK_WIDGET (app)->window, &x, &y);
 
 		sprintf (key, "%s/mdi_window_%lx",
 			 section, (long) app->contents);
