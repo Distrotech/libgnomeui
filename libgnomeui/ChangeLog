@@ -1,3 +1,10 @@
+1998-11-28  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* gtkpixmapmenuitem.[ch]: new widget for menu_items with pixmaps. See
+	  gtkpixmapmenuitem.h for a short description. Please can someone
+	  change gnome-app-helper to use this new widget (makes 
+	  indent_missing_pixmaps obsolete)
+
 1998-11-27  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-app-helper.h (GNOMEUIINFO_ITEM): Fixed typo (inserted
