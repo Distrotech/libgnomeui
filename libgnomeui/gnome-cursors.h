@@ -24,7 +24,6 @@
 typedef enum _GnomeStockCursorType GnomeStockCursorType;
 
 enum _GnomeStockCursorType {
-	/* update structure when adding enums */
 	GNOME_CURSOR_FILE,
 	GNOME_CURSOR_XBM,
 	GNOME_CURSOR_XPM,
@@ -36,13 +35,7 @@ typedef struct _GnomeStockCursor GnomeStockCursor;
 
 struct _GnomeStockCursor {
         gchar *cursorname;
-
-        /* Only needed for _XBM */
-        gchar *xbm_mask_bits;
-        /* Filled in by the library */
-        GdkBitmap *pmap;
-        GdkBitmap *mask;
-
+        GnomeStockCursorType type;
         /*
           GNOME_CURSOR_FILE: filename
           GNOME_CURSOR_XBM:  XBM data bits
@@ -51,23 +44,22 @@ struct _GnomeStockCursor {
           GNOME_CURSOR_STANDARD: a #define from gdkcursors.h
         */
         gpointer cursor_data;
-
         /* Must initialize in all cases */
         GdkColor foreground;
         GdkColor background;
-
         /* Not needed for standard X cursors */
-        gint16 hotspot_x;
-        gint16 hotspot_y;
-
+        gint hotspot_x;
+        gint hotspot_y;
         /* Only needed for XBM */
-        gint16 width;
-        gint16 height;
-
+        gint width;
+        gint height;
         /* Only needed for _GDK_PIXBUF and _FILE */
         guchar alpha_threshold;
-
-        GnomeStockCursorType type : 3;
+        /* Only needed for _XBM */
+        gchar *xbm_mask_bits;
+        /* Filled in by the library */
+        GdkBitmap *pmap;
+        GdkBitmap *mask;
 };
 
 void       gnome_stock_cursor_register   (GnomeStockCursor *cursor);
