@@ -1,5 +1,11 @@
 2001-02-23  Martin Baulig  <baulig@suse.de>
 
+	* gnome-calculator.[ch], gnome-number-entry.[ch]: Moved to
+	libcompat for the moment. This should be anywhere, but not in
+	libgnomeui; GnomeCalculator should be a Bonobo component.
+
+2001-02-23  Martin Baulig  <baulig@suse.de>
+
 	* gnome-pixmap-entry.[ch]: Moved to libcompat. This has been
 	obsoleted by GnomeIconEntry.
 

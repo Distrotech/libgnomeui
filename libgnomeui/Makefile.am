@@ -70,7 +70,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-appbar.c			\
 	gnome-app-helper.c		\
 	gnome-app-util.c		\
-	gnome-calculator.c              \
 	gnome-canvas.c			\
 	gnome-canvas-line.c		\
 	gnome-canvas-rect-ellipse.c	\
@@ -114,7 +113,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-mdi-generic-child.c       \
 	gnome-mdi-session.c		\
 	gnome-messagebox.c		\
-	gnome-number-entry.c		\
 	gnome-pixmap.c			\
 	gnome-popup-menu.c		\
 	gnome-popup-help.c		\
@@ -154,7 +152,6 @@ gnome_headers = \
 	gnome-appbar.h			\
 	gnome-app-helper.h		\
 	gnome-app-util.h		\
-	gnome-calculator.h              \
 	gnome-canvas.h			\
 	gnome-canvas-line.h		\
 	gnome-canvas-rect-ellipse.h	\
@@ -200,7 +197,6 @@ gnome_headers = \
 	gnome-mdi-child.h		\
 	gnome-mdi-generic-child.h	\
 	gnome-mdi-session.h		\
-	gnome-number-entry.h		\
 	gnome-popup-menu.h		\
 	gnome-popup-help.h		\
 	gnome-pouch.h			\
