@@ -232,12 +232,12 @@ typedef struct {
 
 /* Insert a radio item with an inline xpm icon */
 #define GNOMEUIINFO_RADIOITEM(label, tooltip, callback, xpm_data) \
-	{ GNOME_APP_UI_RADIOITEMS, label, tooltip, callback, NULL, NULL, \
+	{ GNOME_APP_UI_ITEM, label, tooltip, callback, NULL, NULL, \
 		GNOME_APP_PIXMAP_DATA, xpm_data, 0, (GdkModifierType) 0, NULL }
 
 /* Insert a radio item with an inline xpm icon and a user data pointer */
 #define GNOMEUIINFO_RADIOITEM_DATA(label, tooltip, callback, user_data, xpm_data)		\
-					{ GNOME_APP_UI_RADIOITEMS, label, tooltip, callback,	\
+					{ GNOME_APP_UI_ITEM, label, tooltip, callback,	\
 					  user_data, NULL, GNOME_APP_PIXMAP_DATA, xpm_data,	\
 					  0, (GdkModifierType) 0, NULL }
 					  
