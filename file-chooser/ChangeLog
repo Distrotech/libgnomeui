@@ -1,3 +1,10 @@
+2004-01-06  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_create_folder): Use the enum equivalent
+	of 0777 as the mode for gnome_vfs_make_directory(); the umask will
+	do the right thing.
+
 2003-12-23  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystemgnomevfs.c (struct _GtkFileSystemGnomeVFS): Changed
