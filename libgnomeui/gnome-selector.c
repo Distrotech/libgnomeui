@@ -47,21 +47,30 @@
 
 static void gnome_selector_class_init (GnomeSelectorClass *class);
 static void gnome_selector_init       (GnomeSelector      *selector);
-static void gnome_selector_destroy    (GtkObject       *object);
-static void gnome_selector_finalize   (GObject         *object);
+static void gnome_selector_destroy    (GtkObject          *object);
+static void gnome_selector_finalize   (GObject            *object);
 
-static void selector_set_arg          (GtkObject       *object,
-				       GtkArg          *arg,
-				       guint           arg_id);
-static void selector_get_arg          (GtkObject       *object,
-				       GtkArg          *arg,
-				       guint           arg_id);
+static void selector_set_arg          (GtkObject          *object,
+				       GtkArg             *arg,
+				       guint               arg_id);
+static void selector_get_arg          (GtkObject          *object,
+				       GtkArg             *arg,
+				       guint               arg_id);
+
+static void browse_clicked            (GnomeSelector   *selector);
 
 static GtkVBoxClass *parent_class;
 
 enum {
 	ARG_0,
 };
+
+enum {
+	BROWSE_SIGNAL,
+	LAST_SIGNAL
+};
+
+static int gnome_selector_signals [LAST_SIGNAL] = {0};
 
 guint
 gnome_selector_get_type (void)
@@ -98,10 +107,25 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 
 	parent_class = gtk_type_class (gtk_vbox_get_type ());
 
+	gnome_selector_signals [BROWSE_SIGNAL] =
+		gtk_signal_new("browse",
+			       GTK_RUN_LAST,
+			       GTK_CLASS_TYPE (object_class),
+			       GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+						  browse),
+			       gtk_signal_default_marshaller,
+			       GTK_TYPE_NONE,
+			       0);
+	gtk_object_class_add_signals (object_class,
+				      gnome_selector_signals,
+				      LAST_SIGNAL);
+
 	object_class->destroy = gnome_selector_destroy;
 	gobject_class->finalize = gnome_selector_finalize;
 	object_class->get_arg = selector_get_arg;
 	object_class->set_arg = selector_set_arg;
+
+	class->browse = browse_clicked;
 }
 
 static void
@@ -139,6 +163,26 @@ gnome_selector_init (GnomeSelector *selector)
 
 	selector->_priv->selector_widget = NULL;
 	selector->_priv->is_popup = FALSE;
+}
+
+static void
+browse_clicked (GnomeSelector *selector)
+{
+	GnomeSelectorPrivate *priv = selector->_priv;
+
+	/*if it already exists make sure it's shown and raised*/
+	if (priv->selector_widget) {
+		gtk_widget_show (priv->selector_widget);
+		if (priv->selector_widget->window)
+			gdk_window_raise (priv->selector_widget->window);
+	}
+}
+
+static void
+browse_signal (GtkWidget *widget, gpointer data)
+{
+	gtk_signal_emit (GTK_OBJECT(data),
+			 gnome_selector_signals [BROWSE_SIGNAL]);
 }
 
 /**
@@ -181,6 +225,9 @@ gnome_selector_construct (GnomeSelector *selector,
 		priv->browse_button = gtk_button_new_with_label
 			(_("Browse..."));
 
+		gtk_signal_connect (GTK_OBJECT (priv->browse_button),
+				    "clicked", browse_signal, selector);
+
 		gtk_box_pack_start (GTK_BOX (priv->entry_hbox),
 				    priv->gentry, TRUE, TRUE, 0);
 		gtk_box_pack_start (GTK_BOX (priv->entry_hbox),
@@ -196,11 +243,11 @@ gnome_selector_construct (GnomeSelector *selector,
 
 		gtk_box_pack_start (GTK_BOX (selector),
 				    priv->gentry,
-				    FALSE, FALSE, 0);
+				    FALSE, FALSE, GNOME_PAD_SMALL);
 
 		gtk_box_pack_start (GTK_BOX (selector),
 				    priv->selector_widget,
-				    TRUE, TRUE, 0);
+				    TRUE, TRUE, GNOME_PAD_SMALL);
 
 		gtk_widget_show (priv->selector_widget);
 	}
