@@ -1123,22 +1123,17 @@ help_view_display_callback (GtkWidget *w, gpointer data)
 static int
 create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 {
-	GtkWidget *image;
 	gchar *path;
-
-	image = gtk_image_new_from_stock (GTK_STOCK_HELP, GTK_ICON_SIZE_MENU);
-
-	uiinfo->widget = gtk_menu_item_new ();
 
 	uiinfo->widget = gtk_image_menu_item_new_with_mnemonic (_("_Contents"));
 
-      	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (uiinfo->widget), image);
+	setup_image_menu_item (uiinfo->widget, GNOME_APP_PIXMAP_STOCK, GTK_STOCK_HELP);
 
 	g_signal_connect_data (uiinfo->widget, "activate",
 			       G_CALLBACK (help_view_display_callback),
 			       g_strdup (uiinfo->moreinfo), 
 			       (GClosureNotify) g_free, 0);
-
+	
 	gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
 
 	/* Install global accelerator */

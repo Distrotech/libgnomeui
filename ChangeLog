@@ -1,3 +1,9 @@
+2002-05-08  Paolo Maggi  <maggi@athena.polito.it>
+
+	* libgnomeui/gnome-app-helper.c (create_help_entries):
+	use setup_image_menu_item to setup the icon of the 
+	"Contents" menu item
+
 Tue May 07 22:55:14 2002  George Lebl <jirka@5z.com>
 
 	* libgnomeui/gnome-file-entry.c, libgnomeui/gnome-entry.c: do a bit
