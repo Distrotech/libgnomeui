@@ -1419,10 +1419,12 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 
 	uiinfo->widget = GTK_WIDGET (menu_shell);
 
+#ifdef FIXME
 	/* Configure menu to gnome preferences, if possible.
 	 * (sync to gnome-app.c:gnome_app_set_menus) */
 	if (!gnome_preferences_get_menubar_relief () && GTK_IS_MENU_BAR (menu_shell))
 		gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (menu_shell), GTK_SHADOW_NONE);
+#endif
 }
 
 
@@ -2356,6 +2358,7 @@ dockitem_bevels_changed_notify(GConfClient            *client,
 static void
 set_separators(GtkToolbar *toolbar, gboolean separators)
 {
+#ifdef FIXME
         if (separators) {
                 gtk_toolbar_set_space_style (toolbar, GTK_TOOLBAR_SPACE_LINE);
                 gtk_toolbar_set_space_size (toolbar, GNOME_PAD_SMALL * 2);
@@ -2363,6 +2366,7 @@ set_separators(GtkToolbar *toolbar, gboolean separators)
                 gtk_toolbar_set_space_style (toolbar, GTK_TOOLBAR_SPACE_EMPTY);
                 gtk_toolbar_set_space_size (toolbar, GNOME_PAD_SMALL);
         }
+#endif
 }
 
 static void
@@ -2396,6 +2400,7 @@ toolbar_relief_changed_notify(GConfClient            *client,
 			      GConfEntry             *entry,
                               gpointer                user_data)
 {
+#ifdef FIXME
         GtkReliefStyle style = GTK_RELIEF_NONE;
         GtkWidget *w = user_data;
         GtkToolbar *toolbar = GTK_TOOLBAR(w);
@@ -2410,6 +2415,7 @@ toolbar_relief_changed_notify(GConfClient            *client,
         }
 
         gtk_toolbar_set_button_relief(toolbar, style);
+#endif
 }
 
 static GConfEnumStringPair toolbar_styles[] = {
@@ -2599,7 +2605,9 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                                    GTK_SIGNAL_FUNC(remove_notify_cb),
 				   GINT_TO_POINTER(notify_id));
 
+#ifdef FIXME
                 gtk_toolbar_set_button_relief (toolbar, relief_style);
+#endif
         }
         
         { /* Toolbar Style */

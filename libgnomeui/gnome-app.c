@@ -482,8 +482,10 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	 * outside of smaller handles), substitute the dock item's relief for
 	 * the menubar's relief, but don't change the size of the menubar in
 	 * the process. */
+#ifdef FIXME
 	gtk_menu_bar_set_shadow_type (GTK_MENU_BAR (app->menubar),
 				      GTK_SHADOW_NONE);
+#endif
 	if (gnome_preferences_get_menubar_relief ()) {
 		guint border_width;
 		
