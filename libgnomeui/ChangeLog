@@ -1,3 +1,10 @@
+1999-08-22  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-icon-sel.c (gnome_icon_selection_show_icons): Patch from 
+	David Meybohm <dm89754@ucf.edu> fixes multiple-progress-bar bug
+	(happened when changing directories during loading). Closes bug 
+	1832.
+
 Sat Aug 21 12:47:28 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-pixmap.c: fix docs for gnome_pixmap_load_file_at_size

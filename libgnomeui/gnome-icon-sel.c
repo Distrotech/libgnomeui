@@ -323,17 +323,34 @@ void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
   g_return_if_fail(gis != NULL);
   if(!gis->file_list) return;
 
-  label = gtk_label_new(_("Loading Icons..."));
-  gtk_box_pack_start(GTK_BOX(gis->box),label,FALSE,FALSE,0);
-  gtk_widget_show(label);
-  
-  progressbar = gtk_progress_bar_new();
-  gtk_box_pack_start(GTK_BOX(gis->box),progressbar,FALSE,FALSE,0);
-  gtk_widget_show(progressbar);
-
   file_count = g_list_length(gis->file_list);
   i = 0;
-  
+
+  /* Locate previous progressbar/label,
+   * if previously called. */
+  progressbar = label = NULL;
+  progressbar = gtk_object_get_user_data(GTK_OBJECT(gis));
+  if (progressbar)
+         label = gtk_object_get_user_data(GTK_OBJECT(progressbar));
+
+  if (!label && !progressbar) {
+         label = gtk_label_new(_("Loading Icons..."));
+         gtk_box_pack_start(GTK_BOX(gis->box),label,FALSE,FALSE,0);
+         gtk_widget_show(label);
+
+         progressbar = gtk_progress_bar_new();
+         gtk_box_pack_start(GTK_BOX(gis->box),progressbar,FALSE,FALSE,0);
+         gtk_widget_show(progressbar);
+
+         /* attach label to progressbar, progressbar to gis 
+          * for recovery if show_icons() called again */
+         gtk_object_set_user_data(GTK_OBJECT(progressbar), label);
+         gtk_object_set_user_data(GTK_OBJECT(gis), progressbar);
+  } else {
+         if (!label && progressbar) g_assert_not_reached();
+         if (label && !progressbar) g_assert_not_reached();
+  }
+         
   gnome_icon_list_freeze(GNOME_ICON_LIST(gis->gil));
 
   /* this can be set with the stop_loading method to stop the
@@ -372,8 +389,16 @@ void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
 
   gnome_icon_list_thaw(GNOME_ICON_LIST(gis->gil));
 
-  gtk_widget_destroy(progressbar);
-  gtk_widget_destroy(label);
+  progressbar = label = NULL;
+  progressbar = gtk_object_get_user_data(GTK_OBJECT(gis));
+  if (progressbar)
+         label = gtk_object_get_user_data(GTK_OBJECT(progressbar));
+  if (progressbar) gtk_widget_destroy(progressbar);
+  if (label) gtk_widget_destroy(label);
+
+  /* cleanse gis of evil progressbar/label ptrs */
+  /* also let previous calls to show_icons() know that rendering is done. */
+  gtk_object_set_user_data(GTK_OBJECT(gis), NULL);
 }
 
 /**
