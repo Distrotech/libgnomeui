@@ -1,3 +1,8 @@
+1998-09-28  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-messagebox.c (gnome_message_box_new): Fixed some memory
+ 	leaks.
+
 1998-09-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-scores.c (gnome_scores_set_colors,
