@@ -217,10 +217,20 @@ typedef struct {
         { GNOME_APP_UI_ITEM, N_("_Redo"), NULL, cb, data, NULL, \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REDO,        \
           GNOME_KEY_NAME_REDO, GNOME_KEY_MOD_REDO, NULL }
-#define GNOMEUIINFO_MENU_NEW_ITEM(cb, data)                    \
-        { GNOME_APP_UI_ITEM, N_("_New"), NULL, cb, data, NULL, \
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,        \
+
+/*Note: New item requires to to specify what is new, so you need
+  to specify the document type, so you need to supply the label
+  as well (it should start with "_New ")*/
+#define GNOMEUIINFO_MENU_NEW_ITEM(label, cb, data)                  \
+        { GNOME_APP_UI_ITEM, label, NULL, cb, data, NULL,           \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,             \
           GNOME_KEY_NAME_NEW, GNOME_KEY_MOD_NEW, NULL }
+/*If you have more then one New type, use this tree*/
+#define GNOMEUIINFO_MENU_NEW_SUBTREE(tree)                          \
+        { GNOME_APP_UI_SUBTREE, N_("_New"), NULL, tree, NULL, NULL, \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,             \
+          GNOME_KEY_NAME_NEW, GNOME_KEY_MOD_NEW, NULL }
+
 #define GNOMEUIINFO_MENU_SAVE_ITEM(cb, data)                    \
         { GNOME_APP_UI_ITEM, N_("_Save"), NULL, cb, data, NULL, \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,        \

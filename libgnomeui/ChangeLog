@@ -1,3 +1,9 @@
+Wed Jan 06 17:45:06 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-app-helper.h: changed the NEW_ITEM macros, as by the
+	  syleguide they need to specify a type, so they need a custom
+	  label passed
+
 Wed Jan 06 17:25:26 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-stock.h: fix a typo in menu stock defines
