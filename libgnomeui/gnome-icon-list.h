@@ -129,9 +129,8 @@ void           gnome_icon_list_set_selection_mode  (GnomeIconList *gil,
 void           gnome_icon_list_select_icon         (GnomeIconList *gil,
 						    int idx);
 void           gnome_icon_list_unselect_icon       (GnomeIconList *gil,
-						    int pos);
-int            gnome_icon_list_unselect_all        (GnomeIconList *gil,
-						    GdkEvent *event, gpointer keep);
+						    int idx);
+int            gnome_icon_list_unselect_all        (GnomeIconList *gil);
 
 /* Setting the spacing values */
 void           gnome_icon_list_set_icon_width      (GnomeIconList *gil,

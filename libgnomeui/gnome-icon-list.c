@@ -515,19 +515,8 @@ emit_select (Gil *gil, int sel, int i, GdkEvent *event)
 			 event);
 }
 
-/**
- * gnome_icon_list_unselect_all:
- * @gil:   An icon list.
- * @event: Unused, must be NULL.
- * @keep:  For internal use only; must be NULL.
- *
- * Unselects all the icons in the icon list.  The @event and @keep parameters
- * must be NULL, since they are used only internally.
- *
- * Returns: the number of icons in the icon list
- */
-int
-gnome_icon_list_unselect_all (GnomeIconList *gil, GdkEvent *event, gpointer keep)
+static int
+gil_unselect_all (GnomeIconList *gil, GdkEvent *event, gpointer keep)
 {
 	GnomeIconListPrivate *priv;
 	Icon *icon;
@@ -548,6 +537,18 @@ gnome_icon_list_unselect_all (GnomeIconList *gil, GdkEvent *event, gpointer keep
 	}
 
 	return idx;
+}
+
+/**
+ * gnome_icon_list_unselect_all:
+ * @gil:   An icon list.
+ *
+ * Returns: the number of icons in the icon list
+ */
+int
+gnome_icon_list_unselect_all (GnomeIconList *gil)
+{
+	return gil_unselect_all (gil, NULL, NULL);
 }
 
 static void
@@ -618,7 +619,7 @@ selection_one_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent *
 			break;
 
 		if (!icon->selected) {
-			gnome_icon_list_unselect_all (gil, NULL, NULL);
+			gil_unselect_all (gil, NULL, NULL);
 			emit_select (gil, TRUE, idx, event);
 		} else {
 			if (priv->selection_mode == GTK_SELECTION_SINGLE
@@ -715,9 +716,9 @@ do_select_many (Gil *gil, Icon *icon, int idx, GdkEvent *event, int use_event)
 
 	if (!additive) {
 		if (icon->selected)
-			gnome_icon_list_unselect_all (gil, NULL, icon);
+			gil_unselect_all (gil, NULL, icon);
 		else
-			gnome_icon_list_unselect_all (gil, NULL, NULL);
+			gil_unselect_all (gil, NULL, NULL);
 	}
 
 	if (!range) {
@@ -896,7 +897,7 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 
 	icon = data;
 	gtk_signal_handler_block (GTK_OBJECT (iti), icon->text_event_id);
-	gnome_icon_list_unselect_all (GIL (GNOME_CANVAS_ITEM (iti)->canvas), NULL, icon);
+	gil_unselect_all (GIL (GNOME_CANVAS_ITEM (iti)->canvas), NULL, icon);
 }
 
 /* Handler for the editing_stopped signal of an icon text item.  We unblock the
@@ -1599,7 +1600,7 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 	only_one = priv->selection_mode == GTK_SELECTION_SINGLE;
 
 	if (only_one || (event->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) == 0)
-		gnome_icon_list_unselect_all (gil, NULL, NULL);
+		gil_unselect_all (gil, NULL, NULL);
 
 	if (only_one)
 		return TRUE;
