@@ -1,3 +1,27 @@
+1998-05-31  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.h: Added 'gnome_client_get_config_prefix' and
+ 	'gnome_client_get_global_config_prefix' declarations.
+	(struct _GnomeClient): New member 'config_prefix' and
+ 	'global_config_prefix'.
+
+	* gnome-client.c: Added 'program_invocation_short_name'
+ 	declaration.  Added 'client_unset_config_prefix' declaration.
+	(gnome_client_get_type): Changed return value of
+ 	'gnome_client_get_type' to 'GtkType'.
+	(gnome_client_init): Preset '[global_]config_prefix'.
+	(gnome_real_client_destroy): Released '[global_]config_prefix'.
+	(gnome_client_connect): Added some calls to unset config prefix.
+	(gnome_client_set_program): Likewise.
+	(gnome_client_set_id): Likewise.
+	(gnome_client_get_previous_id): Added check, if the client
+ 	parameter really is client.
+	(gnome_client_get_config_prefix): New function.  Calculates a
+ 	config prefix depending on program name and client id.
+	(gnome_client_get_global_config_prefix): New function.  Calculates a
+ 	config prefix depending on program name.
+	(client_unset_config_prefix): New function.
+
 1998-05-27  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-helper.h: added new GnomeUIInfoType
