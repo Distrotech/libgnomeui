@@ -70,6 +70,11 @@ GdkCursor *gnome_stock_cursor_new         (const char *cursorname);
 #define GNOME_STOCK_CURSOR_ZOOM_OUT "zoom-out"
 #define GNOME_STOCK_CURSOR_EGG_1 "egg-timer-1"
 #define GNOME_STOCK_CURSOR_POINTING_HAND "pointing-hand"
-
+#define GNOME_STOCK_CURSOR_HORIZONTAL "gnome-horizontal-arrow"
+#define GNOME_STOCK_CURSOR_VERTICAL "gnome-vertical-arrow"
+#define GNOME_STOCK_CURSOR_NE_SW "gnome-northeast-southwest-arrow"
+#define GNOME_STOCK_CURSOR_NW_SE "gnome-northwest-southeast-arrow"
+#define GNOME_STOCK_CURSOR_FLEUR "gnome-fleur"
+#define GNOME_STOCK_CURSOR_CORNERS "gnome-corners-arrow"
 
 #endif /* GNOME_CURSORS_H */

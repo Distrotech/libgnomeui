@@ -48,27 +48,25 @@ static const char * blank_xpm[] = {
 	"        "
 };
 
-static const char * default_arrow_xpm[] = {
-"16 16 3 1",
-"       c None",
-".      c #000000",
-"+      c #FFFFFF",
-".......         ",
-".+++++.         ",
-"..+++.          ",
-".+.++.          ",
-"..+.++.         ",
-".+...++.        ",
-"..  ..++.       ",
-"     ..++.      ",
-"      ..++.     ",
-"       ..++.    ",
-"        ..++.   ",
-"         ..++.  ",
-"          ..++. ",
-"           ..++.",
-"            ... ",
-"             .  "};
+static char * default_arrow_xpm[] = {
+"8 14 3 2",
+"  	c None",
+". 	c #000000",
+"+ 	c #FFFFFF",
+". .             ",
+". + .           ",
+". + + .         ",
+". + + + .       ",
+". + + + + .     ",
+". + + + + + .   ",
+". + + + + . . . ",
+". + + + + .     ",
+". + . . + .     ",
+". + .   . + .   ",
+". .     . + .   ",
+"          . + . ",
+"          . + . ",
+"            .   "};
 
 static const char * egg_timer1_xpm[] = {
 "16 16 3 1",
@@ -229,6 +227,118 @@ static const char hand_open_mask_bits[] = {
    0xf0, 0xff, 0x01, 0xf0, 0xff, 0x00, 0xe0, 0xff, 0x00, 0xc0, 0x7f, 0x00,
    0x80, 0x7f, 0x00, 0x80, 0x7f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
+static char * horiz_xpm[] = {
+"16 8 3 2",
+"  	c None",
+". 	c #000000",
+"+ 	c #FFFFFF",
+"      . . .     . . .           ",
+"    . + .         . + .         ",
+"  . + + . . . . . . + + .       ",
+". + + + + + + + + + + + + .     ",
+". + + + + + + + + + + + + .     ",
+"  . + + . . . . . . + + .       ",
+"    . + .         . + .         ",
+"      . . .     . . .           "};
+
+static char * vert_xpm[] = {
+"8 14 3 2",
+"  	c None",
+". 	c #000000",
+"+ 	c #FFFFFF",
+"      . .       ",
+"    . + + .     ",
+"  . + + + + .   ",
+". + + + + + + . ",
+". . . + + . . . ",
+".   . + + .   . ",
+"    . + + .     ",
+"    . + + .     ",
+".   . + + .   . ",
+". . . + + . . . ",
+". + + + + + + . ",
+"  . + + + + .   ",
+"    . + + .     ",
+"      . .       "};
+
+static char * ne_sw_xpm[] = {
+"16 12 3 2",
+"  	c None",
+". 	c #000000",
+"+ 	c #FFFFFF",
+"              . . . .           ",
+"            . + + + + .         ",
+"          .   . + + + .         ",
+"            . + + + + .         ",
+"          . + + + . + .         ",
+"    .   . + + + .   .           ",
+"  .   . + + + .   .             ",
+". + . + + + .                   ",
+". + + + + .                     ",
+". + + + .   .                   ",
+". + + + + .                     ",
+"  . . . .                       "};
+
+static char * nw_se_xpm[] = {
+"16 12 3 2",
+"  	c None",
+". 	c #000000",
+"+ 	c #FFFFFF",
+"  . . . .                       ",
+". + + + + .                     ",
+". + + + .   .                   ",
+". + + + + .                     ",
+". + . + + + .                   ",
+"  .   . + + + .   .             ",
+"    .   . + + + .   .           ",
+"          . + + + . + .         ",
+"            . + + + + .         ",
+"          .   . + + + .         ",
+"            . + + + + .         ",
+"              . . . .           "};
+
+static char * nsew_xpm[] = {
+"24 18 3 2",
+"  	c None",
+". 	c #000000",
+"+ 	c #FFFFFF",
+"                . .                             ",
+"              . + + .                           ",
+"            . + + + + .                         ",
+"          . + + + + + + .                       ",
+"          . + . + + . + .                       ",
+"      . .   . + + + + .   . .                   ",
+"    . + + .   . + + .   . + + .                 ",
+"  . + + . + . + + + + . + . + + .               ",
+". + + + + + + + + + + + + + + + + .             ",
+". + + + + + + + + + + + + + + + + .             ",
+"  . + + . + . + + + + . + . + + .               ",
+"    . + + .   . + + .   . + + .                 ",
+"      . .   . + + + + .   . .                   ",
+"          . + . + + . + .                       ",
+"          . + + + + + + .                       ",
+"            . + + + + .                         ",
+"              . + + .                           ",
+"                . .                             "};
+
+static char * corners_xpm[] = {
+"16 12 3 2",
+"  	c None",
+". 	c #000000",
+"+ 	c #FFFFFF",
+"  . . . .     . . . .           ",
+". + + + + . . + + + + .         ",
+". + + + . . . . + + + .         ",
+". + + + + . . + + + + .         ",
+". + . + + + + + + . + .         ",
+"  . . . + + + + . . .           ",
+"  . . . + + + + . . .           ",
+". + . + + + + + + . + .         ",
+". + + + + . . + + + + .         ",
+". + + + . . . . + + + .         ",
+". + + + + . . + + + + .         ",
+"  . . . .     . . . .           "};
+
 
 #define WHITE { 0x0000, 0xffff, 0xffff, 0xffff }
 #define BLACK { 0x0000, 0x0000, 0x0000, 0x0000 }
@@ -330,7 +440,79 @@ static GnomeStockCursor default_cursors[] = {
                 -1, -1,   /* w x h */
                 0,        /* alpha */
                 GNOME_CURSOR_XPM /* type */
-        }
+        },
+	{
+		GNOME_STOCK_CURSOR_HORIZONTAL, /* name */
+		horiz_xpm, /* cursor_data */
+		NULL, /* xbm_mask */
+		NULL, NULL, /* bitmap/mask */
+		WHITE, /* foreground */
+		BLACK, /* background */
+		6, 3,  /* hotspot */
+		-1, -1,/* w x h */
+		0,     /* alpha */
+		GNOME_CURSOR_XPM /* type */
+	},
+	{
+		GNOME_STOCK_CURSOR_VERTICAL, /* name */
+		vert_xpm, /* cursor_data */
+		NULL, /* xbm_mask */
+		NULL, NULL, /* bitmap/mask */
+		WHITE, /* foreground */
+		BLACK, /* background */
+		3, 6,  /* hotspot */
+		-1, -1,/* w x h */
+		0,     /* alpha */
+		GNOME_CURSOR_XPM /* type */
+	},
+	{
+		GNOME_STOCK_CURSOR_NE_SW, /* name */
+		ne_sw_xpm, /* cursor_data */
+		NULL, /* xbm_mask */
+		NULL, NULL, /* bitmap/mask */
+		WHITE, /* foreground */
+		BLACK, /* background */
+		5, 5,  /* hotspot */
+		-1, -1,/* w x h */
+		0,     /* alpha */
+		GNOME_CURSOR_XPM /* type */
+	},
+	{
+		GNOME_STOCK_CURSOR_NW_SE, /* name */
+		nw_se_xpm, /* cursor_data */
+		NULL, /* xbm_mask */
+		NULL, NULL, /* bitmap/mask */
+		WHITE, /* foreground */
+		BLACK, /* background */
+		5, 5,  /* hotspot */
+		-1, -1,/* w x h */
+		0,     /* alpha */
+		GNOME_CURSOR_XPM /* type */
+	},
+	{
+		GNOME_STOCK_CURSOR_FLEUR, /* name */
+		nsew_xpm, /* cursor_data */
+		NULL, /* xbm_mask */
+		NULL, NULL, /* bitmap/mask */
+		WHITE, /* foreground */
+		BLACK, /* background */
+		8, 8,  /* hotspot */
+		-1, -1,/* w x h */
+		0,     /* alpha */
+		GNOME_CURSOR_XPM /* type */
+	},
+	{
+		GNOME_STOCK_CURSOR_CORNERS, /* name */
+		corners_xpm, /* cursor_data */
+		NULL, /* xbm_mask */
+		NULL, NULL, /* bitmap/mask */
+		WHITE, /* foreground */
+		BLACK, /* background */
+		5, 5,  /* hotspot */
+		-1, -1,/* w x h */
+		0,     /* alpha */
+		GNOME_CURSOR_XPM /* type */
+	}
 };
 
 static const gint num_default_cursors = sizeof(default_cursors)/sizeof(GnomeStockCursor);
