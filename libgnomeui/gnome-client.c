@@ -2495,7 +2495,7 @@ gnome_client_save_dialog_show (GnomeClient *client, gint key,
  * (modal) dialog is presented to the user. The session manager decides
  * when the dialog is shown, but it will not be shown it unless the
  * session manager is sending an interaction style of #GNOME_INTERACT_ANY.
- * "Cancel" and "Log out" buttons will be added during a shutdown.
+ * A "Cancel Logout" button will be added during a shutdown.
  **/
 void
 gnome_client_save_any_dialog (GnomeClient *client, GtkDialog *dialog)
@@ -2521,7 +2521,7 @@ gnome_client_save_any_dialog (GnomeClient *client, GtkDialog *dialog)
  * May be called during a "save_youself" handler when an error has occured
  * during the save. The session manager decides when the dialog is shown, but
  * it will not be shown it unless the session manager is sending an interaction
- * style of #GNOME_INTERACT_ANY. "Cancel" and "Log out" buttons will be added
+ * style of #GNOME_INTERACT_ANY. A "Cancel Logout" button will be added
  * during a shutdown.
  **/
 
