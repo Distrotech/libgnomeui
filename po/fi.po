@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
-"POT-Creation-Date: 2002-05-13 19:16+0200\n"
-"PO-Revision-Date: 2002-04-19 20:28+0300\n"
+"POT-Creation-Date: 2002-05-14 14:14+0300\n"
+"PO-Revision-Date: 2002-05-14 21:57+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -492,6 +492,7 @@ msgstr "Kohdan 2 vinkki"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tiedosto"
 
@@ -549,6 +550,7 @@ msgid "_Game"
 msgstr "_Peli"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ohje"
 
@@ -594,9 +596,8 @@ msgstr "Palauta tallennettu versio tiedostosta"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-#, fuzzy
 msgid "_Print..."
-msgstr "Tulosta..."
+msgstr "T_ulosta..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -622,14 +623,12 @@ msgstr "Sulje tiedosto"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "_Quit"
-msgstr "Poistu"
+msgstr "_Lopeta"
 
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "Quit the application"
-msgstr "Tietoja tästä ohjelmasta"
+msgstr "Lopeta tämä ohjelma"
 
 #.
 #. * The "Edit" menu
@@ -701,7 +700,7 @@ msgstr "Etsi merkkijonoa"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr ""
+msgstr "Etsi _seuraava"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -709,7 +708,6 @@ msgstr "Etsi uudestaan samaa merkkijonoa"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-#, fuzzy
 msgid "R_eplace..."
 msgstr "Ko_rvaa..."
 
@@ -731,9 +729,8 @@ msgstr "Muokkaa tiedoston ominaisuuksia"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces..."
-msgstr "Asetukset..."
+msgstr "_Asetukset..."
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -744,16 +741,15 @@ msgstr "Määrittele ohjelman asetukset"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Tietoja"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Tietoja tästä ohjelmasta"
 
 #: libgnomeui/gnome-app-helper.c:225
-#, fuzzy
 msgid "Select _All"
 msgstr "_Valitse kaikki"
 
@@ -776,7 +772,7 @@ msgstr "Luo uusi ikkuna"
 msgid "_Close This Window"
 msgstr "_Sulje tämä ikkuna"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Sulje tämä ikkuna"
 
@@ -849,30 +845,26 @@ msgid "End the current game"
 msgstr "Lopeta nykyinen peli"
 
 #: libgnomeui/gnome-app-helper.c:1130
-#, fuzzy
 msgid "_Contents"
-msgstr "_Ohjeen sisällys"
+msgstr "_Sisältö"
 
 #: libgnomeui/gnome-app-helper.c:1131
-#, fuzzy
 msgid "View help for this application"
-msgstr "Tietoja tästä ohjelmasta"
+msgstr "Näytä tämä ohjelman ohje"
 
 #: libgnomeui/gnome-app-helper.c:2515
 msgid "Text Below Icons"
-msgstr ""
+msgstr "Teksti kuvakkeiden alla"
 
 #: libgnomeui/gnome-app-helper.c:2516
 msgid "Text Beside Icons"
-msgstr ""
+msgstr "Teksti kuvakkeiden vierellä"
 
 #: libgnomeui/gnome-app-helper.c:2517
-#, fuzzy
 msgid "Icons Only"
 msgstr "Vain kuvakkeet"
 
 #: libgnomeui/gnome-app-helper.c:2518
-#, fuzzy
 msgid "Text Only"
 msgstr "Vain teksti"
 
@@ -1252,6 +1244,10 @@ msgstr "%a %d. %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Lopeta testi"
+
 #~ msgid "_Print"
 #~ msgstr "T_ulosta"
 
@@ -1267,14 +1263,15 @@ msgstr "Sans 14"
 #~ msgid "Both text and icons"
 #~ msgstr "Sekä teksti että kuvakkeet"
 
+#~ msgid "Both text and icons when horizontal, just icons when vertical"
+#~ msgstr ""
+#~ "Sekä teksti että kuvakkeet kun vaaka-asennossa, pystyssä vain kuvakkeet"
+
 #~ msgid "E_xit"
 #~ msgstr "_Lopeta"
 
 #~ msgid "Exit the program"
 #~ msgstr "Lopeta ohjelma"
-
-#~ msgid "Exit the test"
-#~ msgstr "Lopeta testi"
 
 #~ msgid "GConf error details: %s\n"
 #~ msgstr "GConfin virhetiedot: %s\n"
