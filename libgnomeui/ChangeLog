@@ -1,3 +1,8 @@
+Thu Aug 20 15:44:22 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gtk-socket.c (gtk_socket_filter_func): Small
+	improvement to CreateNotify handling.
+	
 Thu Aug 20 15:23:58 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtk-socket.c (gtk_socket_filter_func): We seem to

@@ -496,22 +496,25 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
       {
 	XCreateWindowEvent *xcwe = &xevent->xcreatewindow;
 
-	gtk_socket_add_window (socket, xcwe->window);
+	if (!socket->plug_window)
+	  {
+	    gtk_socket_add_window (socket, xcwe->window);
+	    
+	    gdk_window_move_resize(socket->plug_window,
+				   0, 0,
+				   widget->allocation.width, 
+				   widget->allocation.height);
 	
-	gdk_window_move_resize(socket->plug_window,
-			       0, 0,
-			       widget->allocation.width, 
-			       widget->allocation.height);
-	
-	socket->request_width = xcwe->width;
-	socket->request_height = xcwe->height;
-	socket->have_size = TRUE;
-	
-	DPRINTF(("Window created with size: %d %d\n",
-		socket->request_width,
-		socket->request_height));
-	
-	gtk_widget_queue_resize (widget);
+	    socket->request_width = xcwe->width;
+	    socket->request_height = xcwe->height;
+	    socket->have_size = TRUE;
+	    
+	    DPRINTF(("Window created with size: %d %d\n",
+		     socket->request_width,
+		     socket->request_height));
+	    
+	    gtk_widget_queue_resize (widget);
+	  }
 	
 	return_val = GDK_FILTER_REMOVE;
 	
