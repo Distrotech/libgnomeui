@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 1.117.2\n"
-"POT-Creation-Date: 2002-08-06 15:26+0200\n"
-"PO-Revision-Date: 2002-07-11 15:55+0900\n"
-"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
+"Project-Id-Version: libgnomeui 2.0.3\n"
+"POT-Creation-Date: 2002-08-20 19:05+0900\n"
+"PO-Revision-Date: 2002-08-20 19:06+0900\n"
+"Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -416,13 +416,13 @@ msgid "GNOME GUI Library"
 msgstr "그놈 GUI 라이브러리"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:591
+#: libgnomeui/gnome-ui-init.c:618
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "여러 개의 세그먼테이션 오류가 발생했습니다; 애러 창을 표시할 수 없습니다\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:605
+#: libgnomeui/gnome-ui-init.c:632
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -746,9 +746,8 @@ msgstr "문자열 치환"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-#, fuzzy
 msgid "_Properties"
-msgstr "등록 정보(_P)..."
+msgstr "등록 정보(_P)"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -759,9 +758,8 @@ msgstr "파일의 속성을 변경하기"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces"
-msgstr "기본 설정(_N)..."
+msgstr "기본 설정(_n)"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -1336,6 +1334,3 @@ msgstr "%Y %b %d %a %T"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
-
-#~ msgid "Exit the test"
-#~ msgstr "테스트 끝내기"
