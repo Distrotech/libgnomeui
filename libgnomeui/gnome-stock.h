@@ -156,6 +156,11 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_ALIGN_CENTER "Center"
 #define GNOME_STOCK_PIXMAP_ALIGN_JUSTIFY "Justify"
 
+#define GNOME_STOCK_PIXMAP_TEXT_BOLD    "Bold"
+#define GNOME_STOCK_PIXMAP_TEXT_ITALIC  "Italic"
+#define GNOME_STOCK_PIXMAP_TEXT_UNDERLINE "Underline"
+#define GNOME_STOCK_PIXMAP_TEXT_STRIKEOUT "Strikeout"
+
 #define GNOME_STOCK_PIXMAP_EXIT        GNOME_STOCK_PIXMAP_QUIT
 
 
@@ -490,6 +495,11 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_ALIGN_RIGHT    "MEnu_Right"
 #define GNOME_STOCK_MENU_ALIGN_CENTER   "Menu_Center"
 #define GNOME_STOCK_MENU_ALIGN_JUSTIFY  "Menu_Justify"
+
+#define GNOME_STOCK_MENU_TEXT_BOLD      "Menu_Bold"
+#define GNOME_STOCK_MENU_TEXT_ITALIC    "Menu_Italic"
+#define GNOME_STOCK_MENU_TEXT_UNDERLINE "Menu_Underline"
+#define GNOME_STOCK_MENU_TEXT_STRIKEOUT "Menu_Strikeout"
 
 #define GNOME_STOCK_MENU_EXIT     GNOME_STOCK_MENU_QUIT
 
