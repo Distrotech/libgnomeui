@@ -1,3 +1,8 @@
+1998-12-13  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-procbar.[ch]: New files. Added the GnomeProcBar that is
+ 	used in GTop and the cpumemusage applet here.
+
 1998-12-13  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app-util.c (gnome_app_activate_statusbar): new private

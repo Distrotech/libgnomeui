@@ -69,5 +69,6 @@
 #include "libgnomeui/gnometypebuiltins.h"
 #include "libgnomeui/gnome-winhints.h"
 #include "libgnomeui/gnome-href.h"
+#include "libgnomeui/gnome-procbar.h"
 
 #endif

@@ -86,6 +86,7 @@ libgnomeui_la_SOURCES = \
 	gnome-stock.c			\
         gnome-winhints.c		\
         gnome-paper-selector.c		\
+	gnome-procbar.c			\
 	gnometypes.c			\
 	gtkcauldron.c			\
 	gtkspell.c			\
@@ -158,6 +159,7 @@ gnome_headers = \
 	gnome-uidefs.h			\
         gnome-winhints.h		\
         gnome-paper-selector.h		\
+	gnome-procbar.h			\
 	gtkcauldron.h			\
 	gtkdial.h			\
 	gtkspell.h			\
