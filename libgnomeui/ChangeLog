@@ -1,3 +1,8 @@
+Mon Oct 18 21:51:43 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-app-util.c: use gnome_request_dialog directly instead
+	  of using old deprecated functions
+
 1999-10-18  Jonathan Blandford  <jrb@redhat.com>
 
 	* Makefile.am (libgnomeui10compat_a_SOURCES): beginnings of the
