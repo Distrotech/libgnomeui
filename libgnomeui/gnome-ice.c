@@ -98,11 +98,11 @@ gnome_ice_io_error_handler (IceConn connection)
 void
 gnome_ice_init (void)
 {
+#ifdef HAVE_LIBSM
   static gboolean ice_init = FALSE;
 
   if (! ice_init)
     {
-#ifdef HAVE_LIBSM
       IceIOErrorHandler default_handler;
 
       gnome_ice_installed_handler = IceSetIOErrorHandler (NULL);
@@ -112,8 +112,8 @@ gnome_ice_init (void)
 	gnome_ice_installed_handler = NULL;
 
       IceAddConnectionWatch (new_ice_connection, NULL);
-#endif /* HAVE_LIBSM */
 
       ice_init = TRUE;
     }
+#endif /* HAVE_LIBSM */
 }
