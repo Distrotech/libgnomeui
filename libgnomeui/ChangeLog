@@ -1,3 +1,9 @@
+Wed Nov 10 20:15:10 1999  George Lebl <jirka@5z.com>
+
+	* gnome-propertybox.c: use GPOINTER_TO_INT to cast from pointer
+	  to int. in _set_modified method use the same assert checks as in
+	  the _changed method.
+
 Wed Nov 10 17:55:10 1999  George Lebl <jirka@5z.com>
 
 	* gnome-icon-sel.c: apply memory leak fix from
