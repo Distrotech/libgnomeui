@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.2\n"
-"POT-Creation-Date: 2003-05-02 21:36+0100\n"
-"PO-Revision-Date: 2003-05-02 21:40+0000\n"
+"POT-Creation-Date: 2003-05-05 02:04+0100\n"
+"PO-Revision-Date: 2003-05-05 02:05+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1044,8 +1044,8 @@ msgid ""
 "parameters."
 msgstr ""
 "GtkEntry que a selecção de ficheiros utiliza para inserir ficheiros. Pode "
-"utilizar esta propriedade para obter a GtkEntry caso necessite de alterar "
-"ou verificar qualquer um dos seus parâmetros."
+"utilizar esta propriedade para obter a GtkEntry caso necessite de alterar ou "
+"verificar qualquer um dos seus parâmetros."
 
 #: libgnomeui/gnome-file-entry.c:528
 msgid "Select file"
@@ -1157,8 +1157,8 @@ msgid ""
 msgstr ""
 "A aplicação \"%s\" tentou alterar um parâmetro da sua configuração que o "
 "administrador do seu sistema ou o vendedor do sistema não lhe permitem "
-"alterar. Algumas das definições que seleccionou poderão não tomar efeito, "
-"ou poderão não ser repostas da próxima vez que utilizar esta aplicação."
+"alterar. Algumas das definições que seleccionou poderão não tomar efeito, ou "
+"poderão não ser repostas da próxima vez que utilizar esta aplicação."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1328,8 +1328,8 @@ msgstr "Pontuação"
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
 #: libgnomeui/gnome-scores.c:194
-msgid "%a %b %x %X %Y"
-msgstr "%a %b %x %X %Y"
+msgid "%a %b %d %T %Y"
+msgstr "%a %b %d %T %Y"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
