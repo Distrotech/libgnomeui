@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
 "POT-Creation-Date: 2002-10-03 05:33+0200\n"
-"PO-Revision-Date: 2002-12-29 19:37+EDT\n"
+"PO-Revision-Date: 2003-01-14 11:02+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
 "MIME-Version: 1.0\n"
@@ -147,7 +147,7 @@ msgstr "የተጠቃሚው የአጠቃቀም ደረጃ ያስፈልጋል"
 
 #: libgnomeui/gnome-client.c:860
 msgid "Specify session management ID"
-msgstr "የጉባኤውን አስተዳደር መለያ ቍጥር ጥቀስ"
+msgstr "የጉባኤውን መቆጣጠሪያ መለያ ቍጥር ጥቀስ"
 
 #: libgnomeui/gnome-client.c:860
 msgid "ID"
@@ -385,7 +385,7 @@ msgstr "የዓለም ረሃብ ያብቃ"
 
 #: libgnomeui/gnome-href.c:138
 msgid "Link color"
-msgstr "ቀለሙን አያይዝ"
+msgstr "አያያዝን ቀለም"
 
 #: libgnomeui/gnome-href.c:139
 msgid "Color used to draw the link"
@@ -890,7 +890,7 @@ msgstr "ከምልክቶቹ ጐን ቀዳሚ ጽሑፍ"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
-msgstr "ምልክቶች ብቻ"
+msgstr "ምልክቶችን ብቻ"
 
 #: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
@@ -1101,11 +1101,11 @@ msgstr "የተመረጠው GtkFont"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "የጽሑፉ ቅድመ እይታ"
+msgstr "የጽሑፉ ቅድመ ዕይታ"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "በመምረጭው ውስጥ የጽሑፉ ቅድመ እይታው ይታያል"
+msgstr "በመምረጭው ውስጥ የጽሑፉ ቅድመ ዕይታው ይታያል"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
@@ -1172,7 +1172,7 @@ msgstr "የምልክቱ መምረጫ ማመልከቻ አርእስት "
 
 #: libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
-msgstr "የሙሻብቀሮቆ ማውጫ"
+msgstr "የPixmap ማውጫ"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
@@ -1281,11 +1281,11 @@ msgstr "መልእክት"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
-msgstr "ቅድመ እይታውን ተጠቀም"
+msgstr "ቅድመ ዕይታውን ተጠቀም"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Whether the pixmap entry should have a preview."
-msgstr "የቆሻብቀሮቆ መግቢያ ቅድመ እይታ ሊኖረው ይገባው እንደሆነ"
+msgstr "የpixmap መግቢያ ቅድመ ዕይታ ሊኖረው ይገባው እንደሆነ"
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
@@ -1293,11 +1293,11 @@ msgstr "ምስል የለም"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
-msgstr "የምስሉ ቅድመ እይታ"
+msgstr "የምስሉ ቅድመ ዕይታ"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
-msgstr "አሁን ለተጠቀሰው ምስል ቅድመ እይታ"
+msgstr "አሁን ለተጠቀሰው ምስል ቅድመ ዕይታ"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
