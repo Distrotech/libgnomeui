@@ -170,15 +170,15 @@ struct _GnomeClientClass
   gboolean (* save_yourself)  (GnomeClient        *client,
 			       gint                phase,
 			       GnomeSaveStyle      save_style,
-			       gint                shutdown,
+			       gboolean                shutdown,
 			       GnomeInteractStyle  interact_style,
-			       gint                fast);
+			       gboolean                fast);
   void (* die)                (GnomeClient        *client);
   void (* save_complete)      (GnomeClient        *client);
   void (* shutdown_cancelled) (GnomeClient        *client);
 
   void (* connect)            (GnomeClient        *client,
-			       gint                restarted);
+			       gboolean            restarted);
   void (* disconnect)         (GnomeClient        *client);
 
   /* Padding for possible expansion */

@@ -70,10 +70,10 @@ static void gnome_real_client_finalize           (GObject          *object);
 static void gnome_real_client_save_complete      (GnomeClient      *client);
 static void gnome_real_client_shutdown_cancelled (GnomeClient      *client);
 static void gnome_real_client_connect            (GnomeClient      *client,
-						  gint              restarted);
+						  gboolean          restarted);
 static void gnome_real_client_disconnect         (GnomeClient      *client);
 static void master_client_connect (GnomeClient *client,
-				   gint         restarted,
+				   gboolean         restarted,
 				   gpointer     client_data);
 static void master_client_disconnect (GnomeClient *client,
 				      gpointer     client_data);
@@ -573,9 +573,9 @@ static void
 client_save_yourself_callback (SmcConn   smc_conn,
 			       SmPointer client_data,
 			       int       save_style,
-			       Bool      shutdown,
+			       gboolean  shutdown,
 			       int       interact_style,
-			       Bool      fast)
+			       gboolean  fast)
 {
   GnomeClient *client= (GnomeClient*) client_data;
   gchar *name, *prefix;
@@ -1095,7 +1095,7 @@ master_client_clean_up (void)
 
 static void
 master_client_connect (GnomeClient *client,
-		       gint         restarted,
+		       gboolean     restarted,
 		       gpointer     client_data)
 {
   gdk_set_sm_client_id (gnome_client_get_id (client));
@@ -2325,7 +2325,7 @@ gnome_real_client_shutdown_cancelled (GnomeClient *client)
 
 static void
 gnome_real_client_connect (GnomeClient *client,
-			   gint         restarted)
+			   gboolean     restarted)
 {  
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
