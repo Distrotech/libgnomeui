@@ -1,5 +1,8 @@
 1998-04-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-dateedit.c (gnome_date_edit_init): The "Calendar" button
+	is now prettier.
+
 	* gnome-dateedit.c (select_clicked): The date editor widget now
 	has a real popup for the calendar, and generally does the calendar
 	stuff in a saner way.

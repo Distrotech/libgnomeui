@@ -300,6 +300,9 @@ static void
 gnome_date_edit_init (GnomeDateEdit *gde)
 {
 	GtkWidget *frame;
+	GtkWidget *hbox;
+	GtkWidget *label;
+	GtkWidget *arrow;
 
 	gde->lower_hour = 7;
 	gde->upper_hour = 19;
@@ -309,10 +312,24 @@ gnome_date_edit_init (GnomeDateEdit *gde)
 	gtk_box_pack_start (GTK_BOX (gde), gde->date_entry, TRUE, TRUE, 0);
 	gtk_widget_show (gde->date_entry);
 	
-	gde->date_button = gtk_button_new_with_label (_("Calendar..."));
+	gde->date_button = gtk_button_new ();
 	gtk_signal_connect (GTK_OBJECT (gde->date_button), "clicked",
 			    GTK_SIGNAL_FUNC (select_clicked), gde);
 	gtk_box_pack_start (GTK_BOX (gde), gde->date_button, FALSE, FALSE, 0);
+
+	hbox = gtk_hbox_new (FALSE, 3);
+	gtk_container_add (GTK_CONTAINER (gde->date_button), hbox);
+	gtk_widget_show (hbox);
+
+	label = gtk_label_new (_("Calendar"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+	gtk_widget_show (label);
+
+	arrow = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+	gtk_box_pack_start (GTK_BOX (hbox), arrow, FALSE, FALSE, 0);
+	gtk_widget_show (arrow);
+	
 	gtk_widget_show (gde->date_button);
 
 	gde->time_entry = gtk_entry_new_with_max_length (9);
