@@ -734,7 +734,7 @@ gnome_app_find_menu_pos (GtkWidget *parent,
     else                                /* something that we just can't handle */
       label = NULL;
 
-    if( label && (strncmp(path, label, path_len) == 0) ) {
+    if( label && (path_len == strlen(label)) && (strncmp(path, label, path_len) == 0) ) {
       if(name_end == NULL) {
         *pos = p;
         return parent;
