@@ -1,3 +1,20 @@
+2003-10-28  Federico Mena Quintero  <federico@ximian.com>
+
+	GtkFileChooser got merged into GTK+ HEAD on 2003-10-23; the
+	remaining files in this module are just for the
+	GtkFileSystemGnomeVFS implementation.
+
+	* configure.ac: Test for gtkfilechoosergnomevfs.h, not
+	gtkfilechooser.h.
+
+	* Makefile.am: Leave only the test program data.
+
+	* gtkfilesystemgnomevfs.h: #include <gtk/gtkfilesystem.h>
+
+	* gtkfilesystemgnomevfs.c: Don't #include more files than we need.
+
+	* *.[ch]: Removed the files that are now in GTK+.
+
 2003-10-22  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilechooserdefault.[ch]: Renamed from

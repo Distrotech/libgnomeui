@@ -6,8 +6,6 @@
 #include <unistd.h>
 
 #include <gtk/gtk.h>
-#include "gtkfilechooserdialog.h"
-#include "gtkfilechooser.h"
 #include "prop-editor.h"
 
 #ifdef USE_GNOME_VFS

@@ -22,7 +22,9 @@
 #define __GTK_FILE_SYSTEM_GNOME_VFS_H__
 
 #include <glib-object.h>
-#include "gtkfilesystem.h"
+#define GTK_FILE_SYSTEM_ENABLE_UNSUPPORTED
+#include <gtk/gtkfilesystem.h>
+#undef GTK_FILE_SYSTEM_ENABLE_UNSUPPORTED
 
 G_BEGIN_DECLS
 

@@ -28,7 +28,6 @@
  *            John Sullivan <sullivan@eazel.com>
  */
 
-#include "gtkfilesystem.h"
 #include "gtkfilesystemgnomevfs.h"
 
 #include <libgnomevfs/gnome-vfs.h>
