@@ -100,14 +100,18 @@ gtk_pixmap_menu_item_class_init (GtkPixmapMenuItemClass *klass)
   container_class->forall = gtk_pixmap_menu_item_forall;
   container_class->remove = gtk_pixmap_menu_item_remove;
 
-  GTK_MENU_ITEM_CLASS (klass)->toggle_size = MAX(GTK_MENU_ITEM_CLASS (klass)->toggle_size, PMAP_WIDTH);
+  menu_item_class->toggle_size = MAX (menu_item_class->toggle_size, PMAP_WIDTH);
 }
 
 static void
 gtk_pixmap_menu_item_init (GtkPixmapMenuItem *menu_item)
 {
+  GtkMenuItem *mi;
+
+  mi = GTK_MENU_ITEM (menu_item);
+
   menu_item->pixmap = NULL;
-  GTK_MENU_ITEM (menu_item)->toggle_size = MAX(GTK_MENU_ITEM (menu_item)->toggle_size, PMAP_WIDTH);
+  mi->toggle_size = MAX (mi->toggle_size, PMAP_WIDTH);
 }
 
 static void
@@ -209,19 +213,24 @@ gtk_pixmap_menu_item_size_allocate (GtkWidget        *widget,
 
   pmenu_item = GTK_PIXMAP_MENU_ITEM(widget);
 
-  if(pmenu_item->pixmap && GTK_WIDGET_VISIBLE(pmenu_item)) {
-    GtkAllocation child_allocation;
+  if (pmenu_item->pixmap && GTK_WIDGET_VISIBLE(pmenu_item))
+    {
+      GtkAllocation child_allocation;
+      int border_width;
 
-    child_allocation.width = pmenu_item->pixmap->requisition.width;
-    child_allocation.height = pmenu_item->pixmap->requisition.height;
-    child_allocation.x = GTK_CONTAINER (widget)->border_width + BORDER_SPACING;
-    child_allocation.y = GTK_CONTAINER (widget)->border_width + BORDER_SPACING
-      + ((allocation->height - child_allocation.height) - child_allocation.x)/2; /* center pixmaps vertically */
-    gtk_widget_size_allocate (pmenu_item->pixmap, &child_allocation);
-  }
+      border_width = GTK_CONTAINER (widget)->border_width;
 
-  if(GTK_WIDGET_CLASS(parent_class)->size_allocate)
-    GTK_WIDGET_CLASS(parent_class)->size_allocate(widget, allocation);
+      child_allocation.width = pmenu_item->pixmap->requisition.width;
+      child_allocation.height = pmenu_item->pixmap->requisition.height;
+      child_allocation.x = border_width + BORDER_SPACING;
+      child_allocation.y = (border_width + BORDER_SPACING
+			    + (((allocation->height - child_allocation.height) - child_allocation.x)
+			       / 2)); /* center pixmaps vertically */
+      gtk_widget_size_allocate (pmenu_item->pixmap, &child_allocation);
+    }
+
+  if (GTK_WIDGET_CLASS (parent_class)->size_allocate)
+    GTK_WIDGET_CLASS(parent_class)->size_allocate (widget, allocation);
 }
 
 static void
