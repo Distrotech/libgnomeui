@@ -1,5 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 
+DEFS += -Wall
+
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
 INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir)
@@ -18,6 +20,7 @@ libgnomeui_la_SOURCES = \
 	gnome-pixmap.c			\
 	gnome-properties.c		\
 	gnome-session.c			\
+	gnome-stock.c			\
 	gtk-clock.c
 
 libgnomeuiinclude_HEADERS = 		\
@@ -31,6 +34,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-properties.h     		\
 	gnome-pixmap.h			\
 	gnome-session.h			\
+	gnome-stock.h			\
 	gtk-clock.h			\
 	libgnomeui.h
 
