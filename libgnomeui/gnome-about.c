@@ -25,19 +25,3 @@
 
 #include "gnome-about.h"
 
-GtkWidget *gnome_about_new (const gchar  *name,
-			    const gchar  *version,
-			    const gchar  *copyright,
-			    const gchar  *comments,
-			    const gchar **authors,
-			    const gchar **documenters,
-			    const gchar  *translator_credits,
-			    GdkPixbuf    *logo_pixbuf)
-{
-	GtkWidget *about;
-
-	/* Totally unusable stub for now */
-	about = gtk_dialog_new ();
-
-	return about;
-}

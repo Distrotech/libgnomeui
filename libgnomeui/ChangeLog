@@ -1,3 +1,12 @@
+2001-08-14  Martin Baulig  <baulig@suse.de>
+
+	* Makefile.am: Disabled GnomeAbout, don't link it into the
+	library and don't install the header file.
+
+	* gnome-about.h (GnomeAbout): Removed all fields and added
+	a private field.
+	(gnome_about_new): Removed.
+
 Sun Aug 12 11:22:03 2001  George Lebl <jirka@5z.com>
 
 	* gnome-dateedit.[ch]: Some cleanup, and make the time

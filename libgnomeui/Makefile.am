@@ -45,7 +45,6 @@ libgnomeui_2_la_SOURCES = \
 	gnometypebuiltins.h		\
 	gnometypebuiltins.c		\
 	gnome-stock-icons.c		\
-	gnome-about.c			\
 	gnome-canvas-init.c		\
 	gnome-client.c			\
 	gnome-color-picker.c		\
@@ -71,7 +70,6 @@ libgnomeui_2_la_SOURCES = \
 
 ## this lists all the non-generated headers
 gnome_headers = \
-	gnome-about.h			\
 	gnome-canvas-init.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
