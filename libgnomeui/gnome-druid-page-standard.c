@@ -137,7 +137,7 @@ gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
 	gtk_widget_set_usize (druid_page_standard->canvas, 508, LOGO_WIDTH + GNOME_PAD * 2);
 	gtk_container_set_border_width (GTK_CONTAINER (druid_page_standard), 0);
 	gtk_container_add (GTK_CONTAINER (druid_page_standard), vbox);
-
+	gtk_widget_show_all (vbox);
 }
 static void
 gnome_druid_page_standard_configure_size (GnomeDruidPageStandard *druid_page_standard, gint width, gint height)
@@ -168,15 +168,18 @@ gnome_druid_page_standard_construct (GnomeDruidPageStandard *druid_page_standard
 	druid_page_standard->background_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
 				       gnome_canvas_rect_get_type (), NULL);
+
 	druid_page_standard->logoframe_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
 				       gnome_canvas_rect_get_type (), NULL);
+
 	druid_page_standard->logo_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
 				       gnome_canvas_image_get_type (), NULL);
-	if (druid_page_standard->logo_image != NULL)
+	if (druid_page_standard->logo_image != NULL) {
 		gnome_canvas_item_set (druid_page_standard->logo_item,
 				       "image", druid_page_standard->logo_image, NULL);
+	}
 	druid_page_standard->title_item =
 		gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (druid_page_standard->canvas)),
 				       gnome_canvas_text_get_type (), 

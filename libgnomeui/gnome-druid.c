@@ -32,6 +32,8 @@ static void gnome_druid_size_allocate   (GtkWidget               *widget,
 					 GtkAllocation           *allocation);
 static void gnome_druid_draw            (GtkWidget               *widget,
 					 GdkRectangle            *area);
+static void gnome_druid_paint           (GtkWidget               *widget,
+					 GdkRectangle            *area);
 static gint gnome_druid_expose          (GtkWidget               *widget,
 					 GdkEventExpose          *event);
 static void gnome_druid_map             (GtkWidget               *widget);
@@ -381,7 +383,25 @@ static void
 gnome_druid_remove (GtkContainer *widget,
 		    GtkWidget *child)
 {
-	GnomeDruid *druid = GNOME_DRUID (widget);
+	GnomeDruid *druid;
+	GList *list;
+	
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GNOME_IS_DRUID (widget));
+	g_return_if_fail (child != NULL);
+
+	druid = GNOME_DRUID (widget);
+
+	list = g_list_find (druid->children, child);
+	/* Is it a page? */ 
+	if (list != NULL) {
+		/* If we are mapped and visible, we want to deal with changing the page. */
+		if ((GTK_WIDGET_MAPPED (GTK_WIDGET (widget))) &&
+		    (list->data == (gpointer) druid->current) &&
+		    (list->next != NULL)) {
+			gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->next->data));
+		}
+	}
 	druid->children = g_list_remove (druid->children, child);
 	gtk_widget_unparent (child);
 }
@@ -416,7 +436,6 @@ gnome_druid_forall (GtkContainer *container,
 		(* callback) (druid->finish, callback_data);
 	}
 }
-
 static void
 gnome_druid_draw (GtkWidget    *widget,
 		  GdkRectangle *area)
@@ -437,8 +456,9 @@ gnome_druid_draw (GtkWidget    *widget,
 			child = GTK_WIDGET (children->data);
 			children = children->next;
 	     
-			if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area))
+			if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area)) {
 				gtk_widget_draw (child, &child_area);
+			}
 		}
 		child = druid->back;
 		if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area))
@@ -666,6 +686,19 @@ gnome_druid_insert_page (GnomeDruid *druid,
 		new_el->data = (gpointer) page;
 	}
 	gtk_widget_set_parent (GTK_WIDGET (page), GTK_WIDGET (druid));
+
+	if (GTK_WIDGET_REALIZED (GTK_WIDGET (druid)))
+		gtk_widget_realize (GTK_WIDGET (page));
+
+	if (GTK_WIDGET_VISIBLE (GTK_WIDGET (druid)) && GTK_WIDGET_VISIBLE (GTK_WIDGET (page))) {
+		if (GTK_WIDGET_MAPPED (GTK_WIDGET (druid)))
+			gtk_widget_map (GTK_WIDGET (page));
+		gtk_widget_queue_resize (GTK_WIDGET (page));
+	}
+	
+	/* if it's the first page, we want to bring it to the foreground. */
+	if (druid->children->data == (gpointer) page)
+		gnome_druid_set_page (druid, page);
 }
 
 /**

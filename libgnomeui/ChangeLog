@@ -1,3 +1,20 @@
+1999-09-02  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid-page.c (gnome_druid_page_paint): Add paint
+	function.  Now redraw problem is gone.
+
+1999-09-01  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid.c (gnome_druid_insert_page): Make the first page in
+	the list be shown.
+	(gnome_druid_remove): If a page is deleted, and it is being shown,
+	show the next page.
+	(gnome_druid_insert_page): if a child is added, and the druid is
+	mapped, then map the child to.  Same with realization.
+
+	* gnome-druid-page-standard.c
+	(gnome_druid_page_standard_configure_size): show internal widgets.
+
 1999-08-31  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (book_create): show notebook before adding it to
