@@ -359,6 +359,7 @@ static GnomeUIInfo *copy_ui_info_tree (const GnomeUIInfo source[])
 	
 	for(i = 0; i < count; i++) {
 		if( (source[i].type == GNOME_APP_UI_SUBTREE) ||
+			(source[i].type == GNOME_APP_UI_SUBTREE_STOCK) ||
 			(source[i].type == GNOME_APP_UI_RADIOITEMS) )
 			copy[i].moreinfo = copy_ui_info_tree(source[i].moreinfo);
 	}
@@ -382,6 +383,7 @@ static void free_ui_info_tree (GnomeUIInfo *root)
 	
 	for(count = 0; root[count].type != GNOME_APP_UI_ENDOFINFO; count++)
 		if( (root[count].type == GNOME_APP_UI_SUBTREE) ||
+			(root[count].type == GNOME_APP_UI_SUBTREE_STOCK) ||
 			(root[count].type == GNOME_APP_UI_RADIOITEMS) )
 			free_ui_info_tree(root[count].moreinfo);
 	
@@ -867,7 +869,7 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 	GnomeMDIChild *child;
 	GnomeUIInfo *ui_info;
 	gint pos, items;
-	
+
 	/* free previous child ui-info */
 	ui_info = gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY);
 	if(ui_info != NULL) {

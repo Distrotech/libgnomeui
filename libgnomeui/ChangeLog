@@ -1,3 +1,8 @@
+1999-06-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (copy_ui_info_tree, free_ui_info_tree): fixed a bug
+	that prevented stock subtrees from being copied or freed.
+
 1999-06-14  Elliot Lee  <sopwith@redhat.com>
 
 	* gnome-dialog.c: Fix for bug #1453:
