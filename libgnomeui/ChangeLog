@@ -1,3 +1,14 @@
+1999-08-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-procbar.c (gnome_proc_bar_construct): New function. 
+
+	* gnome-pixmap-entry.c (gnome_pixmap_entry_construct): New function.
+
+	* gnome-dock-item.c (gnome_dock_item_construct): New function.
+
+	* gnome-file-entry.c (gnome_file_entry_construct): New function,
+	per request from Guillaume.
+
 Fri Aug 27 15:41:48 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-dentry-edit.c: use the new gnome-dentry interface for 

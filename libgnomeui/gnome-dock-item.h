@@ -99,6 +99,9 @@ struct _GnomeDockItemClass
 guint          gnome_dock_item_get_type        (void);
 GtkWidget     *gnome_dock_item_new             (const gchar *name,
                                                 GnomeDockItemBehavior behavior);
+void           gnome_dock_item_construct       (GnomeDockItem *new,
+						const gchar *name,
+						GnomeDockItemBehavior behavior);
 
 GtkWidget     *gnome_dock_item_get_child       (GnomeDockItem *dock_item);
 

@@ -921,6 +921,29 @@ gnome_dock_item_delete_event (GtkWidget *widget,
 
 
 /**
+ * gnome_dock_item_construct:
+ * @new: a #GnomeDockItem.
+ * @name: Name for the new item
+ * @behavior: Behavior for the new item
+ * 
+ * Description: Constructs the @new GnomeDockItem named @name, with the
+ * specified @behavior.
+ * 
+ * Returns: A new GnomeDockItem widget.
+ **/
+static void
+gnome_dock_item_construct (GnomeDockItem *new,
+			   const gchar *name,
+			   GnomeDockItemBehavior behavior)
+{
+	g_return_if_fail (new != NULL);
+	g_return_if_fail (GNOME_IS_DOCK_ITEM (new));
+	
+	new->name = g_strdup (name);
+	new->behavior = behavior;
+}
+
+/**
  * gnome_dock_item_new:
  * @name: Name for the new item
  * @behavior: Behavior for the new item
@@ -938,8 +961,7 @@ gnome_dock_item_new (const gchar *name,
 
   new = GNOME_DOCK_ITEM (gtk_type_new (gnome_dock_item_get_type ()));
 
-  new->name = g_strdup (name);
-  new->behavior = behavior;
+  gnome_dock_item_construct (new, name, behavior);
 
   return GTK_WIDGET (new);
 }

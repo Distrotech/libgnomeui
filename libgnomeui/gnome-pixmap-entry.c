@@ -410,6 +410,32 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 }
 
 /**
+ * gnome_pixmap_entry_construct:
+ * @pentry: A #GnomePixmapEntry object to construct
+ * @history_id: the id given to #gnome_entry_new
+ * @browse_dialog_title: title of the browse dialog
+ * @do_preview: boolean
+ *
+ * Description: Constructs the @gentry object.
+ **/
+void
+gnome_pixmap_entry_construct (GnomePixmapEntry *pentry, const gchar *history_id,
+			      const gchar *browse_dialog_title, gboolean do_preview)
+{
+	GtkWidget *gentry;
+	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry->fentry));
+
+	gnome_entry_set_history_id (GNOME_ENTRY (gentry), history_id);
+	gnome_file_entry_set_title (GNOME_FILE_ENTRY(pentry->fentry),
+				    browse_dialog_title);
+
+	pentry->do_preview = do_preview;
+	if(!do_preview)
+		gtk_widget_hide(pentry->preview_sw);
+
+}
+
+/**
  * gnome_pixmap_entry_new:
  * @history_id: the id given to #gnome_entry_new
  * @browse_dialog_title: title of the browse dialog
@@ -426,20 +452,10 @@ GtkWidget *
 gnome_pixmap_entry_new (const gchar *history_id, const gchar *browse_dialog_title, gboolean do_preview)
 {
 	GnomePixmapEntry *pentry;
-	GtkWidget *gentry;
 
 	pentry = gtk_type_new (gnome_pixmap_entry_get_type ());
 
-	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry->fentry));
-
-	gnome_entry_set_history_id (GNOME_ENTRY (gentry), history_id);
-	gnome_file_entry_set_title (GNOME_FILE_ENTRY(pentry->fentry),
-				    browse_dialog_title);
-
-	pentry->do_preview = do_preview;
-	if(!do_preview)
-		gtk_widget_hide(pentry->preview_sw);
-
+	gnome_pixmap_entry_construct (pentry, history_id, browse_dialog_title, do_preview);
 	return GTK_WIDGET (pentry);
 }
 

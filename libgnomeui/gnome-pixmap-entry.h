@@ -50,6 +50,10 @@ guint      gnome_pixmap_entry_get_type    (void);
 GtkWidget *gnome_pixmap_entry_new         (const gchar *history_id,
 					   const gchar *browse_dialog_title,
 					   gboolean do_preview);
+void       gnome_pixmap_entry_construct   (GnomePixmapEntry *gentry,
+					   const gchar *history_id,
+					   const gchar *browse_dialog_title,
+					   gboolean do_preview);
 
 /*by default gnome_pixmap entry sets the default directory to the
   gnome pixmap directory, this will set it to a subdirectory of that,

@@ -54,6 +54,9 @@ struct _GnomeFileEntryClass {
 guint      gnome_file_entry_get_type    (void);
 GtkWidget *gnome_file_entry_new         (const char *history_id,
 					 const char *browse_dialog_title);
+void       gnome_file_entry_construct  (GnomeFileEntry *fentry,
+					const char *history_id,
+					const char *browse_dialog_title);
 
 GtkWidget *gnome_file_entry_gnome_entry (GnomeFileEntry *fentry);
 GtkWidget *gnome_file_entry_gtk_entry   (GnomeFileEntry *fentry);
