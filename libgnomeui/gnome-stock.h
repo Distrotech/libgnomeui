@@ -107,6 +107,8 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_SRCHRPL     "Search/Replace"
 #define GNOME_STOCK_PIXMAP_BACK        "Back"
 #define GNOME_STOCK_PIXMAP_FORWARD     "Forward"
+#define GNOME_STOCK_PIXMAP_FIRST       "First"
+#define GNOME_STOCK_PIXMAP_LAST        "Last"
 #define GNOME_STOCK_PIXMAP_HOME        "Home"
 #define GNOME_STOCK_PIXMAP_STOP        "Stop"
 #define GNOME_STOCK_PIXMAP_REFRESH     "Refresh"
@@ -303,7 +305,7 @@ GtkWidget             *gnome_stock_pixmap_widget   (GtkWidget *window,
 void gnome_stock_pixmap_widget_set_icon(GnomeStockPixmapWidget *widget,
 					const char *icon);
 
-/* register a pixmap. returns non-zero, if successfull */
+/* register a pixmap. returns non-zero, if successful */
 gint                   gnome_stock_pixmap_register (const char *icon,
 						    const char *subtype,
                                                     GnomeStockPixmapEntry *entry);
@@ -372,6 +374,8 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_SRCHRPL      "Menu_Search/Replace"
 #define GNOME_STOCK_MENU_BACK         "Menu_Back"
 #define GNOME_STOCK_MENU_FORWARD      "Menu_Forward"
+#define GNOME_STOCK_MENU_FIRST        "Menu_First"
+#define GNOME_STOCK_MENU_LAST         "Menu_Last"
 #define GNOME_STOCK_MENU_HOME         "Menu_Home"
 #define GNOME_STOCK_MENU_STOP         "Menu_Stop"
 #define GNOME_STOCK_MENU_REFRESH      "Menu_Refresh"

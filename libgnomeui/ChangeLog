@@ -1,3 +1,7 @@
+Thu Jul 23 00:59:23 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock: added `first' and `last' icons from gnomecard.
+
 1998-07-22  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-stock.h: #include "gnome-pixmap.h" rather than

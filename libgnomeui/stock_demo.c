@@ -611,6 +611,28 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
 	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_FIRST));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_FIRST));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("First");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_LAST));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_LAST));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
+	w = gtk_label_new("Last");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
+
+	column++;
 	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_HOME));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
