@@ -34,7 +34,6 @@
 
 #include <libgnome/gnome-i18n.h>
 #include "gnome-client.h"
-#include "gnome-stock.h"
 #include "gnome-uidefs.h"
 #include "gnome-ice.h"
 #include "gnome-winhints.h"

@@ -41,7 +41,6 @@
 #include <libgnomecanvas/gnome-canvas-util.h>
 #include <bonobo/bonobo-config-database.h>
 #include "gnome-cursors.h"
-#include "gnome-stock.h"
 #include <string.h>
 #include <gtk/gtk.h>
 

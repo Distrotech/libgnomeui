@@ -41,7 +41,6 @@
 #include "gnome-dateedit.h"
 #include "gnome-cursors.h"
 #include <libgnome/gnome-i18n.h>
-#include <libgnomeui/gnome-stock.h>
 
 struct _GnomeDateEditPrivate {
 	GtkWidget *date_entry;
