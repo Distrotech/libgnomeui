@@ -224,6 +224,12 @@ file_read_callback (GnomeVFSAsyncHandle *vfs_handle,
 
     switch (result) {
     case GNOME_VFS_OK:
+	if (bytes_read == 0) {
+	    GdkPixbuf *pixbuf;
+
+	    pixbuf = gdk_pixbuf_loader_get_pixbuf (handle->loader);
+	    load_done (handle, result, pixbuf);
+	}
 	break;
     case GNOME_VFS_ERROR_EOF:
 	{

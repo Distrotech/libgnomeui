@@ -1,5 +1,14 @@
 2000-12-06  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selector.h (GnomeSelector): Added "add_uri" and
+	"add_uri_default" signals.
+	(gnome_selector_add_uri): New function.
+
+	* gnome-vfs-util.c (file_read_callback): If result == GNOME_VFS_OK,
+	but bytes_read == 0, we're at the end of the file.
+
+2000-12-06  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selector.c: Asyncify the "set_filename" signal and the
 	gnome_selector_set_filename() function.
 

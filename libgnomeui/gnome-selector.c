@@ -133,6 +133,8 @@ enum {
     ACTIVATE_ENTRY_SIGNAL,
     HISTORY_CHANGED_SIGNAL,
     GET_FILE_LIST_SIGNAL,
+    ADD_URI_SIGNAL,
+    ADD_URI_DEFAULT_SIGNAL,
     LAST_SIGNAL
 };
 
@@ -275,6 +277,26 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_directory_default),
+			gnome_marshal_VOID__POINTER_INT_BOXED,
+			GTK_TYPE_NONE, 3,
+			GTK_TYPE_STRING, GTK_TYPE_INT,
+			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
+    gnome_selector_signals [ADD_URI_SIGNAL] =
+	gtk_signal_new ("add_uri",
+			GTK_RUN_LAST,
+			GTK_CLASS_TYPE (object_class),
+			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+					   add_uri),
+			gnome_marshal_VOID__POINTER_INT_BOXED,
+			GTK_TYPE_NONE, 3,
+			GTK_TYPE_STRING, GTK_TYPE_INT,
+			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
+    gnome_selector_signals [ADD_URI_DEFAULT_SIGNAL] =
+	gtk_signal_new ("add_uri_default",
+			GTK_RUN_LAST,
+			GTK_CLASS_TYPE (object_class),
+			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+					   add_uri_default),
 			gnome_marshal_VOID__POINTER_INT_BOXED,
 			GTK_TYPE_NONE, 3,
 			GTK_TYPE_STRING, GTK_TYPE_INT,
@@ -1866,6 +1888,36 @@ gnome_selector_add_directory (GnomeSelector *selector,
 			 gnome_selector_signals [ADD_DIRECTORY_SIGNAL],
 			 directory, position, async_handle);
 }
+
+void
+gnome_selector_add_uri (GnomeSelector *selector,
+			GnomeSelectorAsyncHandle **async_handle_return,
+			const gchar *uri, gint position, gboolean defaultp,
+			GnomeSelectorAsyncFunc async_func,
+			gpointer user_data)
+{
+    GnomeSelectorAsyncHandle *async_handle;
+
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+    g_return_if_fail (uri != NULL);
+
+    async_handle = _gnome_selector_async_handle_get
+	(selector, GNOME_SELECTOR_ASYNC_TYPE_ADD_URI,
+	 uri, async_func, user_data);
+    if (async_handle_return != NULL)
+	*async_handle_return = async_handle;
+
+    if (defaultp)
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [ADD_URI_DEFAULT_SIGNAL],
+			 uri, position, async_handle);
+    else
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [ADD_URI_SIGNAL],
+			 uri, position, async_handle);
+}
+
 
 void
 gnome_selector_cancel_async_operation (GnomeSelector *selector, GnomeSelectorAsyncHandle *async_handle)
