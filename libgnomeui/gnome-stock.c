@@ -195,6 +195,11 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
                                         pixbufs,
                                         bitmasks);
 
+        /* Set the main pixbuf from the normal version, in
+           case pixbufs[] contains NULL for some images */
+        if (pixbufs[GTK_STATE_NORMAL] != NULL)
+                gnome_pixmap_set_pixbuf(GNOME_PIXMAP(stock),
+                                        pixbufs[GTK_STATE_NORMAL]);
 	return;
 }
 

@@ -1,5 +1,10 @@
 2000-01-15  Havoc Pennington  <hp@pobox.com>
 
+	* gnome-stock.c (gnome_stock_set_icon): set main pixbuf in
+	addition to the individual states.	
+
+2000-01-15  Havoc Pennington  <hp@pobox.com>
+
 	* gnome-mdi.c (set_active_view): fix printf format warning
 
 	* gnome-dialog.c (gnome_dialog_button_clicked): remove unused
