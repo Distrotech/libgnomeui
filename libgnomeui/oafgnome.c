@@ -183,6 +183,7 @@ rcmd_handle_connecting(RCMDRunInfo *ri)
 {
   char aline[4096];
   int nchars;
+  char *ctmp;
 
  retry:
   nchars = read(ri->outfd, aline, sizeof(aline) - 1);
@@ -205,9 +206,11 @@ rcmd_handle_connecting(RCMDRunInfo *ri)
 
   /* Now, see if we have timed out or got a whole line */
 
-  if(strstr(aline, "login:"))
+  if((ctmp = strstr(ri->in_buf->str, "login:")))
     {
       GtkWidget *prompt_dialog;
+
+      g_string_erase(ri->in_buf, 0, ctmp - ri->in_buf->str + strlen("login:"));
 
       ri->state = ITEMWAIT;
 
@@ -217,9 +220,11 @@ rcmd_handle_connecting(RCMDRunInfo *ri)
       if(ri->state == ITEMWAIT)
 	gtk_main_quit(); /* User cancelled, show is over */
     }
-  else if(strstr(aline, "ssword:"))
+  else if((ctmp = strstr(ri->in_buf->str, "ssword:")))
     {
       GtkWidget *prompt_dialog;
+
+      g_string_erase(ri->in_buf, 0, ctmp - ri->in_buf->str + strlen("ssword:"));
 
       ri->state = ITEMWAIT;
 
@@ -229,13 +234,17 @@ rcmd_handle_connecting(RCMDRunInfo *ri)
       if(ri->state == ITEMWAIT)
 	gtk_main_quit(); /* User cancelled, show is over */
     }
-  else if(strstr(aline, "continue connecting"))
+  else if((ctmp = strstr(ri->in_buf->str, "continue connecting (yes/no)?")))
     {
+      g_string_erase(ri->in_buf, 0, ctmp - ri->in_buf->str + strlen("continue connecting (yes/no)?"));
+
       fputs("yes\n", ri->in_fh);
     }
-  else if(strstr(aline, "GNOME BOOTSTRAP READY"))
+  else if((ctmp = strstr(aline, "GNOME BOOTSTRAP READY")))
     {
       int i;
+
+      g_string_erase(ri->in_buf, 0, ctmp - ri->in_buf->str + strlen("GNOME BOOTSTRAP READY"));
 
       ri->state = REMOTE_CONV;
 
@@ -243,6 +252,8 @@ rcmd_handle_connecting(RCMDRunInfo *ri)
       for(i = 0; ri->cmd[i]; i++)
 	fprintf(ri->in_fh, " %s", ri->cmd[i]);
       fprintf(ri->in_fh, "\n");
+
+      g_string_erase(ri->in_buf, 0, ctmp - ri->in_buf->str);
     }
   else if(strstr(aline, "Permission denied.")
 	  || strstr(aline, "connection closed."))
