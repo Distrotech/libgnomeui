@@ -980,7 +980,7 @@ gtk_calendar_paint_main (GtkWidget *widget)
 {
   GtkCalendar *calendar;
   gint row, col;
-
+ 
   g_return_if_fail (widget != NULL);
   g_return_if_fail (widget->window != NULL);
   g_return_if_fail (GTK_IS_CALENDAR (widget));
@@ -1085,7 +1085,9 @@ gtk_calendar_select_month (GtkCalendar *calendar, gint month, gint year)
 
   calendar->month = month;
   calendar->year  = year;
-  gtk_calendar_paint(GTK_WIDGET(calendar), NULL);
+
+  if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
+    gtk_calendar_paint(GTK_WIDGET(calendar), NULL);
 
   gtk_signal_emit (GTK_OBJECT (calendar), 
        	           gtk_calendar_signals[MONTH_CHANGED_SIGNAL]);
@@ -1148,7 +1150,8 @@ gtk_calendar_clear_marks (GtkCalendar *calendar)
     calendar->marked_date[day] = FALSE;
   }
 
-  gtk_calendar_paint_main(GTK_WIDGET(calendar));
+  if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
+    gtk_calendar_paint_main(GTK_WIDGET(calendar));
 }
 
 gint
@@ -1159,7 +1162,8 @@ gtk_calendar_mark_day (GtkCalendar *calendar, gint day)
   if (day>=1 && day <=31)  
     calendar->marked_date[day-1] = TRUE;
 
-  gtk_calendar_paint_main(GTK_WIDGET(calendar));
+  if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
+    gtk_calendar_paint_main(GTK_WIDGET(calendar));
 }
 
 gint
@@ -1170,7 +1174,8 @@ gtk_calendar_unmark_day (GtkCalendar *calendar, gint day)
   if (day>=1 && day <=31)
     calendar->marked_date[day-1] = FALSE;
 
-  gtk_calendar_paint_main(GTK_WIDGET(calendar));
+  if (GTK_WIDGET_DRAWABLE (GTK_WIDGET(calendar)))
+    gtk_calendar_paint_main(GTK_WIDGET(calendar));
 }
 
 static gint

@@ -112,7 +112,7 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 	time (&current_time);
 	mtm = localtime (&current_time);
 	
-	for (i = gde->lower_hour; i < gde->upper_hour; i++){
+	for (i = gde->lower_hour; i <= gde->upper_hour; i++){
 		GtkWidget *item, *submenu;
 		hour_info_t *hit;
 		char buffer [40];

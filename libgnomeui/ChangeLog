@@ -1,3 +1,7 @@
+1998-04-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-dateedit.c (fill_time_popup): Make the top boundary inclusive
+
 1998-04-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gtkcalendar.[ch]: Update to latest version from gcalendar cvs module.
