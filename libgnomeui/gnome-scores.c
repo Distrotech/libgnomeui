@@ -4,6 +4,7 @@
  * Free software (under the terms of the GNU Library General Public License)
  */
 
+#include <string.h>
 #include "gnome-scores.h"
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
@@ -92,7 +93,7 @@ gnome_scores_new (  guint n_scores,
 		gtk_widget_show ( gs->label_names[i] );
 		gtk_table_attach_defaults ( table, gs->label_names[i], 0, 1, i+1, i+2);
 
-		snprintf(tmp,10,"%5.2f", scores[i]);
+		g_snprintf(tmp,10,"%5.2f", scores[i]);
 		gs->label_scores[i] = gtk_label_new ( tmp );
 		gtk_widget_show ( gs->label_scores[i] );
 		gtk_table_attach_defaults ( table, gs->label_scores[i], 1, 2, i+1, i+2);
@@ -190,7 +191,7 @@ void gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 	if( font ) fo = font;
 	else fo = "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-iso8859-1";
 
-	if( f = gdk_fontset_load ( fo ) )
+	if ((f = gdk_fontset_load (fo)))
 		s->font = f;
 
 	gs->logo = gtk_label_new(txt);

@@ -89,7 +89,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
 			gtk_toolbar_append_item(GTK_TOOLBAR(parent_widget),
 						tbinfo[i].text,
 						tbinfo[i].tooltip_text,
-						GTK_PIXMAP(pmap),
+						pmap,
 						tbinfo[i].clicked_callback,
 						NULL);
 		}
