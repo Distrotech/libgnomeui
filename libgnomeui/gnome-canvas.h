@@ -178,9 +178,15 @@ void gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 etime);
 void gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y);
 void gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y);
 
-/* Remove the iterm from its group and append it to the new group
+/* Remove the item from its parent group and make the new group its parent.  The item will be put on
+ * top of all the items in the new group.  The item's coordinates relative to its new parent to
+ * *not* change -- this means that the item could potentially move on the screen.
+ * 
+ * The item and the group must be in the same canvas.  An item cannot be reparented to a group that
+ * is the item itself or that is an inferior of the item.
  */
-void gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup* new_group);
+void gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group);
+
 
 /* GnomeCanvasGroup - a group of canvas items
  *

@@ -14,7 +14,9 @@
  *
  * - Allow to specify whether GnomeCanvasImage sizes are in units or pixels (scale or don't scale).
  *
- * - Implement gnome_canvas_item_reparent().
+ * - Implement a flag for gnome_canvas_item_reparent() that tells the function to keep the item
+ *   visually in the same place, that is, to keep it in the same place with respect to the canvas
+ *   origin.
  *
  * - GC put functions for items.
  *
@@ -45,8 +47,7 @@
  *
  * - item_class->output (item, "bridge_to_raph's_canvas")
  *
- * - Multiple exposure event compression; this may need to be in Gtk/Gdk instead.
- */
+ * - Multiple exposure event compression; this may need to be in Gtk/Gdk instead.  */
 #include <stdio.h>
 #include <config.h>
 #include <math.h>
@@ -647,15 +648,61 @@ gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y)
 	}
 }
 
-void
-gnome_canvas_item_reparent(GnomeCanvasItem* item, GnomeCanvasGroup* new_group)
+/* Returns whether the item is an inferior of or is equal to the parent. */
+static int
+is_descendant (GnomeCanvasItem *item, GnomeCanvasItem *parent)
 {
-  gtk_object_ref(item);		/* protect it from the unref in group_remove */
-  if (item->parent)
-    group_remove(item->parent, item);
-  item->parent = new_group;
-  group_add(new_group, item);
-  gtk_object_unref(item);
+	for (; item; item = item->parent)
+		if (item == parent)
+			return TRUE;
+
+	return FALSE;
+}
+
+void
+gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
+{
+	GnomeCanvasItem *old_parent;
+
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+	g_return_if_fail (new_group != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_GROUP (new_group));
+
+	/* Both items need to be in the same canvas */
+
+	g_return_if_fail (item->canvas == GNOME_CANVAS_ITEM (new_group)->canvas);
+
+	/* The group cannot be an inferior of the item or be the item itself -- this also takes care
+	 * of the case where the item is the root item of the canvas.
+	 */
+
+	g_return_if_fail (!is_descendant (GNOME_CANVAS_ITEM (new_group), item));
+
+	/* Everything is ok, now actually reparent the item */
+
+	gtk_object_ref (GTK_OBJECT (item)); /* protect it from the unref in group_remove */
+
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+
+	if (item->parent)
+		group_remove (GNOME_CANVAS_GROUP (item->parent), item);
+
+	item->parent = GNOME_CANVAS_ITEM (new_group);
+	group_add (new_group, item);
+
+	/* Rebuild the new parent group's bounds.  This will take care of reconfiguring the item and
+	 * all its children.
+	 */
+
+	gnome_canvas_group_child_bounds (new_group, NULL);
+
+	/* Redraw and repick */
+
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	item->canvas->need_repick = TRUE;
+
+	gtk_object_unref (GTK_OBJECT (item));
 }
 
   
@@ -1562,16 +1609,6 @@ window_to_world (GnomeCanvas *canvas, double *x, double *y)
 {
 	*x = canvas->scroll_x1 + (*x + DISPLAY_X1 (canvas) - canvas->zoom_xofs) / canvas->pixels_per_unit;
 	*y = canvas->scroll_y1 + (*y + DISPLAY_Y1 (canvas) - canvas->zoom_yofs) / canvas->pixels_per_unit;
-}
-
-static int
-is_descendant (GnomeCanvasItem *item, GnomeCanvasItem *parent)
-{
-	for (; item; item = item->parent)
-		if (item == parent)
-			return TRUE;
-
-	return FALSE;
 }
 
 static void

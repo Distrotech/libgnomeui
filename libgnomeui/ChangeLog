@@ -1,3 +1,12 @@
+1998-09-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_item_reparent): Added all the usual
+	sanity checks, plus the extra checks pertaining to reparenting --
+	both items must be in the same canvas, and the new parent cannot
+	be the item itself or an inferior of the item.  Added proper
+	redrawing requests and mark the canvas as needing a repick.  Also,
+	recalculate the item's bounds.
+
 1998-09-27  Michael Lausch  <mla@gams.at>
 
 	* gnome-canvas.c (gnome_canvas_item_reparent): new function. Moves 
