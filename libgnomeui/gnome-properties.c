@@ -1,91 +1,199 @@
+/* gnome-properties.h - Properties interface.
+
+   Copyright (C) 1998 Martin Baulig
+
+   This library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License
+   as published by the Free Software Foundation; either version 2, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+   02111-1307, USA. 
+*/
+
 #include <config.h>
-#include <gtk/gtk.h>
-#include <string.h>
-#include "libgnome/gnome-defs.h"
+#include <gnome.h>
 #include "gnome-properties.h"
-#include "gnome-propertybox.h"
-#include "libgnome/gnome-config.h"
 
-GnomePropertyConfigurator *
-gnome_property_configurator_new (void)
+/* Create new property object from property descriptor. */
+GnomePropertyObject *
+gnome_property_object_new (GnomePropertyDescriptor *descriptor,
+			   gpointer property_data_ptr)
 {
-	GnomePropertyConfigurator *this = g_malloc (sizeof (GnomePropertyConfigurator));
+	GnomePropertyObject *object;
 
-	this->props = NULL;
-	this->property_box = NULL;
+	object = g_new0 (GnomePropertyObject, 1);
 
-	return this;
+	object->descriptor = g_new0 (GnomePropertyDescriptor, 1);
+
+	if (property_data_ptr)
+		object->prop_data = property_data_ptr;
+	else
+		object->prop_data = g_malloc0 (descriptor->size);
+
+	memcpy (object->descriptor, descriptor,
+		sizeof (GnomePropertyDescriptor));
+
+	gnome_property_object_load (object);
+
+	return object;
 }
 
+/* Add new property object to the property box. */
 void
-gnome_property_configurator_destroy (GnomePropertyConfigurator *this)
+gnome_property_object_register (GnomePropertyBox *property_box,
+				GnomePropertyObject *object)
 {
-        g_return_if_fail ( this != NULL );
-	
-	/* The property box should have closed itself. */
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (property_box != NULL);
+	g_return_if_fail (GNOME_IS_PROPERTY_BOX (property_box));
 
-	g_list_free (this->props);
+	g_return_if_fail (object->descriptor != NULL);
+	g_return_if_fail (object->descriptor->init_func != NULL);
+
+	object->label = gtk_label_new (_(object->descriptor->label));
+
+	gtk_notebook_append_page
+		(GTK_NOTEBOOK (property_box->notebook),
+		 object->descriptor->init_func (object),
+		 object->label);
 }
 
+/* Walk the list of property object and invoke callbacks. */
 
-
-void
-gnome_property_configurator_register (GnomePropertyConfigurator *this,
-				      int (*callback)(GnomePropertyRequest))
-{
-        g_return_if_fail ( this != NULL );
-	g_return_if_fail ( callback != NULL );
-
-	this->props = g_list_append (this->props, callback);
-}
-
-/* This is run when the user applies a change in the property box.  */
 static void
-apply_page (GtkObject *object, gint page, gpointer data)
+_property_object_action (GnomePropertyObject *object, 
+			 GnomePropertyAction action)
 {
-	GnomePropertyConfigurator *this = (GnomePropertyConfigurator *) data;
-	int (*cb)(GnomePropertyRequest);
-
-	if (page == -1) {
-		/* Applied all pages.  Now write and sync.  */
-		gnome_property_configurator_request_foreach (this, GNOME_PROPERTY_WRITE);
-		gnome_config_sync ();
-		return;
+	switch (action) {
+	case GNOME_PROPERTY_ACTION_APPLY:
+		gnome_property_object_apply (object);
+		break;
+	case GNOME_PROPERTY_ACTION_UPDATE:
+		gnome_property_object_update (object);
+		break;
+	case GNOME_PROPERTY_ACTION_LOAD:
+		gnome_property_object_load (object);
+		break;
+	case GNOME_PROPERTY_ACTION_SAVE:
+		gnome_property_object_save (object);
+		break;
+	case GNOME_PROPERTY_ACTION_LOAD_TEMP:
+		gnome_property_object_load_temp (object);
+		break;
+	case GNOME_PROPERTY_ACTION_SAVE_TEMP:
+		gnome_property_object_save_temp (object);
+		break;
+	case GNOME_PROPERTY_ACTION_DISCARD_TEMP:
+		gnome_property_object_discard_temp (object);
+		break;
+	case GNOME_PROPERTY_ACTION_CHANGED:
+		gnome_property_object_changed (object);
+		break;
 	}
-
-	cb = (int (*)(GnomePropertyRequest))
-		(g_list_nth (this->props, page)->data);
-	if (cb)
-		(*cb) (GNOME_PROPERTY_APPLY);
 }
 
 void
-gnome_property_configurator_setup (GnomePropertyConfigurator *this)
+gnome_property_object_list_walk (GList *property_object_list,
+				 GnomePropertyAction action)
 {
-        g_return_if_fail ( this != NULL );
+	GList *c, *d;
+	
+	for (c = property_object_list; c; c = c->next) {
+		GnomePropertyObject *object = c->data;
 
-	this->property_box = gnome_property_box_new ();
+		_property_object_action (object, action);
 
-	gtk_signal_connect (GTK_OBJECT (this->property_box), "apply",
-			    (GtkSignalFunc) apply_page, (gpointer) this);
+		for (d = object->object_list; d; d = d->next) {
+			GnomePropertyObject *obj = d->data;
+
+			_property_object_action (obj, action);
+		}
+	}
 }
 
-static void
-request (int (*cb)(GnomePropertyRequest), GnomePropertyRequest r)
+/* Implementation of property actions. */
+
+void
+gnome_property_object_apply (GnomePropertyObject *object)
 {
-	(*cb) (r);
+	if (object->descriptor->apply_func)
+		object->descriptor->apply_func (object);
 }
 
 void
-gnome_property_configurator_request_foreach (GnomePropertyConfigurator *this,
-					     GnomePropertyRequest r)
+gnome_property_object_update (GnomePropertyObject *object)
 {
-        g_return_if_fail ( this != NULL );
-	/* Range check */
-	g_return_if_fail ( ( r >= 0 ) && ( r <= GNOME_PROPERTY_SETUP ) );
-
-	g_list_foreach (this->props, (GFunc)request, (gpointer)r);
+	if (object->descriptor->update_func)
+		object->descriptor->update_func (object);
 }
 
+void
+gnome_property_object_load (GnomePropertyObject *object)
+{
+	if (object->descriptor->load_func)
+		object->descriptor->load_func (object);
+}
 
+void
+gnome_property_object_save (GnomePropertyObject *object)
+{
+	if (object->descriptor->save_func)
+		object->descriptor->save_func (object);
 
+	gnome_config_sync ();
+}
+
+void
+gnome_property_object_load_temp (GnomePropertyObject *object)
+{
+	gnome_property_object_discard_temp (object);
+
+	object->temp_data = g_malloc0 (object->descriptor->size);
+
+	memcpy (object->temp_data, object->prop_data,
+		object->descriptor->size);
+
+	if (object->descriptor->load_temp_func)
+		object->descriptor->load_temp_func (object);
+}
+
+void
+gnome_property_object_save_temp (GnomePropertyObject *object)
+{
+	gint copy = TRUE;
+
+	if (object->descriptor->save_temp_func)
+		copy = object->descriptor->save_temp_func (object);
+
+	if (copy)
+		memcpy (object->prop_data, object->temp_data,
+			object->descriptor->size);
+}
+
+void
+gnome_property_object_discard_temp (GnomePropertyObject *object)
+{
+	if (!object->temp_data)
+		return;
+
+	if (object->descriptor->discard_temp_func)
+		object->descriptor->discard_temp_func (object);
+
+	g_free (object->temp_data);
+	object->temp_data = NULL;
+}
+
+void
+gnome_property_object_changed (GnomePropertyObject *object)
+{
+	if (object->descriptor->changed_func)
+		object->descriptor->changed_func (object);
+}

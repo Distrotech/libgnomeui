@@ -1,3 +1,10 @@
+1998-12-02  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-properties.c: Added new GnomeProperty code here.
+
+	* gnome-property-entries.[ch]: New files. Makes it more easy
+	to create commonly used property entries like font properties etc.
+
 1998-12-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gil_button_press): Grab the rectangle

@@ -76,6 +76,7 @@ libgnomeui_la_SOURCES = \
 	gnome-preferences.c		\
 	gnome-propertybox.c		\
 	gnome-properties.c		\
+	gnome-property-entries.c	\
 	gnome-rootwin.c			\
 	gnome-scores.c			\
 	gnome-startup.c			\
@@ -140,6 +141,7 @@ gnome_headers = \
 	gnome-preferences.h		\
 	gnome-propertybox.h		\
 	gnome-properties.h     		\
+	gnome-property-entries.h	\
 	gnome-pixmap.h			\
 	gnome-pixmap-entry.h		\
 	gnome-scores.h			\

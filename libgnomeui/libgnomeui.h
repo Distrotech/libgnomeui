@@ -44,6 +44,7 @@
 #include "libgnomeui/gnome-preferences.h"
 #include "libgnomeui/gnome-propertybox.h"
 #include "libgnomeui/gnome-properties.h"
+#include "libgnomeui/gnome-property-entries.h"
 #include "libgnomeui/gnome-scores.h"
 #include "libgnomeui/gnome-startup.h"
 #include "libgnomeui/gnome-types.h"
