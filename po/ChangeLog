@@ -1,3 +1,11 @@
+2003-01-08  Daniel Yacob <locales@geez.org>
+
+	* am.po: Updated Amharic translation.
+
+2003-01-07  Daniel Yacob <locales@geez.org>
+
+	* am.po: Updated Amharic translation.
+
 2003-01-07 German Poo-Caaman~o <gpoo@ubiobio.cl>
 
     * es.po: Updated Spanish translation.
@@ -47,6 +55,7 @@
 
 	* fr.po: Updated French translation.
 
+>>>>>>> 1.272
 2002-12-11 Pauli Virtanen <pauli.virtanen@hut.fi>
 
 	* fi.po: Updated Finnish translation.

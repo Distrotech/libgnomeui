@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
-"POT-Creation-Date: 2002-10-03 05:33+0200\n"
-"PO-Revision-Date: 2002-12-10 19:37+EDT\n"
+"POT-Creation-Date: 2003-01-08 06:05+0100\n"
+"PO-Revision-Date: 2003-01-08 07:51+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,16 +19,16 @@ msgid "Credits"
 msgstr "ተሳታፊዎች"
 
 #: libgnomeui/gnome-about.c:223
-msgid "_Written by"
-msgstr "_ፀሐፊው"
+msgid "Written by"
+msgstr "ፀሐፊው"
 
 #: libgnomeui/gnome-about.c:238
-msgid "_Documented by"
-msgstr "_ሰነዱን ያዘጋጀው"
+msgid "Documented by"
+msgstr "ሰነዱን ያዘጋጀው"
 
 #: libgnomeui/gnome-about.c:253
-msgid "_Translated by"
-msgstr "ተ_ርጓሚ"
+msgid "Translated by"
+msgstr "ተርጓሚ"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
@@ -397,11 +397,9 @@ msgstr "ይህ ቁልፍ እራሱ ወደሚያሳየው ወደ URI  ይወስ�
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
-"Error occured while trying to launch the URL handler.\n"
-"Please check the settings in the Control Center if they are correct."
+"An error has occured while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"የURLን መያዣ ለማስጀመር በሚሞክርበት ጊዜ ስህተት ተከስቷል።\n"
-"እባክዎ አካባቢው ያለውን የመቆጣጠሪያ ማዕከል ትክክል እንደሆነ ይፈትሹ።"
 
 #: libgnomeui/gnome-ui-init.c:113
 msgid "X display to use"
@@ -416,12 +414,12 @@ msgid "GNOME GUI Library"
 msgstr "የGNOME GUI ስብስብ"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:618
+#: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "የተለያዩ ክፍሎች ላይ ስህተት ተከስቷል፥ ስሕተቱን ማሳየት አልተቻለም\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:632
+#: libgnomeui/gnome-ui-init.c:631
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -440,8 +438,8 @@ msgid ""
 msgstr ""
 "የGNOME ክፍል መምሪያ (ድርጊት %d) ጊዜ\n"
 "በማይሰጥ ስህተት ተቋርጧል (%s)።\n"
-"ይህንን መምረጫ ሲዘጉ ሁሉ የመጠቀሚያ ፕሮግራሞችይዘጉና ከውይይትዎ ይወጣሉ።"
-"እባክዎ ሁሉንም ፋልዮችን ይህንን መምረጫ ከመዝጋትዎ በፊት ያስቀምጧቸው።"
+"ይህንን መምረጫ ሲዘጉ ሁሉ የመጠቀሚያ ፕሮግራሞችይዘጉና ከውይይትዎ ይወጣሉ።እባክዎ ሁሉንም ፋልዮችን ይህንን መምረጫ "
+"ከመዝጋትዎ በፊት ያስቀምጧቸው።"
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -1242,8 +1240,7 @@ msgstr "የቁልፉ መደብ"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
-"በምልክቶቹ ምስል ቦታ የማውጫውን ስም ማስገባት አለብዎት።"
+msgstr "በምልክቶቹ ምስል ቦታ የማውጫውን ስም ማስገባት አለብዎት።"
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
