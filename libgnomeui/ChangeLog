@@ -1,5 +1,10 @@
 2001-06-03  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selector-dialog-client.c
+	(gnome_selector_dialog_client_new): Added `GnomeSelector *selector' argument.
+
+2001-06-03  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selector-component.c (PROP_CONFIG_MONIKER, ensure_properties_handler):
 	Removed; this is now done by GnomeSelector.
 
