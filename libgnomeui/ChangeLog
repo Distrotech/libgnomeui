@@ -1,5 +1,9 @@
 2001-12-08  James Henstridge  <james@daa.com.au>
 
+	* gnome-appbar.c (gnome_appbar_constructor): _priv->interactivity
+	is a member of the enum.  When deciding on whether to make the
+	status bar a label or entry, we want to check _priv->interactive.
+
 	* gnome-ui-init.c (libgnomeui_post_args_parse): looks like the
 	accelerator loading code got lost at some point.  Adding it back
 	here, using gtk_accel_map_load().

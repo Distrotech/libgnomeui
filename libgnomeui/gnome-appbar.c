@@ -591,7 +591,7 @@ gnome_appbar_constructor (GType                  type,
   GObject *object;
   GnomeAppBar *ab;
   GtkBox *box;
-  gboolean has_status, has_progress, interactivity;
+  gboolean has_status, has_progress, interactive;
 
   object = G_OBJECT_CLASS (parent_class)->constructor (type,
 						       n_properties,
@@ -599,9 +599,9 @@ gnome_appbar_constructor (GType                  type,
 
   ab = GNOME_APPBAR (object);
 
-  has_status    = ab->_priv->has_status;
-  has_progress  = ab->_priv->has_progress;
-  interactivity = ab->_priv->interactivity;
+  has_status   = ab->_priv->has_status;
+  has_progress = ab->_priv->has_progress;
+  interactive  = ab->_priv->interactive;
 
   box = GTK_BOX (ab);
 
@@ -621,7 +621,7 @@ gnome_appbar_constructor (GType                  type,
     gtk_box_pack_start (box, ab->_priv->progress, FALSE, FALSE, 0);
 
   if ( has_status ) {
-    if ( interactivity ) {
+    if ( interactive ) {
       ab->_priv->status = gtk_entry_new();
 
       gtk_signal_connect (GTK_OBJECT(ab->_priv->status), "delete_text",
