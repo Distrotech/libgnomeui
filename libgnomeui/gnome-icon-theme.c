@@ -870,7 +870,6 @@ gnome_icon_theme_rescan_if_needed (GnomeIconTheme *icon_theme)
 {
   GnomeIconThemePrivate *priv;
   IconThemeDirMtime *dir_mtime;
-  char *path;
   GList *d;
   int stat_res;
   struct stat stat_buf;

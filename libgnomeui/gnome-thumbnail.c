@@ -185,7 +185,6 @@ md5_equal (gconstpointer  a,
 static GHashTable *
 read_scripts (void)
 {
-  char *file;
   GHashTable *scripts_hash;
   GConfClient *client;
   GSList *subdirs, *l;

@@ -1,3 +1,13 @@
+2003-03-04  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* libgnomeui/gnome-icon-theme.c (gnome_icon_theme_rescan_if_needed):
+	* libgnomeui/gnome-thumbnail-pixbuf-utils.c (convert_cmyk_to_rgb):
+	* libgnomeui/gnome-thumbnail.c (read_scripts):
+	Remove unused variables to eliminate compiler warnings.
+
+	* libgnomeui/gnome-theme-parser.c (parse_key_value):
+	Initialise locale_end to some value (NULL) before use.
+
 2003-03-02  Anders Carlsson  <andersca@codefactory.se>
 
 	* libgnomeui/gnome-icon-lookup.c:

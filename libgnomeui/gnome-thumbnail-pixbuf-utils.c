@@ -321,7 +321,7 @@ static void
 convert_cmyk_to_rgb (struct jpeg_decompress_struct *cinfo,
 		     guchar *line) 
 {
-	gint i, j;
+	gint j;
 	guchar *p;
 
 	g_return_if_fail (cinfo != NULL);
