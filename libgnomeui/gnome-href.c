@@ -378,14 +378,15 @@ gnome_href_clicked (GtkButton *button)
 
   /* FIXME: Use the error variable from gnome_url_show */
   if(!gnome_url_show(href->_priv->url, NULL)) {
-      GtkWidget *dialog = gtk_message_dialog_new(NULL, 0, GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_OK,
-						 _("Error occured while trying to launch the "
-						   "URL handler.\n"
-						   "Please check the settings in the "
-						   "Control Center if they are correct."));
-
-      gtk_dialog_run(GTK_DIALOG(dialog));
+    GtkWidget *dialog = gtk_message_dialog_new(NULL, 0, GTK_MESSAGE_ERROR,
+					       GTK_BUTTONS_OK,
+					       _("Error occured while trying to launch the "
+						 "URL handler.\n"
+						 "Please check the settings in the "
+						 "Control Center if they are correct."));
+    
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
   }
 }
 
@@ -468,8 +469,6 @@ gnome_href_style_set (GtkWidget *widget,
 
 	if (link_color != &blue)
 		gdk_color_free (link_color);
-	
-	g_print ("in style set: %p!\n", link_color);
 }
 
 static void
