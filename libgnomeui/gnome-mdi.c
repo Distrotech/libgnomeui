@@ -370,11 +370,14 @@ static GnomeUIInfo *copy_ui_info_tree (const GnomeUIInfo source[])
 static gint count_ui_info_items (const GnomeUIInfo *ui_info)
 {
 	gint num;
+        gint count=0;
 	
 	for(num = 0; ui_info[num].type != GNOME_APP_UI_ENDOFINFO; num++)
-		;
+		if (ui_info[num].type != GNOME_APP_UI_HELP && 
+                        ui_info[num].type != GNOME_APP_UI_BUILDER_DATA)
+                        count++;
 	
-	return num;
+	return count;
 }
 
 static void free_ui_info_tree (GnomeUIInfo *root)
