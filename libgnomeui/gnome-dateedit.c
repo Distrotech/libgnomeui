@@ -13,7 +13,9 @@
 #include <gtk/gtk.h>
 #include "gnome-dateedit.h"
 #include <libgnome/gnome-i18nP.h>
-#include <libgnomeui/gtkcalendar.h>
+#ifndef HAVE_GTKCAL
+#    include <libgnomeui/gtkcalendar.h>
+#endif 
 #include <libgnomeui/gnome-stock.h>
 
 

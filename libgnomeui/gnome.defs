@@ -114,21 +114,3 @@
    (decreasing GTK_CLOCK_DECREASING)
    (realtime GTK_CLOCK_REALTIME))
 
-; enumerations from "./gtkcalendar.h"
-
-(define-enum GtkCalendarDisplayOptions
-   (show-heading GTK_CALENDAR_SHOW_HEADING)
-   (show-day-names GTK_CALENDAR_SHOW_DAY_NAMES)
-   (no-month-change GTK_CALENDAR_NO_MONTH_CHANGE))
-
-(define-enum GtkCalendarFont
-   (heading GTK_CALENDAR_FONT_HEADING)
-   (day-name GTK_CALENDAR_FONT_DAY_NAME)
-   (day GTK_CALENDAR_FONT_DAY))
-
-(define-enum GtkCalendarColor
-   (heading GTK_CALENDAR_COLOR_HEADING)
-   (day-name GTK_CALENDAR_COLOR_DAY_NAME)
-   (prev-month GTK_CALENDAR_COLOR_PREV_MONTH)
-   (next-month GTK_CALENDAR_COLOR_NEXT_MONTH)
-   (normal-day GTK_CALENDAR_COLOR_NORMAL_DAY))

@@ -1,6 +1,6 @@
 pixmapdir = $(datadir)/pixmaps
-
-BITMAPS = calculator-font.png
+CONVERTRGB = ../../tools/convertrgb/convertrgb
+BITMAPS    = calculator-font.png
 
 pixmap_DATA = $(BITMAPS)
 
@@ -32,7 +32,7 @@ EXTRA_DIST  = $(BITMAPS) $(stock_images)
 noinst_HEADERS = gnome-stock-imlib.h
 BUILT_SOURCES = gnome-stock-imlib.h
 
-gnome-stock-imlib.h: $(stock_images)
+gnome-stock-imlib.h: $(stock_images) $(CONVERTRGB)
 	@echo "creating gnome-stock-imlib.h"
 	@echo "/* gnome stock icons in Imlib usable rgb data" >gnome-stock-imlib.h
 	@echo " *" >>gnome-stock-imlib.h
@@ -48,9 +48,9 @@ gnome-stock-imlib.h: $(stock_images)
 	@echo " * are Copyright (C) 1998 Tuomas Kuosmanen" >>gnome-stock-imlib.h
 	@echo " */" >>gnome-stock-imlib.h
 	@echo >>gnome-stock-imlib.h
-	@for i in $(stock_images); do \
+	for i in $(stock_images); do \
 	  vn=`echo $$i | sed -e 's,stock_\(.*\)\.png,imlib_\1,'`; \
-	  ../../tools/convertrgb/convertrgb -n -v=$$vn -a=gnome-stock-imlib.h $(srcdir)/$$i;\
+	  $(CONVERTRGB) -n -v=$$vn -a=gnome-stock-imlib.h $(srcdir)/$$i;\
 	done
 
 

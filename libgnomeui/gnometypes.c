@@ -1,3 +1,4 @@
+#include <config.h>
 #include <gtk/gtktypeutils.h>
 #include "libgnomeui.h"
 

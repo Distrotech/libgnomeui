@@ -1,4 +1,4 @@
-
+#include <config.h>
 #include <X11/Xlib.h>
 #include <X11/Xmd.h>
 #include <X11/Xatom.h>
