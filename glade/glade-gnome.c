@@ -34,7 +34,8 @@
 
 #include <gnome.h>
 
-static const char * get_stock_name (const char *stock_name);
+static const char *get_stock_name (const char *stock_name);
+static gboolean get_stock_uiinfo (const char *stock_name, GnomeUIInfo *info);
 
 /* -- routines to build the children for containers -- */
 
@@ -233,6 +234,169 @@ menuitem_build_children (GladeXML *xml, GtkWidget *w, GNode *node,
         gtk_widget_hide(menu); /* wierd things happen if menu is initially visible */
 }
 
+static void
+toolbar_build_children (GladeXML *xml, GtkWidget *w, GNode *node,
+			const char *longname)
+{
+	xmlNodePtr info;
+	GNode *childnode;
+	char *content;
+
+	for (childnode = node->children; childnode;
+	     childnode = childnode->next) {
+		GtkWidget *child;
+		xmlNodePtr xmlnode = childnode->data;
+
+		/* insert a space into the toolbar if required */
+		for (xmlnode = xmlnode->childs; xmlnode;
+		     xmlnode = xmlnode->next)
+			if (!strcmp(xmlnode->name, "child"))
+				break;
+		if (xmlnode) { /* the <child> node exists */
+			for (xmlnode = xmlnode->childs; xmlnode;
+			     xmlnode = xmlnode->next)
+				if (!strcmp(xmlnode->name, "new_group"))
+					break;
+			if (xmlnode) {
+				content = xmlNodeGetContent(xmlnode);
+				if (content[0] == 'T')
+					gtk_toolbar_append_space(
+							GTK_TOOLBAR(w));
+				free(content);
+			}
+		}
+		
+		/* check to see if this is a special Toolbar:button or just
+		 * a standard widget we are adding to the toolbar */
+		xmlnode = childnode->data;
+		for (xmlnode = xmlnode->childs; xmlnode;
+		     xmlnode = xmlnode->next)
+			if (!strcmp(xmlnode->name, "child_name"))
+				break;
+		content = xmlNodeGetContent (xmlnode);
+		if (xmlnode && !strcmp(content, "Toolbar:button")) {
+			char *label = NULL, *icon = NULL, *stock = NULL;
+			GtkWidget *iconw = NULL;
+
+			if (content) free(content);
+			xmlnode = childnode->data;
+			for (xmlnode = xmlnode->childs; xmlnode;
+			     xmlnode = xmlnode->next) {
+				content = xmlNodeGetContent(xmlnode);
+				if (!strcmp(xmlnode->name, "label")) {
+					if (label) g_free(label);
+					label = g_strdup(content);
+				} else if (!strcmp(xmlnode->name, "icon")) {
+					if (icon) g_free(icon);
+					if (stock) g_free(stock);
+					stock = NULL;
+					icon = glade_xml_relative_file(xml,
+								content);
+				} else if (!strcmp(xmlnode->name, "stock_pixmap")) {
+					if (icon) g_free(icon);
+					if (stock) g_free(stock);
+					icon = NULL;
+					stock = g_strdup(content);
+				}
+				if (content) free(content);
+			}
+			if (stock) {
+				iconw = gnome_stock_new_with_icon(
+						get_stock_name(stock));
+				g_free(stock);
+			} else if (icon) {
+				GdkPixmap *pix;
+				GdkBitmap *mask;
+				pix = gdk_pixmap_colormap_create_from_xpm(NULL,
+					gtk_widget_get_colormap(w), &mask,
+					NULL, icon);
+				g_free(icon);
+				iconw = gtk_pixmap_new(pix, mask);
+				if (pix) gdk_pixmap_unref(pix);
+				if (mask) gdk_bitmap_unref(mask);
+			}
+			child = gtk_toolbar_append_item(GTK_TOOLBAR(w),
+							label, NULL, NULL,
+							iconw, NULL, NULL);
+			glade_xml_set_common_params(xml, child, childnode,
+						    longname, "GtkButton");
+		} else {
+			if (content) free(content);
+			child = glade_xml_build_widget(xml,childnode,longname);
+			gtk_toolbar_append_widget(GTK_TOOLBAR(w), child,
+						  NULL, NULL);
+		}
+	}
+}
+
+static void
+menushell_build_children (GladeXML *xml, GtkWidget *w, GNode *node,
+			  const char *longname)
+{
+	GNode *childnode;
+	char *content;
+	gint childnum = -1;
+	GnomeUIInfo infos[2] = {
+		{ GNOME_APP_UI_ITEM },
+		GNOMEUIINFO_END
+	};
+
+	for (childnode = node->children; childnode;
+	     childnode = childnode->next) {
+		xmlNodePtr xmlnode = childnode->data;
+		GtkWidget *child;
+		gchar *tmp1 = NULL, *tmp2 = NULL;
+
+		childnum++;
+		for (xmlnode = xmlnode->childs; xmlnode;
+		     xmlnode = xmlnode->next)
+			if (!strcmp(xmlnode->name, "stock_item"))
+				break;
+		if (!xmlnode) {
+			/* this is a normal menu item */
+			child = glade_xml_build_widget(xml,childnode,longname);
+			gtk_menu_shell_append(GTK_MENU_SHELL(w), child);
+			continue;
+		}
+		content = xmlNodeGetContent(xmlnode);
+		/* load the template GnomeUIInfo for this item */
+		if (!get_stock_uiinfo(content, &infos[0])) {
+			/* failure ... */
+			char *tmp = content;
+			if (!strncmp(tmp, "GNOMEUIINFO_", 12)) tmp += 12;
+			child = gtk_menu_item_new_with_label(tmp);
+			free(content);
+			glade_xml_set_common_params(xml, child, childnode,
+						    longname, "GtkMenuItem");
+			gtk_menu_shell_append(GTK_MENU_SHELL(w), child);
+			continue;
+		}
+		free(content);
+		/* we now have the template for this item.  Now fill it in */
+		xmlnode = childnode->data;
+		for (xmlnode = xmlnode->childs; xmlnode;
+		     xmlnode = xmlnode->next) {
+			content = xmlNodeGetContent(xmlnode);
+			if (!strcmp(xmlnode->name, "label")) {
+				if (tmp1) g_free(tmp1);
+				tmp1 = infos[0].label = g_strdup(content);
+			} else if (!strcmp(xmlnode->name, "tooltip")) {
+				if (tmp2) g_free(tmp2);
+				tmp2 = infos[0].hint = g_strdup(content);
+			}
+			if (content) free(content);
+		}
+		gnome_app_fill_menu(GTK_MENU_SHELL(w), infos, NULL, TRUE,
+				    childnum);
+		child = infos[0].widget;
+		if (tmp1) g_free(tmp1);
+		if (tmp2) g_free(tmp2);
+		gtk_menu_item_remove_submenu(GTK_MENU_ITEM(child));
+		glade_xml_set_common_params(xml, child, childnode,
+					    longname, "GtkMenuItem");
+	}
+}
+
 /* -- routines to build widgets -- */
 
 /* this is for the GnomeStockButton widget ... */
@@ -242,7 +406,7 @@ typedef struct {
         const char *mapping;
 } gnome_map_t;
 
-static gnome_map_t gnome_stock_button_mapping [] = {
+static const gnome_map_t gnome_stock_button_mapping [] = {
         { "APPLY",  GNOME_STOCK_BUTTON_APPLY  },
         { "CANCEL", GNOME_STOCK_BUTTON_CANCEL },
         { "CLOSE",  GNOME_STOCK_BUTTON_CLOSE  },
@@ -256,6 +420,214 @@ static gnome_map_t gnome_stock_button_mapping [] = {
         { "UP",     GNOME_STOCK_BUTTON_UP     },
         { "YES",    GNOME_STOCK_BUTTON_YES    },
 };
+static const gnome_map_t gnome_stock_pixmap_mapping [] = {
+	{ "ABOUT", GNOME_STOCK_PIXMAP_ABOUT },
+	{ "ADD", GNOME_STOCK_PIXMAP_ADD },
+	{ "ALIGN_CENTER", GNOME_STOCK_PIXMAP_ALIGN_CENTER },
+	{ "ALIGN_JUSTIFY", GNOME_STOCK_PIXMAP_ALIGN_JUSTIFY },
+	{ "ALIGN_LEFT", GNOME_STOCK_PIXMAP_ALIGN_LEFT },
+	{ "ALIGN_RIGHT", GNOME_STOCK_PIXMAP_ALIGN_RIGHT },
+	{ "ATTACH", GNOME_STOCK_PIXMAP_ATTACH },
+	{ "BACK", GNOME_STOCK_PIXMAP_BACK },
+	{ "BOOK_BLUE", GNOME_STOCK_PIXMAP_BOOK_BLUE },
+	{ "BOOK_GREEN", GNOME_STOCK_PIXMAP_BOOK_GREEN },
+	{ "BOOK_OPEN", GNOME_STOCK_PIXMAP_BOOK_OPEN },
+	{ "BOOK_RED", GNOME_STOCK_PIXMAP_BOOK_RED },
+	{ "BOOK_YELLOW", GNOME_STOCK_PIXMAP_BOOK_YELLOW },
+	{ "BOTTOM", GNOME_STOCK_PIXMAP_BOTTOM },
+	{ "CDROM", GNOME_STOCK_PIXMAP_CDROM },
+	{ "CLEAR", GNOME_STOCK_PIXMAP_CLEAR },
+	{ "CLOSE", GNOME_STOCK_PIXMAP_CLOSE },
+	{ "COLORSELECTOR", GNOME_STOCK_PIXMAP_COLORSELECTOR },
+	{ "CONVERT", GNOME_STOCK_PIXMAP_CONVERT },
+	{ "COPY", GNOME_STOCK_PIXMAP_COPY },
+	{ "CUT", GNOME_STOCK_PIXMAP_CUT },
+	{ "DISABLED", GNOME_STOCK_PIXMAP_DISABLED },
+	{ "DOWN", GNOME_STOCK_PIXMAP_DOWN },
+	{ "EXEC", GNOME_STOCK_PIXMAP_EXEC },
+	{ "FIRST", GNOME_STOCK_PIXMAP_FIRST },
+	{ "FOCUSED", GNOME_STOCK_PIXMAP_FOCUSED },
+	{ "FONT", GNOME_STOCK_PIXMAP_FONT },
+	{ "FORWARD", GNOME_STOCK_PIXMAP_FORWARD },
+	{ "HELP", GNOME_STOCK_PIXMAP_HELP },
+	{ "HOME", GNOME_STOCK_PIXMAP_HOME },
+	{ "INDEX", GNOME_STOCK_PIXMAP_INDEX },
+	{ "JUMP_TO", GNOME_STOCK_PIXMAP_JUMP_TO },
+	{ "LAST", GNOME_STOCK_PIXMAP_LAST },
+	{ "LINE_IN", GNOME_STOCK_PIXMAP_LINE_IN },
+	{ "MAIL", GNOME_STOCK_PIXMAP_MAIL },
+	{ "MAIL_FWD", GNOME_STOCK_PIXMAP_MAIL_FWD },
+	{ "MAIL_NEW", GNOME_STOCK_PIXMAP_MAIL_NEW },
+	{ "MAIL_RCV", GNOME_STOCK_PIXMAP_MAIL_RCV },
+	{ "MAIL_RPL", GNOME_STOCK_PIXMAP_MAIL_RPL },
+	{ "MAIL_SND", GNOME_STOCK_PIXMAP_MAIL_SND },
+	{ "MIC", GNOME_STOCK_PIXMAP_MIC },
+	{ "MIDI", GNOME_STOCK_PIXMAP_MIDI },
+	{ "MULTIPLE", GNOME_STOCK_PIXMAP_MULTIPLE },
+	{ "NEW", GNOME_STOCK_PIXMAP_NEW },
+	{ "NOT", GNOME_STOCK_PIXMAP_NOT },
+	{ "OPEN", GNOME_STOCK_PIXMAP_OPEN },
+	{ "PASTE", GNOME_STOCK_PIXMAP_PASTE },
+	{ "PREFERENCES", GNOME_STOCK_PIXMAP_PREFERENCES },
+	{ "PRINT", GNOME_STOCK_PIXMAP_PRINT },
+	{ "PROPERTIES", GNOME_STOCK_PIXMAP_PROPERTIES },
+	{ "QUIT", GNOME_STOCK_PIXMAP_QUIT },
+	{ "QUIT", GNOME_STOCK_PIXMAP_QUIT },
+	{ "REDO", GNOME_STOCK_PIXMAP_REDO },
+	{ "REFRESH", GNOME_STOCK_PIXMAP_REFRESH },
+	{ "REGULAR", GNOME_STOCK_PIXMAP_REGULAR },
+	{ "REMOVE", GNOME_STOCK_PIXMAP_REMOVE },
+	{ "REVERT", GNOME_STOCK_PIXMAP_REVERT },
+	{ "SAVE", GNOME_STOCK_PIXMAP_SAVE },
+	{ "SAVE_AS", GNOME_STOCK_PIXMAP_SAVE_AS },
+	{ "SCORES", GNOME_STOCK_PIXMAP_SCORES },
+	{ "SEARCH", GNOME_STOCK_PIXMAP_SEARCH },
+	{ "SPELLCHECK", GNOME_STOCK_PIXMAP_SPELLCHECK },
+	{ "SRCHRPL", GNOME_STOCK_PIXMAP_SRCHRPL },
+	{ "STOP", GNOME_STOCK_PIXMAP_STOP },
+	{ "TABLE_BORDERS", GNOME_STOCK_PIXMAP_TABLE_BORDERS },
+	{ "TABLE_FILL", GNOME_STOCK_PIXMAP_TABLE_FILL },
+	{ "TEXT_BOLD", GNOME_STOCK_PIXMAP_TEXT_BOLD },
+	{ "TEXT_BULLETED_LIST", GNOME_STOCK_PIXMAP_TEXT_BULLETED_LIST },
+	{ "TEXT_INDENT", GNOME_STOCK_PIXMAP_TEXT_INDENT },
+	{ "TEXT_ITALIC", GNOME_STOCK_PIXMAP_TEXT_ITALIC },
+	{ "TEXT_NUMBERED_LIST", GNOME_STOCK_PIXMAP_TEXT_NUMBERED_LIST },
+	{ "TEXT_STRIKEOUT", GNOME_STOCK_PIXMAP_TEXT_STRIKEOUT },
+	{ "TEXT_UNDERLINE", GNOME_STOCK_PIXMAP_TEXT_UNDERLINE },
+	{ "TEXT_UNINDENT", GNOME_STOCK_PIXMAP_TEXT_UNINDENT },
+	{ "TIMER", GNOME_STOCK_PIXMAP_TIMER },
+	{ "TIMER_STOP", GNOME_STOCK_PIXMAP_TIMER_STOP },
+	{ "TOP", GNOME_STOCK_PIXMAP_TOP },
+	{ "TRASH", GNOME_STOCK_PIXMAP_TRASH },
+	{ "TRASH_FULL", GNOME_STOCK_PIXMAP_TRASH_FULL },
+	{ "UNDELETE", GNOME_STOCK_PIXMAP_UNDELETE },
+	{ "UNDO", GNOME_STOCK_PIXMAP_UNDO },
+	{ "UP", GNOME_STOCK_PIXMAP_UP },
+	{ "VOLUME", GNOME_STOCK_PIXMAP_VOLUME },
+};
+static const gnome_map_t gnome_stock_menu_mapping [] = {
+	{ "ABOUT", GNOME_STOCK_MENU_ABOUT },
+	{ "ALIGN_CENTER", GNOME_STOCK_MENU_ALIGN_CENTER },
+	{ "ALIGN_JUSTIFY", GNOME_STOCK_MENU_ALIGN_JUSTIFY },
+	{ "ALIGN_LEFT", GNOME_STOCK_MENU_ALIGN_LEFT },
+	{ "ALIGN_RIGHT", GNOME_STOCK_MENU_ALIGN_RIGHT },
+	{ "ATTACH", GNOME_STOCK_MENU_ATTACH },
+	{ "BACK", GNOME_STOCK_MENU_BACK },
+	{ "BLANK", GNOME_STOCK_MENU_BLANK },
+	{ "BOOK_BLUE", GNOME_STOCK_MENU_BOOK_BLUE },
+	{ "BOOK_GREEN", GNOME_STOCK_MENU_BOOK_GREEN },
+	{ "BOOK_OPEN", GNOME_STOCK_MENU_BOOK_OPEN },
+	{ "BOOK_RED", GNOME_STOCK_MENU_BOOK_RED },
+	{ "BOOK_YELLOW", GNOME_STOCK_MENU_BOOK_YELLOW },
+	{ "BOTTOM", GNOME_STOCK_MENU_BOTTOM },
+	{ "CDROM", GNOME_STOCK_MENU_CDROM },
+	{ "CLOSE", GNOME_STOCK_MENU_CLOSE },
+	{ "CONVERT", GNOME_STOCK_MENU_CONVERT },
+	{ "COPY", GNOME_STOCK_MENU_COPY },
+	{ "CUT", GNOME_STOCK_MENU_CUT },
+	{ "DOWN", GNOME_STOCK_MENU_DOWN },
+	{ "EXEC", GNOME_STOCK_MENU_EXEC },
+	{ "FIRST", GNOME_STOCK_MENU_FIRST },
+	{ "FONT", GNOME_STOCK_MENU_FONT },
+	{ "FORWARD", GNOME_STOCK_MENU_FORWARD },
+	{ "HOME", GNOME_STOCK_MENU_HOME },
+	{ "INDEX", GNOME_STOCK_MENU_INDEX },
+	{ "JUMP_TO", GNOME_STOCK_MENU_JUMP_TO },
+	{ "LAST", GNOME_STOCK_MENU_LAST },
+	{ "LINE_IN", GNOME_STOCK_MENU_LINE_IN },
+	{ "MAIL", GNOME_STOCK_MENU_MAIL },
+	{ "MAIL_FWD", GNOME_STOCK_MENU_MAIL_FWD },
+	{ "MAIL_NEW", GNOME_STOCK_MENU_MAIL_NEW },
+	{ "MAIL_RCV", GNOME_STOCK_MENU_MAIL_RCV },
+	{ "MAIL_RPL", GNOME_STOCK_MENU_MAIL_RPL },
+	{ "MAIL_SND", GNOME_STOCK_MENU_MAIL_SND },
+	{ "MIC", GNOME_STOCK_MENU_MIC },
+	{ "MIDI", GNOME_STOCK_MENU_MIDI },
+	{ "NEW", GNOME_STOCK_MENU_NEW },
+	{ "OPEN", GNOME_STOCK_MENU_OPEN },
+	{ "PASTE", GNOME_STOCK_MENU_PASTE },
+	{ "PREF", GNOME_STOCK_MENU_PREF },
+	{ "PRINT", GNOME_STOCK_MENU_PRINT },
+	{ "PROP", GNOME_STOCK_MENU_PROP },
+	{ "QUIT", GNOME_STOCK_MENU_QUIT },
+	{ "QUIT", GNOME_STOCK_MENU_QUIT },
+	{ "REDO", GNOME_STOCK_MENU_REDO },
+	{ "REFRESH", GNOME_STOCK_MENU_REFRESH },
+	{ "REVERT", GNOME_STOCK_MENU_REVERT },
+	{ "SAVE", GNOME_STOCK_MENU_SAVE },
+	{ "SAVE_AS", GNOME_STOCK_MENU_SAVE_AS },
+	{ "SCORES", GNOME_STOCK_MENU_SCORES },
+	{ "SEARCH", GNOME_STOCK_MENU_SEARCH },
+	{ "SPELLCHECK", GNOME_STOCK_MENU_SPELLCHECK },
+	{ "SRCHRPL", GNOME_STOCK_MENU_SRCHRPL },
+	{ "STOP", GNOME_STOCK_MENU_STOP },
+	{ "TEXT_BOLD", GNOME_STOCK_MENU_TEXT_BOLD },
+	{ "TEXT_ITALIC", GNOME_STOCK_MENU_TEXT_ITALIC },
+	{ "TEXT_STRIKEOUT", GNOME_STOCK_MENU_TEXT_STRIKEOUT },
+	{ "TEXT_UNDERLINE", GNOME_STOCK_MENU_TEXT_UNDERLINE },
+	{ "TIMER", GNOME_STOCK_MENU_TIMER },
+	{ "TIMER_STOP", GNOME_STOCK_MENU_TIMER_STOP },
+	{ "TOP", GNOME_STOCK_MENU_TOP },
+	{ "TRASH", GNOME_STOCK_MENU_TRASH },
+	{ "TRASH_FULL", GNOME_STOCK_MENU_TRASH_FULL },
+	{ "UNDELETE", GNOME_STOCK_MENU_UNDELETE },
+	{ "UNDO", GNOME_STOCK_MENU_UNDO },
+	{ "UP", GNOME_STOCK_MENU_UP },
+	{ "VOLUME", GNOME_STOCK_MENU_VOLUME },
+};
+
+typedef struct {
+        const char *extension;
+        GnomeUIInfo data;
+} gnomeuiinfo_map_t;
+
+static GnomeUIInfo tmptree[] = {
+	GNOMEUIINFO_END
+};
+
+static const gnomeuiinfo_map_t gnome_uiinfo_mapping[] = {
+	{ "ABOUT_ITEM", GNOMEUIINFO_MENU_ABOUT_ITEM(NULL, NULL) },
+	{ "CLEAR_ITEM", GNOMEUIINFO_MENU_CLEAR_ITEM(NULL, NULL) },
+	{ "CLOSE_ITEM", GNOMEUIINFO_MENU_CLOSE_ITEM(NULL, NULL) },
+	{ "CLOSE_WINDOW_ITEM", GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM(NULL,NULL) },
+	{ "COPY_ITEM", GNOMEUIINFO_MENU_COPY_ITEM(NULL, NULL) },
+	{ "CUT_ITEM", GNOMEUIINFO_MENU_CUT_ITEM(NULL, NULL) },
+	{ "EDIT_TREE", GNOMEUIINFO_MENU_EDIT_TREE(tmptree) },
+	{ "END_GAME_ITEM", GNOMEUIINFO_MENU_END_GAME_ITEM(NULL, NULL) },
+	{ "EXIT_ITEM", GNOMEUIINFO_MENU_EXIT_ITEM(NULL, NULL) },
+	{ "FILES_TREE", GNOMEUIINFO_MENU_FILES_TREE(tmptree) },
+	{ "FILE_TREE", GNOMEUIINFO_MENU_FILE_TREE(tmptree) },
+	{ "FIND_AGAIN_ITEM", GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(NULL, NULL) },
+	{ "FIND_ITEM", GNOMEUIINFO_MENU_FIND_ITEM(NULL, NULL) },
+	{ "GAME_TREE", GNOMEUIINFO_MENU_GAME_TREE(tmptree) },
+	{ "HELP_TREE", GNOMEUIINFO_MENU_HELP_TREE(tmptree) },
+	{ "HINT_ITEM", GNOMEUIINFO_MENU_HINT_ITEM(NULL, NULL) },
+	{ "NEW_GAME_ITEM", GNOMEUIINFO_MENU_NEW_GAME_ITEM(NULL, NULL) },
+	{ "NEW_ITEM", GNOMEUIINFO_MENU_NEW_ITEM(NULL, NULL, NULL, NULL) },
+	{ "NEW_WINDOW_ITEM", GNOMEUIINFO_MENU_NEW_WINDOW_ITEM(NULL, NULL) },
+	{ "OPEN_ITEM", GNOMEUIINFO_MENU_OPEN_ITEM(NULL, NULL) },
+	{ "PASTE_ITEM", GNOMEUIINFO_MENU_PASTE_ITEM(NULL, NULL) },
+	{ "PAUSE_GAME_ITEM", GNOMEUIINFO_MENU_PAUSE_GAME_ITEM(NULL, NULL) },
+	{ "PREFERENCES_ITEM", GNOMEUIINFO_MENU_PREFERENCES_ITEM(NULL, NULL) },
+	{ "PRINT_ITEM", GNOMEUIINFO_MENU_PRINT_ITEM(NULL, NULL) },
+	{ "PRINT_SETUP_ITEM", GNOMEUIINFO_MENU_PRINT_SETUP_ITEM(NULL, NULL) },
+	{ "PROPERTIES_ITEM", GNOMEUIINFO_MENU_PROPERTIES_ITEM(NULL, NULL) },
+	{ "REDO_ITEM", GNOMEUIINFO_MENU_REDO_ITEM(NULL, NULL) },
+	{ "REDO_MOVE_ITEM", GNOMEUIINFO_MENU_REDO_MOVE_ITEM(NULL, NULL) },
+	{ "REPLACE_ITEM", GNOMEUIINFO_MENU_REPLACE_ITEM(NULL, NULL) },
+	{ "RESTART_GAME_ITEM", GNOMEUIINFO_MENU_RESTART_GAME_ITEM(NULL,NULL) },
+	{ "REVERT_ITEM", GNOMEUIINFO_MENU_REVERT_ITEM(NULL, NULL) },
+	{ "SAVE_AS_ITEM", GNOMEUIINFO_MENU_SAVE_AS_ITEM(NULL, NULL) },
+	{ "SAVE_ITEM", GNOMEUIINFO_MENU_SAVE_ITEM(NULL, NULL) },
+	{ "SCORES_ITEM", GNOMEUIINFO_MENU_SCORES_ITEM(NULL, NULL) },
+	{ "SELECT_ALL_ITEM", GNOMEUIINFO_MENU_SELECT_ALL_ITEM(NULL, NULL) },
+	{ "SETTINGS_TREE", GNOMEUIINFO_MENU_SETTINGS_TREE(tmptree) },
+	{ "UNDO_ITEM", GNOMEUIINFO_MENU_UNDO_ITEM(NULL, NULL) },
+	{ "UNDO_MOVE_ITEM", GNOMEUIINFO_MENU_UNDO_MOVE_ITEM(NULL, NULL) },
+	{ "VIEW_TREE", GNOMEUIINFO_MENU_VIEW_TREE(tmptree) },
+	{ "WINDOWS_TREE", GNOMEUIINFO_MENU_WINDOWS_TREE(tmptree) },
+};
+
 static int
 stock_compare (const void *a, const void *b)
 {
@@ -268,27 +640,81 @@ stock_compare (const void *a, const void *b)
 static const char *
 get_stock_name (const char *stock_name)
 {
-        const int len = strlen ("GNOME_STOCK_BUTTON_");
+        const int blen = strlen ("GNOME_STOCK_BUTTON_");
+	const int plen = strlen ("GNOME_STOCK_PIXMAP_");
+	const int mlen = strlen ("GNOME_STOCK_MENU_");
 	gnome_map_t *v;
 	gnome_map_t base;
 
         /* If an error happens, return this */
-        if (strncmp (stock_name, "GNOME_STOCK_BUTTON_", len) != 0)
-                return NULL;
-
-        base.extension = stock_name + len;
-        v = bsearch (
-                &base,
-                gnome_stock_button_mapping,
-                sizeof(gnome_stock_button_mapping) / sizeof(gnome_map_t),
-                sizeof (gnome_stock_button_mapping [0]),
-                stock_compare);
-        if (v)
-                return v->mapping;
-        else
-                return NULL;
+        if (!strncmp (stock_name, "GNOME_STOCK_BUTTON_", blen)) {
+		base.extension = stock_name + blen;
+		v = bsearch (
+			     &base,
+			     gnome_stock_button_mapping,
+			     sizeof(gnome_stock_button_mapping) /
+			       sizeof(gnome_map_t),
+			     sizeof (gnome_stock_button_mapping [0]),
+			     stock_compare);
+		if (v)
+			return v->mapping;
+		else
+			return NULL;
+	} else if (!strncmp (stock_name, "GNOME_STOCK_PIXMAP_", plen)) {
+		base.extension = stock_name + plen;
+		v = bsearch (
+			     &base,
+			     gnome_stock_pixmap_mapping,
+			     sizeof(gnome_stock_pixmap_mapping) /
+			       sizeof(gnome_map_t),
+			     sizeof (gnome_stock_pixmap_mapping [0]),
+			     stock_compare);
+		if (v)
+			return v->mapping;
+		else
+			return NULL;
+	} else if (!strncmp (stock_name, "GNOME_STOCK_MENU_", mlen)) {
+		base.extension = stock_name + mlen;
+		v = bsearch (
+			     &base,
+			     gnome_stock_menu_mapping,
+			     sizeof(gnome_stock_menu_mapping) /
+			       sizeof(gnome_map_t),
+			     sizeof (gnome_stock_menu_mapping [0]),
+			     stock_compare);
+		if (v)
+			return v->mapping;
+		else
+			return NULL;
+	}
+	return NULL;
 }
 
+static gboolean
+get_stock_uiinfo (const char *stock_name, GnomeUIInfo *info)
+{
+        const int len = strlen ("GNOMEUIINFO_MENU_");
+	gnomeuiinfo_map_t *v;
+	gnomeuiinfo_map_t base;
+
+        /* If an error happens, return this */
+        if (!strncmp (stock_name, "GNOMEUIINFO_MENU_", len)) {
+		base.extension = stock_name + len;
+		v = bsearch (
+			     &base,
+			     gnome_uiinfo_mapping,
+			     sizeof(gnome_uiinfo_mapping) /
+			     sizeof(gnomeuiinfo_map_t),
+			     sizeof (gnome_uiinfo_mapping [0]),
+			     stock_compare);
+		if (v) {
+			*info = v->data;
+			return TRUE;
+		} else
+			return FALSE;
+	}
+	return FALSE;
+}
 static GtkWidget *
 stock_button_new(GladeXML *xml, GNode *node)
 {
@@ -673,13 +1099,26 @@ dockitem_new(GladeXML *xml, GNode *node)
 }
 
 static GtkWidget *
+menubar_new(GladeXML *xml, GNode *node)
+{
+	return gtk_menu_bar_new();
+}
+
+static GtkWidget *
+menu_new(GladeXML *xml, GNode *node)
+{
+	return gtk_menu_new();
+}
+
+static GtkWidget *
 pixmapmenuitem_new(GladeXML *xml, GNode *node)
 {
 	/* This needs to be rewritten to handle the GNOMEUIINFO_* macros.
 	 * For now, we have something that is useable, but not perfect */
 	GtkWidget *wid;
         xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
-	char *label = NULL, *stock_item = NULL;
+	char *label = NULL;
+	const char *stock_icon = NULL;
 	gboolean right = FALSE;
 
 	for (; info; info = info->next) {
@@ -688,29 +1127,74 @@ pixmapmenuitem_new(GladeXML *xml, GNode *node)
 		if (!strcmp(info->name, "label")) {
 			if (label) g_free(label);
 			label = g_strdup(content);
-		} else if (!strcmp(info->name, "stock_item")) {
-			if (stock_item) g_free(stock_item);
-			if (!strncmp(content, "GNOMEUIINFO_", 12))
-				stock_item = g_strdup(content+12);
-			else
-				stock_item = g_strdup(content);
+		} else if (!strcmp(info->name, "stock_icon")) {
+			stock_icon = get_stock_name(content);
 		} else if (!strcmp(info->name, "right_justify"))
 			right = content[0] == 'T';
 		if (content) free(content);
 	}
-	if (!label) {
-		label = stock_item;
-		stock_item = NULL;
+	wid = gtk_pixmap_menu_item_new();
+	if (label) {
+		GtkWidget *lwid = gtk_label_new(label);
+		gtk_container_add(GTK_CONTAINER(wid), lwid);
+		gtk_widget_show(lwid);
+		g_free(label);
 	}
-	if (label)
-		wid = gtk_menu_item_new_with_label(label);
-	else
-		wid = gtk_menu_item_new();
-	if (label) g_free(label);
-	if (stock_item) g_free(stock_item);
+	if (stock_icon) {
+		GtkWidget *iconw = gnome_stock_new_with_icon(stock_icon);
+		gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(wid),
+						iconw);
+		gtk_widget_show(iconw);
+	}
 	if (right)
 		gtk_menu_item_right_justify(GTK_MENU_ITEM(wid));
 	return wid;
+}
+
+static GtkWidget *
+toolbar_new(GladeXML *xml, GNode *node)
+{
+	GtkWidget *tool;
+	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	GtkOrientation orient = GTK_ORIENTATION_HORIZONTAL;
+	GtkToolbarStyle style = GTK_TOOLBAR_BOTH;
+	GtkToolbarSpaceStyle spaces = GTK_TOOLBAR_SPACE_EMPTY;
+	int space_size = 5;
+	gboolean tooltips = TRUE;
+
+	for (; info; info = info->next) {
+		char *content = xmlNodeGetContent(info);
+
+		switch (info->name[0]) {
+		case 'o':
+			if (!strcmp(info->name, "orientation"))
+				orient = glade_enum_from_string(GTK_TYPE_ORIENTATION,
+								content);
+			break;
+		case 's':
+			if (!strcmp(info->name, "space_size"))
+				space_size = strtol(content, NULL, 0);
+			else if (!strcmp(info->name, "space_style"))
+				spaces = glade_enum_from_string(
+					GTK_TYPE_TOOLBAR_SPACE_STYLE, content);
+			break;
+		case 't':
+			if (!strcmp(info->name, "type"))
+				style = glade_enum_from_string(
+					GTK_TYPE_TOOLBAR_STYLE, content);
+			else if (!strcmp(info->name, "tooltips"))
+				tooltips = content[0] == 'T';
+			break;
+		}
+
+		if (content)
+			free(content);
+	}
+	tool = gtk_toolbar_new(orient, style);
+	gtk_toolbar_set_space_size(GTK_TOOLBAR(tool), space_size);
+	gtk_toolbar_set_space_style(GTK_TOOLBAR(tool), spaces);
+	gtk_toolbar_set_tooltips(GTK_TOOLBAR(tool), tooltips);
+	return tool;
 }
 
 static GtkWidget *
@@ -935,7 +1419,9 @@ static const GladeWidgetBuildData widget_data [] = {
 
 	{ "GnomeDock",          dock_new,           dock_build_children},
 	{ "GnomeDockItem",      dockitem_new,   glade_standard_build_children},
-	{ "GtkMenuItem",        pixmapmenuitem_new, menuitem_build_children},
+	{ "GtkToolbar",         toolbar_new,        toolbar_build_children},
+	{ "GtkMenuBar",         menubar_new,        menushell_build_children},
+	{ "GtkMenu",            menu_new,           menushell_build_children},
 	{ "GtkPixmapMenuItem",  pixmapmenuitem_new, menuitem_build_children},
 
 	{ "GnomeAbout",         about_new,          NULL },
