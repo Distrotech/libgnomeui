@@ -2677,11 +2677,17 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	finished = FALSE;
 
 	while (item && !finished) {
-		parent = item->parent; /* Save the parent here as the item may be destroyed */
+		gtk_object_ref (GTK_OBJECT (item));
 
 		gtk_signal_emit (GTK_OBJECT (item), item_signals[ITEM_EVENT],
 				 &ev,
 				 &finished);
+
+		if (GTK_OBJECT_DESTROYED (item))
+			finished = TRUE;
+
+		parent = item->parent;
+		gtk_object_unref (GTK_OBJECT (item));
 
 		item = parent;
 	}
