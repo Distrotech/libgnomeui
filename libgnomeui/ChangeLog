@@ -1,3 +1,11 @@
+1998-07-01  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.[ch]: changed
+	"typedef struct _GnomeUIBuilderData *GnomeUIBuilderData" to
+	"typedef struct _GnomeUIBuilderData GnomeUIBuilderData" and
+	patched the functions using this. This will probably break some
+	apps, but changes are trivial. It seems more consistent this way.
+
 Tue Jun 30 22:02:34 PDT 1998 Manish Singh <yosh@gimp.org>
 
 	* Makefile.am: added back in the optional gnome-canvas sources

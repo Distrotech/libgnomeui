@@ -138,11 +138,11 @@ typedef struct _GnomeUIInfo GnomeUIInfo;
 
 /* Functions */
     
-typedef struct _GnomeUIBuilderData *GnomeUIBuilderData;
+typedef struct _GnomeUIBuilderData GnomeUIBuilderData;
 typedef void (*GnomeUISignalConnectFunc)(GnomeApp *app,
 					 GnomeUIInfo *info_item,
 					 gchar *signal_name,
-					 GnomeUIBuilderData uidata);
+					 GnomeUIBuilderData *uidata);
 #define GNOME_UISIGFUNC(x) ((void *)x)
 struct _GnomeUIBuilderData {
   GnomeUISignalConnectFunc connect_func;
@@ -164,7 +164,7 @@ void gnome_app_create_menus_with_data   (GnomeApp *app,
 				         gpointer data);
 void gnome_app_create_menus_custom      (GnomeApp *app,
 					 GnomeUIInfo *menuinfo,
-					 GnomeUIBuilderData uibdata);
+					 GnomeUIBuilderData *uibdata);
 void gnome_app_create_toolbar           (GnomeApp *app,
 			                 GnomeUIInfo *toolbarinfo);
 void gnome_app_create_toolbar_interp    (GnomeApp *app,
@@ -177,7 +177,7 @@ void gnome_app_create_toolbar_with_data (GnomeApp *app,
 				         gpointer data);
 void gnome_app_create_toolbar_custom    (GnomeApp *app,
 					 GnomeUIInfo *tbinfo,
-					 GnomeUIBuilderData uibdata);
+					 GnomeUIBuilderData *uibdata);
 GtkWidget *gnome_app_find_menu_pos      (GtkWidget *parent,
 					 gchar *path,
 					 gint *pos);
@@ -187,7 +187,7 @@ void gnome_app_remove_menus             (GnomeApp *app,
 void gnome_app_insert_menus_custom      (GnomeApp *app,
 					 gchar *path,
 					 GnomeUIInfo *menuinfo,
-					 GnomeUIBuilderData uibdata);
+					 GnomeUIBuilderData *uibdata);
 void gnome_app_insert_menus             (GnomeApp *app,
 					 gchar *path,
 					 GnomeUIInfo *menuinfo);

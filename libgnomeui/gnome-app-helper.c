@@ -30,43 +30,43 @@ static void gnome_app_do_menu_creation        (GnomeApp *app,
 					       GtkWidget *parent_widget,
 					       gint pos,
 					       GnomeUIInfo *menuinfo,
-					       GnomeUIBuilderData uidata);
+					       GnomeUIBuilderData *uidata);
 static void gnome_app_do_ui_signal_connect    (GnomeApp *app,
 					       GnomeUIInfo *info_item,
 					       gchar *signal_name,
-					       GnomeUIBuilderData uidata);
+					       GnomeUIBuilderData *uidata);
 static void gnome_app_do_ui_accelerator_setup (GnomeApp *app,
 					       gchar *signal_name,
-				               GnomeUIInfo *menuinfo_item);
+				         GnomeUIInfo *menuinfo_item);
 static void gnome_app_do_toolbar_creation     (GnomeApp *app,
 					       GtkWidget *parent_widget,
 					       GnomeUIInfo *tbinfo,
-					       GnomeUIBuilderData uidata);
+					       GnomeUIBuilderData *uidata);
 static gint gnome_app_add_help_menu_entries   (GnomeApp *app,
 					       GtkWidget *parent_widget,
 					       gint pos,
-				               GnomeUIInfo *menuinfo_item);
+                 GnomeUIInfo *menuinfo_item);
 static gint gnome_app_add_radio_menu_entries  (GnomeApp *app,
 					       GtkWidget *parent_widget,
 					       gint pos,
 					       GnomeUIInfo *menuinfo,
-					       GnomeUIBuilderData uidata);
+					       GnomeUIBuilderData *uidata);
 static void gnome_app_add_radio_toolbar_entries(GnomeApp *app,
 						GtkWidget *parent_widget,
 						GnomeUIInfo *tbinfo,
-						GnomeUIBuilderData uidata);
+						GnomeUIBuilderData *uidata);
 
 static void
 gnome_app_do_menu_creation(GnomeApp *app,
 			   GtkWidget *parent_widget,
 			   gint pos,
 			   GnomeUIInfo *menuinfo,
-			   GnomeUIBuilderData uidata)
+			   GnomeUIBuilderData *uidata)
 {
   int i;
   int has_stock_pixmaps = FALSE;
   int justify_right = FALSE;
-  GnomeUIBuilderData orig_uidata;
+  GnomeUIBuilderData *orig_uidata;
 
   /* store a pointer to the original uidata structure to use it for the
      subtrees */
@@ -93,7 +93,7 @@ gnome_app_do_menu_creation(GnomeApp *app,
     /* set the builder data for the following entries. this builder data is used with all the
        following items in this GnomeUIInfo array. it does not apply to the subtrees nor other
        GnomeUIInfo arrays on the same level */
-    uidata = (GnomeUIBuilderData)menuinfo[i].moreinfo;
+    uidata = (GnomeUIBuilderData *)menuinfo[i].moreinfo;
     break;
 
 	case GNOME_APP_UI_JUSTIFY_RIGHT:
@@ -209,7 +209,7 @@ gnome_app_add_radio_menu_entries(GnomeApp *app,
 				 GtkWidget *parent_widget,
 				 gint pos,
 				 GnomeUIInfo *menuinfo,
-				 GnomeUIBuilderData uidata)
+				 GnomeUIBuilderData *uidata)
 {
   GSList *group = NULL;
 
@@ -224,7 +224,7 @@ gnome_app_add_radio_menu_entries(GnomeApp *app,
         menuinfo++;
       }
       else if (menuinfo->type == GNOME_APP_UI_BUILDER_DATA)
-        uidata = (GnomeUIBuilderData)menuinfo->moreinfo;
+        uidata = (GnomeUIBuilderData *)menuinfo->moreinfo;
       else {
         menuinfo->widget = gtk_radio_menu_item_new_with_label(group, _(menuinfo->label));
         group = gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM(menuinfo->widget));
@@ -316,7 +316,7 @@ gnome_app_add_help_menu_entries(GnomeApp *app,
 void
 gnome_app_create_menus_custom (GnomeApp *app,
 			       GnomeUIInfo *menuinfo,
-			       GnomeUIBuilderData uibdata)
+			       GnomeUIBuilderData *uibdata)
 {
   GtkWidget *menubar;
 #ifdef GTK_HAVE_ACCEL_GROUP
@@ -358,8 +358,8 @@ void
 gnome_app_create_menus(GnomeApp *app,
 		       GnomeUIInfo *menuinfo)
 {
-  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-					NULL, FALSE, NULL, NULL};
+  GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+                                NULL, FALSE, NULL, NULL};
 
   gnome_app_create_menus_custom(app, menuinfo, &uidata);
 }
@@ -369,8 +369,8 @@ gnome_app_create_menus_with_data(GnomeApp *app,
 				 GnomeUIInfo *menuinfo,
 				 gpointer data)
 {
-  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-					NULL, FALSE, NULL, NULL };
+  GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+                                NULL, FALSE, NULL, NULL };
 	
   uidata.data = data;
 
@@ -384,8 +384,8 @@ gnome_app_create_menus_interp (GnomeApp *app,
 			       gpointer data,
 			       GtkDestroyNotify destroy_func)
 {
-  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-					NULL, FALSE, NULL, NULL };
+  GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+                                NULL, FALSE, NULL, NULL };
 
   uidata.data = data;
   uidata.is_interp = TRUE;
@@ -399,7 +399,7 @@ static void
 gnome_app_do_toolbar_creation(GnomeApp *app,
 			      GtkWidget *parent_widget,
 			      GnomeUIInfo *tbinfo,
-			      GnomeUIBuilderData uidata)
+			      GnomeUIBuilderData *uidata)
 {
   int i, set_accel;
   GtkWidget *pmap;
@@ -426,7 +426,7 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
     /* set the builder data for the following entries. this builder data is used with all the
        following items in this GnomeUIInfo array. it does not apply to the subtrees nor other
        GnomeUIInfo arrays on the same level */
-    uidata = (GnomeUIBuilderData)tbinfo[i].moreinfo;
+    uidata = (GnomeUIBuilderData *)tbinfo[i].moreinfo;
     break;
 
 	case GNOME_APP_UI_RADIOITEMS:
@@ -497,7 +497,7 @@ static void
 gnome_app_add_radio_toolbar_entries(GnomeApp *app,
 				    GtkWidget *parent_widget,
 				    GnomeUIInfo *tbinfo,
-				    GnomeUIBuilderData uidata)
+				    GnomeUIBuilderData *uidata)
 {
   GtkWidget *group = NULL;
   GtkWidget *pmap;
@@ -507,7 +507,7 @@ gnome_app_add_radio_toolbar_entries(GnomeApp *app,
   while (tbinfo->type != GNOME_APP_UI_ENDOFINFO)
     {
       if(tbinfo->type == GNOME_APP_UI_BUILDER_DATA)
-         uidata = (GnomeUIBuilderData)tbinfo->moreinfo;
+         uidata = (GnomeUIBuilderData *)tbinfo->moreinfo;
       else {
         switch(tbinfo->pixmap_type) {
         case GNOME_APP_PIXMAP_DATA:
@@ -545,7 +545,7 @@ gnome_app_add_radio_toolbar_entries(GnomeApp *app,
 void
 gnome_app_create_toolbar_custom (GnomeApp *app,
 				 GnomeUIInfo *tbinfo,
-				 GnomeUIBuilderData uibdata)
+				 GnomeUIBuilderData *uibdata)
 {
   GtkWidget *tb;
 
@@ -564,8 +564,8 @@ void
 gnome_app_create_toolbar(GnomeApp *app,
 			 GnomeUIInfo *toolbarinfo)
 {
-  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-					NULL, FALSE, NULL, NULL };
+  GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+                                NULL, FALSE, NULL, NULL };
 
   gnome_app_create_toolbar_custom(app, toolbarinfo, &uidata);
 }
@@ -575,8 +575,8 @@ gnome_app_create_toolbar_with_data(GnomeApp *app,
 				   GnomeUIInfo *toolbarinfo,
 				   gpointer data)
 {
-  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-					NULL, FALSE, NULL, NULL };
+  GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+                                NULL, FALSE, NULL, NULL };
 
   uidata.data = data;
   gnome_app_create_toolbar_custom(app, toolbarinfo, &uidata);
@@ -589,8 +589,8 @@ gnome_app_create_toolbar_interp (GnomeApp *app,
 				 gpointer data,
 				 GtkDestroyNotify destroy_func)
 {
-  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-					NULL, FALSE, NULL, NULL };
+  GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+                                NULL, FALSE, NULL, NULL };
 
   uidata.data = data;
   uidata.is_interp = TRUE;
@@ -604,7 +604,7 @@ static void
 gnome_app_do_ui_signal_connect (GnomeApp *app,
 				GnomeUIInfo *info_item,
 				gchar *signal_name,
-				GnomeUIBuilderData uidata)
+				GnomeUIBuilderData *uidata)
 {
   if(uidata->is_interp)
     gtk_signal_connect_interp(GTK_OBJECT(info_item->widget),
@@ -792,7 +792,7 @@ void
 gnome_app_insert_menus_custom (GnomeApp *app,
 			       gchar *path,
 			       GnomeUIInfo *menuinfo,
-			       GnomeUIBuilderData uibdata)
+			       GnomeUIBuilderData *uibdata)
 {
   GtkWidget *parent;
 #ifdef GTK_HAVE_ACCEL_GROUP
@@ -829,8 +829,8 @@ gnome_app_insert_menus(GnomeApp *app,
 		       gchar *path,
 		       GnomeUIInfo *menuinfo)
 {
-  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-					NULL, FALSE, NULL, NULL};
+  GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+                                NULL, FALSE, NULL, NULL};
 
   gnome_app_insert_menus_custom(app, path, menuinfo, &uidata);
 }
@@ -841,8 +841,8 @@ gnome_app_insert_menus_with_data(GnomeApp *app,
 				 GnomeUIInfo *menuinfo,
 				 gpointer data)
 {
-  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-					NULL, FALSE, NULL, NULL };
+  GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+                                NULL, FALSE, NULL, NULL };
 	
   uidata.data = data;
 
@@ -857,8 +857,8 @@ gnome_app_insert_menus_interp (GnomeApp *app,
 			       gpointer data,
 			       GtkDestroyNotify destroy_func)
 {
-  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-					NULL, FALSE, NULL, NULL };
+  GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+                                NULL, FALSE, NULL, NULL };
 
   uidata.data = data;
   uidata.is_interp = TRUE;
