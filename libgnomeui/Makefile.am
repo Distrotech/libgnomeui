@@ -98,7 +98,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-icon-text.c		\
 	gnome-vfs-util.c		\
 	gnome-window.c			\
-	wap-textfu.c			\
 	$(noinst_HEADERS)
 
 ## this lists all the non-generated headers
@@ -137,7 +136,6 @@ gnome_headers = \
 	gtk-clock.h			\
 	gnome-vfs-util.h		\
 	gnome-window.h			\
-	wap-textfu.h			\
 	oafgnome.h
 
 libinclude_HEADERS = \

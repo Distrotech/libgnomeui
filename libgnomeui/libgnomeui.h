@@ -68,14 +68,12 @@
 #include <libgnomeui/gnome-druid-page-standard.h>
 #include <libgnomeui/oafgnome.h>
 #include <libgnomeui/gnome-vfs-util.h>
-#include <libgnomeui/wap-textfu.h>
 
 #ifdef FIXME
 #include <libgnomeui/gnome-mdi.h>
 #include <libgnomeui/gnome-mdi-child.h>
 #include <libgnomeui/gnome-mdi-generic-child.h>
 #include <libgnomeui/gnome-mdi-session.h>
-#include <libgnomeui/gnome-helpsys.h>
 #include <libgnomeui/gnome-popup-menu.h>
 #include <libgnomeui/gnome-popup-help.h>
 #include <libgnomeui/gnome-textfu.h>

@@ -1,5 +1,9 @@
 2001-06-14  Martin Baulig  <baulig@suse.de>
 
+	* gnome-helpsys.[ch], wap-textfu.[ch]: Removed.
+
+2001-06-14  Martin Baulig  <baulig@suse.de>
+
 	* gnome-cursors.[ch]: Removed. This was a new addition, so we don't
 	need to put it into libcompat.
 
