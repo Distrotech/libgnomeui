@@ -128,6 +128,9 @@ gnome_dialog_init (GnomeDialog *dialog)
   GtkWidget * separator;
   GtkWidget * bf;
 
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
   dialog->modal = FALSE;
   dialog->self_destruct = FALSE;
   dialog->buttons = NULL;
@@ -206,6 +209,9 @@ void       gnome_dialog_append_buttons (GnomeDialog * dialog,
   va_list ap;
   const gchar * button_name = first;
 
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
   va_start(ap, first);
 
   while(button_name != NULL) {
@@ -234,6 +240,9 @@ void       gnome_dialog_append_buttons (GnomeDialog * dialog,
 void
 gnome_dialog_set_modal (GnomeDialog * dialog)
 {
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
   dialog->modal = TRUE;
   gtk_grab_add (GTK_WIDGET (dialog));
 }
@@ -242,15 +251,29 @@ void
 gnome_dialog_set_default (GnomeDialog *dialog,
 			  gint button)
 {
-  GList *list = g_list_nth (dialog->buttons, button);
+  GList *list;
 
-  if (list && list->data)
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  list = g_list_nth (dialog->buttons, button);
+
+  if (list && list->data) {
     gtk_widget_grab_default (GTK_WIDGET (list->data));
+    return;
+  }
+#ifdef GNOME_ENABLE_DEBUG
+  /* If we didn't find the button, complain */
+  g_warning("Button number %d does not appear to exist\n", button); 
+#endif
 }
 
 void       gnome_dialog_set_destroy    (GnomeDialog * dialog,
 					gboolean self_destruct)
 {
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
   dialog->self_destruct = self_destruct;
 }
 
@@ -259,25 +282,45 @@ void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
 					gboolean     setting)
 {
   GList *list;
-  int which = 0;
-  
+
+  g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  list = GNOME_DIALOG (dialog)->buttons;
+  list = g_list_nth (dialog->buttons, button);
 
-  while (list){
-    if (which == button) {
-      /* We've found the right one */
-      gtk_widget_set_sensitive(GTK_WIDGET(list->data), setting);
-      return;
-    }
-    list = list->next;
-    which ++;
+  if (list && list->data) {
+    gtk_widget_set_sensitive(GTK_WIDGET(list->data), setting);
+    return;
   }
-  
+#ifdef GNOME_ENABLE_DEBUG
   /* If we didn't find the button, complain */
   g_warning("Button number %d does not appear to exist\n", button); 
+#endif
 }
+
+void       gnome_dialog_button_connect (GnomeDialog *dialog,
+					gint button,
+					GtkSignalFunc callback,
+					gpointer data)
+{
+  GList * list;
+
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  list = g_list_nth (dialog->buttons, button);
+
+  if (list && list->data) {
+    gtk_signal_connect(GTK_OBJECT(list->data), "clicked",
+		       callback, data);
+    return;
+  }
+#ifdef GNOME_ENABLE_DEBUG
+  /* If we didn't find the button, complain */
+  g_warning("Button number %d does not appear to exist\n", button); 
+#endif
+}
+
 
 static void
 gnome_dialog_button_clicked (GtkWidget   *button, 
@@ -286,7 +329,8 @@ gnome_dialog_button_clicked (GtkWidget   *button,
   GList *list;
   int which = 0;
   gboolean self_destruct;
-
+  
+  g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
   self_destruct = GNOME_DIALOG(dialog)->self_destruct;

@@ -47,23 +47,43 @@ struct _GnomeDialogClass
 {
   GtkWindowClass parent_class;
 
-  void (* clicked)  (GnomeDialog *dialog, gint button);
+  void (* clicked)  (GnomeDialog *dialog, gint button_number);
 };
 
+/* GnomeDialog creates an action area with the buttons of your choice.
+   You should pass the button names (possibly GNOME_STOCK_BUTTON_*) as 
+   arguments to gnome_dialog_new(). The buttons are numbered in the 
+   order you passed them in, starting at 0. These numbers are used
+   in other functions, and passed to the "clicked" callback. */
 
 guint      gnome_dialog_get_type       (void);
 
 /* Arguments: Title and button names, then NULL */
 GtkWidget* gnome_dialog_new            (const gchar * title,
 					...);
+
+/* Connect to the "clicked" signal of a single button */
+void       gnome_dialog_button_connect (GnomeDialog *dialog,
+					gint button,
+					GtkSignalFunc callback,
+					gpointer data);
+
+/* Make the dialog modal */
 void       gnome_dialog_set_modal      (GnomeDialog *dialog);
+
+/* Set the default button. - it will have a little highlight, 
+   (and maybe pressing return will activate it, eventually, not 
+   coded yet.) */
 void       gnome_dialog_set_default    (GnomeDialog *dialog,
 					gint         button);
+/* Set sensitivity of a button */
 void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
 					gint         button,
 					gboolean     setting);
-/* Whether to destroy after emitting clicked signal - 
-   default is FALSE */
+
+/* Whether to destroy after emitting clicked signal - default is
+   FALSE. If clicking *any* button should nuke the dialog, set it to
+   TRUE. */
 void       gnome_dialog_set_destroy    (GnomeDialog * dialog,
 					gboolean self_destruct);
 
