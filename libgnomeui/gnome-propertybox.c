@@ -328,8 +328,7 @@ help (GtkObject *button, GnomePropertyBox *property_box)
 static void
 just_close (GtkObject *button, GnomePropertyBox *property_box)
 {
-	/* FIXME: it isn't clear what is the right thing to do here.  */
-	gtk_widget_destroy (GTK_WIDGET (property_box));
+	gtk_signal_emit_by_name (GTK_OBJECT (property_box), "delete_event");
 }
 
 /* This is connected to the OK button.  */
