@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2002-08-31 05:16+0200\n"
+"POT-Creation-Date: 2002-08-28 17:50+0200\n"
 "PO-Revision-Date: 2002-08-31 18:20+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@linuxmail.org>\n"
 "Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
@@ -104,8 +104,10 @@ msgid "Translator credits"
 msgstr "Đóng góp dịch"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Những người cộng tác dịch. Dòng tin này cần được dánh dấu có thể dịch được"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Những người cộng tác dịch. Dòng tin này cần được dánh dấu có thể dịch được"
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -255,7 +257,8 @@ msgstr "Chọn thời gian từ danh sách"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date bị phản đối, hãy dùng gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date bị phản đối, hãy dùng gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -520,7 +523,6 @@ msgstr "Chỉ dẫn cho mục 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tệp"
 
@@ -578,7 +580,6 @@ msgid "_Game"
 msgstr "Trò chơi"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Chỉ dẫn"
 
@@ -769,11 +770,11 @@ msgstr "Điều chỉnh cấu hình ứng dụng"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "Về"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Thông tin về ứng dụng này"
 
@@ -800,7 +801,7 @@ msgstr "Mở một Cửa sổ mới"
 msgid "_Close This Window"
 msgstr "Đóng cửa sổ"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Đóng cửa sổ hiện thời"
 
@@ -989,7 +990,8 @@ msgstr "Nhập thư mục"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr "Có nên dùng mục tập tin để nhập tên thư mục hay tên tập tin đầy đủ hay không."
+msgstr ""
+"Có nên dùng mục tập tin để nhập tên thư mục hay tên tập tin đầy đủ hay không."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1152,8 +1154,8 @@ msgid ""
 msgstr ""
 "Ứng dụng \"%s\"đã cố thay đổi một thực thể của cấu hình mà nhà quản trị hệ "
 "thống hay nhà phân phối hệ điều hành không cho phép thay đổi. Một số thiết "
-"lập bạn chọn có thể không có tác dụng, hay không được khôi phục khi bạn "
-"dùng ứng dụng vào lần sau."
+"lập bạn chọn có thể không có tác dụng, hay không được khôi phục khi bạn dùng "
+"ứng dụng vào lần sau."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1327,9 +1329,8 @@ msgstr "%a, %d.%m.%Y, %H.%M"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Kết thúc thử"
+#~ msgid "Exit the test"
+#~ msgstr "Kết thúc thử"
 
 #~ msgid "Find _Again"
 #~ msgstr "Tìm thêm"
@@ -1408,4 +1409,3 @@ msgstr "Kết thúc thử"
 
 #~ msgid "Author"
 #~ msgstr "Tác giả"
-

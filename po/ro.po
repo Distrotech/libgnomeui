@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0.1\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
+"POT-Creation-Date: 2002-08-28 17:50+0200\n"
 "PO-Revision-Date: 2002-09-02 20:30+0300\n"
 "Last-Translator: Mugurel Tudor <mugurelu@go.ro>\n"
 "Language-Team: română <ro@li.org>\n"
@@ -104,7 +104,8 @@ msgid "Translator credits"
 msgstr "Echipa de traducători"
 
 #: libgnomeui/gnome-about.c:406
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Echipa de traducători. Acest text ar trebui marcat ca traductibil "
 
 #: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
@@ -255,7 +256,8 @@ msgstr "Selectează ora dintr-o listă"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date este depăşit, folosiţi gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date este depăşit, folosiţi gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -413,12 +415,14 @@ msgid "GNOME GUI Library"
 msgstr "Librăria GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:591
+#: libgnomeui/gnome-ui-init.c:618
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Mai multe erori de segmentare au intervenit; nu pot afişa dialogul de eroare\n"
+msgstr ""
+"Mai multe erori de segmentare au intervenit; nu pot afişa dialogul de "
+"eroare\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:605
+#: libgnomeui/gnome-ui-init.c:632
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -437,8 +441,8 @@ msgid ""
 msgstr ""
 "Managerul de sesiune GNOME (procesul %d) a eşuat\n"
 "datorită unei erori fatale (%s).\n"
-"La închiderea acestui dialog, toate aplicaţiile vor fi închise şi "
-"sesiunea va fi încheiată.\n"
+"La închiderea acestui dialog, toate aplicaţiile vor fi închise şi sesiunea "
+"va fi încheiată.\n"
 "Vă rugăm salvaţi toate fişierele înainte de a închide acest dialog."
 
 #: libgnomeui/gnome_segv.c:110
@@ -470,7 +474,8 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Vă rugăm vizitaţi pagina GNOME Application Crash pentru mai multe informaţii"
+msgstr ""
+"Vă rugăm vizitaţi pagina GNOME Application Crash pentru mai multe informaţii"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -741,7 +746,8 @@ msgstr "Înlocuieşte un text"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
+#, fuzzy
+msgid "_Properties"
 msgstr "_Proprietăţi..."
 
 #: libgnomeui/gnome-app-helper.c:203
@@ -753,7 +759,8 @@ msgstr "Modifică proprietăţile fişierului"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
+#, fuzzy
+msgid "Prefere_nces"
 msgstr "Preferi_nţe..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -868,27 +875,31 @@ msgstr "_Termină jocul"
 msgid "End the current game"
 msgstr "Termină jocul curent"
 
-#: libgnomeui/gnome-app-helper.c:1145
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "Citeşte ajutorul pentru această aplicaţie"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
 msgstr "Text sub iconiţe"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
 msgstr "Prioritate la text sub iconiţe"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
 msgstr "Doar iconiţe"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
 msgstr "Doar text"
 
-#: libgnomeui/gnome-app-helper.c:2629
+#: libgnomeui/gnome-app-helper.c:2630
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Setări implicite desktop (%s)"
@@ -953,7 +964,7 @@ msgstr "Intrare GTK"
 msgid "The GTK entry"
 msgstr "Intrarea GTK"
 
-#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:175
+#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
 msgstr "ID istoric"
 
@@ -962,10 +973,10 @@ msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Identificator unic pentru intrarea fişierului. Acesta va fi folosit pentru a salva "
-"lista istoricului."
+"Identificator unic pentru intrarea fişierului. Acesta va fi folosit pentru a "
+"salva lista istoricului."
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:184
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr "Titlul dialogului de navigare"
 
@@ -993,7 +1004,7 @@ msgstr "Modal"
 msgid "Whether the Browse file window should be modal."
 msgstr "Dacă fereastra de Selectare fişier ar trebui să fie modală."
 
-#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:200
+#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "Nume fişier"
 
@@ -1156,10 +1167,11 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"O eroare a intervenit la încărcarea sau salvarea informaţiilor de configurare "
-"pentru %s. Unele setări de configurare ar putea să nu funcţioneze corect."
+"O eroare a intervenit la încărcarea sau salvarea informaţiilor de "
+"configurare pentru %s. Unele setări de configurare ar putea să nu "
+"funcţioneze corect."
 
-#: libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1167,86 +1179,86 @@ msgstr ""
 "Identificator unic pentru intrarea iconiţei. Acesta va fi folosit pentru a "
 "salva istoricul."
 
-#: libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
 msgstr "Titlu pentru dialogul de Selectare iconiţe."
 
-#: libgnomeui/gnome-icon-entry.c:192
+#: libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
 msgstr "Director pixmap"
 
-#: libgnomeui/gnome-icon-entry.c:193
+#: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
 msgstr "Directorul în care vor fi căutate iconiţele."
 
-#: libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Numele fişierului care ar trebui să fie afişat în intrarea iconiţei."
 
-#: libgnomeui/gnome-icon-entry.c:209
+#: libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
 msgstr "Dialog de selectare"
 
-#: libgnomeui/gnome-icon-entry.c:210
+#: libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Dialogul de selectare al iconiţei. Puteţi folosi această proprietate pentru a "
-"obţine GtkDialog dacă aveţi nevoie de modificarea sau interogarea oricăreia "
-"dintre proprietăţile sale."
+"Dialogul de selectare al iconiţei. Puteţi folosi această proprietate pentru "
+"a obţine GtkDialog dacă aveţi nevoie de modificarea sau interogarea "
+"oricăreia dintre proprietăţile sale."
 
-#: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:981
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
 msgstr "Nici o iconiţă"
 
-#: libgnomeui/gnome-icon-entry.c:530 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Nu pot găsi un hbox, folosind o selecţie normală de fişier"
 
-#: libgnomeui/gnome-icon-entry.c:536 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Previzualizare"
 
-#: libgnomeui/gnome-icon-entry.c:752
+#: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
 msgstr "Dialogul de selectare al iconiţei"
 
-#: libgnomeui/gnome-icon-entry.c:753
+#: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
 msgstr "Acest dialog vă oferă posibilitatea de a selecta o iconiţă."
 
-#: libgnomeui/gnome-icon-entry.c:759
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
 msgstr "Selector iconiţă"
 
-#: libgnomeui/gnome-icon-entry.c:760
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
 msgstr "Vă rugăm alegeţi iconiţa dorită."
 
-#: libgnomeui/gnome-icon-entry.c:984
+#: libgnomeui/gnome-icon-entry.c:982
 msgid "Icon Selector"
 msgstr "Selector iconiţă"
 
-#: libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "This button will open a window to let you select an icon."
 msgstr "Acest buton va deschide o fereastră pentru a selecta o iconiţă."
 
-#: libgnomeui/gnome-icon-entry.c:1008
+#: libgnomeui/gnome-icon-entry.c:1006
 msgid "Browse"
 msgstr "Navighează"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
 msgstr "Cale iconiţă"
 
-#: libgnomeui/gnome-icon-entry.c:1011
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
-"Aici ar trebui să introduceţi numele directorului care conţine "
-"imaginile iconiţelor."
+"Aici ar trebui să introduceţi numele directorului care conţine imaginile "
+"iconiţelor."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1324,4 +1336,3 @@ msgstr "%a %b %d %T %Y"
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
-
