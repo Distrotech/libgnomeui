@@ -37,8 +37,6 @@
 #define GETTEXT_PACKAGE PACKAGE
 #endif
 
-GtkIconSize gnome_icon_size_toolbar;
-
 static void G_GNUC_UNUSED
 add_sized (GtkIconFactory *factory,
            const guchar   *inline_data,
@@ -94,8 +92,6 @@ get_default_icons (GtkIconFactory *factory)
 {
     /* KEEP IN SYNC with gtkstock.c */
 
-    gnome_icon_size_toolbar = gtk_icon_size_register ("gnome-toolbar", 20, 20);
-
     add_sized (factory, stock_attach, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_ATTACH);
     add_sized (factory, stock_book_red, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_BOOK_RED);
     add_sized (factory, stock_book_green, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_BOOK_GREEN);
@@ -129,8 +125,8 @@ get_default_icons (GtkIconFactory *factory)
     add_sized (factory, stock_menu_about, GTK_ICON_SIZE_MENU, GNOME_STOCK_ABOUT);
     add_sized (factory, stock_menu_blank, GTK_ICON_SIZE_MENU, GNOME_STOCK_BLANK); 
 
-    add_sized (factory, stock_not, GNOME_ICON_SIZE_TOOLBAR, GNOME_STOCK_NOT);
-    add_sized (factory, stock_scores, GNOME_ICON_SIZE_TOOLBAR, GNOME_STOCK_SCORES);
+    add_sized (factory, stock_not, GTK_ICON_SIZE_SMALL_TOOLBAR, GNOME_STOCK_NOT);
+    add_sized (factory, stock_scores, GTK_ICON_SIZE_SMALL_TOOLBAR, GNOME_STOCK_SCORES);
 
     add_sized (factory, stock_multiple_file, GTK_ICON_SIZE_DND, GNOME_STOCK_MULTIPLE_FILE);
 }

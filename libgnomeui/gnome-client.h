@@ -158,6 +158,8 @@ struct _GnomeClient
   gboolean            save_phase_2_requested : 1;
   gboolean            save_successfull : 1;
   gboolean            save_yourself_emitted : 1;
+
+  gpointer            reserved; /* Reserved for private struct */
 };
 
 

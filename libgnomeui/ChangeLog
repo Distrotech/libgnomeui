@@ -1,3 +1,15 @@
+Tue Sep 11 00:59:51 2001  George Lebl <jirka@5z.com>
+
+	* gnome-client.h:  Add a reserved pointer for future use
+
+	* gnome-href.h: get rid off the warning about api, it's old
+
+	* gnome-stock-icons.[ch], pixmaps/stock_not.png,
+	  pixmaps/stock_scores.png:  Whack the toolbar size crap, we should
+	  just use the gtk toolbar stuff.  Scale down the two icons that
+	  required the 20x20 size to 18x18 which is the small toolbar size
+	  in gtk
+
 2001-09-10  jacob berkman  <jacob@ximian.com>
 
 	* Makefile.am: install gnome.h in $prefix/include/gnome-2.0/

@@ -1,5 +1,3 @@
-/* WARNING ____ IMMATURE API ____ liable to change */
-
 /* gnome-href.h
  * Copyright (C) 1998, James Henstridge <james@daa.com.au>
  * All rights reserved.
