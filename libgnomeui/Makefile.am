@@ -27,7 +27,9 @@ libgnomeui_la_SOURCES = \
 	gnome-startup.c			\
 	gnome-stock.c			\
 	gtk-clock.c			\
-	gtk-ted.c
+	gtk-ted.c			\
+	gnome-stock-imlib.h		\
+	gnome-stock-xpm.h
 
 libgnomeuiinclude_HEADERS = 		\
 	gnome-about.h			\
@@ -49,8 +51,6 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-stock.h			\
 	gtk-clock.h			\
 	gtk-ted.h			\
-	gnome-stock-imlib.h		\
-	gnome-stock-xpm.h		\
 	libgnomeui.h
 
 ted_demo_SOURCES = ted_demo.c
