@@ -1,5 +1,14 @@
 2001-02-26  Martin Baulig  <baulig@suse.de>
 
+	* gnome-stock.h
+	(GnomeStockPixmapEntryWidget, GnomeStockPixmapEntryGPixmap): Removed.
+	(GnomeStockPixmapEntryImlib): Renamed to GnomeStockPixmapEntryPixbuf.
+	(GnomeStockPixmapEntryImlibScaled): Renamed
+	to GnomeStockPixmapEntryPixbufScaled.
+
+	(GnomeStockPixmapEntryAny): Removed `width' and `height' fields;
+	added `ref_count' and `pixbuf'.
+
 	* gnome-stock.h: Put this back to the API of GNOME 1.x.
 	- reverted to the state of gnome-libs stable.
 	- removed USE_NEW_GNOME_STOCK conditional; only use the

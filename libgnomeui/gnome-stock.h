@@ -192,8 +192,8 @@ typedef struct _GnomeStockPixmapEntryAny     GnomeStockPixmapEntryAny;
 typedef struct _GnomeStockPixmapEntryData    GnomeStockPixmapEntryData;
 typedef struct _GnomeStockPixmapEntryFile    GnomeStockPixmapEntryFile;
 typedef struct _GnomeStockPixmapEntryPath    GnomeStockPixmapEntryPath;
-typedef struct _GnomeStockPixmapEntryWidget  GnomeStockPixmapEntryWidget;
-typedef struct _GnomeStockPixmapEntryGPixmap GnomeStockPixmapEntryGPixmap;
+typedef struct _GnomeStockPixmapEntryPixbuf       GnomeStockPixmapEntryPixbuf;
+typedef struct _GnomeStockPixmapEntryPixbufScaled GnomeStockPixmapEntryPixbufScaled;
 typedef union  _GnomeStockPixmapEntry        GnomeStockPixmapEntry;
 
 typedef enum {
@@ -201,80 +201,63 @@ typedef enum {
         GNOME_STOCK_PIXMAP_TYPE_DATA,
         GNOME_STOCK_PIXMAP_TYPE_FILE,
         GNOME_STOCK_PIXMAP_TYPE_PATH,
-        GNOME_STOCK_PIXMAP_TYPE_WIDGET,
-	GNOME_STOCK_PIXMAP_TYPE_IMLIB,
-	GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED,
-	GNOME_STOCK_PIXMAP_TYPE_GPIXMAP
+	GNOME_STOCK_PIXMAP_TYPE_PIXBUF,
+	GNOME_STOCK_PIXMAP_TYPE_PIXBUF_SCALED,
+	GNOME_STOCK_PIXMAP_TYPE_LAST
 } GnomeStockPixmapType;
 
+struct _GnomeStockPixmapEntryAny {
+        GnomeStockPixmapType type;
+	int ref_count;
+	char *label;
+        GdkPixbuf *pixbuf;
+};
 
 /* a data entry holds a hardcoded pixmap */
 struct _GnomeStockPixmapEntryData {
         GnomeStockPixmapType type;
-	int width, height;
+	int ref_count;
 	char *label;
-        gchar **xpm_data;
-};
-
-/* a data entry holds a hardcoded pixmap */
-typedef struct _GnomeStockPixmapEntryImlib   GnomeStockPixmapEntryImlib;
-struct _GnomeStockPixmapEntryImlib {
-        GnomeStockPixmapType type;
-	int width, height;
-	char *label;
-        const gchar *rgb_data;
-	GdkImlibColor shape;
-};
-
-/* a scalable version */
-typedef struct _GnomeStockPixmapEntryImlibScaled GnomeStockPixmapEntryImlibScaled;
-struct _GnomeStockPixmapEntryImlibScaled {
-        GnomeStockPixmapType type;
-	int width, height;
-	char *label;
-        const gchar *rgb_data;
-	GdkImlibColor shape;
-	int scaled_width, scaled_height;
+        GdkPixbuf *pixbuf;
+        const gchar **xpm_data;
 };
 
 /* a file entry holds a filename (no path) to the pixamp. this pixmap
    will be seached for using gnome_pixmap_file */
 struct _GnomeStockPixmapEntryFile {
         GnomeStockPixmapType type;
-	int width, height;
+	int ref_count;
 	char *label;
+        GdkPixbuf *pixbuf;
         gchar *filename;
 };
 
 /* a path entry holds the complete (absolut) path to the pixmap file */
 struct _GnomeStockPixmapEntryPath {
         GnomeStockPixmapType type;
-	int width, height;
+	int ref_count;
 	char *label;
+        GdkPixbuf *pixbuf;
         gchar *pathname;
 };
 
-/* a widget entry holds a GnomeStockPixmapWidget. This kind of icon can be
- * used by a theme to completely change the handling of a stock icon. */
-struct _GnomeStockPixmapEntryWidget {
+/* a data entry holds a hardcoded pixmap */
+struct _GnomeStockPixmapEntryPixbuf {
         GnomeStockPixmapType type;
-	int width, height;
-	char *label;
-        GtkWidget *widget;
+	int ref_count;
+        char *label;
+        GdkPixbuf *pixbuf;
 };
 
-/* a GnomePixmap */
-struct _GnomeStockPixmapEntryGPixmap {
+ 
+/* scales the Pixbuf data to the given size when used (allows scale-on-demand) */
+struct _GnomeStockPixmapEntryPixbufScaled {
         GnomeStockPixmapType type;
-	int width, height;
-	char *label;
-        GnomePixmap *pixmap;
-};
-
-struct _GnomeStockPixmapEntryAny {
-        GnomeStockPixmapType type;
-	int width, height;
-	char *label;
+	int ref_count;
+        char *label;
+        GdkPixbuf *pixbuf;
+        int scaled_width, scaled_height;
+        GdkPixbuf *unscaled_pixbuf;
 };
 
 union _GnomeStockPixmapEntry {
@@ -283,10 +266,8 @@ union _GnomeStockPixmapEntry {
         GnomeStockPixmapEntryData data;
         GnomeStockPixmapEntryFile file;
         GnomeStockPixmapEntryPath path;
-        GnomeStockPixmapEntryWidget widget;
-	GnomeStockPixmapEntryImlib imlib;
-	GnomeStockPixmapEntryImlibScaled imlib_s;
-        GnomeStockPixmapEntryGPixmap gpixmap;
+        GnomeStockPixmapEntryPixbuf pixbuf;
+        GnomeStockPixmapEntryPixbufScaled scaled;
 };
 
 
