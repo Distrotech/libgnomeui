@@ -1,3 +1,8 @@
+Mon Dec 14 10:19:59 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome-canvas.c: Add idle handlers at GTK_PRIORITY_INTERNAL,
+	so they trigger gtk_events_pending().
+
 Sun Dec 13 20:50:06 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-client.c: fix typo interaction_key -> interaction_keys

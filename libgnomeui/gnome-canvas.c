@@ -2961,7 +2961,8 @@ static void
 gnome_canvas_request_update (GnomeCanvas *canvas)
 {
 	if (!(canvas->need_update || canvas->need_redraw)) {
-		canvas->idle_id = gtk_idle_add (idle_handler, canvas);
+		canvas->idle_id = gtk_idle_add_priority (GTK_PRIORITY_INTERNAL,
+							 idle_handler, canvas);
 	}
 	canvas->need_update = TRUE;
 }
@@ -2990,7 +2991,8 @@ gnome_canvas_request_redraw_uta (GnomeCanvas *canvas,
 	} else {
 		canvas->redraw_area = uta;
 		canvas->need_redraw = TRUE;
-		canvas->idle_id = gtk_idle_add (idle_handler, canvas);
+		canvas->idle_id = gtk_idle_add_priority (GTK_PRIORITY_INTERNAL,
+							 idle_handler, canvas);
 	}
 }
 
