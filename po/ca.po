@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.1.5\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
-"PO-Revision-Date: 2002-12-21 00:35+0100\n"
+"POT-Creation-Date: 2003-02-22 23:07+0100\n"
+"PO-Revision-Date: 2003-02-22 23:10+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -527,6 +527,7 @@ msgstr "Pista per a l'element 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitxer"
 
@@ -584,6 +585,7 @@ msgid "_Game"
 msgstr "_Joc"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajuda"
 
@@ -774,11 +776,11 @@ msgstr "Configura l'aplicació"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Quant a"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Quant a aquesta aplicació"
 
@@ -805,7 +807,7 @@ msgstr "Crea una nova finestra"
 msgid "_Close This Window"
 msgstr "_Tanca aquesta finestra"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Tanca la finestra actual"
 
@@ -1134,9 +1136,7 @@ msgstr "Mida del tipus de lletra per l'etiqueta"
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr ""
-"Tamany de la font per a la etiqueta en el mode d'informació del tipus de "
-"lletra"
+msgstr "Mida del tipus de lletra per a la etiqueta en el mode d'informació del tipus de lletra"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -1347,5 +1347,6 @@ msgstr "%a %d de %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Surt del test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Surt del test"
