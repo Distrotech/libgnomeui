@@ -49,14 +49,14 @@ BEGIN_GNOME_DECLS
 
 
 /* Stuff set on an app-by-app basis. */
-typedef _GnomeAppPreferences GnomeAppPreferences;
+typedef struct _GnomeAppPreferences GnomeAppPreferences;
 
 struct {
   const gchar * status_bar_usage;
 } _GnomeAppPreferences;
 
 /* Stuff set globally */
-typedef _GnomeUIPreferences GnomeUIPreferences;
+typedef struct _GnomeUIPreferences GnomeUIPreferences;
 
 struct {
   const gchar * dialog_buttons_position;
