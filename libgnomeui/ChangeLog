@@ -1,3 +1,7 @@
+2001-08-22  Iain Holmes  <iain@ximian.com>
+
+	* Makefile.am: Install gnome-macros.h
+
 2001-08-14  Martin Baulig  <baulig@suse.de>
 
 	* Makefile.am: Disabled GnomeFontPicker.

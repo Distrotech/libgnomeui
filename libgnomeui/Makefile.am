@@ -84,6 +84,7 @@ gnome_headers = \
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-list.h		\
+	gnome-macros.h			\
 	gnome-ui-init.h			\
 	gnome-stock-icons.h		\
 	gnome-types.h			\
