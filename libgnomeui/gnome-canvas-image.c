@@ -41,6 +41,9 @@ static double gnome_canvas_image_point       (GnomeCanvasItem *item, double x, d
 static void   gnome_canvas_image_translate   (GnomeCanvasItem *item, double dx, double dy);
 
 
+static GnomeCanvasItemClass *parent_class;
+
+
 GtkType
 gnome_canvas_image_get_type (void)
 {
@@ -72,6 +75,8 @@ gnome_canvas_image_class_init (GnomeCanvasImageClass *class)
 
 	object_class = (GtkObjectClass *) class;
 	item_class = (GnomeCanvasItemClass *) class;
+
+	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
 	gtk_object_add_arg_type ("GnomeCanvasImage::image", GTK_TYPE_POINTER, GTK_ARG_WRITABLE, ARG_IMAGE);
 	gtk_object_add_arg_type ("GnomeCanvasImage::x", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_X);
@@ -123,6 +128,9 @@ gnome_canvas_image_destroy (GtkObject *object)
 	g_return_if_fail (GNOME_IS_CANVAS_IMAGE (object));
 
 	free_pixmap_and_mask (GNOME_CANVAS_IMAGE (object));
+
+	if (GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
 static void
@@ -211,14 +219,6 @@ gnome_canvas_image_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	case ARG_IMAGE:
 		/* The pixmap and mask will be freed when the item is reconfigured */
 		image->im = GTK_VALUE_POINTER (*arg);
-		if (image->im) {
-			image->width = image->im->rgb_width / item->canvas->pixels_per_unit;
-			image->height = image->im->rgb_height / item->canvas->pixels_per_unit;
-		} else {
-			image->width = 0.0;
-			image->height = 0.0;
-		}
-
 		update = TRUE;
 		break;
 

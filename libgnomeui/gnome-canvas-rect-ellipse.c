@@ -80,7 +80,7 @@ gnome_canvas_re_class_init (GnomeCanvasREClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasRE::y2", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_Y2);
 	gtk_object_add_arg_type ("GnomeCanvasRE::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasRE::outline_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_OUTLINE_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasRE::width_pixels", GTK_TYPE_UINT,   GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
+	gtk_object_add_arg_type ("GnomeCanvasRE::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
 	gtk_object_add_arg_type ("GnomeCanvasRE::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
 
 	object_class->set_arg = gnome_canvas_re_set_arg;

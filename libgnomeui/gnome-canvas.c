@@ -34,7 +34,7 @@
  *
  * - item_class->output (item, "bridge_to_raph's_canvas")
  *
- * - Multiple exposure event coalescing; this may need to be in Gtk/Gdk instead.
+ * - Multiple exposure event compression; this may need to be in Gtk/Gdk instead.
  *
  * - Make gnome_canvas_scroll_to() use XCopyArea instead of repainting everything.
  *   Or use the Mozilla scrolling code for when we have widgets in the canvas.
@@ -338,9 +338,126 @@ gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
 	item->canvas->need_repick = TRUE;
 }
 
-int
-gnome_canvas_item_grab (GnomeCanvasItem *item, unsigned int event_mask, GdkCursor *cursor, guint32 time)
+static void
+put_item_after (GList *link, GList *before)
 {
+	GnomeCanvasGroup *parent;
+
+	if (link == before)
+		return;
+
+	parent = GNOME_CANVAS_GROUP (GNOME_CANVAS_ITEM (link->data)->parent);
+
+	if (before == NULL) {
+		if (link == parent->item_list)
+			return;
+
+		link->prev->next = link->next;
+
+		if (link->next)
+			link->next->prev = link->prev;
+		else
+			parent->item_list_end = link->prev;
+
+		link->prev = before;
+		link->next = parent->item_list;
+		link->next->prev = link;
+		parent->item_list = link;
+	} else {
+		if ((link == parent->item_list_end) && (before == parent->item_list_end->prev))
+			return;
+
+		if (link->next)
+			link->next->prev = link->prev;
+
+		if (link->prev)
+			link->prev->next = link->next;
+		else {
+			parent->item_list = link->next;
+			parent->item_list->prev = NULL;
+		}
+
+		link->prev = before;
+		link->next = before->next;
+
+		link->prev->next = link;
+
+		if (link->next)
+			link->next->prev = link;
+		else
+			parent->item_list_end = link;
+	}
+}
+
+void
+gnome_canvas_item_raise (GnomeCanvasItem *item, guint positions)
+{
+	GList *link, *before;
+	GnomeCanvasGroup *parent;
+
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+
+	if (!item->parent)
+		return;
+
+	parent = GNOME_CANVAS_GROUP (item->parent);
+	link = g_list_find (parent->item_list, item);
+	g_assert (link != NULL);
+
+	if (positions == 0)
+		put_item_after (link, parent->item_list_end);
+	else {
+		for (before = link; positions && before; positions--)
+			before = before->next;
+
+		if (!before)
+			before = parent->item_list_end;
+
+		put_item_after (link, before);
+	}
+
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	item->canvas->need_repick = TRUE;
+}
+
+void
+gnome_canvas_item_lower (GnomeCanvasItem *item, guint positions)
+{
+	GList *link, *before;
+	GnomeCanvasGroup *parent;
+
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+
+	if (!item->parent)
+		return;
+
+	parent = GNOME_CANVAS_GROUP (item->parent);
+	link = g_list_find (parent->item_list, item);
+	g_assert (link != NULL);
+
+	if (positions == 0)
+		put_item_after (link, NULL);
+	else {
+		if (link->prev)
+			for (before = link->prev; positions && before; positions--)
+				before = before->prev;
+		else
+			before = NULL;
+
+		put_item_after (link, before);
+	}
+
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	item->canvas->need_repick = TRUE;
+}
+
+int
+gnome_canvas_item_grab (GnomeCanvasItem *item, guint event_mask, GdkCursor *cursor, guint32 etime)
+{
+	int retval;
+
 	g_return_val_if_fail (item != NULL, GrabNotViewable);
 	g_return_val_if_fail (GNOME_IS_CANVAS_ITEM (item), GrabNotViewable);
 	g_return_val_if_fail (GTK_WIDGET_MAPPED (item->canvas), GrabNotViewable);
@@ -348,19 +465,24 @@ gnome_canvas_item_grab (GnomeCanvasItem *item, unsigned int event_mask, GdkCurso
 	if (item->canvas->grabbed_item)
 		return AlreadyGrabbed;
 
+	retval = gdk_pointer_grab (GTK_WIDGET (item->canvas)->window,
+				   FALSE,
+				   event_mask,
+				   NULL,
+				   cursor,
+				   etime);
+
+	if (retval != GrabSuccess)
+		return retval;
+
 	item->canvas->grabbed_item = item;
 	item->canvas->grabbed_event_mask = event_mask;
 
-	return gdk_pointer_grab (GTK_WIDGET (item->canvas)->window,
-				 FALSE,
-				 event_mask,
-				 NULL,
-				 cursor,
-				 time);
+	return retval;
 }
 
 void
-gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 time)
+gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 etime)
 {
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
@@ -370,7 +492,7 @@ gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 time)
 
 	item->canvas->grabbed_item = NULL;
 
-	gdk_pointer_ungrab (time);
+	gdk_pointer_ungrab (etime);
 }
 
 void
@@ -1244,7 +1366,7 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	GdkEvent ev;
 	gint finished;
 	GnomeCanvasItem *item;
-	unsigned int mask;
+	guint mask;
 
 	/* Perform checks for grabbed items */
 

@@ -56,9 +56,6 @@ struct _GnomeCanvasImageClass {
 /* Standard Gtk function */
 GtkType gnome_canvas_image_get_type (void);
 
-/* Notifies an image item that its imlib image has changed and must be re-rendered */
-void gnome_canvas_image_update (GnomeCanvasImage *image);
-
 
 END_GNOME_DECLS
 

@@ -1,3 +1,17 @@
+1998-07-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-image.c (gnome_canvas_image_set_arg): Do not reset
+	the width and height when the image is changed.  This makes
+	updating an existing image easier.
+	(gnome_canvas_image_destroy): Oops, the parent class destroy
+	method was not being called.
+
+	* gnome-canvas.c (gnome_canvas_item_grab): Test the return value
+	of gdk_pointer_grab() before actually setting the grabbed item in
+	the canvas structure.
+	(gnome_canvas_item_raise gnome_canvas_item_lower): New public
+	functions used to raise and lower items in their parent's z-order.
+
 Wed Jul 15 22:31:58 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-popupmenu.h, gnome-popupmenu.c (__GNOME_POPUPMENU_H__):
