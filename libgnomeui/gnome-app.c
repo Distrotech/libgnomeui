@@ -721,6 +721,9 @@ void
 gnome_app_set_statusbar (GnomeApp *app,
 		         GtkWidget *statusbar)
 {
+	GtkWidget *frame;
+	GtkWidget *hbox;
+
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
 	g_return_if_fail(statusbar != NULL);
@@ -729,8 +732,20 @@ gnome_app_set_statusbar (GnomeApp *app,
 	app->statusbar = GTK_WIDGET(statusbar);
 	gtk_widget_show(app->statusbar);
 
+	frame = gtk_frame_new(NULL);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_OUT);
+	gtk_container_border_width(GTK_CONTAINER(frame), 0);
+	gtk_widget_show(frame);
+
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_container_border_width(GTK_CONTAINER(hbox), 1);
+	gtk_box_pack_start(GTK_BOX(hbox), statusbar, TRUE, TRUE, 0);
+	gtk_widget_show(hbox);
+
+	gtk_container_add(GTK_CONTAINER(frame), hbox);
+
 	gtk_table_attach (GTK_TABLE (app->table),
-			  app->statusbar,
+			  frame,
 			  0, 3,
 			  3, 4,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
