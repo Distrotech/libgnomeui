@@ -339,6 +339,35 @@ static char * corners_xpm[] = {
 ". + + + + . . + + + + .         ",
 "  . . . .     . . . .           "};
 
+static char * question_xpm[] = {
+"24 24 3 2",
+"  	c None",
+". 	c #000000",
+"+ 	c #FFFFFF",
+". .                     . . . . . .             ",
+". + .                 . + + + + + + .           ",
+". + + .             . + + . . . . + + .         ",
+". + + + .         . + + .         . + + .       ",
+". + + + + .       . + .             . + .       ",
+". + + + + + .     . + .             . + .       ",
+". + + + + . . .   . + .             . + .       ",
+". + + + + .         .               . + .       ",
+". + . . + .                         . + .       ",
+". + .   . + .                     . + + .       ",
+". .     . + .             . . . . + + .         ",
+"          . + .         . + + + + + .           ",
+"          . + .         . + + . . .             ",
+"            .           . + .                   ",
+"                        . + .                   ",
+"                        . + .                   ",
+"                          .                     ",
+"                                                ",
+"                          .                     ",
+"                        . + .                   ",
+"                        . + .                   ",
+"                          .                     ",
+"                                                ",
+"                                                "};
 
 #define WHITE { 0x0000, 0xffff, 0xffff, 0xffff }
 #define BLACK { 0x0000, 0x0000, 0x0000, 0x0000 }
@@ -509,6 +538,18 @@ static GnomeStockCursor default_cursors[] = {
 		WHITE, /* foreground */
 		BLACK, /* background */
 		5, 5,  /* hotspot */
+		-1, -1,/* w x h */
+		0,     /* alpha */
+		GNOME_CURSOR_XPM /* type */
+	},
+	{
+		GNOME_STOCK_CURSOR_WHATISIT, /* name */
+		question_xpm, /* cursor_data */
+		NULL, /* xbm_mask */
+		NULL, NULL, /* bitmap/mask */
+		WHITE, /* foreground */
+		BLACK, /* background */
+		0, 0,  /* hotspot */
 		-1, -1,/* w x h */
 		0,     /* alpha */
 		GNOME_CURSOR_XPM /* type */

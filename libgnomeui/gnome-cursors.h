@@ -76,5 +76,6 @@ GdkCursor *gnome_stock_cursor_new         (const char *cursorname);
 #define GNOME_STOCK_CURSOR_NW_SE "gnome-northwest-southeast-arrow"
 #define GNOME_STOCK_CURSOR_FLEUR "gnome-fleur"
 #define GNOME_STOCK_CURSOR_CORNERS "gnome-corners-arrow"
+#define GNOME_STOCK_CURSOR_WHATISIT "gnome-what-is-it"
 
 #endif /* GNOME_CURSORS_H */
