@@ -195,10 +195,12 @@ static void
 gnome_about_draw (GnomeAbout *about)
 {
 	GnomeCanvasGroup *root;
-	GnomeCanvasItem *item, *item_email;
+	GnomeCanvasItem *item, *item_email G_GNUC_UNUSED;
 	gdouble x, y, x2, y2, h, w;
+#if 0
 	GList *name, *name_url = 0, *name_email;
 	gchar *tmp;
+#endif
 
 	GnomeAboutPrivate *priv = about->_priv;
 	
@@ -626,9 +628,12 @@ get_text_height (GtkWidget *widget)
 static void
 gnome_about_calc_size (GnomeAbout *about)
 {
+	gint num_pars, i, h, w, len[5], pw;
+#if 0
 	GList *name, *email = NULL;
 	GList *urls = NULL;
-	gint num_pars, i, h, w, len[5], tmpl, pw;
+	gint tmpl;
+#endif
 	gint title_h;
 	const gchar *p;
 	gfloat maxlen;
@@ -918,7 +923,7 @@ gnome_about_fill_info (GnomeAbout  *about,
 
 static void gnome_about_fill_style (GnomeAbout *about)
 {
-	GtkStyle *style;
+	GtkStyle *style G_GNUC_UNUSED;
     
 	Bonobo_ConfigDatabase cd = gnome_program_get_config_database (gnome_program_get ());
 
