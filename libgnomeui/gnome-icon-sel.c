@@ -39,6 +39,8 @@ static void gnome_icon_selection_destroy (GtkObject *gis);
 
 static GtkWindowClass *parent_class;
 
+static int sort_file_list( gconstpointer a, gconstpointer b);
+
 guint
 gnome_icon_selection_get_type ()
 {
@@ -78,14 +80,21 @@ gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
 static void
 gnome_icon_selection_init (GnomeIconSelection *gis)
 {
-  gis->clist = gtk_clist_new(1);
+  gis->box = gtk_vbox_new(FALSE, 0);
 
+  gtk_container_add(GTK_CONTAINER(gis), gis->box);
+
+  gtk_widget_show(gis->box);
+
+  gis->clist = gtk_clist_new(1);
   gtk_clist_set_row_height(GTK_CLIST(gis->clist), 
 			   ICON_SIZE + GNOME_PAD_SMALL);
 
-  gtk_container_add(GTK_CONTAINER(gis), gis->clist);
+  gtk_box_pack_end(GTK_BOX(gis->box) , gis->clist, TRUE, TRUE, 0);
 
   gtk_widget_show(gis->clist);
+
+  gis->file_list = NULL;
 }
 
 
@@ -111,11 +120,15 @@ static void gnome_icon_selection_destroy (GtkObject *gis)
 
 void  gnome_icon_selection_add_defaults   (GnomeIconSelection * gis)
 {
+  gchar *pixmap_dir;
+
   g_return_if_fail(gis != NULL);
 
-  g_warning("gnome_icon_selection_add_defaults is unimplemented");
+  pixmap_dir = gnome_unconditional_datadir_file("pixmaps");
   
-  gnome_icon_selection_add_directory(gis, "/usr/local/share/pixmaps");
+  gnome_icon_selection_add_directory(gis, pixmap_dir);
+
+  g_free(pixmap_dir);
 }
 
 static void 
@@ -159,6 +172,11 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 #endif
 }
 
+static int sort_file_list( gconstpointer a, gconstpointer b)
+{
+  return strcmp( (gchar *)a, (gchar *)b );
+}
+
 void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
 					   const gchar * dir)
 {
@@ -200,7 +218,8 @@ void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
       if ( stat(full_path, &statbuf) != -1 ) {
 	if ( S_ISREG(statbuf.st_mode) ) {
 	  /* Image filename, exists, regular file, go for it. */
-	  append_an_icon(gis, full_path);
+          gis->file_list = g_list_insert_sorted(gis->file_list,
+            (gchar *)strdup(full_path), sort_file_list);
 	}
       }
       g_free(full_path);
@@ -209,6 +228,52 @@ void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
 
   closedir(dp);
 }
+
+void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
+{
+  GList * list;
+  GtkWidget *label;
+  GtkWidget *progressbar;
+  int file_count, i;
+
+  g_return_if_fail(gis != NULL);
+  g_return_if_fail(gis->file_list != NULL);
+
+  list = gis->file_list;
+  
+  label = gtk_label_new(_("Loading Icons..."));
+  gtk_box_pack_start(GTK_BOX(gis->box),label,FALSE,FALSE,0);
+  gtk_widget_show(label);
+
+  progressbar = gtk_progress_bar_new();
+  gtk_box_pack_start(GTK_BOX(gis->box),progressbar,FALSE,FALSE,0);
+  gtk_widget_show(progressbar);
+
+  file_count = g_list_length(list);
+  i = 0;
+  
+  gtk_clist_freeze(GTK_CLIST(gis->clist));
+
+  while (list) {
+    append_an_icon(gis, list->data);
+    g_free(list->data);
+    list = list->next;
+    gtk_progress_bar_update (GTK_PROGRESS_BAR (progressbar), (float)i / file_count);
+    while ( gtk_events_pending() ) {
+      gtk_main_iteration();
+    }
+    i++;
+  }
+
+  g_list_free(gis->file_list);
+  gis->file_list = NULL;
+
+  gtk_clist_thaw(GTK_CLIST(gis->clist));
+
+  gtk_widget_destroy(progressbar);
+  gtk_widget_destroy(label);
+}
+
 
 void  gnome_icon_selection_clear          (GnomeIconSelection * gis)
 {

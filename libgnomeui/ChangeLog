@@ -1,3 +1,11 @@
+Tue Jul  7 00:03:21 1998  John Ellis  <johne@bellatlantic.net>
+
+	* gnome-dentry-edit.c (gnome_dentry_get_dentry): fixed segfault.
+	(gnome_dentry_edit_set_icon): icons now display when changed.
+	* gnome-icon-sel.[ch] (gnome_icon_selection_show_icons): new
+	function, call this after adding all directories so the progress
+	bar updates correctly.
+
 Mon Jul  6 22:46:58 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appbar.h, gnome-appbar.c: A tentative start at this

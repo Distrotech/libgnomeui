@@ -35,7 +35,11 @@ typedef struct _GnomeIconSelectionClass GnomeIconSelectionClass;
 struct _GnomeIconSelection {
   GtkVBox vbox;
 
+  GtkWidget * box;
+
   GtkWidget * clist;
+
+  GList * file_list;
 };
 
 struct _GnomeIconSelectionClass {
@@ -52,6 +56,10 @@ void  gnome_icon_selection_add_defaults   (GnomeIconSelection * gis);
 /* Add icons from this directory */
 void  gnome_icon_selection_add_directory  (GnomeIconSelection * gis,
 					   const gchar * dir);
+
+/* Loads and displays the icons that were added using gnome_icon_selection_add_* */
+void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis);
+
 /* Clear all icons */
 void  gnome_icon_selection_clear          (GnomeIconSelection * gis);
 

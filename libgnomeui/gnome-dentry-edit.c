@@ -464,7 +464,7 @@ GnomeDesktopEntry * gnome_dentry_get_dentry(GnomeDEntryEdit * dee)
   g_return_val_if_fail(dee != NULL, NULL);
   g_return_val_if_fail(GNOME_IS_DENTRY_EDIT(dee), NULL);
 
-  newentry = g_new(GnomeDesktopEntry, 1);
+  newentry = g_new0(GnomeDesktopEntry, 1);
 
   gnome_dentry_edit_sync_dentry(dee, newentry);
   
@@ -536,8 +536,16 @@ static void gnome_dentry_edit_set_icon(GnomeDEntryEdit * dee,
     icon_name = "";
   }
   else {
-    dee->desktop_icon = 
-      gnome_pixmap_new_from_file(icon_name);
+    if (g_file_exists(icon_name)) {
+      dee->desktop_icon = 
+        gnome_pixmap_new_from_file(icon_name);
+    }
+    else {
+      gchar *icon_full_name = gnome_pixmap_file(icon_name);
+      dee->desktop_icon = 
+        gnome_pixmap_new_from_file(icon_full_name);
+      g_free(icon_full_name);
+    }
     if (dee->desktop_icon == NULL) {
       dee->desktop_icon = gtk_label_new(_("Couldn't\nload\nicon"));
     }
@@ -601,19 +609,23 @@ static void show_icon_selection(GtkButton * b,
        better directory to look at */
     gnome_icon_selection_add_defaults(GNOME_ICON_SELECTION(iconsel));
 
-    gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
-				     g_filename_pointer(dee->icon));
+    gtk_widget_set_usize(GNOME_ICON_SELECTION(iconsel)->clist , 250, 350);
 
     gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(dee->icon_dialog)->vbox),
 		      iconsel);
-    
+
+    gtk_widget_show_all(dee->icon_dialog);
+
+    gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(iconsel));
+
+    gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
+				     g_filename_pointer(dee->icon));
+
     gnome_dialog_button_connect(GNOME_DIALOG(dee->icon_dialog), 
 				0, /* OK button */
 				GTK_SIGNAL_FUNC(icon_selected_cb),
 				dee);
     gtk_object_set_user_data(GTK_OBJECT(dee), iconsel);
-    
-    gtk_widget_show_all(dee->icon_dialog);
   }
   else {
 #ifdef GNOME_ENABLE_DEBUG
