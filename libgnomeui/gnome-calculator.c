@@ -396,7 +396,8 @@ set_result(GnomeCalculator *gc)
         /* make sure put values in a consistent manner */
 	/* XXX: perhaps we can make sure the calculator works on all locales,
 	 * but currently it will lose precision if we don't do this */
-        old_locale = setlocale (LC_NUMERIC, "C");
+        old_locale = g_strdup (setlocale (LC_NUMERIC, NULL));
+        setlocale (LC_NUMERIC, "C");
 	for(i=12;i>0;i--) {
 		g_snprintf(format, sizeof(format), "%c .%dg", '%', i);
 		g_snprintf(buf, sizeof(buf), format, gc->result);
@@ -404,6 +405,7 @@ set_result(GnomeCalculator *gc)
 			break;
 	}
         setlocale (LC_NUMERIC, old_locale);
+	g_free (old_locale);
 
 	strncpy(gc->result_string,buf,12);
 	gc->result_string[12]='\0';
@@ -732,9 +734,11 @@ add_digit(GtkWidget *w, gpointer data)
 	gtk_widget_queue_draw (gc->display);
 
         /* make sure get values in a consistent manner */
-        old_locale = setlocale (LC_NUMERIC, "C");
+        old_locale = g_strdup (setlocale (LC_NUMERIC, NULL));
+        setlocale (LC_NUMERIC, "C");
 	sscanf(gc->result_string, "%lf", &gc->result);
         setlocale (LC_NUMERIC, old_locale);
+	g_free (old_locale);
 }
 
 static gdouble
@@ -777,9 +781,11 @@ negate_val(GtkWidget *w, gpointer data)
 	}
 
         /* make sure get values in a consistent manner */
-        old_locale = setlocale (LC_NUMERIC, "C");
+        old_locale = g_strdup (setlocale (LC_NUMERIC, NULL));
+        setlocale (LC_NUMERIC, "C");
 	sscanf(gc->result_string, "%lf", &gc->result);
         setlocale (LC_NUMERIC, old_locale);
+	g_free (old_locale);
 
 	gtk_widget_queue_draw (gc->display);
 }

@@ -10,6 +10,14 @@ Mon Jun 19 22:17:01 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dock-layout.[ch]: load and save the hidden state
 
+2000-06-15  Jody Goldberg <jgoldberg@home.com>
+
+	* gnome-calculator.c (set_result) : setlocale returns a static buffer.
+	  Copy it to safety.  Set the locale AFTER storing the current
+	  setting.
+	(add_digit) : Ditto.
+	(negate_val) : Ditto.
+
 Mon Jun 12 16:57:50 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dialog-util.c: fix a memory leak.  Free the info structure
