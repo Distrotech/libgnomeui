@@ -51,6 +51,17 @@ typedef struct _GnomeSelectorClient             GnomeSelectorClient;
 typedef struct _GnomeSelectorClientPrivate      GnomeSelectorClientPrivate;
 typedef struct _GnomeSelectorClientClass        GnomeSelectorClientClass;
 
+typedef struct _GnomeSelectorClientAsyncHandle  GnomeSelectorClientAsyncHandle;
+
+typedef void (*GnomeSelectorClientAsyncFunc)   (GnomeSelectorClient      *client,
+                                                GnomeSelectorAsyncHandle *async_handle,
+                                                GNOME_Selector_AsyncType  async_type,
+                                                const gchar              *uri,
+                                                const gchar              *error,
+                                                gboolean                  success,
+                                                gpointer                  user_data);
+
+
 struct _GnomeSelectorClient {
     BonoboWidget widget;
         
@@ -67,12 +78,12 @@ gnome_selector_client_get_type           (void) G_GNUC_CONST;
 
 GnomeSelectorClient *
 gnome_selector_client_new                (GNOME_Selector       corba_selector,
-					  Bonobo_UIContainer   uic);
+                                          Bonobo_UIContainer   uic);
 
 GnomeSelectorClient *
 gnome_selector_client_construct          (GnomeSelectorClient *client,
-					  GNOME_Selector       corba_selector,
-					  Bonobo_UIContainer   uic);
+                                          GNOME_Selector       corba_selector,
+                                          Bonobo_UIContainer   uic);
 
 /* Get/set the text in the entry widget. */
 gchar *
@@ -80,12 +91,25 @@ gnome_selector_client_get_entry_text     (GnomeSelectorClient *client);
 
 void
 gnome_selector_client_set_entry_text     (GnomeSelectorClient *client,
-					  const gchar         *text);
+                                          const gchar         *text);
 
 /* If the entry widget is derived from GtkEditable, then we can use this
  * function to send an "activate" signal to it. */
 void
 gnome_selector_client_activate_entry     (GnomeSelectorClient *client);
+
+/* Get/set URI. */
+
+gchar *
+gnome_selector_client_get_uri            (GnomeSelectorClient *client);
+
+void
+gnome_selector_client_set_uri            (GnomeSelectorClient             *client,
+                                          GnomeSelectorClientAsyncHandle **handle_return,
+                                          const gchar                     *uri,
+                                          guint                            timeout_msec,
+                                          GnomeSelectorClientAsyncFunc     async_func,
+                                          gpointer                         user_data);
 
 G_END_DECLS
 
