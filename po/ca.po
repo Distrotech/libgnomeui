@@ -1,14 +1,14 @@
 # Catalan translation of libgnomeui.
-# Copyright (C) 2002, 2003 Free Software Foundation, Inc.
+# Copyright © 2002, 2003, 2004 Free Software Foundation, Inc.
 # Dani Vilar <32023dvr@comb.es>, 2002.
-# Jordi Mallach <jordi@sindominio.net>, 2002, 2003.
+# Jordi Mallach <jordi@sindominio.net>, 2002, 2003, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.3.3\n"
+"Project-Id-Version: libgnomeui 2.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-22 02:11+0100\n"
-"PO-Revision-Date: 2003-06-08 18:28+0200\n"
+"POT-Creation-Date: 2004-03-23 15:49+0100\n"
+"PO-Revision-Date: 2004-03-23 15:53+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -141,6 +141,7 @@ msgstr "Quant a %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitxer"
 
@@ -198,6 +199,7 @@ msgid "_Game"
 msgstr "_Joc"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_juda"
 
@@ -388,11 +390,11 @@ msgstr "Configura l'aplicació"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Quant a"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Quant a aquesta aplicació"
 
@@ -419,7 +421,7 @@ msgstr "Crea una nova finestra"
 msgid "_Close This Window"
 msgstr "_Tanca aquesta finestra"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Tanca la finestra actual"
 
@@ -622,14 +624,12 @@ msgstr "Es requereix autenticació"
 #: libgnomeui/gnome-authentication-manager.c:282
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " domini %s"
 
 #: libgnomeui/gnome-authentication-manager.c:285
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"Heu d'identificar-vos per a accedir a «%s».\n"
-"%s"
+msgstr "Heu d'identificar-vos per a accedir a %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -942,13 +942,13 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "Utilitza el GtkFileChooser"
 
 #: libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr ""
+msgstr "Si s'ha d'usar el nou giny FtkFileChooser o el giny GtkFileSelection per a seleccionar fitxers."
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1140,7 +1140,7 @@ msgstr "Directori on buscar les icones"
 
 #: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
-msgstr "Nom de fitxer que s'hauria de mostrar al registre de l'icona."
+msgstr "Nom de fitxer que s'hauria de mostrar al registre de la icona."
 
 #: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
@@ -1241,7 +1241,7 @@ msgstr "Nom d'_usuari:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "_Domini:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
@@ -1249,11 +1249,11 @@ msgstr "_Contrasenya:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Recorda la contrasenya per a aquesta sessió"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Desa la contrasenya a l'anell de claus"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1279,7 +1279,7 @@ msgstr "Una previsualització de la imatge actualment especificada"
 
 #: libgnomeui/gnome-pixmap-entry.c:414
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "No es pot trobar una hbox, s'utilitarà una selecció de fitxers normal"
+msgstr "No es pot trobar una hbox, s'utilitzarà una selecció de fitxers normal"
 
 #: libgnomeui/gnome-pixmap-entry.c:420
 msgid "Preview"
@@ -1330,7 +1330,7 @@ msgstr "Sagnat"
 
 #: libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
-msgstr "Desagnat"
+msgstr "Dessagnat"
 
 #: libgnomeui/gnome-stock-icons.c:145
 msgid "About"
@@ -1338,7 +1338,7 @@ msgstr "Quant a"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "Inhabilita el diàleg de fallades"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
@@ -1388,36 +1388,38 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr ""
+msgstr "L'aplicació «%s» ha sortit inesperadament."
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr ""
+msgstr "procés: %d: %s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr ""
+msgstr "Podeu informar els desenvolupadors de què ha passat per a ajudar-los a arreglar-ho. O podeu reiniciar l'aplicació ara mateix."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Forma d'ús: gnome_segv2 nomapp numsig\n"
 
 #: libgnomeui/gnome_segv.c:154
-#, fuzzy
 msgid "_Restart Application"
-msgstr "Surt d'aquesta aplicació"
+msgstr "_Reinicia l'aplicació"
 
 #: libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
-msgstr ""
+msgstr "_Informa els desenvolupadors"
 
 #: libgnomeui/gnome_segv.c:177
-#, fuzzy
 msgid "_Debug"
-msgstr "Depuració"
+msgstr "_Depuració"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Surt del test"
 
 #~ msgid "Color Selector"
 #~ msgstr "Seleccionador de color"
@@ -1441,9 +1443,6 @@ msgstr "Depuració"
 #~ msgstr ""
 #~ "Si us plau, visiteu la pàgina de Fallades d'Aplicació del GNOME per més "
 #~ "informació"
-
-#~ msgid "Exit the test"
-#~ msgstr "Surt del test"
 
 #~ msgid "_Credits"
 #~ msgstr "_Crèdits"
