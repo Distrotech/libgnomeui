@@ -2,6 +2,9 @@
 
 	* gnome-druid.c (gnome_druid_size_allocate): Patch from damon to
 	put the child in the right place.
+	(gnome_druid_expose): Now I have achieved further enlightenment in
+	the ways of writing a GtkContainer.
+	(gnome_druid_draw): Thanks Owen/HP.  Further Container-hood.
 
 1999-08-19  Havoc Pennington  <hp@pobox.com>
 
