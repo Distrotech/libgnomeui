@@ -19,7 +19,7 @@ lib_LTLIBRARIES = libgnomeui.la
 # these files are `autoconf'ed in.
 EXTRA_libgnomeui_la_SOURCES = gnome-canvas.c gnome-canvas-rect-ellipse.c
 
-EXTRA_HEADERS = gnome-canvas.h
+EXTRA_HEADERS = gnome-canvas.h gnome-canvas-rect-ellipse.h
 
 libgnomeui_la_DEPENDENCIES = @GNOME_CANVAS_OBJS@
 
@@ -29,7 +29,6 @@ libgnomeui_la_SOURCES = \
 	gnome-app-helper.c		\
 	gnome-app-util.c		\
 	gnome-color-selector.c 		\
-	@GNOME_CANVAS_SRC@		\
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
@@ -71,7 +70,6 @@ libgnomeui_la_SOURCES = \
 libgnomeuiinclude_HEADERS = 		\
 	gnome-about.h			\
 	gnome-actionarea.h     		\
-	@GNOME_CANVAS_HED@		\
 	gnome-app.h			\
 	gnome-app-helper.h		\
 	gnome-app-util.h		\

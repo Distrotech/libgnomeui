@@ -1,3 +1,14 @@
+1998-06-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c:
+	* gnome-canvas.h:
+	* gnome-canvas-rect-ellipse.c:
+	* gnome-canvas-rect-ellipse.h: Here is the new canvas that uses
+	GtkObjects for the canvas items.  It supports a hierarchical
+	organization of items, and arbitrary item sets as well.  This is
+	still a work in progress.  Please see the test-gnome demo for
+	information on how to use this beast.
+
 Tue Jun 30 16:13:19 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-color-selector.c: Include <stdio.h>.

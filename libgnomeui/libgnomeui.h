@@ -11,6 +11,7 @@
 #include "libgnomeui/gnome-app-util.h"
 #include "libgnomeui/gnome-actionarea.h"
 #include "libgnomeui/gnome-canvas.h"
+#include "libgnomeui/gnome-canvas-rect-ellipse.h"
 #include "libgnomeui/gnome-color-selector.h"
 #include "libgnomeui/gnome-dialog.h"
 #include "libgnomeui/gnome-dialog-util.h"
