@@ -177,6 +177,20 @@ set_active_window (GnomeMDI *mdi, GHashTable *window_hash, glong active_window)
 	gnome_mdi_set_active_view (mdi, view);
 }
 
+/**
+ * gnome_mdi_restore_state:
+ * @mdi: A pointer to a GnomeMDI object.
+ * @section: Name of the section to restore MDI state from.
+ * @create_child_func: A function that recreates a child from its config string.
+ * 
+ * Description:
+ * Restores the MDI state. Children are recreated with @create_child_func that
+ * restores information about a child from a config string that was provided during
+ * saving state by the child. 
+ * 
+ * Return value:
+ * TRUE if state was successfully restored, FALSE otherwise.
+ **/
 gboolean
 gnome_mdi_restore_state (GnomeMDI *mdi, const gchar *section,
 			 GnomeMDIChildCreator create_child_func)
@@ -327,6 +341,14 @@ view_window_func (gpointer data)
 	return gnome_mdi_get_app_from_view(GTK_WIDGET(data));
 }
 
+/**
+ * gnome_mdi_save_state:
+ * @mdi: A pointer to a GnomeMDI object.
+ * @section: Name of the section that the MDI config should be saved to.
+ * 
+ * Description:
+ * Saves MDI state to the application's config file in section @section.
+ **/
 void
 gnome_mdi_save_state (GnomeMDI *mdi, const gchar *section)
 {

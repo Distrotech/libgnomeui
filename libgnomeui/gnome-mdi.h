@@ -29,7 +29,6 @@
 
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
-#include "gnome-rootwin.h"
 #include "gnome-mdi-child.h"
 
 BEGIN_GNOME_DECLS
@@ -48,19 +47,6 @@ typedef enum {
 	GNOME_MDI_DEFAULT_MODE = 42,
 } GnomeMDIMode;
 
-/* the following keys are used to gtk_object_set_data() copies of the appropriate menu and
- * toolbar templates to their GnomeApps. gtk_object_get_data(gnome_mdi_view_get_toplevel(view),
- * key) will give you a pointer to the data if you have a pointer to a view. this might be
- * useful for enabling/disabling menu items (via ui_info[i]->widget) when certain events
- * happen. these GnomeUIInfo structures are exact copies of the template GnomeUIInfo trees.
- */
-#define GNOME_MDI_TOOLBAR_INFO_KEY           "MDIToolbarUIInfo"
-#define GNOME_MDI_MENUBAR_INFO_KEY           "MDIMenubarUIInfo"
-#define GNOME_MDI_CHILD_MENU_INFO_KEY        "MDIChildMenuUIInfo"
-
-typedef GtkMenuBar *(* GnomeMDIMenubarCreator)(GnomeMDI *, GnomeApp *);
-typedef GtkToolbar *(* GnomeMDIToolbarCreator)(GnomeMDI *, GnomeApp *);
-
 struct _GnomeMDI {
 	GtkObject object;
 
@@ -73,11 +59,6 @@ struct _GnomeMDI {
 
 	gchar *appname, *title;
 
-	/* how to create custom menus/toolbars: */
-	/* either with custom functions */
-	GnomeMDIMenubarCreator create_menubar;
-	GnomeMDIToolbarCreator create_toolbar;
-	/* or (this is an exclusive or ;) by providing pointers to UIInfo templates */
 	GnomeUIInfo *menu_template;
 	GnomeUIInfo *toolbar_template;
 
@@ -122,16 +103,6 @@ struct _GnomeMDIClass {
  *   are called before removing mdi_child or view. the handler should return true if the object
  *   is to be removed from MDI
  *
- * GtkMenubar *create_menus(GnomeMDI *, GnomeApp *)
- *   should return a GtkMenubar for the GnomeApps when the GnomeUIInfo way with using menu
- *   template is not sufficient. This signal is emitted when a new GnomeApp that
- *   needs a new menubar is created but ONLY if the menu template is NULL!
- *
- * GtkToolbar *create_toolbar(GnomeMDI *, GnomeApp *)
- *   should return a GtkToolbar for the GnomeApps when the GnomeUIInfo way with using toolbar
- *   template is not sufficient. This signal is emitted when a new GnomeApp that
- *   needs new toolbar is created but ONLY if the toolbar template is NULL!
- *
  * void child_changed(GnomeMDI *, GnomeMDIChild *)
  *   gets called each time when active child is changed with the second argument
  *   pointing to the old child. mdi->active_view and mdi->active_child still already
@@ -144,7 +115,9 @@ struct _GnomeMDIClass {
  *   emitted after the child_changed signal.
  * 
  * void app_created(GnomeMDI *, GnomeApp *)
- *   is called with each newly created GnomeApp to allow the MDI user to customize it.
+ *   is called with each newly created GnomeApp to allow the MDI user to customize it (add a
+ *   statusbar, toolbars or menubar if the method with GnomeUIInfo templates is not sufficient,
+ *   etc.).
  *   no contents may be set since GnomeMDI uses them for storing either a view of a child
  *   or a notebook
  */
@@ -160,8 +133,6 @@ void          gnome_mdi_set_tab_pos         (GnomeMDI *, GtkPositionType);
 /* setting the menu and toolbar stuff */
 void          gnome_mdi_set_menubar_template(GnomeMDI *, GnomeUIInfo *);
 void          gnome_mdi_set_toolbar_template(GnomeMDI *, GnomeUIInfo *);
-void          gnome_mdi_set_menubar_creator (GnomeMDI *, GnomeMDIMenubarCreator);
-void          gnome_mdi_set_toolbar_creator (GnomeMDI *, GnomeMDIToolbarCreator);
 void          gnome_mdi_set_child_menu_path (GnomeMDI *, gchar *);
 void          gnome_mdi_set_child_list_path (GnomeMDI *, gchar *);
 
@@ -206,6 +177,15 @@ void          gnome_mdi_unregister          (GnomeMDI *, GtkObject *);
 GnomeApp      *gnome_mdi_get_app_from_view    (GtkWidget *);
 GnomeMDIChild *gnome_mdi_get_child_from_view  (GtkWidget *);
 GtkWidget     *gnome_mdi_get_view_from_window (GnomeMDI *, GnomeApp *);
+
+/* the following functions are used to obtain pointers to the GnomeUIInfo structures for a
+ * specified MDI GnomeApp widget. this might be useful for enabling/disabling menu items
+ * (via ui_info[i]->widget) when certain events happen. these GnomeUIInfo structures are
+ * exact copies of the template GnomeUIInfo trees.
+ */
+GnomeUIInfo   *gnome_mdi_get_menubar_info     (GnomeApp *);
+GnomeUIInfo   *gnome_mdi_get_toolbar_info     (GnomeApp *);
+GnomeUIInfo   *gnome_mdi_get_child_menu_info  (GnomeApp *);
 
 END_GNOME_DECLS
 

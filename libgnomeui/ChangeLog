@@ -1,3 +1,16 @@
+1998-12-08  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.[ch]: scratched custom functions for creating
+	menubar/toolbar. use app_created signal instead to customize
+	each GnomeApp at your will if the GnomeUIInfo templates don't
+	do it for you. also moved GNOME_MDI_*_INFO_KEYs back to
+	gnome-mdi.c and added functions to retrieve the UIInfo arrays
+	from GnomeApps to prevent a temptation of the users to try and
+	set some of their own data with this key.
+	* gnome-mdi-session.c: added documentation.
+	* gnome-app-helper.c (gnome_app_install_menu_hints): new function
+	that tries to install menu hints depending on type of app->statubar.
+	
 1998-12-08  Andrew T. Veliath  <andrewtv@usa.net>
 
 	* gnome-app.c, gnome-app-helper.[ch]: Update for integrated

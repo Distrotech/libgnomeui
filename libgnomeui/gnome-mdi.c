@@ -88,8 +88,11 @@ static GList           *child_create_menus       (GnomeMDIChild *, GtkWidget *);
 static GtkWidget       *child_set_label          (GnomeMDIChild *, GtkWidget *);
 
 /* keys for stuff that we'll assign to our GnomeApps */
-#define MDI_CHILD_KEY              "GnomeMDIChild"
-#define ITEM_COUNT_KEY             "MDIChildMenuItems"
+#define GNOME_MDI_TOOLBAR_INFO_KEY           "MDIToolbarUIInfo"
+#define GNOME_MDI_MENUBAR_INFO_KEY           "MDIMenubarUIInfo"
+#define GNOME_MDI_CHILD_MENU_INFO_KEY        "MDIChildMenuUIInfo"
+#define GNOME_MDI_CHILD_KEY                  "GnomeMDIChild"
+#define GNOME_MDI_ITEM_COUNT_KEY             "MDIChildMenuItems"
 
 static GdkCursor *drag_cursor = NULL;
 
@@ -265,8 +268,6 @@ static void gnome_mdi_init (GnomeMDI *mdi)
 	
 	mdi->menu_template = NULL;
 	mdi->toolbar_template = NULL;
-	mdi->create_menubar = NULL;
-	mdi->create_toolbar = NULL;
 	mdi->child_menu_path = NULL;
 	mdi->child_list_path = NULL;
 }
@@ -402,7 +403,7 @@ static GtkWidget *find_item_by_child (GtkMenuShell *shell, GnomeMDIChild *child)
 
 	node = shell->children;
 	while(node) {
-		if(gtk_object_get_data(GTK_OBJECT(node->data), MDI_CHILD_KEY) == child)
+		if(gtk_object_get_data(GTK_OBJECT(node->data), GNOME_MDI_CHILD_KEY) == child)
 			return GTK_WIDGET(node->data);
 		
 		node = node->next;
@@ -415,7 +416,7 @@ static void child_list_activated_cb (GtkWidget *w, GnomeMDI *mdi)
 {
 	GnomeMDIChild *child;
 	
-	child = gtk_object_get_data(GTK_OBJECT(w), MDI_CHILD_KEY);
+	child = gtk_object_get_data(GTK_OBJECT(w), GNOME_MDI_CHILD_KEY);
 	
 	if( child && (child != mdi->active_child) ) {
 		if(child->views)
@@ -444,7 +445,7 @@ static void child_list_menu_create (GnomeMDI *mdi, GnomeApp *app)
 		label = child_set_label(GNOME_MDI_CHILD(child->data), NULL);
 		gtk_widget_show(label);
 		gtk_container_add(GTK_CONTAINER(item), label);
-		gtk_object_set_data(GTK_OBJECT(item), MDI_CHILD_KEY, child->data);
+		gtk_object_set_data(GTK_OBJECT(item), GNOME_MDI_CHILD_KEY, child->data);
 		gtk_widget_show(item);
 		
 		gtk_menu_shell_insert(GTK_MENU_SHELL(submenu), item, pos);
@@ -503,7 +504,7 @@ void child_list_menu_add_item (GnomeMDI *mdi, GnomeMDIChild *child)
 		label = child_set_label(child, NULL);
 		gtk_widget_show(label);
 		gtk_container_add(GTK_CONTAINER(item), label);
-		gtk_object_set_data(GTK_OBJECT(item), MDI_CHILD_KEY, child);
+		gtk_object_set_data(GTK_OBJECT(item), GNOME_MDI_CHILD_KEY, child);
 		gtk_widget_show(item);
 		
 		submenu = gnome_app_find_menu_pos(app->menubar, mdi->child_list_path, &pos);
@@ -846,7 +847,7 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 	ui_info = NULL;
 	
 	/* remove old child-specific menus */
-	items = GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(app), ITEM_COUNT_KEY));
+	items = GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY));
 	if( items > 0 ) {
 		parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
 		if(parent != NULL) {
@@ -883,7 +884,7 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 			( (ui_info = copy_ui_info_tree(child->menu_template)) != NULL) ) {
 			gnome_app_insert_menus_with_data(app, mdi->child_menu_path, ui_info, child);
 			gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
-			gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, GINT_TO_POINTER(count_ui_info_items(ui_info)));
+			gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(count_ui_info_items(ui_info)));
 			gtk_widget_queue_resize(app->menubar);
 		}
 		else {
@@ -904,7 +905,7 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 						items++;
 					}
 					
-					gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, GINT_TO_POINTER(items));
+					gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(items));
 					
 					gtk_widget_queue_resize(parent);
 				}
@@ -915,7 +916,7 @@ static void app_set_view (GnomeMDI *mdi, GnomeApp *app, GtkWidget *view)
 	}
 	else {
 		gtk_window_set_title(GTK_WINDOW(app), mdi->title);
-		gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, NULL);
+		gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, NULL);
 	}
 	
 	set_active_view(mdi, view);
@@ -979,30 +980,12 @@ static void app_create (GnomeMDI *mdi)
 		gnome_app_create_menus_with_data(GNOME_APP(window), ui_info, mdi);
 		gtk_object_set_data(GTK_OBJECT(window), GNOME_MDI_MENUBAR_INFO_KEY, ui_info);
 	}
-	else if(mdi->create_menubar) {
-		menubar = mdi->create_menubar(mdi, GNOME_APP(window));
 		
-		if(menubar) {
-			gtk_widget_show(GTK_WIDGET(menubar));
-			gnome_app_set_menus(GNOME_APP(window), GTK_MENU_BAR(menubar));
-		}
-	}
-	
-	child_list_menu_create(mdi, GNOME_APP(window));
-	
 	/* create toolbar */
 	if(mdi->toolbar_template) {
 		ui_info = copy_ui_info_tree(mdi->toolbar_template);
 		gnome_app_create_toolbar_with_data(GNOME_APP(window), ui_info, mdi);
 		gtk_object_set_data(GTK_OBJECT(window), GNOME_MDI_TOOLBAR_INFO_KEY, ui_info);
-	}
-	else if(mdi->create_toolbar) {
-		toolbar = mdi->create_toolbar(mdi, GNOME_APP(window));
-		
-		if(toolbar) {
-			gtk_widget_show(GTK_WIDGET(toolbar));
-			gnome_app_set_toolbar(GNOME_APP(window), toolbar);
-		}
 	}
 	
 	mdi->active_window = GNOME_APP(window);
@@ -1010,6 +993,8 @@ static void app_create (GnomeMDI *mdi)
 	mdi->active_view = NULL;
 	
 	gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[APP_CREATED], window);
+
+	child_list_menu_create(mdi, GNOME_APP(window));
 }
 
 static void top_add_view (GnomeMDI *mdi, GnomeMDIChild *child, GtkWidget *view)
@@ -1717,42 +1702,6 @@ void gnome_mdi_set_toolbar_template (GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl)
 }
 
 /**
- * gnome_mdi_set_menubar_creator:
- * @mdi: A pointer to a GnomeMDI object. 
- * @func: Function that returns a GtkMenubar widget.
- * 
- * Description:
- * Sets the function used to provide a menubar if there is no template for it.
- * If a template is specified using gnome_mdi_set_menubar_template(), this
- * function is never invoked.
- **/
-void gnome_mdi_set_menubar_creator(GnomeMDI *mdi, GnomeMDIMenubarCreator func)
-{
-	g_return_if_fail(mdi != NULL);
-	g_return_if_fail(GNOME_IS_MDI(mdi));
-
-	mdi->create_menubar = func;
-}
-
-/**
- * gnome_mdi_set_toolbar_creator:
- * @mdi: A pointer to a GnomeMDI object. 
- * @func: Function that returns a GtkToolbar widget.
- * 
- * Description:
- * Sets the function used to provide a toolbar if there is no template for it.
- * If a template is specified using gnome_mdi_set_toolbar_template(), this
- * function is never invoked.
- **/
-void gnome_mdi_set_toolbar_creator (GnomeMDI *mdi, GnomeMDIToolbarCreator func)
-{
-	g_return_if_fail(mdi != NULL);
-	g_return_if_fail(GNOME_IS_MDI(mdi));
-
-	mdi->create_toolbar = func;
-}
-
-/**
  * gnome_mdi_set_child_menu_path:
  * @mdi: A pointer to a GnomeMDI object. 
  * @path: A menu path where the child menus should be inserted.
@@ -1843,7 +1792,7 @@ void gnome_mdi_unregister (GnomeMDI *mdi, GtkObject *o)
  **/
 GnomeMDIChild *gnome_mdi_get_child_from_view(GtkWidget *view)
 {
-	return GNOME_MDI_CHILD(gtk_object_get_data(GTK_OBJECT(view), MDI_CHILD_KEY));
+	return GNOME_MDI_CHILD(gtk_object_get_data(GTK_OBJECT(view), GNOME_MDI_CHILD_KEY));
 }
 
 /**
@@ -1920,3 +1869,38 @@ void gnome_mdi_set_tab_pos (GnomeMDI *mdi, GtkPositionType pos)
 	}
 }
 
+/**
+ * gnome_mdi_get_menubar_info:
+ * @app: A pointer to a GnomeApp widget created by the MDI.
+ * 
+ * Return value: 
+ * A GnomeUIInfo array used for menubar in @app if the menubar has been created with a template. NULL otherwise.
+ **/
+GnomeUIInfo *gnome_mdi_get_menubar_info (GnomeApp *app)
+{
+	return gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_MENUBAR_INFO_KEY);
+}
+
+/**
+ * gnome_mdi_get_toolbar_info:
+ * @app: A pointer to a GnomeApp widget created by the MDI.
+ * 
+ * Return value: 
+ * A GnomeUIInfo array used for toolbar in @app if the toolbar has been created with a template. NULL otherwise.
+ **/
+GnomeUIInfo *gnome_mdi_get_toolbar_info (GnomeApp *app)
+{
+	return gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_TOOLBAR_INFO_KEY);
+}
+
+/**
+ * gnome_mdi_get_menubar_info:
+ * @app: A pointer to a GnomeApp widget created by the MDI.
+ * 
+ * Return value: 
+ * A GnomeUIInfo array used for child's menus in @app if they have been created with a template. NULL otherwise.
+ **/
+GnomeUIInfo *gnome_mdi_get_child_menu_info (GnomeApp *app)
+{
+	return gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY);
+}

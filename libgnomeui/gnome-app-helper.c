@@ -348,6 +348,20 @@ gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
     }
 }
 
+void
+gnome_app_install_menu_hints (GnomeApp *app,
+                              GnomeUIInfo *uiinfo) {
+  g_return_if_fail (app != NULL);
+  g_return_if_fail (uiinfo != NULL);
+  g_return_if_fail (app->statusbar != NULL);
+  g_return_if_fail (GNOME_IS_APP (app));
+
+  if(GNOME_IS_APPBAR(app->statusbar))
+    gnome_app_install_appbar_menu_hints(GNOME_APPBAR(app->statusbar), uiinfo);
+  else if(GTK_IS_STATUSBAR(app->statusbar))
+    gnome_app_install_statusbar_menu_hints(GTK_STATUSBAR(app->statusbar), uiinfo);
+}
+
 /* Creates a menu item appropriate for the SEPARATOR, ITEM, TOGGLEITEM, or 
  * SUBTREE types.  If the item is inside a radio group, then a pointer to the 
  * group's list must be specified as well (*radio_group must be NULL for the 

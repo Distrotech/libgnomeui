@@ -329,6 +329,10 @@ void gnome_app_install_appbar_menu_hints    (GnomeAppBar* appbar,
 void gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
                                              GnomeUIInfo* uiinfo);
 
+/* really? why can't it be automatic? */
+void gnome_app_install_menu_hints           (GnomeApp *app,
+                                             GnomeUIInfo *uinfo);
+
 END_GNOME_DECLS
 
 #endif
