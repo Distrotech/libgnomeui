@@ -93,7 +93,7 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 		   because the user might write all options as
 		   `--foo=bar', but we always split into two arguments,
 		   like `-foo bar'.  */
-		our_argv = (char **) malloc (2 * (state->argc + 1) * sizeof (char *));
+		our_argv = (char **) g_malloc (2 * (state->argc + 1) * sizeof (char *));
 		our_argc = 0;
 		our_argv[our_argc++] = g_strdup (state->argv[0]);
 
@@ -121,7 +121,7 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 		for (i = 0; i < copy_ac; ++i)
 			g_free (copy[i]);
 		g_free (copy);
-		g_free (our_argv);
+		g_free (our_argv); our_argv = NULL;
 	}
 	else
 		return ARGP_ERR_UNKNOWN;
