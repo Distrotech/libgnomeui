@@ -11,6 +11,7 @@
 #include <gtk/gtkwindow.h>
 #include <gtk/gtkpixmap.h>
 #include "libgnome/gnome-defs.h"
+#include "libgnome/gnome-i18n.h"
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"
 
