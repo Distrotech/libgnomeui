@@ -1,3 +1,13 @@
+2003-05-18  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-app-helper.c:
+	* libgnomeui/gnome-app-util.c:
+	* libgnomeui/gnome-app.c:
+	* libgnomeui/gnome-appbar.c:
+	* libgnomeui/gnome-client.c:
+	* libgnomeui/gnome-icon-list.c: Fix typos and make api docs more
+	consistent.
+
 2003-05-19  Kjartan Maraas <kmaraas@gnome.org>
 
 	Ricardo Fernández Pascual  <ric@users.sourceforge.net>:

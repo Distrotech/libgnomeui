@@ -1143,7 +1143,7 @@ master_client_disconnect (GnomeClient *client,
 }
 
 /**
- * gnome_master_client
+ * gnome_master_client:
  *
  * Description:
  * Get the master session management client.  This master client gets a client
@@ -1366,7 +1366,7 @@ gnome_real_client_finalize (GObject *object)
 
 
 /**
- * gnome_client_new
+ * gnome_client_new:
  *
  * Description: Allocates memory for a new GNOME session management client
  * object. After allocating, the client tries to connect to a session manager.
@@ -1389,7 +1389,7 @@ gnome_client_new (void)
 
 
 /**
- * gnome_client_new_without_connection
+ * gnome_client_new_without_connection:
  *
  * Description: Allocates memory for a new GNOME session management client
  * object. You probably want to use gnome_master_client() instead.
@@ -1421,7 +1421,7 @@ gnome_client_new_without_connection (void)
 
 
 /**
- * gnome_client_flush
+ * gnome_client_flush:
  * @client: A #GnomeClient instance.
  *
  * Description:
@@ -1450,7 +1450,7 @@ gnome_client_flush (GnomeClient *client)
 
 
 /**
- * gnome_client_connect
+ * gnome_client_connect:
  * @client: A #GnomeClient instance.
  *
  * Description: Causes the client to connect to the session manager.
@@ -1526,7 +1526,7 @@ gnome_client_connect (GnomeClient *client)
 
 
 /**
- * gnome_client_disconnect
+ * gnome_client_disconnect:
  * @client: A #GnomeClient instance.
  *
  * Description: Disconnect the client from the session manager.
@@ -1587,7 +1587,7 @@ gnome_client_get_flags (GnomeClient *client)
 /*****************************************************************************/
 
 /**
- * gnome_client_set_clone_command
+ * gnome_client_set_clone_command:
  * @client: Pointer to GNOME session client object.
  * @argc: Number of strings in the @argv vector.
  * @argv: Argument strings, suitable for use with execv().
@@ -1613,7 +1613,7 @@ gnome_client_set_clone_command (GnomeClient *client,
 }
 
 /**
- * gnome_client_set_current_directory
+ * gnome_client_set_current_directory:
  * @client: Pointer to GNOME session client object.
  * @dir: Directory path.
  *
@@ -1682,7 +1682,7 @@ gnome_client_set_discard_command (GnomeClient *client,
 
 
 /**
- * gnome_client_set_environment
+ * gnome_client_set_environment:
  * @client: Pointer to GNOME session client object.
  * @name: Name of the environment variable
  * @value: Value of the environment variable
@@ -1736,7 +1736,7 @@ gnome_client_set_environment (GnomeClient *client,
 
 
 /**
- * gnome_client_set_process_id
+ * gnome_client_set_process_id:
  * @client: Pointer to GNOME session client object.
  * @pid: PID to set as the client's PID.
  *
@@ -1765,7 +1765,7 @@ gnome_client_set_process_id (GnomeClient *client, pid_t pid)
 
 
 /**
- * gnome_client_set_program
+ * gnome_client_set_program:
  * @client: Pointer to GNOME session client object.
  * @program: Name of the program.
  *
@@ -1797,7 +1797,7 @@ gnome_client_set_program (GnomeClient *client,
 
 
 /**
- * gnome_client_set_resign_command
+ * gnome_client_set_resign_command:
  * @client: Pointer to GNOME session client object.
  * @argc: Number of strings in @argv.
  * @argv: execv()-style command to undo the effects of the client.
@@ -1845,7 +1845,7 @@ gnome_client_set_resign_command (GnomeClient *client,
 
 
 /**
- * gnome_client_set_restart_command
+ * gnome_client_set_restart_command:
  * @client: Pointer to GNOME session client object.
  * @argc: Number of strings in argv.
  * @argv: Argument vector to an execv() to restart the client.
@@ -1878,7 +1878,7 @@ gnome_client_set_restart_command (GnomeClient *client,
 }
 
 /**
- * gnome_client_set_priority
+ * gnome_client_set_priority:
  * @client: Pointer to GNOME session client object.
  * @priority: Position of client in session start up ordering.
  *
@@ -1907,7 +1907,7 @@ gnome_client_set_priority (GnomeClient *client, guint priority)
 }
 
 /**
- * gnome_client_set_restart_style
+ * gnome_client_set_restart_style:
  * @client: Pointer to GNOME session client object.
  * @style: When to restart the client.
  *
@@ -1959,7 +1959,7 @@ gnome_client_set_restart_style (GnomeClient *client,
 
 
 /**
- * gnome_client_set_shutdown_command
+ * gnome_client_set_shutdown_command:
  * @client: Pointer to GNOME session client object.
  * @argc: Number of strings in argv.
  * @argv: Command to shutdown the client if the client isn't running.
@@ -2006,7 +2006,7 @@ gnome_client_set_shutdown_command (GnomeClient *client,
 
 
 /**
- * gnome_client_set_user_id
+ * gnome_client_set_user_id:
  * @client: Pointer to GNOME session client object.
  * @id: Username.
  *
@@ -2035,7 +2035,7 @@ gnome_client_set_user_id (GnomeClient *client,
 
 
 /**
- * gnome_client_add_static_arg
+ * gnome_client_add_static_arg:
  * @client: Pointer to GNOME session client object.
  * @...: %NULL-terminated list of arguments to add to the restart command.
  *
@@ -2070,7 +2070,7 @@ gnome_client_add_static_arg (GnomeClient *client, ...)
 
 
 /**
- * gnome_client_set_id
+ * gnome_client_set_id:
  * @client: A #GnomeClient instance.
  * @id: Session management ID.
  *
@@ -2095,12 +2095,12 @@ gnome_client_set_id (GnomeClient *client, const gchar *id)
 
 
 /**
- * gnome_client_get_id
+ * gnome_client_get_id:
  * @client: A #GnomeClient instance.
  *
  * Description: Returns session management ID
  *
- * Returns:  Session management ID for this client; %NULL if not connected to a
+ * Returns: Session management ID for this client; %NULL if not connected to a
  * session manager.
  **/
 
@@ -2114,7 +2114,7 @@ gnome_client_get_id (GnomeClient *client)
 }
 
 /**
- * gnome_client_get_previous_id
+ * gnome_client_get_previous_id:
  * @client: A #GnomeClient instance.
  *
  * Description: Get the session management ID from the previous session.
@@ -2153,7 +2153,7 @@ gnome_client_get_desktop_id (GnomeClient *client)
 }
 
 /**
- * gnome_client_get_config_prefix
+ * gnome_client_get_config_prefix:
  * @client: Pointer to GNOME session client object.
  *
  * Description: Get the config prefix for a client. This config prefix
@@ -2187,7 +2187,7 @@ gnome_client_get_config_prefix (GnomeClient *client)
 static gchar* config_prefix = NULL;
 
 /**
- * gnome_client_set_global_config_prefix
+ * gnome_client_set_global_config_prefix:
  * @client: Pointer to GNOME session client object.
  * @prefix: Prefix for saving the global configuration.
  *
@@ -2220,7 +2220,7 @@ gnome_client_set_global_config_prefix (GnomeClient *client, const gchar* prefix)
 }
 
 /**
- * gnome_client_get_global_config_prefix
+ * gnome_client_get_global_config_prefix:
  * @client: Pointer to GNOME session client object.
  *
  * Description: Get the config prefix that will be returned by
@@ -2234,7 +2234,7 @@ gnome_client_set_global_config_prefix (GnomeClient *client, const gchar* prefix)
  * practice limits the users freedom to configure each instance in a different
  * way so it should be used with caution.
  *
- * Returns:  The config prefix as a newly allocated string.
+ * Returns: The config prefix as a newly allocated string.
  **/
 
 const gchar *
@@ -2484,7 +2484,7 @@ gnome_client_save_dialog_show (GnomeClient *client, gint key,
 }
 
 /**
- * gnome_client_save_any_dialog
+ * gnome_client_save_any_dialog:
  * @client: Pointer to #GnomeClient object.
  * @dialog: Pointer to GNOME dialog widget (a #GtkDialog widget).
  *
@@ -2511,7 +2511,7 @@ gnome_client_save_any_dialog (GnomeClient *client, GtkDialog *dialog)
 }
 
 /**
- * gnome_client_save_error_dialog
+ * gnome_client_save_error_dialog:
  * @client: Pointer to #GnomeClient object.
  * @dialog: Pointer to GNOME dialog widget (a #GtkDialog widget).
  *
@@ -2539,7 +2539,7 @@ gnome_client_save_error_dialog (GnomeClient *client, GtkDialog *dialog)
 }
 
 /**
- * gnome_client_request_interaction
+ * gnome_client_request_interaction:
  * @client: A #GnomeClient object.
  * @dialog_type: The type of dialog to create.
  * @function: Callback to invoke to perform the interaction.
@@ -2581,7 +2581,7 @@ gnome_client_request_interaction (GnomeClient *client,
 
 
 /**
- * gnome_client_request_interaction_interp
+ * gnome_client_request_interaction_interp:
  * @client: Pointer to GNOME session client object.
  * @dialog_type: Type of dialog to show.
  * @function: Callback to perform the interaction (a #GnomeInteractFunction).
@@ -2620,7 +2620,7 @@ gnome_client_request_interaction_interp (GnomeClient *client,
 
 
 /**
- * gnome_client_request_phase_2
+ * gnome_client_request_phase_2:
  * @client: A #GnomeClient object.
  *
  * Description:  Request the session managaer to emit the "save_yourself"
@@ -2644,7 +2644,7 @@ gnome_client_request_phase_2 (GnomeClient *client)
 
 
 /**
- * gnome_client_request_save
+ * gnome_client_request_save:
  * @client: Pointer to GNOME session client object.
  * @save_style: Save style to request.
  * @shutdown: Whether to log out of the session.
@@ -2762,7 +2762,7 @@ gnome_client_request_save (GnomeClient	       *client,
 
 
 /**
- * gnome_interaction_key_return
+ * gnome_interaction_key_return:
  * @key: Key passed to interaction callback
  * @cancel_shutdown: If %TRUE, cancel the shutdown
  *
