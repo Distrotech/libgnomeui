@@ -157,7 +157,6 @@ gnome_calculator_class_init (GnomeCalculatorClass *class)
 			       GTK_TYPE_DOUBLE);
 
 	class->result_changed = NULL;
-	gtk_object_class_add_signals (object_class, gnome_calculator_signals, LAST_SIGNAL);
 }
 
 #if 0 /*only used for debugging*/

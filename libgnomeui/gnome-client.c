@@ -1096,7 +1096,6 @@ gnome_client_class_init (GnomeClientClass *klass)
 		    gtk_signal_default_marshaller,
 		    GTK_TYPE_NONE, 0);
   
-  gtk_object_class_add_signals (object_class, client_signals, LAST_SIGNAL);
   
   object_class->destroy = gnome_real_client_destroy;
   

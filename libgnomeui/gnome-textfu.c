@@ -317,7 +317,6 @@ gnome_textfu_class_init (GnomeTextFuClass *klass)
                     gtk_marshal_NONE__STRING,
                     GTK_TYPE_NONE, 1, GTK_TYPE_STRING);
 
-  gtk_object_class_add_signals (object_class, textfu_signals, LAST_SIGNAL);
 
   klass->activate_uri = gnome_real_textfu_activate_uri;
   klass->tag_handlers = g_hash_table_new(g_str_hash, g_str_equal);

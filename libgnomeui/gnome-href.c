@@ -43,12 +43,12 @@ static void gnome_href_init		(GnomeHRef *href);
 static void gnome_href_clicked		(GtkButton *button);
 static void gnome_href_destroy		(GtkObject *object);
 static void gnome_href_finalize		(GObject *object);
-static void gnome_href_get_param	(GObject *object,
+static void gnome_href_get_property	(GObject *object,
 					 guint param_id,
 					 GValue *value,
 					 GParamSpec * pspec,
 					 const gchar *trailer);
-static void gnome_href_set_param	(GObject *object,
+static void gnome_href_set_property	(GObject *object,
 					 guint param_id,
 					 const GValue * value,
 					 GParamSpec * pspec,
@@ -85,9 +85,9 @@ static const gint n_other_drop_types =
 
 
 enum {
-	PARAM_0,
-	PARAM_URL,
-	PARAM_TEXT
+	PROP_0,
+	PROP_URL,
+	PROP_TEXT
 };
 
 /**
@@ -108,16 +108,16 @@ gnome_href_class_init (GnomeHRefClass *klass)
 	GtkButtonClass *button_class = (GtkButtonClass *)klass;
 
 	/* By default we link to The World Food Programme */
-	g_object_class_install_param (gobject_class,
-				      PARAM_URL,
+	g_object_class_install_property (gobject_class,
+				      PROP_URL,
 				      g_param_spec_string ("url",
 							   _("URL"),
 							   _("The URL that GnomeHRef activates"),
 							   "http://www.wfp.org",
 							   (G_PARAM_READABLE |
 							    G_PARAM_WRITABLE)));
-	g_object_class_install_param (gobject_class,
-				      PARAM_TEXT,
+	g_object_class_install_property (gobject_class,
+				      PROP_TEXT,
 				      g_param_spec_string ("text",
 							   _("Text"),
 							   _("The text on the button"),
@@ -128,8 +128,8 @@ gnome_href_class_init (GnomeHRefClass *klass)
 	object_class->destroy = gnome_href_destroy;
 
 	gobject_class->finalize = gnome_href_finalize;
-	gobject_class->set_param = gnome_href_set_param;
-	gobject_class->get_param = gnome_href_get_param;
+	gobject_class->set_property = gnome_href_set_property;
+	gobject_class->get_property = gnome_href_get_property;
 
 	widget_class->realize = gnome_href_realize;
 	button_class->clicked = gnome_href_clicked;
@@ -450,7 +450,7 @@ gnome_href_realize(GtkWidget *widget)
 }
 
 static void
-gnome_href_set_param (GObject *object,
+gnome_href_set_property (GObject *object,
 		      guint param_id,
 		      const GValue * value,
 		      GParamSpec * pspec,
@@ -464,10 +464,10 @@ gnome_href_set_param (GObject *object,
 	self = GNOME_HREF (object);
 
 	switch (param_id) {
-	case PARAM_URL:
+	case PROP_URL:
 		gnome_href_set_url(self, g_value_get_string (value));
 		break;
-	case PARAM_TEXT:
+	case PROP_TEXT:
 		gnome_href_set_text(self, g_value_get_string (value));
 		break;
 	default:
@@ -476,7 +476,7 @@ gnome_href_set_param (GObject *object,
 }
 
 static void
-gnome_href_get_param (GObject *object,
+gnome_href_get_property (GObject *object,
 		      guint param_id,
 		      GValue *value,
 		      GParamSpec * pspec,
@@ -490,11 +490,11 @@ gnome_href_get_param (GObject *object,
 	self = GNOME_HREF (object);
 
 	switch (param_id) {
-	case PARAM_URL:
+	case PROP_URL:
 		g_value_set_string (value,
 				    gnome_href_get_url(self));
 		break;
-	case PARAM_TEXT:
+	case PROP_TEXT:
 		g_value_set_string (value,
 				    gnome_href_get_text(self));
 		break;

@@ -31,13 +31,13 @@
 #include "libgnome/gnome-i18nP.h"
 
 enum {
-  PARAM_0,
-  PARAM_LOOP_TYPE,
-  PARAM_DIRECTION,
-  PARAM_NUM_FRAMES,
-  PARAM_CURRENT_FRAME,
-  PARAM_STATUS,
-  PARAM_SPEED
+  PROP_0,
+  PROP_LOOP_TYPE,
+  PROP_DIRECTION,
+  PROP_NUM_FRAMES,
+  PROP_CURRENT_FRAME,
+  PROP_STATUS,
+  PROP_SPEED
 };
 
 struct _GnomeAnimatorPrivate
@@ -77,12 +77,12 @@ static void gnome_animator_class_init (GnomeAnimatorClass * class);
 static void gnome_animator_init (GnomeAnimator * animator);
 static void destroy (GtkObject * object);
 static void finalize (GObject * object);
-static void set_param (GObject * object, 
+static void set_property (GObject * object, 
 		       guint param_id,
 		       const GValue * value,
 		       GParamSpec * pspec,
 		       const gchar * trailer);
-static void get_param (GObject * object,
+static void get_property (GObject * object,
 		       guint param_id,
 		       GValue *value,
 		       GParamSpec * pspec,
@@ -131,8 +131,8 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
   gobject_class = (GObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
 
-  g_object_class_install_param (gobject_class,
-				PARAM_LOOP_TYPE,
+  g_object_class_install_property (gobject_class,
+				PROP_LOOP_TYPE,
 				g_param_spec_enum ("loop_type",
 						   _("Loop type"),
 						   _("The type of loop the GnomeAnimator uses"),
@@ -140,8 +140,8 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
 						   GNOME_ANIMATOR_LOOP_NONE,
 						   (G_PARAM_READABLE |
 						    G_PARAM_WRITABLE)));
-  g_object_class_install_param (gobject_class,
-				PARAM_DIRECTION,
+  g_object_class_install_property (gobject_class,
+				PROP_DIRECTION,
 				g_param_spec_enum ("direction",
 						   _("Direction"),
 						   _("Animation direction"),
@@ -149,8 +149,8 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
 						   GNOME_ANIMATOR_DIRECTION_FORWARD,
 						   (G_PARAM_READABLE |
 						    G_PARAM_WRITABLE)));
-  g_object_class_install_param (gobject_class,
-				PARAM_NUM_FRAMES,
+  g_object_class_install_property (gobject_class,
+				PROP_NUM_FRAMES,
 				g_param_spec_uint ("num_frames",
 						   _("Number of frames"),
 						   _("Total number of frames in animation"),
@@ -158,8 +158,8 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
 						   0,
 						   0,
 						   G_PARAM_READABLE));
-  g_object_class_install_param (gobject_class,
-				PARAM_CURRENT_FRAME,
+  g_object_class_install_property (gobject_class,
+				PROP_CURRENT_FRAME,
 				g_param_spec_uint ("current_frame",
 						   _("Current frame"),
 						   _("Current frame number"),
@@ -167,8 +167,8 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
 						   0,
 						   0,
 						   G_PARAM_READABLE));
-  g_object_class_install_param (gobject_class,
-				PARAM_STATUS,
+  g_object_class_install_property (gobject_class,
+				PROP_STATUS,
 				g_param_spec_enum ("status",
 						   _("Animation status"),
 						   _("Animation status"),
@@ -176,8 +176,8 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
 						   GNOME_ANIMATOR_STATUS_STOPPED,
 						   (G_PARAM_READABLE |
 						    G_PARAM_WRITABLE)));
-  g_object_class_install_param (gobject_class,
-				PARAM_SPEED,
+  g_object_class_install_property (gobject_class,
+				PROP_SPEED,
 				g_param_spec_double ("speed",
 						     _("Speed"),
 						     _("Animation speed"),
@@ -194,8 +194,8 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
 
   object_class->destroy = destroy;
   gobject_class->finalize = finalize;
-  gobject_class->set_param = set_param;
-  gobject_class->get_param = get_param;
+  gobject_class->set_property = set_property;
+  gobject_class->get_property = get_property;
 }
 
 static void
@@ -250,7 +250,7 @@ finalize (GObject * object)
 }
 
 static void
-set_param (GObject * object,
+set_property (GObject * object,
 	   guint param_id,
 	   const GValue * value,
 	   GParamSpec * pspec,
@@ -263,20 +263,20 @@ set_param (GObject * object,
 
   animator = GNOME_ANIMATOR (object);
   switch (param_id) {
-  case PARAM_LOOP_TYPE:
+  case PROP_LOOP_TYPE:
     gnome_animator_set_loop_type (animator, g_value_get_enum (value));
     break;
 
-  case PARAM_DIRECTION:
+  case PROP_DIRECTION:
     gnome_animator_set_playback_direction (animator,
 					   g_value_get_enum (value));
     break;
 
-  case PARAM_CURRENT_FRAME:
+  case PROP_CURRENT_FRAME:
     gnome_animator_goto_frame (animator, g_value_get_uint (value));
     break;
 
-  case PARAM_STATUS: {
+  case PROP_STATUS: {
     GnomeAnimatorStatus status = g_value_get_enum (value);
     if (status == GNOME_ANIMATOR_STATUS_RUNNING)
       gnome_animator_start (animator);
@@ -286,7 +286,7 @@ set_param (GObject * object,
     break;
   }
 
-  case PARAM_SPEED:
+  case PROP_SPEED:
     gnome_animator_set_playback_speed (animator, g_value_get_double (value));
     break;
 
@@ -297,7 +297,7 @@ set_param (GObject * object,
 
 
 static void
-get_param (GObject * object,
+get_property (GObject * object,
 	   guint param_id,
 	   GValue * value,
 	   GParamSpec * pspec,
@@ -311,27 +311,27 @@ get_param (GObject * object,
   animator = GNOME_ANIMATOR (object);
 
   switch (param_id) {
-  case PARAM_LOOP_TYPE:
+  case PROP_LOOP_TYPE:
     g_value_set_enum (value, animator->loop_type);
     break;
 
-  case PARAM_DIRECTION:
+  case PROP_DIRECTION:
     g_value_set_enum (value, animator->playback_direction);
     break;
 
-  case PARAM_NUM_FRAMES:
+  case PROP_NUM_FRAMES:
     g_value_set_uint (value, animator->n_frames);
     break;
 
-  case PARAM_CURRENT_FRAME:
+  case PROP_CURRENT_FRAME:
     g_value_set_uint (value, animator->frame_num);
     break;
 
-  case PARAM_STATUS:
+  case PROP_STATUS:
     g_value_set_enum (value, animator->status);
     break;
 
-  case PARAM_SPEED:
+  case PROP_SPEED:
     g_value_set_double (value, animator->playback_speed);
     break;
   }

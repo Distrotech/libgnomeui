@@ -137,9 +137,6 @@ gnome_appbar_class_init (GnomeAppBarClass *class)
 		    gtk_signal_default_marshaller,
 		    GTK_TYPE_NONE, 0);
 
-  gtk_object_class_add_signals (object_class, appbar_signals, 
-				LAST_SIGNAL);
-
   parent_class = gtk_type_class (gtk_hbox_get_type ());
   
   class->user_response = NULL;

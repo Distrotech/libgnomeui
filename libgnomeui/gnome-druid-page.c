@@ -106,7 +106,6 @@ gnome_druid_page_class_init (GnomeDruidPageClass *klass)
 				GTK_TYPE_BOOL, 1,
 				GTK_TYPE_POINTER);
 
-	gtk_object_class_add_signals (object_class, druid_page_signals, LAST_SIGNAL);
 	object_class->destroy = gnome_druid_page_destroy;
 	gobject_class->finalize = gnome_druid_page_finalize;
 

@@ -2272,7 +2272,6 @@ wap_textfu_class_init (WapTextFuClass *klass)
                     gtk_marshal_NONE__POINTER,
                     GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
 
-  gtk_object_class_add_signals (object_class, textfu_signals, LAST_SIGNAL);
 
   klass->tag_handlers = g_hash_table_new(g_str_hash, g_str_equal);
 

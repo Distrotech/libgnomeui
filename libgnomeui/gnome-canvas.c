@@ -79,6 +79,7 @@
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
 #include "gnome-canvas.h"
+#include "libgnome/gnome-i18nP.h"
 #include "libart_lgpl/art_rect.h"
 #include "libart_lgpl/art_rect_uta.h"
 #include "libart_lgpl/art_uta_rect.h"
@@ -172,8 +173,6 @@ gnome_canvas_item_class_init (GnomeCanvasItemClass *class)
 				GTK_TYPE_BOOL, 1,
 				GTK_TYPE_GDK_EVENT);
 
-	gtk_object_class_add_signals (object_class, item_signals, ITEM_LAST_SIGNAL);
-
 	gobject_class->shutdown = gnome_canvas_item_shutdown;
 
 	class->realize = gnome_canvas_item_realize;
@@ -226,36 +225,6 @@ gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type, const gchar *firs
 	return item;
 }
 
-/**
- * gnome_canvas_item_newv:
- * @parent: The parent group for the new item.
- * @type: The object type of the item.
- * @nargs: The number of arguments used to configure the item.
- * @args: The list of arguments used to configure the item.
- *
- * Creates a new canvas item with @parent as its parent group.  The item is
- * created at the top of its parent's stack, and starts up as visible.  The item
- * is of the specified @type, for example, it can be
- * gnome_canvas_rect_get_type().  The list of object arguments is used to
- * configure the item.
- *
- * Return value: The newly-created item.
- **/
-GnomeCanvasItem *
-gnome_canvas_item_newv (GnomeCanvasGroup *parent, GtkType type, guint nargs, GtkArg *args)
-{
-	GnomeCanvasItem *item;
-
-	g_return_val_if_fail (parent != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_CANVAS_GROUP (parent), NULL);
-	g_return_val_if_fail (gtk_type_is_a (type, gnome_canvas_item_get_type ()), NULL);
-
-	item = GNOME_CANVAS_ITEM(gtk_type_new (type));
-
-	gnome_canvas_item_constructv (item, parent, nargs, args);
-
-	return item;
-}
 
 /* Performs post-creation operations on a canvas item (adding it to its parent
  * group, etc.)
@@ -286,69 +255,19 @@ void
 gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent,
 			     const gchar *first_arg_name, va_list args)
 {
-        GtkObject *obj;
-	GSList *arg_list;
-	GSList *info_list;
-	char *error;
-
 	g_return_if_fail (parent != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_GROUP (parent));
-
-	obj = GTK_OBJECT(item);
-
-	item->parent = GNOME_CANVAS_ITEM (parent);
-	item->canvas = item->parent->canvas;
-
-	arg_list = NULL;
-	info_list = NULL;
-
-	error = gtk_object_args_collect (GTK_OBJECT_TYPE (obj), &arg_list, &info_list,
-					 first_arg_name, args);
-
-	if (error) {
-		g_warning ("gnome_canvas_item_construct(): %s", error);
-		g_free (error);
-	} else {
-		GSList *arg, *info;
-
-		for (arg = arg_list, info = info_list; arg; arg = arg->next, info = info->next)
-			gtk_object_arg_set (obj, arg->data, info->data);
-
-		gtk_args_collect_cleanup (arg_list, info_list);
-	}
-
-	item_post_create_setup (item);
-}
-
-/**
- * gnome_canvas_item_constructv:
- * @item: An unconstructed canvas item.
- * @parent: The parent group for the item.
- * @nargs: The number of arguments used to configure the item.
- * @args: The list of arguments used to configure the item.
- *
- * Constructs a canvas item; meant for use only by item implementations.
- **/
-void
-gnome_canvas_item_constructv(GnomeCanvasItem *item, GnomeCanvasGroup *parent,
-			     guint nargs, GtkArg *args)
-{
-	GtkObject *obj;
-
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
-	g_return_if_fail (parent != NULL);
-	g_return_if_fail (GNOME_IS_CANVAS_GROUP (parent));
-
-	obj = GTK_OBJECT (item);
 
 	item->parent = GNOME_CANVAS_ITEM (parent);
 	item->canvas = item->parent->canvas;
 
-	gtk_object_setv (obj, nargs, args);
+	g_object_set_valist (G_OBJECT (item), first_arg_name, args);
 
 	item_post_create_setup (item);
 }
+
 
 /* If the item is visible, requests a redraw of it. */
 static void
@@ -577,60 +496,15 @@ gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, ...)
 void
 gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name, va_list args)
 {
-	GSList *arg_list;
-	GSList *info_list;
-	char *error;
-
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
 
-	arg_list = NULL;
-	info_list = NULL;
+	g_object_set_valist (G_OBJECT (item), first_arg_name, args);
 
-	error = gtk_object_args_collect (GTK_OBJECT_TYPE (item),
-					 &arg_list, &info_list, first_arg_name, args);
-
-	if (error) {
-		g_warning ("gnome_canvas_item_set(): %s", error);
-		g_free (error);
-	} else if (arg_list) {
-		GSList *arg;
-		GSList *info;
-		GtkObject *object;
-
-		redraw_if_visible (item);
-
-		object = GTK_OBJECT (item);
-
-		for (arg = arg_list, info = info_list; arg; arg = arg->next, info = info->next)
-			gtk_object_arg_set (object, arg->data, info->data);
-
-		gtk_args_collect_cleanup (arg_list, info_list);
-
-		redraw_if_visible (item);
-		item->canvas->need_repick = TRUE;
-	}
-}
-
-
-/**
- * gnome_canvas_item_setv:
- * @item: A canvas item.
- * @nargs: The number of arguments used to configure the item.
- * @args: The arguments used to configure the item.
- *
- * Configures a canvas item.  The arguments in the item are set to the specified
- * values, and the item is repainted as appropriate.
- **/
-void
-gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args)
-{
 	redraw_if_visible (item);
-	gtk_object_setv (GTK_OBJECT (item), nargs, args);
-	redraw_if_visible (item);
-
 	item->canvas->need_repick = TRUE;
 }
+
 
 /**
  * gnome_canvas_item_affine_relative:
@@ -1471,20 +1345,25 @@ gnome_canvas_item_request_update (GnomeCanvasItem *item)
 
 
 enum {
-	GROUP_ARG_0,
-	GROUP_ARG_X,
-	GROUP_ARG_Y
+	GROUP_PROP_0,
+	GROUP_PROP_X,
+	GROUP_PROP_Y
 };
 
 
 static void gnome_canvas_group_class_init  (GnomeCanvasGroupClass *class);
 static void gnome_canvas_group_init        (GnomeCanvasGroup      *group);
-static void gnome_canvas_group_set_arg     (GtkObject             *object,
-					    GtkArg                *arg,
-					    guint                  arg_id);
-static void gnome_canvas_group_get_arg     (GtkObject             *object,
-					    GtkArg                *arg,
-					    guint                  arg_id);
+static void gnome_canvas_group_set_property(GObject               *object, 
+					    guint                  param_id,
+					    const GValue          *value,
+					    GParamSpec            *pspec,
+					    const gchar           *trailer);
+static void gnome_canvas_group_get_property(GObject               *object,
+					    guint                  param_id,
+					    GValue                *value,
+					    GParamSpec            *pspec,
+					    const gchar           *trailer);
+
 static void gnome_canvas_group_destroy     (GtkObject             *object);
 
 static void   gnome_canvas_group_update      (GnomeCanvasItem *item, double *affine,
@@ -1542,21 +1421,34 @@ gnome_canvas_group_get_type (void)
 static void
 gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 {
+	GObjectClass *gobject_class;
 	GtkObjectClass *object_class;
 	GnomeCanvasItemClass *item_class;
 
+	gobject_class = (GObjectClass *) class;
 	object_class = (GtkObjectClass *) class;
 	item_class = (GnomeCanvasItemClass *) class;
 
 	group_parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasGroup::x", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE,
-				 GROUP_ARG_X);
-	gtk_object_add_arg_type ("GnomeCanvasGroup::y", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE,
-				 GROUP_ARG_Y);
+	gobject_class->set_property = gnome_canvas_group_set_property;
+	gobject_class->get_property = gnome_canvas_group_get_property;
 
-	object_class->set_arg = gnome_canvas_group_set_arg;
-	object_class->get_arg = gnome_canvas_group_get_arg;
+	g_object_class_install_property
+		(gobject_class, GROUP_PROP_X,
+		 g_param_spec_double ("x",
+				      _("X"),
+				      _("X"),
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+	g_object_class_install_property
+		(gobject_class, GROUP_PROP_Y,
+		 g_param_spec_double ("y",
+				      _("Y"),
+				      _("Y"),
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+
 	object_class->destroy = gnome_canvas_group_destroy;
 
 	item_class->update = gnome_canvas_group_update;
@@ -1597,37 +1489,42 @@ gnome_canvas_ensure_translate (GnomeCanvasItem *item)
 	}
 }
 
-/* Set_arg handler for canvas groups */
+/* Set_property handler for canvas groups */
 static void
-gnome_canvas_group_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_canvas_group_set_property (GObject *gobject, guint param_id,
+				 const GValue *value, GParamSpec *pspec,
+				 const gchar *trailer)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasGroup *group;
 	int recalc;
 	double *xlat;
 
-	item = GNOME_CANVAS_ITEM (object);
-	group = GNOME_CANVAS_GROUP (object);
+	g_return_if_fail (gobject != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_GROUP (gobject));
+
+	item = GNOME_CANVAS_ITEM (gobject);
+	group = GNOME_CANVAS_GROUP (gobject);
 
 	recalc = FALSE;
 
-	switch (arg_id) {
-	case GROUP_ARG_X:
+	switch (param_id) {
+	case GROUP_PROP_X:
 #ifdef OLD_XFORM
-		group->xpos = GTK_VALUE_DOUBLE (*arg);
+		group->xpos = g_value_get_double (value);
 #else
 		xlat = gnome_canvas_ensure_translate (item);
-		xlat[0] = GTK_VALUE_DOUBLE (*arg);
+		xlat[0] = g_value_get_double (value);
 #endif
 		recalc = TRUE;
 		break;
 
-	case GROUP_ARG_Y:
+	case GROUP_PROP_Y:
 #ifdef OLD_XFORM
-		group->ypos = GTK_VALUE_DOUBLE (*arg);
+		group->ypos = g_value_get_double (value);
 #else
 		xlat = gnome_canvas_ensure_translate (item);
-		xlat[1] = GTK_VALUE_DOUBLE (*arg);
+		xlat[1] = g_value_get_double (value);
 #endif
 		recalc = TRUE;
 		break;
@@ -1644,46 +1541,48 @@ gnome_canvas_group_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	}
 }
 
-/* Get_arg handler for canvas groups */
+/* Get_property handler for canvas groups */
 static void
-gnome_canvas_group_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_canvas_group_get_property (GObject *gobject, guint param_id,
+				 GValue *value, GParamSpec *pspec,
+				 const gchar *trailer)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasGroup *group;
 
-	item = GNOME_CANVAS_ITEM (object);
-	group = GNOME_CANVAS_GROUP (object);
+	g_return_if_fail (gobject != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_GROUP (gobject));
 
-	switch (arg_id) {
-	case GROUP_ARG_X:
+	item = GNOME_CANVAS_ITEM (gobject);
+	group = GNOME_CANVAS_GROUP (gobject);
+
+	switch (param_id) {
+	case GROUP_PROP_X:
 #ifdef OLD_XFORM
-		GTK_VALUE_DOUBLE (*arg) = group->ypos;
+		g_value_set_double (value, group->xpos);
 #else
 		if (item->xform == NULL)
-			GTK_VALUE_DOUBLE (*arg) = 0;
-		else if (object->flags & GNOME_CANVAS_ITEM_AFFINE_FULL)
-			GTK_VALUE_DOUBLE (*arg) = item->xform[4];
+			g_value_set_double (value, 0);
+		else if (GTK_OBJECT (gobject)->flags & GNOME_CANVAS_ITEM_AFFINE_FULL)
+			g_value_set_double (value, item->xform[4]);
 		else
-			GTK_VALUE_DOUBLE (*arg) = item->xform[0];
+			g_value_set_double (value, item->xform[0]);
 #endif
 		break;
 
-	case GROUP_ARG_Y:
+	case GROUP_PROP_Y:
 #ifdef OLD_XFORM
-		GTK_VALUE_DOUBLE (*arg) = group->ypos;
+		g_value_set_double (value, group->ypos);
 #else
 		if (item->xform == NULL)
-			GTK_VALUE_DOUBLE (*arg) = 0;
-		else if (object->flags & GNOME_CANVAS_ITEM_AFFINE_FULL)
-			GTK_VALUE_DOUBLE (*arg) = item->xform[5];
+			g_value_set_double (value, 0);
+		else if (GTK_OBJECT (gobject)->flags & GNOME_CANVAS_ITEM_AFFINE_FULL)
+			g_value_set_double (value, item->xform[5]);
 		else
-			GTK_VALUE_DOUBLE (*arg) = item->xform[1];
+			g_value_set_double (value, item->xform[1]);
 #endif
 		break;
 
-	default:
-		arg->type = GTK_TYPE_INVALID;
-		break;
 	}
 }
 

@@ -74,12 +74,12 @@ static void gnome_app_init        (GnomeApp      *app);
 static void gnome_app_destroy     (GtkObject     *object);
 static void gnome_app_finalize    (GObject       *object);
 static void gnome_app_show        (GtkWidget     *widget);
-static void gnome_app_get_param   (GObject       *object,
+static void gnome_app_get_property   (GObject       *object,
 				   guint          param_id,
 				   GValue        *value,
 				   GParamSpec    *pspec,
 				   const gchar   *trailer);
-static void gnome_app_set_param   (GObject       *object,
+static void gnome_app_set_property   (GObject       *object,
 				   guint          param_id,
 				   const GValue  *value,
 				   GParamSpec    *pspec,
@@ -122,8 +122,8 @@ write_layout_config (GnomeApp *app, GnomeDockLayout *layout)
 }
 
 enum {
-	PARAM_0,
-	PARAM_APP_ID
+	PROP_0,
+	PROP_APP_ID
 };
 
 static void
@@ -138,15 +138,15 @@ gnome_app_class_init (GnomeAppClass *class)
 	widget_class = (GtkWidgetClass *) class;
 
 	gobject_class->finalize = gnome_app_finalize;
-	gobject_class->set_param = gnome_app_set_param;
-	gobject_class->get_param = gnome_app_get_param;
+	gobject_class->set_property = gnome_app_set_property;
+	gobject_class->get_property = gnome_app_get_property;
 
 	object_class->destroy = gnome_app_destroy;
 
 	widget_class->show = gnome_app_show;
 
-	g_object_class_install_param (gobject_class,
-				      PARAM_APP_ID,
+	g_object_class_install_property (gobject_class,
+				      PROP_APP_ID,
 				      g_param_spec_string ("app_id",
 							   _("App ID"),
 							   _("The application ID string"),
@@ -156,7 +156,7 @@ gnome_app_class_init (GnomeAppClass *class)
 }
 
 static void
-gnome_app_set_param (GObject       *object,
+gnome_app_set_property (GObject       *object,
 		     guint          param_id,
 		     const GValue  *value,
 		     GParamSpec    *pspec,
@@ -165,7 +165,7 @@ gnome_app_set_param (GObject       *object,
 	GnomeApp *app = GNOME_APP (object);
 
 	switch(param_id) {
-	case PARAM_APP_ID:
+	case PROP_APP_ID:
 		g_free (app->name);
 		app->name = g_strdup (g_value_get_string (value));
 		g_free (app->prefix);
@@ -175,7 +175,7 @@ gnome_app_set_param (GObject       *object,
 }
 
 static void
-gnome_app_get_param (GObject       *object,
+gnome_app_get_property (GObject       *object,
 		     guint          param_id,
 		     GValue        *value,
 		     GParamSpec    *pspec,
@@ -184,7 +184,7 @@ gnome_app_get_param (GObject       *object,
 	GnomeApp *app = GNOME_APP (object);
 
 	switch(param_id) {
-	case PARAM_APP_ID:
+	case PROP_APP_ID:
 		g_value_set_string (value, app->name);
 		break;
 	}

@@ -944,7 +944,6 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			gtk_marshal_NONE__NONE,
 			GTK_TYPE_NONE, 0);
 
-	gtk_object_class_add_signals (object_class, iti_signals, LAST_SIGNAL);
 
 	object_class->destroy = iti_destroy;
 	object_class->set_arg = iti_set_arg;

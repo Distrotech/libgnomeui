@@ -76,7 +76,6 @@ static gint            book_button_press(GtkWidget *widget, GdkEventButton *e, g
 static gint            book_button_release(GtkWidget *widget, GdkEventButton *e, gpointer data);
 static void            book_add_view(GtkNotebook *, GtkWidget *);
 static void            set_page_by_widget(GtkNotebook *, GtkWidget *);
-static GtkNotebookPage *find_page_by_widget(GtkNotebook *, GtkWidget *);
 
 static GtkWidget       *pouch_create (GnomeMDI *mdi);
 static void            pouch_add_view (GnomePouch *pouch, GtkWidget *view);
@@ -187,7 +186,6 @@ gnome_mdi_class_init (GnomeMDIClass *klass)
 				gtk_marshal_VOID__POINTER,
 				GTK_TYPE_NONE, 1, gnome_app_get_type());
 	
-	gtk_object_class_add_signals (object_class, mdi_signals, LAST_SIGNAL);
 	
 	klass->add_child = NULL;
 	klass->remove_child = NULL;
@@ -559,22 +557,6 @@ set_page_by_widget (GtkNotebook *book, GtkWidget *child)
 		gtk_notebook_set_page(book, i);
 }
 
-static GtkNotebookPage
-*find_page_by_widget (GtkNotebook *book, GtkWidget *child)
-{
-	GList *page_node;
-	
-	page_node = book->children;
-	while(page_node) {
-		if( ((GtkNotebookPage *)page_node->data)->child == child )
-			return ((GtkNotebookPage *)page_node->data);
-		
-		page_node = g_list_next(page_node);
-	}
-	
-	return NULL;
-}
-
 static GtkWidget
 *find_item_by_child (GtkMenuShell *shell, GnomeMDIChild *child)
 {
@@ -763,6 +745,7 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 		GnomeApp *app;
 		GtkWidget *view, *new_book, *new_app;
 		GtkNotebook *old_book = GTK_NOTEBOOK(widget);
+		gint old_page_no;
 
 		mdi->priv->in_drag = FALSE;
 		gdk_pointer_ungrab(GDK_CURRENT_TIME);
@@ -775,6 +758,8 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 		window_node = mdi->priv->windows;
 		while(window_node) {
 			if(window == GTK_WIDGET(window_node->data)->window) {
+				gint cur_page_no;
+
 				/* page was dragged to another notebook */
 				old_book = GTK_NOTEBOOK(widget);
 				new_book = GNOME_APP(window_node->data)->contents;
@@ -782,15 +767,19 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 				if(old_book == (GtkNotebook *)new_book) /* page has been dropped on the source notebook */
 					return FALSE;
 	
-				if(old_book->cur_page) {
-					view = old_book->cur_page->child;
+				cur_page_no = gtk_notebook_get_current_page(old_book);
+				if(cur_page_no >= 0) {
+					gint new_page_no;
+
+					view = gtk_notebook_get_nth_page(old_book, cur_page_no);
 					gtk_container_remove(GTK_CONTAINER(old_book), view);
 
 					/* a trick to make view_changed signal get emitted
 					   properly, taking care of updating the gnomeapps */
-					if(GTK_NOTEBOOK(new_book)->cur_page) {
+					new_page_no = gtk_notebook_get_current_page(GTK_NOTEBOOK(new_book));
+					if(new_page_no >= 0) {
 						mdi->priv->active_view =
-							GTK_NOTEBOOK(new_book)->cur_page->child;
+							gtk_notebook_get_nth_page(GTK_NOTEBOOK(new_book), new_page_no);
 						mdi->priv->active_child =
 							gnome_mdi_get_child_from_view(mdi->priv->active_view);
 					}
@@ -823,10 +812,11 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 			return FALSE;
 
 		/* create a new toplevel */
-		if(old_book->cur_page) {
+		old_page_no = gtk_notebook_get_current_page(old_book);
+		if(old_page_no >= 0) {
 			gint width, height;
 				
-			view = old_book->cur_page->child;
+			view = gtk_notebook_get_nth_page(old_book, old_page_no);
 	
 			app = gnome_mdi_get_app_from_view(view);
 
@@ -963,9 +953,12 @@ book_switch_page (GtkNotebook *book, GtkNotebookPage *page, gint page_num, Gnome
 	g_message("GnomeMDI: switching pages");
 #endif
 
-	if(page && page->child) {
-		if(page->child != mdi->priv->active_view)
-			set_active_view(mdi, page->child);
+	if(page) {
+		GtkWidget *view;
+
+		view = gtk_notebook_get_nth_page(book, page_num);
+		if(view != mdi->priv->active_view)
+			set_active_view(mdi, view);
 	}
 	else
 		set_active_view(mdi, NULL);  
@@ -991,10 +984,9 @@ app_focus_in_event (GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi)
 			set_active_view(mdi, NULL);
 	}
 	else if(mdi->priv->mode == GNOME_MDI_NOTEBOOK) {
-		GtkNotebookPage *page;
-		page = GTK_NOTEBOOK(app->contents)->cur_page;
-		if(page)
-			set_active_view(mdi, GTK_NOTEBOOK(app->contents)->cur_page->child);
+		gint cur_page_no = gtk_notebook_get_current_page(GTK_NOTEBOOK(app->contents));
+		if(cur_page_no >= 0)
+			set_active_view(mdi, gtk_notebook_get_nth_page(GTK_NOTEBOOK(app->contents), cur_page_no));
 		else
 			set_active_view(mdi, NULL);
 	}
@@ -1138,7 +1130,8 @@ app_book_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 {
 	GnomeMDIChild *child;
 	GtkWidget *view;
-	GList *page_node, *node;
+	gint page_no = 0;
+	GList *node;
 	gint ret = FALSE;
 	
 	if(g_list_length(mdi->priv->windows) == 1) {		
@@ -1155,18 +1148,19 @@ app_book_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 	}
 	else {
 		/* first check if all the children in this notebook can be removed */
-		page_node = GTK_NOTEBOOK(app->contents)->children;
-		if(!page_node) {
+		view = gtk_notebook_get_nth_page(GTK_NOTEBOOK(app->contents), 0);
+		if(!view) {
 			mdi->priv->windows = g_list_remove(mdi->priv->windows, app);
 			gtk_widget_destroy(GTK_WIDGET(app));
 			return FALSE;
 		}
 
-		while(page_node) {
-			view = ((GtkNotebookPage *)page_node->data)->child;
+		page_no = 0;
+		while (view != NULL) {
 			child = gnome_mdi_get_child_from_view(view);
-			
-			page_node = page_node->next;
+
+			view = gtk_notebook_get_nth_page(GTK_NOTEBOOK(app->contents),
+											 ++page_no);
 			
 			node = child->priv->views;
 			while(node) {
@@ -1181,16 +1175,17 @@ app_book_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 				if(!ret)
 					return TRUE;
 			}
-		}
+		} while (view != NULL);
 
 		ret = FALSE;
 		/* now actually remove all children/views! */
-		page_node = GTK_NOTEBOOK(app->contents)->children;
-		while(page_node) {
-			view = ((GtkNotebookPage *)page_node->data)->child;
+		page_no = 0;
+		view = gtk_notebook_get_nth_page(GTK_NOTEBOOK(app->contents), page_no);
+		while(view != NULL) {
 			child = gnome_mdi_get_child_from_view(view);
 			
-			page_node = page_node->next;
+			view = gtk_notebook_get_nth_page(GTK_NOTEBOOK(app->contents),
+											 ++page_no);
 			
 			/* if this is the last view, remove the child */
 			if(g_list_length(child->priv->views) == 1)
@@ -1477,11 +1472,16 @@ gnome_mdi_update_child (GnomeMDI *mdi, GnomeMDIChild *child)
 			g_free(fullname);
 		}
 		else if(mdi->priv->mode == GNOME_MDI_NOTEBOOK) {
-			GtkNotebookPage *page;
+			gint page_num;
 
-			page = find_page_by_widget(GTK_NOTEBOOK(view->parent), view);
-			if(page)
-				title = child_set_label(child, page->tab_label);
+			page_num = gtk_notebook_page_num(GTK_NOTEBOOK(view->parent), view);
+			if(page_num >= 0) {
+				GtkWidget *old_label;
+
+				old_label = gtk_notebook_get_tab_label(GTK_NOTEBOOK(view->parent),
+													   view);
+				title = child_set_label(child, old_label);
+			}
 		}
 		else if(mdi->priv->mode == GNOME_MDI_WIW) {
 			gnome_roo_set_title(GNOME_ROO(view->parent), child->priv->name);
@@ -2373,9 +2373,13 @@ gnome_mdi_get_view_from_window (GnomeMDI *mdi, GnomeApp *app)
 	if((mdi->priv->mode == GNOME_MDI_TOPLEVEL) ||
 	   (mdi->priv->mode == GNOME_MDI_MODAL))
 		return app->contents;
-	else if( mdi->priv->mode == GNOME_MDI_NOTEBOOK &&
-			 GTK_NOTEBOOK(app->contents)->cur_page)
-		return GTK_NOTEBOOK(app->contents)->cur_page->child;
+	else if(mdi->priv->mode == GNOME_MDI_NOTEBOOK) {
+		gint cur_page_no = gtk_notebook_get_current_page(GTK_NOTEBOOK(app->contents));
+		if (cur_page_no >= 0)
+			return gtk_notebook_get_nth_page(GTK_NOTEBOOK(app->contents), cur_page_no);
+		else
+			return NULL;
+	}
 	else if(mdi->priv->mode == GNOME_MDI_WIW)
 		return GTK_WIDGET(gnome_pouch_get_selected(get_pouch_from_app(app)));
 	else

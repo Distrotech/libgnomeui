@@ -41,9 +41,6 @@
 #include "libgnome/libgnomeP.h"
 #include "gnome-entry.h"
 
-/*FIXME: Add GtkArg stuff */
-
-
 struct _GnomeEntryPrivate {
 	gchar     *history_id;
 
@@ -61,13 +58,6 @@ static void   gnome_entry_init         (GnomeEntry      *gentry);
 static void   gnome_entry_destroy      (GtkObject       *object);
 static void   gnome_entry_finalize     (GObject         *object);
 
-static void   entry_set_arg            (GtkObject       *object,
-                                        GtkArg          *arg,
-                                        guint            arg_id);
-static void   entry_get_arg            (GtkObject       *object,
-                                        GtkArg          *arg,
-                                        guint            arg_id);
-
 static gchar *get_entry_text_handler   (GnomeSelector   *selector);
 static void   set_entry_text_handler   (GnomeSelector   *selector,
                                         const gchar     *text);
@@ -78,11 +68,6 @@ static void   entry_activated_cb       (GtkWidget       *widget,
 
 
 static GnomeSelectorClass *parent_class;
-
-enum {
-	ARG_0,
-	ARG_GTK_ENTRY
-};
 
 guint
 gnome_entry_get_type (void)
@@ -120,50 +105,13 @@ gnome_entry_class_init (GnomeEntryClass *class)
 
 	parent_class = gtk_type_class (gnome_selector_get_type ());
 
-	gtk_object_add_arg_type("GnomeEntry::gtk_entry",
-				GTK_TYPE_POINTER,
-				GTK_ARG_READABLE,
-				ARG_GTK_ENTRY);
-
 	object_class->destroy = gnome_entry_destroy;
 	gobject_class->finalize = gnome_entry_finalize;
-	object_class->get_arg = entry_get_arg;
-	object_class->set_arg = entry_set_arg;
 
 	selector_class->get_entry_text = get_entry_text_handler;
 	selector_class->set_entry_text = set_entry_text_handler;
 	selector_class->activate_entry = activate_entry_handler;
 	selector_class->history_changed = history_changed_handler;
-}
-
-static void
-entry_set_arg (GtkObject *object,
-	       GtkArg *arg,
-	       guint arg_id)
-{
-	GnomeEntry *self;
-
-	self = GNOME_ENTRY (object);
-
-	switch (arg_id) {
-	default:
-		break;
-	}
-}
-
-static void
-entry_get_arg (GtkObject *object,
-	       GtkArg *arg,
-	       guint arg_id)
-{
-	GnomeEntry *self;
-
-	self = GNOME_ENTRY (object);
-
-	switch (arg_id) {
-	default:
-		break;
-	}
 }
 
 static void

@@ -183,7 +183,6 @@ gnome_font_picker_class_init (GnomeFontPickerClass *class)
 				GTK_TYPE_NONE, 1,
 				GTK_TYPE_STRING);
 
-	gtk_object_class_add_signals (object_class, font_picker_signals, LAST_SIGNAL);
 
 	object_class->destroy = gnome_font_picker_destroy;
 	gobject_class->finalize = gnome_font_picker_finalize;

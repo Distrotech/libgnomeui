@@ -202,7 +202,6 @@ gnome_dock_class_init (GnomeDockClass *class)
                     gtk_marshal_NONE__NONE,
                     GTK_TYPE_NONE, 0);
 
-  gtk_object_class_add_signals (object_class, dock_signals, LAST_SIGNAL);
 }
 
 static void

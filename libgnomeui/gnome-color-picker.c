@@ -170,7 +170,6 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
 				GTK_TYPE_UINT,
 				GTK_TYPE_UINT);
 
-	gtk_object_class_add_signals (object_class, color_picker_signals, LAST_SIGNAL);
 
 	gtk_object_add_arg_type("GnomeColorPicker::dither",
 				GTK_TYPE_BOOL,

@@ -32,6 +32,7 @@
 
 #include "gnome-dock-item.h"
 #include "gnome-cursors.h"
+#include <libgnome/gnome-i18nP.h>
 
 struct _GnomeDockItemPrivate
 {
@@ -43,11 +44,11 @@ struct _GnomeDockItemPrivate
 
 
 enum {
-  ARG_0,
-  ARG_SHADOW,
-  ARG_ORIENTATION,
-  ARG_PREFERRED_WIDTH,
-  ARG_PREFERRED_HEIGHT
+  PROP_0,
+  PROP_SHADOW,
+  PROP_ORIENTATION,
+  PROP_PREFERRED_WIDTH,
+  PROP_PREFERRED_HEIGHT
 };
 
 #define DRAG_HANDLE_SIZE 10
@@ -62,20 +63,21 @@ enum {
 };
 
 
-static gboolean  check_guint_arg       (GtkObject     *object,
-					const gchar   *name,
-					guint         *value_return);
 static guint     get_preferred_width   (GnomeDockItem *item);
 static guint     get_preferred_height  (GnomeDockItem *item);
 
 static void gnome_dock_item_class_init     (GnomeDockItemClass *klass);
 static void gnome_dock_item_init           (GnomeDockItem      *dock_item);
-static void gnome_dock_item_set_arg        (GtkObject         *object,
-                                            GtkArg            *arg,
-                                            guint              arg_id);
-static void gnome_dock_item_get_arg        (GtkObject         *object,
-                                            GtkArg            *arg,
-                                            guint              arg_id);
+static void gnome_dock_item_set_property   (GObject            *object,
+					    guint               param_id,
+					    const GValue       *value,
+					    GParamSpec         *pspec,
+					    const gchar        *trailer);
+static void gnome_dock_item_get_property   (GObject            *object,
+					    guint               param_id,
+					    GValue             *value,
+					    GParamSpec         *pspec,
+					    const gchar        *trailer);
 static void gnome_dock_item_destroy        (GtkObject         *object);
 static void gnome_dock_item_finalize       (GObject           *object);
 static void gnome_dock_item_map            (GtkWidget         *widget);
@@ -113,22 +115,24 @@ static guint        dock_item_signals[LAST_SIGNAL] = { 0 };
 /* Helper functions.  */
 
 static gboolean
-check_guint_arg (GtkObject *object,
+check_guint_arg (GObject *object,
 		 const gchar *name,
 		 guint *value_return)
 {
-  GtkArgInfo *info;
-  gchar *error;
+  GParamSpec *pspec;
 
-  error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (object), name, &info);
-  if (error != NULL)
-    {
-      g_free (error);
-      return FALSE;
-    }
+  pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (object), name);
+  if (pspec != NULL) {
+    GValue value = { 0, };
 
-  gtk_object_get (object, name, value_return, NULL);
-  return TRUE;
+    g_value_init (&value, G_TYPE_UINT);
+    g_object_get_property (G_OBJECT (object), name, &value);
+    *value_return = g_value_get_uint (&value);
+    g_value_unset (&value);
+
+    return TRUE;
+  } else
+    return FALSE;
 }
 
 static guint
@@ -139,7 +143,7 @@ get_preferred_width (GnomeDockItem *dock_item)
 
   child = GTK_BIN (dock_item)->child;
 
-  if (! check_guint_arg (GTK_OBJECT (child), "preferred_width", &preferred_width))
+  if (! check_guint_arg (G_OBJECT (child), "preferred_width", &preferred_width))
     {
       GtkRequisition child_requisition;
   
@@ -163,7 +167,7 @@ get_preferred_height (GnomeDockItem *dock_item)
 
   child = GTK_BIN (dock_item)->child;
 
-  if (! check_guint_arg (GTK_OBJECT (child), "preferred_height", &preferred_height))
+  if (! check_guint_arg (G_OBJECT (child), "preferred_height", &preferred_height))
     {
       GtkRequisition child_requisition;
   
@@ -220,22 +224,44 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
 
   parent_class = gtk_type_class (gtk_bin_get_type ());
 
-  gtk_object_add_arg_type ("GnomeDockItem::shadow",
-                           GTK_TYPE_SHADOW_TYPE, GTK_ARG_READWRITE,
-                           ARG_SHADOW);
-  gtk_object_add_arg_type ("GnomeDockItem::orientation",
-                           GTK_TYPE_ORIENTATION, GTK_ARG_READWRITE,
-                           ARG_ORIENTATION);
-  gtk_object_add_arg_type ("GnomeDockItem::preferred_width",
-                           GTK_TYPE_UINT, GTK_ARG_READABLE,
-                           ARG_PREFERRED_WIDTH);
-  gtk_object_add_arg_type ("GnomeDockItem::preferred_height",
-                           GTK_TYPE_UINT, GTK_ARG_READABLE,
-                           ARG_PREFERRED_HEIGHT);
-
-  object_class->set_arg = gnome_dock_item_set_arg;
-  object_class->get_arg = gnome_dock_item_get_arg;
+  gobject_class->set_property = gnome_dock_item_set_property;
+  gobject_class->get_property = gnome_dock_item_get_property;
   
+  g_object_class_install_property (gobject_class,
+				   PROP_SHADOW,
+				   g_param_spec_enum ("shadow",
+						      _("Shadow type"),
+						      _("Shadow type"),
+						      GTK_TYPE_SHADOW_TYPE,
+						      GTK_SHADOW_OUT,
+						      (G_PARAM_READABLE |
+						       G_PARAM_WRITABLE)));
+  g_object_class_install_property (gobject_class,
+				   PROP_ORIENTATION,
+				   g_param_spec_enum ("orientation",
+						      _("Orientation"),
+						      _("Orientation"),
+						      GTK_TYPE_ORIENTATION,
+						      GTK_ORIENTATION_HORIZONTAL,
+						      (G_PARAM_READABLE |
+						       G_PARAM_WRITABLE)));
+  g_object_class_install_property (gobject_class,
+				   PROP_PREFERRED_WIDTH,
+				   g_param_spec_uint ("preferred_width",
+						      _("Preferred width"),
+						      _("Preferred width"),
+						      0, G_MAXINT, 0,
+						      (G_PARAM_READABLE |
+						       G_PARAM_WRITABLE)));
+  g_object_class_install_property (gobject_class,
+				   PROP_PREFERRED_HEIGHT,
+				   g_param_spec_uint ("preferred_height",
+						      _("Preferred height"),
+						      _("Preferred height"),
+						      0, G_MAXINT, 0,
+						      (G_PARAM_READABLE |
+						       G_PARAM_WRITABLE)));
+
   dock_item_signals[DOCK_DRAG_BEGIN] =
     gtk_signal_new ("dock_drag_begin",
                     GTK_RUN_LAST,
@@ -278,7 +304,6 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
 		    gtk_marshal_NONE__ENUM,
 		    GTK_TYPE_NONE, 0, GTK_TYPE_ENUM);
 
-  gtk_object_class_add_signals (object_class, dock_item_signals, LAST_SIGNAL);
   
   object_class->destroy = gnome_dock_item_destroy;
   gobject_class->finalize = gnome_dock_item_finalize;
@@ -329,52 +354,63 @@ gnome_dock_item_init (GnomeDockItem *dock_item)
 }
 
 static void
-gnome_dock_item_set_arg (GtkObject *object,
-                         GtkArg *arg,
-                         guint arg_id)
+gnome_dock_item_set_property (GObject            *object,
+			      guint               param_id,
+			      const GValue       *value,
+			      GParamSpec         *pspec,
+			      const gchar        *trailer)
 {
   GnomeDockItem *dock_item;
 
+  g_return_if_fail (object != NULL);
+  g_return_if_fail (GNOME_IS_DOCK_ITEM (object));
+
   dock_item = GNOME_DOCK_ITEM (object);
 
-  switch (arg_id)
+  switch (param_id)
     {
-    case ARG_SHADOW:
-      gnome_dock_item_set_shadow_type (dock_item, GTK_VALUE_ENUM (*arg));
+    case PROP_SHADOW:
+      gnome_dock_item_set_shadow_type (dock_item, g_value_get_enum (value));
       break;
-    case ARG_ORIENTATION:
-      gnome_dock_item_set_orientation (dock_item, GTK_VALUE_ENUM (*arg));
+    case PROP_ORIENTATION:
+      gnome_dock_item_set_orientation (dock_item, g_value_get_enum (value));
       break;
     default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
       break;
     }
 }
 
 static void
-gnome_dock_item_get_arg (GtkObject *object,
-                         GtkArg *arg,
-                         guint arg_id)
+gnome_dock_item_get_property (GObject            *object,
+			      guint               param_id,
+			      GValue             *value,
+			      GParamSpec         *pspec,
+			      const gchar        *trailer)
 {
   GnomeDockItem *dock_item;
 
+  g_return_if_fail (object != NULL);
+  g_return_if_fail (GNOME_IS_DOCK_ITEM (object));
+
   dock_item = GNOME_DOCK_ITEM (object);
 
-  switch (arg_id)
+  switch (param_id)
     {
-    case ARG_SHADOW:
-      GTK_VALUE_ENUM (*arg) = gnome_dock_item_get_shadow_type (dock_item);
+    case PROP_SHADOW:
+      g_value_set_enum (value, gnome_dock_item_get_shadow_type (dock_item));
       break;
-    case ARG_ORIENTATION:
-      GTK_VALUE_ENUM (*arg) = gnome_dock_item_get_orientation (dock_item);
+    case PROP_ORIENTATION:
+      g_value_set_enum (value, gnome_dock_item_get_orientation (dock_item));
       break;
-    case ARG_PREFERRED_HEIGHT:
-      GTK_VALUE_UINT (*arg) = get_preferred_height (dock_item);
+    case PROP_PREFERRED_HEIGHT:
+      g_value_set_uint (value, get_preferred_height (dock_item));
       break;
-    case ARG_PREFERRED_WIDTH:
-      GTK_VALUE_UINT (*arg) = get_preferred_width (dock_item);
+    case PROP_PREFERRED_WIDTH:
+      g_value_set_uint (value, get_preferred_width (dock_item));
       break;
     default:
-      arg->type = GTK_TYPE_INVALID;
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
       break;
     }
 }
@@ -1004,8 +1040,7 @@ gnome_dock_item_add (GtkContainer *container,
                      GtkWidget    *widget)
 {
   GnomeDockItem *dock_item;
-  GtkArgInfo *info_p;
-  gchar *error;
+  GParamSpec *pspec;
 
   g_return_if_fail (GNOME_IS_DOCK_ITEM (container));
   g_return_if_fail (GTK_BIN (container)->child == NULL);
@@ -1016,14 +1051,16 @@ gnome_dock_item_add (GtkContainer *container,
   gtk_widget_set_parent_window (widget, dock_item->bin_window);
   GTK_CONTAINER_CLASS (parent_class)->add (container, widget);
 
-  error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (widget),
-				   "orientation", &info_p);
-  if (error)
-    g_free (error);
-  else
-    gtk_object_set (GTK_OBJECT (widget),
-		    "orientation", dock_item->orientation,
-		    NULL);
+  pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (widget),
+					"orientation");
+  if (pspec != NULL) {
+    GValue value = { 0, };
+
+    g_value_init (&value, GTK_TYPE_ORIENTATION);
+    g_value_set_enum (&value, dock_item->orientation);
+    g_object_set_property (G_OBJECT (widget), "orientation", &value);
+    g_value_unset (&value);
+  }
 }
 
 static void
@@ -1035,13 +1072,12 @@ gnome_dock_item_set_floating (GnomeDockItem *item, gboolean val)
    * set that too.
    */
   if (item->bin.child != NULL) {
-    GtkArgInfo *info_p;
-    gchar *error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (item->bin.child),
-					    "is_floating", &info_p);
-    if (error)
-      g_free (error);
-    else
-      gtk_object_set (GTK_OBJECT (item->bin.child), "is_floating", val, NULL);
+    GValue value = { 0, };
+
+    g_value_init (&value, G_TYPE_BOOLEAN);
+    g_value_set_boolean (&value, val);
+    g_object_set_property (G_OBJECT (item->bin.child), "is_floating", &value);
+    g_value_unset (&value);
   }
 }
 
@@ -1218,9 +1254,6 @@ gboolean
 gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
                                  GtkOrientation orientation)
 {
-  GtkArgInfo *info_p;
-  gchar *error;
-
   g_return_val_if_fail (dock_item != NULL, FALSE);
   g_return_val_if_fail (GNOME_IS_DOCK_ITEM (dock_item), FALSE);
 
@@ -1235,14 +1268,13 @@ gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
       dock_item->orientation = orientation;
 
       if (dock_item->bin.child != NULL) {
-	error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (dock_item->bin.child),
-					 "orientation", &info_p);
-	if (error)
-	  g_free (error);
-	else
-	  gtk_object_set (GTK_OBJECT (dock_item->bin.child),
-			  "orientation", orientation,
-			  NULL);
+	GValue value = { 0, };
+
+	g_value_init (&value, GTK_TYPE_ORIENTATION);
+	g_value_set_enum (&value, orientation);
+	g_object_set_property (G_OBJECT (dock_item->bin.child),
+			       "orientation", &value);
+	g_value_unset (&value);
       }
       if (GTK_WIDGET_DRAWABLE (dock_item))
         gtk_widget_queue_clear (GTK_WIDGET (dock_item));

@@ -142,8 +142,6 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 			       gtk_signal_default_marshaller,
 			       GTK_TYPE_NONE,
 			       0);
-	gtk_object_class_add_signals(object_class,gnome_file_entry_signals,
-				     LAST_SIGNAL);
 
 	gtk_object_add_arg_type("GnomeFileEntry::history_id",
 				GTK_TYPE_STRING,

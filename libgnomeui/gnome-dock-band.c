@@ -139,7 +139,7 @@ static gboolean dock_empty_right              (GnomeDockBand *band,
                                                GList *where,
                                                gint x, gint y);
 
-static gboolean check_guint_arg               (GtkObject *object,
+static gboolean check_guint_arg               (GObject *object,
 					       const gchar *name,
 					       guint *value_return);
 
@@ -245,9 +245,10 @@ gnome_dock_band_size_request (GtkWidget *widget,
 	      gboolean has_preferred_width;
 	      guint preferred_width;
 
-	      has_preferred_width = check_guint_arg (GTK_OBJECT (c->widget),
+	      has_preferred_width = check_guint_arg (G_OBJECT (c->widget),
 						     "preferred_width",
 						     &preferred_width);
+
 	      if (has_preferred_width)
 		c->max_space_requisition = MAX (preferred_width, req.width);
 	      else
@@ -261,6 +262,7 @@ gnome_dock_band_size_request (GtkWidget *widget,
 	      has_preferred_height = check_guint_arg (GTK_OBJECT (c->widget),
 						      "preferred_height",
 						      &preferred_height);
+
 	      if (has_preferred_height)
 		c->max_space_requisition = MAX (preferred_height, req.height);
 	      else
@@ -1467,27 +1469,27 @@ dock_empty_right (GnomeDockBand *band,
   return TRUE;
 }
 
-
-
 /* Helper function.  */
 
 static gboolean
-check_guint_arg (GtkObject *object,
+check_guint_arg (GObject *object,
 		 const gchar *name,
 		 guint *value_return)
 {
-  GtkArgInfo *info;
-  gchar *error;
+  GParamSpec *pspec;
 
-  error = gtk_object_arg_get_info (GTK_OBJECT_TYPE (object), name, &info);
-  if (error != NULL)
-    {
-      g_free (error);
-      return FALSE;
-    }
+  pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (object), name);
+  if (pspec != NULL) {
+    GValue value = { 0, };
 
-  gtk_object_get (object, name, value_return, NULL);
-  return TRUE;
+    g_value_init (&value, G_TYPE_UINT);
+    g_object_get_property (G_OBJECT (object), name, &value);
+    *value_return = g_value_get_uint (&value);
+    g_value_unset (&value);
+
+    return TRUE;
+  } else
+    return FALSE;
 }
 
 

@@ -55,34 +55,42 @@ struct line {
 
 /* Object argument IDs */
 enum {
-	ARG_0,
-	ARG_TEXT,
-	ARG_X,
-	ARG_Y,
-	ARG_FONT,
-        ARG_FONTSET,
-	ARG_FONT_GDK,
-	ARG_ANCHOR,
-	ARG_JUSTIFICATION,
-	ARG_CLIP_WIDTH,
-	ARG_CLIP_HEIGHT,
-	ARG_CLIP,
-	ARG_X_OFFSET,
-	ARG_Y_OFFSET,
-	ARG_FILL_COLOR,
-	ARG_FILL_COLOR_GDK,
-	ARG_FILL_COLOR_RGBA,
-	ARG_FILL_STIPPLE,
-	ARG_TEXT_WIDTH,
-	ARG_TEXT_HEIGHT
+	PROP_0,
+	PROP_TEXT,
+	PROP_X,
+	PROP_Y,
+	PROP_FONT,
+        PROP_FONTSET,
+	PROP_FONT_GDK,
+	PROP_ANCHOR,
+	PROP_JUSTIFICATION,
+	PROP_CLIP_WIDTH,
+	PROP_CLIP_HEIGHT,
+	PROP_CLIP,
+	PROP_X_OFFSET,
+	PROP_Y_OFFSET,
+	PROP_FILL_COLOR,
+	PROP_FILL_COLOR_GDK,
+	PROP_FILL_COLOR_RGBA,
+	PROP_FILL_STIPPLE,
+	PROP_TEXT_WIDTH,
+	PROP_TEXT_HEIGHT
 };
 
 
 static void gnome_canvas_text_class_init (GnomeCanvasTextClass *class);
 static void gnome_canvas_text_init (GnomeCanvasText *text);
 static void gnome_canvas_text_destroy (GtkObject *object);
-static void gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id);
-static void gnome_canvas_text_get_arg (GtkObject *object, GtkArg *arg, guint arg_id);
+static void gnome_canvas_text_set_property (GObject            *object,
+					    guint               param_id,
+					    const GValue       *value,
+					    GParamSpec         *pspec,
+					    const gchar        *trailer);
+static void gnome_canvas_text_get_property (GObject            *object,
+					    guint               param_id,
+					    GValue             *value,
+					    GParamSpec         *pspec,
+					    const gchar        *trailer);
 
 static void gnome_canvas_text_update (GnomeCanvasItem *item, double *affine,
 				      ArtSVP *clip_path, int flags);
@@ -140,56 +148,137 @@ gnome_canvas_text_get_type (void)
 static void
 gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 {
+	GObjectClass *gobject_class;
 	GtkObjectClass *object_class;
 	GnomeCanvasItemClass *item_class;
 
+	gobject_class = (GObjectClass *) class;
 	object_class = (GtkObjectClass *) class;
 	item_class = (GnomeCanvasItemClass *) class;
 
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasText::text",
-				 GTK_TYPE_STRING, GTK_ARG_READWRITE, ARG_TEXT);
-	gtk_object_add_arg_type ("GnomeCanvasText::x",
-				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X);
-	gtk_object_add_arg_type ("GnomeCanvasText::y",
-				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y);
-	gtk_object_add_arg_type ("GnomeCanvasText::font",
-				 GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FONT);
-	gtk_object_add_arg_type ("GnomeCanvasText::fontset",
-				 GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FONTSET);
-	gtk_object_add_arg_type ("GnomeCanvasText::font_gdk",
-				 GTK_TYPE_GDK_FONT, GTK_ARG_READWRITE, ARG_FONT_GDK);
-	gtk_object_add_arg_type ("GnomeCanvasText::anchor",
-				 GTK_TYPE_ANCHOR_TYPE, GTK_ARG_READWRITE, ARG_ANCHOR);
-	gtk_object_add_arg_type ("GnomeCanvasText::justification",
-				 GTK_TYPE_JUSTIFICATION, GTK_ARG_READWRITE, ARG_JUSTIFICATION);
-	gtk_object_add_arg_type ("GnomeCanvasText::clip_width",
-				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_CLIP_WIDTH);
-	gtk_object_add_arg_type ("GnomeCanvasText::clip_height",
-				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_CLIP_HEIGHT);
-	gtk_object_add_arg_type ("GnomeCanvasText::clip",
-				 GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_CLIP);
-	gtk_object_add_arg_type ("GnomeCanvasText::x_offset",
-				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X_OFFSET);
-	gtk_object_add_arg_type ("GnomeCanvasText::y_offset",
-				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y_OFFSET);
-	gtk_object_add_arg_type ("GnomeCanvasText::fill_color",
-				 GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasText::fill_color_gdk",
-				 GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
-	gtk_object_add_arg_type ("GnomeCanvasText::fill_color_rgba",
-				 GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_FILL_COLOR_RGBA);
-	gtk_object_add_arg_type ("GnomeCanvasText::fill_stipple",
-				 GDK_TYPE_DRAWABLE, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
-	gtk_object_add_arg_type ("GnomeCanvasText::text_width",
-				 GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_WIDTH);
-	gtk_object_add_arg_type ("GnomeCanvasText::text_height",
-				 GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_HEIGHT);
+	gobject_class->set_property = gnome_canvas_text_set_property;
+	gobject_class->get_property = gnome_canvas_text_get_property;
+
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_TEXT,
+                 g_param_spec_string ("text", NULL, NULL,
+                                      NULL,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_X,
+                 g_param_spec_double ("x", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_X,
+                 g_param_spec_double ("y", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FONT,
+                 g_param_spec_string ("font", NULL, NULL,
+                                      NULL,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FONTSET,
+                 g_param_spec_string ("font_set", NULL, NULL,
+                                      NULL,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FONT_GDK,
+                 g_param_spec_boxed ("font_gdk", NULL, NULL,
+				     GTK_TYPE_GDK_FONT,
+				     (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_ANCHOR,
+                 g_param_spec_enum ("anchor", NULL, NULL,
+                                    GTK_TYPE_ANCHOR_TYPE,
+                                    GTK_ANCHOR_NW,
+                                    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_JUSTIFICATION,
+                 g_param_spec_enum ("justification", NULL, NULL,
+                                    GTK_TYPE_JUSTIFICATION,
+                                    GTK_JUSTIFY_LEFT,
+                                    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_CLIP_WIDTH,
+                 g_param_spec_double ("clip_width", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_CLIP_HEIGHT,
+                 g_param_spec_double ("clip_height", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_CLIP,
+                 g_param_spec_boolean ("clip", NULL, NULL,
+				       FALSE,
+				       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_X_OFFSET,
+                 g_param_spec_double ("x_offset", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_Y_OFFSET,
+                 g_param_spec_double ("y_offset", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_COLOR,
+                 g_param_spec_string ("fill_color", NULL, NULL,
+                                      NULL,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_COLOR_GDK,
+                 g_param_spec_object ("fill_color_gdk", NULL, NULL,
+                                      GTK_TYPE_GDK_COLOR,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_COLOR_RGBA,
+                 g_param_spec_uint ("fill_color_rgba", NULL, NULL,
+				    0, G_MAXUINT, 0,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_STIPPLE,
+                 g_param_spec_object ("fill_stipple", NULL, NULL,
+                                      GDK_TYPE_DRAWABLE,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_TEXT_WIDTH,
+                 g_param_spec_double ("text_width", NULL, NULL,
+				      0.0, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_TEXT_HEIGHT,
+                 g_param_spec_double ("text_height", NULL, NULL,
+				      0.0, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
 
 	object_class->destroy = gnome_canvas_text_destroy;
-	object_class->set_arg = gnome_canvas_text_set_arg;
-	object_class->get_arg = gnome_canvas_text_get_arg;
 
 	item_class->update = gnome_canvas_text_update;
 	item_class->realize = gnome_canvas_text_realize;
@@ -549,7 +638,11 @@ set_stipple (GnomeCanvasText *text, GdkBitmap *stipple, int reconfigure)
 
 /* Set_arg handler for the text item */
 static void
-gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_canvas_text_set_property (GObject            *object,
+				guint               param_id,
+				const GValue       *value,
+				GParamSpec         *pspec,
+				const gchar        *trailer)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasText *text;
@@ -558,37 +651,40 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	gboolean color_changed;
 	int have_pixel;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_TEXT (object));
+
 	item = GNOME_CANVAS_ITEM (object);
 	text = GNOME_CANVAS_TEXT (object);
 
 	color_changed = FALSE;
 	have_pixel = FALSE;
 
-	switch (arg_id) {
-	case ARG_TEXT:
+	switch (param_id) {
+	case PROP_TEXT:
 		if (text->text)
 			g_free (text->text);
 
-		text->text = g_strdup (GTK_VALUE_STRING (*arg));
+		text->text = g_strdup (g_value_get_string (value));
 		split_into_lines (text);
 		recalc_bounds (text);
 		break;
 
-	case ARG_X:
-		text->x = GTK_VALUE_DOUBLE (*arg);
+	case PROP_X:
+		text->x = g_value_get_double (value);
 		recalc_bounds (text);
 		break;
 
-	case ARG_Y:
-		text->y = GTK_VALUE_DOUBLE (*arg);
+	case PROP_Y:
+		text->y = g_value_get_double (value);
 		recalc_bounds (text);
 		break;
 
-	case ARG_FONT:
+	case PROP_FONT:
 		if (text->font)
 			gdk_font_unref (text->font);
 
-		text->font = gdk_font_load (GTK_VALUE_STRING (*arg));
+		text->font = gdk_font_load (g_value_get_string (value));
 
 		if (item->canvas->aa) {
 			if (text->suckfont)
@@ -601,11 +697,11 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		recalc_bounds (text);
 		break;
 
-	case ARG_FONTSET:
+	case PROP_FONTSET:
 		if (text->font)
 			gdk_font_unref (text->font);
 
-		text->font = gdk_fontset_load (GTK_VALUE_STRING (*arg));
+		text->font = gdk_fontset_load (g_value_get_string (value));
 
 		if (item->canvas->aa) {
 			if (text->suckfont)
@@ -618,11 +714,11 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		recalc_bounds (text);
 		break;
 
-	case ARG_FONT_GDK:
+	case PROP_FONT_GDK:
 		if (text->font)
 			gdk_font_unref (text->font);
 
-		text->font = GTK_VALUE_BOXED (*arg);
+		text->font = g_value_get_boxed (value);
 		gdk_font_ref (text->font);
 
 		if (item->canvas->aa) {
@@ -636,43 +732,43 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		recalc_bounds (text);
 		break;
 
-	case ARG_ANCHOR:
-		text->anchor = GTK_VALUE_ENUM (*arg);
+	case PROP_ANCHOR:
+		text->anchor = g_value_get_enum (value);
 		recalc_bounds (text);
 		break;
 
-	case ARG_JUSTIFICATION:
-		text->justification = GTK_VALUE_ENUM (*arg);
+	case PROP_JUSTIFICATION:
+		text->justification = g_value_get_enum (value);
 		break;
 
-	case ARG_CLIP_WIDTH:
-		text->clip_width = fabs (GTK_VALUE_DOUBLE (*arg));
+	case PROP_CLIP_WIDTH:
+		text->clip_width = fabs (g_value_get_double (value));
 		recalc_bounds (text);
 		break;
 
-	case ARG_CLIP_HEIGHT:
-		text->clip_height = fabs (GTK_VALUE_DOUBLE (*arg));
+	case PROP_CLIP_HEIGHT:
+		text->clip_height = fabs (g_value_get_double (value));
 		recalc_bounds (text);
 		break;
 
-	case ARG_CLIP:
-		text->clip = GTK_VALUE_BOOL (*arg);
+	case PROP_CLIP:
+		text->clip = g_value_get_boolean (value);
 		recalc_bounds (text);
 		break;
 
-	case ARG_X_OFFSET:
-		text->xofs = GTK_VALUE_DOUBLE (*arg);
+	case PROP_X_OFFSET:
+		text->xofs = g_value_get_double (value);
 		recalc_bounds (text);
 		break;
 
-	case ARG_Y_OFFSET:
-		text->yofs = GTK_VALUE_DOUBLE (*arg);
+	case PROP_Y_OFFSET:
+		text->yofs = g_value_get_double (value);
 		recalc_bounds (text);
 		break;
 
-        case ARG_FILL_COLOR:
-		if (GTK_VALUE_STRING (*arg))
-			gdk_color_parse (GTK_VALUE_STRING (*arg), &color);
+        case PROP_FILL_COLOR:
+		if (g_value_get_string (value))
+			gdk_color_parse (g_value_get_string (value), &color);
 
 		text->rgba = ((color.red & 0xff00) << 16 |
 			      (color.green & 0xff00) << 8 |
@@ -681,8 +777,8 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		color_changed = TRUE;
 		break;
 
-	case ARG_FILL_COLOR_GDK:
-		pcolor = GTK_VALUE_BOXED (*arg);
+	case PROP_FILL_COLOR_GDK:
+		pcolor = g_value_get_boxed (value);
 		if (pcolor) {
 			color = *pcolor;
 			gdk_color_context_query_color (item->canvas->cc, &color);
@@ -696,16 +792,17 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		color_changed = TRUE;
 		break;
 
-        case ARG_FILL_COLOR_RGBA:
-		text->rgba = GTK_VALUE_UINT (*arg);
+        case PROP_FILL_COLOR_RGBA:
+		text->rgba = g_value_get_uint (value);
 		color_changed = TRUE;
 		break;
 
-	case ARG_FILL_STIPPLE:
-		set_stipple (text, GTK_VALUE_BOXED (*arg), FALSE);
+	case PROP_FILL_STIPPLE:
+		set_stipple (text, g_value_get_boxed (value), FALSE);
 		break;
 
 	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 
@@ -724,83 +821,90 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 /* Get_arg handler for the text item */
 static void
-gnome_canvas_text_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_canvas_text_get_property (GObject            *object,
+				guint               param_id,
+				GValue             *value,
+				GParamSpec         *pspec,
+				const gchar        *trailer)
 {
 	GnomeCanvasText *text;
 	GdkColor *color;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_TEXT (object));
+
 	text = GNOME_CANVAS_TEXT (object);
 
-	switch (arg_id) {
-	case ARG_TEXT:
-		GTK_VALUE_STRING (*arg) = g_strdup (text->text);
+	switch (param_id) {
+	case PROP_TEXT:
+		g_value_set_string (value, g_strdup (text->text));
 		break;
 
-	case ARG_X:
-		GTK_VALUE_DOUBLE (*arg) = text->x;
+	case PROP_X:
+		g_value_set_double (value, text->x);
 		break;
 
-	case ARG_Y:
-		GTK_VALUE_DOUBLE (*arg) = text->y;
+	case PROP_Y:
+		g_value_set_double (value, text->y);
 		break;
 
-	case ARG_FONT_GDK:
-		GTK_VALUE_BOXED (*arg) = text->font;
+	case PROP_FONT_GDK:
+		g_value_set_boxed (value, text->font);
 		break;
 
-	case ARG_ANCHOR:
-		GTK_VALUE_ENUM (*arg) = text->anchor;
+	case PROP_ANCHOR:
+		g_value_set_enum (value, text->anchor);
 		break;
 
-	case ARG_JUSTIFICATION:
-		GTK_VALUE_ENUM (*arg) = text->justification;
+	case PROP_JUSTIFICATION:
+		g_value_set_enum (value, text->justification);
 		break;
 
-	case ARG_CLIP_WIDTH:
-		GTK_VALUE_DOUBLE (*arg) = text->clip_width;
+	case PROP_CLIP_WIDTH:
+		g_value_set_enum (value, text->clip_width);
 		break;
 
-	case ARG_CLIP_HEIGHT:
-		GTK_VALUE_DOUBLE (*arg) = text->clip_height;
+	case PROP_CLIP_HEIGHT:
+		g_value_set_double (value, text->clip_height);
 		break;
 
-	case ARG_CLIP:
-		GTK_VALUE_BOOL (*arg) = text->clip;
+	case PROP_CLIP:
+		g_value_set_boolean (value, text->clip);
 		break;
 
-	case ARG_X_OFFSET:
-		GTK_VALUE_DOUBLE (*arg) = text->xofs;
+	case PROP_X_OFFSET:
+		g_value_set_double (value, text->xofs);
 		break;
 
-	case ARG_Y_OFFSET:
-		GTK_VALUE_DOUBLE (*arg) = text->yofs;
+	case PROP_Y_OFFSET:
+		g_value_set_double (value, text->yofs);
 		break;
 
-	case ARG_FILL_COLOR_GDK:
+	case PROP_FILL_COLOR_GDK:
 		color = g_new (GdkColor, 1);
 		color->pixel = text->pixel;
 		gdk_color_context_query_color (text->item.canvas->cc, color);
-		GTK_VALUE_BOXED (*arg) = color;
+		g_value_set_boxed (value, color);
 		break;
 
-	case ARG_FILL_COLOR_RGBA:
-		GTK_VALUE_UINT (*arg) = text->rgba;
+	case PROP_FILL_COLOR_RGBA:
+		g_value_set_uint (value, text->rgba);
 		break;
 
-	case ARG_FILL_STIPPLE:
-		GTK_VALUE_BOXED (*arg) = text->stipple;
+	case PROP_FILL_STIPPLE:
+		g_value_set_boxed (value, text->stipple);
 		break;
 
-	case ARG_TEXT_WIDTH:
-		GTK_VALUE_DOUBLE (*arg) = text->max_width / text->item.canvas->pixels_per_unit;
+	case PROP_TEXT_WIDTH:
+		g_value_set_double (value, text->max_width / text->item.canvas->pixels_per_unit);
 		break;
 
-	case ARG_TEXT_HEIGHT:
-		GTK_VALUE_DOUBLE (*arg) = text->height / text->item.canvas->pixels_per_unit;
+	case PROP_TEXT_HEIGHT:
+		g_value_set_double (value, text->height / text->item.canvas->pixels_per_unit);
 		break;
 
 	default:
-		arg->type = GTK_TYPE_INVALID;
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 }

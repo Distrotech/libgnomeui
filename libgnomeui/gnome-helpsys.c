@@ -74,11 +74,11 @@ struct _GnomeHelpViewPrivate {
 };
 
 enum {
-  PARAM_0 = 0,
-  PARAM_APP_STYLE,
-  PARAM_APP_STYLE_PRIORITY,
-  PARAM_ORIENTATION,
-  PARAM_TOPLEVEL
+  PROP_0 = 0,
+  PROP_APP_STYLE,
+  PROP_APP_STYLE_PRIORITY,
+  PROP_ORIENTATION,
+  PROP_TOPLEVEL
 };
 
 typedef enum {
@@ -91,12 +91,12 @@ static void gnome_help_view_class_init (GnomeHelpViewClass *class);
 static void gnome_help_view_init (GnomeHelpView *help_view);
 static void gnome_help_view_destroy (GtkObject *obj);
 static void gnome_help_view_finalize (GObject *obj);
-static void gnome_help_view_get_param	(GObject *object,
+static void gnome_help_view_get_property	(GObject *object,
 					 guint param_id,
 					 GValue *value,
 					 GParamSpec * pspec,
 					 const gchar *trailer);
-static void gnome_help_view_set_param	(GObject *object,
+static void gnome_help_view_set_property	(GObject *object,
 					 guint param_id,
 					 const GValue * value,
 					 GParamSpec * pspec,
@@ -160,14 +160,14 @@ gnome_help_view_class_init (GnomeHelpViewClass *class)
 	object_class->destroy = gnome_help_view_destroy;
 
 	gobject_class->finalize = gnome_help_view_finalize;
-	gobject_class->set_param = gnome_help_view_set_param;
-	gobject_class->get_param = gnome_help_view_get_param;
+	gobject_class->set_property = gnome_help_view_set_property;
+	gobject_class->get_property = gnome_help_view_get_property;
 
 	widget_class->size_request = gnome_help_view_size_request;
 	widget_class->size_allocate = gnome_help_view_size_allocate;
 
-	g_object_class_install_param (gobject_class,
-				      PARAM_APP_STYLE,
+	g_object_class_install_property (gobject_class,
+				      PROP_APP_STYLE,
 				      g_param_spec_enum ("app_style",
 							 _("App style"),
 							 _("The style of GnomeHelpView"),
@@ -176,8 +176,8 @@ gnome_help_view_class_init (GnomeHelpViewClass *class)
 							 (G_PARAM_READABLE |
 							  G_PARAM_WRITABLE)));
 
-	g_object_class_install_param (gobject_class,
-				      PARAM_APP_STYLE_PRIORITY,
+	g_object_class_install_property (gobject_class,
+				      PROP_APP_STYLE_PRIORITY,
 				      g_param_spec_enum ("app_style_priority",
 							 _("App style priority"),
 							 _("The priority of style of GnomeHelpView"),
@@ -186,8 +186,8 @@ gnome_help_view_class_init (GnomeHelpViewClass *class)
 							 (G_PARAM_READABLE |
 							  G_PARAM_WRITABLE)));
 
-	g_object_class_install_param (gobject_class,
-				      PARAM_ORIENTATION,
+	g_object_class_install_property (gobject_class,
+				      PROP_ORIENTATION,
 				      g_param_spec_enum ("orientation",
 							 _("Orientation"),
 							 _("Orientation"),
@@ -196,8 +196,8 @@ gnome_help_view_class_init (GnomeHelpViewClass *class)
 							 (G_PARAM_READABLE |
 							  G_PARAM_WRITABLE)));
 
-	g_object_class_install_param (gobject_class,
-				      PARAM_TOPLEVEL,
+	g_object_class_install_property (gobject_class,
+				      PROP_TOPLEVEL,
 				      g_param_spec_object ("toplevel",
 							   _("Toplevel"),
 							   _("The toplevel widget"),
@@ -282,7 +282,7 @@ gnome_help_view_finalize (GObject *obj)
 }
 
 static void
-gnome_help_view_set_param (GObject *object,
+gnome_help_view_set_property (GObject *object,
 			   guint param_id,
 			   const GValue * value,
 			   GParamSpec * pspec,
@@ -296,19 +296,19 @@ gnome_help_view_set_param (GObject *object,
 	GnomeHelpView *help_view = (GnomeHelpView *)object;
 
 	switch(param_id) {
-	case PARAM_APP_STYLE:
+	case PROP_APP_STYLE:
 		style = g_value_get_enum (value);
 		set_style = TRUE;
 		break;
-	case PARAM_APP_STYLE_PRIORITY:
+	case PROP_APP_STYLE_PRIORITY:
 		priority = g_value_get_enum (value);
 		set_priority = TRUE;
 		break;
-	case PARAM_ORIENTATION:
+	case PROP_ORIENTATION:
 		gnome_help_view_set_orientation (help_view, 
 						 g_value_get_enum (value));
 		break;
-	case PARAM_TOPLEVEL:
+	case PROP_TOPLEVEL:
 		gnome_help_view_set_toplevel (help_view,
 					      GTK_WIDGET (g_value_get_object (value)));
 		break;
@@ -326,7 +326,7 @@ gnome_help_view_set_param (GObject *object,
 }
 
 static void
-gnome_help_view_get_param (GObject *object,
+gnome_help_view_get_property (GObject *object,
 			   guint param_id,
 			   GValue *value,
 			   GParamSpec * pspec,
@@ -335,16 +335,16 @@ gnome_help_view_get_param (GObject *object,
 	GnomeHelpView *help_view = GNOME_HELP_VIEW (object);
 
 	switch(param_id) {
-	case PARAM_APP_STYLE:
+	case PROP_APP_STYLE:
 		g_value_set_enum (value, help_view->_priv->style);
 		break;
-	case PARAM_APP_STYLE_PRIORITY:
+	case PROP_APP_STYLE_PRIORITY:
 		g_value_set_enum (value, help_view->_priv->style_priority);
 		break;
-	case PARAM_ORIENTATION:
+	case PROP_ORIENTATION:
 		g_value_set_enum (value, help_view->_priv->orientation);
 		break;
-	case PARAM_TOPLEVEL:
+	case PROP_TOPLEVEL:
 		/* Don't use G_OBJECT cast as it could be null */
 		g_value_set_object (value, (GObject *)help_view->_priv->toplevel);
 		break;

@@ -93,9 +93,6 @@ gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 				gtk_marshal_VOID__INT,
 				GTK_TYPE_NONE, 1, GTK_TYPE_INT);
 
-	gtk_object_class_add_signals (object_class, property_box_signals,
-				      LAST_SIGNAL);
-
 	klass->apply = NULL;
 	klass->help = NULL;
 }
@@ -188,27 +185,29 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 {
 	GnomePropertyBox *pbox;
 	GtkWidget *page;
-	GList *list;
 	gboolean dirty = FALSE;
+	gint cur_page_no;
 
 	g_return_if_fail(dialog != NULL);
 	g_return_if_fail(GNOME_IS_PROPERTY_BOX(dialog));
         
 	pbox = GNOME_PROPERTY_BOX (dialog);
 
-        if (GTK_NOTEBOOK (pbox->notebook)->cur_page != NULL) {
+	cur_page_no = gtk_notebook_current_page (GTK_NOTEBOOK (pbox->notebook));
+        if (cur_page_no >= 0) {
+	    gint page_no = 0;
+	    GtkWidget *page;
 
-		for (list = GTK_NOTEBOOK (pbox->notebook)->children;
-		     list != NULL;
-		     list = list->next) {
-			GtkNotebookPage *page = list->data;
-			g_assert (page != NULL);
+	    page = gtk_notebook_get_nth_page (GTK_NOTEBOOK (pbox->notebook), 0);
+	    while (page != NULL) {
+		dirty = GPOINTER_TO_INT(gtk_object_get_data (GTK_OBJECT (page),
+							     GNOME_PROPERTY_BOX_DIRTY));
+		if (dirty)
+		    break;
 
-			dirty = GPOINTER_TO_INT(gtk_object_get_data (GTK_OBJECT (page->child),
-								     GNOME_PROPERTY_BOX_DIRTY));
-			if (dirty)
-				break;
-		}
+		page = gtk_notebook_get_nth_page (GTK_NOTEBOOK (pbox->notebook),
+						  ++page_no);
+	    }
         } else {
                 page = NULL;
                 dirty = FALSE;
@@ -273,14 +272,19 @@ set_sensitive (GnomePropertyBox *property_box, gint dirty)
 void
 gnome_property_box_changed (GnomePropertyBox *property_box)
 {
+	gint cur_page_no;
 	GtkWidget *page;
 
 	g_return_if_fail (property_box != NULL);
 	g_return_if_fail (GNOME_IS_PROPERTY_BOX (property_box));
 	g_return_if_fail (property_box->notebook);
-	g_return_if_fail (GTK_NOTEBOOK (property_box->notebook)->cur_page);
+
+	cur_page_no = gtk_notebook_get_current_page (GTK_NOTEBOOK (property_box->notebook));
+	if (cur_page_no < 0)
+	    return;
 	
-	page = GTK_NOTEBOOK (property_box->notebook)->cur_page->child;
+	page = gtk_notebook_get_nth_page (GTK_NOTEBOOK (property_box->notebook),
+					  cur_page_no);
 	g_assert (page != NULL);
 	
 	gtk_object_set_data(GTK_OBJECT(page),
@@ -301,6 +305,7 @@ gnome_property_box_changed (GnomePropertyBox *property_box)
 void
 gnome_property_box_set_modified (GnomePropertyBox *property_box, gboolean state)
 {
+	gint cur_page_no;
 	GtkWidget *page;
 
 	g_return_if_fail (property_box != NULL);
@@ -308,7 +313,12 @@ gnome_property_box_set_modified (GnomePropertyBox *property_box, gboolean state)
 	g_return_if_fail (property_box->notebook);
 	g_return_if_fail (GTK_NOTEBOOK (property_box->notebook)->cur_page);
 	
-	page = GTK_NOTEBOOK (property_box->notebook)->cur_page->child;
+	cur_page_no = gtk_notebook_get_current_page (GTK_NOTEBOOK (property_box->notebook));
+	if (cur_page_no < 0)
+	    return;
+	
+	page = gtk_notebook_get_nth_page (GTK_NOTEBOOK (property_box->notebook),
+					  cur_page_no);
 	g_assert (page != NULL);
 	
 	gtk_object_set_data(GTK_OBJECT(page),
@@ -331,26 +341,24 @@ gnome_property_box_set_state (GnomePropertyBox *property_box, gboolean state)
 static void
 global_apply (GnomePropertyBox *property_box)
 {
-	GList *list;
+	GtkWidget *page;
 	gint n;
 
 	g_return_if_fail(GTK_NOTEBOOK(property_box->notebook)->children != NULL);
-	
-	for (list = GTK_NOTEBOOK(property_box->notebook)->children, n=0;
-	     list != NULL;
-	     list = g_list_next(list), n++) {
-		/* FIXME: there should be a way to report an error
-		   during Apply.  That way we could prevent closing
-		   the window if there were a problem.  */
-		GtkNotebookPage *page = list->data;
-		if (gtk_object_get_data(GTK_OBJECT(page->child),
+
+	n = 0;
+	page = gtk_notebook_get_nth_page(GTK_NOTEBOOK(property_box->notebook), n);
+	while (page != NULL) {
+		if (gtk_object_get_data(GTK_OBJECT(page),
 					GNOME_PROPERTY_BOX_DIRTY)) {
 			gtk_signal_emit (GTK_OBJECT (property_box),
 					 property_box_signals[APPLY], n);
-			gtk_object_set_data(GTK_OBJECT(page->child),
+			gtk_object_set_data(GTK_OBJECT(page),
 					    GNOME_PROPERTY_BOX_DIRTY,
 					    GINT_TO_POINTER(0));
 		}
+
+		page = gtk_notebook_get_nth_page(GTK_NOTEBOOK(property_box->notebook), ++n);
 	}
 
 	/* Emit an apply signal with a button of -1.  This means we

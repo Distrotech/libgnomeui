@@ -94,7 +94,6 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE, 0);
 	
-	gtk_object_class_add_signals (object_class, druid_signals, LAST_SIGNAL);
 	
 	object_class->destroy = gnome_druid_destroy;
 	gobject_class->finalize = gnome_druid_finalize;

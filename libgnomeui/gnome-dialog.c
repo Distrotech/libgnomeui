@@ -120,9 +120,6 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
 		    gtk_marshal_VOID__INT,
 		    GTK_TYPE_NONE, 1, GTK_TYPE_INT);
 
-  gtk_object_class_add_signals (object_class, dialog_signals, 
-				LAST_SIGNAL);
-
   klass->clicked = NULL;
   klass->close = NULL;
   object_class->destroy = gnome_dialog_destroy;

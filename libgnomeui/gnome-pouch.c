@@ -153,7 +153,6 @@ gnome_pouch_class_init(GnomePouchClass *klass)
 				GTK_SIGNAL_OFFSET (GnomePouchClass, unselect_child),
 				gtk_marshal_VOID__POINTER, GTK_TYPE_NONE, 1, GTK_TYPE_WIDGET);
 
-	gtk_object_class_add_signals(object_class, pouch_signals, LAST_SIGNAL);
 
 	widget_class->button_press_event = gnome_pouch_button_press;
 

@@ -1,3 +1,27 @@
+2000-12-15  Martin Baulig  <baulig@suse.de>
+
+	The big "while it is raining outside" cleanup to make it
+	work with the latest glib/gtk+ API:
+
+	- moved GtkArg to GParam.
+	- removed all calls to gtk_object_class_add_signals().
+	- reflect latest GtkNotebook changes.
+
+	* gnome-animator.c, gnome-app.c, gnome-appbar.c,
+	gnome-calculator.c, gnome-canvas-pixbuf.c, gnome-canvas-text.c,
+	gnome-canvas-widget.c, gnome-canvas.c, gnome-client.c,
+	gnome-color-picker.c, gnome-dateedit.c, gnome-dialog.c,
+	gnome-ditem-edit.c, gnome-dock-band.c, gnome-dock-item.c,
+	gnome-dock.c, gnome-druid-page.c, gnome-druid.c, gnome-entry.c,
+	gnome-file-entry.c, gnome-font-picker.c, gnome-helpsys.c,
+	gnome-href.c, gnome-icon-item.c, gnome-icon-list.c, gnome-mdi.c,
+	gnome-paper-selector.c, gnome-pixmap.c, gnome-pouch.c,
+	gnome-propertybox.c, gnome-recently-used.c, gnome-roo.c,
+	gnome-selector.c, gnome-textfu.c, wap-textfu.c: here.
+
+	* gnome-canvas.h (gnome_canvas_newv): Removed.
+	(gnome_canvas_constructv): Removed.
+
 2000-12-13  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector.h (GnomeSelector): Merged the "clear" and

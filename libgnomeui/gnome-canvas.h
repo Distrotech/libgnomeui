@@ -241,24 +241,14 @@ GtkType gnome_canvas_item_get_type (void) G_GNUC_CONST;
 GnomeCanvasItem *gnome_canvas_item_new (GnomeCanvasGroup *parent, GtkType type,
 					const gchar *first_arg_name, ...);
 
-/* Same as above, with parsed args */
-GnomeCanvasItem *gnome_canvas_item_newv (GnomeCanvasGroup *parent, GtkType type,
-					 guint nargs, GtkArg *args);
-
 /* Constructors for use in derived classes and language wrappers */
 void gnome_canvas_item_construct (GnomeCanvasItem *item, GnomeCanvasGroup *parent,
 				  const gchar *first_arg_name, va_list args);
-
-void gnome_canvas_item_constructv (GnomeCanvasItem *item, GnomeCanvasGroup *parent,
-				   guint nargs, GtkArg *args);
 
 /* Configure an item using the standard Gtk argument mechanism.  The last
  * argument must be a NULL pointer.
  */
 void gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, ...);
-
-/* Same as above, with parsed args */
-void gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args);
 
 /* Used only for language wrappers and the like */
 void gnome_canvas_item_set_valist (GnomeCanvasItem *item,

@@ -198,7 +198,6 @@ static void gnome_roo_class_init(GnomeRooClass *klass)
 				GTK_SIGNAL_OFFSET (GnomeRooClass, deselect),
 				gtk_signal_default_marshaller, GTK_TYPE_NONE, 0);
 
-	gtk_object_class_add_signals(object_class, roo_signals, LAST_SIGNAL);
 
 	gobject_class->finalize = gnome_roo_finalize;
 

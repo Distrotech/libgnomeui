@@ -121,7 +121,6 @@ gnome_paper_selector_class_init(GnomePaperSelectorClass *class)
 		   GTK_SIGNAL_OFFSET(GnomePaperSelectorClass, fittopage),
 		   gtk_signal_default_marshaller,
 		   GTK_TYPE_NONE, 0);
-  gtk_object_class_add_signals(object_class, ps_signals, LAST_SIGNAL);
 
   object_class->destroy = gnome_paper_selector_destroy;
   gobject_class->finalize = gnome_paper_selector_finalize;

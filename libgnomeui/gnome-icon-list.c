@@ -1941,7 +1941,6 @@ gil_class_init (GilClass *gil_class)
 			GTK_TYPE_INT,
 			GTK_TYPE_POINTER);
 
-	gtk_object_class_add_signals (object_class, gil_signals, LAST_SIGNAL);
 
 	object_class->destroy = gil_destroy;
 	gobject_class->finalize = gil_finalize;

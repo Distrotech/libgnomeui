@@ -136,12 +136,12 @@ static void gnome_selector_init                (GnomeSelector      *selector);
 static void gnome_selector_destroy             (GtkObject          *object);
 static void gnome_selector_finalize            (GObject            *object);
 
-static void gnome_selector_get_param           (GObject            *object,
+static void gnome_selector_get_property           (GObject            *object,
                                                 guint               param_id,
                                                 GValue             *value,
                                                 GParamSpec         *pspec,
                                                 const gchar        *trailer);
-static void gnome_selector_set_param           (GObject            *object,
+static void gnome_selector_set_property           (GObject            *object,
                                                 guint               param_id,
                                                 const GValue       *value,
                                                 GParamSpec         *pspec,
@@ -190,7 +190,7 @@ static void     free_entry_func                (gpointer         data,
 #define GNOME_SELECTOR_GCONF_DIR "/desktop/standard/gnome-selector"
 
 enum {
-    PARAM_0,
+    PROP_0,
 };
 
 enum {
@@ -456,14 +456,11 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_STRING,
 			GTK_TYPE_GNOME_SELECTOR_ASYNC_HANDLE);
-    gtk_object_class_add_signals (object_class,
-				  gnome_selector_signals,
-				  LAST_SIGNAL);
 
     object_class->destroy = gnome_selector_destroy;
     gobject_class->finalize = gnome_selector_finalize;
-    gobject_class->get_param = gnome_selector_get_param;
-    gobject_class->set_param = gnome_selector_set_param;
+    gobject_class->get_property = gnome_selector_get_property;
+    gobject_class->set_property = gnome_selector_set_property;
 
     class->browse = browse_handler;
     class->clear = clear_handler;
@@ -481,7 +478,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 }
 
 static void
-gnome_selector_set_param (GObject *object, guint param_id,
+gnome_selector_set_property (GObject *object, guint param_id,
 			  const GValue *value, GParamSpec *pspec,
 			  const gchar *trailer)
 {
@@ -500,7 +497,7 @@ gnome_selector_set_param (GObject *object, guint param_id,
 }
 
 static void
-gnome_selector_get_param (GObject *object, guint param_id, GValue *value,
+gnome_selector_get_property (GObject *object, guint param_id, GValue *value,
 			  GParamSpec *pspec, const gchar *trailer)
 {
     GnomeSelector *selector;

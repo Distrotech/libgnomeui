@@ -37,26 +37,30 @@
 #include "gnome-canvas-widget.h"
 
 enum {
-	ARG_0,
-	ARG_WIDGET,
-	ARG_X,
-	ARG_Y,
-	ARG_WIDTH,
-	ARG_HEIGHT,
-	ARG_ANCHOR,
-	ARG_SIZE_PIXELS
+	PROP_0,
+	PROP_WIDGET,
+	PROP_X,
+	PROP_Y,
+	PROP_WIDTH,
+	PROP_HEIGHT,
+	PROP_ANCHOR,
+	PROP_SIZE_IN_PIXELS
 };
 
 
 static void gnome_canvas_widget_class_init (GnomeCanvasWidgetClass *class);
 static void gnome_canvas_widget_init       (GnomeCanvasWidget      *witem);
 static void gnome_canvas_widget_destroy    (GtkObject              *object);
-static void gnome_canvas_widget_set_arg    (GtkObject              *object,
-					    GtkArg                 *arg,
-					    guint                   arg_id);
-static void gnome_canvas_widget_get_arg    (GtkObject              *object,
-					    GtkArg                 *arg,
-					    guint                   arg_id);
+static void gnome_canvas_widget_get_property (GObject            *object,
+					      guint               param_id,
+					      GValue             *value,
+					      GParamSpec         *pspec,
+					      const gchar        *trailer);
+static void gnome_canvas_widget_set_property (GObject            *object,
+					      guint               param_id,
+					      const GValue       *value,
+					      GParamSpec         *pspec,
+					      const gchar        *trailer);
 
 static void   gnome_canvas_widget_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static double gnome_canvas_widget_point       (GnomeCanvasItem *item, double x, double y,
@@ -94,25 +98,64 @@ gnome_canvas_widget_get_type (void)
 static void
 gnome_canvas_widget_class_init (GnomeCanvasWidgetClass *class)
 {
+	GObjectClass *gobject_class;
 	GtkObjectClass *object_class;
 	GnomeCanvasItemClass *item_class;
 
+	gobject_class = (GObjectClass *) class;
 	object_class = (GtkObjectClass *) class;
 	item_class = (GnomeCanvasItemClass *) class;
 
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasWidget::widget", GTK_TYPE_OBJECT, GTK_ARG_READWRITE, ARG_WIDGET);
-	gtk_object_add_arg_type ("GnomeCanvasWidget::x", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X);
-	gtk_object_add_arg_type ("GnomeCanvasWidget::y", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y);
-	gtk_object_add_arg_type ("GnomeCanvasWidget::width", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_WIDTH);
-	gtk_object_add_arg_type ("GnomeCanvasWidget::height", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_HEIGHT);
-	gtk_object_add_arg_type ("GnomeCanvasWidget::anchor", GTK_TYPE_ANCHOR_TYPE, GTK_ARG_READWRITE, ARG_ANCHOR);
-	gtk_object_add_arg_type ("GnomeCanvasWidget::size_pixels", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_SIZE_PIXELS);
+	gobject_class->set_property = gnome_canvas_widget_set_property;
+	gobject_class->get_property = gnome_canvas_widget_get_property;
+
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_WIDGET,
+                 g_param_spec_object ("widget", NULL, NULL,
+                                      GTK_TYPE_WIDGET,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_X,
+                 g_param_spec_double ("x", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_X,
+                 g_param_spec_double ("y", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_X,
+                 g_param_spec_double ("width", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_X,
+                 g_param_spec_double ("height", NULL, NULL,
+				      G_MINDOUBLE, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_ANCHOR,
+                 g_param_spec_enum ("anchor", NULL, NULL,
+                                    GTK_TYPE_ANCHOR_TYPE,
+                                    GTK_ANCHOR_NW,
+                                    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_SIZE_IN_PIXELS,
+                 g_param_spec_boolean ("size_in_pixels", NULL, NULL,
+				       FALSE,
+				       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
 
 	object_class->destroy = gnome_canvas_widget_destroy;
-	object_class->set_arg = gnome_canvas_widget_set_arg;
-	object_class->get_arg = gnome_canvas_widget_get_arg;
 
 	item_class->update = gnome_canvas_widget_update;
 	item_class->point = gnome_canvas_widget_point;
@@ -236,7 +279,11 @@ do_destroy (GtkObject *object, gpointer data)
 }
 
 static void
-gnome_canvas_widget_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_canvas_widget_set_property (GObject            *object,
+				  guint               param_id,
+				  const GValue       *value,
+				  GParamSpec         *pspec,
+				  const gchar        *trailer)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasWidget *witem;
@@ -244,20 +291,23 @@ gnome_canvas_widget_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	int update;
 	int calc_bounds;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_WIDGET (object));
+
 	item = GNOME_CANVAS_ITEM (object);
 	witem = GNOME_CANVAS_WIDGET (object);
 
 	update = FALSE;
 	calc_bounds = FALSE;
 
-	switch (arg_id) {
-	case ARG_WIDGET:
+	switch (param_id) {
+	case PROP_WIDGET:
 		if (witem->widget) {
 			gtk_signal_disconnect (GTK_OBJECT (witem->widget), witem->destroy_id);
 			gtk_container_remove (GTK_CONTAINER (item->canvas), witem->widget);
 		}
 
-		obj = GTK_VALUE_OBJECT (*arg);
+		obj = GTK_OBJECT (g_value_get_object (value));
 		if (obj) {
 			witem->widget = GTK_WIDGET (obj);
 			witem->destroy_id = gtk_signal_connect (obj, "destroy",
@@ -271,55 +321,56 @@ gnome_canvas_widget_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		update = TRUE;
 		break;
 
-	case ARG_X:
-	        if (witem->x != GTK_VALUE_DOUBLE (*arg))
+	case PROP_X:
+	        if (witem->x != g_value_get_double (value))
 		{
-		        witem->x = GTK_VALUE_DOUBLE (*arg);
+		        witem->x = g_value_get_double (value);
 			calc_bounds = TRUE;
 		}
 		break;
 
-	case ARG_Y:
-	        if (witem->y != GTK_VALUE_DOUBLE (*arg))
+	case PROP_Y:
+	        if (witem->y != g_value_get_double (value))
 		{
-		        witem->y = GTK_VALUE_DOUBLE (*arg);
+		        witem->y = g_value_get_double (value);
 			calc_bounds = TRUE;
 		}
 		break;
 
-	case ARG_WIDTH:
-	        if (witem->width != fabs (GTK_VALUE_DOUBLE (*arg)))
+	case PROP_WIDTH:
+	        if (witem->width != fabs (g_value_get_double (value)))
 		{
-		        witem->width = fabs (GTK_VALUE_DOUBLE (*arg));
+		        witem->width = fabs (g_value_get_double (value));
 			update = TRUE;
 		}
 		break;
 
-	case ARG_HEIGHT:
-	        if (witem->height != fabs (GTK_VALUE_DOUBLE (*arg)))
+	case PROP_HEIGHT:
+	        if (witem->height != fabs (g_value_get_double (value)))
 		{
-		        witem->height = fabs (GTK_VALUE_DOUBLE (*arg));
+		        witem->height = fabs (g_value_get_double (value));
 			update = TRUE;
 		}
 		break;
 
-	case ARG_ANCHOR:
-	        if (witem->anchor != GTK_VALUE_ENUM (*arg))
+	case PROP_ANCHOR:
+	        if (witem->anchor != g_value_get_enum (value))
 		{
-		        witem->anchor = GTK_VALUE_ENUM (*arg);
+		        witem->anchor = g_value_get_enum (value);
 			update = TRUE;
 		}
 		break;
 
-	case ARG_SIZE_PIXELS:
-	        if (witem->size_pixels != GTK_VALUE_BOOL (*arg))
+	case PROP_SIZE_IN_PIXELS:
+	        if (witem->size_pixels != g_value_get_boolean (value))
 		{
-		        witem->size_pixels = GTK_VALUE_BOOL (*arg);
+		        witem->size_pixels = g_value_get_boolean (value);
 			update = TRUE;
 		}
 		break;
 
 	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 
@@ -331,43 +382,50 @@ gnome_canvas_widget_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 }
 
 static void
-gnome_canvas_widget_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_canvas_widget_get_property (GObject            *object,
+				  guint               param_id,
+				  GValue             *value,
+				  GParamSpec         *pspec,
+				  const gchar        *trailer)
 {
 	GnomeCanvasWidget *witem;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_WIDGET (object));
+
 	witem = GNOME_CANVAS_WIDGET (object);
 
-	switch (arg_id) {
-	case ARG_WIDGET:
-		GTK_VALUE_OBJECT (*arg) = GTK_OBJECT (witem->widget);
+	switch (param_id) {
+	case PROP_WIDGET:
+		g_value_set_object (value, G_OBJECT (witem->widget));
 		break;
 
-	case ARG_X:
-		GTK_VALUE_DOUBLE (*arg) = witem->x;
+	case PROP_X:
+		g_value_set_double (value, witem->x);
 		break;
 
-	case ARG_Y:
-		GTK_VALUE_DOUBLE (*arg) = witem->y;
+	case PROP_Y:
+		g_value_set_double (value, witem->y);
 		break;
 
-	case ARG_WIDTH:
-		GTK_VALUE_DOUBLE (*arg) = witem->width;
+	case PROP_WIDTH:
+		g_value_set_double (value, witem->width);
 		break;
 
-	case ARG_HEIGHT:
-		GTK_VALUE_DOUBLE (*arg) = witem->height;
+	case PROP_HEIGHT:
+		g_value_set_double (value, witem->height);
 		break;
 
-	case ARG_ANCHOR:
-		GTK_VALUE_ENUM (*arg) = witem->anchor;
+	case PROP_ANCHOR:
+		g_value_set_enum (value, witem->anchor);
 		break;
 
-	case ARG_SIZE_PIXELS:
-		GTK_VALUE_BOOL (*arg) = witem->size_pixels;
+	case PROP_SIZE_IN_PIXELS:
+		g_value_set_boolean (value, witem->size_pixels);
 		break;
 
 	default:
-		arg->type = GTK_TYPE_INVALID;
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 }

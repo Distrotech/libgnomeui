@@ -58,8 +58,8 @@ enum {
 };
 
 enum {
-        PARAM_0,
-        PARAM_APP_SPECIFIC,
+        PROP_0,
+        PROP_APP_SPECIFIC,
         LAST_PARAM
 };
 
@@ -68,12 +68,12 @@ static void                 gnome_recently_used_class_init         (GnomeRecentl
 static void                 gnome_recently_used_destroy            (GtkObject              *object);
 static void                 gnome_recently_used_finalize           (GObject                *object);
 
-static void                 gnome_recently_used_get_param          (GObject                *object,
+static void                 gnome_recently_used_get_property          (GObject                *object,
 								    guint                   param_id,
 								    GValue                 *value,
 								    GParamSpec             *pspec,
 								    const gchar            *trailer);
-static void                 gnome_recently_used_set_param          (GObject                *object,
+static void                 gnome_recently_used_set_property          (GObject                *object,
 								    guint                   param_id,
 								    const GValue           *value,
 								    GParamSpec             *pspec,
@@ -107,8 +107,8 @@ gnome_recently_used_class_init (GnomeRecentlyUsedClass* klass)
         object_class = (GtkObjectClass*) klass;
         gobject_class = (GObjectClass*) klass;
 
-	g_object_class_install_param (gobject_class,
-				      PARAM_APP_SPECIFIC,
+	g_object_class_install_property (gobject_class,
+				      PROP_APP_SPECIFIC,
 				      g_param_spec_boolean ("app_specific",
 							    _("App Specific"),
 							    _("Is this list "
@@ -141,12 +141,11 @@ gnome_recently_used_class_init (GnomeRecentlyUsedClass* klass)
                                 gtk_marshal_NONE__POINTER,
                                 GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
 
-        gtk_object_class_add_signals (object_class, signals, LAST_SIGNAL);
 
         object_class->destroy = gnome_recently_used_destroy;
 
-        gobject_class->set_param = gnome_recently_used_set_param;
-        gobject_class->get_param = gnome_recently_used_get_param;
+        gobject_class->set_property = gnome_recently_used_set_property;
+        gobject_class->get_property = gnome_recently_used_get_property;
         gobject_class->finalize = gnome_recently_used_finalize;
 }
 
@@ -322,7 +321,7 @@ gnome_recently_used_new_app_specific (void)
 }
 
 static void
-gnome_recently_used_get_param (GObject      *object,
+gnome_recently_used_get_property (GObject      *object,
 			       guint         param_id,
 			       GValue       *value,
 			       GParamSpec   *pspec,
@@ -333,7 +332,7 @@ gnome_recently_used_get_param (GObject      *object,
         recently_used = GNOME_RECENTLY_USED(object);
 
         switch (param_id) {
-        case PARAM_APP_SPECIFIC:
+        case PROP_APP_SPECIFIC:
 		g_value_set_boolean (value,
 				     recently_used->_priv->app_specific);
                 break;
@@ -344,7 +343,7 @@ gnome_recently_used_get_param (GObject      *object,
 }
 
 static void
-gnome_recently_used_set_param (GObject      *object,
+gnome_recently_used_set_property (GObject      *object,
 			       guint         param_id,
 			       const GValue *value,
 			       GParamSpec   *pspec,
@@ -355,7 +354,7 @@ gnome_recently_used_set_param (GObject      *object,
         recently_used = GNOME_RECENTLY_USED(object);
 
         switch (param_id) {
-        case PARAM_APP_SPECIFIC:
+        case PROP_APP_SPECIFIC:
 		gnome_recently_used_clear (recently_used);
                 recently_used->_priv->app_specific = g_value_get_boolean (value);
                 gnome_recently_used_ensure (recently_used);
