@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
-"POT-Creation-Date: 2002-05-14 14:14+0300\n"
-"PO-Revision-Date: 2002-05-14 21:57+0300\n"
+"POT-Creation-Date: 2002-05-16 16:19+0300\n"
+"PO-Revision-Date: 2002-05-16 17:19+0300\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -852,23 +852,23 @@ msgstr "_Sisältö"
 msgid "View help for this application"
 msgstr "Näytä tämä ohjelman ohje"
 
-#: libgnomeui/gnome-app-helper.c:2515
+#: libgnomeui/gnome-app-helper.c:2518
 msgid "Text Below Icons"
 msgstr "Teksti kuvakkeiden alla"
 
-#: libgnomeui/gnome-app-helper.c:2516
-msgid "Text Beside Icons"
-msgstr "Teksti kuvakkeiden vierellä"
+#: libgnomeui/gnome-app-helper.c:2519
+msgid "Priority Text Beside Icons"
+msgstr "Oleellinen teksti kuvakkeiden vierellä"
 
-#: libgnomeui/gnome-app-helper.c:2517
+#: libgnomeui/gnome-app-helper.c:2520
 msgid "Icons Only"
 msgstr "Vain kuvakkeet"
 
-#: libgnomeui/gnome-app-helper.c:2518
+#: libgnomeui/gnome-app-helper.c:2521
 msgid "Text Only"
 msgstr "Vain teksti"
 
-#: libgnomeui/gnome-app-helper.c:2578
+#: libgnomeui/gnome-app-helper.c:2582
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Käytä työpöydän oletusta (%s)"
@@ -933,85 +933,85 @@ msgstr "GTK-tekstikenttä"
 msgid "The GTK entry"
 msgstr "GTK-tekstikenttä"
 
-#: libgnomeui/gnome-file-entry.c:217 libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-file-entry.c:218 libgnomeui/gnome-icon-entry.c:174
 msgid "History ID"
 msgstr "Historiikin ID"
 
-#: libgnomeui/gnome-file-entry.c:218
+#: libgnomeui/gnome-file-entry.c:219
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:182
+#: libgnomeui/gnome-file-entry.c:227 libgnomeui/gnome-icon-entry.c:183
 msgid "Browse Dialog Title"
 msgstr "Selausikkunan otsikko"
 
-#: libgnomeui/gnome-file-entry.c:227
+#: libgnomeui/gnome-file-entry.c:228
 msgid "Title for the Browse file dialog."
 msgstr "Selausikkunan otsikko."
 
-#: libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:235
 msgid "Directory Entry"
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:235
+#: libgnomeui/gnome-file-entry.c:236
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:243
+#: libgnomeui/gnome-file-entry.c:244
 msgid "Modal"
 msgstr "Modaalinen"
 
-#: libgnomeui/gnome-file-entry.c:244
+#: libgnomeui/gnome-file-entry.c:245
 msgid "Whether the Browse file window should be modal."
 msgstr "Onko selausikkuna modaalinen."
 
-#: libgnomeui/gnome-file-entry.c:251 libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-file-entry.c:252 libgnomeui/gnome-icon-entry.c:199
 msgid "Filename"
 msgstr "Tiedostonimi"
 
-#: libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Filename that should be displayed in the file entry."
 msgstr "Tiedostonimi, joka näkyy tiedostokentässä."
 
-#: libgnomeui/gnome-file-entry.c:260
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Default Path"
 msgstr "Oletuspolku"
 
-#: libgnomeui/gnome-file-entry.c:261
+#: libgnomeui/gnome-file-entry.c:262
 msgid "Default path for the Browse file window."
 msgstr "Tiedostojen selausikkunan oletuspolku."
 
-#: libgnomeui/gnome-file-entry.c:268
+#: libgnomeui/gnome-file-entry.c:269
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:269
+#: libgnomeui/gnome-file-entry.c:270
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:279
+#: libgnomeui/gnome-file-entry.c:280
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:280
+#: libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
 
-#: libgnomeui/gnome-file-entry.c:514
+#: libgnomeui/gnome-file-entry.c:515
 msgid "Select file"
 msgstr "Valitse tiedosto"
 
-#: libgnomeui/gnome-file-entry.c:652
+#: libgnomeui/gnome-file-entry.c:656
 msgid "_Browse..."
 msgstr "_Selaa..."
 
@@ -1117,7 +1117,7 @@ msgstr ""
 "Virhe tapahtui ladatessa tai tallentaessa ohjelman %s asetustietoja. Jotkin "
 "asetuksistasi eivät välttämättä toimi kunnolla."
 
-#: libgnomeui/gnome-icon-entry.c:174
+#: libgnomeui/gnome-icon-entry.c:175
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1125,45 +1125,45 @@ msgstr ""
 "Kuvakekohdan yksilöllinen tunniste. Tätä käytetään historiikkiluettelon "
 "tallentamiseen."
 
-#: libgnomeui/gnome-icon-entry.c:183
+#: libgnomeui/gnome-icon-entry.c:184
 msgid "Title for the Browse icon dialog."
 msgstr "Kuvakkeiden selausikkunan otsikko."
 
-#: libgnomeui/gnome-icon-entry.c:190
+#: libgnomeui/gnome-icon-entry.c:191
 msgid "Pixmap Directory"
 msgstr "Kuvahakemisto"
 
-#: libgnomeui/gnome-icon-entry.c:191
+#: libgnomeui/gnome-icon-entry.c:192
 msgid "Directory that will be searched for icons."
 msgstr "Hakemisto, josta kuvakkeita etsitään."
 
-#: libgnomeui/gnome-icon-entry.c:199
+#: libgnomeui/gnome-icon-entry.c:200
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Tiedostonimi, joka näkyy tiedostokentässä."
 
-#: libgnomeui/gnome-icon-entry.c:207
+#: libgnomeui/gnome-icon-entry.c:208
 msgid "Picker dialog"
 msgstr "Valitsinikkuna"
 
-#: libgnomeui/gnome-icon-entry.c:208
+#: libgnomeui/gnome-icon-entry.c:209
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:317 libgnomeui/gnome-icon-entry.c:963
+#: libgnomeui/gnome-icon-entry.c:318 libgnomeui/gnome-icon-entry.c:969
 msgid "No Icon"
 msgstr "Ei kuvaketta"
 
-#: libgnomeui/gnome-icon-entry.c:525 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:526 libgnomeui/gnome-pixmap-entry.c:380
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Hboxia ei löydy, käytetään tavallista tiedostonvalintaa"
 
-#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:532 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Preview"
 msgstr "Esikatselu"
 
-#: libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:991
 msgid "Browse"
 msgstr "Selaa"
 
@@ -1201,15 +1201,15 @@ msgstr "Kysymys"
 msgid "Message"
 msgstr "Viesti"
 
-#: libgnomeui/gnome-pixmap-entry.c:118
+#: libgnomeui/gnome-pixmap-entry.c:111
 msgid "Do Preview"
 msgstr "Esikatselu"
 
-#: libgnomeui/gnome-pixmap-entry.c:119
+#: libgnomeui/gnome-pixmap-entry.c:112
 msgid "Whether the pixmap entry should have a preview."
 msgstr ""
 
-#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
+#: libgnomeui/gnome-pixmap-entry.c:186 libgnomeui/gnome-pixmap-entry.c:444
 msgid "No Image"
 msgstr "Ei kuvaa"
 
