@@ -32,8 +32,6 @@
 #include <glade/glade-build.h>
 #include <libgnomeui/libgnomeui.h>
 
-#include <libgnomeui/libgnomeuiP.h>
-
 #include <libbonoboui.h>
 
 #define INT(s)   (strtol ((s), NULL, 0))
