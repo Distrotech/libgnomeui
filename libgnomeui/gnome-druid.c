@@ -566,9 +566,14 @@ gnome_druid_remove (GtkContainer *widget,
 	if (list != NULL) {
 		/* If we are mapped and visible, we want to deal with changing the page. */
 		if ((GTK_WIDGET_MAPPED (GTK_WIDGET (widget))) &&
-		    (list->data == (gpointer) druid->_priv->current) &&
-		    (list->next != NULL)) {
-			gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->next->data));
+		    (list->data == (gpointer) druid->_priv->current)) {
+			if (list->next != NULL)
+				gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->next->data));
+			else if (list->prev != NULL)
+				gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->prev->data));
+			else
+				/* Removing the only child, just set current to NULL */
+				druid->_priv->current = NULL;
 		}
 	}
 	druid->_priv->children = g_list_remove (druid->_priv->children, child);
