@@ -267,11 +267,22 @@ lift_me (GtkWidget *w, GdkEventButton *event, GtkWidget *target)
  * Connect the signals in the widget for drag and drop.
  */
 static void
-gtk_ted_prepare_editable_widget (GtkWidget *w, GtkWidget *ted_table, char *name)
+gtk_ted_prepare_editable_widget (struct ted_widget_info *wi, GtkWidget *ted_table, char *name)
 {
+	GtkWidget *w = wi->widget;
+	
+	if (GTK_WIDGET_NO_WINDOW (wi->widget)){
+		GtkWidget *eventbox;
+
+		eventbox = gtk_event_box_new ();
+		gtk_container_add (GTK_CONTAINER (eventbox), wi->widget);
+		gtk_widget_show (eventbox);
+		wi->widget = w = eventbox;
+	}
 	gtk_signal_connect (GTK_OBJECT (w), "button_press_event", GTK_SIGNAL_FUNC (lift_me), w);
 	gtk_signal_connect (GTK_OBJECT (w), "motion_notify_event", GTK_SIGNAL_FUNC (moveme), ted_table);
 	gtk_signal_connect (GTK_OBJECT (w), "button_release_event", GTK_SIGNAL_FUNC (releaseme), ted_table);
+
 	gtk_widget_set_events (w, gtk_widget_get_events (w) |
 			       GDK_BUTTON_RELEASE_MASK |
 			       GDK_BUTTON1_MOTION_MASK |
@@ -947,7 +958,7 @@ gtk_ted_add (GtkTed *ted, GtkWidget *widget, char *name)
 
 	/* Insertions when we are running the GUI should be properly prepared */
 	if (ted->in_gui){
-		gtk_ted_prepare_editable_widget (wi->widget, GTK_WIDGET (ted), name);
+		gtk_ted_prepare_editable_widget (wi, GTK_WIDGET (ted), name);
 		gtk_ted_widget_control_new (ted, wi->widget, name);
 	}
 }
@@ -958,7 +969,7 @@ gtk_ted_prepare_widgets_edit (gpointer key, gpointer value, gpointer user_data)
 	GtkTed *ted = user_data;
 	struct ted_widget_info *wi = value;
 
-	gtk_ted_prepare_editable_widget (wi->widget, GTK_WIDGET (ted), key);
+	gtk_ted_prepare_editable_widget (wi, GTK_WIDGET (ted), key);
 	gtk_ted_widget_control_new (ted, wi->widget, key);
 }
 

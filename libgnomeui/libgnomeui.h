@@ -15,6 +15,7 @@
 #include "libgnomeui/gnome-stock.h"
 #include "libgnomeui/gnome-session.h"
 #include "libgnomeui/gtk-clock.h"
+#include "libgnomeui/gtk-ted.h"
 
 BEGIN_GNOME_DECLS
 
