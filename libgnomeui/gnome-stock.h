@@ -31,7 +31,12 @@
    calling gnome_stock_pixmap_change. An application should check (by
    calling gnome_stock_pixmap_checkfor), if the current theme supports
    an uncommon icon, before using it. The only icons an app can rely
-   on, are those defined in this haeder file. */
+   on, are those defined in this haeder file.
+
+   We now have stock buttons too. To use them, just replace any
+   gtk_button_new{_with_label} with
+   gnome_stock_button(GNOME_STOCK_BUTTON_...).  This function returns
+   a GtkButton with a gettexted default text and an icon. */
 
 /* State:
 
@@ -39,9 +44,8 @@
      - gnome_stock_pixmap
      - gnome_stock_pixmap_widget
      - gnome_stock_pixmap_checkfor
-
-   not fully implemented:
-     - GnomeStockPixmapWidget (usable, but doesn't change the pixmap)
+     - GnomeStockPixmapWidget
+     - gnome_stock_button
 
    not implemented:
      - gnome_stock_pixmap_register
