@@ -283,6 +283,7 @@ gnome_about_instance_init (GnomeAbout *about)
 	priv->authors = NULL;
 	priv->documenters = NULL;
 
+	atk_object_set_role (gtk_widget_get_accessible (GTK_WIDGET (about)), ATK_ROLE_ALERT);
 	gtk_dialog_set_has_separator (GTK_DIALOG (about), FALSE);
 	gtk_container_set_border_width (GTK_CONTAINER (about), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (about)->vbox), 5);

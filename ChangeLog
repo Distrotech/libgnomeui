@@ -1,3 +1,8 @@
+2004-04-14  Padraig O'Briain <padraig.obriain@sun.com>
+
+	* libgnomeui/gnome-about.c (gnome_about_instance_init): Set role
+	to ATK_ROLE_ALERT. Fixes bug #139541.
+
 2004-04-12  Anders Carlsson  <andersca@gnome.org>
 
 	* libgnomeui/gnome_segv.c (main): Remove call to 
