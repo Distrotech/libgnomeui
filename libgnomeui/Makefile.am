@@ -79,6 +79,7 @@ libgnomeui_la_SOURCES = \
 	gnome-startup.c			\
 	gnome-stock.c			\
 	gnome-stock-imlib.h		\
+	gnometypes.c			\
 	gtkcalendar.c			\
 	gtkspell.c			\
 	gtk-clock.c			\
@@ -128,6 +129,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-stock.h			\
 	gnome-types.h			\
 	gnome-uidefs.h			\
+	gnometypebuiltins.h		\
 	gtkcalendar.h			\
 	gtkcauldron.h			\
 	gtkdial.h			\
@@ -137,6 +139,52 @@ libgnomeuiinclude_HEADERS = 		\
 	gtk-plug.h			\
 	gtk-socket.h			\
 	libgnomeui.h
+
+.PHONY: auto-files auto-files-1
+auto-files:
+	rm -f $(srcdir)/gnome.defs
+	$(MAKE) auto-files-1
+
+auto-files-1: gnome.defs
+auto-files-1: gnometypebuiltins_evals.c gnometypebuiltins_ids.c
+auto-files-1: gnometypebuiltins_vars.c gnometypebuiltins.h
+
+# generate gnome.defs file from gnome-boxed.defs and *.h
+gnome.defs: @MAINT@ makeenums.pl gnome-boxed.defs
+	srcdir=$(srcdir) \
+	  perl $(srcdir)/makeenums.pl defs $(srcdir)/g*.h \
+               > gd.tmp
+	cat $(srcdir)/gnome-boxed.defs >> gd.tmp
+	cp gd.tmp $(srcdir)/gnome.defs
+	rm -f gd.tmp
+
+# generate type identifier header (GTK_TYPE_WIDGET_FLAGS)
+gnometypebuiltins.h: @MAINT@ gnome.defs maketypes.awk
+	awk -f $(srcdir)/maketypes.awk $(srcdir)/gnome.defs macros > gtb.tmp
+	cp gtb.tmp $(srcdir)/gnometypebuiltins.h
+	rm -f gtb.tmp
+
+# generate type identifier variables (GTK_TYPE_WIDGET_FLAGS)
+gnometypebuiltins_vars.c: @MAINT@ gnome.defs maketypes.awk
+	awk -f $(srcdir)/maketypes.awk $(srcdir)/gnome.defs variables > gtbv.tmp
+	cp gtbv.tmp $(srcdir)/gnometypebuiltins_vars.c
+	rm -f gtbv.tmp
+
+# generate type entries for type-id registration
+gnometypebuiltins_ids.c: @MAINT@ gnome.defs maketypes.awk
+	awk -f $(srcdir)/maketypes.awk $(srcdir)/gnome.defs entries > gtbi.tmp
+	cp gtbi.tmp $(srcdir)/gnometypebuiltins_ids.c
+	rm -f gtbi.tmp
+
+# generate enum value arrays
+gnometypebuiltins_evals.c: @MAINT@ makeenums.pl gnome.defs
+	srcdir=$(srcdir) \
+	  perl $(srcdir)/makeenums.pl arrays $(srcdir)/g*.h \
+               > gtbe.tmp
+	cp gtbe.tmp $(srcdir)/gnometypebuiltins_evals.c
+	rm -f gtbe.tmp
+
+#######################
 
 gnome_segv_SOURCES = gnome_segv.c
 

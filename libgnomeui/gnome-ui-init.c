@@ -18,6 +18,7 @@ extern char *program_invocation_name;
 extern char *program_invocation_short_name;
 
 extern void  gnome_client_init (void);
+extern void  gnome_type_init (void);
 
 static void gnome_rc_parse(gchar *command);
 static void gnome_segv_handle(int signum);
@@ -117,6 +118,7 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 
 		gtk_init (&our_argc, &our_argv);
 		gdk_imlib_init ();
+		gnome_type_init();
 		
 #ifdef GTK_HAVE_RC_SET_IMAGE_LOADER
 		/* New feature in 1.1 tree */

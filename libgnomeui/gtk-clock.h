@@ -23,12 +23,12 @@ extern "C" {
 typedef struct _GtkClock GtkClock;
 typedef struct _GtkClockClass GtkClockClass;
 
-enum _GtkClockType {
+typedef enum
+{
 	GTK_CLOCK_INCREASING,
 	GTK_CLOCK_DECREASING,
 	GTK_CLOCK_REALTIME
-};
-typedef enum _GtkClockType GtkClockType;
+} GtkClockType;
 
 struct _GtkClock {
 	GtkLabel widget;

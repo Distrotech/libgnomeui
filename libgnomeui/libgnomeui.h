@@ -59,6 +59,7 @@
 #include "libgnomeui/gtkdial.h"
 #include "libgnomeui/gnome-mdi.h"
 #include "libgnomeui/gnome-mdi-child.h"
+#include "libgnomeui/gnometypebuiltins.h"
 
 BEGIN_GNOME_DECLS
 
