@@ -1,3 +1,8 @@
+2002-04-09  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-color-picker.c (drag_data_received): Emit color_changed
+	signal, fixes #77988.
+
 2002-04-08  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-appbar.c: Remove pointless debug-output. Fixes #75699.
