@@ -103,7 +103,6 @@ typedef struct {
 /* Callback data */
 
 #define GNOMEUIINFO_KEY_UIDATA		"uidata"
-#define GNOMEUIINFO_KEY_UIBDATA		"uibdata"
 
 /* Handy GnomeUIInfo macros */
 

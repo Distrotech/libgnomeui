@@ -1,3 +1,9 @@
+1998-09-18  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.[ch] (do_ui_signal_connect): only store
+	uiinfo->user_data via gtk_object_set_data(), since uibdata->data
+	(if it is non-NULL) is passed to the callback as user data anyway.
+
 1998-09-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-app-helper.c (create_pixmap): If no pixmap has been
