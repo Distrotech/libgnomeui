@@ -2036,6 +2036,8 @@ info_from_vfs_info (const gchar      *uri,
 		    GtkFileInfoType   types)
 {
   GtkFileInfo *info = gtk_file_info_new ();
+  char *local_file;
+  char *display_name;
 
   if (types & GTK_FILE_INFO_DISPLAY_NAME)
     {
@@ -2048,9 +2050,16 @@ info_from_vfs_info (const gchar      *uri,
 	}
       else
 	{
-	  gchar *display_name = g_filename_to_utf8 (vfs_info->name, -1, NULL, NULL, NULL);
-	  if (!display_name)
-	    display_name = g_strescape (vfs_info->name, NULL);
+	  local_file = gnome_vfs_get_local_path_from_uri (uri);
+	  if (local_file != NULL)
+	    {
+	      display_name = g_filename_display_basename (local_file);
+	      g_free (local_file);
+	    }
+	  else
+	    {
+	      display_name = g_filename_display_name (vfs_info->name);
+	    }
 
 	  gtk_file_info_set_display_name (info, display_name);
 

@@ -1,3 +1,8 @@
+2004-12-15  Alexander Larsson  <alexl@redhat.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c (info_from_vfs_info):
+	Use the new g_filename_display_basename call to get the display name.
+
 2004-12-02  Dwayne Bailey  <dwayne@translate.org.za>
 
 	* configure.in: Added "zu" to ALL_LINGUAS.
