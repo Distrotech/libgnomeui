@@ -9,6 +9,7 @@ lib_LTLIBRARIES = libgnomeui.la
 libgnomeui_la_SOURCES = \
 	gnome-color-selector.c 		\
 	gnome-properties.c		\
+	gnome-ice.c			\
 	gnome-init.c			\
 	gnome-actionarea.c		\
 	gnome-messagebox.c		\
@@ -22,6 +23,7 @@ libgnomeuiinclude_HEADERS = 		\
         gnome-actionarea.h     		\
 	gnome-color-selector.h 		\
 	gnome-colors.h         		\
+	gnome-ice.h			\
 	gnome-messagebox.h		\
 	gnome-properties.h     		\
 	gnome-pixmap.h			\

@@ -4,12 +4,9 @@
 
 #include <assert.h>
 
-#ifdef HAVE_LIBSM
-#include <X11/ICE/ICElib.h>
-#endif /* HAVE_LIBSM */
-
 #include "gnome.h"
 #include "gnome-session.h"
+#include "gnome-ice.h"
 
 #define PAD(n,P)  ((((n) % (P)) == 0) ? (n) : ((n) + (P) - ((n) % (P))))
 
@@ -38,39 +35,6 @@ struct client_info
 
 /* The state for this client.  */
 static struct client_info *info;
-
-/* True if we've started listening to ICE.  */
-static int ice_init = 0;
-
-/* ICE connection tag as known by GDK event loop.  */
-static guint ice_tag;
-
-
-/* This is called when data is available on an ICE connection.  */
-static void
-process_ice_messages (gpointer client_data, gint source,
-		      GdkInputCondition condition)
-{
-  IceProcessMessagesStatus status;
-  IceConn connection = (IceConn) client_data;
-
-  status = IceProcessMessages (connection, NULL, NULL);
-  /* FIXME: handle case when status==closed.  */
-}
-
-/* This is called when a new ICE connection is made.  It arranges for
-   the ICE connection to be handled via the event loop.  */
-static void
-new_ice_connection (IceConn connection, IcePointer client_data, Bool opening,
-		    IcePointer *watch_data)
-{
-  if (opening)
-    ice_tag = gdk_input_add (IceConnectionNumber (connection),
-			     GDK_INPUT_READ, process_ice_messages,
-			     (gpointer) connection);
-  else
-    gdk_input_remove (ice_tag);
-}
 
 static void
 save_yourself (SmcConn connection, SmPointer client_data, int save_type,
@@ -139,11 +103,7 @@ gnome_session_init (GnomeSaveFunction saver,
 
   assert (! info);
 
-  if (! ice_init)
-    {
-      IceAddConnectionWatch (new_ice_connection, NULL);
-      ice_init = 1;
-    }
+  gnome_ice_init ();
 
   info = g_new (struct client_info, 1);
   info->state = c_idle;
