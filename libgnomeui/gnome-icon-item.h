@@ -49,6 +49,7 @@ typedef struct {
 	int  (* text_changed)     (GnomeIconTextItem *iti);
 	void (* height_changed)   (GnomeIconTextItem *iti);
 	void (* width_changed)    (GnomeIconTextItem *iti);
+	void (* editing_started)  (GnomeIconTextItem *iti);
 	void (* editing_stopped)  (GnomeIconTextItem *iti);
 } GnomeIconTextItemClass;
 

@@ -28,6 +28,7 @@ enum {
 	TEXT_CHANGED,
 	HEIGHT_CHANGED,
 	WIDTH_CHANGED,
+	EDITING_STARTED,
 	EDITING_STOPPED,
 	LAST_SIGNAL
 };
@@ -248,6 +249,8 @@ iti_start_editing (Iti *iti)
 
 	gtk_editable_select_region (GTK_EDITABLE (iti->entry), 0, -1);
 	iti->editing = TRUE;
+
+	gtk_signal_emit (GTK_OBJECT (iti), iti_signals[EDITING_STARTED]);
 }
 
 /*
@@ -763,6 +766,15 @@ iti_class_init (GnomeIconTextItemClass *text_item_class)
 			GTK_RUN_LAST,
 			object_class->type,
 			GTK_SIGNAL_OFFSET(GnomeIconTextItemClass,width_changed),
+			gtk_marshal_NONE__NONE,
+			GTK_TYPE_NONE, 0);
+
+	iti_signals[EDITING_STARTED] =
+		gtk_signal_new (
+			"editing_started",
+			GTK_RUN_LAST,
+			object_class->type,
+			GTK_SIGNAL_OFFSET (GnomeIconTextItemClass, editing_started),
 			gtk_marshal_NONE__NONE,
 			GTK_TYPE_NONE, 0);
 

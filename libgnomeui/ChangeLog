@@ -1,5 +1,11 @@
 1998-11-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-icon-item.c (iti_class_init): Create the new signal.
+	(iti_start_editing): Emit the editing_started signal.
+
+	* gnome-icon-item.h (GnomeIconTextItemClass): Added an
+	"editing_started" signal, too.
+
 	* gnome-icon-item.h (GnomeIconTextItemClass): Added an
 	"editing_stopped" signal.  It is emitted when the user presses
 	enter or esc and thus finishes editing the item.
