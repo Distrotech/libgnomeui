@@ -1,3 +1,33 @@
+1998-10-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_item_get_bounds): New public
+	function used to query an item for its bounding box.
+	(gnome_canvas_group_bounds): New function that iterates over all
+	the children in the group and adds up their bounds.
+
+	* gnome-canvas.h (GnomeCanvasItem): Added a "bounds" method used
+	to query the item for its bounding box.
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_bounds): New
+	function that implements the "bounds" method for rectangle and
+	ellipse items.
+
+	* gnome-canvas-image.c (gnome_canvas_image_bounds): New function
+	that implements the "bounds" method for image items.
+
+	* gnome-canvas-text.c (gnome_canvas_text_bounds): New function
+	that implements the "bounds" method for text items.
+
+	* gnome-canvas-line.c (get_bounds): Moved most of the stuff in
+	recalc_bounds() to this function.  This function only calculates
+	the line's bounds in world coordinates.
+	(recalc_bounds): Use the get_bounds() function.
+	(gnome_canvas_line_bounds): New function that implements the
+	"bounds" method for line items.
+
+	* gnome-canvas-widget.c (gnome_canvas_widget_bounds): New function
+	that implements the "bounds" method for widget items.
+
 1998-10-03  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-client.c (gnome_client_get_config_prefix): Use

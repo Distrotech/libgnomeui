@@ -42,6 +42,7 @@ static void   gnome_canvas_image_draw        (GnomeCanvasItem *item, GdkDrawable
 static double gnome_canvas_image_point       (GnomeCanvasItem *item, double x, double y,
 					      int cx, int cy, GnomeCanvasItem **actual_item);
 static void   gnome_canvas_image_translate   (GnomeCanvasItem *item, double dx, double dy);
+static void   gnome_canvas_image_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
 
 
 static GnomeCanvasItemClass *parent_class;
@@ -98,6 +99,7 @@ gnome_canvas_image_class_init (GnomeCanvasImageClass *class)
 	item_class->draw = gnome_canvas_image_draw;
 	item_class->point = gnome_canvas_image_point;
 	item_class->translate = gnome_canvas_image_translate;
+	item_class->bounds = gnome_canvas_image_bounds;
 }
 
 static void
@@ -509,4 +511,56 @@ gnome_canvas_image_translate (GnomeCanvasItem *item, double dx, double dy)
 	image->y += dy;
 
 	recalc_bounds (image);
+}
+
+static void
+gnome_canvas_image_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
+{
+	GnomeCanvasImage *image;
+
+	image = GNOME_CANVAS_IMAGE (item);
+
+	*x1 = image->x;
+	*y1 = image->y;
+
+	switch (image->anchor) {
+	case GTK_ANCHOR_NW:
+	case GTK_ANCHOR_W:
+	case GTK_ANCHOR_SW:
+		break;
+
+	case GTK_ANCHOR_N:
+	case GTK_ANCHOR_CENTER:
+	case GTK_ANCHOR_S:
+		*x1 -= image->width / 2.0;
+		break;
+
+	case GTK_ANCHOR_NE:
+	case GTK_ANCHOR_E:
+	case GTK_ANCHOR_SE:
+		*x1 -= image->width;
+		break;
+	}
+
+	switch (image->anchor) {
+	case GTK_ANCHOR_NW:
+	case GTK_ANCHOR_N:
+	case GTK_ANCHOR_NE:
+		break;
+
+	case GTK_ANCHOR_W:
+	case GTK_ANCHOR_CENTER:
+	case GTK_ANCHOR_E:
+		*y1 -= image->height / 2.0;
+		break;
+
+	case GTK_ANCHOR_SW:
+	case GTK_ANCHOR_S:
+	case GTK_ANCHOR_SE:
+		*y1 -= image->height;
+		break;
+	}
+
+	*x2 = *x1 + image->width;
+	*y2 = *y1 + image->height;
 }

@@ -143,14 +143,10 @@ gnome_canvas_item_class_init (GnomeCanvasItemClass *class)
 
 	object_class->shutdown = gnome_canvas_item_shutdown;
 
-	class->reconfigure = NULL;
 	class->realize = gnome_canvas_item_realize;
 	class->unrealize = gnome_canvas_item_unrealize;
 	class->map = gnome_canvas_item_map;
 	class->unmap = gnome_canvas_item_unmap;
-	class->draw = NULL;
-	class->translate = NULL;
-	class->event = NULL;
 }
 
 GnomeCanvasItem *
@@ -669,37 +665,6 @@ is_descendant (GnomeCanvasItem *item, GnomeCanvasItem *parent)
 }
 
 /*
- * gnome_canvas_item_grab_focus:
- * @item: the item that is grabbing the focus
- *
- * Grabs the keyboard focus
- */
-void
-gnome_canvas_item_grab_focus (GnomeCanvasItem *item)
-{
-	GnomeCanvasItem *focused_item;
-	GdkEvent ev;
-	gint finished;
-	
-	g_return_if_fail (item != NULL);
-	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
-	g_return_if_fail (GTK_WIDGET_CAN_FOCUS (GTK_WIDGET (item->canvas)));
-	
-	focused_item = item->canvas->focused_item;
-	
-	if (focused_item){
-		ev.type = GDK_FOCUS_CHANGE;
-		ev.focus_change.send_event = FALSE;
-		ev.focus_change.in = FALSE;
-
-		emit_event (item->canvas, &ev);
-	}
-
-	item->canvas->focused_item = item;
-	gtk_widget_grab_focus (GTK_WIDGET (item->canvas));
-}
-
-/*
  * gnome_canvas_item_reparent:
  * @item:      Item to reparent
  * @new_group: New group where the item is moved to
@@ -755,6 +720,62 @@ gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group)
 	gtk_object_unref (GTK_OBJECT (item));
 }
 
+/*
+ * gnome_canvas_item_grab_focus:
+ * @item: the item that is grabbing the focus
+ *
+ * Grabs the keyboard focus
+ */
+void
+gnome_canvas_item_grab_focus (GnomeCanvasItem *item)
+{
+	GnomeCanvasItem *focused_item;
+	GdkEvent ev;
+	gint finished;
+
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+	g_return_if_fail (GTK_WIDGET_CAN_FOCUS (GTK_WIDGET (item->canvas)));
+
+	focused_item = item->canvas->focused_item;
+
+	if (focused_item) {
+		ev.type = GDK_FOCUS_CHANGE;
+		ev.focus_change.send_event = FALSE;
+		ev.focus_change.in = FALSE;
+
+		emit_event (item->canvas, &ev);
+	}
+
+	item->canvas->focused_item = item;
+	gtk_widget_grab_focus (GTK_WIDGET (item->canvas));
+}
+
+void
+gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
+{
+	double tx1, ty1, tx2, ty2;
+
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+
+	tx1 = ty1 = tx2 = ty2 = 0.0;
+
+	if (GNOME_CANVAS_ITEM_CLASS (item)->bounds)
+		(* GNOME_CANVAS_ITEM_CLASS (item)->bounds) (item, &tx1, &ty1, &tx2, &ty2);
+
+	if (x1)
+		*x1 = tx1;
+
+	if (y1)
+		*y1 = ty1;
+
+	if (x2)
+		*x2 = tx2;
+
+	if (y2)
+		*y2 = ty2;
+}
   
 
 /*** GnomeCanvasGroup ***/
@@ -787,6 +808,7 @@ static void   gnome_canvas_group_draw        (GnomeCanvasItem *item, GdkDrawable
 static double gnome_canvas_group_point       (GnomeCanvasItem *item, double x, double y, int cx, int cy,
 					      GnomeCanvasItem **actual_item);
 static void   gnome_canvas_group_translate   (GnomeCanvasItem *item, double dx, double dy);
+static void   gnome_canvas_group_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
 
 
 static GnomeCanvasItemClass *group_parent_class;
@@ -840,6 +862,7 @@ gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 	item_class->draw = gnome_canvas_group_draw;
 	item_class->point = gnome_canvas_group_point;
 	item_class->translate = gnome_canvas_group_translate;
+	item_class->bounds = gnome_canvas_group_bounds;
 }
 
 static void
@@ -1115,6 +1138,62 @@ gnome_canvas_group_translate (GnomeCanvasItem *item, double dx, double dy)
 
 	if (item->parent)
 		gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
+}
+
+static void
+gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
+{
+	GnomeCanvasGroup *group;
+	GList *list;
+	double tx1, ty1, tx2, ty2;
+	double minx, miny, maxx, maxy;
+
+	group = GNOME_CANVAS_GROUP (item);
+
+	if (!group->item_list) {
+		/* If there are no children, then return the group's origin */
+
+		*x1 = *x2 = group->xpos;
+		*y1 = *y2 = group->ypos;
+
+		return;
+	}
+
+	/* Get the bounds of the first item */
+
+	gnome_canvas_item_get_bounds (group->item_list->data, &minx, &miny, &maxx, &maxy);
+
+	/* Now we can grow the bounds using the rest of the items */
+
+	for (list = group->item_list->next; list; list = list->next) {
+		gnome_canvas_item_get_bounds (list->data, &tx1, &ty1, &tx2, &ty2);
+
+		if (tx1 < minx)
+			minx = tx1;
+
+		if (ty1 < miny)
+			miny = ty1;
+
+		if (tx2 > maxx)
+			maxx = tx2;
+
+		if (ty2 > maxy)
+			maxy = ty2;
+	}
+
+	/* Make the bounds be relative to our parent's coordinate system */
+
+	if (item->parent) {
+		minx += group->xpos;
+		miny += group->ypos;
+		maxx += group->xpos;
+		maxy += group->ypos;
+	}
+
+	*x1 = minx;
+	*y1 = miny;
+	*x2 = maxx;
+	*y2 = maxy;
 }
 
 static void

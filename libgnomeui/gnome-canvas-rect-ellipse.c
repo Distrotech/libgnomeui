@@ -44,6 +44,7 @@ static void gnome_canvas_re_reconfigure (GnomeCanvasItem *item);
 static void gnome_canvas_re_realize     (GnomeCanvasItem *item);
 static void gnome_canvas_re_unrealize   (GnomeCanvasItem *item);
 static void gnome_canvas_re_translate   (GnomeCanvasItem *item, double dx, double dy);
+static void gnome_canvas_re_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
 
 
 static GnomeCanvasItemClass *re_parent_class;
@@ -101,6 +102,7 @@ gnome_canvas_re_class_init (GnomeCanvasREClass *class)
 	item_class->realize = gnome_canvas_re_realize;
 	item_class->unrealize = gnome_canvas_re_unrealize;
 	item_class->translate = gnome_canvas_re_translate;
+	item_class->bounds = gnome_canvas_re_bounds;
 }
 
 static void
@@ -374,6 +376,25 @@ gnome_canvas_re_translate (GnomeCanvasItem *item, double dx, double dy)
 	re->y2 += dy;
 
 	recalc_bounds (re);
+}
+
+static void
+gnome_canvas_re_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
+{
+	GnomeCanvasRE *re;
+	double hwidth;
+
+	re = GNOME_CANVAS_RE (item);
+
+	if (re->width_pixels)
+		hwidth = (re->width / item->canvas->pixels_per_unit) / 2.0;
+	else
+		hwidth = re->width / 2.0;
+
+	*x1 = re->x1 - hwidth;
+	*y1 = re->y1 - hwidth;
+	*x2 = re->x2 + hwidth;
+	*y2 = re->y2 + hwidth;
 }
 
 

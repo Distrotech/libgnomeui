@@ -59,6 +59,7 @@ static void   gnome_canvas_text_draw        (GnomeCanvasItem *item, GdkDrawable 
 static double gnome_canvas_text_point       (GnomeCanvasItem *item, double x, double y,
 					     int cx, int cy, GnomeCanvasItem **actual_item);
 static void   gnome_canvas_text_translate   (GnomeCanvasItem *item, double dx, double dy);
+static void   gnome_canvas_text_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
 
 
 static GnomeCanvasItemClass *parent_class;
@@ -125,6 +126,7 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 	item_class->draw = gnome_canvas_text_draw;
 	item_class->point = gnome_canvas_text_point;
 	item_class->translate = gnome_canvas_text_translate;
+	item_class->bounds = gnome_canvas_text_bounds;
 }
 
 static void
@@ -736,4 +738,65 @@ gnome_canvas_text_translate (GnomeCanvasItem *item, double dx, double dy)
 	text->y += dy;
 
 	recalc_bounds (text);
+}
+
+static void
+gnome_canvas_text_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
+{
+	GnomeCanvasText *text;
+	double width, height;
+
+	text = GNOME_CANVAS_TEXT (item);
+
+	*x1 = text->x;
+	*y1 = text->y;
+
+	if (text->clip) {
+		width = text->clip_width;
+		height = text->clip_height;
+	} else {
+		width = text->max_width / item->canvas->pixels_per_unit;
+		height = text->height / item->canvas->pixels_per_unit;
+	}
+
+	switch (text->anchor) {
+	case GTK_ANCHOR_NW:
+	case GTK_ANCHOR_W:
+	case GTK_ANCHOR_SW:
+		break;
+
+	case GTK_ANCHOR_N:
+	case GTK_ANCHOR_CENTER:
+	case GTK_ANCHOR_S:
+		*x1 -= width / 2.0;
+		break;
+
+	case GTK_ANCHOR_NE:
+	case GTK_ANCHOR_E:
+	case GTK_ANCHOR_SE:
+		*y1 -= width;
+		break;
+	}
+
+	switch (text->anchor) {
+	case GTK_ANCHOR_NW:
+	case GTK_ANCHOR_N:
+	case GTK_ANCHOR_NE:
+		break;
+
+	case GTK_ANCHOR_W:
+	case GTK_ANCHOR_CENTER:
+	case GTK_ANCHOR_E:
+		*y1 -= height / 2.0;
+		break;
+
+	case GTK_ANCHOR_SW:
+	case GTK_ANCHOR_S:
+	case GTK_ANCHOR_SE:
+		*y1 -= height;
+		break;
+	}
+
+	*x2 = *x1 + width;
+	*y2 = *y1 + height;
 }

@@ -106,6 +106,9 @@ struct _GnomeCanvasItemClass {
 	/* Move an item by the specified amount */
 	void (* translate) (GnomeCanvasItem *item, double dx, double dy);
 
+	/* Fetch the item's bounding box (need not be exactly tight) */
+	void (* bounds) (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
+
 	/* Signal: an event ocurred for an item of this type.  The (x, y) coordinates are in the
 	 * canvas world coordinate system.
 	 */
@@ -186,6 +189,14 @@ void gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y);
  * is the item itself or that is an inferior of the item.
  */
 void gnome_canvas_item_reparent (GnomeCanvasItem *item, GnomeCanvasGroup *new_group);
+
+/* Used to send all of the keystroke events to a specific item as well as GDK_FOCUS_CHANGE events. */
+void gnome_canvas_item_grab_focus (GnomeCanvasItem *item);
+
+/* Fetch the bounding box of the item.  The bounding box may not be exactly tight, but the canvas
+ * items will do the best they can.
+ */
+void gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
 
 
 /* GnomeCanvasGroup - a group of canvas items
@@ -285,6 +296,8 @@ struct _GnomeCanvas {
 	GnomeCanvasItem *grabbed_item;		/* Item that holds a pointer grab, or NULL if none */
 	guint grabbed_event_mask;		/* Event mask specified when grabbing an item */
 
+	GnomeCanvasItem *focused_item;		/* If non-NULL the currently focused item */
+
 	GdkEvent pick_event;			/* Event on which selection of current item is based */
 
 	int close_enough;			/* Tolerance distance for picking items */
@@ -296,8 +309,6 @@ struct _GnomeCanvas {
 	int need_repick : 1;			/* Will repick current item at next idle loop iteration */
 	int left_grabbed_item : 1;		/* For use by the internal pick_event function */
 	int in_repick : 1;			/* For use by the internal pick_event function */
-
-	GnomeCanvasItem *focused_item;          /* If non-NULL the currently focused item  */
 };
 
 struct _GnomeCanvasClass {
@@ -362,11 +373,6 @@ void gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *
  */
 int gnome_canvas_get_color (GnomeCanvas *canvas, char *spec, GdkColor *color);
 
-/*
- * Used to send all of the keystroke events to a specific item as well as GDK_FOCUS_CHANGE
- * events.
- */
-void gnome_canvas_item_grab_focus (GnomeCanvasItem *item);
 
 END_GNOME_DECLS
 

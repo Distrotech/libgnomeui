@@ -72,6 +72,7 @@ static void   gnome_canvas_line_draw        (GnomeCanvasItem *item, GdkDrawable 
 static double gnome_canvas_line_point       (GnomeCanvasItem *item, double x, double y,
 					     int cx, int cy, GnomeCanvasItem **actual_item);
 static void   gnome_canvas_line_translate   (GnomeCanvasItem *item, double dx, double dy);
+static void   gnome_canvas_line_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
 
 
 static GnomeCanvasItemClass *parent_class;
@@ -136,6 +137,7 @@ gnome_canvas_line_class_init (GnomeCanvasLineClass *class)
 	item_class->draw = gnome_canvas_line_draw;
 	item_class->point = gnome_canvas_line_point;
 	item_class->translate = gnome_canvas_line_translate;
+	item_class->bounds = gnome_canvas_line_bounds;
 }
 
 static void
@@ -174,22 +176,16 @@ gnome_canvas_line_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+/* Computes the bounding box of the line, including its arrow points.  Assumes that the number of
+ * points in the line is not zero.
+ */
 static void
-recalc_bounds (GnomeCanvasLine *line)
+get_bounds (GnomeCanvasLine *line, double *bx1, double *by1, double *bx2, double *by2)
 {
-	GnomeCanvasItem *item;
 	double *coords;
 	double x1, y1, x2, y2;
 	double width;
-	double dx, dy;
 	int i;
-
-	item = GNOME_CANVAS_ITEM (line);
-
-	if (line->num_points == 0) {
-		item->x1 = item->y1 = item->x2 = item->y2 = 0;
-		return;
-	}
 
 	/* Find bounding box of line's points */
 
@@ -202,7 +198,7 @@ recalc_bounds (GnomeCanvasLine *line)
 	/* Add possible over-estimate for wide lines */
 
 	if (line->width_pixels)
-		width = line->width / item->canvas->pixels_per_unit;
+		width = line->width / line->item.canvas->pixels_per_unit;
 	else
 		width = line->width;
 
@@ -238,6 +234,32 @@ recalc_bounds (GnomeCanvasLine *line)
 	if (line->last_arrow && line->last_coords)
 		for (i = 0, coords = line->last_coords; i < NUM_ARROW_POINTS; i++, coords += 2)
 			GROW_BOUNDS (x1, y1, x2, y2, coords[0], coords[1]);
+
+	/* Done */
+
+	*bx1 = x1;
+	*by1 = y1;
+	*bx2 = x2;
+	*by2 = y2;
+}
+
+static void
+recalc_bounds (GnomeCanvasLine *line)
+{
+	GnomeCanvasItem *item;
+	double x1, y1, x2, y2;
+	double dx, dy;
+
+	item = GNOME_CANVAS_ITEM (line);
+
+	if (line->num_points == 0) {
+		item->x1 = item->y1 = item->x2 = item->y2 = 0;
+		return;
+	}
+
+	/* Get bounds in world coordinates */
+
+	get_bounds (line, &x1, &y1, &x2, &y2);
 
 	/* Convert to canvas pixel coords */
 
@@ -954,4 +976,19 @@ gnome_canvas_line_translate (GnomeCanvasItem *item, double dx, double dy)
 		}
 
 	recalc_bounds (line);
+}
+
+static void
+gnome_canvas_line_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
+{
+	GnomeCanvasLine *line;
+
+	line = GNOME_CANVAS_LINE (item);
+
+	if (line->num_points == 0) {
+		*x1 = *y1 = *x2 = *y2 = 0.0;
+		return;
+	}
+
+	get_bounds (line, x1, y1, x2, y2);
 }

@@ -40,6 +40,7 @@ static void   gnome_canvas_widget_reconfigure (GnomeCanvasItem *item);
 static double gnome_canvas_widget_point       (GnomeCanvasItem *item, double x, double y,
 					       int cx, int cy, GnomeCanvasItem **actual_item);
 static void   gnome_canvas_widget_translate   (GnomeCanvasItem *item, double dx, double dy);
+static void   gnome_canvas_widget_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
 
 
 static GnomeCanvasItemClass *parent_class;
@@ -94,6 +95,7 @@ gnome_canvas_widget_class_init (GnomeCanvasWidgetClass *class)
 	item_class->reconfigure = gnome_canvas_widget_reconfigure;
 	item_class->point = gnome_canvas_widget_point;
 	item_class->translate = gnome_canvas_widget_translate;
+	item_class->bounds = gnome_canvas_widget_bounds;
 }
 
 static void
@@ -410,4 +412,56 @@ gnome_canvas_widget_translate (GnomeCanvasItem *item, double dx, double dy)
 	witem->y = dy;
 
 	recalc_bounds (witem);
+}
+
+static void
+gnome_canvas_widget_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
+{
+	GnomeCanvasWidget *witem;
+
+	witem = GNOME_CANVAS_WIDGET (item);
+
+	*x1 = witem->x;
+	*y1 = witem->y;
+
+	switch (witem->anchor) {
+	case GTK_ANCHOR_NW:
+	case GTK_ANCHOR_W:
+	case GTK_ANCHOR_SW:
+		break;
+
+	case GTK_ANCHOR_N:
+	case GTK_ANCHOR_CENTER:
+	case GTK_ANCHOR_S:
+		*x1 -= witem->width / 2.0;
+		break;
+
+	case GTK_ANCHOR_NE:
+	case GTK_ANCHOR_E:
+	case GTK_ANCHOR_SE:
+		*x1 -= witem->width;
+		break;
+	}
+
+	switch (witem->anchor) {
+	case GTK_ANCHOR_NW:
+	case GTK_ANCHOR_N:
+	case GTK_ANCHOR_NE:
+		break;
+
+	case GTK_ANCHOR_W:
+	case GTK_ANCHOR_CENTER:
+	case GTK_ANCHOR_E:
+		*y1 -= witem->height / 2.0;
+		break;
+
+	case GTK_ANCHOR_SW:
+	case GTK_ANCHOR_S:
+	case GTK_ANCHOR_SE:
+		*y1 -= witem->height;
+		break;
+	}
+
+	*x2 = *x1 + witem->width;
+	*y2 = *y1 + witem->height;
 }
