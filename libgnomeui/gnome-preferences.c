@@ -116,6 +116,7 @@ static const gchar * const dialog_positions [] = {
 
 #define STATUSBAR_DIALOG_KEY       "StatusBar_not_Dialog"
 #define STATUSBAR_INTERACTIVE_KEY  "StatusBar_is_Interactive"
+#define STATUSBAR_METER_ON_RIGHT   "StatusBar_Meter_on_Right"
 
 #define MENUBAR_DETACHABLE_KEY     "Menubar_detachable"
 #define MENUBAR_RELIEF_KEY         "Menubar_relieved"
@@ -252,6 +253,10 @@ gnome_preferences_load_custom(GnomePreferences *settings)
 					 NULL);
   settings->statusbar_is_interactive = b;
 
+  b = gnome_config_get_bool_with_default(STATUSBAR_METER_ON_RIGHT"=true",
+					 NULL);
+  settings->statusbar_meter_on_right = b;
+
   gnome_config_pop_prefix();
   gnome_config_push_prefix(APP);
 
@@ -344,6 +349,8 @@ gnome_preferences_save_custom(GnomePreferences *settings)
 			settings->statusbar_not_dialog);
   gnome_config_set_bool(STATUSBAR_INTERACTIVE_KEY,
 			settings->statusbar_is_interactive);
+  gnome_config_set_bool(STATUSBAR_METER_ON_RIGHT,
+			settings->statusbar_meter_on_right);
 
 
   gnome_config_pop_prefix();
@@ -419,6 +426,18 @@ gboolean          gnome_preferences_get_statusbar_interactive(void)
 void              gnome_preferences_set_statusbar_interactive(gboolean b)
 {
   prefs.statusbar_is_interactive = b;
+}
+
+gboolean
+gnome_preferences_get_statusbar_meter_on_right (void)
+{
+  return prefs.statusbar_meter_on_right;
+}
+
+void
+gnome_preferences_set_statusbar_meter_on_right (gboolean statusbar_meter_on_right)
+{
+  prefs.statusbar_meter_on_right = statusbar_meter_on_right;
 }
 
 gboolean          gnome_preferences_get_menubar_detachable   (void)

@@ -27,6 +27,7 @@ struct _GnomePreferences {
   int property_box_buttons_help : 1;
   int statusbar_not_dialog : 1;
   int statusbar_is_interactive : 1;
+  int statusbar_meter_on_right : 1;
   int menubar_detachable : 1;
   int menubar_relief : 1;
   int toolbar_detachable : 1;
@@ -64,6 +65,11 @@ void              gnome_preferences_set_statusbar_dialog     (gboolean statusbar
    TRUE means the statusbar is interactive */
 gboolean          gnome_preferences_get_statusbar_interactive(void);
 void              gnome_preferences_set_statusbar_interactive(gboolean b);
+
+/* Whether the AppBar progress meter goes on the right or left */
+gboolean          gnome_preferences_get_statusbar_meter_on_right (void);
+void              gnome_preferences_set_statusbar_meter_on_right (gboolean status_meter_on_right);
+
 
 /* Whether menubars can be detached */
 gboolean          gnome_preferences_get_menubar_detachable   (void);

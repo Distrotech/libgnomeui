@@ -1,3 +1,23 @@
+1999-01-17  Nat Friedman  <nat@nat.org>
+
+	* gnome-preferences.c (STATUSBAR_METER_ON_RIGHT): New property
+ 	string macro.
+	(gnome_preferences_load_custom): Load the statusbar_meter_on_right
+ 	property.
+	(gnome_preferences_save_custom): Save the statusbar_meter_on_right
+ 	property.
+	(gnome_preferences_get_statusbar_meter_on_right): New function.
+	(gnome_preferences_set_statusbar_meter_on_right): Likewise.
+
+	* gnome-preferences.h: Added the statusbar_meter_on_right field to
+ 	GnomePreferences.  Added prototypes for
+ 	gnome_preferences_get_statusbar_meter_on_right and
+ 	gnome_preferences_set_statusbar_meter_on_right.
+
+	* gnome-appbar.c (gnome_appbar_construct): Use the
+ 	gnome_preferences_get_statusbar_meter_on_right() function to
+ 	determine the position of the progress meter.
+
 1999-01-17  Jeff Garzik  <jgarzik@pobox.com>
 
         * gnome-app-helper.c:

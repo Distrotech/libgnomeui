@@ -305,6 +305,18 @@ gnome_appbar_construct(GnomeAppBar * ab,
   box->spacing = GNOME_PAD_SMALL;
   box->homogeneous = FALSE;
 
+  if (has_progress)
+    ab->progress = gtk_progress_bar_new();
+  else
+    ab->progress = NULL;
+
+  /*
+   * If the progress meter goes on the right then we place it after we
+   * create the status line.
+   */
+  if (has_progress && !gnome_preferences_get_statusbar_meter_on_right ())
+    gtk_box_pack_start (box, ab->progress, FALSE, FALSE, 0);
+
   if ( has_status ) {
     if ( (interactivity == GNOME_PREFERENCES_ALWAYS) ||
 	 ( (interactivity == GNOME_PREFERENCES_USER) &&
@@ -353,14 +365,11 @@ gnome_appbar_construct(GnomeAppBar * ab,
     ab->interactive = FALSE;
   }
 
-  if ( has_progress ) {
-    ab->progress = gtk_progress_bar_new();
+  if (has_progress && gnome_preferences_get_statusbar_meter_on_right ())
     gtk_box_pack_start (box, ab->progress, FALSE, FALSE, 0);
-    gtk_widget_show (ab->progress);
-  }
-  else ab->progress = NULL;
 
   if (ab->status) gtk_widget_show (ab->status);
+  if (ab->progress) gtk_widget_show(ab->progress);
 }
 
 
