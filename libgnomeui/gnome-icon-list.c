@@ -1428,6 +1428,28 @@ gil_adj_value_changed (GtkAdjustment *adj, Gil *gil)
 	gnome_canvas_scroll_to (GNOME_CANVAS (gil), 0, adj->value);
 }
 
+void           
+gnome_icon_list_construct           (GnomeIconList *gil,
+				     guint icon_width,
+				     GtkAdjustment *adj,
+				     gboolean is_editable)
+{
+	gnome_icon_list_set_icon_width (gil, icon_width);
+	gil->is_editable = is_editable;
+
+	if (adj)
+		gtk_object_ref (GTK_OBJECT (adj));
+	else
+		adj = GTK_ADJUSTMENT (
+			gtk_adjustment_new (0, 0, 1, 0.1, 0.1, 0.1));
+			
+	gil->adj = adj;
+
+	gtk_signal_connect (GTK_OBJECT (adj), "value_changed",
+			    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
+}
+
+
 /**
  * gnome_icon_list_new: [constructor]
  * @icon_width:  Icon width.
@@ -1455,20 +1477,9 @@ gnome_icon_list_new (guint icon_width, GtkAdjustment *adj, gboolean is_editable)
 	Gil *gil;
 	
 	gil = GIL (gtk_type_new (gnome_icon_list_get_type ()));
-	gnome_icon_list_set_icon_width (gil, icon_width);
-	gil->is_editable = is_editable;
 
-	if (adj)
-		gtk_object_ref (GTK_OBJECT (adj));
-	else
-		adj = GTK_ADJUSTMENT (
-			gtk_adjustment_new (0, 0, 1, 0.1, 0.1, 0.1));
-			
-	gil->adj = adj;
+	gnome_icon_list_construct(gil, icon_width, adj, is_editable);
 
-	gtk_signal_connect (GTK_OBJECT (adj), "value_changed",
-			    GTK_SIGNAL_FUNC (gil_adj_value_changed), gil);
-	
 	return GTK_WIDGET (gil);
 }
 

@@ -97,6 +97,11 @@ GtkWidget     *gnome_icon_list_new                 (guint         icon_width,
 						    GtkAdjustment *adj,
 						    gboolean      is_editable);
 
+void           gnome_icon_list_construct           (GnomeIconList *gil,
+						    guint icon_width,
+						    GtkAdjustment *adj,
+						    gboolean is_editable);
+
 /* To avoid excesive recomputes during insertion/deletion */
 void           gnome_icon_list_freeze              (GnomeIconList *gil);
 void           gnome_icon_list_thaw                (GnomeIconList *gil);
