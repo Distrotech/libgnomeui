@@ -349,7 +349,7 @@ gboolean	       gnome_stock_menu_accel      (char *type, guchar *key,
 /* apps can call this function at startup to add per app accelerator
  * redefinitions. section should be something like "/filename/section/" with
  * both the leading and trailing `/' */
-void                   gnome_stock_menu_accel_parse(char *section)
+void                   gnome_stock_menu_accel_parse(char *section);
 
 END_GNOME_DECLS
 
