@@ -88,8 +88,8 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 			gtk_widget_destroy(pentry->preview);
 			pentry->preview = gtk_label_new(_("No Image"));
 			gtk_widget_show(pentry->preview);
-			gtk_container_add(GTK_CONTAINER(pentry->preview_sw),
-					  pentry->preview);
+			gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
+							      pentry->preview);
 		}
 		return;
 	}
@@ -103,8 +103,8 @@ entry_changed(GtkWidget *w, GnomePixmapEntry *pentry)
 		gtk_widget_destroy(pentry->preview);
 		pentry->preview = gtk_pixmap_new(pix,mask);
 		gtk_widget_show(pentry->preview);
-		gtk_container_add(GTK_CONTAINER(pentry->preview_sw),
-				  pentry->preview);
+		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
+						      pentry->preview);
 	}
 	g_free(t);
 	gdk_imlib_destroy_image(im);
@@ -225,8 +225,8 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 
 	pentry->preview = gtk_label_new(_("No Image"));
 	gtk_widget_show(pentry->preview);
-	gtk_container_add(GTK_CONTAINER(pentry->preview_sw),
-			  pentry->preview);
+	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
+					      pentry->preview);
 
 	pentry->fentry = gnome_file_entry_new (NULL,NULL);
 	gtk_signal_connect_after(GTK_OBJECT(pentry->fentry),"browse_clicked",

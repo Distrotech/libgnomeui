@@ -944,7 +944,7 @@ gchar *gtk_dialog_cauldron_parse (gchar * title, glong options, const gchar * fo
 		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
 						option_is_present (p + 1, 'h') ? GTK_POLICY_ALWAYS : GTK_POLICY_AUTOMATIC,
 						option_is_present (p + 1, 'v') ? GTK_POLICY_ALWAYS : GTK_POLICY_AUTOMATIC);
-		gtk_container_add (GTK_CONTAINER (scrolled_window), w);
+		gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), w);
 		gtk_widget_show (scrolled_window);
 		user_callbacks (scrolled_window, p + 1, next_arg, user_data, accel_table);
 		gtk_cauldron_box_add (widget_stack_top (stack), scrolled_window, &p, pixels_per_space);

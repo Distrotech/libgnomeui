@@ -553,7 +553,7 @@ build_page_spell(GtkSpell* spell) {
 	/* FIXME: make a double click replace */
 	gtk_signal_connect(GTK_OBJECT(list), "select_child",
 		(GtkSignalFunc)gtk_spell_list_handler, spell);
-	gtk_container_add(GTK_CONTAINER(scwindow), list);
+	gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scwindow), list);
 	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
 	gtk_box_pack_start(GTK_BOX(vbox), scwindow, TRUE, TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(hbox), vbox, TRUE, TRUE, 0);

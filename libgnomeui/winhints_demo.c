@@ -87,7 +87,7 @@ void prepare_app()
   gtk_widget_show(sw);
 
   lbox = gtk_list_new();
-  gtk_container_add(GTK_CONTAINER(sw), lbox);
+  gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(sw), lbox);
   gtk_widget_show(lbox);
 
   tmp_list=NULL;
@@ -145,7 +145,7 @@ void prepare_app()
   gtk_widget_show(sw);
 
   wsbox = gtk_list_new();
-  gtk_container_add(GTK_CONTAINER(sw), wsbox);
+  gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(sw), wsbox);
   gtk_list_append_items(GTK_LIST(wsbox), get_workspaces());
   gtk_widget_show(wsbox);
 
