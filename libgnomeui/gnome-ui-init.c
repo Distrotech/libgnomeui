@@ -10,6 +10,7 @@
 #include <argp.h>
 
 extern char *program_invocation_name;
+extern char *program_invocation_short_name;
 
 static void gnome_rc_parse(gchar *command);
 
@@ -135,13 +136,22 @@ gnome_init (char *app_id, struct argp *app_args,
 	    int argc, char **argv,
 	    unsigned int flags, int *arg_index)
 {
+	char *arg;
+
 	/* now we replace gtk_init() with gnome_init() in our apps */
 	gtk_set_locale();
 
 	gnomelib_register_arguments ();
 	gnomeui_register_arguments ();
 
-	program_invocation_name = app_id;
+	program_invocation_name = argv[0];
+
+	arg = strrchr (argv[0], '/');
+	if (arg)
+		program_invocation_short_name = arg + 1;
+	else
+		program_invocation_short_name = program_invocation_name;
+
 	gnomelib_init (app_id);
 
 	if (! argp_program_version_hook)

@@ -1,3 +1,7 @@
+Mon Mar  9 17:37:44 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-init.c (gnome_init): Set program_invocation_short_name.
+
 Mon Mar  9 17:37:17 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-init.c (gnome_init): Initialize the
