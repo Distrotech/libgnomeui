@@ -1,19 +1,20 @@
-# translation of libgnomeui.HEAD.be.po to belarusian
-# Copyright (C) 2001-2002,2003 Free Software Foundation, Inc.
-# Vital Khilko <dojlid@mova.org>, 2003
+# Беларускі пераклад libgnomeui.HEAD.
+# Copyright (C) 2001-2002,2003, 2004 Free Software Foundation, Inc.
+# Vital Khilko <dojlid@mova.org>, 2003.
+# Ales Nyakhaychyk <nab@mail.by>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD.be\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-03 23:57+0100\n"
-"PO-Revision-Date: 2003-07-15 13:54+0300\n"
+"POT-Creation-Date: 2004-03-08 04:14+0100\n"
+"PO-Revision-Date: 2004-03-08 15:11+0200\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -120,8 +121,7 @@ msgid "Translator credits"
 msgstr "Зьвесткі пра перакладчыкаў"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Падзякі перакладчыкам. Гэты радок мусьць быць пазначаны для перакладу."
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -139,6 +139,7 @@ msgstr "Пра %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -196,6 +197,7 @@ msgid "_Game"
 msgstr "_Гульня"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Даведка"
 
@@ -386,11 +388,11 @@ msgstr "Наладзіць дастасаваньне"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Пра праграму"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Пра праграму"
 
@@ -417,7 +419,7 @@ msgstr "Стварыць новае вакно"
 msgid "_Close This Window"
 msgstr "Зачыніць _гэтае вакно"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Зачыніць бягучае акно"
 
@@ -619,14 +621,12 @@ msgstr "Патрабуецца высьвятленьне асобы"
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " маёнтак %s"
 
 #: libgnomeui/gnome-authentication-manager.c:268
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"Вам патрэбна вызначыць сябе для доступу да \"%s\".\n"
-"%s"
+msgstr "Вы мусіце ўвайсьці, каб мець доступ да \"%s\"\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -940,13 +940,13 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:299
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "Выкарыстоўваць GtkFileChooser"
 
 #: libgnomeui/gnome-file-entry.c:300
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr ""
+msgstr "Выкарстоўваць новы віджэт GtkFileChooser для вылучэньня файлаў ці стары GtkFileSelection."
 
 #: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
@@ -1230,7 +1230,7 @@ msgstr "_Карыстальнік:"
 
 #: libgnomeui/gnome-password-dialog.c:221
 msgid "_Domain:"
-msgstr ""
+msgstr "_Маёнтак:"
 
 #: libgnomeui/gnome-password-dialog.c:223
 msgid "_Password:"
@@ -1238,11 +1238,11 @@ msgstr "Па_роль:"
 
 #: libgnomeui/gnome-password-dialog.c:369
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Запомніць пароль для на гэты сэанс"
 
 #: libgnomeui/gnome-password-dialog.c:371
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Захаваць пароль у ключох"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1325,7 +1325,7 @@ msgstr "Пра праграму"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "Забараніць дыялёг кэшу"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
@@ -1373,36 +1373,40 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr ""
+msgstr "Дастасаваньне \"%s\" нечакана скончыла сваю працу."
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr ""
+msgstr "працэс %d: %s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
+"Вы можаце паведаміць распрацоўнікам аб тым што здарылася, каб дапамагчы "
+"ім выправіць гэта альбо запусьціць нанова дастасаваньне."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Выкарыстаньне: gnome_segv2 дастасаваньне signum\n"
 
 #: libgnomeui/gnome_segv.c:154
-#, fuzzy
 msgid "_Restart Application"
-msgstr "Выхад з дастасаваньня"
+msgstr "Зап_усьціць"
 
 #: libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
-msgstr ""
+msgstr "Пав_едаміць"
 
 #: libgnomeui/gnome_segv.c:177
-#, fuzzy
 msgid "_Debug"
-msgstr "Адладка"
+msgstr "Ад_ладзіць"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Выйсьці з праверкі"
 
 #~ msgid "Color Selector"
 #~ msgstr "Выбар колеру"
@@ -1427,8 +1431,6 @@ msgstr "Адладка"
 #~ "Калі ласка, наведайце старонку \"GNOME Application Crash\" для атрыманьня "
 #~ "больш падрабязных зьвестак"
 
-#~ msgid "Exit the test"
-#~ msgstr "Выйсьці з праверкі"
-
 #~ msgid "_Credits"
 #~ msgstr "_Падзякі"
+
