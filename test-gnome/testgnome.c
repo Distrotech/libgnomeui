@@ -113,38 +113,10 @@ quit_test (GtkWidget *caller, GdkEvent *event, TestGnomeApp *app)
         return TRUE;
 }
 
-/* The bonobo version is a bit fucked by ignoring absolute filenames,
- * so this just deals with those */
-static void
-our_bonobo_ui_util_set_ui (BonoboUIComponent *component,
-			   const char        *app_prefix,
-			   const char        *file_name,
-			   const char        *app_name)
-{
-	char *ui;
-	BonoboUINode *node;
-
-	if (bonobo_ui_component_get_container (component) == CORBA_OBJECT_NIL) {
-		g_warning ("Component must be associated with a container first "
-			   "see bonobo_component_set_container");
-		return;
-	}
-	
-	node = bonobo_ui_util_new_ui (component, file_name, app_prefix, app_name);
-
-	ui = bonobo_ui_node_to_string (node, TRUE);
-
-	bonobo_ui_node_free (node);
-
-	if (ui)
-		bonobo_ui_component_set (component, "/", ui, NULL);
-}
-
-
 static TestGnomeApp *
 create_newwin(gboolean normal, gchar *appname, gchar *title)
 {
-        TestGnomeApp		*app;
+        TestGnomeApp *app;
 
 	app = g_new0 (TestGnomeApp, 1);
 	app->app = bonobo_window_new (appname, title);
@@ -159,11 +131,11 @@ create_newwin(gboolean normal, gchar *appname, gchar *title)
 	bonobo_ui_component_set_container (app->ui_component,
 					   BONOBO_OBJREF(app->ui_container),
 					   NULL);
-	if (g_file_test ("testgnome.xml", G_FILE_TEST_EXISTS)) {
-		our_bonobo_ui_util_set_ui (app->ui_component, GNOMEUIDATADIR, "testgnome.xml", appname);
-	} else {
-		bonobo_ui_util_set_ui (app->ui_component, GNOMEUIDATADIR, "testgnome.xml", appname);
-	}
+
+	bonobo_ui_util_set_ui (app->ui_component, "",
+			       GNOMEUISRCDIR "/testgnome.xml",
+			       appname);
+
 	bonobo_ui_component_add_verb_list_with_data (app->ui_component, verbs, app);
 	
 	return app;
@@ -684,11 +656,21 @@ create_pixmap_entry(void)
 	gtk_widget_show (app->app);
 }
 
+#if 0
+/*
+ * FontSelector
+ */
+static void
+create_font_selector (void)
+{
+	g_warning ("Font '%s'", gnome_font_select ());
+}
+#endif
 
+#if 0
 /*
  * FontPicker
  */
-#if 0
 static void
 cfp_ck_UseFont(GtkWidget *widget,GnomeFontPicker *gfp)
 {
@@ -839,6 +821,7 @@ create_font_picker (void)
 
 }
 #endif
+
 /*
  * HRef
  */
@@ -1065,6 +1048,7 @@ main (int argc, char **argv)
 		{ "file entry", create_file_entry },
 		{ "pixmap entry", create_pixmap_entry },
 		{ "icon entry", create_icon_entry },
+/*		{ "font selector", create_font_selector }, */
 /*		{ "font picker", create_font_picker },*/
 		{ "href", create_href },
 		{ "icon list", create_icon_list },
@@ -1125,4 +1109,3 @@ main (int argc, char **argv)
 
 	return 0;
 }
-

@@ -12,6 +12,7 @@ INCLUDES = \
 	-DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\
 	-DGNOMEUIBINDIR=\""$(bindir)"\"			\
 	-DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\"	\
+	-DGNOMEUISRCDIR=\""$(srcdir)"\"			\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	-DVERSION=\"$(VERSION)\"			\
 	$(GDK_PIXBUF_CFLAGS)
@@ -36,7 +37,8 @@ test_entry_SOURCES = 	\
 	testentry.c
 
 EXTRA_DIST = 		\
-	bomb.xpm
+	bomb.xpm	\
+	testgnome.xml
 
 # the program has to be run from $srcdir to find its image files
 test: test-gnome
