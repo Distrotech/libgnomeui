@@ -1,3 +1,10 @@
+2003-07-03  Anders Carlsson  <andersca@codefactory.se>
+
+	* doc/reference/.cvsignore:
+	* doc/reference/Makefile.am:
+	* doc/reference/libgnomeui-docs.sgml:
+	Generate xml reference docs (#111798, Matthias Clasen)
+
 2003-07-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-thumbnail-pixbuf-utils.c (vfs_src): Merge
