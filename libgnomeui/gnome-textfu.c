@@ -345,7 +345,7 @@ static gint
 gnome_textfu_button_release_event(GtkWidget *widget, GdkEventButton *event)
 {
   GnomeTextFu *textfu = GNOME_TEXTFU(widget);
-  TextRegionInfo *info;
+  TextRegionInfo *info = NULL;
 
   if(event->window != GTK_LAYOUT(widget)->bin_window)
     goto default_handling;
@@ -622,7 +622,7 @@ gnome_textfu_text_determine_size(GnomeTextFu *textfu, GnomeTextFuItemText *item,
   gint lbearing, rbearing, width, ascent, descent;
   gint space_left;
   char *remaining_text;
-  GdkGC *gc;
+  GdkGC *gc = NULL;
   double avg_width;
   GdkDrawable *outwin;
   gint remaining_len;
@@ -1079,8 +1079,8 @@ gnome_textfu_parse(GnomeTextFu *textfu)
   int fd;
   int bracecount, quotecount, in_comment;
   struct stat sbuf;
-  char *mem, *tag_start, *tag_end, *text_start;
-  int size_left, n;
+  char *mem, *tag_start = NULL, *tag_end, *text_start;
+  int size_left, n = 0;
   char tag_name[32];
   char *attrs[32]; /* Ick. Hardcoded maximum of 32 attributes */
   GHashTable *tag_handlers;
@@ -1147,6 +1147,8 @@ gnome_textfu_parse(GnomeTextFu *textfu)
 	    bracecount++;
 	  break;
 	case '>':
+	  if(!tag_start) /* just for sanity - George */
+	    break;
 	  if(!strncmp(tag_start, "<!", 2))
 	    {
 	      if(!strncmp(tag_end - 2, "-->", 3))

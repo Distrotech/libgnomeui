@@ -226,7 +226,7 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
         gboolean ctype_set;
         char *ctype, *old_ctype = NULL;
-        gboolean do_crash_dialog;
+        gboolean do_crash_dialog = TRUE;
         char *envar;
 
         envar = getenv("GNOME_DISABLE_CRASH_DIALOG");

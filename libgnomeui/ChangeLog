@@ -1,3 +1,17 @@
+Sat Jan 15 00:04:00 2000  George Lebl <jirka@5z.com>
+
+	* gnome-helpsys.c: fix gnome_help_view_get_arg by initializing the
+	  help_view pointer
+	  fix a whole bunch of potentially quite dangerous uninitialized
+	  values
+	  add two g_assert_not_reached into places which would have caused
+	  a segfault if reached
+
+	* gnome-init.c: fix an uninitialized local variable problem
+
+	* gnome-textfu.c: fix several potentially quite dangerous 
+	  uninitialized values and assumptions
+
 2000-01-15  Havoc Pennington  <hp@pobox.com>
 
 	* Makefile.am (test_recently_used_LDADD): Test program for

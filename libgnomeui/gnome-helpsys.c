@@ -183,7 +183,7 @@ gnome_help_view_set_arg (GtkObject *obj, GtkArg *arg, guint arg_id)
 static void
 gnome_help_view_get_arg (GtkObject *obj, GtkArg *arg, guint arg_id)
 {
-  GnomeHelpView *help_view;
+  GnomeHelpView *help_view = GNOME_HELP_VIEW(obj);
 
   switch(arg_id)
     {
@@ -232,7 +232,10 @@ gnome_help_view_size_request  (GtkWidget      *widget,
   GList *children;
   gint nvis_children;
   gint length;
-  guint16 *primary_axis, *secondary_axis, *primary_axis_child, *secondary_axis_child;
+  guint16 *primary_axis = NULL;
+  guint16 *secondary_axis = NULL;
+  guint16 *primary_axis_child = NULL;
+  guint16 *secondary_axis_child = NULL;
   GnomeHelpView *help_view;
   GtkRequisition child_requisition;
 
@@ -262,6 +265,9 @@ gnome_help_view_size_request  (GtkWidget      *widget,
       secondary_axis = &requisition->width;
       secondary_axis_child = &child_requisition.width;
       break;
+    default:
+      /* if this is reached the axis pointers would be very wrong */
+      g_assert_not_reached();
     }
 
   children = box->children;
@@ -315,10 +321,12 @@ gnome_help_view_size_allocate (GtkWidget      *widget,
   gint dimension;
   gint extra;
   gint position;
-  gint16 *primary_axis_child, *secondary_axis_child;
-  guint16 *primary_size_child, *secondary_size_child, *primary_req_size_child, *secondary_req_size_child;
-  gint16 *primary_axis, *secondary_axis;
-  guint16 *primary_size, *secondary_size, *primary_req_size, *secondary_req_size;
+  gint16 *primary_axis_child = NULL, *secondary_axis_child = NULL;
+  guint16 *primary_size_child = NULL, *secondary_size_child = NULL;
+  guint16 *primary_req_size_child = NULL, *secondary_req_size_child = NULL;
+  gint16 *primary_axis = NULL, *secondary_axis = NULL;
+  guint16 *primary_size = NULL, *secondary_size = NULL;
+  guint16 *primary_req_size = NULL, *secondary_req_size = NULL;
   GtkRequisition child_requisition;
   GnomeHelpView *help_view;
   gboolean got_req = FALSE;
@@ -364,6 +372,8 @@ gnome_help_view_size_allocate (GtkWidget      *widget,
       secondary_req_size = &widget->requisition.width;
       secondary_req_size_child = &child_requisition.width;
       break;
+    default:
+      g_assert_not_reached();
     }
 
   nvis_children = 0;
@@ -840,7 +850,7 @@ gnome_help_view_find_help_id(GnomeHelpView *help_view, const char *widget_id)
 static void
 gnome_help_view_show_url(GnomeHelpView *help_view, const char *url, HelpURLType type)
 {
-  char *url_type;
+  char *url_type = NULL;
 
   switch(type)
     {
