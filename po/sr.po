@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-12 01:32+0100\n"
-"PO-Revision-Date: 2004-02-12 01:35+0100\n"
+"POT-Creation-Date: 2004-02-20 02:33+0100\n"
+"PO-Revision-Date: 2004-02-20 02:33+0100\n"
 "Last-Translator: Bojan Suzic <bojans@teol.net>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -654,11 +654,11 @@ msgstr "ПРЕФИКС"
 msgid "Disable connection to session manager"
 msgstr "Онемогући везу са управником сесије"
 
-#: libgnomeui/gnome-client.c:974
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Управљање сесијом"
 
-#: libgnomeui/gnome-client.c:2474
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Откажи одјаву"
 
@@ -953,7 +953,9 @@ msgstr "Користи GtkFileChooser"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "Да ли да користим нови GtkFileChooser елемент или GtkFileSelection елемент за избор датотека."
+msgstr ""
+"Да ли да користим нови GtkFileChooser елемент или GtkFileSelection елемент "
+"за избор датотека."
 
 #: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
@@ -1345,14 +1347,14 @@ msgid "GNOME GUI Library"
 msgstr "Гномова библиотека за корисничко сучеље"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:707
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Дошло је до неколико неправилних приступа меморији (SIGSEGV); не може да "
 "прикаже прозорче за грешку\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:721
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1397,13 +1399,17 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Употреба: gnome_segv2 име-програма број-сигнала\n"
 
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "_Поново покрени програм"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
-msgstr "Обавести програмере"
+msgid "_Inform Developers"
+msgstr "_Обавести програмере"
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
-msgstr "Проналажење грешака"
+msgid "_Debug"
+msgstr "_Нађи грешке"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
