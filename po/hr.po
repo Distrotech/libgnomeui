@@ -4,9 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-09 20:31+0100\n"
-"PO-Revision-Date: 2004-02-05 23:51+CET\n"
+"POT-Creation-Date: 2004-03-13 13:11+0100\n"
+"PO-Revision-Date: 2004-03-13 13:11+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "MIME-Version: 1.0\n"
@@ -116,11 +115,10 @@ msgstr "Unos jednog dokumentatora"
 
 #: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
-msgstr "Prevoditelji"
+msgstr "lokalizacija@linux.hr"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Prevoditelji"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -138,6 +136,7 @@ msgstr "Otprilike %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -195,6 +194,7 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoć"
 
@@ -227,7 +227,7 @@ msgstr "_Spremi Kao..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Makni trenutni pogled na spremink"
+msgstr "Makni trenutni pogled na spremnik"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
@@ -274,10 +274,9 @@ msgstr "_Završi"
 msgid "Quit the application"
 msgstr "Lijevo poravnano"
 
-#.
 #. * The "Edit" menu
-#.
-#. Cut
+#. 
+#.  Cut
 #: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
 msgstr "Iz_reži"
@@ -287,7 +286,7 @@ msgid "Cut the selection"
 msgstr "Izreži označeno"
 
 #. 10
-#. Copy
+#.  Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
 msgstr "_Kopiraj"
@@ -299,7 +298,7 @@ msgstr "Kopiraj označeno"
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
 msgid "_Paste"
-msgstr "_Zaljepi"
+msgstr "_Zalijepi"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
@@ -368,10 +367,9 @@ msgstr "_Svojstva"
 msgid "Modify the file's properties"
 msgstr "Promijeni svojstva datoteke"
 
-#.
 #. * The Settings menu
-#.
-#. Settings
+#. 
+#.  Settings
 #: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
 msgstr "_Postavke"
@@ -381,15 +379,15 @@ msgid "Configure the application"
 msgstr "Podesite program"
 
 #. 20
-#.
-#. * And the "Help" menu
-#.
-#. About
-#: libgnomeui/gnome-app-helper.c:221
+#. 
+#.  * And the "Help" menu
+#. 
+#.  About
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_O"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O ovoj aplikaciji"
 
@@ -401,9 +399,7 @@ msgstr "Označi _sve"
 msgid "Select everything"
 msgstr "Odaberite sve"
 
-#.
 #. * Window menu
-#.
 #: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
 msgstr "Stvori novi  _prozor"
@@ -416,13 +412,11 @@ msgstr "Stvori novi prozor"
 msgid "_Close This Window"
 msgstr "_Zatvori ovaj prozor"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvori trenutni prozor"
 
-#.
 #. * The "Game" menu
-#.
 #: libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
 msgstr "_Nova igra"
@@ -433,11 +427,11 @@ msgstr "Pokreni novu igru"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
-msgstr "_Pauziraj igru"
+msgstr "_Zaustavi igru"
 
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "Pauziraj igru"
+msgstr "Zaustavi igru"
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
@@ -604,7 +598,7 @@ msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted unencrypted."
-msgstr "Vaša lizinka neće biti šifrirano prenesena."
+msgstr "Vaša lozinka neće biti šifrirano prenesena."
 
 #: libgnomeui/gnome-authentication-manager.c:66
 msgid "Your password will be transmitted encrypted."
@@ -613,7 +607,7 @@ msgstr "Vaša lozinka će biti šifrirano prenesena."
 #: libgnomeui/gnome-authentication-manager.c:69
 #: libgnomeui/gnome-authentication-manager.c:272
 msgid "Authentication Required"
-msgstr "Zahtijev za autentifikaciju obavezan"
+msgstr "Zahtjev za autentifikaciju obavezan"
 
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
@@ -627,7 +621,7 @@ msgstr "Morate se prijaviti za pristup %s\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
-msgstr "Odredte ID upravljanja sesijama"
+msgstr "Odredite ID upravljanja sesijama"
 
 #: libgnomeui/gnome-client.c:863
 msgid "ID"
@@ -635,7 +629,7 @@ msgstr "Identifikacija"
 
 #: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
-msgstr "Odredte prefiks za spremljene postavke"
+msgstr "Odredite prefiks za spremljene postavke"
 
 #: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
@@ -643,7 +637,7 @@ msgstr "PREFIX"
 
 #: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
-msgstr "Isključi vezu orema upravitelju sesija"
+msgstr "Isključi vezu prema upravitelju sesija"
 
 #: libgnomeui/gnome-client.c:975
 msgid "Session management"
@@ -691,11 +685,11 @@ msgstr "Umanji sat u skočnom odabiru vremena"
 
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
-msgstr "Povečaj sat"
+msgstr "Povećaj sat"
 
 #: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
-msgstr "Povečaj sat u skočnom odabiru vremena"
+msgstr "Povećaj sat u skočnom odabiru vremena"
 
 #: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
@@ -732,8 +726,7 @@ msgstr "Odaberite vrijeme sa popisa"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_date_edit_get_date je zastarjelo, koristite gnome_date_edit_get_time"
+msgstr "gnome_date_edit_get_date je zastarjelo, koristite gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -879,7 +872,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Da se stavka datoteke koristi za upis imena mapa ili čitavig imena datoteka?"
+"Da se stavka datoteke koristi za upis imena mapa ili čitavog imena "
+"datoteka?"
 
 #: libgnomeui/gnome-file-entry.c:252
 msgid "Modal"
@@ -935,13 +929,13 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:299
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "Koristite GtkFileChooser"
 
 #: libgnomeui/gnome-file-entry.c:300
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr ""
+msgstr "Da se za odabir datoteka koristi nova komponenta GtkFileChooser ili komponenta GtkFileSelection?"
 
 #: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
@@ -1051,10 +1045,10 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"Program  \"%s\" je pokušao promjeniti dio vaših postavki, za koje vam "
+"Program  \"%s\" je pokušao promijeniti dio vaših postavki, za koje vam "
 "administrator sustava ili isporučitelj operativnog sustava ne dozvoljavaju "
 "promjene. Neke od postavki, koje ste odabrali, možda neće biti primjenjene "
-"ili možda neće biti obnovljene sljedeći put kada ćete korsititi program."
+"ili možda neće biti obnovljene sljedeći put kada ćete korstiti program."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1102,8 +1096,7 @@ msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Dogodila se gređka prilikom pokušaja pokretanja uobičajenog preglednika web-"
-"a.\n"
+"Dogodila se greška prilikom pokušaja pokretanja uobičajenog preglednika web-a.\n"
 "Molim, provjerite vaše postavke u 'Željeni programi' alatu postavki."
 
 #: libgnomeui/gnome-icon-entry.c:178
@@ -1182,7 +1175,7 @@ msgstr "Putanja sličice"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "Ovdje biste trebali upsati ime mape u kojoj se nalaze sličice."
+msgstr "Ovdje biste trebali upisati ime mape u kojoj se nalaze sličice."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1279,8 +1272,7 @@ msgid "Score"
 msgstr "Rezultat"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
-#. * Please refer to manpage of strftime(3) for complete reference.
-#.
+#.  * Please refer to manpage of strftime(3) for complete reference.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
@@ -1295,7 +1287,7 @@ msgstr "Okviri tablica"
 
 #: libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
-msgstr "Popina tablice"
+msgstr "Popuna tablice"
 
 #: libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
@@ -1319,7 +1311,7 @@ msgstr "O"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "Onemogući dijalog greške"
 
 #: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
@@ -1335,15 +1327,10 @@ msgstr "Biblioteka GNOME GUI"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Dogodile su se višestruke segmentacijske greške; ne mogu prikazati dijalog s "
-"greškama\n"
+msgstr "Dogodile su se višestruke segmentacijske greške; ne mogu prikazati dijalog s greškama\n"
 
-#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1369,39 +1356,36 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr ""
+msgstr "Aplikacija \"%s\" se nečekivano prestala izvršavati."
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
-msgstr ""
+msgstr "proces %d: %s"
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr ""
+msgstr "Možete obavjestiti razvijatelje o tome što se dogodilo kako biste im pomogli popraviti taj problem ili možete ponovno pokrenuti program."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Uporaba: gnome_segv2 naziv_programa broj_potpisa\n"
 
 #: libgnomeui/gnome_segv.c:154
-#, fuzzy
 msgid "_Restart Application"
-msgstr "Lijevo poravnano"
+msgstr "_Ponovno pokreni program"
 
 #: libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
-msgstr ""
+msgstr "_Obavjesti razvijatelje"
 
 #: libgnomeui/gnome_segv.c:177
-#, fuzzy
 msgid "_Debug"
-msgstr "Pronalaženje grešaka"
+msgstr "_Ispravljanje grešaka"
 
-#~ msgid "Color Selector"
-#~ msgstr "Izbornik boja"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Isključi ispit"
 
-#~ msgid "Exit the test"
-#~ msgstr "Isključi ispit"
