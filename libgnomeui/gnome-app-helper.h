@@ -348,6 +348,9 @@ typedef struct {
 #define GNOMEUIINFO_MENU_VIEW_TREE(tree) \
 	{ GNOME_APP_UI_SUBTREE, N_("_View"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
+#define GNOMEUIINFO_MENU_OPTIONS_TREE(tree) \
+	{ GNOME_APP_UI_SUBTREE, N_("_Options"), NULL, tree, NULL, NULL, \
+		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 #define GNOMEUIINFO_MENU_FILES_TREE(tree) \
 	{ GNOME_APP_UI_SUBTREE, N_("File_s"), NULL, tree, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
