@@ -1,6 +1,6 @@
 # Swedish messages for libgnomeui.
-# Copyright (C) 2001, 2002, 2003 Free Software Foundation, Inc.
-# Christian Rose <menthos@menthos.com>, 2001, 2002, 2003.
+# Copyright (C) 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
+# Christian Rose <menthos@menthos.com>, 2001, 2002, 2003, 2004.
 # Mikael Hallendal <micke@codefactory.se>, 2002.
 #
 # $Id$
@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2004-01-14 08:43+0100\n"
-"PO-Revision-Date: 2003-12-13 12:53+0100\n"
+"POT-Creation-Date: 2004-01-24 15:09+0100\n"
+"PO-Revision-Date: 2004-01-24 15:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -145,6 +145,7 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Arkiv"
 
@@ -202,6 +203,7 @@ msgid "_Game"
 msgstr "_Spel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjälp"
 
@@ -392,11 +394,11 @@ msgstr "Konfigurera programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om detta program"
 
@@ -423,7 +425,7 @@ msgstr "Skapa ett nytt fönster"
 msgid "_Close This Window"
 msgstr "_Stäng detta fönster"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Stäng det aktuella fönstret"
 
@@ -503,23 +505,23 @@ msgstr "_Innehåll"
 msgid "View help for this application"
 msgstr "Visa hjälp för detta program"
 
-#: libgnomeui/gnome-app-helper.c:2566
+#: libgnomeui/gnome-app-helper.c:2567
 msgid "Text Below Icons"
 msgstr "Text under ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2568
 msgid "Priority Text Beside Icons"
 msgstr "Prioritetstext bredvid ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2569
 msgid "Icons Only"
 msgstr "Endast ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Only"
 msgstr "Endast text"
 
-#: libgnomeui/gnome-app-helper.c:2630
+#: libgnomeui/gnome-app-helper.c:2631
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Använd skrivbordsstandard (%s)"
@@ -657,7 +659,7 @@ msgstr "Stäng av koppling till sessionshanteraren"
 msgid "Session management"
 msgstr "Sessionshantering"
 
-#: libgnomeui/gnome-client.c:2473
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Avbryt utloggning"
 
@@ -1323,25 +1325,29 @@ msgstr "Ta bort indrag"
 msgid "About"
 msgstr "Om"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:117
+msgid "Disable Crash Dialog"
+msgstr "Inaktivera kraschdialog"
+
+#: libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "X-display som skall användas"
 
-#: libgnomeui/gnome-ui-init.c:118
+#: libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:126
+#: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "GNOME-bibliotek för grafiska användargränssnitt"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:705
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flera segmenteringsfel har inträffat; kan inte visa felmeddelande\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:719
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1350,7 +1356,7 @@ msgstr ""
 "Kan inte visa kraschdialog\n"
 
 # SUN CHANGED MESSAGE
-#: libgnomeui/gnome_segv.c:100
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1365,39 +1371,60 @@ msgstr ""
 "session avslutas.\n"
 "Spara dina filer innan du stänger den här dialogrutan."
 
-#: libgnomeui/gnome_segv.c:110
+#: libgnomeui/gnome_segv.c:112
 #, c-format
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Programmet \"%s\" (process %d) har kraschat\n"
-"på grund av ett allvarligt fel.\n"
-"(%s)"
+msgid "The Application \"%s\" has quit unexpectedly."
+msgstr "Programmet \"%s\" har oväntat avslutats."
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr "process %d: %s"
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+"Du kan meddela utvecklarna vad som hänt för att hjälpa dem korrigera det. "
+"Alternativt kan du starta om programmet direkt."
+
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Användning: gnome_segv2 programnamn signalnummer\n"
 
-#: libgnomeui/gnome_segv.c:140
-msgid "Submit a bug report"
-msgstr "Skicka in en felrapport"
+#: libgnomeui/gnome_segv.c:166
+msgid "Inform Developers"
+msgstr "Meddela utvecklarna"
 
-#: libgnomeui/gnome_segv.c:151
+#: libgnomeui/gnome_segv.c:177
 msgid "Debug"
 msgstr "Felsök"
 
-#: libgnomeui/gnome_segv.c:159
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Avsluta testet"
 
-#: libgnomeui/gnome_segv.c:165
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Besök GNOMEs programkraschsida för mer information"
+#~ msgid "Process %d: %s"
+#~ msgstr "Process %d: %s"
 
-#~ msgid "Exit the test"
-#~ msgstr "Avsluta testet"
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "Programmet \"%s\" (process %d) har kraschat\n"
+#~ "på grund av ett allvarligt fel.\n"
+#~ "(%s)"
+
+#~ msgid "Submit a bug report"
+#~ msgstr "Skicka in en felrapport"
+
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr "Besök GNOMEs programkraschsida för mer information"
 
 #~ msgid "Domain:"
 #~ msgstr "Domän:"
