@@ -1,3 +1,8 @@
+Wed Apr 19 05:05:20 2000  George Lebl <jirka@5z.com>
+
+	* gnome-file-entry.[ch]: add _set_filename method, and added a bunch
+	  of extra arguments
+
 Wed Apr 19 04:49:54 2000  George Lebl <jirka@5z.com>
 
 	* gnome-file-entry.c: use GtkArg system, use G_DIR_SEPARATOR, and

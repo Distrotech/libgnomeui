@@ -71,6 +71,10 @@ enum {
 	ARG_0,
 	ARG_HISTORY_ID,
 	ARG_BROWSE_DIALOG_TITLE,
+	ARG_DIRECTORY_ENTRY,
+	ARG_MODAL,
+	ARG_FILENAME,
+	ARG_DEFAULT_PATH,
 	ARG_GNOME_ENTRY,
 	ARG_GTK_ENTRY
 };
@@ -132,6 +136,22 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 				GTK_TYPE_POINTER,
 				GTK_ARG_WRITABLE,
 				ARG_BROWSE_DIALOG_TITLE);
+	gtk_object_add_arg_type("GnomeFileEntry::directory_entry",
+				GTK_TYPE_BOOL,
+				GTK_ARG_READWRITE,
+				ARG_DIRECTORY_ENTRY);
+	gtk_object_add_arg_type("GnomeFileEntry::modal",
+				GTK_TYPE_BOOL,
+				GTK_ARG_READWRITE,
+				ARG_MODAL);
+	gtk_object_add_arg_type("GnomeFileEntry::filename",
+				GTK_TYPE_POINTER,
+				GTK_ARG_READWRITE,
+				ARG_FILENAME);
+	gtk_object_add_arg_type("GnomeFileEntry::default_path",
+				GTK_TYPE_POINTER,
+				GTK_ARG_WRITABLE,
+				ARG_FILENAME);
 	gtk_object_add_arg_type("GnomeFileEntry::gnome_entry",
 				GTK_TYPE_POINTER,
 				GTK_ARG_READABLE,
@@ -166,6 +186,18 @@ fentry_set_arg (GtkObject *object,
 		gnome_entry_load_history (GNOME_ENTRY(gentry));
 		break;
 	}
+	case ARG_DIRECTORY_ENTRY:
+		gnome_file_entry_set_directory (self, GTK_VALUE_BOOL(*arg));
+		break;
+	case ARG_MODAL:
+		gnome_file_entry_set_modal (self, GTK_VALUE_BOOL(*arg));
+		break;
+	case ARG_FILENAME:
+		gnome_file_entry_set_filename (self, GTK_VALUE_POINTER(*arg));
+		break;
+	case ARG_DEFAULT_PATH:
+		gnome_file_entry_set_default_path (self, GTK_VALUE_POINTER(*arg));
+		break;
 	case ARG_BROWSE_DIALOG_TITLE:
 		gnome_file_entry_set_title (self, GTK_VALUE_POINTER(*arg));
 		break;
@@ -187,6 +219,16 @@ fentry_get_arg (GtkObject *object,
 	case ARG_GNOME_ENTRY:
 		GTK_VALUE_POINTER(*arg) =
 			gnome_file_entry_gnome_entry(self);
+		break;
+	case ARG_DIRECTORY_ENTRY:
+		GTK_VALUE_BOOL(*arg) = self->directory_entry;
+		break;
+	case ARG_MODAL:
+		GTK_VALUE_BOOL(*arg) = self->is_modal;
+		break;
+	case ARG_FILENAME:
+		GTK_VALUE_POINTER(*arg) =
+			gnome_file_entry_get_full_path (self, FALSE);
 		break;
 	case ARG_GTK_ENTRY:
 		GTK_VALUE_POINTER(*arg) =
@@ -656,6 +698,25 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 		return NULL;
 	} else
 		return p;
+}
+
+/**
+ * gnome_file_entry_set_filename:
+ * @fentry: The GnomeFileEntry widget to work with.
+ *
+ * Description: Sets the internal entry to this string.
+ **/
+void
+gnome_file_entry_set_filename(GnomeFileEntry *fentry, const char *filename)
+{
+	GtkWidget *entry;
+
+	g_return_if_fail (fentry != NULL);
+	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
+
+	entry = gnome_file_entry_gtk_entry (fentry);
+
+	gtk_entry_set_text(GTK_ENTRY(entry), filename);
 }
 
 /**

@@ -102,6 +102,11 @@ void	   gnome_file_entry_set_directory(GnomeFileEntry *fentry,
 char      *gnome_file_entry_get_full_path(GnomeFileEntry *fentry,
 					  gboolean file_must_exist);
 
+/* set the filename to something, this is like setting the internal
+ * GtkEntry */
+void       gnome_file_entry_set_filename(GnomeFileEntry *fentry,
+					 const char *filename);
+
 /*set modality of the file browse dialog, only applies for the
   next time a dialog is created*/
 void       gnome_file_entry_set_modal	(GnomeFileEntry *fentry,
