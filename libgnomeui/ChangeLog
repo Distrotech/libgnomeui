@@ -1,3 +1,15 @@
+2001-11-14  Michael Meeks  <michael@ximian.com>
+
+	* gnome-app-helper.c (gnome_save_accels):
+	gtk_accel_map_save instead of dump_rc.
+	disable
+	(create_help_entries, create_menu_item): kill
+	gtk_widget_lock_accelerators.
+
+	* gnome-app.c (gnome_app_set_menus): use
+	gtk_accel_groups_from_acceleratable instead of from_object;
+	(gnome_app_add_toolbar): ditto.
+
 2001-11-12  Darin Adler  <darin@bentspoon.com>
 
 	* Same files again.

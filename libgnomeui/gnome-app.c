@@ -517,7 +517,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	gtk_widget_show (GTK_WIDGET (dock_item));
 
 	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
-	if (ag && !g_slist_find(gtk_accel_groups_from_object (G_OBJECT (app)), ag))
+	if (ag && !g_slist_find(gtk_accel_groups_from_acceleratable (G_OBJECT (app)), ag))
 	        gtk_window_add_accel_group(GTK_WINDOW(app), ag);
 }
 
@@ -645,7 +645,7 @@ gnome_app_add_toolbar (GnomeApp *app,
 	gtk_widget_show (GTK_WIDGET (dock_item));
 
 	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
-	if (ag && !g_slist_find(gtk_accel_groups_from_object (G_OBJECT (app)), ag))
+	if (ag && !g_slist_find(gtk_accel_groups_from_acceleratable (G_OBJECT (app)), ag))
 	        gtk_window_add_accel_group(GTK_WINDOW(app), ag);
 }
 

@@ -940,7 +940,7 @@ gnome_save_accels (gpointer data)
 	file_name = g_build_filename (gnome_user_accels_dir_get (),
 				      gnome_program_get_app_id (gnome_program_get()),
 				      NULL);
-	gtk_item_factory_dump_rc (file_name, NULL, TRUE);
+	gtk_accel_map_save (file_name);
 	g_free (file_name);
 
 	return TRUE;
@@ -1014,8 +1014,8 @@ create_menu_item (GtkMenuShell       *menu_shell,
 		return;
 	}
 
-	if (!accel_group)
-		gtk_widget_lock_accelerators (uiinfo->widget);
+/*	if (!accel_group)
+		gtk_widget_lock_accelerators (uiinfo->widget); */
 
 	gtk_widget_show (uiinfo->widget);
 	gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
@@ -1332,7 +1332,7 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 
 		gtk_container_add (GTK_CONTAINER (item), label);
 		setup_uline_accel (menu_shell, NULL, item, keyval);
-		gtk_widget_lock_accelerators (item);
+/*		gtk_widget_lock_accelerators (item); */
 
 		gtk_object_set_data_full (GTK_OBJECT (item), "docname",
 					  g_strdup (uiinfo->moreinfo),
