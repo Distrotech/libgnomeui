@@ -983,11 +983,17 @@ gint gnome_mdi_add_view(GnomeMDI *mdi, GnomeMDIChild *child) {
 
   view = gnome_mdi_child_add_view(child);
 
+  if(!view)
+    return FALSE;
+
   gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[ADD_VIEW], view, &ret);
 
-  if(ret == FALSE)
+  if(ret == FALSE) {
     gnome_mdi_child_remove_view(child, view);
-  else if(mdi->flags & GNOME_MDI_NOTEBOOK)
+    return FALSE;
+  }
+
+  if(mdi->flags & GNOME_MDI_NOTEBOOK)
     book_add_view(GTK_NOTEBOOK(mdi->active_window->contents), view);
   else if(mdi->flags & GNOME_MDI_TOPLEVEL)
     /* add a new toplevel unless the remaining one is empty */
@@ -1009,7 +1015,7 @@ gint gnome_mdi_add_view(GnomeMDI *mdi, GnomeMDIChild *child) {
 
   gtk_widget_show(view);
 
-  return ret;
+  return TRUE;
 }
 
 gint gnome_mdi_remove_view(GnomeMDI *mdi, GtkWidget *view, gint force) {

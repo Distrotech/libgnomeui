@@ -129,15 +129,17 @@ static void gnome_mdi_child_destroy(GtkObject *obj) {
 }
 
 GtkWidget *gnome_mdi_child_add_view(GnomeMDIChild *mdi_child) {
-  GtkWidget *view;
+  GtkWidget *view = NULL;
 
   gtk_signal_emit (GTK_OBJECT (mdi_child), mdi_child_signals[CREATE_VIEW], &view);
 
-  mdi_child->views = g_list_append(mdi_child->views, view);
+  if(view) {
+    mdi_child->views = g_list_append(mdi_child->views, view);
 
-  gtk_object_set_data(GTK_OBJECT(view), "GnomeMDIChild", mdi_child);
+    gtk_object_set_data(GTK_OBJECT(view), "GnomeMDIChild", mdi_child);
 
-  gtk_widget_ref(view);
+    gtk_widget_ref(view);
+  }
 
   return view;
 }

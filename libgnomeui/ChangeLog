@@ -1,3 +1,10 @@
+1998-07-13  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (gnome_mdi_add_view): check if view has been successfully
+	added to the child.
+	* gnome-mdi-child.c (gnome_mdi_child_add_view): check if view has been
+	successfully created.
+
 Sun Jul 12 22:57:55 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-app-util.c: Implementations for interactive appbar
