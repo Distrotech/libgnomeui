@@ -1,3 +1,13 @@
+2001-10-16  James Henstridge  <james@daa.com.au>
+
+	* gnome-href.c (gnome_href_class_init): install a "link_colour"
+	style property for changing the link colour.
+	(gnome_href_instance_init): modify the fg of the link using the
+	style property (default to blue).
+	(gnome_href_set_text): use markup to add the underline to the
+	link. (this doesn't seem to work correctly yet, but that is a gtk
+	bug.
+
 2001-10-17  jacob berkman  <jacob@ximian.com>
 
 	* gnome-vfs-util.c (gnome_gdk_pixbuf_new_from_uri_async): pass

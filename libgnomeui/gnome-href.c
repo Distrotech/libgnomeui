@@ -1,5 +1,5 @@
 /* gnome-href.c
- * Copyright (C) 1998, James Henstridge <james@daa.com.au>
+ * Copyright (C) 1998-2001, James Henstridge <james@daa.com.au>
  * All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
@@ -131,17 +131,41 @@ gnome_href_class_init (GnomeHRefClass *klass)
 							      (G_PARAM_READABLE |
 							       G_PARAM_WRITABLE)));
 
+	gtk_widget_class_install_style_property (GTK_WIDGET_CLASS (gobject_class),
+						 g_param_spec_boxed ("link_colour",
+								     _("Link colour"),
+								     _("Colour ysed to draw the link"),
+								     GDK_TYPE_COLOR,
+								     G_PARAM_READABLE));
 }
 
 static void
 gnome_href_instance_init (GnomeHRef *href)
 {
+        GdkColor *link_colour;
+	GdkColor blue = { 0, 0x0000, 0x0000, 0xffff };
+
 	href->_priv = g_new0(GnomeHRefPrivate, 1);
 
 	href->_priv->label = gtk_label_new("");
 	gtk_widget_ref(href->_priv->label);
 
+	gtk_widget_style_get (GTK_WIDGET(href),
+			      "link_colour", &link_colour,
+			      NULL);
+	if (!link_colour)
+		link_colour = &blue;
+	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
+			      GTK_STATE_NORMAL, link_colour);
+	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
+			      GTK_STATE_ACTIVE, link_colour);
+	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
+			      GTK_STATE_PRELIGHT, link_colour);
+	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
+			      GTK_STATE_SELECTED, link_colour);
+
 	gtk_button_set_relief(GTK_BUTTON(href), GTK_RELIEF_NONE);
+
 	gtk_container_add(GTK_CONTAINER(href), href->_priv->label);
 	gtk_widget_show(href->_priv->label);
 
@@ -302,17 +326,16 @@ const gchar *gnome_href_get_text(GnomeHRef *href) {
 void
 gnome_href_set_text (GnomeHRef *href, const gchar *text)
 {
-  gchar *pattern;
+  gchar *markup;
 
   g_return_if_fail(href != NULL);
   g_return_if_fail(GNOME_IS_HREF(href));
   g_return_if_fail(text != NULL);
 
-  /* pattern used to set underline for string */
-  pattern = g_strnfill(strlen(text), '_');
-  gtk_label_set_text(GTK_LABEL(href->_priv->label), text);
-  gtk_label_set_pattern(GTK_LABEL(href->_priv->label), pattern);
-  g_free(pattern);
+  /* underline the string */
+  markup = g_strdup_printf("<u>%s</u>", text);
+  gtk_label_set_markup(GTK_LABEL(href->_priv->label), text);
+  g_free(markup);
 }
 
 #ifndef GNOME_DISABLE_DEPRECATED_SOURCE
