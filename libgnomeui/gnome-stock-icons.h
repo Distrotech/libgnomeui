@@ -28,6 +28,7 @@
 
 #include <glib/gmacros.h>
 #include <gtk/gtkiconfactory.h>
+#include <gtk/gtkstock.h>
 
 G_BEGIN_DECLS
 
