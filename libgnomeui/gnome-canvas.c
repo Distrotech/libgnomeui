@@ -114,13 +114,11 @@ static void gnome_canvas_item_shutdown   (GObject              *object);
 static void gnome_canvas_item_set_property (GObject               *object,
 					    guint                  param_id,
 					    const GValue          *value,
-					    GParamSpec            *pspec,
-					    const gchar           *trailer);
+					    GParamSpec            *pspec);
 static void gnome_canvas_item_get_property (GObject               *object,
 					    guint                  param_id,
 					    GValue                *value,
-					    GParamSpec            *pspec,
-					    const gchar           *trailer);
+					    GParamSpec            *pspec);
 
 
 static void gnome_canvas_item_realize   (GnomeCanvasItem *item);
@@ -270,8 +268,7 @@ item_post_create_setup (GnomeCanvasItem *item)
 /* Set_property handler for canvas items */
 static void
 gnome_canvas_item_set_property (GObject *gobject, guint param_id,
-				const GValue *value, GParamSpec *pspec,
-				const gchar *trailer)
+				const GValue *value, GParamSpec *pspec)
 {
 	GnomeCanvasItem *item;
 
@@ -300,8 +297,7 @@ gnome_canvas_item_set_property (GObject *gobject, guint param_id,
 /* Get_property handler for canvas items */
 static void
 gnome_canvas_item_get_property (GObject *gobject, guint param_id,
-				GValue *value, GParamSpec *pspec,
-				const gchar *trailer)
+				GValue *value, GParamSpec *pspec)
 {
 	GnomeCanvasItem *item;
 
@@ -1435,13 +1431,11 @@ static void gnome_canvas_group_init        (GnomeCanvasGroup      *group);
 static void gnome_canvas_group_set_property(GObject               *object, 
 					    guint                  param_id,
 					    const GValue          *value,
-					    GParamSpec            *pspec,
-					    const gchar           *trailer);
+					    GParamSpec            *pspec);
 static void gnome_canvas_group_get_property(GObject               *object,
 					    guint                  param_id,
 					    GValue                *value,
-					    GParamSpec            *pspec,
-					    const gchar           *trailer);
+					    GParamSpec            *pspec);
 
 static void gnome_canvas_group_destroy     (GtkObject             *object);
 
@@ -1571,8 +1565,7 @@ gnome_canvas_ensure_translate (GnomeCanvasItem *item)
 /* Set_property handler for canvas groups */
 static void
 gnome_canvas_group_set_property (GObject *gobject, guint param_id,
-				 const GValue *value, GParamSpec *pspec,
-				 const gchar *trailer)
+				 const GValue *value, GParamSpec *pspec)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasGroup *group;
@@ -1624,8 +1617,7 @@ gnome_canvas_group_set_property (GObject *gobject, guint param_id,
 /* Get_property handler for canvas groups */
 static void
 gnome_canvas_group_get_property (GObject *gobject, guint param_id,
-				 GValue *value, GParamSpec *pspec,
-				 const gchar *trailer)
+				 GValue *value, GParamSpec *pspec)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasGroup *group;

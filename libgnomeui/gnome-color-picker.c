@@ -113,13 +113,11 @@ static void drag_data_received		(GtkWidget        *widget,
 static void gnome_color_picker_set_property (GObject            *object,
 					     guint               param_id,
 					     const GValue       *value,
-					     GParamSpec         *pspec,
-					     const gchar        *trailer);
+					     GParamSpec         *pspec);
 static void gnome_color_picker_get_property (GObject            *object,
 					     guint               param_id,
 					     GValue             *value,
-					     GParamSpec         *pspec,
-					     const gchar        *trailer);
+					     GParamSpec         *pspec);
 
 
 static guint color_picker_signals[LAST_SIGNAL] = { 0 };
@@ -1023,8 +1021,7 @@ static void
 gnome_color_picker_set_property (GObject            *object,
 				 guint               param_id,
 				 const GValue       *value,
-				 GParamSpec         *pspec,
-				 const gchar        *trailer)
+				 GParamSpec         *pspec)
 {
 	GnomeColorPicker *self;
 	gushort r, g, b, a;
@@ -1074,8 +1071,7 @@ static void
 gnome_color_picker_get_property (GObject            *object,
 				 guint               param_id,
 				 GValue             *value,
-				 GParamSpec         *pspec,
-				 const gchar        *trailer)
+				 GParamSpec         *pspec)
 {
 	GnomeColorPicker *self;
 	gushort val;

@@ -42,13 +42,11 @@ static void gnome_pixmap_size_request  (GtkWidget        *widget,
 static void gnome_pixmap_set_property  (GObject            *object,
                                         guint               param_id,
                                         const GValue       *value,
-                                        GParamSpec         *pspec,
-                                        const gchar        *trailer);
+                                        GParamSpec         *pspec);
 static void gnome_pixmap_get_property  (GObject            *object,
                                         guint               param_id,
                                         GValue             *value,
-                                        GParamSpec         *pspec,
-                                        const gchar        *trailer);
+                                        GParamSpec         *pspec);
 
 static void clear_provided_state_image (GnomePixmap *gpixmap,
                                         GtkStateType state);
@@ -219,8 +217,7 @@ static void
 gnome_pixmap_set_property (GObject            *object,
                            guint               param_id,
                            const GValue       *value,
-                           GParamSpec         *pspec,
-                           const gchar        *trailer)
+                           GParamSpec         *pspec)
 {
         GnomePixmap *self;
 
@@ -284,8 +281,7 @@ static void
 gnome_pixmap_get_property (GObject            *object,
                            guint               param_id,
                            GValue             *value,
-                           GParamSpec         *pspec,
-                           const gchar        *trailer)
+                           GParamSpec         *pspec)
 {
         GnomePixmap *self;
 

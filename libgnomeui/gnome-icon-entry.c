@@ -114,13 +114,11 @@ static void   drag_data_received           (GtkWidget           *widget,
 static void   gnome_icon_entry_get_property(GObject             *object,
 					    guint                param_id,
 					    GValue              *value,
-					    GParamSpec          *pspec,
-					    const gchar         *trailer);
+					    GParamSpec          *pspec);
 static void   gnome_icon_entry_set_property(GObject             *object,
 					    guint                param_id,
 					    const GValue        *value,
-					    GParamSpec          *pspec,
-					    const gchar         *trailer);
+					    GParamSpec          *pspec);
 
 
 
@@ -220,8 +218,7 @@ gnome_icon_entry_update_preview (GnomeIconEntry *ientry)
 
 static void
 gnome_icon_entry_set_property (GObject *object, guint param_id,
-			       const GValue *value, GParamSpec *pspec,
-			       const gchar *trailer)
+			       const GValue *value, GParamSpec *pspec)
 {
     GnomeIconEntry *ientry;
 
@@ -253,7 +250,7 @@ gnome_icon_entry_set_property (GObject *object, guint param_id,
 
 static void
 gnome_icon_entry_get_property (GObject *object, guint param_id, GValue *value,
-			       GParamSpec *pspec, const gchar *trailer)
+			       GParamSpec *pspec)
 {
     GnomeIconEntry *ientry;
 

@@ -151,13 +151,11 @@ static void gnome_selector_finalize            (GObject            *object);
 static void gnome_selector_get_property        (GObject            *object,
                                                 guint               param_id,
                                                 GValue             *value,
-                                                GParamSpec         *pspec,
-                                                const gchar        *trailer);
+                                                GParamSpec         *pspec);
 static void gnome_selector_set_property        (GObject            *object,
                                                 guint               param_id,
                                                 const GValue       *value,
-                                                GParamSpec         *pspec,
-                                                const gchar        *trailer);
+                                                GParamSpec         *pspec);
 
 static GObject *gnome_selector_constructor     (GType                  type,
 						guint                  n_construct_properties,
@@ -640,8 +638,7 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 
 static void
 gnome_selector_set_property (GObject *object, guint param_id,
-			     const GValue *value, GParamSpec *pspec,
-			     const gchar *trailer)
+			     const GValue *value, GParamSpec *pspec)
 {
     GnomeSelector *selector;
 
@@ -722,7 +719,7 @@ gnome_selector_set_property (GObject *object, guint param_id,
 
 static void
 gnome_selector_get_property (GObject *object, guint param_id, GValue *value,
-			     GParamSpec *pspec, const gchar *trailer)
+			     GParamSpec *pspec)
 {
     GnomeSelector *selector;
 

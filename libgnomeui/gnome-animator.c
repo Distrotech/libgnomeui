@@ -78,15 +78,13 @@ static void gnome_animator_init (GnomeAnimator * animator);
 static void destroy (GtkObject * object);
 static void finalize (GObject * object);
 static void set_property (GObject * object, 
-		       guint param_id,
-		       const GValue * value,
-		       GParamSpec * pspec,
-		       const gchar * trailer);
+			  guint param_id,
+			  const GValue * value,
+			  GParamSpec * pspec);
 static void get_property (GObject * object,
-		       guint param_id,
-		       GValue *value,
-		       GParamSpec * pspec,
-		       const gchar *trailer);
+			  guint param_id,
+			  GValue *value,
+			  GParamSpec * pspec);
 static void realize (GtkWidget * widget);
 static void unrealize (GtkWidget * widget);
 static void prepare_aux_pixmaps (GnomeAnimator * animator);
@@ -251,10 +249,9 @@ finalize (GObject * object)
 
 static void
 set_property (GObject * object,
-	   guint param_id,
-	   const GValue * value,
-	   GParamSpec * pspec,
-	   const gchar * trailer)
+	      guint param_id,
+	      const GValue * value,
+	      GParamSpec * pspec)
 {
   GnomeAnimator *animator;
 
@@ -298,10 +295,9 @@ set_property (GObject * object,
 
 static void
 get_property (GObject * object,
-	   guint param_id,
-	   GValue * value,
-	   GParamSpec * pspec,
-	   const gchar * trailer)
+	      guint param_id,
+	      GValue * value,
+	      GParamSpec * pspec)
 {
   GnomeAnimator *animator;
 

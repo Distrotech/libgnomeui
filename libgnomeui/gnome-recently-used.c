@@ -71,13 +71,11 @@ static void                 gnome_recently_used_finalize           (GObject     
 static void                 gnome_recently_used_get_property          (GObject                *object,
 								    guint                   param_id,
 								    GValue                 *value,
-								    GParamSpec             *pspec,
-								    const gchar            *trailer);
+								    GParamSpec             *pspec);
 static void                 gnome_recently_used_set_property          (GObject                *object,
 								    guint                   param_id,
 								    const GValue           *value,
-								    GParamSpec             *pspec,
-								    const gchar            *trailer);
+								    GParamSpec             *pspec);
 
 static GConfValue*          gnome_recent_document_to_gconf_value   (GnomeRecentDocument    *doc);
 static GnomeRecentDocument* gnome_recent_document_from_gconf_value (GConfValue             *val);
@@ -324,8 +322,7 @@ static void
 gnome_recently_used_get_property (GObject      *object,
 			       guint         param_id,
 			       GValue       *value,
-			       GParamSpec   *pspec,
-			       const gchar  *trailer)
+			       GParamSpec   *pspec)
 {
         GnomeRecentlyUsed *recently_used;
 
@@ -346,8 +343,7 @@ static void
 gnome_recently_used_set_property (GObject      *object,
 			       guint         param_id,
 			       const GValue *value,
-			       GParamSpec   *pspec,
-			       const gchar  *trailer)
+			       GParamSpec   *pspec)
 {
         GnomeRecentlyUsed *recently_used;
 

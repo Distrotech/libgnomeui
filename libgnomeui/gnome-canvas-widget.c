@@ -54,13 +54,11 @@ static void gnome_canvas_widget_destroy    (GtkObject              *object);
 static void gnome_canvas_widget_get_property (GObject            *object,
 					      guint               param_id,
 					      GValue             *value,
-					      GParamSpec         *pspec,
-					      const gchar        *trailer);
+					      GParamSpec         *pspec);
 static void gnome_canvas_widget_set_property (GObject            *object,
 					      guint               param_id,
 					      const GValue       *value,
-					      GParamSpec         *pspec,
-					      const gchar        *trailer);
+					      GParamSpec         *pspec);
 
 static void   gnome_canvas_widget_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static double gnome_canvas_widget_point       (GnomeCanvasItem *item, double x, double y,
@@ -282,8 +280,7 @@ static void
 gnome_canvas_widget_set_property (GObject            *object,
 				  guint               param_id,
 				  const GValue       *value,
-				  GParamSpec         *pspec,
-				  const gchar        *trailer)
+				  GParamSpec         *pspec)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasWidget *witem;
@@ -386,8 +383,7 @@ static void
 gnome_canvas_widget_get_property (GObject            *object,
 				  guint               param_id,
 				  GValue             *value,
-				  GParamSpec         *pspec,
-				  const gchar        *trailer)
+				  GParamSpec         *pspec)
 {
 	GnomeCanvasWidget *witem;
 

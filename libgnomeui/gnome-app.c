@@ -77,13 +77,11 @@ static void gnome_app_show        (GtkWidget     *widget);
 static void gnome_app_get_property   (GObject       *object,
 				   guint          param_id,
 				   GValue        *value,
-				   GParamSpec    *pspec,
-				   const gchar   *trailer);
+				   GParamSpec    *pspec);
 static void gnome_app_set_property   (GObject       *object,
 				   guint          param_id,
 				   const GValue  *value,
-				   GParamSpec    *pspec,
-				   const gchar   *trailer);
+				   GParamSpec    *pspec);
 
 static gchar *read_layout_config  (GnomeApp      *app);
 static void   write_layout_config (GnomeApp      *app,
@@ -159,8 +157,7 @@ static void
 gnome_app_set_property (GObject       *object,
 		     guint          param_id,
 		     const GValue  *value,
-		     GParamSpec    *pspec,
-		     const gchar   *trailer)
+		     GParamSpec    *pspec)
 {
 	GnomeApp *app = GNOME_APP (object);
 
@@ -178,8 +175,7 @@ static void
 gnome_app_get_property (GObject       *object,
 		     guint          param_id,
 		     GValue        *value,
-		     GParamSpec    *pspec,
-		     const gchar   *trailer)
+		     GParamSpec    *pspec)
 {
 	GnomeApp *app = GNOME_APP (object);
 

@@ -98,13 +98,11 @@ static void gnome_canvas_pixbuf_destroy (GtkObject *object);
 static void gnome_canvas_pixbuf_set_property (GObject *object,
 					      guint param_id,
 					      const GValue *value,
-					      GParamSpec *pspec,
-					      const gchar *trailer);
+					      GParamSpec *pspec);
 static void gnome_canvas_pixbuf_get_property (GObject *object,
 					      guint param_id,
 					      GValue *value,
-					      GParamSpec *pspec,
-					      const gchar *trailer);
+					      GParamSpec *pspec);
 
 static void gnome_canvas_pixbuf_update (GnomeCanvasItem *item, double *affine,
 					ArtSVP *clip_path, int flags);
@@ -318,8 +316,7 @@ static void
 gnome_canvas_pixbuf_set_property (GObject            *object,
 				  guint               param_id,
 				  const GValue       *value,
-				  GParamSpec         *pspec,
-				  const gchar        *trailer)
+				  GParamSpec         *pspec)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasPixbuf *gcp;
@@ -456,8 +453,7 @@ static void
 gnome_canvas_pixbuf_get_property (GObject            *object,
 				  guint               param_id,
 				  GValue             *value,
-				  GParamSpec         *pspec,
-				  const gchar        *trailer)
+				  GParamSpec         *pspec)
 {
 	GnomeCanvasPixbuf *gcp;
 	PixbufPrivate *priv;

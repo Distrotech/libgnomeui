@@ -71,13 +71,11 @@ static void gnome_dock_item_init           (GnomeDockItem      *dock_item);
 static void gnome_dock_item_set_property   (GObject            *object,
 					    guint               param_id,
 					    const GValue       *value,
-					    GParamSpec         *pspec,
-					    const gchar        *trailer);
+					    GParamSpec         *pspec);
 static void gnome_dock_item_get_property   (GObject            *object,
 					    guint               param_id,
 					    GValue             *value,
-					    GParamSpec         *pspec,
-					    const gchar        *trailer);
+					    GParamSpec         *pspec);
 static void gnome_dock_item_destroy        (GtkObject         *object);
 static void gnome_dock_item_finalize       (GObject           *object);
 static void gnome_dock_item_map            (GtkWidget         *widget);
@@ -357,8 +355,7 @@ static void
 gnome_dock_item_set_property (GObject            *object,
 			      guint               param_id,
 			      const GValue       *value,
-			      GParamSpec         *pspec,
-			      const gchar        *trailer)
+			      GParamSpec         *pspec)
 {
   GnomeDockItem *dock_item;
 
@@ -385,8 +382,7 @@ static void
 gnome_dock_item_get_property (GObject            *object,
 			      guint               param_id,
 			      GValue             *value,
-			      GParamSpec         *pspec,
-			      const gchar        *trailer)
+			      GParamSpec         *pspec)
 {
   GnomeDockItem *dock_item;
 

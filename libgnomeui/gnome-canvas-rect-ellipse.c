@@ -70,13 +70,11 @@ static void gnome_canvas_re_destroy    (GtkObject          *object);
 static void gnome_canvas_re_set_property (GObject              *object,
 					  guint                 param_id,
 					  const GValue         *value,
-					  GParamSpec           *pspec,
-					  const gchar          *trailer);
+					  GParamSpec           *pspec);
 static void gnome_canvas_re_get_property (GObject              *object,
 					  guint                 param_id,
 					  GValue               *value,
-					  GParamSpec           *pspec,
-					  const gchar          *trailer);
+					  GParamSpec           *pspec);
 
 static void gnome_canvas_re_update_shared      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static void gnome_canvas_re_realize     (GnomeCanvasItem *item);
@@ -398,8 +396,7 @@ static void
 gnome_canvas_re_set_property (GObject              *object,
 			      guint                 param_id,
 			      const GValue         *value,
-			      GParamSpec           *pspec,
-			      const gchar          *trailer)
+			      GParamSpec           *pspec)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasRE *re;
@@ -607,8 +604,7 @@ static void
 gnome_canvas_re_get_property (GObject              *object,
 			      guint                 param_id,
 			      GValue               *value,
-			      GParamSpec           *pspec,
-			      const gchar          *trailer)
+			      GParamSpec           *pspec)
 {
 	GnomeCanvasRE *re;
 

@@ -91,13 +91,11 @@ static void gnome_date_edit_forall       (GtkContainer       *container,
 static void gnome_date_edit_set_property    (GObject            *object,
 					  guint               param_id,
 					  const GValue       *value,
-					  GParamSpec         *pspec,
-					  const gchar        *trailer);
+					  GParamSpec         *pspec);
 static void gnome_date_edit_get_property    (GObject            *object,
 					  guint               param_id,
 					  GValue             *value,
-					  GParamSpec         *pspec,
-					  const gchar        *trailer);
+					  GParamSpec         *pspec);
 
 /**
  * gnome_date_edit_get_type:
@@ -504,8 +502,7 @@ static void
 gnome_date_edit_set_property (GObject            *object,
 			   guint               param_id,
 			   const GValue       *value,
-			   GParamSpec         *pspec,
-			   const gchar        *trailer)
+			   GParamSpec         *pspec)
 {
 	GnomeDateEdit *self;
 
@@ -536,8 +533,7 @@ static void
 gnome_date_edit_get_property (GObject            *object,
 			   guint               param_id,
 			   GValue             *value,
-			   GParamSpec         *pspec,
-			   const gchar        *trailer)
+			   GParamSpec         *pspec)
 {
 	GnomeDateEdit *self;
 

@@ -93,13 +93,11 @@ static void gnome_canvas_line_destroy      (GtkObject            *object);
 static void gnome_canvas_line_set_property (GObject              *object,
 					    guint                 param_id,
 					    const GValue         *value,
-					    GParamSpec           *pspec,
-					    const gchar          *trailer);
+					    GParamSpec           *pspec);
 static void gnome_canvas_line_get_property (GObject              *object,
 					    guint                 param_id,
 					    GValue               *value,
-					    GParamSpec           *pspec,
-					    const gchar          *trailer);
+					    GParamSpec           *pspec);
 
 static void   gnome_canvas_line_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static void   gnome_canvas_line_realize     (GnomeCanvasItem *item);
@@ -694,8 +692,7 @@ static void
 gnome_canvas_line_set_property (GObject              *object,
 				guint                 param_id,
 				const GValue         *value,
-				GParamSpec           *pspec,
-				const gchar          *trailer)
+				GParamSpec           *pspec)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasLine *line;
@@ -919,8 +916,7 @@ static void
 gnome_canvas_line_get_property (GObject              *object,
 				guint                 param_id,
 				GValue               *value,
-				GParamSpec           *pspec,
-				const gchar          *trailer)
+				GParamSpec           *pspec)
 {
 	GnomeCanvasLine *line;
 	GnomeCanvasPoints *points;

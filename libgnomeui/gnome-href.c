@@ -46,8 +46,7 @@ static void gnome_href_finalize		(GObject *object);
 static void gnome_href_get_property	(GObject *object,
 					 guint param_id,
 					 GValue *value,
-					 GParamSpec * pspec,
-					 const gchar *trailer);
+					 GParamSpec * pspec);
 static void gnome_href_set_property	(GObject *object,
 					 guint param_id,
 					 const GValue * value,
@@ -483,8 +482,7 @@ static void
 gnome_href_get_property (GObject *object,
 		      guint param_id,
 		      GValue *value,
-		      GParamSpec * pspec,
-		      const gchar *trailer)
+		      GParamSpec * pspec)
 {
 	GnomeHRef *self;
 

@@ -75,13 +75,11 @@ static void gnome_canvas_text_destroy (GtkObject *object);
 static void gnome_canvas_text_set_property (GObject            *object,
 					    guint               param_id,
 					    const GValue       *value,
-					    GParamSpec         *pspec,
-					    const gchar        *trailer);
+					    GParamSpec         *pspec);
 static void gnome_canvas_text_get_property (GObject            *object,
 					    guint               param_id,
 					    GValue             *value,
-					    GParamSpec         *pspec,
-					    const gchar        *trailer);
+					    GParamSpec         *pspec);
 
 static void gnome_canvas_text_update (GnomeCanvasItem *item, double *affine,
 				      ArtSVP *clip_path, int flags);
@@ -545,8 +543,7 @@ static void
 gnome_canvas_text_set_property (GObject            *object,
 				guint               param_id,
 				const GValue       *value,
-				GParamSpec         *pspec,
-				const gchar        *trailer)
+				GParamSpec         *pspec)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasText *text;
@@ -751,8 +748,7 @@ static void
 gnome_canvas_text_get_property (GObject            *object,
 				guint               param_id,
 				GValue             *value,
-				GParamSpec         *pspec,
-				const gchar        *trailer)
+				GParamSpec         *pspec)
 {
 	GnomeCanvasText *text;
 	GdkColor *color;

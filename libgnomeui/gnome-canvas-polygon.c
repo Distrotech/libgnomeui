@@ -82,13 +82,11 @@ static void gnome_canvas_polygon_destroy    (GtkObject               *object);
 static void gnome_canvas_polygon_set_property (GObject              *object,
 					       guint                 param_id,
 					       const GValue         *value,
-					       GParamSpec           *pspec,
-					       const gchar          *trailer);
+					       GParamSpec           *pspec);
 static void gnome_canvas_polygon_get_property (GObject              *object,
 					       guint                 param_id,
 					       GValue               *value,
-					       GParamSpec           *pspec,
-					       const gchar          *trailer);
+					       GParamSpec           *pspec);
 
 static void   gnome_canvas_polygon_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static void   gnome_canvas_polygon_realize     (GnomeCanvasItem *item);
@@ -453,8 +451,7 @@ static void
 gnome_canvas_polygon_set_property (GObject              *object,
 				   guint                 param_id,
 				   const GValue         *value,
-				   GParamSpec           *pspec,
-				   const gchar          *trailer)
+				   GParamSpec           *pspec)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasPolygon *poly;
@@ -654,8 +651,7 @@ static void
 gnome_canvas_polygon_get_property (GObject              *object,
 				   guint                 param_id,
 				   GValue               *value,
-				   GParamSpec           *pspec,
-				   const gchar          *trailer)
+				   GParamSpec           *pspec)
 {
 	GnomeCanvasPolygon *poly;
 	GnomeCanvasPoints *points;

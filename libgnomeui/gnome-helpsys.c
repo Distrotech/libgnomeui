@@ -94,8 +94,7 @@ static void gnome_help_view_finalize (GObject *obj);
 static void gnome_help_view_get_property	(GObject *object,
 					 guint param_id,
 					 GValue *value,
-					 GParamSpec * pspec,
-					 const gchar *trailer);
+					 GParamSpec * pspec);
 static void gnome_help_view_set_property	(GObject *object,
 					 guint param_id,
 					 const GValue * value,
@@ -331,8 +330,7 @@ static void
 gnome_help_view_get_property (GObject *object,
 			   guint param_id,
 			   GValue *value,
-			   GParamSpec * pspec,
-			   const gchar *trailer)
+			   GParamSpec * pspec)
 {
 	GnomeHelpView *help_view = GNOME_HELP_VIEW (object);
 
