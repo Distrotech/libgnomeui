@@ -22,6 +22,17 @@ INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) $(GDK_IMLIB_CFLAGS) $(SUPPORTINCS
         -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
+if HAVE_GTKCAL
+GTKCAL_SOURCES = 
+GTKCAL_HEADERS = 
+else
+GTKCAL_SOURCES =			\
+	gtkcalendar.c
+
+GTKCAL_HEADERS =			\
+	gtkcalendar.h
+endif
+
 libgnomeui_la_SOURCES = \
 	gnome-about.c			\
 	gnome-actionarea.c		\
@@ -72,7 +83,6 @@ libgnomeui_la_SOURCES = \
 	gnome-stock.c			\
         gnome-winhints.c		\
 	gnometypes.c			\
-	gtkcalendar.c			\
 	gtkcauldron.c			\
 	gtklayout.c			\
 	gtkspell.c			\
@@ -80,7 +90,8 @@ libgnomeui_la_SOURCES = \
 	gtk-plug.c			\
 	gtk-socket.c			\
 	gtk-ted.c			\
-	gtkdial.c
+	gtkdial.c			\
+	$(GTKCAL_SOURCES)
 
 libgnomeuiinclude_HEADERS = 		\
 	gnome-about.h			\
@@ -142,7 +153,8 @@ libgnomeuiinclude_HEADERS = 		\
 	gtk-ted.h			\
 	gtk-plug.h			\
 	gtk-socket.h			\
-	libgnomeui.h
+	libgnomeui.h			\
+	$(GTKCAL_HEADERS)
 
 .PHONY: auto-files auto-files-1
 auto-files:
