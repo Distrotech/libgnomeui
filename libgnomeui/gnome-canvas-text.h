@@ -59,13 +59,13 @@ BEGIN_GNOME_DECLS
  * text			string			RW		The string of the text label
  * x			double			RW		X coordinate of anchor point
  * y			double			RW		Y coordinate of anchor point
- * font			string			W		X logical font descriptor
- * fontset		string			W		X logical fontset descriptor
- * font_gdk		GdkFont*		RW		Pointer to a GdkFont
+ * font			string			W		A string describing the font
+ * font_desc	        PangoFontDescription*	RW		Pointer to a PangoFontDescriptor
  * anchor		GtkAnchorType		RW		Anchor side for the text
  * justification	GtkJustification	RW		Justification for multiline text
  * fill_color		string			W		X color specification for text
  * fill_color_gdk	GdkColor*		RW		Pointer to an allocated GdkColor
+ * fill_color_rgba	guint   		RW		RGBA value used for AA color.
  * fill_stipple		GdkBitmap*		RW		Stipple pattern for filling the text
  * clip_width		double			RW		Width of clip rectangle
  * clip_height		double			RW		Height of clip rectangle
@@ -86,37 +86,15 @@ BEGIN_GNOME_DECLS
 
 typedef struct _GnomeCanvasText GnomeCanvasText;
 typedef struct _GnomeCanvasTextClass GnomeCanvasTextClass;
-typedef struct _GnomeCanvasTextSuckFont GnomeCanvasTextSuckFont;
-typedef struct _GnomeCanvasTextSuckChar GnomeCanvasTextSuckChar;
-
-struct _GnomeCanvasTextSuckChar {
-	int     left_sb;
-	int     right_sb;
-	int     width;
-	int     ascent;
-	int     descent;
-	int     bitmap_offset; /* in pixels */
-};
-
-struct _GnomeCanvasTextSuckFont {
-	guchar *bitmap;
-	gint    bitmap_width;
-	gint    bitmap_height;
-	gint    ascent;
-	GnomeCanvasTextSuckChar chars[256];
-};
 
 struct _GnomeCanvasText {
 	GnomeCanvasItem item;
 
-	GdkFont *font;			/* Font for text */
+	PangoFontDescription *font_desc; /* Font description for text */
 	char *text;			/* Text to display */
 	GdkBitmap *stipple;		/* Stipple for text */
 	GdkGC *gc;			/* GC for drawing text */
-
-        GnomeCanvasTextSuckFont *suckfont; /* Sucked font */ /*AA*/
-
-	gpointer lines;			/* Text split into lines (private field) */
+        PangoLayout *layout;            /* The PangoLayout containing the text */
 
 	gulong pixel;			/* Fill color */
 
@@ -131,8 +109,6 @@ struct _GnomeCanvasText {
 
 	GtkAnchorType anchor;		/* Anchor side for text */
 	GtkJustification justification;	/* Justification for text */
-
-	int num_lines;			/* Number of lines of text */
 
 	int cx, cy;			/* Top-left canvas coordinates for text */
 	int clip_cx, clip_cy;		/* Top-left canvas coordinates for clip rectangle */
