@@ -22,6 +22,7 @@
  */
 
 #include <libgnome/libgnome.h>
+#include <libgnomeui/gnome-init.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -50,7 +51,8 @@ int main(int argc, char **argv)
 {
   proginfo myprog;
 
-  gnome_program_init("gnome-remote-bootstrap", VERSION, argc, argv, GNOME_PARAM_POPT_TABLE, options, NULL);
+  gnome_program_init("gnome-remote-bootstrap", VERSION, &libgnomeui_module_info,
+		     argc, argv, GNOME_PARAM_POPT_TABLE, options, NULL);
 
   if(!display
      || (ior_fd < 0))
