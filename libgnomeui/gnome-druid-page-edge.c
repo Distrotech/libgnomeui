@@ -271,6 +271,7 @@ gnome_druid_page_edge_construct (GnomeDruidPageEdge *druid_page_edge)
 				       "text", druid_page_edge->title,
 				       "fill_color_rgba", fill_color,
 				       "font", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"),
+				       "fontset", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"),
 				       NULL);
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_edge->text_color);
@@ -280,6 +281,7 @@ gnome_druid_page_edge_construct (GnomeDruidPageEdge *druid_page_edge)
 				       "text", druid_page_edge->text,
 				       "justification", GTK_JUSTIFY_LEFT,
 				       "font", _("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*"),
+				       "fontset", _("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"),
 				       "fill_color_rgba", fill_color,
 				       NULL);
 

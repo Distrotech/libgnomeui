@@ -252,6 +252,7 @@ gnome_druid_page_standard_construct (GnomeDruidPageStandard *druid_page_standard
 				       gnome_canvas_text_get_type (),
 				       "text", druid_page_standard->title,
 				       "font", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*"),
+				       "fontset", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"),
 				       "fill_color_rgba", fill_color,
 				       NULL);
 
