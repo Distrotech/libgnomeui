@@ -1,3 +1,9 @@
+2003-04-23  Gustavo Giraldez  <gustavo.giraldez@gmx.net>
+
+	* libgnomeui/gnome-icon-theme.c (gnome_icon_theme_class_init):
+	Set parent_class.
+	(gnome_icon_theme_finalize): Chain parent_class' finalize.
+
 2003-04-07  Mark McLoughlin  <mark@skynet.ie>
 
 	* libgnomeui/gnome-icon-theme.c: (theme_lookup_icon):

@@ -131,7 +131,7 @@ static IconSuffix suffix_from_name         (const char           *name);
 
 
 static guint		 signal_changed = 0;
-
+static GObjectClass     *parent_class = NULL;
 
 GType
 gnome_icon_theme_get_type (void)
@@ -169,6 +169,8 @@ static void
 gnome_icon_theme_class_init (GnomeIconThemeClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
+
+  parent_class = g_type_class_peek_parent (klass);
 
   gobject_class->finalize = gnome_icon_theme_finalize;
 
@@ -341,6 +343,8 @@ gnome_icon_theme_finalize (GObject *object)
   blow_themes (priv);
 
   g_free (priv);
+
+  G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 void
