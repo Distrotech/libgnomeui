@@ -36,6 +36,8 @@
  * - Keeping all the gnome-vfs-infos in the hashtable looks wasteful, but otherwise we'll do to much i/o
  */
 
+#include <config.h>
+
 #include "gtkfilesystemgnomevfs.h"
 
 #include <libgnomevfs/gnome-vfs.h>
