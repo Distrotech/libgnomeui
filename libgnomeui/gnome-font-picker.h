@@ -59,7 +59,7 @@ struct _GnomeFontPicker {
 struct _GnomeFontPickerClass {
 	GtkButtonClass parent_class;
 
-	/* font_set signal is emitted when font is choosed */
+	/* font_set signal is emitted when font is chosen */
 	void (* font_set) (GnomeFontPicker *gfp, const gchar *font_name);
 
 	/* It is possible we may need more signals */
@@ -86,7 +86,7 @@ GnomeFontPickerMode
 void       gnome_font_picker_set_mode        (GnomeFontPicker *gfp,
                                               GnomeFontPickerMode mode);
 /* With  GNOME_FONT_PICKER_MODE_FONT_INFO */
-/* If use_font_in_label is true, font name will be writen using font choosed by user and
+/* If use_font_in_label is true, font name will be written using font chosen by user and
  using size passed to this function*/
 void       gnome_font_picker_fi_set_use_font_in_label (GnomeFontPicker *gfp,
                                                        gboolean use_font_in_label,

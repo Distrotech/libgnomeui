@@ -1,3 +1,7 @@
+2002-04-26  Bill Nottingham <notting@redhat.com>
+
+	* libgnomeui/gnome-font-picker.h: fix spelling in comments
+
 2002-04-25  Jody Goldberg <jody@gnome.org>
 
 	* libgnomeui/gnome-app-helper.c (toolbar_styles) : add BOTH_HORIZ.
