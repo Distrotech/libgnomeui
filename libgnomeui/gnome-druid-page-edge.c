@@ -364,7 +364,7 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 
 	gtk_signal_connect (GTK_OBJECT (druid_page_edge),
 			    "prepare",
-			    gnome_druid_page_edge_prepare,
+			    GTK_SIGNAL_FUNC (gnome_druid_page_edge_prepare),
 			    NULL);
 }
 

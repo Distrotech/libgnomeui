@@ -310,7 +310,7 @@ gnome_druid_page_standard_setup (GnomeDruidPageStandard *druid_page_standard)
 
 	gtk_signal_connect (GTK_OBJECT (druid_page_standard),
 			    "prepare",
-			    gnome_druid_page_standard_prepare,
+			    GTK_SIGNAL_FUNC (gnome_druid_page_standard_prepare),
 			    NULL);
 
 }

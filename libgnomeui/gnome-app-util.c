@@ -853,7 +853,7 @@ void gnome_app_set_progress (GnomeAppProgressKey key, gdouble percent)
     gtk_progress_bar_update ( GTK_PROGRESS_BAR(real_key->bar), percent );
   }
   else {
-    gnome_appbar_set_progress ( GNOME_APPBAR(real_key->widget), percent );
+    gnome_appbar_set_progress_percentage ( GNOME_APPBAR(real_key->widget), percent );
   }
 }
 
@@ -887,7 +887,7 @@ void gnome_app_progress_done (GnomeAppProgressKey key)
   }
   else {
     /* Reset the bar */
-    gnome_appbar_set_progress ( GNOME_APPBAR(real_key->widget), 0.0 );
+    gnome_appbar_set_progress_percentage ( GNOME_APPBAR(real_key->widget), 0.0 );
   }
   g_free(key);
 }
@@ -943,8 +943,8 @@ gnome_window_set_icon(GtkWindow *window, GdkPixbuf *pixbuf, gboolean overwrite)
   if(!skip_connect)
     {
       gtk_object_set_data(GTK_OBJECT(window), "WM_HINTS.icon_info", pbi);
-      gtk_signal_connect_after(GTK_OBJECT(window), "realize", gnome_window_realized, pbi);
-      gtk_signal_connect(GTK_OBJECT(window), "destroy", gnome_window_destroyed, pbi);
+      gtk_signal_connect_after(GTK_OBJECT(window), "realize", GTK_SIGNAL_FUNC(gnome_window_realized), pbi);
+      gtk_signal_connect(GTK_OBJECT(window), "destroy", GTK_SIGNAL_FUNC(gnome_window_destroyed), pbi);
     }
 
   if(GTK_WIDGET_REALIZED(window))

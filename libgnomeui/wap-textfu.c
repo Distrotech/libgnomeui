@@ -1214,7 +1214,7 @@ tag_handler_ce(WapTextFu *textfu, const char *tag, guint16 tag_id, char **attrs,
       gtk_object_set_data(GTK_OBJECT(mi), "WapOptionInfo", textfu->cur_option);
 
       if(textfu->cur_option->onpick)
-	gtk_signal_connect(GTK_OBJECT(mi), "select", tag_option_event_selected, textfu);
+	gtk_signal_connect(GTK_OBJECT(mi), "select", GTK_SIGNAL_FUNC(tag_option_event_selected), textfu);
 
       textfu->cur_option->li_widget = mi;
       textfu->in_option = FALSE;
@@ -1747,7 +1747,7 @@ tag_handler_option(WapTextFu *textfu, const char *tag, guint16 tag_id, char **at
       gtk_object_set_data(GTK_OBJECT(mi), "WapOptionInfo", textfu->cur_option);
 
       if(textfu->cur_option->onpick)
-	gtk_signal_connect(GTK_OBJECT(mi), "select", tag_option_event_selected, textfu);
+	gtk_signal_connect(GTK_OBJECT(mi), "select", GTK_SIGNAL_FUNC(tag_option_event_selected), textfu);
 
       textfu->cur_option->li_widget = mi;
       textfu->in_option = FALSE;
@@ -2936,7 +2936,8 @@ wap_textfu_set_scroll_adjustments(GtkLayout      *layout,
     gtk_signal_disconnect(GTK_OBJECT(layout->vadjustment), textfu->vscroll_tag);
 
   textfu->vscroll_tag = gtk_signal_connect(GTK_OBJECT(vadjustment), "value_changed",
-					   wap_textfu_handle_external_scrolling, textfu);
+					   GTK_SIGNAL_FUNC(wap_textfu_handle_external_scrolling),
+					   textfu);
 
   if(GTK_LAYOUT_CLASS(parent_class)->set_scroll_adjustments)
     GTK_LAYOUT_CLASS(parent_class)->set_scroll_adjustments(layout, hadjustment, vadjustment);

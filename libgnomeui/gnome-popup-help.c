@@ -350,7 +350,7 @@ help_callback (GtkWidget *menu, gpointer unused)
                                     NULL);
                 gtk_signal_connect (GTK_OBJECT (helpwindow),
                                     "destroy",
-                                    helpwindow_destroy_callback,
+                                    GTK_SIGNAL_FUNC (helpwindow_destroy_callback),
                                     text);
                 gtk_object_set_data (GTK_OBJECT (menu->parent), 
                                      "gnome_popup_help_data", data);

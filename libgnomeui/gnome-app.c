@@ -862,6 +862,6 @@ gnome_app_set_help_view (GnomeApp *app, GtkWidget *help_view)
 	gnome_app_add_dock_item (app, GNOME_DOCK_ITEM (item),
 				 GNOME_DOCK_BOTTOM, 0, 0, 0);
 	gtk_signal_connect_while_alive(GTK_OBJECT(item), "orientation_changed",
-				       gnome_app_set_help_view_orientation, 
+				       GTK_SIGNAL_FUNC(gnome_app_set_help_view_orientation), 
 				       help_view, GTK_OBJECT(help_view));
 }

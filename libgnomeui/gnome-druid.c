@@ -147,19 +147,19 @@ gnome_druid_init (GnomeDruid *druid)
 	druid->_priv->show_finish = FALSE;
 	gtk_signal_connect (GTK_OBJECT (druid->back),
 			    "clicked",
-			    gnome_druid_back_callback,
+			    GTK_SIGNAL_FUNC (gnome_druid_back_callback),
 			    druid);
 	gtk_signal_connect (GTK_OBJECT (druid->next),
 			    "clicked",
-			    gnome_druid_next_callback,
+			    GTK_SIGNAL_FUNC (gnome_druid_next_callback),
 			    druid);
 	gtk_signal_connect (GTK_OBJECT (druid->cancel),
 			    "clicked",
-			    gnome_druid_cancel_callback,
+			    GTK_SIGNAL_FUNC (gnome_druid_cancel_callback),
 			    druid);
 	gtk_signal_connect (GTK_OBJECT (druid->finish),
 			    "clicked",
-			    gnome_druid_next_callback,
+			    GTK_SIGNAL_FUNC (gnome_druid_next_callback),
 			    druid);
 }
 

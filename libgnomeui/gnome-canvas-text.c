@@ -607,7 +607,7 @@ gnome_canvas_text_set_property (GObject            *object,
 		break;
 
 	case PROP_FONT: {
-		gchar *font_name;
+		const char *font_name;
 
 		font_name = g_value_get_string (value);
 		if (font_name) {
@@ -685,7 +685,7 @@ gnome_canvas_text_set_property (GObject            *object,
 		break;
 
         case PROP_FILL_COLOR: {
-		gchar *color_name;
+		const char *color_name;
 
 		color_name = g_value_get_string (value);
 		if (color_name) {

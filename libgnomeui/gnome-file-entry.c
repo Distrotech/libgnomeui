@@ -197,9 +197,9 @@ fentry_set_arg (GtkObject *object,
 	case ARG_HISTORY_ID: {
 		GtkWidget *gentry;
 		gentry = gnome_file_entry_gnome_entry(self);
-		gnome_entry_set_history_id (GNOME_ENTRY(gentry),
-					    GTK_VALUE_POINTER(*arg));
-		gnome_entry_load_history (GNOME_ENTRY(gentry));
+		gnome_selector_set_history_id (GNOME_SELECTOR(gentry),
+					       GTK_VALUE_POINTER(*arg));
+		gnome_selector_load_history (GNOME_SELECTOR(gentry));
 		break;
 	}
 	case ARG_DIRECTORY_ENTRY:
