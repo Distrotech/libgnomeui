@@ -97,7 +97,7 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 			/* this is the action area -- here we add the buttons*/
 			for (tmp2 = cinfo->children; tmp2; tmp2 = tmp2->next) {
 				GladeWidgetInfo *ccinfo = tmp2->data;
-				const char *stock, *string = NULL;
+				const char *stock, *string = NULL, *label=NULL;
 				GList *tmp3;
 
 				for (tmp3 = ccinfo->attributes;
@@ -107,10 +107,17 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 						    "stock_button")) {
 						string = attr->value;
 						break;
-					}
+					} else if (!strcmp(attr->name,
+							   "label"))
+						label = attr->value;
+					
 				}
-				stock = get_stock_name(string);
-				if (!stock) stock = string;
+				if (!string)
+					stock = label;
+				else {
+					stock = get_stock_name(string);
+					if (!stock) stock = string;
+				}
 				gnome_dialog_append_button(GNOME_DIALOG(w),
 							   stock);
 				/* connect signal handlers, etc ... */
