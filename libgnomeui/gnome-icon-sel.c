@@ -224,40 +224,43 @@ void  gnome_icon_selection_add_defaults   (GnomeIconSelection * gis)
 static void 
 append_an_icon(GnomeIconSelection * gis, const gchar * path)
 {
-	GdkPixbuf *iml;
-	GdkPixbuf *im;
+	GdkPixbuf *pixbuf;
+	GdkPixbuf *scaled;
 	int pos;
-	int w,h;
+	int w, h;
+	char *base;
 	
-	iml = gdk_pixbuf_new_from_file(path);
+	pixbuf = gdk_pixbuf_new_from_file(path);
 	/*if I can't load it, ignore it*/
-	if(!iml)
+	if(pixbuf == NULL)
 		return;
 	
-	w = gdk_pixbuf_get_width (iml);
-	h = gdk_pixbuf_get_height (iml);
-	if(w>h) {
-		if(w>ICON_SIZE) {
-			h = h*((double)ICON_SIZE/w);
+	w = gdk_pixbuf_get_width (pixbuf);
+	h = gdk_pixbuf_get_height (pixbuf);
+	if(w > h) {
+		if(w > ICON_SIZE) {
+			h = h * ((double)ICON_SIZE / w);
 			w = ICON_SIZE;
 		}
 	} else {
 		if(h>ICON_SIZE) {
-			w = w*((double)ICON_SIZE/h);
+			w = w * ((double)ICON_SIZE / h);
 			h = ICON_SIZE;
 		}
 	}
-	w = w>0?w:1;
-	h = h>0?h:1;
+	w = (w > 0) ? w : 1;
+	h = (h > 0) ? h : 1;
 	
-	im = gdk_pixbuf_scale_simple(iml, w, h, GDK_INTERP_BILINEAR);
-	gdk_pixbuf_unref(iml);
-	if(!im)
+	scaled = gdk_pixbuf_scale_simple(pixbuf, w, h, GDK_INTERP_BILINEAR);
+	gdk_pixbuf_unref(pixbuf);
+	if(scaled == NULL)
 		return;
 	
-	pos = gnome_icon_list_append_pixbuf(GNOME_ICON_LIST(gis->_priv->gil), im,
-					    path, g_basename(path));
-	gdk_pixbuf_unref(im); /* I'm so glad that gdk-pixbuf has eliminated the former lameness of imlib! :) */
+	base = g_path_basename(path);
+	pos = gnome_icon_list_append_pixbuf(GNOME_ICON_LIST(gis->_priv->gil),
+					    scaled, path, base);
+	g_free(base);
+	gdk_pixbuf_unref(scaled); /* I'm so glad that gdk-pixbuf has eliminated the former lameness of imlib! :) */
 }
 
 static int sort_file_list( gconstpointer a, gconstpointer b)
@@ -502,23 +505,26 @@ void  gnome_icon_selection_clear          (GnomeIconSelection * gis,
  * Returns: internal string, it must not be changed or freed
  * or NULL
  **/
-const gchar * 
+gchar * 
 gnome_icon_selection_get_icon     (GnomeIconSelection * gis,
 				   gboolean full_path)
 {
-  GList * sel;
+	GList * sel;
 
-  g_return_val_if_fail(gis != NULL, NULL);
+	g_return_val_if_fail(gis != NULL, NULL);
 
-  sel = gnome_icon_list_get_selection(GNOME_ICON_LIST(gis->_priv->gil));
-  if ( sel ) {
-    gchar * p;
-    gint pos = GPOINTER_TO_INT(sel->data);
-    p = gnome_icon_list_get_icon_filename(GNOME_ICON_LIST(gis->_priv->gil), pos);
-    if (full_path) return p;
-    else return g_basename(p);
-  }
-  else return NULL;
+	sel = gnome_icon_list_get_selection(GNOME_ICON_LIST(gis->_priv->gil));
+	if (sel != NULL) {
+		gchar * p;
+		gint pos = GPOINTER_TO_INT(sel->data);
+		p = gnome_icon_list_get_icon_filename(GNOME_ICON_LIST(gis->_priv->gil), pos);
+		if (full_path)
+			return g_strdup(p);
+		else
+			return g_path_basename(p);
+	} else {
+		return NULL;
+	}
 }
 
 /**
@@ -531,28 +537,31 @@ gnome_icon_selection_get_icon     (GnomeIconSelection * gis,
  *
  * Returns:
  **/
-void  gnome_icon_selection_select_icon    (GnomeIconSelection * gis,
-					   const gchar * filename)
+void
+gnome_icon_selection_select_icon (GnomeIconSelection * gis,
+				  const gchar * filename)
 {
-  gint pos;
-  gint icons;
-  
-  g_return_if_fail(gis != NULL);
-  g_return_if_fail(filename != NULL);
+	GnomeIconList *gil;
+	gint pos;
+	gint icons;
 
-  icons = gnome_icon_list_get_num_icons(GNOME_ICON_LIST(gis->_priv->gil));
-  pos = 0;
+	g_return_if_fail(gis != NULL);
+	g_return_if_fail(filename != NULL);
 
-  while ( pos < icons ) {
-    gchar * file = 
-      gnome_icon_list_get_icon_filename(GNOME_ICON_LIST(gis->_priv->gil),pos);
-    if ( strcmp(g_basename(file),filename) == 0 ) {
-      gnome_icon_list_select_icon(GNOME_ICON_LIST(gis->_priv->gil), pos);
-      return;
-    }
+	gil = GNOME_ICON_LIST(gis->_priv->gil);
+	icons = gnome_icon_list_get_num_icons(gil);
 
-    ++pos;
-  }
+	for(pos = 0; pos < icons; pos++) {
+		char *base;
+		gchar * file = gnome_icon_list_get_icon_filename(gil, pos);
+		base = g_path_basename(file);
+		if (strcmp(base, filename) == 0) {
+			gnome_icon_list_select_icon(gil, pos);
+			g_free(base);
+			return;
+		}
+		g_free(base);
+	}
 }
 
 /**

@@ -79,7 +79,8 @@ int main(int argc, char *argv[])
   args = poptGetArgs(ctx);
   if (args && args[0] && args[1])
     {
-      if (strcmp(g_basename (args[0]), "gnome-session") == 0)
+      char *base = g_path_basename (args[0]);
+      if (strcmp(base, "gnome-session") == 0)
         {
           msg = g_strdup_printf(_("The GNOME Session Manager (process %d) has crashed\n"
                                   "due to a fatal error (%s).\n"
@@ -94,8 +95,9 @@ int main(int argc, char *argv[])
           msg = g_strdup_printf(_("Application \"%s\" (process %d) has crashed\ndue to a fatal error.\n(%s)"),
                                 args[0], getppid(), g_strsignal(atoi(args[1])));
         }
-	if(args[2])
-		app_version = args[2];
+      g_free(base);
+      if(args[2])
+	app_version = args[2];
     }
   else
     {

@@ -73,7 +73,7 @@ void  gnome_icon_selection_clear          (GnomeIconSelection * gis,
 
 /* if (full_path) return the whole filename, otherwise just the 
    last component */
-const gchar * 
+gchar * 
 gnome_icon_selection_get_icon             (GnomeIconSelection * gis,
 					   gboolean full_path);
 

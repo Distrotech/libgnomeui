@@ -668,9 +668,12 @@ ientry_browse(GnomeIconEntry *ientry)
 
 		gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(iconsel));
 
-		if(curfile)
+		if(curfile != NULL) {
+			char *base = g_path_basename(curfile);
 			gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
-							 g_basename(curfile));
+							 base);
+			g_free(base);
+		}
 
 		gnome_dialog_button_connect(GNOME_DIALOG(ientry->_priv->pick_dialog), 
 					    0, /* OK button */
