@@ -1,3 +1,9 @@
+Sun Sep 02 00:55:54 2001  George Lebl <jirka@5z.com>
+
+	* gnome-app-helper.c, gnome-entry.c, gnome-ui-init.c:
+	  gnome_program_get_name is now gnome_program_get_app_id and
+	  gnome_program_get_version is now gnome_program_get_app_version
+
 Sat Sep 01 23:38:29 2001  George Lebl <jirka@5z.com>
 
 	* Makefile.am, gnome-scores.[ch]:  Port to GtkDialog and bring back

@@ -495,7 +495,7 @@ static char *
 build_prefix (GnomeEntry *gentry, gboolean trailing_slash)
 {
 	return g_strconcat ("/",
-			       gnome_program_get_name(gnome_program_get()),
+			       gnome_program_get_app_id (gnome_program_get()),
 			       "/History: ",
 			       gentry->_priv->history_id,
 			       trailing_slash ? "/" : "",
@@ -655,7 +655,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (!(gnome_program_get_name(gnome_program_get()) && gentry->_priv->history_id))
+	if (!(gnome_program_get_app_id (gnome_program_get()) && gentry->_priv->history_id))
 		return;
 
 	free_items (gentry);
@@ -743,7 +743,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (!(gnome_program_get_name(gnome_program_get()) && gentry->_priv->history_id))
+	if (!(gnome_program_get_app_id (gnome_program_get()) && gentry->_priv->history_id))
 		return;
 
 	prefix = build_prefix (gentry, TRUE);
