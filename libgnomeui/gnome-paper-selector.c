@@ -22,6 +22,7 @@
 
 #include <glib.h>
 #include "libgnome/libgnomeP.h"
+#include "gnome-uidefs.h"
 #include "gnome-paper-selector.h"
 
 #define g_list_data(list)	((list) ? (((GList *)(list))->data) : NULL)
@@ -220,6 +221,7 @@ gnome_paper_selector_init (GnomePaperSelector *gspaper)
   gtk_tooltips_enable (tooltips);
 
   table = gtk_table_new (4, 3, FALSE);
+  gtk_container_set_border_width(GTK_CONTAINER(table), GNOME_PAD);
   gtk_container_add (GTK_CONTAINER(gspaper), table); 
   
   /* create the paper entry */

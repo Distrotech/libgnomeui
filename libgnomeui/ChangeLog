@@ -1,3 +1,7 @@
+1998-12-08  Tim P. Gerla  <timg@means.net>
+
+	* gnome-paper-selector.c: Added some padding around the dialog.
+
 1998-12-08  Herbert Valerio Riedel  <hvr@hvrlab.ml.org>
 
 	* gtk-ted.c: fixed some cast-warnings
