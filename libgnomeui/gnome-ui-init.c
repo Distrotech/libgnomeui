@@ -621,7 +621,7 @@ static void gnome_segv_handle(int signum)
 
 		eret = waitpid(pid, &estatus, 0);
 		
-                _exit(1);
+                abort ();
 	} else {
 		char buf[32];
 
