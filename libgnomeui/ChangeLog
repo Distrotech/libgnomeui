@@ -1,3 +1,8 @@
+Fri Nov 16 02:06:32 2001  George Lebl <jirka@5z.com>
+
+	* gnome-file-entry.c: change order of includes to make this compile
+	  yet again
+
 2001-11-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-href.c: Fix a typo.

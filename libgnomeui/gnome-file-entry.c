@@ -30,13 +30,13 @@
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  */
 #include <config.h>
-#include <libgnome/gnome-macros.h>
-
+#include <sys/param.h>
 #include <pwd.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/param.h>
 #include <sys/types.h>
+
+#include <libgnome/gnome-macros.h>
 #include <libgnomevfs/gnome-vfs-uri.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
