@@ -1,3 +1,8 @@
+Wed, 15 Mar 2000 14:03:46 +0100 Paolo Molaro <lupus@linuxcare.com>
+
+	* gnome-font-picker.c: avoid checking all the memory for '-'.
+	  Is this code going to stay in gnome-libs? It needs a big cleanup.
+
 2000-03-13  Elliot Lee  <sopwith@redhat.com>
 	* gnome-stock.c: Fix gnome_stock_or_ordinary_button for the ordinary button case.
 	* Makefile.am: Until mdi_demo.c is committed, remove usage thereof

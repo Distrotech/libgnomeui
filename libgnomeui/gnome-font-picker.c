@@ -748,7 +748,7 @@ void gnome_font_picker_font_extract_attr(gchar *font_name,
     gchar *pTmp;
 
     /* Search paramether */
-    for (pTmp=font_name; i!=0; i--,pTmp++)
+    for (pTmp=font_name; *pTmp && i > 0; i--,pTmp++)
         pTmp=(gchar *)strchr(pTmp,'-');
 
     if (*pTmp!=0) {
