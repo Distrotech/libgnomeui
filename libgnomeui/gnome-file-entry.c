@@ -64,6 +64,8 @@ struct _GnomeFileEntryPrivate {
 
 	char *browse_dialog_title;
 
+	GtkFileChooserAction filechooser_action;
+
 	gboolean is_modal : 1;
 
 	gboolean directory_entry : 1; /*optional flag to only do directories*/
@@ -112,7 +114,8 @@ enum {
 	PROP_DEFAULT_PATH,
 	PROP_GNOME_ENTRY,
 	PROP_GTK_ENTRY,
-	PROP_USE_FILECHOOSER
+	PROP_USE_FILECHOOSER,
+	PROP_FILECHOOSER_ACTION
 };
 
 /* Note, can't use boilerplate with interfaces yet,
@@ -302,6 +305,17 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 						 FALSE,
 						 G_PARAM_READWRITE));
 
+	/* FIXME: mark the property strings for translation in 2.7.x */
+	g_object_class_install_property (gobject_class,
+					 PROP_FILECHOOSER_ACTION,
+					 g_param_spec_enum (
+						 "filechooser_action",
+						 "GtkFileChooser Action",
+						 "The type of operation that the file selector is performing",
+						 GTK_TYPE_FILE_CHOOSER_ACTION,
+						 GTK_FILE_CHOOSER_ACTION_OPEN,
+						 G_PARAM_READWRITE));
+
 	class->browse_clicked = browse_clicked;
 	class->activate = NULL;
 }
@@ -346,6 +360,11 @@ fentry_set_property (GObject *object, guint param_id,
 	case PROP_USE_FILECHOOSER:
 		priv->use_filechooser = g_value_get_boolean (value);
 		break;
+
+	case PROP_FILECHOOSER_ACTION:
+		priv->filechooser_action = g_value_get_enum (value);
+		break;
+
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
@@ -402,6 +421,10 @@ fentry_get_property (GObject *object, guint param_id,
 
 	case PROP_USE_FILECHOOSER:
 		g_value_set_boolean (value, priv->use_filechooser);
+		break;
+
+	case PROP_FILECHOOSER_ACTION:
+		g_value_set_enum (value, priv->filechooser_action);
 		break;
 
 	default:
@@ -596,7 +619,7 @@ browse_clicked(GnomeFileEntry *fentry)
 		if (fentry->_priv->directory_entry)
 			action = GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER;
 		else
-			action = GTK_FILE_CHOOSER_ACTION_OPEN;
+			action = fentry->_priv->filechooser_action;
 
 		fentry->fsw = gtk_file_chooser_dialog_new (fentry->_priv->browse_dialog_title
 							   ? fentry->_priv->browse_dialog_title
@@ -604,8 +627,17 @@ browse_clicked(GnomeFileEntry *fentry)
 							   NULL,
 							   action,
 							   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-							   GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 							   NULL);
+
+		if (action == GTK_FILE_CHOOSER_ACTION_SAVE)
+			gtk_dialog_add_button (GTK_DIALOG (fentry->fsw),
+					       GTK_STOCK_SAVE,
+					       GTK_RESPONSE_ACCEPT);
+		else
+			gtk_dialog_add_button (GTK_DIALOG (fentry->fsw),
+					       GTK_STOCK_OPEN,
+					       GTK_RESPONSE_ACCEPT);
+
 		fw = fentry->fsw;
 
 		gtk_dialog_set_default_response (GTK_DIALOG (fw), GTK_RESPONSE_ACCEPT);

@@ -1,3 +1,16 @@
+2004-03-13  Mark McLoughlin  <mark@skynet.ie>
+
+	Add a new "filechooser-action" property so we can use file
+	entries in other modes e.g. save mode. API addition approved
+	by the release team.
+
+	* libgnomeui/gnome-file-entry.c: (gnome_file_entry_class_init),
+	(fentry_set_property), (fentry_get_property): impl. the
+	"filechooser-action" property.
+	(browse_clicked): construct the file chooser with the appropriate
+	GtkFileChooserAction and also append the appropriate buttons
+	for that action.
+
 Fri Mar 12 02:48:56 2004  Jonathan Blandford  <jrb@gnome.org>
 
 	* file-chooser/gtkfilesystemgnomevfs.c (get_vfs_info): Patch from
