@@ -1,3 +1,9 @@
+2002-03-05  Iain <iain@ximian.com>
+
+	* libgnomeui/gnome-ui-init.c (relay_gtk_signal): Wrap relay_gtk_signal
+	in #ifdef HAVE_ESD so that it compiles with -Werror and HAVE_ESD not
+	defined
+
 2002-03-05  Christian Meyer  <chrisime@gnome.org>
 
 	* configure.in: Added 'de' to ALL_LINGUAS.

@@ -281,13 +281,13 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
                 libgnomeui_segv_setup (app, FALSE);
 }
 
+#ifdef HAVE_ESD
 static gboolean
 relay_gtk_signal(GSignalInvocationHint *hint,
 		 guint n_param_values,
 		 const GValue *param_values,
 		 gchar *signame)
 {
-#ifdef HAVE_ESD
   char *pieces[3] = {"gtk-events", NULL, NULL};
   static GQuark disable_sound_quark = 0;
   GObject *object = g_value_get_object (&param_values[0]);
@@ -311,10 +311,8 @@ relay_gtk_signal(GSignalInvocationHint *hint,
   gnome_triggers_vdo("", NULL, (const char **)pieces);
 
   return TRUE;
-#else
-  return FALSE; /* this shouldn't even happen... */
-#endif
 }
+#endif
 
 static void
 initialize_gtk_signal_relay (void)
