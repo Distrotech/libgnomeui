@@ -34,7 +34,7 @@ GnomeCanvasPoints *gnome_canvas_points_new (int num_points);
 
 /* Increate ref count */
 GnomeCanvasPoints *gnome_canvas_points_ref (GnomeCanvasPoints *points);
-#define gnome_canvas_point_unref gnome_canvas_points_free
+#define gnome_canvas_points_unref gnome_canvas_points_free
 
 /* Decrease ref count and free structure if it has reached zero */
 void gnome_canvas_points_free (GnomeCanvasPoints *points);

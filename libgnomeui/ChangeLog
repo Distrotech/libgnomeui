@@ -1,3 +1,8 @@
+1999-03-04  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gnome-canvas-util.h (gnome_canvas_points_unref): 
+	Fix typo -- rename from `gnome_canvas_point_unref'.
+
 1999-02-28  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-property-entries.c (_property_entry_font_entry_cb):
