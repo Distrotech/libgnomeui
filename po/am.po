@@ -652,7 +652,7 @@ msgstr "የአሁኑን ፋይል ዝጋ"
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
-msgstr "_ወጣ"
+msgstr "_ውጣ"
 
 #: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
