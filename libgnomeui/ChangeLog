@@ -1,3 +1,11 @@
+2001-08-01  Michael Meeks  <michael@ximian.com>
+
+	* oafgnome.h: port to bonobo-activation.
+
+	* oafgnome.c (og_pre_args_parse): upd.
+
+	* gnome-rexec-server.c: stale, removed.
+
 2001-07-22  Martin Baulig  <baulig@suse.de>
 
 	* gnome-recently-used.[ch]: Removed.

@@ -28,8 +28,8 @@
 
 #include <libgnome/gnome-program.h>
 
-extern GnomeModuleInfo liboafgnome_module_info;
+extern GnomeModuleInfo libgnomeui_bonobo_activation_module_info;
 
-#define OAF_GNOME_INIT GNOME_PARAM_MODULE,&liboafgnome_module_info
+#define BONOBO_ACTICATION_GNOMEUI_INIT GNOME_PARAM_MODULE,&libgnomeui_bonobo_activation_module_info
 
 #endif

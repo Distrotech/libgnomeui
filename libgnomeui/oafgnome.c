@@ -59,26 +59,26 @@ static GnomeModuleInfo orbit_module_info = {
    NULL
 };
 
-static GnomeModuleRequirement liboaf_requirements[] = {
+static GnomeModuleRequirement libgnomeui_bonobo_activation_requirements[] = {
   {"0.5.1", &orbit_module_info},
   {NULL}
 };
 
-static GnomeModuleInfo liboaf_module_info = {
-  "liboaf", liboaf_version, "Object Activation Framework",
-  liboaf_requirements,
-  (GnomeModuleHook)oaf_preinit, (GnomeModuleHook)oaf_postinit,
-  (struct poptOption *)oaf_popt_options,
+static GnomeModuleInfo libbonobo_activation_module_info = {
+  "liboaf", libgnomeui_bonobo_activation_version, "Object Activation Framework",
+  libgnomeui_bonobo_activation_requirements,
+  (GnomeModuleHook)bonobo_activation_preinit, (GnomeModuleHook)bonobo_activation_postinit,
+  (struct poptOption *)bonobo_activation_popt_options,
   NULL
 };
 
 static GnomeModuleRequirement og_requirements[] = {
-  {"0.0", &liboaf_module_info},
+  {"0.0", &libgnomeui_bonobo_activation_module_info},
   {"1.2.0", &gtk_module_info},
   {NULL}
 };
 
-GnomeModuleInfo liboafgnome_module_info = {
+GnomeModuleInfo libgnomeui_bonobo_actiation_module_info = {
   "liboafgnome", VERSION, "OAF integration for GNOME programs",
   og_requirements,
   og_pre_args_parse, og_post_args_parse,
@@ -92,14 +92,14 @@ og_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
   int dumb_argc = 1;
   char *dumb_argv[] = {NULL};
   dumb_argv[0] = program_invocation_name;
-  (void) oaf_orb_init(&dumb_argc, dumb_argv);
+  (void) bonobo_activation_orb_init(&dumb_argc, dumb_argv);
 }
 
 static void
 og_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
-  oaf_registration_location_add(&rootwin_regloc, -100, NULL);
-  oaf_registration_activator_add(rcmd_activator, 100);
+  bonobo_activation_registration_location_add(&rootwin_regloc, -100, NULL);
+  bonobo_activation_registration_activator_add(rcmd_activator, 100);
 }
 
 /* Registration location stuff */
@@ -484,7 +484,7 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
 
     g_assert(mydisplay);
 
-    g_snprintf(display_buf, sizeof(display_buf), "--display=%s%s", (mydisplay[0]==':')?oaf_hostname_get():"", mydisplay);
+    g_snprintf(display_buf, sizeof(display_buf), "--display=%s%s", (mydisplay[0]==':')?bonobo_activation_hostname_get():"", mydisplay);
     argv[argc++] = display_buf;
 
     g_value_unset (&value);
@@ -511,7 +511,7 @@ rcmd_activator(const OAFRegistrationCategory *regcat, const char **cmd,
   ior_string = rcmd_run(regcat, argv, argc, cmd);
   g_free(basecmd);
 
-  retval = CORBA_ORB_string_to_object(oaf_orb_get(), ior_string, ev);
+  retval = CORBA_ORB_string_to_object(bonobo_activation_orb_get(), ior_string, ev);
   if(ev->_major != CORBA_NO_EXCEPTION)
     retval = CORBA_OBJECT_NIL;
 
