@@ -1,5 +1,10 @@
 1999-02-14 Sergey Panov <sipan@mit.edu>
 
+	* gnome-dentry-edit.c(label_new)The proper label alignment is not
+	to the left, but to the right, where entries are.
+
+1999-02-14 Sergey Panov <sipan@mit.edu>
+
 	* gnome-dentry-edit.c(fill_easy_page,make_page) Get terminal
 	toggle widget to align correctly -- it was not centered, but
 	glued to the icon widget. Achived what, I think, Federico 
