@@ -80,7 +80,6 @@ static void gnome_roo_map(GtkWidget *w);
 static void gnome_roo_unmap(GtkWidget *w);
 static void gnome_roo_size_allocate(GtkWidget *w, GtkAllocation *allocation);
 static void gnome_roo_paint(GtkWidget *w, GdkRectangle *area);
-static void gnome_roo_draw(GtkWidget *w, GdkRectangle *area);
 static gboolean gnome_roo_expose(GtkWidget *w, GdkEventExpose *e);
 static gboolean gnome_roo_button_press(GtkWidget *w, GdkEventButton *e);
 static gboolean gnome_roo_button_release(GtkWidget *w, GdkEventButton *e);
@@ -209,7 +208,6 @@ static void gnome_roo_class_init(GnomeRooClass *klass)
 	widget_class->unmap = gnome_roo_unmap;
 	widget_class->size_request = gnome_roo_size_request;
 	widget_class->size_allocate = gnome_roo_size_allocate;
-	widget_class->draw = gnome_roo_draw;
 	widget_class->expose_event = gnome_roo_expose;
 	widget_class->button_press_event = gnome_roo_button_press;
 	widget_class->button_release_event = gnome_roo_button_release;
@@ -1096,17 +1094,6 @@ gnome_roo_paint(GtkWidget *w, GdkRectangle *area)
 						 w, "gnome-roo",
 						 roo->priv->title_bar_height + 4, w->style->font->ascent + w->style->font->descent,
 						 roo->priv->vis_title);
-}
-
-static void
-gnome_roo_draw(GtkWidget *w, GdkRectangle *area)
-{
-	if(GTK_WIDGET_DRAWABLE(w)) {
-		gnome_roo_paint(w, area);
-	}
-
-	if(GTK_WIDGET_CLASS(parent_class)->draw)
-		(*GTK_WIDGET_CLASS(parent_class)->draw)(w, area);
 }
 
 static gboolean gnome_roo_expose(GtkWidget *w, GdkEventExpose *e)

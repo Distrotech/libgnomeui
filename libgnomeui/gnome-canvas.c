@@ -2173,8 +2173,6 @@ static void gnome_canvas_map            (GtkWidget        *widget);
 static void gnome_canvas_unmap          (GtkWidget        *widget);
 static void gnome_canvas_realize        (GtkWidget        *widget);
 static void gnome_canvas_unrealize      (GtkWidget        *widget);
-static void gnome_canvas_draw           (GtkWidget        *widget,
-					 GdkRectangle     *area);
 static void gnome_canvas_size_allocate  (GtkWidget        *widget,
 					 GtkAllocation    *allocation);
 static gint gnome_canvas_button         (GtkWidget        *widget,
@@ -2246,7 +2244,6 @@ gnome_canvas_class_init (GnomeCanvasClass *class)
 	widget_class->unmap = gnome_canvas_unmap;
 	widget_class->realize = gnome_canvas_realize;
 	widget_class->unrealize = gnome_canvas_unrealize;
-	widget_class->draw = gnome_canvas_draw;
 	widget_class->size_allocate = gnome_canvas_size_allocate;
 	widget_class->button_press_event = gnome_canvas_button;
 	widget_class->button_release_event = gnome_canvas_button;
@@ -2528,27 +2525,6 @@ gnome_canvas_unrealize (GtkWidget *widget)
 
 	if (GTK_WIDGET_CLASS (canvas_parent_class)->unrealize)
 		(* GTK_WIDGET_CLASS (canvas_parent_class)->unrealize) (widget);
-}
-
-/* Draw handler for the canvas */
-static void
-gnome_canvas_draw (GtkWidget *widget, GdkRectangle *area)
-{
-	GnomeCanvas *canvas;
-
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GNOME_IS_CANVAS (widget));
-
-	if (!GTK_WIDGET_DRAWABLE (widget))
-		return;
-
-	canvas = GNOME_CANVAS (widget);
-
-	gnome_canvas_request_redraw (canvas,
-				     area->x - canvas->zoom_xofs,
-				     area->y - canvas->zoom_yofs,
-				     (area->x + area->width - canvas->zoom_xofs),
-				     (area->y + area->height - canvas->zoom_yofs));
 }
 
 /* Handles scrolling of the canvas.  Adjusts the scrolling and zooming offset to

@@ -95,8 +95,7 @@ static void gnome_dock_item_remove         (GtkContainer      *container,
 static void gnome_dock_item_paint          (GtkWidget         *widget,
                                             GdkEventExpose    *event,
                                             GdkRectangle      *area);
-static void gnome_dock_item_draw           (GtkWidget         *widget,
-                                            GdkRectangle      *area);
+static void gnome_dock_item_draw           (GtkWidget         *widget);
 static gint gnome_dock_item_expose         (GtkWidget         *widget,
                                             GdkEventExpose    *event);
 static gint gnome_dock_item_button_changed (GtkWidget         *widget,
@@ -291,7 +290,6 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
   widget_class->style_set = gnome_dock_item_style_set;
   widget_class->size_request = gnome_dock_item_size_request;
   widget_class->size_allocate = gnome_dock_item_size_allocate;
-  widget_class->draw = gnome_dock_item_draw;
   widget_class->expose_event = gnome_dock_item_expose;
   widget_class->button_press_event = gnome_dock_item_button_changed;
   widget_class->button_release_event = gnome_dock_item_button_changed;
@@ -850,8 +848,7 @@ gnome_dock_item_paint (GtkWidget      *widget,
 }
 
 static void
-gnome_dock_item_draw (GtkWidget    *widget,
-                      GdkRectangle *area)
+gnome_dock_item_draw (GtkWidget    *widget)
 {
   GnomeDockItem *di;
 
@@ -878,7 +875,7 @@ gnome_dock_item_draw (GtkWidget    *widget,
 	  gnome_dock_item_paint (widget, NULL, &r);
 	}
       else
-	gnome_dock_item_paint (widget, NULL, area);
+	gnome_dock_item_paint (widget, NULL, NULL);
     }
 }
 
@@ -1353,7 +1350,7 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
   gtk_widget_size_allocate (GTK_WIDGET (item), &allocation);
 
   gdk_window_hide (GTK_WIDGET (item)->window);
-  gnome_dock_item_draw (GTK_WIDGET (item), NULL);
+  gnome_dock_item_draw (GTK_WIDGET (item));
 
   gdk_window_set_transient_for(item->float_window,
                                gdk_window_get_toplevel(GTK_WIDGET (item)->window));

@@ -73,8 +73,6 @@ static void     gnome_dock_size_allocate       (GtkWidget *widget,
                                                 GtkAllocation *allocation);
 static void     gnome_dock_map                 (GtkWidget *widget);
 static void     gnome_dock_unmap               (GtkWidget *widget);
-static void     gnome_dock_draw                (GtkWidget *widget,
-                                                GdkRectangle *area);
 static gint     gnome_dock_expose              (GtkWidget *widget,
                                                 GdkEventExpose *event);
 static void     gnome_dock_add                 (GtkContainer *container,
@@ -106,10 +104,6 @@ static void     unmap_widget                     (GtkWidget *w);
 static void     unmap_widget_foreach             (gpointer data,
                                                 gpointer user_data);
 static void     unmap_band_list                  (GList *list);
-static void     draw_widget                    (GtkWidget *widget,
-                                                GdkRectangle *area);
-static void     draw_band_list                 (GList *list,
-                                                GdkRectangle *area);
 static void     expose_widget                  (GtkWidget *widget,
                                                 GdkEventExpose *event);
 static void     expose_band_list               (GList *list,
@@ -194,7 +188,6 @@ gnome_dock_class_init (GnomeDockClass *class)
   widget_class->size_allocate = gnome_dock_size_allocate;
   widget_class->map = gnome_dock_map;
   widget_class->unmap = gnome_dock_unmap;
-  widget_class->draw = gnome_dock_draw;
   widget_class->expose_event = gnome_dock_expose;
 
   container_class->add = gnome_dock_add;
@@ -541,56 +534,6 @@ gnome_dock_unmap (GtkWidget *widget)
 
   if (GTK_WIDGET_CLASS (parent_class)->unmap != NULL)
     (* GTK_WIDGET_CLASS (parent_class)->unmap) (widget);
-}
-
-
-
-static void
-draw_widget (GtkWidget *widget, GdkRectangle *area)
-{
-  GdkRectangle d_area;
-
-  if (widget != NULL && gtk_widget_intersect (widget, area, &d_area))
-    gtk_widget_draw (widget, &d_area);
-}
-
-static void
-draw_band_list (GList *list, GdkRectangle *area)
-{
-  DEBUG (("entering function -- %p %d %d %d %d",
-	  list, area->x, area->y, area->width, area->height));
-
-  while (list != NULL)
-    {
-      GtkWidget *w;
-
-      w = GTK_WIDGET (list->data);
-      draw_widget (w, area);
-
-      list = list->next;
-    }
-}
-
-static void
-gnome_dock_draw (GtkWidget *widget, GdkRectangle *area)
-{
-  if (GTK_WIDGET_DRAWABLE (widget))
-    {
-      GnomeDock *dock;
-      GList *p;
-
-      dock = GNOME_DOCK (widget);
-
-      draw_widget (dock->client_area, area);
-
-      draw_band_list (dock->top_bands, area);
-      draw_band_list (dock->bottom_bands, area);
-      draw_band_list (dock->left_bands, area);
-      draw_band_list (dock->right_bands, area);
-
-      for (p = dock->floating_children; p != NULL; p = p->next)
-	draw_widget (GTK_WIDGET (p->data), area);
-    }
 }
 
 

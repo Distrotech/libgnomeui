@@ -2958,9 +2958,6 @@ wap_textfu_draw(GtkWidget      *widget,
   textfu = WAP_TEXTFU(widget);
   layout = GTK_LAYOUT(widget);
 
-  if(parent_class->draw)
-    parent_class->draw(widget, area);
-
   if(!textfu->active_card
      || textfu->old_width != widget->allocation.width)
     return;

@@ -186,7 +186,7 @@ gnome_animator_class_init (GnomeAnimatorClass * class)
 						     1.0,
 						     (G_PARAM_READABLE |
 						      G_PARAM_WRITABLE )));
-  widget_class->draw = draw;
+
   widget_class->expose_event = expose;
   widget_class->size_allocate = size_allocate;
   widget_class->realize = realize;

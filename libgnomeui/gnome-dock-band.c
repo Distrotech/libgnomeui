@@ -69,9 +69,6 @@ static void     gnome_dock_band_size_allocate (GtkWidget *widget,
 static void     gnome_dock_band_map           (GtkWidget *widget);
 static void     gnome_dock_band_unmap         (GtkWidget *widget);
 
-static void     gnome_dock_band_draw          (GtkWidget *widget,
-                                               GdkRectangle *area);
-
 static gint     gnome_dock_band_expose        (GtkWidget *widget,
                                                GdkEventExpose *event);
 
@@ -171,7 +168,6 @@ gnome_dock_band_class_init (GnomeDockBandClass *class)
 
   widget_class->map = gnome_dock_band_map;
   widget_class->unmap = gnome_dock_band_unmap;
-  widget_class->draw = gnome_dock_band_draw;
   widget_class->expose_event = gnome_dock_band_expose;
   widget_class->size_request = gnome_dock_band_size_request;
   widget_class->size_allocate = gnome_dock_band_size_allocate;
@@ -600,32 +596,6 @@ gnome_dock_band_unmap (GtkWidget *widget)
       c = lp->data;
       if (GTK_WIDGET_VISIBLE (c->widget) && GTK_WIDGET_MAPPED (c->widget))
         gtk_widget_unmap (c->widget);
-    }
-}
-
-static void
-gnome_dock_band_draw (GtkWidget *widget, GdkRectangle *area)
-{
-  g_return_if_fail (widget != NULL);
-
-  if (GTK_WIDGET_DRAWABLE (widget))
-    {
-      GList *lp;
-      GnomeDockBand *band;
-
-      band = GNOME_DOCK_BAND (widget);
-
-      for (lp = band->children; lp != NULL; lp = lp->next)
-        {
-          GdkRectangle child_area;
-          GnomeDockBandChild *c;
-          GtkWidget *w;
-
-          c = lp->data;
-          w = c->widget;
-          if (gtk_widget_intersect (w, area, &child_area))
-            gtk_widget_draw (w, &child_area);
-        }
     }
 }
 

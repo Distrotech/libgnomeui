@@ -48,8 +48,6 @@ static void gnome_druid_size_request    (GtkWidget               *widget,
 					 GtkRequisition          *requisition);
 static void gnome_druid_size_allocate   (GtkWidget               *widget,
 					 GtkAllocation           *allocation);
-static void gnome_druid_draw            (GtkWidget               *widget,
-					 GdkRectangle            *area);
 static gint gnome_druid_expose          (GtkWidget               *widget,
 					 GdkEventExpose          *event);
 static void gnome_druid_map             (GtkWidget               *widget);
@@ -104,7 +102,6 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 	widget_class->size_allocate = gnome_druid_size_allocate;
 	widget_class->map = gnome_druid_map;
 	widget_class->unmap = gnome_druid_unmap;
-	widget_class->draw = gnome_druid_draw;
 	widget_class->expose_event = gnome_druid_expose;
 
 	container_class->forall = gnome_druid_forall;
@@ -476,44 +473,6 @@ gnome_druid_forall (GtkContainer *container,
 		(* callback) (druid->next, callback_data);
 		(* callback) (druid->cancel, callback_data);
 		(* callback) (druid->finish, callback_data);
-	}
-}
-static void
-gnome_druid_draw (GtkWidget    *widget,
-		  GdkRectangle *area)
-{
-	GnomeDruid *druid;
-	GdkRectangle child_area;
-	GtkWidget *child;
-	GList *children;
-  
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GNOME_IS_DRUID (widget));
-
-	if (GTK_WIDGET_DRAWABLE (widget)) {
-		druid = GNOME_DRUID (widget);
-		children = druid->_priv->children;
-
-		while (children) {
-			child = GTK_WIDGET (children->data);
-			children = children->next;
-	     
-			if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area)) {
-				gtk_widget_draw (child, &child_area);
-			}
-		}
-		child = druid->back;
-		if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area))
-			gtk_widget_draw (child, &child_area);
-		child = druid->next;
-		if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area))
-			gtk_widget_draw (child, &child_area);
-		child = druid->cancel;
-		if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area))
-			gtk_widget_draw (child, &child_area);
-		child = druid->finish;
-		if (GTK_WIDGET_DRAWABLE (child) && gtk_widget_intersect (child, area, &child_area))
-			gtk_widget_draw (child, &child_area);
 	}
 }
 

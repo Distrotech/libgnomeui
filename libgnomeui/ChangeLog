@@ -1,3 +1,11 @@
+Wed Dec 06 01:55:24 2000  George Lebl <jirka@5z.com>
+
+	* gnome-animamtor.c, gnome-canvas.c, gnome-dock-band.c, 
+	  gnome-dock-item.c, gnome-dock.c, gnome-druid-page.c,
+	  gnome-druid.c, gnome-roo.c, gnome-textfu.c, gtkpixmapmenuitem.c,
+	  wap-textfu.c:  There is no draw signal/method anymore, it's
+	  all handled by exposes now so all the draw stuff is now gone.
+
 2000-12-05  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selectorP.h (_gnome_selector_async_handle_removed): Renamed

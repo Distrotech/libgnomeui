@@ -34,8 +34,6 @@
 
 static void gtk_pixmap_menu_item_class_init    (GtkPixmapMenuItemClass *klass);
 static void gtk_pixmap_menu_item_init          (GtkPixmapMenuItem      *menu_item);
-static void gtk_pixmap_menu_item_draw          (GtkWidget              *widget,
-					        GdkRectangle           *area);
 static gint gtk_pixmap_menu_item_expose        (GtkWidget              *widget,
 					        GdkEventExpose         *event);
 
@@ -117,7 +115,6 @@ gtk_pixmap_menu_item_class_init (GtkPixmapMenuItemClass *klass)
 
   parent_class = gtk_type_class (gtk_menu_item_get_type ());
 
-  widget_class->draw = gtk_pixmap_menu_item_draw;
   widget_class->expose_event = gtk_pixmap_menu_item_expose;
   widget_class->map = gtk_pixmap_menu_item_map;
   widget_class->size_allocate = gtk_pixmap_menu_item_size_allocate;
@@ -140,23 +137,6 @@ gtk_pixmap_menu_item_init (GtkPixmapMenuItem *menu_item)
   mi = GTK_MENU_ITEM (menu_item);
 
   menu_item->pixmap = NULL;
-}
-
-static void
-gtk_pixmap_menu_item_draw (GtkWidget    *widget,
-			   GdkRectangle *area)
-{
-  g_return_if_fail (widget != NULL);
-  g_return_if_fail (GTK_IS_PIXMAP_MENU_ITEM (widget));
-  g_return_if_fail (area != NULL);
-
-  if (GTK_WIDGET_CLASS (parent_class)->draw)
-    (* GTK_WIDGET_CLASS (parent_class)->draw) (widget, area);
-
-  if (GTK_WIDGET_DRAWABLE (widget) && 
-      GTK_PIXMAP_MENU_ITEM(widget)->pixmap) {
-    gtk_widget_draw(GTK_WIDGET(GTK_PIXMAP_MENU_ITEM(widget)->pixmap),NULL);
-  }
 }
 
 static gint

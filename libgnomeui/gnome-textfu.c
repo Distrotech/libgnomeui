@@ -70,8 +70,6 @@ static void gnome_textfu_size_request       (GtkWidget      *widget,
 					     GtkRequisition *requisition);
 static void gnome_textfu_size_allocate      (GtkWidget      *widget,
 					     GtkAllocation  *allocation);
-static void gnome_textfu_draw               (GtkWidget      *widget, 
-					     GdkRectangle   *area);
 static gint gnome_textfu_expose             (GtkWidget      *widget, 
 					     GdkEventExpose *event);
 static gint gnome_textfu_button_release_event(GtkWidget *widget, GdkEventButton *event);
@@ -365,7 +363,6 @@ gnome_textfu_class_init (GnomeTextFuClass *klass)
   widget_class->unrealize = gnome_textfu_unrealize;
   widget_class->size_request = gnome_textfu_size_request;
   widget_class->size_allocate = gnome_textfu_size_allocate;
-  widget_class->draw = gnome_textfu_draw;
   widget_class->expose_event = gnome_textfu_expose;
   widget_class->map = gnome_textfu_map;
   widget_class->motion_notify_event = gnome_textfu_motion_notify_event;
@@ -1011,17 +1008,6 @@ gnome_textfu_size_allocate(GtkWidget      *widget,
 
       gtk_widget_queue_draw(widget);
     }
-}
-
-static void
-gnome_textfu_draw(GtkWidget      *widget, 
-		  GdkRectangle   *area)
-{
-  GNOME_CALL_PARENT_HANDLER (GTK_WIDGET_CLASS,
-			     draw,
-			     (widget, area));
-
-  gnome_textfu_determine_size(GNOME_TEXTFU(widget), NULL, TRUE);
 }
 
 static gint
