@@ -1,3 +1,7 @@
+2000-07-09  Karl Eichwalder  <ke@suse.de>
+
+	* gnome_segv.c (main): Fix message string typo.
+
 2000-07-07  Chema Celorio  <chema@celorio.com>
  
  	* gnome_segv.c: add a "DEBUG" button to the segv dialog if the program
