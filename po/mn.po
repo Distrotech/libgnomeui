@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
-"POT-Creation-Date: 2003-08-25 20:29+0200\n"
+"POT-Creation-Date: 2003-11-24 11:30+0100\n"
 "PO-Revision-Date: 2003-08-22 03:01+0200\n"
 "Last-Translator: Sanlig Badral <Badral@openmn.org>\n"
 "Language-Team: Mongolian <openmn-kdemn@lists.sourceforge.net>\n"

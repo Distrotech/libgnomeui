@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.4\n"
-"POT-Creation-Date: 2003-08-25 20:29+0200\n"
+"POT-Creation-Date: 2003-11-24 11:30+0100\n"
 "PO-Revision-Date: 2003-09-10 22:24+0200\n"
 "Last-Translator: Бојан Живановић <bojanz@panet.co.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"

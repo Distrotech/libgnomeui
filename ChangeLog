@@ -1,3 +1,7 @@
+2003-11-24  Anders Carlsson  <andersca@gnome.org>
+
+	* configure.in: Release 2.5.0
+
 2003-11-02  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* libgnomeui/gnome-color-picker.c: Even though this is
