@@ -1,0 +1,126 @@
+<!-- ##### SECTION Title ##### -->
+GnomeDateEdit
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM GnomeDateEditFlags ##### -->
+<para>
+
+</para>
+
+@GNOME_DATE_EDIT_SHOW_TIME: 
+@GNOME_DATE_EDIT_24_HR: 
+@GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY: 
+
+<!-- ##### STRUCT GnomeDateEditPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_date_edit_new ##### -->
+<para>
+
+</para>
+
+@the_time: 
+@show_time: 
+@use_24_format: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_date_edit_new_flags ##### -->
+<para>
+
+</para>
+
+@the_time: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_date_edit_construct ##### -->
+<para>
+
+</para>
+
+@gde: 
+@the_time: 
+@flags: 
+
+
+<!-- ##### FUNCTION gnome_date_edit_set_time ##### -->
+<para>
+
+</para>
+
+@gde: 
+@the_time: 
+
+
+<!-- ##### FUNCTION gnome_date_edit_get_time ##### -->
+<para>
+
+</para>
+
+@gde: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_date_edit_set_popup_range ##### -->
+<para>
+
+</para>
+
+@gde: 
+@low_hour: 
+@up_hour: 
+
+
+<!-- ##### FUNCTION gnome_date_edit_set_flags ##### -->
+<para>
+
+</para>
+
+@gde: 
+@flags: 
+
+
+<!-- ##### FUNCTION gnome_date_edit_get_flags ##### -->
+<para>
+
+</para>
+
+@gde: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_date_edit_get_initial_time ##### -->
+<para>
+
+</para>
+
+@gde: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_date_edit_get_date ##### -->
+<para>
+
+</para>
+
+@gde: 
+@Returns: 
+
+

@@ -1,0 +1,147 @@
+<!-- ##### SECTION Title ##### -->
+GnomeDruidPageStandard
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT GnomeDruidPageStandardPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO gnome_druid_page_standard_set_bg_color ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnome_druid_page_standard_set_logo_bg_color ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO gnome_druid_page_standard_set_title_color ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_druid_page_standard_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_standard_new_with_vals ##### -->
+<para>
+
+</para>
+
+@title: 
+@logo: 
+@top_watermark: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_standard_construct ##### -->
+<para>
+
+</para>
+
+@druid_page_standard: 
+@title: 
+@logo: 
+@top_watermark: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_standard_set_title ##### -->
+<para>
+
+</para>
+
+@druid_page_standard: 
+@title: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_standard_set_logo ##### -->
+<para>
+
+</para>
+
+@druid_page_standard: 
+@logo_image: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_standard_set_top_watermark ##### -->
+<para>
+
+</para>
+
+@druid_page_standard: 
+@top_watermark_image: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_standard_set_title_foreground ##### -->
+<para>
+
+</para>
+
+@druid_page_standard: 
+@color: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_standard_set_background ##### -->
+<para>
+
+</para>
+
+@druid_page_standard: 
+@color: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_standard_set_logo_background ##### -->
+<para>
+
+</para>
+
+@druid_page_standard: 
+@color: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_standard_set_contents_background ##### -->
+<para>
+
+</para>
+
+@druid_page_standard: 
+@color: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_standard_append_item ##### -->
+<para>
+
+</para>
+
+@druid_page_standard: 
+@question_mnemonic: 
+@item: 
+@additional_info_markup: 
+
+

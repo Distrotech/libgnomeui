@@ -1,0 +1,401 @@
+<!-- ##### SECTION Title ##### -->
+gnome-uidefs
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO GNOME_PAD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_PAD_SMALL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_PAD_BIG ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_YES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_NO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_OK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_CANCEL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_EXIT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_EXIT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_CLOSE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_CLOSE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_CUT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_CUT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_COPY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_COPY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_PASTE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_PASTE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_SELECT_ALL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_SELECT_ALL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_CLEAR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_CLEAR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_UNDO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_UNDO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_REDO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_REDO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_SAVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_SAVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_OPEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_OPEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_SAVE_AS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_SAVE_AS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_NEW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_NEW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_PRINT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_PRINT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_PRINT_SETUP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_PRINT_SETUP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_FIND ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_FIND ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_FIND_AGAIN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_FIND_AGAIN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_REPLACE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_REPLACE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_NEW_WINDOW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_NEW_WINDOW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_CLOSE_WINDOW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_CLOSE_WINDOW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_REDO_MOVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_REDO_MOVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_UNDO_MOVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_UNDO_MOVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_PAUSE_GAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_PAUSE_GAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_NAME_NEW_GAME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_KEY_MOD_NEW_GAME ##### -->
+<para>
+
+</para>
+
+
+

@@ -1,0 +1,93 @@
+<!-- ##### SECTION Title ##### -->
+gnome-ui-init
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO LIBGNOMEUI_PARAM_CRASH_DIALOG ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LIBGNOMEUI_PARAM_DISPLAY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LIBGNOMEUI_PARAM_DEFAULT_ICON ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO LIBGNOMEUI_MODULE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION libgnomeui_module_info_get ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_GTK_MODULE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_gtk_module_info_get ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_init_with_popt_table ##### -->
+<para>
+
+</para>
+
+@app_id: 
+@app_version: 
+@argc: 
+@argv: 
+@options: 
+@flags: 
+@return_ctx: 
+@Returns: 
+
+
+<!-- ##### MACRO gnome_init ##### -->
+<para>
+
+</para>
+
+@app_id: 
+@app_version: 
+@argc: 
+@argv: 
+
+

@@ -1,0 +1,85 @@
+<!-- ##### SECTION Title ##### -->
+GnomeMessageBox
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO GNOME_MESSAGE_BOX_INFO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MESSAGE_BOX_WARNING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MESSAGE_BOX_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MESSAGE_BOX_QUESTION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MESSAGE_BOX_GENERIC ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT GnomeMessageBoxPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GnomeMessageBoxButton ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_message_box_new ##### -->
+<para>
+
+</para>
+
+@message: 
+@messagebox_type: 
+@Varargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_message_box_newv ##### -->
+<para>
+
+</para>
+
+@message: 
+@messagebox_type: 
+@buttons: 
+@Returns: 
+
+

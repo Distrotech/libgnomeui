@@ -1,0 +1,73 @@
+<!-- ##### SECTION Title ##### -->
+GnomeDruidPage
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT GnomeDruidPagePrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_druid_page_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_next ##### -->
+<para>
+
+</para>
+
+@druid_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_prepare ##### -->
+<para>
+
+</para>
+
+@druid_page: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_back ##### -->
+<para>
+
+</para>
+
+@druid_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_cancel ##### -->
+<para>
+
+</para>
+
+@druid_page: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_druid_page_finish ##### -->
+<para>
+
+</para>
+
+@druid_page: 
+
+

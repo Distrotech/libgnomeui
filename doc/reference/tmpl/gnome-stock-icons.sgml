@@ -1,0 +1,1289 @@
+<!-- ##### SECTION Title ##### -->
+gnome-stock-icons
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO GNOME_ICON_SIZE_TOOLBAR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### VARIABLE gnome_icon_size_toolbar ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION init_gnome_stock_icons ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_TIMER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_TIMER_STOP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_TRASH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_TRASH_FULL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_SCORES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_ABOUT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BLANK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_VOLUME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MIDI ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MIC ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_LINE_IN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MAIL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MAIL_RCV ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MAIL_SND ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MAIL_RPL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MAIL_FWD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MAIL_NEW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_ATTACH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BOOK_RED ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BOOK_GREEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BOOK_BLUE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BOOK_YELLOW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BOOK_OPEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MULTIPLE_FILE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_NOT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_TABLE_BORDERS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_TABLE_FILL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_TEXT_INDENT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_TEXT_UNINDENT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_TEXT_BULLETED_LIST ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_TEXT_NUMBERED_LIST ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_NEW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_OPEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_CLOSE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_REVERT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_SAVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_SAVE_AS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_CUT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_COPY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_PASTE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_CLEAR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_PROPERTIES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_PREFERENCES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_HELP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_SCORES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_PRINT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_SEARCH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_SRCHRPL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_BACK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_FORWARD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_FIRST ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_LAST ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_HOME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_STOP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_REFRESH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_UNDO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_REDO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TIMER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TIMER_STOP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_MAIL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_MAIL_RCV ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_MAIL_SND ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_MAIL_RPL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_MAIL_FWD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_MAIL_NEW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TRASH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TRASH_FULL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_UNDELETE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_SPELLCHECK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_MIC ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_LINE_IN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_CDROM ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_VOLUME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_MIDI ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_BOOK_RED ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_BOOK_GREEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_BOOK_BLUE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_BOOK_YELLOW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_BOOK_OPEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_ABOUT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_QUIT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_MULTIPLE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_NOT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_CONVERT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_JUMP_TO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_UP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_DOWN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TOP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_BOTTOM ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_ATTACH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_INDEX ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_FONT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_EXEC ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_ALIGN_LEFT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_ALIGN_RIGHT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_ALIGN_CENTER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_ALIGN_JUSTIFY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TEXT_BOLD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TEXT_ITALIC ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TEXT_UNDERLINE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TEXT_STRIKEOUT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TEXT_INDENT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TEXT_UNINDENT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_EXIT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_COLORSELECTOR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_ADD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_REMOVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TABLE_BORDERS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TABLE_FILL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TEXT_BULLETED_LIST ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_PIXMAP_TEXT_NUMBERED_LIST ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_BLANK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_NEW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_SAVE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_SAVE_AS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_REVERT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_OPEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_CLOSE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_QUIT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_CUT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_COPY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_PASTE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_PROP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_PREF ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_ABOUT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_SCORES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_UNDO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_REDO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_PRINT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_SEARCH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_SRCHRPL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_BACK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_FORWARD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_FIRST ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_LAST ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_HOME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_STOP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_REFRESH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_MAIL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_MAIL_RCV ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_MAIL_SND ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_MAIL_RPL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_MAIL_FWD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_MAIL_NEW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_TRASH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_TRASH_FULL ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_UNDELETE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_TIMER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_TIMER_STOP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_SPELLCHECK ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_MIC ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_LINE_IN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_CDROM ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_VOLUME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_MIDI ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_BOOK_RED ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_BOOK_GREEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_BOOK_BLUE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_BOOK_YELLOW ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_BOOK_OPEN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_CONVERT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_JUMP_TO ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_UP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_DOWN ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_TOP ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_BOTTOM ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_ATTACH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_INDEX ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_FONT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_EXEC ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_ALIGN_LEFT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_ALIGN_RIGHT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_ALIGN_CENTER ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_ALIGN_JUSTIFY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_TEXT_BOLD ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_TEXT_ITALIC ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_TEXT_UNDERLINE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_TEXT_STRIKEOUT ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_MENU_EXIT ##### -->
+<para>
+
+</para>
+
+
+

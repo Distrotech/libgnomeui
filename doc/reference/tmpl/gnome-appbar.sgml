@@ -1,0 +1,179 @@
+<!-- ##### SECTION Title ##### -->
+GnomeAppBar
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO GNOME_APPBAR_HAS_STATUS ##### -->
+<para>
+
+</para>
+
+@appbar: 
+
+
+<!-- ##### MACRO GNOME_APPBAR_HAS_PROGRESS ##### -->
+<para>
+
+</para>
+
+@appbar: 
+
+
+<!-- ##### STRUCT GnomeAppBarPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GnomeAppBarMsg ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOME_APPBAR_INTERACTIVE ##### -->
+<para>
+
+</para>
+
+@ab: 
+
+
+<!-- ##### FUNCTION gnome_appbar_new ##### -->
+<para>
+
+</para>
+
+@has_progress: 
+@has_status: 
+@interactivity: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_appbar_set_status ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@status: 
+
+
+<!-- ##### FUNCTION gnome_appbar_get_status ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_appbar_set_default ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@default_status: 
+
+
+<!-- ##### FUNCTION gnome_appbar_push ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@status: 
+
+
+<!-- ##### FUNCTION gnome_appbar_pop ##### -->
+<para>
+
+</para>
+
+@appbar: 
+
+
+<!-- ##### FUNCTION gnome_appbar_clear_stack ##### -->
+<para>
+
+</para>
+
+@appbar: 
+
+
+<!-- ##### FUNCTION gnome_appbar_set_progress_percentage ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@percentage: 
+
+
+<!-- ##### FUNCTION gnome_appbar_get_progress ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_appbar_refresh ##### -->
+<para>
+
+</para>
+
+@appbar: 
+
+
+<!-- ##### FUNCTION gnome_appbar_set_prompt ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@prompt: 
+@modal: 
+
+
+<!-- ##### FUNCTION gnome_appbar_clear_prompt ##### -->
+<para>
+
+</para>
+
+@appbar: 
+
+
+<!-- ##### FUNCTION gnome_appbar_get_response ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_appbar_construct ##### -->
+<para>
+
+</para>
+
+@ab: 
+@has_progress: 
+@has_status: 
+@interactivity: 
+
+

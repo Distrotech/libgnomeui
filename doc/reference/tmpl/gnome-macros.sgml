@@ -1,0 +1,66 @@
+<!-- ##### SECTION Title ##### -->
+gnome-macros
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO GNOME_CLASS_BOILERPLATE ##### -->
+<para>
+
+</para>
+
+@type: 
+@type_as_function: 
+@\
+				parent_type:
+@\
+				parent_type:
+@\
+				parent_type:
+@\
+				parent_type:
+@\
+				parent_type: 
+@parent_type_as_function: 
+
+
+<!-- ##### MACRO GNOME_CALL_PARENT_HANDLER ##### -->
+<para>
+
+</para>
+
+@parent_class_cast: 
+@name: 
+@args: 
+
+
+<!-- ##### MACRO GNOME_CALL_PARENT_HANDLER_WITH_DEFAULT ##### -->
+<para>
+
+</para>
+
+@parent_class_cast: 
+@\
+					       name:
+@\
+					       name:
+@\
+					       name:
+@\
+					       name:
+@\
+					       name: 
+@args: 
+@def_return: 
+
+

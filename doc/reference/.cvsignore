@@ -1,0 +1,12 @@
+Makefile.in
+Makefile
+sgml
+html
+libgnomeui-undocumented.txt
+libgnomeui-unused.txt
+libgnomeui-decl-list.txt
+libgnomeui-decl.txt
+libgnomeui.signals
+libgnomeui.args
+libgnomeui.hierachy
+*.stamp

@@ -1,0 +1,1044 @@
+<!-- ##### SECTION Title ##### -->
+gnome-app-helper
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM GnomeUIInfoType ##### -->
+<para>
+
+</para>
+
+@GNOME_APP_UI_ENDOFINFO: 
+@GNOME_APP_UI_ITEM: 
+@GNOME_APP_UI_TOGGLEITEM: 
+@GNOME_APP_UI_RADIOITEMS: 
+@GNOME_APP_UI_SUBTREE: 
+@GNOME_APP_UI_SEPARATOR: 
+@GNOME_APP_UI_HELP: 
+@GNOME_APP_UI_BUILDER_DATA: 
+@GNOME_APP_UI_ITEM_CONFIGURABLE: 
+@GNOME_APP_UI_SUBTREE_STOCK: 
+@GNOME_APP_UI_INCLUDE: 
+
+<!-- ##### ENUM GnomeUIInfoConfigurableTypes ##### -->
+<para>
+
+</para>
+
+@GNOME_APP_CONFIGURABLE_ITEM_NEW: 
+@GNOME_APP_CONFIGURABLE_ITEM_OPEN: 
+@GNOME_APP_CONFIGURABLE_ITEM_SAVE: 
+@GNOME_APP_CONFIGURABLE_ITEM_SAVE_AS: 
+@GNOME_APP_CONFIGURABLE_ITEM_REVERT: 
+@GNOME_APP_CONFIGURABLE_ITEM_PRINT: 
+@GNOME_APP_CONFIGURABLE_ITEM_PRINT_SETUP: 
+@GNOME_APP_CONFIGURABLE_ITEM_CLOSE: 
+@GNOME_APP_CONFIGURABLE_ITEM_EXIT: 
+@GNOME_APP_CONFIGURABLE_ITEM_CUT: 
+@GNOME_APP_CONFIGURABLE_ITEM_COPY: 
+@GNOME_APP_CONFIGURABLE_ITEM_PASTE: 
+@GNOME_APP_CONFIGURABLE_ITEM_CLEAR: 
+@GNOME_APP_CONFIGURABLE_ITEM_UNDO: 
+@GNOME_APP_CONFIGURABLE_ITEM_REDO: 
+@GNOME_APP_CONFIGURABLE_ITEM_FIND: 
+@GNOME_APP_CONFIGURABLE_ITEM_FIND_AGAIN: 
+@GNOME_APP_CONFIGURABLE_ITEM_REPLACE: 
+@GNOME_APP_CONFIGURABLE_ITEM_PROPERTIES: 
+@GNOME_APP_CONFIGURABLE_ITEM_PREFERENCES: 
+@GNOME_APP_CONFIGURABLE_ITEM_ABOUT: 
+@GNOME_APP_CONFIGURABLE_ITEM_SELECT_ALL: 
+@GNOME_APP_CONFIGURABLE_ITEM_NEW_WINDOW: 
+@GNOME_APP_CONFIGURABLE_ITEM_CLOSE_WINDOW: 
+@GNOME_APP_CONFIGURABLE_ITEM_NEW_GAME: 
+@GNOME_APP_CONFIGURABLE_ITEM_PAUSE_GAME: 
+@GNOME_APP_CONFIGURABLE_ITEM_RESTART_GAME: 
+@GNOME_APP_CONFIGURABLE_ITEM_UNDO_MOVE: 
+@GNOME_APP_CONFIGURABLE_ITEM_REDO_MOVE: 
+@GNOME_APP_CONFIGURABLE_ITEM_HINT: 
+@GNOME_APP_CONFIGURABLE_ITEM_SCORES: 
+@GNOME_APP_CONFIGURABLE_ITEM_END_GAME: 
+
+<!-- ##### ENUM GnomeUIPixmapType ##### -->
+<para>
+
+</para>
+
+@GNOME_APP_PIXMAP_NONE: 
+@GNOME_APP_PIXMAP_STOCK: 
+@GNOME_APP_PIXMAP_DATA: 
+@GNOME_APP_PIXMAP_FILENAME: 
+
+<!-- ##### TYPEDEF GnomeUIInfo ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### MACRO GNOMEUIINFO_KEY_UIDATA ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOMEUIINFO_KEY_UIBDATA ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOMEUIINFO_END ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOMEUIINFO_SEPARATOR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOMEUIINFO_ITEM ##### -->
+<para>
+
+</para>
+
+@label: 
+@tooltip: 
+@callback: 
+@xpm_data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_ITEM_STOCK ##### -->
+<para>
+
+</para>
+
+@label: 
+@tooltip: 
+@callback: 
+@stock_id: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_ITEM_NONE ##### -->
+<para>
+
+</para>
+
+@label: 
+@tooltip: 
+@callback: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_ITEM_DATA ##### -->
+<para>
+
+</para>
+
+@label: 
+@tooltip: 
+@callback: 
+@user_data: 
+@xpm_data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_TOGGLEITEM ##### -->
+<para>
+
+</para>
+
+@label: 
+@tooltip: 
+@callback: 
+@xpm_data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_TOGGLEITEM_DATA ##### -->
+<para>
+
+</para>
+
+@label: 
+@tooltip: 
+@callback: 
+@user_data: 
+@xpm_data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_HELP ##### -->
+<para>
+
+</para>
+
+@app_name: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_SUBTREE ##### -->
+<para>
+
+</para>
+
+@label: 
+@tree: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_SUBTREE_HINT ##### -->
+<para>
+
+</para>
+
+@label: 
+@hint: 
+@tree: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_SUBTREE_STOCK ##### -->
+<para>
+
+</para>
+
+@label: 
+@tree: 
+@stock_id: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_INCLUDE ##### -->
+<para>
+
+</para>
+
+@tree: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_RADIOLIST ##### -->
+<para>
+
+</para>
+
+@list: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_RADIOITEM ##### -->
+<para>
+
+</para>
+
+@label: 
+@tooltip: 
+@callback: 
+@xpm_data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_RADIOITEM_DATA ##### -->
+<para>
+
+</para>
+
+@label: 
+@tooltip: 
+@callback: 
+@user_data: 
+@xpm_data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_NEW_ITEM ##### -->
+<para>
+
+</para>
+
+@label: 
+@tip: 
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_NEW_SUBTREE ##### -->
+<para>
+
+</para>
+
+@tree: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_OPEN_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_SAVE_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_SAVE_AS_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_REVERT_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_PRINT_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_PRINT_SETUP_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_CLOSE_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_EXIT_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_CUT_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_COPY_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_PASTE_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_SELECT_ALL_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_CLEAR_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_UNDO_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_REDO_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_FIND_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_FIND_AGAIN_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_REPLACE_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_PROPERTIES_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_PREFERENCES_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_NEW_WINDOW_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_ABOUT_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_NEW_GAME_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_PAUSE_GAME_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_RESTART_GAME_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_UNDO_MOVE_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_REDO_MOVE_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_HINT_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_SCORES_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_END_GAME_ITEM ##### -->
+<para>
+
+</para>
+
+@cb: 
+@data: 
+
+
+<!-- ##### FUNCTION gnome_app_helper_gettext ##### -->
+<para>
+
+</para>
+
+@string: 
+@Returns: 
+
+
+<!-- ##### MACRO D_ ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
+<!-- ##### MACRO L_ ##### -->
+<para>
+
+</para>
+
+@x: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_FILE_TREE ##### -->
+<para>
+
+</para>
+
+@tree: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_EDIT_TREE ##### -->
+<para>
+
+</para>
+
+@tree: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_VIEW_TREE ##### -->
+<para>
+
+</para>
+
+@tree: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_SETTINGS_TREE ##### -->
+<para>
+
+</para>
+
+@tree: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_FILES_TREE ##### -->
+<para>
+
+</para>
+
+@tree: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_WINDOWS_TREE ##### -->
+<para>
+
+</para>
+
+@tree: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_HELP_TREE ##### -->
+<para>
+
+</para>
+
+@tree: 
+
+
+<!-- ##### MACRO GNOMEUIINFO_MENU_GAME_TREE ##### -->
+<para>
+
+</para>
+
+@tree: 
+
+
+<!-- ##### MACRO GNOME_MENU_FILE_STRING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_FILE_PATH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_EDIT_STRING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_EDIT_PATH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_VIEW_STRING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_VIEW_PATH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_SETTINGS_STRING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_SETTINGS_PATH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_NEW_STRING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_NEW_PATH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_FILES_STRING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_FILES_PATH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_WINDOWS_STRING ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MENU_WINDOWS_PATH ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### STRUCT GnomeUIBuilderData ##### -->
+<para>
+
+</para>
+
+@connect_func: 
+@data: 
+@is_interp: 
+@relay_func: 
+@destroy_func: 
+
+<!-- ##### USER_FUNCTION GnomeUISignalConnectFunc ##### -->
+<para>
+
+</para>
+
+@uiinfo: 
+@signal_name: 
+@uibdata: 
+
+
+<!-- ##### FUNCTION gnome_accelerators_sync ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_app_fill_menu ##### -->
+<para>
+
+</para>
+
+@menu_shell: 
+@uiinfo: 
+@accel_group: 
+@uline_accels: 
+@pos: 
+
+
+<!-- ##### FUNCTION gnome_app_fill_menu_with_data ##### -->
+<para>
+
+</para>
+
+@menu_shell: 
+@uiinfo: 
+@accel_group: 
+@uline_accels: 
+@pos: 
+@user_data: 
+
+
+<!-- ##### FUNCTION gnome_app_fill_menu_custom ##### -->
+<para>
+
+</para>
+
+@menu_shell: 
+@uiinfo: 
+@uibdata: 
+@accel_group: 
+@uline_accels: 
+@pos: 
+
+
+<!-- ##### FUNCTION gnome_app_ui_configure_configurable ##### -->
+<para>
+
+</para>
+
+@uiinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_create_menus ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_create_menus_interp ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@relay_func: 
+@data: 
+@destroy_func: 
+
+
+<!-- ##### FUNCTION gnome_app_create_menus_with_data ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@user_data: 
+
+
+<!-- ##### FUNCTION gnome_app_create_menus_custom ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@uibdata: 
+
+
+<!-- ##### FUNCTION gnome_app_fill_toolbar ##### -->
+<para>
+
+</para>
+
+@toolbar: 
+@uiinfo: 
+@accel_group: 
+
+
+<!-- ##### FUNCTION gnome_app_fill_toolbar_with_data ##### -->
+<para>
+
+</para>
+
+@toolbar: 
+@uiinfo: 
+@accel_group: 
+@user_data: 
+
+
+<!-- ##### FUNCTION gnome_app_fill_toolbar_custom ##### -->
+<para>
+
+</para>
+
+@toolbar: 
+@uiinfo: 
+@uibdata: 
+@accel_group: 
+
+
+<!-- ##### FUNCTION gnome_app_create_toolbar ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_create_toolbar_interp ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@relay_func: 
+@data: 
+@destroy_func: 
+
+
+<!-- ##### FUNCTION gnome_app_create_toolbar_with_data ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@user_data: 
+
+
+<!-- ##### FUNCTION gnome_app_create_toolbar_custom ##### -->
+<para>
+
+</para>
+
+@app: 
+@uiinfo: 
+@uibdata: 
+
+
+<!-- ##### FUNCTION gnome_app_find_menu_pos ##### -->
+<para>
+
+</para>
+
+@parent: 
+@path: 
+@pos: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_app_remove_menus ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@items: 
+
+
+<!-- ##### FUNCTION gnome_app_remove_menu_range ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@start: 
+@items: 
+
+
+<!-- ##### FUNCTION gnome_app_insert_menus_custom ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@menuinfo: 
+@uibdata: 
+
+
+<!-- ##### FUNCTION gnome_app_insert_menus ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@menuinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_insert_menus_with_data ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@menuinfo: 
+@data: 
+
+
+<!-- ##### FUNCTION gnome_app_insert_menus_interp ##### -->
+<para>
+
+</para>
+
+@app: 
+@path: 
+@menuinfo: 
+@relay_func: 
+@data: 
+@destroy_func: 
+
+
+<!-- ##### FUNCTION gnome_app_install_appbar_menu_hints ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@uiinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_install_statusbar_menu_hints ##### -->
+<para>
+
+</para>
+
+@bar: 
+@uiinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_install_menu_hints ##### -->
+<para>
+
+</para>
+
+@app: 
+@uinfo: 
+
+
+<!-- ##### FUNCTION gnome_app_setup_toolbar ##### -->
+<para>
+
+</para>
+
+@toolbar: 
+@dock_item: 
+
+

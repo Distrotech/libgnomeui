@@ -1,0 +1,38 @@
+<!-- ##### SECTION Title ##### -->
+GnomeAbout
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### STRUCT GnomeAboutPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_about_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@version: 
+@copyright: 
+@comments: 
+@authors: 
+@documenters: 
+@translator_credits: 
+@logo_pixbuf: 
+@Returns: 
+
+

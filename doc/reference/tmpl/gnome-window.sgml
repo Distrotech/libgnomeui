@@ -1,0 +1,27 @@
+<!-- ##### SECTION Title ##### -->
+gnome-window
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gnome_window_toplevel_set_title ##### -->
+<para>
+
+</para>
+
+@w: 
+@doc_name: 
+@app_name: 
+@extension: 
+
+

@@ -1,0 +1,68 @@
+<!-- ##### SECTION Title ##### -->
+GnomePropertyBox
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### MACRO GNOME_PROPERTY_BOX_DIRTY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_property_box_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_property_box_changed ##### -->
+<para>
+
+</para>
+
+@property_box: 
+
+
+<!-- ##### FUNCTION gnome_property_box_set_modified ##### -->
+<para>
+
+</para>
+
+@property_box: 
+@state: 
+
+
+<!-- ##### FUNCTION gnome_property_box_append_page ##### -->
+<para>
+
+</para>
+
+@property_box: 
+@child: 
+@tab_label: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_property_box_set_state ##### -->
+<para>
+
+</para>
+
+@property_box: 
+@state: 
+
+
