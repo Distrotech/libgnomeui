@@ -1,5 +1,13 @@
 2000-07-25  Martin Baulig  <baulig@suse.de>
 
+	Added new GnomeSelector widget. We'll subclass this for
+	files, directories, icons, pixmaps and so on.
+
+	* gnome-selector.[ch]: New files.
+	* selector-demo.c: New demo.
+
+2000-07-25  Martin Baulig  <baulig@suse.de>
+
 	* gnome-entry.[ch]: "privatized" it, added necessary accessor
 	functions for the now hidden members and added GtkArg stuff.
 

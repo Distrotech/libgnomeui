@@ -10,6 +10,7 @@ so_locations
 .exrc
 winhints_demo
 stock_demo
+selector_demo
 ted_demo
 animator_demo
 dock_demo

@@ -63,6 +63,7 @@
 #include "libgnomeui/gnome-dock-band.h"
 #include "libgnomeui/gnome-dock-item.h"
 #include "libgnomeui/gnome-entry.h"
+#include "libgnomeui/gnome-selector.h"
 #include "libgnomeui/gnome-file-entry.h"
 #include "libgnomeui/gnome-font-picker.h"
 #include "libgnomeui/gnome-gconf.h"

@@ -11,7 +11,7 @@ GDK_PIXBUF_LIBS=
 #
 # The targets
 #
-noinst_PROGRAMS = test-recently-used test-file-saver stock_demo winhints_demo dock_demo \
+noinst_PROGRAMS = test-recently-used test-file-saver selector_demo stock_demo winhints_demo dock_demo \
 	animator_demo mdi_demo
 bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap gnome-rexec-server
 lib_LTLIBRARIES = libgnomeui-2.la
@@ -139,6 +139,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-druid-page-standard.c	\
 	gnome-geometry.c		\
 	gnome-entry.c			\
+	gnome-selector.c		\
 	gnome-file-entry.c		\
         gnome-font-picker.c		\
 	gnome-gconf.c			\
@@ -215,6 +216,7 @@ gnome_headers = \
 	gnome-druid-page-edge.h		\
 	gnome-druid-page-standard.h	\
 	gnome-entry.h			\
+	gnome-selector.h		\
 	gnome-file-entry.h		\
         gnome-font-picker.h		\
 	gnome-gconf.h			\
@@ -321,6 +323,8 @@ test_file_saver_SOURCES = test-file-saver.c \
 
 test_recently_used_SOURCES = test-recently-used.c \
 	gnome-recently-used.h gnome-recently-used.c  ## here temporarily
+
+selector_demo_SOURCES = selector_demo.c
 
 gnome_segv_SOURCES = gnome_segv.c
 
