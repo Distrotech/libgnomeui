@@ -24,7 +24,9 @@
 
 BEGIN_GNOME_DECLS
 
-void gnome_init (char *app_id, int *argc, char ***argv);
+error_t gnome_init (char *app_id, struct argp *app_parser,
+		    int argc, char **argv,
+		    unsigned int flags, int *arg_index);
 
 END_GNOME_DECLS
 

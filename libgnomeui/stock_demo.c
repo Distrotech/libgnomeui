@@ -278,7 +278,10 @@ main(int argc, char **argv)
 {
 	GtkWidget *window, *hbox, *vbox, *table, *w;
 
-	gnome_init("stock_demo", &argc, &argv);
+#ifdef HAS_GDK_IMLIB
+	gdk_imlib_init();
+#endif 
+	gnome_init("stock_demo", NULL, argc, argv, 0, NULL);
 
 	window = gnome_app_new("Gnome Stock Test", "Gnome Stock Test");
 	gtk_window_set_wmclass(GTK_WINDOW(window), "stock_test",

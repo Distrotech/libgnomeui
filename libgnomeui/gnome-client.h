@@ -155,13 +155,20 @@ struct _GnomeClientClass
 
 guint        gnome_client_get_type (void);
 
+/* Create the default session management client.  This registers some
+   command-line options with gnome_parse_register_arguments.  If
+   possible the default client will contact the session manager after
+   command-line parsing is finished.  The default client will also set
+   the SM_CLIENT_ID property on the main window of your application.  */
+GnomeClient *gnome_client_new_default	         (void);
+
 /* Create a new session management client and try to connect to a
    session manager.  */
-GnomeClient *gnome_client_new                    (gint argc, gchar *argv[]);
+GnomeClient *gnome_client_new                    (void);
 
 
 /* Create a new session management client.  */
-GnomeClient *gnome_client_new_without_connection (gint argc, gchar *argv[]);
+GnomeClient *gnome_client_new_without_connection (void);
 
 
 /* Try to connect to a session manager.  If the client was created
@@ -203,12 +210,11 @@ gchar       *gnome_client_get_previous_id        (GnomeClient *client);
    NULL as parameter.  You are not allowed to unset the properties
    marked as required (see above).  There is one exception to this
    rule: If you unset the clone command, the clone command will be set
-   to the value of the restart command but without a '--sm-client-id'
-   command line option.
+   to the value of the restart command.
 
-   If you set the restart command without specifing a '--sm-client-id'
-   option, this option will be inserted automatically, if the client
-   is connected to a session manager.  */
+   The magic `--sm-client-id' option is automatically appended to the
+   restart command.  Do not include this option in the restart command
+   that you set.  */
 void         gnome_client_set_clone_command      (GnomeClient *client, 
 						  gint argc, gchar *argv[]);
 void         gnome_client_set_current_directory  (GnomeClient *client,

@@ -13,6 +13,8 @@
 #include <gdk/gdkprivate.h>
 #include <X11/Xatom.h>
 
+extern char *program_invocation_name;
+
 #ifndef HAVE_LIBSM
 typedef gpointer SmPointer;
 #endif /* !HAVE_LIBSM */
@@ -98,10 +100,8 @@ static void    array_free                    (gchar **array);
 static gchar** array_init_from_arg           (gint argc, 
 					      gchar *argv[]);
 static gchar** array_copy                    (gchar **source);
-static gchar*  array_has_sm_client_id_arg    (gchar **array);
 static void    array_insert_sm_client_id_arg (gchar ***array, 
 					      gchar *client_id);
-static void    array_remove_sm_client_id_arg (gchar ***array);
 
 /* 'GnomeInteractData' stuff */
 
@@ -132,7 +132,55 @@ static const char *sm_client_id_prop="SM_CLIENT_ID";
 /*****************************************************************************/
 /* Managing the default client */
 
+/* The default client.  */
 static GnomeClient *default_client= NULL;
+
+/* Forward declaration for our parsing function.  */
+static error_t client_parse_func (int key, char *arg,
+				  struct argp_state *state);
+
+/* Command-line arguments understood by this module.  */
+static struct argp_option arguments[] =
+{
+  { "sm-client-id", -1, N_("ID"), OPTION_HIDDEN,
+    N_("Specify session management id"), -2 },
+  { NULL, 0, NULL, 0, NULL, 0 }
+};
+
+/* Definition of our command-line parser.  */
+static struct argp parser =
+{
+  arguments,			/* Argument vector.  */
+  client_parse_func,		/* Parsing function.  */
+  NULL,				/* Docs.  */
+  NULL,				/* More docs.  */
+  NULL,				/* Children.  */
+  NULL,				/* Help filter.  */
+  PACKAGE			/* Translation domain.  */
+};
+
+
+/* Parse command-line arguments we recognize.  */
+static error_t
+client_parse_func (int key, char *arg, struct argp_state *state)
+{
+  if (key == -1)
+    {
+      /* Found our argument.  Set the session id.  */
+      g_assert (default_client != NULL);
+      gnome_client_set_id (default_client, arg);
+    }
+  else if (key == ARGP_KEY_SUCCESS)
+    {
+      /* We're done, we think.  */
+      g_assert (default_client != NULL);
+      gnome_client_connect (default_client);
+    }
+  else
+    return ARGP_ERR_UNKNOWN;
+
+  return 0;
+}
 
 static void
 default_client_connect (GnomeClient *client,
@@ -143,7 +191,7 @@ default_client_connect (GnomeClient *client,
   
   /* FIXME */
   XChangeProperty (gdk_display, gdk_leader_window,
-		   XInternAtom(gdk_display, "SM_CLIENT_ID", False),
+		   XInternAtom(gdk_display, sm_client_id_prop, False),
 		   XA_STRING, 8, GDK_PROP_MODE_REPLACE,
 		   (unsigned char *) client_id,
 		   strlen(client_id));               
@@ -154,15 +202,13 @@ default_client_disconnect (GnomeClient *client,
 			   gpointer client_data)
 {
   XDeleteProperty(gdk_display, gdk_leader_window,
-		  XInternAtom(gdk_display, "SM_CLIENT_ID", False));
+		  XInternAtom(gdk_display, sm_client_id_prop, False));
 }
 
-void
-gnome_default_client_init (gint argc, gchar *argv[])
+static void
+default_client_init (void)
 {
-  g_return_if_fail (default_client == NULL);
-  
-  default_client= gnome_client_new_without_connection (argc, argv);
+  default_client= gnome_client_new_without_connection ();
 
   if (default_client)
     {
@@ -170,14 +216,18 @@ gnome_default_client_init (gint argc, gchar *argv[])
 			  GTK_SIGNAL_FUNC (default_client_connect), NULL);
       gtk_signal_connect (GTK_OBJECT (default_client), "disconnect",
 			  GTK_SIGNAL_FUNC (default_client_disconnect), NULL);
+      gnome_parse_register_arguments (&parser);
     }
 }
 
 GnomeClient *
-gnome_get_default_client (void)
+gnome_client_new_default (void)
 {
+  if (! default_client)
+    default_client_init ();
   return default_client;
 }
+
 
 /*****************************************************************************/
 /* GTK-class managing functions */
@@ -360,11 +410,11 @@ gnome_real_client_destroy (GtkObject *object)
 /* 'gnome_client' public member functions */
 
 GnomeClient *
-gnome_client_new (gint argc, gchar *argv[])
+gnome_client_new (void)
 {
   GnomeClient *client;
   
-  client= gnome_client_new_without_connection (argc, argv);
+  client= gnome_client_new_without_connection ();
   
   gnome_client_connect (client);
 
@@ -372,29 +422,22 @@ gnome_client_new (gint argc, gchar *argv[])
 }
 
 GnomeClient *
-gnome_client_new_without_connection (gint argc, gchar *argv[])
+gnome_client_new_without_connection (void)
 {
   GnomeClient *client;
   gchar       *client_id;
   
   client= gtk_type_new (gnome_client_get_type ());
 
-  /* Preset the CloneCommand, RestartCommand and Program properties.  */
-  client->clone_command   = array_init_from_arg (argc, argv);
-  client->restart_command = array_init_from_arg (argc, argv);
+  /* Preset the CloneCommand, RestartCommand and Program properties.
+     FIXME: having a default would be cool, but it is probably hard to
+     get this to interact correctly with the distributed command-line
+     parsing.  */
+  client->clone_command   = NULL;
+  client->restart_command = NULL;
   
-  if (argc > 0)
-    client->program= g_strdup (argv[0]);
+  client->program = g_strdup (program_invocation_name);
 
-  /* Set the 'client_id', if there was a client id specified on the
-   *  command line.  */
-  client_id= array_has_sm_client_id_arg (client->restart_command);
-  if (client_id)
-    {
-      client->previous_id= g_strdup (client_id);
-      client->client_id= g_strdup (client_id);
-    }
-  
   return client;
 }
 
@@ -502,23 +545,20 @@ gnome_client_set_clone_command (GnomeClient *client,
   g_return_if_fail (GNOME_IS_CLIENT (client));
 
   /* Usually the CloneCommand property is required.  If you unset the
-   * CloneCommand property, we will use the RestartCommand instead,
-   * but remove the '--sm-client-id' option.  */
+     CloneCommand property, we will use the RestartCommand instead.  */
   if (argv == NULL)
     {
       g_return_if_fail (argc == 0);
-      
+
       array_free (client->clone_command);
       client->clone_command = array_copy (client->restart_command);
-      
-      array_remove_sm_client_id_arg (&client->clone_command);
     }
   else
     {
       array_free (client->clone_command);
       client->clone_command = array_init_from_arg (argc, argv);
     }
-  
+
 #ifdef HAVE_LIBSM
   client_set_prop_from_array (client, SmCloneCommand, 
 			      client->clone_command);
@@ -690,19 +730,22 @@ gnome_client_set_restart_command (GnomeClient *client,
      it.  */
   g_return_if_fail (argc != 0);
   g_return_if_fail (argv != NULL);
-  
+
   array_free (client->restart_command);
   client->restart_command = array_init_from_arg (argc, argv);
 
-  /* Set the '--sm-client-id' option, if we are connected.  */
+  /* Set the '--sm-client-id' option, if we are connected.  We set it
+     in a copy, though, and not the original.  This lets us re-use the
+     original for the clone command if we must.  */
   if (GNOME_CLIENT_CONNECTED (client))
-    array_insert_sm_client_id_arg (&client->restart_command, 
-				   client->client_id);
-  
+    {
+      gchar **dup = array_copy (client->restart_command);
+      array_insert_sm_client_id_arg (&dup, client->client_id);
+
 #ifdef HAVE_LIBSM
-  client_set_prop_from_array (client, SmRestartCommand, 
-			      client->restart_command);
+      client_set_prop_from_array (client, SmRestartCommand, dup);
 #endif /* HAVE_LIBSM */
+    }
 }
 
 
@@ -851,14 +894,9 @@ gnome_real_client_connect (GnomeClient *client,
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
   
-  /* We must modify the RestartCommand and CloneCommand
-   * properties.  */
-  array_insert_sm_client_id_arg (&client->restart_command, 
-				 client->client_id);
   if (client->clone_command == 0)
     client->clone_command = array_copy (client->restart_command);
-  array_remove_sm_client_id_arg (&client->clone_command);
-  
+
 #ifdef HAVE_LIBSM
   /* We now set all non empty properties.  */
   client_set_prop_from_array (client, SmCloneCommand,
@@ -879,8 +917,13 @@ gnome_real_client_connect (GnomeClient *client,
 			       client->program);
   client_set_prop_from_array (client, SmResignCommand,
 			      client->resign_command);
-  client_set_prop_from_array (client, SmRestartCommand,
-			      client->restart_command);
+
+  {
+    gchar **dup = array_copy (client->restart_command);
+    array_insert_sm_client_id_arg (&dup, client->client_id);
+    client_set_prop_from_array (client, SmRestartCommand, dup);
+  }
+
   if (client->restart_style != -1)
     client_set_prop_from_gchar (client, SmRestartStyleHint,
 				(gchar)client->restart_style);
@@ -1228,7 +1271,7 @@ client_set_prop_from_array (GnomeClient *client,
   gint    argc;
   gchar **ptr;
   gint    i;
-  
+
   SmProp prop, *proplist[1];
   SmPropValue *vals;
   
@@ -1456,113 +1499,38 @@ gnome_client_marshal_signal_2 (GtkObject     *object,
 /*****************************************************************************/
 /* array helping functions - these function should be replaced by g_lists */
 
-gchar *
-array_has_sm_client_id_arg (gchar **array)
-{
-  gchar **ptr;
-  
-  for (ptr = array ; *ptr ; ptr++)
-    if (strcmp (*ptr, sm_client_id_arg_name) == 0)
-      {
-	ptr++;
-	if (*ptr)
-	  return *ptr;
-	else
-	  {
-	    /* The '--sm-client-id' option was the last command line
-	     * arguement.  '--sm-client-id' needs a parameter, so we
-	     * remove the '--sm-client-id' option, because it is
-	     * useless.  */
-	    ptr--; 
-	    g_free (*ptr);
-	    *ptr= NULL; 
-	  } 
-      }
-
-  return NULL;
-}
-
-void
+static void
 array_insert_sm_client_id_arg (gchar ***array, gchar *client_id)
 {
-  gchar *old_id;
-
-  g_return_if_fail (client_id != NULL);
-  
-  old_id= array_has_sm_client_id_arg (*array);
-  
-  if (old_id)
-    {
-      if (strcmp (old_id, client_id) != 0)
-	{
-	  gchar **ptr;
-	  
-	  g_free (old_id);
-	  
-	  for (ptr = *array ; *ptr ; ptr++)
-	    if (strcmp (*ptr, sm_client_id_arg_name) == 0)
-	      {
-		ptr++;
-		*ptr= g_strdup (client_id);
-		break;
-	      }
-	}
-    }
-  else
-    {
-      gchar **new_array;
-      gchar **ptr1;
-      gchar **ptr2;
-      gint    argc;
-      
-      for (ptr1 = *array, argc = 0; *ptr1 ; ptr1++ , argc++) /* LOOP */;
-      
-      ptr2 = new_array = g_new (gchar*, argc + 3);
-      ptr1 = *array;
-      
-      *ptr2 = *ptr1;
-      ptr1++; ptr2++;
-      *ptr2 = g_strdup (sm_client_id_arg_name);
-      ptr2++;
-      *ptr2 = g_strdup (client_id);
-      ptr2++;
-      for (; *ptr1; ptr1++, ptr2++)
-	*ptr2 = *ptr1;
-      *ptr2= NULL;
-      
-      g_free (*array);
-      *array = new_array;
-    }
-}
-
-void
-array_remove_sm_client_id_arg (gchar ***array)
-{
+  gchar **new_array;
   gchar **ptr1;
   gchar **ptr2;
-  
-  if (array_has_sm_client_id_arg (*array) == NULL)
-    return;
-  
-  for (ptr1 = ptr2 = *array ; *ptr1 ; ptr1++)
-    if (strcmp (*ptr1, sm_client_id_arg_name) == 0)
-      {
-	g_free (*ptr1);	ptr1++;
+  gint    argc;
+      
+  g_return_if_fail (client_id != NULL);
 
-	if (*ptr1)
-	  g_free (*ptr1);
-      }
-    else
-      {
-	*ptr2 = *ptr1; ptr2++;
-      }
+  for (ptr1 = *array, argc = 0; *ptr1 ; ptr1++ , argc++) /* LOOP */;
 
+  ptr2 = new_array = g_new (gchar*, argc + 3);
+  ptr1 = *array;
+
+  *ptr2 = *ptr1;
+  ptr1++; ptr2++;
+  *ptr2 = g_strdup (sm_client_id_arg_name);
+  ptr2++;
+  *ptr2 = g_strdup (client_id);
+  ptr2++;
+  for (; *ptr1; ptr1++, ptr2++)
+    *ptr2 = *ptr1;
   *ptr2= NULL;
+
+  g_free (*array);
+  *array = new_array;
 }
 
 /*****************************************************************************/
 
-void
+static void
 array_free (gchar **array)
 {
   gchar **ptr;
@@ -1578,7 +1546,7 @@ array_free (gchar **array)
     }
 }
 
-gchar **
+static gchar **
 array_init_from_arg (gint argc, gchar *argv[])
 {
   gchar **array;
@@ -1604,7 +1572,7 @@ array_init_from_arg (gint argc, gchar *argv[])
   return array;
 }
 
-gchar **
+static gchar **
 array_copy (gchar **source)
 {
   gchar **array;

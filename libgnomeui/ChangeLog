@@ -1,3 +1,44 @@
+Sun Mar  8 17:59:38 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* Makefile.am (INCLUDES): Added @SUPPORTINCS@.
+	(ted_demo_LDADD): Added @LIBSUPPORT@.
+	(stock_demo_LDADD): Likewise.
+
+Sat Mar  7 01:21:57 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-client.c (gnome_client_new_without_connection): Don't look
+	for magic argument.
+	(default_client_connect): Use sm_client_id_prop.
+	(default_client_disconnect): Likewise.
+	(array_has_sm_client_id_arg): Removed.
+	(array_insert_sm_client_id_arg): Now static.
+	(gnome_client_set_clone_command): Duplicate RestartCommand if
+	clone command is freed.
+	(gnome_real_client_connect): Only add magic option to duplicate of
+	restart command.
+	(gnome_client_set_restart_command): Likewise.
+	(array_copy): Now static.
+	(array_init_from_arg): Likewise.
+	(array_free): Likewise.
+	(array_remove_sm_client_id_arg): Removed.
+
+	* stock_demo.c (main): Use new form of gnome_init.
+	* ted_demo.c (main): Use new form of gnome_init.
+
+Fri Mar  6 21:46:37 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-client.c (gnome_get_default_client): Removed.
+	(gnome_client_new_default): New function.
+	(default_client_init): Renamed, now static.
+	(arguments): New static.
+	(parser): Likewise.
+	(client_parse_func): New function.
+	(gnome_client_new): Changed interface.
+	(gnome_client_new_without_connection): Likewise.
+
+	* gnome-init.c (gnome_init): Pass argv[0], not *argv[0], to
+	gnome_rc_parse.
+
 Sat Mar  8 02:35:33 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock-{imlib,xpm}.h: foolishly tried to make remaning stock

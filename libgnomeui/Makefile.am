@@ -2,7 +2,7 @@
 
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
-INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir)
+INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) @SUPPORTINCS@
 
 lib_LTLIBRARIES = libgnomeui.la
 noinst_PROGRAMS = ted_demo stock_demo
@@ -79,13 +79,13 @@ libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 ted_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
 	$(top_builddir)/libgnome/libgnome.la 		\
-	$(LIBGNOMEUI_LIBS) \
+	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 stock_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
 	$(top_builddir)/libgnome/libgnome.la 		\
-	$(LIBGNOMEUI_LIBS) \
+	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 dist-hook:
