@@ -386,7 +386,15 @@ gnome_dialog_button_clicked (GtkWidget   *button,
      and then destroy the dialog themselves too. */
 
   if (self_destruct) {
+#ifdef GNOME_ENABLE_DEBUG
+    g_print("self_destruct set, closing dialog.\n");
+    fflush(stdout);
+#endif
+#if 0
     gnome_dialog_close(GNOME_DIALOG(dialog));
+#endif
+    gtk_widget_hide(dialog);
+    gtk_widget_destroy(dialog);
   }
 }
 
@@ -396,12 +404,15 @@ static gint gnome_dialog_key_pressed (GtkWidget * d, GdkEventKey * e)
 
   if(e->keyval == GDK_Escape)
     {
-      gnome_dialog_close(GNOME_DIALOG(d));
 #ifdef GNOME_ENABLE_DEBUG
       g_print("Escape pressed, closing dialog\n");
       fflush(stdout);
 #endif
-      return FALSE; /* Stop the event? is this TRUE or FALSE? */
+      g_warning("Escape accelerator temporarily disabled.\n");
+#if 0
+      gnome_dialog_close(GNOME_DIALOG(d));
+#endif
+      return TRUE; /* Stop the event? is this TRUE or FALSE? */
     } 
 
   /* Have to call parent's handler, or the widget wouldn't get any 
@@ -409,7 +420,7 @@ static gint gnome_dialog_key_pressed (GtkWidget * d, GdkEventKey * e)
      may have been destroyed. */
   if (GTK_WIDGET_CLASS(parent_class)->key_press_event)
     return (* (GTK_WIDGET_CLASS(parent_class)->key_press_event))(d, e);
-  else return TRUE; /* ??? */
+  else return FALSE; /* ??? */
 }
 
 static void gnome_dialog_destroy (GtkObject *dialog)
@@ -432,10 +443,15 @@ void gnome_dialog_close(GnomeDialog * dialog)
   
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
-  
+
   gtk_signal_emit_by_name (GTK_OBJECT (dialog), "delete_event",
 			   NULL, &delete_handled);
+
   if (!delete_handled) {
+#ifdef GNOME_ENABLE_DEBUG
+    g_print("delete_event not handled, destroying dialog.\n");
+    fflush(stdout);
+#endif
     gtk_widget_hide(GTK_WIDGET(dialog));
     gtk_widget_destroy (GTK_WIDGET (dialog));
   }

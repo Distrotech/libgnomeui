@@ -1,3 +1,13 @@
+Fri May  1 02:04:06 1998  Havoc Pennington  <hp@pobox.com>
+
+        * gnome-dialog.c (gnome_dialog_clicked): Revert to old destroy
+ 	behavior.  
+
+	* gnome-dialog.c (gnome_dialog_key_pressed): Return TRUE if the
+ 	event was handled (???). Mostly it shouldn't really make a
+ 	difference though, for this function. Disable Escape functionality
+ 	for now.
+	
 Thu Apr 30 23:13:31 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.[ch]: added an accelerator table and
