@@ -2,13 +2,14 @@
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Emese Kovacs <emese@gnome.hu>, 2002.
 # Szabolcs Ban <shooby@gnome.hu>, 2002.
+# Andras Timar <timar@gnome.hu>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2002-12-04 15:47+0100\n"
-"Last-Translator: Szabolcs Ban <shooby@gnome.hu>\n"
+"POT-Creation-Date: 2003-07-07 18:03+0200\n"
+"PO-Revision-Date: 2003-07-08 15:00+0200\n"
+"Last-Translator: Andras Timar <timar@gnome.hu>\n"
 "Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr "1. gyermekelem"
 
 #: demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr "Hint az 1. gyermekelemhez"
+msgstr "Javaslat az 1. gyermekelemhez"
 
 #: demos/mdi_demo.c:131
 msgid "Child Item 2"
@@ -28,7 +29,7 @@ msgstr "2. gyermekelem"
 
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr "Hint a 2. gyermekelemhez"
+msgstr "Javaslat a 2. gyermekelemhez"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -47,9 +48,8 @@ msgid "Translated by"
 msgstr "Fordította"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Köszönet"
+msgstr "_Köszönet"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -139,6 +139,7 @@ msgstr "%s névjegye"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fájl"
 
@@ -196,6 +197,7 @@ msgid "_Game"
 msgstr "_Játék"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Súgó"
 
@@ -219,16 +221,16 @@ msgstr "M_entés"
 
 #: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr "A jelenlegi fájl mentése"
+msgstr "Az aktuális fájl mentése"
 
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Mentés má_sként..."
+msgstr "Me_ntés másként..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "A jelenlegi fájl mentése más néven"
+msgstr "Az aktuális fájl mentése más néven"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
@@ -246,7 +248,7 @@ msgstr "_Nyomtatás..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr "A jelenlegi fájl nyomtatása"
+msgstr "Az aktuális fájl nyomtatása"
 
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
@@ -255,7 +257,7 @@ msgstr "_Oldalbeállítás..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "Oldalbeállítások a jelenlegi nyomtatóhoz"
+msgstr "Oldalbeállítások az aktuális nyomtatóhoz"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
@@ -264,7 +266,7 @@ msgstr "_Bezárás"
 
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr "A jelenlegi fájl bezárása"
+msgstr "Az aktuális fájl bezárása"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
@@ -331,7 +333,7 @@ msgstr "_Újra"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "A visszavonás visszavonása"
+msgstr "A visszavont művelet ismételt végrehajtása"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -386,17 +388,17 @@ msgstr "Az alkalmazás beállításai"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Névjegy"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Az alkalmazás névjegye"
 
 #: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
-msgstr "Min_den kijelölése"
+msgstr "_Mindent kijelöl"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
@@ -417,9 +419,9 @@ msgstr "Új ablakot hoz létre"
 msgid "_Close This Window"
 msgstr "_Ablak bezárása"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr "A jelenlegi ablak bezárása"
+msgstr "Az aktuális ablak bezárása"
 
 #.
 #. * The "Game" menu
@@ -466,7 +468,7 @@ msgstr "A visszavont lépés ismételt végrehajtása"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
-msgstr "_Tipp"
+msgstr "_Javaslat"
 
 #: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
@@ -487,7 +489,7 @@ msgstr "Játék be_fejezése"
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
-msgstr "A jelenlegi játék befejezése"
+msgstr "Az aktuális játék befejezése"
 
 #: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
@@ -592,7 +594,7 @@ msgstr "A felhasználótól elvárható aktivitás"
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "A HTTP-proxy megköveteli a bejelentkezést.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -600,18 +602,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Be kell jelentkezned a(z) \"%s\" eléréséhez.\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "A jelszavad titkosítás nélkül kerül átvitelre."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "A jelszavad titkosítással kerül átvitelre."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Hitelesítés szükséges"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -856,11 +860,11 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
-msgstr "Keresőablak címkéje"
+msgstr "A Tallózás párbeszédablak címe"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
-msgstr "A kereső párbeszédablak címe"
+msgstr "A Tallózás párbeszédablak címe"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
@@ -870,9 +874,7 @@ msgstr "Könyvtár bejegyzés"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"Ha a fájlbeíró mező könyvtárnevek és teljes elérési utak beírására is "
-"használható."
+msgstr "A fájlbeíró mező könyvtárnevek és teljes elérési utak beírására is használható-e."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -880,7 +882,7 @@ msgstr "Modális"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
-msgstr "Ha a fájlbetöltő ablak modális (kizárólagos) lehet."
+msgstr "A fájtallózó ablak modális-e (kizárólagos)?"
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
@@ -896,7 +898,7 @@ msgstr "Alapértelmezett könyvtár"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
-msgstr "A fájlkereső ablak alapértelmezett útvonala."
+msgstr "A tallózó párbeszédablak alapértelmezett könyvtára"
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
@@ -940,11 +942,11 @@ msgstr "Útvonal a fájlhoz"
 
 #: libgnomeui/gnome-file-entry.c:681
 msgid "_Browse..."
-msgstr "_Keresés..."
+msgstr "_Tallózás..."
 
 #: libgnomeui/gnome-file-entry.c:682
 msgid "Pop up a file selector to choose a file"
-msgstr "A fájlkezelő ablakot dobja fel egy fájl kiválasztásához"
+msgstr "Megjelenik egy fájlkezelő-ablak egy fájl kiválasztásához"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -952,7 +954,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaÁáBbCcDdEÉeéFfGgHhIÍiíJjKkLlMmNnOoÓóÖöŐőPpQqRrSsTtUuÚúŰűVvWwXxYyZz"
+msgstr "AaÁáBbCcDdEÉeéFfGgHhIÍiíJjKkLlMmNnOoÓóÖöŐőPpQqRrSsTtUuÚúüÜŰűVvWwXxYyZz"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -960,7 +962,7 @@ msgstr "Betűkészlet választása"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr "A kijelölő párbeszédablak címe"
+msgstr "A kiválasztó párbeszédablak címsora"
 
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
@@ -988,35 +990,35 @@ msgstr "A kiválasztott GtkFont"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "Szövegelőnézet"
+msgstr "Szöveg előnézete"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "Szövegelőnézet a párbeszédablakban"
+msgstr "A párbeszédablakban megjelenített előnézeti szöveg"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr "Betűkészlet használata a címkéken"
+msgstr "Címke betűkészlete"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Font-infó módban ezt a betűkészletet használja a címkéken"
+msgstr "Betűkészletinfó módban ezt a betűkészletet használja a címkéken"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr "Betűméret a címkéken"
+msgstr "Címke betűmérete"
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "Font-infó módban ezt a betűméretet használja a címkéken"
+msgstr "Betűkészletinfó módban ezt a betűméretet használja a címkéken"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr "Méret mutatása"
+msgstr "Méret megjelenítése"
 
 #: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr "Méret mutatása infó módban"
+msgstr "Méret megjelenítése a betűkészlet-információs módban"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
@@ -1033,12 +1035,7 @@ msgid ""
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr ""
-"A(z) %s alkalmazás megpróbálta megváltoztatni a beállításokat, de a "
-"rendszergazda vagy az operációs rendszer terjesztője letiltotta ezt a "
-"lehetőséget. A kiválasztott beállítások közül egyeseket nem lehet "
-"alkalmazni, vagy nem lehet ezeket legközelebb ezzel az alkalmazással "
-"visszaállítani."
+msgstr "A(z) \"%s\" alkalmazás megpróbálta megváltoztatni a beállításokat, de a rendszergazda vagy az operációs rendszer terjesztője letiltotta ezt a lehetőséget. A kiválasztott beállítások közül egyeseket nem lehet alkalmazni, vagy nem lehet ezeket legközelebb ezzel az alkalmazással visszaállítani."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1102,7 +1099,7 @@ msgstr "Az ikonválasztó párbeszédablak címkéje."
 
 #: libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
-msgstr "Kép könyvtár"
+msgstr "Kép könyvtára"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
@@ -1152,7 +1149,7 @@ msgstr "Ikonválasztó"
 
 #: libgnomeui/gnome-icon-entry.c:764
 msgid "Please pick the icon you want."
-msgstr "Kérlek válassz ki egy ikont."
+msgstr "Válassz ki egy ikont."
 
 #: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
@@ -1164,7 +1161,7 @@ msgstr "Ez a gomb egy ikonválasztó párbeszédablakot nyit meg."
 
 #: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
-msgstr "Keresés"
+msgstr "Tallózás"
 
 #: libgnomeui/gnome-icon-entry.c:1014
 msgid "Icon path"
@@ -1212,11 +1209,11 @@ msgstr "Üzenet"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "_Felhasználói név:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Jelszó:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1232,7 +1229,7 @@ msgstr "Nincs kép"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
-msgstr "Kép előnézet"
+msgstr "Kép előnézete"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
@@ -1263,15 +1260,15 @@ msgstr "Sans 14"
 
 #: libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
-msgstr "Táblázat kerete"
+msgstr "Táblázatszegély"
 
 #: libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
-msgstr "Táblára kitöltése"
+msgstr "Táblázat kitöltése"
 
 #: libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
-msgstr "Pontozott lista"
+msgstr "Listajeles felsorolás"
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
@@ -1279,7 +1276,7 @@ msgstr "Számozott lista"
 
 #: libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
-msgstr "Behúzás növelése"
+msgstr "Behúzás"
 
 #: libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
@@ -1362,81 +1359,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "További információért látogass el a GNOME Application Crash oldalra"
 
-#~ msgid "_Credits"
-#~ msgstr "_Köszönet"
-
-#~ msgid "Exit the test"
-#~ msgstr "Kilépés a tesztből"
-
-#~ msgid "Find _Again"
-#~ msgstr "Következő _találat"
-
-#~ msgid "Both text and icons"
-#~ msgstr "Szöveg és ikon"
-
-#~ msgid "E_xit"
-#~ msgstr "_Kilépés"
-
-#~ msgid "Exit the program"
-#~ msgstr "Kilépés a programból"
-
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "GConf hiba részletei: %s\n"
-
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Beállítandó Gdk hibakereső flag-ek"
-
-#~ msgid "FLAGS"
-#~ msgstr "FLAGS"
-
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Törlendő Gdk hibakareső flag-ek"
-
-#~ msgid "Make X calls synchronous"
-#~ msgstr "Szinkron X hívások beállítása"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr ""
-#~ "Ne használj X osztott memória kiterjesztést (shared memory extension)"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Program neve az ablakkezelő számára"
-
-#~ msgid "NAME"
-#~ msgstr "NAME"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Program osztálya az ablakkezelő számára"
-
-#~ msgid "CLASS"
-#~ msgstr "CLASS"
-
-#~ msgid "HOST"
-#~ msgstr "HOST"
-
-#~ msgid "PORT"
-#~ msgstr "PORT"
-
-#~ msgid "STYLE"
-#~ msgstr "STYLE"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Beállítandó Gtk+ hibakereső flag-ek"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Törlendő Gtk+ hibakereső flag-ek"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "Minden figyelmeztetés (warning) végzetes"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "További Gtk modul betöltése"
-
-#~ msgid "MODULE"
-#~ msgstr "MODULE"
-
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
-
-#~ msgid "Author"
-#~ msgstr "Szerző"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Kilépés a tesztből"
