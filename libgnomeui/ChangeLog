@@ -1,5 +1,8 @@
 1999-09-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-color-picker.c (key_pressed): Provide a way to cancel a
+	color picker dialog by pressing escape.
+
 	* gnome-init.c (gnome_segv_handle): Use abort instead of exit().
 
 1999-09-07  Havoc Pennington  <hp@pobox.com>

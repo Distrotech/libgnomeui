@@ -14,7 +14,8 @@
 #include <gtk/gtkcompat.h>
 #include "gnome-color-picker.h"
 #include <libgnome/gnome-i18nP.h>
-
+#include <gdk/gdkkeysyms.h>
+#include <gtk/gtkbutton.h>
 
 /* These are the dimensions of the color sample in the color picker */
 #define COLOR_PICKER_WIDTH  20
@@ -428,6 +429,16 @@ cs_ok_clicked (GtkWidget *widget, gpointer data)
 			 r, g, b, a);
 }
 
+static int
+key_pressed (GtkWidget *widget, GdkEventKey *event, GnomeColorPicker *cp)
+{
+	if (event->keyval == GDK_Escape){
+		gtk_button_clicked (GTK_BUTTON (GTK_COLOR_SELECTION_DIALOG (widget)->cancel_button));
+		return 1;
+	}
+	return 0;
+}
+
 static void
 gnome_color_picker_clicked (GtkButton *button)
 {
@@ -455,6 +466,8 @@ gnome_color_picker_clicked (GtkButton *button)
 				    (GtkSignalFunc) cs_destroy,
 				    cp);
 
+		gtk_signal_connect (GTK_OBJECT (cp->cs_dialog), "key_press_event",
+				    (GtkSignalFunc) key_pressed, cp);
 		gtk_signal_connect (GTK_OBJECT (csd->ok_button), "clicked",
 				    (GtkSignalFunc) cs_ok_clicked,
 				    cp);
