@@ -88,7 +88,8 @@ libgnomeui_la_SOURCES = \
 	gtkspell.c			\
 	gtk-clock.c			\
 	gtk-ted.c			\
-	gtkdial.c
+	gtkdial.c			\
+	gtkpixmapmenuitem.c
 
 ## this lists all the non-generated headers
 gnome_headers = \
@@ -156,6 +157,7 @@ gnome_headers = \
 	gtkspell.h			\
 	gtk-clock.h			\
 	gtk-ted.h			\
+	gtkpixmapmenuitem.h		\
 	libgnomeui.h
 
 libgnomeuiinclude_HEADERS = \

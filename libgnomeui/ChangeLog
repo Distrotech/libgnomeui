@@ -1,3 +1,12 @@
+1998-12-01  Dietmar Maurer  <dm@vlsivie.tuwien.ac.at>
+
+	* gnome-app-helper.[ch]: use the new gtk_pixmap_menu_item.
+	Removed indent_missing_pixmap parameter, since correct
+	indentation is handled by gtk_pixmap_menu_item. 
+	create_pixmap_and_label replaced by create_label.
+
+	* gtkpixmapmenuitem.c: added new remove function.
+	
 1998-12-01  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c, gnome-mdi-child.[ch], gnome-mdi-generic-child.[ch]

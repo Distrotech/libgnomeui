@@ -83,7 +83,7 @@ gnome_popup_menu_new (GnomeUIInfo *uiinfo)
 	uibdata.destroy_func = NULL;
 
 	menu = gtk_menu_new ();
-	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menu), uiinfo, &uibdata, NULL, FALSE, TRUE, 0);
+	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menu), uiinfo, &uibdata, NULL, FALSE, 0);
 
 	return menu;
 }

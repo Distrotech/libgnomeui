@@ -46,9 +46,7 @@
 #include "gnome-pixmap.h"
 #include "gnome-preferences.h"
 #include "gnome-stock.h"
-
-#define MENU_PIXMAP_LABEL_SPACING 2	/* Spacing between pixmap and label in 
-					   menu items */
+#include "gtkpixmapmenuitem.h"
 
 
 /* Creates a pixmap appropriate for items.  The window parameter is required 
@@ -61,7 +59,7 @@
 
 static GtkWidget *
 create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, 
-		gpointer pixmap_info, int indent_missing_pixmaps)
+		gpointer pixmap_info)
 {
 	GtkWidget *pixmap;
 	char *name;
@@ -80,10 +78,6 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type,
 		break;
 
 	case GNOME_APP_PIXMAP_NONE:
-		if (indent_missing_pixmaps)
-			pixmap = gnome_stock_pixmap_widget (window, 
-					GNOME_STOCK_MENU_BLANK);
-
 		break;
 
 	case GNOME_APP_PIXMAP_FILENAME:
@@ -107,57 +101,24 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type,
 	return pixmap;
 }
 
-/* Creates an hbox with a pixmap and a menu item label in it.  It uses the 
- * settings from gnome-preferences to decide whether the menu item should have 
- * a pixmap or not.  It returns the created label widget in the *label 
- * argument.  If indent_missing_pixmaps is TRUE, then it will use an empty 
- * pixmap even if no pixmap is specified, otherwise it will not insert a 
- * pixmap.  It will also return the underlined letter's keyval if keyval is 
- * not NULL.
- */
+/* Creates  a menu item label. It will also return the underlined 
+ * letter's keyval if keyval is not NULL. */
 static GtkWidget *
-create_pixmap_and_label (char *label_text, GnomeUIPixmapType pixmap_type, 
-		gpointer pixmap_info, int indent_missing_pixmaps, 
-		GtkWidget **label, guint *keyval)
+create_label (char *label_text, guint *keyval)
 {
-	GtkWidget *hbox;
-	GtkWidget *pixmap;
 	guint kv;
+	GtkWidget *label;
 
-	hbox = gtk_hbox_new (FALSE, MENU_PIXMAP_LABEL_SPACING);
+	label = gtk_accel_label_new (label_text);
 
-	/* Create the pixmap */
-
-	/* FIXME: this should later allow for on-the-fly configuration of 
-	 * whether pixmaps are displayed or not
-	 */
-
-	if (gnome_config_get_bool("/Gnome/Icons/MenusUseIcons=true"))
-		pixmap = create_pixmap (hbox, pixmap_type, pixmap_info, 
-				indent_missing_pixmaps);
-	else
-		pixmap = NULL;
-
-	if (pixmap) {
-		gtk_box_pack_start (GTK_BOX (hbox), pixmap, FALSE, FALSE, 0);
-		if (gnome_preferences_get_menus_have_icons ())
-			gtk_widget_show (pixmap);
-	}
-
-	/* Create the label */
-
-	*label = gtk_accel_label_new (label_text);
-
-	kv = gtk_label_parse_uline (GTK_LABEL (*label), label_text);
+	kv = gtk_label_parse_uline (GTK_LABEL (label), label_text);
 	if (keyval)
 		*keyval = kv;
 
-	gtk_misc_set_alignment (GTK_MISC (*label), 0.0, 0.5);
-	gtk_box_pack_start (GTK_BOX (hbox), *label, TRUE, TRUE, 0);
-	gtk_widget_show (*label);
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+	gtk_widget_show (label);
 
-	gtk_widget_show (hbox);
-	return hbox;
+	return label;
 }
 
 /* Creates the accelerator for the specified uiinfo item's hotkey */
@@ -203,11 +164,10 @@ setup_underlined_accelerator (GtkAccelGroup *accel_group,
 static void
 create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group, 
 		GnomeUIBuilderData *uibdata, GtkAccelGroup *accel_group, 
-		int insert_shortcuts, int indent_missing_pixmaps, 
-		GtkAccelGroup *menu_accel_group)
+		int insert_shortcuts, GtkAccelGroup *menu_accel_group)
 {
-	GtkWidget *contents;
 	GtkWidget *label;
+	GtkWidget *pixmap;
 	char *i8l_label;
 	guint keyval;
 
@@ -215,15 +175,36 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 
 	switch (uiinfo->type) {
 	case GNOME_APP_UI_SEPARATOR:
+	        uiinfo->widget = gtk_menu_item_new ();
+		break;
 	case GNOME_APP_UI_ITEM:
 	case GNOME_APP_UI_SUBTREE:
 		if (is_radio) {
 			uiinfo->widget = gtk_radio_menu_item_new (*radio_group);
 			*radio_group = gtk_radio_menu_item_group
 				(GTK_RADIO_MENU_ITEM (uiinfo->widget));
-		} else
-			uiinfo->widget = gtk_menu_item_new ();
+		} else {
 
+		        /* Create the pixmap */
+
+		        /* FIXME: this should later allow for on-the-fly configuration of 
+			 * whether pixmaps are displayed or not ???
+			 */
+
+		        if ((uiinfo->pixmap_type != GNOME_APP_PIXMAP_NONE) &&
+			    gnome_config_get_bool("/Gnome/Icons/MenusUseIcons=true") && 
+			    gnome_preferences_get_menus_have_icons()) {
+			        uiinfo->widget = gtk_pixmap_menu_item_new ();
+				pixmap = create_pixmap (uiinfo->widget, uiinfo->pixmap_type, 
+							uiinfo->pixmap_info);
+				if (pixmap) {
+				        gtk_widget_show(pixmap);
+					gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(uiinfo->widget),
+									pixmap);
+				}
+			} else 
+			        uiinfo->widget = gtk_menu_item_new ();
+		}
 		break;
 
 	case GNOME_APP_UI_TOGGLEITEM:
@@ -251,10 +232,8 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	 * the empty string to the header at the beginning of the .pot file. */
 
 	i8l_label = (uiinfo->label [0] == '\0') ? "" : _(uiinfo->label);
-	contents = create_pixmap_and_label (i8l_label, uiinfo->pixmap_type, 
-			uiinfo->pixmap_info, indent_missing_pixmaps, &label, 
-			&keyval);
-	gtk_container_add (GTK_CONTAINER (uiinfo->widget), contents);
+	label = create_label (i8l_label, &keyval);
+	gtk_container_add (GTK_CONTAINER (uiinfo->widget), label);
 
 	gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (label), 
 			uiinfo->widget);
@@ -284,8 +263,7 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 static int
 create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
 		GnomeUIBuilderData *uibdata, GtkAccelGroup *accel_group, 
-		int indent_missing_pixmaps, GtkAccelGroup *menu_accel_group, 
-		gint pos)
+		GtkAccelGroup *menu_accel_group, gint pos)
 {
 	GSList *group;
 
@@ -300,7 +278,6 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 		case GNOME_APP_UI_ITEM:
 			create_menu_item (uiinfo, TRUE, &group, uibdata, 
 					accel_group, FALSE, 
-					indent_missing_pixmaps, 
 					menu_accel_group);
 
 			gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
@@ -344,7 +321,6 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 	FILE *file;
 	GnomeHelpMenuEntry *entry;
 	GtkWidget *item;
-	GtkWidget *contents;
 	GtkWidget *label;
 	guint keyval;
 
@@ -391,9 +367,8 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 		entry->path = g_strdup (buf);
 
 		item = gtk_menu_item_new ();
-		contents = create_pixmap_and_label
-			(s, GNOME_APP_PIXMAP_NONE, NULL, TRUE, &label, &keyval);
-		gtk_container_add(GTK_CONTAINER (item), contents);
+		label = create_label (s, &keyval);
+		gtk_container_add(GTK_CONTAINER (item), label);
 		setup_underlined_accelerator(NULL, menu_accel_group, item, 
 				keyval);
 
@@ -469,7 +444,6 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name,
  * @uiinfo:
  * @accel_group:
  * @insert_shortcuts:
- * @indent_missing_pixmaps:
  * @pos:
  *
  * Description:
@@ -478,7 +452,7 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name,
 void
 gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
 		GtkAccelGroup *accel_group, int insert_shortcuts, 
-		int indent_missing_pixmaps, gint pos)
+		gint pos)
 {
 	GnomeUIBuilderData uibdata;
 
@@ -494,7 +468,7 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 
 	gnome_app_fill_menu_custom (menu_shell, uiinfo, &uibdata,
 				    accel_group, insert_shortcuts,
-				    indent_missing_pixmaps, pos);
+				    pos);
 	return;
 }
 
@@ -506,7 +480,6 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
  * @uibdata:
  * @accel_group:
  * @insert_shortcuts:
- * @indent_missing_pixmaps:
  * @pos:
  *
  * Description:
@@ -515,7 +488,7 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 void
 gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
 		GnomeUIBuilderData *uibdata, GtkAccelGroup *accel_group, 
-		int insert_shortcuts, int indent_missing_pixmaps, gint pos)
+		int insert_shortcuts, gint pos)
 {
 	GnomeUIBuilderData *orig_uibdata;
 	GtkAccelGroup *menu_accel_group;
@@ -550,7 +523,6 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 			/* Create the radio item group */
 			pos = create_radio_menu_items (menu_shell, 
 					uiinfo->moreinfo, uibdata, accel_group, 
-					indent_missing_pixmaps, 
 					menu_accel_group, pos);
 			break;
 
@@ -560,7 +532,6 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 		case GNOME_APP_UI_SUBTREE:
 			create_menu_item (uiinfo, FALSE, NULL, uibdata, 
 					accel_group, insert_shortcuts, 
-					indent_missing_pixmaps, 
 					menu_accel_group);
 
 			if (uiinfo->type == GNOME_APP_UI_SUBTREE) {
@@ -574,7 +545,7 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 				gnome_app_fill_menu_custom
 					(GTK_MENU_SHELL (menu), 
 					 uiinfo->moreinfo, orig_uibdata, 
-					 accel_group, FALSE, TRUE, 0);
+					 accel_group, FALSE, 0);
 			}
 
 			gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
@@ -709,7 +680,7 @@ gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo,
 
 	menubar = gtk_menu_bar_new ();
 	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menubar), uiinfo, uibdata, 
-			app->accel_group, TRUE, FALSE, 0);
+			app->accel_group, TRUE, 0);
 	gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
 }
 
@@ -758,7 +729,7 @@ create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio,
 		/* Create the icon */
 
 		pixmap = create_pixmap (GTK_WIDGET (toolbar), 
-				uiinfo->pixmap_type, uiinfo->pixmap_info, TRUE);
+				uiinfo->pixmap_type, uiinfo->pixmap_info);
 
 		/* Create the toolbar item */
 
@@ -1332,7 +1303,7 @@ gnome_app_insert_menus_custom (GnomeApp *app, gchar *path,
 	
 	/* create menus and insert them */
 	gnome_app_fill_menu_custom (GTK_MENU_SHELL (parent), uiinfo, uibdata, 
-			app->accel_group, TRUE, FALSE, pos);
+			app->accel_group, TRUE, pos);
 }
 
 

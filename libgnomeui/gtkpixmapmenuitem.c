@@ -11,6 +11,8 @@ static void gtk_pixmap_menu_item_draw          (GtkWidget              *widget,
 static gint gtk_pixmap_menu_item_expose        (GtkWidget              *widget,
 					        GdkEventExpose         *event);
 
+/* we must override the following functions */
+
 static void gtk_pixmap_menu_item_map           (GtkWidget        *widget);
 static void gtk_pixmap_menu_item_size_allocate (GtkWidget        *widget,
 						GtkAllocation    *allocation);
@@ -20,6 +22,8 @@ static void gtk_pixmap_menu_item_forall        (GtkContainer    *container,
 						gpointer         callback_data);
 static void gtk_pixmap_menu_item_size_request  (GtkWidget        *widget,
 						GtkRequisition   *requisition);
+static void gtk_pixmap_menu_item_remove        (GtkContainer *container,
+						GtkWidget    *child);
 
 					       
 static GtkMenuItemClass *parent_class = NULL;
@@ -80,7 +84,7 @@ gtk_pixmap_menu_item_class_init (GtkPixmapMenuItemClass *klass)
   widget_class->size_request = gtk_pixmap_menu_item_size_request;
 
   container_class->forall = gtk_pixmap_menu_item_forall;
-
+  container_class->remove = gtk_pixmap_menu_item_remove;
   menu_item_class->toggle_size = INDENT;
 }
 
@@ -239,3 +243,30 @@ gtk_pixmap_menu_item_size_request (GtkWidget      *widget,
     
 }
 
+static void
+gtk_pixmap_menu_item_remove (GtkContainer *container,
+			     GtkWidget    *child)
+{
+  GtkBin *bin;
+  gboolean widget_was_visible;
+
+  g_return_if_fail (container != NULL);
+  g_return_if_fail (GTK_IS_PIXMAP_MENU_ITEM (container));
+  g_return_if_fail (child != NULL);
+  g_return_if_fail (GTK_IS_WIDGET (child));
+
+  bin = GTK_BIN (container);
+  g_return_if_fail ((bin->child == child || 
+		     (GTK_PIXMAP_MENU_ITEM(container)->pixmap == child)));
+
+  widget_was_visible = GTK_WIDGET_VISIBLE (child);
+  
+  gtk_widget_unparent (child);
+  if (bin->child == child)
+    bin->child = NULL; 
+  else 
+    GTK_PIXMAP_MENU_ITEM(container)->pixmap = NULL;
+  
+  if (widget_was_visible)
+    gtk_widget_queue_resize (GTK_WIDGET (container));
+}
