@@ -81,10 +81,6 @@ typedef enum {
 	SYNC_REMOVE
 } SyncType;
 
-enum {
-	ARG_0,
-};
-
 static guint gil_signals[LAST_SIGNAL] = { 0 };
 
 
@@ -1863,35 +1859,6 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 }
 
 static void
-gil_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
-{
-	GnomeIconList *gil;
-
-	gil = GNOME_ICON_LIST (object);
-
-	switch (arg_id) {
-	default:
-		break;
-	}
-}
-
-static void
-gil_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
-{
-	GnomeIconList *gil;
-	GnomeIconListPrivate *priv;
-
-	gil = GNOME_ICON_LIST (object);
-	priv = gil->_priv;
-
-	switch (arg_id) {
-	default:
-		arg->type = GTK_TYPE_INVALID;
-		break;
-	}
-}
-
-static void
 gil_class_init (GilClass *gil_class)
 {
 	GtkObjectClass *object_class;
@@ -1944,8 +1911,6 @@ gil_class_init (GilClass *gil_class)
 
 	object_class->destroy = gil_destroy;
 	gobject_class->finalize = gil_finalize;
-	object_class->set_arg = gil_set_arg;
-	object_class->get_arg = gil_get_arg;
 
 	widget_class->size_request = gil_size_request;
 	widget_class->size_allocate = gil_size_allocate;

@@ -70,14 +70,17 @@ struct _GnomeColorPickerPrivate {
 };
 
 enum {
-	ARG_0,
-	ARG_DITHER,
-	ARG_USE_ALPHA,
-	ARG_TITLE,
-	ARG_RED,
-	ARG_GREEN,
-	ARG_BLUE,
-	ARG_ALPHA
+	PROP_0,
+	PROP_DITHER,
+	PROP_USE_ALPHA,
+	PROP_TITLE,
+	PROP_RED,
+	PROP_GREEN,
+	PROP_BLUE,
+	PROP_ALPHA,
+	PROP_COLOR,
+	PROP_COLOR_GDK,
+	PROP_COLOR_RGBA
 };
 
 enum {
@@ -107,12 +110,16 @@ static void drag_data_received		(GtkWidget        *widget,
 					 guint             info,
 					 guint32           time,
 					 GnomeColorPicker *cpicker);
-static void gnome_color_picker_set_arg (GtkObject *object,
-					GtkArg *arg,
-					guint arg_id);
-static void gnome_color_picker_get_arg (GtkObject *object,
-					GtkArg *arg,
-					guint arg_id);
+static void gnome_color_picker_set_property (GObject            *object,
+					     guint               param_id,
+					     const GValue       *value,
+					     GParamSpec         *pspec,
+					     const gchar        *trailer);
+static void gnome_color_picker_get_property (GObject            *object,
+					     guint               param_id,
+					     GValue             *value,
+					     GParamSpec         *pspec,
+					     const gchar        *trailer);
 
 
 static guint color_picker_signals[LAST_SIGNAL] = { 0 };
@@ -170,40 +177,54 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
 				GTK_TYPE_UINT,
 				GTK_TYPE_UINT);
 
+	gobject_class->get_property = gnome_color_picker_get_property;
+	gobject_class->set_property = gnome_color_picker_set_property;
 
-	gtk_object_add_arg_type("GnomeColorPicker::dither",
-				GTK_TYPE_BOOL,
-				GTK_ARG_READWRITE,
-				ARG_DITHER);
-	gtk_object_add_arg_type("GnomeColorPicker::use_alpha",
-				GTK_TYPE_BOOL,
-				GTK_ARG_READWRITE,
-				ARG_USE_ALPHA);
-	gtk_object_add_arg_type("GnomeColorPicker::title",
-				GTK_TYPE_POINTER,
-				GTK_ARG_READWRITE,
-				ARG_TITLE);
-	gtk_object_add_arg_type("GnomeColorPicker::red",
-				GTK_TYPE_UINT,
-				GTK_ARG_READWRITE,
-				ARG_RED);
-	gtk_object_add_arg_type("GnomeColorPicker::green",
-				GTK_TYPE_UINT,
-				GTK_ARG_READWRITE,
-				ARG_GREEN);
-	gtk_object_add_arg_type("GnomeColorPicker::blue",
-				GTK_TYPE_UINT,
-				GTK_ARG_READWRITE,
-				ARG_BLUE);
-	gtk_object_add_arg_type("GnomeColorPicker::alpha",
-				GTK_TYPE_UINT,
-				GTK_ARG_READWRITE,
-				ARG_ALPHA);
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_DITHER,
+                 g_param_spec_boolean ("dither", NULL, NULL,
+				       TRUE,
+				       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_USE_ALPHA,
+                 g_param_spec_boolean ("use_alpha", NULL, NULL,
+				       FALSE,
+				       (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_TITLE,
+                 g_param_spec_string ("title", NULL, NULL,
+				      NULL,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_RED,
+                 g_param_spec_uint ("red", NULL, NULL,
+				    0, 255, 0,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_GREEN,
+                 g_param_spec_uint ("green", NULL, NULL,
+				    0, 255, 0,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_BLUE,
+                 g_param_spec_uint ("blue", NULL, NULL,
+				    0, 255, 0,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_ALPHA,
+                 g_param_spec_uint ("alpha", NULL, NULL,
+				    0, 255, 0,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
 
 	object_class->destroy = gnome_color_picker_destroy;
 	gobject_class->finalize = gnome_color_picker_finalize;
-	object_class->get_arg = gnome_color_picker_get_arg;
-	object_class->set_arg = gnome_color_picker_set_arg;
 	widget_class->state_changed = gnome_color_picker_state_changed;
 	widget_class->realize = gnome_color_picker_realize;
 	widget_class->style_set = gnome_color_picker_style_set;
@@ -999,87 +1020,99 @@ gnome_color_picker_get_title (GnomeColorPicker *cp)
 }
 
 static void
-gnome_color_picker_set_arg (GtkObject *object,
-			    GtkArg *arg,
-			    guint arg_id)
+gnome_color_picker_set_property (GObject            *object,
+				 guint               param_id,
+				 const GValue       *value,
+				 GParamSpec         *pspec,
+				 const gchar        *trailer)
 {
 	GnomeColorPicker *self;
 	gushort r, g, b, a;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_COLOR_PICKER (object));
+
 	self = GNOME_COLOR_PICKER (object);
 
-	switch (arg_id) {
-	case ARG_DITHER:
-		gnome_color_picker_set_dither(self, GTK_VALUE_BOOL(*arg));
+	switch (param_id) {
+	case PROP_DITHER:
+		gnome_color_picker_set_dither(self, g_value_get_boolean (value));
 		break;
-	case ARG_USE_ALPHA:
-		gnome_color_picker_set_use_alpha(self, GTK_VALUE_BOOL(*arg));
+	case PROP_USE_ALPHA:
+		gnome_color_picker_set_use_alpha(self, g_value_get_boolean (value));
 		break;
-	case ARG_TITLE:
-		gnome_color_picker_set_title(self, GTK_VALUE_STRING(*arg));
+	case PROP_TITLE:
+		gnome_color_picker_set_title(self, g_value_get_string (value));
 		break;
-	case ARG_RED:
+	case PROP_RED:
 		gnome_color_picker_get_i16(self, &r, &g, &b, &a);
 		gnome_color_picker_set_i16(self,
-					   GTK_VALUE_UINT(*arg), g, b, a);
+					   g_value_get_uint (value), g, b, a);
 		break;
-	case ARG_GREEN:
+	case PROP_GREEN:
 		gnome_color_picker_get_i16(self, &r, &g, &b, &a);
 		gnome_color_picker_set_i16(self,
-					   r, GTK_VALUE_UINT(*arg), b, a);
+					   r, g_value_get_uint (value), b, a);
 		break;
-	case ARG_BLUE:
+	case PROP_BLUE:
 		gnome_color_picker_get_i16(self, &r, &g, &b, &a);
 		gnome_color_picker_set_i16(self,
-					   r, g, GTK_VALUE_UINT(*arg), a);
+					   r, g, g_value_get_uint (value), a);
 		break;
-	case ARG_ALPHA:
+	case PROP_ALPHA:
 		gnome_color_picker_get_i16(self, &r, &g, &b, &a);
 		gnome_color_picker_set_i16(self,
-					   r, g, b, GTK_VALUE_UINT(*arg));
+					   r, g, b, g_value_get_uint (value));
 		break;
 	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 }
 
 static void
-gnome_color_picker_get_arg (GtkObject *object,
-			    GtkArg *arg,
-			    guint arg_id)
+gnome_color_picker_get_property (GObject            *object,
+				 guint               param_id,
+				 GValue             *value,
+				 GParamSpec         *pspec,
+				 const gchar        *trailer)
 {
 	GnomeColorPicker *self;
 	gushort val;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_COLOR_PICKER (object));
+
 	self = GNOME_COLOR_PICKER (object);
 
-	switch (arg_id) {
-	case ARG_DITHER:
-		GTK_VALUE_BOOL(*arg) = gnome_color_picker_get_dither(self);
+	switch (param_id) {
+	case PROP_DITHER:
+		g_value_set_boolean (value, gnome_color_picker_get_dither(self));
 		break;
-	case ARG_USE_ALPHA:
-		GTK_VALUE_BOOL(*arg) = gnome_color_picker_get_use_alpha(self);
+	case PROP_USE_ALPHA:
+		g_value_set_boolean (value, gnome_color_picker_get_use_alpha(self));
 		break;
-	case ARG_TITLE:
-		GTK_VALUE_STRING(*arg) = g_strdup(self->_priv->title);
+	case PROP_TITLE:
+		g_value_set_string (value, self->_priv->title);
 		break;
-	case ARG_RED:
+	case PROP_RED:
 		gnome_color_picker_get_i16(self, &val, NULL, NULL, NULL);
-		GTK_VALUE_UINT(*arg) = val;
+		g_value_set_uint (value, val);
 		break;
-	case ARG_GREEN:
+	case PROP_GREEN:
 		gnome_color_picker_get_i16(self, NULL, &val, NULL, NULL);
-		GTK_VALUE_UINT(*arg) = val;
+		g_value_set_uint (value, val);
 		break;
-	case ARG_BLUE:
+	case PROP_BLUE:
 		gnome_color_picker_get_i16(self, NULL, NULL, &val, NULL);
-		GTK_VALUE_UINT(*arg) = val;
+		g_value_set_uint (value, val);
 		break;
-	case ARG_ALPHA:
+	case PROP_ALPHA:
 		gnome_color_picker_get_i16(self, NULL, NULL, NULL, &val);
-		GTK_VALUE_UINT(*arg) = val;
+		g_value_set_uint (value, val);
 		break;
 	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 }
