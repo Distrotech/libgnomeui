@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-05-27 16:51+0200\n"
-"PO-Revision-Date: 2002-05-21 22:43+0200\n"
+"POT-Creation-Date: 2002-05-28 09:51+0200\n"
+"PO-Revision-Date: 2002-05-28 10:01+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -178,13 +178,12 @@ msgid "Received invalid color data\n"
 msgstr "Prijaté neplatné údaje o farbe\n"
 
 #: libgnomeui/gnome-color-picker.c:457
-#, fuzzy
 msgid "Color Selector"
-msgstr "Vymaza» oznaèené"
+msgstr "Výber farby"
 
 #: libgnomeui/gnome-color-picker.c:458
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "Otvori» dialógové okno na zadanie farby"
 
 #: libgnomeui/gnome-color-picker.c:480
 msgid "Pick a color"
@@ -235,13 +234,12 @@ msgid "Date"
 msgstr "Dátum"
 
 #: libgnomeui/gnome-dateedit.c:752
-#, fuzzy
 msgid "Select Date"
-msgstr "Vybra» súbor"
+msgstr "Vybra» dátum"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Vybra» dátum z kalendára"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -249,13 +247,12 @@ msgid "Calendar"
 msgstr "Kalendár"
 
 #: libgnomeui/gnome-dateedit.c:784
-#, fuzzy
 msgid "Select Time"
-msgstr "Vybra» súbor"
+msgstr "Vybra» èas"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr ""
+msgstr "Vybra» èas zo zoznamu"
 
 #: libgnomeui/gnome-dateedit.c:1001
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -395,7 +392,7 @@ msgstr "Farba pou¾itá na nakreslenie linky"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
-msgstr ""
+msgstr "Toto tlaèítko vás presunie na URI, ktoré je na òom uvedené."
 
 #: libgnomeui/gnome-href.c:392
 msgid ""
@@ -525,6 +522,7 @@ msgstr "Rada pre polo¾ku 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "Súbo_r"
 
@@ -582,6 +580,7 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomocník"
 
@@ -772,11 +771,11 @@ msgstr "Konfigurova» aplikáciu"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "O progr_ame"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informácie o tomto programe"
 
@@ -803,7 +802,7 @@ msgstr "Vytvori» nové okno"
 msgid "_Close This Window"
 msgstr "_Zatvori» toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvori» aktuálne okno"
 
@@ -1053,14 +1052,12 @@ msgid "Select file"
 msgstr "Vybra» súbor"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path"
-msgstr "_Vlo¾i»"
+msgstr "Cesta"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path to file"
-msgstr "Ulo¾i» aktuálny súbor"
+msgstr "Cesta k súboru"
 
 #: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
@@ -1068,7 +1065,7 @@ msgstr "_Prezera»..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "Zobrazi» okno pre výber súboru"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1221,29 +1218,28 @@ msgid "Preview"
 msgstr "Náhµad"
 
 #: libgnomeui/gnome-icon-entry.c:752
-#, fuzzy
 msgid "Icon selection dialog"
-msgstr "Titulok dialógového okna výberu"
+msgstr "Dialógové okno výberu ikony"
 
 #: libgnomeui/gnome-icon-entry.c:753
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "Toto dialógové okno vám umo¾òuje vybra» ikonu."
 
 #: libgnomeui/gnome-icon-entry.c:759
 msgid "Icon selector"
-msgstr ""
+msgstr "Výber ikony"
 
 #: libgnomeui/gnome-icon-entry.c:760
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "Prosím vyberte ikonu, ktorú chcete."
 
 #: libgnomeui/gnome-icon-entry.c:984
 msgid "Icon Selector"
-msgstr ""
+msgstr "Výber ikony"
 
 #: libgnomeui/gnome-icon-entry.c:985
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "Toto tlaèítko otvorí okno, ktoré vám umo¾ní zvoli» si ikonu."
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Browse"
@@ -1251,13 +1247,14 @@ msgstr "Prezera»"
 
 #: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
-msgstr ""
+msgstr "Cesta k ikone"
 
 #: libgnomeui/gnome-icon-entry.c:1011
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
+"Tu by ste mali zada» názov prieèinka, kde sú umiestnené obrázky ikon."
 
 #: libgnomeui/gnome-icon-sel.c:297
 #, c-format
@@ -1306,14 +1303,12 @@ msgid "No Image"
 msgstr "Bez obrázka"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
-#, fuzzy
 msgid "Image Preview"
-msgstr "Náhµad"
+msgstr "Náhµad obrázka"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
-#, fuzzy
 msgid "A preview of the image currently specified"
-msgstr "Aktuálne vybratý èas"
+msgstr "Náhµad aktuálne zadaného obrázka"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1342,5 +1337,6 @@ msgstr "%a %d.%m.%Y %H:%M"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ukonèi» test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukonèi» test"
