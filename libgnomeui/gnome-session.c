@@ -242,19 +242,25 @@ set_prop_from_argv (char *property, int argc, char *argv[])
 void
 gnome_session_set_discard_command (int argc, char *argv[])
 {
+#ifdef HAVE_LIBSM
   set_prop_from_argv (SmDiscardCommand, argc, argv);
+#endif
 }
 
 void
 gnome_session_set_restart_command (int argc, char *argv[])
 {
+#ifdef HAVE_LIBSM
   set_prop_from_argv (SmRestartCommand, argc, argv);
+#endif
 }
 
 void
 gnome_session_set_clone_command (int argc, char *argv[])
 {
+#ifdef HAVE_LIBSM
   set_prop_from_argv (SmCloneCommand, argc, argv);
+#endif
 }
 
 void

@@ -5,3 +5,4 @@ Makefile
 *.lo
 _libs
 .libs
+so_locations
