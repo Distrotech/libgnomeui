@@ -2144,6 +2144,26 @@ gnome_client_get_previous_id (GnomeClient *client)
 }
 
 /**
+ * gnome_client_get_desktop_id:
+ * @client: a #GnomeClient
+ * 
+ * Get the client ID of the desktop's current instance, i.e.  if
+ * you consider the desktop as a whole as a session managed app, this
+ * returns its session ID using a GNOME extension to session
+ * management. May return %NULL for apps not running under a recent
+ * version of gnome-session, apps should handle that case.
+ * 
+ * Return value: session ID of GNOME desktop instance, or %NULL if none
+ **/
+const gchar*
+gnome_client_get_desktop_id (GnomeClient *client)
+{
+  g_return_val_if_fail (GNOME_IS_CLIENT (client), NULL);
+
+  return g_getenv ("GNOME_DESKTOP_SESSION_ID");
+}
+
+/**
  * gnome_client_get_config_prefix
  * @client: Pointer to GNOME session client object.
  *
@@ -2160,10 +2180,12 @@ gnome_client_get_previous_id (GnomeClient *client)
 const gchar *
 gnome_client_get_config_prefix (GnomeClient *client)
 {
-  if (!client || !GNOME_IS_CLIENT (client))
+  g_return_val_if_fail (client == NULL || GNOME_IS_CLIENT (client), NULL);
+  
+  if (!client)
       client = master_client;
 
-  if (!client || !GNOME_IS_CLIENT (client))
+  if (!client)
       return gnome_client_get_global_config_prefix (client);
 
   if (!client->config_prefix)

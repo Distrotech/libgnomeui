@@ -434,6 +434,12 @@ const gchar*       gnome_client_get_id                 (GnomeClient *client);
    manager tries to maintain the same id from one session to another. */
 const gchar*       gnome_client_get_previous_id        (GnomeClient *client);
 
+/* Get the client ID of the desktop's current instance, i.e.  if you
+ * consider the desktop as a whole as a session managed app, this
+ * returns its session ID (GNOME extension to SM)
+ */
+const gchar*       gnome_client_get_desktop_id   (GnomeClient *client);
+
 /* Use the following functions, if you want to interact with the user
    during a "save_yourself" handler without being restricted to using 
    the dialog based commands gnome_client_save_[any/error]_dialog.  

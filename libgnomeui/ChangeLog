@@ -1,3 +1,10 @@
+2001-10-31  Havoc Pennington  <hp@redhat.com>
+
+	* gnome-client.c (gnome_client_get_config_prefix): fix some utter
+	braindamage (if you passed in the wrong type, it silently returned
+	the master client)
+	(gnome_client_get_desktop_id): new function
+
 2001-10-30  jacob berkman  <jacob@ximian.com>
 
 	* libgnomeui-2.0.pc.in (Cflags): use the correct includedir
