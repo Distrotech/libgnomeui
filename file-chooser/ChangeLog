@@ -1,3 +1,33 @@
+2003-09-03  Federico Mena Quintero  <federico@ximian.com>
+
+	* TODO: Removed the "extra widget" bit, implemented with the
+	following:
+
+	* gtkfilechooser.h: Added gtk_file_chooser_{set,get}_extra_widget().
+
+	* gtkfilechooser.c (gtk_file_chooser_base_init): Install an
+	"extra-widget" interface property.
+	(gtk_file_chooser_set_extra_widget): Implemented.
+	(gtk_file_chooser_get_extra_widget): Implemented.
+
+	* gtkfilechooserutils.h (GtkFileChooserProp): Added
+	GTK_FILE_CHOOSER_PROP_EXTRA_WIDGET.
+
+	* gtkfilechooserutils.c (_gtk_file_chooser_install_properties):
+	Added the "extra-widget" property.
+
+	* gtkfilechooserimpldefault.c (struct _GtkFileChooserImplDefault):
+	Added an extra_widget field.
+	(gtk_file_chooser_impl_default_set_property): Handle the
+	"extra-widget" property.
+	(gtk_file_chooser_impl_default_get_property): Likewise.
+	(set_preview_widget): Fix the call gtk_container_remove().  Also,
+	we don't need to ref/sink/unref the preview widget, as that gets
+	already done by container_add/remove.
+	(set_extra_widget): New utility function.
+
+	* testfilechooser.c (main): Add an extra widget.
+
 2003-09-02  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystem.h: s/nonexistant/nonexistent
