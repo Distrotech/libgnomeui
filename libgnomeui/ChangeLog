@@ -1,3 +1,8 @@
+Tue Mar 10 15:01:05 1998  Federico Mena <federico@nuclecu.unam.mx>
+
+	* gnome-color-selector.c (gnome_color_selector_new): Use the
+	proper visuals for the color selectors.
+
 Mon Mar  9 23:59:41 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtk-ted.c (gtk_ted_load_layout): Remove gracious printf.

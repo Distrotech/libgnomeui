@@ -204,9 +204,16 @@ gnome_color_selector_new(SetColorFunc set_color_func,
 	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
 	gtk_container_add(GTK_CONTAINER(alignment), frame);
 	gtk_widget_show(frame);
-	
+
+	gtk_widget_push_visual (gtk_preview_get_visual ());
+	gtk_widget_push_colormap (gtk_preview_get_cmap ());
+
 	gcs->preview = gtk_preview_new(GTK_PREVIEW_COLOR);
 	gtk_preview_size(GTK_PREVIEW(gcs->preview), PREVIEW_WIDTH, PREVIEW_HEIGHT);
+
+	gtk_widget_pop_colormap ();
+	gtk_widget_pop_visual ();
+	
 	gtk_container_add(GTK_CONTAINER(frame), gcs->preview);
 	gtk_widget_show(gcs->preview);
 
