@@ -52,6 +52,7 @@ extern "C" {
 #define GTK_CAULDRON_IGNOREESCAPE	(0x1L<<7)
 #define GTK_CAULDRON_IGNOREENTER	(0x1L<<8)
 #define GTK_CAULDRON_GRAB		(0x1L<<9)
+#define GTK_CAULDRON_PARENT		(0x1L<<10)
 
 typedef void (*GtkCauldronNextArgCallback) (gint cauldron_type, gpointer user_data, void *result);
 
@@ -73,16 +74,21 @@ extern gchar *GTK_CAULDRON_ESCAPE;
 /* GTK_CAULDRON_TYPE_CALLBACK : */
 typedef GtkWidget *(*GtkCauldronCustomCallback) (GtkWidget * widget, gpointer user_data);
 
-
 /* for straight C usage */
-gchar *gtk_dialog_cauldron (const gchar * title, glong options,
-			    const gchar * fmt, ...);
+gchar *gtk_dialog_cauldron (const gchar * title, glong options, ...);
+/*
+    i.e. either
+	gchar *gtk_dialog_cauldron (const gchar * title, glong options, gchar *fmt, ...);
+    or if GTK_CAULDRON_PARENT is given along in `options', then,
+	gchar *gtk_dialog_cauldron (const gchar * title, glong options, GtkWindow *parent, gchar *fmt, ...);
+*/
 
 /* for interpreters */
 gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options,
 				  const gchar * format,
 				  GtkCauldronNextArgCallback next_arg,
-				  gpointer user_data);
+				  gpointer user_data,
+				  GtkWidget *parent);
 
 #ifdef __cplusplus
 }

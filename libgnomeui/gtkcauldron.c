@@ -21,6 +21,7 @@
 #define HAVE_GNOME
 #include <gtk/gtk.h>
 #ifdef HAVE_GNOME
+#include "libgnomeui/gnome-preferences.h"
 #include "libgnomeui/gnome-file-entry.h"
 #include "libgnomeui/gnome-number-entry.h"
 #include "libgnomeui/gnome-stock.h"
@@ -502,7 +503,7 @@ static GtkWidget *gtk_label_new_with_ampersand (const gchar * _label)
  * @user_data: data to pass to user function
  *
  * This function parses a format
- * string exactly like gtk_dialog_cauldron()P, however it derives
+ * string exactly like gtk_dialog_cauldron(), however it derives
  * arguments for the @format string from a user function @next_arg.
  * gtk_dialog_cauldron_parse() is primarily used for creating
  * wrappers for interpreted languages.
@@ -514,17 +515,18 @@ static GtkWidget *gtk_label_new_with_ampersand (const gchar * _label)
  * types used for specifying and returning widget data. They are
  * enumerated as <type>GTK_CAULDRON_TYPE_*</type> in the header file gtkcauldron.h.
  *
- * Retuns NULL is returned if the dialog is
- * cancelled. GTK_CAULDRON_ENTERP is returned if the user pressed
+ * NULL is returned if the dialog is
+ * cancelled. GTK_CAULDRON_ENTER is returned if the user pressed
  * enter (return-on-enter can be overridden - see global options
- * below), and GTK_CAULDRON_ESCAPEP is returned if the user
+ * below), and GTK_CAULDRON_ESCAPE is returned if the user
  * pressed escape. Otherwise the label of the widget that was used to
  * exit the dialog is returned.
  *
  */
 gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gchar * format,
-		 GtkCauldronNextArgCallback next_arg, gpointer user_data)
+		 GtkCauldronNextArgCallback next_arg, gpointer user_data, GtkWidget *parent_)
 {
+    GtkWidget *parent = 0;
     GtkWidget *w = 0, *window, *f = 0;
     GSList *radio_group = 0;
     gchar *p, *return_result = 0, *fmt;
@@ -544,13 +546,21 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
     gint ntext_widget = 0;
     gchar *text[MAX_TEXT_WIDGETS];
 
+/* this ensure that if we link with an old code, we don't get segfaults */
+    if (options & GTK_CAULDRON_PARENT)
+	parent == parent_;
+
     stack = malloc (sizeof (*stack));
     memset (stack, 0, sizeof (*stack));
 
     if (options & GTK_CAULDRON_SPACE_MASK)
 	pixels_per_space = (options & GTK_CAULDRON_SPACE_MASK) >> GTK_CAULDRON_SPACE_SHIFT;
 
+#ifdef HAVE_GNOME
+    how = gnome_preferences_get_dialog_type ();
+#else
     how = GTK_WINDOW_DIALOG;
+#endif
     if (options & GTK_CAULDRON_TOPLEVEL)
 	how = GTK_WINDOW_TOPLEVEL;
     else if (options & GTK_CAULDRON_DIALOG)
@@ -558,12 +568,15 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
     else if (options & GTK_CAULDRON_POPUP)
 	how = GTK_WINDOW_POPUP;
     window = gtk_window_new (how);
+#ifdef HAVE_GNOME
+    gtk_window_set_position (GTK_WINDOW (window), gnome_preferences_get_dialog_position ());
+#else
     gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_MOUSE);
-    accel_table = gtk_accel_group_new ();
-    gtk_window_add_accel_group (GTK_WINDOW (window), accel_table);
-
+#endif
     if (title)
 	gtk_window_set_title (GTK_WINDOW (window), title);
+    accel_table = gtk_accel_group_new ();
+    gtk_window_add_accel_group (GTK_WINDOW (window), accel_table);
 
     d.result = &return_result;
     d.options = options;
@@ -1014,9 +1027,31 @@ gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gcha
 
     if (f)
 	gtk_widget_grab_focus (f);
-
+    if (parent) {
+	if (GTK_IS_WINDOW (parent)) {
+	    if ((unsigned long) parent != (unsigned long) window) {
+		gtk_window_set_transient_for (GTK_WINDOW (window), GTK_WINDOW (parent));
+#ifdef HAVE_GNOME
+		/* This code is duplicated in gnome-file-entry.c:browse-clicked.  If
+		 * a change is made here, update it there too. */
+		/* This code is duplicated in gnome-dialog.c:gnome_dialog_set_parent().  If
+		 * a change is made here, update it there too. */
+		if (gnome_preferences_get_dialog_centered ()) {
+		    gint x, y, w, h, window_x, window_y;
+		    if (GTK_WIDGET_VISIBLE (parent)) {
+			gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_NONE);
+			gdk_window_get_origin (GTK_WIDGET (parent)->window, &x, &y);
+			gdk_window_get_size (GTK_WIDGET (parent)->window, &w, &h);
+			window_x = x + w / 4;
+			window_y = y + h / 4;
+			gtk_widget_set_uposition (GTK_WIDGET (window), window_x, window_y);
+		    }
+		}
+#endif
+	    }
+	}
+    }
     gtk_main ();
-
     gtk_window_remove_accel_group (GTK_WINDOW (window), accel_table);
     gtk_object_destroy (GTK_OBJECT (window));
     
@@ -1104,12 +1139,17 @@ static void next_arg (gint type, va_list * ap, void *result)
  * exit the dialog is returned.
  * 
  */
-gchar *gtk_dialog_cauldron (const gchar * title, glong options, const gchar * format,...)
+gchar *gtk_dialog_cauldron (const gchar * title, glong options,...)
 {
     gchar *r;
+    GtkWidget *parent;
+    char *format;
     va_list ap;
-    va_start (ap, format);
-    r = gtk_dialog_cauldron_parse (title, options, format, (GtkCauldronNextArgCallback) next_arg, &ap);
+    va_start (ap, options);
+    if (options & GTK_CAULDRON_PARENT)
+	parent = va_arg (ap, GtkWidget *);
+    format = va_arg (ap, char *);
+    r = gtk_dialog_cauldron_parse (title, options, format, (GtkCauldronNextArgCallback) next_arg, &ap, parent);
     va_end (ap);
     return r;
 }				/* }}} main */
