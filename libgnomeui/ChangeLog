@@ -1,5 +1,7 @@
 2001-05-09  Martin Baulig  <baulig@suse.de>
 
+	* gnome-icon-selector-component.[ch]: Use the new GnomeSelector API.
+
 	* gnome-icon-selector.[ch]: Renamed to gnome-icon-selector-component.[ch].
 
 2001-05-09  Martin Baulig  <baulig@suse.de>
