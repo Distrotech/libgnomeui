@@ -1376,7 +1376,7 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 	use_label = gnome_config_get_bool("/Gnome/Icons/ButtonUseLabels=true");
 
 	if ((use_label) || (!use_icon) || (!pixmap)) {
-		label = gtk_label_new(text);
+		label = gtk_label_new(_(text));
 		gtk_widget_show(label);
 		gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 7);
 	}

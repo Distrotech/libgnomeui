@@ -1,3 +1,13 @@
+1999-11-02  Kjartan Maraas  <kmaraas@online.no>
+
+	* gnome-druid-page-standard.c: #include <config.h>
+	* gnome-druid-page-start.c: ditto.
+	* gnome-druid-page-finish.c: ditto.
+	* gnome-druid-page.c: ditto.
+	* gnome-druid.c: ditto.
+	* gnome-stock.c (gnome_pixmap_button): Marked label creation
+	with _() to make buttons translatable.
+
 1999-10-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (gnome_mdi_remove_view): if a registered object exists,
