@@ -1,3 +1,7 @@
+2002-01-04  Duarte Loreto <happyguy_pt@hotmail.com>
+
+        * configure.in: Added Portuguese (pt) to ALL_LINGUAS
+
 2001-12-28  jacob berkman  <jacob@ximian.com>
 
 	* glade/glade-gnome.c: don't include libgnomeuiP.h any more
