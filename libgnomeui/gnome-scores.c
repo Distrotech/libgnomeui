@@ -66,7 +66,7 @@ gnome_scores_new (  guint n_scores,
 	gchar     	tmp[10];
 	gchar     	*tmp2;
 	int i;
-	gchar * buttons[] = { GNOME_STOCK_BUTTON_OK, NULL };
+	const gchar * buttons[] = { GNOME_STOCK_BUTTON_OK, NULL };
 
 	gnome_dialog_constructv(GNOME_DIALOG(retval),
 				_("Top Ten"),

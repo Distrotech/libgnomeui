@@ -1,9 +1,36 @@
+Sun Jul 26 13:31:27 1998  Tom Tromey  <tromey@cygnus.com>
+
+	Some `-Wall -Wmissing-declarations' fixes:
+	* gnome-scores.c (gnome_scores_new): Changed type of `buttons' to
+	match gnome_dialog_constructv prototype.
+	* gnome-popupmenu.c (gnome_app_create_popup_menus_custom): Removed
+	unused variables.
+	* gnome-lamp.c (type_hash): Now static.
+	* gnome-init.c: Include libgnomeui/libgnomeui.h.
+	(gnome_init): Protect segv code with USE_SEGV_HANDLE.
+	(gnome_segv_handle): Likewise.
+	* gnome-icon-sel.c: Include <string.h>.
+	* gnome-entry.c (gnome_entry_load_history): Removed unused
+	variable.
+	(gnome_entry_save_history): Likewise.
+	* gnome-dns.c (gnome_dns_server_req): Now static.
+	(gnome_dns_create_server): Likewise.
+	(gnome_dns_callback): Likewise.
+	* gnome-dialog-util.c: Include gnome-dialog-util.h.
+	* gnome-client.c (client_set_prop_from_array_with_arg): Added cast
+	to avoid warning.
+	* gnome-app-helper.c (gnome_app_add_radio_menu_entries): Always
+	return a value.
+	(gnome_app_add_help_menu_entries): Likewise.
+	(gnome_app_insert_menus_custom): Removed unused variable.
+	* gnome-appbar.c: Include libgnomeui/gnome-preferences.h.
+	* gnome-app.c: Include libgnomeui/gnome-preferences.h.
+
 1998-07-27  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.[ch]: removed some unused variables and functions and
 	fixed some things that I forgot during the previous commit.
 	Thanks go to Tom Tromey for pointing things out and sending a patch.
-	
 
 1998-07-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 

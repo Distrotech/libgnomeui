@@ -443,7 +443,7 @@ static GdkColor gnome_lamp_purple  = { 0, 0xaaaa, 0x0000, 0xaaaa };
  * utils
  */
 
-GHashTable *type_hash(void)
+static GHashTable *type_hash(void)
 {
 	static GHashTable *hash = NULL;
 

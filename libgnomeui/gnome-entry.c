@@ -318,7 +318,6 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	int n;
 	char key[32];
 	char *value;
-	GSList *prefix_list;
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
@@ -358,7 +357,6 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	struct item *item;
 	int n;
 	char key[32];
-	GSList *prefix_list;
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));

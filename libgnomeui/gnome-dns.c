@@ -127,7 +127,7 @@ void gnome_dns_init (gint server_count)
 
 
 /* Send the request to the server. */
-void
+static void
 gnome_dns_server_req (gint server, const char *hostname) {
 	dns_server[server].in_use = TRUE;
 	gdk_input_add(dns_server[server].pipefd[0],
@@ -284,8 +284,8 @@ gnome_dns_abort (guint32 tag)
  *--------------------------------------------------------------
  */
 
-void gnome_dns_callback(gpointer serv_num, gint source,
-			GdkInputCondition condition)
+static void gnome_dns_callback(gpointer serv_num, gint source,
+			       GdkInputCondition condition)
 {
 	guint32 ip_addr;
 	gint server_num;
@@ -362,7 +362,7 @@ void gnome_dns_callback(gpointer serv_num, gint source,
  *--------------------------------------------------------------
  */
 
-gint gnome_dns_create_server(void)
+static gint gnome_dns_create_server(void)
 {
 	
 	int pid;

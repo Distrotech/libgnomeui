@@ -219,7 +219,7 @@ gnome_app_add_radio_menu_entries(GnomeApp *app,
 {
   GSList *group = NULL;
 
-  g_return_if_fail(menuinfo != NULL);
+  g_return_val_if_fail(menuinfo != NULL, -1);
   while (menuinfo->type != GNOME_APP_UI_ENDOFINFO)
     {
       if (menuinfo->type == GNOME_APP_UI_SEPARATOR) {
@@ -273,7 +273,7 @@ gnome_app_add_help_menu_entries(GnomeApp *app,
       /* some standard help page                             */
 /*      fprintf(stderr, "Unable to open %s\n", (topicFile) ? topicFile : "(null)"); */
       g_free(topicFile);
-      return;
+      return -1;
     }
   g_free(topicFile);
 
@@ -803,9 +803,7 @@ gnome_app_insert_menus_custom (GnomeApp *app,
 			       GnomeUIBuilderData *uibdata)
 {
   GtkWidget *parent;
-#ifdef GTK_HAVE_ACCEL_GROUP
-  GtkAccelGroup *ag;
-#else
+#ifndef GTK_HAVE_ACCEL_GROUP
   GtkAcceleratorTable *at;
 #endif
   gint pos;

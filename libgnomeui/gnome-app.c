@@ -13,6 +13,7 @@
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
+#include "libgnomeui/gnome-preferences.h"
 #include "gnome-app.h"
 #include <string.h>
 #include <gtk/gtk.h>

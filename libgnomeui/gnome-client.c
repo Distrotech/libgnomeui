@@ -1690,7 +1690,7 @@ client_set_prop_from_array_with_arg (GnomeClient *client,
 
   /* An argument with the client id.  */
   vals[1].length= strlen (arg_name);
-  vals[1].value = arg_name;
+  vals[1].value = (char *) arg_name;
   vals[2].length= strlen (client->client_id);
   vals[2].value = client->client_id;
 

@@ -76,9 +76,6 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 	GtkArg	  *temparg;
 	guint	  nargs = 0;
 
-	GtkAccelGroup *ag;
-	int set_accel;
-	
 	g_return_if_fail(app !=NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
 

@@ -3,7 +3,7 @@
  * This version by Havoc Pennington
  * Based on MozStatusbar widget, by Chris Toshok
  * In turn based on GtkStatusbar widget, from Gtk+,
- * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
+ * Copyright (C) 1995-1998 Peter Mattis, Spencer Kimball and Josh MacDonald
  * GtkStatusbar Copyright (C) 1998 Shawn T. Amundson
  *
  * This library is free software; you can redistribute it and/or
@@ -24,6 +24,7 @@
 #include "gnome-appbar.h"
 
 #include "libgnome/gnome-util.h"
+#include "libgnomeui/gnome-preferences.h"
 
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>

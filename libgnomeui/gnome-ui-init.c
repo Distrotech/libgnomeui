@@ -1,18 +1,21 @@
 #include <config.h>
+
 #include <errno.h>
 #include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <gtk/gtk.h>
-#include <gdk_imlib.h>
-#include "libgnome/libgnomeP.h"
 #include <argp.h>
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+
+#include <gtk/gtk.h>
+#include <gdk_imlib.h>
+
+#include "libgnome/libgnomeP.h"
 #include "gnome-preferences.h"
-#include "libgnomeui/gnome-client.h"
+#include "libgnomeui/libgnomeui.h"
 
 extern char *program_invocation_name;
 extern char *program_invocation_short_name;
@@ -21,7 +24,9 @@ extern void  gnome_client_init (void);
 extern void  gnome_type_init (void);
 
 static void gnome_rc_parse(gchar *command);
+#ifdef USE_SEGV_HANDLE
 static void gnome_segv_handle(int signum);
+#endif
 static GdkPixmap *imlib_image_loader(GdkWindow   *window,
 				     GdkColormap *colormap,
 				     GdkBitmap  **mask,
@@ -228,7 +233,7 @@ gnome_init (char *app_id, struct argp *app_args,
 {
 	error_t retval;
 
-#if 0
+#ifdef USE_SEGV_HANDLE
 	struct sigaction sa;
 
 	/* Debugging segv when you have a pointer grab is less than
@@ -275,7 +280,7 @@ gnome_init (char *app_id, struct argp *app_args,
 	gnome_config_set_sync_handler(sync_handler,NULL);
 	atexit(atexit_handler);
 
-#if 0
+#ifdef USE_SEGV_HANDLE
 	memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = (gpointer)gnome_segv_handle;
 	sigaction(SIGSEGV, &sa, NULL);
@@ -359,6 +364,7 @@ gnome_rc_parse (gchar *command)
 	g_free (apprc);
 }
 
+#ifdef USE_SEGV_HANDLE
 static void gnome_segv_handle(int signum)
 {
 	static int in_segv = 0;
@@ -414,6 +420,7 @@ static void gnome_segv_handle(int signum)
 	}
 	in_segv--;
 }
+#endif /* USE_SEGV_HANDLE */
 
 static GdkPixmap *
 imlib_image_loader(GdkWindow   *window,

@@ -21,6 +21,7 @@
 #include "gnome-messagebox.h"
 #include "gnome-types.h"
 #include "gnome-uidefs.h"
+#include "gnome-dialog-util.h"
 #include <gtk/gtk.h>
 
 static GtkWidget * show_ok_box(const gchar * message, const gchar * type,
