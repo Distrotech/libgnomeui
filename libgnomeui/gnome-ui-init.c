@@ -747,7 +747,8 @@ initialize_gtk_signal_relay (void)
 							    &signame, NULL))) {
 		int signums [5];
 		int nsigs, i;
-		
+		gboolean used_signame;
+
 		/*
 		 * XXX this is an incredible hack based on a compile-time
 		 * knowledge of what gtk widgets do what, rather than
@@ -778,12 +779,19 @@ initialize_gtk_signal_relay (void)
 			signums [0] = gtk_signal_lookup (signame, gtk_widget_get_type ());
 			nsigs = 1;
 		}
-		
-		for(i = 0; i < nsigs; i++)
-			if (signums [i] > 0)
+
+		used_signame = FALSE;
+		for(i = 0; i < nsigs; i++) {
+			if (signums [i] > 0) {
 				gtk_signal_add_emission_hook (signums [i],
 							      (GtkEmissionHook)relay_gtk_signal,
 							      signame);
+                                used_signame = TRUE;
+                        }
+                }
+
+                if(!used_signame)
+                        g_free(signame);
 	}
 	gnome_config_pop_prefix ();
 	
