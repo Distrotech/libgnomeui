@@ -1,3 +1,24 @@
+1998-06-07  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.c: Inclueded 'stdarg.h'.
+	(gnome_client_object_init): Preset 'static_args'.
+	(gnome_client_add_static_arg): New function.  Enables one to set
+ 	some command line options, which will always be added to the clone
+ 	and restart command.
+	(gnome_real_client_destroy): Free 'static_args'.
+	(client_set_prop_from_array_with_arg): Includes static arguments
+ 	into the command line, before sending them to the session manager.
+	(client_set_prop_from_glist): New function. Sets properties from a
+ 	list of string (Not yet used).
+
+	* gnome-init.c: Included 'libgnomeui/gnome-client.h'. New variable
+ 	'client'.
+	(our_gtk_parse_func): Adds the parsed gtk command line options as
+ 	static arguments to the master client.
+
+	* gnome-client.h: Added 'gnome_client_add_static_arg' declaration.
+	(struct _GnomeClient): Added member 'static_args'.
+
 1998-06-06  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-init.c (gnome_init): Added 'gnome_client_init' call.

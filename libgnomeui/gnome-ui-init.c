@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "gnome-preferences.h"
+#include "libgnomeui/gnome-client.h"
 
 extern char *program_invocation_name;
 extern char *program_invocation_short_name;
@@ -59,6 +60,9 @@ static int our_argc;
 /* Argument vector we construct.  */
 static char **our_argv;
 
+/* The master client.  */
+static GnomeClient *client;
+
 /* Called during argument parsing to handle various details.  */
 static error_t
 our_gtk_parse_func (int key, char *arg, struct argp_state *state)
@@ -67,12 +71,21 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 	{
 		/* This is some argument we defined.  We handle it by pushing
 		   the flag, and possibly the argument, onto our saved argument
-		   vector.  Later this is passed to gtk_init.  */
-		our_argv[our_argc++] = g_strconcat ("--",
+		   vector.  Later this is passed to gtk_init.
+
+		   Add our arguments as static argument to the master
+		   client.  */
+		our_argv[our_argc] = g_strconcat ("--",
 						    our_gtk_options[- key - 1].name,
 						    NULL);
+		gnome_client_add_static_arg (client, our_argv [our_argc++], NULL);
+		
 		if (arg)
-			our_argv[our_argc++] = g_strdup (arg);
+		  {
+		    
+		    our_argv[our_argc] = g_strdup (arg);
+		    gnome_client_add_static_arg (client, our_argv[our_argc++], NULL);
+		  }
 	}
 	else if (key == ARGP_KEY_INIT)
 	{
@@ -83,6 +96,10 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 		our_argv = (char **) malloc (2 * (state->argc + 1) * sizeof (char *));
 		our_argc = 0;
 		our_argv[our_argc++] = g_strdup (state->argv[0]);
+
+		/* Get the master client.  It must be defined, when
+                   processing 'ARGP_KEY_INIT'.  */
+		client= gnome_master_client ();
 	}
 	else if (key == ARGP_KEY_SUCCESS)
 	{

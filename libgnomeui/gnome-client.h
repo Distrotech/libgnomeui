@@ -106,6 +106,9 @@ struct _GnomeClient
   /* Prefix for configuration files.  */
   gchar              *global_config_prefix;
 
+  /* Static command line options.  */
+  GList              *static_args;
+
   /* The following properties are predefined in the X session
      management protocol.  The entries marked with a 'x' are required
      by the session management protocol.  The entries marked with a
@@ -180,7 +183,13 @@ void         gnome_client_disable_master_connection (void);
    after command-line parsing is finished (except
    'gnome_client_disable_master_connection' was called).  The master
    client will also set the SM_CLIENT_ID property on the main window
-   of your application.  */
+   of your application.  
+
+   Additional the master client gets some static arguments set
+   automatically (see 'gnome_client_add_static_arg' for static
+   arguments): 'gnome_init' sets all command line options, that are
+   understood be 'gnome_init' as static arguments to the master
+   client. */
 GnomeClient *gnome_master_client 	         (void);
 
 /* Get the cloned session management client.  This client gets a
@@ -284,6 +293,14 @@ void         gnome_client_set_shutdown_command   (GnomeClient *client,
 						  gint argc, gchar *argv[]);
 void         gnome_client_set_user_id            (GnomeClient *client,
 						  const gchar *user_id);
+
+/* The following function may be used, to add static arguments to the
+   clone and restart command.  This function can be called more than
+   once.  Every call appends the new arguments to the older ones.
+   These arguments are inserted ahead the arguments set with the
+   'gnome_client_set[clone|restart]_command'.  This list of arguments,
+   given to this function must be end with 'NULL'.  */
+void         gnome_client_add_static_arg (GnomeClient *client, ...);
 
 
 /* The following function can be used, if you want that the

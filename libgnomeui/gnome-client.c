@@ -2,6 +2,7 @@
 
 #include <config.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <pwd.h>
 #include <string.h>
@@ -421,6 +422,8 @@ gnome_client_object_init (GnomeClient *client)
   client->config_prefix       = NULL;
   client->global_config_prefix= NULL;
 
+  client->static_args       = NULL;
+
   /* Preset some default values.  */
   client->clone_command     = NULL;
   client->current_directory = NULL;
@@ -480,6 +483,9 @@ gnome_real_client_destroy (GtkObject *object)
   g_free (client->previous_id);
   g_free (client->config_prefix);
   g_free (client->global_config_prefix);
+
+  g_list_foreach (client->static_args, (GFunc)g_free, NULL);
+  g_list_free (client->static_args);
 
   gnome_string_array_free (client->clone_command);
   g_free     (client->current_directory);
@@ -926,6 +932,29 @@ gnome_client_set_user_id (      GnomeClient *client,
   client_set_prop_from_string (client, SmUserID, client->user_id);
 #endif /* HAVE_LIBSM */
 }
+
+
+void
+gnome_client_add_static_arg (GnomeClient *client, ...)
+{
+  va_list  args;
+  gchar   *str;
+  
+  g_return_if_fail (client != NULL);
+  g_return_if_fail (GNOME_IS_CLIENT (client));
+
+  va_start (args, client);
+  str= va_arg (args, gchar*);
+  while (str)
+    {
+      client->static_args= g_list_append (client->static_args,
+					  g_strdup(str));
+      str= va_arg (args, gchar*);
+    }
+  va_end (args);
+}
+
+/*****************************************************************************/
 
 void
 gnome_client_set_id (GnomeClient *client, const gchar *id)
@@ -1464,6 +1493,42 @@ client_set_prop_from_gchar (GnomeClient *client,
   SmcSetProperties (client->smc_conn, 1, proplist);
 }
 
+static void
+client_set_prop_from_glist (GnomeClient *client,
+			    gchar       *prop_name,
+			    GList       *list)
+{
+  gint    argc;
+  gint    i;
+
+  SmProp prop, *proplist[1];
+  SmPropValue *vals;
+  
+  g_return_if_fail (prop_name != NULL);
+
+  if (!GNOME_CLIENT_CONNECTED (client) || (list == NULL))
+    return;
+
+  argc= g_list_length (list);
+
+  /* Now initialize the 'vals' array.  */
+  vals = g_new (SmPropValue, argc);
+  for (i= 0 ; list ; list= g_list_next (list), i++)
+    {
+      vals[i].length = strlen ((gchar *)list->data);
+      vals[i].value  = (gchar *)list->data;
+    }
+
+  prop.name     = prop_name;
+  prop.type     = SmLISTofARRAY8;
+  prop.num_vals = argc;
+  prop.vals     = vals;
+  proplist[0]   = &prop;
+  SmcSetProperties (client->smc_conn, 1, proplist);
+
+  g_free (vals);
+}		   
+
 void
 client_set_prop_from_array (GnomeClient *client,
 			    gchar *prop_name,
@@ -1508,6 +1573,7 @@ client_set_prop_from_array_with_arg (GnomeClient *client,
 				     const gchar *arg_name,
 				     gchar *array[])
 {
+  GList  *temp;
   gint    argc;
   gchar **ptr;
   gint    i;
@@ -1522,29 +1588,41 @@ client_set_prop_from_array_with_arg (GnomeClient *client,
     return;
 
   /* We count the number of elements in our array.  */
-  for (ptr = array, argc = 0; *ptr ; ptr++, argc++) /* LOOP */;
+  for (ptr= array, argc= 0; *ptr ; ptr++, argc++) /* LOOP */;
 
-  /* Now initialize the 'vals' array.  */
-  vals = g_new (SmPropValue, argc+2);
-  for (ptr = array, i = 0 ; i < argc+2 ; ptr++, i++)
+  /* We add an additional client id argument and some some static
+     arguments.  */
+  argc+= 2+g_list_length (client->static_args);
+
+  vals= g_new (SmPropValue, argc);
+
+  /* The program to start.  */
+  vals[0].length= strlen (*array);
+  vals[0].value = *array++;
+
+  /* An argument with the client id.  */
+  vals[1].length= strlen (arg_name);
+  vals[1].value = arg_name;
+  vals[2].length= strlen (client->client_id);
+  vals[2].value = client->client_id;
+
+  /* Some static arguments.  */
+  for (temp= client->static_args, i= 3; temp; i++, temp= g_list_next (temp))
+    {
+      vals[i].length= strlen ((gchar *)temp->data);
+      vals[i].value = (gchar *)temp->data;
+    }
+  
+  /* Now set the arguments, we must set.  */
+  for (ptr= array; *ptr ; ptr++, i++)
     {
       vals[i].length = strlen (*ptr);
       vals[i].value  = *ptr;
-
-      if (i == 0)
-	{
-	  /* The additional argument will be inserted.  */
-	  vals[1].length= strlen (arg_name);
-	  vals[1].value= arg_name;
-	  vals[2].length= strlen (client->client_id);
-	  vals[2].value= client->client_id;
-	  i+= 2;
-	}
     }
 
   prop.name     = prop_name;
   prop.type     = SmLISTofARRAY8;
-  prop.num_vals = argc+2;
+  prop.num_vals = argc;
   prop.vals     = vals;
   proplist[0]   = &prop;
   SmcSetProperties (client->smc_conn, 1, proplist);
