@@ -264,6 +264,7 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 }
 
 static const struct poptOption gnome_options[] = {
+        { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
 	{NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
 	 &gnome_init_cb, 0, NULL, NULL},
 	{"version", 'V', POPT_ARG_NONE, NULL, -1},
