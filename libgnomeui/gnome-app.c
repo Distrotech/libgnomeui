@@ -9,7 +9,7 @@
 #include <gtk/gtk.h>
 
 static void gnome_app_class_init     	      (GnomeAppClass *appclass);
-static void gnome_app_destroy        	      (GnomeApp      *app);
+static void gnome_app_destroy        	      (GtkObject     *object);
 static void gnome_app_init           	      (GnomeApp      *app);
 static void gnome_app_rightclick_event        (GtkWidget *widget,
 					       GdkEventButton *event,
@@ -96,15 +96,23 @@ gnome_app_new(gchar *appname, char *title)
 	  }
 	if (title)
 		gtk_window_set_title(GTK_WINDOW(retval), title);
-	
+
 	return retval;
 }
 
 static void
-gnome_app_destroy(GnomeApp *app)
+gnome_app_destroy(GtkObject *object)
 {
+	GnomeApp *app;
+	
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_APP (object));
+
+	app = GNOME_APP (object);
+
 	g_free (app->name);
 	g_free (app->prefix);
+
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(GTK_OBJECT(app));
 }
@@ -118,11 +126,14 @@ gnome_app_configure_positions (GnomeApp *app)
 		if (app->menubar->parent->parent)
 			gtk_container_remove (GTK_CONTAINER(app->menubar->parent->parent),
 					      app->menubar->parent);
-		gtk_table_attach_defaults(GTK_TABLE(app->table),
-					  app->menubar->parent,
-					  0, 3,
-					  (app->pos_menubar == GNOME_APP_POS_TOP)?0:2,
-					  (app->pos_menubar == GNOME_APP_POS_TOP)?1:3);
+		gtk_table_attach(GTK_TABLE(app->table),
+				 app->menubar->parent,
+				 0, 3,
+				 (app->pos_menubar == GNOME_APP_POS_TOP)?0:2,
+				 (app->pos_menubar == GNOME_APP_POS_TOP)?1:3,
+				 GTK_EXPAND | GTK_FILL,
+				 GTK_SHRINK,
+				 0, 0);
 	}
 	
 	/* 2. the toolbar */
@@ -137,11 +148,14 @@ gnome_app_configure_positions (GnomeApp *app)
 			offset = 1;
 		
 		if(app->pos_toolbar == GNOME_APP_POS_LEFT || app->pos_toolbar == GNOME_APP_POS_RIGHT){
-			gtk_table_attach_defaults(GTK_TABLE(app->table),
-						  app->toolbar->parent,
-						  (app->pos_toolbar==GNOME_APP_POS_LEFT)?0:2,
-						  (app->pos_toolbar==GNOME_APP_POS_LEFT)?1:3,
-						  offset, 3);
+			gtk_table_attach(GTK_TABLE(app->table),
+					 app->toolbar->parent,
+					 (app->pos_toolbar==GNOME_APP_POS_LEFT)?0:2,
+					 (app->pos_toolbar==GNOME_APP_POS_LEFT)?1:3,
+					 offset, 3,
+					 GTK_SHRINK,
+					 GTK_EXPAND | GTK_FILL,
+					 0, 0);
 		} else {
 			gint moffset;
 			
@@ -149,11 +163,14 @@ gnome_app_configure_positions (GnomeApp *app)
 				moffset = (app->pos_toolbar == GNOME_APP_POS_TOP)?1:-1;
 			else
 				moffset = 0;
-			gtk_table_attach_defaults(GTK_TABLE(app->table),
-						  app->toolbar->parent,
-						  0, 3,
-						  ((app->pos_toolbar==GNOME_APP_POS_TOP)?0:2) + moffset,
-						  ((app->pos_toolbar==GNOME_APP_POS_TOP)?1:3) + moffset);
+			gtk_table_attach(GTK_TABLE(app->table),
+					 app->toolbar->parent,
+					 0, 3,
+					 ((app->pos_toolbar==GNOME_APP_POS_TOP)?0:2) + moffset,
+					 ((app->pos_toolbar==GNOME_APP_POS_TOP)?1:3) + moffset,
+					 GTK_EXPAND | GTK_FILL,
+					 GTK_SHRINK,
+					 0, 0);
 		}
 	}
 	/* Repack any contents of ours */
@@ -246,12 +263,15 @@ gnome_app_set_contents(GnomeApp *app, GtkWidget *contents)
   
 	/* Is this going to work at all? I'll wager not
 	   XXX oops it worked, my mistake :) */
-	gtk_table_attach_defaults(GTK_TABLE(app->table),
-				  contents,
-				  startxs[app->pos_menubar][app->pos_toolbar],
-				  endxs[app->pos_menubar][app->pos_toolbar],
-				  startys[app->pos_menubar][app->pos_toolbar],
-				  endys[app->pos_menubar][app->pos_toolbar]);
+	gtk_table_attach(GTK_TABLE(app->table),
+			 contents,
+			 startxs[app->pos_menubar][app->pos_toolbar],
+			 endxs[app->pos_menubar][app->pos_toolbar],
+			 startys[app->pos_menubar][app->pos_toolbar],
+			 endys[app->pos_menubar][app->pos_toolbar],
+			 GTK_EXPAND | GTK_FILL,
+			 GTK_EXPAND | GTK_FILL,
+			 0, 0);
 	app->contents = contents;
 	gtk_widget_show(contents);
 }
