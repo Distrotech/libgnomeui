@@ -243,9 +243,11 @@ gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
       case GNOME_APP_UI_ITEM:
       case GNOME_APP_UI_TOGGLEITEM:
       case GNOME_APP_UI_SEPARATOR:
-      case GNOME_APP_UI_HELP:
         install_menuitem_hint_to_statusbar(uiinfo, bar);
-          break;
+        break;
+      case GNOME_APP_UI_RADIOITEMS:
+        gnome_app_install_statusbar_menu_hints(bar, uiinfo->moreinfo);
+        break;
       default:
         ; // nothing
         break;
@@ -336,9 +338,11 @@ gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
       case GNOME_APP_UI_ITEM:
       case GNOME_APP_UI_TOGGLEITEM:
       case GNOME_APP_UI_SEPARATOR:
-      case GNOME_APP_UI_HELP:
           install_menuitem_hint_to_appbar(uiinfo, appbar);
           break;
+      case GNOME_APP_UI_RADIOITEMS:
+        gnome_app_install_appbar_menu_hints(appbar, uiinfo->moreinfo);
+        break;
       default:
         ; // nothing
         break;

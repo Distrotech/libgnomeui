@@ -1,3 +1,9 @@
+1998-12-08  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.c (gnome_app_install_statusbar_menu_hints,
+	gnome_app_install_appbar_menu_hints): handle GNOME_APP_UI_RADIOITEMS
+	and don't try to set callback for GNOME_APP_UI_HELP entry.
+
 1998-12-08  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-dock-band.h: Removed unused enum that caused
