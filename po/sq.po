@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-05 15:59+0200\n"
-"PO-Revision-Date: 2004-06-04 12:11+0200\n"
+"POT-Creation-Date: 2004-06-22 11:30+0200\n"
+"PO-Revision-Date: 2004-06-22 11:34+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -31,6 +31,30 @@ msgstr "Objekt bir 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Propozime për objektin 2"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:855
+msgid "Filesystem"
+msgstr "File sistemi"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1507
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Ruajtja e libërshënuesit dështoi (%s)"
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "E pamundur marrja e informacioneve për file '%s': %s"
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Hapja e file '%s' dështoi: %s"
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr "Leximi i figurës '%s' dështoi: shkaku nuk njihet, ndoshta file është i dëmtuar"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -121,8 +145,7 @@ msgid "Translator credits"
 msgstr "Falenderime pëkthyesit"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Kreditë e përkthyesve. Kjo frazë duhet shënuar si e përkthyeshme"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -1433,3 +1456,4 @@ msgstr "_Debug"
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Përfundo provën"
+
