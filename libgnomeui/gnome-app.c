@@ -166,7 +166,7 @@ void gnome_app_create_toolbar(GnomeApp *app,
   gtk_container_add(GTK_CONTAINER(hb), app->toolbar);
 
   if(toolbarinfo)
-    gnome_do_toolbar_creation(app, app->toolbar, toolbarinfo);
+    gnome_app_do_toolbar_creation(app, app->toolbar, toolbarinfo);
 
   gnome_app_set_positions(app,
 			  POS_NOCHANGE,
