@@ -433,7 +433,7 @@ calc_line_widths (GnomeCanvasText *text)
 						  &width,
 						  &ascent,
 						  &descent);
-				lines->width = rbearing;
+				lines->width = lbearing + rbearing;
 				
 			}
 			else
