@@ -74,40 +74,42 @@ typedef void GnomeDeathFunction (gpointer client_data);
 /* Initialize.  This returns the current client id (which should be
    saved for restarting), or NULL on error.  If this client has been
    restarted from a saved session, the old client id should be passed
-   as PREVIOUS_ID.  Otherwise NULL should be used.  */
-char *gnome_init_session (GnomeSaveFunction saver,
+   as PREVIOUS_ID.  Otherwise NULL should be used.  The return value
+   is malloced and should be freed by the caller when appropriate.  */
+char *gnome_session_init (GnomeSaveFunction saver,
+			  gpointer saver_client_data,
 			  GnomeDeathFunction death,
-			  gpointer client_data,
+			  gpointer death_client_data,
 			  char *previous_id);
 
 /* Set the restart style.  Default is GNOME_RESTART_IF_RUNNING.  */
-void gnome_set_restart_style (GnomeRestartStyle style);
+void gnome_session_set_restart_style (GnomeRestartStyle style);
 
 /* Set the current directory property.  */
-void gnome_set_current_directory (char *dir);
+void gnome_session_set_current_directory (char *dir);
 
 /* Set the discard command.  This is a command that can clean up
    after a local save.  */
-void gnome_set_discard_command (int argc, char *argv[]);
+void gnome_session_set_discard_command (int argc, char *argv[]);
 
 /* Set the restart command.  */
-void gnome_set_restart_command (int argc, char *argv[]);
+void gnome_session_set_restart_command (int argc, char *argv[]);
 
 /* Set the clone command.  This is like the restart command but
    doesn't preserve session id info.  */
-void gnome_set_clone_command (int argc, char *argv[]);
+void gnome_session_set_clone_command (int argc, char *argv[]);
 
 /* Set the program name.  The argument should just be ARGV[0].  */
-void gnome_set_program (char *name);
+void gnome_session_set_program (char *name);
 
 /* Request the interaction token.  This will return 1 when this client
    has the interaction token.  If it returns 0, then the shutdown has
    been cancelled, and so the interaction should not take place.  */
-int gnome_request_interaction (GnomeDialogType dialog_type);
+int gnome_session_request_interaction (GnomeDialogType dialog_type);
 
 /* Release the interaction token.  If SHUTDOWN is true, then the
    shutdown will be cancelled.  */
-void gnome_interaction_done (int shutdown);
+void gnome_session_interaction_done (int shutdown);
 
 
 END_GNOME_DECLS

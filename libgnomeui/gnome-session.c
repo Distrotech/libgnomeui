@@ -3,7 +3,10 @@
 #include <config.h>
 
 #include <assert.h>
+
+#ifdef HAVE_LIBSM
 #include <X11/ICE/ICElib.h>
+#endif /* HAVE_LIBSM */
 
 #include "gnome.h"
 #include "gnome-session.h"
@@ -26,9 +29,10 @@ typedef enum
 struct client_info
 {
   client_state state;
-  gpointer client_data;
   GnomeSaveFunction *saver;
+  gpointer saver_client_data;
   GnomeDeathFunction *death;
+  gpointer death_client_data;
   SmcConn connection;
 };
 
@@ -76,7 +80,7 @@ save_yourself (SmcConn connection, SmPointer client_data, int save_type,
 
   info->state = c_save_yourself;
   if (info->saver)
-    status = info->saver (info->client_data, save_type, shutdown,
+    status = info->saver (info->saver_client_data, save_type, shutdown,
 			  interact_style, fast);
   else
     status = True;
@@ -98,7 +102,7 @@ die (SmcConn connection, SmPointer client_data)
   info->state = c_die;
   SmcCloseConnection (connection, 0, NULL);
   if (info->death)
-    info->death (info->client_data);
+    info->death (info->death_client_data);
   /* FIXME.  */
   exit (0);
 }
@@ -120,9 +124,10 @@ shutdown_cancelled (SmcConn connection, SmPointer client_data)
 #endif /* HAVE_LIBSM */
 
 char *
-gnome_init_session (GnomeSaveFunction saver,
+gnome_session_init (GnomeSaveFunction saver,
+		    gpointer saver_client_data,
 		    GnomeDeathFunction death,
-		    gpointer client_data,
+		    gpointer death_client_data,
 		    char *previous)
 {
 #ifdef HAVE_LIBSM
@@ -142,9 +147,10 @@ gnome_init_session (GnomeSaveFunction saver,
 
   info = g_new (struct client_info, 1);
   info->state = c_idle;
-  info->client_data = client_data;
   info->saver = saver;
+  info->saver_client_data = saver_client_data;
   info->death = death;
+  info->death_client_data = death_client_data;
 
   callbacks.save_yourself.callback = save_yourself;
   callbacks.save_yourself.client_data = NULL;
@@ -175,7 +181,7 @@ gnome_init_session (GnomeSaveFunction saver,
 }
 
 void
-gnome_set_restart_style (GnomeRestartStyle style)
+gnome_session_set_restart_style (GnomeRestartStyle style)
 {
 #ifdef HAVE_LIBSM
   SmProp prop, *proplist[1];
@@ -197,7 +203,7 @@ gnome_set_restart_style (GnomeRestartStyle style)
 }
 
 void
-gnome_set_current_directory (char *dir)
+gnome_session_set_current_directory (char *dir)
 {
 #ifdef HAVE_LIBSM
   SmProp prop, *proplist[1];
@@ -219,7 +225,7 @@ gnome_set_current_directory (char *dir)
 }
 
 void
-gnome_set_program (char *name)
+gnome_session_set_program (char *name)
 {
 #ifdef HAVE_LIBSM
   SmProp prop, *proplist[1];
@@ -241,7 +247,7 @@ gnome_set_program (char *name)
 }
 
 void
-gnome_set_discard_command (int argc, char *argv[])
+gnome_session_set_discard_command (int argc, char *argv[])
 {
 #ifdef HAVE_LIBSM
   SmProp prop, *proplist[1];
@@ -272,7 +278,7 @@ gnome_set_discard_command (int argc, char *argv[])
 }
 
 void
-gnome_set_restart_command (int argc, char *argv[])
+gnome_session_set_restart_command (int argc, char *argv[])
 {
 #ifdef HAVE_LIBSM
   SmProp prop, *proplist[1];
@@ -303,7 +309,7 @@ gnome_set_restart_command (int argc, char *argv[])
 }
 
 void
-gnome_set_clone_command (int argc, char *argv[])
+gnome_session_set_clone_command (int argc, char *argv[])
 {
 #ifdef HAVE_LIBSM
   SmProp prop, *proplist[1];
@@ -345,7 +351,7 @@ interact (SmcConn connection, SmPointer client_data)
 #endif /* HAVE_LIBSM */
 
 int
-gnome_request_interaction (GnomeDialogType type)
+gnome_session_request_interaction (GnomeDialogType type)
 {
 #ifdef HAVE_LIBSM
   int status;
@@ -369,7 +375,7 @@ gnome_request_interaction (GnomeDialogType type)
 }
 
 void
-gnome_interaction_done (int shutdown)
+gnome_session_interaction_done (int shutdown)
 {
 #ifdef HAVE_LIBSM
   assert (info->state == c_interact);
