@@ -1,3 +1,11 @@
+2001-12-27  jacob berkman  <jacob@ximian.com>
+
+	* libgnomeuiP.h: remove _GnomeDialogPrivate struct.
+
+	* gnome-dialog.h (struct _GnomeDialog): revert the privatization,
+	as we are deprecated anyway
+	* gnome-dialog.c: fix to work without ->_priv
+
 Wed Dec 26 17:56:25 2001  George Lebl <jirka@5z.com>
 
 	* gnome-scroes.c, gnome-dateedit.c: the output of strftime is

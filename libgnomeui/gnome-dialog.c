@@ -36,8 +36,6 @@
 #include "gnome-dialog-util.h"
 #include "gnome-marshal.h"
 
-#include <libgnomeuiP.h>
-
 enum {
   CLICKED,
   CLOSE,
@@ -135,10 +133,8 @@ gnome_dialog_init (GnomeDialog *dialog)
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  dialog->_priv = g_new0(GnomeDialogPrivate, 1);
-
-  dialog->_priv->just_hide = FALSE;
-  dialog->_priv->click_closes = FALSE;
+  dialog->just_hide = FALSE;
+  dialog->click_closes = FALSE;
   dialog->buttons = NULL;
 
   /* FIXME:!!!!!!!!!!!!!! */
@@ -151,9 +147,9 @@ gnome_dialog_init (GnomeDialog *dialog)
 		      gnome_preferences_get_dialog_position());
 		      */
   
-  dialog->_priv->accelerators = gtk_accel_group_new();
+  dialog->accelerators = gtk_accel_group_new();
   gtk_window_add_accel_group (GTK_WINDOW(dialog), 
-			      dialog->_priv->accelerators);
+			      dialog->accelerators);
 
   bf = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (bf), GTK_SHADOW_OUT);
@@ -181,21 +177,21 @@ gnome_dialog_init_action_area (GnomeDialog * dialog)
 {
   GtkWidget * separator;
 
-  if (dialog->_priv->action_area)
+  if (dialog->action_area)
     return;
 
-  dialog->_priv->action_area = gtk_hbutton_box_new ();
+  dialog->action_area = gtk_hbutton_box_new ();
   /* FIXME!!!!!!! */
-  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog->_priv->action_area), 0);
-  /* gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog->_priv->action_area),
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog->action_area), 0);
+  /* gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog->action_area),
 			     gnome_preferences_get_button_layout()); */
 
-  gtk_button_box_set_spacing (GTK_BOX (dialog->_priv->action_area), 
+  gtk_button_box_set_spacing (GTK_BOX (dialog->action_area), 
 			      GNOME_PAD);
 
-  gtk_box_pack_end (GTK_BOX (dialog->vbox), dialog->_priv->action_area, 
+  gtk_box_pack_end (GTK_BOX (dialog->vbox), dialog->action_area, 
 		    FALSE, TRUE, 0);
-  gtk_widget_show (dialog->_priv->action_area);
+  gtk_widget_show (dialog->action_area);
 
   separator = gtk_hseparator_new ();
   gtk_box_pack_end (GTK_BOX (dialog->vbox), separator, 
@@ -443,7 +439,7 @@ void       gnome_dialog_append_button (GnomeDialog * dialog,
 
     button = gtk_button_new_from_stock (button_name);
     GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
-    gtk_box_pack_start (GTK_BOX (dialog->_priv->action_area), button, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (dialog->action_area), button, TRUE, TRUE, 0);
 
     gtk_widget_grab_default (button);
     gtk_widget_show (button);
@@ -531,7 +527,7 @@ void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
     gnome_dialog_init_action_area (dialog);    
 
     GTK_WIDGET_SET_FLAGS (GTK_WIDGET (button), GTK_CAN_DEFAULT);
-    gtk_box_pack_start (GTK_BOX (dialog->_priv->action_area), button, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (dialog->action_area), button, TRUE, TRUE, 0);
 
     gtk_widget_grab_default (button);
     gtk_widget_show (button);
@@ -838,7 +834,7 @@ void       gnome_dialog_set_close    (GnomeDialog * dialog,
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  dialog->_priv->click_closes = click_closes;
+  dialog->click_closes = click_closes;
 }
 
 /**
@@ -859,9 +855,8 @@ void       gnome_dialog_close_hides (GnomeDialog * dialog,
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  dialog->_priv->just_hide = just_hide;
+  dialog->just_hide = just_hide;
 }
-
 
 /**
  * gnome_dialog_set_sensitive: Set the sensitivity of a button.
@@ -985,7 +980,7 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
     /*FIXME*/
     gtk_widget_add_accelerator(GTK_WIDGET(list->data),
 			       "clicked",
-			       dialog->_priv->accelerators,
+			       dialog->accelerators,
 			       accelerator_key,
 			       accelerator_mods,
 			       GTK_ACCEL_VISIBLE);
@@ -1040,7 +1035,7 @@ gnome_dialog_button_clicked (GtkWidget   *button,
     if (list->data == button) {
 	      gboolean click_closes;
   
-	      click_closes = GNOME_DIALOG(dialog)->_priv->click_closes;
+	      click_closes = GNOME_DIALOG(dialog)->click_closes;
 
 	      gtk_signal_emit (GTK_OBJECT (dialog), dialog_signals[CLICKED], 
 			       which);
@@ -1115,9 +1110,6 @@ static void gnome_dialog_finalize (GObject *object)
 
   dialog = GNOME_DIALOG(object);
 
-  g_free(dialog->_priv);
-  dialog->_priv = NULL;
-
   if (G_OBJECT_CLASS(parent_class)->finalize)
     (* (G_OBJECT_CLASS(parent_class)->finalize))(object);
 }
@@ -1129,7 +1121,7 @@ void gnome_dialog_close_real(GnomeDialog * dialog)
 
   gtk_widget_hide(GTK_WIDGET(dialog));
 
-  if ( ! dialog->_priv->just_hide ) {
+  if ( ! dialog->just_hide ) {
     gtk_widget_destroy (GTK_WIDGET (dialog));
   }
 }
