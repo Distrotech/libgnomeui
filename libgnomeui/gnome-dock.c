@@ -1233,8 +1233,8 @@ gnome_dock_new (void)
 }
 
 void
-gnome_dock_enable_floating_items (GnomeDock *dock,
-                                  gboolean enable)
+gnome_dock_allow_floating_items (GnomeDock *dock,
+                                 gboolean enable)
 {
   dock->floating_items_allowed = enable;
 }
