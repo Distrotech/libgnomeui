@@ -17,6 +17,7 @@
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-mime.h"
+#include "libgnomeui/gnome-preferences.h"
 #include "gnome-file-entry.h"
 
 
@@ -118,6 +119,7 @@ browse_clicked(GnomeFileEntry *fentry)
 {	
 	GtkWidget *fsw;
 	GtkFileSelection *fs;
+	GtkWidget *parent;
 	char *p;
 
 	/*if it already exists make sure it's shown and raised*/
@@ -142,6 +144,37 @@ browse_clicked(GnomeFileEntry *fentry)
 	fsw = gtk_file_selection_new (fentry->browse_dialog_title
 				      ? fentry->browse_dialog_title
 				      : _("Select file"));
+	/* BEGIN UGLINESS.  This code is stolen from gnome_dialog_set_parent.
+	 * We want its functionality, but it takes a GnomeDialog as its argument.
+	 * So we copy it )-: */
+	parent = gtk_widget_get_toplevel (GTK_WIDGET (fentry));
+	gtk_window_set_transient_for (GTK_WINDOW(fsw), GTK_WINDOW (parent));
+
+	if ( gnome_preferences_get_dialog_centered() ) {
+		
+		/* User wants us to center over parent */
+
+		gint x, y, w, h, dialog_x, dialog_y;
+
+		if ( ! GTK_WIDGET_VISIBLE(parent)) return; /* Can't get its
+							      size/pos */
+
+		/* Throw out other positioning */
+		gtk_window_set_position(GTK_WINDOW(fsw),GTK_WIN_POS_NONE);
+
+		gdk_window_get_origin (GTK_WIDGET(parent)->window, &x, &y);
+		gdk_window_get_size   (GTK_WIDGET(parent)->window, &w, &h);
+
+		/* The problem here is we don't know how big the dialog is.
+		   So "centered" isn't really true. We'll go with 
+		   "kind of more or less on top" */
+
+		dialog_x = x + w/4;
+		dialog_y = y + h/4;
+		
+		gtk_widget_set_uposition(GTK_WIDGET(fsw), dialog_x, dialog_y); 
+	}
+
 	gtk_object_set_user_data (GTK_OBJECT (fsw), fentry);
 
 	fs = GTK_FILE_SELECTION (fsw);
@@ -171,8 +204,7 @@ browse_clicked(GnomeFileEntry *fentry)
 
 	gtk_widget_show (fsw);
 	
-	if(fentry->is_modal)
-		gtk_grab_add(fsw);
+	gtk_window_set_modal (GTK_WINDOW (fsw));
 	fentry->fsw = fsw;
 }
 

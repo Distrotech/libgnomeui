@@ -368,6 +368,10 @@ GtkWidget* gnome_dialog_newv            (const gchar * title,
 void       gnome_dialog_set_parent     (GnomeDialog * dialog,
 					GtkWindow   * parent)
 {
+  /* This code is duplicated in gnome-file-entry.c:browse-clicked.  If
+   * a change is made here, update it there too. */
+  /* Also, It might be good at some point to make the first argument
+   * GtkWidget, instead of GnomeDialog */
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
   g_return_if_fail(parent != NULL);

@@ -249,6 +249,10 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 	GnomeFileEntry *fe = GNOME_FILE_ENTRY(ientry->fentry);
 	char *p = gnome_file_entry_get_full_path(fe,FALSE);
 	char *curfile = gnome_icon_entry_get_filename(ientry);
+	GtkWidget *tl;
+
+	/* Are we part of a modal window?  If so, we need to be modal too. */
+	tl = gtk_widget_get_toplevel (GTK_WIDGET (b));
 	
 	if(!p) {
 		if(fe->default_path)
@@ -291,6 +295,11 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 					 GNOME_STOCK_BUTTON_OK,
 					 GNOME_STOCK_BUTTON_CANCEL,
 					 NULL);
+		if (GTK_WINDOW (tl)->modal) {
+			gtk_window_set_modal (GTK_WINDOW (ientry->pick_dialog), TRUE);
+			gnome_dialog_set_parent (GNOME_DIALOG (ientry->pick_dialog), GTK_WIDGET (tl)); 
+			gnome_file_entry_set_modal (GNOME_FILE_ENTRY (ientry->fentry), TRUE);
+		}
 		gnome_dialog_close_hides(GNOME_DIALOG(ientry->pick_dialog), TRUE);
 		gnome_dialog_set_close  (GNOME_DIALOG(ientry->pick_dialog), TRUE);
 
@@ -396,7 +405,7 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 	gtk_signal_connect_after(GTK_OBJECT(ientry->fentry),"browse_clicked",
 				 GTK_SIGNAL_FUNC(browse_clicked),
 				 ientry);
-	/*gtk_box_pack_start (GTK_BOX (ientry), ientry->fentry, FALSE, FALSE, 0);*/
+
 	gtk_widget_show (ientry->fentry);
 	
 	p = gnome_pixmap_file(".");

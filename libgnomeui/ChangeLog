@@ -1,5 +1,13 @@
 1999-01-26  Jonathan Blandford  <jrb@redhat.com>
 
+	* gnome-dialog.c (gnome_dialog_set_parent): Commented the below
+	change.
+
+	* gnome-file-entry.c (browse_clicked): This now will set it's file
+	dialog to be modal.  In addition, it does the equivilent of the
+	gnome_dialog_parent_set.  HOWEVER, gnome_dialog_parent_set only
+	acts upon gnome_dialogs, so I had to copy the code ):
+
 	* gnome-icon-entry.c (gnome_icon_entry_init): Now it looks
 	better.  If anyone wanted to make it even cooler, it might be good
 	to have it inherit from gtk_button, instead of hbox.
