@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 1.112.1\n"
-"POT-Creation-Date: 2002-04-22 12:30+0200\n"
-"PO-Revision-Date: 2002-04-22 12:33+0900\n"
+"Project-Id-Version: libgnomeui 1.115.0\n"
+"POT-Creation-Date: 2002-04-26 12:30+0900\n"
+"PO-Revision-Date: 2002-04-26 12:31+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -144,31 +144,31 @@ msgstr "대화형"
 msgid "Level of user activity required."
 msgstr "사용자 행동이 필요한 정도."
 
-#: libgnomeui/gnome-client.c:833
+#: libgnomeui/gnome-client.c:836
 msgid "Specify session management ID"
 msgstr "세션 관리 id 지정"
 
-#: libgnomeui/gnome-client.c:833
+#: libgnomeui/gnome-client.c:836
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-client.c:839
 msgid "Specify prefix of saved configuration"
 msgstr "이미 저장된 설정의 앞부분을 지정"
 
-#: libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-client.c:839
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:839
+#: libgnomeui/gnome-client.c:842
 msgid "Disable connection to session manager"
 msgstr "세션 관리자에 연결하지 않음"
 
-#: libgnomeui/gnome-client.c:945
+#: libgnomeui/gnome-client.c:948
 msgid "Session management"
 msgstr "세션 관리"
 
-#: libgnomeui/gnome-client.c:2483
+#: libgnomeui/gnome-client.c:2486
 msgid "Cancel Logout"
 msgstr "로그아웃 취소"
 
@@ -428,19 +428,19 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "사용법: gnome_segv2 프로그램명 시그널번호\n"
 
-#: libgnomeui/gnome_segv.c:138
+#: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
 msgstr "버그 보고 제출"
 
-#: libgnomeui/gnome_segv.c:149
+#: libgnomeui/gnome_segv.c:151
 msgid "Debug"
 msgstr "디버그"
 
-#: libgnomeui/gnome_segv.c:157
+#: libgnomeui/gnome_segv.c:159
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:163
+#: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "자세한 정보는 그놈 응용프로그램의 비정상 종료 안내 웹페이지에 있습니다."
@@ -491,6 +491,7 @@ msgstr "항목 2의 힌트"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "파일(_F)"
 
@@ -548,6 +549,7 @@ msgid "_Game"
 msgstr "게임(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "도움말(_H)"
 
@@ -738,11 +740,11 @@ msgstr "프로그램 설정하기"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "정보(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "이 프로그램에 대한 정보"
 
@@ -769,7 +771,7 @@ msgstr "새로운 창 만들기"
 msgid "_Close This Window"
 msgstr "창 닫기(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "현재 창 닫기"
 
@@ -845,19 +847,23 @@ msgstr "현재 게임 끝내기"
 msgid "_Help Contents"
 msgstr "도움말 목차(_H)"
 
-#: libgnomeui/gnome-app-helper.c:2402
+#: libgnomeui/gnome-app-helper.c:2403
 msgid "Both text and icons"
 msgstr "글자와 아이콘 모두"
 
-#: libgnomeui/gnome-app-helper.c:2403
+#: libgnomeui/gnome-app-helper.c:2404
+msgid "Both text and icons when horizontal, just icons when vertical"
+msgstr "가로 방향의 경우 글자와 아이콘 모두, 세로 방향에서는 아이콘만"
+
+#: libgnomeui/gnome-app-helper.c:2405
 msgid "Icons only"
 msgstr "아이콘만"
 
-#: libgnomeui/gnome-app-helper.c:2404
+#: libgnomeui/gnome-app-helper.c:2406
 msgid "Text only"
 msgstr "글자만"
 
-#: libgnomeui/gnome-app-helper.c:2455
+#: libgnomeui/gnome-app-helper.c:2466
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "데스크탑 기본 사항 사용 (%s)"
@@ -1010,11 +1016,11 @@ msgstr ""
 "파일 엔트리가 파일이름의 입력에 사용하는 GnomeEntry.  이 등록 정보를 사용해 "
 "GtkEntry를 얻어 내 그 매개 변수의 값을 알아보거나 변경할 수 있습니다."
 
-#: libgnomeui/gnome-file-entry.c:489
+#: libgnomeui/gnome-file-entry.c:491
 msgid "Select file"
 msgstr "파일 선택"
 
-#: libgnomeui/gnome-file-entry.c:627
+#: libgnomeui/gnome-file-entry.c:629
 msgid "_Browse..."
 msgstr "찾아보기(_B)..."
 
@@ -1250,5 +1256,6 @@ msgstr "%Y %b %d %a %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "테스트 끝내기"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "테스트 끝내기"
