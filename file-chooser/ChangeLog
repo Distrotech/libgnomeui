@@ -1,3 +1,22 @@
+Wed Apr  9 12:28:04 2003  Owen Taylor  <otaylor@redhat.com>
+
+	* gtkfilesystemmodel.c: 
+	- Disconnect signal connections when appropriate.
+	- Listen to ::roots-changed on the file system
+	- When the last reference count on a child is 
+	  removed, queue an idle to unload the parent.
+
+	* gtkfilesystemgnomevfs.c
+	- When URI's outside of file:/// are acessed,
+	  add toplevel URI's to the list of roots.
+	- Improve display name computations
+
+	* gtkfilechooserentry.c: Don't complete on empty
+	file parts; free stored folder when base directory
+	changes.
+	
+	* gtkfilechooser.c: Fill in some docs.
+
 Fri Apr  4 18:29:27 2003  Owen Taylor  <otaylor@redhat.com>
 
 	* gtkfilechooserentry.c: Fix double free.
