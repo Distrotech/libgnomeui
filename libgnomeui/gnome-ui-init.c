@@ -63,7 +63,11 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 	}
 	else if (key == ARGP_KEY_INIT)
 	{
-		our_argv = (char **) malloc ((state->argc + 1) * sizeof (char *));
+		/* We use twice the amount of space you'd think we need,
+		   because the user might write all options as
+		   `--foo=bar', but we always split into two arguments,
+		   like `-foo bar'.  */
+		our_argv = (char **) malloc (2 * (state->argc + 1) * sizeof (char *));
 		our_argc = 0;
 		our_argv[our_argc++] = strdup (state->argv[0]);
 	}

@@ -1,3 +1,8 @@
+Thu Mar 19 18:02:04 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-init.c (our_gtk_parse_func): Allocate two slots for every
+	slot in argv.
+
 1998-03-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-app.c (gnome_app_add): Add support for gtk_container_add
