@@ -324,7 +324,7 @@ gnome_about_display_comments (GdkWindow *win,
    DESCRIPTION:	Calculates size of window WITHOUT counting pixmap. 
    ---------------------------------------------------------------------- */
 
-void
+static void
 gnome_about_calc_size (GnomeAboutInfo *gai)
 {
 	GList *name;
@@ -490,7 +490,7 @@ gnome_fill_info (GtkWidget *widget,
    DESCRIPTION:	
    ---------------------------------------------------------------------- */
 
-void
+static void
 gnome_destroy_about (GtkWidget *widget, gpointer *data)
 {
 	GnomeAboutInfo *gai;

@@ -182,7 +182,8 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group, Gnome
 		  GtkAccelGroup *menu_accel_group)
 {
 	GtkWidget *contents;
-	GtkWidget *label, *i8l_label;
+	GtkWidget *label;
+	char *i8l_label;
 	guint keyval;
 
 	/* Create the menu item */

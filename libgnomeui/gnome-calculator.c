@@ -1050,7 +1050,7 @@ gnome_calculator_realized(GtkWidget *w, gpointer data)
 	return FALSE;
 }
 
-static CalculatorButton buttons[8][5] = {
+static const CalculatorButton buttons[8][5] = {
 	{
 		{N_("1/x"),(GtkSignalFunc)simple_func,c_inv,NULL,FALSE,0},
 		{N_("x^2"),(GtkSignalFunc)simple_func,c_pow2,sqrt,FALSE,0},
@@ -1130,12 +1130,12 @@ gnome_calculator_init (GnomeCalculator *gc)
 
 	for(x=0;x<5;x++) {
 		for(y=0;y<8;y++) {
-			CalculatorButton *but = &buttons[y][x];
+			const CalculatorButton *but = &buttons[y][x];
 			if(but->name) {
 				w=gtk_button_new_with_label(_(but->name));
 				gtk_signal_connect(GTK_OBJECT(w),"clicked",
 						   but->signal_func,
-						   but);
+						   (gpointer) but);
 
 				if(but->key) {
 				  gtk_widget_add_accelerator(w,

@@ -35,7 +35,7 @@ static GtkWindowClass *parent_class;
 
 
 /* Keep in sync with GnomeAppWidgetPositionType */
-static const char *locations[] = {
+static const char * const locations[] = {
 	"top", "bottom", "left", "right", "float,"
 };
 

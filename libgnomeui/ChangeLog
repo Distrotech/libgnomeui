@@ -1,3 +1,31 @@
+1998-10-28  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-app-helper.c (create_menu_item): i8l_label must be a
+	string, not a GtkWidget *.
+
+	* gnome-about.c (gnome_about_calc_size): Made static.
+	(gnome_destroy_about): Likewise.
+
+	* gnome-app.c (locations): Made const.
+
+	* gnome-mdi.c (target_table): Made const.
+
+	* gnome-client.c (arguments parser): Made const.
+
+	* gnome-init.c (our_gtk_options our_gtk_parser): Made const.
+
+	* makeenums.pl (parse_entries): Output the arrays of enumerations
+	as const.
+
+	* gnome-calculator.c (buttons): Made the buttons array const so
+	that it can be shared.
+
+	* gnome-lamp.c: Made the lamp data and enl_mappings const so that
+	they can be shared.
+
+	* gnome-stock.c (entries_data default_accel_hash): Made the list
+	of entries const so that it can be shared between processes.
+
 1998-10-28  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.[ch] (gnome_mdi_register, gnome_mdi_unregister):

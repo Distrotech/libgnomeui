@@ -44,7 +44,7 @@ static GdkPixmap *imlib_image_loader(GdkWindow   *window,
  * Note that the key numbers must start at -1 and decrease by 1.  The
  * key number is used to look up the argument name we supply to Gtk.
  */
-static struct argp_option our_gtk_options[] =
+static const struct argp_option our_gtk_options[] =
 {
 	{ N_("\nGtk+ toolkit options"), -1, NULL, OPTION_DOC,   NULL, -3 },
 	{ "gdk-debug",         -1, N_("FLAGS"),   0,      N_("Gdk debugging flags to set"), 0 },
@@ -142,7 +142,7 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 	return 0;
 }
 
-static struct argp our_gtk_parser =
+static const struct argp our_gtk_parser =
 {
 	our_gtk_options,		/* Options.  */
 	our_gtk_parse_func,		/* The parser function.  */

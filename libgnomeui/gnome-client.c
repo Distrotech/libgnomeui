@@ -166,7 +166,7 @@ static error_t client_parse_func (int key, char *arg,
 				  struct argp_state *state);
 
 /* Command-line arguments understood by this module.  */
-static struct argp_option arguments[] =
+static const struct argp_option arguments[] =
 {
   { "sm-client-id", -1, N_("ID"), OPTION_HIDDEN,
     N_("Specify session management id"), -2 },
@@ -178,7 +178,7 @@ static struct argp_option arguments[] =
 };
 
 /* Definition of our command-line parser.  */
-static struct argp parser =
+static const struct argp parser =
 {
   arguments,			/* Argument vector.  */
   client_parse_func,		/* Parsing function.  */

@@ -130,7 +130,7 @@ static void
 gnome_file_entry_init (GnomeFileEntry *fentry)
 {
 	GtkWidget *button, *the_gtk_entry;
-	GtkTargetEntry drop_types[] = { { "url:ALL", 0, 0 } };
+	static const GtkTargetEntry drop_types[] = { { "url:ALL", 0, 0 } };
 
 	fentry->browse_dialog_title = NULL;
 

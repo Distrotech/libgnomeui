@@ -30,7 +30,7 @@
 #define GNOME_LAMP_TIMEOUT 200
 
 
-static char * lamp1_xpm[] = {
+static const char * const lamp1_xpm[] = {
 "29 29 169 2",
 "  	c None",
 ". 	c #000000",
@@ -232,7 +232,7 @@ static char * lamp1_xpm[] = {
 "                                                          "};
 
 
-static char lamp1_mask_rgb[] = {
+static const char lamp1_mask_rgb[] = {
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -430,13 +430,13 @@ static char lamp1_mask_rgb[] = {
 0x00, 
 };
 
-static GdkColor gnome_lamp_clear   = { 0, 0xaaaa, 0xaaaa, 0xaaaa };
-static GdkColor gnome_lamp_red     = { 0, 0xaaaa, 0x0000, 0x0000 };
-static GdkColor gnome_lamp_green   = { 0, 0x0000, 0xaaaa, 0x0000 };
-static GdkColor gnome_lamp_blue    = { 0, 0x0000, 0x0000, 0xaaaa };
-static GdkColor gnome_lamp_yellow  = { 0, 0xaaaa, 0xaaaa, 0x0000 };
-static GdkColor gnome_lamp_aqua    = { 0, 0x0000, 0xaaaa, 0xaaaa };
-static GdkColor gnome_lamp_purple  = { 0, 0xaaaa, 0x0000, 0xaaaa };
+static const GdkColor gnome_lamp_clear   = { 0, 0xaaaa, 0xaaaa, 0xaaaa };
+static const GdkColor gnome_lamp_red     = { 0, 0xaaaa, 0x0000, 0x0000 };
+static const GdkColor gnome_lamp_green   = { 0, 0x0000, 0xaaaa, 0x0000 };
+static const GdkColor gnome_lamp_blue    = { 0, 0x0000, 0x0000, 0xaaaa };
+static const GdkColor gnome_lamp_yellow  = { 0, 0xaaaa, 0xaaaa, 0x0000 };
+static const GdkColor gnome_lamp_aqua    = { 0, 0x0000, 0xaaaa, 0xaaaa };
+static const GdkColor gnome_lamp_purple  = { 0, 0xaaaa, 0x0000, 0xaaaa };
 
 
 /*
@@ -620,7 +620,7 @@ gnome_lamp_class_init(GtkObjectClass *klass)
 static void
 gnome_lamp_init(GnomeLamp *lamp)
 {
-	gnome_pixmap_load_xpm_d(GNOME_PIXMAP(lamp), lamp1_xpm);
+	gnome_pixmap_load_xpm_d(GNOME_PIXMAP(lamp), (char **) lamp1_xpm);
 	lamp->mask = lamp1_mask_rgb;
 	lamp->color = gnome_lamp_clear;
 	lamp->color_seq[0] = 'C';
@@ -911,7 +911,7 @@ struct _WmLampMapping {
 	guint32 hint; /* CARD32 */
 };
 
-WmLampMapping enl_mappings[] = {
+static const WmLampMapping enl_mappings[] = {
 	{ GNOME_LAMP_IDLE, 7 },
 	{ GNOME_LAMP_BUSY, 1 },
 	{ GNOME_LAMP_INPUT, 13 },
@@ -965,7 +965,7 @@ gnome_lamp_update_window_type(GtkWindow *window, char *type)
 void
 gnome_lamp_set_window_type(GtkWindow *window, const char *type)
 {
-	WmLampMapping *p;
+	const WmLampMapping *p;
 
 	g_return_if_fail(window != NULL);
 	g_return_if_fail(GTK_IS_WINDOW(window));

@@ -683,8 +683,8 @@ scale_down(GtkWidget *window, GtkStateType state, unsigned char *datao,
 }
 
 struct _default_entries_data {
-	char *icon, *subtype;
-	char *label;
+	const char *icon, *subtype;
+	const char *label;
 	const gchar *rgb_data;
 	int width, height;
 	int scaled_width, scaled_height;
@@ -697,7 +697,7 @@ struct _default_entries_data {
 #define MENU_W 16
 #define MENU_H 16
 
-struct _default_entries_data entries_data[] = {
+static const struct _default_entries_data entries_data[] = {
 	{GNOME_STOCK_PIXMAP_NEW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_new, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_SAVE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_save, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_SAVE_AS, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_save_as, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
@@ -827,7 +827,7 @@ struct _default_entries_data entries_data[] = {
 	{GNOME_STOCK_MENU_EXEC, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_exec, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 };
 
-static int entries_data_num = sizeof(entries_data) / sizeof(entries_data[0]);
+static const int entries_data_num = sizeof(entries_data) / sizeof(entries_data[0]);
 
 
 static char *
@@ -853,7 +853,7 @@ stock_pixmaps(void)
 		entry = g_malloc(sizeof(GnomeStockPixmapEntry));
 		entry->any.width = entries_data[i].width;
 		entry->any.height = entries_data[i].height;
-		entry->any.label = entries_data[i].label;
+		entry->any.label = (char *) entries_data[i].label;
 		entry->type = GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED;
 		entry->imlib_s.scaled_width = entries_data[i].scaled_width;
 		entry->imlib_s.scaled_height = entries_data[i].scaled_height;
@@ -1413,7 +1413,7 @@ struct default_AccelEntry {
 	AccelEntry entry;
 };
 
-struct default_AccelEntry default_accel_hash[] = {
+static const struct default_AccelEntry default_accel_hash[] = {
 	{GNOME_STOCK_MENU_NEW, {'N', GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_OPEN, {'O', GDK_CONTROL_MASK}},
 	{GNOME_STOCK_MENU_CLOSE, {'W', GDK_CONTROL_MASK}},
@@ -1442,7 +1442,7 @@ struct default_AccelEntry default_accel_hash[] = {
 
 
 static char *
-accel_to_string(AccelEntry *entry)
+accel_to_string(const AccelEntry *entry)
 {
 	static char s[30];
 
@@ -1539,12 +1539,12 @@ accel_read_rc(gpointer key, gpointer value, gpointer data)
 static GHashTable *
 accel_hash(void) {
 	static GHashTable *hash = NULL;
-	struct default_AccelEntry *p;
+	const struct default_AccelEntry *p;
 
 	if (!hash) {
 		hash = g_hash_table_new(g_str_hash, g_str_equal);
 		for (p = default_accel_hash; p->type; p++)
-			g_hash_table_insert(hash, p->type, &p->entry);
+			g_hash_table_insert(hash, p->type, (gpointer) &p->entry);
 		g_hash_table_foreach(hash, accel_read_rc,
 				     "/Gnome/Accelerators/");
 	}
@@ -1759,7 +1759,7 @@ gnome_stock_menu_accel_dlg(char *section)
 {
 	GnomePropertyBox *box;
 	GtkWidget *w, *label;
-	struct default_AccelEntry *p;
+	const struct default_AccelEntry *p;
 	char *titles[2];
 	char *row_data[2];
 
