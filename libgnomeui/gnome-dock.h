@@ -1,3 +1,5 @@
+/* WARNING ____ IMMATURE API ____ liable to change */
+
 /* gnome-dock.h
 
    Copyright (C) 1998 Free Software Foundation
@@ -76,6 +78,8 @@ struct _GnomeDock
 
   /* Client rectangle before drag.  */
   GtkAllocation client_rect;
+
+  gboolean floating_items_allowed : 1;
 };
 
 struct _GnomeDockClass
@@ -87,6 +91,10 @@ struct _GnomeDockClass
 
 GtkWidget     *gnome_dock_new               (void);
 guint          gnome_dock_get_type          (void);
+
+void           gnome_dock_allow_floating_items
+                                            (GnomeDock *dock,
+                                             gboolean enable);
                                             
 void           gnome_dock_add_item          (GnomeDock             *dock,
                                              GnomeDockItem         *item,

@@ -1,3 +1,32 @@
+1998-12-15  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-app.c (gnome_app_get_dock): New function.
+	(gnome_app_add_dock_item): New function.
+	(gnome_app_add_docked): Rewritten by means of
+ 	`gnome_app_add_dock_item()'.
+
+	* gnome-dock.c (gnome_dock_init): Initialize
+	`floating_items_allowed' to TRUE.
+	(gnome_dock_allow_floating_items): New function.
+        (drag_motion): Do not detach if floating items are
+	not allowed.
+
+	* gnome-dock.h (struct _GnomeDock): New member
+ 	`floating_items_allowed'.
+
+	* gnome-dock-band.h: Marked as immature.
+
+	* gnome-dock.h: Marked as immature.
+
+	* gnome-dock-item.h: Marked as immature.
+
+	* gnome-app.c (gnome_app_get_dock_item_by_name): New function.
+
+	* gnome-dock-item.c (gnome_dock_item_get_child): New function.
+
+	* gnome-app.c (gnome_app_set_menus):
+ 	s/get_menubar_detachable/get_toolbar_detachable.
+
 1998-12-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-app.c (gnome_app_set_*): removed "layout_changed" signal

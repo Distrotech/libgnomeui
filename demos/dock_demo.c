@@ -82,7 +82,7 @@ int
 main (int argc, char **argv)
 {
   GnomeUIBuilderData uibdata;
-  GtkObject *layout;
+  GnomeDockLayout *layout;
   int i;
 
   /* I am having troubles with CVS gnome-libs today, so let's do
@@ -138,12 +138,12 @@ main (int argc, char **argv)
       gtk_container_add (GTK_CONTAINER (dock_items[i]), toolbars[i]);
 
       if (i < 3)
-        gnome_dock_layout_add_item (GNOME_DOCK_LAYOUT (layout),
+        gnome_dock_layout_add_item (layout,
                                     GNOME_DOCK_ITEM (dock_items[i]),
                                     GNOME_DOCK_TOP,
                                     i, 0, 0);
       else
-        gnome_dock_layout_add_item (GNOME_DOCK_LAYOUT (layout),
+        gnome_dock_layout_add_item (layout,
                                     GNOME_DOCK_ITEM (dock_items[i]),
                                     GNOME_DOCK_BOTTOM,
                                     i - 4, 0, 0);

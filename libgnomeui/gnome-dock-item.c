@@ -984,6 +984,12 @@ gnome_dock_item_new (const gchar *name,
   return GTK_WIDGET (new);
 }
 
+GtkWidget *
+gnome_dock_item_get_child (GnomeDockItem *item)
+{
+  return GTK_BIN (item)->child;
+}
+
 gchar *
 gnome_dock_item_get_name (GnomeDockItem *item)
 {
@@ -1197,6 +1203,3 @@ gnome_dock_item_get_floating_position (GnomeDockItem *item,
       *y = item->float_y;
     }
 }
-
-
-

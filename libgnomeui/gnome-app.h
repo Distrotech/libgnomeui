@@ -48,7 +48,7 @@ struct _GnomeApp {
 	/* The status bar.  */
         GtkWidget *statusbar;
 
-	/* The vbox widget that ties them all */
+	/* The vbox widget that ties them.  */
 	GtkWidget *vbox;
 
 	/* The menubar.  This is a pointer to a widget contained into
@@ -66,7 +66,7 @@ struct _GnomeApp {
 
 	/* If TRUE, the application uses gnome-config to retrieve and
            save the docking configuration automagically.  */
-	guint enable_layout_config : 1;
+	gboolean enable_layout_config : 1;
 };
 
 struct _GnomeAppClass {
@@ -116,7 +116,19 @@ void gnome_app_add_docked (GnomeApp *app,
 			   gint band_position,
 			   gint offset);
 
+void gnome_app_add_dock_item (GnomeApp *app,
+			      GnomeDockItem *item,
+			      GnomeDockPlacement placement,
+			      gint band_num,
+			      gint band_position,
+			      gint offset);
+
 void gnome_app_enable_layout_config (GnomeApp *app, gboolean enable);
+
+GnomeDock *gnome_app_get_dock (GnomeApp *app);
+
+GnomeDockItem *gnome_app_get_dock_item_by_name (GnomeApp *app,
+						const gchar *name);
 
 END_GNOME_DECLS
 

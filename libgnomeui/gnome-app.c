@@ -1,4 +1,4 @@
-/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /*
  * GnomeApp widget (C) 1998 Red Hat Software, The Free Software Foundation,
  * Miguel de Icaza, Federico Menu, Chris Toshok.
@@ -12,7 +12,7 @@
  *
  * Toolbar separators and configurable relief by Andrew Veliath.
  *
- * Half-rewritten by Ettore Perazzoli to support GnomeDock.
+ * Modified by Ettore Perazzoli to support GnomeDock.
  *
  */
 
@@ -284,7 +284,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 {
 	GtkWidget *dock_item;
 	GtkAccelGroup *ag;
-	GnomeDockItemBehavior behavior = 0;
+	GnomeDockItemBehavior behavior;
 
 	g_return_if_fail(app != NULL);
 	g_return_if_fail(GNOME_IS_APP(app));
@@ -292,10 +292,10 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	g_return_if_fail(menubar != NULL);
 	g_return_if_fail(GTK_IS_MENU_BAR(menubar));
 
-	behavior |= GNOME_DOCK_ITEM_BEH_EXCLUSIVE;
-	behavior |= GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL;
+	behavior = (GNOME_DOCK_ITEM_BEH_EXCLUSIVE
+		    | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
 	
-	if (!gnome_preferences_get_toolbar_detachable())
+	if (!gnome_preferences_get_menubar_detachable())
 		behavior |= GNOME_DOCK_ITEM_BEH_NEVER_DETACH;
 
 	dock_item = gnome_dock_item_new (GNOME_APP_MENUBAR_NAME,
@@ -304,16 +304,16 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (menubar));
 	gnome_dock_item_set_shadow_type (GNOME_DOCK_ITEM (dock_item), GTK_SHADOW_NONE);
 
-	if(app->layout)
-					gnome_dock_layout_add_item (app->layout,
-																			GNOME_DOCK_ITEM (dock_item),
-																			GNOME_DOCK_TOP,
-																			-1, 0, 0);
+	if (app->layout != NULL)
+		gnome_dock_layout_add_item (app->layout,
+					    GNOME_DOCK_ITEM (dock_item),
+					    GNOME_DOCK_TOP,
+					    -1, 0, 0);
 	else
-					gnome_dock_add_item(GNOME_DOCK(app->dock),
-															GNOME_DOCK_ITEM (dock_item),
-															GNOME_DOCK_TOP,
-															-1, 0, 0, FALSE);
+		gnome_dock_add_item(GNOME_DOCK(app->dock),
+				    GNOME_DOCK_ITEM (dock_item),
+				    GNOME_DOCK_TOP,
+				    -1, 0, 0, FALSE);
 
 	app->menubar = GTK_WIDGET (menubar);
 
@@ -394,20 +394,20 @@ gnome_app_add_toolbar (GnomeApp *app,
 	gtk_container_add (GTK_CONTAINER (dock_item), GTK_WIDGET (toolbar));
 
 	if(app->layout)
-					gnome_dock_layout_add_item (app->layout,
-																			GNOME_DOCK_ITEM (dock_item),
-																			placement,
-																			band_num,
-																			band_position,
-																			offset);
+		gnome_dock_layout_add_item (app->layout,
+					    GNOME_DOCK_ITEM (dock_item),
+					    placement,
+					    band_num,
+					    band_position,
+					    offset);
 	else
-					gnome_dock_add_item (GNOME_DOCK(app->dock),
-															 GNOME_DOCK_ITEM (dock_item),
-															 placement,
-															 band_num,
-															 band_position,
-															 offset,
-															 FALSE);
+		gnome_dock_add_item (GNOME_DOCK(app->dock),
+				     GNOME_DOCK_ITEM (dock_item),
+				     placement,
+				     band_num,
+				     band_position,
+				     offset,
+				     FALSE);
 
 	if (gnome_preferences_get_toolbar_relief ()) {
 		gtk_container_set_border_width (GTK_CONTAINER (dock_item), 1);
@@ -452,15 +452,16 @@ void
 gnome_app_set_toolbar (GnomeApp *app,
 		       GtkToolbar *toolbar)
 {
-	GnomeDockItemBehavior behavior = 0;
-	behavior |= GNOME_DOCK_ITEM_BEH_EXCLUSIVE;
+	GnomeDockItemBehavior behavior;
+
+	/* Making dock items containing toolbars use
+	   `GNOME_DOCK_ITEM_BEH_EXCLUSIVE' is not really a
+	   requirement.  We only do this for backwards compatibility.  */
+	behavior = GNOME_DOCK_ITEM_BEH_EXCLUSIVE;
 	
 	if (!gnome_preferences_get_toolbar_detachable())
 		behavior |= GNOME_DOCK_ITEM_BEH_NEVER_DETACH;
 	
-	/* Making dock items containing toolbars use
-	   `GNOME_DOCK_ITEM_BEH_EXCLUSIVE' is not really a
-	   requirement.  We only do this for backwards compatibility.  */
 	gnome_app_add_toolbar (app, toolbar,
 			       GNOME_APP_TOOLBAR_NAME,
 			       behavior,
@@ -468,6 +469,35 @@ gnome_app_set_toolbar (GnomeApp *app,
 			       0, 0, 0);
 }
 
+
+void
+gnome_app_add_dock_item (GnomeApp *app,
+			 GnomeDockItem *item,
+			 GnomeDockPlacement placement,
+			 gint band_num,
+			 gint band_position,
+			 gint offset)
+{
+	if (app->layout)
+		gnome_dock_layout_add_item (app->layout,
+					    GNOME_DOCK_ITEM (item),
+					    placement,
+					    band_num,
+					    band_position,
+					    offset);
+	else {
+		gnome_dock_add_item (GNOME_DOCK(app->dock),
+				     GNOME_DOCK_ITEM( item),
+				     placement,
+				     band_num,
+				     band_position,
+				     offset,
+				     FALSE);
+		gtk_signal_emit_by_name (GTK_OBJECT (app->dock),
+					 "layout_changed",
+					 (gpointer) app);
+	}
+}
 
 void
 gnome_app_add_docked (GnomeApp *app,
@@ -482,26 +512,42 @@ gnome_app_add_docked (GnomeApp *app,
 	GtkWidget *item;
 
 	item = gnome_dock_item_new (name, behavior);
-
-	if(app->layout)
-					gnome_dock_layout_add_item (app->layout,
-																			GNOME_DOCK_ITEM (item),
-																			placement,
-																			band_num,
-																			band_position,
-																			offset);
-	else
-					gnome_dock_add_item (GNOME_DOCK(app->dock),
-															 GNOME_DOCK_ITEM( item),
-															 placement,
-															 band_num,
-															 band_position,
-															 offset,
-															 FALSE);
+	gtk_container_add (GTK_CONTAINER (item), widget);
+	gnome_app_add_dock_item (app, GNOME_DOCK_ITEM (item),
+				 placement, band_num, band_position, offset);
 }
 
 void
 gnome_app_enable_layout_config (GnomeApp *app, gboolean enable)
 {
 	app->enable_layout_config = enable;
+}
+
+GnomeDockItem *
+gnome_app_get_dock_item_by_name (GnomeApp *app,
+				 const gchar *name)
+{
+	GnomeDockItem *item;
+
+	item = gnome_dock_get_item_by_name (GNOME_DOCK (app->dock), name,
+					    NULL, NULL, NULL, NULL);
+
+	if (item == NULL && app->layout != NULL) {
+		GnomeDockLayoutItem *i;
+
+		i = gnome_dock_layout_get_item_by_name (app->layout,
+							name);
+		if (i == NULL)
+			return NULL;
+
+		return i->item;
+	} else {
+		return item;
+	}
+}
+
+GnomeDock *
+gnome_app_get_dock (GnomeApp *app)
+{
+	return GNOME_DOCK (app->dock);
 }

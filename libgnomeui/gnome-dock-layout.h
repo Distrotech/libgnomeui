@@ -1,3 +1,5 @@
+/* WARNING ____ IMMATURE API ____ liable to change */
+
 /* gnome-dock-layout.c
 
    Copyright (C) 1998 Free Software Foundation

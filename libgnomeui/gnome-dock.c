@@ -199,6 +199,8 @@ gnome_dock_init (GnomeDock *dock)
   dock->left_bands = NULL;
 
   dock->floating_children = NULL;
+
+  dock->floating_items_allowed = TRUE;
 }
 
 
@@ -1089,7 +1091,8 @@ drag_motion (GtkWidget *widget,
 
   /* We are not in any "interesting" area: the item must be floating
      if allowed to.  */
-  if (! (item_behavior & GNOME_DOCK_ITEM_BEH_NEVER_DETACH))
+  if (dock->floating_items_allowed
+      && ! (item_behavior & GNOME_DOCK_ITEM_BEH_NEVER_DETACH))
     drag_floating (dock, item, x, y, rel_x, rel_y);
 }
 
@@ -1227,6 +1230,13 @@ gnome_dock_new (void)
 #endif
 
   return widget;
+}
+
+void
+gnome_dock_enable_floating_items (GnomeDock *dock,
+                                  gboolean enable)
+{
+  dock->floating_items_allowed = enable;
 }
 
 void
