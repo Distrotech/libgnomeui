@@ -1,3 +1,8 @@
+1998-05-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-client.c (default_client_init): Use the new macro
+	GTK_HAVE_SIGNAL_INIT 
+
 1998-05-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkcalendar.c (gtk_calendar_thaw): Added freeze/thaw
