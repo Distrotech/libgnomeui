@@ -27,7 +27,7 @@
 #include "libgnomeui/gnome-init.h"
 #include "libgnomeui/gnome-winhints.h"
 
-#include "gdk-pixbuf/gdk-pixbuf.h"
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-pixmap.h"
 
 extern void gnome_type_init (void);

@@ -11,7 +11,7 @@
  */
 #include <config.h>
 #include <unistd.h> /*getcwd*/
-#include <gdk-pixbuf.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>

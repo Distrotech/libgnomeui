@@ -21,7 +21,7 @@
 #include <gdk/gdkkeysyms.h>
 #include "libgnome/libgnomeP.h"
 #include "gnome-calculator.h"
-#include "gdk-pixbuf/gdk-pixbuf.h"
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-pixmap.h"
 
 typedef void (*sighandler_t)(int);

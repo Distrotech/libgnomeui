@@ -8,7 +8,7 @@
 #include <config.h>
 #include "gnome-pixmap.h"
 #include <stdio.h>
-#include "gdk-pixbuf/gdk-pixbuf-drawable.h"
+#include <gdk-pixbuf/gdk-pixbuf-drawable.h>
 #include "libart_lgpl/art_affine.h"
 #include "libart_lgpl/art_rgb_affine.h"
 #include "libart_lgpl/art_rgb_rgba_affine.h"

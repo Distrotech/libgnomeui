@@ -18,10 +18,10 @@ endif
 #
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
-INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) 		\
+INCLUDES = -I$(top_srcdir)/gdk-pixbuf			\
+	-I.. -I$(srcdir)/.. $(SUPPORTINCS) 		\
 	$(OAF_CFLAGS)					\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl 	\
-	-I$(top_srcdir)/gdk-pixbuf/src			\
         -DGNOMELIBDIR=\""$(libdir)"\" 			\
         -DGNOMEDATADIR=\""$(datadir)"\" 		\
         -DGNOMEBINDIR=\""$(bindir)"\" 			\

@@ -2,10 +2,9 @@
 #define GNOME_PIXMAP_H
 
 #include <gtk/gtkmisc.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include "libgnome/gnome-defs.h"
-
-#include "gdk-pixbuf/gdk-pixbuf.h"
 
 BEGIN_GNOME_DECLS
 

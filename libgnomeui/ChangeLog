@@ -1,3 +1,27 @@
+1999-11-28  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.h: include gdk-pixbuf before gnome-defs, seems to
+	be required for some reason. 
+
+	
+        The below is all still wrong; if you have a gdk-pixbuf installed
+	it will probably use the wrong one.
+	
+	* gnome-pixmap.c: angle
+
+	* gnome-color-picker.h: angle brackets
+
+	* gnome-icon-entry.c: <gdk-pixbuf/gdk-pixbuf.h>
+
+	* gnome-canvas-pixbuf.c: angle brackets
+
+	* gnome-calculator.c: angle brackets
+
+	* Makefile.am (INCLUDES): Put $(top_srcdir)/gdk-pixbuf at the top
+	of the include list; remove $(top_srcdir)/src from the search path.
+
+	* gnome-pixmap.h: put gdk-pixbuf/gdk-pixbuf.h in angle brackets
+
 1999-11-24  Elliot Lee  <sopwith@redhat.com>
 
 	* gnome-app.c (gnome_app_add_dock_item): emit the "layout_changed" signal even if adding the dock item to app->layout.

@@ -24,7 +24,7 @@
 #include <math.h>
 #include <libgnomeui/gnome-canvas.h>
 #include <libgnomeui/gnome-canvas-util.h>
-#include "gdk-pixbuf/gdk-pixbuf.h"
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-canvas-pixbuf.h"
 #include "libart_lgpl/art_rgb_pixbuf_affine.h"
 

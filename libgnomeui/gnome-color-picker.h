@@ -10,7 +10,7 @@
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkbutton.h>
-#include "gdk-pixbuf/gdk-pixbuf.h"
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 BEGIN_GNOME_DECLS
 
