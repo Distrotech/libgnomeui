@@ -395,13 +395,34 @@ gnome_dialog_set_modal (GnomeDialog * dialog)
 
   g_warning("Please use gtk_window_set_modal() instead of gnome_dialog's.");
 
+  g_warning(" THIS FUNCTION WILL GO AWAY SOMETIME BEFORE DEC 15  ");
+
   gtk_window_set_modal(GTK_WINDOW(dialog),TRUE);
 }
 
 struct GnomeDialogRunInfo {
   gint button_number;
-  gint close_id, clicked_id;
+  gint close_id, clicked_id, destroy_id;
+  gboolean destroyed;
 };
+
+static void
+gnome_dialog_shutdown_run(GnomeDialog* dialog,
+                          struct GnomeDialogRunInfo* runinfo)
+{
+  if (!runinfo->destroyed) 
+    {
+      
+      gtk_signal_disconnect(GTK_OBJECT(dialog),
+                            runinfo->close_id);
+      gtk_signal_disconnect(GTK_OBJECT(dialog),
+                            runinfo->clicked_id);
+  
+      runinfo->close_id = runinfo->clicked_id = -1;
+    }
+
+  gtk_main_quit();
+}
 
 static void
 gnome_dialog_setbutton_callback(GnomeDialog *dialog,
@@ -413,14 +434,7 @@ gnome_dialog_setbutton_callback(GnomeDialog *dialog,
 
   runinfo->button_number = button_number;
 
-  gtk_signal_disconnect(GTK_OBJECT(dialog),
-			runinfo->close_id);
-  gtk_signal_disconnect(GTK_OBJECT(dialog),
-			runinfo->clicked_id);
-
-  runinfo->close_id = runinfo->clicked_id = -1;
-
-  gtk_main_quit();
+  gnome_dialog_shutdown_run(dialog, runinfo);
 }
 
 static gboolean
@@ -430,16 +444,20 @@ gnome_dialog_quit_run(GnomeDialog *dialog,
   if(runinfo->close_id < 0)
     return FALSE;
 
-  gtk_signal_disconnect(GTK_OBJECT(dialog),
-			runinfo->close_id);
-  gtk_signal_disconnect(GTK_OBJECT(dialog),
-			runinfo->clicked_id);
-
-  runinfo->close_id = runinfo->clicked_id = -1;
-
-  gtk_main_quit();
+  gnome_dialog_shutdown_run(dialog, runinfo);
 
   return FALSE;
+}
+
+static void
+gnome_dialog_mark_destroy(GnomeDialog* dialog,
+                          struct GnomeDialogRunInfo* runinfo)
+{
+  runinfo->destroyed = TRUE;
+
+  if(runinfo->close_id < 0)
+    return;
+  else gnome_dialog_shutdown_run(dialog, runinfo);
 }
 
 gint
@@ -448,6 +466,9 @@ gnome_dialog_run_modal(GnomeDialog *dialog)
   g_return_val_if_fail(dialog != NULL, -1);
   g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
 
+  g_warning("%s is deprecated, use gnome_dialog_run", __FUNCTION__);
+  g_warning(" THIS FUNCTION WILL GO AWAY SOMETIME BEFORE DEC 15  ");
+  
   gtk_window_set_modal(GTK_WINDOW(dialog),TRUE);
   return gnome_dialog_run(dialog);
 }
@@ -456,14 +477,16 @@ gint
 gnome_dialog_run(GnomeDialog *dialog)
 {
   gboolean was_modal, was_only_hidden;
-  struct GnomeDialogRunInfo ri = {-1,-1,-1};
+  struct GnomeDialogRunInfo ri = {-1,-1,-1,-1,FALSE};
 
   g_return_val_if_fail(dialog != NULL, -1);
   g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
 
-  was_only_hidden = dialog->just_hide || !dialog->click_closes;
   was_modal = GTK_WINDOW(dialog)->modal;
   if (!was_modal) gtk_window_set_modal(GTK_WINDOW(dialog),TRUE);
+
+  /* There are several things that could happen to the dialog, and we
+     need to handle them all: click, delete_event, close, destroy */
 
   ri.clicked_id =
     gtk_signal_connect(GTK_OBJECT(dialog), "clicked",
@@ -475,18 +498,26 @@ gnome_dialog_run(GnomeDialog *dialog)
 		       GTK_SIGNAL_FUNC(gnome_dialog_quit_run),
 		       &ri);
 
+  ri.destroy_id = 
+    gtk_signal_connect(GTK_OBJECT(dialog), "destroy",
+                       GTK_SIGNAL_FUNC(gnome_dialog_mark_destroy),
+                       &ri);
+
   if ( ! GTK_WIDGET_VISIBLE(GTK_WIDGET(dialog)) )
     gtk_widget_show(GTK_WIDGET(dialog));
 
   gtk_main();
 
-  if(was_only_hidden) {
+  if(!ri.destroyed) {
+
+    gtk_signal_disconnect(GTK_OBJECT(dialog), ri.destroy_id);
+
     if(!was_modal)
       {
 	gtk_window_set_modal(GTK_WINDOW(dialog),FALSE);
       }
     
-    if(ri.close_id >= 0)
+    if(ri.close_id >= 0) /* We didn't shut down the run? */
       {
 	gtk_signal_disconnect(GTK_OBJECT(dialog), ri.close_id);
 	gtk_signal_disconnect(GTK_OBJECT(dialog), ri.clicked_id);
@@ -504,6 +535,9 @@ gnome_dialog_run_and_hide (GnomeDialog * dialog)
   g_return_val_if_fail(dialog != NULL, -1);
   g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);  
 
+  g_warning("%s is deprecated, use gnome_dialog_run", __FUNCTION__);
+  g_warning(" THIS FUNCTION WILL GO AWAY SOMETIME BEFORE DEC 15  ");
+
   gnome_dialog_close_hides(dialog, TRUE);
 
   r = gnome_dialog_run(dialog);
@@ -520,6 +554,9 @@ gnome_dialog_run_and_destroy (GnomeDialog * dialog)
 
   g_return_val_if_fail(dialog != NULL, -1);
   g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);  
+
+  g_warning("%s is deprecated, use gnome_dialog_run", __FUNCTION__);
+  g_warning(" THIS FUNCTION WILL GO AWAY SOMETIME BEFORE DEC 15  ");
 
   need_close = dialog->click_closes;
 

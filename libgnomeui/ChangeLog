@@ -1,3 +1,11 @@
+1998-11-25  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.c (gnome_dialog_run): Monitor destroy events, and
+	don't manipulate destroyed dialogs.
+	(gnome_dialog_run_and_destroy):	Deprecated.
+	(gnome_dialog_run_and_hide):    Deprecated.
+	(gnome_dialog_run_modal):       Deprecated.
+
 1998-11-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c: Removed unused function "dummy".
