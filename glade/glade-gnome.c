@@ -324,8 +324,10 @@ dialog_build_children(GladeXML *self, GtkWidget *w,
 
     for (list = children; list; list = list->next) {
 	g_object_get (G_OBJECT (list->data), "label", &label, NULL);
-	if (label)
+	if (label) {
 	    gnome_dialog_append_button (dialog, label);
+	    g_free (label);
+	}
     }
 
     g_list_foreach (children, (GFunc)gtk_widget_unref, NULL);
@@ -375,7 +377,7 @@ app_build (GladeXML *xml, GType widget_type,
 	   GladeWidgetInfo *info)
 {
     GtkWidget *app;
-    const char *s;
+    char *s;
 
     app = glade_standard_build_widget (xml, widget_type, info);
 
@@ -384,6 +386,8 @@ app_build (GladeXML *xml, GType widget_type,
 		  NULL);
 
     g_object_set (G_OBJECT (app), "app_id", s, NULL);
+
+    g_free (s);
 
     return app;
 }
