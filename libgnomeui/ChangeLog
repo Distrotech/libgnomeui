@@ -1,3 +1,16 @@
+1999-08-17  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-canvas.h: Mark new_aa() experimental
+
+	* gnome-dialog-util.h: request_string_dialog() is 
+	deprecated.
+
+	* gnome-messagebox.h: Couple deprecated routines in here...
+
+	* gnome-propertybox.h: Deprecate couple of these
+
+	* libgnomeui.h: Deprecate/experimentalize some stuff
+
 1999-08-17  Tim P. Gerla  <timg@means.net>
 
 	* gnome-less.c: Add documentation

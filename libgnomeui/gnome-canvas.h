@@ -504,7 +504,9 @@ GtkWidget *gnome_canvas_new (void);
 /* Creates a new antialiased empty canvas.  You should push the GdkRgb colormap
  * and visual for this.
  */
+#ifndef GNOME_EXCLUDE_EXPERIMENTAL
 GtkWidget *gnome_canvas_new_aa (void);
+#endif
 
 /* Returns the root canvas item group of the canvas */
 GnomeCanvasGroup *gnome_canvas_root (GnomeCanvas *canvas);
