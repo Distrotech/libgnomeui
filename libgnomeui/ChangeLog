@@ -1,3 +1,9 @@
+2000-01-16  Federico Mena Quintero  <federico@helixcode.com>
+
+	* gnome-canvas.c (gnome_canvas_key): Do not check for the window
+	being same as the layout->bin_window.  Thanks to Chris Lahey
+	<clahey@helixcode.com> for pointing this out.
+
 2000-01-07  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (app_close_book, app_close_top): fixed a bug that
