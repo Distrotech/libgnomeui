@@ -2,12 +2,14 @@
 # Copyright 1999-2001 Free Software Foundation, Inc.
 # Wang Li <charlesw1234@163.com>, 2001
 # Sun Gl0n <gnome_int_l10n@ireland.sun.com>, 2002
+# Funda Wang <fundawang@linux.net.cn>, 2003
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2003-01-22 21:37+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-08 12:38+0200\n"
+"PO-Revision-Date: 2003-08-09 03:11+0800\n"
 "Last-Translator: Wang Li <charles@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -50,9 +52,8 @@ msgid "Translated by"
 msgstr "翻译"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "感谢"
+msgstr "致谢(_R)"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -146,6 +147,7 @@ msgstr "关于 %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "文件(_F)"
 
@@ -203,6 +205,7 @@ msgid "_Game"
 msgstr "游戏(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "帮助(_H)"
 
@@ -231,7 +234,7 @@ msgstr "保存当前文件"
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "另存为(A)..."
+msgstr "另存为(_A)..."
 
 #: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
@@ -399,11 +402,11 @@ msgstr "配置应用程序"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "关于(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "关于本应用程序"
 
@@ -431,7 +434,7 @@ msgstr "创建一个新窗口"
 msgid "_Close This Window"
 msgstr "关闭本窗口(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "关闭当前窗口"
 
@@ -611,7 +614,7 @@ msgstr "需要的用户交互性级别。"
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "您的 HTTP 代理需要您登录。\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -619,18 +622,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"您必须登录才能访问“%s”。\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "您的密码将不加密传送。"
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "您的密码将加密传送。"
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "需要身份认证"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1078,9 +1083,9 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"应用程序“%s”试图更改您的一部分配置，而系统管理员或操作系统厂商不允许您更改这"
-"部分配置。您所选择的一部分设置可能不会生效，或者在您下次使用该应用程序时不会"
-"恢复。"
+"应用程序“%s”试图更改您的一部分配置，而系统管理员或操作系统厂商不允许您更改"
+"这部分配置。您所选择的一部分设置可能不会生效，或者在您下次使用该应用程序时不"
+"会恢复。"
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1267,11 +1272,11 @@ msgstr "消息"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "用户名(_U)："
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "密码(_P)："
 
 # SUN CHANGED MESSAGE
 #: libgnomeui/gnome-pixmap-entry.c:113
@@ -1419,162 +1424,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "详情请访问 GNOME 应用程序崩溃页面"
 
-# SUN CHANGED MESSAGE
-#~ msgid "_Credits"
-#~ msgstr "感谢(_C)"
-
-#~ msgid "Exit the test"
-#~ msgstr "退出测试"
-
-#~ msgid "Find _Again"
-#~ msgstr "查找下一个(A)"
-
-#~ msgid "Both text and icons"
-#~ msgstr "文字和图标"
-
-#~ msgid "E_xit"
-#~ msgstr "退出(_X)"
-
-#~ msgid "Exit the program"
-#~ msgstr "退出本程序"
-
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "GConf 错误详情：%s\n"
-
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "设置 Gdk 调试标志"
-
-#~ msgid "FLAGS"
-#~ msgstr "标志"
-
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "取消 Gdk 调试标志"
-
-#~ msgid "Make X calls synchronous"
-#~ msgstr "对X调用进行同步"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "不使用X共享内存扩展技术"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "由窗口管理器使用的程序名"
-
-#~ msgid "NAME"
-#~ msgstr "名称"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "由窗口管理器使用的程序类"
-
-#~ msgid "CLASS"
-#~ msgstr "类别"
-
-#~ msgid "HOST"
-#~ msgstr "主机"
-
-#~ msgid "PORT"
-#~ msgstr "端口"
-
-#~ msgid "STYLE"
-#~ msgstr "样式"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "设置 Gtk+ 调试标记"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "取消 Gtk+ 调试标记"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "使所有的警告信息成为致命错误"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "装载一个附属的 Gtk 组件"
-
-#~ msgid "MODULE"
-#~ msgstr "组件"
-
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
-
-#~ msgid "Author"
-#~ msgstr "作者"
-
-#~ msgid "Background"
-#~ msgstr "背景"
-
-#~ msgid "The background pixbuf to use"
-#~ msgstr "应用的背景 pixbuf"
-
-#~ msgid "Background start opacity"
-#~ msgstr "背景起点透明度"
-
-#~ msgid "Opacity at the start of the background"
-#~ msgstr "背景起点位置的透明度"
-
-#~ msgid "Background end opacity"
-#~ msgstr "背景终点透明度"
-
-#~ msgid "Opacity at the end of the background"
-#~ msgstr "背景终点位置的透明度"
-
-#~ msgid "Background start position"
-#~ msgstr "背景起点位置"
-
-#~ msgid "Position at the start of the background"
-#~ msgstr "背景起点的位置"
-
-#~ msgid "Background end position"
-#~ msgstr "背景终点位置"
-
-#~ msgid "Position at the end of the background"
-#~ msgstr "背景终点的位置"
-
-#~ msgid "Logo top padding"
-#~ msgstr "徽标顶部填充"
-
-#~ msgid "How far the logo is from the top"
-#~ msgstr "徽标距顶端的距离"
-
-#~ msgid "Logo right padding"
-#~ msgstr "徽标右侧填充"
-
-#~ msgid "How far the logo is from the right"
-#~ msgstr "徽标距右边的距离"
-
-#~ msgid "Header font"
-#~ msgstr "标题字体"
-
-#~ msgid "Header font description as a string"
-#~ msgstr "标题字体描述字符串"
-
-#~ msgid "Copyright font"
-#~ msgstr "版权字体"
-
-#~ msgid "Copyright font description as a string"
-#~ msgstr "版权字体描述字符串"
-
-#~ msgid "Comments font"
-#~ msgstr "注解字体"
-
-#~ msgid "Comments font description as a string"
-#~ msgstr "注解字体描述字符串"
-
-#~ msgid "Name header font"
-#~ msgstr "名称标题字体"
-
-#~ msgid "Name header font description as a string"
-#~ msgstr "名称标题字体描述字符串"
-
-#~ msgid "Name list font"
-#~ msgstr "名称列表字体"
-
-#~ msgid "Name list font description as a string"
-#~ msgstr "名称列表字体字符串"
-
-#~ msgid "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
-#~ msgstr "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*"
-
-#~ msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
-
-#~ msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
-#~ msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "退出测试"
