@@ -1,3 +1,7 @@
+2004-09-13  Jesus Bravo Alvarez  <suso@trasno.net>
+
+	* configure.in: Added gl (Galician) to ALL_LINGUAS.
+
 2004-09-03  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* file-chooser/gtkfilesystemgnomevfs.c: Include
