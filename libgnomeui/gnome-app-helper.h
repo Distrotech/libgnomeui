@@ -53,40 +53,93 @@ G_BEGIN_DECLS
 
 /* These values identify the item type that a particular GnomeUIInfo structure 
  * specifies */
+
+/**
+ * GnomeUIInfoType:
+ * @GNOME_APP_UI_ENDOFINFO: No more items, use it at the end of an array.
+ * @GNOME_APP_UI_ITEM: Normal item, or radio item if it is inside a radioitems
+ * group.
+ * @GNOME_APP_UI_TOGGLEITEM: Toggle (check box) item.
+ * @GNOME_APP_UI_RADIOITEMS: Radio item group.
+ * @GNOME_APP_UI_SUBTREE: Item that defines a subtree/submenu.
+ * @GNOME_APP_UI_SEPARATOR: Separator line (menus) or blank space (toolbars).
+ * @GNOME_APP_UI_HELP: Create a list of help topics, used in the Help menu.
+ * @GNOME_APP_UI_BUILDER_DATA: Specifies the builder data for the following
+ * entries, see code for further info.
+ * @GNOME_APP_UI_ITEM_CONFIGURABLE: A configurable menu item.
+ * @GNOME_APP_UI_SUBTREE_STOCK: Item that defines a subtree/submenu, same as
+ * #GNOME_APP_UI_SUBTREE, but the texts should be looked up in the libgnome
+ * catalog.
+ * @GNOME_APP_UI_INCLUDE: Almost like @GNOME_APP_UI_SUBTREE, but inserts items
+ * into the current menu or whatever, instead of making a submenu.
+ *
+ * These values identify the item type that a particular GnomeUIInfo structure
+ * specifies.
+ *
+ * One should be careful when using gnome_app_create_[custom|interp|with_data]
+ * functions with #GnomeUIInfo arrays containing #GNOME_APP_UI_BUILDER_DATA
+ * items, since their #GnomeUIBuilderData structures completely override the
+ * ones generated or supplied by the above functions.
+ */
 typedef enum {
-	GNOME_APP_UI_ENDOFINFO,		/* No more items, use it at the end of 
-					   an array */
-	GNOME_APP_UI_ITEM,		/* Normal item, or radio item if it is 
-					   inside a radioitems group */
-	GNOME_APP_UI_TOGGLEITEM,	/* Toggle (check box) item */
-	GNOME_APP_UI_RADIOITEMS,	/* Radio item group */
-	GNOME_APP_UI_SUBTREE,		/* Item that defines a 
-					   subtree/submenu */
-	GNOME_APP_UI_SEPARATOR,		/* Separator line (menus) or blank 
-					   space (toolbars) */
-	GNOME_APP_UI_HELP,		/* Create a list of help topics, 
-					   used in the Help menu */
-	GNOME_APP_UI_BUILDER_DATA,	/* Specifies the builder data for the 
-					   following entries, see code for 
-					   further info */
-	GNOME_APP_UI_ITEM_CONFIGURABLE, /* A configurable menu item. */
-	/* one should be careful when using 
-	 * gnome_app_create_*_[custom|interp|with_data]() functions with 
-	 * GnomeUIInfo arrays containing GNOME_APP_UI_BUILDER_DATA items since 
-	 * their GnomeUIBuilderData structures completely override the ones 
-	 * generated or supplied by the above functions. */
-	GNOME_APP_UI_SUBTREE_STOCK,	/* Item that defines a 
-					   subtree/submenu, same as GNOME_APP_UI_SUBTREE,
-					   but the texts should be looked up in the
-					   gnome-libs catalog
-					*/
-	GNOME_APP_UI_INCLUDE            /* almost like SUBTREE, but inserts items into the current menu/whatever. instead of
-					   making a submenu */
+	GNOME_APP_UI_ENDOFINFO,
+	GNOME_APP_UI_ITEM,
+	GNOME_APP_UI_TOGGLEITEM,
+	GNOME_APP_UI_RADIOITEMS,
+	GNOME_APP_UI_SUBTREE,
+	GNOME_APP_UI_SEPARATOR,
+	GNOME_APP_UI_HELP,
+	GNOME_APP_UI_BUILDER_DATA,
+	GNOME_APP_UI_ITEM_CONFIGURABLE,
+	GNOME_APP_UI_SUBTREE_STOCK,
+	GNOME_APP_UI_INCLUDE
 } GnomeUIInfoType;
 
 /* If you insert a value into this enum it'll break configurations all
    over the place.  Only append.  You should also append a matching
    item in the default types near the top of gnome-app-helper.c */
+
+/**
+ * GnomeUIInfoConfigurableTypes:
+ * @GNOME_APP_CONFIGURABLE_ITEM_NEW: The "New" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_OPEN: The "Open" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_SAVE: The "Save" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_SAVE_AS: The "Save as..." menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_REVERT: The "Revert" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_PRINT: The "Print" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_PRINT_SETUP: The "Print setup..." menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_CLOSE: The "Close" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_QUIT: The "Quit" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_CUT: The "Cut" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_COPY: The "Copy" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_PASTE: The "Paste" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_CLEAR: The "Clear" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_UNDO: The "Undo" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_REDO: The "Redo" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_FIND: The "Find..." menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_FIND_AGAIN: The "Find again" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_REPLACE: The "Replace..." menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_PROPERTIES: The "Properties..." menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_PREFERENCES: The "Preferences..." menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_ABOUT: The "About..." menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_SELECT_ALL: The "Select all" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_NEW_WINDOW: The "New window" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_CLOSE_WINDOW: The "Close window" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_NEW_GAME: The "New game" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_PAUSE_GAME: The "Pause game" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_RESTART_GAME: The "Restart game" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_UNDO_MOVE: The "Undo move" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_REDO_MOVE: The "Redo move" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_HINT: The "Hint" menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_SCORES: The "Scores..." menu.
+ * @GNOME_APP_CONFIGURABLE_ITEM_END_GAME: The "End game" menu.
+ *
+ * A user can redefine the accelerator keys for each menu item (if the
+ * application supports this). This enum gives an identifier for each menu
+ * shortcut that can possible be redefined. If an application is not using one
+ * of these accelerators, then no shortcut redefinition is possible unless the
+ * application specifically implements it (moral: use standard menu items).
+ */
 typedef enum {
         /* 0 */
         GNOME_APP_CONFIGURABLE_ITEM_NEW,
@@ -128,61 +181,38 @@ typedef enum {
 
 #define GNOME_APP_CONFIGURABLE_ITEM_EXIT	GNOME_APP_CONFIGURABLE_ITEM_QUIT
 
-/* These values identify the type of pixmap used in an item */
+/**
+ * GnomeUIPixmapType:
+ * @GNOME_APP_PIXMAP_NONE: No pixmap specified.
+ * @GNOME_APP_PIXMAP_STOCK: Use a stock pixmap (#GnomeStock).
+ * @GNOME_APP_PIXMAP_DATA: Use a pixmap from inline xpm data.
+ * @GNOME_APP_PIXMAP_FILENAME: Use a pixmap from the specified filename.
+ *
+ * These values identify the type of pixmap used in an item.
+ */
 typedef enum {
-	GNOME_APP_PIXMAP_NONE,		/* No pixmap specified */
-	GNOME_APP_PIXMAP_STOCK,		/* Use a stock pixmap (GnomeStock) */
-	GNOME_APP_PIXMAP_DATA,		/* Use a pixmap from inline xpm data */
-	GNOME_APP_PIXMAP_FILENAME	/* Use a pixmap from the specified 
-					   filename */
+	GNOME_APP_PIXMAP_NONE,
+	GNOME_APP_PIXMAP_STOCK,
+	GNOME_APP_PIXMAP_DATA,
+	GNOME_APP_PIXMAP_FILENAME
 } GnomeUIPixmapType;
 
-/* This is the structure that defines an item in a menu bar or toolbar.  The 
- * idea is to create an array of such structures with the information needed 
- * to create menus or toolbars.  The most convenient way to create such a 
- * structure is to use the GNOMEUIINFO_* macros provided below. */
 typedef struct {
 	GnomeUIInfoType type;		/* Type of item */
-	gchar const *label;			/* String to use in the label */
-	gchar const *hint;			/* For toolbar items, the tooltip. For 
-					   menu items, the status bar message */
-	gpointer moreinfo;		/* For an item, toggleitem, or 
-					   radioitem, this is a pointer to the 
-					   function to call when the item is 
-					   activated. For a subtree, a pointer 
-					   to another array of GnomeUIInfo 
-					   structures. For a radioitem lead 
-					   entry, a pointer to an array of 
-					   GnomeUIInfo structures for the radio 
-					   item group. For a help item, 
-					   specifies the help node to load 
-					   (i.e. the application's identifier) 
-					   or NULL for the main program's name.
-					   For builder data, points to the 
-					   GnomeUIBuilderData structure for 
-					   the following items */
-	gpointer user_data;		/* Data pointer to pass to callbacks */
-	gpointer unused_data;		/* Reserved for future expansion, 
-					   should be NULL */
-	GnomeUIPixmapType pixmap_type;	/* Type of pixmap for the item */
-	gconstpointer pixmap_info;      /* Pointer to the pixmap information:
-					 *
-					 * For GNOME_APP_PIXMAP_STOCK, a 
-					 * pointer to the stock icon name.
-					 *
-					 * For GNOME_APP_PIXMAP_DATA, a 
-					 * pointer to the inline xpm data.
-					 *
-					 * For GNOME_APP_PIXMAP_FILENAME, a 
-					 * pointer to the filename string.
-					 */
-	guint accelerator_key;		/* Accelerator key, or 0 for none */
+	gchar const *label;		/* String to use in item's label */
+	gchar const *hint;		/* Tooltip for toolbar items, status 
+					   bar message for menu items. */
+	gpointer moreinfo;		/* Extra information; depends on the
+					   type. */
+	gpointer user_data;		/* User data sent to the callback. */
+	gpointer unused_data;		/* Should be NULL (reserved). */
+	GnomeUIPixmapType pixmap_type;	/* Type of pixmap for this item. */
+	gconstpointer pixmap_info;	/* Pointer to pixmap information. */
+	guint accelerator_key;		/* Accelerator key, or 0 for none. */
 	GdkModifierType ac_mods;	/* Mask of modifier keys for the 
-					   accelerator */
-
-	GtkWidget *widget;		/* Filled in by gnome_app_create*, you 
-					   can use this to tweak the widgets 
-					   once they have been created */
+					   accelerator. */
+	GtkWidget *widget;		/* Filled in by the gnome_app_create* 
+					   functions. */
 } GnomeUIInfo;
 
 /* Callback data */
@@ -567,15 +597,28 @@ typedef void (* GnomeUISignalConnectFunc) (GnomeUIInfo        *uiinfo,
 					   const char         *signal_name,
 					   GnomeUIBuilderData *uibdata);
 
+/**
+ * GnomeUIBuilderData:
+ * @connect_func: Function that connects to the item's signals.
+ * @data: User data pointer for the signal callback.
+ * @is_interp: If %TRUE, the signal should be connected with
+ * g_signal_connect_closure_by_id(), otherwise, g_signal_connect() is used.
+ * @relay_func: Marshaller function for language bindings.
+ * @destroy_func: Destroy notification function for language bindings.
+ *
+ * This structure defines how the relevant menu items are to have their signals
+ * connected. This includes the activations signals, as well as the destroy
+ * notifications. The affected menu items are either the items following aA
+ * #GNOME_APP_UI_BUILDER_DATA item in an array of #GnomeUIInfo structures or
+ * all   of the menu items that are connected as a result of a call to
+ * gnome_app_create_menu_custom() and similar functions.
+ */
 struct _GnomeUIBuilderData {
-	GnomeUISignalConnectFunc connect_func;	/* Function that connects to the item's signals */
-	gpointer data;				/* User data pointer */
-	gboolean is_interp;			/* Should use
-						 * g_signal_connect_closure_by_id
-						 * or normal g_signal_connect?
-						 */
-	GtkCallbackMarshal relay_func;		/* Marshaller function for language bindings */
-	GtkDestroyNotify destroy_func;		/* Destroy notification function for language bindings */
+	GnomeUISignalConnectFunc connect_func;
+	gpointer data;
+	gboolean is_interp;
+	GtkCallbackMarshal relay_func;
+	GtkDestroyNotify destroy_func;
 };
 
 /* Flush the accelerator definitions into the application specific
@@ -720,13 +763,10 @@ void gnome_app_remove_menu_range (GnomeApp *app, const gchar *path, gint start, 
  */
 void gnome_app_insert_menus_custom (GnomeApp *app, const gchar *path, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata);
 
-/* FIXME: what does it do? */
 void gnome_app_insert_menus (GnomeApp *app, const gchar *path, GnomeUIInfo *menuinfo);
 
-/* FIXME: what does it do? */
 void gnome_app_insert_menus_with_data (GnomeApp *app, const gchar *path, GnomeUIInfo *menuinfo, gpointer data);
 
-/* FIXME: what does it do? */
 void gnome_app_insert_menus_interp (GnomeApp *app, const gchar *path, GnomeUIInfo *menuinfo,
 				    GtkCallbackMarshal relay_func, gpointer data,
 				    GtkDestroyNotify destroy_func);

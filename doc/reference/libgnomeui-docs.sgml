@@ -76,12 +76,27 @@
       &libgnomeui-GnomeApp;
       &libgnomeui-GnomeAppBar;
       &libgnomeui-gnome-app-helper;
-      &libgnomeui-gnome-app-util;
       &libgnomeui-gnome-window;
       &libgnomeui-GnomeAbout;
     </sect1>
     <sect1>
       <title>Druids</title>
+      <para>
+      Druids (sometimes called <emphasis>Wizards</emphasis> on other systems)
+      are a series of dialog boxes that lead the user through a task that is
+      serial in nature (that is, it has a natural beginning, sequence through
+      the pages and an end).
+      </para>
+      <para>
+      Some applications (for example GNOME Lokkit -- for setting up simple
+      firewall settings) are purely a series of screens that extract some
+      information from the user and then performs an action based on that data.
+      Other applications may be more traditional in nature, however they may
+      wish to run the user through a series of question the first time they run
+      the application; such as to set things up correctly or to import
+      settings from another program. Both these types of programs can use the
+      various druid functions to make their implementation easier.
+      </para>
       &libgnomeui-GnomeDruid;
       &libgnomeui-GnomeDruidPage;
       &libgnomeui-GnomeDruidPageEdge;
@@ -100,10 +115,6 @@
       &libgnomeui-GnomeIconEntry;
       &libgnomeui-GnomeIconList;
       &libgnomeui-GnomeIconSelection;
-      &libgnomeui-GnomeMDI;
-      &libgnomeui-GnomeMDIChild;
-      &libgnomeui-GnomeMDIGenericChild;
-      &libgnomeui-gnome-mdi-session;
       &libgnomeui-GnomeMessageBox;
       &libgnomeui-GnomePixmap;
       &libgnomeui-GnomePixmapEntry;
@@ -115,6 +126,14 @@
       &libgnomeui-gnome-types;
       &libgnomeui-gnome-uidefs;
       &libgnomeui-gnome-vfs-util;
+    </sect1>
+    <sect1>
+      <title>Deprecated modules</title>
+      &libgnomeui-gnome-app-util;
+      &libgnomeui-GnomeMDI;
+      &libgnomeui-GnomeMDIChild;
+      &libgnomeui-GnomeMDIGenericChild;
+      &libgnomeui-gnome-mdi-session;
     </sect1>
     <sect1 id="libgnomeui-objects">
       <title>Object Hierarchy</title>

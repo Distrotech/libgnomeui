@@ -836,6 +836,8 @@ GNOME_APP_CONFIGURABLE_ITEM_EXIT
 GnomeUIPixmapType
 GnomeUIInfo
 GnomeUIBuilderData
+GNOMEUIINFO_KEY_UIDATA
+GNOMEUIINFO_KEY_UIBDATA
 GnomeUISignalConnectFunc
 gnome_accelerators_sync
 gnome_app_fill_menu
@@ -864,8 +866,6 @@ gnome_app_install_appbar_menu_hints
 gnome_app_install_statusbar_menu_hints
 gnome_app_install_menu_hints
 gnome_app_setup_toolbar
-GNOMEUIINFO_KEY_UIDATA
-GNOMEUIINFO_KEY_UIBDATA
 GNOMEUIINFO_END
 GNOMEUIINFO_SEPARATOR
 GNOMEUIINFO_ITEM
@@ -939,8 +939,8 @@ GNOME_MENU_FILES_PATH
 GNOME_MENU_WINDOWS_STRING
 GNOME_MENU_WINDOWS_PATH
 gnome_app_helper_gettext
-D_
 L_
+D_
 </SECTION>
 
 <SECTION>

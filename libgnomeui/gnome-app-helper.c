@@ -621,8 +621,8 @@ install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
 
 /**
  * gnome_app_install_statusbar_menu_hints
- * @bar: Pointer to Gtk+ status bar object
- * @uiinfo: Gnome UI info for the menu to be changed
+ * @bar: Pointer to #GtkStatusbar instance.
+ * @uiinfo: #GnomeUIInfo for the menu to be changed.
  *
  * Description:
  * Install menu hints for the given status bar.
@@ -737,6 +737,12 @@ install_menuitem_hint_to_appbar(GnomeUIInfo* uiinfo, GnomeAppBar* bar)
  * Configure all user-configurable elements in the given UI info
  * structure.  This includes loading and setting previously-set options from
  * GNOME config files.
+ *
+ * Normally, gnome_app_create_menus() calls this function for the developer,
+ * but if something needs to be altered afterwards, this function can be called
+ * first. The main reason for this function being a public interface is so that
+ * it can be called from gnome_popup_menu_new(), which clears a copy of the
+ * pass in #GnomeUIInfo structures.
  */
 
 void
@@ -817,11 +823,13 @@ gnome_app_ui_configure_configurable (GnomeUIInfo* uiinfo)
 
 /**
  * gnome_app_install_appbar_menu_hints
- * @appbar: Pointer to GNOME app bar object.
- * @uiinfo: GNOME UI info for menu
+ * @appbar: An existing #GnomeAppBar instance.
+ * @uiinfo: A #GnomeUIInfo array of a menu for which hints will be set.
  *
  * Description:
- * Install menu hints for the given GNOME app bar object.
+ * Install menu hints for the given @appbar object. This function cannot just
+ * be called automatically, since it is impossible to reliably find the correct
+ * @appbar.
  */
 
 void
@@ -871,11 +879,11 @@ gnome_app_install_appbar_menu_hints (GnomeAppBar* appbar,
 
 /**
  * gnome_app_install_menu_hints
- * @app: Pointer to GNOME app object
- * @uiinfo: GNOME UI menu for which hints will be set
+ * @app: An existing #GnomeAppBar instance.
+ * @uiinfo: A #GnomeUIInfo array of a menu for which hints will be set.
  *
  * Description:
- * Set menu hints for the GNOME app object's attached status bar.
+ * Set menu hints for the @app object's attached status bar.
  */
 
 void
@@ -906,6 +914,12 @@ gnome_save_accels (gpointer data)
 	return TRUE;
 }
 
+/**
+ * gnome_accelerators_sync:
+ *
+ * Flush the accelerator definitions into the application specific
+ * configuration file $HOME/.gnome2/accels/<app-id>.
+ */
 void
 gnome_accelerators_sync (void)
 {
@@ -1208,20 +1222,21 @@ do_ui_signal_connect (GnomeUIInfo        *uiinfo,
 
 /**
  * gnome_app_fill_menu
- * @menu_shell:
- * @uiinfo:
- * @accel_group:
- * @uline_accels:
- * @pos:
+ * @menu_shell: A #GtkMenuShell instance (a menu bar).
+ * @uiinfo: A pointer to the first element in an array of #GnomeUIInfo
+ * structures. The last element of the array should have a type of
+ * #GNOME_APP_UI_ENDOFINFO.
+ * @accel_group: A #GtkAccelGroup.
+ * @uline_accels: %TRUE if underline accelerators will be drawn for the menu
+ * item labels.
+ * @pos: The position in the menu bar at which to start inserting items.
  *
  * Description:
- * Fills the specified menu shell with items created from the specified
- * info, inserting them from the item no. pos on.
- * The accel group will be used as the accel group for all newly created
- * sub menus and serves as the global accel group for all menu item
- * hotkeys. If it is passed as NULL, global hotkeys will be disabled.
- * The uline_accels argument determines whether underline accelerators
- * will be featured from the menu item labels.
+ * Fills the specified @menu_shell with items created from the specified
+ * @uiinfo, inserting them from the item number @pos on.  The @accel_ group
+ * will be used as the accel group for all newly created sub menus and serves
+ * as the global accel group for all menu item hotkeys. If it is passed as
+ * %NULL, global hotkeys will be disabled.
  **/
 
 void
@@ -1253,14 +1268,19 @@ gnome_app_fill_menu (GtkMenuShell  *menu_shell,
 
 /**
  * gnome_app_fill_menu_with_data
- * @menu_shell:
- * @uiinfo:
- * @accel_group:
- * @uline_accels:
- * @pos:
- * @user_data:
+ * @menu_shell: A #GtkMenuShell instance (a menu bar).
+ * @uiinfo: A pointer to the first element in an array of #GnomeUIInfo
+ * structures. The last element of the array should have a type of
+ * #GNOME_APP_UI_ENDOFINFO.
+ * @accel_group: A #GtkAccelGroup.
+ * @uline_accels: %TRUE if underline accelerators will be drawn for the menu
+ * item labels.
+ * @pos: The position in the menu bar at which to start inserting items.
+ * @user_data: Some application-specific data.
  *
  * Description:
+ * This is the same as gnome_app_fill_menu(), except that all the user data
+ * pointers are filled with the value of @user_data.
  **/
 
 void
@@ -1336,22 +1356,22 @@ menus_have_tearoff_changed_notify(GConfClient            *client,
 
 /**
  * gnome_app_fill_menu_custom
- * @menu_shell:
- * @uiinfo:
- * @uibdata:
- * @accel_group:
- * @uline_accels:
- * @pos:
+ * @menu_shell: A #GtkMenuShell instance (a menu bar).
+ * @uiinfo: A pointer to the first element in an array of #GnomeUIInfo
+ * structures. The last element of the array should have a type of
+ * #GNOME_APP_UI_ENDOFINFO.
+ * @uibdata: A #GnomeUIInfoBuilderData instance.
+ * @accel_group: A #GtkAccelGroup.
+ * @uline_accels: %TRUE if underline accelerators will be drawn for the menu
+ * item labels.
+ * @pos: The position in the menu bar at which to start inserting items.
  *
  * Description:
  * Fills the specified menu shell with items created from the specified
- * info, inserting them from item no. pos on and using the specified
- * builder data -- this is intended for language bindings.
- * The accel group will be used as the accel group for all newly created
- * sub menus and serves as the global accel group for all menu item
- * hotkeys. If it is passed as NULL, global hotkeys will be disabled.
- * The uline_accels argument determines whether underline accelerators
- * will be featured from the menu item labels.
+ * @uiinfo, inserting them from item number @pos on and using the specified
+ * builder data (@uibdata) -- this is intended for language bindings. 
+ *
+ * The other parameters have the same meaning as in gnome_app_fill_menu().
  **/
 
 void
@@ -1478,8 +1498,9 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 
 /**
  * gnome_app_create_menus
- * @app: Pointer to GNOME app object.
- * @uiinfo:
+ * @app: A #GnomeApp instance representing the current application.
+ * @uiinfo: The first in an array #GnomeUIInfo instances containing the menu
+ * data.
  *
  * Description:
  * Constructs a menu bar and attaches it to the specified application
@@ -1507,13 +1528,15 @@ gnome_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo)
 
 /**
  * gnome_app_create_menus_interp
- * @app: Pointer to GNOME app object.
- * @uiinfo:
- * @relay_func:
- * @data:
- * @destroy_func:
+ * @app: A #GnomeApp instance, representing the current application.
+ * @uiinfo: The first item in an array of #GnomeUIInfo structures describing
+ * the menu bar.
+ * @relay_func: A marshaller for the signal callbacks.
+ * @data: Application specific data passed to the signal callback functions.
+ * @destroy_func: The function to call when the menu bar is destroyed.
  *
- * Description:
+ * Identical to gnome_app_create_menus(), except that extra functions and data
+ * can be passed in for finer control of the destruction and marshalling.
  **/
 
 void
@@ -1539,11 +1562,14 @@ gnome_app_create_menus_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_create_menus_with_data
- * @app: Pointer to GNOME app object.
- * @uiinfo:
- * @user_data:
+ * @app: A #GnomeApp instance representing the current application.
+ * @uiinfo: The first in an array #GnomeUIInfo instances containing the menu
+ * data.
+ * @user_data: Application-specific data that is passed to every callback
+ * function.
  *
- * Description:
+ * Identical to gnome_app_create_menus(), except that @user_data is passed to
+ * all the callback funtions when signals are emitted.
  **/
 
 void
@@ -1612,11 +1638,14 @@ gnome_app_set_tearoff_menu_titles(GnomeApp *app, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_create_menus_custom
- * @app: Pointer to GNOME app object.
- * @uiinfo:
- * @uibdata:
+ * @app: A #GnomeApp instance representing the current application.
+ * @uiinfo: The first in an array #GnomeUIInfo instances containing the menu
+ * data.
+ * @uibdata: An appropriate #GnomeUIBuilderData instance.
  *
- * Description:
+ * Identical to gnome_app_create_menus(), except that @uibdata is also
+ * specified for creating the signal handlers. Mostly for use by language
+ * bindings.
  **/
 
 void
@@ -1753,11 +1782,14 @@ create_radio_toolbar_items (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_fill_toolbar
- * @toolbar:
- * @uiinfo:
- * @accel_group:
+ * @toolbar: A #GtkToolbar instance.
+ * @uiinfo: An array of #GnomeUIInfo structures containing the items for the
+ * toolbar.
+ * @accel_group: A #GtkAccelGroup for holding the accelerator keys of the items
+ * (or %NULL).
  *
- * Description:
+ * Fills @toolbar with buttons specified in @uiinfo. If @accel_group is not
+ * %NULL, the items' accelrator keys are put into it.
  **/
 
 void
@@ -1782,12 +1814,15 @@ gnome_app_fill_toolbar (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_fill_toolbar_with_data
- * @toolbar:
- * @uiinfo:
- * @accel_group:
- * @user_data:
+ * @toolbar: A #GtkToolbar instance.
+ * @uiinfo: An array of #GnomeUIInfo structures containing the items for the
+ * toolbar.
+ * @accel_group: A #GtkAccelGroup for holding the accelerator keys of the items
+ * (or %NULL).
+ * @user_data: Application specific data.
  *
- * Description:
+ * The same as gnome_app_fill_toolbar(), except that the user data pointers in
+ * the signal handlers are set to @user_data.
  **/
 
 void
@@ -1812,12 +1847,15 @@ gnome_app_fill_toolbar_with_data (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_fill_toolbar_custom
- * @toolbar:
- * @uiinfo:
- * @uibdata:
- * @accel_group:
+ * @toolbar: A #GtkToolbar instance.
+ * @uiinfo: An array of #GnomeUIInfo structures containing the items for the
+ * toolbar.
+ * @uibdata: The #GnomeUIBuilderData data for the toolbar.
+ * @accel_group: A #GtkAccelGroup for holding the accelerator keys of the items
+ * (or %NULL).
  *
- * Description:
+ * The same as gnome_app_fill_toolbar(), except that the sepcified @uibdata
+ * instance is used. This is mostly for the benefit of language bindings.
  **/
 
 void
@@ -1868,8 +1906,8 @@ gnome_app_fill_toolbar_custom (GtkToolbar *toolbar, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_create_toolbar
- * @app: Pointer to GNOME app object.
- * @uiinfo:
+ * @app: A #GnomeApp instance.
+ * @uiinfo: A #GnomeUIInfo array specifying the contents of the toolbar.
  *
  * Description:
  * Constructs a toolbar and attaches it to the specified application
@@ -1896,11 +1934,11 @@ gnome_app_create_toolbar (GnomeApp *app, GnomeUIInfo *uiinfo)
 
 /**
  * gnome_app_create_toolbar_interp
- * @app: Pointer to GNOME app object.
- * @uiinfo:
- * @relay_func:
- * @data:
- * @destroy_func:
+ * @app: A #GnomeApp instance.
+ * @uiinfo: A #GnomeUIInfo array specifying the contents of the toolbar.
+ * @relay_func: Argument marshalling function.
+ * @data: Application specific data to pass to signal callbacks.
+ * @destroy_func: The function to call when the toolbar is destroyed.
  *
  * Description:
  * Constructs a toolbar and attaches it to the specified application
@@ -1929,9 +1967,10 @@ gnome_app_create_toolbar_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_create_toolbar_with_data
- * @app: Pointer to GNOME app object.
- * @uiinfo:
- * @user_data:
+ * @app: A #GnomeApp instance.
+ * @uiinfo: A #GnomeUIInfo array specifying the contents of the toolbar.
+ * @user_data: Application specific data to be sent to each signal callback
+ * function.
  *
  * Description:
  * Constructs a toolbar, sets all the user data pointers to
@@ -1959,9 +1998,10 @@ gnome_app_create_toolbar_with_data (GnomeApp *app, GnomeUIInfo *uiinfo,
 
 /**
  * gnome_app_create_toolbar_custom
- * @app: Pointer to GNOME app object.
- * @uiinfo:
- * @uibdata:
+ * @app: A #GnomeApp instance.
+ * @uiinfo: A #GnomeUIInfo array specifying the contents of the toolbar.
+ * @uibdata: A #GnomeUIBuilderData instance specifying the handlers to use for
+ * the toolbar.
  *
  * Description:
  * Constructs a toolbar and attaches it to the @app window,
@@ -2027,28 +2067,22 @@ g_strncmp_ignore_char( const gchar *first, const gchar *second, gint length, gch
 /* menu insertion/removal functions
  * <jaka.mocnik@kiss.uni-lj.si>
  *
- * the path argument should be in the form "File/.../.../Something". "" will
- * insert the item as the first one in the menubar "File/" will insert it as
- * the first one in the File menu "File/Settings" will insert it after the
- * Setting item in the File menu use of "File/<Separator>" should be obvious.
- * However this stops after the first separator. I hope this explains use of
- * the insert/remove functions well enough.
  */
 
 /**
  * gnome_app_find_menu_pos
- * @parent: Root menu shell widget containing menu items to be searched
- * @path: Specifies the target menu item by menu path
- * @pos: (output) returned item position
+ * @parent: Root menu shell widget containing menu items to be searched.
+ * @path: Specifies the target menu item by menu path.
+ * @pos: Used to hold the returned menu items' position.
  *
  * Description:
- * finds menu item described by path starting
- * in the GtkMenuShell top and returns its parent GtkMenuShell and the
- * position after this item in pos:  gtk_menu_shell_insert(p, w, pos)
- * would then insert widget w in GtkMenuShell p right after the menu item
+ * Finds a menu item described by path starting in the #GtkMenuShell top and
+ * returns its parent #GtkMenuShell and the position after this item in @pos.
+ * The meaning of @pos is that a subsequent call to gtk_menu_shell_insert(p, w,
+ * pos) would then insert widget w in GtkMenuShell p right after the menu item
  * described by path.
  *
- * Returns:
+ * Returns: The parent menu shell of @path.
  **/
 
 GtkWidget *
@@ -2136,12 +2170,18 @@ gnome_app_find_menu_pos (GtkWidget *parent, const gchar *path, gint *pos)
 
 /**
  * gnome_app_remove_menus
- * @app: Pointer to GNOME app object.
- * @path:
- * @items:
+ * @app: A #GnomeApp instance.
+ * @path: A path to the menu item concerned.
+ * @items: The number of items to remove.
  *
- * Description: removes num items from the existing app's menu structure
- * beginning with item described by path
+ * Description: Removes @items items from the existing @app's menu structure,
+ * beginning with item described by @path.
+ *
+ * The @path argument should be in the form "File/.../.../Something". "" will
+ * insert the item as the first one in the menubar, "File/" will insert it as
+ * the first one in the File menu, "File/Settings" will insert it after the
+ * Setting item in the File menu use of "File/<Separator>" should be obvious.
+ * However, the use of "<Seperator>" stops after the first separator.
  **/
 
 void
@@ -2188,15 +2228,15 @@ gnome_app_remove_menus(GnomeApp *app, const gchar *path, gint items)
 
 /**
  * gnome_app_remove_menu_range
- * @app: Pointer to GNOME app object.
- * @path:
- * @start:
- * @items:
+ * @app: A #GnomeApp instance.
+ * @path: A path to the menu item concerned.
+ * @start: An offset beyond the start of @path at which to begin removing.
+ * @items: The number of items to remove.
  *
  * Description:
- * Same as the gnome_app_remove_menus, except it removes the specified number
- * of @items from the existing app's menu structure begining with item described
- * by path, plus the number specified by @start - very useful for adding and
+ * Same as the gnome_app_remove_menus(), except it removes the specified number
+ * of @items from the existing @app's menu structure begining with item
+ * described by (@path plus @start). This is very useful for adding and
  * removing Recent document items in the File menu.
  **/
 
@@ -2244,13 +2284,15 @@ gnome_app_remove_menu_range (GnomeApp *app, const gchar *path, gint start, gint 
 
 /**
  * gnome_app_insert_menus_custom
- * @app: Pointer to GNOME app object.
- * @path:
- * @uiinfo:
- * @uibdata:
+ * @app: A #GnomeApp instance.
+ * @path: A path to the menu item concerned.
+ * @uiinfo: A #GnomeUIInfo array describing the menus.
+ * @uibdata: A #GnomeUIBuilderData instance describing the functions to attach
+ * as the menu's callbacks.
  *
- * Description: inserts menus described by @uiinfo in existing app's menu
- * structure right after the item described by @path.
+ * Description: Inserts menus described by @uiinfo in existing @app's menu
+ * structure right after the item described by @path. The @uibdata parameter
+ * makes this, again, most useful for language bindings.
  **/
 
 void
@@ -2280,11 +2322,12 @@ gnome_app_insert_menus_custom (GnomeApp *app, const gchar *path,
 
 /**
  * gnome_app_insert_menus
- * @app: Pointer to GNOME app object.
- * @path:
- * @menuinfo:
+ * @app: A #GnomeApp instance.
+ * @path: A path to the menu item concerned.
+ * @menuinfo: A #GnomeUIInfo array describing the menus.
  *
- * Description:
+ * Insert the menus given by @menuinfo beginning at @path into the pre-existing
+ * @app.
  **/
 
 void
@@ -2304,12 +2347,13 @@ gnome_app_insert_menus (GnomeApp *app,
 
 /**
  * gnome_app_insert_menus_with_data
- * @app: Pointer to GNOME app object.
- * @path:
- * @menuinfo:
- * @data:
+ * @app: A #GnomeApp instance.
+ * @path: A path to the menu item concerned.
+ * @menuinfo: A #GnomeUIInfo array describing the menus.
+ * @data: Application specific data to send to each signal callback.
  *
- * Description:
+ * This is the same as gnome_app_insert_menus(), except that the specified
+ * @data is passed to each signal callback.
  **/
 
 void
@@ -2330,14 +2374,15 @@ gnome_app_insert_menus_with_data (GnomeApp *app, const gchar *path,
 
 /**
  * gnome_app_insert_menus_interp
- * @app: Pointer to GNOME app object.
- * @path:
- * @menuinfo:
- * @relay_func:
- * @data:
- * @destroy_func:
+ * @app: A #GnomeApp instance.
+ * @path: A path to the menu item concerned.
+ * @menuinfo: A #GnomeUIInfo array describing the menus.
+ * @relay_func: A custom marshallar for signal data.,
+ * @data: Application-specific data to send to each signal callback.
+ * @destroy_func: The function to call when the menu item is destroyed.
  *
- * Description:
+ * THe same as gnome_app_insert_menus(), except that the given functions are
+ * attached to each menu item. Mostly of use for language bindings.
  **/
 
 void
@@ -2644,11 +2689,12 @@ button_press (GtkWidget *dock, GdkEventButton *event, gpointer user_data)
 
 /**
  * gnome_app_setup_toolbar
- * @toolbar: Pointer to #GtkToolbar widget
- * @dock_item: Pointer to a #BonoboDockItem the toolbar is inside, or NULL for none
+ * @toolbar: Pointer to a #GtkToolbar instance.
+ * @dock_item: Pointer to the #BonoboDockItem the toolbar is inside, or %NULL
+ * for none.
  *
  * Description:
- * Sets up a toolbar to use GNOME user preferences
+ * Sets up a toolbar to use GNOME user preferences.
  **/
 
 void

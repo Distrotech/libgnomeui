@@ -35,15 +35,19 @@
 
 /**
  * gnome_window_toplevel_set_title:
- * @window: A pointer to the toplevel window
- * @doc_name: the document name with extension (if any)
- * @app_name: the application name
- * @extension: the default extension that the application uses.
- *             NULL if there isn't a default extension.
+ * @window: A pointer to the toplevel window.
+ * @doc_name: The window-specific name.
+ * @app_name: The application name.
+ * @extension: The default extension that the application uses. %NULL if there
+ * is not a default extension.
  * 
- * Set the title of a toplevel window. Acording to gnome policy or
- * (if implemented) to a gnome setting.
+ * Set the title of a toplevel window. This is done by appending the
+ * window-specific name (less the extension, if any) to the application name.
+ * So it appears as "<appname> : <docname>".
  *
+ * This parameters to this function are appopriate in that it identifies
+ * application windows as containing certain files that are being worked on at
+ * the time (for example, a word processor file, a spreadsheet or an image).
  **/
 void
 gnome_window_toplevel_set_title (GtkWindow *window, const gchar *doc_name,

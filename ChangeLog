@@ -1,3 +1,14 @@
+2002-06-05  Malcolm Tredinnick <malcolm@commsecure.com.au>
+	* doc/reference/libgnomeui-docs.sgml,
+	doc/reference/libgnomeui-sections.txt,
+	doc/reference/tmpl/gnome-app-helper.sgml,
+	doc/reference/tmpl/gnome-window.sgml,
+	libgnomeui/gnome-app-helper.c,
+	libgnomeui/gnome-app-helper.h,
+	libgnomeui/gnome-window.c: Document gnome-app-helper,
+	gnome-window and start on the druid stuff (well, wrote the
+	introduction, at least).
+
 2002-06-04  Abel Cheung  <maddog@linux.org.hk>
 
 	* libgnomeui/gnome-scores.c (gnome_scores_construct): Modify
