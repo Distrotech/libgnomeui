@@ -574,8 +574,8 @@ gnome_icon_list_select_all (GnomeIconList *gil)
 {
 	uint i;
 	
-	g_return_val_if_fail (gil != NULL, 0);
-	g_return_val_if_fail (IS_GIL (gil), 0);
+	g_return_if_fail (gil != NULL);
+	g_return_if_fail (IS_GIL (gil));
 	
 	for (i = 0; i < gnome_icon_list_get_num_icons (gil); i++)
 		gnome_icon_list_select_icon (gil, i);

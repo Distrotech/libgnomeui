@@ -1,3 +1,8 @@
+2004-05-05  Anders Carlsson  <andersca@gnome.org>
+
+	* libgnomeui/gnome-icon-list.c: (gnome_icon_list_select_all):
+	Use g_return_if_fail. (#141833, Damien Carbery)
+	
 2004-05-02  Anders Carlsson  <andersca@gnome.org>
 
 	* libgnomeui/gnome-app-helper.c: (create_and_popup_toolbar_menu):
