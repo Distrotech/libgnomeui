@@ -1,3 +1,7 @@
+2002-05-26  Jacob Berkman  <jacob@ximian.com>
+
+	* configure.in (ALL_LINGUAS): remove ca, it broke the build
+
 2002-05-25  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* configure.in: Added "ca" to the languages list.
