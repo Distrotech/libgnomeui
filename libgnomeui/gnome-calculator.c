@@ -81,8 +81,9 @@ static void gnome_calculator_destroy	(GtkObject		*object);
 
 static GtkVBoxClass *parent_class;
 
-static GdkPixmap * font_pixmap = NULL;
-static int calculator_count = 0;
+/* The calculator font and our own reference count for it */
+static GdkPixmap *calc_font;
+static int calc_font_ref_count;
 
 typedef struct _CalculatorButton CalculatorButton;
 struct _CalculatorButton {
@@ -166,8 +167,6 @@ gnome_calculator_class_init (GnomeCalculatorClass *class)
 
 	class->result_changed = NULL;
 	gtk_object_class_add_signals (object_class, gnome_calculator_signals, LAST_SIGNAL);
-
-	calculator_count++;
 }
 
 #if 0 /*only used for debugging*/
@@ -196,60 +195,6 @@ dump_stack(GnomeCalculator *gc)
 #endif
 
 static void
-put_led_font(GnomeCalculator *gc)
-{
-	gchar *text = gc->result_string;
-	GdkPixmap *p;
-	GtkStyle *style;
-	gint retval;
-	gint i;
-	gint x;
-
-	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gc)))
-		return;
-
-	style = gtk_widget_get_style(gc->display);
-	gtk_pixmap_get(GTK_PIXMAP(gc->display), &p, NULL);
-
-	gdk_draw_rectangle(p, style->black_gc, 1, 0, 0, -1, -1);
-
-        if (font_pixmap != NULL) {
-                if(gc->memory!=0) {
-                        gdk_draw_pixmap(p, style->white_gc, font_pixmap, 13*FONT_WIDTH,
-                                        0, 0, 0, FONT_WIDTH, FONT_HEIGHT);
-                }
-                for(x=12,i=strlen(text)-1;i>=0;x--,i--) {
-                        if(text[i]>='0' && text[i]<='9')
-                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
-                                                (text[i]-'0')*FONT_WIDTH, 0, 
-                                                x*FONT_WIDTH, 0,
-                                                FONT_WIDTH, FONT_HEIGHT);
-                        else if(text[i]=='.')
-                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
-                                                10*FONT_WIDTH, 0, 
-                                                x*FONT_WIDTH, 0,
-                                                FONT_WIDTH, FONT_HEIGHT);
-                        else if(text[i]=='+')
-                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
-                                                11*FONT_WIDTH, 0,
-                                                x*FONT_WIDTH, 0,
-                                                FONT_WIDTH, FONT_HEIGHT);
-                        else if(text[i]=='-')
-                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
-                                                12*FONT_WIDTH, 0, 
-                                                x*FONT_WIDTH, 0,
-                                                FONT_WIDTH, FONT_HEIGHT);
-                        else if(text[i]=='e')
-                                gdk_draw_pixmap(p, style->white_gc, font_pixmap,
-                                                14*FONT_WIDTH, 0, 
-                                                x*FONT_WIDTH, 0,
-                                                FONT_WIDTH, FONT_HEIGHT);
-                }
-        }
-	gtk_signal_emit_by_name(GTK_OBJECT(gc->display), "draw", &retval);
-}
-
-static void
 stack_pop(GList **stack)
 {
 	CalculatorStack *s;
@@ -275,7 +220,7 @@ do_error(GnomeCalculator *gc)
 {
 	gc->error = TRUE;
 	strcpy(gc->result_string,"e");
-	put_led_font(gc);
+	gtk_widget_queue_draw (gc->display);
 }
 
 /*we handle sigfpe's so that we can find all the errors*/
@@ -455,8 +400,7 @@ set_result(GnomeCalculator *gc)
 	strncpy(gc->result_string,buf,12);
 	gc->result_string[12]='\0';
 
-	if(GTK_WIDGET_REALIZED(gc))
-		put_led_font(gc);
+	gtk_widget_queue_draw (gc->display);
 
 	gtk_signal_emit(GTK_OBJECT(gc),
 			gnome_calculator_signals[RESULT_CHANGED_SIGNAL],
@@ -467,9 +411,32 @@ set_result(GnomeCalculator *gc)
 static void
 unselect_invert(GnomeCalculator *gc)
 {
+	g_return_if_fail(gc != NULL);
+	g_return_if_fail(GNOME_IS_CALCULATOR(gc));
+	g_return_if_fail(gc->invert_button);
+
 	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gc->invert_button),
 				    FALSE);
 	gc->invert=FALSE;
+}
+
+static void
+setup_drg_label(GnomeCalculator *gc)
+{
+	GtkWidget *label;
+
+	g_return_if_fail(gc != NULL);
+	g_return_if_fail(GNOME_IS_CALCULATOR(gc));
+	g_return_if_fail(gc->drg_button);
+
+	label = GTK_BUTTON(gc->drg_button)->child;
+
+	if(gc->mode == GNOME_CALCULATOR_DEG)
+		gtk_label_set_text(GTK_LABEL(label), _("DEG"));
+	else if(gc->mode == GNOME_CALCULATOR_RAD)
+		gtk_label_set_text(GTK_LABEL(label), _("RAD"));
+	else
+		gtk_label_set_text(GTK_LABEL(label), _("GRAD"));
 }
 
 static gdouble
@@ -505,6 +472,13 @@ no_func(GtkWidget *w, gpointer data)
 		return;
 
 	push_input(gc);
+
+	/* if no stack, nothing happens */
+	if(!gc->stack) {
+		unselect_invert(gc);
+		return;
+	}
+
 	reduce_stack_prec(gc,NULL);
 	if(gc->error) return;
 	set_result(gc);
@@ -605,7 +579,7 @@ math_func(GtkWidget *w, gpointer data)
 		unselect_invert(gc);
 		return;
 	}
-	
+
 	stack = g_new(CalculatorStack,1);
 	stack->type = CALCULATOR_FUNCTION;
 	if(!gc->invert || invfunc==NULL)
@@ -633,7 +607,7 @@ reset_calc(GtkWidget *w, gpointer data)
 		stack_pop(&gc->stack);
 
 	gc->result = 0;
-	strcpy(gc->result_string,"0");
+	strcpy(gc->result_string, " 0");
 	gc->memory = 0;
 	gc->mode = GNOME_CALCULATOR_DEG;
 	gc->invert = FALSE;
@@ -644,6 +618,7 @@ reset_calc(GtkWidget *w, gpointer data)
 	set_result(gc);
 
 	unselect_invert(gc);
+	setup_drg_label(gc);
 }
 
 static void
@@ -653,8 +628,15 @@ clear_calc(GtkWidget *w, gpointer data)
 
 	g_return_if_fail(gc!=NULL);
 
+	/* if in add digit mode, just clear the number, otherwise clear
+	 * state as well */
+	if(!gc->add_digit) {
+		while(gc->stack)
+			stack_pop(&gc->stack);
+	}
+
 	gc->result = 0;
-	strcpy(gc->result_string,"0");
+	strcpy(gc->result_string, " 0");
 	gc->error = FALSE;
 	gc->invert = FALSE;
 
@@ -737,8 +719,8 @@ add_digit(GtkWidget *w, gpointer data)
 	}
 
 	strcat(gc->result_string,digit);
-	
-	put_led_font(gc);
+
+	gtk_widget_queue_draw (gc->display);
 
 	sscanf(gc->result_string,"%lf",&gc->result);
 }
@@ -783,7 +765,7 @@ negate_val(GtkWidget *w, gpointer data)
 
 	sscanf(gc->result_string,"%lf",&gc->result);
 
-	put_led_font(gc);
+	gtk_widget_queue_draw (gc->display);
 }
 
 static gdouble
@@ -861,9 +843,8 @@ set_result_to(GnomeCalculator *gc, gdouble result)
  * @gc: Pointer to GNOME calculator widget.
  * @result: New value of calculator buffer.
  *
- * Description:
- * Sets the value stored in the calculator's result buffer to the given
- * @result.
+ * Description:  Sets the value stored in the calculator's result buffer to the
+ * given @result.
  **/
 
 void
@@ -886,7 +867,7 @@ store_m(GtkWidget *w, gpointer data)
 
 	gc->memory = gc->result;
 
-	put_led_font(gc);
+	gtk_widget_queue_draw (gc->display);
 
 	unselect_invert(gc);
 }
@@ -920,7 +901,7 @@ sum_m(GtkWidget *w, gpointer data)
 
 	gc->memory += gc->result;
 
-	put_led_font(gc);
+	gtk_widget_queue_draw (gc->display);
 
 	unselect_invert(gc);
 }
@@ -960,7 +941,6 @@ static void
 drg_toggle(GtkWidget *w, gpointer data)
 {
 	GnomeCalculator *gc = gtk_object_get_user_data(GTK_OBJECT(w));
-	GtkWidget *label = GTK_BUTTON(w)->child;
 	GnomeCalculatorMode oldmode;
 
 	g_return_if_fail(gc!=NULL);
@@ -977,13 +957,7 @@ drg_toggle(GtkWidget *w, gpointer data)
 	else
 		gc->mode=GNOME_CALCULATOR_DEG;
 
-
-	if(gc->mode==GNOME_CALCULATOR_DEG)
-		gtk_label_set_text(GTK_LABEL(label),_("DEG"));
-	else if(gc->mode==GNOME_CALCULATOR_RAD)
-		gtk_label_set_text(GTK_LABEL(label),_("RAD"));
-	else
-		gtk_label_set_text(GTK_LABEL(label),_("GRAD"));
+	setup_drg_label(gc);
 
 	/*convert if invert is on*/
 	if(gc->invert) {
@@ -1083,40 +1057,6 @@ sub_parenth(GtkWidget *w, gpointer data)
 	unselect_invert(gc);
 }
 
-static void
-gnome_calculator_realized(GtkWidget *w, gpointer data)
-{
-	GnomeCalculator *gc = GNOME_CALCULATOR(w);
-
-	if(font_pixmap == NULL) {
-                GdkPixbuf *pixbuf;
-		gchar *file = gnome_pixmap_file("calculator-font.png");
-
-		if(file == NULL) {
-			g_warning("Can't find calculator-font.png");
-		} else {
-                        pixbuf = gdk_pixbuf_new_from_file("calculator-font.png");
-                        if (pixbuf == NULL) {
-                                g_warning("Can't load calculator-font.png");
-                        } else {
-                                gdk_pixbuf_render_pixmap_and_mask(pixbuf, &font_pixmap, NULL, 128);
-                        }
-                        g_free(file);
-                }
-	}
-
-	gc->display =  gtk_pixmap_new(gdk_pixmap_new(GTK_WIDGET(gc)->window,
-						     DISPLAY_LEN*FONT_WIDTH,
-						     FONT_HEIGHT,
-						     -1), NULL);
-
-	gtk_box_pack_start(GTK_BOX(gc),gc->display,FALSE,FALSE,0);
-
-	gtk_widget_show(gc->display);
-
-	put_led_font(gc);
-}
-
 static const CalculatorButton buttons[8][5] = {
 	{
 		{N_("1/x"),(GtkSignalFunc)simple_func,c_inv,NULL,FALSE,{0}},
@@ -1169,26 +1109,197 @@ static const CalculatorButton buttons[8][5] = {
 	}
 };
 
+/* Loads the font for the calculator if necessary, or adds a reference count to it */
+static void
+ref_font (void)
+{
+	char *filename;
+	GdkPixbuf *pb;
+
+	if (calc_font) {
+		g_assert (calc_font_ref_count > 0);
+
+		calc_font_ref_count++;
+		return;
+	}
+
+	g_assert (calc_font_ref_count == 0);
+
+	filename = gnome_pixmap_file ("calculator-font.png");
+	if (!filename) {
+		g_message ("ref_font(): could not find calculator-font.png");
+		return;
+	}
+
+	pb = gdk_pixbuf_new_from_file(filename);
+	g_free (filename);
+	if (!pb) {
+		g_message ("ref_font(): could not load calculator-font.png");
+		return;
+	}
+
+	gdk_pixbuf_render_pixmap_and_mask(pb, &calc_font, NULL, 128);
+	gdk_pixbuf_unref (pb);
+
+	if (!calc_font) {
+		g_message ("ref_font(): could not render the calculator font");
+		return;
+	}
+
+	calc_font_ref_count = 1;
+}
+
+/* Unrefs the calculator font pixmap and destroys it if necessary */
+static void
+unref_font (void)
+{
+	g_assert (calc_font_ref_count > 0);
+	g_assert (calc_font != NULL);
+
+	if (calc_font_ref_count > 1) {
+		calc_font_ref_count--;
+		return;
+	}
+
+	calc_font_ref_count = 0;
+	gdk_pixmap_unref (calc_font);
+	calc_font = NULL;
+}
+
+/* Expose handler for the calculator display drawing area */
+static gint
+display_expose (GtkWidget *widget, GdkEventExpose *event, gpointer data)
+{
+	GnomeCalculator *calc;
+	GdkWindow *window;
+	GdkGC *gc;
+	char *text;
+	int x, i;
+
+	calc = GNOME_CALCULATOR (data);
+
+	window = calc->display->window;
+	gc = calc->display->style->black_gc;
+
+	gdk_draw_rectangle (window, gc, TRUE, 0, 0, -1, -1);
+
+	/* If the font could not be loaded, just bail out */
+	if (!calc_font)
+		return TRUE;
+
+	if (calc->memory != 0)
+		gdk_draw_pixmap (window, gc, calc_font,
+				 13 * FONT_WIDTH, 0, 0, 0, FONT_WIDTH, FONT_HEIGHT);
+
+	text = calc->result_string;
+	i = strlen (text) - 1;
+	for (x = 12; i >= 0; x--, i--) {
+		if (text[i] >= '0' && text[i] <= '9')
+			gdk_draw_pixmap (window, gc, calc_font,
+					 (text[i] - '0') * FONT_WIDTH, 0,
+					 x * FONT_WIDTH, 0,
+					 FONT_WIDTH, FONT_HEIGHT);
+		else if (text[i] == '.')
+			gdk_draw_pixmap (window, gc, calc_font,
+					 10 * FONT_WIDTH, 0,
+					 x * FONT_WIDTH, 0,
+					 FONT_WIDTH, FONT_HEIGHT);
+		else if (text[i] == '+')
+			gdk_draw_pixmap (window, gc, calc_font,
+					 11 * FONT_WIDTH, 0,
+					 x * FONT_WIDTH, 0,
+					 FONT_WIDTH, FONT_HEIGHT);
+		else if (text[i] == '-')
+			gdk_draw_pixmap (window, gc, calc_font,
+					 12 * FONT_WIDTH, 0,
+					 x * FONT_WIDTH, 0,
+					 FONT_WIDTH, FONT_HEIGHT);
+		else if (text[i] == 'e')
+			gdk_draw_pixmap (window, gc, calc_font,
+					 14 * FONT_WIDTH, 0,
+					 x * FONT_WIDTH, 0,
+					 FONT_WIDTH, FONT_HEIGHT);
+	}
+
+	return TRUE;
+}
+
+static void
+create_button(GnomeCalculator *gc, GtkWidget *table, int x, int y)
+{
+	const CalculatorButton *but = &buttons[y][x];
+	GtkWidget *w;
+	int i;
+
+	if(!but->name)
+		return;
+
+	w = gtk_button_new_with_label(_(but->name));
+	gtk_signal_connect(GTK_OBJECT(w), "clicked",
+			   but->signal_func,
+			   (gpointer) but);
+
+	for(i=0;but->keys[i]!=0;i++) {
+		gtk_widget_add_accelerator(w, "clicked",
+					   gc->accel,
+					   but->keys[i], 0,
+					   GTK_ACCEL_VISIBLE);
+		gtk_widget_add_accelerator(w, "clicked",
+					   gc->accel,
+					   but->keys[i],
+					   GDK_SHIFT_MASK,
+					   GTK_ACCEL_VISIBLE);
+		gtk_widget_add_accelerator(w, "clicked",
+					   gc->accel,
+					   but->keys[i],
+					   GDK_LOCK_MASK,
+					   GTK_ACCEL_VISIBLE);
+	}
+	gtk_object_set_user_data(GTK_OBJECT(w),gc);
+	gtk_widget_show(w);
+	gtk_table_attach(GTK_TABLE(table), w,
+			 x, x+1, y, y+1,
+			 GTK_FILL | GTK_EXPAND |
+			 GTK_SHRINK,
+			 0, 2, 2);
+
+	/* if this is the DRG button, remember it's pointer */
+	if(but->signal_func == drg_toggle)
+		gc->drg_button = w;
+}
+
 static void
 gnome_calculator_init (GnomeCalculator *gc)
 {
 	gint x,y;
 	GtkWidget *table;
-	GtkWidget *w;
 
-	gc->display = NULL;
+	ref_font ();
+
+	gtk_widget_push_visual (gdk_rgb_get_visual ());
+	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
+
+	gc->display = gtk_drawing_area_new ();
+	gtk_drawing_area_size (GTK_DRAWING_AREA (gc->display), DISPLAY_LEN * FONT_WIDTH, FONT_HEIGHT);
+
+	gtk_widget_pop_colormap ();
+	gtk_widget_pop_visual ();
+
+	gtk_signal_connect (GTK_OBJECT (gc->display), "expose_event",
+			    GTK_SIGNAL_FUNC (display_expose),
+			    gc);
+
+	gtk_box_pack_start (GTK_BOX (gc), gc->display, FALSE, FALSE, 0);
+	gtk_widget_show (gc->display);
+
 	gc->stack = NULL;
 	gc->result = 0;
-	strcpy(gc->result_string,"0");
+	strcpy(gc->result_string," 0");
 	gc->memory = 0;
 	gc->mode = GNOME_CALCULATOR_DEG;
 	gc->invert = FALSE;
-	gc->add_digit = FALSE;
+	gc->add_digit = TRUE;
 	gc->accel = gtk_accel_group_new();
-
-	gtk_signal_connect_after(GTK_OBJECT(gc),"realize",
-				 GTK_SIGNAL_FUNC(gnome_calculator_realized),
-				 NULL);
 
 	table = gtk_table_new(8,5,TRUE);
 	gtk_widget_show(table);
@@ -1197,62 +1308,26 @@ gnome_calculator_init (GnomeCalculator *gc)
 
 	for(x=0;x<5;x++) {
 		for(y=0;y<8;y++) {
-			const CalculatorButton *but = &buttons[y][x];
-			if(but->name) {
-				int i;
-				w=gtk_button_new_with_label(_(but->name));
-				gtk_signal_connect(GTK_OBJECT(w),"clicked",
-						   but->signal_func,
-						   (gpointer) but);
-
-				for(i=0;but->keys[i]!=0;i++) {
-				  gtk_widget_add_accelerator(w,
-							     "clicked",
-							     gc->accel,
-							     but->keys[i],0,
-							     GTK_ACCEL_VISIBLE);
-				  gtk_widget_add_accelerator(w,
-							     "clicked",
-							     gc->accel,
-							     but->keys[i],
-							     GDK_SHIFT_MASK,
-							     GTK_ACCEL_VISIBLE);
-				  gtk_widget_add_accelerator(w,
-							     "clicked",
-							     gc->accel,
-							     but->keys[i],
-							     GDK_LOCK_MASK,
-							     GTK_ACCEL_VISIBLE);
-				}
-				gtk_object_set_user_data(GTK_OBJECT(w),gc);
-				gtk_widget_show(w);
-				gtk_table_attach(GTK_TABLE(table),w,
-						 x,x+1,y,y+1,
-						 GTK_FILL | GTK_EXPAND |
-						 	GTK_SHRINK,
-						 0, 2, 2);
-			}
+			create_button(gc, table, x, y);
 		}
 	}
-	gc->invert_button=gtk_toggle_button_new_with_label(_("INV"));
-	gtk_signal_connect(GTK_OBJECT(gc->invert_button),"toggled",
-			   GTK_SIGNAL_FUNC(invert_toggle),
-			   gc);
-	gtk_object_set_user_data(GTK_OBJECT(gc->invert_button),gc);
+	gc->invert_button = gtk_toggle_button_new_with_label(_("INV"));
+	gtk_signal_connect(GTK_OBJECT(gc->invert_button), "toggled",
+			   GTK_SIGNAL_FUNC(invert_toggle), gc);
+	gtk_object_set_user_data(GTK_OBJECT(gc->invert_button), gc);
 	gtk_widget_show(gc->invert_button);
-	gtk_table_attach_defaults(GTK_TABLE(table),gc->invert_button,0,1,1,2);
+	gtk_table_attach_defaults(GTK_TABLE(table), gc->invert_button,
+				  0, 1, 1, 2);
 }
 
 
 /**
- * gnome_calculator_new
+ * gnome_calculator_new:
  *
- * Description:
- * Creates a calculator widget, a window with all the common buttons and
- * functions found on a standard pocket calculator.
+ * Description: Creates a calculator widget, a window with all the common
+ * buttons and functions found on a standard pocket calculator.
  *
- * Returns:
- * Pointer to newly-created calculator widget.
+ * Returns: Pointer to newly-created calculator widget.
  **/
 
 GtkWidget *
@@ -1278,11 +1353,7 @@ gnome_calculator_destroy (GtkObject *object)
 	while(gc->stack)
 		stack_pop(&gc->stack);
 
-	if((--calculator_count)==0 &&
-	   font_pixmap) {
-		gdk_pixmap_unref(font_pixmap);
-		font_pixmap = NULL;
-	}
+	unref_font ();
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -1292,8 +1363,11 @@ gnome_calculator_destroy (GtkObject *object)
  * gnome_calculator_get_result
  * @gc: Pointer to GNOME calculator widget
  *
- * Returns:
- * Value currently stored in calculator buffer.
+ * Description:  Gets the value of the result buffer as a double.
+ * This should read off whatever is currently on the display of the
+ * calculator.
+ *
+ * Returns:  A double precision result.
  **/
 
 gdouble
@@ -1303,4 +1377,24 @@ gnome_calculator_get_result (GnomeCalculator *gc)
 	g_return_val_if_fail (GNOME_IS_CALCULATOR (gc), 0.0);
 
 	return gc->result;
+}
+
+/**
+ * gnome_calculator_get_accel_group
+ * @gc: Pointer to GNOME calculator widget
+ *
+ * Description:  Gets the accelerator group which you can add to 
+ * the toplevel window or wherever you want to catch the keys for this
+ * widget.
+ *
+ * Returns:  The accelerator group
+ **/
+
+GtkAccelGroup   *
+gnome_calculator_get_accel_group(GnomeCalculator *gc)
+{
+	g_return_val_if_fail (gc, NULL);
+	g_return_val_if_fail (GNOME_IS_CALCULATOR (gc), NULL);
+
+	return gc->accel;
 }

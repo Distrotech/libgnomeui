@@ -26,6 +26,24 @@
 #include <config.h>
 #include <gtk/gtkmain.h>
 #include "gnome-animator.h"
+/*FIXME: BAD, UGLY UGLY UGLY BAD!, This is because this code wants to
+ * allocate GdkPixbufFrames, this must somehow be fixed!!*/
+/* Private part of the GdkPixbufFrame structure */
+struct _GdkPixbufFrame {
+	/* The pixbuf with this frame's image data */
+	GdkPixbuf *pixbuf;
+
+	/* Offsets for overlaying onto the animation's area */
+	int x_offset;
+	int y_offset;
+
+	/* Frame duration in ms */
+	int delay_time;
+
+	/* Overlay mode */
+	GdkPixbufFrameAction action;
+};
+
 
 struct _GnomeAnimatorPrivate
 {
@@ -189,7 +207,7 @@ prepare_aux_pixmaps (GnomeAnimator * animator)
 						       widget->requisition.
 						       height, visual->depth);
 
-	  internal->background_pixbuf = gdk_pixbuf_new (ART_PIX_RGB,
+	  internal->background_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
 							FALSE,
 							8,
 							widget->requisition.
@@ -296,10 +314,10 @@ paint (GnomeAnimator * animator, GdkRectangle * area)
       draw_background_pixbuf (animator);
     }
 
-  draw_source = animator->internal->current_frame->frame->pixbuf;
+  draw_source = gdk_pixbuf_frame_get_pixbuf(animator->internal->current_frame->frame);
 
-  x_off = animator->internal->current_frame->frame->x_offset;
-  y_off = animator->internal->current_frame->frame->y_offset;
+  x_off = gdk_pixbuf_frame_get_x_offset(animator->internal->current_frame->frame);
+  y_off = gdk_pixbuf_frame_get_y_offset(animator->internal->current_frame->frame);
 
   width = gdk_pixbuf_get_width (draw_source);
   height = gdk_pixbuf_get_height (draw_source);
@@ -376,9 +394,11 @@ paint (GnomeAnimator * animator, GdkRectangle * area)
 	  GdkPixbuf *dest_source;
 	  gint i, j, rowstride, dest_rowstride;
 	  gint r, g, b;
+	  /*FIXME: dest_pixels will be used uninitialized in this function,
+	   * fix! */
 	  gchar *dest_pixels, *c, *a, *original_pixels;
 
-	  dest_source = gdk_pixbuf_new (ART_PIX_RGB,
+	  dest_source = gdk_pixbuf_new (GDK_COLORSPACE_RGB,
 					FALSE,
 					gdk_pixbuf_get_bits_per_sample
 					(draw_source),
@@ -724,8 +744,9 @@ gnome_animator_append_frame_from_pixbuf_at_size (GnomeAnimator * animator,
 
   new_frame = append_frame (animator);
 
+  /*FIXME: somehow fix this, GdkPixbufFrame is now an opaque type! */
   new_frame->frame = g_new0 (GdkPixbufFrame, 1);
-  new_frame->frame->pixbuf = gdk_pixbuf_new (gdk_pixbuf_get_format (pixbuf),
+  new_frame->frame->pixbuf = gdk_pixbuf_new (gdk_pixbuf_get_colorspace (pixbuf),
 					     TRUE,
 					     gdk_pixbuf_get_bits_per_sample
 					     (pixbuf), width, height);
@@ -762,8 +783,9 @@ gnome_animator_append_frames_from_pixbuf_at_size (GnomeAnimator * animator,
       GnomeAnimatorFrame *frame;
 
       frame = append_frame (animator);
+      /*FIXME: somehow fix this, GdkPixbufFrame is now an opaque type! */
       frame->frame = g_new0 (GdkPixbufFrame, 1);
-      frame->frame->pixbuf = gdk_pixbuf_new (gdk_pixbuf_get_format (pixbuf),
+      frame->frame->pixbuf = gdk_pixbuf_new (gdk_pixbuf_get_colorspace (pixbuf),
 					     TRUE,
 					     gdk_pixbuf_get_bits_per_sample
 					     (pixbuf), width, height);

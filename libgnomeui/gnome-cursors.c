@@ -613,7 +613,7 @@ build_cursor_table (void)
 	cursortable = g_hash_table_new (g_str_hash, g_str_equal);
 	
 	for (i = 0; i < num_default_cursors; i++){
-		char *name = default_cursors[i].cursorname;
+		const char *name = default_cursors[i].cursorname;
 		char *key, *cursorstr;
 
 		/* Build key */

@@ -56,9 +56,11 @@ typedef enum {
 struct _GnomeCalculator {
 	GtkVBox vbox;
 
+	/*< private >*/
 	GtkWidget *display;
 
 	GtkWidget *invert_button;
+	GtkWidget *drg_button;
 
 	GList *stack;
 	GtkAccelGroup *accel;
@@ -91,6 +93,7 @@ void		 gnome_calculator_clear		(GnomeCalculator *gc,
 void		 gnome_calculator_set		(GnomeCalculator *gc,
 						 gdouble result);
 gdouble		 gnome_calculator_get_result	(GnomeCalculator *gc);
+GtkAccelGroup   *gnome_calculator_get_accel_group(GnomeCalculator *gc);
 
 END_GNOME_DECLS
 

@@ -35,10 +35,7 @@ main (int argc, char *argv[])
   GtkWidget *button;
   GtkWidget *animator;
   GdkPixbuf *pixbuf;
-  GtkWidget *box;
   char *s;
-  int x;
-  int num_frames;
 
   gnome_program_init ("gnome-animator", VERSION, argc, argv, GNOMEUI_INIT,
 		      NULL);

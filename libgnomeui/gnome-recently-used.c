@@ -26,6 +26,7 @@
 #include "gnome-recently-used.h"
 
 #include <sys/time.h>
+#include <stdlib.h>
 
 #include <libgnome/gnomelib-init2.h>
 

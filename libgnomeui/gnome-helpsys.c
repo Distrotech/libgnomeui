@@ -846,7 +846,7 @@ gnome_help_view_process_event(GtkWidget *evbox, GdkEvent *event, GnomeHelpView *
 	gnome_help_view_show_help_for(help_view, chosen_widget);
       else
 	gnome_ok_dialog_parented(_("No help is available for the selected portion of the application."),
-				 GTK_WIDGET(gtk_widget_get_toplevel(help_view->btn_help)));
+				 GTK_WINDOW(gtk_widget_get_toplevel(help_view->btn_help)));
     }
 
   return TRUE;

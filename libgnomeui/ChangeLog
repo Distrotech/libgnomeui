@@ -1,3 +1,51 @@
+Sun Apr 30 02:12:53 2000  George Lebl <jirka@5z.com>
+
+	* animator_demo.c (main): fix warnings
+
+	* gnome-animator.c (prepare_aux_pixmaps) (paint)
+	  (gnome_animator_append_frame_from_pixbuf_)
+	  (gnome_animator_append_frames_from_pixbuf): Make this compile with
+	  newest gdk-pixbuf.  It however can't possibly work due to usage
+	  of unused variables, see all the FIXMEs.
+
+	* gnome-calculator.[ch]:  Fixup Federico's patch.  fix clear/reset
+	  as in gnome-libs-1-0, fix no_func crash.  Add an accessor for
+	  the accelerator group.  Mark all fields in the structure as
+	  private.  Add pointer to the drg button and set it's state
+	  properly on reset.
+
+	* gnome-canvas-pixbuf.c (gnome_canvas_pixbuf_draw)
+	  (gnome_canvas_pixbuf_render):  Make this compile with newest
+	  gdk-pixbuf
+
+	* gnome-cursors.c (build_cursor_table): fix const warning
+
+	* gnome-helpsys.c (gnome_help_view_process_event):  fix warning
+
+	* gnome-recently-used.c:  fix warning
+
+2000-04-19  Federico Mena Quintero  <federico@helixcode.com>
+
+	* gnome-calculator.c: Keep around a pixmap and a reference count
+	for the calculator's font.  It is no longer a GnomePixmap, which
+	did not make any sense.
+	(gnome_calculator_init): gc->display is now a drawing area.
+	Create it with the proper visual and colormap.  Also, do not
+	connect to the realize signal of the calculator.  Call ref_font()
+	instead.
+	(gnome_calculator_destroy): Call unref_font().  Now we don't leak
+	the font.  Wheee!
+	(ref_font): New function to load/ref the calculator's font pixmap.
+	(unref_font): New function to unref/destroy the font pixmap.
+	(gnome_calculator_realized): Removed function.
+	(display_expose): New handler for the calculator's display expose
+	event.
+	(do_error): Queue a draw of the display.
+	(set_result): Likewise.
+	(add_digit): Likewise.
+	(negate_val): Likewise.
+	(store_m): Likewise.
+	(sum_m): Likewise.
 2000-04-20  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-color-picker.c (gnome_color_picker_init): gdk_pixbuf API changes

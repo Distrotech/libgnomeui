@@ -25,7 +25,8 @@
 #include <libgnomeui/gnome-canvas.h>
 #include <libgnomeui/gnome-canvas-util.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <libart_lgpl/art_rgb_pixbuf_affine.h>
+#include <libart_lgpl/art_rgb_affine.h>
+#include <libart_lgpl/art_rgb_rgba_affine.h>
 #include "gnome-canvas-pixbuf.h"
 
 
@@ -768,7 +769,6 @@ gnome_canvas_pixbuf_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 static void
 gnome_canvas_pixbuf_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 {
-	ArtPixBuf *art;
 	GnomeCanvasPixbuf *gcp;
 	PixbufPrivate *priv;
 	double i2c[6], render_affine[6];
@@ -783,12 +783,28 @@ gnome_canvas_pixbuf_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 	compute_render_affine (gcp, render_affine, i2c);
         gnome_canvas_buf_ensure_buf (buf);
 
-	art_rgb_pixbuf_affine (buf->buf,
-			       buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
-			       buf->buf_rowstride,
-			       priv->pixbuf->art_pixbuf,
-			       render_affine,
-			       ART_FILTER_NEAREST, NULL);
+	if (gdk_pixbuf_get_has_alpha(priv->pixbuf))
+		art_rgb_rgba_affine (buf->buf,
+				     buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
+				     buf->buf_rowstride,
+				     gdk_pixbuf_get_pixels(priv->pixbuf),
+				     gdk_pixbuf_get_width(priv->pixbuf),
+				     gdk_pixbuf_get_height(priv->pixbuf),
+				     gdk_pixbuf_get_rowstride(priv->pixbuf),
+				     render_affine,
+				     ART_FILTER_NEAREST,
+				     NULL);
+	else
+		art_rgb_affine (buf->buf,
+				buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
+				buf->buf_rowstride,
+				gdk_pixbuf_get_pixels(priv->pixbuf),
+				gdk_pixbuf_get_width(priv->pixbuf),
+				gdk_pixbuf_get_height(priv->pixbuf),
+				gdk_pixbuf_get_rowstride(priv->pixbuf),
+				render_affine,
+				ART_FILTER_NEAREST,
+				NULL);
 
 	buf->is_bg = 0;
 }
