@@ -9,62 +9,27 @@
   ****/
 
 #include <libgnome/gnome-defs.h>
+#include <gtk/gtkbbox.h>
 
 BEGIN_GNOME_DECLS
 
-/* Used for global defaults. */
-#define GNOME_UI_APPNAME "/_Gnome_UI_Prefs"
+/* Global config choices. App-specific choices are handles in GnomeApp. */
+typedef struct _GnomePreferences GnomePreferences;
 
-
-/* ============= Sections ====================== */
-#define GNOME_GENERAL   "/_Gnome_UI_General"
-
-/* ============== Status Bar =================== */
-
-#define GNOME_STATUS_BAR_KEY "/StatusBarUsage"
-
-/* Three possible values; strings improve human-readability of config
-   file. Should only be parsed once per startup, so no big deal. */
-
-#define  GNOME_STATUS_BAR_NONE "None" 
-#define  GNOME_STATUS_BAR_MIN  "Minimum"  /* only non-interactive messages */
-#define  GNOME_STATUS_BAR_INTERACTIVE "Interactive"
-
-/* ============ Property Box ======================= */
-
-/* ignore this */
-#define _GNOME_PROPERTY_BOX_BUTTONS "/PropertyBoxButtons"
-
-/* Each of these are bools; better way? */
-#define GNOME_PROPERTY_BOX_BUTTONS_OK_KEY _GNOME_PROPERTY_BOX_BUTTONS"OK"
-#define GNOME_PROPERTY_BOX_BUTTONS_APPLY_KEY _GNOME_PROPERTY_BOX_BUTTONS"Apply"
-#define GNOME_PROPERTY_BOX_BUTTONS_CLOSE_KEY _GNOME_PROPERTY_BOX_BUTTONS"Close"
-#define GNOME_PROPERTY_BOX_BUTTONS_HELP_KEY _GNOME_PROPERTY_BOX_BUTTONS"Help"
-
-/* ==================== GnomeDialog ===================== */
-
-/* Use positions from GnomeApp; that stuff needs to be broken out of 
-   GnomeApp */
-
-
-
-/* Stuff set on an app-by-app basis. */
-typedef struct _GnomeAppPreferences GnomeAppPreferences;
-
-struct {
-  const gchar * status_bar_usage;
-} _GnomeAppPreferences;
-
-/* Stuff set globally */
-typedef struct _GnomeUIPreferences GnomeUIPreferences;
-
-struct {
-  const gchar * dialog_buttons_position;
+struct _GnomePreferences {
+  GtkButtonBoxStyle dialog_buttons_style;
   int property_box_buttons_ok : 1;
   int property_box_buttons_apply : 1;
   int property_box_buttons_close : 1;
   int property_box_buttons_help : 1;
-} _GnomeUIPreferences;
+};
+
+
+/* Don't use this unless you know what you're doing. */
+extern GnomePreferences gnome_preferences_global;
+
+void gnome_preferences_load(void);
+void gnome_preferences_save(void);
 
 END_GNOME_DECLS
 

@@ -1,3 +1,9 @@
+Tue May 12 00:33:10 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-preferences.h, gnome-preferences.c: Hmm, I didn't think
+	about that earlier attempt much. This should work a little better.
+	* testgnome.c: Barest skeletal start. 
+
 Sat May  9 15:55:48 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dialog-util.h, gnome-dialog-util.c: gnome-app-util had 
