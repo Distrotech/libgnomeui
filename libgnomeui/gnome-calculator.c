@@ -1229,8 +1229,6 @@ gnome_calculator_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
-/* API docs for macros in gnome-calculator.h */
-
 /**
  * gnome_calculator_get_result
  * @gc: Pointer to GNOME calculator widget
@@ -1239,13 +1237,11 @@ gnome_calculator_destroy (GtkObject *object)
  * Value currently stored in calculator buffer.
  **/
 
-/* MACDOC
-
 gdouble
 gnome_calculator_get_result (GnomeCalculator *gc)
 {
-	I am really a macro defined in gnome-calculator.h
+	g_return_val_if_fail (gc, 0.0);
+	g_return_val_if_fail (GNOME_IS_CALCULATOR (gc), 0.0);
+
+	return gc->result;
 }
-
-END MACDOC */
-

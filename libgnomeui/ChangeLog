@@ -1,3 +1,8 @@
+Tue Dec 21 02:06:25 1999  George Lebl <jirka@5z.com>
+
+	* gnome-calculator.[ch]: make the get_result be a function rather
+	  then a macro to make bindings easier
+
 1999-12-20  Elliot Lee  <sopwith@redhat.com>
 	* *.h: Shuffle structure elements around.
 	* gtkpixmapmenuitem.c: Import fix from gnome-libs-1-0

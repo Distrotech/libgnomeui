@@ -63,8 +63,7 @@ void		 gnome_calculator_clear		(GnomeCalculator *gc,
 						 const gboolean reset);
 void		 gnome_calculator_set		(GnomeCalculator *gc,
 						 gdouble result);
-
-#define gnome_calculator_get_result(gc) (GNOME_CALCULATOR(gc)->result)
+gdouble		 gnome_calculator_get_result	(GnomeCalculator *gc);
 
 END_GNOME_DECLS
 
