@@ -1,3 +1,7 @@
+1999-08-06  Morten Welinder  <terra@diku.dk>
+
+       * gnome-canvas.c (shutdown_transients): Plug leak.
+
 1999-08-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-pixmap-entry.c (ensure_update): New function to ensure

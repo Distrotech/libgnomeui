@@ -2311,6 +2311,8 @@ shutdown_transients (GnomeCanvas *canvas)
 	 */
 	if (canvas->need_redraw) {
 		canvas->need_redraw = FALSE;
+		art_uta_free (canvas->redraw_area);
+		canvas->redraw_area = NULL;
 		canvas->redraw_x1 = 0;
 		canvas->redraw_y1 = 0;
 		canvas->redraw_x2 = 0;
