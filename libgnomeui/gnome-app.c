@@ -204,7 +204,7 @@ layout_changed (GtkWidget *w, gpointer data)
  * @title can be left as NULL, in which case the window's title will
  * not be set.
  *
- * Returns: Pointer to new GNOME app object
+ * Returns: Pointer to new GNOME app object.
  **/
 
 GtkWidget *

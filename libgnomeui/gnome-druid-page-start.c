@@ -256,6 +256,13 @@ gnome_druid_page_start_realize (GtkWidget *widget)
 	GTK_WIDGET_CLASS (parent_class)->realize (widget);
 }
 
+/**
+ * gnome_druid_page_start_new:
+ * 
+ * Creates a new GnomeDruidPageStart widget.
+ * 
+ * Return value: Pointer to new GnomeDruidPageStart
+ **/
 /* Public functions */
 GtkWidget *
 gnome_druid_page_start_new (void)
@@ -268,6 +275,17 @@ gnome_druid_page_start_new (void)
 	gnome_druid_page_start_construct (GNOME_DRUID_PAGE_START (retval));
 	return retval;
 }
+/**
+ * gnome_druid_page_start_new_with_vals:
+ * @title: 
+ * @text: 
+ * @logo: 
+ * @watermark: 
+ * 
+ * 
+ * 
+ * Return value: 
+ **/
 GtkWidget *
 gnome_druid_page_start_new_with_vals (gchar *title, gchar* text, GdkImlibImage *logo, GdkImlibImage *watermark)
 {
