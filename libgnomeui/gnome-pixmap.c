@@ -318,8 +318,8 @@ gnome_pixmap_draw (GtkWidget *widget, GdkRectangle *area)
 
 		/* Offset the area because the window does not fill the allocation */
 
-		area->x -= widget->allocation.x + (widget->allocation.width - widget->requisition.width) / 2;
-		area->y -= widget->allocation.y + (widget->allocation.height - widget->requisition.height) / 2;
+		area->x -= (widget->allocation.width - widget->requisition.width) / 2;
+		area->y -= (widget->allocation.height - widget->requisition.height) / 2;
 
 		w_area.x = 0;
 		w_area.y = 0;
