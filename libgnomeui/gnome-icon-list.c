@@ -1598,6 +1598,7 @@ real_move_cursor (Gil *gil, GtkDirectionType dir, gboolean clear_selection)
 			return;
 		break;
 	default:
+		break;
 	}
 
 	if (clear_selection) {
