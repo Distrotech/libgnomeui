@@ -1,3 +1,15 @@
+1998-09-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-color-picker.[ch]: New color picker that is a real
+	widget.  GnomeColorSelector is now deprecated.
+
+	* gnome-color-selector.c (gnome_color_selector_new): Added message
+	of deprecation.
+
+	* libgnomeui.h: Added gnome-color-picker.h to the list of headers.
+
+	* Makefile.am: Added gnome-color-picker.[ch] to the sources.
+
 1998-09-02  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-mdi.c (gnome_mdi_rename_child): New function. This is

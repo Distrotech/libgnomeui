@@ -334,14 +334,14 @@ void
 gnome_canvas_item_set (GnomeCanvasItem *item, const gchar *first_arg_name, ...)
 {
 	va_list args;
+
 	va_start (args, first_arg_name);
-	gnome_canvas_item_set_valist(item,first_arg_name,args);
+	gnome_canvas_item_set_valist (item, first_arg_name, args);
 	va_end (args);
 }
 
 void 
-gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name,
-			      va_list args)
+gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg_name, va_list args)
 {
 	GSList *arg_list;
 	GSList *info_list;

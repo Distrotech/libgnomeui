@@ -54,6 +54,7 @@ libgnomeui_la_SOURCES = \
 	gnome-calculator.c              \
 	@GNOME_CANVAS_SRC@		\
 	gnome-client.c			\
+	gnome-color-picker.c		\
 	gnome-color-selector.c 		\
 	gnome-dateedit.c		\
 	gnome-dentry-edit.c		\
@@ -108,6 +109,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-calculator.h              \
 	@GNOME_CANVAS_HED@		\
 	gnome-client.h			\
+	gnome-color-picker.h		\
 	gnome-color-selector.h		\
 	gnome-dateedit.h		\
 	gnome-dentry-edit.h		\

@@ -20,6 +20,7 @@
 #include "libgnomeui/gnome-canvas-util.h"
 #include "libgnomeui/gnome-canvas-widget.h"
 #endif
+#include "libgnomeui/gnome-color-picker.h"
 #include "libgnomeui/gnome-color-selector.h"
 #include "libgnomeui/gnome-dentry-edit.h"
 #include "libgnomeui/gnome-dialog.h"

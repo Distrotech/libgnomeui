@@ -217,6 +217,8 @@ gnome_color_selector_new(SetColorFunc set_color_func,
 	GtkWidget          *alignment;
 	GtkWidget          *frame;
 
+	g_warning ("GnomeColorSelector is now deprecated.  You should use GnomeColorPicker instead.");
+
 	gcs = g_malloc(sizeof(GnomeColorSelector));
 
 	gcs->cs_dialog = NULL;
