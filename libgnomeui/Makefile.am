@@ -50,6 +50,7 @@ libgnomeui_la_SOURCES = \
 	gnome-client.c			\
 	gnome-color-selector.c 		\
 	gnome-dateedit.c		\
+	gnome-dentry-edit.c		\
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
@@ -59,6 +60,7 @@ libgnomeui_la_SOURCES = \
 	gnome-font-selector.c 		\
 	gnome-ice.c			\
 	gnome-icon-list.c		\
+	gnome-icon-sel.c		\
 	gnome-init.c			\
 	gnome-lamp.c			\
 	gnome-less.c			\
@@ -97,6 +99,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-client.h			\
 	gnome-color-selector.h		\
 	gnome-dateedit.h		\
+	gnome-dentry-edit.h		\
 	gnome-dialog.h                  \
 	gnome-dialog-util.h		\
 	gnome-dns.h			\
@@ -106,6 +109,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-geometry.h		\
 	gnome-ice.h			\
 	gnome-icon-list.h		\
+	gnome-icon-sel.h		\
 	gnome-lamp.h			\
 	gnome-less.h			\
 	gnome-messagebox.h		\

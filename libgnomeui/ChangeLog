@@ -1,3 +1,10 @@
+Fri Jul 17 14:48:14 1998  John Ellis  <johne@bellatlantic.net>
+
+	* libgnomeui.h:
+        * Makefile.am: Added gnome-dentry-edit.[ch] and
+	gnome-icon-sel.[ch] so they can be used in gmenu. They have been
+	collecting dust, so it's about time :)
+
 1998-07-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-line.[ch]: Beginnings of a polyline/curve item for

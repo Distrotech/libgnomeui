@@ -18,6 +18,7 @@
 #include "libgnomeui/gnome-canvas-text.h"
 #endif
 #include "libgnomeui/gnome-color-selector.h"
+#include "libgnomeui/gnome-dentry-edit.h"
 #include "libgnomeui/gnome-dialog.h"
 #include "libgnomeui/gnome-dialog-util.h"
 #include "libgnomeui/gnome-dns.h"
@@ -26,6 +27,7 @@
 #include "libgnomeui/gnome-font-selector.h"
 #include "libgnomeui/gnome-geometry.h"
 #include "libgnomeui/gnome-icon-list.h"
+#include "libgnomeui/gnome-icon-sel.h"
 #include "libgnomeui/gnome-less.h"
 #include "libgnomeui/gnome-messagebox.h"
 #include "libgnomeui/gnome-net.h"
