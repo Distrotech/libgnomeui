@@ -338,10 +338,12 @@ client_set_ghash (GnomeClient *client, gchar *name, GHashTable *table)
   if (!GNOME_CLIENT_CONNECTED (client))
     return;
   
-  argc= g_hash_table_size (table);
+  argc = g_hash_table_size (table);
+
+  g_return_if_fail (argc > 0);
   
   /* Now initialize the 'vals' array.  */
-  vals= g_new (SmPropValue, argc);
+  vals = g_new (SmPropValue, argc);
   tmp = vals;
   
   g_hash_table_foreach (table, (GHFunc) client_set_ghash0, &tmp);
@@ -802,7 +804,7 @@ client_parse_func (poptContext ctx,
     {
       /* Option: --sm-config-prefix  */
       master_client->config_prefix= g_strdup (arg);
-      master_client_restored= TRUE;    
+      master_client_restored = TRUE;    
     }
   else if (key == -3)
     {
