@@ -1,5 +1,11 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	* gnome-textfu.c (gnome_textfu_parse): Use stat(), not fstat();
+	[FIXME: for some strange reason, fstat() is an undefined symbol
+	on my system.]
+
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
 	* gnome-stock-icons.c: New file; we'll most likely move all
 	the icons from the pixmaps/ directory into GTK+ very soon,
 	this file is the first step in this direction.

@@ -1199,7 +1199,7 @@ gnome_textfu_parse(GnomeTextFu *textfu)
   if(fd < 0)
     return NULL;
 
-  fstat(fd, &sbuf);
+  stat(textfu->cur_filename, &sbuf);
 
   mem = g_malloc(sbuf.st_size + 1);
   size_left = sbuf.st_size;
