@@ -139,7 +139,7 @@ make_mime_name (const char *mime_type)
 }
 
 static char *
-make_generic_mime_name (const char *mime_type)
+make_generic_mime_name (const char *mime_type, gboolean embedd_text)
 {
   char *generic_mime_type, *icon_name;
   char *p;
@@ -155,8 +155,11 @@ make_generic_mime_name (const char *mime_type)
   if ((p = strchr(generic_mime_type, '/')) != NULL)
     {
       *p = 0;
-  
-      icon_name = g_strconcat (ICON_NAME_MIME_PREFIX, generic_mime_type, NULL);
+
+      if (strcmp ("text", generic_mime_type) == 0 && embedd_text)
+	icon_name = g_strdup ("gnome-fs-regular");
+      else
+	icon_name = g_strconcat (ICON_NAME_MIME_PREFIX, generic_mime_type, NULL);
     }
   g_free (generic_mime_type);
   
@@ -289,7 +292,7 @@ gnome_icon_lookup (GnomeIconTheme             *icon_theme,
 	return mime_name;
       g_free (mime_name);
       
-      mime_name = make_generic_mime_name (mime_type);
+      mime_name = make_generic_mime_name (mime_type, flags & GNOME_ICON_LOOKUP_FLAGS_EMBEDDING_TEXT);
       if (mime_name && gnome_icon_theme_has_icon (icon_theme, mime_name))
 	return mime_name;
       g_free (mime_name);

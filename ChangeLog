@@ -1,3 +1,10 @@
+2003-01-31  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-icon-lookup.c (gnome_icon_lookup):
+	Use gnome-regular for text files if 
+        GNOME_ICON_LOOKUP_FLAGS_EMBEDDING_TEXT is set. 
+        This enables top-left text for nautilus.
+
 2003-01-25  Samúel Jón Gunnarsson  <sammi@techattack.nu>
 
 	* configure.in: Added "is" to ALL_LINUGAS.
