@@ -1,3 +1,16 @@
+Thu Apr 16 02:06:07 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appsmenu.h, gnome-appsmenu.c: Renamed "variety" to
+	"class" throughout, for clarity. Starting on using a vtable
+	instead of whatever dumb thing I was doing.
+	(GnomeAppsMenuGtkMenuItemFunc): Replaced by 
+	GnomeAppsMenuSetupFunc, this is more versatile and works
+	with GtkTree or whatever as well. Uses of GtkMenuItemFunc
+	changed appropriately.
+	(gnome_apps_menu_setup): Calls setup function.
+	(gnome_apps_menu_save, gnome_apps_menu_save_default): new
+	functions, started implementing them.
+
 Wed Apr 15 18:03:36 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h: Updated comments.

@@ -69,6 +69,7 @@ BEGIN_GNOME_DECLS
 #define GNOME_APPS_MENU_DENTRY_EXTENSION "desktop"
 
 typedef struct _GnomeAppsMenu GnomeAppsMenu;
+typedef struct _GnomeAppsMenuClass GnomeAppsMenuClass;
 
 struct _GnomeAppsMenu {
   guint is_directory : 1; /* Whether it's a directory. If it is, the
@@ -83,6 +84,7 @@ struct _GnomeAppsMenu {
 			FALSE, this must be NULL */
   GnomeAppsMenu * parent;
   guint in_destroy : 1;
+  GnomeAppsMenuClass * vtable;
 };
 
 #define GNOME_APPS_MENU_IS_DIR(x) \
@@ -118,28 +120,56 @@ void gnome_apps_menu_foreach(GnomeAppsMenu * dir,
    Should return NULL if it fails. */
 
 typedef gpointer (*GnomeAppsMenuLoadFunc)(const gchar *);
+/* Loading can't use vtable directly, 
+   because it's a static function. */
 
-/* The menuitem-creating function can be NULL, if you don't
-   want to create menuitems in gtk_menu_new_from_apps_menu()
-   This function should create the menu item and attach any
-   callbacks. It should NOT be recursive, i.e. just create 
-   the item for this GnomeAppsMenu, don't worry about the 
-   submenus. */
+/* Function to set up a display of this menu item to the user.
+   The information from here is used to create tree items, menu items,
+   or whatever.
+   Can be NULL.
+   Arguments are:
+    GnomeAppsMenu * to get information from
+    gchar ** to store pixmap filename
+    gchar ** to store displayable name 
+    GtkSignalFunc * to store callback
+    gpointer * to store data for callback
+   The function should simply fill in these four bits of information
+   based on the GnomeAppsMenu it receives */
 
-typedef GtkWidget * (*GnomeAppsMenuGtkMenuItemFunc)(GnomeAppsMenu *);
+typedef void (*GnomeAppsMenuSetupFunc)(GnomeAppsMenu *,
+				       gchar **, gchar **,
+				       GtkSignalFunc *, gpointer *);
        
-/* The desktop entry variety is already registered by default,
+/* Save func can be NULL if this kind of thing shouldn't be saved.
+   Should take the GnomeAppsMenu and non-recursively save it with the
+   correct extension in the supplied directory, overwriting
+   anything with the same filename. */
+
+typedef void (*GnomeAppsMenuSaveFunc)(GnomeAppsMenu *, const gchar *);
+
+struct _GnomeAppsMenuClass {
+  gchar * extension;
+  GnomeAppsMenuLoadFunc load_func;
+  GnomeAppsMenuSetupFunc setup_func;
+  GnomeAppsMenuSaveFunc save_func;
+};
+
+/* The desktop entry class is already registered by default,
    with gnome_desktop_entry_load () as LoadFunc,
    and GNOME_APPS_MENU_DENTRY_EXTENSION as extension,
    and a private function to create menuitems. 
 
-   .directory files are also registered by default. */
+   .directory files are also registered by default. 
+
+   Any of the functions can be NULL, if it's not an operation you 
+   want to do. However, there must be an extension. */
 
 void 
-gnome_apps_menu_register_variety( gboolean is_directory,
-                                  const gchar * extension,
-                                  GnomeAppsMenuLoadFunc load_func,
-                                  GnomeAppsMenuGtkMenuItemFunc menu_item_func );
+gnome_apps_menu_register_class( gboolean is_directory,
+				const gchar * extension,
+				GnomeAppsMenuLoadFunc load_func,
+				GnomeAppsMenuSetupFunc setup_func,
+				GnomeAppsMenuSaveFunc save_func );
 
 /* Load a GnomeAppsMenu, with `directory' as root.  */
 
@@ -153,6 +183,20 @@ GnomeAppsMenu * gnome_apps_menu_load_default(void);
 /* Load the systemwide menu, e.g. share/apps */
 
 GnomeAppsMenu * gnome_apps_menu_load_system(void);
+
+/* Save this menu in directory, overwriting/deleting any old menus of
+   registered class. Unrecognized classes are left unchanged. */
+
+gboolean gnome_apps_menu_save(GnomeAppsMenu * gam, 
+			      const gchar * directory);
+
+gboolean gnome_apps_menu_save_default(GnomeAppsMenu * gam);
+
+/* Used to get information for a menu item, without having to know its
+   class. None of the returned pointers should be freed. */
+void gnome_apps_menu_setup( GnomeAppsMenu * gam, gchar ** pixmap_name,
+			    gchar ** name, GtkSignalFunc * callback,
+			    gpointer * data );
 
 /* Create a GtkMenu or MenuItem from a GnomeAppsMenu, complete with
    callbacks. Creating an item recursively creates any submenus.
