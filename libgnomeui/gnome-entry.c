@@ -682,7 +682,7 @@ check_for_duplicates (GSList *gconf_items,
 
 	for (; gconf_items; gconf_items = gconf_items->next) {
 		
-		if (strcmp (gconf_items->data, item->text) == 0) {
+		if (strcmp ((gchar *) gconf_items->data, item->text) == 0) {
 			return FALSE;
 		}
 	}
