@@ -5,7 +5,7 @@
 /* First pass: July 8, 1998 */
 /* gnome-popupmenu.h
  * 
- * Copyright (C)  FIXME FIXME FIXME (FSF or Mark Crichton)
+ * Copyright (C) Mark Crichton
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -35,14 +35,13 @@ void
 gnome_app_create_popup_menus(GnomeApp * app, 
 			     GtkWidget * child, 
 			     GnomeUIInfo * uiinfo, 
-			     gpointer * handler); /* Sure this is gpointer*
-						     and not just gpointer? */
+			     gpointer handler);
 
 void
 gnome_app_create_popup_menus_custom(GnomeApp * app,
 				    GtkWidget * child,
 				    GnomeUIInfo * uiinfo,
-       				    gpointer * handler,
+       				    gpointer handler,
 			            GnomeUIBuilderData * xinfo);
 
 END_GNOME_DECLS
