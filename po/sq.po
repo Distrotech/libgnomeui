@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-29 11:14+0200\n"
+"POT-Creation-Date: 2004-07-04 21:21+0200\n"
 "PO-Revision-Date: 2004-06-29 11:17+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -53,7 +53,8 @@ msgstr "Hapja e file '%s' dështoi: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Leximi i figurës '%s' dështoi: shkaku nuk njihet, ndoshta file është i "
 "dëmtuar"
@@ -147,7 +148,8 @@ msgid "Translator credits"
 msgstr "Falenderime pëkthyesit"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "Kreditë e përkthyesve. Kjo frazë duhet shënuar si e përkthyeshme"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -525,9 +527,10 @@ msgstr "_Përmbajtja"
 msgid "View help for this application"
 msgstr "Shiko ndihmën në lidhje me këtë program"
 
+#. GRUT modified this item
 #: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
-msgstr "Tekst në ikona"
+msgstr "Tekst poshtë ikonave"
 
 #: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
@@ -554,9 +557,10 @@ msgstr " (shtyp return)"
 msgid "ERROR: "
 msgstr "GABIM:"
 
+#. GRUT modified this item
 #: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
-msgstr "Kujdes:"
+msgstr "Kujdes: "
 
 #: libgnomeui/gnome-app-util.c:316
 msgid "y"
