@@ -52,7 +52,6 @@
 #include "libgnomeui/gnome-spell.h"
 #include "libgnomeui/gnome-startup.h"
 #include "libgnomeui/gnome-types.h"
-#include "libgnomeui/gnome-rootwin.h"
 #include "libgnomeui/gnome-stock.h"
 #include "libgnomeui/gnome-client.h"
 #include "libgnomeui/gtkcauldron.h"

@@ -1,3 +1,7 @@
+1998-12-15  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-rootwin.[ch]: Removed this before the freeze.
+
 1998-12-15  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-popup-menu.c (gnome_popup_menu_new): Set global variable

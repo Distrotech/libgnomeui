@@ -81,7 +81,6 @@ libgnomeui_la_SOURCES = \
 	gnome-propertybox.c		\
 	gnome-properties.c		\
 	gnome-property-entries.c	\
-	gnome-rootwin.c			\
 	gnome-scores.c			\
 	gnome-spell.c			\
 	gnome-startup.c			\
@@ -156,7 +155,6 @@ gnome_headers = \
 	gnome-scores.h			\
 	gnome-spell.h			\
 	gnome-startup.h			\
-	gnome-rootwin.h			\
 	gnome-stock.h			\
 	gnome-types.h			\
 	gnome-uidefs.h			\
