@@ -1,3 +1,9 @@
+2002-03-06  Paolo Maggi  <maggi@athena.polito.it>
+
+	* libgnomeui/gnome-font-picker.c (gnome_font_picker_update_font_info):
+	fix mem leak (bug #72976)
+	(gnome_font_picker_get_font_name): memleak
+
 2002-03-05  Iain <iain@ximian.com>
 
 	* libgnomeui/gnome-ui-init.c (relay_gtk_signal): Wrap relay_gtk_signal

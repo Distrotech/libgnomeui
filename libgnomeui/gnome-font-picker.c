@@ -702,8 +702,9 @@ const gchar*	   gnome_font_picker_get_font_name    (GnomeFontPicker *gfp)
 
     if (gfp->_priv->font_dialog) {
 	/* g_free handles NULL */
-	g_free(gfp->_priv->font_name);
-        gfp->_priv->font_name = g_strdup(gtk_font_selection_dialog_get_font_name(GTK_FONT_SELECTION_DIALOG(gfp->_priv->font_dialog)));
+	g_free (gfp->_priv->font_name);
+        gfp->_priv->font_name = gtk_font_selection_dialog_get_font_name (
+			GTK_FONT_SELECTION_DIALOG (gfp->_priv->font_dialog));
     }
 
     return gfp->_priv->font_name;
@@ -1059,4 +1060,5 @@ gnome_font_picker_update_font_info (GnomeFontPicker *gfp)
 		gnome_font_picker_label_use_font_in_label (gfp);
 	}
 
+	pango_font_description_free (desc);
 } /* gnome_font_picker_update_font_info */
