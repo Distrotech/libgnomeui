@@ -3008,6 +3008,7 @@ gnome_canvas_expose (GtkWidget *widget, GdkEventExpose *event)
 
 	uta = art_uta_from_irect (&rect);
 	gnome_canvas_request_redraw_uta (canvas, uta);
+	gnome_canvas_update_now (canvas);
 
 	return FALSE;
 }

@@ -1,5 +1,8 @@
 1999-09-17  Federico Mena Quintero  <federico@redhat.com>
 
+	* gnome-canvas.c (gnome_canvas_expose): Process exposures
+	immediately.  This makes scrolling a lot nicer.
+
 	* gnome-dock.c (gnome_dock_add_floating_item): Do realization,
 	mapping, and redraw queueing the right way.
 	(gnome_dock_set_client_area): Likewise.
