@@ -1,3 +1,11 @@
+2000-02-15  Rusty Conover <rconover@zootweb.com>
+
+	* gnome-font-picker.c (gnome_font_picker_set_font_name): Added
+	call to gnome_font_picker_update_font_info() so that if the widget
+	is in GNOME_FONT_PICKER_MODE_FONT_INFO the widget gets properly
+	updated with the current font.  Before you could set the font name
+	it would appear in the dialog but not on the visable widget.
+	
 Sun Feb 13 23:21:19 2000  George Lebl <jirka@5z.com>
 
 	* gnome-calculator.c: apply patch from "W. Adam Foran"

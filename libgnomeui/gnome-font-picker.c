@@ -494,6 +494,9 @@ gboolean   gnome_font_picker_set_font_name    (GnomeFontPicker *gfp,
     if (gfp->font_name) g_free(gfp->font_name);
     gfp->font_name= tmp;
     
+    if (gfp->mode==GNOME_FONT_PICKER_MODE_FONT_INFO)
+	gnome_font_picker_update_font_info(gfp);
+
     if (gfp->font_dialog)
         return gtk_font_selection_dialog_set_font_name(GTK_FONT_SELECTION_DIALOG(gfp->font_dialog),gfp->font_name);
     else
