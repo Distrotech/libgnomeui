@@ -22,28 +22,6 @@ INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) $(GDK_IMLIB_CFLAGS) $(SUPPORTINCS
         -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" \
         -DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
-
-# these files are `autoconf'ed in.
-EXTRA_libgnomeui_la_SOURCES = \
-	gnome-canvas.c			\
-	gnome-canvas-image.c		\
-	gnome-canvas-line.c		\
-	gnome-canvas-rect-ellipse.c	\
-	gnome-canvas-text.c		\
-	gnome-canvas-util.c		\
-	gnome-canvas-widget.c
-
-EXTRA_HEADERS = \
-	gnome-canvas.h			\
-	gnome-canvas-image.h		\
-	gnome-canvas-line.h		\
-	gnome-canvas-rect-ellipse.h	\
-	gnome-canvas-text.h		\
-	gnome-canvas-util.h		\
-	gnome-canvas-widget.h
-
-libgnomeui_la_DEPENDENCIES = @GNOME_CANVAS_OBJS@
-
 libgnomeui_la_SOURCES = \
 	gnome-about.c			\
 	gnome-actionarea.c		\
@@ -52,7 +30,13 @@ libgnomeui_la_SOURCES = \
 	gnome-app-helper.c		\
 	gnome-app-util.c		\
 	gnome-calculator.c              \
-	@GNOME_CANVAS_SRC@		\
+	gnome-canvas.c			\
+	gnome-canvas-image.c		\
+	gnome-canvas-line.c		\
+	gnome-canvas-rect-ellipse.c	\
+	gnome-canvas-text.c		\
+	gnome-canvas-util.c		\
+	gnome-canvas-widget.c		\
 	gnome-client.c			\
 	gnome-color-picker.c		\
 	gnome-color-selector.c 		\
@@ -107,7 +91,13 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-app-helper.h		\
 	gnome-app-util.h		\
 	gnome-calculator.h              \
-	@GNOME_CANVAS_HED@		\
+	gnome-canvas.h			\
+	gnome-canvas-image.h		\
+	gnome-canvas-line.h		\
+	gnome-canvas-rect-ellipse.h	\
+	gnome-canvas-text.h		\
+	gnome-canvas-util.h		\
+	gnome-canvas-widget.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
 	gnome-color-selector.h		\
@@ -224,7 +214,7 @@ EXTRA_DIST =					\
 	gnometypebuiltins_evals.c
 
 libgnomeui_la_LDFLAGS = -version-info 27:0:27 -rpath $(libdir)
-libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS) @GNOME_CANVAS_OBJS@
+libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 gnome_segv_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\

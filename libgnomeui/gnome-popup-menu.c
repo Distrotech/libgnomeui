@@ -1,12 +1,9 @@
-/* My vague and ugly attempt at adding popup menus to GnomeUI */
-/* By: Mark Crichton <mcrichto@purdue.edu> */
-/* Written under the heavy infulence of whatever was playing */
-/* in my CDROM drive at the time... */
-/* First pass: July 8, 1998 */
-
-/* gnome-popup-menu.c
+/* Popup menus for GNOME
  * 
- * Copyright (C) 1998, Mark Crichton
+ * Copyright (C) 1998 Mark Crichton
+ *
+ * Authors: Mark Crichton <mcrichto@purdue.edu>
+ *          Federico Mena <federico@nuclecu.unam.mx>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -24,98 +21,162 @@
  */
 
 #include <config.h>
-#include <glib.h>
-#include <gdk/gdkkeysyms.h>
-#include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-util.h"
-#include "libgnome/gnome-config.h"
-#include "gnome-app.h"
-#include "gnome-app-helper.h"
 #include "gnome-popup-menu.h"
-#include <gtk/gtk.h>
 
-/* FIXME: all this file is completely broken.  I will rewrite it in a couple of days - Federico */
 
-void
-gnome_app_create_popup_menus_custom (GnomeApp *app,
-		 		     GtkWidget *child,
-		 		     GnomeUIInfo *menuinfo,
-		 		     gpointer handler,
-		  		     GnomeUIBuilderData *uibdata)
-
+/* This is our custom signal connection function for popup menu items -- see below for the
+ * marshaller information.  We pass the original callback function as the data pointer for the
+ * marshaller (uiinfo->moreinfo).
+ */
+static void
+popup_connect_func (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderData *uibdata)
 {
-#if 0
-#ifdef GTK_HAVE_FEATURES_1_1_0
+	g_assert (uibdata->is_interp);
 
-	GtkWidget *menubar;
-	GtkWidget *oldparent;
-	GtkWidget *eb;
-	GtkArg	  *temparg;
-	guint	  nargs = 0;
+	gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), signal_name,
+				 NULL,
+				 uibdata->relay_func,
+				 uiinfo->moreinfo,
+				 uibdata->destroy_func,
+				 FALSE,
+				 FALSE);
+}
 
-	g_return_if_fail(app !=NULL);
-	g_return_if_fail(GNOME_IS_APP(app));
+/* Our custom marshaller for menu items.  We need it so that it can extract the per-attachment
+ * user_data pointer from the parent menu shell and pass it to the callback.  This overrides the
+ * user-specified data from the GnomeUIInfo structures.
+ */
 
-	g_warning("We're here");
-	menubar = gtk_menu_new();
-	eb = gtk_event_box_new();
-	gtk_widget_set_events(eb, GDK_BUTTON_PRESS_MASK);
+typedef void (* ActivateFunc) (GtkObject *object, gpointer data);
 
-	gtk_signal_connect(GTK_OBJECT(eb), "button_press_event",
-			   GTK_SIGNAL_FUNC(gnome_app_rightclick_popup), app);
+static void
+popup_marshal_func (GtkObject *object, gpointer data, guint n_args, GtkArg *args)
+{
+	ActivateFunc func;
+	gpointer user_data;
 
-	/* Now, the magic begins... */
+	func = (ActivateFunc) data;
+	user_data = gtk_object_get_data (GTK_OBJECT (GTK_WIDGET (object)->parent), "gnome_popup_menu_do_popup_user_data");
 
-	gtk_widget_ref(child); 
-	oldparent = child->parent;
+	(* func) (GTK_VALUE_OBJECT (args[0]), user_data);
+}
 
-	/* first, get all the args needed for the new child */
+GtkWidget *
+gnome_popup_menu_new (GnomeUIInfo *uiinfo)
+{
+	GtkWidget *menu;
+	GnomeUIBuilderData uibdata;
 
-	temparg = gtk_container_query_child_args(GTK_WIDGET_TYPE(oldparent), NULL, &nargs);
-	gtk_container_child_getv(GTK_CONTAINER(oldparent), child, nargs, temparg);
+	g_return_val_if_fail (uiinfo != NULL, NULL);
 
-	/* Now we can remove the child */
+	/* We use our own callback marshaller so that it can fetch the popup user data
+	 * from the popup menu and pass it on to the user-defined callbacks.
+	 */
 
-	gtk_container_remove(GTK_CONTAINER(oldparent), child);
+	uibdata.connect_func = popup_connect_func;
+	uibdata.data = NULL;
+	uibdata.is_interp = TRUE;
+	uibdata.relay_func = popup_marshal_func;
+	uibdata.destroy_func = NULL;
 
-	/* GTK_WIDGET_NO_WINDOW() */
-	/* also use query_args and addv */
-	/* SLICK...thanks Tim Janik! */
+	menu = gtk_menu_new ();
+	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menu), uiinfo, &uibdata, NULL, FALSE, TRUE, 0);
 
-	gtk_container_add(GTK_CONTAINER(oldparent), eb);
-	gtk_container_add(GTK_CONTAINER(eb), child);
-	gtk_container_child_setv(GTK_CONTAINER(oldparent), eb, nargs, temparg);
+	return menu;
+}
 
-	gtk_widget_show(eb);
-	gtk_widget_show(child);
+/* Callback used when a button is pressed in a widget attached to a popup menu.  It decides whether
+ * the menu should be popped up and does the appropriate stuff.
+ */
+static gint
+popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+	GtkWidget *popup;
+	gpointer user_data;
 
-	gtk_widget_unref(child); 
-	g_free (temparg);
+	if (event->button != 3)
+		return FALSE;
 
-	/* Now fill the keys... */
+	popup = data;
 
-	gtk_object_set_data (GTK_OBJECT(eb), "gnome_popup_menu", menubar);
-	gtk_object_set_data (GTK_OBJECT(eb), "gnome_popup_old_handler", handler);
-	gtk_object_set_data (GTK_OBJECT(eb), "gnome_popup_child", child);
+	/* Fetch the attachment user data from the widget and install it in the popup menu -- it
+	 * will be used by the callback mashaller to pass the data to the callbacks.
+	 */
 
-	if (menuinfo)
-		gnome_app_do_menu_creation(app, menubar, 0, menuinfo, uibdata);
-#endif /* GTK_HAVE_FEATURES_1_1_0 */
-#endif
+	user_data = gtk_object_get_data (GTK_OBJECT (widget), "gnome_popup_menu_attach_user_data");
+
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "button_press_event");
+
+	gnome_popup_menu_do_popup (popup, NULL, NULL, event, user_data);
+	return TRUE;
+}
+
+/* Callback used to unref the popup menu when the widget it is attached to gets destroyed */
+static void
+popup_attach_widget_destroyed (GtkWidget *widget, gpointer data)
+{
+	GtkWidget *popup;
+
+	popup = data;
+
+	gtk_object_unref (GTK_OBJECT (popup));
 }
 
 void
-gnome_app_create_popup_menus (GnomeApp *app, GtkWidget *child,
-			      GnomeUIInfo *menudata, gpointer handler)
+gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget, gpointer user_data)
 {
-#if 0
-#ifdef GTK_HAVE_FEATURES_1_1_0
+	int event_mask;
 
-	GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
-				      NULL, FALSE, NULL, NULL };
+	g_return_if_fail (popup != NULL);
+	g_return_if_fail (GTK_IS_MENU (popup));
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	gnome_app_create_popup_menus_custom(app, child, menudata, handler,
-					    &uidata);
-#endif
-#endif
+	/* Ref/sink the popup menu so that we take "ownership" of it */
+
+	gtk_object_ref (GTK_OBJECT (popup));
+	gtk_object_sink (GTK_OBJECT (popup));
+
+	/* Store the user data pointer in the widget -- we will use it later when the menu has to be
+	 * invoked.
+	 */
+
+	gtk_object_set_data (GTK_OBJECT (widget), "gnome_popup_menu_attach_user_data", user_data);
+
+	/* Prepare the widget to accept button presses -- the proper assertions will be
+	 * shouted by gtk_widget_set_events().
+	 */
+
+	event_mask = gtk_widget_get_events (widget);
+
+	if (!(event_mask & GDK_BUTTON_PRESS_MASK))
+		gtk_widget_set_events (widget, event_mask & GDK_BUTTON_PRESS_MASK);
+
+	gtk_signal_connect (GTK_OBJECT (widget), "button_press_event",
+			    (GtkSignalFunc) popup_button_pressed,
+			    popup);
+
+	/* This callback will unref the popup menu when the widget it is attached to gets destroyed. */
+
+	gtk_signal_connect (GTK_OBJECT (widget), "destroy",
+			    (GtkSignalFunc) popup_attach_widget_destroyed,
+			    popup);
+}
+
+void
+gnome_popup_menu_do_popup (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpointer pos_data,
+			   GdkEventButton *event, gpointer user_data)
+{
+	g_return_if_fail (popup != NULL);
+	g_return_if_fail (GTK_IS_WIDGET (popup));
+	g_return_if_fail (event != NULL);
+
+	/* Store the user data in the menu for when a callback is activated -- if it is a
+	 * Gnome-generated menu, then the user data will be passed on to callbacks by our custom
+	 * marshaller.
+	 */
+
+	gtk_object_set_data (GTK_OBJECT (popup), "gnome_popup_menu_do_popup_user_data", user_data);
+
+	gtk_menu_popup (GTK_MENU (popup), NULL, NULL, pos_func, pos_data, event->button, event->time);
 }

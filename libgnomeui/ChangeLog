@@ -1,3 +1,39 @@
+1998-09-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-popup-menu.c (gnome_popup_menu_new): New public function
+	to create a popup menu from a GnomeUIInfo array.
+	(gnome_popup_menu_attach): New public function to attach a popup
+	menu to a widget -- the popup menu can be called by pressing mouse
+	button 3 over the widget.  The menu can be shared between multiple
+	widgets and it will be destroyed when the last widget it is
+	attached to is destroyed.
+	(gnome_popup_menu_do_popup): New public function to explicitly
+	popup a menu.
+
+	* gnome-app-helper.c (do_ui_signal_connect): Use
+	gtk_signal_connect_full() instead of gtk_signal_connect_interp(),
+	since the latter is obsolete (but works anyway...).
+
+	* stock_demo.c: 
+	* gnome-stock.c: 
+	* gnome-number-entry.c: 
+	* gnome-init.c: 
+	* gnome-dialog.h: 
+	* gnome-dialog.c: 
+	* gnome-dentry-edit.c: 
+	* gnome-client.c (gnome_client_init): 
+	* gnome-calculator.c: 
+	* gnome-app.c: 
+	* libgnomeui.h: Removed occurrences of #ifdef GTK_HAVE_FEATURES_1_1_0.  
+	We require it, anyways.
+
+	* Makefile.am: Moved all the conditional canvas files into the
+	main list of sources -- they are always compiled now.
+
+1998-09-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* Makefile.am: Renamed gnome-popupmenu.[ch] to gnome-popup-menu.[ch].
+
 1998-09-18  Sebastian Wilhelmi  <wilhelmi@ira.uka.de>
 
 	* libgnomeui.h: corrected gnome-popupmenu.h to gnome-popup-menu.h and

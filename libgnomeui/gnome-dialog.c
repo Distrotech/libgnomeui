@@ -178,15 +178,9 @@ gnome_dialog_init (GnomeDialog *dialog)
   gtk_window_position(GTK_WINDOW(dialog), 
 		      gnome_preferences_get_dialog_position());
   
-#ifdef GTK_HAVE_FEATURES_1_1_0
   dialog->accelerators = gtk_accel_group_new();
   gtk_window_add_accel_group (GTK_WINDOW(dialog), 
 				    dialog->accelerators);
-#else
-  dialog->accelerators = gtk_accelerator_table_new();
-  gtk_window_add_accelerator_table (GTK_WINDOW(dialog),
-                                    dialog->accelerators);
-#endif
 
   bf = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (bf), GTK_SHADOW_OUT);
@@ -672,22 +666,13 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
   list = g_list_nth (dialog->buttons, button);
 
   if (list && list->data) {
-#ifdef GTK_HAVE_FEATURES_1_1_0
-/*FIXME*/
+    /*FIXME*/
     gtk_widget_add_accelerator(GTK_WIDGET(list->data),
 			       "clicked",
 			       dialog->accelerators,
 			       accelerator_key,
 			       accelerator_mods,
 			       GTK_ACCEL_VISIBLE);
-#else
-    gtk_widget_install_accelerator(GTK_WIDGET(list->data),
-                                   dialog->accelerators,
-                                   "clicked",
-                                   accelerator_key,
-                                   accelerator_mods);
-
-#endif
     
     return;
   }
@@ -777,11 +762,6 @@ static void gnome_dialog_destroy (GtkObject *dialog)
 
   g_list_free(GNOME_DIALOG (dialog)->buttons);
 
-#ifndef GTK_HAVE_FEATURES_1_1_0
-  if (GNOME_DIALOG(dialog)->accelerators)
-    gtk_accelerator_table_unref(GNOME_DIALOG(dialog)->accelerators);
-#endif
-
   if (GTK_OBJECT_CLASS(parent_class)->destroy)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(dialog);
 }
@@ -833,6 +813,64 @@ static void gnome_dialog_show (GtkWidget * d)
 
 /****************************************************************
   $Log$
+  Revision 1.39  1998/09/18 23:25:39  unammx
+  Popup menus work.  The API is very simple, and I think it is enough
+  for most purposes -- if language binding writers think there is
+  additional stuff that could be done to them, please feel free to add
+  it.
+
+  I am writing some DocBook documentation for GnomeAppHelper and popup
+  menus; hopefully it will be finished during the weekend.  People
+  should add underlined letters and accelerators to their menus as soon
+  as possible -- the arrangement of the menus and accelerators still
+  needs to be settled in the UI Guidelines, but that's another story :-)
+
+    Federico
+
+  1998-09-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+  	* configure.in: Removed generation of list of canvas files.
+
+  1998-09-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+  	* gnome-popup-menu.c (gnome_popup_menu_new): New public function
+  	to create a popup menu from a GnomeUIInfo array.
+  	(gnome_popup_menu_attach): New public function to attach a popup
+  	menu to a widget -- the popup menu can be called by pressing mouse
+  	button 3 over the widget.  The menu can be shared between multiple
+  	widgets and it will be destroyed when the last widget it is
+  	attached to is destroyed.
+  	(gnome_popup_menu_do_popup): New public function to explicitly
+  	popup a menu.
+
+  	* gnome-app-helper.c (do_ui_signal_connect): Use
+  	gtk_signal_connect_full() instead of gtk_signal_connect_interp(),
+  	since the latter is obsolete (but works anyway...).
+
+  	* stock_demo.c:
+  	* gnome-stock.c:
+  	* gnome-number-entry.c:
+  	* gnome-init.c:
+  	* gnome-dialog.h:
+  	* gnome-dialog.c:
+  	* gnome-dentry-edit.c:
+  	* gnome-client.c (gnome_client_init):
+  	* gnome-calculator.c:
+  	* gnome-app.c:
+  	* libgnomeui.h: Removed occurrences of #ifdef GTK_HAVE_FEATURES_1_1_0.
+  	We require it, anyways.
+
+  	* Makefile.am: Moved all the conditional canvas files into the
+  	main list of sources -- they are always compiled now.
+
+  1998-09-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+  	* testgnome.c (create_app_helper): Added tests for popup menus.
+
+  	* canvas-fifteen.c:
+  	* canvas-arrowhead.c:
+  	* canvas-primitives.c: Removed occurrences of #ifdef GTK_HAVE_FEATURES_1_1_0.
+
   Revision 1.38  1998/08/16 04:11:11  sopwith
 
 

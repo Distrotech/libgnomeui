@@ -11,7 +11,6 @@
 #include "libgnomeui/gnome-app-helper.h"
 #include "libgnomeui/gnome-app-util.h"
 #include "libgnomeui/gnome-actionarea.h"
-#ifdef GTK_HAVE_FEATURES_1_1_0
 #include "libgnomeui/gnome-canvas.h"
 #include "libgnomeui/gnome-canvas-image.h"
 #include "libgnomeui/gnome-canvas-line.h"
@@ -19,7 +18,6 @@
 #include "libgnomeui/gnome-canvas-text.h"
 #include "libgnomeui/gnome-canvas-util.h"
 #include "libgnomeui/gnome-canvas-widget.h"
-#endif
 #include "libgnomeui/gnome-color-picker.h"
 #include "libgnomeui/gnome-color-selector.h"
 #include "libgnomeui/gnome-dentry-edit.h"
@@ -37,9 +35,7 @@
 #include "libgnomeui/gnome-messagebox.h"
 #include "libgnomeui/gnome-net.h"
 #include "libgnomeui/gnome-number-entry.h"
-#ifdef GTK_HAVE_FEATURES_1_1_0
 #include "libgnomeui/gnome-popup-menu.h"
-#endif
 #include "libgnomeui/gnome-pixmap.h"
 #include "libgnomeui/gnome-preferences.h"
 #include "libgnomeui/gnome-propertybox.h"

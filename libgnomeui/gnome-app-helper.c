@@ -62,10 +62,10 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, gpointer pixmap
 		break;
 
 	case GNOME_APP_PIXMAP_DATA:
-		if (pixmap_info){
+		if (pixmap_info)
 			pixmap = gnome_pixmap_new_from_xpm_d (pixmap_info);
-			break;
-		}
+
+		break;
 
 	case GNOME_APP_PIXMAP_NONE:
 		if (indent_missing_pixmaps)
@@ -255,7 +255,7 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, GnomeUIB
 				gtk_menu_item_right_justify (GTK_MENU_ITEM (uiinfo->widget));
 
 			gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
-      pos++;
+			pos++;
 
 			gtk_widget_show (uiinfo->widget);
 
@@ -352,7 +352,7 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int right_ju
 			gtk_menu_item_right_justify (GTK_MENU_ITEM (item));
 
 		gtk_menu_shell_insert (menu_shell, item, pos);
-    pos++;
+		pos++;
 
 		gtk_widget_show (item);
 	}
@@ -388,11 +388,13 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderDat
 			     uiinfo->user_data);
 
 	if (uibdata->is_interp)
-		gtk_signal_connect_interp (GTK_OBJECT (uiinfo->widget), signal_name,
-					   uibdata->relay_func,
-					   uibdata->data ? uibdata->data : uiinfo->user_data,
-					   uibdata->destroy_func,
-					   FALSE);
+		gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), signal_name,
+					 NULL,
+					 uibdata->relay_func,
+					 uibdata->data ? uibdata->data : uiinfo->user_data,
+					 uibdata->destroy_func,
+					 FALSE,
+					 FALSE);
 	else
 		gtk_signal_connect (GTK_OBJECT (uiinfo->widget), signal_name,
 				    uiinfo->moreinfo,
@@ -485,7 +487,7 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, Gnome
 				gtk_menu_item_right_justify (GTK_MENU_ITEM (uiinfo->widget));
 
 			gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
-      pos++;
+			pos++;
 
 			gtk_widget_show (uiinfo->widget);
 			break;
@@ -832,7 +834,7 @@ gnome_app_find_menu_pos (GtkWidget *parent,
 	p = 0;
 	
 	while( children ) {
-    label = NULL;
+		label = NULL;
 		p++;
 		item = GTK_BIN(children->data);
 		
@@ -841,14 +843,14 @@ gnome_app_find_menu_pos (GtkWidget *parent,
 		else if(GTK_IS_LABEL(item->child))  /* a simple item with a label */
 			label = GTK_LABEL (item->child)->label;
 		else if(GTK_IS_HBOX(item->child)) { /* an item with a hbox (pixmap + label) */
-      hbox_children = gtk_container_children(GTK_CONTAINER(item->child));
-      while( hbox_children && (label == NULL) ) {
-        if(GTK_IS_LABEL(hbox_children->data))
-          label = GTK_LABEL(hbox_children->data)->label;
+			hbox_children = gtk_container_children(GTK_CONTAINER(item->child));
+			while( hbox_children && (label == NULL) ) {
+				if(GTK_IS_LABEL(hbox_children->data))
+					label = GTK_LABEL(hbox_children->data)->label;
 
-        hbox_children = g_list_next(hbox_children);
-      }
-    }
+				hbox_children = g_list_next(hbox_children);
+			}
+		}
 		else                                /* something that we just can't handle */
 			label = NULL;
 		

@@ -142,14 +142,9 @@ browse_clicked (GtkWidget *widget, gpointer data)
 			    NULL);
 
 	/* add calculator accels to our window*/
-#ifdef GTK_HAVE_FEATURES_1_1_0
+
 	gtk_window_add_accel_group(GTK_WINDOW(dlg),
 				   GNOME_CALCULATOR(calc)->accel);
-#else
-	gtk_window_add_accelerator_table(GTK_WINDOW(dlg),
-					 GNOME_CALCULATOR(calc)->accel);
-#endif
-
 
 	gtk_widget_show_all (dlg);
 }

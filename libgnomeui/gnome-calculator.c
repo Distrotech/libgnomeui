@@ -1120,11 +1120,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 	gc->mode = GNOME_CALCULATOR_DEG;
 	gc->invert = FALSE;
 	gc->add_digit = FALSE;
-#ifdef GTK_HAVE_FEATURES_1_1_0
 	gc->accel = gtk_accel_group_new();
-#else
-	gc->accel = gtk_accelerator_table_new();
-#endif
 
 	gtk_signal_connect_after(GTK_OBJECT(gc),"realize",
 				 GTK_SIGNAL_FUNC(gnome_calculator_realized),
@@ -1143,7 +1139,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 				gtk_signal_connect(GTK_OBJECT(w),"clicked",
 						   but->signal_func,
 						   but);
-#ifdef GTK_HAVE_FEATURES_1_1_0
+
 				if(but->key) {
 				  gtk_widget_add_accelerator(w,
 							     "clicked",
@@ -1163,24 +1159,7 @@ gnome_calculator_init (GnomeCalculator *gc)
 							     GDK_LOCK_MASK,
 							     GTK_ACCEL_VISIBLE);
 				}
-#else
-                                if(but->key) {
-                                        gtk_widget_install_accelerator(w,
-                                                gc->accel,
-                                                "clicked",
-                                                but->key,0);
-                                        gtk_widget_install_accelerator(w,
-                                                gc->accel,
-                                                "clicked",
-                                                but->key,
-                                                GDK_SHIFT_MASK);
-                                        gtk_widget_install_accelerator(w,
-                                                gc->accel,
-                                                "clicked",
-                                                but->key,
-                                                GDK_LOCK_MASK);
-				}
-#endif
+
 				gtk_object_set_user_data(GTK_OBJECT(w),gc);
 				gtk_widget_show(w);
 				gtk_table_attach(GTK_TABLE(table),w,
