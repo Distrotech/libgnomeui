@@ -14,6 +14,8 @@
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkpacker.h> /* why the hell is GtkAnchorType here and not in gtkenums.h? */
 #include <gdk_imlib.h>
+#include <libart_lgpl/art_misc.h>
+#include <libart_lgpl/art_pixbuf.h>
 #include "gnome-canvas.h"
 
 
@@ -51,8 +53,8 @@ struct _GnomeCanvasImage {
 	GdkPixmap *pixmap;		/* Pixmap rendered from the image */
 	GdkBitmap *mask;		/* Mask rendered from the image */
 
-	double x, y;			/* Position at anchor */
-	double width, height;		/* Size of image in units */
+	double x, y;			/* Position at anchor, item relative */
+	double width, height;		/* Size of image, item relative */
 	GtkAnchorType anchor;		/* Anchor side for image */
 
 	int cx, cy;			/* Top-left canvas coordinates for display */
@@ -60,6 +62,9 @@ struct _GnomeCanvasImage {
 	GdkGC *gc;			/* GC for drawing image */
 
 	unsigned int need_recalc : 1;	/* Do we need to rescale the image? */
+
+	ArtPixBuf *pixbuf;		/* A pixbuf, for aa rendering */
+	double affine[6];               /* The item -> canvas affine */
 };
 
 struct _GnomeCanvasImageClass {

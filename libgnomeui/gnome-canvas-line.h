@@ -108,6 +108,11 @@ struct _GnomeCanvasLine {
 	guint last_arrow : 1;	/* Draw last arrowhead? */
 	guint smooth : 1;	/* Smooth line (with parabolic splines)? */
 
+	/* Antialiased specific stuff follows */
+	guint32 fill_rgba;		/* RGBA color for outline */
+	ArtSVP *fill_svp;		/* The SVP for the outline shape */
+	ArtSVP *first_svp;		/* The SVP for the first arrow */
+	ArtSVP *last_svp;		/* The SVP for the last arrow */
 };
 
 struct _GnomeCanvasLineClass {

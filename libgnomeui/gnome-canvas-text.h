@@ -61,6 +61,25 @@ BEGIN_GNOME_DECLS
 
 typedef struct _GnomeCanvasText GnomeCanvasText;
 typedef struct _GnomeCanvasTextClass GnomeCanvasTextClass;
+typedef struct _GnomeCanvasTextSuckFont GnomeCanvasTextSuckFont;
+typedef struct _GnomeCanvasTextSuckChar GnomeCanvasTextSuckChar;
+
+struct _GnomeCanvasTextSuckChar {
+	int     left_sb;
+	int     right_sb;
+	int     width;
+	int     ascent;
+	int     descent;
+	int     bitmap_offset; /* in pixels */
+};
+
+struct _GnomeCanvasTextSuckFont {
+	guchar *bitmap;
+	gint    bitmap_width;
+	gint    bitmap_height;
+	gint    ascent;
+	GnomeCanvasTextSuckChar chars[256];
+};
 
 struct _GnomeCanvasText {
 	GnomeCanvasItem item;
@@ -90,6 +109,11 @@ struct _GnomeCanvasText {
 	int height;			/* Rendered text height in pixels */
 
 	guint clip : 1;			/* Use clip rectangle? */
+
+	/* Antialiased specific stuff follows */
+	GnomeCanvasTextSuckFont *suckfont; /* Sucked font */
+	guint32 rgba;			/* RGBA color for text */
+	double affine[6];               /* The item -> canvas affine */
 };
 
 struct _GnomeCanvasTextClass {

@@ -20,6 +20,7 @@
 #include <libart_lgpl/art_rect.h>
 #include <libart_lgpl/art_svp.h>
 #include <libart_lgpl/art_uta.h>
+#include <libart_lgpl/art_affine.h>
 
 BEGIN_GNOME_DECLS
 
@@ -68,7 +69,11 @@ enum {
 	GNOME_CANVAS_ITEM_MAPPED        = 1 << 5,
 	GNOME_CANVAS_ITEM_ALWAYS_REDRAW = 1 << 6,
 	GNOME_CANVAS_ITEM_VISIBLE       = 1 << 7,
-	GNOME_CANVAS_ITEM_NEED_UPDATE	= 1 << 8
+	GNOME_CANVAS_ITEM_NEED_UPDATE	= 1 << 8,
+	GNOME_CANVAS_ITEM_NEED_AFFINE	= 1 << 9,
+	GNOME_CANVAS_ITEM_NEED_CLIP	= 1 << 10,
+	GNOME_CANVAS_ITEM_NEED_VIS	= 1 << 11,
+	GNOME_CANVAS_ITEM_AFFINE_FULL	= 1 << 12
 };
 
 /* Update flags for items */
@@ -76,7 +81,8 @@ enum {
 	GNOME_CANVAS_UPDATE_REQUESTED  = 1 << 0,
 	GNOME_CANVAS_UPDATE_AFFINE     = 1 << 1,
 	GNOME_CANVAS_UPDATE_CLIP       = 1 << 2,
-	GNOME_CANVAS_UPDATE_VISIBILITY = 1 << 3
+	GNOME_CANVAS_UPDATE_VISIBILITY = 1 << 3,
+	GNOME_CANVAS_UPDATE_IS_VISIBLE = 1 << 4
 };
 
 /* Data for rendering in antialiased mode */
@@ -119,6 +125,10 @@ struct _GnomeCanvasItem {
 	double x1, y1, x2, y2;		/* Bounding box for this item, in canvas pixel coordinates.
 					 * The bounding box contains (x1, y1) but not (x2, y2).
 					 */
+
+	double *xform;			/* If NULL, then the identity transform. If !AFFINE_FULL, then a two element array
+					   containing a translation. If AFFINE_FULL, then a six element array containing
+					   an affine transformation. */
 };
 
 struct _GnomeCanvasItemClass {
@@ -128,6 +138,7 @@ struct _GnomeCanvasItemClass {
 	 * defined above.  The item should update its internal state from its
 	 * queued state, recompute and request its repaint area, etc.  The
 	 * affine, if used, is a pointer to a 6-element array of doubles.
+	 * The update method also recomputes the bounds of the item.
 	 */
 	void (* update) (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 
@@ -214,14 +225,17 @@ void gnome_canvas_item_set_valist (GnomeCanvasItem *item, const gchar *first_arg
 /* Move an item by the specified amount */
 void gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy);
 
+/* Apply a relative affine transformation to the item. */
+void gnome_canvas_item_affine_relative (GnomeCanvasItem *item, const double affine[6]);
+
+/* Apply an absolute affine transformation to the item. */
+void gnome_canvas_item_affine_absolute (GnomeCanvasItem *item, const double affine[6]);
+
 /* Scale an item about a point by the specified factors */
 void gnome_canvas_item_scale (GnomeCanvasItem *item, double x, double y, double scale_x, double scale_y);
 
 /* Rotate an item about a point by the specified number of degrees */
 void gnome_canvas_item_rotate (GnomeCanvasItem *item, double x, double y, double angle);
-
-/* Apply the specified transformation matrix to an item */
-void gnome_canvas_item_transform (GnomeCanvasItem *item, double *affine);
 
 /* Raise an item in the z-order of its parent group by the specified
  * number of positions.  The specified number must be larger than or
@@ -263,6 +277,14 @@ void gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 etime);
  */
 void gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y);
 void gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y);
+
+/* Gets the affine transform that converts from item-relative coordinates to world coordinates.
+ */
+void gnome_canvas_item_i2w_affine (GnomeCanvasItem *item, double affine[6]);
+
+/* Gets the affine transform that converts from item-relative coordinates to canvas coordinates.
+ */
+void gnome_canvas_item_i2c_affine (GnomeCanvasItem *item, double affine[6]);
 
 /* Remove the item from its parent group and make the new group its parent.  The item will be put on
  * top of all the items in the new group.  The item's coordinates relative to its new parent to
@@ -320,7 +342,10 @@ struct _GnomeCanvasGroup {
 	GList *item_list;
 	GList *item_list_end;
 
+	/* The position of the group has been subsumed into the xform of all items */
+#ifdef OLD_XFORM
 	double xpos, ypos;	/* Point that defines the group's origin */
+#endif
 };
 
 struct _GnomeCanvasGroupClass {
@@ -421,6 +446,12 @@ GtkType gnome_canvas_get_type (void);
  */
 GtkWidget *gnome_canvas_new (void);
 
+/* Creates a new antialiased empty canvas.  You want to push the GdkRgb colormap and visual for this.
+ * 
+ * Return value: The newly-created canvas.
+ **/
+GtkWidget *gnome_canvas_new_aa (void);
+
 /* Returns the root canvas item group of the canvas */
 GnomeCanvasGroup *gnome_canvas_root (GnomeCanvas *canvas);
 
@@ -454,6 +485,10 @@ void gnome_canvas_request_redraw_uta (GnomeCanvas *canvas, ArtUta *uta);
  * specified region.  The region contains (x1, y1) but not (x2, y2).
  */
 void gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2);
+
+/* Gets the affine transform that converts world coordinates into canvas pixel coordinates.
+ */
+void gnome_canvas_w2c_affine (GnomeCanvas *canvas, double affine[6]);
 
 /* These functions convert from a coordinate system to another.  "w" is world coordinates (the ones
  * in which objects are specified), "c" is canvas coordinates (pixel coordinates that are (0,0) for

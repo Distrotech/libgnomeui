@@ -11,6 +11,10 @@
 #include <config.h>
 #include <math.h>
 #include <string.h>
+#include "libart_lgpl/art_vpath.h"
+#include "libart_lgpl/art_svp.h"
+#include "libart_lgpl/art_svp_vpath.h"
+#include "libart_lgpl/art_svp_vpath_stroke.h"
 #include "gnome-canvas-polygon.h"
 #include "gnome-canvas-util.h"
 #include "gnometypebuiltins.h"
@@ -39,8 +43,10 @@ enum {
 	ARG_POINTS,
 	ARG_FILL_COLOR,
 	ARG_FILL_COLOR_GDK,
+	ARG_FILL_COLOR_RGBA,
 	ARG_OUTLINE_COLOR,
 	ARG_OUTLINE_COLOR_GDK,
+	ARG_OUTLINE_COLOR_RGBA,
 	ARG_FILL_STIPPLE,
 	ARG_OUTLINE_STIPPLE,
 	ARG_WIDTH_PIXELS,
@@ -67,6 +73,7 @@ static double gnome_canvas_polygon_point       (GnomeCanvasItem *item, double x,
 						int cx, int cy, GnomeCanvasItem **actual_item);
 static void   gnome_canvas_polygon_translate   (GnomeCanvasItem *item, double dx, double dy);
 static void   gnome_canvas_polygon_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
+static void   gnome_canvas_polygon_render      (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
 
 
 static GnomeCanvasItemClass *parent_class;
@@ -109,8 +116,10 @@ gnome_canvas_polygon_class_init (GnomeCanvasPolygonClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::points", GTK_TYPE_GNOME_CANVAS_POINTS, GTK_ARG_READWRITE, ARG_POINTS);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_color_rgba", GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_FILL_COLOR_RGBA);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_OUTLINE_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_OUTLINE_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_color_rgba", GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_OUTLINE_COLOR_RGBA);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_stipple", GTK_TYPE_GDK_WINDOW, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_stipple", GTK_TYPE_GDK_WINDOW, GTK_ARG_READWRITE, ARG_OUTLINE_STIPPLE);
 	gtk_object_add_arg_type ("GnomeCanvasPolygon::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
@@ -127,6 +136,7 @@ gnome_canvas_polygon_class_init (GnomeCanvasPolygonClass *class)
 	item_class->point = gnome_canvas_polygon_point;
 	item_class->translate = gnome_canvas_polygon_translate;
 	item_class->bounds = gnome_canvas_polygon_bounds;
+	item_class->render = gnome_canvas_polygon_render;
 }
 
 static void
@@ -154,6 +164,12 @@ gnome_canvas_polygon_destroy (GtkObject *object)
 	if (poly->outline_stipple)
 		gdk_bitmap_unref (poly->outline_stipple);
 
+	if (poly->fill_svp)
+		art_svp_free (poly->fill_svp);
+
+	if (poly->outline_svp)
+		art_svp_free (poly->outline_svp);
+
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
@@ -174,8 +190,9 @@ get_bounds (GnomeCanvasPolygon *poly, double *bx1, double *by1, double *bx2, dou
 	x1 = x2 = poly->coords[0];
 	y1 = y2 = poly->coords[1];
 
-	for (i = 1, coords = poly->coords + 2; i < poly->num_points; i++, coords += 2)
+	for (i = 1, coords = poly->coords + 2; i < poly->num_points; i++, coords += 2) {
 		GROW_BOUNDS (x1, y1, x2, y2, coords[0], coords[1]);
+	}
 
 	/* Add outline width */
 
@@ -197,6 +214,29 @@ get_bounds (GnomeCanvasPolygon *poly, double *bx1, double *by1, double *bx2, dou
 	*by1 = y1;
 	*bx2 = x2;
 	*by2 = y2;
+}
+
+/* Computes the bounding box of the polygon, in canvas coordinates.  Assumes that the number of points in the polygon is
+ * not zero.
+ */
+static void
+get_bounds_canvas (GnomeCanvasPolygon *poly, double *bx1, double *by1, double *bx2, double *by2, double affine[6])
+{
+	GnomeCanvasItem *item;
+	ArtDRect bbox_world;
+	ArtDRect bbox_canvas;
+	double i2w[6], w2c[6], i2c[6];
+
+	item = GNOME_CANVAS_ITEM (poly);
+
+	get_bounds (poly, &bbox_world.x0, &bbox_world.y0, &bbox_world.x1, &bbox_world.y1);
+
+	art_drect_affine_transform (&bbox_canvas, &bbox_world, affine);
+	/* include 1 pixel of fudge */
+	*bx1 = bbox_canvas.x0 - 1;
+	*by1 = bbox_canvas.y0 - 1;
+	*bx2 = bbox_canvas.x1 + 1;
+	*by2 = bbox_canvas.y1 + 1;
 }
 
 /* Recalculates the canvas bounds for the polygon */
@@ -343,61 +383,102 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		else
 			set_points (poly, points);
 
-		recalc_bounds (poly);
+		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_FILL_COLOR:
 		if (gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color)) {
 			poly->fill_set = TRUE;
 			poly->fill_pixel = color.pixel;
-			set_gc_foreground (poly->fill_gc, poly->fill_pixel);
-		} else
+			if (item->canvas->aa)
+				poly->fill_rgba =
+					((color.red & 0xff00) << 16) |
+					((color.green & 0xff00) << 8) |
+					(color.blue & 0xff00) |
+					0xff;
+			else
+				set_gc_foreground (poly->fill_gc, poly->fill_pixel);
+		} else {
 			poly->fill_set = FALSE;
+			poly->fill_rgba = 0;
+		}
 
+		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_FILL_COLOR_GDK:
 		poly->fill_set = TRUE;
 		poly->fill_pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
 		set_gc_foreground (poly->fill_gc, poly->fill_pixel);
+		gnome_canvas_item_request_update (item);
+		break;
+
+	case ARG_FILL_COLOR_RGBA:
+		poly->fill_set = TRUE;
+		poly->fill_rgba = GTK_VALUE_UINT (*arg);
+
+		/* should probably request repaint on the fill_svp */
+		gnome_canvas_item_request_update (item);
+
 		break;
 
 	case ARG_OUTLINE_COLOR:
 		if (gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color)) {
 			poly->outline_set = TRUE;
 			poly->outline_pixel = color.pixel;
-			set_gc_foreground (poly->outline_gc, poly->outline_pixel);
-		} else
+			if (item->canvas->aa)
+				poly->outline_rgba =
+					((color.red & 0xff00) << 16) |
+					((color.green & 0xff00) << 8) |
+					(color.blue & 0xff00) |
+					0xff;
+			else
+				set_gc_foreground (poly->outline_gc, poly->outline_pixel);
+		} else {
 			poly->outline_set = FALSE;
+			poly->outline_rgba = 0;
+		}
 
+		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_OUTLINE_COLOR_GDK:
 		poly->outline_set = TRUE;
 		poly->outline_pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
 		set_gc_foreground (poly->outline_gc, poly->outline_pixel);
+		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_FILL_STIPPLE:
 		set_stipple (poly->fill_gc, &poly->fill_stipple, GTK_VALUE_BOXED (*arg), FALSE);
+		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_OUTLINE_STIPPLE:
 		set_stipple (poly->outline_gc, &poly->outline_stipple, GTK_VALUE_BOXED (*arg), FALSE);
+		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_WIDTH_PIXELS:
 		poly->width = GTK_VALUE_UINT (*arg);
 		poly->width_pixels = TRUE;
 		set_outline_gc_width (poly);
+#ifdef OLD_XFORM
 		recalc_bounds (poly);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	case ARG_WIDTH_UNITS:
 		poly->width = fabs (GTK_VALUE_DOUBLE (*arg));
 		poly->width_pixels = FALSE;
 		set_outline_gc_width (poly);
+#ifdef OLD_XFORM
 		recalc_bounds (poly);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	default:
@@ -446,6 +527,10 @@ gnome_canvas_polygon_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		get_color_arg (poly, poly->outline_pixel, arg);
 		break;
 
+	case ARG_FILL_COLOR_RGBA:
+		GTK_VALUE_UINT (*arg) = poly->fill_color;
+		break;
+
 	case ARG_FILL_STIPPLE:
 		GTK_VALUE_BOXED (*arg) = poly->fill_stipple;
 		break;
@@ -461,22 +546,89 @@ gnome_canvas_polygon_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 }
 
 static void
+gnome_canvas_polygon_render (GnomeCanvasItem *item,
+			     GnomeCanvasBuf *buf)
+{
+	GnomeCanvasPolygon *poly;
+	guint32 fg_color, bg_color;
+
+	poly = GNOME_CANVAS_POLYGON (item);
+
+	if (poly->fill_svp != NULL)
+		gnome_canvas_render_svp (buf, poly->fill_svp, poly->fill_rgba);
+
+	if (poly->outline_svp != NULL)
+		gnome_canvas_render_svp (buf, poly->outline_svp, poly->outline_rgba);
+}
+
+static void
 gnome_canvas_polygon_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
 	GnomeCanvasPolygon *poly;
+	ArtVpath *vpath;
+	int i;
+	ArtPoint pi, pc;
+	ArtSVP *svp;
+	double width;
+	double x1, y1, x2, y2;
 
 	poly = GNOME_CANVAS_POLYGON (item);
 
 	if (parent_class->update)
 		(* parent_class->update) (item, affine, clip_path, flags);
 
-	set_gc_foreground (poly->fill_gc, poly->fill_pixel);
-	set_gc_foreground (poly->outline_gc, poly->outline_pixel);
-	set_stipple (poly->fill_gc, &poly->fill_stipple, poly->fill_stipple, TRUE);
-	set_stipple (poly->outline_gc, &poly->outline_stipple, poly->outline_stipple, TRUE);
-	set_outline_gc_width (poly);
+	if (item->canvas->aa) {
+		gnome_canvas_item_reset_bounds (item);
 
-	recalc_bounds (poly);
+		vpath = art_new (ArtVpath, poly->num_points + 2);
+
+		for (i = 0; i < poly->num_points; i++) {
+			pi.x = poly->coords[i * 2];
+			pi.y = poly->coords[i * 2 + 1];
+			art_affine_point (&pc, &pi, affine);
+			vpath[i].code = i == 0 ? ART_MOVETO : ART_LINETO;
+			vpath[i].x = pc.x;
+			vpath[i].y = pc.y;
+		}
+		vpath[i].code = ART_END;
+		vpath[i].x = 0;
+		vpath[i].y = 0;
+
+		if (poly->fill_set) {
+			svp = art_svp_from_vpath (vpath);
+			gnome_canvas_item_update_svp_clip (item, &poly->fill_svp, svp, clip_path);
+		}
+
+		if (poly->outline_set) {
+			if (poly->width_pixels)
+				width = poly->width;
+			else
+				width = poly->width * item->canvas->pixels_per_unit;
+		
+			if (width < 0.5)
+				width = 0.5;
+		
+			svp = art_svp_vpath_stroke (vpath,
+						    ART_PATH_STROKE_JOIN_MITER,
+						    ART_PATH_STROKE_CAP_BUTT,
+						    width,
+						    4,
+						    0.5);
+
+			gnome_canvas_item_update_svp_clip (item, &poly->outline_svp, svp, clip_path);
+		}
+		art_free (vpath);
+
+	} else {
+		set_outline_gc_width (poly);
+		set_gc_foreground (poly->fill_gc, poly->fill_pixel);
+		set_gc_foreground (poly->outline_gc, poly->outline_pixel);
+		set_stipple (poly->fill_gc, &poly->fill_stipple, poly->fill_stipple, TRUE);
+		set_stipple (poly->outline_gc, &poly->outline_stipple, poly->outline_stipple, TRUE);
+
+		get_bounds_canvas (poly, &x1, &y1, &x2, &y2, affine);
+		gnome_canvas_update_bbox (item, x1, y1, x2, y2);		
+	}
 }
 
 static void
@@ -492,7 +644,9 @@ gnome_canvas_polygon_realize (GnomeCanvasItem *item)
 	poly->fill_gc = gdk_gc_new (item->canvas->layout.bin_window);
 	poly->outline_gc = gdk_gc_new (item->canvas->layout.bin_window);
 
+#ifdef OLD_XFORM
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
+#endif
 }
 
 static void
@@ -514,15 +668,26 @@ gnome_canvas_polygon_unrealize (GnomeCanvasItem *item)
  */
 static void
 item_to_canvas (GnomeCanvas *canvas, double *item_coords, GdkPoint *canvas_coords, int num_points,
-		double wdx, double wdy, int cdx, int cdy)
+		double i2c[6])
 {
 	int i;
-	int cx, cy;
+	ArtPoint pi, pc;
 
-	for (i = 0; i < num_points; i++, item_coords += 2, canvas_coords++) {
-		gnome_canvas_w2c (canvas, wdx + item_coords[0], wdy + item_coords[1], &cx, &cy);
-		canvas_coords->x = cx - cdx;
-		canvas_coords->y = cy - cdy;
+#ifdef VERBOSE
+	{
+		char str[128];
+		art_affine_to_string (str, i2c);
+		g_print ("polygon item_to_canvas %s\n", str);
+	}
+#endif
+
+	for (i = 0; i < num_points; i++) {
+		pi.x = item_coords[i * 2];
+		pi.y = item_coords[i * 2 + 1];
+		art_affine_point (&pc, &pi, i2c);
+		canvas_coords->x = floor (pc.x + 0.5);
+		canvas_coords->y = floor (pc.y + 0.5);
+		canvas_coords++; 
 	}
 }
 
@@ -536,6 +701,7 @@ gnome_canvas_polygon_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	double dx, dy;
 	int cx, cy;
 	int i;
+	double i2c[6];
 
 	poly = GNOME_CANVAS_POLYGON (item);
 
@@ -549,10 +715,12 @@ gnome_canvas_polygon_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	else
 		points = g_new (GdkPoint, poly->num_points);
 
-	dx = dy = 0.0;
-	gnome_canvas_item_i2w (item, &dx, &dy);
+	gnome_canvas_item_i2c_affine (item, i2c);
 
-	item_to_canvas (item->canvas, poly->coords, points, poly->num_points, dx, dy, x, y);
+	i2c[4] -= x;
+	i2c[5] -= y;
+
+	item_to_canvas (item->canvas, poly->coords, points, poly->num_points, i2c);
 
 	if (poly->fill_set) {
 		if (poly->fill_stipple)

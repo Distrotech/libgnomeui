@@ -80,6 +80,12 @@ struct _GnomeCanvasPolygon {
 	guint fill_set : 1;		/* Is fill color set? */
 	guint outline_set : 1;		/* Is outline color set? */
 	guint width_pixels : 1;		/* Is outline width specified in pixels or units? */
+
+	/* Antialiased specific stuff follows */
+	guint32 fill_rgba;		/* RGBA color for filling */
+	ArtSVP *fill_svp;		/* The SVP for the filled shape */
+	guint32 outline_rgba;		/* RGBA color for outline */
+	ArtSVP *outline_svp;		/* The SVP for the outline shape */
 };
 
 struct _GnomeCanvasPolygonClass {

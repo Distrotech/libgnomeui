@@ -1,3 +1,23 @@
+Thu Dec 31 23:39:37 1998  Raph Levien  <raph@gimp.org>
+
+	This is a big giant commit for the antialiased canvas.
+
+	* gnome-canvas-image.c:
+	* gnome-canvas-image.h:
+	* gnome-canvas-line.c:
+	* gnome-canvas-line.h:
+	* gnome-canvas-polygon.c:
+	* gnome-canvas-polygon.h:
+	* gnome-canvas-rect-ellipse.c:
+	* gnome-canvas-rect-ellipse.h:
+	* gnome-canvas-text.c:
+	* gnome-canvas-text.h:
+	* gnome-canvas-util.c:
+	* gnome-canvas-util.h:
+	* gnome-canvas.c:
+	* gnome-canvas.h: Added antialiased rendering and per-item
+	affine transformations.
+
 Thu Dec 31 18:50:44 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-calculator.c,gnome_icon_list.c: fix two memory leaks

@@ -9,8 +9,14 @@
  */
 
 #include <config.h>
+#include <string.h> /* for memcpy() */
 #include <math.h>
+#include "libart_lgpl/art_misc.h"
+#include "libart_lgpl/art_affine.h"
+#include "libart_lgpl/art_pixbuf.h"
+#include "libart_lgpl/art_rgb_pixbuf_affine.h"
 #include "gnome-canvas-image.h"
+#include "gnome-canvas-util.h"
 #include "gnometypebuiltins.h"
 
 
@@ -44,7 +50,9 @@ static double gnome_canvas_image_point       (GnomeCanvasItem *item, double x, d
 					      int cx, int cy, GnomeCanvasItem **actual_item);
 static void   gnome_canvas_image_translate   (GnomeCanvasItem *item, double dx, double dy);
 static void   gnome_canvas_image_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
+static void   gnome_canvas_image_render      (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
 
+static ArtPixBuf * pixbuf_from_imlib_image (GdkImlibImage *im);
 
 static GnomeCanvasItemClass *parent_class;
 
@@ -101,6 +109,7 @@ gnome_canvas_image_class_init (GnomeCanvasImageClass *class)
 	item_class->point = gnome_canvas_image_point;
 	item_class->translate = gnome_canvas_image_translate;
 	item_class->bounds = gnome_canvas_image_bounds;
+	item_class->render = gnome_canvas_image_render;
 }
 
 static void
@@ -140,27 +149,26 @@ gnome_canvas_image_destroy (GtkObject *object)
 
 	free_pixmap_and_mask (image);
 
+	if (image->pixbuf != NULL)
+		art_pixbuf_free (image->pixbuf);
+
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+/* Get's the image bounds expressed as item-relative coordinates. */
 static void
-recalc_bounds (GnomeCanvasImage *image)
+get_bounds_item_relative (GnomeCanvasImage *image, double *px1, double *py1, double *px2, double *py2)
 {
 	GnomeCanvasItem *item;
-	double wx, wy;
+	double x, y;
 
 	item = GNOME_CANVAS_ITEM (image);
 
-	/* Get world coordinates */
+	/* Get item coordinates */
 
-	wx = image->x;
-	wy = image->y;
-	gnome_canvas_item_i2w (item, &wx, &wy);
-
-	/* Get canvas pixel coordinates */
-
-	gnome_canvas_w2c (item->canvas, wx, wy, &image->cx, &image->cy);
+	x = image->x;
+	y = image->y;
 
 	/* Anchor image */
 
@@ -173,13 +181,13 @@ recalc_bounds (GnomeCanvasImage *image)
 	case GTK_ANCHOR_N:
 	case GTK_ANCHOR_CENTER:
 	case GTK_ANCHOR_S:
-		image->cx -= image->cwidth / 2;
+		x -= image->width / 2;
 		break;
 
 	case GTK_ANCHOR_NE:
 	case GTK_ANCHOR_E:
 	case GTK_ANCHOR_SE:
-		image->cx -= image->cwidth;
+		x -= image->width;
 		break;
 	}
 
@@ -192,17 +200,56 @@ recalc_bounds (GnomeCanvasImage *image)
 	case GTK_ANCHOR_W:
 	case GTK_ANCHOR_CENTER:
 	case GTK_ANCHOR_E:
-		image->cy -= image->cheight / 2;
+		y -= image->height / 2;
 		break;
 
 	case GTK_ANCHOR_SW:
 	case GTK_ANCHOR_S:
 	case GTK_ANCHOR_SE:
-		image->cy -= image->cheight;
+		y -= image->height;
 		break;
 	}
 
 	/* Bounds */
+
+	*px1 = x;
+	*py1 = y;
+	*px2 = x + image->width;
+	*py2 = y + image->height;
+}
+
+static void
+get_bounds (GnomeCanvasImage *image, double *px1, double *py1, double *px2, double *py2)
+{
+	GnomeCanvasItem *item;
+	double wx, wy;
+	double i2c[6];
+	ArtDRect i_bbox, c_bbox;
+
+	item = GNOME_CANVAS_ITEM (image);
+
+	gnome_canvas_item_i2c_affine (item, i2c);
+
+	get_bounds_item_relative (image, &i_bbox.x0, &i_bbox.y0, &i_bbox.x1, &i_bbox.y1);
+	art_drect_affine_transform (&c_bbox, &i_bbox, i2c);
+
+	/* add a fudge factor */
+	*px1 = c_bbox.x0 - 1;
+	*py1 = c_bbox.y0 - 1;
+	*px2 = c_bbox.x1 + 1;
+	*py2 = c_bbox.y1 + 1;
+}
+
+/* deprecated */
+static void
+recalc_bounds (GnomeCanvasImage *image)
+{
+	GnomeCanvasItem *item;
+	double wx, wy;
+
+	item = GNOME_CANVAS_ITEM (image);
+
+	get_bounds (image, &item->x1, &item->y1, &item->x2, &item->y2);
 
 	item->x1 = image->cx;
 	item->y1 = image->cy;
@@ -229,8 +276,13 @@ gnome_canvas_image_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	switch (arg_id) {
 	case ARG_IMAGE:
 		/* The pixmap and mask will be freed when the item is reconfigured */
-		image->im = GTK_VALUE_POINTER (*arg);
-		update = TRUE;
+		image->im = GTK_VALUE_POINTER (*arg);	
+		if (item->canvas->aa) {
+			if (image->pixbuf != NULL)
+				art_pixbuf_free (image->pixbuf);
+			image->pixbuf = pixbuf_from_imlib_image (image->im);
+		}
+	update = TRUE;
 		break;
 
 	case ARG_X:
@@ -262,11 +314,16 @@ gnome_canvas_image_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 	}
 
+#ifdef OLD_XFORM
 	if (update)
 		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
 
 	if (calc_bounds)
 		recalc_bounds (image);
+#else
+	if (update)
+		gnome_canvas_item_request_update (item);
+#endif
 }
 
 static void
@@ -311,6 +368,8 @@ static void
 gnome_canvas_image_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
 	GnomeCanvasImage *image;
+	double x1, y1, x2, y2;
+	ArtDRect i_bbox, c_bbox;
 
 	image = GNOME_CANVAS_IMAGE (item);
 
@@ -319,14 +378,38 @@ gnome_canvas_image_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_p
 
 	free_pixmap_and_mask (image);
 
-	if (image->im) {
-		image->cwidth = (int) (image->width * item->canvas->pixels_per_unit + 0.5);
-		image->cheight = (int) (image->height * item->canvas->pixels_per_unit + 0.5);
+	/* only works for non-rotated, non-skewed transforms */
+	image->cwidth = (int) (image->width * affine[0] + 0.5);
+	image->cheight = (int) (image->height * affine[3] + 0.5);
 
+	if (image->im)
 		image->need_recalc = TRUE;
-	}
 
+#ifdef OLD_XFORM
 	recalc_bounds (image);
+#else
+	get_bounds_item_relative (image, &i_bbox.x0, &i_bbox.y0, &i_bbox.x1, &i_bbox.y1);
+	art_drect_affine_transform (&c_bbox, &i_bbox, affine);
+
+	/* these values only make sense in the non-rotated, non-skewed case */
+	image->cx = c_bbox.x0;
+	image->cy = c_bbox.y0;
+
+	/* add a fudge factor */
+	c_bbox.x0--;
+	c_bbox.y0--;
+	c_bbox.x1++;
+	c_bbox.y1++;
+
+	gnome_canvas_update_bbox (item, c_bbox.x0, c_bbox.y0, c_bbox.x1, c_bbox.y1);
+
+	image->affine[0] = affine[0];
+	image->affine[1] = affine[1];
+	image->affine[2] = affine[2];
+	image->affine[3] = affine[3];
+	image->affine[4] = i_bbox.x0 * affine[0] + i_bbox.y0 * affine[2] + affine[4];
+	image->affine[5] = i_bbox.x0 * affine[1] + i_bbox.y0 * affine[3] + affine[5];
+#endif
 }
 
 static void
@@ -339,8 +422,8 @@ gnome_canvas_image_realize (GnomeCanvasItem *item)
 	if (parent_class->realize)
 		(* parent_class->realize) (item);
 
-	image->gc = gdk_gc_new (item->canvas->layout.bin_window);
-	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
+	if (!item->canvas->aa)
+		image->gc = gdk_gc_new (item->canvas->layout.bin_window);
 }
 
 static void
@@ -350,7 +433,8 @@ gnome_canvas_image_unrealize (GnomeCanvasItem *item)
 
 	image = GNOME_CANVAS_IMAGE (item);
 
-	gdk_gc_unref (image->gc);
+	if (!item->canvas->aa)
+		gdk_gc_unref (image->gc);
 
 	if (parent_class->unrealize)
 		(* parent_class->unrealize) (item);
@@ -361,6 +445,8 @@ recalc_if_needed (GnomeCanvasImage *image)
 {
 	if (!image->need_recalc)
 		return;
+
+	get_bounds (image, &image->item.x1, &image->item.y1, &image->item.x2, &image->item.y2);
 
 	gdk_imlib_render (image->im, image->cwidth, image->cheight);
 
@@ -508,6 +594,7 @@ gnome_canvas_image_point (GnomeCanvasItem *item, double x, double y,
 static void
 gnome_canvas_image_translate (GnomeCanvasItem *item, double dx, double dy)
 {
+#ifdef OLD_XFORM
 	GnomeCanvasImage *image;
 
 	image = GNOME_CANVAS_IMAGE (item);
@@ -516,6 +603,7 @@ gnome_canvas_image_translate (GnomeCanvasItem *item, double dx, double dy)
 	image->y += dy;
 
 	recalc_bounds (image);
+#endif
 }
 
 static void
@@ -568,4 +656,116 @@ gnome_canvas_image_bounds (GnomeCanvasItem *item, double *x1, double *y1, double
 
 	*x2 = *x1 + image->width;
 	*y2 = *y1 + image->height;
+}
+
+static void
+gnome_canvas_image_render      (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
+{
+	GnomeCanvasImage *image;
+
+	image = GNOME_CANVAS_IMAGE (item);
+
+        gnome_canvas_buf_ensure_buf (buf);
+
+#ifdef VERBOSE
+	{
+		char str[128];
+		art_affine_to_string (str, image->affine);
+		g_print ("gnome_canvas_image_render %s\n", str);
+	}
+#endif
+
+	art_rgb_pixbuf_affine (buf->buf,
+			buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
+			buf->buf_rowstride,
+			image->pixbuf,
+			image->affine,
+			ART_FILTER_NEAREST, NULL);
+
+	buf->is_bg = 0;
+}
+
+/* This creates a new pixbuf from the imlib image. */
+static ArtPixBuf *
+pixbuf_from_imlib_image (GdkImlibImage *im)
+{
+	ArtPixBuf *pixbuf;
+	art_u8 *pixels;
+	int width, height, rowstride;
+	int x, y;
+	unsigned char *p_src, *p_alpha;
+	art_u8 *p_dst;
+	art_u8 r, g, b, alpha;
+	art_u8 xr, xg, xb;
+
+	if (im->alpha_data) {
+		/* image has alpha data (not presently implemented in imlib as
+		   of 15 Dec 1998, but should happen soon. */
+		width = im->rgb_width;
+		height = im->rgb_height;
+		rowstride = width * 4;
+		pixels = art_alloc (rowstride * height);
+		p_src = im->rgb_data;
+		p_alpha = im->alpha_data;
+		p_dst = pixels;
+		for (y = 0; y < height; y++)
+			for (x = 0; x < width; x++) {
+				r = p_src[0];
+				g = p_src[1];
+				b = p_src[2];
+				alpha = p_alpha[0];
+
+					p_dst[0] = r;
+					p_dst[1] = g;
+					p_dst[2] = b;
+					p_dst[3] = alpha;
+
+				p_src += 3;
+				p_alpha += 1;
+				p_dst += 4;
+			}
+		return art_pixbuf_new_rgba (pixels, width, height, rowstride);
+	} else if (im->shape_color.r >= 0 && im->shape_color.g >= 0 && im->shape_color.b >= 0) {
+		/* image has one transparent color */
+		width = im->rgb_width;
+		height = im->rgb_height;
+		rowstride = width * 4;
+		pixels = art_alloc (rowstride * height);
+		p_src = im->rgb_data;
+		p_dst = pixels;
+		xr = im->shape_color.r;
+		xg = im->shape_color.g;
+		xb = im->shape_color.b;
+		for (y = 0; y < height; y++)
+			for (x = 0; x < width; x++) {
+				r = p_src[0];
+				g = p_src[1];
+				b = p_src[2];
+				if (r == xr && g == xg && b == xb) {
+					((art_u32 *)p_dst)[0] = 0;
+				} else {
+					p_dst[0] = r;
+					p_dst[1] = g;
+					p_dst[2] = b;
+					p_dst[3] = 255;
+				}
+				p_src += 3;
+				p_dst += 4;
+			}
+		return art_pixbuf_new_rgba (pixels, width, height, rowstride);
+	} else {
+		/* image is solid rgb */
+		width = im->rgb_width;
+		height = im->rgb_height;
+		rowstride = (width * 3 + 3) & -4;
+		pixels = art_alloc (rowstride * height);
+		p_src = im->rgb_data;
+		p_dst = pixels;
+		for (y = 0; y < height; y++) {
+			memcpy (p_dst, p_src, width * 3);
+			p_src += width * 3;
+			p_dst += rowstride;
+		}
+		return art_pixbuf_new_rgb (pixels, width, height, rowstride);
+	}
 }

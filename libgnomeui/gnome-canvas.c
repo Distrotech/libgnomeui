@@ -39,6 +39,22 @@
  * - Multiple exposure event compression; this may need to be in Gtk/Gdk instead.
  */
 
+/*
+ * Raph's TODO list for the antialiased canvas integration:
+ *
+ * - The underlying libart code is not bulletproof yet, more work there for sure.
+ *
+ * - ::point() method for text item not accurate when affine transformed.
+ *
+ * - Clip rectangle not implemented in aa renderer for text item.
+ *
+ * - Clip paths only partially implemented.
+ *
+ * - Add more image loading techniques to work around imlib deficiencies.
+ */
+
+#define noVERBOSE
+
 #include <stdio.h>
 #include <config.h>
 #include <math.h>
@@ -54,6 +70,7 @@
 
 static void group_add    (GnomeCanvasGroup *group, GnomeCanvasItem *item);
 static void group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item);
+
 
 
 /*** GnomeCanvasItem ***/
@@ -85,7 +102,10 @@ static void gnome_canvas_item_realize   (GnomeCanvasItem *item);
 static void gnome_canvas_item_unrealize (GnomeCanvasItem *item);
 static void gnome_canvas_item_map       (GnomeCanvasItem *item);
 static void gnome_canvas_item_unmap     (GnomeCanvasItem *item);
-static void gnome_canvas_item_update    (GnomeCanvasItem *item);
+static void gnome_canvas_item_update    (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
+static void gnome_canvas_item_invoke_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
+static double gnome_canvas_item_invoke_point (GnomeCanvasItem *item, double x, double y, int cx, int cy,
+					      GnomeCanvasItem **actual_item);
 
 static int emit_event (GnomeCanvas *canvas, GdkEvent *event);
 
@@ -374,6 +394,8 @@ static void
 gnome_canvas_item_realize (GnomeCanvasItem *item)
 {
 	GTK_OBJECT_SET_FLAGS (item, GNOME_CANVAS_ITEM_REALIZED);
+
+	gnome_canvas_item_request_update (item);
 }
 
 static void
@@ -395,9 +417,111 @@ gnome_canvas_item_unmap (GnomeCanvasItem *item)
 }
 
 static void
-gnome_canvas_item_update (GnomeCanvasItem *item)
+gnome_canvas_item_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
+#ifdef UNSET_IN_METHOD
 	GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_NEED_UPDATE);
+	GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_NEED_AFFINE);
+	GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_NEED_CLIP);
+	GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_NEED_VIS);
+#endif
+}
+
+#define HACKISH_AFFINE
+
+/* This routine invokes the update method of the item. */
+static void
+gnome_canvas_item_invoke_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
+{
+	int child_flags;
+	double *child_affine;
+	double new_affine[6];
+
+#ifdef HACKISH_AFFINE
+	double i2w[6], w2c[6], i2c[6];
+#endif
+
+	child_flags = flags;
+	if (!(item->object.flags & GNOME_CANVAS_ITEM_VISIBLE))
+		child_flags &= ~GNOME_CANVAS_UPDATE_IS_VISIBLE;
+
+	/* Apply the child item's transform */
+	if (item->xform == NULL)
+		child_affine = affine;
+	else if (item->object.flags & GNOME_CANVAS_ITEM_AFFINE_FULL) {
+		art_affine_multiply (new_affine, item->xform, affine);
+		child_affine = new_affine;
+	} else {
+		int j;
+
+		for (j = 0; j < 4; j++)
+			new_affine[j] = affine[j];
+		new_affine[4] = item->xform[0] * affine[0] + item->xform[1] * affine[2] + affine[4];
+		new_affine[5] = item->xform[0] * affine[1] + item->xform[1] * affine[3] + affine[5];
+		child_affine = new_affine;
+	}
+
+#ifdef HACKISH_AFFINE
+	gnome_canvas_item_i2w_affine (item, i2w);
+	gnome_canvas_w2c_affine (item->canvas, w2c);
+	art_affine_multiply (i2c, i2w, w2c);
+	/* invariant (doesn't hold now): child_affine == i2c */
+	child_affine = i2c;
+#endif
+
+	/* apply object flags to child flags */
+
+	child_flags &= ~GNOME_CANVAS_UPDATE_REQUESTED;
+	if (item->object.flags & GNOME_CANVAS_ITEM_NEED_UPDATE)
+		child_flags |= GNOME_CANVAS_UPDATE_REQUESTED;
+	if (item->object.flags & GNOME_CANVAS_ITEM_NEED_AFFINE)
+		child_flags |= GNOME_CANVAS_UPDATE_AFFINE;
+	if (item->object.flags & GNOME_CANVAS_ITEM_NEED_CLIP)
+		child_flags |= GNOME_CANVAS_UPDATE_CLIP;
+	if (item->object.flags & GNOME_CANVAS_ITEM_NEED_VIS)
+		child_flags |= GNOME_CANVAS_UPDATE_VISIBILITY;
+
+#ifdef VERBOSE
+	g_print ("item %x object %x\n", child_flags, item->object.flags);
+#endif
+
+	if ((child_flags & (GNOME_CANVAS_UPDATE_REQUESTED | GNOME_CANVAS_UPDATE_AFFINE | GNOME_CANVAS_UPDATE_CLIP |
+			    GNOME_CANVAS_UPDATE_VISIBILITY)) &&
+	    GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update)
+		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, child_affine, clip_path, child_flags);
+
+#ifndef UNSET_IN_METHOD
+	GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_NEED_UPDATE);
+	GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_NEED_AFFINE);
+	GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_NEED_CLIP);
+	GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_NEED_VIS);
+#endif
+}
+
+/* This routine invokes the point method of the item. The argument x, y should be in the parent's item-relative
+ * coordinate system. This routine applies the inverse of the item's transform, maintaining the affine invariant.
+ */
+static double
+gnome_canvas_item_invoke_point (GnomeCanvasItem *item, double x, double y, int cx, int cy, GnomeCanvasItem **actual_item)
+{
+#ifdef HACKISH_AFFINE
+	double i2w[6], w2c[6], i2c[6], c2i[6];
+	ArtPoint c, i;
+#endif
+	
+#ifdef HACKISH_AFFINE
+	gnome_canvas_item_i2w_affine (item, i2w);
+	gnome_canvas_w2c_affine (item->canvas, w2c);
+	art_affine_multiply (i2c, i2w, w2c);
+	art_affine_invert (c2i, i2c);
+	c.x = cx;
+	c.y = cy;
+	art_affine_point (&i, &c, c2i);
+	x = i.x;
+	y = i.y;
+#endif
+
+	return (* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->point) (item, x, y, cx, cy, actual_item);
 }
 
 static void
@@ -500,6 +624,146 @@ gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args)
 	item->canvas->need_repick = TRUE;
 }
 
+/**
+ * gnome_canvas_item_affine_relative:
+ * @item: The item to transform.
+ * @affine: the affine with which to transform the item
+ * 
+ * Apply a relative affine transformation to the item.
+ **/
+#define GCIAR_EPSILON 1e-6
+void
+gnome_canvas_item_affine_relative (GnomeCanvasItem *item, const double affine[6])
+{
+	double *new_affine;
+	int i;
+
+#ifdef VERBOSE
+	{
+		char str[128];
+
+		art_affine_to_string (str, affine);
+		g_print ("g_c_i_a_r %s\n", str);
+	}
+#endif
+
+	if (fabs (affine[0] - 1.0) < GCIAR_EPSILON &&
+	    fabs (affine[1]) < GCIAR_EPSILON &&
+	    fabs (affine[2]) < GCIAR_EPSILON &&
+	    fabs (affine[3] - 1.0) < GCIAR_EPSILON) {
+		/* translation only */
+		if (item->xform) {
+			if (item->object.flags & GNOME_CANVAS_ITEM_AFFINE_FULL) {
+				item->xform[4] += affine[4];
+				item->xform[5] += affine[5];
+			} else {
+				item->xform[0] += affine[4];
+				item->xform[1] += affine[5];
+			}
+		} else {
+			item->object.flags &= ~GNOME_CANVAS_ITEM_AFFINE_FULL;
+			new_affine = g_new (double, 2);
+			new_affine[0] = affine[4];
+			new_affine[1] = affine[5];
+			item->xform = new_affine;
+		}
+	} else {
+		/* need full affine */
+		if (item->xform) {
+			/* add to existing transform */
+			if (item->object.flags & GNOME_CANVAS_ITEM_AFFINE_FULL) {
+				art_affine_multiply (item->xform, item->xform, affine);
+			} else {
+				new_affine = g_new (double, 6);
+				for (i = 0; i < 4; i++)
+					new_affine[i] = affine[i];
+				new_affine[4] = item->xform[0] * affine[0] + item->xform[1] * affine[2] + affine[4];
+				new_affine[5] = item->xform[0] * affine[1] + item->xform[1] * affine[3] + affine[5];
+				g_free (item->xform);
+				item->xform = new_affine;
+			}
+		} else {
+			item->object.flags |= GNOME_CANVAS_ITEM_AFFINE_FULL;
+			new_affine = g_new (double, 6);
+			for (i = 0; i < 6; i++)
+				new_affine[i] = affine[i];
+			item->xform = new_affine;
+		}
+	}
+
+	if (!(item->object.flags & GNOME_CANVAS_ITEM_NEED_AFFINE)) {
+		item->object.flags |= GNOME_CANVAS_ITEM_NEED_AFFINE;
+		if (item->parent != NULL)
+			gnome_canvas_item_request_update (item->parent);
+		else
+			gnome_canvas_request_update (item->canvas);
+	}
+
+	item->canvas->need_repick = TRUE;
+}
+
+/**
+ * gnome_canvas_item_affine_absolute:
+ * @item: The item to transform.
+ * @affine: the affine with which to replace the transform of the item
+ * 
+ * Apply an absolute affine transformation to the item.
+ **/
+void
+gnome_canvas_item_affine_absolute (GnomeCanvasItem *item, const double affine[6])
+{
+	int i;
+
+#ifdef VERBOSE
+	{
+		char str[128];
+
+		art_affine_to_string (str, affine);
+		g_print ("g_c_i_a_a %s\n", str);
+	}
+#endif
+
+	if (fabs (affine[0] - 1.0) < GCIAR_EPSILON &&
+	    fabs (affine[1]) < GCIAR_EPSILON &&
+	    fabs (affine[2]) < GCIAR_EPSILON &&
+	    fabs (affine[3] - 1.0) < GCIAR_EPSILON) {
+		/* translation only */
+		if (item->xform && (item->object.flags & GNOME_CANVAS_ITEM_AFFINE_FULL)) {
+			g_free (item->xform);
+			item->xform = NULL;
+		}
+		if (item->xform == NULL) {
+			item->object.flags &= ~GNOME_CANVAS_ITEM_AFFINE_FULL;
+			item->xform = g_new (double, 2);
+		}
+		item->xform[0] = affine[4];
+		item->xform[1] = affine[5];
+	} else {
+		/* need full affine */
+		if (item->xform && !(item->object.flags & GNOME_CANVAS_ITEM_AFFINE_FULL)) {
+			g_free (item->xform);
+			item->xform = NULL;
+		}
+		if (item->xform == NULL) {
+			item->object.flags |= GNOME_CANVAS_ITEM_AFFINE_FULL;
+			item->xform = g_new (double, 6);
+		}
+		for (i = 0; i < 6; i++) {
+			item->xform[i] = affine[i];
+		}
+	}
+
+	if (!(item->object.flags & GNOME_CANVAS_ITEM_NEED_AFFINE)) {
+		item->object.flags |= GNOME_CANVAS_ITEM_NEED_AFFINE;
+		if (item->parent != NULL)
+			gnome_canvas_item_request_update (item->parent);
+		else
+			gnome_canvas_request_update (item->canvas);
+	}
+
+	item->canvas->need_repick = TRUE;
+}
+
 
 /**
  * gnome_canvas_item_move:
@@ -509,6 +773,24 @@ gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args)
  * 
  * Moves a canvas item by the specified distance, which must be specified in canvas units.
  **/
+#ifndef OLD_XFORM
+void
+gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
+{
+	double translate[6];
+
+#ifdef VERBOSE
+	g_print ("g_c_item_move %g %g\n", dx, dy);
+#endif
+
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+
+	art_affine_translate (translate, dx, dy);
+
+	gnome_canvas_item_affine_relative (item, translate);
+}
+#else
 void
 gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
 {
@@ -529,6 +811,7 @@ gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
 
 	item->canvas->need_repick = TRUE;
 }
+#endif
 
 static void
 put_item_after (GList *link, GList *before)
@@ -834,10 +1117,63 @@ gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 etime)
 
 
 /**
+ * gnome_canvas_item_i2w_affine:
+ * @item: The item whose coordinate system will be used for conversion.
+ * @affine: The affine transform used to convert item to world coordinates.
+ * 
+ * Gets the affine transform that converts from item-relative coordinates to world coordinates.
+ **/
+#ifdef OLD_XFORM
+void
+gnome_canvas_item_i2w_affine (GnomeCanvasItem *item, double affine[6])
+{
+	GnomeCanvasGroup *group;
+
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+	g_return_if_fail (affine != NULL);
+
+	art_affine_identity (affine);
+
+	while (item->parent) {
+		group = GNOME_CANVAS_GROUP (item->parent);
+
+		affine[4] += group->xpos;
+		affine[5] += group->ypos;
+
+		item = item->parent;
+	}
+}
+#else
+void
+gnome_canvas_item_i2w_affine (GnomeCanvasItem *item, double affine[6])
+{
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+	g_return_if_fail (affine != NULL);
+
+	art_affine_identity (affine);
+
+	while (item) {
+		if (item->xform != NULL) {
+			if (item->object.flags & GNOME_CANVAS_ITEM_AFFINE_FULL) {
+				art_affine_multiply (affine, affine, item->xform);
+			} else {
+				affine[4] += item->xform[0];
+				affine[5] += item->xform[1];
+			}
+		}
+
+		item = item->parent;
+	}
+}
+#endif
+
+/**
  * gnome_canvas_item_w2i:
  * @item: The item whose coordinate system will be used for conversion.
- * @x: If non-NULL, the X world coordinate to convert to item-relative coordinates.
- * @y: If non-NULL, Y world coordinate to convert to item-relative coordinates.
+ * @x: the X world coordinate to convert to item-relative coordinates.
+ * @y: the Y world coordinate to convert to item-relative coordinates.
  * 
  * Converts from world coordinates to item-relative coordinates.  The converted coordinates
  * are returned in the same variables.
@@ -845,22 +1181,19 @@ gnome_canvas_item_ungrab (GnomeCanvasItem *item, guint32 etime)
 void
 gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y)
 {
-	GnomeCanvasGroup *group;
+	double affine[6], inv[6];
+	ArtPoint w, i;
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
 
-	while (item->parent) {
-		group = GNOME_CANVAS_GROUP (item->parent);
-
-		if (x)
-			*x -= group->xpos;
-
-		if (y)
-			*y -= group->ypos;
-
-		item = item->parent;
-	}
+	gnome_canvas_item_i2w_affine (item, affine);
+	art_affine_invert (inv, affine);
+	w.x = *x;
+	w.y = *y;
+	art_affine_point (&i, &w, inv);
+	*x = i.x;
+	*y = i.y;
 }
 
 
@@ -876,22 +1209,35 @@ gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y)
 void
 gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y)
 {
-	GnomeCanvasGroup *group;
+	double affine[6];
+	ArtPoint w, i;
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
 
-	while (item->parent) {
-		group = GNOME_CANVAS_GROUP (item->parent);
+	gnome_canvas_item_i2w_affine (item, affine);
+	i.x = *x;
+	i.y = *y;
+	art_affine_point (&w, &i, affine);
+	*x = w.x;
+	*y = w.y;
+}
 
-		if (x)
-			*x += group->xpos;
+/**
+ * gnome_canvas_item_i2c_affine:
+ * @item: The item whose coordinate system will be used for conversion.
+ * @affine: The affine transform used to convert item to canvas coordinates.
+ * 
+ * Gets the affine transform that converts from item-relative coordinates to canvas coordinates.
+ **/
+void
+gnome_canvas_item_i2c_affine (GnomeCanvasItem *item, double affine[6])
+{
+	double i2w[6], w2c[6];
 
-		if (y)
-			*y += group->ypos;
-
-		item = item->parent;
-	}
+	gnome_canvas_item_i2w_affine (item, i2w);
+	gnome_canvas_w2c_affine (item->canvas, w2c);
+	art_affine_multiply (affine, i2w, w2c);
 }
 
 /* Returns whether the item is an inferior of or is equal to the parent. */
@@ -1157,8 +1503,26 @@ gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 static void
 gnome_canvas_group_init (GnomeCanvasGroup *group)
 {
+#if 0
 	group->xpos = 0.0;
 	group->ypos = 0.0;
+#endif
+}
+
+static double *
+gnome_canvas_ensure_translate (GnomeCanvasItem *item)
+{
+	if (item->xform == NULL) {
+		GTK_OBJECT_UNSET_FLAGS (item, GNOME_CANVAS_ITEM_AFFINE_FULL);
+		item->xform = g_new (double, 2);
+		item->xform[0] = 0.0;
+		item->xform[1] = 0.0;
+		return item->xform;
+	} else if (item->object.flags & GNOME_CANVAS_ITEM_AFFINE_FULL) {
+		return item->xform + 4;
+	} else {
+		return item->xform;
+	}
 }
 
 static void
@@ -1167,6 +1531,7 @@ gnome_canvas_group_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GnomeCanvasItem *item;
 	GnomeCanvasGroup *group;
 	int recalc;
+	double *xlat;
 
 	item = GNOME_CANVAS_ITEM (object);
 	group = GNOME_CANVAS_GROUP (object);
@@ -1175,12 +1540,22 @@ gnome_canvas_group_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	switch (arg_id) {
 	case GROUP_ARG_X:
+#ifdef OLD_XFORM
 		group->xpos = GTK_VALUE_DOUBLE (*arg);
+#else
+		xlat = gnome_canvas_ensure_translate (item);
+		xlat[0] = GTK_VALUE_DOUBLE (*arg);
+#endif
 		recalc = TRUE;
 		break;
 
 	case GROUP_ARG_Y:
+#ifdef OLD_XFORM
 		group->ypos = GTK_VALUE_DOUBLE (*arg);
+#else
+		xlat = gnome_canvas_ensure_translate (item);
+		xlat[1] = GTK_VALUE_DOUBLE (*arg);
+#endif
 		recalc = TRUE;
 		break;
 
@@ -1199,17 +1574,37 @@ gnome_canvas_group_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 static void
 gnome_canvas_group_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
+	GnomeCanvasItem *item;
 	GnomeCanvasGroup *group;
 
+	item = GNOME_CANVAS_ITEM (object);
 	group = GNOME_CANVAS_GROUP (object);
 
 	switch (arg_id) {
 	case GROUP_ARG_X:
-		GTK_VALUE_DOUBLE (*arg) = group->xpos;
+#ifdef OLD_XFORM
+		GTK_VALUE_DOUBLE (*arg) = group->ypos;
+#else
+		if (item->xform == NULL)
+			GTK_VALUE_DOUBLE (*arg) = 0;
+		else if (object->flags & GNOME_CANVAS_ITEM_AFFINE_FULL)
+			GTK_VALUE_DOUBLE (*arg) = item->xform[4];
+		else
+			GTK_VALUE_DOUBLE (*arg) = item->xform[0];
+#endif
 		break;
 
 	case GROUP_ARG_Y:
+#ifdef OLD_XFORM
 		GTK_VALUE_DOUBLE (*arg) = group->ypos;
+#else
+		if (item->xform == NULL)
+			GTK_VALUE_DOUBLE (*arg) = 0;
+		else if (object->flags & GNOME_CANVAS_ITEM_AFFINE_FULL)
+			GTK_VALUE_DOUBLE (*arg) = item->xform[4];
+		else
+			GTK_VALUE_DOUBLE (*arg) = item->xform[0];
+#endif
 		break;
 
 	default:
@@ -1248,15 +1643,30 @@ gnome_canvas_group_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_p
 	GnomeCanvasGroup *group;
 	GList *list;
 	GnomeCanvasItem *i;
+	ArtDRect bbox, child_bbox;
 
 	group = GNOME_CANVAS_GROUP (item);
+
+	bbox.x0 = 0;
+	bbox.y0 = 0;
+	bbox.x1 = 0;
+	bbox.y1 = 0;
 
 	for (list = group->item_list; list; list = list->next) {
 		i = list->data;
 
-		if (GNOME_CANVAS_ITEM_CLASS (i->object.klass)->update)
-			(* GNOME_CANVAS_ITEM_CLASS (i->object.klass)->update) (i, affine, clip_path, flags);
+		gnome_canvas_item_invoke_update (i, affine, clip_path, flags);
+
+		child_bbox.x0 = i->x1;
+		child_bbox.y0 = i->y1;
+		child_bbox.x1 = i->x2;
+		child_bbox.y1 = i->y2;
+		art_drect_union (&bbox, &bbox, &child_bbox);
 	}
+	item->x1 = bbox.x0;
+	item->y1 = bbox.y0;
+	item->x2 = bbox.x1;
+	item->y2 = bbox.y1;
 }
 
 static void
@@ -1383,8 +1793,13 @@ gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int
 	best = 0.0;
 	*actual_item = NULL;
 
+#ifdef OLD_XFORM
 	gx = x - group->xpos;
 	gy = y - group->ypos;
+#else
+	gx = x;
+	gy = y;
+#endif
 
 	dist = 0.0; /* keep gcc happy */
 
@@ -1398,8 +1813,7 @@ gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int
 
 		if ((child->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
 		    && GNOME_CANVAS_ITEM_CLASS (child->object.klass)->point) {
-			dist = (* GNOME_CANVAS_ITEM_CLASS (child->object.klass)->point) (child, gx, gy, cx, cy,
-											 &point_item);
+			dist = gnome_canvas_item_invoke_point (child, gx, gy, cx, cy, &point_item);
 			has_point = TRUE;
 		} else
 			has_point = FALSE;
@@ -1418,6 +1832,7 @@ gnome_canvas_group_point (GnomeCanvasItem *item, double x, double y, int cx, int
 static void
 gnome_canvas_group_translate (GnomeCanvasItem *item, double dx, double dy)
 {
+#ifdef OLD_XFORM
 	GnomeCanvasGroup *group;
 
 	group = GNOME_CANVAS_GROUP (item);
@@ -1429,6 +1844,7 @@ gnome_canvas_group_translate (GnomeCanvasItem *item, double dx, double dy)
 
 	if (item->parent)
 		gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
+#endif
 }
 
 static void
@@ -1462,8 +1878,10 @@ gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double
 	/* If there were no visible items, return the group's origin */
 
 	if (!set) {
+#ifdef OLD_XFORM
 		*x1 = *x2 = group->xpos;
 		*y1 = *y2 = group->ypos;
+#endif
 		return;
 	}
 
@@ -1493,10 +1911,12 @@ gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double
 	/* Make the bounds be relative to our parent's coordinate system */
 
 	if (item->parent) {
+#ifdef OLD_XFORM
 		minx += group->xpos;
 		miny += group->ypos;
 		maxx += group->xpos;
 		maxy += group->ypos;
+#endif
 	}
 
 	*x1 = minx;
@@ -1641,8 +2061,10 @@ gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 
 			if (GNOME_IS_CANVAS_GROUP (item))
 				gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item), NULL);
+#if 0
 			else if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update)
 					(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
+#endif
 
 			if (first) {
 				gitem->x1 = item->x1;
@@ -1839,6 +2261,23 @@ GtkWidget *
 gnome_canvas_new (void)
 {
 	return GTK_WIDGET (gtk_type_new (gnome_canvas_get_type ()));
+}
+
+/**
+ * gnome_canvas_new_aa:
+ *
+ * Creates a new antialiased empty canvas.  You want to push the GdkRgb colormap and visual for this.
+ * 
+ * Return value: The newly-created canvas.
+ **/
+GtkWidget *
+gnome_canvas_new_aa (void)
+{
+	GnomeCanvas *canvas;
+
+	canvas = gtk_type_new (gnome_canvas_get_type ());
+	canvas->aa = 1;
+	return GTK_WIDGET (canvas);
 }
 
 static void
@@ -2270,8 +2709,7 @@ pick_current_item (GnomeCanvas *canvas, GdkEvent *event)
 		/* find the closest item */
 
 		if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
-			(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->point) (canvas->root, x, y, cx, cy,
-											 &canvas->new_current_item);
+			gnome_canvas_item_invoke_point (canvas->root, x, y, cx, cy, &canvas->new_current_item);
 		else
 			canvas->new_current_item = NULL;
 	} else
@@ -2523,9 +2961,12 @@ paint (GnomeCanvas *canvas)
 	g_print ("paint\n");
 #endif
 	if (canvas->need_update) {
-		(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (canvas->root, NULL, NULL, 0);
+		double affine[6];
 
-		canvas->root->object.flags &= ~GNOME_CANVAS_ITEM_NEED_UPDATE;
+		art_affine_identity (affine);
+
+		gnome_canvas_item_invoke_update (canvas->root, affine, NULL, 0);
+
 		canvas->need_update = FALSE;
 	}
 
@@ -2576,13 +3017,18 @@ paint (GnomeCanvas *canvas)
 
 			if (canvas->aa) {
 				GnomeCanvasBuf buf;
+				GdkColor *color;
+
 				buf.buf = g_new (guchar, IMAGE_WIDTH_AA * IMAGE_HEIGHT_AA * 3);
 				buf.buf_rowstride = IMAGE_WIDTH_AA * 3;
 				buf.rect.x0 = draw_x1;
 				buf.rect.y0 = draw_y1;
 				buf.rect.x1 = draw_x2;
 				buf.rect.y1 = draw_y2;
-				buf.bg_color = 0xffffff; /* FIXME; should be the same as the style's background color */
+				color = &widget->style->bg[GTK_STATE_NORMAL];
+				buf.bg_color = ((color->red & 0xff00) << 8) |
+					(color->green & 0xff00) |
+					(color->blue >> 8);
 				buf.is_bg = 1;
 				buf.is_buf = 0;
 
@@ -2602,7 +3048,8 @@ paint (GnomeCanvas *canvas)
 					gdk_draw_rectangle (canvas->layout.bin_window,
 							    canvas->pixmap_gc,
 							    TRUE,
-							    0, 0,
+							    draw_x1 - DISPLAY_X1 (canvas) + canvas->zoom_xofs,
+							    draw_y1 - DISPLAY_Y1 (canvas) + canvas->zoom_yofs,
 							    width, height);
 				} else {
 					gdk_draw_rgb_image (canvas->layout.bin_window,
@@ -2674,6 +3121,18 @@ idle_handler (gpointer data)
 	g_print ("idle_handler {\n");
 #endif
 	canvas = data;
+
+	/* Cause the update if necessary */
+
+	if (canvas->need_update) {
+		double affine[6];
+
+		art_affine_identity (affine);
+
+		gnome_canvas_item_invoke_update (canvas->root, affine, NULL, 0);
+
+		canvas->need_update = FALSE;
+	}
 
 	/* Pick new current item */
 
@@ -2762,7 +3221,10 @@ gnome_canvas_set_scroll_region (GnomeCanvas *canvas, double x1, double y1, doubl
 	scroll_to (canvas, xofs, yofs);
 
 	canvas->need_repick = TRUE;
+#if 0
+	/* todo: should be requesting update */
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (canvas->root, NULL, NULL, 0);
+#endif
 
 	gtk_layout_thaw (GTK_LAYOUT (canvas));
 }
@@ -2830,6 +3292,17 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 
 	canvas->pixels_per_unit = n;
 
+#ifdef VERBOSE
+	g_print ("gnome_canvas_set_pixels_per_unit %g\n", n);
+#endif
+	if (!(canvas->root->object.flags & GNOME_CANVAS_ITEM_NEED_AFFINE)) {
+#ifdef VERBOSE
+		g_print ("...requesting update\n");
+#endif
+		canvas->root->object.flags |= GNOME_CANVAS_ITEM_NEED_AFFINE;
+		gnome_canvas_request_update (canvas);
+	}
+
 	gnome_canvas_w2c (canvas,
 			  cx - (canvas_width / (2.0 * n)),
 			  cy - (canvas_height / (2.0 * n)),
@@ -2840,7 +3313,11 @@ gnome_canvas_set_pixels_per_unit (GnomeCanvas *canvas, double n)
 	scroll_to (canvas, x1, y1);
 
 	canvas->need_repick = TRUE;
+#ifdef OLD_XFORM
 	(* GNOME_CANVAS_ITEM_CLASS (canvas->root->object.klass)->update) (canvas->root, NULL, NULL, 0);
+#else
+	
+#endif
 
 	gtk_layout_thaw (GTK_LAYOUT (canvas));
 }
@@ -2888,6 +3365,8 @@ gnome_canvas_get_scroll_offsets (GnomeCanvas *canvas, int *cx, int *cy)
 }
 
 
+/* Invariant: the idle handler is always present when need_update or need_redraw. */
+
 /**
  * gnome_canvas_update_now:
  * @canvas: The canvas whose view should be updated.
@@ -2906,7 +3385,7 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 #ifdef VERBOSE
 	g_print ("update_now\n");
 #endif
-	if (!canvas->need_redraw)
+	if (!(canvas->need_update || canvas->need_redraw))
 		return;
 
 	idle_handler (canvas);
@@ -2914,8 +3393,6 @@ gnome_canvas_update_now (GnomeCanvas *canvas)
 	gdk_flush (); /* flush the X queue to ensure repaint */
 }
 
-
-/* Invariant: the idle handler is always present when need_update or need_redraw. */
 
 /**
  * gnome_canvas_request_update
@@ -3015,6 +3492,33 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 
 
 /**
+ * gnome_canvas_w2c_affine:
+ * @canvas: The canvas whose coordinates need conversion.
+ * @affine
+ * 
+ * Gets the affine transform that converts world coordinates into canvas pixel coordinates.
+ **/
+void
+gnome_canvas_w2c_affine (GnomeCanvas *canvas, double affine[6])
+{
+	double x, y;
+	double zooom;
+
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+	g_return_if_fail (affine != NULL);
+
+	zooom = canvas->pixels_per_unit;
+
+	affine[0] = zooom;
+	affine[1] = 0;
+	affine[2] = 0;
+	affine[3] = zooom;
+	affine[4] = -canvas->scroll_x1 * zooom;
+	affine[5] = -canvas->scroll_y1 * zooom;
+}
+
+/**
  * gnome_canvas_w2c:
  * @canvas: The canvas whose coordinates need conversion.
  * @wx: World X coordinate.
@@ -3028,28 +3532,20 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 void
 gnome_canvas_w2c (GnomeCanvas *canvas, double wx, double wy, int *cx, int *cy)
 {
-	double x, y;
+	double affine[6];
+	ArtPoint w, c;
 
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
-	if (cx) {
-		x = (wx - canvas->scroll_x1) * canvas->pixels_per_unit;
-
-		if (x > 0.0)
-			*cx = (int) (x + 0.5);
-		else
-			*cx = (int) ceil (x - 0.5); /* is this the fastest way to do this? */
-	}
-
-	if (cy) {
-		y = (wy - canvas->scroll_y1) * canvas->pixels_per_unit;
-
-		if (y > 0.0)
-			*cy = (int) (y + 0.5);
-		else
-			*cy = (int) ceil (y - 0.5);
-	}
+	gnome_canvas_w2c_affine (canvas, affine);
+	w.x = wx;
+	w.y = wy;
+	art_affine_point (&c, &w, affine);
+	if (cx)
+		*cx = floor (c.x + 0.5);
+	if (cy)
+		*cy = floor (c.y + 0.5);
 }
 
 /**
@@ -3067,16 +3563,20 @@ gnome_canvas_w2c (GnomeCanvas *canvas, double wx, double wy, int *cx, int *cy)
 void
 gnome_canvas_w2c_d (GnomeCanvas *canvas, double wx, double wy, double *cx, double *cy)
 {
-	double x, y;
+	double affine[6];
+	ArtPoint w, c;
 
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
+	gnome_canvas_w2c_affine (canvas, affine);
+	w.x = wx;
+	w.y = wy;
+	art_affine_point (&c, &w, affine);
 	if (cx)
-		*cx = (wx - canvas->scroll_x1) * canvas->pixels_per_unit;
-
+		*cx = c.x;
 	if (cy)
-		*cy = (wy - canvas->scroll_y1) * canvas->pixels_per_unit;
+		*cy = c.y;
 }
 
 
@@ -3094,14 +3594,21 @@ gnome_canvas_w2c_d (GnomeCanvas *canvas, double wx, double wy, double *cx, doubl
 void
 gnome_canvas_c2w (GnomeCanvas *canvas, int cx, int cy, double *wx, double *wy)
 {
+	double affine[6], inv[6];
+	ArtPoint w, c;
+
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
+	gnome_canvas_w2c_affine (canvas, affine);
+	art_affine_invert (inv, affine);
+	c.x = cx;
+	c.y = cy;
+	art_affine_point (&w, &c, inv);
 	if (wx)
-		*wx = canvas->scroll_x1 + cx / canvas->pixels_per_unit;
-
+		*wx = w.x;
 	if (wy)
-		*wy = canvas->scroll_y1 + cy / canvas->pixels_per_unit;
+		*wy = w.y;
 }
 
 

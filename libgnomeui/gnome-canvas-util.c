@@ -15,9 +15,11 @@
 #include "gnome-canvas-util.h"
 #include <libart_lgpl/art_uta.h>
 #include <libart_lgpl/art_svp.h>
+#include <libart_lgpl/art_svp_ops.h>
 #include <libart_lgpl/art_rgb.h>
 #include <libart_lgpl/art_rgb_svp.h>
 #include <libart_lgpl/art_uta_svp.h>
+#include <libart_lgpl/art_rect_svp.h>
 
 
 GnomeCanvasPoints *
@@ -294,7 +296,8 @@ gnome_canvas_render_svp (GnomeCanvasBuf *buf,
  * @p_svp: a pointer to the existing svp
  * @new_svp: the new svp
  *
- * Sets the svp to the new value, requesting repaint on what's changed.
+ * Sets the svp to the new value, requesting repaint on what's changed. This function takes responsibility for
+ * freeing new_svp.
  **/
 void
 gnome_canvas_update_svp (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp)
@@ -324,6 +327,125 @@ gnome_canvas_update_svp (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp)
 		gnome_canvas_request_redraw_uta (canvas, repaint_uta);
 	}
 	*p_svp = new_svp;
+}
+
+/**
+ * gnome_canvas_update_svp_clip:
+ * @canvas: the canvas containing the svp that needs updating.
+ * @p_svp: a pointer to the existing svp
+ * @new_svp: the new svp
+ * @clip_svp: a clip path, if non-null
+ *
+ * Sets the svp to the new value, clipping if necessary, and requesting repaint on what's changed. This function takes
+ * responsibility for freeing new_svp.
+ **/
+void
+gnome_canvas_update_svp_clip (GnomeCanvas *canvas, ArtSVP **p_svp, ArtSVP *new_svp, ArtSVP *clip_svp)
+{
+	ArtSVP *clipped_svp;
+
+	if (clip_svp != NULL) {
+		clipped_svp = art_svp_intersect (new_svp, clip_svp);
+		art_svp_free (new_svp);
+	} else {
+		clipped_svp = new_svp;
+	}
+	gnome_canvas_update_svp (canvas, p_svp, clipped_svp);
+}
+
+/**
+ * gnome_canvas_item_reset_bounds:
+ * @item: the canvas item containing the svp that needs updating.
+ * @p_svp: a pointer to the existing svp
+ * @new_svp: the new svp
+ *
+ * Sets the svp to the new value, requesting repaint on what's changed. This function takes responsibility for
+ * freeing new_svp. This routine also adds the svp's bbox to the item's.
+ **/
+void
+gnome_canvas_item_reset_bounds (GnomeCanvasItem *item)
+{
+	item->x1 = 0.0;
+	item->y1 = 0.0;
+	item->x2 = 0.0;
+	item->y2 = 0.0;
+}
+
+/**
+ * gnome_canvas_item_update_svp:
+ * @item: the canvas item containing the svp that needs updating.
+ * @p_svp: a pointer to the existing svp
+ * @new_svp: the new svp
+ *
+ * Sets the svp to the new value, requesting repaint on what's changed. This function takes responsibility for
+ * freeing new_svp. This routine also adds the svp's bbox to the item's.
+ **/
+void
+gnome_canvas_item_update_svp (GnomeCanvasItem *item, ArtSVP **p_svp, ArtSVP *new_svp)
+{
+	ArtDRect bbox;
+
+	gnome_canvas_update_svp (item->canvas, p_svp, new_svp);
+	if (new_svp) {
+		bbox.x0 = item->x1;
+		bbox.y0 = item->y1;
+		bbox.x1 = item->x2;
+		bbox.y1 = item->y2;
+		art_drect_svp_union (&bbox, new_svp);
+		item->x1 = bbox.x0;
+		item->y1 = bbox.y0;
+		item->x2 = bbox.x1;
+		item->y2 = bbox.y1;
+	}
+}
+
+/**
+ * gnome_canvas_item_update_svp_clip:
+ * @item: the canvas item containing the svp that needs updating.
+ * @p_svp: a pointer to the existing svp
+ * @new_svp: the new svp
+ * @clip_svp: a clip path, if non-null
+ *
+ * Sets the svp to the new value, clipping if necessary, and requesting repaint on what's changed. This function takes
+ * responsibility for freeing new_svp.
+ **/
+void
+gnome_canvas_item_update_svp_clip (GnomeCanvasItem *item, ArtSVP **p_svp, ArtSVP *new_svp, ArtSVP *clip_svp)
+{
+	ArtSVP *clipped_svp;
+
+	if (clip_svp != NULL) {
+		clipped_svp = art_svp_intersect (new_svp, clip_svp);
+		art_svp_free (new_svp);
+	} else {
+		clipped_svp = new_svp;
+	}
+
+	gnome_canvas_item_update_svp (item, p_svp, clipped_svp);
+}
+
+/**
+ * gnome_canvas_item_request_redraw_svp
+ * @item: the item containing the svp
+ * @svp: the svp that needs to be redrawn
+ *
+ * Request redraw of the svp if in aa mode, or the entire item in in xlib mode.
+ **/ 
+void
+gnome_canvas_item_request_redraw_svp (GnomeCanvasItem *item, const ArtSVP *svp)
+{
+	GnomeCanvas *canvas;
+	ArtUta *uta;
+
+	canvas = item->canvas;
+	if (canvas->aa) {
+		if (svp != NULL) {
+			uta = art_uta_from_svp (svp);
+			gnome_canvas_request_redraw_uta (canvas, uta);
+		}
+	} else {
+		gnome_canvas_request_redraw (canvas, item->x1, item->y1, item->x2, item->y2);		
+	}
 }
 
 /**
@@ -360,10 +482,10 @@ gnome_canvas_buf_ensure_buf (GnomeCanvasBuf *buf)
 	if (!buf->is_buf) {
 		bufptr = buf->buf;
 		for (y = buf->rect.y0; y < buf->rect.y1; y++) {
-			art_rgb_fill_run (buf->buf, buf->bg_color >> 16, (buf->bg_color >> 8) & 0xff, buf->bg_color & 0xff,
+			art_rgb_fill_run (bufptr, buf->bg_color >> 16, (buf->bg_color >> 8) & 0xff, buf->bg_color & 0xff,
 					  buf->rect.x1 - buf->rect.x0);
+			bufptr += buf->buf_rowstride;
 		}
-		bufptr += buf->buf_rowstride;
 		buf->is_buf = 1;
 	}
 }

@@ -11,10 +11,15 @@
 #include <config.h>
 #include <math.h>
 #include <string.h>
+#include "libart_lgpl/art_vpath.h"
+#include "libart_lgpl/art_svp.h"
+#include "libart_lgpl/art_svp_vpath.h"
+#include "libart_lgpl/art_svp_vpath_stroke.h"
 #include "gnome-canvas-line.h"
 #include "gnome-canvas-util.h"
 #include "gnometypebuiltins.h"
 
+#define noVERBOSE
 
 #define DEFAULT_SPLINE_STEPS 12		/* this is what Tk uses */
 #define NUM_ARROW_POINTS     6		/* number of points in an arrowhead */
@@ -41,6 +46,7 @@ enum {
 	ARG_POINTS,
 	ARG_FILL_COLOR,
 	ARG_FILL_COLOR_GDK,
+	ARG_FILL_COLOR_RGBA,
 	ARG_FILL_STIPPLE,
 	ARG_WIDTH_PIXELS,
 	ARG_WIDTH_UNITS,
@@ -76,6 +82,7 @@ static double gnome_canvas_line_point       (GnomeCanvasItem *item, double x, do
 					     int cx, int cy, GnomeCanvasItem **actual_item);
 static void   gnome_canvas_line_translate   (GnomeCanvasItem *item, double dx, double dy);
 static void   gnome_canvas_line_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
+static void   gnome_canvas_line_render      (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
 
 
 static GnomeCanvasItemClass *parent_class;
@@ -118,6 +125,7 @@ gnome_canvas_line_class_init (GnomeCanvasLineClass *class)
 	gtk_object_add_arg_type ("GnomeCanvasLine::points", GTK_TYPE_GNOME_CANVAS_POINTS, GTK_ARG_READWRITE, ARG_POINTS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
 	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasLine::fill_color_rgba", GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_FILL_COLOR_RGBA);
 	gtk_object_add_arg_type ("GnomeCanvasLine::fill_stipple", GTK_TYPE_GDK_WINDOW, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
 	gtk_object_add_arg_type ("GnomeCanvasLine::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
 	gtk_object_add_arg_type ("GnomeCanvasLine::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
@@ -143,6 +151,8 @@ gnome_canvas_line_class_init (GnomeCanvasLineClass *class)
 	item_class->point = gnome_canvas_line_point;
 	item_class->translate = gnome_canvas_line_translate;
 	item_class->bounds = gnome_canvas_line_bounds;
+
+	item_class->render = gnome_canvas_line_render;
 }
 
 static void
@@ -179,6 +189,15 @@ gnome_canvas_line_destroy (GtkObject *object)
 
 	if (line->stipple)
 		gdk_bitmap_unref (line->stipple);
+
+	if (line->fill_svp)
+		art_svp_free (line->fill_svp);
+
+	if (line->first_svp)
+		art_svp_free (line->first_svp);
+
+	if (line->last_svp)
+		art_svp_free (line->last_svp);
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -249,6 +268,31 @@ get_bounds (GnomeCanvasLine *line, double *bx1, double *by1, double *bx2, double
 	*by1 = y1;
 	*bx2 = x2;
 	*by2 = y2;
+}
+
+/* Computes the bounding box of the line, in canvas coordinates.  Assumes that the number of points in the polygon is
+ * not zero. Affine is the i2c transformation.
+ */
+static void
+get_bounds_canvas (GnomeCanvasLine *line, double *bx1, double *by1, double *bx2, double *by2, double affine[6])
+{
+	GnomeCanvasItem *item;
+
+	/* It would be possible to tighten the bounds somewhat by transforming the individual points before
+	   aggregating them into the bbox. But it hardly seems worth it. */
+	ArtDRect bbox_world;
+	ArtDRect bbox_canvas;
+
+	item = GNOME_CANVAS_ITEM (line);
+
+	get_bounds (line, &bbox_world.x0, &bbox_world.y0, &bbox_world.x1, &bbox_world.y1);
+
+	art_drect_affine_transform (&bbox_canvas, &bbox_world, affine);
+	/* include 1 pixel of fudge */
+	*bx1 = bbox_canvas.x0 - 1;
+	*by1 = bbox_canvas.y0 - 1;
+	*bx2 = bbox_canvas.x1 + 1;
+	*by2 = bbox_canvas.y1 + 1;
 }
 
 static void
@@ -560,18 +604,44 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		 * addition to recalculating the bounds.
 		 */
 
+#ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	case ARG_FILL_COLOR:
 		gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color);
 		line->fill_pixel = color.pixel;
-		set_line_gc_foreground (line);
+		if (item->canvas->aa) 
+			line->fill_rgba =
+				((color.red & 0xff00) << 16) |
+				((color.green & 0xff00) << 8) |
+				(color.blue & 0xff00) |
+				0xff;
+		else
+			set_line_gc_foreground (line);
+
+		gnome_canvas_item_request_update (item);
 		break;
 
 	case ARG_FILL_COLOR_GDK:
 		line->fill_pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
 		set_line_gc_foreground (line);
+#ifdef OLD_XFORM
+		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
+		break;
+
+	case ARG_FILL_COLOR_RGBA:
+		line->fill_rgba = GTK_VALUE_UINT (*arg);
+
+		/* should probably request repaint on the fill_svp */
+		gnome_canvas_item_request_update (item);
+
 		break;
 
 	case ARG_FILL_STIPPLE:
@@ -582,39 +652,68 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		line->width = GTK_VALUE_UINT (*arg);
 		line->width_pixels = TRUE;
 		set_line_gc_width (line);
+#ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	case ARG_WIDTH_UNITS:
 		line->width = fabs (GTK_VALUE_DOUBLE (*arg));
 		line->width_pixels = FALSE;
 		set_line_gc_width (line);
+#ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	case ARG_CAP_STYLE:
 		line->cap = GTK_VALUE_ENUM (*arg);
-		recalc_bounds (line);
+#ifdef OLD_XFORM
+		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	case ARG_JOIN_STYLE:
 		line->join = GTK_VALUE_ENUM (*arg);
-		recalc_bounds (line);
+#ifdef OLD_XFORM
+		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 	
 	case ARG_LINE_STYLE:
 		line->line_style = GTK_VALUE_ENUM (*arg);
 		set_line_gc_width (line);
+#ifdef OLD_XFORM
+		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	case ARG_FIRST_ARROWHEAD:
 		line->first_arrow = GTK_VALUE_BOOL (*arg);
+#ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	case ARG_LAST_ARROWHEAD:
 		line->last_arrow = GTK_VALUE_BOOL (*arg);
+#ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	case ARG_SMOOTH:
@@ -627,17 +726,29 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	case ARG_ARROW_SHAPE_A:
 		line->shape_a = fabs (GTK_VALUE_DOUBLE (*arg));
+#ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	case ARG_ARROW_SHAPE_B:
 		line->shape_b = fabs (GTK_VALUE_DOUBLE (*arg));
+#ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	case ARG_ARROW_SHAPE_C:
 		line->shape_c = fabs (GTK_VALUE_DOUBLE (*arg));
+#ifdef OLD_XFORM
 		reconfigure_arrows_and_bounds (line);
+#else
+		gnome_canvas_item_request_update (item);
+#endif
 		break;
 
 	default:
@@ -669,6 +780,10 @@ gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		color->pixel = line->fill_pixel;
 		gdk_color_context_query_color (line->item.canvas->cc, color);
 		GTK_VALUE_BOXED (*arg) = color;
+		break;
+
+	case ARG_FILL_COLOR_RGBA:
+		GTK_VALUE_UINT (*arg) = line->fill_rgba;
 		break;
 
 	case ARG_FILL_STIPPLE:
@@ -722,19 +837,138 @@ gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 }
 
 static void
+gnome_canvas_line_render (GnomeCanvasItem *item,
+			     GnomeCanvasBuf *buf)
+{
+	GnomeCanvasLine *line;
+	guint32 fg_color, bg_color;
+
+	line = GNOME_CANVAS_LINE (item);
+
+	if (line->fill_svp != NULL)
+		gnome_canvas_render_svp (buf, line->fill_svp, line->fill_rgba);
+
+	if (line->first_svp != NULL)
+		gnome_canvas_render_svp (buf, line->first_svp, line->fill_rgba);
+
+	if (line->last_svp != NULL)
+		gnome_canvas_render_svp (buf, line->last_svp, line->fill_rgba);
+}
+
+
+static ArtSVP *
+svp_from_points (const double *item_coords, int num_points, const double affine[6])
+{
+	ArtVpath *vpath;
+	ArtSVP *svp;
+	double x, y;
+	int i;
+
+	vpath = art_new (ArtVpath, num_points + 2);
+
+	for (i = 0; i < num_points; i++) {
+		vpath[i].code = i == 0 ? ART_MOVETO : ART_LINETO;
+		x = item_coords[i * 2];
+		y = item_coords[i * 2 + 1];
+		vpath[i].x = x * affine[0] + y * affine[2] + affine[4];
+		vpath[i].y = x * affine[1] + y * affine[3] + affine[5];
+	}
+#if 0
+	vpath[i].code = ART_LINETO;
+	vpath[i].x = vpath[0].x;
+	vpath[i].y = vpath[0].y;
+	i++;
+#endif
+	vpath[i].code = ART_END;
+	vpath[i].x = 0;
+	vpath[i].y = 0;
+
+	svp = art_svp_from_vpath (vpath);
+
+	art_free (vpath);
+
+	return svp;
+}
+
+static void
 gnome_canvas_line_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
 	GnomeCanvasLine *line;
+	int i;
+	ArtVpath *vpath;
+	ArtPoint pi, pc;
+	double width;
+	ArtSVP *svp;
+	double x1, y1, x2, y2;
 
 	line = GNOME_CANVAS_LINE (item);
 
 	if (parent_class->update)
 		(* parent_class->update) (item, affine, clip_path, flags);
 
-	set_line_gc_foreground (line);
-	set_line_gc_width (line);
-	set_stipple (line, line->stipple, TRUE);
+	reconfigure_arrows (line);
+
+	if (item->canvas->aa) {
+		gnome_canvas_item_reset_bounds (item);
+
+		vpath = art_new (ArtVpath, line->num_points + 2);
+
+		for (i = 0; i < line->num_points; i++) {
+			pi.x = line->coords[i * 2];
+			pi.y = line->coords[i * 2 + 1];
+			art_affine_point (&pc, &pi, affine);
+			vpath[i].code = i == 0 ? ART_MOVETO : ART_LINETO;
+			vpath[i].x = pc.x;
+			vpath[i].y = pc.y;
+		}
+		vpath[i].code = ART_END;
+		vpath[i].x = 0;
+		vpath[i].y = 0;
+
+		if (line->width_pixels)
+			width = line->width;
+		else
+			width = line->width * item->canvas->pixels_per_unit;
+		
+		if (width < 0.5)
+			width = 0.5;
+		
+		svp = art_svp_vpath_stroke (vpath,
+					    ART_PATH_STROKE_JOIN_MITER,
+					    ART_PATH_STROKE_CAP_BUTT,
+					    width,
+					    4,
+					    0.5);
+		art_free (vpath);
+
+		gnome_canvas_item_update_svp_clip (item, &line->fill_svp, svp, clip_path);
+
+		if (line->first_arrow)
+			svp = svp_from_points (line->first_coords, NUM_ARROW_POINTS, affine);
+		else
+			svp = NULL;
+
+		gnome_canvas_item_update_svp_clip (item, &line->first_svp, svp, clip_path);
+
+		if (line->last_arrow)
+			svp = svp_from_points (line->last_coords, NUM_ARROW_POINTS, affine);
+		else
+			svp = NULL;
+
+		gnome_canvas_item_update_svp_clip (item, &line->last_svp, svp, clip_path);
+
+	} else {
+		set_line_gc_foreground (line);
+		set_line_gc_width (line);
+		set_stipple (line, line->stipple, TRUE);
+
+		get_bounds_canvas (line, &x1, &y1, &x2, &y2, affine);
+		gnome_canvas_update_bbox (item, x1, y1, x2, y2);
+	}
+
+#ifdef OLD_XFORM
 	reconfigure_arrows_and_bounds (line);
+#endif
 }
 
 static void
@@ -749,7 +983,9 @@ gnome_canvas_line_realize (GnomeCanvasItem *item)
 
 	line->gc = gdk_gc_new (item->canvas->layout.bin_window);
 
+#if 0
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
+#endif
 }
 
 static void
@@ -767,28 +1003,44 @@ gnome_canvas_line_unrealize (GnomeCanvasItem *item)
 
 static void
 item_to_canvas (GnomeCanvas *canvas, double *item_coords, GdkPoint *canvas_coords, int num_points,
-		int *num_drawn_points, double wdx, double wdy, int cdx, int cdy)
+		int *num_drawn_points, double i2c[6])
 {
 	int i;
-	int cx, cy;
 	int old_cx, old_cy;
+	int cx, cy;
+	ArtPoint pi, pc;
+
+#ifdef VERBOSE
+	{
+		char str[128];
+		art_affine_to_string (str, i2c);
+		g_print ("line item_to_canvas %s\n", str);
+	}
+#endif
 
 	/* the first point is always drawn */
 
-	gnome_canvas_w2c (canvas, wdx + item_coords[0], wdy + item_coords[1], &cx, &cy);
-	canvas_coords->x = cx - cdx;
-	canvas_coords->y = cy - cdy;
+	pi.x = item_coords[0];
+	pi.y = item_coords[1];
+	art_affine_point (&pc, &pi, i2c);
+	cx = floor (pc.x + 0.5);
+	cy = floor (pc.y + 0.5);
+	canvas_coords->x = cx;
+	canvas_coords->y = cy;
 	canvas_coords++;
-	item_coords += 2;
 	old_cx = cx;
 	old_cy = cy;
 	*num_drawn_points = 1;
 	
-	for (i = 1; i < num_points; i++, item_coords += 2 ) {
-		gnome_canvas_w2c (canvas, wdx + item_coords[0], wdy + item_coords[1], &cx, &cy);
-		if (old_cx != cx || old_cy!= cy) {
-			canvas_coords->x = cx - cdx;
-			canvas_coords->y = cy - cdy;
+	for (i = 1; i < num_points; i++) {
+		pi.x = item_coords[i * 2];
+		pi.y = item_coords[i * 2 + 1];
+		art_affine_point (&pc, &pi, i2c);
+		cx = floor (pc.x + 0.5);
+		cy = floor (pc.y + 0.5);
+		if (old_cx != cx || old_cy != cy) {
+			canvas_coords->x = cx;
+			canvas_coords->y = cy;
 			old_cx = cx;
 			old_cy = cy;
 			canvas_coords++; 
@@ -805,7 +1057,7 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	GdkPoint static_points[NUM_STATIC_POINTS];
 	GdkPoint *points;
 	int actual_num_points_drawn;
-	double dx, dy;
+	double i2c[6];
 
 	line = GNOME_CANVAS_LINE (item);
 
@@ -819,11 +1071,13 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	else
 		points = g_new (GdkPoint, line->num_points);
 
-	dx = dy = 0.0;
-	gnome_canvas_item_i2w (item, &dx, &dy);
+	gnome_canvas_item_i2c_affine (item, i2c);
+
+	i2c[4] -= x;
+	i2c[5] -= y;
 
 	item_to_canvas (item->canvas, line->coords, points, line->num_points,
-			&actual_num_points_drawn, dx, dy, x, y);
+			&actual_num_points_drawn, i2c);
 
 	if (line->stipple)
 		gnome_canvas_set_stipple_origin (item->canvas, line->gc);
@@ -839,13 +1093,13 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 	if (line->first_arrow) {
 		item_to_canvas (item->canvas, line->first_coords, points, NUM_ARROW_POINTS,
-				&actual_num_points_drawn, dx, dy, x, y);
+				&actual_num_points_drawn, i2c);
 		gdk_draw_polygon (drawable, line->gc, TRUE, points, actual_num_points_drawn );
 	}
 
 	if (line->last_arrow) {
 		item_to_canvas (item->canvas, line->last_coords, points, NUM_ARROW_POINTS,
-				&actual_num_points_drawn, dx, dy, x, y);
+				&actual_num_points_drawn, i2c);
 		gdk_draw_polygon (drawable, line->gc, TRUE, points, actual_num_points_drawn );
 	}
 }
@@ -863,6 +1117,10 @@ gnome_canvas_line_point (GnomeCanvasItem *item, double x, double y,
 	double width;
 	int num_points, i;
 	int changed_miter_to_bevel;
+
+#ifdef VERBOSE
+	g_print ("gnome_canvas_line_point x, y = (%g, %g); cx, cy = (%d, %d)\n", x, y, cx, cy);
+#endif
 
 	line = GNOME_CANVAS_LINE (item);
 
