@@ -1,3 +1,8 @@
+2002-12-02  Glynn Foster  <glynn.foster@sun.com>
+
+	* libgnomeui/gnome-href.c: (gnome_href_clicked): Update for a nicer
+	string. Should fix #99907.
+
 2002-11-28  Glynn Foster  <glynn.foster@sun.com>
 
 	* libgnomeui/gnome-href.c: (gnome_href_clicked): Change reference

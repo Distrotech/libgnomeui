@@ -390,10 +390,10 @@ gnome_href_clicked (GtkButton *button)
   if(!gnome_url_show(href->_priv->url, NULL)) {
     GtkWidget *dialog = gtk_message_dialog_new(NULL, 0, GTK_MESSAGE_ERROR,
 					       GTK_BUTTONS_OK,
-					       _("Error occured while trying to launch the "
-						 "URL handler.\n"
-						 "Please check the settings in"
-						 "Preferred Applications if they are correct."));
+					       _("An error has occured while trying to launch the "
+						 "default web browser\n"
+						 "Please check your settings in the \n"
+						 "'Preferred Applications' preference tool."));
     
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
