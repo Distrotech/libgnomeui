@@ -1,15 +1,15 @@
 # Czech translation of libgnomeui.
 # Copyright (C) 2002 Free Software Foundation, Inc.
-# Copyright (C) 2004 Miloslav Trmac <mitr@volny.cz>
+# Copyright (C) 2004, 2005 Miloslav Trmac <mitr@volny.cz>
 # Michal Bukovjan <bukm@centrum.cz>, 2002.
-# Miloslav Trmac <mitr@volny.cz>, 2003, 2004.
+# Miloslav Trmac <mitr@volny.cz>, 2003, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-26 00:45+0100\n"
-"PO-Revision-Date: 2004-09-05 16:16+0200\n"
+"PO-Revision-Date: 2005-02-20 14:16+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -181,11 +181,11 @@ msgstr "_Soubor/"
 
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr "Ú_pravy"
+msgstr "_Upravit"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
-msgstr "Ú_pravy/"
+msgstr "_Upravit/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
@@ -1015,7 +1015,7 @@ msgstr "Cesta k souboru"
 
 #: libgnomeui/gnome-file-entry.c:813
 msgid "_Browse..."
-msgstr "_Probírat..."
+msgstr "_Procházet..."
 
 #: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
@@ -1229,7 +1229,7 @@ msgstr "Toto tlačítko otevře okno, ve kterém budete moci vybrat ikonu."
 
 #: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
-msgstr "Probírat"
+msgstr "Procházet"
 
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid "Icon path"
