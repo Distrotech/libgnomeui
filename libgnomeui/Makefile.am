@@ -5,7 +5,7 @@ SUBDIRS = pixmaps
 #
 # The targets
 #
-noinst_PROGRAMS = ted_demo stock_demo winhints_demo
+noinst_PROGRAMS = ted_demo stock_demo winhints_demo animator_demo
 bin_PROGRAMS    = gnome_segv
 lib_LTLIBRARIES = libgnomeui.la
 
@@ -36,6 +36,7 @@ EXTRA_libgnomeui_la_SOURCES = gtkcalendar.h gtkcalendar.c
 
 libgnomeui_la_SOURCES = \
 	gnome-about.c			\
+	gnome-animator.c		\
 	gnome-app.c			\
 	gnome-appbar.c			\
 	gnome-app-helper.c		\
@@ -95,6 +96,7 @@ libgnomeui_la_SOURCES = \
 
 libgnomeuiinclude_HEADERS = 		\
 	gnome-about.h			\
+        gnome-animator.h		\
 	gnome-app.h			\
 	gnome-appbar.h			\
 	gnome-app-helper.h		\
@@ -206,6 +208,8 @@ stock_demo_SOURCES = stock_demo.c
 
 winhints_demo_SOURCES = winhints_demo.c
 
+animator_demo_SOURCES = animator_demo.c
+
 SGML =	\
 	gtk-ted.sgml
 
@@ -246,6 +250,12 @@ stock_demo_LDADD =	\
 	$(INTLLIBS)
 
 winhints_demo_LDADD =	\
+	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	$(top_builddir)/libgnome/libgnome.la 		\
+	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
+	$(INTLLIBS)
+
+animator_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \

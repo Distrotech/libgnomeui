@@ -5,6 +5,7 @@
 #include "libgnome/gnome-parse.h"
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-about.h"
+#include "libgnomeui/gnome-animator.h"
 #include "libgnomeui/gnome-app.h"
 #include "libgnomeui/gnome-appbar.h"
 #include "libgnomeui/gnome-app-helper.h"

@@ -1,3 +1,20 @@
+1998-09-28  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* Makefile.am (libgnomeui_la_SOURCES): Added `gnome-animator.c'.
+	(libgnomeuiinclude_HEADERS): Added `gnome-animator.h'.
+	(noinst_PROGRAMS): Added `animator_demo'.
+	(animator_demo_SOURCES, animator_demo_LDADD): New variables for
+	compiling `animator_demo'.
+
+	* libgnomeui.h: #Include "gnome-animator.h".
+
+	* animator_demo.c: New file: simple demo for `GnomeAnimator'.  It
+ 	currently requires some images from `gnome-core'...  I'll have to
+ 	fix this.
+
+	* gnome-animator.c, gnome-animator.h: New files: new
+ 	`GnomeAnimator' widget.
+
 1998-09-27  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-actionarea.h, gnome-actionarea.c: Removed.
