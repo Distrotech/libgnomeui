@@ -136,13 +136,17 @@ gnome_init (char *app_id, struct argp *app_args,
 	struct sigaction sa;
 	error_t retval;
 
+#if 0
+	/* Debugging segv when you have a pointer grab is less than
+	 * useful, Sop instead of removing the above #if 0, fix the DND
+	 */
 	/* Yes, we do this twice, so if an error occurs before init,
 	   it will be caught, and if it happens after init, we'll override
 	   gtk's handler */
 	memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = (gpointer)gnome_segv_handle;
 	sigaction(SIGSEGV, &sa, NULL);
-
+#endif
 	/* now we replace gtk_init() with gnome_init() in our apps */
 	gtk_set_locale();
 
