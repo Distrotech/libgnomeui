@@ -11,6 +11,7 @@
 #include <gtk/gtkdrawingarea.h>
 #include <gtk/gtkframe.h>
 #include <gtk/gtksignal.h>
+#include <gtk/gtkcompat.h>
 #include "gnome-color-picker.h"
 #include <libgnome/gnome-i18nP.h>
 

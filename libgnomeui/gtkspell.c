@@ -36,6 +36,7 @@
 #include <gtk/gtkcheckbutton.h>
 #include <gtk/gtkhseparator.h>
 #include <gtk/gtkmain.h>
+#include <gtk/gtkcompat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
