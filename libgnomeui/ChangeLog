@@ -1,3 +1,11 @@
+Sat Sep 02 03:25:46 2000  George Lebl <jirka@5z.com>
+
+	* gnome-druid.c: Eek, yet more minor fixes.  close_on_cancel
+	  now works properly.  Also kill the window when the druid
+	  is destroyed so that we don't require the caller to actually
+	  keep an extra pointer around.  This is just sugar, things like
+	  this are allowed.
+
 Sat Sep 02 03:12:20 2000  George Lebl <jirka@5z.com>
 
 	* gnome-druid.c: improve docs for append/prepend/insert

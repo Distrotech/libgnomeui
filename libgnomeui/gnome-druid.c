@@ -635,11 +635,12 @@ gnome_druid_new (void)
  * @close_on_cancel: Close the window when cancel is pressed
  * @window: Optional return of the #GtkWindow created
  *
- * Description: Creates a new #GnomeDruid widget.  It also creates
- * a new toplevel window with the title of @title (which can be
- * %NULL) and a parent of @parent (which also can be %NULL).  The
- * window and the druid will both be shown.  If you need the window
- * widget pointer you can optionally get it through the last argument.
+ * Description: Creates a new #GnomeDruid widget.  It also creates a new
+ * toplevel window with the title of @title (which can be %NULL) and a parent
+ * of @parent (which also can be %NULL).  The window and the druid will both be
+ * shown.  If you need the window widget pointer you can optionally get it
+ * through the last argument.  When the druid gets destroyed, so will the
+ * window that is created here.
  *
  * Returns:  A new #GnomeDruid widget
  **/
@@ -681,7 +682,9 @@ gnome_druid_new_with_window (const char *title,
  * can be %NULL) and a parent of @parent (which also can be %NULL).  The @druid
  * will be placed inside this window.  The window and the druid will both be
  * shown.  If you need the window widget pointer you can optionally get it
- * through the last argument.  See #gnome_druid_new_with_window.
+ * through the last argument.  When the druid gets destroyed, so will the
+ * window that is created here.
+ * See #gnome_druid_new_with_window.
  **/
 void
 gnome_druid_construct_with_window (GnomeDruid *druid,
@@ -719,10 +722,17 @@ gnome_druid_construct_with_window (GnomeDruid *druid,
 	if (close_on_cancel) {
 		/* Use while_alive just for sanity */
 		gtk_signal_connect_object_while_alive
-			(GTK_OBJECT (druid), "destroy",
+			(GTK_OBJECT (druid), "cancel",
 			 GTK_SIGNAL_FUNC (gtk_widget_destroy),
 			 GTK_OBJECT (win));
 	}
+
+	/* When the druid gets destroyed so does the window */
+	/* Use while_alive just for sanity */
+	gtk_signal_connect_object_while_alive
+		(GTK_OBJECT (druid), "destroy",
+		 GTK_SIGNAL_FUNC (gtk_widget_destroy),
+		 GTK_OBJECT (win));
 
 	/* return the window */
 	if (window != NULL)
