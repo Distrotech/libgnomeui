@@ -117,11 +117,11 @@ prop_dlg(GtkWidget *widget, gpointer data)
 
 static GtkWidget *menu_items[20], *frame;
 
+extern void gnome_stock_menu_accel_dlg(char *);
 
 static GtkWidget *
 create_menu(GtkWidget *window)
 {
-	void gnome_stock_menu_accel_dlg(char *);
 	GtkWidget *menubar, *w, *menu;
 	GtkAccelGroup *accel;
 	int i = 0;
