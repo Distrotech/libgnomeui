@@ -766,25 +766,28 @@ item_to_canvas (GnomeCanvas *canvas, double *item_coords, GdkPoint *canvas_coord
 	int i;
 	int cx, cy;
 	int old_cx, old_cy;
-	
-	/* the firts point is always drawn */
+
+	/* the first point is always drawn */
+
 	gnome_canvas_w2c (canvas, wdx + item_coords[0], wdy + item_coords[1], &cx, &cy);
 	canvas_coords->x = cx - cdx;
 	canvas_coords->y = cy - cdy;
-	canvas_coords++; item_coords += 2;
-	old_cx=cx; old_cy=cy;
+	canvas_coords++;
+	item_coords += 2;
+	old_cx = cx;
+	old_cy = cy;
 	*num_drawn_points = 1;
 	
 	for (i = 1; i < num_points; i++, item_coords += 2 ) {
 		gnome_canvas_w2c (canvas, wdx + item_coords[0], wdy + item_coords[1], &cx, &cy);
-		if ( (old_cx != cx) || (old_cy!= cy) )
-		  {
-		    canvas_coords->x = cx - cdx ;
-		    canvas_coords->y = cy - cdy;
-		    old_cx=cx; old_cy=cy;
-		    canvas_coords++; 
-		    (*num_drawn_points)++;
-		  }
+		if (old_cx != cx || old_cy!= cy) {
+			canvas_coords->x = cx - cdx;
+			canvas_coords->y = cy - cdy;
+			old_cx = cx;
+			old_cy = cy;
+			canvas_coords++; 
+			(*num_drawn_points)++;
+		}
 	}
 }
 
@@ -813,7 +816,7 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	dx = dy = 0.0;
 	gnome_canvas_item_i2w (item, &dx, &dy);
 
-	item_to_canvas (item->canvas, line->coords, points, line->num_points, \
+	item_to_canvas (item->canvas, line->coords, points, line->num_points,
 			&actual_num_points_drawn, dx, dy, x, y);
 
 	if (line->stipple)
@@ -829,13 +832,13 @@ gnome_canvas_line_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	points = static_points;
 
 	if (line->first_arrow) {
-		item_to_canvas (item->canvas, line->first_coords, points, NUM_ARROW_POINTS, \
+		item_to_canvas (item->canvas, line->first_coords, points, NUM_ARROW_POINTS,
 				&actual_num_points_drawn, dx, dy, x, y);
 		gdk_draw_polygon (drawable, line->gc, TRUE, points, actual_num_points_drawn );
 	}
 
 	if (line->last_arrow) {
-		item_to_canvas (item->canvas, line->last_coords, points, NUM_ARROW_POINTS, \
+		item_to_canvas (item->canvas, line->last_coords, points, NUM_ARROW_POINTS,
 				&actual_num_points_drawn, dx, dy, x, y);
 		gdk_draw_polygon (drawable, line->gc, TRUE, points, actual_num_points_drawn );
 	}
