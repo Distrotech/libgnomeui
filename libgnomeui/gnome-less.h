@@ -24,6 +24,7 @@
 
 #include "libgnome/gnome-defs.h"
 #include <gtk/gtk.h>
+#include <stdio.h>
 
 BEGIN_GNOME_DECLS
 

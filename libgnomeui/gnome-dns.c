@@ -26,6 +26,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "libgnome/gnome-defs.h"
 #include "gnome-dns.h"
