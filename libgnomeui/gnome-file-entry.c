@@ -459,6 +459,8 @@ tilde_expand (const char *str)
 	return g_strconcat (passwd->pw_dir, G_DIR_SEPARATOR_S, p, NULL);
 }
 
+/* This is only used for the file dialog.  It can end up also being
+ * the default path. */
 static gchar *
 build_filename (GnomeFileEntry *fentry)
 {
@@ -473,11 +475,11 @@ build_filename (GnomeFileEntry *fentry)
 		(GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
 
 	if (text == NULL || text[0] == '\0')
-		return NULL;
+		return g_strconcat (fentry->default_path, "/", NULL);
 
 	file = _gnome_file_entry_expand_filename (text, fentry->default_path);
 	if (file == NULL)
-		return NULL;
+		return g_strconcat (fentry->default_path, "/", NULL);
 
 	/* Now append a '/' if it doesn't exist and we're in directory only
 	 * mode.  We also have to do this if the file exists and it *is* a

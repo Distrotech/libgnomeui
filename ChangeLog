@@ -1,3 +1,9 @@
+Mon Jan 05 17:21:19 2004  George Lebl <jirka@5z.com>
+
+	* libgnomeui/gnome-file-entry.c: make _set_default_path work if
+	  the entry field is empty.  That is, set the file selector path
+	  to this.
+
 2004-01-04  Anders Carlsson  <andersca@gnome.org>
 
 	* libgnomeui/gnome-password-dialog.h: Remove extra comma
