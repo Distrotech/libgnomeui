@@ -656,6 +656,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 
 	gconf_items = gconf_client_get_list (gentry->_priv->gconf_client,
 					     key, GCONF_VALUE_STRING, NULL);
+	g_free (key);
 
 	for (items = gconf_items; items; items = items->next) {
 
