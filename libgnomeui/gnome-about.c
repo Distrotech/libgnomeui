@@ -585,6 +585,8 @@ gnome_about_construct (GnomeAbout *about,
 			      title, version, 
 			      copyright, authors, 
 			      comments, logo);
+	gtk_signal_connect(GTK_OBJECT(about),"destroy",
+			   GTK_SIGNAL_FUNC(gnome_destroy_about),ai);
   
 	w = ai->w; h = ai->h;
 	/* x = (gdk_screen_width ()  - w) / 2; */
