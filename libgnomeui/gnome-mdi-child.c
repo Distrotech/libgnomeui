@@ -40,8 +40,10 @@ static void       gnome_mdi_child_init             (GnomeMDIChild *);
 static void       gnome_mdi_child_destroy          (GtkObject *);
 static void       gnome_mdi_child_finalize         (GObject *);
 
-static GtkWidget *gnome_mdi_child_set_label        (GnomeMDIChild *, GtkWidget *);
+static BonoboUINode *gnome_mdi_child_get_node        (GnomeMDIChild *);
 static GtkWidget *gnome_mdi_child_create_view      (GnomeMDIChild *);
+
+static guint last_child_id = 0;
 
 GNOME_CLASS_BOILERPLATE (GnomeMDIChild, gnome_mdi_child,
 			 GtkObject, gtk_object);
@@ -61,7 +63,7 @@ gnome_mdi_child_class_init (GnomeMDIChildClass *klass)
 	klass->create_view = NULL;
 	klass->create_menus = NULL;
 	klass->get_config_string = NULL;
-	klass->set_label = gnome_mdi_child_set_label;
+	klass->get_node = gnome_mdi_child_get_node;
 }
 
 static void
@@ -78,6 +80,8 @@ gnome_mdi_child_init (GnomeMDIChild *mdi_child)
 	mdi_child->priv->band_num = 101;
 	mdi_child->priv->band_pos = 0;
 	mdi_child->priv->offset = 0;
+
+	mdi_child->priv->child_id = ++last_child_id;
 }
 
 static GtkWidget *
@@ -94,25 +98,26 @@ gnome_mdi_child_create_view (GnomeMDIChild *child)
  * parameter is NULL and modify and return the old widget otherwise. it
  * should (obviously) NOT call the parent class handler!
  */
-static GtkWidget *
-gnome_mdi_child_set_label (GnomeMDIChild *child, GtkWidget *old_label)
+static BonoboUINode *
+gnome_mdi_child_get_node (GnomeMDIChild *child)
 {
+	BonoboUINode *node;
+	gchar *name;
+
 #ifdef GNOME_ENABLE_DEBUG
-	g_message("GnomeMDIChild: default set_label handler called!\n");
+	g_message("GnomeMDIChild: default get_node handler called!\n");
 #endif
 
-	if(old_label) {
-		gtk_label_set_text(GTK_LABEL(old_label), child->priv->name);
-		return old_label;
-	}
-	else {
-		GtkWidget *label;
+	name = g_strdup_printf ("GnomeMDIChild%d", child->priv->child_id);
 
-		label = gtk_label_new(child->priv->name);
-		gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.5);
+	node = bonobo_ui_node_new ("menuitem");
+	bonobo_ui_node_set_attr (node, "name", name);
+	bonobo_ui_node_set_attr (node, "verb", name);
+	bonobo_ui_node_set_attr (node, "_label", child->priv->name);
 
-		return label;
-	}
+	g_free (name);
+
+	return node;
 }
 
 static void

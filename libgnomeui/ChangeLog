@@ -1,3 +1,21 @@
+2001-06-15  Martin Baulig  <baulig@suse.de>
+
+	* gnome-mdi.[ch]: Started to port this to BonoboWindow.
+
+	* gnome-mdi.h (GnomeMDIClass): Changed return value of the `add_child',
+	`remove_child', `add_view' and `remove_view' virtual functions from
+	gint to gboolean. The second argument of the `app_created' virtual
+	function is now a `BonboWindow *'.
+	(gnome_mdi_get_app_from_view): Renamed to gnome_mdi_get_window_from_view.
+	(gnome_mdi_get_active_window): Return a `BonoboWindow *'.
+	(gnome_mdi_get_window_from_view): Likewise.
+	(gnome_mdi_get_view_from_window): Second argument is `BonoboWindow *'.
+	(gnome_mdi_set_menubar_template): Second argument is `const gchar *'.
+	(gnome_mdi_set_toolbar_template): Likewise.
+
+	* gnome-mdi-child.h (GnomeMDIChildClass): Renamed `set_label' to `get_node'
+	and made it return a `BonoboUINode *'.
+
 2001-06-14  Martin Baulig  <baulig@suse.de>
 
 	* gnome-textfu.[ch], gnome-popup-help.[ch], gnome-popup-menu.[ch]: Removed.

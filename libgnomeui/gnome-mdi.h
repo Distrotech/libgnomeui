@@ -32,6 +32,8 @@
 #include <gdk/gdk.h>
 
 #include <libgnomeui/gnome-app.h>
+#include <bonobo/bonobo-win.h>
+#include <bonobo/bonobo-ui-component.h>
 #include "gnome-mdi-child.h"
 
 G_BEGIN_DECLS
@@ -68,13 +70,14 @@ struct _GnomeMDI {
 struct _GnomeMDIClass {
 	GObjectClass parent_class;
 
-	gint        (*add_child)     (GnomeMDI *mdi, GnomeMDIChild *child);
-	gint        (*remove_child)  (GnomeMDI *mdi, GnomeMDIChild *child);
-	gint        (*add_view)      (GnomeMDI *mdi, GtkWidget *view);
-	gint        (*remove_view)   (GnomeMDI *mdi, GtkWidget *view);
+	gboolean    (*add_child)     (GnomeMDI *mdi, GnomeMDIChild *child);
+	gboolean    (*remove_child)  (GnomeMDI *mdi, GnomeMDIChild *child);
+	gboolean    (*add_view)      (GnomeMDI *mdi, GtkWidget *view);
+	gboolean    (*remove_view)   (GnomeMDI *mdi, GtkWidget *view);
 	void        (*child_changed) (GnomeMDI *mdi, GnomeMDIChild *app);
 	void        (*view_changed)  (GnomeMDI *mdi, GtkWidget *old_view);
-	void        (*app_created)   (GnomeMDI *mdi, GnomeApp *app);
+	void        (*app_created)   (GnomeMDI *mdi, BonoboWindow *win,
+								  BonoboUIComponent *component);
 };
 
 /*
@@ -140,7 +143,7 @@ const GList   *gnome_mdi_get_windows         (GnomeMDI *mdi);
 
 /* manipulating windows */
 void           gnome_mdi_open_toplevel       (GnomeMDI *mdi);
-GnomeApp      *gnome_mdi_get_active_window   (GnomeMDI *mdi);
+BonoboWindow  *gnome_mdi_get_active_window   (GnomeMDI *mdi);
 
 /*
  * the following two functions are here to make life easier if an application
@@ -159,16 +162,16 @@ void          gnome_mdi_unregister           (GnomeMDI *mdi, GObject *object);
  * objects associated with a particular view and for retrieveing the
  * visible view of a certain GnomeApp.
  */
-GnomeApp      *gnome_mdi_get_app_from_view   (GtkWidget *view);
-GnomeMDIChild *gnome_mdi_get_child_from_view (GtkWidget *view);
-GtkWidget     *gnome_mdi_get_view_from_window(GnomeMDI *mdi, GnomeApp *app);
+BonoboWindow  *gnome_mdi_get_window_from_view (GtkWidget *view);
+GnomeMDIChild *gnome_mdi_get_child_from_view  (GtkWidget *view);
+GtkWidget     *gnome_mdi_get_view_from_window (GnomeMDI *mdi, GnomeApp *app);
 
 /* the following API is used for easy creation of menus and toolbars
    via GnomeUIInfo structures */
 
 /* setting the GnomeUIInfo templates for menu and toolbar */
-void           gnome_mdi_set_menubar_template   (GnomeMDI *mdi, GnomeUIInfo *menu_tmpl);
-void           gnome_mdi_set_toolbar_template   (GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl);
+void           gnome_mdi_set_menubar_template   (GnomeMDI *mdi, const gchar *menu_tmpl);
+void           gnome_mdi_set_toolbar_template   (GnomeMDI *mdi, const gchar *tbar_tmpl);
 
 /* the following functions are used to obtain pointers to the GnomeUIInfo
  * structures for a specified MDI GnomeApp widget. this might be useful for

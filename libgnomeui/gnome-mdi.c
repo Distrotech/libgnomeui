@@ -34,8 +34,13 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-preferences.h>
+#include <libgnome/gnome-marshal.h>
 #include <libgnomeui/gnome-app.h>
 #include <bonobo/bonobo-dock-layout.h>
+#include <bonobo/bonobo-win.h>
+#include <bonobo/bonobo-ui-container.h>
+#include <bonobo/bonobo-ui-component.h>
+#include <bonobo/bonobo-ui-util.h>
 #include "gnome-pouch.h"
 #include "gnome-roo.h"
 #include "gnome-macros.h"
@@ -52,20 +57,20 @@
 static void            gnome_mdi_class_init(GnomeMDIClass  *);
 static void            gnome_mdi_init(GnomeMDI *);
 static void            gnome_mdi_finalize(GObject *);
-static void            gnome_mdi_app_create(GnomeMDI *, GnomeApp *);
+static gboolean        gnome_mdi_add_child_handler(GnomeMDI *mdi, GnomeMDIChild *child);
+static gboolean        gnome_mdi_remove_child_handler(GnomeMDI *mdi, GnomeMDIChild *child);
+static gboolean        gnome_mdi_add_view_handler(GnomeMDI *mdi, GtkWidget *widget);
+static void            gnome_mdi_app_created_handler(GnomeMDI *, BonoboWindow *, BonoboUIComponent *);
 static void            gnome_mdi_view_changed(GnomeMDI *, GtkWidget *);
 
-static void            child_list_create(GnomeMDI *, GnomeApp *);
-static void            child_list_activated_cb(GtkWidget *, GnomeMDI *);
-static GtkWidget       *find_item_by_child(GtkMenuShell *, GnomeMDIChild *);
+static void            child_list_create(GnomeMDI *, BonoboUIEngine *, BonoboUIComponent *);
 
 static GtkWidget       *app_create(GnomeMDI *);
-static GtkWidget       *app_clone(GnomeMDI *, GnomeApp *);
-static void            app_destroy(GnomeApp *, GnomeMDI *);
+static GtkWidget       *app_clone(GnomeMDI *, BonoboWindow *);
 static gint            app_toplevel_delete_event(GnomeApp *, GdkEventAny *, GnomeMDI *);
 static gint            app_book_delete_event(GnomeApp *, GdkEventAny *, GnomeMDI *);
 static gint            app_wiw_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi);
-static void            app_focus_in_event(GnomeApp *, GdkEventFocus *, GnomeMDI *);
+static void            app_focus_in_event(BonoboWindow *, GdkEventFocus *, GnomeMDI *);
 
 static GtkWidget       *book_create(GnomeMDI *);
 static void            book_switch_page(GtkNotebook *, GtkNotebookPage *, gint, GnomeMDI *);
@@ -84,16 +89,11 @@ static void            pouch_close_child(GnomePouch *pouch, GnomeRoo *roo, Gnome
 static void            top_add_view(GnomeMDI *, GtkWidget *, GnomeMDIChild *, GtkWidget *);
 static void            set_active_view(GnomeMDI *, GtkWidget *);
 
-static GnomeUIInfo     *copy_ui_info_tree(const GnomeUIInfo *);
-static void            free_ui_info_tree(GnomeUIInfo *);
-static gint            count_ui_info_items(const GnomeUIInfo *);
-
 static void            remove_view(GnomeMDI *, GtkWidget *);
 static void            remove_child(GnomeMDI *, GnomeMDIChild *);
 
 /* convenience functions that call child's "virtual" functions */
-static GList           *child_create_menus(GnomeMDIChild *, GtkWidget *);
-static GtkWidget       *child_set_label(GnomeMDIChild *, GtkWidget *);
+static BonoboUINode    *child_get_node(GnomeMDIChild *);
 
 /* a macro for getting the app's pouch (app->scrolledwindow->viewport->pouch) */
 #define get_pouch_from_app(app) \
@@ -179,22 +179,24 @@ gnome_mdi_class_init (GnomeMDIClass *klass)
 					   G_SIGNAL_RUN_FIRST,
 					   G_STRUCT_OFFSET (GnomeMDIClass, app_created),
 					   NULL, NULL,
-					   g_cclosure_marshal_VOID__OBJECT,
-					   G_TYPE_NONE, 1, GNOME_TYPE_APP);
+					   gnome_marshal_VOID__OBJECT_OBJECT,
+					   G_TYPE_NONE, 2,
+					   BONOBO_TYPE_WINDOW, BONOBO_UI_COMPONENT_TYPE);
 	
 	
-	klass->add_child = NULL;
-	klass->remove_child = NULL;
-	klass->add_view = NULL;
+	klass->add_child = gnome_mdi_add_child_handler;
+	klass->remove_child = gnome_mdi_remove_child_handler;
+	klass->add_view = gnome_mdi_add_view_handler;
 	klass->remove_view = NULL;
 	klass->child_changed = NULL;
 	klass->view_changed = gnome_mdi_view_changed;
-	klass->app_created = gnome_mdi_app_create;
+	klass->app_created = gnome_mdi_app_created_handler;
 }
 
 static void
 gnome_mdi_view_changed (GnomeMDI *mdi, GtkWidget *old_view)
 {
+#if 0
 	GList *menu_list = NULL, *children;
 	GtkWidget *parent = NULL, *view;
 	GtkWidget *toolbar;
@@ -212,7 +214,7 @@ gnome_mdi_view_changed (GnomeMDI *mdi, GtkWidget *old_view)
 	view = mdi->priv->active_view;
 
 	if(view)
-		app = gnome_mdi_get_app_from_view(view);
+		app = gnome_mdi_get_window_from_view(view);
 	if(old_view) {
 		data = gtk_object_get_data(GTK_OBJECT(old_view), GNOME_MDI_APP_KEY);
 		if(data)
@@ -358,30 +360,34 @@ gnome_mdi_view_changed (GnomeMDI *mdi, GtkWidget *old_view)
 
 	if(parent)
 		gtk_widget_queue_resize(parent);
+#endif
 }
 
 static void
-gnome_mdi_app_create (GnomeMDI *mdi, GnomeApp *app)
+gnome_mdi_app_created_handler (GnomeMDI *mdi, BonoboWindow *win, BonoboUIComponent *component)
 {
-	GnomeUIInfo *ui_info;
+    bonobo_ui_component_set_translate (component, "/", mdi->priv->menu_template, NULL);
+    bonobo_ui_component_set_translate (component, "/toolbar", mdi->priv->toolbar_template, NULL);
 
-	/* set up menus */
-	if(mdi->priv->menu_template) {
-		ui_info = copy_ui_info_tree(mdi->priv->menu_template);
-		gnome_app_create_menus_with_data(app, ui_info, mdi);
-		gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_MENUBAR_INFO_KEY,
-							ui_info);
-	}
+	child_list_create (mdi, bonobo_window_get_ui_engine (win), component);
+}
 
-	/* create toolbar */
-	if(mdi->priv->toolbar_template) {
-		ui_info = copy_ui_info_tree(mdi->priv->toolbar_template);
-		gnome_app_create_toolbar_with_data(app, ui_info, mdi);
-		gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_TOOLBAR_INFO_KEY,
-							ui_info);
-	}
+static gboolean
+gnome_mdi_add_child_handler (GnomeMDI *mdi, GnomeMDIChild *child)
+{
+	return TRUE;
+}
 
-	child_list_create(mdi, app);
+static gboolean
+gnome_mdi_remove_child_handler (GnomeMDI *mdi, GnomeMDIChild *child)
+{
+	return TRUE;
+}
+
+static gboolean
+gnome_mdi_add_view_handler (GnomeMDI *mdi, GtkWidget *widget)
+{
+	return TRUE;
 }
 
 static void
@@ -457,74 +463,18 @@ gnome_mdi_init (GnomeMDI *mdi)
 	mdi->priv->has_user_refcount = 1;
 }
 
-static GList *
-child_create_menus (GnomeMDIChild *child, GtkWidget *view)
+static BonoboUINode *
+child_get_node (GnomeMDIChild *child)
 {
-	if(GNOME_MDI_CHILD_GET_CLASS(child)->create_menus)
-		return GNOME_MDI_CHILD_GET_CLASS(child)->create_menus(child, view);
-
+	if (GNOME_MDI_CHILD_GET_CLASS(child)->get_node != NULL)
+		return GNOME_MDI_CHILD_GET_CLASS(child)->get_node(child);
 	return NULL;
 }
 
 static GtkWidget *
-child_set_label (GnomeMDIChild *child, GtkWidget *label)
+child_set_label (GnomeMDIChild *child, GtkWidget *widget)
 {
-	if (GNOME_MDI_CHILD_GET_CLASS(child)->set_label != NULL)
-		return GNOME_MDI_CHILD_GET_CLASS(child)->set_label(child, label);
 	return NULL;
-}
-
-/* the app-helper support routines
- * copying and freeing of GnomeUIInfo trees and counting items in them.
- */
-static GnomeUIInfo *
-copy_ui_info_tree (const GnomeUIInfo source[])
-{
-	GnomeUIInfo *copy;
-	int i, count;
-	
-	for(count = 0; source[count].type != GNOME_APP_UI_ENDOFINFO; count++)
-		;
-	
-	count++;
-
-	copy = g_malloc(count*sizeof(GnomeUIInfo));
-	
-	memcpy(copy, source, count*sizeof(GnomeUIInfo));
-	
-	for(i = 0; i < count; i++) {
-		if( (source[i].type == GNOME_APP_UI_SUBTREE) ||
-			(source[i].type == GNOME_APP_UI_SUBTREE_STOCK) ||
-			(source[i].type == GNOME_APP_UI_RADIOITEMS) )
-			copy[i].moreinfo = copy_ui_info_tree(source[i].moreinfo);
-	}
-	
-	return copy;
-}
-
-static gint
-count_ui_info_items (const GnomeUIInfo *ui_info)
-{
-	gint num;
-	
-	for(num = 0; ui_info[num].type != GNOME_APP_UI_ENDOFINFO; num++)
-		;
-	
-	return num;
-}
-
-static void
-free_ui_info_tree (GnomeUIInfo *root)
-{
-	int count;
-	
-	for(count = 0; root[count].type != GNOME_APP_UI_ENDOFINFO; count++)
-		if( (root[count].type == GNOME_APP_UI_SUBTREE) ||
-			(root[count].type == GNOME_APP_UI_SUBTREE_STOCK) ||
-			(root[count].type == GNOME_APP_UI_RADIOITEMS) )
-			free_ui_info_tree(root[count].moreinfo);
-	
-	g_free(root);
 }
 
 static void
@@ -541,132 +491,70 @@ set_page_by_widget (GtkNotebook *book, GtkWidget *child)
 		gtk_notebook_set_page(book, i);
 }
 
-static GtkWidget *
-find_item_by_child (GtkMenuShell *shell, GnomeMDIChild *child)
-{
-	GList *node;
-
-	node = shell->children;
-	while(node) {
-		if(gtk_object_get_data(GTK_OBJECT(node->data), GNOME_MDI_CHILD_KEY) == child)
-			return GTK_WIDGET(node->data);
-		
-		node = node->next;
-	}
-
-	return NULL;
-}
-
 static void
-child_list_activated_cb (GtkWidget *w, GnomeMDI *mdi)
+child_list_create (GnomeMDI *mdi, BonoboUIEngine *engine, BonoboUIComponent *component)
 {
-	GnomeMDIChild *child;
-	
-	child = gtk_object_get_data(GTK_OBJECT(w), GNOME_MDI_CHILD_KEY);
-	
-	if( child && (child != mdi->priv->active_child) ) {
-		if(child->priv->views)
-			gnome_mdi_set_active_view(mdi, child->priv->views->data);
-		else
-			gnome_mdi_add_view(mdi, child);
-	}
-}
-
-static void
-child_list_create (GnomeMDI *mdi, GnomeApp *app)
-{
-	GtkWidget *submenu, *item, *label;
+	BonoboUINode *submenu;
 	GList *child_node;
-	gint pos;
+	gchar *path;
 	
 	if(mdi->priv->child_list_path == NULL)
 		return;
 	
-	submenu = gnome_app_find_menu_pos(app->menubar,
-									  mdi->priv->child_list_path, &pos);
-	
-	if(submenu == NULL)
-		return;
+	submenu = bonobo_ui_node_new ("placeholder");
 
 	child_node = mdi->priv->children;
 	while(child_node) {
-		item = gtk_menu_item_new();
-		gtk_signal_connect(GTK_OBJECT(item), "activate",
-						   GTK_SIGNAL_FUNC(child_list_activated_cb), mdi);
-		label = child_set_label(GNOME_MDI_CHILD(child_node->data), NULL);
-		gtk_widget_show(label);
-		gtk_container_add(GTK_CONTAINER(item), label);
-		gtk_object_set_data(GTK_OBJECT(item), GNOME_MDI_CHILD_KEY,
-							child_node->data);
-		gtk_widget_show(item);
-		
-		gtk_menu_shell_append(GTK_MENU_SHELL(submenu), item);
+		BonoboUINode *node;
+
+		node = child_get_node (child_node->data);
+		if (node)
+			bonobo_ui_node_add_child (submenu, node);
 		
 		child_node = child_node->next;
 	}
 
-	gtk_widget_queue_resize(submenu);
+	bonobo_ui_util_translate_ui (submenu);
+
+	path = g_strdup_printf ("%s/placeholder", mdi->priv->child_list_path);
+	bonobo_ui_engine_xml_rm (engine, path, "GnomeMDIWindow");
+	bonobo_ui_engine_xml_merge_tree (engine, mdi->priv->child_list_path, submenu, "GnomeMDIWindow");
+	g_free (path);
+}
+
+static void
+child_list_update (GnomeMDI *mdi)
+{
+	BonoboWindow *window;
+	GList *window_node;
+	
+	if(mdi->priv->child_list_path == NULL)
+		return;
+	
+	window_node = mdi->priv->windows;
+	while(window_node) {
+		Bonobo_UIComponent uic;
+
+		window = BONOBO_WINDOW(window_node->data);
+		uic = bonobo_ui_engine_get_component(bonobo_window_get_ui_engine(window),
+											 "GnomeMDIWindow");
+
+		child_list_create (mdi, bonobo_window_get_ui_engine(window), NULL);
+
+		window_node = window_node->next;
+	}
 }
 
 void
 gnome_mdi_child_list_remove (GnomeMDI *mdi, GnomeMDIChild *child)
 {
-	GtkWidget *item, *shell;
-	GnomeApp *app;
-	GList *app_node;
-	gint pos;
-	
-	if(mdi->priv->child_list_path == NULL)
-		return;
-	
-	app_node = mdi->priv->windows;
-	while(app_node) {
-		app = GNOME_APP(app_node->data);
-		shell = gnome_app_find_menu_pos(app->menubar,
-										mdi->priv->child_list_path, &pos);
-		if(shell) {
-			item = find_item_by_child(GTK_MENU_SHELL(shell), child);
-			if(item) {
-				gtk_container_remove(GTK_CONTAINER(shell), item);
-				gtk_widget_queue_resize (GTK_WIDGET (shell));
-			}
-		}
-		
-		app_node = app_node->next;
-	}
+	child_list_update (mdi);
 }
 
 void
 gnome_mdi_child_list_add (GnomeMDI *mdi, GnomeMDIChild *child)
 {
-	GtkWidget *item, *submenu, *label;
-	GnomeApp *app;
-	GList *app_node;
-	gint pos;
-	
-	if(mdi->priv->child_list_path == NULL)
-		return;
-	
-	app_node = mdi->priv->windows;
-	while(app_node) {
-		app = GNOME_APP(app_node->data);
-		submenu = gnome_app_find_menu_pos(app->menubar,
-										  mdi->priv->child_list_path, &pos);
-		if(submenu) {
-			item = gtk_menu_item_new();
-			gtk_signal_connect(GTK_OBJECT(item), "activate",
-							   GTK_SIGNAL_FUNC(child_list_activated_cb), mdi);
-			label = child_set_label(child, NULL);
-			gtk_widget_show(label);
-			gtk_container_add(GTK_CONTAINER(item), label);
-			gtk_object_set_data(GTK_OBJECT(item), GNOME_MDI_CHILD_KEY, child);
-			gtk_widget_show(item);
-			gtk_menu_shell_append(GTK_MENU_SHELL(submenu), item);
-			gtk_widget_queue_resize(submenu);
-		}
-		
-		app_node = app_node->next;
-	}
+	child_list_update (mdi);
 }
 
 static gint
@@ -726,7 +614,7 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 	if(e->button == 1 && e->window == widget->window && mdi->priv->in_drag) {
 		GdkWindow *window;
 		GList *window_node;
-		GnomeApp *app;
+		BonoboWindow *app;
 		GtkWidget *view, *new_book, *new_app;
 		GtkNotebook *old_book = GTK_NOTEBOOK(widget);
 		gint old_page_no;
@@ -774,12 +662,12 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 
 					book_add_view(GTK_NOTEBOOK(new_book), view);
 
-					app = gnome_mdi_get_app_from_view(view);
+					app = gnome_mdi_get_window_from_view(view);
 					gdk_window_raise(GTK_WIDGET(app)->window);
 
 					if(old_book->cur_page == NULL) {
 						mdi->priv->active_window = app;
-						app = GNOME_APP(gtk_widget_get_toplevel(GTK_WIDGET(old_book)));
+						app = BONOBO_WINDOW(gtk_widget_get_toplevel(GTK_WIDGET(old_book)));
 						mdi->priv->windows =
 							g_list_remove(mdi->priv->windows, app);
 						gtk_widget_destroy(GTK_WIDGET(app));
@@ -802,7 +690,7 @@ book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer data)
 				
 			view = gtk_notebook_get_nth_page(old_book, old_page_no);
 	
-			app = gnome_mdi_get_app_from_view(view);
+			app = gnome_mdi_get_window_from_view(view);
 
 			width = view->allocation.width;
 			height = view->allocation.height;
@@ -949,17 +837,18 @@ book_switch_page (GtkNotebook *book, GtkNotebookPage *page, gint page_num, Gnome
 }
 
 static void
-app_focus_in_event (GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi)
+app_focus_in_event (BonoboWindow *win, GdkEventFocus *event, GnomeMDI *mdi)
 {
 	/* updates active_view and active_child when a new toplevel receives focus */
-	g_return_if_fail(GNOME_IS_APP(app));
+	g_return_if_fail(BONOBO_IS_WINDOW(win));
 #ifdef GNOME_ENABLE_DEBUG
 	g_message("GnomeMDI: toplevel receiving focus");
 #endif
 
 	if(mdi->priv->mode == GNOME_MDI_TOPLEVEL || 
 	   mdi->priv->mode == GNOME_MDI_MODAL)
-		set_active_view(mdi, app->contents);
+		set_active_view(mdi, bonobo_window_get_contents(win));
+#if 0
 	else if(mdi->priv->mode == GNOME_MDI_WIW) {
 		GnomeRoo *roo = gnome_pouch_get_selected(get_pouch_from_app(app));
 		if(roo)
@@ -974,30 +863,37 @@ app_focus_in_event (GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi)
 		else
 			set_active_view(mdi, NULL);
 	}
+#endif
 
-	mdi->priv->active_window = app;
+	mdi->priv->active_window = win;
 }
 
 static GtkWidget *
-app_clone (GnomeMDI *mdi, GnomeApp *app)
+app_clone (GnomeMDI *mdi, BonoboWindow *app)
 {
+#if 0
 	GnomeDockLayout *layout;
 	gchar *layout_string = NULL;
+#endif
 	GtkWidget *new_app;
 
+#if 0
 	if(app) {
 		layout = gnome_dock_get_layout(GNOME_DOCK(app->dock));
 		layout_string = gnome_dock_layout_create_string(layout);
 		gtk_object_unref(GTK_OBJECT(layout));
 	}
+#endif
 
 	new_app = app_create(mdi);
 
+#if 0
 	if(layout_string) {
 		if(GNOME_APP(new_app)->layout)
 			gnome_dock_layout_parse_string(GNOME_APP(new_app)->layout, layout_string);
 		g_free(layout_string);
 	}
+#endif
 
 	return new_app;
 }
@@ -1041,6 +937,7 @@ app_toplevel_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 static gint
 app_wiw_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 {
+	BonoboWindow *win = (BonoboWindow *) app;
 	GnomeMDIChild *child;
 	GtkWidget *view;
 	GList *view_node, *node;
@@ -1075,7 +972,7 @@ app_wiw_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 			
 			node = child->priv->views;
 			while(node) {
-				if(gnome_mdi_get_app_from_view(node->data) != app)
+				if(gnome_mdi_get_window_from_view(node->data) != win)
 					break;
 				
 				node = node->next;
@@ -1113,6 +1010,7 @@ app_wiw_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 static gint
 app_book_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 {
+	BonoboWindow *win = (BonoboWindow *) app;
 	GnomeMDIChild *child;
 	GtkWidget *view;
 	gint page_no = 0;
@@ -1149,7 +1047,7 @@ app_book_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 			
 			node = child->priv->views;
 			while(node) {
-				if(gnome_mdi_get_app_from_view(node->data) != app)
+				if(gnome_mdi_get_window_from_view(node->data) != win)
 					break;
 				
 				node = node->next;
@@ -1186,47 +1084,44 @@ app_book_delete_event (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 }
 
 static void
-app_destroy (GnomeApp *app, GnomeMDI *mdi)
+app_destroy (BonoboWindow *win, GnomeMDI *mdi)
 {
-	GnomeUIInfo *ui_info;
-	
-	if(mdi->priv->active_window == app) {
+	bonobo_ui_engine_deregister_component(bonobo_window_get_ui_engine(win), "GnomeMDIWindow");
+
+	child_list_update (mdi);
+
+	if(mdi->priv->active_window == win) {
 		if(mdi->priv->windows != NULL)
-			mdi->priv->active_window = GNOME_APP(mdi->priv->windows->data);
+			mdi->priv->active_window = BONOBO_WINDOW(mdi->priv->windows->data);
 		else
 			mdi->priv->active_window = NULL;
 	}
-
-	/* free stuff that got allocated for this GnomeApp */
-	ui_info = gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_MENUBAR_INFO_KEY);
-	if(ui_info)
-		free_ui_info_tree(ui_info);
-	
-	ui_info = gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_TOOLBAR_INFO_KEY);
-	if(ui_info)
-		free_ui_info_tree(ui_info);
-	
-	ui_info = gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY);
-	if(ui_info)
-		free_ui_info_tree(ui_info);
 }
 
 static GtkWidget *
 app_create (GnomeMDI *mdi)
 {
 	GtkWidget *window;
-	GnomeApp *app;
+	BonoboWindow *win;
+	BonoboUIEngine *engine;
+	BonoboUIContainer *container;
+	BonoboUIComponent *component;
 	GtkSignalFunc func = NULL;
 
-	window = gnome_app_new(mdi->priv->appname, mdi->priv->title);
-	app = GNOME_APP(window);
+	window = bonobo_window_new(mdi->priv->appname, mdi->priv->title);
+	win = BONOBO_WINDOW(window);
 
-	/* don't do automagical layout saving */
-	app->enable_layout_config = FALSE;
+	engine = bonobo_window_get_ui_engine(win);
 
-	gtk_window_set_wmclass (GTK_WINDOW (app), mdi->priv->appname, mdi->priv->appname);
+    container = bonobo_ui_container_new();
+	bonobo_ui_container_set_engine(container, engine);
+
+	component = bonobo_ui_component_new("GnomeMDIWindow");
+    bonobo_ui_component_set_container(component, BONOBO_OBJREF (container));
+
+	gtk_window_set_wmclass(GTK_WINDOW(win), mdi->priv->appname, mdi->priv->appname);
   
-	gtk_window_set_policy(GTK_WINDOW(app), TRUE, TRUE, FALSE);
+	gtk_window_set_policy(GTK_WINDOW(win), TRUE, TRUE, FALSE);
   
 	mdi->priv->windows = g_list_append(mdi->priv->windows, window);
 
@@ -1249,10 +1144,11 @@ app_create (GnomeMDI *mdi)
 					   func, mdi);
 	gtk_signal_connect(GTK_OBJECT(window), "focus_in_event",
 					   GTK_SIGNAL_FUNC(app_focus_in_event), mdi);
+
 	gtk_signal_connect(GTK_OBJECT(window), "destroy",
 					   GTK_SIGNAL_FUNC(app_destroy), mdi);
 
-	g_signal_emit(G_OBJECT(mdi), mdi_signals[APP_CREATED], 0, window);
+	g_signal_emit(G_OBJECT(mdi), mdi_signals[APP_CREATED], 0, window, component);
 
 	return window;
 }
@@ -1261,7 +1157,7 @@ static void
 remove_view (GnomeMDI *mdi, GtkWidget *view)
 {
 	GtkWidget *parent;
-	GnomeApp *window;
+	BonoboWindow *window;
 	GnomeMDIChild *child;
 
 	child = gnome_mdi_get_child_from_view(view);
@@ -1271,12 +1167,12 @@ remove_view (GnomeMDI *mdi, GtkWidget *view)
 	if(!parent)
 		return;
 
-	window = gnome_mdi_get_app_from_view(view);
+	window = gnome_mdi_get_window_from_view(view);
 
 	if(mdi->priv->mode == GNOME_MDI_TOPLEVEL ||
 	   mdi->priv->mode == GNOME_MDI_MODAL) {
 		gtk_container_remove(GTK_CONTAINER(parent), view);
-		window->contents = NULL;
+		// window->contents = NULL;
 
 		/* if this is NOT the last toplevel or a registered object exists,
 		   destroy the toplevel */
@@ -1345,6 +1241,7 @@ remove_child (GnomeMDI *mdi, GnomeMDIChild *child)
 	gtk_object_unref(GTK_OBJECT(child));
 
 	if(mdi->priv->mode == GNOME_MDI_MODAL && mdi->priv->children) {
+#if 0
 		GnomeMDIChild *next_child = mdi->priv->children->data;
 
 		if(next_child->priv->views) {
@@ -1354,19 +1251,20 @@ remove_child (GnomeMDI *mdi, GnomeMDIChild *child)
 		}
 		else
 			gnome_mdi_add_view(mdi, next_child);
+#endif
 	}
 }
 
 static void
-top_add_view (GnomeMDI *mdi, GtkWidget *app, GnomeMDIChild *child, GtkWidget *view)
+top_add_view (GnomeMDI *mdi, GtkWidget *win, GnomeMDIChild *child, GtkWidget *view)
 {
 	if(child && view)
-		gnome_app_set_contents(GNOME_APP(app), view);
+		bonobo_window_set_contents(BONOBO_WINDOW(win), view);
 
 	set_active_view(mdi, view);
 
-	if(!GTK_WIDGET_VISIBLE(app))
-		gtk_widget_show(app);
+	if(!GTK_WIDGET_VISIBLE(win))
+		gtk_widget_show(win);
 }
 
 static void
@@ -1392,7 +1290,7 @@ set_active_view (GnomeMDI *mdi, GtkWidget *view)
 
 	if(view) {
 		mdi->priv->active_child = gnome_mdi_get_child_from_view(view);
-		mdi->priv->active_window = gnome_mdi_get_app_from_view(view);
+		mdi->priv->active_window = gnome_mdi_get_window_from_view(view);
 	}
 
 	mdi->priv->active_view = view;
@@ -1416,11 +1314,11 @@ gnome_mdi_new_toplevel (GnomeMDI *mdi)
 
 		if(mdi->priv->mode == GNOME_MDI_NOTEBOOK) {
 			book = book_create(mdi);
-			gnome_app_set_contents(GNOME_APP(app), book);
+			bonobo_window_set_contents(BONOBO_WINDOW(app), book);
 		}
 		else if(mdi->priv->mode == GNOME_MDI_WIW) {
 			pouch = pouch_create(mdi);
-			gnome_app_set_contents(GNOME_APP(app), pouch);
+			bonobo_window_set_contents(BONOBO_WINDOW(app), pouch);
 		}
 
 		return app;
@@ -1453,7 +1351,7 @@ gnome_mdi_update_child (GnomeMDI *mdi, GnomeMDIChild *child)
 			gchar *fullname;
       
 			fullname = g_strconcat(child->priv->name, " - ", mdi->priv->title, NULL);
-			gtk_window_set_title(GTK_WINDOW(gnome_mdi_get_app_from_view(view)),
+			gtk_window_set_title(GTK_WINDOW(gnome_mdi_get_window_from_view(view)),
 								 fullname);
 			g_free(fullname);
 		}
@@ -1548,15 +1446,17 @@ gnome_mdi_set_active_view (GnomeMDI *mdi, GtkWidget *view)
 	else if(mdi->priv->mode == GNOME_MDI_WIW)
 		gnome_pouch_select_roo(GNOME_POUCH(view->parent->parent), GNOME_ROO(view->parent));
 	else if(mdi->priv->mode == GNOME_MDI_MODAL) {
+#ifdef FIXME
 		if(mdi->priv->active_window->contents) {
 			remove_view(mdi, mdi->priv->active_window->contents);
 			mdi->priv->active_window->contents = NULL;
 		}
 		gnome_app_set_contents(mdi->priv->active_window, view);
+#endif
 		set_active_view(mdi, view);
 	}
 
-	window = GTK_WINDOW(gnome_mdi_get_app_from_view(view));
+	window = GTK_WINDOW(gnome_mdi_get_window_from_view(view));
 	
 	/* TODO: hmmm... I dont know how to give focus to the window, so that it
 	   would receive keyboard events */
@@ -1627,14 +1527,14 @@ gnome_mdi_add_view (GnomeMDI *mdi, GnomeMDIChild *child)
 		gtk_widget_show(view);
 
 	if(mdi->priv->mode == GNOME_MDI_NOTEBOOK) {
-		if(GNOME_APP(app)->contents == NULL) {
+		if(bonobo_window_get_contents(BONOBO_WINDOW(app)) == NULL) {
 			book = book_create(mdi);
-			gnome_app_set_contents(GNOME_APP(app), book);
+			bonobo_window_set_contents(BONOBO_WINDOW(app), book);
 		}
-		book_add_view(GTK_NOTEBOOK(GNOME_APP(app)->contents), view);
+		book_add_view(GTK_NOTEBOOK(bonobo_window_get_contents(BONOBO_WINDOW(app))), view);
 	}
 	else if(mdi->priv->mode == GNOME_MDI_WIW) {
-		if(GNOME_APP(app)->contents == NULL) {
+		if(bonobo_window_get_contents(BONOBO_WINDOW(app)) == NULL) {
 			pouch = pouch_create(mdi);
 			gnome_app_set_contents(GNOME_APP(app), pouch);
 		}
@@ -1642,22 +1542,24 @@ gnome_mdi_add_view (GnomeMDI *mdi, GnomeMDIChild *child)
 	}
 	else if(mdi->priv->mode == GNOME_MDI_TOPLEVEL) {
 		/* add a new toplevel unless the remaining one is empty */
-		if(app == NULL || GNOME_APP(app)->contents != NULL)
-			app = app_clone(mdi, GNOME_APP(app));
+		if(app == NULL || bonobo_window_get_contents (BONOBO_WINDOW (app)) != NULL)
+			app = app_clone(mdi, BONOBO_WINDOW(app));
 		else
 			app = GTK_WIDGET(mdi->priv->active_window);
 		top_add_view(mdi, app, child, view);
 	}
+#ifdef FIXME
 	else if(mdi->priv->mode == GNOME_MDI_MODAL) {
 		/* replace the existing view if there is one */
-		if(GNOME_APP(app)->contents) {
-			remove_view(mdi, GNOME_APP(app)->contents);
-			GNOME_APP(app)->contents = NULL;
+		if(bonobo_window_get_contents(BONOBO_WINDOW(app))) {
+			remove_view(mdi, bonobo_window_get_contents(BONOBO_WINDOW(app)));
+			// bonobo_window_get_contents(BONOBO_WINDOW(app)) = NULL;
 		}
 
 		gnome_app_set_contents(GNOME_APP(app), view);
 		set_active_view(mdi, view);
 	}
+#endif
 
 	return TRUE;
 }
@@ -1719,9 +1621,9 @@ gnome_mdi_add_toplevel_view (GnomeMDI *mdi, GnomeMDIChild *child)
 		gtk_widget_show(view);
 
 	if(mdi->priv->mode == GNOME_MDI_NOTEBOOK)
-		book_add_view(GTK_NOTEBOOK(GNOME_APP(app)->contents), view);
+		book_add_view(GTK_NOTEBOOK(bonobo_window_get_contents(BONOBO_WINDOW(app))), view);
 	else if(mdi->priv->mode == GNOME_MDI_WIW) {
-		if(GNOME_APP(app)->contents == NULL) {
+		if(bonobo_window_get_contents(BONOBO_WINDOW(app)) == NULL) {
 			pouch = pouch_create(mdi);
 			gnome_app_set_contents(GNOME_APP(app), pouch);
 		}
@@ -1730,16 +1632,18 @@ gnome_mdi_add_toplevel_view (GnomeMDI *mdi, GnomeMDIChild *child)
 	else if(mdi->priv->mode == GNOME_MDI_TOPLEVEL)
 		/* add a new toplevel unless the remaining one is empty */
 		top_add_view(mdi, app, child, view);
+#ifdef FIXME
 	else if(mdi->priv->mode == GNOME_MDI_MODAL) {
 		/* replace the existing view if there is one */
-		if(GNOME_APP(app)->contents) {
+		if(bonobo_window_get_contents(BONOBO_WINDOW(app))) {
 			remove_view(mdi, mdi->priv->active_window->contents);
-			GNOME_APP(app)->contents = NULL;
+			// bonobo_window_get_contents(BONOBO_WINDOW(app)) = NULL;
 		}
 
 		gnome_app_set_contents(GNOME_APP(app), view);
 		set_active_view(mdi, view);
 	}
+#endif
 
 	if(!GTK_WIDGET_VISIBLE(app))
 		gtk_widget_show(app);
@@ -2038,7 +1942,7 @@ gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 	/* remove all GnomeApps but the active one */
 	app_node = mdi->priv->windows;
 	while(app_node) {
-		if(GNOME_APP(app_node->data) != mdi->priv->active_window)
+		if(BONOBO_WINDOW(app_node->data) != mdi->priv->active_window)
 			gtk_widget_destroy(GTK_WIDGET(app_node->data));
 		app_node = app_node->next;
 	}
@@ -2047,12 +1951,14 @@ gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 		g_list_free(mdi->priv->windows);
 
 	if(mdi->priv->active_window) {
+#if 0
 		if(mdi->priv->mode == GNOME_MDI_NOTEBOOK ||
 		   mdi->priv->mode == GNOME_MDI_WIW)
 			gtk_container_remove(GTK_CONTAINER(mdi->priv->active_window->dock),
 								 GNOME_DOCK(mdi->priv->active_window->dock)->client_area);
 
 		mdi->priv->active_window->contents = NULL;
+#endif
 
 		if( (mdi->priv->mode == GNOME_MDI_TOPLEVEL) || (mdi->priv->mode == GNOME_MDI_MODAL))
 			gtk_signal_disconnect_by_func(GTK_OBJECT(mdi->priv->active_window),
@@ -2078,11 +1984,11 @@ gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 
 		if(mode == GNOME_MDI_NOTEBOOK) {
 			book = book_create(mdi);
-			gnome_app_set_contents(mdi->priv->active_window, book);
+			bonobo_window_set_contents(mdi->priv->active_window, book);
 		}
 		else if(mode == GNOME_MDI_WIW) {
 			pouch = pouch_create(mdi);
-			gnome_app_set_contents(mdi->priv->active_window, pouch);
+			bonobo_window_set_contents(mdi->priv->active_window, pouch);
 		}
 	}
 
@@ -2100,19 +2006,19 @@ gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 				gtk_widget_set_usize(view, width, height);
 
 			if(mdi->priv->mode == GNOME_MDI_NOTEBOOK)
-				book_add_view(GTK_NOTEBOOK(mdi->priv->active_window->contents), view);
+				book_add_view(GTK_NOTEBOOK(bonobo_window_get_contents(mdi->priv->active_window)), view);
 			else if(mdi->priv->mode == GNOME_MDI_WIW)
 				pouch_add_view(get_pouch_from_app(mdi->priv->active_window), view);
 			else if(mdi->priv->mode == GNOME_MDI_TOPLEVEL) {
 				/* add a new toplevel unless the remaining one is empty */
-				if(mdi->priv->active_window->contents != NULL)
-					mdi->priv->active_window = GNOME_APP(app_clone(mdi, mdi->priv->active_window));
+				if(bonobo_window_get_contents(mdi->priv->active_window) != NULL)
+					mdi->priv->active_window = BONOBO_WINDOW(app_clone(mdi, mdi->priv->active_window));
 				top_add_view(mdi, GTK_WIDGET(mdi->priv->active_window), child, view);
 			}
 			else if(mdi->priv->mode == GNOME_MDI_MODAL) {
 				/* replace the existing view if there is one */
-				if(mdi->priv->active_window->contents == NULL) {
-					gnome_app_set_contents(mdi->priv->active_window, view);
+				if(bonobo_window_get_contents(mdi->priv->active_window) == NULL) {
+					bonobo_window_set_contents(mdi->priv->active_window, view);
 					set_active_view(mdi, view);
 				}
 			}
@@ -2179,7 +2085,7 @@ gnome_mdi_get_active_view (GnomeMDI *mdi)
  * Return value:
  * A pointer to a #GnomeApp that has the focus.
  **/
-GnomeApp *
+BonoboWindow *
 gnome_mdi_get_active_window (GnomeMDI *mdi)
 {
 	g_return_val_if_fail(mdi != NULL, NULL);
@@ -2203,12 +2109,12 @@ gnome_mdi_get_active_window (GnomeMDI *mdi)
  * #gnome_mdi_get_menubar_info.
  **/
 void
-gnome_mdi_set_menubar_template (GnomeMDI *mdi, GnomeUIInfo *menu_tmpl)
+gnome_mdi_set_menubar_template (GnomeMDI *mdi, const gchar *menu_tmpl)
 {
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));
 
-	mdi->priv->menu_template = menu_tmpl;
+	mdi->priv->menu_template = g_strdup (menu_tmpl);
 }
 
 /**
@@ -2226,12 +2132,12 @@ gnome_mdi_set_menubar_template (GnomeMDI *mdi, GnomeUIInfo *menu_tmpl)
  * #gnome_mdi_get_toolbar_info. 
  **/
 void
-gnome_mdi_set_toolbar_template (GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl)
+gnome_mdi_set_toolbar_template (GnomeMDI *mdi, const gchar *tbar_tmpl)
 {
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));
 
-	mdi->priv->toolbar_template = tbar_tmpl;
+	mdi->priv->toolbar_template = g_strdup (tbar_tmpl);
 }
 
 /**
@@ -2352,7 +2258,7 @@ gnome_mdi_get_child_from_view (GtkWidget *view)
 }
 
 /**
- * gnome_mdi_get_app_from_view:
+ * gnome_mdi_get_window_from_view:
  * @view: A pointer to a #GtkWidget.
  * 
  * Description:
@@ -2361,8 +2267,8 @@ gnome_mdi_get_child_from_view (GtkWidget *view)
  * Return value:
  * A pointer to the #GnomeApp containg the specified view.
  **/
-GnomeApp *
-gnome_mdi_get_app_from_view (GtkWidget *view)
+BonoboWindow *
+gnome_mdi_get_window_from_view (GtkWidget *view)
 {
 	GtkWidget *app;
 
@@ -2371,7 +2277,7 @@ gnome_mdi_get_app_from_view (GtkWidget *view)
 
 	app = gtk_widget_get_toplevel(view);
 	if(app)
-		return GNOME_APP(app);
+		return BONOBO_WINDOW(app);
 
 	return NULL;
 }

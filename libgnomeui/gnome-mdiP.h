@@ -58,15 +58,15 @@ struct _GnomeMDIPrivate
 {
 	gchar *appname, *title;
 
-	GnomeUIInfo *menu_template;
-	GnomeUIInfo *toolbar_template;
+	gchar *menu_template;
+	gchar *toolbar_template;
 
     /* probably only one of these would do, but... redundancy rules ;) */
 	GnomeMDIChild *active_child;
 	GtkWidget *active_view;  
-	GnomeApp *active_window;
+	BonoboWindow *active_window;
 
-	GList *windows;     /* toplevel windows - GnomeApp widgets */
+	GList *windows;     /* toplevel windows - BonoboWindow widgets */
 	GList *children;    /* children - GnomeMDIChild objects*/
 
 	GSList *registered; /* see comment for gnome_mdi_(un)register() functions below for an explanation. */
@@ -90,6 +90,7 @@ struct _GnomeMDIChildPrivate
 {
 	GtkObject *parent;               /* a pointer to the MDI */
 
+	guint child_id;
 	gchar *name;
 
 	GList *views;

@@ -33,6 +33,7 @@
 
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
+#include <bonobo/bonobo-ui-node.h>
 
 G_BEGIN_DECLS
 
@@ -73,10 +74,10 @@ struct _GnomeMDIChildClass
 	/* these make no sense as signals, so we'll make them "virtual" functions */
 	/* these should correspond to the typedefs in gnome-mdi-generic-child,
 	 * except that they should lack the data argument */
-	GtkWidget * (* create_view)       (GnomeMDIChild *);
-	GList *     (* create_menus)      (GnomeMDIChild *, GtkWidget *);
-	char *      (* get_config_string) (GnomeMDIChild *);
-	GtkWidget * (* set_label)         (GnomeMDIChild *, GtkWidget *);
+	GtkWidget *    (* create_view)       (GnomeMDIChild *);
+	GList *        (* create_menus)      (GnomeMDIChild *, GtkWidget *);
+	char *         (* get_config_string) (GnomeMDIChild *);
+	BonoboUINode * (* get_node)          (GnomeMDIChild *);
 };
 
 GtkType      gnome_mdi_child_get_type   (void) G_GNUC_CONST;

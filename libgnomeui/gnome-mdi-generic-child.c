@@ -36,16 +36,17 @@
 #include "gnome-mdi.h"
 #include "gnome-mdiP.h"
 
-static void        gnome_mdi_generic_child_class_init        (GnomeMDIGenericChildClass *klass);
-static void        gnome_mdi_generic_child_init              (GnomeMDIGenericChild *child);
-static void        gnome_mdi_generic_child_destroy           (GtkObject *child);
+static void         gnome_mdi_generic_child_class_init        (GnomeMDIGenericChildClass *klass);
+static void         gnome_mdi_generic_child_init              (GnomeMDIGenericChild *child);
+static void         gnome_mdi_generic_child_destroy           (GtkObject *child);
 
-static GtkWidget   *gnome_mdi_generic_child_create_view      (GnomeMDIChild *child);
-static GList       *gnome_mdi_generic_child_create_menus     (GnomeMDIChild *child,
+static GtkWidget    *gnome_mdi_generic_child_create_view      (GnomeMDIChild *child);
+static GList        *gnome_mdi_generic_child_create_menus     (GnomeMDIChild *child,
 							      GtkWidget     *view);
-static gchar       *gnome_mdi_generic_child_get_config_string(GnomeMDIChild *child);
-static GtkWidget   *gnome_mdi_generic_child_set_label        (GnomeMDIChild *child,
-							      GtkWidget     *old_label);
+static gchar        *gnome_mdi_generic_child_get_config_string(GnomeMDIChild *child);
+#if 0
+static BonoboUINode *gnome_mdi_generic_child_get_node         (GnomeMDIChild *child);
+#endif
 
 GNOME_CLASS_BOILERPLATE (GnomeMDIGenericChild, gnome_mdi_generic_child,
 			 GnomeMDIChild, gnome_mdi_child);
@@ -63,7 +64,9 @@ gnome_mdi_generic_child_class_init (GnomeMDIGenericChildClass *klass)
 
 	mdi_child_klass->create_view = gnome_mdi_generic_child_create_view;
 	mdi_child_klass->create_menus = gnome_mdi_generic_child_create_menus;
-	mdi_child_klass->set_label = gnome_mdi_generic_child_set_label;
+#if 0
+	mdi_child_klass->get_node = gnome_mdi_generic_child_get_node;
+#endif
 	mdi_child_klass->get_config_string = gnome_mdi_generic_child_get_config_string;
 }
 
@@ -430,6 +433,7 @@ gnome_mdi_generic_child_get_config_string (GnomeMDIChild *_child)
 											  child->priv->get_config_string_data);
 }
 
+#if 0
 static GtkWidget *
 gnome_mdi_generic_child_set_label (GnomeMDIChild *_child,
 				   GtkWidget *old_label)
@@ -462,6 +466,7 @@ gnome_mdi_generic_child_set_label (GnomeMDIChild *_child,
 		return child->priv->set_label(GNOME_MDI_CHILD(child), old_label,
 									  child->priv->set_label_data);
 }
+#endif
 
 static void
 gnome_mdi_generic_child_destroy (GtkObject *obj)
