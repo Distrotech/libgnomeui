@@ -292,6 +292,39 @@ gnome_dialog_set_modal (GnomeDialog * dialog)
   dialog->modal = TRUE;
 }
 
+static void
+gnome_dialog_run_clicked(GnomeDialog *dialog,
+			 gint button_number,
+			 gint *setme)
+{
+  *setme = button_number;
+}
+
+char *
+gnome_dialog_run_modal(GnomeDialog *dialog)
+{
+  gint button_num = -1;
+  char *retval = NULL;
+
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  gnome_dialog_set_modal(dialog);
+  gnome_dialog_close_hides(dialog, TRUE);
+  gtk_grab_add(GTK_WIDGET(dialog));
+  gtk_signal_connect(GTK_OBJECT(dialog), "clicked", 
+		     GTK_SIGNAL_FUNC(gnome_dialog_run_clicked),
+		     &button_num);
+  gtk_main();
+
+  gtk_grab_remove(GTK_WIDGET(dialog));
+
+  if(button_num >= 0)
+    gtk_label_get(GTK_LABEL(GTK_BUTTON(g_list_nth(dialog->buttons, button_num))->child), &retval);
+
+  return retval;
+}
+
 void
 gnome_dialog_set_default (GnomeDialog *dialog,
 			  gint button)

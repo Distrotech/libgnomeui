@@ -79,6 +79,9 @@ void       gnome_dialog_button_connect (GnomeDialog *dialog,
 
 /* Make the dialog modal */
 void       gnome_dialog_set_modal      (GnomeDialog *dialog);
+/* As above, but also run the dialog and return the text of the button
+   that was pressed (you still need to _destroy it though) */
+char      *gnome_dialog_run_modal      (GnomeDialog *dialog);
 
 /* Set the default button. - it will have a little highlight, 
    (and maybe pressing return will activate it, eventually, not 
