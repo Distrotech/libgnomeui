@@ -252,7 +252,7 @@ static void prepare_app(void)
   gtk_container_add(GTK_CONTAINER(button), hb);
   gtk_widget_show(hb);
 
-  apic = gtk_image_new_from_stock (GNOME_STOCK_PIXMAP_HELP,
+  apic = gtk_image_new_from_stock (GTK_STOCK_HELP,
 				   GTK_ICON_SIZE_BUTTON);
   gtk_box_pack_start(GTK_BOX(hb), apic, FALSE, FALSE, 0);
   gtk_widget_show(apic);
@@ -261,7 +261,7 @@ static void prepare_app(void)
   gtk_box_pack_end(GTK_BOX(hb), label, FALSE, FALSE, 5);
   gtk_widget_show(label);
   
-  button = gtk_button_new_from_stock (GNOME_STOCK_BUTTON_CLOSE);
+  button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
   gtk_box_pack_end(GTK_BOX(hb1), button, FALSE, FALSE, 0);
   gtk_signal_connect(GTK_OBJECT(button), "clicked",
                      GTK_SIGNAL_FUNC(quit_cb), lbox);
