@@ -71,8 +71,15 @@ struct _GnomeIconEntryPrivate {
     GtkWidget *icon_selector;
 
     gchar *current_icon;
+
+    guint preview_x, preview_y;
 };
 	
+enum {
+    PROP_0,
+    PROP_PREVIEW_X,
+    PROP_PREVIEW_Y
+};
 
 static void   gnome_icon_entry_class_init  (GnomeIconEntryClass *class);
 static void   gnome_icon_entry_init        (GnomeIconEntry      *ientry);
@@ -93,6 +100,18 @@ static void   drag_data_received           (GtkWidget           *widget,
                                             guint                info,
                                             guint32              time,
                                             GnomeIconEntry      *ientry);
+static void   gnome_icon_entry_get_property(GObject             *object,
+					    guint                param_id,
+					    GValue              *value,
+					    GParamSpec          *pspec,
+					    const gchar         *trailer);
+static void   gnome_icon_entry_set_property(GObject             *object,
+					    guint                param_id,
+					    const GValue        *value,
+					    GParamSpec          *pspec,
+					    const gchar         *trailer);
+
+
 
 static gchar    *get_uri_handler           (GnomeSelector            *selector);
 static void      set_uri_handler           (GnomeSelector            *selector,
@@ -124,11 +143,96 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 
     parent_class = gtk_type_class (gnome_file_selector_get_type ());
 
+    gobject_class->get_property = gnome_icon_entry_get_property;
+    gobject_class->set_property = gnome_icon_entry_set_property;
+
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_PREVIEW_X,
+	 g_param_spec_uint ("preview_x", NULL, NULL,
+			    0, G_MAXINT, ICON_SIZE,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_PREVIEW_Y,
+	 g_param_spec_uint ("preview_y", NULL, NULL,
+			    0, G_MAXINT, ICON_SIZE,
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+
     object_class->destroy = gnome_icon_entry_destroy;
     gobject_class->finalize = gnome_icon_entry_finalize;
 
     selector_class->get_uri = get_uri_handler;
     selector_class->set_uri = set_uri_handler;
+}
+
+static void
+gnome_icon_entry_update_preview (GnomeIconEntry *ientry)
+{
+    g_return_if_fail (ientry != NULL);
+    g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
+
+    if (ientry->_priv->browse_button == NULL) {
+	g_warning (G_STRLOC ": Can't change preview size if we aren't using "
+		   " the default browse button.");
+	return;
+    }
+
+    gtk_widget_set_usize (ientry->_priv->browse_button,
+			  ientry->_priv->preview_x + 12,
+			  ientry->_priv->preview_y + 12);
+}
+
+static void
+gnome_icon_entry_set_property (GObject *object, guint param_id,
+			       const GValue *value, GParamSpec *pspec,
+			       const gchar *trailer)
+{
+    GnomeIconEntry *ientry;
+
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_ICON_ENTRY (object));
+
+    ientry = GNOME_ICON_ENTRY (object);
+
+    switch (param_id) {
+    case PROP_PREVIEW_X:
+	ientry->_priv->preview_x = g_value_get_uint (value);
+	gnome_icon_entry_update_preview (ientry);
+	break;
+    case PROP_PREVIEW_Y:
+	ientry->_priv->preview_y = g_value_get_uint (value);
+	gnome_icon_entry_update_preview (ientry);
+	break;
+    default:
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+	break;
+    }
+}
+
+static void
+gnome_icon_entry_get_property (GObject *object, guint param_id, GValue *value,
+			       GParamSpec *pspec, const gchar *trailer)
+{
+    GnomeIconEntry *ientry;
+
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_ICON_ENTRY (object));
+
+    ientry = GNOME_ICON_ENTRY (object);
+
+    switch (param_id) {
+    case PROP_PREVIEW_X:
+	g_value_set_uint (value, ientry->_priv->preview_x);
+	break;
+    case PROP_PREVIEW_Y:
+	g_value_set_uint (value, ientry->_priv->preview_y);
+	break;
+    default:
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+	break;
+    }
 }
 
 static void
@@ -245,14 +349,14 @@ set_uri_async_cb (GnomeGdkPixbufAsyncHandle *handle,
     h = gdk_pixbuf_get_height (pixbuf);
 
     if (w > h) {
-	if (w > ICON_SIZE) {
-	    h = h * ((double) ICON_SIZE / w);
-	    w = ICON_SIZE;
+	if (w > ientry->_priv->preview_x) {
+	    h = h * ((double) ientry->_priv->preview_x / w);
+	    w = ientry->_priv->preview_x;
 	}
     } else {
-	if (h > ICON_SIZE) {
-	    w = w * ((double) ICON_SIZE / h);
-	    h = ICON_SIZE;
+	if (h > ientry->_priv->preview_y) {
+	    w = w * ((double) ientry->_priv->preview_y / h);
+	    h = ientry->_priv->preview_y;
 	}
     }
 
@@ -476,6 +580,9 @@ gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 
     g_return_if_fail (ientry != NULL);
 
+    ientry->_priv->preview_x = ICON_SIZE;
+    ientry->_priv->preview_y = ICON_SIZE;
+
     /* Create the default selector widget if requested. */
     if (flags & GNOME_SELECTOR_DEFAULT_BROWSE_DIALOG) {
 	if (browse_dialog != NULL) {
@@ -556,7 +663,8 @@ gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 	/*FIXME: 60x60 is just larger then default 48x48, though icon sizes
 	  are supposed to be selectable I guess*/
 	gtk_widget_set_usize (ientry->_priv->browse_button,
-			      ICON_SIZE + 12, ICON_SIZE + 12);
+			      ientry->_priv->preview_x + 12,
+			      ientry->_priv->preview_y + 12);
 	gtk_container_add (GTK_CONTAINER (w), ientry->_priv->browse_button);
 	gtk_widget_show_all (ientry->_priv->browse_button);
 
@@ -668,6 +776,19 @@ gnome_icon_entry_get_icon_selector (GnomeIconEntry *ientry)
 
     gtk_object_ref (GTK_OBJECT (ientry->_priv->icon_selector));
     return ientry->_priv->icon_selector;
+}
+
+void
+gnome_icon_entry_set_preview_size (GnomeIconEntry *ientry,
+				   guint preview_x, guint preview_y)
+{
+    g_return_if_fail (ientry != NULL);
+    g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
+
+    ientry->_priv->preview_x = preview_x;
+    ientry->_priv->preview_y = preview_y;
+
+    gnome_icon_entry_update_preview (ientry);
 }
 
 

@@ -1,5 +1,19 @@
 2001-02-23  Martin Baulig  <baulig@suse.de>
 
+	* gnome-icon-entry.c (gnome_icon_entry_set_preview_size):
+	New function; inspired by gnome_pixmap_entry_set_preview_size().
+	Added "preview_x" and "preview_y" properties.
+
+2001-02-23  Martin Baulig  <baulig@suse.de>
+
+	* gnome-file-entry.[ch]: Moved to libcompat. This has been replaced
+	by GnomeFileSelector.
+
+	* gnome-gconf.c (gnome_file_entry_get/set): Removed.
+	(gnome_icon_entry_get/set): Removed.
+
+2001-02-23  Martin Baulig  <baulig@suse.de>
+
 	* gnome-canvas.h (GnomeCanvas): Removed `cc' field, GdkColorContext
 	no longer exists in GTK+.
 

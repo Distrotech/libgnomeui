@@ -91,6 +91,11 @@ void       gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 /* returns the GnomeIconSelector widget of the browse dialog. */
 GtkWidget *gnome_icon_entry_get_icon_selector (GnomeIconEntry *ientry);
 
+void	   gnome_icon_entry_set_preview_size  (GnomeIconEntry *ientry,
+					       guint preview_x,
+					       guint preview_y);
+
+
 #ifndef GNOME_EXCLUDE_DEPRECATED
 /* DEPRECATED routines left for compatibility only, will disapear in
  * some very distant future */
