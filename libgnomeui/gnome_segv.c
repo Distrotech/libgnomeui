@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
   args = poptGetArgs(ctx);
   if (args && args[0] && args[1])
     {
-      msg = g_strdup_printf(_("Application \"%s\" (process %d) has crashed due to a bug in the software.\n(%s)\nFor more information, see http://www.gnome.org/wherever/we/decide/"),
+      msg = g_strdup_printf(_("Application \"%s\" (process %d) has crashed due to a bug in the software.\n(%s)\nFor more information, see http://www.gnome.org/application_crashed.shtml"),
                        args[0], getppid(), g_strsignal(atoi(args[1])));
     }
   else

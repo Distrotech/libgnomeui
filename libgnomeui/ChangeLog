@@ -2,6 +2,7 @@
 
 	* gnome_segv.c (main): Cleanup; use message box, have only one
 	button, improve message, don't segfault if called improperly.
+	(main): Now there's an URL explaining what the crash means.
 
 	* gnome-init.c (gnome_segv_handle): Always exit, don't check
 	gnome_segv return value; handle any signal, not just segv (though 
