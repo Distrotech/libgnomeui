@@ -1,3 +1,8 @@
+2001-07-16  Martin Baulig  <baulig@suse.de>
+
+	* ChangeLog: This is the *top-level* ChangeLog file. There
+	are ChangeLog files in libgnomeui/, demos/ and test-gnome/.
+
 2001-07-08  Peter Williams  <peterw@ximian.com>
 
 	* configure.in (REBUILD): Add a REBUILD rule as in libgnome.
@@ -11,10 +16,6 @@
 	* configure.in: change MAKE_INLINE_PIXBUF to 
 	GDK_PIXBUF_CSOURCE.
 	
-	* libgnomeui/gnome-stock-icons.c: (add_sized), (add_unsized): Change
-	gdk_pixbuf_new_from_inline to gdk_pixbuf_new_from_stream.
-	* libgnomeui/pixmaps/Makefile.am: change MAKE_INLINE_PIXBUF to GDK_PIXBUF_CSOURCE
-
 2001-06-26  Fatih Demir <kabalak@gtranslator.org>
 
 	* configure.in: Added ta to the languages list.

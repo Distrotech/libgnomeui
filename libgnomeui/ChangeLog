@@ -1,3 +1,10 @@
+2001-06-28  Anders Carlsson  <andersca@codefactory.se>
+
+	* gnome-stock-icons.c: (add_sized), (add_unsized): Change
+	gdk_pixbuf_new_from_inline to gdk_pixbuf_new_from_stream.
+	
+	* pixmaps/Makefile.am: change MAKE_INLINE_PIXBUF to GDK_PIXBUF_CSOURCE
+
 2001-07-15  Darin Adler  <darin@bentspoon.com>
 
 	* .cvsignore: Update for new generated files.
