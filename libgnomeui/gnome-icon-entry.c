@@ -34,12 +34,29 @@
 #include "gnome-icon-entry.h"
 #include <sys/stat.h>
 #include <unistd.h>
+#include <string.h>
 
 
 static void gnome_icon_entry_class_init (GnomeIconEntryClass *class);
 static void gnome_icon_entry_init       (GnomeIconEntry      *ientry);
+static void drag_data_get		(GtkWidget          *widget,
+					 GdkDragContext     *context,
+					 GtkSelectionData   *selection_data,
+					 guint               info,
+					 guint               time,
+					 GnomeIconEntry     *ientry);
+static void drag_data_received		(GtkWidget        *widget,
+					 GdkDragContext   *context,
+					 gint              x,
+					 gint              y,
+					 GtkSelectionData *selection_data,
+					 guint             info,
+					 guint32           time,
+					 GnomeIconEntry   *ientry);
 
 static GtkVBoxClass *parent_class;
+
+static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
 guint
 gnome_icon_entry_get_type (void)
@@ -76,7 +93,6 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	char *t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->fentry),
 						 FALSE);
 	GdkImlibImage *im;
-	GtkWidget *pixmap;
 	GtkWidget *child;
 	int w,h;
 
@@ -85,14 +101,17 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	if(!t || !g_file_test (t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
 	   !(im = gdk_imlib_load_image (t))) {
 		if(GNOME_IS_PIXMAP(child)) {
+			gtk_drag_source_unset (ientry->pickbutton);
 			gtk_widget_destroy(child);
 			child = gtk_label_new(_("No Icon"));
 			gtk_widget_show(child);
 			gtk_container_add(GTK_CONTAINER(ientry->pickbutton),
 					  child);
 		}
+		g_free(t);
 		return;
 	}
+	g_free(t);
 	w = im->rgb_width;
 	h = im->rgb_height;
 	if(w>h) {
@@ -106,13 +125,28 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 			h = 48;
 		}
 	}
-	pixmap = gnome_pixmap_new_from_imlib_at_size (im, w, h);
+	if(GNOME_IS_PIXMAP(child))
+		gnome_pixmap_load_imlib_at_size (GNOME_PIXMAP(child),im, w, h);
+	else {
+		gtk_widget_destroy(child);
+		child = gnome_pixmap_new_from_imlib_at_size (im, w, h);
+		gtk_widget_show(child);
+		gtk_container_add(GTK_CONTAINER(ientry->pickbutton), child);
 
-	gtk_widget_destroy(child);
-	gtk_widget_show(pixmap);
-	gtk_container_add(GTK_CONTAINER(ientry->pickbutton), pixmap);
-	g_free(t);
+		if(!GTK_WIDGET_NO_WINDOW(child)) {
+			gtk_signal_connect (GTK_OBJECT (child), "drag_data_get",
+					    GTK_SIGNAL_FUNC (drag_data_get),ientry);
+			gtk_drag_source_set (child,
+					     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+					     drop_types, 1,
+					     GDK_ACTION_COPY);
+		}
+	}
 	gdk_imlib_destroy_image(im);
+	gtk_drag_source_set (ientry->pickbutton,
+			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+			     drop_types, 1,
+			     GDK_ACTION_COPY);
 }
 
 static void
@@ -227,7 +261,8 @@ browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 	gtk_signal_connect(GTK_OBJECT(fs->file_list),"select_row",
 			   GTK_SIGNAL_FUNC(setup_preview),NULL);
 	gtk_object_set_data(GTK_OBJECT(fs->selection_entry),"frame",w);
-	gtk_signal_connect_while_alive(GTK_OBJECT(fs->selection_entry),"changed",
+	gtk_signal_connect_while_alive(GTK_OBJECT(fs->selection_entry),
+				       "changed",
 				       GTK_SIGNAL_FUNC(setup_preview),NULL,
 				       GTK_OBJECT(fs));
 }
@@ -370,6 +405,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 		gtk_signal_connect_after(GTK_OBJECT(GNOME_ICON_SELECTION(iconsel)->gil), "select_icon",
 					 GTK_SIGNAL_FUNC(gil_icon_selected_cb),
 					 ientry);
+
 		gtk_object_set_user_data(GTK_OBJECT(ientry), iconsel);
 	} else {
 		if(!GTK_WIDGET_VISIBLE(ientry->pick_dialog))
@@ -387,7 +423,6 @@ drag_data_received (GtkWidget        *widget,
 		    guint32           time,
 		    GnomeIconEntry   *ientry)
 {
-	GtkWidget *entry = gnome_icon_entry_gtk_entry(ientry);
 	GList *files;
 
 	/*here we extract the filenames from the URI-list we recieved*/
@@ -398,16 +433,41 @@ drag_data_received (GtkWidget        *widget,
 		return;
 	}
 
-	gtk_entry_set_text (GTK_ENTRY(entry), files->data);
+	gnome_icon_entry_set_icon(ientry,files->data);
 
 	/*free the list of files we got*/
 	gnome_uri_list_free_strings (files);
 }
 
+static void  
+drag_data_get  (GtkWidget          *widget,
+		GdkDragContext     *context,
+		GtkSelectionData   *selection_data,
+		guint               info,
+		guint               time,
+		GnomeIconEntry     *ientry)
+{
+	char *string;
+	char *file =
+		gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->fentry),
+					       TRUE);
+	if(!file) {
+		/*FIXME: cancel the drag*/
+		return;
+	}
+
+	string = g_strdup_printf("file:%s\r\n",file);
+	g_free(file);
+	gtk_selection_data_set (selection_data,
+				selection_data->target,
+				8, string, strlen(string)+1);
+	g_free(string);
+}
+
+
 static void
 gnome_icon_entry_init (GnomeIconEntry *ientry)
 {
-	static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 	GtkWidget *w;
 	GtkWidget *align;
 	char *p;
@@ -429,8 +489,12 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
 			   drop_types, 1, GDK_ACTION_COPY);
-	gtk_signal_connect (GTK_OBJECT (ientry->pickbutton), "drag_data_received",
+	gtk_signal_connect (GTK_OBJECT (ientry->pickbutton),
+			    "drag_data_received",
 			    GTK_SIGNAL_FUNC (drag_data_received),ientry);
+	gtk_signal_connect (GTK_OBJECT (ientry->pickbutton), "drag_data_get",
+			    GTK_SIGNAL_FUNC (drag_data_get),ientry);
+
 	gtk_signal_connect(GTK_OBJECT(ientry->pickbutton), "clicked",
 			   GTK_SIGNAL_FUNC(show_icon_selection),ientry);
 	/*FIXME: 60x60 is just larger then default 48x48, though icon sizes

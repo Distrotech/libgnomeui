@@ -397,7 +397,13 @@ toggle_icon (Gil *gil, Icon *icon, GdkEvent *event)
 				gtk_signal_emit (GTK_OBJECT (gil), gil_signals[UNSELECT_ICON], n, event);
 		}
 
-		if (selected_icon && (selected_icon->text->selected) && (event->button.button == 1))
+		/*if it's a double or tripple click don't unselect, we want to
+		  be able to get double clicks in SINGLE mode*/
+		if (event->type != GDK_2BUTTON_PRESS &&
+		    event->type != GDK_3BUTTON_PRESS &&
+		    selected_icon &&
+		    (selected_icon->text->selected) &&
+		    (event->button.button == 1))
 			gtk_signal_emit (GTK_OBJECT (gil), gil_signals [UNSELECT_ICON], idx, event);
 		else if (event->button.button == 1)
 			gtk_signal_emit (GTK_OBJECT (gil), gil_signals [SELECT_ICON], idx, event);

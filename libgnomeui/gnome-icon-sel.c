@@ -307,7 +307,7 @@ void  gnome_icon_selection_show_icons  (GnomeIconSelection * gis)
   int file_count, i;
 
   g_return_if_fail(gis != NULL);
-  g_return_if_fail(gis->file_list != NULL);
+  if(!gis->file_list) return;
 
   list = gis->file_list;
   

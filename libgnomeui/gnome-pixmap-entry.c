@@ -9,6 +9,7 @@
 #include <config.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <string.h>
 #include <gdk_imlib.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
@@ -30,8 +31,24 @@
 
 static void gnome_pixmap_entry_class_init (GnomePixmapEntryClass *class);
 static void gnome_pixmap_entry_init       (GnomePixmapEntry      *pentry);
+static void drag_data_get		  (GtkWidget          *widget,
+					   GdkDragContext     *context,
+					   GtkSelectionData   *selection_data,
+					   guint               info,
+					   guint               time,
+					   GnomePixmapEntry   *pentry);
+static void drag_data_received		  (GtkWidget        *widget,
+					   GdkDragContext   *context,
+					   gint              x,
+					   gint              y,
+					   GtkSelectionData *selection_data,
+					   guint             info,
+					   guint32           time,
+					   GnomePixmapEntry *pentry);
 
 static GtkVBoxClass *parent_class;
+
+static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
 guint
 gnome_pixmap_entry_get_type (void)
@@ -81,6 +98,7 @@ refresh_preview(GnomePixmapEntry *pentry)
 	if(!t || !g_file_test(t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
 	   !(im = gdk_imlib_load_image (t))) {
 		if(GNOME_IS_PIXMAP(pentry->preview)) {
+			gtk_drag_source_unset (pentry->preview_sw);
 			gtk_widget_destroy(pentry->preview->parent);
 			pentry->preview = gtk_label_new(_("No Image"));
 			gtk_widget_show(pentry->preview);
@@ -100,6 +118,20 @@ refresh_preview(GnomePixmapEntry *pentry)
 		gtk_widget_show(pentry->preview);
 		gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(pentry->preview_sw),
 						      pentry->preview);
+		if(!GTK_WIDGET_NO_WINDOW(pentry->preview)) {
+			gtk_signal_connect (GTK_OBJECT (pentry->preview), "drag_data_get",
+					    GTK_SIGNAL_FUNC (drag_data_get),pentry);
+			gtk_drag_source_set (pentry->preview,
+					     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+					     drop_types, 1,
+					     GDK_ACTION_COPY);
+		}
+		gtk_signal_connect (GTK_OBJECT (pentry->preview->parent), "drag_data_get",
+				    GTK_SIGNAL_FUNC (drag_data_get),pentry);
+		gtk_drag_source_set (pentry->preview->parent,
+				     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+				     drop_types, 1,
+				     GDK_ACTION_COPY);
 	}
 	g_free(pentry->last_preview);
 	pentry->last_preview = t;
@@ -262,10 +294,34 @@ drag_data_received (GtkWidget        *widget,
 	gnome_uri_list_free_strings (files);
 }
 
+static void  
+drag_data_get  (GtkWidget          *widget,
+		GdkDragContext     *context,
+		GtkSelectionData   *selection_data,
+		guint               info,
+		guint               time,
+		GnomePixmapEntry   *pentry)
+{
+	char *string;
+	char *file =
+		gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(pentry->fentry),
+					       TRUE);
+	if(!file) {
+		/*FIXME: cancel the drag*/
+		return;
+	}
+
+	string = g_strdup_printf("file:%s\r\n",file);
+	g_free(file);
+	gtk_selection_data_set (selection_data,
+				selection_data->target,
+				8, string, strlen(string)+1);
+	g_free(string);
+}
+
 static void
 gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 {
-	static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 	GtkWidget *w;
 	char *p;
 
@@ -286,6 +342,9 @@ gnome_pixmap_entry_init (GnomePixmapEntry *pentry)
 			   drop_types, 1, GDK_ACTION_COPY);
 	gtk_signal_connect (GTK_OBJECT (pentry->preview_sw), "drag_data_received",
 			    GTK_SIGNAL_FUNC (drag_data_received),pentry);
+	/*for some reason we can't do this*/
+	/*gtk_signal_connect (GTK_OBJECT (pentry->preview_sw), "drag_data_get",
+			    GTK_SIGNAL_FUNC (drag_data_get),pentry);*/
 	gtk_box_pack_start (GTK_BOX (pentry), pentry->preview_sw, TRUE, TRUE, 0);
 	gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(pentry->preview_sw),
 				       GTK_POLICY_AUTOMATIC,

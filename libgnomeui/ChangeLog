@@ -1,3 +1,19 @@
+Mon Mar 08 21:43:19 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-list.c: in SINGLE mode, don't unselect on
+	  GDK_[23]BUTTON_PRESS, to allow the app to get double/tripple
+	  clicks in SINGLE mode
+
+	* gnome-icon-entry.c: fixed a leak in setting the icon, and added
+	  dragging, so that we may drag the icon from the preview button
+
+	* gnome-pixmap-entry.c: added way to drag the image from the
+	  preview frame
+
+	* gnome-icon-sel.c: (gnome_icon_selection_show_icons) just quit
+	  if file_list is NULL, we might just have come to an empty
+	  directory
+
 1999-03-07  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-color-picker.c (render): added a check if cp is realized,
