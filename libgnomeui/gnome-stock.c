@@ -352,8 +352,9 @@ gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
 			req.width, req.height);
 	gdk_gc_destroy(gc);
 	if (pixmap->mask) {
-		gpixmap->mask = gdk_pixmap_new(pixmap->mask,
-					       req.width, req.height, 1);
+		if (!gpixmap->mask)
+			gpixmap->mask = gdk_pixmap_new(pixmap->mask,
+						       req.width, req.height, 1);
 		gc = gdk_gc_new(gpixmap->mask);
 		gdk_draw_pixmap(gpixmap->mask, gc, pixmap->mask, 0, 0, 0, 0,
 				req.width, req.height);
@@ -920,8 +921,8 @@ lookup(const char *icon, const char *subtype, int fallback)
 	s = build_hash_key(icon, subtype);
 	entry = (GnomeStockPixmapEntry *)g_hash_table_lookup(hash, s);
 	if (!entry) {
-		if (!fallback) return NULL;
 		g_free(s);
+		if (!fallback) return NULL;
 		s = build_hash_key(icon, GNOME_STOCK_PIXMAP_REGULAR);
 		entry = (GnomeStockPixmapEntry *)
 			g_hash_table_lookup(hash, s);
