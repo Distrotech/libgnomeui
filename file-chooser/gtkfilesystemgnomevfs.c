@@ -566,6 +566,8 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 				      GError           **error)
 {
   char *uri;
+  GnomeVFSURI *vfs_uri;
+  gboolean exists;
   GtkFilePath *parent_path;
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
   GtkFileFolderGnomeVFS *folder_vfs;
@@ -583,6 +585,26 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 
   if (!gtk_file_system_get_parent (file_system, path, &parent_path, error))
     {
+      g_free (uri);
+      return NULL;
+    }
+
+  vfs_uri = gnome_vfs_uri_new (uri);
+  if (!vfs_uri)
+    {
+      set_vfs_error (GNOME_VFS_ERROR_INVALID_URI, uri, error);
+      gtk_file_path_free (parent_path);
+      g_free (uri);
+      return NULL;
+    }
+
+  exists = gnome_vfs_uri_exists (vfs_uri);
+  gnome_vfs_uri_unref (vfs_uri);
+
+  if (!exists)
+    {
+      set_vfs_error (GNOME_VFS_ERROR_NOT_FOUND, uri, error);
+      gtk_file_path_free (parent_path);
       g_free (uri);
       return NULL;
     }

@@ -1,3 +1,9 @@
+2004-04-21  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_get_folder): Check that the URI exists
+	before creating the folder structure.  Fixes #140095.
+
 ==================== 2.6.1 ====================
 
 2004-04-20  Anders Carlsson  <andersca@gnome.org>
@@ -48,6 +54,7 @@
 
         * configure.in: Added "gu" (Gujarati) to ALL_LINGUAS.
 
+>>>>>>> 1.421
 2004-04-06  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c (fs_module_init): Ref the
