@@ -503,6 +503,7 @@ browse_clicked(GnomeFileEntry *fentry)
 	GtkFileSelection *fs;
 	char *p;
 	GtkWidget *toplevel;
+	GClosure *closure;
 
 	/*if it already exists make sure it's shown and raised*/
 	if(fentry->fsw) {
@@ -542,9 +543,12 @@ browse_clicked(GnomeFileEntry *fentry)
 		g_free (p);
 	}
 
-	g_signal_connect (fs->ok_button, "clicked",
-			  G_CALLBACK (browse_dialog_ok),
-			  fs);
+	closure = g_cclosure_new (G_CALLBACK (browse_dialog_ok), fs, NULL);
+	g_object_watch_closure (G_OBJECT (fentry->fsw), closure);
+	g_signal_connect_closure_by_id (fs->ok_button,
+					g_signal_lookup ("clicked", G_OBJECT_TYPE (fs->ok_button)),
+					0, closure, FALSE);
+
 	g_signal_connect_swapped (fs->cancel_button, "clicked",
 				  G_CALLBACK (gtk_widget_destroy),
 				  fentry->fsw);

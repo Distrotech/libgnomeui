@@ -1,3 +1,9 @@
+2003-03-24  Narayana Pattipati <narayana.pattipati@wipro.com>
+
+	*libgnomeui/gnome-file-entry.c (browse_clicked): Fix the problem
+	application crash when Gnome File Selector widget's OK button is
+	double clicked. Fixes bugzilla bug#104906
+
 2003-03-19  Paul Duffy <dubhthach@frink.nuigalway.ie>
 
         * configure.in: Added "ga" to ALL_LINGUAS.
