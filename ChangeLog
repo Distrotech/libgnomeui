@@ -1,3 +1,10 @@
+2004-09-17  Matthias Clasen  <mclasen@redhat.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c (gtk_file_system_gnome_vfs_parse): 
+	Don't switch the folder until we have seen the full hostname.
+	Otherwise, the auth dialog will come up for every single character
+	of the hostname being typed in. (#151296, Rodney Dawes)
+
 2004-09-13  J.H.M. Dassen (Ray) <jdassen@debian.org>
 
 	* configure.in: Bumped the gnome-vfs version requirement to 2.7.1 as

@@ -1151,6 +1151,7 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
       gchar *file;
       gchar *host_and_path;
       gchar *host_and_path_escaped;
+      gboolean complete_hostname = TRUE;
 
       gchar *colon = strchr (stripped, ':');
 
@@ -1162,6 +1163,9 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
 	  gchar *first_slash = strchr (colon + 1, '/');
 
 	  host_name = g_strndup (colon + 1, first_slash - (colon + 1));
+
+	  if (first_slash == colon + 1)
+	    complete_hostname = FALSE;
 
 	  if (first_slash == last_slash)
 	    path = g_strdup ("/");
@@ -1180,8 +1184,9 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
 	  gchar *first_slash = strchr (colon + 3, '/');
 	  if (!first_slash)
 	    {
+	      complete_hostname = FALSE;
 	      host_name = g_strdup (colon + 3);
-	      path = g_strdup ("/");
+	      path = g_strdup ("");
 	      file = g_strdup ("");
 	    }
 	  else
@@ -1199,17 +1204,29 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
 
       host_and_path = g_strconcat (host_name, path, NULL);
       host_and_path_escaped = gnome_vfs_escape_host_and_path_string (host_and_path);
-      *folder = gtk_file_path_new_steal (g_strconcat (scheme, "//", host_and_path_escaped, NULL));
-      *file_part = file;
-      result = TRUE;
+
+      if (complete_hostname)
+	{
+	  *folder = gtk_file_path_new_steal (g_strconcat (scheme, "//", host_and_path_escaped, NULL));
+	  *file_part = file;
+	  result = TRUE;
+	}
+      else
+	{
+	  /* Don't switch the folder until we have seen the full hostname.
+           * Otherwise, the auth dialog will come up for every single character
+           * of the hostname being typed in. 
+           */
+	  *folder = gtk_file_path_copy (base_path);
+	  *file_part = g_strdup (stripped);
+	  result = TRUE;
+	}
 
       g_free (scheme);
       g_free (host_name);
       g_free (path);
       g_free (host_and_path);
       g_free (host_and_path_escaped);
-
-      result = TRUE;
     }
   else
     {
