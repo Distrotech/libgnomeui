@@ -80,7 +80,7 @@ struct _GnomeIconTextItemClass {
 	GnomeCanvasItemClass parent_class;
 
 	/* Signals we emit */
-	int  (* text_changed)      (GnomeIconTextItem *iti);
+	gboolean  (* text_changed)      (GnomeIconTextItem *iti);
 	void (* height_changed)    (GnomeIconTextItem *iti);
 	void (* width_changed)     (GnomeIconTextItem *iti);
 	void (* editing_started)   (GnomeIconTextItem *iti);
@@ -111,10 +111,10 @@ void         gnome_icon_text_item_setxy         (GnomeIconTextItem *iti,
 						 int                y);
 
 void         gnome_icon_text_item_select        (GnomeIconTextItem *iti,
-						 int                sel);
+						 gboolean                sel);
 
 void         gnome_icon_text_item_focus         (GnomeIconTextItem *iti,
-						 int                focused);
+						 gboolean                focused);
 
 const char  *gnome_icon_text_item_get_text      (GnomeIconTextItem *iti);
 

@@ -88,7 +88,7 @@ struct _GnomeIconListClass {
 	/* Key Binding signals */
 	void     (*move_cursor)      (GnomeIconList *gil, GtkDirectionType dir, gboolean clear_selection);
 	void     (*toggle_cursor_selection) (GnomeIconList *gil);
-	void     (*select_all)       (GnomeIconList *gil);
+	void     (*unused)       (GnomeIconList *unused);
 	
 	/* Padding for possible expansion */
 	gpointer padding1;

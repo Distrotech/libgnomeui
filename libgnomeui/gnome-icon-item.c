@@ -1088,7 +1088,7 @@ gnome_icon_text_item_setxy (GnomeIconTextItem *iti, int x, int y)
 }
 
 void
-gnome_icon_text_item_focus (GnomeIconTextItem *iti, int focused)
+gnome_icon_text_item_focus (GnomeIconTextItem *iti, gboolean focused)
 {
 	GnomeIconTextItemPrivate *priv;
 
@@ -1116,7 +1116,7 @@ gnome_icon_text_item_focus (GnomeIconTextItem *iti, int focused)
  * editing process.
  */
 void
-gnome_icon_text_item_select (GnomeIconTextItem *iti, int sel)
+gnome_icon_text_item_select (GnomeIconTextItem *iti, gboolean sel)
 {
 	GnomeIconTextItemPrivate *priv;
 

@@ -1,3 +1,11 @@
+2002-02-22  Murray Cumming  <murrayc@usa.net>
+
+	* Renamed GnomeIconList::select_all default signal handler
+	to unused, and removed the signals enum SELECT_ALL value, because
+	there is no such signal in GnomeIconList.
+	* Changed gnome_icon_text_item_focus() and 
+	gnome_icon_text_item_select() args from int to gboolean.
+	
 2002-02-22  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-app-helper.c: Remove unsupported #ifdef ENABLE_NLS.
