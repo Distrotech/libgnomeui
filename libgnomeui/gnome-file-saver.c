@@ -346,7 +346,8 @@ gnome_file_saver_destroy (GtkObject* object)
 		}
 
 		gconf_client_remove_dir(file_saver->_priv->conf,
-					"/desktop/standard/save-locations");
+					"/desktop/standard/save-locations",
+                                        NULL);
 
 		gtk_object_unref(GTK_OBJECT(file_saver->_priv->conf));
 		file_saver->_priv->conf = NULL;

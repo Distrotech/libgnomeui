@@ -324,11 +324,11 @@ gnome_help_view_construct(GnomeHelpView *self,
 }
 
 void
-gnome_help_view_set_toplevel(GnomeHelpView *self,
+gnome_help_view_set_toplevel(GnomeHelpView *help_view,
 			     GtkWidget *toplevel)
 {
-	g_return_if_fail(self != NULL);
-	g_return_if_fail(GNOME_IS_HELP_VIEW(self));
+	g_return_if_fail(help_view != NULL);
+	g_return_if_fail(GNOME_IS_HELP_VIEW(help_view));
 	g_return_if_fail(toplevel != NULL);
 	g_return_if_fail(GTK_IS_WIDGET(toplevel));
 
@@ -339,7 +339,8 @@ gnome_help_view_set_toplevel(GnomeHelpView *self,
 	}
 	help_view->_priv->toplevel = toplevel;
 	gtk_object_ref(GTK_OBJECT(help_view->_priv->toplevel));
-	gtk_object_set_data(toplevel, GNOME_APP_HELP_VIEW_NAME, help_view);
+	gtk_object_set_data(GTK_OBJECT(toplevel), GNOME_APP_HELP_VIEW_NAME,
+			    help_view);
 }
 
 void
@@ -1056,7 +1057,7 @@ gnome_help_view_find_help_id(GnomeHelpView *help_view, const char *widget_id)
   g_snprintf(buf, sizeof(buf),
 	     "help/%s/widget-help-map.txt",
 	     gnome_program_get_name(gnome_program_get()));
-  filename = gnome_datadir_file(rel_filename);
+  filename = gnome_datadir_file(buf);
   if(filename == NULL)
 	  return NULL;
 

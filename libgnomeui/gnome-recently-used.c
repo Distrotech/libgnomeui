@@ -351,7 +351,8 @@ gnome_recently_used_destroy (GtkObject* object)
 		}
 
 		gconf_client_remove_dir(recently_used->_priv->conf,
-					recently_used->_priv->key_root);
+					recently_used->_priv->key_root,
+                                        NULL);
 
 
 		gtk_object_unref(GTK_OBJECT(recently_used->_priv->conf));
