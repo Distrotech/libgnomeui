@@ -1,3 +1,8 @@
+2001-11-01  Mark McLoughlin  <mark@skynet.ie>
+
+	* gnome-app-helper.c: (help_view_display_callback): update for
+	gnome_help_display changes.
+
 2001-10-31  Havoc Pennington  <hp@redhat.com>
 
 	* gnome-client.c (gnome_client_get_config_prefix): fix some utter

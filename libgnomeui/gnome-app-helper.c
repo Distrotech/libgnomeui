@@ -1297,8 +1297,7 @@ help_view_display_callback (GtkWidget *w, gpointer data)
 		return;
 
 	/* FIXME: handle errors somehow */
-	gnome_help_display (gnome_program_get (),
-			    docname,
+	gnome_help_display (docname,
 			    section,
 			    NULL /* error */);
 }
