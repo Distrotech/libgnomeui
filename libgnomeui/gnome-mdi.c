@@ -24,12 +24,11 @@
 /*
   @NOTATION@
 */
+#include "config.h"
 
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
-#include <gobject/gobject.h>
 
-#include <config.h>
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-config.h"
 #include "libgnome/gnome-i18nP.h"
@@ -42,9 +41,10 @@
 #include "gnome-preferences.h"
 #include "gnome-pouch.h"
 #include "gnome-roo.h"
+#include "gnome-macros.h"
 #include "gnome-mdi.h"
-#include "gnome-mdiP.h"
 #include "gnome-mdi-child.h"
+#include "gnome-mdiP.h"
 
 #include <unistd.h>
 #include <stdio.h>
@@ -122,30 +122,8 @@ enum {
 
 static gint mdi_signals[LAST_SIGNAL];
 
-static GtkObjectClass *parent_class = NULL;
-
-guint
-gnome_mdi_get_type ()
-{
-	static guint mdi_type = 0;
-
-	if (!mdi_type) {
-		GtkTypeInfo mdi_info = {
-			"GnomeMDI",
-			sizeof (GnomeMDI),
-			sizeof (GnomeMDIClass),
-			(GtkClassInitFunc) gnome_mdi_class_init,
-			(GtkObjectInitFunc) gnome_mdi_init,
-			NULL,
-			NULL,
-			NULL
-		};
-		
-		mdi_type = gtk_type_unique (gtk_object_get_type (), &mdi_info);
-	}
-
-	return mdi_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeMDI, gnome_mdi,
+			 GtkObject, gtk_object);
 
 static void
 gnome_mdi_class_init (GnomeMDIClass *klass)
@@ -218,8 +196,6 @@ gnome_mdi_class_init (GnomeMDIClass *klass)
 	klass->child_changed = NULL;
 	klass->view_changed = gnome_mdi_view_changed;
 	klass->app_created = gnome_mdi_app_create;
-
-	parent_class = gtk_type_class (gtk_object_get_type ());
 }
 
 static void
@@ -435,8 +411,7 @@ gnome_mdi_finalize (GObject *object)
 	g_free(mdi->priv->appname);
 	g_free(mdi->priv->title);
 
-	if(G_OBJECT_CLASS(parent_class)->finalize)
-		(*G_OBJECT_CLASS(parent_class)->finalize)(object);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
 static void
@@ -465,13 +440,12 @@ gnome_mdi_destroy (GtkObject *object)
 	   destruction of toplevel windows: it unrefs itself,
 	   thus taking care of the initial reference added
 	   upon mdi creation. */
-	if(mdi->priv->has_user_refcount) {
+	if (mdi->priv->has_user_refcount != 0) {
 		mdi->priv->has_user_refcount = 0;
 		gtk_object_unref(object);
 	}
 
-	if(GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
 }
 
 static void
@@ -501,25 +475,28 @@ gnome_mdi_init (GnomeMDI *mdi)
 	mdi->priv->has_user_refcount = 1;
 }
 
-static GList
-*child_create_menus (GnomeMDIChild *child, GtkWidget *view)
+static GList *
+child_create_menus (GnomeMDIChild *child, GtkWidget *view)
 {
 	if(GNOME_MDI_CHILD_GET_CLASS(child)->create_menus)
-		return GNOME_MDI_CHILD_GET_CLASS(child)->create_menus(child, view, NULL);
+		return GNOME_MDI_CHILD_GET_CLASS(child)->create_menus(child, view);
 
 	return NULL;
 }
 
-static GtkWidget *child_set_label (GnomeMDIChild *child, GtkWidget *label)
+static GtkWidget *
+child_set_label (GnomeMDIChild *child, GtkWidget *label)
 {
-	return GNOME_MDI_CHILD_GET_CLASS(child)->set_label(child, label, NULL);
+	if (GNOME_MDI_CHILD_GET_CLASS(child)->set_label != NULL)
+		return GNOME_MDI_CHILD_GET_CLASS(child)->set_label(child, label);
+	return NULL;
 }
 
 /* the app-helper support routines
  * copying and freeing of GnomeUIInfo trees and counting items in them.
  */
-static GnomeUIInfo
-*copy_ui_info_tree (const GnomeUIInfo source[])
+static GnomeUIInfo *
+copy_ui_info_tree (const GnomeUIInfo source[])
 {
 	GnomeUIInfo *copy;
 	int i, count;
@@ -2513,8 +2490,8 @@ emit_boolean_pointer (GnomeMDI *mdi, int sig,
 		      gboolean default_return)
 {
 	gboolean retval;
-	GValue params[2];
-	GValue rvalue = { 0, };
+	GValue params[2] = {{0}};
+	GValue rvalue = {0};
 
 	g_return_val_if_fail (GTK_IS_OBJECT (mdi), default_return);
 
@@ -2527,7 +2504,7 @@ emit_boolean_pointer (GnomeMDI *mdi, int sig,
 	g_value_init (&rvalue, G_TYPE_BOOLEAN);
 	g_value_set_boolean (&rvalue, default_return);
 
-	g_signal_emitv (params, sig, 0, &rvalue);
+	g_signal_emitv (params, mdi_signals[sig], 0, &rvalue);
 
 	retval = g_value_get_boolean (&rvalue);
   

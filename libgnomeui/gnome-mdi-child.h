@@ -62,11 +62,6 @@ struct _GnomeMDIChild
 	GnomeMDIChildPrivate *priv;
 };
 
-typedef GtkWidget   *(*GnomeMDIChildViewCreator) (GnomeMDIChild *, gpointer);
-typedef GList       *(*GnomeMDIChildMenuCreator) (GnomeMDIChild *, GtkWidget *, gpointer);
-typedef gchar       *(*GnomeMDIChildConfigFunc)  (GnomeMDIChild *, gpointer);
-typedef GtkWidget   *(*GnomeMDIChildLabelFunc)   (GnomeMDIChild *, GtkWidget *, gpointer);
-
 /* note that if you override the set_label virtual function, it should return
  * a new widget if its GtkWidget* parameter is NULL and modify and return the
  * old widget otherwise.
@@ -76,13 +71,15 @@ struct _GnomeMDIChildClass
 	GtkObjectClass parent_class;
 
 	/* these make no sense as signals, so we'll make them "virtual" functions */
-	GnomeMDIChildViewCreator create_view;
-	GnomeMDIChildMenuCreator create_menus;
-	GnomeMDIChildConfigFunc  get_config_string;
-	GnomeMDIChildLabelFunc   set_label;
+	/* these should correspond to the typedefs in gnome-mdi-generic-child,
+	 * except that they should lack the data argument */
+	GtkWidget * (* create_view)       (GnomeMDIChild *);
+	GList *     (* create_menus)      (GnomeMDIChild *, GtkWidget *);
+	char *      (* get_config_string) (GnomeMDIChild *);
+	GtkWidget * (* set_label)         (GnomeMDIChild *, GtkWidget *);
 };
 
-guint        gnome_mdi_child_get_type    (void) G_GNUC_CONST;
+GtkType      gnome_mdi_child_get_type   (void) G_GNUC_CONST;
 GtkWidget   *gnome_mdi_child_add_view   (GnomeMDIChild *mdi_child);
 void         gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view);
 

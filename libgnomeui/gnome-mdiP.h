@@ -35,7 +35,10 @@
 
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
+
+#include "gnome-mdi.h"
 #include "gnome-mdi-child.h"
+#include "gnome-mdi-generic-child.h"
 
 BEGIN_GNOME_DECLS
 

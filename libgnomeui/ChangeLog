@@ -1,3 +1,14 @@
+Wed Dec 06 20:35:48 2000  George Lebl <jirka@5z.com>
+
+	* gnome-mdi.[ch], gnome-mdi-child.[ch], gnome-mdiP.h,
+	  gnome-mdi-generic-child.[ch]:  fix yesterday's braindamages and
+	  make signals actually work on the MDI, us ehte boilerplate on these
+	  and some cleanup.  The virtual pointers in the child are now not
+	  defined by the generic child typedef, since the pointers in the
+	  class structure should NOT include the data pointers.  Plus it is
+	  a style issue that they should be explicit types rather then
+	  typedefs.
+
 2000-12-06  Martin Baulig  <baulig@suse.de>
 
 	* gnome-selector.h (GnomeSelector): Added "add_uri" and

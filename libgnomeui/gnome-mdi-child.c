@@ -24,12 +24,14 @@
 /*
   @NOTATION@
 */
+#include "config.h"
 
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
+#include "gnome-macros.h"
 #include "gnome-mdi-child.h"
 #include "gnome-mdi.h"
 #include "gnome-mdiP.h"
@@ -39,33 +41,11 @@ static void       gnome_mdi_child_init             (GnomeMDIChild *);
 static void       gnome_mdi_child_destroy          (GtkObject *);
 static void       gnome_mdi_child_finalize         (GObject *);
 
-static GtkWidget *gnome_mdi_child_set_label        (GnomeMDIChild *, GtkWidget *, gpointer);
+static GtkWidget *gnome_mdi_child_set_label        (GnomeMDIChild *, GtkWidget *);
 static GtkWidget *gnome_mdi_child_create_view      (GnomeMDIChild *);
 
-static GtkObjectClass *parent_class = NULL;
-
-guint
-gnome_mdi_child_get_type ()
-{
-	static guint mdi_child_type = 0;
-  
-	if (!mdi_child_type) {
-		GtkTypeInfo mdi_child_info = {
-			"GnomeMDIChild",
-			sizeof (GnomeMDIChild),
-			sizeof (GnomeMDIChildClass),
-			(GtkClassInitFunc) gnome_mdi_child_class_init,
-			(GtkObjectInitFunc) gnome_mdi_child_init,
-			NULL,
-			NULL,
-			NULL
-		};
-    
-		mdi_child_type = gtk_type_unique (gtk_object_get_type (), &mdi_child_info);
-	}
-  
-	return mdi_child_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeMDIChild, gnome_mdi_child,
+			 GtkObject, gtk_object);
 
 static void
 gnome_mdi_child_class_init (GnomeMDIChildClass *klass)
@@ -83,8 +63,6 @@ gnome_mdi_child_class_init (GnomeMDIChildClass *klass)
 	klass->create_menus = NULL;
 	klass->get_config_string = NULL;
 	klass->set_label = gnome_mdi_child_set_label;
-
-	parent_class = gtk_type_class (gtk_object_get_type ());
 }
 
 static void
@@ -107,7 +85,7 @@ static GtkWidget *
 gnome_mdi_child_create_view (GnomeMDIChild *child)
 {
 	if(GNOME_MDI_CHILD_GET_CLASS(child)->create_view)
-		return GNOME_MDI_CHILD_GET_CLASS(child)->create_view(child, NULL);
+		return GNOME_MDI_CHILD_GET_CLASS(child)->create_view(child);
 
 	return NULL;
 }
@@ -118,7 +96,7 @@ gnome_mdi_child_create_view (GnomeMDIChild *child)
  * should (obviously) NOT call the parent class handler!
  */
 static GtkWidget *
-gnome_mdi_child_set_label (GnomeMDIChild *child, GtkWidget *old_label, gpointer data)
+gnome_mdi_child_set_label (GnomeMDIChild *child, GtkWidget *old_label)
 {
 #ifdef GNOME_ENABLE_DEBUG
 	g_message("GnomeMDIChild: default set_label handler called!\n");
@@ -153,8 +131,7 @@ gnome_mdi_child_finalize (GObject *obj)
 		g_free(mdi_child->priv->name);
 	mdi_child->priv->name = NULL;
 
-	if(G_OBJECT_CLASS(parent_class)->finalize)
-		(* G_OBJECT_CLASS(parent_class)->finalize)(obj);
+	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (obj));
 }
 
 static void
@@ -174,28 +151,27 @@ gnome_mdi_child_destroy (GtkObject *obj)
 		gnome_mdi_child_remove_view(mdi_child,
 									GTK_WIDGET(mdi_child->priv->views->data));
 
-	if(GTK_OBJECT_CLASS(parent_class)->destroy)
-		(* GTK_OBJECT_CLASS(parent_class)->destroy)(obj);
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (obj));
 }
 
 void
 gnome_mdi_child_add_toolbar(GnomeMDIChild *mdi_child, GnomeApp *app,
 							GtkToolbar *toolbar)
 {
-	g_return_if_fail(mdi_child != NULL);
-	g_return_if_fail(GNOME_IS_MDI_CHILD(mdi_child));
-	g_return_if_fail(app != NULL);
-	g_return_if_fail(GNOME_IS_APP(app));
-	g_return_if_fail(toolbar != NULL);
-	g_return_if_fail(GTK_IS_TOOLBAR(app));
+	g_return_if_fail (mdi_child != NULL);
+	g_return_if_fail (GNOME_IS_MDI_CHILD (mdi_child));
+	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
+	g_return_if_fail (toolbar != NULL);
+	g_return_if_fail (GTK_IS_TOOLBAR (toolbar));
 
-	gnome_app_add_toolbar(app, toolbar,
-						  GNOME_MDI_CHILD_TOOLBAR_NAME,
-						  mdi_child->priv->behavior,
-						  mdi_child->priv->placement,
-						  mdi_child->priv->band_num,
-						  mdi_child->priv->band_pos,
-						  mdi_child->priv->offset);
+	gnome_app_add_toolbar (app, toolbar,
+			       GNOME_MDI_CHILD_TOOLBAR_NAME,
+			       mdi_child->priv->behavior,
+			       mdi_child->priv->placement,
+			       mdi_child->priv->band_num,
+			       mdi_child->priv->band_pos,
+			       mdi_child->priv->offset);
 }
 
 /**
@@ -265,11 +241,13 @@ gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view)
 void
 gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, const gchar *name)
 {
-	gchar *old_name = mdi_child->priv->name;
+	gchar *old_name;
 
 	g_return_if_fail(mdi_child != NULL);
 	g_return_if_fail(name != NULL);
 	g_return_if_fail(GNOME_IS_MDI_CHILD(mdi_child));
+
+	old_name = mdi_child->priv->name;
 
 	if(mdi_child->priv->parent)
 		gnome_mdi_child_list_remove(GNOME_MDI(mdi_child->priv->parent),

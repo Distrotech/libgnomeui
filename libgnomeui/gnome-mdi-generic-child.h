@@ -60,7 +60,15 @@ struct _GnomeMDIGenericChildClass {
 	GnomeMDIChildClass parent_class;
 };
 
-guint                gnome_mdi_generic_child_get_type (void) G_GNUC_CONST;
+/* These should correspond to the virtual functions in
+ * GnomeMDIChild, except that they should contain the extra "data" pointer */
+typedef GtkWidget   *(*GnomeMDIChildViewCreator) (GnomeMDIChild *, gpointer);
+typedef GList       *(*GnomeMDIChildMenuCreator) (GnomeMDIChild *, GtkWidget *, gpointer);
+typedef gchar       *(*GnomeMDIChildConfigFunc)  (GnomeMDIChild *, gpointer);
+typedef GtkWidget   *(*GnomeMDIChildLabelFunc)   (GnomeMDIChild *, GtkWidget *, gpointer);
+
+
+GtkType              gnome_mdi_generic_child_get_type (void) G_GNUC_CONST;
 
 GnomeMDIGenericChild *gnome_mdi_generic_child_new     (const gchar *name);
 
