@@ -1314,41 +1314,41 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 	else
 		path_len = name_end - path;
 	
-	if (path_len == 0) {
-    if(children && GTK_IS_TEAROFF_MENU_ITEM(children->data))
-      /* consider the position after the tear off item as the topmost one. */
-      *pos = 1;
-    else
-      *pos = 0;
+	if (path_len == 0){
+
+		if (children && GTK_IS_TEAROFF_MENU_ITEM(children->data))
+			/* consider the position after the tear off item as the topmost one. */
+			*pos = 1;
+		else
+			*pos = 0;
 		return parent;
 	}
 	
 	p = 0;
 
-	while(children) {
-		item = GTK_BIN(children->data);
-    children = children->next;
+	while (children){
+		item = GTK_BIN (children->data);
+		children = children->next;
 		label = NULL;
 		p++;
 		
-    if(GTK_IS_TEAROFF_MENU_ITEM(item))
-      label = NULL;
-		else if(!item->child)          /* this is a separator, right? */
-      label = "<Separator>";
-		else if(GTK_IS_LABEL(item->child))  /* a simple item with a 
-						       label */
-			label = GTK_LABEL (item->child)->label;
-		else                  /* something that we just can't handle */
+		if (GTK_IS_TEAROFF_MENU_ITEM(item))
 			label = NULL;
-
-		if( label && (path_len == strlen(label)) && (strncmp(path, label, path_len) == 0) ) {
-			if(name_end == NULL) {
+		else if (!item->child)          /* this is a separator, right? */
+			label = "<Separator>";
+		else if (GTK_IS_LABEL (item->child))  /* a simple item with a label */
+			label = GTK_LABEL (item->child)->label;
+		else
+			label = NULL; /* something that we just can't handle */
+		
+		if (label && (path_len == strlen (label)) && (strncmp (path, label, path_len) == 0)){
+			if (name_end == NULL) {
 				*pos = p;
 				return parent;
 			}
-			else if(GTK_MENU_ITEM(item)->submenu)
+			else if (GTK_MENU_ITEM (item)->submenu)
 				return gnome_app_find_menu_pos
-					(GTK_MENU_ITEM(item)->submenu, 
+					(GTK_MENU_ITEM (item)->submenu, 
 					 (gchar *)(name_end + 1), pos);
 			else
 				return NULL;
@@ -1428,41 +1428,43 @@ gnome_app_remove_menus(GnomeApp *app, gchar *path, gint items)
 void
 gnome_app_remove_menu_range (GnomeApp *app, gchar *path, gint start, gint items)
 {
-  GtkWidget *parent, *child;
-  GList *children;
-  gint pos;
+	GtkWidget *parent, *child;
+	GList *children;
+	gint pos;
+	
+	g_return_if_fail (app != NULL);
+	g_return_if_fail (GNOME_IS_APP (app));
 
-  g_return_if_fail(app != NULL);
-  g_return_if_fail(GNOME_IS_APP(app));
+	/* find the first item (which is actually at position pos-1) to remove */
+	parent = gnome_app_find_menu_pos (app->menubar, path, &pos);
 
-  /* find the first item (which is actually at position pos-1) to remove */
-  parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
+	/* in case of path ".../" remove the first item */
+	if (path [strlen (path) - 1] == '/')
+		pos++;
 
-  /* in case of path ".../" remove the first item */
-  if(path[strlen(path) - 1] == '/')
-    pos++;
-
-  pos += start;
+	pos += start;
   
-  if( parent == NULL ) {
-    g_warning("gnome_app_remove_menus: couldn't find first item to remove!");
-    return;
-  }
+	if (parent == NULL){
+		g_warning("gnome_app_remove_menus: couldn't find first item to remove!");
+		return;
+	}
 
-  /* remove items */
-  children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
-  while(children && items > 0) {
-    child = GTK_WIDGET(children->data);
-    children = children->next;
-    /* if this item contains a gtkaccellabel, we have to set its
-       accel_widget to NULL so that the item gets unrefed. */
-    if(GTK_IS_ACCEL_LABEL(GTK_BIN(child)->child))
-      gtk_accel_label_set_accel_widget(GTK_ACCEL_LABEL(GTK_BIN(child)->child), NULL);
-    gtk_container_remove(GTK_CONTAINER(parent), child);
-    items--;
-  }
+	/* remove items */
+	children = g_list_nth (GTK_MENU_SHELL (parent)->children, pos - 1);
+	while (children && items > 0) {
+		child = GTK_WIDGET (children->data);
+		children = children->next;
+		/*
+		 * if this item contains a gtkaccellabel, we have to set its
+		 * accel_widget to NULL so that the item gets unrefed.
+		 */
+		if (GTK_IS_ACCEL_LABEL (GTK_BIN (child)->child))
+			gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (GTK_BIN (child)->child), NULL);
+		gtk_container_remove (GTK_CONTAINER (parent), child);
+		items--;
+	}
 
-  gtk_widget_queue_resize(parent);
+	gtk_widget_queue_resize(parent);
 }
 
 /**
