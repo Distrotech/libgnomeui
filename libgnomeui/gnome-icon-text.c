@@ -92,7 +92,8 @@ gnome_icon_layout_text (GdkFont *font, const gchar *text, const gchar *separator
 	GdkWChar *row_end;
 	GdkWChar *s, *word_start, *word_end, *old_word_end;
 	GdkWChar *sub_text;
-	int i, w_len, w;
+	int i, w;
+	gsize w_len;
 	GdkWChar *text_wc, *text_iter, *separators_wc;
 	int text_len_wc, separators_len_wc;
 
@@ -218,7 +219,7 @@ gnome_icon_layout_text (GdkFont *font, const gchar *text, const gchar *separator
 		} else {
 			/* Create subrow and append it to the list */
 
-			int sub_len;
+			gsize sub_len;
 			sub_len = word_end - text_iter;
 
 			sub_text = g_new (GdkWChar, sub_len + 1);

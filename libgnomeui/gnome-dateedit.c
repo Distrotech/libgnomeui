@@ -116,7 +116,7 @@ static void
 day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 {
 	char buffer [40];
-	gint year, month, day;
+	guint year, month, day;
 
 	gtk_calendar_get_date (calendar, &year, &month, &day);
 

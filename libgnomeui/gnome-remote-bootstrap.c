@@ -61,9 +61,9 @@ int main(int argc, char **argv)
       return 1;
     }
 
-  setenv("DISPLAY", display, TRUE);
+  putenv(g_strconcat("DISPLAY", display));
   if(strcmp(languages, "C"))
-    setenv("LANG", languages, TRUE);
+    putenv(g_strconcat("LANG", languages));
 
   memset(&myprog, 0, sizeof(myprog));
   myprog.pipe_fd = -1;

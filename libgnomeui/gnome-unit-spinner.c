@@ -21,6 +21,7 @@
 */
 
 #include <ctype.h>
+#include <string.h>
 
 #include "gnome-unit-spinner.h"
 #include "gdk/gdkkeysyms.h"

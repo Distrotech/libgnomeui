@@ -1,3 +1,22 @@
+2001-06-21  Mark Murnane  <Mark.Murnane@Sun.com>
+
+	* Changes made during 64-bit cleaning.
+
+	* gnome-dateedit.c (day_selected): Modified type of day, month and year
+	to match signature of gtk_calendar_get_date.
+
+	* gnome-icon-text.c (gnome_icon_layout_text):  Changed w_len and sublen
+ 	to a gsize.
+
+	* gnome-less.c (gnome_less_write_fd): Changes len and bytes_written to
+	a gsize.
+
+	* gnome-remote_bootstrap.c (main): Changed setenv to putenv.  Solaris
+	does not have a setenv libc function.
+
+	* gnome-unit-spinner.c: Added include directive for string.h.  Required
+	to ensure proper forward declaration of strcmp().
+
 2001-06-21  Jens Finke  <jens@gnome.org>
 
 	* libgnomeui.h: Don't include gnome-animator.h.

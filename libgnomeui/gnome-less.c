@@ -521,8 +521,8 @@ gboolean
 gnome_less_write_fd(GnomeLess * gl, int fd)
 {
 	gchar * contents;
-	gint len;
-	gint bytes_written;
+	gsize len;
+	gsize bytes_written;
 	GtkTextIter start, end;
 
 
