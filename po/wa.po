@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2001-11-03 14:06+0100\n"
+"POT-Creation-Date: 2001-11-07 11:47+0100\n"
 "PO-Revision-Date: 1999-02-07 17:37+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -1188,7 +1188,7 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "Parfondeu di coleur: %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:851
+#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:860
 #, fuzzy
 msgid "No Icon"
 msgstr "Imådjete:"
@@ -1202,7 +1202,7 @@ msgstr ""
 msgid "Preview"
 msgstr "Di dvant"
 
-#: libgnomeui/gnome-icon-entry.c:872
+#: libgnomeui/gnome-icon-entry.c:881
 #, fuzzy
 msgid "Browse"
 msgstr "_Betchteu"
@@ -1217,7 +1217,7 @@ msgstr ""
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr ""
 
-#: libgnomeui/gnome-icon-sel.c:398
+#: libgnomeui/gnome-icon-sel.c:409
 msgid "Loading Icons..."
 msgstr ""
 

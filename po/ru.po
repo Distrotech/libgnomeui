@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2001-11-03 14:06+0100\n"
+"POT-Creation-Date: 2001-11-07 11:47+0100\n"
 "PO-Revision-Date: 2001-10-14 16:10+0400\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1132,7 +1132,7 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr ""
 
-#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:851
+#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:860
 msgid "No Icon"
 msgstr "Нет пиктограммы"
 
@@ -1144,7 +1144,7 @@ msgstr ""
 msgid "Preview"
 msgstr "Просмотр"
 
-#: libgnomeui/gnome-icon-entry.c:872
+#: libgnomeui/gnome-icon-entry.c:881
 msgid "Browse"
 msgstr "Просмотр"
 
@@ -1158,7 +1158,7 @@ msgstr ""
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr ""
 
-#: libgnomeui/gnome-icon-sel.c:398
+#: libgnomeui/gnome-icon-sel.c:409
 msgid "Loading Icons..."
 msgstr "Загрузка пиктограмм..."
 

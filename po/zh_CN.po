@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs\n"
-"POT-Creation-Date: 2001-11-03 14:06+0100\n"
+"POT-Creation-Date: 2001-11-07 11:47+0100\n"
 "PO-Revision-Date: 2001-10-08 21:45+0800\n"
 "Last-Translator: Wang Li <charlesw1234@163.com>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -1158,7 +1158,7 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "GConf 错误详情： %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:851
+#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:860
 msgid "No Icon"
 msgstr "无图标"
 
@@ -1170,7 +1170,7 @@ msgstr "无法找到 hbox，使用普通文件选择"
 msgid "Preview"
 msgstr "预览"
 
-#: libgnomeui/gnome-icon-entry.c:872
+#: libgnomeui/gnome-icon-entry.c:881
 msgid "Browse"
 msgstr "浏览..."
 
@@ -1184,7 +1184,7 @@ msgstr "GnomeIconSelection：‘%s’不存在或者不是目录"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection：无法打开目录‘%s’"
 
-#: libgnomeui/gnome-icon-sel.c:398
+#: libgnomeui/gnome-icon-sel.c:409
 msgid "Loading Icons..."
 msgstr "载入图标..."
 

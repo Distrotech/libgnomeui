@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
-"POT-Creation-Date: 2001-11-03 14:06+0100\n"
+"POT-Creation-Date: 2001-11-07 11:47+0100\n"
 "PO-Revision-Date: 2001-06-19 12:54+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -1153,7 +1153,7 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "Detalles del error GConf: %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:851
+#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:860
 msgid "No Icon"
 msgstr "Sin icono"
 
@@ -1165,7 +1165,7 @@ msgstr "No puedo encontrar un hbox, usando un selector de archivos normal"
 msgid "Preview"
 msgstr "Previsualizar"
 
-#: libgnomeui/gnome-icon-entry.c:872
+#: libgnomeui/gnome-icon-entry.c:881
 msgid "Browse"
 msgstr "Navegar"
 
@@ -1179,7 +1179,7 @@ msgstr "GnomeIconSelection: '%s' no existe o no es un directorio"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: no pude abrir el directorio '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:398
+#: libgnomeui/gnome-icon-sel.c:409
 msgid "Loading Icons..."
 msgstr "Cargando iconos..."
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2\n"
-"POT-Creation-Date: 2001-11-03 14:06+0100\n"
+"POT-Creation-Date: 2001-11-07 11:47+0100\n"
 "PO-Revision-Date: 2001-09-22 11:01+0800\n"
 "Last-Translator: Joe Man <trmetal@yahoo.com.hk>\n"
 "Language-Team: Chinese <zh@li.org>\n"
@@ -1156,7 +1156,7 @@ msgstr "當載入或儲存 %s 的設定資料時發生錯誤。某些設定將�
 msgid "GConf error details: %s\n"
 msgstr "GConf 詳細錯誤：%s\n"
 
-#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:851
+#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:860
 msgid "No Icon"
 msgstr "無圖示"
 
@@ -1168,7 +1168,7 @@ msgstr "無法找到水平容器元件，使用一般的檔案選取對話盒"
 msgid "Preview"
 msgstr "預覽"
 
-#: libgnomeui/gnome-icon-entry.c:872
+#: libgnomeui/gnome-icon-entry.c:881
 msgid "Browse"
 msgstr "瀏覽"
 
@@ -1182,7 +1182,7 @@ msgstr "圖示選擇：'%s' 不存在或不是一個目錄"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "圖示選擇：無法開啟目錄 '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:398
+#: libgnomeui/gnome-icon-sel.c:409
 msgid "Loading Icons..."
 msgstr "載入圖示"
 

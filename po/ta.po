@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 1.96.0\n"
-"POT-Creation-Date: 2001-11-03 14:06+0100\n"
+"POT-Creation-Date: 2001-11-07 11:47+0100\n"
 "PO-Revision-Date: 2001-06-16 00:05-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil\n"
@@ -1169,7 +1169,7 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "GConf À¢¨ÆÂ¢ý Å¢ÅÃí¸û: %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:851
+#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:860
 #, fuzzy
 msgid "No Icon"
 msgstr "ÌÚõÀ¼õ:"
@@ -1183,7 +1183,7 @@ msgstr ""
 msgid "Preview"
 msgstr "ÓýÒ"
 
-#: libgnomeui/gnome-icon-entry.c:872
+#: libgnomeui/gnome-icon-entry.c:881
 #, fuzzy
 msgid "Browse"
 msgstr "_§Á§Ä¡Ê"
@@ -1198,7 +1198,7 @@ msgstr ""
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr ""
 
-#: libgnomeui/gnome-icon-sel.c:398
+#: libgnomeui/gnome-icon-sel.c:409
 msgid "Loading Icons..."
 msgstr ""
 

@@ -1,7 +1,7 @@
 AC_INIT(libgnomeui)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(libgnomeui, 1.105.0)
+AM_INIT_AUTOMAKE(libgnomeui, 1.106.0)
 
 AM_MAINTAINER_MODE
 
@@ -53,7 +53,7 @@ CPPFLAGS="$sm_save_cppflags"
 dnl
 dnl Start of pkg-config checks
 dnl
-GNOMEUI_MODULES="libgnome-2.0 >= 1.105.0 libgnomecanvas-2.0 >= 1.105.0 libbonoboui-2.0 >= 1.104 gconf-2.0 >= 1.1.1"
+GNOMEUI_MODULES="libgnome-2.0 >= 1.105.0 libgnomecanvas-2.0 >= 1.105.0 libbonoboui-2.0 >= 1.106 gconf-2.0 >= 1.1.1"
 PKG_CHECK_MODULES(LIBGNOMEUI, $GNOMEUI_MODULES)
 AC_SUBST(LIBGNOMEUI_CFLAGS)
 AC_SUBST(LIBGNOMEUI_LIBS)

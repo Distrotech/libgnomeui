@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
-"POT-Creation-Date: 2001-11-03 14:06+0100\n"
+"POT-Creation-Date: 2001-11-07 11:47+0100\n"
 "PO-Revision-Date: 2001-06-01 17:35GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -1178,7 +1178,7 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "GConf xəta mündəricatı: %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:851
+#: libgnomeui/gnome-icon-entry.c:259 libgnomeui/gnome-icon-entry.c:860
 #, fuzzy
 msgid "No Icon"
 msgstr "Timsal Yoxdur"
@@ -1191,7 +1191,7 @@ msgstr "hbox tapıla bilmir, normal fayl seçkisi işlədirəm"
 msgid "Preview"
 msgstr "Nümayiş"
 
-#: libgnomeui/gnome-icon-entry.c:872
+#: libgnomeui/gnome-icon-entry.c:881
 msgid "Browse"
 msgstr "Gəz"
 
@@ -1205,7 +1205,7 @@ msgstr "GnomeIconSelection: '%s' ya mövcud deyil ya da cərgə deyildir"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: '%s' cərgəsi açıla bilmir"
 
-#: libgnomeui/gnome-icon-sel.c:398
+#: libgnomeui/gnome-icon-sel.c:409
 msgid "Loading Icons..."
 msgstr "Timsallar Yüklənir..."
 
