@@ -228,6 +228,15 @@ gnome_dialog_init_action_area (GnomeDialog * dialog)
   gtk_widget_show (separator);
 }
 
+
+/**
+ * gnome_dialog_construct: Functionality of gnome_dialog_new() for language wrappers.
+ * @dialog: Dialog to construct.
+ * @title: Title of the dialog.
+ * @ap: va_list of buttons, NULL-terminated.
+ * 
+ * See gnome_dialog_new().
+ **/
 void       
 gnome_dialog_construct (GnomeDialog * dialog,
 			const gchar * title,
@@ -251,6 +260,14 @@ gnome_dialog_construct (GnomeDialog * dialog,
   };  
 }
 
+/**
+ * gnome_dialog_constructv: Functionality of gnome_dialog_new(), for language wrappers.
+ * @dialog: Dialog to construct.
+ * @title: Title of the dialog.
+ * @buttons: NULL-terminated array of buttons.
+ * 
+ * See gnome_dialog_new().
+ **/
 void gnome_dialog_constructv (GnomeDialog * dialog,
 			      const gchar * title,
 			      const gchar ** buttons)
@@ -275,6 +292,23 @@ void gnome_dialog_constructv (GnomeDialog * dialog,
 
 
 
+/**
+ * gnome_dialog_new: Create a new &GnomeDialog.
+ * @title: The title of the dialog; appears in window titlebar.
+ * @...: NULL-terminated varargs list of button names or GNOME_STOCK_BUTTON_* defines.
+ * 
+ * Creates a new &GnomeDialog, with the given title, and any button names 
+ * in the arg list. Buttons can be simple names, such as _("My Button"),
+ * or gnome-stock defines such as %GNOME_STOCK_BUTTON_OK, etc. The last
+ * argument should be NULL to terminate the list.  
+ *
+ * Buttons passed to this function are numbered from left to right,
+ * starting with 0. So the first button in the arglist is button 0,
+ * then button 1, etc.  These numbers are used throughout the
+ * &GnomeDialog API.
+ *
+ * Return value: The new &GnomeDialog.
+ **/
 GtkWidget* gnome_dialog_new            (const gchar * title,
 					...)
 {
@@ -296,6 +330,16 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
   return GTK_WIDGET (dialog);
 }
 
+/**
+ * gnome_dialog_newv: Create a new &GnomeDialog.
+ * @title: Title of the dialog.
+ * @buttons: NULL-terminated vector of buttons names.
+ * 
+ * See gnome_dialog_new(), this function is identical but does not use
+ * varargs.
+ * 
+ * Return value: 
+ **/
 GtkWidget* gnome_dialog_newv            (const gchar * title,
 					 const gchar ** buttons)
 {
@@ -308,6 +352,19 @@ GtkWidget* gnome_dialog_newv            (const gchar * title,
   return GTK_WIDGET (dialog);
 }
 
+/**
+ * gnome_dialog_set_parent: Set the logical parent window of a &GnomeDialog.
+ * @dialog: &GnomeDialog to set the parent of.
+ * @parent: Parent &GtkWindow.
+ * 
+ * Dialogs have "parents," usually the main application window which spawned 
+ * them. This function will let the window manager know about the parent-child
+ * relationship. Usually this means the dialog must stay on top of the parent,
+ * and will be minimized when the parent is. Gnome also allows users to 
+ * request dialog placement above the parent window (vs. at the mouse position,
+ * or at a default window manger location).
+ * 
+ **/
 void       gnome_dialog_set_parent     (GnomeDialog * dialog,
 					GtkWindow   * parent)
 {
@@ -315,6 +372,7 @@ void       gnome_dialog_set_parent     (GnomeDialog * dialog,
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
   g_return_if_fail(parent != NULL);
   g_return_if_fail(GTK_IS_WINDOW(parent));
+  g_return_if_fail(parent != GTK_WINDOW(dialog));
 
   gtk_window_set_transient_for (GTK_WINDOW(dialog), parent);
 
@@ -345,6 +403,17 @@ void       gnome_dialog_set_parent     (GnomeDialog * dialog,
 }
 
 
+/**
+ * gnome_dialog_append_buttons: Add buttons to a dialog after its initial construction.
+ * @dialog: &GnomeDialog to add buttons to.
+ * @first: First button to add.
+ * @...: varargs list of additional buttons, NULL-terminated.
+ * 
+ * This function is mostly for internal library use. You should use
+ * gnome_dialog_new() instead. See that function for a description of
+ * the button arguments.
+ * 
+ **/
 void       gnome_dialog_append_buttons (GnomeDialog * dialog,
 					const gchar * first,
 					...)
@@ -364,6 +433,17 @@ void       gnome_dialog_append_buttons (GnomeDialog * dialog,
   va_end(ap);
 }
 
+
+/**
+ * gnome_dialog_append_button: Add a button to a dialog after its initial construction.
+ * @dialog: &GnomeDialog to add button to.
+ * @button_name: Button to add.
+ * 
+ * This function is mostly for internal library use. You should use
+ * gnome_dialog_new() instead. See that function for a description of
+ * the button argument.
+ * 
+ **/
 void       gnome_dialog_append_button (GnomeDialog * dialog,
 				       const gchar * button_name)
 {
@@ -390,6 +470,16 @@ void       gnome_dialog_append_button (GnomeDialog * dialog,
   }
 }
 
+/**
+ * gnome_dialog_append_button_with_pixmap: Add a pixmap button to a dialog.
+ * @dialog: &GnomeDialog to add the button to.
+ * @button_name: Name of the button, or stock button #define.
+ * @pixmap_name: Stock pixmap name.
+ * 
+ * gnome_dialog_new() does not permit custom buttons with pixmaps, so if you 
+ * want one of those you need to use this function.
+ * 
+ **/
 void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
 						   const gchar * button_name,
 						   const gchar * pixmap_name)
@@ -425,6 +515,14 @@ void       gnome_dialog_append_button_with_pixmap (GnomeDialog * dialog,
   }
 }
 
+/**
+ * gnome_dialog_append_buttonsv: Like gnome_dialog_append_buttons(), but with a vector arg instead of a varargs list.
+ * @dialog: &GnomeDialog to append to.
+ * @buttons: NULL-terminated vector of buttons to append.
+ * 
+ * For internal use, language bindings, etc. Use gnome_dialog_new() instead.
+ * 
+ **/
 void       gnome_dialog_append_buttonsv (GnomeDialog * dialog,
 					 const gchar ** buttons)
 {
@@ -437,6 +535,15 @@ void       gnome_dialog_append_buttonsv (GnomeDialog * dialog,
   }
 }
 
+/**
+ * gnome_dialog_append_buttons_with_pixmaps: Like gnome_dialog_append_button_with_pixmap(), but allows multiple buttons.
+ * @dialog: &GnomeDialog to append to.
+ * @names: NULL-terminated vector of button names.
+ * @pixmaps: NULL-terminated vector of pixmap names.
+ * 
+ * Simply calls gnome_dialog_append_button_with_pixmap() repeatedly.
+ * 
+ **/
 void       gnome_dialog_append_buttons_with_pixmaps (GnomeDialog * dialog,
 						     const gchar **names,
 						     const gchar **pixmaps)
@@ -569,18 +676,60 @@ gnome_dialog_run_real(GnomeDialog* dialog, gboolean close_after)
   return ri.button_number;
 }
 
+/**
+ * gnome_dialog_run: Make the dialog modal and block waiting for user response.
+ * @dialog: &GnomeDialog to use.
+ * 
+ * Blocks until the user clicks a button, or closes the dialog with the 
+ * window manager's close decoration (or by pressing Escape).
+ * 
+ * You need to set up the dialog to do the right thing when a button
+ * is clicked or delete_event is received; you must consider both of
+ * those possibilities so that you know the status of the dialog when
+ * gnome_dialog_run() returns. A common mistake is to forget about
+ * Escape and the window manager close decoration; by default, these
+ * call gnome_dialog_close(), which by default destroys the dialog. If
+ * your button clicks do not destroy the dialog, you don't know
+ * whether the dialog is destroyed when gnome_dialog_run()
+ * returns. This is bad.
+ *
+ * So you should either close the dialog on button clicks as well, or
+ * change the gnome_dialog_close() behavior to hide instead of
+ * destroy. You can do this with gnome_dialog_close_hides().
+ *
+ * Return value:  If a button was pressed, the button number is returned. If not, -1 is returned.
+ **/
 gint
 gnome_dialog_run(GnomeDialog *dialog)
 {
   return gnome_dialog_run_real(dialog,FALSE);
 }
 
+/**
+ * gnome_dialog_run_and_close: Like gnome_dialog_run(), but force-closes the dialog after the run, iff the dialog was not closed already.
+ * @dialog: &GnomeDialog to use.
+ * 
+ * See gnome_dialog_run(). The only difference is that this function calls 
+ * gnome_dialog_close() before returning, if the dialog was not already closed.
+ * 
+ * Return value: If a button was pressed, the button number. Otherwise -1.
+ **/
 gint 
 gnome_dialog_run_and_close(GnomeDialog* dialog)
 {
   return gnome_dialog_run_real(dialog,TRUE);
 }
 
+/**
+ * gnome_dialog_set_default: Set the default button for the dialog. The Enter key activates the default button.
+ * @dialog: &GnomeDialog to affect.
+ * @button: Number of the default button.
+ * 
+ * The default button will be activated if the user just presses return.
+ * Usually you should make the least-destructive button the default.
+ * Otherwise, the most commonly-used button.
+ * 
+ **/
 void
 gnome_dialog_set_default (GnomeDialog *dialog,
 			  gint button)
@@ -602,6 +751,19 @@ gnome_dialog_set_default (GnomeDialog *dialog,
 #endif
 }
 
+/**
+ * gnome_dialog_set_close: Whether to call gnome_dialog_close() when a button is clicked.
+ * @dialog: &GnomeDialog to affect.
+ * @click_closes: TRUE if clicking any button should call gnome_dialog_close().
+ * 
+ * This is a convenience function so you don't have to connect callbacks
+ * to each button just to close the dialog. By default, &GnomeDialog 
+ * has this parameter set the FALSE and it will not close on any click.
+ * (This was a design error.) However, almost all the &GnomeDialog subclasses,
+ * such as &GnomeMessageBox and &GnomePropertyBox, have this parameter set to
+ * TRUE by default.
+ * 
+ **/
 void       gnome_dialog_set_close    (GnomeDialog * dialog,
 				      gboolean click_closes)
 {
@@ -611,6 +773,18 @@ void       gnome_dialog_set_close    (GnomeDialog * dialog,
   dialog->click_closes = click_closes;
 }
 
+/**
+ * gnome_dialog_close_hides: gnome_dialog_close() can destroy or hide the dialog; toggle this behavior.
+ * @dialog: &GnomeDialog to affect.
+ * @just_hide: If TRUE, gnome_dialog_close() calls gtk_widget_hide() instead of gtk_widget_destroy().
+ * 
+ * Some dialogs are expensive to create, so you want to keep them around and just 
+ * gtk_widget_show() them when they are opened, and gtk_widget_hide() them when 
+ * they're closed. Other dialogs are expensive to keep around, so you want to 
+ * gtk_widget_destroy() them when they're closed. It's a judgment call you 
+ * will need to make for each dialog.
+ * 
+ **/
 void       gnome_dialog_close_hides (GnomeDialog * dialog, 
 				     gboolean just_hide)
 {
@@ -621,6 +795,15 @@ void       gnome_dialog_close_hides (GnomeDialog * dialog,
 }
 
 
+/**
+ * gnome_dialog_set_sensitive: Set the sensitivity of a button.
+ * @dialog: &GnomeDialog to affect.
+ * @button: Which button to affect.
+ * @setting: TRUE means it's sensitive.
+ * 
+ * Calls gtk_widget_set_sensitive() on the specified button number. 
+ *
+ **/
 void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
 					gint         button,
 					gboolean     setting)
@@ -642,6 +825,16 @@ void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
 #endif
 }
 
+/**
+ * gnome_dialog_button_connect: Connect a callback to one of the button's "clicked" signals.
+ * @dialog: &GnomeDialog to affect.
+ * @button: Button number.
+ * @callback: A standard Gtk callback.
+ * @data: Callback data.
+ * 
+ * Simply gtk_signal_connect() to the "clicked" signal of the specified button.
+ * 
+ **/
 void       gnome_dialog_button_connect (GnomeDialog *dialog,
 					gint button,
 					GtkSignalFunc callback,
@@ -665,6 +858,16 @@ void       gnome_dialog_button_connect (GnomeDialog *dialog,
 #endif
 }
 
+/**
+ * gnome_dialog_button_connect_object: gtk_signal_connect_object() to a button.
+ * @dialog: &GnomeDialog to affect.
+ * @button: Button to connect to.
+ * @callback: Callback.
+ * @obj: As for gtk_signal_connect_object().
+ * 
+ * gtk_signal_connect_object() to the "clicked" signal of the given button.
+ * 
+ **/
 void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
 					       gint button,
 					       GtkSignalFunc callback,
@@ -689,6 +892,15 @@ void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
 }
 
 
+/**
+ * gnome_dialog_set_accelerator: Set an accelerator key for a button.
+ * @dialog: &GnomeDialog to affect.
+ * @button: Button number.
+ * @accelerator_key: Key for the accelerator.
+ * @accelerator_mods: Modifier.
+ * 
+ * 
+ **/
 void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
 					gint button,
 					const guchar accelerator_key,
@@ -718,6 +930,18 @@ void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
 #endif
 }
 
+/**
+ * gnome_dialog_editable_enters: Make the "activate" signal of an editable click the default dialog button.
+ * @dialog: &GnomeDialog to affect.
+ * @editable: Editable to affect.
+ * 
+ * Normally if there's an editable widget (such as &GtkEntry) in your
+ * dialog, pressing Enter will activate the editable rather than the
+ * default dialog button. However, in most cases, the user expects to
+ * type something in and then press enter to close the dialog. This 
+ * function enables that behavior.
+ * 
+ **/
 void       gnome_dialog_editable_enters   (GnomeDialog * dialog,
 					   GtkEditable * editable)
 {
@@ -814,6 +1038,22 @@ void gnome_dialog_close_real(GnomeDialog * dialog)
   }
 }
 
+/**
+ * gnome_dialog_close: Close (hide or destroy) the dialog.
+ * @dialog: &GnomeDialog to close.
+ * 
+ * See also gnome_dialog_close_hides(). This function emits the
+ * "close" signal, which either hides or destroys the dialog (destroy
+ * by default). If you connect to the "close" signal, and your
+ * callback returns TRUE, the hide or destroy will be blocked. You can
+ * do this to avoid closing the dialog if the user gives invalid
+ * input, for example.
+ * 
+ * Using gnome_dialog_close() in place of gtk_widget_hide() or
+ * gtk_widget_destroy() allows you to easily catch all sources of
+ * dialog closure, including delete_event and button clicks, and
+ * handle them in a central location.
+ **/
 void gnome_dialog_close(GnomeDialog * dialog)
 {
   gint close_handled = FALSE;
