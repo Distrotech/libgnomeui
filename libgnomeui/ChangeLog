@@ -1,3 +1,9 @@
+1999-11-09  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-color-picker.c (render): gdk_pixmapified.
+
+	* winhints_demo.c (prepare_app): gdk_pixmapified.
+
 1999-11-09  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-pixmap.c (match_representation_to_mode): New function
