@@ -1,18 +1,22 @@
+# translation of ta.po to Tamil
 # Tamil translation of libgnomeui2.
-# Copyright (C) 2001, 2002, 2003 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
 # Dinesh Nadarajah <n_dinesh@yahoo.com>, 2001, 2002, 2003.
-# 
+# Jayaradha N <jaya@pune.redhat.com>, 2004.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui2 2.2.0\n"
+"Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-08-16 13:40+0200\n"
-"PO-Revision-Date: 2004-02-23 17:51-0600\n"
-"Last-Translator: Dinesh Nadarajah <dinesh_list@sbcglobal.net>\n"
-"Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
+"PO-Revision-Date: 2004-08-20 12:46+0530\n"
+"Last-Translator: Jayaradha N <jaya@pune.redhat.com>\n"
+"Language-Team: Tamil <zhakanini@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -33,33 +37,31 @@ msgstr "உருப்படி 2'க்கு குறிப்பிடு"
 #: file-chooser/gtkfilesystemgnomevfs.c:652
 #, c-format
 msgid "%s is not a folder"
-msgstr ""
+msgstr "%s அடைவு இல்லை"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:859
-#, fuzzy
 msgid "Filesystem"
-msgstr "கோ_ப்புகள்"
+msgstr "கோப்பு அமைப்புகள்"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:1523
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "புத்தக குறி சேமிப்பதில் தோல்வி (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "'%s' கோப்புக்கான தகவலை பெற முடியவில்லை: %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "'%s' ஐ திறப்பதில் தோல்வி: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr "'%s' பிம்பத்தை ஏற்றுவதில் தோல்வி:காரணம் தெரியவில்லை : பிம்பம் சிதைந்திருக்கலாம்"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -150,8 +152,7 @@ msgid "Translator credits"
 msgstr "மொழிபெயற்றோர் புகழ்"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "மொழிபெயற்றோர் புகழ். இச்சரம் மொழிபெயர்க்கக்கூடியதாக குறிக்க வேண்டும்"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -544,9 +545,9 @@ msgid "Text Only"
 msgstr "உரை மட்டும்"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "கொடாநிலை கணிமேசையைப் பயன்படுத்தவும் (%s)"
+msgstr "இயல்பான கணினி மேசையை பயன்படுத்தவும் (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -647,9 +648,9 @@ msgid "Authentication Required"
 msgstr "பெயர்-கடவுச்சொல் வேண்டும்"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "%s அணுகலுக்கு நீங்கள் கடவுச்சொல் வழங்கவேண்டும்\n"
+msgstr "%s டொமைன் ஐ அணுக %s ஆக உள்நுழைந்திருக்க வேண்டும்\n"
 
 #: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
@@ -835,29 +836,24 @@ msgstr "பின்னணி வண்ணம் அமைக்கப்பட�
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "சின்னத்தின் பின்னணி வண்ணம்"
+msgstr "உள்ளடக்கத்தின் பின்னணி வண்ணம்"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "சின்னத்தின் பின்னணி வண்ணம்"
+msgstr "உள்ளடக்கத்தின் பின்னணி வண்ணம்"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr "ஓர் GdkColorராக பின்னணி வண்ணம்"
+msgstr " Gdநிறமாக உள்ளடக்கத்தின்க பின்னணி வண்ணம்"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "பின்னணி வண்ணம் அமைக்கப்பட்டுள்ளது"
+msgstr "உள்ளடக்கத்தின் பின்னணி வண்ணம் அமைக்கப்பட்டுள்ளது"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "பின்னணி வண்ணம் அமைக்கப்பட்டுள்ளது"
+msgstr "உள்ளடக்கத்தின் பின்னணி வண்ணம் அமைக்கப்பட்டுள்ளது"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -916,7 +912,7 @@ msgstr "வரலாறு எண்"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
+msgstr "கோப்பு உள்ளீட்டின் தனிப்பட்ட அடையாளம். இது வரலாற்றை சேமிக்க உதவும்"
 
 #: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
@@ -934,7 +930,7 @@ msgstr "அடைவு நுழைவு"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
+msgstr "கோப்பு உள்ளீடு அடைவின் பெயரை உள்ளிடுவதை அல்லது முழு கோப்பு பெயரை உள்ளிடுவதை பயன்படுத்துகிறதா"
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
@@ -942,7 +938,7 @@ msgstr "Modal"
 
 #: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
-msgstr ""
+msgstr "கோப்பை திற சாளரம் பொதுமாதிரியாக இருக்க வேண்டுமா"
 
 #: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
@@ -969,7 +965,7 @@ msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
-msgstr ""
+msgstr "க்னோம் உள்ளீடு கோப்புகளின் பெயர்கை உள்ளிடும் அமைப்பை பயன்படுத்துகிறது. க்னோம் உள்ளீட்டை பெறவும் திருத்த மற்றும் கேள்விகள் கேட்கடும் ள்  இதை பயன்படுத்தலாம்."
 
 #: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
@@ -980,7 +976,7 @@ msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
-msgstr ""
+msgstr "GtkEntry கோப்புபெயர்களை உள்ளிடுவதை பயன்படுத்துகிறது. இந்த பண்பை GtkEntry இல் திருத்தம் செய்ய , கேள்விக்கு அளவுருக்கலாக பயன்படுத்தலாம்"
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
@@ -990,7 +986,7 @@ msgstr "GtkFileChooser பயன்படுத்தவும்"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr ""
+msgstr "GtkFileChooser சாளரம் அல்லது GtkFileSelection சாளரத்தை கோப்பை தேர்வு செய்ய பயன்படுத்த வேண்டுமா"
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1034,7 +1030,7 @@ msgstr "முறைமை"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr ""
+msgstr "எழுத்துரு தேர்வாளர் எழுத்துருவை தேர்வு செய்யும் பாங்கு"
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
@@ -1099,14 +1095,14 @@ msgid ""
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr ""
+msgstr "பயன்பாடு \"%s\" உங்கள் கணினி மேலாளர் அல்லது இயங்குதள விற்பனையாளர் அனுமதிக்காத கோப்பில் மாற்றம் செய்ய விரும்புகிறீர்கள். நீங்கள் தேர்வு செய்த சில அமைப்புகள் அவற்றிற்கான விளைவை ஏற்படுத்தாது அல்லது அடுத்த முறை துவங்கும் போது பயன்பாடு நினைவில் கொள்ளாது"
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
-msgstr ""
+msgstr "%s க்கான அமைப்புத்தகவலை சேமிக்கும் போது அல்லது ஏற்றும் போது பிழை நேர்ந்தது. சில அமைப்புகள் சரியாக வேலை செய்யாமல் போகலாம்"
 
 #: libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1138,7 +1134,7 @@ msgstr "இணைப்பை வரைவதட்கு பயண்படு�
 
 #: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
-msgstr ""
+msgstr "இந்த பட்டன் நீங்கள் பார்க்க வேண்டிய URI க்கு உங்களை அழைத்துச்செல்லும்"
 
 #: libgnomeui/gnome-href.c:394
 msgid ""
@@ -1152,7 +1148,7 @@ msgstr ""
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
+msgstr "சின்னத்தின் உள்ளீட்டிற்கான தனி அடையாளம். இது வரலாற்றை பட்டியலில் சேமிக்க பயன்படும்"
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
@@ -1178,7 +1174,7 @@ msgstr "தெரிவுசெய்யும் உரையாடல்"
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
-msgstr ""
+msgstr "சின்னம் தேர்வு உரையாடல் பெட்டி. இந்த பண்பை பயன்படுத்தி திருத்த மற்றும் கேள்விகள் கேட்க GtkDialog ஐ பெறலாம்."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
@@ -1270,11 +1266,11 @@ msgstr "_கடவுச் சொல்:"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "(_a)பெயரில்லாமல் இணை"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "(_u)பயனீட்டாளராக இணை"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
@@ -1404,6 +1400,10 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
+"க்னோம் அமர்வு மேலாளர் (செயல் எண் %d) \n"
+"பிழை காரணமாக நொருங்கியது (%s).\n"
+"இந்த உரையாடல் பெட்டியை மூடினால், உங்கள் அமர்வில் உள்ள அத்தனை பயன்பாடுகளும் மூடப்பட்டு வெளியேற்றப்படுவீர்கள்\n"
+"மூடுவதற்கு முன் அனைத்து கோப்புகளையும் சேமிக்கவும்."
 
 #: libgnomeui/gnome_segv.c:112
 #, c-format
@@ -1419,7 +1419,7 @@ msgstr "செயல் %d: %s"
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr ""
+msgstr "உங்கள் நிரலாக்குபவர்களுக்கு தகவல் தெரிவித்து சிக்கலை சரி செய்ய உதவலாம் அல்லது பயன்பாட்டை மீண்டும் துவங்கலாம்"
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1437,8 +1437,3 @@ msgstr "_நிரலருக்கு தெரிவிக்கவும்"
 msgid "_Debug"
 msgstr "_பிழை நீக்கு"
 
-#~ msgid " domain %s"
-#~ msgstr " களம் %s"
-
-#~ msgid "Exit the test"
-#~ msgstr "பரிசோதனையிலிருந்து வெளியேறு"
