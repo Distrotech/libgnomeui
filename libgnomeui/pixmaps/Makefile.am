@@ -6,18 +6,11 @@ pixmap_DATA = $(BITMAPS)
 
 EXTRA_DIST  = $(BITMAPS)
 
-noinst_PROGRAMS = xpm2rgb
-
 noinst_HEADERS = gnome-stock-imlib.h
 
-xpm2rgb_SOURCES = xpm2rgb.c
+CLEANFILES = gnome-stock-imlib.h tmp.h
 
-xpm2rgb_LDADD = \
-	$(GNOME_LIBDIR) \
-	$(GNOMEUI_LIBS) \
-	$(INTLLIBS)
-
-gnome-stock-imlib.h: Makefile.am stock_*.xpm xpm2rgb
+gnome-stock-imlib.h: Makefile stock_*.xpm
 	@echo "building gnome-stock-imlib.h"
 	@echo "/* gnome stock icons in Imlib usable rgb data" >gnome-stock-imlib.h
 	@echo " *" >>gnome-stock-imlib.h
@@ -33,6 +26,12 @@ gnome-stock-imlib.h: Makefile.am stock_*.xpm xpm2rgb
 	@echo " * are Copyright (C) 1998 Tuomas Kuosmanen" >>gnome-stock-imlib.h
 	@echo " */" >>gnome-stock-imlib.h
 	@echo >>gnome-stock-imlib.h
-	@for i in stock_*.xpm; do I="`echo $$i | sed -e 's/stock_//' -e 's/.xpm//'`" ; ./xpm2rgb $$i imlib_$$I ; done
-	
+	@for i in stock_*.xpm; do \
+		../../tools/convertrgb/convertrgb -n -a=gnome-stock-imlib.h $$i ; \
+		I="`echo $$i | sed -e 's/stock_//' -e 's/.xpm//'`" ; \
+		: ./xpm2rgb $$i imlib_$$I ; \
+	done
+	@mv -f gnome-stock-imlib.h tmp.h
+	@sed -e 's/stock_\(.*\)_rgb/imlib_\1/' <tmp.h >gnome-stock-imlib.h
+	@rm -f tmp.h
 
