@@ -1,4 +1,4 @@
-SUBDIRS = libgnomeui demos po intl
+SUBDIRS = libgnomeui images demos po intl
 
 gnomeincludedir=$(includedir)/gnome/$(GNOME_INTERFACE_VERSION)
 gnomeinclude_HEADERS = gnome.h

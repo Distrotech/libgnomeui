@@ -1,3 +1,7 @@
+2001-04-11  Martin Baulig  <baulig@suse.de>
+
+	* images/: New directory. Copied here from gnome-libs.
+
 2001-03-24  Martin Baulig  <baulig@suse.de>
 
 	* configure.in: Removed the REBUILD alias.
