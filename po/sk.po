@@ -1,18 +1,18 @@
 # libgnomeui sk.po
-# Copyright (C) 2002, 2003 Free Software Foundation, Inc.
-# Marcel Telka <marcel@telka.sk>, 2002, 2003.
+# Copyright (C) 2002, 2003, 2004 Free Software Foundation, Inc.
+# Marcel Telka <marcel@telka.sk>, 2002, 2003, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
-"PO-Revision-Date: 2003-12-24 12:39+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-04 16:46+0100\n"
+"PO-Revision-Date: 2004-01-04 16:47+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -139,6 +139,7 @@ msgstr "O programe %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "Súbo_r"
 
@@ -196,6 +197,7 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomocník"
 
@@ -386,11 +388,11 @@ msgstr "Konfigurovať aplikáciu"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "O progr_ame"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informácie o tomto programe"
 
@@ -417,7 +419,7 @@ msgstr "Vytvoriť nové okno"
 msgid "_Close This Window"
 msgstr "_Zatvoriť toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvoriť aktuálne okno"
 
@@ -619,7 +621,7 @@ msgstr "Je vyžadované overenie totožnosti"
 #: libgnomeui/gnome-authentication-manager.c:265
 #, c-format
 msgid " domain %s"
-msgstr ""
+msgstr " doména %s"
 
 #: libgnomeui/gnome-authentication-manager.c:268
 #, c-format
@@ -710,7 +712,7 @@ msgstr "Počiatočný čas"
 msgid "The initial time"
 msgstr "Počiatočný čas"
 
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:96
 msgid "Date"
 msgstr "Dátum"
 
@@ -741,7 +743,7 @@ msgstr ""
 "gnome_date_edit_get_date je neodporúčané, použite gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:155
+#: libgnomeui/gnome-font-picker.c:153
 msgid "Title"
 msgstr "Titulok"
 
@@ -959,75 +961,75 @@ msgstr "_Prezerať..."
 msgid "Pop up a file selector to choose a file"
 msgstr "Zobraziť okno pre výber súboru"
 
-#: libgnomeui/gnome-font-picker.c:66
+#: libgnomeui/gnome-font-picker.c:64
 msgid "sans 12"
 msgstr "sans 12"
 
-#: libgnomeui/gnome-font-picker.c:67
+#: libgnomeui/gnome-font-picker.c:65
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaÁaÄäBbCcČčDdĎďEeÉéFfGgHhIiÍíJjKkLlĽľĹĺMmNnŇňOoÓóÔôPpQqRrŔŕSsŠsTtŤťUuÚúVvWwXxYyÝýZzŽž"
 
-#: libgnomeui/gnome-font-picker.c:68
+#: libgnomeui/gnome-font-picker.c:66
 msgid "Pick a Font"
 msgstr "Vybrať typ písma"
 
-#: libgnomeui/gnome-font-picker.c:156
+#: libgnomeui/gnome-font-picker.c:154
 msgid "The title of the selection dialog box"
 msgstr "Titulok dialógového okna výberu"
 
-#: libgnomeui/gnome-font-picker.c:164
+#: libgnomeui/gnome-font-picker.c:162
 msgid "Mode"
 msgstr "Mód"
 
-#: libgnomeui/gnome-font-picker.c:165
+#: libgnomeui/gnome-font-picker.c:163
 msgid "The mode of operation of the font picker"
 msgstr "Režim činnosti okna pre výber typu písma"
 
-#: libgnomeui/gnome-font-picker.c:174
+#: libgnomeui/gnome-font-picker.c:172
 msgid "Font name"
 msgstr "Názov typu písma"
 
-#: libgnomeui/gnome-font-picker.c:175
+#: libgnomeui/gnome-font-picker.c:173
 msgid "Name of the selected font"
 msgstr "Názov vybratého písma"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:182 libgnomeui/gnome-font-picker.c:977
 msgid "Font"
 msgstr "Typ písma"
 
-#: libgnomeui/gnome-font-picker.c:185
+#: libgnomeui/gnome-font-picker.c:183
 msgid "The selected GtkFont"
 msgstr "Vybratý GtkFont"
 
-#: libgnomeui/gnome-font-picker.c:192
+#: libgnomeui/gnome-font-picker.c:190
 msgid "Preview text"
 msgstr "Text náhľadu"
 
-#: libgnomeui/gnome-font-picker.c:193
+#: libgnomeui/gnome-font-picker.c:191
 msgid "Preview text shown in the dialog"
 msgstr "Náhľad textu zobrazeného v dialógovom okne"
 
-#: libgnomeui/gnome-font-picker.c:201
+#: libgnomeui/gnome-font-picker.c:199
 msgid "Use font in label"
 msgstr "Použiť písmo v návestí"
 
-#: libgnomeui/gnome-font-picker.c:202
+#: libgnomeui/gnome-font-picker.c:200
 msgid "Use font in the label in font info mode"
 msgstr "Použiť písmo v návestí v režime informácie o type písma"
 
-#: libgnomeui/gnome-font-picker.c:210
+#: libgnomeui/gnome-font-picker.c:208
 msgid "Font size for label"
 msgstr "Veľkosť písma pre návestie"
 
-#: libgnomeui/gnome-font-picker.c:211
+#: libgnomeui/gnome-font-picker.c:209
 msgid "Font size for label in font info mode"
 msgstr "Veľkosť písma pre návestie v režime informácie o type písma"
 
-#: libgnomeui/gnome-font-picker.c:221
+#: libgnomeui/gnome-font-picker.c:219
 msgid "Show size"
 msgstr "Zobraziť veľkosť"
 
-#: libgnomeui/gnome-font-picker.c:222
+#: libgnomeui/gnome-font-picker.c:220
 msgid "Show size in font info mode"
 msgstr "Zobraziť veľkosť v režime informácie o type písma"
 
@@ -1261,26 +1263,26 @@ msgstr "Náhľad obrázka"
 msgid "A preview of the image currently specified"
 msgstr "Náhľad aktuálne zadaného obrázka"
 
-#: libgnomeui/gnome-scores.c:78
+#: libgnomeui/gnome-scores.c:77
 msgid "Top Ten"
 msgstr "Najlepších 10"
 
-#: libgnomeui/gnome-scores.c:91
+#: libgnomeui/gnome-scores.c:90
 msgid "User"
 msgstr "Používateľ"
 
-#: libgnomeui/gnome-scores.c:94
+#: libgnomeui/gnome-scores.c:93
 msgid "Score"
 msgstr "Body"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: libgnomeui/gnome-scores.c:194
+#: libgnomeui/gnome-scores.c:193
 msgid "%a %b %d %T %Y"
 msgstr "%a %d.%m.%Y %H:%M"
 
-#: libgnomeui/gnome-scores.c:395
+#: libgnomeui/gnome-scores.c:394
 msgid "Sans 14"
 msgstr "Sans 14"
 
@@ -1386,5 +1388,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Prosím navštívte stránku GNOME Application Crash pre viac informácií"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ukončiť test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukončiť test"
