@@ -440,7 +440,10 @@ gnome_font_picker_clicked(GtkButton *button)
                                                    gfp->preview_text);
         
         gtk_widget_show(gfp->font_dialog);
-    } /* if */
+    } else if (gfp->font_dialog->window) {
+	/*raise the window so that if it is obscured that we see it*/
+	gdk_window_raise(gfp->font_dialog->window);
+    }/* if */
 } /* gnome_font_picker_clicked */
 
 void

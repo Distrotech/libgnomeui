@@ -1,3 +1,9 @@
+Sun Nov 22 02:41:12 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-font-picker.c: raise the window on click if one exists
+	  already, so that if it was obscured, the user doesn't get
+	  confused
+
 Sun Nov 22 01:11:26 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-pixmap-entry.[ch]: added a simple preview for the pixmaps
