@@ -46,43 +46,49 @@ typedef enum {
 #define GNOME_IS_DATE_EDIT_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_DATE_EDIT))
 #define GNOME_DATE_EDIT_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_DATE_EDIT, GnomeDateEditClass))
 
-typedef struct {
+typedef struct _GnomeDateEdit        GnomeDateEdit;
+typedef struct _GnomeDateEditPrivate GnomeDateEditPrivate;
+typedef struct _GnomeDateEditClass   GnomeDateEditClass;
+
+struct _GnomeDateEdit {
 	GtkHBox hbox;
 
-	GtkWidget *date_entry;
-	GtkWidget *date_button;
-	
-	GtkWidget *time_entry;
-	GtkWidget *time_popup;
+	/*< private >*/
+	GnomeDateEditPrivate *_priv;
+};
 
-	GtkWidget *cal_label;
-	GtkWidget *cal_popup;
-	GtkWidget *calendar;
-
-	time_t    initial_time;
-
-	int       lower_hour;
-	int       upper_hour;
-	
-	int       flags;
-} GnomeDateEdit;
-
-typedef struct {
+struct _GnomeDateEditClass {
 	GtkHBoxClass parent_class;
+
 	void (*date_changed) (GnomeDateEdit *gde);
 	void (*time_changed) (GnomeDateEdit *gde);
-} GnomeDateEditClass;
+};
 
 guint     gnome_date_edit_get_type        (void);
-GtkWidget *gnome_date_edit_new            (time_t the_time, int show_time, int use_24_format);
-GtkWidget *gnome_date_edit_new_flags      (time_t the_time, GnomeDateEditFlags flags);
+GtkWidget *gnome_date_edit_new            (time_t the_time,
+					   gboolean show_time,
+					   gboolean use_24_format);
+GtkWidget *gnome_date_edit_new_flags      (time_t the_time,
+					   GnomeDateEditFlags flags);
+
+/* Note that everything that can be achieved with gnome_date_edit_new can
+ * be achieved with gnome_date_edit_new_flags, so that's why this call 
+ * is like the _new_flags call */
+void      gnome_date_edit_construct	  (GnomeDateEdit *gde,
+					   time_t the_time,
+					   GnomeDateEditFlags flags);
 
 void      gnome_date_edit_set_time        (GnomeDateEdit *gde, time_t the_time);
+time_t    gnome_date_edit_get_time        (GnomeDateEdit *gde);
 void      gnome_date_edit_set_popup_range (GnomeDateEdit *gde, int low_hour, int up_hour);
-time_t    gnome_date_edit_get_date        (GnomeDateEdit *gde);
 void      gnome_date_edit_set_flags       (GnomeDateEdit *gde, GnomeDateEditFlags flags);
 int       gnome_date_edit_get_flags       (GnomeDateEdit *gde);
 
+time_t    gnome_date_edit_get_initial_time(GnomeDateEdit *gde);
+
+#ifndef GNOME_EXCLUDE_DEPRECATED
+time_t    gnome_date_edit_get_date        (GnomeDateEdit *gde);
+#endif /* GNOME_EXCLUDE_DEPRECATED */
 
 END_GNOME_DECLS
 

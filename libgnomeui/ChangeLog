@@ -1,3 +1,17 @@
+Thu Jul 13 19:12:38 2000  George Lebl <jirka@5z.com>
+
+	* gnome-appbar.[ch]:  Add a private pointer and structure and move
+	  privates in there.  Also make _set_progress a deprecated function
+	  and added _set_progress_percentage to make the naming be more correct
+
+	* gnome-date-edit.[ch]:  Add a private structure, use typedefs in the
+	  standard way, add an accessor for initial_time as it's now a
+	  private member, and rename _get_date to _get_time (_get_date is
+	  still there as a part of the deprecated API), do the GtkArg
+	  dance, use gtk_widget_get_child_requisition instead of
+	  gtk_widget_size_request, fix some documentation and add a
+	  _construct method
+
 Wed Jul 12 16:59:10 2000  George Lebl <jirka@5z.com>
 
 	* gnome-file-entry.h, gnome-icon-entry.h: hide deprecated functions

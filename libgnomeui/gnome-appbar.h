@@ -47,34 +47,17 @@ BEGIN_GNOME_DECLS
 #define GNOME_APPBAR_HAS_STATUS(appbar) (GNOME_APPBAR(appbar)->status != NULL)
 #define GNOME_APPBAR_HAS_PROGRESS(appbar) (GNOME_APPBAR(appbar)->progress != NULL)
 
-typedef struct _GnomeAppBar      GnomeAppBar;
-typedef struct _GnomeAppBarClass GnomeAppBarClass;
-typedef struct _GnomeAppBarMsg GnomeAppBarMsg;
+typedef struct _GnomeAppBar        GnomeAppBar;
+typedef struct _GnomeAppBarPrivate GnomeAppBarPrivate;
+typedef struct _GnomeAppBarClass   GnomeAppBarClass;
+typedef struct _GnomeAppBarMsg     GnomeAppBarMsg;
 
 struct _GnomeAppBar
 {
   GtkHBox parent_widget;
 
-  /* Private; there's no guarantee on the type of these in the
-     future. Statusbar could be a label, entry, GtkStatusbar, or
-     something else; progress could be a label or progress bar; it's
-     all up in the air for now. */
-  GtkWidget * progress;
-  GtkWidget * status;
-  gchar * prompt; /* The text of a prompt, if any. */
-
-  /* Keep it simple; no contexts. 
-     if (status_stack) display_top_of_stack;
-     else if (default_status) display_default;
-     else display_nothing;      */
-  /* Also private by the way */
-  GSList * status_stack;
-  gchar  * default_status;
-
-  gint16 editable_start; /* The first editable position in the interactive
-			  buffer. */
-  gboolean interactive : 1; /* This means status is an entry rather than a
-			       label, for the moment. */
+  /*< private >*/
+  GnomeAppBarPrivate *_priv;
 };
 
 struct _GnomeAppBarClass
@@ -112,11 +95,9 @@ void       gnome_appbar_pop              (GnomeAppBar * appbar);
 /* Nuke the stack. */
 void       gnome_appbar_clear_stack      (GnomeAppBar * appbar);
 
-/* pure sugar - with a bad name, in light of the get_progress name
-   which is not the opposite of set_progress. Maybe this function
-   should die.*/
-void	     gnome_appbar_set_progress	  (GnomeAppBar *appbar,
-					   gfloat percentage);
+/* Sugar function to set the percentage of the progressbar. */
+void	     gnome_appbar_set_progress_percentage	  (GnomeAppBar *appbar,
+							   gfloat percentage);
 /* use GtkProgress functions on returned value */
 GtkProgress* gnome_appbar_get_progress    (GnomeAppBar * appbar);
 
@@ -141,6 +122,11 @@ void       gnome_appbar_construct(GnomeAppBar * ab,
 				  gboolean has_progress,
 				  gboolean has_status,
 				  GnomePreferencesType interactivity);
+
+#ifndef GNOME_EXCLUDE_DEPRECATED
+void	     gnome_appbar_set_progress	(GnomeAppBar *appbar,
+					 gfloat percentage);
+#endif
 
 END_GNOME_DECLS
 

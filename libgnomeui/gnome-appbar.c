@@ -25,19 +25,48 @@
   @NOTATION@
  */
 
-#include "gnome-appbar.h"
-
-#include "libgnome/gnome-util.h"
-#include "libgnomeui/gnome-preferences.h"
-
+#include "config.h"
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 
 #include <string.h> /* for strlen */
 
+#include "gnome-appbar.h"
+
+#include "libgnome/gnome-util.h"
+#include "libgnome/gnome-i18nP.h"
+#include "libgnomeui/gnome-preferences.h"
+
 #include "gnome-uidefs.h"
 
+#ifndef GNOME_ENABLE_DEBUG
 #define GNOME_ENABLE_DEBUG /* to be sure */
+#endif
+
+struct _GnomeAppBarPrivate
+{
+  /* Private; there's no guarantee on the type of these in the
+     future. Statusbar could be a label, entry, GtkStatusbar, or
+     something else; progress could be a label or progress bar; it's
+     all up in the air for now. */
+  GtkWidget * progress;
+  GtkWidget * status;
+  gchar * prompt; /* The text of a prompt, if any. */
+
+  /* Keep it simple; no contexts. 
+     if (status_stack) display_top_of_stack;
+     else if (default_status) display_default;
+     else display_nothing;      */
+  /* Also private by the way */
+  GSList * status_stack;
+  gchar  * default_status;
+
+  gint16 editable_start; /* The first editable position in the interactive
+			  buffer. */
+  gboolean interactive : 1; /* This means status is an entry rather than a
+			       label, for the moment. */
+};
+
 
 static void gnome_appbar_class_init               (GnomeAppBarClass *class);
 static void gnome_appbar_init                     (GnomeAppBar      *ab);
@@ -158,16 +187,16 @@ entry_delete_text_cb(GtkWidget * entry, gint start,
 {
   g_return_if_fail(GNOME_IS_APPBAR(ab));
   g_return_if_fail(GTK_IS_ENTRY(entry));
-  g_return_if_fail(ab->interactive);
+  g_return_if_fail(ab->_priv->interactive);
 
-  if (ab->prompt == NULL) return; /* not prompting, so don't 
+  if (ab->_priv->prompt == NULL) return; /* not prompting, so don't 
 				     interfere. */
 #ifdef GNOME_ENABLE_DEBUG
     g_print("Start is %d, stop is %d, start of editable is %d\n", 
-	    start, stop, ab->editable_start);
+	    start, stop, ab->_priv->editable_start);
 #endif
   
-  if (start < ab->editable_start) {
+  if (start < ab->_priv->editable_start) {
     /* Block the signal, since it's trying to delete text
        that shouldn't be deleted. */
     gtk_signal_emit_stop_by_name(GTK_OBJECT(entry), "delete_text");
@@ -183,7 +212,7 @@ entry_insert_text_cb  (GtkEditable    *entry,
 {
   gint pos; 
 
-  if (ab->prompt == NULL) return; /* not prompting, so don't 
+  if (ab->_priv->prompt == NULL) return; /* not prompting, so don't 
 				     interfere. */
 
 #ifdef HAVE_GTK_EDITABLE_GET_POSITION
@@ -194,12 +223,12 @@ entry_insert_text_cb  (GtkEditable    *entry,
 
 #ifdef GNOME_ENABLE_DEBUG
     g_print("Position is %d, start of editable is %d\n", 
-	    pos, ab->editable_start);
+	    pos, ab->_priv->editable_start);
 #endif
 
-  if (pos < ab->editable_start) {
+  if (pos < ab->_priv->editable_start) {
 
-    /*    gtk_editable_set_position(entry, ab->editable_start); */
+    /*    gtk_editable_set_position(entry, ab->_priv->editable_start); */
     gtk_signal_emit_stop_by_name(GTK_OBJECT(entry), "insert_text");
     /*    gtk_signal_emit_by_name(GTK_OBJECT(entry), "insert_text",
 			    text, length, position); */
@@ -229,10 +258,11 @@ entry_activate_cb(GtkWidget * entry, GnomeAppBar * ab)
 static void
 gnome_appbar_init (GnomeAppBar *ab)
 {
-  ab->default_status = NULL;
-  ab->status_stack   = NULL;
-  ab->editable_start = 0;
-  ab->prompt         = NULL;
+  ab->_priv                 = g_new0(GnomeAppBarPrivate, 1);
+  ab->_priv->default_status = NULL;
+  ab->_priv->status_stack   = NULL;
+  ab->_priv->editable_start = 0;
+  ab->_priv->prompt         = NULL;
 }
 
 
@@ -311,71 +341,71 @@ gnome_appbar_construct(GnomeAppBar * ab,
   box->homogeneous = FALSE;
 
   if (has_progress)
-    ab->progress = gtk_progress_bar_new();
+    ab->_priv->progress = gtk_progress_bar_new();
   else
-    ab->progress = NULL;
+    ab->_priv->progress = NULL;
 
   /*
    * If the progress meter goes on the right then we place it after we
    * create the status line.
    */
   if (has_progress && !gnome_preferences_get_statusbar_meter_on_right ())
-    gtk_box_pack_start (box, ab->progress, FALSE, FALSE, 0);
+    gtk_box_pack_start (box, ab->_priv->progress, FALSE, FALSE, 0);
 
   if ( has_status ) {
     if ( (interactivity == GNOME_PREFERENCES_ALWAYS) ||
 	 ( (interactivity == GNOME_PREFERENCES_USER) &&
 	   gnome_preferences_get_statusbar_interactive()) ) {
-      ab->interactive = TRUE;
+      ab->_priv->interactive = TRUE;
    
-      ab->status = gtk_entry_new();
+      ab->_priv->status = gtk_entry_new();
 
-      gtk_signal_connect (GTK_OBJECT(ab->status), "delete_text",
+      gtk_signal_connect (GTK_OBJECT(ab->_priv->status), "delete_text",
 			  GTK_SIGNAL_FUNC(entry_delete_text_cb),
 			  ab);
-      gtk_signal_connect (GTK_OBJECT(ab->status), "insert_text",
+      gtk_signal_connect (GTK_OBJECT(ab->_priv->status), "insert_text",
 			  GTK_SIGNAL_FUNC(entry_insert_text_cb),
 			  ab);
-      gtk_signal_connect_after(GTK_OBJECT(ab->status), "key_press_event",
+      gtk_signal_connect_after(GTK_OBJECT(ab->_priv->status), "key_press_event",
 			       GTK_SIGNAL_FUNC(entry_key_press_cb),
 			       ab);
-      gtk_signal_connect(GTK_OBJECT(ab->status), "activate",
+      gtk_signal_connect(GTK_OBJECT(ab->_priv->status), "activate",
 			 GTK_SIGNAL_FUNC(entry_activate_cb),
 			 ab);
 
       /* no prompt now */
-      gtk_entry_set_editable(GTK_ENTRY(ab->status), FALSE);
+      gtk_entry_set_editable(GTK_ENTRY(ab->_priv->status), FALSE);
 
-      gtk_box_pack_start (box, ab->status, TRUE, TRUE, 0);
+      gtk_box_pack_start (box, ab->_priv->status, TRUE, TRUE, 0);
     }
     else {
       GtkWidget * frame;
       
-      ab->interactive = FALSE;
+      ab->_priv->interactive = FALSE;
 
       frame = gtk_frame_new (NULL);
       gtk_frame_set_shadow_type (GTK_FRAME(frame), GTK_SHADOW_IN);
       
-      ab->status = gtk_label_new ("");
-      gtk_misc_set_alignment (GTK_MISC (ab->status), 0.0, 0.0);
-      gtk_widget_set_usize (ab->status, 1, -1);
+      ab->_priv->status = gtk_label_new ("");
+      gtk_misc_set_alignment (GTK_MISC (ab->_priv->status), 0.0, 0.0);
+      gtk_widget_set_usize (ab->_priv->status, 1, -1);
       
       gtk_box_pack_start (box, frame, TRUE, TRUE, 0);
-      gtk_container_add (GTK_CONTAINER(frame), ab->status);
+      gtk_container_add (GTK_CONTAINER(frame), ab->_priv->status);
       
       gtk_widget_show (frame);
     }
   }
   else {
-    ab->status = NULL;
-    ab->interactive = FALSE;
+    ab->_priv->status = NULL;
+    ab->_priv->interactive = FALSE;
   }
 
   if (has_progress && gnome_preferences_get_statusbar_meter_on_right ())
-    gtk_box_pack_start (box, ab->progress, FALSE, FALSE, 0);
+    gtk_box_pack_start (box, ab->_priv->progress, FALSE, FALSE, 0);
 
-  if (ab->status) gtk_widget_show (ab->status);
-  if (ab->progress) gtk_widget_show(ab->progress);
+  if (ab->_priv->status) gtk_widget_show (ab->_priv->status);
+  if (ab->_priv->progress) gtk_widget_show(ab->_priv->progress);
 }
 
 
@@ -397,16 +427,16 @@ gnome_appbar_set_prompt (GnomeAppBar * appbar,
 {
   g_return_if_fail(appbar != NULL);
   g_return_if_fail(prompt != NULL);
-  g_return_if_fail(appbar->interactive);
+  g_return_if_fail(appbar->_priv->interactive);
 
   /* Remove anything old. */
-  if (appbar->prompt) {
+  if (appbar->_priv->prompt) {
     gnome_appbar_clear_prompt(appbar);
   }
 
-  appbar->prompt = g_strconcat(prompt, "  ", NULL);
+  appbar->_priv->prompt = g_strconcat(prompt, "  ", NULL);
 
-  if (modal) gtk_grab_add(appbar->status);
+  if (modal) gtk_grab_add(appbar->_priv->status);
 
   gnome_appbar_refresh(appbar);
 }
@@ -424,13 +454,13 @@ void
 gnome_appbar_clear_prompt    (GnomeAppBar * appbar)
 {
   g_return_if_fail(appbar != NULL);
-  g_return_if_fail(appbar->interactive);
+  g_return_if_fail(appbar->_priv->interactive);
 
   /* This isn't really right; most of Gtk would only emit here,
      and then have a clear_prompt_real as default handler. */
   
-  g_free(appbar->prompt);
-  appbar->prompt = NULL;
+  g_free(appbar->_priv->prompt);
+  appbar->_priv->prompt = NULL;
 
   gnome_appbar_refresh(appbar);
 
@@ -454,13 +484,13 @@ gchar *
 gnome_appbar_get_response    (GnomeAppBar * appbar)
 {
   g_return_val_if_fail(appbar != NULL, NULL);
-  g_return_val_if_fail(appbar->interactive, NULL);
-  g_return_val_if_fail(appbar->prompt != NULL, NULL);
+  g_return_val_if_fail(appbar->_priv->interactive, NULL);
+  g_return_val_if_fail(appbar->_priv->prompt != NULL, NULL);
   
   /* This returns an allocated string. */
-  return gtk_editable_get_chars(GTK_EDITABLE(appbar->status),
-				appbar->editable_start, 
-				GTK_ENTRY(appbar->status)->text_length);
+  return gtk_editable_get_chars(GTK_EDITABLE(appbar->_priv->status),
+				appbar->_priv->editable_start, 
+				GTK_ENTRY(appbar->_priv->status)->text_length);
 } 
 
 
@@ -479,29 +509,29 @@ gnome_appbar_refresh           (GnomeAppBar * appbar)
   g_return_if_fail(appbar != NULL);
   g_return_if_fail(GNOME_IS_APPBAR(appbar));
   
-  if (appbar->prompt) {
-    g_return_if_fail(appbar->interactive); /* Just a consistency check */
-    gtk_entry_set_editable(GTK_ENTRY(appbar->status), TRUE);
+  if (appbar->_priv->prompt) {
+    g_return_if_fail(appbar->_priv->interactive); /* Just a consistency check */
+    gtk_entry_set_editable(GTK_ENTRY(appbar->_priv->status), TRUE);
     /* Allow insert_text to work, so we can set the prompt. */
-    appbar->editable_start = 0;
-    gtk_entry_set_text(GTK_ENTRY(appbar->status), appbar->prompt);
+    appbar->_priv->editable_start = 0;
+    gtk_entry_set_text(GTK_ENTRY(appbar->_priv->status), appbar->_priv->prompt);
     /* This has to be after setting the text. */
-    appbar->editable_start = strlen(appbar->prompt);   
-    gtk_entry_set_position(GTK_ENTRY(appbar->status), 
-			   appbar->editable_start);
-    gtk_widget_grab_focus(appbar->status);
+    appbar->_priv->editable_start = strlen(appbar->_priv->prompt);   
+    gtk_entry_set_position(GTK_ENTRY(appbar->_priv->status), 
+			   appbar->_priv->editable_start);
+    gtk_widget_grab_focus(appbar->_priv->status);
   }
   else {
-    if (appbar->interactive) {
-      appbar->editable_start = 0;
-      gtk_entry_set_editable(GTK_ENTRY(appbar->status), FALSE);
-      gtk_grab_remove(appbar->status); /* In case */
+    if (appbar->_priv->interactive) {
+      appbar->_priv->editable_start = 0;
+      gtk_entry_set_editable(GTK_ENTRY(appbar->_priv->status), FALSE);
+      gtk_grab_remove(appbar->_priv->status); /* In case */
     }
 
-    if (appbar->status_stack)
-      gnome_appbar_set_status(appbar, stringstack_top(appbar->status_stack));
-    else if (appbar->default_status)
-      gnome_appbar_set_status(appbar, appbar->default_status);
+    if (appbar->_priv->status_stack)
+      gnome_appbar_set_status(appbar, stringstack_top(appbar->_priv->status_stack));
+    else if (appbar->_priv->default_status)
+      gnome_appbar_set_status(appbar, appbar->_priv->default_status);
     else 
       gnome_appbar_set_status(appbar, "");
   }
@@ -526,10 +556,10 @@ gnome_appbar_set_status       (GnomeAppBar * appbar,
   g_return_if_fail(status != NULL);
   g_return_if_fail(GNOME_IS_APPBAR(appbar));
 
-  if (appbar->interactive) 
-    gtk_entry_set_text(GTK_ENTRY(appbar->status), status);
+  if (appbar->_priv->interactive) 
+    gtk_entry_set_text(GTK_ENTRY(appbar->_priv->status), status);
   else
-    gtk_label_set_text(GTK_LABEL(appbar->status), status);
+    gtk_label_set_text(GTK_LABEL(appbar->_priv->status), status);
 }
 
 
@@ -550,8 +580,9 @@ gnome_appbar_set_default      (GnomeAppBar * appbar,
   g_return_if_fail(default_status != NULL);
   g_return_if_fail(GNOME_IS_APPBAR(appbar));
   
-  if (appbar->default_status) g_free(appbar->default_status);
-  appbar->default_status = g_strdup(default_status);
+  /* g_free handles NULL */
+  g_free(appbar->_priv->default_status);
+  appbar->_priv->default_status = g_strdup(default_status);
   gnome_appbar_refresh(appbar);
 }
 
@@ -574,7 +605,7 @@ gnome_appbar_push             (GnomeAppBar * appbar,
   g_return_if_fail(status != NULL);
   g_return_if_fail(GNOME_IS_APPBAR(appbar));
 
-  appbar->status_stack = stringstack_push(appbar->status_stack, status);
+  appbar->_priv->status_stack = stringstack_push(appbar->_priv->status_stack, status);
   gnome_appbar_refresh(appbar);
 }
 
@@ -594,7 +625,7 @@ gnome_appbar_pop              (GnomeAppBar * appbar)
   g_return_if_fail(appbar != NULL);
   g_return_if_fail(GNOME_IS_APPBAR(appbar));
   
-  appbar->status_stack = stringstack_pop(appbar->status_stack);
+  appbar->_priv->status_stack = stringstack_pop(appbar->_priv->status_stack);
   gnome_appbar_refresh(appbar);
 }
 
@@ -614,33 +645,45 @@ gnome_appbar_clear_stack      (GnomeAppBar * appbar)
   g_return_if_fail(appbar != NULL);
   g_return_if_fail(GNOME_IS_APPBAR(appbar));
 
-  stringstack_free(appbar->status_stack);
-  appbar->status_stack = NULL;
+  stringstack_free(appbar->_priv->status_stack);
+  appbar->_priv->status_stack = NULL;
   gnome_appbar_refresh(appbar);
 }
 
 
 /**
- * gnome_appbar_set_progress
+ * gnome_appbar_set_progress_precentage
  * @appbar: Pointer to GNOME appbar object
  * @percentage: Percentage to which progress bar should be set.
  *
  * Description:
  * Sets progress bar to the given percentage.
- * Pure sugar - with a bad name, in light of the get_progress name
- * which is not the opposite of set_progress. Maybe this function
- * should die. 
+ **/
+
+void
+gnome_appbar_set_progress_percentage(GnomeAppBar *appbar,
+				     gfloat percentage)
+{
+  g_return_if_fail (appbar != NULL);
+  g_return_if_fail (appbar->_priv->progress != NULL);
+  g_return_if_fail (GNOME_IS_APPBAR(appbar));
+
+  gtk_progress_bar_update(GTK_PROGRESS_BAR(appbar->_priv->progress), percentage);
+}
+
+/**
+ * gnome_appbar_set_progress
+ *
+ * Description:
+ * Deprecated, use #gnome_appbar_set_progress_percentage
  **/
 
 void
 gnome_appbar_set_progress(GnomeAppBar *appbar,
 			  gfloat percentage)
 {
-  g_return_if_fail (appbar != NULL);
-  g_return_if_fail (appbar->progress != NULL);
-  g_return_if_fail (GNOME_IS_APPBAR(appbar));
-
-  gtk_progress_bar_update(GTK_PROGRESS_BAR(appbar->progress), percentage);
+	g_warning(_("gnome_appbar_set_progress deprecated, use gnome_appbar_set_progress_percentage"));
+	gnome_appbar_set_progress_percentage(appbar, percentage);
 }
 
 
@@ -661,10 +704,10 @@ GtkProgress*
 gnome_appbar_get_progress    (GnomeAppBar * appbar)
 {
   g_return_val_if_fail(appbar != NULL, NULL);
-  g_return_val_if_fail(appbar->progress != NULL, NULL);
+  g_return_val_if_fail(appbar->_priv->progress != NULL, NULL);
   g_return_val_if_fail(GNOME_IS_APPBAR(appbar), NULL);
 
-  return GTK_PROGRESS(appbar->progress);
+  return GTK_PROGRESS(appbar->_priv->progress);
 }
 
 static void
@@ -681,8 +724,13 @@ gnome_appbar_destroy (GtkObject *object)
 
   gnome_appbar_clear_stack(ab);
   /* g_free checks if these are NULL */
-  g_free(ab->default_status);
-  g_free(ab->prompt);
+  g_free(ab->_priv->default_status);
+  ab->_priv->default_status = NULL;;
+  g_free(ab->_priv->prompt);
+  ab->_priv->prompt = NULL;
+
+  g_free(ab->_priv);
+  ab->_priv = NULL;
 
   GTK_OBJECT_CLASS (parent_class)->destroy (object);
 }
