@@ -69,7 +69,7 @@ gnome_win_hints_set_layer(GtkWidget *window, GnomeWinLayer layer)
     }
   else
     {
-      CARD32 data[1];
+      long data[1];
       
       data[0] = layer;
       XChangeProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_LAYER,
@@ -101,7 +101,7 @@ gnome_win_hints_get_layer(GtkWidget *window)
     {
       if (r_type == XA_CARDINAL && r_format == 32 && count == 1)
 	{
-	  layer = ((CARD32 *)prop)[0];
+	  layer = ((long *)prop)[0];
 	  mylayer = (GnomeWinLayer)layer;
 	  XFree(prop);
 	  gdk_error_warnings = prev_error;
@@ -148,7 +148,7 @@ gnome_win_hints_set_state(GtkWidget *window, GnomeWinState state)
     }
   else
     {
-      CARD32 data[1];
+      long data[1];
       
       data[0] = (CARD32)state;
       XChangeProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_STATE,
@@ -179,8 +179,8 @@ gnome_win_hints_get_state(GtkWidget *window)
     {
       if (r_type == XA_CARDINAL && r_format == 32 && count == 2)
 	{
-	  state = (GnomeWinState)(((CARD32 *)prop)[0]) && 
-	    (GnomeWinState)(((CARD32 *)prop)[1]);
+	  state = (GnomeWinState)(((long *)prop)[0]) && 
+	    (GnomeWinState)(((long *)prop)[1]);
 	  XFree(prop);
 	  gdk_error_warnings = prev_error;
 	  return state;
@@ -221,7 +221,7 @@ gnome_win_hints_set_hints(GtkWidget *window,  GnomeWinHints skip)
     }
   else
     {
-      CARD32 data[1];
+      long data[1];
       
       data[0] = (CARD32)skip;
       XChangeProperty(GDK_DISPLAY(), priv->xwindow, _XA_WIN_HINTS,
@@ -252,8 +252,8 @@ gnome_win_hints_get_hints(GtkWidget *window)
     {
       if (r_type == XA_CARDINAL && r_format == 32 && count == 2)
 	{
-	  hints = (GnomeWinState)(((CARD32 *)prop)[0]) && 
-	    (GnomeWinState)(((CARD32 *)prop)[1]);
+	  hints = (GnomeWinState)(((long *)prop)[0]) && 
+	    (GnomeWinState)(((long *)prop)[1]);
 	  XFree(prop);
 	  gdk_error_warnings = prev_error;
 	  return hints;
@@ -268,7 +268,7 @@ void
 gnome_win_hints_set_workspace(GtkWidget *window, gint workspace)
 {
   GdkWindowPrivate *priv;
-  CARD32 data[1];
+  long data[1];
   gint prev_error;
   
   prev_error = gdk_error_warnings;
@@ -303,7 +303,7 @@ gnome_win_hints_get_workspace(GtkWidget *window)
     {
       if (r_type == XA_CARDINAL && r_format == 32 && count == 1)
 	{
-	  ws = (gint)(((CARD32 *)prop)[0]); 
+	  ws = (gint)(((long *)prop)[0]); 
 	  XFree(prop);
 	  gdk_error_warnings = prev_error;
 	  return ws;
@@ -355,7 +355,7 @@ gnome_win_hints_get_current_workspace(void)
     {
       if (r_type == XA_CARDINAL && r_format == 32 && count == 1)
         {
-	  CARD32 n = *(CARD32 *)prop;
+	  CARD32 n = *(long *)prop;
 	  
 	  ws = (gint)n;
         }
@@ -416,7 +416,7 @@ gnome_win_hints_get_workspace_count(void)
     {
       if (r_type == XA_CARDINAL && r_format == 32 && count == 1)
         {
-	  CARD32 n = *(CARD32 *)prop;
+	  CARD32 n = *(long *)prop;
 	  wscount = (gint)n;
         }
       XFree(prop);
@@ -429,7 +429,7 @@ void
 gnome_win_hints_set_expanded_size(GtkWidget *window, gint x, gint y, gint width, gint height)
 {
   GdkWindowPrivate *priv;
-  CARD32 data[4];
+  long data[4];
   gint prev_error;
   
   prev_error = gdk_error_warnings;
@@ -467,13 +467,13 @@ gnome_win_hints_get_expanded_size(GtkWidget *window, gint *x, gint *y, gint *wid
       if (r_type == XA_CARDINAL && r_format == 32 && count == 4)
 	{
 	  if (x)
-	    *x = (gint)(((CARD32 *)prop)[0]);
+	    *x = (gint)(((long *)prop)[0]);
 	  if (y)
-	    *y = (gint)(((CARD32 *)prop)[1]);
+	    *y = (gint)(((long *)prop)[1]);
 	  if (width)
-	    *width = (gint)(((CARD32 *)prop)[2]);
+	    *width = (gint)(((long *)prop)[2]);
 	  if (height)
-	    *height = (gint)(((CARD32 *)prop)[3]);
+	    *height = (gint)(((long *)prop)[3]);
 	  XFree(prop);
 	  gdk_error_warnings = prev_error;
 	  return TRUE;
@@ -488,7 +488,7 @@ void
 gnome_win_hints_set_app_state(GtkWidget *window,  GnomeWinAppState state)
 {
   GdkWindowPrivate *priv;
-  CARD32 data[1];
+  long data[1];
   gint prev_error;
   
   prev_error = gdk_error_warnings;
@@ -523,7 +523,7 @@ gnome_win_hints_get_app_state(GtkWidget *window)
     {
       if (r_type == XA_CARDINAL && r_format == 32 && count == 2)
 	{
-	  state = (GnomeWinAppState)(((CARD32 *)prop)[0]);
+	  state = (GnomeWinAppState)(((long *)prop)[0]);
 	  XFree(prop);
 	  gdk_error_warnings = prev_error;
 	  return state;
@@ -538,7 +538,7 @@ void
 gnome_win_hints_set_moving(GtkWidget *window, gboolean moving)
 {
   GdkWindowPrivate *priv;
-  CARD32 data[1];
+  long data[1];
   gint prev_error;
   
   prev_error = gdk_error_warnings;
@@ -574,7 +574,7 @@ gnome_win_hints_wm_exists(void)
     {
       if (r_type == XA_CARDINAL && r_format == 32 && count == 1)
         {
-	  Window n = *(CARD32 *)prop;
+	  Window n = *(long *)prop;
 	  if (XGetWindowProperty(GDK_DISPLAY(), n,
 				 _XA_WIN_SUPPORTING_WM_CHECK, 0, 1, False, 
 				 XA_CARDINAL,
