@@ -1,3 +1,9 @@
+1998-02-19  Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-session.c: Removed. Was replaced by gnome-client.
+
+	* gnome-session.h: same as above.
+
 Wed Feb 18 13:52:00 PST 1998  Christoph Toshok  <toshok@hungry.com>
 	* gnome-app-helper.c (gnome_app_do_menu_creation): If any items in
 	a menu have GNOME_APP_PIXMAP_STOCK, use gnome_stock_menu_item for
