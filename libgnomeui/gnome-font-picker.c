@@ -37,8 +37,6 @@
 
 
 
-#include "gnome-font-picker-ico.h"
-
 #define DEF_FONT_NAME "-adobe-times-medium-r-normal-*-14-*-*-*-p-*-iso8859-1"
 #define DEF_PREVIEW_TEXT "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 

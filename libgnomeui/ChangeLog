@@ -1,3 +1,8 @@
+1998-10-25  Kjartan Maraas  <kmaraas@fib.hl.no>
+
+	* gnome-font-picker.c: Removed #include "gnome-font-picker-ico.h"
+	to make it compile again
+	
 1998-10-24  David Abilleira  <odaf@nexo.es>
 
 	* gnome-font-picker.c: Now it uses GNOME_STOCK_PIXMAP_FONT instead of
