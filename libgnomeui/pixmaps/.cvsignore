@@ -2,4 +2,4 @@ Makefile
 Makefile.in
 .deps
 .xvpics
-gnome-stock-imlib.h
+gnome-stock-pixbufs.h

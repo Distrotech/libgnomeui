@@ -1,3 +1,15 @@
+2000-09-30  Martin Baulig  <baulig@suse.de>
+
+	* gnome-stock.c: Switch to inline pixbufs.
+	(default_entries_data): Removed "width" and "height".
+	(stock_pixmaps): Use gdk_pixbuf_new_from_inline() with the
+	inline pixbufs from pixmaps/gnome-stock-pixbufs.h.
+
+	* pixmaps/copyright.txt: New file. This will be inserted at
+	the head of the generated gnome-stock-pixbufs.h.
+	* pixmaps/Makefile.am: Create gnome-stock-pixbufs.h from the
+	PNG images using GTK+ 2.0's make-inline-pixbuf script.
+
 2000-09-28  Martin Baulig  <baulig@suse.de>
 
 	* gnome-font-selector.[ch]: Moved to libcompat.
