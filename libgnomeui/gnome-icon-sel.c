@@ -33,12 +33,13 @@
 
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
-#include "libgnome/gnome-mime.h"
 #include "libgnome/gnome-i18nP.h"
 #include "gnome-icon-list.h"
 #include "gnome-uidefs.h"
 
 #include "gnome-icon-sel.h"
+
+#include <libgnomevfs/gnome-vfs-mime.h>
 
 #define ICON_SIZE 48
 
@@ -295,7 +296,7 @@ gnome_icon_selection_add_directory (GnomeIconSelection * gis,
 #endif
     if ( *(de->d_name) == '.' ) continue; /* skip dotfiles */
 
-    mimetype = gnome_mime_type(de->d_name);
+    mimetype = gnome_vfs_mime_type_from_name(de->d_name);
     if (mimetype != NULL &&
 	strncmp(mimetype, "image", strlen("image")) == 0 ) {
       gchar * full_path = g_concat_dir_and_file(dir, de->d_name);

@@ -29,9 +29,10 @@
 #include <gtk/gtk.h>
 #include <libgnome/gnome-i18nP.h>
 #include <libgnome/gnome-util.h>
-#include <libgnome/gnome-mime-info.h>
 #include "gtkpixmapmenuitem.h"
 #include "gnome-stock.h"
+
+#include <libgnomevfs/gnome-vfs-mime.h>
 
 struct _GnomeFileSaverPrivate {
         GtkWidget *filename_entry;

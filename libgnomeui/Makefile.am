@@ -293,7 +293,7 @@ stamp-gnomemarshal.h: @REBUILD@ gnomemarshal.list
 	&& rm -f xgen-gmh xgen-gmh~ \
 	&& echo timestamp > $(@F)
 
-gnomemarshal.c: @REBUILD@ stamp-gnomemarshal.h
+gnomemarshal.h gnomemarshal.c: @REBUILD@ stamp-gnomemarshal.h
 	cd $(srcdir) \
 	&& glib-genmarshal --prefix=gnome_marshal gnomemarshal.list --body >> xgen-gmc \
 	&& cp xgen-gmc gnomemarshal.c \

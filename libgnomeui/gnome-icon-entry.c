@@ -39,7 +39,6 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkalignment.h>
 #include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-mime.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-ditem.h"
 #include "libgnome/libgnomeP.h"
@@ -51,6 +50,7 @@
 #include "gnome-dialog.h"
 #include "gnome-stock.h"
 
+#include <libgnomevfs/gnome-vfs-mime.h>
 #include <libgnomevfs/gnome-vfs-file-info.h>
 
 #define ICON_SIZE 48
@@ -412,7 +412,7 @@ drag_data_received (GtkWidget        *widget,
     for (li = files; li != NULL; li = li->next) {
 	const char *mimetype;
 
-	mimetype = gnome_mime_type (li->data);
+	mimetype = gnome_vfs_mime_type_from_name (li->data);
 
 	if (mimetype && !strcmp (mimetype, "application/x-gnome-app-info")) {
 	    /* hmmm a desktop, try loading the icon from that */

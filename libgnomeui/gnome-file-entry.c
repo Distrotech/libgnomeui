@@ -44,9 +44,10 @@
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-util.h"
-#include "libgnome/gnome-mime.h"
 #include "libgnomeui/gnome-preferences.h"
 #include "gnome-file-entry.h"
+
+#include <libgnomevfs/gnome-vfs-mime.h>
 
 struct _GnomeFileEntryPrivate {
 	GtkWidget *gentry;
