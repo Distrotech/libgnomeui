@@ -2,6 +2,8 @@ Thu Sep 14 19:44:26 2000  George Lebl <jirka@5z.com>
 
 	* gnome-app.c: use GParam
 
+	* gnome-helpsys.c: use g_object_set/new since we now use GParam here
+
 Thu Sep 14 18:45:54 2000  George Lebl <jirka@5z.com>
 
 	* gnome-file-entry.c, gnome-icon-entry.c, gnome-textfu.c: use
