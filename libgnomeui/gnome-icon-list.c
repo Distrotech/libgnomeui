@@ -951,6 +951,8 @@ gil_destroy (GtkObject *object)
 
 	if (gil->adj)
 		gtk_object_unref (GTK_OBJECT (gil->adj));
+	if (gil->hadj)
+		gtk_object_unref (GTK_OBJECT (gil->hadj));
 	
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(*GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -1650,8 +1652,19 @@ gnome_icon_list_set_hadjustment (GnomeIconList *gil, GtkAdjustment *hadj)
 
 	gil->hadj = hadj;
 
-	if (gil->hadj)
+	if (gil->hadj) {
 		gtk_object_ref (GTK_OBJECT (gil->hadj));
+		/* the horizontal adjustment is not used, so set some default
+		 * values to indicate that everything is visible horizontally
+		 */
+		gil->hadj->lower = 0.0;
+		gil->hadj->upper = 1.0;
+		gil->hadj->value = 0.0;
+		gil->hadj->step_increment = 1.0;
+		gil->hadj->page_increment = 1.0;
+		gil->hadj->page_size = 1.0;
+		gtk_adjustment_changed (gil->hadj);
+	}
 
 	if (!gil->hadj || !old_adjustment)
 		gtk_widget_queue_resize (GTK_WIDGET (gil));

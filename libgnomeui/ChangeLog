@@ -1,3 +1,11 @@
+1999-02-11  James Henstridge  <james@daa.com.au>
+
+	* gnome-icon-list.c(gnome_icon_list_set_hadjustment): When a
+	horizontal adjustment is given for the GnomeIconList, set the values
+	in the adjustment so that page_size = lower-upper, since the icon
+	list doesn't scroll horizontally.
+	(gil_destroy): unref the horizontal adjustment if we have one.
+
 1999-02-10  Felix Bellaby <felix@pooh.u-net.com>
 
 	* gnome-client.c (client_set_restart_command, client_set_clone_command,
