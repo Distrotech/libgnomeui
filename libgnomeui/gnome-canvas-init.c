@@ -223,5 +223,4 @@ static void
 libgnomecanvas_pre_args_parse (GnomeProgram *program,
 			       GnomeModuleInfo *mod_info)
 {
-	libgnomecanvas_init ();
 }
