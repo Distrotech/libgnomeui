@@ -327,7 +327,7 @@ static void
 app_build_children (GladeXML *self, GtkWidget *parent,
 		    GladeWidgetInfo *info)
 {
-    int i, j;
+    int i;
 
     for (i = 0; i < info->n_children; i++) {
 	GladeChildInfo *cinfo;

@@ -56,6 +56,7 @@
 
 #include <gtk/gtkversion.h>
 #include <gtk/gtkmain.h>
+#include <gtk/gtkaccelmap.h>
 
 /*****************************************************************************
  * libgnomeui

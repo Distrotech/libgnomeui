@@ -1,3 +1,11 @@
+2001-12-08  Rodrigo Moya <rodrigo@gnome-db.org>
+
+	* glade/glade-gnome.c (app_build_children):
+	* libgnomeui/gnome-messagebox.c: removed unused variable
+
+	* libgnomeui/gnome-ui-init.c: #include gtkaccelmap.h to avoid
+	warnings
+
 2001-12-08  Murray Cumming  <murrayc@usa.net>
 
 	* libgnomeui/gnome-font-picker.h: font_set default signal

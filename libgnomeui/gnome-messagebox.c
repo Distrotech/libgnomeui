@@ -94,7 +94,6 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 	GtkStyle *style;
         const gchar* title_prefix = NULL;
         const gchar* appname;
-	gint i = 0;
 
 	g_return_if_fail (messagebox != NULL);
 	g_return_if_fail (GNOME_IS_MESSAGE_BOX (messagebox));
