@@ -34,7 +34,7 @@ typedef enum {
         /* update struct when adding enum values */
 	GNOME_PIXMAP_SIMPLE, /* No alpha blending */
 	GNOME_PIXMAP_COLOR   /* */
-} GnomePixmapDraw;
+} GnomePixmapDrawMode;
 
 #define GNOME_PIXMAP(obj)         GTK_CHECK_CAST (obj, gnome_pixmap_get_type (), GnomePixmap)
 #define GNOME_PIXMAP_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_pixmap_get_type (), GnomePixmapClass)
@@ -56,22 +56,27 @@ struct _GnomePixmap {
 	 *                          -  hp + jrb + quartic + Jesse Ventura + GW Bush 
 	 */
 
-	GdkPixbuf *original_image;
-
-	GdkPixbuf *original_scaled_image;
-	GdkBitmap *original_scaled_mask;
+	GdkPixbuf *provided_image;
 
         struct {
                 GdkPixbuf *pixbuf;
                 GdkBitmap *mask;
 		gfloat saturation;
 		gboolean pixelate;
-        } image_data[5]; /* the five states */
+        } provided[5]; /* the five states */
 
+	GdkPixbuf *generated_scaled_image;
+	GdkBitmap *generated_scaled_mask;
+        
+        struct {
+                GdkPixbuf *pixbuf;
+                GdkBitmap *mask;
+        } generated[5]; /* the five states */
+        
 	gint width, height;
 	gint alpha_threshold;
 
-	GnomePixmapDraw mode : 2;
+	GnomePixmapDrawMode mode : 2;
 };
 
 
@@ -108,16 +113,16 @@ void            gnome_pixmap_set_pixbuf_at_state     (GnomePixmap      *gpixmap,
 						      GtkStateType      state,
 						      GdkPixbuf        *pixbuf,
 						      GdkBitmap        *mask);
-void            gnome_pixmap_set_pixbufs_at_state    (GnomePixmap      *gpixmap,
-						      GdkPixbuf        *pixbufs[5],
-						      GdkBitmap        *masks[5]);
+void            gnome_pixmap_set_state_pixbufs       (GnomePixmap      *gpixmap,
+                                                      GdkPixbuf        *pixbufs[5],
+                                                      GdkBitmap        *masks[5]);
 void            gnome_pixmap_set_draw_vals           (GnomePixmap      *gpixmap,
 						      GtkStateType      state,
 						      gfloat            saturation,
 						      gboolean          pixelate);
 void            gnome_pixmap_set_draw_mode           (GnomePixmap      *gpixmap,
-						      GnomePixmapDraw   mode);
-GnomePixmapDraw gnome_pixmap_get_draw_mode           (GnomePixmap      *gpixmap);
+						      GnomePixmapDrawMode   mode);
+GnomePixmapDrawMode gnome_pixmap_get_draw_mode       (GnomePixmap      *gpixmap);
 void            gnome_pixmap_clear                   (GnomePixmap      *gpixmap);
 void            gnome_pixmap_set_alpha_threshold     (GnomePixmap      *gpixmap,
 						      gint              alpha_threshold);
@@ -125,20 +130,5 @@ gint            gnome_pixmap_get_alpha_threshold     (GnomePixmap      *gpixmap)
 
 
 END_GNOME_DECLS
-
-/* PRIVATE INTERNAL FUNCTIONS DO NOT USE */
-/* FIXME create a private header and move this there. */
-GdkPixbuf      *gnome_pixbuf_build_insensitive       (GdkPixbuf        *pixbuf,
-						      guchar            red_bg,
-						      guchar            green_bg,
-						      guchar            blue_bg);
-GdkPixbuf      *gnome_pixbuf_build_grayscale         (GdkPixbuf        *pixbuf);
-void            gnome_pixbuf_render                  (GdkPixbuf        *pixbuf,
-						      GdkPixmap       **pixmap,
-						      GdkBitmap       **mask,
-						      gint              alpha_threshold);
-
-
-
 
 #endif /* __GNOME_PIXMAP_H__ */

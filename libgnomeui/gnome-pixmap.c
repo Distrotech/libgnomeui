@@ -32,9 +32,26 @@ static void gnome_pixmap_init          (GnomePixmap      *gpixmap);
 static void gnome_pixmap_destroy       (GtkObject        *object);
 static gint gnome_pixmap_expose        (GtkWidget        *widget,
 					GdkEventExpose   *event);
+static void gnome_pixmap_size_request  (GtkWidget        *widget,
+                                        GtkRequisition    *requisition);
 
-static void clear_image (GnomePixmap *gpixmap, GtkStateType state);
-static void clear_old_images           (GnomePixmap *gpixmap);
+static void clear_provided_state_image (GnomePixmap *gpixmap,
+                                        GtkStateType state);
+static void clear_generated_state_image(GnomePixmap *gpixmap,
+                                        GtkStateType state);
+static void clear_provided_image       (GnomePixmap *gpixmap);
+static void clear_scaled_image         (GnomePixmap *gpixmap);
+static void clear_all_images           (GnomePixmap *gpixmap);
+static void clear_generated_images     (GnomePixmap *gpixmap);
+static void generate_image             (GnomePixmap *gpixmap,
+                                        GtkStateType state);
+static void set_size                   (GnomePixmap *gpixmap,
+                                        gint width, gint height);
+
+static GdkPixbuf* saturate_and_pixelate(GdkPixbuf *pixbuf,
+                                        gfloat saturation, gboolean pixelate);
+
+static GdkBitmap* create_mask(GnomePixmap *gpixmap, GdkPixbuf *pixbuf);
 
 static GtkMiscClass *parent_class = NULL;
 
@@ -82,9 +99,9 @@ gnome_pixmap_init (GnomePixmap *gpixmap)
 
         GTK_WIDGET_SET_FLAGS(GTK_WIDGET(gpixmap), GTK_NO_WINDOW);
 
-        /* Default to pixmap mode, store data on
-           server */
-	gpixmap->original_image = NULL;
+	gpixmap->provided_image = NULL;
+        gpixmap->generated_scaled_image = NULL;
+        gpixmap->generated_scaled_mask = NULL;
 
 	gpixmap->width = -1;
 	gpixmap->height = -1;
@@ -92,14 +109,17 @@ gnome_pixmap_init (GnomePixmap *gpixmap)
 	gpixmap->mode = GNOME_PIXMAP_SIMPLE;
 
         for (i = 0; i < 5; i ++) {
-                gpixmap->image_data[i].pixbuf = NULL;
-                gpixmap->image_data[i].mask = NULL;
-		gpixmap->image_data[i].saturation = 1.0;
-		gpixmap->image_data[i].pixelate = FALSE;
+                gpixmap->generated[i].pixbuf = NULL;
+                gpixmap->generated[i].mask = NULL;
+
+                gpixmap->provided[i].pixbuf = NULL;
+                gpixmap->provided[i].mask = NULL;
+		gpixmap->provided[i].saturation = 1.0;
+		gpixmap->provided[i].pixelate = FALSE;
 
 		if (i == GTK_STATE_INSENSITIVE) {
-			gpixmap->image_data[i].saturation = 0.8;
-			gpixmap->image_data[i].pixelate = TRUE;
+			gpixmap->provided[i].saturation = 0.8;
+			gpixmap->provided[i].pixelate = TRUE;
 		}
         }
 }
@@ -118,6 +138,7 @@ gnome_pixmap_class_init (GnomePixmapClass *class)
 	parent_class = gtk_type_class (gtk_misc_get_type ());
 
 	widget_class->expose_event = gnome_pixmap_expose;
+        widget_class->size_request = gnome_pixmap_size_request;
 }
 
 static void
@@ -130,87 +151,59 @@ gnome_pixmap_destroy (GtkObject *object)
 
 	gpixmap = GNOME_PIXMAP (object);
 
-        clear_old_images(gpixmap);
+        clear_all_images(gpixmap);
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
 static void
-generate_state (GnomePixmap *gpixmap, gint state)
+gnome_pixmap_size_request  (GtkWidget        *widget,
+                            GtkRequisition    *requisition)
 {
-	/* Make sure we're clean */
-	clear_image (gpixmap, state);
+        /* We base size on the max of all provided images if w,h are -1
+           else the scaled "main" image size (gpixmap->width, gpixmap->height) */
+        gint maxwidth = 0;
+        gint maxheight = 0;
+        int i;
+        GnomePixmap *gpixmap;
 
-	if (gpixmap->image_data[state].saturation == 1.0) {
-		gpixmap->image_data[state].pixbuf = gpixmap->original_scaled_image;
-		gpixmap->image_data[state].mask = gpixmap->original_scaled_mask;
+        gpixmap = GNOME_PIXMAP(widget);
+        
+        if (gpixmap->width >= 0 &&
+            gpixmap->height >= 0) {
+                /* shortcut if both sizes are set */
+                maxwidth = gpixmap->width;
+                maxheight = gpixmap->height;
+        } else {
+                if (gpixmap->provided_image != NULL) {
+                        maxwidth = MAX(maxwidth, gdk_pixbuf_get_width(gpixmap->provided_image));
+                        maxheight = MAX(maxheight, gdk_pixbuf_get_height(gpixmap->provided_image));
+                }
+                
+                i = 0;
+                
+                while (i < 5) {
+                        GdkPixbuf *pix = gpixmap->provided[i].pixbuf;
+                        
+                        if (pix != NULL) {
+                                maxwidth = MAX(maxwidth, gdk_pixbuf_get_width(pix));
+                                maxheight = MAX(maxheight, gdk_pixbuf_get_height(pix));
+                        }
+                        
+                        ++i;
+                }
 
-		if (gpixmap->original_scaled_image)
-			gdk_pixbuf_ref (gpixmap->original_scaled_image);
-		if (gpixmap->original_scaled_mask)
-			gdk_bitmap_ref (gpixmap->original_scaled_mask);
-		return;
-	} else if (gpixmap->original_scaled_image != NULL) {
-		GdkPixbuf *target;
-		gint i, j;
-		gint width, height, has_alpha, rowstride;
-		guchar *target_pixels;
-		guchar *original_pixels;
-		guchar *current_pixel;
-		guchar intensity;
+                /* fix the size that was specified, if one was. */
+                if (gpixmap->width >= 0)
+                        maxwidth = gpixmap->width;
+                
+                if (gpixmap->height >= 0)
+                        maxheight = gpixmap->height;
+        }
 
-		has_alpha = gdk_pixbuf_get_has_alpha (gpixmap->original_scaled_image);
-		width = gdk_pixbuf_get_width (gpixmap->original_scaled_image);
-		height = gdk_pixbuf_get_height (gpixmap->original_scaled_image);
-		rowstride = gdk_pixbuf_get_rowstride (gpixmap->original_scaled_image);
-		target = gdk_pixbuf_new (ART_PIX_RGB,
-					 has_alpha,
-					 gdk_pixbuf_get_bits_per_sample (gpixmap->original_scaled_image),
-					 width, height);
-		target_pixels = gdk_pixbuf_get_pixels (target);
-		original_pixels = gdk_pixbuf_get_pixels (gpixmap->original_scaled_image);
-
-		for (i = 0; i < height; i++) {
-			for (j = 0; j < width; j++) {
-				current_pixel = original_pixels + i*rowstride + j*(has_alpha?4:3);
-				intensity = INTENSITY (*(current_pixel), *(current_pixel + 1), *(current_pixel + 2));
-				if (gpixmap->image_data[state].pixelate && (i+j)%2 == 0) {
-					*(target_pixels + i*rowstride + j*(has_alpha?4:3)) = intensity/2 + 127;
-					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 1) = intensity/2 + 127;
-					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 2) = intensity/2 + 127;
-				} else if (gpixmap->image_data[state].pixelate) {
-#define DARK_FACTOR 0.7
-					*(target_pixels + i*rowstride + j*(has_alpha?4:3)) =
-						(guchar) (((1.0 - gpixmap->image_data[state].saturation) * intensity
-							   + gpixmap->image_data[state].saturation * (*(current_pixel)))) * DARK_FACTOR;
-					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 1) =
-						(guchar) (((1.0 - gpixmap->image_data[state].saturation) * intensity
-							   + gpixmap->image_data[state].saturation * (*(current_pixel + 1)))) * DARK_FACTOR;
-					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 2) =
-						(guchar) (((1.0 - gpixmap->image_data[state].saturation) * intensity
-							   + gpixmap->image_data[state].saturation * (*(current_pixel + 2)))) * DARK_FACTOR;
-				} else {
-					*(target_pixels + i*rowstride + j*(has_alpha?4:3)) =
-						(guchar) ((1.0 - gpixmap->image_data[state].saturation) * intensity
-							  + gpixmap->image_data[state].saturation * (*(current_pixel)));
-					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 1) =
-						(guchar) ((1.0 - gpixmap->image_data[state].saturation) * intensity
-							  + gpixmap->image_data[state].saturation * (*(current_pixel + 1)));
-					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 2) =
-						(guchar) ((1.0 - gpixmap->image_data[state].saturation) * intensity
-							  + gpixmap->image_data[state].saturation * (*(current_pixel + 2)));
-				}
-				if (has_alpha)
-					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 3) = *(original_pixels + i*rowstride + j*(has_alpha?4:3) + 3);
-			}
-		}
-
-		gpixmap->image_data[state].pixbuf = target;
-		gpixmap->image_data[state].mask = gpixmap->original_scaled_mask;
-		if (gpixmap->original_scaled_mask)
-			gdk_pixmap_ref (gpixmap->image_data[state].mask);
-	}
+        requisition->width = maxwidth + GTK_MISC (gpixmap)->xpad * 2;
+        requisition->height = maxheight + GTK_MISC (gpixmap)->ypad * 2;
 }
 
 static void
@@ -228,16 +221,13 @@ paint_with_pixbuf (GnomePixmap *gpixmap, GdkRectangle *area)
         misc = GTK_MISC (gpixmap);
         widget = GTK_WIDGET (gpixmap);
 
-	/* We find the pixmap */
-        draw_source = gpixmap->image_data[GTK_WIDGET_STATE (widget)].pixbuf;
-        draw_mask = gpixmap->image_data[GTK_WIDGET_STATE (widget)].mask;
-
-	if (draw_source == NULL)
-		generate_state (gpixmap, GTK_WIDGET_STATE (widget));
-
-        draw_source = gpixmap->image_data[GTK_WIDGET_STATE (widget)].pixbuf;
-        draw_mask = gpixmap->image_data[GTK_WIDGET_STATE (widget)].mask;
-
+        /* Ensure we have this state, if we can think of a way to have
+           it */
+        generate_image (gpixmap, GTK_WIDGET_STATE (widget));
+        
+        draw_source = gpixmap->generated[GTK_WIDGET_STATE (widget)].pixbuf;
+        draw_mask = gpixmap->generated[GTK_WIDGET_STATE (widget)].mask;
+        
         if (draw_source == NULL)
 		return;
 
@@ -368,165 +358,65 @@ gnome_pixmap_expose (GtkWidget *widget, GdkEventExpose *event)
  */
 
 static void
-clear_image(GnomePixmap *gpixmap, GtkStateType state)
+set_state_pixbuf(GnomePixmap* gpixmap, GtkStateType state, GdkPixbuf* pixbuf, GdkBitmap* mask)
 {
-        if (gpixmap->image_data[state].pixbuf != NULL) {
-                gdk_pixbuf_unref(gpixmap->image_data[state].pixbuf);
-                gpixmap->image_data[state].pixbuf = NULL;
-        }
+        clear_generated_state_image(gpixmap, state);
+        clear_provided_state_image(gpixmap, state);
 
-        if (gpixmap->image_data[state].mask != NULL) {
-                gdk_bitmap_unref(gpixmap->image_data[state].mask);
-                gpixmap->image_data[state].mask = NULL;
+        g_return_if_fail(gpixmap->provided[state].pixbuf == NULL);
+        g_return_if_fail(gpixmap->provided[state].mask == NULL);
+
+        gpixmap->provided[state].pixbuf = pixbuf;
+        if (pixbuf)
+                gdk_pixbuf_ref(pixbuf);
+
+        gpixmap->provided[state].mask = mask;
+        if (mask)
+                gdk_bitmap_ref(mask);
+
+        if (GTK_WIDGET_VISIBLE(gpixmap)) {
+                gtk_widget_queue_resize(GTK_WIDGET(gpixmap));
+                gtk_widget_queue_clear(GTK_WIDGET(gpixmap));
         }
 }
 
 static void
-clear_old_images(GnomePixmap *gpixmap)
+set_state_pixbufs(GnomePixmap* gpixmap, GdkPixbuf* pixbufs[5], GdkBitmap* masks[5])
 {
         guint i;
 
         i = 0;
         while (i < 5) {
 
-                clear_image(gpixmap, i);
-
+                set_state_pixbuf(gpixmap,
+                                 i,
+                                 pixbufs ? pixbufs[i] : NULL,
+                                 masks ? masks[i] : NULL);
                 ++i;
         }
 }
 
 static void
-resize_to_fit(GnomePixmap *gpixmap)
+set_pixbuf(GnomePixmap* gpixmap, GdkPixbuf* pixbuf)
 {
-        /* We base size on GTK_STATE_NORMAL, or failing that the first state
-           we can find. */
-        guint i;
-        gint width, height;
-        gint oldwidth, oldheight;
-	GdkPixbuf *pix = NULL;
+        if (pixbuf == gpixmap->provided_image)
+                return;
+        
+        clear_generated_images(gpixmap);
+        clear_provided_image(gpixmap);
 
-        oldwidth = GTK_WIDGET (gpixmap)->requisition.width;
-        oldheight = GTK_WIDGET (gpixmap)->requisition.height;
+        g_return_if_fail(gpixmap->provided_image == NULL);
 
-        width = 0;
-        height = 0;
+        gpixmap->provided_image = pixbuf;
 
+        if (pixbuf)
+                gdk_pixbuf_ref(pixbuf);
 
-	pix = gpixmap->image_data[GTK_STATE_NORMAL].pixbuf;
-
-	if (pix == NULL) {
-		i = 0;
-		while (i < 5) {
-			pix = gpixmap->image_data[i].pixbuf;
-
-			if (pix != NULL)
-				break;
-
-			++i;
-		}
-	}
-
-	if (pix != NULL) {
-		width = pix->art_pixbuf->width;
-		height = pix->art_pixbuf->height;
-	}
-
-        if (width * height > 0) {
-                GTK_WIDGET (gpixmap)->requisition.width = width + GTK_MISC (gpixmap)->xpad * 2;
-                GTK_WIDGET (gpixmap)->requisition.height = height + GTK_MISC (gpixmap)->ypad * 2;
-        } else {
-                GTK_WIDGET (gpixmap)->requisition.width = 0;
-                GTK_WIDGET (gpixmap)->requisition.height = 0;
-        }
-
-        if (GTK_WIDGET_VISIBLE (gpixmap)) {
-                if ((GTK_WIDGET (gpixmap)->requisition.width != oldwidth) ||
-                    (GTK_WIDGET (gpixmap)->requisition.height != oldheight))
-                        gtk_widget_queue_resize (GTK_WIDGET (gpixmap));
-                else
-                        gtk_widget_queue_clear (GTK_WIDGET (gpixmap));
-	}
-}
-
-static void
-set_pixbuf(GnomePixmap* gpixmap, GtkStateType state, GdkPixbuf* pixbuf, GdkBitmap* mask)
-{
-        clear_image(gpixmap, state);
-
-        if (pixbuf != NULL) {
-		gint width, height;
-
-		width = gpixmap->width;
-		height = gpixmap->height;
-
-		if (width == -1 && gpixmap->original_image)
-			width = gdk_pixbuf_get_width (gpixmap->original_image);
-
-		if (height == -1 && gpixmap->original_image)
-			height = gdk_pixbuf_get_height (gpixmap->original_image);
-
-		if (width == -1 || height == -1 ||
-		    (width == gdk_pixbuf_get_width (gpixmap->original_image) &&
-		     height ==  gdk_pixbuf_get_height (gpixmap->original_image))) {
-			gpixmap->image_data[state].pixbuf = pixbuf;
-			gdk_pixbuf_ref(pixbuf);
-		} else {
-			gpixmap->image_data[state].pixbuf = gdk_pixbuf_scale_simple (pixbuf, width, height, ART_FILTER_BILINEAR);
-			/* We want to regenerate the mask */
-			mask = NULL;
-		}
-        }
-
-        if (mask != NULL) {
-                gpixmap->image_data[state].mask = mask;
-		gdk_bitmap_ref (mask);
-        } else {
-                /* Create the mask if we have alpha and a pixbuf */
-                if (pixbuf && gdk_pixbuf_get_has_alpha(pixbuf)) {
-                        GdkBitmap *mask = NULL;
-
-                        mask = gdk_pixmap_new(NULL,
-                                              gdk_pixbuf_get_width(pixbuf),
-                                              gdk_pixbuf_get_height(pixbuf),
-                                              1);
-
-                        gdk_pixbuf_render_threshold_alpha(pixbuf, mask,
-                                                          0, 0, 0, 0,
-                                                          gdk_pixbuf_get_width(pixbuf),
-                                                          gdk_pixbuf_get_height(pixbuf),
-                                                          gpixmap->alpha_threshold);
-
-                        gpixmap->image_data[state].mask = mask;
-                }
+        if (GTK_WIDGET_VISIBLE(gpixmap)) {
+                gtk_widget_queue_resize(GTK_WIDGET(gpixmap));
+                gtk_widget_queue_clear(GTK_WIDGET(gpixmap));
         }
 }
-
-static void
-set_pixbufs(GnomePixmap* gpixmap, GdkPixbuf* pixbufs[5], GdkBitmap* masks[5])
-{
-        guint i;
-
-        i = 0;
-        while (i < 5) {
-
-                set_pixbuf(gpixmap,
-                           i,
-                           pixbufs ? pixbufs[i] : NULL,
-                           masks ? masks[i] : NULL);
-                ++i;
-        }
-
-        resize_to_fit(gpixmap);
-}
-
-static void
-free_buffer (gpointer user_data, gpointer data)
-{
-        g_return_if_fail (data != NULL);
-        g_return_if_fail (user_data == NULL);
-	g_free (data);
-}
-
 
 
 
@@ -694,30 +584,7 @@ gnome_pixmap_new_from_pixbuf          (GdkPixbuf *pixbuf)
 
 	g_return_val_if_fail (pixbuf != NULL, GTK_WIDGET (retval));
 
-	retval->original_image = pixbuf;
-	gdk_pixbuf_ref (pixbuf);
-
-	retval->original_scaled_image = pixbuf;
-	gdk_pixbuf_ref (pixbuf);
-
-	if (gdk_pixbuf_get_has_alpha (pixbuf)) {
-		retval->original_scaled_mask
-			= gdk_pixmap_new (NULL,
-					  gdk_pixbuf_get_width (pixbuf),
-					  gdk_pixbuf_get_height (pixbuf),
-					  1);
-		gdk_pixbuf_render_threshold_alpha
-			(pixbuf,
-			 retval->original_scaled_mask,
-			 0, 0, 0, 0,
-			 gdk_pixbuf_get_width (pixbuf),
-			 gdk_pixbuf_get_height (pixbuf),
-			 retval->alpha_threshold);
-	}
-
-	/* Now we handle our requisition */
-	GTK_WIDGET (retval)->requisition.width = gdk_pixbuf_get_width (pixbuf) + GTK_MISC (retval)->xpad * 2;
-	GTK_WIDGET (retval)->requisition.height = gdk_pixbuf_get_height (pixbuf) + GTK_MISC (retval)->ypad * 2;
+        set_pixbuf(retval, pixbuf);
 
 	return GTK_WIDGET (retval);
         /*return gnome_pixmap_new_from_pixbuf_at_size(pixbuf, -1, -1);*/
@@ -769,43 +636,8 @@ gnome_pixmap_set_pixbuf_size (GnomePixmap      *gpixmap,
 {
 	g_return_if_fail (gpixmap != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-
-	/* did we change anything? */
-	if (width == gpixmap->width && height == gpixmap->height)
-		return;
-
-	/* FIXME: if old_width == -1 and pixbuf->width == width, we can just set
-	 * the values and return as an optomization step. */
-
-	clear_old_images (gpixmap);
-
-	gpixmap->width = width;
-	gpixmap->height = height;
-
-	if (width == -1)
-		width = gdk_pixbuf_get_width (gpixmap->original_image);
-	if (height == -1)
-		height = gdk_pixbuf_get_height (gpixmap->original_image);
-
-	if (gpixmap->original_scaled_image)
-		gdk_pixbuf_unref (gpixmap->original_scaled_image);
-	if (gpixmap->original_scaled_mask)
-		gdk_bitmap_unref (gpixmap->original_scaled_mask);
-
-	gpixmap->original_scaled_image = gdk_pixbuf_scale_simple (gpixmap->original_image,
-                                                                  width, height, ART_FILTER_BILINEAR);
-	gpixmap->original_scaled_mask = gdk_pixmap_new (NULL, width, height, 1);
-	gdk_pixbuf_render_threshold_alpha(gpixmap->original_scaled_image,
-					  gpixmap->original_scaled_mask,
-					  0, 0, 0, 0,
-					  width, height,
-					  gpixmap->alpha_threshold);
-
-	GTK_WIDGET (gpixmap)->requisition.width = width + GTK_MISC (gpixmap)->xpad * 2;
-	GTK_WIDGET (gpixmap)->requisition.height = height + GTK_MISC (gpixmap)->ypad * 2;
-
-        if (GTK_WIDGET_VISIBLE (gpixmap))
-		gtk_widget_queue_resize (GTK_WIDGET (gpixmap));
+        
+        set_size(gpixmap, width, height);
 }
 
 /**
@@ -851,46 +683,11 @@ void
 gnome_pixmap_set_pixbuf (GnomePixmap *gpixmap,
 			 GdkPixbuf *pixbuf)
 {
-	gint old_width, old_height;
-
 	g_return_if_fail (gpixmap != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
 	g_return_if_fail (pixbuf != NULL);
 
-	if (pixbuf == gpixmap->original_image)
-		return;
-
-	old_width = gpixmap->width;
-	old_height = gpixmap->height;
-
-	/* make sure it's empty */
-        gdk_pixbuf_ref (pixbuf);
-	gnome_pixmap_clear (gpixmap);
-	gpixmap->original_image = pixbuf;
-
-	if (gdk_pixbuf_get_has_alpha (pixbuf)) {
-		gpixmap->original_scaled_mask
-			= gdk_pixmap_new (NULL,
-					  gdk_pixbuf_get_width (pixbuf),
-					  gdk_pixbuf_get_height (pixbuf),
-					  1);
-		gdk_pixbuf_render_threshold_alpha
-			(pixbuf,
-			 gpixmap->original_scaled_mask,
-			 0, 0, 0, 0,
-			 gdk_pixbuf_get_width (pixbuf),
-			 gdk_pixbuf_get_height (pixbuf),
-			 gpixmap->alpha_threshold);
-	}
-	if (old_width == -1 && old_height == -1) {
-		GTK_WIDGET (gpixmap)->requisition.width = gdk_pixbuf_get_width (pixbuf) + GTK_MISC (gpixmap)->xpad * 2;
-		GTK_WIDGET (gpixmap)->requisition.height = gdk_pixbuf_get_height (pixbuf) + GTK_MISC (gpixmap)->ypad * 2;
-	} else {
-		/* We fake the old size, and set the original one back  */
-		gpixmap->width = -1;
-		gpixmap->height = -1;
-		gnome_pixmap_set_pixbuf_size (gpixmap, old_width, old_height);
-	}
+        set_pixbuf(gpixmap, pixbuf);
 }
 
 
@@ -898,7 +695,9 @@ gnome_pixmap_set_pixbuf (GnomePixmap *gpixmap,
  * gnome_pixmap_get_pixbuf:
  * @gpixmap: A @GnomePixmap.
  *
- * Gets the current image used by @gpixmap.
+ * Gets the current image used by @gpixmap, if you have set the
+ * pixbuf. If you've only set the value for particular states,
+ * then this won't return anything.
  *
  * Return value: A pixbuf.
  **/
@@ -908,7 +707,7 @@ gnome_pixmap_get_pixbuf (GnomePixmap      *gpixmap)
 	g_return_val_if_fail (gpixmap != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_PIXMAP (gpixmap), NULL);
 
-	return gpixmap->original_image;
+	return gpixmap->provided_image;
 }
 
 
@@ -934,29 +733,12 @@ gnome_pixmap_set_pixbuf_at_state (GnomePixmap *gpixmap,
 {
         g_return_if_fail (gpixmap != NULL);
         g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-
-	if ((state == GTK_STATE_NORMAL) && (gpixmap->original_image == NULL)) {
-		/* We've never set the original image.  Set one so we don't fall
-		 * over in some states */
-		gpixmap->original_image = pixbuf;
-		gdk_pixbuf_ref (gpixmap->original_image);
-
-		gpixmap->original_scaled_image = pixbuf;
-		gdk_pixbuf_ref (gpixmap->original_scaled_image);
-
-		if (mask != NULL) {
-			gpixmap->original_scaled_mask = mask;
-			gdk_bitmap_ref (gpixmap->original_scaled_mask);
-		}
-		GTK_WIDGET (gpixmap)->requisition.width = gdk_pixbuf_get_width (pixbuf) + GTK_MISC (gpixmap)->xpad * 2;
-		GTK_WIDGET (gpixmap)->requisition.height = gdk_pixbuf_get_height (pixbuf) + GTK_MISC (gpixmap)->ypad * 2;
-	}
-
-        set_pixbuf (gpixmap, state, pixbuf, mask);
+        
+        set_state_pixbuf (gpixmap, state, pixbuf, mask);
 }
 
 /**
- * gnome_pixmap_set_pixbufs_at_state:
+ * gnome_pixmap_set_state_pixbufs
  * @gpixmap: A @GnomePixmap.
  * @pixbufs: The images.
  * @masks: The masks.
@@ -968,30 +750,14 @@ gnome_pixmap_set_pixbuf_at_state (GnomePixmap *gpixmap,
  *
  **/
 void
-gnome_pixmap_set_pixbufs_at_state (GnomePixmap *gpixmap,
-				   GdkPixbuf   *pixbufs[5],
-				   GdkBitmap   *masks[5])
+gnome_pixmap_set_state_pixbufs (GnomePixmap *gpixmap,
+                                GdkPixbuf   *pixbufs[5],
+                                GdkBitmap   *masks[5])
 {
         g_return_if_fail(gpixmap != NULL);
         g_return_if_fail(GNOME_IS_PIXMAP (gpixmap));
-
-	if ((gpixmap->original_image == NULL) && (pixbufs[GTK_STATE_NORMAL] != NULL)) {
-		/* We are setting the images from scratch */
-		gpixmap->original_image = pixbufs[GTK_STATE_NORMAL];
-		gdk_pixbuf_ref (gpixmap->original_image);
-
-		gpixmap->original_scaled_image = pixbufs[GTK_STATE_NORMAL];
-		gdk_pixbuf_ref (gpixmap->original_scaled_image);
-
-		if (masks[GTK_STATE_NORMAL] != NULL) {
-			gpixmap->original_scaled_mask = masks[GTK_STATE_NORMAL];
-			gdk_bitmap_ref (gpixmap->original_scaled_mask);
-		}
-		GTK_WIDGET (gpixmap)->requisition.width = gdk_pixbuf_get_width (pixbufs[GTK_STATE_NORMAL]) + GTK_MISC (gpixmap)->xpad * 2;
-		GTK_WIDGET (gpixmap)->requisition.height = gdk_pixbuf_get_height (pixbufs[GTK_STATE_NORMAL]) + GTK_MISC (gpixmap)->ypad * 2;
-	}
-
-        set_pixbufs(gpixmap, pixbufs, masks);
+        
+        set_state_pixbufs(gpixmap, pixbufs, masks);
 }
 
 /**
@@ -1007,25 +773,12 @@ gnome_pixmap_clear (GnomePixmap *gpixmap)
         g_return_if_fail(gpixmap != NULL);
         g_return_if_fail(GNOME_IS_PIXMAP (gpixmap));
 
-        clear_old_images(gpixmap);
-	if (gpixmap->original_image) {
-		gdk_pixbuf_unref (gpixmap->original_image);
-		gpixmap->original_image = NULL;
-	}
+        clear_all_images(gpixmap);
 
-	if (gpixmap->original_scaled_image) {
-		gdk_pixbuf_unref (gpixmap->original_scaled_image);
-		gpixmap->original_scaled_image = NULL;
-	}
-
-	if (gpixmap->original_scaled_mask) {
-		gdk_pixmap_unref (gpixmap->original_scaled_mask);
-		gpixmap->original_scaled_mask = NULL;
-	}
-
-        if (GTK_WIDGET_VISIBLE (gpixmap)) {
-		gtk_widget_queue_clear (GTK_WIDGET (gpixmap));
-	}
+        if (GTK_WIDGET_VISIBLE(gpixmap)) {
+                gtk_widget_queue_resize(GTK_WIDGET(gpixmap));
+                gtk_widget_queue_clear(GTK_WIDGET(gpixmap));
+        }
 }
 
 /**
@@ -1054,8 +807,12 @@ gnome_pixmap_set_draw_vals (GnomePixmap *gpixmap,
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
 	g_return_if_fail (state >= 0 && state < 5);
 
-	gpixmap->image_data[state].saturation = saturation;
-	gpixmap->image_data[state].pixelate = pixelate;
+	gpixmap->provided[state].saturation = saturation;
+	gpixmap->provided[state].pixelate = pixelate;
+
+        if (GTK_WIDGET_VISIBLE(gpixmap)) {
+                gtk_widget_queue_clear(GTK_WIDGET(gpixmap));
+        }
 }
 
 /**
@@ -1068,21 +825,19 @@ gnome_pixmap_set_draw_vals (GnomePixmap *gpixmap,
  **/
 void
 gnome_pixmap_set_draw_mode (GnomePixmap *gpixmap,
-			    GnomePixmapDraw mode)
+			    GnomePixmapDrawMode mode)
 {
 	g_return_if_fail (gpixmap != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
 
 	if (gpixmap->mode == mode)
 		return;
-
-	if (gpixmap->original_image && !gdk_pixbuf_get_has_alpha (gpixmap->original_image))
-		return;
-
+        
 	gpixmap->mode = mode;
-	clear_old_images (gpixmap);
+	clear_generated_images (gpixmap);
 
         if (GTK_WIDGET_VISIBLE (gpixmap)) {
+                gtk_widget_queue_resize (GTK_WIDGET (gpixmap));
 		gtk_widget_queue_clear (GTK_WIDGET (gpixmap));
 	}
 }
@@ -1093,9 +848,9 @@ gnome_pixmap_set_draw_mode (GnomePixmap *gpixmap,
  *
  * Gets the current draw mode.
  *
- * Return value: The current @GnomePixmapDraw setting.
+ * Return value: The current @GnomePixmapDrawMode setting.
  **/
-GnomePixmapDraw
+GnomePixmapDrawMode
 gnome_pixmap_get_draw_mode (GnomePixmap *gpixmap)
 {
 	g_return_val_if_fail (gpixmap != NULL, GNOME_PIXMAP_SIMPLE);
@@ -1126,19 +881,9 @@ gnome_pixmap_set_alpha_threshold (GnomePixmap *gpixmap,
 		return;
 
 	gpixmap->alpha_threshold = alpha_threshold;
-	clear_old_images (gpixmap);
 
-
-
-	if (gpixmap->original_scaled_mask)
-		gdk_pixbuf_render_threshold_alpha
-			(gpixmap->original_scaled_image,
-			 gpixmap->original_scaled_mask,
-			 0, 0, 0, 0,
-			 gdk_pixbuf_get_width (gpixmap->original_scaled_image),
-			 gdk_pixbuf_get_height (gpixmap->original_scaled_image),
-			 gpixmap->alpha_threshold);
-
+	clear_generated_images (gpixmap);
+        
         if (GTK_WIDGET_VISIBLE (gpixmap)) {
 		gtk_widget_queue_clear (GTK_WIDGET (gpixmap));
 	}
@@ -1161,355 +906,325 @@ gnome_pixmap_get_alpha_threshold (GnomePixmap *gpixmap)
 	return gpixmap->alpha_threshold;
 }
 
-
-
-
 /*
- * gdk_pixbuf helper_functions
+ * Internal functions
  */
 
-void
-gnome_pixbuf_render(GdkPixbuf  *pixbuf,
-                    GdkPixmap **pixmap,
-                    GdkBitmap **mask_retval,
-		    gint        alpha_threshold)
+static void
+clear_provided_state_image (GnomePixmap *gpixmap,
+                            GtkStateType state)
 {
-        GdkBitmap *mask = NULL;
-
-        g_return_if_fail(pixbuf != NULL);
-
-        /* generate mask */
-        if (gdk_pixbuf_get_has_alpha(pixbuf)) {
-                mask = gdk_pixmap_new(NULL,
-                                      gdk_pixbuf_get_width(pixbuf),
-                                      gdk_pixbuf_get_height(pixbuf),
-                                      1);
-
-                gdk_pixbuf_render_threshold_alpha(pixbuf, mask,
-                                                  0, 0, 0, 0,
-                                                  gdk_pixbuf_get_width(pixbuf),
-                                                  gdk_pixbuf_get_height(pixbuf),
-                                                  alpha_threshold);
-        }
-
-        /* Draw to pixmap */
-
-        if (pixmap != NULL) {
-                GdkGC* gc;
-
-                *pixmap = gdk_pixmap_new(NULL,
-                                         gdk_pixbuf_get_width(pixbuf),
-                                         gdk_pixbuf_get_height(pixbuf),
-                                         gdk_rgb_get_visual()->depth);
-
-                gc = gdk_gc_new(*pixmap);
-
-                gdk_gc_set_clip_mask(gc, mask);
-
-                gdk_pixbuf_render_to_drawable(pixbuf, *pixmap,
-                                              gc,
-                                              0, 0, 0, 0,
-                                              gdk_pixbuf_get_width(pixbuf),
-                                              gdk_pixbuf_get_height(pixbuf),
-                                              GDK_RGB_DITHER_NORMAL,
-                                              0, 0);
-
-                gdk_gc_unref(gc);
-        }
-
-        if (mask_retval)
-                *mask_retval = mask;
-        else
-                gdk_bitmap_unref(mask);
+        if (gpixmap->provided[state].pixbuf != NULL) {
+                gdk_pixbuf_unref(gpixmap->provided[state].pixbuf);
+                gpixmap->provided[state].pixbuf = NULL;
+        }        
 }
 
-
+static void
+clear_generated_state_image(GnomePixmap *gpixmap,
+                            GtkStateType state)
+{
+        if (gpixmap->generated[state].pixbuf != NULL) {
+                gdk_pixbuf_unref(gpixmap->generated[state].pixbuf);
+                gpixmap->generated[state].pixbuf = NULL;
+        }
 
-/*
- * defunct code
- */
-#if 0
-/* code snippet to copy for getting base_color from a window */
-/*
-	if (window) {
-		GtkStyle *style = gtk_widget_get_style(window);
-		scale_base.r = style->bg[state].red >> 8;
-		scale_base.g = style->bg[state].green >> 8;
-		scale_base.b = style->bg[state].blue >> 8;
+        if (gpixmap->generated[state].mask != NULL) {
+                gdk_bitmap_unref(gpixmap->generated[state].mask);
+                gpixmap->generated[state].mask = NULL;
+        }
+}
+        
+static void
+clear_provided_image (GnomePixmap *gpixmap)
+{
+        if (gpixmap->provided_image) {
+                gdk_pixbuf_unref(gpixmap->provided_image);
+                gpixmap->provided_image = NULL;
+        }
+}
+
+static void
+clear_scaled_image (GnomePixmap *gpixmap)
+{
+        if (gpixmap->generated_scaled_image) {
+                gdk_pixbuf_unref(gpixmap->generated_scaled_image);
+                gpixmap->generated_scaled_image = NULL;
+        }
+        if (gpixmap->generated_scaled_mask) {
+                gdk_bitmap_unref(gpixmap->generated_scaled_mask);
+                gpixmap->generated_scaled_mask = NULL;
+        }
+}
+
+static void
+clear_all_images (GnomePixmap *gpixmap)
+{
+        guint i;
+
+        i = 0;
+        while (i < 5) {
+
+                clear_provided_state_image(gpixmap, i);
+
+                ++i;
+        }
+        
+        clear_generated_images(gpixmap);
+        clear_provided_image(gpixmap);
+}
+
+static void
+clear_generated_images (GnomePixmap *gpixmap)
+{
+        guint i;
+
+        i = 0;
+        while (i < 5) {
+
+                clear_generated_state_image(gpixmap, i);
+
+                ++i;
+        }
+
+        clear_scaled_image(gpixmap);
+}
+
+static void
+generate_image (GnomePixmap *gpixmap,
+                GtkStateType state)
+{
+        /* See if this image is already generated */
+        if (gpixmap->generated[state].pixbuf != NULL)
+                return;
+
+        g_return_if_fail(gpixmap->generated[state].pixbuf == NULL);
+        g_return_if_fail(gpixmap->generated[state].mask == NULL);
+        
+        /* To generate an image, we first use the provided image for a given
+           state, if any; if not we use the gpixmap->provided_image; if that
+           doesn't exist then we bail out. */
+           
+        if (gpixmap->provided[state].pixbuf != NULL) {
+                gint width = gpixmap->width;
+                gint height = gpixmap->height;
+                GdkPixbuf *scaled;
+                GdkPixbuf *generated;
+
+                if (width >= 0 || height >= 0) {
+                        if (width < 0)
+                                width = gdk_pixbuf_get_width(gpixmap->provided[state].pixbuf);
+
+                        if (height < 0)
+                                height = gdk_pixbuf_get_height(gpixmap->provided[state].pixbuf);
+                        
+                        scaled = gdk_pixbuf_scale_simple (gpixmap->provided[state].pixbuf,
+                                                          gpixmap->width,
+                                                          gpixmap->height,
+                                                          ART_FILTER_BILINEAR);
+                } else {
+                        /* just copy */
+                        scaled = gpixmap->provided[state].pixbuf;
+                        gdk_pixbuf_ref(scaled);
+                }
+                        
+                generated = saturate_and_pixelate(scaled,
+                                                  gpixmap->provided[state].saturation,
+                                                  gpixmap->provided[state].pixelate);
+                
+                gpixmap->generated[state].pixbuf = generated;
+
+                if ((scaled == gpixmap->provided[state].pixbuf) &&
+                    gpixmap->provided[state].mask) {
+                        /* use provided mask if it exists
+                           and we did not have to scale */
+                        gpixmap->generated[state].mask =
+                                gpixmap->provided[state].mask;
+                        gdk_bitmap_ref(gpixmap->generated[state].mask);
+                } else {
+                        /* create mask */
+                        gpixmap->generated[state].mask =
+                                create_mask(gpixmap, generated);
+                }
+
+                /* Drop intermediate image */
+                gdk_pixbuf_unref(scaled);
+        }
+        
+        /* Ensure we've generated the scaled image
+           if we have an original image */
+        if (gpixmap->provided_image != NULL &&
+            gpixmap->generated_scaled_image == NULL) {
+                gint width = gpixmap->width;
+                gint height = gpixmap->height;
+                
+                if (width < 0)
+                        width = gdk_pixbuf_get_width(gpixmap->provided_image);
+                if (height < 0)
+                        height = gdk_pixbuf_get_height(gpixmap->provided_image);
+                
+                if (gpixmap->width < 0 && /* orig w/h, not the "fixed" ones */
+                    gpixmap->height < 0) {
+                        /* Just copy */
+                        gpixmap->generated_scaled_image = gpixmap->provided_image;
+                        gdk_pixbuf_ref(gpixmap->generated_scaled_image);
+                } else {
+                        gpixmap->generated_scaled_image =
+                                gdk_pixbuf_scale_simple (gpixmap->provided_image,
+                                                         width,
+                                                         height,
+                                                         ART_FILTER_BILINEAR);
+                }
+
+                gpixmap->generated_scaled_mask =
+                        create_mask(gpixmap, gpixmap->generated_scaled_image);
+        }
+
+        /* Now we generate the per-state image from the scaled
+           copy of the provided image */
+        if (gpixmap->generated_scaled_image != NULL) {
+                GdkPixbuf *generated;
+
+                g_return_if_fail(gpixmap->generated_scaled_mask);
+                
+                generated = saturate_and_pixelate(gpixmap->generated_scaled_image,
+                                                  gpixmap->provided[state].saturation,
+                                                  gpixmap->provided[state].pixelate);
+                
+                gpixmap->generated[state].pixbuf = generated;
+
+                if (gpixmap->provided[state].mask) {
+                        /* use provided mask if it exists */
+                        gpixmap->generated[state].mask =
+                                gpixmap->provided[state].mask;
+                        gdk_bitmap_ref(gpixmap->generated[state].mask);
+                } else {
+                        /* If we just copied the generated_scaled_image
+                           then also copy the mask */
+                        if (generated == gpixmap->generated_scaled_image) {
+                                gpixmap->generated[state].mask =
+                                        gpixmap->generated_scaled_mask;
+                                gdk_bitmap_ref(gpixmap->generated_scaled_mask);
+                        } else {
+                                /* create mask */
+                                gpixmap->generated[state].mask =
+                                        create_mask(gpixmap, generated);
+                        }
+                }
+        }
+
+        /* If we didn't have a provided_image or a provided image for the
+           particular state, then we have no way to generate an image.
+        */
+}
+
+static void
+set_size (GnomePixmap *gpixmap,
+          gint width, gint height)
+{
+        if (gpixmap->width == width &&
+            gpixmap->height == height)
+                return;
+        
+	/* FIXME: if old_width == -1 and pixbuf->width == width, we can just set
+	 * the values and return as an optomization step. */
+        
+        clear_generated_images(gpixmap);
+        
+        gpixmap->width = width;
+        gpixmap->height = height;
+        
+        if (GTK_WIDGET_VISIBLE (gpixmap)) {
+                if ((GTK_WIDGET (gpixmap)->requisition.width != width) ||
+                    (GTK_WIDGET (gpixmap)->requisition.height != height))
+                        gtk_widget_queue_resize (GTK_WIDGET (gpixmap));
+                else
+                        gtk_widget_queue_clear (GTK_WIDGET (gpixmap));
 	}
-*/
-#endif
-
-#if 0
-static void
-match_representation_to_mode  (GnomePixmap *gpixmap)
-{
-
-        if (gpixmap->flags & GNOME_PIXMAP_USE_PIXBUF) {
-                /* Convert all pixmaps to pixbuf */
-                guint i = 0;
-                while (i < 5) {
-                        if (gpixmap->image_data[i].pixmap != NULL) {
-                                GdkPixbuf *pixbuf;
-                                gint w, h;
-
-                                gdk_window_get_size(gpixmap->image_data[i].pixmap,
-                                                    &w, &h);
-
-                                pixbuf = gdk_pixbuf_rgb_from_drawable(gpixmap->image_data[i].pixmap,
-                                                                      0, 0,
-                                                                      w, h);
-
-                                /* This deletes the pixmap */
-                                set_pixbuf(gpixmap, i, pixbuf, NULL);
-                        }
-
-                        ++i;
-                }
-
-        } else if (gpixmap->flags & GNOME_PIXMAP_USE_PIXMAP) {
-                /* Convert all pixbuf to pixmap */
-                guint i = 0;
-                while (i < 5) {
-                        if (gpixmap->image_data[i].pixbuf != NULL) {
-                                GdkPixmap *pixmap = NULL;
-                                GdkBitmap *mask = NULL;
-
-                                gnome_pixbuf_render(gpixmap->image_data[i].pixbuf,
-                                                    &pixmap,
-                                                    &mask);
-                                /* deletes the pixbuf */
-                                set_pixmap(gpixmap, i, pixmap, mask);
-                        }
-
-                        ++i;
-                }
-        }
 }
-#endif
 
-#if 0
-static void
-build_insensitive_pixmap      (GnomePixmap *gpixmap)
+static GdkBitmap*
+create_mask(GnomePixmap *gpixmap, GdkPixbuf *pixbuf)
 {
-        /* FIXME This code is also in gtk/gtkpixmap.c */
-        GdkGC *gc;
-        GdkPixmap *normal;
-        GdkBitmap *normal_mask;
-        GdkPixmap *insensitive;
-        gint w, h, x, y;
-        GdkGCValues vals;
-        GdkVisual *visual;
-        GdkImage *image;
-        GdkColorContext *cc;
-        GdkColor color;
-        GdkColormap *cmap;
-        gint32 red, green, blue;
-        GtkStyle *style;
-        GtkWidget *widget;
-        GdkColor c;
-        gboolean failed;
+        GdkBitmap *mask;
+        gint width = gdk_pixbuf_get_width(pixbuf);
+        gint height = gdk_pixbuf_get_height(pixbuf);
+        
+        mask = gdk_pixmap_new (NULL, width, height, 1);
 
-        widget = GTK_WIDGET (gpixmap);
-
-        g_return_if_fail(widget != NULL);
-
-        normal = gpixmap->image_data[GTK_STATE_NORMAL].pixmap;
-        normal_mask = gpixmap->image_data[GTK_STATE_NORMAL].mask;
-
-        if (normal == NULL)
-                return; /* Give up */
-
-        g_return_if_fail(gpixmap->image_data[GTK_STATE_INSENSITIVE].pixmap == NULL);
-        g_return_if_fail(gpixmap->image_data[GTK_STATE_INSENSITIVE].mask == NULL);
-
-        gdk_window_get_size(normal, &w, &h);
-        image = gdk_image_get(normal, 0, 0, w, h);
-        insensitive = gdk_pixmap_new(widget->window, w, h, -1);
-        gc = gdk_gc_new (normal);
-
-        visual = gtk_widget_get_visual(widget);
-        cmap = gtk_widget_get_colormap(widget);
-        cc = gdk_color_context_new(visual, cmap);
-
-        if ((cc->mode != GDK_CC_MODE_TRUE) &&
-            (cc->mode != GDK_CC_MODE_MY_GRAY)) {
-
-                gdk_draw_image(insensitive, gc, image, 0, 0, 0, 0, w, h);
-
-                style = gtk_widget_get_style(widget);
-                color = style->bg[0];
-                gdk_gc_set_foreground (gc, &color);
-                for (y = 0; y < h; y++) {
-                        for (x = y % 2; x < w; x += 2) {
-                                gdk_draw_point(insensitive, gc, x, y);
-                        }
-                }
-
+        gdk_pixbuf_render_threshold_alpha(pixbuf,
+                                          mask,
+                                          0, 0, 0, 0,
+                                          width, height,
+                                          gpixmap->alpha_threshold);
+                
+        
+        return mask;
+}
+ 
+static GdkPixbuf*
+saturate_and_pixelate(GdkPixbuf *pixbuf, gfloat saturation, gboolean pixelate)
+{
+        if (saturation == 1.0) {
+                gdk_pixbuf_ref(pixbuf);
+                return pixbuf;
         } else {
+		GdkPixbuf *target;
+		gint i, j;
+		gint width, height, has_alpha, rowstride;
+		guchar *target_pixels;
+		guchar *original_pixels;
+		guchar *current_pixel;
+		guchar intensity;
 
-                gdk_gc_get_values(gc, &vals);
-                style = gtk_widget_get_style(widget);
+		has_alpha = gdk_pixbuf_get_has_alpha (pixbuf);
+		width = gdk_pixbuf_get_width (pixbuf);
+		height = gdk_pixbuf_get_height (pixbuf);
+		rowstride = gdk_pixbuf_get_rowstride (pixbuf);
+                
+		target = gdk_pixbuf_new (ART_PIX_RGB,
+					 has_alpha,
+					 gdk_pixbuf_get_bits_per_sample (pixbuf),
+					 width, height);
+                
+		target_pixels = gdk_pixbuf_get_pixels (target);
+		original_pixels = gdk_pixbuf_get_pixels (pixbuf);
 
-                color = style->bg[0];
-                red = color.red;
-                green = color.green;
-                blue = color.blue;
+		for (i = 0; i < height; i++) {
+			for (j = 0; j < width; j++) {
+				current_pixel = original_pixels + i*rowstride + j*(has_alpha?4:3);
+				intensity = INTENSITY (*(current_pixel), *(current_pixel + 1), *(current_pixel + 2));
+				if (pixelate && (i+j)%2 == 0) {
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3)) = intensity/2 + 127;
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 1) = intensity/2 + 127;
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 2) = intensity/2 + 127;
+				} else if (pixelate) {
+#define DARK_FACTOR 0.7
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3)) =
+						(guchar) (((1.0 - saturation) * intensity
+							   + saturation * (*(current_pixel)))) * DARK_FACTOR;
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 1) =
+						(guchar) (((1.0 - saturation) * intensity
+							   + saturation * (*(current_pixel + 1)))) * DARK_FACTOR;
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 2) =
+						(guchar) (((1.0 - saturation) * intensity
+							   + saturation * (*(current_pixel + 2)))) * DARK_FACTOR;
+				} else {
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3)) =
+						(guchar) ((1.0 - saturation) * intensity
+							  + saturation * (*(current_pixel)));
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 1) =
+						(guchar) ((1.0 - saturation) * intensity
+							  + saturation * (*(current_pixel + 1)));
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 2) =
+						(guchar) ((1.0 - saturation) * intensity
+							  + saturation * (*(current_pixel + 2)));
+				}
+				if (has_alpha)
+					*(target_pixels + i*rowstride + j*(has_alpha?4:3) + 3) = *(original_pixels + i*rowstride + j*(has_alpha?4:3) + 3);
+			}
+		}
 
-                for (y = 0; y < h; y++) {
-                        for (x = 0; x < w; x++) {
-                                c.pixel = gdk_image_get_pixel(image, x, y);
-                                gdk_color_context_query_color(cc, &c);
-                                c.red = (((gint32)c.red - red) >> 1) + red;
-                                c.green = (((gint32)c.green - green) >> 1) + green;
-                                c.blue = (((gint32)c.blue - blue) >> 1) + blue;
-                                c.pixel = gdk_color_context_get_pixel(cc, c.red, c.green, c.blue,
-                                                                      &failed);
-                                gdk_image_put_pixel(image, x, y, c.pixel);
-                        }
-                }
-
-                for (y = 0; y < h; y++) {
-                        for (x = y % 2; x < w; x += 2) {
-                                c.pixel = gdk_image_get_pixel(image, x, y);
-                                gdk_color_context_query_color(cc, &c);
-                                c.red = (((gint32)c.red - red) >> 1) + red;
-                                c.green = (((gint32)c.green - green) >> 1) + green;
-                                c.blue = (((gint32)c.blue - blue) >> 1) + blue;
-                                c.pixel = gdk_color_context_get_pixel(cc, c.red, c.green, c.blue,
-                                                                      &failed);
-                                gdk_image_put_pixel(image, x, y, c.pixel);
-                        }
-                }
-
-                gdk_draw_image(insensitive, gc, image, 0, 0, 0, 0, w, h);
-        }
-
-        gpixmap->image_data[GTK_STATE_INSENSITIVE].pixmap = insensitive;
-        gpixmap->image_data[GTK_STATE_INSENSITIVE].mask = normal_mask;
-
-        /* Just ref the normal mask, don't create a new mask. */
-        if (normal_mask != NULL) {
-                gdk_bitmap_ref(normal_mask);
-        }
-
-        gdk_image_destroy(image);
-        gdk_color_context_free(cc);
-        gdk_gc_destroy(gc);
+                return target;
+	}
 }
-#endif
-
-/*
- * Build insensitive
- */
-#if 0
-static void
-build_insensitive_pixbuf      (GnomePixmap *gpixmap)
-{
-        GdkPixbuf *normal;
-        GdkBitmap *normal_mask;
-        gint32 red, green, blue;
-        GdkPixbuf *insensitive;
-        GdkColor color;
-        GtkStyle *style;
-        GtkWidget *widget;
-
-
-        widget = GTK_WIDGET (gpixmap);
-
-        g_return_if_fail(widget != NULL);
-
-        normal = gpixmap->image_data[GTK_STATE_NORMAL].pixbuf;
-        normal_mask = gpixmap->image_data[GTK_STATE_NORMAL].mask;
-
-        if (normal == NULL)
-                return; /* Give up */
-
-        g_return_if_fail(gpixmap->image_data[GTK_STATE_INSENSITIVE].pixbuf == NULL);
-        g_return_if_fail(gpixmap->image_data[GTK_STATE_INSENSITIVE].mask == NULL);
-
-        style = gtk_widget_get_style(widget);
-
-        color = style->bg[0];
-        red = color.red/255;
-        green = color.green/255;
-        blue = color.blue/255;
-
-        insensitive = gnome_pixbuf_build_insensitive(normal, red, green, blue);
-
-        gpixmap->image_data[GTK_STATE_INSENSITIVE].pixbuf = insensitive;
-        gpixmap->image_data[GTK_STATE_INSENSITIVE].mask   = normal_mask;
-
-        /* Just ref the normal mask, don't create a new mask. */
-        if (normal_mask != NULL) {
-                gdk_bitmap_ref(normal_mask);
-        }
-}
-#endif
-
-#if 0
-GdkPixbuf *
-gnome_pixbuf_build_insensitive(GdkPixbuf* normal,
-                               guchar red_bg, guchar green_bg, guchar blue_bg)
-{
-        gint32 red, green, blue;
-        GdkPixbuf *insensitive;
-        gint w, h, x, y;
-
-        g_return_val_if_fail(normal != NULL, NULL);
-
-        w = gdk_pixbuf_get_width(normal);
-        h = gdk_pixbuf_get_height(normal);
-
-        insensitive = gdk_pixbuf_new(gdk_pixbuf_get_format(normal),
-                                     gdk_pixbuf_get_has_alpha(normal),
-                                     gdk_pixbuf_get_bits_per_sample(normal),
-                                     w, h);
-
-        red = red_bg;
-        green = green_bg;
-        blue = blue_bg;
-
-        /* Fade each pixel */
-        for (y = 0; y < h; y++) {
-                for (x = 0; x < w; x++) {
-                        guchar* src_pixel;
-                        guchar* dest_pixel;
-
-                        src_pixel = normal->art_pixbuf->pixels +
-                                y * normal->art_pixbuf->rowstride +
-                                x * (normal->art_pixbuf->has_alpha ? 4 : 3);
-
-                        dest_pixel = insensitive->art_pixbuf->pixels +
-                                y * insensitive->art_pixbuf->rowstride +
-                                x * (insensitive->art_pixbuf->has_alpha ? 4 : 3);
-
-                        dest_pixel[0] = ((src_pixel[0] - red) >> 1) + red;
-                        dest_pixel[1] = ((src_pixel[1] - green) >> 1) + green;
-                        dest_pixel[2] = ((src_pixel[2] - blue) >> 1) + blue;
-                }
-        }
-
-        /* Now do another fade pass, skipping every other pixel */
-        for (y = 0; y < h; y++) {
-                for (x = y % 2; x < w; x += 2) {
-                        guchar* src_pixel;
-                        guchar* dest_pixel;
-
-                        src_pixel = insensitive->art_pixbuf->pixels +
-                                y * insensitive->art_pixbuf->rowstride +
-                                x * (insensitive->art_pixbuf->has_alpha ? 4 : 3);
-
-                        dest_pixel = insensitive->art_pixbuf->pixels +
-                                y * insensitive->art_pixbuf->rowstride +
-                                x * (insensitive->art_pixbuf->has_alpha ? 4 : 3);
-
-                        dest_pixel[0] = ((src_pixel[0] - red) >> 1) + red;
-                        dest_pixel[1] = ((src_pixel[1] - green) >> 1) + green;
-                        dest_pixel[2] = ((src_pixel[2] - blue) >> 1) + blue;
-                }
-        }
-
-        return insensitive;
-}
-#endif

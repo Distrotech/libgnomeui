@@ -1,3 +1,61 @@
+2000-01-15  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-mdi.c (set_active_view): fix printf format warning
+
+	* gnome-dialog.c (gnome_dialog_button_clicked): remove unused
+	variable
+
+	* gnome-pixmap.h: remove the "internal functions" since we no
+	longer use any of them	
+
+	* gnome-stock.c (gnome_stock_pixmap_gdk): gdk_pixbuf_render_pixmap
+
+	* gnome-init.c (libgnomeui_pixbuf_image_loader): 
+	gdk_pixbuf_render_pixmap
+
+	* gnome-calculator.c (gnome_calculator_realized): replace
+	gnome_pixbuf_render with gdk_pixbuf_render_pixmap
+
+	* gnome-stock.c (gnome_stock_set_icon): sync with
+	gnome_pixmap_set_state_pixbufs rename
+
+	* gnome-druid.c (gnome_druid_size_request): add cast to remove
+	warning
+	(gnome_druid_paint): delete prototype, never defined
+
+	* gnome-pixmap.c (gnome_pixmap_set_state_pixbufs): rename from
+	gnome_pixmap_set_pixbufs_at_state for clarity
+
+	* gnome-messagebox.c: include gnomelib-init isntead of
+	gnomelib-init2
+	
+	* gnome-client.c (gnome_client_pre_args_parse): const on the
+	module info
+	(gnome_client_post_args_parse): ditto
+
+	* gnome-pixmap.c: There was massive cut-and-paste fest in here;
+	clean it all up.  Also, remove gnome_pixbuf_render since we have
+	one of these in gdk-pixbuf now.
+	(gnome_pixmap_size_request): implement size request so we can
+	lazily calculate size information instead of updating the 
+	requisition all the darn time
+	(set_pixbuf): don't calculate any pixbufs/masks etc. since 
+	it's all done lazily now
+	(gnome_pixmap_set_draw_vals): queue a redraw if necessary
+
+	* gnome-pixmap.h: split the data members so that generated 
+	images are always clearly separated from non-generated images,
+	this is the only way to get predictable, consistent behavior.
+
+	* gnome-pixmap.c: nuke all the crufty unused code at the bottom
+
+	* gnome-pixmap.h: s/GnomePixmapDraw/GnomePixmapDrawMode/g
+
+	* gnome-pixmap.c (gnome_pixmap_set_pixbuf): if width/height are
+	-1, it's necessary to reset the scaled image
+	(gnome_pixmap_set_pixbufs_at_state): call set_pixbuf_size()
+	instead of manually calculating the requisition
+	
 Sat Jan 15 00:04:00 2000  George Lebl <jirka@5z.com>
 
 	* gnome-helpsys.c: fix gnome_help_view_get_arg by initializing the

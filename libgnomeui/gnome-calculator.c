@@ -1040,7 +1040,7 @@ gnome_calculator_realized(GtkWidget *w, gpointer data)
                         if (pixbuf == NULL) {
                                 g_warning("Can't load calculator-font.png");
                         } else {
-                                gnome_pixbuf_render(pixbuf, &font_pixmap, NULL, 128);
+                                gdk_pixbuf_render_pixmap(pixbuf, &font_pixmap, NULL, 128);
                         }
                         g_free(file);
                 }

@@ -191,9 +191,9 @@ gnome_stock_set_icon(GnomeStock *stock, const char *icon)
            while we could share the insensitive versions in our hash table.
            It's an open question which is the right thing...
         */
-        gnome_pixmap_set_pixbufs_at_state (GNOME_PIXMAP(stock),
-					   pixbufs,
-					   bitmasks);
+        gnome_pixmap_set_state_pixbufs (GNOME_PIXMAP(stock),
+                                        pixbufs,
+                                        bitmasks);
 
 	return;
 }
@@ -1568,10 +1568,10 @@ gnome_stock_pixmap_gdk (const char    *icon,
 
         pixbuf = gdk_pixbuf_new_from_stock_pixmap_entry(entries[state]);
 
-        gnome_pixbuf_render(pixbuf,
-                            pixmap,
-                            mask,
-			    128);
+        gdk_pixbuf_render_pixmap(pixbuf,
+                                 pixmap,
+                                 mask,
+                                 128);
 
         gdk_pixbuf_unref(pixbuf);
 }

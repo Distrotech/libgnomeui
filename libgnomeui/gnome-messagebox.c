@@ -27,7 +27,7 @@
 #include <gtk/gtk.h>
 #include "libgnomeui/gnome-stock.h"
 #include "libgnomeui/gnome-uidefs.h"
-#include <libgnome/gnomelib-init2.h>
+#include <libgnome/libgnome.h>
 
 #define GNOME_MESSAGE_BOX_WIDTH  425
 #define GNOME_MESSAGE_BOX_HEIGHT 125

@@ -37,8 +37,6 @@ static void gnome_druid_size_allocate   (GtkWidget               *widget,
 					 GtkAllocation           *allocation);
 static void gnome_druid_draw            (GtkWidget               *widget,
 					 GdkRectangle            *area);
-static void gnome_druid_paint           (GtkWidget               *widget,
-					 GdkRectangle            *area);
 static gint gnome_druid_expose          (GtkWidget               *widget,
 					 GdkEventExpose          *event);
 static void gnome_druid_map             (GtkWidget               *widget);
@@ -218,7 +216,7 @@ gnome_druid_size_request (GtkWidget *widget,
 			temp_width = MAX (temp_width, child_requisition.width);
 			temp_height = MAX (temp_height, child_requisition.height);
 			if (GTK_WIDGET_MAPPED (child) && child != druid->current)
-				gtk_widget_unmap (child);
+				gtk_widget_unmap (GTK_WIDGET(child));
 		}
 	}
 	
