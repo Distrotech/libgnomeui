@@ -39,6 +39,7 @@
 #include "gnome-uidefs.h"
 #include "gnome-ui-init.h"
 #include "gnome-ice.h"
+#include "gnome-marshal.h"
 #include <gtk/gtk.h>
 #include <gdk/gdkprivate.h>
 #include <X11/Xatom.h>
@@ -1157,7 +1158,7 @@ gnome_client_class_init (GnomeClientClass *klass)
 		    GTK_RUN_LAST,
 		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeClientClass, save_yourself),
-		    gnome_marshal_BOOLEAN__INT_ENUM_BOOLEAN_ENUM_BOOLEAN,
+		    _gnome_marshal_BOOLEAN__INT_ENUM_BOOLEAN_ENUM_BOOLEAN,
 		    GTK_TYPE_BOOL, 5,
 		    GTK_TYPE_INT,
 		    GNOME_TYPE_SAVE_STYLE,

@@ -42,6 +42,7 @@
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
 
+#include "gnome-marshal.h"
 #include "gnome-color-picker.h"
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkbutton.h>
@@ -147,7 +148,7 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
 				GTK_RUN_FIRST,
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeColorPickerClass, color_set),
-				gnome_marshal_VOID__UINT_UINT_UINT_UINT,
+				_gnome_marshal_VOID__UINT_UINT_UINT_UINT,
 				GTK_TYPE_NONE, 4,
 				GTK_TYPE_UINT,
 				GTK_TYPE_UINT,

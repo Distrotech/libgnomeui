@@ -1,3 +1,33 @@
+2001-12-07  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-icon-sel.c (gnome_icon_selection_instance_init): Update 
+	for the changed GnomeIconList API.
+
+	* gnome-icon-list.h: Bring back some of the old, working API,
+	also add new signals to the vtable.
+
+	* gnome-icon-list.c: Make GnomeIconList work, and add support
+	for focus and keybindings. Editing will follow.
+
+	* gnome-icon-entry.c: Fix some bugs.
+
+	* gnome-client.c: Update to use our marshaller.
+
+	* gnome-druid-page.c: Likewise.
+
+	* gnome-dialog.c: Likewise.
+
+	* gnome-color-picker.c: Likewise.
+
+	* gnome-marshal.list: Add.
+
+	* Makefile.am: Add gnome-icon-item.[ch] and 
+	gnome-marshal.list.
+
+	* gnome-icon-item.c: Add.
+
+	* gnome-icon-item.h: Add.
+
 2001-11-30  Richard Hestilow  <hestilow@ximian.com>
 
 	* gnome-messagebox.c (gnome_message_box_new):

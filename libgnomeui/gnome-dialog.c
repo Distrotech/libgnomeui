@@ -34,6 +34,7 @@
 #include <gdk/gdkkeysyms.h>
 #include "gnome-uidefs.h"
 #include "gnome-dialog-util.h"
+#include "gnome-marshal.h"
 
 #include <libgnomeuiP.h>
 
@@ -114,7 +115,7 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
 		    GTK_RUN_LAST,
 		    GTK_CLASS_TYPE (object_class),
 		    GTK_SIGNAL_OFFSET (GnomeDialogClass, close),
-		    gnome_marshal_INT__VOID,
+		    _gnome_marshal_INT__VOID,
 		    GTK_TYPE_INT, 0);
 
   dialog_signals[CLICKED] =

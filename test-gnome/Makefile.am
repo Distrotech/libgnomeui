@@ -16,13 +16,13 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"GnomeUI\"
 
 LDADD = \
-	$(top_builddir)/libgnomeui/libgnomeui-2.la
+	$(top_builddir)/libgnomeui/libgnomeui-2.la 
 
 noinst_HEADERS = \
 	testgnome.h
 
 noinst_PROGRAMS = \
-	test-gnome test-druid test-entry
+	test-gnome test-druid test-entry test-iconlist
 
 test_gnome_SOURCES =		\
 	testgnome.c		\
@@ -33,6 +33,9 @@ test_druid_SOURCES =	\
 
 test_entry_SOURCES = 	\
 	testentry.c
+
+test_iconlist_SOURCES = 	\
+	testiconlist.c
 
 EXTRA_DIST = 		\
 	bomb.xpm	\

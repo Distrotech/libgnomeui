@@ -63,6 +63,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-gconf-ui.c		\
 	gnome-href.c			\
 	gnome-ice.c			\
+	gnome-marshal.c			\
 	gnome-messagebox.c		\
 	gnome-mdi.c			\
 	gnome-mdi-child.c		\
@@ -76,6 +77,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-ui-init.c			\
 	gnometypes.c			\
 	gnome-icon-entry.c		\
+	gnome-icon-item.c		\
 	gnome-icon-list.c		\
 	gnome-icon-sel.c		\
 	gnome-vfs-util.c		\
@@ -105,6 +107,7 @@ gnome_headers = \
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-entry.h		\
+	gnome-icon-item.h		\
 	gnome-icon-list.h		\
 	gnome-icon-sel.h		\
 	gnome-messagebox.h		\
@@ -198,12 +201,29 @@ gnometypes.c: $(srcdir)/gnometype_inits.c
 
 gnome_segv2_SOURCES = gnome_segv.c
 
+$(srcdir)/gnome-marshal.h: @REBUILD@ Makefile.am gnome-marshal.list
+	cd $(srcdir) \
+	&& glib-genmarshal --prefix=_gnome_marshal gnome-marshal.list --header >> xgen-gmh \
+	&& (cmp -s xgen-gmh gnome-marshal.h || cp xgen-gmh gnome-marshal.h) \
+	&& rm -f xgen-gmh xgen-gmh~
+
+$(srcdir)/gnome-marshal.c: @REBUILD@ Makefile.am gnome-marshal.list
+	cd $(srcdir) \
+	&& glib-genmarshal --prefix=_gnome_marshal gnome-marshal.list --body >> xgen-gmc \
+	&& cp xgen-gmc gnome-marshal.c \
+	&& rm -f xgen-gmc xgen-gmc~
+
 EXTRA_DIST =					\
 	AUTHORS					\
+	gnome-marshal.list			\
 	gnome-boxed.defs			\
 	gnometype_inits.c			\
 	libgnomeui-2.0.pc.in			\
 	$(schema_DATA)
+
+BUILT_SOURCES = \
+	gnome-marshal.h			\
+	gnome-marshal.c			
 
 libgnomeui_2_la_LDFLAGS = \
 	-version-info $(LIB_VERSION)		\

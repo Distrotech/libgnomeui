@@ -934,7 +934,7 @@ create_icon_list(void)
 	gtk_widget_set_usize (sw, 430, 300);
 	gtk_widget_show (sw);
 
-	iconlist = gnome_icon_list_new (80, GNOME_ICON_LIST_IS_EDITABLE);
+	iconlist = gnome_icon_list_new (80, NULL, GNOME_ICON_LIST_IS_EDITABLE);
 	gtk_container_add (GTK_CONTAINER (sw), iconlist);
 	gtk_signal_connect (GTK_OBJECT (iconlist), "select_icon",
 			    GTK_SIGNAL_FUNC (select_icon),

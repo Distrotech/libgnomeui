@@ -39,6 +39,7 @@
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomecanvas/gnome-canvas-rich-text.h>
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
+#include <libgnomeui/gnome-icon-item.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 G_BEGIN_DECLS
@@ -68,6 +69,10 @@ typedef enum {
 struct _GnomeIconList {
 	GnomeCanvas canvas;
 
+	/* Scroll adjustments */
+	GtkAdjustment *adj;
+	GtkAdjustment *hadj;
+	
 	/*< private >*/
 	GnomeIconListPrivate * _priv;
 };
@@ -75,10 +80,16 @@ struct _GnomeIconList {
 struct _GnomeIconListClass {
 	GnomeCanvasClass parent_class;
 
-	void     (*select_icon)    (GnomeIconList *gil, gint num, GdkEvent *event);
-	void     (*unselect_icon)  (GnomeIconList *gil, gint num, GdkEvent *event);
-	gboolean (*text_changed)   (GnomeIconList *gil, gint num, const char *new_text);
+	void     (*select_icon)      (GnomeIconList *gil, gint num, GdkEvent *event);
+	void     (*unselect_icon)    (GnomeIconList *gil, gint num, GdkEvent *event);
+	void     (*focus_icon)       (GnomeIconList *gil, gint num);
+	gboolean (*text_changed)     (GnomeIconList *gil, gint num, const char *new_text);
 
+	/* Key Binding signals */
+	void     (*move_cursor)      (GnomeIconList *gil, GtkDirectionType dir, gboolean clear_selection);
+	void     (*toggle_cursor_selection) (GnomeIconList *gil);
+	void     (*select_all)       (GnomeIconList *gil);
+	
 	/* Padding for possible expansion */
 	gpointer padding1;
 	gpointer padding2;
@@ -92,11 +103,19 @@ enum {
 GType          gnome_icon_list_get_type            (void) G_GNUC_CONST;
 
 GtkWidget     *gnome_icon_list_new                 (guint         icon_width,
+						    GtkAdjustment *adj,
 						    int           flags);
+
 void           gnome_icon_list_construct           (GnomeIconList *gil,
 						    guint icon_width,
+						    GtkAdjustment *adj,
 						    int flags);
 
+void           gnome_icon_list_set_hadjustment    (GnomeIconList *gil,
+						   GtkAdjustment *hadj);
+
+void           gnome_icon_list_set_vadjustment    (GnomeIconList *gil,
+						   GtkAdjustment *vadj);
 
 /* To avoid excesive recomputes during insertion/deletion */
 void           gnome_icon_list_freeze              (GnomeIconList *gil);
@@ -138,6 +157,10 @@ void           gnome_icon_list_unselect_icon       (GnomeIconList *gil,
 						    int idx);
 int            gnome_icon_list_unselect_all        (GnomeIconList *gil);
 GList *        gnome_icon_list_get_selection       (GnomeIconList *gil);
+
+/* Managing focus */
+void           gnome_icon_list_focus_icon          (GnomeIconList *gil,
+						    gint idx);
 
 /* Setting the spacing values */
 void           gnome_icon_list_set_icon_width      (GnomeIconList *gil,
@@ -181,8 +204,8 @@ int            gnome_icon_list_get_icon_at         (GnomeIconList *gil,
 int            gnome_icon_list_get_items_per_line  (GnomeIconList *gil);
 
 /* Accessibility functions */
-GnomeCanvasRichText *gnome_icon_list_get_icon_text_item (GnomeIconList *gil,
-							 int idx);
+GnomeIconTextItem *gnome_icon_list_get_icon_text_item (GnomeIconList *gil,
+						       int idx);
 
 GnomeCanvasPixbuf *gnome_icon_list_get_icon_pixbuf_item (GnomeIconList *gil,
 							 int idx);

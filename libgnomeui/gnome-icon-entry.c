@@ -298,10 +298,12 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 		}
 	}
 	gdk_pixbuf_unref (scaled);
+#if 0
 	gtk_drag_source_set (ientry->_priv->pickbutton,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 			     drop_types, 1,
 			     GDK_ACTION_COPY);
+#endif
 }
 
 static void
@@ -527,9 +529,7 @@ gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEnt
 	icon = gnome_icon_selection_get_icon(gis, TRUE);
 
 	if (icon != NULL) {
-		GtkWidget *e = gnome_icon_entry_gtk_entry(ientry);
-		gtk_entry_set_text(GTK_ENTRY(e),icon);
-		
+		gnome_file_entry_set_filename (GNOME_FILE_ENTRY (ientry->_priv->fentry), icon);
 	}
 
 	if(event && event->type == GDK_2BUTTON_PRESS && ((GdkEventButton *)event)->button == 1) {
@@ -547,12 +547,16 @@ dialog_response (GtkWidget *dialog, gint response_id, gpointer data)
 {
 	GnomeIconEntry *ientry = data;
 
-	if (response_id == 0 /* OK */) {
+	switch (response_id) {
+	case GTK_RESPONSE_OK:
 		icon_selected_cb (ientry);
-		gtk_widget_destroy (dialog);
-	} else if (response_id == 1 /* Cancel */) {
+		gtk_widget_hide (dialog);
+		break;
+	default:
+		/* This catches cancel and delete event */
 		cancel_pressed (ientry);
-		gtk_widget_destroy (dialog);
+		gtk_widget_hide (dialog);
+		break;
 	}
 }
 
@@ -627,14 +631,13 @@ ientry_browse(GnomeIconEntry *ientry)
 			gtk_dialog_new_with_buttons (ientry->_priv->browse_dialog_title,
 						     GTK_WINDOW (tl), 
 						     (GTK_WINDOW (tl)->modal ? GTK_DIALOG_MODAL : 0),
-						     GTK_STOCK_OK,
-						     GTK_STOCK_CANCEL,
+						     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+						     GTK_STOCK_OK, GTK_RESPONSE_OK,
 						     NULL);
 		gtk_signal_connect (GTK_OBJECT (ientry->_priv->pick_dialog),
 				    "destroy",
 				    GTK_SIGNAL_FUNC (gtk_widget_destroyed),
 				    &ientry->_priv->pick_dialog);
-
 		gtk_window_set_policy(GTK_WINDOW(ientry->_priv->pick_dialog), 
 				      TRUE, TRUE, TRUE);
 

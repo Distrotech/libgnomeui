@@ -84,7 +84,6 @@ gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
 static void
 gnome_icon_selection_instance_init (GnomeIconSelection *gis)
 {
-	GtkAdjustment *vadj;
 	GtkWidget *box;
 	GtkWidget *frame;
 	GtkWidget *sb;
@@ -107,15 +106,16 @@ gnome_icon_selection_instance_init (GnomeIconSelection *gis)
 	gtk_box_pack_start (GTK_BOX (box), frame, TRUE, TRUE, 0);
 	gtk_widget_show (frame);
 
-	gis->_priv->gil = gnome_icon_list_new(ICON_SIZE+30, FALSE);
+	sb = gtk_vscrollbar_new(NULL);
+	gtk_box_pack_end(GTK_BOX(box),sb,FALSE,FALSE,0);
+	gtk_widget_show(sb);
+
+	gis->_priv->gil = gnome_icon_list_new(ICON_SIZE+30,
+					      gtk_range_get_adjustment (GTK_RANGE (sb)),
+					      FALSE);
 	gtk_widget_set_usize(gis->_priv->gil,350,300);
 	gnome_icon_list_set_selection_mode(GNOME_ICON_LIST(gis->_priv->gil),
 					    GTK_SELECTION_SINGLE);
-
-	vadj = gtk_layout_get_vadjustment(GTK_LAYOUT(gis->_priv->gil));
-	sb = gtk_vscrollbar_new(vadj);
-	gtk_box_pack_end(GTK_BOX(box),sb,FALSE,FALSE,0);
-	gtk_widget_show(sb);
 
 	gtk_container_add (GTK_CONTAINER (frame), gis->_priv->gil);
 	gtk_widget_show(gis->_priv->gil);
@@ -310,14 +310,17 @@ gnome_icon_selection_add_directory (GnomeIconSelection * gis,
     const char *mimetype;
     char *uri;
     GnomeVFSFileInfo *info;
-
+    gchar *full_path;
+    
 #ifdef GNOME_ENABLE_DEBUG
     g_print("File: %s\n", de->d_name);
 #endif
     if ( *(de->d_name) == '.' ) continue; /* skip dotfiles */
 
-    uri = g_filename_to_uri (de->d_name, "localhost", NULL);
+    full_path = g_build_filename (dir, de->d_name, NULL);
+    uri = g_filename_to_uri (full_path, "localhost", NULL);
     info = gnome_vfs_file_info_new ();
+    g_free (full_path);
     /* FIXME: OK to do synchronous I/O here? */
     gnome_vfs_get_file_info (uri, info, GNOME_VFS_FILE_INFO_GET_MIME_TYPE | 
 			     GNOME_VFS_FILE_INFO_FOLLOW_LINKS);

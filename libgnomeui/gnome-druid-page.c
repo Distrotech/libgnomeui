@@ -25,6 +25,7 @@
 #include <libgnome/gnome-macros.h>
 
 #include "gnome-druid-page.h"
+#include "gnome-marshal.h"
 
 #include <libgnomeuiP.h>
 
@@ -66,7 +67,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *class)
 				GTK_RUN_LAST,
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, next),
-				gnome_marshal_BOOLEAN__OBJECT,
+				_gnome_marshal_BOOLEAN__OBJECT,
 				GTK_TYPE_BOOL, 1,
 				GTK_TYPE_WIDGET);
 	druid_page_signals[PREPARE] = 
@@ -74,7 +75,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *class)
 				GTK_RUN_LAST,
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, prepare),
-				gtk_marshal_VOID__OBJECT,
+				g_cclosure_marshal_VOID__OBJECT,
 				GTK_TYPE_NONE, 1,
 				GTK_TYPE_WIDGET);
 	druid_page_signals[BACK] = 
@@ -82,7 +83,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *class)
 				GTK_RUN_LAST,
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, back),
-				gnome_marshal_BOOLEAN__OBJECT,
+				_gnome_marshal_BOOLEAN__OBJECT,
 				GTK_TYPE_WIDGET, 1,
 				GTK_TYPE_WIDGET);
 	druid_page_signals[FINISH] = 
@@ -90,7 +91,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *class)
 				GTK_RUN_LAST,
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, finish),
-				gtk_marshal_VOID__OBJECT,
+				g_cclosure_marshal_VOID__OBJECT,
 				GTK_TYPE_NONE, 1,
 				GTK_TYPE_WIDGET);
 	druid_page_signals[CANCEL] = 
@@ -98,7 +99,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *class)
 				GTK_RUN_LAST,
 				GTK_CLASS_TYPE (object_class),
 				GTK_SIGNAL_OFFSET (GnomeDruidPageClass, cancel),
-				gnome_marshal_BOOLEAN__OBJECT,
+				_gnome_marshal_BOOLEAN__OBJECT,
 				GTK_TYPE_BOOL, 1,
 				GTK_TYPE_WIDGET);
 
