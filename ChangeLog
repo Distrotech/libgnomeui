@@ -1,3 +1,7 @@
+2002-01-12 Hasbullah Bin Pit <sebol@ikhlas.com>
+
+	* configure.in: added ms in ALL_LINGUAS
+
 2002-01-08  Richard Hestilow  <hestilow@ximian.com>
 
 	* configure.in: Check for ESD.
