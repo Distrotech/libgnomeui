@@ -1,3 +1,8 @@
+1999-02-05  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-dock.c (drag_check): fixed (hopefully) the docking
+	policy.
+
 1999-02-04  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gnome-font-picker.[ch]:

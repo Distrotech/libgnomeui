@@ -1,3 +1,4 @@
+
 /* gnome-dock.c
 
    Copyright (C) 1998 Free Software Foundation
@@ -913,9 +914,17 @@ drag_check (GnomeDock *dock,
             gint x, gint y,
             gboolean is_vertical)
 {
-#define NEW_BAND_SNAP 4
+#define NEW_BAND_SNAP 8
   GList *lp;
   GtkAllocation *alloc;
+  GnomeDockBand *parent_band = NULL;
+  gint alone = FALSE;
+
+  if(!item->is_floating)
+    parent_band = GNOME_DOCK_BAND(GTK_WIDGET(item)->parent);
+
+  if(parent_band)
+     alone = gnome_dock_band_get_num_children(parent_band) <= 1;
 
   for (lp = *area; lp != NULL; lp = lp->next)
     {
@@ -927,16 +936,43 @@ drag_check (GnomeDock *dock,
           if (is_vertical)
             {
               if (x > alloc->x + alloc->width - NEW_BAND_SNAP)
-                return drag_new (dock, item, area, lp, x, y, TRUE);
+                {
+                  if(alone && lp->next)
+                    return drag_to (dock, item, lp->next, x, y, FALSE);
+                  else if(!lp->next)
+                    return drag_new (dock, item, area, lp, x, y, FALSE);
+                  else if(parent_band == GNOME_DOCK_BAND(lp->data))
+                    return drag_to (dock, item, lp, x, y, FALSE);
+                }
               else
-                return drag_to (dock, item, lp, x, y, TRUE);
+                {
+                  if(!alone && x < alloc->x + NEW_BAND_SNAP)
+                    return drag_new (dock, item, area, lp->prev, x, y, FALSE);
+                  else if (x > alloc->x + NEW_BAND_SNAP ||
+                           parent_band == GNOME_DOCK_BAND(lp->data))
+                    return drag_to (dock, item, lp, x, y, FALSE);
+                }
             }
           else
             {
-              if (y > alloc->y + alloc->height  - NEW_BAND_SNAP)
-                return drag_new (dock, item, area, lp, x, y, FALSE);
+              if (y > alloc->y + alloc->height - NEW_BAND_SNAP)
+                {
+                  if(alone && lp->next)
+                    return drag_to (dock, item, lp->next, x, y, FALSE);
+                  else if(!lp->next)
+                    return drag_new (dock, item, area, lp, x, y, FALSE);
+                  else if(parent_band == GNOME_DOCK_BAND(lp->data))
+                    return drag_to (dock, item, lp, x, y, FALSE);
+
+                }
               else
-                return drag_to (dock, item, lp, x, y, FALSE);
+                {
+                  if(!alone && y < alloc->y + NEW_BAND_SNAP)
+                    return drag_new (dock, item, area, lp->prev, x, y, FALSE);
+                  else if (y > alloc->y + NEW_BAND_SNAP ||
+                           parent_band == GNOME_DOCK_BAND(lp->data))
+                    return drag_to (dock, item, lp, x, y, FALSE);
+                }
             }
         }
     }
