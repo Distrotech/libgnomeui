@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-06 20:26+0100\n"
+"POT-Creation-Date: 2004-02-17 20:50+0100\n"
 "PO-Revision-Date: 2004-02-07 03:19+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -856,11 +856,11 @@ msgstr "GTK-invoerveld"
 msgid "The GTK entry"
 msgstr "Het GTK-invoerveld"
 
-#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
+#: libgnomeui/gnome-file-entry.c:226 libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "Geschiedenis-ID"
 
-#: libgnomeui/gnome-file-entry.c:221
+#: libgnomeui/gnome-file-entry.c:227
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -868,19 +868,19 @@ msgstr ""
 "Unieke naam voor het bestandsinvoerveld. Dit dient om de geschiedenislijst "
 "op te slaan."
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Titel van Bladeren-dialoogvenster"
 
-#: libgnomeui/gnome-file-entry.c:230
+#: libgnomeui/gnome-file-entry.c:236
 msgid "Title for the Browse file dialog."
 msgstr "De titel van de Bladeren-bestandskiezer"
 
-#: libgnomeui/gnome-file-entry.c:237
+#: libgnomeui/gnome-file-entry.c:243
 msgid "Directory Entry"
 msgstr "Map-invoerveld"
 
-#: libgnomeui/gnome-file-entry.c:238
+#: libgnomeui/gnome-file-entry.c:244
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -888,35 +888,35 @@ msgstr ""
 "Of het bestandsinvoerveld gebruikt wordt om mapnamen of complete "
 "bestandsnamen in te voeren."
 
-#: libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:252
 msgid "Modal"
 msgstr "Modaal"
 
-#: libgnomeui/gnome-file-entry.c:247
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Whether the Browse file window should be modal."
 msgstr "Of de Bladeren-bestandskiezer modaal moet zijn."
 
-#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
+#: libgnomeui/gnome-file-entry.c:260 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Bestandsnaam"
 
-#: libgnomeui/gnome-file-entry.c:255
+#: libgnomeui/gnome-file-entry.c:261
 msgid "Filename that should be displayed in the file entry."
 msgstr "Bestandsnaam die weergegeven moet worden in de bestands-invoerveld"
 
-#: libgnomeui/gnome-file-entry.c:263
+#: libgnomeui/gnome-file-entry.c:269
 msgid "Default Path"
 msgstr "Standaardpad"
 
-#: libgnomeui/gnome-file-entry.c:264
+#: libgnomeui/gnome-file-entry.c:270
 msgid "Default path for the Browse file window."
 msgstr "Standaardpad voor de Bestandskiezer"
 
-#: libgnomeui/gnome-file-entry.c:271
+#: libgnomeui/gnome-file-entry.c:277
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:272
+#: libgnomeui/gnome-file-entry.c:278
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -926,11 +926,11 @@ msgstr ""
 "voeren. U kunt deze eigenschap gebruiken om zonodig de GnomeEntry op te "
 "vragen voor het aanpassen of opvragen van zijn parameters."
 
-#: libgnomeui/gnome-file-entry.c:282
+#: libgnomeui/gnome-file-entry.c:288
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:283
+#: libgnomeui/gnome-file-entry.c:289
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -940,23 +940,35 @@ msgstr ""
 "eigenschap gebruiken om zonodig de GtkEntry op te vragen voor het aanpassen "
 "of opvragen van zijn parameters."
 
-#: libgnomeui/gnome-file-entry.c:535
+#: libgnomeui/gnome-file-entry.c:299
+msgid "Use GtkFileChooser"
+msgstr "GtkFileChooser gebruiken"
+
+#: libgnomeui/gnome-file-entry.c:300
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+"Of het nieuwe GtkFileChooser-element of het GtkFileSelection-element gebruikt "
+"moet worden om bestanden te selecteren."
+
+#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
 msgstr "Kies bestand"
 
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path"
 msgstr "Pad"
 
-#: libgnomeui/gnome-file-entry.c:656
+#: libgnomeui/gnome-file-entry.c:748
 msgid "Path to file"
 msgstr "Pad naar bestand"
 
-#: libgnomeui/gnome-file-entry.c:683
+#: libgnomeui/gnome-file-entry.c:775
 msgid "_Browse..."
 msgstr "_Bladeren..."
 
-#: libgnomeui/gnome-file-entry.c:684
+#: libgnomeui/gnome-file-entry.c:776
 msgid "Pop up a file selector to choose a file"
 msgstr "Bestandskiezer tonen om een bestand te selecteren"
 
@@ -1104,7 +1116,7 @@ msgstr ""
 "starten.\n"
 "Gaat u na of de instellingen in de 'Voorkeurstoepassingen' juist zijn."
 
-#: libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-icon-entry.c:178
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1112,27 +1124,27 @@ msgstr ""
 "Unieke naam voor het pictograminvoerveld. Dit dient om de geschiedenislijst "
 "te bewaren."
 
-#: libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
 msgstr "De titel van het pictogrammen-bladervenster"
 
-#: libgnomeui/gnome-icon-entry.c:193
+#: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
 msgstr "Afbeeldingenmap"
 
-#: libgnomeui/gnome-icon-entry.c:194
+#: libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
 msgstr "Map om pictogrammen in te zoeken"
 
-#: libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Bestandsnaam die in het pictogram-invoerveld dient te staan."
 
-#: libgnomeui/gnome-icon-entry.c:210
+#: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
 msgstr "Kiesvenster"
 
-#: libgnomeui/gnome-icon-entry.c:211
+#: libgnomeui/gnome-icon-entry.c:212
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1140,52 +1152,44 @@ msgstr ""
 "Pictogramkiesvenster. U kunt deze eigenschap gebruiken om zonodig de "
 "GtkDialog op te vragen voor het opvragen of aanpassen van zijn eigenschappen."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
 msgstr "Geen pictogram"
 
-#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:386
-msgid "Can't find an hbox, using a normal file selection"
-msgstr "Kon geen hbox vinden, gebruik een normale bestandsselectie"
-
-#: libgnomeui/gnome-icon-entry.c:539 libgnomeui/gnome-pixmap-entry.c:392
-msgid "Preview"
-msgstr "Voorbeeld"
-
-#: libgnomeui/gnome-icon-entry.c:756
+#: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
 msgstr "Pictogram-selectievenster"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
 msgstr "Dit dialoogvenster biedt de mogelijkheid een pictogram te selecteren."
 
-#: libgnomeui/gnome-icon-entry.c:763
+#: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
 msgstr "Pictogramkiezer"
 
-#: libgnomeui/gnome-icon-entry.c:764
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
 msgstr "Kies het gewenste pictogram."
 
-#: libgnomeui/gnome-icon-entry.c:988
+#: libgnomeui/gnome-icon-entry.c:983
 msgid "Icon Selector"
 msgstr "Pictogramkiezer"
 
-#: libgnomeui/gnome-icon-entry.c:989
+#: libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
 msgstr ""
 "Deze knop zal een selectievenster openen voor het kiezen van een pictogram."
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
 msgstr "Bladeren"
 
-#: libgnomeui/gnome-icon-entry.c:1014
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid "Icon path"
 msgstr "Pictogram-pad"
 
-#: libgnomeui/gnome-icon-entry.c:1015
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1247,25 +1251,33 @@ msgstr "Wachtwoord voor deze sessie onthouden"
 msgid "Save password in keyring"
 msgstr "Wachtwoord opslaan in sleutelbos"
 
-#: libgnomeui/gnome-pixmap-entry.c:113
+#: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
 msgstr "Voorbeeld"
 
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Of het afbeeldings-invoerveld een voorbeeld moet weergeven."
 
-#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "Geen afbeelding"
 
-#: libgnomeui/gnome-pixmap-entry.c:205
+#: libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
 msgstr "Afbeeldingsvoorbeeld"
 
-#: libgnomeui/gnome-pixmap-entry.c:206
+#: libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
 msgstr "Een voorbeeld van de huidige afbeelding"
+
+#: libgnomeui/gnome-pixmap-entry.c:414
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Kon geen hbox vinden, gebruik een normale bestandsselectie"
+
+#: libgnomeui/gnome-pixmap-entry.c:420
+msgid "Preview"
+msgstr "Voorbeeld"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1335,7 +1347,7 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI-bibliotheek"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:707
+#: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1343,7 +1355,7 @@ msgstr ""
 "tonen\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:721
+#: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
 "Segmentation fault!\n"
