@@ -40,11 +40,6 @@ EXTRA_HEADERS =
 noinst_HEADERS = \
 	libgnomeuiP.h
 
-EXTRA_PROGRAMS = unused
-
-unused_SOURCES = \
-	gnome-ditem-edit.c
-
 libgnomeui_2_la_SOURCES = \
 	gnometypebuiltins.h		\
 	gnometypebuiltins.c		\
@@ -81,7 +76,6 @@ gnome_headers = \
 	gnome-client.h			\
 	gnome-color-picker.h		\
 	gnome-dateedit.h		\
-	gnome-ditem-edit.h		\
 	gnome-druid.h			\
 	gnome-druid-page.h		\
 	gnome-druid-page-edge.h		\
