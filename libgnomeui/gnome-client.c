@@ -575,6 +575,13 @@ client_save_phase_2_callback (SmcConn smc_conn, SmPointer client_data)
   client_save_yourself_possibly_done (client);
 }
 
+static gint
+end_wait (gpointer data)
+{
+  gboolean *waiting = (gboolean*)data;
+  *waiting = FALSE;
+  return 0;
+}
 
 static void
 client_save_yourself_callback (SmcConn   smc_conn,
@@ -667,8 +674,15 @@ client_save_yourself_callback (SmcConn   smc_conn,
 
   client_set_state (client, GNOME_CLIENT_SAVING_PHASE_1);
 
-  while (gdk_pointer_is_grabbed())
-    gtk_main_iteration();
+  if (gdk_pointer_is_grabbed())
+    {
+      gboolean waiting = TRUE;
+      gint id = gtk_timeout_add (4000, end_wait, &waiting);
+
+      while (gdk_pointer_is_grabbed() && waiting)
+	gtk_main_iteration();
+      gtk_timeout_remove (id);
+    }
 
   /* Check that we did not receive a shutdown cancelled while waiting 
    * for the grab to be released. The grab should prevent it but ... */
