@@ -682,7 +682,7 @@ popup_button_pressed (GtkWidget *widget, GdkEventButton *event, gpointer data)
 
   popup_set_selection((GnomeHelpView *)data);
 
-  gnome_popup_menu_do_popup(class->popup_menu, NULL, NULL, event, data);
+  gnome_popup_menu_do_popup(class->popup_menu, NULL, NULL, event, data, widget);
 
   return TRUE;
 }
@@ -692,7 +692,7 @@ gnome_help_view_select_style(GtkWidget *btn, GnomeHelpView *help_view)
 {
   GnomeHelpViewClass *class = GNOME_HELP_VIEW_CLASS(GTK_OBJECT(help_view)->klass);
 
-  gnome_popup_menu_do_popup(class->popup_menu, NULL, NULL, NULL, help_view);
+  gnome_popup_menu_do_popup(class->popup_menu, NULL, NULL, NULL, help_view, btn);
 }
 
 static void

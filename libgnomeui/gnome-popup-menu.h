@@ -44,11 +44,16 @@ void gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
 			      gpointer user_data);
 
 void gnome_popup_menu_do_popup (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpointer pos_data,
-				GdkEventButton *event, gpointer user_data);
+				GdkEventButton *event, gpointer user_data, GtkWidget *for_widget);
 
 int gnome_popup_menu_do_popup_modal (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpointer pos_data,
-				     GdkEventButton *event, gpointer user_data);
+				     GdkEventButton *event, gpointer user_data, GtkWidget *for_widget);
 
+void gnome_popup_menu_append (GtkWidget *popup, GnomeUIInfo *uiinfo);
+
+/*** This layer, on top of the gnome_popup_menu_*() routines, defines a standard way of
+listing items on a widget's popup ****/
+void gnome_widget_add_popup_items (GtkWidget *widget, GnomeUIInfo *uiinfo, gpointer user_data);
 
 END_GNOME_DECLS
 

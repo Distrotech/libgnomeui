@@ -1,3 +1,8 @@
+1999-11-15  Elliot Lee  <sopwith@redhat.com>
+
+	* gnome-app-helper.[ch]: Const correctness.
+	* gnome-popup-menu.[ch]: Add gnome_popup_menu_append() and gnome_widget_add_popup_items().
+
 1999-11-13  Jacob Berkman  <jberkman@andrew.cmu.edu>
 
 	* gnome_segv.c (main): use g_basename() instead of

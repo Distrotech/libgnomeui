@@ -534,7 +534,7 @@ gchar * gnome_app_helper_gettext (const gchar *string);
 typedef struct _GnomeUIBuilderData GnomeUIBuilderData;
 
 typedef void (* GnomeUISignalConnectFunc) (GnomeUIInfo        *uiinfo,
-					   gchar              *signal_name,
+					   const char         *signal_name,
 					   GnomeUIBuilderData *uibdata);
 
 struct _GnomeUIBuilderData {

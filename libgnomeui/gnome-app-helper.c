@@ -1097,7 +1097,7 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 
 /* Performs signal connection as appropriate for interpreters or native bindings */
 static void
-do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, 
+do_ui_signal_connect (GnomeUIInfo *uiinfo, const char *signal_name, 
 		GnomeUIBuilderData *uibdata)
 {
 	if (uibdata->is_interp)
@@ -1146,7 +1146,7 @@ gnome_app_fill_menu (GtkMenuShell  *menu_shell,
 	g_return_if_fail (uiinfo != NULL);
 	g_return_if_fail (pos >= 0);
 	
-	uibdata.connect_func = do_ui_signal_connect;
+	uibdata.connect_func =  do_ui_signal_connect;
 	uibdata.data = NULL;
 	uibdata.is_interp = FALSE;
 	uibdata.relay_func = NULL;
