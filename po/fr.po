@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.117.1\n"
-"POT-Creation-Date: 2002-05-23 02:17+0200\n"
+"POT-Creation-Date: 2002-05-27 16:51+0200\n"
 "PO-Revision-Date: 2002-05-23 02:02+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
@@ -527,7 +527,6 @@ msgstr "Astuce pour l'élément fils"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fichier"
 
@@ -585,7 +584,6 @@ msgid "_Game"
 msgstr "_Jeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aide"
 
@@ -776,11 +774,11 @@ msgstr "Configurer l'application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "À _propos"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "À propos de cette application"
 
@@ -807,7 +805,7 @@ msgstr "Crée une nouvelle fenêtre"
 msgid "_Close This Window"
 msgstr "_Fermer cette fenêtre"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Ferme la fenêtre en cours"
 
@@ -1052,23 +1050,23 @@ msgstr ""
 "Vous pouvez utiliser cette propriété pour obtenir le GtkEntry si vous avez "
 "besoin de modifier ou interroger un de ses paramètres."
 
-#: libgnomeui/gnome-file-entry.c:517
+#: libgnomeui/gnome-file-entry.c:527
 msgid "Select file"
 msgstr "Sélectionner un fichier"
 
-#: libgnomeui/gnome-file-entry.c:635
+#: libgnomeui/gnome-file-entry.c:645
 msgid "Path"
 msgstr "Chemin"
 
-#: libgnomeui/gnome-file-entry.c:635
+#: libgnomeui/gnome-file-entry.c:645
 msgid "Path to file"
 msgstr "Chemin vers le fichier"
 
-#: libgnomeui/gnome-file-entry.c:662
+#: libgnomeui/gnome-file-entry.c:672
 msgid "_Browse..."
 msgstr "_Parcourir..."
 
-#: libgnomeui/gnome-file-entry.c:663
+#: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
 msgstr "Affiche un sélecteur de fichier pour choisir un fichier"
 
@@ -1213,53 +1211,53 @@ msgstr ""
 "obtenir le GtkDialog si vous avez besoin de modifier ou interroger n'importe "
 "de ses propriétés"
 
-#: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:980
+#: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:981
 msgid "No Icon"
 msgstr ""
 "Pas\n"
 "d'icône"
 
-#: libgnomeui/gnome-icon-entry.c:527 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:530 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Ne peut trouver une hbox, utilise un sélecteur de fichier normal"
 
-#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:536 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Aperçu"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:752
 msgid "Icon selection dialog"
 msgstr "Dialogue de sélection d'icône"
 
-#: libgnomeui/gnome-icon-entry.c:752
+#: libgnomeui/gnome-icon-entry.c:753
 msgid "This dialog box lets you select an icon."
 msgstr "Cette boîte de dialogue vous permets de sélectionner une icône."
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:759
 msgid "Icon selector"
 msgstr "Sélecteur d'icône"
 
-#: libgnomeui/gnome-icon-entry.c:759
+#: libgnomeui/gnome-icon-entry.c:760
 msgid "Please pick the icon you want."
 msgstr "Veuillez choisir l'icône que vous souhaitez."
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:984
 msgid "Icon Selector"
 msgstr "Sélecteur d'icône"
 
-#: libgnomeui/gnome-icon-entry.c:984
+#: libgnomeui/gnome-icon-entry.c:985
 msgid "This button will open a window to let you select an icon."
 msgstr "Ce bouton ouvrira une fenêtre vous permettant de choisir une icône."
 
-#: libgnomeui/gnome-icon-entry.c:1007
+#: libgnomeui/gnome-icon-entry.c:1008
 msgid "Browse"
 msgstr "Parcourir"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
 msgstr "Chemin de l'icône"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1011
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1348,9 +1346,8 @@ msgstr "%a %d %b %Y, %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Quitter le test"
+#~ msgid "Exit the test"
+#~ msgstr "Quitter le test"
 
 #~ msgid "Find _Again"
 #~ msgstr "Rechercher à _nouveau"

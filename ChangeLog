@@ -1,3 +1,7 @@
+2002-05-27  Anders Carlsson  <andersca@gnu.org>
+
+	* configure.in: Release 1.117.2
+
 2002-05-26  Jacob Berkman  <jacob@ximian.com>
 
 	* configure.in (ALL_LINGUAS): remove ca, it broke the build

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-05-23 08:19+0400\n"
+"POT-Creation-Date: 2002-05-27 16:51+0200\n"
 "PO-Revision-Date: 2002-05-23 08:30+0400\n"
 "Last-Translator: Dmitry G. Mastrukov <dmitry@taurussoft.org>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -524,7 +524,6 @@ msgstr "Подсказка для элемента 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -582,7 +581,6 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Справка"
 
@@ -773,11 +771,11 @@ msgstr "Настроить приложение"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_О программе"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Получить информацию об этой программе"
 
@@ -804,7 +802,7 @@ msgstr "Создать новое окно"
 msgid "_Close This Window"
 msgstr "_Закрыть это окно"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Закрыть текущее окно"
 
@@ -1207,56 +1205,55 @@ msgstr ""
 "Диалог выбора пиктограмм. Можно использовать это свойство для получения  "
 "GtkDialog, если необходимо изменить или запросить любое из свойств."
 
-#: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:980
+#: libgnomeui/gnome-icon-entry.c:319 libgnomeui/gnome-icon-entry.c:981
 msgid "No Icon"
 msgstr "Нет пиктограммы"
 
-#: libgnomeui/gnome-icon-entry.c:527 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:530 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Невозможно найти hbox, используется обычное выделение файлов"
 
-#: libgnomeui/gnome-icon-entry.c:533 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:536 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Предварительный просмотр"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:752
 msgid "Icon selection dialog"
 msgstr "Диалога выбора пиктограмм"
 
-#: libgnomeui/gnome-icon-entry.c:752
+#: libgnomeui/gnome-icon-entry.c:753
 msgid "This dialog box lets you select an icon."
 msgstr "Этот диалог позволяет выбрать пиктограмму."
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:759
 msgid "Icon selector"
 msgstr "Выбор пиктограмм"
 
-#: libgnomeui/gnome-icon-entry.c:759
+#: libgnomeui/gnome-icon-entry.c:760
 msgid "Please pick the icon you want."
 msgstr "Выберите желаемую пиктограмму."
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:984
 msgid "Icon Selector"
 msgstr "Выбрать пиктограмму"
 
-#: libgnomeui/gnome-icon-entry.c:984
+#: libgnomeui/gnome-icon-entry.c:985
 msgid "This button will open a window to let you select an icon."
 msgstr "Эта кнопка откроет окно, позволяющее выбрать пиктограмму."
 
-#: libgnomeui/gnome-icon-entry.c:1007
+#: libgnomeui/gnome-icon-entry.c:1008
 msgid "Browse"
 msgstr "Просмотреть"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
 msgstr "Путь к пиктограмме"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1011
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
-"Здесь следует ввести имя каталога, где размещены пиктограммы."
+msgstr "Здесь следует ввести имя каталога, где размещены пиктограммы."
 
 #: libgnomeui/gnome-icon-sel.c:297
 #, c-format
@@ -1339,9 +1336,8 @@ msgstr "%a, %d %b"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Выйти из теста"
+#~ msgid "Exit the test"
+#~ msgstr "Выйти из теста"
 
 #~ msgid "Find _Again"
 #~ msgstr "Найти _снова"
