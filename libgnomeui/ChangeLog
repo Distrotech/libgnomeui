@@ -1,8 +1,9 @@
 1999-01-17  Seth Alves  <alves@hungry.com>
 
-	* gnome-stock.h (GNOME_STOCK_MENU_FONT): moved colorselector add text_numbered_list
-	text_indent text_bulleted_list table_fill table_borders remove clear text_unindent
-	stock pixmaps from gnome-icons into libgnomeui
+	* gnome-stock.h (GNOME_STOCK_MENU_FONT): moved colorselector add
+	text_numbered_list text_indent text_bulleted_list table_fill
+	table_borders remove clear text_unindent stock pixmaps
+	from gnome-icons into libgnomeui
 
 1999-01-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
