@@ -79,26 +79,36 @@ GtkWidget * gnome_ok_cancel_dialog_modal_parented (const gchar * message,
 						   gpointer data,
 						   GtkWindow * parent);
 
-/* Get a string. */
+/* This function is deprecated; use gnome_request_dialog() instead. */
 GtkWidget * gnome_request_string_dialog           (const gchar * prompt,
 						   GnomeStringCallback callback,
 						   gpointer data);
 
+/* This function is deprecated; use gnome_request_dialog() instead. */
 GtkWidget * gnome_request_string_dialog_parented  (const gchar * prompt,
 						   GnomeStringCallback callback,
 						   gpointer data,
 						   GtkWindow * parent);
 
-/* Request a string, but don't echo to the screen. */
+/* This function is deprecated; use gnome_request_dialog() instead. */
 GtkWidget * gnome_request_password_dialog         (const gchar * prompt,
 						   GnomeStringCallback callback,
 						   gpointer data);
 
+/* This function is deprecated; use gnome_request_dialog() instead. */
 GtkWidget * gnome_request_password_dialog_parented(const gchar * prompt,
 						   GnomeStringCallback callback,
 						   gpointer data,
 						   GtkWindow * parent);
 
+/* Dialog containing a prompt and a text entry field for a response */
+GtkWidget * gnome_request_dialog (gboolean password,
+                                  const gchar * prompt,
+                                  const gchar * default_text,
+                                  const guint16 max_length,
+                                  GnomeStringCallback callback,
+                                  gpointer data,
+                                  GtkWindow * parent);
 
 END_GNOME_DECLS
 

@@ -1,7 +1,17 @@
+1998-11-26  Jeff Garzik  <jgarzik@pobox.com>
+
+	* gnome-dialog-util.[ch]: new, more generic function
+	  gnome_request_dialog().
+	  
+	  This replaces the now-deprecated
+	  gnome_request_string_dialog(),
+	  gnome_request_string_dialog_parented(),
+	  gnome_request_password_dialog(), and
+	  gnome_request_password_dialog_parent().
+
 1998-11-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
-	* gnome-mdi-session.c: make it respect latest changes to
-	GnomeMDI.
+	* gnome-mdi-session.c: make it respect latest changes to GnomeMDI.
 
 1998-11-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 

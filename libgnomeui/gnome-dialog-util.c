@@ -218,6 +218,8 @@ static void dialog_string_callback (GnomeMessageBox * mbox, gint button,
 }
 
 static GtkWidget * request_dialog (const gchar * request, 
+				   const gchar * default_text,
+				   const guint16 max_length,
 				   GnomeStringCallback callback,
 				   gpointer data, gboolean password,
 				   GtkWindow * parent)
@@ -232,8 +234,13 @@ static GtkWidget * request_dialog (const gchar * request,
 				 NULL );
   gnome_dialog_set_default ( GNOME_DIALOG(mbox), 0 );
 
+  /* set up text entry widget */
   entry = gtk_entry_new();
   if (password) gtk_entry_set_visibility (GTK_ENTRY(entry), FALSE);
+  if ((default_text != NULL) && (*default_text))
+    gtk_entry_set_text(GTK_ENTRY(entry), default_text);
+  if (max_length > 0)
+    gtk_entry_set_max_length(GTK_ENTRY(entry), max_length);
 
   gtk_box_pack_end ( GTK_BOX(GNOME_DIALOG(mbox)->vbox), 
 		     entry, FALSE, FALSE, GNOME_PAD_SMALL );
@@ -266,7 +273,8 @@ GtkWidget * gnome_request_string_dialog  (const gchar * prompt,
 					  GnomeStringCallback callback, 
 					  gpointer data)
 {
-  return request_dialog (prompt, callback, data, FALSE, NULL);
+  g_message("gnome_request_string_dialog is deprecated, use gnome_request_dialog instead.");
+  return request_dialog (prompt, NULL, 0, callback, data, FALSE, NULL);
 }
 
 GtkWidget * gnome_request_string_dialog_parented  (const gchar * prompt,
@@ -274,7 +282,8 @@ GtkWidget * gnome_request_string_dialog_parented  (const gchar * prompt,
 						   gpointer data,
 						   GtkWindow * parent)
 {
-  return request_dialog (prompt, callback, data, FALSE, parent);
+  g_message("gnome_request_string_dialog_parented is deprecated, use gnome_request_dialog instead.");
+  return request_dialog (prompt, NULL, 0, callback, data, FALSE, parent);
 }
 
 /* Request a string, but don't echo to the screen. */
@@ -282,7 +291,8 @@ GtkWidget * gnome_request_password_dialog (const gchar * prompt,
 					   GnomeStringCallback callback, 
 					   gpointer data)
 {
-  return request_dialog (prompt, callback, data, TRUE, NULL);
+  g_message("gnome_request_password_dialog is deprecated, use gnome_request_dialog instead.");
+  return request_dialog (prompt, NULL, 0, callback, data, TRUE, NULL);
 }
 
 GtkWidget * gnome_request_password_dialog_parented(const gchar * prompt,
@@ -290,5 +300,37 @@ GtkWidget * gnome_request_password_dialog_parented(const gchar * prompt,
 						   gpointer data,
 						   GtkWindow * parent)
 {
-  return request_dialog (prompt, callback, data, TRUE, parent);
+  g_message("gnome_request_password_dialog_parented is deprecated, use gnome_request_dialog instead.");
+  return request_dialog (prompt, NULL, 0, callback, data, TRUE, parent);
 }
+
+/**
+ * gnome_request_dialog
+ * @password: %TRUE if on-screen text input is masked
+ * @prompt: Text of the prompt to be displayed
+ * @default_text: Default text in entry widget, %NULL if none
+ * @max_length: Maximum input chars allowed
+ * @callback: Callback function for handling dialog results
+ * @parent: Parent window, or %NULL for no parent.
+ *
+ * Description:  Creates a GNOME text entry request dialog.  @callback
+ * is called when the dialog closes, passing the text entry input or
+ * %NULL if the user cancelled.  @callback is defined as
+ *
+ * void (* GnomeStringCallback)(gchar * string, gpointer data); 
+ *
+ * Returns:  Pointer to new GNOME dialog object.
+ **/
+
+GtkWidget * gnome_request_dialog (gboolean password,
+				  const gchar * prompt,
+				  const gchar * default_text,
+				  const guint16 max_length,
+				  GnomeStringCallback callback, 
+				  gpointer data,
+				  GtkWindow * parent)
+{
+  return request_dialog (prompt, default_text, max_length,
+  			 callback, data, password, parent);
+}
+
