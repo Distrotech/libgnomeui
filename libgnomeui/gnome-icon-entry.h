@@ -38,9 +38,10 @@
 #define GNOME_ICON_ENTRY_H
 
 
-#include <gtk/gtkvbox.h>
+#include <glib.h>
 #include <libgnome/gnome-defs.h>
-#include <libgnomeui/gnome-file-entry.h>
+#include "gnome-file-selector.h"
+
 
 
 BEGIN_GNOME_DECLS
@@ -59,17 +60,14 @@ typedef struct _GnomeIconEntryPrivate  GnomeIconEntryPrivate;
 typedef struct _GnomeIconEntryClass    GnomeIconEntryClass;
 
 struct _GnomeIconEntry {
-	GtkVBox vbox;
+	GnomeFileSelector selector;
 	
 	/*< private >*/
 	GnomeIconEntryPrivate *_priv;
 };
 
 struct _GnomeIconEntryClass {
-	GtkVBoxClass parent_class;
-
-	void (*changed) (GnomeIconEntry *ientry);
-	void (*browse) (GnomeIconEntry *ientry);
+	GnomeFileSelectorClass parent_class;
 };
 
 
@@ -82,11 +80,26 @@ void       gnome_icon_entry_construct   (GnomeIconEntry *ientry,
 					 const gchar *history_id,
 					 const gchar *browse_dialog_title);
 
+void       gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
+                                            const gchar *history_id,
+                                            const gchar *dialog_title,
+                                            GtkWidget *entry_widget,
+                                            GtkWidget *selector_widget,
+                                            GtkWidget *browse_dialog,
+                                            guint32 flags);
+
+/* returns the GnomeIconSelector widget of the browse dialog. */
+GtkWidget *gnome_icon_entry_get_icon_selector (GnomeIconEntry *ientry);
+
+#ifndef GNOME_EXCLUDE_DEPRECATED
+/* DEPRECATED routines left for compatibility only, will disapear in
+ * some very distant future */
+
 /*by default gnome_pixmap entry sets the default directory to the
   gnome pixmap directory, this will set it to a subdirectory of that,
   or one would use the file_entry functions for any other path*/
-void       gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
-					      const gchar *subdir);
+void       gnome_icon_entry_set_pixmap_subdir (GnomeIconEntry *ientry,
+					       const gchar *subdir);
 
 /*only return a file if it was possible to load it with gdk-pixbuf*/
 gchar      *gnome_icon_entry_get_filename(GnomeIconEntry *ientry);
@@ -95,23 +108,7 @@ gchar      *gnome_icon_entry_get_filename(GnomeIconEntry *ientry);
 gboolean   gnome_icon_entry_set_filename(GnomeIconEntry *ientry,
 					 const gchar *filename);
 
-void       gnome_icon_entry_set_browse_dialog_title(GnomeIconEntry *ientry,
-						    const gchar *browse_dialog_title);
-void       gnome_icon_entry_set_history_id(GnomeIconEntry *ientry,
-					   const gchar *history_id);
-
-GtkWidget *gnome_icon_entry_pick_dialog	(GnomeIconEntry *ientry);
-
-#ifndef GNOME_EXCLUDE_DEPRECATED
-/* DEPRECATED routines left for compatibility only, will disapear in
- * some very distant future */
-/* this is deprecated in favour of the above */
-void       gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
-				     const gchar *filename);
-GtkWidget *gnome_icon_entry_gnome_file_entry(GnomeIconEntry *ientry);
-GtkWidget *gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry);
-GtkWidget *gnome_icon_entry_gtk_entry   (GnomeIconEntry *ientry);
-#endif
+#endif /* not GNOME_EXCLUDE_DEPRECATED */
 
 
 END_GNOME_DECLS

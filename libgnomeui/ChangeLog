@@ -1,5 +1,32 @@
 2000-10-03  Martin Baulig  <baulig@suse.de>
 
+	* gnome-icon-entry.h (GnomeIconEntry): Derive from GnomeFileSelector.
+	(gnome_icon_entry_construct_full): New function.
+	(gnome_icon_entry_get_icon_selector): New function.
+	(gnome_icon_entry_get_filename): This function is now deprecated; use
+	the GnomeSelector functions instead.
+	(gnome_icon_entry_set_filename): Likewise.
+	(gnome_icon_entry_set_pixmap_subdir): This function is now deprecated.
+	(gnome_icon_entry_set_browse_dialog_title): Removed.
+	(gnome_icon_entry_set_history_id): Removed.
+	(gnome_icon_entry_pick_dialog): Removed.
+ 	(gnome_icon_entry_set_icon): Removed.
+	(gnome_icon_entry_gnome_file_entry): Removed.
+	(gnome_icon_entry_gnome_entry): Removed.
+	(gnome_icon_entry_gtk_entry): Removed.
+
+	* gnome-icon-entry.c: Totally rewrote this file from scratch.
+	(ientry_directory_filter_func): This checks whether it's a valid
+	image file [NOTE: when this is invoked from "add_file" signal handler,
+	we already have the GnomeVFSFileInfo so this won't block; that's why
+	it's better to set a filter on the GnomeFileSelector instead of
+	overriding the "check_filename" handle.]
+	(gnome_icon_entry_construct_full): Create a GnomeVFSDirectoryFilter
+	which uses the ientry_directory_filter_func() and call
+	gnome_file_selector_add_filter() on it.
+
+2000-10-03  Martin Baulig  <baulig@suse.de>
+
 	* gnome-entry.h (GnomeEntry): Derive this from GnomeSelector and
 	exclude all deprecated functions is GNOME_EXCLUDE_DEPRECATED is
 	defined.
