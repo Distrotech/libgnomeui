@@ -98,15 +98,19 @@ struct _GnomeSelectorClass {
     gboolean  (*check_filename)            (GnomeSelector *selector,
                                             const gchar   *filename);
     void      (*add_file)                  (GnomeSelector *selector,
+                                            gint           position,
                                             const gchar   *filename);
     void      (*add_file_default)          (GnomeSelector *selector,
+                                            gint           position,
                                             const gchar   *filename);
 
     gboolean  (*check_directory)           (GnomeSelector *selector,
                                             const gchar   *directory);
     void      (*add_directory)             (GnomeSelector *selector,
+                                            gint           position,
                                             const gchar   *directory);
     void      (*add_directory_default)     (GnomeSelector *selector,
+                                            gint           position,
                                             const gchar   *directory);
 
     void      (*update_file_list)          (GnomeSelector *selector);
@@ -117,6 +121,12 @@ struct _GnomeSelectorClass {
     void      (*selection_changed)         (GnomeSelector *selector);
 
     void      (*history_changed)           (GnomeSelector *selector);
+
+    /* the following operations are async. */
+    void      (*do_add)                    (GnomeSelector *selector,
+                                            gint           position,
+                                            const gchar   *uri);
+    void      (*stop_loading)              (GnomeSelector *selector);
 };
 
 
@@ -148,6 +158,11 @@ gboolean     gnome_selector_append_file        (GnomeSelector *selector,
                                                 const gchar   *filename,
                                                 gboolean       defaultp);
 
+gboolean     gnome_selector_add_file           (GnomeSelector *selector,
+                                                gint           position,
+                                                const gchar   *filename,
+                                                gboolean       defaultp);
+
 /* Get/set file list (set will replace the old file list). */
 GSList *     gnome_selector_get_file_list      (GnomeSelector *selector,
                                                 gboolean       incl_dir_list,
@@ -173,6 +188,11 @@ gboolean     gnome_selector_prepend_directory  (GnomeSelector *selector,
                                                 const gchar   *directory,
                                                 gboolean       defaultp);
 gboolean     gnome_selector_append_directory   (GnomeSelector *selector,
+                                                const gchar   *directory,
+                                                gboolean       defaultp);
+
+gboolean     gnome_selector_add_directory      (GnomeSelector *selector,
+                                                gint           position,
                                                 const gchar   *directory,
                                                 gboolean       defaultp);
 

@@ -1,3 +1,24 @@
+2000-09-16  Martin Baulig  <baulig@suse.de>
+
+	* gnome-selector.h (GnomeSelector):
+	- Added `position' argument to the "add", "add_default",
+	"add_directory" and "add_directory_default" signals; this is
+	0 for the start of the list, -1 for the end of it or any position
+	in the middle.
+	- Added "do_load" and "stop_loading" signals which are supposed
+	to invoke asynchronous operations.
+	(gnome_selector_add_file, gnome_selector_add_directory): New
+	functions which allow you to insert a file or directory at an
+	arbitrary position.
+	(gnome_selector_prepend_file,gnome_selector_append_file): Call
+	gnome_selector_add_file() with apropriate arguments.
+	(gnome_selector_prepend_directory,gnome_selector_append_directory):
+	Call gnome_selector_add_directory() with apropriate arguments.
+	(gnome_selector_add_file): Just emit the ADD_FILE/
+	ADD_FILE_DEFAULT signal here.
+	(gnome_selector_add_directory): Just emit the ADD_DIRECTORY/
+	ADD_DIRECTORY_DEFAULT signal here.
+
 Fri Sep 15 18:49:34 2000  George Lebl <jirka@5z.com>
 
 	* gnome-animator.c, gnome-helpsys.c, gnome-selector.c: don't set
