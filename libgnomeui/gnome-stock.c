@@ -311,6 +311,9 @@ gnome_stock_pixmap_widget_set_icon(GnomeStockPixmapWidget *widget,
 /*  new GnomeStock widget  */
 /***************************/
 
+static gint (*parent_expose)(GtkWidget *widget, GdkEventExpose *event) = NULL;
+static void (*parent_draw)(GtkWidget *widget, GdkRectangle *area) = NULL;
+
 static void
 gnome_stock_destroy(GtkObject *object)
 {
@@ -359,9 +362,9 @@ gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
 		gint width, height;
 		gdk_window_get_size(gpixmap->pixmap, &width, &height);
 		if ((width != req.width) || (height != req.height)) {
-			gdk_window_destroy(gpixmap->pixmap);
+			gdk_pixmap_unref(gpixmap->pixmap);
 			gpixmap->pixmap = NULL;
-			gdk_window_destroy(gpixmap->mask);
+			gdk_pixmap_unref(gpixmap->mask);
 			gpixmap->mask = NULL;
 		}
 	}
@@ -376,10 +379,12 @@ gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
 	gdk_draw_pixmap(gpixmap->pixmap, gc, pixmap->pixmap, 0, 0, 0, 0,
 			req.width, req.height);
 	gdk_gc_destroy(gc);
-	gc = gdk_gc_new(gpixmap->mask);
-	gdk_draw_pixmap(gpixmap->mask, gc, pixmap->mask, 0, 0, 0, 0,
-			req.width, req.height);
-	gdk_gc_destroy(gc);
+	if (pixmap->mask) {
+		gc = gdk_gc_new(gpixmap->mask);
+		gdk_draw_pixmap(gpixmap->mask, gc, pixmap->mask, 0, 0, 0, 0,
+				req.width, req.height);
+		gdk_gc_destroy(gc);
+	}
 	if (GTK_WIDGET(gpixmap)->window)
 		gdk_window_shape_combine_mask(GTK_WIDGET(gpixmap)->window,
 					      gpixmap->mask, 0, 0);
@@ -399,34 +404,59 @@ gnome_stock_state_changed(GtkWidget *widget, guint prev_state)
 	GnomeStock *w = GNOME_STOCK(widget);
 	GnomePixmap *pixmap;
 	GtkWidget *tmp;
+	static GHashTable *hash = NULL;
+	struct style_hash {
+		GtkWidget *widget;
+	};
 
+	if (!hash) {
+		hash = g_hash_table_new(g_direct_hash, g_direct_equal);
+	}
 	if (widget->parent) {
+		GdkWindow *w;
 		tmp = widget->parent;
-		if (tmp->parent)
+		w = tmp->window;
+		while (tmp->parent) {
+			if (tmp->parent->window != w) break;
 			tmp = tmp->parent;
+		}
 	} else {
 		tmp = widget;
 	}
+	if (g_hash_table_lookup(hash, widget)) {
+		if (tmp != g_hash_table_lookup(hash, widget)) {
+			if (w->regular) {
+				gtk_widget_unref(GTK_WIDGET(w->regular));
+				w->regular = NULL;
+			}
+			if (w->disabled) {
+				gtk_widget_unref(GTK_WIDGET(w->disabled));
+				w->disabled = NULL;
+			}
+			if (w->focused) {
+				gtk_widget_unref(GTK_WIDGET(w->focused));
+				w->focused = NULL;
+			}
+			w->current = NULL;
+		}
+		/* FIXME: do I really need to remove the entry? */
+		g_hash_table_remove(hash, widget);
+	}
+	g_hash_table_insert(hash, widget, tmp);
 	pixmap = NULL;
 	if (GTK_WIDGET_HAS_FOCUS(widget)) {
 		if (!w->focused) {
 			w->focused = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_FOCUSED);
-			/* gtk_widget_ref(GTK_WIDGET(w->focused)); */
-			/* gtk_widget_show(GTK_WIDGET(w->focused)); */
 		}
 		pixmap = w->focused;
 	} else if (!GTK_WIDGET_IS_SENSITIVE(widget)) {
 		if (!w->disabled) {
 			w->disabled = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_DISABLED);
-			/* gtk_widget_ref(GTK_WIDGET(w->disabled)); */
-			/* gtk_widget_show(GTK_WIDGET(w->disabled)); */
 		}
 		pixmap = w->disabled;
 	} else {
 		if (!w->regular) {
 			w->regular = gnome_stock_pixmap(tmp, w->icon, GNOME_STOCK_PIXMAP_REGULAR);
-			/* gtk_widget_ref(GTK_WIDGET(w->regular)); */
-			/* gtk_widget_show(GTK_WIDGET(w->regular)); */
 		}
 		pixmap = w->regular;
 	}
@@ -436,12 +466,32 @@ gnome_stock_state_changed(GtkWidget *widget, guint prev_state)
 	gnome_stock_paint(w, pixmap);
 }
 
+static gint
+gnome_stock_expose(GtkWidget *widget, GdkEventExpose *event)
+{
+	gnome_stock_state_changed(widget, 0);
+	return (*parent_expose)(widget, event);
+}
+
+static void
+gnome_stock_draw(GtkWidget *widget, GdkRectangle *area)
+{
+	gnome_stock_state_changed(widget, 0);
+	(*parent_draw)(widget, area);
+}
+
 static void
 gnome_stock_class_init(GtkObjectClass *klass)
 {
 	klass->destroy = gnome_stock_destroy;
 	((GtkWidgetClass *)klass)->state_changed =
 		gnome_stock_state_changed;
+	parent_expose = ((GtkWidgetClass *)klass)->expose_event;
+	((GtkWidgetClass *)klass)->expose_event =
+		gnome_stock_expose;
+	parent_draw = ((GtkWidgetClass *)klass)->draw;
+	((GtkWidgetClass *)klass)->draw =
+		gnome_stock_draw;
 }
 
 static void
@@ -466,7 +516,8 @@ gnome_stock_get_type(void)
 			(GtkClassInitFunc)gnome_stock_class_init,
 			(GtkObjectInitFunc)gnome_stock_init,
 			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			(GtkArgGetFunc) NULL,
+			(GtkClassInitFunc) NULL
 		};
 		new_type = gtk_type_unique(gnome_pixmap_get_type(), &type_info);
 	}
@@ -713,7 +764,7 @@ struct _default_entries_data entries_data[] = {
 	{GNOME_STOCK_PIXMAP_NOT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_not, TB_W, TB_H, TB_W, TB_H},
 	{GNOME_STOCK_PIXMAP_CONVERT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_convert, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_JUMP_TO, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_jump_to, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
-	{GNOME_STOCK_PIXMAP_MULTIPLE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_multiple_file, 32, 32 },
+	{GNOME_STOCK_PIXMAP_MULTIPLE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_multiple_file, 32, 32, 32, 32},
 	{GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_exit, TB_W, TB_H, TB_W, TB_H},
 	{GNOME_STOCK_PIXMAP_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_about, MENU_W, MENU_H, MENU_W, MENU_H},
 	{GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, N_("OK"), imlib_button_ok, TB_W, TB_H, TB_W, TB_H},
@@ -1172,7 +1223,8 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 		    (pixmap->window == NULL))
 			GNOME_STOCK_PIXMAP_WIDGET(pixmap)->window = button;
 #endif /* !USE_NEW_GNOME_STOCK */
-		if (GNOME_IS_PIXMAP(pixmap)) {
+		if ((GNOME_IS_PIXMAP(pixmap)) &&
+		    (!GNOME_IS_STOCK(pixmap))) {
 			GnomeStockPixmapEntry *entry;
 			char s[32];
 
@@ -1325,7 +1377,7 @@ struct default_AccelEntry default_accel_hash[] = {
 	{GNOME_STOCK_MENU_MAIL, {0, 0}},
 	{GNOME_STOCK_MENU_MAIL_RCV, {0, 0}},
 	{GNOME_STOCK_MENU_MAIL_SND, {0, 0}},
-	{NULL}
+	{NULL, {0,0}}
 };
 
 
@@ -1639,6 +1691,8 @@ accel_dlg_select(GtkCList *widget, int row, int col, GdkEventButton *event)
 }
 
 
+/* make the compiler happy */
+void gnome_stock_menu_accel_dlg(char *section);
 
 void
 gnome_stock_menu_accel_dlg(char *section)
@@ -1721,7 +1775,8 @@ gnome_stock_transparent_window (const char *icon, const char *subtype)
 						       entry->imlib.width, entry->imlib.height);
 		break;
 	 default:
-		 break;
+		im = NULL;
+		break;
 	}
 
 	if (!im)

@@ -1,3 +1,10 @@
+Mon Sep 21 00:03:03 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.c: removed some compiler warnings.
+	GnomeStock is now a bit smarter concerning the background color for
+	transparency and disabled pixmaps (for those of you who play
+	around with the gtk styles).
+
 Sun Sep 20 15:26:41 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* pixmaps/: use PNG images instead of XPMs.
