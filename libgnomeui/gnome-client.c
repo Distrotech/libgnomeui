@@ -824,6 +824,14 @@ gnome_client_disable_master_connection (void)
   gnome_client_auto_connect_master= FALSE;
 }
 
+/* Called at exit to ensure the ice connection is closed cleanly
+ * This avoids io errors on the session manager side */
+static void  
+master_client_clean_up (void)
+{
+  gnome_client_disconnect (master_client);
+}
+
 static void
 master_client_connect (GnomeClient *client,
 		       gint         restarted,
@@ -836,7 +844,9 @@ master_client_connect (GnomeClient *client,
 		   XInternAtom(gdk_display, sm_client_id_prop, False),
 		   XA_STRING, 8, GDK_PROP_MODE_REPLACE,
 		   (unsigned char *) client_id,
-		   strlen(client_id));               
+		   strlen(client_id));
+
+  g_atexit (master_client_clean_up);
 }
 
 static void
