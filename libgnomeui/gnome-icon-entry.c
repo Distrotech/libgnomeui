@@ -150,8 +150,11 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 	class->changed = NULL;
 	class->browse = ientry_browse;
 
-	gobject_class->finalize = ientry_finalize;
 	object_class->destroy = ientry_destroy;
+
+	gobject_class->finalize     = ientry_finalize;
+	gobject_class->set_property = ientry_set_property;
+	gobject_class->get_property = ientry_get_property;
 
 	g_object_class_install_property (gobject_class,
 					 PROP_HISTORY_ID,
@@ -198,8 +201,6 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 						 GTK_TYPE_DIALOG,
 						 G_PARAM_READABLE));
 
-	gobject_class->set_property = ientry_set_property;
-	gobject_class->get_property = ientry_get_property;
 }
 
 /* set_property handler for the icon entry */

@@ -1,3 +1,8 @@
+2002-02-27  Mark McLoughlin  <mark@skynet.ie>
+
+	* gnome-icon-entry.c: (gnome_icon_entry_class_init): set
+	property handlers berfore installing properties.
+
 2002-02-25  Zbigniew Chyla  <cyba@gnome.pl>
 
 	* gnome-about.c (gnome_about_instance_init): Marked string for translation.
