@@ -61,17 +61,24 @@
  * libgnomeui
  *****************************************************************************/
 
-static void libgnomeui_arg_callback(poptContext con,
-                                    enum poptCallbackReason reason,
-                                    const struct poptOption * opt,
-                                    const char * arg, void * data);
-static void libgnomeui_init_pass(const GnomeModuleInfo *mod_info);
-static void libgnomeui_class_init(GnomeProgramClass *klass, const GnomeModuleInfo *mod_info);
-static void libgnomeui_instance_init(GnomeProgram *program, GnomeModuleInfo *mod_info);
-static void libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
-static void libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
-static void libgnomeui_rc_parse (gchar *command);
-static void libgnomeui_segv_setup(gboolean post_arg_parse);
+static void libgnomeui_arg_callback 	(poptContext con,
+					 enum poptCallbackReason reason,
+					 const struct poptOption * opt,
+					 const char * arg,
+					 void * data);
+static void libgnomeui_init_pass	(const GnomeModuleInfo *mod_info);
+static void libgnomeui_class_init	(GnomeProgramClass *klass,
+					 const GnomeModuleInfo *mod_info);
+static void libgnomeui_instance_init	(GnomeProgram *program,
+					 GnomeModuleInfo *mod_info);
+static void libgnomeui_pre_args_parse	(GnomeProgram *app,
+					 GnomeModuleInfo *mod_info);
+static void libgnomeui_post_args_parse	(GnomeProgram *app,
+					 GnomeModuleInfo *mod_info);
+static void libgnomeui_rc_parse		(GnomeProgram *program,
+					 const gchar *command);
+static void libgnomeui_segv_setup	(GnomeProgram *program,
+					 gboolean post_arg_parse);
 
 /* Prototype for a private gnome_stock function */
 void _gnome_stock_icons_init (void);
@@ -265,7 +272,7 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 			      NULL);
 
         if(do_crash_dialog)
-                libgnomeui_segv_setup(FALSE);
+                libgnomeui_segv_setup (app, FALSE);
 
         /* Begin hack to propogate an en_US locale into Gtk+ if LC_CTYPE=C, so that non-ASCII
            characters will display for as many people as possible. Related to bug #1979 */
@@ -299,9 +306,9 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
 
         gnome_type_init();
         /* #warning FIXME: here... gtk_rc ... */
-        libgnomeui_rc_parse(program_invocation_name);
+        libgnomeui_rc_parse (program, program_invocation_name);
 
-        libgnomeui_segv_setup(TRUE);
+        libgnomeui_segv_setup (program, TRUE);
 
         priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
         priv->constructed = TRUE;
@@ -315,7 +322,8 @@ libgnomeui_arg_callback(poptContext con,
                         const struct poptOption * opt,
                         const char * arg, void * data)
 {
-        GnomeProgram *program = gnome_program_get ();
+        GnomeProgram *program = g_dataset_get_data (con, "GnomeProgram");
+	g_assert (program != NULL);
 
         switch(reason) {
         case POPT_CALLBACK_REASON_OPTION:
@@ -352,11 +360,11 @@ libgnomeui_arg_callback(poptContext con,
  * If you don't like it.. give me a good reason.  Symlin
  */
 static void
-libgnomeui_rc_parse (gchar *command)
+libgnomeui_rc_parse (GnomeProgram *program, const gchar *command)
 {
 	gint i;
 	gint buf_len;
-	gchar *buf = NULL;
+	const gchar *buf = NULL;
 	gchar *file;
 	gchar *apprc;
 	
@@ -412,7 +420,7 @@ libgnomeui_rc_parse (gchar *command)
 static void libgnomeui_segv_handle(int signum);
 
 static void
-libgnomeui_segv_setup(gboolean post_arg_parse)
+libgnomeui_segv_setup (GnomeProgram *program, gboolean post_arg_parse)
 {
         static struct sigaction *setptr;
         struct sigaction sa;
@@ -420,7 +428,7 @@ libgnomeui_segv_setup(gboolean post_arg_parse)
         GValue value = { 0, };
 
         g_value_init (&value, G_TYPE_BOOLEAN);
-        g_object_get_property (G_OBJECT (gnome_program_get()),
+        g_object_get_property (G_OBJECT (program),
                                LIBGNOMEUI_PARAM_CRASH_DIALOG, &value);
         do_crash_dialog = g_value_get_boolean (&value);
         g_value_unset (&value);
@@ -541,18 +549,19 @@ gnome_init_with_popt_table (const char *app_id,
 			    int flags,
 			    poptContext *return_ctx)
 {
-        gnome_program_init (app_id, app_version,
-			    LIBGNOMEUI_MODULE,
-			    argc, argv,
-			    GNOME_PARAM_POPT_TABLE, options,
-			    GNOME_PARAM_POPT_FLAGS, flags,
-			    NULL);
+	GnomeProgram *program;
+        program = gnome_program_init (app_id, app_version,
+				      LIBGNOMEUI_MODULE,
+				      argc, argv,
+				      GNOME_PARAM_POPT_TABLE, options,
+				      GNOME_PARAM_POPT_FLAGS, flags,
+				      NULL);
 
         if(return_ctx) {
                 GValue value = { 0, };
 
                 g_value_init (&value, G_TYPE_POINTER);
-                g_object_get_property (G_OBJECT (gnome_program_get()),
+                g_object_get_property (G_OBJECT (program),
                                        GNOME_PARAM_POPT_CONTEXT, &value);
                 *return_ctx = g_value_peek_pointer (&value);
                 g_value_unset (&value);
@@ -701,8 +710,17 @@ add_gtk_arg_callback (poptContext con, enum poptCallbackReason reason,
 		      const struct poptOption * opt,
 		      const char * arg, void * data)
 {
-	gnome_gtk_init_info *init_info = data;
+	GnomeProgram *program;
+	gnome_gtk_init_info *init_info;
 	char *newstr;
+
+	program = g_dataset_get_data (con, "GnomeProgram");
+	g_assert (program != NULL);
+
+	init_info = g_object_get_data (G_OBJECT (program),
+				       "Libgnomeui-Gtk-Module-init-info");
+	g_assert (init_info != NULL);
+
 
 	switch (reason) {
 	case POPT_CALLBACK_REASON_PRE:

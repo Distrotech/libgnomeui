@@ -1,3 +1,9 @@
+Sun Oct 14 20:14:52 2001  George Lebl <jirka@5z.com>
+
+	* gnome-ui-init.c:  Use the "GnomeProgram" data that's set in
+	  libgnome popt stuff now.  Also correctly use the right GnomeProgram
+	  object in more places.
+
 Sun Oct 14 18:03:38 2001  George Lebl <jirka@5z.com>
 
 	* gnome-ui-init.c: Fix an INCREDIBLE hack, and a couple of leaks
