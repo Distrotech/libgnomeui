@@ -1,3 +1,8 @@
+2001-06-12  Martin Baulig  <baulig@suse.de>
+
+	* gnome.h: Don't #include "gnomesupport.h".
+	Use `#include <...>' instead of `#include "..."'.
+
 2001-06-07  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* configure.in: Added "az" and "wa" to the languages list.
