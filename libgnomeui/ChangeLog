@@ -1,3 +1,13 @@
+Sat Nov 21 22:57:15 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-calculator.c: don't reset the calculator on realize, just
+	  write the current number as it might have been already set, and
+	  check for realized before trying to write the font
+
+	* gnome-number-entry.[ch]: get rid of problems with multiple
+	  dialogs and non-modalness of the dialog as in the previous
+	  cases (only one dialog, destroy on entry destroy)
+
 Sat Nov 21 19:08:01 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-color-picker.c: catch destroy event on the dialog, don't

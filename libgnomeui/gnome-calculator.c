@@ -349,7 +349,8 @@ set_result(GnomeCalculator *gc)
 	strncpy(gc->result_string,buf,12);
 	gc->result_string[12]='\0';
 
-	put_led_font(gc);
+	if(GTK_WIDGET_REALIZED(gc))
+		put_led_font(gc);
 
 	gtk_signal_emit(GTK_OBJECT(gc),
 			gnome_calculator_signals[RESULT_CHANGED_SIGNAL],
@@ -1044,8 +1045,7 @@ gnome_calculator_realized(GtkWidget *w, gpointer data)
 
 	gtk_widget_show(gc->display);
 
-	gc->stack = NULL;
-	reset_calc(NULL,gc);
+	put_led_font(gc);
 
 	return FALSE;
 }

@@ -29,6 +29,8 @@ struct _GnomeNumberEntry {
 	GtkHBox hbox;
 
 	char *calc_dialog_title;
+	
+	GtkWidget *calc_dlg;
 
 	GtkWidget *gentry;
 };
