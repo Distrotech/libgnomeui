@@ -377,14 +377,14 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 #endif
 
   system_vfs->volume_monitor = gnome_vfs_volume_monitor_ref (gnome_vfs_get_volume_monitor ());
-  g_signal_connect (system_vfs->volume_monitor, "volume-mounted",
-		    G_CALLBACK (volume_mount_unmount_cb), system_vfs);
-  g_signal_connect (system_vfs->volume_monitor, "volume-unmounted",
-		    G_CALLBACK (volume_mount_unmount_cb), system_vfs);
-  g_signal_connect (system_vfs->volume_monitor, "drive-connected",
-		    G_CALLBACK (drive_connect_disconnect_cb), system_vfs);
-  g_signal_connect (system_vfs->volume_monitor, "drive-disconnected",
-		    G_CALLBACK (drive_connect_disconnect_cb), system_vfs);
+  g_signal_connect_object (system_vfs->volume_monitor, "volume-mounted",
+			   G_CALLBACK (volume_mount_unmount_cb), system_vfs, 0);
+  g_signal_connect_object (system_vfs->volume_monitor, "volume-unmounted",
+			   G_CALLBACK (volume_mount_unmount_cb), system_vfs, 0);
+  g_signal_connect_object (system_vfs->volume_monitor, "drive-connected",
+			   G_CALLBACK (drive_connect_disconnect_cb), system_vfs, 0);
+  g_signal_connect_object (system_vfs->volume_monitor, "drive-disconnected",
+			   G_CALLBACK (drive_connect_disconnect_cb), system_vfs, 0);
 
 }
 
