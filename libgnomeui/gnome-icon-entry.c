@@ -54,6 +54,7 @@
 #include "gnome-i18nP.h"
 
 #include <libgnome/gnome-util.h>
+#include <libgnome/gnome-config.h>
 #include <libgnomevfs/gnome-vfs-mime.h>
 
 #include "gnome-file-entry.h"
@@ -708,44 +709,81 @@ drag_data_received (GtkWidget        *widget,
 	/*here we extract the filenames from the URI-list we recieved*/
 	uris = gnome_vfs_uri_list_parse (selection_data->data);
 
-	/* FIXME: Support multiple files */
-	/* FIXME: Support executable entries (smack files after others) */
 	for (li = uris; li != NULL; li = li->next) {
+		const char *mimetype;
+		const char *path;
+
 		uri = li->data;
+
 		/* FIXME: Support non-local files */
 		if ( ! gnome_vfs_uri_is_local (uri)) {
 			uri = NULL;
 			continue;
 		}
-		/* FIXME! we have to do this by hand nowdays, no ditem */
-#ifdef FIXME
-		const char *mimetype;
 
-		mimetype = gnome_mime_type(li->data);
+		path = gnome_vfs_uri_get_path (uri);
+		mimetype = gnome_vfs_get_mime_type_from_file_data (uri);
 
-		if(mimetype
-			&& !strcmp(mimetype, "application/x-gnome-app-info")) {
-			/* hmmm a desktop, try loading the icon from that */
-			GnomeDesktopItem * item;
-			const char *icon;
+		if (mimetype != NULL &&
+		    strcmp (mimetype, "application/x-gnome-app-info") == 0) {
+			char *confpath;
+			char *icon;
 
-			item = gnome_desktop_item_new_from_file
-				(li->data,
-				 GNOME_DESKTOP_ITEM_LOAD_NO_SYNC |
-				 GNOME_DESKTOP_ITEM_LOAD_NO_OTHER_SECTIONS);
-			if(!item)
-				continue;
-			icon = gnome_desktop_item_get_icon_path(item);
-
-			if(gnome_icon_entry_set_filename(ientry, icon)) {
-				gnome_desktop_item_unref(item);
-				break;
+			/* Try to read the .desktop's Icon entry */
+			confpath = g_strdup_printf ("=%s=/Desktop Entry/Icon",
+						    path);
+			icon = gnome_config_get_string (confpath);
+			if (icon == NULL || *icon == '\0') {
+				gnome_config_drop_file (confpath);
+				g_free (confpath);
+				g_free (icon);
+				confpath = g_strdup_printf ("=%s=/KDE Desktop Entry/Icon",
+							    path);
+				icon = gnome_config_get_string (confpath);
+				gnome_config_drop_file (confpath);
+				g_free (confpath);
+				if (icon == NULL || *icon == '\0') {
+					g_free (icon);
+					icon = NULL;
+				}
 			}
-			gnome_desktop_item_unref(item);
-		} else
-#endif
-		if(gnome_icon_entry_set_filename(ientry,
-						 gnome_vfs_uri_get_path (uri))) {
+
+			if (icon == NULL) {
+				uri = NULL;
+				continue;
+			}
+
+			if (icon[0] == G_DIR_SEPARATOR) {
+				if(gnome_icon_entry_set_filename(ientry, icon)) {
+					g_free (icon);
+					break;
+				}
+				g_free (icon);
+			} else {
+				char *full;
+				full = gnome_program_locate_file (NULL /* program */,
+								  GNOME_FILE_DOMAIN_PIXMAP,
+								  icon,
+								  TRUE /* only_if_exists */,
+								  NULL /* ret_locations */);
+				if (full == NULL) {
+					full = gnome_program_locate_file (NULL /* program */,
+									  GNOME_FILE_DOMAIN_APP_PIXMAP,
+									  icon,
+									  TRUE /* only_if_exists */,
+									  NULL /* ret_locations */);
+				}
+				/* FIXME: try the KDE path if we know it */
+				g_free (icon);
+
+				if (full != NULL &&
+				    gnome_icon_entry_set_filename (ientry, full)) {
+					g_free (full);
+					break;
+				}
+				g_free (full);
+			}
+		} else if (gnome_icon_entry_set_filename (ientry, path)) {
 			break;
 		}
 		uri = NULL;

@@ -45,18 +45,24 @@
 #define ICON_SIZE 48
 
 struct _GnomeIconSelectionPrivate {
-  GtkWidget * box;
+	GtkWidget * box;
 
-  GtkWidget * gil;
+	GtkWidget * gil;
 
-  GList * file_list;
-  
-  gboolean stop_loading; /* a flag set to stop the loading of images in midprocess */
+	GList * file_list;
+
+	/* For loading the icons */
+	GMainLoop * load_loop;
+	guint load_idle;
+	int load_i;
+	int load_file_count;
+	GtkWidget * load_progressbar;
 };
 
 static void gnome_icon_selection_class_init (GnomeIconSelectionClass *klass);
 static void gnome_icon_selection_instance_init (GnomeIconSelection   *gis);
 
+static void gnome_icon_selection_destroy    (GtkObject               *object);
 static void gnome_icon_selection_finalize   (GObject                 *object);
 
 static int sort_file_list		    (gconstpointer            a,
@@ -69,10 +75,13 @@ static void
 gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
 {
   GObjectClass *gobject_class;
+  GtkObjectClass *object_class;
 
   gobject_class = (GObjectClass*) klass;
+  object_class = (GtkObjectClass*) klass;
 
   gobject_class->finalize = gnome_icon_selection_finalize;
+  object_class->destroy = gnome_icon_selection_destroy;
 }
 
 static void
@@ -137,14 +146,36 @@ gnome_icon_selection_new (void)
 }
 
 static void
+gnome_icon_selection_destroy (GtkObject *object)
+{
+	GnomeIconSelection *gis;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_ICON_SELECTION(object));
+	
+	gis = GNOME_ICON_SELECTION (object);
+
+	if (gis->_priv->load_idle != 0)
+		g_source_remove (gis->_priv->load_idle);
+	gis->_priv->load_idle = 0;
+
+	if (gis->_priv->load_loop != NULL &&
+	    g_main_loop_is_running (gis->_priv->load_loop))
+		g_main_loop_quit (gis->_priv->load_loop);
+
+	GNOME_CALL_PARENT_HANDLER (GTK_OBJECT_CLASS, destroy, (object));
+}
+
+
+static void
 gnome_icon_selection_finalize (GObject *object)
 {
 	GnomeIconSelection *gis;
 
-	g_return_if_fail(object != NULL);
-	g_return_if_fail(GNOME_IS_ICON_SELECTION(object));
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_ICON_SELECTION(object));
 	
-	gis = GNOME_ICON_SELECTION(object);
+	gis = GNOME_ICON_SELECTION (object);
 
 	/*clear our data if we have some*/
 	if (gis->_priv->file_list != NULL) {
@@ -174,7 +205,8 @@ gnome_icon_selection_add_defaults (GnomeIconSelection * gis)
 {
   gchar *pixmap_dir;
 
-  g_return_if_fail(gis != NULL);
+  g_return_if_fail (gis != NULL);
+  g_return_if_fail (GNOME_IS_ICON_SELECTION (gis));
 
   pixmap_dir = gnome_unconditional_datadir_file("pixmaps");
   
@@ -255,8 +287,9 @@ gnome_icon_selection_add_directory (GnomeIconSelection * gis,
   struct dirent * de;
   DIR * dp;
 
-  g_return_if_fail(gis != NULL);
-  g_return_if_fail(dir != NULL);
+  g_return_if_fail (gis != NULL);
+  g_return_if_fail (GNOME_IS_ICON_SELECTION (gis));
+  g_return_if_fail (dir != NULL);
 
   if ( ! g_file_test (dir, G_FILE_TEST_IS_DIR)) {
 	  g_warning(_("GnomeIconSelection: '%s' does not exist or is not "
@@ -299,10 +332,30 @@ gnome_icon_selection_add_directory (GnomeIconSelection * gis,
   closedir(dp);
 }
 
-static void
-set_flag(GtkWidget *w, int *flag)
+static gboolean
+load_idle_func (gpointer data)
 {
-	*flag = TRUE;
+	GnomeIconSelection * gis = data;
+	GList * list = gis->_priv->file_list;
+
+	append_an_icon (gis, list->data);
+
+	g_free (list->data);
+	gis->_priv->file_list = g_list_remove_link (gis->_priv->file_list, list);
+	g_list_free_1 (list);
+
+	/* If icons were added while adding */
+	if (gis->_priv->load_i > gis->_priv->load_file_count)
+		gis->_priv->load_file_count = gis->_priv->load_i;
+
+	gtk_progress_bar_update
+		(GTK_PROGRESS_BAR (gis->_priv->load_progressbar),
+		 (float)gis->_priv->load_i /
+		 gis->_priv->load_file_count);
+
+	gis->_priv->load_i ++;
+
+	return TRUE;
 }
 
 /**
@@ -320,99 +373,74 @@ set_flag(GtkWidget *w, int *flag)
 void
 gnome_icon_selection_show_icons (GnomeIconSelection * gis)
 {
-  GtkWidget *label;
-  GtkWidget *progressbar;
-  int file_count, i;
-  int local_dest;
-  int was_destroyed = FALSE;
+	GtkWidget *label;
+	GtkWidget *progressbar;
 
-  g_return_if_fail(gis != NULL);
-  if(!gis->_priv->file_list) return;
+	g_return_if_fail (gis != NULL);
+	g_return_if_fail (GNOME_IS_ICON_SELECTION (gis));
 
-  file_count = g_list_length(gis->_priv->file_list);
-  i = 0;
+	/* Nothing to load */
+	if (gis->_priv->file_list == NULL)
+		return;
 
-  /* Locate previous progressbar/label,
-   * if previously called. */
-  progressbar = label = NULL;
-  progressbar = gtk_object_get_user_data(GTK_OBJECT(gis));
-  if (progressbar)
-         label = gtk_object_get_user_data(GTK_OBJECT(progressbar));
+	/* We're already loading! */
+	if (gis->_priv->load_loop != NULL)
+		return;
 
-  if (!label && !progressbar) {
-         label = gtk_label_new(_("Loading Icons..."));
-         gtk_box_pack_start(GTK_BOX(gis->_priv->box),label,FALSE,FALSE,0);
-         gtk_widget_show(label);
+	label = gtk_label_new (_("Loading Icons..."));
+	gtk_box_pack_start (GTK_BOX (gis->_priv->box),
+			    label, FALSE, FALSE, 0);
+	gtk_widget_show (label);
+	gtk_signal_connect (GTK_OBJECT (label), "destroy",
+			    GTK_SIGNAL_FUNC (gtk_widget_destroyed),
+			    &label);
 
-         progressbar = gtk_progress_bar_new();
-         gtk_box_pack_start(GTK_BOX(gis->_priv->box),progressbar,FALSE,FALSE,0);
-         gtk_widget_show(progressbar);
+	progressbar = gtk_progress_bar_new ();
+	gtk_box_pack_start (GTK_BOX (gis->_priv->box),
+			    progressbar, FALSE, FALSE, 0);
+	gtk_widget_show (progressbar);
+	gtk_signal_connect (GTK_OBJECT (progressbar), "destroy",
+			    GTK_SIGNAL_FUNC (gtk_widget_destroyed),
+			    &progressbar);
 
-         /* attach label to progressbar, progressbar to gis 
-          * for recovery if show_icons() called again */
-         gtk_object_set_user_data(GTK_OBJECT(progressbar), label);
-         gtk_object_set_user_data(GTK_OBJECT(gis), progressbar);
-  } else {
-         if (!label && progressbar) g_assert_not_reached();
-         if (label && !progressbar) g_assert_not_reached();
-  }
-         
-  gnome_icon_list_freeze(GNOME_ICON_LIST(gis->_priv->gil));
+	gnome_icon_list_freeze (GNOME_ICON_LIST (gis->_priv->gil));
 
-  /* this can be set with the stop_loading method to stop the
-     display in the middle */
-  gis->_priv->stop_loading = FALSE;
-  
-  /*bind destroy so that we can bail out of this function if the whole thing
-    was destroyed while doing the main_iteration*/
-  local_dest = gtk_signal_connect(GTK_OBJECT(gis),"destroy",
-				  GTK_SIGNAL_FUNC(set_flag),
-				  &was_destroyed);
+	/* Ref to avoid object disappearing from under us */
+	gtk_object_ref (GTK_OBJECT (gis));
 
-  while (gis->_priv->file_list) {
-	  GList * list = gis->_priv->file_list;
-	  append_an_icon(gis, list->data);
-	  g_free(list->data);
-	  gis->_priv->file_list = g_list_remove_link(gis->_priv->file_list,list);
-	  g_list_free_1(list);
+	gis->_priv->load_loop = g_main_loop_new (NULL, FALSE);
+	gis->_priv->load_i = 0;
+	gis->_priv->load_file_count = g_list_length (gis->_priv->file_list);
+	gis->_priv->load_progressbar = progressbar;
 
-	  gtk_progress_bar_update (GTK_PROGRESS_BAR (progressbar),
-				   (float)i / file_count);
-	  /* FIXME: this should be done either
-	   * 1) asynchroniously
-	   * 2) with a separate main loop and not the gtk one */
-	  while ( gtk_events_pending() ) {
-                  gtk_main_iteration();
+	if (gis->_priv->load_idle != 0)
+		g_source_remove (gis->_priv->load_idle);
+	gis->_priv->load_idle = g_idle_add (load_idle_func, gis);
 
-                  /*if the gis was destroyed from underneath us ... bail out*/
-                  if(was_destroyed) 
-                          return;
-                  
-                  if(gis->_priv->stop_loading)
-                          goto out;
-	  }
-	  
-	  i++;
-  }
+	GDK_THREADS_LEAVE ();  
+	g_main_loop_run (gis->_priv->load_loop);
+	GDK_THREADS_ENTER ();  
 
- out:
-  
-  gtk_signal_disconnect(GTK_OBJECT(gis),local_dest);
+	if (gis->_priv->load_idle != 0)
+		g_source_remove (gis->_priv->load_idle);
+	gis->_priv->load_idle = 0;
 
-  gnome_icon_list_thaw(GNOME_ICON_LIST(gis->_priv->gil));
+	if (gis->_priv->load_loop != NULL)
+		g_main_loop_unref (gis->_priv->load_loop);
+	gis->_priv->load_loop = NULL;
 
-  progressbar = label = NULL;
-  progressbar = gtk_object_get_user_data(GTK_OBJECT(gis));
-  if (progressbar)
-         label = gtk_object_get_user_data(GTK_OBJECT(progressbar));
-  if (progressbar)
-	  gtk_widget_destroy(progressbar);
-  if (label)
-	  gtk_widget_destroy(label);
+	gis->_priv->load_progressbar = NULL;
 
-  /* cleanse gis of evil progressbar/label ptrs */
-  /* also let previous calls to show_icons() know that rendering is done. */
-  gtk_object_set_user_data(GTK_OBJECT(gis), NULL);
+	if ( ! GTK_OBJECT_DESTROYED (gis)) {
+		gnome_icon_list_thaw (GNOME_ICON_LIST (gis->_priv->gil));
+
+		if (progressbar != NULL)
+			gtk_widget_destroy (progressbar);
+		if (label != NULL)
+			gtk_widget_destroy (label);
+	}
+
+	gtk_object_unref (GTK_OBJECT (gis));
 }
 
 /**
@@ -430,12 +458,14 @@ gnome_icon_selection_show_icons (GnomeIconSelection * gis)
  * Returns:
  **/
 void
-gnome_icon_selection_stop_loading(GnomeIconSelection * gis)
+gnome_icon_selection_stop_loading (GnomeIconSelection * gis)
 {
-	g_return_if_fail(gis != NULL);
-	g_return_if_fail(GNOME_IS_ICON_SELECTION(gis));
+	g_return_if_fail (gis != NULL);
+	g_return_if_fail (GNOME_IS_ICON_SELECTION (gis));
 	
-	gis->_priv->stop_loading = TRUE;
+	if (gis->_priv->load_loop != NULL &&
+	    g_main_loop_is_running (gis->_priv->load_loop))
+		g_main_loop_quit (gis->_priv->load_loop);
 }
 
 /**
@@ -485,7 +515,8 @@ gnome_icon_selection_get_icon (GnomeIconSelection * gis,
 {
 	GList * sel;
 
-	g_return_val_if_fail(gis != NULL, NULL);
+	g_return_val_if_fail (gis != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_ICON_SELECTION (gis), NULL);
 
 	sel = gnome_icon_list_get_selection(GNOME_ICON_LIST(gis->_priv->gil));
 	if (sel != NULL) {
@@ -519,8 +550,9 @@ gnome_icon_selection_select_icon (GnomeIconSelection * gis,
 	gint pos;
 	gint icons;
 
-	g_return_if_fail(gis != NULL);
-	g_return_if_fail(filename != NULL);
+	g_return_if_fail (gis != NULL);
+	g_return_if_fail (GNOME_IS_ICON_SELECTION (gis));
+	g_return_if_fail (filename != NULL);
 
 	gil = GNOME_ICON_LIST(gis->_priv->gil);
 	icons = gnome_icon_list_get_num_icons(gil);

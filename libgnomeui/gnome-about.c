@@ -33,6 +33,7 @@
 #include <gtk/gtkdrawingarea.h>
 #include <gtk/gtkframe.h>
 #include <gtk/gtkstock.h>
+#include <gtk/gtksignal.h>
 
 #include <string.h>
 
@@ -158,6 +159,9 @@ gnome_about_instance_init (GnomeAbout *about)
 	/* Add the OK button */
 	gtk_dialog_add_button (GTK_DIALOG (about), GTK_STOCK_OK, GTK_RESPONSE_OK);
 	gtk_dialog_set_default_response (GTK_DIALOG (about), GTK_RESPONSE_OK);
+	gtk_signal_connect (GTK_OBJECT (about), "response",
+			    GTK_SIGNAL_FUNC (gtk_widget_destroy),
+			    NULL);
 }
 
 static void
