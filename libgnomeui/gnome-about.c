@@ -688,6 +688,23 @@ gnome_about_get_property (GObject *object, guint prop_id, GValue *value, GParamS
 	}
 }
 
+/**
+ * gnome_about_new:
+ * @name: The name of the application.
+ * @version: The version string of the application.
+ * @copyright: The application's copyright statement.
+ * @comments: A short miscellaneous string.
+ * @authors: An %NULL terminated array of the application authors.
+ * @documenters: An array of the application documenters.
+ * @translator_credits: The translator for the current locale.
+ * @logo_pixbuf: The application's logo.
+ *
+ * Construct an application's credits box. The @authors array canot be empty
+ * and the @translator_credits should be marked as a translatable string (so
+ * that only the translator for the currently active locale is displayed).
+ *
+ * Returns: A new "About" dialog.
+ */
 GtkWidget *
 gnome_about_new (const gchar  *name,
 		 const gchar  *version,
@@ -711,6 +728,23 @@ gnome_about_new (const gchar  *name,
 	return GTK_WIDGET(about);
 }
 
+/**
+ * gnome_about_construct:
+ * @about: An existing #GnomeAbout instance.
+ * @name: The name of the application.
+ * @version: The version string of the application.
+ * @copyright: The application's copyright statement.
+ * @comments: A short miscellaneous string.
+ * @authors: An %NULL terminated array of the application authors.
+ * @documenters: An array of the application documenters.
+ * @translator_credits: The translator for the current locale.
+ * @logo_pixbuf: The application's logo.
+ *
+ * Similar to gnome_about_new() except that the pre-existing @about widget is
+ * used. Note that in this version of the function, @authors is not checked to
+ * be non-%NULL, so callers must be careful, since bad things will happen if
+ * this condition is not met.
+ */
 void
 gnome_about_construct (GnomeAbout *about,
 		       const gchar  *name,

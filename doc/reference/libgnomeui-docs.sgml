@@ -39,6 +39,7 @@
 <!ENTITY libgnomeui-gnome-window SYSTEM "sgml/gnome-window.sgml">
 <!ENTITY libgnomeui-gnome-popup-menu SYSTEM "sgml/gnome-popup-menu.sgml">
 <!ENTITY libgnomeui-gnometypebuiltins SYSTEM "sgml/gnometypebuiltins.sgml">
+<!ENTITY libgnomeui-object-index SYSTEM "sgml/tree_index.sgml">
 ]>
 <book id="index">
   <bookinfo>
@@ -47,45 +48,61 @@
 
   <chapter>
     <title>GNOME UI Library (libgnomeui)</title>
-    &libgnomeui-GnomeAbout;
-    &libgnomeui-GnomeMDIChild;
-    &libgnomeui-GnomeClient;
-    &libgnomeui-GnomeColorPicker;
-    &libgnomeui-GnomeDateEdit;
-    &libgnomeui-GnomeDruidPageEdge;
-    &libgnomeui-GnomeFileEntry;
-    &libgnomeui-GnomeDruidPageStandard;
-    &libgnomeui-GnomeDruidPage;
-    &libgnomeui-GnomeDruid;
-    &libgnomeui-GnomeEntry;
-    &libgnomeui-GnomeFontPicker;
-    &libgnomeui-GnomeHRef;
-    &libgnomeui-GnomeIconList;
-    &libgnomeui-GnomeApp;
-    &libgnomeui-GnomeMDIGenericChild;
-    &libgnomeui-GnomeMDI;
-    &libgnomeui-GnomeAppBar;
-    &libgnomeui-GnomeDialog;
-    &libgnomeui-GnomeIconEntry;
-    &libgnomeui-GnomeIconSelection;
-    &libgnomeui-GnomeMessageBox;
-    &libgnomeui-GnomePixmapEntry;
-    &libgnomeui-GnomePixmap;
-    &libgnomeui-GnomePropertyBox;
-    &libgnomeui-GnomeScores;
-    &libgnomeui-gnome-ice;
-    &libgnomeui-gnome-app-helper;
-    &libgnomeui-gnome-app-util;
-    &libgnomeui-gnome-mdi-session;
-    &libgnomeui-gnome-ui-init;
-    &libgnomeui-gnome-dialog-util;
-    &libgnomeui-gnome-gconf-ui;
-    &libgnomeui-gnome-stock-icons;
-    &libgnomeui-gnome-types;
-    &libgnomeui-gnome-uidefs;
-    &libgnomeui-gnome-vfs-util;
-    &libgnomeui-gnome-window;
-    &libgnomeui-gnome-popup-menu;
-    &libgnomeui-gnometypebuiltins;
+    <sect1>
+      <title>Application mangement</title>
+      &libgnomeui-GnomeApp;
+      &libgnomeui-GnomeAppBar;
+      &libgnomeui-gnome-app-helper;
+      &libgnomeui-gnome-app-util;
+      &libgnomeui-GnomeAbout;
+    </sect1>
+    <sect1>
+      <title>FIXME</title>
+      &libgnomeui-GnomeClient;
+      &libgnomeui-GnomeColorPicker;
+      &libgnomeui-GnomeDateEdit;
+      &libgnomeui-GnomeDialog;
+      &libgnomeui-gnome-dialog-util;
+    </sect1>
+    <sect1>
+      <title>Druids</title>
+      &libgnomeui-GnomeDruid;
+      &libgnomeui-GnomeDruidPage;
+      &libgnomeui-GnomeDruidPageEdge;
+      &libgnomeui-GnomeDruidPageStandard;
+    </sect1>
+    <sect1>
+      <title>FIXME</title>
+      &libgnomeui-GnomeEntry;
+      &libgnomeui-GnomeFileEntry;
+      &libgnomeui-GnomeFontPicker;
+      &libgnomeui-gnome-gconf-ui;
+      &libgnomeui-GnomeHRef;
+      &libgnomeui-gnome-ice;
+      &libgnomeui-GnomeIconEntry;
+      &libgnomeui-GnomeIconList;
+      &libgnomeui-GnomeIconSelection;
+      &libgnomeui-GnomeMDI;
+      &libgnomeui-GnomeMDIChild;
+      &libgnomeui-GnomeMDIGenericChild;
+      &libgnomeui-gnome-mdi-session;
+      &libgnomeui-GnomeMessageBox;
+      &libgnomeui-GnomePixmap;
+      &libgnomeui-GnomePixmapEntry;
+      &libgnomeui-gnome-popup-menu;
+      &libgnomeui-GnomePropertyBox;
+      &libgnomeui-GnomeScores;
+      &libgnomeui-gnome-stock-icons;
+      &libgnomeui-gnometypebuiltins;
+      &libgnomeui-gnome-types;
+      &libgnomeui-gnome-uidefs;
+      &libgnomeui-gnome-ui-init;
+      &libgnomeui-gnome-vfs-util;
+      &libgnomeui-gnome-window;
+    </sect1>
+    <sect1 id="libgnomeui-objects">
+      <title>Object Hierarchy</title>
+      &libgnomeui-object-index;
+    </sect1>
   </chapter>
 </book>

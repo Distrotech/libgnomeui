@@ -1,10 +1,25 @@
+2002-06-01  Malcolm Tredinnick <malcolm@commsecure.com.au>
+	* doc/reference/Makefile.am: Add GNOME_DISABLE_DEPREACTED guards
+	  into the scanning.
+
+	* doc/reference/libgnomeui-docs.sgml: Add an object hierarchy
+	  diagram and begin to order the sections in some sane fashion.
+
+	* doc/reference/libgnomui-sections.txt: Put *Private classes
+	  into the private subsection. Add in the introspected parameter
+	  documentation for the widgets.
+
+	* doc/reference/tmpl/gnome-about.sgml, libgnomeui/gnome-about.c:
+	  Document the GnomeAbout widget. One down, a few hundred to go.
+	  This is sooo not fun.
+
 2002-05-31  Federico Mena Quintero  <federico@ximian.com>
 
 	* libgnomeui/gnome-ui-init.c (relay_gtk_signal): Last part of the
 	patch by Frederic Crozat <fcrozat@mandrakesoft.com>.  Changes the
 	prefix of sample IDs to "gtk-events-2".
 
-2002-05-31  Malcolm Tredinnick <malcolm@tredinnick.org>
+2002-05-31  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* libgnomeui/gnome-app-helper.c, gnome-app-helper.h,
 	gnome-client.c, gnome-client.h, gnome-color-picker.c,

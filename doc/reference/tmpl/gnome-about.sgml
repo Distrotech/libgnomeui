@@ -2,11 +2,15 @@
 GnomeAbout
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Display author, documenter and translator credits for an application.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
-
+The GnomeAbout widget is used as the standard way of displaying credits in an
+application. Typically, it will be called when a user selects the
+<literal>About...</literal> option from the <literal>Help</literal> menu. With
+one simple function call, the application can then display all of the
+appropriate information.
 </para>
 
 <!-- ##### SECTION See_Also ##### -->
@@ -14,9 +18,10 @@ GnomeAbout
 
 </para>
 
-<!-- ##### STRUCT GnomeAboutPrivate ##### -->
+<!-- ##### STRUCT GnomeAbout ##### -->
 <para>
-
+A dialog box widget containing all of the relevant credit information and
+displaying as three notebook pages.
 </para>
 
 

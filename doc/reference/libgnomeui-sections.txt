@@ -1,7 +1,7 @@
 <SECTION>
 <FILE>gnome-about</FILE>
-GnomeAboutPrivate
 <TITLE>GnomeAbout</TITLE>
+GnomeAbout
 gnome_about_new
 gnome_about_construct
 <SUBSECTION Standard>
@@ -12,14 +12,17 @@ gnome_about_get_type
 GNOME_ABOUT_CLASS
 GNOME_IS_ABOUT_CLASS
 GNOME_ABOUT_GET_CLASS
+
+<SUBSECTION Private>
+GnomeAboutPrivate
 </SECTION>
 
 <SECTION>
 <FILE>gnome-app</FILE>
 GNOME_APP_MENUBAR_NAME
 GNOME_APP_TOOLBAR_NAME
-GnomeAppPrivate
 <TITLE>GnomeApp</TITLE>
+GnomeApp
 gnome_app_new
 gnome_app_construct
 gnome_app_set_menus
@@ -41,15 +44,18 @@ gnome_app_get_type
 GNOME_APP_CLASS
 GNOME_IS_APP_CLASS
 GNOME_APP_GET_CLASS
+
+<SUBSECTION Private>
+GnomeAppPrivate
 </SECTION>
 
 <SECTION>
 <FILE>gnome-appbar</FILE>
 GNOME_APPBAR_HAS_STATUS
 GNOME_APPBAR_HAS_PROGRESS
-GnomeAppBarPrivate
 GnomeAppBarMsg
 <TITLE>GnomeAppBar</TITLE>
+GnomeAppBar
 GNOME_APPBAR_INTERACTIVE
 gnome_appbar_new
 gnome_appbar_set_status
@@ -72,6 +78,8 @@ gnome_appbar_get_type
 GNOME_APPBAR_CLASS
 GNOME_IS_APPBAR_CLASS
 GNOME_APPBAR_GET_CLASS
+<SUBSECTION Private>
+GnomeAppBarPrivate
 </SECTION>
 
 <SECTION>
@@ -85,6 +93,7 @@ GnomeClientState
 GnomeClientFlags
 GnomeInteractFunction
 <TITLE>GnomeClient</TITLE>
+GnomeClient
 GNOME_CLIENT_MODULE
 gnome_client_module_info_get
 GNOME_CLIENT_PARAM_SM_CONNECT
@@ -135,8 +144,8 @@ GNOME_CLIENT_GET_CLASS
 
 <SECTION>
 <FILE>gnome-color-picker</FILE>
-GnomeColorPickerPrivate
 <TITLE>GnomeColorPicker</TITLE>
+GnomeColorPicker
 gnome_color_picker_new
 gnome_color_picker_set_d
 gnome_color_picker_get_d
@@ -158,13 +167,16 @@ gnome_color_picker_get_type
 GNOME_COLOR_PICKER_CLASS
 GNOME_IS_COLOR_PICKER_CLASS
 GNOME_COLOR_PICKER_GET_CLASS
+
+<SUBSECTION Private>
+GnomeColorPickerPrivate
 </SECTION>
 
 <SECTION>
 <FILE>gnome-dateedit</FILE>
 GnomeDateEditFlags
-GnomeDateEditPrivate
 <TITLE>GnomeDateEdit</TITLE>
+GnomeDateEdit
 gnome_date_edit_new
 gnome_date_edit_new_flags
 gnome_date_edit_construct
@@ -183,11 +195,16 @@ gnome_date_edit_get_type
 GNOME_DATE_EDIT_CLASS
 GNOME_IS_DATE_EDIT_CLASS
 GNOME_DATE_EDIT_GET_CLASS
+
+<SUBSECTION Private>
+GnomeDateEditPrivate
+
 </SECTION>
 
 <SECTION>
 <FILE>gnome-dialog</FILE>
 <TITLE>GnomeDialog</TITLE>
+GnomeDialog
 gnome_dialog_new
 gnome_dialog_newv
 gnome_dialog_set_parent
@@ -237,6 +254,7 @@ GNOME_DIALOG_GET_CLASS
 GnomeEdgePosition
 GnomeDruidPageEdgePrivate
 <TITLE>GnomeDruidPageEdge</TITLE>
+GnomeDruidPageEdge
 gnome_druid_page_edge_new
 gnome_druid_page_edge_new_aa
 gnome_druid_page_edge_new_with_vals
@@ -263,8 +281,8 @@ GNOME_DRUID_PAGE_EDGE_GET_CLASS
 
 <SECTION>
 <FILE>gnome-druid-page-standard</FILE>
-GnomeDruidPageStandardPrivate
 <TITLE>GnomeDruidPageStandard</TITLE>
+GnomeDruidPageStandard
 gnome_druid_page_standard_set_bg_color
 gnome_druid_page_standard_set_logo_bg_color
 gnome_druid_page_standard_set_title_color
@@ -287,12 +305,17 @@ gnome_druid_page_standard_get_type
 GNOME_DRUID_PAGE_STANDARD_CLASS
 GNOME_IS_DRUID_PAGE_STANDARD_CLASS
 GNOME_DRUID_PAGE_STANDARD_GET_CLASS
+
+<SUBSECTION Private>
+GnomeDruidPageStandardPrivate
+
 </SECTION>
 
 <SECTION>
 <FILE>gnome-druid-page</FILE>
 GnomeDruidPagePrivate
 <TITLE>GnomeDruidPage</TITLE>
+GnomeDruidPage
 gnome_druid_page_new
 gnome_druid_page_next
 gnome_druid_page_prepare
@@ -311,8 +334,8 @@ GNOME_DRUID_PAGE_GET_CLASS
 
 <SECTION>
 <FILE>gnome-druid</FILE>
-GnomeDruidPrivate
 <TITLE>GnomeDruid</TITLE>
+GnomeDruid
 gnome_druid_new
 gnome_druid_set_buttons_sensitive
 gnome_druid_set_show_finish
@@ -331,12 +354,17 @@ gnome_druid_get_type
 GNOME_DRUID_CLASS
 GNOME_IS_DRUID_CLASS
 GNOME_DRUID_GET_CLASS
+
+<SUBSECTION Private>
+GnomeDruidPrivate
+
 </SECTION>
 
 <SECTION>
 <FILE>gnome-entry</FILE>
 GnomeEntryPrivate
 <TITLE>GnomeEntry</TITLE>
+GnomeEntry
 gnome_entry_new
 gnome_entry_construct
 gnome_entry_gtk_entry
@@ -359,8 +387,8 @@ GNOME_ENTRY_GET_CLASS
 
 <SECTION>
 <FILE>gnome-file-entry</FILE>
-GnomeFileEntryPrivate
 <TITLE>GnomeFileEntry</TITLE>
+GnomeFileEntry
 gnome_file_entry_new
 gnome_file_entry_construct
 gnome_file_entry_gnome_entry
@@ -382,6 +410,10 @@ gnome_file_entry_get_type
 GNOME_FILE_ENTRY_CLASS
 GNOME_IS_FILE_ENTRY_CLASS
 GNOME_FILE_ENTRY_GET_CLASS
+
+<SUBSECTION Private>
+GnomeFileEntryPrivate
+
 </SECTION>
 
 <SECTION>
@@ -389,6 +421,7 @@ GNOME_FILE_ENTRY_GET_CLASS
 GnomeFontPickerMode
 GnomeFontPickerPrivate
 <TITLE>GnomeFontPicker</TITLE>
+GnomeFontPicker
 gnome_font_picker_new
 gnome_font_picker_set_title
 gnome_font_picker_get_title
@@ -415,8 +448,8 @@ GNOME_FONT_PICKER_GET_CLASS
 
 <SECTION>
 <FILE>gnome-href</FILE>
-GnomeHRefPrivate
 <TITLE>GnomeHRef</TITLE>
+GnomeHRef
 gnome_href_new
 gnome_href_construct
 gnome_href_set_url
@@ -433,12 +466,17 @@ gnome_href_get_type
 GNOME_HREF_CLASS
 GNOME_IS_HREF_CLASS
 GNOME_HREF_GET_CLASS
+
+<SUBSECTION Private>
+GnomeHRefPrivate
+
 </SECTION>
 
 <SECTION>
 <FILE>gnome-icon-entry</FILE>
 GnomeIconEntryPrivate
 <TITLE>GnomeIconEntry</TITLE>
+GnomeIconEntry
 gnome_icon_entry_new
 gnome_icon_entry_construct
 gnome_icon_entry_set_pixmap_subdir
@@ -463,8 +501,8 @@ GNOME_ICON_ENTRY_GET_CLASS
 
 <SECTION>
 <FILE>gnome-icon-item</FILE>
-GnomeIconTextItemPrivate
 <TITLE>GnomeIconTextItem</TITLE>
+GnomeIconTextItem
 gnome_icon_text_item_configure
 gnome_icon_text_item_setxy
 gnome_icon_text_item_select
@@ -481,6 +519,10 @@ gnome_icon_text_item_get_type
 GNOME_ICON_TEXT_ITEM_CLASS
 GNOME_IS_ICON_TEXT_ITEM_CLASS
 GNOME_ICON_TEXT_ITEM_GET_CLASS
+
+<SUBSECTION Private>
+GnomeIconTextItemPrivate
+
 </SECTION>
 
 <SECTION>
@@ -488,6 +530,7 @@ GNOME_ICON_TEXT_ITEM_GET_CLASS
 GnomeIconListPrivate
 GnomeIconListMode
 <TITLE>GnomeIconList</TITLE>
+GnomeIconList
 gnome_icon_list_new
 gnome_icon_list_construct
 gnome_icon_list_set_hadjustment
@@ -538,8 +581,8 @@ GNOME_ICON_LIST_GET_CLASS
 
 <SECTION>
 <FILE>gnome-icon-sel</FILE>
-GnomeIconSelectionPrivate
 <TITLE>GnomeIconSelection</TITLE>
+GnomeIconSelection
 gnome_icon_selection_new
 gnome_icon_selection_add_defaults
 gnome_icon_selection_add_directory
@@ -558,6 +601,10 @@ gnome_icon_selection_get_type
 GNOME_ICON_SELECTION_CLASS
 GNOME_IS_ICON_SELECTION_CLASS
 GNOME_ICON_SELECTION_GET_CLASS
+
+<SUBSECTION Private>
+GnomeIconSelectionPrivate
+
 </SECTION>
 
 <SECTION>
@@ -567,6 +614,7 @@ GnomeMDIChildMenuCreator
 GnomeMDIChildConfigFunc
 GnomeMDIChildLabelFunc
 <TITLE>GnomeMDIChild</TITLE>
+GnomeMDIChild
 gnome_mdi_child_add_view
 gnome_mdi_child_remove_view
 gnome_mdi_child_set_name
@@ -584,6 +632,7 @@ GNOME_MDI_CHILD_GET_CLASS
 <SECTION>
 <FILE>gnome-mdi-generic-child</FILE>
 <TITLE>GnomeMDIGenericChild</TITLE>
+GnomeMDIGenericChild
 gnome_mdi_generic_child_new
 gnome_mdi_generic_child_set_view_creator
 gnome_mdi_generic_child_set_view_creator_full
@@ -607,6 +656,7 @@ GNOME_MDI_GENERIC_CHILD_GET_CLASS
 <FILE>gnome-mdi</FILE>
 GnomeMDIMode
 <TITLE>GnomeMDI</TITLE>
+GnomeMDI
 gnome_mdi_new
 gnome_mdi_set_mode
 gnome_mdi_set_menubar_template
@@ -654,6 +704,7 @@ GNOME_MESSAGE_BOX_GENERIC
 GnomeMessageBoxPrivate
 GnomeMessageBoxButton
 <TITLE>GnomeMessageBox</TITLE>
+GnomeMessageBox
 gnome_message_box_new
 gnome_message_box_newv
 gnome_message_box_construct
@@ -669,8 +720,8 @@ GNOME_MESSAGE_BOX_GET_CLASS
 
 <SECTION>
 <FILE>gnome-pixmap-entry</FILE>
-GnomePixmapEntryPrivate
 <TITLE>GnomePixmapEntry</TITLE>
+GnomePixmapEntry
 gnome_pixmap_entry_new
 gnome_pixmap_entry_construct
 gnome_pixmap_entry_set_pixmap_subdir
@@ -690,12 +741,17 @@ gnome_pixmap_entry_get_type
 GNOME_PIXMAP_ENTRY_CLASS
 GNOME_IS_PIXMAP_ENTRY_CLASS
 GNOME_PIXMAP_ENTRY_GET_CLASS
+
+<SUBSECTION Private>
+GnomePixmapEntryPrivate
+
 </SECTION>
 
 <SECTION>
 <FILE>gnome-pixmap</FILE>
 GnomePixmapPrivate
 <TITLE>GnomePixmap</TITLE>
+GnomePixmap
 gnome_pixmap_new_from_file
 gnome_pixmap_new_from_file_at_size
 gnome_pixmap_new_from_xpm_d
@@ -719,6 +775,7 @@ GNOME_PIXMAP_GET_CLASS
 <FILE>gnome-propertybox</FILE>
 GNOME_PROPERTY_BOX_DIRTY
 <TITLE>GnomePropertyBox</TITLE>
+GnomePropertyBox
 gnome_property_box_new
 gnome_property_box_changed
 gnome_property_box_set_modified
@@ -736,8 +793,8 @@ GNOME_PROPERTY_BOX_GET_CLASS
 
 <SECTION>
 <FILE>gnome-scores</FILE>
-GnomeScoresPrivate
 <TITLE>GnomeScores</TITLE>
+GnomeScores
 gnome_scores_display_with_pixmap
 gnome_scores_new
 gnome_scores_construct
@@ -757,6 +814,10 @@ gnome_scores_get_type
 GNOME_SCORES_CLASS
 GNOME_IS_SCORES_CLASS
 GNOME_SCORES_GET_CLASS
+
+<SUBSECTION Private>
+GnomeScoresPrivate
+
 </SECTION>
 
 <SECTION>
@@ -766,6 +827,35 @@ GnomeUIInfoConfigurableTypes
 GNOME_APP_CONFIGURABLE_ITEM_EXIT
 GnomeUIPixmapType
 GnomeUIInfo
+GnomeUIBuilderData
+GnomeUISignalConnectFunc
+gnome_accelerators_sync
+gnome_app_fill_menu
+gnome_app_fill_menu_with_data
+gnome_app_fill_menu_custom
+gnome_app_ui_configure_configurable
+gnome_app_create_menus
+gnome_app_create_menus_interp
+gnome_app_create_menus_with_data
+gnome_app_create_menus_custom
+gnome_app_fill_toolbar
+gnome_app_fill_toolbar_with_data
+gnome_app_fill_toolbar_custom
+gnome_app_create_toolbar
+gnome_app_create_toolbar_interp
+gnome_app_create_toolbar_with_data
+gnome_app_create_toolbar_custom
+gnome_app_find_menu_pos
+gnome_app_remove_menus
+gnome_app_remove_menu_range
+gnome_app_insert_menus_custom
+gnome_app_insert_menus
+gnome_app_insert_menus_with_data
+gnome_app_insert_menus_interp
+gnome_app_install_appbar_menu_hints
+gnome_app_install_statusbar_menu_hints
+gnome_app_install_menu_hints
+gnome_app_setup_toolbar
 GNOMEUIINFO_KEY_UIDATA
 GNOMEUIINFO_KEY_UIBDATA
 GNOMEUIINFO_END
@@ -818,9 +908,6 @@ GNOMEUIINFO_MENU_REDO_MOVE_ITEM
 GNOMEUIINFO_MENU_HINT_ITEM
 GNOMEUIINFO_MENU_SCORES_ITEM
 GNOMEUIINFO_MENU_END_GAME_ITEM
-gnome_app_helper_gettext
-D_
-L_
 GNOMEUIINFO_MENU_FILE_TREE
 GNOMEUIINFO_MENU_EDIT_TREE
 GNOMEUIINFO_MENU_VIEW_TREE
@@ -843,35 +930,9 @@ GNOME_MENU_FILES_STRING
 GNOME_MENU_FILES_PATH
 GNOME_MENU_WINDOWS_STRING
 GNOME_MENU_WINDOWS_PATH
-GnomeUIBuilderData
-GnomeUISignalConnectFunc
-gnome_accelerators_sync
-gnome_app_fill_menu
-gnome_app_fill_menu_with_data
-gnome_app_fill_menu_custom
-gnome_app_ui_configure_configurable
-gnome_app_create_menus
-gnome_app_create_menus_interp
-gnome_app_create_menus_with_data
-gnome_app_create_menus_custom
-gnome_app_fill_toolbar
-gnome_app_fill_toolbar_with_data
-gnome_app_fill_toolbar_custom
-gnome_app_create_toolbar
-gnome_app_create_toolbar_interp
-gnome_app_create_toolbar_with_data
-gnome_app_create_toolbar_custom
-gnome_app_find_menu_pos
-gnome_app_remove_menus
-gnome_app_remove_menu_range
-gnome_app_insert_menus_custom
-gnome_app_insert_menus
-gnome_app_insert_menus_with_data
-gnome_app_insert_menus_interp
-gnome_app_install_appbar_menu_hints
-gnome_app_install_statusbar_menu_hints
-gnome_app_install_menu_hints
-gnome_app_setup_toolbar
+gnome_app_helper_gettext
+D_
+L_
 </SECTION>
 
 <SECTION>
