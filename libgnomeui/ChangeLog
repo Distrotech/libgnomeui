@@ -1,3 +1,8 @@
+Sun Jun 14 13:46:09 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* Makefile.am (INCLUDES): Look in intl source and build
+	directories.
+
 Sat Jun 13 16:46:18 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-client.c (arguments): Fixed typo.
