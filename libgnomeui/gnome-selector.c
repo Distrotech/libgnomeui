@@ -1676,6 +1676,7 @@ void
 _gnome_selector_async_handle_destroy (GnomeSelectorAsyncHandle *async_handle)
 {
     GnomeSelector *selector;
+    GSList *c;
 
     g_return_if_fail (async_handle != NULL);
     g_assert (GNOME_IS_SELECTOR (async_handle->selector));
@@ -1683,6 +1684,17 @@ _gnome_selector_async_handle_destroy (GnomeSelectorAsyncHandle *async_handle)
     selector = async_handle->selector;
 
     g_message (G_STRLOC ": %p - %d", async_handle, async_handle->refcount);
+
+    for (c = async_handle->async_data_list; c; c = c->next) {
+	GnomeSelectorAsyncData *async_data = c->data;
+
+	if (async_data->async_data_destroy)
+	    async_data->async_data_destroy (async_data->async_data);
+    }
+
+    g_slist_foreach (async_handle->async_data_list, (GFunc) g_free, NULL);
+    g_slist_free (async_handle->async_data_list);
+    async_handle->async_data_list = NULL;
 
     if (async_handle->async_func)
 	async_handle->async_func (selector, async_handle,
@@ -1734,19 +1746,6 @@ gnome_selector_async_handle_unref (GnomeSelectorAsyncHandle *async_handle)
 
     async_handle->refcount--;
     if (async_handle->refcount <= 0) {
-	GSList *c;
-
-	for (c = async_handle->async_data_list; c; c = c->next) {
-	    GnomeSelectorAsyncData *async_data = c->data;
-
-	    if (async_data->async_data_destroy)
-		async_data->async_data_destroy (async_data->async_data);
-	}
-
-	g_slist_foreach (async_handle->async_data_list, (GFunc) g_free, NULL);
-	g_slist_free (async_handle->async_data_list);
-	async_handle->async_data_list = NULL;
-
 	if (async_handle->error)
 	    g_error_free (async_handle->error);
 
