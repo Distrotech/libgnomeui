@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-22 02:11+0100\n"
-"PO-Revision-Date: 2003-06-05 08:58--100\n"
-"Last-Translator: Samuel Jon Gunnarsson <sammi@techattack.nu>\n"
+"POT-Creation-Date: 2004-04-07 00:56+0000\n"
+"PO-Revision-Date: 2004-03-12 14:54-0000\n"
+"Last-Translator: helgi <helgi@trance.is>\n"
 "Language-Team: Icelandic <gnome@techattack.nu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -139,6 +139,7 @@ msgstr "Um %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Skrá"
 
@@ -196,6 +197,7 @@ msgid "_Game"
 msgstr "_Leikur"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjálp"
 
@@ -391,11 +393,11 @@ msgstr "Stilla forrit"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Um"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Um þetta forrit"
 
@@ -422,7 +424,7 @@ msgstr "Búa til nýja glugga"
 msgid "_Close This Window"
 msgstr "_Loka þessum glugga"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Loka núverandi glugga"
 
@@ -617,21 +619,19 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Lykilorð þitt mun verða sent dulkóðað."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:289
+#: libgnomeui/gnome-authentication-manager.c:287
 msgid "Authentication Required"
 msgstr "Auðkenningar krafist"
 
-#: libgnomeui/gnome-authentication-manager.c:282
+#: libgnomeui/gnome-authentication-manager.c:280
 #, c-format
 msgid " domain %s"
 msgstr ""
 
-#: libgnomeui/gnome-authentication-manager.c:285
-#, fuzzy, c-format
+#: libgnomeui/gnome-authentication-manager.c:283
+#, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
-"Þú verður að skrá þig inn til að nálgast \"%s\".\n"
-"%s"
+msgstr "Þú verður að skrá þig inn til að nálgast \"%s\".\n"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1346,14 +1346,12 @@ msgstr "GNOME GUI safn"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Fjölþætt frumskiptingarvilla átti sér stað; tókst ekki að ræsa villuglugga\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1409,28 +1407,6 @@ msgstr ""
 msgid "_Debug"
 msgstr "Aflúsa"
 
-#~ msgid "Color Selector"
-#~ msgstr "Val á litum"
-
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Forritið \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-
-#~ msgid "Submit a bug report"
-#~ msgstr "Senda tilkynningu um villu"
-
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#~ msgid "Please visit the GNOME Application Crash page for more information"
-#~ msgstr ""
-#~ "Vinsamlegast heimsækið GNOME síðuna 'forrit hrundi'  fyrir frekari "
-#~ "upplýsingar"
-
-#~ msgid "Exit the test"
-#~ msgstr "Ljúka prufu"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ljúka prufu"
