@@ -73,6 +73,17 @@ void       gnome_druid_insert_page           (GnomeDruid *druid, GnomeDruidPage 
 void       gnome_druid_append_page           (GnomeDruid *druid, GnomeDruidPage *page);
 void	   gnome_druid_set_page              (GnomeDruid *druid, GnomeDruidPage *page);
 
+/* Pure sugar, methods for making new druids with a window already */
+GtkWidget *gnome_druid_new_with_window       (const char *title,
+					      GtkWindow *parent,
+					      gboolean close_on_cancel,
+					      GtkWidget **window);
+void       gnome_druid_construct_with_window (GnomeDruid *druid,
+					      const char *title,
+					      GtkWindow *parent,
+					      gboolean close_on_cancel,
+					      GtkWidget **window);
+
 END_GNOME_DECLS
 
 #endif /* __GNOME_DRUID_H__ */

@@ -1,3 +1,13 @@
+Sat Sep 02 01:57:10 2000  George Lebl <jirka@5z.com>
+
+	* gnome-druid.[ch]: Add some sugar API.  Normally a druid is inside
+	  a window, so there is now a gnome_druid_new_with_window function
+	  which does this and a few other minor things for you.  Also
+	  document the _new function.
+
+	* gnome-helpsys.c: Eek, forgot to commit this earlier.  This uses
+	  GError for the gnome_url functions now.
+
 Fri Sep 01 03:33:09 2000  George Lebl <jirka@5z.com>
 
 	* *.h:  All _get_type functions are now G_GNUC_CONST to make

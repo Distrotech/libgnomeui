@@ -1092,7 +1092,7 @@ static void
 gnome_help_view_show_url(GnomeHelpView *help_view, const char *url, HelpURLType type)
 {
   char *url_type = NULL;
-  GnomeURLError error;
+  GError *error = NULL;
 
   switch(type)
     {
@@ -1110,10 +1110,11 @@ gnome_help_view_show_url(GnomeHelpView *help_view, const char *url, HelpURLType 
 			      GNOME_URL_DISPLAY_NEWWIN |
 			      GNOME_URL_DISPLAY_CLOSE_ATEXIT,
 			      &error);
-  /*FIXME:
-  if(error != GNOME_URL_NO_ERROR) {
-
-  } */
+  if(error != NULL) {
+  /*FIXME: properly handle the error!*/
+	  g_warning (_("Cought GnomeURL error: %s"), error->message);
+	  g_clear_error (&error);
+  }
 }
 
 void
@@ -1129,6 +1130,7 @@ gnome_help_view_display (GnomeHelpView *help_view, const char *help_path)
 	gnome_help_view_show_url(help_view, url, URL_GENERAL_HELPSYSTEM);
       else
 	gnome_url_show(url);
+        /* FIXME: Handle errors */
 
       g_free(url);
     }

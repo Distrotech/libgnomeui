@@ -614,11 +614,121 @@ gnome_druid_cancel_callback (GtkWidget *button, GtkWidget *druid)
 }
 
 /* Public Functions */
+/**
+ * gnome_druid_new:
+ *
+ * Description: Creates a new #GnomeDruid widget.  You need to add this
+ * to a dialog yourself, it is not a dialog.
+ *
+ * Returns:  A new #GnomeDruid widget
+ **/
 GtkWidget *
 gnome_druid_new (void)
 {
 	return GTK_WIDGET (gtk_type_new (gnome_druid_get_type ()));
 }
+
+/**
+ * gnome_druid_new_with_window:
+ * @title: A title of the window
+ * @parent: The parent of this window (transient_for)
+ * @close_on_cancel: Close the window when cancel is pressed
+ * @window: Optional return of the #GtkWindow created
+ *
+ * Description: Creates a new #GnomeDruid widget.  It also creates
+ * a new toplevel window with the title of @title (which can be
+ * %NULL) and a parent of @parent (which also can be %NULL).  The
+ * window and the druid will both be shown.  If you need the window
+ * widget pointer you can optionally get it through the last argument.
+ *
+ * Returns:  A new #GnomeDruid widget
+ **/
+GtkWidget *
+gnome_druid_new_with_window (const char *title,
+			     GtkWindow *parent,
+			     gboolean close_on_cancel,
+			     GtkWidget **window)
+{
+	GtkWidget *druid = gtk_type_new (gnome_druid_get_type ());
+
+	/* make sure we always set window to NULL, even in 
+	 * case of precondition errors */
+	if (window != NULL)
+		*window = NULL;
+
+	g_return_val_if_fail (parent == NULL ||
+			      GTK_IS_WINDOW (parent),
+			      NULL);
+
+	gnome_druid_construct_with_window (GNOME_DRUID (druid),
+					   title,
+					   parent,
+					   close_on_cancel,
+					   window);
+
+	return druid;
+}
+
+/**
+ * gnome_druid_construct_with_window:
+ * @druid: The #GnomeDruid
+ * @title: A title of the window
+ * @parent: The parent of this window (transient_for)
+ * @close_on_cancel: Close the window when cancel is pressed
+ * @window: Optional return of the #GtkWindow created
+ *
+ * Description: Creates a new toplevel window with the title of @title (which
+ * can be %NULL) and a parent of @parent (which also can be %NULL).  The @druid
+ * will be placed inside this window.  The window and the druid will both be
+ * shown.  If you need the window widget pointer you can optionally get it
+ * through the last argument.  See #gnome_druid_new_with_window.
+ **/
+void
+gnome_druid_construct_with_window (GnomeDruid *druid,
+				   const char *title,
+				   GtkWindow *parent,
+				   gboolean close_on_cancel,
+				   GtkWidget **window)
+{
+	GtkWidget *win;
+
+	/* make sure we always set window to NULL, even in 
+	 * case of precondition errors */
+	if (window != NULL)
+		*window = NULL;
+
+	g_return_if_fail (druid != NULL);
+	g_return_if_fail (GNOME_IS_DRUID (druid));
+	g_return_if_fail (parent == NULL ||
+			  GTK_IS_WINDOW (parent));
+
+	win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+
+	if (title != NULL)
+		gtk_window_set_title (GTK_WINDOW (win), title);
+	if (parent != NULL)
+		gtk_window_set_transient_for (GTK_WINDOW (win),
+					      parent);
+
+	gtk_widget_show (GTK_WIDGET (druid));
+
+	gtk_container_add (GTK_CONTAINER (win), GTK_WIDGET (druid));
+
+	gtk_widget_show (win);
+
+	if (close_on_cancel) {
+		/* Use while_alive just for sanity */
+		gtk_signal_connect_object_while_alive
+			(GTK_OBJECT (druid), "destroy",
+			 GTK_SIGNAL_FUNC (gtk_widget_destroy),
+			 GTK_OBJECT (win));
+	}
+
+	/* return the window */
+	if (window != NULL)
+		*window = win;
+}
+
 
 /**
  * gnome_druid_set_buttons_sensitive
@@ -719,7 +829,7 @@ gnome_druid_prepend_page (GnomeDruid *druid,
  * 
  * Description: This will insert @page after @back_page into the list of
  * internal pages that the @druid has.  If @back_page is not present in the list
- * or NULL, @page will be prepended to the list.
+ * or %NULL, @page will be prepended to the list.
  **/
 void
 gnome_druid_insert_page (GnomeDruid *druid,
