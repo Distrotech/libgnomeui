@@ -1,3 +1,12 @@
+1998-11-18  Tuomas Kuosmanen  <tigert@fun112.koivukyla.hoas.fi>
+
+	* gnome-stock.[c,h], stock_demo.c, pixmaps/stock_index.png
+	I updated the index stock-icon, and added stock icons for 
+	alignment (left, right, center, justify) - (I thought I added 
+	Changelog entries for these already!?) - index is meant for 
+	the Help Browser for example, alignment stuff for 
+	gnumeric and all editors/wordprocessors/whatever.
+
 1998-11-17  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c: got rid of all the DnD stuff and implemented my own

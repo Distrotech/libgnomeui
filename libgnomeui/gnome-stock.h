@@ -482,6 +482,7 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_TOP          "Menu_Top"
 #define GNOME_STOCK_MENU_BOTTOM       "Menu_Bottom"
 #define GNOME_STOCK_MENU_ATTACH       "Menu_Attach"
+#define GNOME_STOCK_MENU_INDEX        "Menu_Index"
 #define GNOME_STOCK_MENU_FONT         "Menu_Font"
 #define GNOME_STOCK_MENU_EXEC         "Menu_Exec"
 
