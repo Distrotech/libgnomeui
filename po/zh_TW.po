@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.7.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-13 18:30+0200\n"
+"POT-Creation-Date: 2005-01-26 00:45+0100\n"
 "PO-Revision-Date: 2004-09-10 07:24+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -31,16 +31,16 @@ msgstr "副項目二"
 msgid "Hint for item 2"
 msgstr "項目二的提示"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:668
+#: file-chooser/gtkfilesystemgnomevfs.c:678
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s 不是資料夾"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:875
+#: file-chooser/gtkfilesystemgnomevfs.c:885
 msgid "Filesystem"
 msgstr "檔案系統"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1539
+#: file-chooser/gtkfilesystemgnomevfs.c:1569
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "無法儲存書籤 (%s)"

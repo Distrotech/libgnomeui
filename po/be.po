@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-13 18:30+0200\n"
+"POT-Creation-Date: 2005-01-26 00:45+0100\n"
 "PO-Revision-Date: 2004-03-08 15:11+0200\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -32,17 +32,17 @@ msgstr "Элемэнт-нашчадак 2"
 msgid "Hint for item 2"
 msgstr "Падказка для элемэнту 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:668
+#: file-chooser/gtkfilesystemgnomevfs.c:678
 #, c-format
 msgid "%s is not a folder"
 msgstr ""
 
-#: file-chooser/gtkfilesystemgnomevfs.c:875
+#: file-chooser/gtkfilesystemgnomevfs.c:885
 #, fuzzy
 msgid "Filesystem"
 msgstr "Фай_лы"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1539
+#: file-chooser/gtkfilesystemgnomevfs.c:1569
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-13 18:30+0200\n"
+"POT-Creation-Date: 2005-01-26 00:45+0100\n"
 "PO-Revision-Date: 2004-09-28 17:48+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@linuxmail.org>\n"
 "Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
@@ -31,16 +31,16 @@ msgstr "Sự kiện con 2"
 msgid "Hint for item 2"
 msgstr "Chỉ dẫn cho mục 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:668
+#: file-chooser/gtkfilesystemgnomevfs.c:678
 #, c-format
 msgid "%s is not a folder"
 msgstr ""
 
-#: file-chooser/gtkfilesystemgnomevfs.c:875
+#: file-chooser/gtkfilesystemgnomevfs.c:885
 msgid "Filesystem"
 msgstr "Hệ tập tin"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1539
+#: file-chooser/gtkfilesystemgnomevfs.c:1569
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr ""
@@ -1464,110 +1464,110 @@ msgstr "_Thông báo cho Nhà phát triển"
 msgid "_Debug"
 msgstr "_Debug"
 
-msgid "Color Selector"
-msgstr "Trình chọn Màu"
+#~ msgid "Color Selector"
+#~ msgstr "Trình chọn Màu"
 
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Ứng dụng \"%s\" (quá trình %d) đã bị đổ vỡ\n"
-"do một sai lầm nguy hiểm.\n"
-"(%s)"
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "Ứng dụng \"%s\" (quá trình %d) đã bị đổ vỡ\n"
+#~ "do một sai lầm nguy hiểm.\n"
+#~ "(%s)"
 
-msgid "Submit a bug report"
-msgstr "Trình ra một báo cáo rối "
+#~ msgid "Submit a bug report"
+#~ msgstr "Trình ra một báo cáo rối "
 
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
 
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Hãy xem trang the GNOME Application Crash để có thêm thông tin"
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr "Hãy xem trang the GNOME Application Crash để có thêm thông tin"
 
-msgid "_Credits"
-msgstr "_Công lao"
+#~ msgid "_Credits"
+#~ msgstr "_Công lao"
 
-msgid "Exit the test"
-msgstr "Kết thúc thử"
+#~ msgid "Exit the test"
+#~ msgstr "Kết thúc thử"
 
-msgid "Find _Again"
-msgstr "Tìm thêm"
+#~ msgid "Find _Again"
+#~ msgstr "Tìm thêm"
 
-msgid "Both text and icons"
-msgstr "Cả văn bản và các biểu tượng"
+#~ msgid "Both text and icons"
+#~ msgstr "Cả văn bản và các biểu tượng"
 
-msgid "E_xit"
-msgstr "Kết thúc"
+#~ msgid "E_xit"
+#~ msgstr "Kết thúc"
 
-msgid "Exit the program"
-msgstr "Kết thúc chương trình"
+#~ msgid "Exit the program"
+#~ msgstr "Kết thúc chương trình"
 
-msgid "Gdk debugging flags to set"
-msgstr "Tập hợp các lỗi Gdk được định vị"
+#~ msgid "Gdk debugging flags to set"
+#~ msgstr "Tập hợp các lỗi Gdk được định vị"
 
-msgid "FLAGS"
-msgstr "CỜ"
+#~ msgid "FLAGS"
+#~ msgstr "CỜ"
 
-msgid "Gdk debugging flags to unset"
-msgstr "Tắt định vị các lỗi"
+#~ msgid "Gdk debugging flags to unset"
+#~ msgstr "Tắt định vị các lỗi"
 
-msgid "Make X calls synchronous"
-msgstr "Gọi X đồng bộ"
+#~ msgid "Make X calls synchronous"
+#~ msgstr "Gọi X đồng bộ"
 
-msgid "Don't use X shared memory extension"
-msgstr "Không dùng bộ nhớ phân chia cho X"
+#~ msgid "Don't use X shared memory extension"
+#~ msgstr "Không dùng bộ nhớ phân chia cho X"
 
-msgid "Program name as used by the window manager"
-msgstr "Tên chương trình dùng như ở quản lý cửa sổ"
+#~ msgid "Program name as used by the window manager"
+#~ msgstr "Tên chương trình dùng như ở quản lý cửa sổ"
 
-msgid "NAME"
-msgstr "TÊN"
+#~ msgid "NAME"
+#~ msgstr "TÊN"
 
-msgid "Program class as used by the window manager"
-msgstr "Cấp chương trình dùng ở quản lý cửa sổ"
+#~ msgid "Program class as used by the window manager"
+#~ msgstr "Cấp chương trình dùng ở quản lý cửa sổ"
 
-msgid "CLASS"
-msgstr "CẤP"
+#~ msgid "CLASS"
+#~ msgstr "CẤP"
 
-msgid "HOST"
-msgstr "MÁY CHỦ"
+#~ msgid "HOST"
+#~ msgstr "MÁY CHỦ"
 
-msgid "PORT"
-msgstr "CỔNG"
+#~ msgid "PORT"
+#~ msgstr "CỔNG"
 
-msgid "STYLE"
-msgstr "KIỂU"
+#~ msgid "STYLE"
+#~ msgstr "KIỂU"
 
-msgid "Gtk+ debugging flags to set"
-msgstr "Tập hợp các lỗi Gtk+ được định vị"
+#~ msgid "Gtk+ debugging flags to set"
+#~ msgstr "Tập hợp các lỗi Gtk+ được định vị"
 
-msgid "Gtk+ debugging flags to unset"
-msgstr "Tắt các lỗi Gtk+ được định vị"
+#~ msgid "Gtk+ debugging flags to unset"
+#~ msgstr "Tắt các lỗi Gtk+ được định vị"
 
-msgid "Make all warnings fatal"
-msgstr "Làm tất cả cảnh cáo báo nguy hiểm"
+#~ msgid "Make all warnings fatal"
+#~ msgstr "Làm tất cả cảnh cáo báo nguy hiểm"
 
-msgid "Load an additional Gtk module"
-msgstr "Tải thêm một môđun Gtk"
+#~ msgid "Load an additional Gtk module"
+#~ msgstr "Tải thêm một môđun Gtk"
 
-msgid "MODULE"
-msgstr "MÔĐUN"
+#~ msgid "MODULE"
+#~ msgstr "MÔĐUN"
 
-msgid "GTK+"
-msgstr "GTK+"
+#~ msgid "GTK+"
+#~ msgstr "GTK+"
 
-msgid "GConf error details: %s\n"
-msgstr "Các chi tiết sai sót của GConf: %s\n"
+#~ msgid "GConf error details: %s\n"
+#~ msgstr "Các chi tiết sai sót của GConf: %s\n"
 
-msgid "Copyright font"
-msgstr "Phông bản quyền"
+#~ msgid "Copyright font"
+#~ msgstr "Phông bản quyền"
 
-msgid "Comments font"
-msgstr "Phông các bình luận"
+#~ msgid "Comments font"
+#~ msgstr "Phông các bình luận"
 
-msgid "Author"
-msgstr "Tác giả"
+#~ msgid "Author"
+#~ msgstr "Tác giả"
 
 #~ msgid " domain %s"
 #~ msgstr " vùng %s"

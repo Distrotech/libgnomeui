@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
-"POT-Creation-Date: 2004-09-12 12:10+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-01-26 00:45+0100\n"
 "PO-Revision-Date: 2004-09-12 13:44+0200\n"
 "Last-Translator: Francesco Marletta <francesco.marletta@tiscali.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -32,16 +32,16 @@ msgstr "Oggetto figlio 2"
 msgid "Hint for item 2"
 msgstr "Suggerimento per l'oggetto 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:668
+#: file-chooser/gtkfilesystemgnomevfs.c:678
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s non è una cartella"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:875
+#: file-chooser/gtkfilesystemgnomevfs.c:885
 msgid "Filesystem"
 msgstr "Filesystem"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1539
+#: file-chooser/gtkfilesystemgnomevfs.c:1569
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Salvataggio del segnalibro fallito (%s)"
@@ -173,7 +173,6 @@ msgstr "Informazioni su %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -231,7 +230,6 @@ msgid "_Game"
 msgstr "_Gioco"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_iuto"
 
@@ -423,11 +421,11 @@ msgstr "Configura l'applicazione"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "I_nformazioni"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Informazioni su questa applicazione"
 
@@ -454,7 +452,7 @@ msgstr "Crea una nuova finestra"
 msgid "_Close This Window"
 msgstr "_Chiudi questa finestra"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Chiude la finestra corrente"
 
@@ -1481,9 +1479,8 @@ msgstr "_Informa gli sviluppatori"
 msgid "_Debug"
 msgstr "_Debug"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Termina il test"
+#~ msgid "Exit the test"
+#~ msgstr "Termina il test"
 
-msgid " domain %s"
-msgstr " dominio %s"
+#~ msgid " domain %s"
+#~ msgstr " dominio %s"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui gnome 2.10 branch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-20 18:13+0200\n"
+"POT-Creation-Date: 2005-01-26 00:45+0100\n"
 "PO-Revision-Date: 2004-11-19 11:33+0200\n"
 "Last-Translator: Vladimir Petkov <vpetkov@i-space.org>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -32,16 +32,16 @@ msgstr "Синовен елемент 2"
 msgid "Hint for item 2"
 msgstr "Подсещане за елемент 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:668
+#: file-chooser/gtkfilesystemgnomevfs.c:678
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s не е папка"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:875
+#: file-chooser/gtkfilesystemgnomevfs.c:885
 msgid "Filesystem"
 msgstr "Файлова система"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1556
+#: file-chooser/gtkfilesystemgnomevfs.c:1569
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Запазването на отметката е неуспешно (%s)"
@@ -175,7 +175,6 @@ msgstr "Относно %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -233,7 +232,6 @@ msgid "_Game"
 msgstr "_Игри"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Помощ"
 
@@ -424,11 +422,11 @@ msgstr "Конфигуриране на програмата"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Относно"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Относно тази програма"
 
@@ -455,7 +453,7 @@ msgstr "Създаване на нов прозорец"
 msgid "_Close This Window"
 msgstr "_Затваряне на този прозорец"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Затваряне на текущия прозорец"
 
@@ -1471,9 +1469,8 @@ msgstr "_Информиране на разработчиците"
 msgid "_Debug"
 msgstr "_Поправяне на грешки"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Излизане от теста"
+#~ msgid "Exit the test"
+#~ msgstr "Излизане от теста"
 
 #~ msgid " domain %s"
 #~ msgstr " домейн·%s"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-21 22:19+0200\n"
+"POT-Creation-Date: 2005-01-26 00:45+0100\n"
 "PO-Revision-Date: 2004-12-21 22:22+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -35,16 +35,16 @@ msgstr "Dukterinis elementas 2"
 msgid "Hint for item 2"
 msgstr "Elemento 2 patarimas"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:677
+#: file-chooser/gtkfilesystemgnomevfs.c:678
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nėra aplankas"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:884
+#: file-chooser/gtkfilesystemgnomevfs.c:885
 msgid "Filesystem"
 msgstr "Bylų sistema"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1565
+#: file-chooser/gtkfilesystemgnomevfs.c:1569
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Žymelės saugojimas nepavyko (%s)"
@@ -175,7 +175,6 @@ msgstr "Apie %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Byla"
 
@@ -233,7 +232,6 @@ msgid "_Game"
 msgstr "Žai_dimas"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pagalba"
 
@@ -424,11 +422,11 @@ msgstr "Sutvarkyti programą"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Apie"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Apie šią programą"
 
@@ -455,7 +453,7 @@ msgstr "Sukurti naują langą"
 msgid "_Close This Window"
 msgstr "_Uždaryti šį langą"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Uždaryti esamą langą"
 
@@ -1470,6 +1468,5 @@ msgstr "_Informuoti kūrėjus"
 msgid "_Debug"
 msgstr "_Derinti"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Išeiti iš testo"
+#~ msgid "Exit the test"
+#~ msgstr "Išeiti iš testo"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-14 01:30+0000\n"
+"POT-Creation-Date: 2005-01-26 00:45+0100\n"
 "PO-Revision-Date: 2005-01-14 03:58+0000\n"
 "Last-Translator: Telsa Gwynne <hobbit@aloss.ukuu.org.uk>\n"
 "Language-Team: Cymraeg <gnome-cy@pengwyn.linux.org.uk>\n"
@@ -36,16 +36,16 @@ msgstr "Eitem Plentyn 1"
 msgid "Hint for item 2"
 msgstr "Awgrymiad ynghylch eitem 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:677
+#: file-chooser/gtkfilesystemgnomevfs.c:678
 #, c-format
 msgid "%s is not a folder"
 msgstr "Nid yw %s yn blygell"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:884
+#: file-chooser/gtkfilesystemgnomevfs.c:885
 msgid "Filesystem"
 msgstr "System Ffeiliau"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1565
+#: file-chooser/gtkfilesystemgnomevfs.c:1569
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Methwyd arbed llyfrnodau (%s)"
@@ -176,7 +176,6 @@ msgstr "Ynghylch %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Ffeil"
 
@@ -234,7 +233,6 @@ msgid "_Game"
 msgstr "_Gêm"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Cymorth"
 
@@ -274,8 +272,8 @@ msgstr "Cadw'r ffeil cyfredol gyda enw newydd"
 msgid "_Revert"
 msgstr "_Dychwelyd"
 
-#: libgnomeui/gnome-app-helper.c:126
 # Checkme: "a"? Only one, isn't there? 
+#: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
 msgstr "Dychwelyd at fersiwn o'r ffeil yma a gadwyd"
 
@@ -373,9 +371,9 @@ msgstr "_Ailwneud"
 msgid "Redo the undone action"
 msgstr "Ailwneud y weithred a ddatwneuthpwyd"
 
+# Checkme: Was chwilio. Considered canfod. Now darganfod. Gareth sed. 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
-# Checkme: Was chwilio. Considered canfod. Now darganfod. Gareth sed. 
 msgid "_Find..."
 msgstr "_Darganfod..."
 
@@ -383,9 +381,9 @@ msgstr "_Darganfod..."
 msgid "Search for a string"
 msgstr "Chwilio am linyn"
 
+# Checkme: see above.
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
-# Checkme: see above.
 msgid "Find Ne_xt"
 msgstr "Darganfod y _Nesaf"
 
@@ -428,11 +426,11 @@ msgstr "Cyflunio'r rhaglen"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Ynghylch"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Ynghylch y rhaglen hon"
 
@@ -459,7 +457,7 @@ msgstr "Creu ffenest newydd"
 msgid "_Close This Window"
 msgstr "_Cau'r Ffenest Hon"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Cau'r ffenest gyfredol hon"
 
@@ -669,8 +667,8 @@ msgstr "Mae'n rhaid mewngofnodi er mwyn cyrchu %s parth %s.\n"
 msgid "You must log in to access %s\n"
 msgstr "Mae'n rhaid mewngofnodi er mwyn cyrchu %s.\n"
 
-#: libgnomeui/gnome-client.c:863
 # Checkme: what is this talking about? 
+#: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
 msgstr "Penodi adnabyddiaeth i'r rheolaeth sesiwn"
 
@@ -758,8 +756,8 @@ msgstr "Dyddiad"
 msgid "Select Date"
 msgstr "Dewiswch Dyddiad"
 
-#: libgnomeui/gnome-dateedit.c:752
 # Checkme: how many calendars? from "the" calendar better?
+#: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
 msgstr "Dewiswch y dyddiad o galendr"
 
@@ -772,8 +770,8 @@ msgstr "Calendr"
 msgid "Select Time"
 msgstr "Dewiswch Amser"
 
-#: libgnomeui/gnome-dateedit.c:784
 # Checkme: a list? the list? what list?
+#: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
 msgstr "Dewiswch yr amser o restr"
 
@@ -787,14 +785,14 @@ msgstr ""
 msgid "Title"
 msgstr "Teitl"
 
-#: libgnomeui/gnome-druid-page-standard.c:122
 # Checkme: terminology, English? 
+#: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
 msgstr "Teitl y derwydd"
 
-#: libgnomeui/gnome-druid-page-standard.c:130
 # Checkme:
 # This is "the image file which contains the logo", and a comment would help
+#: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
 msgstr "Delwedd logo"
 
@@ -934,9 +932,9 @@ msgstr ""
 "Dynodwr unigryw i'r cofnod ffeil. Fe gaiff ei ddefnyddio er mwyn cadw'r "
 "rhestr hanes."
 
-#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 # Checkme Noun noun noun.
 # Checkme See tooltip.
+#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "Teitl y Deialog Pori"
 
@@ -1485,9 +1483,8 @@ msgstr "_Cysylltu a'r Datblygwyr"
 msgid "_Debug"
 msgstr "_Datnamu"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Gadael y prawf"
+#~ msgid "Exit the test"
+#~ msgstr "Gadael y prawf"
 
 #~ msgid " domain %s"
 #~ msgstr " parth %s"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.8-branch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-01 09:50+0200\n"
+"POT-Creation-Date: 2005-01-26 00:45+0100\n"
 "PO-Revision-Date: 2004-11-15 23:18+0200\n"
 "Last-Translator: Zuza Software Foundation <info@translate.org.za>\n"
 "Language-Team: Northern Sotho <translate-discuss-nso@lists.sourceforge.net>\n"
@@ -32,16 +32,16 @@ msgstr "Selo sa Ngwana sa 2"
 msgid "Hint for item 2"
 msgstr "Keletšo bakeng sa selo sa 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:677
+#: file-chooser/gtkfilesystemgnomevfs.c:678
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ga se sephuthedi"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:884
+#: file-chooser/gtkfilesystemgnomevfs.c:885
 msgid "Filesystem"
 msgstr "Tshepedišo ya go faela"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1565
+#: file-chooser/gtkfilesystemgnomevfs.c:1569
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Go boloka puku-tshwayo go paletšwe (%s)"
@@ -173,7 +173,6 @@ msgstr "Ka ga %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Faele"
 
@@ -231,7 +230,6 @@ msgid "_Game"
 msgstr "_Papadi"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Thušo"
 
@@ -423,11 +421,11 @@ msgstr "Fetola sebopego sa tirišo"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Ka ga"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Ka ga tirišo ye"
 
@@ -454,7 +452,7 @@ msgstr "Hlama lefesetere le leswa"
 msgid "_Close This Window"
 msgstr "_Tswalela Lefesetere le"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Tswalela lefesetere la gona bjale"
 
@@ -1482,6 +1480,5 @@ msgstr "_Tsebiša Batšweletši"
 msgid "_Debug"
 msgstr "_Fokotša diphošo"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Etšwa tekong"
+#~ msgid "Exit the test"
+#~ msgstr "Etšwa tekong"
