@@ -1,3 +1,15 @@
+2003-10-20  Federico Mena Quintero  <federico@ximian.com>
+
+	* gtkfilesystemgnomevfs.c (folder_child_new): New utility
+	function.
+	(gtk_file_system_gnome_vfs_get_folder): Use folder_child_new().
+	(gtk_file_folder_gnome_vfs_get_info): Likewise.
+	(directory_load_callback): Likewise.
+	(monitor_callback): Likewise.
+
+	* TODO: Removed the item about factoring out the code that creates
+	FolderChild structures.
+
 2003-10-17  Federico Mena Quintero  <federico@ximian.com>
 
 	* gtkfilesystemgnomevfs.c

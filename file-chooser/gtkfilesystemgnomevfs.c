@@ -192,7 +192,9 @@ static void client_notify_cb (GConfClient *client,
 			      GConfEntry  *entry,
 			      gpointer     data);
 
-static void  folder_child_free (FolderChild *child);
+static FolderChild *folder_child_new (const char       *uri,
+				      GnomeVFSFileInfo *info);
+static void         folder_child_free (FolderChild *child);
 
 static void     set_vfs_error     (GnomeVFSResult   result,
 				   const gchar     *uri,
@@ -492,13 +494,10 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 	      set_vfs_error (result, uri, error);
 	      return FALSE;
 	    }
-	  
-	  child = g_new (FolderChild, 1);
-	  child->uri = g_strdup (uri);
-	  
-	  child->info = vfs_info;
-	  gnome_vfs_file_info_ref (child->info);
-	  
+
+	  child = folder_child_new (uri, vfs_info);
+	  gnome_vfs_file_info_unref (vfs_info);
+
 	  g_hash_table_replace (parent_folder->children,
 				child->uri, child);
 
@@ -1080,11 +1079,7 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
 	    {
 	      GSList *uris;
 
-	      child = g_new (FolderChild, 1);
-	      child->uri = g_strdup (uri);
-	      child->info = vfs_info;
-	      gnome_vfs_file_info_ref (vfs_info);
-
+	      child = folder_child_new (uri, vfs_info);
 	      g_hash_table_replace (folder_vfs->children, child->uri, child);
 
 	      uris = g_slist_append (NULL, (char *) uri);
@@ -1191,6 +1186,20 @@ info_from_vfs_info (const gchar      *uri,
   return info;
 }
 
+static FolderChild *
+folder_child_new (const char       *uri,
+		  GnomeVFSFileInfo *info)
+{
+  FolderChild *child;
+
+  child = g_new (FolderChild, 1);
+  child->uri = g_strdup (uri);
+  child->info = info;
+  gnome_vfs_file_info_ref (child->info);
+
+  return child;
+}
+
 static void
 folder_child_free (FolderChild *child)
 {
@@ -1274,10 +1283,9 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
       
       if (uri)
 	{
-	  FolderChild *child = g_new (FolderChild, 1);
-	  child->uri = uri;
-	  child->info = vfs_info;
-	  gnome_vfs_file_info_ref (child->info);
+	  FolderChild *child;
+
+	  child = folder_child_new (uri, vfs_info);
 
 	  if (!g_hash_table_lookup (folder_vfs->children, child->uri))
 	    new = TRUE;
@@ -1330,10 +1338,10 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
 	
 	if (result == GNOME_VFS_OK)
 	  {
-	    FolderChild *child = g_new (FolderChild, 1);
-	    child->uri = g_strdup (info_uri);
-	    child->info = vfs_info;
-	    gnome_vfs_file_info_ref (child->info);
+	    FolderChild *child;
+
+	    child = folder_child_new (info_uri, vfs_info);
+	    gnome_vfs_file_info_unref (vfs_info);
 	    
 	    g_hash_table_replace (folder_vfs->children,
 				  child->uri, child);
