@@ -1,3 +1,7 @@
+2002-03-10  Changwoo Ryu  <cwryu@debian.org>
+
+	* configure.in: Added 'ko' to ALL_LINGUAS.
+
 2002-03-06  Paolo Maggi  <maggi@athena.polito.it>
 
 	* libgnomeui/gnome-font-picker.c (gnome_font_picker_update_font_info):

@@ -1,0 +1,1306 @@
+# Korean messages for libgnomeui
+# Copyright (C) 1998, 1999, 2002 Free Software Foundation, Inc.
+# Changwoo Ryu <cwryu@adam.kaist.ac.kr>, 1998-2002.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui 1.112.1\n"
+"POT-Creation-Date: 2002-03-10 23:18+0900\n"
+"PO-Revision-Date: 2002-03-11 17:55+0900\n"
+"Last-Translator: Changwoo Ryu <cwryu@adam.kaist.ac.kr>\n"
+"Language-Team: Korean <ko@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=euc-kr\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: libgnomeui/gnome-about.c:187
+msgid "Credits"
+msgstr "만든 사람"
+
+#: libgnomeui/gnome-about.c:210
+msgid "Written by"
+msgstr "개발한 사람"
+
+#: libgnomeui/gnome-about.c:224
+msgid "Documented by"
+msgstr "문서를 작성한 사람"
+
+#: libgnomeui/gnome-about.c:238
+msgid "Translated by"
+msgstr "번역한 사람"
+
+#. Add the credits button
+#: libgnomeui/gnome-about.c:295
+msgid "_Credits"
+msgstr "만든 사람(_C)"
+
+#: libgnomeui/gnome-about.c:335
+msgid "Program name"
+msgstr "프로그램 이름"
+
+#: libgnomeui/gnome-about.c:336
+msgid "The name of the program"
+msgstr "이 프로그램의 이름"
+
+#: libgnomeui/gnome-about.c:343
+msgid "Program version"
+msgstr "프로그램 버전"
+
+#: libgnomeui/gnome-about.c:344
+msgid "The version of the program"
+msgstr "이 프로그램의 버전"
+
+#: libgnomeui/gnome-about.c:350
+msgid "Copyright string"
+msgstr "저작권 문자열"
+
+#: libgnomeui/gnome-about.c:351
+msgid "Copyright information for the program"
+msgstr "이 프로그램에 관한 저작권 정보"
+
+#: libgnomeui/gnome-about.c:358
+msgid "Comments string"
+msgstr "설명 문자열"
+
+#: libgnomeui/gnome-about.c:359
+msgid "Comments about the program"
+msgstr "이 프로그램에 관한 살명"
+
+#: libgnomeui/gnome-about.c:365
+msgid "Authors"
+msgstr "만든이"
+
+#: libgnomeui/gnome-about.c:366
+msgid "List of authors of the programs"
+msgstr "이 프로그램을 만든 사람들의 목록"
+
+#: libgnomeui/gnome-about.c:368
+msgid "Author entry"
+msgstr "만든이 항목"
+
+#: libgnomeui/gnome-about.c:369
+msgid "A single author entry"
+msgstr "만든이 한 사람 항목"
+
+#: libgnomeui/gnome-about.c:376
+msgid "Documenters"
+msgstr "문서 작성자"
+
+#: libgnomeui/gnome-about.c:377
+msgid "List of people documenting the program"
+msgstr "이 프로그램의 문서를 작성한 사람들의 목록"
+
+#: libgnomeui/gnome-about.c:379
+msgid "Documenter entry"
+msgstr "문서 작성자 항목"
+
+#: libgnomeui/gnome-about.c:380
+msgid "A single documenter entry"
+msgstr "이 프로그램의 문서를 작성한 한 사람 항목"
+
+#: libgnomeui/gnome-about.c:388
+msgid "Translator credits"
+msgstr "번역자 크레디트"
+
+#: libgnomeui/gnome-about.c:389
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "번역자의 크레디트. 이 문자열은 번역 가능하도록 표시해야 합니다"
+
+#: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "로고"
+
+#: libgnomeui/gnome-about.c:397
+msgid "A logo for the about box"
+msgstr "프로그램 정보 상자의 로고"
+
+#: libgnomeui/gnome-about.c:476
+#, c-format
+msgid "About %s"
+msgstr "%s 정보"
+
+#: libgnomeui/gnome-appbar.c:762
+msgid "Has Progress"
+msgstr "진행률 표시줄 사용"
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Create a progress widget."
+msgstr "진행률 표시줄을 만듭니다."
+
+#: libgnomeui/gnome-appbar.c:770
+msgid "Has Status"
+msgstr "상태 표시줄 사용"
+
+#: libgnomeui/gnome-appbar.c:771
+msgid "Create a status widget."
+msgstr "상태 표시줄을 만듭니다."
+
+#: libgnomeui/gnome-appbar.c:778
+msgid "Interactivity"
+msgstr "대화형"
+
+#: libgnomeui/gnome-appbar.c:779
+msgid "Level of user activity required."
+msgstr "사용자 행동이 필요한 정도."
+
+#: libgnomeui/gnome-client.c:833
+msgid "Specify session management ID"
+msgstr "세션 관리 id 지정"
+
+#: libgnomeui/gnome-client.c:833
+msgid "ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:836
+msgid "Specify prefix of saved configuration"
+msgstr "이미 저장된 설정의 앞부분을 지정"
+
+#: libgnomeui/gnome-client.c:836
+msgid "PREFIX"
+msgstr "PREFIX"
+
+#: libgnomeui/gnome-client.c:839
+msgid "Disable connection to session manager"
+msgstr "세션 관리자에 연결하지 않음"
+
+#: libgnomeui/gnome-client.c:945
+msgid "Session management"
+msgstr "세션 관리"
+
+#: libgnomeui/gnome-client.c:2483
+msgid "Cancel Logout"
+msgstr "로그아웃 취소"
+
+#: libgnomeui/gnome-color-picker.c:405
+msgid "Received invalid color data\n"
+msgstr "잘못된 색 데이타를 받았습니다\n"
+
+#: libgnomeui/gnome-color-picker.c:468
+msgid "Pick a color"
+msgstr "색상 선택"
+
+#: libgnomeui/gnome-dateedit.c:428
+msgid "Time"
+msgstr "시각"
+
+#: libgnomeui/gnome-dateedit.c:429
+msgid "The time currently selected"
+msgstr "현재 선택한 시각"
+
+#: libgnomeui/gnome-dateedit.c:441
+msgid "DateEdit Flags"
+msgstr "DateEdit 플래그"
+
+#: libgnomeui/gnome-dateedit.c:442
+msgid "Flags for how DateEdit looks"
+msgstr "DateEdit 겉모양에 관한 플래그"
+
+#: libgnomeui/gnome-dateedit.c:451
+msgid "Lower Hour"
+msgstr "최소 시"
+
+#: libgnomeui/gnome-dateedit.c:452
+msgid "Lower hour in the time popup selector"
+msgstr "팝업 시간 선택기에서 최소 시간"
+
+#: libgnomeui/gnome-dateedit.c:462
+msgid "Upper Hour"
+msgstr "최대 시"
+
+#: libgnomeui/gnome-dateedit.c:463
+msgid "Upper hour in the time popup selector"
+msgstr "팝업 시간 선택기에서 최대 시간"
+
+#: libgnomeui/gnome-dateedit.c:473
+msgid "Initial Time"
+msgstr "최초 시각"
+
+#: libgnomeui/gnome-dateedit.c:474
+msgid "The initial time"
+msgstr "최초 시각"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:703
+msgid "Calendar"
+msgstr "달력"
+
+#: libgnomeui/gnome-dateedit.c:933
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr "gnome_date_edit_get_date는 낡아서 권장되지 않습니다, gnome_date_edit_get_time을 사용하십시오"
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "제목"
+
+# druid는 어쩌구 wizard를 말한다.
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "마법사의 제목"
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "로고 그림"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "위쪽에 워터마크"
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "위쪽에 워터마크 그림"
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "제목 전경"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "제목의 전경 색"
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "제목 전경 색"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "제목의 전경 색의 GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "제목 전경 색 설정"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "제목의 전경 색을 설정합니다"
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "배경 색"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "배경 색"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "배경의 색의 GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "배경 색 설정"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "배경의 색을 설정합니다"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Logo Background Color"
+msgstr "로고 배경 색"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Logo Background color"
+msgstr "로고 배경 색"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Logo Background color as a GdkColor"
+msgstr "로고 배경 색의 GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Logo Background color set"
+msgstr "로고 배경 색 설정"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Logo Background color is set"
+msgstr "로고 배경 색을 설정합니다"
+
+#: libgnomeui/gnome-druid.c:150
+msgid "Show Finish"
+msgstr "끝내기 보여주기"
+
+#: libgnomeui/gnome-druid.c:151
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "'다음' 단추 대신에 '끝내기' 보여주기"
+
+#: libgnomeui/gnome-druid.c:158
+msgid "Show Help"
+msgstr "도움말 보여주기"
+
+#: libgnomeui/gnome-druid.c:159
+msgid "Show the 'Help' button"
+msgstr "도움말 단추 보여주기"
+
+#: libgnomeui/gnome-href.c:118
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:119
+msgid "The URL that GnomeHRef activates"
+msgstr "GnomeHRef가 활성화하는 URL"
+
+#: libgnomeui/gnome-href.c:126
+msgid "Text"
+msgstr "글월"
+
+#: libgnomeui/gnome-href.c:127
+msgid "The text on the button"
+msgstr "단추 위의 글월"
+
+#: libgnomeui/gnome-href.c:128
+msgid "End World Hunger"
+msgstr "지구촌의 굶주림을 없앱시다"
+
+#: libgnomeui/gnome-href.c:134
+msgid "Link colour"
+msgstr "링크 색"
+
+#: libgnomeui/gnome-href.c:135
+msgid "Colour used to draw the link"
+msgstr "링크를 그릴 때 사용할 색"
+
+#: libgnomeui/gnome-href.c:396
+msgid ""
+"Error occured while trying to launch the URL handler.\n"
+"Please check the settings in the Control Center if they are correct."
+msgstr ""
+"URL 처리기를 시작하려는 데 오류가 발생했습니다.\n"
+"조종 센터에서 설정사항이 올바른 지 확인하십시오."
+
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+msgid "X display to use"
+msgstr "사용할 X display"
+
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
+msgid "DISPLAY"
+msgstr "DISPLAY"
+
+#: libgnomeui/gnome-ui-init.c:111
+msgid "GNOME GUI Library"
+msgstr "그놈 GUI 라이브러리"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:569
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr ""
+"여러 개의 세그먼테이션 오류가 발생했습니다; 애러 창을 표시할 수 없습니다\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:583
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"세그멘테이션 오류!\n"
+"이상 종료 대화 창을 표시할 수 없습니다\n"
+
+#: libgnomeui/gnome-ui-init.c:715
+msgid "Gdk debugging flags to set"
+msgstr "Gdk 디버깅 플래그를 set"
+
+#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
+#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
+msgid "FLAGS"
+msgstr "FLAGS"
+
+#: libgnomeui/gnome-ui-init.c:718
+msgid "Gdk debugging flags to unset"
+msgstr "Gdk 디버깅 플래그를 unset"
+
+#: libgnomeui/gnome-ui-init.c:726
+msgid "Make X calls synchronous"
+msgstr "X call 동기화"
+
+#: libgnomeui/gnome-ui-init.c:732
+msgid "Don't use X shared memory extension"
+msgstr "X 공유 기억장치 확장 기능을 사용하지 않음"
+
+#: libgnomeui/gnome-ui-init.c:736
+msgid "Program name as used by the window manager"
+msgstr "윈도우 관리자가 사용할 프로그램 이름"
+
+#: libgnomeui/gnome-ui-init.c:736
+msgid "NAME"
+msgstr "NAME"
+
+#: libgnomeui/gnome-ui-init.c:739
+msgid "Program class as used by the window manager"
+msgstr "윈도우 관리자가 사용할 프로그램 클래스"
+
+#: libgnomeui/gnome-ui-init.c:739
+msgid "CLASS"
+msgstr "CLASS"
+
+#: libgnomeui/gnome-ui-init.c:743
+msgid "HOST"
+msgstr "HOST"
+
+#: libgnomeui/gnome-ui-init.c:747
+msgid "PORT"
+msgstr "PORT"
+
+#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
+msgid "STYLE"
+msgstr "STYLE"
+
+#: libgnomeui/gnome-ui-init.c:759
+msgid "Gtk+ debugging flags to set"
+msgstr "Gtk+ 디버깅 플래그를 set"
+
+#: libgnomeui/gnome-ui-init.c:762
+msgid "Gtk+ debugging flags to unset"
+msgstr "Gtk+ 디버깅 플래그를 unset"
+
+#: libgnomeui/gnome-ui-init.c:765
+msgid "Make all warnings fatal"
+msgstr "모든 경고를 치명적으로 생각함"
+
+#: libgnomeui/gnome-ui-init.c:768
+msgid "Load an additional Gtk module"
+msgstr "Gtk 모듈을 추가로 읽어들임"
+
+#: libgnomeui/gnome-ui-init.c:768
+msgid "MODULE"
+msgstr "MODULE"
+
+#: libgnomeui/gnome-ui-init.c:873
+msgid "GTK+"
+msgstr "GTK+"
+
+#: libgnomeui/gnome_segv.c:100
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"그놈 세션 관리자가 (프로세스 %d) 치명적인 문제가 (%s) 발생하여 \n"
+"비정상적으로 종료되었습니다.\n"
+"이 대화창을 닫으면, 모든 프로그램이 종료할 것이고 현재 세션이\n"
+"끝납니다.\n"
+"이 대화창을 닫기 전에 파일을 저장해 주십시오."
+
+#: libgnomeui/gnome_segv.c:110
+#, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"프로그램 \"%s\"(프로세스 번호 %d)가 치명적인\n"
+"오류로 인해 비정상적으로 종료되었습니다.\n"
+"(%s)"
+
+#: libgnomeui/gnome_segv.c:123
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "사용법: gnome_segv2 프로그램명 시그널번호\n"
+
+#: libgnomeui/gnome_segv.c:139
+msgid "Submit a bug report"
+msgstr "버그 보고 제출"
+
+#: libgnomeui/gnome_segv.c:150
+msgid "Debug"
+msgstr "디버그"
+
+#: libgnomeui/gnome_segv.c:158
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:164
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr ""
+"자세한 정보는 그놈 응용프로그램의 비정상 종료 안내 웹페이지에 있습니다."
+
+#: libgnomeui/gnome-stock-icons.c:137
+msgid "Table Borders"
+msgstr "표 둘레"
+
+#: libgnomeui/gnome-stock-icons.c:138
+msgid "Table Fill"
+msgstr "표 채움"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Bulleted List"
+msgstr "번호없는 리스트"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Numbered List"
+msgstr "번호붙인 리스트"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Indent"
+msgstr "들이기"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Un-Indent"
+msgstr "들이기-취소"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "About"
+msgstr "이 프로그램은"
+
+#: demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "하위 항목 1"
+
+#: demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "항목 1의 힌트"
+
+#: demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "하위 항목 2"
+
+#: demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "항목 2의 힌트"
+
+#. Some standard menus
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: test-gnome/testgnome.xml.h:5
+msgid "_File"
+msgstr "파일(_F)"
+
+#: libgnomeui/gnome-app-helper.c:83
+msgid "_File/"
+msgstr "파일(_F)/"
+
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
+msgid "_Edit"
+msgstr "편집(_E)"
+
+#: libgnomeui/gnome-app-helper.c:85
+msgid "_Edit/"
+msgstr "편집(_E)/"
+
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
+msgid "_View"
+msgstr "보기(_V)"
+
+#: libgnomeui/gnome-app-helper.c:87
+msgid "_View/"
+msgstr "보기(_V)/"
+
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
+msgid "_Settings"
+msgstr "설정(_S)"
+
+#: libgnomeui/gnome-app-helper.c:89
+msgid "_Settings/"
+msgstr "설정(_S)/"
+
+#. If you have more then one New type, use this tree
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
+msgid "_New"
+msgstr "새로운(_N)"
+
+#: libgnomeui/gnome-app-helper.c:91
+msgid "_New/"
+msgstr "새로운(_N)/"
+
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
+msgid "Fi_les"
+msgstr "파일들(_L)"
+
+#: libgnomeui/gnome-app-helper.c:93
+msgid "Fi_les/"
+msgstr "파일들(_L)/"
+
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
+msgid "_Windows"
+msgstr "창(_W)"
+
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
+msgid "_Game"
+msgstr "게임(_G)"
+
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: test-gnome/testgnome.xml.h:6
+msgid "_Help"
+msgstr "도움말(_H)"
+
+#: libgnomeui/gnome-app-helper.c:97
+msgid "_Windows/"
+msgstr "창(_W)/"
+
+#. Open
+#: libgnomeui/gnome-app-helper.c:109
+msgid "_Open..."
+msgstr "열기(_O)..."
+
+#: libgnomeui/gnome-app-helper.c:109
+msgid "Open a file"
+msgstr "파일 열기"
+
+#. Save
+#: libgnomeui/gnome-app-helper.c:114
+msgid "_Save"
+msgstr "저장(_S)"
+
+#: libgnomeui/gnome-app-helper.c:114
+msgid "Save the current file"
+msgstr "현재 파일 저장"
+
+#. Save As
+#: libgnomeui/gnome-app-helper.c:119
+msgid "Save _As..."
+msgstr "다른 이름으로 저장(_A)..."
+
+#: libgnomeui/gnome-app-helper.c:120
+msgid "Save the current file with a different name"
+msgstr "현재 파일을 다른 이름으로 저장하기"
+
+#. Revert
+#: libgnomeui/gnome-app-helper.c:125
+msgid "_Revert"
+msgstr "되돌아가기(_R)"
+
+#: libgnomeui/gnome-app-helper.c:126
+msgid "Revert to a saved version of the file"
+msgstr "저장된 파일의 상태로 되돌아가기"
+
+#. Print
+#: libgnomeui/gnome-app-helper.c:131
+msgid "_Print"
+msgstr "인쇄(_P)..."
+
+#: libgnomeui/gnome-app-helper.c:131
+msgid "Print the current file"
+msgstr "현재 파일 인쇄하기"
+
+#. Print Setup
+#: libgnomeui/gnome-app-helper.c:136
+msgid "Print S_etup..."
+msgstr "인쇄 설정(_E)..."
+
+#: libgnomeui/gnome-app-helper.c:137
+msgid "Setup the page settings for your current printer"
+msgstr "현재 프린터의 페이지 설정을 맞추기"
+
+#. Close
+#: libgnomeui/gnome-app-helper.c:142
+msgid "_Close"
+msgstr "닫기(_C)"
+
+#: libgnomeui/gnome-app-helper.c:142
+msgid "Close the current file"
+msgstr "현재 파일을 닫기"
+
+#. Exit
+#: libgnomeui/gnome-app-helper.c:147
+msgid "E_xit"
+msgstr "종료(_X)"
+
+#: libgnomeui/gnome-app-helper.c:147
+msgid "Exit the program"
+msgstr "프로그램 종료하기"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: libgnomeui/gnome-app-helper.c:155
+msgid "C_ut"
+msgstr "자르기(_C)"
+
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cut the selection"
+msgstr "선택된 부분 자르기"
+
+#. 10
+#. Copy
+#: libgnomeui/gnome-app-helper.c:161
+msgid "_Copy"
+msgstr "복사(_C)"
+
+#: libgnomeui/gnome-app-helper.c:161
+msgid "Copy the selection"
+msgstr "선택된 부분 복사"
+
+#. Paste
+#: libgnomeui/gnome-app-helper.c:166
+msgid "_Paste"
+msgstr "붙이기(_P)"
+
+#: libgnomeui/gnome-app-helper.c:166
+msgid "Paste the clipboard"
+msgstr "클립보드를 붙이기"
+
+#. Clear
+#: libgnomeui/gnome-app-helper.c:171
+msgid "C_lear"
+msgstr "지우기(_L)"
+
+#: libgnomeui/gnome-app-helper.c:171
+msgid "Clear the selection"
+msgstr "선택된 부분 지우기"
+
+#. Undo
+#: libgnomeui/gnome-app-helper.c:176
+msgid "_Undo"
+msgstr "실행 취소(_U)"
+
+#: libgnomeui/gnome-app-helper.c:176
+msgid "Undo the last action"
+msgstr "마지막 실행 취소하기"
+
+#. Redo
+#: libgnomeui/gnome-app-helper.c:181
+msgid "_Redo"
+msgstr "다시 실행(_R)"
+
+#: libgnomeui/gnome-app-helper.c:181
+msgid "Redo the undone action"
+msgstr "실행 취소한 실행을 다시 실행하기"
+
+#. Find
+#: libgnomeui/gnome-app-helper.c:186
+msgid "_Find..."
+msgstr "찾기(_F)..."
+
+#: libgnomeui/gnome-app-helper.c:186
+msgid "Search for a string"
+msgstr "문자열 찾기"
+
+#. Find Again
+#: libgnomeui/gnome-app-helper.c:191
+msgid "Find _Again"
+msgstr "다시 찾기(_A)"
+
+#: libgnomeui/gnome-app-helper.c:192
+msgid "Search again for the same string"
+msgstr "같은 문자열을 다시 찾기"
+
+#. Replace
+#: libgnomeui/gnome-app-helper.c:197
+msgid "_Replace..."
+msgstr "치환(_R)"
+
+#: libgnomeui/gnome-app-helper.c:197
+msgid "Replace a string"
+msgstr "문자열 치환"
+
+#. Properties
+#: libgnomeui/gnome-app-helper.c:202
+msgid "_Properties..."
+msgstr "속성(_P)..."
+
+#: libgnomeui/gnome-app-helper.c:203
+msgid "Modify the file's properties"
+msgstr "파일의 속성을 변경하기"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: libgnomeui/gnome-app-helper.c:211
+msgid "_Preferences..."
+msgstr "선택사항(_P)..."
+
+#: libgnomeui/gnome-app-helper.c:212
+msgid "Configure the application"
+msgstr "프로그램 설정하기"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+msgid "_About"
+msgstr "이 프로그램은(_A)"
+
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+msgid "About this application"
+msgstr "이 프로그램에 대하여"
+
+#: libgnomeui/gnome-app-helper.c:225
+msgid "_Select All"
+msgstr "모두 선택(_S)"
+
+#: libgnomeui/gnome-app-helper.c:226
+msgid "Select everything"
+msgstr "모두 선택하기"
+
+#.
+#. * Window menu
+#.
+#: libgnomeui/gnome-app-helper.c:234
+msgid "Create New _Window"
+msgstr "새 창(_W)"
+
+#: libgnomeui/gnome-app-helper.c:235
+msgid "Create a new window"
+msgstr "새로운 창 만들기"
+
+#: libgnomeui/gnome-app-helper.c:239
+msgid "_Close This Window"
+msgstr "창 닫기(_C)"
+
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+msgid "Close the current window"
+msgstr "현재 창 닫기"
+
+#.
+#. * The "Game" menu
+#.
+#: libgnomeui/gnome-app-helper.c:248
+msgid "_New game"
+msgstr "새 게임(_N)"
+
+#: libgnomeui/gnome-app-helper.c:249
+msgid "Start a new game"
+msgstr "새로운 게임 시작"
+
+#: libgnomeui/gnome-app-helper.c:253
+msgid "_Pause game"
+msgstr "게임 일시정지(_P)"
+
+#: libgnomeui/gnome-app-helper.c:254
+msgid "Pause the game"
+msgstr "게임을 일시 정지하기"
+
+#: libgnomeui/gnome-app-helper.c:258
+msgid "_Restart game"
+msgstr "게임 다시 시작(_R)"
+
+#: libgnomeui/gnome-app-helper.c:259
+msgid "Restart the game"
+msgstr "게임을 다시 시작하기"
+
+#: libgnomeui/gnome-app-helper.c:263
+msgid "_Undo move"
+msgstr "움직임 실행 취소"
+
+#: libgnomeui/gnome-app-helper.c:264
+msgid "Undo the last move"
+msgstr "마지막 움직임 실행 취소"
+
+#: libgnomeui/gnome-app-helper.c:268
+msgid "_Redo move"
+msgstr "움직임 다시 실행"
+
+#: libgnomeui/gnome-app-helper.c:269
+msgid "Redo the undone move"
+msgstr "실행 취소된 움직임 다시 실행"
+
+#: libgnomeui/gnome-app-helper.c:273
+msgid "_Hint"
+msgstr "힌트(_H)"
+
+#: libgnomeui/gnome-app-helper.c:274
+msgid "Get a hint for your next move"
+msgstr "다음 움직임에 대한 힌트 보기"
+
+#. 30
+#: libgnomeui/gnome-app-helper.c:279
+msgid "_Scores..."
+msgstr "점수(_S)..."
+
+#: libgnomeui/gnome-app-helper.c:280
+msgid "View the scores"
+msgstr "점수 보기"
+
+#: libgnomeui/gnome-app-helper.c:284
+msgid "_End game"
+msgstr "게임 끝(_E)"
+
+#: libgnomeui/gnome-app-helper.c:285
+msgid "End the current game"
+msgstr "현재 게임 끝내기"
+
+#: libgnomeui/gnome-app-helper.c:2563
+msgid "Both text and icons"
+msgstr "글자와 아이콘 모두"
+
+#: libgnomeui/gnome-app-helper.c:2564
+msgid "Icons only"
+msgstr "아이콘만"
+
+#: libgnomeui/gnome-app-helper.c:2565
+msgid "Text only"
+msgstr "글자만"
+
+#: libgnomeui/gnome-app-helper.c:2616
+#, c-format
+msgid "Use desktop default (%s)"
+msgstr "데스크탑 기본 사항 사용 (%s)"
+
+#: libgnomeui/gnome-app-util.c:99
+msgid " (press return)"
+msgstr " (리턴을 누르세요) "
+
+#: libgnomeui/gnome-app-util.c:141
+msgid "ERROR: "
+msgstr "오류: "
+
+#: libgnomeui/gnome-app-util.c:178
+msgid "Warning: "
+msgstr "경고: "
+
+#: libgnomeui/gnome-app-util.c:316
+msgid "y"
+msgstr "y"
+
+#: libgnomeui/gnome-app-util.c:317
+msgid "yes"
+msgstr "예"
+
+#: libgnomeui/gnome-app-util.c:320
+msgid "n"
+msgstr "n"
+
+#: libgnomeui/gnome-app-util.c:321
+msgid "no"
+msgstr "아니오"
+
+#: libgnomeui/gnome-app-util.c:356
+msgid " (yes or no)"
+msgstr "(예(y) 혹은 아니오(n))"
+
+#: libgnomeui/gnome-app-util.c:357
+msgid "  - OK? (yes or no)"
+msgstr "  - 확인? (예(y) 혹은 아니오(n))"
+
+#: libgnomeui/gnome-app-util.c:685
+msgid "Progress"
+msgstr "계속"
+
+#: libgnomeui/gnome-app.c:150
+msgid "App ID"
+msgstr "App ID"
+
+#: libgnomeui/gnome-app.c:151
+msgid "The application ID string"
+msgstr "응용 프로그램 ID 문자열"
+
+#: libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
+msgid "History id"
+msgstr "히스토리 ID"
+
+#: libgnomeui/gnome-entry.c:178
+msgid "GTK entry"
+msgstr "GTK 엔트리"
+
+#: libgnomeui/gnome-entry.c:179
+msgid "The GTK entry"
+msgstr "GTK 엔트리"
+
+#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
+msgid "History ID"
+msgstr "히스토리 ID"
+
+#: libgnomeui/gnome-file-entry.c:191
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr "파일 엔트리의 유일하게 구별 가능한 ID.  이 ID는 히스토리를 저장하는 데 쓰입니다."
+
+#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
+msgid "Browse Dialog Title"
+msgstr "찾아보기 대화 상자 제목"
+
+#: libgnomeui/gnome-file-entry.c:200
+msgid "Title for the Browse file dialog."
+msgstr "찾아보기 대화 상자의 제목"
+
+#: libgnomeui/gnome-file-entry.c:207
+msgid "Directory Entry"
+msgstr "폴더 엔트리"
+
+#: libgnomeui/gnome-file-entry.c:208
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr "파일 엔트리를 폴더 이름을 입력하는 데 사용할 지 아니면 파일이름을 입력하는 데 사용할 지."
+
+#: libgnomeui/gnome-file-entry.c:216
+msgid "Modal"
+msgstr "모달"
+
+#: libgnomeui/gnome-file-entry.c:217
+msgid "Whether the Browse file window should be modal."
+msgstr "찾아보기 파일 창이 모달인지 여부."
+
+#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
+msgid "Filename"
+msgstr "파일이름"
+
+#: libgnomeui/gnome-file-entry.c:225
+msgid "Filename that should be displayed in the file entry."
+msgstr "파일이름 엔트리에 표시할 파일이름."
+
+# 테스트 프로그램의 번역?
+#
+# 테스트 프로그램은 번역할 필요가 없다.  왜냐하면 설치되지 않으니까.
+# 시간이 남아돌면서 번역할 메세지가 이거밖에 없다면 몰라도, 쓸데없는 일에
+# 시간을 낭비하고 싶지는 않다.
+#
+#: libgnomeui/gnome-file-entry.c:233
+msgid "Default Path"
+msgstr "기본 경로"
+
+#: libgnomeui/gnome-file-entry.c:234
+msgid "Default path for the Browse file window."
+msgstr "찾아보기 파일 창의 기본 경로."
+
+#: libgnomeui/gnome-file-entry.c:241
+msgid "GnomeEntry"
+msgstr "GnomeEntry"
+
+#: libgnomeui/gnome-file-entry.c:242
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr "파일 엔트리가 파일이름의 입력에 사용하는 GnomeEntry.  이 등록정보를 사용해 GnomeEntry를 얻어 내 그 매개 변수의 값을 알아보거나 변경할 수 있습니다."
+
+#: libgnomeui/gnome-file-entry.c:252
+msgid "GtkEntry"
+msgstr "GtkEntry"
+
+#: libgnomeui/gnome-file-entry.c:253
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr "파일 엔트리가 파일이름의 입력에 사용하는 GnomeEntry.  이 등록정보를 사용해 GtkEntry를 얻어 내 그 매개 변수의 값을 알아보거나 변경할 수 있습니다."
+
+#: libgnomeui/gnome-file-entry.c:418
+msgid "Select file"
+msgstr "파일 선택"
+
+#: libgnomeui/gnome-file-entry.c:592
+msgid "Browse..."
+msgstr "찾아보기..."
+
+#: libgnomeui/gnome-font-picker.c:66
+msgid "sans 12"
+msgstr "sans 12"
+
+#: libgnomeui/gnome-font-picker.c:67
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz 무궁화 꽃이 피었습니다"
+
+#: libgnomeui/gnome-font-picker.c:68
+msgid "Pick a Font"
+msgstr "글꼴 선택"
+
+#: libgnomeui/gnome-font-picker.c:156
+msgid "The title of the selection dialog box"
+msgstr "선택 대화 상자의 제목"
+
+#: libgnomeui/gnome-font-picker.c:164
+msgid "Mode"
+msgstr "모드"
+
+#: libgnomeui/gnome-font-picker.c:165
+msgid "The mode of operation of the font picker"
+msgstr "글꼴 선택의 동작 모드"
+
+#: libgnomeui/gnome-font-picker.c:174
+msgid "Font name"
+msgstr "글꼴 이름"
+
+#: libgnomeui/gnome-font-picker.c:175
+msgid "Name of the selected font"
+msgstr "선택한 글꼴의 이름"
+
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+msgid "Font"
+msgstr "글꼴"
+
+#: libgnomeui/gnome-font-picker.c:185
+msgid "The selected GtkFont"
+msgstr "선택한 GtkFont"
+
+#: libgnomeui/gnome-font-picker.c:192
+msgid "Preview text"
+msgstr "미리 보기 텍스트"
+
+#: libgnomeui/gnome-font-picker.c:193
+msgid "Preview text shown in the dialog"
+msgstr "대화 상자에 표시할 미리보기 텍스트"
+
+#: libgnomeui/gnome-font-picker.c:201
+msgid "Use font in label"
+msgstr "레이블에서 글꼴 사용"
+
+#: libgnomeui/gnome-font-picker.c:202
+msgid "Use font in the label in font info mode"
+msgstr "글꼴 정보 모드에서 레이블에서 글꼴 사용"
+
+#: libgnomeui/gnome-font-picker.c:210
+msgid "Font size for label"
+msgstr "레이블의 글꼴 크기"
+
+#: libgnomeui/gnome-font-picker.c:211
+msgid "Font size for label in font info mode"
+msgstr "글꼴 정보 모드에서 레이블의 글꼴 크기"
+
+#: libgnomeui/gnome-font-picker.c:221
+msgid "Show size"
+msgstr "크기 보여주기"
+
+#: libgnomeui/gnome-font-picker.c:222
+msgid "Show size in font info mode"
+msgstr "글꼴 정보 모드에서 크기 보여주기"
+
+#: libgnomeui/gnome-gconf-ui.c:61
+msgid "GNOME GConf UI Support"
+msgstr "그놈 GConf UI 지원 기능"
+
+#: libgnomeui/gnome-gconf-ui.c:107
+#, c-format
+msgid ""
+"You attempted to change an aspect of your configuration that your system "
+"administrator or operating system vendor does not allow you to change. Some "
+"of the settings you have selected may not take effect, or may not be "
+"restored next time you use this application (%s)."
+msgstr "귀하의 시스템 관리자, 혹은 운영 체제를 공급한 업체가 바꾸지 못하도록 정해 놓은 설정 사항을 바꾸려고 시도하셨습니다. 방금 선택한 설정 사항 중에 일부는 적용되지 않을 수도 있고, 다음에 다시 이 프로그램을 (%s) 실행할 때 그 설정사항을 잃어버릴 수도 있습니다."
+
+#: libgnomeui/gnome-gconf-ui.c:115
+#, c-format
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr "%s에 대한 설정 정보를 읽어들이거나 저장하는 도중에 오류가 발생했습니다. 설정 사항의 일부가 올바르게 동작하지 않을 수 있습니다."
+
+#: libgnomeui/gnome-gconf-ui.c:139
+#, c-format
+msgid "GConf error details: %s\n"
+msgstr "GConf 오류 세부 사항: %s\n"
+
+#: libgnomeui/gnome-icon-entry.c:164
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr "아이콘 엔트리의 유일하게 구별 가능한 ID.  이 ID는 히스토리를 저장하는 데 쓰입니다."
+
+#: libgnomeui/gnome-icon-entry.c:173
+msgid "Title for the Browse icon dialog."
+msgstr "찾아보기 아이콘 대화 상자의 제목."
+
+#: libgnomeui/gnome-icon-entry.c:180
+msgid "Pixmap Directory"
+msgstr "픽스맵 폴더"
+
+#: libgnomeui/gnome-icon-entry.c:181
+msgid "Directory that will be searched for icons."
+msgstr "아이콘을 찾을 폴더."
+
+#: libgnomeui/gnome-icon-entry.c:189
+msgid "Filename that should be displayed in the icon entry."
+msgstr "아이콘 엔트리에 표시해야 할 파일이름."
+
+#: libgnomeui/gnome-icon-entry.c:197
+msgid "Picker dialog"
+msgstr "선택 대화상자"
+
+#: libgnomeui/gnome-icon-entry.c:198
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr "아이콘 선택 대화 상자.  이 등록정보를 사용해 GtkDialog를 얻어 내 그 파라미터의 값을 알아보거나 변경할 수 있습니다."
+
+#: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
+msgid "No Icon"
+msgstr "아이콘 없음"
+
+#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:386
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "hbox를 찾을 수 없음, 보통 파일 선택을 사용함"
+
+#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:392
+msgid "Preview"
+msgstr "미리 보기"
+
+#: libgnomeui/gnome-icon-entry.c:930
+msgid "Browse"
+msgstr "찾아보기"
+
+#: libgnomeui/gnome-icon-sel.c:296
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr "GnomeIconSelection: '%s'이(가) 없거나 폴더가 아닙니다"
+
+#: libgnomeui/gnome-icon-sel.c:304
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr "GnomeIconSelection: 폴더 '%s'을(를) 열 수 없습니다"
+
+#: libgnomeui/gnome-icon-sel.c:411
+msgid "Loading Icons..."
+msgstr "아이콘 읽어오기..."
+
+#: libgnomeui/gnome-messagebox.c:110
+msgid "Information"
+msgstr "알림"
+
+#: libgnomeui/gnome-messagebox.c:115
+msgid "Warning"
+msgstr "경고"
+
+#: libgnomeui/gnome-messagebox.c:121
+msgid "Error"
+msgstr "오류"
+
+#: libgnomeui/gnome-messagebox.c:127
+msgid "Question"
+msgstr "물음"
+
+#: libgnomeui/gnome-messagebox.c:132
+msgid "Message"
+msgstr "메시지"
+
+#: libgnomeui/gnome-pixmap-entry.c:114
+msgid "Do Preview"
+msgstr "미리보기 사용"
+
+#: libgnomeui/gnome-pixmap-entry.c:115
+msgid "Whether the pixmap entry should have a preview."
+msgstr "픽스맵 엔트리에서 미리보기를 할 것인지 여부."
+
+#: libgnomeui/gnome-pixmap-entry.c:192 libgnomeui/gnome-pixmap-entry.c:504
+msgid "No Image"
+msgstr "그림 없음"
+
+#: libgnomeui/gnome-scores.c:78
+msgid "Top Ten"
+msgstr "상위 10등"
+
+#: libgnomeui/gnome-scores.c:91
+msgid "User"
+msgstr "사용자"
+
+#: libgnomeui/gnome-scores.c:94
+msgid "Score"
+msgstr "점수"
+
+#: libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "날짜"
+
+#. the localized string should fit (after replacing the %a %b
+#. etc) in ~18 chars.
+#. %a is abbreviated weekday, %A is full weekday,
+#. %b %B are abbreviated and full monthname, %Y is year,
+#. %d is day of month, %m is month number, %T full hour,
+#. %H hours, %M minutes, %S seconds
+#.
+#: libgnomeui/gnome-scores.c:199
+msgid "%a %b %d %T %Y"
+msgstr "%Y %b %d %a %T"
+
+#: libgnomeui/gnome-scores.c:412
+msgid "Sans 14"
+msgstr "Sans 14"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "테스트 끝내기"
