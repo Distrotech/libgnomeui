@@ -1,3 +1,10 @@
+1998-10-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-line.h: Added a comment for the line_style argument.
+
+	* gnome-canvas-line.c (gnome_canvas_line_set_arg): Actually set
+	the line_style.
+
 1998-10-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-canvas.c (emit_event): Small bug fix:  do not reinitialize

@@ -571,7 +571,7 @@ gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	
 	case ARG_LINE_STYLE:
 		line->line_style = GTK_VALUE_ENUM (*arg);
-		recalc_bounds (line);
+		set_line_gc_width (line);
 		break;
 
 	case ARG_FIRST_ARROWHEAD:

@@ -43,6 +43,7 @@ BEGIN_GNOME_DECLS
  *								will be scaled when the canvas zoom factor changes.
  * cap_style		GdkCapStyle		RW		Cap ("endpoint") style for the line.
  * join_style		GdkJoinStyle		RW		Join ("vertex") style for the line.
+ * line_style		GdkLineStyle		RW		Line dash style
  * first_arrowhead	boolean			RW		Specifies whether to draw an arrowhead on the
  *								first point of the line.
  * last_arrowhead	boolean			RW		Specifies whether to draw an arrowhead on the
