@@ -21,7 +21,8 @@ INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) \
         -DGNOMEDATADIR=\""$(datadir)"\" \
         -DGNOMEBINDIR=\""$(bindir)"\" \
         -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" \
-        -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\"
+        -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" \
+	-DG_LOG_DOMAIN=\"GnomeUI\"
 
 EXTRA_HEADERS = 
 
