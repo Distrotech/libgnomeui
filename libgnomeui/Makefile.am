@@ -232,11 +232,7 @@ SGML =	\
 	gtk-ted.sgml
 
 gtkrcdir = $(datadir)
-gtkrc_DATA = gtkrc gtkrc.el gtkrc.eo gtkrc.he gtkrc.hy gtkrc.ja \
-	gtkrc.ko gtkrc.ru gtkrc.tr gtkrc.th gtkrc.uk \
-	gtkrc.iso88592 gtkrc.iso88595 gtkrc.zh_CN gtkrc.zh_TW \
-	gtkrc.ka_GE.georgianacademy gtkrc.ka_GE.georgianps \
-	gtkrc.vi_VN.tcvn gtkrc.vi_VN.viscii
+gtkrc_DATA = gtkrc gtkrc.ja gtkrc.ko gtkrc.ru
 
 EXTRA_DIST =					\
 	$(SGML)					\
@@ -294,24 +290,3 @@ dock_demo_LDADD =	\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
 	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
-
-install-data-local:
-	cd $(DESTDIR)$(datadir) ; \
-		ln gtkrc.iso88592 gtkrc.cs ; \
-		ln gtkrc.iso88592 gtkrc.hr ; \
-		ln gtkrc.iso88592 gtkrc.hu ; \
-		ln gtkrc.iso88592 gtkrc.pl ; \
-		ln gtkrc.iso88592 gtkrc.ro ; \
-		ln gtkrc.iso88592 gtkrc.sk ; \
-		ln gtkrc.iso88592 gtkrc.sl ; \
-		ln gtkrc.iso88592 gtkrc.sq ; \
-		ln gtkrc.iso88592 gtkrc.sr_YU.iso88592 ; \
-		ln gtkrc.iso88595 gtkrc.bg ; \
-		ln gtkrc.iso88595 gtkrc.mk ; \
-		ln gtkrc.iso88595 gtkrc.sr ; \
-		ln gtkrc.iso88595 gtkrc.ru_RU.iso88595 ; \
-		$(LN_S) gtkrc.ka_GE.georgianacademy gtkrc.ka ; \
-		ln gtkrc.vi_VN.viscii gtkrc.vi_VN.viscii111 ; \
-		ln gtkrc.vi_VN.tcvn gtkrc.vi_VN.tcvn5712 ; \
-		$(LN_S) gtkrc.vi_VN.tcvn5712 gtkrc.vi
-

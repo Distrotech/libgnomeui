@@ -1,3 +1,9 @@
+Wed Jun 23 14:48:29 1999  Raph Levien  <raph@gimp.org>
+
+	* Makefile.am: Reverted Pablo Saratxaga's changes. I'm not sure
+	what the right thing to do is, but hardlinking gtkrc files doesn't
+	seem to be it. In any case, it breaks my build, so I'm reverting.
+
 1999-06-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.[ch]: Moved all the private fields of the
