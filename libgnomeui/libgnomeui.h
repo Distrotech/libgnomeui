@@ -27,6 +27,7 @@
 #include "libgnomeui/gtk-ted.h"
 #include "libgnomeui/gtk-plug.h"
 #include "libgnomeui/gtk-socket.h"
+#include "libgnomeui/gtkcalendar.h"
 
 BEGIN_GNOME_DECLS
 
