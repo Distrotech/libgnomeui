@@ -39,14 +39,6 @@
 
 
 /*
- * The stock buttons suck at this time. So maybe we should undefine
- * BUTTON_WANT_ICON. If it is undefined, the stock buttons will not include
- * a pixmap. I leave this defined, so that ppl see a difference between
- * stock buttons and application buttons.
- */
-#define BUTTON_WANT_ICON
-
-/*
  * Hmmm, I'm not sure, if using color context can consume to much colors,
  * so one can define this here. If defined, all color context modes other
  * then true/pseudo color and gray lead to the old shading method for
@@ -438,6 +430,7 @@ struct _default_entries_data entries_data[] = {
 	{GNOME_STOCK_PIXMAP_NEW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_new, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_SAVE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_save, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_SAVE_AS, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_save_as, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_REVERT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_revert, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_CUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_cut, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_help, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_PRINT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_print, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
@@ -465,6 +458,13 @@ struct _default_entries_data entries_data[] = {
 	{GNOME_STOCK_PIXMAP_TRASH, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_trash, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_TRASH_FULL, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_trash_full, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_SPELLCHECK, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_spellcheck, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_MIC, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mic, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_VOLUME, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_volume, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_LINE_IN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_line_in, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_BOOK_RED, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_red, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_BOOK_GREEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_green, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_BOOK_BLUE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_blue, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
+	{GNOME_STOCK_PIXMAP_BOOK_YELLOW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_yellow, TIGERT_W, TIGERT_H, TIGERT_W, TIGERT_H},
 	{GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_exit, TB_W, TB_H, TB_W, TB_H},
 	{GNOME_STOCK_PIXMAP_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_about, MENU_W, MENU_H, MENU_W, MENU_H},
 	{GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, N_("OK"), imlib_button_ok, TB_W, TB_H, TB_W, TB_H},
@@ -477,6 +477,7 @@ struct _default_entries_data entries_data[] = {
 	{GNOME_STOCK_MENU_NEW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_new, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_SAVE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_save, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_SAVE_AS, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_save_as, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_REVERT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_revert, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_OPEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_open, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_QUIT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_exit, MENU_W, MENU_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_CUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_cut, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
@@ -502,6 +503,13 @@ struct _default_entries_data entries_data[] = {
 	{GNOME_STOCK_MENU_TRASH, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_trash, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_TRASH_FULL, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_trash_full, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_SPELLCHECK, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_spellcheck, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_MIC, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mic, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_LINE_IN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_line_in, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_VOLUME, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_volume, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BOOK_RED, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_red, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BOOK_GREEN, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_green, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BOOK_BLUE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_blue, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_BOOK_YELLOW, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_book_yellow, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_ABOUT, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_about, MENU_W, MENU_H, MENU_W, MENU_H},
 	/* TODO: I shouldn't waste a pixmap for that */
 	{GNOME_STOCK_MENU_BLANK, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_menu_blank, MENU_W, MENU_H, MENU_W, MENU_H}, 
@@ -827,18 +835,24 @@ gnome_stock_pixmap_checkfor(char *icon, char *subtype)
 
 
 
+/*******************/
+/*  stock buttons  */
+/*******************/
+
 static GtkWidget *
 stock_button_from_entry (char *type, GnomeStockPixmapEntry *entry)
 {
-	GtkWidget *button, *label, *hbox;
-#ifdef BUTTON_WANT_ICON
+	GtkWidget *button, *label, *hbox, *w;
 	GtkWidget *pixmap;
-#endif /* BUTTON_WANT_ICON */
 
 	button = gtk_button_new();
 	hbox = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox);
 	gtk_container_add(GTK_CONTAINER(button), hbox);
+	w = hbox;
+	hbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(w), hbox, TRUE, FALSE, 7);
 	if (entry->any.label)
 		label = gtk_label_new(dgettext(PACKAGE, entry->any.label));
 	else
@@ -846,13 +860,14 @@ stock_button_from_entry (char *type, GnomeStockPixmapEntry *entry)
 	gtk_widget_show(label);
 	gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 7);
 
-#ifdef BUTTON_WANT_ICON
-	pixmap = gnome_stock_pixmap_widget(button, type);
-	if (pixmap) {
-		gtk_widget_show(pixmap);
-		gtk_box_pack_start_defaults(GTK_BOX(hbox), pixmap);
+	if (gnome_config_get_int("GnomeStock/Icons/ButtonsUseIcons=1")) {
+		pixmap = gnome_stock_pixmap_widget(button, type);
+		if (pixmap) {
+			gtk_widget_show(pixmap);
+			gtk_box_pack_start(GTK_BOX(hbox), pixmap,
+					   FALSE, FALSE, 0);
+		}
 	}
-#endif /* BUTTON_WANT_ICON */
 	return button;
 }
 
@@ -897,8 +912,7 @@ gnome_stock_menu_item(char *type, char *text)
 	g_return_val_if_fail(text != NULL, NULL);
 
 	if (use_icons == -1) {
-		/* TODO: fetch default value from gnome_config */
-		use_icons = TRUE;
+		use_icons = gnome_config_get_int("GnomeStock/Icons/MenusUseIcons=1");
 	}
 	if (use_icons) {
 		hbox = gtk_hbox_new(FALSE, 2);
@@ -1098,9 +1112,8 @@ gnome_stock_menu_accel_parse(char *section)
 }
 
 
-
 /********************************/
-/*  accelerator definition box	*/
+/*  accelerator definition box  */
 /********************************/
 
 #include <libgnomeui/gnome-messagebox.h>
