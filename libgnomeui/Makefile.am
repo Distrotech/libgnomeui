@@ -8,7 +8,7 @@ LIB_VERSION_NUM=0.0.0
 #
 # The targets
 #
-noinst_PROGRAMS = test-file-saver stock_demo winhints_demo  dock_demo #animator_demo
+noinst_PROGRAMS = test-recently-used test-file-saver stock_demo winhints_demo  dock_demo #animator_demo
 bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap gnome-rexec-server
 lib_LTLIBRARIES = libgnomeui-2.0.la
 
@@ -302,6 +302,9 @@ gnometypebuiltins_evals.c: @REBUILD@ makeenums.pl gnome.defs
 test_file_saver_SOURCES = test-file-saver.c \
 	gnome-file-saver.h gnome-file-saver.c  ## here temporarily
 
+test_recently_used_SOURCES = test-recently-used.c \
+	gnome-recently-used.h gnome-recently-used.c  ## here temporarily
+
 gnome_segv_SOURCES = gnome_segv.c
 
 stock_demo_SOURCES = stock_demo.c
@@ -354,6 +357,13 @@ gnome_segv_LDADD =	\
 	$(INTLLIBS)
 
 test_file_saver_LDADD =	\
+	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
+	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
+	$(GDK_PIXBUF_LIBS) \
+	$(LIBGNOMEUI_LIBS) \
+	$(INTLLIBS)
+
+test_recently_used_LDADD =	\
 	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(GDK_PIXBUF_LIBS) \

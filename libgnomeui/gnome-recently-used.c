@@ -25,7 +25,12 @@
 
 #include <libgnome/gnomelib-init2.h>
 
-static guint recently_used_instance_count = 0;
+#include <gtk/gtk.h>
+
+#include <string.h>
+#include <errno.h>
+#include <libgnome/gnome-i18nP.h>
+
 
 enum {
         DOCUMENT_ADDED,
@@ -36,14 +41,29 @@ enum {
 
 enum {
         ARG_0,
+        ARG_APP_SPECIFIC,
         LAST_ARG
 };
+
 static void                 gnome_recently_used_init               (GnomeRecentlyUsed      *recently_used);
 static void                 gnome_recently_used_class_init         (GnomeRecentlyUsedClass *klass);
 static void                 gnome_recently_used_destroy            (GtkObject              *object);
 static void                 gnome_recently_used_finalize           (GtkObject              *object);
+
+static void                 gnome_recently_used_set_arg          (GtkObject              *object,
+                                                                    GtkArg                 *arg,
+                                                                    guint                   arg_id);
+static void                 gnome_recently_used_get_arg          (GtkObject              *object,
+                                                                    GtkArg                 *arg,
+                                                                    guint                   arg_id);
+
+
+
 static GConfValue*          gnome_recent_document_to_gconf_value   (GnomeRecentDocument    *doc);
 static GnomeRecentDocument* gnome_recent_document_from_gconf_value (GConfValue             *val);
+static void                 gnome_recent_document_fill_from_gconf_value (GnomeRecentDocument *doc,
+                                                                         GConfValue             *val);
+
 static void                 gnome_recent_document_set_gconf_key    (GnomeRecentDocument    *doc,
                                                                     const gchar            *key);
 static const gchar*         gnome_recent_document_get_gconf_key    (GnomeRecentDocument    *doc);
@@ -55,8 +75,7 @@ static void                 documents_changed_notify               (GConfClient 
                                                                     gpointer                user_data);
 
 
-
-static GtkObject* parent_class = NULL;
+static GtkObjectClass* parent_class = NULL;
 static guint signals[LAST_SIGNAL] = { 0 };
 
 GtkType
@@ -83,14 +102,19 @@ gnome_recently_used_get_type (void)
 }
 
 static void
-gnome_recently_used_class_init (GnomeRecentlyUsed* klass)
+gnome_recently_used_class_init (GnomeRecentlyUsedClass* klass)
 {
         GtkObjectClass* object_class;
 
         object_class = (GtkObjectClass*) klass;
 
         parent_class = gtk_type_class (GTK_TYPE_OBJECT);
-
+        
+        gtk_object_add_arg_type ("GnomeRecentlyUsed::app_specific",
+                                 GTK_TYPE_BOOL,
+                                 GTK_ARG_READWRITE | GTK_ARG_CONSTRUCT_ONLY,
+                                 ARG_APP_SPECIFIC);
+        
         signals[DOCUMENT_ADDED] =
                 gtk_signal_new ("document_added",
                                 GTK_RUN_FIRST,
@@ -117,6 +141,9 @@ gnome_recently_used_class_init (GnomeRecentlyUsed* klass)
 
         gtk_object_class_add_signals (object_class, signals, LAST_SIGNAL);
 
+        object_class->set_arg = gnome_recently_used_set_arg;
+        object_class->get_arg = gnome_recently_used_get_arg;
+        
         object_class->destroy = gnome_recently_used_destroy;
         object_class->finalize = gnome_recently_used_finalize;
 }
@@ -124,7 +151,28 @@ gnome_recently_used_class_init (GnomeRecentlyUsed* klass)
 void
 gnome_recently_used_init (GnomeRecentlyUsed* recently_used)
 {
-        g_return_if_fail(recently_used_instance_count == 0);
+
+}
+
+static void
+gnome_recently_used_construct (GnomeRecentlyUsed *recently_used,
+                               gboolean app_specific)
+{
+        GSList *all_entries;
+        GSList *iter;
+        
+        g_return_if_fail(recently_used->conf == NULL);
+        
+        recently_used->app_specific = !!app_specific;
+        
+        if (app_specific) {
+                recently_used->key_root = g_strconcat("/apps/gnome-settings/",
+                                                      gnome_program_get_name(gnome_program_get()),
+                                                      "/recent-documents",
+                                                      NULL);
+        } else {
+                recently_used->key_root = g_strdup("/desktop/standard/recent-documents");
+        }
         
         recently_used->conf = gnome_gconf_client_get();
 
@@ -133,12 +181,12 @@ gnome_recently_used_init (GnomeRecentlyUsed* recently_used)
         /* No preload because the explicit all_entries call below
            effectively results in a preload. */
         gconf_client_add_dir(recently_used->conf,
-                             "/desktop/standard/recent-documents",
+                             recently_used->key_root,
                              GCONF_CLIENT_PRELOAD_NONE, NULL);
         
         all_entries =
                 gconf_client_all_entries(recently_used->conf,
-                                         "/desktop/standard/recent-documents",
+                                         recently_used->key_root,
                                          NULL);
 
         recently_used->hash = g_hash_table_new(g_str_hash, g_str_equal);
@@ -149,14 +197,14 @@ gnome_recently_used_init (GnomeRecentlyUsed* recently_used)
                 gchar* full_key;
                 GnomeRecentDocument *doc;
                 
-                full_key = gconf_concat_key_and_dir("/desktop/standard/recent-documents",
+                full_key = gconf_concat_key_and_dir(recently_used->key_root,
                                                     gconf_entry_key(entry));
 
                 doc = gnome_recent_document_from_gconf_value(gconf_entry_value(entry));
 
                 if (doc != NULL) {
                         gnome_recent_document_ref(doc);
-                        gnome_recent_document_set_gconf_key(full_key);
+                        gnome_recent_document_set_gconf_key(doc, full_key);
                         
                         g_hash_table_insert(recently_used->hash,
                                             (gchar*)gnome_recent_document_get_gconf_key(doc),
@@ -172,18 +220,74 @@ gnome_recently_used_init (GnomeRecentlyUsed* recently_used)
         
         recently_used->conf_notify =
                 gconf_client_notify_add(recently_used->conf,
-                                        "/desktop/standard/recent-documents",
+                                        recently_used->key_root,
                                         documents_changed_notify,
                                         recently_used, NULL, NULL);
-        
-        ++recently_used_instance_count;
 }
 
 GnomeRecentlyUsed*
 gnome_recently_used_new (void)
 {
-        return GNOME_RECENTLY_USED (gtk_type_new (gnome_recently_used_get_type ()));
+        GnomeRecentlyUsed *recently_used;
+
+        recently_used = GNOME_RECENTLY_USED (gtk_type_new (gnome_recently_used_get_type ()));
+
+        gnome_recently_used_construct(recently_used, FALSE);
+        
+        return recently_used;
 }
+
+GnomeRecentlyUsed*
+gnome_recently_used_new_app_specific (void)
+{
+        GnomeRecentlyUsed *recently_used;
+
+        recently_used = GNOME_RECENTLY_USED (gtk_type_new (gnome_recently_used_get_type ()));
+
+        gnome_recently_used_construct(recently_used, TRUE);
+        
+        return recently_used;
+}
+
+static void
+gnome_recently_used_set_arg (GtkObject *object,
+                             GtkArg *arg,
+                             guint arg_id)
+{
+        GnomeRecentlyUsed *recently_used;
+
+        recently_used = GNOME_RECENTLY_USED(object);
+
+        switch (arg_id) {
+        case ARG_APP_SPECIFIC:
+                gnome_recently_used_construct(recently_used, GTK_VALUE_BOOL(*arg));
+                break;
+
+        default:
+                break;
+        }
+}
+
+static void
+gnome_recently_used_get_arg (GtkObject *object,
+                             GtkArg *arg,
+                             guint arg_id)
+{
+        GnomeRecentlyUsed *recently_used;
+
+        recently_used = GNOME_RECENTLY_USED(object);
+
+        switch (arg_id) {
+        case ARG_APP_SPECIFIC:
+                GTK_VALUE_BOOL(*arg) = recently_used->app_specific;
+                break;
+
+        default:
+                arg->type = GTK_TYPE_INVALID;
+                break;
+        }
+}
+
 
 static void
 destroy_foreach(gpointer key, gpointer value, gpointer user_data)
@@ -217,7 +321,7 @@ gnome_recently_used_finalize (GtkObject* object)
         }
 
         gconf_client_remove_dir(recently_used->conf,
-                                "/desktop/standard/recent-documents");
+                                recently_used->key_root);
 
         
         iter = recently_used->add_list;
@@ -236,8 +340,6 @@ gnome_recently_used_finalize (GtkObject* object)
         g_hash_table_destroy(recently_used->hash);
         
         gtk_object_unref(GTK_OBJECT(recently_used->conf));
-
-        recently_used_instance_count = 0;
         
         (* parent_class->finalize) (object);
 }
@@ -258,7 +360,7 @@ gnome_recently_used_add (GnomeRecentlyUsed   *recently_used,
 
         key = gconf_unique_key();
 
-        full_key = gconf_concat_key_and_dir("/desktop/standard/recent-documents",
+        full_key = gconf_concat_key_and_dir(recently_used->key_root,
                                             key);
 
         g_free(key);
@@ -267,7 +369,7 @@ gnome_recently_used_add (GnomeRecentlyUsed   *recently_used,
 
         val = gnome_recent_document_to_gconf_value(doc);
         
-        gconf_client_set(recently_used->client,
+        gconf_client_set(recently_used->conf,
                          full_key,
                          val,
                          NULL);
@@ -333,7 +435,7 @@ gnome_recently_used_document_changed (GnomeRecentlyUsed   *recently_used,
         
         val = gnome_recent_document_to_gconf_value(doc);
         
-        gconf_client_set(recently_used->client,
+        gconf_client_set(recently_used->conf,
                          key,
                          val,
                          NULL);
@@ -370,6 +472,9 @@ documents_changed_notify(GConfClient* client, guint cnxn_id,
                         return;
                 } else {
                         /* This entry has changed */
+                        gnome_recent_document_fill_from_gconf_value(doc,
+                                                                    value);
+                        
                         gtk_signal_emit(GTK_OBJECT(recently_used),
                                         signals[DOCUMENT_CHANGED],
                                         doc);
@@ -409,6 +514,10 @@ documents_changed_notify(GConfClient* client, guint cnxn_id,
                 }
 
                 if (doc != NULL) {
+                        /* Here we assume the value received is the same
+                           as the value we sent (since we don't fill_from_value)
+                           which isn't necessarily true but is a lot faster
+                           and will pretty much always be true */
                         recently_used->add_list = g_slist_remove(recently_used->add_list,
                                                                  doc);
 
@@ -453,26 +562,26 @@ gnome_recently_used_add_simple       (GnomeRecentlyUsed   *recently_used,
         doc = gnome_recent_document_new();
 
         if (command)
-                gnome_recent_document_set("command", command);
+                gnome_recent_document_set(doc, "command", command);
 
         if (menu_text)
-                gnome_recent_document_set("menu-text", menu_text);
+                gnome_recent_document_set(doc, "menu-text", menu_text);
 
         if (menu_pixmap)
-                gnome_recent_document_set("menu-pixmap", menu_pixmap);
+                gnome_recent_document_set(doc, "menu-pixmap", menu_pixmap);
 
         if (menu_hint)
-                gnome_recent_document_set("menu-hint", menu_hint);
+                gnome_recent_document_set(doc, "menu-hint", menu_hint);
 
         if (filename)
-                gnome_recent_document_set("filename", filename);
+                gnome_recent_document_set(doc, "filename", filename);
 
         if (mime_type)
-                gnome_recent_document_set("mime-type", mime_type);
+                gnome_recent_document_set(doc, "mime-type", mime_type);
         
         appid = gnome_program_get_name(gnome_program_get());
 
-        gnome_recent_document_set("app", appid);
+        gnome_recent_document_set(doc, "app", appid);
         
         gnome_recently_used_add (recently_used, doc);
 
@@ -523,6 +632,29 @@ gnome_recent_document_ref (GnomeRecentDocument *doc)
         doc->refcount += 1;
 }
 
+static void
+clear_doc (GnomeRecentDocument *doc)
+{
+        /* ignore gconf_key, creation_time, and refcount
+           since we keep those when filling a doc from
+           a GConfValue */
+        
+        g_free(doc->command);
+        doc->command = NULL;
+        g_free(doc->menu_hint);
+        doc->menu_hint = NULL;
+        g_free(doc->menu_pixmap);
+        doc->menu_pixmap = NULL;
+        g_free(doc->menu_text);
+        doc->menu_text = NULL;
+        g_free(doc->filename);
+        doc->filename = NULL;
+        g_free(doc->mime_type);
+        doc->mime_type = NULL;
+        g_free(doc->app_id);
+        doc->app_id = NULL;
+}
+
 void
 gnome_recent_document_unref (GnomeRecentDocument *doc)
 {
@@ -532,19 +664,13 @@ gnome_recent_document_unref (GnomeRecentDocument *doc)
         doc->refcount -= 1;
 
         if (doc->refcount == 0) {
-                g_free(doc->command);
-                g_free(doc->menu_hint);
-                g_free(doc->menu_pixmap);
-                g_free(doc->menu_text);
-                g_free(doc->filename);
-                g_free(doc->mime_type);
-                g_free(doc->app_id);
+                clear_doc(doc);
                 g_free(doc->gconf_key);
                 g_free(doc);
         }
 }
 
-gchar**
+static gchar**
 find_arg(GnomeRecentDocument *doc,
          const gchar *arg)
 {
@@ -558,7 +684,7 @@ find_arg(GnomeRecentDocument *doc,
                 return &doc->menu_hint;
         else if (strcmp(arg, "filename") == 0)
                 return &doc->filename;
-        else if (strcmp(arg, "mime-type") == 0)                
+        else if (strcmp(arg, "mime-type") == 0)        
                 return &doc->mime_type;
         else if (strcmp(arg, "app") == 0)
                 return &doc->app_id;
@@ -587,14 +713,14 @@ gnome_recent_document_set            (GnomeRecentDocument *doc,
         /* This check is required, since arg may come in from GConf and
            be invalid */
         if (setme == NULL) {
-                g_warning("bad recent document attribute: %s\n", arg);
+                g_warning("bad GnomeRecentDocument attribute: %s\n", arg);
                 return;
         }
         
         if (*setme)
                 g_free(*setme);
 
-        *setme = g_strdup(val);
+        *setme = val ? g_strdup(val) : NULL;
 }
 
 const gchar*
@@ -604,11 +730,16 @@ gnome_recent_document_get (GnomeRecentDocument *doc,
         gchar** getme;
 
         getme = find_arg(doc, arg);
-        
-        return *getme;
+
+        if (getme)
+                return *getme;
+        else {
+                g_warning("bad GnomeRecentDocument attribute: %s\n", arg);
+                return NULL;
+        }
 }
 
-void
+GTime
 gnome_recent_document_get_creation_time (GnomeRecentDocument *doc)
 {
         return doc->creation_time;
@@ -644,7 +775,7 @@ decode_arg(const gchar* arg, gchar** argp, gchar** valp)
 {
         const gchar* colon;
 
-        colon = strstr(arg);
+        colon = strchr(arg, ':');
 
         if (colon == NULL)
                 goto failed;
@@ -689,13 +820,15 @@ gnome_recent_document_to_gconf_value (GnomeRecentDocument *doc)
         gchar *t;
         
         val = gconf_value_new(GCONF_VALUE_LIST);
-
+        gconf_value_set_list_type(val, GCONF_VALUE_STRING);
+        
         add_arg(doc, &list, "command", doc->command);
         add_arg(doc, &list, "menu-text", doc->menu_text);
         add_arg(doc, &list, "menu-pixmap", doc->menu_pixmap);
         add_arg(doc, &list, "menu-hint", doc->menu_hint);
         add_arg(doc, &list, "filename", doc->filename);
         add_arg(doc, &list, "mime-type", doc->mime_type);
+        add_arg(doc, &list, "app", doc->app_id);
 
         t = g_strdup_printf("%lu", (gulong)doc->creation_time);
 
@@ -719,22 +852,19 @@ string_to_gulong(const gchar* str)
   return retval;
 }
 
-static GnomeRecentDocument*
-gnome_recent_document_from_gconf_value (GConfValue *val)
+static gboolean
+fill_doc(GnomeRecentDocument **docp, GConfValue *val)
 {
         GSList *iter;
-        GnomeRecentDocument *doc;
         
         if (val == NULL)
-                return NULL;
+                return FALSE;
 
         if (val->type != GCONF_VALUE_LIST)
-                return NULL;
+                return FALSE;
 
         if (gconf_value_list_type(val) != GCONF_VALUE_STRING)
-                return NULL;
-
-        doc = NULL; 
+                return FALSE;
         
         iter = gconf_value_list(val);
 
@@ -756,13 +886,13 @@ gnome_recent_document_from_gconf_value (GConfValue *val)
 
                         if (arg) {
                                 /* create the doc only if we get > 0 args */
-                                if (doc == NULL)
-                                        doc = gnome_recent_document_new();
+                                if (*docp == NULL)
+                                        *docp = gnome_recent_document_new();
 
                                 if (strcmp(arg, "creation-time") == 0) {
-                                        doc->creation_time = string_to_gulong(argval);
+                                        (*docp)->creation_time = string_to_gulong(argval);
                                 } else {
-                                        gnome_recent_document_set(doc, arg, argval);
+                                        gnome_recent_document_set(*docp, arg, argval);
                                 }
                         }
 
@@ -773,7 +903,32 @@ gnome_recent_document_from_gconf_value (GConfValue *val)
                 iter = g_slist_next(iter);
         }
 
-        return doc;
+        return TRUE;
 }
 
+static GnomeRecentDocument*
+gnome_recent_document_from_gconf_value (GConfValue *val)
+{
+        GnomeRecentDocument *doc = NULL;
 
+        fill_doc(&doc, val);
+
+        if (doc && doc->menu_text == NULL) {
+                /* Junk value */
+                gnome_recent_document_unref(doc);
+                return NULL;
+        }
+                
+        return doc;        
+}
+
+static void
+gnome_recent_document_fill_from_gconf_value (GnomeRecentDocument *doc,
+                                             GConfValue *val)
+{
+        clear_doc(doc);
+        fill_doc(&doc, val);
+        /* guarantee that menu name always exists */
+        if (doc->menu_text == NULL)
+                doc->menu_text = g_strdup(_("Unknown"));
+}

@@ -47,6 +47,8 @@ struct _GnomeRecentlyUsed {
         GConfClient *conf;
         guint conf_notify;
         GSList *add_list;
+        gchar *key_root;
+        gboolean app_specific;
 };
 
 struct _GnomeRecentlyUsedClass {
@@ -59,6 +61,7 @@ struct _GnomeRecentlyUsedClass {
 
 GtkType              gnome_recently_used_get_type         (void);
 GnomeRecentlyUsed*   gnome_recently_used_new              (void);
+GnomeRecentlyUsed*   gnome_recently_used_new_app_specific (void);
 
 void                 gnome_recently_used_add              (GnomeRecentlyUsed   *recently_used,
                                                            GnomeRecentDocument *doc);
@@ -102,7 +105,7 @@ const gchar*         gnome_recent_document_get            (GnomeRecentDocument *
                                                            const gchar         *arg);
 
 
-void                 gnome_recent_document_get_creation_time (GnomeRecentDocument *doc);
+GTime                gnome_recent_document_get_creation_time (GnomeRecentDocument *doc);
 
 
 #ifdef __cplusplus

@@ -578,7 +578,7 @@ gnome_file_saver_update_location(GnomeFileSaver* file_saver,
         GtkWidget *mi;
         GSList *found;
         
-        if (value->type != GCONF_VALUE_PAIR) {
+        if (value == NULL || value->type != GCONF_VALUE_PAIR) {
                 /* Weird, whatever. */
                 gnome_file_saver_remove_location(file_saver,
                                                  key);
