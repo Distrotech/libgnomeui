@@ -1,3 +1,9 @@
+2004-08-25  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-authentication-manager.[ch]:
+	Add gnome_authentication_manager_dialog_is_visible.
+	Its a big hack, but useful.
+
 2004-08-25  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-appbar.c: Bitfield warnings

@@ -25,6 +25,10 @@
 #ifndef GNOME_AUTHENTICATION_MANAGER_H
 #define GNOME_AUTHENTICATION_MANAGER_H
 
+#include <glib.h>
+
 void 	gnome_authentication_manager_init (void);
+
+gboolean gnome_authentication_manager_dialog_is_visible (void);
 
 #endif /* GNOME_AUTHENTICATION_MANAGER_H */

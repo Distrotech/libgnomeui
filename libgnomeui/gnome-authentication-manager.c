@@ -51,6 +51,14 @@
 #define DEBUG_MSG(x)
 #endif
 
+static int gnome_authentication_manager_dialog_visible = 0;
+
+gboolean
+gnome_authentication_manager_dialog_is_visible (void)
+{
+	return gnome_authentication_manager_dialog_visible > 0;
+}
+
 static GnomePasswordDialog *
 construct_password_dialog (gboolean is_proxy_authentication, const GnomeVFSModuleCallbackAuthenticationIn *in_args)
 {
@@ -148,6 +156,7 @@ authentication_dialog_destroyed (GtkDialog *dialog, CallbackInfo *info)
 {
 	DEBUG_MSG (("+%s\n", G_GNUC_FUNCTION));
 
+	gnome_authentication_manager_dialog_visible--;
 	mark_callback_completed (info);	
 }
 
@@ -187,6 +196,8 @@ present_authentication_dialog_nonblocking (CallbackInfo *info)
 
 	gtk_widget_show (GTK_WIDGET (dialog));
 
+	gnome_authentication_manager_dialog_visible++;
+	
 	return 0;
 }
 
@@ -395,6 +406,7 @@ full_authentication_dialog_destroyed (GtkDialog *dialog, FullCallbackInfo *info)
 
 	info->response (info->response_data);
 	g_free (info);
+	gnome_authentication_manager_dialog_visible--;
 }
 
 static gint /* GtkFunction */
@@ -433,6 +445,8 @@ present_full_authentication_dialog_nonblocking (FullCallbackInfo *info)
 
 	gtk_widget_show (GTK_WIDGET (dialog));
 
+	gnome_authentication_manager_dialog_visible++;
+	
 	return 0;
 }
 
@@ -752,6 +766,7 @@ question_dialog_destroyed (GtkDialog *dialog, QuestionCallbackInfo *info)
 {
 	info->response (info->response_data);
 	g_free (info);
+	gnome_authentication_manager_dialog_visible--;
 }
 
 static void
@@ -813,6 +828,8 @@ present_question_dialog_nonblocking (QuestionCallbackInfo *info)
 			  G_CALLBACK (question_dialog_destroyed), info);
 	
 	gtk_widget_show (GTK_WIDGET (dialog));
+
+	gnome_authentication_manager_dialog_visible++;
 	return 0;
 }
 
