@@ -1,3 +1,9 @@
+Thu Aug 20 19:06:19 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-dentry-edit.c: Include <ctype.h>.
+	(gnome_dentry_edit_split): New function.
+	(gnome_dentry_edit_sync_dentry): Use it.
+
 Thu Aug 20 19:22:47 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtk-socket.c (gtk_socket_claim_focus): Yet another fix

@@ -18,6 +18,8 @@
 
 #include <config.h>
 
+#include <ctype.h>
+
 #include "gnome-dentry-edit.h"
 
 #include "libgnome/libgnomeP.h"
@@ -375,6 +377,50 @@ static void gnome_dentry_edit_sync_display(GnomeDEntryEdit * dee,
 #endif
 }
 
+/* This is a simple-minded string splitter.  It splits on whitespace.
+   Something better would be to define a quoting syntax so that the
+   user can use quotes and such.  FIXME.  */
+static void
+gnome_dentry_edit_split (char *text, int *argcp, char ***argvp)
+{
+  char *p;
+  int count = 0;
+
+  /* First pass: find out how large to make the return vector.  */
+  for (p = text; *p; ++p) {
+    while (*p && isspace (*p))
+      ++p;
+    if (! *p)
+      break;
+    while (*p && ! isspace (*p))
+      ++p;
+    ++count;
+  }
+
+  /* Increment count to account for NULL terminator.  Resulting ARGC
+     doesn't include NULL terminator, though.  */
+  *argcp = count;
+  ++count;
+  *argvp = (char **) g_malloc (count * sizeof (char *));
+
+  count = 0;
+  for (p = text; *p; ++p) {
+    char *q;
+
+    while (*p && isspace (*p))
+      ++p;
+    if (! *p)
+      break;
+
+    q = p;
+    while (*p && ! isspace (*p))
+      ++p;
+    (*argvp)[count++] = (char *) strndup (q, p - q);
+  }
+
+  (*argvp)[count] = NULL;
+}
+
 /* Conform dentry to display */
 static void gnome_dentry_edit_sync_dentry(GnomeDEntryEdit * dee,
 					  GnomeDesktopEntry * dentry)
@@ -394,15 +440,9 @@ static void gnome_dentry_edit_sync_dentry(GnomeDEntryEdit * dee,
   if (text[0] != '\0') dentry->comment = g_strdup(text);
 
   text = gtk_entry_get_text(GTK_ENTRY(dee->exec_entry));
-  /* OK, going to cheat here. It seems like a big pain to parse
-     the text into a vector, and I don't understand all the issues; 
-     plus gnome_desktop_entry_launch just flattens the vector anyway. */
   gnome_string_array_free(dentry->exec);
   if (text[0] != '\0') {
-    dentry->exec = g_malloc ( sizeof(char *) * 2 );
-    (dentry->exec)[0] = g_strdup(text);
-    (dentry->exec)[1] = NULL;
-    dentry->exec_length = 1; /* doesn't include NULL terminator */
+    gnome_dentry_edit_split (text, &dentry->exec_length, &dentry->exec);
   } else {
     dentry->exec_length = 0;
   }
