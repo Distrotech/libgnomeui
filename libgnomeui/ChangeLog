@@ -1,5 +1,9 @@
 2001-08-11  Martin Baulig  <baulig@suse.de>
 
+	* Makefile.am: Don't install gnome-macros.h.
+
+2001-08-11  Martin Baulig  <baulig@suse.de>
+
 	* gtkrc*: Removed.
 
 	* landscape.xpm, portrait.xpm: Removed.

@@ -38,6 +38,7 @@ INCLUDES = \
 EXTRA_HEADERS = 
 
 noinst_HEADERS = \
+	gnome-macros.h			\
 	libgnomeuiP.h
 
 libgnomeui_2_la_SOURCES = \
@@ -90,7 +91,6 @@ gnome_headers = \
 	gnome-ice.h			\
 	gnome-icon-list.h		\
 	gnome-ui-init.h			\
-	gnome-macros.h			\
 	gnome-stock-icons.h		\
 	gnome-types.h			\
 	gnome-uidefs.h			\
