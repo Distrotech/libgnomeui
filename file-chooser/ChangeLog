@@ -1,6 +1,15 @@
 2004-02-17  Alexander Larsson  <alexl@redhat.com>
 
 	* gtkfilesystemgnomevfs.c:
+	Don't start load on get_folder.
+	Always reload on get_children (to avoid stale data)
+	
+	* gtkfilesystemgnomevfs.c:
+	Use right desktop folder icon
+
+2004-02-17  Alexander Larsson  <alexl@redhat.com>
+
+	* gtkfilesystemgnomevfs.c:
 	Clean up todo list
 	Canonicalize uris for folder lookup
 	Add filesystem volume

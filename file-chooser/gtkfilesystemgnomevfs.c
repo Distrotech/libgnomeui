@@ -33,6 +33,7 @@
 /* TODO:
  * - handle local only property (should go in gtkfilechooserdefault 
  * - Don't we need desktop file link support?
+ * - Keeping all the gnome-vfs-infos in the hashtable looks wasteful, but otherwise we'll do to much i/o
  */
 
 #include "gtkfilesystemgnomevfs.h"
@@ -501,25 +502,30 @@ gtk_file_system_gnome_vfs_get_volume_for_path (GtkFileSystem     *file_system,
   return (GtkFileSystemVolume *) volume;
 }
 
-static void
-ensure_types (GtkFileFolderGnomeVFS *folder_vfs,
-	      GtkFileInfoType        types)
+
+static gboolean
+remove_all  (gpointer  key,
+	     gpointer  value,
+	     gpointer  user_data)
 {
-  if ((folder_vfs->types & types) != types)
-    {
-      folder_vfs->types |= types;
+  return TRUE;
+}
 
-      if (folder_vfs->async_handle)
-	gnome_vfs_async_cancel (folder_vfs->async_handle);
+static void
+load_dir (GtkFileFolderGnomeVFS *folder_vfs)
+{
+  if (folder_vfs->async_handle)
+    gnome_vfs_async_cancel (folder_vfs->async_handle);
 
-      gnome_vfs_async_load_directory (&folder_vfs->async_handle,
-				      folder_vfs->uri,
-				      get_options (folder_vfs->types),
-				      ITEMS_PER_NOTIFICATION,
-				      GNOME_VFS_PRIORITY_DEFAULT,
-				      directory_load_callback, folder_vfs);
-
-    }
+  g_hash_table_foreach_remove (folder_vfs->children,
+			       remove_all, NULL);
+  g_print ("load_dir %s\n", folder_vfs->uri);
+  gnome_vfs_async_load_directory (&folder_vfs->async_handle,
+				  folder_vfs->uri,
+				  get_options (folder_vfs->types),
+				  ITEMS_PER_NOTIFICATION,
+				  GNOME_VFS_PRIORITY_DEFAULT,
+				  directory_load_callback, folder_vfs);
 }
 
 static char *
@@ -555,15 +561,14 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
   GtkFileFolderGnomeVFS *folder_vfs;
   GnomeVFSMonitorHandle *monitor = NULL;
-  GnomeVFSAsyncHandle *async_handle;
   GnomeVFSResult result;
 
   uri = make_uri_canonical (gtk_file_path_get_string (path));
   folder_vfs = g_hash_table_lookup (system_vfs->folders, uri);
   if (folder_vfs)
     {
+      folder_vfs->types |= types;
       g_free (uri);
-      ensure_types (folder_vfs, types);
       return g_object_ref (folder_vfs);
     }
 
@@ -586,19 +591,11 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
       set_vfs_error (result, uri, error);
       return NULL;
     }
-
-  gnome_vfs_async_load_directory (&async_handle,
-				  uri,
-				  get_options (types),
-				  ITEMS_PER_NOTIFICATION,
-				  GNOME_VFS_PRIORITY_DEFAULT,
-				  directory_load_callback, folder_vfs);
-
   folder_vfs->system = system_vfs;
   folder_vfs->uri = uri; /* takes ownership */
   folder_vfs->types = types;
   folder_vfs->monitor = monitor;
-  folder_vfs->async_handle = async_handle;
+  folder_vfs->async_handle = NULL;
   folder_vfs->children = g_hash_table_new_full (g_str_hash,
 						g_str_equal,
 						NULL,
@@ -1757,39 +1754,29 @@ lookup_vfs_info_in_folder (GtkFileFolder     *folder,
   child = g_hash_table_lookup (folder_vfs->children, uri);
   if (!child)
     {
-      if (folder_vfs->async_handle)
-	{
-	  /* Loading the directory is in progress, so we may not have loaded the
-	   * file's information yet.
-	   */
-	  GnomeVFSFileInfo *vfs_info;
-	  GnomeVFSResult result;
-
-	  vfs_info = gnome_vfs_file_info_new ();
-	  result = gnome_vfs_get_file_info (uri, vfs_info, get_options (folder_vfs->types));
-
-	  if (result != GNOME_VFS_OK)
-	    set_vfs_error (result, uri, error);
-	  else
-	    {
-	      GSList *uris;
-
-	      child = folder_child_new (uri, vfs_info);
-	      g_hash_table_replace (folder_vfs->children, child->uri, child);
-
-	      uris = g_slist_append (NULL, (char *) uri);
-	      g_signal_emit_by_name (folder_vfs, "files-added", uris);
-	      g_slist_free (uris);
-	    }
-
-	  gnome_vfs_file_info_unref (vfs_info);
-	}
+      /* We may not have loaded the file's information yet.
+       */
+      GnomeVFSFileInfo *vfs_info;
+      GnomeVFSResult result;
+      
+      vfs_info = gnome_vfs_file_info_new ();
+      result = gnome_vfs_get_file_info (uri, vfs_info, get_options (folder_vfs->types));
+      
+      if (result != GNOME_VFS_OK)
+	set_vfs_error (result, uri, error);
       else
-	g_set_error (error,
-		     GTK_FILE_SYSTEM_ERROR,
-		     GTK_FILE_SYSTEM_ERROR_NONEXISTENT,
-		     "'%s' does not exist",
-		     uri);
+	{
+	  GSList *uris;
+	  
+	  child = folder_child_new (uri, vfs_info);
+	  g_hash_table_replace (folder_vfs->children, child->uri, child);
+	  
+	  uris = g_slist_append (NULL, (char *) uri);
+	  g_signal_emit_by_name (folder_vfs, "files-added", uris);
+	  g_slist_free (uris);
+	}
+      
+      gnome_vfs_file_info_unref (vfs_info);
     }
   
   return child->info;
@@ -1828,6 +1815,8 @@ gtk_file_folder_gnome_vfs_list_children (GtkFileFolder  *folder,
 {
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
 
+  load_dir (folder_vfs);
+  
   *children = NULL;
 
   g_hash_table_foreach (folder_vfs->children, list_children_foreach, children);
