@@ -21,6 +21,7 @@
  */
 
 #include <config.h>
+#include <gtk/gtkmain.h>
 #include "gnome-popup-menu.h"
 
 
@@ -33,13 +34,14 @@ popup_connect_func (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderData 
 {
 	g_assert (uibdata->is_interp);
 
-	gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), signal_name,
-				 NULL,
-				 uibdata->relay_func,
-				 uiinfo->moreinfo,
-				 uibdata->destroy_func,
-				 FALSE,
-				 FALSE);
+	if (uiinfo->moreinfo)
+		gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), signal_name,
+					 NULL,
+					 uibdata->relay_func,
+					 uiinfo->moreinfo,
+					 uibdata->destroy_func,
+					 FALSE,
+					 FALSE);
 }
 
 /* Our custom marshaller for menu items.  We need it so that it can extract the per-attachment
@@ -58,6 +60,7 @@ popup_marshal_func (GtkObject *object, gpointer data, guint n_args, GtkArg *args
 	func = (ActivateFunc) data;
 	user_data = gtk_object_get_data (GTK_OBJECT (GTK_WIDGET (object)->parent), "gnome_popup_menu_do_popup_user_data");
 
+	gtk_object_set_data (GTK_WIDGET (object)->parent, "gnome_popup_menu_active_item", object);
 	(* func) (object, user_data);
 }
 
@@ -164,6 +167,9 @@ void
 gnome_popup_menu_do_popup (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpointer pos_data,
 			   GdkEventButton *event, gpointer user_data)
 {
+	guint button;
+	guint32 timestamp;
+
 	g_return_if_fail (popup != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (popup));
 	g_return_if_fail (event != NULL);
@@ -175,5 +181,77 @@ gnome_popup_menu_do_popup (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpoin
 
 	gtk_object_set_data (GTK_OBJECT (popup), "gnome_popup_menu_do_popup_user_data", user_data);
 
-	gtk_menu_popup (GTK_MENU (popup), NULL, NULL, pos_func, pos_data, event->button, event->time);
+	if (event) {
+		button = event->button;
+		timestamp = event->time;
+	} else {
+		button = 0;
+		timestamp = GDK_CURRENT_TIME;
+	}
+
+	gtk_menu_popup (GTK_MENU (popup), NULL, NULL, pos_func, pos_data, button, timestamp);
+}
+
+/* Convenience callback to exit the main loop of a modal popup menu when it is deactivated*/
+static void
+menu_shell_deactivated (GtkMenuShell *menu_shell, gpointer data)
+{
+	gtk_main_quit ();
+}
+
+/* Returns the index of the active item in the specified menu, or -1 if none is active */
+static int
+get_active_index (GtkMenu *menu)
+{
+	GList *l;
+	GtkWidget *active;
+	int i;
+
+	active = gtk_object_get_data (GTK_OBJECT (menu), "gnome_popup_menu_active_item");
+
+	for (i = 0, l = GTK_MENU_SHELL (menu)->children; l; l = l->next, i++)
+		if (active == l->data)
+			return i;
+
+	return -1;
+}
+
+int
+gnome_popup_menu_do_popup_modal (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpointer pos_data,
+				 GdkEventButton *event, gpointer user_data)
+{
+	guint id;
+	guint button;
+	guint32 timestamp;
+
+	g_return_val_if_fail (popup != NULL, -1);
+	g_return_val_if_fail (GTK_IS_WIDGET (popup), -1);
+	g_return_val_if_fail (event != NULL, -1);
+
+	gtk_object_set_data (GTK_OBJECT (popup), "gnome_popup_menu_do_popup_user_data", user_data);
+
+	/* Connect to the deactivation signal to be able to quit our modal main loop */
+
+	id = gtk_signal_connect (GTK_OBJECT (popup), "deactivate",
+				 (GtkSignalFunc) menu_shell_deactivated,
+				 NULL);
+
+	gtk_object_set_data (GTK_OBJECT (popup), "gnome_popup_menu_active_item", NULL);
+
+	if (event) {
+		button = event->button;
+		timestamp = event->time;
+	} else {
+		button = 0;
+		timestamp = GDK_CURRENT_TIME;
+	}
+
+	gtk_menu_popup (GTK_MENU (popup), NULL, NULL, pos_func, pos_data, button, timestamp);
+	gtk_grab_add (popup);
+	gtk_main ();
+	gtk_grab_remove (popup);
+
+	gtk_signal_disconnect (GTK_OBJECT (popup), id);
+
+	return get_active_index (GTK_MENU (popup));
 }

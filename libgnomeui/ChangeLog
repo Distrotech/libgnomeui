@@ -1,3 +1,15 @@
+1998-11-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-popup-menu.c (popup_connect_func): Only connect to the
+	signal if the callback is not NULL.
+	(gnome_popup_menu_do_popup): If the event is NULL, use button 0
+	and GDK_CURRENT_TIME to pop up the menu.
+	(gnome_popup_menu_do_popup_modal): New public function to run a
+	popup menu modally, and return the index of the selected item.
+
+	* gnome-app-helper.c (do_ui_signal_connect): Only connect to the
+	signal if the callback is not NULL.
+
 Wed Nov  4 11:31:57 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtk-socket.c (gtk_socket_filter_func): Call 

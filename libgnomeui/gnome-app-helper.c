@@ -419,7 +419,7 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderDat
 					 uibdata->destroy_func,
 					 FALSE,
 					 FALSE);
-	else
+	else if (uiinfo->moreinfo)
 		gtk_signal_connect (GTK_OBJECT (uiinfo->widget), signal_name,
 				    uiinfo->moreinfo,
 				    uibdata->data ? uibdata->data : uiinfo->user_data);
@@ -506,7 +506,7 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, Gnome
 				menu = gtk_menu_new ();
 				gtk_menu_item_set_submenu (GTK_MENU_ITEM (uiinfo->widget), menu);
 				gnome_app_fill_menu_custom (GTK_MENU_SHELL (menu), uiinfo->moreinfo, orig_uibdata,
-                                    accel_group, FALSE, TRUE, 0);
+							    accel_group, FALSE, TRUE, 0);
 			}
 
 			if (right_justify)

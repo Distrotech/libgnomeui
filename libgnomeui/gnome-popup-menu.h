@@ -60,10 +60,17 @@ void gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget, gpointer user
  * the mouse), pass NULL for these parameters.
  *
  * The event parameter is needed to figure out the mouse button that activated the menu and the time
- * at which this happened.
+ * at which this happened.  If you pass in NULL, then no button and the current time will be used as
+ * defaults.
  */
 void gnome_popup_menu_do_popup (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpointer pos_data,
 				GdkEventButton *event, gpointer user_data);
+
+/* Same as above, but runs the popup menu modally and returns the index of the selected item, or -1
+ * if none.
+ */
+int gnome_popup_menu_do_popup_modal (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpointer pos_data,
+				     GdkEventButton *event, gpointer user_data);
 
 
 END_GNOME_DECLS
