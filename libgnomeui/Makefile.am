@@ -58,7 +58,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-gconf-ui.c		\
 	gnome-href.c			\
 	gnome-ice.c			\
-	gnome-marshal.c			\
+	gnome-marshal-main.c		\
 	gnome-marshal.h			\
 	gnome-messagebox.c		\
 	gnome-mdi.c			\
