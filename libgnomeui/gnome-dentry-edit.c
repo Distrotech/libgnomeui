@@ -341,7 +341,7 @@ static void gnome_dentry_edit_destroy (GtkObject *dee)
 static void gnome_dentry_edit_sync_display(GnomeDEntryEdit * dee,
 					   GnomeDesktopEntry * dentry)
 {
-  gchar * s;
+  gchar * s = NULL;
   g_return_if_fail(dee != NULL);
   g_return_if_fail(GNOME_IS_DENTRY_EDIT(dee));
 
@@ -350,9 +350,9 @@ static void gnome_dentry_edit_sync_display(GnomeDEntryEdit * dee,
   gtk_entry_set_text(GTK_ENTRY(dee->comment_entry),
 		     dentry->comment ? dentry->comment : "");
   
-  s = g_flatten_vector(" ", dentry->exec);
-  gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), s);
-  g_free(s);
+  if (dentry->exec_length != 0) s = g_flatten_vector(" ", dentry->exec);
+  gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), s ? s : "");
+  if (s) g_free(s);
 
   gtk_entry_set_text(GTK_ENTRY(dee->tryexec_entry), 
 		     dentry->tryexec ? dentry->tryexec : "");
@@ -531,9 +531,9 @@ static void gnome_dentry_edit_set_icon(GnomeDEntryEdit * dee,
   if (dee->desktop_icon) gtk_widget_destroy(dee->desktop_icon);
   dee->desktop_icon = NULL;
 
-  if (icon_name == NULL) {
+  if (icon_name == NULL || !strcmp(icon_name,"")) {
     dee->desktop_icon = gtk_label_new(_("No\nicon"));
-    icon_name = "";
+    if (!icon_name) icon_name = "";
   }
   else {
     if (g_file_exists(icon_name)) {

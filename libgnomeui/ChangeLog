@@ -1,3 +1,9 @@
+Mon Jul 20 22:41:29 1998  John Ellis  <johne@bellatlantic.net>
+
+	* gnome-dentry-edit.c (gnome_dentry_edit_sync_display): fix segfault
+	when dentry->exec should be empty, but isn't. hmm...
+	(gnome_dentry_edit_set_icon): fix when clearing by setting it "".
+
 Mon Jul 20 17:30:12 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-client.c (gnome_client_init): Only reallocate buffer if
