@@ -8,7 +8,7 @@ LIB_VERSION_NUM=0.0.0
 #
 # The targets
 #
-bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap gnome-rexec-server
+bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap
 lib_LTLIBRARIES = libgnomeui-2.la
 
 #
@@ -21,43 +21,15 @@ INCLUDES = \
 	-I$(top_srcdir)					\
 	-I$(top_srcdir)/intl				\
 	-I$(top_builddir)/intl				\
-	$(WARN_CFLAGS)					\
-	$(GNOMESUPPORT_CFLAGS)				\
-	$(GLIB_CFLAGS)					\
-	$(GTK_CFLAGS)					\
-	$(OAF_CFLAGS)					\
-	$(XML_CFLAGS)					\
-	$(LIBART_CFLAGS)				\
         -DGNOMELIBDIR=\""$(libdir)"\" 			\
         -DGNOMEDATADIR=\""$(datadir)"\" 		\
         -DGNOMEBINDIR=\""$(bindir)"\" 			\
         -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" 	\
         -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
-	$(ORBIT_CFLAGS)					\
-	$(GCONF_CFLAGS)					\
-	$(PANGO_CFLAGS)					\
+	$(WARN_CFLAGS)					\
+	$(LIBGNOMECANVAS_CFLAGS)			\
 	-DVERSION=\"$(VERSION)\"
-
-gnome_corba_rexec_built = 		\
-	gnome-corba-rexec.h		\
-	gnome-corba-rexec-skels.c	\
-	gnome-corba-rexec-stubs.c	\
-	gnome-corba-rexec-common.c
-
-gnome_unknown_built = \
-	gnome-unknown.h					\
-	gnome-unknown-skels.c				\
-	gnome-unknown-stubs.c				\
-	gnome-unknown-common.c
-
-$(gnome_corba_rexec_built): $(top_srcdir)/idl/gnome-corba-rexec.idl
-	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/gnome-corba-rexec.idl
-
-$(gnome_unknown_built): $(top_srcdir)/idl/gnome-unknown.idl
-	$(ORBIT_IDL) $(IDL_FLAGS) $(top_srcdir)/idl/gnome-unknown.idl
-
-gnorba_built = $(gnome_unknown_built) $(gnome_corba_rexec_built)
 
 EXTRA_HEADERS = 
 
@@ -71,14 +43,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-appbar.c			\
 	gnome-app-helper.c		\
 	gnome-app-util.c		\
-	gnome-canvas.c			\
-	gnome-canvas-line.c		\
-	gnome-canvas-rect-ellipse.c	\
-	gnome-canvas-pixbuf.c		\
-	gnome-canvas-polygon.c		\
-	gnome-canvas-text.c		\
-	gnome-canvas-util.c		\
-	gnome-canvas-widget.c		\
 	gnome-client.c			\
 	gnome-color-picker.c		\
 	gnome-cursors.c			\
@@ -141,8 +105,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-window.c			\
 	gnomemarshal-main.c		\
 	wap-textfu.c			\
-	$(noinst_HEADERS)		\
-	$(gnorba_built)
+	$(noinst_HEADERS)
 
 ## this lists all the non-generated headers
 gnome_headers = \
@@ -152,14 +115,6 @@ gnome_headers = \
 	gnome-appbar.h			\
 	gnome-app-helper.h		\
 	gnome-app-util.h		\
-	gnome-canvas.h			\
-	gnome-canvas-line.h		\
-	gnome-canvas-rect-ellipse.h	\
-	gnome-canvas-pixbuf.h		\
-	gnome-canvas-polygon.h		\
-	gnome-canvas-text.h		\
-	gnome-canvas-util.h		\
-	gnome-canvas-widget.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
 	gnome-cursors.h			\
@@ -224,19 +179,9 @@ gnome_headers = \
 
 libgnomeuiinclude_HEADERS =		\
 	$(gnome_headers)		\
-	gnome-unknown.h			\
-	gnome-corba-rexec.h		\
 	gnometypebuiltins.h
 
-ORBIT_IDL=orbit-idl
-
-IDL_FLAGS=-D__LIBOAFGNOME_COMPILATION -D__LIBGNORBA_COMPILATION
-
 gnome_remote_bootstrap_SOURCES=gnome-remote-bootstrap.c
-gnome_remote_bootstrap_LDADD=../libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la
-
-gnome_rexec_server_SOURCES=gnome-rexec-server.c
-gnome_rexec_server_LDADD=../libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la gnome-corba-rexec-skels.o gnome-corba-rexec-common.o $(OAF_LIBS)
 
 BUILT_SOURCES = \
 	gnometypebuiltins.h		\
@@ -244,8 +189,7 @@ BUILT_SOURCES = \
 	gnometypebuiltins_ids.c		\
 	gnometypebuiltins_vars.c	\
 	gnomemarshal.h			\
-	gnomemarshal.c			\
-	$(gnorba_built)
+	gnomemarshal.c
 
 # generate gnome.defs file from gnome-boxed.defs and *.h
 gnome.defs: @REBUILD@ makeenums.pl gnome-boxed.defs $(gnome_headers)
@@ -302,9 +246,6 @@ gtkrc_DATA = gtkrc gtkrc.el gtkrc.eo gtkrc.he gtkrc.hy gtkrc.ja \
 	gtkrc.ka_GE.georgianacademy gtkrc.ka_GE.georgianps \
 	gtkrc.vi_VN.tcvn gtkrc.vi_VN.viscii
 
-oafinfodir=$(datadir)/oaf
-oafinfo_DATA=gnome-rexec-server.oafinfo
-
 EXTRA_DIST =					\
 	$(gtkrc_DATA)				\
 	AUTHORS					\
@@ -318,27 +259,16 @@ EXTRA_DIST =					\
 	gnometypebuiltins_evals.c		\
 	portrait.xpm				\
 	landscape.xpm				\
-	libgnomeui-2.0.pc.in			\
-	$(oafinfo_DATA)
+	libgnomeui-2.0.pc.in
 
 libgnomeui_2_la_LDFLAGS = \
-	-version-info $(LIB_VERSION)				\
-	$(OAF_LIBS)						\
-	$(GCONF_LIBS)						\
-	$(PANGO_LIBS)						\
-	$(LIBGNOMEUI_LIBS)
+	-version-info $(LIB_VERSION)
 
-#		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome-$(GNOME_INTERFACE_VERSION)
+libgnomeui_2_la_LIBADD = \
+	$(LIBGNOMECANVAS_LIBS)
 
-libgnomeui_2_la_LIBADD = $(LIBGNOMEUI_LIBS) -lICE -lSM -lz $(XML_LIBS)
-
-LDADD =	\
-	libgnomeui-$(GNOME_INTERFACE_VERSION).la 			\
-	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la	\
-        $(LIBGNOMEUI_LIBS)						\
-	$(LIBART_LIBS)							\
-	$(PANGO_LIBS)							\
-	$(INTLLIBS)
+LDADD = \
+	libgnomeui-2.la
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libgnomeui-2.0.pc
