@@ -39,6 +39,7 @@
 #include <gtk/gtklistitem.h>
 #include <gtk/gtksignal.h>
 #include "libgnome/libgnomeP.h"
+#include "gnome-macros.h"
 #include "gnome-entry.h"
 
 struct _GnomeEntryPrivate {
@@ -59,6 +60,13 @@ static void   activate_entry_handler   (GnomeSelector   *selector);
 static void   history_changed_handler  (GnomeSelector   *selector);
 static void   entry_activated_cb       (GtkWidget       *widget,
                                         gpointer         data);
+static void   do_construct_handler     (GnomeSelector   *selector);
+
+
+static GObject*
+gnome_entry_constructor (GType                  type,
+			 guint                  n_construct_properties,
+			 GObjectConstructParam *construct_properties);
 
 
 static GnomeSelectorClass *parent_class;
@@ -102,10 +110,14 @@ gnome_entry_class_init (GnomeEntryClass *class)
 	object_class->destroy = gnome_entry_destroy;
 	gobject_class->finalize = gnome_entry_finalize;
 
+	gobject_class->constructor = gnome_entry_constructor;
+
 	selector_class->get_entry_text = get_entry_text_handler;
 	selector_class->set_entry_text = set_entry_text_handler;
 	selector_class->activate_entry = activate_entry_handler;
 	selector_class->history_changed = history_changed_handler;
+
+	selector_class->do_construct = do_construct_handler;
 }
 
 static void
@@ -114,53 +126,59 @@ gnome_entry_init (GnomeEntry *gentry)
 	gentry->_priv = g_new0(GnomeEntryPrivate, 1);
 }
 
-/**
- * gnome_entry_construct:
- * @gentry: Pointer to GnomeEntry object.
- * @history_id: If not %NULL, the text id under which history data is stored
- *
- * Constructs a #GnomeEntry object, for language bindings or subclassing
- * use #gnome_entry_new from C
- *
- * Returns: 
- */
-void
-gnome_entry_construct (GnomeEntry *gentry, 
-		       const gchar *history_id)
+static gboolean
+get_value_boolean (GnomeEntry *gentry, const gchar *prop_name)
 {
-	guint32 flags;
+	GValue value = { 0, };
+	gboolean retval;
 
-	g_return_if_fail (gentry != NULL);
+	g_value_init (&value, G_TYPE_BOOLEAN);
+	g_object_get_property (G_OBJECT (gentry), prop_name, &value);
+	retval = g_value_get_boolean (&value);
+	g_value_unset (&value);
 
-	flags = GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET;
-
-	gnome_entry_construct_full (gentry, history_id, NULL, NULL,
-				    NULL, NULL, flags);
+	return retval;
 }
 
-void
-gnome_entry_construct_full (GnomeEntry *gentry,
-			    const gchar *history_id,
-			    const gchar *dialog_title,
-			    GtkWidget *entry_widget,
-			    GtkWidget *selector_widget,
-			    GtkWidget *browse_dialog,
-			    guint32 flags)
+static gboolean
+has_value_widget (GnomeEntry *gentry, const gchar *prop_name)
 {
-	guint32 newflags = flags;
+	GValue value = { 0, };
+	gboolean retval;
 
-	g_return_if_fail (gentry != NULL);
+	g_value_init (&value, GTK_TYPE_WIDGET);
+	g_object_get_property (G_OBJECT (gentry), prop_name, &value);
+	retval = g_value_get_object (&value) != NULL;
+	g_value_unset (&value);
 
-	/* Create the default selector widget if requested. */
-	if (flags & GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET) {
-		if (entry_widget != NULL) {
-			g_warning (G_STRLOC ": It makes no sense to use "
-				   "GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET "
-				   "and pass a `entry_widget' as well.");
-			return;
-		}
+	return retval;
+}
+
+static void
+do_construct_handler (GnomeSelector *selector)
+{
+	GnomeEntry *gentry;
+
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (selector));
+
+	gentry = GNOME_ENTRY (selector);
+
+	g_message (G_STRLOC);
+
+	if (get_value_boolean (gentry, "use_default_entry_widget") &&
+	    !has_value_widget (gentry, "entry_widget")) {
+		GtkWidget *entry_widget;
+		GValue value = { 0, };
+
+		g_message (G_STRLOC ": default entry");
 
 		entry_widget = gtk_combo_new ();
+
+		g_value_init (&value, GTK_TYPE_WIDGET);
+		g_value_set_object (&value, G_OBJECT (entry_widget));
+		g_object_set_property (G_OBJECT (gentry), "entry_widget", &value);
+		g_value_unset (&value);
 
 		gentry->_priv->combo = entry_widget;
 		gentry->_priv->entry = GTK_COMBO (entry_widget)->entry;
@@ -172,14 +190,29 @@ gnome_entry_construct_full (GnomeEntry *gentry,
 				    "activate",
 				    GTK_SIGNAL_FUNC (entry_activated_cb),
 				    gentry);
-
-		newflags &= ~GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET;
 	}
 
-	gnome_selector_construct (GNOME_SELECTOR (gentry),
-				  history_id, dialog_title,
-				  entry_widget, selector_widget,
-				  browse_dialog, newflags);
+	GNOME_CALL_PARENT_HANDLER (GNOME_SELECTOR_CLASS, do_construct, (selector));
+}
+
+static GObject*
+gnome_entry_constructor (GType                  type,
+			 guint                  n_construct_properties,
+			 GObjectConstructParam *construct_properties)
+{
+	GObject *object = G_OBJECT_CLASS (parent_class)->constructor (type,
+								      n_construct_properties,
+								      construct_properties);
+	GnomeEntry *gentry = GNOME_ENTRY (object);
+
+	g_message (G_STRLOC ": %d - %d", type, GNOME_TYPE_ENTRY);
+
+	if (type == GNOME_TYPE_ENTRY)
+		gnome_selector_do_construct (GNOME_SELECTOR (gentry));
+
+	g_message (G_STRLOC);
+
+	return object;
 }
 
 
@@ -198,9 +231,13 @@ gnome_entry_new (const gchar *history_id)
 {
 	GnomeEntry *gentry;
 
-	gentry = gtk_type_new (gnome_entry_get_type ());
-
-	gnome_entry_construct (gentry, history_id);
+	gentry = g_object_new (gnome_entry_get_type (),
+			       "use_default_entry_widget", TRUE,
+			       "want_browse_button", FALSE,
+			       "want_clear_button", FALSE,
+			       "want_default_button", FALSE,
+			       "history_id", history_id,
+			       NULL);
 
 	return GTK_WIDGET (gentry);
 }

@@ -83,6 +83,17 @@ struct _GnomeSelectorPrivate {
 
     guint32      flags;
 
+    guint32      use_default_entry_widget : 1;
+    guint32      use_default_selector_widget : 1;
+    guint32      use_default_browse_dialog : 1;
+    guint32      want_browse_button : 1;
+    guint32      want_clear_button : 1;
+    guint32      want_default_button : 1;
+    guint32      auto_save_history : 1;
+    guint32      auto_save_all : 1;
+
+    guint32      constructed : 1;
+
     guint32      changed : 1;
     guint32      history_changed : 1;
     guint32      need_rebuild : 1;
@@ -147,8 +158,12 @@ static void gnome_selector_set_property        (GObject            *object,
                                                 GParamSpec         *pspec,
                                                 const gchar        *trailer);
 
-static void     update_handler                 (GnomeSelector   *selector);
-static void     browse_handler                 (GnomeSelector   *selector);
+static GObject *gnome_selector_constructor     (GType                  type,
+						guint                  n_construct_properties,
+						GObjectConstructParam *construct_properties);
+
+static void     update_handler                 (GnomeSelector            *selector);
+static void     browse_handler                 (GnomeSelector            *selector);
 static void     clear_handler                  (GnomeSelector            *selector,
 						guint                     list_id);
 
@@ -183,14 +198,34 @@ static void     add_uri_list_handler           (GnomeSelector            *select
 static GSList  *get_uri_list_handler           (GnomeSelector            *selector,
                                                 guint                     list_id);
 
+static void     do_construct_handler           (GnomeSelector            *selector);
+
+
+
 static void     free_entry_func                (gpointer         data,
                                                 gpointer         user_data);
+
 
 
 #define GNOME_SELECTOR_GCONF_DIR "/desktop/standard/gnome-selector"
 
 enum {
     PROP_0,
+
+    /* Construction properties */
+    PROP_ENTRY_WIDGET,
+    PROP_SELECTOR_WIDGET,
+    PROP_BROWSE_DIALOG,
+    PROP_USE_DEFAULT_ENTRY_WIDGET,
+    PROP_USE_DEFAULT_SELECTOR_WIDGET,
+    PROP_USE_DEFAULT_BROWSE_DIALOG,
+    PROP_WANT_BROWSE_BUTTON,
+    PROP_WANT_CLEAR_BUTTON,
+    PROP_WANT_DEFAULT_BUTTON,
+    PROP_AUTO_SAVE_HISTORY,
+    PROP_AUTO_SAVE_ALL,
+
+    /* Normal properties */
     PROP_DIALOG_TITLE,
     PROP_HISTORY_ID,
     PROP_SELECTION_MODE
@@ -471,19 +506,102 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 
     gobject_class->get_property = gnome_selector_get_property;
     gobject_class->set_property = gnome_selector_set_property;
+    gobject_class->constructor = gnome_selector_constructor;
 
+    /* Construction properties */
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_ENTRY_WIDGET,
+	 g_param_spec_object ("entry_widget", NULL, NULL,
+			      GTK_TYPE_WIDGET,
+			      (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			       G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_SELECTOR_WIDGET,
+	 g_param_spec_object ("selector_widget", NULL, NULL,
+			      GTK_TYPE_WIDGET,
+			      (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			       G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_BROWSE_DIALOG,
+	 g_param_spec_object ("browse_dialog", NULL, NULL,
+			      GTK_TYPE_WIDGET,
+			      (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			       G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_USE_DEFAULT_ENTRY_WIDGET,
+	 g_param_spec_boolean ("use_default_entry_widget", NULL, NULL,
+			       TRUE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_USE_DEFAULT_SELECTOR_WIDGET,
+	 g_param_spec_boolean ("use_default_selector_widget", NULL, NULL,
+			       TRUE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_USE_DEFAULT_BROWSE_DIALOG,
+	 g_param_spec_boolean ("use_default_browse_dialog", NULL, NULL,
+			       TRUE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_WANT_BROWSE_BUTTON,
+	 g_param_spec_boolean ("want_browse_button", NULL, NULL,
+			       TRUE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_WANT_CLEAR_BUTTON,
+	 g_param_spec_boolean ("want_clear_button", NULL, NULL,
+			       TRUE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_WANT_DEFAULT_BUTTON,
+	 g_param_spec_boolean ("want_default_button", NULL, NULL,
+			       TRUE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_AUTO_SAVE_HISTORY,
+	 g_param_spec_boolean ("auto_save_history", NULL, NULL,
+			       FALSE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_AUTO_SAVE_ALL,
+	 g_param_spec_boolean ("auto_save_all", NULL, NULL,
+			       FALSE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
+
+    /* Normal properties */
     g_object_class_install_property
 	(gobject_class,
 	 PROP_DIALOG_TITLE,
 	 g_param_spec_string ("dialog_title", NULL, NULL,
 			      NULL,
-			      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+			      (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			       G_PARAM_CONSTRUCT)));
     g_object_class_install_property
 	(gobject_class,
 	 PROP_HISTORY_ID,
 	 g_param_spec_string ("history_id", NULL, NULL,
 			      NULL,
-			      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+			      (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			       G_PARAM_CONSTRUCT)));
     g_object_class_install_property
 	(gobject_class,
 	 PROP_SELECTION_MODE,
@@ -493,6 +611,8 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 
     object_class->destroy = gnome_selector_destroy;
     gobject_class->finalize = gnome_selector_finalize;
+
+    class->do_construct = do_construct_handler;
 
     class->browse = browse_handler;
     class->clear = clear_handler;
@@ -522,7 +642,57 @@ gnome_selector_set_property (GObject *object, guint param_id,
     selector = GNOME_SELECTOR (object);
 
     switch (param_id) {
-    case PROP_DIALOG_TITLE:
+    case PROP_ENTRY_WIDGET:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->entry_widget = (GtkWidget *) g_value_get_object (value);
+	if (selector->_priv->entry_widget)
+	    gtk_widget_ref (selector->_priv->entry_widget);
+	break;
+    case PROP_SELECTOR_WIDGET:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->selector_widget = (GtkWidget *) g_value_get_object (value);
+	if (selector->_priv->selector_widget)
+	    gtk_widget_ref (selector->_priv->selector_widget);
+	break;
+    case PROP_BROWSE_DIALOG:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->browse_dialog = (GtkWidget *) g_value_get_object (value);
+	if (selector->_priv->browse_dialog)
+	    gtk_widget_ref (selector->_priv->browse_dialog);
+	break;
+    case PROP_USE_DEFAULT_ENTRY_WIDGET:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->use_default_entry_widget = g_value_get_boolean (value);
+	break;
+    case PROP_USE_DEFAULT_SELECTOR_WIDGET:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->use_default_selector_widget = g_value_get_boolean (value);
+	break;
+    case PROP_USE_DEFAULT_BROWSE_DIALOG:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->use_default_browse_dialog = g_value_get_boolean (value);
+	break;
+    case PROP_WANT_BROWSE_BUTTON:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->want_browse_button = g_value_get_boolean (value);
+	break;
+    case PROP_WANT_CLEAR_BUTTON:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->want_clear_button = g_value_get_boolean (value);
+	break;
+    case PROP_WANT_DEFAULT_BUTTON:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->want_default_button = g_value_get_boolean (value);
+	break;
+    case PROP_AUTO_SAVE_HISTORY:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->auto_save_history = g_value_get_boolean (value);
+	break;
+    case PROP_AUTO_SAVE_ALL:
+	g_assert (!selector->_priv->constructed);
+	selector->_priv->auto_save_all = g_value_get_boolean (value);
+	break;
+   case PROP_DIALOG_TITLE:
 	gnome_selector_set_dialog_title (selector, g_value_get_string (value));
 	break;
     case PROP_HISTORY_ID:
@@ -549,6 +719,39 @@ gnome_selector_get_property (GObject *object, guint param_id, GValue *value,
     selector = GNOME_SELECTOR (object);
 
     switch (param_id) {
+    case PROP_ENTRY_WIDGET:
+	g_value_set_object (value, (GObject *) selector->_priv->entry_widget);
+	break;
+    case PROP_SELECTOR_WIDGET:
+	g_value_set_object (value, (GObject *) selector->_priv->selector_widget);
+	break;
+    case PROP_BROWSE_DIALOG:
+	g_value_set_object (value, (GObject *) selector->_priv->browse_dialog);
+	break;
+    case PROP_USE_DEFAULT_ENTRY_WIDGET:
+	g_value_set_boolean (value, selector->_priv->use_default_entry_widget);
+	break;
+    case PROP_USE_DEFAULT_SELECTOR_WIDGET:
+	g_value_set_boolean (value, selector->_priv->use_default_selector_widget);
+	break;
+    case PROP_USE_DEFAULT_BROWSE_DIALOG:
+	g_value_set_boolean (value, selector->_priv->use_default_browse_dialog);
+	break;
+    case PROP_WANT_BROWSE_BUTTON:
+	g_value_set_boolean (value, selector->_priv->want_browse_button);
+	break;
+    case PROP_WANT_CLEAR_BUTTON:
+	g_value_set_boolean (value, selector->_priv->want_clear_button);
+	break;
+    case PROP_WANT_DEFAULT_BUTTON:
+	g_value_set_boolean (value, selector->_priv->want_default_button);
+	break;
+    case PROP_AUTO_SAVE_HISTORY:
+	g_value_set_boolean (value, selector->_priv->auto_save_history);
+	break;
+    case PROP_AUTO_SAVE_ALL:
+	g_value_set_boolean (value, selector->_priv->auto_save_all);
+	break;
     case PROP_DIALOG_TITLE:
 	g_value_set_string (value, gnome_selector_get_dialog_title (selector));
 	break;
@@ -776,26 +979,20 @@ clear_clicked_cb (GtkWidget *widget, gpointer data)
 }
 
 
-/**
- * gnome_selector_construct:
- * @selector: Pointer to GnomeSelector object.
- * @history_id: If not %NULL, the text id under which history data is stored
- * @selector_widget: Widget which should be used inside the selector box.
- * @browse_dialog: Widget which should be used as browse dialog.
- *
- * Constructs a #GnomeSelector object, for language bindings or subclassing
- * use #gnome_selector_new from C
- *
- * Returns: 
- */
-void
-gnome_selector_construct (GnomeSelector *selector, 
-			  const gchar *history_id,
-			  const gchar *dialog_title,
-			  GtkWidget *entry_widget,
-			  GtkWidget *selector_widget,
-			  GtkWidget *browse_dialog,
-			  guint32 flags)
+static GObject*
+gnome_selector_constructor (GType                  type,
+			    guint                  n_construct_properties,
+			    GObjectConstructParam *construct_properties)
+{
+    GObject *object = G_OBJECT_CLASS (parent_class)->constructor (type,
+								  n_construct_properties,
+								  construct_properties);
+
+    return object;
+}
+
+static void
+do_construct_handler (GnomeSelector *selector)
 {
     GnomeSelectorPrivate *priv;
 
@@ -804,43 +1001,18 @@ gnome_selector_construct (GnomeSelector *selector,
 
     priv = selector->_priv;
 
-    priv->entry_widget = entry_widget;
-    if (priv->entry_widget)
-	gtk_widget_ref (priv->entry_widget);
-
-    priv->history_id = g_strdup (history_id);
-    priv->dialog_title = g_strdup (dialog_title);
-
-    priv->flags = flags;
+    g_message (G_STRLOC);
 
     priv->client = gnome_get_gconf_client ();
     gtk_object_ref (GTK_OBJECT (priv->client));
-
-    if (priv->history_id) {
-	priv->gconf_history_dir = gconf_concat_dir_and_key
-	    (GNOME_SELECTOR_GCONF_DIR, priv->history_id);
-	priv->gconf_history_key = gconf_concat_dir_and_key
-	    (priv->gconf_history_dir, "history");
-	priv->gconf_uri_list_key = gconf_concat_dir_and_key
-	    (priv->gconf_history_dir, "uri-list");
-
-	gconf_client_add_dir (priv->client, priv->gconf_history_dir,
-			      GCONF_CLIENT_PRELOAD_NONE, NULL);
-    }
-
-    priv->selector_widget = selector_widget;
-    if (priv->selector_widget)
-	gtk_widget_ref (priv->selector_widget);
-
-    priv->browse_dialog = browse_dialog;
-    if (priv->browse_dialog)
-	gtk_widget_ref (priv->browse_dialog);
 
     priv->box = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 
     priv->hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 
     if (priv->entry_widget) {
+	gtk_widget_show_all (priv->entry_widget);
+
 	gtk_box_pack_start (GTK_BOX (priv->hbox), priv->entry_widget,
 			    TRUE, TRUE, 0);
     }
@@ -848,14 +1020,7 @@ gnome_selector_construct (GnomeSelector *selector,
     gtk_box_pack_start (GTK_BOX (priv->box), priv->hbox,
 			TRUE, FALSE, GNOME_PAD_SMALL);
 
-    if (flags & GNOME_SELECTOR_WANT_BROWSE_BUTTON) {
-	if (priv->browse_dialog == NULL) {
-	    g_warning (G_STRLOC ": It makes no sense to use "
-		       "GNOME_SELECTOR_WANT_BROWSE_BUTTON "
-		       "without having a `browse_dialog'.");
-	    return;
-	}
-
+    if (priv->want_browse_button) {
 	priv->browse_button = gtk_button_new_with_label (_("Browse..."));
 
 	gtk_signal_connect (GTK_OBJECT (priv->browse_button),
@@ -866,7 +1031,7 @@ gnome_selector_construct (GnomeSelector *selector,
 			    priv->browse_button, FALSE, FALSE, 0);
     }
 
-    if (flags & GNOME_SELECTOR_WANT_DEFAULT_BUTTON) {
+    if (priv->want_default_button) {
 	priv->default_button = gtk_button_new_with_label (_("Default..."));
 
 	gtk_signal_connect (GTK_OBJECT (priv->default_button),
@@ -877,7 +1042,7 @@ gnome_selector_construct (GnomeSelector *selector,
 			    priv->default_button, FALSE, FALSE, 0);
     }
 
-    if (flags & GNOME_SELECTOR_WANT_CLEAR_BUTTON) {
+    if (priv->want_clear_button) {
 	priv->clear_button = gtk_button_new_with_label (_("Clear..."));
 
 	gtk_signal_connect (GTK_OBJECT (priv->clear_button),
@@ -899,13 +1064,23 @@ gnome_selector_construct (GnomeSelector *selector,
     gtk_box_pack_start (GTK_BOX (selector), priv->box,
 			TRUE, TRUE, GNOME_PAD_SMALL);
 
-    if (priv->flags & GNOME_SELECTOR_AUTO_SAVE_HISTORY)
+    if (priv->auto_save_history)
 	gnome_selector_load_history (selector);
 
-    if (priv->flags & GNOME_SELECTOR_AUTO_SAVE_ALL)
+    if (priv->auto_save_all)
 	gnome_selector_load_all (selector);
+
+    selector->_priv->constructed = TRUE;
 }
 
+void
+gnome_selector_do_construct (GnomeSelector *selector)
+{
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+    GNOME_SELECTOR_CLASS (G_OBJECT_GET_CLASS (selector))->do_construct (selector);
+}
 
 static void
 gnome_selector_destroy (GtkObject *object)

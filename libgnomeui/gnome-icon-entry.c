@@ -72,6 +72,7 @@ struct _GnomeIconEntryPrivate {
 
     gchar *current_icon;
 
+    gboolean constructed;
     guint preview_x, preview_y;
 };
 	
@@ -117,6 +118,14 @@ static gchar    *get_uri_handler           (GnomeSelector            *selector);
 static void      set_uri_handler           (GnomeSelector            *selector,
                                             const gchar              *filename,
                                             GnomeSelectorAsyncHandle *async_handle);
+static void      do_construct_handler      (GnomeSelector            *selector);
+
+
+static GObject*
+gnome_icon_entry_constructor (GType                  type,
+			      guint                  n_construct_properties,
+			      GObjectConstructParam *construct_properties);
+
 
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
@@ -151,20 +160,26 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 	 PROP_PREVIEW_X,
 	 g_param_spec_uint ("preview_x", NULL, NULL,
 			    0, G_MAXINT, ICON_SIZE,
-			    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			     G_PARAM_CONSTRUCT)));
 
     g_object_class_install_property
 	(gobject_class,
 	 PROP_PREVIEW_Y,
 	 g_param_spec_uint ("preview_y", NULL, NULL,
 			    0, G_MAXINT, ICON_SIZE,
-			    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+			    (G_PARAM_READABLE | G_PARAM_WRITABLE |
+			     G_PARAM_CONSTRUCT)));
 
     object_class->destroy = gnome_icon_entry_destroy;
     gobject_class->finalize = gnome_icon_entry_finalize;
 
+    gobject_class->constructor = gnome_icon_entry_constructor;
+
     selector_class->get_uri = get_uri_handler;
     selector_class->set_uri = set_uri_handler;
+
+    selector_class->do_construct = do_construct_handler;
 }
 
 static void
@@ -199,11 +214,13 @@ gnome_icon_entry_set_property (GObject *object, guint param_id,
     switch (param_id) {
     case PROP_PREVIEW_X:
 	ientry->_priv->preview_x = g_value_get_uint (value);
-	gnome_icon_entry_update_preview (ientry);
+	if (ientry->_priv->constructed)
+	    gnome_icon_entry_update_preview (ientry);
 	break;
     case PROP_PREVIEW_Y:
 	ientry->_priv->preview_y = g_value_get_uint (value);
-	gnome_icon_entry_update_preview (ientry);
+	if (ientry->_priv->constructed)
+	    gnome_icon_entry_update_preview (ientry);
 	break;
     default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
@@ -239,32 +256,8 @@ static void
 gnome_icon_entry_init (GnomeIconEntry *ientry)
 {
     ientry->_priv = g_new0(GnomeIconEntryPrivate, 1);
-}
 
-/**
- * gnome_icon_entry_construct:
- * @ientry: Pointer to GnomeIconEntry object.
- * @history_id: If not %NULL, the text id under which history data is stored
- *
- * Constructs a #GnomeIconEntry object, for language bindings or subclassing
- * use #gnome_icon_entry_new from C
- *
- * Returns: 
- */
-void
-gnome_icon_entry_construct (GnomeIconEntry *ientry, 
-			    const gchar *history_id,
-			    const gchar *dialog_title)
-{
-    guint32 flags;
-
-    g_return_if_fail (ientry != NULL);
-
-    flags = GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET |
-	GNOME_SELECTOR_DEFAULT_BROWSE_DIALOG;
-
-    gnome_icon_entry_construct_full (ientry, history_id, dialog_title,
-				     NULL, NULL, NULL, flags);
+    g_message (G_STRLOC);
 }
 
 static gchar *
@@ -565,32 +558,63 @@ ientry_directory_filter_func (const GnomeVFSFileInfo *info, gpointer data)
 	return TRUE;
 }
 
-
-void
-gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
-				 const gchar *history_id,
-				 const gchar *dialog_title,
-				 GtkWidget *entry_widget,
-				 GtkWidget *selector_widget,
-				 GtkWidget *browse_dialog,
-				 guint32 flags)
+static gboolean
+get_value_boolean (GnomeIconEntry *ientry, const gchar *prop_name)
 {
+    GValue value = { 0, };
+    gboolean retval;
+
+    g_value_init (&value, G_TYPE_BOOLEAN);
+    g_object_get_property (G_OBJECT (ientry), prop_name, &value);
+    retval = g_value_get_boolean (&value);
+    g_value_unset (&value);
+
+    return retval;
+}
+
+static gboolean
+has_value_widget (GnomeIconEntry *ientry, const gchar *prop_name)
+{
+	GValue value = { 0, };
+	gboolean retval;
+
+	g_value_init (&value, GTK_TYPE_WIDGET);
+	g_object_get_property (G_OBJECT (ientry), prop_name, &value);
+	retval = g_value_get_object (&value) != NULL;
+	g_value_unset (&value);
+
+	return retval;
+}
+
+static void
+do_construct_handler (GnomeSelector *selector)
+{
+    GnomeIconEntry *ientry;
     GnomeVFSDirectoryFilter *filter;
-    guint32 newflags = flags;
 
-    g_return_if_fail (ientry != NULL);
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_ICON_ENTRY (selector));
 
-    ientry->_priv->preview_x = ICON_SIZE;
-    ientry->_priv->preview_y = ICON_SIZE;
+    ientry = GNOME_ICON_ENTRY (selector);
 
-    /* Create the default selector widget if requested. */
-    if (flags & GNOME_SELECTOR_DEFAULT_BROWSE_DIALOG) {
-	if (browse_dialog != NULL) {
-	    g_warning (G_STRLOC ": It makes no sense to use "
-		       "GNOME_SELECTOR_DEFAULT_BROWSE_DIALOG "
-		       "and pass a `browse_dialog' as well.");
-	    return;
-	}
+    /* Create the default browser dialog if requested. */
+    if (get_value_boolean (ientry, "use_default_browse_dialog") &&
+	!has_value_widget (ientry, "browse_dialog")) {
+	GtkWidget *browse_dialog;
+	gchar *dialog_title, *history_id;
+	GValue value = { 0, };
+
+	g_message (G_STRLOC ": default browse dialog");
+
+	g_value_init (&value, G_TYPE_STRING);
+	g_object_get_property (G_OBJECT (ientry), "dialog_title", &value);
+	dialog_title = g_value_dup_string (&value);
+	g_value_unset (&value);
+
+	g_value_init (&value, G_TYPE_STRING);
+	g_object_get_property (G_OBJECT (ientry), "history_id", &value);
+	history_id = g_value_dup_string (&value);
+	g_value_unset (&value);
 
 	browse_dialog = gnome_dialog_new (dialog_title,
 					  GNOME_STOCK_BUTTON_OK,
@@ -610,7 +634,7 @@ gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 				     ientry);
 
 	ientry->_priv->icon_selector = gnome_icon_selector_new
-	    (history_id, dialog_title, 0);
+	    (history_id, dialog_title);
 
 	gnome_icon_selector_add_defaults
 	    (GNOME_ICON_SELECTOR (ientry->_priv->icon_selector));
@@ -625,19 +649,22 @@ gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 
 	gtk_widget_show_all (ientry->_priv->icon_selector);
 
-	newflags &= ~GNOME_SELECTOR_DEFAULT_BROWSE_DIALOG;
+	g_value_init (&value, GTK_TYPE_WIDGET);
+	g_value_set_object (&value, G_OBJECT (browse_dialog));
+	g_object_set_property (G_OBJECT (ientry), "browse_dialog", &value);
+	g_value_unset (&value);
+
+	g_free (dialog_title);
+	g_free (history_id);
     }
 
-    /* Create the default selector widget if requested. */
-    if (flags & GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET) {
-	GtkWidget *w;
+    /* Create the default entry widget if requested. */
+    if (get_value_boolean (ientry, "use_default_entry_widget") &&
+	!has_value_widget (ientry, "entry_widget")) {
+	GtkWidget *entry_widget, *w;
+	GValue value = { 0, };
 
-	if (entry_widget != NULL) {
-	    g_warning (G_STRLOC ": It makes no sense to use "
-		       "GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET "
-		       "and pass a `entry_widget' as well.");
-	    return;
-	}
+	g_message (G_STRLOC ": default entry widget");
 
 	entry_widget = gtk_hbox_new (FALSE, 4);
 
@@ -668,13 +695,13 @@ gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 	gtk_container_add (GTK_CONTAINER (w), ientry->_priv->browse_button);
 	gtk_widget_show_all (ientry->_priv->browse_button);
 
-	newflags &= ~GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET;
+	g_value_init (&value, GTK_TYPE_WIDGET);
+	g_value_set_object (&value, G_OBJECT (entry_widget));
+	g_object_set_property (G_OBJECT (ientry), "entry_widget", &value);
+	g_value_unset (&value);
     }
 
-    gnome_file_selector_construct (GNOME_FILE_SELECTOR (ientry),
-				   history_id, dialog_title,
-				   entry_widget, selector_widget,
-				   browse_dialog, newflags);
+    GNOME_CALL_PARENT_HANDLER (GNOME_SELECTOR_CLASS, do_construct, (selector));
 
     filter = gnome_vfs_directory_filter_new_custom
 	(ientry_directory_filter_func,
@@ -684,6 +711,30 @@ gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
 	 ientry);
 
     gnome_file_selector_set_filter (GNOME_FILE_SELECTOR (ientry), filter);
+
+    g_message (G_STRLOC);
+}
+
+static GObject*
+gnome_icon_entry_constructor (GType                  type,
+			      guint                  n_construct_properties,
+			      GObjectConstructParam *construct_properties)
+{
+    GObject *object = G_OBJECT_CLASS (parent_class)->constructor (type,
+								  n_construct_properties,
+								  construct_properties);
+    GnomeIconEntry *ientry = GNOME_ICON_ENTRY (object);
+
+    g_message (G_STRLOC ": %d - %d", type, GNOME_TYPE_ICON_ENTRY);
+
+    if (type == GNOME_TYPE_ICON_ENTRY)
+	gnome_selector_do_construct (GNOME_SELECTOR (ientry));
+
+    ientry->_priv->constructed = TRUE;
+
+    g_message (G_STRLOC);
+
+    return object;
 }
 
 
@@ -702,9 +753,16 @@ gnome_icon_entry_new (const gchar *history_id, const gchar *dialog_title)
 {
     GnomeIconEntry *ientry;
 
-    ientry = gtk_type_new (gnome_icon_entry_get_type ());
-
-    gnome_icon_entry_construct (ientry, history_id, dialog_title);
+    ientry = g_object_new (gnome_icon_entry_get_type (),
+			   "use_default_entry_widget", TRUE,
+			   "use_default_selector_widget", FALSE,
+			   "use_default_browse_dialog", TRUE,
+			   "want_browse_button", FALSE,
+			   "want_clear_button", FALSE,
+			   "want_default_button", FALSE,
+			   "history_id", history_id,
+			   "dialog_title", dialog_title,
+			   NULL);
 
     return GTK_WIDGET (ientry);
 }

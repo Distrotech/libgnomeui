@@ -67,20 +67,6 @@ struct _GnomeEntryClass {
 
 guint        gnome_entry_get_type         (void) G_GNUC_CONST;
 GtkWidget   *gnome_entry_new              (const gchar *history_id);
-GtkWidget   *gnome_entry_new_flags        (const gchar *history_id,
-                                           guint32      flags);
-
-/* for language bindings and subclassing, use gnome_entry_new */
-void         gnome_entry_construct        (GnomeEntry  *gentry, 
-                                           const gchar *history_id);
-
-void         gnome_entry_construct_full   (GnomeEntry  *gentry,
-                                           const gchar *history_id,
-                                           const gchar *dialog_title,
-                                           GtkWidget   *entry_widget,
-                                           GtkWidget   *selector_widget,
-                                           GtkWidget   *browse_dialog,
-                                           guint32      flags);
 
 gchar       *gnome_entry_get_text         (GnomeEntry  *gentry);
 

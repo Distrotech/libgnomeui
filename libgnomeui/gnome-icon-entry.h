@@ -73,20 +73,7 @@ struct _GnomeIconEntryClass {
 
 guint      gnome_icon_entry_get_type    (void) G_GNUC_CONST;
 GtkWidget *gnome_icon_entry_new         (const gchar *history_id,
-					 const gchar *browse_dialog_title);
-
-/* for language bindings and subclassing, use gnome_icon_entry_new from C */
-void       gnome_icon_entry_construct   (GnomeIconEntry *ientry,
-					 const gchar *history_id,
-					 const gchar *browse_dialog_title);
-
-void       gnome_icon_entry_construct_full (GnomeIconEntry *ientry,
-                                            const gchar *history_id,
-                                            const gchar *dialog_title,
-                                            GtkWidget *entry_widget,
-                                            GtkWidget *selector_widget,
-                                            GtkWidget *browse_dialog,
-                                            guint32 flags);
+					 const gchar *dialog_title);
 
 /* returns the GnomeIconSelector widget of the browse dialog. */
 GtkWidget *gnome_icon_entry_get_icon_selector (GnomeIconEntry *ientry);

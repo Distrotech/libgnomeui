@@ -157,8 +157,10 @@ struct _GnomeSelectorClass {
                                        gint                      position,
                                        guint                     list_id,
                                        GnomeSelectorAsyncHandle *async_handle);
-};
 
+    /* For subclasses only. */
+    void     (*do_construct)          (GnomeSelector            *selector);
+};
 
 guint
 gnome_selector_get_type           (void) G_GNUC_CONST;
@@ -166,14 +168,9 @@ gnome_selector_get_type           (void) G_GNUC_CONST;
 /* This is a purely virtual class, so there is no _new method.
  * Use gnome_{file,icon,pixmap}_selector_new instead. */
 
+/* This is ONLY for subclasses ! */
 void
-gnome_selector_construct          (GnomeSelector *selector,
-                                   const gchar   *history_id,
-                                   const gchar   *dialog_title,
-                                   GtkWidget     *entry_widget,
-                                   GtkWidget     *selector_widget,
-                                   GtkWidget     *browse_dialog,
-                                   guint32        flags);
+gnome_selector_do_construct       (GnomeSelector             *selector);
 
 /* checks whether this is a valid filename/directory. */
 void

@@ -1,5 +1,42 @@
 2001-02-26  Martin Baulig  <baulig@suse.de>
 
+	For GnomeSelector and its subclasses, you can now use g_object_new()
+	to create a new instance.
+
+	* gnome-selector.h (GnomeSelectorClass): Added `do_construct' method.
+	(gnome_selector_construct): Removed.
+	(gnome_selector_do_construct): New function, only for subclasses.
+
+	* gnome-selector.c (PROP_ENTRY_WIDGET, PROP_SELECTOR_WIDGET,
+	PROP_BROWSE_DIALOG, PROP_USE_DEFAULT_ENTRY_WIDGET,
+	PROP_USE_DEFAULT_SELECTOR_WIDGET, PROP_USE_DEFAULT_BROWSE_DIALOG,
+	PROP_WANT_BROWSE_BUTTON, PROP_WANT_CLEAR_BUTTON,
+	PROP_WANT_DEFAULT_BUTTON, PROP_AUTO_SAVE_HISTORY, PROP_AUTO_SAVE_ALL):
+	New construction only properties.
+	(PROP_DIALOG_TITLE, PROP_HISTORY_ID): Made these construction, but not
+	construction only properties.
+	(gnome_selector_class_init): Connect gnome_selector_constructor() to
+	the GObject's `constructor' method and do_construct_handler() to the
+	GnomeSelector's `do_construct' method.
+
+	* gnome-entry.h (gnome_entry_new_flags): Removed.
+	(gnome_entry_construct, gnome_entry_construct_full): Removed.
+
+	* gnome-file-selector.h (gnome_file_selector_new): Removed `flags'
+	argument.
+	(gnome_file_selector_new_custom, gnome_file_selector_construct):
+	Removed.
+
+	* gnome-icon-selector.h (gnome_icon_selector_new): Removed `flags'
+	argument.
+	(gnome_icon_selector_new_custom, gnome_icon_selector_construct):
+	Removed.
+
+	* gnome-icon-entry.h (gnome_icon_entry_construct): Removed.
+	(gnome_icon_entry_construct_full): Removed.
+
+2001-02-26  Martin Baulig  <baulig@suse.de>
+
 	* gnome-stock.c: Back to the API described below.
 
 	* gnome-stock.h
