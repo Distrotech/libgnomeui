@@ -33,8 +33,6 @@
 #include <libgnome/gnomelib-init2.h>
 #include <libgnomeui/gnome-dialog.h>
 
-#include "libgnomeuiP.h"
-
 BEGIN_GNOME_DECLS
 
 #define GNOME_TYPE_CLIENT            (gnome_client_get_type ())
