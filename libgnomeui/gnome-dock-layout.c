@@ -76,21 +76,11 @@ static void
 gnome_dock_layout_destroy (GtkObject *object)
 {
   GnomeDockLayout *layout;
-  GList *lp;
 
   layout = GNOME_DOCK_LAYOUT (object);
 
-  lp = layout->items;
-  while (lp != NULL)
-    {
-      GList *next;
-
-      next = lp->next;
-
-      remove_item (layout, lp);
-
-      lp = next;
-    }
+  while (layout->items)
+    remove_item (layout, layout->items);
 }
 
 
@@ -165,7 +155,7 @@ remove_item (GnomeDockLayout *layout,
 
   gtk_widget_unref (GTK_WIDGET (item));
 
-  g_list_remove_link (layout->items, list);
+  layout->items = g_list_remove_link (layout->items, list);
 
   g_free (list->data);
   g_list_free (list);

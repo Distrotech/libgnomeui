@@ -1,3 +1,9 @@
+1999-09-24  Morten Welinder  <terra@diku.dk>
+
+	* gnome-dock-layout.c (gnome_dock_layout_destroy): Don't walk and
+ 	muck with the same list simultaneously.
+	(remove_item): Handle remove of first item also.
+
 1999-09-24  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-mdi-session.c (view_window_func): Return NULL unless
