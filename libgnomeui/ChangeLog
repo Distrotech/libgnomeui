@@ -1,3 +1,8 @@
+1999-12-05  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-dialog.c (gnome_dialog_button_clicked): no need for saving
+	click_closes as gnome_dialog_clicked() takes care of this.
+	
 1999-12-04  Elliot Lee  <sopwith@redhat.com>
 
 	* gtkpixmapmenuitem.c: Fix size_request/size_allocate - was HORRIBLY broken before.

@@ -973,7 +973,6 @@ gnome_dialog_button_clicked (GtkWidget   *button,
   g_return_if_fail(dialog != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(dialog));
 
-  click_closes = GNOME_DIALOG(dialog)->click_closes;
   list = GNOME_DIALOG (dialog)->buttons;
 
   while (list){
