@@ -1,10 +1,15 @@
+2002-01-05  Christian Rose  <menthos@menthos.com>
+
+	* sv.po: Updated Swedish translation.
+
 2002-01-04  Duarte Loreto <happyguy_pt@hotmail.com>
 
         * pt.po: Added Portuguese translation.
 
 2002-01-02  Stanislav Visnovsky  <visnovsky@nenya.ms.mff.cuni.cz>
 
-	* POTFILES.in: Added libgnomeui/gnome-appbar.c thanks to Marcel Telka <marcel@telka.sk>.
+	* POTFILES.in: Added libgnomeui/gnome-appbar.c thanks to
+	Marcel Telka <marcel@telka.sk>.
 
 2001-12-28  Christian Rose  <menthos@menthos.com>
 

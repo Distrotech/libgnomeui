@@ -1,14 +1,14 @@
 # Swedish messages for libgnomeui.
-# Copyright (C) 2001 Free Software Foundation, Inc.
-# Christian Rose <menthos@menthos.com>, 2001.
+# Copyright (C) 2001, 2002 Free Software Foundation, Inc.
+# Christian Rose <menthos@menthos.com>, 2001, 2002.
 #
 # $Id$
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2001-12-28 23:08+0100\n"
-"PO-Revision-Date: 2001-12-28 23:08+0100\n"
+"POT-Creation-Date: 2002-01-05 18:58+0100\n"
+"PO-Revision-Date: 2002-01-05 18:58+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -206,6 +206,30 @@ msgstr "Dokumentatör"
 msgid "About %s"
 msgstr "Om %s"
 
+#: libgnomeui/gnome-appbar.c:762
+msgid "Has Progress"
+msgstr "Har förlopp"
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Create a progress widget."
+msgstr "Skapa en ny förloppswidget."
+
+#: libgnomeui/gnome-appbar.c:770
+msgid "Has Status"
+msgstr "Har status"
+
+#: libgnomeui/gnome-appbar.c:771
+msgid "Create a status widget."
+msgstr "Skapa en ny statuswidget."
+
+#: libgnomeui/gnome-appbar.c:778
+msgid "Interactivity"
+msgstr "Interaktivitet"
+
+#: libgnomeui/gnome-appbar.c:779
+msgid "Level of user activity required."
+msgstr "Nivå på användarinteraktivitet som krävs."
+
 #: libgnomeui/gnome-client.c:835
 msgid "Specify session management ID"
 msgstr "Ange ID för sessionskontroll"
@@ -247,7 +271,7 @@ msgid "Time"
 msgstr "Tid"
 
 #: libgnomeui/gnome-dateedit.c:437
-msgid "The time currentlyselected"
+msgid "The time currently selected"
 msgstr "Tiden som är vald för tillfället"
 
 #: libgnomeui/gnome-dateedit.c:449
