@@ -5,10 +5,10 @@ SUBDIRS = pixmaps
 #
 # The targets
 #
-noinst_PROGRAMS = ted_demo stock_demo winhints_demo animator_demo dock_demo
+noinst_PROGRAMS = stock_demo winhints_demo animator_demo dock_demo
 bin_PROGRAMS    = gnome_segv
 lib_LTLIBRARIES = libgnomeui.la
-
+lib_LIBRARIES = libgnomeui10compat.a
 #
 # Install location for header files
 #
@@ -26,6 +26,16 @@ INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) \
 	-DG_LOG_DOMAIN=\"GnomeUI\"
 
 EXTRA_HEADERS = 
+
+libgnomeui10compat_a_SOURCES =\
+	gnome-guru.c			\
+	gtkcauldron.c			\
+	gnome-compat.c
+
+#libgnomeui10compat_a_HEADERS =\
+#	gnome-guru.h			\
+#	gtkcauldron.h			\
+#	gnome-compat.h
 
 libgnomeui_la_SOURCES = \
 	gnome-about.c			\
@@ -61,7 +71,6 @@ libgnomeui_la_SOURCES = \
 	gnome-druid-page-standard.c	\
 	gnome-druid-page-finish.c	\
 	gnome-geometry.c		\
-	gnome-guru.c			\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
         gnome-font-picker.c		\
@@ -97,9 +106,7 @@ libgnomeui_la_SOURCES = \
         gnome-paper-selector.c		\
 	gnome-procbar.c			\
 	gnometypes.c			\
-	gtkcauldron.c			\
 	gtk-clock.c			\
-	gtk-ted.c			\
 	gtkdial.c			\
 	gtkpixmapmenuitem.c
 
@@ -143,7 +150,6 @@ gnome_headers = \
         gnome-font-picker.h		\
 	gnome-font-selector.h 		\
 	gnome-geometry.h		\
-	gnome-guru.h			\
 	gnome-href.h			\
 	gnome-ice.h			\
 	gnome-icon-list.h		\
@@ -176,10 +182,8 @@ gnome_headers = \
         gnome-winhints.h		\
         gnome-paper-selector.h		\
 	gnome-procbar.h			\
-	gtkcauldron.h			\
 	gtkdial.h			\
 	gtk-clock.h			\
-	gtk-ted.h			\
 	gtkpixmapmenuitem.h		\
 	libgnomeui.h
 
@@ -228,8 +232,6 @@ gnometypebuiltins_evals.c: @REBUILD@ makeenums.pl gnome.defs
 
 gnome_segv_SOURCES = gnome_segv.c
 
-ted_demo_SOURCES = ted_demo.c
-
 stock_demo_SOURCES = stock_demo.c
 
 winhints_demo_SOURCES = winhints_demo.c
@@ -237,9 +239,6 @@ winhints_demo_SOURCES = winhints_demo.c
 animator_demo_SOURCES = animator_demo.c
 
 dock_demo_SOURCES = dock_demo.c
-
-SGML =	\
-	gtk-ted.sgml
 
 gtkrcdir = $(datadir)
 gtkrc_DATA = gtkrc gtkrc.el gtkrc.eo gtkrc.he gtkrc.hy gtkrc.ja \
@@ -249,7 +248,6 @@ gtkrc_DATA = gtkrc gtkrc.el gtkrc.eo gtkrc.he gtkrc.hy gtkrc.ja \
 	gtkrc.vi_VN.tcvn gtkrc.vi_VN.viscii
 
 EXTRA_DIST =					\
-	$(SGML)					\
 	$(gtkrc_DATA)				\
 	AUTHORS					\
 	gnome.defs 				\
@@ -264,13 +262,6 @@ libgnomeui_la_LDFLAGS = -version-info 43:0:0 -rpath $(libdir)
 libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 gnome_segv_LDADD =	\
-	libgnomeui.la 					\
-	$(top_builddir)/libgnome/libgnome.la 		\
-	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
-	$(INTLLIBS)
-
-ted_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\

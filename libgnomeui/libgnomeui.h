@@ -48,7 +48,6 @@
 #endif
 #include "libgnomeui/gnome-geometry.h"
 #ifndef GNOME_EXCLUDE_DEPRECATED
-#include "libgnomeui/gnome-guru.h"
 #endif
 #include "libgnomeui/gnome-icon-list.h"
 #include "libgnomeui/gnome-icon-item.h"
@@ -90,7 +89,6 @@
 #include "libgnomeui/gtk-clock.h"
 #include "libgnomeui/gtkdial.h"
 #ifndef GNOME_EXCLUDE_DEPRECATED
-#include "libgnomeui/gtk-ted.h"
 #endif
 #include "libgnomeui/gtkpixmapmenuitem.h"
 #include "libgnomeui/gnome-dateedit.h"

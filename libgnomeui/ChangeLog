@@ -1,3 +1,10 @@
+1999-10-18  Jonathan Blandford  <jrb@redhat.com>
+
+	* Makefile.am (libgnomeui10compat_a_SOURCES): beginnings of the
+	compat library.  I'm not 100% sure I set this up correctly,
+	though.
+	* gtk-ted*: Blown away!!!
+
 1999-10-11  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-messagebox.c (gnome_message_box_new): add a label field to
