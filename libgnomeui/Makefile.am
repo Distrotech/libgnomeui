@@ -96,7 +96,8 @@ libgnomeui_la_SOURCES = \
 	gtkdial.c			\
 	$(gtkcal_sources)
 
-libgnomeuiinclude_HEADERS = 		\
+## this lists all the non-generated headers
+gnome_headers = \
 	gnome-about.h			\
         gnome-animator.h		\
 	gnome-app.h			\
@@ -148,7 +149,6 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-uidefs.h			\
         gnome-winhints.h		\
         gnome-paper-selector.h		\
-	gnometypebuiltins.h		\
 	gtkcauldron.h			\
 	gtkdial.h			\
 	gtklayout.h			\
@@ -160,21 +160,20 @@ libgnomeuiinclude_HEADERS = 		\
 	libgnomeui.h			\
 	$(gtkcal_headers)
 
-.PHONY: auto-files auto-files-1
-auto-files:
-	rm -f $(srcdir)/gnome.defs
-	$(MAKE) auto-files-1
+libgnomeuiinclude_HEADERS = \
+	$(gnome_headers)	\
+	gnometypebuiltins.h
 
-auto-files-1: gnome.defs
-auto-files-1: gnometypebuiltins_evals.c gnometypebuiltins_ids.c
-auto-files-1: gnometypebuiltins_vars.c gnometypebuiltins.h
-
-gnometypes.c: gnometypebuiltins_evals.c gnometypebuiltins_vars.c
+BUILT_SOURCES = \
+	gnometypebuiltins.h		\
+	gnometypebuiltins_evals.c	\
+	gnometypebuiltins_ids.c		\
+	gnometypebuiltins_vars.c
 
 # generate gnome.defs file from gnome-boxed.defs and *.h
-gnome.defs: @MAINT@ makeenums.pl gnome-boxed.defs
+gnome.defs: @MAINT@ makeenums.pl gnome-boxed.defs $(gnome_headers)
 	cd $(srcdir) \
-	&& perl makeenums.pl defs $(libgnomeuiinclude_HEADERS) > gd.tmp \
+	&& perl makeenums.pl defs $(gnome_headers) > gd.tmp \
 	&& cat gnome-boxed.defs >> gd.tmp \
 	&& mv gd.tmp gnome.defs
 
@@ -199,7 +198,7 @@ gnometypebuiltins_ids.c: @MAINT@ gnome.defs maketypes.awk
 # generate enum value arrays
 gnometypebuiltins_evals.c: @MAINT@ makeenums.pl gnome.defs
 	cd $(srcdir) \
-	&& perl makeenums.pl arrays $(libgnomeuiinclude_HEADERS) > gtbe.tmp \
+	&& perl makeenums.pl arrays $(gnome_headers) > gtbe.tmp \
 	&& mv gtbe.tmp gnometypebuiltins_evals.c
 
 #######################
@@ -216,7 +215,6 @@ animator_demo_SOURCES = animator_demo.c
 
 SGML =	\
 	gtk-ted.sgml
-
 
 gtkrcdir = $(datadir)
 gtkrc_DATA = gtkrc

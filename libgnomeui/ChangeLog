@@ -1,3 +1,13 @@
+1998-10-05  Raja R Harinath  <harinath@cs.umn.edu>
+
+	Changes to parallel `gtk+'.
+	* Makefile.am (libgnomeuiinclude_HEADERS): Move non-generated
+	headers ...
+	(gnome_headers): ... here.
+	(gnome.defs): Depend on $(gnome_headers).
+	(auto-files, auto-files-1): Remove rules.
+	(BUILT_SOURCES): List generated files.
+	
 1998-10-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-line.h: Added a comment for the line_style argument.
