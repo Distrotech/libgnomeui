@@ -1,3 +1,15 @@
+Wed Mar 18 20:40:43 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-stock.c (NOT_ALWAYS_SHADE): Renamed to fix typo.
+	(_default_entries_data): Added `label' field.
+	(entries_data): Added label info to each element.
+	(stock_pixmaps): Copy label into hash entry.
+	(gnome_stock_menu_item): Fail if text is NULL.
+	(gnome_stock_button): Look up label in entry.
+
+	* gnome-stock.h: Added `label' field to each GnomeStockPixmapEntry
+	structure.
+
 1998-03-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-file-entry.h: New files gnome-file-entry.[ch].  This is a

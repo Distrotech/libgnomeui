@@ -1,5 +1,5 @@
 /* GNOME GUI Library
- * Copyright (C) 1997 the Free Software Foundation
+ * Copyright (C) 1997, 1998 the Free Software Foundation
  *
  * Author: Eckehard Berns
  */
@@ -128,6 +128,7 @@ typedef enum {
 struct _GnomeStockPixmapEntryData {
         GnomeStockPixmapType type;
 	int width, height;
+	char *label;
         gchar **xpm_data;
 };
 
@@ -136,6 +137,7 @@ typedef struct _GnomeStockPixmapEntryImlib   GnomeStockPixmapEntryImlib;
 struct _GnomeStockPixmapEntryImlib {
         GnomeStockPixmapType type;
 	int width, height;
+	char *label;
         gchar *rgb_data;
 	GdkImlibColor shape;
 };
@@ -145,6 +147,7 @@ typedef struct _GnomeStockPixmapEntryImlibScaled GnomeStockPixmapEntryImlibScale
 struct _GnomeStockPixmapEntryImlibScaled {
         GnomeStockPixmapType type;
 	int width, height;
+	char *label;
         gchar *rgb_data;
 	GdkImlibColor shape;
 	int scaled_width, scaled_height;
@@ -155,6 +158,7 @@ struct _GnomeStockPixmapEntryImlibScaled {
 struct _GnomeStockPixmapEntryFile {
         GnomeStockPixmapType type;
 	int width, height;
+	char *label;
         gchar *filename;
 };
 
@@ -162,6 +166,7 @@ struct _GnomeStockPixmapEntryFile {
 struct _GnomeStockPixmapEntryPath {
         GnomeStockPixmapType type;
 	int width, height;
+	char *label;
         gchar *pathname;
 };
 
@@ -170,12 +175,14 @@ struct _GnomeStockPixmapEntryPath {
 struct _GnomeStockPixmapEntryWidget {
         GnomeStockPixmapType type;
 	int width, height;
+	char *label;
         GtkWidget *widget;
 };
 
 struct _GnomeStockPixmapEntryAny {
         GnomeStockPixmapType type;
 	int width, height;
+	char *label;
 };
 
 union _GnomeStockPixmapEntry {
@@ -261,14 +268,6 @@ GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (char *icon, char *subtype);
 #define GNOME_STOCK_BUTTON_CLOSE  "Button_Close"
 #define GNOME_STOCK_BUTTON_APPLY  "Button_Apply"
 #define GNOME_STOCK_BUTTON_HELP   "Button_Help"
-
-/* dummy gettext helpers */
-#ifdef NEVER
-char *gettext_dummy_string[] = {
-	N_("Ok"), N_("Cancel"), N_("Yes"), N_("No"),
-	N_("Close"), N_("Apply")
-};
-#endif
 
 /* returns a default button widget for dialogs */
 GtkWidget             *gnome_stock_button          (char *type);
