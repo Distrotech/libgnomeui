@@ -91,6 +91,23 @@ static const char strings [] = {
 	N_("_Game"), 
 	N_("_Help"), 
 	N_("_Windows/")
+	
+	N_("File"),
+	N_("File/"),
+	N_("Edit"),
+	N_("Edit/"),
+	N_("View"),
+	N_("View/"),
+	N_("Settings"),
+	N_("Settings/"),
+        N_("New"),
+	N_("New/"),
+	N_("Files"),
+	N_("Files/"),
+	N_("Windows"),
+	N_("Game"), 
+	N_("Help"), 
+	N_("Windows/")
 };
 
 #endif

@@ -1,3 +1,8 @@
+2000-02-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-app-helper.c: Add the non-accelerated variants for
+	translation purposes.
+
 Fri Feb 18 17:30:58 2000  George Lebl <jirka@5z.com>
 
 	* gnome-app-helper.c,gnome-stock.c: use the gnome-properties instead
