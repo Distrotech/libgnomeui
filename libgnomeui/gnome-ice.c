@@ -10,8 +10,30 @@
 #include <gtk/gtk.h>
 #include "gnome-ice.h"
 
-/* True if we've started listening to ICE.  */
-static int ice_init = 0;
+
+typedef struct _GnomeIceInternal
+{
+  gint input_id;
+} GnomeIceInternal;
+
+static GnomeIceInternal*
+malloc_gnome_ice_internal ()
+{
+  GnomeIceInternal *gnome_ice_internal = g_malloc (sizeof (GnomeIceInternal));
+  gnome_ice_internal->input_id = 0;
+  return gnome_ice_internal;
+}
+
+static void
+free_gnome_ice_internal (GnomeIceInternal *gnome_ice_internal)
+{
+  g_assert (gnome_ice_internal != NULL);
+  g_free (gnome_ice_internal);
+}
+
+/* map IceConn pointers to GnomeIceInternal pointers */
+static GHashTable *__gnome_ice_internal_hash = NULL;
+
 
 #ifdef HAVE_LIBSM
 
@@ -24,6 +46,7 @@ process_ice_messages (gpointer client_data, gint source,
   IceConn connection = (IceConn) client_data;
 
   status = IceProcessMessages (connection, NULL, NULL);
+
   /* FIXME: handle case when status==closed.  */
 }
 
@@ -33,17 +56,40 @@ static void
 new_ice_connection (IceConn connection, IcePointer client_data, Bool opening,
 		    IcePointer *watch_data)
 {
-  gint tag;
+  GnomeIceInternal *gnome_ice_internal;
 
-  /* It turns out to be easier for us to always call gdk_input_add,
-     even if we are trying to remove the input.  The reason is that
-     this is simpler than keeping a hash table mapping connections
-     onto gdk tags.  This is losing.  */
-  tag = gdk_input_add (IceConnectionNumber (connection),
-		       GDK_INPUT_READ, process_ice_messages,
-		       (gpointer) connection);
-  if (! opening)
-    gdk_input_remove (tag);
+  if (opening)
+    {
+      gnome_ice_internal = g_hash_table_lookup (__gnome_ice_internal_hash, connection);
+      if (gnome_ice_internal)
+	{
+	  gdk_input_remove (gnome_ice_internal->input_id);
+	  gnome_ice_internal->input_id = 0;
+	}
+      else
+	{
+	  gnome_ice_internal = malloc_gnome_ice_internal ();
+	  g_hash_table_insert (__gnome_ice_internal_hash, connection, gnome_ice_internal);
+	}
+
+
+       gnome_ice_internal->input_id = 
+	 gdk_input_add (IceConnectionNumber (connection),
+			GDK_INPUT_READ, process_ice_messages,
+			(gpointer) connection);
+    }
+  else 
+    {
+      gnome_ice_internal = g_hash_table_lookup (__gnome_ice_internal_hash, connection);
+      if (! gnome_ice_internal)
+	{
+	  return;
+	}
+
+      gdk_input_remove (gnome_ice_internal->input_id);
+      g_hash_table_remove (__gnome_ice_internal_hash, connection);
+      free_gnome_ice_internal (gnome_ice_internal);
+    }
 }
 
 #endif /* HAVE_LIBSM */
@@ -51,11 +97,17 @@ new_ice_connection (IceConn connection, IcePointer client_data, Bool opening,
 void
 gnome_ice_init (void)
 {
+  static gboolean ice_init = FALSE;
+
   if (! ice_init)
     {
 #ifdef HAVE_LIBSM
       IceAddConnectionWatch (new_ice_connection, NULL);
+
+      /* map IceConn pointers to GnomeIceInternal pointers */
+      __gnome_ice_internal_hash = g_hash_table_new (g_direct_hash, NULL);
 #endif /* HAVE_LIBSM */
-      ice_init = 1;
+
+      ice_init = TRUE;
     }
 }

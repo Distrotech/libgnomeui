@@ -1,3 +1,9 @@
+1998-12-21  Jay Painter <jpaint@serv.net>
+	* gnome-ice.c: added an internal hash to map ICE connections
+	to GnomeIceInternal structures which keep state information
+	on ICE connections so their gdk_add_input callbacks can be
+	added/removed correctly.
+
 1998-12-18  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-procbar.c (gnome_proc_bar_draw): Calculate total field
