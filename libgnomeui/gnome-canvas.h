@@ -465,6 +465,10 @@ struct _GnomeCanvas {
 	/* GC for temporary draw pixmap */
 	GdkGC *pixmap_gc;
 
+	/* Input context for dead key support */
+	GdkIC     *ic;
+	GdkICAttr *ic_attr;
+
 	/* Whether items need update at next idle loop iteration */
 	unsigned int need_update : 1;
 

@@ -2303,6 +2303,9 @@ gnome_canvas_init (GnomeCanvas *canvas)
 	gtk_layout_set_hadjustment (GTK_LAYOUT (canvas), NULL);
 	gtk_layout_set_vadjustment (GTK_LAYOUT (canvas), NULL);
 
+	canvas->ic = NULL;
+	canvas->ic_attr = NULL;
+
 	canvas->cc = gdk_color_context_new (gtk_widget_get_visual (GTK_WIDGET (canvas)),
 					    gtk_widget_get_colormap (GTK_WIDGET (canvas)));
 
@@ -2497,6 +2500,31 @@ gnome_canvas_realize (GtkWidget *widget)
 				 | GDK_LEAVE_NOTIFY_MASK
 				 | GDK_FOCUS_CHANGE_MASK));
 
+	if (gdk_im_ready () && (canvas->ic_attr = gdk_ic_attr_new ()) != NULL) {
+		GdkEventMask mask;
+		GdkICAttr *attr = canvas->ic_attr;
+		GdkICAttributesType attrmask = GDK_IC_ALL_REQ;
+		GdkIMStyle style;
+		GdkIMStyle supported_style = GDK_IM_PREEDIT_NONE |
+			GDK_IM_PREEDIT_NOTHING |
+			GDK_IM_STATUS_NONE |
+			GDK_IM_STATUS_NOTHING;
+
+		attr->style = style = gdk_im_decide_style (supported_style);
+		attr->client_window = canvas->layout.bin_window;
+
+		canvas->ic = gdk_ic_new (attr, attrmask);
+		if (canvas->ic != NULL) {
+			mask = gdk_window_get_events (attr->client_window);
+			mask |= gdk_ic_get_events (canvas->ic);
+			gdk_window_set_events (attr->client_window, mask);
+
+			if (GTK_WIDGET_HAS_FOCUS (widget))
+				gdk_im_begin (canvas->ic, attr->client_window);
+		} else
+			g_warning ("Can't create input context.");
+	}
+
 	/* Create our own temporary pixmap gc and realize all the items */
 
 	canvas->pixmap_gc = gdk_gc_new (canvas->layout.bin_window);
@@ -2516,6 +2544,15 @@ gnome_canvas_unrealize (GtkWidget *widget)
 	canvas = GNOME_CANVAS (widget);
 
 	shutdown_transients (canvas);
+
+	if (canvas->ic) {
+		gdk_ic_destroy (canvas->ic);
+		canvas->ic = NULL;
+	}
+	if (canvas->ic_attr) {
+		gdk_ic_attr_destroy (canvas->ic_attr);
+		canvas->ic_attr = NULL;
+	}
 
 	/* Unrealize items and parent widget */
 
@@ -3090,6 +3127,8 @@ gnome_canvas_focus_in (GtkWidget *widget, GdkEventFocus *event)
 
 	canvas = GNOME_CANVAS (widget);
 
+	if (canvas->ic)
+		gdk_im_begin (canvas->ic, canvas->layout.bin_window);
 	if (canvas->focused_item)
 		return emit_event (canvas, (GdkEvent *) event);
 	else
@@ -3103,6 +3142,8 @@ gnome_canvas_focus_out (GtkWidget *widget, GdkEventFocus *event)
 	GnomeCanvas *canvas;
 
 	canvas = GNOME_CANVAS (widget);
+
+	gdk_im_end ();
 
 	if (canvas->focused_item)
 		return emit_event (canvas, (GdkEvent *) event);
