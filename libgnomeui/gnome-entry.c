@@ -15,7 +15,7 @@
 #include "gnome-entry.h"
 
 
-#define DEFAULT_MAX_HISTORY_SAVED 60  /* Why 60?  Because MC defaults to that :-) */
+#define DEFAULT_MAX_HISTORY_SAVED 10  /* This seems to make more sense then 60*/
 
 
 struct item {
@@ -355,11 +355,21 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	gnome_config_pop_prefix ();
 }
 
+static gboolean
+check_for_duplicates (struct item **final_items, gint n, struct item *item)
+{
+	int i;
+	for (i = 0; i < n; i++)
+		if (!strcmp (item->text, final_items[i]->text))
+			return FALSE;
+	return TRUE;
+}
 void
 gnome_entry_save_history (GnomeEntry *gentry)
 {
 	char *prefix;
 	GList *items;
+	struct item *final_items[DEFAULT_MAX_HISTORY_SAVED];
 	struct item *item;
 	int n;
 	char key[13];
@@ -370,24 +380,29 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	if (!(gnome_app_id && gentry->history_id))
 		return;
 
-	prefix = build_prefix (gentry, FALSE);
+	prefix = build_prefix (gentry, TRUE);
+	/* a little ugly perhaps, but should speed things up and
+	 * prevent us from building this twice */
+	prefix[strlen (prefix) - 1] = '\0';
 	if (gnome_config_has_section (prefix))
 		gnome_config_clean_section (prefix);
-	g_free (prefix);
-	
-	prefix = build_prefix (gentry, TRUE);
+
+	prefix [strlen (prefix)] = '/';
 	gnome_config_push_prefix (prefix);
 	g_free (prefix);
-
-	/* FIXME: add condition n < max_num_history_saved */
 
 	for (n = 0, items = gentry->items; items; items = items->next) {
 		item = items->data;
 
 		if (item->save) {
-			g_snprintf (key, sizeof(key), "%d", n++);
-			gnome_config_set_string (key, item->text);
+			if (check_for_duplicates (final_items, n, item)) {
+				final_items [n] = item;
+				g_snprintf (key, sizeof(key), "%d", n++);
+				gnome_config_set_string (key, item->text);
+			}
 		}
+		if (n > DEFAULT_MAX_HISTORY_SAVED)
+			break;
 	}
 
 	gnome_config_pop_prefix ();

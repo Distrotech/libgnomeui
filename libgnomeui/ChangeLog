@@ -1,3 +1,10 @@
+1999-01-07  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-entry.c (gnome_entry_save_history): changed a bit.  Now
+	it's a little tiny bit more efficient, and no longer will save
+	duplicate fields.
+	(check_for_duplicates): new function.
+
 1999-01-07  Chris Lahey  <clahey@umich.edu>
 
 	* gnome-paper-selector.h, gnome-paper-selector.c
