@@ -3,6 +3,7 @@
 
 #include "libgnome/gnome-defs.h"
 #include "libgnomeui/gnome-app.h"
+#include "libgnomeui/gnome-app-helper.h"
 #include "libgnomeui/gnome-actionarea.h"
 #include "libgnomeui/gnome-colors.h"
 #include "libgnomeui/gnome-color-selector.h"
