@@ -198,6 +198,9 @@ gnome_message_box_new (const gchar           *message,
 	
 	va_end (ap);
 
+	gtk_widget_grab_focus(
+		g_list_last (GNOME_DIALOG (message_box)->buttons)->data);
+
 	gnome_dialog_set_close ( GNOME_DIALOG(message_box),
 				 TRUE );
 
@@ -307,6 +310,9 @@ gnome_message_box_newv (const gchar           *message,
 	  i++;
 	};
 	
+	gtk_widget_grab_focus(
+		g_list_last (GNOME_DIALOG (message_box)->buttons)->data);
+	
 	gnome_dialog_set_close ( GNOME_DIALOG(message_box),
 				 TRUE );
 
@@ -328,6 +334,8 @@ gnome_message_box_set_default (GnomeMessageBox     *message_box,
 {
   g_warning("gnome_message_box_set_default is deprecated.\n");
   gnome_dialog_set_default(GNOME_DIALOG(message_box), button);
+  gtk_widget_grab_focus(
+	  g_list_last (GNOME_DIALOG (message_box)->buttons)->data);
 }
 
 

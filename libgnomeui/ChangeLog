@@ -1,3 +1,9 @@
+2000-05-30  Jon K Hellan  <hellan@acm.org>
+
+	* gnome-messagebox.c (gnome_message_box_new,
+	gnome_message_box_newv, gnome_message_box_set_default): Set
+	keyboard focus to default button.
+
 2000-05-27  Julian Missig  <julian@linuxpower.org>
 
 	* gnome-paper-selector.h: SELECTOR, not SELECTER.
