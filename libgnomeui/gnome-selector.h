@@ -88,17 +88,17 @@ struct _GnomeSelector {
 struct _GnomeSelectorClass {
     GtkVBoxClass parent_class;
 
-    void      (*changed)                   (GnomeSelector *selector);
-    void      (*browse)                    (GnomeSelector *selector);
-    void      (*clear)                     (GnomeSelector *selector);
-    void      (*clear_default)             (GnomeSelector *selector);
+    void      (*changed)                   (GnomeSelector            *selector);
+    void      (*browse)                    (GnomeSelector            *selector);
+    void      (*clear)                     (GnomeSelector            *selector);
+    void      (*clear_default)             (GnomeSelector            *selector);
 
-    void      (*freeze)                    (GnomeSelector *selector);
-    void      (*update)                    (GnomeSelector *selector);
-    void      (*thaw)                      (GnomeSelector *selector);
+    void      (*freeze)                    (GnomeSelector            *selector);
+    void      (*update)                    (GnomeSelector            *selector);
+    void      (*thaw)                      (GnomeSelector            *selector);
 
-    gchar *   (*get_filename)              (GnomeSelector *selector);
-    void      (*set_filename)              (GnomeSelector            *selector,
+    gchar *   (*get_uri)                   (GnomeSelector            *selector);
+    void      (*set_uri)                   (GnomeSelector            *selector,
                                             const gchar              *filename,
                                             GnomeSelectorAsyncHandle *async_handle);
 
@@ -109,8 +109,8 @@ struct _GnomeSelectorClass {
 
     void      (*update_uri_list)           (GnomeSelector *selector);
 
-    GSList *  (*get_uri_list)              (GnomeSelector *selector,
-                                            gboolean       defaultp);
+    GSList *  (*get_uri_list)              (GnomeSelector            *selector,
+                                            gboolean                  defaultp);
 
     void      (*set_selection_mode)        (GnomeSelector *selector,
                                             guint          mode);
@@ -169,9 +169,6 @@ void         gnome_selector_construct          (GnomeSelector *selector,
                                                 GtkWidget     *browse_dialog,
                                                 guint32        flags);
 
-/*only return a file if the `check_filename' method succeeded. */
-gchar       *gnome_selector_get_filename       (GnomeSelector *selector);
-
 /* checks whether this is a valid filename/directory. */
 void         gnome_selector_check_filename     (GnomeSelector             *selector,
                                                 GnomeSelectorAsyncHandle **async_handle_return,
@@ -211,29 +208,24 @@ void         gnome_selector_add_uri            (GnomeSelector             *selec
 
 
 /* Get/set file list (set will replace the old file list). */
-GSList *     gnome_selector_get_uri_list       (GnomeSelector *selector,
-                                                gboolean       defaultp);
-void         gnome_selector_set_uri_list       (GnomeSelector *selector,
-                                                GSList        *uri_list,
-                                                gboolean       defaultp);
+GSList *     gnome_selector_get_uri_list       (GnomeSelector             *selector,
+                                                gboolean                   defaultp);
+void         gnome_selector_set_uri_list       (GnomeSelector             *selector,
+                                                GSList                    *uri_list,
+                                                gboolean                   defaultp);
 
-/* set the filename to something, returns TRUE on success. */
-void         gnome_selector_set_filename       (GnomeSelector             *selector,
+/* Get/set URI. */
+gchar       *gnome_selector_get_uri            (GnomeSelector             *selector);
+
+void         gnome_selector_set_uri            (GnomeSelector             *selector,
                                                 GnomeSelectorAsyncHandle **async_handle_return,
                                                 const gchar               *filename,
                                                 GnomeSelectorAsyncFunc     async_func,
                                                 gpointer                   user_data);
 
 /* Remove all entries from the selector. */
-void         gnome_selector_clear              (GnomeSelector *selector,
-                                                gboolean       defaultp);
-
-/* Get/set directory list (set will replace the old directory list). */
-GSList *     gnome_selector_get_directory_list (GnomeSelector *selector,
-                                                gboolean       defaultp);
-void         gnome_selector_set_directory_list (GnomeSelector *selector,
-                                                GSList        *dir_list,
-                                                gboolean       defaultp);
+void         gnome_selector_clear              (GnomeSelector             *selector,
+                                                gboolean                   defaultp);
 
 /* Updates the internal file list. This will also read all the directories
  * from the directory list and add the files to an internal list. */

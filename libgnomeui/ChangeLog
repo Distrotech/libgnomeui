@@ -1,5 +1,10 @@
 2000-12-08  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selector.h (GnomeSelector): Renamed "get_filename" signal
+	to "get_uri" and "set_filename" signal to "set_uri".
+	(gnome_selector_get_filename): Renamed to gnome_selector_get_uri().
+	(gnome_selector_set_filename): Renamed to gnome_selector_set_uri().
+
 	* gnome-selector.h (GnomeSelector): Renamed "update_file_list" signal
 	to "update_uri_list"; removed `directory_listp' argument from the
 	"get_file_list" signal and renamed it to "get_uri_list".

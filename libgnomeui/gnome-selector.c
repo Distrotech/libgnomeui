@@ -73,8 +73,8 @@ static void     browse_handler                 (GnomeSelector   *selector);
 static void     clear_handler                  (GnomeSelector   *selector);
 static void     clear_default_handler          (GnomeSelector   *selector);
 
-static gchar   *get_filename_handler           (GnomeSelector   *selector);
-static void     set_filename_handler           (GnomeSelector            *selector,
+static gchar   *get_uri_handler                (GnomeSelector            *selector);
+static void     set_uri_handler                (GnomeSelector            *selector,
                                                 const gchar              *filename,
 						GnomeSelectorAsyncHandle *async_handle);
 
@@ -87,8 +87,9 @@ static void     add_uri_default_handler        (GnomeSelector            *select
                                                 gint                      position,
 						GnomeSelectorAsyncHandle *async_handle);
 
-static GSList  *get_uri_list_handler           (GnomeSelector   *selector,
-                                                gboolean         defaultp);
+static GSList  *get_uri_list_handler           (GnomeSelector            *selector,
+                                                gboolean                  defaultp);
+
 static void     free_entry_func                (gpointer         data,
                                                 gpointer         user_data);
 static GSList  *_gnome_selector_copy_list      (GSList          *thelist);
@@ -106,8 +107,8 @@ enum {
     CLEAR_SIGNAL,
     CLEAR_DEFAULT_SIGNAL,
     CHECK_FILENAME_SIGNAL,
-    GET_FILENAME_SIGNAL,
-    SET_FILENAME_SIGNAL,
+    GET_URI_SIGNAL,
+    SET_URI_SIGNAL,
     ADD_FILE_SIGNAL,
     ADD_FILE_DEFAULT_SIGNAL,
     CHECK_DIRECTORY_SIGNAL,
@@ -214,21 +215,21 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gtk_signal_default_marshaller,
 			GTK_TYPE_NONE,
 			0);
-    gnome_selector_signals [GET_FILENAME_SIGNAL] =
-	gtk_signal_new ("get_filename",
+    gnome_selector_signals [GET_URI_SIGNAL] =
+	gtk_signal_new ("get_uri",
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   get_filename),
+					   get_uri),
 			gtk_marshal_POINTER__VOID,
 			GTK_TYPE_POINTER,
 			0);
-    gnome_selector_signals [SET_FILENAME_SIGNAL] =
-	gtk_signal_new ("set_filename",
+    gnome_selector_signals [SET_URI_SIGNAL] =
+	gtk_signal_new ("set_uri",
 			GTK_RUN_LAST,
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
-					   set_filename),
+					   set_uri),
 			gnome_marshal_VOID__STRING_BOXED,
 			GTK_TYPE_NONE, 2,
 			GTK_TYPE_STRING,
@@ -409,8 +410,8 @@ gnome_selector_class_init (GnomeSelectorClass *class)
     class->clear_default = clear_default_handler;
     class->update = update_handler;
 
-    class->get_filename = get_filename_handler;
-    class->set_filename = set_filename_handler;
+    class->get_uri = get_uri_handler;
+    class->set_uri = set_uri_handler;
 
     class->add_uri = add_uri_handler;
     class->add_uri_default = add_uri_default_handler;
@@ -536,7 +537,7 @@ clear_default_handler (GnomeSelector *selector)
 }
 
 static gchar *
-get_filename_handler (GnomeSelector *selector)
+get_uri_handler (GnomeSelector *selector)
 {
     g_return_val_if_fail (selector != NULL, FALSE);
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
@@ -545,8 +546,8 @@ get_filename_handler (GnomeSelector *selector)
 }
 
 static void
-set_filename_handler (GnomeSelector *selector, const gchar *filename,
-		      GnomeSelectorAsyncHandle *async_handle)
+set_uri_handler (GnomeSelector *selector, const gchar *filename,
+		 GnomeSelectorAsyncHandle *async_handle)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
@@ -986,7 +987,7 @@ gnome_selector_clear (GnomeSelector *selector, gboolean defaultp)
 }
 
 /**
- * gnome_selector_get_filename
+ * gnome_selector_get_uri
  * @selector: Pointer to GnomeSelector object.
  *
  * Description:
@@ -994,7 +995,7 @@ gnome_selector_clear (GnomeSelector *selector, gboolean defaultp)
  * Returns:
  */
 gchar *
-gnome_selector_get_filename (GnomeSelector *selector)
+gnome_selector_get_uri (GnomeSelector *selector)
 {
     gchar *retval = NULL;
 
@@ -1002,7 +1003,7 @@ gnome_selector_get_filename (GnomeSelector *selector)
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
 
     gtk_signal_emit (GTK_OBJECT (selector),
-		     gnome_selector_signals [GET_FILENAME_SIGNAL],
+		     gnome_selector_signals [GET_URI_SIGNAL],
 		     &retval);
 
     return retval;
@@ -1010,7 +1011,7 @@ gnome_selector_get_filename (GnomeSelector *selector)
 
 
 /**
- * gnome_selector_set_filename
+ * gnome_selector_set_uri
  * @selector: Pointer to GnomeSelector object.
  * @filename: Filename to set.
  *
@@ -1022,11 +1023,11 @@ gnome_selector_get_filename (GnomeSelector *selector)
  * Returns: #TRUE if @filename was ok or #FALSE if not.
  */
 void
-gnome_selector_set_filename (GnomeSelector *selector,
-			     GnomeSelectorAsyncHandle **async_handle_return,
-			     const gchar *filename,
-			     GnomeSelectorAsyncFunc async_func,
-			     gpointer user_data)
+gnome_selector_set_uri (GnomeSelector *selector,
+			GnomeSelectorAsyncHandle **async_handle_return,
+			const gchar *filename,
+			GnomeSelectorAsyncFunc async_func,
+			gpointer user_data)
 {
     GnomeSelectorAsyncHandle *async_handle;
 
@@ -1035,13 +1036,13 @@ gnome_selector_set_filename (GnomeSelector *selector,
     g_return_if_fail (filename != NULL);
 
     async_handle = _gnome_selector_async_handle_get
-	(selector, GNOME_SELECTOR_ASYNC_TYPE_SET_FILENAME,
+	(selector, GNOME_SELECTOR_ASYNC_TYPE_SET_URI,
 	 filename, async_func, user_data);
     if (async_handle_return != NULL)
 	*async_handle_return = async_handle;
 
     gtk_signal_emit (GTK_OBJECT (selector),
-		     gnome_selector_signals [SET_FILENAME_SIGNAL],
+		     gnome_selector_signals [SET_URI_SIGNAL],
 		     filename, async_handle);
 }
 

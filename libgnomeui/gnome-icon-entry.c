@@ -94,8 +94,8 @@ static void   drag_data_received           (GtkWidget           *widget,
                                             guint32              time,
                                             GnomeIconEntry      *ientry);
 
-static gchar    *get_filename_handler      (GnomeSelector       *selector);
-static void      set_filename_handler      (GnomeSelector            *selector,
+static gchar    *get_uri_handler           (GnomeSelector            *selector);
+static void      set_uri_handler           (GnomeSelector            *selector,
                                             const gchar              *filename,
                                             GnomeSelectorAsyncHandle *async_handle);
 
@@ -127,8 +127,8 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
     object_class->destroy = gnome_icon_entry_destroy;
     gobject_class->finalize = gnome_icon_entry_finalize;
 
-    selector_class->get_filename = get_filename_handler;
-    selector_class->set_filename = set_filename_handler;
+    selector_class->get_uri = get_uri_handler;
+    selector_class->set_uri = set_uri_handler;
 }
 
 static void
@@ -164,7 +164,7 @@ gnome_icon_entry_construct (GnomeIconEntry *ientry,
 }
 
 static gchar *
-get_filename_handler (GnomeSelector *selector)
+get_uri_handler (GnomeSelector *selector)
 {
     GnomeIconEntry *ientry;
 
@@ -177,7 +177,7 @@ get_filename_handler (GnomeSelector *selector)
 }
 
 static void
-set_filename_async_done_cb (gpointer data)
+set_uri_async_done_cb (gpointer data)
 {
     GnomeIconEntryAsyncData *async_data = data;
     GnomeIconEntry *ientry;
@@ -201,9 +201,9 @@ set_filename_async_done_cb (gpointer data)
 }
 
 static void
-set_filename_async_cb (GnomeGdkPixbufAsyncHandle *handle,
-		       GnomeVFSResult error, GdkPixbuf *pixbuf,
-		       gpointer callback_data)
+set_uri_async_cb (GnomeGdkPixbufAsyncHandle *handle,
+		  GnomeVFSResult error, GdkPixbuf *pixbuf,
+		  gpointer callback_data)
 {
     GnomeIconEntryAsyncData *async_data = callback_data;
     GnomeIconEntry *ientry;
@@ -286,15 +286,15 @@ set_filename_async_cb (GnomeGdkPixbufAsyncHandle *handle,
      * that add_file_async_done_cb() attempts to free this. */
     async_data->handle = NULL;
 
-    GNOME_CALL_PARENT_HANDLER (GNOME_SELECTOR_CLASS, set_filename,
+    GNOME_CALL_PARENT_HANDLER (GNOME_SELECTOR_CLASS, set_uri,
 			       (GNOME_SELECTOR (ientry),
 				async_data->uri,
 				async_data->async_handle));
 }
 
 static void
-set_filename_done_cb (GnomeGdkPixbufAsyncHandle *handle,
-		      gpointer callback_data)
+set_uri_done_cb (GnomeGdkPixbufAsyncHandle *handle,
+		 gpointer callback_data)
 {
     GnomeIconEntryAsyncData *async_data = callback_data;
 
@@ -307,8 +307,8 @@ set_filename_done_cb (GnomeGdkPixbufAsyncHandle *handle,
 }
 
 static void
-set_filename_handler (GnomeSelector *selector, const gchar *uri,
-		      GnomeSelectorAsyncHandle *async_handle)
+set_uri_handler (GnomeSelector *selector, const gchar *uri,
+		 GnomeSelectorAsyncHandle *async_handle)
 {
     GnomeIconEntry *ientry;
     GnomeIconEntryAsyncData *async_data;
@@ -326,10 +326,10 @@ set_filename_handler (GnomeSelector *selector, const gchar *uri,
     gtk_object_ref (GTK_OBJECT (async_data->ientry));
 
     _gnome_selector_async_handle_add (async_handle, async_data,
-				      set_filename_async_done_cb);
+				      set_uri_async_done_cb);
 
     async_data->handle = gnome_gdk_pixbuf_new_from_uri_async
-	(uri, set_filename_async_cb, set_filename_done_cb, async_data);
+	(uri, set_uri_async_cb, set_uri_done_cb, async_data);
 }
 
 static void
@@ -356,8 +356,7 @@ browse_dialog_ok_cb (GtkButton *button, GnomeIconEntry *ientry)
 
     g_message (G_STRLOC ": `%s'", uri);
 
-    gnome_selector_set_filename (GNOME_SELECTOR (ientry), NULL,
-				 uri, NULL, NULL);
+    gnome_selector_set_uri (GNOME_SELECTOR (ientry), NULL, uri, NULL, NULL);
 
     g_slist_free (selection);
 }
@@ -375,7 +374,7 @@ drag_data_get (GtkWidget          *widget,
     g_return_if_fail (ientry != NULL);
     g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
 
-    uri = gnome_selector_get_filename (GNOME_SELECTOR (ientry));
+    uri = gnome_selector_get_uri (GNOME_SELECTOR (ientry));
     if (!uri) {
 	gtk_drag_finish (context, FALSE, FALSE, time);
 	return;
@@ -428,13 +427,13 @@ drag_data_received (GtkWidget        *widget,
 		continue;
 	    icon = gnome_desktop_item_get_icon_path (item);
 
-	    gnome_selector_set_filename (GNOME_SELECTOR (ientry), NULL,
-					 icon, NULL, NULL);
+	    gnome_selector_set_uri (GNOME_SELECTOR (ientry), NULL,
+				    icon, NULL, NULL);
 	    gnome_desktop_item_unref (item);
 	    break;
 	} else {
-	    gnome_selector_set_filename (GNOME_SELECTOR (ientry), NULL,
-					 li->data, NULL, NULL);
+	    gnome_selector_set_uri (GNOME_SELECTOR (ientry), NULL,
+				    li->data, NULL, NULL);
 	    break;
 	}
     }
@@ -711,10 +710,10 @@ gnome_icon_entry_set_filename (GnomeIconEntry *ientry,
 	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry), FALSE);
 
 	g_warning (G_STRLOC ": this function is deprecated; use "
-		   "gnome_selector_set_filename instead.");
+		   "gnome_selector_set_uri instead.");
 
-	gnome_selector_set_filename (GNOME_SELECTOR (ientry), NULL,
-				     filename, NULL, NULL);
+	gnome_selector_set_uri (GNOME_SELECTOR (ientry), NULL,
+				filename, NULL, NULL);
 
 	return FALSE;
 }
@@ -737,8 +736,8 @@ gnome_icon_entry_get_filename (GnomeIconEntry *ientry)
 	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry),NULL);
 
 	g_warning (G_STRLOC ": this function is deprecated; use "
-		   "gnome_selector_get_filename instead.");
+		   "gnome_selector_get_uri instead.");
 
-	return gnome_selector_get_filename (GNOME_SELECTOR (ientry));
+	return gnome_selector_get_uri (GNOME_SELECTOR (ientry));
 }
 
