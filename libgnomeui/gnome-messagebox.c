@@ -54,7 +54,8 @@ gnome_messagebox_get_type ()
 	sizeof (GnomeMessageBoxClass),
 	(GtkClassInitFunc) gnome_messagebox_class_init,
 	(GtkObjectInitFunc) gnome_messagebox_init,
-	(GtkArgFunc) NULL,
+	(GtkArgSetFunc) NULL,
+	(GtkArgGetFunc) NULL,
       };
 
       messagebox_type = gtk_type_unique (gtk_window_get_type (), &messagebox_info);

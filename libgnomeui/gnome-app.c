@@ -50,7 +50,8 @@ gnome_app_get_type(void)
 			sizeof(GnomeAppClass),
 			(GtkClassInitFunc) gnome_app_class_init,
 			(GtkObjectInitFunc) gnome_app_init,
-			(GtkArgFunc) NULL,
+			(GtkArgSetFunc) NULL,
+			(GtkArgGetFunc) NULL,
 		};
 		gnomeapp_type = gtk_type_unique(gtk_window_get_type(), &gnomeapp_info);
 		parent_class = gtk_type_class(gtk_window_get_type());

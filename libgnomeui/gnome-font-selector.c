@@ -119,7 +119,8 @@ guint gnome_font_selector_get_type(void)
       sizeof(GnomeFontSelectorClass),
       (GtkClassInitFunc) gnome_font_selector_class_init,
       (GtkObjectInitFunc) gnome_font_selector_init,
-      (GtkArgFunc) NULL,
+      (GtkArgSetFunc) NULL,
+      (GtkArgGetFunc) NULL,
     };
     gnomefontsel_type = gtk_type_unique(gtk_dialog_get_type(),
 					&gnomefontsel_info);
