@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-24 11:24+0100\n"
-"PO-Revision-Date: 2004-02-06 01:00+0900\n"
+"POT-Creation-Date: 2004-02-26 22:54+0900\n"
+"PO-Revision-Date: 2004-02-26 22:53+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -142,6 +142,7 @@ msgstr "%s について"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ファイル(_F)"
 
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "ゲーム(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
@@ -389,11 +391,11 @@ msgstr "アプリケーションの設定を変更します"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "情報(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "このアプリケーションの情報を表示します"
 
@@ -420,7 +422,7 @@ msgstr "新規にウインドウを生成します"
 msgid "_Close This Window"
 msgstr "ウインドウを閉じる(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "このウインドウを閉じます"
 
@@ -938,13 +940,15 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:299
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "GtkFileChooser を使う"
 
 #: libgnomeui/gnome-file-entry.c:300
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
+"ファイルの選択で新しいウィジット GtkFileChooser または従来のウィジット "
+"GtkFileSelection を利用するかどうかです。"
 
 #: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
 msgid "Select file"
@@ -1282,7 +1286,7 @@ msgstr "得点"
 #.
 #: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr "%Y年%m月%d日 (%a) %T"
+msgstr "%Y年%B%d日 (%a) %T"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
@@ -1388,19 +1392,17 @@ msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法: gnome_segv2 アプリケーション名 シグナル番号\n"
 
 #: libgnomeui/gnome_segv.c:154
-#, fuzzy
 msgid "_Restart Application"
-msgstr "アプリケーションを終了します"
+msgstr "アプリの再起動(_R)"
 
 #: libgnomeui/gnome_segv.c:166
-#, fuzzy
 msgid "_Inform Developers"
-msgstr "開発者へ通知する"
+msgstr "開発者へ通知する(_I)"
 
 #: libgnomeui/gnome_segv.c:177
-#, fuzzy
 msgid "_Debug"
-msgstr "デバッグ"
+msgstr "デバッグする(_D)"
 
-#~ msgid "Exit the test"
-#~ msgstr "テストの終了"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "テストの終了"
