@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.107.0\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
-"PO-Revision-Date: 2002-05-23 15:55+0200\n"
+"POT-Creation-Date: 2002-07-21 10:55+0200\n"
+"PO-Revision-Date: 2002-07-21 10:56+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -518,6 +518,7 @@ msgstr "Hint for oppføring 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
@@ -575,6 +576,7 @@ msgid "_Game"
 msgstr "_Spill"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjelp"
 
@@ -741,8 +743,8 @@ msgstr "Erstatt en tekststreng"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
-msgstr "E_genskaper..."
+msgid "_Properties"
+msgstr "E_genskaper"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -753,8 +755,8 @@ msgstr "Modifiser filens egenskaper"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
-msgstr "_Brukervalg..."
+msgid "Prefere_nces"
+msgstr "_Brukervalg"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -765,11 +767,11 @@ msgstr "Konfigurer applikasjonen"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om denne applikasjonen"
 
@@ -796,7 +798,7 @@ msgstr "Opprett et nytt vindu"
 msgid "_Close This Window"
 msgstr "L_ukk dette vinduet"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Lukk aktivt vindu"
 
@@ -1322,68 +1324,6 @@ msgstr "%a %b %d %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "_Contents"
-#~ msgstr "_Innhold"
-
-#~ msgid "Exit the test"
-#~ msgstr "Avslutt testprogrammet"
-
-#~ msgid "Exit the program"
-#~ msgstr "Avslutt programmet"
-
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "Detaljer om GConf feil: %s\n"
-
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Gdk avlusingsflagg som skal slås på"
-
-#~ msgid "FLAGS"
-#~ msgstr "FLAGG"
-
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Gdk avlusingsflagg som skal slås av"
-
-#~ msgid "Make X calls synchronous"
-#~ msgstr "Bruk synkrone X-kall"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "Ikke bruk X-utvidelse for delt minne"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Programnavn som brukt av vindusbehandleren"
-
-#~ msgid "NAME"
-#~ msgstr "NAVN"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Programklasse som brukt av vindusbehandleren"
-
-#~ msgid "CLASS"
-#~ msgstr "KLASSE"
-
-#~ msgid "HOST"
-#~ msgstr "VERT"
-
-#~ msgid "PORT"
-#~ msgstr "PORT"
-
-#~ msgid "STYLE"
-#~ msgstr "STIL"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Gtk+ avlusingsflagg som skal slås på"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Gtk+ avlusingsflagg som skal slås av"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "Gjør alle advarsler til fatale"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "Last tilleggsmodul for Gtk+"
-
-#~ msgid "MODULE"
-#~ msgstr "MODUL"
-
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Avslutt testprogrammet"
