@@ -260,7 +260,7 @@ struct _GnomeStockPixmapWidgetClass {
 };
 
 guint gnome_stock_pixmap_widget_get_type(void);
-GtkWidget *gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon);
+GtkWidget *gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon);
 
 
 
@@ -274,33 +274,42 @@ GtkWidget *gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon);
  * the result is the same */
 #if 0
 GnomePixmap           *gnome_stock_pixmap          (GtkWidget *window,
-                                                    char *icon,
-                                                    char *subtype);
+                                                    const char *icon,
+                                                    const char *subtype);
 #endif
 
 /* just fetch a GnomeStockPixmapWidget */
 GtkWidget             *gnome_stock_pixmap_widget   (GtkWidget *window,
-                                                    char *icon);
+                                                    const char *icon);
 
 /* change the icon/look of a GnomeStockPixmapWidget */
 void gnome_stock_pixmap_widget_set_icon(GnomeStockPixmapWidget *widget,
-					char *icon);
+					const char *icon);
 
 /* register a pixmap. returns non-zero, if successfull */
-gint                   gnome_stock_pixmap_register (char *icon, char *subtype,
+gint                   gnome_stock_pixmap_register (const char *icon,
+						    const char *subtype,
                                                     GnomeStockPixmapEntry *entry);
 
 /* change an existing entry. returns non-zero on success */
-gint                   gnome_stock_pixmap_change   (char *icon, char *subtype,
+gint                   gnome_stock_pixmap_change   (const char *icon,
+						    const char *subtype,
                                                     GnomeStockPixmapEntry *entry);
 
 /* check for the existance of an entry. returns the entry if it
    exists, or NULL otherwise */
-GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (char *icon, char *subtype);
+GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (const char *icon,
+						    const char *subtype);
 
 
 
 /*  buttons  */
+
+/* this function returns a button with a pixmap (if ButtonUseIcons is enabled)
+ * and the provided text */
+
+GtkWidget            *gnome_pixmap_button         (GtkWidget *pixmap,
+						   const char *text);
 
 #define GNOME_STOCK_BUTTON_OK     "Button_Ok"
 #define GNOME_STOCK_BUTTON_CANCEL "Button_Cancel"
@@ -311,13 +320,13 @@ GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (char *icon, char *subtype);
 #define GNOME_STOCK_BUTTON_HELP   "Button_Help"
 
 /* returns a default button widget for dialogs */
-GtkWidget             *gnome_stock_button          (char *type);
+GtkWidget             *gnome_stock_button          (const char *type);
 
 /* Returns a button widget.  If the TYPE argument matches a
    GNOME_STOCK_BUTTON_* define, then a stock button is created.
    Otherwise, an ordinary button is created, and TYPE is given as the
    label.  */
-GtkWidget             *gnome_stock_or_ordinary_button (char *type);
+GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 
 
 /*  menus  */
@@ -365,7 +374,8 @@ GtkWidget             *gnome_stock_or_ordinary_button (char *type);
 
 
 /* returns a GtkMenuItem with an stock icon and text */
-GtkWidget             *gnome_stock_menu_item       (char *type, char *text);
+GtkWidget             *gnome_stock_menu_item       (const char *type,
+						    const char *text);
 
 
 /*
@@ -384,13 +394,14 @@ GtkWidget             *gnome_stock_menu_item       (char *type, char *text);
 
 /* this function returns the stock menu accelerators for the menu type in key
  * and mod */
-gboolean	       gnome_stock_menu_accel      (char *type, guchar *key,
+gboolean	       gnome_stock_menu_accel      (const char *type,
+						    guchar *key,
 						    guint8 *mod);
 
 /* apps can call this function at startup to add per app accelerator
  * redefinitions. section should be something like "/filename/section/" with
  * both the leading and trailing `/' */
-void                   gnome_stock_menu_accel_parse(char *section);
+void                   gnome_stock_menu_accel_parse(const char *section);
 
 END_GNOME_DECLS
 

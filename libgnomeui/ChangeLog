@@ -1,3 +1,12 @@
+Tue May 19 21:38:15 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.c (gnome_pixmap_button): New function. Returns a button
+	with a pixmap and label. Added default size to the created button.
+	(gnome_stock_menu_item): Use gnome_config_get_bool.
+	(gnome_pixmap_button): Likewise.
+
+	* gnome-stock.[ch]: added some `const' to `char *'s.
+
 1998-05-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-client.c (gnome_client_class_init): Use GTK_RUN_LAST for

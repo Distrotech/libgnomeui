@@ -34,7 +34,24 @@
 #include "libgnome/gnome-config.h"
 #include "gnome-stock.h"
 #include "gnome-pixmap.h"
+#include "gnome-uidefs.h"
 
+
+/*
+ * If BUTTON_SET_SIZE is enabled, all gnome buttons created here will at least
+ * be the size of GNOME_BUTTON_WIDTH x GNOME_BUTTON_HEIGHT. But since that
+ * results is pretty big buttons (if they're not GTK_CAN_DEFAULT), I leave
+ * this configurable
+ */
+#define BUTTON_SET_SIZE
+
+/*
+ * BUTTON_DEFBRD_WIDTH/HEIGHT is the value that is added to GNOME_BUTTON_WIDTH
+ * and GNOME_BUTTON_HEIGHT to emulate the real visual width and height of
+ * buttons without the GTK_CAN_DEFAULT flag.
+ */
+#define BUTTON_DEFBRD_WIDTH 3
+#define BUTTON_DEFBRD_HEIGHT (-11)
 
 
 
@@ -55,8 +72,10 @@
 #define STOCK_SEP '.'
 #define STOCK_SEP_STR "."
 
-static GnomePixmap *gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype);
-static GnomeStockPixmapEntry *lookup(char *icon, char *subtype, int fallback);
+static GnomePixmap *gnome_stock_pixmap(GtkWidget *window, const char *icon,
+				       const char *subtype);
+static GnomeStockPixmapEntry *lookup(const char *icon, const char *subtype,
+				     int fallback);
 
 /*
  * GnomeStockPixmapWidget
@@ -242,7 +261,7 @@ gnome_stock_pixmap_widget_get_type(void)
 
 
 GtkWidget *
-gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon)
+gnome_stock_pixmap_widget_new(GtkWidget *window, const char *icon)
 {
 	GtkWidget *w;
 	GnomeStockPixmapWidget *p;
@@ -270,7 +289,7 @@ gnome_stock_pixmap_widget_new(GtkWidget *window, char *icon)
 
 void
 gnome_stock_pixmap_widget_set_icon(GnomeStockPixmapWidget *widget,
-				   char *icon)
+				   const char *icon)
 {
 	GnomeStockPixmapEntry *entry;
 
@@ -519,7 +538,7 @@ static int entries_data_num = sizeof(entries_data) / sizeof(entries_data[0]);
 
 
 static char *
-build_hash_key(char *icon, char *subtype)
+build_hash_key(const char *icon, const char *subtype)
 {
 	return g_copy_strings(icon, STOCK_SEP_STR, subtype ? subtype : GNOME_STOCK_PIXMAP_REGULAR, NULL);
 }
@@ -556,7 +575,7 @@ stock_pixmaps(void)
 				    entry);
 	}
 	
-#ifdef DEBUG
+#if defined(DEBUG) && 0
 	{
 		time_t t;
 		int i;
@@ -580,7 +599,7 @@ stock_pixmaps(void)
 
 
 static GnomeStockPixmapEntry *
-lookup(char *icon, char *subtype, int fallback)
+lookup(const char *icon, const char *subtype, int fallback)
 {
 	char *s;
 	GHashTable *hash = stock_pixmaps();
@@ -738,7 +757,7 @@ build_disabled_pixmap(GtkWidget *window, GnomePixmap **inout_pixmap)
 
 
 static GnomePixmap *
-gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype)
+gnome_stock_pixmap(GtkWidget *window, const char *icon, const char *subtype)
 {
 	GnomeStockPixmapEntry *entry;
 	GnomePixmap *pixmap;
@@ -784,7 +803,7 @@ gnome_stock_pixmap(GtkWidget *window, char *icon, char *subtype)
 
 
 GtkWidget *
-gnome_stock_pixmap_widget(GtkWidget *window, char *icon)
+gnome_stock_pixmap_widget(GtkWidget *window, const char *icon)
 {
 	GtkWidget *w;
 
@@ -794,7 +813,7 @@ gnome_stock_pixmap_widget(GtkWidget *window, char *icon)
 
 
 gint
-gnome_stock_pixmap_register(char *icon, char *subtype,
+gnome_stock_pixmap_register(const char *icon, const char *subtype,
 			    GnomeStockPixmapEntry *entry)
 {
 	g_return_val_if_fail(NULL == lookup(icon, subtype, 0), 0);
@@ -807,7 +826,7 @@ gnome_stock_pixmap_register(char *icon, char *subtype,
 
 
 gint
-gnome_stock_pixmap_change(char *icon, char *subtype,
+gnome_stock_pixmap_change(const char *icon, const char *subtype,
 			  GnomeStockPixmapEntry *entry)
 {
 	GHashTable *hash;
@@ -827,7 +846,7 @@ gnome_stock_pixmap_change(char *icon, char *subtype,
 
 
 GnomeStockPixmapEntry *
-gnome_stock_pixmap_checkfor(char *icon, char *subtype)
+gnome_stock_pixmap_checkfor(const char *icon, const char *subtype)
 {
 	return lookup(icon, subtype, 0);
 }
@@ -838,11 +857,13 @@ gnome_stock_pixmap_checkfor(char *icon, char *subtype)
 /*  stock buttons  */
 /*******************/
 
-static GtkWidget *
-stock_button_from_entry (char *type, GnomeStockPixmapEntry *entry)
+GtkWidget *
+gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 {
 	GtkWidget *button, *label, *hbox, *w;
-	GtkWidget *pixmap;
+#ifdef BUTTON_SET_SIZE
+	GtkRequisition req;
+#endif
 
 	button = gtk_button_new();
 	hbox = gtk_hbox_new(FALSE, 0);
@@ -852,26 +873,55 @@ stock_button_from_entry (char *type, GnomeStockPixmapEntry *entry)
 	hbox = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox);
 	gtk_box_pack_start(GTK_BOX(w), hbox, TRUE, FALSE, 7);
-	if (entry->any.label)
-		label = gtk_label_new(dgettext(PACKAGE, entry->any.label));
-	else
-		label = gtk_label_new(dgettext(PACKAGE, type));
+
+	label = gtk_label_new(text);
 	gtk_widget_show(label);
 	gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 7);
 
-	if (gnome_config_get_int("/Gnome/Icons/ButtonsUseIcons=1")) {
-		pixmap = gnome_stock_pixmap_widget(button, type);
-		if (pixmap) {
-			gtk_widget_show(pixmap);
-			gtk_box_pack_start(GTK_BOX(hbox), pixmap,
-					   FALSE, FALSE, 0);
-		}
+	if ((gnome_config_get_bool("/Gnome/Icons/ButtonsUseIcons=true")) &&
+	    (pixmap)) {
+		/* assign the created button as the container widget to the
+		 * GnomeStockPixmap (see comment in stock_button_from_entry)
+		 */
+		if ((GNOME_IS_STOCK_PIXMAP_WIDGET(pixmap)) &&
+		    (pixmap->window == NULL))
+			GNOME_STOCK_PIXMAP_WIDGET(pixmap)->window = button;
+
+		gtk_widget_show(pixmap);
+		gtk_box_pack_start(GTK_BOX(hbox), pixmap,
+				   FALSE, FALSE, 0);
 	}
+
+#ifdef BUTTON_SET_SIZE
+	gtk_widget_size_request(button, &req);
+	if (req.width < GNOME_BUTTON_WIDTH)
+		req.width = GNOME_BUTTON_WIDTH + BUTTON_DEFBRD_WIDTH;
+	if (req.height < GNOME_BUTTON_HEIGHT)
+		req.height = GNOME_BUTTON_HEIGHT + BUTTON_DEFBRD_HEIGHT;
+	gtk_widget_set_usize(GTK_WIDGET(button), req.width, req.height);
+#endif
+
 	return button;
 }
 
+static GtkWidget *
+stock_button_from_entry (const char *type, GnomeStockPixmapEntry *entry)
+{
+	char *text;
+	GtkWidget *pixmap;
+
+	if (entry->any.label)
+		text = dgettext(PACKAGE, entry->any.label);
+	else
+		text = dgettext(PACKAGE, type);
+	/* Don't give the container widget (that is used for color calculation
+	 * etc.) */
+	pixmap = gnome_stock_pixmap_widget(NULL, type);
+	return gnome_pixmap_button(pixmap, text);
+}
+
 GtkWidget *
-gnome_stock_button(char *type)
+gnome_stock_button(const char *type)
 {
 	GnomeStockPixmapEntry *entry;
 
@@ -882,7 +932,7 @@ gnome_stock_button(char *type)
 }
 
 GtkWidget *
-gnome_stock_or_ordinary_button (char *type)
+gnome_stock_or_ordinary_button (const char *type)
 {
 	GnomeStockPixmapEntry *entry;
 
@@ -902,7 +952,7 @@ gnome_stock_or_ordinary_button (char *type)
 static int use_icons = -1;
 
 GtkWidget *
-gnome_stock_menu_item(char *type, char *text)
+gnome_stock_menu_item(const char *type, const char *text)
 {
 	GtkWidget *hbox, *w, *menu_item;
 
@@ -911,7 +961,8 @@ gnome_stock_menu_item(char *type, char *text)
 	g_return_val_if_fail(text != NULL, NULL);
 
 	if (use_icons == -1) {
-		use_icons = gnome_config_get_int("Gnome/Icons/MenusUseIcons=1");
+		use_icons =
+			gnome_config_get_bool("Gnome/Icons/MenusUseIcons=true");
 	}
 	if (use_icons) {
 		hbox = gtk_hbox_new(FALSE, 2);
@@ -1086,11 +1137,11 @@ accel_hash(void) {
 }
 
 gboolean
-gnome_stock_menu_accel(char *type, guchar *key, guint8 *mod)
+gnome_stock_menu_accel(const char *type, guchar *key, guint8 *mod)
 {
 	AccelEntry *entry;
 
-	entry = g_hash_table_lookup(accel_hash(), type);
+	entry = g_hash_table_lookup(accel_hash(), (char *)type);
 	if (!entry) {
 		*key = 0;
 		*mod = 0;
@@ -1103,11 +1154,11 @@ gnome_stock_menu_accel(char *type, guchar *key, guint8 *mod)
 }
 
 void
-gnome_stock_menu_accel_parse(char *section)
+gnome_stock_menu_accel_parse(const char *section)
 {
 	g_return_if_fail(section != NULL);
 	g_hash_table_foreach(accel_hash(), accel_read_rc,
-			     section);
+			     (char *)section);
 }
 
 
