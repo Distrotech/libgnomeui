@@ -742,7 +742,7 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	
 	/* Translate configurable menu items to normal menu items. */
 
-	if (uiinfo->type == GNOME_APP_UI_ITEM_CONFIGURABLE){
+	if (uiinfo->type == GNOME_APP_UI_ITEM_CONFIGURABLE) {
 		int type = uiinfo->accelerator_key;
 		
 	        gnome_app_ui_configure_configurable( uiinfo );
@@ -789,7 +789,7 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 					gtk_pixmap_menu_item_set_pixmap(GTK_PIXMAP_MENU_ITEM(uiinfo->widget),
 									pixmap);
 				}
-			} else 
+			} else
 			        uiinfo->widget = gtk_menu_item_new ();
 		}
 		break;
@@ -1356,11 +1356,9 @@ gnome_app_set_tearoff_menu_titles(GnomeApp *app, GnomeUIInfo *uiinfo,
 		ctmp2 = ctmp;
 		while((ctmp2 = strchr(ctmp2, '_')))
 			g_memmove(ctmp2, ctmp2+1, strlen(ctmp2+1)+1);
-		
-		gtk_object_set_data_full(GTK_OBJECT(uiinfo[i].widget),
-					 "GtkTearoffMenuItem_window_title",
-					 g_strdup(ctmp), g_free);
-		
+
+		gtk_menu_set_title(GTK_MENU(GTK_MENU_ITEM(uiinfo[i].widget)->submenu), ctmp);
+
 		gnome_app_set_tearoff_menu_titles(app, uiinfo[i].moreinfo, ctmp);
 	}
 }
