@@ -499,7 +499,7 @@ gnome_client_connect (GnomeClient *client)
 			   SmcShutdownCancelledProcMask,
 			   &callbacks,
 			   client->client_id, &client_id,
-			   ERROR_STRING_LENGTH, &error_string_ret);
+			   ERROR_STRING_LENGTH, error_string_ret);
       
       if (error_string_ret[0])
 	g_warning ("While connecting to session manager:\n%s.",
