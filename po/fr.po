@@ -6,9 +6,9 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.1.5\n"
-"POT-Creation-Date: 2003-01-23 15:33+0100\n"
-"PO-Revision-Date: 2003-01-04 00:07+0100\n"
+"Project-Id-Version: libgnomeui 2.2.0\n"
+"POT-Creation-Date: 2003-02-17 00:13+0100\n"
+"PO-Revision-Date: 2003-02-17 00:05+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -528,6 +528,7 @@ msgstr "Astuce pour l'élément 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fichier"
 
@@ -585,6 +586,7 @@ msgid "_Game"
 msgstr "_Jeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aide"
 
@@ -775,11 +777,11 @@ msgstr "Configure l'application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "À _propos"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "À propos de cette application"
 
@@ -806,7 +808,7 @@ msgstr "Crée une nouvelle fenêtre"
 msgid "_Close This Window"
 msgstr "_Fermer cette fenêtre"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Ferme la fenêtre courante"
 
@@ -997,7 +999,7 @@ msgid ""
 "filenames."
 msgstr ""
 "Définit si l'entrée du fichier est utilisée pour saisir des noms de "
-"répertoires ou des noms de fichier complets."
+"répertoires ou des noms de fichiers complets."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -1005,7 +1007,7 @@ msgstr "Modal"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
-msgstr "Définit si la fenêtre de sélection de fichier doit être modale."
+msgstr "Définit si la fenêtre de sélection de fichiers doit être modale."
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
@@ -1033,7 +1035,7 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry que l'entrée de fichier utilise pour saisir les noms de fichier. "
+"GnomeEntry que l'entrée de fichier utilise pour saisir les noms de fichiers. "
 "Vous pouvez utiliser cette propriété pour obtenir le GnomeEntry si vous "
 "devez modifier ou interroger un de ses paramètres."
 
@@ -1047,7 +1049,7 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry que l'entrée de fichier utilise pour saisir les noms de fichier. "
+"GtkEntry que l'entrée de fichier utilise pour saisir les noms de fichiers. "
 "Vous pouvez utiliser cette propriété pour obtenir le GtkEntry si vous devez "
 "modifier ou interroger un de ses paramètres."
 
@@ -1077,7 +1079,8 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr ""
+"Portez ce vieux whisky au juge blond qui fume. 0123456789. àâéèêëîïôùûüçæœ."
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1220,7 +1223,7 @@ msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "hbox introuvable, utilisation d'un sélecteur de fichier normal"
+msgstr "hbox introuvable, utilisation d'un sélecteur de fichiers normal"
 
 #: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
@@ -1341,8 +1344,9 @@ msgstr "%a %d %b %Y, %T"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Quitter le test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Quitter le test"
 
 #~ msgid "Find _Again"
 #~ msgstr "Rechercher à _nouveau"
