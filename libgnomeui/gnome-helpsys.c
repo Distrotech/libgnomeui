@@ -5,6 +5,8 @@
  * Add sanity checking to all parameters of API functions
  */
 
+#include <glib.h>
+#include <ctype.h>
 #include <libgnome/gnome-defs.h>
 #include <libgnome/gnome-url.h>
 #include <libgnome/gnome-util.h>
@@ -120,8 +122,6 @@ gnome_help_view_class_init (GnomeHelpViewClass *class)
 static void
 gnome_help_view_init (GnomeHelpView *help_view)
 {
-  GnomeHelpViewClass *class;
-
   help_view->orientation = GTK_ORIENTATION_VERTICAL;
   help_view->style = GNOME_HELP_BROWSER;
   help_view->style_prio = G_PRIORITY_LOW;
@@ -138,18 +138,17 @@ gnome_help_view_init (GnomeHelpView *help_view)
 						NULL,
 						gnome_stock_pixmap_widget(GTK_WIDGET(help_view), GNOME_STOCK_PIXMAP_PREFERENCES),
 						gnome_help_view_select_style, help_view);
-  help_view->btn_contribute = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->toolbar), _("Interact"),
-						      _("Discuss this application with other users"),
-						      NULL,
-						      gnome_stock_pixmap_widget(GTK_WIDGET(help_view), GNOME_STOCK_PIXMAP_MIC),
-						      gnome_help_view_interact, help_view);
 
   /* XXX fixme */
 #if 0
-  class = GNOME_HELP_VIEW_CLASS(GTK_OBJECT(help_view)->klass);
-  gtk_widget_add_events(GTK_WIDGET(help_view), GDK_BUTTON_PRESS_MASK);
-  gtk_signal_connect (GTK_OBJECT(help_view), "button_press_event",
-		      GTK_SIGNAL_FUNC(popup_button_pressed), help_view);
+  {
+    GnomeHelpViewClass *class;
+
+    class = GNOME_HELP_VIEW_CLASS(GTK_OBJECT(help_view)->klass);
+    gtk_widget_add_events(GTK_WIDGET(help_view), GDK_BUTTON_PRESS_MASK);
+    gtk_signal_connect (GTK_OBJECT(help_view), "button_press_event",
+			GTK_SIGNAL_FUNC(popup_button_pressed), help_view);
+  }
 #endif
 
   gtk_box_pack_start(GTK_BOX(help_view), help_view->toolbar, TRUE, TRUE, GNOME_PAD_SMALL);
@@ -158,7 +157,6 @@ gnome_help_view_init (GnomeHelpView *help_view)
   gtk_widget_show(help_view->toolbar);
   gtk_widget_show(help_view->btn_style);
   gtk_widget_show(help_view->btn_help);
-  gtk_widget_show(help_view->btn_contribute);
 
   gnome_help_view_set_style(help_view, help_view->app_style, help_view->app_style_priority);
   gnome_help_view_set_orientation(help_view, GTK_ORIENTATION_HORIZONTAL);
@@ -218,6 +216,19 @@ gnome_help_view_new(GtkWidget *toplevel, GnomeHelpViewStyle app_style,
 				     "app_style", app_style,
 				     "app_style_priority", app_style_priority,
 				     NULL);
+}
+
+GnomeHelpView *
+gnome_help_view_find(GtkWidget *awidget)
+{
+  GtkWidget *tmpw;
+
+  for(tmpw = gtk_widget_get_toplevel(awidget); tmpw && GTK_IS_MENU(tmpw); tmpw = GTK_MENU(tmpw)->toplevel);
+
+  if(tmpw)
+    tmpw = gtk_object_get_data(GTK_OBJECT(tmpw), GNOME_APP_HELP_VIEW_NAME);
+
+  return GNOME_IS_HELP_VIEW(tmpw)?((GnomeHelpView *)tmpw):NULL;
 }
 
 /* size_request & size_allocate are generalizations of the same
@@ -731,33 +742,181 @@ gnome_help_view_find_help_id(GnomeHelpView *help_view, const char *widget_id)
 static char *
 gnome_help_view_get_base_url(void)
 {
+  return NULL;
 }
 
 static void
 gnome_help_view_show_url(GnomeHelpView *help_view, const char *url, HelpURLType type)
 {
-  gnome_url_show(url);
+  char *url_type;
+
+  switch(type)
+    {
+    case URL_SAME_APP:
+    case URL_GENERAL_HELPSYSTEM:
+      url_type = "help";
+      break;
+    case URL_WEB:
+      url_type = NULL;
+      break;
+    }
+
+  help_view->url_ctx = gnome_url_show_full(help_view->url_ctx, url, url_type);
 }
 
 void
-gnome_help_view_display(gpointer ignore, GnomeHelpMenuEntry *ent)
+gnome_help_view_display (GnomeHelpView *help_view, const char *help_path)
 {
-  gchar *file, *url;
-	
-  g_assert(ent != NULL);
-  g_assert(ent->path != NULL);
-  g_assert(ent->name != NULL);
+  char *url;
 
-  file = gnome_help_file_path (ent->name, ent->path);
+  url = gnome_help_path_resolve(help_path, "html");
+
+  if(url)
+    {
+      gnome_help_view_show_url(help_view, url, URL_GENERAL_HELPSYSTEM);
+      g_free(url);
+    }
+}
+
+void
+gnome_help_view_display_callback (GtkWidget *widget, const char *help_path)
+{
+  GnomeHelpView *help_view;
+
+  help_view = gnome_help_view_find(widget);
+
+  gnome_help_view_display(help_view, help_path);
+}
+
+/**
+ * gnome_help_path_resolve:
+ * @path: A help path (of the form appname/chaptername/sectionname
+ * @file_type: The type of the file to be found, normally "html"
+ *
+ * Turns a "help path" into a full URL.
+ */
+char *
+gnome_help_path_resolve(const char *path, const char *file_type)
+{
+  GList *language_list;
+  char fnbuf[PATH_MAX], tmppath[PATH_MAX];
+  char *appname, *filepath, *sectpath;
+  char *res;
+  char *ctmp;
+
+  g_return_val_if_fail(path, NULL);
+  if(!file_type)
+    file_type = "html";
+
+  strcpy(tmppath, path);
+  appname = tmppath;
+
+  filepath = strchr(tmppath, '/');
+
+  if(filepath)
+    {
+      *filepath = '\0';
+      filepath++;
+      sectpath = strchr(filepath, '/');
+      if(sectpath)
+	{
+	  *sectpath = '\0';
+	  sectpath++;
+	}
+    }
+  else
+    {
+      sectpath = NULL;
+      filepath = appname;
+    }
+
+  for(language_list = gnome_i18n_get_language_list (NULL), res = NULL; !res && language_list;
+      language_list = language_list->next)
+    {
+      const char *lang;
+		
+      lang = language_list->data;
+		
+      g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s/%s.%s", appname, lang, filepath, file_type);
+      res = gnome_help_file (fnbuf);
+
+      language_list = language_list->next;
+    }
+
+  if(res)
+    {
+      ctmp = g_strdup_printf("file://%s%s%s", res, sectpath?"#":"", sectpath?sectpath:"");
+      g_free(res);
+      res = ctmp;
+    }
 	
-  if (!file)
-    return;
-	
-  url = g_alloca (strlen (file)+10);
-  strcpy (url,"ghelp:");
-  strcat (url, file);
-  gnome_url_show(url);
-  g_free (file);
+  return res;
+}
+
+/**
+ * gnome_help_app_topics:
+ * @app_id: The application's ID string
+ *
+ * Returns: A GSList of strings. The strings are in pairs, topic description then help path.
+ */
+GSList *
+gnome_help_app_topics(const char *app_id)
+{
+  GList *language_list;
+  GSList *retval;
+  char *topicfn;
+  char fnbuf[PATH_MAX], aline[LINE_MAX];
+  FILE *fh;
+
+  for(language_list = gnome_i18n_get_language_list (NULL), topicfn = NULL; !topicfn && language_list;
+      language_list = language_list->next)
+    {
+      const char *lang;
+		
+      lang = language_list->data;
+		
+      g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s/topic.list", app_id, lang);
+      topicfn = gnome_help_file (fnbuf);
+
+      language_list = language_list->next;
+    }
+
+  if(!topicfn)
+    return NULL;
+
+  fh = fopen(topicfn, "r");
+  g_free(topicfn);
+  if(!fh)
+    return NULL;
+
+  retval = NULL;
+  while(fgets(aline, sizeof(aline), fh))
+    {
+      char *path_part, *name_part, *ctmp;
+
+      g_strstrip(aline);
+
+      if(aline[0] == '\0' || aline[0] == '#')
+	continue;
+
+      for(ctmp = aline; *ctmp && !isspace(ctmp); ctmp++) /**/;
+      if(*ctmp == '\0')
+	continue;
+
+      *ctmp = '\0'; ctmp++;
+      path_part = aline;
+      while(*ctmp && isspace(ctmp)) ctmp++;
+      if(*ctmp == '\0')
+	continue;
+
+      name_part = ctmp;
+
+      g_snprintf(fnbuf, sizeof(fnbuf), "%s/%s", app_id, path_part);
+      retval = g_slist_append(retval, g_strdup(name_part));
+      retval = g_slist_append(retval, g_strdup(fnbuf));
+    }
+
+  return retval;
 }
 
 /**

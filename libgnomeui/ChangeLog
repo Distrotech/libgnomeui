@@ -1,3 +1,10 @@
+1999-11-09  Elliot Lee  <sopwith@redhat.com>
+
+	* gnome-dock-item.[ch]: Add an orientation_changed signal.
+	* gnome-helpsys.[ch]: New implementation.
+	* gnome-app-helper.c: Use helpsys API function for reading the topic list and displaying help.
+	* gnome-app.[ch]: Add gnome_app_set_help_view().
+
 1999-11-04  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-druid.c (gnome_druid_init): patch from boc to give the

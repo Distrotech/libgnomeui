@@ -135,7 +135,8 @@ GnomeDock *gnome_app_get_dock (GnomeApp *app);
 
 GnomeDockItem *gnome_app_get_dock_item_by_name (GnomeApp *app,
 						const gchar *name);
-
+void gnome_app_set_help_view (GnomeApp *app,
+			      GtkWidget *help_view);
 END_GNOME_DECLS
 
 #endif /* GNOME_APP_H */

@@ -41,6 +41,7 @@ enum {
   DOCK_DRAG_END,
   DOCK_DRAG_MOTION,
   DOCK_DETACH,
+  ORIENTATION_CHANGED,
   LAST_SIGNAL
 };
 
@@ -167,6 +168,14 @@ gnome_dock_item_class_init (GnomeDockItemClass *class)
                     GTK_SIGNAL_OFFSET (GnomeDockItemClass, dock_detach),
                     gtk_marshal_NONE__NONE,
                     GTK_TYPE_NONE, 0);
+
+  dock_item_signals[ORIENTATION_CHANGED] =
+    gtk_signal_new ("orientation_changed",
+		    GTK_RUN_LAST,
+		    object_class->type,
+		    GTK_SIGNAL_OFFSET (GnomeDockItemClass, orientation_changed),
+		    gtk_marshal_NONE__ENUM,
+		    GTK_TYPE_NONE, 0, GTK_TYPE_ENUM);
 
   gtk_object_class_add_signals (object_class, dock_item_signals, LAST_SIGNAL);
   
@@ -1069,6 +1078,8 @@ gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
       if (GTK_WIDGET_DRAWABLE (dock_item))
         gtk_widget_queue_clear (GTK_WIDGET (dock_item));
       gtk_widget_queue_resize (GTK_WIDGET (dock_item));
+
+      gtk_signal_emit(GTK_OBJECT(dock_item), dock_item_signals[ORIENTATION_CHANGED], orientation);
     }
 
   return TRUE;

@@ -87,22 +87,18 @@ rootwin_check(const OAFRegistrationLocation *regloc,
 	      int *ret_distance, gpointer user_data)
 {
   GdkAtom name_server_ior_atom;
-  GdkAtom type;
-  char *ior = NULL, *result;
-  gint format;
+  GdkAtom type, fmt;
+  char *ior = NULL;
   gint actual_length;
-  guint32 old_warnings;
 
   if(strcmp(regcat->name, "IDL:OAF/ActivationContext:1.0"))
     return NULL;
-
-  name_server_ior_atom = ;
 
   if(!
      gdk_property_get (GDK_ROOT_PARENT(),
 		       gdk_atom_intern("OAFGNOME_AC_IOR", FALSE),
 		       gdk_atom_intern("STRING", FALSE),
-		       0, 99999, FALSE, &type, &actual_length,
+		       0, 99999, FALSE, &type, &fmt, &actual_length,
 		       (guchar *)&ior))
     return NULL;
 

@@ -2,10 +2,10 @@
 #define GNOME_HELPSYS_H 1
 
 #include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-url.h>
 
 #include <gtk/gtk.h>
 #include <libgnomeui/gnome-dock-item.h>
-#include <libgnome/gnome-help.h>
 
 BEGIN_GNOME_DECLS
 
@@ -31,7 +31,9 @@ struct _GnomeHelpView {
   GnomeHelpViewStylePriority app_style_priority;
 
   GtkWidget *toplevel;
-  GtkWidget *toolbar, *content, *btn_help, *btn_style, *btn_contribute;
+  GtkWidget *toolbar, *content, *btn_help, *btn_style;
+
+  GnomeURLDisplayContext url_ctx;
 };
 
 struct _GnomeHelpViewClass {
@@ -42,11 +44,20 @@ struct _GnomeHelpViewClass {
 GtkType gnome_help_view_get_type(void);
 GtkWidget *gnome_help_view_new(GtkWidget *toplevel, GnomeHelpViewStyle app_style,
 			       GnomeHelpViewStylePriority app_style_priority);
+GnomeHelpView *gnome_help_view_find(GtkWidget *awidget);
 void gnome_help_view_set_style(GnomeHelpView *help_view, GnomeHelpViewStyle style, GnomeHelpViewStylePriority style_priority);
 void gnome_help_view_show_help(GnomeHelpView *help_view, const char *help_path);
 void gnome_help_view_show_help_for(GnomeHelpView *help_view, GtkWidget *widget);
 void gnome_help_view_set_orientation(GnomeHelpView *help_view, GtkOrientation orientation);
-void gnome_help_view_display(gpointer ignore, GnomeHelpMenuEntry *ent);
+
+void gnome_help_view_display (GnomeHelpView *help_view, const char *help_path);
+void gnome_help_view_display_callback (GtkWidget *widget, const char *help_path);
+
+/* Non-widget routines */
+
+/* Turns a help path into a full URL */
+char *gnome_help_path_resolve(const char *path, const char *file_type);
+GSList *gnome_help_app_topics(const char *app_id);
 
 /* Object data on toplevel, name */
 #define GNOME_APP_HELP_VIEW_NAME "HelpView"

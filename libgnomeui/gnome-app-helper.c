@@ -52,6 +52,7 @@ char *alloca ();
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
 #include "libgnome/gnome-help.h"
+#include "libgnomeui/gnome-helpsys.h"
 
 /* Note that this file must include gnome-i18n, and not gnome-i18nP, so that 
  * _() is the same as the one seen by the application.  This is moderately 
@@ -1038,32 +1039,15 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 	return pos;
 }
 
-/* Frees a help menu entry when its corresponding menu item is destroyed */
-static void
-free_help_menu_entry (GtkWidget *widget, gpointer data)
-{
-	GnomeHelpMenuEntry *entry;
-
-	entry = data;
-
-	g_free (entry->name);
-	g_free (entry->path);
-	g_free (entry);
-}
-
 /* Creates the menu entries for help topics.  Returns the updated position 
  * value. */
 static int
 create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 {
-	char buf[1024];
-	char *topic_file;
-	char *s;
-	FILE *file;
-	GnomeHelpMenuEntry *entry;
-	GtkWidget *item;
-	GtkWidget *label;
-	guint keyval;
+	GSList *topics, *cur;
+
+	uiinfo->widget = NULL; /* No relevant widget, as we may have created 
+				  several of them */
 
 	if (!uiinfo->moreinfo) {
 		g_warning ("GnomeUIInfo->moreinfo cannot be NULL for "
@@ -1071,64 +1055,34 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 		return pos;
 	}
 
-	/* Try to open help topics file */
+	topics = gnome_help_app_topics ((const char *)uiinfo->moreinfo);
 
-	topic_file = gnome_help_file_find_file (uiinfo->moreinfo, "topic.dat");
+	for (cur = topics; cur && cur->next; cur = cur->next->next)
+	  {
+	    GtkWidget *item;
+	    GtkWidget *label;
+	    guint keyval;
 
-	if (!topic_file || !(file = fopen (topic_file, "rt"))) {
-		g_warning ("Could not open help topics file %s", 
-				topic_file ? topic_file : "NULL");
+	    item = gtk_menu_item_new ();
+	    label = create_label (cur->data, &keyval);
+	    g_free(cur->data);
 
-		if (topic_file)
-			g_free (topic_file);
+	    gtk_container_add (GTK_CONTAINER (item), label);
+	    setup_uline_accel (menu_shell, NULL, item, keyval);
+	    gtk_widget_lock_accelerators (item);
 
-		return pos;
-	}
-	g_free (topic_file);
-	
-	/* Read in the help topics and create menu items for them */
+	    gtk_signal_connect_full (GTK_OBJECT (item), "activate",
+				     (GtkSignalFunc) gnome_help_view_display_callback, NULL,
+				     cur->next->data, g_free,
+				     FALSE, FALSE);
 
-	while (fgets (buf, sizeof (buf), file)) {
-		/* Format of lines is "help_file_name whitespace* menu_title" */
+	    gtk_menu_shell_insert (menu_shell, item, pos);
+	    pos++;
 
-		for (s = buf; *s && !isspace (*s); s++)
-			;
+	    gtk_widget_show (item);
 
-		*s++ = '\0';
-
-		for (; *s && isspace (*s); s++)
-			;
-
-		if (s[strlen (s) - 1] == '\n')
-			s[strlen (s) - 1] = '\0';
-
-		/* Create help menu entry */
-
-		entry = g_new (GnomeHelpMenuEntry, 1);
-		entry->name = g_strdup (uiinfo->moreinfo);
-		entry->path = g_strdup (buf);
-
-		item = gtk_menu_item_new ();
-		label = create_label (s, &keyval);
-		gtk_container_add (GTK_CONTAINER (item), label);
-		setup_uline_accel (menu_shell, NULL, item, keyval);
-		gtk_widget_lock_accelerators (item);
-		
-		gtk_signal_connect (GTK_OBJECT (item), "activate",
-				    (GtkSignalFunc) gnome_help_display, entry);
-		gtk_signal_connect (GTK_OBJECT (item), "destroy",
-				    (GtkSignalFunc) free_help_menu_entry, 
-				    entry);
-
-		gtk_menu_shell_insert (menu_shell, item, pos);
-		pos++;
-
-		gtk_widget_show (item);
-	}
-
-	fclose (file);
-	uiinfo->widget = NULL; /* No relevant widget, as we may have created 
-				  several of them */
+	  }
+	g_slist_free(topics);
 
 	return pos;
 }

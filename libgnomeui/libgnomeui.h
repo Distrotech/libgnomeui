@@ -44,6 +44,7 @@
 #include "libgnomeui/gnome-file-entry.h"
 #include "libgnomeui/gnome-font-picker.h"
 #include "libgnomeui/gnome-geometry.h"
+#include "libgnomeui/gnome-helpsys.h"
 #include "libgnomeui/gnome-icon-list.h"
 #include "libgnomeui/gnome-icon-item.h"
 #include "libgnomeui/gnome-icon-sel.h"

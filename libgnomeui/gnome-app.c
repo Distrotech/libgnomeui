@@ -26,6 +26,7 @@
 #include "libgnomeui/gnome-uidefs.h"
 #include "libgnomeui/gnome-preferences.h"
 #include "libgnomeui/gnome-dock.h"
+#include "libgnomeui/gnome-helpsys.h"
 
 #include "gnome-app.h"
 
@@ -691,4 +692,43 @@ GnomeDock *
 gnome_app_get_dock (GnomeApp *app)
 {
 	return GNOME_DOCK (app->dock);
+}
+
+static void
+gnome_app_set_help_view_orientation(GnomeHelpView *help_view, GtkOrientation new_orientation, GtkWidget *dock_item)
+{
+	gnome_help_view_set_orientation(help_view, new_orientation);
+}
+
+/**
+ * gnome_app_add_help_view:
+ * @app: A &GnomeApp widget
+ * @help_view: A &GnomeHelpView widget
+ *
+ * Sets the &GnomeHelpView widget for a particular &GnomeApp toplevel.
+ * If 'help_view' is NULL, creates a help view using reasonable default settings.
+ */
+void
+gnome_app_set_help_view (GnomeApp *app, GtkWidget *help_view)
+{
+	GtkWidget *item;
+	gpointer td;
+	g_return_if_fail(GNOME_IS_APP(app));
+
+	td = gtk_object_get_data((GtkObject *)app, GNOME_APP_HELP_VIEW_NAME);
+
+	if(td)
+		return;
+
+	if(help_view == NULL)
+		help_view = gnome_help_view_new(GTK_WIDGET(app), GNOME_HELP_POPUP, G_PRIORITY_LOW);
+
+	gtk_widget_show(help_view);
+
+	item = gnome_dock_item_new (GNOME_APP_HELP_VIEW_NAME, 0);
+	gtk_container_add (GTK_CONTAINER (item), help_view);
+	gnome_app_add_dock_item (app, GNOME_DOCK_ITEM (item),
+				 GNOME_DOCK_BOTTOM, 0, 0, 0);
+	gtk_signal_connect_object_while_alive(GTK_OBJECT(item), "orientation_changed",
+					      gnome_app_set_help_view_orientation, help_view);
 }

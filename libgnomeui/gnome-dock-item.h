@@ -93,6 +93,7 @@ struct _GnomeDockItemClass
   void (* dock_drag_motion) (GnomeDockItem *item, gint x, gint y);
   void (* dock_drag_end) (GnomeDockItem *item);
   void (* dock_detach) (GnomeDockItem *item);
+  void (* orientation_changed) (GnomeDockItem *item, GtkOrientation new_orientation);
 };
 
 /* Public methods.  */

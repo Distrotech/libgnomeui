@@ -18,7 +18,8 @@
 
 #include <gtk/gtkstatusbar.h>
 #include <libgnome/gnome-defs.h>
-#include "gnome-appbar.h"
+#include <libgnomeui/gnome-appbar.h>
+#include <libgnomeui/gnome-app.h>
 
 BEGIN_GNOME_DECLS
 
