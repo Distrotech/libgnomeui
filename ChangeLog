@@ -1,3 +1,15 @@
+2004-01-16  Federico Mena Quintero  <federico@ximian.com>
+
+	Fix #124789:
+
+	* libgnomeui/gnome-icon-item.c (gnome_icon_text_item_configure):
+	Don't store the fontname, as it is ignored elsewhere anyway.
+	(gnome_icon_text_item_destroy): Free the private structure.
+
+	* libgnomeui/gnome-icon-list.c (gil_style_set): Don't pass a
+	fontname parameter to gnome_icon_text_item_configure().
+	(gil_realize): Don't copy the style.
+
 2004-01-14  Anders Carlsson  <andersca@gnome.org>
 
 	* configure.in: Release 2.5.3

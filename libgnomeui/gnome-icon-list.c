@@ -1582,7 +1582,6 @@ gil_realize (GtkWidget *widget)
 {
 	Gil *gil;
 	GnomeIconListPrivate *priv;
-	GtkStyle *style;
 	GdkColor color;
 
 	gil = GIL (widget);
@@ -1597,9 +1596,7 @@ gil_realize (GtkWidget *widget)
 
 	/* Change the style to use the base color as the background */
 
-	style = gtk_style_copy (gtk_widget_get_style (widget));
-    
-	color = style->base[GTK_STATE_NORMAL];
+	color = widget->style->base[GTK_STATE_NORMAL];
 	gtk_widget_modify_bg (widget, GTK_STATE_NORMAL, &color);
 
 	gdk_window_set_background (GTK_LAYOUT (gil)->bin_window,
@@ -1651,7 +1648,7 @@ real_move_cursor (Gil *gil, GtkDirectionType dir, gboolean clear_selection)
 	default:
 		break;
 	}
-	
+
 	if (clear_selection &&
 	    g_array_index (priv->icon_list, Icon *, new_focus_icon)->selected == FALSE) {
 		gnome_icon_list_unselect_all (gil);
@@ -2091,13 +2088,13 @@ gil_focus_in (GtkWidget *widget, GdkEventFocus *event)
 	Gil *gil;
 
 	gil = GIL (widget);
-	
+
 	GTK_WIDGET_SET_FLAGS (widget, GTK_HAS_FOCUS);
 
 	if (gil->_priv->icons > 0 && gil->_priv->focus_icon == -1) {
 		gnome_icon_list_focus_icon (gil, 0);
 	}
-	
+
 	gtk_widget_queue_draw (widget);
 
 	return FALSE;
@@ -2209,22 +2206,19 @@ gil_style_set (GtkWidget *widget, GtkStyle *prev_style)
 
 	if (priv->icons) {
 		char *file_name;
-		char *font_name;
 
 		style = gtk_widget_get_style (GTK_WIDGET(widget));
-		font_name = pango_font_description_to_string (style->font_desc);
-		
+
 		for (item_count=0; item_count < priv->icons; item_count++) {
 			item = gnome_icon_list_get_icon_text_item (gil, item_count);
 			file_name = g_strdup (item->text);
-			gnome_icon_text_item_configure (item, 0, 0, 
-											priv->icon_width, font_name,
-											file_name, priv->is_editable, 
+			gnome_icon_text_item_configure (item, 0, 0,
+											priv->icon_width, NULL,
+											file_name, priv->is_editable,
 											priv->static_text);
 
 			g_free (file_name);
 		}
-		g_free (font_name);
 
 	}
 

@@ -126,7 +126,7 @@ send_focus_event (GnomeIconTextItem *iti, gboolean in)
 	fake_event.focus_change.window = widget->window;
 	fake_event.focus_change.in = in;
 	gtk_widget_event (widget, &fake_event);
-	
+
 	/* FIXME: this is failing */
 #if 0
 	g_return_if_fail (GTK_WIDGET_HAS_FOCUS (widget) == in);
@@ -377,7 +377,7 @@ realize_cursor_gc (GnomeIconTextItem *iti)
 	if (cursor_color) {
 		gdk_gc_set_rgb_fg_color (iti->_priv->cursor_gc, cursor_color);
 	} else {
-		gdk_gc_set_rgb_fg_color (iti->_priv->cursor_gc, 
+		gdk_gc_set_rgb_fg_color (iti->_priv->cursor_gc,
 					 &widget->style->black);
 	}
 }
@@ -529,7 +529,7 @@ iti_draw_cursor (GnomeIconTextItem *iti, GdkDrawable *drawable,
 	int cursor_offset;
 	PangoRectangle pos;
 	GtkEntry *entry;
-	
+
 	g_return_if_fail (iti->_priv->cursor_gc != NULL);
 
 	entry = GTK_ENTRY (iti->_priv->entry);
@@ -584,7 +584,7 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 		state = GTK_STATE_SELECTED;
 	else if (iti->selected)
 		state = GTK_STATE_ACTIVE;
-	else 
+	else
 		state = GTK_STATE_NORMAL;
 
 	if (iti->selected && !iti->editing)
@@ -640,7 +640,7 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 			range[0] = g_utf8_offset_to_pointer (GTK_ENTRY (priv->entry)->text, range[0]) - GTK_ENTRY (priv->entry)->text;
 			range[1] = g_utf8_offset_to_pointer (GTK_ENTRY (priv->entry)->text, range[1]) - GTK_ENTRY (priv->entry)->text;
-			
+
 			state = GTK_WIDGET_HAS_FOCUS (widget) ? GTK_STATE_SELECTED : GTK_STATE_ACTIVE;
 			selection_color = &widget->style->base[state];
 			text_color = &widget->style->text[state];
@@ -894,19 +894,24 @@ gnome_icon_text_item_destroy (GtkObject *object)
 		iti->text = NULL;
 	}
 
-	if (priv->layout) {
-		g_object_unref (priv->layout);
-		priv->layout = NULL;
-	}
+	if (priv) {
+		if (priv->layout) {
+			g_object_unref (priv->layout);
+			priv->layout = NULL;
+		}
 
-	if (priv->entry_top) {
-		gtk_widget_destroy (priv->entry_top);
-		priv->entry_top = NULL;
-	}
+		if (priv->entry_top) {
+			gtk_widget_destroy (priv->entry_top);
+			priv->entry_top = NULL;
+		}
 
-	if (priv->cursor_gc) {
-		g_object_unref (priv->cursor_gc);
-		priv->cursor_gc = NULL;
+		if (priv->cursor_gc) {
+			g_object_unref (priv->cursor_gc);
+			priv->cursor_gc = NULL;
+		}
+
+		g_free (priv);
+		iti->_priv = NULL;
 	}
 
 	GNOME_CALL_PARENT (GTK_OBJECT_CLASS, destroy, (object));
@@ -1008,7 +1013,7 @@ gnome_icon_text_item_instance_init (GnomeIconTextItem *item)
  * @x: X position in which to place the item.
  * @y: Y position in which to place the item.
  * @width: Maximum width allowed for this item, to be used for word wrapping.
- * @fontname: Name of the fontset that should be used to display the text.
+ * @fontname: Ignored.
  * @text: Text that is going to be displayed.
  * @is_editable: Deprecated.
  * @is_static: Whether @text points to a static string or not.
@@ -1062,18 +1067,13 @@ gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,
 	else
 		iti->text = g_strdup (text);
 
-	if (iti->fontname)
-		g_free (iti->fontname);
-
-	iti->fontname = fontname ? g_strdup (fontname) : NULL;
-
 	/* Create our new PangoLayout */
 	if (priv->layout != NULL)
 		g_object_unref (priv->layout);
 	priv->layout = gtk_widget_create_pango_layout (GTK_WIDGET (GNOME_CANVAS_ITEM (iti)->canvas), iti->text);
 
 	pango_layout_set_font_description (priv->layout, GTK_WIDGET (GNOME_CANVAS_ITEM (iti)->canvas)->style->font_desc);
-	
+
 	pango_layout_set_alignment (priv->layout, PANGO_ALIGN_CENTER);
 	update_pango_layout (iti);
 
