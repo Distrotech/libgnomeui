@@ -24,29 +24,29 @@ static void gnome_rc_parse(gchar *command);
    key number is used to look up the argument name we supply to Gtk.  */
 static struct argp_option our_gtk_options[] =
 {
-  { "gdk-debug", -1, NULL, OPTION_HIDDEN,
-    NULL, -2 },
-  { "gdk-no-debug", -2, NULL, OPTION_HIDDEN,
-    NULL, 0 },
-  { "display", -3, N_("DISPLAY"), 0,
-    N_("X display to use"), 0 },
-  { "sync", -4, NULL, OPTION_HIDDEN,
-    NULL, 0 },
-  { "no-xshm", -5, NULL, 0,
-    N_("Don't use X shared memory extension"), 0 },
-  { "name", -6, N_("NAME"), 0,
-    N_("FIXME"), 0 },
-  { "class", -7, N_("CLASS"), 0,
-    N_("FIXME"), 0 },
-  { "gxid_host", -8, N_("HOST"), 0,
-    N_("FIXME"), 0 },
-  { "gxid_port", -9, N_("PORT"), 0,
-    N_("FIXME"), 0 },
-  { "xim-preedit", -10, N_("STYLE"), 0,
-    N_("FIXME"), 0 },
-  { "xim-status", -11, N_("STYLE"), 0,
-    N_("FIXME"), 0 },
-  { NULL, 0, NULL, 0, NULL, 0 }
+	{ "gdk-debug", -1, NULL, OPTION_HIDDEN,
+	  NULL, -2 },
+	{ "gdk-no-debug", -2, NULL, OPTION_HIDDEN,
+	  NULL, 0 },
+	{ "display", -3, N_("DISPLAY"), 0,
+	  N_("X display to use"), 0 },
+	{ "sync", -4, NULL, OPTION_HIDDEN,
+	  NULL, 0 },
+	{ "no-xshm", -5, NULL, 0,
+	  N_("Don't use X shared memory extension"), 0 },
+	{ "name", -6, N_("NAME"), 0,
+	  N_("FIXME"), 0 },
+	{ "class", -7, N_("CLASS"), 0,
+	  N_("FIXME"), 0 },
+	{ "gxid_host", -8, N_("HOST"), 0,
+	  N_("FIXME"), 0 },
+	{ "gxid_port", -9, N_("PORT"), 0,
+	  N_("FIXME"), 0 },
+	{ "xim-preedit", -10, N_("STYLE"), 0,
+	  N_("FIXME"), 0 },
+	{ "xim-status", -11, N_("STYLE"), 0,
+	  N_("FIXME"), 0 },
+	{ NULL, 0, NULL, 0, NULL, 0 }
 };
 
 /* Index of next free slot in the argument vector we construct for
@@ -60,61 +60,61 @@ static char **our_argv;
 static error_t
 our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 {
-  if (key < 0)
-    {
-      /* This is some argument we defined.  We handle it by pushing
-	 the flag, and possibly the argument, onto our saved argument
-	 vector.  Later this is passed to gtk_init.  */
-      our_argv[our_argc++] = g_strconcat ("--",
-					  our_gtk_options[- key - 1].name,
-					  NULL);
-      if (arg)
-	our_argv[our_argc++] = strdup (arg);
-    }
-  else if (key == ARGP_KEY_INIT)
-    {
-      our_argv = (char **) malloc ((state->argc + 1) * sizeof (char *));
-      our_argc = 0;
-      our_argv[our_argc++] = strdup (state->argv[0]);
-    }
-  else if (key == ARGP_KEY_SUCCESS)
-    {
-      int i, copy_ac = our_argc;
-      char **copy = (char **) malloc (our_argc * sizeof (char *));
+	if (key < 0)
+	{
+		/* This is some argument we defined.  We handle it by pushing
+		   the flag, and possibly the argument, onto our saved argument
+		   vector.  Later this is passed to gtk_init.  */
+		our_argv[our_argc++] = g_strconcat ("--",
+						    our_gtk_options[- key - 1].name,
+						    NULL);
+		if (arg)
+			our_argv[our_argc++] = strdup (arg);
+	}
+	else if (key == ARGP_KEY_INIT)
+	{
+		our_argv = (char **) malloc ((state->argc + 1) * sizeof (char *));
+		our_argc = 0;
+		our_argv[our_argc++] = strdup (state->argv[0]);
+	}
+	else if (key == ARGP_KEY_SUCCESS)
+	{
+		int i, copy_ac = our_argc;
+		char **copy = (char **) malloc (our_argc * sizeof (char *));
 
-      memcpy (copy, our_argv, our_argc * sizeof (char *));
-      our_argv[our_argc] = NULL;
+		memcpy (copy, our_argv, our_argc * sizeof (char *));
+		our_argv[our_argc] = NULL;
 
-      gtk_init (&our_argc, &our_argv);
-      gdk_imlib_init ();
-      gnome_rc_parse (program_invocation_name);
+		gtk_init (&our_argc, &our_argv);
+		gdk_imlib_init ();
+		gnome_rc_parse (program_invocation_name);
 
-      for (i = 0; i < copy_ac; ++i)
-	free (copy[i]);
-      free (copy);
-      free (our_argv);
-    }
-  else
-    return ARGP_ERR_UNKNOWN;
+		for (i = 0; i < copy_ac; ++i)
+			free (copy[i]);
+		free (copy);
+		free (our_argv);
+	}
+	else
+		return ARGP_ERR_UNKNOWN;
 
-  return 0;
+	return 0;
 }
 
 static struct argp our_gtk_parser =
 {
-  our_gtk_options,		/* Options.  */
-  our_gtk_parse_func,		/* The parser function.  */
-  NULL,				/* Description of other args.  */
-  NULL,				/* Extra text for long help.  */
-  NULL,				/* Child arguments.  */
-  NULL,				/* Help filter.  */
-  PACKAGE			/* Translation domain.  */
+	our_gtk_options,		/* Options.  */
+	our_gtk_parse_func,		/* The parser function.  */
+	NULL,				/* Description of other args.  */
+	NULL,				/* Extra text for long help.  */
+	NULL,				/* Child arguments.  */
+	NULL,				/* Help filter.  */
+	PACKAGE			/* Translation domain.  */
 };
 
 void
 gnomeui_register_arguments (void)
 {
-  gnome_parse_register_arguments (&our_gtk_parser);
+	gnome_parse_register_arguments (&our_gtk_parser);
 }
 
 
@@ -124,10 +124,10 @@ gnomeui_register_arguments (void)
 static void
 default_version_func (FILE *stream, struct argp_state *state)
 {
-  fprintf (stream, "Gnome %s %s\n", gnome_app_id,
-	   argp_program_version ? argp_program_version : "");
-  /* FIXME: define a way to set copyright date so we can print it
-     here?  */
+	fprintf (stream, "Gnome %s %s\n", gnome_app_id,
+		 argp_program_version ? argp_program_version : "");
+	/* FIXME: define a way to set copyright date so we can print it
+	   here?  */
 }
 
 error_t
@@ -141,6 +141,7 @@ gnome_init (char *app_id, struct argp *app_args,
 	gnomelib_register_arguments ();
 	gnomeui_register_arguments ();
 
+	program_invocation_name = app_id;
 	gnomelib_init (app_id);
 
 	if (! argp_program_version_hook)
