@@ -12,6 +12,7 @@ winhints_demo
 stock_demo
 ted_demo
 animator_demo
+dock_demo
 gnome.defs
 gnometypebuiltins.h
 gnometypebuiltins_evals.c
