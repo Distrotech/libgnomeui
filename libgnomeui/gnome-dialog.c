@@ -351,33 +351,6 @@ void       gnome_dialog_set_parent     (GnomeDialog * dialog,
   g_return_if_fail(parent != GTK_WINDOW(dialog));
 
   gtk_window_set_transient_for (GTK_WINDOW(dialog), parent);
-
-  /* FIXME!!!!!!!! */
-  /*if ( gnome_preferences_get_dialog_centered() ) { */
-  if (1) {
-
-    /* User wants us to center over parent */
-
-    gint x, y, w, h, dialog_x, dialog_y;
-
-    if ( ! GTK_WIDGET_VISIBLE(parent)) return; /* Can't get its
-						  size/pos */
-
-    /* Throw out other positioning */
-    gtk_window_set_position(GTK_WINDOW(dialog),GTK_WIN_POS_NONE);
-
-    gdk_window_get_origin (GTK_WIDGET(parent)->window, &x, &y);
-    gdk_drawable_get_size   (GTK_WIDGET(parent)->window, &w, &h);
-
-    /* The problem here is we don't know how big the dialog is.
-       So "centered" isn't really true. We'll go with
-       "kind of more or less on top" */
-
-    dialog_x = x + w/4;
-    dialog_y = y + h/4;
-
-    gtk_window_move (GTK_WINDOW (dialog), dialog_x, dialog_y);
-  }
 }
 
 
