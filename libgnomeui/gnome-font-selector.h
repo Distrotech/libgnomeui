@@ -1,4 +1,5 @@
-/* GnomeFontSel widget, by Elliot Lee. Largely derived from: */
+/* GnomeFontSelector widget, by Elliot Lee.
+   Derived from code in: */
 /* The GIMP -- an image manipulation program
  * Copyright (C) 1995 Spencer Kimball and Peter Mattis
  *
@@ -16,6 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
 #ifndef __GNOME_FONT_SELECTOR_H__
 #define __GNOME_FONT_SELECTOR_H__
 
@@ -63,6 +65,8 @@ struct _GnomeFontSelectorClass
 struct _GnomeFontSelector
 {
   GtkDialog parent_object;
+
+  GtkWidget *ok_button, *cancel_button;
   GtkWidget *main_vbox;
   GtkWidget *font_list;
   GtkWidget *size_menu;
@@ -86,11 +90,16 @@ struct _GnomeFontSelector
   int slant;
   int set_width;
   int spacing;
-  gpointer gdisp_ptr;
 };
 
 guint gnome_font_selector_get_type(void);
+GtkWidget *gnome_font_selector_new(void);
+/* You should free this retval up after you're done with it */
+gchar *gnome_font_selector_get_selected(GnomeFontSelector *text_tool);
+/* Basically runs a modal-dialog version of this, and returns
+   the string that id's the selected font. */
+gchar *gnome_font_select(void);
 
 END_GNOME_DECLS
 
-#endif /* __TEXT_TOOL_H__ */
+#endif /* __GNOME_FONT_SELECTOR_H__ */
