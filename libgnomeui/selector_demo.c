@@ -162,8 +162,8 @@ main (int argc, char **argv)
 {
     GtkWidget *app;
     GtkWidget *vbox;
-    GtkWidget *frame1, *frame2;
-    GtkWidget *fselector;
+    GtkWidget *frame1, *frame2, *frame3;
+    GtkWidget *fselector, *entry;
 
     gnome_program_init ("selector_demo", "1.0", argc, argv,
 			GNOMEUI_INIT, NULL);
@@ -174,7 +174,7 @@ main (int argc, char **argv)
 
     vbox = gtk_vbox_new (FALSE, GNOME_PAD);
 
-    frame1 = gtk_frame_new ("Test 1");
+    frame1 = gtk_frame_new ("GnomeFileSelector");
 
     gtk_box_pack_start (GTK_BOX (vbox), frame1, FALSE, FALSE,
 			GNOME_PAD);
@@ -183,7 +183,16 @@ main (int argc, char **argv)
 
     gtk_container_add (GTK_CONTAINER (frame1), fselector);
 
-    frame2 = gtk_frame_new ("Test 2");
+    frame3 = gtk_frame_new ("GnomeEntry");
+
+    gtk_box_pack_start (GTK_BOX (vbox), frame3, FALSE, FALSE,
+			GNOME_PAD);
+
+    entry = gnome_entry_new ("test3");
+
+    gtk_container_add (GTK_CONTAINER (frame3), entry);
+
+    frame2 = gtk_frame_new ("GnomeIconSelector");
 
     gtk_box_pack_start (GTK_BOX (vbox), frame2, TRUE, TRUE,
 			GNOME_PAD);
