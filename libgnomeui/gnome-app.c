@@ -824,10 +824,12 @@ gnome_app_get_dock (GnomeApp *app)
 static void
 gnome_app_set_help_view_orientation(GtkWidget *dock_item, GtkOrientation new_orientation, GnomeHelpView *help_view)
 {
+#ifdef FIXME
 	/* 2000-09-01: Something wrong with new_orientation:
 	   It is always 0. IH */
 	gnome_help_view_set_orientation(help_view, 
 					GNOME_DOCK_ITEM (dock_item)->orientation);
+#endif
 }
 
 /**
@@ -850,10 +852,12 @@ gnome_app_set_help_view (GnomeApp *app, GtkWidget *help_view)
 	if(td)
 		return;
 
+#ifdef FIXME
 	if(help_view == NULL)
 		help_view = gnome_help_view_new(GTK_WIDGET(app),
 						GNOME_HELP_POPUP,
 						G_PRIORITY_LOW);
+#endif
 
 	gtk_widget_show(help_view);
 

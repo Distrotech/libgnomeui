@@ -68,16 +68,12 @@ libgnomeui_2_la_SOURCES = \
 	gnome-icon-selector.c		\
 	gnome-file-selector.c		\
         gnome-font-picker.c		\
-	gnome-helpsys.c			\
 	gnome-href.c			\
 	gnome-ice.c			\
 	gnome-icon-entry.c		\
 	gnome-init.c			\
 	gnome-less.c			\
 	gnome-pixmap.c			\
-	gnome-popup-menu.c		\
-	gnome-popup-help.c		\
-	gnome-pouchP.h			\
         gnome-winhints.c		\
         gnome-paper-selector.c		\
 	gnome-unit-spinner.c		\
@@ -88,7 +84,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-icon-item.c		\
 	gnome-icon-text.c		\
 	gnome-vfs-util.c		\
-	gnome-textfu.c			\
 	gnome-window.c			\
 	gnomemarshal-main.c		\
 	wap-textfu.c			\

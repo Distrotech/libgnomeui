@@ -1,10 +1,19 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	Temporarily removed gnome-helpsys, gnome-popup-menu,
+	gnome-popup-help and gnome-textfu from the build.
+
+	* Makefile.am (libgnomeui_2_la_SOURCES): Removed
+	gnome-helpsys.c, gnome-popup-menu.c, gnome-popup-help.c,
+	gnome-textfu.c, gnome-pouchP.h.
+
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
 	* gnome-ditem.c: Use BonoboWindow, not GnomeApp.
 
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
-	Temporarily remove GnomeMDI from the build so that we can
+	Temporarily removed GnomeMDI from the build so that we can
 	get rid of gnome-app.[ch] and gnome-app-helper.[ch].
 
 	As a weekend hack project, someone needs to make GnomeMDI
