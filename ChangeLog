@@ -1,3 +1,7 @@
+2003-10-06  Christian Rose  <menthos@menthos.com>
+
+	* configure.in: Added "mr" to ALL_LINGUAS.
+
 2003-09-25  Balamurali Viswanathan <balamurali.viswanathan@wipro.com>
 
 	* libgnomeui/gnome-file-entry.c (browse_dialog_ok): Emit changed signal
