@@ -793,7 +793,11 @@ static gint app_close_top (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 		else
 			gnome_mdi_remove_view(mdi, app->contents, FALSE);
 	}
-	
+	else {
+		mdi->windows = g_list_remove(mdi->windows, app);
+		gtk_widget_destroy(GTK_WIDGET(app));
+	}
+
 	return FALSE;
 }
 
@@ -819,6 +823,12 @@ static gint app_close_book (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
 	else {
 		/* first check if all the children in this notebook can be removed */
 		page_node = GTK_NOTEBOOK(app->contents)->children;
+		if(!page_node) {
+			mdi->windows = g_list_remove(mdi->windows, app);
+			gtk_widget_destroy(GTK_WIDGET(app));
+			return FALSE;
+		}
+
 		while(page_node) {
 			view = ((GtkNotebookPage *)page_node->data)->child;
 			child = gnome_mdi_get_child_from_view(view);
