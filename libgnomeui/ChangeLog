@@ -1,3 +1,9 @@
+1999-02-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-init.c (gnome_add_gtk_arg_callback): Add a hack to allow
+	using --gtk-debug-objects (this is required as we create GTK
+	objects before gtk_init is called).
+
 Tue Feb 23 00:31:53 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-pixmap.c: fix for the new requisition stuff so that

@@ -104,6 +104,10 @@ gnome_add_gtk_arg_callback(poptContext con,
 		break;
 		
 	case POPT_CALLBACK_REASON_OPTION:
+		if (strcmp (opt->longName, "gtk-debug-objects") == 0){
+			gtk_debug_flags |= GTK_DEBUG_OBJECTS;
+			break;
+		}
 		newstr = g_strconcat("--", opt->longName, NULL);
 		g_ptr_array_add(gtk_args, newstr);
 		gnome_client_add_static_arg(client, newstr, NULL);
@@ -141,6 +145,8 @@ static const struct poptOption gtk_options [] = {
         { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
 	{ NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
 	  &gnome_add_gtk_arg_callback, 0, NULL},
+	{ "gtk-debug-objects", '\0', POPT_ARG_NONE, NULL, 0,
+	  N_("Enable object debugging"),NULL},
 	{ "gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,
 	  N_("Gdk debugging flags to set"), N_("FLAGS")},
 	{ "gdk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
