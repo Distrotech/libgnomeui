@@ -428,9 +428,9 @@ gnome_app_set_contents (GnomeApp *app, GtkWidget *contents)
 
 	if (new_contents == contents && new_contents != app->contents) {
 		gtk_widget_show (new_contents);
-		gtk_signal_connect (GTK_OBJECT (new_contents), "parent_set",
-				    GTK_SIGNAL_FUNC (contents_parent_set),
-				    app);
+		g_signal_connect (G_OBJECT (new_contents), "parent_set",
+				  G_CALLBACK (contents_parent_set),
+				  app);
 
 		app->contents = new_contents;
 	}

@@ -148,7 +148,7 @@ entry_delete_text_cb(GtkWidget * entry, gint start,
   if (start < ab->_priv->editable_start) {
     /* Block the signal, since it's trying to delete text
        that shouldn't be deleted. */
-    gtk_signal_emit_stop_by_name(GTK_OBJECT(entry), "delete_text");
+    g_signal_stop_emission_by_name(entry, "delete_text");
     gdk_beep();
   }
 }
@@ -197,7 +197,7 @@ entry_key_press_cb(GtkWidget * entry, GdkEventKey * e, GnomeAppBar * ab)
 static void
 entry_activate_cb(GtkWidget * entry, GnomeAppBar * ab)
 {
-  gtk_signal_emit(GTK_OBJECT(ab), appbar_signals[USER_RESPONSE]);
+  g_signal_emit(ab, appbar_signals[USER_RESPONSE], 0);
 }
 
 static void
@@ -354,20 +354,20 @@ gnome_appbar_refresh           (GnomeAppBar * appbar)
   
   if (appbar->_priv->prompt) {
     g_return_if_fail(appbar->_priv->interactive); /* Just a consistency check */
-    gtk_entry_set_editable(GTK_ENTRY(appbar->_priv->status), TRUE);
+    gtk_editable_set_editable(GTK_EDITABLE(appbar->_priv->status), TRUE);
     /* Allow insert_text to work, so we can set the prompt. */
     appbar->_priv->editable_start = 0;
     gtk_entry_set_text(GTK_ENTRY(appbar->_priv->status), appbar->_priv->prompt);
     /* This has to be after setting the text. */
     appbar->_priv->editable_start = strlen(appbar->_priv->prompt);   
-    gtk_entry_set_position(GTK_ENTRY(appbar->_priv->status), 
-			   appbar->_priv->editable_start);
+    gtk_editable_set_position(GTK_EDITABLE(appbar->_priv->status), 
+			      appbar->_priv->editable_start);
     gtk_widget_grab_focus(appbar->_priv->status);
   }
   else {
     if (appbar->_priv->interactive) {
       appbar->_priv->editable_start = 0;
-      gtk_entry_set_editable(GTK_ENTRY(appbar->_priv->status), FALSE);
+      gtk_editable_set_editable(GTK_EDITABLE(appbar->_priv->status), FALSE);
       gtk_grab_remove(appbar->_priv->status); /* In case */
     }
 
@@ -511,7 +511,7 @@ gnome_appbar_set_progress_percentage(GnomeAppBar *appbar,
   g_return_if_fail (appbar->_priv->progress != NULL);
   g_return_if_fail (GNOME_IS_APPBAR(appbar));
 
-  gtk_progress_bar_update(GTK_PROGRESS_BAR(appbar->_priv->progress), percentage);
+  gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(appbar->_priv->progress), percentage);
 }
 
 

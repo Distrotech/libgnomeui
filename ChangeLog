@@ -1,5 +1,31 @@
 2002-02-11  Federico Mena Quintero  <federico@ximian.com>
 
+	* libgnomeui/gnome-appbar.c (entry_insert_text_cb): Use
+	g_signal_stop_emission_by_name().
+	(entry_activate_cb): Use g_signal_emit().
+	(gnome_appbar_refresh): Use gtk_editable_set_editable().
+	(gnome_appbar_refresh): Use gtk_editable_set_position().
+	(gnome_appbar_set_progress_percentage): Use
+	gtk_progress_bar_set_fraction().
+
+	* libgnomeui/gnome-app-util.c (gnome_app_flash): Use
+	g_signal_connect().
+	(reply_clear_prompt_cb): Use
+	g_signal_handlers_disconnect_by_func().
+	(gnome_app_set_progress): Use gtk_progress_bar_set_fraction().
+	(gnome_app_progress_done): Use g_signal_handler_disconnect().
+
+	* libgnomeui/gnome-app-helper.c
+	(install_menuitem_hint_to_statusbar): Use g_signal_connect() and
+	g_object_set_data().
+	(create_help_entries): Use g_object_set_data_full().
+	(do_ui_signal_connect): Use g_signal_connect_full().
+
+	* libgnomeui/gnome-app.c (gnome_app_set_contents): use
+	g_signal_connect().
+
+2002-02-11  Federico Mena Quintero  <federico@ximian.com>
+
 	* libgnomeui/gnome-app-util.c (ack_clear_prompt_cb): Use
 	g_signal_handlers_disconnect_by_func().
 	(gnome_app_message_bar): Use g_signal_connect().

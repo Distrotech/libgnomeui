@@ -569,19 +569,19 @@ install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
 
   if (uiinfo->hint)
     {
-      gtk_object_set_data (GTK_OBJECT(uiinfo->widget),
-                           apphelper_statusbar_hint,
-                           (gpointer)L_(uiinfo->hint));
+      g_object_set_data (uiinfo->widget,
+			 apphelper_statusbar_hint,
+			 L_(uiinfo->hint));
 
-      gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
-                          "select",
-                          GTK_SIGNAL_FUNC(put_hint_in_statusbar),
-                          bar);
+      g_signal_connect (G_OBJECT (uiinfo->widget),
+			"select",
+			G_CALLBACK(put_hint_in_statusbar),
+			bar);
       
-      gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
-                          "deselect",
-                          GTK_SIGNAL_FUNC(remove_hint_from_statusbar),
-                          bar);
+      g_signal_connect (G_OBJECT (uiinfo->widget),
+			"deselect",
+			G_CALLBACK(remove_hint_from_statusbar),
+			bar);
     }
 }        
 
@@ -1245,9 +1245,9 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 		gtk_container_add (GTK_CONTAINER (item), label);
 /*		gtk_widget_lock_accelerators (item); */
 
-		gtk_object_set_data_full (GTK_OBJECT (item), "docname",
-					  g_strdup (uiinfo->moreinfo),
-					  g_free);
+		g_object_set_data_full (G_OBJECT (item), "docname",
+					g_strdup (uiinfo->moreinfo),
+					g_free);
 
 		g_signal_connect_closure_by_id (item,
 						g_signal_lookup ("activate", G_OBJECT_TYPE (item)),
@@ -1311,13 +1311,14 @@ do_ui_signal_connect (GnomeUIInfo        *uiinfo,
 		saved_data->destroy_func = uibdata->destroy_func;
 		saved_data->user_data = uibdata->data ? uibdata->data : uiinfo->user_data;
 
-		gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), 
-					 signal_name,
-					 GTK_SIGNAL_FUNC (ui_relay_callback),
-					 NULL,
-					 saved_data,
-					 (GtkDestroyNotify) ui_destroy_callback,
-					 FALSE, FALSE);
+		g_signal_connect_full (uiinfo->widget, 
+				       g_signal_lookup (signal_name, G_OBJECT_TYPE (uiinfo->widget)),
+				       0,
+				       g_cclosure_new (
+					       G_CALLBACK (ui_relay_callback),
+					       saved_data,
+					       (GClosureNotify) ui_destroy_callback),
+				       FALSE);
 	
 	} else if (uiinfo->moreinfo)
 		gtk_signal_connect (GTK_OBJECT (uiinfo->widget), 

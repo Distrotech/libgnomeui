@@ -285,10 +285,10 @@ gnome_app_flash (GnomeApp * app, const gchar * flash)
 			mi );
     
     mi->handlerid = 
-      gtk_signal_connect ( GTK_OBJECT(app),
-			   "destroy",
-			   GTK_SIGNAL_FUNC(remove_timeout_cb),
-			   mi );
+      g_signal_connect (G_OBJECT(app),
+			"destroy",
+			G_CALLBACK(remove_timeout_cb),
+			mi);
 
     mi->app       = app;
   }   
@@ -340,12 +340,8 @@ reply_clear_prompt_cb(GnomeAppBar * ab, ReplyInfo * ri)
 #ifdef GNOME_ENABLE_DEBUG
   g_print("Clear prompt callback (reply)\n");
 #endif
-  gtk_signal_disconnect_by_func(GTK_OBJECT(ab), 
-				GTK_SIGNAL_FUNC(bar_reply_cb),
-				ri);
-  gtk_signal_disconnect_by_func(GTK_OBJECT(ab), 
-				GTK_SIGNAL_FUNC(reply_clear_prompt_cb),
-				ri);
+  g_signal_handlers_disconnect_by_func(ab, bar_reply_cb, ri);
+  g_signal_handlers_disconnect_by_func(ab, reply_clear_prompt_cb, ri);
   g_free(ri);
 }
 
@@ -851,7 +847,7 @@ void gnome_app_set_progress (GnomeAppProgressKey key, gdouble percent)
   g_return_if_fail ( key != NULL );  
 
   if (real_key->bar) {
-    gtk_progress_bar_update ( GTK_PROGRESS_BAR(real_key->bar), percent );
+    gtk_progress_bar_set_fraction ( GTK_PROGRESS_BAR(real_key->bar), percent );
   }
   else {
     gnome_appbar_set_progress_percentage ( GNOME_APPBAR(real_key->widget), percent );
@@ -881,7 +877,7 @@ void gnome_app_progress_done (GnomeAppProgressKey key)
 
   progress_timeout_remove((ProgressKeyReal *)key);
 
-  gtk_signal_disconnect(GTK_OBJECT(real_key->app), real_key->handler_id);
+  g_signal_handler_disconnect(real_key->app, real_key->handler_id);
 
   if (real_key->bar) { /* It's a dialog */
     if (real_key->widget) gnome_dialog_close(GNOME_DIALOG(real_key->widget));
