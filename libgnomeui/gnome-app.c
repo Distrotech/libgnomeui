@@ -128,6 +128,11 @@ gnome_app_init (GnomeApp *app)
 	gtk_box_pack_start (GTK_BOX (app->vbox), app->dock,
 			    TRUE, TRUE, 0);
 
+	gtk_signal_connect (GTK_OBJECT (app->dock),
+			    "layout_changed",
+			    GTK_SIGNAL_FUNC (layout_changed),
+			    (gpointer) app);
+
 	app->layout = gnome_dock_layout_new ();
 
 	app->enable_layout_config = TRUE;
@@ -140,31 +145,29 @@ gnome_app_show (GtkWidget *widget)
 
 	app = GNOME_APP (widget);
 
-	if (app->enable_layout_config) {
-		gchar *s;
+	if (app->layout != NULL) {
+		if (app->enable_layout_config) {
+			gchar *s;
 
-		/* Override the layout with the user's saved
-                   configuration.  */
-		s = read_layout_config (app);
-		gnome_dock_layout_parse_string (app->layout, s);
-		g_free (s);
+			/* Override the layout with the user's saved
+			   configuration.  */
+			s = read_layout_config (app);
+			gnome_dock_layout_parse_string (app->layout, s);
+			g_free (s);
+		}
+
+		gnome_dock_add_from_layout (GNOME_DOCK (app->dock),
+					    app->layout);
+
+		if (app->enable_layout_config)
+			write_layout_config (app, app->layout);
+
+		gtk_object_unref (GTK_OBJECT (app->layout));
+		app->layout = NULL;
 	}
-
-	gnome_dock_add_from_layout (GNOME_DOCK (app->dock), app->layout);
-
+			
 	gtk_widget_show (app->vbox);
 	gtk_widget_show (app->dock);
-
-	if (app->enable_layout_config)
-		write_layout_config (app, app->layout);
-			
-	gtk_object_unref (GTK_OBJECT (app->layout));
-	app->layout = NULL;
-
-	gtk_signal_connect (GTK_OBJECT (app->dock),
-			    "layout_changed",
-			    GTK_SIGNAL_FUNC (layout_changed),
-			    (gpointer) app);
 
 	if (GTK_WIDGET_CLASS (parent_class)->show != NULL)
 		(*GTK_WIDGET_CLASS (parent_class)->show) (widget);

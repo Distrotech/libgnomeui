@@ -1,3 +1,9 @@
+Fri Feb 12 20:59:53 PST 1999 Jay Painter <jpaint@serv.net>
+
+	* gnome-app.c applied patch from Ettore Perazzoli to fix 
+	segmentation faults when a gnome-app is shown/hidden multiple
+	times.
+
 1999-02-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-dentry-edit.c (make_page): Use uniform padding for the
