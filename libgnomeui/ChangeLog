@@ -1,3 +1,35 @@
+1999-08-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-rect-ellipse.h (GnomeCanvasRE): Moved private
+	fields to a private structure in the .c file.
+
+	* gnome-canvas-rect-ellipse.c (REPrivate): New private structure
+	for the abstract rect/ellipse item.
+	(gnome_canvas_re_set_arg): Queue updates and never redraws.
+	Sanitized the way colors are handled; now all information (RGBA
+	and pixel info) is available at all times after an update.
+	(get_color_arg): Helper function for gnome_canvas_re_get_arg() so
+	that it always returns consistent color information.
+	(update_gc): Helper function for gnome_canvas_re_update().  We now
+	use the gtk_gc memoization functions to share GCs between canvas
+	items.
+	(gnome_canvas_re_unrealize): Release the GCs using gtk_gc.
+	(get_corners): Helper function for everyone else so that the user
+	can specify coordinates in disorder (i.e. x1 > x2 and such).
+	(update_non_aa): Update function for rectangles and ellipses in
+	the non-antialiased case.
+	(gnome_canvas_re_update): Sanitized.  Update color information
+	properly.  Removed the gnome_canvas_re_update_shared() function.
+	(gnome_canvas_rect_draw): Sanitized.
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_class_init): Added
+	new "width" and "width_is_in_pixels" readable object arguments to
+	query the outline width and whether it was specified in pixels or
+	in units.
+	(gnome_canvas_re_get_arg): Handle the new arguments.
+
+	* gnome-icon-list.h: Fixed some comments.
+
 1999-07-31  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-client.c (gnome_client_request_save): Don't prompt for
