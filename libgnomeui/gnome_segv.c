@@ -69,7 +69,11 @@ int main(int argc, char *argv[])
                                   GNOME_STOCK_BUTTON_CLOSE,
                                   NULL);
 
-  urlbtn = gnome_href_new("http://www.gnome.org/application_crashed.shtml",
+  /* Before to change this link to something like
+   * http://www.gnome.org/application_crashed.LL.shtml,
+   * ask webmaster@redhat.com for a copy of the source shtml file, translate it,
+   * and send it back to him. */
+  urlbtn = gnome_href_new(_("http://www.gnome.org/application_crashed.shtml"),
                           _("Please visit the GNOME Application Crash page for more information"));
   gtk_widget_show(urlbtn);
   gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(mainwin)->vbox), urlbtn);
