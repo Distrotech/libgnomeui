@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+#include "libgnome/libgnomeP.h"
 #include "gtkcalendar.h"
 #include "libgnome/lib_date.h"
 
@@ -681,7 +682,7 @@ gtk_calendar_size_request (GtkWidget      *widget,
   /* Calculate max month string width */
   max_month_width = 0;
   for (i = 1; i <= 12; i++) {
-    sprintf (buffer, "%s", month_name[i]);
+    sprintf (buffer, "%s", _(month_name[i]));
     str_width = gdk_string_measure (cal->month_font, buffer);
     if (str_width > max_month_width)
       max_month_width = str_width;
@@ -856,7 +857,7 @@ gtk_calendar_paint_header (GtkWidget *widget)
                    y, buffer);
 
   /* Draw month */ 
-  sprintf (buffer, "%s", month_name[calendar->month + 1]);
+  sprintf (buffer, "%s", _(month_name[calendar->month + 1]));
   str_width = gdk_string_measure (calendar->month_font, buffer);
   gdk_draw_string (calendar->header_win, calendar->month_font, gc, 
                    3 + calendar->arrow_width + (max_month_width - str_width)/2, 
@@ -886,7 +887,7 @@ gtk_calendar_paint_day_names (GtkWidget *widget)
   int day_wid_sep;
   int str_width;
   static char *dayinletters[] =
-  {"Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"};
+  {_("Su"), _("Mo"), _("Tu"), _("We"), _("Th"), _("Fr"), _("Sa")};
 
   g_return_if_fail (widget != NULL);
   g_return_if_fail (GTK_IS_CALENDAR (widget));
