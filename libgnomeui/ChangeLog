@@ -1,3 +1,9 @@
+2000-05-22  Jacob Berkman  <jacob@helixcode.com>
+
+	* gnome-window-icon.c (icon_set): don't draw the mini icon when
+	minimized, since this seems to have some bugs in it.  Will
+	reenable after it is fixed.
+
 Sat May 20  Martijn van Beers  <martijn@earthling.net>
 
 	* (every GtkObject).h: make sure every object has GNOME_TYPE_

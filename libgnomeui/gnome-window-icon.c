@@ -117,6 +117,7 @@ icon_set (GtkWindow *w, IconData *icon_data)
 
 	*idata = *icon_data;
 
+#if 0
 	if (!idata->window) {
 		GdkWindowAttr wa;
 		gint height, width;
@@ -127,7 +128,6 @@ icon_set (GtkWindow *w, IconData *icon_data)
 		 * work most places.
 		 *
 		 * See http://www.tronche.com/gui/x/icccm/sec-4.html#s-4.1.9
-
 		 */
 		gdk_window_get_size (idata->pixmap, &width, &height);
 		wa.visual      = gdk_imlib_get_visual   (); /* gdk_window_get_visual (GDK_ROOT_PARENT ()); */
@@ -146,7 +146,7 @@ icon_set (GtkWindow *w, IconData *icon_data)
 
 	if (idata->mask)
 		gdk_window_shape_combine_mask (idata->window, idata->mask, 0, 0);
-
+#endif
 	if (do_connect) {
 		gtk_signal_connect_after (GTK_OBJECT (w), "realize",
 					  GTK_SIGNAL_FUNC (window_realized),
