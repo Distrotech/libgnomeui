@@ -13,7 +13,8 @@
 	libgnomeui/gnome-messagebox.[ch], libgnomeui/gnome-scores.[ch],
 	libgnomeui/gnome-stock.[ch], demos/dock_demo.c,
 	libgnomeui/gnome-cursors.[ch], libgnomeui/gtkpixmapmenuitem.[ch],
-	libgnomeui/gnome-gconf.[ch], libgnomeui/gnome-file-saver.[ch].
+	libgnomeui/gnome-gconf.[ch], libgnomeui/gnome-file-saver.[ch],
+	libgnomeui/gnome-app.[ch].
 
 2001-04-21  Kjartan Maraas  <kmaraas@gnome.org>
 
