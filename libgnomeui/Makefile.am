@@ -81,9 +81,8 @@ libgnomeui_2_la_SOURCES = \
 	gnome-druid-page-edge.c		\
 	gnome-druid-page-standard.c	\
 	gnome-geometry.c		\
+	gnome-selector-client.c		\
 	gnome-entry.c			\
-	gnome-selector.c		\
-	gnome-selectorP.h		\
 	gnome-icon-selector.c		\
 	gnome-file-selector.c		\
         gnome-font-picker.c		\

@@ -4,9 +4,3 @@
 ; The code doesn't benefit most C programs directly, but is very useful
 ; for language bindings.
 
-(define-boxed GnomeSelectorAsyncHandle
-  #f
-  gnome_selector_async_handle_ref
-  gnome_selector_async_handle_unref
-  #t
-)

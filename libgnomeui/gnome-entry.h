@@ -33,9 +33,8 @@
 #define GNOME_ENTRY_H
 
 
-#include <glib.h>
-
-#include "gnome-selector.h"
+#include <libgnome/gnome-selector.h>
+#include <libgnomeui/gnome-selector-client.h>
 
 
 G_BEGIN_DECLS
@@ -54,24 +53,29 @@ typedef struct _GnomeEntryPrivate GnomeEntryPrivate;
 typedef struct _GnomeEntryClass   GnomeEntryClass;
 
 struct _GnomeEntry {
-	GnomeSelector selector;
+	GnomeSelectorClient selector_client;
 
 	/*< private >*/
 	GnomeEntryPrivate *_priv;
 };
 
 struct _GnomeEntryClass {
-	GnomeSelectorClass parent_class;
+	GnomeSelectorClientClass parent_class;
 };
 
 
-guint        gnome_entry_get_type         (void) G_GNUC_CONST;
-GtkWidget   *gnome_entry_new              (const gchar *history_id);
+GtkType      gnome_entry_get_type                (void) G_GNUC_CONST;
 
-gchar       *gnome_entry_get_text         (GnomeEntry  *gentry);
+GtkWidget   *gnome_entry_new                     (const gchar        *history_id);
 
-void         gnome_entry_set_text         (GnomeEntry  *gentry,
-					   const gchar *text);
+GtkWidget   *gnome_entry_construct_from_selector (GnomeEntry         *gentry,
+                                                  GNOME_Selector      corba_selector,
+                                                  Bonobo_UIContainer  uic);
+
+gchar       *gnome_entry_get_text                (GnomeEntry         *gentry);
+
+void         gnome_entry_set_text                (GnomeEntry         *gentry,
+                                                  const gchar        *text);
 
 G_END_DECLS
 

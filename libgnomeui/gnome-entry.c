@@ -43,6 +43,8 @@
 #include "gnome-entry.h"
 
 struct _GnomeEntryPrivate {
+	BonoboControl *control;
+
 	GtkWidget *combo;
 	GtkWidget *entry;
 };
@@ -50,26 +52,22 @@ struct _GnomeEntryPrivate {
 
 static void   gnome_entry_class_init   (GnomeEntryClass *class);
 static void   gnome_entry_init         (GnomeEntry      *gentry);
-static void   gnome_entry_destroy      (GtkObject       *object);
 static void   gnome_entry_finalize     (GObject         *object);
 
-static gchar *get_entry_text_handler   (GnomeSelector   *selector);
+static gchar *get_entry_text_handler   (GnomeSelector   *selector,
+					GnomeEntry      *gentry);
 static void   set_entry_text_handler   (GnomeSelector   *selector,
-                                        const gchar     *text);
-static void   activate_entry_handler   (GnomeSelector   *selector);
-static void   history_changed_handler  (GnomeSelector   *selector);
+                                        const gchar     *text,
+					GnomeEntry      *gentry);
+static void   activate_entry_handler   (GnomeSelector   *selector,
+					GnomeEntry      *gentry);
+static void   history_changed_handler  (GnomeSelector   *selector,
+					GnomeEntry      *gentry);
 static void   entry_activated_cb       (GtkWidget       *widget,
-                                        gpointer         data);
-static void   do_construct_handler     (GnomeSelector   *selector);
+					GnomeSelector   *selector);
 
 
-static GObject*
-gnome_entry_constructor (GType                  type,
-			 guint                  n_construct_properties,
-			 GObjectConstructParam *construct_properties);
-
-
-static GnomeSelectorClass *parent_class;
+static GnomeSelectorClientClass *parent_class;
 
 guint
 gnome_entry_get_type (void)
@@ -88,7 +86,7 @@ gnome_entry_get_type (void)
 			NULL
 		};
 
-		entry_type = gtk_type_unique (gnome_selector_get_type (), &entry_info);
+		entry_type = gtk_type_unique (gnome_selector_client_get_type (), &entry_info);
 	}
 
 	return entry_type;
@@ -97,27 +95,15 @@ gnome_entry_get_type (void)
 static void
 gnome_entry_class_init (GnomeEntryClass *class)
 {
-	GnomeSelectorClass *selector_class;
 	GtkObjectClass *object_class;
 	GObjectClass *gobject_class;
 
-	selector_class = (GnomeSelectorClass *) class;
 	object_class = (GtkObjectClass *) class;
 	gobject_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gnome_selector_get_type ());
+	parent_class = gtk_type_class (gnome_selector_client_get_type ());
 
-	object_class->destroy = gnome_entry_destroy;
 	gobject_class->finalize = gnome_entry_finalize;
-
-	gobject_class->constructor = gnome_entry_constructor;
-
-	selector_class->get_entry_text = get_entry_text_handler;
-	selector_class->set_entry_text = set_entry_text_handler;
-	selector_class->activate_entry = activate_entry_handler;
-	selector_class->history_changed = history_changed_handler;
-
-	selector_class->do_construct = do_construct_handler;
 }
 
 static void
@@ -126,103 +112,17 @@ gnome_entry_init (GnomeEntry *gentry)
 	gentry->_priv = g_new0(GnomeEntryPrivate, 1);
 }
 
-static gboolean
-get_value_boolean (GnomeEntry *gentry, const gchar *prop_name)
+GtkWidget *
+gnome_entry_construct_from_selector (GnomeEntry *gentry,
+				     GNOME_Selector corba_selector,
+				     Bonobo_UIContainer uic)
 {
-	GValue value = { 0, };
-	gboolean retval;
+	g_return_val_if_fail (gentry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
+	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
 
-	g_value_init (&value, G_TYPE_BOOLEAN);
-	g_object_get_property (G_OBJECT (gentry), prop_name, &value);
-	retval = g_value_get_boolean (&value);
-	g_value_unset (&value);
-
-	return retval;
-}
-
-static gboolean
-has_value_widget (GnomeEntry *gentry, const gchar *prop_name)
-{
-	GValue value = { 0, };
-	gboolean retval;
-
-	g_value_init (&value, GTK_TYPE_WIDGET);
-	g_object_get_property (G_OBJECT (gentry), prop_name, &value);
-	retval = g_value_get_object (&value) != NULL;
-	g_value_unset (&value);
-
-	return retval;
-}
-
-static void
-do_construct_handler (GnomeSelector *selector)
-{
-	GnomeEntry *gentry;
-
-	g_return_if_fail (selector != NULL);
-	g_return_if_fail (GNOME_IS_ENTRY (selector));
-
-	gentry = GNOME_ENTRY (selector);
-
-	g_message (G_STRLOC);
-
-	if (get_value_boolean (gentry, "want_default_behaviour")) {
-		g_object_set (G_OBJECT (gentry),
-			      "want_default_behaviour", FALSE,
-			      "use_default_entry_widget", TRUE,
-			      "want_browse_button", FALSE,
-			      "want_clear_button", FALSE,
-			      "want_default_button", FALSE,
-			      NULL);
-	}
-
-	if (get_value_boolean (gentry, "use_default_entry_widget") &&
-	    !has_value_widget (gentry, "entry_widget")) {
-		GtkWidget *entry_widget;
-		GValue value = { 0, };
-
-		g_message (G_STRLOC ": default entry");
-
-		entry_widget = gtk_combo_new ();
-
-		g_value_init (&value, GTK_TYPE_WIDGET);
-		g_value_set_object (&value, G_OBJECT (entry_widget));
-		g_object_set_property (G_OBJECT (gentry), "entry_widget", &value);
-		g_value_unset (&value);
-
-		gentry->_priv->combo = entry_widget;
-		gentry->_priv->entry = GTK_COMBO (entry_widget)->entry;
-
-		gtk_combo_disable_activate (GTK_COMBO (entry_widget));
-		gtk_combo_set_case_sensitive (GTK_COMBO (entry_widget), TRUE);
-
-		gtk_signal_connect (GTK_OBJECT (gentry->_priv->entry),
-				    "activate",
-				    GTK_SIGNAL_FUNC (entry_activated_cb),
-				    gentry);
-	}
-
-	GNOME_CALL_PARENT_HANDLER (GNOME_SELECTOR_CLASS, do_construct, (selector));
-}
-
-static GObject*
-gnome_entry_constructor (GType                  type,
-			 guint                  n_construct_properties,
-			 GObjectConstructParam *construct_properties)
-{
-	GObject *object = G_OBJECT_CLASS (parent_class)->constructor (type,
-								      n_construct_properties,
-								      construct_properties);
-	GnomeEntry *gentry = GNOME_ENTRY (object);
-
-	g_message (G_STRLOC ": %d - %d", type, GNOME_TYPE_ENTRY);
-
-	if (type == GNOME_TYPE_ENTRY)
-		gnome_selector_do_construct (GNOME_SELECTOR (gentry));
-
-	g_message (G_STRLOC);
-
-	return object;
+	return (GtkWidget *) gnome_selector_client_construct
+		(GNOME_SELECTOR_CLIENT (gentry), corba_selector, uic);
 }
 
 
@@ -239,29 +139,50 @@ gnome_entry_constructor (GType                  type,
 GtkWidget *
 gnome_entry_new (const gchar *history_id)
 {
+	GnomeSelector *selector;
 	GnomeEntry *gentry;
+	GtkWidget *entry_widget;
 
-	gentry = g_object_new (gnome_entry_get_type (),
-			       "history_id", history_id,
-			       NULL);
+	selector = g_object_new (gnome_selector_get_type (),
+				 "history_id", history_id,
+				 NULL);
 
-	return GTK_WIDGET (gentry);
-}
+	gentry = g_object_new (gnome_entry_get_type (), NULL);
 
-static void
-gnome_entry_destroy (GtkObject *object)
-{
-	GnomeEntry *gentry;
+	entry_widget = gtk_combo_new ();
 
-	/* remember, destroy can be run multiple times! */
+	gentry->_priv->combo = entry_widget;
+	gentry->_priv->entry = GTK_COMBO (entry_widget)->entry;
 
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_ENTRY (object));
+	gtk_combo_disable_activate (GTK_COMBO (entry_widget));
+	gtk_combo_set_case_sensitive (GTK_COMBO (entry_widget), TRUE);
 
-	gentry = GNOME_ENTRY (object);
+	g_signal_connect_data (gentry->_priv->entry, "activate",
+			       G_CALLBACK (entry_activated_cb),
+			       selector, NULL, FALSE, FALSE);
 
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+	gtk_widget_show_all (entry_widget);
+
+	gentry->_priv->control = bonobo_control_new (entry_widget);
+
+	gnome_selector_bind_to_control (selector,
+					BONOBO_OBJREF (gentry->_priv->control));
+
+	g_signal_connect_data (selector, "get_entry_text",
+			       G_CALLBACK (get_entry_text_handler),
+			       gentry, NULL, FALSE, FALSE);
+	g_signal_connect_data (selector, "set_entry_text",
+			       G_CALLBACK (set_entry_text_handler),
+			       gentry, NULL, FALSE, FALSE);
+	g_signal_connect_data (selector, "activate_entry",
+			       G_CALLBACK (activate_entry_handler),
+			       gentry, NULL, FALSE, FALSE);
+	g_signal_connect_data (selector, "history_changed",
+			       G_CALLBACK (history_changed_handler),
+			       gentry, NULL, FALSE, FALSE);
+
+	return gnome_entry_construct_from_selector
+		(gentry, BONOBO_OBJREF (selector), CORBA_OBJECT_NIL);
 }
 
 static void
@@ -282,67 +203,63 @@ gnome_entry_finalize (GObject *object)
 }
 
 static gchar *
-get_entry_text_handler (GnomeSelector *selector)
+get_entry_text_handler (GnomeSelector *selector, GnomeEntry *gentry)
 {
-	GnomeEntry *gentry;
 	const char *text;
 
 	g_return_val_if_fail (selector != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_ENTRY (selector), NULL);
-
-	gentry = GNOME_ENTRY (selector);
+	g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
+	g_return_val_if_fail (gentry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
 
 	text = gtk_entry_get_text (GTK_ENTRY (gentry->_priv->entry));
 	return g_strdup (text);
 }
 
 static void
-set_entry_text_handler (GnomeSelector *selector, const gchar *text)
+set_entry_text_handler (GnomeSelector *selector, const gchar *text,
+			GnomeEntry *gentry)
 {
-	GnomeEntry *gentry;
-
 	g_return_if_fail (selector != NULL);
-	g_return_if_fail (GNOME_IS_ENTRY (selector));
-
-	gentry = GNOME_ENTRY (selector);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+	g_return_if_fail (gentry != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
 	if (gentry->_priv->entry)
 		gtk_entry_set_text (GTK_ENTRY (gentry->_priv->entry), text);
 }
 
 static void
-activate_entry_handler (GnomeSelector *selector)
+activate_entry_handler (GnomeSelector *selector, GnomeEntry *gentry)
 {
-	GnomeEntry *gentry;
 	const char *text;
 
 	g_return_if_fail (selector != NULL);
-	g_return_if_fail (GNOME_IS_ENTRY (selector));
-
-	gentry = GNOME_ENTRY (selector);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+	g_return_if_fail (gentry != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
 	text = gtk_entry_get_text (GTK_ENTRY (gentry->_priv->entry));
 	gnome_selector_prepend_history (selector, TRUE, text);
 }
 
 static void
-history_changed_handler (GnomeSelector *selector)
+history_changed_handler (GnomeSelector *selector, GnomeEntry *gentry)
 {
-	GnomeEntry *gentry;
 	GtkWidget *list_widget;
 	GList *items = NULL;
 	GSList *history_list, *c;
 
 	g_return_if_fail (selector != NULL);
-	g_return_if_fail (GNOME_IS_ENTRY (selector));
-
-	gentry = GNOME_ENTRY (selector);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
+	g_return_if_fail (gentry != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
 	list_widget = GTK_COMBO (gentry->_priv->combo)->list;
 
 	gtk_list_clear_items (GTK_LIST (list_widget), 0, -1);
 
-	history_list = gnome_selector_get_history (GNOME_SELECTOR (gentry));
+	history_list = gnome_selector_get_history (selector);
 
 	for (c = history_list; c; c = c->next) {
 		GtkWidget *item;
@@ -361,12 +278,12 @@ history_changed_handler (GnomeSelector *selector)
 }
 
 static void
-entry_activated_cb (GtkWidget *widget, gpointer data)
+entry_activated_cb (GtkWidget *widget, GnomeSelector *selector)
 {
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (GNOME_IS_SELECTOR (data));
+	g_return_if_fail (selector != NULL);
+	g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-	gnome_selector_activate_entry (GNOME_SELECTOR (data));
+	g_signal_emit_by_name (selector, "activate_entry");
 }
 
 gchar *
@@ -375,7 +292,7 @@ gnome_entry_get_text (GnomeEntry *gentry)
 	g_return_val_if_fail (gentry != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
 
-	return gnome_selector_get_uri (GNOME_SELECTOR (gentry));
+	return gnome_selector_client_get_entry_text (GNOME_SELECTOR_CLIENT (gentry));
 }
 
 void
@@ -384,7 +301,7 @@ gnome_entry_set_text (GnomeEntry *gentry, const gchar *text)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	gnome_selector_set_uri (GNOME_SELECTOR (gentry), NULL,
-				text, NULL, NULL);
+	gnome_selector_client_set_entry_text (GNOME_SELECTOR_CLIENT (gentry),
+					      text);
 }
 
