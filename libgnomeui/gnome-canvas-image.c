@@ -129,9 +129,13 @@ free_pixmap_and_mask (GnomeCanvasImage *image)
 {
 	if (image->pixmap)
 		gdk_imlib_free_pixmap (image->pixmap);
-
+#if 0
+	/* When you tell imlib to free a pixmap, it will also free its
+	 * associated mask.  Now is that broken, or what?
+	 */
 	if (image->mask)
 		gdk_imlib_free_bitmap (image->mask);
+#endif
 
 	image->pixmap = NULL;
 	image->mask = NULL;
