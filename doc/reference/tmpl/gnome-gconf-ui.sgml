@@ -14,7 +14,7 @@ gnome-gconf-ui
 
 </para>
 
-<!-- ##### FUNCTION gnome_gconf_ui_module_info_get ##### -->
+<!-- ##### MACRO gnome_gconf_ui_module_info_get ##### -->
 <para>
 
 </para>

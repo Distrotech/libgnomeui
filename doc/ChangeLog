@@ -1,3 +1,13 @@
+2001-10-29  Seth Nickell  <snickell@stanford.edu>
+
+	* ChangeLog:
+	* reference/tmpl/gnome-gconf-ui.sgml:
+	* reference/tmpl/gnome-stock-icons.sgml:
+	* reference/tmpl/libgnomeui-unused.sgml:
+
+	Give in to the mighty gods of the auto-generated
+	docs.
+
 Sun Sep 09 00:17:31 2001  Malcolm Tredinnick <malcolm@commsecure.com.au>
 
 	* reference/*: Add the beginnings of the API reference manual.
