@@ -1,3 +1,8 @@
+1998-10-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-canvas.c (emit_event): Small bug fix:  do not reinitialize
+	the item to be used.
+
 Sat Oct  3 23:46:51 EDT 1998 Gregory McLean <gregm@comstar.net>
 	
 	* gnome-canvas.c (gnome_canvas_item_get_bounds):
@@ -49,6 +54,7 @@ Sat Oct  3 23:46:51 EDT 1998 Gregory McLean <gregm@comstar.net>
 	* gnome-client.c (gnome_client_get_config_prefix): Use
 	`program_invocation_short_name' if `client->program' is NULL.
 
+>>>>>>> 1.474
 1998-10-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtklayout.c (gtk_layout_move): Provide a default value. 

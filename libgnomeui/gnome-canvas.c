@@ -1833,16 +1833,18 @@ emit_event (GnomeCanvas *canvas, GdkEvent *event)
 	 */
 	item = canvas->current_item;
 	
-	if (event->type == GDK_KEY_PRESS || event->type == GDK_KEY_RELEASE || event->type == GDK_FOCUS_CHANGE)
-		if (canvas->focused_item)
-			item = canvas->focused_item;
+	if ((event->type == GDK_KEY_PRESS   ||
+	     event->type == GDK_KEY_RELEASE ||
+	     event->type == GDK_FOCUS_CHANGE) &&
+	    canvas->focused_item)
+		item = canvas->focused_item;
 	    
 	/*
 	 * The event is propagated up the hierarchy (for if someone connected to a group instead of
 	 * a leaf event), and emission is stopped if a handler returns TRUE, just like for GtkWidget
 	 * events.
 	 */
-	for (finished = FALSE, item = canvas->current_item; item && !finished; item = item->parent)
+	for (finished = FALSE; item && !finished; item = item->parent)
 	  {
 		gtk_signal_emit (GTK_OBJECT (item), item_signals[ITEM_EVENT],
 				 &ev,
