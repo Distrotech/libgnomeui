@@ -122,8 +122,8 @@ get_default_icons (GtkIconFactory *factory)
     add_sized (factory, stock_text_indent, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_TEXT_INDENT);
     add_sized (factory, stock_text_unindent, GTK_ICON_SIZE_BUTTON, GNOME_STOCK_TEXT_UNINDENT);
 
-    add_sized (factory, stock_about, GTK_ICON_SIZE_MENU, GNOME_STOCK_ABOUT);
-    add_sized (factory, stock_blank, GTK_ICON_SIZE_MENU, GNOME_STOCK_BLANK); 
+    add_sized (factory, stock_menu_about, GTK_ICON_SIZE_MENU, GNOME_STOCK_ABOUT);
+    add_sized (factory, stock_menu_blank, GTK_ICON_SIZE_MENU, GNOME_STOCK_BLANK); 
 
     add_sized (factory, stock_not, GNOME_ICON_SIZE_TOOLBAR, GNOME_STOCK_NOT);
     add_sized (factory, stock_scores, GNOME_ICON_SIZE_TOOLBAR, GNOME_STOCK_SCORES);

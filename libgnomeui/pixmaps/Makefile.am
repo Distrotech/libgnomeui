@@ -20,7 +20,7 @@ stock_images = \
 	stock_mail_send.png \
 	stock_menu_about.png \
 	stock_menu_blank.png \
-	stock_menu_scores.png \
+	stock_scores.png \
 	stock_mic.png \
 	stock_multiple_file.png \
 	stock_not.png \

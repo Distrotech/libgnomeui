@@ -1,6 +1,6 @@
 2001-07-22  Martin Baulig  <baulig@suse.de>
 
-	* pixmaps/stock_scores.png: Removed, same as stock_menu_scores.png.
+	* pixmaps/stock_menu_scores.png: Removed, same as stock_scores.png.
 
 	* gnome-stock-icons.[ch]: Cleaned this up.
 
