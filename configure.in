@@ -275,6 +275,7 @@ demos/Makefile
 test-gnome/Makefile
 doc/Makefile
 doc/reference/Makefile
+doc/reference/version.xml
 ])
 echo "configuration:
 	esd support: ${esd_msg}

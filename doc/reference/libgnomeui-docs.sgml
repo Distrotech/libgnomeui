@@ -44,10 +44,12 @@
 <!ENTITY libgnomeui-gnome-popup-menu SYSTEM "xml/gnome-popup-menu.xml">
 <!ENTITY libgnomeui-gnometypebuiltins SYSTEM "xml/gnometypebuiltins.xml">
 <!ENTITY libgnomeui-object-index SYSTEM "xml/tree_index.sgml">
+<!ENTITY version SYSTEM "version.xml">
 ]>
 <book id="index">
   <bookinfo>
     <title>GNOME UI Library Reference Manual</title>
+    <releaseinfo>for libgnomeui &version;</releaseinfo>
   </bookinfo>
 
   <chapter>

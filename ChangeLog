@@ -1,3 +1,12 @@
+2004-05-02  Anders Carlsson  <andersca@gnome.org>
+
+	* configure.in:
+	* doc/reference/Makefile.am:
+	* doc/reference/libgnomeui-docs.sgml:
+	* doc/reference/version.xml.in:
+	Put version number in reference docs.
+	(#125759, Steve Chaplin)
+
 =================== 2.6.1.1 ===================
 
 2004-05-02  Anders Carlsson  <andersca@gnome.org>

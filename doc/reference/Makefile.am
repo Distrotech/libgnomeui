@@ -66,10 +66,12 @@ HTML_IMAGES =								\
 	$(top_srcdir)/libgnomeui/pixmaps/stock_volume.png
 
 # Extra SGML files that are included by $(DOC_MAIN_SGML_FILE).
-content_files =
+content_files =				\
+	version.xml
 
 # Other files to distribute.
-extra_files =
+extra_files =				\
+	version.xml.in
 
 # CFLAGS and LDFLAGS for compiling scan program. Only needed if your app/lib
 # contains GtkObjects/GObjects and you want to document signals and properties.
