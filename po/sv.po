@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-04 12:05+0200\n"
-"PO-Revision-Date: 2004-06-04 12:06+0200\n"
+"POT-Creation-Date: 2004-06-29 15:54+0200\n"
+"PO-Revision-Date: 2004-06-29 15:54+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,6 +32,33 @@ msgstr "Barnobjekt 2"
 #: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Tips för objekt 2"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:855
+msgid "Filesystem"
+msgstr "Filsystem"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1517
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Sparande av bokmärke misslyckades (%s)"
+
+#: file-chooser/testfilechooser.c:176
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "Kunde inte hämta information om filen \"%s\": %s"
+
+#: file-chooser/testfilechooser.c:189
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Misslyckades med att öppna filen \"%s\": %s"
+
+#: file-chooser/testfilechooser.c:228
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Misslyckades med att läsa in bilden \"%s\": orsaken okänd, kanske en trasig "
+"bildfil"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -1254,23 +1281,31 @@ msgstr "Fråga"
 msgid "Message"
 msgstr "Meddelande"
 
-#: libgnomeui/gnome-password-dialog.c:219
+#: libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "_Användarnamn:"
 
-#: libgnomeui/gnome-password-dialog.c:221
+#: libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "_Domän:"
 
-#: libgnomeui/gnome-password-dialog.c:223
+#: libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_Lösenord:"
 
-#: libgnomeui/gnome-password-dialog.c:369
+#: libgnomeui/gnome-password-dialog.c:330
+msgid "Connect _anonymously"
+msgstr "Anslut _anonymt"
+
+#: libgnomeui/gnome-password-dialog.c:335
+msgid "Connect as _user:"
+msgstr "Anslut som an_vändare:"
+
+#: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "Kom ihåg lösenordet under denna session"
 
-#: libgnomeui/gnome-password-dialog.c:371
+#: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "Spara lösenordet i nyckelring"
 
@@ -1441,23 +1476,11 @@ msgstr "_Felsök"
 msgid "Exit the test"
 msgstr "Avsluta testet"
 
-#~ msgid "Filesystem"
-#~ msgstr "Filsystem"
+#~ msgid "Connect anonymously"
+#~ msgstr "Anslut anonymt"
 
-#~ msgid "Bookmark saving failed (%s)"
-#~ msgstr "Sparande av bokmärke misslyckades (%s)"
-
-#~ msgid "Could not get information for file '%s': %s"
-#~ msgstr "Kunde inte hämta information om filen \"%s\": %s"
-
-#~ msgid "Failed to open file '%s': %s"
-#~ msgstr "Misslyckades med att öppna filen \"%s\": %s"
-
-#~ msgid ""
-#~ "Failed to load image '%s': reason not known, probably a corrupt image file"
-#~ msgstr ""
-#~ "Misslyckades med att läsa in bilden \"%s\": orsaken okänd, kanske en "
-#~ "trasig bildfil"
+#~ msgid "Connect as user:"
+#~ msgstr "Anslut som användare:"
 
 #~ msgid "Use desktop default (%s)"
 #~ msgstr "Använd skrivbordsstandard (%s)"
