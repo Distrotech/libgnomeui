@@ -1,6 +1,13 @@
+1999-02-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-popup-menu.c (gnome_popup_menu_do_popup): Do not
+	g_return_if_fail (event != NULL), since we *can* take null
+	events.  Thanks to Timo Sirainen <aaaaaa@sicom.fi> for reporting
+	this.
+
 1999-02-11 Sergey Panov <sipan@mit.edu>
 
-        * gnome-app-helper.c(install_menuitem_hint_to_statusbar,
+	* gnome-app-helper.c (install_menuitem_hint_to_statusbar,
 	install_menuitem_hint_to_appbar): hints were not translated
         at all. Now we look for them first using gettext then, if failed,
         with dgettext.

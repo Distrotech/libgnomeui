@@ -317,7 +317,6 @@ gnome_popup_menu_do_popup (GtkWidget *popup, GtkMenuPositionFunc pos_func, gpoin
 
 	g_return_if_fail (popup != NULL);
 	g_return_if_fail (GTK_IS_WIDGET (popup));
-	g_return_if_fail (event != NULL);
 
 	/* Store the user data in the menu for when a callback is activated -- if it is a
 	 * Gnome-generated menu, then the user data will be passed on to callbacks by our custom
