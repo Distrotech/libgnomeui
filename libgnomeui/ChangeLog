@@ -1,3 +1,7 @@
+2002-04-09  jacob berkman  <jacob@ximian.com>
+
+	* gnome-file-entry.c (tilde_expand): move up and fix some warnings
+
 2002-04-09  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-dialog.c (gnome_dialog_set_parent): Don't try to move

@@ -385,6 +385,45 @@ browse_dialog_kill (GtkWidget *widget, gpointer data)
 	fentry->fsw = NULL;
 }
 
+/* Does tilde (home directory) expansion on a string */
+static char *
+tilde_expand (const char *str)
+{
+	struct passwd *passwd;
+	const char *p;
+	char *name;
+
+	g_assert (str != NULL);
+
+	if (*str != '~')
+		return g_strdup (str);
+
+	str++;
+
+	p = (const char *)strchr (str, G_DIR_SEPARATOR);
+
+	/* d = "~" or d = "~/" */
+	if (!*str || *str == G_DIR_SEPARATOR) {
+		passwd = getpwuid (geteuid ());
+		p = (*str == G_DIR_SEPARATOR) ? str + 1 : "";
+	} else {
+		if (!p) {
+			p = "";
+			passwd = getpwnam (str);
+		} else {
+			name = g_strndup (str, p - str);
+			passwd = getpwnam (name);
+			g_free (name);
+		}
+	}
+
+	/* If we can't figure out the user name, bail out */
+	if (!passwd)
+		return NULL;
+
+	return g_strconcat (passwd->pw_dir, G_DIR_SEPARATOR_S, p, NULL);
+}
+
 static gchar *
 build_filename (GnomeFileEntry *fentry)
 {
@@ -419,8 +458,7 @@ browse_clicked(GnomeFileEntry *fentry)
 {
 	GtkWidget *fsw;
 	GtkFileSelection *fs;
-	GtkWidget *parent;
-	const char *p;
+	char *p;
 
 	/*if it already exists make sure it's shown and raised*/
 	if(fentry->fsw) {
@@ -754,45 +792,6 @@ gnome_file_entry_set_default_path(GnomeFileEntry *fentry, const char *path)
 	/*handles NULL as well*/
 	g_free(fentry->default_path);
 	fentry->default_path = p;
-}
-
-/* Does tilde (home directory) expansion on a string */
-static char *
-tilde_expand (char *str)
-{
-	struct passwd *passwd;
-	char *p;
-	char *name;
-
-	g_assert (str != NULL);
-
-	if (*str != '~')
-		return g_strdup (str);
-
-	str++;
-
-	p = strchr (str, G_DIR_SEPARATOR);
-
-	/* d = "~" or d = "~/" */
-	if (!*str || *str == G_DIR_SEPARATOR) {
-		passwd = getpwuid (geteuid ());
-		p = (*str == G_DIR_SEPARATOR) ? str + 1 : "";
-	} else {
-		if (!p) {
-			p = "";
-			passwd = getpwnam (str);
-		} else {
-			name = g_strndup (str, p - str);
-			passwd = getpwnam (name);
-			g_free (name);
-		}
-	}
-
-	/* If we can't figure out the user name, bail out */
-	if (!passwd)
-		return NULL;
-
-	return g_strconcat (passwd->pw_dir, G_DIR_SEPARATOR_S, p, NULL);
 }
 
 /**
