@@ -1,3 +1,8 @@
+2003-02-01  Anders Carlsson  <andersca@codefactory.se>
+
+	* libgnomeui/gnome-client.c (client_set_restart_command): Fix
+	memory leak, patch by Arjan van de Ven, #104986.
+
 2003-01-31  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-icon-lookup.c (gnome_icon_lookup):
