@@ -1307,6 +1307,12 @@ gnome_icon_list_clear (GnomeIconList *gil)
 	gil->icons = 0;
 	priv->last_selected_idx = -1;
 	priv->last_selected_icon = NULL;
+
+	if (!priv->frozen) {
+		gil_layout_all_icons (gil);
+		gil_scrollbar_adjust (gil);
+	} else
+		priv->dirty = TRUE;
 }
 
 static void

@@ -1,5 +1,10 @@
 2000-07-27  Martin Baulig  <baulig@suse.de>
 
+	* gnome-icon-list.c (gnome_icon_list_clear): This needs to
+	mark the icon list as dirty.
+
+2000-07-27  Martin Baulig  <baulig@suse.de>
+
 	* gnome-canvas-pixbuf.c (gnome_canvas_pixbuf_destroy): Destroy
 	may run multiple times nowadays.
 	* gnome-icon-item.c (iti_destroy): Likewise.
