@@ -1,438 +1,604 @@
-# translation of libgnomeui.po to Kinyarwanda
+# translation of libgnomeui to Kinyarwanda.
+# Copyright (C) 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
-# Copyright (C) 2004 Free Software Foundation, Inc..
-# Steve Murphy <murf@e-tools.com>, 2004.
-# Steve performed initial rough translation from compendium built from translations provided by the following four:
-# Philibert Ndandali  <philinda@mail.rw>, 2004.
-# Viateur MUGENZI <muvia@hotmail.com>, 2004.
-# Noëlla Mupole <s24211045@tuks.co.za>, 2004.
-# Carole Karema <karemacarole@hotmail.com>, 2004.
+# Steve Murphy <murf@e-tools.com>, 2005
+# Steve performed initial rough translation from compendium built from translations provided by the following translators:
+# Philibert Ndandali  <ndandali@yahoo.fr>, 2005.
+# Viateur MUGENZI <muvia1@yahoo.fr>, 2005.
+# Noëlla Mupole <s24211045@tuks.co.za>, 2005.
+# Carole Karema <karemacarole@hotmail.com>, 2005.
+# JEAN BAPTISTE NGENDAHAYO <ngenda_denis@yahoo.co.uk>, 2005.
+# Augustin KIBERWA  <akiberwa@yahoo.co.uk>, 2005.
+# Donatien NSENGIYUMVA <ndonatienuk@yahoo.co.uk>, 2005..
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui\n"
+"Project-Id-Version: libgnomeui 2.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-07 14:54+0100\n"
-"PO-Revision-Date: 2004-11-16 14:50-0700\n"
+"POT-Creation-Date: 2005-03-30 19:49-0700\n"
+"PO-Revision-Date: 2005-03-28 19:35-0700\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
 
 #: demos/mdi_demo.c:128
+#, fuzzy
 msgid "Child Item 1"
-msgstr ""
+msgstr "1."
 
 #: demos/mdi_demo.c:129
+#, fuzzy
 msgid "Hint for item 1"
-msgstr ""
+msgstr "kugirango Ikintu 1."
 
 #: demos/mdi_demo.c:131
+#, fuzzy
 msgid "Child Item 2"
-msgstr ""
+msgstr "2."
 
 #: demos/mdi_demo.c:132
+#, fuzzy
 msgid "Hint for item 2"
-msgstr ""
+msgstr "kugirango Ikintu 2."
 
 #: file-chooser/gtkfilesystemgnomevfs.c:697
-#, c-format
+#, fuzzy, c-format
 msgid "%s is not a folder"
-msgstr ""
+msgstr "%sni OYA a Ububiko"
 
+# scp/source\office\dir.lng:STR_DIR_DATEIEN.text
 #: file-chooser/gtkfilesystemgnomevfs.c:908
+#, fuzzy
 msgid "Filesystem"
-msgstr "imiterere ya dosiye"
+msgstr "Idosiye"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1592
-#, c-format
+#: file-chooser/gtkfilesystemgnomevfs.c:1597
+#, fuzzy, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "Mu kubika Byanze"
 
 #: file-chooser/testfilechooser.c:176
-#, c-format
+#, fuzzy, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "OYA Kubona Ibisobanuro kugirango IDOSIYE"
 
 #: file-chooser/testfilechooser.c:189
-#, c-format
+#, fuzzy, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "Kuri Gufungura IDOSIYE"
 
 #: file-chooser/testfilechooser.c:228
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
+msgstr "Kuri Ibirimo Ishusho OYA a Ishusho IDOSIYE"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
 msgstr ""
 
 #: libgnomeui/gnome-about.c:230
+#, fuzzy
 msgid "Written by"
-msgstr ""
+msgstr "ku"
 
 #: libgnomeui/gnome-about.c:245
+#, fuzzy
 msgid "Documented by"
-msgstr ""
+msgstr "ku"
 
 #: libgnomeui/gnome-about.c:260
+#, fuzzy
 msgid "Translated by"
-msgstr ""
+msgstr "ku"
 
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_BASICMENU.MN_EDIT.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_BASICPLUGINMENU.MN_PLEDIT.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\macrodlg.src:RID_MACROCHOOSER.RID_PB_EDIT.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\moduldlg.src:RID_TP_MODULS.RID_PB_EDIT.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\moduldlg.src:RID_TP_LIBS.RID_PB_EDIT.text
 #: libgnomeui/gnome-about.c:323
+#, fuzzy
 msgid "C_redits"
-msgstr ""
+msgstr "Guhindura"
 
 #: libgnomeui/gnome-about.c:378
+#, fuzzy
 msgid "Program name"
-msgstr ""
+msgstr "Izina:"
 
 #: libgnomeui/gnome-about.c:379
+#, fuzzy
 msgid "The name of the program"
-msgstr ""
+msgstr "Izina: Bya Porogaramu"
 
 #: libgnomeui/gnome-about.c:386
+#, fuzzy
 msgid "Program version"
-msgstr ""
+msgstr "Verisiyo"
 
 #: libgnomeui/gnome-about.c:387
+#, fuzzy
 msgid "The version of the program"
-msgstr ""
+msgstr "Verisiyo Bya Porogaramu"
 
 #: libgnomeui/gnome-about.c:393
+#, fuzzy
 msgid "Copyright string"
-msgstr ""
+msgstr "Ikurikiranyanyuguti"
 
 #: libgnomeui/gnome-about.c:394
+#, fuzzy
 msgid "Copyright information for the program"
-msgstr ""
+msgstr "Ibisobanuro kugirango Porogaramu"
 
 #: libgnomeui/gnome-about.c:401
+#, fuzzy
 msgid "Comments string"
-msgstr ""
+msgstr "Ikurikiranyanyuguti"
 
 #: libgnomeui/gnome-about.c:402
+#, fuzzy
 msgid "Comments about the program"
-msgstr ""
+msgstr "Ibyerekeye Porogaramu"
 
 #: libgnomeui/gnome-about.c:408
 msgid "Authors"
-msgstr ""
+msgstr "Abahanzi"
 
 #: libgnomeui/gnome-about.c:409
+#, fuzzy
 msgid "List of authors of the programs"
-msgstr ""
+msgstr "Bya Abahanzi Bya Porogaramu"
 
 #: libgnomeui/gnome-about.c:411
+#, fuzzy
 msgid "Author entry"
-msgstr ""
+msgstr "Icyinjijwe"
 
 #: libgnomeui/gnome-about.c:412
+#, fuzzy
 msgid "A single author entry"
-msgstr ""
+msgstr "A UMWE Umwanditsi Icyinjijwe"
 
 #: libgnomeui/gnome-about.c:419
+#, fuzzy
 msgid "Documenters"
-msgstr ""
+msgstr "ku"
 
 #: libgnomeui/gnome-about.c:420
+#, fuzzy
 msgid "List of people documenting the program"
-msgstr ""
+msgstr "Bya Abantu Porogaramu"
 
 #: libgnomeui/gnome-about.c:422
+#, fuzzy
 msgid "Documenter entry"
-msgstr ""
+msgstr "Icyinjijwe"
 
 #: libgnomeui/gnome-about.c:423
+#, fuzzy
 msgid "A single documenter entry"
-msgstr ""
+msgstr "A UMWE Icyinjijwe"
 
 #: libgnomeui/gnome-about.c:431
+#, fuzzy
 msgid "Translator credits"
-msgstr ""
+msgstr "ku"
 
 #: libgnomeui/gnome-about.c:432
+#, fuzzy
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr ""
+msgstr "Kuri Ikurikiranyanyuguti cy/ byagarajwe Nka"
 
+# #-#-#-#-#  officecfg.pot (Gnome 2.12)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Wizard.Agenda.Logo.Visible.text
+# #-#-#-#-#  officecfg.pot (Gnome 2.12)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Wizard.Letter.Print.Logo.text
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "ikirango"
 
 #: libgnomeui/gnome-about.c:440
+#, fuzzy
 msgid "A logo for the about box"
-msgstr ""
+msgstr "A ikirango kugirango Ibyerekeye Agasanduku"
 
+# offmgr/source\offapp\intro\intro.hrc:TEXT_DEFAULTABOUT.text
 #: libgnomeui/gnome-about.c:519
-#, c-format
+#, fuzzy, c-format
 msgid "About %s"
-msgstr ""
+msgstr "Ibyerekeye"
 
+# sc/source\ui\src\globstr.src:RID_GLOBSTR.STR_HFCMD_FILE.text
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
+#, fuzzy
 msgid "_File"
-msgstr ""
+msgstr "IDOSIYE"
 
+# sc/source\ui\src\globstr.src:RID_GLOBSTR.STR_LINKERRORFILE.text
 #: libgnomeui/gnome-app-helper.c:83
+#, fuzzy
 msgid "_File/"
-msgstr ""
+msgstr "Idosiye:"
 
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_BASICMENU.MN_EDIT.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_BASICPLUGINMENU.MN_PLEDIT.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\macrodlg.src:RID_MACROCHOOSER.RID_PB_EDIT.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\moduldlg.src:RID_TP_MODULS.RID_PB_EDIT.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\moduldlg.src:RID_TP_LIBS.RID_PB_EDIT.text
 #: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+#, fuzzy
 msgid "_Edit"
-msgstr ""
+msgstr "Guhindura"
 
+# dbaccess/source/ui/inc/toolbox.hrc:MID_DBUI_QUERY_EDIT_JOINCONNECTION.text
 #: libgnomeui/gnome-app-helper.c:85
+#, fuzzy
 msgid "_Edit/"
-msgstr ""
+msgstr "Kwandika..."
 
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_BASICMENU.MN_VIEW.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_BASICPLUGINMENU.MN_PLVIEW.text
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+#, fuzzy
 msgid "_View"
-msgstr ""
+msgstr "Kureba"
 
 #: libgnomeui/gnome-app-helper.c:87
+#, fuzzy
 msgid "_View/"
-msgstr ""
+msgstr "Kugaragaza"
 
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+#, fuzzy
 msgid "_Settings"
-msgstr ""
+msgstr "Amagenamiterere"
 
+# wizards/source\euro\euro.src:STEP_LASTPAGE_+_3.text
 #: libgnomeui/gnome-app-helper.c:89
+#, fuzzy
 msgid "_Settings/"
-msgstr ""
+msgstr "Amagenamiterere:"
 
+# basctl/source\basicide\brkdlg.src:RID_BASICIDE_BREAKPOINTDLG.RID_PB_NEW.text
 #. If you have more then one New type, use this tree
 #: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+#, fuzzy
 msgid "_New"
-msgstr ""
+msgstr "Gishya"
 
+# basctl/source\basicide\moduldlg.src:RID_TP_LIBS.RID_PB_NEWLIB.text
 #: libgnomeui/gnome-app-helper.c:91
+#, fuzzy
 msgid "_New/"
-msgstr ""
+msgstr "Gishya..."
 
+# scp/source\office\dir.lng:STR_DIR_DATEIEN.text
 #: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+#, fuzzy
 msgid "Fi_les"
-msgstr ""
+msgstr "Idosiye"
 
+# scp/source\office\dir.lng:STR_DIR_DATEIEN.text
 #: libgnomeui/gnome-app-helper.c:93
+#, fuzzy
 msgid "Fi_les/"
-msgstr ""
+msgstr "Idosiye"
 
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
+# dbaccess/source/ui/inc/toolbox.hrc:MID_UNDO.text
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
 #: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+#, fuzzy
 msgid "_Windows"
-msgstr ""
+msgstr "Isubiranyuma"
 
+# basctl/source\basicide\basidesh.src:RID_STR_SAVE.text
 #: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+#, fuzzy
 msgid "_Game"
-msgstr ""
+msgstr "Kubika"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
+#, fuzzy
 msgid "_Help"
-msgstr ""
+msgstr "Ifashayobora"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
 msgstr ""
 
+# sfx2/source\appl\minbox.src:RID_MAIL_INBOX.BTN_MAILINBOX_OPEN.text
 #. Open
 #: libgnomeui/gnome-app-helper.c:109
+#, fuzzy
 msgid "_Open..."
-msgstr ""
+msgstr "Gufungura..."
 
 #: libgnomeui/gnome-app-helper.c:109
+#, fuzzy
 msgid "Open a file"
-msgstr ""
+msgstr "a IDOSIYE"
 
+# basctl/source\basicide\basidesh.src:RID_STR_SAVE.text
 #. Save
 #: libgnomeui/gnome-app-helper.c:114
+#, fuzzy
 msgid "_Save"
-msgstr ""
+msgstr "Kubika"
 
 #: libgnomeui/gnome-app-helper.c:114
+#, fuzzy
 msgid "Save the current file"
-msgstr ""
+msgstr "Kubika KIGEZWEHO IDOSIYE"
 
+# sfx2/source\doc\doc.src:STR_SAVEASDOC.text
 #. Save As
 #: libgnomeui/gnome-app-helper.c:119
+#, fuzzy
 msgid "Save _As..."
-msgstr ""
+msgstr "Gushyingura muri..."
 
 #: libgnomeui/gnome-app-helper.c:120
+#, fuzzy
 msgid "Save the current file with a different name"
-msgstr ""
+msgstr "Kubika KIGEZWEHO IDOSIYE Na: a Izina:"
 
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
+#, fuzzy
 msgid "_Revert"
-msgstr ""
+msgstr "Kugaruza"
 
 #: libgnomeui/gnome-app-helper.c:126
+#, fuzzy
 msgid "Revert to a saved version of the file"
-msgstr ""
+msgstr "Kuri a Verisiyo Bya IDOSIYE"
 
+# sfx2/source\appl\newhelp.src:STR_HELP_BUTTON_PRINT.text
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
+#, fuzzy
 msgid "_Print..."
-msgstr ""
+msgstr "Gucapa..."
 
 #: libgnomeui/gnome-app-helper.c:131
+#, fuzzy
 msgid "Print the current file"
-msgstr ""
+msgstr "KIGEZWEHO IDOSIYE"
 
+# sfx2/source\appl\newhelp.src:STR_HELP_BUTTON_PRINT.text
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
+#, fuzzy
 msgid "Print S_etup..."
-msgstr ""
+msgstr "Gucapa..."
 
 #: libgnomeui/gnome-app-helper.c:137
+#, fuzzy
 msgid "Setup the page settings for your current printer"
-msgstr ""
+msgstr "Ipaji Amagenamiterere kugirango KIGEZWEHO Mucapyi"
 
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\macrodlg.src:RID_MACROCHOOSER.RID_PB_CLOSE.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\macrodlg.src:RID_STR_CLOSE.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\moduldlg.src:RID_TP_MODULS.RID_PB_CLOSE.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\moduldlg.src:RID_TP_LIBS.RID_PB_CLOSE.text
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
+#, fuzzy
 msgid "_Close"
-msgstr ""
+msgstr "Gufunga"
 
 #: libgnomeui/gnome-app-helper.c:142
+#, fuzzy
 msgid "Close the current file"
-msgstr ""
+msgstr "Funga KIGEZWEHO IDOSIYE"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
+#, fuzzy
 msgid "_Quit"
-msgstr ""
+msgstr "Kuvamo"
 
 #: libgnomeui/gnome-app-helper.c:147
+#, fuzzy
 msgid "Quit the application"
-msgstr ""
+msgstr "Porogaramu"
 
+# dbaccess/source/ui/inc/toolbox.hrc:MID_SBA_QRY_CUT.text
 #.
 #. * The "Edit" menu
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
+#, fuzzy
 msgid "Cu_t"
-msgstr ""
+msgstr "Gukata"
 
 #: libgnomeui/gnome-app-helper.c:155
+#, fuzzy
 msgid "Cut the selection"
-msgstr ""
+msgstr "Ihitamo"
 
+# dbaccess/source/ui/inc/toolbox.hrc:MID_SBA_QRY_COPY.text
 #. 10
 #. Copy
 #: libgnomeui/gnome-app-helper.c:161
+#, fuzzy
 msgid "_Copy"
-msgstr ""
+msgstr "Gukoporora"
 
 #: libgnomeui/gnome-app-helper.c:161
+#, fuzzy
 msgid "Copy the selection"
-msgstr ""
+msgstr "Ihitamo"
 
+# dbaccess/source/ui/inc/toolbox.hrc:MID_SBA_QRY_PASTE.text
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
+#, fuzzy
 msgid "_Paste"
-msgstr ""
+msgstr "Komeka"
 
 #: libgnomeui/gnome-app-helper.c:166
+#, fuzzy
 msgid "Paste the clipboard"
-msgstr ""
+msgstr "Ububikokoporora"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
+#, fuzzy
 msgid "C_lear"
-msgstr ""
+msgstr "Gusiba"
 
 #: libgnomeui/gnome-app-helper.c:171
+#, fuzzy
 msgid "Clear the selection"
-msgstr ""
+msgstr "Ihitamo"
 
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
+# dbaccess/source/ui/inc/toolbox.hrc:MID_UNDO.text
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
 #. Undo
 #: libgnomeui/gnome-app-helper.c:176
+#, fuzzy
 msgid "_Undo"
-msgstr ""
+msgstr "Isubiranyuma"
 
 #: libgnomeui/gnome-app-helper.c:176
+#, fuzzy
 msgid "Undo the last action"
-msgstr ""
+msgstr "Iheruka Igikorwa"
 
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
+# dbaccess/source/ui/inc/toolbox.hrc:MID_REDO.text
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
+#, fuzzy
 msgid "_Redo"
-msgstr ""
+msgstr "Isubiramo"
 
 #: libgnomeui/gnome-app-helper.c:181
+#, fuzzy
 msgid "Redo the undone action"
-msgstr ""
+msgstr "Igikorwa"
 
+# sfx2/source\appl\newhelp.src:STR_HELP_BUTTON_SEARCHDIALOG.text
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
+#, fuzzy
 msgid "_Find..."
-msgstr ""
+msgstr "Gushaka..."
 
 #: libgnomeui/gnome-app-helper.c:186
+#, fuzzy
 msgid "Search for a string"
-msgstr ""
+msgstr "kugirango a Ikurikiranyanyuguti"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
+#, fuzzy
 msgid "Find Ne_xt"
-msgstr ""
+msgstr "Shaka ibikurikira"
 
 #: libgnomeui/gnome-app-helper.c:192
+#, fuzzy
 msgid "Search again for the same string"
-msgstr ""
+msgstr "kugirango Ikurikiranyanyuguti"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
+#, fuzzy
 msgid "R_eplace..."
-msgstr ""
+msgstr "Gusimbura:"
 
 #: libgnomeui/gnome-app-helper.c:197
+#, fuzzy
 msgid "Replace a string"
-msgstr ""
+msgstr "a Ikurikiranyanyuguti"
 
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\basidesh.src:RID_POPUP_BRKPROPS.text
+# #-#-#-#-#  basctl.pot (Gnome 2.12)  #-#-#-#-#
+# basctl/source\basicide\tbxctl.src:RID_TOOLBOX.SID_SHOW_PROPERTYBROWSER.text
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
+#, fuzzy
 msgid "_Properties"
-msgstr ""
+msgstr "indangakintu"
 
 #: libgnomeui/gnome-app-helper.c:203
+#, fuzzy
 msgid "Modify the file's properties"
-msgstr ""
+msgstr "Indangakintu..."
 
 #.
 #. * The Settings menu
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
+#, fuzzy
 msgid "Prefere_nces"
-msgstr ""
+msgstr "Ibyahiswemo"
 
 #: libgnomeui/gnome-app-helper.c:212
+#, fuzzy
 msgid "Configure the application"
-msgstr ""
+msgstr "Porogaramu"
 
 #. 20
 #.
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#, fuzzy
 msgid "_About"
-msgstr ""
+msgstr "Bigyanye"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#, fuzzy
 msgid "About this application"
-msgstr ""
+msgstr "iyi Porogaramu"
 
+# #-#-#-#-#  padmin.pot (Gnome 2.12)  #-#-#-#-#
+# padmin/source\padialog.src:RID_FONTIMPORT_DIALOG.RID_FIMP_BTN_SELECTALL.text
+# #-#-#-#-#  padmin.pot (Gnome 2.12)  #-#-#-#-#
+# padmin/source\padialog.src:RID_ADDP_PAGE_OLDPRINTERS.RID_ADDP_OLD_BTN_SELECTALL.text
 #: libgnomeui/gnome-app-helper.c:225
+#, fuzzy
 msgid "Select _All"
-msgstr ""
+msgstr "Hitamo byose"
 
 #: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
@@ -442,96 +608,125 @@ msgstr ""
 #. * Window menu
 #.
 #: libgnomeui/gnome-app-helper.c:234
+#, fuzzy
 msgid "Create New _Window"
-msgstr ""
+msgstr "a Gishya Idirishya"
 
 #: libgnomeui/gnome-app-helper.c:235
+#, fuzzy
 msgid "Create a new window"
-msgstr ""
+msgstr "a Gishya Idirishya"
 
 #: libgnomeui/gnome-app-helper.c:239
+#, fuzzy
 msgid "_Close This Window"
-msgstr ""
+msgstr "Funga"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#, fuzzy
 msgid "Close the current window"
-msgstr ""
+msgstr "Funga KIGEZWEHO Idirishya"
 
 #.
 #. * The "Game" menu
 #.
 #: libgnomeui/gnome-app-helper.c:248
+#, fuzzy
 msgid "_New game"
-msgstr ""
+msgstr "Impera"
 
 #: libgnomeui/gnome-app-helper.c:249
+#, fuzzy
 msgid "Start a new game"
-msgstr ""
+msgstr "Gutangira a Gishya"
 
 #: libgnomeui/gnome-app-helper.c:253
+#, fuzzy
 msgid "_Pause game"
-msgstr ""
+msgstr "Impera"
 
 #: libgnomeui/gnome-app-helper.c:254
+#, fuzzy
 msgid "Pause the game"
-msgstr ""
+msgstr "Ububikokoporora"
 
 #: libgnomeui/gnome-app-helper.c:258
+#, fuzzy
 msgid "_Restart game"
-msgstr ""
+msgstr "Gutangira a Gishya"
 
 #: libgnomeui/gnome-app-helper.c:259
+#, fuzzy
 msgid "Restart the game"
-msgstr ""
+msgstr "Gutangira a Gishya"
 
 #: libgnomeui/gnome-app-helper.c:263
+#, fuzzy
 msgid "_Undo move"
-msgstr ""
+msgstr "Kwimura"
 
 #: libgnomeui/gnome-app-helper.c:264
+#, fuzzy
 msgid "Undo the last move"
-msgstr ""
+msgstr "Iheruka Kwimura"
 
 #: libgnomeui/gnome-app-helper.c:268
+#, fuzzy
 msgid "_Redo move"
-msgstr ""
+msgstr "Kwimura"
 
 #: libgnomeui/gnome-app-helper.c:269
+#, fuzzy
 msgid "Redo the undone move"
-msgstr ""
+msgstr "Kwimura"
 
 #: libgnomeui/gnome-app-helper.c:273
+#, fuzzy
 msgid "_Hint"
-msgstr ""
+msgstr "Kuvamo"
 
 #: libgnomeui/gnome-app-helper.c:274
+#, fuzzy
 msgid "Get a hint for your next move"
-msgstr ""
+msgstr "a kugirango Komeza>> Kwimura"
 
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
+#, fuzzy
 msgid "_Scores..."
-msgstr ""
+msgstr "Gushakisha..."
 
 #: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
 msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:284
+#, fuzzy
 msgid "_End game"
-msgstr ""
+msgstr "Impera"
 
 #: libgnomeui/gnome-app-helper.c:285
+#, fuzzy
 msgid "End the current game"
-msgstr ""
+msgstr "Impera KIGEZWEHO"
 
+# #-#-#-#-#  sc.pot (Gnome 2.12)  #-#-#-#-#
+# sc/source\ui\dbgui\validate.src:TP_VALIDATION_INPUTHELP.FL_CONTENT.text
+# #-#-#-#-#  sc.pot (Gnome 2.12)  #-#-#-#-#
+# sc/source\ui\dbgui\validate.src:TP_VALIDATION_ERROR.FL_CONTENT.text
+# #-#-#-#-#  sc.pot (Gnome 2.12)  #-#-#-#-#
+# sc/source\ui\navipi\navipi.src:RID_SCDLG_NAVIGATOR.TBX_CMD.IID_ZOOMOUT.text
+# #-#-#-#-#  sc.pot (Gnome 2.12)  #-#-#-#-#
+# sc/source\ui\navipi\navipi.src:SCSTR_CONTENT_ROOT.text
 #: libgnomeui/gnome-app-helper.c:1143
+#, fuzzy
 msgid "_Contents"
-msgstr ""
+msgstr "Ibigize"
 
 #: libgnomeui/gnome-app-helper.c:1146
+#, fuzzy
 msgid "View help for this application"
-msgstr ""
+msgstr "Ifashayobora kugirango iyi Porogaramu"
 
 #: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
@@ -543,11 +738,11 @@ msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
-msgstr ""
+msgstr "Udushushondanga Gusa"
 
 #: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
-msgstr "amagambo gusa"
+msgstr "umwandiko gusa"
 
 #: libgnomeui/gnome-app-helper.c:2634
 #, c-format
@@ -555,95 +750,112 @@ msgid "Use Desktop Default (%s)"
 msgstr ""
 
 #: libgnomeui/gnome-app-util.c:99
+#, fuzzy
 msgid " (press return)"
-msgstr ""
+msgstr "(Kanda Garuka"
 
+# starmath/source\smres.src:RID_ERR_IDENT.text
 #: libgnomeui/gnome-app-util.c:141
+#, fuzzy
 msgid "ERROR: "
-msgstr "ikosa"
+msgstr "IKOSA"
 
 #: libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
-msgstr ""
+msgstr "Iburira:"
 
 #: libgnomeui/gnome-app-util.c:316
 msgid "y"
-msgstr ""
+msgstr "y"
 
+# svx/source\svdraw\svdstr.src:STR_ItemValYES.text
 #: libgnomeui/gnome-app-util.c:317
 msgid "yes"
 msgstr "Yego"
 
 #: libgnomeui/gnome-app-util.c:320
 msgid "n"
-msgstr ""
+msgstr "n"
 
 #: libgnomeui/gnome-app-util.c:321
+#, fuzzy
 msgid "no"
-msgstr ""
+msgstr "Oya"
 
 #: libgnomeui/gnome-app-util.c:356
+#, fuzzy
 msgid " (yes or no)"
-msgstr ""
+msgstr "(Yego Cyangwa Oya"
 
 #: libgnomeui/gnome-app-util.c:357
+#, fuzzy
 msgid "  - OK? (yes or no)"
-msgstr ""
+msgstr "-Yego Cyangwa Oya"
 
+# padmin/source\padialog.src:RID_PROGRESS_DLG.RID_PROGRESS_PROGRESS_TXT.text
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
-msgstr "Iterambere"
+msgstr "Aho bigeze"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr ""
 
 #: libgnomeui/gnome-app.c:154
+#, fuzzy
 msgid "The application ID string"
-msgstr ""
+msgstr "Porogaramu Ikurikiranyanyuguti"
 
+# padmin/source\padialog.src:RID_PROGRESS_DLG.RID_PROGRESS_PROGRESS_TXT.text
 #: libgnomeui/gnome-appbar.c:747
+#, fuzzy
 msgid "Has Progress"
-msgstr ""
+msgstr "Aho bigeze"
 
 #: libgnomeui/gnome-appbar.c:748
+#, fuzzy
 msgid "Create a progress widget."
-msgstr ""
+msgstr "a Aho bigeze"
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
 msgstr ""
 
 #: libgnomeui/gnome-appbar.c:756
+#, fuzzy
 msgid "Create a status widget."
-msgstr ""
+msgstr "a Imimerere"
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
 msgstr ""
 
 #: libgnomeui/gnome-appbar.c:764
+#, fuzzy
 msgid "Level of user activity required."
-msgstr ""
+msgstr "Bya Ukoresha: Umurimo Bya ngombwa"
 
 #: libgnomeui/gnome-authentication-manager.c:70
+#, fuzzy
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Kuri LOG in"
 
 #: libgnomeui/gnome-authentication-manager.c:71
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
-msgstr ""
+msgstr "LOG in Kuri"
 
 #: libgnomeui/gnome-authentication-manager.c:74
+#, fuzzy
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Ijambobanga..."
 
 #: libgnomeui/gnome-authentication-manager.c:75
+#, fuzzy
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Ijambobanga... Bishunzwe:"
 
 #: libgnomeui/gnome-authentication-manager.c:78
 #: libgnomeui/gnome-authentication-manager.c:307
@@ -651,463 +863,585 @@ msgid "Authentication Required"
 msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:299
-#, c-format
+#, fuzzy, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr ""
+msgstr "LOG in Kuri Urwego"
 
 #: libgnomeui/gnome-authentication-manager.c:301
-#, c-format
+#, fuzzy, c-format
 msgid "You must log in to access %s\n"
-msgstr ""
+msgstr "LOG in Kuri"
 
 #: libgnomeui/gnome-client.c:863
+#, fuzzy
 msgid "Specify session management ID"
-msgstr ""
+msgstr "Umukoro"
 
+# svtools/source\dialogs\addresstemplate.src:STR_FIELD_ID.text
 #: libgnomeui/gnome-client.c:863
 msgid "ID"
-msgstr "irangamimerere"
+msgstr "ID"
 
 #: libgnomeui/gnome-client.c:866
+#, fuzzy
 msgid "Specify prefix of saved configuration"
-msgstr ""
+msgstr "Imbanziriza Bya Iboneza"
 
+# #-#-#-#-#  officecfg.pot (Gnome 2.12)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Wizard.Agenda.Save.AutoPrefix.text
+# #-#-#-#-#  officecfg.pot (Gnome 2.12)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Wizard.Letter.Save.AutoPrefix.text
+# #-#-#-#-#  officecfg.pot (Gnome 2.12)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Wizard.Fax.Save.AutoPrefix.text
+# #-#-#-#-#  officecfg.pot (Gnome 2.12)  #-#-#-#-#
+# officecfg/registry\schema\org\openoffice\Office\Writer.xcs:....Wizard.Memo.Save.AutoPrefix.text
 #: libgnomeui/gnome-client.c:866
+#, fuzzy
 msgid "PREFIX"
-msgstr "imenyakanisha"
+msgstr "Imbanziriza"
 
 #: libgnomeui/gnome-client.c:869
+#, fuzzy
 msgid "Disable connection to session manager"
-msgstr ""
+msgstr "Ukwihuza Kuri Umukoro Muyobozi"
 
 #: libgnomeui/gnome-client.c:975
+#, fuzzy
 msgid "Session management"
-msgstr ""
+msgstr "Umukoro"
 
 #: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr ""
 
 #: libgnomeui/gnome-color-picker.c:414
+#, fuzzy
 msgid "Received invalid color data\n"
-msgstr ""
+msgstr "Sibyo Ibara"
 
 #: libgnomeui/gnome-color-picker.c:465
+#, fuzzy
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "a Ikiganiro Kuri Ibara"
 
 #: libgnomeui/gnome-color-picker.c:487
+#, fuzzy
 msgid "Pick a color"
-msgstr ""
+msgstr "a Ibara"
 
 #: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
 msgid "Time"
-msgstr "igihe"
+msgstr "Igihe"
 
 #: libgnomeui/gnome-dateedit.c:480
+#, fuzzy
 msgid "The time currently selected"
-msgstr ""
+msgstr "Igihe Byahiswemo"
 
 #: libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
 msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:493
+#, fuzzy
 msgid "Flags for how DateEdit looks"
-msgstr ""
+msgstr "kugirango"
 
 #: libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
 msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:503
+#, fuzzy
 msgid "Lower hour in the time popup selector"
-msgstr ""
+msgstr "ISAHA in Igihe"
 
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
 msgstr ""
 
 #: libgnomeui/gnome-dateedit.c:514
+#, fuzzy
 msgid "Upper hour in the time popup selector"
-msgstr ""
+msgstr "ISAHA in Igihe"
 
 #: libgnomeui/gnome-dateedit.c:524
+#, fuzzy
 msgid "Initial Time"
-msgstr ""
+msgstr "Igihe"
 
 #: libgnomeui/gnome-dateedit.c:525
+#, fuzzy
 msgid "The initial time"
-msgstr ""
+msgstr "Igihe"
 
 #: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "Itariki"
 
+# wizards/source\euro\euro.src:MESSAGES_+_2.text
 #: libgnomeui/gnome-dateedit.c:752
+#, fuzzy
 msgid "Select Date"
-msgstr ""
+msgstr "Guhitamo idosiye"
 
 #: libgnomeui/gnome-dateedit.c:752
+#, fuzzy
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Itariki Bivuye a Kalindari"
 
+# svtools/source\dialogs\addresstemplate.src:STR_FIELD_CALENDAR.text
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
 msgid "Calendar"
-msgstr "Karendari"
+msgstr "Kalindari"
 
+# wizards/source\euro\euro.src:MESSAGES_+_2.text
 #: libgnomeui/gnome-dateedit.c:784
+#, fuzzy
 msgid "Select Time"
-msgstr ""
+msgstr "Guhitamo idosiye"
 
 #: libgnomeui/gnome-dateedit.c:784
+#, fuzzy
 msgid "Select the time from a list"
-msgstr ""
+msgstr "Igihe Bivuye a Urutonde"
 
 #: libgnomeui/gnome-dateedit.c:1003
+#, fuzzy
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
+msgstr "Bitemewe. Gukoresha"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
 msgid "Title"
-msgstr "umutwe"
+msgstr "Umutwe"
 
 #: libgnomeui/gnome-druid-page-standard.c:122
+#, fuzzy
 msgid "Title of the druid"
-msgstr ""
+msgstr "Bya"
 
 #: libgnomeui/gnome-druid-page-standard.c:130
+#, fuzzy
 msgid "Logo image"
-msgstr ""
+msgstr "Ishusho"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
 msgstr ""
 
 #: libgnomeui/gnome-druid-page-standard.c:138
+#, fuzzy
 msgid "Watermark image for the top"
-msgstr ""
+msgstr "Ishusho kugirango Hejuru:"
 
 #: libgnomeui/gnome-druid-page-standard.c:145
+#, fuzzy
 msgid "Title Foreground"
-msgstr ""
+msgstr "Ibara Gushyiraho"
 
 #: libgnomeui/gnome-druid-page-standard.c:146
+#, fuzzy
 msgid "Foreground color of the title"
-msgstr ""
+msgstr "Ibara Bya Umutwe"
 
 #: libgnomeui/gnome-druid-page-standard.c:153
+#, fuzzy
 msgid "Title Foreground Color"
-msgstr ""
+msgstr "Ibara Gushyiraho"
 
 #: libgnomeui/gnome-druid-page-standard.c:154
+#, fuzzy
 msgid "Foreground color of the title as a GdkColor"
-msgstr ""
+msgstr "Ibara Bya Umutwe Nka a"
 
 #: libgnomeui/gnome-druid-page-standard.c:161
+#, fuzzy
 msgid "Title Foreground color set"
-msgstr ""
+msgstr "Ibara Gushyiraho"
 
 #: libgnomeui/gnome-druid-page-standard.c:162
+#, fuzzy
 msgid "Foreground color of the title is set"
-msgstr ""
+msgstr "Ibara Bya Umutwe ni Gushyiraho"
 
+# svx/sdi\svxslots.src:SID_BACKGROUND_COLOR.text
 #: libgnomeui/gnome-druid-page-standard.c:169
 #: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
-msgstr "ibara ry'imbuganyuma"
+msgstr "Ibara rya mbuganyuma"
 
 #: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
-msgstr "ibara ry'imbuganyuma"
+msgstr "Ibara rya mbuganyuma"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
+#, fuzzy
 msgid "Background color as a GdkColor"
-msgstr ""
+msgstr "Ibara Nka a"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
+#, fuzzy
 msgid "Background color set"
-msgstr ""
+msgstr "Ibara Gushyiraho"
 
 #: libgnomeui/gnome-druid-page-standard.c:186
+#, fuzzy
 msgid "Background color is set"
-msgstr ""
+msgstr "Ibara ni Gushyiraho"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
+#, fuzzy
 msgid "Contents Background Color"
-msgstr ""
+msgstr "Ibara"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
+#, fuzzy
 msgid "Contents Background color"
-msgstr ""
+msgstr "Ibara"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
+#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr ""
+msgstr "Ibara Nka a"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
+#, fuzzy
 msgid "Contents Background color set"
-msgstr ""
+msgstr "Ibara Gushyiraho"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
+#, fuzzy
 msgid "Contents Background color is set"
-msgstr ""
+msgstr "Ibara ni Gushyiraho"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
+#, fuzzy
 msgid "Logo Background Color"
-msgstr ""
+msgstr "Ibara"
 
 #: libgnomeui/gnome-druid-page-standard.c:217
+#, fuzzy
 msgid "Logo Background color"
-msgstr ""
+msgstr "Ibara"
 
 #: libgnomeui/gnome-druid-page-standard.c:225
+#, fuzzy
 msgid "Logo Background color as a GdkColor"
-msgstr ""
+msgstr "Ibara Nka a"
 
 #: libgnomeui/gnome-druid-page-standard.c:232
+#, fuzzy
 msgid "Logo Background color set"
-msgstr ""
+msgstr "Ibara Gushyiraho"
 
 #: libgnomeui/gnome-druid-page-standard.c:233
+#, fuzzy
 msgid "Logo Background color is set"
-msgstr ""
+msgstr "Ibara ni Gushyiraho"
 
 #: libgnomeui/gnome-druid.c:150
+#, fuzzy
 msgid "Show Finish"
-msgstr ""
+msgstr "Ingano"
 
 #: libgnomeui/gnome-druid.c:151
+#, fuzzy
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr ""
+msgstr "Akabuto Bya Akabuto"
 
 #: libgnomeui/gnome-druid.c:158
+#, fuzzy
 msgid "Show Help"
-msgstr ""
+msgstr "Ingano"
 
 #: libgnomeui/gnome-druid.c:159
+#, fuzzy
 msgid "Show the 'Help' button"
-msgstr ""
+msgstr "Akabuto"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
+#, fuzzy
 msgid "History id"
-msgstr ""
+msgstr "ID"
 
 #: libgnomeui/gnome-entry.c:200
+#, fuzzy
 msgid "GTK entry"
-msgstr ""
+msgstr "Icyinjijwe"
 
 #: libgnomeui/gnome-entry.c:201
+#, fuzzy
 msgid "The GTK entry"
-msgstr ""
+msgstr "Icyinjijwe"
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
+#, fuzzy
 msgid "History ID"
-msgstr ""
+msgstr "ID"
 
 #: libgnomeui/gnome-file-entry.c:230
+#, fuzzy
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
+msgstr "Ikiranga kugirango IDOSIYE Icyinjijwe Kuri Kubika Urutonde Urutonde"
 
 #: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:239
+#, fuzzy
 msgid "Title for the Browse file dialog."
-msgstr ""
+msgstr "kugirango IDOSIYE Ikiganiro"
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:247
+#, fuzzy
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
+msgstr "IDOSIYE Icyinjijwe ni Kuri Injiza bushyinguro Amazina Cyangwa Byuzuye"
 
+# #-#-#-#-#  goodies.pot (Gnome 2.12)  #-#-#-#-#
+# goodies/source\filter.vcl\egif\dlgegif.src:DLG_EXPORT_GIF.GRP_MODE.text
+# #-#-#-#-#  goodies.pot (Gnome 2.12)  #-#-#-#-#
+# goodies/source\filter.vcl\eos2met\dlgeos2.src:DLG_EXPORT_EMET.GRP_MODE.text
+# #-#-#-#-#  goodies.pot (Gnome 2.12)  #-#-#-#-#
+# goodies/source\filter.vcl\epict\dlgepct.src:DLG_EXPORT_EPCT.GRP_MODE.text
+# #-#-#-#-#  goodies.pot (Gnome 2.12)  #-#-#-#-#
+# goodies/source\filter.vcl\epng\dlgepng.src:DLG_EXPORT_EPNG.GRP_COMPRESSION.text
 #: libgnomeui/gnome-file-entry.c:255
+#, fuzzy
 msgid "Modal"
-msgstr ""
+msgstr "Ubwoko"
 
 #: libgnomeui/gnome-file-entry.c:256
+#, fuzzy
 msgid "Whether the Browse file window should be modal."
-msgstr ""
+msgstr "IDOSIYE Idirishya"
 
 #: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "Izina ry'idosiye"
 
 #: libgnomeui/gnome-file-entry.c:264
+#, fuzzy
 msgid "Filename that should be displayed in the file entry."
-msgstr ""
+msgstr "in IDOSIYE Icyinjijwe"
 
 #: libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:273
+#, fuzzy
 msgid "Default path for the Browse file window."
-msgstr ""
+msgstr "Inzira kugirango IDOSIYE Idirishya"
 
 #: libgnomeui/gnome-file-entry.c:280
+#, fuzzy
 msgid "GnomeEntry"
-msgstr ""
+msgstr "Icyinjijwe"
 
 #: libgnomeui/gnome-file-entry.c:281
+#, fuzzy
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
+"IDOSIYE Icyinjijwe kugirango Gukoresha iyi indangakintu Kuri Kubona NIBA "
+"Kuri Guhindura Cyangwa Ikibazo# Bya Ibigenga"
 
 #: libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:292
+#, fuzzy
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
+"IDOSIYE Icyinjijwe kugirango Gukoresha iyi indangakintu Kuri Kubona NIBA "
+"Kuri Guhindura Cyangwa Ikibazo# Bya Ibigenga"
 
 #: libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
 msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:303
+#, fuzzy
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr ""
+msgstr "Kuri Gukoresha Gishya Cyangwa Kuri Guhitamo Idosiye"
 
+# wizards/source\euro\euro.src:MESSAGES_+_2.text
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
-msgstr "Hitamo idosiye"
+msgstr "Guhitamo idosiye"
 
 #: libgnomeui/gnome-file-entry.c:786
 msgid "Path"
-msgstr "akayira"
+msgstr "Inzira"
 
 #: libgnomeui/gnome-file-entry.c:786
+#, fuzzy
 msgid "Path to file"
-msgstr ""
+msgstr "Kuri IDOSIYE"
 
 #: libgnomeui/gnome-file-entry.c:813
+#, fuzzy
 msgid "_Browse..."
-msgstr ""
+msgstr "Gushakisha..."
 
 #: libgnomeui/gnome-file-entry.c:814
+#, fuzzy
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "Hejuru a IDOSIYE Kuri Guhitamo a IDOSIYE"
 
 #: libgnomeui/gnome-font-picker.c:66
+#, fuzzy
 msgid "sans 12"
-msgstr ""
+msgstr "Nta 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:68
+#, fuzzy
 msgid "Pick a Font"
-msgstr ""
+msgstr "a"
 
 #: libgnomeui/gnome-font-picker.c:156
+#, fuzzy
 msgid "The title of the selection dialog box"
-msgstr ""
+msgstr "Umutwe Bya Ihitamo Ikiganiro Agasanduku"
 
+# #-#-#-#-#  goodies.pot (Gnome 2.12)  #-#-#-#-#
+# goodies/source\filter.vcl\egif\dlgegif.src:DLG_EXPORT_GIF.GRP_MODE.text
+# #-#-#-#-#  goodies.pot (Gnome 2.12)  #-#-#-#-#
+# goodies/source\filter.vcl\eos2met\dlgeos2.src:DLG_EXPORT_EMET.GRP_MODE.text
+# #-#-#-#-#  goodies.pot (Gnome 2.12)  #-#-#-#-#
+# goodies/source\filter.vcl\epict\dlgepct.src:DLG_EXPORT_EPCT.GRP_MODE.text
+# #-#-#-#-#  goodies.pot (Gnome 2.12)  #-#-#-#-#
+# goodies/source\filter.vcl\epng\dlgepng.src:DLG_EXPORT_EPNG.GRP_COMPRESSION.text
 #: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
-msgstr "uburyo"
+msgstr "Ubwoko"
 
 #: libgnomeui/gnome-font-picker.c:165
+#, fuzzy
 msgid "The mode of operation of the font picker"
-msgstr ""
+msgstr "Ubwoko Bya Bya Intego- nyuguti"
 
+# svx/sdi\svxslots.src:SID_ATTR_CHAR_FONT.text
 #: libgnomeui/gnome-font-picker.c:174
+#, fuzzy
 msgid "Font name"
-msgstr ""
+msgstr "Izina ry'Umukono"
 
 #: libgnomeui/gnome-font-picker.c:175
+#, fuzzy
 msgid "Name of the selected font"
-msgstr ""
+msgstr "Bya Byahiswemo Intego- nyuguti"
 
 #: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
-msgstr "Umukono"
+msgstr "Intego-nyuguti"
 
 #: libgnomeui/gnome-font-picker.c:185
+#, fuzzy
 msgid "The selected GtkFont"
-msgstr ""
+msgstr "Byahiswemo"
 
 #: libgnomeui/gnome-font-picker.c:192
+#, fuzzy
 msgid "Preview text"
-msgstr ""
+msgstr "Umwandiko"
 
 #: libgnomeui/gnome-font-picker.c:193
+#, fuzzy
 msgid "Preview text shown in the dialog"
-msgstr ""
+msgstr "Umwandiko in Ikiganiro"
 
 #: libgnomeui/gnome-font-picker.c:201
+#, fuzzy
 msgid "Use font in label"
-msgstr ""
+msgstr "Intego- nyuguti in Akarango"
 
 #: libgnomeui/gnome-font-picker.c:202
+#, fuzzy
 msgid "Use font in the label in font info mode"
-msgstr ""
+msgstr "Intego- nyuguti in Akarango in Intego- nyuguti Ibisobanuro Ubwoko"
 
 #: libgnomeui/gnome-font-picker.c:210
+#, fuzzy
 msgid "Font size for label"
-msgstr ""
+msgstr "Ingano kugirango Akarango"
 
 #: libgnomeui/gnome-font-picker.c:211
+#, fuzzy
 msgid "Font size for label in font info mode"
-msgstr ""
+msgstr "Ingano kugirango Akarango in Intego- nyuguti Ibisobanuro Ubwoko"
 
 #: libgnomeui/gnome-font-picker.c:221
+#, fuzzy
 msgid "Show size"
-msgstr ""
+msgstr "Ingano"
 
 #: libgnomeui/gnome-font-picker.c:222
+#, fuzzy
 msgid "Show size in font info mode"
-msgstr ""
+msgstr "Ingano in Intego- nyuguti Ibisobanuro Ubwoko"
 
 #: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
 msgstr ""
 
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
+# #-#-#-#-#  dbaccess.pot (Gnome 2.12)  #-#-#-#-#
 #: libgnomeui/gnome-gconf-ui.c:96
+#, fuzzy
 msgid "_Details"
-msgstr ""
+msgstr "Birambuye"
 
 #: libgnomeui/gnome-gconf-ui.c:169
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
+"Porogaramu Kuri Guhindura>> Bya Iboneza Sisitemu umuyobozi/ uyobora Cyangwa "
+"Sisitemu Umucuruzi OYA Kwemerera Kuri Guhindura>> Bya Amagenamiterere "
+"Byahiswemo Gicurasi OYA INGARUKA Cyangwa Gicurasi OYA Komeza>> Igihe "
+"Gukoresha Porogaramu"
 
 #: libgnomeui/gnome-gconf-ui.c:176
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
+"Ikosa Itangira... Cyangwa Mu kubika Iboneza Ibisobanuro kugirango Bya "
+"Iboneza Amagenamiterere Gicurasi OYA Akazi"
 
 #: libgnomeui/gnome-href.c:123
 msgid "URL"
-msgstr "URL-Inkomoko imwe"
+msgstr "URL"
 
 #: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
@@ -1115,117 +1449,142 @@ msgstr ""
 
 #: libgnomeui/gnome-href.c:131
 msgid "Text"
-msgstr "Amagambo"
+msgstr "Umwandiko"
 
 #: libgnomeui/gnome-href.c:132
+#, fuzzy
 msgid "The text on the button"
-msgstr ""
+msgstr "Umwandiko ku Akabuto"
 
 #: libgnomeui/gnome-href.c:133
+#, fuzzy
 msgid "End World Hunger"
-msgstr ""
+msgstr "Impera"
 
 #: libgnomeui/gnome-href.c:139
+#, fuzzy
 msgid "Link color"
-msgstr ""
+msgstr "Ibara"
 
 #: libgnomeui/gnome-href.c:140
+#, fuzzy
 msgid "Color used to draw the link"
-msgstr ""
+msgstr "Kuri Gushushanya Ihuza"
 
 #: libgnomeui/gnome-href.c:171
+#, fuzzy
 msgid "This button will take you to the URI that it displays."
-msgstr ""
+msgstr "Akabuto Kuri"
 
 #: libgnomeui/gnome-href.c:394
+#, fuzzy
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
+"Ikosa Kuri Mburabuzi Urubuga Mucukumbuzi Kugenzura... Amagenamiterere in"
 
 #: libgnomeui/gnome-icon-entry.c:178
+#, fuzzy
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
+"Ikiranga kugirango Agashushondanga Icyinjijwe Kuri Kubika Urutonde Urutonde"
 
 #: libgnomeui/gnome-icon-entry.c:187
+#, fuzzy
 msgid "Title for the Browse icon dialog."
-msgstr ""
+msgstr "kugirango Agashushondanga Ikiganiro"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
 msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:195
+#, fuzzy
 msgid "Directory that will be searched for icons."
-msgstr ""
+msgstr "kugirango Udushushondanga"
 
 #: libgnomeui/gnome-icon-entry.c:203
+#, fuzzy
 msgid "Filename that should be displayed in the icon entry."
-msgstr ""
+msgstr "in Agashushondanga Icyinjijwe"
 
 #: libgnomeui/gnome-icon-entry.c:211
+#, fuzzy
 msgid "Picker dialog"
-msgstr ""
+msgstr "Ikiganiro"
 
 #: libgnomeui/gnome-icon-entry.c:212
+#, fuzzy
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
+"Ikiganiro Gukoresha iyi indangakintu Kuri Kubona NIBA Kuri Guhindura Cyangwa "
+"Ikibazo# Bya Indangakintu..."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
 msgstr ""
 
 #: libgnomeui/gnome-icon-entry.c:750
+#, fuzzy
 msgid "Icon selection dialog"
-msgstr ""
+msgstr "Ihitamo Ikiganiro"
 
 #: libgnomeui/gnome-icon-entry.c:751
+#, fuzzy
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "Ikiganiro Agasanduku Guhitamo Agashushondanga"
 
 #: libgnomeui/gnome-icon-entry.c:757
+#, fuzzy
 msgid "Icon selector"
-msgstr ""
+msgstr "Ihitamo Ikiganiro"
 
 #: libgnomeui/gnome-icon-entry.c:758
+#, fuzzy
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "Agashushondanga"
 
 #: libgnomeui/gnome-icon-entry.c:983
+#, fuzzy
 msgid "Icon Selector"
-msgstr ""
+msgstr "Ihitamo Ikiganiro"
 
 #: libgnomeui/gnome-icon-entry.c:984
+#, fuzzy
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "Akabuto Gufungura a Idirishya Kuri Guhitamo Agashushondanga"
 
+# toolkit/source\awt\accessiblestrings.src:RID_STR_ACC_NAME_BROWSEBUTTON.text
 #: libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
-msgstr "Shakisha"
+msgstr "Gushakisha"
 
 #: libgnomeui/gnome-icon-entry.c:1009
+#, fuzzy
 msgid "Icon path"
-msgstr ""
+msgstr "Inzira"
 
 #: libgnomeui/gnome-icon-entry.c:1010
+#, fuzzy
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
+msgstr "Injiza Izina: Bya bushyinguro Agashushondanga Ishusho"
 
 #: libgnomeui/gnome-icon-sel.c:293
-#, c-format
+#, fuzzy, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr ""
+msgstr "OYA Cyangwa ni OYA a bushyinguro"
 
 #: libgnomeui/gnome-icon-sel.c:301
-#, c-format
+#, fuzzy, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr ""
+msgstr "Gufungura bushyinguro"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
@@ -1233,7 +1592,7 @@ msgstr ""
 
 #: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
-msgstr "amakuru"
+msgstr "Ibisobanuro"
 
 #: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
@@ -1241,76 +1600,95 @@ msgstr "Iburira"
 
 #: libgnomeui/gnome-messagebox.c:120
 msgid "Error"
-msgstr "ikosa"
+msgstr "Ikosa"
 
 #: libgnomeui/gnome-messagebox.c:126
 msgid "Question"
 msgstr ""
 
+# sfx2/source\doc\doc.src:STR_DOCTYPENAME_MESSAGE.text
 #: libgnomeui/gnome-messagebox.c:131
 msgid "Message"
-msgstr "ubutumwa"
+msgstr "Ubutumwa"
 
 #: libgnomeui/gnome-password-dialog.c:252
+#, fuzzy
 msgid "_Username:"
-msgstr ""
+msgstr "Izina ry'ukoresha"
 
 #: libgnomeui/gnome-password-dialog.c:254
+#, fuzzy
 msgid "_Domain:"
-msgstr ""
+msgstr "Urubuga:"
 
+# basctl/source\basicide\moduldlg.src:RID_TP_LIBS.RID_PB_PASSWORD.text
 #: libgnomeui/gnome-password-dialog.c:256
+#, fuzzy
 msgid "_Password:"
-msgstr ""
+msgstr "Ijambobanga..."
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
 msgstr ""
 
 #: libgnomeui/gnome-password-dialog.c:335
+#, fuzzy
 msgid "Connect as _user:"
-msgstr ""
+msgstr "Nka Ukoresha:"
 
 #: libgnomeui/gnome-password-dialog.c:433
+#, fuzzy
 msgid "Remember password for this session"
-msgstr ""
+msgstr "Ijambobanga... kugirango iyi Umukoro"
 
 #: libgnomeui/gnome-password-dialog.c:435
+#, fuzzy
 msgid "Save password in keyring"
-msgstr ""
+msgstr "Kubika Ijambobanga... in"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
+#, fuzzy
 msgid "Do Preview"
-msgstr ""
+msgstr "Igaragazambere"
 
 #: libgnomeui/gnome-pixmap-entry.c:115
+#, fuzzy
 msgid "Whether the pixmap entry should have a preview."
-msgstr ""
+msgstr "Icyinjijwe a Igaragazambere"
 
 #: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
+#, fuzzy
 msgid "No Image"
-msgstr ""
+msgstr "Ishusho"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
-msgstr ""
+msgstr "Igaragazambere ry'ishusho"
 
 #: libgnomeui/gnome-pixmap-entry.c:207
+#, fuzzy
 msgid "A preview of the image currently specified"
-msgstr ""
+msgstr "A Igaragazambere Bya Ishusho"
 
 #: libgnomeui/gnome-pixmap-entry.c:414
+#, fuzzy
 msgid "Can't find an hbox, using a normal file selection"
-msgstr ""
+msgstr "Gushaka ikoresha a Bisanzwe IDOSIYE Ihitamo"
 
 #: libgnomeui/gnome-pixmap-entry.c:420
 msgid "Preview"
-msgstr "ibibanjirije"
+msgstr "Igaragazambere"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
 msgstr ""
 
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\dialog\chardlg.src:RID_SVXSTR_COLOR_USER.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\dialog\page.src:RID_SVXSTRARY_PAPERSIZE_STD.13.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\dialog\page.src:RID_SVXSTRARY_PAPERSIZE_DRAW.16.text
 #: libgnomeui/gnome-scores.c:91
 msgid "User"
 msgstr "Ukoresha"
@@ -1323,12 +1701,14 @@ msgstr ""
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
 #: libgnomeui/gnome-scores.c:194
+#, fuzzy
 msgid "%a %b %d %T %Y"
-msgstr ""
+msgstr "%a%b%d%T%YCYOSE"
 
 #: libgnomeui/gnome-scores.c:395
+#, fuzzy
 msgid "Sans 14"
-msgstr ""
+msgstr "14"
 
 #: libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
@@ -1339,36 +1719,69 @@ msgid "Table Fill"
 msgstr ""
 
 #: libgnomeui/gnome-stock-icons.c:141
+#, fuzzy
 msgid "Bulleted List"
-msgstr ""
+msgstr "Ilisiti ibarwa"
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
-msgstr ""
+msgstr "Ilisiti ibarwa"
 
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\dialog\fontwork.src:RID_SVXDLG_FONTWORK.MTR_FLD_TEXTSTART.quickhelptext
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\dialog\numpages.src:RID_SVXPAGE_NUM_POSITION.FT_BORDERDIST.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\dialog\paragrph.src:RID_SVXPAGE_STD_PARAGRAPH.FL_INDENT.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\editeng\editeng.src:RID_EDITUNDO_INDENT.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\items\svxitems.src:RID_ATTR_PARA_LRSPACE.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\items\svxitems.src:RID_ATTR_LRSPACE.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\outliner\outliner.src:RID_OUTLUNDO_DEPTH.text
 #: libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
-msgstr "siga marije"
+msgstr "Akagerampera"
 
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\dialog\fontwork.src:RID_SVXDLG_FONTWORK.MTR_FLD_TEXTSTART.quickhelptext
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\dialog\numpages.src:RID_SVXPAGE_NUM_POSITION.FT_BORDERDIST.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\dialog\paragrph.src:RID_SVXPAGE_STD_PARAGRAPH.FL_INDENT.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\editeng\editeng.src:RID_EDITUNDO_INDENT.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\items\svxitems.src:RID_ATTR_PARA_LRSPACE.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\items\svxitems.src:RID_ATTR_LRSPACE.text
+# #-#-#-#-#  svx.pot (Gnome 2.12)  #-#-#-#-#
+# svx/source\outliner\outliner.src:RID_OUTLUNDO_DEPTH.text
 #: libgnomeui/gnome-stock-icons.c:144
+#, fuzzy
 msgid "Un-Indent"
-msgstr ""
+msgstr "Akagerampera"
 
 #: libgnomeui/gnome-stock-icons.c:145
 msgid "About"
-msgstr "ki/bijyanye"
+msgstr "Bigyanye"
 
 #: libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
 msgstr ""
 
 #: libgnomeui/gnome-ui-init.c:119
+#, fuzzy
 msgid "X display to use"
-msgstr ""
+msgstr "Kugaragaza Kuri Gukoresha"
 
+# offmgr/source\offapp\dialog\optgdlg.src:OFA_TP_VIEW.GB_APPEARANCE.text
 #: libgnomeui/gnome-ui-init.c:119
+#, fuzzy
 msgid "DISPLAY"
-msgstr "Kwerekana"
+msgstr "Kugaragaza"
 
 #: libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
@@ -1376,20 +1789,20 @@ msgstr ""
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
-#, c-format
+#, fuzzy, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
+msgstr "Kugaragaza Ikosa"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
-msgstr ""
+msgstr "Kugaragaza"
 
 #: libgnomeui/gnome_segv.c:101
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
@@ -1397,11 +1810,13 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
+"Kuri a Ikosa Gufunga iyi Ikiganiro Byose Porogaramu Gufunga Na Umukoro "
+"Gusohoka Kubika Byose Idosiye Mbere iyi Ikiganiro"
 
 #: libgnomeui/gnome_segv.c:112
-#, c-format
+#, fuzzy, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr ""
+msgstr "Kuvamo"
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
@@ -1409,23 +1824,32 @@ msgid "process %d: %s"
 msgstr ""
 
 #: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+#, fuzzy
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr ""
+msgstr "Bya Kuri Ifashayobora Ongera utangire Porogaramu Iburyo: NONEAHA"
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr ""
 
 #: libgnomeui/gnome_segv.c:153
+#, fuzzy
 msgid "_Restart Application"
-msgstr ""
+msgstr "Porogaramu"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
 msgstr ""
 
+# Debug menu items
 #: libgnomeui/gnome_segv.c:176
+#, fuzzy
 msgid "_Debug"
-msgstr ""
+msgstr "Kosora amakosa"
+
+#: test-gnome/testgnome.xml.h:3
+#, fuzzy
+msgid "Exit the test"
+msgstr "Igerageza"
