@@ -54,6 +54,7 @@
 
 #include "libgnomeuiP.h"
 
+#include <gtk/gtkversion.h>
 #include <gtk/gtkmain.h>
 
 /*****************************************************************************
@@ -729,14 +730,18 @@ const GnomeModuleInfo *
 gnome_gtk_module_info_get (void)
 {
 	static GnomeModuleInfo module_info = {
-		/* XXX the only decent version I found was this,
-		 * it should be the same as GTK though */
-		"gtk", GTK_PIXBUF_VERSION, N_("GTK+"),
+		"gtk", NULL, N_("GTK+"),
 		NULL, NULL,
 		gtk_pre_args_parse, gtk_post_args_parse, gtk_options,
 		NULL,
 		NULL, NULL, NULL
 	};
+	if (module_info.version == NULL) {
+		module_info.version = g_strdup_printf ("%d.%d.%d",
+						       GTK_MAJOR_VERSION,
+						       GTK_MINOR_VERSION,
+						       GTK_MICRO_VERSION);
+	}
 
 	return &module_info;
 }

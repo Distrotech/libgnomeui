@@ -1,3 +1,7 @@
+Mon Sep 03 00:48:06 2001  George Lebl <jirka@5z.com>
+
+	* gnome-ui-init.c: fix gtk version, duh!
+
 Mon Sep 03 00:42:33 2001  George Lebl <jirka@5z.com>
 
 	* gnome-ui-init.c: use the correct GTK+ version
