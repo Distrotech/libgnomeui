@@ -194,7 +194,7 @@ gnome_app_get_property (GObject       *object,
 static void
 gnome_app_instance_init (GnomeApp *app)
 {
-	const char *icons;
+	const char *icons = NULL;
 		
 	app->_priv = NULL;
 	/* XXX: when there is some private stuff enable this

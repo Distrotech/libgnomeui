@@ -25,6 +25,13 @@ Library:
 	(Anders Carlsson, Christian Schaller)
 	* Fix leak in the font picker (Kjartan Maraas)
 	* Fix top-left text for icons in nautilus (Alex Larsson)
+	* Fix the file entry to use utf8 when setting the selected
+	file name (Hidetoshi Tajima)
+	* Fix a crash in the icon entry (Balamurali Viswanathan)
+	* Don't open an infinite amount of preview widgets in the
+	icon entry.
+	* Enable color palette in the color picker (Gustavo Carneiro)
+	* Clear entry items properly in gnome-entry.c (Marco Pesenti Gritti)
 
 Translations:
 

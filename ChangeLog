@@ -1,3 +1,10 @@
+2003-05-26  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* NEWS: Update some more
+	* libgnomeui/gnome-app.c: (gnome_app_instance_init): Init
+	icons to NULL to fix potential problems with python apps.
+	Patch from marcus at frebsd org. Fixes bug #111168.
+
 2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-file-entry.c: Fix the file entry
