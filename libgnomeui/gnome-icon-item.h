@@ -25,6 +25,8 @@
  * Based on the GNOME 1.0 icon item by Miguel de Icaza and Federico Mena.
  */
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #ifndef _GNOME_ICON_TEXT_ITEM_H_
 #define _GNOME_ICON_TEXT_ITEM_H_
 
@@ -131,3 +133,5 @@ GtkEditable *gnome_icon_text_item_get_editable  (GnomeIconTextItem *iti);
 G_END_DECLS
 
 #endif /* _GNOME_ICON_TEXT_ITEM_H_ */
+
+#endif /* GNOME_DISABLE_DEPRECATED */

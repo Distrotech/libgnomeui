@@ -1,5 +1,10 @@
 2004-11-13  Anders Carlsson  <andersca@gnome.org>
 
+	* libgnomeui/gnome-icon-item.h:
+	Deprecate, used by GnomeIconList which is also deprecated.
+	
+2004-11-13  Anders Carlsson  <andersca@gnome.org>
+
 	* libgnome/gnome-scores.h:
 	Deprecate. This is too specialized, and eventually a replacement
 	will find its way into gnome-games.
