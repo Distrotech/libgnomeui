@@ -113,12 +113,13 @@ gnome_add_gtk_arg_callback(poptContext con,
 			   const struct poptOption * opt,
 			   const char * arg, void * data)
 {
+  static gnome_gtk_initialized = FALSE;
   static GPtrArray *gtk_args = NULL;
   char *newstr, *newarg;
   int final_argc;
   char **final_argv;
 
-  if(gnome_initialized) {
+  if(gnome_gtk_initialized) {
     /* gnome has already been initialized, so app might be making a
        second pass over the args - just ignore */
     return;
@@ -127,8 +128,11 @@ gnome_add_gtk_arg_callback(poptContext con,
   switch(reason) {
   case POPT_CALLBACK_REASON_PRE:
     gtk_args = g_ptr_array_new();
+
+    /* Note that the value of argv[0] passed to main() may be
+     * different from the value that this passes to gtk */
     g_ptr_array_add(gtk_args,
-		    g_strdup(poptGetInvocationName(con)));
+    		    g_strdup(poptGetInvocationName(con)));
     break;
 
   case POPT_CALLBACK_REASON_OPTION:
@@ -160,6 +164,7 @@ gnome_add_gtk_arg_callback(poptContext con,
     g_ptr_array_free(gtk_args, TRUE);
 #endif
     gtk_args = NULL;
+    gnome_gtk_initialized = TRUE;
     break;
   }
 }
