@@ -1,3 +1,7 @@
+Fri Aug 21 18:28:43 1998  Jonathan Blandford  <jrb@redhat.com>
+	* gtk-plug.[ch]:
+	(gtk_plug_construct): New function.
+
 Thu Aug 20 19:06:19 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-dentry-edit.c: Include <ctype.h>.
