@@ -157,29 +157,6 @@ static void gnome_about_fill_options (GtkWidget *widget,
 GNOME_CLASS_BOILERPLATE (GnomeAbout, gnome_about,
 			 GnomeDialog, gnome_dialog)
 
-guint
-gnome_about_get_type (void)
-{
-	static guint about_type = 0;
-
-	if (!about_type) {
-		GtkTypeInfo about_info = {
-			"GnomeAbout",
-			sizeof (GnomeAbout),
-			sizeof (GnomeAboutClass),
-			(GtkClassInitFunc) gnome_about_class_init,
-			(GtkObjectInitFunc) gnome_about_init,
-			NULL,
-			NULL,
-			NULL
-		};
-		
-		about_type = gtk_type_unique (gnome_dialog_get_type (), &about_info);
-	}
-	
-	return about_type;
-}
-
 static void
 gnome_about_class_init (GnomeAboutClass *klass)
 {
@@ -954,8 +931,6 @@ gnome_about_destroy (GtkObject *object)
 static void
 gnome_about_finalize (GObject *object)
 {
-	GnomeAbout *self = GNOME_ABOUT(object);
-
 	GNOME_CALL_PARENT_HANDLER (G_OBJECT_CLASS, finalize, (object));
 }
 
@@ -1108,7 +1083,7 @@ gnome_about_construct (GnomeAbout *about,
 	gtk_container_add (GTK_CONTAINER(frame), canvas);
 
 	/* Fill the GnomeAboutPriv structure */
-	gnome_about_fill_info (about,
+	gnome_about_fill_info (GTK_WIDGET (about),
 			       about->_priv,
 			       title, version, url,
 			       copyright,

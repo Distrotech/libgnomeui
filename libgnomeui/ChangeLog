@@ -1,3 +1,8 @@
+2000-09-05  Martin Baulig  <baulig@suse.de>
+
+	* gnome-about.c (gnome_about_get_type): Removed since we now use
+	the boilerplate macros.
+
 Sat Sep 02 02:31:03 2000  Iain Holmes <terrorist@gegl.org>
 
 	* gnome-about.c (gnome_about_init): Allocate the _priv structure.
