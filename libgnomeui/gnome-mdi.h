@@ -99,6 +99,9 @@ struct _GnomeMDI {
   GnomeUIInfo *menu_template;
   GnomeUIInfo *toolbar_template;
 
+  gboolean menu_cb_with_data : 1;
+  gboolean toolbar_cb_with_data : 1;
+
   /* paths for insertion of mdi_child specific menus and mdi_child list menu via
      gnome-app-helper routines */
   gchar *child_menu_path;
@@ -130,8 +133,8 @@ void          gnome_mdi_set_mode            (GnomeMDI *, GnomeMDIMode);
 void          gnome_mdi_set_tab_pos         (GnomeMDI *, GtkPositionType);
 
 /* setting the menu and toolbar stuff */
-void          gnome_mdi_set_menu_template   (GnomeMDI *, GnomeUIInfo *);
-void          gnome_mdi_set_toolbar_template(GnomeMDI *, GnomeUIInfo *);
+void          gnome_mdi_set_menu_template   (GnomeMDI *, GnomeUIInfo *, gboolean);
+void          gnome_mdi_set_toolbar_template(GnomeMDI *, GnomeUIInfo *, gboolean);
 void          gnome_mdi_set_child_menu_path (GnomeMDI *, gchar *);
 void          gnome_mdi_set_child_list_path (GnomeMDI *, gchar *);
 

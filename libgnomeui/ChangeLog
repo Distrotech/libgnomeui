@@ -1,3 +1,11 @@
+1998-09-15  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-mdi.c (gnome_mdi_set_menu_template): Added gboolean argument
+	to this function specifying whether to use the _with_data() functions
+ 	when creating the menu/toolbar.
+	(gnome_mdi_set_toolbar_template): Likewise.
+	* gnome-mdi-child.c (gnome_mdi_child_set_menu_template): Likewise.
+
 1998-09-14  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (gnome_mdi_remove_view): fixed view removal to

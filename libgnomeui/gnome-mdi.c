@@ -818,7 +818,10 @@ static void app_set_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
     /* create new child-specific menus */
     if( child->menu_template &&
         ( (ui_info = copy_ui_info_tree(child->menu_template)) != NULL) ) {
-      gnome_app_insert_menus(app, mdi->child_menu_path, ui_info);
+      if (child->menu_cb_with_data)
+	gnome_app_insert_menus_with_data(app, mdi->child_menu_path, ui_info, child);
+      else
+	gnome_app_insert_menus(app, mdi->child_menu_path, ui_info);
       gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
       gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, (gpointer)count_ui_info_items(ui_info));
     }
@@ -910,7 +913,10 @@ static void app_create(GnomeMDI *mdi) {
   /* set up menus */
   if(mdi->menu_template) {
     ui_info = copy_ui_info_tree(mdi->menu_template);
-    gnome_app_create_menus(GNOME_APP(window), ui_info);
+    if(mdi->menu_cb_with_data)
+      gnome_app_create_menus_with_data(GNOME_APP(window), ui_info, mdi);
+    else
+      gnome_app_create_menus(GNOME_APP(window), ui_info);
     gtk_object_set_data(GTK_OBJECT(window), GNOME_MDI_MENUBAR_INFO_KEY, ui_info);
   }
   else {
@@ -928,7 +934,10 @@ static void app_create(GnomeMDI *mdi) {
   /* create toolbar */
   if(mdi->toolbar_template) {
     ui_info = copy_ui_info_tree(mdi->toolbar_template);
-    gnome_app_create_toolbar_with_data(GNOME_APP(window), ui_info, mdi);
+    if(mdi->toolbar_cb_with_data)
+      gnome_app_create_toolbar_with_data(GNOME_APP(window), ui_info, mdi);
+    else
+      gnome_app_create_toolbar(GNOME_APP(window), ui_info);
     gtk_object_set_data(GTK_OBJECT(window), GNOME_MDI_TOOLBAR_INFO_KEY, ui_info);
   }
   else {
@@ -1367,18 +1376,20 @@ GtkWidget *gnome_mdi_active_view(GnomeMDI *mdi) {
   return mdi->active_view;
 }
 
-void gnome_mdi_set_menu_template(GnomeMDI *mdi, GnomeUIInfo *menu_tmpl) {
+void gnome_mdi_set_menu_template(GnomeMDI *mdi, GnomeUIInfo *menu_tmpl, gboolean cb_with_data) {
   g_return_if_fail(mdi != NULL);
   g_return_if_fail(GNOME_IS_MDI(mdi));
 
   mdi->menu_template = menu_tmpl;
+  mdi->menu_cb_with_data = cb_with_data;
 }
 
-void gnome_mdi_set_toolbar_template(GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl) {
+void gnome_mdi_set_toolbar_template(GnomeMDI *mdi, GnomeUIInfo *tbar_tmpl, gboolean cb_with_data) {
   g_return_if_fail(mdi != NULL);
   g_return_if_fail(GNOME_IS_MDI(mdi));
 
   mdi->toolbar_template = tbar_tmpl;
+  mdi->toolbar_cb_with_data = cb_with_data;
 }
 
 void gnome_mdi_set_child_menu_path(GnomeMDI *mdi, gchar *path) {
