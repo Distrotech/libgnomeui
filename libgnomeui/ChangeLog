@@ -1,5 +1,20 @@
 1998-11-21  Andrew T. Veliath  <andrewtv@usa.net>
 
+	* gnome-app-helper.c (gnome_app_create_menus_custom): If menubar
+	relief is set to none, set menu bar shadow type to GTK_SHADOW_NONE.
+	(gnome_app_create_toolbar_custom): Remove the extra pad to toolbar
+	added previously, it's not needed now that handle box doesn't have a
+	relief in the case where it overlapped.
+
+	* gnome-preferences.c (prefs =): Add default for menubar_relief as
+	TRUE (i.e. unchanged behavior).  Add define for MENUBAR_RELIEF_KEY.
+	(gnome_preferences_load_custom): Load for menubar relief.
+	(gnome_preferences_save_custom): Save for menubar relief.
+	(gnome_preferences_{get,set}_menubar_relief): New functions.
+
+	* gnome-preferences.h: Add menubar_relief to GnomePreferences.
+	Add prototypes for gnome_preferences_{get,set}_menubar_relief.
+
 	* gnome-app.c (gnome_app_set_toolbar): If toolbar relief is set to
 	none and we are using a detachable toolbar, set handle box shadow
 	type to GTK_SHADOW_NONE.

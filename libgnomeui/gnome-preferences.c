@@ -38,6 +38,7 @@ static GnomePreferences prefs =
   FALSE,              /* Statusbar isn't interactive */
   TRUE,               /* Toolbar has handlebox */
   TRUE,               /* Menubar has handlebox */
+  TRUE,               /* Menubars are relieved */
   FALSE,               /* Toolbar buttons are not relieved */
   TRUE,               /* Center dialogs over apps when possible */
   TRUE,               /* Menu items have icons in them */
@@ -113,6 +114,7 @@ static const gchar * const dialog_positions [] = {
 #define TOOLBAR_HANDLEBOX_KEY      "Toolbar_has_Handlebox"
 #define MENUBAR_HANDLEBOX_KEY      "Menubar_has_Handlebox"
 
+#define MENUBAR_RELIEF_KEY         "Menubar_relieved"
 #define TOOLBAR_RELIEF_KEY         "Toolbar_relieved_buttons"
 
 #define MENUS_HAVE_ICONS_KEY       "Menus_have_icons"
@@ -252,6 +254,10 @@ gnome_preferences_load_custom(GnomePreferences *settings)
   
   settings->menubar_handlebox = b;
 
+  b = gnome_config_get_bool_with_default(MENUBAR_RELIEF_KEY"=true",
+					 NULL);
+  settings->menubar_relief = b;
+
   b = gnome_config_get_bool_with_default(TOOLBAR_RELIEF_KEY"=true",
 					 NULL);
   settings->toolbar_relief = b;
@@ -318,6 +324,8 @@ gnome_preferences_save_custom(GnomePreferences *settings)
 			settings->toolbar_handlebox);
   gnome_config_set_bool(MENUBAR_HANDLEBOX_KEY,
 			settings->menubar_handlebox);
+  gnome_config_set_bool(MENUBAR_RELIEF_KEY,
+			settings->menubar_relief);
   gnome_config_set_bool(TOOLBAR_RELIEF_KEY,
 			settings->toolbar_relief);
   gnome_config_set_bool(MENUS_HAVE_ICONS_KEY,
@@ -393,6 +401,16 @@ gboolean          gnome_preferences_get_menubar_handlebox    (void)
 void              gnome_preferences_set_menubar_handlebox    (gboolean b)
 {
   prefs.menubar_handlebox = b;
+}
+
+gboolean          gnome_preferences_get_menubar_relief    (void)
+{
+  return prefs.menubar_relief;
+}
+
+void              gnome_preferences_set_menubar_relief    (gboolean b)
+{
+  prefs.menubar_relief = b;
 }
 
 gboolean          gnome_preferences_get_toolbar_relief    (void)
