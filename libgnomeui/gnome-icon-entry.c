@@ -50,6 +50,7 @@
 #include "libgnome/gnome-i18nP.h"
 #include "libgnome/gnome-mime.h"
 #include "libgnome/gnome-util.h"
+#include "libgnome/gnome-ditem.h"
 #include "gnome-dialog.h"
 #include "gnome-stock.h"
 #include "gnome-file-entry.h"
@@ -61,6 +62,17 @@
 #include <unistd.h>
 #include <string.h>
 
+struct _GnomeIconEntryPrivate {
+	GtkWidget *fentry;
+
+	GtkWidget *pickbutton;
+	
+	GtkWidget *pick_dialog;
+	gchar *pick_dialog_dir;
+
+	gchar *history_id;
+	gchar *browse_dialog_title;
+};
 
 static void gnome_icon_entry_class_init (GnomeIconEntryClass *class);
 static void gnome_icon_entry_init       (GnomeIconEntry      *ientry);
@@ -78,13 +90,31 @@ static void drag_data_received		(GtkWidget        *widget,
 					 guint             info,
 					 guint32           time,
 					 GnomeIconEntry   *ientry);
+static void ientry_destroy		(GtkObject *object);
+static void ientry_get_arg		(GtkObject *object,
+					 GtkArg *arg,
+					 guint arg_id);
+static void ientry_set_arg		(GtkObject *object,
+					 GtkArg *arg,
+					 guint arg_id);
+static void ientry_browse               (GnomeIconEntry *ientry);
 
 static GtkVBoxClass *parent_class;
 
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
 enum {
+	ARG_0,
+	ARG_HISTORY_ID,
+	ARG_BROWSE_DIALOG_TITLE,
+	ARG_PIXMAP_SUBDIR,
+	ARG_FILENAME,
+	ARG_PICK_DIALOG
+};
+
+enum {
 	CHANGED_SIGNAL,
+	BROWSE_SIGNAL,
 	LAST_SIGNAL
 };
 
@@ -128,10 +158,96 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 			       			 changed),
 			       gtk_signal_default_marshaller,
 			       GTK_TYPE_NONE, 0);
+	gnome_ientry_signals[BROWSE_SIGNAL] =
+		gtk_signal_new("browse",
+			       GTK_RUN_LAST,
+			       object_class->type,
+			       GTK_SIGNAL_OFFSET(GnomeIconEntryClass,
+			       			 browse),
+			       gtk_signal_default_marshaller,
+			       GTK_TYPE_NONE, 0);
 	gtk_object_class_add_signals (object_class, gnome_ientry_signals,
 				      LAST_SIGNAL);
 	class->changed = NULL;
+	class->browse = ientry_browse;
+
+	object_class->destroy = ientry_destroy;
+
+	gtk_object_add_arg_type("GnomeIconEntry::history_id",
+				GTK_TYPE_POINTER,
+				GTK_ARG_WRITABLE | GTK_ARG_CONSTRUCT,
+				ARG_HISTORY_ID);
+	gtk_object_add_arg_type("GnomeIconEntry::browse_dialog_title",
+				GTK_TYPE_POINTER,
+				GTK_ARG_WRITABLE | GTK_ARG_CONSTRUCT,
+				ARG_BROWSE_DIALOG_TITLE);
+	gtk_object_add_arg_type("GnomeIconEntry::pixmap_subdir",
+				GTK_TYPE_POINTER,
+				GTK_ARG_WRITABLE | GTK_ARG_CONSTRUCT,
+				ARG_PIXMAP_SUBDIR);
+	gtk_object_add_arg_type("GnomeIconEntry::filename",
+				GTK_TYPE_POINTER,
+				GTK_ARG_READWRITE | GTK_ARG_CONSTRUCT,
+				ARG_FILENAME);
+	gtk_object_add_arg_type("GnomeIconEntry::pick_dialog",
+				GTK_TYPE_POINTER,
+				GTK_ARG_READABLE | GTK_ARG_CONSTRUCT,
+				ARG_PICK_DIALOG);
+
+	object_class->set_arg = ientry_set_arg;
+	object_class->get_arg = ientry_get_arg;
 }
+
+static void
+ientry_set_arg (GtkObject *object,
+		GtkArg *arg,
+		guint arg_id)
+{
+	GnomeIconEntry *self;
+
+	self = GNOME_ICON_ENTRY (object);
+
+	switch (arg_id) {
+	case ARG_HISTORY_ID:
+		gnome_icon_entry_set_history_id(self, GTK_VALUE_POINTER(*arg));
+		break;
+	case ARG_BROWSE_DIALOG_TITLE:
+		gnome_icon_entry_set_browse_dialog_title
+			(self, GTK_VALUE_POINTER(*arg));
+		break;
+	case ARG_PIXMAP_SUBDIR:
+		gnome_icon_entry_set_pixmap_subdir(self,
+						   GTK_VALUE_POINTER(*arg));
+		break;
+	case ARG_FILENAME:
+		gnome_icon_entry_set_filename(self, GTK_VALUE_POINTER(*arg));
+		break;
+	default:
+		break;
+	}
+}
+
+static void
+ientry_get_arg (GtkObject *object,
+		GtkArg *arg,
+		guint arg_id)
+{
+	GnomeIconEntry *self;
+
+	self = GNOME_ICON_ENTRY (object);
+
+	switch (arg_id) {
+	case ARG_FILENAME:
+		GTK_VALUE_POINTER(*arg) = gnome_icon_entry_get_filename(self);
+		break;
+	case ARG_PICK_DIALOG:
+		GTK_VALUE_POINTER(*arg) = gnome_icon_entry_pick_dialog(self);
+		break;
+	default:
+		break;
+	}
+}
+
 
 static void
 entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
@@ -144,19 +260,19 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
 
-	t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->fentry),
+	t = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->_priv->fentry),
 					   FALSE);
 
-	child = GTK_BIN(ientry->pickbutton)->child;
+	child = GTK_BIN(ientry->_priv->pickbutton)->child;
 	
 	if(!t || !g_file_test (t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
 	   !(pixbuf = gdk_pixbuf_new_from_file (t))) {
 		if(GNOME_IS_PIXMAP(child)) {
-			gtk_drag_source_unset (ientry->pickbutton);
+			gtk_drag_source_unset (ientry->_priv->pickbutton);
 			gtk_widget_destroy(child);
 			child = gtk_label_new(_("No Icon"));
 			gtk_widget_show(child);
-			gtk_container_add(GTK_CONTAINER(ientry->pickbutton),
+			gtk_container_add(GTK_CONTAINER(ientry->_priv->pickbutton),
 					  child);
 		}
 		g_free(t);
@@ -184,7 +300,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 		gtk_widget_destroy(child);
 		child = gnome_pixmap_new_from_pixbuf_at_size (pixbuf, w, h);
 		gtk_widget_show(child);
-		gtk_container_add(GTK_CONTAINER(ientry->pickbutton), child);
+		gtk_container_add(GTK_CONTAINER(ientry->_priv->pickbutton), child);
 
 		if(!GTK_WIDGET_NO_WINDOW(child)) {
 			gtk_signal_connect (GTK_OBJECT (child), "drag_data_get",
@@ -196,7 +312,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 		}
 	}
         gdk_pixbuf_unref(pixbuf);
-	gtk_drag_source_set (ientry->pickbutton,
+	gtk_drag_source_set (ientry->_priv->pickbutton,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 			     drop_types, 1,
 			     GDK_ACTION_COPY);
@@ -228,7 +344,7 @@ entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
 	} else {
 		/* We pretend like ok has been called */
 		entry_changed (NULL, ientry);
-		gtk_widget_hide (ientry->pick_dialog);
+		gtk_widget_hide (ientry->_priv->pick_dialog);
 	}
 }
 
@@ -283,17 +399,27 @@ setup_preview(GtkWidget *widget)
 }
 
 static void
-ientry_destroy(GnomeIconEntry *ientry)
+ientry_destroy(GtkObject *object)
 {
-	g_return_if_fail (ientry != NULL);
-	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
+	GnomeIconEntry *ientry;
 
-	if(ientry->fentry)
-		gtk_widget_unref (ientry->fentry);
-	if(ientry->pick_dialog)
-		gtk_widget_destroy(ientry->pick_dialog);
-	if(ientry->pick_dialog_dir)
-		g_free(ientry->pick_dialog_dir);
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_ICON_ENTRY (object));
+
+	ientry = GNOME_ICON_ENTRY(object);
+
+	if(ientry->_priv->fentry)
+		gtk_widget_unref (ientry->_priv->fentry);
+	if(ientry->_priv->pick_dialog)
+		gtk_widget_destroy(ientry->_priv->pick_dialog);
+	g_free(ientry->_priv->pick_dialog_dir);
+	g_free(ientry->_priv->history_id);
+	g_free(ientry->_priv->browse_dialog_title);
+	g_free(ientry->_priv);
+
+	if(GTK_OBJECT_CLASS(parent_class)->destroy)
+		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
+
 }
 
 
@@ -397,7 +523,7 @@ gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEnt
 	if(event && event->type == GDK_2BUTTON_PRESS && ((GdkEventButton *)event)->button == 1) {
 		gnome_icon_selection_stop_loading(gis);
 		entry_changed (NULL, ientry);
-		gtk_widget_hide(ientry->pick_dialog);
+		gtk_widget_hide(ientry->_priv->pick_dialog);
 	}
 
 	gtk_signal_emit(GTK_OBJECT(ientry),
@@ -405,24 +531,22 @@ gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEnt
 }
 
 static void
-show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
+ientry_browse(GnomeIconEntry *ientry)
 {
 	GnomeFileEntry *fe;
 	gchar *p;
 	gchar *curfile;
 	GtkWidget *tl;
 
-	g_return_if_fail (b != NULL);
-	g_return_if_fail (GTK_IS_BUTTON (b));
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
 
-	fe = GNOME_FILE_ENTRY(ientry->fentry);
+	fe = GNOME_FILE_ENTRY(ientry->_priv->fentry);
 	p = gnome_file_entry_get_full_path(fe,FALSE);
 	curfile = gnome_icon_entry_get_filename(ientry);
 
 	/* Are we part of a modal window?  If so, we need to be modal too. */
-	tl = gtk_widget_get_toplevel (GTK_WIDGET (b));
+	tl = gtk_widget_get_toplevel (GTK_WIDGET (ientry->_priv->pickbutton));
 	
 	if(!p) {
 		if(fe->default_path)
@@ -433,7 +557,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 			p = g_strdup(cwd);
 			g_free(cwd);
 		}
-		gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->fentry))),
+		gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->_priv->fentry))),
 				    p);
 	}
 
@@ -453,40 +577,39 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 				p = g_strdup(cwd);
 				free(cwd);
 			}
-			gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->fentry))),
+			gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->_priv->fentry))),
 				    p);
 			g_return_if_fail(g_file_test (p,G_FILE_TEST_ISDIR));
 		}
 	}
 	
 
-	if(ientry->pick_dialog==NULL ||
-	   ientry->pick_dialog_dir==NULL ||
-	   strcmp(p,ientry->pick_dialog_dir)!=0) {
+	if(ientry->_priv->pick_dialog==NULL ||
+	   ientry->_priv->pick_dialog_dir==NULL ||
+	   strcmp(p,ientry->_priv->pick_dialog_dir)!=0) {
 		GtkWidget * iconsel;
 		GtkWidget * gil;
 		
-		if(ientry->pick_dialog) {
-			gtk_container_remove (GTK_CONTAINER (ientry->fentry->parent), ientry->fentry);
-			gtk_widget_destroy(ientry->pick_dialog);
+		if(ientry->_priv->pick_dialog) {
+			gtk_container_remove (GTK_CONTAINER (ientry->_priv->fentry->parent), ientry->_priv->fentry);
+			gtk_widget_destroy(ientry->_priv->pick_dialog);
 		}
 		
-		if(ientry->pick_dialog_dir)
-			g_free(ientry->pick_dialog_dir);
-		ientry->pick_dialog_dir = p;
-		ientry->pick_dialog = 
-			gnome_dialog_new(GNOME_FILE_ENTRY(ientry->fentry)->browse_dialog_title,
+		g_free(ientry->_priv->pick_dialog_dir);
+		ientry->_priv->pick_dialog_dir = p;
+		ientry->_priv->pick_dialog = 
+			gnome_dialog_new(ientry->_priv->browse_dialog_title,
 					 GNOME_STOCK_BUTTON_OK,
 					 GNOME_STOCK_BUTTON_CANCEL,
 					 NULL);
 		if (GTK_WINDOW (tl)->modal) {
-			gtk_window_set_modal (GTK_WINDOW (ientry->pick_dialog), TRUE);
-			gnome_dialog_set_parent (GNOME_DIALOG (ientry->pick_dialog), GTK_WINDOW (tl)); 
+			gtk_window_set_modal (GTK_WINDOW (ientry->_priv->pick_dialog), TRUE);
+			gnome_dialog_set_parent (GNOME_DIALOG (ientry->_priv->pick_dialog), GTK_WINDOW (tl)); 
 		}
-		gnome_dialog_close_hides(GNOME_DIALOG(ientry->pick_dialog), TRUE);
-		gnome_dialog_set_close  (GNOME_DIALOG(ientry->pick_dialog), TRUE);
+		gnome_dialog_close_hides(GNOME_DIALOG(ientry->_priv->pick_dialog), TRUE);
+		gnome_dialog_set_close  (GNOME_DIALOG(ientry->_priv->pick_dialog), TRUE);
 
-		gtk_window_set_policy(GTK_WINDOW(ientry->pick_dialog), 
+		gtk_window_set_policy(GTK_WINDOW(ientry->_priv->pick_dialog), 
 				      TRUE, TRUE, TRUE);
 
 		iconsel = gnome_icon_selection_new();
@@ -494,15 +617,15 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 		gtk_object_set_user_data(GTK_OBJECT(ientry), iconsel);
 
 		gnome_icon_selection_add_directory(GNOME_ICON_SELECTION(iconsel),
-						   ientry->pick_dialog_dir);
+						   ientry->_priv->pick_dialog_dir);
 
 
-		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->pick_dialog)->vbox),
-				   ientry->fentry, FALSE, FALSE, 0);
-		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->pick_dialog)->vbox),
+		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->_priv->pick_dialog)->vbox),
+				   ientry->_priv->fentry, FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(ientry->_priv->pick_dialog)->vbox),
 				   iconsel, TRUE, TRUE, 0);
 
-		gtk_widget_show_all(ientry->pick_dialog);
+		gtk_widget_show_all(ientry->_priv->pick_dialog);
 
 		gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(iconsel));
 
@@ -510,11 +633,11 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 			gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
 							 g_basename(curfile));
 
-		gnome_dialog_button_connect(GNOME_DIALOG(ientry->pick_dialog), 
+		gnome_dialog_button_connect(GNOME_DIALOG(ientry->_priv->pick_dialog), 
 					    0, /* OK button */
 					    GTK_SIGNAL_FUNC(icon_selected_cb),
 					    ientry);
-		gnome_dialog_button_connect(GNOME_DIALOG(ientry->pick_dialog), 
+		gnome_dialog_button_connect(GNOME_DIALOG(ientry->_priv->pick_dialog), 
 					    1, /* Cancel button */
 					    GTK_SIGNAL_FUNC(cancel_pressed),
 					    ientry);
@@ -526,10 +649,20 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 	} else {
 		GnomeIconSelection *gis =
 			gtk_object_get_user_data(GTK_OBJECT(ientry));
-		if(!GTK_WIDGET_VISIBLE(ientry->pick_dialog))
-			gtk_widget_show(ientry->pick_dialog);
+		if(!GTK_WIDGET_VISIBLE(ientry->_priv->pick_dialog))
+			gtk_widget_show(ientry->_priv->pick_dialog);
 		if(gis) gnome_icon_selection_show_icons(gis);
 	}
+}
+
+static void
+show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
+{
+	g_return_if_fail (ientry != NULL);
+	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
+
+	gtk_signal_emit(GTK_OBJECT(ientry),
+			gnome_ientry_signals[BROWSE_SIGNAL]);
 }
 
 static void
@@ -542,7 +675,7 @@ drag_data_received (GtkWidget        *widget,
 		    guint32           time,
 		    GnomeIconEntry   *ientry)
 {
-	GList *files;
+	GList *files, *li;
 
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
@@ -555,7 +688,33 @@ drag_data_received (GtkWidget        *widget,
 		return;
 	}
 
-	gnome_icon_entry_set_icon(ientry,files->data);
+	for(li = files; li!=NULL; li = li->next) {
+		const char *mimetype;
+
+		mimetype = gnome_mime_type(li->data);
+
+		if(mimetype
+			&& !strcmp(mimetype, "application/x-gnome-app-info")) {
+			/* hmmm a desktop, try loading the icon from that */
+			GnomeDesktopItem * item;
+			const char *icon;
+
+			item = gnome_desktop_item_new_from_file
+				(li->data,
+				 GNOME_DESKTOP_ITEM_LOAD_NO_SYNC |
+				 GNOME_DESKTOP_ITEM_LOAD_NO_OTHER_SECTIONS);
+			if(!item)
+				continue;
+			icon = gnome_desktop_item_get_icon_path(item);
+
+			if(gnome_icon_entry_set_filename(ientry, icon)) {
+				gnome_desktop_item_unref(item);
+				break;
+			}
+			gnome_desktop_item_unref(item);
+		} else if(gnome_icon_entry_set_filename(ientry, li->data))
+			break;
+	}
 
 	/*free the list of files we got*/
 	gnome_uri_list_free_strings (files);
@@ -575,7 +734,7 @@ drag_data_get  (GtkWidget          *widget,
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
 
-	file = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->fentry),
+	file = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->_priv->fentry),
 					      TRUE);
 
 	if(!file) {
@@ -598,52 +757,57 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 	GtkWidget *w;
 	gchar *p;
 
+	ientry->_priv = g_new0(GnomeIconEntryPrivate, 1);
+
 	gtk_box_set_spacing (GTK_BOX (ientry), 4);
-	
+
 	gtk_signal_connect(GTK_OBJECT(ientry),"destroy",
 			   GTK_SIGNAL_FUNC(ientry_destroy), NULL);
 	
-	ientry->pick_dialog = NULL;
-	ientry->pick_dialog_dir = NULL;
+	ientry->_priv->pick_dialog = NULL;
+	ientry->_priv->pick_dialog_dir = NULL;
 	
 	w = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
 	gtk_widget_show(w);
 	gtk_box_pack_start (GTK_BOX (ientry), w, TRUE, TRUE, 0);
-	ientry->pickbutton = gtk_button_new_with_label(_("No Icon"));
-	gtk_drag_dest_set (GTK_WIDGET (ientry->pickbutton),
+	ientry->_priv->pickbutton = gtk_button_new_with_label(_("No Icon"));
+	gtk_drag_dest_set (GTK_WIDGET (ientry->_priv->pickbutton),
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
 			   drop_types, 1, GDK_ACTION_COPY);
-	gtk_signal_connect (GTK_OBJECT (ientry->pickbutton),
+	gtk_signal_connect (GTK_OBJECT (ientry->_priv->pickbutton),
 			    "drag_data_received",
 			    GTK_SIGNAL_FUNC (drag_data_received),ientry);
-	gtk_signal_connect (GTK_OBJECT (ientry->pickbutton), "drag_data_get",
+	gtk_signal_connect (GTK_OBJECT (ientry->_priv->pickbutton),
+			    "drag_data_get",
 			    GTK_SIGNAL_FUNC (drag_data_get),ientry);
 
-	gtk_signal_connect(GTK_OBJECT(ientry->pickbutton), "clicked",
+	gtk_signal_connect(GTK_OBJECT(ientry->_priv->pickbutton), "clicked",
 			   GTK_SIGNAL_FUNC(show_icon_selection),ientry);
 	/*FIXME: 60x60 is just larger then default 48x48, though icon sizes
 	  are supposed to be selectable I guess*/
-	gtk_widget_set_usize(ientry->pickbutton,60,60);
-	gtk_container_add (GTK_CONTAINER (w), ientry->pickbutton);
-	gtk_widget_show (ientry->pickbutton);
+	gtk_widget_set_usize(ientry->_priv->pickbutton,60,60);
+	gtk_container_add (GTK_CONTAINER (w), ientry->_priv->pickbutton);
+	gtk_widget_show (ientry->_priv->pickbutton);
 
-	ientry->fentry = gnome_file_entry_new (NULL,NULL);
+	ientry->_priv->fentry = gnome_file_entry_new (NULL, _("Browse"));
 	/*BORPORP */
-	gnome_file_entry_set_modal (GNOME_FILE_ENTRY (ientry->fentry), TRUE);
-	gtk_widget_ref (ientry->fentry);
-	gtk_signal_connect_after(GTK_OBJECT(ientry->fentry),"browse_clicked",
+	gnome_file_entry_set_modal (GNOME_FILE_ENTRY (ientry->_priv->fentry),
+				    TRUE);
+	gtk_widget_ref (ientry->_priv->fentry);
+	gtk_signal_connect_after(GTK_OBJECT(ientry->_priv->fentry),
+				 "browse_clicked",
 				 GTK_SIGNAL_FUNC(browse_clicked),
 				 ientry);
 
-	gtk_widget_show (ientry->fentry);
+	gtk_widget_show (ientry->_priv->fentry);
 	
 	p = gnome_pixmap_file(".");
-	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->fentry),p);
+	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->_priv->fentry),p);
 	g_free(p);
 	
-	w = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(ientry->fentry));
+	w = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(ientry->_priv->fentry));
 /*	gtk_signal_connect_while_alive(GTK_OBJECT(w), "changed",
 				       GTK_SIGNAL_FUNC(entry_changed),
 				       ientry, GTK_OBJECT(ientry));*/
@@ -659,8 +823,8 @@ gnome_icon_entry_init (GnomeIconEntry *ientry)
 /**
  * gnome_icon_entry_construct:
  * @ientry: the GnomeIconEntry to work with
- * @history_id: the id given to #gnome_entry_new
- * @browse_dialog_title: title of the browse dialog and icon selection dialog
+ * @history_id: the id given to #gnome_entry_new in the browse dialog
+ * @browse_dialog_title: title of the icon selection dialog
  *
  * Description: For language bindings and subclassing, from C use
  * #gnome_icon_entry_new
@@ -675,9 +839,8 @@ gnome_icon_entry_construct (GnomeIconEntry *ientry,
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
 
-	gnome_file_entry_construct (GNOME_FILE_ENTRY (ientry->fentry),
-				    history_id,
-				    browse_dialog_title);
+	gnome_icon_entry_set_history_id(ientry, history_id);
+	gnome_icon_entry_set_browse_dialog_title(ientry, browse_dialog_title);
 }
 
 /**
@@ -701,59 +864,6 @@ gnome_icon_entry_new (const gchar *history_id, const gchar *browse_dialog_title)
 	return GTK_WIDGET (ientry);
 }
 
-/**
- * gnome_icon_entry_gnome_file_entry:
- * @ientry: the GnomeIconEntry to work with
- *
- * Description: Get the GnomeFileEntry widget that's part of the entry
- * DEPRECATED! Use the "changed" signal for getting changes
- *
- * Returns: Returns GnomeFileEntry widget
- **/
-GtkWidget *
-gnome_icon_entry_gnome_file_entry (GnomeIconEntry *ientry)
-{
-	g_return_val_if_fail (ientry != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry), NULL);
-
-	return ientry->fentry;
-}
-
-/**
- * gnome_icon_entry_gnome_entry:
- * @ientry: the GnomeIconEntry to work with
- *
- * Description: Get the GnomeEntry widget that's part of the entry
- * DEPRECATED! Use the "changed" signal for getting changes
- *
- * Returns: Returns GnomeEntry widget
- **/
-GtkWidget *
-gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry)
-{
-	g_return_val_if_fail (ientry != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry), NULL);
-
-	return gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(ientry->fentry));
-}
-
-/**
- * gnome_icon_entry_gtk_entry:
- * @ientry: the GnomeIconEntry to work with
- *
- * Description: Get the GtkEntry widget that's part of the entry.
- * DEPRECATED! Use the "changed" signal for getting changes
- *
- * Returns: Returns GtkEntry widget
- **/
-GtkWidget *
-gnome_icon_entry_gtk_entry (GnomeIconEntry *ientry)
-{
-	g_return_val_if_fail (ientry != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry), NULL);
-
-	return gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->fentry));
-}
 
 /**
  * gnome_icon_entry_set_pixmap_subdir:
@@ -778,26 +888,28 @@ gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
 		subdir = ".";
 
 	p = gnome_pixmap_file(subdir);
-	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->fentry),p);
+	gnome_file_entry_set_default_path(GNOME_FILE_ENTRY(ientry->_priv->fentry),p);
 	g_free(p);
 }
 
 /**
- * gnome_icon_entry_set_icon:
+ * gnome_icon_entry_set_filename:
  * @ientry: the GnomeIconEntry to work with
  * @filename: a filename
  * 
  * Description: Sets the icon of GnomeIconEntry to be the one pointed to by
  * @filename (in the current subdirectory).
  *
- * Returns:
+ * Returns: %TRUE if icon was loaded ok, %FALSE otherwise
  **/
-void
-gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
-			  const gchar *filename)
+gboolean
+gnome_icon_entry_set_filename(GnomeIconEntry *ientry,
+			      const gchar *filename)
 {
-	g_return_if_fail (ientry != NULL);
-	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
+	GtkWidget *child;
+
+	g_return_val_if_fail (ientry != NULL, FALSE);
+	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry), FALSE);
 	
 	if(!filename)
 		filename = "";
@@ -807,6 +919,13 @@ gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
 	entry_changed (NULL, ientry);
 	gtk_signal_emit(GTK_OBJECT(ientry),
 			gnome_ientry_signals[CHANGED_SIGNAL]);
+
+	child = GTK_BIN(ientry->_priv->pickbutton)->child;
+	/* this happens if it doesn't exist or isn't an image */
+	if(!GNOME_IS_PIXMAP(child))
+		return FALSE;
+
+	return TRUE;
 }
 
 /**
@@ -828,12 +947,160 @@ gnome_icon_entry_get_filename(GnomeIconEntry *ientry)
 	g_return_val_if_fail (ientry != NULL,NULL);
 	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry),NULL);
 
-	child = GTK_BIN(ientry->pickbutton)->child;
+	child = GTK_BIN(ientry->_priv->pickbutton)->child;
 	
 	/* this happens if it doesn't exist or isn't an image */
 	if(!GNOME_IS_PIXMAP(child))
 		return NULL;
 	
-	return gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->fentry),
+	return gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->_priv->fentry),
 					      TRUE);
+}
+
+/**
+ * gnome_icon_entry_pick_dialog:
+ * @ientry: the GnomeIconEntry to work with
+ *
+ * Description: If a pick dialog exists, return a pointer to it or
+ * return NULL.  This is if you need to do something with all dialogs.
+ * You would use the browse signal with connect_after to get the
+ * pick dialog when it is displayed.
+ * 
+ * Returns: The pick dialog or %NULL if none exists
+ **/
+GtkWidget *
+gnome_icon_entry_pick_dialog(GnomeIconEntry *ientry)
+{
+	g_return_val_if_fail (ientry != NULL,NULL);
+	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry),NULL);
+
+	return ientry->_priv->pick_dialog;
+}
+
+/**
+ * gnome_icon_entry_set_browse_dialog_title:
+ * @ientry: the GnomeIconEntry to work with
+ * @browse_dialog_title: title of the icon selection dialog
+ *
+ * Description:  Set the title of the browse dialog.  It will not effect
+ * an existing dialog.
+ *
+ * Returns:
+ **/
+void
+gnome_icon_entry_set_browse_dialog_title(GnomeIconEntry *ientry,
+					 const gchar *browse_dialog_title)
+{
+	g_return_if_fail (ientry != NULL);
+	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
+
+	g_free(ientry->_priv->browse_dialog_title);
+	ientry->_priv->browse_dialog_title = g_strdup(browse_dialog_title);
+}
+
+/**
+ * gnome_icon_entry_set_history_id:
+ * @ientry: the GnomeIconEntry to work with
+ * @history_id: the id given to #gnome_entry_new in the browse dialog
+ *
+ * Description:  Set the history_id of the entry in the browse dialog
+ * and reload the history
+ *
+ * Returns:
+ **/
+void
+gnome_icon_entry_set_history_id(GnomeIconEntry *ientry,
+				const gchar *history_id)
+{
+	GtkWidget *gentry;
+
+	g_free(ientry->_priv->history_id);
+	ientry->_priv->history_id = g_strdup(history_id);
+
+	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(ientry->_priv->fentry));
+	gnome_entry_set_history_id (GNOME_ENTRY(gentry), history_id);
+	gnome_entry_load_history (GNOME_ENTRY(gentry));
+}
+
+/* DEPRECATED routines left for compatibility only, will disapear in
+ * some very distant future */
+
+/**
+ * gnome_icon_entry_set_icon:
+ * @ientry: the GnomeIconEntry to work with
+ * @filename: a filename
+ * 
+ * Description: Deprecated in favour of #gnome_icon_entry_set_filename
+ *
+ * Returns:
+ **/
+void
+gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
+			  const gchar *filename)
+{
+	g_warning("gnome_icon_entry_set_icon deprecated, "
+		  "use gnome_icon_entry_set_filename!");
+	gnome_icon_entry_set_filename(ientry, filename);
+}
+
+/**
+ * gnome_icon_entry_gnome_file_entry:
+ * @ientry: the GnomeIconEntry to work with
+ *
+ * Description: Get the GnomeFileEntry widget that's part of the entry
+ * DEPRECATED! Use the "changed" signal for getting changes
+ *
+ * Returns: Returns GnomeFileEntry widget
+ **/
+GtkWidget *
+gnome_icon_entry_gnome_file_entry (GnomeIconEntry *ientry)
+{
+	g_return_val_if_fail (ientry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry), NULL);
+
+	g_warning("gnome_icon_entry_gnome_file_entry deprecated, "
+		  "use changed signal!");
+	return ientry->_priv->fentry;
+}
+
+/**
+ * gnome_icon_entry_gnome_entry:
+ * @ientry: the GnomeIconEntry to work with
+ *
+ * Description: Get the GnomeEntry widget that's part of the entry
+ * DEPRECATED! Use the "changed" signal for getting changes
+ *
+ * Returns: Returns GnomeEntry widget
+ **/
+GtkWidget *
+gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry)
+{
+	g_return_val_if_fail (ientry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry), NULL);
+
+	g_warning("gnome_icon_entry_gnome_entry deprecated, "
+		  "use changed signal!");
+
+	return gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(ientry->_priv->fentry));
+}
+
+/**
+ * gnome_icon_entry_gtk_entry:
+ * @ientry: the GnomeIconEntry to work with
+ *
+ * Description: Get the GtkEntry widget that's part of the entry.
+ * DEPRECATED! Use the "changed" signal for getting changes
+ *
+ * Returns: Returns GtkEntry widget
+ **/
+GtkWidget *
+gnome_icon_entry_gtk_entry (GnomeIconEntry *ientry)
+{
+	g_return_val_if_fail (ientry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_ICON_ENTRY (ientry), NULL);
+
+	g_warning("gnome_icon_entry_gtk_entry deprecated, "
+		  "use changed signal!");
+
+	return gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->_priv->fentry));
 }

@@ -50,24 +50,22 @@ BEGIN_GNOME_DECLS
 #define GNOME_IS_ICON_ENTRY(obj)      GTK_CHECK_TYPE (obj, gnome_icon_entry_get_type ())
 
 
-typedef struct _GnomeIconEntry      GnomeIconEntry;
-typedef struct _GnomeIconEntryClass GnomeIconEntryClass;
+typedef struct _GnomeIconEntry         GnomeIconEntry;
+typedef struct _GnomeIconEntryPrivate  GnomeIconEntryPrivate;
+typedef struct _GnomeIconEntryClass    GnomeIconEntryClass;
 
 struct _GnomeIconEntry {
 	GtkVBox vbox;
 	
-	GtkWidget *fentry;
-
-	GtkWidget *pickbutton;
-	
-	GtkWidget *pick_dialog;
-	gchar *pick_dialog_dir;
+	/*< private >*/
+	GnomeIconEntryPrivate *_priv;
 };
 
 struct _GnomeIconEntryClass {
 	GtkVBoxClass parent_class;
 
 	void (*changed) (GnomeIconEntry *ientry);
+	void (*browse) (GnomeIconEntry *ientry);
 };
 
 
@@ -85,14 +83,30 @@ void       gnome_icon_entry_construct   (GnomeIconEntry *ientry,
   or one would use the file_entry functions for any other path*/
 void       gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,
 					      const gchar *subdir);
+
+/*only return a file if it was possible to load it with gdk-pixbuf*/
+gchar      *gnome_icon_entry_get_filename(GnomeIconEntry *ientry);
+
+/* set the icon to something, returns TRUE on success */
+gboolean   gnome_icon_entry_set_filename(GnomeIconEntry *ientry,
+					 const gchar *filename);
+
+void       gnome_icon_entry_set_browse_dialog_title(GnomeIconEntry *ientry,
+						    const gchar *browse_dialog_title);
+void       gnome_icon_entry_set_history_id(GnomeIconEntry *ientry,
+					   const gchar *history_id);
+
+GtkWidget *gnome_icon_entry_pick_dialog	(GnomeIconEntry *ientry);
+
+/* DEPRECATED routines left for compatibility only, will disapear in
+ * some very distant future */
+/* this is deprecated in favour of the above */
 void       gnome_icon_entry_set_icon(GnomeIconEntry *ientry,
 				     const gchar *filename);
 GtkWidget *gnome_icon_entry_gnome_file_entry(GnomeIconEntry *ientry);
 GtkWidget *gnome_icon_entry_gnome_entry (GnomeIconEntry *ientry);
 GtkWidget *gnome_icon_entry_gtk_entry   (GnomeIconEntry *ientry);
 
-/*only return a file if it was possible to load it with imlib*/
-gchar      *gnome_icon_entry_get_filename(GnomeIconEntry *ientry);
 
 END_GNOME_DECLS
 

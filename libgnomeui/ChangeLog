@@ -1,3 +1,16 @@
+Fri Feb 25 03:29:15 2000  George Lebl <jirka@5z.com>
+
+	* gnome-icon-entry.[ch]: made the interface sane, made privates
+	  really private by using a private struct, which means we'll be
+	  able to change the ugly "entry" based implementation later.
+	  added gtk argument support, added set_filename and deprecated
+	  set_icon.  Mark the other deprecated methods so.  added
+	  _pick_dialog and "browse" signal.  If a .desktop is dropped on
+	  the thing, it will try to extract a filename from there.
+
+	* gnome-ditem-edit.c: clear the three entires for the languages
+	  entry when setting a new ditem
+
 2000-02-24  ERDI Gergo  <cactus@cactus.rulez.org>
 
 	* gnome-about.c (gnome_about_fill_options): New function to set
