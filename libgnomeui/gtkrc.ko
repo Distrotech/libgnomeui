@@ -68,17 +68,6 @@ style "GnomeGuru_PageTitle_style"
 -*-*-bold-*-*--14-*-*-*-*-*-ksc5601.1987-*"
 }
 
-style "toolbar_style"
-{
-  fontset = "-adobe-helvetica-medium-r-normal--10-100-75-75-p-56-iso8859-1,
--*-*-medium-*-*--10-*-*-*-*-*-ksc5601.1987-*"
-}
-
-style "default"
-{
-  fontset = "-adobe-helvetica-medium-r-normal--14-100-100-100-p-76-iso8859-1,
--*-*-medium-*-*--14-*-*-*-*-*-ksc5601.1987-*"
-}
 
 widget "*GnomeScores*.CurrentPlayer" style "GnomeScores_CurrentPlayer_style"
 widget "*GnomeScores*.Logo" style "GnomeScores_Logo_style"
@@ -90,5 +79,3 @@ widget "*GnomeAbout*.Names" style "GnomeAbout_Names_style"
 widget "*GnomeAbout*.Title" style "GnomeAbout_Title_style"
 widget "*GnomeHRef.GtkLabel" style "GnomeHRef_Label_style"
 widget "*GnomeGuru*.PageTitle" style "GnomeGuru_PageTitle_style"
-widget_class "*GtkToolbar*" style "toolbar_style"
-widget_class "*" style "default"

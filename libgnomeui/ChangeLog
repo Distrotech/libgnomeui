@@ -1,3 +1,8 @@
+1999-02-27  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* gtkrc.ja, gtkrc.ko: Removed default style, as gtk+ already has
+	the default gtkrc's.
+
 1999-02-26  Sergey Panov <sipan@mit.edu>
 
         * gnome-app-helper.c, gnome-app-helper.h: make "_New"
