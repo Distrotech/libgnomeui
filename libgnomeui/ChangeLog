@@ -1,3 +1,35 @@
+Sun May 17 02:29:14 1998  Havoc Pennington  <hp@pobox.com>
+
+	* Makefile.am, libgnomeui.h: Include gnome-preferences. Cross
+	fingers.
+	* gnome-dialog.c: Don't put libgnomeui/ in front of #includes. Use
+	gnome-preferences setting for button position.
+	* gnome-init.c (gnome_init): gnome_preferences_load()
+	* gnome-preferences.c: Add trailing slash to section names;
+	gnome-config is a little finicky about this. Use array instead of
+	defines for possible button style options.
+	(gnome_preferences_load): Use a loop to load
+	the styles, instead of a long if-else thing.
+	(gnome_preferences_save): Implemented just the dialog button
+	styles part.
+
+Sat May 16 16:02:38 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-actionarea.c: Add annoying warning. I am deleting this
+	in a week or so.
+	* gnome-color-selector.c: Added "FIXME no copyright". Use
+	g_return_if_fail throughout instead of g_assert, for consistency
+	with rest of lib.
+	* gnome-dateedit.c: Add some g_return_if_fail checks.
+	* gnome-pixmap.c: g_return_if_fail
+	* gnome-properties.c: #include gnome-config, don't #include
+	action-area. Add a couple g_return_if_fail checks.
+	(gnome_property_configurator_setup): Don't show the property box
+ 	in setup; it needs to be shown *after* the pages are added to
+ 	it. This makes desktop-properties come up much more nicely.
+	(gnome_property_configurator_destroy): Don't destroy the property
+ 	box in _destroy(); it destroys itself on close. 
+
 Sat May 16 02:12:43 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-preferences.c (gnome_preferences_load): Removed useless

@@ -28,7 +28,7 @@
 
 GnomePreferences gnome_preferences_global =
 {
-  GTK_BUTTONBOX_START, /* Position of dialog buttons. */
+  GTK_BUTTONBOX_END,  /* Position of dialog buttons. */
   TRUE,               /* PropertyBox has OK button */
   TRUE,               /* PropertyBox has Apply */
   TRUE,               /* PropertyBox has Close */
@@ -42,17 +42,22 @@ GnomePreferences gnome_preferences_global =
 
 
 /* ============= Sections ====================== */
-#define GENERAL   "/Gnome/UI_General"
-#define DIALOGS   "/Gnome/UI_Dialogs"
+#define GENERAL   "/Gnome/UI_General/"
+#define DIALOGS   "/Gnome/UI_Dialogs/"
 
 /* ==================== GnomeDialog ===================== */
 
 #define DIALOG_BUTTONS_STYLE_KEY "DialogButtonsStyle"
 
-#define DIALOG_BUTTONS_STYLE_DEFAULT "Default"
-#define DIALOG_BUTTONS_STYLE_SPREAD  "Spread"
-#define DIALOG_BUTTONS_STYLE_EDGE    "Edge"
-#define DIALOG_BUTTONS_STYLE_START   "Start"
+static const gchar * const dialog_button_styles [] = {
+  "Default",
+  "Spread",
+  "Edge",
+  "Start",
+  "End"
+};
+
+#define NUM_BUTTON_STYLES 5
 
 /* ============ Property Box ======================= */
 
@@ -75,27 +80,21 @@ void gnome_preferences_load(void)
   gnome_config_push_prefix(DIALOGS);
 
   s = gnome_config_get_string(DIALOG_BUTTONS_STYLE_KEY);
+
   if ( s == NULL ) {
     ; /* Leave the default initialization, nothing found. */
   }
   else {
-    if ( strcasecmp(s, DIALOG_BUTTONS_STYLE_DEFAULT) == 0 ) {
-      gnome_preferences_global.dialog_buttons_style = 
-	GTK_BUTTONBOX_DEFAULT_STYLE;
+    i = 0;
+    while ( i < NUM_BUTTON_STYLES ) {
+      if ( strcasecmp(s, dialog_button_styles[i]) == 0 ) {
+	gnome_preferences_global.dialog_buttons_style = i;
+	break;
+      } 
+      ++i;
     }
-    else if (  strcasecmp(s, DIALOG_BUTTONS_STYLE_SPREAD) == 0 ) {
-      gnome_preferences_global.dialog_buttons_style = 
-	GTK_BUTTONBOX_SPREAD;
-    } 
-    else if (  strcasecmp(s, DIALOG_BUTTONS_STYLE_EDGE) == 0 ) {
-      gnome_preferences_global.dialog_buttons_style = 
-	GTK_BUTTONBOX_EDGE;
-    } 
-    else if (  strcasecmp(s, DIALOG_BUTTONS_STYLE_START) == 0 ) {
-      gnome_preferences_global.dialog_buttons_style = 
-	GTK_BUTTONBOX_START;
-    } 
-    else {
+    if ( i == NUM_BUTTON_STYLES ) {
+      /* We got all the way to the end without finding one */
       g_warning("Didn't recognize buttonbox style in libgnomeui config\n");
     }
   }
@@ -128,4 +127,11 @@ void gnome_preferences_load(void)
 
 void gnome_preferences_save(void)
 {
+  gnome_config_push_prefix(DIALOGS);
+  
+  gnome_config_set_string(DIALOG_BUTTONS_STYLE_KEY, 
+			  dialog_button_styles[gnome_preferences_global.dialog_buttons_style]);
+
+  gnome_config_pop_prefix();
+  gnome_config_sync();
 }

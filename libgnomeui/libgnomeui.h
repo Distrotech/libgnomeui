@@ -21,6 +21,7 @@
 #include "libgnomeui/gnome-messagebox.h"
 #include "libgnomeui/gnome-net.h"
 #include "libgnomeui/gnome-pixmap.h"
+#include "libgnomeui/gnome-preferences.h"
 #include "libgnomeui/gnome-propertybox.h"
 #include "libgnomeui/gnome-properties.h"
 #include "libgnomeui/gnome-scores.h"

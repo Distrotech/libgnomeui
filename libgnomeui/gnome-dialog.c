@@ -25,9 +25,9 @@
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-#include "libgnomeui/gnome-stock.h"
-#include "libgnomeui/gnome-uidefs.h"
-
+#include "gnome-stock.h"
+#include "gnome-uidefs.h"
+#include "gnome-preferences.h"
 
 enum {
   CLICKED,
@@ -204,8 +204,9 @@ gnome_dialog_init (GnomeDialog *dialog)
   gtk_widget_show (separator);
 
   dialog->action_area = gtk_hbutton_box_new ();
-  gtk_button_box_set_layout ( GTK_BUTTON_BOX (dialog->action_area),
-			      GTK_BUTTONBOX_END );
+  gtk_button_box_set_layout (GTK_BUTTON_BOX (dialog->action_area),
+			     gnome_preferences_global.dialog_buttons_style);
+
   gtk_button_box_set_spacing (GTK_BUTTON_BOX (dialog->action_area), 
 			      GNOME_PAD);
 

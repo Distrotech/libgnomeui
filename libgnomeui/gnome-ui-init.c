@@ -165,6 +165,9 @@ gnome_init (char *app_id, struct argp *app_args,
 	
 	gnomelib_init (app_id);
 
+	/* Load UI preferences. Should this go here? */
+	gnome_preferences_load();
+
 	if (! argp_program_version_hook)
 		argp_program_version_hook = default_version_func;
 

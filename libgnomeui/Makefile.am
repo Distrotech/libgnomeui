@@ -35,6 +35,7 @@ libgnomeui_la_SOURCES = \
 	gnome-net.c			\
 	gnome-about.c			\
 	gnome-pixmap.c			\
+	gnome-preferences.c		\
 	gnome-propertybox.c		\
 	gnome-properties.c		\
 	gnome-client.c			\
@@ -69,6 +70,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-less.h			\
 	gnome-messagebox.h		\
 	gnome-net.h			\
+	gnome-preferences.h		\
 	gnome-propertybox.h		\
 	gnome-properties.h     		\
 	gnome-pixmap.h			\
