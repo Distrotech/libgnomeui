@@ -63,7 +63,7 @@ struct _GnomeDruidClass
 };
 
 
-GtkType    gnome_druid_get_type              (void) G_GNUC_CONST;
+GType      gnome_druid_get_type              (void) G_GNUC_CONST;
 GtkWidget *gnome_druid_new                   (void);
 void	   gnome_druid_set_buttons_sensitive (GnomeDruid *druid,
 					      gboolean back_sensitive,

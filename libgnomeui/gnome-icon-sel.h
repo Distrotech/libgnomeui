@@ -52,7 +52,7 @@ struct _GnomeIconSelectionClass {
   GtkVBoxClass parent_class;
 };
 
-GtkType gnome_icon_selection_get_type     (void) G_GNUC_CONST;
+GType gnome_icon_selection_get_type     (void) G_GNUC_CONST;
 
 GtkWidget * gnome_icon_selection_new      (void);
 

@@ -35,6 +35,8 @@
  *	Written by: Havoc Pennington, based on code by John Ellis.
  */
 #include <config.h>
+#include <libgnome/gnome-macros.h>
+
 #include <unistd.h> /*getcwd*/
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gtk/gtkbutton.h>
@@ -75,7 +77,7 @@ struct _GnomeIconEntryPrivate {
 };
 
 static void gnome_icon_entry_class_init (GnomeIconEntryClass *class);
-static void gnome_icon_entry_init       (GnomeIconEntry      *ientry);
+static void gnome_icon_entry_instance_init (GnomeIconEntry      *ientry);
 static void drag_data_get		(GtkWidget          *widget,
 					 GdkDragContext     *context,
 					 GtkSelectionData   *selection_data,
@@ -100,8 +102,6 @@ static void ientry_set_arg		(GtkObject *object,
 					 guint arg_id);
 static void ientry_browse               (GnomeIconEntry *ientry);
 
-static GtkVBoxClass *parent_class;
-
 static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 
 enum {
@@ -121,38 +121,13 @@ enum {
 
 static gint gnome_ientry_signals[LAST_SIGNAL] = {0};
 
-
-guint
-gnome_icon_entry_get_type (void)
-{
-	static guint icon_entry_type = 0;
-
-	if (!icon_entry_type) {
-		GtkTypeInfo icon_entry_info = {
-			"GnomeIconEntry",
-			sizeof (GnomeIconEntry),
-			sizeof (GnomeIconEntryClass),
-			(GtkClassInitFunc) gnome_icon_entry_class_init,
-			(GtkObjectInitFunc) gnome_icon_entry_init,
-			NULL,
-			NULL,
-			NULL
-		};
-
-		icon_entry_type = gtk_type_unique (GTK_TYPE_VBOX,
-						   &icon_entry_info);
-	}
-
-	return icon_entry_type;
-}
-
+GNOME_CLASS_BOILERPLATE (GnomeIconEntry, gnome_icon_entry,
+			 GtkVBox, gtk_vbox, GTK_TYPE_VBOX)
 static void
 gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *)class;
 	GObjectClass *gobject_class = (GObjectClass *)class;
-
-	parent_class = gtk_type_class (GTK_TYPE_VBOX);
 
 	gnome_ientry_signals[CHANGED_SIGNAL] =
 		gtk_signal_new("changed",
@@ -824,7 +799,7 @@ drag_data_get  (GtkWidget          *widget,
 
 
 static void
-gnome_icon_entry_init (GnomeIconEntry *ientry)
+gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 {
 	GtkWidget *w;
 	gchar *p;

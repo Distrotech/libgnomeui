@@ -39,7 +39,7 @@ INCLUDES = \
 EXTRA_HEADERS = 
 
 noinst_HEADERS = \
-	gnome-macros.h			\
+	gnome-i18nP.h			\
 	libgnomeuiP.h
 
 libgnomeui_2_la_SOURCES = \
@@ -66,7 +66,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-gconf-ui.h		\
 	gnome-href.c			\
 	gnome-ice.c			\
-	gnome-i18nP.h			\
 	gnome-messagebox.c		\
 	gnome-mdi.c			\
 	gnome-mdi-child.c		\
@@ -110,7 +109,6 @@ gnome_headers = \
 	gnome-icon-entry.h		\
 	gnome-icon-list.h		\
 	gnome-icon-sel.h		\
-	gnome-macros.h			\
 	gnome-messagebox.h		\
 	gnome-mdi.h			\
 	gnome-mdi-child.h		\

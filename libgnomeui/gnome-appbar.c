@@ -83,8 +83,8 @@ enum {
 
 static gint appbar_signals[LAST_SIGNAL] = { 0 };
 
-guint      
-gnome_appbar_get_type ()
+GType      
+gnome_appbar_get_type (void)
 {
   static GType ab_type = 0;
 

@@ -72,7 +72,7 @@ struct _GnomeDruidPageStandardClass
 #endif
 
 
-GtkType    gnome_druid_page_standard_get_type                (void) G_GNUC_CONST;
+GType      gnome_druid_page_standard_get_type                (void) G_GNUC_CONST;
 GtkWidget *gnome_druid_page_standard_new                     (void);
 GtkWidget *gnome_druid_page_standard_new_with_vals           (const gchar            *title,
 							      GdkPixbuf              *logo,

@@ -25,7 +25,7 @@
 */
 
 #include <config.h>
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 #ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 
@@ -36,7 +36,7 @@
 
 
 static void gnome_pixmap_class_init    (GnomePixmapClass *class);
-static void gnome_pixmap_init          (GnomePixmap      *gpixmap);
+static void gnome_pixmap_instance_init (GnomePixmap      *gpixmap);
 
 /* Not used currently */
 struct _GnomePixmapPrivate {
@@ -52,14 +52,14 @@ struct _GnomePixmapPrivate {
  * Returns: the type ID of the &GnomePixmap class.
  */
 GNOME_CLASS_BOILERPLATE (GnomePixmap, gnome_pixmap,
-			 GtkImage, gtk_image)
+			 GtkImage, gtk_image, GTK_TYPE_IMAGE)
 
 /*
  * Widget functions
  */
 
 static void
-gnome_pixmap_init (GnomePixmap *gpixmap)
+gnome_pixmap_instance_init (GnomePixmap *gpixmap)
 {
 }
 

@@ -23,7 +23,7 @@
 */
 
 #include <config.h>
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 #include <unistd.h> 
 #include <sys/stat.h>
@@ -55,7 +55,7 @@ struct _GnomeIconSelectionPrivate {
 };
 
 static void gnome_icon_selection_class_init (GnomeIconSelectionClass *klass);
-static void gnome_icon_selection_init       (GnomeIconSelection      *gis);
+static void gnome_icon_selection_instance_init (GnomeIconSelection   *gis);
 
 static void gnome_icon_selection_destroy    (GtkObject               *object);
 static void gnome_icon_selection_finalize   (GObject                 *object);
@@ -64,7 +64,7 @@ static int sort_file_list		    (gconstpointer            a,
 					     gconstpointer            b);
 
 GNOME_CLASS_BOILERPLATE (GnomeIconSelection, gnome_icon_selection,
-			 GtkVBox, gtk_vbox)
+			 GtkVBox, gtk_vbox, GTK_TYPE_VBOX)
 
 static void
 gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
@@ -80,7 +80,7 @@ gnome_icon_selection_class_init (GnomeIconSelectionClass *klass)
 }
 
 static void
-gnome_icon_selection_init (GnomeIconSelection *gis)
+gnome_icon_selection_instance_init (GnomeIconSelection *gis)
 {
 	GtkAdjustment *vadj;
 	GtkWidget *box;

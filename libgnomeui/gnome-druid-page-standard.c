@@ -21,7 +21,7 @@
  */
 
 #include <config.h>
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
@@ -59,7 +59,7 @@ struct _GnomeDruidPageStandardPrivate
 };
 
 
-static void gnome_druid_page_standard_init          (GnomeDruidPageStandard      *druid_page_standard);
+static void gnome_druid_page_standard_instance_init (GnomeDruidPageStandard      *druid_page_standard);
 static void gnome_druid_page_standard_class_init    (GnomeDruidPageStandardClass *class);
 
 static void gnome_druid_page_standard_get_property  (GObject                     *object,
@@ -106,7 +106,8 @@ enum {
 };
 
 GNOME_CLASS_BOILERPLATE (GnomeDruidPageStandard, gnome_druid_page_standard,
-			 GnomeDruidPage, gnome_druid_page)
+			 GnomeDruidPage, gnome_druid_page,
+			 GNOME_TYPE_DRUID_PAGE)
 
 static void
 gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *class)
@@ -228,7 +229,7 @@ gnome_druid_page_standard_class_init (GnomeDruidPageStandardClass *class)
 }
 
 static void
-gnome_druid_page_standard_init (GnomeDruidPageStandard *druid_page_standard)
+gnome_druid_page_standard_instance_init (GnomeDruidPageStandard *druid_page_standard)
 {
 
 	GtkWidget *vbox;

@@ -22,12 +22,10 @@
 */
 
 #include <config.h>
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
-
-#include "gnome-macros.h"
 
 #include "gnome-i18nP.h"
 
@@ -45,7 +43,7 @@
 #include <string.h>
 
 static void            gnome_mdi_class_init     (GnomeMDIClass  *);
-static void            gnome_mdi_init           (GnomeMDI *);
+static void            gnome_mdi_instance_init  (GnomeMDI *);
 static void            gnome_mdi_destroy        (GtkObject *);
 static void            gnome_mdi_finalize       (GObject *);
 
@@ -115,7 +113,7 @@ typedef void       (*GnomeMDISignal2) (GtkObject *, gpointer, gpointer);
 static gint mdi_signals[LAST_SIGNAL];
 
 GNOME_CLASS_BOILERPLATE (GnomeMDI, gnome_mdi,
-			 GtkObject, gtk_object)
+			 GtkObject, gtk_object, GTK_TYPE_OBJECT)
 
 static void gnome_mdi_class_init (GnomeMDIClass *class)
 {
@@ -236,7 +234,7 @@ static void gnome_mdi_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
 }
 
-static void gnome_mdi_init (GnomeMDI *mdi)
+static void gnome_mdi_instance_init (GnomeMDI *mdi)
 {
 	/* FIXME!
 	mdi->mode = gnome_preferences_get_mdi_mode();

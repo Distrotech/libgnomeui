@@ -51,7 +51,7 @@ struct _GnomeAboutClass {
 	GtkDialogClass parent_class;
 };
 
-GType gnome_about_get_type (void);
+GType gnome_about_get_type (void) G_GNUC_CONST;
 
 GtkWidget *gnome_about_new (const gchar  *name,
 			    const gchar  *version,

@@ -22,7 +22,7 @@
 */
 
 #include <config.h>
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 #include "gnome-druid-page.h"
 
@@ -38,7 +38,7 @@ enum {
 	LAST_SIGNAL
 };
 
-static void gnome_druid_page_init		(GnomeDruidPage		 *druid_page);
+static void gnome_druid_page_instance_init	(GnomeDruidPage		 *druid_page);
 static void gnome_druid_page_class_init  	(GnomeDruidPageClass	 *klass);
 static void gnome_druid_page_destroy  		(GtkObject		 *object);
 static void gnome_druid_page_finalize  		(GObject		 *object);
@@ -54,7 +54,7 @@ static void gnome_druid_page_realize            (GtkWidget		 *widget);
 static guint druid_page_signals[LAST_SIGNAL] = { 0 };
 
 GNOME_CLASS_BOILERPLATE (GnomeDruidPage, gnome_druid_page,
-			 GtkBin, gtk_bin)
+			 GtkBin, gtk_bin, GTK_TYPE_BIN)
 
 static void
 gnome_druid_page_class_init (GnomeDruidPageClass *class)
@@ -125,7 +125,7 @@ gnome_druid_page_class_init (GnomeDruidPageClass *class)
 
 
 static void
-gnome_druid_page_init (GnomeDruidPage *druid_page)
+gnome_druid_page_instance_init (GnomeDruidPage *druid_page)
 {
 	/* enable if you add privates */
 	/*druid_page->_priv = g_new0 (GnomeDruidPagePrivate, 1);*/

@@ -21,7 +21,7 @@
   @NOTATION@
 */
 #include <config.h>
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
@@ -52,7 +52,7 @@ enum {
 };
 
 
-static void    gnome_druid_init            (GnomeDruid      *druid);
+static void    gnome_druid_instance_init   (GnomeDruid      *druid);
 static void    gnome_druid_class_init      (GnomeDruidClass *klass);
 static void    gnome_druid_destroy         (GtkObject       *object);
 static void    gnome_druid_finalize        (GObject         *object);
@@ -94,7 +94,8 @@ static void    gnome_druid_help_callback   (GtkWidget       *button,
 static guint druid_signals[LAST_SIGNAL] = { 0 };
 
 /* define the _get_type method and parent_class */
-GNOME_CLASS_BOILERPLATE(GnomeDruid, gnome_druid, GtkContainer, gtk_container)
+GNOME_CLASS_BOILERPLATE(GnomeDruid, gnome_druid,
+			GtkContainer, gtk_container, GTK_TYPE_CONTAINER)
 
 static void
 gnome_druid_class_init (GnomeDruidClass *klass)
@@ -159,7 +160,7 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 }
 
 static void
-gnome_druid_init (GnomeDruid *druid)
+gnome_druid_instance_init (GnomeDruid *druid)
 {
 	druid->_priv = g_new0(GnomeDruidPrivate, 1);
 

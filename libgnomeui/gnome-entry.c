@@ -29,7 +29,7 @@
  */
 
 #include <config.h>
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"

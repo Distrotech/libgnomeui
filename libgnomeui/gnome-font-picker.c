@@ -20,7 +20,7 @@
  */
 
 #include <config.h>
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
@@ -81,7 +81,7 @@ enum {
 
 /* Prototypes */
 static void gnome_font_picker_class_init (GnomeFontPickerClass *class);
-static void gnome_font_picker_init       (GnomeFontPicker      *cp);
+static void gnome_font_picker_instance_init (GnomeFontPicker   *cp);
 static void gnome_font_picker_destroy    (GtkObject            *object);
 static void gnome_font_picker_finalize   (GObject              *object);
 static void gnome_font_picker_get_property (GObject *object,
@@ -125,7 +125,7 @@ static void gnome_font_picker_update_font_info(GnomeFontPicker *gfs);
 static guint font_picker_signals[LAST_SIGNAL] = { 0 };
 
 GNOME_CLASS_BOILERPLATE (GnomeFontPicker, gnome_font_picker,
-			 GtkButton, gtk_button)
+			 GtkButton, gtk_button, GTK_TYPE_BUTTON)
 
 static void
 gnome_font_picker_class_init (GnomeFontPickerClass *class)
@@ -205,7 +205,7 @@ gnome_font_picker_class_init (GnomeFontPickerClass *class)
 }
 
 static void
-gnome_font_picker_init (GnomeFontPicker *gfp)
+gnome_font_picker_instance_init (GnomeFontPicker *gfp)
 {
 
     gfp->_priv                         = g_new0(GnomeFontPickerPrivate, 1);

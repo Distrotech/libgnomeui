@@ -21,7 +21,7 @@
 */
 
 #include "config.h"
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
@@ -38,7 +38,7 @@ struct _GnomeHRefPrivate {
 };
 
 static void gnome_href_class_init	(GnomeHRefClass *klass);
-static void gnome_href_init		(GnomeHRef *href);
+static void gnome_href_instance_init	(GnomeHRef *href);
 static void gnome_href_clicked		(GtkButton *button);
 static void gnome_href_destroy		(GtkObject *object);
 static void gnome_href_finalize		(GObject *object);
@@ -94,7 +94,7 @@ enum {
  **/
 /* The following defines the get_type */
 GNOME_CLASS_BOILERPLATE (GnomeHRef, gnome_href,
-			 GtkButton, gtk_button)
+			 GtkButton, gtk_button, GTK_TYPE_BUTTON)
 
 static void
 gnome_href_class_init (GnomeHRefClass *klass)
@@ -134,7 +134,7 @@ gnome_href_class_init (GnomeHRefClass *klass)
 }
 
 static void
-gnome_href_init(GnomeHRef *href)
+gnome_href_instance_init (GnomeHRef *href)
 {
 	href->_priv = g_new0(GnomeHRefPrivate, 1);
 

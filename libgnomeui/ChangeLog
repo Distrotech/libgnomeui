@@ -1,3 +1,13 @@
+Fri Sep 14 12:36:25 2001  George Lebl <jirka@5z.com>
+
+	* Makefile.am, *.c, *.h: remove gnome-macros.h it is now in libgnome.
+	  Also at the same time make sure we use GType for all type
+	  references and not guint nor GtkType.  Also since gnome-macros
+	  changed slightly, use the new style.  And fix some related warnings
+
+	* gnome-icon-list.c, gnome-client.c, gnome-icon-entry.c: move to
+	  the gnome-macros stuff.
+
 2001-09-12  jacob berkman  <jacob@ximian.com>
 
 	* Makefile.am (libgnomeui_2_la_SOURCES): add gnome-window-icon.c

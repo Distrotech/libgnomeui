@@ -115,8 +115,9 @@ gnome_window_icon_set_default_from_file_list (const char **filenames)
 void
 gnome_window_icon_set_default_from_file (const char *filename)
 {	
-	const char **filenames[2] = { NULL };
+	const char *filenames[2] = { NULL };
 
+	/* FIXME: the vector const is wrong */
 	filenames[0] = filename;
 	gnome_window_icon_set_default_from_file_list (filenames);
 }

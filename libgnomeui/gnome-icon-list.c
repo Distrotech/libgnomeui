@@ -84,9 +84,21 @@ typedef enum {
 
 static guint gil_signals[LAST_SIGNAL] = { 0 };
 
+static void gnome_icon_list_instance_init (Gil *gil);
+static void gnome_icon_list_class_init (GilClass *gil_class);
 
-static GtkContainerClass *parent_class;
 
+/**
+ * gnome_icon_list_get_type:
+ *
+ * Registers the &GnomeIconList class if necessary, and returns the type ID
+ * associated to it.
+ *
+ * Returns: The type ID of the &GnomeIconList class.
+ */
+GNOME_CLASS_BOILERPLATE (GnomeIconList, gnome_icon_list,
+			 GnomeCanvas, gnome_canvas,
+			 GNOME_TYPE_CANVAS)
 
 /* Icon structure */
 typedef struct {
@@ -1836,7 +1848,7 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 }
 
 static void
-gil_class_init (GilClass *gil_class)
+gnome_icon_list_class_init (GilClass *gil_class)
 {
 	GtkObjectClass *object_class;
 	GObjectClass *gobject_class;
@@ -1849,8 +1861,6 @@ gil_class_init (GilClass *gil_class)
 	widget_class = (GtkWidgetClass *)   gil_class;
 	layout_class = (GtkLayoutClass *)   gil_class;
 	canvas_class = (GnomeCanvasClass *) gil_class;
-
-	parent_class = gtk_type_class (GNOME_TYPE_CANVAS);
 
 	gil_signals[SELECT_ICON] =
 		gtk_signal_new (
@@ -1901,7 +1911,7 @@ gil_class_init (GilClass *gil_class)
 }
 
 static void
-gil_init (Gil *gil)
+gnome_icon_list_instance_init (Gil *gil)
 {
 	gil->_priv = g_new0 (GnomeIconListPrivate, 1);
 
@@ -1917,38 +1927,6 @@ gil_init (Gil *gil)
 
 	gnome_canvas_set_scroll_region (GNOME_CANVAS (gil), 0.0, 0.0, 1000000.0, 1000000.0);
 	gnome_canvas_scroll_to (GNOME_CANVAS (gil), 0, 0);
-}
-
-/**
- * gnome_icon_list_get_type:
- *
- * Registers the &GnomeIconList class if necessary, and returns the type ID
- * associated to it.
- *
- * Returns: The type ID of the &GnomeIconList class.
- */
-GType
-gnome_icon_list_get_type (void)
-{
-	static GType gil_type = 0;
-
-	if (!gil_type) {
-		GtkTypeInfo gil_info = {
-			"GnomeIconList",
-			sizeof (GnomeIconList),
-			sizeof (GnomeIconListClass),
-			(GtkClassInitFunc) gil_class_init,
-			(GtkObjectInitFunc) gil_init,
-			NULL,
-			NULL,
-			NULL
-		};
-
-		gil_type = gtk_type_unique (gnome_canvas_get_type (),
-					    &gil_info);
-	}
-
-	return gil_type;
 }
 
 /**

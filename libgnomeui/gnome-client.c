@@ -66,7 +66,7 @@ enum {
 };
 
 static void gnome_client_class_init              (GnomeClientClass *klass);
-static void gnome_client_object_init             (GnomeClient      *client);
+static void gnome_client_instance_init           (GnomeClient      *client);
 
 static void gnome_real_client_destroy            (GtkObject        *object);
 static void gnome_real_client_save_complete      (GnomeClient      *client);
@@ -86,7 +86,6 @@ static void   client_unset_config_prefix    (GnomeClient *client);
 static gchar** array_init_from_arg           (gint argc, 
 					      gchar *argv[]);
 
-static GtkObjectClass *parent_class = NULL;
 static gint client_signals[LAST_SIGNAL] = { 0 };
 
 static const char *sm_client_id_arg_name G_GNUC_UNUSED = "--sm-client-id";
@@ -832,7 +831,6 @@ static const struct poptOption options[] = {
 
   {NULL, '\0', POPT_ARG_CALLBACK | POPT_CBFLAG_PRE | POPT_CBFLAG_POST, 
    client_parse_func, 0, NULL, NULL},
-#define N_(x) x
 
   {"sm-client-id", '\0', POPT_ARG_STRING, NULL, ARG_SM_CLIENT_ID, 
    N_("Specify session management ID"), N_("ID")},
@@ -1147,38 +1145,13 @@ gnome_master_client (void)
 /*****************************************************************************/
 /* GTK-class managing functions */
 
-GtkType
-gnome_client_get_type (void)
-{
-  static GType client_type = 0;
-  
-  if (!client_type)
-    {
-      GtkTypeInfo client_info =
-      {
-	"GnomeClient",
-	sizeof (GnomeClient),
-	sizeof (GnomeClientClass),
-	(GtkClassInitFunc) gnome_client_class_init,
-	(GtkObjectInitFunc) gnome_client_object_init,
-	NULL,
-	NULL,
-	NULL
-      };
-
-      client_type = gtk_type_unique (GTK_TYPE_OBJECT, &client_info);
-    }
-  
-  return client_type;
-}
+GNOME_CLASS_BOILERPLATE (GnomeClient, gnome_client,
+			 GtkObject, gtk_object, GTK_TYPE_OBJECT)
 
 static void
 gnome_client_class_init (GnomeClientClass *klass)
 {
   GtkObjectClass *object_class = (GtkObjectClass*) klass;
-  
-  parent_class = gtk_type_class (GTK_TYPE_OBJECT);
-  
   
   client_signals[SAVE_YOURSELF] =
     gtk_signal_new ("save_yourself",
@@ -1241,7 +1214,7 @@ gnome_client_class_init (GnomeClientClass *klass)
 }
 
 static void
-gnome_client_object_init (GnomeClient *client)
+gnome_client_instance_init (GnomeClient *client)
 {
   client->smc_conn          = NULL;
   client->client_id         = NULL;

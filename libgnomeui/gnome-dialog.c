@@ -69,7 +69,7 @@ static void gnome_dialog_close_real(GnomeDialog * d);
 static GtkWindowClass *parent_class;
 static gint dialog_signals[LAST_SIGNAL] = { 0, 0 };
 
-guint
+GType
 gnome_dialog_get_type (void)
 {
   static GType dialog_type = 0;

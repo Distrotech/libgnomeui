@@ -22,7 +22,7 @@
 */
 
 #include <config.h>
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 #ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 
@@ -37,7 +37,7 @@
 #include "gnome-mdi.h"
 
 static void       gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
-static void       gnome_mdi_child_init             (GnomeMDIChild *);
+static void       gnome_mdi_child_instance_init    (GnomeMDIChild *);
 static void       gnome_mdi_child_destroy          (GtkObject *);
 static void       gnome_mdi_child_finalize         (GObject *);
 
@@ -49,7 +49,7 @@ void child_list_menu_remove_item (GnomeMDI *, GnomeMDIChild *);
 void child_list_menu_add_item    (GnomeMDI *, GnomeMDIChild *);
 
 GNOME_CLASS_BOILERPLATE (GnomeMDIChild, gnome_mdi_child,
-			 GtkObject, gtk_object)
+			 GtkObject, gtk_object, GTK_TYPE_OBJECT)
 
 
 static void gnome_mdi_child_class_init (GnomeMDIChildClass *klass)
@@ -69,7 +69,7 @@ static void gnome_mdi_child_class_init (GnomeMDIChildClass *klass)
 	klass->set_label = gnome_mdi_child_set_label;
 }
 
-static void gnome_mdi_child_init (GnomeMDIChild *mdi_child)
+static void gnome_mdi_child_instance_init (GnomeMDIChild *mdi_child)
 {
 	mdi_child->name = NULL;
 	mdi_child->parent = NULL;

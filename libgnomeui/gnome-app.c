@@ -39,7 +39,7 @@
  */
 
 #include "config.h"
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 #include <string.h>
 #include <gtk/gtk.h>
@@ -66,12 +66,12 @@ struct _GnomeAppPrivate
 	int dummy;
 	/* Nothing right now, needs to get filled with the private things */
 	/* XXX: When stuff is added, uncomment the allocation in the
-	 * gnome_app_init function! */
+	 * gnome_app_instance_init function! */
 };
 
 
 static void gnome_app_class_init  (GnomeAppClass *class);
-static void gnome_app_init        (GnomeApp      *app);
+static void gnome_app_instance_init        (GnomeApp      *app);
 static void gnome_app_destroy     (GtkObject     *object);
 static void gnome_app_finalize    (GObject       *object);
 static void gnome_app_show        (GtkWidget     *widget);
@@ -92,7 +92,7 @@ static void   layout_changed      (GtkWidget     *widget,
 
 /* define _get_type and parent_class */
 GNOME_CLASS_BOILERPLATE (GnomeApp, gnome_app,
-			 GtkWindow, gtk_window)
+			 GtkWindow, gtk_window, GTK_TYPE_WINDOW)
 
 static gchar *
 read_layout_config (GnomeApp *app)
@@ -188,7 +188,7 @@ gnome_app_get_property (GObject       *object,
 }
 
 static void
-gnome_app_init (GnomeApp *app)
+gnome_app_instance_init (GnomeApp *app)
 {
 	/* FIXME!!!!!!!
 	const char *str = NULL;

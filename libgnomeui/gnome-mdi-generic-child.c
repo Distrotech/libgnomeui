@@ -22,7 +22,7 @@
 */
 
 #include <config.h>
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 #ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 
@@ -36,7 +36,7 @@
 #include "gnome-mdi.h"
 
 static void       gnome_mdi_generic_child_class_init        (GnomeMDIGenericChildClass *klass);
-static void       gnome_mdi_generic_child_init              (GnomeMDIGenericChild *child);
+static void       gnome_mdi_generic_child_instance_init     (GnomeMDIGenericChild *child);
 static void       gnome_mdi_generic_child_destroy           (GtkObject *);
 
 static GtkWidget  *gnome_mdi_generic_child_create_view      (GnomeMDIGenericChild *child);
@@ -47,7 +47,8 @@ static GtkWidget  *gnome_mdi_generic_child_set_label        (GnomeMDIGenericChil
 							     GtkWidget *old_label);
 
 GNOME_CLASS_BOILERPLATE (GnomeMDIGenericChild, gnome_mdi_generic_child,
-			 GnomeMDIChild, gnome_mdi_child)
+			 GnomeMDIChild, gnome_mdi_child,
+			 GNOME_TYPE_MDI_CHILD)
 
 static void gnome_mdi_generic_child_class_init (GnomeMDIGenericChildClass *klass)
 {
@@ -65,7 +66,7 @@ static void gnome_mdi_generic_child_class_init (GnomeMDIGenericChildClass *klass
 	mdi_child_klass->get_config_string = (GnomeMDIChildConfigFunc)gnome_mdi_generic_child_get_config_string;
 }
 
-static void gnome_mdi_generic_child_init (GnomeMDIGenericChild *child)
+static void gnome_mdi_generic_child_instance_init (GnomeMDIGenericChild *child)
 {
 	child->create_view = NULL;
 	child->create_menus = NULL;

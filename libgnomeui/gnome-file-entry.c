@@ -30,29 +30,28 @@
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  */
 #include <config.h>
-#include "gnome-macros.h"
-
-/* Must be before all other gnome includes!! */
-#include "gnome-i18nP.h"
+#include <libgnome/gnome-macros.h>
 
 #include <pwd.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/param.h>
 #include <sys/types.h>
+#include <libgnomevfs/gnome-vfs-mime.h>
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkfilesel.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtksignal.h>
-#include "libgnome/gnome-util.h"
 
+/* Must be before all other gnome includes!! */
+#include "gnome-i18nP.h"
+
+#include <libgnome/gnome-util.h>
 #include "libgnomeuiP.h"
 
 #include "gnome-file-entry.h"
-
-#include <libgnomevfs/gnome-vfs-mime.h>
 
 struct _GnomeFileEntryPrivate {
 	GtkWidget *gentry;

@@ -33,7 +33,6 @@
 
 
 #include <libgnome/libgnome.h>
-#include "gnome-macros.h"
 #include "gnometypebuiltins.h"
 #include "gnome-gconf-ui.h"
 

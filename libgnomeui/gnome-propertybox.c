@@ -24,7 +24,7 @@
    that would violate this goal.  */
 
 #include <config.h>
-#include "gnome-macros.h"
+#include <libgnome/gnome-macros.h>
 
 #ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 
@@ -44,7 +44,7 @@ enum
 };
 
 static void gnome_property_box_class_init     (GnomePropertyBoxClass *klass);
-static void gnome_property_box_init           (GnomePropertyBox *property_box);
+static void gnome_property_box_instance_init  (GnomePropertyBox *property_box);
 static void gnome_property_box_destroy        (GtkObject *object);
 
 /*
@@ -62,7 +62,7 @@ static void dialog_clicked_cb (GnomeDialog * dialog, gint button,
 static gint property_box_signals [LAST_SIGNAL] = { 0 };
 
 GNOME_CLASS_BOILERPLATE(GnomePropertyBox, gnome_property_box,
-			GnomeDialog, gnome_dialog);
+			GnomeDialog, gnome_dialog, GNOME_TYPE_DIALOG);
 static void
 gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 {
@@ -100,7 +100,7 @@ gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 }
 
 static void
-gnome_property_box_init (GnomePropertyBox *property_box)
+gnome_property_box_instance_init (GnomePropertyBox *property_box)
 {
 	GList * button_list;
 
