@@ -1,3 +1,24 @@
+1999-07-23  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dock-item.c (gnome_dock_item_button_changed): Removed
+	unused variables.
+	(gnome_dock_item_motion): Likewise.
+	(gnome_dock_item_motion): Likewise.
+	(gnome_dock_item_delete_event): Likewise.
+
+	* gnome-dock-layout.c (gnome_dock_layout_class_init): Initialize
+	`parent_class'.
+
+	* gnome-dock.c (gnome_dock_size_request): Removed unused
+	variable.
+	(get_docked_item_by_name): Likewise.
+	(drag_begin_foreach_func): Removed useless declaration.
+
+	* gnome-dock.c: Fixed a two bugs reported by Ben Hendrickson
+	<bhendrickson@usa.net>.
+	(get_docked_item_by_name): Return the correct placement, and
+	iterate correctly.
+
 1999-07-22  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c (child_list_menu_create, child_list_menu_add_item):

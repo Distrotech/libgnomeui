@@ -106,8 +106,6 @@ static void     forall_helper                  (GList *list,
                                                 GtkCallback callback,
                                                 gpointer callback_data);
       
-static void     drag_begin_foreach_func        (gpointer data,
-                                                gpointer user_data);
 static void     drag_begin                     (GtkWidget *widget,
                                                 gpointer data);
 static void     drag_end_bands                 (GList **list,
@@ -248,7 +246,6 @@ static void
 gnome_dock_size_request (GtkWidget *widget, GtkRequisition *requisition)
 {
   GnomeDock *dock;
-  GtkContainer *container;
   GList *lp;
 
   dock = GNOME_DOCK (widget);
@@ -1175,20 +1172,20 @@ get_docked_item_by_name (GnomeDock *dock,
       { NULL, GNOME_DOCK_LEFT },
       { NULL, GNOME_DOCK_RIGHT },
       { NULL, GNOME_DOCK_FLOATING },
-    }, *p;
-    GtkWidget *item;
+    };
     GList *lp;
+    guint i;
 
     areas[0].band_list = dock->top_bands;
     areas[1].band_list = dock->bottom_bands;
     areas[2].band_list = dock->left_bands;
     areas[3].band_list = dock->right_bands;
 
-    for (p = areas; p->band_list != NULL; p++)
+    for (i = 0; i < 4; i++)
       {
         guint num_band;
 
-        for (lp = p->band_list, num_band = 0;
+        for (lp = areas[i].band_list, num_band = 0;
              lp != NULL;
              lp = lp->next, num_band++)
           {
@@ -1205,7 +1202,7 @@ get_docked_item_by_name (GnomeDock *dock,
                 if (num_band_return != NULL)
                   *num_band_return = num_band;
                 if (placement_return != NULL)
-                  *placement_return = areas->placement;
+                  *placement_return = areas[i].placement;
 
                 return item;
               }

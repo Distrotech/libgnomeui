@@ -757,7 +757,6 @@ gnome_dock_item_button_changed (GtkWidget      *widget,
 {
   GnomeDockItem *di;
   gboolean event_handled;
-  GdkCursor *fleur;
   
   g_return_val_if_fail (widget != NULL, FALSE);
   g_return_val_if_fail (GNOME_IS_DOCK_ITEM (widget), FALSE);
@@ -834,9 +833,6 @@ gnome_dock_item_motion (GtkWidget      *widget,
 {
   GnomeDockItem *di;
   gint new_x, new_y;
-  gint ox, oy;
-  gboolean in_handle;
-  GdkCursor *fleur;
 
   g_return_val_if_fail (widget != NULL, FALSE);
   g_return_val_if_fail (GNOME_IS_DOCK_ITEM (widget), FALSE);
@@ -915,8 +911,6 @@ static gint
 gnome_dock_item_delete_event (GtkWidget *widget,
                               GdkEventAny  *event)
 {
-  GnomeDockItem *di;
-
   g_return_val_if_fail (widget != NULL, FALSE);
   g_return_val_if_fail (GNOME_IS_DOCK_ITEM (widget), FALSE);
   g_return_val_if_fail (event != NULL, FALSE);

@@ -62,6 +62,8 @@ gnome_dock_layout_class_init (GnomeDockLayoutClass  *class)
   object_class = (GtkObjectClass *) class;
 
   object_class->destroy = gnome_dock_layout_destroy;
+
+  parent_class = gtk_type_class (gtk_object_get_type ());
 }
 
 static void
@@ -526,8 +528,9 @@ gnome_dock_layout_create_string (GnomeDockLayout *layout)
  * 
  * Returns: %TRUE if the operation succeeds, %FALSE if it fails.
  **/
-gboolean gnome_dock_layout_parse_string (GnomeDockLayout *layout,
-                                         const gchar *string)
+gboolean
+gnome_dock_layout_parse_string (GnomeDockLayout *layout,
+				const gchar *string)
 {
   gchar **tmp, **p;
 
