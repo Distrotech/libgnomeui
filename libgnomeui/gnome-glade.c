@@ -1,3 +1,4 @@
+/* -*- Mode: C; c-basic-offset: 8 -*- */
 /* libglade - a library for building interfaces from XML files at runtime
  * Copyright (C) 1998, 1999  James Henstridge <james@daa.com.au>
  * Copyright (C) 1999 Miguel de Icaza (miguel@gnu.org)
@@ -49,8 +50,7 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 			    const char *longname)
 {
 	GList *tmp;
-	GNode *childnode;
-	char *vboxname, *content;
+	char *vboxname;
 
 	vboxname = g_strconcat (longname, ".", info->name, NULL);
 
@@ -75,7 +75,6 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 
 		if (is_action_area) {
 			char *parent_name;
-			GNode *buttonnode;
 
 			parent_name = g_strconcat(vboxname, ".", cinfo->name,
 						  NULL);
@@ -148,7 +147,6 @@ messagebox_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 {
 	GList *tmp;
 	GladeWidgetInfo *cinfo;
-	GNode *childnode;
 	GtkWidget *child;
 
 	/* the message box contains a vbox which contains a hbuttonbox ... */
@@ -157,7 +155,6 @@ messagebox_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 	for (tmp = cinfo->children; tmp; tmp = tmp->next) {
 		GList *tmp2;
 		const char *stock, *string = NULL;
-		char *content;
 
 		cinfo = tmp->data;
 		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
