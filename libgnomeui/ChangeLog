@@ -1,3 +1,19 @@
+1999-09-14  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-text.c (gnome_canvas_text_init): Do not load a
+	default fontset.  This is fantastically inefficient, since we have
+	to pull the whole big fontset from the server even if we never use
+	it again and replace it immediately with the user-specified font.
+	(gnome_canvas_suck_font): Take into account the fact that the font
+	may be NULL.
+	(get_bounds_item_relative): Likewise.
+	(gnome_canvas_text_draw): Likewise.
+	(gnome_canvas_text_render): Likewise.
+	(gnome_canvas_text_point): Likewise.
+	(gnome_canvas_text_set_arg): Do not try to load a default font if
+	loading the user-specified one fails.
+	(gnome_canvas_text_destroy): Free the sucked font.
+
 1999-09-13  Karl Eichwalder  <ke@suse.de>
 
 	* winhints_demo.c (about_cb): Add missing \n.

@@ -1,7 +1,8 @@
 /* Text item type for GnomeCanvas widget
  *
- * GnomeCanvas is basically a port of the Tk toolkit's most excellent canvas widget.  Tk is
- * copyrighted by the Regents of the University of California, Sun Microsystems, and other parties.
+ * GnomeCanvas is basically a port of the Tk toolkit's most excellent canvas
+ * widget.  Tk is copyrighted by the Regents of the University of California,
+ * Sun Microsystems, and other parties.
  *
  * Copyright (C) 1998 The Free Software Foundation
  *
@@ -18,6 +19,8 @@
 #include "libart_lgpl/art_rgb_bitmap_affine.h"
 #include "gnome-canvas-util.h"
 
+
+
 /* This defines a line of text */
 struct line {
 	char *text;	/* Line's text, it is a pointer into the text->text string */
@@ -25,6 +28,9 @@ struct line {
 	int width;	/* Line's width in pixels */
 };
 
+
+
+/* Object argument IDs */
 enum {
 	ARG_0,
 	ARG_TEXT,
@@ -50,33 +56,40 @@ enum {
 
 
 static void gnome_canvas_text_class_init (GnomeCanvasTextClass *class);
-static void gnome_canvas_text_init       (GnomeCanvasText      *text);
-static void gnome_canvas_text_destroy    (GtkObject            *object);
-static void gnome_canvas_text_set_arg    (GtkObject            *object,
-					  GtkArg               *arg,
-					  guint                 arg_id);
-static void gnome_canvas_text_get_arg    (GtkObject            *object,
-					  GtkArg               *arg,
-					  guint                 arg_id);
+static void gnome_canvas_text_init (GnomeCanvasText *text);
+static void gnome_canvas_text_destroy (GtkObject *object);
+static void gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id);
+static void gnome_canvas_text_get_arg (GtkObject *object, GtkArg *arg, guint arg_id);
 
-static void   gnome_canvas_text_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
-static void   gnome_canvas_text_realize     (GnomeCanvasItem *item);
-static void   gnome_canvas_text_unrealize   (GnomeCanvasItem *item);
-static void   gnome_canvas_text_draw        (GnomeCanvasItem *item, GdkDrawable *drawable,
-					     int x, int y, int width, int height);
-static double gnome_canvas_text_point       (GnomeCanvasItem *item, double x, double y,
-					     int cx, int cy, GnomeCanvasItem **actual_item);
-static void   gnome_canvas_text_translate   (GnomeCanvasItem *item, double dx, double dy);
-static void   gnome_canvas_text_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
-static void   gnome_canvas_text_render      (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
+static void gnome_canvas_text_update (GnomeCanvasItem *item, double *affine,
+				      ArtSVP *clip_path, int flags);
+static void gnome_canvas_text_realize (GnomeCanvasItem *item);
+static void gnome_canvas_text_unrealize (GnomeCanvasItem *item);
+static void gnome_canvas_text_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
+				    int x, int y, int width, int height);
+static double gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y, int cx, int cy,
+				       GnomeCanvasItem **actual_item);
+static void gnome_canvas_text_bounds (GnomeCanvasItem *item,
+				      double *x1, double *y1, double *x2, double *y2);
+static void gnome_canvas_text_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf);
 
-static GnomeCanvasTextSuckFont * gnome_canvas_suck_font (GdkFont *font);
+static GnomeCanvasTextSuckFont *gnome_canvas_suck_font (GdkFont *font);
 static void gnome_canvas_suck_font_free (GnomeCanvasTextSuckFont *suckfont);
 
 
 static GnomeCanvasItemClass *parent_class;
 
+
 
+/**
+ * gnome_canvas_text_get_type:
+ * @void: 
+ * 
+ * Registers the &GnomeCanvasText class if necessary, and returns the type ID
+ * associated to it.
+ * 
+ * Return value: The type ID of the &GnomeCanvasText class.
+ **/
 GtkType
 gnome_canvas_text_get_type (void)
 {
@@ -100,6 +113,7 @@ gnome_canvas_text_get_type (void)
 	return text_type;
 }
 
+/* Class initialization function for the text item */
 static void
 gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 {
@@ -111,25 +125,44 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasText::text", GTK_TYPE_STRING, GTK_ARG_READWRITE, ARG_TEXT);
-	gtk_object_add_arg_type ("GnomeCanvasText::x", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X);
-	gtk_object_add_arg_type ("GnomeCanvasText::y", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y);
-	gtk_object_add_arg_type ("GnomeCanvasText::font", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FONT);
-	gtk_object_add_arg_type ("GnomeCanvasText::fontset", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FONTSET);
-	gtk_object_add_arg_type ("GnomeCanvasText::font_gdk", GTK_TYPE_GDK_FONT, GTK_ARG_READWRITE, ARG_FONT_GDK);
-	gtk_object_add_arg_type ("GnomeCanvasText::anchor", GTK_TYPE_ANCHOR_TYPE, GTK_ARG_READWRITE, ARG_ANCHOR);
-	gtk_object_add_arg_type ("GnomeCanvasText::justification", GTK_TYPE_JUSTIFICATION, GTK_ARG_READWRITE, ARG_JUSTIFICATION);
-	gtk_object_add_arg_type ("GnomeCanvasText::clip_width", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_CLIP_WIDTH);
-	gtk_object_add_arg_type ("GnomeCanvasText::clip_height", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_CLIP_HEIGHT);
-	gtk_object_add_arg_type ("GnomeCanvasText::clip", GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_CLIP);
-	gtk_object_add_arg_type ("GnomeCanvasText::x_offset", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X_OFFSET);
-	gtk_object_add_arg_type ("GnomeCanvasText::y_offset", GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y_OFFSET);
-	gtk_object_add_arg_type ("GnomeCanvasText::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasText::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
-	gtk_object_add_arg_type ("GnomeCanvasText::fill_color_rgba", GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_FILL_COLOR_RGBA);
-	gtk_object_add_arg_type ("GnomeCanvasText::fill_stipple", GTK_TYPE_GDK_WINDOW, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
-	gtk_object_add_arg_type ("GnomeCanvasText::text_width", GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_WIDTH);
-	gtk_object_add_arg_type ("GnomeCanvasText::text_height", GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_HEIGHT);
+	gtk_object_add_arg_type ("GnomeCanvasText::text",
+				 GTK_TYPE_STRING, GTK_ARG_READWRITE, ARG_TEXT);
+	gtk_object_add_arg_type ("GnomeCanvasText::x",
+				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X);
+	gtk_object_add_arg_type ("GnomeCanvasText::y",
+				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y);
+	gtk_object_add_arg_type ("GnomeCanvasText::font",
+				 GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FONT);
+	gtk_object_add_arg_type ("GnomeCanvasText::fontset",
+				 GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FONTSET);
+	gtk_object_add_arg_type ("GnomeCanvasText::font_gdk",
+				 GTK_TYPE_GDK_FONT, GTK_ARG_READWRITE, ARG_FONT_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasText::anchor",
+				 GTK_TYPE_ANCHOR_TYPE, GTK_ARG_READWRITE, ARG_ANCHOR);
+	gtk_object_add_arg_type ("GnomeCanvasText::justification",
+				 GTK_TYPE_JUSTIFICATION, GTK_ARG_READWRITE, ARG_JUSTIFICATION);
+	gtk_object_add_arg_type ("GnomeCanvasText::clip_width",
+				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_CLIP_WIDTH);
+	gtk_object_add_arg_type ("GnomeCanvasText::clip_height",
+				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_CLIP_HEIGHT);
+	gtk_object_add_arg_type ("GnomeCanvasText::clip",
+				 GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_CLIP);
+	gtk_object_add_arg_type ("GnomeCanvasText::x_offset",
+				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_X_OFFSET);
+	gtk_object_add_arg_type ("GnomeCanvasText::y_offset",
+				 GTK_TYPE_DOUBLE, GTK_ARG_READWRITE, ARG_Y_OFFSET);
+	gtk_object_add_arg_type ("GnomeCanvasText::fill_color",
+				 GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
+	gtk_object_add_arg_type ("GnomeCanvasText::fill_color_gdk",
+				 GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
+	gtk_object_add_arg_type ("GnomeCanvasText::fill_color_rgba",
+				 GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_FILL_COLOR_RGBA);
+	gtk_object_add_arg_type ("GnomeCanvasText::fill_stipple",
+				 GTK_TYPE_GDK_WINDOW, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
+	gtk_object_add_arg_type ("GnomeCanvasText::text_width",
+				 GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_WIDTH);
+	gtk_object_add_arg_type ("GnomeCanvasText::text_height",
+				 GTK_TYPE_DOUBLE, GTK_ARG_READABLE, ARG_TEXT_HEIGHT);
 
 	object_class->destroy = gnome_canvas_text_destroy;
 	object_class->set_arg = gnome_canvas_text_set_arg;
@@ -140,21 +173,16 @@ gnome_canvas_text_class_init (GnomeCanvasTextClass *class)
 	item_class->unrealize = gnome_canvas_text_unrealize;
 	item_class->draw = gnome_canvas_text_draw;
 	item_class->point = gnome_canvas_text_point;
-	item_class->translate = gnome_canvas_text_translate;
 	item_class->bounds = gnome_canvas_text_bounds;
 	item_class->render = gnome_canvas_text_render;
 }
 
+/* Object initialization function for the text item */
 static void
 gnome_canvas_text_init (GnomeCanvasText *text)
 {
 	text->x = 0.0;
 	text->y = 0.0;
-	text->font = gdk_fontset_load (
-		"-*-*-medium-r-normal-*-13-*-*-*-*-*-*-*,"
-		"-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*");
-		/* lame default */
-	g_assert (text->font != NULL);
 	text->anchor = GTK_ANCHOR_CENTER;
 	text->justification = GTK_JUSTIFY_LEFT;
 	text->clip_width = 0.0;
@@ -163,6 +191,7 @@ gnome_canvas_text_init (GnomeCanvasText *text)
 	text->yofs = 0.0;
 }
 
+/* Destroy handler for the text item */
 static void
 gnome_canvas_text_destroy (GtkObject *object)
 {
@@ -179,7 +208,11 @@ gnome_canvas_text_destroy (GtkObject *object)
 	if (text->lines)
 		g_free (text->lines);
 
-	gdk_font_unref (text->font);
+	if (text->font)
+		gdk_font_unref (text->font);
+
+	if (text->suckfont)
+		gnome_canvas_suck_font_free (text->suckfont);
 
 	if (text->stipple)
 		gdk_bitmap_unref (text->stipple);
@@ -205,7 +238,7 @@ get_bounds_item_relative (GnomeCanvasText *text, double *px1, double *py1, doubl
 
 	/* Calculate text dimensions */
 
-	if (text->text)
+	if (text->text && text->font)
 		text->height = (text->font->ascent + text->font->descent) * text->num_lines;
 	else
 		text->height = 0;
@@ -293,7 +326,7 @@ get_bounds (GnomeCanvasText *text, double *px1, double *py1, double *px2, double
 
 	/* Calculate text dimensions */
 
-	if (text->text)
+	if (text->text && text->font)
 		text->height = (text->font->ascent + text->font->descent) * text->num_lines;
 	else
 		text->height = 0;
@@ -357,9 +390,9 @@ get_bounds (GnomeCanvasText *text, double *px1, double *py1, double *px2, double
 	}
 }
 
-/* Recalculates the bounding box of the text item.  The bounding box is defined by the text's
- * extents if the clip rectangle is disabled.  If it is enabled, the bounding box is defined by the
- * clip rectangle itself.
+/* Recalculates the bounding box of the text item.  The bounding box is defined
+ * by the text's extents if the clip rectangle is disabled.  If it is enabled,
+ * the bounding box is defined by the clip rectangle itself.
  */
 static void
 recalc_bounds (GnomeCanvasText *text)
@@ -388,7 +421,11 @@ calc_line_widths (GnomeCanvasText *text)
 
 	for (i = 0; i < text->num_lines; i++) {
 		if (lines->length != 0) {
-			lines->width = gdk_text_width (text->font, lines->text, lines->length);
+			if (text->font)
+				lines->width = gdk_text_width (text->font,
+							       lines->text, lines->length);
+			else
+				lines->width = 0;
 
 			if (lines->width > text->max_width)
 				text->max_width = lines->width;
@@ -480,6 +517,7 @@ set_stipple (GnomeCanvasText *text, GdkBitmap *stipple, int reconfigure)
 	}
 }
 
+/* Set_arg handler for the text item */
 static void
 gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
@@ -521,13 +559,11 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			gdk_font_unref (text->font);
 
 		text->font = gdk_font_load (GTK_VALUE_STRING (*arg));
-		if (!text->font) {
-			text->font = gdk_font_load ("fixed");
-			g_assert (text->font != NULL);
-		}
+
 		if (item->canvas->aa) {
 			if (text->suckfont)
 				gnome_canvas_suck_font_free (text->suckfont);
+
 			text->suckfont = gnome_canvas_suck_font (text->font);
 		}
 
@@ -540,15 +576,11 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 			gdk_font_unref (text->font);
 
 		text->font = gdk_fontset_load (GTK_VALUE_STRING (*arg));
-		if (!text->font) {
-			text->font = gdk_fontset_load (
-				"-*-*-medium-r-normal-*-13-*-*-*-*-*-*-*,"
-				"-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*");
-			g_assert (text->font != NULL);
-		}
+
 		if (item->canvas->aa) {
 			if (text->suckfont)
 				gnome_canvas_suck_font_free (text->suckfont);
+
 			text->suckfont = gnome_canvas_suck_font (text->font);
 		}
 
@@ -562,11 +594,14 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 		text->font = GTK_VALUE_BOXED (*arg);
 		gdk_font_ref (text->font);
+
 		if (item->canvas->aa) {
 			if (text->suckfont)
 				gnome_canvas_suck_font_free (text->suckfont);
+
 			text->suckfont = gnome_canvas_suck_font (text->font);
 		}
+
 		calc_line_widths (text);
 		recalc_bounds (text);
 		break;
@@ -608,6 +643,7 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
         case ARG_FILL_COLOR:
 		if (GTK_VALUE_STRING (*arg))
 			gdk_color_parse (GTK_VALUE_STRING (*arg), &color);
+
 		text->rgba = ((color.red & 0xff00) << 16 |
 			      (color.green & 0xff00) << 8 |
 			      (color.blue & 0xff00) |
@@ -656,6 +692,7 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	}
 }
 
+/* Get_arg handler for the text item */
 static void
 gnome_canvas_text_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
@@ -738,6 +775,7 @@ gnome_canvas_text_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	}
 }
 
+/* Update handler for the text item */
 static void
 gnome_canvas_text_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
@@ -763,16 +801,12 @@ gnome_canvas_text_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_pa
 			text->affine[i] = affine[i];
 		get_bounds_item_relative (text, &i_bbox.x0, &i_bbox.y0, &i_bbox.x1, &i_bbox.y1);
 		art_drect_affine_transform (&c_bbox, &i_bbox, affine);
-#ifdef VERBOSE
-		g_print ("gnome_canvas_text_update (%g, %g) - (%g, %g) -> (%g, %g) - (%g, %g)\n",
-			 i_bbox.x0, i_bbox.y0, i_bbox.x1, i_bbox.y1,
-			 c_bbox.x0, c_bbox.y0, c_bbox.x1, c_bbox.y1);
-#endif
 		gnome_canvas_update_bbox (item, c_bbox.x0, c_bbox.y0, c_bbox.x1, c_bbox.y1);
 
 	}
 }
 
+/* Realize handler for the text item */
 static void
 gnome_canvas_text_realize (GnomeCanvasItem *item)
 {
@@ -784,12 +818,9 @@ gnome_canvas_text_realize (GnomeCanvasItem *item)
 		(* parent_class->realize) (item);
 
 	text->gc = gdk_gc_new (item->canvas->layout.bin_window);
-
-#if 0
-	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->update) (item, NULL, NULL, 0);
-#endif
 }
 
+/* Unrealize handler for the text item */
 static void
 gnome_canvas_text_unrealize (GnomeCanvasItem *item)
 {
@@ -906,6 +937,7 @@ get_line_xpos (GnomeCanvasText *text, struct line *line)
 	return x;
 }
 
+/* Draw handler for the text item */
 static void
 gnome_canvas_text_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 			int x, int y, int width, int height)
@@ -918,7 +950,7 @@ gnome_canvas_text_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 	text = GNOME_CANVAS_TEXT (item);
 
-	if (!text->text)
+	if (!text->text || !text->font)
 		return;
 
 	if (text->clip) {
@@ -957,187 +989,170 @@ gnome_canvas_text_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 		gdk_gc_set_clip_rectangle (text->gc, NULL);
 }
 
-#ifdef OLD_XFORM
-static double
-gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y,
-			 int cx, int cy, GnomeCanvasItem **actual_item)
-{
-	GnomeCanvasText *text;
-	int i;
-	struct line *lines;
-	int x1, y1, x2, y2;
-	int font_height;
-	int dx, dy;
-	double dist, best;
-
-	text = GNOME_CANVAS_TEXT (item);
-
-	*actual_item = item;
-
-	/* The idea is to build bounding rectangles for each of the lines of text (clipped by the
-	 * clipping rectangle, if it is activated) and see whether the point is inside any of these.
-	 * If it is, we are done.  Otherwise, calculate the distance to the nearest rectangle.
-	 */
-
-	font_height = text->font->ascent + text->font->descent;
-
-	best = 1.0e36;
-
-	lines = text->lines;
-
-	for (i = 0; i < text->num_lines; i++) {
-		/* Compute the coordinates of rectangle for the current line, clipping if appropriate */
-
-		x1 = get_line_xpos (text, lines);
-		y1 = text->cy + i * font_height;
-		x2 = x1 + lines->width;
-		y2 = y1 + font_height;
-
-		if (text->clip) {
-			if (x1 < text->clip_cx)
-				x1 = text->clip_cx;
-
-			if (y1 < text->clip_cy)
-				y1 = text->clip_cy;
-
-			if (x2 > (text->clip_cx + text->clip_width))
-				x2 = text->clip_cx + text->clip_width;
-
-			if (y2 > (text->clip_cy + text->clip_height))
-				y2 = text->clip_cy + text->clip_height;
-
-			if ((x1 >= x2) || (y1 >= y2))
-				continue;
-		}
-
-		/* Calculate distance from point to rectangle */
-
-		if (cx < x1)
-			dx = x1 - cx;
-		else if (cx >= x2)
-			dx = cx - x2 + 1;
-		else
-			dx = 0;
-
-		if (cy < y1)
-			dy = y1 - cy;
-		else if (cy >= y2)
-			dy = cy - y2 + 1;
-		else
-			dy = 0;
-
-		if ((dx == 0) && (dy == 0))
-			return 0.0;
-
-		dist = sqrt (dx * dx + dy * dy);
-		if (dist < best)
-			best = dist;
-
-		/* Next! */
-
-		lines++;
-	}
-
-	return best / item->canvas->pixels_per_unit;
-}
-#else
-static double
-gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y,
-			 int cx, int cy, GnomeCanvasItem **actual_item)
-{
-	GnomeCanvasText *text;
-	int i;
-	struct line *lines;
-	int x1, y1, x2, y2;
-	int font_height;
-	int dx, dy;
-	double dist, best;
-
-	text = GNOME_CANVAS_TEXT (item);
-
-	*actual_item = item;
-
-	/* The idea is to build bounding rectangles for each of the lines of text (clipped by the
-	 * clipping rectangle, if it is activated) and see whether the point is inside any of these.
-	 * If it is, we are done.  Otherwise, calculate the distance to the nearest rectangle.
-	 */
-
-	font_height = text->font->ascent + text->font->descent;
-
-	best = 1.0e36;
-
-	lines = text->lines;
-
-	for (i = 0; i < text->num_lines; i++) {
-		/* Compute the coordinates of rectangle for the current line, clipping if appropriate */
-
-		x1 = get_line_xpos (text, lines);
-		y1 = text->cy + i * font_height;
-		x2 = x1 + lines->width;
-		y2 = y1 + font_height;
-
-		if (text->clip) {
-			if (x1 < text->clip_cx)
-				x1 = text->clip_cx;
-
-			if (y1 < text->clip_cy)
-				y1 = text->clip_cy;
-
-			if (x2 > (text->clip_cx + text->clip_width))
-				x2 = text->clip_cx + text->clip_width;
-
-			if (y2 > (text->clip_cy + text->clip_height))
-				y2 = text->clip_cy + text->clip_height;
-
-			if ((x1 >= x2) || (y1 >= y2))
-				continue;
-		}
-
-		/* Calculate distance from point to rectangle */
-
-		if (cx < x1)
-			dx = x1 - cx;
-		else if (cx >= x2)
-			dx = cx - x2 + 1;
-		else
-			dx = 0;
-
-		if (cy < y1)
-			dy = y1 - cy;
-		else if (cy >= y2)
-			dy = cy - y2 + 1;
-		else
-			dy = 0;
-
-		if ((dx == 0) && (dy == 0))
-			return 0.0;
-
-		dist = sqrt (dx * dx + dy * dy);
-		if (dist < best)
-			best = dist;
-
-		/* Next! */
-
-		lines++;
-	}
-
-	return best / item->canvas->pixels_per_unit;
-}
-#endif
-
+/* Render handler for the text item */
 static void
-gnome_canvas_text_translate (GnomeCanvasItem *item, double dx, double dy)
+gnome_canvas_text_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 {
 	GnomeCanvasText *text;
+	guint32 fg_color;
+	double x_start, y_start;
+	double xpos, ypos;
+	struct line *lines;
+	int i, j;
+	double affine[6];
+	GnomeCanvasTextSuckFont *suckfont;
+	int dx, dy;
+	ArtPoint start_i, start_c;
 
 	text = GNOME_CANVAS_TEXT (item);
 
-	text->x += dx;
-	text->y += dy;
+	if (!text->text || !text->font || !text->suckfont)
+		return;
 
-	recalc_bounds (text);
+	suckfont = text->suckfont;
+
+	fg_color = text->rgba;
+
+        gnome_canvas_buf_ensure_buf (buf);
+
+	lines = text->lines;
+	start_i.y = get_line_ypos_item_relative (text);
+
+	art_affine_scale (affine, item->canvas->pixels_per_unit, item->canvas->pixels_per_unit);
+	for (i = 0; i < 6; i++)
+		affine[i] = text->affine[i];
+
+	for (i = 0; i < text->num_lines; i++) {
+		if (lines->length != 0) {
+			start_i.x = get_line_xpos_item_relative (text, lines);
+			art_affine_point (&start_c, &start_i, text->affine);
+			xpos = start_c.x;
+			ypos = start_c.y;
+
+			for (j = 0; j < lines->length; j++) {
+				GnomeCanvasTextSuckChar *ch;
+
+				ch = &suckfont->chars[(unsigned char)((lines->text)[j])];
+
+				affine[4] = xpos;
+				affine[5] = ypos;
+				art_rgb_bitmap_affine (
+					buf->buf,
+					buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
+					buf->buf_rowstride,
+					suckfont->bitmap + (ch->bitmap_offset >> 3),
+					ch->width,
+					suckfont->bitmap_height,
+					suckfont->bitmap_width >> 3,
+					fg_color,
+					affine,
+					ART_FILTER_NEAREST, NULL);
+
+				dx = ch->left_sb + ch->width + ch->right_sb;
+				xpos += dx * affine[0];
+				ypos += dx * affine[1];
+			}
+		}
+
+		dy = text->font->ascent + text->font->descent;
+		start_i.y += dy;
+		lines++;
+	}
+
+	buf->is_bg = 0;
 }
 
+/* Point handler for the text item */
+static double
+gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y,
+			 int cx, int cy, GnomeCanvasItem **actual_item)
+{
+	GnomeCanvasText *text;
+	int i;
+	struct line *lines;
+	int x1, y1, x2, y2;
+	int font_height;
+	int dx, dy;
+	double dist, best;
+
+	text = GNOME_CANVAS_TEXT (item);
+
+	*actual_item = item;
+
+	/* The idea is to build bounding rectangles for each of the lines of
+	 * text (clipped by the clipping rectangle, if it is activated) and see
+	 * whether the point is inside any of these.  If it is, we are done.
+	 * Otherwise, calculate the distance to the nearest rectangle.
+	 */
+
+	if (text->font)
+		font_height = text->font->ascent + text->font->descent;
+	else
+		font_height = 0;
+
+	best = 1.0e36;
+
+	lines = text->lines;
+
+	for (i = 0; i < text->num_lines; i++) {
+		/* Compute the coordinates of rectangle for the current line,
+		 * clipping if appropriate.
+		 */
+
+		x1 = get_line_xpos (text, lines);
+		y1 = text->cy + i * font_height;
+		x2 = x1 + lines->width;
+		y2 = y1 + font_height;
+
+		if (text->clip) {
+			if (x1 < text->clip_cx)
+				x1 = text->clip_cx;
+
+			if (y1 < text->clip_cy)
+				y1 = text->clip_cy;
+
+			if (x2 > (text->clip_cx + text->clip_width))
+				x2 = text->clip_cx + text->clip_width;
+
+			if (y2 > (text->clip_cy + text->clip_height))
+				y2 = text->clip_cy + text->clip_height;
+
+			if ((x1 >= x2) || (y1 >= y2))
+				continue;
+		}
+
+		/* Calculate distance from point to rectangle */
+
+		if (cx < x1)
+			dx = x1 - cx;
+		else if (cx >= x2)
+			dx = cx - x2 + 1;
+		else
+			dx = 0;
+
+		if (cy < y1)
+			dy = y1 - cy;
+		else if (cy >= y2)
+			dy = cy - y2 + 1;
+		else
+			dy = 0;
+
+		if ((dx == 0) && (dy == 0))
+			return 0.0;
+
+		dist = sqrt (dx * dx + dy * dy);
+		if (dist < best)
+			best = dist;
+
+		/* Next! */
+
+		lines++;
+	}
+
+	return best / item->canvas->pixels_per_unit;
+}
+
+/* Bounds handler for the text item */
 static void
 gnome_canvas_text_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
 {
@@ -1199,6 +1214,8 @@ gnome_canvas_text_bounds (GnomeCanvasItem *item, double *x1, double *y1, double 
 	*y2 = *y1 + height;
 }
 
+
+
 /* Routines for sucking fonts from the X server */
 
 static GnomeCanvasTextSuckFont *
@@ -1216,6 +1233,9 @@ gnome_canvas_suck_font (GdkFont *font)
 	guchar *bitmap, *line;
 	int width, height;
 	int black_pixel, pixel;
+
+	if (!font)
+		return NULL;
 
 	suckfont = g_new (GnomeCanvasTextSuckFont, 1);
 
@@ -1260,9 +1280,10 @@ gnome_canvas_suck_font (GdkFont *font)
 			       text, 1);
 	}
 
-	/* The handling of the image leaves me with distinct unease.
-	   But this is more or less copied out of
-	   gimp/app/text_tool.c, so it _ought_ to work. -RLL */
+	/* The handling of the image leaves me with distinct unease.  But this
+	 * is more or less copied out of gimp/app/text_tool.c, so it _ought_ to
+	 * work. -RLL
+	 */
 
 	image = gdk_image_get (pixmap, 0, 0, width, height);
 	suckfont->bitmap = g_malloc0 ((width >> 3) * height);
@@ -1289,82 +1310,8 @@ gnome_canvas_suck_font (GdkFont *font)
 }
 
 static void
-gnome_canvas_suck_font_free (GnomeCanvasTextSuckFont *suckfont) {
+gnome_canvas_suck_font_free (GnomeCanvasTextSuckFont *suckfont)
+{
 	g_free (suckfont->bitmap);
 	g_free (suckfont);
-}
-
-static void
-gnome_canvas_text_render      (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
-{
-	GnomeCanvasText *text;
-	guint32 fg_color;
-	double x_start, y_start;
-	double xpos, ypos;
-	struct line *lines;
-	int i, j;
-	double affine[6];
-	GnomeCanvasTextSuckFont *suckfont;
-	int dx, dy;
-	ArtPoint start_i, start_c;
-
-	text = GNOME_CANVAS_TEXT (item);
-	if (!text->text)
-		return;
-
-	suckfont = text->suckfont;
-
-	fg_color = text->rgba;
-
-        gnome_canvas_buf_ensure_buf (buf);
-
-	lines = text->lines;
-	start_i.y = get_line_ypos_item_relative (text);
-
-	art_affine_scale (affine, item->canvas->pixels_per_unit, item->canvas->pixels_per_unit);
-	for (i = 0; i < 6; i++)
-		affine[i] = text->affine[i];
-
-#ifdef VERBOSE
-	{
-		char str[128];
-		art_affine_to_string (str, affine);
-		g_print ("gnome_canvas_text_render %s\n", str);
-	}
-#endif
-	for (i = 0; i < text->num_lines; i++) {
-		if (lines->length != 0) {
-			start_i.x = get_line_xpos_item_relative (text, lines);
-			art_affine_point (&start_c, &start_i, text->affine);
-			xpos = start_c.x;
-			ypos = start_c.y;
-
-			for (j = 0; j < lines->length; j++) {
-				GnomeCanvasTextSuckChar *ch;
-
-				ch = &suckfont->chars[(unsigned char)((lines->text)[j])];
-				affine[4] = xpos;
-				affine[5] = ypos;
-				art_rgb_bitmap_affine (buf->buf,
-						       buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
-						       buf->buf_rowstride,
-						       suckfont->bitmap + (ch->bitmap_offset >> 3),
-						       ch->width,
-						       suckfont->bitmap_height,
-						       suckfont->bitmap_width >> 3,
-						       fg_color,
-						       affine,
-						       ART_FILTER_NEAREST, NULL);
-				dx = ch->left_sb + ch->width + ch->right_sb;
-				xpos += dx * affine[0];
-				ypos += dx * affine[1];
-			}
-		}
-
-		dy = text->font->ascent + text->font->descent;
-		start_i.y += dy;
-		lines++;
-	}
-
-	buf->is_bg = 0;
 }
