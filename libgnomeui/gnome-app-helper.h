@@ -263,7 +263,7 @@ typedef struct {
 
 /* Insert all the help topics based on the application's id */
 #define GNOMEUIINFO_HELP(app_name) \
-	{ GNOME_APP_UI_HELP, NULL, NULL, app_name, NULL, NULL, \
+	{ GNOME_APP_UI_HELP, NULL, NULL, (void *)app_name, NULL, NULL, \
 		(GnomeUIPixmapType) 0, NULL, 0,	(GdkModifierType) 0, NULL }
 
 /* Insert a subtree (submenu) */

@@ -1,3 +1,9 @@
+2002-06-05  Bastien Nocera  <hadess@hadess.net>
+
+	* libgnomeui/gnome-app-helper.h: fix macro problem when using
+	GNOMEUIINFO_HELP in a C++ program, casting away constness is
+	not implicit in C++ (Closes: 83916)
+
 2002-06-05  Malcolm Tredinnick <malcolm@commsecure.com.au>
 	* doc/reference/libgnomeui-docs.sgml,
 	doc/reference/libgnomeui-sections.txt,
