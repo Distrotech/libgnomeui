@@ -111,7 +111,6 @@
       <title>FIXME</title>
       &libgnomeui-GnomeColorPicker;
       &libgnomeui-GnomeDateEdit;
-      &libgnomeui-GnomeDialog;
       &libgnomeui-gnome-dialog-util;
       &libgnomeui-GnomeEntry;
       &libgnomeui-GnomeFileEntry;
@@ -124,10 +123,8 @@
       &libgnomeui-GnomeIconSelection;
       &libgnomeui-GnomeThemeFile;
       &libgnomeui-GnomeThumbnail;
-      &libgnomeui-GnomeMessageBox;
       &libgnomeui-GnomePixmap;
       &libgnomeui-GnomePixmapEntry;
-      &libgnomeui-GnomePropertyBox;
       &libgnomeui-GnomeScores;
     </sect1>
     <sect1>
@@ -151,6 +148,9 @@
       &libgnomeui-GnomeMDIChild;
       &libgnomeui-GnomeMDIGenericChild;
       &libgnomeui-gnome-mdi-session;
+      &libgnomeui-GnomeDialog;
+      &libgnomeui-GnomeMessageBox;
+      &libgnomeui-GnomePropertyBox;
     </sect1>
     <sect1 id="libgnomeui-objects">
       <title>Object Hierarchy</title>

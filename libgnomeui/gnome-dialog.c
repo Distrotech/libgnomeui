@@ -918,13 +918,13 @@ void       gnome_dialog_button_connect_object (GnomeDialog *dialog,
 
 
 /**
- * gnome_dialog_set_accelerator: Set an accelerator key for a button.
+ * gnome_dialog_set_accelerator:
  * @dialog: #GnomeDialog to affect.
  * @button: Button number.
  * @accelerator_key: Key for the accelerator.
  * @accelerator_mods: Modifier.
  *
- *
+ * Set an accelerator key for a button.
  **/
 void       gnome_dialog_set_accelerator(GnomeDialog * dialog,
 					gint button,

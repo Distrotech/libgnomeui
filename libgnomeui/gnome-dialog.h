@@ -45,8 +45,12 @@ G_BEGIN_DECLS
 typedef struct _GnomeDialog        GnomeDialog;
 typedef struct _GnomeDialogClass   GnomeDialogClass;
 
-/* The vbox can be accessed directly; if you fool with anything else,
-   you're on your own. */
+/**
+ * GnomeDialog:
+ * @vbox: The middle portion of the dialog box.
+ *
+ * Client code can pack widgets (for example, text or images) into @vbox.
+ */
 struct _GnomeDialog
 {
   GtkWindow window;

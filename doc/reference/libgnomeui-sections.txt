@@ -804,13 +804,12 @@ GNOME_MESSAGE_BOX_WARNING
 GNOME_MESSAGE_BOX_ERROR
 GNOME_MESSAGE_BOX_QUESTION
 GNOME_MESSAGE_BOX_GENERIC
-GnomeMessageBoxPrivate
-GnomeMessageBoxButton
 <TITLE>GnomeMessageBox</TITLE>
 GnomeMessageBox
 gnome_message_box_new
 gnome_message_box_newv
 gnome_message_box_construct
+
 <SUBSECTION Standard>
 GNOME_MESSAGE_BOX
 GNOME_IS_MESSAGE_BOX
@@ -819,6 +818,11 @@ gnome_message_box_get_type
 GNOME_MESSAGE_BOX_CLASS
 GNOME_IS_MESSAGE_BOX_CLASS
 GNOME_MESSAGE_BOX_GET_CLASS
+
+<SUBSECTION Private>
+GnomeMessageBoxPrivate
+GnomeMessageBoxButton
+
 </SECTION>
 
 <SECTION>
@@ -876,7 +880,6 @@ GNOME_PIXMAP_GET_CLASS
 
 <SECTION>
 <FILE>gnome-propertybox</FILE>
-GNOME_PROPERTY_BOX_DIRTY
 <TITLE>GnomePropertyBox</TITLE>
 GnomePropertyBox
 gnome_property_box_new
@@ -884,6 +887,7 @@ gnome_property_box_changed
 gnome_property_box_set_modified
 gnome_property_box_append_page
 gnome_property_box_set_state
+
 <SUBSECTION Standard>
 GNOME_PROPERTY_BOX
 GNOME_IS_PROPERTY_BOX
@@ -892,6 +896,9 @@ gnome_property_box_get_type
 GNOME_PROPERTY_BOX_CLASS
 GNOME_IS_PROPERTY_BOX_CLASS
 GNOME_PROPERTY_BOX_GET_CLASS
+
+<SUBSECTION Private>
+GNOME_PROPERTY_BOX_DIRTY
 </SECTION>
 
 <SECTION>
@@ -1445,11 +1452,6 @@ gnome_thumbnail_factory_get_type
 
 <SECTION>
 <FILE>gnome-marshal</FILE>
-</SECTION>
-
-<SECTION>
-<FILE>libgnomeui-access</FILE>
-_AccessibilityClassInitFn
 </SECTION>
 
 <SECTION>

@@ -246,7 +246,7 @@ gnome_property_box_changed (GnomePropertyBox *property_box)
 /**
  * gnome_property_box_set_modified:
  * @property_box: The GnomePropertyBox that contains the changed data
- * @state:        The state.  TRUE means modified, FALSE means unmodified.
+ * @state:        The state. %TRUE means modified, %FALSE means unmodified.
  *
  * This sets the modified flag of the GnomePropertyBox to the value in @state.
  * Affects whether the OK/Apply buttons are sensitive.
@@ -275,7 +275,13 @@ gnome_property_box_set_modified (GnomePropertyBox *property_box, gboolean state)
 	set_sensitive (property_box, state);
 }
 
-/* Deprecated */
+/**
+ * gnome_property_box_set_state:
+ * @property_box: The GnomePropertyBox that contains the changed data
+ * @state: The state. %TRUE means modified, %FALSE means unmodified.
+ *
+ * An alias for  gnome_property_box_set_modified().
+ */
 void
 gnome_property_box_set_state (GnomePropertyBox *property_box, gboolean state)
 {

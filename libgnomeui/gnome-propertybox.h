@@ -44,8 +44,15 @@ G_BEGIN_DECLS
 typedef struct _GnomePropertyBox      GnomePropertyBox;
 typedef struct _GnomePropertyBoxClass GnomePropertyBoxClass;
 
+/**
+ * GnomePropertyBox:
+ *
+ * An opaque widget representing a property box. Items should be added to this
+ * widget using gnome_property_box_append_page.
+ */
 struct _GnomePropertyBox
 {
+	/*< private >*/
 	GnomeDialog dialog;
 
 	GtkWidget *notebook;	    /* The notebook widget.  */

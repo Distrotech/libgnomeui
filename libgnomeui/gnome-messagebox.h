@@ -48,8 +48,13 @@ typedef struct _GnomeMessageBoxPrivate GnomeMessageBoxPrivate;
 typedef struct _GnomeMessageBoxClass   GnomeMessageBoxClass;
 typedef struct _GnomeMessageBoxButton  GnomeMessageBoxButton;
 
+/**
+ * GnomeMessageBox:
+ * @dialog: A #GnomeDialog widget holding the contents of the message box.
+ */
 struct _GnomeMessageBox
 {
+  /*< public >*/
   GnomeDialog dialog;
   /*< private >*/
   GnomeMessageBoxPrivate *_priv;

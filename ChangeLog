@@ -1,3 +1,25 @@
+2002-11-09  Malcolm Tredinnick <malcolm@commsecure.com.au>
+
+	* doc/reference/Makefile.am:
+	Don't scan libgnomeui-access.h; it's only for internal use.
+
+	* doc/reference/tmpl/libgnomeui-access.sgml: Removed.
+
+	* doc/reference/libgnomeui-docs.sgml,
+	* doc/reference/libgnomeui-sections.txt:
+	Reordered some sections.
+
+	* doc/reference/tmpl/gnome-dialog.sgml,
+	* doc/reference/tmpl/gnome-messagebox.sgml,
+	* doc/reference/tmpl/gnome-propertybox.sgml,
+	* doc/reference/tmpl/gnome-uidefs.sgml,
+	* libgnomeui/gnome-dialog.c,
+	* libgnomeui/gnome-dialog.h,
+	* libgnomeui/gnome-messagebox.h,
+	* libgnomeui/gnome-propertybox.c,
+	* libgnomeui/gnome-propertybox.h:
+	Documentation updates.
+
 2002-11-08  Deepa Natarajan  <deepa.natarajan@wipro.com>
 
 	* libgnomeui/gnome-about.c: Removed mnemonics for "Written by",

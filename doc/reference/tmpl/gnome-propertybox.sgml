@@ -2,7 +2,7 @@
 GnomePropertyBox
 
 <!-- ##### SECTION Short_Description ##### -->
-
+Create a tabbed dialog for setting properties and preferences.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -13,13 +13,6 @@ GnomePropertyBox
 <para>
 
 </para>
-
-<!-- ##### MACRO GNOME_PROPERTY_BOX_DIRTY ##### -->
-<para>
-
-</para>
-
-
 
 <!-- ##### STRUCT GnomePropertyBox ##### -->
 <para>
@@ -78,7 +71,7 @@ GnomePropertyBox
 </para>
 
 @propertybox: the object which received the signal.
-@arg1: 
+@arg1: the notebook page number which emitted the signal.
 
 <!-- ##### SIGNAL GnomePropertyBox::help ##### -->
 <para>
@@ -86,5 +79,5 @@ GnomePropertyBox
 </para>
 
 @propertybox: the object which received the signal.
-@arg1: 
+@arg1: the notebook page number which emitted the signal.
 
