@@ -381,7 +381,7 @@ msgstr "_Beállítások"
 
 #: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
-msgstr "Az alkalmazás beállításai"
+msgstr "Az alkalmazás beállítása"
 
 #. 20
 #.
