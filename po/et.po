@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-05-27 16:51+0200\n"
-"PO-Revision-Date: 2002-03-21 23:41+0200\n"
+"POT-Creation-Date: 2002-05-30 21:49+0300\n"
+"PO-Revision-Date: 2002-05-30 22:19+0300\n"
 "Last-Translator: Tõivo Leedjärv <toivo@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -15,27 +15,24 @@ msgstr ""
 
 #: libgnomeui/gnome-about.c:194
 msgid "Credits"
-msgstr ""
-
-#: libgnomeui/gnome-about.c:223
-#, fuzzy
-msgid "_Written by"
 msgstr "Autorid"
 
+#: libgnomeui/gnome-about.c:223
+msgid "_Written by"
+msgstr "_Programmeerimine"
+
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "_Documented by"
-msgstr "Dokumentatsioon"
+msgstr "_Dokumentatsioon"
 
 #: libgnomeui/gnome-about.c:253
-#, fuzzy
 msgid "_Translated by"
-msgstr "Tõlge"
+msgstr "_Tõlge"
 
 #. Add the credits button
 #: libgnomeui/gnome-about.c:310
 msgid "_Credits"
-msgstr ""
+msgstr "_Autorid"
 
 #: libgnomeui/gnome-about.c:352
 msgid "Program name"
@@ -91,7 +88,7 @@ msgstr "Dokumenteerijad"
 
 #: libgnomeui/gnome-about.c:394
 msgid "List of people documenting the program"
-msgstr "Programmi dokumenteerijate nimekiri"
+msgstr "Programmi dokumentatsiooni kirjutajate nimekiri"
 
 #: libgnomeui/gnome-about.c:396
 msgid "Documenter entry"
@@ -180,9 +177,8 @@ msgid "Received invalid color data\n"
 msgstr ""
 
 #: libgnomeui/gnome-color-picker.c:457
-#, fuzzy
 msgid "Color Selector"
-msgstr "Tühjenda valik"
+msgstr ""
 
 #: libgnomeui/gnome-color-picker.c:458
 msgid "Open a dialog to specify the color"
@@ -237,13 +233,12 @@ msgid "Date"
 msgstr "Kuupäev"
 
 #: libgnomeui/gnome-dateedit.c:752
-#, fuzzy
 msgid "Select Date"
-msgstr "Vali fail"
+msgstr "Vali kuupäev"
 
 #: libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Vali kalendrist kuupäev"
 
 #. Calendar label, only shown if the date editor has a time field
 #: libgnomeui/gnome-dateedit.c:763
@@ -251,13 +246,12 @@ msgid "Calendar"
 msgstr "Kalender"
 
 #: libgnomeui/gnome-dateedit.c:784
-#, fuzzy
 msgid "Select Time"
-msgstr "Vali fail"
+msgstr "Vali aeg"
 
 #: libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
-msgstr ""
+msgstr "Vali nimekirjast aeg"
 
 #: libgnomeui/gnome-dateedit.c:1001
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -387,9 +381,8 @@ msgid "End World Hunger"
 msgstr ""
 
 #: libgnomeui/gnome-href.c:138
-#, fuzzy
 msgid "Link color"
-msgstr "Vali värv"
+msgstr "Lingi värv"
 
 #: libgnomeui/gnome-href.c:139
 msgid "Color used to draw the link"
@@ -438,6 +431,11 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
+"GNOME'i sessioonihaldur (protsess nr %d) krahhis\n"
+"parandamatu vea tõttu (%s).\n"
+"Selle dialoogi sulgemisel lõpetatakse kõikide rakenduste töö ja sessioon "
+"lõppeb.\n"
+"Enne selle dialoogi sulgemist salvesta palun kõik oma failid."
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -446,6 +444,9 @@ msgid ""
 "due to a fatal error.\n"
 "(%s)"
 msgstr ""
+"Rakendus \"%s\" (protsess nr %d) krahhis\n"
+"parandamatu vea tõttu.\n"
+"(%s)"
 
 #: libgnomeui/gnome_segv.c:122
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -461,11 +462,11 @@ msgstr ""
 
 #: libgnomeui/gnome_segv.c:159
 msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr ""
+msgstr "http://www.gnome.org/application_crashed.shtml"
 
 #: libgnomeui/gnome_segv.c:165
 msgid "Please visit the GNOME Application Crash page for more information"
-msgstr ""
+msgstr "Lisainfo saamiseks külasta palun GNOME'i Krahhilehekülge"
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
@@ -513,6 +514,7 @@ msgstr ""
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:521
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -570,6 +572,7 @@ msgid "_Game"
 msgstr "_Mäng"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:539
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Abi"
 
@@ -615,13 +618,12 @@ msgstr "Taasta faili salvestatud versioon"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-#, fuzzy
 msgid "_Print..."
-msgstr "_Otsi..."
+msgstr "_Prindi..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr ""
+msgstr "Prindi aktiivne fail"
 
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
@@ -643,21 +645,18 @@ msgstr "Sulge aktiivne fail"
 
 #. Exit
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "_Quit"
-msgstr "_Lõika"
+msgstr "_Lõpeta"
 
 #: libgnomeui/gnome-app-helper.c:147
-#, fuzzy
 msgid "Quit the application"
-msgstr "Info selle programmi kohta"
+msgstr "Lõpeta programmi töö"
 
 #.
 #. * The "Edit" menu
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-#, fuzzy
 msgid "Cu_t"
 msgstr "_Lõika"
 
@@ -700,7 +699,7 @@ msgstr "_Unusta"
 
 #: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr ""
+msgstr "Unusta viimane tegevus"
 
 #. Redo
 #: libgnomeui/gnome-app-helper.c:181
@@ -709,7 +708,7 @@ msgstr "Uu_esti"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr ""
+msgstr "Taasta unustatud tegevus"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -723,7 +722,7 @@ msgstr "Otsi stringi"
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr ""
+msgstr "Otsi _järgmine..."
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -731,7 +730,6 @@ msgstr "Otsi sama stringi uuesti"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-#, fuzzy
 msgid "R_eplace..."
 msgstr "A_senda..."
 
@@ -753,7 +751,6 @@ msgstr "Redigeeri faili omadusi"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces..."
 msgstr "_Häälestus..."
 
@@ -766,16 +763,15 @@ msgstr "Programmi häälestus"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Info selle programmi kohta"
 
 #: libgnomeui/gnome-app-helper.c:225
-#, fuzzy
 msgid "Select _All"
 msgstr "_Vali kõik"
 
@@ -798,7 +794,7 @@ msgstr "Loo uus aken"
 msgid "_Close This Window"
 msgstr "_Sulge see aken"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Sulge aktiivne aken"
 
@@ -811,7 +807,7 @@ msgstr "_Uus mäng"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr "Alustab uue mängu"
+msgstr "Alusta uut mängu"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
@@ -823,11 +819,11 @@ msgstr ""
 
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
-msgstr ""
+msgstr "_Taasalusta mäng"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr ""
+msgstr "Taasalusta mäng"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
@@ -835,7 +831,7 @@ msgstr "Käik _tagasi"
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "Unustab viimati tehtud käigu"
+msgstr "Unusta viimati tehtud käik"
 
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
@@ -843,7 +839,7 @@ msgstr "Käik _edasi"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "Käib viimati tagasivõetud käigu uuesti"
+msgstr "Käi viimati tagasivõetud käik uuesti"
 
 #: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
@@ -851,7 +847,7 @@ msgstr "_Vihje"
 
 #: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
-msgstr ""
+msgstr "Vihje järgmise võimaliku käigu kohta"
 
 #. 30
 #: libgnomeui/gnome-app-helper.c:279
@@ -868,32 +864,29 @@ msgstr "_Lõpeta mäng"
 
 #: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
-msgstr "Lõpetab praeguse mängu"
+msgstr "Lõpeta praegune mäng"
 
 #: libgnomeui/gnome-app-helper.c:1130
 msgid "_Contents"
-msgstr ""
+msgstr "_Sisukord"
 
 #: libgnomeui/gnome-app-helper.c:1131
-#, fuzzy
 msgid "View help for this application"
-msgstr "Info selle programmi kohta"
+msgstr "Sirvi programmi abiinfot"
 
 #: libgnomeui/gnome-app-helper.c:2518
 msgid "Text Below Icons"
-msgstr ""
+msgstr "Tekst ikoonide all"
 
 #: libgnomeui/gnome-app-helper.c:2519
 msgid "Priority Text Beside Icons"
-msgstr ""
+msgstr "Tähtsam tekst ikoonide kõrval"
 
 #: libgnomeui/gnome-app-helper.c:2520
-#, fuzzy
 msgid "Icons Only"
 msgstr "Ainult ikoonid"
 
 #: libgnomeui/gnome-app-helper.c:2521
-#, fuzzy
 msgid "Text Only"
 msgstr "Ainult tekst"
 
@@ -1041,9 +1034,8 @@ msgid "Select file"
 msgstr "Vali fail"
 
 #: libgnomeui/gnome-file-entry.c:645
-#, fuzzy
 msgid "Path"
-msgstr "_Aseta"
+msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:645
 #, fuzzy
@@ -1051,27 +1043,24 @@ msgid "Path to file"
 msgstr "Salvesta aktiivne fail"
 
 #: libgnomeui/gnome-file-entry.c:672
-#, fuzzy
 msgid "_Browse..."
-msgstr "Vali..."
+msgstr "_Vali..."
 
 #: libgnomeui/gnome-file-entry.c:673
 msgid "Pop up a file selector to choose a file"
 msgstr ""
 
 #: libgnomeui/gnome-font-picker.c:66
-#, fuzzy
 msgid "sans 12"
-msgstr "Sans 14"
+msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsŠšZzŽžTtUuVvWwÕõÄäÖöÜüXxYy"
 
 #: libgnomeui/gnome-font-picker.c:68
-#, fuzzy
 msgid "Pick a Font"
-msgstr "Vali värv"
+msgstr "Vali kirjatüüp"
 
 #: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
@@ -1286,9 +1275,8 @@ msgid "No Image"
 msgstr "Pilti pole"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
-#, fuzzy
 msgid "Image Preview"
-msgstr "Eelvaade"
+msgstr "Pildi eelvaade"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
@@ -1321,6 +1309,10 @@ msgstr "%d. %b %Y %H:%M"
 msgid "Sans 14"
 msgstr "Sans 14"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Välju testprogrammist"
+
 #~ msgid "Find _Again"
 #~ msgstr "O_tsi uuesti"
 
@@ -1329,9 +1321,6 @@ msgstr "Sans 14"
 
 #~ msgid "E_xit"
 #~ msgstr "_Välju"
-
-#~ msgid "Exit the program"
-#~ msgstr "Välju programmist"
 
 #~ msgid "FLAGS"
 #~ msgstr "FLAGS"
