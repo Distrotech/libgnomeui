@@ -779,8 +779,7 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
 	gnome_app_set_toolbar (app, GTK_TOOLBAR (toolbar));
 }
 
-/*
- * menu insertion/removal functions
+/* menu insertion/removal functions
  * <jaka.mocnik@kiss.uni-lj.si>
  *
  * the path argument should be in the form "File/.../.../Something".
@@ -791,9 +790,7 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
  * I hope this explains use of the insert/remove functions well enough.
  */
 
-/*
- * p = gnome_app_find_menu_pos(top, path, &pos)
- * finds menu item described by path (see below for details) starting in the GtkMenuShell top
+/* finds menu item described by path (see below for details) starting in the GtkMenuShell top
  * and returns its parent GtkMenuShell and the position after this item in pos:
  * gtk_menu_shell_insert(p, w, pos) would then insert widget w in GtkMenuShell p right after
  * the menu item described by path.
@@ -867,9 +864,8 @@ gnome_app_find_menu_pos (GtkWidget *parent,
 	return NULL;
 }
 
-/*
- * gnome_app_remove_menus(app, path, num) removes num items from the existing app's menu structure
- * begining with item described by path
+/* removes num items from the existing app's menu structure begining with item described
+ * by path
  */
 void
 gnome_app_remove_menus(GnomeApp *app,
@@ -908,9 +904,7 @@ gnome_app_remove_menus(GnomeApp *app,
 	gtk_widget_queue_resize(parent);
 }
 
-/*
- * gnome_app_insert_menus_custom(app, path, info, uibdata) inserts menus described by info
- * in existing app's menu structure right after the item described by path.
+/* inserts menus described by uiinfo in existing app's menu structure right after the item described by path.
  */
 void
 gnome_app_insert_menus_custom (GnomeApp *app,
