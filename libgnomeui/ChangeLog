@@ -1,3 +1,8 @@
+1999-03-28  Felix Bellaby <felix@pooh.u-net.com>
+	
+	* gnome-client.c (save_yourself_callback): timeout wait for pointer
+	grab to be released (before gsm issues a warning!).
+
 1999-03-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (emit_event): Ref/unref the item while its event
