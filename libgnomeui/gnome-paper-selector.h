@@ -26,9 +26,11 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_PAPER_SELECTOR(obj)         GTK_CHECK_CAST (obj, gnome_paper_selector_get_type (), GnomePaperSelector)
-#define GNOME_PAPER_SELECTOR_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_paper_selector_get_type (), GnomePaperSelectorClass)
-#define GNOME_IS_PAPER_SELECTOR(obj)      GTK_CHECK_TYPE (obj, gnome_paper_selector_get_type ())
+#define GNOME_TYPE_PAPER_SELECTOR            (gnome_paper_selector_get_type ())
+#define GNOME_PAPER_SELECTOR(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_PAPER_SELECTOR, GnomePaperSelector))
+#define GNOME_PAPER_SELECTOR_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PAPER_SELECTOR, GnomePaperSelectorClass))
+#define GNOME_IS_PAPER_SELECTOR(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_PAPER_SELECTER))
+#define GNOME_IS_PAPER_SELECTOR_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PAPER_SELECTOR))
 
 
 typedef struct _GnomePaperSelector      GnomePaperSelector;

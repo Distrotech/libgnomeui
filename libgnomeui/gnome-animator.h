@@ -35,12 +35,11 @@ BEGIN_GNOME_DECLS
 
 /* GnomeAnimator class, derived from GtkWidget.  */
 
-#define GNOME_ANIMATOR(obj) \
-  GTK_CHECK_CAST (obj, gnome_animator_get_type (), GnomeAnimator)
-#define GNOME_ANIMATOR_CLASS(klass) \
-  GTK_CHECK_CLASS_CAST (klass, gnome_animator_get_type (), GnomeAnimatorClass)
-#define GNOME_IS_ANIMATOR(obj) \
-  GTK_CHECK_TYPE (obj, gnome_animator_get_type ())
+#define GNOME_TYPE_ANIMATOR            (gnome_animator_get_type())
+#define GNOME_ANIMATOR(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ANIMATOR, GnomeAnimator))
+#define GNOME_ANIMATOR_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ANIMATOR, GnomeAnimatorClass))
+#define GNOME_IS_ANIMATOR(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ANIMATOR))
+#define GNOME_IS_ANIMATOR_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ANIMATOR))
 
 /* Current animator status.  */
 typedef enum
