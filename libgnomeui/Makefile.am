@@ -28,7 +28,7 @@ INCLUDES = -I$(top_srcdir)/gdk-pixbuf			\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl 	\
 	$(SUPPORTINCS) 					\
 	$(OAF_CFLAGS)					\
-	@LIBART_CFLAGS@					\
+	$(LIBART_CFLAGS)				\
         -DGNOMELIBDIR=\""$(libdir)"\" 			\
         -DGNOMEDATADIR=\""$(datadir)"\" 		\
         -DGNOMEBINDIR=\""$(bindir)"\" 			\
@@ -360,71 +360,10 @@ libgnomeui_2_la_LDFLAGS = -version-info $(LIB_VERSION)				\
 
 libgnomeui_2_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
-gnome_segv_LDADD =	\
+LDADD =	\
 	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
 	$(GDK_PIXBUF_LIBS) \
         $(LIBGNOMEUI_LIBS) \
-	@LIBART_LIBS@	\
+	$(LIBART_LIBS)	\
 	$(INTLLIBS)
-
-test_file_saver_LDADD =	\
-	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
-	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-	$(GDK_PIXBUF_LIBS) \
-	$(LIBGNOMEUI_LIBS) \
-	@LIBART_LIBS@	\
-	$(INTLLIBS)
-
-test_recently_used_LDADD =	\
-	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
-	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-	$(GDK_PIXBUF_LIBS) \
-	$(LIBGNOMEUI_LIBS) \
-	@LIBART_LIBS@	\
-	$(INTLLIBS)
-
-stock_demo_LDADD =	\
-	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
-	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-	$(GDK_PIXBUF_LIBS) \
-	$(LIBGNOMEUI_LIBS) \
-	@LIBART_LIBS@	\
-	$(INTLLIBS)
-
-#	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-#	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-#	$(LIBGNOMEUI_LIBS)
-
-winhints_demo_LDADD =	\
-	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
-	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-	$(GDK_PIXBUF_LIBS) \
-	$(LIBGNOMEUI_LIBS) \
-	@LIBART_LIBS@	\
-	$(INTLLIBS)
-
-animator_demo_LDADD =	\
-	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
-	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-	$(GDK_PIXBUF_LIBS) \
-	$(LIBGNOMEUI_LIBS) \
-	@LIBART_LIBS@	\
-	$(INTLLIBS)
-
-dock_demo_LDADD =	\
-	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
-	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-	$(GDK_PIXBUF_LIBS) \
-	$(LIBGNOMEUI_LIBS) \
-	@LIBART_LIBS@	\
-	$(INTLLIBS)
-
-mdi_demo_LDADD =       \
-        libgnomeui-$(GNOME_INTERFACE_VERSION).la                                        \
-        $(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la                 \
-        $(GDK_PIXBUF_LIBS) \
-        $(LIBGNOMEUI_LIBS) \
-	@LIBART_LIBS@	\
-        $(INTLLIBS)
-

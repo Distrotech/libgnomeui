@@ -1,3 +1,16 @@
+Thu May 18  Martijn van Beers  <martijn@earthling.net>
+
+	* Makefile.am:
+	  - use $(LIBART_CFLAGS) instead of @LIBART_CFLAGS@ like everything
+	    else
+	  - ditto for LIBART_LIBS
+	  - use LDADD instead of creating an identical target_LDADD for
+	    all of gnome_segv, test_file_saver, test_recently_used,
+	    stock_demo, winhints_demo, animator_demo, dock_demo and
+	    mdi_demo
+
+	* .cvsignore: add test-recently-used, test-file-saver and mdi_demo
+
 Wed May 17 14:05:14 2000  George Lebl <jirka@5z.com>
 
 	* gnome-href.[ch]: interface sanitation.  Make get/set_label

@@ -13,6 +13,9 @@ stock_demo
 ted_demo
 animator_demo
 dock_demo
+test-recently-used
+test-file-saver
+mdi_demo
 gnome.defs
 gnometypebuiltins.h
 gnometypebuiltins_evals.c
