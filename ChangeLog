@@ -1,3 +1,10 @@
+2004-11-25  Federico Mena Quintero  <federico@ximian.com>
+
+	Merged from HEAD; fix by Alex Larsson:
+
+	* file-chooser/gtkfilesystemgnomevfs.c (load_dir):
+	Fix crasher. uri is a string, not a GnomeVFSUri.
+
 2004-11-18  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c (load_dir): Use a different
