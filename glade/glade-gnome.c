@@ -238,6 +238,10 @@ dock_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		   const char *longname)
 {
 	GList *tmp;
+	GnomeApp *app = NULL;
+
+	if (w->parent && w->parent && GNOME_IS_APP(w->parent->parent))
+		app = GNOME_APP(w->parent->parent);
 
 	for (tmp = info->children; tmp; tmp = tmp->next) {
 		GladeWidgetInfo *cinfo = tmp->data;
@@ -277,9 +281,14 @@ dock_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 				else if (!strcmp(attr->name, "offset"))
 					offset = strtoul(attr->value, NULL, 0);
 			}
-			gnome_dock_add_item(GNOME_DOCK(w),
-					    GNOME_DOCK_ITEM(child), placement,
-					    band, position, offset, FALSE);
+			if (app)
+				gnome_app_add_dock_item(app,
+					GNOME_DOCK_ITEM(child), placement,
+					band, position, offset);
+			else
+				gnome_dock_add_item(GNOME_DOCK(w),
+					GNOME_DOCK_ITEM(child), placement,
+					band, position, offset, FALSE);
 		}
 	}
 }
@@ -856,6 +865,7 @@ static const gnomeuiinfo_map_t gnome_uiinfo_mapping[] = {
 	{ "HINT_ITEM", GNOMEUIINFO_MENU_HINT_ITEM(NULL, NULL) },
 	{ "NEW_GAME_ITEM", GNOMEUIINFO_MENU_NEW_GAME_ITEM(NULL, NULL) },
 	{ "NEW_ITEM", GNOMEUIINFO_MENU_NEW_ITEM(NULL, NULL, NULL, NULL) },
+	{ "NEW_SUBTREE", GNOMEUIINFO_MENU_NEW_SUBTREE(tmptree) },
 	{ "NEW_WINDOW_ITEM", GNOMEUIINFO_MENU_NEW_WINDOW_ITEM(NULL, NULL) },
 	{ "OPEN_ITEM", GNOMEUIINFO_MENU_OPEN_ITEM(NULL, NULL) },
 	{ "PASTE_ITEM", GNOMEUIINFO_MENU_PASTE_ITEM(NULL, NULL) },
