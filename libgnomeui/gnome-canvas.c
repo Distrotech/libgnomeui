@@ -8,6 +8,40 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
+/* TO-DO list for the canvas:
+ *
+ * - Fix refcounting and destruction of items.
+ *
+ * - GC put functions for items.
+ *
+ * - Stipple for filling items.
+ *
+ * - Fix item sets and recursive argument settings once Tim fixes the GtkArg mechanism.
+ *
+ * - Line/Curve item.
+ *
+ * - Polygon item.
+ *
+ * - Arc item.
+ *
+ * - Widget item.
+ *
+ * - Text item: wrapped and clipped text, support justification.
+ *
+ * - Sane font handling API.
+ *
+ * - Talk Raph into using a very similar API for GtkCaanvas.
+ *
+ * - item_class->output (item, "postscript")
+ *
+ * - item_class->output (item, "bridge_to_raph's_canvas")
+ *
+ * - Multiple exposure event coalescing; this may need to be in Gtk/Gdk instead.
+ *
+ * - Make gnome_canvas_scroll_to() use XCopyArea instead of repainting everything.
+ *   Or use the Mozilla scrolling code for when we have widgets in the canvas.
+ */
+
 #include <config.h>
 #include <math.h>
 #include <stdarg.h>
