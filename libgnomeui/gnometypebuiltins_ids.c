@@ -24,6 +24,8 @@
     GTK_TYPE_ENUM, _gnome_client_state_values },
   { "GnomeClientFlags", &GTK_TYPE_GNOME_CLIENT_FLAGS,
     GTK_TYPE_FLAGS, _gnome_client_flags_values },
+  { "GnomeDateEditFlags", &GTK_TYPE_GNOME_DATE_EDIT_FLAGS,
+    GTK_TYPE_FLAGS, _gnome_date_edit_flags_values },
   { "GnomeDockPlacement", &GTK_TYPE_GNOME_DOCK_PLACEMENT,
     GTK_TYPE_ENUM, _gnome_dock_placement_values },
   { "GnomeDockItemBehavior", &GTK_TYPE_GNOME_DOCK_ITEM_BEHAVIOR,

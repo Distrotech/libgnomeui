@@ -89,6 +89,8 @@ popup_marshal_func (GtkObject *object, gpointer data, guint n_args, GtkArg *args
  * Creates a popup menu out of the specified uiinfo array.  Use
  * gnome_popup_menu_do_popup() to pop the menu up, or attach it to a
  * window with gnome_popup_menu_attach().
+ *
+ * Returns a menu widget
  */
 GtkWidget *
 gnome_popup_menu_new_with_accelgroup (GnomeUIInfo *uiinfo,
@@ -138,6 +140,9 @@ gnome_popup_menu_new_with_accelgroup (GnomeUIInfo *uiinfo,
  * accelgroup for you and attaches it to the menu object.  Use
  * gnome_popup_menu_get_accel_group() to get the accelgroup that is
  * created.
+ *
+ * Returns a menu widget
+ *
  */
 GtkWidget *
 gnome_popup_menu_new (GnomeUIInfo *uiinfo)

@@ -21,6 +21,7 @@ static const GtkEnumValue _gnome_ui_info_type_values[] = {
   { GNOME_APP_UI_HELP, "GNOME_APP_UI_HELP", "help" },
   { GNOME_APP_UI_BUILDER_DATA, "GNOME_APP_UI_BUILDER_DATA", "builder-data" },
   { GNOME_APP_UI_ITEM_CONFIGURABLE, "GNOME_APP_UI_ITEM_CONFIGURABLE", "item-configurable" },
+  { GNOME_APP_UI_SUBTREE_STOCK, "GNOME_APP_UI_SUBTREE_STOCK", "subtree-stock" },
   { 0, NULL, NULL }
 };
 static const GtkEnumValue _gnome_ui_info_configurable_types_values[] = {
@@ -111,6 +112,12 @@ static const GtkEnumValue _gnome_client_flags_values[] = {
   { GNOME_CLIENT_RESTORED, "GNOME_CLIENT_RESTORED", "restored" },
   { 0, NULL, NULL }
 };
+static const GtkEnumValue _gnome_date_edit_flags_values[] = {
+  { GNOME_DATE_EDIT_SHOW_TIME, "GNOME_DATE_EDIT_SHOW_TIME", "show-time" },
+  { GNOME_DATE_EDIT_24_HR, "GNOME_DATE_EDIT_24_HR", "24-hr" },
+  { GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY, "GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY", "week-starts-on-monday" },
+  { 0, NULL, NULL }
+};
 static const GtkEnumValue _gnome_dock_placement_values[] = {
   { GNOME_DOCK_TOP, "GNOME_DOCK_TOP", "top" },
   { GNOME_DOCK_RIGHT, "GNOME_DOCK_RIGHT", "right" },
@@ -132,6 +139,7 @@ static const GtkEnumValue _gnome_font_picker_mode_values[] = {
   { GNOME_FONT_PICKER_MODE_PIXMAP, "GNOME_FONT_PICKER_MODE_PIXMAP", "pixmap" },
   { GNOME_FONT_PICKER_MODE_FONT_INFO, "GNOME_FONT_PICKER_MODE_FONT_INFO", "font-info" },
   { GNOME_FONT_PICKER_MODE_USER_WIDGET, "GNOME_FONT_PICKER_MODE_USER_WIDGET", "user-widget" },
+  { GNOME_FONT_PICKER_MODE_UNKNOWN, "GNOME_FONT_PICKER_MODE_UNKNOWN", "unknown" },
   { 0, NULL, NULL }
 };
 static const GtkEnumValue _gnome_icon_list_mode_values[] = {

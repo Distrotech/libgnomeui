@@ -45,13 +45,13 @@ gnome_icon_text_info_free (GnomeIconTextInfo *ti)
  * @max_width:  Maximum width allowed
  * @confine:    whether it is mandatory to wrap at max_width
  *
- * Wraps the specified TEXT and returns a new GnomeIconTextInfo
- * structure.  TEXT is word-wrapped as defined by the specified
- * SEPARATOR characters (or just at spaces if separators is NULL).
- * The MAX_WIDTH parameter specifies the width at which text will be
- * wrapped.  If a word is too long to be wrapped and CONFINE is TRUE,
- * it will be force-split somewhere in the middle; if CONFINE is
- * FALSE, then the text may exceed the specified max_width.
+ * Wraps the specified @text and returns a new GnomeIconTextInfo
+ * structure.  @text is word-wrapped as defined by the specified
+ * @separators characters (or just at spaces if separators is NULL).
+ * The @max_width parameter specifies the width at which text will be
+ * wrapped.  If a word is too long to be wrapped and @confine is %TRUE,
+ * it will be force-split somewhere in the middle; if @confine is
+ * %FALSE, then the text may exceed the specified max_width.
  */
 GnomeIconTextInfo *
 gnome_icon_layout_text (GdkFont *font, char *text, char *separators, int max_width, int confine)

@@ -493,6 +493,35 @@ static GtkWidget *gtk_label_new_with_ampersand (const gchar * _label)
 
 #define MAX_TEXT_WIDGETS 64
 
+/**
+ * gtk_dialog_cauldron_parse:
+ * @title: dialog title
+ * @options: dialog options, see the macro definitions
+ * @format: format string that describes the dialog
+ * @next_arg: user function.
+ * @user_data: data to pass to user function
+ *
+ * This function parses a format
+ * string exactly like gtk_dialog_cauldron()P, however it derives
+ * arguments for the @format string from a user function @next_arg.
+ * gtk_dialog_cauldron_parse() is primarily used for creating
+ * wrappers for interpreted languages.
+ *
+ * Each subsequent call to @next_arg must assign to <type>*result</type> a
+ * pointer to data of the type specified by <type>cauldron_type</type>. (An
+ * example can be found in <filename>gtk_dialog_cauldron.c</filename> and the
+ * pygnome package.) The \fIcauldron_type\fP's are a small set of
+ * types used for specifying and returning widget data. They are
+ * enumerated as <type>GTK_CAULDRON_TYPE_*</type> in the header file gtkcauldron.h.
+ *
+ * Retuns NULL is returned if the dialog is
+ * cancelled. GTK_CAULDRON_ENTERP is returned if the user pressed
+ * enter (return-on-enter can be overridden - see global options
+ * below), and GTK_CAULDRON_ESCAPEP is returned if the user
+ * pressed escape. Otherwise the label of the widget that was used to
+ * exit the dialog is returned.
+ *
+ */
 gchar *gtk_dialog_cauldron_parse (const gchar * title, glong options, const gchar * format,
 		 GtkCauldronNextArgCallback next_arg, gpointer user_data)
 {
@@ -1053,6 +1082,28 @@ static void next_arg (gint type, va_list * ap, void *result)
     return;
 }
 
+/**
+ * gtk_dialog_cauldron:
+ * @title: dialog title
+ * @options: dialog options, see the macro definitions
+ * @format: dialog layout format string
+ *
+ * This function parses a @format string with
+ * a variable length list of arguments. The @format string describes a
+ * dialog box and has intuitive tokens to represent different frames and
+ * widgets. The dialog box is drawn whereupon gtk_dialog_cauldron()
+ * blocks until closed or until an appropriate button is pushed. Results
+ * from the widgets are then stored into appropriate variables passed in
+ * the argument list in order to be retrieved by the caller.
+ *
+ * Retuns NULL is returned if the dialog is
+ * cancelled. GTK_CAULDRON_ENTERP is returned if the user pressed
+ * enter (return-on-enter can be overridden - see global options
+ * below), and GTK_CAULDRON_ESCAPEP is returned if the user
+ * pressed escape. Otherwise the label of the widget that was used to
+ * exit the dialog is returned.
+ * 
+ */
 gchar *gtk_dialog_cauldron (const gchar * title, glong options, const gchar * format,...)
 {
     gchar *r;

@@ -869,8 +869,18 @@ gnome_icon_text_item_setxy (GnomeIconTextItem *iti, int x, int y)
  * @fontname: Font that should be used to display the text
  * @text:   The text that is going to be displayed.
  * @is_editable: Whether editing is enabled for this item
+ * @is_static: Whether the string is allocated and wont go away.
  *
  * This routine is used to configure a GnomeIconTextItem.
+ *
+ * @x,@y specify the cordinates where the item is placed inside the canvas
+ * @width is the maximum allowed width for this icon.
+ *
+ * if @is_static is true, it means that there is no need for the item
+ * to allocate memory for the string (it is a guarantee that the text is
+ * allocated in the parent and it wont be deallocated during the life
+ * time of this item).  This is an optimization to reduce memory usage for
+ * large icon-lists. 
  */
 void
 gnome_icon_text_item_configure (GnomeIconTextItem *iti, int x, int y,

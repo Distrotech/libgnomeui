@@ -556,7 +556,6 @@ gnome_icon_entry_gtk_entry (GnomeIconEntry *ientry)
  * pixmap directory to use as the default path for the file
  * entry
  *
- * Returns:
  **/
 void
 gnome_icon_entry_set_pixmap_subdir(GnomeIconEntry *ientry,

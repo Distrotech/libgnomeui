@@ -23,7 +23,8 @@
    (separator GNOME_APP_UI_SEPARATOR)
    (help GNOME_APP_UI_HELP)
    (builder-data GNOME_APP_UI_BUILDER_DATA)
-   (item-configurable GNOME_APP_UI_ITEM_CONFIGURABLE))
+   (item-configurable GNOME_APP_UI_ITEM_CONFIGURABLE)
+   (subtree-stock GNOME_APP_UI_SUBTREE_STOCK))
 
 (define-enum GnomeUIInfoConfigurableTypes
    (new GNOME_APP_CONFIGURABLE_ITEM_NEW)
@@ -108,6 +109,13 @@
    (restarted GNOME_CLIENT_RESTARTED)
    (restored GNOME_CLIENT_RESTORED))
 
+; enumerations from "gnome-dateedit.h"
+
+(define-flags GnomeDateEditFlags
+   (show-time GNOME_DATE_EDIT_SHOW_TIME)
+   (24-hr GNOME_DATE_EDIT_24_HR)
+   (week-starts-on-monday GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY))
+
 ; enumerations from "gnome-dock.h"
 
 (define-enum GnomeDockPlacement
@@ -132,7 +140,8 @@
 (define-enum GnomeFontPickerMode
    (pixmap GNOME_FONT_PICKER_MODE_PIXMAP)
    (font-info GNOME_FONT_PICKER_MODE_FONT_INFO)
-   (user-widget GNOME_FONT_PICKER_MODE_USER_WIDGET))
+   (user-widget GNOME_FONT_PICKER_MODE_USER_WIDGET)
+   (unknown GNOME_FONT_PICKER_MODE_UNKNOWN))
 
 ; enumerations from "gnome-icon-list.h"
 

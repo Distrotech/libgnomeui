@@ -82,20 +82,19 @@ static gint dns_con_size, dns_con_size_max;
 static gint dns_con_tag = 0;
 
 
-/*
- *--------------------------------------------------------------
- * gnome_dns_init
+/**
+ * gnome_dns_init:
+ * @server_count: server count to fork() at init.
  *
- *   Initialize the dns functions for use.
- *
- * Arguments:
- *   server_count specifies the number of servers to fork() at
- *   init, or <= 0 to do dynamic server forking.  If you are
- *   concerned about virtual mem usage, fork your servers as one of the
- *   first things in your program.
+ * Initialize the dns functions for use.
  * 
- *   Note that it will still do dynamic forking if you specify > 0. 
- *   when it runs out of servers.. a good init value may be 1 or 2.
+ * server_count specifies the number of servers to fork() at
+ * init, or <= 0 to do dynamic server forking.  If you are
+ * concerned about virtual mem usage, fork your servers as one of the
+ * first things in your program.
+ * 
+ * Note that it will still do dynamic forking if you specify > 0. 
+ * when it runs out of servers.. a good init value may be 1 or 2.
  * 
  * Results:
  *   gnome_dns_lookup() will be ready for use.
@@ -137,32 +136,26 @@ gnome_dns_server_req (gint server, const char *hostname) {
 	write (dns_server[server].pipefd[1], hostname, strlen (hostname) + 1);
 }
 
-/*
- *--------------------------------------------------------------
- * gnome_dns_lookup
+/**
+ * gnome_dns_lookup:
+ * @hostname: hostname to lookup
+ * @callback: function to call when dns lookup is complete.
+ * @callback_data: data to pass to the callback function
  *
  * looks up an address and returns a tag for use with
  * gnome_dns_abort() if desired.  May not return -1 if
  * hostname was in cache.
  *
- * Arguments:
- * char *hostname - hostname to lookup
- * callback - function to call when dns lookup is complete.
- * callback_data - data to pass to this function.
- *   
- * Results:
  * callback function is called when dns_lookup is complete.
- * returns a tag identifying this lookup or -1 if lookup was
- * in cache.
- * 
+ *
  * Side effects:
  * a new dns server may be spawned if all the current servers
  * are in use.
  *
- *--------------------------------------------------------------
+ * Returns a tag identifying this lookup or -1 if lookup was
+ * in cache.
+ * 
  */
-
-
 guint32 gnome_dns_lookup (const char *hostname, 
 			  void (* callback) (guint32 ip_addr, void *callback_data),
 			  void *callback_data)
@@ -229,21 +222,13 @@ guint32 gnome_dns_lookup (const char *hostname,
 	return tag;
 }
 
-/*
- *--------------------------------------------------------------
- * gnome_dns_abort
+/**
+ * gnome_dns_abort:
+ * @tag32: the tag returned from previous call to gnome_dns_lookup().
  *
  * aborts a previous call to gnome_dns_lookup().
  *
- * Arguments:
- * gint tag32 - the tag returned from previous call to gnome_dns_lookup().
- *   
- * Results:
- *   callback function is not called.
- *
- * Side effects:
- * 
- *--------------------------------------------------------------
+ * callback function is not called.
  */
 
 

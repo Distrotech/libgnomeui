@@ -1,7 +1,7 @@
 /* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
 /*
  * GnomeApp widget (C) 1998 Red Hat Software, The Free Software Foundation,
- * Miguel de Icaza, Federico Menu, Chris Toshok.
+ * Miguel de Icaza, Federico Menu, Chris Toshok, Ettore Perazzoli.
  *
  * Originally by Elliot Lee,
  *
