@@ -332,7 +332,7 @@ gnome_href_set_text (GnomeHRef *href, const gchar *text)
 
   /* underline the string */
   markup = g_strdup_printf("<u>%s</u>", text);
-  gtk_label_set_markup(GTK_LABEL(href->_priv->label), text);
+  gtk_label_set_markup(GTK_LABEL(href->_priv->label), markup);
   g_free(markup);
 }
 
