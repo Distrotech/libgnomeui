@@ -156,7 +156,6 @@ $(srcdir)/stamp-libgnomeui.defs: @REBUILD@ Makefile.am libgnomeui.defs libgnomeu
 $(srcdir)/gnometypebuiltins.c: @REBUILD@ Makefile.am $(gnome_headers) gnometypebuiltins.h
 	cd $(srcdir) \
 	&& glib-mkenums \
-			--fhead "#include <gobject/genums.h>\n" \
 			--fhead "#include \"libgnomeui.h\"\n\n" \
 			--fhead "#include \"gnometypebuiltins.h\"\n\n" \
 			--fprod "\n/* enumerations from \"@filename@\" */" \
@@ -177,7 +176,7 @@ $(srcdir)/gnometypebuiltins.h: @REBUILD@ Makefile.am $(gnome_headers)
 	&& glib-mkenums \
 			--fhead "#ifndef __GNOMETYPEBUILTINS_H__\n" \
 			--fhead "#define __GNOMETYPEBUILTINS_H__ 1\n\n" \
-			--fhead "#include <gobject/genums.h>\n\n" \
+			--fhead "#include <glib-object.h>\n\n" \
 			--fhead "G_BEGIN_DECLS\n\n" \
 			--ftail "G_END_DECLS\n\n" \
 			--ftail "#endif /* __GNOMETYPEBUILTINS_H__ */\n" \
