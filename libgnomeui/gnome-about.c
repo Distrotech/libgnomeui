@@ -337,16 +337,15 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 			tmp = g_strdup_printf("<%s>", (gchar*) name_email->data);
 			item_email = DRAW_TEXT(x2, y, GNOME_ABOUT_CONTENT_COLOR,
 					       ai->font_names, tmp);
-			g_free (tmp);
 
 			tmp = g_strdup_printf("mailto:%s", (gchar*) name_email->data);
 			gtk_signal_connect(
 			    GTK_OBJECT(item_email), "event",
 			    (GtkSignalFunc) gnome_about_item_cb, ai);
-			gtk_object_set_data(
+			gtk_object_set_data_full(
 			    GTK_OBJECT(item_email),
-			    "url", (gchar*)name_email->data);
-			g_free (tmp);
+			    "url", tmp,
+			    (GtkDestroyNotify) g_free);
 		}
 		
 		y += h + BASE_LINE_SKIP;
