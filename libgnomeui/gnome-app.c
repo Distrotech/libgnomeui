@@ -154,7 +154,8 @@ gnome_app_class_init (GnomeAppClass *class)
 							   _("The application ID string"),
 							   g_get_prgname (),
 							   (G_PARAM_READABLE |
-							    G_PARAM_WRITABLE)));
+							    G_PARAM_WRITABLE |
+							    G_PARAM_CONSTRUCT)));
 }
 
 static void
