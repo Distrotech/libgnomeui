@@ -198,8 +198,8 @@ typedef struct {
  * to specify the document type, so you need to supply the label
  * as well (it should start with "_New ")
  */
-#define GNOMEUIINFO_MENU_NEW_ITEM(label, cb, data)                          \
-        { GNOME_APP_UI_ITEM, label, N_("Create a new document"),            \
+#define GNOMEUIINFO_MENU_NEW_ITEM(label, tip, cb, data)                     \
+        { GNOME_APP_UI_ITEM, label, tip,                                    \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,                     \
           GNOME_KEY_NAME_NEW, GNOME_KEY_MOD_NEW, NULL }
@@ -211,33 +211,33 @@ typedef struct {
           GNOME_KEY_NAME_NEW, GNOME_KEY_MOD_NEW, NULL }
 
 #define GNOMEUIINFO_MENU_OPEN_ITEM(cb, data)                                \
-        { GNOME_APP_UI_ITEM, N_("_Open..."), N_("Open a document"),         \
+        { GNOME_APP_UI_ITEM, N_("_Open..."), N_("Open a file"),             \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,                    \
           GNOME_KEY_NAME_OPEN, GNOME_KEY_MOD_OPEN, NULL }
 
 #define GNOMEUIINFO_MENU_SAVE_ITEM(cb, data)                                \
-        { GNOME_APP_UI_ITEM, N_("_Save"), N_("Save the current document"),  \
+        { GNOME_APP_UI_ITEM, N_("_Save"), N_("Save the current file"),      \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,                    \
           GNOME_KEY_NAME_SAVE, GNOME_KEY_MOD_SAVE, NULL }
 
 #define GNOMEUIINFO_MENU_SAVE_AS_ITEM(cb, data)                             \
         { GNOME_APP_UI_ITEM, N_("Save _As..."),                             \
-          N_("Save the current document with a different name"),            \
+          N_("Save the current file with a different name"),                \
           cb, (gpointer)(data),                                             \
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS,           \
           GNOME_KEY_NAME_SAVE_AS, GNOME_KEY_MOD_SAVE_AS, NULL }
 
 #define GNOMEUIINFO_MENU_REVERT_ITEM(cb, data)                              \
         { GNOME_APP_UI_ITEM, N_("_Revert"),                                 \
-          N_("Revert to a saved version of the document"),                  \
+          N_("Revert to a saved version of the file"),                      \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_REVERT,                  \
           0,  (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_PRINT_ITEM(cb, data)                               \
-        { GNOME_APP_UI_ITEM, N_("_Print"), N_("Print the current document"),\
+        { GNOME_APP_UI_ITEM, N_("_Print"), N_("Print the current file"),    \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT,                   \
           0,  (GdkModifierType) 0, NULL }
@@ -257,7 +257,7 @@ typedef struct {
           0,  (GdkModifierType) 0, NULL }
 
 #define GNOMEUIINFO_MENU_CLOSE_ITEM(cb, data)                               \
-        { GNOME_APP_UI_ITEM, N_("_Close"), N_("Close the current document"),\
+        { GNOME_APP_UI_ITEM, N_("_Close"), N_("Close the current file"),    \
           cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,                   \
           GNOME_KEY_NAME_CLOSE, GNOME_KEY_MOD_CLOSE, NULL }
@@ -292,12 +292,12 @@ typedef struct {
 #define GNOMEUIINFO_MENU_CLEAR_ITEM(cb, data)                               \
         { GNOME_APP_UI_ITEM, N_("C_lear"), N_("Clear the selection"),       \
           cb, (gpointer)(data), NULL,                                       \
-          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLEAR,                   \
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK,                   \
           GNOME_KEY_NAME_CLEAR, GNOME_KEY_MOD_CLEAR, NULL }
 
 #define GNOMEUIINFO_MENU_UNDO_ITEM(cb, data)                                \
         { GNOME_APP_UI_ITEM, N_("_Undo"), N_("Undo the last action"),       \
-          NULL, cb, (gpointer)(data), NULL,                                 \
+          cb, (gpointer)(data), NULL,                                       \
           GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_UNDO,                    \
           GNOME_KEY_NAME_UNDO, GNOME_KEY_MOD_UNDO, NULL }
 
@@ -309,7 +309,7 @@ typedef struct {
 
 #define GNOMEUIINFO_MENU_PROPERTIES_ITEM(cb, data)                          \
         { GNOME_APP_UI_ITEM, N_("Properties..."),                           \
-          N_("Modify the document's properties"),                           \
+          N_("Modify the file's properties"),                               \
           cb, (gpointer)(data),                                             \
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROPERTIES,        \
           0,  (GdkModifierType) 0, NULL }
