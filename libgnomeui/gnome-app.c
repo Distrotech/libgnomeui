@@ -157,7 +157,7 @@ gnome_app_configure_toolbar_hseparators (GnomeApp *app)
 
 	g_return_if_fail (app != NULL);
 
-	if (!app->toolbar || gnome_preferences_get_toolbar_relief ())
+	if (!app->toolbar)
 		return;
 
 	toolbar = GTK_TOOLBAR (app->toolbar);
@@ -199,7 +199,7 @@ gnome_app_configure_toolbar_vseparators (GnomeApp *app)
 
 	g_return_if_fail (app != NULL);
 
-	if (!app->toolbar || gnome_preferences_get_toolbar_relief ())
+	if (!app->toolbar)
 		return;
 
 	toolbar = GTK_TOOLBAR (app->toolbar);
@@ -659,20 +659,28 @@ gnome_app_set_toolbar (GnomeApp *app,
 	if ( gnome_preferences_get_toolbar_handlebox() ) {
 	  hb = gtk_handle_box_new ();
 	  gtk_widget_show (hb);
-	  if ( ! gnome_preferences_get_toolbar_relief() )
-	    gtk_handle_box_set_shadow_type (GTK_HANDLE_BOX (hb), GTK_SHADOW_NONE);
+	  if ( gnome_preferences_get_toolbar_flat() )
+		  gtk_handle_box_set_shadow_type (GTK_HANDLE_BOX (hb), GTK_SHADOW_NONE);
+	  else if ( ! gnome_preferences_get_toolbar_relief() ) {
+		  /* Avoid relief overlap with flat buttons + handlebox relief */
+		  gtk_container_border_width (GTK_CONTAINER (hb), 2);
+	  }
 	}
 	else {
+   	  /* Non-detachable toolbars are always flat */
 	  hb = gtk_event_box_new();
 	  gtk_widget_set_events(hb, GDK_BUTTON_PRESS_MASK);
 	}
 
-	if ( gnome_preferences_get_toolbar_relief() ) {
+	if ( gnome_preferences_get_toolbar_relief() ||
+	     !gnome_preferences_get_toolbar_lines() ) {
 	  gtk_toolbar_set_space_size (GTK_TOOLBAR (toolbar), GNOME_PAD);
 	} else {
-	  gtk_toolbar_set_button_relief(toolbar, GTK_RELIEF_NONE);
 	  gtk_toolbar_set_space_size (GTK_TOOLBAR (toolbar), GNOME_PAD_SMALL);
 	}
+
+	if ( !gnome_preferences_get_toolbar_relief() )
+	  gtk_toolbar_set_button_relief(toolbar, GTK_RELIEF_NONE);
 	
 	app->toolbar = GTK_WIDGET (toolbar);
 	gtk_signal_connect (GTK_OBJECT(hb), "button_press_event",

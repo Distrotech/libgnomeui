@@ -611,7 +611,8 @@ create_toolbar_item (GtkToolbar *toolbar, GnomeUIInfo *uiinfo, int is_radio, Gtk
 
 	switch (uiinfo->type) {
 	case GNOME_APP_UI_SEPARATOR:
-		if (gnome_preferences_get_toolbar_relief ()) {
+		if (gnome_preferences_get_toolbar_relief () ||
+		    !gnome_preferences_get_toolbar_lines ()) {
 			gtk_toolbar_append_space (toolbar);
 			uiinfo->widget = NULL; /* no meaningful widget for a space */
 		} else {

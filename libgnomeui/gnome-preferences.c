@@ -39,7 +39,9 @@ static GnomePreferences prefs =
   TRUE,               /* Toolbar has handlebox */
   TRUE,               /* Menubar has handlebox */
   TRUE,               /* Menubars are relieved */
-  FALSE,               /* Toolbar buttons are not relieved */
+  FALSE,              /* Toolbar buttons are not relieved */
+  FALSE,              /* Toolbars have a flattened look */
+  TRUE,               /* Toolbars show lines for separators */
   TRUE,               /* Center dialogs over apps when possible */
   TRUE,               /* Menu items have icons in them */
   GTK_WINDOW_DIALOG,  /* Dialogs are treated specially */
@@ -116,6 +118,8 @@ static const gchar * const dialog_positions [] = {
 
 #define MENUBAR_RELIEF_KEY         "Menubar_relieved"
 #define TOOLBAR_RELIEF_KEY         "Toolbar_relieved_buttons"
+#define TOOLBAR_FLAT_KEY           "Toolbar_flat"
+#define TOOLBAR_LINES_KEY          "Toolbar_lines"
 
 #define MENUS_HAVE_ICONS_KEY       "Menus_have_icons"
 
@@ -262,6 +266,14 @@ gnome_preferences_load_custom(GnomePreferences *settings)
 					 NULL);
   settings->toolbar_relief = b;
 
+  b = gnome_config_get_bool_with_default(TOOLBAR_FLAT_KEY"=false",
+					 NULL);
+  settings->toolbar_flat = b;
+
+  b = gnome_config_get_bool_with_default(TOOLBAR_LINES_KEY"=true",
+					 NULL);
+  settings->toolbar_lines = b;
+
   b = gnome_config_get_bool_with_default (MENUS_HAVE_ICONS_KEY"=true",
 					  NULL);
   settings->menus_have_icons = b;
@@ -328,6 +340,10 @@ gnome_preferences_save_custom(GnomePreferences *settings)
 			settings->menubar_relief);
   gnome_config_set_bool(TOOLBAR_RELIEF_KEY,
 			settings->toolbar_relief);
+  gnome_config_set_bool(TOOLBAR_FLAT_KEY,
+			settings->toolbar_flat);
+  gnome_config_set_bool(TOOLBAR_LINES_KEY,
+			settings->toolbar_lines);
   gnome_config_set_bool(MENUS_HAVE_ICONS_KEY,
 			settings->menus_have_icons);
 
@@ -421,6 +437,26 @@ gboolean          gnome_preferences_get_toolbar_relief    (void)
 void              gnome_preferences_set_toolbar_relief    (gboolean b)
 {
   prefs.toolbar_relief = b;
+}
+
+gboolean          gnome_preferences_get_toolbar_flat      (void)
+{
+  return prefs.toolbar_flat;
+}
+
+void              gnome_preferences_set_toolbar_flat      (gboolean b)
+{
+  prefs.toolbar_flat = b;
+}
+
+gboolean          gnome_preferences_get_toolbar_lines     (void)
+{
+  return prefs.toolbar_lines;
+}
+
+void              gnome_preferences_set_toolbar_lines     (gboolean b)
+{
+  prefs.toolbar_lines = b;
 }
 
 gboolean          gnome_preferences_get_dialog_centered      ()

@@ -1,3 +1,20 @@
+1998-11-22  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* gnome-app-helper.c (create_toolbar_item): Do not create line
+	separators if prefs has toolbar lines option off.
+
+	* gnome-preferences.[ch]: Add toolbar_flat and toolbar_lines
+	preferences.  Default is set to have non-flat toolbars and toolbar
+	lines.
+
+	* gnome-app.c (gnome_app_configure_toolbar_[hv]separators): Always
+	attempt separator reconfiguration, if possible.
+	(gnome_app_set_toolbar): Adjust for flat toolbar in prefs, and
+	adjust border width slightly larger in the original case of relief
+	overlapping buttons without relief where the handlebox seems
+	broken. Set space size to GNOME_PAD if we are not using toolbar
+	lines.
+
 Sun Nov 22 03:40:33 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-number-entry.c: when the dialog exists update the info,

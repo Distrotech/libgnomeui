@@ -29,8 +29,10 @@ struct _GnomePreferences {
   int statusbar_is_interactive : 1;
   int toolbar_handlebox : 1;
   int menubar_handlebox : 1;
-  int menubar_relief : 1;	
+  int menubar_relief : 1;
   int toolbar_relief : 1;
+  int toolbar_flat : 1;
+  int toolbar_lines : 1;
   int dialog_centered : 1;
   int menus_have_icons : 1;
   GtkWindowType dialog_type;
@@ -73,6 +75,14 @@ void              gnome_preferences_set_menubar_relief       (gboolean b);
 /* Whether toolbar buttons have a beveled edge */
 gboolean          gnome_preferences_get_toolbar_relief       (void);
 void              gnome_preferences_set_toolbar_relief       (gboolean b);
+
+/* Whether toolbars have a flattened look  */
+gboolean          gnome_preferences_get_toolbar_flat         (void);
+void              gnome_preferences_set_toolbar_flat         (gboolean b);
+
+/* Whether toolbars show lines for separators  */
+gboolean          gnome_preferences_get_toolbar_lines        (void);
+void              gnome_preferences_set_toolbar_lines        (gboolean b);
 
 /* Whether to try to center dialogs over their parent window.
    If it's possible, dialog_position is ignored. If not,
