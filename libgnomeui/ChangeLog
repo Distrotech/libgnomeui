@@ -1,5 +1,10 @@
 1998-07-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
+	* gnome-mdi.[ch]: added child_changed signal and did some extensive
+	code clean-up ;).
+	
+1998-07-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
 	* gnome-app-helper.c (gnome_app_find_menu_pos): added a
 	check if submenu is not NULL.
 	* gnome-mdi.[ch]: removed child_menu_label and all related

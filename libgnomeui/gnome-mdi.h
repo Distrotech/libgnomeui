@@ -26,6 +26,10 @@
  *   template is not sufficient. This signal is emitted when a new GnomeApp that
  *   needs new toolbar is created but ONLY if the toolbar template is NULL!
  *
+ * void child_changed(GnomeMDI *, GnomeMDIChild *)
+ *   gets called each time when active  child is changed with the second argument
+ *   pointing to the new active child (or NULL if no child is currently active).
+ *
  * void app_created(GnomeMDI *, GnomeApp *)
  *   is called with each newly created GnomeApp to allow the MDI user to customize it.
  */
@@ -94,6 +98,7 @@ struct _GnomeMDIClass
   gint        (*remove_child)(GnomeMDI *, GnomeMDIChild *); 
   gint        (*add_view)(GnomeMDI *, GtkWidget *); 
   gint        (*remove_view)(GnomeMDI *, GtkWidget *); 
+  void        (*child_changed)(GnomeMDI *, GnomeMDIChild *);
   void        (*app_created)(GnomeMDI *, GnomeApp *);
 };
 

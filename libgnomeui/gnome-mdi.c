@@ -87,7 +87,7 @@ enum {
   REMOVE_CHILD,
   ADD_VIEW,
   REMOVE_VIEW,
-  MDI_CHILD_CHANGED,
+  CHILD_CHANGED,
   APP_CREATED,       /* so new GnomeApps can be further customized by applications */
   LAST_SIGNAL
 };
@@ -213,6 +213,12 @@ static void gnome_mdi_class_init (GnomeMDIClass *class) {
 					     GTK_SIGNAL_OFFSET (GnomeMDIClass, remove_view),
 					     gnome_mdi_marshal_2,
 					     GTK_TYPE_BOOL, 1, GTK_TYPE_POINTER);
+  mdi_signals[CHILD_CHANGED] = gtk_signal_new ("child_changed",
+					     GTK_RUN_LAST,
+					     object_class->type,
+					     GTK_SIGNAL_OFFSET (GnomeMDIClass, child_changed),
+					     gnome_mdi_marshal_4,
+					     GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
   mdi_signals[APP_CREATED] = gtk_signal_new ("app_created",
 					     GTK_RUN_LAST,
 					     object_class->type,
@@ -228,6 +234,7 @@ static void gnome_mdi_class_init (GnomeMDIClass *class) {
   class->remove_child = NULL;
   class->add_view = NULL;
   class->remove_view = NULL;
+  class->child_changed = NULL;
   class->app_created = NULL;
 
   parent_class = gtk_type_class (gtk_object_get_type ());
@@ -395,10 +402,8 @@ static void child_list_activated_cb(GtkWidget *w, GnomeMDI *mdi) {
   child = gtk_object_get_data(GTK_OBJECT(w), MDI_CHILD_KEY);
 
   if( child && (child != mdi->active_child) ) {
-    mdi->active_child = child;
-
     if(child->views)
-      mdi->active_view = GTK_WIDGET(child->views->data);
+      app_set_active_view(mdi, VIEW_GET_WINDOW(child->views->data), GTK_WIDGET(child->views->data));
     else
       gnome_mdi_add_view(mdi, child);
 
@@ -562,12 +567,9 @@ static void book_switch_page(GtkNotebook *book, GtkNotebookPage *page, gint page
   if(page_num == -1)
     return;
 
-  mdi->active_view = GTK_WIDGET(page->child);
-  mdi->active_child = VIEW_GET_CHILD(mdi->active_view);
+  app = VIEW_GET_WINDOW(page->child);
 
-  app = VIEW_GET_WINDOW(mdi->active_view);
-
-  app_set_active_view(mdi, app, mdi->active_view);
+  app_set_active_view(mdi, app, page->child);
 }
 
 static void toplevel_focus(GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi) {
@@ -579,14 +581,10 @@ static void toplevel_focus(GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi) {
   if(app->contents == NULL)
     return;
 
-  if((mdi->flags & GNOME_MDI_TOPLEVEL) || (mdi->flags & GNOME_MDI_MODAL)) {
-    mdi->active_view = app->contents;
-    mdi->active_child = VIEW_GET_CHILD(mdi->active_view);
-  }
-  else if((mdi->flags & GNOME_MDI_NOTEBOOK) && (GTK_NOTEBOOK(app->contents)->cur_page != NULL)) {
-    mdi->active_view = GTK_NOTEBOOK(app->contents)->cur_page->child;
-    mdi->active_child = VIEW_GET_CHILD(mdi->active_view);
-  }
+  if((mdi->flags & GNOME_MDI_TOPLEVEL) || (mdi->flags & GNOME_MDI_MODAL))
+    app_set_active_view(mdi, app, app->contents);
+  else if((mdi->flags & GNOME_MDI_NOTEBOOK) && (GTK_NOTEBOOK(app->contents)->cur_page != NULL))
+    app_set_active_view(mdi, app, GTK_NOTEBOOK(app->contents)->cur_page->child);
 }
 
 static void book_drag_begin(GtkNotebook *book, GdkEvent *event, GnomeMDI *mdi) {
@@ -683,7 +681,7 @@ static gint app_close_top(GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi) {
       gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD], child_node->data, &handler_ret);
 
       if(handler_ret == FALSE)
-	return TRUE;
+        return TRUE;
 
       child_node = g_list_next(child_node);
     }
@@ -699,7 +697,7 @@ static gint app_close_top(GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi) {
 
       /* if this is the last view, we should remove the mdi_child! */
       if(!gnome_mdi_remove_child(mdi, child, FALSE))
-	return TRUE;
+        return TRUE;
     }
     else
       gnome_mdi_remove_view(mdi, app->contents, FALSE);
@@ -720,7 +718,7 @@ static gint app_close_book(GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi) {
       gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD], node->data, &handler_ret);
 
       if(handler_ret == FALSE)
-	return TRUE;
+        return TRUE;
 
       node = g_list_next(node);
     }
@@ -772,20 +770,6 @@ static gint app_close_book(GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi) {
   return FALSE;
 }
 
-static void app_set_title(GnomeMDI *mdi, GnomeApp *app) {
-  gchar *fullname;
-  GnomeMDIChild *child;
-
-  if( (mdi->flags & (GNOME_MDI_MODAL | GNOME_MDI_TOPLEVEL)) &&
-      app->contents && (child = VIEW_GET_CHILD(app->contents)) ) {
-    fullname = g_copy_strings(child->name, " - ", mdi->title, NULL);
-    gtk_window_set_title(GTK_WINDOW(app), fullname);
-    g_free(fullname);
-  }
-  else
-    gtk_window_set_title(GTK_WINDOW(app), mdi->title);
-}
-
 static void app_set_active_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
   GList *menu_list = NULL, *children;
   GtkWidget *parent;
@@ -793,7 +777,17 @@ static void app_set_active_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
   GnomeUIInfo *ui_info;
   gint pos, items;
 
-  app_set_title(mdi, app);
+  /* set the title */
+  if( view && (mdi->flags & (GNOME_MDI_MODAL | GNOME_MDI_TOPLEVEL)) &&
+      (child = VIEW_GET_CHILD(view)) ) {
+    gchar *fullname;
+
+    fullname = g_copy_strings(child->name, " - ", mdi->title, NULL);
+    gtk_window_set_title(GTK_WINDOW(app), fullname);
+    g_free(fullname);
+  }
+  else
+    gtk_window_set_title(GTK_WINDOW(app), mdi->title);
 
   ui_info = gtk_object_get_data(GTK_OBJECT(app), MDI_CHILD_MENU_INFO_KEY);
   if(ui_info != NULL) {
@@ -848,10 +842,17 @@ static void app_set_active_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
       }
     }
   }
-  else 
+  else {
     gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, NULL);
 
+    child = NULL;
+  }
+
+  if(child != mdi->active_child)
+    gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[CHILD_CHANGED], child);
+
   mdi->active_view = view;
+  mdi->active_child = child;
 }
 
 static void app_destroy(GnomeApp *app) {
@@ -970,11 +971,6 @@ static void top_add_view(GnomeMDI *mdi, GnomeMDIChild *child, GtkWidget *view) {
 
   if(!GTK_WIDGET_VISIBLE(window))
     gtk_widget_show(GTK_WIDGET(window));
-
-  if(!app_full) {
-    mdi->active_view = view;
-    mdi->active_child = child;
-  }
 }
 
 gint gnome_mdi_add_view(GnomeMDI *mdi, GnomeMDIChild *child) {
@@ -998,9 +994,6 @@ gint gnome_mdi_add_view(GnomeMDI *mdi, GnomeMDIChild *child) {
       gnome_mdi_remove_view(mdi, mdi->active_window->contents, TRUE);
       mdi->active_window->contents = NULL;
     }
-
-    mdi->active_view = view;
-    mdi->active_child = child;
 
     gnome_app_set_contents(mdi->active_window, view);
     app_set_active_view(mdi, mdi->active_window, view);
@@ -1027,16 +1020,14 @@ gint gnome_mdi_remove_view(GnomeMDI *mdi, GtkWidget *view, gint force) {
   if(ret == FALSE)
     return FALSE;
 
-  if(view == mdi->active_view) {
-    mdi->active_view = NULL;
-    mdi->active_child = NULL;
-  }
-
   child = VIEW_GET_CHILD(view);
 
   parent = view->parent;
 
   window = VIEW_GET_WINDOW(view);
+
+  if(view == mdi->active_view)
+    app_set_active_view(mdi, window, NULL);
 
 #if 0
   if(mdi->flags & GNOME_MDI_MS)
@@ -1055,8 +1046,6 @@ gint gnome_mdi_remove_view(GnomeMDI *mdi, GtkWidget *view, gint force) {
       mdi->windows = g_list_remove(mdi->windows, window);
       gtk_widget_destroy(GTK_WIDGET(window));
     }
-    else
-      app_set_active_view(mdi, window, NULL);
   }
   else if( (mdi->flags & GNOME_MDI_NOTEBOOK) &&
 	   (GTK_NOTEBOOK(parent)->cur_page == NULL) &&
@@ -1065,8 +1054,6 @@ gint gnome_mdi_remove_view(GnomeMDI *mdi, GtkWidget *view, gint force) {
     mdi->windows = g_list_remove(mdi->windows, window);
     gtk_widget_destroy(GTK_WIDGET(window));
   }
-  else if(mdi->active_child == NULL)
-    app_set_active_view(mdi, window, NULL);
 
   /* remove this view from the mdi_child's view list */
   gnome_mdi_child_remove_view(child, view);
@@ -1114,11 +1101,6 @@ gint gnome_mdi_remove_child(GnomeMDI *mdi, GnomeMDIChild *child, gint force) {
 
   mdi->children = g_list_remove(mdi->children, child);
 
-  if(mdi->active_child == child) {
-    mdi->active_child = NULL;
-    mdi->active_view = NULL;
-  }
-
   child_list_menu_remove_item(mdi, child);
 
   gtk_object_destroy(GTK_OBJECT(child));
@@ -1137,7 +1119,7 @@ gint gnome_mdi_remove_all(GnomeMDI *mdi, gint force) {
       gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[REMOVE_CHILD], child_node->data, &handler_ret);
 
       if(handler_ret == FALSE)
-	return FALSE;
+        return FALSE;
 
       child_node = g_list_next(child_node);
     }
@@ -1183,7 +1165,7 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, gint mode) {
       view = GTK_WIDGET(view_node->data);
 
       if(mdi->flags & (GNOME_MDI_TOPLEVEL | GNOME_MDI_MODAL))
-	VIEW_GET_WINDOW(view)->contents = NULL;
+        VIEW_GET_WINDOW(view)->contents = NULL;
 
       gtk_container_remove(GTK_CONTAINER(view->parent), view);
 
@@ -1191,7 +1173,7 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, gint mode) {
 
       /* if we are to change mode to MODAL, destroy all views except the active one */
       if( (mdi->flags & GNOME_MDI_MODAL)  && (view != mdi->active_view) )
-	gnome_mdi_child_remove_view(child, view);
+        gnome_mdi_child_remove_view(child, view);
     }
     child_node = g_list_next(child_node);
   }
@@ -1228,30 +1210,28 @@ void gnome_mdi_set_mode(GnomeMDI *mdi, gint mode) {
       view = GTK_WIDGET(view_node->data);
 
       if(mdi->flags & GNOME_MDI_NOTEBOOK)
-	book_add_view(GTK_NOTEBOOK(mdi->active_window->contents), view);
+        book_add_view(GTK_NOTEBOOK(mdi->active_window->contents), view);
       else if(mdi->flags & GNOME_MDI_TOPLEVEL)
-	/* add a new toplevel unless the remaining one is empty */
-	top_add_view(mdi, child, view);
+        /* add a new toplevel unless the remaining one is empty */
+        top_add_view(mdi, child, view);
       else if(mdi->flags & GNOME_MDI_MODAL) {
-	/* replace the existing view if there is one */
-	if(mdi->active_window->contents) {
-	  gnome_mdi_remove_view(mdi, mdi->active_window->contents, TRUE);
-	  mdi->active_window->contents = NULL;
-	}
-	mdi->active_view = view;
-	mdi->active_child = child;
-	gnome_app_set_contents(mdi->active_window, view);
-	app_set_active_view(mdi, mdi->active_window, view);
+        /* replace the existing view if there is one */
+        if(mdi->active_window->contents) {
+          gnome_mdi_remove_view(mdi, mdi->active_window->contents, TRUE);
+          mdi->active_window->contents = NULL;
+        }
+        gnome_app_set_contents(mdi->active_window, view);
+        app_set_active_view(mdi, mdi->active_window, view);
       }
 #if 0
       else if(mdi->flags & GNOME_MDI_MS)
-	gnome_mdi_pouch_add(GNOME_MDI_POUCH(mdi->active_window->contents), view);
+        gnome_mdi_pouch_add(GNOME_MDI_POUCH(mdi->active_window->contents), view);
 #endif
 
       view_node = g_list_next(view_node);
     }
     child_node = g_list_next(child_node);
-  }  
+  }
 
   if(!GTK_WIDGET_VISIBLE(mdi->active_window))
     gtk_widget_show(GTK_WIDGET(mdi->active_window));
