@@ -1,3 +1,11 @@
+2002-02-08  Mark McLoughlin  <mark@skynet.ie>
+
+	* gnome-ui-init.c:
+	(libgnomeui_post_args_parse): fix leak.
+
+	* libgnomeui.h: include gnome-window-icon.h, poor
+	forgotten thing.
+
 2002-02-05  Federico Mena Quintero  <federico@ximian.com>
 
 	* libgnomeui/gnome-about.c (gnome_about_instance_init): Nullify

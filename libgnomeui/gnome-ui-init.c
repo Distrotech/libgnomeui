@@ -420,7 +420,7 @@ initialize_gtk_signal_relay (void)
 static void
 libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
 {
-        GnomeProgramPrivate_libgnomeui *priv = g_new0(GnomeProgramPrivate_libgnomeui, 1);
+        GnomeProgramPrivate_libgnomeui *priv;
         gchar *filename;
 
         gnome_type_init();
