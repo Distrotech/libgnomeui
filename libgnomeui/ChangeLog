@@ -1,3 +1,24 @@
+2001-09-04  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-entry.c: (gnome_entry_class_init), (entry_activated),
+	(gnome_entry_new), (gnome_entry_finalize),
+	(gnome_entry_history_changed), (gnome_entry_set_history_id),
+	(build_gconf_key), (gnome_entry_load_history),
+	(check_for_duplicates), (gnome_entry_save_history):
+
+	Make gnome-entry use GConf.
+	
+	* gnome-file-entry.c: (fentry_set_arg),
+	(gnome_file_entry_construct):
+	* gnome-icon-entry.c: (gnome_icon_entry_set_history_id):
+	Some fixups to work with API changes in gnome-entry.
+	
+	* libgnomeui-2.0.pc.in:
+	Fix include path.
+	
+	* pixmaps/Makefile.am:
+	Don't install the gcalc font png.
+
 Tue Sep 04 00:04:00 2001  George Lebl <jirka@5z.com>
 
 	* Makefile.am, gnome-popup-menu.[ch], libgnomeui.h: bring back

@@ -1,6 +1,19 @@
+2001-09-04  Anders Carlsson  <andersca@gnu.org>
+
+	* Makefile.am: Add test-entry.
+	
+	* testentry.c: New file.
+	
+	* testgnome.c: Some changes to work with new api.
+
 Mon Sep 03 00:12:44 2001  George Lebl <jirka@5z.com>
 
 	* testgnome.c: make it compile
+
+Fri Aug 31 04:00:30 2001  George Lebl <jirka@5z.com>
+
+	* testgnome.c: remove the test of the image entry since it no longer
+	  exists
 
 Fri Aug 31 04:00:30 2001  George Lebl <jirka@5z.com>
 

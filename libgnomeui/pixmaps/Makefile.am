@@ -1,8 +1,3 @@
-pixmapdir = $(datadir)/pixmaps
-BITMAPS    = calculator-font.png
-
-pixmap_DATA = $(BITMAPS)
-
 # Please update this when you add more `stock_*.png' files
 stock_images = \
 	stock_attach.png \
@@ -37,7 +32,7 @@ stock_images = \
 	stock_volume.png \
 	stock_midi.png
 
-EXTRA_DIST  = $(BITMAPS) $(stock_images)
+EXTRA_DIST  = $(stock_images)
 
 noinst_HEADERS = gnome-stock-pixbufs.h
 BUILT_SOURCES = gnome-stock-pixbufs.h
@@ -50,3 +45,5 @@ gnome-stock-pixbufs.h: @GDK_PIXBUF_CSOURCE@ $(stock_images)
 	   @GDK_PIXBUF_CSOURCE@ --raw --build-list $$var > pixbufs-tmp && \
 	   cat $(srcdir)/copyright.txt pixbufs-tmp > gnome-stock-pixbufs.h
 	-rm -f pixbufs-tmp
+
+

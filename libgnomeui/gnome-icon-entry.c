@@ -1099,8 +1099,9 @@ gnome_icon_entry_set_history_id(GnomeIconEntry *ientry,
 	ientry->_priv->history_id = g_strdup(history_id);
 
 	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(ientry->_priv->fentry));
-	gnome_entry_set_history_id (GNOME_ENTRY(gentry), history_id);
-	gnome_entry_load_history (GNOME_ENTRY(gentry));
+	g_object_set (G_OBJECT (gentry),
+		      "history_id", history_id,
+		      NULL);
 }
 
 /* DEPRECATED routines left for compatibility only, will disapear in

@@ -1,6 +1,6 @@
-2001-09-03  Anders Carlsson  <andersca@gnu.org>
+2001-09-04  Anders Carlsson  <andersca@gnu.org>
 
-	* configure.in: Bump to .103
+	* configure.in: Bump to 1.103.0
 
 Sun Aug 26 19:35:40 2001  George Lebl <jirka@5z.com>
 

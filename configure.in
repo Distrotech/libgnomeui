@@ -34,8 +34,8 @@ dnl
 dnl Start of pkg-config checks
 dnl
 PKG_CHECK_MODULES(LIBGNOMEUI, \
-		  libgnome-2.0 >= 1.102.0 libgnomecanvas-2.0 >= 1.102.0 \
-		  libbonoboui-2.0 >= 1.97.0 gconf-2.0 >= 1.1.1)
+		  libgnome-2.0 >= 1.103.0 libgnomecanvas-2.0 >= 1.103.0 \
+		  libbonoboui-2.0 >= 1.97.0 gconf-2.0 >= 1.1.1 )
 AC_SUBST(LIBGNOMEUI_CFLAGS)
 AC_SUBST(LIBGNOMEUI_LIBS)
 

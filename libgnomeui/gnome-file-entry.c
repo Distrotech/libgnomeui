@@ -240,9 +240,9 @@ fentry_set_arg (GtkObject *object,
 	case ARG_HISTORY_ID: {
 		GtkWidget *gentry;
 		gentry = gnome_file_entry_gnome_entry(self);
-		gnome_entry_set_history_id (GNOME_ENTRY(gentry),
-					    GTK_VALUE_POINTER(*arg));
-		gnome_entry_load_history (GNOME_ENTRY(gentry));
+		g_object_set (G_OBJECT (gentry),
+			      "history_id", GTK_VALUE_STRING (*arg),
+			      NULL);
 		break;
 	}
 	case ARG_DIRECTORY_ENTRY:
@@ -594,8 +594,9 @@ gnome_file_entry_construct (GnomeFileEntry *fentry, const char *history_id, cons
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
 
-	gnome_entry_construct (GNOME_ENTRY (fentry->_priv->gentry),
-			       history_id);
+	g_object_set (G_OBJECT (fentry->_priv->gentry),
+		      "history_id", history_id,
+		      NULL);
 
 	gnome_file_entry_set_title (fentry, browse_dialog_title);
 }

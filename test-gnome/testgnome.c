@@ -531,7 +531,6 @@ create_entry(void)
 	app = create_newwin(TRUE,"testGNOME","Entry");
 	entry = gnome_entry_new(NULL);
 	g_assert(entry != NULL);
-//	gnome_entry_set_text (GNOME_ENTRY(entry), "Foo");
 	bonobo_window_set_contents(BONOBO_WINDOW(app->app), entry);
 	gtk_widget_show(entry);
 	gtk_widget_show(app->app);
@@ -572,7 +571,7 @@ file_entry_modal_toggle(GtkWidget *w, GnomeFileEntry *fentry)
 static void
 file_entry_directory_toggle(GtkWidget *w, GnomeFileEntry *fentry)
 {
-	gnome_file_entry_set_directory(fentry,GTK_TOGGLE_BUTTON(w)->active);
+	gnome_file_entry_set_directory_entry (fentry,GTK_TOGGLE_BUTTON(w)->active);
 }
 
 static void
@@ -921,8 +920,7 @@ create_image_entry(void)
 	GtkWidget *entry;
 
 	app = create_newwin(TRUE,"testGNOME","Pixmap Entry");
-	/* FIXME: The gnome_image_entry_new param. must be reviewed */
-	entry = gnome_image_entry_new_pixmap_entry (0,0);
+	entry = gnome_pixmap_entry_new (NULL, "Test", FALSE);
 	bonobo_window_set_contents(BONOBO_WINDOW(app->app),entry);
 	gtk_widget_show(entry);
 	gtk_widget_show(app->app);
