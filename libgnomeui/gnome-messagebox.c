@@ -239,8 +239,10 @@ gnome_message_box_new (const gchar           *message,
 	
 	va_end (ap);
 
-	gtk_widget_grab_focus(
-		g_list_last (GNOME_DIALOG (message_box)->buttons)->data);
+	if (GNOME_DIALOG (message_box)->buttons) {
+		gtk_widget_grab_focus(
+			g_list_last (GNOME_DIALOG (message_box)->buttons)->data);
+	}
 
 	return GTK_WIDGET (message_box);
 }

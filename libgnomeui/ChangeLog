@@ -1,3 +1,12 @@
+2001-11-30  Richard Hestilow  <hestilow@ximian.com>
+
+	* gnome-messagebox.c (gnome_message_box_new):
+	Only try to grab button focus if buttons != NULL.
+	
+	* gnome-pixmap-entry.c (gnome_pixmap_entry_instance_init):
+	Set do_preview to 0 instead of 1, as it is not really set up
+	by default and thus will confuse gnome_pixmap_entry_set_preview.
+
 2001-11-30  Anders Carlsson  <andersca@gnu.org>
 
 	* gnome-font-picker.c (gnome_font_picker_label_use_font_in_label): 

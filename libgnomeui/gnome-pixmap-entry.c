@@ -508,7 +508,7 @@ gnome_pixmap_entry_instance_init (GnomePixmapEntry *pentry)
 
 	pentry->_priv = g_new0(GnomePixmapEntryPrivate, 1);
 
-	pentry->_priv->do_preview = 1;
+	pentry->_priv->do_preview = 0;
 
 	pentry->_priv->last_preview = NULL;
 
