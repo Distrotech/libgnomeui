@@ -3126,6 +3126,8 @@ idle_handler (gpointer data)
 {
 	GnomeCanvas *canvas;
 
+	GDK_THREADS_ENTER ();
+
 #ifdef VERBOSE
 	g_print ("idle_handler {\n");
 #endif
@@ -3165,6 +3167,8 @@ idle_handler (gpointer data)
 	g_print ("idle_handler }\n");
 #endif
 
+	GDK_THREADS_LEAVE ();
+	
 	return FALSE;
 }
 

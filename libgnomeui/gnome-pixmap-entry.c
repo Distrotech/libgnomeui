@@ -113,6 +113,9 @@ static int
 changed_timeout_func(gpointer data)
 {
 	GSList *li,*tmp;
+
+	GDK_THREADS_ENTER();
+	
 	tmp = changed_pentries;
 	changed_pentries = NULL;
 	if(tmp) {
@@ -123,6 +126,9 @@ changed_timeout_func(gpointer data)
 		return TRUE;
 	}
 	change_timeout = -1;
+
+	GDK_THREADS_LEAVE();
+	
 	return FALSE;
 }
 

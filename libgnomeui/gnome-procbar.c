@@ -38,7 +38,7 @@ static void gnome_proc_bar_finalize (GtkObject *o);
 static void gnome_proc_bar_setup_colors (GnomeProcBar *pb);
 static void gnome_proc_bar_draw (GnomeProcBar *pb, unsigned val []);
 static void gnome_proc_bar_destroy (GtkObject *obj);
-
+static gint gnome_proc_bar_timeout (gpointer data);
 
 guint
 gnome_proc_bar_get_type (void)
@@ -293,6 +293,19 @@ gnome_proc_bar_draw (GnomeProcBar *pb, unsigned val [])
 #undef W
 #undef A
 
+static gint
+gnome_proc_bar_timeout (gpointer data)
+{
+	GnomeProcBar *pb = data;
+	gint result;
+
+	GDK_THREADS_ENTER ();
+	result = pb->cb (pb->cb_data);
+	GDK_THREADS_LEAVE ();
+
+	return result;
+}
+
 void
 gnome_proc_bar_set_values (GnomeProcBar *pb, unsigned val [])
 {
@@ -334,7 +347,8 @@ gnome_proc_bar_start (GnomeProcBar *pb, gint gtime, gpointer data)
 
     if (pb->cb) {
 	pb->cb (data);
-	pb->tag = gtk_timeout_add (gtime, pb->cb, data);
+        pb->cb_data = data;
+	pb->tag = gtk_timeout_add (gtime, gnome_proc_bar_timeout, pb);
     }
 }
 

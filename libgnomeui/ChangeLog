@@ -1,3 +1,14 @@
+1999-02-24  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome-animator.c gnome-app-util.c gnome-canvas.c
+	  gnome-icon-list.c gnome-pixmap-entry.c gnome-procbar.[ch]
+	  gtk-clock.c gtkdial.c:
+
+	Added in calls to GDK_THREADS_ENTER/LEAVE around timeouts and
+	idles so that libgnomeui can be called from a threaded 
+	GTK+ application. (Should have no effect on non-threaded
+	applications)
+
 Wed Feb 24 15:23:28 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-icon-entry.c: get rid of last remaints of gtk pixmap code

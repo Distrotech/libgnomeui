@@ -467,9 +467,13 @@ timer_cb (gpointer data)
 {
   GnomeAnimator *animator;
 
+  GDK_THREADS_ENTER ();
+  
   animator = GNOME_ANIMATOR (data);
   if (animator->status != GNOME_ANIMATOR_STATUS_STOPPED)
     gnome_animator_advance (animator, +1);
+
+  GDK_THREADS_LEAVE ();
 
   return FALSE;
 }

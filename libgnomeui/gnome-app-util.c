@@ -221,9 +221,14 @@ typedef struct _MessageInfo MessageInfo;
 static gint
 remove_message_timeout (MessageInfo * mi) 
 {
+  GDK_THREADS_ENTER ();	
+	
   gnome_appbar_refresh(GNOME_APPBAR(mi->app->statusbar));
   gtk_signal_disconnect(GTK_OBJECT(mi->app), mi->handlerid);
   g_free ( mi );
+
+  GDK_THREADS_LEAVE ();
+
   return FALSE; /* removes the timeout */
 }
 
@@ -651,8 +656,14 @@ typedef struct {
 static gint progress_timeout_cb (ProgressKeyReal * key)
 {
   gdouble percent;
+
+  GDK_THREADS_ENTER ();
+	
   percent = (* key->percentage_cb)(key->data);
   gnome_app_set_progress (key, percent);
+
+  GDK_THREADS_LEAVE ();
+  
   return TRUE;
 }
 

@@ -1,5 +1,5 @@
 /* GTK - The GIMP Toolkit
- * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
+ * Copyright (C) 1995-1999 Peter Mattis, Spencer Kimball and Josh MacDonald
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -15,6 +15,8 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
+
+/* gtkdial.c: Written by Owen Taylor <otaylor@redhat.com>
 
 /* needed for M_* under 'gcc -ansi -pedantic' on GNU/Linux */
 #ifndef _BSD_SOURCE
@@ -514,11 +516,15 @@ gtk_dial_motion_notify (GtkWidget      *widget,
 static gint
 gtk_dial_timer (GtkDial *dial)
 {
+  GDK_THREADS_ENTER();
+  
   g_return_val_if_fail (dial != NULL, FALSE);
   g_return_val_if_fail (GTK_IS_DIAL (dial), FALSE);
 
   if (dial->policy == GTK_UPDATE_DELAYED)
     gtk_signal_emit_by_name (GTK_OBJECT (dial->adjustment), "value_changed");
+
+  GDK_THREADS_LEAVE();
 
   return FALSE;
 }

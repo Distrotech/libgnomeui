@@ -57,6 +57,7 @@ struct _GnomeProcBar {
 	unsigned *last;
 
 	gint (*cb)();
+	gpointer cb_data;
 };
 
 struct _GnomeProcBarClass {

@@ -94,7 +94,9 @@ static gint gtk_clock_timer_callback(gpointer data)
 {
 	GtkClock *clock = (GtkClock *)data;
 
+	GDK_THREADS_ENTER ();
 	gtk_clock_gen_str(clock);
+	GDK_THREADS_LEAVE ();
 
 	return TRUE;
 }
@@ -103,6 +105,8 @@ static gint gtk_clock_timer_first_callback(gpointer data)
 {
 	GtkClock *clock = (GtkClock *)data;
         gint tmpid;
+
+	GDK_THREADS_ENTER();
 	
 	gtk_clock_gen_str(clock);
 
@@ -112,6 +116,8 @@ static gint gtk_clock_timer_first_callback(gpointer data)
 	gtk_clock_stop(clock);
 
 	clock->timer_id = tmpid;
+
+	GDK_THREADS_LEAVE();
 
 	return FALSE;
 }

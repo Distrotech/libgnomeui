@@ -1334,6 +1334,8 @@ scroll_timeout (gpointer data)
 	double x, y;
 	int value;
 
+	GDK_THREADS_ENTER ();
+	
 	value = gil->adj->value + gil->value_diff;
 	if (value > gil->adj->upper - gil->adj->page_size)
 		value = gil->adj->upper - gil->adj->page_size;
@@ -1344,6 +1346,8 @@ scroll_timeout (gpointer data)
 				      gil->event_last_x, gil->event_last_y,
 				      &x, &y);
 	gil_mark_region (gil, NULL, x, y);
+
+	GDK_THREADS_LEAVE();
 
 	return TRUE;
 }
