@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2004-02-15 17:07+0100\n"
-"PO-Revision-Date: 2004-02-15 17:07+0100\n"
+"POT-Creation-Date: 2004-02-18 23:03+0100\n"
+"PO-Revision-Date: 2004-02-18 23:03+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -655,11 +655,11 @@ msgstr "PREFIX"
 msgid "Disable connection to session manager"
 msgstr "Stäng av koppling till sessionshanteraren"
 
-#: libgnomeui/gnome-client.c:974
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "Sessionshantering"
 
-#: libgnomeui/gnome-client.c:2474
+#: libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "Avbryt utloggning"
 
@@ -1350,12 +1350,12 @@ msgid "GNOME GUI Library"
 msgstr "GNOME-bibliotek för grafiska användargränssnitt"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:707
+#: libgnomeui/gnome-ui-init.c:708
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flera segmenteringsfel har inträffat; kan inte visa felmeddelande\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:721
+#: libgnomeui/gnome-ui-init.c:722
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1401,17 +1401,30 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Användning: gnome_segv2 programnamn signalnummer\n"
 
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "_Starta om programmet"
+
 #: libgnomeui/gnome_segv.c:166
-msgid "Inform Developers"
-msgstr "Meddela utvecklarna"
+msgid "_Inform Developers"
+msgstr "_Meddela utvecklarna"
 
 #: libgnomeui/gnome_segv.c:177
-msgid "Debug"
-msgstr "Felsök"
+msgid "_Debug"
+msgstr "_Felsök"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Avsluta testet"
+
+#~ msgid "Restart Application"
+#~ msgstr "Starta om programmet"
+
+#~ msgid "Inform Developers"
+#~ msgstr "Meddela utvecklarna"
+
+#~ msgid "Debug"
+#~ msgstr "Felsök"
 
 #~ msgid "Color Selector"
 #~ msgstr "Färgväljare"
