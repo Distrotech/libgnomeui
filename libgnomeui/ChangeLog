@@ -1,3 +1,10 @@
+Sat Mar  8 02:35:33 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock-{imlib,xpm}.h: foolishly tried to make remaning stock
+	icons look like tigert's pixmaps.
+
+	* gnome-stock.c: changed_size fields (20x20 -> 24x24) for affected icons
+
 Sat Mar  7 16:40:08 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.c (create_pixmap_from_data): use

@@ -305,38 +305,38 @@ main(int argc, char **argv)
 	gtk_container_add(GTK_CONTAINER(frame), table);
 	fill_table(window, GTK_TABLE(table));
 
-	hbox = gtk_hbox_new(TRUE, 0);
+	hbox = gtk_hbox_new(FALSE, 0);
 	gtk_container_border_width(GTK_CONTAINER(hbox), 5);
 	gtk_widget_show(hbox);
 	gtk_box_pack_end(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-	w = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
-	gtk_widget_show(w);
-	gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 3);
-	gtk_signal_connect(GTK_OBJECT(w), "clicked",
-			   (GtkSignalFunc)tb_sens, NULL);
-
-	w = gnome_stock_button(GNOME_STOCK_BUTTON_APPLY);
-	gtk_widget_show(w);
-	gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 3);
-	gtk_widget_set_sensitive(w, FALSE);
-
-	w = gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-	gtk_widget_show(w);
-	gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 3);
-	gtk_signal_connect(GTK_OBJECT(w), "clicked",
-			   (GtkSignalFunc)tb_insens, NULL);
-
-	w = gnome_stock_button(GNOME_STOCK_BUTTON_HELP);
-	gtk_widget_show(w);
-	gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 3);
-
 	w = gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);
 	gtk_widget_show(w);
-	gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 3);
+	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
 	gtk_signal_connect_object(GTK_OBJECT(w), "clicked",
 				  (GtkSignalFunc)gtk_widget_destroy,
 				  GTK_OBJECT(window));
+
+	w = gnome_stock_button(GNOME_STOCK_BUTTON_HELP);
+	gtk_widget_show(w);
+	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
+
+	w = gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
+	gtk_widget_show(w);
+	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
+	gtk_signal_connect(GTK_OBJECT(w), "clicked",
+			   (GtkSignalFunc)tb_insens, NULL);
+
+	w = gnome_stock_button(GNOME_STOCK_BUTTON_APPLY);
+	gtk_widget_show(w);
+	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
+	gtk_widget_set_sensitive(w, FALSE);
+
+	w = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
+	gtk_widget_show(w);
+	gtk_box_pack_end(GTK_BOX(hbox), w, FALSE, FALSE, 3);
+	gtk_signal_connect(GTK_OBJECT(w), "clicked",
+			   (GtkSignalFunc)tb_sens, NULL);
 
 	gnome_app_set_contents(GNOME_APP(window), vbox);
 	gnome_app_set_menus(GNOME_APP(window),
