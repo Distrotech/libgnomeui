@@ -230,7 +230,7 @@ SGML =	\
 	gtk-ted.sgml
 
 gtkrcdir = $(datadir)
-gtkrc_DATA = gtkrc gtkrc.ja gtkrc.ko
+gtkrc_DATA = gtkrc gtkrc.ja gtkrc.ko gtkrc.ru
 
 EXTRA_DIST =					\
 	$(SGML)					\
