@@ -488,6 +488,13 @@ menushell_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 	}
 	if (uline)
 		glade_xml_pop_uline_accel(xml);
+	if (strcmp(info->class, "GtkMenuBar") != 0 &&
+	    gnome_preferences_get_menus_have_tearoff()) {
+		GtkWidget *tearoff = gtk_tearoff_menu_item_new();
+
+		gtk_menu_prepend(GTK_MENU(w), tearoff);
+		gtk_widget_show(tearoff);
+	}
 }
 
 static void
