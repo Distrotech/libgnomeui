@@ -120,6 +120,19 @@ int gnome_session_request_interaction (GnomeDialogType dialog_type);
    shutdown will be cancelled.  */
 void gnome_session_interaction_done (int shutdown);
 
+/* Request the session manager to save the session in some way.  This
+   can also be used to request a logout.  If IS_GLOBAL is true, then
+   all clients are saved; otherwise only this client is saved.  */
+void gnome_session_request_save (GnomeSaveStyle save_style,
+				 int /* bool */ is_shutdown,
+				 GnomeInteractStyle interact_style,
+				 int /* bool */ is_fast,
+				 int /* bool */ is_global);
+
+
+/* Returns true if we're actually talking to the session manager,
+   false otherwise.  */
+int gnome_session_connected_p (void);
 
 END_GNOME_DECLS
 

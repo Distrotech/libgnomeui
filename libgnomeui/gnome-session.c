@@ -346,3 +346,30 @@ gnome_session_interaction_done (int shutdown)
   SmcInteractDone (info->connection, shutdown);
 #endif /* HAVE_LIBSM */
 }
+
+void
+gnome_session_request_save (GnomeSaveStyle save_style,
+			    int /* bool */ is_shutdown,
+			    GnomeInteractStyle interact_style,
+			    int /* bool */ is_fast,
+			    int /* bool */ is_global)
+{
+#ifdef HAVE_LIBSM
+  if (! info)
+    return;
+
+  SmcRequestSaveYourself (info->connection, save_style,
+			  is_shutdown, interact_style,
+			  is_fast, is_global);
+#endif /* HAVE_LIBSM */
+}
+
+int
+gnome_session_connected_p (void)
+{
+#ifdef HAVE_LIBSM
+  return (info && info->connection);
+#else
+  return 0;
+#endif /* HAVE_LIBSM */
+}
