@@ -682,6 +682,7 @@ static const gnome_map_t gnome_stock_pixmap_mapping [] = {
 	{ "DISABLED", GNOME_STOCK_PIXMAP_DISABLED },
 	{ "DOWN", GNOME_STOCK_PIXMAP_DOWN },
 	{ "EXEC", GNOME_STOCK_PIXMAP_EXEC },
+	{ "EXIT", GNOME_STOCK_PIXMAP_QUIT },
 	{ "FIRST", GNOME_STOCK_PIXMAP_FIRST },
 	{ "FOCUSED", GNOME_STOCK_PIXMAP_FOCUSED },
 	{ "FONT", GNOME_STOCK_PIXMAP_FONT },
@@ -711,7 +712,6 @@ static const gnome_map_t gnome_stock_pixmap_mapping [] = {
 	{ "PRINT", GNOME_STOCK_PIXMAP_PRINT },
 	{ "PROPERTIES", GNOME_STOCK_PIXMAP_PROPERTIES },
 	{ "QUIT", GNOME_STOCK_PIXMAP_QUIT },
-	{ "EXIT", GNOME_STOCK_PIXMAP_QUIT },
 	{ "REDO", GNOME_STOCK_PIXMAP_REDO },
 	{ "REFRESH", GNOME_STOCK_PIXMAP_REFRESH },
 	{ "REGULAR", GNOME_STOCK_PIXMAP_REGULAR },
@@ -766,6 +766,7 @@ static const gnome_map_t gnome_stock_menu_mapping [] = {
 	{ "CUT", GNOME_STOCK_MENU_CUT },
 	{ "DOWN", GNOME_STOCK_MENU_DOWN },
 	{ "EXEC", GNOME_STOCK_MENU_EXEC },
+	{ "EXIT", GNOME_STOCK_MENU_QUIT },
 	{ "FIRST", GNOME_STOCK_MENU_FIRST },
 	{ "FONT", GNOME_STOCK_MENU_FONT },
 	{ "FORWARD", GNOME_STOCK_MENU_FORWARD },
@@ -791,7 +792,6 @@ static const gnome_map_t gnome_stock_menu_mapping [] = {
 	{ "PRINT", GNOME_STOCK_MENU_PRINT },
 	{ "PROP", GNOME_STOCK_MENU_PROP },
 	{ "QUIT", GNOME_STOCK_MENU_QUIT },
-	{ "EXIT", GNOME_STOCK_MENU_QUIT },
 	{ "REDO", GNOME_STOCK_MENU_REDO },
 	{ "REFRESH", GNOME_STOCK_MENU_REFRESH },
 	{ "REVERT", GNOME_STOCK_MENU_REVERT },
@@ -1258,7 +1258,13 @@ clock_new(GladeXML *xml, GladeWidgetInfo *info)
 	return wid;
 }
 
-/* -- GnomeAnimator not finished */
+static GtkWidget *
+animator_new(GladeXML *xml, GladeWidgetInfo *info)
+{
+	GtkWidget *wid = gtk_type_new(gnome_animator_get_type());
+
+	return wid;
+}
 
 static GtkWidget *
 less_new(GladeXML *xml, GladeWidgetInfo *info)
@@ -1656,10 +1662,9 @@ about_new(GladeXML *xml, GladeWidgetInfo *info)
 	}
 	wid = gnome_about_new(title, version, _(copyright),
 			      (const gchar **)authors, _(comments), logo);
-	/* if (title) g_free(title); */
-	/* if (version) g_free(version); */
 	if (authors) g_strfreev(authors);
 
+	glade_xml_set_window_props(GTK_WINDOW(wid), info);
 	glade_xml_set_toplevel(xml, GTK_WINDOW(wid));
 
 	return wid;
@@ -1670,23 +1675,15 @@ gnomedialog_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *win;
 	GList *tmp;
-	gint xpos = -1, ypos = -1;
-	gboolean allow_shrink = TRUE, allow_grow = TRUE, auto_shrink = FALSE;
 	gboolean auto_close = FALSE, hide_on_close = FALSE;
-	gchar *title = NULL, *wmname = NULL, *wmclass = NULL;
+	gchar *title = NULL;
 
 	for (tmp = info->attributes; tmp; tmp = tmp->next) {
 		GladeAttribute *attr = tmp->data;
 
 		switch (attr->name[0]) {
 		case 'a':
-			if (!strcmp(attr->name, "allow_grow"))
-				allow_grow = attr->value[0] == 'T';
-			else if (!strcmp(attr->name, "allow_shrink"))
-				allow_shrink = attr->value[0] == 'T';
-			else if (!strcmp(attr->name, "auto_shrink"))
-				auto_shrink = attr->value[0] == 'T';
-			else if (!strcmp(attr->name, "auto_close"))
+			if (!strcmp(attr->name, "auto_close"))
 				auto_close = attr->value[0] == 'T';
 			break;
 		case 'h':
@@ -1696,33 +1693,13 @@ gnomedialog_new(GladeXML *xml, GladeWidgetInfo *info)
 			if (!strcmp(attr->name, "title"))
 				title = attr->value;
 			break;
-		case 'w':
-			if (!strcmp(attr->name, "wmclass_name"))
-				wmname = attr->value;
-			else if (!strcmp(attr->name, "wmclass_class"))
-				wmclass = attr->value;
-			break;
-		case 'x':
-			if (attr->name[1] == '\0')
-				xpos = strtol(attr->value, NULL, 0);
-			break;
-		case 'y':
-			if (attr->name[1] == '\0')
-				ypos = strtol(attr->value, NULL, 0);
-			break;
 		}
 	}
 	win = gnome_dialog_new(_(title), NULL);
-	gtk_window_set_policy(GTK_WINDOW(win), allow_shrink, allow_grow,
-			      auto_shrink);
-	if (wmname || wmclass)
-		gtk_window_set_wmclass(GTK_WINDOW(win),
-				       wmname?wmname:"", wmclass?wmclass:"");
 	gnome_dialog_set_close(GNOME_DIALOG(win), auto_close);
 	gnome_dialog_close_hides(GNOME_DIALOG(win), hide_on_close);
-	if (xpos >= 0 || ypos >= 0)
-		gtk_widget_set_uposition (win, xpos, ypos);
 
+	glade_xml_set_window_props(GTK_WINDOW(win), info);
 	glade_xml_set_toplevel(xml, GTK_WINDOW(win));
 
 	return win;
@@ -1764,6 +1741,7 @@ messagebox_new(GladeXML *xml, GladeWidgetInfo *info)
 	/* create the message box with no buttons */
 	win = gnome_message_box_new(_(message), typename, NULL);
 
+	glade_xml_set_window_props(GTK_WINDOW(win), info);
 	glade_xml_set_toplevel(xml, GTK_WINDOW(win));
 
 	return win;
@@ -1774,22 +1752,13 @@ app_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *win;
 	GList *tmp;
-	gchar *title = NULL, *wmname = NULL, *wmclass = NULL;
+	gchar *title = NULL;
 	gboolean enable_layout = TRUE;
-	gboolean allow_shrink = TRUE, allow_grow = TRUE, auto_shrink = FALSE;
 
 	for (tmp = info->attributes; tmp; tmp = tmp->next) {
 		GladeAttribute *attr = tmp->data;
 
 		switch (attr->name[0]) {
-		case 'a':
-			if (!strcmp(attr->name, "allow_grow"))
-				allow_grow = attr->value[0] == 'T';
-			else if (!strcmp(attr->name, "allow_shrink"))
-				allow_shrink = attr->value[0] == 'T';
-			else if (!strcmp(attr->name, "auto_shrink"))
-				auto_shrink = attr->value[0] == 'T';
-			break;
 		case 'e':
 			if (!strcmp(attr->name, "enable_layout_config"))
 				enable_layout = attr->value[0] == 'T';
@@ -1798,22 +1767,12 @@ app_new(GladeXML *xml, GladeWidgetInfo *info)
 			if (!strcmp(attr->name, "title"))
 				title = attr->value;
 			break;
-		case 'w':
-			if (!strcmp(attr->name, "wmclass_name"))
-				wmname = attr->value;
-			else if (!strcmp(attr->name, "wmclass_class"))
-				wmclass = attr->value;
-			break;
 		}
 	}
 	win = gnome_app_new(gnome_app_id, _(title));
-	gtk_window_set_policy(GTK_WINDOW(win), allow_shrink, allow_grow,
-			      auto_shrink);
-	if (wmname || wmclass)
-		gtk_window_set_wmclass(GTK_WINDOW(win),
-				       wmname?wmname:"", wmclass?wmclass:"");
 	gnome_app_enable_layout_config(GNOME_APP(win), enable_layout);
 
+	glade_xml_set_window_props(GTK_WINDOW(win), info);
 	glade_xml_set_toplevel(xml, GTK_WINDOW(win));
 
 	return win;
@@ -1824,6 +1783,7 @@ propbox_new(GladeXML *xml, GladeWidgetInfo *info)
 {
 	GtkWidget *pbox = gnome_property_box_new();
 
+	glade_xml_set_window_props(GTK_WINDOW(pbox), info);
 	glade_xml_set_toplevel(xml, GTK_WINDOW(pbox));
 	return pbox;
 }
@@ -1986,6 +1946,7 @@ static const GladeWidgetBuildData widget_data [] = {
 	{ "GnomePixmapEntry",   pixmap_entry_new,pixmap_entry_build_children },
 	{ "GnomeDateEdit",      date_edit_new,      NULL },
 	{ "GtkClock",           clock_new,          NULL },
+	{ "GnomeAnimator",      animator_new,       NULL },
 	{ "GnomeLess",          less_new,           NULL },
 	{ "GnomeCalculator",    calculator_new,     NULL },
 	{ "GnomePaperSelector", paper_selector_new, NULL },
