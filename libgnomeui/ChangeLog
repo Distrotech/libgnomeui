@@ -1,3 +1,8 @@
+Sat Aug 21 11:06:57 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-app.c: fix so that documentation for gnome_app_add_dock_item
+	  is actually read
+
 1999-08-19  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-animator.c (free_all_frames): Don't free the mask, since

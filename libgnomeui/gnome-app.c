@@ -525,7 +525,7 @@ gnome_app_set_toolbar (GnomeApp *app,
 
 
 /**
- * gnome_app_add_docked:
+ * gnome_app_add_dock_item:
  * @app: A &GnomeApp widget
  * @item: Dock item to be added to @app's dock.
  * @placement: Placement for the dock item
