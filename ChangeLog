@@ -1,5 +1,10 @@
 2002-04-17  Federico Mena Quintero  <federico@ximian.com>
 
+	* libgnomeui/gnome-about.c (gnome_about_display_credits_dialog):
+	Add mnemonics to the notebook tab labels.
+
+2002-04-17  Federico Mena Quintero  <federico@ximian.com>
+
 	* libgnomeui/gnome-icon-list.c
 	(gnome_icon_list_set_icon_data_full):
 	s/GtkDestroyNotify/GDestroyNotify.
