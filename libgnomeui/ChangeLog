@@ -1,3 +1,8 @@
+1998-12-16  Yukihiro Nakai <Nakai@abricot.co.jp>
+
+	* Added gtkrc.ja. The original gtkrc is not good for
+	the multi-byte users.
+
 1998-12-16  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-dock-item.c (gnome_dock_item_detach): Set the "transient
