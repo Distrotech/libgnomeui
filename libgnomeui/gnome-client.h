@@ -78,6 +78,14 @@ typedef enum
   GNOME_CLIENT_DISCONNECTED
 } GnomeClientState;
 
+typedef enum
+{
+  GNOME_CLIENT_IS_CONNECTED= 1 << 0,
+  GNOME_CLIENT_RESTARTED   = 1 << 1,
+  GNOME_CLIENT_RESTORED    = 1 << 2
+} GnomeClientFlags;
+
+
 typedef void (*GnomeInteractFunction) (GnomeClient     *client,
 				       gint             key,
 				       GnomeDialogType  dialog_type,
@@ -208,6 +216,23 @@ gchar*       gnome_client_get_global_config_prefix (GnomeClient *client);
    be gathered together into the app.d directory. */
 void         gnome_client_set_global_config_prefix (GnomeClient *client,
 						    gchar* prefix);
+
+/* Returns some flags, that give additional information about this
+   client.  Right now, the following flags are supported:
+  
+   - GNOME_CLIENT_IS_CONNECTED: The client is connected to a session
+     manager (It's the same information like using
+     GNOME_CLIENT_CONNECTED).
+   
+   - GNOME_CLIENT_RESTARTED: The client has been restarted, i. e. it
+     has been running with the same client id before.
+     
+   - GNOME_CLIENT_RESTORED: This flag is only used for the master
+     client.  It indicates, that there may be a configuraion file from
+     which the clients state should be restored (using the
+     gnome_client_get_config_prefix call).  */
+   
+GnomeClientFlags gnome_client_get_flags            (GnomeClient *client);
 
 /* The following functions are used to set or unset the session
    management properties that are used by the session manager to determine 

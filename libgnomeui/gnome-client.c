@@ -107,6 +107,12 @@ static const char *sm_config_prefix_arg_name = "--sm-config-prefix";
 static const char *sm_client_id_prop="SM_CLIENT_ID";
 
 
+/* The master client.  */
+static GnomeClient *master_client= NULL;
+
+static gboolean gnome_client_auto_connect_master = TRUE;
+static gboolean master_client_restored= FALSE;
+
 /*****************************************************************************/
 /* Managing the interaction keys. */
 
@@ -634,6 +640,13 @@ client_save_yourself_callback (SmcConn   smc_conn,
       unlink (name);
       close (fd);
       client->config_prefix = g_strconcat (strrchr (name, '/'), "/", NULL);
+
+      if (client == master_client)
+	{
+	  /* The config prefix has been changed, so it cannot be used
+             anymore to restore a saved session.  */
+	  master_client_restored= FALSE;
+	}
     }
   free (name);
 
@@ -717,12 +730,6 @@ client_interact_callback (SmcConn smc_conn, SmPointer client_data)
 /*****************************************************************************/
 /* Managing the master client */
 
-/* The master client.  */
-static GnomeClient *master_client= NULL;
-static GnomeClient *cloned_client= NULL;
-
-static gboolean gnome_client_auto_connect_master = TRUE;
-
 /* The following environment variables will be set on the master
    client, if they are defined the programs environment.  The array
    must end with a NULL entry.
@@ -790,13 +797,12 @@ client_parse_func (poptContext ctx,
     {
       /* Option: --sm-client-id  */
       gnome_client_set_id (master_client, arg);
-      g_free (master_client->previous_id);
-      master_client->previous_id= g_strdup (arg);
     }
   else if (key == -2)
     {
       /* Option: --sm-config-prefix  */
-      master_client->config_prefix = g_strdup (arg);
+      master_client->config_prefix= g_strdup (arg);
+      master_client_restored= TRUE;    
     }
   else if (key == -3)
     {
@@ -937,6 +943,7 @@ gnome_master_client (void)
 GnomeClient*
 gnome_cloned_client (void)
 {
+  g_warning ("'gnome_cloned_client' is not working as expected anymore.\n");
   return NULL;
 }
 
@@ -1286,14 +1293,14 @@ gnome_client_connect (GnomeClient *client)
   if (GNOME_CLIENT_CONNECTED (client))
     {
       IceConn ice_conn;
-      gint    restarted = FALSE;
+      gint    restarted= FALSE;
 
-      if (client->client_id != NULL)
-	{
-	  restarted = !strcmp (client->client_id, client_id);
-	  g_free (client->client_id);
-	}
-      client->client_id = client_id;
+      g_free (client->previous_id);
+      client->previous_id= client->client_id;
+      client->client_id= client_id;
+      
+      restarted= (client->previous_id && 
+		  !strcmp (client->previous_id, client_id));
       
       /* Lets call 'gnome_process_ice_messages' if new data arrives.  */
       ice_conn = SmcGetIceConnection ((SmcConn) client->smc_conn);
@@ -1330,6 +1337,58 @@ gnome_client_disconnect (GnomeClient *client)
   if (GNOME_CLIENT_CONNECTED (client))
     gtk_signal_emit (GTK_OBJECT (client), client_signals[DISCONNECT]);
 }
+
+/*****************************************************************************/
+
+/**
+ * gnome_client_get_flags:
+ * @client: Pointer to GNOME session client object.
+ * 
+ * Description:
+ *
+ * Returns some flags, that give additional information about this
+ * client.  Right now, the following flags are supported:
+ * 
+ * - GNOME_CLIENT_IS_CONNECTED: The client is connected to a session
+ *   manager (It's the same information like using *
+ *   GNOME_CLIENT_CONNECTED).
+ *  
+ * - GNOME_CLIENT_RESTARTED: The client has been restarted, i. e. it
+ *   has been running with the same client id before.
+ *    
+ * - GNOME_CLIENT_RESTORED: This flag is only used for the master
+ *   client.  It indicates, that there may be a configuraion file from
+ *   which the clients state should be restored (using the
+ *   gnome_client_get_config_prefix call).
+ **/
+   
+GnomeClientFlags
+gnome_client_get_flags (GnomeClient *client)
+{
+  GnomeClientFlags flags= 0;
+  
+  g_return_val_if_fail (client != NULL, 0);
+  g_return_val_if_fail (GNOME_IS_CLIENT (client), 0);
+
+  /* To not break binary compability with existing code, the
+     GnomeClient struct has not been changed.  So the flags have to be
+     calculated every time.  */
+
+  if (GNOME_CLIENT_CONNECTED (client))
+    {
+      flags |= GNOME_CLIENT_IS_CONNECTED;
+
+      if (client->previous_id && 
+	  !strcmp (client->previous_id, client->client_id))
+	flags |= GNOME_CLIENT_RESTARTED;
+      
+      if (master_client_restored && (client == master_client))
+	flags |= GNOME_CLIENT_RESTORED;
+    }
+
+  return flags;
+}
+
 
 /*****************************************************************************/
 
