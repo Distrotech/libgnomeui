@@ -6,7 +6,7 @@ BEGIN_GNOME_DECLS
 
 typedef struct {
 	GtkWidget *notebook;
-
+        GtkWidget *property_box;
 	GList *props;
 } GnomePropertyConfigurator;
 
