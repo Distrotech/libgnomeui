@@ -1,3 +1,7 @@
+Fri Sep 04 17:53:41 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-color-picker.c: initialize use_alpha
+
 1998-09-03  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-font-selector.c (gnome_font_select_with_default): New

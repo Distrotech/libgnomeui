@@ -287,6 +287,7 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 	cp->b = 0.0;
 	cp->a = 1.0;
 	cp->dither = TRUE;
+	cp->use_alpha = FALSE;
 	render (cp);
 }
 
