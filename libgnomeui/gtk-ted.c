@@ -70,7 +70,7 @@ gtk_ted_class_init (GtkTedClass *class)
 	object_class->destroy = gtk_ted_destroy;
 }
 
-GtkWidget *
+static GtkWidget *
 gtk_ted_init (GtkTed *ted)
 {
 	GtkWidget *table;
@@ -164,7 +164,8 @@ gtk_ted_attach (GtkTed *ted, GtkWidget *widget, struct ted_widget_info *wi)
 	
 	if (!GTK_IS_ALIGNMENT (widget)){
 		if (!GTK_IS_ALIGNMENT (widget->parent)){
-			printf ("Mhm this should be an alignemnet\n");
+			g_warning ("Mhm this should be an alignemnet\n");
+			align = NULL;
 		} else
 			align = widget;
 	} else
@@ -263,7 +264,7 @@ gtk_ted_widget_drop (GtkTed *ted, GtkWidget *w, int drop_x, int drop_y)
  * Handle the dragging part of the widget
  */
 static void
-moveme (GtkWidget *w, GdkEvent *event, GtkWidget *widget)
+moveme (GtkWidget *w, GdkEvent *event)
 {
 	GtkWidget *top;
 
@@ -298,7 +299,7 @@ releaseme (GtkWidget *w, GdkEventButton *event, GtkTed *ted)
  * start dragging the widget
  */
 static void
-lift_me (GtkWidget *w, GdkEventButton *event, GtkWidget *target)
+lift_me (GtkWidget *w, GdkEventButton *event)
 {
 	GtkWidget *top;
 
@@ -318,7 +319,7 @@ lift_me (GtkWidget *w, GdkEventButton *event, GtkWidget *target)
  * Connect the signals in the widget for drag and drop.
  */
 static void
-gtk_ted_prepare_editable_widget (struct ted_widget_info *wi, GtkWidget *ted_table, char *name)
+gtk_ted_prepare_editable_widget (struct ted_widget_info *wi, GtkWidget *ted_table)
 {
 	GtkWidget *w = wi->widget;
 	GtkWidget *window;
@@ -929,7 +930,7 @@ gtk_ted_load_label (GtkTed *ted, char *prefix, char *secname)
 	return wi;
 }
 
-void
+static void
 gtk_ted_load_layout (GtkTed *ted, char *layout_file)
 {
 	struct ted_widget_info *wi;
@@ -1322,7 +1323,7 @@ gtk_ted_add (GtkTed *ted, GtkWidget *widget, char *original_name)
 
 	/* Insertions when we are running the GUI should be properly prepared */
 	if (ted->in_gui){
-		gtk_ted_prepare_editable_widget (wi, GTK_WIDGET (ted), name);
+		gtk_ted_prepare_editable_widget (wi, GTK_WIDGET (ted));
 		gtk_ted_widget_control_new (ted, wi->widget, name);
 	}
 	g_free (name);
@@ -1341,7 +1342,7 @@ gtk_ted_prepare_widgets_edit (gpointer key, gpointer value, gpointer user_data)
 	if (wi->widget == 0)
 		return;
 	
-	gtk_ted_prepare_editable_widget (wi, GTK_WIDGET (ted), key);
+	gtk_ted_prepare_editable_widget (wi, GTK_WIDGET (ted));
 	gtk_ted_widget_control_new (ted, wi->widget, key);
 	top_col = wi->start_col + wi->col_span;
 	top_row = wi->start_row + wi->row_span;
@@ -1380,7 +1381,7 @@ gtk_ted_setup_layout (gpointer key, gpointer value, gpointer user_data)
 	ted->top_row = MAX (ted->top_row, wi->start_row + wi->row_span);
 }
 
-void
+static void
 gtk_ted_set_spacings (GtkTed *ted)
 {
 	int i;
