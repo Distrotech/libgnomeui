@@ -1,3 +1,9 @@
+Sat Mar 24 23:55:06 2001  George Lebl <jirka@5z.com>
+
+	* gnome-animator.c: include string.h to fix 64bitness
+
+	* wap-textfu.c: fix a couple of uninitialized warnings
+
 2001-03-24  Martin Baulig  <baulig@suse.de>
 
 	* gnome-boxed.defs (GnomeCanvasPoints): Removed.

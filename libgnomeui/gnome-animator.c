@@ -24,6 +24,7 @@
  */
 
 #include <config.h>
+#include <string.h>
 #include "gnome-macros.h"
 #include <gobject/gparam.h>
 #include <gtk/gtkmain.h>

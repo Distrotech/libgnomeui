@@ -335,7 +335,7 @@ push_pango_para(WapTextFu *textfu)
   int end_offset;
   WapParaStyle *ps;
   gboolean got_ul, got_ol;
-  int bullet_level, bullet_num;
+  int bullet_level = 0, bullet_num = 0;
   int start_offset = 0;
   int first_indent = 0;
   gboolean color_from_link = FALSE;
@@ -504,7 +504,7 @@ push_pango_para(WapTextFu *textfu)
 static WapTextStyle *
 style_change(WapTextFu *textfu, const char *tagname, gboolean begin_new, gboolean ascend_tree, gboolean is_link)
 {
-  WapTextStyle *retval = NULL, *old;
+  WapTextStyle *retval = NULL, *old = NULL;
   GList *cur;
 
   cur = textfu->cur_card->text_style_stack;
@@ -581,7 +581,7 @@ initiate_para(WapTextFu *textfu)
 static WapParaStyle *
 paragraph_division(WapTextFu *textfu, const char *tagname, gboolean begin_new, gboolean ascend_tree)
 {
-  WapParaStyle *retval = NULL, *old;
+  WapParaStyle *retval = NULL, *old = NULL;
   GList *cur;
 
   push_pango_para(textfu);
