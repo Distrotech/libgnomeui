@@ -1,3 +1,10 @@
+Wed Jan 12 15:51:18 2000  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* gnome-about.h: Added rewrite notice
+
+	* gnome-about.c (gnome_about_draw, gnome_about_calc_size):
+	Compile-time option to show/hide URLs
+
 2000-01-12  Iain Holmes  <ih@csd.abdn.ac.uk>
 
 	* gnome-cursors.c: Fixed a typo that meant cursor zoom-in was being

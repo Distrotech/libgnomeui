@@ -3,6 +3,8 @@
  *
  * AUTHOR:
  * Cesar Miquel <miquel@df.uba.ar>
+ * REWRITTEN BY:
+ * Gergõ Érdi <cactus@cactus.rulez.org>
  *
  * DESCRIPTION:
  *	A very specialized widget to display "About this program"-like

@@ -31,17 +31,11 @@
 #include <string.h>
 #include <gtk/gtk.h>
 
-/* FONTS */
-#define HELVETICA_20_BFONT "-adobe-helvetica-bold-r-normal-*-20-*-*-*-*-*-*-*"
-#define HELVETICA_14_BFONT "-adobe-helvetica-bold-r-normal-*-14-*-*-*-*-*-*-*"
-#define HELVETICA_12_BFONT "-adobe-helvetica-bold-r-normal-*-12-*-*-*-*-*-*-*"
-#define HELVETICA_12_FONT  "-adobe-helvetica-medium-r-normal-*-12-*-*-*-*-*-*-*"
-#define HELVETICA_10_FONT  "-adobe-helvetica-medium-r-normal-*-10-*-*-*-*-*-*-*"
-
 #define GNOME_ABOUT_DEFAULT_WIDTH               100
 #define GNOME_ABOUT_MAX_WIDTH                   600
 #define BASE_LINE_SKIP                          0
 
+/* Layout */
 #define GNOME_ABOUT_PADDING_X 1
 #define GNOME_ABOUT_PADDING_Y 1
 
@@ -55,6 +49,9 @@
 #define GNOME_ABOUT_TITLE_PADDING_UP 6
 #define GNOME_ABOUT_TITLE_PADDING_DOWN 7
 
+#define GNOME_ABOUT_TITLE_URL_PADDING_UP 2
+#define GNOME_ABOUT_TITLE_URL_PADDING_DOWN 4
+
 #define GNOME_ABOUT_CONTENT_BACKGROUND 0x76a184ff
 #define GNOME_ABOUT_CONTENT_COLOR 0x000000ff
 #define GNOME_ABOUT_CONTENT_PADDING_X GNOME_ABOUT_TITLE_PADDING_X
@@ -67,8 +64,12 @@
 
 #define GNOME_ABOUT_AUTHORS_PADDING_Y 3
 #define GNOME_ABOUT_AUTHORS_INDENT 10
+#define GNOME_ABOUT_AUTHORS_URL_INDENT 10
 
 #define GNOME_ABOUT_COMMENTS_INDENT 3
+
+/* Options */
+#define GNOME_ABOUT_SHOW_URLS 0
 
 typedef struct
 {
@@ -80,11 +81,13 @@ typedef struct
 	gchar *comments;
 	GdkPixbuf *logo;
 	GdkFont *font_title,
-	  *font_copyright,
-	  *font_author,
-	  *font_names,
-	  *font_comments;
-	gint16 logo_w, logo_h;
+		*font_title_url,
+		*font_copyright,
+		*font_author,
+		*font_names,
+		*font_names_url,
+		*font_comments;
+	gint16 logo_w, logo_h, title_w, title_h;
 	gint16 w, h;
 } GnomeAboutInfo;
 
@@ -171,7 +174,7 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 	x = GNOME_ABOUT_PADDING_X;
 	y = GNOME_ABOUT_PADDING_Y;
 
-	/*Logo */
+	/* Logo */
 	if (ai->logo)
 	{
 		y += GNOME_ABOUT_LOGO_PADDING_Y;
@@ -192,17 +195,13 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 		y += ai->logo_h + GNOME_ABOUT_LOGO_PADDING_Y;
 	}
 
-	/*Draw the title */
+	/* Draw the title */
 	if (ai->title)
 	{
-		/*Title background */
+		/* Title background */
 		x = GNOME_ABOUT_PADDING_X + GNOME_ABOUT_TITLE_PADDING_X;
 		y += GNOME_ABOUT_TITLE_PADDING_Y;
-		h =
-		    (ai->font_title->descent +
-		     GNOME_ABOUT_TITLE_PADDING_DOWN) +
-		    (ai->font_title->ascent +
-		     GNOME_ABOUT_TITLE_PADDING_UP);
+		h = ai->title_h;
 		x2 =
 		    ai->w - (GNOME_ABOUT_TITLE_PADDING_X +
 			     GNOME_ABOUT_PADDING_X) - 1;
@@ -215,30 +214,54 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 				      "y2", y2,
 				      "fill_color_rgba",
 				      GNOME_ABOUT_TITLE_BACKGROUND, NULL);
-		/*Title text */
+		/* Title text */
 		x += ai->w / 2;
 		y += GNOME_ABOUT_TITLE_PADDING_UP;
-		item = gnome_canvas_item_new(root,
-					     gnome_canvas_text_get_type(),
-					     "x", x,
-					     "y", y,
-					     "anchor", GTK_ANCHOR_NORTH,
-					     "fill_color_rgba",
-					     GNOME_ABOUT_TITLE_COLOR,
-					     "text", ai->title, "font_gdk",
-					     ai->font_title, NULL);
+		item = gnome_canvas_item_new(
+			root,
+			gnome_canvas_text_get_type(),
+			"x", x,
+			"y", y,
+			"anchor", GTK_ANCHOR_NORTH,
+			"fill_color_rgba", GNOME_ABOUT_TITLE_COLOR,
+			"text", ai->title,
+			"font_gdk", ai->font_title,
+			NULL);
 		if (ai->url)
 		{
 		    gtk_signal_connect(GTK_OBJECT(item), "event",
 				       (GtkSignalFunc) gnome_about_item_cb, ai);
 		    gtk_object_set_data(GTK_OBJECT(item), "url", ai->url);
 		}
-		y -= GNOME_ABOUT_TITLE_PADDING_UP;
-		y += h + GNOME_ABOUT_TITLE_PADDING_Y;
+		y += ai->font_title->ascent + ai->font_title->descent +
+			GNOME_ABOUT_TITLE_PADDING_DOWN;
+#if GNOME_ABOUT_SHOW_URLS
+		if (ai->url)
+		{
+			y += GNOME_ABOUT_TITLE_URL_PADDING_UP;
+			item = gnome_canvas_item_new(
+				root,
+				gnome_canvas_text_get_type(),
+				"x", x,
+				"y", y,
+				"anchor", GTK_ANCHOR_NORTH,
+				"fill_color_rgba", GNOME_ABOUT_TITLE_COLOR,
+				"text", ai->url,
+				"font_gdk", ai->font_title_url,
+				NULL);
+			gtk_signal_connect(GTK_OBJECT(item), "event",
+					   (GtkSignalFunc)gnome_about_item_cb, ai);
+			gtk_object_set_data(GTK_OBJECT(item), "url", ai->url);
+			y += ai->font_title_url->ascent +
+				ai->font_title->descent +
+				GNOME_ABOUT_TITLE_URL_PADDING_DOWN;
+		}
+#endif /* GNOME_ABOUT_SHOW_URLS */
 		x = GNOME_ABOUT_PADDING_X;
+		y += GNOME_ABOUT_TITLE_PADDING_Y;
 	}
 
-	/*Contents */
+	/* Contents */
 	if (ai->copyright || ai->names || ai->comments)
 	{
 		x = GNOME_ABOUT_PADDING_X + GNOME_ABOUT_CONTENT_PADDING_X;
@@ -258,7 +281,7 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 				      NULL);
 	}
 
-	/*Copyright message */
+	/* Copyright message */
 	if (ai->copyright)
 	{
 		x = GNOME_ABOUT_PADDING_X +
@@ -275,7 +298,7 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 		    GNOME_ABOUT_COPYRIGHT_PADDING_DOWN;
 	}
 
-	/*Authors list */
+	/* Authors list */
 	if (ai->names)
 	{
 		y += GNOME_ABOUT_CONTENT_SPACING;
@@ -301,13 +324,24 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 		h = ai->font_names->descent + ai->font_names->ascent;
 		item = DRAW_TEXT(x, y, GNOME_ABOUT_CONTENT_COLOR,
 				 ai->font_names, ((char *) name->data));
+		y += h + BASE_LINE_SKIP;
 		if (name_url->data)
 		{
 		    gtk_signal_connect(GTK_OBJECT(item), "event",
 				       (GtkSignalFunc) gnome_about_item_cb, ai);
 		    gtk_object_set_data(GTK_OBJECT(item), "url", (char*)name_url->data);
+#if GNOME_ABOUT_SHOW_URLS
+		    x += GNOME_ABOUT_AUTHORS_URL_INDENT;
+		    h = ai->font_names_url->descent + ai->font_names->ascent;
+		    item = DRAW_TEXT(x, y, GNOME_ABOUT_CONTENT_COLOR,
+				     ai->font_names_url, ((char *)name_url->data));
+		    y += h + BASE_LINE_SKIP;
+		    gtk_signal_connect(GTK_OBJECT(item), "event",
+				       (GtkSignalFunc) gnome_about_item_cb, ai);
+		    gtk_object_set_data(GTK_OBJECT(item), "url", (char*)name_url->data);
+		    x -= GNOME_ABOUT_AUTHORS_URL_INDENT;
+#endif
 		}
-		y += h;
 		name = name->next;
 		name_url = name_url->next;
 	    }
@@ -319,7 +353,7 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 		h = ai->font_names->descent + ai->font_names->ascent;
 		item = DRAW_TEXT(x, y, GNOME_ABOUT_CONTENT_COLOR,
 				 ai->font_names, ((char *) name->data));
-		y += h;
+		y += h + BASE_LINE_SKIP;
 		name = name->next;
 	    }
 	}
@@ -456,14 +490,18 @@ gnome_about_display_comments (GnomeCanvasGroup *group,
 
 /* ----------------------------------------------------------------------
    NAME:	gnome_about_calc_size
-   DESCRIPTION:	Calculates size of window WITHOUT counting pixmap. 
+   DESCRIPTION:	Calculates size of window
    ---------------------------------------------------------------------- */
 
 static void
 gnome_about_calc_size (GnomeAboutInfo *ai)
 {
 	GList *name;
-	gint num_pars, i, h, w, len[4], tmpl, pw;
+#if GNOME_ABOUT_SHOW_URLS
+	GList *urls = NULL;
+#endif /* GNOME_ABOUT_SHOW_URLS */
+	gint num_pars, i, h, w, len[5], tmpl, pw;
+	gint title_h;
 	const gchar *p;
 	gfloat maxlen;
 
@@ -471,25 +509,40 @@ gnome_about_calc_size (GnomeAboutInfo *ai)
 	h = GNOME_ABOUT_PADDING_Y;
 
 	pw = 0; /* Maximum of title and content padding */
-	
+
+	len[0] = 0;
+	len[1] = 0;
+	title_h = 0;
 	if (ai->title)
 	{
 		h += GNOME_ABOUT_TITLE_PADDING_Y;
 		len[0] = gdk_string_measure (ai->font_title,
 					     ai->title);
-		h += (ai->font_title->descent + GNOME_ABOUT_TITLE_PADDING_DOWN) +
-			(ai->font_title->ascent + GNOME_ABOUT_TITLE_PADDING_UP) +
-			GNOME_ABOUT_TITLE_PADDING_Y;
+		title_h += (ai->font_title->descent + GNOME_ABOUT_TITLE_PADDING_DOWN) +
+			(ai->font_title->ascent + GNOME_ABOUT_TITLE_PADDING_UP);
+		h += GNOME_ABOUT_TITLE_PADDING_Y;
 		pw = GNOME_ABOUT_TITLE_PADDING_X;
+#if GNOME_ABOUT_SHOW_URLS
+		if (ai->url)
+		{
+			title_h += ai->font_title_url->ascent +
+				GNOME_ABOUT_TITLE_URL_PADDING_UP +
+				ai->font_title_url->descent +
+				GNOME_ABOUT_TITLE_URL_PADDING_DOWN;
+			len[1] = gdk_string_measure (ai->font_title_url, ai->url);
+		}
+#endif /* GNOME_ABOUT_SHOW_URLS */
 	}
-	else
-		len[0] = 0;
+	ai->title_h = title_h;
+	h += title_h;
 
 	if (ai->copyright || ai->names || ai->comments)
 	{
 		h += 2 * GNOME_ABOUT_CONTENT_PADDING_Y;
 		pw = MAX(pw, GNOME_ABOUT_CONTENT_PADDING_X);
 	}
+
+	len[2] = 0;
 	if (ai->copyright)
 	{
 		h += ai->font_copyright->descent +
@@ -497,38 +550,53 @@ gnome_about_calc_size (GnomeAboutInfo *ai)
 			GNOME_ABOUT_COPYRIGHT_PADDING_UP +
 			GNOME_ABOUT_COPYRIGHT_PADDING_DOWN +
 			GNOME_ABOUT_CONTENT_SPACING;
-		len[1] = gdk_string_measure (ai->font_copyright, ai->copyright);
+		len[2] = gdk_string_measure (ai->font_copyright, ai->copyright);
 	}
-	else
-		len[1] = 0;
 
-	len[2] = 0;
+	len[3] = 0;
+	len[4] = 0;
 	if (ai->names)
 	{
 		name = g_list_first (ai->names);
+#if GNOME_ABOUT_SHOW_URLS
+		if (ai->author_urls)
+			urls = g_list_first (ai->author_urls);
+#endif
 		while (name)
 		{
 			tmpl = gdk_string_measure (ai->font_names, name->data);
-			if (tmpl > len[2])
-				len[2] = tmpl;
+			if (tmpl > len[3])
+				len[3] = tmpl;
+			h += (ai->font_names->descent +
+			      ai->font_names->ascent) + BASE_LINE_SKIP;
+#if GNOME_ABOUT_SHOW_URLS
+			if (urls)
+			{
+				if (urls->data)
+				{
+				    tmpl = gdk_string_measure (ai->font_names_url, urls->data);
+				    if (tmpl > len[4])
+					len[4] = tmpl;
+				    h += (ai->font_names_url->descent +
+					  ai->font_names_url->ascent) + BASE_LINE_SKIP;
+				}
+				urls = urls->next;
+			}
+#endif
 			name = name->next;
 		}
 		tmpl = gdk_string_measure (ai->font_names, _("Authors: "));
-		len[2] += tmpl +
+		len[3] += tmpl +
 			GNOME_ABOUT_PADDING_X +
 			GNOME_ABOUT_CONTENT_PADDING_X +
 			GNOME_ABOUT_CONTENT_INDENT +
 			GNOME_ABOUT_AUTHORS_INDENT;
-		h += g_list_length(ai->names) *
-			(ai->font_names->descent +
-			 ai->font_names->ascent +
-			 BASE_LINE_SKIP) +
-			GNOME_ABOUT_AUTHORS_PADDING_Y +
+		h += GNOME_ABOUT_AUTHORS_PADDING_Y +
 			GNOME_ABOUT_CONTENT_SPACING;
 	}
 
 	maxlen = (gfloat) w;
-	for (i = 0; i < 3; i++)
+	for (i = 0; i < 5; i++)
 		if (len[i] > maxlen)
 			maxlen = (gfloat) len[i];
 	
@@ -620,6 +688,9 @@ gnome_about_fill_info (GtkWidget *widget,
 	gtk_widget_set_name (widget, "Title");
 	ai->font_title = gdk_font_ref (widget->style->font);
 
+	gtk_widget_set_name (widget, "TitleUrl");
+	ai->font_title_url = gdk_font_ref (widget->style->font);
+	
 	gtk_widget_set_name (widget, "Copyright");
 	ai->font_copyright = gdk_font_ref (widget->style->font);
 
@@ -629,6 +700,9 @@ gnome_about_fill_info (GtkWidget *widget,
 	gtk_widget_set_name (widget, "Names");
 	ai->font_names = gdk_font_ref (widget->style->font);
 
+	gtk_widget_set_name (widget, "NamesUrl");
+	ai->font_names_url = gdk_font_ref (widget->style->font);
+	
 	gtk_widget_set_name (widget, "Comments");
 	ai->font_comments = gdk_font_ref (widget->style->font);
 
