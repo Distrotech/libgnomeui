@@ -612,7 +612,7 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
-"\"%s\-ə yetişə bilmək üçün giriş etməlisiniz\".\n"
+"\"%sə yetişə bilmək üçün giriş etməlisiniz\".\n"
 "%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64

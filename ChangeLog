@@ -1,3 +1,7 @@
+2003-06-25  Thomas Vander Stichele <thomas at apestaart dot org>
+
+        * po/az.po: removed \- which was causing msgfmt to break
+
 2003-06-15  Anders Carlsson  <andersca@codefactory.se>
 
 	* libgnomeui/gnome-icon-theme.c: (load_themes),
