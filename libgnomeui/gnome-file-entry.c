@@ -602,7 +602,7 @@ browse_clicked(GnomeFileEntry *fentry)
 							   ? fentry->_priv->browse_dialog_title
 							   : _("Select file"),
 							   NULL,
-							   GTK_FILE_CHOOSER_ACTION_OPEN,
+							   action,
 							   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 							   GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 							   NULL);
