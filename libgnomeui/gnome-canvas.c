@@ -1962,10 +1962,12 @@ gnome_canvas_group_bounds (GnomeCanvasItem *item, double *x1, double *y1, double
 	list = list->next;
 
 	for (; list; list = list->next) {
+		child = list->data;
+
 		if (!(child->object.flags & GNOME_CANVAS_ITEM_VISIBLE))
 			continue;
 
-		gnome_canvas_item_get_bounds (list->data, &tx1, &ty1, &tx2, &ty2);
+		gnome_canvas_item_get_bounds (child, &tx1, &ty1, &tx2, &ty2);
 
 		if (tx1 < minx)
 			minx = tx1;
