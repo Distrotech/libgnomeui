@@ -72,7 +72,7 @@ main (int argc, char **argv)
 
   app = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (app), "Test!");
-  gtk_widget_set_usize (GTK_WIDGET (app), 400, 400);
+  gtk_window_set_default_size (GTK_WINDOW (app), 400, 400);
 
   dock = gnome_dock_new ();
   gtk_container_add (GTK_CONTAINER (app), dock);
@@ -107,12 +107,12 @@ main (int argc, char **argv)
         gnome_dock_add_item (GNOME_DOCK (dock),
                              dock_items[i],
                              GNOME_DOCK_POS_TOP,
-                             i, 0, 0);
+                             i, 0, 0, TRUE);
       else
         gnome_dock_add_item (GNOME_DOCK (dock),
                              dock_items[i],
                              GNOME_DOCK_POS_BOTTOM,
-                             i - 4, 0, 0);
+                             i - 4, 0, 0, TRUE);
 
       gtk_widget_show (toolbars[i]);
       gtk_widget_show (dock_items[i]);
