@@ -206,6 +206,8 @@ append_an_icon(GnomeIconSelection * gis, const gchar * path)
 	
 	im = gdk_imlib_clone_scaled_image(iml,w,h);
 	gdk_imlib_destroy_image(iml);
+	if(!im)
+		return;
 	
 	pos = gnome_icon_list_append_imlib(GNOME_ICON_LIST(gis->gil),im,
 					   g_basename(path));

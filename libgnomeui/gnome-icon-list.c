@@ -747,6 +747,7 @@ gnome_icon_list_insert_imlib (GnomeIconList *gil, int pos, GdkImlibImage *im, co
 
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
+	g_return_if_fail (im != NULL);
 
 	icon = icon_new_from_imlib (gil, im, text);
 	icon_list_insert (gil, pos, icon);
@@ -793,6 +794,7 @@ gnome_icon_list_append_imlib (GnomeIconList *gil, GdkImlibImage *im, char *text)
 
 	g_return_val_if_fail (gil != NULL, -1);
 	g_return_val_if_fail (IS_GIL (gil), -1);
+	g_return_val_if_fail (im != NULL, -1);
 
 	icon = icon_new_from_imlib (gil, im, text);
 	return icon_list_append (gil, icon);
