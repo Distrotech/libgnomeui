@@ -1,5 +1,11 @@
 2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-file-entry.c: Fix the file entry
+	to use utf8 when setting the selected file name to the
+	gtk_entry. Patch from Hidetoshi Tajima. bug #110500.
+	
+2003-05-24  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-icon-entry.c: Fix a crash when
 	doing some crazy stuff with the icon entry. Fixes
 	bug #106298. Patch from Balamurali Viswanathan.
