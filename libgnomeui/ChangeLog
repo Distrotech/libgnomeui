@@ -1,3 +1,10 @@
+2000-01-18  ERDI Gergo  <cactus@cactus.rulez.org>
+
+	* gnome-about.c (gnome_about_item_cb): Changed URL underlining
+	code to match the the color of the text
+	(gnome_about_fill_info, gnome_about_parse_name): author name
+	parsing to get clickable e-mails (idea by Iain Holmes)
+
 Tue Jan 18 00:56:46 2000  George Lebl <jirka@5z.com>
 
 	* gnome-pixmap.[ch]: fixup the pixmap entry to actually not even
