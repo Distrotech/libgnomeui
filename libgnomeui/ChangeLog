@@ -1,3 +1,26 @@
+1999-10-25  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.h, gnome-pixmap.c: Rewrite. Now supports a
+	different pixmap for every state, so we can migrate this
+	functionality out of GnomeStock. Also, uses gdk-pixbuf instead of
+	Imlib, and on Owen's recommendation does not use a shaped window.
+	Also, now derives from GtkMisc so you can set alignment, etc.
+	Compat functions not yet in place. Doesn't compile either,
+	untested and depends on some nonexistent GdkPixbuf stuff.
+	
+	* gnome-stock.c: Delete all the stuff that wasn't being compiled 
+	due to the USE_NEW_GNOME_STOCK #define
+
+	* gnome-stock.h: Don't define USE_NEW_GNOME_STOCK, unconditionally
+	compile the new stuff, delete the old stuff. 
+	Move all GNOME_STOCK_* string constant macros to gnome-stock-ids.h
+	Delete large comment at the top, it was outdated.
+	Delete Imlib entry types (need compat for these)
+	Make xpm_data in the XPM entry type const 
+	Delete all the regular/disabled/focus fields in GnomeStock widget
+	
+	* gnome-stock-ids.h: New file to unclutter gnome-stock.h
+	
 1999-10-10  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-less.c: Remove the stupid popup menu, breaks binary

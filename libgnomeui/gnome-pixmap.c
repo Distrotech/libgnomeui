@@ -1,39 +1,24 @@
-/* GNOME GUI Library
- * Copyright (C) 1997, 1998 the Free Software Foundation
+/* GNOME GUI Library, second iteration of GnomePixmap
+ * Copyright (C) 1997, 1998, 1999 the Free Software Foundation
  *
- * Authors: Miguel de Icaza
- *          Federico Mena
+ * 
+ * GnomePixmap v2: Havoc Pennington
  */
 
 #include <config.h>
-
-#if 0
-#include <X11/Xlib.h>
-#include <gdk/gdkx.h>
-#endif
-#include "libgnome/gnome-defs.h"
-#include <gtk/gtk.h>                  /* These two includes should be remove once everyting */
-#include "libgnome/libgnomeP.h"        /* is switched to use the GnomePixmap widget.         */
 #include "gnome-pixmap.h"
-#include <gdk-pixbuf.h>
-
 
 static void gnome_pixmap_class_init    (GnomePixmapClass *class);
 static void gnome_pixmap_init          (GnomePixmap      *gpixmap);
 static void gnome_pixmap_destroy       (GtkObject        *object);
-static void gnome_pixmap_realize       (GtkWidget        *widget);
-static void gnome_pixmap_size_request  (GtkWidget        *widget,
-					GtkRequisition   *requisition);
-static void gnome_pixmap_size_allocate (GtkWidget        *widget,
-					GtkAllocation    *allocation);
-static void gnome_pixmap_draw          (GtkWidget        *widget,
-					GdkRectangle     *area);
 static gint gnome_pixmap_expose        (GtkWidget        *widget,
 					GdkEventExpose   *event);
-static void setup_window_and_style     (GnomePixmap *gpixmap);
 
+static void clear_old_images           (GnomePixmap *gpixmap);
+static void build_insensitive_pixbuf      (GnomePixmap *gpixmap);
+static void build_insensitive_pixmap      (GnomePixmap *gpixmap);
 
-static GtkWidgetClass *parent_class;
+static GtkMiscClass *parent_class;
 
 /**
  * gnome_pixmap_get_type:
@@ -65,8 +50,48 @@ gnome_pixmap_get_type (void)
 static void
 gnome_pixmap_init (GnomePixmap *gpixmap)
 {
-	gpixmap->pixmap = NULL;
-	gpixmap->mask = NULL;
+        guint i;
+        
+        /* Default to pixmap mode, store data on
+           server */
+        gpixmap->flags = GNOME_PIXMAP_USE_PIXMAP | GNOME_PIXMAP_BUILD_INSENSITIVE;
+
+        i = 0;
+        while (i < 5) {
+                gpixmap->image_data[i].pixbuf = NULL;
+                gpixmap->image_data[i].pixmap = NULL;
+                gpixmap->image_data[i].mask = NULL;
+
+                ++i;
+        }
+}
+
+GtkWidget*
+gnome_pixmap_new(GnomePixmapMode mode)
+{
+        GtkWidget* widget;
+        GnomePixmap* gpixmap;
+
+        widget = gtk_type_new(gnome_pixmap_get_type());
+        gpixmap = GNOME_PIXMAP(widget);
+        
+        switch (mode) {
+        case GNOME_PIXMAP_KEEP_PIXMAP:
+                gpixmap->flags &= ~GNOME_PIXMAP_USE_PIXBUF;
+                gpixmap->flags |= GNOME_PIXMAP_USE_PIXMAP;
+                break;
+
+        case GNOME_PIXMAP_KEEP_PIXBUF:
+                gpixmap->flags &= ~GNOME_PIXMAP_USE_PIXMAP;
+                gpixmap->flags |= GNOME_PIXMAP_USE_PIXBUF;
+                break;
+
+        default:
+                g_warning("Invalid GnomePixmap mode");
+                break;
+        }
+
+        return widget;
 }
 
 static void
@@ -78,497 +103,179 @@ gnome_pixmap_class_init (GnomePixmapClass *class)
 	object_class = (GtkObjectClass *) class;
 	widget_class = (GtkWidgetClass *) class;
 
-	parent_class = gtk_type_class (gtk_widget_get_type ());
+	parent_class = gtk_type_class (gtk_misc_get_type ());
 
-	widget_class->realize = gnome_pixmap_realize;
-	widget_class->size_request = gnome_pixmap_size_request;
-	widget_class->size_allocate = gnome_pixmap_size_allocate;
-	widget_class->draw = gnome_pixmap_draw;
 	widget_class->expose_event = gnome_pixmap_expose;
 
 	object_class->destroy = gnome_pixmap_destroy;
 }
 
 static void
-free_pixmap_and_mask (GnomePixmap *gpixmap)
-{
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-
-	if (gpixmap->pixmap) {
-		gdk_pixmap_unref (gpixmap->pixmap);
-		gpixmap->pixmap = NULL;
-	}
-
-	if (gpixmap->mask) {
-		gdk_pixmap_unref (gpixmap->mask);
-		gpixmap->mask = NULL;
-	}
-}
-
-static void
 gnome_pixmap_destroy (GtkObject *object)
 {
 	GnomePixmap *gpixmap;
-
+        
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (object));
 
 	gpixmap = GNOME_PIXMAP (object);
 
-	free_pixmap_and_mask (gpixmap);
-
+        clear_old_images(gpixmap);
+        
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
-/**
- * gnome_pixmap_new_from_file:
- * @filename: The name of a file containing a graphics image
- *
- * Description: Returns a widget that contains the image, or %NULL
- * if it fails to load the image.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_file (const char *filename)
-{
-	GnomePixmap *gpixmap;
-
-	g_return_val_if_fail(filename != NULL, NULL);
-
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_file (gpixmap, filename);
-
-	return GTK_WIDGET (gpixmap);
-}
-
-/**
- * gnome_pixmap_new_from_file_at_size:
- * @filename: The name of a file containing a graphics image
- * @width: desired width
- * @height: desired height.
- *
- * Description: Returns a widget that contains the image scaled to
- * @width by @height pixels, or %NULL if it fails to load the image.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_file_at_size (const char *filename, int width, int height)
-{
-	GnomePixmap *gpixmap;
-
-	g_return_val_if_fail(filename != NULL, NULL);
-
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_file_at_size (gpixmap, filename, width, height);
-
-	return GTK_WIDGET (gpixmap);
-}
-
-/**
- * gnome_pixmap_new_from_xpm_d:
- * @xpm_data: A pointer to an inlined xpm image.
- *
- * Description: Returns a widget that contains the image, or %NULL
- * if it fails to load the image.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_xpm_d (char **xpm_data)
-{
-	GnomePixmap *gpixmap;
-
-	g_return_val_if_fail(xpm_data != NULL, NULL);
-
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_xpm_d (gpixmap, xpm_data);
-
-	return GTK_WIDGET (gpixmap);
-}
-
-/**
- * gnome_pixmap_new_from_xpm_d_at_size:
- * @xpm_data: A pointer to an inlined xpm image.
- * @width: desired widht
- * @height: desired height.
- *
- * Description: Returns a widget that contains the image scaled to
- * @width by @height pixels, or %NULL if it fails to load the image.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_xpm_d_at_size (char **xpm_data, int width, int height)
-{
-	GnomePixmap *gpixmap;
-
-	g_return_val_if_fail(xpm_data != NULL, NULL);
-
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_xpm_d_at_size (gpixmap, xpm_data, width, height);
-
-	return GTK_WIDGET (gpixmap);
-}
-
-/**
- * gnome_pixmap_new_from_rgb_d:
- * @data: A pointer to an inlined rgb image.
- *
- * Description: Returns a widget that contains the image, or %NULL
- * if it fails to load the image.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_rgb_d (unsigned char *data, unsigned char *alpha,
-			     int rgb_width, int rgb_height)
-{
-	GnomePixmap *gpixmap;
-
-	g_return_val_if_fail(data != NULL, NULL);
-
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_rgb_d (gpixmap, data, alpha,
-				 rgb_width, rgb_height);
-
-	return GTK_WIDGET (gpixmap);
-}
-
-/**
- * gnome_pixmap_new_from_rgb_d_shaped:
- * @data: A pointer to an inlined rgb image
- * @alpha: pointer to the alpha channel.
- * @rgb_width: width of the rgb data
- * @rgb_height: height of the rgb data.
- * @shape_color: which color encodes the transparency
- *
- * Description: Returns a widget that contains the image, or %NULL
- * if it fails to load the image.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_rgb_d_shaped (unsigned char *data, unsigned char *alpha,
-				    int rgb_width, int rgb_height,
-				    GdkColor *shape_color)
-{
-	GnomePixmap *gpixmap;
-
-	g_return_val_if_fail(data != NULL, NULL);
-
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_rgb_d_shaped (gpixmap, data, alpha,
-					rgb_width, rgb_height,
-					shape_color);
-
-	return GTK_WIDGET (gpixmap);
-}
-
-/**
- * gnome_pixmap_new_from_rgb_d_at_size:
- * @data: A pointer to an inlined rgb image.
- * @alpha:
- * @rgb_width: the width of the rgb image.
- * @rgb_height: the height of the rgb image.
- * @width: desired width.
- * @height: desired height.
- *
- * Description: Returns a widget that contains the image scaled to
- * @width by @height pixels, or %NULL if it fails to load the image.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_rgb_d_at_size (unsigned char *data, unsigned char *alpha,
-				     int rgb_width, int rgb_height,
-				     int width, int height)
-{
-	GnomePixmap *gpixmap;
-
-	g_return_val_if_fail(data != NULL, NULL);
-
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_rgb_d_at_size (gpixmap, data, alpha,
-                                         rgb_width, rgb_height,
-                                         width, height);
-
-	return GTK_WIDGET (gpixmap);
-}
-
-/**
- * gnome_pixmap_new_from_rgb_d_shaped_at_size:
- * @data: A pointer to an inlined rgb image
- * @alpha: pointer to the alpha channel.
- * @rgb_width: width of the rgb data
- * @rgb_height: height of the rgb data.
- * @shape_color: which color encodes the transparency
- * @width: desired width.
- * @height: desired height.
- *
- * Description: Returns a widget that contains the image scaled to
- * @width by @height pixels, or %NULL if it fails to load the image.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_rgb_d_shaped_at_size (unsigned char *data,
-					    unsigned char *alpha,
-					    int rgb_width, int rgb_height,
-					    int width, int height,
-					    GdkColor *shape_color)
-{
-	GnomePixmap *gpixmap;
-
-	g_return_val_if_fail(data != NULL, NULL);
-
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_rgb_d_shaped_at_size (gpixmap, data, alpha,
-						rgb_width, rgb_height,
-						width, height,
-						shape_color);
-
-	return GTK_WIDGET (gpixmap);
-}
-
-/**
- * gnome_pixmap_new_from_gnome_pixmap:
- * @gpixmap_old: Another GnomePixmap widget
- *
- * Description: Returns a widget that contains a copy of @gpixmap_old
- *
- * Returns: A new #GnomePixmap widget
- */
-GtkWidget *
-gnome_pixmap_new_from_gnome_pixmap (GnomePixmap *gpixmap_old)
-{
-	GnomePixmap *gpixmap;
-	GtkRequisition req;
-	GdkVisual *visual;
-	GdkGC *gc;
-
-	g_return_val_if_fail(gpixmap_old != NULL, NULL);
-	g_return_val_if_fail(GNOME_IS_PIXMAP(gpixmap_old), NULL);
-
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gtk_widget_size_request (GTK_WIDGET(gpixmap_old), &req);
-	if (GTK_WIDGET(gpixmap_old)->window)
-		visual = gdk_window_get_visual (GTK_WIDGET(gpixmap_old)->window);
-	else
-		visual = gdk_rgb_get_visual();
-	gpixmap->pixmap = gdk_pixmap_new (gpixmap_old->pixmap,
-					  req.width, req.height,
-					  visual->depth);
-	gc = gdk_gc_new (gpixmap->pixmap);
-	gdk_draw_pixmap (gpixmap->pixmap, gc, gpixmap_old->pixmap, 0, 0, 0, 0,
-			 req.width, req.height);
-	gdk_gc_destroy (gc);
-	gpixmap->mask = gdk_pixmap_new (gpixmap_old->mask,
-					req.width, req.height, 1);
-	gc = gdk_gc_new (gpixmap->mask);
-	gdk_draw_pixmap (gpixmap->mask, gc, gpixmap_old->mask, 0, 0, 0, 0,
-			 req.width, req.height);
-	gdk_gc_destroy (gc);
-
-	return GTK_WIDGET (gpixmap);
-}
-
 static void
-setup_window_and_style (GnomePixmap *gpixmap)
+paint_with_pixbuf (GnomePixmap *gpixmap, GdkRectangle *area)
 {
-	GdkWindowAttr attributes;
-	gint attributes_mask;
 	GtkWidget *widget;
-	gint w, h;
-	GdkVisual *imvisual;
-	GdkColormap *imcolormap;
-	GdkVisual *visual;
-	GdkColormap *colormap;
+        GdkPixbuf *draw_source;
+        GdkBitmap *draw_mask;
+        
+        widget = GTK_WIDGET(gpixmap);
 
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
+        g_return_if_fail(GTK_WIDGET_DRAWABLE(gpixmap));
 
-	widget = GTK_WIDGET (gpixmap);
+        draw_source = gpixmap->image_data[GTK_WIDGET_STATE(widget)].pixbuf;
+        draw_mask = gpixmap->image_data[GTK_WIDGET_STATE(widget)].mask;
+        
+        if (draw_source == NULL &&
+            GTK_WIDGET_STATE(widget) == GTK_STATE_INSENSITIVE &&
+            (gpixmap->flags & GNOME_PIXMAP_BUILD_INSENSITIVE)) {
+          /* Demand-create the insensitive pixmap if we are insensitive
+           * and the build_insensitive flag is turned on
+           */
+          
+                build_insensitive_pixbuf(gpixmap);
+                
+                draw_source = gpixmap->image_data[GTK_STATE_INSENSITIVE].pixbuf;
+                draw_mask = gpixmap->image_data[GTK_STATE_INSENSITIVE].mask;
+        }
+        
+        if (draw_source == NULL) {
+                /* Try normal, if the other state isn't set */
+                draw_source = gpixmap->image_data[GTK_STATE_NORMAL].pixbuf;
+                draw_mask = gpixmap->image_data[GTK_STATE_NORMAL].mask;
+        }
 
-	if (widget->window)
-		gdk_window_unref (widget->window);
-#if 0
-	/* FIXME: do we have to detach the style?  Does it matter if we change the window? */
-	if (widget->style)
-		gtk_style_detach (widget->style);
-#endif
-	if (gpixmap->pixmap) {
-		gdk_window_get_size (gpixmap->pixmap, &w, &h);
-	} else {
-		w = h = 0;
-	}
-	imvisual = gdk_rgb_get_visual ();
-	imcolormap = gdk_rgb_get_cmap ();
-	visual = gtk_widget_get_visual (widget);
-	colormap = gtk_widget_get_colormap (widget);
-	if(GDK_VISUAL_XVISUAL(imvisual)->visualid !=
-	   GDK_VISUAL_XVISUAL(visual)->visualid) {
-		GTK_WIDGET_UNSET_FLAGS (widget, GTK_NO_WINDOW);
-		attributes.window_type = GDK_WINDOW_CHILD;
-		attributes.x = widget->allocation.x + (widget->allocation.width - w) / 2;
-		attributes.y = widget->allocation.y + (widget->allocation.height - h) / 2;
-		attributes.width = w;
-		attributes.height = h;
-		attributes.wclass = GDK_INPUT_OUTPUT;
-		attributes.visual = gpixmap->pixmap?imvisual:visual;
-		attributes.colormap = gpixmap->pixmap?imcolormap:colormap;
-		attributes.event_mask = (gtk_widget_get_events (widget)
-					 | GDK_EXPOSURE_MASK);
+        if (draw_source != NULL) {
+                /* Draw the image */                
+                gint x, y;
+          
+                x = (widget->allocation.x * (1.0 - misc->xalign) +
+                     (widget->allocation.x + widget->allocation.width
+                      - (widget->requisition.width - misc->xpad * 2)) *
+                     misc->xalign) + 0.5;
+                y = (widget->allocation.y * (1.0 - misc->yalign) +
+                     (widget->allocation.y + widget->allocation.height
+                      - (widget->requisition.height - misc->ypad * 2)) *
+                     misc->yalign) + 0.5;
+                
+                if (draw_mask) {
+                        gdk_gc_set_clip_mask (widget->style->black_gc, draw_mask);
+                        gdk_gc_set_clip_origin (widget->style->black_gc, x, y);
+                }
 
-		attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
+                /* FIXME draw the pixbuf */
 
-		widget->window = gdk_window_new (gtk_widget_get_parent_window (widget),
-						 &attributes, attributes_mask);
-		gdk_window_set_user_data (widget->window, widget);
-
-		if (gpixmap->mask)
-			gtk_widget_shape_combine_mask (widget, gpixmap->mask, 0, 0);
-	} else {
-		GTK_WIDGET_SET_FLAGS (widget, GTK_NO_WINDOW);
-		if (widget->parent) {
-			widget->window = gtk_widget_get_parent_window (widget);
-			gdk_window_ref (widget->window);
-		}
-	}
-
-	widget->style = gtk_style_attach (widget->style, widget->window);
-	gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);
+                if (draw_mask) {
+                        gdk_gc_set_clip_mask (widget->style->black_gc, NULL);
+                        gdk_gc_set_clip_origin (widget->style->black_gc, 0, 0);
+                }
+                
+        } else {
+                /* Draw nothing */
+                g_warning("GnomePixmap expose received, but our requisition should have been 0,0");
+        }
 }
 
 static void
-gnome_pixmap_realize (GtkWidget *widget)
+paint_with_pixmap (GnomePixmap *gpixmap, GdkRectangle *area)
 {
-	GnomePixmap *gpixmap;
+	GtkWidget *widget;
+        GdkPixmap *draw_source;
+        GdkBitmap *draw_mask;
+        
+        widget = GTK_WIDGET(gpixmap);
+        misc = GTK_MISC (widget);
+        
+        g_return_if_fail(GTK_WIDGET_DRAWABLE(gpixmap));
 
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (widget));
+        draw_source = gpixmap->image_data[GTK_WIDGET_STATE(widget)].pixmap;
+        draw_mask = gpixmap->image_data[GTK_WIDGET_STATE(widget)].mask;
 
-	gpixmap = GNOME_PIXMAP (widget);
-	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
+        if (draw_source == NULL &&
+            GTK_WIDGET_STATE(widget) == GTK_STATE_INSENSITIVE &&
+            (gpixmap->flags & GNOME_PIXMAP_BUILD_INSENSITIVE)) {
+          /* Demand-create the insensitive pixmap if we are insensitive
+           * and the build_insensitive flag is turned on
+           */
+                build_insensitive_pixmap(gpixmap);
+                
+                draw_source = gpixmap->image_data[GTK_STATE_INSENSITIVE].pixmap;
+                draw_mask = gpixmap->image_data[GTK_STATE_INSENSITIVE].mask;
+        }
+        
+        if (draw_source == NULL) {
+                /* fall back to normal, if no special case */
+                draw_source = gpixmap->image_data[GTK_STATE_NORMAL].pixmap;
+                draw_mask = gpixmap->image_data[GTK_STATE_NORMAL].mask;
+        }
 
-	setup_window_and_style (gpixmap);
-}
+        if (draw_source != NULL) {
+                /* Draw the image */
+                gint x, y;
+          
+                x = (widget->allocation.x * (1.0 - misc->xalign) +
+                     (widget->allocation.x + widget->allocation.width
+                      - (widget->requisition.width - misc->xpad * 2)) *
+                     misc->xalign) + 0.5;
+                y = (widget->allocation.y * (1.0 - misc->yalign) +
+                     (widget->allocation.y + widget->allocation.height
+                      - (widget->requisition.height - misc->ypad * 2)) *
+                     misc->yalign) + 0.5;
+                
+                if (draw_mask) {
+                        gdk_gc_set_clip_mask (widget->style->black_gc, draw_mask);
+                        gdk_gc_set_clip_origin (widget->style->black_gc, x, y);
+                }
 
-static void
-gnome_pixmap_size_request (GtkWidget *widget, GtkRequisition *requisition)
-{
-	GnomePixmap *gpixmap;
-	gint w, h;
+                /* FIXME we are always redrawing the whole thing */
+                gdk_draw_pixmap (widget->window,
+                                 widget->style->black_gc,
+                                 draw_source,
+                                 0, 0,
+                                 x, y,
+                                 -1, -1);
 
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (widget));
-	g_return_if_fail (requisition != NULL);
+                if (draw_mask) {
+                        gdk_gc_set_clip_mask (widget->style->black_gc, NULL);
+                        gdk_gc_set_clip_origin (widget->style->black_gc, 0, 0);
+                }
 
-	gpixmap = GNOME_PIXMAP (widget);
-
-	if (gpixmap->pixmap)
-		gdk_window_get_size (gpixmap->pixmap, &w, &h);
-	else
-		w = h = 0;
-
-	requisition->width = w;
-	requisition->height = h;
-}
-
-static void
-gnome_pixmap_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
-{
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (widget));
-	g_return_if_fail (allocation != NULL);
-
-	widget->allocation = *allocation;
-
-	if (GTK_WIDGET_REALIZED (widget) &&
-	    !(GTK_WIDGET_FLAGS(widget)&GTK_NO_WINDOW)) {
-		GtkRequisition req;
-		gtk_widget_get_child_requisition (widget, &req);
-		gdk_window_move (widget->window,
-				 allocation->x + (allocation->width - req.width) / 2,
-				 allocation->y + (allocation->height - req.height) / 2);
-	}
+        } else {
+                /* Shouldn't be getting this */
+                g_warning("GnomePixmap expose received, but our requisition should have been 0,0");
+        }
 }
 
 static void
 paint (GnomePixmap *gpixmap, GdkRectangle *area)
 {
-	GtkWidget *widget = GTK_WIDGET(gpixmap);
-	if (!gpixmap->pixmap) {
-		gdk_window_clear_area (widget->window,
-				       area->x, area->y,
-				       area->width, area->height);
-		return;
-	}
-	if(!(GTK_WIDGET_FLAGS(widget)&GTK_NO_WINDOW)) {
-		gdk_draw_pixmap (widget->window,
-				 widget->style->black_gc,
-				 gpixmap->pixmap,
-				 area->x, area->y,
-				 area->x, area->y,
-				 area->width, area->height);
-	} else {
-		int x,y;
-		GtkRequisition req;
-		gtk_widget_get_child_requisition (widget, &req);
-		x = widget->allocation.x + (widget->allocation.width - req.width) / 2;
-		y = widget->allocation.y + (widget->allocation.height - req.height) / 2;
-
-		if (gpixmap->mask) {
-			gdk_gc_set_clip_mask (widget->style->black_gc, gpixmap->mask);
-			gdk_gc_set_clip_origin (widget->style->black_gc, x, y);
-		}
-
-		gdk_draw_pixmap (widget->window,
-				 widget->style->black_gc,
-				 gpixmap->pixmap,
-				 0, 0, x, y, -1, -1);
-
-		if (gpixmap->mask) {
-			gdk_gc_set_clip_mask (widget->style->black_gc, NULL);
-			gdk_gc_set_clip_origin (widget->style->black_gc, 0, 0);
-		}
-	}
-}
-
-static void
-gnome_pixmap_draw (GtkWidget *widget, GdkRectangle *area)
-{
-	GnomePixmap *gpixmap;
-	GdkRectangle w_area;
-	GdkRectangle p_area;
-
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (widget));
-	g_return_if_fail (area != NULL);
-	
-	if (GTK_WIDGET_DRAWABLE (widget)) {
-		gpixmap = GNOME_PIXMAP (widget);
-
-		if(!(GTK_WIDGET_FLAGS(gpixmap)&GTK_NO_WINDOW)) {
-			GtkRequisition req;
-			gtk_widget_get_child_requisition (widget, &req);
-			/* Offset the area because the window does not fill the allocation */
-			area->x -= (widget->allocation.width - req.width) / 2;
-			area->y -= (widget->allocation.height - req.height) / 2;
-
-			w_area.x = 0;
-			w_area.y = 0;
-			w_area.width = req.width;
-			w_area.height = req.height;
-
-			if (gdk_rectangle_intersect (area, &w_area, &p_area))
-				paint (gpixmap, &p_area);
-		} else
-			paint (gpixmap, area);
-	}
+	GtkWidget *widget;
+        GdkPixmap *draw_source;
+        GdkBitmap *draw_mask;
+        
+        widget = GTK_WIDGET(gpixmap);
+        
+        if (gpixmap->flags & GNOME_PIXMAP_USE_PIXBUF) {
+                paint_with_pixbuf(gpixmap, area);
+        } else if (gpixmap->flags & GNOME_PIXMAP_USE_PIXMAP) {
+                paint_with_pixmap(gpixmap, area);
+        } else {
+                g_assert_not_reached();
+        }
 }
 
 static gint
@@ -584,398 +291,510 @@ gnome_pixmap_expose (GtkWidget *widget, GdkEventExpose *event)
 	return FALSE;
 }
 
-static void
-gdk_pixbuf_render(GdkPixbuf* buf, GdkPixmap** pixmap, GdkBitmap** mask)
-{
-        g_warning("doesn't work");
-
-}
-
-static void
-finish_load (GnomePixmap *gpixmap, GdkPixbuf* buf,
-             gboolean scaled, int width, int height, gboolean unref)
-{
-        GdkPixbuf* old;
-        
-	if (buf == NULL)
-		return;
-
-	if (scaled) {
-                old = buf;
-		buf = gdk_pixbuf_scale(old, width, height);
-                if (unref)
-                        gdk_pixbuf_unref(buf);
-                else
-                        unref = TRUE; /* do unref our new copy */
-        }
-
-        gdk_pixbuf_render(buf, &gpixmap->pixmap, &gpixmap->mask);
-
-	if (unref)
-		gdk_pixbuf_unref(buf);
-
-        buf = NULL;
-
-	if(!(GTK_WIDGET_FLAGS(gpixmap)&GTK_NO_WINDOW)) {
-		if (GTK_WIDGET_REALIZED (gpixmap)) {
-			if (GTK_WIDGET_MAPPED (gpixmap))
-				gdk_window_hide (GTK_WIDGET (gpixmap)->window);
-			setup_window_and_style (gpixmap);
-		}
-
-		if (GTK_WIDGET_MAPPED (gpixmap))
-			gdk_window_show (GTK_WIDGET (gpixmap)->window);
-	}
-
-	if (GTK_WIDGET_VISIBLE (gpixmap))
-		gtk_widget_queue_resize (GTK_WIDGET (gpixmap));
-}
-
-static void
-load_file (GnomePixmap *gpixmap, const char *filename, int scaled, int width, int height)
-{
-        GdkPixbuf* buf;
-
-	free_pixmap_and_mask (gpixmap);
-
-        buf = gdk_pixbuf_load_image(filename);
-	finish_load (gpixmap, buf, scaled, width, height, TRUE);
-}
-
-static void
-load_xpm_d (GnomePixmap *gpixmap, char **xpm_data, int scaled, int width, int height)
-{
-        GdkPixbuf* buf;
-
-	free_pixmap_and_mask (gpixmap);
-
-        buf = gdk_pixbuf_new_from_xpm_d(xpm_data);
-	finish_load (gpixmap, buf, scaled, width, height, TRUE);
-}
-
-static void
-load_rgb_d (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
-	    int rgb_width, int rgb_height,
-	    int scaled, int width, int height)
-{
-        GdkPixbuf* buf;
-
-	free_pixmap_and_mask (gpixmap);
-
-        buf = gdk_pixbuf_new_from_rgb_d(data, rgb_width, rgb_height);
-	finish_load (gpixmap, buf, scaled, width, height, TRUE);
-}
-
-static void
-load_rgb_d_shaped (GnomePixmap *gpixmap, unsigned char *data,
-		   unsigned char *alpha,
-		   int rgb_width, int rgb_height,
-		   int scaled, int width, int height,
-		   GdkColor *shape_color)
-{
-        GdkPixbuf* buf;
-
-	free_pixmap_and_mask (gpixmap);
-
-        buf = gdk_pixbuf_new_from_rgb_d_with_shape_color(data, rgb_width, rgb_height);
-	finish_load (gpixmap, buf, scaled, width, height, 1);
-}
-
-/**
- * gnome_pixmap_load_file:
- * @gpixmap: the #GnomePixmap widget
- * @filename: a new filename
- *
- * Description: Sets the gnome pixmap to image stored
- * in @filename.
- */
 void
-gnome_pixmap_load_file (GnomePixmap *gpixmap, const char *filename)
+gnome_pixmap_set_build_insensitive (GnomePixmap *gpixmap,
+                                    gboolean build_insensitive)
 {
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-	g_return_if_fail (filename != NULL);
+  g_return_if_fail(gpixmap != NULL);
+  g_return_if_fail(GNOME_IS_PIXMAP(gpixmap));
 
-	load_file (gpixmap, filename, FALSE, 0, 0);
-}
-
-/**
- * gnome_pixmap_load_file_at_size:
- * @gpixmap: the #GnomePixmap widget
- * @filename: a new filename
- * @width: desired width.
- * @height: desired height.
- *
- * Description: Sets the gnome pixmap to image stored in
- * @filename scaled to @width and @height pixels.
- */
-void
-gnome_pixmap_load_file_at_size (GnomePixmap *gpixmap, const char *filename, int width, int height)
-{
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-	g_return_if_fail (filename != NULL);
-	g_return_if_fail (width > 0);
-	g_return_if_fail (height > 0);
-
-	load_file (gpixmap, filename, TRUE, width, height);
-}
-
-/**
- * gnome_pixmap_load_xpm_d:
- * @gpixmap: the #GnomePixmap widget
- * @xpm_data: xpm image data
- *
- * Description: Sets the gnome pixmap to image stored in @xpm_data.
- */
-void
-gnome_pixmap_load_xpm_d (GnomePixmap *gpixmap, char **xpm_data)
-{
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-	g_return_if_fail (xpm_data != NULL);
-
-	load_xpm_d (gpixmap, xpm_data, FALSE, 0, 0);
-}
-
-/**
- * gnome_pixmap_load_xpm_d_at_size:
- * @gpixmap: the #GnomePixmap widget
- * @xpm_data: xpm image data
- * @width: desired width.
- * @height: desired height.
- *
- * Description: Sets the gnome pixmap to image stored in
- * @xpm_data scaled to @width and @height pixels.
- */
-void
-gnome_pixmap_load_xpm_d_at_size (GnomePixmap *gpixmap, char **xpm_data, int width, int height)
-{
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-	g_return_if_fail (xpm_data != NULL);
-	g_return_if_fail (width > 0);
-	g_return_if_fail (height > 0);
-
-	load_xpm_d (gpixmap, xpm_data, TRUE, width, height);
-}
-
-/**
- * gnome_pixmap_load_rgb_d:
- * @gpixmap: the #GnomePixmap widget
- * @xpm_data: xpm image data
- * @data: A pointer to an inlined rgb image.
- * @alpha:
- * @rgb_width: the width of the rgb image.
- * @rgb_height: the height of the rgb image.
- *
- * Description: Sets the gnome pixmap to the image.
- */
-void
-gnome_pixmap_load_rgb_d (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
-			 int rgb_width, int rgb_height)
-{
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (rgb_width > 0);
-	g_return_if_fail (rgb_height > 0);
-
-	load_rgb_d (gpixmap, data, alpha, rgb_width, rgb_height, FALSE, 0, 0);
-}
-
-/**
- * gnome_pixmap_load_rgb_d_shaped:
- * @gpixmap: the #GnomePixmap widget
- * @xpm_data: xpm image data
- * @data: A pointer to an inlined rgb image.
- * @alpha:
- * @rgb_width: the width of the rgb image.
- * @rgb_height: the height of the rgb image.
- * @shape_color: which color encodes the transparency
- *
- * Description: Sets the gnome pixmap to the image.
- */
-void
-gnome_pixmap_load_rgb_d_shaped (GnomePixmap *gpixmap, unsigned char *data,
-				unsigned char *alpha,
-				int rgb_width, int rgb_height,
-				GdkColor *shape_color)
-{
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (rgb_width > 0);
-	g_return_if_fail (rgb_height > 0);
-
-	load_rgb_d_shaped (gpixmap, data, alpha, rgb_width, rgb_height, FALSE,
-			   0, 0, shape_color);
-}
-
-/**
- * gnome_pixmap_load_rgb_d_at_size:
- * @gpixmap: the #GnomePixmap widget
- * @xpm_data: xpm image data
- * @data: A pointer to an inlined rgb image.
- * @alpha:
- * @rgb_width: the width of the rgb image.
- * @rgb_height: the height of the rgb image.
- * @width: desired width.
- * @height: desired height.
- *
- * Description: Sets the gnome pixmap to the image scaled to
- * @width and @height pixels.
- */
-void
-gnome_pixmap_load_rgb_d_at_size (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
-				 int rgb_width, int rgb_height,
-				 int width, int height)
-{
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (rgb_width > 0);
-	g_return_if_fail (rgb_height > 0);
-	g_return_if_fail (width > 0);
-	g_return_if_fail (height > 0);
-
-	load_rgb_d (gpixmap, data, alpha, rgb_width, rgb_height, TRUE, width, height);
-}
-
-/**
- * gnome_pixmap_load_rgb_d_shaped_at_size:
- * @gpixmap: the #GnomePixmap widget
- * @xpm_data: xpm image data
- * @data: A pointer to an inlined rgb image.
- * @alpha:
- * @rgb_width: the width of the rgb image.
- * @rgb_height: the height of the rgb image.
- * @width: desired width.
- * @height: desired height.
- * @shape_color: which color encodes the transparency
- *
- * Description: Sets the gnome pixmap to the image scaled to
- * @width and @height pixels.
- */
-void
-gnome_pixmap_load_rgb_d_shaped_at_size (GnomePixmap *gpixmap,
-					unsigned char *data,
-					unsigned char *alpha,
-					int rgb_width, int rgb_height,
-					int width, int height,
-					GdkColor *shape_color)
-{
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (rgb_width > 0);
-	g_return_if_fail (rgb_height > 0);
-	g_return_if_fail (width > 0);
-	g_return_if_fail (height > 0);
-
-	load_rgb_d_shaped (gpixmap, data, alpha, rgb_width, rgb_height, TRUE,
-			   width, height, shape_color);
+  if (build_insensitive)
+    gpixmap->flags |= GNOME_PIXMAP_BUILD_INSENSITIVE;
+  else
+    gpixmap->flags &= ~GNOME_PIXMAP_BUILD_INSENSITIVE;
 }
 
 /*
- * Compat
+ * Set image data, create with image data 
  */
 
-#if 0
-
-/**
- * gnome_pixmap_new_from_imlib:
- * @im: A pointer to GdkImlibImage data
- *
- * Description: Returns a widget that contains the image, or %NULL
- * if it fails to load the image. Note that @im will not be
- * rendered after this call.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_imlib (GdkImlibImage *im)
+static void
+clear_old_images(GnomePixmap *gpixmap)
 {
-	GnomePixmap *gpixmap;
+        guint i;
+        
+        i = 0;
+        while (i < 5) {
+                if (gpixmap->image_data[i].pixbuf != NULL) {
+                        gdk_pixbuf_unref(gpixmap->image_data[i].pixbuf);
+                        gpixmap->image_data[i].pixbuf = NULL;
+                }
 
-	g_return_val_if_fail(im != NULL, NULL);
+                if (gpixmap->image_data[i].pixmap != NULL) {
+                        gdk_pixmap_unref(gpixmap->image_data[i].pixmap);
+                        gpixmap->image_data[i].pixmap = NULL;
+                }
 
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_imlib (gpixmap, im);
-
-	return GTK_WIDGET (gpixmap);
+                if (gpixmap->image_data[i].mask != NULL) {
+                        gdk_bitmap_unref(gpixmap->image_data[i].mask);
+                        gpixmap->image_data[i].mask = NULL;
+                }
+                
+                ++i;
+        }
 }
 
-/**
- * gnome_pixmap_new_from_imlib_at_size:
- * @im: A pointer to GdkImlibImage data
- * @width: desired width.
- * @height: desired height.
- *
- * Description: Returns a widget that contains the image scaled to
- * @width by @height pixels, or %NULL if it fails to load the image.
- * Note that @im will not be * rendered after this call.
- *
- * Returns: A new #GnomePixmap widget or %NULL
- */
-GtkWidget *
-gnome_pixmap_new_from_imlib_at_size (GdkImlibImage *im, int width, int height)
+static void
+resize_to_fit(GnomePixmap *gpixmap)
 {
-	GnomePixmap *gpixmap;
+        /* We base size on GTK_STATE_NORMAL, or failing that the first state
+           we can find. */
+        guint i;
+        gint width, height;
+        gint oldwidth, oldheight;
+        
+        oldwidth = GTK_WIDGET (pixmap)->requisition.width;
+        oldheight = GTK_WIDGET (pixmap)->requisition.height;
+        
+        width = 0;
+        height = 0;
 
-	g_return_val_if_fail (im != NULL, NULL);
-	g_return_val_if_fail (width > 0, NULL);
-	g_return_val_if_fail (height > 0, NULL);
+        if (gpixmap->flags & GNOME_PIXMAP_USE_PIXMAP) {
 
-	gpixmap = gtk_type_new (gnome_pixmap_get_type ());
-	gnome_pixmap_load_imlib_at_size (gpixmap, im, width, height);
+                GdkPixmap *pix = NULL;
 
-	return GTK_WIDGET (gpixmap);
+                pix = gpixmap->image_data[GTK_STATE_NORMAL].pixmap;
+
+                if (pix == NULL) {
+                        i = 0;
+                        while (i < 5) {
+                                pix = gpixmap->image_data[i].pixmap;
+
+                                if (pix != NULL)
+                                        break;
+
+                                ++i;
+                        }
+                }
+
+                if (pix != NULL) {
+                        gdk_window_get_size (pix, &width, &height);
+                }
+
+        } else if (gpixmap->flags & GNOME_PIXMAP_USE_PIXMAP) {
+
+                GdkPixbuf *pix = NULL;
+
+                pix = gpixmap->image_data[GTK_STATE_NORMAL].pixbuf;
+
+                if (pix == NULL) {
+                        i = 0;
+                        while (i < 5) {
+                                pix = gpixmap->image_data[i].pixbuf;
+
+                                if (pix != NULL)
+                                        break;
+
+                                ++i;
+                        }
+                }
+
+                if (pix != NULL) {
+                        width = pix->art_pixbuf->width;
+                        height = pix->art_pixbuf->height;
+                }
+
+        } else {
+                /* A GnomePixmap invariant is that either USE_PIXMAP or USE_PIXBUF is
+                 * always set
+                 */
+                g_assert_not_reached();
+        }
+
+        if (width * height > 0) {
+                GTK_WIDGET (gpixmap)->requisition.width = width + GTK_MISC (pixmap)->xpad * 2;
+                GTK_WIDGET (gpixmap)->requisition.height = height + GTK_MISC (pixmap)->ypad * 2;
+        } else {
+                GTK_WIDGET (gpixmap)->requisition.width = 0;
+                GTK_WIDGET (gpixmap)->requisition.height = 0;
+        }
+
+        if (GTK_WIDGET_VISIBLE (gpixmap)) {
+                if ((GTK_WIDGET (gpixmap)->requisition.width != oldwidth) ||
+                    (GTK_WIDGET (gpixmap)->requisition.height != oldheight))
+                        gtk_widget_queue_resize (GTK_WIDGET (gpixmap));
+                else
+                        gtk_widget_queue_clear (GTK_WIDGET (gpixmap));
+	}
+}
+
+static void
+set_pixbufs(GnomePixmap* gpixmap, GdkPixbuf* pixbufs[5])
+{
+        guint i;
+
+        clear_old_images(gpixmap);
+
+        gpixmap->flags &= ~GNOME_PIXMAP_USE_PIXMAP;
+        gpixmap->flags |= GNOME_PIXMAP_USE_PIXBUF;
+        
+        i = 0;
+        while (i < 5) {
+
+                if (pixbufs[i] != NULL) {
+                        gpixmap->image_data[i].pixbuf = pixbufs[i];
+                        
+                        gdk_pixbuf_ref(pixbufs[i]);
+                
+                        gpixmap->image_data[i].mask = ; /* FIXME generate mask */
+                }
+                        
+                ++i;
+        }
+
+        resize_to_fit(gpixmap);
+}
+
+static void
+set_pixmaps(GnomePixmap* gpixmap, GdkPixmap* pixmaps[5], GdkBitmap* masks[5])
+{
+        guint i;
+
+        clear_old_images(gpixmap);
+
+        gpixmap->flags &= ~GNOME_PIXMAP_USE_PIXBUF;
+        gpixmap->flags |= GNOME_PIXMAP_USE_PIXMAP;
+        
+        i = 0;
+        while (i < 5) {
+
+                if (pixmaps[i] != NULL) {
+                        gpixmap->image_data[i].pixmap = pixmaps[i];
+                        
+                        gdk_pixmap_ref(pixmaps[i]);
+                }
+
+                if (masks[i] != NULL) {
+                        gpixmap->image_data[i].mask = masks[i];
+
+                        gdk_bitmap_ref(masks[i]);
+                }
+                        
+                ++i;
+        }
+
+        resize_to_fit(gpixmap);
 }
 
 
-/**
- * gnome_pixmap_load_imlib:
- * @gpixmap: the #GnomePixmap widget
- * @im: A pointer to GdkImlibImage data
- * @width: desired width.
- * @height: desired height.
- *
- * Description: Sets the gnome pixmap to image stored in @im. Note
- * that @im will not be rendered after this call.
- */
+
 void
-gnome_pixmap_load_imlib (GnomePixmap *gpixmap, GdkImlibImage *im)
+gnome_pixmap_set_pixbufs            (GnomePixmap *gpixmap,
+                                     GdkPixbuf   *pixbufs[5],
+                                     GdkBitmap   *masks[5])
 {
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-	g_return_if_fail (im != NULL);
-
-	finish_load (gpixmap, im, 0, 0, 0, 0);
+        g_return_if_fail(gpixmap != NULL);
+        g_return_if_fail(GNOME_IS_PIXMAP(gpixmap));
+        
+        if (gpixmap->flags & GNOME_PIXMAP_USE_PIXBUF)
+                set_pixbufs(gpixmap, pixbufs, masks);
+        else {
+                /* Convert to pixmaps and don't keep a pixbuf reference */
+                /* FIXME */
+                
+        }
 }
 
-/**
- * gnome_pixmap_load_imlib_at_size:
- * @gpixmap: the #GnomePixmap widget
- * @im: A pointer to GdkImlibImage data
- * @width: desired width.
- * @height: desired height.
- *
- * Description: Sets the gnome pixmap to image stored in @im
- * scaled to @width and @height pixels. Note that @im will not
- * be rendered after this call.
- */
 void
-gnome_pixmap_load_imlib_at_size (GnomePixmap *gpixmap,
-				 GdkImlibImage *im, int width, int height)
+gnome_pixmap_set_pixmaps            (GnomePixmap *gpixmap,
+                                     GdkPixmap   *pixmaps[5],
+                                     GdkBitmap   *masks[5])
 {
-	g_return_if_fail (gpixmap != NULL);
-	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
-	g_return_if_fail (im != NULL);
-	g_return_if_fail (width > 0);
-	g_return_if_fail (height > 0);
-
-	finish_load (gpixmap, im, 1, width, height, 0);
+        g_return_if_fail(gpixmap != NULL);
+        g_return_if_fail(GNOME_IS_PIXMAP(gpixmap));
+        
+        if (gpixmap->flags & GNOME_PIXMAP_USE_PIXMAP)
+                set_pixmaps(gpixmap, pixmaps, masks);
+        else {
+                /* Convert to pixbufs and don't keep a pixmap reference */
+                /* FIXME */
+                
+        }
 }
 
-#endif
+GtkWidget*
+gnome_pixmap_new_from_pixbuf          (GdkPixbuf *pixbuf)
+{
+        return gnome_pixmap_new_from_pixbuf_at_size(pixbuf, -1, -1);
+}
+
+GtkWidget*
+gnome_pixmap_new_from_pixbuf_at_size  (GdkPixbuf *pixbuf, gint width, gint height)
+{
+        GtkWidget *widget;
+        GnomePixmap *gpixmap;
+        GdkPixbuf *pixbufs[5] = { NULL, NULL, NULL, NULL, NULL };
+        GdkBitmap *masks[5] = { NULL, NULL, NULL, NULL, NULL };
+        
+        widget = gtk_type_new(gnome_pixmap_get_type());
+        gpixmap = GNOME_PIXMAP(widget);
+
+        g_return_val_if_fail(pixbuf != NULL, widget);
+        
+        /* Using pixmap mode by default */
+        
+        if (pixbuf != NULL) {
+                /* Scale if needed, -1 means "natural dimension" */
+                if (width < 0)
+                        width = pixbuf->art_pixbuf->width;
+                if (height < 0)
+                        height = pixbuf->art_pixbuf->height;
+                
+                if (width != pixbuf->art_pixbuf->width ||
+                    height != pixbuf->art_pixbuf->height) {
+                        pixbuf = gdk_pixbuf_scale(pixbuf, width, height);
+                }
+                
+                pixbufs[GTK_STATE_NORMAL] = pixbuf;
+
+                masks[GTK_STATE_NORMAL] = gdk_pixbuf_create_mask(pixbuf);
+
+                gnome_pixmap_set_pixbufs(gpixmap, pixbufs, masks);
+        }
+
+        return widget;
+}
+
+
+GtkWidget*
+gnome_pixmap_new_from_file_at_size          (const gchar *filename, gint width, gint height)
+{
+        GtkWidget *widget;
+        
+        pixbuf = gdk_pixbuf_new_from_file(filename);
+
+        if (pixbuf != NULL) {
+                widget = gnome_pixmap_new_from_pixbuf_at_size(pixbuf, width, height);
+                
+                gdk_pixbuf_unref(pixbuf);
+        }
+
+        return widget;
+}
+
+GtkWidget*
+gnome_pixmap_new_from_file          (const char *filename)
+{
+        return gnome_pixmap_new_from_file_at_size(filename, -1, -1);
+}
+
+GtkWidget*
+gnome_pixmap_new_from_xpm_d_at_size (char **xpm_data, int width, int height)
+{
+        GtkWidget *widget;
+        
+        pixbuf = gdk_pixbuf_new_from_xpm_data(xpm_data);
+        
+        if (pixbuf != NULL) {
+                widget = gnome_pixmap_new_from_pixbuf_at_size(pixbuf, width, height);
+                
+                gdk_pixbuf_unref(pixbuf);
+        }
+
+        return widget;
+}
+
+GtkWidget*
+gnome_pixmap_new_from_xpm_d         (char **xpm_data)
+{
+        return gnome_pixmap_new_from_xpm_d_at_size(xpm_data, -1, -1);
+}
+
+/*
+ * Build insensitive 
+ */
+
+static void
+build_insensitive_pixbuf      (GnomePixmap *gpixmap)
+{
+        gint32 red, green, blue;
+        GdkPixbuf *normal;
+        GdkBitmap *normal_mask;
+        GdkPixbuf *insensitive;
+        GdkColor color, c;
+        GtkStyle *style;
+        GtkWidget *widget;
+        gint w, h, x, y;
+        
+        widget = GTK_WIDGET (gpixmap);
+
+        g_return_if_fail(widget != NULL);
+
+        normal = gpixmap->image_data[GTK_STATE_NORMAL].pixbuf;
+        normal_mask = gpixmap->image_data[GTK_STATE_NORMAL].mask;
+
+        if (normal == NULL)
+                return; /* Give up */
+
+        g_return_if_fail(gpixmap->image_data[GTK_STATE_INSENSITIVE].pixbuf == NULL);
+        g_return_if_fail(gpixmap->image_data[GTK_STATE_INSENSITIVE].mask == NULL);
+
+        insensitive = gdk_pixbuf_new(); /* FIXME */
+        
+        style = gtk_widget_get_style(widget);
+        
+        color = style->bg[0];
+        red = color.red/255;
+        green = color.green/255;
+        blue = color.blue/255;
+
+        /* Fade each pixel */
+        for (y = 0; y < h; y++) {
+          for (x = 0; x < w; x++) {
+            guchar* src_pixel;
+            guchar* dest_pixel;
+
+            src_pixel = normal->art_pixbuf->pixels +
+              y * normal->art_pixbuf->rowstride +
+              x * (normal->art_pixbuf->has_alpha ? 4 : 3);
+
+            dest_pixel = insensitive->art_pixbuf->pixels +
+              y * insensitive->art_pixbuf->rowstride +
+              x * (insensitive->art_pixbuf->has_alpha ? 4 : 3);
+            
+            dest_pixel[0] = ((src_pixel[0] - red) >> 1) + red;
+            dest_pixel[1] = ((src_pixel[1] - green) >> 1) + green;
+            dest_pixel[2] = ((src_pixel[2] - blue) >> 1) + blue;
+          }
+        }
+
+        /* Now do another fade pass, skipping every other pixel */
+        for (y = 0; y < h; y++) {
+          for (x = y % 2; x < w; x += 2) {
+            guchar* src_pixel;
+            guchar* dest_pixel;
+
+            src_pixel = insensitive->art_pixbuf->pixels +
+              y * insensitive->art_pixbuf->rowstride +
+              x * (insensitive->art_pixbuf->has_alpha ? 4 : 3);
+
+            dest_pixel = insensitive->art_pixbuf->pixels +
+              y * insensitive->art_pixbuf->rowstride +
+              x * (insensitive->art_pixbuf->has_alpha ? 4 : 3);
+            
+            dest_pixel[0] = ((src_pixel[0] - red) >> 1) + red;
+            dest_pixel[1] = ((src_pixel[1] - green) >> 1) + green;
+            dest_pixel[2] = ((src_pixel[2] - blue) >> 1) + blue;
+          }
+        }
+
+        gpixmap->image_data[GTK_STATE_INSENSITIVE].pixbuf = insensitive;
+        gpixmap->image_data[GTK_STATE_INSENSITIVE].mask   = normal_mask;
+
+        /* Just ref the normal mask, don't create a new mask. */
+        if (normal_mask != NULL) {
+                gdk_bitmap_ref(normal_mask);
+        }
+}
+
+
+static void
+build_insensitive_pixmap      (GnomePixmap *gpixmap)
+{
+        /* FIXME This code is also in gtk/gtkpixmap.c */
+        GdkGC *gc;
+        GdkPixmap *normal;
+        GdkBitmap *normal_mask;
+        GdkPixmap *insensitive;
+        gint w, h, x, y;
+        GdkGCValues vals;
+        GdkVisual *visual;
+        GdkImage *image;
+        GdkColorContext *cc;
+        GdkColor color;
+        GdkColormap *cmap;
+        gint32 red, green, blue;
+        GtkStyle *style;
+        GtkWidget *widget;
+        GdkColor c;
+        gboolean failed;
+
+        widget = GTK_WIDGET (gpixmap);
+
+        g_return_if_fail(widget != NULL);
+
+        normal = gpixmap->image_data[GTK_STATE_NORMAL].pixmap;
+        normal_mask = gpixmap->image_data[GTK_STATE_NORMAL].mask;
+
+        if (normal == NULL)
+                return; /* Give up */
+
+        g_return_if_fail(gpixmap->image_data[GTK_STATE_INSENSITIVE].pixmap == NULL);
+        g_return_if_fail(gpixmap->image_data[GTK_STATE_INSENSITIVE].mask == NULL);
+        
+        gdk_window_get_size(normal, &w, &h);
+        image = gdk_image_get(normal, 0, 0, w, h);
+        insensitive = gdk_pixmap_new(widget->window, w, h, -1);
+        gc = gdk_gc_new (normal);
+
+        visual = gtk_widget_get_visual(widget);
+        cmap = gtk_widget_get_colormap(widget);
+        cc = gdk_color_context_new(visual, cmap);
+
+        if ((cc->mode != GDK_CC_MODE_TRUE) &&
+            (cc->mode != GDK_CC_MODE_MY_GRAY)) {
+
+                gdk_draw_image(insensitive, gc, image, 0, 0, 0, 0, w, h);
+                
+                style = gtk_widget_get_style(widget);
+                color = style->bg[0];
+                gdk_gc_set_foreground (gc, &color);
+                for (y = 0; y < h; y++) {
+                        for (x = y % 2; x < w; x += 2) {
+                                gdk_draw_point(insensitive, gc, x, y);
+                        }
+                }
+
+        } else {
+
+                gdk_gc_get_values(gc, &vals);
+                style = gtk_widget_get_style(widget);
+
+                color = style->bg[0];
+                red = color.red;
+                green = color.green;
+                blue = color.blue;
+
+                for (y = 0; y < h; y++) {
+                        for (x = 0; x < w; x++) {
+                                c.pixel = gdk_image_get_pixel(image, x, y);
+                                gdk_color_context_query_color(cc, &c);
+                                c.red = (((gint32)c.red - red) >> 1) + red;
+                                c.green = (((gint32)c.green - green) >> 1) + green;
+                                c.blue = (((gint32)c.blue - blue) >> 1) + blue;
+                                c.pixel = gdk_color_context_get_pixel(cc, c.red, c.green, c.blue,
+                                                                      &failed);
+                                gdk_image_put_pixel(image, x, y, c.pixel);
+                        }
+                }
+
+                for (y = 0; y < h; y++) {
+                        for (x = y % 2; x < w; x += 2) {
+                                c.pixel = gdk_image_get_pixel(image, x, y);
+                                gdk_color_context_query_color(cc, &c);
+                                c.red = (((gint32)c.red - red) >> 1) + red;
+                                c.green = (((gint32)c.green - green) >> 1) + green;
+                                c.blue = (((gint32)c.blue - blue) >> 1) + blue;
+                                c.pixel = gdk_color_context_get_pixel(cc, c.red, c.green, c.blue,
+                                                                      &failed);
+                                gdk_image_put_pixel(image, x, y, c.pixel);
+                        }
+                }
+
+                gdk_draw_image(insensitive, gc, image, 0, 0, 0, 0, w, h);
+        }
+
+        gpixmap->image_data[GTK_STATE_INSENSITIVE].pixmap = insensitive;
+        gpixmap->image_data[GTK_STATE_INSENSITIVE].mask = normal_mask;
+
+        /* Just ref the normal mask, don't create a new mask. */
+        if (normal_mask != NULL) {
+                gdk_bitmap_ref(normal_mask);
+        }
+
+        gdk_image_destroy(image);
+        gdk_color_context_free(cc);
+        gdk_gc_destroy(gc);
+}
+
+

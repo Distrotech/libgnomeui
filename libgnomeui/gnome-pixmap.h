@@ -1,14 +1,27 @@
+
 #ifndef GNOME_PIXMAP_H
 #define GNOME_PIXMAP_H
 
-
-#include <gdk/gdk.h>
-#include <gtk/gtkwidget.h>
+#include <gtk/gtkmisc.h>
 
 #include <libgnome/gnome-defs.h>
 
+#include <gdk-pixbuf.h>
+
 BEGIN_GNOME_DECLS
 
+typedef enum {
+        /* render from a pixbuf, don't create pixmap */
+        GNOME_PIXMAP_USE_PIXBUF = 1 << 0,
+        /* render from a pixmap, discard pixbuf */
+        GNOME_PIXMAP_USE_PIXMAP = 1 << 1,
+        GNOME_PIXMAP_BUILD_INSENSITIVE = 1 << 2
+} GnomePixmapFlags;
+
+typedef enum {
+  GNOME_PIXMAP_KEEP_PIXBUF,
+  GNOME_PIXMAP_KEEP_PIXMAP
+} GnomePixmapMode;
 
 #define GNOME_PIXMAP(obj)         GTK_CHECK_CAST (obj, gnome_pixmap_get_type (), GnomePixmap)
 #define GNOME_PIXMAP_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_pixmap_get_type (), GnomePixmapClass)
@@ -19,70 +32,49 @@ typedef struct _GnomePixmap GnomePixmap;
 typedef struct _GnomePixmapClass GnomePixmapClass;
 
 struct _GnomePixmap {
-	GtkWidget widget;
+	GtkMisc misc;
 
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
+        /*< private >*/
+        guint      flags;
+
+        struct {
+                GdkPixbuf *pixbuf;
+                GdkPixmap *pixmap;
+                GdkBitmap *mask;
+        } image_data[5]; /* the five states */
 };
 
 struct _GnomePixmapClass {
-	GtkWidgetClass parent_class;
+	GtkMiscClass parent_class;
 };
 
 
 guint      gnome_pixmap_get_type               (void);
 
-GtkWidget *gnome_pixmap_new_from_file          (const char *filename);
-GtkWidget *gnome_pixmap_new_from_file_at_size  (const char *filename, int width, int height);
-GtkWidget *gnome_pixmap_new_from_xpm_d         (char **xpm_data);
-GtkWidget *gnome_pixmap_new_from_xpm_d_at_size (char **xpm_data, int width, int height);
-GtkWidget *gnome_pixmap_new_from_rgb_d         (unsigned char *data, unsigned char *alpha,
-						int rgb_width, int rgb_height);
-GtkWidget *gnome_pixmap_new_from_rgb_d_shaped  (unsigned char *data, unsigned char *alpha,
-						int rgb_width, int rgb_height,
-                                                GdkColor* shape_color);
-GtkWidget * gnome_pixmap_new_from_rgb_d_shaped_at_size (unsigned char *data,
-					        unsigned char *alpha,
-					        int rgb_width, int rgb_height,
-					        int width, int height,
-					        GdkColor *shape_color);
-GtkWidget *gnome_pixmap_new_from_rgb_d_at_size (unsigned char *data, unsigned char *alpha,
-						int rgb_width, int rgb_height,
-						int width, int height);
-GtkWidget *gnome_pixmap_new_from_gnome_pixmap  (GnomePixmap *gpixmap);
+GtkWidget* gnome_pixmap_new                    (GnomePixmapMode mode);
 
-void       gnome_pixmap_load_file              (GnomePixmap *gpixmap, const char *filename);
-void       gnome_pixmap_load_file_at_size      (GnomePixmap *gpixmap, const char *filename, int width, int height);
-void       gnome_pixmap_load_xpm_d             (GnomePixmap *gpixmap, char **xpm_data);
-void       gnome_pixmap_load_xpm_d_at_size     (GnomePixmap *gpixmap, char **xpm_data, int width, int height);
-void       gnome_pixmap_load_rgb_d             (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
-						int rgb_width, int rgb_height);
-void       gnome_pixmap_load_rgb_d_shaped      (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
-						int rgb_width, int rgb_height,
-						GdkColor *shape_color);
-void gnome_pixmap_load_rgb_d_shaped_at_size    (GnomePixmap *gpixmap,
-					        unsigned char *data,
-					        unsigned char *alpha,
-					        int rgb_width, int rgb_height,
-					        int width, int height,
-					        GdkColor *shape_color);
-void       gnome_pixmap_load_rgb_d_at_size     (GnomePixmap *gpixmap, unsigned char *data, unsigned char *alpha,
-						int rgb_width, int rgb_height,
-						int width, int height);
+void       gnome_pixmap_set_build_insensitive  (GnomePixmap *gpixmap,
+                                                gboolean build_insensitive);
 
-#if 0
-/* Compat library candidates */
+void       gnome_pixmap_set_mode               (GnomePixmap *gpixmap,
+                                                GnomePixmapMode mode);
 
-void       gnome_pixmap_load_imlib             (GnomePixmap *gpixmap,
-						GdkImlibImage *im);
-void       gnome_pixmap_load_imlib_at_size     (GnomePixmap *gpixmap,
-				                GdkImlibImage *im,
-						int width, int height);
-GtkWidget *gnome_pixmap_new_from_imlib         (GdkImlibImage *im);
-GtkWidget *gnome_pixmap_new_from_imlib_at_size (GdkImlibImage *im,
-						int width, int height);
-#endif 
+void       gnome_pixmap_set_pixbufs            (GnomePixmap* gpixmap,
+                                                GdkPixbuf*   pixbufs[5],
+                                                GdkBitmap*   masks[5]);
 
+void       gnome_pixmap_set_pixmaps            (GnomePixmap* gpixmap,
+                                                GdkPixmap*   pixmaps[5],
+                                                GdkBitmap*   masks[5]);
+
+GtkWidget *gnome_pixmap_new_from_pixbuf          (GdkPixbuf *pixbuf);
+GtkWidget *gnome_pixmap_new_from_pixbuf_at_size  (GdkPixbuf *pixbuf, gint width, gint height);
+
+GtkWidget *gnome_pixmap_new_from_file          (const gchar *filename);
+GtkWidget *gnome_pixmap_new_from_file_at_size  (const gchar *filename, gint width, gint height);
+
+GtkWidget *gnome_pixmap_new_from_xpm_d         (gchar **xpm_data);
+GtkWidget *gnome_pixmap_new_from_xpm_d_at_size (gchar **xpm_data, gint width, gint height);
 
 END_GNOME_DECLS
 
