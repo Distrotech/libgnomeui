@@ -1136,8 +1136,8 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
   gdk_window_hide (GTK_WIDGET (item)->window);
   gnome_dock_item_draw (GTK_WIDGET (item), NULL);
 
-  gdk_window_set_transient_for (item->float_window,
-                                GTK_WIDGET (item)->parent->window);
+  gdk_window_set_transient_for(item->float_window,
+                               gdk_window_get_toplevel(GTK_WIDGET (item)->window));
 
   return TRUE;
 }
