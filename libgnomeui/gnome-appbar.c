@@ -668,25 +668,6 @@ gnome_appbar_set_progress_percentage(GnomeAppBar *appbar,
   gtk_progress_bar_update(GTK_PROGRESS_BAR(appbar->_priv->progress), percentage);
 }
 
-#ifndef GNOME_EXCLUDE_DEPRECATED_SOURCE
-
-/**
- * gnome_appbar_set_progress
- *
- * Description:
- * Deprecated, use #gnome_appbar_set_progress_percentage
- **/
-
-void
-gnome_appbar_set_progress(GnomeAppBar *appbar,
-			  gfloat percentage)
-{
-	g_warning(_("gnome_appbar_set_progress deprecated, use gnome_appbar_set_progress_percentage"));
-	gnome_appbar_set_progress_percentage(appbar, percentage);
-}
-
-#endif /* not GNOME_EXCLUDE_DEPRECATED_SOURCE */
-
 
 /**
  * gnome_appbar_get_progress

@@ -2,6 +2,7 @@
 
 	* gnome-entry.[ch]: Move all deprecated functions to libcompat.
 	* gnome-icon-entry.[ch]: Likewise.
+	* gnome-appbar.[ch]: Likewise.
 
 2001-02-23  Martin Baulig  <baulig@suse.de>
 

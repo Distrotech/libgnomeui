@@ -126,11 +126,6 @@ void       gnome_appbar_construct(GnomeAppBar * ab,
 				  gboolean has_status,
 				  GnomePreferencesType interactivity);
 
-#ifndef GNOME_EXCLUDE_DEPRECATED
-void	     gnome_appbar_set_progress	(GnomeAppBar *appbar,
-					 gfloat percentage);
-#endif
-
 END_GNOME_DECLS
 
 #endif /* __GNOME_APPBAR_H__ */
