@@ -482,8 +482,7 @@ client_set_restart_command (GnomeClient *client)
   vals[i].length = strlen (sm_screen);
   vals[i++].value = (char *)sm_screen;
   vals[i].length = strlen (tmp);
-  vals[i++].value = g_strdup(tmp);
-  g_free(tmp);
+  vals[i++].value = tmp;
 #endif
 
   for (list = client->static_args; list; list = g_list_next (list))
@@ -501,6 +500,10 @@ client_set_restart_command (GnomeClient *client)
   client_set_value (client, SmRestartCommand, SmLISTofARRAY8, i, vals);
 
   g_free (vals);
+
+#ifdef HAVE_GTK_MULTIHEAD
+  g_free (tmp);
+#endif
 }
 
 static void
