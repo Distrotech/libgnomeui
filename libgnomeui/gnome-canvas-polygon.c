@@ -472,7 +472,7 @@ gnome_canvas_polygon_set_property (GObject              *object,
 
 	switch (param_id) {
 	case PROP_POINTS:
-		points = g_value_get_pointer (value);
+		points = g_value_get_boxed (value);
 
 		if (poly->coords) {
 			g_free (poly->coords);
@@ -590,12 +590,12 @@ gnome_canvas_polygon_set_property (GObject              *object,
 		break;
 
 	case PROP_FILL_STIPPLE:
-		set_stipple (poly->fill_gc, &poly->fill_stipple, g_value_get_boxed (value), FALSE);
+		set_stipple (poly->fill_gc, &poly->fill_stipple, (GdkBitmap *) g_value_get_object (value), FALSE);
 		gnome_canvas_item_request_update (item);
 		break;
 
 	case PROP_OUTLINE_STIPPLE:
-		set_stipple (poly->outline_gc, &poly->outline_stipple, g_value_get_boxed (value), FALSE);
+		set_stipple (poly->outline_gc, &poly->outline_stipple, (GdkBitmap *) g_value_get_object (value), FALSE);
 		gnome_canvas_item_request_update (item);
 		break;
 
@@ -661,9 +661,9 @@ gnome_canvas_polygon_get_property (GObject              *object,
 		if (poly->num_points != 0) {
 			points = gnome_canvas_points_new (poly->num_points);
 			memcpy (points->coords, poly->coords, 2 * poly->num_points * sizeof (double));
-			g_value_set_pointer (value, points);
+			g_value_set_boxed (value, points);
 		} else
-			g_value_set_pointer (value, NULL);
+			g_value_set_boxed (value, NULL);
 		break;
 
 	case PROP_FILL_COLOR_GDK:
@@ -683,11 +683,11 @@ gnome_canvas_polygon_get_property (GObject              *object,
 		break;
 
 	case PROP_FILL_STIPPLE:
-		g_value_set_boxed (value, poly->fill_stipple);
+		g_value_set_object (value, (GObject *) poly->fill_stipple);
 		break;
 
 	case PROP_OUTLINE_STIPPLE:
-		g_value_set_boxed (value, poly->outline_stipple);
+		g_value_set_object (value, (GObject *) poly->outline_stipple);
 		break;
 
 	default:

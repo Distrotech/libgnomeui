@@ -1,5 +1,7 @@
 2000-12-20  Martin Baulig  <baulig@suse.de>
 
+	* gnome-canvas-rect-ellipse.c: GtkArg -> GParam.
+
 	* gnome-canvas-polygon.c: GtkArg -> GParam.
 
 	* gnome-canvas-lines.c: GtkArg -> GParam.
