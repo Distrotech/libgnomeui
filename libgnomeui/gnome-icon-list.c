@@ -209,6 +209,7 @@ get_icon_num_from_xy (GnomeIconList *ilist, int x, int y, int *num, int *on_spac
 	    && (col >= (ilist->icons % ilist->icon_cols))) {
 		*num = -1;
 		*on_spacing = TRUE;
+		return;
 	}
 
 	*num = row * ilist->icon_cols + col;
@@ -1021,7 +1022,7 @@ adjust_scrollbars (GnomeIconList *ilist)
 	adj->lower          = 0;
 	adj->upper          = ilist_height;
 
-	if ((ilist->ilist_window_height - ilist->y_offset) > ilist_height) {
+	if ((ilist->ilist_window_height + ilist->y_offset) > ilist_height) {
 		adj->value = ilist_height - ilist->ilist_window_height;
 		gtk_signal_emit_by_name (GTK_OBJECT (adj), "value_changed");
 	};
@@ -1036,7 +1037,7 @@ adjust_scrollbars (GnomeIconList *ilist)
 	adj->lower          = 0;
 	adj->upper          = ilist_width;
 
-	if ((ilist->ilist_window_width - ilist->x_offset) > ilist_width) {
+	if ((ilist->ilist_window_width + ilist->x_offset) > ilist_width) {
 		adj->value = ilist_width - ilist->ilist_window_width;
 		gtk_signal_emit_by_name (GTK_OBJECT (adj), "value_changed");
 	}
