@@ -1,3 +1,8 @@
+1998-09-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-popup-menu.c (popup_marshal_func): Fixed stupid bug in the
+	marshaller; I was using args[0] instead of the actual object.
+
 Wed Sep 23 17:04:05 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock.[ch]: expanded the functionality of
