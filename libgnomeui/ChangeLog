@@ -1,3 +1,12 @@
+2000-01-30  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dialog.c (gnome_dialog_run_real): Create a new GMainLoop
+	to avoid problems with quitting the wrong mainloop with
+	gtk_main()/gtk_main_quit()
+
+	* gnome-recently-used.c (gnome_recently_used_get_all): Sort the
+	returned list of recently used documents
+
 2000-01-30  Iain Holmes  <ih@csd.abdn.ac.uk>
 
 	* gnome-cursors.[ch]: Added a GNOME_STOCK_CURSOR_XTERM type cursor.

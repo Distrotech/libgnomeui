@@ -568,6 +568,7 @@ struct GnomeDialogRunInfo {
   gint button_number;
   gint close_id, clicked_id, destroy_id;
   gboolean destroyed;
+  GMainLoop *mainloop;
 };
 
 static void
@@ -585,7 +586,12 @@ gnome_dialog_shutdown_run(GnomeDialog* dialog,
       runinfo->close_id = runinfo->clicked_id = -1;
     }
 
-  gtk_main_quit();
+  if (runinfo->mainloop)
+    {
+      g_main_quit(runinfo->mainloop);
+      g_main_destroy(runinfo->mainloop);
+      runinfo->mainloop = NULL;
+    }
 }
 
 static void
@@ -628,13 +634,14 @@ static gint
 gnome_dialog_run_real(GnomeDialog* dialog, gboolean close_after)
 {
   gboolean was_modal;
-  struct GnomeDialogRunInfo ri = {-1,-1,-1,-1,FALSE};
+  struct GnomeDialogRunInfo ri = {-1,-1,-1,-1,FALSE,NULL};
 
   g_return_val_if_fail(dialog != NULL, -1);
   g_return_val_if_fail(GNOME_IS_DIALOG(dialog), -1);
 
   was_modal = GTK_WINDOW(dialog)->modal;
-  if (!was_modal) gtk_window_set_modal(GTK_WINDOW(dialog),TRUE);
+  if (!was_modal)
+    gtk_window_set_modal(GTK_WINDOW(dialog),TRUE);
 
   /* There are several things that could happen to the dialog, and we
      need to handle them all: click, delete_event, close, destroy */
@@ -657,8 +664,11 @@ gnome_dialog_run_real(GnomeDialog* dialog, gboolean close_after)
   if ( ! GTK_WIDGET_VISIBLE(GTK_WIDGET(dialog)) )
     gtk_widget_show(GTK_WIDGET(dialog));
 
-  gtk_main();
+  ri.mainloop = g_main_new(FALSE);
+  g_main_run(ri.mainloop);
 
+  g_assert(ri.mainloop == NULL);
+  
   if(!ri.destroyed) {
 
     gtk_signal_disconnect(GTK_OBJECT(dialog), ri.destroy_id);

@@ -406,6 +406,23 @@ listize_foreach(gpointer key, gpointer value, gpointer user_data)
         *list = g_slist_prepend(*list, value);
 }
 
+static gint
+descending_chronological_compare_func(gconstpointer a, gconstpointer b)
+{
+        GTime a_time;
+        GTime b_time;
+
+        a_time = gnome_recent_document_get_creation_time((GnomeRecentDocument*)a);
+        b_time = gnome_recent_document_get_creation_time((GnomeRecentDocument*)b);
+
+        if (a_time > b_time)
+                return -1;
+        else if (a_time < b_time)
+                return 1;
+        else
+                return 0;
+}
+
 GSList*
 gnome_recently_used_get_all (GnomeRecentlyUsed   *recently_used)
 {
@@ -415,6 +432,9 @@ gnome_recently_used_get_all (GnomeRecentlyUsed   *recently_used)
 
         /* FIXME sort this list by creation time */
         g_hash_table_foreach(recently_used->hash, listize_foreach, &list);
+
+        /* Sort from newest to oldest */
+        list = g_slist_sort(list, descending_chronological_compare_func);
         
         return list;
 }
