@@ -386,7 +386,7 @@ client_set_clone_command (GnomeClient *client)
   GList  *list;
   gint    argc;
   gchar **ptr;
-  gint    i;
+  gint    i = 0;
 
   SmPropValue *vals;
   
@@ -407,27 +407,30 @@ client_set_clone_command (GnomeClient *client)
 
   ptr=client->clone_command ? client->clone_command : client->restart_command;
 
-  vals[0].length = strlen (*ptr);
-  vals[0].value  = *ptr++;
+  vals[i].length = strlen (*ptr);
+  vals[i++].value  = *ptr++;
 
-  vals[1].length = strlen (sm_config_prefix_arg_name);
-  vals[1].value = (char *) sm_config_prefix_arg_name;
-  vals[2].length = strlen (gnome_client_get_config_prefix (client));
-  vals[2].value = client->config_prefix;
+  if (client->config_prefix)
+    {
+      vals[i].length = strlen (sm_config_prefix_arg_name);
+      vals[i++].value = (char *) sm_config_prefix_arg_name;
+      vals[i].length = strlen (client->config_prefix);
+      vals[i++].value = client->config_prefix;
+    }
 
-  for (list = client->static_args, i = 3; list; i++, list= g_list_next (list))
+  for (list = client->static_args; list; list= g_list_next (list))
     {
       vals[i].length= strlen ((gchar *)list->data);
-      vals[i].value = (gchar *)list->data;
+      vals[i++].value = (gchar *)list->data;
     }
 
-  for (; *ptr ; i++)
+  while (*ptr)
     {
       vals[i].length = strlen (*ptr);
-      vals[i].value  = *ptr++;
+      vals[i++].value  = *ptr++;
     }
 
-  client_set_value (client, SmCloneCommand, SmLISTofARRAY8, argc, vals);
+  client_set_value (client, SmCloneCommand, SmLISTofARRAY8, i, vals);
   
   g_free (vals);
 }		   
@@ -438,7 +441,7 @@ client_set_restart_command (GnomeClient *client)
   GList  *list;
   gint    argc;
   gchar **ptr;
-  gint    i;
+  gint    i = 0;
 
   SmPropValue *vals;
   
@@ -454,32 +457,34 @@ client_set_restart_command (GnomeClient *client)
 
   ptr = client->restart_command;
 
-  vals[0].length = strlen (*ptr);
-  vals[0].value  = *ptr++;
+  vals[i].length = strlen (*ptr);
+  vals[i++].value  = *ptr++;
 
-  vals[1].length = strlen (sm_config_prefix_arg_name);
-  vals[1].value = (char *) sm_config_prefix_arg_name;
-  vals[2].length = strlen (gnome_client_get_config_prefix (client));
-  vals[2].value = client->config_prefix;
+  if (client->config_prefix)
+    {
+      vals[i].length = strlen (sm_config_prefix_arg_name);
+      vals[i++].value = (char *) sm_config_prefix_arg_name;
+      vals[i].length = strlen (client->config_prefix);
+      vals[i++].value = client->config_prefix;
+    }
+  vals[i].length = strlen (sm_client_id_arg_name);
+  vals[i++].value = (char *) sm_client_id_arg_name;
+  vals[i].length = strlen (client->client_id);
+  vals[i++].value = client->client_id;
 
-  vals[3].length = strlen (sm_client_id_arg_name);
-  vals[3].value = (char *) sm_client_id_arg_name;
-  vals[4].length = strlen (client->client_id);
-  vals[4].value = client->client_id;
-
-  for (list = client->static_args, i = 5; list; i++, list = g_list_next (list))
+  for (list = client->static_args; list; list = g_list_next (list))
     {
       vals[i].length= strlen ((gchar *)list->data);
-      vals[i].value = (gchar *)list->data;
+      vals[i++].value = (gchar *)list->data;
     }
 
-  for (; *ptr ; i++)
+  while (*ptr)
     {
       vals[i].length = strlen (*ptr);
-      vals[i].value  = *ptr++;
+      vals[i++].value  = *ptr++;
     }
 
-  client_set_value (client, SmRestartCommand, SmLISTofARRAY8, argc, vals);
+  client_set_value (client, SmRestartCommand, SmLISTofARRAY8, i, vals);
   
   g_free (vals);
 }		   
@@ -578,7 +583,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
 {
   GnomeClient *client= (GnomeClient*) client_data;
   gchar *name, *prefix;
-  int fd;
+  int fd, len;
 
   if (!client_grab_widget)
     client_grab_widget = gtk_widget_new (gtk_widget_get_type(), NULL);
@@ -671,15 +676,15 @@ client_save_yourself_callback (SmcConn   smc_conn,
   gdk_keyboard_ungrab (GDK_CURRENT_TIME);
   gtk_grab_add (client_grab_widget);
 
-  name = client->program;
+  name = g_strdup (gnome_client_get_global_config_prefix(client));
+  name[strlen (name) - 1] = '\0';
 
-  if ((prefix = strrchr (name, '/')))
-    name = prefix + 1;
+  prefix = g_strconcat (name, "-XXXXX", "/", NULL);
+  g_free (name);
+  len = strlen (prefix);
 
-  prefix = g_strconcat ("/", name, "-XXXXX", "/", NULL);
   name = gnome_config_get_real_path (prefix);
-  
-  free (prefix);
+  g_free (prefix);
 
   name [strlen (name) - 1] = 'X';
   fd = mkstemp (name);
@@ -688,7 +693,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
     {
       unlink (name);
       close (fd);
-      client->config_prefix = g_strconcat (strrchr (name, '/'), "/", NULL);
+      client->config_prefix = g_strconcat (name+strlen(name) - len, "/", NULL);
 
       if (client == master_client)
 	{
@@ -697,7 +702,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
 	  master_client_restored= FALSE;
 	}
     }
-  free (name);
+  g_free (name);
 
   client_set_clone_command (client);
   client_set_restart_command (client);

@@ -1,3 +1,9 @@
+1999-02-10  Felix Bellaby <felix@pooh.u-net.com>
+
+	* gnome-client.c (client_set_restart_command, client_set_clone_command,
+	client_save_yourself_callback): fix implementation of the config 
+	prefix so that it is based on the global config prefix as documented.
+
 1999-02-10  James Henstridge  <james@daa.com.au>
 
 	* gnome-icon-list.c: added an implementation for the
