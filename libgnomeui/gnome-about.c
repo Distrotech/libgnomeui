@@ -1088,32 +1088,30 @@ void gnome_about_parse_name(gchar **name, gchar **email)
 	gchar *email_start = 0;
 	
 	buffer = g_new(gchar, strlen(*name));
-	
-	for (; *name_buf; name_buf++)
+
+	for (name_buf = strchr(*name, '<'); name_buf;
+	     name_buf = strchr(name_buf++, '<'))
 	{
-		if (*name_buf == '<')
+		email_start = name_buf;
+		closed_bracket = at_num = 0;
+		name_buf++;
+		
+		for (buffer_len = 0; *name_buf; name_buf++, buffer_len++)
 		{
-			email_start = name_buf;
-			closed_bracket = at_num = 0;
-			name_buf++;
-			
-			for (buffer_len = 0; *name_buf; name_buf++, buffer_len++)
+			if (*name_buf == '>')
 			{
-				if (*name_buf == '>')
-				{
-					closed_bracket = 1;
-					break;
-				}
-				if (*name_buf == '<')
-				{
-					name_buf--;
-					break;
-				}
-				if (*name_buf == '@')
-					at_num++;
-				
-				buffer[buffer_len] = *name_buf;
+				closed_bracket = 1;
+				break;
 			}
+			if (*name_buf == '<')
+			{
+				name_buf--;
+				break;
+			}
+			if (*name_buf == '@')
+				at_num++;
+			
+			buffer[buffer_len] = *name_buf;
 		}
 	}
 	

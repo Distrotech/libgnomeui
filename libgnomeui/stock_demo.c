@@ -304,7 +304,7 @@ create_menu(GtkWidget *window)
 
 typedef struct _TbItems TbItems;
 struct _TbItems {
-	char *icon;
+	const char *icon;
 	GtkWidget *widget; /* will be filled in */
 };
 
