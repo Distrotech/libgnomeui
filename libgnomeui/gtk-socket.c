@@ -218,7 +218,6 @@ gtk_socket_size_request (GtkWidget      *widget,
 
   g_return_if_fail (widget != NULL);
   g_return_if_fail (GTK_IS_SOCKET (widget));
-  g_return_if_fail (widget->window != NULL);
   g_return_if_fail (requisition != NULL);
   
   socket = GTK_SOCKET (widget);
@@ -265,7 +264,6 @@ gtk_socket_size_allocate (GtkWidget     *widget,
 
   g_return_if_fail (widget != NULL);
   g_return_if_fail (GTK_IS_SOCKET (widget));
-  g_return_if_fail (widget->window != NULL);
   g_return_if_fail (allocation != NULL);
 
   socket = GTK_SOCKET (widget);

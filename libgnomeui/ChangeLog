@@ -1,3 +1,8 @@
+Mon Aug 24 19:01:02 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gtk-socket.c (gtk_socket_size_request/allocate): Don't
+	need to assert that the widget->window != NULL.
+
 Mon Aug 24 23:43:47 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock-imlib.h: added convert and jump_to icons
