@@ -359,6 +359,12 @@ menushell_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		{ GNOME_APP_UI_ITEM },
 		GNOMEUIINFO_END
 	};
+	GtkAccelGroup *uline = NULL;
+
+	if (strcmp(info->class, "GtkMenuBar") != 0) {
+		uline = gtk_menu_ensure_uline_accel_group(GTK_MENU(w));
+		glade_xml_push_uline_accel(xml, uline);
+	}
 
 	for (tmp = info->children; tmp; tmp = tmp->next) {
 		GladeWidgetInfo *cinfo = tmp->data;
@@ -402,13 +408,15 @@ menushell_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 				infos[0].hint = _(attr->value);
 		}
 		gnome_app_fill_menu(GTK_MENU_SHELL(w), infos,
-				    gtk_accel_group_get_default(), TRUE,
+				    glade_xml_ensure_accel(xml), TRUE,
 				    childnum);
 		child = infos[0].widget;
 		gtk_menu_item_remove_submenu(GTK_MENU_ITEM(child));
 		glade_xml_set_common_params(xml, child, cinfo,
 					    longname);
 	}
+	if (uline)
+		glade_xml_pop_uline_accel(xml);
 }
 
 /* -- routines to build widgets -- */
@@ -1120,7 +1128,25 @@ pixmapmenuitem_new(GladeXML *xml, GladeWidgetInfo *info)
 	}
 	wid = gtk_pixmap_menu_item_new();
 	if (label) {
-		GtkWidget *lwid = gtk_label_new(_(label));
+		GtkAccelGroup *accel;
+		guint key;
+		GtkWidget *lwid = gtk_label_new("");
+		key = gtk_label_parse_uline(GTK_LABEL(lwid), _(label));
+		if (key) {
+			accel = glade_xml_get_uline_accel(xml);
+			if (accel)
+				gtk_widget_add_accelerator(wid,
+							   "activate_item",
+							   accel, key, 0, 0);
+			else {
+				/* not inside a GtkMenu -- must be on menubar*/
+				accel = glade_xml_ensure_accel(xml);
+				gtk_widget_add_accelerator(wid,
+							   "activate_item",
+							   accel, key,
+							   GDK_MOD1_MASK, 0);
+			}
+		}
 		gtk_container_add(GTK_CONTAINER(wid), lwid);
 		gtk_widget_show(lwid);
 	}
@@ -1211,6 +1237,9 @@ about_new(GladeXML *xml, GladeWidgetInfo *info)
 	/* if (title) g_free(title); */
 	/* if (version) g_free(version); */
 	if (authors) g_strfreev(authors);
+
+	glade_xml_set_toplevel(xml, GTK_WINDOW(wid));
+
 	return wid;
 }
 
@@ -1271,6 +1300,9 @@ gnomedialog_new(GladeXML *xml, GladeWidgetInfo *info)
 	gnome_dialog_close_hides(GNOME_DIALOG(win), hide_on_close);
 	if (xpos >= 0 || ypos >= 0)
 		gtk_widget_set_uposition (win, xpos, ypos);
+
+	glade_xml_set_toplevel(xml, GTK_WINDOW(win));
+
 	return win;
 }
 
@@ -1288,9 +1320,7 @@ messagebox_new(GladeXML *xml, GladeWidgetInfo *info)
 		case 'm':
 			if (!strcmp(attr->name, "message"))
 				message = attr->value;
-			break;
-		case 't':
-			if (!strcmp(attr->name, "type")) {
+			else if (!strcmp(attr->name, "message_box_type")) {
 				gchar *str = attr->value;
 				if (strncmp(str, "GNOME_MESSAGE_BOX_", 18))
 					break;
@@ -1311,6 +1341,9 @@ messagebox_new(GladeXML *xml, GladeWidgetInfo *info)
 	}
 	/* create the message box with no buttons */
 	win = gnome_message_box_new(_(message), typename, NULL);
+
+	glade_xml_set_toplevel(xml, GTK_WINDOW(win));
+
 	return win;
 }
 
@@ -1358,6 +1391,9 @@ app_new(GladeXML *xml, GladeWidgetInfo *info)
 		gtk_window_set_wmclass(GTK_WINDOW(win),
 				       wmname?wmname:"", wmclass?wmclass:"");
 	gnome_app_enable_layout_config(GNOME_APP(win), enable_layout);
+
+	glade_xml_set_toplevel(xml, GTK_WINDOW(win));
+
 	return win;
 }
 
