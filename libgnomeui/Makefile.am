@@ -30,6 +30,7 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	$(WARN_CFLAGS)					\
 	$(LIBGNOMECANVAS_CFLAGS)			\
+	-DGTK_VERSION=\""$(GTK_VERSION)"\"		\
 	-DVERSION=\"$(VERSION)\"
 
 EXTRA_HEADERS = 
@@ -44,6 +45,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-appbar.c			\
 	gnome-app-helper.c		\
 	gnome-app-util.c		\
+	gnome-canvas-init.c		\
 	gnome-client.c			\
 	gnome-color-picker.c		\
 	gnome-cursors.c			\
@@ -114,6 +116,7 @@ gnome_headers = \
 	gnome-appbar.h			\
 	gnome-app-helper.h		\
 	gnome-app-util.h		\
+	gnome-canvas-init.h		\
 	gnome-client.h			\
 	gnome-color-picker.h		\
 	gnome-cursors.h			\

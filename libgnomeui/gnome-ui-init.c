@@ -43,7 +43,7 @@
 #endif
 
 #include <libgnome/libgnome.h>
-#include <libgnomecanvas/libgnomecanvas.h>
+#include <libgnomeui/gnome-canvas-init.h>
 
 #include "gnome-client.h"
 #include "gnome-preferences.h"

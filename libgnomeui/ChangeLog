@@ -1,3 +1,11 @@
+2001-04-19  Michael Meeks  <michael@ximian.com>
+
+	* libgnomeui.h: add gnome-canvas-init.h
+
+	* gnome-canvas-init.h: add.
+
+	* Makefile.am: add gnome-canvas-init.[ch]
+
 2001-04-18  Martin Baulig  <baulig@suse.de>
 
 	* gnome-init.c (libbonoboui_module_init): Added libbonoboui initialization here;
