@@ -1,4 +1,4 @@
-# Swedish messages for libgnomeui-2.
+# Swedish messages for libgnomeui.
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Christian Rose <menthos@menthos.com>, 2001.
 #
@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui-2\n"
-"POT-Creation-Date: 2001-06-16 13:45+0200\n"
-"PO-Revision-Date: 2001-06-16 15:35+0200\n"
+"Project-Id-Version: libgnomeui\n"
+"POT-Creation-Date: 2001-07-07 01:12+0200\n"
+"PO-Revision-Date: 2001-07-07 01:23+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -179,55 +179,12 @@ msgstr ""
 "Fel uppstod vid körning av URL-hanteraren.\n"
 "Var vänlig och kontrollera att inställningarna i kontrollpanelen är korrekta."
 
-#: libgnomeui/gnome-animator.c:136
-msgid "Loop type"
-msgstr "Slingtyp"
-
-#: libgnomeui/gnome-animator.c:137
-msgid "The type of loop the GnomeAnimator uses"
-msgstr "Slingtypen som GnomeAnimator använder"
-
-#: libgnomeui/gnome-animator.c:145
-msgid "Direction"
-msgstr "Riktning"
-
-#: libgnomeui/gnome-animator.c:146
-msgid "Animation direction"
-msgstr "Animationsriktning"
-
-#: libgnomeui/gnome-animator.c:154
-msgid "Number of frames"
-msgstr "Antal ramar"
-
-#: libgnomeui/gnome-animator.c:155
-msgid "Total number of frames in animation"
-msgstr "Totala antalet ramar i animeringen"
-
-#: libgnomeui/gnome-animator.c:163
-msgid "Current frame"
-msgstr "Aktuell ram"
-
-#: libgnomeui/gnome-animator.c:164
-msgid "Current frame number"
-msgstr "Aktuellt ramnummer"
-
-#: libgnomeui/gnome-animator.c:172 libgnomeui/gnome-animator.c:173
-msgid "Animation status"
-msgstr "Animationsstatus"
-
-#: libgnomeui/gnome-animator.c:181
-msgid "Speed"
-msgstr "Hastighet"
-
-#: libgnomeui/gnome-animator.c:182
-msgid "Animation speed"
-msgstr "Animationshastighet"
-
 #: libgnomeui/gnome-canvas-init.c:52
 msgid "Gdk debugging flags to set"
 msgstr "Felsökningsflaggor för Gdk som ska användas"
 
-#: libgnomeui/gnome-canvas-init.c:52 libgnomeui/gnome-canvas-init.c:55 libgnomeui/gnome-canvas-init.c:85 libgnomeui/gnome-canvas-init.c:88
+#: libgnomeui/gnome-canvas-init.c:52 libgnomeui/gnome-canvas-init.c:55
+#: libgnomeui/gnome-canvas-init.c:85 libgnomeui/gnome-canvas-init.c:88
 msgid "FLAGS"
 msgstr "FLAGGOR"
 
@@ -235,11 +192,11 @@ msgstr "FLAGGOR"
 msgid "Gdk debugging flags to unset"
 msgstr "Felsökningsflaggor för Gdk som inte ska användas"
 
-#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:133
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:128
 msgid "X display to use"
 msgstr "X-display som skall användas"
 
-#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:133
+#: libgnomeui/gnome-canvas-init.c:58 libgnomeui/gnome-init.c:128
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
@@ -418,7 +375,8 @@ msgid ""
 "In the following commands you should use %s in the spot where the\n"
 "filename/URL should be substituted.  If you leave the field blank\n"
 "drops will not be accepted.  If this application can accept\n"
-"multiple files or URLs as arguments after its command name check the box above."
+"multiple files or URLs as arguments after its command name check the box "
+"above."
 msgstr ""
 "I de följande kommandona kan du använda %s på den plats där\n"
 "filnamnet/URL:en ska hamna. Om du lämnar fältet tomt kommer\n"
@@ -490,13 +448,30 @@ msgstr "Dra och släpp"
 msgid "Advanced"
 msgstr "Avancerat"
 
-#: libgnomeui/gnome-druid-page-edge.c:352 libgnomeui/gnome-druid-page-standard.c:301
+#: libgnomeui/gnome-druid-page-edge.c:352
+#: libgnomeui/gnome-druid-page-standard.c:301
 msgid "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
 msgstr "-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"
 
 #: libgnomeui/gnome-druid-page-edge.c:361
 msgid "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
 msgstr "-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"
+
+#: libgnomeui/gnome-druid.c:128
+msgid "Show Finish"
+msgstr "Visa Slutför"
+
+#: libgnomeui/gnome-druid.c:129
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Visa knappen \"Slutför\" istället för \"Nästa\"-knappen"
+
+#: libgnomeui/gnome-druid.c:136
+msgid "Show Help"
+msgstr "Visa hjälp"
+
+#: libgnomeui/gnome-druid.c:137
+msgid "Show the 'Help' button"
+msgstr "Visa \"Hjälp\"-knappen"
 
 #: libgnomeui/gnome-font-picker.c:858 libgnomeui/gnome-stock-icons.c:279
 msgid "Font"
@@ -527,7 +502,7 @@ msgid "Bonobo UI"
 msgstr "Bonobo-användargränssnitt"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-init.c:510
+#: libgnomeui/gnome-init.c:466
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flera segmenteringsfel har inträffat; kan inte visa felmeddelande\n"
 
@@ -660,12 +635,14 @@ msgstr "Okänd"
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session will exit.\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
 "GNOMEs sessionshanterare (process %d) har kraschat\n"
 "på grund av ett allvarligt fel (%s).\n"
-"När du stänger den här dialogrutan kommer alla program att stängas och din session avslutas.\n"
+"När du stänger den här dialogrutan kommer alla program att stängas och din "
+"session avslutas.\n"
 "Var vänlig och spara dina filer innan du stänger den här dialogrutan."
 
 #: libgnomeui/gnome_segv.c:102
@@ -786,3 +763,36 @@ msgstr "Upp"
 #: libgnomeui/gnome-stock-icons.c:278
 msgid "Down"
 msgstr "Ner"
+
+#~ msgid "Loop type"
+#~ msgstr "Slingtyp"
+
+#~ msgid "The type of loop the GnomeAnimator uses"
+#~ msgstr "Slingtypen som GnomeAnimator använder"
+
+#~ msgid "Direction"
+#~ msgstr "Riktning"
+
+#~ msgid "Animation direction"
+#~ msgstr "Animationsriktning"
+
+#~ msgid "Number of frames"
+#~ msgstr "Antal ramar"
+
+#~ msgid "Total number of frames in animation"
+#~ msgstr "Totala antalet ramar i animeringen"
+
+#~ msgid "Current frame"
+#~ msgstr "Aktuell ram"
+
+#~ msgid "Current frame number"
+#~ msgstr "Aktuellt ramnummer"
+
+#~ msgid "Animation status"
+#~ msgstr "Animationsstatus"
+
+#~ msgid "Speed"
+#~ msgstr "Hastighet"
+
+#~ msgid "Animation speed"
+#~ msgstr "Animationshastighet"
