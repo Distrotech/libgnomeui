@@ -454,7 +454,7 @@ show_icon_selection(GtkButton * b, GnomeIconEntry * ientry)
 
 		if(curfile)
 			gnome_icon_selection_select_icon(GNOME_ICON_SELECTION(iconsel), 
-							 g_filename_pointer(curfile));
+							 g_basename(curfile));
 
 		gnome_dialog_button_connect(GNOME_DIALOG(ientry->pick_dialog), 
 					    0, /* OK button */

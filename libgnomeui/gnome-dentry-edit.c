@@ -546,7 +546,7 @@ gnome_dentry_edit_sync_display(GnomeDEntryEdit *dee,
 		     dentry->comment ? dentry->comment : "");
   
   if (dentry->exec)
-    s = g_flatten_vector(" ", dentry->exec);
+    s = g_strjoinv(" ", dentry->exec);
   gtk_entry_set_text(GTK_ENTRY(dee->exec_entry), s ? s : "");
   g_free(s);
 

@@ -40,7 +40,7 @@ main (int argc, char *argv[])
   GtkWidget *tmp;
   char *s;
 
-  gnome_init ("gnome-animator", VERSION, argc, argv);
+  gnome_program_init ("gnome-animator", VERSION, argc, argv, GNOMEUI_INIT, NULL);
 
   the_app = gnome_app_new ("gnome-animator", "Test!");
   gtk_widget_realize (the_app);

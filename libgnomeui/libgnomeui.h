@@ -1,6 +1,8 @@
 #ifndef LIBGNOMEUI_H
 #define LIBGNOMEUI_H
 
+#define GNOME_EXCLUDE_DEPRECATED 1
+
 #include "libgnomeui/gnome-compat.h"
 
 #include "libgnome/gnome-defs.h"
@@ -106,8 +108,9 @@
 #include "libgnomeui/gnome-druid-page-start.h"
 #include "libgnomeui/gnome-druid-page-standard.h"
 #include "libgnomeui/gnome-druid-page-finish.h"
+
+#define GNOMEUI_INIT LIBGNOMEUI_INIT,GNOME_CLIENT_INIT
+
+#define gnome_init(app_id, app_version, argc, argv) gnome_program_init(app_id, app_version, argc, argv, GNOMEUI_INIT, NULL)
+
 #endif
-
-
-
-

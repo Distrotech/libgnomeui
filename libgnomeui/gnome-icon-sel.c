@@ -480,7 +480,7 @@ gnome_icon_selection_get_icon     (GnomeIconSelection * gis,
     gint pos = GPOINTER_TO_INT(sel->data);
     p = gnome_icon_list_get_icon_data(GNOME_ICON_LIST(gis->gil), pos);
     if (full_path) return p;
-    else return g_filename_pointer(p);
+    else return g_basename(p);
   }
   else return NULL;
 }
@@ -510,7 +510,7 @@ void  gnome_icon_selection_select_icon    (GnomeIconSelection * gis,
   while ( pos < icons ) {
     gchar * file = 
       gnome_icon_list_get_icon_data(GNOME_ICON_LIST(gis->gil),pos);
-    if ( strcmp(g_filename_pointer(file),filename) == 0 ) {
+    if ( strcmp(g_basename(file),filename) == 0 ) {
       gnome_icon_list_select_icon(GNOME_ICON_LIST(gis->gil), pos);
       return;
     }

@@ -7,6 +7,7 @@
 #include <config.h>
 #include <string.h>
 #include <stdlib.h> /* atoi */
+#include <ctype.h> /* isdigit */
 #include <stdio.h>
 #include <time.h>
 #include <gdk/gdkkeysyms.h>

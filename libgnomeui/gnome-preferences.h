@@ -1,3 +1,4 @@
+/* DEPRECATED */
 #ifndef GNOME_PREFERENCES_H
 #define GNOME_PREFERENCES_H
 /****

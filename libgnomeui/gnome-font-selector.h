@@ -1,3 +1,4 @@
+/* DEPRECATED */
 /* GnomeFontSelector widget, by Elliot Lee.
    Derived from code in: */
 /* The GIMP -- an image manipulation program

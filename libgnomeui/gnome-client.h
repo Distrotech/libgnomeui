@@ -26,6 +26,7 @@
 #include <sys/types.h>
 #include <gtk/gtkobject.h>
 #include <libgnome/gnome-defs.h>
+#include <libgnome/gnomelib-init2.h>
 #include <libgnomeui/gnome-dialog.h>
 
 BEGIN_GNOME_DECLS
@@ -166,9 +167,12 @@ struct _GnomeClientClass
   void (* disconnect)         (GnomeClient        *client);
 };
 
+extern GnomeModuleInfo gnome_client_module_info;
+#define GNOME_CLIENT_INIT GNOME_PARAM_MODULE,&gnome_client_module_info
+#define GNOME_CLIENT_PARAM_SM_CONNECT "B:libgnomeui/gnome-client/sm_connect"
+
 /* For internal use by the gnome-libs: */
 guint        gnome_client_get_type (void);
-void         gnome_client_init(void); 
 
 /* Get the master session management client.  This master client gets
    a client id, that may be specified by the '--sm-client-id' command
@@ -406,10 +410,6 @@ gchar*       gnome_client_get_id                 (GnomeClient *client);
    recreated from a previous session, returns NULL. The session 
    manager tries to maintain the same id from one session to another. */
 gchar*       gnome_client_get_previous_id        (GnomeClient *client);
-
-/* Get the cloned session management client. This function is included 
-   for backwards compatibility and always returns NULL. */
-GnomeClient *gnome_cloned_client 	         (void);
 
 /* Use the following functions, if you want to interact with the user
    during a "save_yourself" handler without being restricted to using 

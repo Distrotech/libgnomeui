@@ -1,25 +1,8 @@
 /* -*- Mode: C; tab-width: 8; c-basic-offset: 8; indent-tabs-mode: nil -*- */
-/* Blame Elliot for the poptimization of this file */
+/* Blame Elliot for most of this stuff*/
 
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
-#endif
-
-#define USE_SEGV_HANDLE 1
-
-/* AIX requires this to be the first thing in the file.  */
-#ifndef __GNUC__
-# if HAVE_ALLOCA_H
-#  include <alloca.h>
-# else
-#  ifdef _AIX
- #pragma alloca
-#  else
-#   ifndef alloca /* predefined by HP cc +Olibcalls */
-char *alloca ();
-#   endif
-#  endif
-# endif
 #endif
 
 #include <errno.h>
@@ -30,57 +13,130 @@ char *alloca ();
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-
-#include <gtk/gtk.h>
-#include <gdk_imlib.h>
-
-#ifdef HAVE_ESD
-#include <esd.h>
-#endif
-
-#include "libgnome/libgnomeP.h"
-#include "libgnome/gnome-popt.h"
-#include "gnome-preferences.h"
-#include "libgnomeui/gnome-client.h"
-#include "libgnomeui/gnome-init.h"
-#include "libgnomeui/gnome-winhints.h"
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
 #endif
 
-static void initialize_gtk_signal_relay(void);
-static gboolean
-relay_gtk_signal(GtkObject *object,
-		 guint signal_id,
-		 guint n_params,
-		 GtkArg *params,
-		 gchar *signame);
+#include <gtk/gtk.h>
+#include <gdk_imlib.h>
 
-extern char *program_invocation_name;
-extern char *program_invocation_short_name;
+#include "libgnome/libgnomeP.h"
 
-extern void  gnome_type_init (void);
+#include "libgnomeui/libgnomeui.h"
+#include "libgnomeui/gnome-client.h"
+#include "libgnomeui/gnome-preferences.h"
+#include "libgnomeui/gnome-init.h"
+#include "libgnomeui/gnome-winhints.h"
 
-static void gnome_rc_parse(gchar *command);
-static void gnome_segv_setup(gboolean post_arg_parse);
+extern void gnome_type_init (void);
 
-static GdkPixmap *imlib_image_loader(GdkWindow   *window,
-				     GdkColormap *colormap,
-				     GdkBitmap  **mask,
-				     GdkColor    *transparent_color,
-				     const gchar *filename);
+/******************** gtk proxy module *******************/
 
-/* This isn't conditionally compiled based on USE_SEGV_HANDLE
-   because the --disable-crash-dialog option is always accepted,
-   even if it has no effect
-*/
-gboolean disable_crash_dialog = FALSE;
+static void
+gnome_add_gtk_arg_callback(poptContext con,
+			   enum poptCallbackReason reason,
+			   const struct poptOption * opt,
+			   const char * arg, void * data);
+static void gtk_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
+static void gtk_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 
+static struct poptOption gtk_options [] = {
+        { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
 
-/* The master client.  */
-static GnomeClient *client = NULL;
+	{ NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE,
+	  &gnome_add_gtk_arg_callback, 0, NULL},
 
-static gboolean gnome_initialized = FALSE;
+	{ "gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gdk debugging flags to set"), N_("FLAGS")},
+
+	{ "gdk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gdk debugging flags to unset"), N_("FLAGS")},
+
+	{ "display", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("X display to use"), N_("DISPLAY")},
+
+	{ "sync", '\0', POPT_ARG_NONE, NULL, 0,
+	  N_("Make X calls synchronous"), NULL},
+
+	{ "no-xshm", '\0', POPT_ARG_NONE, NULL, 0,
+	  N_("Don't use X shared memory extension"), NULL},
+
+	{ "name", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Program name as used by the window manager"), N_("NAME")},
+
+	{ "class", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Program class as used by the window manager"), N_("CLASS")},
+
+	{ "gxid_host", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("HOST")},
+
+	{ "gxid_port", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("PORT")},
+
+	{ "xim-preedit", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("STYLE")},
+
+	{ "xim-status", '\0', POPT_ARG_STRING, NULL, 0,
+	  NULL, N_("STYLE")},
+
+	{ "gtk-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gtk+ debugging flags to set"), N_("FLAGS")},
+
+	{ "gtk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Gtk+ debugging flags to unset"), N_("FLAGS")},
+
+	{ "g-fatal-warnings", '\0', POPT_ARG_NONE, NULL, 0,
+	  N_("Make all warnings fatal"), NULL},
+
+	{ "gtk-module", '\0', POPT_ARG_STRING, NULL, 0,
+	  N_("Load an additional Gtk module"), N_("MODULE")},
+
+	{ NULL, '\0', 0, NULL, 0}
+};
+
+GnomeModuleInfo gtk_module_info = {
+        "gtk", "1.2.5" /* aargh broken! */, "GTK",
+        NULL,
+        gtk_pre_args_parse, gtk_post_args_parse,
+        gtk_options
+};
+
+struct {
+        GPtrArray *gtk_args;
+} gnome_gtk_init_info = {0};
+
+static void
+gtk_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
+{
+	if (getenv ("GTK_DEBUG_OBJECTS"))
+		gtk_debug_flags |= GTK_DEBUG_OBJECTS;
+		
+        gnome_gtk_init_info.gtk_args = g_ptr_array_new();
+}
+
+static void
+gtk_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
+{
+        int i;
+        int final_argc;
+        char **final_argv;
+        char *accels_rc_filename;
+
+        g_ptr_array_add(gnome_gtk_init_info.gtk_args, NULL);
+
+        final_argc = gnome_gtk_init_info.gtk_args->len - 1;
+        final_argv = g_memdup(gnome_gtk_init_info.gtk_args->pdata, sizeof(char *) * gnome_gtk_init_info.gtk_args->len);
+        gtk_init(&final_argc, &final_argv);
+
+        accels_rc_filename = g_concat_dir_and_file (gnome_user_accels_dir, gnome_program_get_name(gnome_program_get()));
+        gtk_item_factory_parse_rc(accels_rc_filename);
+        g_free(accels_rc_filename);
+
+        g_free(final_argv);
+        for(i = 0; i < gnome_gtk_init_info.gtk_args->len; i++)
+                g_free(g_ptr_array_index(gnome_gtk_init_info.gtk_args, i));
+        g_ptr_array_free(gnome_gtk_init_info.gtk_args, TRUE); gnome_gtk_init_info.gtk_args = NULL;
+}
 
 static void
 gnome_add_gtk_arg_callback(poptContext con,
@@ -88,30 +144,15 @@ gnome_add_gtk_arg_callback(poptContext con,
 			   const struct poptOption * opt,
 			   const char * arg, void * data)
 {
-        static int gnome_gtk_initialized = FALSE;
-        static GPtrArray *gtk_args = NULL;
-	char *newstr;
-	int final_argc;
-	char **final_argv;
-	
-	if(gnome_gtk_initialized) {
-		/*
-		 * gnome has already been initialized, so app might be making a
-		 * second pass over the args - just ignore
-		 */
-		return;
-	}
-	
+        char *newstr;
+
 	switch(reason) {
-	  gchar *file_name;
 	case POPT_CALLBACK_REASON_PRE:
-		gtk_args = g_ptr_array_new();
-		
 		/* Note that the value of argv[0] passed to main() may be
 		 * different from the value that this passes to gtk
 		 */
-		g_ptr_array_add(gtk_args,
-				(char *)poptGetInvocationName(con));
+		g_ptr_array_add(gnome_gtk_init_info.gtk_args,
+				(char *)g_strdup(poptGetInvocationName(con)));
 		break;
 		
 	case POPT_CALLBACK_REASON_OPTION:
@@ -126,68 +167,353 @@ gnome_add_gtk_arg_callback(poptContext con,
 		  break;
 		}
 
-		g_ptr_array_add(gtk_args, newstr);
-		gnome_client_add_static_arg(client, newstr, NULL);
+		g_ptr_array_add(gnome_gtk_init_info.gtk_args, newstr);
+                /* XXX gnome-client tie-in */
 		break;
-		
-	case POPT_CALLBACK_REASON_POST:
-		g_ptr_array_add(gtk_args, NULL);
-
-		final_argc = gtk_args->len - 1;
-		final_argv = g_memdup(gtk_args->pdata, sizeof(char *) * gtk_args->len);
-		gtk_init(&final_argc, &final_argv);
-		g_free(final_argv);
-		
-		g_ptr_array_free(gtk_args, TRUE);
-		gtk_args = NULL;
-		gnome_gtk_initialized = TRUE;
-		file_name = g_concat_dir_and_file (gnome_user_accels_dir, gnome_app_id);
-#if GTK_CHECK_VERSION(1,2,1)
-		gtk_item_factory_parse_rc (file_name);
-#else
-		g_warning ("Accelerator support disabled.  Use at least GTK+ 1.2.1 if you want it.");
-#endif
-		g_free (file_name);
-		break;
+        default:
+                break;
 	}
 }
 
-static const struct poptOption gtk_options [] = {
-        { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
-	{ NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
-	  &gnome_add_gtk_arg_callback, 0, NULL},
-	{ "gdk-debug", '\0', POPT_ARG_STRING, NULL, 0,
-	  N_("Gdk debugging flags to set"), N_("FLAGS")},
-	{ "gdk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
-	  N_("Gdk debugging flags to unset"), N_("FLAGS")},
-	{ "display", '\0', POPT_ARG_STRING, NULL, 0,
-	  N_("X display to use"), N_("DISPLAY")},
-	{ "sync", '\0', POPT_ARG_NONE, NULL, 0,
-	  N_("Make X calls synchronous"), NULL},
-	{ "no-xshm", '\0', POPT_ARG_NONE, NULL, 0,
-	  N_("Don't use X shared memory extension"), NULL},
-	{ "name", '\0', POPT_ARG_STRING, NULL, 0,
-	  N_("Program name as used by the window manager"), N_("NAME")},
-	{ "class", '\0', POPT_ARG_STRING, NULL, 0,
-	  N_("Program class as used by the window manager"), N_("CLASS")},
-	{ "gxid_host", '\0', POPT_ARG_STRING, NULL, 0,
-	  NULL, N_("HOST")},
-	{ "gxid_port", '\0', POPT_ARG_STRING, NULL, 0,
-	  NULL, N_("PORT")},
-	{ "xim-preedit", '\0', POPT_ARG_STRING, NULL, 0,
-	  NULL, N_("STYLE")},
-	{ "xim-status", '\0', POPT_ARG_STRING, NULL, 0,
-	  NULL, N_("STYLE")},
-	{ "gtk-debug", '\0', POPT_ARG_STRING, NULL, 0,
-	  N_("Gtk+ debugging flags to set"), N_("FLAGS")},
-	{ "gtk-no-debug", '\0', POPT_ARG_STRING, NULL, 0,
-	  N_("Gtk+ debugging flags to unset"), N_("FLAGS")},
-	{ "g-fatal-warnings", '\0', POPT_ARG_NONE, NULL, 0,
-	  N_("Make all warnings fatal"), NULL},
-	{ "gtk-module", '\0', POPT_ARG_STRING, NULL, 0,
-	  N_("Load an additional Gtk module"), N_("MODULE")},
-	{ NULL, '\0', 0, NULL, 0}
+/******************* libgnomeui module ***********************/
+static void libgnomeui_arg_callback(poptContext con,
+                                    enum poptCallbackReason reason,
+                                    const struct poptOption * opt,
+                                    const char * arg, void * data);
+static void libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
+static void libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
+static void libgnomeui_rc_parse (gchar *command);
+static GdkPixmap *libgnomeui_imlib_image_loader(GdkWindow   *window,
+                                                GdkColormap *colormap,
+                                                GdkBitmap  **mask,
+                                                GdkColor    *transparent_color,
+                                                const gchar *filename);
+static void libgnomeui_segv_setup(gboolean post_arg_parse);
+
+static GnomeModuleRequirement libgnomeui_requirements[] = {
+        {VERSION, &libgnome_module_info},
+        {"1.2.5", &gtk_module_info},
+        {NULL, NULL}
 };
+
+enum { ARG_DISABLE_CRASH_DIALOG=1 };
+
+static struct poptOption libgnomeui_options[] = {
+        { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
+	{NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
+	 &libgnomeui_arg_callback, 0, NULL, NULL},
+	{"disable-crash-dialog", '\0', POPT_ARG_NONE, NULL, ARG_DISABLE_CRASH_DIALOG},
+	{NULL, '\0', 0, NULL, 0}
+};
+
+GnomeModuleInfo libgnomeui_module_info = {
+        "libgnomeui", VERSION, "GNOME GUI Library",
+        libgnomeui_requirements,
+        libgnomeui_pre_args_parse, libgnomeui_post_args_parse,
+        libgnomeui_options
+};
+
+static void
+libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
+{
+        gboolean ctype_set;
+        char *ctype, *old_ctype = NULL;
+        gboolean do_crash_dialog;
+        char *envar;
+
+        envar = getenv("GNOME_DISABLE_CRASH_DIALOG");
+        if(envar)
+                do_crash_dialog = atoi(envar)?FALSE:TRUE;
+        gnome_program_attributes_set(app, LIBGNOMEUI_PARAM_CRASH_DIALOG, do_crash_dialog, NULL);
+
+        if(do_crash_dialog)
+                libgnomeui_segv_setup(FALSE);
+
+        /* Begin hack to propogate an en_US locale into Gtk+ if LC_CTYPE=C, so that non-ASCII
+           characters will display for as many people as possible. Related to bug #1979 */
+        ctype = setlocale (LC_CTYPE, NULL);
+
+        if (!strcmp(ctype, "C")) {
+                old_ctype = g_strdup (getenv ("LC_CTYPE"));
+                putenv ("LC_CTYPE=en_US");
+                ctype_set = TRUE;
+        } else
+                ctype_set = FALSE;
+
+        gtk_set_locale ();
+
+        if (ctype_set) {
+                char *setme;
+
+                if (old_ctype) {
+                        setme = g_strconcat ("LC_CTYPE=", old_ctype, NULL);
+                        g_free(old_ctype);
+                } else
+                        setme = "LC_CTYPE";
+
+                putenv (setme);
+        }
+        /* End hack */
+}
+
+static void
+libgnomeui_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
+{
+        gdk_imlib_init();
+        gnome_type_init();
+        gtk_rc_set_image_loader(libgnomeui_imlib_image_loader);
+        libgnomeui_rc_parse(program_invocation_name);
+        gnome_preferences_load();
+
+        if (gnome_preferences_get_disable_imlib_cache ()){
+                int pixmaps, images;
+			
+                /*
+                 * If cache info has been set to -1, -1, it
+                 * means something initialized before us and
+                 * is requesting the cache to not be touched
+                 */
+                gdk_imlib_get_cache_info (&pixmaps, &images);
+
+                if (!(pixmaps == -1 || images == -1))
+                        gdk_imlib_set_cache_info (0, images);
+        }
+
+        libgnomeui_segv_setup(TRUE);
+}
+
+static void
+libgnomeui_arg_callback(poptContext con,
+                        enum poptCallbackReason reason,
+                        const struct poptOption * opt,
+                        const char * arg, void * data)
+{
+        switch(reason) {
+        case POPT_CALLBACK_REASON_OPTION:
+                switch(opt->val) {
+                case ARG_DISABLE_CRASH_DIALOG:
+                        gnome_program_attributes_set(gnome_program_get(), LIBGNOMEUI_PARAM_CRASH_DIALOG, FALSE, NULL);
+                        break;
+                }
+                break;
+        default:
+                break;
+        }
+}
+
+/* automagically parse all the gtkrc files for us.
+ * 
+ * Parse:
+ * $gnomedatadir/gtkrc
+ * $gnomedatadir/$apprc
+ * ~/.gnome/gtkrc
+ * ~/.gnome/$apprc
+ *
+ * appname is derived from argv[0].  IMHO this is a great solution.
+ * It provides good consistancy (you always know the rc file will be
+ * the same name as the executable), and it's easy for the programmer.
+ * 
+ * If you don't like it.. give me a good reason.  Symlin
+ */
+static void
+libgnomeui_rc_parse (gchar *command)
+{
+	gint i;
+	gint buf_len;
+	gchar *buf = NULL;
+	gchar *file;
+	gchar *apprc;
+	
+	buf_len = strlen(command);
+	
+	for (i = 0; i < buf_len; i++) {
+		if (command[buf_len - i] == '/') {
+			buf = &command[buf_len - i + 1];
+			break;
+		}
+	}
+	
+	if (!buf)
+                buf = command;
+
+        apprc = g_alloca (strlen(buf) + 4);
+	sprintf(apprc, "%src", buf);
+	
+	/* <gnomedatadir>/gtkrc */
+	file = gnome_datadir_file("gtkrc");
+	if (file) {
+		gtk_rc_add_default_file (file);
+		g_free (file);
+	}
+
+	/* <gnomedatadir>/<progname> */
+	file = gnome_datadir_file(apprc);
+	if (file) {
+                gtk_rc_add_default_file (file);
+                g_free (file);
+        }
+	
+	/* ~/.gnome/gtkrc */
+	file = gnome_util_home_file("gtkrc");
+	if (file) {
+		gtk_rc_add_default_file (file);
+		g_free (file);
+	}
+	
+	/* ~/.gnome/<progname> */
+	file = gnome_util_home_file(apprc);
+	if (file) {
+		gtk_rc_add_default_file (file);
+		g_free (file);
+	}
+
+	gtk_rc_init ();
+}
+
+static GdkPixmap *
+libgnomeui_imlib_image_loader(GdkWindow   *window,
+                              GdkColormap *colormap,
+                              GdkBitmap  **mask,
+                              GdkColor    *transparent_color,
+                              const gchar *filename)
+{
+	GdkPixmap *retval;
+	
+	if (gdk_imlib_load_file_to_pixmap ((char *) filename, &retval, mask))
+		return retval;
+	else
+		return NULL;
+}
+
+/* crash handler */
+static void libgnomeui_segv_handle(int signum);
+
+static void
+libgnomeui_segv_setup(gboolean post_arg_parse)
+{
+        static struct sigaction *setptr;
+        struct sigaction sa;
+        gboolean do_crash_dialog = TRUE;
+
+        gnome_program_attributes_get(gnome_program_get(), LIBGNOMEUI_PARAM_CRASH_DIALOG, &do_crash_dialog, NULL);
+
+        memset(&sa, 0, sizeof(sa));
+
+        setptr = &sa;
+        if(do_crash_dialog) {
+                sa.sa_handler = (gpointer)libgnomeui_segv_handle;
+        } else {
+                sa.sa_handler = SIG_DFL;
+        }
+
+        sigaction(SIGSEGV, setptr, NULL);
+        sigaction(SIGFPE, setptr, NULL);
+        sigaction(SIGBUS, setptr, NULL);
+}
+
+static void libgnomeui_segv_handle(int signum)
+{
+	static int in_segv = 0;
+	pid_t pid;
+	
+	in_segv++;
+
+        if (in_segv > 2) {
+                /* The fprintf() was segfaulting, we are just totally hosed */
+                _exit(1);
+        } else if (in_segv > 1) {
+                /* dialog display isn't working out */
+                fprintf(stderr, _("Multiple segmentation faults occurred; can't display error dialog\n"));
+                _exit(1);
+        }
+
+        /* Make sure we release grabs */
+        gdk_pointer_ungrab(GDK_CURRENT_TIME);
+        gdk_keyboard_ungrab(GDK_CURRENT_TIME);
+
+        gdk_flush();
+        
+	if ((pid = fork())) {
+                /* Wait for user to see the dialog, then exit. */
+                /* Why wait at all? Because we want to allow people to attach to the
+		   process */
+		int estatus;
+		pid_t eret;
+
+		eret = waitpid(pid, &estatus, 0);
+
+                /* Don't use app attributes here - a lot of things are probably hosed */
+		if(getenv("GNOME_DUMP_CORE"))
+	                abort ();
+
+		_exit(1);
+	} else {
+		char buf[32];
+
+		g_snprintf(buf, sizeof(buf), "%d", signum);
+
+		/* Child process */
+		execl(GNOMEBINDIR "/gnome_segv", GNOMEBINDIR "/gnome_segv",
+		      program_invocation_name, buf, gnome_app_version, NULL);
+
+                execlp("gnome_segv", "gnome_segv", program_invocation_name, buf, gnome_app_version, NULL);
+
+                _exit(99);
+	}
+
+	in_segv--;
+}
+
+#warning "Solve the sound events situation"
+
+/* backwards compat */
+int gnome_init_with_popt_table(const char *app_id,
+			       const char *app_version,
+			       int argc, char **argv,
+			       const struct poptOption *options,
+			       int flags,
+			       poptContext *return_ctx)
+{
+        gnome_program_init(app_id, app_version, argc, argv, GNOMEUI_INIT,
+                      GNOME_PARAM_POPT_TABLE, options, GNOME_PARAM_POPT_FLAGS, flags,
+                      NULL);
+
+        if(return_ctx)
+                gnome_program_attributes_get(gnome_program_get(), GNOME_PARAM_POPT_CONTEXT, return_ctx, NULL);
+
+        return 0;
+}
+
+
+/****************************************************************************************/
+
+#ifdef BUILD_UNUSED_LEGACY_CODE
+
+static void initialize_gtk_signal_relay(void);
+static gboolean
+relay_gtk_signal(GtkObject *object,
+		 guint signal_id,
+		 guint n_params,
+		 GtkArg *params,
+		 gchar *signame);
+
+static void gnome_rc_parse(gchar *command);
+
+static GdkPixmap *imlib_image_loader(GdkWindow   *window,
+				     GdkColormap *colormap,
+				     GdkBitmap  **mask,
+				     GdkColor    *transparent_color,
+				     const gchar *filename);
+
+/* This isn't conditionally compiled based on USE_SEGV_HANDLE
+   because the --disable-crash-dialog option is always accepted,
+   even if it has no effect
+*/
+gboolean disable_crash_dialog = FALSE;
+
+/* The master client.  */
+static GnomeClient *client = NULL;
+
 
 static void
 gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
@@ -203,28 +529,6 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
                         gboolean ctype_set;
 
                         gnome_segv_setup (FALSE);
-                        ctype = setlocale (LC_CTYPE, NULL);
-
-                        if (!strcmp(ctype, "C")) {
-                                old_ctype = g_strdup (getenv ("LC_CTYPE"));
-                                putenv ("LC_CTYPE=en_US");
-                                ctype_set = TRUE;
-                        } else
-                                ctype_set = FALSE;
-
-                        gtk_set_locale ();
-
-                        if (ctype_set) {
-                                char *setme;
-
-                                if (old_ctype) {
-                                        setme = g_strconcat ("LC_CTYPE=", old_ctype, NULL);
-                                        g_free(old_ctype);
-                                } else
-                                        setme = "LC_CTYPE";
-
-                                putenv (setme);
-                        }
                         client = gnome_master_client();
                 }
 		break;
@@ -277,11 +581,6 @@ gnome_init_cb(poptContext ctx, enum poptCallbackReason reason,
 }
 
 static const struct poptOption gnome_options[] = {
-        { NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
-	{NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
-	 &gnome_init_cb, 0, NULL, NULL},
-	{"disable-crash-dialog", '\0', POPT_ARG_NONE, NULL, -2},
-	{NULL, '\0', 0, NULL, 0}
 };
 
 static void
@@ -437,9 +736,6 @@ gnome_init_with_popt_table(const char *app_id,
 	
 	gnome_register_options();
 
-	if (getenv ("GTK_DEBUG_OBJECTS"))
-		gtk_debug_flags |= GTK_DEBUG_OBJECTS;
-		
 	gnome_client_init();
 	
 	if(options) {
@@ -454,10 +750,6 @@ gnome_init_with_popt_table(const char *app_id,
 		*return_ctx = ctx;
 	else
 		poptFreeContext(ctx);
-
-	/* reduce mem usage (hopefully) */
-	gnome_config_sync();
-	g_blow_chunks();
 
 	return 0;
 }
@@ -488,204 +780,6 @@ gnome_init(const char *app_id,
 
 /* perhaps this belongs in libgnome.. move it if you like. */
 
-/* automagically parse all the gtkrc files for us.
- * 
- * Parse:
- * $gnomedatadir/gtkrc
- * $gnomedatadir/$apprc
- * ~/.gnome/gtkrc
- * ~/.gnome/$apprc
- *
- * appname is derived from argv[0].  IMHO this is a great solution.
- * It provides good consistancy (you always know the rc file will be
- * the same name as the executable), and it's easy for the programmer.
- * 
- * If you don't like it.. give me a good reason.  Symlin
- */
-static void
-gnome_rc_parse (gchar *command)
-{
-	gint i;
-	gint buf_len;
-	gint found = 0;
-	gchar *buf = NULL;
-	gchar *file;
-	gchar *apprc;
-	
-	buf_len = strlen(command);
-	
-	for (i = 0; i < buf_len; i++) {
-		if (command[buf_len - i] == '/') {
-			buf = g_strdup (&command[buf_len - i + 1]);
-			found = TRUE;
-			break;
-		}
-	}
-	
-	if (!found)
-		buf = g_strdup (command);
-	
-	apprc = g_malloc (strlen(buf) + 3);
-	g_snprintf(apprc, strlen(buf) + 3, "%src", buf);
-	
-	g_free(buf);
-	
-	
-	/* <gnomedatadir>/gtkrc */
-	file = gnome_unconditional_datadir_file("gtkrc");
-	if (file){
-		gtk_rc_add_default_file (file);
-		g_free (file);
-	}
-
-	/* <gnomedatadir>/<progname> */
-	file = gnome_unconditional_datadir_file(apprc);
-	if (file){
-		gtk_rc_add_default_file (file);
-		g_free (file);
-	}
-	
-	/* ~/.gnome/gtkrc */
-	file = gnome_util_home_file("gtkrc");
-	if (file){
-		gtk_rc_add_default_file (file);
-		g_free (file);
-	}
-	
-	/* ~/.gnome/<progname> */
-	file = gnome_util_home_file(apprc);
-	if (file){
-		gtk_rc_add_default_file (file);
-		g_free (file);
-	}
-	
-	g_free (apprc);
-	gtk_rc_init ();
-}
-
-
-#ifdef USE_SEGV_HANDLE
-static void gnome_segv_handle(int signum);
-#endif
-
-static void
-gnome_segv_setup(gboolean post_arg_parse)
-{
-#ifdef USE_SEGV_HANDLE
-        static struct sigaction sa_saved_fpe, sa_saved_segv, sa_saved_bus;
-        struct sigaction sa;
-
-        memset(&sa, 0, sizeof(sa));
-        sa.sa_handler = (gpointer)gnome_segv_handle;
- 
-        /* 
-         * Yes, we do this twice, so if an error occurs before init,
-         * it will be caught, and if it happens after init, we'll override
-         * gtk's handler
-         */
-       if(post_arg_parse) {
-                struct sigaction *setptr_segv, *setptr_fpe, *setptr_bus;
-
-                if(disable_crash_dialog) {
-                        setptr_segv = &sa_saved_segv;
-                        setptr_fpe = &sa_saved_fpe;
-                        setptr_bus = &sa_saved_bus;
-                } else
-                        setptr_segv = setptr_fpe = setptr_bus = &sa;
-
-                sigaction(SIGSEGV, setptr_segv, NULL);
-                sigaction(SIGFPE, setptr_fpe, NULL);
-                sigaction(SIGBUS, setptr_bus, NULL);
-        } else {
-                struct sigaction *setptr;
-                char *ctmp;
-
-                /* Well, actually we haven't parsed options yet
-                   so --disable-crash-dialog can't take effect.
-                   But you could change this flag in the debugger. -hp
-
-                   ...or use an environment variable - ecl
-                */
-                ctmp = getenv("GNOME_DISABLE_CRASH_DIALOG");
-                if(ctmp)
-                        disable_crash_dialog = atoi(ctmp)?TRUE:FALSE;
-
-                setptr = disable_crash_dialog?NULL:&sa;
-
-                sigaction(SIGSEGV, setptr, &sa_saved_segv);
-                sigaction(SIGFPE, setptr, &sa_saved_fpe);
-                sigaction(SIGBUS, setptr, &sa_saved_bus);
-        }
-#endif
-}
-
-#ifdef USE_SEGV_HANDLE
-static void gnome_segv_handle(int signum)
-{
-	static int in_segv = 0;
-	pid_t pid;
-	
-	in_segv++;
-
-        if (in_segv > 2) {
-                /* The fprintf() was segfaulting, we are just totally hosed */
-                _exit(1);
-        } else if (in_segv > 1) {
-                /* dialog display isn't working out */
-                fprintf(stderr, _("Multiple segmentation faults occurred; can't display error dialog\n"));
-                _exit(1);
-        }
-
-        /* Make sure we release grabs */
-        gdk_pointer_ungrab(GDK_CURRENT_TIME);
-        gdk_keyboard_ungrab(GDK_CURRENT_TIME);
-
-        gdk_flush();
-        
-	if ((pid = fork())) {
-                /* Wait for user to see the dialog, then exit. */
-                /* Why wait at all? Because we want to allow people to attach to the
-		   process */
-		int estatus;
-		pid_t eret;
-
-		eret = waitpid(pid, &estatus, 0);
-
-		if(getenv("GNOME_DUMP_CORE"))		
-	                abort ();
-		_exit(1);
-	} else {
-		char buf[32];
-
-		g_snprintf(buf, sizeof(buf), "%d", signum);
-
-		/* Child process */
-		execl(GNOMEBINDIR "/gnome_segv", GNOMEBINDIR "/gnome_segv",
-		      program_invocation_name, buf, gnome_app_version, NULL);
-
-                execlp("gnome_segv", "gnome_segv", program_invocation_name, buf, gnome_app_version, NULL);
-
-                _exit(99);
-	}
-
-	in_segv--;
-}
-#endif
-
-static GdkPixmap *
-imlib_image_loader(GdkWindow   *window,
-		   GdkColormap *colormap,
-		   GdkBitmap  **mask,
-		   GdkColor    *transparent_color,
-		   const gchar *filename)
-{
-	GdkPixmap *retval;
-	
-	if (gdk_imlib_load_file_to_pixmap ((char *) filename, &retval, mask))
-		return retval;
-	else
-		return NULL;
-}
 
 static gboolean
 relay_gtk_signal(GtkObject *object,
@@ -791,3 +885,5 @@ initialize_gtk_signal_relay (void)
 	
 #endif
 }
+
+#endif /* BUILD_UNUSED_LEGACY_CODE */

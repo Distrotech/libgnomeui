@@ -1,3 +1,4 @@
+/* DEPRECATED */
 #ifndef __GTK_TED_H__
 #define __GTK_TED_H__
 

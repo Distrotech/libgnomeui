@@ -808,7 +808,7 @@ gnome_save_accels (gpointer data)
 {
 	gchar *file_name;
 
-	file_name = g_concat_dir_and_file (gnome_user_accels_dir, gnome_app_id);
+	file_name = g_concat_dir_and_file (gnome_user_accels_dir, gnome_program_get_name(gnome_program_get()));
 	gtk_item_factory_dump_rc (file_name, NULL, TRUE);
 	g_free (file_name);
 
@@ -961,7 +961,7 @@ create_menu_item (GtkMenuShell       *menu_shell,
 				widget = widget->parent;
 		}
 		g_string_prepend_c (gstring, '>');
-		g_string_prepend (gstring, gnome_app_id);
+		g_string_prepend (gstring, gnome_program_get_name(gnome_program_get()));
 		g_string_prepend_c (gstring, '<');
 
 		/* g_print ("######## menu item path: %s\n", gstring->str); */

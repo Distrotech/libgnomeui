@@ -3,19 +3,24 @@
 
 BEGIN_GNOME_DECLS
 
-#include "libgnome/gnome-popt.h"
+#include "libgnome/gnomelib-init2.h"
 
-/* After these functions return, gnome is initialized and you can do
-   whatever you like. */
-int gnome_init(const char *app_id, const char *app_version,
-	       int argc, char **argv);
-/* return_ctx can be NULL if you don't want the poptContext to be returned */
+
+
+#define LIBGNOMEUI_PARAM_CRASH_DIALOG "B:libgnomeui/show_crash_dialog"
+
+extern GnomeModuleInfo libgnomeui_module_info, gtk_module_info;
+
+#define LIBGNOMEUI_INIT GNOME_PARAM_MODULE,&libgnomeui_module_info
+
+/* The gnome_init define is in libgnomeui.h so it can be a macro */
 int gnome_init_with_popt_table(const char *app_id,
 			       const char *app_version,
 			       int argc, char **argv,
 			       const struct poptOption *options,
 			       int flags,
 			       poptContext *return_ctx);
+
 
 END_GNOME_DECLS
 

@@ -1,3 +1,4 @@
+/* DEPRECATED */
 /* WARNING ____ IMMATURE API ____ liable to change */
 
 /* gnome-guru.h: Copyright (C) 1998 Free Software Foundation

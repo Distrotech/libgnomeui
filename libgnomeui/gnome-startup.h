@@ -1,3 +1,4 @@
+/* DEPRECATED */
 /* gnome-startup.h - Functions for handling one-time startups in sessions.
    Written by Tom Tromey <tromey@cygnus.com>.  */
 

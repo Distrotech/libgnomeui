@@ -1,3 +1,4 @@
+/* DEPRECATED */
 /* gnome-less.h: Copyright (C) 1998 Free Software Foundation
  *  A simple GtkText wrapper with a scroll bar, convenience functions,
  *   and a right-click popup menu. For displaying info to the user,

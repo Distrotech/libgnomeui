@@ -1,3 +1,4 @@
+/* DEPRECATED */
 #ifndef __GNOME_DNS_H__
 #define __GNOME_DNS_H__
 

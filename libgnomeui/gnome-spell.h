@@ -1,3 +1,4 @@
+/* DEPRECATED */
 /* GTK - Spell widget
  * Copyright (C) 1997 Paolo Molaro
  *

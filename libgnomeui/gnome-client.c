@@ -88,6 +88,12 @@ static void gnome_real_client_shutdown_cancelled (GnomeClient      *client);
 static void gnome_real_client_connect            (GnomeClient      *client,
 						  gint              restarted);
 static void gnome_real_client_disconnect         (GnomeClient      *client);
+static void master_client_connect (GnomeClient *client,
+				   gint         restarted,
+				   gpointer     client_data);
+static void master_client_disconnect (GnomeClient *client,
+				      gpointer     client_data);
+
 
 static void   client_unset_config_prefix    (GnomeClient *client);
 
@@ -103,7 +109,6 @@ static const char *sm_config_prefix_arg_name = "--sm-config-prefix";
 /* The master client.  */
 static GnomeClient *master_client= NULL;
 
-static gboolean gnome_client_auto_connect_master = TRUE;
 static gboolean master_client_restored= FALSE;
 
 /*****************************************************************************/
@@ -812,27 +817,48 @@ static char* master_environment[]=
   NULL
 };
 
-/* Forward declaration for our parsing function.  */
+/********* gnome_client module */
+
+/* Forward declaration for our module functions.  */
 static void client_parse_func (poptContext ctx,
 			       enum poptCallbackReason reason,
 			       const struct poptOption *opt,
 			       const char *arg, void *data);
-
+static void gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
+static void gnome_client_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 
 /* Command-line arguments understood by this module.  */
+enum { ARG_SM_CLIENT_ID=1, ARG_SM_CONFIG_PREFIX, ARG_SM_DISABLE };
 static const struct poptOption options[] = {
   {NULL, '\0', POPT_ARG_INTL_DOMAIN, PACKAGE, 0, NULL, NULL},
+
   {NULL, '\0', POPT_ARG_CALLBACK | POPT_CBFLAG_PRE | POPT_CBFLAG_POST, 
    client_parse_func, 0, NULL, NULL},
-  {"sm-client-id", '\0', POPT_ARG_STRING, NULL, -1, 
+
+  {"sm-client-id", '\0', POPT_ARG_STRING, NULL, ARG_SM_CLIENT_ID, 
    N_("Specify session management ID"), N_("ID")},
-  {"sm-config-prefix", '\0', POPT_ARG_STRING, NULL, -2, 
+
+  {"sm-config-prefix", '\0', POPT_ARG_STRING, NULL, ARG_SM_CONFIG_PREFIX, 
    N_("Specify prefix of saved configuration"), N_("PREFIX")},
-  {"sm-disable", '\0', POPT_ARG_NONE, NULL, -3, 
+
+  {"sm-disable", '\0', POPT_ARG_NONE, NULL, ARG_SM_DISABLE, 
    N_("Disable connection to session manager"), NULL},
+
   {NULL, '\0', 0, NULL, 0}
 };
 
+extern GnomeModuleInfo gtk_module_info;
+static GnomeModuleRequirement gnome_client_requirements[] = {
+  { "1.2.5", &gtk_module_info },
+  { NULL, NULL }
+};
+
+GnomeModuleInfo gnome_client_module_info = {
+  "gnome-client", VERSION, N_("Session management"),
+  gnome_client_requirements,
+  gnome_client_pre_args_parse, gnome_client_post_args_parse,
+  options
+};
 
 /* Parse command-line arguments we recognize.  */
 static void
@@ -841,46 +867,90 @@ client_parse_func (poptContext ctx,
 		   const struct poptOption *opt,
 		   const char *arg, void *data)
 {
-  int key = opt ? opt->val : 0;
-
-  /* 'gnome_client_init' must have been called, before call
-     'client_parse_func'.  */
-  g_return_if_fail (master_client);
-
-  if (reason == POPT_CALLBACK_REASON_PRE) 
-    {
-      /* needed on non-glibc systems: */
-      gnome_client_set_program (master_client, program_invocation_name);
-      /* Argument parsing is starting.  We set the restart and the
-	 clone command to a default value, so other functions can use
-	 the master client while parsing the command line.  */
-      gnome_client_set_restart_command (master_client, 1, 
-					&master_client->program);
-    }
-  else if (reason == POPT_CALLBACK_REASON_POST)
-    {
-      /* We're done, so we can connect to the session manager now.  */
-      if (gnome_client_auto_connect_master)
-	gnome_client_connect (master_client);
-    }
-  else if (key == -1)
-    {
-      /* Option: --sm-client-id  */
+  switch (reason) {
+  case POPT_CALLBACK_REASON_OPTION:
+    switch (opt->val) {
+    case ARG_SM_CLIENT_ID:
       gnome_client_set_id (master_client, arg);
-    }
-  else if (key == -2)
-    {
-      /* Option: --sm-config-prefix  */
+      break;
+    case ARG_SM_DISABLE:
+      gnome_client_disable_master_connection ();
+      break;
+    case ARG_SM_CONFIG_PREFIX:
+      if(master_client->config_prefix)
+	g_free(master_client->config_prefix);
       master_client->config_prefix= g_strdup (arg);
       master_client_restored = TRUE;    
+      break;
     }
-  else if (key == -3)
-    {
-      /* Option: --sm-disable  */
-      gnome_client_disable_master_connection ();
-    }
+    break;
+  default:
+    break;
+  }
 }
 
+
+static void
+gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
+{
+  int i;
+  char *cwd;
+
+  /* Make sure the Gtk+ type system is initialized.  */
+  gtk_type_init ();
+  gtk_signal_init ();
+
+  /* Create the master client.  */
+  master_client = gnome_client_new_without_connection ();
+  /* Connect the master client's default signals.  */
+  gtk_signal_connect (GTK_OBJECT (master_client), "connect",
+		      GTK_SIGNAL_FUNC (master_client_connect), NULL);
+  gtk_signal_connect (GTK_OBJECT (master_client), "disconnect",
+		      GTK_SIGNAL_FUNC (master_client_disconnect), NULL);
+
+  /* Initialise ICE */
+  gnome_ice_init ();
+
+  /* Set the master client's environment.  */
+  for (i= 0; master_environment[i]; i++)
+    {
+      char *value= getenv (master_environment[i]);
+	      
+      if (value)
+	gnome_client_set_environment (master_client,
+				      master_environment[i],
+				      value);
+    }
+
+  cwd = g_get_current_dir();
+  if (cwd != NULL)
+    {
+      gnome_client_set_current_directory (master_client, cwd);
+      g_free (cwd);
+    }
+
+  gnome_program_attributes_set(app, GNOME_CLIENT_PARAM_SM_CONNECT, TRUE, NULL);
+
+  /* needed on non-glibc systems: */
+  gnome_client_set_program (master_client, program_invocation_name);
+  /* Argument parsing is starting.  We set the restart and the
+     clone command to a default value, so other functions can use
+     the master client while parsing the command line.  */
+  gnome_client_set_restart_command (master_client, 1, 
+				    &master_client->program);
+}
+
+static void
+gnome_client_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
+{
+  gboolean do_connect = TRUE;
+
+  gnome_program_attributes_get(app, GNOME_CLIENT_PARAM_SM_CONNECT, &do_connect, NULL);
+
+  /* We're done, so we can connect to the session manager now.  */
+  if (do_connect)
+    gnome_client_connect (master_client);
+}
 
 /**
  * gnome_client_disable_master_connection
@@ -892,7 +962,7 @@ client_parse_func (poptContext ctx,
 void         
 gnome_client_disable_master_connection (void)
 {
-  gnome_client_auto_connect_master= FALSE;
+  gnome_program_attributes_set(gnome_program_get(), GNOME_CLIENT_PARAM_SM_CONNECT, FALSE, NULL);
 }
 
 /* Called at exit to ensure the ice connection is closed cleanly
@@ -924,79 +994,6 @@ master_client_disconnect (GnomeClient *client,
   gdk_set_sm_client_id (NULL);
 }
 
-
-/**
- * gnome_client_init
- *
- * Description:
- **/
-
-void
-gnome_client_init (void)
-{
-  gint i;
-  gchar *buffer= NULL;
-
-  /* This function must not be called more than once.  */
-  g_return_if_fail (master_client == NULL);
-  
-  /* Make sure the Gtk+ type system is initialized.  */
-  gtk_type_init ();
-  gtk_signal_init ();
-
-  /* Create the master client.  */
-  master_client= gnome_client_new_without_connection ();
-  g_assert (master_client);
-
-  /* Initialise ICE */
-  gnome_ice_init ();
-
-  /* Connect the master client's default signals.  */
-  gtk_signal_connect (GTK_OBJECT (master_client), "connect",
-		      GTK_SIGNAL_FUNC (master_client_connect), NULL);
-  gtk_signal_connect (GTK_OBJECT (master_client), "disconnect",
-		      GTK_SIGNAL_FUNC (master_client_disconnect), NULL);
-
-  /* Register commandline options.  */
-  gnomelib_register_popt_table (options, N_("Session management options"));
-
-  /* Set the master client's environment.  */
-  for (i= 0; master_environment[i]; i++)
-    {
-      char *value= getenv (master_environment[i]);
-	      
-      if (value)
-	gnome_client_set_environment (master_client,
-				      master_environment[i],
-				      value);
-    }
-
-  /* Set the current directory.  */
-  i= 512;
-  while (buffer == NULL)
-    {
-      buffer= (gchar *) g_malloc (i);
-	      
-      if (getcwd (buffer, i) == NULL)
-	{
-	  g_free (buffer);
-	  i *= 2;
-	  buffer= NULL;
-	  /* ERANGE means that we needed more space in the
-	     buffer.  Other errors mean don't bother setting
-	     the directory information.  */
-	  if (errno != ERANGE)
-	    break;
-	}
-    }
-  if (buffer != NULL)
-    {
-      gnome_client_set_current_directory (master_client, buffer);
-      g_free (buffer);
-    }
-}
-
-
 /**
  * gnome_master_client
  *
@@ -1023,21 +1020,6 @@ gnome_master_client (void)
   return master_client;
 }
 
-
-/**
- * gnome_cloned_client
- *
- * Description:
- *
- * Returns:  Pointer to
- **/
-
-GnomeClient*
-gnome_cloned_client (void)
-{
-  g_warning ("'gnome_cloned_client' is not working as expected anymore.\n");
-  return NULL;
-}
 
 /*****************************************************************************/
 /* GTK-class managing functions */

@@ -1,3 +1,18 @@
+1999-10-07  Elliot Lee  <sopwith@redhat.com>
+
+	* animator_demo.c, dock_demo.c, gnome-app-helper.c,
+ 	gnome-client.[ch], gnome-entry.c, gnome-init.[ch]: Use new init
+ 	system
+	* gnome-dateedit.c: Fix warning, include ctype.h for isdigit().
+	* gnome-dentry-edit.c, gnome-icon-entry.c, gnome-icon-sel.c: Avoid using deprecated functions.
+	* makeenums.pl: Skip files with / DEPRECATED / in them.
+	* gnome-dns.h, gnome-font-selector.h, gnome-guru.h, gnome-less.h,
+ 	gnome-preferences.h, gnome-properties.h, gnome-property-entries.h,
+ 	gnome-spell.h, gnome-startup.h, gtk-ted.h, gtkcauldron.h: Add deprecated marking so
+ 	makeenums.pl will skip this
+	* gnometypebuiltins*.[ch]: Rebuild
+	* libgnomeui.h: Exclude all deprecated stuff. Add defines for backwards source compat to new system.
+
 1999-09-28  Elliot Lee  <sopwith@redhat.com>
 	* gnome-init.c (gnome_segv_handle): Only dump core if $GNOME_DUMP_CORE is set.
 	  Pass the app version to gnome_segv.

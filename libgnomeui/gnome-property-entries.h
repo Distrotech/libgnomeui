@@ -1,3 +1,4 @@
+/* DEPRECATED */
 /* WARNING ____ IMMATURE API ____ liable to change */
 
 /* gnome-property-entries.h - Property entries.

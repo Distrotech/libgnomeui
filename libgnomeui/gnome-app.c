@@ -71,10 +71,10 @@ write_layout_config (GnomeApp *app, GnomeDockLayout *layout)
 GtkType
 gnome_app_get_type (void)
 {
-	static GtkType gnomeapp_type = 0;
+	static GtkType gnome_program_type = 0;
 
-	if (!gnomeapp_type) {
-		GtkTypeInfo gnomeapp_info = {
+	if (!gnome_program_type) {
+		GtkTypeInfo gnome_program_info = {
 			"GnomeApp",
 			sizeof (GnomeApp),
 			sizeof (GnomeAppClass),
@@ -85,10 +85,10 @@ gnome_app_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		gnomeapp_type = gtk_type_unique (gtk_window_get_type (), &gnomeapp_info);
+		gnome_program_type = gtk_type_unique (gtk_window_get_type (), &gnome_program_info);
 	}
 
-	return gnomeapp_type;
+	return gnome_program_type;
 }
 
 static void

@@ -1,3 +1,4 @@
+/* DEPRECATED */
 /* gtkcauldron.h - creates complex dialogs from a format string in a single line
  * Copyright (C) 1998 Paul Sheer
  *
