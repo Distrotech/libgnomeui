@@ -82,13 +82,13 @@ gnome_scores_class_init (GnomeScoresClass *class) {}
 
 /**
  * gnome_scores_new:
- * @n_scores:
- * @names:
- * @scores:
- * @times:
- * @clear:
+ * @n_scores: Number of positions.
+ * @names: Names of the players.
+ * @scores: Scores
+ * @times: Time in which the scores were done
+ * @clear: Add a "Clear" Button?
  *
- * Description:
+ * Description: Creates the high-scores window.
  *
  * Returns: A new #GnomeScores widget
  */
@@ -184,10 +184,10 @@ gnome_scores_new (  guint n_scores,
 /**
  * gnome_scores_set_color:
  * @gs: A #GnomeScores widget
- * @n:
- * @col:
+ * @n: Entry to be changed.
+ * @col: Color.
  *
- * Description:
+ * Description: Set the color of one entry.
  *
  * Returns:
  */
@@ -209,9 +209,9 @@ gnome_scores_set_color(GnomeScores *gs, guint n, GdkColor *col)
 /**
  * gnome_scores_set_def_color:
  * @gs: A #GnomeScores widget
- * @col:
+ * @col: Color
  *
- * Description:
+ * Description: Set the default color of the entries.
  *
  * Returns:
  */
@@ -228,9 +228,9 @@ gnome_scores_set_def_color(GnomeScores *gs, GdkColor *col)
 /**
  * gnome_scores_set_colors:
  * @gs: A #GnomeScores widget
- * @col:
+ * @col: Array of colors.
  *
- * Description:
+ * Description: Set the color of all the entries.
  *
  * Returns:
  */
@@ -247,9 +247,9 @@ gnome_scores_set_colors(GnomeScores *gs, GdkColor *col)
 /**
  * gnome_scores_set_current_player:
  * @gs: A #GnomeScores widget
- * @i:
+ * @i: Index of the current(from 0 to 9).
  *
- * Description:
+ * Description: Set the index of the current player in top ten.
  *
  * Returns:
  */
@@ -264,9 +264,9 @@ gnome_scores_set_current_player (GnomeScores *gs, gint i)
 /**
  * gnome_scores_set_logo_label_title:
  * @gs: A #GnomeScores widget
- * @txt:
+ * @txt: Name of the logo.
  *
- * Description:
+ * Description: Creates a label to be the logo
  *
  * Returns:
  */
@@ -288,11 +288,11 @@ gnome_scores_set_logo_label_title (GnomeScores *gs, gchar *txt)
 /**
  * gnome_scores_set_logo_label:
  * @gs: A #GnomeScores widget
- * @txt:
- * @font:
- * @col:
+ * @txt: Text in the label.
+ * @font: Font to use in the label.
+ * @col: Color to use in the label.
  *
- * Description:
+ * Description: Creates a label to be the logo
  *
  * Returns:
  */
@@ -316,7 +316,7 @@ gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 	if( font ) 
 		fo = font;
 	else 
-		fo = "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-iso8859-1";
+		fo = _("-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*");
 
 	if(( f = gdk_fontset_load ( fo ) ))
 		s->font = f;
@@ -331,9 +331,9 @@ gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 /**
  * gnome_scores_set_logo_widget:
  * @gs: A #GnomeScores widget
- * @w:
+ * @w: Widget to be used as logo.
  *
- * Description:
+ * Description:  Set an arbitrary widget to be the logo.
  *
  * Returns:
  */
@@ -353,9 +353,9 @@ gnome_scores_set_logo_widget (GnomeScores *gs, GtkWidget *w)
 /**
  * gnome_scores_set_logo_pixmap:
  * @gs: A #GnomeScores widget
- * @pix_name:
+ * @pix_name: filename of a pixmap
  *
- * Description:
+ * Description:  Sets the logo on the scores dialog box to a pixmap
  *
  * Returns:
  */
@@ -381,18 +381,21 @@ gnome_scores_set_logo_pixmap (GnomeScores *gs, gchar *pix_name)
 /**
  * gnome_scores_display:
  * @gs: A #GnomeScores widget
- * @app_name:
- * @level:
- * @pos:
+ * @app_name: Name of the application, as in gnome_score_init.
+ * @level: Level of the game or %NULL.
+ * @pos: Position in the top ten of the current player, as returned by gnome_score_log.
  *
- * Description:
+ * Description:  Does all the work of displaying the best scores. 
+ * It calls gnome_score_get_notables to retrieve the info, creates the window,
+ * and show it.
  *
- * Returns:
+ * Returns:  If a dialog is displayed return it's pointer.  It can also
+ * be %NULL if no dialog is displayed
  */
-void
+GtkWidget *
 gnome_scores_display (gchar *title, gchar *app_name, gchar *level, int pos)
 {
-	GtkWidget *hs;
+	GtkWidget *hs = NULL;
 /*        	GdkColor ctitle = {0, 0, 0, 65535}; */
 /* 	GdkColor col = {0, 65535, 0, 0}; */
 	gchar **names = NULL;
@@ -415,4 +418,6 @@ gnome_scores_display (gchar *title, gchar *app_name, gchar *level, int pos)
 		g_free(scores);
 		g_free(scoretimes);
 	} 
+
+	return hs;
 }

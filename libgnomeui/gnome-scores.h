@@ -90,7 +90,7 @@ guint      gnome_scores_get_type (void);
    pos = gnome_score_log(score, level, TRUE);
    gnome_scores_display (_("Mi game"), "migame", level, pos);
    */
-void       /* Doesn't return nothing */
+GtkWidget *       /* returns the pointer to the displayed window */
 	gnome_scores_display (
 		gchar *title,    /* Title. */
 		gchar *app_name, /* Name of the application, as in 
