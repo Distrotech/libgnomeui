@@ -21,7 +21,7 @@ INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) \
         -DGNOMEDATADIR=\""$(datadir)"\" \
         -DGNOMEBINDIR=\""$(bindir)"\" \
         -DGNOMELOCALSTATEDIR=\""$(localstatedir)"\" \
-        -DGNOMELOCALEDIR=\""$(datadir)/locale"\"
+        -DGNOMELOCALEDIR=\""$(gnomelocaledir)"\"
 
 EXTRA_HEADERS = 
 

@@ -1112,28 +1112,7 @@ gnome_client_object_init (GnomeClient *client)
   
   client->shutdown_command  = NULL;
   
-  {
-    gchar *user_id;
-    
-    user_id = getenv ("USER");
-    if (user_id)
-      client->user_id= g_strdup (user_id);
-    else
-      {
-	struct passwd *pwd;
-	
-	pwd = getpwuid (getuid ());
-	if (pwd)
-	  {
-	    client->user_id= g_strdup (pwd->pw_name);
-	    /* FIXME: getpwuid() shouldn't be pointing to static memory,
-	              but free()ing pwd consistantly segfaults */
-	    /* g_free (pwd); */
-	  }
-	else
-	  client->user_id= "";
-      }
-  }
+  client->user_id= g_strdup (g_get_user_name ());
 
   client->state                       = GNOME_CLIENT_DISCONNECTED;
   client->interaction_keys            = NULL;

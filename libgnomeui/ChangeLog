@@ -1,3 +1,10 @@
+1999-01-21  Sebastian Wilhelmi  <wilhelmi@ira.uka.de>
+
+	* Makefile.am (INCLUDES): s%$(datadir)/locale%$(gnomelocaledir)%
+
+	* gnome-client.c (gnome_client_object_init): use g_get_user_name
+	instead of doing it the hard way.
+
 1999-01-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-canvas-line.c (gnome_canvas_line_draw): Remove warning
