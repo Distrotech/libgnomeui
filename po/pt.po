@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-24 11:24+0100\n"
+"POT-Creation-Date: 2004-03-03 23:57+0100\n"
 "PO-Revision-Date: 2004-02-18 22:50+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -947,23 +947,23 @@ msgstr ""
 "Se utilizar o novo widget GtkFileChooser ou o widget GtkFileSelection para "
 "seleccionar ficheiros."
 
-#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
+#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
 msgstr "Seleccionar ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path"
 msgstr "Caminho"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path to file"
 msgstr "Caminho para o ficheiro"
 
-#: libgnomeui/gnome-file-entry.c:775
+#: libgnomeui/gnome-file-entry.c:781
 msgid "_Browse..."
 msgstr "_Procurar..."
 
-#: libgnomeui/gnome-file-entry.c:776
+#: libgnomeui/gnome-file-entry.c:782
 msgid "Pop up a file selector to choose a file"
 msgstr "Surge um selector de ficheiros para seleccionar um"
 

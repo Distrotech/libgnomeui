@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.5.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-29 00:18+0100\n"
+"POT-Creation-Date: 2004-03-03 23:57+0100\n"
 "PO-Revision-Date: 2004-02-29 00:16+0100\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
@@ -144,7 +144,6 @@ msgstr "À propos de %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fichier"
 
@@ -202,7 +201,6 @@ msgid "_Game"
 msgstr "_Jeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aide"
 
@@ -393,11 +391,11 @@ msgstr "Configure l'application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "À _propos"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "À propos de cette application"
 
@@ -424,7 +422,7 @@ msgstr "Crée une nouvelle fenêtre"
 msgid "_Close This Window"
 msgstr "_Fermer cette fenêtre"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Ferme la fenêtre courante"
 
@@ -1360,6 +1358,7 @@ msgstr ""
 "Plusieurs erreurs de segmentation sont survenues ; impossible d'afficher la "
 "boîte de dialogue d'erreur\n"
 
+#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
@@ -1420,6 +1419,5 @@ msgstr "_Informer les développeurs"
 msgid "_Debug"
 msgstr "_Débogage"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Quitter le test"
+#~ msgid "Exit the test"
+#~ msgstr "Quitter le test"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-27 04:21+0100\n"
+"POT-Creation-Date: 2004-03-03 23:57+0100\n"
 "PO-Revision-Date: 2004-02-28 01:00-0600\n"
 "Last-Translator: Paisa Seeluangsawat <paisa@users.sf.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
@@ -139,7 +139,6 @@ msgstr "เกี่ยวกับ %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "แ_ฟ้ม"
 
@@ -197,7 +196,6 @@ msgid "_Game"
 msgstr "เ_กม"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_วิธีใช้"
 
@@ -388,11 +386,11 @@ msgstr "ปรับแต่งโปรแกรม"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "เกี่ยวกับโปรแกรมนี้"
 
@@ -419,7 +417,7 @@ msgstr "สร้างหน้าต่างใหม่"
 msgid "_Close This Window"
 msgstr "ปิ_ดหน้าต่างนี้"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "ปิดหน้าต่างปัจจุบัน"
 
@@ -936,23 +934,23 @@ msgid ""
 "to select files."
 msgstr "ว่าจะใช้วิดเก็จ GtkFileChooser (ใหม่กว่า) หรือ GtkFileSelection สำหรับเลือกแฟ้ม."
 
-#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
+#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
 msgstr "เลือกแฟ้ม"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path"
 msgstr "พาธ"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path to file"
 msgstr "พาธไปยังแฟ้ม"
 
-#: libgnomeui/gnome-file-entry.c:775
+#: libgnomeui/gnome-file-entry.c:781
 msgid "_Browse..."
 msgstr "เ_รียกดู..."
 
-#: libgnomeui/gnome-file-entry.c:776
+#: libgnomeui/gnome-file-entry.c:782
 msgid "Pop up a file selector to choose a file"
 msgstr "แสดงหน้าต่างสำหรับเลือกแฟ้ม"
 
@@ -1383,6 +1381,5 @@ msgstr "แ_จ้งผู้เขียน"
 msgid "_Debug"
 msgstr "_ดีบัก"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "ออกจากการทดสอบ"
+#~ msgid "Exit the test"
+#~ msgstr "ออกจากการทดสอบ"

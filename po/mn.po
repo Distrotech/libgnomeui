@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-24 11:24+0100\n"
+"POT-Creation-Date: 2004-03-03 23:57+0100\n"
 "PO-Revision-Date: 2004-02-20 21:12+0100\n"
 "Last-Translator: Sanlig Badral <badral@openmn.org>\n"
 "Language-Team: Mongolian <openmn-core@lists.sf.net>\n"
@@ -955,23 +955,23 @@ msgstr ""
 "Файл сонгохдоо шинэ GtkFileChooser вижет эсвэл GtkFileSelection вижет "
 "хэрэглэх эсэх"
 
-#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
+#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
 msgstr "Файл сонгох"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path"
 msgstr "Зам"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path to file"
 msgstr "Файлын зам"
 
-#: libgnomeui/gnome-file-entry.c:775
+#: libgnomeui/gnome-file-entry.c:781
 msgid "_Browse..."
 msgstr "_Сонгох..."
 
-#: libgnomeui/gnome-file-entry.c:776
+#: libgnomeui/gnome-file-entry.c:782
 msgid "Pop up a file selector to choose a file"
 msgstr "Файл сонгохын тулд файл сонгогчоор хийх"
 

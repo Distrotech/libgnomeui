@@ -12,13 +12,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-29 04:19+0100\n"
+"POT-Creation-Date: 2004-03-03 23:57+0100\n"
 "PO-Revision-Date: 2004-02-29 12:11+0100\n"
 "Last-Translator: Arafat Medini <lumina@silverpen.de>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -127,8 +127,7 @@ msgstr "المترجمين"
 #: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"شكر للمترجمين. يجب تعليم هذا النص على انه قابل للترجمة"
+msgstr "شكر للمترجمين. يجب تعليم هذا النص على انه قابل للترجمة"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -145,7 +144,6 @@ msgstr "حول %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_ملف"
 
@@ -203,7 +201,6 @@ msgid "_Game"
 msgstr "_لعبة"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_مساعدة"
 
@@ -394,11 +391,11 @@ msgstr "إعداد التطبيق"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_حول"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "حول هذا البرنامج"
 
@@ -425,7 +422,7 @@ msgstr "إنشاء نافذة جديدة"
 msgid "_Close This Window"
 msgstr "_غلق هذه النافذة"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "غلق النافذة الحالية"
 
@@ -866,8 +863,7 @@ msgstr "هوية التاريخ"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
-"معرّف وحيد لخانة الملفات.  سيستخدم لحفظ قائمة التاريخ."
+msgstr "معرّف وحيد لخانة الملفات.  سيستخدم لحفظ قائمة التاريخ."
 
 #: libgnomeui/gnome-file-entry.c:235 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
@@ -922,9 +918,8 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"خانة جنوم التي تستخدمها خانة الملفات لإدخال أسماء الملفات. يمكنك "
-"استخدام هذه الخاصية للحصول على GnomeEntry إذا أردت تعديل أو الإستعلام عن أيّ "
-"من عواملها."
+"خانة جنوم التي تستخدمها خانة الملفات لإدخال أسماء الملفات. يمكنك استخدام هذه "
+"الخاصية للحصول على GnomeEntry إذا أردت تعديل أو الإستعلام عن أيّ من عواملها."
 
 #: libgnomeui/gnome-file-entry.c:288
 msgid "GtkEntry"
@@ -936,9 +931,8 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"خانة Gtk هي التي تستخدمها خانة الملفات لإدخال أسماء الملفات. يمكنك "
-"استخدام هذه الخاصية للحصول على GtkEntry إذا أردت تعديل أو الإستعلام عن أي "
-"من عواملها."
+"خانة Gtk هي التي تستخدمها خانة الملفات لإدخال أسماء الملفات. يمكنك استخدام "
+"هذه الخاصية للحصول على GtkEntry إذا أردت تعديل أو الإستعلام عن أي من عواملها."
 
 #: libgnomeui/gnome-file-entry.c:299
 msgid "Use GtkFileChooser"
@@ -949,7 +943,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"فيما إذا ستستخدم قطعة GtkFileChooser أو قطعة GtkFileSelection لإنتقاء الملفات."
+"فيما إذا ستستخدم قطعة GtkFileChooser أو قطعة GtkFileSelection لإنتقاء "
+"الملفات."
 
 #: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
@@ -1116,8 +1111,7 @@ msgstr ""
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
-"معرّف وحيد لخانة الأيقونات. سيتم استخدامه لحفظ قائمة التاريخ."
+msgstr "معرّف وحيد لخانة الأيقونات. سيتم استخدامه لحفظ قائمة التاريخ."
 
 #: libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
@@ -1144,8 +1138,8 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"حوار منتقي الأيقونات. يمكنك استخدام هذه الخاصية للحصول على GtkDialog "
-"إذا أردت تعديل أو الإستعلام عن أيّ من خواصها."
+"حوار منتقي الأيقونات. يمكنك استخدام هذه الخاصية للحصول على GtkDialog إذا "
+"أردت تعديل أو الإستعلام عن أيّ من خواصها."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
@@ -1187,8 +1181,7 @@ msgstr "مسار الأيقونة"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
-"يجب أن تدخل هنا إسم الدليل الذي فيه توجد صور الأيقونات."
+msgstr "يجب أن تدخل هنا إسم الدليل الذي فيه توجد صور الأيقونات."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1403,9 +1396,8 @@ msgstr "إ_بلاغ المطورين"
 msgid "_Debug"
 msgstr "_تنقيح"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "خروج من التجربة"
+#~ msgid "Exit the test"
+#~ msgstr "خروج من التجربة"
 
 #~ msgid "Color Selector"
 #~ msgstr "منتقي الألوان"

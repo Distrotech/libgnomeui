@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.5.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-26 16:13+0100\n"
+"POT-Creation-Date: 2004-03-03 23:57+0100\n"
 "PO-Revision-Date: 2004-02-26 16:13+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -144,7 +144,6 @@ msgstr "Info zu %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datei"
 
@@ -202,7 +201,6 @@ msgid "_Game"
 msgstr "_Spiel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hilfe"
 
@@ -394,11 +392,11 @@ msgstr "Die Anwendung konfigurieren"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Info zu dieser Anwendung"
 
@@ -425,7 +423,7 @@ msgstr "Ein neues Fenster öffnen"
 msgid "_Close This Window"
 msgstr "Fenster _schließen"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Das aktuelle Fenster schließen"
 
@@ -957,23 +955,23 @@ msgstr ""
 "Soll das neue GtkFileChooser- oder das GtkFileSelection-Widget zum Wählen "
 "von Dateien verwendet werden?"
 
-#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
+#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
 msgstr "Datei auswählen"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path"
 msgstr "Pfad"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path to file"
 msgstr "Pfad zur Datei"
 
-#: libgnomeui/gnome-file-entry.c:775
+#: libgnomeui/gnome-file-entry.c:781
 msgid "_Browse..."
 msgstr "_Auswählen..."
 
-#: libgnomeui/gnome-file-entry.c:776
+#: libgnomeui/gnome-file-entry.c:782
 msgid "Pop up a file selector to choose a file"
 msgstr "Dateiauswahl aufklappen um eine Datei zu wählen"
 
@@ -1424,6 +1422,5 @@ msgstr "_Entwickler informieren"
 msgid "_Debug"
 msgstr "_Fehlerdiagnose"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Den Test beenden"
+#~ msgid "Exit the test"
+#~ msgstr "Den Test beenden"

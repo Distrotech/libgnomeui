@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-27 18:27-0600\n"
+"POT-Creation-Date: 2004-03-03 23:57+0100\n"
 "PO-Revision-Date: 2004-02-23 17:51-0600\n"
 "Last-Translator: Dinesh Nadarajah <dinesh_list@sbcglobal.net>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -138,7 +138,6 @@ msgstr "%s பற்றி"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_கோப்பு"
 
@@ -196,7 +195,6 @@ msgid "_Game"
 msgstr "_விளையாட்டு"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_உதவி"
 
@@ -387,11 +385,11 @@ msgstr "செயல்பாட்டை அமை வடிவப்படு�
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "பற்றி"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "இந்த செயல்பாட்டைப் பற்றி"
 
@@ -418,7 +416,7 @@ msgstr "புதிய ஒரு சாளரத்தைப் படை"
 msgid "_Close This Window"
 msgstr "_இந்த சாளரத்தை மூடு"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "தற்போதைய சாளரத்தை மூடு"
 
@@ -1374,6 +1372,5 @@ msgstr "_நிரலருக்கு தெரிவிக்கவும்"
 msgid "_Debug"
 msgstr "_பிழை நீக்கு"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "பரிசோதனையிலிருந்து வெளியேறு"
+#~ msgid "Exit the test"
+#~ msgstr "பரிசோதனையிலிருந்து வெளியேறு"

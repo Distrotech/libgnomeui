@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-24 11:24+0100\n"
+"POT-Creation-Date: 2004-03-03 23:57+0100\n"
 "PO-Revision-Date: 2002-06-08 14:30+0530\n"
 "Last-Translator: Jitendra Shah <jitendras@vsnl.com>\n"
 "Language-Team: Marathi <www.indictrans.org>\n"
@@ -1153,29 +1153,29 @@ msgid ""
 msgstr ""
 
 # libgnomeui/gnome-file-entry.c:418
-#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
+#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
 msgstr "फाइल निवडा"
 
 # libgnomeui/gnome-app-helper.c:166
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 #, fuzzy
 msgid "Path"
 msgstr "मार्ग"
 
 # libgnomeui/gnome-app-helper.c:114
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 #, fuzzy
 msgid "Path to file"
 msgstr "फाइलचा मार्ग"
 
 # libgnomeui/gnome-file-entry.c:592
-#: libgnomeui/gnome-file-entry.c:775
+#: libgnomeui/gnome-file-entry.c:781
 #, fuzzy
 msgid "_Browse..."
 msgstr "संचार करा"
 
-#: libgnomeui/gnome-file-entry.c:776
+#: libgnomeui/gnome-file-entry.c:782
 msgid "Pop up a file selector to choose a file"
 msgstr "फाइल निवडण्यासाठी विंडो उघडा"
 

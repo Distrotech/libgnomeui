@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.5.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-24 23:51+0900\n"
+"POT-Creation-Date: 2004-03-03 23:57+0100\n"
 "PO-Revision-Date: 2004-02-24 23:52+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
@@ -138,7 +138,6 @@ msgstr "%s 정보"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "파일(_F)"
 
@@ -196,7 +195,6 @@ msgid "_Game"
 msgstr "게임(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "도움말(_H)"
 
@@ -387,11 +385,11 @@ msgstr "프로그램을 설정합니다"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "정보(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "이 프로그램에 대한 정보"
 
@@ -418,7 +416,7 @@ msgstr "새 창을 만듭니다"
 msgid "_Close This Window"
 msgstr "창 닫기(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "현재 창을 닫습니다"
 
@@ -944,25 +942,27 @@ msgstr "GtkFileChooser 사용"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "파일을 선택할 때 새로운 GtkFileChooser 위젯을 사용할 지 GtkFileSelection 위젯을 사용할 지"
+msgstr ""
+"파일을 선택할 때 새로운 GtkFileChooser 위젯을 사용할 지 GtkFileSelection 위젯"
+"을 사용할 지"
 
-#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
+#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
 msgstr "파일 선택"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path"
 msgstr "경로"
 
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path to file"
 msgstr "파일의 경로"
 
-#: libgnomeui/gnome-file-entry.c:775
+#: libgnomeui/gnome-file-entry.c:781
 msgid "_Browse..."
 msgstr "찾아보기(_B)..."
 
-#: libgnomeui/gnome-file-entry.c:776
+#: libgnomeui/gnome-file-entry.c:782
 msgid "Pop up a file selector to choose a file"
 msgstr "파일을 선택할 수 있는 파일 선택 창을 띄웁니다"
 
@@ -1401,6 +1401,5 @@ msgstr "개발자에게 알리기(_I)"
 msgid "_Debug"
 msgstr "디버깅(_D)"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "테스트 끝내기"
+#~ msgid "Exit the test"
+#~ msgstr "테스트 끝내기"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-28 19:09+0200\n"
+"POT-Creation-Date: 2004-03-03 23:57+0100\n"
 "PO-Revision-Date: 2004-02-28 19:22+0200\n"
 "Last-Translator: Pauli Virtanen <pauli.virtanen@hut.fi>\n"
 "Language-Team: Gnome Finnish Translation Team <gnome-fi-laatu@lists."
@@ -143,7 +143,6 @@ msgstr "Tietoja ohjelmasta %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tiedosto"
 
@@ -201,7 +200,6 @@ msgid "_Game"
 msgstr "_Peli"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ohje"
 
@@ -392,11 +390,11 @@ msgstr "Määrittele ohjelman asetukset"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Tietoja"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Tietoja tästä ohjelmasta"
 
@@ -423,7 +421,7 @@ msgstr "Luo uusi ikkuna"
 msgid "_Close This Window"
 msgstr "_Sulje tämä ikkuna"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Sulje tämä ikkuna"
 
@@ -948,7 +946,9 @@ msgstr "Käytä GtkFileChooseria"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "Käytetäänkö GtkFileChooser-säädintä vai GtkFileSelection-säädintä tiedostojen valitsemiseen."
+msgstr ""
+"Käytetäänkö GtkFileChooser-säädintä vai GtkFileSelection-säädintä "
+"tiedostojen valitsemiseen."
 
 #: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
@@ -1405,9 +1405,8 @@ msgstr "_Ota yhteyttä kehittäjiin"
 msgid "_Debug"
 msgstr "_Vianetsintä"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Lopeta testi"
+#~ msgid "Exit the test"
+#~ msgstr "Lopeta testi"
 
 #~ msgid "Color Selector"
 #~ msgstr "Värivalitsin"

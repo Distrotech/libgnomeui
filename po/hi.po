@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui-2.0.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-26 18:46+0530\n"
+"POT-Creation-Date: 2004-03-03 23:57+0100\n"
 "PO-Revision-Date: 2003-08-25 16:04+0530\n"
 "Last-Translator: G Karunakar <karunakar@freedomink.org>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
@@ -166,7 +166,6 @@ msgstr "%s के बारे में"
 # test-gnome/testgnome.xml.h:5
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "फाइल (_F)"
 
@@ -239,7 +238,6 @@ msgstr "खेल (_G)"
 # libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 # test-gnome/testgnome.xml.h:6
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "सहायता (_H)"
 
@@ -469,12 +467,12 @@ msgstr "अनुप्रयोग को कानफिगर करें"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "के बारे में (_A)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "इस अनुप्रयोग के बारे में"
 
@@ -507,7 +505,7 @@ msgid "_Close This Window"
 msgstr "इस विन्डो को बंद करें (_C)"
 
 # libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "वर्तमान विन्डो को बन्द करें"
 
@@ -1145,26 +1143,26 @@ msgid ""
 msgstr ""
 
 # libgnomeui/gnome-file-entry.c:418
-#: libgnomeui/gnome-file-entry.c:594 libgnomeui/gnome-file-entry.c:622
+#: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
 msgstr "फाइल चयन करें"
 
 # libgnomeui/gnome-app-helper.c:166
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path"
 msgstr "पाथ"
 
 # libgnomeui/gnome-app-helper.c:114
-#: libgnomeui/gnome-file-entry.c:748
+#: libgnomeui/gnome-file-entry.c:754
 msgid "Path to file"
 msgstr "फाइल का पाथ"
 
 # libgnomeui/gnome-file-entry.c:592
-#: libgnomeui/gnome-file-entry.c:775
+#: libgnomeui/gnome-file-entry.c:781
 msgid "_Browse..."
 msgstr "ब्राउज (_B)..."
 
-#: libgnomeui/gnome-file-entry.c:776
+#: libgnomeui/gnome-file-entry.c:782
 msgid "Pop up a file selector to choose a file"
 msgstr "फाइल चयन करने के लिये फाइल सेलेक्टर खोलें"
 
@@ -1603,6 +1601,7 @@ msgstr "GNOME GUI लाइब्रेरी"
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "कई हिस्सों में एक साथ खराबी त्रुटि संदेश नहीं दिए जा सकते\n"
 
+#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
@@ -1661,7 +1660,5 @@ msgid "_Debug"
 msgstr "त्रुटि सुधार"
 
 # test-gnome/testgnome.xml.h:3
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "test से बाहर जाएं"
-
+#~ msgid "Exit the test"
+#~ msgstr "test से बाहर जाएं"
