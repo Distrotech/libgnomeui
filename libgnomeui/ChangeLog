@@ -1,3 +1,13 @@
+Wed Dec 16 17:53:48 1998  Raph Levien  <raph@gimp.org>
+
+	So far, no changes that affect canvas users or xlib custom items.
+
+	* gnome-canvas-util.h:
+	* gnome-canvas-util.c: Added a number of routines that are helpful
+	for aa rendering.
+
+	* gnome-canvas-rect-ellipse.c: re-enabled the rendering.
+
 Wed Dec 16 11:51:23 1998  Raph Levien  <raph@gimp.org>
 
 	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_render): Added
