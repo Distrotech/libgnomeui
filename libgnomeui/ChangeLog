@@ -1,3 +1,14 @@
+1998-10-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas-polygon.[ch]: New polygon item for the canvas.  I
+	need it for Gnomecal, so I finally got around to implementing this.
+	
+	* gnome-canvas.c: Update the TODO list; we now have a polygon item.
+
+	* libgnomeui.h: Added gnome-canvas-polygon.h to the list of headers.
+
+	* Makefile.am: Added gnome-canvas-polygon.[ch] to the list of sources.
+
 1998-10-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-item.c (gnome_icon_text_item_select): When we are

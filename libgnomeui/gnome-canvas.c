@@ -35,8 +35,6 @@
  *
  * - Curve support for line item.
  *
- * - Polygon item.
- *
  * - Arc item.
  *
  * - Sane font handling API.

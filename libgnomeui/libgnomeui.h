@@ -14,6 +14,7 @@
 #include "libgnomeui/gnome-canvas-image.h"
 #include "libgnomeui/gnome-canvas-line.h"
 #include "libgnomeui/gnome-canvas-rect-ellipse.h"
+#include "libgnomeui/gnome-canvas-polygon.h"
 #include "libgnomeui/gnome-canvas-text.h"
 #include "libgnomeui/gnome-canvas-util.h"
 #include "libgnomeui/gnome-canvas-widget.h"

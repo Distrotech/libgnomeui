@@ -46,6 +46,7 @@ libgnomeui_la_SOURCES = \
 	gnome-canvas-image.c		\
 	gnome-canvas-line.c		\
 	gnome-canvas-rect-ellipse.c	\
+	gnome-canvas-polygon.c		\
 	gnome-canvas-text.c		\
 	gnome-canvas-util.c		\
 	gnome-canvas-widget.c		\
@@ -112,6 +113,7 @@ gnome_headers = \
 	gnome-canvas-image.h		\
 	gnome-canvas-line.h		\
 	gnome-canvas-rect-ellipse.h	\
+	gnome-canvas-polygon.h		\
 	gnome-canvas-text.h		\
 	gnome-canvas-util.h		\
 	gnome-canvas-widget.h		\

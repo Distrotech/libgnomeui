@@ -86,7 +86,7 @@ gnome_canvas_polygon_get_type (void)
 			(GtkClassInitFunc) NULL
 		};
 
-		polygon_type = gtk_type_unique (gnome_canvas_polygon_get_type (), &polygon_info);
+		polygon_type = gtk_type_unique (gnome_canvas_item_get_type (), &polygon_info);
 	}
 
 	return polygon_type;
@@ -213,7 +213,7 @@ recalc_bounds (GnomeCanvasPolygon *poly)
 	gnome_canvas_item_i2w (item, &dx, &dy);
 
 	gnome_canvas_w2c (item->canvas, x1 + dx, y1 + dy, &item->x1, &item->y1);
-	gnome_canvas_w2c (item-.canvas, x2 + dx, y2 + dy, &item->x2, &item->y2);
+	gnome_canvas_w2c (item->canvas, x2 + dx, y2 + dy, &item->x2, &item->y2);
 
 	/* Some safety fudging */
 
@@ -223,6 +223,33 @@ recalc_bounds (GnomeCanvasPolygon *poly)
 	item->y2++;
 
 	gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
+}
+
+/* Sets the points of the polygon item to the specified ones.  If needed, it will add a point to
+ * close the polygon.
+ */
+static void
+set_points (GnomeCanvasPolygon *poly, GnomeCanvasPoints *points)
+{
+	int duplicate;
+
+	/* See if we need to duplicate the first point */
+
+	duplicate = ((points->coords[0] != points->coords[2 * points->num_points - 2])
+		     || (points->coords[1] != points->coords[2 * points->num_points - 1]));
+
+	if (duplicate)
+		poly->num_points = points->num_points + 1;
+	else
+		poly->num_points = points->num_points;
+
+	poly->coords = g_new (double, 2 * poly->num_points);
+	memcpy (poly->coords, points->coords, 2 * points->num_points * sizeof (double));
+
+	if (duplicate) {
+		poly->coords[2 * poly->num_points - 2] = poly->coords[0];
+		poly->coords[2 * poly->num_points - 1] = poly->coords[1];
+	}
 }
 
 /* Convenience function to set a GC's foreground color to the specified pixel value */
@@ -278,11 +305,8 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 		if (!points)
 			poly->num_points = 0;
-		else {
-			poly->num_points = points->num_points;
-			poly->coords = g_new (double, 2 * poly->num_points);
-			memcpy (poly->coords, points->coords, 2 * poly->num_points * sizeof (double));
-		}
+		else
+			set_points (poly, points);
 
 		recalc_bounds (poly);
 		break;
@@ -323,7 +347,7 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		poly->width = GTK_VALUE_UINT (*arg);
 		poly->width_pixels = TRUE;
 		set_outline_gc_width (poly);
-		recalc_bounds (poly)
+		recalc_bounds (poly);
 		break;
 
 	case ARG_WIDTH_UNITS:
@@ -475,7 +499,7 @@ gnome_canvas_polygon_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	dx = dy = 0.0;
 	gnome_canvas_item_i2w (item, &dx, &dy);
 
-	item_to_canvas (item-.canvas, poly->coords, points, dx, dy, x, y);
+	item_to_canvas (item->canvas, poly->coords, points, poly->num_points, dx, dy, x, y);
 
 	if (poly->fill_set)
 		gdk_draw_polygon (drawable, poly->fill_gc, TRUE, points, poly->num_points);
@@ -493,7 +517,29 @@ static double
 gnome_canvas_polygon_point (GnomeCanvasItem *item, double x, double y,
 			    int cx, int cy, GnomeCanvasItem **actual_item)
 {
-	
+	GnomeCanvasPolygon *poly;
+	double dist;
+	double width;
+
+	poly = GNOME_CANVAS_POLYGON (item);
+
+	*actual_item = item;
+
+	dist = gnome_canvas_polygon_to_point (poly->coords, poly->num_points, x, y);
+
+	if (poly->outline_set) {
+		if (poly->width_pixels)
+			width = poly->width / item->canvas->pixels_per_unit;
+		else
+			width = poly->width;
+
+		dist -= width / 2.0;
+
+		if (dist < 0.0)
+			dist = 0.0;
+	}
+
+	return dist;
 }
 
 static void
