@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <gtk/gtk.h>
+#include <gdk_imlib.h>
 #include "libgnome/libgnome.h"
 
 static void gnome_rc_parse(gchar *command);
@@ -15,6 +16,7 @@ gnome_init (char *app_id, gint *argc, gchar ***argv)
 	/* now we replace gtk_init() with gnome_init() in our apps */
 	gtk_set_locale();
 	gtk_init(argc, argv);
+	gdk_imlib_init();
 	
 	gnome_rc_parse(*argv[0]);
 

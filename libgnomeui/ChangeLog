@@ -1,3 +1,29 @@
+1998-02-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-pixmap.c:
+	* gnome-pixmap.h: New GnomePixmap widget!  It was created to
+	replace the ugly gnome_create_pixmap_*() functions.  Now you can
+	simply do something like:
+
+		GtkWidget *gpixmap;
+		gpixmap = gnome_pixmap_new_from_file ("hello.jpg");
+		gtk_container_add (container, gpixmap);
+		gtk_widget_show (gpixmap);
+
+	And that's it.  The GnomePixmap widget takes care of all the
+	visuals/colormaps/other_icky_X_stuff.
+
+	GnomePixmap uses gdk_imlib for its work, so now gdk_imlib is a
+	required component of Gnome.  Please install it if you have not
+	done it yet; it is a very cool thing to have.
+
+	During the next hours, I will be converting most of Gnome to use
+	the new GnomePixmap widget instead of the old
+	gnome_creat_pixmap_*() functions.
+
+	* gnome-init.c (gnome_init): Added gdk_imlib_init() to the GnomeUI
+	initialization procedure.
+
 1998-02-23  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-client.c (gnome_default_client_init): New function.
