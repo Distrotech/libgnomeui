@@ -12,6 +12,10 @@
 	* doc/reference/tmpl/gnome-about.sgml, libgnomeui/gnome-about.c:
 	  Document the GnomeAbout widget. One down, a few hundred to go.
 	  This is sooo not fun.
+	
+	* doc/reference/tmpl/.cvsignore: Ignore *-unused.sgml.
+
+	* doc/reference/tmpl/libgnomeui-unused.sgml: Removed.
 
 2002-05-31  Federico Mena Quintero  <federico@ximian.com>
 
