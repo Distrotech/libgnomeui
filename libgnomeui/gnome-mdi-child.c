@@ -100,8 +100,14 @@ static GtkWidget *gnome_mdi_child_set_label (GnomeMDIChild *child, GtkWidget *ol
 		gtk_label_set(GTK_LABEL(old_label), child->name);
 		return old_label;
 	}
-	else
-		return gtk_label_new(child->name);
+	else {
+		GtkWidget *label;
+
+		label = gtk_label_new(child->name);
+		gtk_misc_set_alignment(GTK_MISC(label), 0.0, 0.5);
+
+		return label;
+	}
 }
 
 static void gnome_mdi_child_destroy (GtkObject *obj)

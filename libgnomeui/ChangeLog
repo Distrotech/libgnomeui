@@ -1,3 +1,8 @@
+1998-12-09  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi-child.c (gnome_mdi_child_set_label): left-justify
+	the label. it looks better this way.
+	
 1998-12-09  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-client.c (client_set_state): New function.
