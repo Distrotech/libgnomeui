@@ -1543,6 +1543,8 @@ pixmapmenuitem_new(GladeXML *xml, GladeWidgetInfo *info)
 		GtkAccelGroup *accel;
 		guint key;
 		GtkWidget *lwid = gtk_label_new("");
+
+		gtk_misc_set_alignment(GTK_MISC(lwid), 0.0, 0.5);
 		key = gtk_label_parse_uline(GTK_LABEL(lwid), _(label));
 		if (key) {
 			accel = glade_xml_get_uline_accel(xml);
