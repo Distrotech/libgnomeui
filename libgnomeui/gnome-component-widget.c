@@ -33,7 +33,8 @@
 
 struct _GnomeSelectorClientPrivate {
     GNOME_Selector selector;
-    Bonobo_EventSource_ListenerId listener_id;
+    Bonobo_EventSource_ListenerId async_listener_id;
+    Bonobo_EventSource_ListenerId notify_listener_id;
     GnomeAsyncContext *async_ctx;
 
     gchar *browse_dialog_moniker;
@@ -55,12 +56,26 @@ struct _GnomeSelectorClientPrivate {
     GHashTable *async_ops;
 };
 
+enum {
+    ACTIVATE_ENTRY_SIGNAL,
+    LAST_SIGNAL
+};
+
+static int gnome_selector_client_signals [LAST_SIGNAL] = {0};
+
 static void
-gnome_selector_client_event_cb (BonoboListener    *listener,
-				char              *event_name, 
-				CORBA_any         *any,
-				CORBA_Environment *ev,
-				gpointer           user_data);
+gnome_selector_client_async_event_cb (BonoboListener    *listener,
+				      char              *event_name, 
+				      CORBA_any         *any,
+				      CORBA_Environment *ev,
+				      gpointer           user_data);
+
+static void
+gnome_selector_client_notify_event_cb (BonoboListener    *listener,
+				       char              *event_name, 
+				       CORBA_any         *any,
+				       CORBA_Environment *ev,
+				       gpointer           user_data);
 
 static BonoboWidgetClass *gnome_selector_client_parent_class;
 
@@ -256,6 +271,17 @@ gnome_selector_client_class_init (GnomeSelectorClientClass *klass)
     object_class->finalize = gnome_selector_client_finalize;
     object_class->set_property = gnome_selector_client_set_property;
     object_class->get_property = gnome_selector_client_get_property;
+
+    gnome_selector_client_signals [ACTIVATE_ENTRY_SIGNAL] =
+	g_signal_newc ("activate_entry",
+		       G_TYPE_FROM_CLASS (object_class),
+		       G_SIGNAL_RUN_LAST,
+		       G_STRUCT_OFFSET (GnomeSelectorClientClass,
+					activate_entry),
+		       NULL, NULL,
+		       g_cclosure_marshal_VOID__STRING,
+		       G_TYPE_NONE,
+		       1, G_TYPE_STRING);
 
     /* Construction properties */
     g_object_class_install_property
@@ -481,8 +507,16 @@ gnome_selector_client_construct_from_objref (GnomeSelectorClient *client,
 	return NULL;
     }
 
-    client->_priv->listener_id = bonobo_event_source_client_add_listener
-	(event_source, gnome_selector_client_event_cb, "GNOME/Selector:async", &ev, client);
+    client->_priv->async_listener_id = bonobo_event_source_client_add_listener
+	(event_source, gnome_selector_client_async_event_cb, "GNOME/Selector:async", &ev, client);
+    if (BONOBO_EX (&ev)) {
+	g_object_unref (G_OBJECT (client));
+	CORBA_exception_free (&ev);
+	return NULL;
+    }
+
+    client->_priv->notify_listener_id = bonobo_event_source_client_add_listener
+	(event_source, gnome_selector_client_notify_event_cb, "GNOME/Selector:notify", &ev, client);
     if (BONOBO_EX (&ev)) {
 	g_object_unref (G_OBJECT (client));
 	CORBA_exception_free (&ev);
@@ -560,8 +594,8 @@ gnome_selector_client_activate_entry (GnomeSelectorClient *client)
 }
 
 static void
-gnome_selector_client_event_cb (BonoboListener *listener, char *event_name, 
-				CORBA_any *any, CORBA_Environment *ev, gpointer user_data)
+gnome_selector_client_async_event_cb (BonoboListener *listener, char *event_name, 
+				      CORBA_any *any, CORBA_Environment *ev, gpointer user_data)
 {
     GnomeSelectorClient *client;
     GNOME_Selector_AsyncEvent *async_reply;
@@ -597,6 +631,25 @@ gnome_selector_client_event_cb (BonoboListener *listener, char *event_name,
 	return;
 
     gnome_async_handle_completed (async_handle, async_reply->success);
+}
+
+static void
+gnome_selector_client_notify_event_cb (BonoboListener *listener, char *event_name, 
+				       CORBA_any *any, CORBA_Environment *ev, gpointer user_data)
+{
+    GnomeSelectorClient *client;
+
+    g_return_if_fail (user_data != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR_CLIENT (user_data));
+
+    client = GNOME_SELECTOR_CLIENT (user_data);
+
+    g_message (G_STRLOC ": %p - `%s'", client, event_name);
+
+    if (!strcmp (event_name, "GNOME/Selector:notify:activate-entry"))
+	if (any && CORBA_TypeCode_equal (any->_type, TC_string, ev))
+	    g_signal_emit (G_OBJECT (client), gnome_selector_client_signals [ACTIVATE_ENTRY_SIGNAL], 0,
+			   BONOBO_ARG_GET_STRING (any));
 }
 
 gchar *

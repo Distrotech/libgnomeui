@@ -61,6 +61,9 @@ struct _GnomeSelectorClient {
 
 struct _GnomeSelectorClientClass {
     BonoboWidgetClass parent_class;
+
+    void     (*activate_entry)              (GnomeSelectorClient   *client,
+					     const gchar           *entry_text);
 };
 
 GtkType
