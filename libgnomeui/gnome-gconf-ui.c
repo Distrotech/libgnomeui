@@ -32,7 +32,7 @@
 
 #include "gnome-i18nP.h"
 
-#include <libgnome.h>
+#include <libgnome/libgnome.h>
 #include <gtk/gtk.h>
 
 #include "gnome-gconf-ui.h"

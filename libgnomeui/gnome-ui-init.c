@@ -43,7 +43,7 @@
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
 
-#include <libgnome.h>
+#include <libgnome/libgnome.h>
 
 #include "gnome-client.h"
 #include "gnome-gconf-ui.h"

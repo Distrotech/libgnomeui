@@ -36,8 +36,8 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include <libgnome.h>
-#include <libgnomeui.h>
+#include <libgnome/libgnome.h>
+#include <libgnomeui/libgnomeui.h>
 #include <signal.h>
 #include <string.h>
 #include <stdio.h>

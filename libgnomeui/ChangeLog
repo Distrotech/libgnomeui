@@ -1,3 +1,10 @@
+2001-09-07  jacob berkman  <jacob@ximian.com>
+
+	* gnome_segv.c: 
+	* gnome-ui-init.c: 
+	* gnome-gconf-ui.c: <libgnome(ui).h> -=>
+	<libgnome(ui)/libgnome(ui).h>
+
 2001-09-05  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-app.c: (gnome_app_new):
