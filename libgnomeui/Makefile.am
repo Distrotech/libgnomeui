@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-DEFS += -Wall
+# DEFS += -Wall
 
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
@@ -39,6 +39,10 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-stock.h			\
 	gtk-clock.h			\
 	libgnomeui.h
+
+EXTRA_DIST = \
+	gnome-stock-ok.xpm		\
+	gnome-stock-cancel.xpm
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
 libgnomeui_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(x_libs)
