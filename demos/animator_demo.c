@@ -95,7 +95,7 @@ main (int argc, char *argv[])
      specified size: the foot is always clipped to fit into this size,
      even if the button becomes larger.  */
   the_button = gtk_button_new ();
-  gtk_container_border_width (GTK_CONTAINER (the_button), 4);
+  gtk_container_set_border_width (GTK_CONTAINER (the_button), 4);
   {
     tmp = gtk_hbox_new (TRUE, 0);
     gtk_container_add (GTK_CONTAINER (the_button), tmp);

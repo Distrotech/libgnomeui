@@ -165,7 +165,7 @@ gnome_color_selector_button_clicked(GtkWidget *widget,
 				   (GtkSignalFunc) gnome_color_selector_cancel_clicked,
 				   gcs);
 
-		gtk_window_position(GTK_WINDOW(csd), GTK_WIN_POS_MOUSE);
+		gtk_window_set_position(GTK_WINDOW(csd), GTK_WIN_POS_MOUSE);
 	} /* if */
 
 	if (!GTK_WIDGET_VISIBLE(gcs->cs_dialog)) {
@@ -235,7 +235,7 @@ gnome_color_selector_new(SetColorFunc set_color_func,
 			   gcs);
 
 	alignment = gtk_alignment_new(0.5, 0.5, 0.0, 0.0);
-	gtk_container_border_width(GTK_CONTAINER(alignment), 1);
+	gtk_container_set_border_width(GTK_CONTAINER(alignment), 1);
 	gtk_container_add(GTK_CONTAINER(gcs->button), alignment);
 	gtk_widget_show(alignment);
 

@@ -625,7 +625,7 @@ gtk_ted_add_separator (GtkWidget *widget, GtkTed *ted)
 	wi->type = sep_widget;
 	gtk_object_set_data (GTK_OBJECT (e), "ted_widget_info", wi);
 	
-	gtk_container_border_width (GTK_CONTAINER (e), 2);
+	gtk_container_set_border_width (GTK_CONTAINER (e), 2);
 	gtk_ted_add (ted, e, my_name);
 }
 
@@ -1149,8 +1149,8 @@ gtk_ted_span_control (char *str, struct ted_widget_info *wi, int is_y)
 	gtk_container_add (GTK_CONTAINER (vbox), frame);
 	
 	
-	gtk_container_border_width (GTK_CONTAINER (frame), 2);
-	gtk_container_border_width (GTK_CONTAINER (hbox), 2);
+	gtk_container_set_border_width (GTK_CONTAINER (frame), 2);
+	gtk_container_set_border_width (GTK_CONTAINER (hbox), 2);
 	more  = gtk_button_new_with_label ("+");
 	gtk_widget_show (more);
 	gtk_box_pack_end_defaults (GTK_BOX (hbox), more);
@@ -1436,7 +1436,7 @@ gtk_ted_new_layout (char *name, char *layout)
 	ted = gtk_type_new (gtk_ted_get_type ());
 	ted->dialog_name = g_strdup (name);
 	gtk_ted_load_layout (ted, layout);
-	gtk_container_border_width (GTK_CONTAINER (ted), 6);
+	gtk_container_set_border_width (GTK_CONTAINER (ted), 6);
 	
 	return GTK_WIDGET (ted);
 }

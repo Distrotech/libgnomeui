@@ -210,7 +210,7 @@ gnome_guru_construct                 (GnomeGuru   * guru,
 
     guru->buttonbox = gtk_hbutton_box_new();
 
-    gtk_container_border_width(GTK_CONTAINER(guru->buttonbox),
+    gtk_container_set_border_width(GTK_CONTAINER(guru->buttonbox),
 			       GNOME_PAD_SMALL);
 
     gtk_box_pack_end(GTK_BOX(guru),

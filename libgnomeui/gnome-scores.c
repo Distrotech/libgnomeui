@@ -123,7 +123,7 @@ gnome_scores_new (  guint n_scores,
 			    GTK_WIDGET(table),
 			    TRUE, TRUE, 0);
 
-	gtk_container_border_width (GTK_CONTAINER (gs), 5);
+	gtk_container_set_border_width (GTK_CONTAINER (gs), 5);
 
 
 	gnome_dialog_set_close (GNOME_DIALOG (gs), TRUE);

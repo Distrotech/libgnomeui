@@ -661,7 +661,7 @@ gnome_app_set_toolbar (GnomeApp *app,
 		  gtk_handle_box_set_shadow_type (GTK_HANDLE_BOX (hb), GTK_SHADOW_NONE);
 	  else if ( ! gnome_preferences_get_toolbar_relief() ) {
 		  /* Avoid relief overlap with flat buttons + handlebox relief */
-		  gtk_container_border_width (GTK_CONTAINER (hb), 2);
+		  gtk_container_set_border_width (GTK_CONTAINER (hb), 2);
 	  }
 	}
 	else {

@@ -71,12 +71,12 @@ void prepare_app()
 
   frame=gtk_frame_new(_("Layer:"));
   gtk_box_pack_start(GTK_BOX(vb), frame, FALSE, FALSE, 0);
-  gtk_container_border_width(GTK_CONTAINER(frame), 5);
+  gtk_container_set_border_width(GTK_CONTAINER(frame), 5);
   gtk_widget_show(frame);
 
   vb1 =gtk_vbox_new(FALSE,0);
   gtk_container_add(GTK_CONTAINER(frame), vb1);
-  gtk_container_border_width(GTK_CONTAINER(vb1), 5);
+  gtk_container_set_border_width(GTK_CONTAINER(vb1), 5);
   gtk_widget_show(vb1);
 
   sw = gtk_scrolled_window_new(NULL, NULL);
@@ -129,12 +129,12 @@ void prepare_app()
 
   frame=gtk_frame_new(_("Workspaces:"));
   gtk_box_pack_start(GTK_BOX(vb), frame, FALSE, FALSE, 0);
-  gtk_container_border_width(GTK_CONTAINER(frame), 5);
+  gtk_container_set_border_width(GTK_CONTAINER(frame), 5);
   gtk_widget_show(frame);
   
   vb1 =gtk_vbox_new(FALSE,0);
   gtk_container_add(GTK_CONTAINER(frame), vb1);
-  gtk_container_border_width(GTK_CONTAINER(vb1), 5);
+  gtk_container_set_border_width(GTK_CONTAINER(vb1), 5);
   gtk_widget_show(vb1);
 
   sw = gtk_scrolled_window_new(NULL, NULL);
@@ -165,12 +165,12 @@ void prepare_app()
 
   frame=gtk_frame_new(_("State Toggles:"));
   gtk_box_pack_start(GTK_BOX(vb), frame, FALSE, TRUE, 0);
-  gtk_container_border_width(GTK_CONTAINER(frame), 5);
+  gtk_container_set_border_width(GTK_CONTAINER(frame), 5);
   gtk_widget_show(frame);
 
   vb1 =gtk_vbox_new(FALSE,0);
   gtk_container_add(GTK_CONTAINER(frame), vb1);
-  gtk_container_border_width(GTK_CONTAINER(vb1), 5);
+  gtk_container_set_border_width(GTK_CONTAINER(vb1), 5);
   gtk_widget_show(vb1);
 
   minbut = gtk_check_button_new_with_label(_("Minimized"));
@@ -209,12 +209,12 @@ void prepare_app()
 
   frame=gtk_frame_new(_("Skip Toggles:"));
   gtk_box_pack_start(GTK_BOX(vb), frame, FALSE, FALSE, 0);
-  gtk_container_border_width(GTK_CONTAINER(frame), 5);
+  gtk_container_set_border_width(GTK_CONTAINER(frame), 5);
   gtk_widget_show(frame);
 
   vb1 =gtk_vbox_new(FALSE,0);
   gtk_container_add(GTK_CONTAINER(frame), vb1);
-  gtk_container_border_width(GTK_CONTAINER(vb1), 5);
+  gtk_container_set_border_width(GTK_CONTAINER(vb1), 5);
   gtk_widget_show(vb1);
 
   sfocbut = gtk_check_button_new_with_label(_("Skip Focus"));
@@ -246,7 +246,7 @@ void prepare_app()
   gtk_widget_show(button);
 
   hb = gtk_hbox_new(FALSE, 0);
-  gtk_container_border_width(GTK_CONTAINER(hb), 5);
+  gtk_container_set_border_width(GTK_CONTAINER(hb), 5);
   gtk_container_add(GTK_CONTAINER(button), hb);
   gtk_widget_show(hb);
 

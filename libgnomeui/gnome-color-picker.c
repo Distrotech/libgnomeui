@@ -243,7 +243,7 @@ gnome_color_picker_init (GnomeColorPicker *cp)
 	/* Create the widgets */
 
 	alignment = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
-	gtk_container_border_width (GTK_CONTAINER (alignment), COLOR_PICKER_PAD);
+	gtk_container_set_border_width (GTK_CONTAINER (alignment), COLOR_PICKER_PAD);
 	gtk_container_add (GTK_CONTAINER (cp), alignment);
 	gtk_widget_show (alignment);
 
@@ -401,7 +401,7 @@ gnome_color_picker_clicked (GtkButton *button)
 
 		/* FIXME: do something about the help button */
 
-		gtk_window_position (GTK_WINDOW (cp->cs_dialog), GTK_WIN_POS_MOUSE);
+		gtk_window_set_position (GTK_WINDOW (cp->cs_dialog), GTK_WIN_POS_MOUSE);
 
 		/* If there is a grabed window, set new dialog as modal */
 		if (gtk_grab_get_current())

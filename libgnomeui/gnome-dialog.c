@@ -175,7 +175,7 @@ gnome_dialog_init (GnomeDialog *dialog)
   dialog->parent = NULL;
 
   GTK_WINDOW(dialog)->type = gnome_preferences_get_dialog_type();
-  gtk_window_position(GTK_WINDOW(dialog), 
+  gtk_window_set_position(GTK_WINDOW(dialog), 
 		      gnome_preferences_get_dialog_position());
   
   dialog->accelerators = gtk_accel_group_new();
@@ -188,7 +188,7 @@ gnome_dialog_init (GnomeDialog *dialog)
   gtk_widget_show(bf);
 
   vbox = gtk_vbox_new(FALSE, GNOME_PAD);
-  gtk_container_border_width (GTK_CONTAINER (vbox), 
+  gtk_container_set_border_width (GTK_CONTAINER (vbox), 
 			      GNOME_PAD_SMALL);
   gtk_container_add(GTK_CONTAINER(bf), vbox);
   gtk_widget_show(vbox);
@@ -290,6 +290,10 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
 
   va_end(ap);
 
+  /* argument list may be null if the user wants to do weird things to the
+   * dialog, but we need to make sure this is initialized */
+  gnome_dialog_init_action_area(dialog);
+  
   return GTK_WIDGET (dialog);
 }
 
@@ -325,7 +329,7 @@ void       gnome_dialog_set_parent     (GnomeDialog * dialog,
 						  size/pos */
 
     /* Throw out other positioning */
-    gtk_window_position(GTK_WINDOW(dialog),GTK_WIN_POS_NONE);
+    gtk_window_set_position(GTK_WINDOW(dialog),GTK_WIN_POS_NONE);
 
     gdk_window_get_origin (GTK_WIDGET(parent)->window, &x, &y);
     gdk_window_get_size   (GTK_WIDGET(parent)->window, &w, &h);

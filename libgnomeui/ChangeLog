@@ -1,3 +1,15 @@
+1998-11-28  Stuart Parmenter  <pavlov@pavlov.net>
+
+	* *.c
+	s/gtk_container_border_width/gtk_container_set_border_width/
+	s/gtk_window_position/gtk_window_set_position/
+	s/gtk_notebook_current_page/gtk_notebook_get_current_page/
+
+	* gnome-dialog.c:
+        make sure that we initialize the action_area if the buttons args are
+	null.  Martin: this isn't how you had just changed things, but this
+	breaks Balsa the way you have it.
+	
 1998-11-28  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-client.c (client_set_value): New function.

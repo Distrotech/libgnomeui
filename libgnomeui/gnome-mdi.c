@@ -597,7 +597,7 @@ static gint book_button_release(GtkWidget *widget, GdkEventButton *e, gpointer d
 	
 			book_add_view(GTK_NOTEBOOK(new_book), view);
 				
-			gtk_window_position(GTK_WINDOW(mdi->active_window), GTK_WIN_POS_MOUSE);
+			gtk_window_set_position(GTK_WINDOW(mdi->active_window), GTK_WIN_POS_MOUSE);
 	
 			gtk_widget_set_usize (view, width, height);
 	

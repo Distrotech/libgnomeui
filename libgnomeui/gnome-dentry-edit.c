@@ -262,10 +262,10 @@ make_page(void)
   GtkWidget * frame, * page;
 
   frame = gtk_frame_new(NULL);
-  gtk_container_border_width(GTK_CONTAINER(frame), GNOME_PAD_SMALL);
+  gtk_container_set_border_width(GTK_CONTAINER(frame), GNOME_PAD_SMALL);
   
   page = gtk_table_new(7, 2, FALSE);
-  gtk_container_border_width (GTK_CONTAINER (page), GNOME_PAD_SMALL);
+  gtk_container_set_border_width (GTK_CONTAINER (page), GNOME_PAD_SMALL);
 
   gtk_container_add (GTK_CONTAINER(frame), page);
 

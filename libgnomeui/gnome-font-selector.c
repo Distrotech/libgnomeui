@@ -172,7 +172,7 @@ gnome_font_selector_init(GtkWidget *widget)
   /* Create the shell and vertical & horizontal boxes */
   gtk_window_set_title (GTK_WINDOW (text_tool), "Font Selector");
   gtk_window_set_policy (GTK_WINDOW (text_tool), FALSE, TRUE, TRUE);
-  gtk_window_position (GTK_WINDOW (text_tool), GTK_WIN_POS_MOUSE);
+  gtk_window_set_position (GTK_WINDOW (text_tool), GTK_WIN_POS_MOUSE);
 
   /* handle the wm close signal */
   gtk_signal_connect (GTK_OBJECT (text_tool), "delete_event",
@@ -180,7 +180,7 @@ gnome_font_selector_init(GtkWidget *widget)
 		      text_tool);
 
   text_tool->main_vbox = gtk_vbox_new (FALSE, 2);
-  gtk_container_border_width (GTK_CONTAINER (text_tool->main_vbox), 2);
+  gtk_container_set_border_width (GTK_CONTAINER (text_tool->main_vbox), 2);
   gtk_box_pack_start (GTK_BOX (GTK_DIALOG (text_tool)->vbox), text_tool->main_vbox, TRUE, TRUE, 0);
   top_hbox = gtk_hbox_new (FALSE, 1);
   gtk_box_pack_start (GTK_BOX (text_tool->main_vbox), top_hbox, TRUE, TRUE, 0);

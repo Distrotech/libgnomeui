@@ -249,7 +249,7 @@ gtk_spell_ask(gchar* word) {
 	if ( !ask_dialog ) {
 		ask_dialog = gtk_dialog_new();
 		gtk_window_set_title(GTK_WINDOW(ask_dialog), "Confirm");
-		gtk_container_border_width(GTK_CONTAINER(ask_dialog), 5);
+		gtk_container_set_border_width(GTK_CONTAINER(ask_dialog), 5);
 		gtk_signal_connect(GTK_OBJECT(ask_dialog), "delete_event",
 			(GtkSignalFunc)gtk_spell_ask_close, NULL);
 		gtk_signal_connect(GTK_OBJECT(ask_dialog), "destroy",
@@ -745,10 +745,10 @@ build_widget(GtkSpell* spell) {
 	GtkWidget* label;
 
 	notebook = gtk_notebook_new();
-	/*gtk_container_border_width(GTK_CONTAINER(notebook), 10);*/
+	/*gtk_container_set_border_width(GTK_CONTAINER(notebook), 10);*/
 
 	spell->page_spell = gtk_vbox_new(FALSE, 5);
-	gtk_container_border_width(GTK_CONTAINER(spell->page_spell), 10);
+	gtk_container_set_border_width(GTK_CONTAINER(spell->page_spell), 10);
 	gtk_widget_show(spell->page_spell);
 	build_page_spell(spell);
 	label = gtk_label_new("Spell");

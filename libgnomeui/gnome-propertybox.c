@@ -323,7 +323,7 @@ help (GnomePropertyBox *property_box)
 	gint page;
 
 	page =
-	  gtk_notebook_current_page (GTK_NOTEBOOK (property_box->notebook));
+	  gtk_notebook_get_current_page (GTK_NOTEBOOK (property_box->notebook));
 	gtk_signal_emit (GTK_OBJECT (property_box), property_box_signals[HELP],
 			 page);
 }
