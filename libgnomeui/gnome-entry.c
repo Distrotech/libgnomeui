@@ -66,99 +66,99 @@ enum {
 GType
 gnome_entry_get_type (void)
 {
-	static GType entry_type = 0;
+    static GType entry_type = 0;
 
-	if (!entry_type) {
-		GtkTypeInfo entry_info = {
-			"GnomeEntry",
-			sizeof (GnomeEntry),
-			sizeof (GnomeEntryClass),
-			(GtkClassInitFunc) gnome_entry_class_init,
-			(GtkObjectInitFunc) gnome_entry_init,
-			NULL,
-			NULL,
-			NULL
-		};
+    if (!entry_type) {
+	GtkTypeInfo entry_info = {
+	    "GnomeEntry",
+	    sizeof (GnomeEntry),
+	    sizeof (GnomeEntryClass),
+	    (GtkClassInitFunc) gnome_entry_class_init,
+	    (GtkObjectInitFunc) gnome_entry_init,
+	    NULL,
+	    NULL,
+	    NULL
+	};
 
-		entry_type = gtk_type_unique (gnome_selector_client_get_type (), &entry_info);
-	}
+	entry_type = gtk_type_unique (gnome_selector_client_get_type (), &entry_info);
+    }
 
-	return entry_type;
+    return entry_type;
 }
 
 static void
 gnome_entry_set_property (GObject *object, guint param_id,
 			  const GValue *value, GParamSpec *pspec)
 {
-	GnomeEntry *entry;
+    GnomeEntry *entry;
 
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_ENTRY (object));
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_ENTRY (object));
 
-	entry = GNOME_ENTRY (object);
+    entry = GNOME_ENTRY (object);
 
-	switch (param_id) {
-	case PROP_IS_FILE_ENTRY:
-		g_assert (!entry->_priv->constructed);
-		entry->_priv->is_file_entry = g_value_get_boolean (value);
-		break;
-	default:
-		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-		break;
-	}
+    switch (param_id) {
+    case PROP_IS_FILE_ENTRY:
+	g_assert (!entry->_priv->constructed);
+	entry->_priv->is_file_entry = g_value_get_boolean (value);
+	break;
+    default:
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+	break;
+    }
 }
 
 static void
 gnome_entry_get_property (GObject *object, guint param_id, GValue *value,
 			  GParamSpec *pspec)
 {
-	GnomeEntry *entry;
+    GnomeEntry *entry;
 
-	g_return_if_fail (object != NULL);
-	g_return_if_fail (GNOME_IS_ENTRY (object));
+    g_return_if_fail (object != NULL);
+    g_return_if_fail (GNOME_IS_ENTRY (object));
 
-	entry = GNOME_ENTRY (object);
+    entry = GNOME_ENTRY (object);
 
-	switch (param_id) {
-	case PROP_IS_FILE_ENTRY:
-		g_value_set_boolean (value, entry->_priv->is_file_entry);
-		break;
-	default:
-		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-		break;
-	}
+    switch (param_id) {
+    case PROP_IS_FILE_ENTRY:
+	g_value_set_boolean (value, entry->_priv->is_file_entry);
+	break;
+    default:
+	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
+	break;
+    }
 }
 
 static void
 gnome_entry_class_init (GnomeEntryClass *class)
 {
-	GtkObjectClass *object_class;
-	GObjectClass *gobject_class;
+    GtkObjectClass *object_class;
+    GObjectClass *gobject_class;
 
-	object_class = (GtkObjectClass *) class;
-	gobject_class = (GObjectClass *) class;
+    object_class = (GtkObjectClass *) class;
+    gobject_class = (GObjectClass *) class;
 
-	parent_class = gtk_type_class (gnome_selector_client_get_type ());
+    parent_class = gtk_type_class (gnome_selector_client_get_type ());
 
-	gobject_class->get_property = gnome_entry_get_property;
-	gobject_class->set_property = gnome_entry_set_property;
+    gobject_class->get_property = gnome_entry_get_property;
+    gobject_class->set_property = gnome_entry_set_property;
 
-	/* Construction properties */
-	g_object_class_install_property
-		(gobject_class,
-		 PROP_IS_FILE_ENTRY,
-		 g_param_spec_boolean ("is-file-entry", NULL, NULL,
-				       FALSE,
-				       (G_PARAM_READABLE | G_PARAM_WRITABLE |
-					G_PARAM_CONSTRUCT_ONLY)));
+    /* Construction properties */
+    g_object_class_install_property
+	(gobject_class,
+	 PROP_IS_FILE_ENTRY,
+	 g_param_spec_boolean ("is-file-entry", NULL, NULL,
+			       FALSE,
+			       (G_PARAM_READABLE | G_PARAM_WRITABLE |
+				G_PARAM_CONSTRUCT_ONLY)));
 
-	gobject_class->finalize = gnome_entry_finalize;
+    gobject_class->finalize = gnome_entry_finalize;
 }
 
 static void
 gnome_entry_init (GnomeEntry *gentry)
 {
-	gentry->_priv = g_new0 (GnomeEntryPrivate, 1);
+    gentry->_priv = g_new0 (GnomeEntryPrivate, 1);
 }
 
 GtkWidget *
@@ -166,42 +166,42 @@ gnome_entry_construct (GnomeEntry         *gentry,
 		       GNOME_Selector      corba_selector,
 		       Bonobo_UIContainer  uic)
 {
-	g_return_val_if_fail (gentry != NULL, NULL);
-	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
-	g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
+    g_return_val_if_fail (gentry != NULL, NULL);
+    g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
+    g_return_val_if_fail (corba_selector != CORBA_OBJECT_NIL, NULL);
 
-	return (GtkWidget *) gnome_selector_client_construct_from_objref
-		(GNOME_SELECTOR_CLIENT (gentry), corba_selector, uic);
+    return (GtkWidget *) gnome_selector_client_construct_from_objref
+	(GNOME_SELECTOR_CLIENT (gentry), corba_selector, uic);
 }
 
 GtkWidget *
 gnome_entry_new (void)
 {
-	GnomeEntry *entry;
+    GnomeEntry *entry;
 
-	entry = g_object_new (gnome_entry_get_type (),
-			      "is-file-entry", FALSE,
-			      NULL);
+    entry = g_object_new (gnome_entry_get_type (),
+			  "is-file-entry", FALSE,
+			  NULL);
 
-	return (GtkWidget *) gnome_selector_client_construct
-		(GNOME_SELECTOR_CLIENT (entry),
-		 "OAFIID:GNOME_UI_Component_Entry",
-		 CORBA_OBJECT_NIL);
+    return (GtkWidget *) gnome_selector_client_construct
+	(GNOME_SELECTOR_CLIENT (entry),
+	 "OAFIID:GNOME_UI_Component_Entry",
+	 CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
 gnome_file_entry_new (void)
 {
-	GnomeEntry *entry;
+    GnomeEntry *entry;
 
-	entry = g_object_new (gnome_entry_get_type (),
-			      "is-file-entry", TRUE,
-			      NULL);
+    entry = g_object_new (gnome_entry_get_type (),
+			  "is-file-entry", TRUE,
+			  NULL);
 
-	return (GtkWidget *) gnome_selector_client_construct
-		(GNOME_SELECTOR_CLIENT (entry),
-		 "OAFIID:GNOME_UI_Component_Entry",
-		 CORBA_OBJECT_NIL);
+    return (GtkWidget *) gnome_selector_client_construct
+	(GNOME_SELECTOR_CLIENT (entry),
+	 "OAFIID:GNOME_UI_Component_Entry",
+	 CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
