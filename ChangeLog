@@ -1,3 +1,7 @@
+2001-12-10  jacob berkman  <jacob@ximian.com>
+
+	* glade/glade-gnome.c: accept more values for boolean true
+
 2001-12-09  Kristian Rietveld  <kris@gtk.org>
 
 	* libgnomeui/gnome-dialog.c (gnome_dialog_construct): don't append

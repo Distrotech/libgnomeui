@@ -36,6 +36,10 @@
 
 #include <libbonoboui.h>
 
+#define INT(s)   (strtol ((s), NULL, 0))
+#define BOOL(s)  (g_ascii_tolower (*(s)) == 't' || g_ascii_tolower (*(s)) == 'y' || INT (s))
+#define FLOAT(s) (g_strtod ((s), NULL))
+
 typedef struct {
     const char *extension;
     GnomeUIInfo data;
@@ -554,13 +558,13 @@ icon_list_new (GladeXML *xml, GType widget_type,
 	const char *value = info->properties[i].value;
 
 	if (!strcmp (name, "text_editable")) {
-	    if (*value == 'y')
+	    if (BOOL (value))
 		flags |= GNOME_ICON_LIST_IS_EDITABLE;
 	} else if (!strcmp (name, "text_static")) {
-	    if (*value == 'y')
+	    if (BOOL (value))
 		flags |= GNOME_ICON_LIST_STATIC_TEXT;
 	} else if (!strcmp (name, "icon_width")) {
-	    icon_width = strtol (value, NULL, 10);
+	    icon_width = INT (value);
 	}
     }
 
@@ -652,16 +656,14 @@ static void
 app_enable_layout_config (GladeXML *xml, GtkWidget *w,
 			  const char *name, const char *value)
 {
-    gnome_app_enable_layout_config (GNOME_APP (w),
-				    *value == 'y');
+    gnome_app_enable_layout_config (GNOME_APP (w), BOOL (value));
 }
 
 static void
 pixmap_entry_set_preview (GladeXML *xml, GtkWidget *w,
 			  const char *name, const char *value)
 {
-    gnome_pixmap_entry_set_preview (GNOME_PIXMAP_ENTRY (w),
-				    *value == 'y');
+    gnome_pixmap_entry_set_preview (GNOME_PIXMAP_ENTRY (w), BOOL (value));
 }
 
 static void
@@ -678,24 +680,21 @@ static void
 icon_list_set_row_spacing (GladeXML *xml, GtkWidget *w,
 			   const char *name, const char *value)
 {
-    gnome_icon_list_set_row_spacing (GNOME_ICON_LIST (w),
-				     strtol (value, NULL, 10));
+    gnome_icon_list_set_row_spacing (GNOME_ICON_LIST (w), INT (value));
 }
 
 static void
 icon_list_set_col_spacing (GladeXML *xml, GtkWidget *w,
 			   const char *name, const char *value)
 {
-    gnome_icon_list_set_col_spacing (GNOME_ICON_LIST (w),
-				     strtol (value, NULL, 10));
+    gnome_icon_list_set_col_spacing (GNOME_ICON_LIST (w), INT (value));
 }
 
 static void
 icon_list_set_text_spacing (GladeXML *xml, GtkWidget *w,
 			    const char *name, const char *value)
 {
-    gnome_icon_list_set_text_spacing (GNOME_ICON_LIST (w),
-				      strtol (value, NULL, 10));
+    gnome_icon_list_set_text_spacing (GNOME_ICON_LIST (w), INT (value));
 }
 
 static void
@@ -709,14 +708,14 @@ static void
 dialog_set_auto_close (GladeXML *xml, GtkWidget *w,
 		       const char *name, const char *value)
 {
-    gnome_dialog_set_close (GNOME_DIALOG (w), *value == 'y');
+    gnome_dialog_set_close (GNOME_DIALOG (w), BOOL (value));
 }
 
 static void
 dialog_set_hide_on_close (GladeXML *xml, GtkWidget *w,
 			  const char *name, const char *value)
 {
-    gnome_dialog_close_hides (GNOME_DIALOG (w), *value == 'y');
+    gnome_dialog_close_hides (GNOME_DIALOG (w), BOOL (value));
 }
 
 static void
