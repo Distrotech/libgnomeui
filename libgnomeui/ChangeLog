@@ -1,3 +1,10 @@
+Sun Dec 09 14:15:01 2001  George Lebl <jirka@5z.com>
+
+	* gnome-dialog.c, gnome-messagebox.c: Contrary to popular belief,
+	  va_list is not a pointer and certainly not a string vector.  Use
+	  the constructv method in the messagebox and don't check for
+	  nullness of va_list in gnome_dialog_construct.
+
 Sun Dec 09 14:04:22 2001  George Lebl <jirka@5z.com>
 
 	* gnome-popup-menu.c, gnome-app.c:

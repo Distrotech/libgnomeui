@@ -223,18 +223,15 @@ gnome_dialog_construct (GnomeDialog * dialog,
   if (title)
     gtk_window_set_title (GTK_WINDOW (dialog), title);
   
-  if (ap) {
-    while (TRUE) {
+  while (TRUE) {
+    button_name = va_arg (ap, gchar *);
       
-      button_name = va_arg (ap, gchar *);
-      
-      if (button_name == NULL) {
-	break;
-      }
+    if (button_name == NULL) {
+      break;
+    }
     
-      gnome_dialog_append_button( dialog, 
+    gnome_dialog_append_button( dialog, 
 				  button_name);
-    };
   }
 
   /* argument list may be null if the user wants to do weird things to the

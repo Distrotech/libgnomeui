@@ -139,7 +139,7 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
                 s = g_strdup_printf("%s (%s)", title_prefix, appname);
         }
 
-	gnome_dialog_construct (GNOME_DIALOG (messagebox), s ? s : title_prefix, buttons);
+	gnome_dialog_constructv (GNOME_DIALOG (messagebox), s ? s : title_prefix, buttons);
 	g_free (s);
 
 	hbox = gtk_hbox_new (FALSE, 0);
