@@ -8,8 +8,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.he\n"
-"POT-Creation-Date: 2003-06-04 09:08+0200\n"
-"PO-Revision-Date: 2003-04-08 14:21+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-19 21:31+0200\n"
+"PO-Revision-Date: 2003-06-19 23:27+0300\n"
 "Last-Translator: Gil 'Dolfin' Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -50,9 +51,8 @@ msgid "Translated by"
 msgstr "תורגם על-ידי"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "תודות"
+msgstr "_תודות"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -123,8 +123,7 @@ msgid "Translator credits"
 msgstr "תודות למתרגמים"
 
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "תודות למתרגמים. מחרוזת זו צריכה להיות מסומנת כניתנת לתרגום"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -142,6 +141,7 @@ msgstr "אודות %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_קובץ"
 
@@ -199,6 +199,7 @@ msgid "_Game"
 msgstr "_משחק"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_עזרה"
 
@@ -389,11 +390,11 @@ msgstr "הגדר את היישום"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_אודות"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "אודות יישום זה"
 
@@ -420,7 +421,7 @@ msgstr "יוצר חלון חדש"
 msgid "_Close This Window"
 msgstr "_סגור חלון זה"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "סוגר את החלון הנוכחי"
 
@@ -502,11 +503,11 @@ msgstr "מציג עזרה עבור יישום זה"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
-msgstr "מלל מתחת לסמלים"
+msgstr "טקסט מתחת לסמלים"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
-msgstr "עדיפות מלל ליד סמלים"
+msgstr "עדיפות טקסט ליד סמלים"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
@@ -514,7 +515,7 @@ msgstr "סמלים בלבד"
 
 #: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
-msgstr "מלל בלבד"
+msgstr "טקסט בלבד"
 
 #: libgnomeui/gnome-app-helper.c:2630
 #, c-format
@@ -595,7 +596,7 @@ msgstr "רמת פעילות משתמש דרושה."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "מתווך ה HTTP שלך דורש שתתחבר.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -603,18 +604,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"אתה חייב להתחבר כדי לגשת ל \"%s\".\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "סיסמתך תשלח ללא הצפנה."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "סיסמתך תשלח מוצפנת."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "אישור דרוש"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -864,13 +867,13 @@ msgstr "כותרת לתיבת הדו-שיח עיון."
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
-msgstr "ערך סיפרייה"
+msgstr "ערך ספרייה"
 
 #: libgnomeui/gnome-file-entry.c:238
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr "האם ערך הקובץ הוא שמות סיפריות או שמות קבצים מלאים."
+msgstr "האם ערך הקובץ הוא שמות ספריות או שמות קבצים מלאים."
 
 #: libgnomeui/gnome-file-entry.c:246
 msgid "Modal"
@@ -950,8 +953,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz אבגדהוזחטיכלמנסעפצקרשת"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz אבגדהוזחטיכלמנסעפצקרשת"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -987,27 +989,27 @@ msgstr "ה GtkFont הנבחר"
 
 #: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "תצוגה מקדימה של מלל"
+msgstr "תצוגה מקדימה של טקסט"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "תצוגה מקדימה של מלל מוצגת בתיבת הדו-שיח"
+msgstr "תצוגה מקדימה של טקסט מוצגת בתיבת הדו-שיח"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr "השתמש בגופן בתוית"
+msgstr "השתמש בגופן בתווית"
 
 #: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "השתמש בגופן בתוית במצב מידע גופן"
+msgstr "השתמש בגופן בתווית במצב מידע גופן"
 
 #: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr "גודל גופן לתוית"
+msgstr "גודל גופן לתווית"
 
 #: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "גודל גופן לתוית במצב מידע גופן"
+msgstr "גודל גופן לתווית במצב מידע גופן"
 
 #: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -1056,11 +1058,11 @@ msgstr "הכתובת ש GnomeHRef מפעיל"
 
 #: libgnomeui/gnome-href.c:130
 msgid "Text"
-msgstr "מלל"
+msgstr "טקסט"
 
 #: libgnomeui/gnome-href.c:131
 msgid "The text on the button"
-msgstr "המלל שעל הכפתור"
+msgstr "הטקסט שעל הכפתור"
 
 #: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
@@ -1076,21 +1078,21 @@ msgstr "צבע שנבחר לצביעת הקישור"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
-msgstr "כפתור זה יקח אותך לכתובת שהוא מציג."
+msgstr "כפתור זה ייקח אותך לכתובת שהוא מציג."
 
 #: libgnomeui/gnome-href.c:393
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"ארעה שגיאה בזמן נסיון הפעלת דפדפן ברירת המחדל.\n"
+"ארעה שגיאה בזמן ניסיון הפעלת דפדפן ברירת המחדל.\n"
 "אנא בדוק את הגדרותיך בכלי ההעדפות 'יישומים מועדפים'."
 
 #: libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr "מזהה יחודי לערך הסמל.  זה ישמש לשמירת רשימת ההסיטוריה."
+msgstr "מזהה ייחודי לערך הסמל.  זה ישמש לשמירת רשימת ההיסטוריה."
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
@@ -1102,7 +1104,7 @@ msgstr "ספריית Pixmap"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
-msgstr "הסיפרייה בה יחופשו הסמלים."
+msgstr "הספרייה בה יחופשו הסמלים."
 
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
@@ -1117,7 +1119,7 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"תיבת דו-דיח לבחירת סמל.  אתה יכול להשתמש במאפיין זה כדי לקבל את ה GtkDialog "
+"תיבת דו-שיח לבחירת סמל.  אתה יכול להשתמש במאפיין זה כדי לקבל את ה GtkDialog "
 "אם אתה צריך לשנות או לבדוק כל אחד ממאפייניו."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
@@ -1154,7 +1156,7 @@ msgstr "בוחר סמל"
 
 #: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
-msgstr "כפתור זה יפתח חלון שיתן לך לבחור סמל."
+msgstr "כפתור זה יפתח חלון שייתן לך לבחור סמל."
 
 #: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
@@ -1168,7 +1170,7 @@ msgstr "נתיב סמל"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "כאן אתה צריך לכתוב את שם הספירייה בה נמצאים תמונות הסמלים."
+msgstr "כאן אתה צריך לכתוב את שם הספרייה בה נמצאים תמונות הסמלים."
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1178,7 +1180,7 @@ msgstr "GnomeIconSelection: '%s' לא קיים או שאינו ספרייה"
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection: לא ניתן לפתוח את הסיפרייה '%s'"
+msgstr "GnomeIconSelection: לא ניתן לפתוח את הספרייה '%s'"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
@@ -1206,11 +1208,11 @@ msgstr "הודעה"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "_שם משתמש:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_סיסמה:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1283,25 +1285,25 @@ msgstr "ביטול הזחה"
 msgid "About"
 msgstr "אודות"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "X display to use"
 msgstr "תצוגת X לשימוש"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "DISPLAY"
 msgstr "תצוגה"
 
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:125
 msgid "GNOME GUI Library"
 msgstr "ספריית ממשק המשתמש של GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "מספר תקלות הקטעה אירעו בו זמנית; לא ניתן להציג תיבת דו-שיח לשגיאה\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:637
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1354,8 +1356,10 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "אנא בקר בעמוד ריסוק היישומים של GNOME לעוד מידע"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "יציאה מהבדיקה"
+
 #~ msgid "_Credits"
 #~ msgstr "_תודות"
 
-#~ msgid "Exit the test"
-#~ msgstr "יציאה מהבדיקה"
