@@ -17,12 +17,6 @@ BEGIN_GNOME_DECLS
 #define GNOME_MDI_CHILD_CLASS(klass)  GTK_CHECK_CLASS_CAST (klass, gnome_mdi_child_get_type (), GnomeMDIChildClass)
 #define GNOME_IS_MDI_CHILD(obj)       GTK_CHECK_TYPE (obj, gnome_mdi_child_get_type ())
 
-#define VIEW_GET_CHILD(view)         GNOME_MDI_CHILD(gtk_object_get_data(GTK_OBJECT(view), "GnomeMDIChild"))
-#define VIEW_GET_WINDOW(v)           GNOME_APP(gtk_widget_get_toplevel(GTK_WIDGET(v)))
-#define VIEW_GET_NAME(v)             (VIEW_GET_CHILD(v)->name)
-
-#define CHILD_LAST_VIEW(child)       (g_list_length(child->views) == 1)
-
 typedef struct _GnomeMDIChild       GnomeMDIChild;
 typedef struct _GnomeMDIChildClass  GnomeMDIChildClass;
 

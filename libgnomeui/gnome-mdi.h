@@ -57,17 +57,18 @@ BEGIN_GNOME_DECLS
 typedef struct _GnomeMDI       GnomeMDI;
 typedef struct _GnomeMDIClass  GnomeMDIClass;
 
-#define GNOME_MDI_MS         (1L << 0)      /* for MS-like MDI - not supported right now */
-#define GNOME_MDI_NOTEBOOK   (1L << 1)      /* notebook */
-#define GNOME_MDI_MODAL      (1L << 2)      /* "modal" app */
-#define GNOME_MDI_TOPLEVEL   (1L << 3)      /* many toplevel windows */
-
-#define GNOME_MDI_MODE_FLAGS (GNOME_MDI_MS | GNOME_MDI_NOTEBOOK | GNOME_MDI_MODAL | GNOME_MDI_TOPLEVEL)
+typedef enum {
+  GNOME_MDI_MS = 1,
+  GNOME_MDI_NOTEBOOK,
+  GNOME_MDI_MODAL,
+  GNOME_MDI_TOPLEVEL
+} GnomeMDIMode;
 
 /* the following keys are used to gtk_object_set_data() copies of the appropriate menu and toolbar templates
- * to their GnomeApps. gtk_object_get_data(VIEW_GET_WINDOW(view), key) will give you a pointer to the data
- * if you have a pointer to a view. this might be useful for enabling/disabling menus when certain events
- * happen. these GnomeUIInfo structures are exact copies of the template GnomeUIInfo trees.
+ * to their GnomeApps. gtk_object_get_data(gnome_mdi_view_get_toplevel(view), key) will give you a pointer to
+ * the data if you have a pointer to a view. this might be useful for enabling/disabling menu items (via
+ * ui_info[i]->widget) when certain events happen. these GnomeUIInfo structures are exact copies of the
+ * template GnomeUIInfo trees.
  */
 #define GNOME_MDI_TOOLBAR_INFO_KEY           "MDIToolbarUIInfo"
 #define GNOME_MDI_MENUBAR_INFO_KEY           "MDIMenubarUIInfo"
@@ -76,7 +77,7 @@ typedef struct _GnomeMDIClass  GnomeMDIClass;
 struct _GnomeMDI {
   GtkObject object;
 
-  gint32 flags;
+  GnomeMDIMode mode;
 
   gchar *appname, *title;
   gchar *dnd_type;
@@ -86,8 +87,10 @@ struct _GnomeMDI {
   GtkWidget *active_view;
   GnomeApp *active_window;
 
-  GList *windows;   /* toplevel windows - GnomeApp widgets */
-  GList *children;  /* children - GnomeMDIChild objects*/
+  GList *windows;     /* toplevel windows - GnomeApp widgets */
+  GList *children;    /* children - GnomeMDIChild objects*/
+
+  GSList *registered; /* see comment for gnome_mdi_(un)register() functions below for an explanation. */
 
   GnomeUIInfo *menu_template;
   GnomeUIInfo *toolbar_template;
@@ -135,6 +138,25 @@ gint          gnome_mdi_remove_all          (GnomeMDI *, gint);
 
 GnomeMDIChild *gnome_mdi_active_child       (GnomeMDI *);
 GnomeMDIChild *gnome_mdi_find_child         (GnomeMDI *, gchar *);
+
+/*
+ * the following two functions are here to make life easier if an application opens windows
+ * that should "keep the app alive" even if there are no MDI windows open. any such windows
+ * should be registered with the MDI: as long as there is a window registered, the MDI will
+ * not destroy itself (even if the last of its windows is closed). on the other hand closing
+ * the last MDI window when no other windows are registered with the MDI will result in MDI
+ * being gtk_object_destroy()ed.
+ */
+void          gnome_mdi_register            (GnomeMDI *, GtkWidget *);
+void          gnome_mdi_unregister          (GnomeMDI *, GtkWidget *);
+
+/*
+ * convenience functions for retrieveing GnomeMDIChild and GnomeApp
+ * objects associated with a particular view. These obsolete the
+ * VIEW_GET_*() macros.
+ */
+GnomeApp      *gnome_mdi_get_app_from_view  (GtkWidget *);
+GnomeMDIChild *gnome_mdi_get_child_from_view(GtkWidget *);
 
 END_GNOME_DECLS
 
