@@ -1356,9 +1356,10 @@ void
 gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
 {
 	double tx1, ty1, tx2, ty2;
-	double mx1, my1, mx2, my2;
 	ArtPoint p1, p2, p3, p4;
 	ArtPoint q1, q2, q3, q4;
+	double min_x1, min_y1, min_x2, min_y2;
+	double max_x1, max_y1, max_x2, max_y2;
 
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
@@ -1384,26 +1385,42 @@ gnome_canvas_item_get_bounds (GnomeCanvasItem *item, double *x1, double *y1, dou
 		art_affine_point (&q3, &p3, item->xform);
 		art_affine_point (&q4, &p4, item->xform);
 
-		mx1 = MIN (q1.x, q2.x);
-		my1 = MIN (q1.y, q2.y);
-		mx2 = MAX (q3.x, q4.x);
-		my2 = MAX (q3.y, q4.y);
-
-		if (mx1 < mx2) {
-			tx1 = mx1;
-			tx2 = mx2;
+		if (q1.x < q2.x) {
+			min_x1 = q1.x;
+			max_x1 = q2.x;
 		} else {
-			tx1 = mx2;
-			tx2 = mx1;
+			min_x1 = q2.x;
+			max_x1 = q1.x;
 		}
 
-		if (my1 < my2) {
-			ty1 = my1;
-			ty2 = my2;
+		if (q1.y < q2.y) {
+			min_y1 = q1.y;
+			max_y1 = q2.y;
 		} else {
-			ty1 = my2;
-			ty2 = my1;
+			min_y1 = q2.y;
+			max_y1 = q1.y;
 		}
+
+		if (q3.x < q4.x) {
+			min_x2 = q3.x;
+			max_x2 = q4.x;
+		} else {
+			min_x2 = q4.x;
+			max_x2 = q3.x;
+		}
+
+		if (q3.y < q4.y) {
+			min_y2 = q3.y;
+			max_y2 = q4.y;
+		} else {
+			min_y2 = q4.y;
+			max_y2 = q3.y;
+		}
+
+		tx1 = MIN (min_x1, min_x2);
+		ty1 = MIN (min_y1, min_y2);
+		tx2 = MAX (max_x1, max_x2);
+		ty2 = MAX (max_y1, max_y2);
 	} else if (item->xform) {
 		tx1 += item->xform[0];
 		ty1 += item->xform[1];
