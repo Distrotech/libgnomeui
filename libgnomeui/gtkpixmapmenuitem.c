@@ -274,6 +274,8 @@ gtk_pixmap_menu_item_size_request (GtkWidget      *widget,
   
   if (menu_item->pixmap)
     gtk_widget_size_request(menu_item->pixmap, &req);
+  else
+    req.width = PMAP_WIDTH;
 
   requisition->height = MAX(req.height + GTK_CONTAINER(widget)->border_width + BORDER_SPACING, requisition->height);
   requisition->width += (req.width + GTK_CONTAINER(widget)->border_width + BORDER_SPACING);

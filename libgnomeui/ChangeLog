@@ -1,3 +1,9 @@
+2000-06-29  Iain Holmes   <terrorist@gegl.org>
+
+	* gtkpixmapmenuitem.c (gtk_pixmap_menu_item_size_request): Take the
+	  space required by a pixmap into consideration even if one does not 
+	  exist. Fixes bug #13812
+
 2000-06-29  Miguel de Icaza  <miguel@gnu.org>
 
 	* gnome-canvas.c (gnome_canvas_focus_in): Comment out the ic code
