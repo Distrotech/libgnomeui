@@ -1,3 +1,9 @@
+1999-02-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-dentry-edit.c (fill_easy_page): The terminal toggle should
+	be anchored to the left.  It is very disconcerting to have it move
+	around when the user resizes the window.
+
 1999-02-14 Sergey Panov <sipan@mit.edu>
 
 	* gnome-dentry-edit.c(label_new)The proper label alignment is not
