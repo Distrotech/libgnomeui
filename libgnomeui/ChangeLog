@@ -1,3 +1,16 @@
+2000-05-03  Iain Holmes  <ih@csd.abdn.ac.uk>
+
+	* gnome-canvas-text.c (calc_line_widths): Correctly calculate the width
+	of the text. Fixes bug #2085
+
+2000-05-01  Iain Holmes  <ih@csd.abdn.ac.uk>
+
+	* gnome-canvas-widget.c (gnome_canvas_widget_render)
+	(gnome_canvas_widget_draw): New functions to queue a widget redraw
+	when the item is redrawn.
+	(gnome_canvas_widget_class_init): Connect the render and draw
+	functions to the item.
+
 Sun Apr 30 01:21:16 2000  George Lebl <jirka@5z.com>
 
 	* gnome-calculator.c:  push result after reset/calc so that double

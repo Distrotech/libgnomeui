@@ -421,9 +421,21 @@ calc_line_widths (GnomeCanvasText *text)
 
 	for (i = 0; i < text->num_lines; i++) {
 		if (lines->length != 0) {
-			if (text->font)
-				lines->width = gdk_text_width (text->font,
-							       lines->text, lines->length);
+			if (text->font) {
+				gint rbearing, lbearing;
+				gint width, ascent, descent;
+
+				gdk_text_extents (text->font,
+						  lines->text,
+						  lines->length,
+						  &lbearing,
+						  &rbearing,
+						  &width,
+						  &ascent,
+						  &descent);
+				lines->width = rbearing;
+				
+			}
 			else
 				lines->width = 0;
 

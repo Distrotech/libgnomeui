@@ -41,6 +41,12 @@ static double gnome_canvas_widget_point       (GnomeCanvasItem *item, double x, 
 static void   gnome_canvas_widget_translate   (GnomeCanvasItem *item, double dx, double dy);
 static void   gnome_canvas_widget_bounds      (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2);
 
+static void gnome_canvas_widget_render (GnomeCanvasItem *item,
+					GnomeCanvasBuf *buf);
+static void gnome_canvas_widget_draw (GnomeCanvasItem *item,
+				      GdkDrawable *drawable,
+				      int x, int y,
+				      int width, int height);
 
 static GnomeCanvasItemClass *parent_class;
 
@@ -95,6 +101,8 @@ gnome_canvas_widget_class_init (GnomeCanvasWidgetClass *class)
 	item_class->point = gnome_canvas_widget_point;
 	item_class->translate = gnome_canvas_widget_translate;
 	item_class->bounds = gnome_canvas_widget_bounds;
+	item_class->render = gnome_canvas_widget_render;
+	item_class->draw = gnome_canvas_widget_draw;
 }
 
 static void
@@ -375,6 +383,32 @@ gnome_canvas_widget_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_
 	}
 
 	recalc_bounds (witem);
+}
+
+static void
+gnome_canvas_widget_render (GnomeCanvasItem *item,
+			    GnomeCanvasBuf *buf)
+{
+	GnomeCanvasWidget *witem;
+
+	witem = GNOME_CANVAS_WIDGET (item);
+
+	if (witem->widget) 
+		gtk_widget_queue_draw (witem->widget);
+}
+
+static void
+gnome_canvas_widget_draw (GnomeCanvasItem *item,
+			  GdkDrawable *drawable,
+			  int x, int y,
+			  int width, int height)
+{
+	GnomeCanvasWidget *witem;
+
+	witem = GNOME_CANVAS_WIDGET (item);
+
+	if (witem->widget)
+		gtk_widget_queue_draw (witem->widget);
 }
 
 static double

@@ -2556,9 +2556,9 @@ gnome_canvas_draw (GtkWidget *widget, GdkRectangle *area)
 				     area->x + DISPLAY_X1 (canvas) - canvas->zoom_xofs,
 				     area->y + DISPLAY_Y1 (canvas) - canvas->zoom_yofs,
 				     (area->x + area->width + DISPLAY_X1 (canvas)
-				      - canvas->zoom_xofs),
+				      - canvas->zoom_xofs) + 1,
 				     (area->y + area->height + DISPLAY_Y1 (canvas)
-				      - canvas->zoom_yofs));
+				      - canvas->zoom_yofs) + 1);
 }
 
 /* Handles scrolling of the canvas.  Adjusts the scrolling and zooming offset to
