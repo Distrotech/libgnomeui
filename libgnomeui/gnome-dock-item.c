@@ -267,6 +267,7 @@ gnome_dock_item_destroy (GtkObject *object)
   g_return_if_fail (GNOME_IS_DOCK_ITEM (object));
 
   di = GNOME_DOCK_ITEM (object);
+  g_free (di->name);
 
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (object);

@@ -1,3 +1,13 @@
+1999-04-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-dock-item.c (gnome_dock_item_destroy): Release di->name on
+	the destroy handler.  Memory leak spotted by Morten Welinder again.
+
+1999-04-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtk-clock.c (gtk_clock_new): Bug fix from Damon Chaplin,
+	clock->type was never initialized.
+
 1999-04-21  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi-generic-child.h: fixed a typo. GNOME_IS_MDI_GENERIC_CHILD()
@@ -5,11 +15,6 @@
 	* gnome-mdi-generic-child.c, gnome-mdi.c, gnome-mdi-session.*:
 	some documentation fixes.
 	
-1999-04-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
-
-	* gtk-clock.c (gtk_clock_new): Bug fix from Damon Chaplin,
-	clock->type was never initialized.
-
 1999-04-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-item.c (gnome_icon_text_item_stop_editing): Make sure
