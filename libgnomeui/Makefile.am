@@ -22,6 +22,7 @@ libgnomeui_la_SOURCES = \
 	gnome-net.c			\
 	gnome-about.c			\
 	gnome-pixmap.c			\
+	gnome-propertybox.c		\
 	gnome-properties.c		\
 	gnome-client.c			\
 	gnome-scores.c			\
@@ -48,6 +49,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-ice.h			\
 	gnome-messagebox.h		\
 	gnome-net.h			\
+	gnome-propertybox.h		\
 	gnome-properties.h     		\
 	gnome-pixmap.h			\
 	gnome-client.h			\

@@ -1,5 +1,11 @@
 Sat Mar 21 00:45:10 1998  Tom Tromey  <tromey@cygnus.com>
 
+	* libgnomeui.h: Include gnome-propertybox.h.
+	* gnome-propertybox.h: New file.
+	* gnome-propertybox.c: New file.
+	* Makefile.am (libgnomeui_la_SOURCES): Added gnome-propertybox.c.
+	(libgnomeuiinclude_HEADERS): Added gnome-propertybox.h.
+
 	* gnome-messagebox.c: Changed all names from gnome_messagebox_* to
 	gnome_message_box_*.  The latter mathches Gtk style, and works
 	better with gnome.defs/gen-typeinfo.
