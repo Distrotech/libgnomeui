@@ -39,6 +39,8 @@
 #define STOCK_SEP '.'
 #define STOCK_SEP_STR "."
 
+#define GNOME_STOCK_BUTTON_PADDING 2
+
 static GnomeStockPixmapEntry **lookup(const char *icon);
 
 /***************************/
@@ -923,7 +925,8 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 	w = hbox;
 	hbox = gtk_hbox_new(FALSE, 0);
 	gtk_widget_show(hbox);
-	gtk_box_pack_start(GTK_BOX(w), hbox, TRUE, FALSE, 7);
+	gtk_box_pack_start(GTK_BOX(w), hbox, TRUE, FALSE,
+                           GNOME_STOCK_BUTTON_PADDING);
 
 	use_icon = gnome_config_get_bool("/Gnome/Icons/ButtonUseIcons=true");
 	use_label = gnome_config_get_bool("/Gnome/Icons/ButtonUseLabels=true");
@@ -931,7 +934,8 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 	if ((use_label) || (!use_icon) || (!pixmap)) {
 		label = gtk_label_new(_(text));
 		gtk_widget_show(label);
-		gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 7);
+		gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE,
+                                 GNOME_STOCK_BUTTON_PADDING);
 	}
 
 	if ((use_icon) && (pixmap)) {
