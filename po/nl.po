@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
 "POT-Creation-Date: 2002-04-14 20:44-0400\n"
-"PO-Revision-Date: 2002-04-17 14:56+0100\n"
+"PO-Revision-Date: 2002-04-18 15:51+0100\n"
 "Last-Translator: Ronald Hummelink <ronald@hummelink.xs4all.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -327,11 +327,11 @@ msgstr "Toon de 'Afmaken' knop in plaats van de 'Volgende' knop"
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
-msgstr "Toon Help"
+msgstr "Toon Hulp"
 
 #: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
-msgstr "Toon de 'Help' knop"
+msgstr "Toon de 'Hulp' knop"
 
 #: libgnomeui/gnome-href.c:121
 msgid "URL"
@@ -550,7 +550,7 @@ msgstr "_Spel"
 #: libgnomeui/gnome-app-helper.h:531
 #: test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr "_Help"
+msgstr "_Hulp"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
@@ -939,11 +939,11 @@ msgstr "Unieke naam voor bestands entries. Dit zal gebruikt worden om de histori
 #: libgnomeui/gnome-file-entry.c:199
 #: libgnomeui/gnome-icon-entry.c:172
 msgid "Browse Dialog Title"
-msgstr "Blader Venster Titel"
+msgstr "Titel van Bladervenster"
 
 #: libgnomeui/gnome-file-entry.c:200
 msgid "Title for the Browse file dialog."
-msgstr "De titel van het bestands selectie venster"
+msgstr "De titel van het bestand-bladervenster"
 
 #: libgnomeui/gnome-file-entry.c:207
 msgid "Directory Entry"
@@ -951,7 +951,7 @@ msgstr "Map Entry"
 
 #: libgnomeui/gnome-file-entry.c:208
 msgid "Whether the file entry is being used to enter directory names or complete filenames."
-msgstr "Of de bestands entry gebruikt wordt om map namen of complete bestandsnamen in te voeren."
+msgstr "Of de bestands-entry gebruikt wordt om mapnamen of complete bestandsnamen in te voeren."
 
 #: libgnomeui/gnome-file-entry.c:216
 msgid "Modal"
@@ -959,7 +959,7 @@ msgstr "Modaal"
 
 #: libgnomeui/gnome-file-entry.c:217
 msgid "Whether the Browse file window should be modal."
-msgstr "Of het bestands blader scherm modaal moet zijn."
+msgstr "Of het bestand-bladervenster modaal moet zijn."
 
 #: libgnomeui/gnome-file-entry.c:224
 #: libgnomeui/gnome-icon-entry.c:188
@@ -968,15 +968,15 @@ msgstr "_Bestandsnaam"
 
 #: libgnomeui/gnome-file-entry.c:225
 msgid "Filename that should be displayed in the file entry."
-msgstr "Bestandsnaam die weergegeven moet worden in de bestands entry"
+msgstr "Bestandsnaam die weergegeven moet worden in de bestand-entry"
 
 #: libgnomeui/gnome-file-entry.c:233
 msgid "Default Path"
-msgstr "Standaard Path"
+msgstr "Standaard Pad"
 
 #: libgnomeui/gnome-file-entry.c:234
 msgid "Default path for the Browse file window."
-msgstr "Standaard Path voor het Bestands blader venster"
+msgstr "Standaard Pad voor het Bestands blader venster"
 
 #: libgnomeui/gnome-file-entry.c:241
 msgid "GnomeEntry"
@@ -992,7 +992,7 @@ msgstr "GtkEntry"
 
 #: libgnomeui/gnome-file-entry.c:253
 msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
-msgstr "GtkEntry dat het bestand gebruikt om bestandsnamen n te voeren. Je kunt deze eigenschap gebruiken om de GtkEntry te krijgen als je zijn parameters wil opvragen of wijzigen."
+msgstr "GtkEntry dat het bestand gebruikt om bestandnamen in te voeren. Je kunt deze eigenschap gebruiken om de GtkEntry te krijgen als je zijn parameters wil opvragen of wijzigen."
 
 #: libgnomeui/gnome-file-entry.c:481
 msgid "Select file"
@@ -1086,7 +1086,7 @@ msgstr "_Details"
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
 msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
-msgstr "De applicatie \"%s\" probeerde een onderdeel van uw configuratie te veranderen dat uw systeembeheerder of computerleverancier u niet toelaat te veranderen. Sommige van de instellingen die u heeft gekozen worden mogelijk genegeerd of zullen zijn vergeten de volgende keer dat je het programma gebruikt."
+msgstr "De applicatie \"%s\" probeerde een onderdeel van uw configuratie te veranderen dat uw systeembeheerder of computerleverancier u niet toelaat te veranderen. Sommige van de instellingen die u heeft gekozen worden mogelijk genegeerd of zullen zijn vergeten, de volgende keer het programma gebruikt."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1119,7 +1119,7 @@ msgstr "Kiesvenster"
 
 #: libgnomeui/gnome-icon-entry.c:198
 msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
-msgstr "Icoon kies dialoog. Je kunt deze eigenschap gebruiken om de GtkDialog te krijgen als je zijn parameters wil opvragen of wijzigen."
+msgstr "Icoon kies-dialoogvenster. Je kunt deze eigenschap gebruiken om de GtkDialog te krijgen als je zijn parameters wil opvragen of wijzigen."
 
 #: libgnomeui/gnome-icon-entry.c:306
 #: libgnomeui/gnome-icon-entry.c:908
@@ -1143,12 +1143,12 @@ msgstr "Browse"
 #: libgnomeui/gnome-icon-sel.c:296
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: '%s' bestaat niet of is geen directory"
+msgstr "GnomeIconSelection: '%s' bestaat niet of is geen map"
 
 #: libgnomeui/gnome-icon-sel.c:304
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection: kon directory '%s' niet openen"
+msgstr "GnomeIconSelection: kon map '%s' niet openen"
 
 #: libgnomeui/gnome-icon-sel.c:406
 msgid "Loading Icons..."
@@ -1185,7 +1185,7 @@ msgstr "Of de pixmap entry een voorbeeld moet weergeven."
 #: libgnomeui/gnome-pixmap-entry.c:193
 #: libgnomeui/gnome-pixmap-entry.c:505
 msgid "No Image"
-msgstr "Geen afbeelding"
+msgstr "Geen Afbeelding"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
