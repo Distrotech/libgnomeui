@@ -1,5 +1,9 @@
 2001-12-07  jacob berkman  <jacob@ximian.com>
 
+	* gnome-druid-page-standard.c
+	(gnome_druid_page_standard_class_init): make it build for people
+	with -Werror, and subsequently break for people who want to run it
+
 	* gnome-dateedit.c (create_children): add a forward decl
 
 	* gnome-messagebox.c (gnome_message_box_construct): make public
