@@ -1,5 +1,12 @@
-/* gnome-client.h - Session management support for Gnome apps. */
-/* Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de */
+/* 
+ * gnome_client Widget
+ *
+ * AUTHOR:
+ * Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de
+ *
+ * DESCRIPTION:
+ * Session management support for Gnome apps.
+ */
 
 #ifndef GNOME_CLIENT_H
 #define GNOME_CLIENT_H
@@ -148,7 +155,7 @@ struct _GnomeClientClass
 
   gint (* save_yourself)      (GnomeClient        *client,
 			       gint                phase,
-			       GnomeRestartStyle   save_style,
+			       GnomeSaveStyle      save_style,
 			       gint                shutdown,
 			       GnomeInteractStyle  interact_style,
 			       gint                fast);
@@ -163,13 +170,6 @@ struct _GnomeClientClass
 
 
 guint        gnome_client_get_type (void);
-
-void gnome_client_init (void);
-
-/* Obsolet, use 'gnome_master_client' instead.  This function will be
-   removed soon.  */
-GnomeClient *gnome_client_new_default	         (void);
-
 
 /* Normally the master client is connected to the session manager
    automatically, when calling 'gnome_init'.  One can disable this

@@ -1,3 +1,10 @@
+1998-11-24  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.c: Removed definition of 'gnome_client_new_default'.
+
+	* gnome-client.h: Removed declaration of
+ 	'gnome_client_new_default'.
+
 Tue Nov 24 01:56:28 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-icon-entry.[ch]: new files, new widget for handeling
@@ -8,6 +15,17 @@ Tue Nov 24 01:56:28 1998  George Lebl  <jirka@5z.com>
 	  out of a list
 
 	* Makefile.am,libgnomeui.h: update for the above
+
+1998-11-24  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.c (gnome_client_init): Changed error handling
+ 	slightly.  No aborts directly, if the master_client can't be
+ 	created.
+	(gnome_master_client): Removed assertion.
+	(client_parse_func): Changed error handling slightly.  If a
+ 	'--sm-client-id' and a '--sm-cloned-id' option is given, the
+ 	'cloned_id' is now always taken from the '--sm-cloned-id'.
+	(gnome_client_object_init): Free 'pwd' after using it.
 
 Mon Nov 23 23:55:41 1998  Owen Taylor  <otaylor@redhat.com>
 

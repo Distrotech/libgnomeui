@@ -162,10 +162,11 @@ static char* master_environment[]=
 };
 
 /* Forward declaration for our parsing function.  */
-static void client_parse_func(poptContext ctx,
-			      enum poptCallbackReason reason,
-			      const struct poptOption *opt,
-			      const char *arg, void *data);
+static void client_parse_func (poptContext ctx,
+			       enum poptCallbackReason reason,
+			       const struct poptOption *opt,
+			       const char *arg, void *data);
+
 
 /* Command-line arguments understood by this module.  */
 static const struct poptOption options[] = {
@@ -180,57 +181,57 @@ static const struct poptOption options[] = {
   {NULL, '\0', 0, NULL, 0}
 };
 
+
 /* Parse command-line arguments we recognize.  */
 static void
-client_parse_func(poptContext ctx,
-		  enum poptCallbackReason reason,
-		  const struct poptOption *opt,
-		  const char *arg, void *data)
+client_parse_func (poptContext ctx,
+		   enum poptCallbackReason reason,
+		   const struct poptOption *opt,
+		   const char *arg, void *data)
 {
-  int key = opt?opt->val:0;
+  int key = opt ? opt->val : 0;
 
-  if(reason == POPT_CALLBACK_REASON_PRE) {
+  /* 'gnome_client_init' must have been called, before call
+     'client_parse_func'.  */
+  g_return_if_fail (master_client);
+
+  if (reason == POPT_CALLBACK_REASON_PRE) 
+    {
       /* Argument parsing is starting.  We set the restart and the
 	 clone command to a default value, so other functions can use
-	 the master client while command line parsing.  */
-      g_assert (master_client != NULL);
+	 the master client while parsing the command line.  */
       gnome_client_set_restart_command (master_client, 1,
 					&program_invocation_name);
-      gnome_client_set_clone_command (master_client, 0, NULL);
-      
+      gnome_client_set_clone_command (master_client, 0, NULL);      
     }
-  else if(reason == POPT_CALLBACK_REASON_POST)
+  else if (reason == POPT_CALLBACK_REASON_POST)
     {
-      /* We're done, we think.  This has moved to from the
-         ARGP_KEY_SUCCESS to ARGP_KEY_FINI, because this way some
-         other command line parsing functions can disable the
-         connection of the master client while parsing
-         ARGP_KEY_SUCCESS.  */
+      /* We're done, so we can connect to the session manager now.  */
       if (gnome_client_auto_connect_master)
-	{
-	  g_assert (master_client != NULL);
-	  gnome_client_connect (master_client);
-	}
+	gnome_client_connect (master_client);
     }
   else if (key == -1)
     {
-      /* Found our argument.  Set the session id.  */
-      g_assert (master_client != NULL);
+      /* Option: --sm-client-id  */
       gnome_client_set_id (master_client, arg);
+
       g_free (master_client->previous_id);
-      master_client->previous_id = g_strdup (arg);
-      g_free (cloned_id);
-      cloned_id= g_strdup (arg);
+      master_client->previous_id= g_strdup (arg);
+      
+      /* The cloned id should only be set, if there wasn't an explicit
+         '--sm-cloned-id' option specified.  */
+      if (!cloned_id)
+	cloned_id= g_strdup (arg);
     }
   else if (key == -2)
     {
-      /* Set the id of the client, that we want to clone.  */
+      /* Option: --sm-cloned-id  */
       g_free (cloned_id);
       cloned_id = g_strdup (arg);
     }
   else if (key == -3)
     {
-      /* Disable the connection to the session manager.  */
+      /* Option: --sm-disable  */
       gnome_client_disable_master_connection ();
     }
 }
@@ -250,12 +251,12 @@ gnome_client_disable_master_connection (void)
 
 static void
 master_client_connect (GnomeClient *client,
-			gint         restarted,
-			gpointer     client_data)
+		       gint         restarted,
+		       gpointer     client_data)
 {
   char *client_id= gnome_client_get_id (client);
   
-  /* FIXME: Should move into gdk. */
+  /* FIXME: Should be moved into gdk. */
   XChangeProperty (gdk_display, gdk_leader_window,
 		   XInternAtom(gdk_display, sm_client_id_prop, False),
 		   XA_STRING, 8, GDK_PROP_MODE_REPLACE,
@@ -265,7 +266,7 @@ master_client_connect (GnomeClient *client,
 
 static void
 master_client_disconnect (GnomeClient *client,
-			   gpointer client_data)
+			  gpointer client_data)
 {
   XDeleteProperty(gdk_display, gdk_leader_window,
 		  XInternAtom(gdk_display, sm_client_id_prop, False));
@@ -281,80 +282,64 @@ master_client_disconnect (GnomeClient *client,
 void
 gnome_client_init (void)
 {
-  /* Make sure Gtk type system initialized.  */
+  gint i;
+  gchar *buffer= NULL;
+
+  /* This function must not be, if there allready exists a master client.  */
+  g_return_if_fail (master_client == NULL);
+  
+  /* Make sure the Gtk+ type system is initialized.  */
   gtk_type_init ();
   gtk_signal_init ();
 
-  if (!master_client)
+  /* Create the master client.  */
+  master_client= gnome_client_new_without_connection ();
+  g_assert (master_client);
+
+  /* Connect the master client's default signals.  */
+  gtk_signal_connect (GTK_OBJECT (master_client), "connect",
+		      GTK_SIGNAL_FUNC (master_client_connect), NULL);
+  gtk_signal_connect (GTK_OBJECT (master_client), "disconnect",
+		      GTK_SIGNAL_FUNC (master_client_disconnect), NULL);
+
+  /* Register commandline options.  */
+  gnomelib_register_popt_table (options, N_("Session management options"));
+
+  /* Set the master client's environment.  */
+  for (i= 0; master_environment[i]; i++)
     {
-      master_client= gnome_client_new_without_connection ();
-      
-      if (master_client)
+      char *value= getenv (master_environment[i]);
+	      
+      if (value)
+	gnome_client_set_environment (master_client,
+				      master_environment[i],
+				      value);
+    }
+
+  /* Set the current directory.  */
+  i= 512;
+  while (buffer == NULL)
+    {
+      buffer= (gchar *) g_malloc (i);
+	      
+      if (getcwd (buffer, i) == NULL)
 	{
-	  gint i;
-	  gchar *buffer= NULL;
-	  
-	  gtk_signal_connect (GTK_OBJECT (master_client), "connect",
-			      GTK_SIGNAL_FUNC (master_client_connect), NULL);
-	  gtk_signal_connect (GTK_OBJECT (master_client), "disconnect",
-			      GTK_SIGNAL_FUNC (master_client_disconnect), NULL);
-	  gnomelib_register_popt_table(options, N_("Session management options"));
-
-	  /* Set the master clients environment.  */
-	  for (i= 0; master_environment[i]; i++)
-	    {
-	      char *value= getenv (master_environment[i]);
-	      
-	      if (value)
-		gnome_client_set_environment (master_client, 
-					      master_environment[i],
-					      value);
-	    }
-
-	  /* Set the current directory.  */
-	  i= 512;
-	  while (buffer == NULL)
-	    {
-	      buffer= (gchar *) g_malloc (i);
-	      
-	      if (getcwd (buffer, i) == NULL)
-		{
-		  g_free (buffer);
-		  i *= 2;
-		  buffer= NULL;
-		  /* ERANGE means that we needed more space in the
-		     buffer.  Other errors mean don't bother setting
-		     the directory information.  */
-		  if (errno != ERANGE)
-		    break;
-		}
-	    }
-	  if (buffer != NULL)
-	    {
-	      gnome_client_set_current_directory (master_client, buffer);
-	      g_free (buffer);
-	    }
+	  g_free (buffer);
+	  i *= 2;
+	  buffer= NULL;
+	  /* ERANGE means that we needed more space in the
+	     buffer.  Other errors mean don't bother setting
+	     the directory information.  */
+	  if (errno != ERANGE)
+	    break;
 	}
     }
+  if (buffer != NULL)
+    {
+      gnome_client_set_current_directory (master_client, buffer);
+      g_free (buffer);
+    }
 }
-
-
-/**
- * gnome_client_new_default
- *
- * Description:
- *
- * Returns:  Pointer to
- **/
-
-GnomeClient *
-gnome_client_new_default (void)
-{
-  if (! master_client)
-    gnome_client_init ();
-  return master_client;
-}
-
 
 
 /**
@@ -368,8 +353,6 @@ gnome_client_new_default (void)
 GnomeClient*
 gnome_master_client (void)
 {
-  g_assert (master_client);
-  
   return master_client;
 }
 
@@ -388,6 +371,7 @@ gnome_cloned_client (void)
 {
   if (!cloned_client && cloned_id)
     {
+      /* The 'cloned_client' gets only created, when it's needed.  */
       cloned_client= gnome_client_new_without_connection ();
       gnome_client_set_id (cloned_client, cloned_id);
     }
@@ -533,8 +517,7 @@ gnome_client_object_init (GnomeClient *client)
 	if (pwd)
 	  {
 	    client->user_id= g_strdup (pwd->pw_name);
-	    
-	    /* FIXME: 'pwd' should be freed */
+	    g_free (pwd);
 	  }
 	else
 	  client->user_id= "";
