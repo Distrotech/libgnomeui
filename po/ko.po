@@ -481,7 +481,7 @@ msgstr "게임을 다시 시작합니다"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
-msgstr "움직임 실행 취소"
+msgstr "움직임 실행 취소(_U)"
 
 #: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
@@ -489,7 +489,7 @@ msgstr "마지막 움직임을 취소합니다"
 
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
-msgstr "움직임 다시 실행"
+msgstr "움직임 다시 실행(_R)"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
