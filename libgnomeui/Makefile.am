@@ -13,6 +13,7 @@ libgnomeui_la_SOURCES = \
 	gnome-app-helper.c		\
 	gnome-color-selector.c 		\
 	gnome-dns.c			\
+	gnome-entry.c			\
 	gnome-font-selector.c 		\
 	gnome-ice.c			\
 	gnome-init.c			\
@@ -35,6 +36,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-app-helper.h		\
 	gnome-color-selector.h 		\
 	gnome-dns.h			\
+	gnome-entry.h			\
 	gnome-font-selector.h 		\
 	gnome-ice.h			\
 	gnome-messagebox.h		\
@@ -83,7 +85,6 @@ stock_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
-
 
 dist-hook:
 	mkdir $(distdir)/pixmaps

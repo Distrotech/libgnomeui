@@ -1,4 +1,17 @@
-1998-02-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+1998-02-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-entry.c: First usable version of the GnomeEntry widget.
+
+	* gnome-startup.c: 
+	* gnome-client.c: Added #include <string.h>
+
+	* libgnomeui.h: Added gnome-entry.h to the includes list.
+
+	* Makefile.am: Added gnome-entry.{c,h}
+
+	* gnome-entry.c:
+	* gnome-entry.h: New GnomeËntry widget -- entry field with
+	automagic history saving.
 
 	* ted_demo.c (main): Added app_id "ted_demo".
 

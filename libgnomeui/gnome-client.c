@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <pwd.h>
+#include <string.h>
 #include <sys/types.h>
 
 #include "gnome.h"

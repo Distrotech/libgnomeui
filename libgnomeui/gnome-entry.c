@@ -3,9 +3,12 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
-#include "libgnome/gnome-defs.h"
-#include "libgnome/gnome-config.h"
-#include "libgnome/gnome-util.h"
+#include <stdio.h>
+#include <string.h>
+#include <gtk/gtkentry.h>
+#include <gtk/gtklist.h>
+#include <gtk/gtklistitem.h>
+#include "libgnome/libgnome.h"
 #include "gnome-entry.h"
 
 
@@ -74,8 +77,7 @@ gnome_entry_new (char *history_id)
 
 	gentry = gtk_type_new (gnome_entry_get_type ());
 
-	gentry->history_id = g_strdup (history_id); /* this handles NULL correctly */
-
+	gnome_entry_set_history_id (gentry, history_id);
 	gnome_entry_load_history (gentry);
 
 	return GTK_WIDGET (gentry);
@@ -105,11 +107,19 @@ static void
 gnome_entry_destroy (GtkObject *object)
 {
 	GnomeEntry *gentry;
+	GtkWidget *entry;
+	char *text;
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (object));
 
 	gentry = GNOME_ENTRY (object);
+
+	entry = gnome_entry_gtk_entry (gentry);
+	text = gtk_entry_get_text (GTK_ENTRY (entry));
+
+	if (strcmp (text, "") != 0)
+		gnome_entry_prepend_history (gentry, TRUE, text);
 
 	gnome_entry_save_history (gentry);
 
@@ -120,6 +130,27 @@ gnome_entry_destroy (GtkObject *object)
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
+}
+
+GtkWidget *
+gnome_entry_gtk_entry (GnomeEntry *gentry)
+{
+	g_return_val_if_fail (gentry != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_ENTRY (gentry), NULL);
+
+	return GTK_COMBO (gentry)->entry;
+}
+
+void
+gnome_entry_set_history_id (GnomeEntry *gentry, char *history_id)
+{
+	g_return_if_fail (gentry != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (gentry));
+
+	if (gentry->history_id)
+		g_free (gentry->history_id);
+
+	gentry->history_id = g_strdup (history_id); /* this handles NULL correctly */
 }
 
 static char *
@@ -133,16 +164,112 @@ build_prefix (GnomeEntry *gentry, int trailing_slash)
 			       NULL);
 }
 
+void
+gnome_entry_prepend_history (GnomeEntry *gentry, int save, char *text)
+{
+	struct item *item;
+	GList *gitem;
+	GtkWidget *li;
+	GtkWidget *entry;
+	char *tmp;
+
+	g_return_if_fail (gentry != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (gentry));
+	g_return_if_fail (text != NULL); /* FIXME: should we just return without warning? */
+
+	entry = gnome_entry_gtk_entry (gentry);
+	tmp = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+	
+	item = g_new (struct item, 1);
+	item->save = save;
+	item->text = g_strdup (text);
+
+	gentry->items = g_list_prepend (gentry->items, item);
+
+	li = gtk_list_item_new_with_label (text);
+	gtk_widget_show (li);
+
+	gitem = g_list_append (NULL, li);
+	gtk_list_prepend_items (GTK_LIST (GTK_COMBO (gentry)->list), gitem);
+
+	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
+	g_free (tmp);
+}
+
+void
+gnome_entry_append_history (GnomeEntry *gentry, int save, char *text)
+{
+	struct item *item;
+	GList *gitem;
+	GtkWidget *li;
+	GtkWidget *entry;
+	char *tmp;
+
+	g_return_if_fail (gentry != NULL);
+	g_return_if_fail (GNOME_IS_ENTRY (gentry));
+	g_return_if_fail (text != NULL); /* FIXME: shoudl we just return without warning? */
+
+	entry = gnome_entry_gtk_entry (gentry);
+	tmp = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+	
+	item = g_new (struct item, 1);
+	item->save = save;
+	item->text = g_strdup (text);
+
+	gentry->items = g_list_append (gentry->items, item);
+
+	li = gtk_list_item_new_with_label (text);
+	gtk_widget_show (li);
+
+	gitem = g_list_append (NULL, li);
+	gtk_list_append_items (GTK_LIST (GTK_COMBO (gentry)->list), gitem);
+
+	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
+	g_free (tmp);
+}
+
 static void
 set_combo_items (GnomeEntry *gentry)
 {
 	GtkList *gtklist;
+	GList *items;
+	GList *gitems;
+	struct item *item;
+	GtkWidget *li;
+	GtkWidget *entry;
+	char *tmp;
 
 	gtklist = GTK_LIST (GTK_COMBO (gentry)->list);
 
+	gtk_container_block_resize (GTK_CONTAINER (gtklist));
+
+	/* We save the contents of the entry because when we insert
+	 * items on the combo list, the contents of the entry will get
+	 * changed.
+	 */
+
+	entry = gnome_entry_gtk_entry (gentry);
+	tmp = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+	
 	gtk_list_clear_items (gtklist, 0, -1); /* erase everything */
 
+	gitems = NULL;
 
+	for (items = gentry->items; items; items = items->next) {
+		item = items->data;
+
+		li = gtk_list_item_new_with_label (item->text);
+		gtk_widget_show (li);
+		
+		gitems = g_list_append (gitems, li);
+	}
+
+	gtk_list_append_items (gtklist, gitems); /* this handles NULL correctly */
+
+	gtk_entry_set_text (GTK_ENTRY (entry), tmp);
+	g_free (tmp);
+
+	gtk_container_unblock_resize (GTK_CONTAINER (gtklist));
 }
 
 void
@@ -157,7 +284,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (!(gnome_get_app_id () && gentry->history_id))
+	if (!(gnome_app_id && gentry->history_id))
 		return;
 
 	free_items (gentry);
@@ -196,11 +323,12 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (!(gnome_app_get_id () && gentry->history_id))
+	if (!(gnome_app_id && gentry->history_id))
 		return;
 
 	prefix = build_prefix (gentry, FALSE);
-	gnome_config_clean_section (prefix);
+	if (gnome_config_has_section (prefix))
+		gnome_config_clean_section (prefix);
 	g_free (prefix);
 	
 	prefix = build_prefix (gentry, TRUE);
