@@ -1,3 +1,16 @@
+2004-08-30  Federico Mena Quintero  <federico@ximian.com>
+
+	Fix #145200:
+
+	* file-chooser/gtkfilesystemgnomevfs.c (struct
+	_GtkFileSystemGnomeVFS): Added fields to store the signal
+	connection IDs for the volume monitor.
+	(gtk_file_system_gnome_vfs_init): Store the signal connection IDs.
+	Do not create an extra reference to the volume monitor.
+	(gtk_file_system_gnome_vfs_finalize): Disconnect from the volume
+	monitor's signals.  For now, don't unref the monitor.  See
+	http://bugzilla.gnome.org/show_bug.cgi?id=151463 for reference.
+
 2004-08-25  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-icon-theme.c: (gnome_icon_theme_lookup_icon):
@@ -144,7 +157,6 @@
 
         * configure.in: Added "gu" (Gujarati) to ALL_LINGUAS.
 
->>>>>>> 1.421
 2004-04-06  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c (fs_module_init): Ref the

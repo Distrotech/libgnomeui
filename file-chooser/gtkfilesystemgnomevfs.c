@@ -81,6 +81,10 @@ struct _GtkFileSystemGnomeVFS
   GHashTable *folders;
 
   GnomeVFSVolumeMonitor *volume_monitor;
+  gulong volume_mounted_id;
+  gulong volume_unmounted_id;
+  gulong drive_connected_id;
+  gulong drive_disconnected_id;
 
 #ifdef USE_GCONF
   GConfClient *client;
@@ -382,15 +386,19 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 							  NULL);
 #endif
 
-  system_vfs->volume_monitor = gnome_vfs_volume_monitor_ref (gnome_vfs_get_volume_monitor ());
-  g_signal_connect_object (system_vfs->volume_monitor, "volume-mounted",
-			   G_CALLBACK (volume_mount_unmount_cb), system_vfs, 0);
-  g_signal_connect_object (system_vfs->volume_monitor, "volume-unmounted",
-			   G_CALLBACK (volume_mount_unmount_cb), system_vfs, 0);
-  g_signal_connect_object (system_vfs->volume_monitor, "drive-connected",
-			   G_CALLBACK (drive_connect_disconnect_cb), system_vfs, 0);
-  g_signal_connect_object (system_vfs->volume_monitor, "drive-disconnected",
-			   G_CALLBACK (drive_connect_disconnect_cb), system_vfs, 0);
+  system_vfs->volume_monitor = gnome_vfs_get_volume_monitor ();
+  system_vfs->volume_mounted_id =
+    g_signal_connect_object (system_vfs->volume_monitor, "volume-mounted",
+			     G_CALLBACK (volume_mount_unmount_cb), system_vfs, 0);
+  system_vfs->volume_unmounted_id =
+    g_signal_connect_object (system_vfs->volume_monitor, "volume-unmounted",
+			     G_CALLBACK (volume_mount_unmount_cb), system_vfs, 0);
+  system_vfs->drive_connected_id =
+    g_signal_connect_object (system_vfs->volume_monitor, "drive-connected",
+			     G_CALLBACK (drive_connect_disconnect_cb), system_vfs, 0);
+  system_vfs->drive_disconnected_id =
+    g_signal_connect_object (system_vfs->volume_monitor, "drive-disconnected",
+			     G_CALLBACK (drive_connect_disconnect_cb), system_vfs, 0);
 
 }
 
@@ -409,7 +417,14 @@ gtk_file_system_gnome_vfs_finalize (GObject *object)
   gtk_file_paths_free (system_vfs->bookmarks);
 #endif
 
-  gnome_vfs_volume_monitor_unref (system_vfs->volume_monitor);
+  g_signal_handler_disconnect (system_vfs->volume_monitor, system_vfs->volume_mounted_id);
+  g_signal_handler_disconnect (system_vfs->volume_monitor, system_vfs->volume_unmounted_id);
+  g_signal_handler_disconnect (system_vfs->volume_monitor, system_vfs->drive_connected_id);
+  g_signal_handler_disconnect (system_vfs->volume_monitor, system_vfs->drive_disconnected_id);
+
+  /* FIXME: See http://bugzilla.gnome.org/show_bug.cgi?id=151463
+   * gnome_vfs_volume_monitor_unref (system_vfs->volume_monitor);
+   */
 
   /* XXX Assert ->folders should be empty
    */
