@@ -391,7 +391,6 @@ static GtkWidget *find_item_by_label(GtkMenuShell *shell, gchar *label) {
 
 static void child_list_activated_cb(GtkWidget *w, GnomeMDI *mdi) {
   GnomeMDIChild *child;
-  GtkWindow *window;
 
   child = gtk_object_get_data(GTK_OBJECT(w), MDI_CHILD_KEY);
 
@@ -908,8 +907,6 @@ static void app_create(GnomeMDI *mdi) {
   gtk_signal_connect(GTK_OBJECT(window), "destroy",
                      GTK_SIGNAL_FUNC(app_destroy), NULL);
 
-  /* gtk_window_position (GTK_WINDOW(window), GTK_WIN_POS_MOUSE); */
-
   /* set up menus */
   if(mdi->menu_template) {
     ui_info = copy_ui_info_tree(mdi->menu_template);
@@ -1073,9 +1070,6 @@ gint gnome_mdi_remove_view(GnomeMDI *mdi, GtkWidget *view, gint force) {
 
   window = gnome_mdi_get_app_from_view(view);
 
-  if(view == mdi->active_view)
-    app_set_view(mdi, window, NULL);
-
 #if 0
   if(mdi->mode == GNOME_MDI_MS)
     gnome_mdi_pouch_remove(GNOME_MDI_POUCH(GTK_WIDGET(parent)->parent), view);
@@ -1093,14 +1087,19 @@ gint gnome_mdi_remove_view(GnomeMDI *mdi, GtkWidget *view, gint force) {
       mdi->windows = g_list_remove(mdi->windows, window);
       gtk_widget_destroy(GTK_WIDGET(window));
     }
+    else
+      app_set_view(mdi, window, NULL);
   }
   else if( (mdi->mode == GNOME_MDI_NOTEBOOK) &&
-	   (GTK_NOTEBOOK(parent)->cur_page == NULL) &&
-	   (g_list_length(mdi->windows) > 1) ) {
-    /* if this is NOT the last toplevel, destroy it! */
-    mdi->windows = g_list_remove(mdi->windows, window);
-    gtk_widget_destroy(GTK_WIDGET(window));
-  }
+	   (GTK_NOTEBOOK(parent)->cur_page == NULL) ) {
+    if(g_list_length(mdi->windows) > 1) {
+      /* if this is NOT the last toplevel, destroy it! */
+      mdi->windows = g_list_remove(mdi->windows, window);
+      gtk_widget_destroy(GTK_WIDGET(window));
+    }
+    else
+      app_set_view(mdi, window, NULL);
+  }  
 
   /* remove this view from the child's view list */
   gnome_mdi_child_remove_view(child, view);

@@ -1,3 +1,8 @@
+1998-09-14  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c (gnome_mdi_remove_view): fixed view removal to
+	update the menubar correctly.
+
 1998-09-12  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-mdi.c: Use the gnome_app_*_menus() calls instead of their
