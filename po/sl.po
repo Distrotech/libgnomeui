@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-04-22 12:30+0200\n"
+"POT-Creation-Date: 2001-11-25 02:36+0100\n"
 "PO-Revision-Date: 2001-07-29 12:32+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -13,137 +13,135 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libgnomeui/gnome-about.c:194
+#: libgnomeui/gnome-about.c:187
 msgid "Credits"
 msgstr "Zasluge"
 
-#: libgnomeui/gnome-about.c:222
-#, fuzzy
-msgid "_Written by"
+#: libgnomeui/gnome-about.c:210
+msgid "Written by"
 msgstr "Napisal"
 
-#: libgnomeui/gnome-about.c:237
-#, fuzzy
-msgid "_Documented by"
+#: libgnomeui/gnome-about.c:224
+msgid "Documented by"
 msgstr "Dokumentiral"
 
-#: libgnomeui/gnome-about.c:252
-#, fuzzy
-msgid "_Translated by"
+#: libgnomeui/gnome-about.c:238
+msgid "Translated by"
 msgstr "Prevedel"
 
 #. Add the credits button
-#: libgnomeui/gnome-about.c:309
+#: libgnomeui/gnome-about.c:295
 msgid "_Credits"
 msgstr "_Zasluge"
 
-#: libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:335
 msgid "Program name"
 msgstr "Ime programa"
 
-#: libgnomeui/gnome-about.c:352
+#: libgnomeui/gnome-about.c:336
 msgid "The name of the program"
 msgstr "Ime tega programa"
 
-#: libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:343
 msgid "Program version"
 msgstr "Različica programa"
 
-#: libgnomeui/gnome-about.c:360
+#: libgnomeui/gnome-about.c:344
 msgid "The version of the program"
 msgstr "Različica programa"
 
-#: libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:350
 msgid "Copyright string"
 msgstr "Niz avtorskih pravic"
 
-#: libgnomeui/gnome-about.c:367
+#: libgnomeui/gnome-about.c:351
 msgid "Copyright information for the program"
 msgstr "Podatki o avtorskih pravicah za program"
 
-#: libgnomeui/gnome-about.c:374
+#: libgnomeui/gnome-about.c:358
 msgid "Comments string"
 msgstr "Niz komentarja"
 
-#: libgnomeui/gnome-about.c:375
+#: libgnomeui/gnome-about.c:359
 msgid "Comments about the program"
 msgstr "Komentarji o programu"
 
-#: libgnomeui/gnome-about.c:381
+#: libgnomeui/gnome-about.c:365
 msgid "Authors"
 msgstr "Avtorji"
 
-#: libgnomeui/gnome-about.c:382
+#: libgnomeui/gnome-about.c:366
 msgid "List of authors of the programs"
 msgstr "Seznam avtorjev programov"
 
-#: libgnomeui/gnome-about.c:384
+#: libgnomeui/gnome-about.c:368
 msgid "Author entry"
 msgstr "Vpis avtorja"
 
-#: libgnomeui/gnome-about.c:385
+#: libgnomeui/gnome-about.c:369
 msgid "A single author entry"
 msgstr "Vpis enega samega avtorja"
 
-#: libgnomeui/gnome-about.c:392
+#: libgnomeui/gnome-about.c:376
 msgid "Documenters"
 msgstr "Pisci dokumentacije"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:377
 msgid "List of people documenting the program"
 msgstr "Seznam ljudi, ki so dokumentirali program"
 
-#: libgnomeui/gnome-about.c:395
+#: libgnomeui/gnome-about.c:379
 msgid "Documenter entry"
 msgstr "Vpis pisca dokumentacije"
 
-#: libgnomeui/gnome-about.c:396
+#: libgnomeui/gnome-about.c:380
 msgid "A single documenter entry"
 msgstr "Vpis enega samega pisca dokumentacije"
 
-#: libgnomeui/gnome-about.c:404
+#: libgnomeui/gnome-about.c:388
 msgid "Translator credits"
 msgstr "Zasluge prevajalca"
 
-#: libgnomeui/gnome-about.c:405
+#: libgnomeui/gnome-about.c:389
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr "Zasluge prevajalcev. Ta niz bi moral biti označen kot prevedljiv"
+msgstr ""
+"Zasluge prevajalcev. Ta niz bi moral biti označen kot prevedljiv"
 
-#: libgnomeui/gnome-about.c:412 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logotip"
 
-#: libgnomeui/gnome-about.c:413
+#: libgnomeui/gnome-about.c:397
 msgid "A logo for the about box"
 msgstr "Logotip za škatlo \"O programu\""
 
-#: libgnomeui/gnome-about.c:492
+#: libgnomeui/gnome-about.c:476
 #, c-format
 msgid "About %s"
 msgstr "O %s"
 
-#: libgnomeui/gnome-appbar.c:748
+#: libgnomeui/gnome-appbar.c:762
 msgid "Has Progress"
 msgstr "Ima merilec napredka"
 
-#: libgnomeui/gnome-appbar.c:749
+#: libgnomeui/gnome-appbar.c:763
 msgid "Create a progress widget."
 msgstr "Ustvari gradnik napredka."
 
-#: libgnomeui/gnome-appbar.c:756
+#: libgnomeui/gnome-appbar.c:770
 msgid "Has Status"
 msgstr "Ima stanje"
 
-#: libgnomeui/gnome-appbar.c:757
+#: libgnomeui/gnome-appbar.c:771
 msgid "Create a status widget."
 msgstr "Ustvari gradnik stanja."
 
-#: libgnomeui/gnome-appbar.c:764
+#: libgnomeui/gnome-appbar.c:778
 msgid "Interactivity"
 msgstr "Interaktivnost"
 
-#: libgnomeui/gnome-appbar.c:765
+#: libgnomeui/gnome-appbar.c:779
 msgid "Level of user activity required."
 msgstr "Stopnja potrebne uporabniške aktivnosti."
 
@@ -179,59 +177,58 @@ msgstr "Prekliči odjavo"
 msgid "Received invalid color data\n"
 msgstr "Prejel neveljavne podatke o barvi\n"
 
-#: libgnomeui/gnome-color-picker.c:471
+#: libgnomeui/gnome-color-picker.c:468
 msgid "Pick a color"
 msgstr "Izberi barvo"
 
-#: libgnomeui/gnome-dateedit.c:455
+#: libgnomeui/gnome-dateedit.c:428
 msgid "Time"
 msgstr "Ura"
 
-#: libgnomeui/gnome-dateedit.c:456
+#: libgnomeui/gnome-dateedit.c:429
 msgid "The time currently selected"
 msgstr "Trenutno izbrana ura"
 
-#: libgnomeui/gnome-dateedit.c:468
+#: libgnomeui/gnome-dateedit.c:441
 msgid "DateEdit Flags"
 msgstr "Zastavice DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:469
+#: libgnomeui/gnome-dateedit.c:442
 msgid "Flags for how DateEdit looks"
 msgstr "Zastavice, ki določajo kako izgleda DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:478
+#: libgnomeui/gnome-dateedit.c:451
 msgid "Lower Hour"
 msgstr "Nižja ura"
 
-#: libgnomeui/gnome-dateedit.c:479
+#: libgnomeui/gnome-dateedit.c:452
 msgid "Lower hour in the time popup selector"
 msgstr "Nižja ura v vzkličnem časovnem izbiranju"
 
-#: libgnomeui/gnome-dateedit.c:489
+#: libgnomeui/gnome-dateedit.c:462
 msgid "Upper Hour"
 msgstr "Višja ura"
 
-#: libgnomeui/gnome-dateedit.c:490
+#: libgnomeui/gnome-dateedit.c:463
 msgid "Upper hour in the time popup selector"
 msgstr "Višja ura v vzkličnem časovnem izbiranju"
 
-#: libgnomeui/gnome-dateedit.c:500
+#: libgnomeui/gnome-dateedit.c:473
 msgid "Initial Time"
 msgstr "Začetni čas"
 
-#: libgnomeui/gnome-dateedit.c:501
+#: libgnomeui/gnome-dateedit.c:474
 msgid "The initial time"
 msgstr "Začetni čas"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:730
+#: libgnomeui/gnome-dateedit.c:703
 msgid "Calendar"
 msgstr "Koledar"
 
-#: libgnomeui/gnome-dateedit.c:960
+#: libgnomeui/gnome-dateedit.c:933
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_date_edit_get_date ni zaželjen, uporabite gnome_date_edit_get_time"
+msgstr "gnome_date_edit_get_date ni zaželjen, uporabite gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -336,71 +333,136 @@ msgstr "Kaži pomoč"
 msgid "Show the 'Help' button"
 msgstr "Kaži gumb \"Pomoč\""
 
-#: libgnomeui/gnome-href.c:121
+#: libgnomeui/gnome-href.c:118
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:119
 msgid "The URL that GnomeHRef activates"
 msgstr "URL, ki ga aktivira GnomeHRef"
 
-#: libgnomeui/gnome-href.c:129
+#: libgnomeui/gnome-href.c:126
 msgid "Text"
 msgstr "Besedilo"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:127
 msgid "The text on the button"
 msgstr "Besedilo na gumbu"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:128
 msgid "End World Hunger"
 msgstr "Končaj svetovno lakoto"
 
-#: libgnomeui/gnome-href.c:137
-#, fuzzy
-msgid "Link color"
+#: libgnomeui/gnome-href.c:134
+msgid "Link colour"
 msgstr "Barva povezave"
 
-#: libgnomeui/gnome-href.c:138
-#, fuzzy
-msgid "Color used to draw the link"
+#: libgnomeui/gnome-href.c:135
+msgid "Colour used to draw the link"
 msgstr "Barva uporabljena za izris povezave"
 
-#: libgnomeui/gnome-href.c:383
+#: libgnomeui/gnome-href.c:396
 msgid ""
 "Error occured while trying to launch the URL handler.\n"
 "Please check the settings in the Control Center if they are correct."
-msgstr ""
-"Zgodila se je napaka ob poskusu zagona URL upravljalnika.\n"
-"Prosim preglejte pravilnost nastavitev v Kontrolnem centru."
+msgstr "Zgodila se je napaka ob poskusu zagona URL upravljalnika.\nProsim preglejte pravilnost nastavitev v Kontrolnem centru."
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
 msgid "X display to use"
 msgstr "Zaslon X za uporabo"
 
-#: libgnomeui/gnome-ui-init.c:104
+#: libgnomeui/gnome-ui-init.c:103 libgnomeui/gnome-ui-init.c:722
 msgid "DISPLAY"
 msgstr "ZASLON"
 
-#: libgnomeui/gnome-ui-init.c:112
+#: libgnomeui/gnome-ui-init.c:111
 msgid "GNOME GUI Library"
 msgstr "Knjižnjica grafičnega vmesnika Gnome"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:564
+#: libgnomeui/gnome-ui-init.c:569
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Zgodilo se je več segmentacijskih napak; ne morem prikazati dialoga z "
-"napako\n"
+msgstr "Zgodilo se je več segmentacijskih napak; ne morem prikazati dialoga z napako\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:578
+#: libgnomeui/gnome-ui-init.c:583
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
-msgstr ""
-"Segmentacijska napaka!\n"
-"Ne morem prikazati dialoga z napako\n"
+msgstr "Segmentacijska napaka!\nNe morem prikazati dialoga z napako\n"
+
+#: libgnomeui/gnome-ui-init.c:715
+msgid "Gdk debugging flags to set"
+msgstr "Gdk razhroščevalne zastavice, ki naj bodo nastavljene"
+
+#: libgnomeui/gnome-ui-init.c:715 libgnomeui/gnome-ui-init.c:718
+#: libgnomeui/gnome-ui-init.c:759 libgnomeui/gnome-ui-init.c:762
+msgid "FLAGS"
+msgstr "ZASTAVICE"
+
+#: libgnomeui/gnome-ui-init.c:718
+msgid "Gdk debugging flags to unset"
+msgstr "Gdk razhroščevalne zastavice, ki naj ne bodo nastavljene"
+
+#: libgnomeui/gnome-ui-init.c:726
+msgid "Make X calls synchronous"
+msgstr "Naredi klice X sinhrone"
+
+#: libgnomeui/gnome-ui-init.c:732
+msgid "Don't use X shared memory extension"
+msgstr "Ne uporabljal dodatka X za skupno rabo pomnilnika"
+
+#: libgnomeui/gnome-ui-init.c:736
+msgid "Program name as used by the window manager"
+msgstr "Ime programa, kot ga uporablja upravljalnik oken"
+
+#: libgnomeui/gnome-ui-init.c:736
+msgid "NAME"
+msgstr "IME"
+
+#: libgnomeui/gnome-ui-init.c:739
+msgid "Program class as used by the window manager"
+msgstr "Razred programa, kot ga uporablja upravljalnik oken"
+
+#: libgnomeui/gnome-ui-init.c:739
+msgid "CLASS"
+msgstr "RAZRED"
+
+#: libgnomeui/gnome-ui-init.c:743
+msgid "HOST"
+msgstr "GOSTITELJ"
+
+#: libgnomeui/gnome-ui-init.c:747
+msgid "PORT"
+msgstr "VRATA"
+
+#: libgnomeui/gnome-ui-init.c:752 libgnomeui/gnome-ui-init.c:755
+msgid "STYLE"
+msgstr "SLOG"
+
+#: libgnomeui/gnome-ui-init.c:759
+msgid "Gtk+ debugging flags to set"
+msgstr "Gtk+ razhroščevalne zastavice, ki naj bodo nastavljene"
+
+#: libgnomeui/gnome-ui-init.c:762
+msgid "Gtk+ debugging flags to unset"
+msgstr "Gtk+ razhroščevalne zastavice, ki naj ne bodo nastavljene"
+
+#: libgnomeui/gnome-ui-init.c:765
+msgid "Make all warnings fatal"
+msgstr "Naj bodo vsa opozorila usodna"
+
+#: libgnomeui/gnome-ui-init.c:768
+msgid "Load an additional Gtk module"
+msgstr "Naloži dodaten Gtk modul"
+
+#: libgnomeui/gnome-ui-init.c:768
+msgid "MODULE"
+msgstr "MODUL"
+
+#: libgnomeui/gnome-ui-init.c:873
+msgid "GTK+"
+msgstr "GTK+"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -410,11 +472,7 @@ msgid ""
 "When you close this dialog, all applications will close and your session "
 "will exit.\n"
 "Please save all your files before closing this dialog."
-msgstr ""
-"GNOME upravljalnik sej (proces %d) se je sesul\n"
-"zaradi usodne napake (%s).\n"
-"Ko zaprete ta dialog se bodo zaprle vse aplikacije in seja se bo končala.\n"
-"Prosim, shranite vse svoje datoteke preden zaprete ta dialog."
+msgstr "GNOME upravljalnik sej (proces %d) se je sesul\nzaradi usodne napake (%s).\nKo zaprete ta dialog se bodo zaprle vse aplikacije in seja se bo končala.\nProsim, shranite vse svoje datoteke preden zaprete ta dialog."
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -422,28 +480,25 @@ msgid ""
 "Application \"%s\" (process %d) has crashed\n"
 "due to a fatal error.\n"
 "(%s)"
-msgstr ""
-"Program \"%s\" (proces %d) se je zaradi\n"
-" usodne napake sesul.\n"
-"(%s)"
+msgstr "Program \"%s\" (proces %d) se je zaradi\n usodne napake sesul.\n(%s)"
 
-#: libgnomeui/gnome_segv.c:122
+#: libgnomeui/gnome_segv.c:123
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Uporaba: gnome_segv2 imeprograma štsignala\n"
 
-#: libgnomeui/gnome_segv.c:138
+#: libgnomeui/gnome_segv.c:139
 msgid "Submit a bug report"
 msgstr "Pošlji poročilo o hrošču"
 
-#: libgnomeui/gnome_segv.c:149
+#: libgnomeui/gnome_segv.c:150
 msgid "Debug"
 msgstr "Razhroščuj"
 
-#: libgnomeui/gnome_segv.c:157
+#: libgnomeui/gnome_segv.c:158
 msgid "http://www.gnome.org/application_crashed.shtml"
 msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#: libgnomeui/gnome_segv.c:163
+#: libgnomeui/gnome_segv.c:164
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Za več informacij prosimo obiščite stran Sesutje programov GNOME"
 
@@ -493,6 +548,7 @@ msgstr "Namig za predmet 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -550,6 +606,7 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoč"
 
@@ -740,11 +797,11 @@ msgstr "Nastavi program"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_O"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O tem programu"
 
@@ -771,7 +828,7 @@ msgstr "Ustvari novo okno"
 msgid "_Close This Window"
 msgstr "_Zapri to okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zapri trenutno okno"
 
@@ -843,23 +900,19 @@ msgstr "_Končaj igro"
 msgid "End the current game"
 msgstr "Končaj trenutno igro"
 
-#: libgnomeui/gnome-app-helper.c:1096
-msgid "_Help Contents"
-msgstr ""
-
-#: libgnomeui/gnome-app-helper.c:2402
+#: libgnomeui/gnome-app-helper.c:2563
 msgid "Both text and icons"
 msgstr "Oboje besedilo in ikone"
 
-#: libgnomeui/gnome-app-helper.c:2403
+#: libgnomeui/gnome-app-helper.c:2564
 msgid "Icons only"
 msgstr "Le ikone"
 
-#: libgnomeui/gnome-app-helper.c:2404
+#: libgnomeui/gnome-app-helper.c:2565
 msgid "Text only"
 msgstr "Le besedilo"
 
-#: libgnomeui/gnome-app-helper.c:2455
+#: libgnomeui/gnome-app-helper.c:2616
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Privzeto po namizju (%s)"
@@ -924,97 +977,92 @@ msgstr "GTK vnos"
 msgid "The GTK entry"
 msgstr "GTK vnos"
 
-#: libgnomeui/gnome-file-entry.c:194 libgnomeui/gnome-icon-entry.c:170
+#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
 msgid "History ID"
 msgstr "Id zgodovine"
 
-#: libgnomeui/gnome-file-entry.c:195
+#: libgnomeui/gnome-file-entry.c:191
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Edinstven identifikator za ta vnos datoteke.  To bo uporabljeno za "
-"shranjevanje seznama zgodovine."
+"Edinstven identifikator za ta vnos datoteke.  To bo uporabljeno za shranjevanje seznama zgodovine."
 
-#: libgnomeui/gnome-file-entry.c:203 libgnomeui/gnome-icon-entry.c:179
+#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
 msgid "Browse Dialog Title"
 msgstr "Naziv brskalnega dialoga"
 
-#: libgnomeui/gnome-file-entry.c:204
+#: libgnomeui/gnome-file-entry.c:200
 msgid "Title for the Browse file dialog."
 msgstr "Naziv dialoga za brksanje datotek."
 
-#: libgnomeui/gnome-file-entry.c:211
+#: libgnomeui/gnome-file-entry.c:207
 msgid "Directory Entry"
 msgstr "Vnos imenika"
 
-#: libgnomeui/gnome-file-entry.c:212
+#: libgnomeui/gnome-file-entry.c:208
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Ali je vnos datoteke namenjen za vnos imen imenikov ali popolnih imen "
-"datotek."
+"Ali je vnos datoteke namenjen za vnos imen imenikov ali popolnih imen datotek."
 
-#: libgnomeui/gnome-file-entry.c:220
+#: libgnomeui/gnome-file-entry.c:216
 msgid "Modal"
 msgstr "Na vrhu"
 
-#: libgnomeui/gnome-file-entry.c:221
+#: libgnomeui/gnome-file-entry.c:217
 msgid "Whether the Browse file window should be modal."
 msgstr "Ali naj bo okno brskalnika datotek na vrhu."
 
-#: libgnomeui/gnome-file-entry.c:228 libgnomeui/gnome-icon-entry.c:195
+#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
 msgid "Filename"
 msgstr "Ime datoteke"
 
-#: libgnomeui/gnome-file-entry.c:229
+#: libgnomeui/gnome-file-entry.c:225
 msgid "Filename that should be displayed in the file entry."
 msgstr "Ime datoteke, ki naj bo prikazano v vpisu datoteke."
 
-#: libgnomeui/gnome-file-entry.c:237
+#: libgnomeui/gnome-file-entry.c:233
 msgid "Default Path"
 msgstr "Privzeta pot"
 
-#: libgnomeui/gnome-file-entry.c:238
+#: libgnomeui/gnome-file-entry.c:234
 msgid "Default path for the Browse file window."
 msgstr "Privzeta pot za okno brskalnika datotek"
 
-#: libgnomeui/gnome-file-entry.c:245
+#: libgnomeui/gnome-file-entry.c:241
 msgid "GnomeEntry"
 msgstr "GnomeVnos"
 
-#: libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:242
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeVnos, ki ga vnos datoteke uporablja za vnašanje imen datotek. To "
-"lastnost lahko uporabite za pridobitev GnomeVnos, če morate spremeniti ali "
-"poizvedeti po njegovih parametrih."
+"GnomeVnos, ki ga vnos datoteke uporablja za vnašanje imen datotek. To lastnost "
+"lahko uporabite za pridobitev GnomeVnos, če morate spremeniti ali poizvedeti po njegovih parametrih."
 
-#: libgnomeui/gnome-file-entry.c:256
+#: libgnomeui/gnome-file-entry.c:252
 msgid "GtkEntry"
 msgstr "GtkVnos"
 
-#: libgnomeui/gnome-file-entry.c:257
+#: libgnomeui/gnome-file-entry.c:253
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
 "GtkVnos, ki ga vnos datoteke uporablja za vnašanje imen datotek. To lastnost "
-"lahko uporabite za pridobitev GtkVnos, če morate spremeniti ali poizvedeti "
-"po njegovih parametrih."
+"lahko uporabite za pridobitev GtkVnos, če morate spremeniti ali poizvedeti po njegovih parametrih."
 
-#: libgnomeui/gnome-file-entry.c:489
+#: libgnomeui/gnome-file-entry.c:418
 msgid "Select file"
 msgstr "Izberi datoteko"
 
-#: libgnomeui/gnome-file-entry.c:627
-#, fuzzy
-msgid "_Browse..."
+#: libgnomeui/gnome-file-entry.c:592
+msgid "Browse..."
 msgstr "Brskaj..."
 
 #: libgnomeui/gnome-font-picker.c:66
@@ -1049,7 +1097,7 @@ msgstr "Ime pisave"
 msgid "Name of the selected font"
 msgstr "Ime izbrane pisave"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:978
 msgid "Font"
 msgstr "Pisava"
 
@@ -1093,82 +1141,75 @@ msgstr "Kaži velikost v načinu podatkov o pisavi"
 msgid "GNOME GConf UI Support"
 msgstr "Podpora uporabiškemu vmesniku Gconf GNOME"
 
-#: libgnomeui/gnome-gconf-ui.c:96
-msgid "_Details"
-msgstr ""
-
-#: libgnomeui/gnome-gconf-ui.c:169
-#, fuzzy, c-format
+#: libgnomeui/gnome-gconf-ui.c:107
+#, c-format
 msgid ""
-"The application \"%s\" attempted to change an aspect of your configuration "
-"that your system administrator or operating system vendor does not allow you "
-"to change. Some of the settings you have selected may not take effect, or "
-"may not be restored next time you use the application."
-msgstr ""
-"Poskusili ste spremeniti nastavitve, ki vam jih vaš sistemski administrator "
-"ali prodajalec operacijskega sistema ne dovoli spremeniti. Nekatere od "
-"izbranih nastavitev morda ne bodo upoštevane ali pa ob naslednjem zagonu te "
-"aplikacije ne bodo obnovljene (%s)."
+"You attempted to change an aspect of your configuration that your system "
+"administrator or operating system vendor does not allow you to change. Some "
+"of the settings you have selected may not take effect, or may not be "
+"restored next time you use this application (%s)."
+msgstr "Poskusili ste spremeniti nastavitve, ki vam jih vaš sistemski administrator ali prodajalec operacijskega sistema ne dovoli spremeniti. Nekatere od izbranih nastavitev morda ne bodo upoštevane ali pa ob naslednjem zagonu te aplikacije ne bodo obnovljene (%s)."
 
-#: libgnomeui/gnome-gconf-ui.c:176
+#: libgnomeui/gnome-gconf-ui.c:115
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
-msgstr ""
-"Med nalaganjem ali shranjevanjem podatkov za %s se je zgodila napaka. Možno "
-"je, da nekatere nastavitve ne bodo delovale pravilno."
+msgstr "Med nalaganjem ali shranjevanjem podatkov za %s se je zgodila napaka. Možno je, da nekatere nastavitve ne bodo delovale pravilno."
 
-#: libgnomeui/gnome-icon-entry.c:171
+#: libgnomeui/gnome-gconf-ui.c:139
+#, c-format
+msgid "GConf error details: %s\n"
+msgstr "Podrobnosti napake GConf: %s\n"
+
+#: libgnomeui/gnome-icon-entry.c:164
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Edinstven identifikator za vnos ikone.  To bo uporabljeno za shranitev "
-"seznama zgodovine."
+"Edinstven identifikator za vnos ikone.  To bo uporabljeno za shranitev seznama zgodovine."
 
-#: libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:173
 msgid "Title for the Browse icon dialog."
 msgstr "Naziv dialoga za brksanje ikon"
 
-#: libgnomeui/gnome-icon-entry.c:187
+#: libgnomeui/gnome-icon-entry.c:180
 msgid "Pixmap Directory"
 msgstr "Imenik slik"
 
-#: libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-icon-entry.c:181
 msgid "Directory that will be searched for icons."
 msgstr "Imenik v katerem naj se iščejo ikone"
 
-#: libgnomeui/gnome-icon-entry.c:196
+#: libgnomeui/gnome-icon-entry.c:189
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Ime datoteke, ki naj bo prikazano v vnosu ikone."
 
-#: libgnomeui/gnome-icon-entry.c:204
+#: libgnomeui/gnome-icon-entry.c:197
 msgid "Picker dialog"
 msgstr "Dialog izbirnika"
 
-#: libgnomeui/gnome-icon-entry.c:205
+#: libgnomeui/gnome-icon-entry.c:198
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Dialog izbirnika ikone.  To lastnost lahko uporabite za pridobitev "
-"GtkDialog, če morate spremeniti ali poizvedeti po katerikoli od njegovih "
-"lastnosti."
+"Dialog izbirnika ikone.  To lastnost lahko uporabite za pridobitev GtkDialog, če "
+"morate spremeniti ali poizvedeti po katerikoli od njegovih lastnosti."
 
-#: libgnomeui/gnome-icon-entry.c:314 libgnomeui/gnome-icon-entry.c:941
+#: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
 msgid "No Icon"
 msgstr "Brez"
 
-#: libgnomeui/gnome-icon-entry.c:522 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Ne najdem hbox-a, uporabljam običajno izbiranje datotek"
 
-#: libgnomeui/gnome-icon-entry.c:528 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Predogled"
 
-#: libgnomeui/gnome-icon-entry.c:963
+#: libgnomeui/gnome-icon-entry.c:930
 msgid "Browse"
 msgstr "Brskaj"
 
@@ -1182,7 +1223,7 @@ msgstr "GnomeIconSelection: '%s' ne obstaja ali ni imenik"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: ne morem odpreti imenika '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:406
+#: libgnomeui/gnome-icon-sel.c:411
 msgid "Loading Icons..."
 msgstr "Nalagam ikone..."
 
@@ -1206,15 +1247,15 @@ msgstr "Vprašanje"
 msgid "Message"
 msgstr "Sporočilo"
 
-#: libgnomeui/gnome-pixmap-entry.c:118
+#: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
 msgstr "Naredi predogled"
 
-#: libgnomeui/gnome-pixmap-entry.c:119
+#: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Ali naj ima vnos slike predogled."
 
-#: libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
+#: libgnomeui/gnome-pixmap-entry.c:192 libgnomeui/gnome-pixmap-entry.c:504
 msgid "No Image"
 msgstr "Ni slike"
 
@@ -1249,62 +1290,17 @@ msgstr "%a %d %b %T %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "Podrobnosti napake GConf: %s\n"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Izhod iz preizkusa"
 
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Gdk razhroščevalne zastavice, ki naj bodo nastavljene"
 
-#~ msgid "FLAGS"
-#~ msgstr "ZASTAVICE"
+# Smart report:
+# Total untranslated messages in file: 293 
+# Translations made:
+# full: 217
+# smart: 6
+# cond: 87
+# total: 310 ; distinct: 197
 
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Gdk razhroščevalne zastavice, ki naj ne bodo nastavljene"
 
-#~ msgid "Make X calls synchronous"
-#~ msgstr "Naredi klice X sinhrone"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "Ne uporabljal dodatka X za skupno rabo pomnilnika"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Ime programa, kot ga uporablja upravljalnik oken"
-
-#~ msgid "NAME"
-#~ msgstr "IME"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Razred programa, kot ga uporablja upravljalnik oken"
-
-#~ msgid "CLASS"
-#~ msgstr "RAZRED"
-
-#~ msgid "HOST"
-#~ msgstr "GOSTITELJ"
-
-#~ msgid "PORT"
-#~ msgstr "VRATA"
-
-#~ msgid "STYLE"
-#~ msgstr "SLOG"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Gtk+ razhroščevalne zastavice, ki naj bodo nastavljene"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Gtk+ razhroščevalne zastavice, ki naj ne bodo nastavljene"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "Naj bodo vsa opozorila usodna"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "Naloži dodaten Gtk modul"
-
-#~ msgid "MODULE"
-#~ msgstr "MODUL"
-
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
-
-#~ msgid "Exit the test"
-#~ msgstr "Izhod iz preizkusa"
