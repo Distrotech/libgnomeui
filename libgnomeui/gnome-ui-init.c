@@ -16,6 +16,8 @@
 extern char *program_invocation_name;
 extern char *program_invocation_short_name;
 
+extern void  gnome_client_init (void);
+
 static void gnome_rc_parse(gchar *command);
 static void gnome_segv_handle(int signum);
 static GdkPixmap *imlib_image_loader(GdkWindow   *window,
@@ -163,6 +165,7 @@ gnome_init (char *app_id, struct argp *app_args,
 	/* now we replace gtk_init() with gnome_init() in our apps */
 	gtk_set_locale();
 
+	gnome_client_init ();
 	gnomelib_register_arguments ();
 	gnomeui_register_arguments ();
 

@@ -1,3 +1,30 @@
+1998-06-06  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-init.c (gnome_init): Added 'gnome_client_init' call.
+
+	* gnome-client.c: New variable 'gnome_client_auto_connect_master',
+ 	'cloned_client', 'sm_cloned_id_arg_name' and
+ 	'cloned_id'. 'default_client' renamed to 'master_client'. Replaec
+ 	'array_free' with 'gnome_string_array_free'.
+ 	(gnome_client_object_init): Renamed 'gnome_client_init' function.
+	(master_client_connect): Renamed 'default_client_connect'
+ 	function.
+	(master_client_disconnect): Renamed 'default_client_disconnect'
+ 	function.
+	(gnome_client_init): Renamed 'default_client_init' function.
+	(arguments): Added 'sm-cloned-id' and 'sm-disable' option.
+	(client_set_prop_from_array_with_arg): New function.  Sets a
+ 	property from a string array and adds a additional command to the
+ 	commandline.
+	(gnome_master_client): New function.
+	(gnome_cloned_client): New function.
+	(gnome_client_new_default): Added warning message.
+	(client_parse_func): Added setting of restart and clone command.  Connecting to session manager when receiving ARGP_KEY_FINI.
+	(gnome_client_disable_master_connection): New function.
+
+	* gnome-client.h: New 'gnome_client_disable_master_connection',
+ 	'gnome_master_client' and 'gnome_cloned_client' declaration.
+
 Thu Jun  4 14:53:55 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-lamp.h: new function gnome_lamp_set_window_type.
