@@ -155,13 +155,17 @@ static gint /* GtkFunction */
 present_authentication_dialog_nonblocking (CallbackInfo *info)
 {
 	GnomePasswordDialog *dialog;
-	GtkWidget *toplevel;
+	GtkWidget *toplevel, *current_grab;
 
 	g_return_val_if_fail (info != NULL, 0);
 
 	dialog = construct_password_dialog (info->is_proxy_authentication, info->in_args);
 
-	toplevel = gtk_widget_get_toplevel (gtk_grab_get_current ());
+	toplevel = NULL;
+	current_grab = gtk_grab_get_current ();
+	if (current_grab) {
+		toplevel = gtk_widget_get_toplevel (current_grab);
+	}
 	if (toplevel && GTK_WIDGET_TOPLEVEL (toplevel)) {
 		/* There is a modal window, so we need to be modal too in order to
 		 * get input. We set the other modal dialog as parent, which
@@ -381,13 +385,17 @@ static gint /* GtkFunction */
 present_full_authentication_dialog_nonblocking (FullCallbackInfo *info)
 {
 	GnomePasswordDialog *dialog;
-	GtkWidget *toplevel;
+	GtkWidget *toplevel, *current_grab;
 
 	g_return_val_if_fail (info != NULL, 0);
 
 	dialog = construct_full_password_dialog (info->in_args);
 
-	toplevel = gtk_widget_get_toplevel (gtk_grab_get_current ());
+	toplevel = NULL;
+	current_grab = gtk_grab_get_current ();
+	if (current_grab) {
+		toplevel = gtk_widget_get_toplevel (current_grab);
+	}
 	if (toplevel && GTK_WIDGET_TOPLEVEL (toplevel)) {
 		/* There is a modal window, so we need to be modal too in order to
 		 * get input. We set the other modal dialog as parent, which

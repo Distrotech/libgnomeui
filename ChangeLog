@@ -1,3 +1,9 @@
+2004-03-19  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-authentication-manager.c (present_authentication_dialog_nonblocking),
+	(present_full_authentication_dialog_nonblocking): 
+	Fixed small bug in last change.
+
 2004-03-18  Alexander Larsson  <alexl@redhat.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c: (load_dir),
