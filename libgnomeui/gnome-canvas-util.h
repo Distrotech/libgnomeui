@@ -25,13 +25,18 @@ BEGIN_GNOME_DECLS
 typedef struct {
 	int num_points;
 	double *coords;
+	int ref_count;
 } GnomeCanvasPoints;
 
 
 /* Allocate a new GnomeCanvasPoints structure with enough space for the specified number of points */
 GnomeCanvasPoints *gnome_canvas_points_new (int num_points);
 
-/* Free a points structure */
+/* Increate ref count */
+GnomeCanvasPoints *gnome_canvas_points_ref (GnomeCanvasPoints *points);
+#define gnome_canvas_point_unref gnome_canvas_points_free
+
+/* Decrease ref count and free structure if it has reached zero */
 void gnome_canvas_points_free (GnomeCanvasPoints *points);
 
 /* Given three points forming an angle, compute the coordinates of the inside and outside points of

@@ -39,7 +39,17 @@ gnome_canvas_points_new (int num_points)
 	points = g_new (GnomeCanvasPoints, 1);
 	points->num_points = num_points;
 	points->coords = g_new (double, 2 * num_points);
+	points->ref_count = 1;
 
+	return points;
+}
+
+GnomeCanvasPoints *
+gnome_canvas_points_ref (GnomeCanvasPoints *points)
+{
+	g_return_val_if_fail (points != NULL, NULL);
+
+	points->ref_count += 1;
 	return points;
 }
 
@@ -48,8 +58,11 @@ gnome_canvas_points_free (GnomeCanvasPoints *points)
 {
 	g_return_if_fail (points != NULL);
 
-	g_free (points->coords);
-	g_free (points);
+	points->ref_count -= 1;
+	if (points->ref_count == 0){
+		g_free (points->coords);
+		g_free (points);
+	}
 }
 
 int
