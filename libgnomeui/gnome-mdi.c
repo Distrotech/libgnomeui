@@ -32,7 +32,7 @@ static GnomeMDIChild   *gnome_mdi_find_child     (GnomeMDI *, gchar *);
 
 static GtkWidget       *find_item_by_label       (GtkMenuShell *, gchar *);
 
-static GtkWidget       *child_list_menu_create     (GnomeMDI *);
+static void             child_list_menu_create     (GnomeMDI *, GnomeApp *);
 static void             child_list_menu_remove_item(GnomeMDI *, GnomeMDIChild *);
 static void             child_list_menu_add_item   (GnomeMDI *, GnomeMDIChild *);
 static void             child_list_activated_cb    (GtkWidget *, GnomeMDI *);
@@ -72,7 +72,6 @@ static gint             count_ui_info_items      (GnomeUIInfo *);
 /* keys for stuff that we'll assign to our GnomeApps */
 #define TOOLBAR_INFO_KEY           "MDIToolbarUIInfo"
 #define MENUBAR_INFO_KEY           "MDIMenubarUIInfo"
-#define MDI_CHILD_LIST_KEY         "MDIChildList"
 #define MDI_CHILD_MENU_INFO_KEY    "MDIChildMenuUIInfo"
 #define MDI_CHILD_KEY              "GnomeMDIChild"
 #define ITEM_COUNT_KEY             "MDIChildMenuItems"
@@ -247,8 +246,6 @@ static void gnome_mdi_destroy(GtkObject *object) {
 
   if(mdi->child_menu_path)
     g_free(mdi->child_menu_path);
-  if(mdi->child_menu_label)
-    g_free(mdi->child_menu_label);
   if(mdi->child_list_path)
     g_free(mdi->child_list_path);
 
@@ -277,7 +274,6 @@ static void gnome_mdi_init (GnomeMDI *mdi) {
   mdi->menu_template = NULL;
   mdi->toolbar_template = NULL;
   mdi->child_menu_path = NULL;
-  mdi->child_menu_label = NULL;
   mdi->child_list_path = NULL;
 
   gethostname(hostname, 127);
@@ -383,7 +379,7 @@ static GtkWidget *find_item_by_label(GtkMenuShell *shell, gchar *label) {
   while(child) {
     grandchild = GTK_BIN(child->data)->child;
     if( (GTK_IS_LABEL(grandchild)) &&
-	(strcmp(GTK_LABEL(grandchild)->label, label) == 0) )
+        (strcmp(GTK_LABEL(grandchild)->label, label) == 0) )
       return GTK_WIDGET(child->data);
 
     child = g_list_next(child);
@@ -419,57 +415,47 @@ static void child_list_activated_cb(GtkWidget *w, GnomeMDI *mdi) {
   }
 }
 
-static GtkWidget *child_list_menu_create(GnomeMDI *mdi) {
-  GtkWidget *menu, *item, *title_item;
+static void child_list_menu_create(GnomeMDI *mdi, GnomeApp *app) {
+  GtkWidget *submenu, *item;
   GList *child;
+  gint pos;
 
-  title_item = gtk_menu_item_new_with_label( (mdi->child_menu_label)?(mdi->child_menu_label):(_("Children")) );
-  gtk_widget_show(title_item);
+  submenu = gnome_app_find_menu_pos(app->menubar, mdi->child_list_path, &pos);
 
-  if(mdi->children) {
-    menu = gtk_menu_new();
+  child = mdi->children;
+  while(child) {
+    item = gtk_menu_item_new_with_label(GNOME_MDI_CHILD(child->data)->name);
+    gtk_signal_connect(GTK_OBJECT(item), "activate",
+                       GTK_SIGNAL_FUNC(child_list_activated_cb), mdi);
+    gtk_object_set_data(GTK_OBJECT(item), MDI_CHILD_KEY, child->data);
+    gtk_widget_show(item);
 
-    child = mdi->children;
-    while(child) {
-      item = gtk_menu_item_new_with_label(GNOME_MDI_CHILD(child->data)->name);
-      gtk_signal_connect(GTK_OBJECT(item), "activate",
-			 GTK_SIGNAL_FUNC(child_list_activated_cb), mdi);
-      gtk_object_set_data(GTK_OBJECT(item), MDI_CHILD_KEY, child->data);
+    gtk_menu_shell_insert(GTK_MENU_SHELL(submenu), item, pos);
 
-      gtk_widget_show(item);
-
-      gtk_menu_append(GTK_MENU(menu), item);
-
-      child = g_list_next(child);
-    }
-
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(title_item), menu);
+    child = g_list_next(child);
   }
 
-  return title_item;
+  gtk_widget_queue_resize(submenu);
 }
 
 static void child_list_menu_remove_item(GnomeMDI *mdi, GnomeMDIChild *child) {
-  GtkWidget *item;
-  GtkMenuItem *menu;
-  GtkMenuShell *shell;
-
+  GtkWidget *item, *shell;
   GnomeApp *app;
   GList *app_node;
+  gint pos;
+
+  if(mdi->child_list_path == NULL)
+    return;
 
   app_node = mdi->windows;
   while(app_node) {
     app = GNOME_APP(app_node->data);
-    menu = GTK_MENU_ITEM(gtk_object_get_data(GTK_OBJECT(app->menubar), MDI_CHILD_LIST_KEY));
 
-    if (menu)
-    {
-      shell = GTK_MENU_SHELL(menu->submenu);
+    shell = gnome_app_find_menu_pos(app->menubar, mdi->child_list_path, &pos);
 
-      item = find_item_by_label(shell, child->name);
-    
+    if(shell) {
+      item = find_item_by_label(GTK_MENU_SHELL(shell), child->name);
       gtk_container_remove(GTK_CONTAINER(shell), item);
-    
       gtk_widget_queue_resize (GTK_WIDGET (shell));
     }
 
@@ -479,9 +465,12 @@ static void child_list_menu_remove_item(GnomeMDI *mdi, GnomeMDIChild *child) {
 
 static void child_list_menu_add_item(GnomeMDI *mdi, GnomeMDIChild *child) {
   GtkWidget *item, *submenu;
-  GtkMenuItem *menu;
   GnomeApp *app;
   GList *app_node;
+  gint pos;
+
+  if(mdi->child_list_path == NULL)
+    return;
 
   app_node = mdi->windows;
   while(app_node) {
@@ -493,19 +482,10 @@ static void child_list_menu_add_item(GnomeMDI *mdi, GnomeMDIChild *child) {
     gtk_object_set_data(GTK_OBJECT(item), MDI_CHILD_KEY, child);
     gtk_widget_show(item);
 
-    menu = GTK_MENU_ITEM(gtk_object_get_data(GTK_OBJECT(app->menubar), MDI_CHILD_LIST_KEY));
-
-    if(menu) {
-      if((submenu = menu->submenu) == NULL) {
-        submenu = gtk_menu_new();
-
-        gtk_menu_item_set_submenu(menu, submenu);
-      }
-
-      gtk_menu_append(GTK_MENU(submenu), item);
-
-      gtk_widget_queue_resize(GTK_WIDGET(submenu));
-    }
+    submenu = gnome_app_find_menu_pos(app->menubar, mdi->child_list_path, &pos);
+    gtk_menu_shell_insert(GTK_MENU_SHELL(submenu), item, pos);
+    gtk_widget_queue_resize(submenu);
+    
     app_node = g_list_next(app_node);
   }
 }
@@ -948,12 +928,7 @@ static void app_create(GnomeMDI *mdi) {
     }
   }
 
-  /* we add the mdi_child list menu to the menubar */
-  if( menubar && (parent = gnome_app_find_menu_pos(GTK_WIDGET(menubar), mdi->child_list_path, &pos)) ) {
-    child_menu = child_list_menu_create(mdi);
-    gtk_menu_shell_insert(GTK_MENU_SHELL(parent), child_menu, pos);
-    gtk_object_set_data(GTK_OBJECT(menubar), MDI_CHILD_LIST_KEY, child_menu);
-  }
+  child_list_menu_create(mdi, GNOME_APP(window));
 
   /* create toolbar */
   if(mdi->toolbar_template) {
@@ -1302,13 +1277,6 @@ void gnome_mdi_set_child_menu_path(GnomeMDI *mdi, gchar *path) {
     g_free(mdi->child_menu_path);
 
   mdi->child_menu_path = g_strdup(path);
-}
-
-void gnome_mdi_set_child_menu_label(GnomeMDI *mdi, gchar *label) {
-  if(mdi->child_menu_label)
-    g_free(mdi->child_menu_label);
-
-  mdi->child_menu_label = g_strdup(label);
 }
 
 void gnome_mdi_set_child_list_path(GnomeMDI *mdi, gchar *path) {

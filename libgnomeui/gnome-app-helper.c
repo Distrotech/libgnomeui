@@ -730,11 +730,13 @@ gnome_app_find_menu_pos (GtkWidget *parent,
 
     if( label && (strncmp(path, label->label, path_len) == 0) ) {
       if(name_end == NULL) {
-	*pos = p;
-	return parent;
+        *pos = p;
+        return parent;
       }
+      else if(GTK_MENU_ITEM(item)->submenu)
+        return gnome_app_find_menu_pos(GTK_MENU_ITEM(item)->submenu, (gchar *)(name_end + 1), pos);
       else
-	return gnome_app_find_menu_pos(GTK_MENU_ITEM(item)->submenu, (gchar *)(name_end + 1), pos);
+        return NULL;
     }
 
     children = g_list_next(children);

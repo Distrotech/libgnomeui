@@ -1,3 +1,11 @@
+1998-07-06  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.c (gnome_app_find_menu_pos): added a
+	check if submenu is not NULL.
+	* gnome-mdi.[ch]: removed child_menu_label and all related
+	functions. now all children items are inserted where
+	child_list_path points.
+
 1998-07-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_update_now): New public function

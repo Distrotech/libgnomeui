@@ -79,7 +79,6 @@ struct _GnomeMDI {
   /* paths for insertion of mdi_child specific menus and mdi_child list menu via
      gnome-app-helper routines */
   gchar *child_menu_path;
-  gchar *child_menu_label;
   gchar *child_list_path;
 
   GnomeRootWin *root_window; /* this is needed for DND */
@@ -106,7 +105,6 @@ void          gnome_mdi_set_mode            (GnomeMDI *, gint);
 void          gnome_mdi_set_menu_template   (GnomeMDI*, GnomeUIInfo *);
 void          gnome_mdi_set_toolbar_template(GnomeMDI*, GnomeUIInfo *);
 void          gnome_mdi_set_child_menu_path (GnomeMDI *, gchar *);
-void          gnome_mdi_set_child_menu_label(GnomeMDI *, gchar *);
 void          gnome_mdi_set_child_list_path (GnomeMDI *, gchar *);
 
 GnomeMDIChild *gnome_mdi_active_child       (GnomeMDI*);
