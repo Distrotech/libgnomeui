@@ -56,16 +56,20 @@ struct _GnomeHRefClass {
  */
 
 guint gnome_href_get_type(void);
-GtkWidget *gnome_href_new(const gchar *url, const gchar *label);
+GtkWidget *gnome_href_new(const gchar *url, const gchar *text);
 
 /* for bindings and subclassing, use the gnome_href_new from C */
 void gnome_href_construct(GnomeHRef *href,
 			  const gchar *url,
-			  const gchar *label);
+			  const gchar *text);
 
 void gnome_href_set_url(GnomeHRef *href, const gchar *url);
 gchar *gnome_href_get_url(GnomeHRef *href);
 
+void gnome_href_set_text(GnomeHRef *href, const gchar *text);
+gchar *gnome_href_get_text(GnomeHRef *href);
+
+/* deprecated!, use set/get_text */
 void gnome_href_set_label(GnomeHRef *href, const gchar *label);
 gchar *gnome_href_get_label(GnomeHRef *href);
 
