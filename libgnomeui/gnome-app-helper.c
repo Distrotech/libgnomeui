@@ -63,6 +63,11 @@ gnome_app_do_menu_creation(GnomeApp *app,
   int i;
   int has_stock_pixmaps = FALSE;
   int justify_right = FALSE;
+  GnomeUIBuilderData orig_uidata;
+
+  /* store a pointer to the original uidata structure to use it for the
+     subtrees */
+  orig_uidata = uidata;
 
   /* first check if any of them use the stock pixmaps, because if
      they do we need to use gnome_stock_menu_item for all of them
@@ -80,6 +85,13 @@ gnome_app_do_menu_creation(GnomeApp *app,
     {
       switch(menuinfo[i].type)
 	{
+
+  case GNOME_APP_UI_BUILDER_DATA:
+    /* set the builder data for the following entries. this builder data is used with all the
+       following items in this GnomeUIInfo array. it does not apply to the subtrees nor other
+       GnomeUIInfo arrays on the same level */
+    uidata = (GnomeUIBuilderData)menuinfo[i].moreinfo;
+    break;
 
 	case GNOME_APP_UI_JUSTIFY_RIGHT:
 	  justify_right = TRUE;
@@ -173,7 +185,7 @@ gnome_app_do_menu_creation(GnomeApp *app,
 					   submenu,
 					   0,
 					   menuinfo[i].moreinfo,
-					   uidata);
+					   orig_uidata);
 	      }
 	  }
 	  break;
@@ -202,26 +214,28 @@ gnome_app_add_radio_menu_entries(GnomeApp *app,
   while (menuinfo->type != GNOME_APP_UI_ENDOFINFO)
     {
       if (menuinfo->type == GNOME_APP_UI_SEPARATOR) {
-	menuinfo->widget = gtk_menu_item_new();
-	gtk_widget_show(menuinfo->widget);
-	gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo->widget, pos);
-	pos++;
-	menuinfo++;
+        menuinfo->widget = gtk_menu_item_new();
+        gtk_widget_show(menuinfo->widget);
+        gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo->widget, pos);
+        pos++;
+        menuinfo++;
       }
+      else if (menuinfo->type == GNOME_APP_UI_BUILDER_DATA)
+        uidata = (GnomeUIBuilderData)menuinfo->moreinfo;
       else {
-	menuinfo->widget = gtk_radio_menu_item_new_with_label(group, _(menuinfo->label));
-	group = gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM(menuinfo->widget));
+        menuinfo->widget = gtk_radio_menu_item_new_with_label(group, _(menuinfo->label));
+        group = gtk_radio_menu_item_group(GTK_RADIO_MENU_ITEM(menuinfo->widget));
 	
-	gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(menuinfo->widget), TRUE);
-	gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(menuinfo->widget), FALSE);
-	gtk_widget_show(menuinfo->widget);
-	gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo->widget, pos);
-	pos++;
+        gtk_check_menu_item_set_show_toggle(GTK_CHECK_MENU_ITEM(menuinfo->widget), TRUE);
+        gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(menuinfo->widget), FALSE);
+        gtk_widget_show(menuinfo->widget);
+        gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo->widget, pos);
+        pos++;
 
-	uidata->connect_func(app, menuinfo, "activate", uidata);
-	gnome_app_do_ui_accelerator_setup(app, "activate", menuinfo);
+        uidata->connect_func(app, menuinfo, "activate", uidata);
+        gnome_app_do_ui_accelerator_setup(app, "activate", menuinfo);
 
-	menuinfo++;
+        menuinfo++;
       }
     }
 
@@ -405,6 +419,13 @@ gnome_app_do_toolbar_creation(GnomeApp *app,
     {
       switch(tbinfo[i].type)
 	{
+  case GNOME_APP_UI_BUILDER_DATA:
+    /* set the builder data for the following entries. this builder data is used with all the
+       following items in this GnomeUIInfo array. it does not apply to the subtrees nor other
+       GnomeUIInfo arrays on the same level */
+    uidata = (GnomeUIBuilderData)tbinfo[i].moreinfo;
+    break;
+
 	case GNOME_APP_UI_RADIOITEMS:
 	  gnome_app_add_radio_toolbar_entries(app, parent_widget,
 					      tbinfo[i].moreinfo, uidata);
@@ -482,35 +503,39 @@ gnome_app_add_radio_toolbar_entries(GnomeApp *app,
     
   while (tbinfo->type != GNOME_APP_UI_ENDOFINFO)
     {
-      switch(tbinfo->pixmap_type) {
-      case GNOME_APP_PIXMAP_DATA:
-	pmap = gnome_pixmap_new_from_xpm_d(tbinfo->pixmap_info);
-	break;
+      if(tbinfo->type == GNOME_APP_UI_BUILDER_DATA)
+         uidata = (GnomeUIBuilderData)tbinfo->moreinfo;
+      else {
+        switch(tbinfo->pixmap_type) {
+        case GNOME_APP_PIXMAP_DATA:
+          pmap = gnome_pixmap_new_from_xpm_d(tbinfo->pixmap_info);
+          break;
 
-      case GNOME_APP_PIXMAP_FILENAME:
-	pmap = gnome_pixmap_new_from_file((char *)tbinfo->pixmap_info);
-	break;
+        case GNOME_APP_PIXMAP_FILENAME:
+          pmap = gnome_pixmap_new_from_file((char *)tbinfo->pixmap_info);
+          break;
 
-      case GNOME_APP_PIXMAP_STOCK:
-	pmap = gnome_stock_pixmap_widget_new(GTK_WIDGET(app), tbinfo->pixmap_info);
-	break;
+        case GNOME_APP_PIXMAP_STOCK:
+          pmap = gnome_stock_pixmap_widget_new(GTK_WIDGET(app), tbinfo->pixmap_info);
+          break;
 
-      default:
-	pmap = NULL; break;
-      }
+        default:
+          pmap = NULL; break;
+        }
 
-      group = tbinfo->widget =
-	gtk_toolbar_append_element(GTK_TOOLBAR(parent_widget),
-				   GTK_TOOLBAR_CHILD_RADIOBUTTON,
-				   group, _(tbinfo->label),
-				   _(tbinfo->hint), NULL,
-				   pmap, NULL, NULL);
+        group = tbinfo->widget =
+          gtk_toolbar_append_element(GTK_TOOLBAR(parent_widget),
+                                     GTK_TOOLBAR_CHILD_RADIOBUTTON,
+                                     group, _(tbinfo->label),
+                                     _(tbinfo->hint), NULL,
+                                     pmap, NULL, NULL);
 
-      uidata->connect_func(app, tbinfo, "clicked", uidata);
+        uidata->connect_func(app, tbinfo, "clicked", uidata);
 
-      gnome_app_do_ui_accelerator_setup(app, "clicked", tbinfo);
+        gnome_app_do_ui_accelerator_setup(app, "clicked", tbinfo);
 	
-      tbinfo++;
+        tbinfo++;
+      }
     }
 }
 

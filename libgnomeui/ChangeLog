@@ -1,3 +1,13 @@
+1998-06-30  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.[ch]: Modified menu and toolbar creation functions
+	to support GNOME_APP_UI_BUILDER_DATA items that supply GnomeUIBuilderData
+	structure to use with the following entries until the end of the current
+	GnomeUIInfo array or next GNOME_APP_UI_BUILDER_DATA item. BuilderData
+	structures supplied in this manner do not affect subtrees [initial structures
+	created by or supplied to appropriate gnome_app_helper__create_*() calls are
+	used for this] or other GnomeUIInfo arrays at the same level.
+
 Tue Jun 30 17:14:31 1998	Jonathan Blandford <jrb@redhat.com>
 	* gnome-app-helper.c: Modified gnome_app_add_radio_menu_entries()
 	to handle separators.

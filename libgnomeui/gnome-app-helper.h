@@ -17,7 +17,11 @@ typedef enum {
   GNOME_APP_UI_SUBTREE,
   GNOME_APP_UI_SEPARATOR,
   GNOME_APP_UI_HELP,
-  GNOME_APP_UI_JUSTIFY_RIGHT /* this should right justify all the following entries */
+  GNOME_APP_UI_JUSTIFY_RIGHT, /* this should right justify all the following entries */
+  GNOME_APP_UI_BUILDER_DATA   /* specifies the builder data for the following entries, see code for further info */
+  /* one should be careful when using gnome_app_create_*_[custom|interp|with_data]() functions
+     with GnomeUIInfo arrays containing GNOME_APP_UI_BUILDER_DATA items since their GnomeUIBuilderData
+     structures completely override the ones generated or supplied by the above functions. */
 } GnomeUIInfoType;
 
 typedef enum {
@@ -45,7 +49,9 @@ struct _GnomeUIInfo {
      call when activated.
      
      For a help item, specifies the help node to load
-     (or NULL for main prog's name) */
+     (or NULL for main prog's name)
+
+     For builder data, point to the GnomeUIBuilderData structure for the following items */
   gpointer moreinfo;
 
   /* Value for pass to gtk_signal_connect() */

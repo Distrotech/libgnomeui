@@ -53,6 +53,9 @@ GtkWidget     *gnome_mdi_child_add_view        (GnomeMDIChild *);
 void          gnome_mdi_child_remove_view      (GnomeMDIChild *, GtkWidget *view);
 
 void          gnome_mdi_child_set_name         (GnomeMDIChild *, gchar *);
+
+/* note that you should not pass any user data to child menu callbacks, since
+   the corresponding GnomeMDIChild is passed as user data by MDI */
 void          gnome_mdi_child_set_menu_template(GnomeMDIChild *, GnomeUIInfo *);
 
 END_GNOME_DECLS
