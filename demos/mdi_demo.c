@@ -198,7 +198,7 @@ int
 main(int argc, char **argv)
 {
   gnome_program_init ("mdi_demo", "2.0", argc, argv,
-					  GNOME_PARAM_MODULE_INFO, libgnomeui_module_info,
+					  GNOME_PARAM_MODULE_INFO, &libgnomeui_module_info,
 					  NULL);
 
   mdi = gnome_mdi_new("MDIDemo", "MDI Demo");

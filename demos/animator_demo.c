@@ -38,7 +38,7 @@ main (int argc, char *argv[])
   char *s;
 
   gnome_program_init ("gnome-animator", VERSION, argc, argv,
-		      GNOME_PARAM_MODULE_INFO, libgnomeui_module_info,
+		      GNOME_PARAM_MODULE_INFO, &libgnomeui_module_info,
 		      NULL);
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
