@@ -31,7 +31,7 @@
 #include "libgnome/gnome-config.h"
 #include "gnome-app.h"
 #include "gnome-app-helper.h"
-#include "gnome-popupmenu.h"
+#include "gnome-popup-menu.h"
 #include <gtk/gtk.h>
 
 /* FIXME: all this file is completely broken.  I will rewrite it in a couple of days - Federico */

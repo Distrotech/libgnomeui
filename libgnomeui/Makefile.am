@@ -78,7 +78,7 @@ libgnomeui_la_SOURCES = \
 	gnome-net.c			\
 	gnome-number-entry.c		\
 	gnome-pixmap.c			\
-	gnome-popupmenu.c		\
+	gnome-popup-menu.c		\
 	gnome-preferences.c		\
 	gnome-propertybox.c		\
 	gnome-properties.c		\
@@ -131,7 +131,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-mdi-child.h		\
 	gnome-number-entry.h		\
 	gnome-net.h			\
-	gnome-popupmenu.h		\
+	gnome-popup-menu.h		\
 	gnome-preferences.h		\
 	gnome-propertybox.h		\
 	gnome-properties.h     		\
