@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-13 18:30+0200\n"
-"PO-Revision-Date: 2004-07-27 18:24+0300\n"
+"POT-Creation-Date: 2004-12-21 22:19+0200\n"
+"PO-Revision-Date: 2004-12-21 22:22+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -35,16 +35,16 @@ msgstr "Dukterinis elementas 2"
 msgid "Hint for item 2"
 msgstr "Elemento 2 patarimas"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:668
+#: file-chooser/gtkfilesystemgnomevfs.c:677
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nėra aplankas"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:875
+#: file-chooser/gtkfilesystemgnomevfs.c:884
 msgid "Filesystem"
 msgstr "Bylų sistema"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1539
+#: file-chooser/gtkfilesystemgnomevfs.c:1565
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Žymelės saugojimas nepavyko (%s)"
@@ -175,6 +175,7 @@ msgstr "Apie %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Byla"
 
@@ -232,6 +233,7 @@ msgid "_Game"
 msgstr "Žai_dimas"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pagalba"
 
@@ -422,11 +424,11 @@ msgstr "Sutvarkyti programą"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Apie"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Apie šią programą"
 
@@ -453,7 +455,7 @@ msgstr "Sukurti naują langą"
 msgid "_Close This Window"
 msgstr "_Uždaryti šį langą"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Uždaryti esamą langą"
 
@@ -696,7 +698,7 @@ msgstr "Gauti netinkami spalvų duomenys\n"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr "Atidarykite langą tam kad nurodyti spalvą"
+msgstr "Atidarykite langą spalvos parinkimui"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -1021,7 +1023,7 @@ msgstr "_Naršyti..."
 
 #: libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
-msgstr "Iškviesti bylos pasirinkimo langą, kad pasirinkti bylą"
+msgstr "Iškviesti bylų pažymėjimo langą bylos pasirinkimui"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1437,7 +1439,7 @@ msgstr ""
 #: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "Programa „%s“ netikėtai išėjo."
+msgstr "Programa „%s“ netikėtai baigė darbą."
 
 #: libgnomeui/gnome_segv.c:117
 #, c-format
@@ -1468,30 +1470,6 @@ msgstr "_Informuoti kūrėjus"
 msgid "_Debug"
 msgstr "_Derinti"
 
-#~ msgid "Exit the test"
-#~ msgstr "Išeiti iš testo"
-
-#~ msgid " domain %s"
-#~ msgstr " domenas %s"
-
-#~ msgid "Color Selector"
-#~ msgstr "Spalvų Pasirinkimas"
-
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Programa „%s“ (procesas %d) nulūžo\n"
-#~ "dėl lemtingos klaidos.\n"
-#~ "(%s)"
-
-#~ msgid "Submit a bug report"
-#~ msgstr "Pateikti klaidos ataskaitą"
-
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
-
-#~ msgid "Please visit the GNOME Application Crash page for more information"
-#~ msgstr ""
-#~ "Aplankykite GNOME Programų Lūžimo puslapį, norėdami sužinoti daugiau"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Išeiti iš testo"
