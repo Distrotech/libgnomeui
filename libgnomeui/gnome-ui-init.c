@@ -432,8 +432,6 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
         priv->constructed = TRUE;
 
-        _gnome_stock_icons_init ();
-
         /* load the accelerators */
         filename = g_build_filename (gnome_user_accels_dir_get (),
                                      gnome_program_get_app_id (program),
@@ -445,6 +443,9 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
 #ifdef HAVE_BIND_TEXTDOMAIN_CODESET
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 #endif
+
+        _gnome_stock_icons_init ();
+
 	initialize_gtk_signal_relay ();
 }
 
