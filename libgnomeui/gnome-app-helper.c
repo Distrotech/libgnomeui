@@ -57,18 +57,20 @@ create_pixmap (GtkWidget *window, GnomeUIPixmapType pixmap_type, gpointer pixmap
 	pixmap = NULL;
 
 	switch (pixmap_type) {
-	case GNOME_APP_PIXMAP_NONE:
-		if (indent_missing_pixmaps)
-			pixmap = gnome_stock_pixmap_widget (window, GNOME_STOCK_MENU_BLANK);
-
-		break;
-
 	case GNOME_APP_PIXMAP_STOCK:
 		pixmap = gnome_stock_pixmap_widget (window, pixmap_info);
 		break;
 
 	case GNOME_APP_PIXMAP_DATA:
-		pixmap = gnome_pixmap_new_from_xpm_d (pixmap_info);
+		if (pixmap_info){
+			pixmap = gnome_pixmap_new_from_xpm_d (pixmap_info);
+			break;
+		}
+
+	case GNOME_APP_PIXMAP_NONE:
+		if (indent_missing_pixmaps)
+			pixmap = gnome_stock_pixmap_widget (window, GNOME_STOCK_MENU_BLANK);
+
 		break;
 
 	case GNOME_APP_PIXMAP_FILENAME:
