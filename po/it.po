@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-13 18:30+0200\n"
-"PO-Revision-Date: 2004-02-24 23:26+0100\n"
+"POT-Creation-Date: 2004-09-12 12:10+0200\n"
+"PO-Revision-Date: 2004-09-12 13:44+0200\n"
 "Last-Translator: Francesco Marletta <francesco.marletta@tiscali.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -35,33 +35,34 @@ msgstr "Suggerimento per l'oggetto 2"
 #: file-chooser/gtkfilesystemgnomevfs.c:668
 #, c-format
 msgid "%s is not a folder"
-msgstr ""
+msgstr "%s non è una cartella"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:875
-#, fuzzy
 msgid "Filesystem"
-msgstr "Fi_le"
+msgstr "Filesystem"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:1539
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "Salvataggio del segnalibro fallito (%s)"
 
 #: file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "Impossibile ottenere informazioni per il file \"%s\": %s"
 
 #: file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "Apertura del file \"%s\" fallita: %s"
 
 #: file-chooser/testfilechooser.c:228
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
+"Caricamento dell'immagine \"%s\" fallito: motivo sconosciuto, probabilmente "
+"il file che la contiene è corrotto"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
@@ -172,6 +173,7 @@ msgstr "Informazioni su %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -229,6 +231,7 @@ msgid "_Game"
 msgstr "_Gioco"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_iuto"
 
@@ -420,11 +423,11 @@ msgstr "Configura l'applicazione"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "I_nformazioni"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informazioni su questa applicazione"
 
@@ -451,7 +454,7 @@ msgstr "Crea una nuova finestra"
 msgid "_Close This Window"
 msgstr "_Chiudi questa finestra"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Chiude la finestra corrente"
 
@@ -548,9 +551,9 @@ msgid "Text Only"
 msgstr "Solo testo"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Impostazioni predefinite del desktop (%s)"
+msgstr "Usare le impostazioni predefinite del desktop (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
@@ -626,7 +629,7 @@ msgstr "Livello di interazione con l'utente richiesto."
 
 #: libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "Il proprio proxy HTTP richiede di effettuare il login.\n"
+msgstr "Il proxy HTTP in uso richiede di effettuare il login.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
@@ -651,9 +654,10 @@ msgid "Authentication Required"
 msgstr "Richiesta autenticazione"
 
 #: libgnomeui/gnome-authentication-manager.c:299
-#, fuzzy, c-format
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "È necessario effettuare il login per accedere a \"%s\"\n"
+msgstr ""
+"È necessario effettuare il login per accedere a \"%s\" nel dominio \"%s\"\n"
 
 #: libgnomeui/gnome-authentication-manager.c:301
 #, c-format
@@ -839,29 +843,24 @@ msgstr "Il colore di sfondo è impostato"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "Colore di sfondo del logo"
+msgstr "Colore di sfondo del sommario"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "Colore di sfondo del logo"
+msgstr "Colore di sfondo del sommario"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr "Il colore di sfondo come GdkColor"
+msgstr "Il colore di sfondo del sommario come GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "Colore di sfondo impostato"
+msgstr "Colore di sfondo del sommario impostato"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "Il colore di sfondo è impostato"
+msgstr "Il colore di sfondo del sommario è impostato"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -886,7 +885,7 @@ msgstr "Il colore di sfondo del logo è stato impostato"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
-msgstr "Mostra il pulsante «Fine»"
+msgstr "Mostra «Fine»"
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
@@ -894,7 +893,7 @@ msgstr "Mostra il pulsante «Fine» invece del pulsante «Avanti»"
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
-msgstr "Mostra aiuto"
+msgstr "Mostra «Aiuto»"
 
 #: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
@@ -950,7 +949,7 @@ msgstr "Modale"
 
 #: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
-msgstr "Indica se la finestra «Sfoglia file» debba essere modale.c"
+msgstr "Indica se la finestra «Sfoglia file» debba essere modale."
 
 #: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
@@ -979,7 +978,7 @@ msgid ""
 "its parameters."
 msgstr ""
 "GnomeEntry che il campo file usa per fornire nomi di file. È possibile usare "
-"questa proprietà per otterere il GnomeEntry, se è necessario modificare o "
+"questa proprietà per ottenere il GnomeEntry, se è necessario modificare o "
 "interrogare uno dei suoi parametri."
 
 #: libgnomeui/gnome-file-entry.c:291
@@ -993,7 +992,7 @@ msgid ""
 "parameters."
 msgstr ""
 "GtkEntry che il campo file usa per fornire nomi di file. È possibile usare "
-"questa proprietà per otterere il GtkEntry, se è necessario modificare o "
+"questa proprietà per ottenere il GtkEntry, se è necessario modificare o "
 "interrogare uno dei suoi parametri."
 
 #: libgnomeui/gnome-file-entry.c:302
@@ -1199,7 +1198,7 @@ msgstr "Directory in cui ricercare le icone."
 
 #: libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
-msgstr "None del file che dovrebbe essere mostrato nel campo icona."
+msgstr "Nome del file che dovrebbe essere mostrato nel campo icona."
 
 #: libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
@@ -1305,11 +1304,11 @@ msgstr "_Password:"
 
 #: libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Connessione _anonima"
 
 #: libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
-msgstr ""
+msgstr "Connessione come _utente:"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
@@ -1420,7 +1419,7 @@ msgstr "Libreria per la GUI di GNOME"
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Si sono verificati errori di segmentazione multipli; impossibile "
-"visualizzare la finestre di errore\n"
+"visualizzare la finestra di errore\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -1430,7 +1429,7 @@ msgid ""
 "Cannot display crash dialog\n"
 msgstr ""
 "Errore di segmentazione!\n"
-"Impossibile mostrare la finestre di dialogo relativa\n"
+"Impossibile mostrare la finestra di dialogo relativa\n"
 
 #: libgnomeui/gnome_segv.c:101
 #, c-format
@@ -1482,8 +1481,9 @@ msgstr "_Informa gli sviluppatori"
 msgid "_Debug"
 msgstr "_Debug"
 
-#~ msgid " domain %s"
-#~ msgstr " dominio %s"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Termina il test"
 
-#~ msgid "Exit the test"
-#~ msgstr "Termina il test"
+msgid " domain %s"
+msgstr " dominio %s"
