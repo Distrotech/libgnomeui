@@ -78,8 +78,7 @@ typedef struct
 	gchar *title;
 	gchar *url;
 	gchar *copyright;
-	GList *names;
-	GList *author_urls;
+	GList *names, *author_urls, *author_emails;
 	gchar *comments;
 	GdkPixbuf *logo;
 	GdkFont *font_title,
@@ -109,7 +108,7 @@ static void gnome_about_display_comments (GnomeCanvasGroup *group,
 
 static gint gnome_about_item_cb (GnomeCanvasItem *item, GdkEvent
 				 *event, gpointer data);
-
+static void gnome_about_parse_name (gchar **name, gchar **email);
 
 /**
  *g nome_about_get_type
@@ -167,9 +166,10 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 		NULL)
 
 	GnomeCanvasGroup *root;
-	GnomeCanvasItem *item;
+	GnomeCanvasItem *item, *item_email;
 	gdouble x, y, x2, y2, h, w;
-	GList *name;
+	GList *name, *name_url = 0, *name_email;
+	gchar *tmp;
 
 	root = gnome_canvas_root(canvas);
 
@@ -301,7 +301,7 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 		    GNOME_ABOUT_COPYRIGHT_PADDING_DOWN;
 	}
 
-	/* Authors list */
+	/* Authors header */
 	if (ai->names)
 	{
 		y += GNOME_ABOUT_CONTENT_SPACING;
@@ -318,49 +318,69 @@ gnome_about_draw (GnomeCanvas *canvas, GnomeAboutInfo *ai)
 	x += gdk_string_measure(ai->font_author, _("Authors:")) +
 	    GNOME_ABOUT_AUTHORS_INDENT;
 
-	name = g_list_first(ai->names);
+	/* Authors list */
+	name = g_list_first (ai->names);
+	name_email = g_list_first (ai->author_emails);
 	if (ai->author_urls)
-	{
-	    GList* name_url = g_list_first(ai->author_urls);
-	    while (name)
-	    {
-		h = ai->font_names->descent + ai->font_names->ascent;
-		item = DRAW_TEXT(x, y, GNOME_ABOUT_CONTENT_COLOR,
-				 ai->font_names, ((char *) name->data));
-		y += h + BASE_LINE_SKIP;
-		if (name_url->data)
-		{
-		    gtk_signal_connect(GTK_OBJECT(item), "event",
-				       (GtkSignalFunc) gnome_about_item_cb, ai);
-		    gtk_object_set_data(GTK_OBJECT(item), "url", (char*)name_url->data);
-#if GNOME_ABOUT_SHOW_URLS
-		    x += GNOME_ABOUT_AUTHORS_URL_INDENT;
-		    h = ai->font_names_url->descent + ai->font_names->ascent;
-		    item = DRAW_TEXT(x, y, GNOME_ABOUT_CONTENT_COLOR,
-				     ai->font_names_url, ((char *)name_url->data));
-		    y += h + BASE_LINE_SKIP;
-		    gtk_signal_connect(GTK_OBJECT(item), "event",
-				       (GtkSignalFunc) gnome_about_item_cb, ai);
-		    gtk_object_set_data(GTK_OBJECT(item), "url", (char*)name_url->data);
-		    x -= GNOME_ABOUT_AUTHORS_URL_INDENT;
-#endif
-		}
-		name = name->next;
-		name_url = name_url->next;
-	    }
-	}
-	else
-	{   
-	    while (name)
-	    {
-		h = ai->font_names->descent + ai->font_names->ascent;
-		item = DRAW_TEXT(x, y, GNOME_ABOUT_CONTENT_COLOR,
-				 ai->font_names, ((char *) name->data));
-		y += h + BASE_LINE_SKIP;
-		name = name->next;
-	    }
-	}
+	    name_url = g_list_first (ai->author_urls);
 
+	while (name)
+	{
+		h = ai->font_names->descent + ai->font_names->ascent;
+		w = gdk_string_measure(ai->font_names, (gchar*) name->data) +
+		    gdk_string_measure(ai->font_names, " ");
+		item = DRAW_TEXT(x, y, GNOME_ABOUT_CONTENT_COLOR,
+				 ai->font_names, (gchar *) name->data);
+		if (name_email->data)
+		{
+			x2 = x + w;
+			tmp = g_strdup_printf("<%s>", (gchar*) name_email->data);
+			item_email = DRAW_TEXT(x2, y, GNOME_ABOUT_CONTENT_COLOR,
+					       ai->font_names, tmp);
+			g_free (tmp);
+
+			tmp = g_strdup_printf("mailto:%s", (gchar*) name_email->data);
+			gtk_signal_connect(
+			    GTK_OBJECT(item_email), "event",
+			    (GtkSignalFunc) gnome_about_item_cb, ai);
+			gtk_object_set_data(
+			    GTK_OBJECT(item_email),
+			    "url", (gchar*)name_email->data);
+			g_free (tmp);
+		}
+		
+		y += h + BASE_LINE_SKIP;
+		name = name->next;
+		name_email = name_email->next;
+
+		if (name_url)
+		{
+			if (name_url->data)
+			{
+				gtk_signal_connect(
+					GTK_OBJECT(item), "event",
+					(GtkSignalFunc) gnome_about_item_cb, ai);
+				gtk_object_set_data(GTK_OBJECT(item),
+						    "url", (gchar*)name_url->data);
+#if GNOME_ABOUT_SHOW_URLS
+				x += GNOME_ABOUT_AUTHORS_URL_INDENT;
+				h = ai->font_names_url->descent + ai->font_names->ascent;
+				item = DRAW_TEXT(x, y, GNOME_ABOUT_CONTENT_COLOR,
+						 ai->font_names_url,
+						 ((char *)name_url->data));
+				gtk_signal_connect(
+					GTK_OBJECT(item), "event",
+					(GtkSignalFunc) gnome_about_item_cb, ai);
+				gtk_object_set_data(GTK_OBJECT(item),
+						    "url", (char*)name_url->data);
+				y += h + BASE_LINE_SKIP;
+				x -= GNOME_ABOUT_AUTHORS_URL_INDENT;
+#endif
+			}
+			name_url = name_url->next;
+		}
+	}
+	
 	if (ai->comments)
 	{
 		y += GNOME_ABOUT_CONTENT_SPACING;
@@ -499,7 +519,7 @@ gnome_about_display_comments (GnomeCanvasGroup *group,
 static void
 gnome_about_calc_size (GnomeAboutInfo *ai)
 {
-	GList *name;
+	GList *name, *email = NULL;
 #if GNOME_ABOUT_SHOW_URLS
 	GList *urls = NULL;
 #endif /* GNOME_ABOUT_SHOW_URLS */
@@ -561,6 +581,8 @@ gnome_about_calc_size (GnomeAboutInfo *ai)
 	if (ai->names)
 	{
 		name = g_list_first (ai->names);
+		if (ai->author_emails)
+			email = g_list_first (ai->author_emails);
 #if GNOME_ABOUT_SHOW_URLS
 		if (ai->author_urls)
 			urls = g_list_first (ai->author_urls);
@@ -568,6 +590,15 @@ gnome_about_calc_size (GnomeAboutInfo *ai)
 		while (name)
 		{
 			tmpl = gdk_string_measure (ai->font_names, name->data);
+			if (email)
+				if (email->data)
+				{
+					tmpl += gdk_string_measure(
+						ai->font_names, " ");
+					tmpl += gdk_string_measure(
+						ai->font_names,
+						(gchar*)email->data);
+				}
 			if (tmpl > len[3])
 				len[3] = tmpl;
 			h += (ai->font_names->descent +
@@ -587,6 +618,8 @@ gnome_about_calc_size (GnomeAboutInfo *ai)
 			}
 #endif
 			name = name->next;
+			if (email)
+				email = email->next;
 		}
 		tmpl = gdk_string_measure (ai->font_names, _("Authors: "));
 		len[3] += tmpl +
@@ -712,13 +745,13 @@ gnome_about_fill_info (GtkWidget *widget,
 	gtk_widget_set_style (widget, style);
 	gtk_style_unref (style);
 
-	/*Load logo */
+	/* Load logo */
 	ai->logo = NULL;
 	ai->logo_h = 0;
 	ai->logo_w = 0;
 	gnome_about_load_logo (ai, logo);
 
-	/*fill struct */
+	/* fill struct */
 	if (title)
 	    ai->title = g_strconcat(title, " ", version ? version : "", NULL);
 	else
@@ -734,15 +767,21 @@ gnome_about_fill_info (GtkWidget *widget,
 	ai->comments = g_strdup (comments);
 
 	ai->names = NULL;
+	ai->author_emails = NULL;
 	if (authors && authors[0])
 	{
-	    while (*authors)
-	    {
-		ai->names = g_list_append (ai->names,
-					   g_strdup (*authors));
-		authors++;
-		author_num++;
-	    }
+		gchar *name, *email;
+		while (*authors)
+		{
+			name = g_strdup (*authors);
+			gnome_about_parse_name (&name, &email);
+
+			ai->names = g_list_append (ai->names, name);
+			ai->author_emails = g_list_append (ai->author_emails, email);
+			
+			authors++;
+			author_num++;
+		}
 	}
 
 	ai->author_urls = NULL;
@@ -988,6 +1027,7 @@ gnome_about_item_cb(GnomeCanvasItem *item, GdkEvent *event,
 			{
 				gdouble x1, x2, y1, y2;
 				GnomeCanvasPoints *points;
+				guint color;
 
 
 				points = gnome_canvas_points_new (2);
@@ -998,11 +1038,18 @@ gnome_about_item_cb(GnomeCanvasItem *item, GdkEvent *event,
 				points->coords[1] = y2;
 				points->coords[2] = x2;
 				points->coords[3] = y2;
-				underline = gnome_canvas_item_new (gnome_canvas_root (item->canvas),
-								   gnome_canvas_line_get_type (),
-								   "points", points,
-								   "fill_color", "white",
-								   NULL);
+
+				gtk_object_get(
+				    GTK_OBJECT (item),
+				    "fill_color_rgba", &color,
+				    NULL);
+				
+				underline = gnome_canvas_item_new (
+				    gnome_canvas_root (item->canvas),
+				    gnome_canvas_line_get_type (),
+				    "points", points,
+				    "fill_color_rgba", color,
+				    NULL);
 				gnome_canvas_points_unref (points);
 			}
 			cursor = gnome_stock_cursor_new (GNOME_STOCK_CURSOR_POINTING_HAND); 
@@ -1031,4 +1078,53 @@ gnome_about_item_cb(GnomeCanvasItem *item, GdkEvent *event,
 		break;
 	}
 	return 0;
+}
+
+void gnome_about_parse_name(gchar **name, gchar **email)
+{
+	int closed_bracket = 0;
+	int at_num = 0;
+	gchar *buffer, *name_buf = *name;
+	int buffer_len = 0;
+	gchar *email_start = 0;
+	
+	buffer = g_new(gchar, strlen(*name));
+	
+	for (; *name_buf; name_buf++)
+	{
+		if (*name_buf == '<')
+		{
+			email_start = name_buf;
+			closed_bracket = at_num = 0;
+			name_buf++;
+			
+			for (buffer_len = 0; *name_buf; name_buf++, buffer_len++)
+			{
+				if (*name_buf == '>')
+				{
+					closed_bracket = 1;
+					break;
+				}
+				if (*name_buf == '<')
+				{
+					name_buf--;
+					break;
+				}
+				if (*name_buf == '@')
+					at_num++;
+				
+				buffer[buffer_len] = *name_buf;
+			}
+		}
+	}
+	
+	buffer[buffer_len] = '\0';
+	if (closed_bracket && at_num == 1)
+	{
+		*email = buffer;
+		*email_start = '\0';
+		return;
+	}
+	g_free(buffer);
+	*email = NULL;
 }
