@@ -4,6 +4,7 @@
  * Originally by Elliot Lee, with hacking by Chris Toshok for *_data,
  * Marc Ewing added menu support, toggle and radio support,
  * and I don't know what you other people did :)
+ * insert/removal functions by Jaka Mocnik
  */
 #include <config.h>
 #include <gdk/gdkkeysyms.h>
@@ -23,6 +24,7 @@
 
 static void gnome_app_do_menu_creation        (GnomeApp *app,
 					       GtkWidget *parent_widget,
+					       gint pos,
 					       GnomeUIInfo *menuinfo,
 					       GnomeUIBuilderData uidata);
 static void gnome_app_do_ui_signal_connect    (GnomeApp *app,
@@ -38,9 +40,11 @@ static void gnome_app_do_toolbar_creation     (GnomeApp *app,
 					       GnomeUIBuilderData uidata);
 static void gnome_app_add_help_menu_entries   (GnomeApp *app,
 					       GtkWidget *parent_widget,
+					       gint pos,
 				               GnomeUIInfo *menuinfo_item);
 static void gnome_app_add_radio_menu_entries  (GnomeApp *app,
 					       GtkWidget *parent_widget,
+					       gint pos,
 					       GnomeUIInfo *menuinfo,
 					       GnomeUIBuilderData uidata);
 static void gnome_app_add_radio_toolbar_entries(GnomeApp *app,
@@ -51,6 +55,7 @@ static void gnome_app_add_radio_toolbar_entries(GnomeApp *app,
 static void
 gnome_app_do_menu_creation(GnomeApp *app,
 			   GtkWidget *parent_widget,
+			   gint pos,
 			   GnomeUIInfo *menuinfo,
 			   GnomeUIBuilderData uidata)
 {
@@ -80,11 +85,11 @@ gnome_app_do_menu_creation(GnomeApp *app,
 	  break;
 
 	case GNOME_APP_UI_HELP:
-	  gnome_app_add_help_menu_entries(app, parent_widget, &menuinfo[i]);
+	  gnome_app_add_help_menu_entries(app, parent_widget, pos, &menuinfo[i]);
 	  break;
 
 	case GNOME_APP_UI_RADIOITEMS:
-	  gnome_app_add_radio_menu_entries(app, parent_widget,
+	  gnome_app_add_radio_menu_entries(app, parent_widget, pos,
 					   menuinfo[i].moreinfo, uidata);
 	  break;
 	  
@@ -117,7 +122,8 @@ gnome_app_do_menu_creation(GnomeApp *app,
 	    if(justify_right)
 	      gtk_menu_item_right_justify(GTK_MENU_ITEM(menuinfo[i].widget));
 
-	    gtk_menu_shell_append(GTK_MENU_SHELL(parent_widget), menuinfo[i].widget);
+	    gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo[i].widget, pos);
+	    pos++;
 
 	    /* Only connect the signal if the item is not a subtree */
 
@@ -132,6 +138,7 @@ gnome_app_do_menu_creation(GnomeApp *app,
 		gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuinfo[i].widget), submenu);
 		gnome_app_do_menu_creation(app,
 					   submenu,
+					   0,
 					   menuinfo[i].moreinfo,
 					   uidata);
 	      }
@@ -149,6 +156,7 @@ gnome_app_do_menu_creation(GnomeApp *app,
 static void
 gnome_app_add_radio_menu_entries(GnomeApp *app,
 				 GtkWidget *parent_widget,
+				 gint pos,
 				 GnomeUIInfo *menuinfo,
 				 GnomeUIBuilderData uidata)
 {
@@ -164,7 +172,8 @@ gnome_app_add_radio_menu_entries(GnomeApp *app,
       gtk_check_menu_item_set_state(GTK_CHECK_MENU_ITEM(menuinfo->widget), FALSE);
 
       gtk_widget_show(menuinfo->widget);
-      gtk_menu_shell_append(GTK_MENU_SHELL(parent_widget), menuinfo->widget);
+      gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo->widget, pos);
+      pos++;
 
       uidata->connect_func(app, menuinfo, "activate", uidata);
       gnome_app_do_ui_accelerator_setup(app, "activate", menuinfo);
@@ -176,6 +185,7 @@ gnome_app_add_radio_menu_entries(GnomeApp *app,
 static void
 gnome_app_add_help_menu_entries(GnomeApp *app,
 				GtkWidget *parent_widget,
+				gint pos,
 				GnomeUIInfo *menuinfo_item)
 {
   char buf[BUFSIZ];
@@ -225,7 +235,9 @@ gnome_app_add_help_menu_entries(GnomeApp *app,
 	  gnome_app_do_ui_accelerator_setup(app, "activate", menuinfo_item);
 	  menuinfo_item->accelerator_key = 0;
 	}
-      gtk_menu_shell_append(GTK_MENU_SHELL(parent_widget), menuinfo_item->widget);
+      gtk_menu_shell_insert(GTK_MENU_SHELL(parent_widget), menuinfo_item->widget, pos);
+      pos++;
+
       gtk_signal_connect(GTK_OBJECT (menuinfo_item->widget), "activate",
 			 (gpointer) gnome_help_display,
 			 (gpointer) entry);
@@ -255,7 +267,7 @@ gnome_app_create_menus_custom (GnomeApp *app,
   at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");
   set_accel = (at == NULL);
   if (menuinfo)
-    gnome_app_do_menu_creation(app, app->menubar, menuinfo, uibdata);
+    gnome_app_do_menu_creation(app, app->menubar, 0, menuinfo, uibdata);
   if (set_accel) {
     at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");
     if (at)
@@ -527,4 +539,161 @@ gnome_app_do_ui_accelerator_setup (GnomeApp *app,
 				   signal_name,
 				   menuinfo_item->accelerator_key,
 				   menuinfo_item->ac_mods);
+}
+
+/*
+ * path should be in the form "File/.../.../Something".
+ * "" will insert the item as the first one in the menubar
+ * "File/" will insert it as the first one in the File menu
+ * "File/Settings" will insert it after the Setting item in the File menu
+ * I hope this explains use of the insert/remove functions.
+ */
+GtkWidget *
+gnome_app_find_menu_pos (GtkWidget *parent,
+			 gchar *path,
+			 gint *pos)
+{
+  GtkBin *item;
+  GtkLabel *label = NULL;
+  GList *children;
+  gchar *name_end;
+  gint p, path_len;
+
+  g_return_val_if_fail(parent != NULL, NULL);
+  g_return_val_if_fail(path != NULL, NULL);
+  g_return_val_if_fail(pos != NULL, NULL);
+
+  children = GTK_MENU_SHELL(parent)->children;
+
+  name_end = strchr(path, '/');
+  if(name_end == NULL)
+    path_len = strlen(path);
+  else
+    path_len = name_end - path;
+
+  p = 0;
+
+  while( children && (path_len > 0) ) {
+    p++;
+    item = GTK_BIN(children->data);
+
+    if(GTK_IS_LABEL(item->child))
+      label = GTK_LABEL(item->child);
+    else if(GTK_IS_HBOX(item->child))
+      label = GTK_LABEL(g_list_next(gtk_container_children(GTK_CONTAINER(item->child)))->data);
+
+    if( label && (strncmp(path, label->label, path_len) == 0) ) {
+      if(name_end == NULL) {
+	*pos = p;
+	return parent;
+      }
+      else
+	return gnome_app_find_menu_pos(GTK_MENU_ITEM(item)->submenu, (gchar *)(name_end + 1), pos);
+    }
+
+    children = g_list_next(children);
+  }
+
+  return NULL;
+}
+
+void
+gnome_app_remove_menus(GnomeApp *app,
+		       gchar *path,
+		       gint items)
+{
+  GtkWidget *parent, *child;
+  GList *children;
+  gint pos;
+
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+
+  parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
+  if( (parent == NULL) || (pos < 1) ) {
+    g_warning("gnome_app_remove_menus: couldn't find first item to remove!");
+    return;
+  }
+
+  children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
+  while(children && items > 0) {
+    child = GTK_WIDGET(children->data);
+    children = g_list_next(children);
+    gtk_container_remove(GTK_CONTAINER(parent), child);
+    items--;
+  }
+}
+
+void
+gnome_app_insert_menus_custom (GnomeApp *app,
+			       gchar *path,
+			       GnomeUIInfo *menuinfo,
+			       GnomeUIBuilderData uibdata)
+{
+  GtkWidget *parent;
+  GtkAcceleratorTable *at;
+  gint pos;
+
+  g_return_if_fail(app != NULL);
+  g_return_if_fail(GNOME_IS_APP(app));
+  g_return_if_fail(app->menubar != NULL);
+
+  parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
+  if(parent == NULL) {
+    g_warning("gnome_app_insert_menus_custom: couldn't find insertion point for menus!");
+    return;
+  }
+
+  gnome_app_do_menu_creation(app, parent, pos, menuinfo, uibdata);
+
+  /* for the moment we don't set the accelerators */
+#if 0
+  at = gtk_object_get_data(GTK_OBJECT(app), "GtkAcceleratorTable");
+  if (at)
+    gtk_window_add_accelerator_table(GTK_WINDOW(app), at);
+#endif
+}
+
+void
+gnome_app_insert_menus(GnomeApp *app,
+		       gchar *path,
+		       GnomeUIInfo *menuinfo)
+{
+  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+					NULL, FALSE, NULL, NULL};
+
+  gnome_app_insert_menus_custom(app, path, menuinfo, &uidata);
+}
+
+void
+gnome_app_insert_menus_with_data(GnomeApp *app,
+				 gchar *path,
+				 GnomeUIInfo *menuinfo,
+				 gpointer data)
+{
+  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+					NULL, FALSE, NULL, NULL };
+	
+  uidata.data = data;
+
+  gnome_app_insert_menus_custom(app, path, menuinfo, &uidata);
+}
+
+void
+gnome_app_insert_menus_interp (GnomeApp *app,
+			       gchar *path,
+			       GnomeUIInfo *menuinfo,
+			       GtkCallbackMarshal relay_func,
+			       gpointer data,
+			       GtkDestroyNotify destroy_func)
+{
+  struct _GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
+					NULL, FALSE, NULL, NULL };
+
+  uidata.data = data;
+  uidata.is_interp = TRUE;
+  uidata.relay_func = relay_func;
+  uidata.destroy_func = destroy_func;
+
+  gnome_app_insert_menus_custom(app, path, menuinfo, &uidata);
 }

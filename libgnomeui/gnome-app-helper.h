@@ -163,6 +163,30 @@ void gnome_app_create_toolbar_with_data (GnomeApp *app,
 void gnome_app_create_toolbar_custom    (GnomeApp *app,
 					 GnomeUIInfo *tbinfo,
 					 GnomeUIBuilderData uibdata);
+GtkWidget *gnome_app_find_menu_pos      (GtkWidget *parent,
+					 gchar *path,
+					 gint *pos);
+void gnome_app_remove_menus             (GnomeApp *app,
+					 gchar *path,
+					 gint items);
+void gnome_app_insert_menus_custom      (GnomeApp *app,
+					 gchar *path,
+					 GnomeUIInfo *menuinfo,
+					 GnomeUIBuilderData uibdata);
+void gnome_app_insert_menus             (GnomeApp *app,
+					 gchar *path,
+					 GnomeUIInfo *menuinfo);
+void gnome_app_insert_menus_with_data   (GnomeApp *app,
+					 gchar *path,
+					 GnomeUIInfo *menuinfo,
+					 gpointer data);
+void gnome_app_insert_menus_interp      (GnomeApp *app,
+					 gchar *path,
+					 GnomeUIInfo *menuinfo,
+					 GtkCallbackMarshal relay_func,
+					 gpointer data,
+					 GtkDestroyNotify destroy_func);
+
 END_GNOME_DECLS
 
 #endif

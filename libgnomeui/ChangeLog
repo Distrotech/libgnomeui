@@ -1,3 +1,10 @@
+1998-06-01  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-app-helper.[ch]: added gnome_app_remove_menus() and
+	gnome_app_insert_menus_* routines. For the time being they
+	dont set or remove accelerators, since I had no idea how to
+	handle this - especially removal.
+	
 1998-05-31  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-about.c: Include "libgnome/gnome-i18nP.h" instead of
