@@ -1,7 +1,7 @@
 #ifndef TESTGNOME_H
 #define TESTGNOME_H
 
-#include <bonobo/bonobo-object-client.h>
+#include <bonobo/bonobo-object.h>
 #include <bonobo/bonobo-ui-container.h>
 #include <bonobo/bonobo-ui-component.h>
 

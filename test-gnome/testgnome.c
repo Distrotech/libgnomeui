@@ -124,8 +124,9 @@ create_newwin(gboolean normal, gchar *appname, gchar *title)
 				   GTK_SIGNAL_FUNC(quit_test), app);
 	};
 	app->ui_container = bonobo_ui_container_new ();
-	bonobo_ui_container_set_win (app->ui_container, 
-				     BONOBO_WINDOW (app->app));
+	bonobo_ui_container_set_engine (app->ui_container,
+					bonobo_window_get_ui_engine (BONOBO_WINDOW (app->app)));
+
 	app->ui_component = bonobo_ui_component_new (appname);
 	bonobo_ui_component_set_container (app->ui_component,
 					   BONOBO_OBJREF(app->ui_container));
@@ -1040,8 +1041,6 @@ main (int argc, char **argv)
 	gnome_program_init ("testGNOME", VERSION, &libgnomeui_module_info,
 			    argc, argv, NULL);
 
-	if (bonobo_init (&argc, argv) == FALSE)
-		g_error ("Could not initialize Bonobo!\n");
 	app = create_newwin (FALSE, "testGNOME", "testGNOME");
 	gtk_widget_set_usize (app->app, 200, 300);
 	box1 = gtk_vbox_new (FALSE, 0);
