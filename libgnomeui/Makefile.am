@@ -47,7 +47,7 @@ EXTRA_DIST = \
 	gnome-stock-cancel.xpm
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
-libgnomeui_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(x_libs) $(INTLLIBS)
+libgnomeui_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(x_libs)
 
 files:
         @files=`ls $(DISTFILES) 2> /dev/null `; for p in $$files; do \

@@ -179,6 +179,8 @@ void gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 {
 	GtkStyle *s = gtk_style_new(); /* i believe that i should copy the default style
 					  and change only the fg & font fields, how? */
+	GdkFont *f;
+	gchar *fo;
 
 	if(gs->logo) {
 		g_print("Warning: gnome_scores_set_logo_* can be called only once\n");
@@ -187,6 +189,14 @@ void gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 
 	if(col)
 		memcpy((void *) &s->fg[0], col, sizeof(GdkColor) );
+
+	if( font ) 
+		fo = font;
+	else 
+		fo = "-freefont-garamond-*-*-*-*-30-170-*-*-*-*-iso8859-1";
+
+	if( f = gdk_fontset_load ( fo ) )
+		s->font = f;
 
 	gs->logo = gtk_label_new(txt);
 	gtk_widget_set_style(GTK_WIDGET(gs->logo), s);
