@@ -58,8 +58,10 @@ gnome_property_object_register (GnomePropertyBox *property_box,
 	g_return_if_fail (object->descriptor != NULL);
 	g_return_if_fail (object->descriptor->init_func != NULL);
 
-	if (!object->label)
+	if (!object->label) {
 		object->label = gtk_label_new (_(object->descriptor->label));
+		gtk_object_ref (GTK_OBJECT (object->label));
+	}
 
 	gtk_notebook_append_page
 		(GTK_NOTEBOOK (property_box->notebook),
