@@ -144,16 +144,17 @@ gnome_color_picker_class_init (GnomeColorPickerClass *class)
 	widget_class = (GtkWidgetClass *) class;
 
 	color_picker_signals[COLOR_SET] =
-		gtk_signal_new ("color_set",
-				GTK_RUN_FIRST,
-				GTK_CLASS_TYPE (object_class),
-				GTK_SIGNAL_OFFSET (GnomeColorPickerClass, color_set),
-				_gnome_marshal_VOID__UINT_UINT_UINT_UINT,
-				GTK_TYPE_NONE, 4,
-				GTK_TYPE_UINT,
-				GTK_TYPE_UINT,
-				GTK_TYPE_UINT,
-				GTK_TYPE_UINT);
+		g_signal_new ("color_set",
+			      G_TYPE_FROM_CLASS (gobject_class),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GnomeColorPickerClass, color_set),
+			      NULL, NULL,
+			      _gnome_marshal_VOID__UINT_UINT_UINT_UINT,
+			      G_TYPE_NONE, 4,
+			      G_TYPE_UINT,
+			      G_TYPE_UINT,
+			      G_TYPE_UINT,
+			      G_TYPE_UINT);
 
 	gobject_class->get_property = gnome_color_picker_get_property;
 	gobject_class->set_property = gnome_color_picker_set_property;
@@ -399,7 +400,7 @@ drag_data_received (GtkWidget        *widget,
 	if (selection_data->length < 0)
 		return;
 
-	if ((selection_data->format != 16) || 
+	if ((selection_data->format != 16) ||
 	    (selection_data->length != 8)) {
 		g_warning (_("Received invalid color data\n"));
 		return;
@@ -412,7 +413,7 @@ drag_data_received (GtkWidget        *widget,
 				   dropped[2], dropped[3]);
 }
 
-static void  
+static void
 drag_data_get  (GtkWidget          *widget,
 		GdkDragContext     *context,
 		GtkSelectionData   *selection_data,
@@ -458,10 +459,9 @@ gnome_color_picker_instance_init (GnomeColorPicker *cp)
 
 	cp->_priv->drawing_area = gtk_drawing_area_new ();
 
-	gtk_drawing_area_size (GTK_DRAWING_AREA (cp->_priv->drawing_area), COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
-	gtk_signal_connect (GTK_OBJECT (cp->_priv->drawing_area), "expose_event",
-			    (GtkSignalFunc) expose_event,
-			    cp);
+	gtk_widget_set_size_request (cp->_priv->drawing_area, COLOR_PICKER_WIDTH, COLOR_PICKER_HEIGHT);
+	g_signal_connect (cp->_priv->drawing_area, "expose_event",
+			  G_CALLBACK (expose_event), cp);
 	gtk_container_add (GTK_CONTAINER (frame), cp->_priv->drawing_area);
 	gtk_widget_show (cp->_priv->drawing_area);
 
@@ -494,12 +494,10 @@ gnome_color_picker_instance_init (GnomeColorPicker *cp)
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
 			     drop_types, 1,
 			     GDK_ACTION_COPY);
-	gtk_signal_connect (GTK_OBJECT (cp),
-			    "drag_data_received",
-			    GTK_SIGNAL_FUNC (drag_data_received), cp);
-	gtk_signal_connect (GTK_OBJECT (cp),
-			    "drag_data_get",
-			    GTK_SIGNAL_FUNC (drag_data_get), cp);
+	g_signal_connect (cp, "drag_data_received",
+			  G_CALLBACK (drag_data_received), cp);
+	g_signal_connect (cp, "drag_data_get",
+			  G_CALLBACK (drag_data_get), cp);
 }
 
 static void
@@ -564,7 +562,7 @@ gnome_color_picker_finalize (GObject *object)
 GtkWidget *
 gnome_color_picker_new (void)
 {
-	return GTK_WIDGET (gtk_type_new (GNOME_TYPE_COLOR_PICKER));
+	return g_object_new (GNOME_TYPE_COLOR_PICKER, NULL);
 }
 
 /* Callback used when the color selection dialog is destroyed */
@@ -585,28 +583,33 @@ static void
 cs_ok_clicked (GtkWidget *widget, gpointer data)
 {
 	GnomeColorPicker *cp;
-	gdouble color[4];
+	GtkColorSelection *cs;
+	GdkColor color;
+	guint16 alpha;
 	gushort r, g, b, a;
 
 	cp = GNOME_COLOR_PICKER (data);
 
-	gtk_color_selection_get_color (GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (cp->_priv->cs_dialog)->colorsel),
-				       color);
+	cs = GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (cp->_priv->cs_dialog)->colorsel);
+
+	gtk_color_selection_get_current_color (cs, &color);
+	alpha = gtk_color_selection_get_current_alpha (cs);
+
 	gtk_widget_destroy (cp->_priv->cs_dialog);
 
-	cp->_priv->r = color[0];
-	cp->_priv->g = color[1];
-	cp->_priv->b = color[2];
-	cp->_priv->a = cp->_priv->use_alpha ? color[3] : 1.0;
+	cp->_priv->r = color.red / 65535.0;
+	cp->_priv->g = color.green / 65535.0;
+	cp->_priv->b = color.blue / 65535.0;
+	cp->_priv->a = cp->_priv->use_alpha ? (alpha / 65535.0) : 1.0;
 
 	render (cp);
-	gtk_widget_draw (cp->_priv->drawing_area, NULL);
+	gtk_widget_queue_draw (cp->_priv->drawing_area);
 
 	/* Notify the world that the color was set */
 
 	gnome_color_picker_get_i16 (cp, &r, &g, &b, &a);
-	gtk_signal_emit (GTK_OBJECT (cp), color_picker_signals[COLOR_SET],
-			 r, g, b, a);
+	g_signal_emit (cp, color_picker_signals[COLOR_SET], 0,
+		       r, g, b, a);
 }
 
 static int
@@ -624,7 +627,8 @@ gnome_color_picker_clicked (GtkButton *button)
 {
 	GnomeColorPicker *cp;
 	GtkColorSelectionDialog *csd;
-	gdouble color[4];
+	GdkColor color;
+	guint16 alpha;
 
 	g_return_if_fail (button != NULL);
 	g_return_if_fail (GNOME_IS_COLOR_PICKER (button));
@@ -642,27 +646,25 @@ gnome_color_picker_clicked (GtkButton *button)
                 GtkWidget *parent;
 
                 parent = gtk_widget_get_toplevel(GTK_WIDGET(cp));
-                
+
 		cp->_priv->cs_dialog = gtk_color_selection_dialog_new (cp->_priv->title);
 
                 if (parent)
                         gtk_window_set_transient_for(GTK_WINDOW(cp->_priv->cs_dialog),
                                                      GTK_WINDOW(parent));
-                
+
 		csd = GTK_COLOR_SELECTION_DIALOG (cp->_priv->cs_dialog);
-		gtk_signal_connect (GTK_OBJECT (cp->_priv->cs_dialog), "destroy",
-				    (GtkSignalFunc) cs_destroy,
-				    cp);
+		g_signal_connect (cp->_priv->cs_dialog, "destroy",
+				  G_CALLBACK (cs_destroy), cp);
 
-		gtk_signal_connect (GTK_OBJECT (cp->_priv->cs_dialog), "key_press_event",
-				    (GtkSignalFunc) key_pressed, cp);
-		gtk_signal_connect (GTK_OBJECT (csd->ok_button), "clicked",
-				    (GtkSignalFunc) cs_ok_clicked,
-				    cp);
+		g_signal_connect (cp->_priv->cs_dialog, "key_press_event",
+				  G_CALLBACK (key_pressed), cp);
+		g_signal_connect (csd->ok_button, "clicked",
+				  G_CALLBACK (cs_ok_clicked), cp);
 
-		gtk_signal_connect_object (GTK_OBJECT (csd->cancel_button), "clicked",
-					   (GtkSignalFunc) gtk_widget_destroy,
-					   GTK_OBJECT(cp->_priv->cs_dialog));
+		g_signal_connect_swapped (csd->cancel_button, "clicked",
+					  G_CALLBACK (gtk_widget_destroy),
+					  cp->_priv->cs_dialog);
 
 		/* FIXME: do something about the help button */
 
@@ -675,14 +677,16 @@ gnome_color_picker_clicked (GtkButton *button)
 	gtk_color_selection_set_has_opacity_control (GTK_COLOR_SELECTION (csd->colorsel),
 						     cp->_priv->use_alpha);
 
-	color[0] = cp->_priv->r;
-	color[1] = cp->_priv->g;
-	color[2] = cp->_priv->b;
-	color[3] = cp->_priv->use_alpha ? cp->_priv->a : 1.0;
+	color.red   = (int) (cp->_priv->r * 65535 + 0.5);
+	color.green = (int) (cp->_priv->g * 65535 + 0.5);
+	color.blue  = (int) (cp->_priv->b * 65535 + 0.5);
+	alpha       = cp->_priv->use_alpha ? (int) (cp->_priv->a * 65535 + 0.5) : 65535;
 
-	/* Hack: we set the color twice so that GtkColorSelection will remember its history */
-	gtk_color_selection_set_color (GTK_COLOR_SELECTION (csd->colorsel), color);
-	gtk_color_selection_set_color (GTK_COLOR_SELECTION (csd->colorsel), color);
+	gtk_color_selection_set_previous_color (GTK_COLOR_SELECTION (csd->colorsel), &color);
+	gtk_color_selection_set_previous_alpha (GTK_COLOR_SELECTION (csd->colorsel), alpha);
+
+	gtk_color_selection_set_current_color (GTK_COLOR_SELECTION (csd->colorsel), &color);
+	gtk_color_selection_set_current_alpha (GTK_COLOR_SELECTION (csd->colorsel), alpha);
 
 	gtk_widget_show (cp->_priv->cs_dialog);
 }
@@ -716,7 +720,7 @@ gnome_color_picker_set_d (GnomeColorPicker *cp, gdouble r, gdouble g, gdouble b,
 	cp->_priv->a = a;
 
 	render (cp);
-	gtk_widget_draw (cp->_priv->drawing_area, NULL);
+	gtk_widget_queue_draw (cp->_priv->drawing_area);
 }
 
 
@@ -777,7 +781,7 @@ gnome_color_picker_set_i8 (GnomeColorPicker *cp, guint8 r, guint8 g, guint8 b, g
 	cp->_priv->a = a / 255.0;
 
 	render (cp);
-	gtk_widget_draw (cp->_priv->drawing_area, NULL);
+	gtk_widget_queue_draw (cp->_priv->drawing_area);
 }
 
 
@@ -838,7 +842,7 @@ gnome_color_picker_set_i16 (GnomeColorPicker *cp, gushort r, gushort g, gushort 
 	cp->_priv->a = a / 65535.0;
 
 	render (cp);
-	gtk_widget_draw (cp->_priv->drawing_area, NULL);
+	gtk_widget_queue_draw (cp->_priv->drawing_area);
 }
 
 
@@ -893,7 +897,7 @@ gnome_color_picker_set_dither (GnomeColorPicker *cp, gboolean dither)
 	cp->_priv->dither = dither ? TRUE : FALSE;
 
 	render (cp);
-	gtk_widget_draw (cp->_priv->drawing_area, NULL);
+	gtk_widget_queue_draw (cp->_priv->drawing_area);
 }
 
 
@@ -936,7 +940,7 @@ gnome_color_picker_set_use_alpha (GnomeColorPicker *cp, gboolean use_alpha)
 	cp->_priv->use_alpha = use_alpha ? TRUE : FALSE;
 
 	render (cp);
-	gtk_widget_draw (cp->_priv->drawing_area, NULL);
+	gtk_widget_queue_draw (cp->_priv->drawing_area);
 }
 
 /**
