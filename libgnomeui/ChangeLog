@@ -1,3 +1,9 @@
+1999-10-21  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas.c (gnome_canvas_set_pixels_per_unit): Clear the
+	redraw area to avoid creating enormous microtile arrays when we
+	zoom repeatedly.
+
 1999-10-20  Elliot Lee  <sopwith@redhat.com>
 
 	* gnome-init.c: Fix the memory leak AND avoid the bug from the first fix.
