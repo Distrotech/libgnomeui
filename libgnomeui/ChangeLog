@@ -1,3 +1,7 @@
+1999-08-17  Tim P. Gerla  <timg@means.net>
+
+	* gnome-less.c: Add documentation
+
 1999-08-17  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas-line.c (gnome_canvas_line_set_arg): Typo fix; do

@@ -116,6 +116,14 @@ gnome_less_init (GnomeLess *gl)
   gtk_container_add(GTK_CONTAINER(gl), hbox);
 }
 
+/**
+ * gnome_less_new
+ *
+ * Creates a new GnomeLess widget.
+ * 
+ * Returns:
+ * &GtkWidget pointer to a new GNOME less widget
+ **/
 
 GtkWidget* gnome_less_new (void)
 {
@@ -136,6 +144,18 @@ static void gnome_less_destroy (GtkObject *gl)
   if (GTK_OBJECT_CLASS(parent_class)->destroy)
     (* (GTK_OBJECT_CLASS(parent_class)->destroy))(gl);
 }
+
+/**
+ * gnome_less_show_file
+ * @gl: Pointer to GnomeLess widget
+ * @path: Pathname of file to be displayed
+ *
+ * Displays a file in a GnomeLess widget. Replaces any text already being displayed
+ * in the widget.
+ *
+ * Returns:
+ * %TRUE if successful, %FALSE if not. Error stored in %errno.
+ **/
 
 gboolean gnome_less_show_file(GnomeLess * gl, const gchar * path)
 {
@@ -171,6 +191,19 @@ gboolean gnome_less_show_file(GnomeLess * gl, const gchar * path)
   else return TRUE;
 }
 
+/**
+ * gnome_less_show_command
+ * @gl: Pointer to GnomeLess widget
+ * @command_line: Command to be executed
+ *
+ * Runs the shell command specified in @command_line, and places the output of that command
+ * in the GnomeLess widget specified by @gl. Replaces any text already being displayed in the
+ * widget.
+ *
+ * Returns:
+ * %TRUE if successful, %FALSE if not. Error stored in %errno.
+ **/
+
 gboolean gnome_less_show_command(GnomeLess * gl,
 				 const gchar * command_line)
 {
@@ -200,6 +233,18 @@ gboolean gnome_less_show_command(GnomeLess * gl,
 }
 
 #define GLESS_BUFSIZE 1024
+
+/**
+ * gnome_less_show_filestream
+ * @gl: Pointer to GnomeLess widget
+ * @f: Filestream to be displayed in the widget
+ *
+ * Reads all of the text from filestream @f, and places it in the GnomeLess widget @gl. Replaces any text
+ * already being displayed.
+ *
+ * Returns:
+ * %TRUE if successful, %FALSE if not. Error stored in %errno.
+ **/
 
 gboolean gnome_less_show_filestream(GnomeLess * gl, FILE * f)
 {
@@ -234,6 +279,18 @@ gboolean gnome_less_show_filestream(GnomeLess * gl, FILE * f)
   }
 }
 
+/**
+ * gnome_less_show_fd
+ * @gl: Pointer to GnomeLess widget
+ * @file_descriptor: Filestream to be displayed in the widget
+ *
+ * Reads all of the text from file descriptor @file_descriptor, and places it in the GnomeLess widget @gl.
+ * Replaces any text already being displayed.
+ *
+ * Returns:
+ * %TRUE if successful, %FALSE if not. Error stored in %errno.
+ **/
+
 gboolean gnome_less_show_fd         (GnomeLess * gl, int file_descriptor)
 {
   FILE * f;
@@ -258,6 +315,16 @@ static void gnome_less_append_string(GnomeLess * gl, const gchar * s)
   gtk_text_insert(gl->text, gl->font, NULL, NULL, s, strlen(s)); 
 }
 
+/**
+ * gnome_less_show_string
+ * @gl: Pointer to GnomeLess widget
+ * @s: String to be displayed
+ *
+ * Displays a string in the GnomeLess widget @gl. Replaces any text
+ * already being displayed.
+ *
+ **/
+ 
 void gnome_less_show_string(GnomeLess * gl, const gchar * s)
 {
   g_return_if_fail(gl != NULL);
@@ -270,6 +337,13 @@ void gnome_less_show_string(GnomeLess * gl, const gchar * s)
   gtk_text_thaw(gl->text);
 }
 
+/**
+ * gnome_less_clear
+ * @gl: Pointer to GnomeLess widget
+ *
+ * Clears all text from GnomeLess widget @gl.
+ **/
+
 void gnome_less_clear (GnomeLess * gl)
 {
   g_return_if_fail(gl != NULL);
@@ -278,6 +352,18 @@ void gnome_less_clear (GnomeLess * gl)
   gtk_editable_delete_text(GTK_EDITABLE(gl->text), 0,
 			   gtk_text_get_length(GTK_TEXT(gl->text)));
 }
+
+/**
+ * gnome_less_set_font
+ * @gl: Pointer to GnomeLess widget
+ * @font: Pointer to GdkFont
+ *
+ * Sets the font of the text to be displayed in the GnomeLess widget @gl to @font.
+ *
+ * Note: This will not affect text already being displayed.
+ * If you use this function after adding text to the widget, you must show it again
+ * by using #gnome_less_reshow or one of the gnome_less_show commands.
+ **/
 
 void gnome_less_set_font(GnomeLess * gl, GdkFont * font)
 {
@@ -293,12 +379,32 @@ void gnome_less_set_font(GnomeLess * gl, GdkFont * font)
   }
 }
 
+/**
+ * gnome_less_fixed_font
+ * @gl: Pointer to GnomeLess widget
+ *
+ * This function is obsolete. Please use #gnome_less_set_fixed_font instead.
+ **/
+
 void gnome_less_fixed_font(GnomeLess * gl)
 {
   g_warning("Please use gnome_less_set_fixed_font instead. Sorry!\n");
   gnome_less_set_fixed_font(gl, TRUE);
 }
 
+/**
+ * gnome_less_set_fixed_font
+ * @gl: Pointer to GNOME Less widget
+ * @fixed: Whether or not to use a fixed font
+ *
+ * Specifies whether or not new text should be displayed using a fixed font. Pass TRUE
+ * in @fixed to use a fixed font, or FALSE to revert to the default GtkText font.
+ *
+ * Note: This will not affect text already being displayed.
+ * If you use this function after adding text to the widget, you must show it again
+ * by using #gnome_less_reshow or one of the gnome_less_show commands.
+ **/
+  
 void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed)
 {
   GdkFont * font;
@@ -327,6 +433,16 @@ void gnome_less_set_fixed_font  (GnomeLess * gl, gboolean fixed)
   gnome_less_set_font(gl, font);  
 }
 
+/**
+ * gnome_less_write_fd 
+ * @gl: Pointer to GnomeLess widget
+ * @fd: File descriptor
+ *
+ * Writes the text displayed in the GnomeLess widget @gl to file descriptor @fd.
+ *
+ * Returns: %TRUE if successful, %FALSE if not. Error stored in %errno.
+ **/
+
 gboolean gnome_less_write_fd (GnomeLess * gl, int fd)
 {
   gchar * contents;
@@ -350,6 +466,16 @@ gboolean gnome_less_write_fd (GnomeLess * gl, int fd)
   }
   else return TRUE; /* Nothing to write. */
 }
+
+/**
+ * gnome_less_write_file
+ * @gl: Pointer to GnomeLess widget
+ * @path: Path of file to be written
+ *
+ * Writes the text displayed in the GnomeLess widget @gl to the file specified by @path.
+ *
+ * Returns: %TRUE if successful, %FALSE if not. Error stored in %errno.
+ **/
 
 gboolean gnome_less_write_file   (GnomeLess * gl, const gchar * path)
 {
@@ -376,6 +502,14 @@ gboolean gnome_less_write_file   (GnomeLess * gl, const gchar * path)
   else return TRUE;
 }
 
+/**
+ * gnome_less_reshow
+ * @gl: Pointer to GnomeLess widget
+ *
+ * Re-displays all of the text in the GnomeLess widget @gl. If the font has changed since
+ * the last show/reshow of text, it will update the current text to the new font.
+ **/
+ 
 void gnome_less_reshow          (GnomeLess * gl)
 {
   gchar * contents;
@@ -407,6 +541,3 @@ static gint text_clicked_cb(GtkText * text, GdkEventButton * e,
                  NULL, e->button, time(NULL));
   return TRUE; 
 }
-
-
-
