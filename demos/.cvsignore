@@ -1,0 +1,10 @@
+Makefile.in
+Makefile
+.deps
+.libs
+selector_demo
+stock_demo
+winhints_demo
+dock_demo
+animator_demo
+mdi_demo
