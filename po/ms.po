@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-08-06 15:26+0200\n"
+"POT-Creation-Date: 2002-08-09 03:48+0800\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -19,7 +19,7 @@ msgstr "Kredit"
 
 #: libgnomeui/gnome-about.c:223
 msgid "_Written by"
-msgstr "Di_tulis oleh"
+msgstr "Ditu_lis oleh"
 
 # libgnomeui/gnome-dentry-edit.c:374
 #: libgnomeui/gnome-about.c:238
@@ -170,7 +170,7 @@ msgstr "ID"
 # libgnomeui/gnome-client.c:837
 #: libgnomeui/gnome-client.c:863
 msgid "Specify prefix of saved configuration"
-msgstr "Nyatakan prefiks fail yang disimpan"
+msgstr "Nyatakan prefiks konfigurasi yang disimpan"
 
 # libgnomeui/gnome-client.c:837
 #: libgnomeui/gnome-client.c:863
@@ -506,7 +506,7 @@ msgstr "Hantar laporan pepijat"
 # libgnomeui/gnome_segv.c:104
 #: libgnomeui/gnome_segv.c:151
 msgid "Debug"
-msgstr "Nyah-pepijat"
+msgstr "Nyahpepijat"
 
 # libgnomeui/gnome_segv.c:111
 #: libgnomeui/gnome_segv.c:159
@@ -570,6 +570,7 @@ msgstr "Petua item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -632,6 +633,7 @@ msgstr "_Permainan"
 
 # libgnomeui/gnome-app-helper.c:92
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Bantuan"
 
@@ -677,12 +679,12 @@ msgstr "Simpan fail ini dengan nama lain"
 #. Revert
 #: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
-msgstr "_Kembalikan"
+msgstr "_Berbalik"
 
 # libgnomeui/gnome-app-helper.c:139
 #: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
-msgstr "Kembalikan ke fail yang telah disimpan"
+msgstr "Berbalik ke fail yang telah disimpan"
 
 # libgnomeui/gnome-app-helper.c:144
 #. Print
@@ -699,7 +701,7 @@ msgstr "Cetak fail ini"
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "T_etapan cetak"
+msgstr "T_etapan Cetakan..."
 
 # libgnomeui/gnome-app-helper.c:150
 #: libgnomeui/gnome-app-helper.c:137
@@ -715,7 +717,7 @@ msgstr "_Tutup"
 # libgnomeui/gnome-app-helper.c:155
 #: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr "Tutup fail ini"
+msgstr "Tutup fail semasa"
 
 # libgnomeui/gnome-app-helper.c:168
 #. Exit
@@ -860,12 +862,12 @@ msgstr "Konfigurasikan aplikasi"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Perihal"
 
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Perihal aplikasi ini"
 
@@ -898,7 +900,7 @@ msgid "_Close This Window"
 msgstr "_Tutup Tetingkap Ini"
 
 # libgnomeui/gnome-app-helper.c:253
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Tutup tetingkap ini"
 
@@ -923,17 +925,17 @@ msgstr "_kaku permainan"
 # libgnomeui/gnome-app-helper.c:267
 #: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "Kaku permainan sebentar"
+msgstr "Kaku permainan"
 
 # libgnomeui/gnome-app-helper.c:271
 #: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
-msgstr "Jalankan _semula permainan"
+msgstr "_Ulanghidup permainan"
 
 # libgnomeui/gnome-app-helper.c:272
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr "Jalankan semula permainan"
+msgstr "Mulakan semula permainan"
 
 # libgnomeui/gnome-app-helper.c:276
 #: libgnomeui/gnome-app-helper.c:263
@@ -948,7 +950,7 @@ msgstr "Nyahcara pindahan terakhir"
 # libgnomeui/gnome-app-helper.c:281
 #: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
-msgstr "_Ulangcara Pindahan"
+msgstr "_Ulangcara pindahan"
 
 # libgnomeui/gnome-app-helper.c:282
 #: libgnomeui/gnome-app-helper.c:269
@@ -1065,7 +1067,7 @@ msgstr " - OK? (ya atau tidak)"
 # libgnomeui/gnome-app-util.c:687
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
-msgstr "Perjalanan"
+msgstr "Progres"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
@@ -1077,7 +1079,7 @@ msgstr "Rentetan ID aplikasi"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr "id Sejarah"
+msgstr "Id Sejarah"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -1247,7 +1249,7 @@ msgstr "Prebiu teks"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "Prebiu teks yang dpaparkan pada dialog"
+msgstr "Prebiu teks yang dipaparkan pada dialog"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
@@ -1389,7 +1391,7 @@ msgstr "Lungsur"
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
-msgstr "path ikon"
+msgstr "Path ikon"
 
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
@@ -1490,8 +1492,9 @@ msgid "Sans 14"
 msgstr "Sans 14"
 
 # libgnomeui/gnome-app-helper.c:160
-#~ msgid "Exit the test"
-#~ msgstr "Keluar ujian"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Keluar ujian"
 
 # libgnomeui/gnome-app-helper.c:204
 #~ msgid "Find _Again"
