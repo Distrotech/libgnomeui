@@ -1,3 +1,9 @@
+1999-01-06  Nat Friedman  <nat@nat.org>
+
+	* gnome-app-helper.h: Added the little tool-tips-like descriptions
+ 	of each standard menu item's function.  Cleaned the macros up a
+ 	bit and grouped them according to the menu in which they belong.
+
 Wed Jan 06 18:03:59 1999  George Lebl  <jirka@5z.com>
 
 	* gnome-app-helper.c: cast data to (gpointer) on the new macros,
