@@ -1115,7 +1115,10 @@ dockitem_new(GladeXML *xml, GNode *node)
 static GtkWidget *
 menubar_new(GladeXML *xml, GNode *node)
 {
-	return gtk_menu_bar_new();
+	GtkWidget *wid = gtk_menu_bar_new();
+
+	gtk_menu_bar_set_shadow_type(GTK_MENU_BAR(wid), GTK_SHADOW_NONE);
+	return wid;
 }
 
 static GtkWidget *
@@ -1208,6 +1211,10 @@ toolbar_new(GladeXML *xml, GNode *node)
 	gtk_toolbar_set_space_size(GTK_TOOLBAR(tool), space_size);
 	gtk_toolbar_set_space_style(GTK_TOOLBAR(tool), spaces);
 	gtk_toolbar_set_tooltips(GTK_TOOLBAR(tool), tooltips);
+
+	gtk_toolbar_set_button_relief(GTK_TOOLBAR(tool),
+		gnome_preferences_get_toolbar_relief_btn()?GTK_RELIEF_NORMAL:
+				      GTK_RELIEF_NONE);
 	return tool;
 }
 
