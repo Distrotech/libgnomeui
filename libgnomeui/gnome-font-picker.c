@@ -1003,7 +1003,6 @@ static void
 gnome_font_picker_label_use_font_in_label  (GnomeFontPicker *gfp)
 {
 	PangoFontDescription *desc;
-	GtkStyle *style;
 
 	desc = pango_font_description_from_string (gfp->_priv->font_name);
 	if (desc == NULL) {
@@ -1014,18 +1013,9 @@ gnome_font_picker_label_use_font_in_label  (GnomeFontPicker *gfp)
 	pango_font_description_set_size (desc,
 					 gfp->_priv->use_font_in_label_size *
 					 PANGO_SCALE);
+	/* Modify font style */
+	gtk_widget_modify_font (gfp->_priv->font_label, desc);
 
-	/* FIXME: listen for style changes */
-	/* Change label style */
-	gtk_widget_ensure_style (gfp->_priv->font_label);
-	style = gtk_style_copy (gfp->_priv->font_label->style);
-	if (style->font_desc != NULL)
-		pango_font_description_free (style->font_desc);
-
-	style->font_desc = desc;
-
-	gtk_widget_set_style (gfp->_priv->font_label, style);
-	g_object_unref (G_OBJECT (style));
 } /* gnome_font_picker_set_label_font */
 
 static void
