@@ -32,7 +32,7 @@
 static void             gnome_mdi_class_init     (GnomeMDIClass  *);
 static void             gnome_mdi_init           (GnomeMDI *);
 static void             gnome_mdi_destroy        (GtkObject *);
-static void             gnome_mdi_set_active_view(GnomeMDI *, GtkWidget *);
+static void             set_active_view          (GnomeMDI *, GtkWidget *);
 
 static GtkWidget       *find_item_by_label       (GtkMenuShell *, gchar *);
 
@@ -573,11 +573,11 @@ static void toplevel_focus(GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi) {
   mdi->active_window = app;
 
   if((mdi->mode == GNOME_MDI_TOPLEVEL) || (mdi->mode == GNOME_MDI_MODAL))
-    gnome_mdi_set_active_view(mdi, app->contents);
+    set_active_view(mdi, app->contents);
   else if((mdi->mode == GNOME_MDI_NOTEBOOK) && GTK_NOTEBOOK(app->contents)->cur_page)
-    gnome_mdi_set_active_view(mdi, GTK_NOTEBOOK(app->contents)->cur_page->child);
+    set_active_view(mdi, GTK_NOTEBOOK(app->contents)->cur_page->child);
   else
-    gnome_mdi_set_active_view(mdi, NULL);
+    set_active_view(mdi, NULL);
 }
 
 static void book_drag_begin(GtkNotebook *book, GdkEvent *event, GnomeMDI *mdi) {
@@ -854,7 +854,7 @@ static void app_set_view(GnomeMDI *mdi, GnomeApp *app, GtkWidget *view) {
     gtk_object_set_data(GTK_OBJECT(app), ITEM_COUNT_KEY, NULL);
   }
 
-  gnome_mdi_set_active_view(mdi, view);
+  set_active_view(mdi, view);
 }
 
 static void app_destroy(GnomeApp *app) {
@@ -970,7 +970,7 @@ static void top_add_view(GnomeMDI *mdi, GnomeMDIChild *child, GtkWidget *view) {
     gtk_widget_show(GTK_WIDGET(window));
 }
 
-static void gnome_mdi_set_active_view(GnomeMDI *mdi, GtkWidget *view) {
+static void set_active_view(GnomeMDI *mdi, GtkWidget *view) {
   GnomeMDIChild *child;
 
   if(view)
@@ -983,6 +983,23 @@ static void gnome_mdi_set_active_view(GnomeMDI *mdi, GtkWidget *view) {
 
   mdi->active_view = view;
   mdi->active_child = child;
+}
+
+void gnome_mdi_set_active_view(GnomeMDI *mdi, GtkWidget *view) {
+  GtkWindow *window;
+
+  g_return_if_fail(mdi != NULL);
+  g_return_if_fail(GNOME_IS_MDI(mdi));
+  g_return_if_fail(view != NULL);
+  g_return_if_fail(GTK_IS_WIDGET(view));
+
+  set_active_view(mdi, view);
+
+  window = GTK_WINDOW(gnome_mdi_get_app_from_view(mdi->active_view));
+
+  if(mdi->mode == GNOME_MDI_NOTEBOOK)
+    set_page_by_widget
+      (GTK_NOTEBOOK(GNOME_APP(window)->contents), mdi->active_view);
 }
 
 gint gnome_mdi_add_view(GnomeMDI *mdi, GnomeMDIChild *child) {
@@ -1349,6 +1366,13 @@ GnomeMDIChild *gnome_mdi_active_child(GnomeMDI *mdi) {
     return(gnome_mdi_get_child_from_view(mdi->active_view));
 
   return NULL;
+}
+
+GtkWidget *gnome_mdi_active_view(GnomeMDI *mdi) {
+  g_return_val_if_fail(mdi != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_MDI(mdi), NULL);
+
+  return mdi->active_view;
 }
 
 void gnome_mdi_set_menu_template(GnomeMDI *mdi, GnomeUIInfo *menu_tmpl) {

@@ -1,3 +1,12 @@
+1998-09-06  Martin Baulig  <martin@home-of-linux.org>
+
+	* gnome-mdi.h (gnome_mdi_active_view): New function.
+	(gnome_mdi_set_active_view): New function.
+
+	* gnome-mdi.c: Renamed static `gnome_mdi_set_active_view()'
+ 	to `set_active_view()' and added new global function
+ 	`gnome_mdi_set_active_view()'.
+
 Fri Sep 04 17:53:41 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-color-picker.c: initialize use_alpha
