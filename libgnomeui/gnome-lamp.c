@@ -18,7 +18,11 @@
 
    Author: Eckehard Berns  */
 
+#include <gtk/gtkmain.h>
 #include "gnome-lamp.h"
+
+/* timeout in msecs for blinking lamps */
+#define GNOME_LAMP_TIMEOUT 200
 
 
 static char * lamp1_xpm[] = {
@@ -421,13 +425,13 @@ static char lamp1_mask_rgb[] = {
 0x00, 
 };
 
-static GdkColor gnome_lamp_clear   = { 0, 0xc0c0, 0xc0c0, 0xc0c0 };
-static GdkColor gnome_lamp_red     = { 0, 0xffff, 0x0000, 0x0000 };
-static GdkColor gnome_lamp_green   = { 0, 0x0000, 0xffff, 0x0000 };
-static GdkColor gnome_lamp_blue    = { 0, 0x0000, 0x0000, 0xffff };
-static GdkColor gnome_lamp_yellow  = { 0, 0xffff, 0xffff, 0x0000 };
-static GdkColor gnome_lamp_aqua    = { 0, 0x0000, 0xffff, 0xffff };
-static GdkColor gnome_lamp_purple  = { 0, 0xffff, 0x0000, 0xffff };
+static GdkColor gnome_lamp_clear   = { 0, 0xaaaa, 0xaaaa, 0xaaaa };
+static GdkColor gnome_lamp_red     = { 0, 0xaaaa, 0x0000, 0x0000 };
+static GdkColor gnome_lamp_green   = { 0, 0x0000, 0xaaaa, 0x0000 };
+static GdkColor gnome_lamp_blue    = { 0, 0x0000, 0x0000, 0xaaaa };
+static GdkColor gnome_lamp_yellow  = { 0, 0xaaaa, 0xaaaa, 0x0000 };
+static GdkColor gnome_lamp_aqua    = { 0, 0x0000, 0xaaaa, 0xaaaa };
+static GdkColor gnome_lamp_purple  = { 0, 0xaaaa, 0x0000, 0xaaaa };
 
 
 /*
@@ -467,12 +471,6 @@ GHashTable *type_hash(void)
 
 
 static void
-start_timer(void)
-{
-}
-
-
-static void
 seqchar_to_color(char c, GdkColor *color_return)
 {
 	switch (c) {
@@ -508,6 +506,87 @@ seqchar_to_color(char c, GdkColor *color_return)
 
 
 /*
+ * timer and widget list
+ */
+
+static guint gnome_lamp_timer = 0;
+static GList *gnome_lamp_list = NULL;
+
+static void
+gnome_lamp_list_add(GnomeLamp *lamp)
+{
+	g_return_if_fail(lamp != NULL);
+	g_return_if_fail(GNOME_IS_LAMP(lamp));
+
+	if (!gnome_lamp_list) {
+		gnome_lamp_list = g_list_alloc();
+		gnome_lamp_list->data = lamp;
+		return;
+	}
+	g_list_append(gnome_lamp_list, lamp);
+}
+
+
+static void
+gnome_lamp_list_remove(GnomeLamp *lamp)
+{
+	g_return_if_fail(lamp != NULL);
+	g_return_if_fail(GNOME_IS_LAMP(lamp));
+
+	if (!gnome_lamp_list) return;
+	gnome_lamp_list = g_list_remove(gnome_lamp_list, lamp);
+}
+
+
+static void
+gnome_lamp_foreach(gpointer data, gpointer user_data)
+{
+	gint *handled = user_data;
+	GnomeLamp *lamp = data;
+	GdkColor color;
+
+	g_return_if_fail(data != NULL);
+	g_return_if_fail(user_data != NULL);
+	g_return_if_fail(GNOME_IS_LAMP(lamp));
+
+	if (!lamp->color_seq[0]) return;
+	if (!lamp->color_seq[1]) return;
+	*handled = TRUE;
+	lamp->index++;
+	if (!lamp->color_seq[lamp->index]) lamp->index = 0;
+	/* TODO: this should just draw a cached pixmap for speedups */
+	seqchar_to_color(lamp->color_seq[lamp->index], &color);
+	gnome_lamp_set_color(lamp, &color);
+}
+
+
+static gint
+gnome_lamp_timer_callback(gpointer data)
+{
+	gint handled = FALSE;
+
+	if (!gnome_lamp_list) {
+		gnome_lamp_timer = 0;
+		return FALSE;
+	}
+	g_list_foreach(gnome_lamp_list, gnome_lamp_foreach, &handled);
+	if (!handled)
+		gnome_lamp_timer = 0;
+	return handled;
+}
+
+
+static void
+start_timer(void)
+{
+	if (gnome_lamp_timer) return;
+	gnome_lamp_timer = gtk_timeout_add(GNOME_LAMP_TIMEOUT,
+					   gnome_lamp_timer_callback,
+					   NULL);
+}
+
+
+/*
  * widget
  */
 
@@ -518,6 +597,8 @@ gnome_lamp_destroy(GtkObject *object)
 
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_LAMP (object));
+
+	gnome_lamp_list_remove(GNOME_LAMP(object));
 
 	object_class = gtk_type_class(gnome_pixmap_get_type());
 	if (object_class->destroy)
@@ -541,6 +622,7 @@ gnome_lamp_init(GnomeLamp *lamp)
 	lamp->color_seq[1] = 0;
 	lamp->index = 0;
 	gnome_lamp_set_color(lamp, &lamp->color);
+	gnome_lamp_list_add(lamp);
 }
 
 guint
@@ -625,6 +707,7 @@ gnome_lamp_set_sequence(GnomeLamp *lamp, const char *sequence)
 	g_return_if_fail(strlen(sequence) <= GNOME_LAMP_MAX_SEQUENCE);
 
 	strcpy(lamp->color_seq, sequence);
+	lamp->index = 0;
 	if (strlen(lamp->color_seq) > 1) {
 		start_timer();
 	}
@@ -641,6 +724,7 @@ gnome_lamp_set_sequence(GnomeLamp *lamp, const char *sequence)
 #define USE_IMAGE       0
 /* color context is ways faster than rasters best_color_get */
 #define USE_CC          1
+#define ALWAYS_USE_CC   0
 
 #if FORCE_STRIPPLE
 #undef FORCE_FULL
@@ -655,14 +739,17 @@ gnome_lamp_set_pixmap_color(GnomeLamp *lamp)
 	gint w, h, x, y;
 	GdkVisual *visual;
 #if !FORCE_STRIPPLE
+	guint32 r, g, b;
 #if USE_IMAGE
 	GdkImage *image;
 #endif
 #endif
 #if USE_CC
 	GdkColorContext *cc;
+#if ALWAYS_USE_CC || (!FORCE_STRIPPLE)
 	gint failed;
 #endif
+#endif /* USE_CC */
 	const unsigned char *p;
 	GdkColormap *cmap;
 	GdkColor c;
@@ -700,16 +787,19 @@ gnome_lamp_set_pixmap_color(GnomeLamp *lamp)
 #if !FORCE_FULL
 		c.red = red; c.green = green; c.blue = blue;
 #if USE_CC
+#if !ALWAYS_USE_CC
 		/* it might be better to use imlib's best-color-match in modes
 		 * where colormap entries are short. I need only one call to
 		 * the function, so speed is no problem here. */
-		/* c.pixel = gdk_color_context_get_pixel(cc, red, green, blue, &failed); */
 		gdk_imlib_best_color_get(&c);
+#else /* ALWAYS_USE_CC */
+		c.pixel = gdk_color_context_get_pixel(cc, red, green, blue, &failed);
+#endif /* ALWAYS_USE_CC */
 
 		gdk_color_context_free(cc);
-#else
+#else /* !USE_CC */
 		gdk_imlib_best_color_get(&c);
-#endif
+#endif /* !USE_CC */
 		gdk_gc_set_foreground(gc, &c);
 		p = lamp->mask;
 		for (y = 0; y < h; y ++) {
@@ -741,9 +831,33 @@ gnome_lamp_set_pixmap_color(GnomeLamp *lamp)
 				p += 3;
 				continue;
 			}
+			/* this is a better, but more expensive calculation */
+			r = ((guint32)(*p++) * red) >> 7;
+			g = ((guint32)(*p++) * green) >> 7;
+			b = ((guint32)(*p++) * blue) >> 7;
+			if (r > 0xffff) {
+				g += (r - 0xffff) >> 2;
+				b += (r - 0xffff) >> 2;
+			}
+			if (g > 0xffff) {
+				r += (g - 0xffff) >> 2;
+				b += (g - 0xffff) >> 2;
+			}
+			if (b > 0xffff) {
+				r += (b - 0xffff) >> 2;
+				g += (b - 0xffff) >> 2;
+			}
+			if (r > 0xffff) r = 0xffff;
+			if (g > 0xffff) g = 0xffff;
+			if (b > 0xffff) b = 0xffff;
+			c.red = r;
+			c.green = g;
+			c.blue = b;
+			/*
 			c.red = ((guint32)(*p++) * red) >> 8;
 			c.green = ((guint32)(*p++) * green) >> 8;
 			c.blue = ((guint32)(*p++) * blue) >> 8;
+			 */
 #if USE_CC
 			c.pixel = gdk_color_context_get_pixel(cc, c.red, c.green, c.blue, &failed);
 #else

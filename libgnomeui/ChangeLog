@@ -1,3 +1,7 @@
+Tue Jun  2 00:50:56 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-lamp.c: added sequence support.
+
 Mon Jun  1 17:48:28 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-lamp.c (gnome_lamp_set_pixmap_color): use imlib's best color

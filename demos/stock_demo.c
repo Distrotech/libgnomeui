@@ -377,6 +377,10 @@ toggle_button(GtkWidget *button, GnomeStockPixmapWidget *w)
 
 
 
+#undef USE_LAMP
+#undef USE_BUTTON
+
+#ifdef USE_LAMP
 static void
 lamp_value_changed(GtkAdjustment *adj, GnomeLamp *lamp)
 {
@@ -387,11 +391,15 @@ lamp_value_changed(GtkAdjustment *adj, GnomeLamp *lamp)
 	c.blue = (c.red < 0x8000) ? c.red + 0x8000 : c.green + 0x8000;
 	gnome_lamp_set_color(lamp, &c);
 }
+#endif /* USE_LAMP */
 
 static void
 fill_table(GtkWidget *window, GtkTable *table)
 {
-	GtkWidget *w, *button, *lamp;
+	GtkWidget *w, *button;
+#ifdef USE_LAMP
+	GtkWidget *lamp;
+#endif
 	gint row, column;
 
 	row = column = 0;
@@ -726,7 +734,7 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 2, row + 3);
 
-#if 0
+#ifdef USE_BUTTON
 	column++;
 	w = gnome_pixmap_new_from_file(gnome_pixmap_file("gnome-unknown.png"));
 	w = gnome_pixmap_button(w, "Test");
@@ -737,9 +745,9 @@ fill_table(GtkWidget *window, GtkTable *table)
 	gtk_widget_set_sensitive(w, FALSE);
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
-#endif
+#endif /* USE_BUTTON */
 
-#if 0
+#ifdef USE_LAMP
 	column++;
 	lamp = gnome_lamp_new();
 	gtk_widget_show(lamp);
@@ -751,7 +759,13 @@ fill_table(GtkWidget *window, GtkTable *table)
 	w = gtk_hscale_new(GTK_ADJUSTMENT(w));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, column, column + 1, row + 1, row + 2);
-#endif
+
+	column++;
+	w = gnome_lamp_new();
+	gnome_lamp_set_sequence(GNOME_LAMP(w), "RPBAGABPRYGABP");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, column, column + 1, row, row + 1);
+#endif /* USE_LAMP */
 
 	gtk_table_set_col_spacings(table, 10);
 	gtk_table_set_row_spacing(table, 2, 10);
