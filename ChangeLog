@@ -1,5 +1,10 @@
 2001-06-13  Martin Baulig  <baulig@suse.de>
 
+	* configure.in: Use PKG_CHECK_MODULES from pkg-config to
+	check for stuff.
+
+2001-06-13  Martin Baulig  <baulig@suse.de>
+
 	* gnome.h: Moved to libcompat.
 
 	The plan with #include <gnome.h> is the same than with

@@ -5,8 +5,7 @@ INCLUDES = \
 	-I$(top_builddir)/intl				\
 	-I$(top_srcdir)/libgnomeui			\
 	$(WARN_CFLAGS)					\
-	$(LIBGNOMECANVAS_CFLAGS)			\
-	$(GCONF_CFLAGS)					\
+	$(LIBGNOMEUI_DEMOS_CFLAGS)			\
         -DGNOMEUILIBDIR=\""$(libdir)"\" 		\
         -DGNOMEUIDATADIR=\""$(datadir)"\" 		\
         -DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\
@@ -18,7 +17,7 @@ INCLUDES = \
 
 LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui-2.la \
-	$(INTLLIBS)
+	$(LIBGNOMEUI_DEMOS_LIBS)
 
 noinst_PROGRAMS = \
 	winhints_demo

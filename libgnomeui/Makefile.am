@@ -31,9 +31,7 @@ INCLUDES = \
         -DGNOMEUILOCALEDIR=\""$(gnomelocaledir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	$(WARN_CFLAGS)					\
-	$(LIBGNOME_CFLAGS)				\
-	$(LIBGNOMECANVAS_CFLAGS)			\
-	$(LIBBONOBOUI_CFLAGS)				\
+	$(LIBGNOMEUI_CFLAGS)				\
 	-DGTK_VERSION=\""$(GTK_VERSION)"\"		\
 	-DVERSION=\"$(VERSION)\"
 
@@ -217,9 +215,7 @@ libgnomeui_2_la_LDFLAGS = \
 	-version-info $(LIB_VERSION)
 
 libgnomeui_2_la_LIBADD = \
-	$(LIBGNOME_LIBS)			\
-	$(LIBGNOMECANVAS_LIBS)			\
-	$(LIBBONOBOUI_LIBS)
+	$(LIBGNOMEUI_LIBS)
 
 LDADD = \
 	libgnomeui-2.la

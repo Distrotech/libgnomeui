@@ -22,9 +22,7 @@ INCLUDES = \
 	-DGNOMEUIXMLDBFILE=\""$(componentdir)/selector-components.xmldb"\" \
 	-DG_LOG_DOMAIN=\"GnomeUI-Components\"		\
 	$(WARN_CFLAGS)					\
-	$(LIBGNOME_CFLAGS)				\
-	$(LIBGNOMECANVAS_CFLAGS)			\
-	$(LIBBONOBOUI_CFLAGS)				\
+	$(LIBGNOMEUI_COMPONENTS_CFLAGS)			\
 	-DGTK_VERSION=\""$(GTK_VERSION)"\"		\
 	-DVERSION=\"$(VERSION)\"
 
@@ -48,4 +46,6 @@ libgnomeui_components_2_la_LDFLAGS = \
 	-version-info $(LIB_VERSION)
 
 libgnomeui_components_2_la_LIBADD = \
-	../libgnomeui/libgnomeui-2.la
+	../libgnomeui/libgnomeui-2.la		\
+	$(LIBGNOMEUI_COMPONENTS_LIBS)
+
