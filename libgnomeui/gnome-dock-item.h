@@ -52,8 +52,8 @@ typedef enum
 /* obsolete, for compatibility; don't use */
 #define GNOME_DOCK_ITEM_BEH_NEVER_DETACH GNOME_DOCK_ITEM_BEH_NEVER_FLOATING
 
-#define GNOME_DOCK_ITEM_NOT_LOCKED(x) (!(GNOME_DOCK_ITEM(x)->behavior & \
-                                         GNOME_DOCK_ITEM_BEH_LOCKED))
+#define GNOME_DOCK_ITEM_NOT_LOCKED(x) (! (GNOME_DOCK_ITEM(x)->behavior \
+                                          & GNOME_DOCK_ITEM_BEH_LOCKED))
 
 typedef struct _GnomeDockItem       GnomeDockItem;
 typedef struct _GnomeDockItemClass  GnomeDockItemClass;

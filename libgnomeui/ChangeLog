@@ -1,3 +1,29 @@
+1999-02-05  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-dock-item.c (gnome_dock_item_motion): Retrieve the pointer
+ 	position in a sane way.
+
+	* gnome-dock.c: Reverted Jaka's changes of 1999-02-04.
+	(drag_motion): If everything fails, move the item on its own band
+ 	according to the current pointer position instead of just doing
+ 	nothing.
+	(drag_check): Removed `NEW_BAND_SNAP' hack.  Use the
+ 	`drag_allocation' instead of the `allocation' of the band for
+ 	doing the comparisons.  Check against the band only if
+ 	`new_for_drag' is false.  If we are in the upper/leftmost half and
+ 	dragging into the band fails, try to create a new band.
+	(drag_new): Set `new_for_drag' in the new band to TRUE.
+
+	* gnome-dock-band.c (gnome_dock_band_drag_begin): Copy the current
+ 	allocation into `drag_allocation'.
+	(gnome_dock_band_init): Initialize `max_space_requisition',
+ 	`tot_offsets' and `new_for_drag'.  Set `drag_allocation' to { -1,
+ 	-1, 0, 0 }.
+	(gnome_dock_band_drag_end): Set `new_for_drag' to FALSE.
+	
+	* gnome-dock-band.h (struct _GnomeDockBand): New members
+ 	`drag_allocation' and `new_for_drag'.
+
 1999-02-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-messagebox.c (gnome_message_box_new): Use
@@ -84,6 +110,7 @@ Thu Feb 04 19:10:38 1999  George Lebl  <jirka@5z.com>
 	Converted other types to Glib types.
 
 1999-02-03  Jonathan Blandford  <jrb@redhat.com>
+
 	* gnome-icon-entry.c (gnome_icon_entry_set_icon): another little
 	bug fix.
 

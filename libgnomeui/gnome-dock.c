@@ -1,4 +1,3 @@
-
 /* gnome-dock.c
 
    Copyright (C) 1998 Free Software Foundation
@@ -789,6 +788,10 @@ drag_new (GnomeDock *dock,
                                         ? GTK_ORIENTATION_VERTICAL
                                         : GTK_ORIENTATION_HORIZONTAL));
 
+      /* This is mostly to remember that `drag_allocation' for this
+         child is bogus, as it was not previously allocated.  */
+      new_band->new_for_drag = TRUE;
+
       if (where == NULL)
         *area = where = g_list_prepend (*area, new_band);
       else if (where->next == NULL)
@@ -859,21 +862,23 @@ drag_floating (GnomeDock *dock,
 
   if (item_widget->parent != dock_widget)
     {
-      GtkAllocation *dock_allocation;
-      GtkAllocation *client_allocation = NULL;
+      GtkAllocation *dock_allocation, *client_allocation;
 
       /* The item is currently not floating (so it is not our child).
          Make it so if we are outside the docking areas.  */
 
       dock_allocation = &dock_widget->allocation;
-      if(dock->client_area)
+      if (dock->client_area)
         client_allocation = &dock->client_area->allocation;
+      else
+        client_allocation = NULL;
 
-      if (rel_x < dock_allocation->x
-          || rel_x >= dock_allocation->x + dock_allocation->width
-          || rel_y < dock_allocation->y
-          || rel_y >= dock_allocation->y + dock_allocation->height
-          || (client_allocation && rel_x >= client_allocation->x
+      if (rel_x < 0 
+          || rel_x >= dock_allocation->width
+          || rel_y < 0
+          || rel_y >= dock_allocation->height
+          || (client_allocation != NULL
+              && rel_x >= client_allocation->x
               && rel_x < client_allocation->x + client_allocation->width
               && rel_y >= client_allocation->y
               && rel_y < client_allocation->y + client_allocation->height))
@@ -914,64 +919,37 @@ drag_check (GnomeDock *dock,
             gint x, gint y,
             gboolean is_vertical)
 {
-#define NEW_BAND_SNAP 8
   GList *lp;
   GtkAllocation *alloc;
-  GnomeDockBand *parent_band = NULL;
-  gint alone = FALSE;
-
-  if(!item->is_floating)
-    parent_band = GNOME_DOCK_BAND(GTK_WIDGET(item)->parent);
-
-  if(parent_band)
-     alone = gnome_dock_band_get_num_children(parent_band) <= 1;
 
   for (lp = *area; lp != NULL; lp = lp->next)
     {
-      alloc = &(GTK_WIDGET(lp->data)->allocation);
+      GnomeDockBand *band;
 
-      if (x >= alloc->x && x < alloc->x + alloc->width &&
-          y >= alloc->y && y < alloc->y + alloc->height)
+      band = GNOME_DOCK_BAND (lp->data);
+
+      if (! band->new_for_drag)
         {
-          if (is_vertical)
-            {
-              if (x > alloc->x + alloc->width - NEW_BAND_SNAP)
-                {
-                  if(alone && lp->next)
-                    return drag_to (dock, item, lp->next, x, y, FALSE);
-                  else if(!lp->next)
-                    return drag_new (dock, item, area, lp, x, y, FALSE);
-                  else if(parent_band == GNOME_DOCK_BAND(lp->data))
-                    return drag_to (dock, item, lp, x, y, FALSE);
-                }
-              else
-                {
-                  if(!alone && x < alloc->x + NEW_BAND_SNAP)
-                    return drag_new (dock, item, area, lp->prev, x, y, FALSE);
-                  else if (x > alloc->x + NEW_BAND_SNAP ||
-                           parent_band == GNOME_DOCK_BAND(lp->data))
-                    return drag_to (dock, item, lp, x, y, FALSE);
-                }
-            }
-          else
-            {
-              if (y > alloc->y + alloc->height - NEW_BAND_SNAP)
-                {
-                  if(alone && lp->next)
-                    return drag_to (dock, item, lp->next, x, y, FALSE);
-                  else if(!lp->next)
-                    return drag_new (dock, item, area, lp, x, y, FALSE);
-                  else if(parent_band == GNOME_DOCK_BAND(lp->data))
-                    return drag_to (dock, item, lp, x, y, FALSE);
+          alloc = &band->drag_allocation;
 
+          if (x >= alloc->x && x < alloc->x + alloc->width
+              && y >= alloc->y && y < alloc->y + alloc->height)
+            {
+              if (is_vertical)
+                {
+                  if (x < alloc->x + alloc->width / 2
+                      && drag_to (dock, item, lp, x, y, TRUE))
+                    return TRUE;
+                  else
+                    return drag_new (dock, item, area, lp, x, y, TRUE);
                 }
               else
                 {
-                  if(!alone && y < alloc->y + NEW_BAND_SNAP)
-                    return drag_new (dock, item, area, lp->prev, x, y, FALSE);
-                  else if (y > alloc->y + NEW_BAND_SNAP ||
-                           parent_band == GNOME_DOCK_BAND(lp->data))
-                    return drag_to (dock, item, lp, x, y, FALSE);
+                  if (y < alloc->y + alloc->height / 2
+                      && drag_to (dock, item, lp, x, y, FALSE))
+                    return TRUE;
+                  else 
+                    return drag_new (dock, item, area, lp, x, y, FALSE);
                 }
             }
         }
@@ -996,10 +974,10 @@ drag_begin (GtkWidget *widget, gpointer data)
 
   /* Communicate all the bands that `widget' is currently being
      dragged.  */
-  g_list_foreach (dock->top_bands, (GFunc)gnome_dock_band_drag_begin, item);
-  g_list_foreach (dock->bottom_bands, (GFunc)gnome_dock_band_drag_begin, item);
-  g_list_foreach (dock->right_bands, (GFunc)gnome_dock_band_drag_begin, item);
-  g_list_foreach (dock->left_bands, (GFunc)gnome_dock_band_drag_begin, item);
+  g_list_foreach (dock->top_bands, (GFunc) gnome_dock_band_drag_begin, item);
+  g_list_foreach (dock->bottom_bands, (GFunc) gnome_dock_band_drag_begin, item);
+  g_list_foreach (dock->right_bands, (GFunc) gnome_dock_band_drag_begin, item);
+  g_list_foreach (dock->left_bands, (GFunc) gnome_dock_band_drag_begin, item);
 }
 
 
@@ -1142,6 +1120,12 @@ drag_motion (GtkWidget *widget,
   if (dock->floating_items_allowed
       && ! (item_behavior & GNOME_DOCK_ITEM_BEH_NEVER_DETACH))
     drag_floating (dock, item, x, y, rel_x, rel_y);
+
+  /* If still not floating, fall back to moving the item in its own
+     band.  */
+  if (! item->is_floating)
+    gnome_dock_band_drag_to (GNOME_DOCK_BAND (GTK_WIDGET (item)->parent),
+                             item, rel_x, rel_y);
 }
 
 

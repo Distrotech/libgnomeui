@@ -56,10 +56,20 @@ struct _GnomeDockBand
   guint num_children;
 
   GList *floating_child;        /* GnomeDockBandChild */
+
   gboolean doing_drag;
 
   guint max_space_requisition;
   guint tot_offsets;
+
+  /* This used to remember the allocation before the drag begin: it is
+     necessary to do so because we actually decide what docking action
+     happens depending on it, instead of using the current allocation
+     (which might be constantly changing while the user drags things
+     around).  */
+  GtkAllocation drag_allocation;
+
+  guint new_for_drag : 1;
 };
 
 struct _GnomeDockBandClass

@@ -491,14 +491,14 @@ gnome_dock_item_size_request (GtkWidget      *widget,
   dock_item = GNOME_DOCK_ITEM (widget);
 
   /* If our child is not visible, we still request its size, since
-     we won't have any usefull hint for our size otherwise.  */
+     we won't have any useful hint for our size otherwise.  */
   if (bin->child != NULL)
     gtk_widget_size_request (bin->child, &bin->child->requisition);
 
   if (dock_item->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       requisition->width = 
-        GNOME_DOCK_ITEM_NOT_LOCKED(dock_item) ? DRAG_HANDLE_SIZE : 0;
+        GNOME_DOCK_ITEM_NOT_LOCKED (dock_item) ? DRAG_HANDLE_SIZE : 0;
       if (bin->child != NULL)
         {
           requisition->width += bin->child->requisition.width;
@@ -510,7 +510,7 @@ gnome_dock_item_size_request (GtkWidget      *widget,
   else
     {
       requisition->height = 
-        GNOME_DOCK_ITEM_NOT_LOCKED(dock_item) ? DRAG_HANDLE_SIZE : 0;
+        GNOME_DOCK_ITEM_NOT_LOCKED (dock_item) ? DRAG_HANDLE_SIZE : 0;
       if (bin->child != NULL)
         {
           requisition->width = bin->child->requisition.width;
@@ -643,7 +643,7 @@ gnome_dock_item_paint (GtkWidget      *widget,
   GdkRectangle rect;
   gint drag_handle_size = DRAG_HANDLE_SIZE;
 
-  if (!GNOME_DOCK_ITEM_NOT_LOCKED(widget))
+  if (!GNOME_DOCK_ITEM_NOT_LOCKED (widget))
     drag_handle_size = 0;
 
   bin = GTK_BIN (widget);
@@ -687,7 +687,7 @@ gnome_dock_item_paint (GtkWidget      *widget,
   /* We currently draw the handle _above_ the relief of the dockitem.
      It could also be drawn on the same level...  */
 
-  if (GNOME_DOCK_ITEM_NOT_LOCKED(di))
+  if (GNOME_DOCK_ITEM_NOT_LOCKED (di))
     {
       
       rect.x = 0;
@@ -701,10 +701,12 @@ gnome_dock_item_paint (GtkWidget      *widget,
       else
         {
           rect.width = width;
-      rect.height = DRAG_HANDLE_SIZE;
+          rect.height = DRAG_HANDLE_SIZE;
         }
       
-      draw_textured_frame (widget, di->bin_window, &rect, GTK_SHADOW_OUT, event ? &event->area : area);
+      draw_textured_frame (widget, di->bin_window, &rect,
+                           GTK_SHADOW_OUT,
+                           event ? &event->area : area);
     }    
   
   if (bin->child && GTK_WIDGET_VISIBLE (bin->child))
@@ -875,10 +877,8 @@ gnome_dock_item_motion (GtkWidget      *widget,
   if (event->window != di->bin_window)
     return FALSE;
 
-  gdk_window_get_origin (di->float_window, &ox, &oy);
-  gdk_window_get_pointer (di->float_window, &new_x, &new_y, NULL);
-  new_x += ox;
-  new_y += oy;
+  gdk_window_get_pointer (NULL, &new_x, &new_y, NULL);
+  
 #if 0
   new_x -= di->dragoff_x;
   new_y -= di->dragoff_y;

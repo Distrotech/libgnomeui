@@ -169,12 +169,21 @@ gnome_dock_band_init (GnomeDockBand *band)
   GTK_WIDGET_SET_FLAGS (band, GTK_NO_WINDOW);
 
   band->orientation = GTK_ORIENTATION_HORIZONTAL;
-  band->children = NULL;
-  band->floating_child = NULL;
 
+  band->children = NULL;
   band->num_children = 0;
 
+  band->floating_child = NULL;
+
   band->doing_drag = FALSE;
+
+  band->max_space_requisition = 0;
+  band->tot_offsets = 0;
+
+  band->drag_allocation.x = band->drag_allocation.y = -1;
+  band->drag_allocation.width = band->drag_allocation.height = 0;
+
+  band->new_for_drag = FALSE;
 }
 
 
@@ -1681,6 +1690,7 @@ gnome_dock_band_drag_begin (GnomeDockBand *band, GnomeDockItem *item)
     }
 
   band->doing_drag = TRUE;
+  band->drag_allocation = GTK_WIDGET (band)->allocation;
 }
 
 gboolean
@@ -1756,6 +1766,7 @@ gnome_dock_band_drag_end (GnomeDockBand *band, GnomeDockItem *item)
     }
 
   band->doing_drag = FALSE;
+  band->new_for_drag = FALSE;
 }
 
 GnomeDockItem *
