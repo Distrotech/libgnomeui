@@ -7,20 +7,22 @@ INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir)
 lib_LTLIBRARIES = libgnomeui.la
 
 libgnomeui_la_SOURCES = \
+	gnome-actionarea.c		\
+	gnome-app.c			\
 	gnome-color-selector.c 		\
-	gnome-properties.c		\
+	gnome-colors.c			\
 	gnome-ice.c			\
 	gnome-init.c			\
-	gnome-actionarea.c		\
 	gnome-messagebox.c		\
 	gnome-pixmap.c			\
-	gnome-toolbar.c			\
-	gnome-colors.c			\
+	gnome-properties.c		\
 	gnome-session.c			\
+	gnome-toolbar.c			\
 	gtk-clock.c
 
 libgnomeuiinclude_HEADERS = 		\
         gnome-actionarea.h     		\
+	gnome-app.h			\
 	gnome-color-selector.h 		\
 	gnome-colors.h         		\
 	gnome-ice.h			\
