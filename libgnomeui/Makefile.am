@@ -72,7 +72,7 @@ EXTRA_DIST = \
 	AUTHORS
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
-libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS) 
+libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 ted_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
