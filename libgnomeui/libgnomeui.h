@@ -44,7 +44,7 @@
 #include "libgnomeui/gnome-rootwin.h"
 #include "libgnomeui/gnome-stock.h"
 #include "libgnomeui/gnome-client.h"
-#ifndef HAVE_GTKCAL
+#ifndef __GTK_CALENDAR_H__
 #include "libgnomeui/gtkcalendar.h"
 #endif
 #include "libgnomeui/gtkcauldron.h"
