@@ -52,10 +52,28 @@
 #include <stdio.h>
 #include <string.h>
 
+struct _GnomeHelpViewPrivate {
+  GtkWidget *popup_menu;
+
+  GtkWidget *toplevel;
+  GtkWidget *toolbar, *content, *btn_help, *btn_style, *evbox;
+
+  GnomeURLDisplayContext *url_ctx;
+
+  GtkOrientation orientation;
+
+  GnomeHelpViewStylePriority style_priority;
+  GnomeHelpViewStylePriority app_style_priority;
+
+  GnomeHelpViewStyle style : 2;
+
+  GnomeHelpViewStyle app_style : 2; /* Used to properly handle object args for style & prio */ 
+};
+
 enum {
-  ARG_NONE=0,
+  ARG_0 = 0,
   ARG_APP_STYLE,
-  ARG_APP_STYLE_PRIO,
+  ARG_APP_STYLE_PRIORITY,
   ARG_TOPLEVEL
 };
 
@@ -68,6 +86,7 @@ typedef enum {
 static void gnome_help_view_class_init (GnomeHelpViewClass *class);
 static void gnome_help_view_init (GnomeHelpView *help_view);
 static void gnome_help_view_destroy (GtkObject *obj);
+static void gnome_help_view_finalize (GObject *obj);
 static void gnome_help_view_set_arg (GtkObject *obj, GtkArg *arg, guint arg_id);
 static void gnome_help_view_get_arg (GtkObject *obj, GtkArg *arg, guint arg_id);
 static void gnome_help_view_size_request  (GtkWidget      *widget,
@@ -83,9 +102,15 @@ static void gnome_help_view_set_style_browser(gpointer dummy, GnomeHelpView *hel
 static gint gnome_help_view_process_event(GtkWidget *btn, GdkEvent *event, GnomeHelpView *help_view);
 
 static GnomeUIInfo popup_style_menu_items[] = {
-  GNOMEUIINFO_RADIOITEM("_Popup", "Show help in temporary popup windows", gnome_help_view_set_style_popup, NULL),
-  GNOMEUIINFO_RADIOITEM("_Embedded", "Show help inside the application window", gnome_help_view_set_style_embedded, NULL),
-  GNOMEUIINFO_RADIOITEM("_Browser", "Show help in a help browser window", gnome_help_view_set_style_browser, NULL),
+  GNOMEUIINFO_RADIOITEM(N_("_Popup"),
+			N_("Show help in temporary popup windows"),
+			gnome_help_view_set_style_popup, NULL),
+  GNOMEUIINFO_RADIOITEM(N_("_Embedded"),
+			N_("Show help inside the application window"),
+			gnome_help_view_set_style_embedded, NULL),
+  GNOMEUIINFO_RADIOITEM(N_("_Browser"),
+			N_("Show help in a help browser window"),
+			gnome_help_view_set_style_browser, NULL),
   GNOMEUIINFO_END
 };
 
@@ -128,9 +153,11 @@ static void
 gnome_help_view_class_init (GnomeHelpViewClass *class)
 {
   GtkObjectClass *object_class;
+  GObjectClass *gobject_class;
   GtkWidgetClass *widget_class;
 
   object_class = (GtkObjectClass *) class;
+  gobject_class = (GObjectClass *) class;
   widget_class = (GtkWidgetClass *) class;
   parent_class = gtk_type_class(gtk_type_parent(GTK_CLASS_TYPE(object_class)));
 
@@ -138,48 +165,63 @@ gnome_help_view_class_init (GnomeHelpViewClass *class)
   object_class->set_arg = gnome_help_view_set_arg;
   object_class->destroy = gnome_help_view_destroy;
 
+  gobject_class->finalize = gnome_help_view_finalize;
+
   widget_class->size_request = gnome_help_view_size_request;
   widget_class->size_allocate = gnome_help_view_size_allocate;
 
-  class->popup_menu = gnome_popup_menu_new(popup_style_menu);
-
-  gtk_object_add_arg_type ("GnomeHelpView::app_style", GTK_TYPE_ENUM, GTK_ARG_READWRITE|GTK_ARG_CONSTRUCT, ARG_APP_STYLE);
-  gtk_object_add_arg_type ("GnomeHelpView::app_style_priority", GTK_TYPE_INT, GTK_ARG_READWRITE|GTK_ARG_CONSTRUCT, ARG_APP_STYLE_PRIO);
-  gtk_object_add_arg_type ("GnomeHelpView::toplevel", GTK_TYPE_OBJECT, GTK_ARG_READWRITE|GTK_ARG_CONSTRUCT, ARG_TOPLEVEL);
+  /* while these are used mainly for construction, they are not
+   * GTK_ARG_CONSTRUCT because all that GTK_ARG_CONSTRUCT does is
+   * make sure they are called with a zero argument, which is
+   * quite useless in our case */
+  gtk_object_add_arg_type ("GnomeHelpView::app_style",
+			   GTK_TYPE_ENUM,
+			   GTK_ARG_READWRITE,
+			   ARG_APP_STYLE);
+  gtk_object_add_arg_type ("GnomeHelpView::app_style_priority",
+			   GTK_TYPE_INT,
+			   GTK_ARG_READWRITE,
+			   ARG_APP_STYLE_PRIORITY);
+  gtk_object_add_arg_type ("GnomeHelpView::toplevel",
+			   GTK_TYPE_OBJECT,
+			   GTK_ARG_READWRITE,
+			   ARG_TOPLEVEL);
 }
 
 static void
 gnome_help_view_init (GnomeHelpView *help_view)
 {
-  help_view->orientation = GTK_ORIENTATION_VERTICAL;
-  help_view->style = GNOME_HELP_BROWSER;
-  help_view->style_prio = G_PRIORITY_LOW;
+	help_view->_priv = g_new0(GnomeHelpViewPrivate, 1);
 
-  help_view->toolbar = gtk_toolbar_new(GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_ICONS);
-  help_view->btn_help = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->toolbar), _("Help"),
+  help_view->_priv->orientation = GTK_ORIENTATION_VERTICAL;
+  help_view->_priv->style = GNOME_HELP_BROWSER;
+  help_view->_priv->style_priority = G_PRIORITY_LOW;
+
+  help_view->_priv->toolbar = gtk_toolbar_new(GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_ICONS);
+  help_view->_priv->btn_help = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->_priv->toolbar), _("Help"),
 						_("Show help for a specific region of the application"),
 						NULL,
 						gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_HELP),
 						gnome_help_view_select_help_cb, help_view);
-  help_view->btn_style = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->toolbar), _("Style"),
+  help_view->_priv->btn_style = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->_priv->toolbar), _("Style"),
 						_("Change the way help is displayed"),
 						NULL,
 						gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_PREFERENCES),
 						gnome_help_view_select_style, help_view);
 
-  help_view->evbox = gtk_event_box_new();
-  gtk_widget_add_events(help_view->evbox,
+  help_view->_priv->evbox = gtk_event_box_new();
+  gtk_widget_add_events(help_view->_priv->evbox,
 			GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK|GDK_POINTER_MOTION_MASK|GDK_KEY_PRESS_MASK);
 
-  gtk_box_pack_start(GTK_BOX(help_view), help_view->toolbar, TRUE, TRUE, GNOME_PAD_SMALL);
-  gtk_box_pack_start(GTK_BOX(help_view), help_view->evbox, FALSE, FALSE, 0);
+  gtk_box_pack_start(GTK_BOX(help_view), help_view->_priv->toolbar, TRUE, TRUE, GNOME_PAD_SMALL);
+  gtk_box_pack_start(GTK_BOX(help_view), help_view->_priv->evbox, FALSE, FALSE, 0);
 
-  gtk_widget_show(help_view->toolbar);
-  gtk_widget_show(help_view->btn_style);
-  gtk_widget_show(help_view->btn_help);
-  gtk_widget_show(help_view->evbox);
+  gtk_widget_show(help_view->_priv->toolbar);
+  gtk_widget_show(help_view->_priv->btn_style);
+  gtk_widget_show(help_view->_priv->btn_help);
+  gtk_widget_show(help_view->_priv->evbox);
 
-  gnome_help_view_set_style(help_view, help_view->app_style, help_view->app_style_priority);
+  gnome_help_view_set_style(help_view, help_view->_priv->app_style, help_view->_priv->app_style_priority);
   gnome_help_view_set_orientation(help_view, GTK_ORIENTATION_HORIZONTAL);
 }
 
@@ -187,16 +229,35 @@ static void
 gnome_help_view_destroy (GtkObject *obj)
 {
   GnomeHelpView *help_view = (GnomeHelpView *)obj;
+
   /* remember, destroy can be run multiple times! */
 
-  if(help_view->toplevel) {
-	  gtk_object_remove_data(GTK_OBJECT(help_view->toplevel), GNOME_APP_HELP_VIEW_NAME);
-	  gtk_object_unref(GTK_OBJECT(help_view->toplevel));
-	  help_view->toplevel = NULL;
+  if(help_view->_priv->popup_menu != NULL) {
+	  gtk_widget_destroy(help_view->_priv->popup_menu);
+	  help_view->_priv->popup_menu = NULL;
+  }
+
+  if(help_view->_priv->toplevel != NULL) {
+	  gtk_object_remove_data(GTK_OBJECT(help_view->_priv->toplevel),
+				 GNOME_APP_HELP_VIEW_NAME);
+	  gtk_object_unref(GTK_OBJECT(help_view->_priv->toplevel));
+	  help_view->_priv->toplevel = NULL;
   }
 
   if (GTK_OBJECT_CLASS (parent_class)->destroy)
     (* GTK_OBJECT_CLASS (parent_class)->destroy) (obj);
+}
+
+static void
+gnome_help_view_finalize (GObject *obj)
+{
+	GnomeHelpView *help_view = (GnomeHelpView *)obj;
+
+	g_free(help_view->_priv);
+	help_view->_priv = NULL;
+
+	if (G_OBJECT_CLASS (parent_class)->finalize)
+		(* G_OBJECT_CLASS (parent_class)->finalize) (obj);
 }
 
 static void
@@ -207,19 +268,14 @@ gnome_help_view_set_arg (GtkObject *obj, GtkArg *arg, guint arg_id)
   switch(arg_id)
     {
     case ARG_APP_STYLE:
-      help_view->app_style = GTK_VALUE_ENUM(*arg);
+      help_view->_priv->app_style = GTK_VALUE_ENUM(*arg);
       break;
-    case ARG_APP_STYLE_PRIO:
-      help_view->app_style_priority = GTK_VALUE_INT(*arg);
+    case ARG_APP_STYLE_PRIORITY:
+      help_view->_priv->app_style_priority = GTK_VALUE_ENUM(*arg);
       break;
     case ARG_TOPLEVEL:
-      if(help_view->toplevel) {
-	      gtk_object_remove_data(GTK_OBJECT(help_view->toplevel), GNOME_APP_HELP_VIEW_NAME);
-	      gtk_object_unref(GTK_OBJECT(help_view->toplevel));
-      }
-      help_view->toplevel = GTK_WIDGET(GTK_VALUE_OBJECT(*arg));
-      gtk_object_ref(GTK_OBJECT(help_view->toplevel));
-      gtk_object_set_data(GTK_VALUE_OBJECT(*arg), GNOME_APP_HELP_VIEW_NAME, help_view);
+      gnome_help_view_set_toplevel(help_view,
+				   GTK_WIDGET(GTK_VALUE_OBJECT(*arg)));
       break;
     }
 }
@@ -232,10 +288,10 @@ gnome_help_view_get_arg (GtkObject *obj, GtkArg *arg, guint arg_id)
   switch(arg_id)
     {
     case ARG_APP_STYLE:
-      GTK_VALUE_ENUM(*arg) = help_view->style;
+      GTK_VALUE_ENUM(*arg) = help_view->_priv->style;
       break;
-    case ARG_APP_STYLE_PRIO:
-      GTK_VALUE_INT(*arg) = help_view->style_prio;
+    case ARG_APP_STYLE_PRIORITY:
+      GTK_VALUE_INT(*arg) = help_view->_priv->style_priority;
       break;
     }
 }
@@ -252,17 +308,52 @@ gnome_help_view_new(GtkWidget *toplevel, GnomeHelpViewStyle app_style,
 }
 
 void
+gnome_help_view_construct(GnomeHelpView *self,
+			  GtkWidget *toplevel,
+			  GnomeHelpViewStyle app_style,
+			  GnomeHelpViewStylePriority app_style_priority)
+{
+	g_return_if_fail(self != NULL);
+	g_return_if_fail(GNOME_IS_HELP_VIEW(self));
+
+	gtk_object_set(GTK_OBJECT(self),
+		       "toplevel", toplevel,
+		       "app_style", app_style,
+		       "app_style_priority", app_style_priority,
+		       NULL);
+}
+
+void
+gnome_help_view_set_toplevel(GnomeHelpView *self,
+			     GtkWidget *toplevel)
+{
+	g_return_if_fail(self != NULL);
+	g_return_if_fail(GNOME_IS_HELP_VIEW(self));
+	g_return_if_fail(toplevel != NULL);
+	g_return_if_fail(GTK_IS_WIDGET(toplevel));
+
+	if(help_view->_priv->toplevel) {
+		gtk_object_remove_data(GTK_OBJECT(help_view->_priv->toplevel),
+				       GNOME_APP_HELP_VIEW_NAME);
+		gtk_object_unref(GTK_OBJECT(help_view->_priv->toplevel));
+	}
+	help_view->_priv->toplevel = toplevel;
+	gtk_object_ref(GTK_OBJECT(help_view->_priv->toplevel));
+	gtk_object_set_data(toplevel, GNOME_APP_HELP_VIEW_NAME, help_view);
+}
+
+void
 gnome_help_view_set_visibility(GnomeHelpView *help_view, gboolean visible)
 {
   if(visible)
     {
-      gtk_widget_show(help_view->content);
-      gtk_widget_show(help_view->toolbar);
+      gtk_widget_show(help_view->_priv->content);
+      gtk_widget_show(help_view->_priv->toolbar);
     }
   else
     {
-      gtk_widget_hide(help_view->content);
-      gtk_widget_hide(help_view->toolbar);
+      gtk_widget_hide(help_view->_priv->content);
+      gtk_widget_hide(help_view->_priv->toolbar);
     }
 }
 
@@ -270,13 +361,23 @@ GnomeHelpView *
 gnome_help_view_find(GtkWidget *awidget)
 {
   GtkWidget *tmpw;
+  GnomeHelpView *help_view;
 
-  for(tmpw = gtk_widget_get_toplevel(awidget); tmpw && GTK_IS_MENU(tmpw); tmpw = GTK_MENU(tmpw)->toplevel);
+  for(tmpw = gtk_widget_get_toplevel(awidget);
+      tmpw && GTK_IS_MENU(tmpw);
+      tmpw = GTK_MENU(tmpw)->toplevel)
+	  ;
 
   if(tmpw)
-    tmpw = gtk_object_get_data(GTK_OBJECT(tmpw), GNOME_APP_HELP_VIEW_NAME);
+	  help_view = gtk_object_get_data(GTK_OBJECT(tmpw),
+					  GNOME_APP_HELP_VIEW_NAME);
+  else
+	  help_view = NULL;
 
-  return GNOME_IS_HELP_VIEW(tmpw)?((GnomeHelpView *)tmpw):NULL;
+  if(GNOME_IS_HELP_VIEW(tmpw))
+	  return help_view;
+  else
+	  return NULL;
 }
 
 /* size_request & size_allocate are generalizations of the same
@@ -308,7 +409,7 @@ gnome_help_view_size_request  (GtkWidget      *widget,
   requisition->height = 0;
   nvis_children = 0;
 
-  switch(help_view->orientation)
+  switch(help_view->_priv->orientation)
     {
     case GTK_ORIENTATION_HORIZONTAL:
       primary_axis = &requisition->width;
@@ -399,7 +500,7 @@ gnome_help_view_size_allocate (GtkWidget      *widget,
 
   widget->allocation = *allocation;
 
-  switch(help_view->orientation)
+  switch(help_view->_priv->orientation)
     {
     case GTK_ORIENTATION_HORIZONTAL:
       primary_axis = &allocation->x;
@@ -594,21 +695,21 @@ gnome_help_view_size_allocate (GtkWidget      *widget,
 static void
 gnome_help_view_update_style(GnomeHelpView *help_view)
 {
-  if(help_view->style == GNOME_HELP_EMBEDDED)
+  if(help_view->_priv->style == GNOME_HELP_EMBEDDED)
     {
-      if(help_view->content) /* Popup help */
-	gtk_widget_destroy(help_view->content->parent);
+      if(help_view->_priv->content) /* Popup help */
+	gtk_widget_destroy(help_view->_priv->content->parent);
 
-      help_view->content = gnome_textfu_new();
-      gtk_box_pack_start(GTK_BOX(help_view), help_view->content, TRUE, TRUE, GNOME_PAD_SMALL);
-      gtk_widget_show(help_view->content);
+      help_view->_priv->content = gnome_textfu_new();
+      gtk_box_pack_start(GTK_BOX(help_view), help_view->_priv->content, TRUE, TRUE, GNOME_PAD_SMALL);
+      gtk_widget_show(help_view->_priv->content);
     }
   else
     {
-      if(help_view->content)
+      if(help_view->_priv->content)
 	{
-	  gtk_container_remove(GTK_CONTAINER(help_view), help_view->content);
-	  help_view->content = NULL;
+	  gtk_container_remove(GTK_CONTAINER(help_view), help_view->_priv->content);
+	  help_view->_priv->content = NULL;
 	}
     }
 }
@@ -636,27 +737,27 @@ gnome_help_view_set_style(GnomeHelpView *help_view,
 			  GnomeHelpViewStyle style,
 			  GnomeHelpViewStylePriority style_priority)
 {
-  help_view->app_style = style;
-  help_view->app_style_priority = style_priority;
+  help_view->_priv->app_style = style;
+  help_view->_priv->app_style_priority = style_priority;
 
-  if(style_priority <= help_view->style_prio)
+  if(style_priority <= help_view->_priv->style_priority)
     {
-      GnomeHelpViewStyle old_style = help_view->style;
+      GnomeHelpViewStyle old_style = help_view->_priv->style;
 
-      help_view->style = style;
-      help_view->style_prio = style_priority;
+      help_view->_priv->style = style;
+      help_view->_priv->style_priority = style_priority;
 
       if(old_style != style)
 	gnome_help_view_update_style(help_view);
     }
 
-  gnome_help_view_set_orientation(help_view, help_view->orientation);
+  gnome_help_view_set_orientation(help_view, help_view->_priv->orientation);
 }
 
 static void
 gtk_widget_destroy_2(GtkWidget *x, GnomeHelpView *help_view)
 {
-  help_view->content = NULL;
+  help_view->_priv->content = NULL;
 }
 
 static void
@@ -678,7 +779,7 @@ gnome_help_view_popup(GnomeHelpView *help_view, const char *file_path)
   GnomeTextFu *tf;
   GtkWidget *win;
 
-  if(!help_view->content)
+  if(!help_view->_priv->content)
     {
       win = gtk_window_new(GTK_WINDOW_POPUP);
       tf = GNOME_TEXTFU(gnome_textfu_new());
@@ -695,7 +796,7 @@ gnome_help_view_popup(GnomeHelpView *help_view, const char *file_path)
       gtk_signal_connect_after(GTK_OBJECT(win), "button_release_event", GTK_SIGNAL_FUNC(do_popup_destroy), NULL);
     }
   else
-    gnome_textfu_load_file(GNOME_TEXTFU(help_view->content), file_path);
+    gnome_textfu_load_file(GNOME_TEXTFU(help_view->_priv->content), file_path);
 }
 
 void
@@ -706,7 +807,7 @@ gnome_help_view_show_help(GnomeHelpView *help_view, const char *help_path, const
 
   g_message("show_help: %s, %s", help_path, help_type);
 
-  style = help_view->style;
+  style = help_view->_priv->style;
   if(!help_type || strcmp(help_type, "popup"))
     style = GNOME_HELP_BROWSER;
 
@@ -736,7 +837,7 @@ gnome_help_view_show_help(GnomeHelpView *help_view, const char *help_path, const
   switch(style)
     {
     case GNOME_HELP_EMBEDDED:
-      gnome_textfu_load_file(GNOME_TEXTFU(help_view->content), file_path);
+      gnome_textfu_load_file(GNOME_TEXTFU(help_view->_priv->content), file_path);
       break;
     case GNOME_HELP_POPUP:
       gnome_help_view_popup(help_view, file_path);
@@ -771,21 +872,21 @@ gnome_help_view_show_help_for(GnomeHelpView *help_view, GtkWidget *widget)
 void
 gnome_help_view_set_orientation(GnomeHelpView *help_view, GtkOrientation orientation)
 {
-  help_view->orientation = orientation;
+  help_view->_priv->orientation = orientation;
 
   switch(orientation)
     {
     case GTK_ORIENTATION_VERTICAL:
-      if(help_view->style == GNOME_HELP_EMBEDDED)
-	gtk_toolbar_set_orientation(GTK_TOOLBAR(help_view->toolbar), GTK_ORIENTATION_HORIZONTAL);
+      if(help_view->_priv->style == GNOME_HELP_EMBEDDED)
+	gtk_toolbar_set_orientation(GTK_TOOLBAR(help_view->_priv->toolbar), GTK_ORIENTATION_HORIZONTAL);
       else
-	gtk_toolbar_set_orientation(GTK_TOOLBAR(help_view->toolbar), GTK_ORIENTATION_VERTICAL);
+	gtk_toolbar_set_orientation(GTK_TOOLBAR(help_view->_priv->toolbar), GTK_ORIENTATION_VERTICAL);
       break;
     case GTK_ORIENTATION_HORIZONTAL:
-      if(help_view->style == GNOME_HELP_EMBEDDED)
-	gtk_toolbar_set_orientation(GTK_TOOLBAR(help_view->toolbar), GTK_ORIENTATION_VERTICAL);
+      if(help_view->_priv->style == GNOME_HELP_EMBEDDED)
+	gtk_toolbar_set_orientation(GTK_TOOLBAR(help_view->_priv->toolbar), GTK_ORIENTATION_VERTICAL);
       else
-	gtk_toolbar_set_orientation(GTK_TOOLBAR(help_view->toolbar), GTK_ORIENTATION_HORIZONTAL);
+	gtk_toolbar_set_orientation(GTK_TOOLBAR(help_view->_priv->toolbar), GTK_ORIENTATION_HORIZONTAL);
       break;
     }
 }
@@ -844,9 +945,9 @@ gnome_help_view_process_event(GtkWidget *evbox, GdkEvent *event, GnomeHelpView *
     return TRUE;
   
   evb = (GdkEventButton *)event;
-  gtk_signal_disconnect_by_func(GTK_OBJECT(help_view->evbox), GTK_SIGNAL_FUNC(gnome_help_view_process_event), help_view);
+  gtk_signal_disconnect_by_func(GTK_OBJECT(help_view->_priv->evbox), GTK_SIGNAL_FUNC(gnome_help_view_process_event), help_view);
   gtk_signal_emit_stop_by_name(GTK_OBJECT(evbox), "event");
-  gtk_grab_remove(help_view->evbox);
+  gtk_grab_remove(help_view->_priv->evbox);
   gdk_pointer_ungrab(evb->time);
   gdk_flush();
 
@@ -854,13 +955,13 @@ gnome_help_view_process_event(GtkWidget *evbox, GdkEvent *event, GnomeHelpView *
     {
       gdk_window_get_user_data(evb->window, (gpointer *)&chosen_widget);
 
-      if(help_view->btn_help && (chosen_widget == help_view->btn_help))
+      if(help_view->_priv->btn_help && (chosen_widget == help_view->_priv->btn_help))
 	/* do nothing - they canceled out of it */;
       else if(chosen_widget)
 	gnome_help_view_show_help_for(help_view, chosen_widget);
       else
 	gnome_ok_dialog_parented(_("No help is available for the selected portion of the application."),
-				 GTK_WINDOW(gtk_widget_get_toplevel(help_view->btn_help)));
+				 GTK_WINDOW(gtk_widget_get_toplevel(help_view->_priv->btn_help)));
     }
 
   return TRUE;
@@ -884,7 +985,7 @@ gnome_help_view_select_help_menu_cb(GtkWidget *widget)
 void
 gnome_help_view_select_help_cb(GtkWidget *ignored, GnomeHelpView *help_view)
 {
-  g_return_if_fail(!help_view->evbox->window);
+  g_return_if_fail(!help_view->_priv->evbox->window);
 
 #if 0
   SourceState *ss;
@@ -893,14 +994,14 @@ gnome_help_view_select_help_cb(GtkWidget *ignored, GnomeHelpView *help_view)
   ss->help_view = help_view;
   ss->cur_toplevel = None;
 
-  gdk_window_add_filter(help_view->evbox->window, gnome_help_view_process_event, ss);
+  gdk_window_add_filter(help_view->_priv->evbox->window, gnome_help_view_process_event, ss);
 #else
-  gtk_signal_connect(GTK_OBJECT(help_view->evbox), "event", GTK_SIGNAL_FUNC(gnome_help_view_process_event), help_view);
+  gtk_signal_connect(GTK_OBJECT(help_view->_priv->evbox), "event", GTK_SIGNAL_FUNC(gnome_help_view_process_event), help_view);
 #endif
   if(!choose_cursor)
     choose_cursor = gnome_stock_cursor_new(GNOME_STOCK_CURSOR_POINTING_HAND);
-  gtk_grab_add(help_view->evbox);
-  gdk_pointer_grab(help_view->evbox->window, TRUE,
+  gtk_grab_add(help_view->_priv->evbox);
+  gdk_pointer_grab(help_view->_priv->evbox->window, TRUE,
 		   GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK|GDK_KEY_PRESS_MASK|GDK_POINTER_MOTION_MASK,
 		   NULL, choose_cursor, GDK_CURRENT_TIME);
 }
@@ -912,7 +1013,7 @@ popup_set_selection (GnomeHelpView *help_view)
 {
   int n;
 
-  switch(help_view->style)
+  switch(help_view->_priv->style)
     {
     case GNOME_HELP_POPUP:
       n = 0;
@@ -937,46 +1038,51 @@ popup_set_selection (GnomeHelpView *help_view)
 static void
 gnome_help_view_select_style(GtkWidget *btn, GnomeHelpView *help_view)
 {
-  GnomeHelpViewClass *class = GNOME_HELP_VIEW_GET_CLASS(help_view);
+  if( ! help_view->_priv->popup_menu)
+	  help_view->_priv->popup_menu =gnome_popup_menu_new(popup_style_menu);
 
-  gnome_popup_menu_do_popup(class->popup_menu, NULL, NULL, NULL, help_view, btn);
+
+  gnome_popup_menu_do_popup(help_view->_priv->popup_menu,
+			    NULL, NULL, NULL, help_view, btn);
 }
 
 static char *
 gnome_help_view_find_help_id(GnomeHelpView *help_view, const char *widget_id)
 {
-  char *fn, relfn[512];
+  char *filename, buf[512];
   FILE *fh = NULL;
   char *retval = NULL;
 
-  g_snprintf(relfn, sizeof(relfn), "help/%s/widget-help-map.txt", gnome_program_get_name(gnome_program_get()));
-  fn = gnome_datadir_file(relfn);
-  if(!fn)
-    return NULL;
+  g_snprintf(buf, sizeof(buf),
+	     "help/%s/widget-help-map.txt",
+	     gnome_program_get_name(gnome_program_get()));
+  filename = gnome_datadir_file(rel_filename);
+  if(filename == NULL)
+	  return NULL;
 
-  fh = fopen(fn, "r");
-  if(!fh)
-    goto out;
-  while(!retval && fgets(relfn, sizeof(relfn), fh))
+  fh = fopen(filename, "r");
+  g_free(filename);
+  if(fh)
+	  return NULL;
+  while(!retval && fgets(buf, sizeof(buf), fh))
     {
       char *ctmp;
 
-      g_strstrip(relfn);
-      if(relfn[0] == '#' || relfn[0] == '\0')
+      g_strstrip(buf);
+      if(buf[0] == '#' || buf[0] == '\0')
 	continue;
 
-      ctmp = strchr(relfn, '=');
+      ctmp = strchr(buf, '=');
       if(!ctmp)
 	continue;
       *ctmp = '\0';
 
-      if(strcmp(relfn, widget_id))
+      if(strcmp(buf, widget_id))
 	continue;
 
       retval = g_strdup(ctmp + 1);
     }
 
- out:
   fclose(fh);
   return retval;
 }
@@ -998,10 +1104,11 @@ gnome_help_view_show_url(GnomeHelpView *help_view, const char *url, HelpURLType 
       break;
     }
 
-  help_view->url_ctx = gnome_url_show_full(help_view->url_ctx, url, url_type,
-					   GNOME_URL_DISPLAY_NEWWIN |
-					   GNOME_URL_DISPLAY_CLOSE_ATEXIT,
-					   &error);
+  help_view->_priv->url_ctx =
+	  gnome_url_show_full(help_view->_priv->url_ctx, url, url_type,
+			      GNOME_URL_DISPLAY_NEWWIN |
+			      GNOME_URL_DISPLAY_CLOSE_ATEXIT,
+			      &error);
   /*FIXME:
   if(error != GNOME_URL_NO_ERROR) {
 

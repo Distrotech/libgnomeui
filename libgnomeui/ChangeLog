@@ -1,3 +1,11 @@
+Fri Aug 04 05:08:26 2000  George Lebl <jirka@5z.com>
+
+	* gnome-helpsys.[ch]:  In the grand tradition of most probably
+	  non-compiling code, I'll make it compile when I get to my machine.
+	  I added private poiner and moved all the crap in there and done
+	  a tiny bit of cleanup and tried to understand what this beast
+	  does.
+
 2000-08-03  Martin Baulig  <baulig@suse.de>
 
 	You can now use a customize entry widget in the GnomeSelector.
