@@ -1,0 +1,729 @@
+/* -*- Mode: C; c-set-style: linux indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+/* gnome-cursors.c - Stock GNOME cursors
+   
+   Copyright (C) 1999 Iain Holmes
+   Contains code by Miguel de Icaza
+   
+   The Gnome Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+   
+   The Gnome Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+   
+   You should have received a copy of the GNU Library General Public
+   License along with the Gnome Library; see the file COPYING.LIB.  If not,
+   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.  */
+
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
+#include <gnome.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
+#include <gdk/gdkx.h>
+
+#ifdef NEED_GNOMESUPPORT_H
+#  include "gnomesupport.h"
+#endif
+
+#include "gnome-cursors.h"
+#include <unistd.h>
+#include <ctype.h>
+
+static GHashTable *cursortable = NULL;
+
+/*
+ * XPM data
+ */
+
+
+static const gchar * blank_xpm[] = {
+	"8 1 1 1",
+	"     c None",
+	"        "
+};
+
+static const gchar * default_arrow_xpm[] = {
+"16 16 3 1",
+"       c None",
+".      c #000000",
+"+      c #FFFFFF",
+".......         ",
+".+++++.         ",
+"..+++.          ",
+".+.++.          ",
+"..+.++.         ",
+".+...++.        ",
+"..  ..++.       ",
+"     ..++.      ",
+"      ..++.     ",
+"       ..++.    ",
+"        ..++.   ",
+"         ..++.  ",
+"          ..++. ",
+"           ..++.",
+"            ... ",
+"             .  "};
+
+static const gchar * egg_timer1_xpm[] = {
+"16 16 3 1",
+"       c None",
+".      c #000000",
+"+      c #FFFFFF",
+"   ..........   ",
+"   .        .   ",
+"   .    .   .   ",
+"    ....+.+.    ",
+"    .+..+.+.    ",
+"     ..+.+.     ",
+"     .+....     ",
+"      .+ .      ",
+"      . +.      ",
+"     . .  .     ",
+"     .  + .     ",
+"    . ++.  .    ",
+"    .  +   .    ",
+"   .  +.++  .   ",
+"   . +++.+  .   ",
+"   ..........   "};
+
+static const gchar * egg_timer2_xpm[] = {
+"16 16 3 1",
+"       c None",
+".      c #000000",
+"+      c #FFFFFF",
+"   ..........   ",
+"   .        .   ",
+"   .        .   ",
+"    ..     .    ",
+"    .+..+.+.    ",
+"     ..+.+.     ",
+"     .+....     ",
+"      .++.      ",
+"      .++.      ",
+"     . .+ .     ",
+"     .  + .     ",
+"    . ++.  .    ",
+"    .  +++ .    ",
+"   ...+.+++ .   ",
+"   ..+++.+...   ",
+"   ..........   "};
+
+static const gchar * egg_timer3_xpm[] = {
+"16 16 3 1",
+"       c None",
+".      c #000000",
+"+      c #FFFFFF",
+"   ..........   ",
+"   .        .   ",
+"   .        .   ",
+"    .      .    ",
+"    .      .    ",
+"     ..+. .     ",
+"     .+....     ",
+"      . +.      ",
+"      .+ .      ",
+"     . .+ .     ",
+"     .+ +..     ",
+"    ..++.  .    ",
+"    . ..++..    ",
+"   ...+.+.++.   ",
+"   ..+++.+...   ",
+"   ..........   "};
+
+static const gchar * egg_timer4_xpm[] = {
+"16 16 3 1",
+"       c None",
+".      c #000000",
+"+      c #FFFFFF",
+"   ..........   ",
+"   .        .   ",
+"   .        .   ",
+"    .      .    ",
+"    .      .    ",
+"     .    .     ",
+"     .    .     ",
+"      .  .      ",
+"      .+ .      ",
+"     . .. .     ",
+"     .++++.     ",
+"    ..++.++.    ",
+"    .++++++.    ",
+"   ..++.++.+.   ",
+"   ..+++++++.   ",
+"   ..........   "};
+
+static const gchar * pointing_hand_xpm[] = {
+"16 20 3 1",
+"       c None",
+".      c #000000",
+"+      c #FFFFFF",
+"    ..          ",
+"   .++.         ",
+"   .++.         ",
+"   .++.         ",
+"   .++...       ",
+"   .++.++.      ",
+"   .++.++...    ",
+" . .++.++.++... ",
+".+..++.++.++.++.",
+".++.++.++.++.++.",
+".++.++.++.++.++.",
+".++.++.++.++.++.",
+" .+++++++++++++.",
+" .+++++++++++++.",
+"  .++++++++++++.",
+"  .++++++++++++.",
+"  .+++++++++++. ",
+"   .+++++++++.  ",
+"    .........   "};
+
+static const gchar * cursor_zoom_in_xpm[] = {
+"32 32 2 1",
+"       c None",
+".      c #000000",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"        ......                  ",
+"       ..     ..                ",
+"      ..       ..               ",
+"      .         .               ",
+"     .    ...    .              ",
+"     .    ...    .              ",
+"     .  .......  .              ",
+"     .  .......  .              ",
+"     .    ...    .              ",
+"      .   ...   ..              ",
+"      ..       . .              ",
+"       ..     . . .             ",
+"        ........ . .            ",
+"         .....  . . .           ",
+"                 . . .          ",
+"                  . . .         ",
+"                   . . .        ",
+"                    . . .       ",
+"                     .   .      ",
+"                      .  .      ",
+"                       ..       ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                "};
+
+static const gchar * cursor_zoom_out_xpm[] = {
+"32 32 2 1",
+"       c None",
+".      c #000000",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"        ......                  ",
+"       ..     ..                ",
+"      ..       ..               ",
+"      .         .               ",
+"     .           .              ",
+"     .           .              ",
+"     .  .......  .              ",
+"     .  .......  .              ",
+"     .           .              ",
+"      .         ..              ",
+"      ..       . .              ",
+"       ..     . . .             ",
+"        ........ . .            ",
+"         .....  . . .           ",
+"                 . . .          ",
+"                  . . .         ",
+"                   . . .        ",
+"                    . . .       ",
+"                     .   .      ",
+"                      .  .      ",
+"                       ..       ",
+"                                ",
+"                                ",
+"                                ",
+"                                ",
+"                                "};
+
+
+#define hand_closed_data_width 20
+#define hand_closed_data_height 20
+static const char hand_closed_data_bits[] = {
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x00, 0x80, 0x3f, 0x00,
+   0x80, 0xff, 0x00, 0x80, 0xff, 0x00, 0xb0, 0xff, 0x00, 0xf0, 0xff, 0x00,
+   0xe0, 0xff, 0x00, 0xe0, 0x7f, 0x00, 0xc0, 0x7f, 0x00, 0x80, 0x3f, 0x00,
+   0x00, 0x3f, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+
+/* Made with Gimp */
+#define hand_closed_mask_width 20
+#define hand_closed_mask_height 20
+static const char hand_closed_mask_bits[] = {
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+   0x00, 0x00, 0x00, 0x00, 0x06, 0x00, 0x80, 0x3f, 0x00, 0xc0, 0xff, 0x00,
+   0xc0, 0xff, 0x01, 0xf0, 0xff, 0x01, 0xf8, 0xff, 0x01, 0xf8, 0xff, 0x01,
+   0xf0, 0xff, 0x01, 0xf0, 0xff, 0x00, 0xe0, 0xff, 0x00, 0xc0, 0x7f, 0x00,
+   0x80, 0x7f, 0x00, 0x80, 0x7f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+
+#define hand_open_data_width 20
+#define hand_open_data_height 20
+static const char hand_open_data_bits[] = {
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x00,
+   0x60, 0x36, 0x00, 0x60, 0x36, 0x00, 0xc0, 0x36, 0x01, 0xc0, 0xb6, 0x01,
+   0x80, 0xbf, 0x01, 0x98, 0xff, 0x01, 0xb8, 0xff, 0x00, 0xf0, 0xff, 0x00,
+   0xe0, 0xff, 0x00, 0xe0, 0x7f, 0x00, 0xc0, 0x7f, 0x00, 0x80, 0x3f, 0x00,
+   0x00, 0x3f, 0x00, 0x00, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+
+#define hand_open_mask_width 20
+#define hand_open_mask_height 20
+static const char hand_open_mask_bits[] = {
+   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x00, 0x60, 0x3f, 0x00,
+   0xf0, 0x7f, 0x00, 0xf0, 0x7f, 0x01, 0xe0, 0xff, 0x03, 0xe0, 0xff, 0x03,
+   0xd8, 0xff, 0x03, 0xfc, 0xff, 0x03, 0xfc, 0xff, 0x01, 0xf8, 0xff, 0x01,
+   0xf0, 0xff, 0x01, 0xf0, 0xff, 0x00, 0xe0, 0xff, 0x00, 0xc0, 0x7f, 0x00,
+   0x80, 0x7f, 0x00, 0x80, 0x7f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+
+
+#define WHITE { 65535, 65535, 65535, 0 }
+#define BLACK { 0, 0, 0, 0 }
+
+
+static GnomeStockCursor default_cursors[] = {
+        {
+                GNOME_STOCK_CURSOR_DEFAULT,
+                GNOME_CURSOR_XPM,
+                default_arrow_xpm,
+                BLACK,
+                WHITE,
+                0, 0,     /* hotspot */
+                -1, -1,   /* w x h */
+                0,        /* alpha */
+                NULL,     /* xbm mask */
+                NULL, NULL /* bitmap/mask */
+        },
+        {
+                GNOME_STOCK_CURSOR_BLANK,
+                GNOME_CURSOR_XPM,
+                blank_xpm,
+                BLACK,
+                WHITE,
+                0, 0,     /* hotspot */
+                -1, -1,   /* w x h */
+                0,        /* alpha */
+                NULL, /* xbm mask */
+                NULL, NULL /* bitmap/mask */
+        },
+        {
+                GNOME_STOCK_CURSOR_POINTING_HAND,
+                GNOME_CURSOR_XPM,
+                pointing_hand_xpm,
+                BLACK,
+                WHITE,
+                5, 0,     /* hotspot */
+                -1, -1,   /* w x h */
+                0,        /* alpha */
+                NULL, /* xbm mask */
+                NULL, NULL /* bitmap/mask */
+        },
+        {
+                GNOME_STOCK_CURSOR_HAND_OPEN,
+                GNOME_CURSOR_XBM,
+                (gchar*)hand_open_data_bits,
+                BLACK,
+                WHITE,
+                10, 10,     /* hotspot */
+                hand_open_data_width, hand_open_data_height,   /* w x h */
+                0,        /* alpha */
+                (gchar*)hand_open_mask_bits,
+                NULL, NULL /* bitmap/mask */
+        },
+        {
+                GNOME_STOCK_CURSOR_HAND_CLOSE,
+                GNOME_CURSOR_XBM,
+                (gchar*)hand_closed_data_bits,
+                BLACK,
+                WHITE,
+                10, 10,     /* hotspot */
+                hand_closed_data_width, hand_closed_data_height,   /* w x h */
+                0,        /* alpha */
+                (gchar*)hand_closed_mask_bits,
+                NULL, NULL /* bitmap/mask */
+        },
+        {
+                GNOME_STOCK_CURSOR_ZOOM_IN,
+                GNOME_CURSOR_XPM,
+                cursor_zoom_in_xpm,
+                BLACK,
+                WHITE,
+                10, 10,     /* hotspot */
+                -1, -1,   /* w x h */
+                0,        /* alpha */
+                NULL, /* xbm mask */
+                NULL, NULL /* bitmap/mask */
+        },
+        {
+                GNOME_STOCK_CURSOR_ZOOM_IN,
+                GNOME_CURSOR_XPM,
+                cursor_zoom_out_xpm,
+                BLACK,
+                WHITE,
+                10, 10,     /* hotspot */
+                -1, -1,   /* w x h */
+                0,        /* alpha */
+                NULL, /* xbm mask */
+                NULL, NULL /* bitmap/mask */
+        },
+        {
+                GNOME_STOCK_CURSOR_EGG_1,
+                GNOME_CURSOR_XPM,
+                egg_timer1_xpm,
+                BLACK,
+                WHITE,
+                8, 8,     /* hotspot */
+                -1, -1,   /* w x h */
+                0,        /* alpha */
+                NULL, /* xbm mask */
+                NULL, NULL /* bitmap/mask */
+        }
+};
+
+static const gint num_default_cursors = sizeof(default_cursors)/sizeof(GnomeStockCursor);
+
+
+static void
+build_cursor_table (void)
+{
+	int i;
+
+        g_assert (cursortable == NULL);
+        
+	cursortable = g_hash_table_new (g_str_hash, g_str_equal);
+	
+	for (i = 0; i < num_default_cursors; i++)
+		gnome_stock_cursor_register (&default_cursors[i]);
+}
+
+
+/**
+ * create_bitmap_and_mask_from_xpm:
+ * @bitmap: Bitmap to hold the cursor bitmap.
+ * @mask: Bitmap to hold mask.
+ * @xpm: XPM data.
+ *
+ * Originally written by Miguel de Icaza.
+ * Modified by Iain Holmes.
+ */
+static void
+create_bitmap_and_mask_from_xpm (GdkBitmap **bitmap,
+				 GdkBitmap **mask,
+				 gchar **xpm)
+{
+	int height, width, colors;
+	char *pixmap_buffer;
+	char *mask_buffer;
+	int x, y, pix, yofs;
+	int transparent_color, black_color;
+	
+	sscanf (xpm [0], "%d %d %d %d", &width, &height, &colors, &pix);
+	
+	g_print ("width: %d\n", width);
+ 	g_assert (width%8 == 0);
+	pixmap_buffer = (char*) malloc (sizeof (char) * (width * height/8));
+	mask_buffer = (char*) malloc (sizeof (char) * (width * height/8));
+	
+	if (!pixmap_buffer || !mask_buffer)
+		return;
+	
+	g_assert (colors <= 3);
+	
+	transparent_color = ' ';
+	black_color = '.';
+	
+	yofs = colors + 1;
+	for (y = 0; y < height; y++){
+		for (x = 0; x < width;){
+			char value = 0, maskv = 0;
+			
+			for (pix = 0; pix < 8; pix++, x++){
+				if (xpm [y + yofs][x] != transparent_color){
+					maskv |= 1 << pix;
+					
+					if (xpm [y + yofs][x] != black_color){
+						value |= 1 << pix;
+					}
+				}
+			}
+			pixmap_buffer [(y * (width/8) + x/8)-1] = value;
+			mask_buffer [(y * (width/8) + x/8)-1] = maskv;
+		}
+	}
+	*bitmap = gdk_bitmap_create_from_data (NULL, pixmap_buffer, width, height);
+	*mask   = gdk_bitmap_create_from_data (NULL, mask_buffer, width, height);
+}
+
+
+#define MAXIMUM(x,y) ((x) > (y) ? (x) : (y))
+#define MINIMUM(x,y) ((x) < (y) ? (x) : (y))
+
+/* Take RGB and desaturate it. */
+static unsigned int
+threshold (unsigned int r,
+	   unsigned int g,
+	   unsigned int b)
+{
+	int max, min;
+	
+	max = MAXIMUM(r, g);
+	max = MAXIMUM(max, b);
+	min = MINIMUM(b, g);
+	min = MINIMUM(min, r);
+	
+	return (max + min) / 2;
+}
+
+
+/**
+ * gnome_cursor_create_from_pixbuf:
+ * @pixbuf: #GdkPixbuf containing the image.
+ * @bitmap: Return for the image bitmap.
+ * @mask: Return for the image mask.
+ * @width: Return for the image width.
+ * @height: Return for the image height.
+ *
+ * Creates a bitmap and mask from a #GdkPixbuf.
+ */
+static void
+gnome_cursor_create_from_pixbuf (GdkPixbuf *pixbuf,
+                                 guchar alpha_threshold,
+				 GdkBitmap **bitmap,
+				 GdkBitmap **mask)
+{
+	int w, h, has_alpha, rs;
+	int x, y;
+	unsigned char *pixel;
+	unsigned int r, g, b, a = 255;
+	unsigned char *pmap, *bmap;
+	
+	has_alpha = gdk_pixbuf_get_has_alpha (pixbuf);
+	pixel = gdk_pixbuf_get_pixels (pixbuf);
+
+        w = gdk_pixbuf_get_width(pixbuf);
+        h = gdk_pixbuf_get_height(pixbuf);
+        
+	g_assert (w%8 == 0);
+	pmap = (char*) malloc (sizeof (char) * (w * h / 8));
+	bmap = (char*) malloc (sizeof (char) * (w * h / 8));
+	
+	for (y = 0; y < h; y++) {
+                for (x = 0; x < w;) {
+                        int pix;
+                        unsigned char value = 0, maskv = 0;
+			
+                        for (pix = 0; pix < 8; pix++, x++) {
+                                unsigned int t = 0;
+                                r = *(pixel++);
+                                g = *(pixel++);
+                                b = *(pixel++);
+                                if (has_alpha)
+                                        a = *(pixel++);
+				
+                                if (a >= 127) {
+                                        maskv |= 1 << pix;
+					
+                                        /* threshold should be a #define */
+                                        if (threshold (r, g, b) >= alpha_threshold) {
+                                                value |= 1 << pix;
+                                        }
+                                }
+                        }
+                        pmap[(y * (w / 8) + x / 8 - 1)] = value;
+                        bmap[(y * (w / 8) + x / 8 - 1)] = maskv;
+                }
+	}
+	
+	*bitmap = gdk_bitmap_create_from_data (NULL, pmap, w, h);
+	*mask = gdk_bitmap_create_from_data (NULL, bmap, w, h);
+}
+
+
+/**
+ * gnome_stock_cursor_new:
+ * @cursorname: The name of the cursor to be set
+ *
+ * Returns a #GdkCursor of the requested cursor or %NULL on error.
+ * @cursorname is the name of a gnome stock cursor; either one you've
+ * registered or one of the stock definitions
+ * (GNOME_STOCK_CURSOR_DEFAULT, etc.)
+ *
+ * Returns: A new #GdkCursor or %NULL on failure.  */
+GdkCursor*
+gnome_stock_cursor_new (const gchar *cursorname)
+{
+	GnomeStockCursor *cursor = NULL;
+	GdkCursor *gdk_cursor;
+        GdkBitmap *pmap = NULL;
+        GdkBitmap *mask = NULL;
+
+        /* FIXME if GdkCursor had a refcount we could cache that
+           instead of the pixmap/bitmap */
+        
+	if (!cursortable)
+		build_cursor_table ();
+	
+	cursor = g_hash_table_lookup (cursortable, cursorname);
+
+	if (cursor == NULL) {
+		g_warning ("Unknown cursor %s", cursorname);
+		return NULL;
+	}
+
+        if (cursor->type != GNOME_CURSOR_STANDARD && cursor->pmap == NULL) {
+        
+                switch (cursor->type) {
+                case GNOME_CURSOR_XBM:
+                        pmap = gdk_bitmap_create_from_data (NULL,
+                                                            cursor->cursor_data,
+                                                            cursor->width,
+                                                            cursor->height);
+                        mask = gdk_bitmap_create_from_data (NULL,
+                                                            cursor->xbm_mask_bits,
+                                                            cursor->width,
+                                                            cursor->height);
+                        break;
+                        
+                case GNOME_CURSOR_XPM:
+                        create_bitmap_and_mask_from_xpm (&pmap, &mask, 
+                                                         cursor->cursor_data);
+                        break;
+                
+                case GNOME_CURSOR_FILE:
+                {
+                        GdkPixbuf *pixbuf;
+		
+                        pixbuf = gdk_pixbuf_new_from_file (cursor->cursor_data);
+                        gnome_cursor_create_from_pixbuf (pixbuf,
+                                                         cursor->alpha_threshold,
+                                                         &pmap, &mask);
+                        gdk_pixbuf_unref (pixbuf);
+                }
+                break;
+              
+                case GNOME_CURSOR_GDK_PIXBUF:
+                        gnome_cursor_create_from_pixbuf ((GdkPixbuf*) cursor->cursor_data,
+                                                         cursor->alpha_threshold,
+                                                         &pmap, &mask);
+                        break;
+                
+                default:
+                        g_warning ("Invalid GnomeCursorType");
+                        return NULL;
+                }
+        }
+
+        if (cursor->type != GNOME_CURSOR_STANDARD) {
+                if (pmap == NULL)
+                        return NULL;
+                else {
+                        gdk_cursor = gdk_cursor_new_from_pixmap (pmap, 
+                                                                 mask,
+                                                                 &cursor->foreground,
+                                                                 &cursor->background,
+                                                                 cursor->hotspot_x, 
+                                                                 cursor->hotspot_y);
+                }
+        } else {
+                return gdk_cursor_new(GPOINTER_TO_INT(cursor->cursor_data));
+        }
+          
+        cursor->pmap = pmap;
+        cursor->mask = mask;
+        
+	return gdk_cursor;
+}
+
+
+/**
+ * gnome_stock_cursor_register:
+ * @cursor: #GnomeStockCursor describing the cursor to register.
+ *
+ * The #GnomeStockCursor is not copied and must not be freed.  */
+void
+gnome_stock_cursor_register (GnomeStockCursor *cursor)
+{
+	GnomeStockCursor *old_cursor;
+        
+	if (!cursortable)
+		build_cursor_table ();
+
+        g_return_if_fail (cursor != NULL);
+        g_return_if_fail (cursor->pmap == NULL);
+        g_return_if_fail (cursor->mask == NULL);
+        
+	/* Check if the cursorname is unique */
+	old_cursor = g_hash_table_lookup (cursortable, cursor->cursorname);
+        
+	if (old_cursor) {
+		g_warning ("Cursor name %s is already registered.", 
+			   cursor->cursorname);
+		return;
+	}
+
+	g_hash_table_insert (cursortable, cursor->cursorname, cursor);
+}
+
+/**
+ * gnome_stock_cursor_lookup_entry:
+ * @cursorname: cursor name to look up in the list of registered cursors.
+ *
+ * The returned #GnomeStockCursor is not copied and must not be freed.  */
+GnomeStockCursor*
+gnome_stock_cursor_lookup_entry(const gchar *cursorname)
+{
+	if (!cursortable)
+		build_cursor_table ();
+	
+	return g_hash_table_lookup (cursortable, cursorname);
+}
+
+
+/**
+ * gnome_stock_cursor_unregister:
+ * @cursorname: Name of cursor to unregister.
+ *
+ * Unregisters a cursor and frees all memory associated with it.
+ */
+void
+gnome_stock_cursor_unregister (const gchar *cursorname)
+{
+	GnomeStockCursor *cursor;
+
+        g_return_if_fail (cursortable != NULL);
+
+	cursor = g_hash_table_lookup (cursortable, cursorname);
+	g_return_if_fail (cursor != NULL);
+	
+	g_hash_table_remove (cursortable, cursorname);
+
+        gdk_bitmap_unref(cursor->pmap);
+        gdk_bitmap_unref(cursor->mask);
+}
+
+
+
+/*
+ * The original idea was to have a stack of cursors for each GdkWindow,
+ * with push/pop. However this can't be sanely implemented
+ * without reference counting on the cursors.
+ */
