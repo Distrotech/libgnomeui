@@ -177,7 +177,7 @@ gnome_window_set_icon_from_default (GtkWindow *w)
 	const gchar *default_icon = NULL;
 
 	program = gnome_program_get ();
-	g_object_get (G_OBJECT (program), LIBGNOMEUI_PARAM_DEFAULT_ICON, &default_icon);
+	g_object_get (G_OBJECT (program), LIBGNOMEUI_PARAM_DEFAULT_ICON, &default_icon, NULL);
 	if (default_icon)
 		gnome_window_set_icon_from_file (w, default_icon, FALSE);
 }
