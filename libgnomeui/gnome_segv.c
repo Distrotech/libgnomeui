@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
   gchar* msg;
   struct sigaction sa;
   poptContext ctx;
-  char **args;
+  const char **args;
 
   /* We do this twice to make sure we don't start running ourselves... :) */
   memset(&sa, 0, sizeof(sa));

@@ -254,6 +254,25 @@ gnome_app_destroy (GtkObject *object)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
+/* Callback for an app's contents' parent_set signal.  We set the app->contents
+ * to NULL and detach the signal.
+ */
+static void
+contents_parent_set (GtkWidget *widget, GtkWidget *previous_parent, gpointer data)
+{
+	GnomeApp *app;
+
+	app = GNOME_APP (data);
+
+	g_assert (previous_parent == GTK_WIDGET (app));
+
+	gtk_signal_disconnect_by_func (GTK_OBJECT (widget),
+				       GTK_SIGNAL_FUNC (contents_parent_set),
+				       data);
+
+	app->contents = NULL;
+}
+
 /**
  * gnome_app_set_contents
  * @app: Pointer to GNOME app object.
@@ -262,19 +281,30 @@ gnome_app_destroy (GtkObject *object)
  * Description:
  * Sets the content area of the GNOME app's main window.
  **/
-
 void
 gnome_app_set_contents (GnomeApp *app, GtkWidget *contents)
 {
+	GtkWidget *new_contents;
+
 	g_return_if_fail (app != NULL);
 	g_return_if_fail (GNOME_IS_APP(app));
 	g_return_if_fail (app->dock != NULL);
-	g_return_if_fail (app->contents == NULL);
+	g_return_if_fail (contents != NULL);
+	g_return_if_fail (GTK_IS_WIDGET (contents));
 
 	gnome_dock_set_client_area (GNOME_DOCK (app->dock), contents);
-	gtk_widget_show (contents);
 
-	app->contents = contents;
+	/* Re-fetch it in case it did not change */
+	new_contents = gnome_dock_get_client_area (GNOME_DOCK (app->dock));
+
+	if (new_contents == contents && new_contents != app->contents) {
+		gtk_widget_show (new_contents);
+		gtk_signal_connect (GTK_OBJECT (new_contents), "parent_set",
+				    GTK_SIGNAL_FUNC (contents_parent_set),
+				    app);
+
+		app->contents = new_contents;
+	}
 }
 
 /**

@@ -1,3 +1,20 @@
+1999-09-17  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-app.c (gnome_app_set_contents): Do all the proper checks
+	with respect to the dock's new client area.  Also, connect a
+	signal handler to the parent_set signal of the contents.
+	(contents_parent_set): Set the app->contents to NULL when the
+	contents are unparented.  This fixes a bug where the app would
+	keep a dangling pointer to the contents when they were removed.
+
+	Note that GnomeDock has an inconsistency with the way the other
+	GtkContainers work; it should barf if its client area is not NULL
+	instead of unparenting it when you try to set a new client area.
+
+	* gnome_segv.c (main): Const correctness for the args variable.
+	If you want this abominable little program to go in, at least make
+	sure it builds cleanly!
+
 1999-09-17  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dateedit.h, gnome-dateedit.c: Revert the new consistent
