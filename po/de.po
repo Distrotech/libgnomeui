@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
-"POT-Creation-Date: 2002-12-09 21:29+0100\n"
-"PO-Revision-Date: 2002-12-16 00:24+0100\n"
-"Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
+"POT-Creation-Date: 2002-12-20 17:48+0100\n"
+"PO-Revision-Date: 2002-12-20 17:48+0100\n"
+"Last-Translator: Benjamin Greiner <nadaschauher@gmx.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -532,6 +532,7 @@ msgstr "Hinweis für Kindelement 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datei"
 
@@ -589,6 +590,7 @@ msgid "_Game"
 msgstr "_Spiel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hilfe"
 
@@ -779,11 +781,11 @@ msgstr "Die Anwendung konfigurieren"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Info"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Über diese Anwendung"
 
@@ -810,7 +812,7 @@ msgstr "Ein neues Fenster öffnen"
 msgid "_Close This Window"
 msgstr "Fenster _schließen"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Das aktuelle Fenster schließen"
 
@@ -892,15 +894,15 @@ msgstr "Hilfe zu dieser Anwendung zeigen"
 
 #: libgnomeui/gnome-app-helper.c:2566
 msgid "Text Below Icons"
-msgstr "Text unter Icons"
+msgstr "Text unter Symbolen"
 
 #: libgnomeui/gnome-app-helper.c:2567
 msgid "Priority Text Beside Icons"
-msgstr "Text vorrangig neben Icons"
+msgstr "Nur wichtiger Text neben Symbolen"
 
 #: libgnomeui/gnome-app-helper.c:2568
 msgid "Icons Only"
-msgstr "Nur Icons"
+msgstr "Nur Symbole"
 
 #: libgnomeui/gnome-app-helper.c:2569
 msgid "Text Only"
@@ -1186,12 +1188,12 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Eindeutige Kennung für den Icon-Eintrag.  Dies wird verwendet, um die "
+"Eindeutige Kennung für den Symbol-Eintrag.  Dies wird verwendet, um die "
 "Chronikliste zu speichern."
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
-msgstr "Der Titel des Auswahl-Icondialogs."
+msgstr "Der Titel des Symbolauswahl-Dialogs."
 
 #: libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
@@ -1199,11 +1201,11 @@ msgstr "Pixmap-Verzeichnis"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
-msgstr "Das nach Icons zu durchsuchende Verzeichnis."
+msgstr "Das nach Symbolen zu durchsuchende Verzeichnis."
 
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
-msgstr "Dateiname der im Icon-Eintrag angezeigt werden soll."
+msgstr "Dateiname, der im Symboleintrag angezeigt werden soll."
 
 # CHECK
 #: libgnomeui/gnome-icon-entry.c:210
@@ -1215,12 +1217,12 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Auswahldialog.  Sie können diese Eigenschaft verwenden, um den GtkDialog zu "
+"Symbolauswahl-Dialog.  Sie können diese Eigenschaft verwenden, um den GtkDialog zu "
 "erhalten, falls Sie seine Eigenschfaten verändern oder abfragen müssen."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
 msgid "No Icon"
-msgstr "Kein Icon"
+msgstr "Kein Symbol"
 
 #: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
@@ -1233,27 +1235,27 @@ msgstr "Voransicht"
 
 #: libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
-msgstr "Icon für Auswahldialog"
+msgstr "Symbolauswahl-Dialog"
 
 #: libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
-msgstr "Dieser Auswahldialog lässt Sie ein Icon auswählen."
+msgstr "Dieser Auswahldialog lässt Sie ein Symbol auswählen."
 
 #: libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
-msgstr "Icon-Auswahl"
+msgstr "Symbolauswahl"
 
 #: libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
-msgstr "Wählen Sie ein Icon."
+msgstr "Wählen Sie das gewünschte Symbol."
 
 #: libgnomeui/gnome-icon-entry.c:982
 msgid "Icon Selector"
-msgstr "Icon-Auswahl"
+msgstr "Symbolauswahl"
 
 #: libgnomeui/gnome-icon-entry.c:983
 msgid "This button will open a window to let you select an icon."
-msgstr "Diese Schaltfläche öffnet das Auswahlfenster für das Icon."
+msgstr "Diese Schaltfläche öffnet das Auswahlfenster für Symbole."
 
 #: libgnomeui/gnome-icon-entry.c:1006
 msgid "Browse"
@@ -1261,13 +1263,13 @@ msgstr "Auswählen"
 
 #: libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon path"
-msgstr "Icon-Pfad"
+msgstr "Pfad zum Symbol"
 
 #: libgnomeui/gnome-icon-entry.c:1009
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "Bitte ein Verzeichnis angeben in dem Icons gespeichert sind"
+msgstr "Bitte ein Verzeichnis angeben, in dem sich Symbole befinden"
 
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1281,7 +1283,7 @@ msgstr "GnomeIconSelection: Verzeichnis »%s« konnte nicht geöffnet werden"
 
 #: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr "Icons werden geladen..."
+msgstr "Symbole werden geladen..."
 
 #: libgnomeui/gnome-messagebox.c:108
 msgid "Information"
@@ -1346,5 +1348,6 @@ msgstr "%a, %d. %m. %Y"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Den Test beenden"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Den Test beenden"
