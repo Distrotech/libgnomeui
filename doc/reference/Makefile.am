@@ -174,8 +174,8 @@ maintainer-clean-local: clean
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(TARGET_DIR)
-	(installfiles=`echo $(srcdir)/html/*.html`; \
-	if test "$$installfiles" = '$(srcdir)/html/*.html'; \
+	(installfiles=`echo $(srcdir)/html/*`; \
+	if test "$$installfiles" = '$(srcdir)/html/*'; \
 	then echo '-- Nothing to install' ; \
 	else \
 	  for i in $$installfiles; do \
