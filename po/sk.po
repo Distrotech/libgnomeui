@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-03-18 15:41+0100\n"
-"PO-Revision-Date: 2002-03-03 13:33+0100\n"
+"POT-Creation-Date: 2002-03-25 11:26+0100\n"
+"PO-Revision-Date: 2002-03-25 11:26+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -490,6 +490,7 @@ msgstr "Rada pre polo¾ku 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "Súbo_r"
 
@@ -547,6 +548,7 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomocník"
 
@@ -737,11 +739,11 @@ msgstr "Konfigurova» aplikáciu"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "O progr_ame"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informácie o tomto programe"
 
@@ -768,7 +770,7 @@ msgstr "Vytvori» nové okno"
 msgid "_Close This Window"
 msgstr "_Zatvori» toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvori» aktuálne okno"
 
@@ -1085,20 +1087,24 @@ msgstr "Zobrazi» veµkos» v re¾ime informácie o type písma"
 msgid "GNOME GConf UI Support"
 msgstr "Podpora UI GNOME GConf"
 
-#: libgnomeui/gnome-gconf-ui.c:107
+#: libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "_Detaily"
+
+#: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
 msgid ""
-"You attempted to change an aspect of your configuration that your system "
-"administrator or operating system vendor does not allow you to change. Some "
-"of the settings you have selected may not take effect, or may not be "
-"restored next time you use this application (%s)."
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
 msgstr ""
-"Pokú¹ate sa zmeni» stav va¹ej konfigurácie, ktorý vám vá¹ správca systému "
-"alebo dodávateµ operaèného systému nepovolil nastavova». Niektoré z "
-"nastavení, ktoré ste zvolili sa nemusia prejavi» alebo nemusia by» obnovené "
-"pri nasledujúcom pou¾ití tejto aplikácie (%s)."
+"Aplikácia \"%s\" sa pokúsila zmeni» stav va¹ej konfigurácie, ktorý vám vá¹ "
+"správca systému alebo dodávateµ operaèného systému nepovolil nastavova». "
+"Niektoré z nastavení, ktoré ste zvolili sa nemusia prejavi» alebo nemusia "
+"by» obnovené pri nasledujúcom pou¾ití tejto aplikácie."
 
-#: libgnomeui/gnome-gconf-ui.c:115
+#: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1106,11 +1112,6 @@ msgid ""
 msgstr ""
 "Vyskytla sa chyba pri naèítavaní alebo ukladaní konfiguraènej informácie pre "
 "%s. Niektoré z va¹ich konfiguraèných nastavení nemusia pracova» správne."
-
-#: libgnomeui/gnome-gconf-ui.c:139
-#, c-format
-msgid "GConf error details: %s\n"
-msgstr "Podrobnosti chyby GConf: %s\n"
 
 #: libgnomeui/gnome-icon-entry.c:164
 msgid ""
@@ -1241,59 +1242,6 @@ msgstr "%a %d.%m.%Y %H:%M"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Nastavi» príznaky ladenia Gdk"
-
-#~ msgid "FLAGS"
-#~ msgstr "PRÍZNAKY"
-
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Odznaèi» ladiace príznaky Gdk"
-
-#~ msgid "Make X calls synchronous"
-#~ msgstr "Pou¾i» synchrónne volania X"
-
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "Nepou¾i» ro¾írenie zdieµanej pamäte X"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Názov programu pou¾itý správcom okien"
-
-#~ msgid "NAME"
-#~ msgstr "NÁZOV"
-
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Trieda programu pou¾itá správcom okien"
-
-#~ msgid "CLASS"
-#~ msgstr "TRIEDA"
-
-#~ msgid "HOST"
-#~ msgstr "HOSTITE¥"
-
-#~ msgid "PORT"
-#~ msgstr "PORT"
-
-#~ msgid "STYLE"
-#~ msgstr "©TÝL"
-
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Nastavi» ladiace príznaky Gtk+"
-
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Odznaèi» ladiace príznaky Gtk+"
-
-#~ msgid "Make all warnings fatal"
-#~ msgstr "Spravi» v¹etky upozornenia záva¾né"
-
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "Nahra» prídavný Gtk modul"
-
-#~ msgid "MODULE"
-#~ msgstr "MODUL"
-
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
-
-#~ msgid "Exit the test"
-#~ msgstr "Ukonèi» test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukonèi» test"
