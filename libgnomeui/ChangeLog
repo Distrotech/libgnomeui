@@ -1,3 +1,8 @@
+Wed Apr 19 04:49:54 2000  George Lebl <jirka@5z.com>
+
+	* gnome-file-entry.c: use GtkArg system, use G_DIR_SEPARATOR, and
+	  minor cleanup
+
 Wed Apr 19 04:36:15 2000  George Lebl <jirka@5z.com>
 
 	* gnome-href.c: use GtkArg system and small doc updates

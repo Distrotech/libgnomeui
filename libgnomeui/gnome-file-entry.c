@@ -59,7 +59,21 @@ static void gnome_file_entry_drag_data_received (GtkWidget        *widget,
 						 guint             info,
 						 guint32           time);
 static void browse_clicked(GnomeFileEntry *fentry);
+static void fentry_set_arg                (GtkObject *object,
+					   GtkArg *arg,
+					   guint arg_id);
+static void fentry_get_arg                (GtkObject *object,
+					   GtkArg *arg,
+					   guint arg_id);
 static GtkHBoxClass *parent_class;
+
+enum {
+	ARG_0,
+	ARG_HISTORY_ID,
+	ARG_BROWSE_DIALOG_TITLE,
+	ARG_GNOME_ENTRY,
+	ARG_GTK_ENTRY
+};
 
 guint
 gnome_file_entry_get_type (void)
@@ -110,10 +124,77 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	gtk_object_class_add_signals(object_class,gnome_file_entry_signals,
 				     LAST_SIGNAL);
 
+	gtk_object_add_arg_type("GnomeFileEntry::history_id",
+				GTK_TYPE_POINTER,
+				GTK_ARG_WRITABLE,
+				ARG_HISTORY_ID);
+	gtk_object_add_arg_type("GnomeFileEntry::browse_dialog_title",
+				GTK_TYPE_POINTER,
+				GTK_ARG_WRITABLE,
+				ARG_BROWSE_DIALOG_TITLE);
+	gtk_object_add_arg_type("GnomeFileEntry::gnome_entry",
+				GTK_TYPE_POINTER,
+				GTK_ARG_READABLE,
+				ARG_GNOME_ENTRY);
+	gtk_object_add_arg_type("GnomeFileEntry::gtk_entry",
+				GTK_TYPE_POINTER,
+				GTK_ARG_READABLE,
+				ARG_GTK_ENTRY);
+
 	object_class->finalize = gnome_file_entry_finalize;
+	object_class->get_arg = fentry_get_arg;
+	object_class->set_arg = fentry_set_arg;
 
 	class->browse_clicked = browse_clicked;
+}
 
+static void
+fentry_set_arg (GtkObject *object,
+		GtkArg *arg,
+		guint arg_id)
+{
+	GnomeFileEntry *self;
+
+	self = GNOME_FILE_ENTRY (object);
+
+	switch (arg_id) {
+	case ARG_HISTORY_ID: {
+		GtkWidget *gentry;
+		gentry = gnome_file_entry_gnome_entry(self);
+		gnome_entry_set_history_id (GNOME_ENTRY(gentry),
+					    GTK_VALUE_POINTER(*arg));
+		gnome_entry_load_history (GNOME_ENTRY(gentry));
+		break;
+	}
+	case ARG_BROWSE_DIALOG_TITLE:
+		gnome_file_entry_set_title (self, GTK_VALUE_POINTER(*arg));
+		break;
+	default:
+		break;
+	}
+}
+
+static void
+fentry_get_arg (GtkObject *object,
+		GtkArg *arg,
+		guint arg_id)
+{
+	GnomeFileEntry *self;
+
+	self = GNOME_FILE_ENTRY (object);
+
+	switch (arg_id) {
+	case ARG_GNOME_ENTRY:
+		GTK_VALUE_POINTER(*arg) =
+			gnome_file_entry_gnome_entry(self);
+		break;
+	case ARG_GTK_ENTRY:
+		GTK_VALUE_POINTER(*arg) =
+			gnome_file_entry_gtk_entry(self);
+		break;
+	default:
+		break;
+	}
 }
 
 static void
@@ -160,7 +241,7 @@ browse_clicked(GnomeFileEntry *fentry)
 		gtk_widget_set_sensitive(fs->file_list,
 					 !fentry->directory_entry);
 		p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
-		if(p && *p!='/' && fentry->default_path) {
+		if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
 			p = g_concat_dir_and_file (fentry->default_path, p);
 			gtk_file_selection_set_filename (fs, p);
 			g_free(p);
@@ -211,7 +292,7 @@ browse_clicked(GnomeFileEntry *fentry)
 				 !fentry->directory_entry);
 
 	p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
-	if(p && *p!='/' && fentry->default_path) {
+	if(p && *p!=G_DIR_SEPARATOR && fentry->default_path) {
 		p = g_concat_dir_and_file (fentry->default_path, p);
 		gtk_file_selection_set_filename (fs, p);
 		g_free(p);
@@ -447,18 +528,13 @@ gnome_file_entry_set_default_path(GnomeFileEntry *fentry, const char *path)
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
 
-	if(path) {
-		if(realpath(path,rpath))
-			p = g_strdup(rpath);
-		else
-			p = NULL;
-	} else
+	if(path && realpath(path, rpath))
+		p = g_strdup(rpath);
+	else
 		p = NULL;
 
-	if(fentry->default_path)
-		g_free(fentry->default_path);
-
 	/*handles NULL as well*/
+	g_free(fentry->default_path);
 	fentry->default_path = p;
 }
 
@@ -535,7 +611,7 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 		return NULL;
 	}
 
-	if (*t == '/')
+	if (*t == G_DIR_SEPARATOR)
 		p = t;
 	else if (*t == '~') {
 		p = tilde_expand (t);
