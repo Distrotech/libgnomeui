@@ -1,5 +1,9 @@
 1998-12-08  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
+	* gnome-mdi.c (book_switch_page): only call app_set_view() if the
+	new current page's child differs from active_view.
+	(gnome_mdi_set_mode): open a toplevel if there was one open before,
+	even without any children.
 	* gnome-app-helper.c (gnome_app_install_statusbar_menu_hints,
 	gnome_app_install_appbar_menu_hints): handle GNOME_APP_UI_RADIOITEMS
 	and don't try to set callback for GNOME_APP_UI_HELP entry.

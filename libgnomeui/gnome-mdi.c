@@ -697,8 +697,10 @@ static void book_switch_page(GtkNotebook *book, GtkNotebookPage *page, gint page
 #endif
 	app = GNOME_APP(gtk_widget_get_toplevel(GTK_WIDGET(book)));
 
-	if(page)
-		app_set_view(mdi, app, page->child);
+	if(page) {
+		if(page->child != mdi->active_view)
+			app_set_view(mdi, app, page->child);
+	}
 	else
 		app_set_view(mdi, app, NULL);  
 }
@@ -1562,6 +1564,9 @@ void gnome_mdi_set_mode (GnomeMDI *mdi, GnomeMDIMode mode)
 	mdi->active_window = NULL;
 
 	mdi->mode = mode;
+
+	if(windows)
+		gnome_mdi_open_toplevel(mdi);
 
 	/* re-implant views in proper containers */
 	child_node = mdi->children;
