@@ -15,10 +15,33 @@
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
+#include <config.h>
 #include "libgnome/gnome-defs.h"
 #include "gnome-messagebox.h"
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
+
+/* Library must use dgettext, not gettext.  */
+#ifdef ENABLE_NLS
+#    include <libintl.h>
+#    define _(String) dgettext (PACKAGE, String)
+#    ifdef gettext_noop
+#        define N_(String) gettext_noop (String)
+#    else
+#        define N_(String) (String)
+#    endif
+#else
+/* Stubs that do something close enough.  */
+#    define textdomain(String) (String)
+#    define gettext(String) (String)
+#    define dgettext(Domain,Message) (Message)
+#    define dcgettext(Domain,Message,Type) (Message)
+#    define bindtextdomain(Domain,Directory) (Domain)
+#    define _(String) (String)
+#    define N_(String) (String)
+#endif
+
 
 enum {
   CLICKED,
@@ -138,7 +161,7 @@ gnome_messagebox_new (gchar           *message,
 
   if (strcmp(GNOME_MESSAGEBOX_INFO, messagebox_type) == 0)
     {
-      gtk_window_set_title (GTK_WINDOW (messagebox), "Information");
+      gtk_window_set_title (GTK_WINDOW (messagebox), _("Information"));
       pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (messagebox)->window, 
 					   &mask, 
 					   &style->bg[GTK_STATE_NORMAL],
@@ -146,7 +169,7 @@ gnome_messagebox_new (gchar           *message,
     }
   else if (strcmp(GNOME_MESSAGEBOX_WARNING, messagebox_type) == 0)
     {
-      gtk_window_set_title (GTK_WINDOW (messagebox), "Warning");
+      gtk_window_set_title (GTK_WINDOW (messagebox), _("Warning"));
       pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (messagebox)->window,
 					   &mask, 
 					   &style->bg[GTK_STATE_NORMAL],
@@ -154,7 +177,7 @@ gnome_messagebox_new (gchar           *message,
     }
   else if (strcmp(GNOME_MESSAGEBOX_ERROR, messagebox_type) == 0)
     {
-      gtk_window_set_title (GTK_WINDOW (messagebox), "Error");
+      gtk_window_set_title (GTK_WINDOW (messagebox), _("Error"));
       pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (messagebox)->window, 
 					   &mask, 
 					   &style->bg[GTK_STATE_NORMAL],
@@ -162,7 +185,7 @@ gnome_messagebox_new (gchar           *message,
     }
   else if (strcmp(GNOME_MESSAGEBOX_QUESTION, messagebox_type) == 0)
     {
-      gtk_window_set_title (GTK_WINDOW (messagebox), "Question");
+      gtk_window_set_title (GTK_WINDOW (messagebox), _("Question"));
       pixmap = gdk_pixmap_create_from_xpm (GTK_WIDGET (messagebox)->window, 
 					   &mask, 
 					   &style->bg[GTK_STATE_NORMAL],
@@ -205,7 +228,7 @@ gnome_messagebox_new (gchar           *message,
   if (button1)
     messagebox->button1 = gtk_button_new_with_label (button1);
   else
-    messagebox->button1 = gtk_button_new_with_label ("OK");
+    messagebox->button1 = gtk_button_new_with_label (_("OK"));
   GTK_WIDGET_SET_FLAGS (GTK_WIDGET (messagebox->button1), GTK_CAN_DEFAULT);
   gtk_widget_set_usize (GTK_WIDGET (messagebox->button1), 
 			GNOME_MESSAGEBOX_BUTTON_WIDTH,
