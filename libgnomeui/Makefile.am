@@ -208,7 +208,7 @@ libgnomeui_2_la_LDFLAGS = \
 	-version-info $(LIB_VERSION)
 
 libgnomeui_2_la_LIBADD = \
-	$(LIBGNOMEUI_LIBS)
+	$(LIBGNOMEUI_LIBS) $(SM_LIBS)
 
 LDADD = \
 	libgnomeui-2.la

@@ -27,8 +27,27 @@ AC_SUBST(LDFLAGS)
 
 GNOME_COMPILE_WARNINGS(maximum)
 
-dnl Utility conditional
-AM_CONDITIONAL(FALSE, test x = y)
+dnl
+dnl Check for -lSM (for gnome-client)
+dnl
+
+AC_PATH_XTRA
+
+SM_LIBS=""
+sm_save_cppflags="$CPPFLAGS"
+CPPFLAGS="$CPPFLAGS $X_CFLAGS"
+
+GNOME_HAVE_SM=true
+AC_CHECK_LIB(SM, SmcSaveYourselfDone,
+	[SM_LIBS="-lSM -lICE"],GNOME_HAVE_SM=false,
+	$X_LIBS -lICE)
+AC_CHECK_HEADERS(X11/SM/SMlib.h,GNOME_HAVE_SM=false)
+if test "$GNOME_HAVE_SM" = true; then
+	AC_DEFINE(HAVE_LIBSM)
+fi
+
+AC_SUBST(SM_LIBS)
+CPPFLAGS="$sm_save_cppflags"
 
 dnl
 dnl Start of pkg-config checks

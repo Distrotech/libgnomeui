@@ -29,7 +29,7 @@
 #include <gtk/gtkwindow.h>
 #include <gtk/gtkeditable.h>
 #include <gtk/gtkaccelgroup.h>
-
+#include <gtk/gtkstock.h>
 
 #include <stdarg.h>
 

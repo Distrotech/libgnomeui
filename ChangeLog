@@ -1,3 +1,7 @@
+2001-09-08  jacob berkman  <jacob@ximian.com>
+
+	* configure.in: add check for libSM, which gnome-client needs.
+
 2001-09-04  Rodrigo Moya <rodrigo@gnome-db.org>
 
 	* libgnomeui/gnome-i18nP.h: remove gettext defines, which are already
