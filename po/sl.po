@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-06-09 22:13+0200\n"
+"POT-Creation-Date: 2002-06-16 15:33+0200\n"
 "PO-Revision-Date: 2001-07-29 12:32+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -872,10 +872,6 @@ msgstr "_Končaj igro"
 msgid "End the current game"
 msgstr "Končaj trenutno igro"
 
-#: libgnomeui/gnome-app-helper.c:1144
-msgid "_Contents"
-msgstr "_Vsebina"
-
 #: libgnomeui/gnome-app-helper.c:1145
 msgid "View help for this application"
 msgstr "Glej pomoč za ta program"
@@ -1334,6 +1330,9 @@ msgstr "Sans 14"
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Izhod iz preizkusa"
+
+#~ msgid "_Contents"
+#~ msgstr "_Vsebina"
 
 #~ msgid "Find _Again"
 #~ msgstr "Poišči z_nova"
