@@ -377,7 +377,7 @@ setup_preview(GtkWidget *widget)
 	frame = gtk_object_get_data(GTK_OBJECT(widget),"frame");
 	fs = gtk_object_get_data(GTK_OBJECT(frame),"fs");
 
-	if((l = gtk_container_children(GTK_CONTAINER(frame))) != NULL) {
+	if((l = gtk_container_get_children(GTK_CONTAINER(frame))) != NULL) {
 		pp = l->data;
 		g_list_free(l);
 	}

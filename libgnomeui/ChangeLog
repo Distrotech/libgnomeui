@@ -1,3 +1,8 @@
+Fri Aug 31 03:59:37 2001  George Lebl <jirka@5z.com>
+
+	* gnome-pixmap-entry.c, gnome-icon-entry.c: a bit of fixup for new
+	  GTK+ api
+
 Fri Aug 31 03:16:44 2001  George Lebl <jirka@5z.com>
 
 	* gnome-icon-entry.h, gnome-icon-sel.h, gnome-pixmap-entry.h:  Remove
