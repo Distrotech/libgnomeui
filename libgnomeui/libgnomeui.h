@@ -55,6 +55,7 @@
 #include <libgnomeui/gnome-macros.h>
 #include <libgnomeui/gnome-types.h>
 #include <libgnomeui/gnome-stock-icons.h>
+#include <libgnomeui/gnome-scores.h>
 #include <libgnomeui/gnome-client.h>
 #include <libgnomeui/gnome-dateedit.h>
 #include <libgnomeui/gnometypebuiltins.h>
