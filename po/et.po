@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui Gnome 2.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-29 12:39+0100\n"
-"PO-Revision-Date: 2005-02-10 18:22+0300\n"
+"PO-Revision-Date: 2005-02-11 09:09+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -786,11 +786,11 @@ msgstr "Logopilt"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
-msgstr ""
+msgstr "Pealmine vesimärk"
 
 #: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
-msgstr ""
+msgstr "Vesimärgipile pealmise kihi jaoks"
 
 #: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
@@ -881,19 +881,19 @@ msgstr ""
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
-msgstr ""
+msgstr "Näita Rakenda-nuppu"
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr ""
+msgstr "Näitab 'Rakenda' nuppu 'Edasi' nupu asemel"
 
 #: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
-msgstr ""
+msgstr "Näita Abi"
 
 #: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
-msgstr ""
+msgstr "Näitab 'Abi' nuppu"
 
 #: libgnomeui/gnome-entry.c:193
 #: libgnomeui/gnome-entry.c:194
