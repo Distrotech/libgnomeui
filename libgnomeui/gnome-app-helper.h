@@ -5,7 +5,8 @@ struct _GnomeMenuInfo {
 	enum {
 		GNOME_APP_MENU_ENDOFINFO,
 		GNOME_APP_MENU_ITEM,
-		GNOME_APP_MENU_SUBMENU
+		GNOME_APP_MENU_SUBMENU,
+		GNOME_APP_MENU_HELP
 	} type;
 	gchar *label;
 	gpointer moreinfo; /* For a menuitem, this should point to the
@@ -13,7 +14,12 @@ struct _GnomeMenuInfo {
 			      activated.
 			      
 			      For a submenu, it should point to the
-			      GnomeMenuInfo array for that menu. */
+			      GnomeMenuInfo array for that menu.
+
+			      For a help entry, is points to a string
+			      which is a component of the help path
+			      used to find the help for this app.
+			   */
 	GtkWidget *widget; /* This is filled in by gnome_app_create_menu() */
 };
 
