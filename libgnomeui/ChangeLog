@@ -1,6 +1,10 @@
-Wen Nov 18 03:26 PM 1998  Tim Gerla   <timg@means.net
+Wen Nov 18 04:57 PM 1998  Tim Gerla   <timg@means.net>
 
-        * Added some keybindings to gnome-uidefs.h. Use them.
+        * gnome-uidefs.h: Fixed to really be GnomeUIInfo compatible.
+
+Wen Nov 18 03:26 PM 1998  Tim Gerla   <timg@means.net>
+
+        * gnome-uidefs.h: Added some keybindings.
 
 1998-11-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 

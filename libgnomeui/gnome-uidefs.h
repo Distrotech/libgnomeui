@@ -39,19 +39,32 @@
 /* These are keybindings, in GnomeUIInfo format. USE THEM OR DIE! 
    Add to the list as well..
 */
-#define GNOME_KEY_EXIT 	"<control>Q"
-#define GNOME_KEY_CLOSE "<control>W"
+#define GNOME_KEY_NAME_EXIT 	'Q'
+#define GNOME_KEY_MOD_EXIT	(GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_CLOSE 	'W'
+#define	GNOME_KEY_MOD_CLOSE	(GDK_CONTROL_MASK)
 
-#define GNOME_KEY_CUT 	"<control>X"
-#define GNOME_KEY_COPY	"<control>C"
-#define GNOME_KEY_PASTE "<control>V"
-#define GNOME_KEY_CLEAR "<control>K"
+#define GNOME_KEY_NAME_CUT 	'X'
+#define GNOME_KEY_MOD_CUT 	(GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_COPY	'C'
+#define GNOME_KEY_MOD_COPY	(GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_PASTE 	'V'
+#define GNOME_KEY_MOD_PASTE 	(GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_CLEAR 	'K'
+#define GNOME_KEY_NAME_CLEAR 	(GDK_CONTROL_MASK)
 
-#define GNOME_KEY_UNDO  "<control>U"
-#define GNOME_KEY_REDO	"<control>R"
+#define GNOME_KEY_NAME_UNDO  	'U'
+#define GNOME_KEY_MOD_UNDO  	(GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_REDO	'R'
+#define GNOME_KEY_MOD_REDO	(GDK_CONTROL_MASK)
 
-#define GNOME_KEY_NEW	"<control>N"
-#define GNOME_KEY_SAVE	"<control>S"
-#define GNOME_KEY_OPEN	"<control>O"
+#define GNOME_KEY_NAME_NEW	'N'
+#define GNOME_KEY_MOD_NEW	(GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_SAVE	'S'
+#define GNOME_KEY_MOD_SAVE	(GDK_CONTROL_MASK)
+#define GNOME_KEY_NAME_SAVE_AS	'S'
+#define GNOME_KEY_MOD_SAVE_AS   (GDK_CONTROL_MASK||GDK_SHIFT_MASK)
+#define GNOME_KEY_NAME_OPEN	'O'
+#define GNOME_KEY_MOD_OPEN	(GDK_CONTROL_MASK)
 
 #endif
