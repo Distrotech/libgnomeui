@@ -1,3 +1,7 @@
+2002-04-27  Simos Xenitellis  <simos@hellug.gr>
+
+	* configure.in: Added Greek (el) to ALL_LINGUAS. 
+
 2002-04-26  Bill Nottingham <notting@redhat.com>
 
 	* libgnomeui/gnome-font-picker.h: fix spelling in comments
