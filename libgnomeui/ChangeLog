@@ -5,7 +5,7 @@
 
 1999-09-09  Vincent Renardias <vincent@ldsol.com>
 
-	* libgnomeui/gnome_segv.c: i18n the URL of the Crash page too.
+	* gnome_segv.c: i18n the URL of the Crash page too.
 	  Added a comment for translators too.
 
 1999-09-22  Federico Mena Quintero  <federico@redhat.com>
