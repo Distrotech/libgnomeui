@@ -33,7 +33,107 @@
 
 #include <gnome.h>
 
+static const char * get_stock_name (const char *stock_name);
+
 /* -- routines to build the children for containers -- */
+
+static void
+gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
+			    const char *longname)
+{
+	xmlNodePtr info;
+	GNode *childnode;
+	char *vboxname, *content;
+
+	for (info = ((xmlNodePtr)node->children->data)->childs;
+	     info; info = info->next)
+		if (!strcmp(info->name, "name"))
+			break;
+	g_assert(info != NULL);
+
+	content = xmlNodeGetContent(info);
+	vboxname = g_strconcat(longname, ".", content, NULL);
+	if (content) free(content);
+
+	for (childnode = node->children->children; childnode;
+	     childnode = childnode->next) {
+		GtkWidget *child;
+		xmlNodePtr xmlnode = childnode->data;
+		gboolean expand = TRUE, fill = TRUE, start = TRUE;
+		gint padding = 0;
+
+		for (xmlnode = xmlnode->childs; xmlnode; xmlnode=xmlnode->next)
+			if (!strcmp(xmlnode->name, "child_name"))
+				break;
+		content = xmlNodeGetContent(xmlnode);
+		if (xmlnode && !strcmp(content, "GnomeDialog:action_area")) {
+			char *parent_name;
+			GNode *buttonnode;
+
+			if (content) free(content);
+
+			/* this is the action area -- here we add the buttons*/
+			for (buttonnode = childnode->children; buttonnode;
+			     buttonnode = buttonnode->next) {
+				const char *stock;
+				xmlnode = buttonnode->data;
+
+				for (xmlnode = xmlnode->childs; xmlnode;
+				     xmlnode = xmlnode->next)
+					if (!strcmp(xmlnode->name,
+						    "stock_button"))
+						break;
+				if (!xmlnode) continue;
+				content = xmlNodeGetContent(xmlnode);
+				stock = get_stock_name(content);
+				if (!stock) stock = content;
+				gnome_dialog_append_button(GNOME_DIALOG(w),
+							   stock);
+				if (content) free(content);
+			}
+			continue;
+		}
+		if (content) free(content);
+
+		child = glade_xml_build_widget(xml, childnode, vboxname);
+		for (xmlnode = ((xmlNodePtr)childnode->data)->childs;
+		     xmlnode; xmlnode = xmlnode->next)
+			if (!strcmp(xmlnode->name, "child"))
+				break;
+		if (!xmlnode) {
+			gtk_box_pack_start_defaults(
+				GTK_BOX(GNOME_DIALOG(w)->vbox), child);
+			continue;
+		}
+		for (xmlnode=xmlnode->childs; xmlnode; xmlnode=xmlnode->next) {
+			content = xmlNodeGetContent(xmlnode);
+			switch(xmlnode->name[0]) {
+			case 'e':
+				if (!strcmp(xmlnode->name, "expand"))
+					expand = content[0] == 'T';
+				break;
+			case 'f':
+				if (!strcmp(xmlnode->name, "fill"))
+					fill = content[0] == 'T';
+				break;
+			case 'p':
+				if (!strcmp(xmlnode->name, "padding"))
+					padding = strtol(content, NULL, 0);
+				else if (!strcmp(xmlnode->name, "pack"))
+					start = strcmp(content, "GTK_PACK_START");
+				break;
+			}
+			if (content) free(content);
+		}
+		if (start)
+			gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(w)->vbox),
+					   child, expand, fill, padding);
+		else
+			gtk_box_pack_end(GTK_BOX(GNOME_DIALOG(w)->vbox),
+					 child, expand, fill, padding);
+	}
+	g_free(vboxname);
+}
 
 /* -- routines to build widgets -- */
 
@@ -66,17 +166,17 @@ stock_compare (const void *a, const void *b)
 
         return strcmp (ga->extension, gb->extension);
 }
-/* create a stock button from a string representation of its name */
-static GtkWidget *button_stock_new (const char *stock_name)
+
+static const char *
+get_stock_name (const char *stock_name)
 {
-        GtkWidget *w;
         const int len = strlen ("GNOME_STOCK_BUTTON_");
-        gnome_map_t *v;
-        gnome_map_t base;
-                
+	gnome_map_t *v;
+	gnome_map_t base;
+
         /* If an error happens, return this */
         if (strncmp (stock_name, "GNOME_STOCK_BUTTON_", len) != 0)
-                return gtk_button_new_with_label (stock_name);
+                return NULL;
 
         base.extension = stock_name + len;
         v = bsearch (
@@ -86,9 +186,9 @@ static GtkWidget *button_stock_new (const char *stock_name)
                 sizeof (gnome_stock_button_mapping [0]),
                 stock_compare);
         if (v)
-                return gnome_stock_button (v->mapping);
+                return v->mapping;
         else
-                return gtk_button_new_with_label (stock_name);
+                return NULL;
 }
 
 static GtkWidget *
@@ -124,7 +224,11 @@ stock_button_new(GladeXML *xml, GNode *node)
         if (string != NULL) {
                 button = gtk_button_new_with_label(string);
         } else if (stock != NULL) {
-                button = button_stock_new (stock);
+		const char *tmp = get_stock_name(stock);
+		if (tmp)
+			button = gnome_stock_button(tmp);
+		else
+			button = gtk_button_new_with_label(stock);
         } else
                 button = gtk_button_new();
 
@@ -419,6 +523,120 @@ about_new(GladeXML *xml, GNode *node) {
 	return wid;
 }
 
+static GtkWidget *
+gnomedialog_new(GladeXML *xml, GNode *node)
+{
+	GtkWidget *win;
+	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	gint xpos = -1, ypos = -1;
+	gboolean allow_shrink = TRUE, allow_grow = TRUE, auto_shrink = FALSE;
+	gboolean auto_close = FALSE, hide_on_close = FALSE;
+	gchar *title = NULL;
+
+	for (; info; info = info->next) {
+		char *content = xmlNodeGetContent(info);
+
+		switch (info->name[0]) {
+		case 'a':
+			if (!strcmp(info->name, "allow_grow"))
+				allow_grow = content[0] == 'T';
+			else if (!strcmp(info->name, "allow_shrink"))
+				allow_shrink = content[0] == 'T';
+			else if (!strcmp(info->name, "auto_shrink"))
+				auto_shrink = content[0] == 'T';
+			else if (!strcmp(info->name, "auto_close"))
+				auto_close = content[0] == 'T';
+			break;
+		case 'h':
+			if (!strcmp(info->name, "hide_on_close"))
+				hide_on_close = content[0] == 'T';
+		case 't':
+			if (!strcmp(info->name, "title")) {
+				if (title) g_free(title);
+				title = g_strdup(content);
+			}
+			break;
+		case 'x':
+			if (info->name[1] == '\0') xpos = strtol(content, NULL, 0);
+			break;
+		case 'y':
+			if (info->name[1] == '\0') ypos = strtol(content, NULL, 0);
+			break;
+		}
+
+		if (content)
+			free(content);
+	}
+	win = gnome_dialog_new(title, NULL);
+	if (title) g_free(title);
+	gtk_window_set_policy(GTK_WINDOW(win), allow_shrink, allow_grow,
+			      auto_shrink);
+	gnome_dialog_set_close(GNOME_DIALOG(win), auto_close);
+	gnome_dialog_close_hides(GNOME_DIALOG(win), hide_on_close);
+	if (xpos >= 0 || ypos >= 0)
+		gtk_widget_set_uposition (win, xpos, ypos);
+	return win;
+}
+
+static GtkWidget *
+messagebox_new(GladeXML *xml, GNode *node)
+{
+	GtkWidget *win;
+	GNode *child;
+	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
+	gchar *typename = GNOME_MESSAGE_BOX_GENERIC, *message = NULL;
+
+	for (; info; info = info->next) {
+		char *content = xmlNodeGetContent(info);
+
+		switch (info->name[0]) {
+		case 'm':
+			if (!strcmp(info->name, "message")) {
+				if (message) g_free(message);
+				message = g_strdup(content);
+			}
+			break;
+		case 't':
+			if (!strcmp(info->name, "type")) {
+				if (strncmp(content, "GNOME_MESSAGE_BOX_", 18))
+					break;
+				if (!strcmp(&content[18], "INFO"))
+					typename = GNOME_MESSAGE_BOX_INFO;
+				else if (!strcmp(&content[18], "WARNING"))
+					typename = GNOME_MESSAGE_BOX_WARNING;
+				else if (!strcmp(&content[18], "ERROR"))
+					typename = GNOME_MESSAGE_BOX_ERROR;
+				else if (!strcmp(&content[18], "QUESTION"))
+					typename = GNOME_MESSAGE_BOX_QUESTION;
+				else if (!strcmp(&content[18], "GENERIC"))
+					typename = GNOME_MESSAGE_BOX_GENERIC;
+			}
+			break;
+		}
+		if (content) free(content);
+	}
+	/* create the message box with no buttons */
+	win = gnome_message_box_new(message, typename, NULL);
+	/* the message box contains a vbox which contains a hbuttonbox ... */
+	child = node->children->children;
+	/* the children of the hbuttonbox are the buttons ... */
+	for (child = child->children; child; child = child->next) {
+		const char *stock;
+		char *content;
+
+		info = child->data;
+		for (info = info->childs; info; info = info->next)
+			if (!strcmp(info->name, "stock_button"))
+				break;
+		if (!info) continue;
+		content = xmlNodeGetContent(info);
+		stock = get_stock_name(content);
+		if (!stock) stock = content;
+		gnome_dialog_append_button(GNOME_DIALOG(win), stock);
+		if (content) free(content);
+	}
+	return win;
+}
 /* -- dialog box build routine goes here */
 
 /* -- routines to initialise these widgets with libglade -- */
@@ -440,7 +658,10 @@ static const GladeWidgetBuildData widget_data [] = {
 	{ "GnomePaperSelector", paper_selector_new, NULL },
 	{ "GnomeSpell",         spell_new,          NULL },
 	{ "GtkDial",            dial_new,           NULL },
+
 	{ "GnomeAbout",         about_new,          NULL },
+	{ "GnomeDialog",        gnomedialog_new,   gnomedialog_build_children},
+	{ "GnomeMessageBox",    messagebox_new,     NULL },
 	{ NULL, NULL, NULL }
 };
 
