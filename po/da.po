@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: gnome-libs 2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-08-17 13:20+0200\n"
-"PO-Revision-Date: 2004-08-17 13:22+0200\n"
+"PO-Revision-Date: 2004-08-17 15:14+0200\n"
 "Last-Translator: Martin Willemoes Hansen <mwh@sysrq.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,7 @@ msgstr ""
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
-msgstr "Bidragsydere"
+msgstr "Bidragydere"
 
 #: libgnomeui/gnome-about.c:230
 msgid "Written by"
