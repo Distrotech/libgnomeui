@@ -644,13 +644,16 @@ static void gnome_segv_handle(int signum)
         
 	if ((pid = fork())) {
                 /* Wait for user to see the dialog, then exit. */
-                /* Why wait at all? */
+                /* Why wait at all? Because we want to allow people to attach to the
+		   process */
 		int estatus;
 		pid_t eret;
 
 		eret = waitpid(pid, &estatus, 0);
-		
-                abort ();
+
+		if(getenv("GNOME_DUMP_CORE"))		
+	                abort ();
+		_exit(1);
 	} else {
 		char buf[32];
 
@@ -658,9 +661,9 @@ static void gnome_segv_handle(int signum)
 
 		/* Child process */
 		execl(GNOMEBINDIR "/gnome_segv", GNOMEBINDIR "/gnome_segv",
-		      program_invocation_name, buf, NULL);
+		      program_invocation_name, buf, gnome_app_version, NULL);
 
-                execlp("gnome_segv", "gnome_segv", program_invocation_name, buf, NULL);
+                execlp("gnome_segv", "gnome_segv", program_invocation_name, buf, gnome_app_version, NULL);
 
                 _exit(99);
 	}

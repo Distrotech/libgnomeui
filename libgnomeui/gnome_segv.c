@@ -18,8 +18,6 @@
 #include <string.h>
 #include <stdio.h>
 
-int retval = 1;
-
 int main(int argc, char *argv[])
 {
   GtkWidget *mainwin, *urlbtn;
@@ -27,6 +25,8 @@ int main(int argc, char *argv[])
   struct sigaction sa;
   poptContext ctx;
   const char **args;
+  char *urlstr;
+  char *app_version = NULL;
   int res;
   gchar *appname;
   gchar *bug_buddy_path = NULL;
@@ -62,6 +62,8 @@ int main(int argc, char *argv[])
           msg = g_strdup_printf(_("Application \"%s\" (process %d) has crashed\ndue to a fatal error.\n(%s)"),
                                 args[0], getppid(), g_strsignal(atoi(args[1])));
         }
+	if(args[2])
+		app_version = args[2];
     }
   else
     {
@@ -69,7 +71,6 @@ int main(int argc, char *argv[])
       return 1;
     }
   appname = g_strdup(args[0]);
-  poptFreeContext(ctx);
 
   mainwin = gnome_message_box_new(msg,
                                   GNOME_MESSAGE_BOX_ERROR,
@@ -88,7 +89,13 @@ int main(int argc, char *argv[])
     }
   /* Please download http://www.gnome.org/application_crashed-shtml.txt,
    * translate the plain text, and send the file to webmaster@gnome.org. */
-  urlbtn = gnome_href_new(_("http://www.gnome.org/application_crashed.shtml"),
+  urlstr = g_strdup_printf("%s?app=%s%s%s&libsver=%s", 
+		_("http://www.gnome.org/application_crashed.shtml"),
+		args[0],
+		app_version?"&version=":"",
+		app_version?app_version:"",
+		VERSION);
+  urlbtn = gnome_href_new(urlstr,
                           _("Please visit the GNOME Application Crash page for more information"));
   gtk_widget_show(urlbtn);
   gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(mainwin)->vbox), urlbtn);
@@ -111,7 +118,7 @@ int main(int argc, char *argv[])
       retval = system(bug_buddy_path);
       if (retval == -1 || retval == 127)
         {
-          g_warning(g_strerror(errno));
+          g_warning("Couldn't run bug-buddy: %s", g_strerror(errno));
         }
     }
 

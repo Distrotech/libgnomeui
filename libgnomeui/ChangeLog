@@ -1,3 +1,9 @@
+1999-09-28  Elliot Lee  <sopwith@redhat.com>
+	* gnome-init.c (gnome_segv_handle): Only dump core if $GNOME_DUMP_CORE is set.
+	  Pass the app version to gnome_segv.
+	* gnome_segv.c: add more items to the URL that is given to the user (app
+	version, 
+
 1999-10-06  Jacob Berkman  <jberkman@andrew.cmu.edu>
 
 	* gnome_segv.c (main): add a hook for the soon-to-be available
