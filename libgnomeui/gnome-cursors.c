@@ -654,8 +654,8 @@ create_bitmap_and_mask_from_xpm (GdkBitmap **bitmap,
 	sscanf (xpm [0], "%d %d %d %d", &width, &height, &colors, &pix);
 	
  	g_assert (width%8 == 0);
-	pixmap_buffer = (char*) malloc (sizeof (char) * (width * height/8));
-	mask_buffer = (char*) malloc (sizeof (char) * (width * height/8));
+	pixmap_buffer = (char*) g_malloc (sizeof (char) * (width * height/8));
+	mask_buffer = (char*) g_malloc (sizeof (char) * (width * height/8));
 	
 	if (!pixmap_buffer || !mask_buffer)
 		return;
@@ -685,6 +685,9 @@ create_bitmap_and_mask_from_xpm (GdkBitmap **bitmap,
 	}
 	*bitmap = gdk_bitmap_create_from_data (NULL, pixmap_buffer, width, height);
 	*mask   = gdk_bitmap_create_from_data (NULL, mask_buffer, width, height);
+
+	g_free(pixmap_buffer);
+	g_free(mask_buffer);
 }
 
 
@@ -737,8 +740,8 @@ gnome_cursor_create_from_pixbuf (GdkPixbuf *pixbuf,
         h = gdk_pixbuf_get_height(pixbuf);
         
 	g_assert (w%8 == 0);
-	pmap = (char*) malloc (sizeof (char) * (w * h / 8));
-	bmap = (char*) malloc (sizeof (char) * (w * h / 8));
+	pmap = (char*) g_malloc (sizeof (char) * (w * h / 8));
+	bmap = (char*) g_malloc (sizeof (char) * (w * h / 8));
 	
 	for (y = 0; y < h; y++) {
                 for (x = 0; x < w;) {
@@ -769,6 +772,9 @@ gnome_cursor_create_from_pixbuf (GdkPixbuf *pixbuf,
 	
 	*bitmap = gdk_bitmap_create_from_data (NULL, pmap, w, h);
 	*mask = gdk_bitmap_create_from_data (NULL, bmap, w, h);
+
+	g_free(pmap);
+	g_free(bmap);
 }
 
 
