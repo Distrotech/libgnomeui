@@ -34,31 +34,7 @@
 #include "gnome-popupmenu.h"
 #include <gtk/gtk.h>
 
-extern void gnome_app_do_ui_signal_connect (GnomeApp *, GnomeUIInfo *, gchar *, GnomeUIBuilderData *);
-
-void gnome_app_rightclick_popup(GtkWidget *eb_widget, GdkEventButton *event, GnomeApp *app)
-{
-	GtkWidget  *popup_menu;
-	GtkWidget *child;
-	gpointer *eventhandler;
-
-	g_return_if_fail (app != NULL);
-	g_return_if_fail (GNOME_IS_APP (app));
-	
-	/* And for my first trick....I pull the menu widget info OUT of the EventBox */
-
-	popup_menu = gtk_object_get_data(GTK_OBJECT(eb_widget), "gnome_popup_menu");
-	eventhandler = gtk_object_get_data(GTK_OBJECT(eb_widget), "gnome_popup_old_handler");
-	child = gtk_object_get_data(GTK_OBJECT(eb_widget), "gnome_popup_child");
-
-	if(event->button !=3)
-		/* Ok, it's not our event, so call the other event handler */
-		/* and I have no idea how to do this...gracefully */
-		return;
-
-
-   	gtk_menu_popup (GTK_MENU(popup_menu), NULL, NULL, NULL, NULL, event->button, event->time);
-}
+/* FIXME: all this file is completely broken.  I will rewrite it in a couple of days - Federico */
 
 void
 gnome_app_create_popup_menus_custom (GnomeApp *app,
@@ -68,7 +44,7 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 		  		     GnomeUIBuilderData *uibdata)
 
 {
-
+#if 0
 #ifdef GTK_HAVE_FEATURES_1_1_0
 
 	GtkWidget *menubar;
@@ -125,12 +101,14 @@ gnome_app_create_popup_menus_custom (GnomeApp *app,
 	if (menuinfo)
 		gnome_app_do_menu_creation(app, menubar, 0, menuinfo, uibdata);
 #endif /* GTK_HAVE_FEATURES_1_1_0 */
+#endif
 }
 
 void
 gnome_app_create_popup_menus (GnomeApp *app, GtkWidget *child,
 			      GnomeUIInfo *menudata, gpointer handler)
 {
+#if 0
 #ifdef GTK_HAVE_FEATURES_1_1_0
 
 	GnomeUIBuilderData uidata = { GNOME_UISIGFUNC(gnome_app_do_ui_signal_connect),
@@ -138,5 +116,6 @@ gnome_app_create_popup_menus (GnomeApp *app, GtkWidget *child,
 
 	gnome_app_create_popup_menus_custom(app, child, menudata, handler,
 					    &uidata);
+#endif
 #endif
 }

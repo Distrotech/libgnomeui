@@ -1,3 +1,51 @@
+1998-09-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-app-helper.c (gnome_app_fill_menu
+	gnome_app_fill_menu_custom): New public functions that are a
+	rewrite of the menu creation code in GnomeAppHelper.  These are
+	saner versions with additional goodies, like working accelerators,
+	underlined shortcuts, sanity checks, etc.
+	(gnome_app_create_menus):
+	(gnome_app_create_menus_interp):
+	(gnome_app_create_menus_with_data):
+	(gnome_app_create_menus_custom): Made these functions use the new
+	fill_menu code.
+	The toolbar code still needs sanitizing; will do that tomorrow.
+
+	* gnome-app-helper.h: Beautification and documentation of the
+	header file.
+	(GnomeUISignalConnectFunc): Removed the app parameter to functions
+	of this type, as it is not needed or used.  Please make the
+	appropriate changes to your language bindings and such.
+
+	* gnome-app-helper.c: Added a little TODO list.
+
+	* gnome-popupmenu.c: #ifdef'ed out the function bodies, since
+	gnome-popupmenu is completely broken and needs rewriting.
+
+	* gnome-canvas.c: Updates to the TODO list.
+
+	* gnome-preferences.c (gnome_preferences_get_menus_have_icons
+	gnome_preferences_set_menus_have_icons): New public functions to
+	get/set whether menu items have icons in them.
+	(gnome_preferences_load): Load the menus_have_icons parameter.
+	(gnome_preferences_save): Save the menus_have_icons parameter.
+
+	* gnome-rootwin.c (gnome_rootwin_expose): Return FALSE.
+
+	* gnome-app.c: Added g_return_* sanity checks where they were missing.
+	(gnome_app_set_contents): Fix the case where contents == NULL.
+
+	* gnome-app.h: Added some comments/documentation.
+	(struct _GnomeApp) Added an accel_group field -- this is the accel
+	group where the window's hotkeys live.
+
+	* gnome-app.c (gnome_app_init): Create the app window's accel
+	group and attach it.
+
+	* gnome-app.c (get_orientation): Added a small warning if the
+	orientation is not matched.
+
 Tue Sep 15 11:22:24 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtk-socket.c (gtk_socket_realize): Add a gdk_flush()

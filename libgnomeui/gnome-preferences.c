@@ -36,6 +36,7 @@ struct _GnomePreferences {
   int menubar_handlebox : 1;
   int toolbar_relief : 1;
   int dialog_centered : 1;
+  int menus_have_icons : 1;
   GtkWindowType dialog_type;
   GtkWindowPosition dialog_position;
   GnomeMDIMode mdi_mode;
@@ -60,6 +61,7 @@ static GnomePreferences prefs =
   TRUE,               /* Menubar has handlebox */
   TRUE,               /* Toolbar buttons are relieved */
   TRUE,               /* Center dialogs over apps when possible */
+  TRUE,               /* Menu items have icons in them */
   GTK_WINDOW_DIALOG,  /* Dialogs are treated specially */
   GTK_WIN_POS_MOUSE,  /* Put dialogs at mouse pointer. */
   GNOME_MDI_NOTEBOOK, /* Use notebook MDI mode. */
@@ -133,6 +135,8 @@ static const gchar * const dialog_positions [] = {
 #define MENUBAR_HANDLEBOX_KEY      "Menubar_has_Handlebox"
 
 #define TOOLBAR_RELIEF_KEY         "Toolbar_relieved_buttons"
+
+#define MENUS_HAVE_ICONS_KEY       "Menus_have_icons"
 
 /* =========== MDI ================================= */
 
@@ -272,6 +276,10 @@ void gnome_preferences_load(void)
 					 NULL);
   prefs.toolbar_relief = b;
 
+  b = gnome_config_get_bool_with_default (MENUS_HAVE_ICONS_KEY"=true",
+					  NULL);
+  prefs.menus_have_icons = b;
+
   gnome_config_pop_prefix();
   gnome_config_push_prefix(MDI);
 
@@ -331,6 +339,8 @@ void gnome_preferences_save(void)
 			prefs.menubar_handlebox);
   gnome_config_set_bool(TOOLBAR_RELIEF_KEY,
 			prefs.toolbar_relief);
+  gnome_config_set_bool(MENUS_HAVE_ICONS_KEY,
+			prefs.menus_have_icons);
 
   gnome_config_pop_prefix();
   gnome_config_push_prefix(MDI);
@@ -468,3 +478,14 @@ gnome_preferences_set_property_box_button_apply (int v)
 	prefs.property_box_buttons_apply = v;
 }
 
+int
+gnome_preferences_get_menus_have_icons (void)
+{
+	return prefs.menus_have_icons;
+}
+
+void
+gnome_preferences_set_menus_have_icons (int have_icons)
+{
+	prefs.menus_have_icons = have_icons ? TRUE : FALSE;
+}

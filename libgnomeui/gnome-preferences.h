@@ -70,9 +70,10 @@ void              gnome_preferences_set_mdi_tab_pos          (GtkPositionType p)
 int               gnome_preferences_get_property_box_apply (void);
 void              gnome_preferences_set_property_box_button_apply (int v);
 
+/* Whether menu items have icons in them or not */
+int               gnome_preferences_get_menus_have_icons (void);
+void              gnome_preferences_set_menus_have_icons (int have_icons);
+
 END_GNOME_DECLS
 
 #endif
-
-
-

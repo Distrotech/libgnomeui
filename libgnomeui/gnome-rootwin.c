@@ -92,6 +92,7 @@ static gint
 gnome_rootwin_expose (GtkWidget      *widget,
 		      GdkEventExpose *event)
 {
+	return FALSE;
 }
 
 static void

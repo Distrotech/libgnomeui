@@ -10,7 +10,9 @@
 
 /* TO-DO list for the canvas:
  *
- * - Implement hiding/showing of items.
+ * - Implement hiding/showing of items (visibility flag).
+ *
+ * - Allow to specify whether GnomeCanvasImage sizes are in units or pixels (scale or don't scale).
  *
  * - Implement gnome_canvas_item_reparent().
  *
@@ -19,6 +21,8 @@
  * - Stipple for filling items.
  *
  * - Widget item (finish it).
+ *
+ * - GList *gnome_canvas_gimme_all_items_contained_in_this_area (GnomeCanvas *canvas, Rectangle area);
  *
  * - Have the canvas carry a list of areas to repaint.  If a request_repaint is made for an area
  *   that does not touch any of the areas of the list, queue the new area.  Else, grow the existing,

@@ -1,3 +1,12 @@
+/* GnomeApp widget (C) 1998 Red Hat Software, Miguel de Icaza, Federico Mena, Chris Toshok.
+ *
+ * Originally by Elliot Lee, with hacking by Chris Toshok for *_data, Marc Ewing added menu support,
+ * toggle and radio support, and I don't know what you other people did :) menu insertion/removal
+ * functions by Jaka Mocnik.
+ *
+ * Major cleanups and rearrangements by Federico Mena.
+ */
+
 #ifndef GNOME_APP_HELPER_H
 #define GNOME_APP_HELPER_H
 
@@ -5,208 +14,284 @@
 
 BEGIN_GNOME_DECLS
 
-/*
- * Helper routines,
+/* This module lets you easily create menus and toolbars for your applications.  You basically
+ * define a hierarchy of arrays of GnomeUIInfo structures, and you later call the provided functions
+ * to create menu bars or tool bars.
  */
 
+/* These values identify the item type that a particular GnomeUIInfo structure specifies */
 typedef enum {
-  GNOME_APP_UI_ENDOFINFO,
-  GNOME_APP_UI_ITEM,
-  GNOME_APP_UI_TOGGLEITEM, /* check item for menu - no toolbar support */
-  GNOME_APP_UI_RADIOITEMS, /* no toolbar support */
-  GNOME_APP_UI_SUBTREE,
-  GNOME_APP_UI_SEPARATOR,
-  GNOME_APP_UI_HELP,
-  GNOME_APP_UI_JUSTIFY_RIGHT, /* this should right justify all the following entries */
-  GNOME_APP_UI_BUILDER_DATA   /* specifies the builder data for the following entries, see code for further info */
-  /* one should be careful when using gnome_app_create_*_[custom|interp|with_data]() functions
-     with GnomeUIInfo arrays containing GNOME_APP_UI_BUILDER_DATA items since their GnomeUIBuilderData
-     structures completely override the ones generated or supplied by the above functions. */
+	GNOME_APP_UI_ENDOFINFO,		/* No more items, use it at the end of an array */
+	GNOME_APP_UI_ITEM,		/* Normal item, or radio item if it is inside a radioitems group */
+	GNOME_APP_UI_TOGGLEITEM,	/* Toggle (check box) item */
+	GNOME_APP_UI_RADIOITEMS,	/* Radio item group */
+	GNOME_APP_UI_SUBTREE,		/* Item that defines a subtree/submenu */
+	GNOME_APP_UI_SEPARATOR,		/* Separator line (menus) or blank space (toolbars) */
+	GNOME_APP_UI_HELP,		/* Create a list of help topics, used in the Help menu */
+	GNOME_APP_UI_JUSTIFY_RIGHT,	/* Specifies that all subsequent items should be right-justified on the menubar */
+	GNOME_APP_UI_BUILDER_DATA	/* Specifies the builder data for the following entries, see
+					 * code for further info.
+					 */
+	/* one should be careful when using gnome_app_create_*_[custom|interp|with_data]() functions
+	 * with GnomeUIInfo arrays containing GNOME_APP_UI_BUILDER_DATA items since their
+	 * GnomeUIBuilderData structures completely override the ones generated or supplied by the
+	 * above functions.
+	 */
 } GnomeUIInfoType;
 
+/* These values identify the type of pixmap used in an item */
 typedef enum {
-  GNOME_APP_PIXMAP_NONE,
-  GNOME_APP_PIXMAP_STOCK,
-  GNOME_APP_PIXMAP_DATA, /* Can't currently use these last two in menus */
-  GNOME_APP_PIXMAP_FILENAME
+	GNOME_APP_PIXMAP_NONE,		/* No pixmap specified */
+	GNOME_APP_PIXMAP_STOCK,		/* Use a stock pixmap (GnomeStock) */
+	GNOME_APP_PIXMAP_DATA,		/* Use a pixmap from inline xpm data */
+	GNOME_APP_PIXMAP_FILENAME	/* Use a pixmap from the specified filename */
 } GnomeUIPixmapType;
 
-struct _GnomeUIInfo {
-  GnomeUIInfoType type;
+/* This is the structure that defines an item in a menu bar or toolbar.  The idea is to create
+ * arrayw of such structures with the information needed to create menus or toolbars.  The most
+ * convenient way to create such a structure is to use the GNOMEUIINFO_* macros provided below.
+ */
+typedef struct {
+	GnomeUIInfoType type;		/* Type of item */
 
-  gchar *label;
+	gchar *label;			/* String to use in the label */
 
-  gchar *hint; /* For toolbar items, the tooltip.
-		  For menu items, the status bar message */
+	gchar *hint;			/* For toolbar items, the tooltip.  For menu items, the
+					 * status bar message.
+					 */
 
-  /* For an item, toggleitem, or radioitem, procedure to call when activated.
-     
-     For a subtree, point to the GnomeUIInfo array for
-     that subtree.
+	gpointer moreinfo;		/* For an item, toggleitem, or radioitem, this is a pointer
+					 * to the function to call when the item is activated.
+					 *
+					 * For a subtree, a pointer to another array of GnomeUIInfo
+					 * structures.
+					 *
+					 * For a radioitem lead entry, a pointer to an array of
+					 * GnomeUIInfo structures for the radio item group.
+					 *
+					 * For a help item, specifies the help node to load
+					 * (i.e. the application's identifier) or NULL for the main
+					 * program's name.
+					 *
+					 * For builder data, points to the GnomeUIBuilderData
+					 * structure for the following items.
+					 */
 
-     For a radioitem lead entry, point to the GnomeUIInfo array for
-     the radio item group.  For the radioitem array, procedure to
-     call when activated.
-     
-     For a help item, specifies the help node to load
-     (or NULL for main prog's name)
+	gpointer user_data;		/* Data pointer to pass to callbacks */
 
-     For builder data, point to the GnomeUIBuilderData structure for the following items */
-  gpointer moreinfo;
+	gpointer unused_data;		/* Reserved for future expansion, should be NULL */
 
-  /* Value for pass to gtk_signal_connect() */
-  gpointer user_data;
+	GnomeUIPixmapType pixmap_type;	/* Type of pixmap for the item */
 
-  /* Unsed - for future expansion.  Should always be NULL. */
-  gpointer unused_data;
+	gpointer pixmap_info;		/* Pointer to the pixmap information:
+					 *
+					 * For GNOME_APP_PIXMAP_STOCK, a pointer to the stock icon name.
+					 *
+					 * For GNOME_APP_PIXMAP_DATA, a pointer to the inline xpm data.
+					 *
+					 * For GNOME_APP_PIXMAP_FILENAME, a pointer to the filename string.
+					 */
 
-  GnomeUIPixmapType pixmap_type;
+	guint accelerator_key;		/* Accelerator key, or 0 for none */
+	GdkModifierType ac_mods;	/* Mask of modifier keys for the accelerator */
 
-  /* Either 
-   * a pointer to the char for the pixmap (GNOME_APP_PIXMAP_DATA),
-   * a char* for the filename (GNOME_APP_PIXMAP_FILENAME),
-   * or a char* for the stock pixmap name (GNOME_APP_PIXMAP_STOCK).
-   */
-  gpointer pixmap_info;
-
-  guint accelerator_key; /* Accelerator key... Set to 0 to ignore */
-  GdkModifierType ac_mods; /* An OR of the masks for the accelerator */
-
-  GtkWidget *widget; /* Filled in by gnome_app_create* */
-};
-typedef struct _GnomeUIInfo GnomeUIInfo;
+	GtkWidget *widget;		/* Filled in by gnome_app_create*, you can use this to tweak
+					 * the widgets once they have been created
+					 */
+} GnomeUIInfo;
 
 
 /* Handy GnomeUIInfo macros */
 
-#define GNOMEUIINFO_END       {GNOME_APP_UI_ENDOFINFO, NULL, NULL, NULL, \
-                               NULL, NULL, (GnomeUIPixmapType)0, NULL, 0, \
-                               (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_SEPARATOR {GNOME_APP_UI_SEPARATOR, NULL, NULL, NULL, \
-                               NULL, NULL, (GnomeUIPixmapType)0, NULL, 0, \
-                               (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_JUSTIFY_RIGHT   {GNOME_APP_UI_JUSTIFY_RIGHT, \
-                                     NULL, NULL, NULL, NULL, NULL, \
-                                     (GnomeUIPixmapType)0, NULL, 0, \
-                                     (GdkModifierType)0, NULL}
+/* Used to terminate an array of GnomeUIInfo structures */
+#define GNOMEUIINFO_END			{ GNOME_APP_UI_ENDOFINFO, NULL, NULL, NULL, NULL, NULL,		\
+					  (GnomeUIPixmapType) 0, NULL, 0, (GdkModifierType) 0, NULL }
 
-#define GNOMEUIINFO_ITEM(label, tip, cb, xpm) \
-                              {GNOME_APP_UI_ITEM, label, tip, cb, \
-			       NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_ITEM_STOCK(label, tip, cb, xpm) \
-                              {GNOME_APP_UI_ITEM, label, tip, cb, \
-			       NULL, NULL, GNOME_APP_PIXMAP_STOCK, xpm, \
-			       0, (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_ITEM_NONE(label, tip, cb) \
-                              {GNOME_APP_UI_ITEM, label, tip, cb, \
-			       NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL, \
-			       0, (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_ITEM_DATA(label, tip, cb, data, xpm) \
-                              {GNOME_APP_UI_ITEM, label, tip, cb, \
-			       data, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_TOGGLEITEM(label, tip, cb, xpm) \
-                              {GNOME_APP_UI_TOGGLEITEM, label, tip, cb, \
-			       NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_TOGGLEITEM_DATA(label, tip, cb, data, xpm) \
-                              {GNOME_APP_UI_TOGGLEITEM, label, tip, cb, \
-			       data, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_HELP(name) \
-                              {GNOME_APP_UI_HELP, NULL, NULL, name, \
-                               NULL, NULL, (GnomeUIPixmapType)0, NULL, 0, \
-                               (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_SUBTREE(label, tree) \
-                              {GNOME_APP_UI_SUBTREE, label, NULL, tree, \
-                               NULL, NULL, (GnomeUIPixmapType)0, NULL, 0, \
-                               (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_RADIOLIST(list) \
-                              {GNOME_APP_UI_RADIOITEMS, NULL, NULL, list, \
-                               NULL, NULL, (GnomeUIPixmapType)0, NULL, 0, \
-                               (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_RADIOITEM(label, tip, cb, xpm) \
-                              {GNOME_APP_UI_RADIOITEMS, label, tip, cb, \
-			       NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, (GdkModifierType)0, NULL}
-#define GNOMEUIINFO_RADIOITEM_DATA(label, tip, cb, data, xpm) \
-                              {GNOME_APP_UI_RADIOITEMS, label, tip, cb, \
-			       data, NULL, GNOME_APP_PIXMAP_DATA, xpm, \
-			       0, (GdkModifierType)0, NULL}
+/* Insert a separator line (on a menu) or a blank space (on a toolbar) */
+#define GNOMEUIINFO_SEPARATOR		{ GNOME_APP_UI_SEPARATOR, NULL, NULL, NULL, NULL, NULL,		\
+					  (GnomeUIPixmapType) 0, NULL, 0, (GdkModifierType) 0, NULL }
+
+/* Specify that all subsequent items should be right-justified in the menu bar */
+#define GNOMEUIINFO_JUSTIFY_RIGHT	{ GNOME_APP_UI_JUSTIFY_RIGHT, NULL, NULL, NULL, NULL, NULL,	\
+					  (GnomeUIPixmapType) 0, NULL, 0, (GdkModifierType) 0, NULL }
+
+/* Insert an item with an inline xpm icon */
+#define GNOMEUIINFO_ITEM(label, tooltip, callback, xpm_data)				\
+					{ GNOME_APP_UI_ITEM, label, tooltip, callback,	\
+					  NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm_data,	\
+					  0, (GdkModifierType) 0, NULL}
+
+/* Insert an item with a stock icon */
+#define GNOMEUIINFO_ITEM_STOCK(label, tooltip, callback, stock_id)			\
+					{ GNOME_APP_UI_ITEM, label, tooltip, callback,	\
+					  NULL, NULL, GNOME_APP_PIXMAP_STOCK, stock_id,	\
+					  0, (GdkModifierType) 0, NULL }
+
+/* Insert an item with no icon */
+#define GNOMEUIINFO_ITEM_NONE(label, tooltip, callback)					\
+					{ GNOME_APP_UI_ITEM, label, tooltip, callback,	\
+					  NULL, NULL, GNOME_APP_PIXMAP_NONE, NULL,	\
+					  0, (GdkModifierType) 0, NULL }
+
+/* Insert an item with an inline xpm icon and a user data pointer */
+#define GNOMEUIINFO_ITEM_DATA(label, tooltip, callback, user_data, xpm_data)			\
+					{ GNOME_APP_UI_ITEM, label, tooltip, callback,		\
+					  user_data, NULL, GNOME_APP_PIXMAP_DATA, xpm_data,	\
+					  0, (GdkModifierType) 0, NULL }
+
+/* Insert a toggle item (check box) with an inline xpm icon */
+#define GNOMEUIINFO_TOGGLEITEM(label, tooltip, callback, xpm_data)				\
+					{ GNOME_APP_UI_TOGGLEITEM, label, tooltip, callback,	\
+					  NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm_data,		\
+					  0, (GdkModifierType) 0, NULL }
+
+/* Insert a toggle item (check box) with an inline xpm icon and a user data pointer */
+#define GNOMEUIINFO_TOGGLEITEM_DATA(label, tooltip, callback, user_data, xpm_data)		\
+					{ GNOME_APP_UI_TOGGLEITEM, label, tooltip, callback,	\
+					  user_data, NULL, GNOME_APP_PIXMAP_DATA, xpm_data,	\
+					  0, (GdkModifierType) 0, NULL }
+
+/* Insert all the help topics based on the application's id */
+#define GNOMEUIINFO_HELP(app_name)							\
+					{ GNOME_APP_UI_HELP, NULL, NULL, app_name,	\
+					  NULL, NULL, (GnomeUIPixmapType) 0, NULL, 0,	\
+					  (GdkModifierType) 0, NULL }
+
+/* Insert a subtree (submenu) */
+#define GNOMEUIINFO_SUBTREE(label, tree)						\
+					{ GNOME_APP_UI_SUBTREE, label, NULL, tree,	\
+					  NULL, NULL, (GnomeUIPixmapType) 0, NULL, 0,	\
+					  (GdkModifierType) 0, NULL }
+
+/* Insert a list of radio items */
+#define GNOMEUIINFO_RADIOLIST(list)							\
+					{ GNOME_APP_UI_RADIOITEMS, NULL, NULL, list,	\
+					  NULL, NULL, (GnomeUIPixmapType) 0, NULL, 0,	\
+					  (GdkModifierType) 0, NULL }
+
+/* Insert a radio item with an inline xpm icon */
+#define GNOMEUIINFO_RADIOITEM(label, tooltip, callback, xpm_data)				\
+					{ GNOME_APP_UI_RADIOITEMS, label, tooltip, callback,	\
+					  NULL, NULL, GNOME_APP_PIXMAP_DATA, xpm,		\
+					  0, (GdkModifierType) 0, NULL }
+
+/* Insert a radio item with an inline xpm icon and a user data pointer */
+#define GNOMEUIINFO_RADIOITEM_DATA(label, tooltip, callback, user_data, xpm_data)		\
+					{ GNOME_APP_UI_RADIOITEMS, label, tooltip, callback,	\
+					  user_data, NULL, GNOME_APP_PIXMAP_DATA, xpm_data,	\
+					  0, (GdkModifierType) 0, NULL }
 
 
-/* Functions */
+/* Types useful to language bindings */
     
 typedef struct _GnomeUIBuilderData GnomeUIBuilderData;
-typedef void (*GnomeUISignalConnectFunc)(GnomeApp *app,
-					 GnomeUIInfo *info_item,
-					 gchar *signal_name,
-					 GnomeUIBuilderData *uidata);
-#define GNOME_UISIGFUNC(x) ((void *)x)
+
+typedef void (* GnomeUISignalConnectFunc) (GnomeUIInfo        *uiinfo,
+					   gchar              *signal_name,
+					   GnomeUIBuilderData *uibdata);
+
 struct _GnomeUIBuilderData {
-  GnomeUISignalConnectFunc connect_func;
-  gpointer data;
-  gboolean is_interp;
-  GtkCallbackMarshal relay_func;
-  GtkDestroyNotify destroy_func;
+	GnomeUISignalConnectFunc connect_func;	/* Function that connects to the item's signals */
+	gpointer data;				/* User data pointer */
+	gboolean is_interp;			/* Should use gtk_signal_connect_interp or normal gtk_signal_connect? */
+	GtkCallbackMarshal relay_func;		/* Marshaller function for language bindings */
+	GtkDestroyNotify destroy_func;		/* Destroy notification function for language bindings */
 };
 
-void gnome_app_create_menus             (GnomeApp *app,
-			                 GnomeUIInfo *menuinfo);
-void gnome_app_create_menus_interp      (GnomeApp *app,
-					 GnomeUIInfo *menuinfo,
-					 GtkCallbackMarshal relay_func,
-					 gpointer data,
-					 GtkDestroyNotify destroy_func);
-void gnome_app_create_menus_with_data   (GnomeApp *app,
-			                 GnomeUIInfo *menuinfo,
-				         gpointer data);
-void gnome_app_create_menus_custom      (GnomeApp *app,
-					 GnomeUIInfo *menuinfo,
-					 GnomeUIBuilderData *uibdata);
-void gnome_app_create_toolbar           (GnomeApp *app,
-			                 GnomeUIInfo *toolbarinfo);
-void gnome_app_create_toolbar_interp    (GnomeApp *app,
-					 GnomeUIInfo *tbinfo,
-					 GtkCallbackMarshal relay_func,
-					 gpointer data,
-					 GtkDestroyNotify destroy_func);
-void gnome_app_create_toolbar_with_data (GnomeApp *app,
-			                 GnomeUIInfo *toolbarinfo,
-				         gpointer data);
+#define GNOME_UISIGFUNC(x) ((gpointer) x)
+
+
+/* Fills the specified menu shell with items created from the specified info.  If the specified
+ * accelgroup is not NULL, then the menu's hotkeys are put into that accelgroup.  If accel_group is
+ * non-NULL and insert_shortcuts is TRUE, then the shortcut keys (MOD1 + underlined letters) in the
+ * items' labels will be put into the accel group as well.  If indent_missing_pixmaps is TRUE, then
+ * an empty pixmap will be used in place of missing pixmaps, otherwise just plain labels will be used.
+ */
+void gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
+			  GtkAccelGroup *accel_group, int insert_shortcuts,
+			  int indent_missing_pixmaps);
+
+/* Fills the specified menu shell with items created from the specified info, using the specified
+ * builder data -- this is intended for language bindings.  If the specified accelgroup is not NULL,
+ * then the menu's hotkeys are put into that accelgroup.  If accel_group is non-NULL and
+ * insert_shortcuts is TRUE, then the shortcut keys (MOD1 + underlined letters) in the items' labels
+ * will be put into the accel group as well (this is useful for toplevel menu bars in which you want
+ * MOD1-F to activate the "_File" menu, for example).
+ */
+void gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata,
+				 GtkAccelGroup *accel_group, int insert_shortcuts,
+				 int indent_missing_pixmaps);
+
+/* Constructs a menu bar and attaches it to the specified application window */
+void gnome_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo);
+
+/* Constructs a menu bar and attaches it to the specified application window -- this version is
+ * intended for language bindings.
+ */
+void gnome_app_create_menus_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
+				    GtkCallbackMarshal relay_func, gpointer data,
+				    GtkDestroyNotify destroy_func);
+
+/* Constructs a menu bar, sets all the user data pointers to the specified value, and attaches it to
+ * the specified application window.
+ */
+void gnome_app_create_menus_with_data (GnomeApp *app, GnomeUIInfo *uiinfo, gpointer user_data);
+
+/* Constructs a menu bar and attaches it to the specified application window, using the
+ * specified builder data -- intended for language bindings.
+ */
+void gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuilderData *uibdata);
+
+/* Constructs a toolbar and attaches it to the specified application window */
+void gnome_app_create_toolbar (GnomeApp *app, GnomeUIInfo *toolbarinfo);
+
+/* Constructs a toolbar and attaches it to the specified application window -- this version is
+ * intended for language bindings.
+ */
+void gnome_app_create_toolbar_interp (GnomeApp *app, GnomeUIInfo *tbinfo,
+				      GtkCallbackMarshal relay_func, gpointer data,
+				      GtkDestroyNotify destroy_func);
+
+/* Constructs a toolbar, sets all the user data pointers to the specified value, and attaches it to
+ * the specified application window.
+ */
+void gnome_app_create_toolbar_with_data (GnomeApp *app, GnomeUIInfo *toolbarinfo, gpointer user_data);
+
+/* Constructs a toolbar and attaches it to the specified application window, using the specified
+ * builder data -- intended for language bindings.
+ */
+void gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *tbinfo, GnomeUIBuilderData *uibdata);
+
+/* FIXME: change name */
 GtkWidget *gnome_create_toolbar_with_data (GnomeApp *app,
 					 GnomeUIInfo *toolbarinfo,
 					 gpointer data);
-void gnome_app_create_toolbar_custom    (GnomeApp *app,
-					 GnomeUIInfo *tbinfo,
-					 GnomeUIBuilderData *uibdata);
+
+/* FIXME: change name */
 GtkWidget *gnome_create_toolbar_custom  (GnomeApp *app,
 					 GnomeUIInfo *tbinfo,
 					 GnomeUIBuilderData *uibdata);
-GtkWidget *gnome_app_find_menu_pos      (GtkWidget *parent,
-					 gchar *path,
-					 gint *pos);
-void gnome_app_remove_menus             (GnomeApp *app,
-					 gchar *path,
-					 gint items);
-void gnome_app_insert_menus_custom      (GnomeApp *app,
-					 gchar *path,
-					 GnomeUIInfo *menuinfo,
-					 GnomeUIBuilderData *uibdata);
-void gnome_app_insert_menus             (GnomeApp *app,
-					 gchar *path,
-					 GnomeUIInfo *menuinfo);
-void gnome_app_insert_menus_with_data   (GnomeApp *app,
-					 gchar *path,
-					 GnomeUIInfo *menuinfo,
-					 gpointer data);
-void gnome_app_insert_menus_interp      (GnomeApp *app,
-					 gchar *path,
-					 GnomeUIInfo *menuinfo,
-					 GtkCallbackMarshal relay_func,
-					 gpointer data,
-					 GtkDestroyNotify destroy_func);
+
+/* FIXME: what does it do? */
+GtkWidget *gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos);
+
+/* FIXME: what does it do? */
+void gnome_app_remove_menus (GnomeApp *app, gchar *path, gint items);
+
+/* FIXME: what does it do? */
+void gnome_app_insert_menus_custom (GnomeApp *app, gchar *path, GnomeUIInfo *menuinfo, GnomeUIBuilderData *uibdata);
+
+/* FIXME: what does it do? */
+void gnome_app_insert_menus (GnomeApp *app, gchar *path, GnomeUIInfo *menuinfo);
+
+/* FIXME: what does it do? */
+void gnome_app_insert_menus_with_data (GnomeApp *app, gchar *path, GnomeUIInfo *menuinfo, gpointer data);
+
+/* FIXME: what does it do? */
+void gnome_app_insert_menus_interp (GnomeApp *app, gchar *path, GnomeUIInfo *menuinfo,
+				    GtkCallbackMarshal relay_func, gpointer data,
+				    GtkDestroyNotify destroy_func);
+
 
 END_GNOME_DECLS
 
