@@ -1,3 +1,7 @@
+Fri Feb 13 18:09:46 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtk-ted.c (gtk_ted_update_position): More refcouting joy.
+
 Fri Feb 13 11:45:12 1998  Nuno Ferreira <nmrf@rnl.ist.utl.pt>
 
 	* gnome-app.c (gnome_app_configure_positions): use app->toolbar

@@ -975,9 +975,11 @@ gtk_ted_update_position (struct ted_widget_info *wi)
 	if (GTK_IS_TABLE (wi->widget->parent)){
 		GtkTed *ted = GTK_TED (wi->widget->parent);
 		char buf [40];
-		
+
+		gtk_widget_ref (wi->widget);
 		gtk_container_remove (GTK_CONTAINER (wi->widget->parent), wi->widget);
 		gtk_ted_attach (ted, wi->widget, wi);
+		gtk_widget_unref (wi->widget);
 
 		sprintf (buf, "%d", wi->col_span);
 		gtk_label_set (GTK_LABEL (wi->label_span_x), buf);

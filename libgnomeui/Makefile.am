@@ -71,12 +71,11 @@ libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 ted_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
 	$(top_builddir)/libgnome/libgnome.la 		\
-	$(LIBGNOMEUI_LIBS) $(INTLLIBS)
+	$(LIBGNOMEUI_LIBS) 
 
 stock_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
-	$(top_builddir)/libgnome/libgnome.la 		\
-	$(LIBGNOMEUI_LIBS) $(INTLLIBS)
+	$(LIBGNOMEUI_LIBS) 
 
 dist-hook:
 	mkdir $(distdir)/pixmaps
