@@ -1,3 +1,9 @@
+Sat Sep 19 12:47:35 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* pixmaps/xpm2rgb.c pixmaps/stock_*.xpm: new files
+	* pixmaps/Makefile.am: added generation of gnome-stock-imlib.h
+	* gnome-stock.c: include pixmaps/gnome-stock-imlib.h
+
 1998-09-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-popup-menu.c (gnome_popup_menu_new): New public function

@@ -1,2 +1,7 @@
 Makefile
 Makefile.in
+.deps
+.xvpics
+*.o
+xpm2rgb
+gnome-stock-imlib.h
