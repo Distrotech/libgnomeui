@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui-2.0.hi\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2003-08-11 17:02+0530\n"
+"POT-Creation-Date: 2003-08-25 15:14+0530\n"
+"PO-Revision-Date: 2003-08-25 16:04+0530\n"
 "Last-Translator: G Karunakar <karunakar@freedomink.org>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -142,8 +142,7 @@ msgstr "अनुवाद का श्रेय"
 
 # libgnomeui/gnome-about.c:389
 #: libgnomeui/gnome-about.c:432
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "अनुवादक को श्रेय. इस वाक्य को अनुवाद के योग्य चिन्हित किया जाए"
 
 # libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
@@ -166,6 +165,7 @@ msgstr "%s के बारे में"
 # test-gnome/testgnome.xml.h:5
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "फाइल (_F)"
 
@@ -238,6 +238,7 @@ msgstr "खेल (_G)"
 # libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 # test-gnome/testgnome.xml.h:6
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "सहायता (_H)"
 
@@ -467,12 +468,12 @@ msgstr "अनुप्रयोग को कानफिगर करें"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "के बारे में (_A)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "इस अनुप्रयोग के बारे में"
 
@@ -505,7 +506,7 @@ msgid "_Close This Window"
 msgstr "इस विन्डो को बंद करें (_C)"
 
 # libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "वर्तमान विन्डो को बन्द करें"
 
@@ -731,11 +732,11 @@ msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "आपका पासवर्ड सामान्य रुप में भेजा जाएगा"
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "आपका पासवर्ड गुप्त रुप में भेजा जाएगा"
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
@@ -1035,8 +1036,7 @@ msgstr "इतिहास क्रमांक"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
-"फाइल प्रविष्टि के लिए एक मात्र सूचक इसका उपयोग इतिहास को संग्रहित करने के लिए होता है"
+msgstr "फाइल प्रविष्टि के लिए एक मात्र सूचक इसका उपयोग इतिहास को संग्रहित करने के लिए होता है"
 
 # libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
@@ -1315,6 +1315,8 @@ msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
+"डिफॉल्ट वेब ब्राउसर शुरु करने में त्रुटी है\n"
+"कृपया वरीयता टुल में अनुप्रयोग वरीयता समायोजन जांचें"
 
 # libgnomeui/gnome-icon-entry.c:164
 #: libgnomeui/gnome-icon-entry.c:177
@@ -1615,8 +1617,9 @@ msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "अधिक जानकारी के लिए गनोम अनुप्रयोग क्रैश पेज पर जाएं"
 
 # test-gnome/testgnome.xml.h:3
-#~ msgid "Exit the test"
-#~ msgstr "test से बाहर जाएं"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "test से बाहर जाएं"
 
 #~ msgid "_Credits"
 #~ msgstr "श्रेय (_C)"
@@ -1636,3 +1639,4 @@ msgstr "अधिक जानकारी के लिए गनोम अन�
 # libgnomeui/gnome-app-helper.c:2563
 #~ msgid "Both text and icons"
 #~ msgstr "पाठ्य तथा आइकान दोनो"
+
