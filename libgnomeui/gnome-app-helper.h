@@ -23,7 +23,10 @@ struct _GnomeUIInfo {
   /* For an item, procedure to call when activated.
      
      For a subtree, point to the GnomeUIInfo array for
-     that subtree. */
+     that subtree.
+
+     For a help item, specifies the help node to load
+     (or NULL for main prog's name) */
   gpointer moreinfo; 
 
   enum {

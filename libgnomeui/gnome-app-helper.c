@@ -140,7 +140,8 @@ gnome_app_add_help_menu_entries(GnomeApp *app,
   char *topicFile, *s;
   GnomeHelpMenuEntry *entry;
   FILE *f;
-    
+  if(!menuinfo_item->moreinfo)
+    menuinfo_item->moreinfo = app->name;
   topicFile = gnome_help_file_path(menuinfo_item->moreinfo, "topic.dat");
   if (!(f = fopen (topicFile, "r"))) {
     /* XXX should throw up a dialog, or perhaps default to */
