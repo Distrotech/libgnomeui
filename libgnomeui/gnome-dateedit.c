@@ -131,7 +131,7 @@ day_selected (GtkCalendar *calendar, GnomeDateEdit *gde)
 	gtk_calendar_get_date (calendar, &year, &month, &day);
 
 	mtm.tm_mday = day;
-	mtm.tm_mon = month - 1;
+	mtm.tm_mon = month;
 	if (year > 1900)
 		mtm.tm_year = year - 1900;
 	else
@@ -243,14 +243,17 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 {
 	const char *str;
 	GDate *date;
+	int month;
 
 	str = gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry));
 
 	date = g_date_new ();
 	g_date_set_parse (date, str);
-
+        /* GtkCalendar expects month to be in 0-11 range (inclusive) */
+	month = g_date_get_month (date) - 1;
+	
 	gtk_calendar_select_month (GTK_CALENDAR (gde->_priv->calendar),
-				   g_date_get_month (date),
+				   CLAMP (month, 0, 11),
 				   g_date_get_year (date));
         gtk_calendar_select_day (GTK_CALENDAR (gde->_priv->calendar),
 				 g_date_get_day (date));
@@ -328,7 +331,6 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 		return;
 
 	menu = gtk_menu_new ();
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (gde->_priv->time_popup), menu);
 
 	time (&current_time);
 	mtm = localtime (&current_time);
@@ -407,6 +409,8 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 			gtk_widget_show (mins);
 		}
 	}
+	/* work around a GtkOptionMenu bug #66969 */
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (gde->_priv->time_popup), menu);
 }
 
 static void

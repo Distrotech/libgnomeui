@@ -1,5 +1,12 @@
 2001-12-27  jacob berkman  <jacob@ximian.com>
 
+	* gnome-dateedit.c (fill_time_popup): set the menu on the
+	optionmenu after populating it to workaround bug #66969
+	(day_selected): gtk_calendar_get_date() already returns month in
+	the 0-11 range
+	(select_clicked): gtk_calendar_select_month() expects month to be
+	in the 0-11 range, while g_date_get_month() is 1-12.
+
 	* libgnomeuiP.h: remove _GnomeDialogPrivate struct.
 
 	* gnome-dialog.h (struct _GnomeDialog): revert the privatization,
