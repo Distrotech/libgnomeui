@@ -70,18 +70,14 @@ gtk_ted_class_init (GtkTedClass *class)
 	object_class->destroy = gtk_ted_destroy;
 }
 
-static GtkWidget *
+static void
 gtk_ted_init (GtkTed *ted)
 {
-	GtkWidget *table;
-
 	ted->dialog_name = NULL;
 	ted->widget_box  = NULL;
 	ted->need_gui = 0;
 	ted->in_gui   = 0;
 	ted->widgets = g_hash_table_new (g_str_hash, g_str_equal);
-
-	return table;
 }
 
 guint
