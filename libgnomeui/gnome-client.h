@@ -5,6 +5,7 @@
 #define GNOME_CLIENT_H
 
 #include <unistd.h>
+#include <sys/types.h>
 #include <gtk/gtkobject.h>
 #include <libgnome/gnome-defs.h>
 
