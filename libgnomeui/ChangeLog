@@ -1,5 +1,8 @@
 2001-02-23  Martin Baulig  <baulig@suse.de>
 
+	* Makefile.am (INCLUDES): Added $(PANGO_CFLAGS).
+	(libgnomeui_2_la_LDFLAGS, LDADD): Added $(PANGO_LIBS).
+
 	* gnome-init.c (gtk_pre_args_parse): Comment out setting
 	of `gtk_debug_flags' which has gone from GTK+.
 

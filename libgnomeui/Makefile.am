@@ -35,6 +35,7 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	$(ORBIT_CFLAGS)					\
 	$(GCONF_CFLAGS)					\
+	$(PANGO_CFLAGS)					\
 	-DVERSION=\"$(VERSION)\"
 
 gnome_corba_rexec_built = 		\
@@ -332,6 +333,7 @@ libgnomeui_2_la_LDFLAGS = \
 	-version-info $(LIB_VERSION)				\
 	$(OAF_LIBS)						\
 	$(GCONF_LIBS)						\
+	$(PANGO_LIBS)						\
 	$(LIBGNOMEUI_LIBS)
 
 #		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome-$(GNOME_INTERFACE_VERSION)
@@ -343,4 +345,5 @@ LDADD =	\
 	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la	\
         $(LIBGNOMEUI_LIBS)						\
 	$(LIBART_LIBS)							\
+	$(PANGO_LIBS)							\
 	$(INTLLIBS)
