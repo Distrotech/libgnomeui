@@ -1,3 +1,7 @@
+2001-09-20  Frank Belew <frb@ximian.com>
+
+	* configure.in: removed AM_CONDITIONAL(FALSE...)
+
 2001-09-19  Darin Adler  <darin@bentspoon.com>
 
 	* .cvsignore: Ignore generated sgml directory.

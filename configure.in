@@ -15,9 +15,6 @@ AM_PROG_LIBTOOL
 AC_PROG_YACC
 AC_PATH_PROGS(PATH_TO_XRDB, "xrdb")
 
-dnl utility conditional
-AM_CONDITIONAL(FALSE, test "x" = "y")
-
 ALL_LINGUAS="az es fr it nn no sv ta tr wa"
 AM_GLIB_GNU_GETTEXT
 
