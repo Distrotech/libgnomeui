@@ -28,9 +28,15 @@
  *
  * void child_changed(GnomeMDI *, GnomeMDIChild *)
  *   gets called each time when active child is changed with the second argument
- *   pointing to the new active child (or NULL if no child will be active). mdi->active_view
- *   and mdi->active_child still hold old values.
+ *   pointing to the old child. mdi->active_view and mdi->active_child still already
+ *   hold the new values
  *
+ * void view_changed(GnomeMDI *, GtkWidget *)
+ *   is emitted whenever a view is changed, regardless of it being the view of the same child as
+ *   the old view or not. the second argument points to the old view, mdi->active_view and
+ *   mdi->active_child hold the new values. if the child has also been changed, this signal is
+ *   emitted after the child_changed signal.
+ * 
  * void app_created(GnomeMDI *, GnomeApp *)
  *   is called with each newly created GnomeApp to allow the MDI user to customize it.
  *   no contents may be set since GnomeMDI uses them for storing either a view of a child
@@ -118,6 +124,7 @@ struct _GnomeMDIClass
   gint        (*add_view)(GnomeMDI *, GtkWidget *); 
   gint        (*remove_view)(GnomeMDI *, GtkWidget *); 
   void        (*child_changed)(GnomeMDI *, GnomeMDIChild *);
+  void        (*view_changed)(GnomeMDI *, GtkWidget *);
   void        (*app_created)(GnomeMDI *, GnomeApp *);
 };
 

@@ -90,6 +90,7 @@ enum {
   ADD_VIEW,
   REMOVE_VIEW,
   CHILD_CHANGED,
+  VIEW_CHANGED,
   APP_CREATED,       /* so new GnomeApps can be further customized by applications */
   LAST_SIGNAL
 };
@@ -172,49 +173,55 @@ static void gnome_mdi_class_init (GnomeMDIClass *class) {
 					      object_class->type,
 					      GTK_SIGNAL_OFFSET (GnomeMDIClass, create_menus),
 					      gnome_mdi_marshal_1,
-					      gtk_widget_get_type(), 1, GTK_TYPE_POINTER);
+					      gtk_widget_get_type(), 1, gnome_app_get_type());
   mdi_signals[CREATE_TOOLBAR] = gtk_signal_new ("create_toolbar",
 						GTK_RUN_LAST,
 						object_class->type,
 						GTK_SIGNAL_OFFSET (GnomeMDIClass, create_toolbar),
 						gnome_mdi_marshal_1,
-						gtk_widget_get_type(), 1, GTK_TYPE_POINTER);
+						gtk_widget_get_type(), 1, gnome_app_get_type());
   mdi_signals[ADD_CHILD] = gtk_signal_new ("add_child",
 					   GTK_RUN_LAST,
 					   object_class->type,
 					   GTK_SIGNAL_OFFSET (GnomeMDIClass, add_child),
 					   gnome_mdi_marshal_2,
-					   GTK_TYPE_BOOL, 1, GTK_TYPE_POINTER);
+					   GTK_TYPE_BOOL, 1, gnome_mdi_child_get_type());
   mdi_signals[REMOVE_CHILD] = gtk_signal_new ("remove_child",
 					      GTK_RUN_LAST,
 					      object_class->type,
 					      GTK_SIGNAL_OFFSET (GnomeMDIClass, remove_child),
 					      gnome_mdi_marshal_2,
-					      GTK_TYPE_BOOL, 1, GTK_TYPE_POINTER);
+					      GTK_TYPE_BOOL, 1, gnome_mdi_child_get_type());
   mdi_signals[ADD_VIEW] = gtk_signal_new ("add_view",
 					  GTK_RUN_LAST,
 					  object_class->type,
 					  GTK_SIGNAL_OFFSET (GnomeMDIClass, add_view),
 					  gnome_mdi_marshal_2,
-					  GTK_TYPE_BOOL, 1, GTK_TYPE_POINTER);
+					  GTK_TYPE_BOOL, 1, gtk_widget_get_type());
   mdi_signals[REMOVE_VIEW] = gtk_signal_new ("remove_view",
 					     GTK_RUN_LAST,
 					     object_class->type,
 					     GTK_SIGNAL_OFFSET (GnomeMDIClass, remove_view),
 					     gnome_mdi_marshal_2,
-					     GTK_TYPE_BOOL, 1, GTK_TYPE_POINTER);
+					     GTK_TYPE_BOOL, 1, gtk_widget_get_type());
   mdi_signals[CHILD_CHANGED] = gtk_signal_new ("child_changed",
 					     GTK_RUN_LAST,
 					     object_class->type,
 					     GTK_SIGNAL_OFFSET (GnomeMDIClass, child_changed),
 					     gnome_mdi_marshal_3,
-					     GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
+					     GTK_TYPE_NONE, 1, gnome_mdi_child_get_type());
+  mdi_signals[VIEW_CHANGED] = gtk_signal_new ("view_changed",
+					      GTK_RUN_LAST,
+					      object_class->type,
+					      GTK_SIGNAL_OFFSET(GnomeMDIClass, view_changed),
+					      gnome_mdi_marshal_3,
+					      GTK_TYPE_NONE, 1, gtk_widget_get_type());
   mdi_signals[APP_CREATED] = gtk_signal_new ("app_created",
 					     GTK_RUN_LAST,
 					     object_class->type,
 					     GTK_SIGNAL_OFFSET (GnomeMDIClass, app_created),
 					     gnome_mdi_marshal_3,
-					     GTK_TYPE_NONE, 1, GTK_TYPE_POINTER);
+					     GTK_TYPE_NONE, 1, gnome_app_get_type());
 
   gtk_object_class_add_signals (object_class, mdi_signals, LAST_SIGNAL);
 
@@ -225,6 +232,7 @@ static void gnome_mdi_class_init (GnomeMDIClass *class) {
   class->add_view = NULL;
   class->remove_view = NULL;
   class->child_changed = NULL;
+  class->view_changed = NULL;
   class->app_created = NULL;
 
   parent_class = gtk_type_class (gtk_object_get_type ());
@@ -965,18 +973,27 @@ static void top_add_view(GnomeMDI *mdi, GnomeMDIChild *child, GtkWidget *view) {
 }
 
 static void set_active_view(GnomeMDI *mdi, GtkWidget *view) {
-  GnomeMDIChild *child;
+  GnomeMDIChild *child, *old_child;
+  GtkWidget *old_view;
+
+  if(view == mdi->active_view)
+    return;
 
   if(view)
     child = gnome_mdi_get_child_from_view(view);
   else
     child = NULL;
 
-  if(child != mdi->active_child)
-    gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[CHILD_CHANGED], child);
+  old_child = mdi->active_child;
+  old_view = mdi->active_view;
 
   mdi->active_view = view;
   mdi->active_child = child;
+
+  if(child != old_child)
+    gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[CHILD_CHANGED], old_child);
+
+  gtk_signal_emit(GTK_OBJECT(mdi), mdi_signals[VIEW_CHANGED], old_view);
 }
 
 void gnome_mdi_set_active_view(GnomeMDI *mdi, GtkWidget *view) {

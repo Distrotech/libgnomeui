@@ -1,3 +1,12 @@
+1998-09-21  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.[ch]: added view_changed signal, similar to child_changed.
+	* gnome-mdi.c (app_set_view): update active_view and active_child to
+	hold new values before emitting child_changed and/or view_changed
+	signals and pass old child/view as signal handler arguments. this
+	seems saner since the appropriate gnome-app is already updated to
+	match the new view.
+
 1998-09-20  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* pixmaps/Makefile.am (stock_images): New variable.  Lists all the
