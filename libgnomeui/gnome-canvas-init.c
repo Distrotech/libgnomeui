@@ -96,9 +96,16 @@ static struct poptOption gtk_options [] = {
     { NULL, '\0', 0, NULL, 0}
 };
 
+static GnomeModuleRequirement gtk_requirements[] = {
+    /* We require libgnomebase setup to be run first as it
+     * initializes the type system and some other stuff. */
+    {VERSION, &libgnomebase_module_info},
+    {NULL, NULL}
+};
+
 GnomeModuleInfo gtk_module_info = {
     "gtk", GTK_VERSION, "GTK+",
-    NULL,
+    gtk_requirements,
     gtk_pre_args_parse, gtk_post_args_parse, NULL,
     NULL,
     NULL, NULL, NULL
@@ -109,7 +116,6 @@ libgnomecanvas_pre_args_parse (GnomeProgram *program,
 			       GnomeModuleInfo *mod_info);
 
 static GnomeModuleRequirement libgnomecanvas_requirements[] = {
-    {VERSION, &libgnomebase_module_info},
     {GTK_VERSION, &gtk_module_info},
     {NULL, NULL}
 };
