@@ -1,5 +1,10 @@
 2001-04-15  Martin Baulig  <baulig@suse.de>
 
+	* libgnomeuiP.h (gnome_i18n_get_language_list, gnome_i18n_get_preferred_language):
+	Provide external declarations for these functions here [FIXME: broken].
+
+2001-04-15  Martin Baulig  <baulig@suse.de>
+
 	* gnome-i18nP.h: Removed; #include <libgnomebase/gnome-i18n.h> instead.
 
 2001-04-14  Martin Baulig  <baulig@suse.de>

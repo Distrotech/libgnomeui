@@ -39,7 +39,7 @@
 #include <libgnome/gnome-url.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
-#include <libgnome/gnome-portability.h>
+#include <libgnomebase/gnome-portability.h>
 #include <libgnomebase/gnome-i18n.h>
 #include "gnome-helpsys.h"
 #include "gnome-stock.h"
@@ -51,6 +51,8 @@
 #include "gnome-dialog-util.h"
 #include <libgnomebase/gnome-program.h>
 #include <gdk/gdkx.h>
+
+#include "libgnomeuiP.h"
 
 #include <stdio.h>
 #include <string.h>
