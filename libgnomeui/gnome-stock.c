@@ -383,6 +383,9 @@ gnome_stock_paint(GnomeStock *stock, GnomePixmap *pixmap)
 	if (GTK_WIDGET(gpixmap)->window)
 		gdk_window_shape_combine_mask(GTK_WIDGET(gpixmap)->window,
 					      gpixmap->mask, 0, 0);
+	/* XXX: this isn't needed always, but I found that in some
+	 * circumstances it is. */
+	gtk_widget_queue_draw(GTK_WIDGET(stock));
 }
 
 /*
@@ -747,6 +750,8 @@ struct _default_entries_data entries_data[] = {
 	{GNOME_STOCK_MENU_STOP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_stop, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_REFRESH, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_refresh, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_UNDELETE, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_undelete, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_TIMER, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_timer, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
+	{GNOME_STOCK_MENU_TIMER_STOP, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_timer_stopped, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_MAIL, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_MAIL_RCV, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_receive, TIGERT_W, TIGERT_H, MENU_W, MENU_H},
 	{GNOME_STOCK_MENU_MAIL_SND, GNOME_STOCK_PIXMAP_REGULAR, NULL, imlib_mail_send, TIGERT_W, TIGERT_H, MENU_W, MENU_H},

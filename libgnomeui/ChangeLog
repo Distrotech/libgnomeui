@@ -1,3 +1,8 @@
+Sat Sep 19 19:37:13 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.c (gnome_stock_paint): added gtk_widget_queue_draw
+	* gnome-stock.[ch]: added menu versions of the timer icons
+
 Sat Sep 19 17:24:58 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* pixmaps/Makefile.am: removed xpm2rgb which needs a Display.

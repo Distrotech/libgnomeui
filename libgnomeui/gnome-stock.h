@@ -436,6 +436,8 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_TRASH        "Menu_Trash"
 #define GNOME_STOCK_MENU_TRASH_FULL   "Menu_Trash Full"
 #define GNOME_STOCK_MENU_UNDELETE     "Menu_Undelete"
+#define GNOME_STOCK_MENU_TIMER        "Menu_Timer"
+#define GNOME_STOCK_MENU_TIMER_STOP   "Menu_Timer Stopped"
 #define GNOME_STOCK_MENU_SPELLCHECK   "Menu_Spellchecker"
 #define GNOME_STOCK_MENU_MIC          "Menu_Microphone"
 #define GNOME_STOCK_MENU_LINE_IN      "Menu_Line In"
