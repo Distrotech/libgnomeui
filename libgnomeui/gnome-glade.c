@@ -25,7 +25,6 @@
 #include "config.h"
 #endif
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <glade/glade.h>
@@ -47,113 +46,92 @@ static gboolean get_stock_uiinfo (const char *stock_name, GnomeUIInfo *info);
 /* -- routines to build the children for containers -- */
 
 static void
-gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
+gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 			    const char *longname)
 {
-	xmlNodePtr info;
+	GList *tmp;
 	GNode *childnode;
 	char *vboxname, *content;
 
-	for (info = ((xmlNodePtr)node->children->data)->childs;
-	     info; info = info->next)
-		if (!strcmp(info->name, "name"))
-			break;
-	g_assert(info != NULL);
+	vboxname = g_strconcat (longname, ".", info->name, NULL);
 
-	content = xmlNodeGetContent(info);
-	vboxname = g_strconcat(longname, ".", content, NULL);
-	if (content) free(content);
-
-	for (childnode = node->children->children; childnode;
-	     childnode = childnode->next) {
+	/* all dialog children are inside the main vbox */
+	for (tmp = ((GladeWidget *)info->children->data)->children;
+	     tmp; tmp = tmp->next) {
+		GladeWidgetInfo *cinfo = tmp->data;
 		GtkWidget *child;
-		xmlNodePtr xmlnode = childnode->data;
+		GList *tmp2;
+		gboolean is_action_area = FALSE;
 		gboolean expand = TRUE, fill = TRUE, start = TRUE;
 		gint padding = 0;
 
-		for (xmlnode = xmlnode->childs; xmlnode; xmlnode=xmlnode->next)
-			if (!strcmp(xmlnode->name, "child_name"))
+		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+			if (!strcmp(attr->name, "child_name") &&
+			    !strcmp(attr->value, "Dialog:action_area")) {
+				is_action_area = TRUE;
 				break;
-		content = xmlNodeGetContent(xmlnode);
-		if (xmlnode && !strcmp(content, "GnomeDialog:action_area")) {
+			}
+		}
+
+		if (is_action_area) {
 			char *parent_name;
 			GNode *buttonnode;
 
-			if (content) free(content);
-			xmlnode = childnode->data;
-			for (xmlnode = xmlnode->childs; xmlnode;
-			     xmlnode = xmlnode->next)
-				if (!strcmp(xmlnode->name, "name"))
-					break;
-			if (xmlnode) {
-				content = xmlNodeGetContent(xmlnode);
-				parent_name = g_strconcat(longname, ".",
-							  content, NULL);
-				free(content);
-			} else
-				parent_name = g_strconcat(longname,
-							  ".action_area",NULL);
+			parent_name = g_strconcat(vboxname, ".", cinfo->name,
+						  NULL);
 
 			/* this is the action area -- here we add the buttons*/
-			for (buttonnode = childnode->children; buttonnode;
-			     buttonnode = buttonnode->next) {
-				const char *stock;
-				xmlnode = buttonnode->data;
+			for (tmp2 = cinfo->children; tmp2; tmp2 = tmp2->next) {
+				GladeWidgetInfo *ccinfo = tmp2->data;
+				const char *stock, *string = NULL;
+				GList *tmp3;
 
-				for (xmlnode = xmlnode->childs; xmlnode;
-				     xmlnode = xmlnode->next)
-					if (!strcmp(xmlnode->name,
-						    "stock_button"))
+				for (tmp3 = ccinfo->attributes;
+				     tmp3; tmp3 = tmp3->next) {
+					GladeAttribute *attr = tmp3->data;
+					if (!strcmp(attr->name,
+						    "stock_button")) {
+						string = attr->value;
 						break;
-				if (!xmlnode) continue;
-				content = xmlNodeGetContent(xmlnode);
-				stock = get_stock_name(content);
-				if (!stock) stock = content;
+					}
+				}
+				stock = get_stock_name(string);
+				if (!stock) stock = string;
 				gnome_dialog_append_button(GNOME_DIALOG(w),
 							   stock);
-				if (content) free(content);
 				/* connect signal handlers, etc ... */
 				child = g_list_last(
 					GNOME_DIALOG(w)->buttons)->data;
 				glade_xml_set_common_params(xml, child,
-							    buttonnode,
-							    parent_name,
-							    "GtkButton");
+							    ccinfo,
+							    parent_name);
 			}
 			g_free(parent_name);
 			continue;
 		}
-		if (content) free(content);
 
-		child = glade_xml_build_widget(xml, childnode, vboxname);
-		for (xmlnode = ((xmlNodePtr)childnode->data)->childs;
-		     xmlnode; xmlnode = xmlnode->next)
-			if (!strcmp(xmlnode->name, "child"))
-				break;
-		if (!xmlnode) {
-			gtk_box_pack_start_defaults(
-				GTK_BOX(GNOME_DIALOG(w)->vbox), child);
-			continue;
-		}
-		for (xmlnode=xmlnode->childs; xmlnode; xmlnode=xmlnode->next) {
-			content = xmlNodeGetContent(xmlnode);
-			switch(xmlnode->name[0]) {
+		child = glade_xml_build_widget(xml, cinfo, vboxname);
+		for (tmp2 = cinfo->child_attributes; tmp2; tmpt = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+
+			switch(attr->name[0]) {
 			case 'e':
-				if (!strcmp(xmlnode->name, "expand"))
-					expand = content[0] == 'T';
+				if (!strcmp(attr->name, "expand"))
+					expand = attr->value[0] == 'T';
 				break;
 			case 'f':
-				if (!strcmp(xmlnode->name, "fill"))
-					fill = content[0] == 'T';
+				if (!strcmp(attr->name, "fill"))
+					fill = attr->value[0] == 'T';
 				break;
 			case 'p':
-				if (!strcmp(xmlnode->name, "padding"))
-					padding = strtol(content, NULL, 0);
-				else if (!strcmp(xmlnode->name, "pack"))
-					start = strcmp(content, "GTK_PACK_START");
+				if (!strcmp(attr->name, "padding"))
+					padding = strtol(attr->value, NULL, 0);
+				else if (!strcmp(attr->name, "pack"))
+					start = strcmp(attr->value,
+						       "GTK_PACK_START");
 				break;
 			}
-			if (content) free(content);
 		}
 		if (start)
 			gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(w)->vbox),
@@ -166,89 +144,98 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
 }
 
 static void
-messagebox_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
+messagebox_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 			    const char *longname)
 {
-	xmlNode *info;
+	GList *tmp;
+	GladeWidgetInfo *cinfo;
 	GNode *childnode;
 	GtkWidget *child;
 
 	/* the message box contains a vbox which contains a hbuttonbox ... */
-	childnode = node->children->children;
+	cinfo = ((GladeWidgetInfo *)info->children->data)->children->data;
 	/* the children of the hbuttonbox are the buttons ... */
-	for (childnode = childnode->children; childnode;
-	     childnode = childnode->next) {
-		const char *stock;
+	for (tmp = cinfo->children; tmp; tmp = tmp->next) {
+		GList *tmp2;
+		const char *stock, *string = NULL;
 		char *content;
 
-		info = childnode->data;
-		for (info = info->childs; info; info = info->next)
-			if (!strcmp(info->name, "stock_button"))
+		cinfo = tmp->data;
+		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+			if (!strcmp(attr->name, "stock_button")) {
+				string = attr->value;
 				break;
-		if (!info) continue;
-		content = xmlNodeGetContent(info);
-		stock = get_stock_name(content);
-		if (!stock) stock = content;
+			}
+		}
+		stock = get_stock_name(string);
+		if (!stock) stock = string;
 		gnome_dialog_append_button(GNOME_DIALOG(w), stock);
-		if (content) free(content);
 		child = g_list_last(GNOME_DIALOG(w)->buttons)->data;
-		glade_xml_set_common_params(xml, child, childnode,
-					    longname, "GtkButton");
+		glade_xml_set_common_params(xml, child, cinfo,
+					    longname);
 	}
 }
 
 static void
-app_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
+app_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		   const char *longname)
 {
-	xmlNodePtr info;
-	GNode *childnode;
-	char *content;
+	GList *tmp;
 
-	for (childnode = node->children; childnode;
-	     childnode = childnode->next) {
-		xmlNodePtr xmlnode = childnode->data;
+	for (tmp = info->children; tmp; tmp = tmp->next) {
+		GladeWidgetInfo *cinfo = tmp->data;
+		GList *tmp2;
+		gboolean is_dock = FALSE, is_appbar = FALSE;
 		GtkWidget *child;
 
-		for (xmlnode = xmlnode->childs; xmlnode; xmlnode=xmlnode->next)
-			if (!strcmp(xmlnode->name, "child_name"))
+		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+			if (!strcmp(attr->name, "child_name")) {
+				is_dock   = !strcmp(attr->value,
+						    "GnomeApp:dock");
+				is_appbar = !strcmp(attr->value,
+						    "GnomeApp:appbar");
 				break;
-		content = xmlNodeGetContent(xmlnode);
-		if (xmlnode && !strcmp(content, "GnomeApp:dock")) {
+			}
+		}
+		if (is_dock) {
 			/* the dock has already been created */
 			glade_xml_set_common_params(xml,
-					GTK_WIDGET(gnome_app_get_dock(GNOME_APP(w))),
-					childnode, longname, "GnomeDock");
-		} else if (xmlnode && !strcmp(content, "GnomeApp:appbar")) {
-			child = glade_xml_build_widget(xml,childnode,longname);
+				GTK_WIDGET(gnome_app_get_dock(GNOME_APP(w))),
+				cinfo, longname);
+		} else if (is_appbar) {
+			child = glade_xml_build_widget(xml, cinfo, longname);
 			gnome_app_set_statusbar(GNOME_APP(w), child);
 		} else {
-			child = glade_xml_build_widget(xml,childnode,longname);
+			child = glade_xml_build_widget(xml, cinfo, longname);
 			gtk_container_add(GTK_CONTAINER(w), child);
 		}
-		if (content) free(content);
 	}
 }
 
 static void
-dock_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
+dock_build_children(GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 		   const char *longname)
 {
-	xmlNodePtr info;
-	GNode *childnode;
-	char *content;
+	GList *tmp;
 
-	for (childnode = node->children; childnode;
-	     childnode = childnode->next) {
-		xmlNodePtr xmlnode = childnode->data;
+	for (tmp = info->children; tmp; tmp = tmp->next) {
+		GladeWidgetInfo *cinfo = tmp->data;
+		GList *tmp2;
+		gboolean is_contents = FALSE;
 		GtkWidget *child;
 
-		for (xmlnode = xmlnode->childs; xmlnode; xmlnode=xmlnode->next)
-			if (!strcmp(xmlnode->name, "child_name"))
+		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+			if (!strcmp(attr->name, "child_name")) {
+				is_contents = !strcmp(attr->value,
+						      "GnomeDock:contents");
 				break;
-		content = xmlNodeGetContent(xmlnode);
-		if (xmlnode && !strcmp(content, "GnomeDock:contents")) {
-			child = glade_xml_build_widget(xml,childnode,longname);
+			}
+		}
+		if (is_contents) {
+			child = glade_xml_build_widget(xml, cinfo, longname);
 			gnome_dock_set_client_area(GNOME_DOCK(w), child);
 		} else {
 			/* a dock item */
@@ -256,114 +243,92 @@ dock_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
 			guint band = 0, offset = 0;
 			gint position = 0;
 
-			child = glade_xml_build_widget(xml,childnode,longname);
-			if (content) free(content);
-			xmlnode = childnode->data;
-			for (xmlnode = xmlnode->childs; xmlnode;
-			     xmlnode = xmlnode->next) {
-				content = xmlNodeGetContent(xmlnode);
-				if (!strcmp(xmlnode->name, "placement"))
+			child = glade_xml_build_widget(xml, cinfo, longname);
+			for (tmp2 = cinfo->attributes; tmp2; tmp2=tmp2->next) {
+				GladeAttribute *attr = tmp2->data;
+
+				if (!strcmp(attr->name, "placement"))
 					placement = glade_enum_from_string(
 						GTK_TYPE_GNOME_DOCK_PLACEMENT,
-						content);
-				else if (!strcmp(xmlnode->name, "band"))
-					band = strtoul(content, NULL, 0);
-				else if (!strcmp(xmlnode->name, "position"))
-					position = strtol(content, NULL, 0);
-				else if (!strcmp(xmlnode->name, "offset"))
-					offset = strtoul(content, NULL, 0);
-				if (content) free(content);
+						attr->value);
+				else if (!strcmp(attr->name, "band"))
+					band = strtoul(attr->value, NULL, 0);
+				else if (!strcmp(attr->name, "position"))
+					position = strtol(attr->value, NULL,0);
+				else if (!strcmp(attr->name, "offset"))
+					offset = strtoul(attr->value, NULL, 0);
 			}
-			content = NULL;
 			gnome_dock_add_item(GNOME_DOCK(w),
 					    GNOME_DOCK_ITEM(child), placement,
 					    band, position, offset, FALSE);
 		}
-		if (content) free(content);
 	}
 }
 
 static void
-menuitem_build_children (GladeXML *xml, GtkWidget *w, GNode *node,
+menuitem_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
                          const char *longname)
 {
         GtkWidget *menu;
-        if (!node->children) return;
-        menu = glade_xml_build_widget(xml, node->children, longname);
+        if (!info->children) return;
+        menu = glade_xml_build_widget(xml, info->children, longname);
         gtk_menu_item_set_submenu(GTK_MENU_ITEM(w), menu);
-        gtk_widget_hide(menu); /* wierd things happen if menu is initially visible */
+	/* weird things happen if menu is initially visible */
+        gtk_widget_hide(menu);
 }
 
 static void
-toolbar_build_children (GladeXML *xml, GtkWidget *w, GNode *node,
+toolbar_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 			const char *longname)
 {
-	xmlNodePtr info;
-	GNode *childnode;
-	char *content;
+	GList *tmp;
 
-	for (childnode = node->children; childnode;
-	     childnode = childnode->next) {
+	for (tmp = info->children; tmp; tmp = tmp->next) {
+		GladeWidgetInfo *cinfo = tmp->data;
 		GtkWidget *child;
-		xmlNodePtr xmlnode = childnode->data;
+		GList *tmp2;
+		gboolean is_button = FALSE;
 
-		/* insert a space into the toolbar if required */
-		for (xmlnode = xmlnode->childs; xmlnode;
-		     xmlnode = xmlnode->next)
-			if (!strcmp(xmlnode->name, "child"))
-				break;
-		if (xmlnode) { /* the <child> node exists */
-			for (xmlnode = xmlnode->childs; xmlnode;
-			     xmlnode = xmlnode->next)
-				if (!strcmp(xmlnode->name, "new_group"))
-					break;
-			if (xmlnode) {
-				content = xmlNodeGetContent(xmlnode);
-				if (content[0] == 'T')
-					gtk_toolbar_append_space(
-							GTK_TOOLBAR(w));
-				free(content);
-			}
+		for (tmp2 = cinfo->child_attributes; tmp2; tmp2 = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+			if (!strcmp(attr->name, "new_group") &&
+			    attr->value[0] == 'T')
+				gtk_toolbar_append_space(GTK_TOOLBAR(w));
 		}
 		
 		/* check to see if this is a special Toolbar:button or just
 		 * a standard widget we are adding to the toolbar */
-		xmlnode = childnode->data;
-		for (xmlnode = xmlnode->childs; xmlnode;
-		     xmlnode = xmlnode->next)
-			if (!strcmp(xmlnode->name, "child_name"))
+		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+			if (!strcmp(attr->name, "child_name")) {
+				is_button = !strcmp(attr->value,
+						    "Toolbar:button");
 				break;
-		content = xmlNodeGetContent (xmlnode);
-		if (xmlnode && !strcmp(content, "Toolbar:button")) {
+			}
+		}
+		if (is_button) {
 			char *label = NULL, *icon = NULL, *stock = NULL;
 			GtkWidget *iconw = NULL;
 
-			if (content) free(content);
-			xmlnode = childnode->data;
-			for (xmlnode = xmlnode->childs; xmlnode;
-			     xmlnode = xmlnode->next) {
-				content = xmlNodeGetContent(xmlnode);
-				if (!strcmp(xmlnode->name, "label")) {
-					if (label) g_free(label);
-					label = g_strdup(content);
-				} else if (!strcmp(xmlnode->name, "icon")) {
+			for (tmp2 = cinfo->attributes; tmp2; tmp2=tmp2->next) {
+				GladeAttribute *attr = tmp2->data;
+
+				if (!strcmp(attr->name, "label")) {
+					label = attr->value;
+				} else if (!strcmp(attr->name, "icon")) {
 					if (icon) g_free(icon);
-					if (stock) g_free(stock);
 					stock = NULL;
 					icon = glade_xml_relative_file(xml,
 								content);
-				} else if (!strcmp(xmlnode->name, "stock_pixmap")) {
+				} else if (!strcmp(attr->name,"stock_pixmap")){
 					if (icon) g_free(icon);
-					if (stock) g_free(stock);
 					icon = NULL;
-					stock = g_strdup(content);
+					stock = attr->value;
 				}
-				if (content) free(content);
 			}
 			if (stock) {
 				iconw = gnome_stock_new_with_icon(
 						get_stock_name(stock));
-				g_free(stock);
 			} else if (icon) {
 				GdkPixmap *pix;
 				GdkBitmap *mask;
@@ -378,11 +343,10 @@ toolbar_build_children (GladeXML *xml, GtkWidget *w, GNode *node,
 			child = gtk_toolbar_append_item(GTK_TOOLBAR(w),
 							_(label), NULL, NULL,
 							iconw, NULL, NULL);
-			glade_xml_set_common_params(xml, child, childnode,
-						    longname, "GtkButton");
+			glade_xml_set_common_params(xml, child, cinfo,
+						    longname);
 		} else {
-			if (content) free(content);
-			child = glade_xml_build_widget(xml,childnode,longname);
+			child = glade_xml_build_widget(xml, cinfo, longname);
 			gtk_toolbar_append_widget(GTK_TOOLBAR(w), child,
 						  NULL, NULL);
 		}
@@ -390,73 +354,64 @@ toolbar_build_children (GladeXML *xml, GtkWidget *w, GNode *node,
 }
 
 static void
-menushell_build_children (GladeXML *xml, GtkWidget *w, GNode *node,
+menushell_build_children (GladeXML *xml, GtkWidget *w, GladeWidgetInfo *info,
 			  const char *longname)
 {
-	GNode *childnode;
-	char *content;
+	GList *tmp;
 	gint childnum = -1;
 	GnomeUIInfo infos[2] = {
 		{ GNOME_APP_UI_ITEM },
 		GNOMEUIINFO_END
 	};
 
-	for (childnode = node->children; childnode;
-	     childnode = childnode->next) {
-		xmlNodePtr xmlnode = childnode->data;
+	for (tmp = info->children; tmp; tmp = tmp->next) {
+		GladeWidgetInfo *cinfo = tmp->data;
+		GList *tmp2;
 		GtkWidget *child;
-		gchar *tmp1 = NULL, *tmp2 = NULL;
+		gchar *stock_item = NULL;
 
 		childnum++;
-		for (xmlnode = xmlnode->childs; xmlnode;
-		     xmlnode = xmlnode->next)
-			if (!strcmp(xmlnode->name, "stock_item"))
+		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+
+			if (!strcmp(attr->name, "stock_item")) {
+				stock_item = attr->value;
 				break;
-		if (!xmlnode) {
-			/* this is a normal menu item */
-			child = glade_xml_build_widget(xml,childnode,longname);
-			gtk_menu_shell_append(GTK_MENU_SHELL(w), child);
-			continue;
-		}
-		content = xmlNodeGetContent(xmlnode);
-		/* load the template GnomeUIInfo for this item */
-		if (!get_stock_uiinfo(content, &infos[0])) {
-			/* failure ... */
-			char *tmp = content;
-			if (!strncmp(tmp, "GNOMEUIINFO_", 12)) tmp += 12;
-			child = gtk_menu_item_new_with_label(tmp);
-			free(content);
-			glade_xml_set_common_params(xml, child, childnode,
-						    longname, "GtkMenuItem");
-			gtk_menu_shell_append(GTK_MENU_SHELL(w), child);
-			continue;
-		}
-		free(content);
-		/* we now have the template for this item.  Now fill it in */
-		xmlnode = childnode->data;
-		for (xmlnode = xmlnode->childs; xmlnode;
-		     xmlnode = xmlnode->next) {
-			content = xmlNodeGetContent(xmlnode);
-			if (!strcmp(xmlnode->name, "label")) {
-				if (tmp1) g_free(tmp1);
-				tmp1 = g_strdup(content);
-				infos[0].label = _(tmp1);
-			} else if (!strcmp(xmlnode->name, "tooltip")) {
-				if (tmp2) g_free(tmp2);
-				tmp2 = g_strdup(content);
-				infos[0].hint = _(tmp2);
 			}
-			if (content) free(content);
+		}
+		if (!stock_name) {
+			/* this is a normal menu item */
+			child = glade_xml_build_widget(xml, cinfo, longname);
+			gtk_menu_shell_append(GTK_MENU_SHELL(w), child);
+			continue;
+		}
+		/* load the template GnomeUIInfo for this item */
+		if (!get_stock_uiinfo(stock_name, &infos[0])) {
+			/* failure ... */
+			if (!strncmp(stock_name, "GNOMEUIINFO_", 12))
+				stock_name += 12;
+			child = gtk_menu_item_new_with_label(stock_name);
+			glade_xml_set_common_params(xml, child, cinfo,
+						    longname);
+			gtk_menu_shell_append(GTK_MENU_SHELL(w), child);
+			continue;
+		}
+		/* we now have the template for this item.  Now fill it in */
+		for (tmp2 = cinfo->attributes; tmp2; tmp2 = tmp2->next) {
+			GladeAttribute *attr = tmp2->data;
+
+			if (!strcmp(attr->name, "label"))
+				infos[0].label = _(attr->value);
+			else if (!strcmp(xmlnode->name, "tooltip"))
+				infos[0].hint = _(attr->value);
 		}
 		gnome_app_fill_menu(GTK_MENU_SHELL(w), infos,
 				    gtk_accel_group_get_default(), TRUE,
 				    childnum);
 		child = infos[0].widget;
-		if (tmp1) g_free(tmp1);
-		if (tmp2) g_free(tmp2);
 		gtk_menu_item_remove_submenu(GTK_MENU_ITEM(child));
-		glade_xml_set_common_params(xml, child, childnode,
-					    longname, "GtkMenuItem");
+		glade_xml_set_common_params(xml, child, cinfo,
+					    longname);
 	}
 }
 
