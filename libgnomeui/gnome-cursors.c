@@ -390,7 +390,7 @@ static GnomeStockCursor default_cursors[] = {
                 egg_timer1_xpm, /* cursor_data */
                 NULL, /* xbm mask */
                 NULL, NULL, /* bitmap/mask */
-                {0x0, 0xFFFF, 0xFFFF, 0x0, /* foreground */
+                {0x0, 0xFFFF, 0xFFFF, 0x0}, /* foreground */
                 BLACK, /* background */
                 8, 8,     /* hotspot */
                 -1, -1,   /* w x h */
