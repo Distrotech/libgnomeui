@@ -433,27 +433,37 @@ fill_table(GtkWidget *window, GtkTable *table)
 	w = gnome_stock_pixmap_widget(button, GNOME_STOCK_PIXMAP_TIMER);
 	gtk_widget_show(w);
 	gtk_container_add(GTK_CONTAINER(button), w);
-	gtk_table_attach_defaults(table, button, 1, 2, 3, 4);
+	gtk_table_attach_defaults(table, button, 0, 1, 4, 6);
 	gtk_signal_connect(GTK_OBJECT(button), "clicked",
 			   GTK_SIGNAL_FUNC(toggle_button), w);
 
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_MAIL));
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_HOME));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 1, 2, 3, 4);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_HOME));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 1, 2, 4, 5);
+	w = gtk_label_new("Home");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 1, 2, 5, 6);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_STOP));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 2, 3, 3, 4);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_MAIL));
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_STOP));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 2, 3, 4, 5);
-	w = gtk_label_new("Mail");
+	w = gtk_label_new("Stop");
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 2, 3, 5, 6);
 
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_MAIL_RCV));
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_REFRESH));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 3, 4, 3, 4);
-	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_MAIL_RCV));
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_REFRESH));
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 3, 4, 4, 5);
-	w = gtk_label_new("Receive Mail");
+	w = gtk_label_new("Refresh");
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 3, 4, 5, 6);
 
@@ -466,6 +476,26 @@ fill_table(GtkWidget *window, GtkTable *table)
 	w = gtk_label_new("Send Mail");
 	gtk_widget_show(w);
 	gtk_table_attach_defaults(table, w, 4, 5, 5, 6);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_MAIL));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 5, 6, 3, 4);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_MAIL));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 5, 6, 4, 5);
+	w = gtk_label_new("Mail");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 5, 6, 5, 6);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_MAIL_RCV));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 6, 7, 3, 4);
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_MENU_MAIL_RCV));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 6, 7, 4, 5);
+	w = gtk_label_new("Receive Mail");
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 6, 7, 5, 6);
 }
 
 
