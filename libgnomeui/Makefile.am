@@ -5,14 +5,19 @@ SUBDIRS = pixmaps
 LIB_VERSION=0:0:0
 LIB_VERSION_NUM=0.0.0
 
-
-GDK_PIXBUF_LIBS=
-
 #
 # The targets
 #
-noinst_PROGRAMS = test-recently-used test-file-saver selector_demo stock_demo winhints_demo dock_demo \
-	animator_demo mdi_demo
+noinst_PROGRAMS = \
+	test-recently-used	\
+	test-file-saver		\
+	selector_demo		\
+	stock_demo		\
+	winhints_demo		\
+	dock_demo 		\
+	animator_demo		\
+	mdi_demo
+
 bin_PROGRAMS    = gnome_segv gnome-remote-bootstrap gnome-rexec-server
 lib_LTLIBRARIES = libgnomeui-2.la
 
@@ -21,12 +26,14 @@ lib_LTLIBRARIES = libgnomeui-2.la
 #
 libgnomeuiincludedir = $(includedir)/gnome/$(GNOME_INTERFACE_VERSION)/libgnomeui
 
-INCLUDES = -I$(top_srcdir)/gdk-pixbuf			\
+INCLUDES = \
 	-I$(top_builddir)				\
 	-I$(top_srcdir)					\
-	-I$(top_srcdir)/intl -I$(top_builddir)/intl 	\
+	-I$(top_srcdir)/intl				\
+	-I$(top_builddir)/intl				\
 	$(SUPPORTINCS) 					\
-	$(GLIB_CFLAGS) $(GTK_CFLAGS)			\
+	$(GLIB_CFLAGS)					\
+	$(GTK_CFLAGS)					\
 	$(OAF_CFLAGS)					\
 	$(LIBGLADE_CFLAGS)				\
 	$(LIBART_CFLAGS)				\
@@ -322,20 +329,19 @@ EXTRA_DIST =					\
 	landscape.xpm				\
 	$(oafinfo_DATA)
 
-libgnomeui_2_la_LDFLAGS = -version-info $(LIB_VERSION)				\
-		$(GDK_PIXBUF_LIBS)							\
-		$(OAF_LIBS)								\
-		$(GCONF_LIBS)					\
-		$(LIBGNOMEUI_LIBS)
+libgnomeui_2_la_LDFLAGS = \
+	-version-info $(LIB_VERSION)				\
+	$(OAF_LIBS)						\
+	$(GCONF_LIBS)						\
+	$(LIBGNOMEUI_LIBS)
 
 #		-L`cd $(top_builddir); pwd`/libgnome/.libs -lgnome-$(GNOME_INTERFACE_VERSION)
 
 libgnomeui_2_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 LDADD =	\
-	libgnomeui-$(GNOME_INTERFACE_VERSION).la 					\
-	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la 		\
-	$(GDK_PIXBUF_LIBS) \
-        $(LIBGNOMEUI_LIBS) \
-	$(LIBART_LIBS)	\
+	libgnomeui-$(GNOME_INTERFACE_VERSION).la 			\
+	$(top_builddir)/libgnome/libgnome-$(GNOME_INTERFACE_VERSION).la	\
+        $(LIBGNOMEUI_LIBS)						\
+	$(LIBART_LIBS)							\
 	$(INTLLIBS)

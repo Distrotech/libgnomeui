@@ -1,3 +1,7 @@
+Thu Aug 24 03:29:46 2000  George Lebl <jirka@5z.com>
+
+	* Makefile.am: a bit of makefile cleanup
+
 Thu Aug 24 02:23:51 2000  George Lebl <jirka@5z.com>
 
 	* gnome-animator.c: fix compile errors
