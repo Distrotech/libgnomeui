@@ -70,8 +70,11 @@ typedef enum
 typedef enum
 {
   GNOME_CLIENT_IDLE,
-  GNOME_CLIENT_SAVING,
-  GNOME_CLIENT_WAITING
+  GNOME_CLIENT_SAVING_PHASE_1,
+  GNOME_CLIENT_WAITING_FOR_PHASE_2,
+  GNOME_CLIENT_SAVING_PHASE_2,
+  GNOME_CLIENT_FROZEN,
+  GNOME_CLIENT_DISCONNECTED
 } GnomeClientState;
 
 typedef void (*GnomeInteractFunction) (GnomeClient     *client,
@@ -123,7 +126,6 @@ struct _GnomeClient
   GnomeInteractStyle  interact_style;
   gboolean            shutdown;
   gboolean            fast;
-  gint                phase;
 
   /* other internal state information */
   GnomeClientState    state;

@@ -437,6 +437,14 @@ client_unset (GnomeClient *client, gchar *name)
     SmcDeleteProperties ((SmcConn) client->smc_conn, 1, &name);
 }
 
+
+static void
+client_set_state (GnomeClient *client, GnomeClientState state)
+{
+  client->state= state;
+}
+
+
 #endif /* HAVE_LIBSM */
 
 /*****************************************************************************/
@@ -461,20 +469,29 @@ client_save_yourself_possibly_done (GnomeClient *client)
   if (client->interaction_keys)
     return;
   
-  if (client->save_phase_2_requested && (client->phase == 1))
+  if ((client->state == GNOME_CLIENT_SAVING_PHASE_1) &&
+      client->save_phase_2_requested)
     {
-      SmcRequestSaveYourselfPhase2 ((SmcConn) client->smc_conn,
-				    client_save_phase_2_callback,
-				    (SmPointer) client);
-    }
-  else
-    {
-      if (client->state == GNOME_CLIENT_SAVING)
-	SmcSaveYourselfDone ((SmcConn) client->smc_conn,
-			     client->save_successfull);
+      Status status;
       
-      client->state= 
-	(client->shutdown) ? GNOME_CLIENT_WAITING : GNOME_CLIENT_IDLE;
+      status= SmcRequestSaveYourselfPhase2 ((SmcConn) client->smc_conn,
+					    client_save_phase_2_callback,
+					    (SmPointer) client);
+
+      if (status)
+	client_set_state (client, GNOME_CLIENT_WAITING_FOR_PHASE_2);
+    }
+
+  if ((client->state == GNOME_CLIENT_SAVING_PHASE_1) ||
+      (client->state == GNOME_CLIENT_SAVING_PHASE_2))
+    {
+      SmcSaveYourselfDone ((SmcConn) client->smc_conn,
+			   client->save_successfull);
+      
+      if (client->shutdown)
+	client_set_state (client, GNOME_CLIENT_FROZEN);
+      else
+	client_set_state (client, GNOME_CLIENT_IDLE);
     }
 }
 
@@ -484,7 +501,7 @@ client_save_phase_2_callback (SmcConn smc_conn, SmPointer client_data)
 {
   GnomeClient *client= (GnomeClient*) client_data;
 
-  client->phase= 2;
+  client_set_state (client, GNOME_CLIENT_SAVING_PHASE_2);
  
   gtk_signal_emit (GTK_OBJECT (client), client_signals[SAVE_YOURSELF],
 		   2,
@@ -539,12 +556,12 @@ client_save_yourself_callback (SmcConn   smc_conn,
       break;
     }
   client->fast = fast;
-  client->phase= 1;
 
-  client->state                 = GNOME_CLIENT_SAVING;
   client->save_phase_2_requested= FALSE;
   client->save_successfull      = TRUE;
   client->save_yourself_emitted = FALSE;
+
+  client_set_state (client, GNOME_CLIENT_SAVING_PHASE_1);
 
   gtk_signal_emit (GTK_OBJECT (client), 
 		   client_signals[SAVE_YOURSELF],
@@ -903,7 +920,7 @@ gnome_client_class_init (GnomeClientClass *klass)
 		    GTK_TYPE_BOOL);
   client_signals[DIE] =
     gtk_signal_new ("die",
-		    GTK_RUN_FIRST,
+		    GTK_RUN_LAST,
 		    object_class->type,
 		    GTK_SIGNAL_OFFSET (GnomeClientClass, die),
 		    gtk_signal_default_marshaller,
@@ -1001,7 +1018,7 @@ gnome_client_object_init (GnomeClient *client)
       }
   }
 
-  client->state                       = GNOME_CLIENT_IDLE;
+  client->state                       = GNOME_CLIENT_DISCONNECTED;
   client->interaction_keys            = NULL;
 }
 
@@ -1233,6 +1250,8 @@ gnome_client_connect (GnomeClient *client)
 				       gnome_process_ice_messages,
 				       (gpointer) client);
 
+      client_set_state (client, GNOME_CLIENT_IDLE);
+
       /* Let all the world know, that we have a connection to a
          session manager.  */
       gtk_signal_emit (GTK_OBJECT (client), client_signals[CONNECT], 
@@ -1254,7 +1273,6 @@ void
 gnome_client_disconnect (GnomeClient *client)
 {
   g_return_if_fail (client != NULL);
-
 
   gnome_client_flush (client);
   if (GNOME_CLIENT_CONNECTED (client))
@@ -1883,7 +1901,7 @@ gnome_real_client_save_complete (GnomeClient *client)
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
   
-  client->state = GNOME_CLIENT_IDLE;
+  client_set_state (client, GNOME_CLIENT_IDLE);
 }
 
 /* The following function is executed, after receiving a SHUTDOWN
@@ -1898,8 +1916,12 @@ gnome_real_client_shutdown_cancelled (GnomeClient *client)
   g_return_if_fail (GNOME_IS_CLIENT (client));
 
 #ifdef HAVE_LIBSM
-  if (client->state == GNOME_CLIENT_SAVING)
+  if ((client->state == GNOME_CLIENT_SAVING_PHASE_1) ||
+      (client->state == GNOME_CLIENT_WAITING_FOR_PHASE_2) ||
+      (client->state == GNOME_CLIENT_SAVING_PHASE_2))
     SmcSaveYourselfDone ((SmcConn) client->smc_conn, False);
+
+  client_set_state (client, GNOME_CLIENT_IDLE);
   
   /* Free all interation keys but the one in use.  */
   while (client->interaction_keys)
@@ -1911,8 +1933,6 @@ gnome_real_client_shutdown_cancelled (GnomeClient *client)
       client->interaction_keys= g_slist_remove (tmp, tmp->data);
     }
 #endif /* HAVE_LIBSM */
-
-  client->state = GNOME_CLIENT_IDLE;
 }
 
 static void
@@ -2004,6 +2024,8 @@ gnome_real_client_disconnect (GnomeClient *client)
       client->input_id = 0;
     }
 
+  client_set_state (client, GNOME_CLIENT_DISCONNECTED);
+
   /* Free all interation keys but the one in use.  */
   while (client->interaction_keys)
     {
@@ -2015,8 +2037,6 @@ gnome_real_client_disconnect (GnomeClient *client)
     }
 
 #endif /* HAVE_LIBSM */
-
-  client->state = GNOME_CLIENT_IDLE;  
 }
 
 /*****************************************************************************/
@@ -2030,8 +2050,9 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
 					   GtkDestroyNotify       destroy) 
 {
 #ifdef HAVE_LIBSM
+  Status          status;
   InteractionKey *key;
-  int _dialog_type;
+  int             _dialog_type;
 #endif
   
   /* Convert GnomeDialogType into XSM library values */
@@ -2052,7 +2073,7 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
     default:
       g_assert_not_reached ();
       return;
-    };
+    }
 
 #ifdef HAVE_LIBSM
   
@@ -2061,11 +2082,18 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
   
   g_return_if_fail (key);
   
-  client->interaction_keys= g_slist_prepend (client->interaction_keys, key);
+  status= SmcInteractRequest ((SmcConn) client->smc_conn, _dialog_type, 
+			      client_interact_callback, (SmPointer) client);
   
-  SmcInteractRequest ((SmcConn) client->smc_conn, _dialog_type, 
-		      client_interact_callback, (SmPointer) client);
-
+  if (status)
+    {
+        client->interaction_keys= g_slist_prepend (client->interaction_keys, 
+						   key);
+    }
+  else
+    {
+      interaction_key_destroy (key);
+    }
 #endif /* HAVE_LIBSM */
 }
 
@@ -2089,7 +2117,8 @@ gnome_client_request_interaction (GnomeClient *client,
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
 
-  g_return_if_fail (client->state == GNOME_CLIENT_SAVING);
+  g_return_if_fail ((client->state == GNOME_CLIENT_SAVING_PHASE_1) ||
+		    (client->state == GNOME_CLIENT_SAVING_PHASE_2));
 
   g_return_if_fail ((client->interact_style != GNOME_INTERACT_NONE) &&
 		    ((client->interact_style == GNOME_INTERACT_ANY) ||
@@ -2121,7 +2150,8 @@ gnome_client_request_interaction_interp (GnomeClient *client,
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));
 
-  g_return_if_fail (client->state == GNOME_CLIENT_SAVING);
+  g_return_if_fail ((client->state == GNOME_CLIENT_SAVING_PHASE_1) ||
+		    (client->state == GNOME_CLIENT_SAVING_PHASE_2));
 
   g_return_if_fail ((client->interact_style != GNOME_INTERACT_NONE) &&
 		    ((client->interact_style == GNOME_INTERACT_ANY) ||
@@ -2151,8 +2181,7 @@ gnome_client_request_phase_2 (GnomeClient *client)
   g_return_if_fail (GNOME_IS_CLIENT (client));
 
   /* Check if we are in save phase one */
-  g_return_if_fail (client->state == GNOME_CLIENT_SAVING);
-  g_return_if_fail (client->phase == 1);
+  g_return_if_fail (client->state == GNOME_CLIENT_SAVING_PHASE_1);
 
   client->save_phase_2_requested= TRUE;
 }

@@ -1,3 +1,15 @@
+1998-12-09  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.c (client_set_state): New function.
+	(client_save_yourself_possibly_done): Handle the case, that a
+ 	'SaveYourselfPhase2' request is rejected.
+	(gnome_client_class_init): Run the 'die' default handler last.
+	(gnome_client_request_interaction_internal): Handle the case, that
+ 	a 'InteractRequest' is rejected.
+
+	* gnome-client.h (enum GnomeClientState): Added additional states.
+	(struct _GnomeClient): Removed phase.
+
 1998-12-08  Tim P. Gerla  <timg@means.net>
 
 	* gnome-paper-selector.c: Added some padding around the dialog.
