@@ -23,7 +23,7 @@
 
 BEGIN_GNOME_DECLS
 
-void gnome_init (int *argc, char ***argv);
+void gnome_init (char *app_id, int *argc, char ***argv);
 
 END_GNOME_DECLS
 

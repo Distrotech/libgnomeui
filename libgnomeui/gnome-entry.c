@@ -63,21 +63,18 @@ gnome_entry_class_init (GnomeEntryClass *class)
 static void
 gnome_entry_init (GnomeEntry *gentry)
 {
-	gentry->app_id     = NULL;
 	gentry->history_id = NULL;
 	gentry->items      = NULL;
 }
 
 GtkWidget *
-gnome_entry_new (char *app_id,
-		 char *history_id)
+gnome_entry_new (char *history_id)
 {
 	GnomeEntry *gentry;
 
 	gentry = gtk_type_new (gnome_entry_get_type ());
 
-	gentry->app_id     = g_strdup (app_id); /* these handle NULL correctly */
-	gentry->history_id = g_strdup (history_id);
+	gentry->history_id = g_strdup (history_id); /* this handles NULL correctly */
 
 	gnome_entry_load_history (gentry);
 
@@ -116,9 +113,6 @@ gnome_entry_destroy (GtkObject *object)
 
 	gnome_entry_save_history (gentry);
 
-	if (gentry->app_id)
-		g_free (gentry->app_id);
-
 	if (gentry->history_id)
 		g_free (gentry->history_id);
 
@@ -132,11 +126,23 @@ static char *
 build_prefix (GnomeEntry *gentry, int trailing_slash)
 {
 	return g_copy_strings ("/",
-			       gentry->app_id,
+			       gnome_app_id,
 			       "/History: ",
 			       gentry->history_id,
 			       trailing_slash ? "/" : "",
 			       NULL);
+}
+
+static void
+set_combo_items (GnomeEntry *gentry)
+{
+	GtkList *gtklist;
+
+	gtklist = GTK_LIST (GTK_COMBO (gentry)->list);
+
+	gtk_list_clear_items (gtklist, 0, -1); /* erase everything */
+
+
 }
 
 void
@@ -151,7 +157,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (!(gentry->app_id && gentry->history_id))
+	if (!(gnome_get_app_id () && gentry->history_id))
 		return;
 
 	free_items (gentry);
@@ -173,10 +179,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 		gentry->items = g_list_prepend (gentry->items, item);
 	}
 
-	/* Did we get anything? */
-
-	if (gentry->items)
-		; /* FIXME: set combo popdown strings */
+	set_combo_items (gentry);
 
 	gnome_config_pop_prefix ();
 }
@@ -193,7 +196,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
-	if (!(gentry->app_id && gentry->history_id))
+	if (!(gnome_app_get_id () && gentry->history_id))
 		return;
 
 	prefix = build_prefix (gentry, FALSE);

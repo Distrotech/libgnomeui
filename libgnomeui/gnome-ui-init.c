@@ -10,7 +10,7 @@
 static void gnome_rc_parse(gchar *command);
 
 void
-gnome_init (gint *argc, gchar ***argv)
+gnome_init (char *app_id, gint *argc, gchar ***argv)
 {
 	/* now we replace gtk_init() with gnome_init() in our apps */
 	gtk_set_locale();
@@ -18,7 +18,7 @@ gnome_init (gint *argc, gchar ***argv)
 	
 	gnome_rc_parse(*argv[0]);
 
-	gnomelib_init (argc, argv);
+	gnomelib_init (app_id, argc, argv);
 }
 
 /* perhaps this belongs in libgnome.. move it if you like. */

@@ -1,3 +1,12 @@
+1998-02-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* ted_demo.c (main): Added app_id "ted_demo".
+
+	* stock_demo.c (main): Added app_id "stock_demo".
+
+	* gnome-init.c (gnome_init): Added app_id parameter to this
+	function.  Changes to the rest of Gnome are in progress.
+
 1998-02-19  Carsten Schaar <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gnome-session.c: Removed. Was replaced by gnome-client.

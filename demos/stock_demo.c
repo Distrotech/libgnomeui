@@ -237,7 +237,7 @@ main(int argc, char **argv)
 {
 	GtkWidget *window, *hbox, *vbox, *w;
 
-	gnome_init(&argc, &argv);
+	gnome_init("stock_demo", &argc, &argv);
 #ifdef HAS_GDK_IMLIB
 	gdk_imlib_init();
 #endif 

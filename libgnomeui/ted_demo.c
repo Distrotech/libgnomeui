@@ -33,7 +33,7 @@ main (int argc, char *argv[])
 {
 	GtkWidget *t, *w;
 	
-	gnome_init (&argc, &argv);
+	gnome_init ("ted_demo", &argc, &argv);
 
 	gtk_ted_set_app_name ("MyApp");
 	

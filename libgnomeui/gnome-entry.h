@@ -25,7 +25,6 @@ typedef struct _GnomeEntryClass GnomeEntryClass;
 struct _GnomeEntry {
 	GtkCombo combo;
 
-	char  *app_id;
 	char  *history_id;
 	GList *items;
 };
@@ -36,8 +35,7 @@ struct GnomeEntryClass {
 
 
 guint      gnome_entry_get_type (void);
-GtkWidget *gnome_entry_new (char *app_id,
-			    char *history_id);
+GtkWidget *gnome_entry_new (char *history_id);
 
 void       gnome_entry_load_history (GnomeEntry *gentry);
 void       gnome_entry_save_history (GnomeEntry *gentry);
