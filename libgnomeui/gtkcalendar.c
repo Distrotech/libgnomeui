@@ -19,15 +19,17 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <config.h>
 #include <sys/time.h>
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
-#include <config.h>
-#include "libgnome/libgnome.h"
 #include "gtkcalendar.h"
 #include "libgnome/lib_date.h"
+#include <libgnome/gnome-defs.h>
+#include "libgnome/gnome-i18nP.h"
+
 
 #define HELVETICA_10_FONT  "-adobe-helvetica-bold-r-normal-*-10-*-*-*-*-*-*-*"
 #define FIXED_10_FONT      "-b&h-lucidatypewriter-medium-r-normal-*-10-*-*-*-*-*-*-*"
@@ -917,7 +919,7 @@ gtk_calendar_paint_day_names (GtkWidget *widget)
   gdk_gc_set_foreground (gc, &calendar->background_color);
   for (day = 0; day < 7; day++)
     {
-      sprintf (buffer, "%s", dayinletters[day]);
+      sprintf (buffer, "%s", _(dayinletters[day]));
       str_width = gdk_string_measure (calendar->day_name_font, buffer);
       gdk_draw_string (calendar->day_name_win, calendar->day_name_font, 
                        gc, CALENDAR_MARGIN + day_wid_sep * day + 
