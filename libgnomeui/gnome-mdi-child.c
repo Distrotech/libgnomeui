@@ -97,7 +97,7 @@ static GtkWidget *gnome_mdi_child_set_label (GnomeMDIChild *child, GtkWidget *ol
 #endif
 
 	if(old_label) {
-		gtk_label_set(GTK_LABEL(old_label), child->name);
+		gtk_label_set_text(GTK_LABEL(old_label), child->name);
 		return old_label;
 	}
 	else {

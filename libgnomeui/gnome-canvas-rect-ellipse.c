@@ -517,14 +517,16 @@ gnome_canvas_re_render (GnomeCanvasItem *item,
 			art_rgb_svp_aa (re->fill_svp,
 					buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
 					fg_color, bg_color,
-					buf->buf, buf->buf_rowstride);
+					buf->buf, buf->buf_rowstride,
+					NULL);
 			buf->is_bg = 0;
 			buf->is_buf = 1;
 		} else {
 			art_rgb_svp_alpha (re->fill_svp,
 					   buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
 					   re->fill_color,
-					   buf->buf, buf->buf_rowstride);
+					   buf->buf, buf->buf_rowstride,
+					   NULL);
 		}
 	}
 
@@ -536,14 +538,16 @@ gnome_canvas_re_render (GnomeCanvasItem *item,
 			art_rgb_svp_aa (re->outline_svp,
 					buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
 					fg_color, bg_color,
-					buf->buf, buf->buf_rowstride);
+					buf->buf, buf->buf_rowstride,
+					NULL);
 			buf->is_bg = 0;
 			buf->is_buf = 1;
 		} else {
 			art_rgb_svp_alpha (re->outline_svp,
 					   buf->rect.x0, buf->rect.y0, buf->rect.x1, buf->rect.y1,
 					   re->outline_color,
-					   buf->buf, buf->buf_rowstride);
+					   buf->buf, buf->buf_rowstride,
+					   NULL);
 		}
 	}
 }

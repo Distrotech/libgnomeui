@@ -929,11 +929,11 @@ drg_toggle(GtkWidget *w, gpointer data)
 
 
 	if(gc->mode==GNOME_CALCULATOR_DEG)
-		gtk_label_set(GTK_LABEL(label),_("DEG"));
+		gtk_label_set_text(GTK_LABEL(label),_("DEG"));
 	else if(gc->mode==GNOME_CALCULATOR_RAD)
-		gtk_label_set(GTK_LABEL(label),_("RAD"));
+		gtk_label_set_text(GTK_LABEL(label),_("RAD"));
 	else
-		gtk_label_set(GTK_LABEL(label),_("GRAD"));
+		gtk_label_set_text(GTK_LABEL(label),_("GRAD"));
 
 	/*convert if invert is on*/
 	if(gc->invert) {

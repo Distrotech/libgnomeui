@@ -394,7 +394,7 @@ flip_to_page(GnomeGuru * guru,
     gtk_widget_show(guru->back);
   }
 
-  gtk_label_set(GTK_LABEL(guru->page_title), page->name);
+  gtk_label_set_text(GTK_LABEL(guru->page_title), page->name);
 
   gtk_widget_show(page->widget);
 }

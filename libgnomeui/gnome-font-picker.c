@@ -653,13 +653,13 @@ void gnome_font_picker_update_font_info(GnomeFontPicker *gfp)
     /* Extract font name */
     gnome_font_picker_font_extract_attr(gfp->font_name,pTmp,2);
     *pTmp=toupper(*pTmp);
-    gtk_label_set(GTK_LABEL(gfp->font_label),pTmp);
+    gtk_label_set_text(GTK_LABEL(gfp->font_label),pTmp);
 
     /* Extract font size */
     if (gfp->show_size)
     {
         gnome_font_picker_font_extract_attr(gfp->font_name,pTmp,7);
-        gtk_label_set(GTK_LABEL(gfp->size_label),pTmp);
+        gtk_label_set_text(GTK_LABEL(gfp->size_label),pTmp);
     }
 
     if (gfp->use_font_in_label)
