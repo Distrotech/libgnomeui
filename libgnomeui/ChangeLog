@@ -1,3 +1,14 @@
+Sat Mar  7 16:40:08 1998  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-stock.c (create_pixmap_from_data): use
+	gnome_pixmap_new_from_xpm_d_at_size.
+	
+	* gnome-stock.h: added new stock icons: print, search, back, forward.
+	
+	* gnome-stock-{imlib,xpm}.h: added tigert's icons.
+
+	* stock_demo.c: included new icons
+
 Fri Mar  6 18:06:32 1998  Eckehard Berns  <eb@berns.prima.de>
 
 	* gnome-stock{,-imlib,-xpm}.[ch]: reorganized pixmaps.

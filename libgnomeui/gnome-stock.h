@@ -91,6 +91,10 @@ BEGIN_GNOME_DECLS
 #define GNOME_STOCK_PIXMAP_PROPERTIES  "Properties"
 #define GNOME_STOCK_PIXMAP_HELP        "Help"
 #define GNOME_STOCK_PIXMAP_SCORES      "Scores"
+#define GNOME_STOCK_PIXMAP_PRINT       "Print"
+#define GNOME_STOCK_PIXMAP_SEARCH      "Search"
+#define GNOME_STOCK_PIXMAP_BACK        "Back"
+#define GNOME_STOCK_PIXMAP_FORWARD     "Forward"
 #define GNOME_STOCK_PIXMAP_EXIT        "Exit"
 
 

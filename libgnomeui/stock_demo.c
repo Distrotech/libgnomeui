@@ -1,7 +1,7 @@
 #include <gnome.h>
 
 
-static GtkWidget *menu_items[20];
+static GtkWidget *menu_items[20], *frame;
 
 
 static GtkWidget *
@@ -164,7 +164,7 @@ create_menu(GtkWidget *window)
         gtk_menu_bar_append(GTK_MENU_BAR(menubar), w);
 
 	menu_items[i] = NULL;
-	g_print("%d menu items\n", i);
+	/* g_print("%d menu items\n", i); */
 	gtk_window_add_accelerator_table(GTK_WINDOW(window), accel);
 	return menubar;
 }
@@ -217,6 +217,7 @@ tb_sens(GtkWidget *w, gpointer *data)
 	TbItems *t;
 	GtkWidget **m;
 
+	gtk_widget_set_sensitive(frame, TRUE);
 	for (t = tb_items; t->icon; t++) {
 		gtk_widget_set_sensitive(t->widget, TRUE);
 	}
@@ -233,6 +234,7 @@ tb_insens(GtkWidget *w, gpointer *data)
 	TbItems *t;
 	GtkWidget **m;
 
+	gtk_widget_set_sensitive(frame, FALSE);
 	for (t = tb_items; t->icon; t++) {
 		gtk_widget_set_sensitive(t->widget, FALSE);
 	}
@@ -244,14 +246,39 @@ tb_insens(GtkWidget *w, gpointer *data)
 
 
 void
+fill_table(GtkWidget *window, GtkTable *table)
+{
+	GtkWidget *w;
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_HELP));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 0, 1, 0, 1);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_SEARCH));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 1, 2, 0, 1);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_PRINT));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 2, 3, 0, 1);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_BACK));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 3, 4, 0, 1);
+
+	w = GTK_WIDGET(gnome_stock_pixmap_widget(window, GNOME_STOCK_PIXMAP_FORWARD));
+	gtk_widget_show(w);
+	gtk_table_attach_defaults(table, w, 4, 5, 0, 1);
+}
+
+
+
+void
 main(int argc, char **argv)
 {
-	GtkWidget *window, *hbox, *vbox, *w;
+	GtkWidget *window, *hbox, *vbox, *table, *w;
 
 	gnome_init("stock_demo", &argc, &argv);
-#ifdef HAS_GDK_IMLIB
-	gdk_imlib_init();
-#endif 
 
 	window = gnome_app_new("Gnome Stock Test", "Gnome Stock Test");
 	gtk_window_set_wmclass(GTK_WINDOW(window), "stock_test",
@@ -266,9 +293,17 @@ main(int argc, char **argv)
 	gtk_widget_show(vbox);
 	w = gtk_label_new("Click on `Cancel' to disable the toolbar and menu items\n"
 			  "Click on `OK' to enable the toolbar and menu items\n"
-			  "Select File->Exit to exit the app");
+			  "Select File->Exit or the Exit button to exit the app");
 	gtk_widget_show(w);
 	gtk_box_pack_start(GTK_BOX(vbox), w, TRUE, TRUE, 2);
+
+	frame = gtk_frame_new("Other Icons");
+	gtk_widget_show(frame);
+	gtk_box_pack_start(GTK_BOX(vbox), frame, TRUE, TRUE, 2);
+	table = gtk_table_new(1, 1, FALSE);
+	gtk_widget_show(table);
+	gtk_container_add(GTK_CONTAINER(frame), table);
+	fill_table(window, GTK_TABLE(table));
 
 	hbox = gtk_hbox_new(TRUE, 0);
 	gtk_container_border_width(GTK_CONTAINER(hbox), 5);
@@ -295,6 +330,13 @@ main(int argc, char **argv)
 	w = gnome_stock_button(GNOME_STOCK_BUTTON_HELP);
 	gtk_widget_show(w);
 	gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 3);
+
+	w = gnome_stock_button(GNOME_STOCK_BUTTON_CLOSE);
+	gtk_widget_show(w);
+	gtk_box_pack_start(GTK_BOX(hbox), w, FALSE, FALSE, 3);
+	gtk_signal_connect_object(GTK_OBJECT(w), "clicked",
+				  (GtkSignalFunc)gtk_widget_destroy,
+				  GTK_OBJECT(window));
 
 	gnome_app_set_contents(GNOME_APP(window), vbox);
 	gnome_app_set_menus(GNOME_APP(window),
