@@ -217,12 +217,6 @@ gnome_icon_lookup (GnomeIconLoader            *icon_loader,
 	}
     }
 
-  icon_name = get_icon_name (file_uri, file_info, mime_type, flags);
-
-  if (icon_name && gnome_icon_loader_has_icon (icon_loader, icon_name))
-    return icon_name;
-  g_free (icon_name);
-
   if (mime_type)
     {
       mime_name = get_vfs_mime_name (mime_type);
@@ -238,6 +232,10 @@ gnome_icon_lookup (GnomeIconLoader            *icon_loader,
       g_free (mime_name);
     }
       
+  icon_name = get_icon_name (file_uri, file_info, mime_type, flags);
+  if (icon_name && gnome_icon_loader_has_icon (icon_loader, icon_name))
+    return icon_name;
+  g_free (icon_name);
 
   return g_strdup (ICON_NAME_REGULAR);
 }
