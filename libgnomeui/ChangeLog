@@ -1,3 +1,8 @@
+Thu Jun 18 00:40:27 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-entry.c: use the new gnome_config prefix list functions
+	  so that gnome_entry doesn't interfere with app's prefix stack
+
 Tue Jun 16 15:35:01 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dentry-edit.h, gnome-dentry-edit.c, gnome-icon-sel.h,

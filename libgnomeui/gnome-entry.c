@@ -316,6 +316,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	int n;
 	char key[32];
 	char *value;
+	GSList *prefix_list;
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
@@ -324,6 +325,9 @@ gnome_entry_load_history (GnomeEntry *gentry)
 		return;
 
 	free_items (gentry);
+
+	/*so that we don't disturb the app's prefix list*/
+	prefix_list = gnome_config_remove_prefix_list();
 
 	prefix = build_prefix (gentry, TRUE);
 	gnome_config_push_prefix (prefix);
@@ -345,6 +349,7 @@ gnome_entry_load_history (GnomeEntry *gentry)
 	set_combo_items (gentry);
 
 	gnome_config_pop_prefix ();
+	gnome_config_set_prefix_list(prefix_list);
 }
 
 void
@@ -355,12 +360,16 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	struct item *item;
 	int n;
 	char key[32];
+	GSList *prefix_list;
 
 	g_return_if_fail (gentry != NULL);
 	g_return_if_fail (GNOME_IS_ENTRY (gentry));
 
 	if (!(gnome_app_id && gentry->history_id))
 		return;
+
+	/*so that we don't disturb the app's prefix list*/
+	prefix_list = gnome_config_remove_prefix_list();
 
 	prefix = build_prefix (gentry, FALSE);
 	if (gnome_config_has_section (prefix))
@@ -383,5 +392,6 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	}
 
 	gnome_config_pop_prefix ();
+	gnome_config_set_prefix_list(prefix_list);
 	gnome_config_sync ();
 }
