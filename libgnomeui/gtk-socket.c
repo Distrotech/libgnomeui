@@ -29,6 +29,7 @@
 static void gtk_socket_class_init               (GtkSocketClass    *klass);
 static void gtk_socket_init                     (GtkSocket         *socket);
 static void gtk_socket_realize                  (GtkWidget        *widget);
+static void gtk_socket_unrealize                (GtkWidget        *widget);
 static void gtk_socket_size_request             (GtkWidget      *widget,
 					       GtkRequisition *requisition);
 static void gtk_socket_size_allocate            (GtkWidget     *widget,
@@ -45,6 +46,11 @@ static GdkFilterReturn gtk_socket_filter_func   (GdkXEvent *gdk_xevent,
 						 GdkEvent *event, 
 						 gpointer data);
 
+
+static void gtk_window_remove_embedded_xid (GtkWindow *window, guint xid);
+static void gtk_window_add_embedded_xid    (GtkWindow *window, guint xid);
+
+#define DEBUG_PLUGSOCKET
 #ifdef DEBUG_PLUGSOCKET
 #define DPRINTF(arg) g_print arg
 #else
@@ -96,6 +102,7 @@ gtk_socket_class_init (GtkSocketClass *class)
   parent_class = gtk_type_class (gtk_widget_get_type ());
 
   widget_class->realize = gtk_socket_realize;
+  widget_class->unrealize = gtk_socket_unrealize;
   widget_class->size_request = gtk_socket_size_request;
   widget_class->size_allocate = gtk_socket_size_allocate;
   widget_class->focus_in_event = gtk_socket_focus_in_event;
@@ -217,6 +224,28 @@ gtk_socket_realize (GtkWidget *widget)
   gdk_flush();
 }
 
+static void
+gtk_socket_unrealize (GtkWidget *widget)
+{
+  GtkSocket *socket;
+
+  g_return_if_fail (widget != NULL);
+  g_return_if_fail (GTK_IS_SOCKET (widget));
+
+  socket = GTK_SOCKET (widget);
+
+  if (socket->plug_window)
+    {
+      GtkWidget *toplevel = gtk_widget_get_toplevel (GTK_WIDGET (socket));
+      if (toplevel && GTK_IS_WINDOW (toplevel))
+	gtk_window_remove_embedded_xid (GTK_WINDOW (toplevel), 
+					GDK_WINDOW_XWINDOW (socket->plug_window));
+    }
+
+  if (GTK_WIDGET_CLASS (parent_class)->unrealize)
+    return (* GTK_WIDGET_CLASS (parent_class)->unrealize) (widget);
+}
+  
 static void 
 gtk_socket_size_request (GtkWidget      *widget,
 			 GtkRequisition *requisition)
@@ -464,15 +493,73 @@ gtk_socket_send_configure_event (GtkSocket *socket)
 	      False, NoEventMask, &event);
 }
 
+/* As the names indicate, these functions don't belong
+ * here. gnome-libs can't depend on GTK+ themes yet,
+ * so here they are anyways.
+ */
+static void
+gtk_window_add_embedded_xid (GtkWindow *window, guint xid)
+{
+  GList *embedded_windows;
+
+  g_return_if_fail (window != NULL);
+  g_return_if_fail (GTK_IS_WINDOW (window));
+  
+  g_print ("add %#x\n", xid);
+
+  embedded_windows = gtk_object_get_data (GTK_OBJECT (window), "gtk-embedded");
+  if (embedded_windows)
+    gtk_object_remove_no_notify_by_id (GTK_OBJECT (window), 
+				       g_quark_from_static_string ("gtk-embedded"));
+  embedded_windows = g_list_prepend (embedded_windows,
+				     GUINT_TO_POINTER (xid));
+
+  gtk_object_set_data_full (GTK_OBJECT (window), "gtk-embedded", 
+			    embedded_windows,
+			    embedded_windows ?
+			      (GtkDestroyNotify) g_list_free : NULL);
+}
+
+static void
+gtk_window_remove_embedded_xid (GtkWindow *window, guint xid)
+{
+  GList *embedded_windows;
+  GList *node;
+
+  g_return_if_fail (window != NULL);
+  g_return_if_fail (GTK_IS_WINDOW (window));
+  
+  g_print ("remove %#x\n", xid);
+
+  embedded_windows = gtk_object_get_data (GTK_OBJECT (window), "gtk-embedded");
+  if (embedded_windows)
+    gtk_object_remove_no_notify_by_id (GTK_OBJECT (window), 
+				       g_quark_from_static_string ("gtk-embedded"));
+
+  node = g_list_find (embedded_windows, GUINT_TO_POINTER (xid));
+  if (node)
+    {
+      embedded_windows = g_list_remove_link (embedded_windows, node);
+      g_list_free_1 (node);
+    }
+  
+  gtk_object_set_data_full (GTK_OBJECT (window), 
+			    "gtk-embedded", embedded_windows,
+			    embedded_windows ?
+			      (GtkDestroyNotify) g_list_free : NULL);
+}
+
 static void
 gtk_socket_add_window (GtkSocket *socket, guint32 xid)
 {
   socket->plug_window = gdk_window_lookup (xid);
   socket->same_app = TRUE;
-  
+
   if (!socket->plug_window)
     {
+      GtkWidget *toplevel;
       GdkDragProtocol protocol;
+      GList *embedded_windows;
 
       socket->plug_window = gdk_window_foreign_new (xid);
       socket->same_app = FALSE;
@@ -487,6 +574,14 @@ gtk_socket_add_window (GtkSocket *socket, guint32 xid)
 
       gdk_window_add_filter (socket->plug_window, 
 			     gtk_socket_filter_func, socket);
+
+      /* Add a pointer to the socket on our toplevel window */
+
+      toplevel = gtk_widget_get_toplevel (GTK_WIDGET (socket));
+      if (toplevel && GTK_IS_WINDOW (toplevel))
+	{
+	  gtk_window_add_embedded_xid (GTK_WINDOW (toplevel), xid);
+	}
     }
 }
 
@@ -513,6 +608,8 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
 
 	if (!socket->plug_window)
 	  {
+	    g_print("Here!\n");
+
 	    gtk_socket_add_window (socket, xcwe->window);
 	    
 	    gdk_window_move_resize(socket->plug_window,
@@ -575,7 +672,15 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
 	if (socket->plug_window &&
 	    (xdwe->window == GDK_WINDOW_XWINDOW (socket->plug_window)))
 	  {
+	    GtkWidget *toplevel;
+	    
+	    DPRINTF(("Destroy Notify\n"));
+	    
 	    socket->plug_window = NULL;
+	    
+	    toplevel = gtk_widget_get_toplevel (GTK_WIDGET (socket));
+	    if (toplevel && GTK_IS_WINDOW (toplevel))
+	      gtk_window_remove_embedded_xid (GTK_WINDOW (toplevel), xdwe->window);
 	    gtk_widget_destroy (widget);
 	    
 	    return_val = GDK_FILTER_REMOVE;
@@ -614,6 +719,8 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
       if (xevent->xmaprequest.window ==
 	  GDK_WINDOW_XWINDOW (socket->plug_window))
 	{
+	  DPRINTF(("Map Request\n"));
+	    
 	  gdk_window_show (socket->plug_window);
 
 	  return_val = GDK_FILTER_REMOVE;
