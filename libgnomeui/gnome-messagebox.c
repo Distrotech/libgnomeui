@@ -168,6 +168,7 @@ gnome_message_box_new (const gchar           *message,
 	}
 
 	label = gtk_label_new (message);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 	gtk_widget_show (label);
 

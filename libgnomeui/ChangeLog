@@ -1,5 +1,8 @@
 1999-02-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-messagebox.c (gnome_message_box_new): Justify labels to
+	the left.
+
 	* gnome-init.c (gnome_add_gtk_arg_callback): Add a hack to allow
 	using --gtk-debug-objects (this is required as we create GTK
 	objects before gtk_init is called).
