@@ -1,3 +1,12 @@
+2001-10-30  Anders Carlsson  <andersca@gnu.org>
+
+	* gnome-icon-list.h: Add function definitions for added functions.
+
+	* gnome-icon-list.c (gnome_icon_list_get_icon_text_item): Add function
+	to get the rich text item for an icon.
+	(gnome_icon_list_get_icon_pixbuf_item): Add function to get the pixbuf
+	item for an icon. Fixes #61706.
+
 2001-10-29  jacob berkman  <jacob@ximian.com>
 
 	* gnome_segv.c (main): use GETTEXT_PACKAGE

@@ -2569,3 +2569,32 @@ gnome_icon_list_find_icon_from_filename (GnomeIconList *gil,
 	return -1;
 }
 
+GnomeCanvasRichText *
+gnome_icon_list_get_icon_text_item (GnomeIconList *gil,
+				    int idx)
+{
+	Icon *icon;
+	
+	g_return_val_if_fail (gil != NULL, NULL);
+	g_return_val_if_fail (IS_GIL (gil), NULL);
+	g_return_val_if_fail (idx >= 0 && idx < gil->_priv->icons, NULL);
+
+	icon = g_array_index (gil->_priv->icon_list, Icon*, idx);
+
+	return icon->text;
+}
+
+GnomeCanvasPixbuf *
+gnome_icon_list_get_icon_pixbuf_item (GnomeIconList *gil,
+				      int idx)
+{
+	Icon *icon;
+	
+	g_return_val_if_fail (gil != NULL, NULL);
+	g_return_val_if_fail (IS_GIL (gil), NULL);
+	g_return_val_if_fail (idx >= 0 && idx < gil->_priv->icons, NULL);
+
+	icon = g_array_index (gil->_priv->icon_list, Icon*, idx);
+
+	return icon->image;
+}

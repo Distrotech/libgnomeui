@@ -37,6 +37,8 @@
 
 
 #include <libgnomecanvas/gnome-canvas.h>
+#include <libgnomecanvas/gnome-canvas-rich-text.h>
+#include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 G_BEGIN_DECLS
@@ -177,6 +179,15 @@ int            gnome_icon_list_get_icon_at         (GnomeIconList *gil,
 						    int x, int y);
 
 int            gnome_icon_list_get_items_per_line  (GnomeIconList *gil);
+
+/* Accessibility functions */
+GnomeCanvasRichText *gnome_icon_list_get_icon_text_item (GnomeIconList *gil,
+							 int idx);
+
+GnomeCanvasPixbuf *gnome_icon_list_get_icon_pixbuf_item (GnomeIconList *gil,
+							 int idx);
+
+
 
 G_END_DECLS
 
