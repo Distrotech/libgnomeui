@@ -264,8 +264,8 @@ gnome_pixmap_size_request (GtkWidget *widget, GtkRequisition *requisition)
 	else
 		w = h = 0;
 
-	requisition->width = w;
-	requisition->height = h;
+	widget->requisition.width = requisition->width = w;
+	widget->requisition.height = requisition->height = h;
 }
 
 static void
@@ -292,7 +292,8 @@ gnome_pixmap_expose (GtkWidget *widget, GdkEventExpose *event)
 	g_return_val_if_fail (GNOME_IS_PIXMAP (widget), FALSE);
 	g_return_val_if_fail (event != NULL, FALSE);
 
-	if (GTK_WIDGET_DRAWABLE (widget)) {
+	if (GTK_WIDGET_DRAWABLE (widget) && (widget->requisition.width)
+	    && (widget->requisition.height)) {
 		gpixmap = GNOME_PIXMAP (widget);
 
 		if (gpixmap->pixmap)

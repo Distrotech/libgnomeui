@@ -1,3 +1,14 @@
+1998-03-01  Eckehard Berns  <eb@berns.prima.de>
+
+	* gnome-pixmap.c: fixed GnomePixmaps positioning.
+
+	* gnome-stock.c (..._size_request): request size of current pixmap
+	if there is one.
+
+	* gnome-stock-{imlib,xpm}.h: added/changed those nasty stock button
+	pixmaps to other nasty pixmaps (when will someone with at least a
+	minimum of some drawing skill replace my ugly pixmaps?)
+
 Sun Mar  1 00:23:29 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-about.c (gnome_about_display_comments): Simplified

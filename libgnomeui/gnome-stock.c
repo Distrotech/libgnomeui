@@ -43,7 +43,7 @@
 #include "pixmaps/tb_copy.xpm"
 #include "pixmaps/tb_paste.xpm"
 #include "pixmaps/tb_properties.xpm"
-#include "pixmaps/tb_unknown.xpm"
+/* #include "pixmaps/tb_unknown.xpm" */
 #include "pixmaps/tb_exit.xpm"
 #include "pixmaps/tb_scores.xpm"
 #include "gnome-stock-xpm.h"
@@ -168,8 +168,13 @@ gnome_stock_pixmap_widget_size_request(GtkWidget *widget,
 	g_return_if_fail(requisition != NULL);
 	g_return_if_fail(GNOME_IS_STOCK_PIXMAP_WIDGET(widget));
 
-	requisition->width = GNOME_STOCK_PIXMAP_WIDGET(widget)->width;
-	requisition->height = GNOME_STOCK_PIXMAP_WIDGET(widget)->height;
+	if (!GNOME_STOCK_PIXMAP_WIDGET(widget)->pixmap) {
+		requisition->width = GNOME_STOCK_PIXMAP_WIDGET(widget)->width;
+		requisition->height = GNOME_STOCK_PIXMAP_WIDGET(widget)->height;
+	} else {
+		gtk_widget_size_request(GTK_WIDGET(GNOME_STOCK_PIXMAP_WIDGET(widget)->pixmap),
+					requisition);
+	}
 }
 
 
@@ -285,11 +290,12 @@ struct _default_entries_data entries_data[] = {
         {GNOME_STOCK_PIXMAP_COPY, GNOME_STOCK_PIXMAP_REGULAR, imlib_copy, 20, 20},
         {GNOME_STOCK_PIXMAP_PASTE, GNOME_STOCK_PIXMAP_REGULAR, imlib_paste, 20, 20},
         {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_REGULAR, imlib_properties, 20, 20},
-        {GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, imlib_unknown, 20, 20},
+	/* {GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, imlib_unknown, 20, 20}, */
         {GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, imlib_exit, 20, 20},
         {GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, imlib_ok, 20, 20},
         {GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, imlib_ok, 20, 20},
         {GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_PIXMAP_REGULAR, imlib_cancel, 20, 20},
+        {GNOME_STOCK_BUTTON_HELP, GNOME_STOCK_PIXMAP_REGULAR, imlib_help, 20, 20},
         {GNOME_STOCK_MENU_NEW, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_new, 16, 16},
         {GNOME_STOCK_MENU_SAVE, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_save, 16, 16},
         {GNOME_STOCK_MENU_OPEN, GNOME_STOCK_PIXMAP_REGULAR, imlib_menu_open, 16, 16},
@@ -319,11 +325,15 @@ struct _default_entries_data entries_data[] = {
         {GNOME_STOCK_PIXMAP_PASTE, GNOME_STOCK_PIXMAP_REGULAR, tb_paste_xpm, 20, 20},
         {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_REGULAR, tb_properties_xpm, 20, 20},
         /* {GNOME_STOCK_PIXMAP_PROPERTIES, GNOME_STOCK_PIXMAP_DISABLED, tb_prop_dis_xpm, 20, 20}, */
-        {GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, tb_unknown_xpm, 20, 20},
+	/* {GNOME_STOCK_PIXMAP_HELP, GNOME_STOCK_PIXMAP_REGULAR, tb_unknown_xpm, 20, 20}, */
         {GNOME_STOCK_PIXMAP_EXIT, GNOME_STOCK_PIXMAP_REGULAR, tb_exit_xpm, 20, 20},
-        {GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm, 20, 20},
-        {GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm, 20, 20},
-        {GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_cancel_xpm, 20, 20},
+	/* {GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm, 20, 20}, */
+	{GNOME_STOCK_BUTTON_OK, GNOME_STOCK_PIXMAP_REGULAR, button_ok_xpm, 20, 20},
+	/* {GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_ok_xpm, 20, 20}, */
+	{GNOME_STOCK_BUTTON_APPLY, GNOME_STOCK_PIXMAP_REGULAR, button_ok_xpm, 20, 20},
+	/* {GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_cancel_xpm, 20, 20}, */
+	{GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_PIXMAP_REGULAR, button_cancel_xpm, 20, 20},
+	{GNOME_STOCK_BUTTON_HELP, GNOME_STOCK_PIXMAP_REGULAR, button_help_xpm, 20, 20},
         {GNOME_STOCK_MENU_NEW, GNOME_STOCK_PIXMAP_REGULAR, gnome_stock_menu_new_xpm, 16, 16},
         {GNOME_STOCK_MENU_SAVE, GNOME_STOCK_PIXMAP_REGULAR, menu_save_xpm, 16, 16},
         {GNOME_STOCK_MENU_OPEN, GNOME_STOCK_PIXMAP_REGULAR, menu_open_xpm, 16, 16},
