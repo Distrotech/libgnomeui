@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.116.1\n"
-"POT-Creation-Date: 2002-05-01 19:04+0200\n"
-"PO-Revision-Date: 2002-05-01 19:04+0200\n"
-"Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
+"POT-Creation-Date: 2002-05-11 19:14+0200\n"
+"PO-Revision-Date: 2002-05-11 19:15+0200\n"
+"Last-Translator: Christophe Fergeau <teuf@users.sourceforge.net>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -407,8 +407,8 @@ msgstr ""
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
+"When you close this dialog, all applications will close and your session will "
+"exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
 "Le Gestionnaire de Session GNOME (processus %d) s'est\n"
@@ -599,8 +599,8 @@ msgstr "Revenir à la dernière version enregistrée du fichier"
 
 #. Print
 #: libgnomeui/gnome-app-helper.c:131
-msgid "_Print"
-msgstr "_Imprimer"
+msgid "_Print..."
+msgstr "_Imprimer..."
 
 #: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -638,7 +638,7 @@ msgstr "Quitte l'application"
 #.
 #. Cut
 #: libgnomeui/gnome-app-helper.c:155
-msgid "C_ut"
+msgid "Cu_t"
 msgstr "Co_uper"
 
 #: libgnomeui/gnome-app-helper.c:155
@@ -702,8 +702,8 @@ msgstr "Rechercher une chaîne"
 
 #. Find Again
 #: libgnomeui/gnome-app-helper.c:191
-msgid "Find _Again"
-msgstr "Rechercher à _nouveau"
+msgid "Find Ne_xt"
+msgstr "_Suivant"
 
 #: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -711,7 +711,7 @@ msgstr "Rechercher une nouvelle fois la même chaîne"
 
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
-msgid "_Replace..."
+msgid "R_eplace..."
 msgstr "_Remplacer..."
 
 #: libgnomeui/gnome-app-helper.c:197
@@ -732,7 +732,7 @@ msgstr "Modifier les propriétés de ce fichier"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "_Preferences..."
+msgid "Prefere_nces..."
 msgstr "_Préférences..."
 
 #: libgnomeui/gnome-app-helper.c:212
@@ -753,7 +753,7 @@ msgid "About this application"
 msgstr "À propos de cette application"
 
 #: libgnomeui/gnome-app-helper.c:225
-msgid "_Select All"
+msgid "Select _All"
 msgstr "Sélectionner _tout"
 
 #: libgnomeui/gnome-app-helper.c:226
@@ -847,28 +847,31 @@ msgstr "_Arrêter la partie"
 msgid "End the current game"
 msgstr "Terminer la partie en cours"
 
-#: libgnomeui/gnome-app-helper.c:1096
-msgid "_Help Contents"
+#: libgnomeui/gnome-app-helper.c:1130
+msgid "_Contents"
 msgstr "Contenu de l'_aide"
 
-#: libgnomeui/gnome-app-helper.c:2463
-msgid "Both text and icons"
-msgstr "À la fois texte et icônes"
+#: libgnomeui/gnome-app-helper.c:1131
+msgid "View help for this application"
+msgstr "Afficher l'aide pour cette application"
 
-#: libgnomeui/gnome-app-helper.c:2464
-msgid "Both text and icons when horizontal, just icons when vertical"
-msgstr ""
-"À la fois texte et icônes quand horizontal, juste les icônes quand vertical"
+#: libgnomeui/gnome-app-helper.c:2515
+msgid "Text Below Icons"
+msgstr "Texte sous les icônes"
 
-#: libgnomeui/gnome-app-helper.c:2465
-msgid "Icons only"
+#: libgnomeui/gnome-app-helper.c:2516
+msgid "Text Beside Icons"
+msgstr "Texte à côté des icônes"
+
+#: libgnomeui/gnome-app-helper.c:2517
+msgid "Icons Only"
 msgstr "Seulement des icônes"
 
-#: libgnomeui/gnome-app-helper.c:2466
-msgid "Text only"
-msgstr "Texte seulement"
+#: libgnomeui/gnome-app-helper.c:2518
+msgid "Text Only"
+msgstr "Seulement du texte"
 
-#: libgnomeui/gnome-app-helper.c:2526
+#: libgnomeui/gnome-app-helper.c:2578
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Utiliser la valeur par défaut (%s)"
@@ -962,8 +965,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Si l'entrée du fihier est utilisé pour saisir des noms de répertoires ou des "
-"noms de fichier complet."
+"Si l'entrée du fihier est utilisé pour saisir des noms de répertoires ou "
+"des noms de fichier complet."
 
 #: libgnomeui/gnome-file-entry.c:243
 msgid "Modal"
@@ -995,13 +998,13 @@ msgstr "GnomeEntry"
 
 #: libgnomeui/gnome-file-entry.c:269
 msgid ""
-"GnomeEntry that the file entry uses for entering filenames.  You can use "
-"this property to get the GnomeEntry if you need to modify or query any of "
-"its parameters."
+"GnomeEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GnomeEntry if you need to modify or query any of its "
+"parameters."
 msgstr ""
 "GnomeEntry que l'entrée de fichier utilise pour entrer les noms de fichier. "
-"Vous pouvez utiliser cette propriété pour obtenir le GnomeEntry si vous avez "
-"besoin de modifier ou interroger un de ses paramètres."
+"Vous pouvez utiliser cette propriété pour obtenir le GnomeEntry si vous "
+"avez besoin de modifier ou interroger un de ses paramètres."
 
 #: libgnomeui/gnome-file-entry.c:279
 msgid "GtkEntry"
@@ -1110,14 +1113,14 @@ msgstr "_Détails"
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
 "that your system administrator or operating system vendor does not allow you "
-"to change. Some of the settings you have selected may not take effect, or "
-"may not be restored next time you use the application."
+"to change. Some of the settings you have selected may not take effect, or may "
+"not be restored next time you use the application."
 msgstr ""
 "L'application « %s » a tenté de modifier un aramètre que votre "
 "administrateur système ou le vendeur du système d'exploitation ne vous "
-"permet pas de changer. Quelques uns des réglages que vous avez sélectionnés "
-"ne prendront pas effet, ou ne seront pas restoré la prochaine fois que vous "
-"utiliserez cette application."
+"permet pas de changer. Quelques uns des réglages que vous avez "
+"sélectionnés ne prendront pas effet, ou ne seront pas restoré la prochaine "
+"fois que vous utiliserez cette application."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1162,9 +1165,9 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Dialogue de sélection de couleur. Vous pouvez utiliser cette propriété pour "
-"obtenir le GtkDialog si vous avez besoin de modifier ou interroger n'importe "
-"de ses propriétés"
+"Dialogue de sélection de couleur. Vous pouvez utiliser cette propriété "
+"pour obtenir le GtkDialog si vous avez besoin de modifier ou interroger "
+"n'importe de ses propriétés"
 
 #: libgnomeui/gnome-icon-entry.c:317 libgnomeui/gnome-icon-entry.c:963
 msgid "No Icon"
@@ -1264,6 +1267,17 @@ msgstr "Sans 14"
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Quitter le test"
+
+#~ msgid "Find _Again"
+#~ msgstr "Rechercher à _nouveau"
+
+#~ msgid "Both text and icons"
+#~ msgstr "À la fois texte et icônes"
+
+#~ msgid "Both text and icons when horizontal, just icons when vertical"
+#~ msgstr ""
+#~ "À la fois texte et icônes quand horizontal, juste les icônes quand "
+#~ "vertical"
 
 #~ msgid "E_xit"
 #~ msgstr "_Quitter"
