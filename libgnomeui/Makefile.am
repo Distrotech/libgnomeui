@@ -27,14 +27,20 @@ INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) $(GTK_CFLAGS) $(SUPPORTINCS) \
 EXTRA_libgnomeui_la_SOURCES = \
 	gnome-canvas.c			\
 	gnome-canvas-image.c		\
+	gnome-canvas-line.c		\
 	gnome-canvas-rect-ellipse.c	\
-	gnome-canvas-text.c
+	gnome-canvas-text.c		\
+	gnome-canvas-util.c		\
+	gnome-canvas-widget.c
 
 EXTRA_HEADERS = \
 	gnome-canvas.h			\
 	gnome-canvas-image.h		\
+	gnome-canvas-line.h		\
 	gnome-canvas-rect-ellipse.h	\
-	gnome-canvas-text.h
+	gnome-canvas-text.h		\
+	gnome-canvas-util.h		\
+	gnome-canvas-widget.h
 
 libgnomeui_la_DEPENDENCIES = @GNOME_CANVAS_OBJS@
 

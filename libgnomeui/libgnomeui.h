@@ -18,6 +18,7 @@
 #include "libgnomeui/gnome-canvas-rect-ellipse.h"
 #include "libgnomeui/gnome-canvas-text.h"
 #include "libgnomeui/gnome-canvas-util.h"
+#include "libgnomeui/gnome-canvas-widget.h"
 #endif
 #include "libgnomeui/gnome-color-selector.h"
 #include "libgnomeui/gnome-dentry-edit.h"

@@ -237,12 +237,12 @@ gnome_canvas_image_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	case ARG_WIDTH:
-		image->width = GTK_VALUE_DOUBLE (*arg);
+		image->width = fabs (GTK_VALUE_DOUBLE (*arg));
 		update = TRUE;
 		break;
 
 	case ARG_HEIGHT:
-		image->height = GTK_VALUE_DOUBLE (*arg);
+		image->height = fabs (GTK_VALUE_DOUBLE (*arg));
 		update = TRUE;
 		break;
 

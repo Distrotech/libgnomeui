@@ -1,3 +1,22 @@
+1998-08-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_button): 
+	(gnome_canvas_motion): 
+	(gnome_canvas_expose): 
+	(gnome_canvas_key): 
+	(gnome_canvas_crossing): Only do stuff if the event window is the
+	same as the canvas->layout.bin_window.
+
+	* gnome-canvas-widget.[ch]: New widget item type for GnomeCanvas.
+	It still needs to be debugged.
+
+	* Makefile.am: Added gnome-canvas-widget to the sources.
+
+	* libgnomeui.h: Added gnome-canvas-widget.h to the list of headers.
+
+	* gnome-canvas-image.c (gnome_canvas_image_set_arg): Take the
+	absolute value of the width/height arguments.
+
 1998-08-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_draw): Use the zoom offsets when

@@ -1782,6 +1782,9 @@ gnome_canvas_button (GtkWidget *widget, GdkEventButton *event)
 
 	canvas = GNOME_CANVAS (widget);
 
+	if (event->window != canvas->layout.bin_window)
+		return FALSE;
+
 	switch (event->button) {
 	case 1:
 		mask = GDK_BUTTON1_MASK;
@@ -1846,6 +1849,9 @@ gnome_canvas_motion (GtkWidget *widget, GdkEventMotion *event)
 
 	canvas = GNOME_CANVAS (widget);
 
+	if (event->window != canvas->layout.bin_window)
+		return FALSE;
+
 	canvas->state = event->state;
 	pick_current_item (canvas, (GdkEvent *) event);
 	emit_event (canvas, (GdkEvent *) event);
@@ -1862,10 +1868,10 @@ gnome_canvas_expose (GtkWidget *widget, GdkEventExpose *event)
 	g_return_val_if_fail (GNOME_IS_CANVAS (widget), FALSE);
 	g_return_val_if_fail (event != NULL, FALSE);
 
-	if (!GTK_WIDGET_DRAWABLE (widget))
-		return FALSE;
-
 	canvas = GNOME_CANVAS (widget);
+
+	if (!GTK_WIDGET_DRAWABLE (widget) || (event->window != canvas->layout.bin_window))
+		return FALSE;
 
 	gnome_canvas_request_redraw (canvas,
 				     event->area.x + DISPLAY_X1 (canvas) - canvas->zoom_xofs,
@@ -1887,6 +1893,9 @@ gnome_canvas_key (GtkWidget *widget, GdkEventKey *event)
 
 	canvas = GNOME_CANVAS (widget);
 
+	if (event->window != canvas->layout.bin_window)
+		return FALSE;
+
 	emit_event (canvas, (GdkEvent *) event);
 
 	return FALSE;
@@ -1902,6 +1911,9 @@ gnome_canvas_crossing (GtkWidget *widget, GdkEventCrossing *event)
 	g_return_val_if_fail (event != NULL, FALSE);
 
 	canvas = GNOME_CANVAS (widget);
+
+	if (event->window != canvas->layout.bin_window)
+		return FALSE;
 
 	canvas->state = event->state;
 	pick_current_item (canvas, (GdkEvent *) event);
