@@ -1,3 +1,16 @@
+2000-09-11  Martin Baulig  <baulig@suse.de>
+
+	* gnome-file-selector.h (GnomeFileSelector): Derive from GnomeEntry.
+
+	* gnome-file-selector.c (GnomeFileSelectorPrivate): Removed the
+	`combo' and `entry' fields.
+	(get_entry_text_handler, set_entry_text_handler): Removed.
+	(history_changed_handler): Removed.
+	(entry_activated_cb): Moved all its functionality into the
+	`activate_entry_handler' and then removed this function.
+	(gnome_file_selector_construct): Don't create the entry widget here
+	but pass GNOME_SELECTOR_DEFAULT_ENTRY_WIDGET down to the parent class.
+
 2000-07-29  Martin Baulig  <baulig@suse.de>
 
 	* gnome-glade.c: Removed.
