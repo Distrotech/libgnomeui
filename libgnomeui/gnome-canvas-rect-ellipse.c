@@ -228,25 +228,30 @@ gnome_canvas_re_destroy (GtkObject *object)
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_RE (object));
 
+	/* remember, destroy can be run multiple times! */
+
 	re = GNOME_CANVAS_RE (object);
 	item = GNOME_CANVAS_ITEM (re);
 	priv = re->priv;
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	if (priv) {
+		gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 
-	if (priv->fill_stipple)
-		gdk_bitmap_unref (priv->fill_stipple);
+		if (priv->fill_stipple)
+			gdk_bitmap_unref (priv->fill_stipple);
 
-	if (priv->outline_stipple)
-		gdk_bitmap_unref (priv->outline_stipple);
+		if (priv->outline_stipple)
+			gdk_bitmap_unref (priv->outline_stipple);
 
-	if (priv->fill_svp)
-		art_svp_free (priv->fill_svp);
+		if (priv->fill_svp)
+			art_svp_free (priv->fill_svp);
 
-	if (priv->outline_svp)
-		art_svp_free (priv->outline_svp);
+		if (priv->outline_svp)
+			art_svp_free (priv->outline_svp);
 
-	g_free (priv);
+		g_free (priv);
+		re->priv = NULL;
+	}
 
 	if (GTK_OBJECT_CLASS (re_parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (re_parent_class)->destroy) (object);

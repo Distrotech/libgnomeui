@@ -1,3 +1,9 @@
+2000-07-31  Martin Baulig  <baulig@suse.de>
+
+	* gnome-icon-list.c (gnome_icon_list_new): Removed the adjustment
+	argument and undeprecated this function.
+	(gnome_icon_list_new_flags): Removed.
+
 2000-07-27  Martin Baulig  <baulig@suse.de>
 
 	* gnome-canvas.c (gnome_canvas_destroy): Destroy may run
