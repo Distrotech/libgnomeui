@@ -1873,3 +1873,53 @@ gnome_stock_transparent_window (const char *icon, const char *subtype)
 	
 	return window;
 }
+
+void 
+gnome_stock_pixmap_gdk (const char   *icon,
+			const char   *subtype,
+			GdkPixmap    **pixmap,
+			GdkPixmap    **mask)
+{
+	static GdkImlibColor shape_color = { 0xff, 0, 0xff, 0 };
+	GnomeStockPixmapEntry *entry;
+	GdkImlibImage *im;
+	
+	g_return_if_fail(icon != NULL);
+	g_return_if_fail(pixmap != NULL);
+	g_return_if_fail(mask != NULL);
+
+	/* subtype can be NULL, so not checked */
+	entry = lookup(icon, subtype, TRUE);
+
+	g_return_if_fail(entry != NULL);
+
+	switch (entry->type) {
+	case GNOME_STOCK_PIXMAP_TYPE_DATA:
+		im = gdk_imlib_create_image_from_xpm_data (entry->data.xpm_data);
+		break;
+	case GNOME_STOCK_PIXMAP_TYPE_PATH:
+		im = gdk_imlib_load_image (entry->path.pathname);
+		break;
+	case GNOME_STOCK_PIXMAP_TYPE_IMLIB_SCALED:
+	case GNOME_STOCK_PIXMAP_TYPE_IMLIB:
+		im = gdk_imlib_create_image_from_data ((gchar *)entry->imlib.rgb_data, NULL,
+						       entry->imlib.width, entry->imlib.height);
+		break;
+	 default:
+		im = NULL;
+		break;
+	}
+	
+	g_return_if_fail(im != NULL);
+	
+	/* The imlib images use a color to encode the shape, use it */
+	gdk_imlib_set_image_shape (im, &shape_color);
+
+	/* Render the image, return it */
+	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
+
+	*pixmap = gdk_imlib_move_image (im);
+	*mask = gdk_imlib_move_mask (im);
+
+	gdk_imlib_destroy_image (im);
+}

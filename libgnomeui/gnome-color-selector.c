@@ -182,31 +182,31 @@ gnome_color_selector_button_clicked(GtkWidget *widget,
 	} /* if */
 } /* gnome_color_selector_button_clicked */
 
-static gint
-color_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, gpointer data)
+static void
+color_dropped (GtkWidget        *widget,
+	       GdkDragContext   *context,
+	       gint              x,
+	       gint              y,
+	       GtkSelectionData *selection_data,
+	       guint             info,
+	       guint             time,
+	       gpointer          data)
 {
 	GnomeColorSelector *gcs = data;
 	unsigned int i;
 
-	if (strcmp (event->data_type, "application/x-color") == 0){
-		gdouble *dropped = data;
-		for (i = 0; i < event->data_numbytes / sizeof (gdouble); i++)
-			printf ("%g ", dropped[i]);
+	if ((selection_data->format == 16) && (selection_data->length == 8)) {
+		guint16 *dropped = (guint16 *)selection_data->data;
+		for (i = 0; i < 4; i++)
+			printf ("%d ", dropped[i]);
 		printf("\n");
-
-		gnome_color_selector_set_color (gcs, dropped [1], dropped [2], dropped [3]);
-	}
-	return FALSE;
-}
-
-static void
-setup_dnd (GtkWidget *preview, GnomeColorSelector *gcs)
-{
-	char *drop_types [] = { "application/x-color" };
-
-	gtk_widget_dnd_drop_set (GTK_WIDGET (preview), TRUE, drop_types, 1, 0);
-	gtk_signal_connect (GTK_OBJECT (preview), "drop_data_available_event",
-			    GTK_SIGNAL_FUNC (color_dropped), gcs);
+	
+		gnome_color_selector_set_color (gcs, 
+						(gdouble)dropped [0]/0xffff, 
+						(gdouble)dropped [1]/0xffff, 
+						(gdouble)dropped [2]/0xffff);
+	} else
+		g_warning ("Invalid color dropped!");
 }
 
 GnomeColorSelector *
@@ -216,6 +216,7 @@ gnome_color_selector_new(SetColorFunc set_color_func,
 	GnomeColorSelector *gcs;
 	GtkWidget          *alignment;
 	GtkWidget          *frame;
+	static GtkTargetEntry drop_types = { "application/x-color", 0, 0 };
 
 	g_warning ("GnomeColorSelector is now deprecated.  You should use GnomeColorPicker instead.");
 
@@ -247,8 +248,16 @@ gnome_color_selector_new(SetColorFunc set_color_func,
 	gtk_widget_push_colormap (gtk_preview_get_cmap ());
 
 	gcs->preview = gtk_preview_new(GTK_PREVIEW_COLOR);
-	gtk_signal_connect (GTK_OBJECT (gcs->preview), "realize",
-			    GTK_SIGNAL_FUNC(setup_dnd), gcs);
+
+	gtk_drag_dest_set (gcs->preview,
+			   GTK_DEST_DEFAULT_MOTION |
+			   GTK_DEST_DEFAULT_HIGHLIGHT |
+			   GTK_DEST_DEFAULT_DROP,
+			   &drop_types, 1, GDK_ACTION_COPY);
+
+	gtk_signal_connect (GTK_OBJECT (gcs->preview), "drag_data_received",
+			    GTK_SIGNAL_FUNC (color_dropped), gcs);
+
 	gtk_preview_size(GTK_PREVIEW(gcs->preview), PREVIEW_WIDTH, PREVIEW_HEIGHT);
 
 	gtk_widget_pop_colormap ();

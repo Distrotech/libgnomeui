@@ -29,6 +29,16 @@
 #include <unistd.h>
 #include <stdio.h>
 
+enum {
+	TARGET_ROOTWIN,
+	TARGET_MDI
+};
+
+static GtkTargetEntry target_table[] = {
+	{ NULL,                         0, TARGET_MDI },
+	{ "application/x-rootwin-drop", 0, TARGET_ROOTWIN },
+};
+
 static void             gnome_mdi_class_init     (GnomeMDIClass  *);
 static void             gnome_mdi_init           (GnomeMDI *);
 static void             gnome_mdi_destroy        (GtkObject *);
@@ -64,23 +74,28 @@ static void             toplevel_focus           (GnomeApp *, GdkEventFocus *, G
 static void             top_add_view             (GnomeMDI *, GnomeMDIChild *, GtkWidget *);
 
 static void             book_drag_begin          (GtkNotebook *, GdkEvent *, GnomeMDI *);
-static void             book_drag_req            (GtkNotebook *, GdkEvent *, GnomeMDI *);
-static void             book_drop                (GtkNotebook *, GdkEvent *, GnomeMDI *);
-static void             rootwin_drop             (GtkWidget *, GdkEvent *, GnomeMDI *);
-
+static void             book_drag_req            (GtkWidget *,
+						  GdkDragContext *,
+						  GtkSelectionData *,
+						  guint, guint, 
+						  GnomeMDI *);
+static void             book_drop                (GtkNotebook *,
+					          GdkDragContext *,
+						  GtkSelectionData *,
+						  guint, guint,
+						  GnomeMDI *);
 static GnomeUIInfo     *copy_ui_info_tree        (GnomeUIInfo *);
 static void             free_ui_info_tree        (GnomeUIInfo *);
 static gint             count_ui_info_items      (GnomeUIInfo *);
 
-#define DND_TYPE            "mdi/bookpage-"
+#define DND_TYPE            "application/x-gnome-mdi-"
 
 /* keys for stuff that we'll assign to our GnomeApps */
 #define MDI_CHILD_KEY              "GnomeMDIChild"
 #define ITEM_COUNT_KEY             "MDIChildMenuItems"
 
-/* hmmm... is it OK to have these two widgets (used for notebook page DnD)
-   as global vars? */
-static GtkWidget *drag_page = NULL, *drag_page_ok = NULL;
+static GdkPixmap *drag_icon = NULL;
+static GdkPixmap *drag_icon_mask = NULL;
 
 enum {
   CREATE_MENUS,
@@ -263,8 +278,6 @@ static void gnome_mdi_destroy(GtkObject *object) {
 }
 
 static void gnome_mdi_init (GnomeMDI *mdi) {
-  gchar hostname[128] = "\0", pid[12];
-
   mdi->mode = gnome_preferences_get_mdi_mode();
   mdi->tab_pos = gnome_preferences_get_mdi_tab_pos();
 
@@ -276,16 +289,19 @@ static void gnome_mdi_init (GnomeMDI *mdi) {
   mdi->active_window = NULL;
   mdi->active_view = NULL;
 
-  mdi->root_window = NULL;
-
   mdi->menu_template = NULL;
   mdi->toolbar_template = NULL;
   mdi->child_menu_path = NULL;
   mdi->child_list_path = NULL;
 
-  gethostname(hostname, 127);
-  sprintf(pid, "%d", getpid());
-  mdi->dnd_type = g_copy_strings(DND_TYPE, hostname, pid, NULL);
+  if (!target_table[0].target) {
+    gchar hostname[128] = "\0", pid[12];
+    
+    gethostname(hostname, 127);
+    sprintf(pid, "%d", getpid());
+    
+    target_table[0].target = g_copy_strings(DND_TYPE, hostname, pid, NULL);
+  }
 }
 
 GtkObject *gnome_mdi_new(gchar *appname, gchar *title) {
@@ -501,34 +517,32 @@ static GtkWidget *book_create(GnomeMDI *mdi) {
 
   gtk_signal_connect(GTK_OBJECT(us), "switch_page",
 		     GTK_SIGNAL_FUNC(book_switch_page), mdi);
-  gtk_signal_connect(GTK_OBJECT(us), "drag_begin_event",
-		     GTK_SIGNAL_FUNC(book_drag_begin), mdi);
-  gtk_signal_connect(GTK_OBJECT(us), "drag_request_event",
+  gtk_signal_connect(GTK_OBJECT(us), "drag_data_get",
 		     GTK_SIGNAL_FUNC(book_drag_req), mdi);
-  gtk_signal_connect (GTK_OBJECT(us), "drop_data_available_event",
+  gtk_signal_connect (GTK_OBJECT(us), "drag_data_received",
 		      GTK_SIGNAL_FUNC(book_drop), mdi);
 
   /* if DnD icons are not loaded yet, load them */
-  if(!drag_page)
-    drag_page = gnome_stock_transparent_window (GNOME_STOCK_PIXMAP_NOT, NULL);
-  if(!drag_page_ok)
-    drag_page_ok = gnome_stock_transparent_window (GNOME_STOCK_PIXMAP_BOOK_BLUE, NULL);
+  if(!drag_icon)
+	  gnome_stock_pixmap_gdk (GNOME_STOCK_PIXMAP_BOOK_BLUE, NULL,
+				  &drag_icon, &drag_icon_mask);
 
-  /* if root window is not set up as our drop zone, set it up */
-  if(!mdi->root_window) {
-    rw = gnome_rootwin_new ();
-    
-    gtk_signal_connect (GTK_OBJECT(rw), "drop_data_available_event",
-			GTK_SIGNAL_FUNC(rootwin_drop), mdi);
-    
-    gtk_widget_realize (rw);
-    gtk_widget_dnd_drop_set (rw, TRUE, &mdi->dnd_type, 1, FALSE);
-    gtk_widget_show (rw);
-    mdi->root_window = GNOME_ROOTWIN (rw);
-  }
+  gtk_drag_dest_set(us,
+		    GTK_DEST_DEFAULT_MOTION |
+		    GTK_DEST_DEFAULT_HIGHLIGHT |
+		    GTK_DEST_DEFAULT_DROP,
+		    target_table, 1,
+		    GDK_ACTION_MOVE);
 
-  gtk_widget_dnd_drop_set (us, TRUE, &mdi->dnd_type, 1, FALSE);
-  gtk_widget_dnd_drag_set (us, TRUE, &mdi->dnd_type, 1);
+  gtk_drag_source_set(us,
+		      GDK_BUTTON1_MASK,
+		      target_table, 2,
+		      GDK_ACTION_MOVE);
+
+  gtk_drag_source_set_icon(us,
+			   gdk_imlib_get_colormap(),
+			   drag_icon,
+			   drag_icon_mask);
 
   gtk_notebook_set_scrollable(GTK_NOTEBOOK(us), TRUE);
   
@@ -579,37 +593,66 @@ static void toplevel_focus(GnomeApp *app, GdkEventFocus *event, GnomeMDI *mdi) {
     set_active_view(mdi, NULL);
 }
 
-static void book_drag_begin(GtkNotebook *book, GdkEvent *event, GnomeMDI *mdi) {
-  GdkPoint hotspot = { 5, 5 };
-
-  if (drag_page && drag_page_ok) {
-    gdk_dnd_set_drag_shape (drag_page->window, &hotspot,
-			    drag_page_ok->window, &hotspot);	
-
-    gtk_widget_show (drag_page_ok);
-    gtk_widget_show (drag_page);
+void  
+book_drag_req  (GtkWidget          *widget,
+		GdkDragContext     *context,
+		GtkSelectionData   *selection_data,
+		guint               info,
+		guint               time,
+		GnomeMDI           *mdi)
+{
+  switch (info) {
+  case TARGET_MDI:
+    gtk_selection_data_set (selection_data,
+			    selection_data->target,
+			    8, (guchar *)&widget, sizeof(&widget));
+    break;
+  case TARGET_ROOTWIN:
+    {
+      GtkWidget *view, *new_book;
+      GtkNotebook *old_book = GTK_NOTEBOOK(widget);
+     
+      if(g_list_length(old_book->children) == 1)
+	return;
+      
+      if(old_book->cur_page) {
+	gint width, height;
+	
+	view = old_book->cur_page->child;
+	
+	width = view->allocation.width;
+	height = view->allocation.height;
+	
+	gtk_container_remove(GTK_CONTAINER(old_book), view);
+	
+	app_create(mdi);
+	
+	new_book = book_create(mdi);
+	
+	book_add_view(GTK_NOTEBOOK(new_book), view);
+	
+	gtk_window_position(GTK_WINDOW(mdi->active_window), GTK_WIN_POS_MOUSE);
+	
+	gtk_widget_set_usize (view, width, height);
+	
+	gtk_widget_show(GTK_WIDGET(mdi->active_window));
+      }
+    }
   }
 }
 
-static void book_drag_req(GtkNotebook *book, GdkEvent *event, GnomeMDI *mdi) {
-  gtk_widget_dnd_data_set(GTK_WIDGET(book), event, book, sizeof(book));
-}
-
-static void book_drop(GtkNotebook *book, GdkEvent *event, GnomeMDI *mdi) {
+static void book_drop (GtkNotebook        *book,
+		       GdkDragContext     *context,
+		       GtkSelectionData   *selection_data,
+		       guint               info,
+		       guint               time,
+		       GnomeMDI           *mdi)
+{
   GtkWidget *view;
   GtkNotebook *old_book;
   GnomeApp *app;
 
-  if(strcmp(event->dropdataavailable.data_type, mdi->dnd_type) != 0)
-    return;
-
-#if 0
-  /* can get this to work */
-  old_book = GTK_NOTEBOOK(event->dropdataavailable.data);
-#else
-  /* so this is a workaround */
-  old_book = GTK_NOTEBOOK(mdi->active_window->contents);
-#endif
+  old_book = GTK_NOTEBOOK(*(GtkWidget **)selection_data->data);
 
   if(book == old_book)
     return;
@@ -625,48 +668,6 @@ static void book_drop(GtkNotebook *book, GdkEvent *event, GnomeMDI *mdi) {
       mdi->windows = g_list_remove(mdi->windows, app);
       gtk_widget_destroy(GTK_WIDGET(app));
     }
-  }
-}
-
-static void rootwin_drop(GtkWidget *rw, GdkEvent *event, GnomeMDI *mdi) {
-  GtkWidget *view, *new_book;
-  GtkNotebook *old_book;
-
-  if(strcmp(event->dropdataavailable.data_type, mdi->dnd_type) != 0)
-    return;
-
-#if 0
-  /* dont know why this doesnt work... */
-  old_book = GTK_NOTEBOOK(event->dropdataavailable.data);
-#else
-  /* so this is a workaround */
-  old_book = GTK_NOTEBOOK(mdi->active_window->contents);
-#endif 
-
-  if(g_list_length(old_book->children) == 1)
-    return;
-
-  if(old_book->cur_page) {
-    gint width, height;
-
-    view = old_book->cur_page->child;
-
-    width = view->allocation.width;
-    height = view->allocation.height;
-
-    gtk_container_remove(GTK_CONTAINER(old_book), view);
-
-    app_create(mdi);
-
-    new_book = book_create(mdi);
-
-    book_add_view(GTK_NOTEBOOK(new_book), view);
-
-    gtk_window_position(GTK_WINDOW(mdi->active_window), GTK_WIN_POS_MOUSE);
-    
-    gtk_widget_set_usize (view, width, height);
-
-    gtk_widget_show(GTK_WIDGET(mdi->active_window));
   }
 }
 

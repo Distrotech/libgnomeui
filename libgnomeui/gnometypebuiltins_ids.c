@@ -22,6 +22,8 @@
     GTK_TYPE_ENUM, _gnome_restart_style_values },
   { "GnomeClientState", &GTK_TYPE_GNOME_CLIENT_STATE,
     GTK_TYPE_ENUM, _gnome_client_state_values },
+  { "GnomeFontPickerMode", &GTK_TYPE_GNOME_FONT_PICKER_MODE,
+    GTK_TYPE_ENUM, _gnome_font_picker_mode_values },
   { "GnomeIconListMode", &GTK_TYPE_GNOME_ICON_LIST_MODE,
     GTK_TYPE_ENUM, _gnome_icon_list_mode_values },
   { "GnomeMDIMode", &GTK_TYPE_GNOME_MDI_MODE,

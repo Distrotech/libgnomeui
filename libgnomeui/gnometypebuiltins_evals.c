@@ -74,6 +74,12 @@ static GtkEnumValue _gnome_client_state_values[] = {
   { GNOME_CLIENT_WAITING, "GNOME_CLIENT_WAITING", "waiting" },
   { 0, NULL, NULL }
 };
+static GtkEnumValue _gnome_font_picker_mode_values[] = {
+  { GNOME_FONT_PICKER_MODE_PIXMAP, "GNOME_FONT_PICKER_MODE_PIXMAP", "pixmap" },
+  { GNOME_FONT_PICKER_MODE_FONT_INFO, "GNOME_FONT_PICKER_MODE_FONT_INFO", "font-info" },
+  { GNOME_FONT_PICKER_MODE_USER_WIDGET, "GNOME_FONT_PICKER_MODE_USER_WIDGET", "user-widget" },
+  { 0, NULL, NULL }
+};
 static GtkEnumValue _gnome_icon_list_mode_values[] = {
   { GNOME_ICON_LIST_ICONS, "GNOME_ICON_LIST_ICONS", "icons" },
   { GNOME_ICON_LIST_TEXT_BELOW, "GNOME_ICON_LIST_TEXT_BELOW", "text-below" },

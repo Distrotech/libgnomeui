@@ -1,3 +1,15 @@
+Sun Oct 18 18:59:33 1998  Owen Taylor  <otaylor@gtk.org>
+
+	* gnome-mdi.[ch] gnome-color-selector.c gnome-file-entry.c: 
+	Adapted to the new GTK+ DND API.
+
+	* gnome-stock.[ch]: Added new function
+	gnome_stock-pixmap_gdk() to get a stock pixmap as
+	a GdkPixmap/GdkMask.
+
+	* gtk-socket.[ch]: Changes to enable DND proxying to
+	the embedded plug.
+
 1998-10-17  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gnome-stock.c: Removed `BUTTON_DEFBRD_WIDTH' and

@@ -154,7 +154,7 @@ gtk_socket_steal (GtkSocket *socket, guint32 id)
 
       XSelectInput (GDK_DISPLAY (),
 		    GDK_WINDOW_XWINDOW(socket->plug_window),
-		    StructureNotifyMask);
+		    StructureNotifyMask | PropertyChangeMask);
 
       gtk_widget_queue_resize (widget);
     }
@@ -472,12 +472,21 @@ gtk_socket_add_window (GtkSocket *socket, guint32 xid)
   
   if (!socket->plug_window)
     {
+      GdkDragProtocol protocol;
+
       socket->plug_window = gdk_window_foreign_new (xid);
       socket->same_app = FALSE;
       
       XSelectInput (GDK_DISPLAY (),
 		    GDK_WINDOW_XWINDOW(socket->plug_window),
-		    StructureNotifyMask);
+		    StructureNotifyMask | PropertyChangeMask);
+
+      if (gdk_drag_get_protocol (xid, &protocol))
+	gtk_drag_dest_set_proxy (GTK_WIDGET (socket), socket->plug_window, 
+				 protocol, TRUE);
+
+      gdk_window_add_filter (socket->plug_window, 
+			     gtk_socket_filter_func, socket);
     }
 }
 
@@ -610,6 +619,22 @@ gtk_socket_filter_func (GdkXEvent *gdk_xevent, GdkEvent *event, gpointer data)
 	  return_val = GDK_FILTER_REMOVE;
 	}
       break;
+    case PropertyNotify:
+      if (xevent->xproperty.window ==
+	  GDK_WINDOW_XWINDOW (socket->plug_window))
+	{
+	  GdkDragProtocol protocol;
+
+	  if ((xevent->xproperty.atom == gdk_atom_intern ("XdndAware", FALSE)) ||
+	      (xevent->xproperty.atom == gdk_atom_intern ("_MOTIF_DRAG_RECEIVER_INFO", FALSE)))
+	    {
+	      if (gdk_drag_get_protocol (xevent->xproperty.window, &protocol))
+		gtk_drag_dest_set_proxy (GTK_WIDGET (socket),
+					 socket->plug_window,
+					 protocol, TRUE);
+	    }
+	  return_val = GDK_FILTER_REMOVE;
+	}
     }
 
   return return_val;

@@ -74,6 +74,13 @@
    (saving GNOME_CLIENT_SAVING)
    (waiting GNOME_CLIENT_WAITING))
 
+; enumerations from "gnome-font-picker.h"
+
+(define-enum GnomeFontPickerMode
+   (pixmap GNOME_FONT_PICKER_MODE_PIXMAP)
+   (font-info GNOME_FONT_PICKER_MODE_FONT_INFO)
+   (user-widget GNOME_FONT_PICKER_MODE_USER_WIDGET))
+
 ; enumerations from "gnome-icon-list.h"
 
 (define-enum GnomeIconListMode

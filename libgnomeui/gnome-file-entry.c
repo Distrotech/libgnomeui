@@ -6,6 +6,7 @@
  */
 #include <config.h>
 #include <gtk/gtkbutton.h>
+#include <gtk/gtkdnd.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtkfilesel.h>
 #include <gtk/gtkmain.h>
@@ -18,7 +19,13 @@
 static void gnome_file_entry_class_init (GnomeFileEntryClass *class);
 static void gnome_file_entry_init       (GnomeFileEntry      *fentry);
 static void gnome_file_entry_finalize   (GtkObject           *object);
-
+static void gnome_file_entry_drag_data_received (GtkEntry         *widget,
+						 GdkDragContext   *context,
+						 gint              x,
+						 gint              y,
+						 GtkSelectionData *data,
+						 guint             info,
+						 guint             time);
 
 static GtkHBoxClass *parent_class;
 
@@ -106,32 +113,24 @@ browse_clicked (GtkWidget *widget, gpointer data)
 }
 
 static void
-drop_data_available (GtkEntry *widget, GdkEventDropDataAvailable *data)
+gnome_file_entry_drag_data_received (GtkEntry         *widget,
+				     GdkDragContext   *context,
+				     gint              x,
+				     gint              y,
+				     GtkSelectionData *selection_data,
+				     guint             info,
+				     guint             time)
 {
-	
-	if (!data->data_numbytes)
-		return;
-
-	gtk_entry_set_text (widget, data->data);
+	gtk_entry_set_text (widget, selection_data->data);
 }
 
-/*
- * Sets up dnd
- */
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
-static void
-realize (GtkObject *object, GtkEntry *entry)
-{
-	char *drop_types [] = { "url:ALL" };
-	
-	gtk_signal_connect (object, "drop_data_available_event", GTK_SIGNAL_FUNC (drop_data_available), NULL);
-	gdk_window_dnd_drop_set (entry->text_area, TRUE, drop_types, ELEMENTS(drop_types), FALSE);
-}
 
 static void
 gnome_file_entry_init (GnomeFileEntry *fentry)
 {
 	GtkWidget *button, *the_gtk_entry;
+	GtkTargetEntry drop_types[] = { { "url:ALL", 0, 0 } };
 
 	fentry->browse_dialog_title = NULL;
 
@@ -139,8 +138,13 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 
 	fentry->gentry = gnome_entry_new (NULL);
 	the_gtk_entry = gnome_file_entry_gtk_entry (fentry);
-	gtk_signal_connect (GTK_OBJECT (the_gtk_entry), "realize", GTK_SIGNAL_FUNC(realize), the_gtk_entry);
-	
+
+	gtk_drag_dest_set (GTK_WIDGET (the_gtk_entry),
+			   GTK_DEST_DEFAULT_MOTION |
+			   GTK_DEST_DEFAULT_HIGHLIGHT |
+			   GTK_DEST_DEFAULT_DROP,
+			   drop_types, ELEMENTS(drop_types), GDK_ACTION_COPY);
+
 	gtk_box_pack_start (GTK_BOX (fentry), fentry->gentry, TRUE, TRUE, 0);
 	gtk_widget_show (fentry->gentry);
 

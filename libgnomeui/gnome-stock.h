@@ -515,6 +515,14 @@ void                   gnome_stock_menu_accel_parse(const char *section);
  */
 GtkWidget *gnome_stock_transparent_window (const char *icon, const char *subtype);
 
+/*
+ * Return a GdkPixmap and GdkMask for a stock pixmap
+ */
+void gnome_stock_pixmap_gdk (const char *icon,
+			     const char *subtype,
+			     GdkPixmap **pixmap,
+			     GdkPixmap **mask);
+
 END_GNOME_DECLS
 
 #endif /* GNOME_STOCK_H */

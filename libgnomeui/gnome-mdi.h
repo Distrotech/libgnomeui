@@ -108,8 +108,6 @@ struct _GnomeMDI {
      gnome-app-helper routines */
   gchar *child_menu_path;
   gchar *child_list_path;
-
-  GnomeRootWin *root_window; /* this is needed for DND */
 };
 
 struct _GnomeMDIClass
