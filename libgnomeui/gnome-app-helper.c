@@ -574,6 +574,9 @@ gnome_app_find_menu_pos (GtkWidget *parent,
   g_return_val_if_fail(path != NULL, NULL);
   g_return_val_if_fail(pos != NULL, NULL);
 
+  if (strlen (path) == 0)
+    return parent;
+
   children = GTK_MENU_SHELL(parent)->children;
 
   name_end = strchr(path, '/');
