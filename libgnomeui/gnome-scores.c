@@ -441,7 +441,7 @@ gnome_scores_set_logo_label (GnomeScores *gs, gchar *txt, gchar *font,
 	if( font ) 
 		fo = font;
 	else 
-		fo = _("-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*");
+		fo = _("-freefont-garamond-*-*-*-*-30-170-*-*-*-*-*-*,*-r-*");
 
 	if(( f = gdk_fontset_load ( fo ) ))
 		s->font = f;
