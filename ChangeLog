@@ -1,3 +1,9 @@
+2003-05-19  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_segv_handle): Install
+	a sighandler to fix looping gnome-segv from looping when it crashes
+	itself. Patch from Damon Chaplin. Fixes bug #84778.
+
 2003-05-18  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-app-helper.c:
