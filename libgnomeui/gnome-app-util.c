@@ -90,12 +90,8 @@ ack_clear_prompt_cb(GnomeAppBar * bar, gpointer data)
   g_print("Clearing prompt (ack)\n");
 #endif
 
-  gtk_signal_disconnect_by_func(GTK_OBJECT(bar), 
-				GTK_SIGNAL_FUNC(ack_cb),
-				data);
-  gtk_signal_disconnect_by_func(GTK_OBJECT(bar), 
-				GTK_SIGNAL_FUNC(ack_clear_prompt_cb),
-				data);
+  g_signal_handlers_disconnect_by_func(bar, ack_cb, data);
+  g_signal_handlers_disconnect_by_func(bar, ack_clear_prompt_cb, data);
 }
 
 static void gnome_app_message_bar (GnomeApp * app, const gchar * message)
@@ -104,10 +100,8 @@ static void gnome_app_message_bar (GnomeApp * app, const gchar * message)
   gnome_appbar_set_prompt(GNOME_APPBAR(app->statusbar), prompt, FALSE);
   gnome_app_activate_statusbar(app);
   g_free(prompt);
-  gtk_signal_connect(GTK_OBJECT(app->statusbar), "user_response",
-		     GTK_SIGNAL_FUNC(ack_cb), NULL);
-  gtk_signal_connect(GTK_OBJECT(app->statusbar), "clear_prompt",
-		     GTK_SIGNAL_FUNC(ack_clear_prompt_cb), NULL);
+  g_signal_connect(app->statusbar, "user_response", G_CALLBACK(ack_cb), NULL);
+  g_signal_connect(app->statusbar, "clear_prompt", G_CALLBACK(ack_clear_prompt_cb), NULL);
 }
 
 
@@ -236,7 +230,7 @@ remove_message_timeout (MessageInfo * mi)
   GDK_THREADS_ENTER ();	
 	
   gnome_appbar_refresh(GNOME_APPBAR(mi->app->statusbar));
-  gtk_signal_disconnect(GTK_OBJECT(mi->app), mi->handlerid);
+  g_signal_handler_disconnect(mi->app, mi->handlerid);
   g_free ( mi );
 
   GDK_THREADS_LEAVE ();

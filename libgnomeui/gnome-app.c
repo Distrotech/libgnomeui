@@ -208,10 +208,7 @@ gnome_app_instance_init (GnomeApp *app)
 	gtk_box_pack_start (GTK_BOX (app->vbox), app->dock,
 			    TRUE, TRUE, 0);
 
-	gtk_signal_connect (GTK_OBJECT (app->dock),
-			    "layout_changed",
-			    GTK_SIGNAL_FUNC (layout_changed),
-			    (gpointer) app);
+	g_signal_connect (app->dock, "layout_changed", G_CALLBACK (layout_changed), app);
 	
 	app->enable_layout_config = TRUE;
 
@@ -359,7 +356,7 @@ gnome_app_destroy (GtkObject *object)
 	}
 
 	if (app->layout != NULL) {
-		gtk_object_unref (GTK_OBJECT (app->layout));
+		g_object_unref (app->layout);
 		app->layout = NULL;
 	}
 
@@ -400,9 +397,7 @@ contents_parent_set (GtkWidget *widget, GtkWidget *previous_parent, gpointer dat
 
 	g_assert (previous_parent == app->dock);
 
-	gtk_signal_disconnect_by_func (GTK_OBJECT (widget),
-				       GTK_SIGNAL_FUNC (contents_parent_set),
-				       data);
+	g_signal_handlers_disconnect_by_func (widget, contents_parent_set, data);
 
 	app->contents = NULL;
 }
@@ -492,7 +487,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 	gtk_widget_show (GTK_WIDGET (menubar));
 	gtk_widget_show (GTK_WIDGET (dock_item));
 
-	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
+	ag = g_object_get_data(G_OBJECT(app), "GtkAccelGroup");
 	if (ag && !g_slist_find(gtk_accel_groups_from_object (G_OBJECT (app)), ag))
 	        gtk_window_add_accel_group(GTK_WINDOW(app), ag);
 }
@@ -620,7 +615,7 @@ gnome_app_add_toolbar (GnomeApp *app,
 	gtk_widget_show (GTK_WIDGET (toolbar));
 	gtk_widget_show (GTK_WIDGET (dock_item));
 
-	ag = gtk_object_get_data(GTK_OBJECT(app), "GtkAccelGroup");
+	ag = g_object_get_data(G_OBJECT(app), "GtkAccelGroup");
 	if (ag && !g_slist_find(gtk_accel_groups_from_object (G_OBJECT (app)), ag))
 	        gtk_window_add_accel_group(GTK_WINDOW(app), ag);
 }
@@ -694,9 +689,7 @@ gnome_app_add_dock_item (GnomeApp *app,
 				     offset,
 				     FALSE);
 
-	gtk_signal_emit_by_name (GTK_OBJECT (app->dock),
-				 "layout_changed",
-				 (gpointer) app);
+	g_signal_emit_by_name (app->dock, "layout_changed", app);
 }
 
 /**

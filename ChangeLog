@@ -1,3 +1,32 @@
+2002-02-11  Federico Mena Quintero  <federico@ximian.com>
+
+	* libgnomeui/gnome-app-util.c (ack_clear_prompt_cb): Use
+	g_signal_handlers_disconnect_by_func().
+	(gnome_app_message_bar): Use g_signal_connect().
+	(remove_message_timeout): Use g_signal_handler_disconnect().
+
+	* libgnomeui/gnome-app-helper.c (showing_pixmaps_changed_notify):
+	Use g_object_get_data().
+	(remove_notify_cb): Likewise.
+	(setup_image_menu_item): Use g_object_set_data().
+	(setup_image_menu_item): Use g_object_set_data_full().
+	(setup_image_menu_item): Use g_signal_connect().
+	(put_hint_in_statusbar): Use g_object_get_data().
+	(put_hint_in_appbar): Likewise.
+	(create_menu_item): No need to use
+	gtk_check_menu_item_set_show_toggle(), which is deprecated and
+	silly anyways.
+	(help_view_display_callback): Use g_object_get_data().
+	(create_help_entries): Use g_signal_connect_closure_by_id().
+
+	* libgnomeui/gnome-app.c (gnome_app_instance_init): Use
+	g_signal_connect().
+	(gnome_app_destroy): Use g_object_unref().
+	(contents_parent_set): Use g_signal_handlers_disconnect_by_func().
+	(gnome_app_set_menus): Use g_object_get_data().
+	(gnome_app_add_toolbar): Likewise.
+	(gnome_app_add_dock_item): Use g_signal_emit_by_name().
+
 2002-02-11  Anders Carlsson  <andersca@gnu.org>
 
 	* configure.in: Release 1.111.0

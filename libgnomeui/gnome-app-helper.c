@@ -406,10 +406,10 @@ showing_pixmaps_changed_notify(GConfClient            *client,
                 GnomeUIPixmapType pixmap_type;
                 gconstpointer pixmap_info;
 
-                pixmap_type = GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(mi),
-                                                                  gnome_app_helper_pixmap_type));
-                pixmap_info = gtk_object_get_data(GTK_OBJECT(mi),
-                                                  gnome_app_helper_pixmap_info);
+                pixmap_type = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(mi),
+								gnome_app_helper_pixmap_type));
+                pixmap_info = g_object_get_data(G_OBJECT(mi),
+						gnome_app_helper_pixmap_info);
 
                 pixmap = create_pixmap (pixmap_type, pixmap_info,
 					GTK_ICON_SIZE_MENU);
@@ -435,7 +435,7 @@ remove_notify_cb(GtkObject *obj, gpointer data)
         
         notify_id = GPOINTER_TO_INT(data);
 
-        conf = gtk_object_get_data(obj, gnome_app_helper_gconf_client);
+        conf = g_object_get_data (G_OBJECT (obj), gnome_app_helper_gconf_client);
 
         gconf_client_notify_remove(conf, notify_id);
 }
@@ -449,11 +449,11 @@ setup_image_menu_item (GtkWidget *mi, GnomeUIPixmapType pixmap_type,
         
         g_return_if_fail(GTK_IS_IMAGE_MENU_ITEM(mi));
 
-        gtk_object_set_data(GTK_OBJECT(mi), gnome_app_helper_pixmap_type,
-                            GINT_TO_POINTER(pixmap_type));
+        g_object_set_data(G_OBJECT(mi), gnome_app_helper_pixmap_type,
+			  GINT_TO_POINTER(pixmap_type));
 
-        gtk_object_set_data(GTK_OBJECT(mi), gnome_app_helper_pixmap_info,
-                            (gpointer)pixmap_info);
+        g_object_set_data(G_OBJECT(mi), gnome_app_helper_pixmap_info,
+			  (gpointer)pixmap_info);
 
 
 	/* make sure that things are all ready for us */
@@ -462,8 +462,8 @@ setup_image_menu_item (GtkWidget *mi, GnomeUIPixmapType pixmap_type,
         conf = gconf_client_get_default();
 
         g_object_ref (G_OBJECT (conf));
-        gtk_object_set_data_full(GTK_OBJECT(mi), gnome_app_helper_gconf_client,
-                                 conf, (GtkDestroyNotify)g_object_unref);
+        g_object_set_data_full(G_OBJECT(mi), gnome_app_helper_gconf_client,
+			       conf, g_object_unref);
 
         if (gconf_client_get_bool(conf,
                                   "/desktop/gnome/interface/menus_have_icons",
@@ -485,9 +485,9 @@ setup_image_menu_item (GtkWidget *mi, GnomeUIPixmapType pixmap_type,
                                             showing_pixmaps_changed_notify,
                                             mi, NULL, NULL);
 
-        gtk_signal_connect(GTK_OBJECT(mi), "destroy",
-                           GTK_SIGNAL_FUNC(remove_notify_cb),
-			   GINT_TO_POINTER(notify_id));
+        g_signal_connect(mi, "destroy",
+			 G_CALLBACK (remove_notify_cb),
+			 GINT_TO_POINTER(notify_id));
 }
 
 /* Creates  a menu item label. */
@@ -523,8 +523,7 @@ setup_accelerator (GtkAccelGroup *accel_group, GnomeUIInfo *uiinfo,
 static void
 put_hint_in_statusbar(GtkWidget* menuitem, gpointer data)
 {
-	gchar* hint = gtk_object_get_data(GTK_OBJECT(menuitem),
-					  apphelper_statusbar_hint);
+	gchar* hint = g_object_get_data(G_OBJECT(menuitem), apphelper_statusbar_hint);
 	GtkWidget* bar = data;
 	guint id;
 	
@@ -640,8 +639,7 @@ gnome_app_install_statusbar_menu_hints (GtkStatusbar* bar,
 static void
 put_hint_in_appbar(GtkWidget* menuitem, gpointer data)
 {
-  gchar* hint = gtk_object_get_data (GTK_OBJECT(menuitem),
-                                     "apphelper_appbar_hint");
+  gchar* hint = g_object_get_data (G_OBJECT(menuitem), "apphelper_appbar_hint");
   GtkWidget* bar = data;
 
   g_return_if_fail (hint != NULL);
@@ -1020,13 +1018,10 @@ create_menu_item (GtkMenuShell       *menu_shell,
 	
 	/* Set toggle information, if appropriate */
 	
-	if ((uiinfo->type == GNOME_APP_UI_TOGGLEITEM) || is_radio) {
-		gtk_check_menu_item_set_show_toggle
-			(GTK_CHECK_MENU_ITEM(uiinfo->widget), TRUE);
+	if ((uiinfo->type == GNOME_APP_UI_TOGGLEITEM) || is_radio)
 		gtk_check_menu_item_set_active
 			(GTK_CHECK_MENU_ITEM (uiinfo->widget), FALSE);
-	}
-	
+
 	/* Connect to the signal and set user data */
 	
 	type = uiinfo->type;
@@ -1207,8 +1202,7 @@ static void
 help_view_display_callback (GtkWidget *w, gpointer data)
 {
 	char *section = data;
-	char *docname = gtk_object_get_data
-		(GTK_OBJECT (w), "docname");
+	char *docname = g_object_get_data (G_OBJECT (w), "docname");
 
 	/* FIXME: handle errors somehow */
 	if (docname == NULL ||
@@ -1255,11 +1249,21 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 					  g_strdup (uiinfo->moreinfo),
 					  g_free);
 
+		g_signal_connect_closure_by_id (item,
+						g_signal_lookup ("activate", G_OBJECT_TYPE (item)),
+						0,
+						g_cclosure_new (
+							G_CALLBACK (help_view_display_callback),
+							cur->next->data,
+							(GClosureNotify) g_free),
+						FALSE);
+#if 0
 		gtk_signal_connect_full
 			(GTK_OBJECT (item), "activate",
 			 GTK_SIGNAL_FUNC (help_view_display_callback), NULL,
 			 cur->next->data, g_free,
 			 FALSE, FALSE);
+#endif
 		cur->next->data = NULL;
 
 		gtk_menu_shell_insert (menu_shell, item, pos);
