@@ -229,11 +229,11 @@ recalc_bounds (GnomeCanvasLine *line)
 
 	/* Add the arrow points, if any */
 
-	if (line->first_arrow)
+	if (line->first_arrow && line->first_coords)
 		for (i = 0, coords = line->first_coords; i < NUM_ARROW_POINTS; i++, coords += 2)
 			GROW_BOUNDS (x1, y1, x2, y2, coords[0], coords[1]);
 
-	if (line->last_arrow)
+	if (line->last_arrow && line->last_coords)
 		for (i = 0, coords = line->last_coords; i < NUM_ARROW_POINTS; i++, coords += 2)
 			GROW_BOUNDS (x1, y1, x2, y2, coords[0], coords[1]);
 
@@ -435,6 +435,9 @@ reconfigure_arrows (GnomeCanvasLine *line)
 	double shape_a, shape_b, shape_c;
 	double width;
 	int i;
+
+	if (line->num_points == 0)
+		return;
 
 	/* Set up things */
 
