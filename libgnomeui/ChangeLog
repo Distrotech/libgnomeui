@@ -1,3 +1,20 @@
+1998-02-14  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* libgnomeui.h: includes the new session management
+	support header file 'gnome-client.h' instead of the old one
+	'gnome-session.h'
+
+	* Makefile.am (libgnomeui_la_SOURCES): replaced 'gnome-session.c'
+	with 'gnome-client.c'
+	(libgnomeuiinclude_HEADERS): replaced 'gnome-session.h' with
+	'gnome-client.h'
+	(ted_demo_LDADD): added '$(INTLLIBS)'
+	(stock_demo_LDADD): added '$(INTLLIBS)'
+
+	* gnome-client.h: new file
+
+	* gnome-client.c: new file
+
 1998-02-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-about.c (gnome_fill_info): Made gdk_color_alloc() use the
