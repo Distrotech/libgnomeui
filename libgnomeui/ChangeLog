@@ -1,3 +1,18 @@
+1998-03-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-icon-list.h: New files gnome-icon-list.[ch].  This
+	provides the GnomeIconList widget.  It is an icon list widget with
+	several display modes.  It has an API very similar to the
+	GtkCList, so using it should be easy.  It will be used on the file
+	manager for the iconic view, for an icon selector property box,
+	etc.  It is still not finished and it has bugs, but you can start
+	playing with it now.  There is a small example program on
+	http://www.nuclecu.unam.mx/~federico/test-ilist.c
+
+	* libgnomeui.h: Added gnome-icon-list.h to the includes.
+
+	* Makefile.am: Added gnome-icon-list.[ch] to the rules.
+
 Thu Mar 26 13:29:18 1998  Radek Doulik  <gis@academy.cas.cz>
 
 	* gnome-client.c (gnome_client_flush): check HAVE_LIBSM, hope I don't

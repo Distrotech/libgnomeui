@@ -41,7 +41,7 @@ struct _GnomeUIInfo {
   gpointer user_data;
 
   /* Unsed - for future expansion.  Should always be NULL. */
-  gpointer unsed_data;
+  gpointer unused_data;
 
   enum {
     GNOME_APP_PIXMAP_NONE,
