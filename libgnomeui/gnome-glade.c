@@ -80,6 +80,19 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
 			GNode *buttonnode;
 
 			if (content) free(content);
+			xmlnode = childnode->data;
+			for (xmlnode = xmlnode->childs; xmlnode;
+			     xmlnode = xmlnode->next)
+				if (!strcmp(xmlnode->name, "name"))
+					break;
+			if (xmlnode) {
+				content = xmlNodeGetContent(xmlnode);
+				parent_name = g_strconcat(longname, ".",
+							  content, NULL);
+				free(content);
+			} else
+				parent_name = g_strconcat(longname,
+							  ".action_area",NULL);
 
 			/* this is the action area -- here we add the buttons*/
 			for (buttonnode = childnode->children; buttonnode;
@@ -99,7 +112,15 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
 				gnome_dialog_append_button(GNOME_DIALOG(w),
 							   stock);
 				if (content) free(content);
+				/* connect signal handlers, etc ... */
+				child = g_list_last(
+					GNOME_DIALOG(w)->buttons)->data;
+				glade_xml_set_common_params(xml, child,
+							    buttonnode,
+							    parent_name,
+							    "GtkButton");
 			}
+			g_free(parent_name);
 			continue;
 		}
 		if (content) free(content);
@@ -142,6 +163,38 @@ gnomedialog_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
 					 child, expand, fill, padding);
 	}
 	g_free(vboxname);
+}
+
+static void
+messagebox_build_children(GladeXML *xml, GtkWidget *w, GNode *node,
+			    const char *longname)
+{
+	xmlNode *info;
+	GNode *childnode;
+	GtkWidget *child;
+
+	/* the message box contains a vbox which contains a hbuttonbox ... */
+	childnode = node->children->children;
+	/* the children of the hbuttonbox are the buttons ... */
+	for (childnode = childnode->children; childnode;
+	     childnode = childnode->next) {
+		const char *stock;
+		char *content;
+
+		info = childnode->data;
+		for (info = info->childs; info; info = info->next)
+			if (!strcmp(info->name, "stock_button"))
+				break;
+		if (!info) continue;
+		content = xmlNodeGetContent(info);
+		stock = get_stock_name(content);
+		if (!stock) stock = content;
+		gnome_dialog_append_button(GNOME_DIALOG(w), stock);
+		if (content) free(content);
+		child = g_list_last(GNOME_DIALOG(w)->buttons)->data;
+		glade_xml_set_common_params(xml, child, childnode,
+					    longname, "GtkButton");
+	}
 }
 
 static void
@@ -1332,7 +1385,6 @@ static GtkWidget *
 messagebox_new(GladeXML *xml, GNode *node)
 {
 	GtkWidget *win;
-	GNode *child;
 	xmlNodePtr info = ((xmlNodePtr)node->data)->childs;
 	gchar *typename = GNOME_MESSAGE_BOX_GENERIC, *message = NULL;
 
@@ -1367,24 +1419,6 @@ messagebox_new(GladeXML *xml, GNode *node)
 	}
 	/* create the message box with no buttons */
 	win = gnome_message_box_new(_(message), typename, NULL);
-	/* the message box contains a vbox which contains a hbuttonbox ... */
-	child = node->children->children;
-	/* the children of the hbuttonbox are the buttons ... */
-	for (child = child->children; child; child = child->next) {
-		const char *stock;
-		char *content;
-
-		info = child->data;
-		for (info = info->childs; info; info = info->next)
-			if (!strcmp(info->name, "stock_button"))
-				break;
-		if (!info) continue;
-		content = xmlNodeGetContent(info);
-		stock = get_stock_name(content);
-		if (!stock) stock = content;
-		gnome_dialog_append_button(GNOME_DIALOG(win), stock);
-		if (content) free(content);
-	}
 	return win;
 }
 
@@ -1477,7 +1511,7 @@ static const GladeWidgetBuildData widget_data [] = {
 
 	{ "GnomeAbout",         about_new,          NULL },
 	{ "GnomeDialog",        gnomedialog_new,   gnomedialog_build_children},
-	{ "GnomeMessageBox",    messagebox_new,     NULL },
+	{ "GnomeMessageBox",    messagebox_new,     messagebox_build_children},
 	{ "GnomeApp",           app_new,            app_build_children},
 	{ NULL, NULL, NULL }
 };
