@@ -22,6 +22,7 @@
 
 #include "gnome-dentry-edit.h"
 
+#include "gnomesupport.h"
 #include "libgnome/libgnomeP.h"
 
 #ifdef TEST_DENTRY_EDIT

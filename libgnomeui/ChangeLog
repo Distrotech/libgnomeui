@@ -1,3 +1,7 @@
+Tue Sep  8 22:54:31 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-dentry-edit.c: Include gnomesupport.h for strndup.
+
 1998-09-06  Martin Baulig  <martin@home-of-linux.org>
 
 	* gnome-mdi.c (gnome_mdi_set_mode, rootwin_drop): Make the newly
