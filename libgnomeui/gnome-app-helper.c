@@ -63,6 +63,15 @@
 #include "gnome-stock.h"
 #include "gtkpixmapmenuitem.h"
 
+/* keys used for get/set_data */
+const char *gnome_app_helper_gconf_client = "gnome-app-helper-gconf-client";
+const char *gnome_app_helper_menu_hint = "gnome-app-helper:menu-hint";
+const char *gnome_app_helper_pixmap_type = "gnome-app-helper-pixmap-type";
+const char *gnome_app_helper_pixmap_info = "gnome-app-helper-pixmap-info";
+const char *apphelper_statusbar_hint = "apphelper_statusbar_hint";
+const char *apphelper_appbar_hint = "apphelper_appbar_hint";
+const char *GtkMenu_uline_accel_group = "GtkMenu-uline-accel-group";
+
 /* prototypes */
 static gint g_strncmp_ignore_char( const gchar *first, const gchar *second,
 				   gint length, gchar ignored );
@@ -388,9 +397,9 @@ showing_pixmaps_changed_notify(GConfClient            *client,
                 gconstpointer pixmap_info;
 
                 pixmap_type = GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(mi),
-                                                                  "gnome-app-helper-pixmap-type"));
+                                                                  gnome_app_helper_pixmap_type));
                 pixmap_info = gtk_object_get_data(GTK_OBJECT(mi),
-                                                  "gnome-app-helper-pixmap-info");
+                                                  gnome_app_helper_pixmap_info);
 
                 pixmap = create_pixmap(pixmap_type, pixmap_info);
 
@@ -414,7 +423,7 @@ remove_notify_cb(GtkObject *obj, gpointer data)
         
         notify_id = GPOINTER_TO_INT(data);
 
-        conf = gtk_object_get_data(obj, "gnome-app-helper-gconf-client");
+        conf = gtk_object_get_data(obj, gnome_app_helper_gconf_client);
 
         gconf_client_notify_remove(conf, notify_id);
 }
@@ -428,18 +437,17 @@ setup_pixmap_menu_item(GtkWidget *mi, GnomeUIPixmapType pixmap_type,
         
         g_return_if_fail(GTK_IS_PIXMAP_MENU_ITEM(mi));
 
-        gtk_object_set_data(GTK_OBJECT(mi), "gnome-app-helper-pixmap-type",
+        gtk_object_set_data(GTK_OBJECT(mi), gnome_app_helper_pixmap_type,
                             GINT_TO_POINTER(pixmap_type));
 
-        gtk_object_set_data(GTK_OBJECT(mi), "gnome-app-helper-pixmap-info",
+        gtk_object_set_data(GTK_OBJECT(mi), gnome_app_helper_pixmap_info,
                             (gpointer)pixmap_info);
 
         
         conf = gnome_get_gconf_client();
 
         gtk_object_ref(GTK_OBJECT(conf));
-        
-        gtk_object_set_data_full(GTK_OBJECT(mi), "gnome-app-helper-gconf-client",
+        gtk_object_set_data_full(GTK_OBJECT(mi), gnome_app_helper_gconf_client,
                                  conf, (GtkDestroyNotify)gtk_object_unref);
 
         if (gconf_client_get_bool(conf,
@@ -503,13 +511,14 @@ gtk_menu_ensure_uline_accel_group (GtkMenu *menu)
 
   g_return_val_if_fail (GTK_IS_MENU (menu), NULL);
 
-  accel_group = gtk_object_get_data (GTK_OBJECT (menu), "GtkMenu-uline-accel-group");
+  accel_group = gtk_object_get_data (GTK_OBJECT (menu),
+				     GtkMenu_uline_accel_group);
   if (!accel_group)
     {
       accel_group = gtk_accel_group_new ();
       gtk_accel_group_attach (accel_group, GTK_OBJECT (menu));
       gtk_object_set_data_full (GTK_OBJECT (menu),
-				"GtkMenu-uline-accel-group",
+				GtkMenu_uline_accel_group,
 				accel_group,
 				(GtkDestroyNotify) gtk_accel_group_unref);
     }
@@ -568,7 +577,7 @@ static void
 put_hint_in_statusbar(GtkWidget* menuitem, gpointer data)
 {
 	gchar* hint = gtk_object_get_data(GTK_OBJECT(menuitem),
-					  "apphelper_statusbar_hint");
+					  apphelper_statusbar_hint);
 	GtkWidget* bar = data;
 	guint id;
 	
@@ -577,7 +586,7 @@ put_hint_in_statusbar(GtkWidget* menuitem, gpointer data)
 	g_return_if_fail (GTK_IS_STATUSBAR(bar));
 	
 	id = gtk_statusbar_get_context_id(GTK_STATUSBAR(bar),
-					  "gnome-app-helper:menu-hint");
+					  gnome_app_helper_menu_hint);
 	
 	gtk_statusbar_push(GTK_STATUSBAR(bar),id,hint);
 }
@@ -595,7 +604,7 @@ remove_hint_from_statusbar(GtkWidget* menuitem, gpointer data)
 	g_return_if_fail (GTK_IS_STATUSBAR(bar));
 	
 	id = gtk_statusbar_get_context_id(GTK_STATUSBAR(bar),
-					  "gnome-app-helper:menu-hint");
+					  gnome_app_helper_menu_hint);
 	
 	gtk_statusbar_pop(GTK_STATUSBAR(bar), id);
 }
@@ -615,7 +624,7 @@ install_menuitem_hint_to_statusbar(GnomeUIInfo* uiinfo, GtkStatusbar* bar)
   if (uiinfo->hint)
     {
       gtk_object_set_data (GTK_OBJECT(uiinfo->widget),
-                           "apphelper_statusbar_hint",
+                           apphelper_statusbar_hint,
                            (gpointer)L_(uiinfo->hint));
 
       gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
@@ -724,7 +733,7 @@ install_menuitem_hint_to_appbar(GnomeUIInfo* uiinfo, GnomeAppBar* bar)
   if (uiinfo->hint)
     {
       gtk_object_set_data (GTK_OBJECT(uiinfo->widget),
-                           "apphelper_appbar_hint",
+                           apphelper_appbar_hint,
                            (gpointer)L_(uiinfo->hint));
 
       gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
@@ -1118,7 +1127,8 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 			break;
 
 		case GNOME_APP_UI_ITEM:
-			create_menu_item (menu_shell, uiinfo, TRUE, &group, uibdata, 
+			create_menu_item (menu_shell, uiinfo, TRUE,
+					  &group, uibdata, 
 					  accel_group, FALSE, pos);
 			pos++;
 			break;
@@ -1355,11 +1365,13 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 		case GNOME_APP_UI_SUBTREE:
 		case GNOME_APP_UI_SUBTREE_STOCK:
 			if (uiinfo->type == GNOME_APP_UI_SUBTREE_STOCK)
-				create_menu_item (menu_shell, uiinfo, FALSE, NULL, uibdata, 
+				create_menu_item (menu_shell, uiinfo, FALSE,
+						  NULL, uibdata, 
 						  accel_group, uline_accels,
 						  pos);
 			else
-				create_menu_item (menu_shell, uiinfo, FALSE, NULL, uibdata, 
+				create_menu_item (menu_shell, uiinfo, FALSE,
+						  NULL, uibdata, 
 						  accel_group, uline_accels,
 						  pos);
 			
@@ -2506,8 +2518,7 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
         conf = gnome_get_gconf_client();
 
         gtk_object_ref(GTK_OBJECT(conf));
-        
-        gtk_object_set_data_full(GTK_OBJECT(toolbar), "gnome-app-helper-gconf-client",
+        gtk_object_set_data_full(GTK_OBJECT(toolbar), gnome_app_helper_gconf_client,
                                  conf, (GtkDestroyNotify)gtk_object_unref);
         
         /* Attach GConf settings */
@@ -2515,6 +2526,10 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
         if (dock_item != NULL) { /* Dock item bevel */
                 gboolean bevels = TRUE;
                 guint notify_id;
+
+		gtk_object_ref(GTK_OBJECT(conf));
+		gtk_object_set_data_full(GTK_OBJECT(dock_item), gnome_app_helper_gconf_client,
+					 conf, (GtkDestroyNotify)gtk_object_unref);
                 
                 bevels = gconf_client_get_bool(conf,
                                                "/desktop/gnome/toolbars/bevels",

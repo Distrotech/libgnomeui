@@ -1,3 +1,11 @@
+Wed Dec 06 22:16:29 2000  George Lebl <jirka@5z.com>
+
+	* gnome-app-helper.c, gnome-gconf.c, gnome-mdi-child.c: Cleanup,
+	  setup the gconf client data for the dockitems so that we don't crash
+	  on destroy.  I've realized there are severe problems in the
+	  GnomeUIInfo code wrt the new signal stuff and some unexplained
+	  crashes.  Fun.
+
 Wed Dec 06 20:35:48 2000  George Lebl <jirka@5z.com>
 
 	* gnome-mdi.[ch], gnome-mdi-child.[ch], gnome-mdiP.h,

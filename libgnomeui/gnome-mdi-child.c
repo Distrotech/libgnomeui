@@ -156,7 +156,7 @@ gnome_mdi_child_destroy (GtkObject *obj)
 
 void
 gnome_mdi_child_add_toolbar(GnomeMDIChild *mdi_child, GnomeApp *app,
-							GtkToolbar *toolbar)
+			    GtkToolbar *toolbar)
 {
 	g_return_if_fail (mdi_child != NULL);
 	g_return_if_fail (GNOME_IS_MDI_CHILD (mdi_child));
@@ -299,7 +299,7 @@ gnome_mdi_child_get_name(GnomeMDIChild *mdi_child)
  **/
 void
 gnome_mdi_child_set_menu_template (GnomeMDIChild *mdi_child,
-								   GnomeUIInfo *menu_tmpl)
+				   GnomeUIInfo *menu_tmpl)
 {
 	g_return_if_fail(mdi_child != NULL);
 	g_return_if_fail(GNOME_IS_MDI_CHILD(mdi_child));
@@ -318,7 +318,8 @@ gnome_mdi_child_set_menu_template (GnomeMDIChild *mdi_child,
  * toolbars utilizing the GnomeMDI view_changed or child_changed signal.
  **/
 void
-gnome_mdi_child_set_toolbar_template (GnomeMDIChild *mdi_child, GnomeUIInfo *toolbar_tmpl)
+gnome_mdi_child_set_toolbar_template (GnomeMDIChild *mdi_child,
+				      GnomeUIInfo *toolbar_tmpl)
 {
 	g_return_if_fail(mdi_child != NULL);
 	g_return_if_fail(GNOME_IS_MDI_CHILD(mdi_child));
@@ -342,10 +343,10 @@ gnome_mdi_child_set_toolbar_template (GnomeMDIChild *mdi_child, GnomeUIInfo *too
  **/
 void
 gnome_mdi_child_set_toolbar_position(GnomeMDIChild *mdi_child,
-									 GnomeDockItemBehavior behavior,
-									 GnomeDockPlacement placement,
-									 gint band_num, gint band_pos,
-									 gint offset)
+				     GnomeDockItemBehavior behavior,
+				     GnomeDockPlacement placement,
+				     gint band_num, gint band_pos,
+				     gint offset)
 {
 	g_return_if_fail(mdi_child != NULL);
 	g_return_if_fail(GNOME_IS_MDI_CHILD(mdi_child));
