@@ -21,11 +21,19 @@
 
 
 
-/* This defines a line of text */
+/* This defines a line of text */	
 struct line {
 	char *text;	/* Line's text, it is a pointer into the text->text string */
 	int length;	/* Line's length in characters */
 	int width;	/* Line's width in pixels */
+	int rbearing;   /* Line's rbearing */
+	int lbearing;   /* Line's lbearing */
+};
+
+struct TextPrivate {
+	int min_lbearing;
+	int max_rbearing;
+	struct line *lines;
 };
 
 
@@ -205,8 +213,11 @@ gnome_canvas_text_destroy (GtkObject *object)
 	if (text->text)
 		g_free (text->text);
 
-	if (text->lines)
+	if (text->lines) {
+		if (((struct TextPrivate *)text->lines)->lines)
+			g_free (((struct TextPrivate *)text->lines)->lines);
 		g_free (text->lines);
+	}
 
 	if (text->font)
 		gdk_font_unref (text->font);
@@ -225,9 +236,11 @@ static void
 get_bounds_item_relative (GnomeCanvasText *text, double *px1, double *py1, double *px2, double *py2)
 {
 	GnomeCanvasItem *item;
+	struct TextPrivate *private;
 	double x, y;
 	double clip_x, clip_y;
 
+	private = (struct TextPrivate*) text->lines;
 	item = GNOME_CANVAS_ITEM (text);
 
 	x = text->x;
@@ -296,9 +309,9 @@ get_bounds_item_relative (GnomeCanvasText *text, double *px1, double *py1, doubl
 		*px2 = clip_x + text->clip_width;
 		*py2 = clip_y + text->clip_height;
 	} else {
-		*px1 = x;
+		*px1 = x + private->min_lbearing;
 		*py1 = y;
-		*px2 = x + text->max_width;
+		*px2 = x + text->max_width + private->max_rbearing;
 		*py2 = y + text->height;
 	}
 }
@@ -307,19 +320,25 @@ static void
 get_bounds (GnomeCanvasText *text, double *px1, double *py1, double *px2, double *py2)
 {
 	GnomeCanvasItem *item;
+	struct TextPrivate *private;
 	double wx, wy;
+	int i;
+
+	private = (struct TextPrivate*) text->lines;
+	if (!private) {
+		split_into_lines (text);
+		private = (struct TextPrivate*) text->lines;
+	}
 
 	item = GNOME_CANVAS_ITEM (text);
 
 	/* Get canvas pixel coordinates for text position */
-
 	wx = text->x;
 	wy = text->y;
 	gnome_canvas_item_i2w (item, &wx, &wy);
 	gnome_canvas_w2c (item->canvas, wx + text->xofs, wy + text->yofs, &text->cx, &text->cy);
 
 	/* Get canvas pixel coordinates for clip rectangle position */
-
 	gnome_canvas_w2c (item->canvas, wx, wy, &text->clip_cx, &text->clip_cy);
 	text->clip_cwidth = text->clip_width * item->canvas->pixels_per_unit;
 	text->clip_cheight = text->clip_height * item->canvas->pixels_per_unit;
@@ -383,9 +402,9 @@ get_bounds (GnomeCanvasText *text, double *px1, double *py1, double *px2, double
 		*px2 = text->clip_cx + text->clip_cwidth;
 		*py2 = text->clip_cy + text->clip_cheight;
 	} else {
-		*px1 = text->cx;
+		*px1 = text->cx + private->min_lbearing;
 		*py1 = text->cy;
-		*px2 = text->cx + text->max_width;
+		*px2 = text->cx + text->max_width + private->max_rbearing;
 		*py2 = text->cy + text->height;
 	}
 }
@@ -410,10 +429,17 @@ recalc_bounds (GnomeCanvasText *text)
 static void
 calc_line_widths (GnomeCanvasText *text)
 {
+	struct TextPrivate *private;
 	struct line *lines;
 	int i;
 
-	lines = text->lines;
+	private = (struct TextPrivate*)text->lines;
+	if (!private) {
+		split_into_lines (text);
+		private = (struct TextPrivate*) text->lines;
+	}
+
+	lines = private->lines;
 	text->max_width = 0;
 
 	if (!lines)
@@ -433,16 +459,23 @@ calc_line_widths (GnomeCanvasText *text)
 						  &width,
 						  &ascent,
 						  &descent);
-				lines->width = lbearing + rbearing;
-				
+				lines->rbearing = rbearing;
+				lines->lbearing = lbearing;
+				lines->width = width;
 			}
 			else
-				lines->width = 0;
-
-			if (lines->width > text->max_width)
+			{
+				lines->rbearing = 0;
+				lines->lbearing = 0;
+			}
+			if ((lines->width) > text->max_width)
 				text->max_width = lines->width;
+			if (lines->rbearing > private->max_rbearing)
+				private->max_rbearing = lines->rbearing;
+			if (lines->lbearing < private->min_lbearing)
+				private->min_lbearing = lines->lbearing;
 		}
-
+		
 		lines++;
 	}
 }
@@ -452,15 +485,22 @@ static void
 split_into_lines (GnomeCanvasText *text)
 {
 	char *p;
+	struct TextPrivate *private;
 	struct line *lines;
 	int len;
 
 	/* Free old array of lines */
 
-	if (text->lines)
-		g_free (text->lines);
+	private = (struct TextPrivate*)text->lines;
+	if (private) {
+		if (private->lines)
+			g_free (private->lines);
+		g_free (private);
+	}
+	text->lines = (gpointer)g_new0 (struct TextPrivate, 1);
+	private = (struct TextPrivate *)text->lines;
 
-	text->lines = NULL;
+	private->lines = NULL;
 	text->num_lines = 0;
 
 	if (!text->text)
@@ -476,7 +516,7 @@ split_into_lines (GnomeCanvasText *text)
 
 	/* Allocate array of lines and calculate split positions */
 
-	text->lines = lines = g_new0 (struct line, text->num_lines);
+	private->lines = lines = g_new0 (struct line, text->num_lines);
 	len = 0;
 
 	for (p = text->text; *p; p++) {
@@ -957,6 +997,7 @@ gnome_canvas_text_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 {
 	GnomeCanvasText *text;
 	GdkRectangle rect;
+	struct TextPrivate *private;
 	struct line *lines;
 	int i;
 	int xpos, ypos;
@@ -975,7 +1016,8 @@ gnome_canvas_text_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 		gdk_gc_set_clip_rectangle (text->gc, &rect);
 	}
 
-	lines = text->lines;
+	private = (struct TextPrivate*)text->lines;
+	lines = private->lines;
 	ypos = text->cy + text->font->ascent;
 
 	if (text->stipple)
@@ -1010,6 +1052,7 @@ gnome_canvas_text_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 	guint32 fg_color;
 	double x_start, y_start;
 	double xpos, ypos;
+	struct TextPrivate *private;
 	struct line *lines;
 	int i, j;
 	double affine[6];
@@ -1028,7 +1071,8 @@ gnome_canvas_text_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 
         gnome_canvas_buf_ensure_buf (buf);
 
-	lines = text->lines;
+	private = (struct TextPrivate *)text->lines;
+	lines = private->lines;
 	start_i.y = get_line_ypos_item_relative (text);
 
 	art_affine_scale (affine, item->canvas->pixels_per_unit, item->canvas->pixels_per_unit);
@@ -1082,6 +1126,7 @@ gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y,
 {
 	GnomeCanvasText *text;
 	int i;
+	struct TextPrivate *private;
 	struct line *lines;
 	int x1, y1, x2, y2;
 	int font_height;
@@ -1105,7 +1150,8 @@ gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y,
 
 	best = 1.0e36;
 
-	lines = text->lines;
+	private = (struct TextPrivate *)text->lines;
+	lines = private->lines;
 
 	for (i = 0; i < text->num_lines; i++) {
 		/* Compute the coordinates of rectangle for the current line,
@@ -1170,11 +1216,13 @@ static void
 gnome_canvas_text_bounds (GnomeCanvasItem *item, double *x1, double *y1, double *x2, double *y2)
 {
 	GnomeCanvasText *text;
+	struct TextPrivate *private;
 	double width, height;
 
 	text = GNOME_CANVAS_TEXT (item);
+	private = (struct TextPrivate*) text->lines;
 
-	*x1 = text->x;
+	*x1 = text->x + private->min_lbearing;
 	*y1 = text->y;
 
 	if (text->clip) {
@@ -1223,7 +1271,7 @@ gnome_canvas_text_bounds (GnomeCanvasItem *item, double *x1, double *y1, double 
 		break;
 	}
 
-	*x2 = *x1 + width;
+	*x2 = *x1 + width + private->max_rbearing;
 	*y2 = *y1 + height;
 }
 
