@@ -387,6 +387,10 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderDat
 			     GNOMEUIINFO_KEY_UIDATA,
 			     uiinfo->user_data);
 
+	gtk_object_set_data (GTK_OBJECT (uiinfo->widget),
+			     GNOMEUIINFO_KEY_UIBDATA,
+			     uibdata->data);
+
 	if (uibdata->is_interp)
 		gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), signal_name,
 					 NULL,
