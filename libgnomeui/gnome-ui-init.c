@@ -587,20 +587,19 @@ libgnomeui_segv_setup (GnomeProgram *program, gboolean post_arg_parse)
         do_crash_dialog = g_value_get_boolean (&value);
         g_value_unset (&value);
 
-        memset(&sa, 0, sizeof(sa));
-
-        setptr = &sa;
         if(do_crash_dialog) {
+                memset(&sa, 0, sizeof(sa));
+                setptr = &sa;
+
                 sa.sa_handler = (gpointer)libgnomeui_segv_handle;
-        } else {
-                sa.sa_handler = SIG_DFL;
+
+                sigaction(SIGSEGV, setptr, NULL);
+                sigaction(SIGABRT, setptr, NULL);
+                sigaction(SIGTRAP, setptr, NULL);
+                sigaction(SIGFPE, setptr, NULL);
+                sigaction(SIGBUS, setptr, NULL);
         }
 
-        sigaction(SIGSEGV, setptr, NULL);
-        sigaction(SIGABRT, setptr, NULL);
-        sigaction(SIGTRAP, setptr, NULL);
-        sigaction(SIGFPE, setptr, NULL);
-        sigaction(SIGBUS, setptr, NULL);
 }
 
 static void libgnomeui_segv_handle(int signum)

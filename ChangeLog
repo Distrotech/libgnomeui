@@ -1,3 +1,9 @@
+2002-10-04  Vladimir Vukicevic  <vladimir@pobox.com>
+
+	* libgnomeui/gnome-ui-init.c (libgnomeui_segv_setup): don't reset
+	signals to SIG_DFL if do_crash_dialog is false, leave them
+	as-is.
+
 2002-10-08  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-thumbnail-pixbuf-utils.c (_gnome_thumbnail_load_scaled_jpeg):
