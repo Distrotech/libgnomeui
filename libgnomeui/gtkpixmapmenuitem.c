@@ -32,7 +32,7 @@ static void gtk_pixmap_menu_item_remove        (GtkContainer *container,
 static GtkMenuItemClass *parent_class = NULL;
 
 #define BORDER_SPACING  3
-#define INDENT 18
+#define PMAP_WIDTH 20
 
 GtkType
 gtk_pixmap_menu_item_get_type (void)
@@ -99,12 +99,15 @@ gtk_pixmap_menu_item_class_init (GtkPixmapMenuItemClass *klass)
 
   container_class->forall = gtk_pixmap_menu_item_forall;
   container_class->remove = gtk_pixmap_menu_item_remove;
+
+  GTK_MENU_ITEM_CLASS (klass)->toggle_size = MAX(GTK_MENU_ITEM_CLASS (klass)->toggle_size, PMAP_WIDTH);
 }
 
 static void
 gtk_pixmap_menu_item_init (GtkPixmapMenuItem *menu_item)
 {
   menu_item->pixmap = NULL;
+  GTK_MENU_ITEM (menu_item)->toggle_size = MAX(GTK_MENU_ITEM (menu_item)->toggle_size, PMAP_WIDTH);
 }
 
 static void
@@ -203,66 +206,22 @@ gtk_pixmap_menu_item_size_allocate (GtkWidget        *widget,
 				    GtkAllocation    *allocation)
 {
   GtkPixmapMenuItem *pmenu_item;
-  GtkAllocation child_allocation, real_allocation;
-  GtkMenuItem *menu_item;
-  GtkBin *bin;
-  gint diff = 0;
-  gboolean show_pmap;
-
-  g_return_if_fail (widget != NULL);
-  g_return_if_fail (GTK_IS_PIXMAP_MENU_ITEM (widget));
-  g_return_if_fail (allocation != NULL);
 
   pmenu_item = GTK_PIXMAP_MENU_ITEM(widget);
 
-  widget->allocation = *allocation;
+  if(pmenu_item->pixmap && GTK_WIDGET_VISIBLE(pmenu_item)) {
+    GtkAllocation child_allocation;
 
-  real_allocation = *allocation;
-
-  show_pmap = (allocation->width >= widget->requisition.width);
-
-  if (pmenu_item->pixmap && show_pmap ) {
     child_allocation.width = pmenu_item->pixmap->requisition.width;
     child_allocation.height = pmenu_item->pixmap->requisition.height;
     child_allocation.x = GTK_CONTAINER (widget)->border_width + BORDER_SPACING;
     child_allocation.y = GTK_CONTAINER (widget)->border_width + BORDER_SPACING
       + ((allocation->height - child_allocation.height) - child_allocation.x)/2; /* center pixmaps vertically */
-    real_allocation.x += child_allocation.width + child_allocation.x;
-    real_allocation.width -= child_allocation.width + child_allocation.x;
-
     gtk_widget_size_allocate (pmenu_item->pixmap, &child_allocation);
   }
 
-  menu_item = GTK_MENU_ITEM (widget);
-  bin = GTK_BIN (widget);
-  
-  if (bin->child)
-    {
-      gint xspace, yspace;
-
-      xspace = GTK_CONTAINER (widget)->border_width +
-	widget->style->klass->xthickness + BORDER_SPACING;
-      yspace = GTK_CONTAINER (widget)->border_width +
-	widget->style->klass->ythickness;
-      child_allocation.x = (xspace + real_allocation.x - allocation->x);
-      child_allocation.y = (yspace);
-      child_allocation.width = MAX (1, (gint)real_allocation.width - xspace * 2);
-      child_allocation.height = MAX (1, (gint)real_allocation.height - yspace * 2);
-      child_allocation.x += GTK_MENU_ITEM (widget)->toggle_size;
-      child_allocation.width -= GTK_MENU_ITEM (widget)->toggle_size;
-      if (menu_item->submenu && menu_item->show_submenu_indicator)
-	child_allocation.width -= 21;
-      
-      gtk_widget_size_allocate (bin->child, &child_allocation);
-    }
-
-  if (GTK_WIDGET_REALIZED (widget))
-    gdk_window_move_resize (widget->window,
-                            allocation->x, allocation->y,
-                            allocation->width, allocation->height);
-
-  if (menu_item->submenu)
-    gtk_menu_reposition (GTK_MENU (menu_item->submenu));
+  if(GTK_WIDGET_CLASS(parent_class)->size_allocate)
+    GTK_WIDGET_CLASS(parent_class)->size_allocate(widget, allocation);
 }
 
 static void
