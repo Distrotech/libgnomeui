@@ -1,4 +1,4 @@
-# $(datadir)/gtkrc.ja
+# $(datadir)/gtkrc.ko
 #
 # This file is needed for the Korean users.
 # The fonts are changed from the original gtkrc.
@@ -7,8 +7,6 @@
 # Changwoo Ryu <cwryu@adam.kaist.ac.kr>
 #
 
-# $(datadir)/gtkrc
-
 style "GnomeScores_CurrentPlayer_style"
 {
   fg[NORMAL] = {1.0, 0.0, 0.0}
@@ -16,7 +14,8 @@ style "GnomeScores_CurrentPlayer_style"
 
 style "GnomeScores_Logo_style"
 {
-  fontset = "-freefont-garamond-*-*-*-*-24-170-*-*-*-*-iso8859-1,-*-*-*-*-*--24-*-*-*-*-*-ksc5601.1987-*"
+  fontset = "-freefont-garamond-*-*-*-*-24-170-*-*-*-*-iso8859-1,
+-*-*-*-*-*--24-*-*-*-*-*-ksc5601.1987-*"
   fg[NORMAL] = {0.0, 0.0, 1.0}
 }
 
@@ -27,7 +26,8 @@ style "GnomeAbout_DrawingArea_style"
 
 style "GnomeAbout_Title_style"
 {
-  fontset = "-adobe-helvetica-bold-r-normal-*-18-*-*-*-*-*-*-*,-*-*-bold-*-*--18-*-*-*-*-*-ksc5601.1987-*"
+  fontset = "-adobe-helvetica-bold-r-normal-*-18-*-*-*-*-*-*-*,
+-*-*-bold-*-*--18-*-*-*-*-*-ksc5601.1987-*"
 }
 
 style "GnomeAbout_Copyright_style"
