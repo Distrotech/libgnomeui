@@ -74,9 +74,9 @@ typedef struct {
   gchar * extension; /* The file extension, without the period.
 			This implies the type of the data field. */
   gpointer data;     /* Data loaded from the file */
-  /* Private after here - don't use, they should be moved 
-     somewhere nicer eventually */
   GList * submenus;  /* NULL if there are none */
+  /* Private after here - don't use, they should be moved 
+     somewhere nicer eventually? */
   GnomeAppsMenu * parent;
   guint in_destroy : 1;
 } GnomeAppsMenu;
@@ -131,11 +131,19 @@ typedef struct {
   GnomeAppsMenuLoadFunc load_func;
   GnomeAppsMenuGtkMenuItemFunc menu_item_func;
 } GnomeAppsMenuVariety;
+
+GnomeAppsMenuVariety * 
+gnome_apps_menu_variety_new( gchar * extension,
+			     GnomeAppsMenuLoadFunc load_func,
+			     GnomeAppsMenuGtkMenuItemFunc menu_item_func );
        
 /* The desktop entry variety is already registered by default,
    with gnome_desktop_entry_load () as LoadFunc,
    and GNOME_APPS_MENU_DENTRY_EXTENSION as extension,
-   and a private function to create menuitems. */
+   and a private function to create menuitems. 
+   
+   This function owns and will destroy your variety, so
+   no need to. The destroy function isn't even public. */
 
 void gnome_apps_menu_register_variety(GnomeAppsMenuVariety * v);
 

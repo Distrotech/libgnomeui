@@ -1,3 +1,10 @@
+Fri Apr 10 00:14:03 1998  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-appsmenu.h (gnome_apps_menu_variety_new): 
+	New function.
+	* gnome-appsmenu.c: Continued implementation. Variety
+	registration is done, load and GtkMenu creation isn't.
+
 Thu Apr  9 23:25:29 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-appsmenu.h: Added basic menu-manipulation functions.

@@ -16,7 +16,123 @@
  */
 
 #include "gnome-appsmenu.h"
+#include <string.h>
 
+/* Use a dotfile, so people won't try to edit manually
+   unless they really know what they're doing. */
+
+#define GNOME_APPS_MENU_ROOT_DIR ".Gnome Apps Menu"
+
+static GList * varieties = NULL;
+
+void gnome_apps_menu_register_variety(GnomeAppsMenuVariety * v)
+{
+  g_return_if_fail(v != NULL);
+  g_list_append(varieties, v);
+}
+
+GnomeAppsMenuVariety * 
+gnome_apps_menu_variety_new( gchar * extension,
+			     GnomeAppsMenuLoadFunc load_func,
+			     GnomeAppsMenuGtkMenuItemFunc menu_item_func )
+{
+  GnomeAppsMenuVariety * v;
+
+  g_return_val_if_fail(extension != NULL, NULL);
+  g_return_val_if_fail(load_func != NULL, NULL);
+  /* OK to have no menu_item_func */
+  
+  v = g_new(GnomeAppsMenuVariety, 1);
+  
+  v->extension = g_strdup(extension);
+  v->load_func = load_func;
+  v->menu_item_func = menu_item_func;
+
+  return v;
+}
+
+static void 
+gnome_apps_menu_variety_destroy( GnomeAppsMenuVariety * v )
+{
+  g_return_if_fail ( v != NULL );
+  
+  g_free(v->extension);
+  g_free(v);
+}
+
+static void clear_varieties(void)
+{
+  GnomeAppsMenuVariety * v;
+  GList * first = varieties;
+
+  while ( varieties ) {
+    v = (GnomeAppsMenuVariety *)varieties->data;
+    gnome_apps_menu_variety_destroy(v);
+    varieties = g_list_next(varieties);
+  }
+  g_list_free(first);
+  varieties = NULL;
+}
+
+static void make_default_varieties(void)
+{
+  GnomeAppsMenuVariety * v;
+
+  v = gnome_apps_menu_variety_new( GNOME_APPS_MENU_DENTRY_EXTENSION,
+				   gnome_desktop_entry_load,
+				   NULL /* FIXME */ );
+  
+  gnome_apps_menu_register_variety(v);
+}
+
+static GnomeAppsMenuLoadFunc get_func(gchar * filename,
+				      /* load_func if TRUE,
+					 menu_item_func if FALSE */
+				      gboolean load_func)
+{
+  GList * list;
+  GnomeAppsMenuVariety * v;
+
+  list = varieties;
+
+  while ( list ) {
+    v = (GnomeAppsMenuVariety *)list->data;
+    g_assert ( v != NULL );
+
+    if ( strstr(filename, 
+		v->extension) ) {
+      if (load_func) {
+	return v->load_func;
+      }
+      else {
+	return v->menu_item_func;
+      }
+    }
+    
+    list = g_list_next(list);
+  }
+
+  return NULL; /* didn't find an appropriate extension */
+}
+
+/* FIXME these two will be based on the panel/menu.c code */
+
+GnomeAppsMenu * gnome_apps_menu_load(gchar * directory)
+{
+  GnomeAppsMenuLoadFunc load_func;
+  g_warning("Not implemented\n");
+}
+
+GtkWidget * gtk_menu_new_from_apps_menu(GnomeAppsMenu * gam)
+{
+  GnomeAppsMenuGtkMenuItemFunc menu_item_func;
+  g_warning("Not implemented\n");
+}
+
+/****************************************************
+  Remaining functions are for manipulating the apps_menu
+  trees. Don't relate to config files. 
+  *******************************************/
 
 GnomeAppsMenu * gnome_apps_menu_new(void)
 {
@@ -28,7 +144,7 @@ GnomeAppsMenu * gnome_apps_menu_new(void)
   gam->in_destroy = FALSE;
 }
 
-/* Used in foreach */
+/* GFunc for the g_list_foreach() call  */
 static void gnome_apps_menu_destroy_one ( gpointer menu, 
 					  gpointer data )
 {
@@ -178,7 +294,3 @@ void gnome_apps_menu_foreach(GnomeAppsMenu * dir,
   }
 }
     
-
-  
-
-
