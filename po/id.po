@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-06 15:30+0700\n"
+"POT-Creation-Date: 2004-04-20 00:17+0200\n"
 "PO-Revision-Date: 2003-06-12 14:50+0700\n"
 "Last-Translator: Mohammad DAMT <mdamt@bisnisweb.com>\n"
 "Language-Team: Indonesia <id@li.org>\n"
@@ -139,7 +139,6 @@ msgstr "Informasi tentang %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -197,7 +196,6 @@ msgid "_Game"
 msgstr "_Gim"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Bantuan"
 
@@ -388,11 +386,11 @@ msgstr "Konfigurasikan aplikasi"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Informasi Program"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Informasi tentang aplikasi ini"
 
@@ -419,7 +417,7 @@ msgstr "Buat window baru"
 msgid "_Close This Window"
 msgstr "_Tutup Window Ini"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Tutup window ini"
 
@@ -614,16 +612,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Password Anda akan dikirimkan lewat jalur terenkripsi"
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:287
+#: libgnomeui/gnome-authentication-manager.c:295
 msgid "Authentication Required"
 msgstr "Anda harus login terlebih dahulu"
 
-#: libgnomeui/gnome-authentication-manager.c:280
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid " domain %s"
 msgstr " domain %s"
 
-#: libgnomeui/gnome-authentication-manager.c:283
+#: libgnomeui/gnome-authentication-manager.c:291
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Anda harus login dulu sebelum bisa masuk ke %s\n"
@@ -1346,6 +1344,7 @@ msgstr "Pustaka GUI GNOME"
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Ada segmentation fault terjadi; tidak dapat menampilkan dialog error\n"
 
+#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
@@ -1392,18 +1391,17 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Cara pakai: gnome_segv2 nama_aplikasi signum\n"
 
-#: libgnomeui/gnome_segv.c:154
+#: libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
 msgstr "Jalankan _Ulang Aplikasi Ini"
 
-#: libgnomeui/gnome_segv.c:166
+#: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
 msgstr "Ber_i tahu Para Pembuat Program ini"
 
-#: libgnomeui/gnome_segv.c:177
+#: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_Debug"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Keluar dari tes"
+#~ msgid "Exit the test"
+#~ msgstr "Keluar dari tes"

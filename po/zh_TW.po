@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-22 02:11+0100\n"
+"POT-Creation-Date: 2004-04-20 00:17+0200\n"
 "PO-Revision-Date: 2003-06-12 08:21+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -612,16 +612,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "您的密碼會以加密的方式傳送。"
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:289
+#: libgnomeui/gnome-authentication-manager.c:295
 msgid "Authentication Required"
 msgstr "需要認證"
 
-#: libgnomeui/gnome-authentication-manager.c:282
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid " domain %s"
 msgstr ""
 
-#: libgnomeui/gnome-authentication-manager.c:285
+#: libgnomeui/gnome-authentication-manager.c:291
 #, fuzzy, c-format
 msgid "You must log in to access %s\n"
 msgstr ""
@@ -1373,16 +1373,16 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法：gnome_segv2 程式名稱 訊號號碼\n"
 
-#: libgnomeui/gnome_segv.c:154
+#: libgnomeui/gnome_segv.c:153
 #, fuzzy
 msgid "_Restart Application"
 msgstr "離開程式"
 
-#: libgnomeui/gnome_segv.c:166
+#: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
 msgstr ""
 
-#: libgnomeui/gnome_segv.c:177
+#: libgnomeui/gnome_segv.c:176
 #, fuzzy
 msgid "_Debug"
 msgstr "偵錯"

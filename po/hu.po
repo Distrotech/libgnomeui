@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-23 04:10+0100\n"
+"POT-Creation-Date: 2004-04-20 00:17+0200\n"
 "PO-Revision-Date: 2004-04-14 16:01+0200\n"
 "Last-Translator: Laszlo Dvornik <dvornikl@mailbox.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -123,7 +123,8 @@ msgid "Translator credits"
 msgstr "Fordítók"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "A fordítók listája. Ez a karakterlánc fordítandó."
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
@@ -141,7 +142,6 @@ msgstr "%s névjegye"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fájl"
 
@@ -199,7 +199,6 @@ msgid "_Game"
 msgstr "_Játék"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Súgó"
 
@@ -390,11 +389,11 @@ msgstr "Az alkalmazás beállítása"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Névjegy"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Az alkalmazás névjegye"
 
@@ -421,7 +420,7 @@ msgstr "Új ablakot hoz létre"
 msgid "_Close This Window"
 msgstr "_Ablak bezárása"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "A jelenlegi ablak bezárása"
 
@@ -616,16 +615,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "A jelszava titkosítással kerül átvitelre."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:289
+#: libgnomeui/gnome-authentication-manager.c:295
 msgid "Authentication Required"
 msgstr "Hitelesítés szükséges"
 
-#: libgnomeui/gnome-authentication-manager.c:282
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid " domain %s"
 msgstr " %s tartomány"
 
-#: libgnomeui/gnome-authentication-manager.c:285
+#: libgnomeui/gnome-authentication-manager.c:291
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Be kell jelentkeznie a(z) %s eléréséhez.\n"
@@ -864,7 +863,8 @@ msgstr "Előzmény ID"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr "A fájlbejegyzés egyedi azonosítója. Az előzménylistában ez lesz használva."
+msgstr ""
+"A fájlbejegyzés egyedi azonosítója. Az előzménylistában ez lesz használva."
 
 #: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
@@ -1345,7 +1345,8 @@ msgstr "GNOME GUI programkönyvtár"
 #: libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Többszörös szegmentációs hiba; hiba-párbeszédpanel megjelenítése sikertelen\n"
+msgstr ""
+"Többszörös szegmentációs hiba; hiba-párbeszédpanel megjelenítése sikertelen\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
@@ -1394,18 +1395,17 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Használat: gnome_segv2 appname signum\n"
 
-#: libgnomeui/gnome_segv.c:154
+#: libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
 msgstr "Az alkalmazás új_raindítása"
 
-#: libgnomeui/gnome_segv.c:166
+#: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
 msgstr "A _fejlesztők értesítése"
 
-#: libgnomeui/gnome_segv.c:177
+#: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_Hibakeresés"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Kilépés a tesztből"
+#~ msgid "Exit the test"
+#~ msgstr "Kilépés a tesztből"

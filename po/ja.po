@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-22 02:11+0100\n"
+"POT-Creation-Date: 2004-04-20 00:17+0200\n"
 "PO-Revision-Date: 2004-02-26 22:53+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -615,16 +615,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "パスワードを暗号化して送信します。"
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:289
+#: libgnomeui/gnome-authentication-manager.c:295
 msgid "Authentication Required"
 msgstr "認証を必要としています"
 
-#: libgnomeui/gnome-authentication-manager.c:282
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid " domain %s"
 msgstr " ドメイン %s"
 
-#: libgnomeui/gnome-authentication-manager.c:285
+#: libgnomeui/gnome-authentication-manager.c:291
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "%s にアクセスするためにログインして下さい\n"
@@ -1389,15 +1389,15 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法: gnome_segv2 アプリケーション名 シグナル番号\n"
 
-#: libgnomeui/gnome_segv.c:154
+#: libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
 msgstr "アプリの再起動(_R)"
 
-#: libgnomeui/gnome_segv.c:166
+#: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
 msgstr "開発者へ通知する(_I)"
 
-#: libgnomeui/gnome_segv.c:177
+#: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "デバッグする(_D)"
 

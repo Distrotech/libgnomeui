@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui-2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-09 20:07+0530\n"
+"POT-Creation-Date: 2004-04-20 00:17+0200\n"
 "PO-Revision-Date: 2004-02-29 20:47+0530\n"
 "Last-Translator: Nirav, Ankit, Ankur, Atit, Bhavin, Kartik, Khushbu, Sweta. "
 "<magnet@magnet-i.com>\n"
@@ -171,7 +171,6 @@ msgstr "%s ના વિશે"
 # test-gnome/testgnome.xml.h:5
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ફાઇલ (_F)"
 
@@ -244,7 +243,6 @@ msgstr "રમત (_G)"
 # libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 # test-gnome/testgnome.xml.h:6
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "મદદ (_H)"
 
@@ -474,12 +472,12 @@ msgstr "કાર્યક્રમની રુપરેખા બનાવો"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "ના વિશે (_A)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "આ કાર્યક્રમ વિશે"
 
@@ -512,7 +510,7 @@ msgid "_Close This Window"
 msgstr "આ વિન્ડો બંધ કરો (_C)"
 
 # libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "વર્તમાન વિન્ડો બંધ કરો"
 
@@ -745,16 +743,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "તમારો પાસવર્ડ ગુપ્ત કોડમાં ફેરવયા પછી માેકલાશે."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:287
+#: libgnomeui/gnome-authentication-manager.c:295
 msgid "Authentication Required"
 msgstr "પ્રમાણિત કરવું જરૂરી છે"
 
-#: libgnomeui/gnome-authentication-manager.c:280
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid " domain %s"
 msgstr " પ્રદેશ %s"
 
-#: libgnomeui/gnome-authentication-manager.c:283
+#: libgnomeui/gnome-authentication-manager.c:291
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "પ્રાપ્ત કરવા માટે તમારે પ્રવેશ કરવો પડશે %s\n"
@@ -1609,6 +1607,7 @@ msgstr "જીનોમ GUI પુસ્તકાલય"
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "ઘણાંબધાં વિભાગોની ભૂલો થઇ છે; સંવાદ દર્શાવી શકતું નથી\n"
 
+#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
@@ -1654,22 +1653,21 @@ msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "વપરાશ: gnome_segv2 appname signum\n"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: libgnomeui/gnome_segv.c:154
+#: libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
 msgstr "કાર્યક્રમ ફરીથી શરુ કરો (_R)"
 
-#: libgnomeui/gnome_segv.c:166
+#: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
 msgstr "વિકસાવનારાઓને જાણ કરો (_I)"
 
-#: libgnomeui/gnome_segv.c:177
+#: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "ભૂલ શોધો (_D)"
 
 # test-gnome/testgnome.xml.h:3
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "ચકાસણીમાંથી બહાર નીકળો"
+#~ msgid "Exit the test"
+#~ msgstr "ચકાસણીમાંથી બહાર નીકળો"
 
 # libgnomeui/gnome-app-helper.c:171
 #~ msgid "Color Selector"

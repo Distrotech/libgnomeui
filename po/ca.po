@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-23 15:49+0100\n"
+"POT-Creation-Date: 2004-04-20 00:17+0200\n"
 "PO-Revision-Date: 2004-03-23 15:53+0100\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <tradgnome@softcatala.org>\n"
@@ -141,7 +141,6 @@ msgstr "Quant a %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitxer"
 
@@ -199,7 +198,6 @@ msgid "_Game"
 msgstr "_Joc"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_juda"
 
@@ -390,11 +388,11 @@ msgstr "Configura l'aplicació"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Quant a"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Quant a aquesta aplicació"
 
@@ -421,7 +419,7 @@ msgstr "Crea una nova finestra"
 msgid "_Close This Window"
 msgstr "_Tanca aquesta finestra"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Tanca la finestra actual"
 
@@ -617,16 +615,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "La vostra contrasenya es transmetrà xifrada."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:289
+#: libgnomeui/gnome-authentication-manager.c:295
 msgid "Authentication Required"
 msgstr "Es requereix autenticació"
 
-#: libgnomeui/gnome-authentication-manager.c:282
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid " domain %s"
 msgstr " domini %s"
 
-#: libgnomeui/gnome-authentication-manager.c:285
+#: libgnomeui/gnome-authentication-manager.c:291
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Heu d'identificar-vos per a accedir a %s\n"
@@ -948,7 +946,9 @@ msgstr "Utilitza el GtkFileChooser"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "Si s'ha d'usar el nou giny FtkFileChooser o el giny GtkFileSelection per a seleccionar fitxers."
+msgstr ""
+"Si s'ha d'usar el nou giny FtkFileChooser o el giny GtkFileSelection per a "
+"seleccionar fitxers."
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1399,27 +1399,28 @@ msgstr "procés: %d: %s"
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr "Podeu informar els desenvolupadors de què ha passat per a ajudar-los a arreglar-ho. O podeu reiniciar l'aplicació ara mateix."
+msgstr ""
+"Podeu informar els desenvolupadors de què ha passat per a ajudar-los a "
+"arreglar-ho. O podeu reiniciar l'aplicació ara mateix."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Forma d'ús: gnome_segv2 nomapp numsig\n"
 
-#: libgnomeui/gnome_segv.c:154
+#: libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
 msgstr "_Reinicia l'aplicació"
 
-#: libgnomeui/gnome_segv.c:166
+#: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
 msgstr "_Informa els desenvolupadors"
 
-#: libgnomeui/gnome_segv.c:177
+#: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_Depuració"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Surt del test"
+#~ msgid "Exit the test"
+#~ msgstr "Surt del test"
 
 #~ msgid "Color Selector"
 #~ msgstr "Seleccionador de color"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui-2.0.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-22 02:11+0100\n"
+"POT-Creation-Date: 2004-04-20 00:17+0200\n"
 "PO-Revision-Date: 2003-08-25 16:04+0530\n"
 "Last-Translator: G Karunakar <karunakar@freedomink.org>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
@@ -738,16 +738,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "आपका पासवर्ड गुप्त रुप में भेजा जाएगा"
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:289
+#: libgnomeui/gnome-authentication-manager.c:295
 msgid "Authentication Required"
 msgstr "प्रमाणिकता जरुरी"
 
-#: libgnomeui/gnome-authentication-manager.c:282
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid " domain %s"
 msgstr ""
 
-#: libgnomeui/gnome-authentication-manager.c:285
+#: libgnomeui/gnome-authentication-manager.c:291
 #, fuzzy, c-format
 msgid "You must log in to access %s\n"
 msgstr ""
@@ -1645,16 +1645,16 @@ msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "प्रयोग: gnome_segv2 appname signum\n"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: libgnomeui/gnome_segv.c:154
+#: libgnomeui/gnome_segv.c:153
 #, fuzzy
 msgid "_Restart Application"
 msgstr "अनुप्रयोग के बाहर"
 
-#: libgnomeui/gnome_segv.c:166
+#: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
 msgstr ""
 
-#: libgnomeui/gnome_segv.c:177
+#: libgnomeui/gnome_segv.c:176
 #, fuzzy
 msgid "_Debug"
 msgstr "त्रुटि सुधार"

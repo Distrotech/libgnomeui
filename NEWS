@@ -1,5 +1,26 @@
+libgnomeui 2.6.1 "Magmoor"
+--------------------------
+
+What's new since 2.6.0
+
+* Improvements:
+	- File system loading notification support (Federico Mena Quintero)
+
+* Bug fixes:
+	- Authentication manager fixes (Alexander Larsson)
+	- File system fixes (Federico, Alexander)
+	- Various bugfixes (Padraig O'Brian, Anders Carlsson)
+
+* Translations:
+	- Added Punjabi translation (Amanpreet Singh Alam)
+	- Added Gujarati translation (Gujurati Team)
+	- Added Maori translation (John C Barstow)
+	- Added Basque translation (Iñaki Larrañaga)
+	- Added Afrikaans translation (Zuza Software Foundation)
+	- Various updated translations (ca, et, eu, he, hu, id, is, nn, wa)
+
 libgnomeui 2.6.0 "Zeb"
------------------------
+----------------------
 
 What's new since 2.4
 

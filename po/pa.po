@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD 11\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-22 19:54+0530\n"
+"POT-Creation-Date: 2004-04-20 00:17+0200\n"
 "PO-Revision-Date: 2004-03-17 09:13+0530\n"
 "Last-Translator: Amanpreet Singh Alam <amanlinux@netscape.net>\n"
 "Language-Team: Punjabi\n"
@@ -141,7 +141,6 @@ msgstr "%s ਬਾਰੇ"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ਫਾੲਿਲ਼"
 
@@ -199,7 +198,6 @@ msgid "_Game"
 msgstr "ਖੇਡ"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "ਸਹਾੲਿਤਾ"
 
@@ -390,11 +388,11 @@ msgstr "ਕਾਰਜ ਦੀ ਸੰਰਚਨਾ"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "ਬਾਰੇ"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "ੲਿਸ ਕਾਰਜ ਬਾਰੇ"
 
@@ -421,7 +419,7 @@ msgstr "ਨਵ੾ ਝਰੋਖਾ ਬਣਾੳੁ"
 msgid "_Close This Window"
 msgstr "ੲਿਹ ਝਰੋਖਾ ਬੰਦ ਕਰੋ"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "ਮੌਜੂਦਾ ਝਰੋਖਾ ਬੰਦ ਕਰੋ"
 
@@ -616,16 +614,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "ਤੁਹਾਡਾ ਗੁਪਤ-ਕੋਡ ਨੰੂ ੳੁਲਝਾ ਕੇ ਭੇਜਿਅਾ ਜਾਵੇਗਾ"
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:289
+#: libgnomeui/gnome-authentication-manager.c:295
 msgid "Authentication Required"
 msgstr "ਪ੍ਮਾਣਕਤਾ ਲੋੜੀਦੀ ਹੈ"
 
-#: libgnomeui/gnome-authentication-manager.c:282
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid " domain %s"
 msgstr " ਡੋਮੇਨ %s"
 
-#: libgnomeui/gnome-authentication-manager.c:285
+#: libgnomeui/gnome-authentication-manager.c:291
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "ਤੁਹਾਨੰੂ %s ਤੱਕ ਪਹੁੰਚਣ ਲੲੀ ਦਾਖਲੇ (ਲਾਗਅਾਨ) ਦੀ ਲੋੜ ਹੈ੤ \n"
@@ -1337,6 +1335,7 @@ msgstr "ਗਨੋਮ ਜੀਯੂਅਾੲੀ ਲਾੲਿਬਰੇਰੀ"
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "ਬਹੁ ਸਿਗਮਿਨਟੇਸ਼ਨ ਤਰੁੱਟੀ ਅਾੲੀ ਹੈ; ਗਲਤੀ ਤਖਤੀ ਨਹੀ ਵੇਖਾ ਸਕਦਾ ਹੈ\n"
 
+#. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
@@ -1383,24 +1382,23 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "ਵਰਤੋਃgnome_segv2 appname signum\n"
 
-#: libgnomeui/gnome_segv.c:154
+#: libgnomeui/gnome_segv.c:153
 #, fuzzy
 msgid "_Restart Application"
 msgstr "ਕਾਰਜ ਬੰਦ ਕਰੋ"
 
-#: libgnomeui/gnome_segv.c:166
+#: libgnomeui/gnome_segv.c:165
 #, fuzzy
 msgid "_Inform Developers"
 msgstr "ਵਿਕਾਸਵਾਦੀਅ੾ ਲੲੀ ਜਾਣਕਾਰੀ"
 
-#: libgnomeui/gnome_segv.c:177
+#: libgnomeui/gnome_segv.c:176
 #, fuzzy
 msgid "_Debug"
 msgstr "ਡੀਬੱਗ"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "ਜ੾ਚ ਤੋ ਬਾਹਰ"
+#~ msgid "Exit the test"
+#~ msgstr "ਜ੾ਚ ਤੋ ਬਾਹਰ"
 
 #~ msgid "Color Selector"
 #~ msgstr "ਰੰਗ ਚੋਣਕਾਰ"

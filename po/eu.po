@@ -8,14 +8,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
-"POT-Creation-Date: 2004-04-16 12:10+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-04-20 00:17+0200\n"
 "PO-Revision-Date: 2004-04-16 12:17+0200\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.0.2\n"
 
 #: demos/mdi_demo.c:128
@@ -125,8 +125,10 @@ msgstr ""
 "(<hizkpol@ej-gv.es>)"
 
 #: libgnomeui/gnome-about.c:432
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Itzultzaileen kredituak. Kate honek itzulgarri gisa markatuta egon behar du"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Itzultzaileen kredituak. Kate honek itzulgarri gisa markatuta egon behar du"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -143,7 +145,6 @@ msgstr "%s(r)i buruz "
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitxategia"
 
@@ -201,7 +202,6 @@ msgid "_Game"
 msgstr "J_okoa"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "La_guntza"
 
@@ -392,11 +392,11 @@ msgstr "Aplikazioa konfiguratzen du"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "Honi _buruz"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Aplikazio honi buruz"
 
@@ -423,7 +423,7 @@ msgstr "Leiho berria sortzen du"
 msgid "_Close This Window"
 msgstr "It_xi leiho hau"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Uneko leihoa ixten du"
 
@@ -618,16 +618,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Zure pasahitza enkriptatuta transmitituko da."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:287
+#: libgnomeui/gnome-authentication-manager.c:295
 msgid "Authentication Required"
 msgstr "Autentifikazioa behar da"
 
-#: libgnomeui/gnome-authentication-manager.c:280
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid " domain %s"
 msgstr " %s domeinua "
 
-#: libgnomeui/gnome-authentication-manager.c:283
+#: libgnomeui/gnome-authentication-manager.c:291
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Saioa hasi behar duzu \"%s\" atzitzeko.\n"
@@ -739,7 +739,8 @@ msgstr "Hautatu ordua zerrendatik"
 
 #: libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date zaharkitua dago, erabili gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date zaharkitua dago, erabili gnome_date_edit_get_time"
 
 #: libgnomeui/gnome-druid-page-standard.c:121
 #: libgnomeui/gnome-font-picker.c:155
@@ -894,7 +895,8 @@ msgstr "Modala"
 
 #: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
-msgstr "'Arakatu fitxategia' leihoak modala izan behar duen ala ez adierazten du."
+msgstr ""
+"'Arakatu fitxategia' leihoak modala izan behar duen ala ez adierazten du."
 
 #: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
@@ -949,8 +951,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Fitxategiak hautatzeko GtkFileChooser edo GtkFileSelection widge-a erabili behar "
-"den adierazten du."
+"Fitxategiak hautatzeko GtkFileChooser edo GtkFileSelection widge-a erabili "
+"behar den adierazten du."
 
 #: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
@@ -1346,6 +1348,7 @@ msgstr "GNOME GUI liburutegia"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Segmentazio-hutsegite asko gertatu dira; ezin da errorearen elkarrizketa-"
@@ -1353,6 +1356,7 @@ msgstr ""
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1390,8 +1394,8 @@ msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
-"Garatzaileak gertatutakoari buruz jakinarazi ditzakezu arazoa konpontzeko. Edo "
-"bestela, aplikazioa berrabia dezakezu."
+"Garatzaileak gertatutakoari buruz jakinarazi ditzakezu arazoa konpontzeko. "
+"Edo bestela, aplikazioa berrabia dezakezu."
 
 #: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
@@ -1409,9 +1413,8 @@ msgstr "_Jakinarazi garatzaileei"
 msgid "_Debug"
 msgstr "_Araztu"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "Irten probatik"
+#~ msgid "Exit the test"
+#~ msgstr "Irten probatik"
 
 #~ msgid "Color Selector"
 #~ msgstr "Kolore-hautatzailea"
@@ -1435,4 +1438,3 @@ msgstr "Irten probatik"
 #~ msgstr ""
 #~ "Bisitatu GNOMEren aplikazioen hutsegiteen orria informazio gehiago "
 #~ "lortzeko"
-
