@@ -889,7 +889,8 @@ client_parse_func (poptContext ctx,
 /**
  * gnome_client_disable_master_connection
  *
- * Description:
+ * Description: Don't connect the master client to the session manager. Usually 
+ * invoked by users when they pass the --sm-disable argument to a Gnome application.
  **/
 
 void         
