@@ -554,6 +554,7 @@ setup_uline_accel (GtkMenuShell  *menu_shell,
 		   GtkWidget     *menu_item,
 		   guint          keyval)
 {
+#if 0 /* FIXME FIXME FIXME */
 	if (keyval != GDK_VoidSymbol) {
 		if (GTK_IS_MENU (menu_shell))
 			gtk_widget_add_accelerator (menu_item,
@@ -568,6 +569,7 @@ setup_uline_accel (GtkMenuShell  *menu_shell,
 						    keyval, GDK_MOD1_MASK,
 						    0);
 	}
+#endif
 }
 
 /* Callback to display hint in the statusbar when a menu item is 

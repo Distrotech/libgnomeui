@@ -1,3 +1,12 @@
+2001-03-24  Martin Baulig  <baulig@suse.de>
+
+	* gnome-app-helper.c (setup_uline_accel): Commented out
+	for the moment [FIXME: fix this].
+
+	* gnome-i18nP.h: New file. Copied from libgnome-2.
+	[FIXME: We really need to find a solution for this; glib has
+	its own, gtk+ has its own, ....]
+
 2001-03-21  Martin Baulig  <baulig@suse.de>
 
 	The canvas is now in its own libgnomecanvas-2 top-level module.
