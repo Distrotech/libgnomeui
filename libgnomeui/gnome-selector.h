@@ -113,7 +113,7 @@ struct _GnomeSelectorClass {
                                        gboolean                  defaultp);
 
     void     (*set_selection_mode)    (GnomeSelector            *selector,
-                                       guint                     mode);
+                                       GtkSelectionMode          mode);
     GSList * (*get_selection)         (GnomeSelector            *selector);
 
     void     (*selection_changed)     (GnomeSelector            *selector);

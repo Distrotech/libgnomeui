@@ -309,9 +309,9 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   set_selection_mode),
-			gtk_marshal_VOID__INT,
-			GTK_TYPE_NONE,
-			1, GTK_TYPE_INT);
+			gtk_marshal_VOID__BOXED,
+			GTK_TYPE_NONE, 1,
+			GTK_TYPE_SELECTION_MODE);
     gnome_selector_signals [GET_SELECTION_SIGNAL] =
 	gtk_signal_new ("get_selection",
 			GTK_RUN_LAST,

@@ -1,5 +1,8 @@
 2000-12-08  Martin Baulig  <baulig@suse.de>
 
+	* gnome-selector.h (GnomeSelector): The argument of the
+	"set_selection_mode" signal is a GtkSelectionMode, not a gint.
+
 	* gnome-selector.h (GnomeSelector): Renamed "get_filename" signal
 	to "get_uri" and "set_filename" signal to "set_uri".
 	(gnome_selector_get_filename): Renamed to gnome_selector_get_uri().
