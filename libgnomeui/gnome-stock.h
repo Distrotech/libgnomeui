@@ -494,7 +494,7 @@ GtkWidget             *gnome_stock_or_ordinary_button (const char *type);
 #define GNOME_STOCK_MENU_EXEC         "Menu_Exec"
 
 #define GNOME_STOCK_MENU_ALIGN_LEFT     "Menu_Left"
-#define GNOME_STOCK_MENU_ALIGN_RIGHT    "MEnu_Right"
+#define GNOME_STOCK_MENU_ALIGN_RIGHT    "Menu_Right"
 #define GNOME_STOCK_MENU_ALIGN_CENTER   "Menu_Center"
 #define GNOME_STOCK_MENU_ALIGN_JUSTIFY  "Menu_Justify"
 
