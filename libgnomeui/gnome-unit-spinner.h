@@ -1,0 +1,62 @@
+/* Dia -- an diagram creation/manipulation program
+ * Copyright (C) 1998, 1999 Alexander Larsson
+ *
+ * diaunitspinner.[ch] -- a spin button widget for length measurements.
+ * Copyright (C) 1999 James Henstridge
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
+
+#ifndef GNOME_UNIT_SPINNER_H
+#define GNOME_UNIT_SPINNER_H
+
+#include <gtk/gtk.h>
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-paper.h>
+
+BEGIN_GNOME_DECLS
+
+#define GNOME_UNIT_SPINNER(obj) GTK_CHECK_CAST(obj, gnome_unit_spinner_get_type(), GnomeUnitSpinner)
+#define GNOME_UNIT_SPINNER_CLASS(klass) GTK_CHECK_CLASS_CAST(klass, gnome_unit_spinner_get_type(), GnomeUnitSpinnerClass)
+#define GNOME_IS_UNIT_SPINNER(obj) GTK_CHECK_TYPE(obj, gnome_unit_spinner_get_type())
+
+typedef struct _GnomeUnitSpinner GnomeUnitSpinner;
+typedef struct _GnomeUnitSpinnerClass GnomeUnitSpinnerClass;
+
+struct _GnomeUnitSpinner {
+  GtkSpinButton parent;
+
+  const GnomeUnit *adj_unit;
+};
+
+struct _GnomeUnitSpinnerClass {
+  GtkSpinButtonClass parent_class;
+};
+
+GtkType    gnome_unit_spinner_get_type     (void);
+GtkWidget *gnome_unit_spinner_new          (GtkAdjustment *adjustment,
+					    guint digits,
+					    const GnomeUnit *adj_unit);
+void       gnome_unit_spinner_set_value    (GnomeUnitSpinner *self,
+					    gfloat val,
+					    const GnomeUnit *unit);
+gfloat     gnome_unit_spinner_get_value    (GnomeUnitSpinner *self,
+					    const GnomeUnit *unit);
+void       gnome_unit_spinner_change_units (GnomeUnitSpinner *self,
+					    const GnomeUnit *unit);
+
+END_GNOME_DECLS
+
+#endif

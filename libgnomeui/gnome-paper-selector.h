@@ -1,21 +1,22 @@
-/* GnomePaperSelector widget 
- * Copyright (C) 1998 the Free Software Foundation
+/* Dia -- an diagram creation/manipulation program
+ * Copyright (C) 1998, 1999 Alexander Larsson
  *
- * Author: Dirk Luetjens <dirk@luedi.oche.de>
+ * diapagelayout.[ch] -- a page settings widget for dia.
+ * Copyright (C) 1999 James Henstridge
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- * This library is distributed in the hope that it will be useful,
+ * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 #ifndef GNOME_PAPER_SELECTOR_H
@@ -23,59 +24,94 @@
 
 #include <gtk/gtk.h>
 #include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-paper.h>
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_PAPER_SELECTOR(obj)         GTK_CHECK_CAST (obj, gnome_paper_selector_get_type (), GnomePaperSelector)
-#define GNOME_PAPER_SELECTOR_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, gnome_paper_selector_get_type (), GnomePaperSelectorClass)
-#define GNOME_IS_PAPER_SELECTOR(obj)      GTK_CHECK_TYPE (obj, gnome_paper_selector_get_type ())
+#define OLD_GNOME_SELECTOR_API
 
+#define GNOME_PAPER_SELECTOR(obj) GTK_CHECK_CAST(obj, gnome_paper_selector_get_type(), GnomePaperSelector)
+#define GNOME_PAPER_SELECTOR_CLASS(klass) GTK_CHECK_CLASS_CAST(klass, gnome_paper_selector_get_type(), GnomePaperSelectorClass)
+#define DIA_IS_PAGE_LAYOUT(obj) GTK_CHECK_TYPE(obj, gnome_paper_selector_get_type())
 
-typedef struct _GnomePaperSelector      GnomePaperSelector;
+typedef struct _GnomePaperSelector GnomePaperSelector;
 typedef struct _GnomePaperSelectorClass GnomePaperSelectorClass;
 
-struct _GnomePaperSelector {
-  GtkVBox vbox;
-  
-  GtkWidget *paper;
-  GtkWidget *width;
-  GtkWidget *height;
-  GtkWidget *unit;
-  GtkWidget *unit_label;
+typedef enum {
+  GNOME_PAPER_ORIENT_PORTRAIT,
+  GNOME_PAPER_ORIENT_LANDSCAPE
+} GnomePaperOrient;
 
-  gint paper_id;
-  gint width_id;
-  gint height_id;
+struct _GnomePaperSelector {
+  GtkTable parent;
+
+  /*<private>*/
+  const GnomeUnit *unit;
+  const GnomePaper *paper;
+
+  GtkWidget *paper_size, *paper_label;
+  GtkWidget *orient_portrait, *orient_landscape;
+  GtkWidget *tmargin, *bmargin, *lmargin, *rmargin;
+  GtkWidget *scaling;
+  GtkWidget *fittopage;
+
+  GtkWidget *darea;
+
+  GdkGC *gc;
+
+  /* position of paper preview */
+  gint x, y, width, height;
+
+  gboolean block_changed;
 };
 
 struct _GnomePaperSelectorClass {
-  GtkVBoxClass parent_class;
+  GtkTableClass parent_class;
+
+  void (*changed)(GnomePaperSelector *pl);
+  void (*fittopage)(GnomePaperSelector *pl);
 };
 
-guint		gnome_paper_selector_get_type	(void);
-GtkWidget	*gnome_paper_selector_new	(void);
+GtkType      gnome_paper_selector_get_type    (void);
+GtkWidget   *gnome_paper_selector_new(void);
+GtkWidget   *gnome_paper_selector_new_with_unit (const GnomeUnit *unit);
 
-gchar		*gnome_paper_selector_get_name	(GnomePaperSelector *gspaper);
-gfloat		gnome_paper_selector_get_width	(GnomePaperSelector *gspaper);
-gfloat		gnome_paper_selector_get_height	(GnomePaperSelector *gspaper);
-gfloat          gnome_paper_selector_get_left_margin   (GnomePaperSelector *gspaper);
-gfloat          gnome_paper_selector_get_right_margin  (GnomePaperSelector *gspaper);
-gfloat          gnome_paper_selector_get_top_margin    (GnomePaperSelector *gspaper);
-gfloat          gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspaper);
+const GnomePaper *gnome_paper_selector_get_paper (GnomePaperSelector *pl);
+void         gnome_paper_selector_set_paper   (GnomePaperSelector *pl,
+					       const gchar *paper);
+void         gnome_paper_selector_get_margins (GnomePaperSelector *pl,
+					       const GnomeUnit *unit,
+					       gfloat *tmargin,
+					       gfloat *bmargin,
+					       gfloat *lmargin,
+					       gfloat *rmargin);
+void         gnome_paper_selector_set_margins (GnomePaperSelector *pl,
+					       const GnomeUnit *unit,
+					       gfloat tmargin, gfloat bmargin,
+					       gfloat lmargin, gfloat rmargin);
+GnomePaperOrient gnome_paper_selector_get_orientation
+					      (GnomePaperSelector *pl);
+void         gnome_paper_selector_set_orientation (GnomePaperSelector *pl,
+						   GnomePaperOrient orient);
+gfloat       gnome_paper_selector_get_scaling (GnomePaperSelector *self);
+void         gnome_paper_selector_set_scaling (GnomePaperSelector *self,
+					       gfloat scaling);
 
-  /* These are still only stubs. */
-void		gnome_paper_selector_set_name	(GnomePaperSelector *gspaper,
-						 const gchar *name);
-void		gnome_paper_selector_set_width	(GnomePaperSelector *gspaper,
-						 gfloat width);
-void		gnome_paper_selector_set_height	(GnomePaperSelector *gspaper,
-						 gfloat height);
+void         gnome_paper_selector_get_effective_area (GnomePaperSelector *self,
+						      const GnomeUnit *unit,
+						      gfloat *width,
+						      gfloat *height);
+
+/* compatibility with old interface ... */
+#ifdef OLD_PAGE_SELECTOR_API
+gfloat gnome_paper_selector_get_width  (GnomePaperSelector *gspaper);
+gfloat gnome_paper_selector_get_height (GnomePaperSelector *gspaper);
+gfloat gnome_paper_selector_get_left_margin   (GnomePaperSelector *gspaper);
+gfloat gnome_paper_selector_get_right_margin  (GnomePaperSelector *gspaper);
+gfloat gnome_paper_selector_get_top_margin    (GnomePaperSelector *gspaper);
+gfloat gnome_paper_selector_get_bottom_margin (GnomePaperSelector *gspaper);
+#endif
 
 END_GNOME_DECLS
 
-#endif 
-
-
-
-
-
+#endif

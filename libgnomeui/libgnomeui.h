@@ -59,6 +59,7 @@
 /* Considering moving this to gnome-print, so this file 
    is deprecated but the API isn't */
 #include "libgnomeui/gnome-paper-selector.h"
+#include "libgnomeui/gnome-unit-spinner.h"
 #include "libgnomeui/gnome-popup-menu.h"
 #include "libgnomeui/gnome-popup-help.h"
 #include "libgnomeui/gnome-pixmap.h"

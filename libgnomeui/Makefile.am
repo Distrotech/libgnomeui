@@ -151,6 +151,7 @@ libgnomeui_la_SOURCES = \
 	gnome-stock-ids.c		\
         gnome-winhints.c		\
         gnome-paper-selector.c		\
+	gnome-unit-spinner.c		\
 	gnome-procbar.c			\
 	gnometypes.c			\
 	gtk-clock.c			\
@@ -222,6 +223,7 @@ gnome_headers = \
 	gnome-uidefs.h			\
         gnome-winhints.h		\
         gnome-paper-selector.h		\
+	gnome-unit-spinner.h		\
 	gnome-procbar.h			\
 	gtkdial.h			\
 	gtk-clock.h			\
@@ -315,6 +317,8 @@ EXTRA_DIST =					\
 	gnometypebuiltins_vars.c		\
 	gnometypebuiltins_ids.c			\
 	gnometypebuiltins_evals.c		\
+	portrait.xpm				\
+	landscape.xpm				\
 	$(oafinfo_DATA)
 
 libgnomeui_la_LDFLAGS = -version-info 43:0:0 -rpath $(libdir) \

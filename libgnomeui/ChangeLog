@@ -1,3 +1,21 @@
+1999-12-12  James Henstridge  <james@daa.com.au>
+
+	* libgnomeui.h: include gnome-unit-spinner.h.
+
+	* Makefile.am (EXTRA_DIST): added portrait.xpm and landscape.xpm
+	pixmaps for the new gnome-paper-selector.
+	(libgnomeui_la_SOURCES): added gnome-unit-spinner.c
+	(gnome_headers): added gnome-unit-spinner.h
+
+	* portrait.xpm, landscape.xpm: image files for the new paper selector.
+	
+	* gnome-paper-selector.[ch]: new paper selector.  It should be source
+	source compatible with the old one, but you would probably want to
+	modify your code to take advantage of the newer features.
+	
+	* gnome-unit-spinner.[ch]: new widget.  A GtkSpinButton type widget
+	that understands different units.
+
 1999-12-07  Martin Baulig  <martin@home-of-linux.org>
 
 	* Makefile.am: Removed all HistoryDB stuff.
