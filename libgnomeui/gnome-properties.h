@@ -23,8 +23,9 @@
 #ifndef __GNOME_PROPERTIES_H__
 #define __GNOME_PROPERTIES_H__
 
-#include "gnome-dialog.h"
-#include "libgnome/gnome-defs.h"
+#include <libgnome/gnome-defs.h>
+#include <libgnomeui/gnome-dialog.h>
+#include <libgnomeui/gnome-propertybox.h>
 
 BEGIN_GNOME_DECLS
 

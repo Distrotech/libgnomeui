@@ -19,10 +19,20 @@
 */
 
 #include <config.h>
-#include <gnome.h>
 #include "gnome-properties.h"
+#include "gnome-property-entries.h"
+#include "libgnome/gnome-i18nP.h"
+#include "gnome-uidefs.h"
+#include "gnome-color-picker.h"
 
 #include <gdk/gdkprivate.h>
+#include <gtk/gtkbutton.h>
+#include <gtk/gtkentry.h>
+#include <gtk/gtkfontsel.h>
+#include <gtk/gtkframe.h>
+#include <gtk/gtklabel.h>
+#include <gtk/gtksignal.h>
+#include <gtk/gtktable.h>
 
 /* =======================================================================
  * Font properties object.
@@ -197,7 +207,7 @@ _property_entry_font_select_cb (GtkWidget *widget, FontCbData *cb_data)
 	GtkFontSelectionDialog *fontsel;
 
 	fontsel = GTK_FONT_SELECTION_DIALOG
-		(gtk_font_selection_dialog_new (_(cb_data->label)));
+		(gtk_font_selection_dialog_new (gettext (cb_data->label)));
 
 	gtk_window_set_modal (GTK_WINDOW (fontsel), TRUE);
 	
@@ -308,7 +318,7 @@ gnome_property_entry_colors (GnomePropertyObject *object, const gchar *label,
 	GtkWidget *frame, *table;
 	gint rows, i;
 
-	frame = gtk_frame_new (_(label));
+	frame = gtk_frame_new (gettext (label));
 
 	rows = (num_colors < columns) ? 2 :
 		((num_colors+columns-1) / columns) << 1;

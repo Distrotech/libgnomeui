@@ -19,8 +19,11 @@
 */
 
 #include <config.h>
-#include <gnome.h>
+#include <gtk/gtklabel.h>
+#include <gtk/gtknotebook.h>
 #include "gnome-properties.h"
+#include "libgnome/gnome-config.h"
+#include "libgnome/gnome-i18nP.h"
 
 /* Create new property object from property descriptor. */
 GnomePropertyObject *
@@ -59,7 +62,7 @@ gnome_property_object_register (GnomePropertyBox *property_box,
 	g_return_if_fail (object->descriptor->init_func != NULL);
 
 	if (!object->label) {
-		object->label = gtk_label_new (_(object->descriptor->label));
+		object->label = gtk_label_new (gettext (object->descriptor->label));
 		gtk_object_ref (GTK_OBJECT (object->label));
 	}
 

@@ -17,9 +17,7 @@
  * 02111-1307, USA.
  */
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
+#include <config.h>
 
 /* AIX requires this to be the first thing in the file.  */
 #ifndef __GNUC__
@@ -44,7 +42,9 @@ char *alloca ();
 #include <errno.h>
 #include <ctype.h>
 #include <gtk/gtk.h>
-#include <gnome.h>
+#include "gnome-spell.h"
+
+#include "libgnome/gnome-i18nP.h"
 
 #ifndef HAVE_GDK_CHILD_REGISTER
 

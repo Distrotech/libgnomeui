@@ -1,3 +1,49 @@
+1999-06-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-properties.h: Fix includes.
+	* gnome-procbar.h: Likewise.
+	* gnome-procbar.c: Likewise.
+	* gnome-property-entries.h: Likewise.
+	* gnome-spell.c: Likewise.  Fix i18n includes as well.
+
+	* gnome-properties.c: Fix includes and i18n includes.
+	(gnome_property_object_register): Use gettext() here, not _().
+
+	* gnome-property-entries.c: Fix includes and i18n includes.
+	(_property_entry_font_select_cb): Use gettext() here, not _().
+	(gnome_property_entry_colors): Likewise.
+
+	* gnome-canvas-util.c (gnome_canvas_join_gdk_to_art): Barf if
+	passed an invalid value.
+	(gnome_canvas_cap_gdk_to_art): Likewise.
+
+	* gnome-icon-item.c (gnome_icon_text_item_configure): Added some
+	more sanity checks.  Make the iti->width be the specified width.
+	(ItiPrivate): Moved the private fields of the GnomeIconTextItem
+	structure to this new structure.  Replaced the old fields with
+	padding to preserve binary compatibility.
+	(iti_init): Create the private structure here.
+	(iti_update): Changed all the functions to *properly* queue
+	updates and then changed iti_update() to update the stuff that is
+	needed and then queue a redraw properly.  This is the way canvas
+	items should work.  
+	Improved documentation comments.
+
+	* gnome-icon-item.h: Remove unnecessary #includes.  Improved
+	comments a bit.
+
+	* gnome-canvas.c (gnome_canvas_new_aa): Added a loud warning about
+	not using the AA canvas until it is debugged.
+	(gnome_canvas_item_update): Unset the GNOME_CANVAS_ITEM_NEED_*
+	flags here.
+	(gnome_canvas_group_update): Call the group's parent class update
+	method.
+
+	* gnome-icon-list.c (gil_get_icons_in_region): Do the right thing
+	for selections of zero width/height.
+	(gil_motion_notify): Call the parent class motion_notify_event
+	method.  This makes drag-selection in icon text items work again.
+
 Wed Jun  9 19:20:41 1999  Raph Levien  <raph@gimp.org>
 
 	* gnome-canvas-polygon.c (gnome_canvas_polygon_update): Joins

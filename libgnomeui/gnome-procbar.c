@@ -21,7 +21,12 @@
 */
 
 #include <config.h>
-#include <gnome.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <gtk/gtkdrawingarea.h>
+#include <gtk/gtkframe.h>
+#include <gtk/gtkmain.h>
+#include <gtk/gtksignal.h>
 #include "gnome-procbar.h"
 
 #define A (w->allocation)

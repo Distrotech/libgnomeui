@@ -626,12 +626,17 @@ gnome_canvas_join_gdk_to_art (GdkJoinStyle gdk_join)
 {
 	switch (gdk_join) {
 	case GDK_JOIN_MITER:
-	default:
 		return ART_PATH_STROKE_JOIN_MITER;
+
 	case GDK_JOIN_ROUND:
 		return ART_PATH_STROKE_JOIN_ROUND;
+
 	case GDK_JOIN_BEVEL:
 		return ART_PATH_STROKE_JOIN_BEVEL;
+
+	default:
+		g_assert_not_reached ();
+		return ART_PATH_STROKE_JOIN_MITER; /* shut up the compiler */
 	}
 }
 
@@ -649,11 +654,16 @@ gnome_canvas_cap_gdk_to_art (GdkCapStyle gdk_cap)
 	switch (gdk_cap) {
 	case GDK_CAP_BUTT:
 	case GDK_CAP_NOT_LAST:
-	default:
 		return ART_PATH_STROKE_CAP_BUTT;
+
 	case GDK_CAP_ROUND:
 		return ART_PATH_STROKE_CAP_ROUND;
+
 	case GDK_CAP_PROJECTING:
 		return ART_PATH_STROKE_CAP_SQUARE;
+
+	default:
+		g_assert_not_reached ();
+		return ART_PATH_STROKE_CAP_BUTT; /* shut up the compiler */
 	}
 }

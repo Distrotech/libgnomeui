@@ -20,6 +20,7 @@
 #ifndef __GNOME_SPELL_H__
 #define __GNOME_SPELL_H__
 
+#include <libgnome/gnome-defs.h>
 #include <gtk/gtkvbox.h>
 #include <gtk/gtktooltips.h>
 
@@ -27,9 +28,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+BEGIN_GNOME_DECLS
 
 #define GNOME_SPELL(obj)		GTK_CHECK_CAST(obj, gnome_spell_get_type(), GnomeSpell)
 #define GNOME_SPELL_CLASS(klass)		GTK_CHECK_CLASS_CAST(klass, gnome_spell_get_type(), GnomeSpelliClass)
@@ -99,8 +98,6 @@ int			gnome_spell_next(GnomeSpell* gtkspell);
 /* kill the ispell process */
 void		gnome_spell_kill(GnomeSpell* gtkspell);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+END_GNOME_DECLS
 
 #endif /* __GNOME_SPELL_H__ */
