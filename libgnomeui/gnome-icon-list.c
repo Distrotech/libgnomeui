@@ -920,23 +920,23 @@ icon_new_from_imlib (GnomeIconList *gil, GdkImlibImage *im, const char *text)
 
 	icon = g_new0 (Icon, 1);
 
-	if(im)
-	  icon->image = GNOME_CANVAS_IMAGE (gnome_canvas_item_new (
-								   group,
-								   gnome_canvas_image_get_type (),
-								   "x", 0.0,
-								   "y", 0.0,
-								   "width", (double) im->rgb_width,
-								   "height", (double) im->rgb_height,
-								   "image", im,
-								   NULL));
+	if (im)
+		icon->image = GNOME_CANVAS_IMAGE (gnome_canvas_item_new (
+			group,
+			gnome_canvas_image_get_type (),
+			"x", 0.0,
+			"y", 0.0,
+			"width", (double) im->rgb_width,
+			"height", (double) im->rgb_height,
+			"image", im,
+			NULL));
 	else
-	  icon->image = GNOME_CANVAS_IMAGE (gnome_canvas_item_new (
-								   group,
-								   gnome_canvas_image_get_type (),
-								   "x", 0.0,
-								   "y", 0.0,
-								   NULL));
+		icon->image = GNOME_CANVAS_IMAGE (gnome_canvas_item_new (
+			group,
+			gnome_canvas_image_get_type (),
+			"x", 0.0,
+			"y", 0.0,
+			NULL));
 
 	icon->text = GNOME_ICON_TEXT_ITEM (gnome_canvas_item_new (
 		group,
