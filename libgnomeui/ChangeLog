@@ -1,3 +1,12 @@
+Mon May 22  Martijn van Beers  <martijn@earthling.net>
+
+	* gnome-gconf.c (gnome_gconf_*_set): added a value != check
+	  (gnome_gconf_spin_button_get): initialize retval
+	  (gnome_gconf_gtk_radio_button_set): fix ending condition in for loop
+	  (gnome_gconf_gtk_range_*): allow GCONF_VALUE_INT
+	  (gnome_gconf_color_picker_get): save alpha
+	  (gnome_gconf_color_picker_set): implement
+
 Sat May 20 14:50:59 2000  George Lebl <jirka@5z.com>
 
 	* gnome-stock.[ch]: the GdkPixbuf getting routine is renamed to
