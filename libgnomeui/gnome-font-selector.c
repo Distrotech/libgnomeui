@@ -20,9 +20,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <Xlib.h>
+#include <X11/Xlib.h>
+#include <gdk/gdkx.h>
 #include "gnome.h"
-#include "gnome-fontsel.h"
+#include "gnome-font-selector.h"
 #include "gdk/gdkkeysyms.h"
 
 #define FONT_LIST_WIDTH  125
@@ -59,8 +60,9 @@ struct _FontInfo
 			 */
 };
 
+static void gnome_font_selector_class_init(GnomeFontSelectorClass *klass);
+static void gnome_font_selector_init(GtkWidget *widget);
 static void       text_resize_text_widget (GnomeFontSelector *);
-static void       text_create_dialog      (GnomeFontSelector *);
 static void       text_ok_callback        (GtkWidget *, gpointer);
 static void       text_cancel_callback    (GtkWidget *, gpointer);
 static gint       text_delete_callback    (GtkWidget *, GdkEvent *, gpointer);
@@ -72,7 +74,6 @@ static void       text_slant_callback     (GtkWidget *, gpointer);
 static void       text_set_width_callback (GtkWidget *, gpointer);
 static void       text_spacing_callback   (GtkWidget *, gpointer);
 static gint       text_size_key_function  (GtkWidget *, GdkEventKey *, gpointer);
-static void       text_antialias_update   (GtkWidget *, gpointer);
 static void       text_font_item_update   (GtkWidget *, gpointer);
 static void       text_validate_combo     (GnomeFontSelector *, int);
 
@@ -86,10 +87,6 @@ static int        text_is_xlfd_font_name  (char *);
 static int        text_get_xlfd           (double, int, char *, char *, char *,
 					   char *, char *, char *, char *);
 static int        text_load_font          (GnomeFontSelector *);
-static void       text_init_render        (GnomeFontSelector *);
-static void       text_gdk_image_to_region (GdkImage *, int, PixelRegion *);
-static int        text_get_extents        (char *, char *, int *, int *, int *, int *);
-static Layer *    text_render             (GImage *, int, int, int, char *, char *, int, int);
 
 static GnomeActionAreaItem action_items[] =
 {
@@ -97,12 +94,29 @@ static GnomeActionAreaItem action_items[] =
   { "Cancel", text_cancel_callback, NULL, NULL },
 };
 
-static MenuItem size_metric_items[] =
+typedef GtkSignalFunc MenuItemCallback;
+typedef struct {
+  char *label;
+  int foo, bar;
+  gpointer cb, cbdata, blah, baz;
+  
+} MenuItem;
+
+static GnomeMenuInfo size_metric_items[] =
+{
+  { GNOME_APP_MENU_ITEM, "Pixels", text_pixels_callback, NULL },
+  { GNOME_APP_MENU_ITEM, "Points", text_points_callback, NULL },
+  { GNOME_APP_MENU_ENDOFINFO, NULL, NULL, NULL }
+};
+
+#if 0
+static GnomeMenuInfo size_metric_items[] =
 {
   { "Pixels", 0, 0, text_pixels_callback, (gpointer) PIXELS, NULL, NULL },
   { "Points", 0, 0, text_points_callback, (gpointer) POINTS, NULL, NULL },
   { NULL, 0, 0, NULL, NULL, NULL, NULL }
 };
+#endif
 
 guint gnome_font_selector_get_type(void)
 {
@@ -131,7 +145,6 @@ gnome_font_selector_class_init(GnomeFontSelectorClass *klass)
 static void
 gnome_font_selector_init(GtkWidget *widget)
 {
-  GnomeFontSelector *text_tool = GNOME_FONT_SELECTOR(widget);
   GtkWidget *top_hbox;
   GtkWidget *right_vbox;
   GtkWidget *text_hbox;
@@ -151,11 +164,15 @@ gnome_font_selector_init(GtkWidget *widget)
   int i, j;
   FontInfo **font_info;
   int nfonts;
-  GnomeFontSelectorClass *klass
-    = GTK_FONT_SELECTOR_CLASS(GTK_OBJECT(text_tool)->klass);
+  GnomeFontSelectorClass *klass;
+  GnomeFontSelector *text_tool;
 
-  font_info = GTK_FONT_SELECTOR_CLASS(GTK_OBJECT(text_tool)->klass)->font_info;
-  nfonts = GTK_FONT_SELECTOR_CLASS(GTK_OBJECT(text_tool)->klass)->nfonts;
+  text_tool = GNOME_FONT_SELECTOR(widget);
+
+  klass = GNOME_FONT_SELECTOR_CLASS(GTK_OBJECT(widget)->klass);
+
+  font_info = klass->font_info;
+  nfonts = klass->nfonts;
 
   /* Create the shell and vertical & horizontal boxes */
   gtk_window_set_title (GTK_WINDOW (text_tool), "Font Selector");
@@ -209,9 +226,18 @@ gnome_font_selector_init(GtkWidget *widget)
   gtk_box_pack_start (GTK_BOX (text_hbox), text_tool->size_text, TRUE, TRUE, 0);
 
   /* Create the size menu */
-  size_metric_items[0].user_data = text_tool;
-  size_metric_items[1].user_data = text_tool;
-  text_tool->size_menu = build_menu (size_metric_items, NULL);
+  text_tool->size_menu = gtk_menu_new();
+  for(i = 0; size_metric_items[i].type != GNOME_APP_MENU_ENDOFINFO; i++)
+    {
+      size_metric_items[i].widget = gtk_menu_item_new_with_label(size_metric_items[i].label);
+      gtk_signal_connect(GTK_OBJECT(size_metric_items[i].widget),
+			 "activate",
+			 size_metric_items[i].moreinfo, text_tool);
+      gtk_widget_show(size_metric_items[i].widget);
+      gtk_menu_append(GTK_MENU(text_tool->size_menu),
+		      size_metric_items[i].widget);
+    }
+
   size_opt_menu = gtk_option_menu_new ();
   gtk_box_pack_start (GTK_BOX (text_hbox), size_opt_menu, FALSE, FALSE, 0);
 
@@ -222,20 +248,13 @@ gnome_font_selector_init(GtkWidget *widget)
   text_tool->the_text = gtk_entry_new ();
   gtk_container_add (GTK_CONTAINER (text_tool->text_frame), text_tool->the_text);
 
-  /* create the antialiasing toggle button  */
-  text_tool->antialias_toggle = gtk_check_button_new_with_label ("Antialiasing");
-  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (text_tool->antialias_toggle), text_tool->antialias);
-  gtk_box_pack_start (GTK_BOX (right_vbox), text_tool->antialias_toggle, FALSE, FALSE, 0);
-  gtk_signal_connect (GTK_OBJECT (text_tool->antialias_toggle), "toggled",
-		      (GtkSignalFunc) text_antialias_update,
-		      text_tool);
 
   /* Allocate the arrays for the foundry, weight, slant, set_width and spacing menu items */
-  text_tool->foundry_items = (GtkWidget **) g_malloc (sizeof (GtkWidget *) * nfoundries);
-  text_tool->weight_items = (GtkWidget **) g_malloc (sizeof (GtkWidget *) * nweights);
-  text_tool->slant_items = (GtkWidget **) g_malloc (sizeof (GtkWidget *) * nslants);
-  text_tool->set_width_items = (GtkWidget **) g_malloc (sizeof (GtkWidget *) * nset_widths);
-  text_tool->spacing_items = (GtkWidget **) g_malloc (sizeof (GtkWidget *) * nspacings);
+  text_tool->foundry_items = (GtkWidget **) g_malloc (sizeof (GtkWidget *) * klass->nfoundries);
+  text_tool->weight_items = (GtkWidget **) g_malloc (sizeof (GtkWidget *) * klass->nweights);
+  text_tool->slant_items = (GtkWidget **) g_malloc (sizeof (GtkWidget *) * klass->nslants);
+  text_tool->set_width_items = (GtkWidget **) g_malloc (sizeof (GtkWidget *) * klass->nset_widths);
+  text_tool->spacing_items = (GtkWidget **) g_malloc (sizeof (GtkWidget *) * klass->nspacings);
 
   menu_items[0] = text_tool->foundry_items;
   menu_items[1] = text_tool->weight_items;
@@ -261,11 +280,11 @@ gnome_font_selector_init(GtkWidget *widget)
   menu_item_strs[3] = klass->set_width_array;
   menu_item_strs[4] = klass->spacing_array;
 
-  menu_callbacks[0] = text_foundry_callback;
-  menu_callbacks[1] = text_weight_callback;
-  menu_callbacks[2] = text_slant_callback;
-  menu_callbacks[3] = text_set_width_callback;
-  menu_callbacks[4] = text_spacing_callback;
+  menu_callbacks[0] = GTK_SIGNAL_FUNC(text_foundry_callback);
+  menu_callbacks[1] = GTK_SIGNAL_FUNC(text_weight_callback);
+  menu_callbacks[2] = GTK_SIGNAL_FUNC(text_slant_callback);
+  menu_callbacks[3] = GTK_SIGNAL_FUNC(text_set_width_callback);
+  menu_callbacks[4] = GTK_SIGNAL_FUNC(text_spacing_callback);
 
   font_infos[0] = font_info[0]->foundries;
   font_infos[1] = font_info[0]->weights;
@@ -374,9 +393,8 @@ text_ok_callback (GtkWidget *w,
   text_tool = GNOME_FONT_SELECTOR(client_data);
 
   if (GTK_WIDGET_VISIBLE (text_tool))
-    gtk_widget_hide (text_tool);
+    gtk_widget_hide (GTK_WIDGET(text_tool));
 
-  text_init_render (text_tool);
 }
 
 static gint
@@ -398,7 +416,7 @@ text_cancel_callback (GtkWidget *w,
   text_tool = GNOME_FONT_SELECTOR(client_data);
 
   if (GTK_WIDGET_VISIBLE (text_tool))
-    gtk_widget_hide (text_tool);
+    gtk_widget_hide (GTK_WIDGET(text_tool));
 }
 
 static void
@@ -409,10 +427,17 @@ text_font_item_update (GtkWidget *w,
   int old_index;
   int i, index;
   GnomeFontSelector *the_text_tool;
+  GnomeFontSelectorClass *klass;
+  FontInfo **font_info;
 
   /*  Is this font being selected?  */
   if (w->state != GTK_STATE_SELECTED)
     return;
+
+  the_text_tool = GNOME_FONT_SELECTOR(gtk_object_get_data(GTK_OBJECT(w),
+							  "GnomeFontSelector"));
+  klass = GNOME_FONT_SELECTOR_CLASS(GTK_OBJECT(the_text_tool)->klass);
+  font_info = klass->font_info;
 
   index = (long) data;
 
@@ -453,15 +478,15 @@ text_font_item_update (GtkWidget *w,
       gtk_option_menu_set_history (GTK_OPTION_MENU (the_text_tool->option_menus[4]), 0);
     }
 
-  for (i = 0; i < nfoundries; i++)
+  for (i = 0; i < klass->nfoundries; i++)
     gtk_widget_set_sensitive (the_text_tool->foundry_items[i], font->foundries[i]);
-  for (i = 0; i < nweights; i++)
+  for (i = 0; i < klass->nweights; i++)
     gtk_widget_set_sensitive (the_text_tool->weight_items[i], font->weights[i]);
-  for (i = 0; i < nslants; i++)
+  for (i = 0; i < klass->nslants; i++)
     gtk_widget_set_sensitive (the_text_tool->slant_items[i], font->slants[i]);
-  for (i = 0; i < nset_widths; i++)
+  for (i = 0; i < klass->nset_widths; i++)
     gtk_widget_set_sensitive (the_text_tool->set_width_items[i], font->set_widths[i]);
-  for (i = 0; i < nspacings; i++)
+  for (i = 0; i < klass->nspacings; i++)
     gtk_widget_set_sensitive (the_text_tool->spacing_items[i], font->spacings[i]);
 }
 
@@ -605,6 +630,11 @@ text_validate_combo (GnomeFontSelector *text_tool,
   int best_matches;
   int matches;
   int i;
+  GnomeFontSelectorClass *klass;
+  FontInfo **font_info;
+
+  klass = GNOME_FONT_SELECTOR_CLASS(GTK_OBJECT(text_tool)->klass);
+  font_info = klass->font_info;
 
   font = font_info[text_tool->font_index];
 
@@ -744,7 +774,7 @@ text_get_fonts (GnomeFontSelectorClass *klass)
 
   /* construct a valid font pattern */
 
-  fontnames = XListFonts (DISPLAY, "-*-*-*-*-*-*-0-0-75-75-*-0-*-*", 32767, &num_fonts);
+  fontnames = XListFonts (GDK_DISPLAY(), "-*-*-*-*-*-*-0-0-75-75-*-0-*-*", 32767, &num_fonts);
 
   /* the maximum size of the table is the number of font names returned */
   klass->font_info = g_malloc (sizeof (FontInfo**) * num_fonts);
@@ -764,12 +794,12 @@ text_get_fonts (GnomeFontSelectorClass *klass)
       }
 
   XFreeFontNames (fontnames);
-
-  klass->nfoundries = list_length (foundries) + 1;
-  klass->nweights = list_length (weights) + 1;
-  klass->nslants = list_length (slants) + 1;
-  klass->nset_widths = list_length (set_widths) + 1;
-  klass->nspacings = list_length (spacings) + 1;
+#define list_length g_slist_length
+  klass->nfoundries = list_length (klass->foundries) + 1;
+  klass->nweights = list_length (klass->weights) + 1;
+  klass->nslants = list_length (klass->slants) + 1;
+  klass->nset_widths = list_length (klass->set_widths) + 1;
+  klass->nspacings = list_length (klass->spacings) + 1;
 
   klass->foundry_array = g_malloc (sizeof (char*) * klass->nfoundries);
   klass->weight_array = g_malloc (sizeof (char*) * klass->nweights);
@@ -860,7 +890,7 @@ text_get_fonts (GnomeFontSelectorClass *klass)
 	  klass->font_info[i]->combos[j] = g_malloc (sizeof (int) * 5);
 
 	  field = text_get_field (fontname, FOUNDRY);
-	  index = text_field_to_index (foundry_array, klass->nfoundries, field);
+	  index = text_field_to_index (klass->foundry_array, klass->nfoundries, field);
 	  klass->font_info[i]->foundries[index] = 1;
 	  klass->font_info[i]->combos[j][0] = index;
 	  free (field);
@@ -1174,354 +1204,4 @@ text_load_font (GnomeFontSelector *text_tool)
     }
 
   return FALSE;
-}
-
-static void
-text_init_render (GnomeFontSelector *text_tool)
-{
-  GDisplay *gdisp;
-  char fontname[2048];
-  char *text;
-  int border;
-  char *border_text;
-  double size;
-  char *size_text;
-  char *foundry_str;
-  char *family_str;
-  char *weight_str;
-  char *slant_str;
-  char *set_width_str;
-  char *spacing_str;
-
-  size_text = gtk_entry_get_text (GTK_ENTRY (text_tool->size_text));
-  size = atof (size_text);
-  if (text_tool->antialias)
-    size *= SUPERSAMPLE;
-
-  foundry_str = foundry_array[text_tool->foundry];
-  if (strcmp (foundry_str, "(nil)") == 0)
-    foundry_str = "";
-  family_str = font_info[text_tool->font_index]->family;
-  weight_str = weight_array[text_tool->weight];
-  if (strcmp (weight_str, "(nil)") == 0)
-    weight_str = "";
-  slant_str = slant_array[text_tool->slant];
-  if (strcmp (slant_str, "(nil)") == 0)
-    slant_str = "";
-  set_width_str = set_width_array[text_tool->set_width];
-  if (strcmp (set_width_str, "(nil)") == 0)
-    set_width_str = "";
-  spacing_str = spacing_array[text_tool->spacing];
-  if (strcmp (spacing_str, "(nil)") == 0)
-    spacing_str = "";
-
-  if (text_get_xlfd (size, text_tool->size_type, foundry_str, family_str,
-		     weight_str, slant_str, set_width_str, spacing_str, fontname))
-    {
-      /* get the text */
-      text = gtk_entry_get_text (GTK_ENTRY (text_tool->the_text));
-
-      border_text = gtk_entry_get_text (GTK_ENTRY (text_tool->border_text));
-      border = atoi (border_text);
-
-      gdisp = (GDisplay *) text_tool->gdisp_ptr;
-
-      text_render (gdisp->gimage, gimage_active_drawable (gdisp->gimage),
-		   text_tool->click_x, text_tool->click_y,
-		   fontname, text, border, text_tool->antialias);
-
-      gdisplays_flush ();
-    }
-}
-
-static void
-text_gdk_image_to_region (GdkImage    *image,
-			  int          scale,
-			  PixelRegion *textPR)
-{
-  int black_pixel;
-  int pixel;
-  int value;
-  int scalex, scaley;
-  int scale2;
-  int x, y;
-  int i, j;
-  unsigned char * data;
-
-  scale2 = scale * scale;
-  black_pixel = BlackPixel (DISPLAY, DefaultScreen (DISPLAY));
-  data = textPR->data;
-
-  for (y = 0, scaley = 0; y < textPR->h; y++, scaley += scale)
-    {
-      for (x = 0, scalex = 0; x < textPR->w; x++, scalex += scale)
-	{
-	  value = 0;
-
-	  for (i = scaley; i < scaley + scale; i++)
-	    for (j = scalex; j < scalex + scale; j++)
-	      {
-		pixel = gdk_image_get_pixel (image, j, i);
-		if (pixel == black_pixel)
-		  value += 255;
-	      }
-	  value = value / scale2;
-
-	  /*  store the alpha value in the data  */
-	  *data++ = (unsigned char) value;
-	}
-    }
-}
-
-static Layer *
-text_render (GImage *gimage,
-	     int     drawable_id,
-	     int     text_x,
-	     int     text_y,
-	     char   *fontname,
-	     char   *text,
-	     int     border,
-	     int     antialias)
-{
-  GdkFont *font;
-  GdkPixmap *pixmap;
-  GdkImage *image;
-  GdkGC *gc;
-  GdkColor black, white;
-  Layer *layer;
-  TileManager *mask, *newmask;
-  PixelRegion textPR, maskPR;
-  int layer_type;
-  unsigned char color[MAX_CHANNELS];
-  char *str;
-  int nstrs;
-  int line_width, line_height;
-  int pixmap_width, pixmap_height;
-  int text_width, text_height;
-  int width, height;
-  int x, y, k;
-  void * pr;
-
-  /*  determine the layer type  */
-  if (drawable_id != -1)
-    layer_type = drawable_type_with_alpha (drawable_id);
-  else
-    layer_type = gimage_base_type_with_alpha (gimage);
-
-  /* scale the text based on the antialiasing amount */
-  if (antialias)
-    antialias = SUPERSAMPLE;
-  else
-    antialias = 1;
-
-  /* load the font in */
-  font = gdk_font_load (fontname);
-  if (!font)
-    return NULL;
-
-  /* determine the bounding box of the text */
-  width = -1;
-  height = 0;
-  line_height = font->ascent + font->descent;
-
-  nstrs = 0;
-  str = strtok (text, "\n");
-  while (str)
-    {
-      nstrs += 1;
-
-      /* gdk_string_measure will give the correct width of the
-       *  string. However, we'll add a little "fudge" factor just
-       *  to be sure.
-       */
-      line_width = gdk_string_measure (font, str) + 5;
-      if (line_width > width)
-	width = line_width;
-      height += line_height;
-
-      str = strtok (NULL, "\n");
-    }
-
-  /* We limit the largest pixmap we create to approximately 200x200.
-   * This is approximate since it depends on the amount of antialiasing.
-   * Basically, we want the width and height to be divisible by the antialiasing
-   *  amount. (Which lies in the range 1-10).
-   * This avoids problems on some X-servers (Xinside) which have problems
-   *  with large pixmaps. (Specifically pixmaps which are larger - width
-   *  or height - than the screen).
-   */
-  pixmap_width = TILE_WIDTH * antialias;
-  pixmap_height = TILE_HEIGHT * antialias;
-
-  /* determine the actual text size based on the amount of antialiasing */
-  text_width = width / antialias;
-  text_height = height / antialias;
-
-  /* create the pixmap of depth 1 */
-  pixmap = gdk_pixmap_new (NULL, pixmap_width, pixmap_height, 1);
-
-  /* create the gc */
-  gc = gdk_gc_new (pixmap);
-  gdk_gc_set_font (gc, font);
-
-  /*  get black and white pixels for this gdisplay  */
-  black.pixel = BlackPixel (DISPLAY, DefaultScreen (DISPLAY));
-  white.pixel = WhitePixel (DISPLAY, DefaultScreen (DISPLAY));
-
-  /* Render the text into the pixmap.
-   * Since the pixmap may not fully bound the text (because we limit its size)
-   *  we must tile it around the texts actual bounding box.
-   */
-  mask = tile_manager_new (text_width, text_height, 1);
-  pixel_region_init (&maskPR, mask, 0, 0, text_width, text_height, TRUE);
-
-  for (pr = pixel_regions_register (1, &maskPR); pr != NULL; pr = pixel_regions_process (pr))
-    {
-      /* erase the pixmap */
-      gdk_gc_set_foreground (gc, &white);
-      gdk_draw_rectangle (pixmap, gc, 1, 0, 0, pixmap_width, pixmap_height);
-      gdk_gc_set_foreground (gc, &black);
-
-      /* adjust the x and y values */
-      x = -maskPR.x * antialias;
-      y = font->ascent - maskPR.y * antialias;
-      str = text;
-
-      for (k = 0; k < nstrs; k++)
-	{
-	  gdk_draw_string (pixmap, font, gc, x, y, str);
-	  str += strlen (str) + 1;
-	  y += line_height;
-	}
-
-      /* create the GdkImage */
-      image = gdk_image_get (pixmap, 0, 0, pixmap_width, pixmap_height);
-
-      if (!image)
-	fatal_error ("sanity check failed: could not get gdk image");
-
-      if (image->depth != 1)
-	fatal_error ("sanity check failed: image should have 1 bit per pixel");
-
-      /* convert the GdkImage bitmap to a region */
-      text_gdk_image_to_region (image, antialias, &maskPR);
-
-      /* free the image */
-      gdk_image_destroy (image);
-    }
-
-  /*  Crop the mask buffer  */
-  newmask = crop_buffer (mask, border);
-  if (newmask != mask)
-    tile_manager_destroy (mask);
-
-  if (newmask && 
-      (layer = layer_new (gimage->ID, newmask->levels[0].width,
-			 newmask->levels[0].height, layer_type,
-			 "Text Layer", OPAQUE, NORMAL_MODE)))
-    {
-      /*  color the layer buffer  */
-      gimage_get_foreground (gimage, drawable_id, color);
-      color[layer->bytes - 1] = OPAQUE;
-      pixel_region_init (&textPR, layer->tiles, 0, 0, layer->width, layer->height, TRUE);
-      color_region (&textPR, color);
-
-      /*  apply the text mask  */
-      pixel_region_init (&textPR, layer->tiles, 0, 0, layer->width, layer->height, TRUE);
-      pixel_region_init (&maskPR, newmask, 0, 0, layer->width, layer->height, FALSE);
-      apply_mask_to_region (&textPR, &maskPR, OPAQUE);
-
-      /*  Start a group undo  */
-      undo_push_group_start (gimage, EDIT_PASTE_UNDO);
-
-      /*  Set the layer offsets  */
-      layer->offset_x = text_x;
-      layer->offset_y = text_y;
-
-      /*  If there is a selection mask clear it--
-       *  this might not always be desired, but in general,
-       *  it seems like the correct behavior.
-       */
-      if (! gimage_mask_is_empty (gimage))
-	channel_clear (gimage_get_mask (gimage));
-
-      /*  If the drawable id is invalid, create a new layer  */
-      if (drawable_id == -1)
-	gimage_add_layer (gimage, layer, -1);
-      /*  Otherwise, instantiate the text as the new floating selection */
-      else
-	floating_sel_attach (layer, drawable_id);
-
-      /*  end the group undo  */
-      undo_push_group_end (gimage);
-
-      tile_manager_destroy (newmask);
-    }
-  else 
-    {
-      if (newmask) 
-	warning("text_render: could not allocate image");
-      layer = NULL;
-    }
-
-  /* free the pixmap */
-  gdk_pixmap_unref (pixmap);
-
-  /* free the gc */
-  gdk_gc_destroy (gc);
-
-  /* free the font */
-  gdk_font_unref (font);
-
-  return layer;
-}
-
-
-static int
-text_get_extents (char *fontname,
-		  char *text,
-		  int  *width,
-		  int  *height,
-		  int  *ascent,
-		  int  *descent)
-{
-  GdkFont *font;
-  char *str;
-  int nstrs;
-  int line_width, line_height;
-
-  /* load the font in */
-  font = gdk_font_load (fontname);
-  if (!font)
-    return FALSE;
-
-  /* determine the bounding box of the text */
-  *width = -1;
-  *height = 0;
-  *ascent = font->ascent;
-  *descent = font->descent;
-  line_height = *ascent + *descent;
-
-  nstrs = 0;
-  str = strtok (text, "\n");
-  while (str)
-    {
-      nstrs += 1;
-
-      /* gdk_string_measure will give the correct width of the
-       *  string. However, we'll add a little "fudge" factor just
-       *  to be sure.
-       */
-      line_width = gdk_string_measure (font, str) + 5;
-      if (line_width > *width)
-	*width = line_width;
-      *height += line_height;
-
-      str = strtok (NULL, "\n");
-    }
-
-  if (*width < 0)
-    return FALSE;
-  else
-    return TRUE;
 }

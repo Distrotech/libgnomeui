@@ -23,15 +23,13 @@
 
 BEGIN_GNOME_DECLS
 
-#define GNOME_FONT_SELECTOR(obj) \
-   GTK_CHECK_CAST(obj, gnome_font_selector_get_type(), GnomeFontSelector)
-#define GNOME_FONT_SELECTOR_CLASS(class) \
-     GTK_CHECK_CAST_CLASS(class, gnome_font_selector_get_type(), \
-			  GnomeFontSelectorClass)
-#define GNOME_IS_FONT_SELECTOR(obj)      GTK_CHECK_TYPE(obj, gnome_font_selector_get_type())
-
 typedef struct _GnomeFontSelector GnomeFontSelector;
 typedef struct _GnomeFontSelectorClass GnomeFontSelectorClass;
+
+#define GNOME_FONT_SELECTOR(obj) GTK_CHECK_CAST(obj, gnome_font_selector_get_type(), GnomeFontSelector)
+#define GNOME_FONT_SELECTOR_CLASS(klass) GTK_CHECK_CLASS_CAST(klass, gnome_font_selector_get_type(), GnomeFontSelectorClass)
+#define GNOME_IS_FONT_SELECTOR(obj)      GTK_CHECK_TYPE(obj, gnome_font_selector_get_type())
+
 typedef struct _FontInfo FontInfo; /* struct is defined in gnome-fontsel.c */
 
 struct _GnomeFontSelectorClass
