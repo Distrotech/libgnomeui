@@ -1,3 +1,9 @@
+2003-09-15  Not Zed  <NotZed@Ximian.com>
+
+	* libgnomeui/gnome-icon-list.c (real_select_icon): Only add the
+	icon to the selection if it isn't already in the selected list.
+	Fixes bug #122356.
+
 2003-09-09  Anders Carlsson  <andersca@gnome.org>
 
 	* configure.in: Release 2.4.0.1

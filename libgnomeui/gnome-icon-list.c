@@ -1720,8 +1720,9 @@ real_select_icon (Gil *gil, gint num, GdkEvent *event)
 
 	icon->selected = TRUE;
 	gnome_icon_text_item_select (icon->text, TRUE);
-	priv->selection = g_list_insert_sorted (priv->selection, GINT_TO_POINTER (num),
-						selection_list_compare_cb);
+	if (g_list_find(priv->selection, GINT_TO_POINTER(num)) == NULL)
+		priv->selection = g_list_insert_sorted (priv->selection, GINT_TO_POINTER (num),
+							selection_list_compare_cb);
 }
 
 static void
