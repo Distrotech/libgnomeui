@@ -154,7 +154,7 @@ label_new (char *text)
   GtkWidget *label;
 
   label = gtk_label_new (text);
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
   return label;
 }
 
