@@ -1,3 +1,9 @@
+2000-09-25  Iain Holmes  <iain@helixcode.com>
+
+	* gnome-propertybox.c (dialog_clicked_cb): Check all the pages for a 
+	change, as opposed to just the current one.
+	Use the GNOME_CLASS_BOILERPLATE macro for the type creation.
+
 2000-09-24  Iain Holmes  <iain@helixcode.com>
 
 	* gnome-file-selector.c (gnome_file_selector_construct): Construct

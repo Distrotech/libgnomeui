@@ -26,6 +26,7 @@
 #include <config.h>
 
 #include "gnome-propertybox.h"
+#include "gnome-macros.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-i18nP.h"
 #include "gnome-stock.h"
@@ -63,40 +64,10 @@ static void just_close       (GnomePropertyBox *property_box);
 static void dialog_clicked_cb (GnomeDialog * dialog, gint button,
 			       gpointer data);
 
-static GnomeDialogClass *parent_class = NULL;
-
 static gint property_box_signals [LAST_SIGNAL] = { 0 };
 
-/**
- * gnome_property_box_get_type:
- *
- * Internal routine that returns the GtkType of the
- * GnomePropertyBox widget
- */
-guint
-gnome_property_box_get_type (void)
-{
-	static guint property_box_type = 0;
-
-	if (!property_box_type){
-		GtkTypeInfo property_box_info = {
-			"GnomePropertyBox",
-			sizeof (GnomePropertyBox),
-			sizeof (GnomePropertyBoxClass),
-			(GtkClassInitFunc) gnome_property_box_class_init,
-			(GtkObjectInitFunc) gnome_property_box_init,
-			NULL,
-			NULL,
-			NULL
-		};
-
-		property_box_type = gtk_type_unique (gnome_dialog_get_type (),
-						     &property_box_info);
-	}
-
-	return property_box_type;
-}
-
+GNOME_CLASS_BOILERPLATE(GnomePropertyBox, gnome_property_box,
+			GnomeDialog, gnome_dialog);
 static void
 gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 {
@@ -236,7 +207,8 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 {
 	GnomePropertyBox *pbox;
 	GtkWidget *page;
-	gboolean dirty;
+	GList *list;
+	gboolean dirty = FALSE;
 
 	g_return_if_fail(dialog != NULL);
 	g_return_if_fail(GNOME_IS_PROPERTY_BOX(dialog));
@@ -244,11 +216,18 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 	pbox = GNOME_PROPERTY_BOX (dialog);
 
         if (GTK_NOTEBOOK (pbox->notebook)->cur_page != NULL) {
-                page = GTK_NOTEBOOK (pbox->notebook)->cur_page->child;
-                g_assert (page != NULL);
 
-                dirty = GPOINTER_TO_INT(gtk_object_get_data (GTK_OBJECT (page),
-                                                             GNOME_PROPERTY_BOX_DIRTY));
+		for (list = GTK_NOTEBOOK (pbox->notebook)->children;
+		     list != NULL;
+		     list = list->next) {
+			GtkNotebookPage *page = list->data;
+			g_assert (page != NULL);
+
+			dirty = GPOINTER_TO_INT(gtk_object_get_data (GTK_OBJECT (page->child),
+								     GNOME_PROPERTY_BOX_DIRTY));
+			if (dirty)
+				break;
+		}
         } else {
                 page = NULL;
                 dirty = FALSE;
