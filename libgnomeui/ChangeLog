@@ -1,3 +1,10 @@
+1998-11-29  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* gnome-client.c (client_save_yourself_possibly_done): New function.
+	(client_save_phase_2_callback): Uses new function.
+	(client_save_yourself_callback): Likewise.
+	(gnome_interaction_key_return): Likewise.
+
 1998-11-29  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c, gnome-mdi-child.[ch], gnome-mdi-generic-child.[ch]:
