@@ -1,3 +1,7 @@
+2001-07-21  Martin Baulig  <baulig@suse.de>
+
+	* gnome-pixmap.[ch]: Removed, this is already in libgnome1-compat.
+
 2001-07-18  Martin Baulig  <baulig@suse.de>
 
 	* gtkdial.[ch], gtk-clock.[ch]: Removed.
