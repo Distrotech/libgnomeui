@@ -6,12 +6,12 @@
 #include <config.h>
 #include <gnome.h>
 
-GtkWidget *the_app;
-GtkWidget *the_button;
-GtkWidget *the_animator;
-GtkWidget *the_second_animator;
-GtkWidget *the_third_animator;
-GtkWidget *the_box;
+static GtkWidget *the_app;
+static GtkWidget *the_button;
+static GtkWidget *the_animator;
+static GtkWidget *the_second_animator;
+static GtkWidget *the_third_animator;
+static GtkWidget *the_box;
 
 static void quit_cb (GtkWidget *widget, void *data);
 static void toggle_start_stop_cb (GtkWidget *widget, void *data);
@@ -110,12 +110,13 @@ main (int argc, char *argv[])
 
   the_second_animator = gnome_animator_new_with_size (100, 100);
 
+#if 0
   /* This is the mandatory "jumping Tux" animation.  The animation is
      extracted from a large image, made up by tiling the frames
      horizontally.  The frames are quite small, so we get a chance to
      show how easy it is to magnify them with
      `gnome_animator_append_frames_from_file_at_size()'.  */
-  s = gnome_pixmap_file ("mailcheck/tux-anim.xpm");
+  s = gnome_pixmap_file ("mailcheck/tux-anim.png");
   gnome_animator_append_frames_from_file_at_size (GNOME_ANIMATOR
                                                     (the_second_animator),
                                                   s,
@@ -124,11 +125,13 @@ main (int argc, char *argv[])
 
   gtk_box_pack_start (GTK_BOX (the_box), the_second_animator, FALSE, TRUE, 0);
 
+#endif
+
   the_third_animator = gnome_animator_new_with_size (48, 48);
 
   /* ...And this is another animation, similiar to the Tux one, but
      without magnification and no shape.  */
-  s = gnome_pixmap_file ("mailcheck/email.xpm");
+  s = gnome_pixmap_file ("mailcheck/email.png");
   gnome_animator_append_frames_from_file (GNOME_ANIMATOR (the_third_animator),
                                           s, 0, 0, 150, 48);
   g_free (s);
@@ -140,9 +143,10 @@ main (int argc, char *argv[])
   gtk_widget_show (the_animator);
 
   gtk_widget_show (the_button);
-  gtk_widget_show (the_second_animator);
+  
+  /*  gtk_widget_show (the_second_animator); */
+
   gtk_widget_show (the_third_animator);
-  gtk_widget_show (the_button);
 
   gtk_widget_show (the_app);
 
