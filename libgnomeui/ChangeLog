@@ -1,3 +1,17 @@
+2000-01-31  Havoc Pennington  <hp@redhat.com>
+
+	* gtkpixmapmenuitem.h (struct _GtkPixmapMenuItemClass): new class
+	fields to track the number of GtkPixmapMenuItem that actually have
+	pixmaps; if none, then we drop the toggle size to that of a
+	standard menu item. Basically this means that now if you turn off
+	pixmaps there isn't a big gap on the left of your menus.
+
+	* gtkpixmapmenuitem.c (gtk_pixmap_menu_item_init): remove
+	pointless set of toggle_size field in menu item instance
+	(gtk_pixmap_menu_item_class_init): don't set the menu item class
+	toggle size until we actually get a pixmap
+	(gtk_pixmap_menu_item_class_init): init new class fields
+
 Sun Jan 30 16:58:54 2000  George Lebl <jirka@5z.com>
 
 	* gnome-dentry-edit.c: properly cast dentry->exec

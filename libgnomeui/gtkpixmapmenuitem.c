@@ -28,7 +28,8 @@ static void gtk_pixmap_menu_item_size_request  (GtkWidget        *widget,
 static void gtk_pixmap_menu_item_remove        (GtkContainer *container,
 						GtkWidget    *child);
 
-					       
+static void changed_have_pixmap_status         (GtkPixmapMenuItem *menu_item);
+
 static GtkMenuItemClass *parent_class = NULL;
 
 #define BORDER_SPACING  3
@@ -100,7 +101,8 @@ gtk_pixmap_menu_item_class_init (GtkPixmapMenuItemClass *klass)
   container_class->forall = gtk_pixmap_menu_item_forall;
   container_class->remove = gtk_pixmap_menu_item_remove;
 
-  menu_item_class->toggle_size = MAX (menu_item_class->toggle_size, PMAP_WIDTH);
+  klass->orig_toggle_size = menu_item_class->toggle_size;
+  klass->have_pixmap_count = 0;
 }
 
 static void
@@ -111,7 +113,6 @@ gtk_pixmap_menu_item_init (GtkPixmapMenuItem *menu_item)
   mi = GTK_MENU_ITEM (menu_item);
 
   menu_item->pixmap = NULL;
-  mi->toggle_size = MAX (mi->toggle_size, PMAP_WIDTH);
 }
 
 static void
@@ -182,10 +183,11 @@ gtk_pixmap_menu_item_set_pixmap (GtkPixmapMenuItem *menu_item,
         !GTK_WIDGET_MAPPED (pixmap))
       gtk_widget_map (pixmap);
   }
+
+  changed_have_pixmap_status(menu_item);
   
   if (GTK_WIDGET_VISIBLE (pixmap) && GTK_WIDGET_VISIBLE (menu_item))
     gtk_widget_queue_resize (pixmap);
-
 }
 
 static void
@@ -298,21 +300,42 @@ gtk_pixmap_menu_item_remove (GtkContainer *container,
   gtk_widget_unparent (child);
   if (bin->child == child)
     bin->child = NULL; 
-  else 
+  else {
     GTK_PIXMAP_MENU_ITEM(container)->pixmap = NULL;
-  
+    changed_have_pixmap_status(GTK_PIXMAP_MENU_ITEM(container));
+  }
+    
   if (widget_was_visible)
     gtk_widget_queue_resize (GTK_WIDGET (container));
 }
 
 
+/* important to only call this if there was actually a _change_ in pixmap == NULL */
+static void
+changed_have_pixmap_status (GtkPixmapMenuItem *menu_item)
+{
+  if (menu_item->pixmap != NULL) {
+    GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->have_pixmap_count += 1;
 
+    if (GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->have_pixmap_count == 1) {
+      /* Install pixmap toggle size */
+      GTK_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->toggle_size = MAX(GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->orig_toggle_size, PMAP_WIDTH);
+    }
+  } else {
+    GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->have_pixmap_count -= 1;
 
+    if (GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->have_pixmap_count == 0) {
+      /* Install normal toggle size */
+      GTK_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->toggle_size = GTK_PIXMAP_MENU_ITEM_CLASS(GTK_OBJECT(menu_item)->klass)->orig_toggle_size;    
+    }
+  }
 
-
-
-
-
-
-
+  /* Note that we actually need to do this for _all_ GtkPixmapMenuItem
+     whenever the klass->toggle_size changes; but by doing it anytime
+     this function is called, we get the same effect, just because of
+     how the preferences option to show pixmaps works. Bogus, broken.
+  */
+  if (GTK_WIDGET_VISIBLE(GTK_WIDGET(menu_item))) 
+    gtk_widget_queue_resize(GTK_WIDGET(menu_item));
+}
 

@@ -43,6 +43,9 @@ struct _GtkPixmapMenuItem
 struct _GtkPixmapMenuItemClass
 {
   GtkMenuItemClass parent_class;
+
+  guint orig_toggle_size;
+  guint have_pixmap_count;
 };
 
 
