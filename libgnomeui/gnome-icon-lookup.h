@@ -23,7 +23,7 @@
 #ifndef GNOME_ICON_LOOKUP_H
 #define GNOME_ICON_LOOKUP_H
 
-#include <libgnomeui/gnome-icon-theme.h>
+#include <gtk/gtkicontheme.h>
 #include <libgnomevfs/gnome-vfs-file-info.h>
 #include "gnome-thumbnail.h"
 
@@ -32,7 +32,8 @@ G_BEGIN_DECLS
 typedef enum {
   GNOME_ICON_LOOKUP_FLAGS_NONE = 0,
   GNOME_ICON_LOOKUP_FLAGS_EMBEDDING_TEXT = 1<<0,
-  GNOME_ICON_LOOKUP_FLAGS_SHOW_SMALL_IMAGES_AS_THEMSELVES = 1<<1
+  GNOME_ICON_LOOKUP_FLAGS_SHOW_SMALL_IMAGES_AS_THEMSELVES = 1<<1,
+  GNOME_ICON_LOOKUP_FLAGS_ALLOW_SVG_AS_THEMSELVES = 1<<2
 } GnomeIconLookupFlags;
 
 typedef enum {
@@ -41,7 +42,8 @@ typedef enum {
 } GnomeIconLookupResultFlags;
 
 
-char *gnome_icon_lookup      (GnomeIconTheme             *icon_theme,
+/* Also takes GnomeIconTheme for backwards compat */
+char *gnome_icon_lookup      (GtkIconTheme               *icon_theme,
 			      GnomeThumbnailFactory      *thumbnail_factory,
 			      const char                 *file_uri,
 			      const char                 *custom_icon,
@@ -49,7 +51,7 @@ char *gnome_icon_lookup      (GnomeIconTheme             *icon_theme,
 			      const char                 *mime_type,
 			      GnomeIconLookupFlags        flags,
 			      GnomeIconLookupResultFlags *result);
-char *gnome_icon_lookup_sync (GnomeIconTheme             *icon_theme,
+char *gnome_icon_lookup_sync (GtkIconTheme               *icon_theme,
 			      GnomeThumbnailFactory      *thumbnail_factory,
 			      const char                 *file_uri,
 			      const char                 *custom_icon,

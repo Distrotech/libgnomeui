@@ -1,3 +1,16 @@
+2003-12-18  Alexander Larsson  <alexl@redhat.com>
+
+        * doc/reference/tmpl/gnome-icon-theme.sgml:
+	* doc/reference/tmpl/gnome-icon-lookup.sgml:
+	Update
+	
+	* libgnomeui/gnome-icon-lookup.[ch]:
+	Use GtkIconThemes instead, but accept GnomeIconThemes for
+	backwards compat.
+
+	* libgnomeui/gnome-icon-theme.[ch]:
+	Turn into a GtkIconTheme wrapper
+	
 2003-12-17  Mark McLoughlin  <mark@skynet.ie>
 
 	* libgnomeui/gnome-multiscreen.c: (make_environment_for_screen):

@@ -22,13 +22,11 @@ GnomeIconTheme
 @parent_class: 
 @changed: 
 
-<!-- ##### STRUCT GnomeIconTheme ##### -->
+<!-- ##### TYPEDEF GnomeIconTheme ##### -->
 <para>
 
 </para>
 
-@parent_instance: 
-@priv: 
 
 <!-- ##### FUNCTION gnome_icon_theme_new ##### -->
 <para>
