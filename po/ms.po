@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
-"POT-Creation-Date: 2002-06-11 23:02+0200\n"
+"POT-Creation-Date: 2002-07-19 02:26+0800\n"
 "PO-Revision-Date: 2002-02-24 17:42+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -570,6 +570,7 @@ msgstr "Petua item 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
@@ -632,6 +633,7 @@ msgstr "_Permainan"
 
 # libgnomeui/gnome-app-helper.c:92
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Bantuan"
 
@@ -833,8 +835,8 @@ msgstr "Ganti perkataan"
 # libgnomeui/gnome-app-helper.c:215
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-msgid "_Properties..."
-msgstr "_Ciri-ciri..."
+msgid "_Properties"
+msgstr "_Ciri-ciri"
 
 # libgnomeui/gnome-app-helper.c:216
 #: libgnomeui/gnome-app-helper.c:203
@@ -847,8 +849,8 @@ msgstr "Ubahsuai ciri-ciri fail"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-msgid "Prefere_nces..."
-msgstr "Ke_utamaan..."
+msgid "Prefere_nces"
+msgstr "Ke_utamaan"
 
 # libgnomeui/gnome-app-helper.c:225
 #: libgnomeui/gnome-app-helper.c:212
@@ -860,12 +862,12 @@ msgstr "Konfigurasikan aplikasi"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Perihal"
 
 # libgnomeui/gnome-app-helper.c:235
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Perihal aplikasi ini"
 
@@ -898,7 +900,7 @@ msgid "_Close This Window"
 msgstr "_Tutup Tetingkap Ini"
 
 # libgnomeui/gnome-app-helper.c:253
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Tutup tetingkap ini"
 
@@ -1486,8 +1488,9 @@ msgid "Sans 14"
 msgstr "Sans 14"
 
 # libgnomeui/gnome-app-helper.c:160
-#~ msgid "Exit the test"
-#~ msgstr "Keluar ujian"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Keluar ujian"
 
 #~ msgid "_Contents"
 #~ msgstr "_Kandungan"
