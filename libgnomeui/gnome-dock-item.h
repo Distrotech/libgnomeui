@@ -43,13 +43,17 @@ typedef enum
 {
   GNOME_DOCK_ITEM_BEH_NORMAL = 0,
   GNOME_DOCK_ITEM_BEH_EXCLUSIVE = 1 << 0,
-  GNOME_DOCK_ITEM_BEH_NEVER_DETACH = 1 << 1,
+  GNOME_DOCK_ITEM_BEH_NEVER_FLOATING = 1 << 1,
   GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL = 1 << 2,
-  GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL = 1 << 3
+  GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL = 1 << 3,
+  GNOME_DOCK_ITEM_BEH_LOCKED = 1 << 4
 } GnomeDockItemBehavior;
 
-#define GNOME_DOCK_ITEM_DETACHABLE(x) (!(GNOME_DOCK_ITEM(x)->behavior & \
-                                       GNOME_DOCK_ITEM_BEH_NEVER_DETACH))
+/* obsolete, for compatibility; don't use */
+#define GNOME_DOCK_ITEM_BEH_NEVER_DETACH GNOME_DOCK_ITEM_BEH_NEVER_FLOATING
+
+#define GNOME_DOCK_ITEM_NOT_LOCKED(x) (!(GNOME_DOCK_ITEM(x)->behavior & \
+                                         GNOME_DOCK_ITEM_BEH_LOCKED))
 
 typedef struct _GnomeDockItem       GnomeDockItem;
 typedef struct _GnomeDockItemClass  GnomeDockItemClass;

@@ -296,7 +296,7 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 		    | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
 	
 	if (!gnome_preferences_get_menubar_detachable())
-		behavior |= GNOME_DOCK_ITEM_BEH_NEVER_DETACH;
+		behavior |= GNOME_DOCK_ITEM_BEH_LOCKED;
 
 	dock_item = gnome_dock_item_new (GNOME_APP_MENUBAR_NAME,
 					 behavior);
@@ -460,7 +460,7 @@ gnome_app_set_toolbar (GnomeApp *app,
 	behavior = GNOME_DOCK_ITEM_BEH_EXCLUSIVE;
 	
 	if (!gnome_preferences_get_toolbar_detachable())
-		behavior |= GNOME_DOCK_ITEM_BEH_NEVER_DETACH;
+		behavior |= GNOME_DOCK_ITEM_BEH_LOCKED;
 	
 	gnome_app_add_toolbar (app, toolbar,
 			       GNOME_APP_TOOLBAR_NAME,

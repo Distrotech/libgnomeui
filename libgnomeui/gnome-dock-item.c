@@ -493,7 +493,7 @@ gnome_dock_item_size_request (GtkWidget      *widget,
   if (dock_item->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
       requisition->width = 
-        GNOME_DOCK_ITEM_DETACHABLE(dock_item) ? DRAG_HANDLE_SIZE : 0;
+        GNOME_DOCK_ITEM_NOT_LOCKED(dock_item) ? DRAG_HANDLE_SIZE : 0;
       if (bin->child != NULL)
         {
           requisition->width += bin->child->requisition.width;
@@ -505,7 +505,7 @@ gnome_dock_item_size_request (GtkWidget      *widget,
   else
     {
       requisition->height = 
-        GNOME_DOCK_ITEM_DETACHABLE(dock_item) ? DRAG_HANDLE_SIZE : 0;
+        GNOME_DOCK_ITEM_NOT_LOCKED(dock_item) ? DRAG_HANDLE_SIZE : 0;
       if (bin->child != NULL)
         {
           requisition->width = bin->child->requisition.width;
@@ -554,7 +554,7 @@ gnome_dock_item_size_allocate (GtkWidget     *widget,
       child_allocation.x = border_width;
       child_allocation.y = border_width;
 
-      if (GNOME_DOCK_ITEM_DETACHABLE(di))
+      if (GNOME_DOCK_ITEM_NOT_LOCKED(di))
         {
           if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
             child_allocation.x += DRAG_HANDLE_SIZE;
@@ -595,7 +595,7 @@ gnome_dock_item_size_allocate (GtkWidget     *widget,
 	  child_allocation.width = MAX (1, widget->allocation.width - 2 * border_width);
 	  child_allocation.height = MAX (1, widget->allocation.height - 2 * border_width);
 
-          if (GNOME_DOCK_ITEM_DETACHABLE (di))
+          if (GNOME_DOCK_ITEM_NOT_LOCKED (di))
             {
               if (di->orientation == GTK_ORIENTATION_HORIZONTAL)
                 child_allocation.width -= DRAG_HANDLE_SIZE;
@@ -638,7 +638,7 @@ gnome_dock_item_paint (GtkWidget      *widget,
   GdkRectangle rect;
   gint drag_handle_size = DRAG_HANDLE_SIZE;
 
-  if (!GNOME_DOCK_ITEM_DETACHABLE(widget))
+  if (!GNOME_DOCK_ITEM_NOT_LOCKED(widget))
     drag_handle_size = 0;
 
   bin = GTK_BIN (widget);
@@ -682,7 +682,7 @@ gnome_dock_item_paint (GtkWidget      *widget,
   /* We currently draw the handle _above_ the relief of the dockitem.
      It could also be drawn on the same level...  */
 
-  if (GNOME_DOCK_ITEM_DETACHABLE(di))
+  if (GNOME_DOCK_ITEM_NOT_LOCKED(di))
     {
       
       rect.x = 0;
@@ -787,7 +787,7 @@ gnome_dock_item_button_changed (GtkWidget      *widget,
   if (event->window != di->bin_window)
     return FALSE;
 
-  if (!GNOME_DOCK_ITEM_DETACHABLE(widget))
+  if (!GNOME_DOCK_ITEM_NOT_LOCKED(widget))
     return FALSE;
 
   event_handled = FALSE;
@@ -1101,7 +1101,7 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
   GtkRequisition requisition;
   GtkAllocation allocation;
 
-  if (item->behavior & GNOME_DOCK_ITEM_BEH_NEVER_DETACH)
+  if (item->behavior & GNOME_DOCK_ITEM_BEH_NEVER_FLOATING)
     return FALSE;
 
   item->float_x = x;

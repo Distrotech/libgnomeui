@@ -123,8 +123,8 @@ main (int argc, char **argv)
                                              GNOME_DOCK_ITEM_BEH_EXCLUSIVE
                                              | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
       else if (i == 1)
-        dock_items[i] = gnome_dock_item_new ("NoDetachBar",
-                                             GNOME_DOCK_ITEM_BEH_NEVER_DETACH);
+        dock_items[i] = gnome_dock_item_new ("LockedBar",
+                                             GNOME_DOCK_ITEM_BEH_LOCKED);
       else
         {
           gchar *name;
