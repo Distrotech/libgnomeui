@@ -255,7 +255,7 @@ msgstr "ตั้ง_ค่าการพิมพ์..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "ตั้งค่าเกี่ยวกับการพิมพ์่สำหรับเครื่องพิมพ์ปัจจุบัน"
+msgstr "ตั้งค่าเกี่ยวกับการพิมพ์สำหรับเครื่องพิมพ์ปัจจุบัน"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
@@ -568,11 +568,11 @@ msgstr ""
 
 #: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
-msgstr "มีแถบความคืนหน้า"
+msgstr "มีแถบความคืบหน้า"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr "สร้างวิดเก็จแสดงความคืนหน้า"
+msgstr "สร้างวิดเจ็ตแสดงความคืบหน้า"
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
@@ -580,7 +580,7 @@ msgstr "มีแถบสถานะ"
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr "สร้างวิดเก็จแสดงสถานะ"
+msgstr "สร้างวิดเจ็ตแสดงสถานะ"
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
@@ -932,7 +932,7 @@ msgstr "ใช้ GtkFileChooser"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "ว่าจะใช้วิดเก็จ GtkFileChooser (ใหม่กว่า) หรือ GtkFileSelection สำหรับเลือกแฟ้ม."
+msgstr "จะใช้วิดเจ็ต GtkFileChooser (ใหม่กว่า) หรือ GtkFileSelection สำหรับเลือกแฟ้ม."
 
 #: libgnomeui/gnome-file-entry.c:603 libgnomeui/gnome-file-entry.c:628
 msgid "Select file"
@@ -1033,7 +1033,7 @@ msgstr ""
 
 #: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr "_ลายระเอียด"
+msgstr "_รายละเอียด"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
@@ -1076,11 +1076,11 @@ msgstr "ขจัดความอดอยาก"
 
 #: libgnomeui/gnome-href.c:138
 msgid "Link color"
-msgstr "สีลิงค์"
+msgstr "สีลิงก์"
 
 #: libgnomeui/gnome-href.c:139
 msgid "Color used to draw the link"
-msgstr "สีสำหรับแสดงลิงค์"
+msgstr "สีสำหรับแสดงลิงก์"
 
 #: libgnomeui/gnome-href.c:170
 msgid "This button will take you to the URI that it displays."
@@ -1106,7 +1106,7 @@ msgstr "ชื่อหน้าต่างเลือกไอคอน"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
-msgstr "โฟลเดอร์พิกแมป"
+msgstr "โฟลเดอร์พิกซ์แมป"
 
 #: libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
