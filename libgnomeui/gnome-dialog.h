@@ -21,7 +21,6 @@
 #include <gdk/gdk.h>
 #include <gtk/gtkwindow.h>
 #include <gtk/gtkeditable.h>
-#include <gtk/gtkfeatures.h>
 #include <gtk/gtkaccelgroup.h>
 #include <libgnome/gnome-defs.h>
 
