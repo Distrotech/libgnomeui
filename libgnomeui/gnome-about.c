@@ -18,33 +18,13 @@
  */
 
 #include <config.h>
+#include "libgnome/gnome-i18n.h"
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
 #include "gnome-about.h"
 #include <strings.h>
 #include <gtk/gtk.h>
 #include <gnome.h>
-
-/* Library must use dgettext, not gettext.  */
-#ifdef ENABLE_NLS
-#    include <libintl.h>
-#    undef _
-#    define _(String) dgettext (PACKAGE, String)
-#    ifdef gettext_noop
-#        define N_(String) gettext_noop (String)
-#    else
-#        define N_(String) (String)
-#    endif
-#else
-/* Stubs that do something close enough.  */
-#    define textdomain(String) (String)
-#    define gettext(String) (String)
-#    define dgettext(Domain,Message) (Message)
-#    define dcgettext(Domain,Message,Type) (Message)
-#    define bindtextdomain(Domain,Directory) (Domain)
-#    define _(String) (String)
-#    define N_(String) (String)
-#endif
 
 /* FONTS */
 #define HELVETICA_20_BFONT "-adobe-helvetica-bold-r-normal-*-20-*-*-*-*-*-*-*"
@@ -146,7 +126,7 @@ gnome_about_class_init (GnomeAboutClass *klass)
 }
 
 /* ----------------------------------------------------------------------
-   NAME:	gome_about_init
+   NAME:	gnome_about_init
    DESCRIPTION:	
    ---------------------------------------------------------------------- */
 
@@ -156,7 +136,7 @@ gnome_about_init (GnomeAbout *about)
 }
 
 /* ----------------------------------------------------------------------
-   NAME:	gome_about_repaint
+   NAME:	gnome_about_repaint
    DESCRIPTION:	
    ---------------------------------------------------------------------- */
 
@@ -277,10 +257,7 @@ gnome_about_display_comments (GdkWindow *win,
 
 	/* we need a buffer because strtok will modify the string! */
 	/* strtok is a cool but dangerous function. */
-	buffer = malloc (sizeof(char) * strlen(comments) + 1);
-	if (buffer == NULL)
-		return;
-	strcpy (buffer, comments);
+	buffer = g_strdup(comments);
 
 	ypos = y;
 
@@ -288,11 +265,8 @@ gnome_about_display_comments (GdkWindow *win,
 	par = (GList *)NULL;
 
 	for (tok = strtok (buffer, "\n"); tok; tok = strtok (NULL, "\n")) {
-		p1 = (char *)malloc (sizeof (char) * strlen (tok) + 1);
-		if (p1 == NULL)
-			goto free_list;
-		strcpy (p1, tok);
-		par = g_list_append (par, p1);
+	        p1 = g_strdup(tok);
+		par = g_list_append (par, g_strdup(tok));
 	}
 
 	/* Print each paragraph */
@@ -350,11 +324,9 @@ gnome_about_display_comments (GdkWindow *win,
 
 free_list:
 	/* Free list memory */
-	for (tmp = par; tmp != NULL; tmp = tmp->next) {
-		free (tmp->data);
-	}
+	g_list_foreach(par, g_free, NULL);
 	g_list_free (par);
-	free (buffer);
+	g_free (buffer);
 
 	return;
 }
@@ -448,14 +420,14 @@ gnome_about_calc_size (GnomeAboutInfo *gai)
    DESCRIPTION:	
    ---------------------------------------------------------------------- */
 
-static GnomeAboutInfo
-*gnome_fill_info (GtkWidget *widget,
-		  gchar	*title,
-		  gchar	*version,
-		  gchar   *copyright,
-		  gchar   **authors,
-		  gchar   *comments,
-		  gchar   *logo)
+static GnomeAboutInfo*
+gnome_fill_info (GtkWidget *widget,
+		 gchar	*title,
+		 gchar	*version,
+		 gchar   *copyright,
+		 gchar   **authors,
+		 gchar   *comments,
+		 gchar   *logo)
 {
 	GnomeAboutInfo *gai;
 	GdkColor light_green = {0, 51914, 64764, 44718};
@@ -464,74 +436,58 @@ static GnomeAboutInfo
 	GtkStyle *style;
 
 	/* alloc mem for struct */
-	gai = malloc (sizeof(GnomeAboutInfo)); 
-	if (gai == NULL)
-		return NULL;
+	gai = g_new (GnomeAboutInfo);
 
 	/* Create fonts */
 	/* FIXME: dirty hack, but it solves i18n problem without rewriting the
 	   drawing code..  */
 	style = gtk_style_ref (widget->style);
+
 	gtk_widget_set_name (widget, "Title");
 	gai->font_title = gdk_font_ref (widget->style->font);
+
 	gtk_widget_set_name (widget, "Copyright");
 	gai->font_copyright = gdk_font_ref (widget->style->font);
+
 	gtk_widget_set_name (widget, "Author");
 	gai->font_author = gdk_font_ref (widget->style->font);
+
 	gtk_widget_set_name (widget, "Names");
 	gai->font_names = gdk_font_ref (widget->style->font);
+
 	gtk_widget_set_name (widget, "Comments");
 	gai->font_comments = gdk_font_ref (widget->style->font);
+
 	gtk_widget_set_style (widget, style);
 	gtk_style_unref (style);
   
 	/* Add color */
 	memcpy (&gai->light_green, &light_green, sizeof (GdkColor));
-/*   gdk_color_alloc (gdk_colormap_get_system (), &gai->light_green); */
+	/*   gdk_color_alloc (gdk_colormap_get_system (), &gai->light_green); */
 
-	/* FIXME: this should use a GdkColorContext for allocation.  The cc structure
-	 * should reside in the GnomeAboutClass so that all about boxes share it.
-	 */
+	/* FIXME: this should use a GdkColorContext for allocation.
+	 * The cc structure should reside in the GnomeAboutClass so
+	 * that all about boxes share it. */
 	gdk_color_alloc (gtk_widget_get_default_colormap (), &gai->light_green);
 
 	/* fill struct */
 	if(title) 
-	{
-		s = "";
-		s = g_copy_strings (title, " ", version ? version : "", NULL);
-		gai->title = malloc (sizeof(char)*strlen(s)+1);
-		strcpy (gai->title, s);
-	}
+	  gai->title = g_copy_strings (title, " ",
+				       version ? version : "", NULL);
 	else
-		gai->title = NULL;
+	  gai->title = NULL;
   
-	if (copyright)
-	{
-		gai->copyright = malloc (sizeof(char)*strlen(copyright)+1);
-		strcpy (gai->copyright, copyright);
-	}
-	else
-		gai->copyright = NULL;
+	gai->copyright = g_strdup(copyright);
   
-	if (comments)
-	{
-		gai->comments = malloc (sizeof(char)*strlen(comments)+1);
-		strcpy (gai->comments, comments);
-	}
-	else
-		gai->comments = NULL;
-  
+	gai->comments = g_strdup(comments);
   
 	gai->names = NULL;
 	if (authors && authors[0])
 	{
 		while( *authors ) 
 		{
-			s = malloc (sizeof(char)*strlen( *authors)+1);
-			if (s == NULL) 
-				break;
-			strcpy (s, *authors);
-			gai->names = g_list_append (gai->names, (gpointer) s);
+			gai->names = g_list_append (gai->names,
+						    g_strdup(*authors));
 			authors++;
 		}
 	}
@@ -558,12 +514,9 @@ gnome_destroy_about (GtkWidget *widget, gpointer *data)
 	gai = (GnomeAboutInfo *)data;
 
 	/* Free memory used for title, copyright and comments */
-	if (gai->title)
-		free (gai->title);
-	if (gai->copyright)
-		free (gai->copyright);
-	if (gai->comments)
-		free (gai->comments);
+	g_free (gai->title);
+	g_free (gai->copyright);
+	g_free (gai->comments);
 
 	/* Free GUI's. */
 	gdk_font_unref (gai->font_title);
@@ -573,12 +526,7 @@ gnome_destroy_about (GtkWidget *widget, gpointer *data)
 	gdk_font_unref (gai->font_comments);
 
 	/* Free memory used for authors */
-	tmp = gai->names;
-	while (tmp)
-	{
-		free (tmp->data);
-		tmp = tmp->next;
-	} 
+	g_list_foreach(gai->names, g_free, NULL);
 	g_list_free (tmp);
 
 }

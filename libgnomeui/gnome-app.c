@@ -266,7 +266,12 @@ gnome_app_toolbar_set_position(GnomeApp *app, GnomeAppWidgetPositionType pos_too
 }
 
 /* These are used for knowing where to pack the contents into the
-   table, so we don't have to recompute every time we set_contents */
+   table, so we don't have to recompute every time we set_contents.
+   The first dimension is the current position of the menubar, and the
+   second dimension is the current position of the toolbar. Put it all
+   together and you find out the top-left and bottom-right coordinates
+   of the contents inside the placement table.
+*/
 static gint startxs[2][4] = {
 	{0, 0, 1, 0},
 	{0, 0, 1, 0}

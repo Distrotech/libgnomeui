@@ -96,7 +96,7 @@ static void   client_unset_prop             (GnomeClient *client,
 
 #endif /* HAVE_LIBSM */
 
-static void    array_free                    (gchar **array);
+#define array_free(array) gnome_string_array_free((array))
 static gchar** array_init_from_arg           (gint argc, 
 					      gchar *argv[]);
 static gchar** array_copy                    (gchar **source);
@@ -389,8 +389,7 @@ gnome_real_client_destroy (GtkObject *object)
     gnome_client_disconnect (client);
 
   g_free (client->client_id);
-  if (client->previous_id)
-    g_free (client->previous_id);
+  g_free (client->previous_id);
 
   array_free (client->clone_command);
   g_free     (client->current_directory);
@@ -1550,22 +1549,6 @@ array_insert_sm_client_id_arg (gchar ***array, gchar *client_id)
 }
 
 /*****************************************************************************/
-
-static void
-array_free (gchar **array)
-{
-  gchar **ptr;
-
-  if (array != NULL)
-    {
-      /* Free all entries in our array.  */
-      for (ptr = array ; *ptr ; ptr++)
-	g_free (*ptr);
-      
-      /* Free the array.  */
-      g_free (array);
-    }
-}
 
 static gchar **
 array_init_from_arg (gint argc, gchar *argv[])
