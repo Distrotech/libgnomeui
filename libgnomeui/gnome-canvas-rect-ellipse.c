@@ -461,8 +461,11 @@ gnome_canvas_re_set_property (GObject              *object,
 			gnome_canvas_re_set_fill (re, pcolor != NULL);
 
 			if (pcolor) {
+				GdkColormap *colormap;
+
 				color = *pcolor;
-				gdk_color_context_query_color (item->canvas->cc, &color);
+				colormap = gtk_widget_get_colormap (GTK_WIDGET (item->canvas));
+				gdk_rgb_find_color (colormap, &color);
 				have_pixel = TRUE;
 			}
 
@@ -513,8 +516,12 @@ gnome_canvas_re_set_property (GObject              *object,
 			gnome_canvas_re_set_outline (re, pcolor != NULL);
 
 			if (pcolor) {
+				GdkColormap *colormap;
+
 				color = *pcolor;
-				gdk_color_context_query_color (item->canvas->cc, &color);
+				colormap = gtk_widget_get_colormap (GTK_WIDGET (item->canvas));
+				gdk_rgb_find_color (colormap, &color);
+
 				have_pixel = TRUE;
 			}
 
@@ -586,10 +593,13 @@ static void
 get_color_value (GnomeCanvasRE *re, gulong pixel, GValue *value)
 {
 	GdkColor *color;
+	GdkColormap *colormap;
 
 	color = g_new (GdkColor, 1);
 	color->pixel = pixel;
-	gdk_color_context_query_color (GNOME_CANVAS_ITEM (re)->canvas->cc, color);
+
+	colormap = gtk_widget_get_colormap (GTK_WIDGET (re));
+	gdk_rgb_find_color (colormap, color);
 	g_value_set_boxed (value,  color);
 }
 

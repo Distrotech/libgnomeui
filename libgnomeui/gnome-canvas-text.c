@@ -703,9 +703,12 @@ gnome_canvas_text_set_property (GObject            *object,
 	case PROP_FILL_COLOR_GDK:
 		pcolor = g_value_get_boxed (value);
 		if (pcolor) {
-			color = *pcolor;
-			gdk_color_context_query_color (item->canvas->cc, &color);
-			have_pixel = TRUE;
+		    GdkColormap *colormap;
+
+		    color = *pcolor;
+		    colormap = gtk_widget_get_colormap (GTK_WIDGET (item->canvas));
+		    gdk_rgb_find_color (colormap, &color);
+		    have_pixel = TRUE;
 		}
 
 		text->rgba = ((color.red & 0xff00) << 16 |
@@ -803,13 +806,16 @@ gnome_canvas_text_get_property (GObject            *object,
 		g_value_set_double (value, text->yofs);
 		break;
 
-	case PROP_FILL_COLOR_GDK:
+	case PROP_FILL_COLOR_GDK: {
+		GdkColormap *colormap;
+
 		color = g_new (GdkColor, 1);
 		color->pixel = text->pixel;
-		gdk_color_context_query_color (text->item.canvas->cc, color);
+		colormap = gtk_widget_get_colormap (GTK_WIDGET (text->item.canvas));
+		gdk_rgb_find_color (colormap, color);
 		g_value_set_boxed (value, color);
 		break;
-
+	}
 	case PROP_FILL_COLOR_RGBA:
 		g_value_set_uint (value, text->rgba);
 		break;
@@ -899,8 +905,6 @@ gnome_canvas_text_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 {
 	GnomeCanvasText *text;
 	GdkRectangle rect;
-	int i;
-	int xpos, ypos;
 
 	text = GNOME_CANVAS_TEXT (item);
 
@@ -932,10 +936,8 @@ gnome_canvas_text_render (GnomeCanvasItem *item, GnomeCanvasBuf *buf)
 {
 	GnomeCanvasText *text;
 	guint32 fg_color;
-	double xpos, ypos;
-	int i, j;
+	int i;
 	double affine[6];
-	int dx, dy;
 	ArtPoint start_i, start_c;
 	FT_Bitmap bitmap;
 	
@@ -989,9 +991,7 @@ gnome_canvas_text_point (GnomeCanvasItem *item, double x, double y,
 {
 	GnomeCanvasText *text;
 	PangoLayoutIter *iter;
-	int i;
 	int x1, y1, x2, y2;
-	int font_height;
 	int dx, dy;
 	double dist, best;
 

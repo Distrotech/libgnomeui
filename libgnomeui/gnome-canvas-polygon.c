@@ -509,8 +509,11 @@ gnome_canvas_polygon_set_property (GObject              *object,
 			poly->fill_set = pcolor != NULL;
 
 			if (pcolor) {
+				GdkColormap *colormap;
+
 				color = *pcolor;
-				gdk_color_context_query_color (item->canvas->cc, &color);
+				colormap = gtk_widget_get_colormap (GTK_WIDGET (item->canvas));
+				gdk_rgb_find_color (colormap, &color);
 				have_pixel = TRUE;
 			}
 
@@ -560,8 +563,11 @@ gnome_canvas_polygon_set_property (GObject              *object,
 			poly->outline_set = pcolor != NULL;
 
 			if (pcolor) {
+				GdkColormap *colormap;
+
 				color = *pcolor;
-				gdk_color_context_query_color (item->canvas->cc, &color);
+				colormap = gtk_widget_get_colormap (GTK_WIDGET (item->canvas));
+				gdk_rgb_find_color (colormap, &color);
 				have_pixel = TRUE;
 			}
 
@@ -634,10 +640,13 @@ static void
 get_color_value (GnomeCanvasPolygon *poly, gulong pixel, GValue *value)
 {
 	GdkColor *color;
+	GdkColormap *colormap;
 
 	color = g_new (GdkColor, 1);
 	color->pixel = pixel;
-	gdk_color_context_query_color (poly->item.canvas->cc, color);
+
+	colormap = gtk_widget_get_colormap (GTK_WIDGET (poly));
+	gdk_rgb_find_color (colormap, color);
 	g_value_set_boxed (value, color);
 }
 

@@ -767,8 +767,12 @@ gnome_canvas_line_set_property (GObject              *object,
 	case PROP_FILL_COLOR_GDK:
 		pcolor = g_value_get_boxed (value);
 		if (pcolor) {
+			GdkColormap *colormap;
 			color = *pcolor;
-			gdk_color_context_query_color (item->canvas->cc, &color);
+
+			colormap = gtk_widget_get_colormap (GTK_WIDGET (item->canvas));
+			gdk_rgb_find_color (colormap, &color);
+
 			have_pixel = TRUE;
 		}
 
@@ -937,12 +941,16 @@ gnome_canvas_line_get_property (GObject              *object,
 			g_value_set_boxed (value, NULL);
 		break;
 
-	case PROP_FILL_COLOR_GDK:
+	case PROP_FILL_COLOR_GDK: {
+		GdkColormap *colormap;
+
 		color = g_new (GdkColor, 1);
 		color->pixel = line->fill_pixel;
-		gdk_color_context_query_color (line->item.canvas->cc, color);
+		colormap = gtk_widget_get_colormap (GTK_WIDGET (line->item.canvas));
+		gdk_rgb_find_color (colormap, color);
 		g_value_set_boxed (value, color);
 		break;
+	}
 
 	case PROP_FILL_COLOR_RGBA:
 		g_value_set_uint (value, line->fill_rgba);

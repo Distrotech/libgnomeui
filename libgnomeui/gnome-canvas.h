@@ -441,9 +441,6 @@ struct _GnomeCanvas {
 	/* If non-NULL, the currently focused item */
 	GnomeCanvasItem *focused_item;
 
-	/* Color context used for color allocation */
-	GdkColorContext *cc;
-
 	/* GC for temporary draw pixmap */
 	GdkGC *pixmap_gc;
 

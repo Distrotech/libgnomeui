@@ -1,5 +1,28 @@
 2001-02-23  Martin Baulig  <baulig@suse.de>
 
+	* gnome-canvas.h (GnomeCanvas): Removed `cc' field, GdkColorContext
+	no longer exists in GTK+.
+
+	* gnome-canvas.c (gnome_canvas_get_color): Use gdk_rgb_find_color()
+	instead of gdk_color_context_get_pixels().
+	(gnome_canvas_get_color_pixel): Likewise.
+
+	* gnome-canvas-line.c (gnome_canvas_line_get/set_property):
+	Use gdk_rgb_find_color() instead of gdk_color_context_query_color().
+
+	* gnome-canvas-polygon.c (gnome_canvas_polygon_get/set_property):
+	Use gdk_rgb_find_color() instead of gdk_color_context_query_color().
+	(get_color_value): Likewise.
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_re_get/set_property):
+	Use gdk_rgb_find_color() instead of gdk_color_context_query_color().
+	(get_color_value): Likewise.
+
+	* gnome-canvas-text.c (gnome_canvas_text_get/set_property):
+	Use gdk_rgb_find_color() instead of gdk_color_context_query_color().
+
+2001-02-23  Martin Baulig  <baulig@suse.de>
+
 	* Makefile.am (INCLUDES): Added $(PANGO_CFLAGS).
 	(libgnomeui_2_la_LDFLAGS, LDADD): Added $(PANGO_LIBS).
 

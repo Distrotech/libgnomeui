@@ -2268,9 +2268,6 @@ gnome_canvas_init (GnomeCanvas *canvas)
 	gtk_layout_set_hadjustment (GTK_LAYOUT (canvas), NULL);
 	gtk_layout_set_vadjustment (GTK_LAYOUT (canvas), NULL);
 
-	canvas->cc = gdk_color_context_new (gtk_widget_get_visual (GTK_WIDGET (canvas)),
-					    gtk_widget_get_colormap (GTK_WIDGET (canvas)));
-
 	/* Create the root item as a special case */
 
 	canvas->root = GNOME_CANVAS_ITEM (gtk_type_new (gnome_canvas_group_get_type ()));
@@ -2347,11 +2344,6 @@ gnome_canvas_destroy (GtkObject *object)
 	}
 
 	shutdown_transients (canvas);
-
-	if (canvas->cc) {
-		gdk_color_context_free (canvas->cc);
-		canvas->cc = NULL;
-	}
 
 	if (GTK_OBJECT_CLASS (canvas_parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (canvas_parent_class)->destroy) (object);
@@ -3845,8 +3837,7 @@ gnome_canvas_world_to_window (GnomeCanvas *canvas, double worldx, double worldy,
 int
 gnome_canvas_get_color (GnomeCanvas *canvas, const char *spec, GdkColor *color)
 {
-	gulong pixel;
-	gint n;
+	GdkColormap *colormap;
 
 	g_return_val_if_fail (canvas != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), FALSE);
@@ -3862,17 +3853,9 @@ gnome_canvas_get_color (GnomeCanvas *canvas, const char *spec, GdkColor *color)
 
 	gdk_color_parse (spec, color);
 
-	pixel = 0;
-	n = 0;
-	gdk_color_context_get_pixels (canvas->cc,
-				      &color->red,
-				      &color->green,
-				      &color->blue,
-				      1,
-				      &pixel,
-				      &n);
+	colormap = gtk_widget_get_colormap (GTK_WIDGET (canvas));
 
-	color->pixel = pixel;
+	gdk_rgb_find_color (colormap, color);
 
 	return TRUE;
 }
@@ -3891,26 +3874,21 @@ gulong
 gnome_canvas_get_color_pixel (GnomeCanvas *canvas,
 			      guint        rgba)
 {
+	GdkColormap *colormap;
 	GdkColor color;
-	gulong pixel;
-	gint n;
 
 	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), 0);
 
 	color.red = ((rgba & 0xff000000) >> 16) + ((rgba & 0xff000000) >> 24);
 	color.green = ((rgba & 0x00ff0000) >> 8) + ((rgba & 0x00ff0000) >> 16);
 	color.blue = (rgba & 0x0000ff00) + ((rgba & 0x0000ff00) >> 8);
-	pixel = 0;
-	n = 0;
-	gdk_color_context_get_pixels (canvas->cc,
-				      &color.red,
-				      &color.green,
-				      &color.blue,
-				      1,
-				      &pixel,
-				      &n);
+	color.pixel = 0;
 
-	return pixel;
+	colormap = gtk_widget_get_colormap (GTK_WIDGET (canvas));
+
+	gdk_rgb_find_color (colormap, &color);
+
+	return color.pixel;
 }
 
 
