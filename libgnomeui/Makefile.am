@@ -84,8 +84,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-pouchP.h			\
 	gnome-preferences.c		\
 	gnome-roo.c			\
-	gnome-stock.c			\
-	gnome-stock-ids.c		\
         gnome-winhints.c		\
         gnome-paper-selector.c		\
 	gnome-unit-spinner.c		\
@@ -151,8 +149,7 @@ gnome_headers = \
 	gnome-pixmap.h			\
 	gnome-roo.h			\
 	gnome-selector.h		\
-	gnome-stock.h			\
-	gnome-stock-ids.h		\
+	gnome-stock-icons.h		\
 	gnome-types.h			\
 	gnome-uidefs.h			\
 	gnome-unit-spinner.h		\

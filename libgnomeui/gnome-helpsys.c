@@ -41,7 +41,7 @@
 #include <libgnome/gnome-config.h>
 #include <libgnome/gnome-i18n.h>
 #include "gnome-helpsys.h"
-#include "gnome-stock.h"
+#include "gnome-stock-icons.h"
 #include "gnome-uidefs.h"
 #include "gnome-popup-menu.h"
 #include "wap-textfu.h"
@@ -213,18 +213,20 @@ gnome_help_view_init (GnomeHelpView *help_view)
   help_view->_priv->style_priority = G_PRIORITY_LOW;
 
   help_view->_priv->toolbar = gtk_toolbar_new(GTK_ORIENTATION_VERTICAL, GTK_TOOLBAR_ICONS);
-  help_view->_priv->btn_help = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->_priv->toolbar), _("Help"),
-						_("Show help for a specific region of the application"),
-						NULL,
-						gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_HELP),
-						GTK_SIGNAL_FUNC (gnome_help_view_select_help_cb),
-						(gpointer) help_view);
-  help_view->_priv->btn_style = gtk_toolbar_append_item(GTK_TOOLBAR(help_view->_priv->toolbar), _("Style"),
-						_("Change the way help is displayed"),
-						NULL,
-						gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_PREFERENCES),
-						GTK_SIGNAL_FUNC (gnome_help_view_select_style),
-						(gpointer) help_view);
+  help_view->_priv->btn_help = gtk_toolbar_insert_stock(GTK_TOOLBAR(help_view->_priv->toolbar),
+							GNOME_STOCK_PIXMAP_HELP,
+							_("Help"),
+							_("Show help for a specific region of the application"),
+							GTK_SIGNAL_FUNC (gnome_help_view_select_help_cb),
+							(gpointer) help_view,
+							-1);
+  help_view->_priv->btn_style = gtk_toolbar_insert_stock(GTK_TOOLBAR(help_view->_priv->toolbar),
+							 GNOME_STOCK_PIXMAP_PREFERENCES,
+							 _("Style"),
+							 _("Change the way help is displayed"),
+							 GTK_SIGNAL_FUNC (gnome_help_view_select_style),
+							 (gpointer) help_view,
+							 -1);
 
   help_view->_priv->evbox = gtk_event_box_new();
   gtk_widget_add_events(help_view->_priv->evbox,

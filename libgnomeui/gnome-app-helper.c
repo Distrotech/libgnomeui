@@ -341,9 +341,11 @@ create_pixmap (GnomeUIPixmapType pixmap_type, gconstpointer pixmap_info)
 	pixmap = NULL;
 
 	switch (pixmap_type) {
+#ifdef FIXME
 	case GNOME_APP_PIXMAP_STOCK:
 		pixmap = gnome_stock_new_with_icon (pixmap_info);
 		break;
+#endif
 
 	case GNOME_APP_PIXMAP_DATA:
 		if (pixmap_info)

@@ -29,7 +29,7 @@
 
 #include <libgnome/gnome-i18n.h>
 
-#include "gnome-stock-ids.h"
+#include <libgnomeui/gnome-stock-icons.h>
 #include "pixmaps/gnome-stock-pixbufs.h"
 
 #ifndef GETTEXT_PACKAGE
@@ -255,7 +255,6 @@ get_default_icons (GtkIconFactory *factory)
 
 static GtkStockItem builtin_items [] =
 {
-    { GTK_STOCK_DIALOG_INFO, N_("Information"), 0, 0, GETTEXT_PACKAGE },
     { GNOME_STOCK_PIXMAP_ADD, N_("Add"), 0, 0, GETTEXT_PACKAGE },
     { GNOME_STOCK_PIXMAP_CLEAR, N_("Clear"), 0, 0, GETTEXT_PACKAGE },
     { GNOME_STOCK_PIXMAP_COLORSELECTOR, N_("Select Color"), 0, 0, GETTEXT_PACKAGE },

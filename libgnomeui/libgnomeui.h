@@ -70,7 +70,7 @@
 #include <libgnomeui/gnome-popup-help.h>
 #include <libgnomeui/gnome-pixmap.h>
 #include <libgnomeui/gnome-types.h>
-#include <libgnomeui/gnome-stock.h>
+#include <libgnomeui/gnome-stock-icons.h>
 #include <libgnomeui/gnome-client.h>
 #include <libgnomeui/gtk-clock.h>
 #include <libgnomeui/gtkdial.h>

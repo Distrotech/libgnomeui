@@ -1,5 +1,18 @@
 2001-04-29  Martin Baulig  <baulig@suse.de>
 
+	* gnome-app-helper.c, gnome-druid.c, gnome-font-picker.c,
+	gnome-helpsys.c: Use the GTK+ API to access our stock icons.
+
+	* gnome-stock-icons.h: New file; provide #defines for all
+	our stock ids.
+
+	* gnome-init.c (libgnomeui_post_args_parse): Call
+	init_gnome_stock_icons().
+
+	* gnome-stock.[ch], gnome-stock-ids.[ch]: Removed.
+
+2001-04-29  Martin Baulig  <baulig@suse.de>
+
 	* gnome-textfu.c (gnome_textfu_parse): Use stat(), not fstat();
 	[FIXME: for some strange reason, fstat() is an undefined symbol
 	on my system.]
