@@ -31,6 +31,9 @@
 
 #include "libgnome/libgnomeP.h"
 #include "gnome-client.h"
+#include "gnome-stock.h"
+#include "gnome-messagebox.h"
+#include "gnome-uidefs.h"
 #include "gnome-ice.h"
 #include "gnome-winhints.h"
 #include <gtk/gtk.h>
@@ -727,7 +730,8 @@ client_die_callback (SmcConn smc_conn, SmPointer client_data)
 {
   GnomeClient *client= (GnomeClient*) client_data;
 
-  gtk_grab_remove (client_grab_widget);
+  if (client_grab_widget)
+    gtk_grab_remove (client_grab_widget);
 
   gtk_signal_emit (GTK_OBJECT (client), client_signals[DIE]);
 }
@@ -738,7 +742,8 @@ client_save_complete_callback (SmcConn smc_conn, SmPointer client_data)
 {
   GnomeClient *client = (GnomeClient*) client_data;
 
-  gtk_grab_remove (client_grab_widget);
+  if (client_grab_widget)
+    gtk_grab_remove (client_grab_widget);
 
   gtk_signal_emit (GTK_OBJECT (client), client_signals[SAVE_COMPLETE]);
 }
@@ -749,7 +754,8 @@ client_shutdown_cancelled_callback (SmcConn smc_conn, SmPointer client_data)
 {
   GnomeClient *client= (GnomeClient*) client_data;
 
-  gtk_grab_remove (client_grab_widget);
+  if (client_grab_widget)
+    gtk_grab_remove (client_grab_widget);
 
   gtk_signal_emit (GTK_OBJECT (client), client_signals[SHUTDOWN_CANCELLED]);
 }
@@ -883,7 +889,7 @@ gnome_client_disable_master_connection (void)
 static void  
 master_client_clean_up (void)
 {
-  if (GNOME_CLIENT_CONNECTED (master_client))
+  if (master_client && GNOME_CLIENT_CONNECTED (master_client))
       gnome_client_disconnect (master_client);
 }
 
@@ -1264,16 +1270,14 @@ gnome_client_new_without_connection (void)
 void
 gnome_client_flush (GnomeClient *client)
 {
-#ifdef HAVE_LIBSM
-  IceConn conn;
-#endif
-
   g_return_if_fail (client != NULL);
-  g_return_if_fail (GNOME_CLIENT_CONNECTED (client));
+  g_return_if_fail (GNOME_IS_CLIENT (client));
 
 #ifdef HAVE_LIBSM
-  conn = SmcGetIceConnection ((SmcConn) client->smc_conn);
-  IceFlush (conn);
+  if (GNOME_CLIENT_CONNECTED (client)) {
+    IceConn conn = SmcGetIceConnection ((SmcConn) client->smc_conn);
+    IceFlush (conn);
+  }
 #endif
 }
 
@@ -1370,6 +1374,7 @@ void
 gnome_client_disconnect (GnomeClient *client)
 {
   g_return_if_fail (client != NULL);
+  g_return_if_fail (GNOME_IS_CLIENT (client));
 
   if (GNOME_CLIENT_CONNECTED (client))
     {
@@ -1963,7 +1968,10 @@ gchar *
 gnome_client_get_config_prefix (GnomeClient *client)
 {
   if (!client || !GNOME_IS_CLIENT (client))
-    client = master_client;
+      client = master_client;
+
+  if (!client || !GNOME_IS_CLIENT (client))
+      return gnome_client_get_global_config_prefix (client);
 
   if (!client->config_prefix)
     client->config_prefix = gnome_client_get_global_config_prefix (client);
@@ -1987,10 +1995,11 @@ gnome_client_set_global_config_prefix (GnomeClient *client, gchar* prefix)
   if (client == NULL)
     {
       config_prefix= g_strdup (prefix);
+      return;
     }
 
   g_return_if_fail (GNOME_IS_CLIENT (client));
-  
+      
   client->global_config_prefix = g_strdup (prefix);
 }
 
@@ -2228,11 +2237,11 @@ gnome_client_save_dialog_show (GnomeClient *client, gint key,
   gboolean shutdown_cancelled;
   gint cancel_button = g_list_length (dialog->buttons);
 
-  /* These are SYSTEM modal dialogs so map them above everything else */
-  gnome_win_hints_set_layer (GTK_WIDGET (dialog), WIN_LAYER_ABOVE_DOCK);
-
   if (client->shutdown) 
     gnome_dialog_append_button (dialog, _("Cancel Logout"));
+  gtk_widget_show_all (GTK_WIDGET (dialog));
+  /* These are SYSTEM modal dialogs so map them above everything else */
+  gnome_win_hints_set_layer (GTK_WIDGET (dialog), WIN_LAYER_ABOVE_DOCK);
   shutdown_cancelled = (cancel_button == gnome_dialog_run_and_close (dialog));
   gnome_interaction_key_return (key, shutdown_cancelled);
 }
@@ -2458,14 +2467,67 @@ gnome_client_request_save (GnomeClient	       *client,
       return;
     }
   
-#ifdef HAVE_LIBSM
+  if (shutdown) 
+    {
+      static GtkWidget *box = NULL;
+      static GtkWidget *but = NULL;
+      gboolean logout_prompt;
+      
+      gnome_config_push_prefix ("/Gnome/Session/");
+      logout_prompt = gnome_config_get_bool ("Prompt_for_logout=true");
+
+      if(logout_prompt) 
+	{
+	  if(! box) 
+	    {
+	      box = gnome_message_box_new(_("Really log out?"), 
+					  GNOME_MESSAGE_BOX_QUESTION,
+					  GNOME_STOCK_BUTTON_YES, 
+					  GNOME_STOCK_BUTTON_NO, NULL);
+	      gnome_dialog_set_default (GNOME_DIALOG (box), 0);
+	      gtk_window_set_wmclass(GTK_WINDOW(box),
+				     "Logout Dialog", "GnomeUI");
+	      gtk_window_set_policy (GTK_WINDOW (box), FALSE, FALSE, TRUE);
+	      
+	      but = gtk_check_button_new_with_label (_("Ask next time"));
+	      gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (box)->vbox),but,
+				  FALSE, TRUE, GNOME_PAD_SMALL);
+	      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(but),TRUE);
+	      gnome_dialog_close_hides (GNOME_DIALOG (box), TRUE);
+	      gtk_widget_show_all (box);
+	      gdk_window_set_role (GTK_WIDGET(box)->window,
+				   "Gnome Logout Dialog");
+	    }
+	  shutdown = gnome_dialog_run_and_close (GNOME_DIALOG (box)) == 0;
+	  if (GTK_TOGGLE_BUTTON (but)->active != logout_prompt)
+	    {
+	      gnome_config_set_bool("Prompt_for_logout",
+				    GTK_TOGGLE_BUTTON (but)->active);
+	      gnome_config_sync ();
+	    }
+	  gnome_config_pop_prefix ();
+	}
+    }
   if (GNOME_CLIENT_CONNECTED (client))
     {
+#ifdef HAVE_LIBSM
+      if (shutdown)
+	{
+	  gnome_triggers_do("Session shutdown", NULL,
+			    "gnome", "logout", NULL);
+	}
       SmcRequestSaveYourself ((SmcConn) client->smc_conn, _save_style,
 			      shutdown, _interact_style,
 			      fast, global);            
-    }
 #endif HAVE_LIBSM
+    }
+  else 
+    {
+      gtk_signal_emit (GTK_OBJECT (client), client_signals[SAVE_YOURSELF],
+		       1, save_style, shutdown, interact_style, fast);
+      if (shutdown) 
+	gtk_signal_emit (GTK_OBJECT (client), client_signals[DIE]);
+    }
 }
 
 /*****************************************************************************/

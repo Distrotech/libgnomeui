@@ -1,3 +1,9 @@
+1999-03-24  Felix Bellaby <felix@pooh.u-net.com>
+	
+	* gnome-client.c (gnome_client_request_save): confirm before logout.
+	(gnome_client_save_dialog_show): show window before setting hints.
+	Tidy up runtime warnings in various functions.	
+
 1999-03-22  Pavel Machek  <pavel@ucw.cz>
 
 	* gnome-winhints.c (gnome_win_hints_init): g_return_if_fails()
