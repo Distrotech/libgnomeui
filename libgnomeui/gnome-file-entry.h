@@ -34,6 +34,8 @@ struct _GnomeFileEntry {
 	GtkWidget *fsw;
 	
 	int is_modal;
+	
+	int directory_entry; /*optional flag to only do directories*/
 
 	GtkWidget *gentry;
 };
@@ -61,6 +63,10 @@ void       gnome_file_entry_set_title   (GnomeFileEntry *fentry,
 /*set default path for the browse dialog*/
 void	   gnome_file_entry_set_default_path(GnomeFileEntry *fentry,
 					     char *path);
+
+/*sets up the file entry to be a directory picker rather then a file picker*/
+void	   gnome_file_entry_set_directory(GnomeFileEntry *fentry,
+					  int directory_entry);
 
 /*returns a filename which is a full path with WD or the default
   directory prepended if it's not an absolute path, returns

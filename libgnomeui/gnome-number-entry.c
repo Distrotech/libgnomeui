@@ -102,11 +102,6 @@ gnome_number_entry_get_number(GnomeNumberEntry *nentry)
 	return r;
 }
 
-static void
-calc_realized(GtkWidget *w, GnomeNumberEntry *nentry)
-{
-}
-
 static int
 calc_dialog_destroyed(GtkWidget *w, GnomeNumberEntry *nentry)
 {
@@ -127,6 +122,10 @@ browse_clicked (GtkWidget *widget, gpointer data)
 		gtk_widget_show(nentry->calc_dlg);
 		if(nentry->calc_dlg->window)
 			gdk_window_raise(nentry->calc_dlg->window);
+		calc = gtk_object_get_data (GTK_OBJECT (nentry->calc_dlg),
+					    "calc");
+		gnome_calculator_set(GNOME_CALCULATOR(calc),
+				     gnome_number_entry_get_number(nentry));
 		return;
 	}
 
@@ -142,9 +141,6 @@ browse_clicked (GtkWidget *widget, gpointer data)
 	gnome_calculator_set(GNOME_CALCULATOR(calc),
 			     gnome_number_entry_get_number(nentry));
 
-	gtk_signal_connect_after(GTK_OBJECT(calc),"realize",
-				 GTK_SIGNAL_FUNC(calc_realized),
-				 nentry);
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(dlg)->vbox),
 			   calc,TRUE,TRUE,0);
 

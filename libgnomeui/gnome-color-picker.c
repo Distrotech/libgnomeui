@@ -377,16 +377,35 @@ gnome_color_picker_clicked (GtkButton *button)
 	
 	/*if dialog already exists, make sure it's shown and raised*/
 	if(cp->cs_dialog) {
+		csd = GTK_COLOR_SELECTION_DIALOG (cp->cs_dialog);
 		gtk_widget_show(cp->cs_dialog);
 		if(cp->cs_dialog->window)
 			gdk_window_raise(cp->cs_dialog->window);
-		return;
+	} else {
+		/* Create the dialog and connects its buttons */
+
+		cp->cs_dialog = gtk_color_selection_dialog_new (cp->title);
+		csd = GTK_COLOR_SELECTION_DIALOG (cp->cs_dialog);
+		gtk_signal_connect (GTK_OBJECT (cp->cs_dialog), "destroy",
+				    (GtkSignalFunc) cs_destroy,
+				    cp);
+
+		gtk_signal_connect (GTK_OBJECT (csd->ok_button), "clicked",
+				    (GtkSignalFunc) cs_ok_clicked,
+				    cp);
+
+		gtk_signal_connect_object (GTK_OBJECT (csd->cancel_button), "clicked",
+					   (GtkSignalFunc) gtk_widget_destroy,
+					   GTK_OBJECT(cp->cs_dialog));
+
+		/* FIXME: do something about the help button */
+
+		gtk_window_position (GTK_WINDOW (cp->cs_dialog), GTK_WIN_POS_MOUSE);
+
+		/* If there is a grabed window, set new dialog as modal */
+		if (gtk_grab_get_current())
+			gtk_window_set_modal(GTK_WINDOW(cp->cs_dialog),TRUE);
 	}
-
-	/* Create the dialog and connects its buttons */
-
-	cp->cs_dialog = gtk_color_selection_dialog_new (cp->title);
-	csd = GTK_COLOR_SELECTION_DIALOG (cp->cs_dialog);
 	gtk_color_selection_set_opacity (GTK_COLOR_SELECTION (csd->colorsel), cp->use_alpha);
 
 	color[0] = cp->r;
@@ -398,26 +417,6 @@ gnome_color_picker_clicked (GtkButton *button)
 	gtk_color_selection_set_color (GTK_COLOR_SELECTION (csd->colorsel), color);
 	gtk_color_selection_set_color (GTK_COLOR_SELECTION (csd->colorsel), color);
 
-	gtk_signal_connect (GTK_OBJECT (cp->cs_dialog), "destroy",
-			    (GtkSignalFunc) cs_destroy,
-			    cp);
-
-	gtk_signal_connect (GTK_OBJECT (csd->ok_button), "clicked",
-			    (GtkSignalFunc) cs_ok_clicked,
-			    cp);
-
-	gtk_signal_connect_object (GTK_OBJECT (csd->cancel_button), "clicked",
-				   (GtkSignalFunc) gtk_widget_destroy,
-				   GTK_OBJECT(cp->cs_dialog));
-
-	/* FIXME: do something about the help button */
-
-        gtk_window_position (GTK_WINDOW (cp->cs_dialog), GTK_WIN_POS_MOUSE);
-        
-        /* If there is a grabed window, set new dialog as modal */
-        if (gtk_grab_get_current())
-            gtk_window_set_modal(GTK_WINDOW(cp->cs_dialog),TRUE);
-        
 	gtk_widget_show (cp->cs_dialog);
 }
 

@@ -6,6 +6,7 @@
  */
 #include <config.h>
 #include <unistd.h> /*getcwd*/
+#include <sys/stat.h> /*stat*/
 #include <sys/param.h> /*realpath*/
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkdnd.h>
@@ -86,6 +87,18 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 	class->browse_clicked = browse_clicked;
 }
 
+static int
+my_g_is_directory (const char *filename)
+{
+	struct stat s;
+	
+	if(stat (filename, &s) != 0 ||
+	   !S_ISDIR (s.st_mode))
+		return FALSE;
+	return TRUE;
+}
+
+
 static void
 browse_dialog_ok (GtkWidget *widget, gpointer data)
 {
@@ -123,6 +136,8 @@ browse_clicked(GnomeFileEntry *fentry)
 		if(fentry->fsw->window)
 			gdk_window_raise(fentry->fsw->window);
 		fs = GTK_FILE_SELECTION(fentry->fsw);
+		gtk_widget_set_sensitive(fs->file_list,
+					 !fentry->directory_entry);
 		p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
 		if(p && *p!='/' && fentry->default_path) {
 			p = g_concat_dir_and_file (fentry->default_path, p);
@@ -140,6 +155,8 @@ browse_clicked(GnomeFileEntry *fentry)
 	gtk_object_set_user_data (GTK_OBJECT (fsw), fentry);
 
 	fs = GTK_FILE_SELECTION (fsw);
+	gtk_widget_set_sensitive(fs->file_list,
+				 !fentry->directory_entry);
 
 	p = gtk_entry_get_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
 	if(p && *p!='/' && fentry->default_path) {
@@ -196,6 +213,7 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 	fentry->browse_dialog_title = NULL;
 	fentry->default_path = NULL;
 	fentry->is_modal = FALSE;
+	fentry->directory_entry = FALSE;
 
 	gtk_box_set_spacing (GTK_BOX (fentry), 4);
 
@@ -326,8 +344,19 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry,
 		p = g_concat_dir_and_file (cwd, t);
 		free(cwd);
 	}
-	/*return the file if it's ok*/
-	if(!file_must_exist || g_file_exists(p))
+	if(file_must_exist) {
+		if(fentry->directory_entry) {
+			char *d;
+			if(my_g_is_directory(p))
+				return p;
+			d = g_dirname(p);
+			g_free(p);
+			if(my_g_is_directory(d))
+				return d;
+			p = d;
+		} else if(g_file_exists(p))
+			return p;
+	} else 
 		return p;
 	/*bad file, return NULL*/
 	g_free(p);
@@ -337,8 +366,17 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry,
 void
 gnome_file_entry_set_modal(GnomeFileEntry *fentry, int is_modal)
 {
-	g_return_val_if_fail (fentry != NULL,NULL);
-	g_return_val_if_fail (GNOME_IS_FILE_ENTRY (fentry),NULL);
+	g_return_if_fail (fentry != NULL);
+	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
 	
 	fentry->is_modal = is_modal;
+}
+
+void
+gnome_file_entry_set_directory(GnomeFileEntry *fentry, int directory_entry)
+{
+	g_return_if_fail (fentry != NULL);
+	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
+	
+	fentry->directory_entry = directory_entry;
 }

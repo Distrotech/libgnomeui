@@ -1,3 +1,14 @@
+Sun Nov 22 03:40:33 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-number-entry.c: when the dialog exists update the info,
+	  also made some cleanup here
+
+	* gnome-color-picker.c: when dialog exists update it to the current
+	  value
+
+	* gnome-file-entry.c: add directory browsing capability
+	  (set_directory)
+
 Sun Nov 22 02:41:12 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-font-picker.c: raise the window on click if one exists
