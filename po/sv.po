@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-02-24 18:42+0100\n"
-"PO-Revision-Date: 2002-02-24 18:42+0100\n"
+"POT-Creation-Date: 2002-03-03 15:27+0100\n"
+"PO-Revision-Date: 2002-03-03 15:28+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,6 +30,11 @@ msgstr "Dokumenterat av"
 #: libgnomeui/gnome-about.c:238
 msgid "Translated by"
 msgstr "Översatt av"
+
+#. Add the credits button
+#: libgnomeui/gnome-about.c:295
+msgid "_Credits"
+msgstr "_Tack"
 
 #: libgnomeui/gnome-about.c:335
 msgid "Program name"
@@ -178,52 +183,52 @@ msgstr "Mottog ogiltig färgdata\n"
 msgid "Pick a color"
 msgstr "Välj en färg"
 
-#: libgnomeui/gnome-dateedit.c:425
+#: libgnomeui/gnome-dateedit.c:428
 msgid "Time"
 msgstr "Tid"
 
-#: libgnomeui/gnome-dateedit.c:426
+#: libgnomeui/gnome-dateedit.c:429
 msgid "The time currently selected"
 msgstr "Tiden som är vald för tillfället"
 
-#: libgnomeui/gnome-dateedit.c:438
+#: libgnomeui/gnome-dateedit.c:441
 msgid "DateEdit Flags"
 msgstr "DateEdit-flaggor"
 
-#: libgnomeui/gnome-dateedit.c:439
+#: libgnomeui/gnome-dateedit.c:442
 msgid "Flags for how DateEdit looks"
 msgstr "Flaggor för hur DateEdit ser ut"
 
-#: libgnomeui/gnome-dateedit.c:448
+#: libgnomeui/gnome-dateedit.c:451
 msgid "Lower Hour"
 msgstr "Minska timme"
 
-#: libgnomeui/gnome-dateedit.c:449
+#: libgnomeui/gnome-dateedit.c:452
 msgid "Lower hour in the time popup selector"
 msgstr "Minska timme i popup-tidsväljaren"
 
-#: libgnomeui/gnome-dateedit.c:459
+#: libgnomeui/gnome-dateedit.c:462
 msgid "Upper Hour"
 msgstr "Öka timme"
 
-#: libgnomeui/gnome-dateedit.c:460
+#: libgnomeui/gnome-dateedit.c:463
 msgid "Upper hour in the time popup selector"
 msgstr "Öka timme i popup-tidsväljaren"
 
-#: libgnomeui/gnome-dateedit.c:470
+#: libgnomeui/gnome-dateedit.c:473
 msgid "Initial Time"
 msgstr "Starttid"
 
-#: libgnomeui/gnome-dateedit.c:471
+#: libgnomeui/gnome-dateedit.c:474
 msgid "The initial time"
 msgstr "Starttiden"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:700
+#: libgnomeui/gnome-dateedit.c:703
 msgid "Calendar"
 msgstr "Kalender"
 
-#: libgnomeui/gnome-dateedit.c:930
+#: libgnomeui/gnome-dateedit.c:933
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date är föråldrat, använd gnome_date_edit_get_time"
 
@@ -986,7 +991,7 @@ msgstr "GTK-post"
 msgid "The GTK entry"
 msgstr "GTK-posten"
 
-#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:160
+#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
 msgid "History ID"
 msgstr "Historik-id"
 
@@ -998,7 +1003,7 @@ msgstr ""
 "Unik identifierare för filposten. Detta kommer att användas för att spara "
 "historiklistan."
 
-#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:169
+#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
 msgid "Browse Dialog Title"
 msgstr "Bläddra dialiogtitel"
 
@@ -1026,7 +1031,7 @@ msgstr "Modal"
 msgid "Whether the Browse file window should be modal."
 msgstr "Huruvida filbläddringsfönstret ska vara modalt."
 
-#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:185
+#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
 msgid "Filename"
 msgstr "Filnamn"
 
@@ -1182,7 +1187,7 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "GConf-feldetaljer: %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:161
+#: libgnomeui/gnome-icon-entry.c:164
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1190,27 +1195,27 @@ msgstr ""
 "Unik identifierare för ikonposten. Detta kommer att användas för att spara "
 "historiklistan."
 
-#: libgnomeui/gnome-icon-entry.c:170
+#: libgnomeui/gnome-icon-entry.c:173
 msgid "Title for the Browse icon dialog."
 msgstr "Titel för ikonbläddringsdialogen."
 
-#: libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-icon-entry.c:180
 msgid "Pixmap Directory"
 msgstr "Pixmapkatalog"
 
-#: libgnomeui/gnome-icon-entry.c:178
+#: libgnomeui/gnome-icon-entry.c:181
 msgid "Directory that will be searched for icons."
 msgstr "Katalog som ikoner kommer att sökas i."
 
-#: libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-icon-entry.c:189
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Filnamn som ska visas i ikonposten."
 
-#: libgnomeui/gnome-icon-entry.c:194
+#: libgnomeui/gnome-icon-entry.c:197
 msgid "Picker dialog"
 msgstr "Väljardialog"
 
-#: libgnomeui/gnome-icon-entry.c:195
+#: libgnomeui/gnome-icon-entry.c:198
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1218,19 +1223,19 @@ msgstr ""
 "Ikonväljardialog. Du kan använda denna egenskap för att få tag i GtkDialog "
 "om du behöver ändra eller undersöka någon av dess egenskaper."
 
-#: libgnomeui/gnome-icon-entry.c:305 libgnomeui/gnome-icon-entry.c:907
+#: libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
 msgid "No Icon"
 msgstr "Ingen ikon"
 
-#: libgnomeui/gnome-icon-entry.c:510 libgnomeui/gnome-pixmap-entry.c:386
+#: libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan inte hitta en hbox, använder vanligt filval"
 
-#: libgnomeui/gnome-icon-entry.c:516 libgnomeui/gnome-pixmap-entry.c:392
+#: libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Förhandsgranska"
 
-#: libgnomeui/gnome-icon-entry.c:929
+#: libgnomeui/gnome-icon-entry.c:930
 msgid "Browse"
 msgstr "Bläddra"
 
