@@ -1,3 +1,9 @@
+1999-01-19  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-app-helper.h (GNOMEUIINFO_RADIOITEM): hmm,
+	has this _EVER_ worked?  does anyone use it?  There seems to be a
+	typo with it.
+
 1999-01-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-item.c (iti_start_selecting): Use an I-beam cursor
