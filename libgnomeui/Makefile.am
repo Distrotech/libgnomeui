@@ -12,11 +12,13 @@ libgnomeui_la_SOURCES = \
 	gnome-app.c			\
 	gnome-app-helper.c		\
 	gnome-color-selector.c 		\
+	gnome-dns.c			\
 	gnome-font-selector.c 		\
 	gnome-colors.c			\
 	gnome-ice.c			\
 	gnome-init.c			\
 	gnome-messagebox.c		\
+	gnome-net.c			\
 	gnome-about.c			\
 	gnome-pixmap.c			\
 	gnome-properties.c		\
@@ -27,15 +29,17 @@ libgnomeui_la_SOURCES = \
 	gtk-ted.c
 
 libgnomeuiinclude_HEADERS = 		\
+	gnome-about.h			\
         gnome-actionarea.h     		\
 	gnome-app.h			\
 	gnome-app-helper.h		\
 	gnome-color-selector.h 		\
-	gnome-font-selector.h 		\
 	gnome-colors.h         		\
+	gnome-dns.h			\
+	gnome-font-selector.h 		\
 	gnome-ice.h			\
 	gnome-messagebox.h		\
-	gnome-about.h			\
+	gnome-net.h			\
 	gnome-properties.h     		\
 	gnome-pixmap.h			\
 	gnome-session.h			\
@@ -62,7 +66,7 @@ EXTRA_DIST = \
 	AUTHORS
 
 libgnomeui_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
-libgnomeui_la_LIBADD = $(GTK_LIBS) $(X_LIBS) $(x_libs)
+libgnomeui_la_LIBADD = $(LIBGNOMEUI_LIBS)
 
 ted_demo_LDADD =	\
 	$(top_builddir)/libgnome/libgnome.la 		\
