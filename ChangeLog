@@ -1,3 +1,10 @@
+2005-02-16  Alexander Larsson  <alexl@redhat.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	Make backend threadsafe, and handle
+	cancellation thread issues.
+	fixes #166852, in combination with the latest gnome-vfs
+	
 2005-02-08  Christian Rose  <menthos@menthos.com>
 
 	* configure.in: Added "xh" to ALL_LINGUAS.

@@ -125,7 +125,7 @@ struct _GtkFileFolderGnomeVFS
 
   GtkFileSystemGnomeVFS *system;
 
-  GHashTable *children;
+  GHashTable *children; /* NULL if destroyed */
 };
 
 typedef struct _FolderChild FolderChild;
@@ -233,6 +233,7 @@ static void  gtk_file_folder_gnome_vfs_class_init (GtkFileFolderGnomeVFSClass *c
 static void  gtk_file_folder_gnome_vfs_iface_init (GtkFileFolderIface         *iface);
 static void  gtk_file_folder_gnome_vfs_init       (GtkFileFolderGnomeVFS      *impl);
 static void  gtk_file_folder_gnome_vfs_finalize   (GObject                    *object);
+static void  gtk_file_folder_gnome_vfs_dispose    (GObject                    *object);
 
 static GtkFileInfo *gtk_file_folder_gnome_vfs_get_info      (GtkFileFolder      *folder,
 							     const GtkFilePath  *path,
@@ -818,6 +819,8 @@ volume_mount_cb (gboolean succeeded,
 {
   struct mount_closure *closure;
 
+  gdk_threads_enter ();
+  
   closure = data;
 
   closure->succeeded = succeeded;
@@ -829,6 +832,8 @@ volume_mount_cb (gboolean succeeded,
     }
 
   g_main_loop_quit (closure->loop);
+
+  gdk_threads_leave ();
 }
 
 static gboolean
@@ -848,9 +853,9 @@ gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem        *file_system,
       gnome_vfs_drive_mount (GNOME_VFS_DRIVE (volume), volume_mount_cb, &closure);
       gnome_authentication_manager_pop_sync ();
 
-      GDK_THREADS_LEAVE ();
+      gdk_threads_leave ();
       g_main_loop_run (closure.loop);
-      GDK_THREADS_ENTER ();
+      gdk_threads_enter ();
       g_main_loop_unref (closure.loop);
 
       if (closure.succeeded)
@@ -1857,6 +1862,7 @@ gtk_file_folder_gnome_vfs_class_init (GtkFileFolderGnomeVFSClass *class)
   folder_parent_class = g_type_class_peek_parent (class);
 
   gobject_class->finalize = gtk_file_folder_gnome_vfs_finalize;
+  gobject_class->dispose = gtk_file_folder_gnome_vfs_dispose;
 }
 
 static void
@@ -1872,23 +1878,53 @@ gtk_file_folder_gnome_vfs_init (GtkFileFolderGnomeVFS *impl)
 {
 }
 
+static gboolean
+unref_at_idle (GObject *object)
+{
+  g_object_unref (object);
+  return FALSE;
+}
+
 static void
-gtk_file_folder_gnome_vfs_finalize (GObject *object)
+gtk_file_folder_gnome_vfs_dispose (GObject *object)
 {
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (object);
   GtkFileSystemGnomeVFS *system_vfs = folder_vfs->system;
+  gboolean was_destroyed;
 
+  was_destroyed = folder_vfs->children == NULL;
+  
   if (folder_vfs->uri)
     g_hash_table_remove (system_vfs->folders, folder_vfs->uri);
+  folder_vfs->uri = NULL;
+  
   if (folder_vfs->async_handle)
     gnome_vfs_async_cancel (folder_vfs->async_handle);
+  folder_vfs->async_handle = NULL;
+  
   if (folder_vfs->monitor)
     gnome_vfs_monitor_cancel (folder_vfs->monitor);
+  folder_vfs->monitor = NULL;
+  
   if (folder_vfs->children)
     g_hash_table_destroy (folder_vfs->children);
+  folder_vfs->children = NULL;
 
-  g_free (folder_vfs->uri);
+  if (!was_destroyed)
+    {
+      /* The folder is now marked as destroyed, we
+       * free it at idle time to avoid races with the
+       * cancelled async job. See gnome_vfs_async_cancel()
+       */
+      g_object_ref (object);
+      g_idle_add ((GSourceFunc)unref_at_idle, object);
+    }
+}
 
+
+static void
+gtk_file_folder_gnome_vfs_finalize (GObject *object)
+{
   folder_parent_class->finalize (object);
 }
 
@@ -2185,7 +2221,9 @@ volume_mount_unmount_cb (GnomeVFSVolumeMonitor *monitor,
 			 GnomeVFSVolume        *volume,
 			 GtkFileSystemGnomeVFS *system_vfs)
 {
+  gdk_threads_enter ();
   g_signal_emit_by_name (system_vfs, "volumes-changed");
+  gdk_threads_leave ();
 }
 
 /* Callback used when a drive gets connected or disconnected */
@@ -2194,7 +2232,9 @@ drive_connect_disconnect_cb (GnomeVFSVolumeMonitor *monitor,
 			     GnomeVFSDrive         *drive,
 			     GtkFileSystemGnomeVFS *system_vfs)
 {
+  gdk_threads_enter ();
   g_signal_emit_by_name (system_vfs, "volumes-changed");
+  gdk_threads_leave ();
 }
 
 struct purge_closure
@@ -2272,6 +2312,16 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
   GSList *added_uris = NULL;
   GSList *changed_uris = NULL;
 
+  /* This is called from an idle, we need to protect is as such */
+  gdk_threads_enter ();
+
+  /* See if this folder is already destroyed.
+   * This can happen if we cancel in another thread while
+   * directory_load_callback is just being called
+   */
+  if (folder_vfs->children == NULL)
+    return;
+  
   for (tmp_list = list; tmp_list; tmp_list = tmp_list->next)
     {
       GnomeVFSFileInfo *vfs_info;
@@ -2331,6 +2381,8 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
       g_signal_emit_by_name (folder_vfs, "finished-loading");
       folder_purge_and_unmark (folder_vfs);
     }
+
+  gdk_threads_leave ();
 }
 
 static void
@@ -2343,6 +2395,13 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
   GtkFileFolderGnomeVFS *folder_vfs = user_data;
   GSList *uris;
 
+  /* This is called from an idle, we need to protect is as such */
+  gdk_threads_enter ();
+
+  /* Check if destroyed */
+  if (folder_vfs->children == NULL)
+    return;
+  
   switch (event_type)
     {
     case GNOME_VFS_MONITOR_EVENT_CHANGED:
@@ -2402,6 +2461,8 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
     case GNOME_VFS_MONITOR_EVENT_METADATA_CHANGED:
       break;
     }
+  
+  gdk_threads_leave ();
 }
 
 static gboolean
