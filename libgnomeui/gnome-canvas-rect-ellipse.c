@@ -147,47 +147,74 @@ recalc_bounds (GnomeCanvasRE *re)
 	gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
 }
 
+/* Convenience function to set a GC's foreground color to the specified pixel value */
+static void
+set_gc_foreground (GdkGC *gc, gulong pixel)
+{
+	GdkColor c;
+
+	if (!gc)
+		return;
+
+	c.pixel = pixel;
+	gdk_gc_set_foreground (gc, &c);
+}
+
+/* Recalculate the outline width of the rectangle/ellipse and set it in its GC */
+static void
+set_outline_gc_width (GnomeCanvasRE *re)
+{
+	int width;
+
+	if (!re->outline_gc)
+		return;
+
+	if (re->width_pixels)
+		width = (int) re->width;
+	else
+		width = (int) (re->width * re->item.canvas->pixels_per_unit + 0.5);
+
+	gdk_gc_set_line_attributes (re->outline_gc, width,
+				    GDK_LINE_SOLID, GDK_CAP_PROJECTING, GDK_JOIN_MITER);
+}
+
+
 static void
 gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasRE *re;
-	int calc_bounds;
-	int calc_gcs;
 	GdkColor color;
 
 	item = GNOME_CANVAS_ITEM (object);
 	re = GNOME_CANVAS_RE (object);
 
-	calc_bounds = FALSE;
-	calc_gcs = FALSE;
-
 	switch (arg_id) {
 	case ARG_X1:
 		re->x1 = GTK_VALUE_DOUBLE (*arg);
-		calc_bounds = TRUE;
+		recalc_bounds (re);
 		break;
 
 	case ARG_Y1:
 		re->y1 = GTK_VALUE_DOUBLE (*arg);
-		calc_bounds = TRUE;
+		recalc_bounds (re);
 		break;
 
 	case ARG_X2:
 		re->x2 = GTK_VALUE_DOUBLE (*arg);
-		calc_bounds = TRUE;
+		recalc_bounds (re);
 		break;
 
 	case ARG_Y2:
 		re->y2 = GTK_VALUE_DOUBLE (*arg);
-		calc_bounds = TRUE;
+		recalc_bounds (re);
 		break;
 
 	case ARG_FILL_COLOR:
 		if (gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color)) {
 			re->fill_set = TRUE;
 			re->fill_pixel = color.pixel;
-			calc_gcs = TRUE;
+			set_gc_foreground (re->fill_gc, re->fill_pixel);
 		} else
 			re->fill_set = FALSE;
 
@@ -196,14 +223,14 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	case ARG_FILL_COLOR_GDK:
 		re->fill_set = TRUE;
 		re->fill_pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
-		calc_gcs = TRUE;
+		set_gc_foreground (re->fill_gc, re->fill_pixel);
 		break;
 
 	case ARG_OUTLINE_COLOR:
 		if (gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color)) {
 			re->outline_set = TRUE;
 			re->outline_pixel = color.pixel;
-			calc_gcs = TRUE;
+			set_gc_foreground (re->outline_gc, re->outline_pixel);
 		} else
 			re->outline_set = FALSE;
 
@@ -212,30 +239,40 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	case ARG_OUTLINE_COLOR_GDK:
 		re->outline_set = TRUE;
 		re->outline_pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
-		calc_gcs = TRUE;
+		set_gc_foreground (re->outline_gc, re->outline_pixel);
 		break;
 
 	case ARG_WIDTH_PIXELS:
 		re->width = GTK_VALUE_UINT (*arg);
 		re->width_pixels = TRUE;
-		calc_gcs = TRUE;
+		set_outline_gc_width (re);
+		recalc_bounds (re);
 		break;
 
 	case ARG_WIDTH_UNITS:
 		re->width = fabs (GTK_VALUE_DOUBLE (*arg));
 		re->width_pixels = FALSE;
-		calc_gcs = TRUE;
+		set_outline_gc_width (re);
+		recalc_bounds (re);
 		break;
 
 	default:
 		break;
 	}
+}
 
-	if (calc_gcs)
-		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+/* Allocates a GdkColor structure filled with the specified pixel, and puts it into the specified
+ * arg for returning it in the get_arg method.
+ */
+static void
+get_color_arg (GnomeCanvasRE *re, gulong pixel, GtkArg *arg)
+{
+	GdkColor *color;
 
-	if (calc_bounds)
-		recalc_bounds (re);
+	color = g_new (GdkColor, 1);
+	color->pixel = pixel;
+	gdk_color_context_query_color (GNOME_CANVAS_ITEM (re)->canvas->cc, color);
+	GTK_VALUE_BOXED (*arg) = color;
 }
 
 static void
@@ -264,17 +301,11 @@ gnome_canvas_re_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	case ARG_FILL_COLOR_GDK:
-		color = g_new (GdkColor, 1);
-		color->pixel = re->fill_pixel;
-		gdk_color_context_query_color (re->item.canvas->cc, color);
-		GTK_VALUE_BOXED (*arg) = color;
+		get_color_arg (re, re->fill_pixel, arg);
 		break;
 
 	case ARG_OUTLINE_COLOR_GDK:
-		color = g_new (GdkColor, 1);
-		color->pixel = re->outline_pixel;
-		gdk_color_context_query_color (re->item.canvas->cc, color);
-		GTK_VALUE_BOXED (*arg) = color;
+		get_color_arg (re, re->outline_pixel, arg);
 		break;
 
 	default:
@@ -287,31 +318,15 @@ static void
 gnome_canvas_re_reconfigure (GnomeCanvasItem *item)
 {
 	GnomeCanvasRE *re;
-	GdkColor color;
-	int width;
 
 	re = GNOME_CANVAS_RE (item);
 
 	if (re_parent_class->reconfigure)
 		(* re_parent_class->reconfigure) (item);
 
-	if (re->fill_gc) {
-		color.pixel = re->fill_pixel;
-		gdk_gc_set_foreground (re->fill_gc, &color);
-	}
-
-	if (re->outline_gc) {
-		color.pixel = re->outline_pixel;
-		gdk_gc_set_foreground (re->outline_gc, &color);
-
-		if (re->width_pixels)
-			width = (int) re->width;
-		else
-			width = (int) (re->width * item->canvas->pixels_per_unit + 0.5);
-
-		gdk_gc_set_line_attributes (re->outline_gc, width,
-					    GDK_LINE_SOLID, GDK_CAP_PROJECTING, GDK_JOIN_MITER);
-	}
+	set_gc_foreground (re->fill_gc, re->fill_pixel);
+	set_gc_foreground (re->outline_gc, re->outline_pixel);
+	set_outline_gc_width (re);
 
 	recalc_bounds (re);
 }

@@ -257,199 +257,7 @@ recalc_bounds (GnomeCanvasLine *line)
 	gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
 }
 
-static void
-gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
-{
-	GnomeCanvasItem *item;
-	GnomeCanvasLine *line;
-	int calc_bounds;
-	int recalc;
-	GnomeCanvasPoints *points;
-	GdkColor color;
-
-	item = GNOME_CANVAS_ITEM (object);
-	line = GNOME_CANVAS_LINE (object);
-
-	calc_bounds = FALSE;
-	recalc = FALSE;
-
-	switch (arg_id) {
-	case ARG_POINTS:
-		points = GTK_VALUE_POINTER (*arg);
-
-		if (line->coords) {
-			g_free (line->coords);
-			line->coords = NULL;
-		}
-
-		if (!points)
-			line->num_points = 0;
-		else {
-			line->num_points = points->num_points;
-			line->coords = g_new (double, 2 * line->num_points);
-			memcpy (line->coords, points->coords, 2 * line->num_points * sizeof (double));
-		}
-
-		/* Drop the arrowhead polygons if they exist -- they will be regenerated */
-
-		if (line->first_coords) {
-			g_free (line->first_coords);
-			line->first_coords = NULL;
-		}
-
-		if (line->last_coords) {
-			g_free (line->last_coords);
-			line->last_coords = NULL;
-		}
-
-		recalc = TRUE; /* need to re-generate arrowheads in addition to rebounding */
-		break;
-
-	case ARG_FILL_COLOR:
-		gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color);
-		line->pixel = color.pixel;
-		recalc = TRUE;
-		break;
-
-	case ARG_FILL_COLOR_GDK:
-		line->pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
-		recalc = TRUE;
-		break;
-
-	case ARG_WIDTH_PIXELS:
-		line->width = GTK_VALUE_UINT (*arg);
-		line->width_pixels = TRUE;
-		recalc = TRUE;
-		break;
-
-	case ARG_WIDTH_UNITS:
-		line->width = fabs (GTK_VALUE_DOUBLE (*arg));
-		line->width_pixels = FALSE;
-		recalc = TRUE;
-		break;
-
-	case ARG_CAP_STYLE:
-		line->cap = GTK_VALUE_ENUM (*arg);
-		recalc = TRUE;
-		break;
-
-	case ARG_JOIN_STYLE:
-		line->join = GTK_VALUE_ENUM (*arg);
-		recalc = TRUE;
-		break;
-
-	case ARG_FIRST_ARROWHEAD:
-		line->first_arrow = GTK_VALUE_BOOL (*arg);
-		recalc = TRUE;
-		break;
-
-	case ARG_LAST_ARROWHEAD:
-		line->last_arrow = GTK_VALUE_BOOL (*arg);
-		recalc = TRUE;
-		break;
-
-	case ARG_SMOOTH:
-		/* FIXME */
-		break;
-
-	case ARG_SPLINE_STEPS:
-		/* FIXME */
-		break;
-
-	case ARG_ARROW_SHAPE_A:
-		line->shape_a = fabs (GTK_VALUE_DOUBLE (*arg));
-		recalc = TRUE;
-		break;
-
-	case ARG_ARROW_SHAPE_B:
-		line->shape_b = fabs (GTK_VALUE_DOUBLE (*arg));
-		recalc = TRUE;
-		break;
-
-	case ARG_ARROW_SHAPE_C:
-		line->shape_c = fabs (GTK_VALUE_DOUBLE (*arg));
-		recalc = TRUE;
-		break;
-
-	default:
-		break;
-	}
-
-	if (recalc)
-		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
-
-	if (calc_bounds)
-		recalc_bounds (line);
-}
-
-static void
-gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
-{
-	GnomeCanvasLine *line;
-	GnomeCanvasPoints *points;
-	GdkColor *color;
-
-	line = GNOME_CANVAS_LINE (object);
-
-	switch (arg_id) {
-	case ARG_POINTS:
-		if (line->num_points != 0) {
-			points = gnome_canvas_points_new (line->num_points);
-			memcpy (points->coords, line->coords, 2 * line->num_points * sizeof (double));
-			GTK_VALUE_POINTER (*arg) = points;
-		} else
-			GTK_VALUE_POINTER (*arg) = NULL;
-		break;
-
-	case ARG_FILL_COLOR_GDK:
-		color = g_new (GdkColor, 1);
-		color->pixel = line->pixel;
-		gdk_color_context_query_color (line->item.canvas->cc, color);
-		GTK_VALUE_BOXED (*arg) = color;
-		break;
-
-	case ARG_CAP_STYLE:
-		GTK_VALUE_ENUM (*arg) = line->cap;
-		break;
-
-	case ARG_JOIN_STYLE:
-		GTK_VALUE_ENUM (*arg) = line->join;
-		break;
-
-	case ARG_FIRST_ARROWHEAD:
-		GTK_VALUE_BOOL (*arg) = line->first_arrow;
-		break;
-
-	case ARG_LAST_ARROWHEAD:
-		GTK_VALUE_BOOL (*arg) = line->last_arrow;
-		break;
-
-	case ARG_SMOOTH:
-		GTK_VALUE_BOOL (*arg) = line->smooth;
-		break;
-
-	case ARG_SPLINE_STEPS:
-		GTK_VALUE_UINT (*arg) = line->spline_steps;
-		break;
-
-	case ARG_ARROW_SHAPE_A:
-		GTK_VALUE_DOUBLE (*arg) = line->shape_a;
-		break;
-
-	case ARG_ARROW_SHAPE_B:
-		GTK_VALUE_DOUBLE (*arg) = line->shape_b;
-		break;
-
-	case ARG_ARROW_SHAPE_C:
-		GTK_VALUE_DOUBLE (*arg) = line->shape_c;
-		break;
-
-	default:
-		arg->type = GTK_TYPE_INVALID;
-		break;
-	}
-}
-
+/* Recalculates the arrow polygons for the line */
 static void
 reconfigure_arrows (GnomeCanvasLine *line)
 {
@@ -611,6 +419,237 @@ reconfigure_arrows (GnomeCanvasLine *line)
 	}
 }
 
+/* Convenience function to set the line's GC's foreground color */
+static void
+set_line_gcs_foreground (GnomeCanvasLine *line)
+{
+	GdkColor c;
+
+	if (!line->gc)
+		return;
+
+	c.pixel = line->pixel;
+	gdk_gc_set_foreground (line->gc, &c);
+	gdk_gc_set_foreground (line->arrow_gc, &c);
+}
+
+/* Recalculate the line's width and set it in its GC */
+static void
+set_line_gc_width (GnomeCanvasLine *line)
+{
+	int width;
+
+	if (!line->gc)
+		return;
+
+	if (line->width_pixels)
+		width = (int) line->width;
+	else
+		width = (int) (line->width * line->item.canvas->pixels_per_unit + 0.5);
+
+	gdk_gc_set_line_attributes (line->gc,
+				    width,
+				    GDK_LINE_SOLID,
+				    (line->first_arrow || line->last_arrow) ? GDK_CAP_BUTT : line->cap,
+				    line->join);
+}
+
+/* Convenience functions to recalculate the arrows and bounds of the line */
+static void
+reconfigure_arrows_and_bounds (GnomeCanvasLine *line)
+{
+	reconfigure_arrows (line);
+	recalc_bounds (line);
+}
+
+static void
+gnome_canvas_line_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+{
+	GnomeCanvasItem *item;
+	GnomeCanvasLine *line;
+	GnomeCanvasPoints *points;
+	GdkColor color;
+
+	item = GNOME_CANVAS_ITEM (object);
+	line = GNOME_CANVAS_LINE (object);
+
+	switch (arg_id) {
+	case ARG_POINTS:
+		points = GTK_VALUE_POINTER (*arg);
+
+		if (line->coords) {
+			g_free (line->coords);
+			line->coords = NULL;
+		}
+
+		if (!points)
+			line->num_points = 0;
+		else {
+			line->num_points = points->num_points;
+			line->coords = g_new (double, 2 * line->num_points);
+			memcpy (line->coords, points->coords, 2 * line->num_points * sizeof (double));
+		}
+
+		/* Drop the arrowhead polygons if they exist -- they will be regenerated */
+
+		if (line->first_coords) {
+			g_free (line->first_coords);
+			line->first_coords = NULL;
+		}
+
+		if (line->last_coords) {
+			g_free (line->last_coords);
+			line->last_coords = NULL;
+		}
+
+		/* Since the line's points have changed, we need to re-generate arrowheads in
+		 * addition to recalculating the bounds.
+		 */
+
+		reconfigure_arrows_and_bounds (line);
+		break;
+
+	case ARG_FILL_COLOR:
+		gnome_canvas_get_color (item->canvas, GTK_VALUE_STRING (*arg), &color);
+		line->pixel = color.pixel;
+		set_line_gcs_foreground (line);
+		break;
+
+	case ARG_FILL_COLOR_GDK:
+		line->pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
+		set_line_gcs_foreground (line);
+		break;
+
+	case ARG_WIDTH_PIXELS:
+		line->width = GTK_VALUE_UINT (*arg);
+		line->width_pixels = TRUE;
+		set_line_gc_width (line);
+		reconfigure_arrows_and_bounds (line);
+		break;
+
+	case ARG_WIDTH_UNITS:
+		line->width = fabs (GTK_VALUE_DOUBLE (*arg));
+		line->width_pixels = FALSE;
+		set_line_gc_width (line);
+		reconfigure_arrows_and_bounds (line);
+		break;
+
+	case ARG_CAP_STYLE:
+		line->cap = GTK_VALUE_ENUM (*arg);
+		recalc_bounds (line);
+		break;
+
+	case ARG_JOIN_STYLE:
+		line->join = GTK_VALUE_ENUM (*arg);
+		recalc_bounds (line);
+		break;
+
+	case ARG_FIRST_ARROWHEAD:
+		line->first_arrow = GTK_VALUE_BOOL (*arg);
+		reconfigure_arrows_and_bounds (line);
+		break;
+
+	case ARG_LAST_ARROWHEAD:
+		line->last_arrow = GTK_VALUE_BOOL (*arg);
+		reconfigure_arrows_and_bounds (line);
+		break;
+
+	case ARG_SMOOTH:
+		/* FIXME */
+		break;
+
+	case ARG_SPLINE_STEPS:
+		/* FIXME */
+		break;
+
+	case ARG_ARROW_SHAPE_A:
+		line->shape_a = fabs (GTK_VALUE_DOUBLE (*arg));
+		reconfigure_arrows_and_bounds (line);
+		break;
+
+	case ARG_ARROW_SHAPE_B:
+		line->shape_b = fabs (GTK_VALUE_DOUBLE (*arg));
+		reconfigure_arrows_and_bounds (line);
+		break;
+
+	case ARG_ARROW_SHAPE_C:
+		line->shape_c = fabs (GTK_VALUE_DOUBLE (*arg));
+		reconfigure_arrows_and_bounds (line);
+		break;
+
+	default:
+		break;
+	}
+}
+
+static void
+gnome_canvas_line_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+{
+	GnomeCanvasLine *line;
+	GnomeCanvasPoints *points;
+	GdkColor *color;
+
+	line = GNOME_CANVAS_LINE (object);
+
+	switch (arg_id) {
+	case ARG_POINTS:
+		if (line->num_points != 0) {
+			points = gnome_canvas_points_new (line->num_points);
+			memcpy (points->coords, line->coords, 2 * line->num_points * sizeof (double));
+			GTK_VALUE_POINTER (*arg) = points;
+		} else
+			GTK_VALUE_POINTER (*arg) = NULL;
+		break;
+
+	case ARG_FILL_COLOR_GDK:
+		color = g_new (GdkColor, 1);
+		color->pixel = line->pixel;
+		gdk_color_context_query_color (line->item.canvas->cc, color);
+		GTK_VALUE_BOXED (*arg) = color;
+		break;
+
+	case ARG_CAP_STYLE:
+		GTK_VALUE_ENUM (*arg) = line->cap;
+		break;
+
+	case ARG_JOIN_STYLE:
+		GTK_VALUE_ENUM (*arg) = line->join;
+		break;
+
+	case ARG_FIRST_ARROWHEAD:
+		GTK_VALUE_BOOL (*arg) = line->first_arrow;
+		break;
+
+	case ARG_LAST_ARROWHEAD:
+		GTK_VALUE_BOOL (*arg) = line->last_arrow;
+		break;
+
+	case ARG_SMOOTH:
+		GTK_VALUE_BOOL (*arg) = line->smooth;
+		break;
+
+	case ARG_SPLINE_STEPS:
+		GTK_VALUE_UINT (*arg) = line->spline_steps;
+		break;
+
+	case ARG_ARROW_SHAPE_A:
+		GTK_VALUE_DOUBLE (*arg) = line->shape_a;
+		break;
+
+	case ARG_ARROW_SHAPE_B:
+		GTK_VALUE_DOUBLE (*arg) = line->shape_b;
+		break;
+
+	case ARG_ARROW_SHAPE_C:
+		GTK_VALUE_DOUBLE (*arg) = line->shape_c;
+		break;
+
+	default:
+		arg->type = GTK_TYPE_INVALID;
+		break;
+	}
+}
+
 static void
 gnome_canvas_line_reconfigure (GnomeCanvasItem *item)
 {
@@ -623,26 +662,9 @@ gnome_canvas_line_reconfigure (GnomeCanvasItem *item)
 	if (parent_class->reconfigure)
 		(* parent_class->reconfigure) (item);
 
-	if (line->gc) {
-		color.pixel = line->pixel;
-		gdk_gc_set_foreground (line->gc, &color);
-		gdk_gc_set_foreground (line->arrow_gc, &color);
-
-		if (line->width_pixels)
-			width = (int) line->width;
-		else
-			width = (int) (line->width * item->canvas->pixels_per_unit + 0.5);
-
-		gdk_gc_set_line_attributes (line->gc,
-					    width,
-					    GDK_LINE_SOLID,
-					    (line->first_arrow || line->last_arrow) ? GDK_CAP_BUTT : line->cap,
-					    line->join);
-	}
-
-	reconfigure_arrows (line);
-
-	recalc_bounds (line);
+	set_line_gcs_foreground (line);
+	set_line_gc_width (line);
+	reconfigure_arrows_and_bounds (line);
 }
 
 static void

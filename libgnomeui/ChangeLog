@@ -1,5 +1,19 @@
 1998-09-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-canvas-line.c (gnome_canvas_line_set_arg): Avoid
+	unnecessary reconfiguration, recalculation of bounds, and arrow
+	polygon recomputation.
+
+	* gnome-canvas-text.c (gnome_canvas_text_set_arg): Avoid
+	unnecessary item reconfiguration and recalculation of bounds.
+
+	* gnome-canvas-rect-ellipse.c (get_color_arg): New function to
+	avoid a bit of duplicated code in gnome_canvas_re_get_arg().
+	(set_outline_gc_width): Now the outline GC's line width is
+	calculated here.
+	(gnome_canvas_re_set_arg): Optimizations to avoid unnecessary
+	item reconfiguration and recalculation of bounds.
+
 	* gnome-app-helper.c (create_menu_item): Set separators as
 	insensitive so that they cannot be selected.
 	(create_pixmap): Look for pixmap files in the standard pixmap

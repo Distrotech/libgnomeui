@@ -327,18 +327,28 @@ split_into_lines (GnomeCanvasText *text)
 	calc_line_widths (text);
 }
 
+/* Convenience function to set the text's GC's foreground color */
+static void
+set_text_gc_foreground (GnomeCanvasText *text)
+{
+	GdkColor c;
+
+	if (!text->gc)
+		return;
+
+	c.pixel = text->pixel;
+	gdk_gc_set_foreground (text->gc, &c);
+}
+
 static void
 gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasText *text;
-	int calc_gcs;
 	GdkColor color;
 
 	item = GNOME_CANVAS_ITEM (object);
 	text = GNOME_CANVAS_TEXT (object);
-
-	calc_gcs = FALSE;
 
 	switch (arg_id) {
 	case ARG_TEXT:
@@ -424,20 +434,17 @@ gnome_canvas_text_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		else
 			text->pixel = 0;
 
-		calc_gcs = TRUE;
+		set_text_gc_foreground (text);
 		break;
 
 	case ARG_FILL_COLOR_GDK:
 		text->pixel = ((GdkColor *) GTK_VALUE_BOXED (*arg))->pixel;
-		calc_gcs = TRUE;
+		set_text_gc_foreground (text);
 		break;
 
 	default:
 		break;
 	}
-
-	if (calc_gcs)
-		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }
 
 static void
@@ -517,10 +524,7 @@ gnome_canvas_text_reconfigure (GnomeCanvasItem *item)
 	if (parent_class->reconfigure)
 		(* parent_class->reconfigure) (item);
 
-	if (text->gc) {
-		color.pixel = text->pixel;
-		gdk_gc_set_foreground (text->gc, &color);
-	}
+	set_text_gc_foreground (text);
 
 	recalc_bounds (text);
 }
@@ -536,6 +540,7 @@ gnome_canvas_text_realize (GnomeCanvasItem *item)
 		(* parent_class->realize) (item);
 
 	text->gc = gdk_gc_new (item->canvas->layout.bin_window);
+
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
 }
 
