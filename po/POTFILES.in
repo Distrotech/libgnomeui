@@ -1,4 +1,3 @@
-demos/winhints_demo.c
 libgnomeui/gnome-canvas-init.c
 libgnomeui/gnome-client.c
 libgnomeui/gnome-color-picker.c
