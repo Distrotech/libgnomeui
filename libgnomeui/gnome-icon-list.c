@@ -1529,7 +1529,7 @@ icon_is_in_area (Icon *icon, int x1, int y1, int x2, int y2)
 {
 	double ix1, iy1, ix2, iy2;
 
-	if (x1 == y1 && x2 == y2)
+	if (x1 == x2 && y1 == y2)
 		return FALSE;
 
 	gnome_canvas_item_get_bounds (GNOME_CANVAS_ITEM (icon->image), &ix1, &iy1, &ix2, &iy2);

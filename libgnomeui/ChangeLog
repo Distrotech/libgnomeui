@@ -1,3 +1,8 @@
+1999-07-20  Federico Mena Quintero  <federico@evilplan.org>
+
+	* gnome-icon-list.c (icon_is_in_area): I'm a doofus.  Fix the
+	same-coordinates comparison.
+
 1999-07-18  Miguel de Icaza  <miguel@gnu.org>
 
 	* gnome-icon-list.c: Reverted all the changes that made gil->adj
