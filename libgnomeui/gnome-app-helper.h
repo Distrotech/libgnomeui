@@ -1,14 +1,17 @@
-/* GnomeApp widget (C) 1998 Red Hat Software, Miguel de Icaza, Federico Mena, 
- * Chris Toshok.
+/* GnomeApp widget (C) 1998,1999 Red Hat Software, Miguel de Icaza,
+ * Federico Mena, Chris Toshok.
  *
- * Originally by Elliot Lee, with hacking by Chris Toshok for *_data, 
- * Marc Ewing added menu support, toggle and radio support, and I don't know 
- * what you other people did :) menu insertion/removal functions by Jaka Mocnik.
+ *
+ * Originally by Elliot Lee, with hacking by Chris Toshok for *_data,
+ * Marc Ewing added menu support, toggle and radio support, and I
+ * don't know what you other people did :) menu insertion/removal
+ * functions by Jaka Mocnik.  Standard menu items by George Lebl and
+ * Nat Friedman.
+ *
  * Some subtree hackage (and possibly various justification hacks) by Justin 
  * Maurer.
  *
- * Major cleanups and rearrangements by Federico Mena and Justin Maurer.
- */
+ * Major cleanups and rearrangements by Federico Mena and Justin Maurer.  */
 
 #ifndef GNOME_APP_HELPER_H
 #define GNOME_APP_HELPER_H
