@@ -6,7 +6,7 @@
  * Author: Federico Mena
  */
 
-#include <gdk/gdkprivate.h>
+#include <gdk/gdkx.h>
 #include "libgnome/gnome-defs.h"
 #include "gnome-rootwin.h"
 
@@ -189,7 +189,7 @@ gnome_rootwin_realize (GtkWidget *widget)
 
 	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
 
-	widget->window = gdk_window_foreign_new (gdk_root_window);
+	widget->window = gdk_window_foreign_new (GDK_ROOT_WINDOW());
 	gdk_window_set_user_data (widget->window, widget);
 
 	/* Here we set the widget's events plus the window's events plus the normal

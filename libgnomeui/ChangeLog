@@ -1,3 +1,7 @@
+Fri Nov 13 11:29:22 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gnome-rootwin.c: Include gdkx.h not gdkprivate.h
+
 1998-11-11  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-geometry.c (gnome_geometry_string): Use
