@@ -624,7 +624,7 @@ gnome_canvas_text_set_property (GObject            *object,
 		if (text->font_desc)
 			pango_font_description_free (text->font_desc);
 
-		text->font_desc = g_value_get_as_pointer (value);
+		text->font_desc = g_value_get_boxed (value);
 
 		pango_layout_set_font_description (text->layout, text->font_desc);
 		recalc_bounds (text);
