@@ -70,7 +70,6 @@ libgnomeui_la_SOURCES = \
 	gnome-scores.c			\
 	gnome-startup.c			\
 	gnome-stock.c			\
-	pixmaps/gnome-stock-imlib.h		\
         gnome-winhints.c		\
 	gnometypes.c			\
 	gtkcalendar.c			\

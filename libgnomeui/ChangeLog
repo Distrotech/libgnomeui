@@ -1,3 +1,14 @@
+1998-09-20  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* pixmaps/Makefile.am (stock_images): New variable.  Lists all the
+	stock images.
+	(EXTRA_DIST): Add $(stock_images).
+	(BUILT_SOURCES): Add `gnome-stock-imlib.h'.
+	(gnome-stock-imlib.h): Don't use wildcards, use $(stock_images).
+
+	* Makefile.am (libgnomeui_la_SOURCES): 
+	Remove `pixmaps/gnome-stock-imlib.h'. 
+
 Sun Sep 20 18:40:44 1998  John Ellis  <johne@bellatlantic.net>
 
 	* pixmaps/calculator-font.xpm: Changed to png
