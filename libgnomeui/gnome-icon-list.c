@@ -520,7 +520,11 @@ icon_event (Gil *gil, Icon *icon, GdkEvent *event)
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
 		gil->last_clicked = icon;
-		if (icon->text->selected && (event->button.button == 1))
+		/*
+		 * FIXME:
+		 * Would it be ok to never set last_clicked to NULL here?
+		 */
+		if (icon->text->selected && (event->button.button == 1 || event->button.button == 3))
 			gil->last_clicked = icon;
 		else {
 			gil->last_clicked = NULL;
