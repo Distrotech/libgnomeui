@@ -7,14 +7,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.2\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2003-05-05 23:48+0200\n"
-"Last-Translator: Данило Шеган <danilo@prevod.org>\n"
+"Project-Id-Version: libgnomeui 2.4\n"
+"POT-Creation-Date: 2003-07-13 21:44+0200\n"
+"PO-Revision-Date: 2003-07-08 21:17+0200\n"
+"Last-Translator: Бојан Живановић <bojanz@panet.co.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -49,9 +50,8 @@ msgid "Translated by"
 msgstr "Превео"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Захвале"
+msgstr "_Захвале"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -142,6 +142,7 @@ msgstr "О програму „%s“"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Датотека"
 
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_Игра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Помоћ"
 
@@ -389,11 +391,11 @@ msgstr "Подеси апликацију"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "О _програму"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "О овом програму"
 
@@ -420,7 +422,7 @@ msgstr "Отвори нови прозор"
 msgid "_Close This Window"
 msgstr "_Затвори овај прозор"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Затвори текући прозор"
 
@@ -596,7 +598,7 @@ msgstr "Колико корисник мора да суделује."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Ваш HTTP прокси захтева да се пријавите.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -604,18 +606,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Морате се пријавити да бисте приступили „%s“.\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Послаће вашу лозинку без шифровања."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Послаће вашу лозинку шифровано."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Захтева се идентификација"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1216,11 +1220,11 @@ msgstr "Порука"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "_Корисничко име:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Лозинка:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1353,7 +1357,7 @@ msgstr "Употреба: gnome_segv2 име-програма број-сигн�
 
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
-msgstr "Пошаљите извештај о буби"
+msgstr "Пошаљите извештај о грешци"
 
 #: libgnomeui/gnome_segv.c:151
 msgid "Debug"
@@ -1367,8 +1371,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Посетите Гномову страницу за пукле програме за додатне информације"
 
-#~ msgid "_Credits"
-#~ msgstr "_Захвале"
-
-#~ msgid "Exit the test"
-#~ msgstr "Напустите пробу"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Напустите пробу"

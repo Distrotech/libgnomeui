@@ -7,14 +7,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.2\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
-"PO-Revision-Date: 2003-05-05 23:48+0200\n"
-"Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
+"Project-Id-Version: libgnomeui 2.4\n"
+"POT-Creation-Date: 2003-07-13 21:44+0200\n"
+"PO-Revision-Date: 2003-07-08 21:17+0200\n"
+"Last-Translator: Bojan Živanović <bojanz@panet.co.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -34,7 +35,7 @@ msgstr "Nagoveštaj za 2. stavku"
 
 #: libgnomeui/gnome-about.c:198
 msgid "Credits"
-msgstr "Zaхvale"
+msgstr "Zahvale"
 
 #: libgnomeui/gnome-about.c:230
 msgid "Written by"
@@ -49,9 +50,8 @@ msgid "Translated by"
 msgstr "Preveo"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Zaхvale"
+msgstr "_Zahvale"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -119,13 +119,13 @@ msgstr "Polje za one koji su dokumentovali"
 
 #: libgnomeui/gnome-about.c:431
 msgid "Translator credits"
-msgstr "Zaхvalnost za prevod"
+msgstr "Zahvalnost za prevod"
 
 #: libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
-"Zaхvalnost prevodiocima. Ova niska treba da bude označena kao prevodiva"
+"Zahvalnost prevodiocima. Ova niska treba da bude označena kao prevodiva"
 
 #: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -142,6 +142,7 @@ msgstr "O programu „%s“"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Datoteka"
 
@@ -199,6 +200,7 @@ msgid "_Game"
 msgstr "_Igra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomoć"
 
@@ -389,11 +391,11 @@ msgstr "Podesi aplikaciju"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "O _programu"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O ovom programu"
 
@@ -420,7 +422,7 @@ msgstr "Otvori novi prozor"
 msgid "_Close This Window"
 msgstr "_Zatvori ovaj prozor"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvori tekući prozor"
 
@@ -482,7 +484,7 @@ msgstr "_Rezultati ..."
 
 #: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
-msgstr "Tabela najboljiх rezultata"
+msgstr "Tabela najboljih rezultata"
 
 #: libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
@@ -596,7 +598,7 @@ msgstr "Koliko korisnik mora da sudeluje."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Vaš HTTP proksi zahteva da se prijavite.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -604,18 +606,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Morate se prijaviti da biste pristupili „%s“.\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Poslaće vašu lozinku bez šifrovanja."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Poslaće vašu lozinku šifrovano."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Zahteva se identifikacija"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -627,7 +631,7 @@ msgstr "ID"
 
 #: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
-msgstr "Navedite prefiks sačuvaniх podešavanja"
+msgstr "Navedite prefiks sačuvanih podešavanja"
 
 #: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
@@ -746,11 +750,11 @@ msgstr "Naslovna slika"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
-msgstr "Vodeni žig u vrхu"
+msgstr "Vodeni žig u vrhu"
 
 #: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
-msgstr "Vodeni žig u vrхu"
+msgstr "Vodeni žig u vrhu"
 
 #: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
@@ -856,7 +860,7 @@ msgid ""
 "list."
 msgstr ""
 "Jedinstvena oznaka za datoteku. Ovo će se koristiti za snimanje spiska "
-"otvaraniх datoteka (istorijat)."
+"otvaranih datoteka (istorijat)."
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
@@ -958,7 +962,7 @@ msgstr "sans 12"
 
 #: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbVvGgDdĐđEeŽžZzIiJjKkLlLjljMmNnNjnjOoPpRrSsTtĆćUuFfhхCcČčDždžŠš"
+msgstr "AaBbVvGgDdĐđEeŽžZzIiJjKkLlLjljMmNnNjnjOoPpRrSsTtĆćUuFfHhCcČčDždžŠš"
 
 #: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1042,7 +1046,7 @@ msgid ""
 msgstr ""
 "Program „%s“ je pokušao da izmeni podešavanja sistema za koja vaš "
 "administrator ili proizvođač operativnog sistema ne dozvoljavaju izmene. "
-"Neka od izabraniх postavki neće imati uticaja, ili se neće koristiti i pri "
+"Neka od izabranih postavki neće imati uticaja, ili se neće koristiti i pri "
 "narednom pokretanju programa."
 
 #: libgnomeui/gnome-gconf-ui.c:176
@@ -1052,7 +1056,7 @@ msgid ""
 "Some of your configuration settings may not work properly."
 msgstr ""
 "Došlo je do greške pri učitavanju ili snimanju podataka o podešavanjima za %"
-"s. Neka od vašiх postavki možda neće ispravno raditi."
+"s. Neka od vaših postavki možda neće ispravno raditi."
 
 #: libgnomeui/gnome-href.c:122
 msgid "URL"
@@ -1100,7 +1104,7 @@ msgid ""
 "list."
 msgstr ""
 "Jedinstvena oznaka za ikonu. Ovo će se koristiti pri snimanju spiska "
-"posećeniх datoteka (istorijat)."
+"posećenih datoteka (istorijat)."
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
@@ -1128,7 +1132,7 @@ msgid ""
 "need to modify or query any of its properties."
 msgstr ""
 "Prozorče za izbor ikone. Možete koristiti ovu osobinu da dobijete GtkDialog "
-"ukoliko želite da saznate ili izmenite neku od njegoviх osobina."
+"ukoliko želite da saznate ili izmenite neku od njegovih osobina."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
@@ -1216,11 +1220,11 @@ msgstr "Poruka"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "_Korisničko ime:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Lozinka:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1244,7 +1248,7 @@ msgstr "Pregled trenutno navedene slike"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
-msgstr "Prviх deset"
+msgstr "Prvih deset"
 
 #: libgnomeui/gnome-scores.c:91
 msgid "User"
@@ -1309,7 +1313,7 @@ msgstr "Gnomova biblioteka za korisničko sučelje"
 #: libgnomeui/gnome-ui-init.c:705
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
-"Došlo je do nekoliko nepravilniх pristupa memoriji (SIGSEGV); ne može da "
+"Došlo je do nekoliko nepravilnih pristupa memoriji (SIGSEGV); ne može da "
 "prikaže prozorče za grešku\n"
 
 #. Eeeek! Can't show dialog
@@ -1353,7 +1357,7 @@ msgstr "Upotreba: gnome_segv2 ime-programa broj-signala\n"
 
 #: libgnomeui/gnome_segv.c:140
 msgid "Submit a bug report"
-msgstr "Pošaljite izveštaj o bubi"
+msgstr "Pošaljite izveštaj o grešci"
 
 #: libgnomeui/gnome_segv.c:151
 msgid "Debug"
@@ -1367,8 +1371,6 @@ msgstr "http://www.gnome.org/application_crashed.shtml"
 msgid "Please visit the GNOME Application Crash page for more information"
 msgstr "Posetite Gnomovu stranicu za pukle programe za dodatne informacije"
 
-#~ msgid "_Credits"
-#~ msgstr "_Zaхvale"
-
-#~ msgid "Exit the test"
-#~ msgstr "Napustite probu"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Napustite probu"
