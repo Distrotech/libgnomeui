@@ -84,6 +84,7 @@ libgnomeui/libgnomeui-2.0.pc
 libgnomeui/pixmaps/Makefile
 images/Makefile
 demos/Makefile
+doc/Makefile
 ])
 
 cat $srcdir/message-of-doom

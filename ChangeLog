@@ -1,5 +1,9 @@
 2001-04-11  Martin Baulig  <baulig@suse.de>
 
+	* docs/: New directory.
+
+2001-04-11  Martin Baulig  <baulig@suse.de>
+
 	* libgnomeui/: This has now been copied over in CVS. There's a
 	GNOME_LIBS_MODULE_SPLIT tag which refers to the latest version
 	in gnome-libs.
