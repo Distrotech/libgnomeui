@@ -11,28 +11,14 @@
 #include <gnome.h>
 #include <signal.h>
 #include <string.h>
+#include <stdio.h>
 
 int retval = 1;
 
-static void button_click(GtkWidget *button, int choice)
-{
-  retval = choice;
-  gtk_main_quit();
-}
-
-static gboolean delete_event(GtkWidget *awin)
-{
-  retval = 1;
-  gtk_main_quit();
-  return TRUE; /* Piece of crap Gtk. Return values from signal handlers
-		  work shoddily */
-}
-
 int main(int argc, char *argv[])
 {
-  GtkWidget *mainwin, *btn, *lbl;
-  GString *mystr;
-  int firstarg;
+  GtkWidget *mainwin;
+  gchar* msg;
   struct sigaction sa;
   poptContext ctx;
   char **args;
@@ -51,41 +37,28 @@ int main(int argc, char *argv[])
   sa.sa_handler = SIG_IGN;
   sigaction(SIGSEGV, &sa, NULL);
 
-  mainwin = gtk_dialog_new();
-
-  btn = gnome_stock_button(GNOME_STOCK_BUTTON_YES);
-  gtk_container_add(GTK_CONTAINER(GTK_DIALOG(mainwin)->action_area),
-		    btn);
-  gtk_signal_connect(GTK_OBJECT(btn), "clicked",
-		     GTK_SIGNAL_FUNC(button_click), (gpointer)0);
-
-  btn = gnome_stock_button(GNOME_STOCK_BUTTON_NO);
-  gtk_container_add(GTK_CONTAINER(GTK_DIALOG(mainwin)->action_area),
-		    btn);
-  gtk_signal_connect(GTK_OBJECT(btn), "clicked",
-		     GTK_SIGNAL_FUNC(button_click), (gpointer)1);
-
-  btn = gtk_button_new_with_label(_("No, and ignore\nfuture SIGSEGV's"));
-  gtk_container_add(GTK_CONTAINER(GTK_DIALOG(mainwin)->action_area),
-		    btn);
-  gtk_signal_connect(GTK_OBJECT(btn), "clicked",
-		     GTK_SIGNAL_FUNC(button_click), (gpointer)99);
-
-  gtk_box_set_homogeneous(GTK_BOX(GTK_DIALOG(mainwin)->action_area),
-			  TRUE);
-
-  mystr = g_string_new(NULL);
   args = poptGetArgs(ctx);
-  g_string_sprintf(mystr, _("Application \"%s\" has a bug.\nSIGSEGV received at PC %#lx in PID %d.\n\n\nDo you want to exit this program?"),
-		   args[0], (unsigned long)atoi(args[1]), getppid());
+  if (args && args[0] && args[1])
+    {
+      msg = g_strdup_printf(_("Application \"%s\" (process %d) has crashed due to a bug in the software.\n(%s)\nFor more information, see http://www.gnome.org/wherever/we/decide/"),
+                       args[0], getppid(), g_strsignal(atoi(args[1])));
+    }
+  else
+    {
+      fprintf(stderr, "Usage: gnome_segv appname signum\n");
+      return 1;
+    }
+
   poptFreeContext(ctx);
-  lbl = gtk_label_new(mystr->str);
-  gtk_container_add(GTK_CONTAINER(GTK_DIALOG(mainwin)->vbox),
-		    lbl);
 
-  gtk_widget_show_all(mainwin);
+  mainwin = gnome_message_box_new(msg,
+                                  GNOME_MESSAGE_BOX_ERROR,
+                                  GNOME_STOCK_BUTTON_CLOSE,
+                                  NULL);
 
-  gtk_main();
+  g_free(msg);
 
-  return retval;
+  gnome_dialog_run(GNOME_DIALOG(mainwin));
+
+  return 0;
 }

@@ -556,22 +556,8 @@ gnome_rc_parse (gchar *command)
 static void gnome_segv_handle(int signum)
 {
 	static int in_segv = 0;
-	void *eip = NULL;
 	pid_t pid;
 	
-#if 0
-	/* Is there any way to do this portably? */
-#ifdef linux
-#if defined(__i386__)
-	eip = sc->eip;
-#elif defined(__ppc__)
-	eip = sc->nc_ip;
-#elif defined(__sparc__)
-	eip = sc->sigc_pc;
-#endif
-#endif
-	
-#endif /* #if 0 */
 	
 	if(in_segv)
 		return;
@@ -581,27 +567,16 @@ static void gnome_segv_handle(int signum)
 	pid = fork();
 	
 	if (pid){
+                /* Wait for user to see the dialog, then exit. */
 		int estatus;
 		pid_t eret;
 		
 		eret = waitpid(pid, &estatus, 0);
 		
-		/* We only do a zap-em if the user specifically requested it
-		 * - if an error happens getting user decision, we carry on.
-		 * "Failsafe" is the idea
-		 */
-		if (WIFEXITED(estatus) && WEXITSTATUS(estatus) == 0)
-			exit(0);
-		else if (WIFEXITED(estatus) && WEXITSTATUS(estatus) == 99){
-			
-			/* We don't decrement the in_segv lock
-			 * - basically the user wants to ignore all future segv's
-			 */
-			return;
-		}
+                exit(1);
 	} else {
 		char buf[32];
-		g_snprintf(buf, sizeof(buf), "%ld", eip);
+		g_snprintf(buf, sizeof(buf), "%d", signum);
 		/* Child process */
 		execl(GNOMEBINDIR "/gnome_segv", GNOMEBINDIR "/gnome_segv",
 		      program_invocation_name, buf, NULL);

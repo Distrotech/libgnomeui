@@ -1,3 +1,13 @@
+1999-07-16  Havoc Pennington  <hp@pobox.com>
+
+	* gnome_segv.c (main): Cleanup; use message box, have only one
+	button, improve message, don't segfault if called improperly.
+
+	* gnome-init.c (gnome_segv_handle): Always exit, don't check
+	gnome_segv return value; handle any signal, not just segv (though 
+	for now the handler isn't installed for other signals, we probably
+	want sigbus and sigfpe eventually). 
+
 1999-07-14  Havoc Pennington <hp@pobox.com>
 
 	* gnome-client.c: Docs, docs
