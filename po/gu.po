@@ -1,21 +1,23 @@
+# translation of libgnomeui.HEAD.gu.po to Gujarati
 # translation of gu.po to Gujarati
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # MagNet <magnet@magnet-i.com>, 2004.
 # Ankit Patel <ankit@redhat.com>, 2004.
 msgid ""
 msgstr ""
-"Project-Id-Version: gu\n"
+"Project-Id-Version: libgnomeui.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-19 23:37-0400\n"
-"PO-Revision-Date: 2004-08-05 13:46+0530\n"
+"POT-Creation-Date: 2004-08-09 12:04+0200\n"
+"PO-Revision-Date: 2004-08-09 15:44+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
-"<magnet@magnet-i.com>\n"
 "Language-Team: Gujarati\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"<magnet@magnet-i.com>\n"
 "X-Generator: KBabel 1.3.1\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 
 # demos/mdi_demo.c:128
 #: demos/mdi_demo.c:128
@@ -37,12 +39,17 @@ msgstr "બાળ વસ્તુ ૨"
 msgid "Hint for item 2"
 msgstr "વસ્તુ ૨ માટે સંકેત"
 
+#: file-chooser/gtkfilesystemgnomevfs.c:650
+#, c-format
+msgid "%s is not a folder"
+msgstr "%s એ ફોલ્ડર નથી"
+
 # libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
-#: file-chooser/gtkfilesystemgnomevfs.c:856
+#: file-chooser/gtkfilesystemgnomevfs.c:857
 msgid "Filesystem"
 msgstr "ફાઈલસિસ્ટમ"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1518
+#: file-chooser/gtkfilesystemgnomevfs.c:1521
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "બુકમાર્ક સંગ્રહવામાં નિષ્ફળ (%s)"
@@ -198,6 +205,7 @@ msgstr "%s ના વિશે"
 # test-gnome/testgnome.xml.h:5
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ફાઇલ (_F)"
 
@@ -270,6 +278,7 @@ msgstr "રમત (_G)"
 # libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 # test-gnome/testgnome.xml.h:6
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "મદદ (_H)"
 
@@ -499,12 +508,12 @@ msgstr "કાર્યક્રમની રુપરેખા બનાવો"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "ના વિશે (_A)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "આ કાર્યક્રમ વિશે"
 
@@ -537,7 +546,7 @@ msgid "_Close This Window"
 msgstr "આ વિન્ડો બંધ કરો (_C)"
 
 # libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "વર્તમાન વિન્ડો બંધ કરો"
 
@@ -1663,11 +1672,13 @@ msgstr "જીનોમ GUI પુસ્તકાલય"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:708
+#, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "ઘણાંબધાં વિભાગોની ભૂલો થઇ છે; સંવાદ દર્શાવી શકતું નથી\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
+#, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1722,4 +1733,8 @@ msgstr "વિકસાવનારાઓને જાણ કરો (_I)"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "ભૂલ શોધો (_D)"
+
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "ચકાસણી બંધ કરો"
 
