@@ -11,6 +11,11 @@
 
 2000-09-11  Martin Baulig  <baulig@suse.de>
 
+	* gnome-icon-selector.c (icon_selected_cb): New callback function;
+	emits the "selection_changed" signal on the GnomeSelector.
+	(gnome_icon_selector_construct): Connect the `icon_selected_cb' to
+	the "select_icon" and "unselect_icon" signals of the GnomeIconList.
+
 	* gnome-selector.h (GnomeSelector): Added "selection_changed" signal.
 
 Sun Sep 10 19:47:07 2000  George Lebl <jirka@5z.com>
