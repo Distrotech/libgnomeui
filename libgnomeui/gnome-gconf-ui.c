@@ -50,6 +50,7 @@ gnome_gconf_ui_pre_args_parse (GnomeProgram *app, GnomeModuleInfo *mod_info)
         gconf_client_set_global_default_error_handler
 		(gnome_default_gconf_client_error_handler);
 }
+#define N_(x) x
 
 const GnomeModuleInfo *
 gnome_gconf_ui_module_info_get (void)

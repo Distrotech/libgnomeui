@@ -287,21 +287,21 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_edge->background_color);
 	druid_page_edge->_priv->background_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
-				       gnome_canvas_rect_get_type (),
+				       GNOME_TYPE_CANVAS_RECT,
 				       "fill_color_rgba", fill_color,
 				       NULL);
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_edge->textbox_color);
 	druid_page_edge->_priv->textbox_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
-				       gnome_canvas_rect_get_type (),
+				       GNOME_TYPE_CANVAS_RECT,
 				       "fill_color_rgba", fill_color,
 				       NULL);
 
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_edge->logo_background_color);
 	druid_page_edge->_priv->logoframe_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
-				       gnome_canvas_rect_get_type (),
+				       GNOME_TYPE_CANVAS_RECT,
 				       "fill_color_rgba", fill_color,
 				       NULL);
 	if (druid_page_edge->logo_image == NULL) {
@@ -310,7 +310,7 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 
 	druid_page_edge->_priv->top_watermark_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
-				       gnome_canvas_pixbuf_get_type (),
+				       GNOME_TYPE_CANVAS_PIXBUF,
 				       "x", 0.0,
 				       "y", 0.0,
 				       "x_set", TRUE,
@@ -324,7 +324,7 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 
 	druid_page_edge->_priv->logo_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
-				       gnome_canvas_pixbuf_get_type (),
+				       GNOME_TYPE_CANVAS_PIXBUF,
 				       "x_set", TRUE,
 				       "y_set", TRUE,
 				       NULL);
@@ -335,7 +335,7 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 
 	druid_page_edge->_priv->watermark_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
-				       gnome_canvas_pixbuf_get_type (),
+				       GNOME_TYPE_CANVAS_PIXBUF,
 				       "x_set", TRUE,
 				       "y_set", TRUE,
 				       NULL);
@@ -348,7 +348,7 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_edge->title_color);
 	druid_page_edge->_priv->title_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
-				       gnome_canvas_text_get_type (),
+				       GNOME_TYPE_CANVAS_TEXT,
 				       "text", druid_page_edge->title,
 				       "fill_color_rgba", fill_color,
 				       "fontset", _("-adobe-helvetica-bold-r-normal-*-*-180-*-*-p-*-*-*,*-r-*"),
@@ -357,7 +357,7 @@ gnome_druid_page_edge_setup (GnomeDruidPageEdge *druid_page_edge)
 	fill_color = GDK_COLOR_TO_RGBA (druid_page_edge->text_color);
 	druid_page_edge->_priv->text_item =
 		gnome_canvas_item_new (gnome_canvas_root (canvas),
-				       gnome_canvas_text_get_type (),
+				       GNOME_TYPE_CANVAS_TEXT,
 				       "text", druid_page_edge->text,
 				       "justification", GTK_JUSTIFY_LEFT,
 				       "fontset", _("-adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-*-*,*-r-*"),
@@ -429,7 +429,7 @@ gnome_druid_page_edge_new (GnomeEdgePosition position)
 	g_return_val_if_fail (position >= GNOME_EDGE_START &&
 			      position < GNOME_EDGE_LAST, NULL);
 
-	retval = gtk_type_new (gnome_druid_page_edge_get_type ());
+	retval = gtk_type_new (GNOME_TYPE_DRUID_PAGE_EDGE);
 
 	gnome_druid_page_edge_construct (retval,
 					 position,
@@ -461,7 +461,7 @@ gnome_druid_page_edge_new_aa (GnomeEdgePosition position)
 	g_return_val_if_fail (position >= GNOME_EDGE_START &&
 			      position < GNOME_EDGE_LAST, NULL);
 
-	retval = gtk_type_new (gnome_druid_page_edge_get_type ());
+	retval = gtk_type_new (GNOME_TYPE_DRUID_PAGE_EDGE);
 
 	gnome_druid_page_edge_construct (retval,
 					 position,
@@ -506,7 +506,7 @@ gnome_druid_page_edge_new_with_vals (GnomeEdgePosition position,
 	g_return_val_if_fail (position >= GNOME_EDGE_START &&
 			      position < GNOME_EDGE_LAST, NULL);
 
-	retval = gtk_type_new (gnome_druid_page_edge_get_type ());
+	retval = gtk_type_new (GNOME_TYPE_DRUID_PAGE_EDGE);
 
 	gnome_druid_page_edge_construct (retval,
 					 position,

@@ -86,7 +86,7 @@ static gint appbar_signals[LAST_SIGNAL] = { 0 };
 guint      
 gnome_appbar_get_type ()
 {
-  static guint ab_type = 0;
+  static GType ab_type = 0;
 
   if (!ab_type)
     {
@@ -102,7 +102,7 @@ gnome_appbar_get_type ()
 	NULL
       };
 
-      ab_type = gtk_type_unique (gtk_hbox_get_type (), &ab_info);
+      ab_type = gtk_type_unique (GTK_TYPE_HBOX, &ab_info);
     }
 
   return ab_type;
@@ -137,7 +137,7 @@ gnome_appbar_class_init (GnomeAppBarClass *class)
 		    gtk_signal_default_marshaller,
 		    GTK_TYPE_NONE, 0);
 
-  parent_class = gtk_type_class (gtk_hbox_get_type ());
+  parent_class = gtk_type_class (GTK_TYPE_HBOX);
   
   class->user_response = NULL;
   class->clear_prompt  = NULL; /* maybe should have a handler
@@ -297,7 +297,7 @@ gnome_appbar_new (gboolean has_progress,
 		  gboolean has_status,
 		  GnomePreferencesType interactivity)
 {
-  GnomeAppBar * ab = gtk_type_new (gnome_appbar_get_type ());
+  GnomeAppBar * ab = gtk_type_new (GNOME_TYPE_APPBAR);
 
   gnome_appbar_construct(ab, has_progress, has_status, interactivity);
 

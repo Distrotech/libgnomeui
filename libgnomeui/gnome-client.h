@@ -184,7 +184,7 @@ const GnomeModuleInfo *gnome_client_module_info_get (void) G_GNUC_CONST;
 #define GNOME_CLIENT_PARAM_SM_CONNECT "sm-connect"
 
 /* For internal use by the gnome-libs: */
-guint        gnome_client_get_type (void) G_GNUC_CONST;
+GType        gnome_client_get_type (void) G_GNUC_CONST;
 
 /* Get the master session management client.  This master client gets
    a client id, that may be specified by the '--sm-client-id' command

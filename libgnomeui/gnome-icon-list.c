@@ -938,14 +938,14 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 
 	icon->group = GNOME_CANVAS_GROUP (gnome_canvas_item_new (
 		gnome_canvas_root (canvas),
-		gnome_canvas_group_get_type (),
+		GNOME_TYPE_CANVAS_GROUP,
 		"x", 0.0,
 		"y", 0.0,
 		NULL));
 
 	icon->image = GNOME_CANVAS_PIXBUF (gnome_canvas_item_new (
 		icon->group,
-		gnome_canvas_pixbuf_get_type (),
+		GNOME_TYPE_CANVAS_PIXBUF,
 		"x", 0.0,
 		"y", 0.0,
 		"width", (double) gdk_pixbuf_get_width (im),
@@ -957,7 +957,7 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 #if 0
 	icon->text = GNOME_ICON_TEXT_ITEM (gnome_canvas_item_new (
 		icon->group,
-		gnome_icon_text_item_get_type (),
+		GNOME_TYPE_ICON_TEXT_ITEM,
 		"text", text,
 		"x", (double) DEFAULT_TEXT_SPACING,
 		"y", (double) gdk_pixbuf_get_height (im),
@@ -969,7 +969,7 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 
 	icon->text = GNOME_CANVAS_RICH_TEXT (gnome_canvas_item_new (
 		icon->group,
-		gnome_canvas_rich_text_get_type (),
+		GNOME_TYPE_CANVAS_RICH_TEXT,
 		"text", text,
 		"x", (double) DEFAULT_TEXT_SPACING,
 		"y", (double) gdk_pixbuf_get_height (im),
@@ -1611,7 +1611,7 @@ gil_button_press (GtkWidget *widget, GdkEventButton *event)
 
 	stipple = gdk_bitmap_create_from_data (NULL, gray50_bits, gray50_width, gray50_height);
 	priv->sel_rect = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (gil)),
-						gnome_canvas_rect_get_type (),
+						GNOME_TYPE_CANVAS_RECT,
 						"x1", tx,
 						"y1", ty,
 						"x2", tx,
@@ -1850,7 +1850,7 @@ gil_class_init (GilClass *gil_class)
 	layout_class = (GtkLayoutClass *)   gil_class;
 	canvas_class = (GnomeCanvasClass *) gil_class;
 
-	parent_class = gtk_type_class (gnome_canvas_get_type ());
+	parent_class = gtk_type_class (GNOME_TYPE_CANVAS);
 
 	gil_signals[SELECT_ICON] =
 		gtk_signal_new (
@@ -1927,10 +1927,10 @@ gil_init (Gil *gil)
  *
  * Returns: The type ID of the &GnomeIconList class.
  */
-guint
+GType
 gnome_icon_list_get_type (void)
 {
-	static guint gil_type = 0;
+	static GType gil_type = 0;
 
 	if (!gil_type) {
 		GtkTypeInfo gil_info = {
@@ -2032,7 +2032,7 @@ gnome_icon_list_new (guint icon_width, int flags)
 	Gil *gil;
 
 	gtk_widget_push_colormap (gdk_rgb_get_cmap ());
-	gil = GIL (gtk_type_new (gnome_icon_list_get_type ()));
+	gil = GIL (gtk_type_new (GNOME_TYPE_ICON_LIST));
 	gtk_widget_pop_colormap ();
 
 	gnome_icon_list_construct (gil, icon_width, flags);

@@ -139,7 +139,7 @@ gnome_icon_entry_get_type (void)
 			NULL
 		};
 
-		icon_entry_type = gtk_type_unique (gtk_vbox_get_type (),
+		icon_entry_type = gtk_type_unique (GTK_TYPE_VBOX,
 						   &icon_entry_info);
 	}
 
@@ -152,7 +152,7 @@ gnome_icon_entry_class_init (GnomeIconEntryClass *class)
 	GtkObjectClass *object_class = (GtkObjectClass *)class;
 	GObjectClass *gobject_class = (GObjectClass *)class;
 
-	parent_class = gtk_type_class (gtk_vbox_get_type ());
+	parent_class = gtk_type_class (GTK_TYPE_VBOX);
 
 	gnome_ientry_signals[CHANGED_SIGNAL] =
 		gtk_signal_new("changed",
@@ -930,7 +930,7 @@ gnome_icon_entry_new (const gchar *history_id, const gchar *browse_dialog_title)
 {
 	GnomeIconEntry *ientry;
 
-	ientry = gtk_type_new (gnome_icon_entry_get_type ());
+	ientry = gtk_type_new (GNOME_TYPE_ICON_ENTRY);
 
 	gnome_icon_entry_construct (ientry, history_id, browse_dialog_title);
 	

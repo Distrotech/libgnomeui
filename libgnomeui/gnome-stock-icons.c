@@ -134,7 +134,7 @@ get_default_icons (GtkIconFactory *factory)
 
     add_sized (factory, stock_multiple_file, GTK_ICON_SIZE_DND, GNOME_STOCK_MULTIPLE_FILE);
 }
-
+#define N_(x) x
 static GtkStockItem builtin_items [] =
 {
     { GNOME_STOCK_TABLE_BORDERS, N_("Table Borders"), 0, 0, GETTEXT_PACKAGE },

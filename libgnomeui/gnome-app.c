@@ -308,14 +308,14 @@ gnome_app_new (const gchar *appname, const gchar *title)
 	g_return_val_if_fail (appname != NULL, NULL);
 
 	if (title != NULL) {
-		app = g_object_new (gnome_app_get_type (),
+		app = g_object_new (GNOME_TYPE_APP,
 				    "app_id", appname,
 				    NULL);
 		gtk_object_set (GTK_OBJECT (app),
 				"title", title,
 				NULL);
 	} else {
-		app = g_object_new (gnome_app_get_type (),
+		app = g_object_new (GNOME_TYPE_APP,
 				    "app_id", appname,
 				    NULL);
 	}

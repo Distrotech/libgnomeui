@@ -71,7 +71,7 @@ struct _GnomeMDIGenericChildClass {
 	GnomeMDIChildClass parent_class;
 };
 
-guint                gnome_mdi_generic_child_get_type (void);
+GType                 gnome_mdi_generic_child_get_type (void);
 
 GnomeMDIGenericChild *gnome_mdi_generic_child_new     (const gchar *name);
 

@@ -127,7 +127,7 @@ struct _GnomeMDIClass {
  *   or a notebook
  */
 
-guint         gnome_mdi_get_type            (void);
+GType          gnome_mdi_get_type            (void);
 
 GtkObject     *gnome_mdi_new                (const gchar *appname, const gchar *title);
 

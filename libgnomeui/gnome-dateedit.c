@@ -798,7 +798,7 @@ gnome_date_edit_new_flags (time_t the_time, GnomeDateEditFlags flags)
 {
 	GnomeDateEdit *gde;
 
-	gde = gtk_type_new (gnome_date_edit_get_type ());
+	gde = gtk_type_new (GNOME_TYPE_DATE_EDIT);
 
 	gnome_date_edit_construct(gde, the_time, flags);
 

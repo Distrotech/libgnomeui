@@ -104,7 +104,7 @@ GnomeMDIGenericChild *gnome_mdi_generic_child_new (const gchar *name)
 {
 	GnomeMDIGenericChild *child;
 
-	child = gtk_type_new(gnome_mdi_generic_child_get_type ());
+	child = gtk_type_new (GNOME_TYPE_MDI_GENERIC_CHILD);
 
 	GNOME_MDI_CHILD(child)->name = g_strdup(name);
 
@@ -314,10 +314,10 @@ static GtkWidget *gnome_mdi_generic_child_create_view (GnomeMDIGenericChild *chi
 		GtkWidget *ret = NULL;
 
 		args[0].name = NULL;
-		args[0].type = gnome_mdi_child_get_type();
+		args[0].type = GNOME_TYPE_MDI_CHILD;
 		GTK_VALUE_OBJECT(args[0]) = GTK_OBJECT(child);
 		args[1].name = NULL;
-		args[1].type = gtk_widget_get_type();
+		args[1].type = GTK_TYPE_WIDGET;
 		GTK_VALUE_POINTER(args[1]) = &ret;
 		child->create_view_cbm(NULL, child->create_view_data, 1, args);
 		return ret;
@@ -337,10 +337,10 @@ static GList *gnome_mdi_generic_child_create_menus(GnomeMDIGenericChild *child, 
 		GList *ret = NULL;
 		
 		args[0].name = NULL;
-		args[0].type = gnome_mdi_child_get_type();
+		args[0].type = GNOME_TYPE_MDI_CHILD;
 		GTK_VALUE_OBJECT(args[0]) = GTK_OBJECT(child);
 		args[1].name = NULL;
-		args[1].type = gtk_widget_get_type();
+		args[1].type = GTK_TYPE_WIDGET;
 		GTK_VALUE_OBJECT(args[0]) = GTK_OBJECT(view);
 		args[2].name = NULL;
 		args[2].type = GTK_TYPE_POINTER; /* should we have a boxed type? */
@@ -363,7 +363,7 @@ static gchar *gnome_mdi_generic_child_get_config_string (GnomeMDIGenericChild *c
 		gchar *ret = NULL;
 		
 		args[0].name = NULL;
-		args[0].type = gnome_mdi_child_get_type();
+		args[0].type = GNOME_TYPE_MDI_CHILD;
 		GTK_VALUE_OBJECT(args[0]) = GTK_OBJECT(child);
 		args[1].name = NULL;
 		args[1].type = GTK_TYPE_STRING;
@@ -387,13 +387,13 @@ static GtkWidget *gnome_mdi_generic_child_set_label (GnomeMDIGenericChild *child
 		GtkWidget *ret = NULL;
 
 		args[0].name = NULL;
-		args[0].type = gnome_mdi_child_get_type();
+		args[0].type = GNOME_TYPE_MDI_CHILD;
 		GTK_VALUE_OBJECT(args[0]) = GTK_OBJECT(child);
 		args[1].name = NULL;
-		args[1].type = gtk_widget_get_type();
+		args[1].type = GTK_TYPE_WIDGET;
 		GTK_VALUE_OBJECT(args[0]) = GTK_OBJECT(old_label);
 		args[2].name = NULL;
-		args[2].type = gtk_widget_get_type();
+		args[2].type = GTK_TYPE_WIDGET;
 		GTK_VALUE_POINTER(args[2]) = &ret;
 		child->set_label_cbm(NULL, child->set_label_data, 2, args);
 		return ret;

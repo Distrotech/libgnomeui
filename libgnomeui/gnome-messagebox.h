@@ -61,7 +61,7 @@ struct _GnomeMessageBoxClass
 };
 
 
-guint      gnome_message_box_get_type   (void) G_GNUC_CONST;
+GType      gnome_message_box_get_type   (void) G_GNUC_CONST;
 GtkWidget* gnome_message_box_new        (const gchar           *message,
 					 const gchar           *messagebox_type,
 					 ...);

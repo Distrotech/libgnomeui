@@ -375,7 +375,7 @@ gnome_font_picker_get_property (GObject *object,
 GtkWidget *
 gnome_font_picker_new (void)
 {
-	return GTK_WIDGET (gtk_type_new (gnome_font_picker_get_type ()));
+	return GTK_WIDGET (gtk_type_new (GNOME_TYPE_FONT_PICKER));
 } /* gnome_font_picker_new */
 
 

@@ -76,7 +76,7 @@ gnome_property_box_class_init (GnomePropertyBoxClass *klass)
 
 	object_class->destroy = gnome_property_box_destroy;
 
-	parent_class = gtk_type_class (gnome_dialog_get_type ());
+	parent_class = gtk_type_class (GNOME_TYPE_DIALOG);
 
 	property_box_signals[APPLY] =
 		gtk_signal_new ("apply",
@@ -181,7 +181,7 @@ gnome_property_box_destroy (GtkObject *object)
 GtkWidget *
 gnome_property_box_new (void)
 {
-	return gtk_type_new (gnome_property_box_get_type ());
+	return gtk_type_new (GNOME_TYPE_PROPERTY_BOX);
 }
 
 static void

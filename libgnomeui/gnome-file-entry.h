@@ -90,7 +90,7 @@ struct _GnomeFileEntryClass {
 };
 
 
-guint      gnome_file_entry_get_type    (void) G_GNUC_CONST;
+GType      gnome_file_entry_get_type    (void) G_GNUC_CONST;
 GtkWidget *gnome_file_entry_new         (const char *history_id,
 					 const char *browse_dialog_title);
 void       gnome_file_entry_construct  (GnomeFileEntry *fentry,

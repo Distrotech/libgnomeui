@@ -586,7 +586,7 @@ gnome_pixmap_entry_new (const gchar *history_id, const gchar *browse_dialog_titl
 {
 	GnomePixmapEntry *pentry;
 
-	pentry = gtk_type_new (gnome_pixmap_entry_get_type ());
+	pentry = gtk_type_new (GNOME_TYPE_PIXMAP_ENTRY);
 
 	gnome_pixmap_entry_construct (pentry, history_id, browse_dialog_title, do_preview);
 	return GTK_WIDGET (pentry);

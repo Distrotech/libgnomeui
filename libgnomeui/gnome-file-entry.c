@@ -105,12 +105,13 @@ enum {
 /* Note, can't use boilerplate with interfaces yet,
  * should get sorted out */
 static GtkVBoxClass *parent_class = NULL;
-GtkType
+GType
 gnome_file_entry_get_type (void)
 {
-	static GtkType object_type = 0;
+	static GType object_type = 0;
+
 	if (object_type == 0) {
-		GtkType type_of_parent;
+		GType type_of_parent;
 		static const GtkTypeInfo object_info = {
 			"GnomeFileEntry",
 			sizeof (GnomeFileEntry),
@@ -127,7 +128,7 @@ gnome_file_entry_get_type (void)
 			NULL,			                         	 /* interface_finalize */
 			NULL			                         	 /* interface_data */
 		};
-		type_of_parent = gtk_vbox_get_type ();
+		type_of_parent = GTK_TYPE_VBOX;
 		object_type = gtk_type_unique (type_of_parent, &object_info);
 		parent_class = gtk_type_class (type_of_parent);
 
@@ -615,7 +616,7 @@ gnome_file_entry_new (const char *history_id, const char *browse_dialog_title)
 {
 	GnomeFileEntry *fentry;
 
-	fentry = gtk_type_new (gnome_file_entry_get_type ());
+	fentry = gtk_type_new (GNOME_TYPE_FILE_ENTRY);
 
 	gnome_file_entry_construct (fentry, history_id, browse_dialog_title);
 	return GTK_WIDGET (fentry);

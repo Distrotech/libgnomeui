@@ -88,7 +88,7 @@ struct _GnomeMDIChildClass
 	GnomeMDIChildLabelFunc   set_label;
 };
 
-guint         gnome_mdi_child_get_type         (void);
+GType         gnome_mdi_child_get_type         (void);
 
 GtkWidget     *gnome_mdi_child_add_view        (GnomeMDIChild *mdi_child);
 

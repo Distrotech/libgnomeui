@@ -77,7 +77,7 @@ struct _GnomeEntryClass {
 };
 
 
-guint        gnome_entry_get_type         (void) G_GNUC_CONST;
+GType        gnome_entry_get_type         (void) G_GNUC_CONST;
 GtkWidget   *gnome_entry_new              (const gchar *history_id);
 
 /* for language bindings and subclassing, use gnome_entry_new */

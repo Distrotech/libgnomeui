@@ -562,7 +562,7 @@ gnome_color_picker_finalize (GObject *object)
 GtkWidget *
 gnome_color_picker_new (void)
 {
-	return GTK_WIDGET (gtk_type_new (gnome_color_picker_get_type ()));
+	return GTK_WIDGET (gtk_type_new (GNOME_TYPE_COLOR_PICKER));
 }
 
 /* Callback used when the color selection dialog is destroyed */

@@ -72,7 +72,7 @@ static gint dialog_signals[LAST_SIGNAL] = { 0, 0 };
 guint
 gnome_dialog_get_type (void)
 {
-  static guint dialog_type = 0;
+  static GType dialog_type = 0;
 
   if (!dialog_type)
     {
@@ -88,7 +88,7 @@ gnome_dialog_get_type (void)
 	NULL
       };
 
-      dialog_type = gtk_type_unique (gtk_window_get_type (), &dialog_info);
+      dialog_type = gtk_type_unique (GTK_TYPE_WINDOW, &dialog_info);
     }
 
   return dialog_type;
@@ -107,7 +107,7 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
   widget_class = (GtkWidgetClass*) klass;
   window_class = (GtkWindowClass*) klass;
 
-  parent_class = gtk_type_class (gtk_window_get_type ());
+  parent_class = gtk_type_class (GTK_TYPE_WINDOW);
 
   dialog_signals[CLOSE] =
     gtk_signal_new ("close",
@@ -307,7 +307,7 @@ GtkWidget* gnome_dialog_new            (const gchar * title,
   va_list ap;
   GnomeDialog *dialog;
 	
-  dialog = gtk_type_new (gnome_dialog_get_type ());
+  dialog = gtk_type_new (GNOME_TYPE_DIALOG);
 
   va_start (ap, title);
   
@@ -333,7 +333,7 @@ GtkWidget* gnome_dialog_newv            (const gchar * title,
 {
   GnomeDialog *dialog;
 	
-  dialog = gtk_type_new (gnome_dialog_get_type ());
+  dialog = gtk_type_new (GNOME_TYPE_DIALOG);
 
   gnome_dialog_constructv(dialog, title, buttons);
 

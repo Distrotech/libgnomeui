@@ -135,7 +135,7 @@ gnome_icon_selection_new (void)
 {
   GnomeIconSelection * gis;
   
-  gis = gtk_type_new(gnome_icon_selection_get_type());
+  gis = gtk_type_new (GNOME_TYPE_ICON_SELECTION);
 
   return GTK_WIDGET (gis);
 }

@@ -94,10 +94,11 @@ static char *build_gconf_key (GnomeEntry *gentry);
 /* Note, can't use boilerplate with interfaces yet,
  * should get sorted out */
 static GtkComboClass *parent_class = NULL;
-GtkType
+GType
 gnome_entry_get_type (void)
 {
-	static GtkType object_type = 0;
+	static GType object_type = 0;
+
 	if (object_type == 0) {
 		GtkType type_of_parent;
 		static const GtkTypeInfo object_info = {
@@ -116,7 +117,7 @@ gnome_entry_get_type (void)
 			NULL,			                         /* interface_finalize */
 			NULL			                         /* interface_data */
 		};
-		type_of_parent = gtk_combo_get_type ();
+		type_of_parent = GTK_TYPE_COMBO;
 		object_type = gtk_type_unique (type_of_parent, &object_info);
 		parent_class = gtk_type_class (type_of_parent);
 

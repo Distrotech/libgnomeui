@@ -57,10 +57,10 @@ static void gnome_message_box_construct  (GnomeMessageBox      *messagebox,
 
 static GnomeDialogClass *parent_class;
 
-guint
+GType
 gnome_message_box_get_type (void)
 {
-	static guint message_box_type = 0;
+	static GType message_box_type = 0;
 
 	if (!message_box_type)
 	{
@@ -76,7 +76,7 @@ gnome_message_box_get_type (void)
 			NULL
 		};
 
-		message_box_type = gtk_type_unique (gnome_dialog_get_type (), &message_box_info);
+		message_box_type = gtk_type_unique (GNOME_TYPE_DIALOG, &message_box_info);
 	}
 
 	return message_box_type;
@@ -90,7 +90,7 @@ gnome_message_box_class_init (GnomeMessageBoxClass *klass)
 
 	object_class = (GtkObjectClass *)klass;
 	gobject_class = (GObjectClass *)klass;
-	parent_class = gtk_type_class (gnome_dialog_get_type ());
+	parent_class = gtk_type_class (GNOME_TYPE_DIALOG);
 
 	object_class->destroy = gnome_message_box_destroy;
 	gobject_class->finalize = gnome_message_box_finalize;
@@ -294,7 +294,7 @@ gnome_message_box_new (const gchar           *message,
         
 	va_start (ap, message_box_type);
 	
-	message_box = gtk_type_new (gnome_message_box_get_type ());
+	message_box = gtk_type_new (GNOME_TYPE_MESSAGE_BOX);
 
 	gnome_message_box_construct (message_box, message,
 				     message_box_type, NULL);
@@ -344,7 +344,7 @@ gnome_message_box_newv (const gchar           *message,
 	g_return_val_if_fail (message != NULL, NULL);
 	g_return_val_if_fail (message_box_type != NULL, NULL);
 
-	message_box = gtk_type_new (gnome_message_box_get_type ());
+	message_box = gtk_type_new (GNOME_TYPE_MESSAGE_BOX);
 
 	gnome_message_box_construct (message_box, message,
 				     message_box_type, buttons);

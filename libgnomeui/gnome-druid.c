@@ -465,7 +465,7 @@ gnome_druid_size_allocate (GtkWidget *widget,
 static GtkType
 gnome_druid_child_type (GtkContainer *container)
 {
-	return gnome_druid_page_get_type ();
+	return GNOME_TYPE_DRUID_PAGE;
 }
 
 static void
@@ -698,7 +698,7 @@ gnome_druid_help_callback (GtkWidget  *button,
 GtkWidget *
 gnome_druid_new (void)
 {
-	return GTK_WIDGET (gtk_type_new (gnome_druid_get_type ()));
+	return GTK_WIDGET (gtk_type_new (GNOME_TYPE_DRUID));
 }
 
 /**
@@ -723,7 +723,7 @@ gnome_druid_new_with_window (const char *title,
 			     gboolean close_on_cancel,
 			     GtkWidget **window)
 {
-	GtkWidget *druid = gtk_type_new (gnome_druid_get_type ());
+	GtkWidget *druid = gtk_type_new (GNOME_TYPE_DRUID);
 
 	/* make sure we always set window to NULL, even in 
 	 * case of precondition errors */

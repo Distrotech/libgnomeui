@@ -586,7 +586,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
   gboolean ret;
 
   if (!client_grab_widget)
-    client_grab_widget = gtk_widget_new (gtk_widget_get_type(), NULL);
+    client_grab_widget = gtk_widget_new (GTK_TYPE_WIDGET, NULL);
 
   /* The first SaveYourself after registering for the first time
    * is a special case (SM specs 7.2).
@@ -832,6 +832,7 @@ static const struct poptOption options[] = {
 
   {NULL, '\0', POPT_ARG_CALLBACK | POPT_CBFLAG_PRE | POPT_CBFLAG_POST, 
    client_parse_func, 0, NULL, NULL},
+#define N_(x) x
 
   {"sm-client-id", '\0', POPT_ARG_STRING, NULL, ARG_SM_CLIENT_ID, 
    N_("Specify session management ID"), N_("ID")},
@@ -1149,7 +1150,7 @@ gnome_master_client (void)
 GtkType
 gnome_client_get_type (void)
 {
-  static GtkType client_type = 0;
+  static GType client_type = 0;
   
   if (!client_type)
     {
@@ -1165,7 +1166,7 @@ gnome_client_get_type (void)
 	NULL
       };
 
-      client_type = gtk_type_unique (gtk_object_get_type (), &client_info);
+      client_type = gtk_type_unique (GTK_TYPE_OBJECT, &client_info);
     }
   
   return client_type;
@@ -1176,7 +1177,7 @@ gnome_client_class_init (GnomeClientClass *klass)
 {
   GtkObjectClass *object_class = (GtkObjectClass*) klass;
   
-  parent_class = gtk_type_class (gtk_object_get_type ());
+  parent_class = gtk_type_class (GTK_TYPE_OBJECT);
   
   
   client_signals[SAVE_YOURSELF] =
@@ -1386,7 +1387,7 @@ gnome_client_new_without_connection (void)
 {
   GnomeClient *client;
 
-  client= gtk_type_new (gnome_client_get_type ());
+  client = gtk_type_new (GNOME_TYPE_CLIENT);
 
   /* Preset the CloneCommand, RestartCommand and Program properties.
      FIXME: having a default would be cool, but it is probably hard to
@@ -2461,7 +2462,7 @@ gnome_client_save_dialog_show (GnomeClient *client, gint key,
   gboolean shutdown_cancelled;
 
   if (client->shutdown) 
-    gtk_dialog_add_button (dialog, _("Cancel Logout"), GTK_RESPONSE_CANCEL);
+	  gtk_dialog_add_button (dialog, _("Cancel Logout"), GTK_RESPONSE_CANCEL);
   gtk_widget_show_all (GTK_WIDGET (dialog));
   /* These are SYSTEM modal dialogs so map them above everything else */
 #if 0

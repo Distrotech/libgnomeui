@@ -1,3 +1,70 @@
+2001-09-05  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-app.c: (gnome_app_new):
+	* gnome-appbar.c: (gnome_appbar_get_type),
+	(gnome_appbar_class_init), (gnome_appbar_new):
+	* gnome-appbar.h:
+	* gnome-client.c: (client_save_yourself_callback),
+	(gnome_client_get_type), (gnome_client_class_init),
+	(gnome_client_new_without_connection),
+	(gnome_client_save_dialog_show):
+	* gnome-client.h:
+	* gnome-color-picker.c: (gnome_color_picker_new):
+	* gnome-dateedit.c: (gnome_date_edit_new_flags):
+	* gnome-dateedit.h:
+	* gnome-dialog.c: (gnome_dialog_get_type),
+	(gnome_dialog_class_init), (gnome_dialog_new), (gnome_dialog_newv):
+	* gnome-dialog.h:
+	* gnome-druid-page-edge.c: (gnome_druid_page_edge_setup),
+	(gnome_druid_page_edge_new), (gnome_druid_page_edge_new_aa),
+	(gnome_druid_page_edge_new_with_vals):
+	* gnome-druid-page-standard.c: (gnome_druid_page_standard_new),
+	(gnome_druid_page_standard_new_with_vals):
+	* gnome-druid.c: (gnome_druid_child_type), (gnome_druid_new),
+	(gnome_druid_new_with_window):
+	* gnome-entry.c: (gnome_entry_get_type):
+	* gnome-entry.h:
+	* gnome-file-entry.c: (gnome_file_entry_get_type),
+	(gnome_file_entry_new):
+	* gnome-file-entry.h:
+	* gnome-font-picker.c: (gnome_font_picker_new):
+	* gnome-gconf-ui.c:
+	* gnome-icon-entry.c: (gnome_icon_entry_get_type),
+	(gnome_icon_entry_class_init), (gnome_icon_entry_new):
+	* gnome-icon-entry.h:
+	* gnome-icon-list.c:
+	* gnome-icon-list.h:
+	* gnome-icon-sel.c: (gnome_icon_selection_new):
+	* gnome-mdi-child.h:
+	* gnome-mdi-generic-child.c: (gnome_mdi_generic_child_new),
+	(gnome_mdi_generic_child_create_view),
+	(gnome_mdi_generic_child_create_menus),
+	(gnome_mdi_generic_child_get_config_string),
+	(gnome_mdi_generic_child_set_label):
+	* gnome-mdi-generic-child.h:
+	* gnome-mdi.c: (gnome_mdi_class_init), (gnome_mdi_new):
+	* gnome-mdi.h:
+	* gnome-messagebox.c: (gnome_message_box_get_type),
+	(gnome_message_box_class_init), (gnome_message_box_new),
+	(gnome_message_box_newv):
+	* gnome-messagebox.h:
+	* gnome-pixmap-entry.c: (gnome_pixmap_entry_new):
+	* gnome-pixmap-entry.h:
+	* gnome-pixmap.c: (gnome_pixmap_new_from_file),
+	(gnome_pixmap_new_from_file_at_size),
+	(gnome_pixmap_new_from_xpm_d),
+	(gnome_pixmap_new_from_xpm_d_at_size),
+	(gnome_pixmap_new_from_gnome_pixmap):
+	* gnome-pixmap.h:
+	* gnome-propertybox.c: (gnome_property_box_class_init),
+	(gnome_property_box_new):
+	* gnome-propertybox.h:
+	* gnome-scores.c: (gnome_scores_new):
+	* gnome-scores.h:
+	* gnome-stock-icons.c:
+	Change to use GType instead of guint.  Change to use GTK_TYPE_FOO
+	instead of gtk_foo_get_type ()
+
 Tue Sep 04 19:11:34 2001  George Lebl <jirka@5z.com>
 
 	* gnome-about.[ch]: fixup includes, silence warnings, fix one

@@ -535,7 +535,7 @@ gnome_druid_page_standard_new (void)
 {
 	GnomeDruidPageStandard *retval;
 
-	retval = gtk_type_new (gnome_druid_page_standard_get_type ());
+	retval = gtk_type_new (GNOME_TYPE_DRUID_PAGE_STANDARD);
 
 	return GTK_WIDGET (retval);
 }
@@ -547,7 +547,7 @@ gnome_druid_page_standard_new_with_vals (const gchar *title,
 {
 	GnomeDruidPageStandard *retval;
 
-	retval = gtk_type_new (gnome_druid_page_standard_get_type ());
+	retval = gtk_type_new (GNOME_TYPE_DRUID_PAGE_STANDARD);
 
 	gnome_druid_page_standard_set_title (retval, title);
 	gnome_druid_page_standard_set_logo (retval, logo);

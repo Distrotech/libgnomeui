@@ -253,7 +253,7 @@ gnome_scores_new (  guint n_scores,
 		    time_t *times,
 		    gboolean clear)
 {
-	GtkWidget *retval = gtk_type_new(gnome_scores_get_type());
+	GtkWidget *retval = gtk_type_new (GNOME_TYPE_SCORES);
 
 	gnome_scores_construct(GNOME_SCORES(retval), n_scores, names, scores, times, clear);
 

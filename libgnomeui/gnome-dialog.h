@@ -72,7 +72,7 @@ struct _GnomeDialogClass
    order you passed them in, starting at 0. These numbers are used
    in other functions, and passed to the "clicked" callback. */
 
-guint      gnome_dialog_get_type       (void) G_GNUC_CONST;
+GType      gnome_dialog_get_type       (void) G_GNUC_CONST;
 
 /* Arguments: Title and button names, then NULL */
 GtkWidget* gnome_dialog_new            (const gchar * title,
