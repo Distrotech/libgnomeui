@@ -27,6 +27,7 @@
 #include <gtk/gtkfontsel.h>
 #include <gdk_imlib.h>
 #include <libgnomeui/gnome-pixmap.h>
+#include <libgnomeui/gnome-stock.h>
 #include "gnome-font-picker.h"
 #include <libgnome/gnome-i18n.h>
 
@@ -521,12 +522,7 @@ GtkWidget *gnome_font_picker_create_inside(GnomeFontPicker *gfp)
     GtkWidget *widget;
     
     if (gfp->mode==GNOME_FONT_PICKER_MODE_PIXMAP) {
-        widget = (GtkWidget *)gnome_pixmap_new_from_rgb_d_shaped(
-                  (unsigned char *)gnome_font_picker_ico,
-                  NULL,
-                  gnome_font_picker_ico_width,
-                  gnome_font_picker_ico_height,
-                  (GdkImlibColor *) &gnome_font_picker_ico_alpha);
+        widget=gnome_stock_new_with_icon(GNOME_STOCK_PIXMAP_FONT);
         gtk_widget_show(widget);
     }
     else if (gfp->mode==GNOME_FONT_PICKER_MODE_FONT_INFO) {

@@ -1,3 +1,11 @@
+1998-10-24  David Abilleira  <odaf@nexo.es>
+
+	* gnome-font-picker.c: Now it uses GNOME_STOCK_PIXMAP_FONT instead of
+        the one in gnome-font-picer-ico.png
+        
+	* gnome-font-picker-ico.png: Removed
+	* gnome-font-picker-ico.h: Removed
+
 1998-10-24  Martin Baulig  <martin@home-of-linux.org>
 
 	* pixmaps/Makefile.am: Make `gnome-stock-imlib.h' depend upon
