@@ -35,8 +35,8 @@ static gint make_inetaddr(gchar *host, gint port, struct sockaddr_in *sa)
 	struct hostent *he;
 	
 	if ((he = gethostbyname(host)) != NULL) {
-		bzero(sa, sizeof(struct sockaddr_in));
-		bcopy(he->h_addr, &sa->sin_addr, he->h_length);
+	        memset(sa, 0, sizeof(struct sockaddr_in));
+		memcpy(&sa->sin_addr, he->h_addr, he->h_length);
 		sa->sin_family = he->h_addrtype;
 	} else if ((sa->sin_addr.s_addr = inet_addr(host)) != -1) {
 		sa->sin_family = AF_INET;
