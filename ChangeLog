@@ -1,3 +1,12 @@
+2003-05-15  Jaka Mocnik  <jaka@gnu.org>
+
+	* libgnomeui/gnome-mdi.c: fixed referencing problems. sink the object
+	instead of unrefing them. patch by Ecmel Ercan. this is actually not
+	a Proper(tm) fix, but it serves its purpose: finalization is done
+	properly. the Right Way(tm) would be to make GnomeMDI and
+	GnomeMDIChild GObject descendants, but since the MDI API is
+	deprecated, I won't bother.
+
 2003-05-13  Anders Carlsson  <andersca@codefactory.se>
 
 	* libgnomeui/gnome-app-helper.c: Accept both-horiz here too.
