@@ -1,5 +1,12 @@
 2004-05-02  Anders Carlsson  <andersca@gnome.org>
 
+	* libgnomeui/gnome-authentication-manager.c:
+	(construct_full_password_dialog):
+	Make message work better for RTL languages.
+	(#129254, Christian Rose)
+	
+2004-05-02  Anders Carlsson  <andersca@gnome.org>
+
 	* libgnomeui/gnome-href.c: (gnome_href_clicked):
 	Use gnome_url_show_on_screen.
 	(#111923, Leena Gunda)

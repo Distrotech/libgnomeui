@@ -285,10 +285,11 @@ construct_full_password_dialog (const GnomeVFSModuleCallbackFullAuthenticationIn
 		g_string_append_printf (name, "/%s", in_args->object);
 	}
 	if (in_args->domain != NULL) {
-		g_string_append_printf (name, _(" domain %s"), in_args->domain);
+		message = g_strdup_printf (_("You must log in to access %s domain %s\n"), name->str, in_args->domain);
+	} else {
+		message = g_strdup_printf (_("You must log in to access %s\n"), name->str);
 	}
 
-	message = g_strdup_printf (_("You must log in to access %s\n"), name->str);
 	g_string_free (name, TRUE);
 		
 	dialog = GNOME_PASSWORD_DIALOG (gnome_password_dialog_new (
