@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
         {
           msg = g_strdup_printf(_("The GNOME Session Manager (process %d) has crashed\n"
                                   "due to a fatal error (%s).\n"
-                                  "When you close this dialog, all applications will close"
+                                  "When you close this dialog, all applications will close "
                                   "and your session will exit.\nPlease save all your files "
                                   "before closing this dialog."),
                                 getppid(), g_strsignal(atoi(args[1])));

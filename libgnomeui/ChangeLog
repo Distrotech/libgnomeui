@@ -1,3 +1,7 @@
+2000-07-10  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome_segv.c (main): Fix typo.
+
 2000-07-07  Chema Celorio  <chema@celorio.com>
 
 	* gnome_segv.c: add a "DEBUG" button to the segv dialog if the program
