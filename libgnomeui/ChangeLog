@@ -1,3 +1,9 @@
+1999-11-09  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-pixmap.c (match_representation_to_mode): New function
+	converts pixbuf->pixmap or vice-versa if you set pixbuf in pixmap
+	mode or vice-versa.
+
 1999-11-08  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-pixmap.c (gnome_pixbuf_scale): fix no-scaling-needed case
