@@ -1,3 +1,8 @@
+Wed Dec 29 16:53:35 1999  George Lebl <jirka@5z.com>
+
+	* oafgnome.c: add include for unistd.h and fcntl.h to make this
+	  actually compile
+
 1999-12-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi-child.[ch] (gnome_mdi_child_set_toolbar_template):

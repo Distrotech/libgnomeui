@@ -3,6 +3,8 @@
 #include <popt.h>
 #include <errno.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <gtk/gtk.h>
