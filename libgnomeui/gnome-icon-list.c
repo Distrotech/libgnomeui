@@ -572,7 +572,7 @@ gil_unselect_all (GnomeIconList *gil, GdkEvent *event, gpointer keep)
 void
 gnome_icon_list_select_all (GnomeIconList *gil)
 {
-	uint i;
+	guint i;
 	
 	g_return_if_fail (gil != NULL);
 	g_return_if_fail (IS_GIL (gil));
