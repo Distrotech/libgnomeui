@@ -21,7 +21,6 @@ libgnomeuiincludedir = $(includedir)/libgnomeui
 INCLUDES = -I.. -I$(srcdir)/.. $(SUPPORTINCS) \
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl \
 	-I$(includedir) $(GDK_IMLIB_CFLAGS) \
-	$(AUDIOFILE_CFLAGS) $(ESD_CFLAGS) \
         -DGNOMELIBDIR=\""$(libdir)"\" \
         -DGNOMEDATADIR=\""$(datadir)"\" \
         -DGNOMEBINDIR=\""$(bindir)"\" \
@@ -274,33 +273,33 @@ gnome_segv_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
+	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 stock_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
+	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 winhints_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
+	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 animator_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
+	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)
 
 dock_demo_LDADD =	\
 	libgnomeui.la 					\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
-	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
+	$(LIBGNOMEUI_LIBS) \
 	$(INTLLIBS)

@@ -1,6 +1,10 @@
 #include "oafgnome.h"
+#include <libgnome/gnome-defs.h>
 #include <popt.h>
 #include <liboaf/liboaf.h>
+#include <gdk/gdkx.h>
+#include <gdk/gdk.h>
+#include <libgnomeui/gnome-init.h>
 
 static void og_pre_args_parse(GnomeProgram *app,
 			      const GnomeModuleInfo *mod_info);
@@ -8,17 +12,30 @@ static void og_post_args_parse(GnomeProgram *app,
 			       const GnomeModuleInfo *mod_info);
 static OAFRegistrationLocation rootwin_regloc;
 
+static GnomeModuleInfo orbit_module_info = {
+  "ORBit", orbit_version, "CORBA implementation",
+   NULL,
+   NULL, NULL,
+   NULL,
+   NULL
+};
+
+static GnomeModuleRequirement liboaf_requirements[] = {
+  {"0.5.1", &orbit_module_info},
+  {NULL}
+};
+
 static GnomeModuleInfo liboaf_module_info = {
   "liboaf", liboaf_version, "Object Activation Framework",
-  NULL,
-  oaf_preinit, oaf_postinit,
+  liboaf_requirements,
+  (GnomeModuleHook)oaf_preinit, (GnomeModuleHook)oaf_postinit,
   oaf_popt_options,
   NULL
 };
 
 static GnomeModuleRequirement og_requirements[] = {
-  {"0.0", liboaf_module_info},
-  {"1.2.0", gtk_module_info},
+  {"0.0", &liboaf_module_info},
+  {"1.2.0", &gtk_module_info},
   {NULL}
 };
 
@@ -53,6 +70,7 @@ rootwin_lock(const OAFRegistrationLocation *regloc,
 	     gpointer user_data)
 {
   XGrabServer(GDK_DISPLAY());
+  gdk_flush();
 }
 
 static void
@@ -60,45 +78,35 @@ rootwin_unlock(const OAFRegistrationLocation *regloc,
 	       gpointer user_data)
 {
   XUngrabServer(GDK_DISPLAY());
+  gdk_flush();
 }
 
-static void char *
+static char *
 rootwin_check(const OAFRegistrationLocation *regloc,
 	      const OAFRegistrationCategory *regcat,
 	      int *ret_distance, gpointer user_data)
 {
   GdkAtom name_server_ior_atom;
-  Atom type;
+  GdkAtom type;
   char *ior = NULL, *result;
-  int format;
-  unsigned long nitems, after;
+  gint format;
+  gint actual_length;
   guint32 old_warnings;
-
-  old_warnings = gdk_error_warnings;
-  gdk_error_warnings = 0;
-  gdk_error_code = 0;
 
   if(strcmp(regcat->name, "IDL:OAF/ActivationContext:1.0"))
     return NULL;
 
-  name_server_ior_atom = gdk_atom_intern("OAFGNOME_AC_IOR", FALSE);
-  /* XXX redo with gtk+? */
-  XGetWindowProperty (GDK_DISPLAY(), GDK_ROOT_WINDOW(),
-		      name_server_ior_atom, 0, 99999, False, AnyPropertyType,
-		      &type, &format, &nitems, &after, &ior);
+  name_server_ior_atom = ;
 
-  if (type == None)
+  if(!
+     gdk_property_get (GDK_ROOT_PARENT(),
+		       gdk_atom_intern("OAFGNOME_AC_IOR", FALSE),
+		       gdk_atom_intern("STRING", FALSE),
+		       0, 99999, FALSE, &type, &actual_length,
+		       (guchar *)&ior))
     return NULL;
 
-  result = g_strdup(ior);
-  XFree (ior);
-
-  gdk_flush ();
-  gdk_error_code = 0;
-  gdk_error_warnings = old_warnings;
-  gdk_flush ();
-
-  return result;
+  return ior;
 }
 
 static void
@@ -107,11 +115,8 @@ rootwin_register(const OAFRegistrationLocation *regloc,
 		 const OAFRegistrationCategory *regcat,
 		 gpointer user_data)
 {
-  GdkAtom name_server_ior_atom = gdk_atom_intern("OAFGNOME_AC_IOR", FALSE);
-  XChangeProperty(GDK_DISPLAY(), GDK_ROOT_WINDOW(),
-		  name_server_ior_atom,
-		  gdk_atom_intern("STRING"), 8, PropModeReplace,
-		  (guchar *)ior, strlen(ior));
+  gdk_property_change(GDK_ROOT_PARENT(), gdk_atom_intern("OAFGNOME_AC_IOR", FALSE),
+		      gdk_atom_intern("STRING", FALSE), 8, GDK_PROP_MODE_REPLACE, (guchar *) ior, strlen(ior));
 }
 
 static void
@@ -120,8 +125,7 @@ rootwin_unregister(const OAFRegistrationLocation *regloc,
 		   const OAFRegistrationCategory *regcat,
 		   gpointer user_data)
 {
-  XDeleteProperty (GDK_DISPLAY, GDK_ROOT_WINDOW(),
-		   gdk_atom_intern("OAFGNOME_AC_IOR", FALSE));
+  gdk_property_delete(GDK_ROOT_PARENT(), gdk_atom_intern("OAFGNOME_AC_IOR", FALSE));
 }
 
 static OAFRegistrationLocation rootwin_regloc = {
