@@ -5,7 +5,7 @@ SUBDIRS = pixmaps
 #
 # The targets
 #
-noinst_PROGRAMS = ted_demo stock_demo winhints_demo animator_demo
+noinst_PROGRAMS = ted_demo stock_demo winhints_demo animator_demo dock_demo
 bin_PROGRAMS    = gnome_segv
 lib_LTLIBRARIES = libgnomeui.la
 
@@ -48,6 +48,9 @@ libgnomeui_la_SOURCES = \
 	gnome-dialog.c                  \
 	gnome-dialog-util.c		\
 	gnome-dns.c			\
+	gnome-dock.c			\
+	gnome-dock-band.c		\
+	gnome-dock-item.c		\
 	gnome-geometry.c		\
 	gnome-guru.c			\
 	gnome-entry.c			\
@@ -115,6 +118,9 @@ gnome_headers = \
 	gnome-dialog.h                  \
 	gnome-dialog-util.h		\
 	gnome-dns.h			\
+	gnome-dock.c			\
+	gnome-dock-band.c		\
+	gnome-dock-item.c		\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
         gnome-font-picker.h		\
@@ -213,6 +219,8 @@ winhints_demo_SOURCES = winhints_demo.c
 
 animator_demo_SOURCES = animator_demo.c
 
+dock_demo_SOURCES = dock_demo.c
+
 SGML =	\
 	gtk-ted.sgml
 
@@ -262,6 +270,13 @@ winhints_demo_LDADD =	\
 	$(INTLLIBS)
 
 animator_demo_LDADD =	\
+	$(top_builddir)/libgnomeui/libgnomeui.la 	\
+	$(top_builddir)/libgnome/libgnome.la 		\
+	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\
+	@LIBSUPPORT@ $(LIBGNOMEUI_LIBS) \
+	$(INTLLIBS)
+
+dock_demo_LDADD =	\
 	$(top_builddir)/libgnomeui/libgnomeui.la 	\
 	$(top_builddir)/libgnome/libgnome.la 		\
 	$(top_builddir)/libart_lgpl/libart_lgpl.la 	\

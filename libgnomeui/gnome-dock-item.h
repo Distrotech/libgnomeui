@@ -1,0 +1,115 @@
+/* gnome-dock-item.h
+ *
+ * Copyright (C) 1998 Ettore Perazzoli
+ * Copyright (C) 1998 Elliot Lee
+ * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+#ifndef _GNOME_DOCK_ITEM_H
+#define _GNOME_DOCK_ITEM_H
+
+#include <gdk/gdk.h>
+#include <gtk/gtkbin.h>
+
+#include <libgnome/gnome-defs.h>
+
+BEGIN_GNOME_DECLS
+
+#define GNOME_DOCK_ITEM(obj) \
+  GTK_CHECK_CAST (obj, gnome_dock_item_get_type (), GnomeDockItem)
+#define GNOME_DOCK_ITEM_CLASS(klass) \
+  GTK_CHECK_CLASS_CAST (klass, gnome_dock_item_get_type (), GnomeDockItemClass)
+#define GNOME_IS_DOCK_ITEM(obj) \
+  GTK_CHECK_TYPE (obj, gnome_dock_item_get_type ())
+
+typedef enum
+{
+  GNOME_DOCK_ITEM_BEH_NORMAL = 0,
+  GNOME_DOCK_ITEM_BEH_EXCLUSIVE = 1 << 0,
+  GNOME_DOCK_ITEM_BEH_NEVER_DETACH = 1 << 1,
+  GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL = 1 << 2,
+  GNOME_DOCK_ITEM_BEH_NEVER_HORIZONTAL = 1 << 3
+} GnomeDockItemBehavior;
+
+typedef struct _GnomeDockItem       GnomeDockItem;
+typedef struct _GnomeDockItemClass  GnomeDockItemClass;
+
+struct _GnomeDockItem
+{
+  GtkBin bin;
+
+  GdkWindow            *bin_window; /* parent window for children */
+  GdkWindow            *float_window;
+  GtkShadowType         shadow_type;
+       
+  GtkOrientation        orientation;
+  GnomeDockItemBehavior behavior;
+
+  guint                 float_window_mapped : 1;
+  guint                 child_detached : 1;
+  guint                 in_drag : 1;
+
+  /* If TRUE, the pointer must be grabbed on "map_event".  */
+  guint                 grab_on_map_event : 1;
+
+  /* Start drag position (wrt widget->window).  */
+  gint                  dragoff_x, dragoff_y;
+};
+
+struct _GnomeDockItemClass
+{
+  GtkBinClass parent_class;
+
+  void (* dock_drag_begin) (GnomeDockItem *item);
+  void (* dock_drag_motion) (GnomeDockItem *item, gint x, gint y);
+  void (* dock_drag_end) (GnomeDockItem *item);
+  void (* dock_detach) (GnomeDockItem *item);
+};
+
+/* Public methods.  */
+guint          gnome_dock_item_get_type        (void);
+GtkWidget*     gnome_dock_item_new            (GnomeDockItemBehavior behavior);
+
+void           gnome_dock_item_set_shadow_type (GnomeDockItem *dock_item,
+                                                GtkShadowType type);
+
+GtkShadowType  gnome_dock_item_get_shadow_type (GnomeDockItem *dock_item);
+ 
+gboolean       gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
+                                                GtkOrientation orientation);
+
+GtkOrientation gnome_dock_item_get_orientation (GnomeDockItem *dock_item);
+
+GnomeDockItemBehavior gnome_dock_item_get_behavior (GnomeDockItem *dock_item);
+
+/* Private methods.  */
+gboolean       gnome_dock_item_detach          (GnomeDockItem *item,
+                                                gint x, gint y);
+                                               
+void           gnome_dock_item_attach          (GnomeDockItem *item,
+                                                GtkWidget *parent,
+                                                gint x, gint y);
+                                               
+void           gnome_dock_item_grab_pointer    (GnomeDockItem *item);
+                                               
+void           gnome_dock_item_drag_floating   (GnomeDockItem *item,
+                                                gint x, gint y);
+
+END_GNOME_DECLS
+
+#endif /* _GNOME_DOCK_ITEM_H */

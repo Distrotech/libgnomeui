@@ -1,3 +1,20 @@
+1998-12-08  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* libgnomeui.h: #Include "libgnomeui/gnome-dock.h"
+ 	"libgnomeui/gnome-dock-band.h" and "libgnomeui/gnome-dock-item.h".
+
+	* dock_demo.c: New file: temporary demo for the GnomeDock*
+ 	widgets.
+
+	* gnome-dock.c, gnome-dock.h: New files implementing the GnomeDock 
+	widget.
+
+	* gnome-dock-band.c, gnome-dock-band.h: New files implementing the 
+	GnomeDockBand widget.
+
+	* gnome-dock-item.c, gnome-dock-item.h: New files implementing the 
+	GnomeDockItem widget.
+
 1998-12-07  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-app-helper.c (gnome_app_install_appbar_menu_hints): 
