@@ -1,3 +1,7 @@
+2004-11-15  Dwayne Bailey  <dwayne@translate.org.za>
+
+	* configure.in: Added "nso" to ALL_LINGUAS.
+
 2004-11-13  Anders Carlsson  <andersca@gnome.org>
 
 	* libgnomeui/gnome-icon-item.h:
