@@ -343,18 +343,18 @@ void gnome_stock_pixmap_widget_set_icon(GnomeStock *widget,
 
 /* register a pixmap. returns non-zero, if successful */
 gint                   gnome_stock_pixmap_register (const char *icon,
-						    const char *subtype,
+						    GtkStateType state,
                                                     GnomeStockPixmapEntry *entry);
 
 /* change an existing entry. returns non-zero on success */
 gint                   gnome_stock_pixmap_change   (const char *icon,
-						    const char *subtype,
+						    GtkStateType state,
                                                     GnomeStockPixmapEntry *entry);
 
 /* check for the existance of an entry. returns the entry if it
    exists, or NULL otherwise */
 GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (const char *icon,
-						    const char *subtype);
+						    GtkStateType state);
 
 
 
@@ -500,13 +500,13 @@ void                   gnome_stock_menu_accel_parse(const char *section);
  * Creates a toplevel window with a shaped mask.  Useful for making the DnD
  * windows
  */
-GtkWidget *gnome_stock_transparent_window (const char *icon, const char *subtype);
+GtkWidget *gnome_stock_transparent_window (const char *icon, GtkStateType state);
 
 /*
  * Return a GdkPixmap and GdkMask for a stock pixmap
  */
 void gnome_stock_pixmap_gdk (const char *icon,
-			     const char *subtype,
+			     GtkStateType state,
 			     GdkPixmap **pixmap,
 			     GdkPixmap **mask);
 
