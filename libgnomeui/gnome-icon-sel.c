@@ -311,9 +311,6 @@ gnome_icon_selection_add_directory (GnomeIconSelection * gis,
     GnomeVFSFileInfo *info;
     gchar *full_path;
     
-#ifdef GNOME_ENABLE_DEBUG
-    g_print("File: %s\n", de->d_name);
-#endif
     if ( *(de->d_name) == '.' ) continue; /* skip dotfiles */
 
     full_path = g_build_filename (dir, de->d_name, NULL);
@@ -329,9 +326,7 @@ gnome_icon_selection_add_directory (GnomeIconSelection * gis,
     if (mimetype != NULL &&
 	strncmp(mimetype, "image", strlen("image")) == 0 ) {
       gchar * full_path = g_build_filename (dir, de->d_name, NULL);
-#ifdef GNOME_ENABLE_DEBUG
-      g_print("Full path: %s\n", full_path);
-#endif
+
       if (g_file_test (full_path, G_FILE_TEST_IS_REGULAR)) {
 	      /* Image filename, exists, regular file, go for it. */
 	      gis->_priv->file_list =

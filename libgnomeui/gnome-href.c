@@ -130,9 +130,9 @@ gnome_href_class_init (GnomeHRefClass *klass)
 							       G_PARAM_WRITABLE)));
 
 	gtk_widget_class_install_style_property (GTK_WIDGET_CLASS (gobject_class),
-						 g_param_spec_boxed ("link_colour",
-								     _("Link colour"),
-								     _("Colour used to draw the link"),
+						 g_param_spec_boxed ("link_color",
+								     _("Link color"),
+								     _("Color used to draw the link"),
 								     GDK_TYPE_COLOR,
 								     G_PARAM_READABLE));
 }
@@ -140,7 +140,7 @@ gnome_href_class_init (GnomeHRefClass *klass)
 static void
 gnome_href_instance_init (GnomeHRef *href)
 {
-        GdkColor *link_colour;
+        GdkColor *link_color;
 	GdkColor blue = { 0, 0x0000, 0x0000, 0xffff };
 
 	href->_priv = g_new0(GnomeHRefPrivate, 1);
@@ -149,18 +149,18 @@ gnome_href_instance_init (GnomeHRef *href)
 	gtk_widget_ref(href->_priv->label);
 
 	gtk_widget_style_get (GTK_WIDGET(href),
-			      "link_colour", &link_colour,
+			      "link_color", &link_color,
 			      NULL);
-	if (!link_colour)
-		link_colour = &blue;
+	if (!link_color)
+		link_color = &blue;
 	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
-			      GTK_STATE_NORMAL, link_colour);
+			      GTK_STATE_NORMAL, link_color);
 	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
-			      GTK_STATE_ACTIVE, link_colour);
+			      GTK_STATE_ACTIVE, link_color);
 	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
-			      GTK_STATE_PRELIGHT, link_colour);
+			      GTK_STATE_PRELIGHT, link_color);
 	gtk_widget_modify_fg (GTK_WIDGET(href->_priv->label),
-			      GTK_STATE_SELECTED, link_colour);
+			      GTK_STATE_SELECTED, link_color);
 
 	gtk_button_set_relief(GTK_BUTTON(href), GTK_RELIEF_NONE);
 
