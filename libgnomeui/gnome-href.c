@@ -68,12 +68,38 @@ static void gnome_href_class_init(GnomeHRefClass *klass) {
   button_class->clicked = gnome_href_clicked;
 }
 
-static void gnome_href_init(GnomeHRef *self) {
-  self->label = gtk_label_new("");
-  gtk_button_set_relief(GTK_BUTTON(self), GTK_RELIEF_NONE);
-  gtk_container_add(GTK_CONTAINER(self), self->label);
-  gtk_widget_show(self->label);
-  self->url = NULL;
+static void gnome_href_init(GnomeHRef *href) {
+  href->label = gtk_label_new("");
+  gtk_button_set_relief(GTK_BUTTON(href), GTK_RELIEF_NONE);
+  gtk_container_add(GTK_CONTAINER(href), href->label);
+  gtk_widget_show(href->label);
+  href->url = NULL;
+}
+
+/**
+ * gnome_href_construct
+ * @href: Pointer to GnomeHRef widget
+ * @url: URL assigned to this object.
+ * @label: Text associated with the URL.
+ *
+ * Description:
+ * For bindings and subclassing, in c you should use #gnome_href_new
+ *
+ * Returns:
+ **/
+
+void gnome_href_construct(GnomeHRef *href, const gchar *url, const gchar *label) {
+	
+  g_return_if_fail(href != NULL);
+  g_return_if_fail(GNOME_IS_HREF(href));
+  g_return_if_fail(url != NULL);
+
+  gnome_href_set_url(href, url);
+
+  if (!label)
+    label = url;
+
+  gnome_href_set_label(href, label);
 }
 
 
@@ -91,62 +117,58 @@ static void gnome_href_init(GnomeHRef *self) {
  **/
 
 GtkWidget *gnome_href_new(const gchar *url, const gchar *label) {
-  GnomeHRef *self;
+  GnomeHRef *href;
 
   g_return_val_if_fail(url != NULL, NULL);
 
-  self = gtk_type_new(gnome_href_get_type());
-  gnome_href_set_url(self, url);
+  href = gtk_type_new(gnome_href_get_type());
 
-  if (!label)
-    label = url;
+  gnome_href_construct(href, url, label);
 
-  gnome_href_set_label(self, label);
-
-  return GTK_WIDGET(self);
+  return GTK_WIDGET(href);
 }
 
 
 /**
  * gnome_href_get_url
- * @self: Pointer to GnomeHRef widget
+ * @href: Pointer to GnomeHRef widget
  *
  * Description:
- * Returns the pointer to the URL associated with the @self href object.
+ * Returns the pointer to the URL associated with the @href href object.
  *
  * Returns:  Pointer to URL string, or %NULL if failure.
  **/
 
-gchar *gnome_href_get_url(GnomeHRef *self) {
-  g_return_val_if_fail(self != NULL, NULL);
-  g_return_val_if_fail(GNOME_IS_HREF(self), NULL);
-  return self->url;
+gchar *gnome_href_get_url(GnomeHRef *href) {
+  g_return_val_if_fail(href != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_HREF(href), NULL);
+  return href->url;
 }
 
 
 /**
  * gnome_href_set_url
- * @self: Pointer to GnomeHRef widget
- * @url: String containing the URL to be stored within @self.
+ * @href: Pointer to GnomeHRef widget
+ * @url: String containing the URL to be stored within @href.
  *
  * Description:
- * Sets the internal URL value within @self to the value of @url.
+ * Sets the internal URL value within @href to the value of @url.
  **/
 
-void gnome_href_set_url(GnomeHRef *self, const gchar *url) {
-  g_return_if_fail(self != NULL);
-  g_return_if_fail(GNOME_IS_HREF(self));
+void gnome_href_set_url(GnomeHRef *href, const gchar *url) {
+  g_return_if_fail(href != NULL);
+  g_return_if_fail(GNOME_IS_HREF(href));
   g_return_if_fail(url != NULL);
 
-  if (self->url)
-    g_free(self->url);
-  self->url = g_strdup(url);
+  if (href->url)
+    g_free(href->url);
+  href->url = g_strdup(url);
 }
 
 
 /**
  * gnome_href_get_label
- * @self: Pointer to GnomeHRef widget
+ * @href: Pointer to GnomeHRef widget
  *
  * Description:
  * Returns the contents of the label widget used to display the link
@@ -155,20 +177,20 @@ void gnome_href_set_url(GnomeHRef *self, const gchar *url) {
  * Returns:  Pointer to text contained in the label widget.
  **/
 
-gchar *gnome_href_get_label(GnomeHRef *self) {
+gchar *gnome_href_get_label(GnomeHRef *href) {
   gchar *ret;
 
-  g_return_val_if_fail(self != NULL, NULL);
-  g_return_val_if_fail(GNOME_IS_HREF(self), NULL);
+  g_return_val_if_fail(href != NULL, NULL);
+  g_return_val_if_fail(GNOME_IS_HREF(href), NULL);
 
-  gtk_label_get(GTK_LABEL(self->label), &ret);
+  gtk_label_get(GTK_LABEL(href->label), &ret);
   return ret;
 }
 
 
 /**
  * gnome_href_set_label
- * @self: Pointer to GnomeHRef widget
+ * @href: Pointer to GnomeHRef widget
  * @label: New link text for the href object.
  *
  * Description:
@@ -176,42 +198,42 @@ gchar *gnome_href_get_label(GnomeHRef *self) {
  * text) to the value given in @label.
  **/
 
-void gnome_href_set_label(GnomeHRef *self, const gchar *label) {
+void gnome_href_set_label(GnomeHRef *href, const gchar *label) {
   gchar *pattern;
 
-  g_return_if_fail(self != NULL);
-  g_return_if_fail(GNOME_IS_HREF(self));
+  g_return_if_fail(href != NULL);
+  g_return_if_fail(GNOME_IS_HREF(href));
   g_return_if_fail(label != NULL);
 
   /* pattern used to set underline for string */
   pattern = g_strnfill(strlen(label), '_');
-  gtk_label_set_text(GTK_LABEL(self->label), label);
-  gtk_label_set_pattern(GTK_LABEL(self->label), pattern);
+  gtk_label_set_text(GTK_LABEL(href->label), label);
+  gtk_label_set_pattern(GTK_LABEL(href->label), pattern);
   g_free(pattern);
 }
 
 static void gnome_href_clicked(GtkButton *button) {
-  GnomeHRef *self;
+  GnomeHRef *href;
 
   g_return_if_fail(button != NULL);
   g_return_if_fail(GNOME_IS_HREF(button));
 
   if (GTK_BUTTON_CLASS(parent_class)->clicked)
     (* GTK_BUTTON_CLASS(parent_class)->clicked)(button);
-  self = GNOME_HREF(button);
-  g_return_if_fail(self->url);
+  href = GNOME_HREF(button);
+  g_return_if_fail(href->url);
 
-  gnome_url_show(self->url);
+  gnome_url_show(href->url);
 }
 
 static void gnome_href_destroy(GtkObject *object) {
-  GnomeHRef *self;
+  GnomeHRef *href;
 
   g_return_if_fail(object != NULL);
   g_return_if_fail(GNOME_IS_HREF(object));
-  self = GNOME_HREF(object);
-  if (self->url)
-    g_free(self->url);
+  href = GNOME_HREF(object);
+  if (href->url)
+    g_free(href->url);
   if (parent_class->destroy)
     (* parent_class->destroy)(object);
 }

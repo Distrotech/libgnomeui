@@ -38,6 +38,7 @@ typedef struct _GnomeHRefClass GnomeHRefClass;
 struct _GnomeHRef {
   GtkButton button;
 
+  /*< private >*/
   gchar *url;
   GtkWidget *label;
 };
@@ -52,6 +53,11 @@ struct _GnomeHRefClass {
 
 guint gnome_href_get_type(void);
 GtkWidget *gnome_href_new(const gchar *url, const gchar *label);
+
+/* for bindings and subclassing, use the gnome_href_new from C */
+void gnome_href_construct(GnomeHRef *href,
+			  const gchar *url,
+			  const gchar *label);
 
 void gnome_href_set_url(GnomeHRef *href, const gchar *url);
 gchar *gnome_href_get_url(GnomeHRef *href);

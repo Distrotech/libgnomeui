@@ -1,3 +1,9 @@
+Sat Jan 22 15:35:29 2000  George Lebl <jirka@5z.com>
+
+	* gnome-href.[ch]: add a constructor method.  Also make the
+	  parameter names consistent with the header by using href instead
+	  of self in the .c file
+
 Sat Jan 22 13:51:51 2000  George Lebl <jirka@5z.com>
 
 	* gnome-messagebox.[ch]: add a _construct method and use it in _new and
