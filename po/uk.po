@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-07-04 11:05+0200\n"
+"POT-Creation-Date: 2003-08-04 18:00+0300\n"
 "PO-Revision-Date: 2003-01-28 02:59--500\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -46,9 +46,8 @@ msgid "Translated by"
 msgstr "Перекладачі"
 
 #: libgnomeui/gnome-about.c:323
-#, fuzzy
 msgid "C_redits"
-msgstr "Інформація про авторів"
+msgstr "_Автори"
 
 #: libgnomeui/gnome-about.c:378
 msgid "Program name"
@@ -139,6 +138,7 @@ msgstr "Про %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Файл"
 
@@ -196,6 +196,7 @@ msgid "_Game"
 msgstr "_Гра"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Довідка"
 
@@ -386,11 +387,11 @@ msgstr "Налаштувати програму"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Про"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Про програму"
 
@@ -417,7 +418,7 @@ msgstr "Створити нове вікно"
 msgid "_Close This Window"
 msgstr "_Закрити це вікно"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Закрити поточне вікно"
 
@@ -592,7 +593,7 @@ msgstr "Вимагається рівень активності користу�
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "Ваш проксі HTTP вимагає реєстрації.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -600,18 +601,20 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
+"Вам необхідно зареєструватись для доступу до \"%s\".\n"
+"%s"
 
 #: libgnomeui/gnome-authentication-manager.c:64
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Ваш пароль буде передано незашифрованим."
 
 #: libgnomeui/gnome-authentication-manager.c:65
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Ваш пароль буде передано зашифрованим."
 
 #: libgnomeui/gnome-authentication-manager.c:68
 msgid "Authentication Required"
-msgstr ""
+msgstr "Вимагається реєстрація"
 
 #: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
@@ -1213,11 +1216,11 @@ msgstr "Повідомлення"
 
 #: libgnomeui/gnome-password-dialog.c:253
 msgid "_Username:"
-msgstr ""
+msgstr "_Користувач:"
 
 #: libgnomeui/gnome-password-dialog.c:254
 msgid "_Password:"
-msgstr ""
+msgstr "_Пароль:"
 
 #: libgnomeui/gnome-pixmap-entry.c:113
 msgid "Do Preview"
@@ -1364,8 +1367,6 @@ msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "Будь ласка, відвідайте сторінку збоїв прогам GNOME для додаткової інформації"
 
-#~ msgid "_Credits"
-#~ msgstr "Інформація про _авторів"
-
-#~ msgid "Exit the test"
-#~ msgstr "Вийти з тесту"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Вийти з тесту"
