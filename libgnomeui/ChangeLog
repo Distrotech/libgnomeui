@@ -1,3 +1,9 @@
+Sun Dec  5 17:55:53 1999  Changwoo Ryu  <cwryu@adam.kaist.ac.kr>
+
+	* gnome-about.c (gnome_fill_info): Applied the patch from KUSANO
+	Takayuki <AE5T-KSN@asahi-net.or.jp>.  This fixed the problem that
+	gtkrc* file didn't affect on GnomeAbout.  (Closes bug #2603)
+
 1999-12-05  Elliot Lee  <sopwith@redhat.com>
 
 	* gtkpixmapmenuitem.c: Fix size_request/size_allocate - was HORRIBLY broken before.
