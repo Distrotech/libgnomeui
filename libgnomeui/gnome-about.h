@@ -49,7 +49,7 @@ guint      gnome_about_get_type       (void);
  *	gchar *authors[] = {"author1", "author2", ..., NULL};
  *
  *	GtkWidget *about = gnome_about_new ( _("GnoApp"), "1.2b",
- *				_("Copyrigth FSF (C) 1998"),
+ *				_("Copyright FSF (C) 1998"),
  *				authors,
  *				"Comment line 1\nLine 2",
  *				"/usr/local/share/pixmaps/gnoapp-logo.xpm");
