@@ -1,5 +1,9 @@
 2001-12-27  jacob berkman  <jacob@ximian.com>
 
+	* gnome-font-picker.c (gnome_font_picker_set_preview_text): don't
+	free/dup the text if it is the same (pointer) as our current text
+	(gnome_font_picker_set_font_name): ditto
+
 	* gnome-dateedit.c (fill_time_popup): set the menu on the
 	optionmenu after populating it to workaround bug #66969
 	(day_selected): gtk_calendar_get_date() already returns month in

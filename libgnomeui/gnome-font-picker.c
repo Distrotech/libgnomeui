@@ -759,9 +759,10 @@ gboolean   gnome_font_picker_set_font_name    (GnomeFontPicker *gfp,
     g_return_val_if_fail (GNOME_IS_FONT_PICKER (gfp), FALSE);
     g_return_val_if_fail (fontname != NULL, FALSE);
 
-    /* g_free handles NULL */
-    g_free(gfp->_priv->font_name);
-    gfp->_priv->font_name = g_strdup(fontname);
+    if (gfp->_priv->font_name != fontname) {
+	    g_free(gfp->_priv->font_name);
+	    gfp->_priv->font_name = g_strdup (fontname);
+    }
     
     if (gfp->_priv->mode == GNOME_FONT_PICKER_MODE_FONT_INFO)
 	gnome_font_picker_update_font_info(gfp);
@@ -818,9 +819,10 @@ void	   gnome_font_picker_set_preview_text (GnomeFontPicker *gfp,
     g_return_if_fail (GNOME_IS_FONT_PICKER (gfp));
     g_return_if_fail (text != NULL);
 
-    /* g_free handles NULL */
-    g_free(gfp->_priv->preview_text);
-    gfp->_priv->preview_text = g_strdup(text);
+    if (gfp->_priv->preview_text != text) {
+	    g_free(gfp->_priv->preview_text);
+	    gfp->_priv->preview_text = g_strdup (text);
+    }
 
     if (gfp->_priv->font_dialog)
         gtk_font_selection_dialog_set_preview_text(GTK_FONT_SELECTION_DIALOG(gfp->_priv->font_dialog), gfp->_priv->preview_text);
@@ -923,6 +925,7 @@ gnome_font_picker_dialog_cancel_clicked(GtkWidget *widget,
 
     gtk_widget_hide(gfp->_priv->font_dialog);
 
+    /* FIXME: is this necessary? bug #67587 */
     /* Restore old values */
     gnome_font_picker_set_font_name(gfp,gfp->_priv->font_name);
     gnome_font_picker_set_preview_text(gfp,gfp->_priv->preview_text);
@@ -937,6 +940,7 @@ gnome_font_picker_dialog_delete_event(GtkWidget *widget, GdkEventAny *ev,
 
     gfp = GNOME_FONT_PICKER (data);
     
+    /* FIXME: is this necessary? bug #67587 */
     /* Here we restore old values */
     gnome_font_picker_set_font_name(gfp,gfp->_priv->font_name);
     gnome_font_picker_set_preview_text(gfp,gfp->_priv->preview_text);
