@@ -2,6 +2,16 @@
 
 	* configure.in: (ALL_LINGUAS) Added Bulgarian (bg).
 
+2002-06-25  Mark McLoughlin  <mark@skynet.ie>
+
+	* configure.in: check for gtk-2.1.x and define
+	HAVE_GTK_MULTIHEAD instead of checking for
+	specific functions.
+
+	* libgnomeui/gnome-client.c: (client_set_restart_command):
+	use HAVE_GTK_MULTIHEAD and
+	s/gdk_get_default_display/gdk_display_get_default/
+
 2002-06-10  Malcolm Tredinnick <malcolm@commsecure.com.au>
 	* libgnomeui/gnome-app-helper.c: Translate the word "Contents" in the
 	  libgnomeui domain (i.e. correctly).
