@@ -277,7 +277,7 @@ master_client_disconnect (GnomeClient *client,
 void
 gnome_client_init (void)
 {
-#ifdef GTK_HAVE_SIGNAL_INIT
+#ifdef GTK_HAVE_FEATURES_1_1_0
   /* Make sure Gtk type system initialized.  */
   gtk_type_init ();
   gtk_signal_init ();

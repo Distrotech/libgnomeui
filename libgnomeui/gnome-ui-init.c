@@ -125,7 +125,7 @@ our_gtk_parse_func (int key, char *arg, struct argp_state *state)
 		gdk_imlib_init ();
 		gnome_type_init();
 		
-#ifdef GTK_HAVE_RC_SET_IMAGE_LOADER
+#ifdef GTK_HAVE_FEATURES_1_1_0
 		/* New feature in 1.1 tree */
 		gtk_rc_set_image_loader(imlib_image_loader);
 #endif
