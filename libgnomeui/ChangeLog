@@ -1,3 +1,17 @@
+1998-12-15  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-dock-item.h: Change GNOME_DOCK_ITEM_BEH_NEVER_DETACH 
+	to GNOME_DOCK_ITEM_BEH_NEVER_FLOATING for Ettore; add
+	GNOME_DOCK_ITEM_BEH_LOCKED. 
+
+	* gnome-dock-item.c: Reflect name changes and new flag.
+
+	* gnome-app.c (gnome_app_set_toolbar): GNOME_DOCK_ITEM_BEH_LOCKED 
+	instead of NEVER_DETACH
+	(gnome_app_set_menus): Same
+
+	* dock_demo.c (main): Same	
+	
 1998-12-15  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
 
 	* gnome-mdi.c: clone apps layout whenever possible.
