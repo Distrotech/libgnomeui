@@ -13,13 +13,6 @@ fi
 GNOME_COMMON_INIT
 GNOME_PLATFORM_GNOME_2(yes, force)
 
-if test -e .using-gnome-libs-package ; then
-  USING_GNOME_LIBS_PACKAGE=true
-else
-  USING_GNOME_LIBS_PACKAGE=false
-fi
-AM_CONDITIONAL(USING_GNOME_LIBS_PACKAGE, test x$USING_GNOME_LIBS_PACKAGE = xtrue)
-
 AC_ISC_POSIX
 AC_PROG_CC
 AC_STDC_HEADERS
@@ -77,21 +70,13 @@ AM_CONDITIONAL(FALSE, test x = y)
 dnl
 dnl Start of pkg-config checks
 dnl
-if test x$USING_GNOME_LIBS_PACKAGE = xtrue ; then
-  GNOME_PKGCONFIG_CHECK_MODULES(GNOMELIBSPACKAGE, gnome-common-2.0 gobject-2.0 ORBit-2.0 libart-2.0 pango oaf-2.0 gnomevfs-2.0 gconfgtk-2.0 libxml-2.0)
-  GNOMELIBSPACKAGE_CFLAGS="-I\$(top_srcdir)/../libgnome-2 -I\$(top_srcdir)/../libgnomecanvas-2 -I\$(top_builddir)/../libgnomecanvas-2 -I\$(top_srcdir)/../libbonobo-2 -I\$(top_builddir)/../libbonobo-2 $GNOMELIBSPACKAGE_CFLAGS"
-  GNOMELIBSPACKAGE_REAL_LIBS="\$(top_builddir)/../libgnome-2/libgnome/libgnome-2.la \$(top_builddir)/../libbonobo-2/libbonobo/libbonobo-2.la \$(top_builddir)/../libgnomecanvas-2/libgnomecanvas/libgnomecanvas-2.la"
-else
-  GNOME_PKGCONFIG_CHECK_MODULES(LIBGNOMECANVAS, libgnomecanvas-2.0:1.96.0)
-  GNOME_PKGCONFIG_CHECK_MODULES(LIBBONOBO, libbonobo-2.0:1.96.0)
-fi
-AC_SUBST(GNOMELIBSPACKAGE_CFLAGS)
-AC_SUBST(GNOMELIBSPACKAGE_LIBS)
-AC_SUBST(GNOMELIBSPACKAGE_REAL_LIBS)
+GNOME_PKGCONFIG_CHECK_MODULES(LIBGNOMECANVAS, libgnomecanvas-2.0:1.96.0)
 AC_SUBST(LIBGNOMECANVAS_CFLAGS)
 AC_SUBST(LIBGNOMECANVAS_LIBS)
-AC_SUBST(LIBBONOBO_CFLAGS)
-AC_SUBST(LIBBONOBO_LIBS)
+
+dnl GNOME_PKGCONFIG_CHECK_MODULES(LIBBONOBO, libbonobo-2.0:1.96.0)
+dnl AC_SUBST(LIBBONOBO_CFLAGS)
+dnl AC_SUBST(LIBBONOBO_LIBS)
 
 AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is required to build
 gnome-libs. You can download the latest version from ftp://people.redhat.com/sopwith/popt/]))
