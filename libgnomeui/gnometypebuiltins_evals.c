@@ -69,6 +69,14 @@ static GtkEnumValue _gnome_icon_list_mode_values[] = {
   { GNOME_ICON_LIST_TEXT_RIGHT, "GNOME_ICON_LIST_TEXT_RIGHT", "text-right" },
   { 0, NULL, NULL }
 };
+static GtkEnumValue _gnome_mdi_mode_values[] = {
+  { GNOME_MDI_MS, "GNOME_MDI_MS", "ms" },
+  { GNOME_MDI_NOTEBOOK, "GNOME_MDI_NOTEBOOK", "notebook" },
+  { GNOME_MDI_MODAL, "GNOME_MDI_MODAL", "modal" },
+  { GNOME_MDI_TOPLEVEL, "GNOME_MDI_TOPLEVEL", "toplevel" },
+  { GNOME_MDI_REDRAW, "GNOME_MDI_REDRAW", "redraw" },
+  { 0, NULL, NULL }
+};
 static GtkEnumValue _gnome_property_request_values[] = {
   { GNOME_PROPERTY_READ, "GNOME_PROPERTY_READ", "read" },
   { GNOME_PROPERTY_WRITE, "GNOME_PROPERTY_WRITE", "write" },
