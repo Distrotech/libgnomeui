@@ -145,6 +145,12 @@ gnome_canvas_re_destroy (GtkObject *object)
 
 	re = GNOME_CANVAS_RE (object);
 
+	if (re->fill_svp != NULL)
+		art_svp_free (re->fill_svp);
+	
+	if (re->outline_svp != NULL)
+		art_svp_free (re->outline_svp);
+		
 	if (re->fill_stipple)
 		gdk_bitmap_unref (re->fill_stipple);
 
