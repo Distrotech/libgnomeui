@@ -99,8 +99,8 @@ typedef struct {
 	/* Rectangle describing the rendering area */
 	ArtIRect rect;
 
-	/* Background color to be used if is_solid is FALSE, given as 0xrrggbb */
-	guint32 bg_color;
+	/* Solid color to be used if is_solid is FALSE, given as 0xrrggbb */
+	guint32 solid_color;
 
 	/* If FALSE, the buffer does not contain meaningful data and it should
 	 * be considered to be a solid bg_color instead.  If TRUE, then the

@@ -3183,25 +3183,26 @@ paint (GnomeCanvas *canvas)
 				GdkColor *color;
 
 				buf.buf = g_new (guchar, IMAGE_WIDTH_AA * IMAGE_HEIGHT_AA * 3);
-				buf.buf_rowstride = IMAGE_WIDTH_AA * 3;
+				buf.rowstride = IMAGE_WIDTH_AA * 3;
 				buf.rect.x0 = draw_x1;
 				buf.rect.y0 = draw_y1;
 				buf.rect.x1 = draw_x2;
 				buf.rect.y1 = draw_y2;
 				color = &widget->style->bg[GTK_STATE_NORMAL];
-				buf.bg_color = (((color->red & 0xff00) << 8)
-						| (color->green & 0xff00)
-						| (color->blue >> 8));
-				buf.is_bg = 1;
-				buf.is_buf = 0;
+				buf.solid_color = (((color->red & 0xff00) << 8)
+						   | (color->green & 0xff00)
+						   | (color->blue >> 8));
+				buf.is_solid = TRUE;
 
 				if (canvas->root->object.flags & GNOME_CANVAS_ITEM_VISIBLE)
 					(* GNOME_CANVAS_ITEM_CLASS (
 						canvas->root->object.klass)->render) (
 							canvas->root, &buf);
 
-				if (buf.is_bg) {
-					gdk_rgb_gc_set_foreground (canvas->pixmap_gc, buf.bg_color);
+				if (buf.is_solid) {
+					/* FIXME: will this screw up dithering? */
+					gdk_rgb_gc_set_foreground (canvas->pixmap_gc,
+								   buf.solid_color);
 					gdk_draw_rectangle (canvas->layout.bin_window,
 							    canvas->pixmap_gc,
 							    TRUE,
@@ -3661,7 +3662,6 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 	ArtIRect bbox;
 	ArtIRect visible;
 	ArtIRect clip;
-	gint w_width, w_height;
 
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
@@ -3699,21 +3699,20 @@ gnome_canvas_request_redraw (GnomeCanvas *canvas, int x1, int y1, int x2, int y2
 void
 gnome_canvas_w2c_affine (GnomeCanvas *canvas, double affine[6])
 {
-	double x, y;
-	double zooom;
+	double zoom;
 
 	g_return_if_fail (canvas != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 	g_return_if_fail (affine != NULL);
 
-	zooom = canvas->pixels_per_unit;
+	zoom = canvas->pixels_per_unit;
 
-	affine[0] = zooom;
+	affine[0] = zoom;
 	affine[1] = 0;
 	affine[2] = 0;
-	affine[3] = zooom;
-	affine[4] = -canvas->scroll_x1 * zooom;
-	affine[5] = -canvas->scroll_y1 * zooom;
+	affine[3] = zoom;
+	affine[4] = -canvas->scroll_x1 * zoom;
+	affine[5] = -canvas->scroll_y1 * zoom;
 }
 
 /**

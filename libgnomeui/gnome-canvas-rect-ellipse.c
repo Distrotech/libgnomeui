@@ -782,6 +782,8 @@ gnome_canvas_rect_class_init (GnomeCanvasRectClass *class)
 	item_class->contains = gnome_canvas_rect_contains;
 }
 
+
+
 /* Update handler for the rectangle item */
 static void
 gnome_canvas_rect_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
@@ -960,6 +962,11 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 
 	get_corners (re, &i1.x, &i1.y, &i2.x, &i2.y);
 
+	/* For the non-AA case, we do a semi-sane thing by just transforming the
+	 * opposite corners of the rectangle.  Translation and scaling will
+	 * work, rotation and shearing won't.
+	 */
+
 	gnome_canvas_item_i2c_affine (item, i2c);
 	art_affine_point (&c1, &i1, i2c);
 	art_affine_point (&c2, &i2, i2c);
@@ -973,8 +980,7 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	h = y2 - y1 + 1;
 
 	/* If we have stipples, set the offsets in the GCs and reset them later,
-	 * because these GCs are supposed to be read-only.
-	 */
+	 * because these GCs are supposed to be read-only.  */
 
 	if (priv->fill_stipple)
 		gnome_canvas_set_stipple_origin (item->canvas, priv->fill_gc);
@@ -990,7 +996,7 @@ gnome_canvas_rect_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 		gdk_draw_rectangle (drawable, priv->fill_gdc, TRUE, x1, y1, w, h);
 
 	if (priv->outline_color & 0xff >= 128)
-		gdk_draw_rectangel (drawable, priv->outline_gc, FALSE, x1, y1, w, h);
+		gdk_draw_rectangle (drawable, priv->outline_gc, FALSE, x1, y1, w, h);
 
 	/* Reset stipple offsets */
 
@@ -1007,38 +1013,47 @@ gnome_canvas_rect_contains (GnomeCanvasItem *item, double x, double y, GnomeCanv
 {
 	GnomeCanvasRE *re;
 	REPrivate *priv;
+	ArtPoint p1, p2;
 	double x1, y1, x2, y2;
-
-	re = GNOME_CANVAS_RE (item);
-	priv = re->priv;
-
-	
-}
-
-static double
-gnome_canvas_rect_point (GnomeCanvasItem *item, double x, double y, int cx, int cy,
-			 GnomeCanvasItem **actual_item)
-{
-	GnomeCanvasRE *re;
-	REPrivate *priv;
-	double x1, y1, x2, y2;
-	double hwidth;
-	double dx, dy;
-	double tmp;
 
 	re = GNOME_CANVAS_RE (item);
 	priv = re->priv;
 
 	*actual_item = item;
 
-	/* Find the bounds for the rectangle plus its outline width */
+	get_corners (re, &p1.x, &p1.y, &p2.x, &p2.y);
 
-	x1 = priv->x1;
-	y1 = priv->y1;
-	x2 = priv->x2;
-	y2 = priv->y2;
+	if (!item->canvas->aa) {
+		double i2c[6];
+		ArtPoint i, c;
 
-	if (priv->outline_set) {
+		/* For the non-AA case, we do the same thing as in ::draw() and
+		 * just transform the opposite corners of the rectangle.
+		 */
+
+		gnome_canvas_item_i2c_affine (item, i2c);
+
+		art_affine_point (&p1, &p1, i2c);
+		art_affine_point (&p2, &p2, i2c);
+
+		i.x = x;
+		i.y = y;
+		art_affine_point (&c, &i, i2c);
+		x = c.x;
+		y = c.y;
+	}
+
+	x1 = p1.x;
+	y1 = p1.y;
+	x2 = p2.x;
+	y2 = p2.y;
+
+	if (priv->fill_color & 0xff >= priv->fill_alpha_threshold)
+		return x >= x1 && x <= x2 && y >= y1 && y <= y2;
+
+	if (priv->outline_color & 0xff >= priv->outline_alpha_threshold) {
+		double hwidth;
+
 		if (priv->width_in_pixels)
 			hwidth = (priv->width / item->canvas->pixels_per_unit) / 2.0;
 		else
@@ -1048,76 +1063,59 @@ gnome_canvas_rect_point (GnomeCanvasItem *item, double x, double y, int cx, int 
 		y1 -= hwidth;
 		x2 += hwidth;
 		y2 += hwidth;
-	} else
-		hwidth = 0.0;
 
-	/* Is point inside rectangle (which can be hollow if it has no fill set)? */
+		if (x >= x1 && x <= x2 && y >= y1 && y <= y2) {
+			double dx, dy;
+			double tmp;
 
-	if ((x >= x1) && (y >= y1) && (x <= x2) && (y <= y2)) {
-		if (priv->fill_set || !priv->outline_set)
-			return 0.0;
+			dx = x - x1;
+			tmp = x2 - x;
+			if (tmp < dx)
+				dx = tmp;
 
-		dx = x - x1;
-		tmp = x2 - x;
-		if (tmp < dx)
-			dx = tmp;
+			dy = y - y1;
+			tmp = y2 - y;
+			if (tmp < dy)
+				dy = tmp;
 
-		dy = y - y1;
-		tmp = y2 - y;
-		if (tmp < dy)
-			dy = tmp;
+			if (dy < dx)
+				dx = dy;
 
-		if (dy < dx)
-			dx = dy;
+			dx -= 2.0 * hwidth;
 
-		dx -= 2.0 * hwidth;
-
-		if (dx < 0.0)
-			return 0.0;
-		else
-			return dx;
+			if (dx < 0.0)
+				return TRUE;
+		}
 	}
 
-	/* Point is outside rectangle */
-
-	if (x < x1)
-		dx = x1 - x;
-	else if (x > x2)
-		dx = x - x2;
-	else
-		dx = 0.0;
-
-	if (y < y1)
-		dy = y1 - y;
-	else if (y > y2)
-		dy = y - y2;
-	else
-		dy = 0.0;
-
-	return sqrt (dx * dx + dy * dy);
+	return FALSE;
 }
 
+
 
 /* Ellipse item */
 
 static void gnome_canvas_ellipse_class_init (GnomeCanvasEllipseClass *class);
 
-static void   gnome_canvas_ellipse_update (GnomeCanvasItem *item, double *affine,
-					   ArtSVP *clip_path, int flags);
-static void   gnome_canvas_ellipse_draw   (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y,
-					   int width, int height);
-static double gnome_canvas_ellipse_point  (GnomeCanvasItem *item, double x, double y, int cx, int cy,
-					   GnomeCanvasItem **actual_item);
+static void gnome_canvas_ellipse_update (GnomeCanvasItem *item, double *affine,
+					 ArtSVP *clip_path, int flags);
+static void gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable, int x, int y,
+				       int width, int height);
+static gboolean gnome_canvas_ellipse_contains (GnomeCanvasItem *item, double x, double y,
+					       GnomeCanvasItem **actual_item);
 
+static GnomeCanvasREClass *ellipse_parent_class;
+
+
 
 /**
  * gnome_canvas_ellipse_get_type:
  * @void:
  *
- * Registers the &GnomeCanvasEllipse class if necessary, and returns the type ID
+ * Registers the #GnomeCanvasEllipse class if necessary, and returns the type ID
  * associated to it.
  *
- * Return value: The type ID of the &GnomeCanvasEllipse class.
+ * Return value: The type ID of the #GnomeCanvasEllipse class.
  **/
 GtkType
 gnome_canvas_ellipse_get_type (void)
@@ -1150,153 +1148,23 @@ gnome_canvas_ellipse_class_init (GnomeCanvasEllipseClass *class)
 
 	item_class = (GnomeCanvasItemClass *) class;
 
-	item_class->draw = gnome_canvas_ellipse_draw;
-	item_class->point = gnome_canvas_ellipse_point;
+	ellipse_parent_class = gtk_type_class (gnome_canvas_re_get_type ());
+
 	item_class->update = gnome_canvas_ellipse_update;
+	item_class->draw = gnome_canvas_ellipse_draw;
+	item_class->contains = gnome_canvas_ellipse_contains;
 }
 
-static void
-gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
-			   int x, int y, int width, int height)
-{
-	GnomeCanvasRE *re;
-	REPrivate *priv;
-	double i2w[6], w2c[6], i2c[6];
-	int x1, y1, x2, y2;
-	ArtPoint i1, i2;
-	ArtPoint c1, c2;
+
 
-	re = GNOME_CANVAS_RE (item);
-	priv = re->priv;
+/* Update sequence for the ellipse item */
 
-	/* Get canvas pixel coordinates */
-
-	gnome_canvas_item_i2w_affine (item, i2w);
-	gnome_canvas_w2c_affine (item->canvas, w2c);
-	art_affine_multiply (i2c, i2w, w2c);
-
-	i1.x = priv->x1;
-	i1.y = priv->y1;
-	i2.x = priv->x2;
-	i2.y = priv->y2;
-	art_affine_point (&c1, &i1, i2c);
-	art_affine_point (&c2, &i2, i2c);
-	x1 = c1.x;
-	y1 = c1.y;
-	x2 = c2.x;
-	y2 = c2.y;
-
-	if (priv->fill_set) {
-		if (priv->fill_stipple)
-			gnome_canvas_set_stipple_origin (item->canvas, priv->fill_gc);
-
-		gdk_draw_arc (drawable,
-			      priv->fill_gc,
-			      TRUE,
-			      x1 - x,
-			      y1 - y,
-			      x2 - x1,
-			      y2 - y1,
-			      0 * 64,
-			      360 * 64);
-	}
-
-	if (priv->outline_set) {
-		if (priv->outline_stipple)
-			gnome_canvas_set_stipple_origin (item->canvas, priv->outline_gc);
-
-		gdk_draw_arc (drawable,
-			      priv->outline_gc,
-			      FALSE,
-			      x1 - x,
-			      y1 - y,
-			      x2 - x1,
-			      y2 - y1,
-			      0 * 64,
-			      360 * 64);
-	}
-}
-
-static double
-gnome_canvas_ellipse_point (GnomeCanvasItem *item, double x, double y, int cx, int cy,
-			    GnomeCanvasItem **actual_item)
-{
-	GnomeCanvasRE *re;
-	REPrivate *priv;
-	double dx, dy;
-	double scaled_dist;
-	double outline_dist;
-	double center_dist;
-	double width;
-	double a, b;
-	double diamx, diamy;
-
-	re = GNOME_CANVAS_RE (item);
-	priv = re->priv;
-
-	*actual_item = item;
-
-	if (priv->outline_set) {
-		if (priv->width_in_pixels)
-			width = priv->width / item->canvas->pixels_per_unit;
-		else
-			width = priv->width;
-	} else
-		width = 0.0;
-
-	/* Compute the distance between the center of the ellipse and the point, with the ellipse
-	 * considered as being scaled to a circle.
-	 */
-
-	dx = x - (priv->x1 + priv->x2) / 2.0;
-	dy = y - (priv->y1 + priv->y2) / 2.0;
-	center_dist = sqrt (dx * dx + dy * dy);
-
-	a = dx / ((priv->x2 + width - priv->x1) / 2.0);
-	b = dy / ((priv->y2 + width - priv->y1) / 2.0);
-	scaled_dist = sqrt (a * a + b * b);
-
-	/* If the scaled distance is greater than 1, then we are outside.  Compute the distance from
-	 * the point to the edge of the circle, then scale back to the original un-scaled coordinate
-	 * system.
-	 */
-
-	if (scaled_dist > 1.0)
-		return (center_dist / scaled_dist) * (scaled_dist - 1.0);
-
-	/* We are inside the outer edge of the ellipse.  If it is filled, then we are "inside".
-	 * Otherwise, do the same computation as above, but also check whether we are inside the
-	 * outline.
-	 */
-
-	if (priv->fill_set)
-		return 0.0;
-
-	if (scaled_dist > GNOME_CANVAS_EPSILON)
-		outline_dist = (center_dist / scaled_dist) * (1.0 - scaled_dist) - width;
-	else {
-		/* Handle very small distance */
-
-		diamx = priv->x2 - priv->x1;
-		diamy = priv->y2 - priv->y1;
-
-		if (diamx < diamy)
-			outline_dist = (diamx - width) / 2.0;
-		else
-			outline_dist = (diamy - width) / 2.0;
-	}
-
-	if (outline_dist < 0.0)
-		return 0.0;
-
-	return outline_dist;
-}
-
+/* Number of points in an ellipse */
 #define N_PTS 126
 
+/* Generates a vector path for an ellipse */
 static void
-gnome_canvas_gen_ellipse (ArtVpath *vpath, double x0, double y0,
-			  double x1, double y1)
+gnome_canvas_gen_ellipse (ArtVpath *vpath, double x0, double y0, double x1, double y1)
 {
 	int i;
 
@@ -1304,16 +1172,37 @@ gnome_canvas_gen_ellipse (ArtVpath *vpath, double x0, double y0,
 		double th;
 
 		th = (2 * M_PI * i) / N_PTS;
-		vpath[i].code = i == 0 ? ART_MOVETO : ART_LINETO;
+		vpath[i].code = (i == 0) ? ART_MOVETO : ART_LINETO;
 		vpath[i].x = (x0 + x1) * 0.5 + (x1 - x0) * 0.5 * cos (th);
 		vpath[i].y = (y0 + y1) * 0.5 - (y1 - y0) * 0.5 * sin (th);
 	}
 }
 
+/* Update handler for the ellipse item */
 static void
 gnome_canvas_ellipse_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
 {
+	GnomeCanvasRE *re;
+	REPrivate *priv;
+
+	re = GNOME_CANVAS_RE (item);
+	priv = re->priv;
+
+	if (GNOME_CANVAS_ITEM_CLASS (ellipse_parent_class)->update)
+		(* GNOME_CANVAS_ITEM_CLASS (ellipse_parent_class)->update) (
+			item, affine, clip_path, flags);
+
+	/* GnomeCanvasRE::update() did handle everything for the non-AA case */
+	if (!item->canvas->aa)
+		return;
+
+	/* FIXME: compute SVPs for AA */
+}
+
 #if 0
+static void
+gnome_canvas_ellipse_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags)
+{
 	GnomeCanvasRE *re;
 	ArtVpath vpath[N_PTS + N_PTS + 3];
 	ArtVpath *vpath2;
@@ -1392,5 +1281,168 @@ gnome_canvas_ellipse_update (GnomeCanvasItem *item, double *affine, ArtSVP *clip
 		get_bounds (re, &x0, &y0, &x1, &y1);
 		gnome_canvas_update_bbox (item, x0, y0, x1, y1);
 	}
+}
 #endif
+
+
+
+/* Draw handler for the ellipse item */
+static void
+gnome_canvas_ellipse_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
+			   int x, int y, int width, int height)
+{
+	GnomeCanvasRE *re;
+	REPrivate *priv;
+	ArtPoint i1, i2, c1, c2;
+	double i2c[6];
+	int x1, y1, x2, y2;
+	int w, h;
+
+	re = GNOME_CANVAS_RE (item);
+	priv = re->priv;
+
+	get_corners (re, &i1.x, &i1.y, &i2.x, &i2.y);
+
+	/* For the non-AA case, we do a semi-sane thing by just transforming the
+	 * opposite corners of the rectangle.  Translation and scaling will
+	 * work, rotation and shearing won't.
+	 */
+
+	gnome_canvas_item_i2c_affine (item, i2c);
+	art_affine_point (&c1, &i1, i2c);
+	art_affine_point (&c2, &i2, i2c);
+
+	x1 = floor (c1.x - x + 0.5);
+	y1 = floor (c1.y - y + 0.5);
+	x2 = floor (c2.x - x + 0.5);
+	y2 = floor (c2.y - y + 0.5);
+
+	w = x2 - x1 + 1;
+	h = y2 - y1 + 1;
+
+	/* If we have stipples, set the offsets in the GCs and reset them later,
+	 * because these GCs are supposed to be read-only.  */
+
+	if (priv->fill_stipple)
+		gnome_canvas_set_stipple_origin (item->canvas, priv->fill_gc);
+
+	if (priv->outline_stipple)
+		gnome_canvas_set_stipple_origin (item->canvas, priv->outline_gc);
+
+	/* If the colors were specified in RGBA, threshold out the alpha to see
+	 * if we should actually paint the fill or outline.
+	 */
+
+	if (priv->fill_color & 0xff >= 128)
+		gdk_draw_arc (drawable, priv->fill_gc, TRUE, x1, y1, w, h, 0 * 64, 360 * 64);
+
+	if (priv->outline_color & 0xff >= 128)
+		gdk_draw_arc (drawable, priv->outline_gc, FALSE, x1, y1, w, h, 0 * 64, 360 * 64);
+	
+	/* Reset stipple offsets */
+
+	if (priv->fill_stipple)
+		gdk_gc_set_ts_origin (priv->fill_gc, 0, 0);
+
+	if (priv->outline_stipple)
+		gdk_gc_set_ts_origin (priv->outline_gc, 0, 0);
+}
+
+/* Contains handler for the ellipse item */
+static gboolean
+gnome_canvas_ellipse_contains (GnomeCanvasItem *item, double x, double y,
+			       GnomeCanvasItem **actual_item)
+{
+	GnomeCanvasRE *re;
+	REPrivate *priv;
+	ArtPoint p1, p2;
+	double x1, y1, x2, y2;
+	double width;
+	double dx, dy;
+	double scaled_dist, outline_dist, center_dist;
+	double a, b;
+	double diamx, diamy;
+
+	re = GNOME_CANVAS_RE (item);
+	priv = re->priv;
+
+	*actual_item = item;
+
+	get_corners (re, &p1.x, &p1.y, &p2.x, &p2.y);
+
+	if (!item->canvas->aa) {
+		double i2c[6];
+		ArtPoint i, c;
+
+		/* For the non-AA case, we do the same thing as in ::draw() and
+		 * just transform the opposite corners of the ellipse.
+		 */
+
+		gnome_canvas_item_i2c_affine (item, i2c);
+
+		art_affine_point (&p1, &p1, i2c);
+		art_affine_point (&p2, &p2, i2c);
+
+		i.x = x;
+		i.y = y;
+		art_affine_point (&c, &i, i2c);
+		x = c.x;
+		y = c.y;
+	}
+
+	x1 = p1.x;
+	y1 = p1.y;
+	x2 = p2.x;
+	y2 = p2.y;
+
+	if (priv->outline_color & 0xff >= priv->outline_alpha_threshold) {
+		if (priv->width_in_pixels)
+			width = priv->width / item->canvas->pixels_per_unit;
+		else
+			width = priv->width;
+	} else
+		width = 0.0;
+
+	/* Compute the distance between the center of the ellipse and the point,
+	 * with the ellipse considered as being scaled to a circle.
+	 */
+
+	dx = x - (x1 + x2) / 2.0;
+	dy = y - (y1 + y2) / 2.0;
+	center_dist = sqrt (dx * dx + dy * dy);
+
+	a = dx / ((x2 + width - x1) / 2.0);
+	b = dy / ((y2 + width - y1) / 2.0);
+	scaled_dist = sqrt (a * a + b * b);
+
+	/* If the scaled distance is greater than 1, we are outside */
+	if (scaled_dist > 1.0)
+		return FALSE;
+
+	/* We are inside the outer edge of the ellipse.  If it is filled, then
+	 * we are "inside".  Otherwise, do the same computation as above, but
+	 * also check whether we are inside the outline.
+	 */
+
+	if (priv->fill_color & 0xff >= priv->fill_alpha_threshold)
+		return TRUE;
+
+	if (scaled_dist > GNOME_CANVAS_EPSILON)
+		outline_dist = (center_dist / scaled_dist) * (1.0 - scaled_dist) - width;
+	else {
+		/* Handle very small distance */
+
+		diamx = x2 - x1;
+		diamy = y2 - y1;
+
+		if (diamx < diamy)
+			outline_dist = (diamx - width) / 2.0;
+		else
+			outline_dist = (diamy - width) / 2.0;
+	}
+
+	if (outline_dist < 0.0)
+		return TRUE;
+
+	return FALSE;
 }

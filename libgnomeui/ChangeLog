@@ -1,3 +1,20 @@
+1999-12-15  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-canvas-rect-ellipse.c (gnome_canvas_rect_contains):
+	Implemented hit testing with the correct semantics for transformed
+	rectangles items in the non-AA case.
+	(gnome_canvas_ellipse_update): Use the correct update model; this
+	is basically copied over from gnome_canvas_rect_update().
+	(gnome_canvas_ellipse_draw): Better computation of coordinates,
+	and threshold alpha properly.
+	(gnome_canvas_ellipse_contains): Implemented hit testing with the
+	correct semantics for transformed ellipses in the non-AA case.
+
+	* gnome-canvas.h (GnomeCanvasBuf): Renamed the bg_color field to
+	solid_color, to be consistent with the is_solid flag.
+
+	* gnome-canvas.c: Renamed usage of fields of GnomeCanvasBuf.
+
 1999-12-14  Federico Mena Quintero  <federico@redhat.com>
 
 	* gnome-canvas-rect-ellipse.c (update_non_aa): Compute the
