@@ -26,4 +26,5 @@ modules_LTLIBRARIES =				\
 
 libgnome_vfs_la_SOURCES = gtkfilesystemgnomevfs.c gtkfilesystemgnomevfs.h
 libgnome_vfs_la_LDFLAGS = $(module_flags)
-libgnome_vfs_la_LIBADD = $(FILE_SYSTEM_LIBS)
+libgnome_vfs_la_LIBADD = $(FILE_SYSTEM_LIBS)	\
+	$(top_builddir)/libgnomeui/libgnomeui-2.la
