@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-03-30 00:09+0100\n"
-"PO-Revision-Date: 2002-03-25 11:26+0100\n"
+"POT-Creation-Date: 2002-04-10 08:06+0200\n"
+"PO-Revision-Date: 2002-04-10 08:09+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -121,27 +121,27 @@ msgstr "Logo pre dialógové okno O programe"
 msgid "About %s"
 msgstr "O programe %s"
 
-#: libgnomeui/gnome-appbar.c:762
+#: libgnomeui/gnome-appbar.c:748
 msgid "Has Progress"
 msgstr "Má postup"
 
-#: libgnomeui/gnome-appbar.c:763
+#: libgnomeui/gnome-appbar.c:749
 msgid "Create a progress widget."
 msgstr "Vytvori» prvok postupu."
 
-#: libgnomeui/gnome-appbar.c:770
+#: libgnomeui/gnome-appbar.c:756
 msgid "Has Status"
 msgstr "Má stav"
 
-#: libgnomeui/gnome-appbar.c:771
+#: libgnomeui/gnome-appbar.c:757
 msgid "Create a status widget."
 msgstr "Vytvori» stavový prvok."
 
-#: libgnomeui/gnome-appbar.c:778
+#: libgnomeui/gnome-appbar.c:764
 msgid "Interactivity"
 msgstr "Interaktivita"
 
-#: libgnomeui/gnome-appbar.c:779
+#: libgnomeui/gnome-appbar.c:765
 msgid "Level of user activity required."
 msgstr "Po¾adovaná úroveò pou¾ívateµovej aktivity."
 
@@ -177,56 +177,56 @@ msgstr "Zru¹i» prihlasovanie"
 msgid "Received invalid color data\n"
 msgstr "Prijaté neplatné údaje o farbe\n"
 
-#: libgnomeui/gnome-color-picker.c:468
+#: libgnomeui/gnome-color-picker.c:471
 msgid "Pick a color"
 msgstr "Vybra» farbu"
 
-#: libgnomeui/gnome-dateedit.c:468
+#: libgnomeui/gnome-dateedit.c:456
 msgid "Time"
 msgstr "Èas"
 
-#: libgnomeui/gnome-dateedit.c:469
+#: libgnomeui/gnome-dateedit.c:457
 msgid "The time currently selected"
 msgstr "Aktuálne vybratý èas"
 
-#: libgnomeui/gnome-dateedit.c:481
+#: libgnomeui/gnome-dateedit.c:469
 msgid "DateEdit Flags"
 msgstr "Príznaky DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:482
+#: libgnomeui/gnome-dateedit.c:470
 msgid "Flags for how DateEdit looks"
 msgstr "Príznaky pre zobrazenie DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:491
+#: libgnomeui/gnome-dateedit.c:479
 msgid "Lower Hour"
 msgstr "Ni¾¹ia hodina"
 
-#: libgnomeui/gnome-dateedit.c:492
+#: libgnomeui/gnome-dateedit.c:480
 msgid "Lower hour in the time popup selector"
 msgstr "Ni¾¹ia hodina v okne pre výber èasu"
 
-#: libgnomeui/gnome-dateedit.c:502
+#: libgnomeui/gnome-dateedit.c:490
 msgid "Upper Hour"
 msgstr "Vy¹¹ia hodina"
 
-#: libgnomeui/gnome-dateedit.c:503
+#: libgnomeui/gnome-dateedit.c:491
 msgid "Upper hour in the time popup selector"
 msgstr "Vy¹¹ia hodina v okne pre výber èasu"
 
-#: libgnomeui/gnome-dateedit.c:513
+#: libgnomeui/gnome-dateedit.c:501
 msgid "Initial Time"
 msgstr "Poèiatoèný èas"
 
-#: libgnomeui/gnome-dateedit.c:514
+#: libgnomeui/gnome-dateedit.c:502
 msgid "The initial time"
 msgstr "Poèiatoèný èas"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:745
+#: libgnomeui/gnome-dateedit.c:731
 msgid "Calendar"
 msgstr "Kalendár"
 
-#: libgnomeui/gnome-dateedit.c:975
+#: libgnomeui/gnome-dateedit.c:961
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date je neodporúèané, pou¾ite gnome_date_edit_get_time"
@@ -355,12 +355,12 @@ msgid "End World Hunger"
 msgstr "Ukonèi» svetový hlad"
 
 #: libgnomeui/gnome-href.c:134
-msgid "Link colour"
+msgid "Link color"
 msgstr "Farba linky"
 
 #: libgnomeui/gnome-href.c:135
-msgid "Colour used to draw the link"
-msgstr "Farba pou¾itá zobrazenie linky"
+msgid "Color used to draw the link"
+msgstr "Farba pou¾itá na nakreslenie linky"
 
 #: libgnomeui/gnome-href.c:396
 msgid ""
@@ -490,6 +490,7 @@ msgstr "Rada pre polo¾ku 2"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "Súbo_r"
 
@@ -547,6 +548,7 @@ msgid "_Game"
 msgstr "_Hra"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Pomocník"
 
@@ -737,11 +739,11 @@ msgstr "Konfigurova» aplikáciu"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "O progr_ame"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Informácie o tomto programe"
 
@@ -768,7 +770,7 @@ msgstr "Vytvori» nové okno"
 msgid "_Close This Window"
 msgstr "_Zatvori» toto okno"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zatvori» aktuálne okno"
 
@@ -840,19 +842,23 @@ msgstr "Koni_ec hry"
 msgid "End the current game"
 msgstr "Koniec aktuálnej hry"
 
-#: libgnomeui/gnome-app-helper.c:2563
+#: libgnomeui/gnome-app-helper.c:1096
+msgid "_Help Contents"
+msgstr "_Pomocník - obsah"
+
+#: libgnomeui/gnome-app-helper.c:2402
 msgid "Both text and icons"
 msgstr "Text aj ikony"
 
-#: libgnomeui/gnome-app-helper.c:2564
+#: libgnomeui/gnome-app-helper.c:2403
 msgid "Icons only"
 msgstr "Len ikony"
 
-#: libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2404
 msgid "Text only"
 msgstr "Len text"
 
-#: libgnomeui/gnome-app-helper.c:2616
+#: libgnomeui/gnome-app-helper.c:2455
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Pou¾i» predvolenú pracovnú plochu (%s)"
@@ -1006,8 +1012,8 @@ msgid "Select file"
 msgstr "Vybra» súbor"
 
 #: libgnomeui/gnome-file-entry.c:592
-msgid "Browse..."
-msgstr "Prezera»..."
+msgid "_Browse..."
+msgstr "_Prezera»..."
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1173,7 +1179,7 @@ msgstr "GnomeIconSelection: '%s' neexistuje alebo nie je prieèinok"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: nemô¾em otvori» prieèinok '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:411
+#: libgnomeui/gnome-icon-sel.c:406
 msgid "Loading Icons..."
 msgstr "Nahrávam ikony..."
 
@@ -1240,5 +1246,6 @@ msgstr "%a %d.%m.%Y %H:%M"
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "Ukonèi» test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Ukonèi» test"
