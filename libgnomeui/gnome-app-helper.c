@@ -2373,7 +2373,8 @@ static GConfEnumStringPair toolbar_styles[] = {
         { GTK_TOOLBAR_TEXT, "text" },
         { GTK_TOOLBAR_ICONS, "icons" },
         { GTK_TOOLBAR_BOTH, "both" },
-        { GTK_TOOLBAR_BOTH_HORIZ, "both_horiz" }
+        { GTK_TOOLBAR_BOTH_HORIZ, "both_horiz" },
+	{ -1, NULL }
 };
 
 static void
@@ -2408,9 +2409,10 @@ per_app_toolbar_style_changed_notify(GConfClient            *client,
                                               NULL);
 
                 if (str) {
-                        gconf_string_to_enum(toolbar_styles,
-                                             str,
-                                             (gint*)&style);
+			if (!gconf_string_to_enum (toolbar_styles,
+						   str,
+						   (gint *)&style))
+				style = GTK_TOOLBAR_BOTH;
 
                         g_free(str);
                 }
@@ -2454,9 +2456,10 @@ toolbar_style_changed_notify(GConfClient            *client,
             value &&
             value->type == GCONF_VALUE_STRING &&
             gconf_value_get_string(value) != NULL) {
-                gconf_string_to_enum(toolbar_styles,
-                                     gconf_value_get_string(value),
-                                     (gint*)&style);
+		if (!gconf_string_to_enum (toolbar_styles,
+					   gconf_value_get_string (value),
+					   (gint *)&style))
+			style = GTK_TOOLBAR_BOTH;
         }
 
         gtk_toolbar_set_style(toolbar, style);
@@ -2513,7 +2516,7 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 	menu = gtk_menu_new ();
 
 	both = _("Text Below Icons");
-	both_horiz = _("Text Beside Icons");
+	both_horiz = _("Priority Text Beside Icons");
 	icons = _("Icons Only");
 	text = _("Text Only");
 
@@ -2552,9 +2555,10 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 				      NULL);
 
 	if (str != NULL) {
-		gconf_string_to_enum(toolbar_styles,
-				     str,
-				     (gint*)&toolbar_style);
+		if (!gconf_string_to_enum (toolbar_styles,
+					   str,
+					   (gint*)&toolbar_style))
+			toolbar_style = GTK_TOOLBAR_BOTH;
 		g_free(str);
 	}
 
@@ -2595,9 +2599,10 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 		gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (global_item), TRUE);
 	}
 	else {
-		gconf_string_to_enum(toolbar_styles,
-				     str,
-				     (gint*)&toolbar_style);
+		if (!gconf_string_to_enum(toolbar_styles,
+					  str,
+					  (gint*)&toolbar_style))
+			toolbar_style = GTK_TOOLBAR_BOTH;
 
 		/* We have a per-app setting, find out which one it is */
 		switch (toolbar_style) {
@@ -2708,9 +2713,10 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                                                       NULL);
 
                         if (str != NULL) {
-                                gconf_string_to_enum(toolbar_styles,
-                                                     str,
-                                                     (gint*)&toolbar_style);
+                                if (!gconf_string_to_enum(toolbar_styles,
+							  str,
+							  (gint*)&toolbar_style))
+					toolbar_style = GTK_TOOLBAR_BOTH;
                                 g_free(str);
                         }
                 }
