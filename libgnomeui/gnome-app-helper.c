@@ -774,7 +774,6 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 					(GTK_MENU_SHELL (menu), 
 					 uiinfo->moreinfo, orig_uibdata, 
 					 accel_group, FALSE, 0);
-				
 				if (gnome_preferences_get_menus_have_tearoff ()) {
 					tearoff = gtk_tearoff_menu_item_new ();
 					gtk_widget_show (tearoff);
@@ -1336,7 +1335,8 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
       label = NULL;
 		else if(!item->child)          /* this is a separator, right? */
       label = "<Separator>";
-		else if(GTK_IS_LABEL(item->child)) /* a simple item with a label */
+		else if(GTK_IS_LABEL(item->child))  /* a simple item with a 
+						       label */
 			label = GTK_LABEL (item->child)->label;
 		else                  /* something that we just can't handle */
 			label = NULL;
