@@ -2,6 +2,14 @@ pixmapdir = $(datadir)/pixmaps
 CONVERTRGB = ../../tools/convertrgb/convertrgb
 BITMAPS    = calculator-font.png
 
+# 
+# CONVERTRGB is required to create generated sopurces.
+# If we are just doing "make dist", then this must be built by hand
+#
+$(CONVERTRGB):
+	cd ../../tools/convertrgb && \
+	$(MAKE) $(AM_MAKEFLAGS) convertrgb
+
 pixmap_DATA = $(BITMAPS)
 
 
