@@ -1,3 +1,11 @@
+Mon Mar 15 04:48:10 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-list.c: remove timeout when widget is destroyed,
+	  the posibility is remote, but still possible
+
+	* gnome-pixmap-entry.c: when entry is destroyed dequeue the entry
+	  to be updated in timeout to avert possible crash
+
 1999-03-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-app-helper.c: Removed ellipsis from the "New Window" and

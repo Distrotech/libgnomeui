@@ -228,6 +228,7 @@ pentry_destroy(GnomePixmapEntry *pentry)
 {
 	pentry->preview = NULL;
 	g_free(pentry->last_preview);
+	changed_pentries = g_slist_remove(changed_pentries,pentry);
 	return FALSE;
 }
 

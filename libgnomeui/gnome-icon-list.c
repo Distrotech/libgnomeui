@@ -961,6 +961,9 @@ gil_destroy (GtkObject *object)
 	gil->dirty  = TRUE;
 	gnome_icon_list_clear (gil);
 
+	if (gil->timer_tag != -1)
+		gtk_timeout_remove (gil->timer_tag);
+
 	if (gil->adj)
 		gtk_object_unref (GTK_OBJECT (gil->adj));
 	if (gil->hadj)
