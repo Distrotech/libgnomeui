@@ -764,6 +764,7 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 				/* Create the subtree for this item */
 
 				GtkWidget *menu;
+				GtkWidget *tearoff;
 
 				menu = gtk_menu_new ();
 				gtk_menu_item_set_submenu
@@ -772,6 +773,11 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 					(GTK_MENU_SHELL (menu), 
 					 uiinfo->moreinfo, orig_uibdata, 
 					 accel_group, FALSE, 0);
+				if (gnome_preferences_get_menus_have_tearoff ()) {
+					tearoff = gtk_tearoff_menu_item_new ();
+					gtk_widget_show (tearoff);
+					gtk_menu_prepend (GTK_MENU (menu), tearoff);
+				}
 			}
 
 			gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
@@ -1281,9 +1287,13 @@ gnome_app_find_menu_pos (GtkWidget *parent, gchar *path, gint *pos)
 		p++;
 		item = GTK_BIN(children->data);
 		
-		if(!item->child)                    /* this is a separator, 
-						       right? */
-			label = "<Separator>";
+		if(!item->child) {
+			/* this is a separator, right? */
+			if (GTK_IS_TEAROFF_MENU_ITEM (item))
+				label = NULL;
+			else
+				label = "<Separator>";
+		}
 		else if(GTK_IS_LABEL(item->child))  /* a simple item with a 
 						       label */
 			label = GTK_LABEL (item->child)->label;

@@ -44,6 +44,7 @@ static GnomePreferences prefs =
   TRUE,               /* Toolbars show lines for separators */
   TRUE,               /* Toolbars show labels */
   TRUE,               /* Center dialogs over apps when possible */
+  TRUE,               /* Menus have a tearoff bar */
   TRUE,               /* Menu items have icons in them */
   TRUE,               /* Disable the Imlib cache */
   GTK_WINDOW_DIALOG,  /* Dialogs are treated specially */
@@ -125,6 +126,7 @@ static const gchar * const dialog_positions [] = {
 #define TOOLBAR_LINES_KEY          "Toolbar_lines"
 #define TOOLBAR_LABELS_KEY         "Toolbar_labels"
 
+#define MENUS_HAVE_TEAROFF_KEY     "Menus_have_tearoff"
 #define MENUS_HAVE_ICONS_KEY       "Menus_have_icons"
 #define DISABLE_IMLIB_CACHE_KEY    "Disable_Imlib_cache"
 
@@ -281,6 +283,10 @@ gnome_preferences_load_custom(GnomePreferences *settings)
 					 NULL);
   settings->toolbar_labels = b;
 
+  b = gnome_config_get_bool_with_default (MENUS_HAVE_TEAROFF_KEY"=true",
+					  NULL);
+  settings->menus_have_tearoff = b;
+
   b = gnome_config_get_bool_with_default (MENUS_HAVE_ICONS_KEY"=true",
 					  NULL);
   settings->menus_have_icons = b;
@@ -357,6 +363,8 @@ gnome_preferences_save_custom(GnomePreferences *settings)
 			settings->toolbar_lines);
   gnome_config_set_bool(TOOLBAR_LABELS_KEY,
 			settings->toolbar_labels);
+  gnome_config_set_bool(MENUS_HAVE_TEAROFF_KEY,
+			settings->menus_have_tearoff);
   gnome_config_set_bool(MENUS_HAVE_ICONS_KEY,
 			settings->menus_have_icons);
   gnome_config_set_bool(DISABLE_IMLIB_CACHE_KEY,
@@ -545,6 +553,18 @@ void
 gnome_preferences_set_property_box_button_apply (int v)
 {
 	prefs.property_box_buttons_apply = v;
+}
+
+gboolean
+gnome_preferences_get_menus_have_tearoff (void)
+{
+	return prefs.menus_have_tearoff;
+}
+
+void
+gnome_preferences_set_menus_have_tearoff (gboolean b)
+{
+	prefs.menus_have_tearoff = b;
 }
 
 int
