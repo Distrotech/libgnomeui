@@ -171,7 +171,7 @@ gnome_message_box_new (const gchar           *message,
         s = NULL;
         appname = gnome_program_get_human_readable_name(gnome_program_get());
         if (appname) {
-                s = g_strdup_printf("%s: %s", title_prefix, appname);
+                s = g_strdup_printf("%s (%s)", title_prefix, appname);
         }
         if (s) {
                 gtk_window_set_title(GTK_WINDOW(message_box), s);

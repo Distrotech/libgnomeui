@@ -1,3 +1,9 @@
+2000-01-11  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-messagebox.c (gnome_message_box_new): 
+	Format title as "Error (Gnumeric)" rather than 
+	"Error: Gnumeric"
+
 2000-01-12  Martijn van Beers  <martijn@earthling.net>
 
         * gnome-gconf.[ch]: added get/set functions for
