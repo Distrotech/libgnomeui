@@ -175,7 +175,7 @@ gnome_recently_used_ensure (GnomeRecentlyUsed *recently_used)
         
         recently_used->_priv->conf = gnome_get_gconf_client ();
 
-        gtk_object_ref (GTK_OBJECT (recently_used->_priv->conf));
+        g_object_ref (G_OBJECT (recently_used->_priv->conf));
         
         /* No preload because the explicit all_entries call when ensuring
            effectively results in a preload. */
@@ -285,7 +285,7 @@ gnome_recently_used_clear (GnomeRecentlyUsed *recently_used)
                                         NULL);
 
 
-		gtk_object_unref(GTK_OBJECT(recently_used->_priv->conf));
+		g_object_unref(G_OBJECT(recently_used->_priv->conf));
 		recently_used->_priv->conf = NULL;
 	}
 }

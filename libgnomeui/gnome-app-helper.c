@@ -446,9 +446,9 @@ setup_pixmap_menu_item(GtkWidget *mi, GnomeUIPixmapType pixmap_type,
         
         conf = gnome_get_gconf_client();
 
-        gtk_object_ref(GTK_OBJECT(conf));
+        g_object_ref (G_OBJECT (conf));
         gtk_object_set_data_full(GTK_OBJECT(mi), gnome_app_helper_gconf_client,
-                                 conf, (GtkDestroyNotify)gtk_object_unref);
+                                 conf, (GtkDestroyNotify)g_object_unref);
 
         if (gconf_client_get_bool(conf,
                                   "/desktop/gnome/menus/show-icons",

@@ -251,7 +251,7 @@ gnome_file_saver_init (GnomeFileSaver* file_saver)
         
         file_saver->_priv->conf = gnome_get_gconf_client();
 
-        gtk_object_ref(GTK_OBJECT(file_saver->_priv->conf));
+        g_object_ref(G_OBJECT(file_saver->_priv->conf));
 
         /*
          * Fill in the Location menu
@@ -350,7 +350,7 @@ gnome_file_saver_destroy (GtkObject* object)
 					"/desktop/standard/save-locations",
                                         NULL);
 
-		gtk_object_unref(GTK_OBJECT(file_saver->_priv->conf));
+		g_object_unref(G_OBJECT(file_saver->_priv->conf));
 		file_saver->_priv->conf = NULL;
 	}
         

@@ -1017,7 +1017,7 @@ do_construct_handler (GnomeSelector *selector)
     g_message (G_STRLOC);
 
     priv->client = gnome_get_gconf_client ();
-    gtk_object_ref (GTK_OBJECT (priv->client));
+    g_object_ref (G_OBJECT (priv->client));
 
     priv->box = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 
@@ -1117,7 +1117,7 @@ gnome_selector_destroy (GtkObject *object)
 		 selector->_priv->gconf_history_dir,
 		 NULL);
 
-	gtk_object_unref (GTK_OBJECT (selector->_priv->client));
+	g_object_unref (G_OBJECT (selector->_priv->client));
 	selector->_priv->client = NULL;
     }
 

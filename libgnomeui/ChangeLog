@@ -1,3 +1,10 @@
+Sun Mar 25 03:04:13 2001  George Lebl <jirka@5z.com>
+
+	* gnome-app-helper.c, gnome-file-saver.c, gnome-gconf.c,
+	  gnome-recently-used.c, gnome-selector.c:  GConfClient
+	  is no longer a GtkObject, so use g_object_* methods on
+	  it and not gtk_object_
+
 Sun Mar 25 02:13:43 2001  George Lebl <jirka@5z.com>
 
 	* gnome-app-helper.c: gconf_client is now a GObject, not GtkObject
