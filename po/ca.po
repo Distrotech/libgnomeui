@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.3.0\n"
-"POT-Creation-Date: 2003-06-04 15:02+0200\n"
-"PO-Revision-Date: 2003-06-04 15:08+0200\n"
+"Project-Id-Version: libgnomeui 2.3.3\n"
+"POT-Creation-Date: 2003-06-08 18:16+0200\n"
+"PO-Revision-Date: 2003-06-08 18:23+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -154,7 +154,7 @@ msgstr "_Edita"
 
 #: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
-msgstr "_Editar/"
+msgstr "_Edita/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
@@ -200,7 +200,7 @@ msgstr "_Joc"
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 #: test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr "_Ajuda"
+msgstr "A_juda"
 
 #: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
@@ -294,11 +294,11 @@ msgstr "Retalla la selecció"
 #. Copy
 #: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
-msgstr "_Copia"
+msgstr "_Còpia"
 
 #: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr "Copia la selecció"
+msgstr "Còpia la selecció"
 
 #. Paste
 #: libgnomeui/gnome-app-helper.c:166
@@ -339,7 +339,7 @@ msgstr "Refés l'acció sense fer"
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
-msgstr "_Busca..."
+msgstr "_Cerca..."
 
 #: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
@@ -523,7 +523,7 @@ msgstr "Utilitza l'escriptori per defecte (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
-msgstr " (prem return)"
+msgstr " (premeu return)"
 
 #: libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
@@ -575,15 +575,15 @@ msgstr "En curs"
 
 #: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr "Crea un símbol de progrés."
+msgstr "Crea un giny de progrés."
 
 #: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
-msgstr "En Estat"
+msgstr "Té estat"
 
 #: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr "Crea un símbol d'estat."
+msgstr "Crea un giny d'estat."
 
 #: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
@@ -595,7 +595,8 @@ msgstr "Nivell d'usuari requerit."
 
 #: libgnomeui/gnome-authentication-manager.c:60
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "El vostre servidor intermediari d'HTTP requereix que vos identifiqueu.\n"
+msgstr ""
+"El vostre servidor intermediari d'HTTP requereix que vos identifiqueu.\n"
 
 #: libgnomeui/gnome-authentication-manager.c:61
 #, c-format
@@ -644,7 +645,7 @@ msgstr "Gestió de sessió"
 
 #: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
-msgstr "Cancel.lar la Sortida"
+msgstr "Cancel·la la sortida"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
@@ -1125,7 +1126,7 @@ msgstr "Nom de fitxer que s'hauria de mostrar al registre de l'icona."
 
 #: libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
-msgstr "El diàleg del Capturador"
+msgstr "El diàleg del capturador"
 
 #: libgnomeui/gnome-icon-entry.c:211
 msgid ""
@@ -1305,27 +1306,27 @@ msgstr "Desagnat"
 msgid "About"
 msgstr "Quant a"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "X display to use"
 msgstr "Pantalla X per utilitzar"
 
-#: libgnomeui/gnome-ui-init.c:113
+#: libgnomeui/gnome-ui-init.c:117
 msgid "DISPLAY"
 msgstr "VISUALITZACIÓ"
 
-#: libgnomeui/gnome-ui-init.c:121
+#: libgnomeui/gnome-ui-init.c:125
 msgid "GNOME GUI Library"
 msgstr "Biblioteca GNOME GUI"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:619
+#: libgnomeui/gnome-ui-init.c:623
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Han ocorregut múltiples violacions de segment; no es pot mostrar el diàleg "
 "d'error\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:633
+#: libgnomeui/gnome-ui-init.c:637
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
@@ -1355,7 +1356,7 @@ msgid ""
 "due to a fatal error.\n"
 "(%s)"
 msgstr ""
-"L'aplicació \"%s\" (procés %d) ha fallat\n"
+"L'aplicació «%s» (procés %d) ha fallat\n"
 "degut a un error fatal.\n"
 "(%s)"
 
