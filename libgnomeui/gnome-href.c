@@ -392,8 +392,8 @@ gnome_href_clicked (GtkButton *button)
 					       GTK_BUTTONS_OK,
 					       _("Error occured while trying to launch the "
 						 "URL handler.\n"
-						 "Please check the settings in the "
-						 "Control Center if they are correct."));
+						 "Please check the settings in"
+						 "Preferred Applications if they are correct."));
     
     gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
