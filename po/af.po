@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.6-branch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-03-30 17:02+0200\n"
 "Last-Translator: Zuza Software Foundation <info@translate.org.za>\n"
 "Language-Team: Afrikaans <translate-discuss-af@lists.sourceforge.net>\n"
@@ -499,25 +499,25 @@ msgstr "_Inhoud"
 msgid "View help for this application"
 msgstr "Bekyk hulp vir hierdie toepassing"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Teks Onder Ikone"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Prioriteitteks Langs Ikone"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Slegs Ikone"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Slegs Teks"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "Gebruik werkarea verstek (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -614,16 +614,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Jou wagwoord sal met enkodering gestuur word."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Verifiëringsversoek"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
-msgstr " domein %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "Jy moet aanmeld om toegang te verkry tot %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Jy moet aanmeld om toegang te verkry tot %s\n"
@@ -1070,39 +1070,39 @@ msgstr ""
 "n Fout het voorgekom terwyl die optstellingsinligting vir %s gelaai of "
 "gestoor is. Van jou instellings mag dalk nie behoorlik werk nie."
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "Die URL wat GnomeHRef aktiveer"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Teks"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "Die teks op die knop"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "Beëindig Wêreldhonger"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Skakelkleur"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "Kleur wat gebruik word om die skakel te teken"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Hierdie knop sal jou neem na die  URI wat vertoon word."
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1404,6 +1404,9 @@ msgstr "_Lig Programmeerders in"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_Ontvlooi"
+
+#~ msgid " domain %s"
+#~ msgstr " domein %s"
 
 #~ msgid "Exit the test"
 #~ msgstr "Sluit die toets af"

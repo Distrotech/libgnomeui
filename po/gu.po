@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui-2.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-02-29 20:47+0530\n"
 "Last-Translator: Nirav, Ankit, Ankur, Atit, Bhavin, Kartik, Khushbu, Sweta. "
 "<magnet@magnet-i.com>\n"
@@ -607,28 +607,28 @@ msgstr "સમાવિષ્ટ વસ્તુઓ (_C)"
 msgid "View help for this application"
 msgstr "આ કાર્યક્રમ માટે મદદ જુઓ"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "ચિહ્નની નીચેનું લખાણ"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "ચિહ્નની બાજુમાં પ્રાથમિક લખાણ"
 
 # libgnomeui/gnome-app-helper.c:2564
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "ફક્ત ચિહ્નો"
 
 # libgnomeui/gnome-app-helper.c:2565
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "ફક્ત લખાણ"
 
 # libgnomeui/gnome-app-helper.c:2616
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "ડેસ્કટોપના મૂળભૂતો (%s) વાપરો"
 
 # libgnomeui/gnome-app-util.c:99
@@ -743,16 +743,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "તમારો પાસવર્ડ ગુપ્ત કોડમાં ફેરવયા પછી માેકલાશે."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "પ્રમાણિત કરવું જરૂરી છે"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
-msgstr " પ્રદેશ %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "પ્રાપ્ત કરવા માટે તમારે પ્રવેશ કરવો પડશે %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "પ્રાપ્ત કરવા માટે તમારે પ્રવેશ કરવો પડશે %s\n"
@@ -1296,45 +1296,45 @@ msgstr ""
 "ગોઠવણી કદાચ યોગ્ય રીતે કાર્ય ન કરે."
 
 # libgnomeui/gnome-href.c:118
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
 # libgnomeui/gnome-href.c:119
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "URL જેને GnomeHRef કાર્યશીલ કરે છે"
 
 # libgnomeui/gnome-href.c:126
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "લખાણ"
 
 # libgnomeui/gnome-href.c:127
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "બટન પરનું લખાણ"
 
 # libgnomeui/gnome-href.c:128
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "વિશ્વની ભૂખને સમાપ્ત કરો"
 
 # libgnomeui/gnome-href.c:134
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "કડીનો રંગ"
 
 # libgnomeui/gnome-href.c:135
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "કડીને દોરવા માટે વપરાતો રંગ"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "આ બટન તમને URI પર લઇ જશે કે જે ડિસ્પ્લે કરેલ છે."
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1664,6 +1664,9 @@ msgstr "વિકસાવનારાઓને જાણ કરો (_I)"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "ભૂલ શોધો (_D)"
+
+#~ msgid " domain %s"
+#~ msgstr " પ્રદેશ %s"
 
 # test-gnome/testgnome.xml.h:3
 #~ msgid "Exit the test"

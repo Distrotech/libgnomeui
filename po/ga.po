@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-03-21 14:41+0000\n"
 "Last-Translator: Alastair McKinstry <mckinstry@computer.org>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -497,25 +497,25 @@ msgstr ""
 msgid "View help for this application"
 msgstr "Feach ar Cabhair le haighaidh an feidhmchlár seo"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Téasc faoi na Dealbhanna"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr ""
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Dealbhanna Amháin"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Téasc Amháin"
 
-#: libgnomeui/gnome-app-helper.c:2631
+#: libgnomeui/gnome-app-helper.c:2634
 #, c-format
-msgid "Use desktop default (%s)"
+msgid "Use Desktop Default (%s)"
 msgstr ""
 
 #: libgnomeui/gnome-app-util.c:99
@@ -612,16 +612,18 @@ msgid "Your password will be transmitted encrypted."
 msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
 msgstr ""
+"Caithfidh tú logáil isteach chun \"%s\" a rochtain.\n"
+"%s"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, fuzzy, c-format
 msgid "You must log in to access %s\n"
 msgstr ""
@@ -1052,39 +1054,39 @@ msgid ""
 "Some of your configuration settings may not work properly."
 msgstr ""
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr ""
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Téasc"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "An téasc ar an cnaipe"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr ""
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Dáth an Ceangal"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr ""
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr ""
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."

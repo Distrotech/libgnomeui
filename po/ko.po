@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-04-21 02:03+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
@@ -496,25 +496,25 @@ msgstr "차례(_C)"
 msgid "View help for this application"
 msgstr "이 프로그램에 대한 도움말을 봅니다"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "아이콘 아래 글자"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "아이콘 옆에 글자"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "아이콘만"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "글자만"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "데스크탑 기본 사항 사용 (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -611,16 +611,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "열쇠글이 암호화된 상태로 전송됩니다."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "인증이 필요합니다"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
-msgstr " 도메인 %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "\"%s\"에 접근하려면 로그인을 해야 합니다\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "\"%s\"에 접근하려면 로그인을 해야 합니다\n"
@@ -1068,39 +1068,39 @@ msgstr ""
 "%s에 대한 설정 정보를 읽어들이거나 저장하는 도중에 오류가 발생했습니다. 설정 "
 "사항의 일부가 올바르게 동작하지 않을 수 있습니다."
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "GnomeHRef가 활성화하는 URL"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "글월"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "단추 위의 글월"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "지구촌의 굶주림을 없앱시다"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "링크 색"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "링크를 그릴 때 사용할 색"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "이 단추를 누르면 단추가 보여주는 URI로 이동합니다."
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1400,6 +1400,9 @@ msgstr "개발자에게 알리기(_I)"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "디버깅(_D)"
+
+#~ msgid " domain %s"
+#~ msgstr " 도메인 %s"
 
 #~ msgid "Exit the test"
 #~ msgstr "테스트 끝내기"

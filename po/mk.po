@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2003-09-04 15:42+0200\n"
 "Last-Translator: Ivan Stojmirov <stojmir@linux.net.mk>\n"
 "Language-Team: Macedonian <gnomk-main@lists.sourceforge.net>\n"
@@ -508,25 +508,25 @@ msgstr "_Содржина"
 msgid "View help for this application"
 msgstr "Види ја помошта за оваа апликација"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Текст Под Икони"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Приоритет текст Пкрај Икони"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Само Икони"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Само Текст"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "Употреби преддефинирана работна површина (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -623,16 +623,18 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Вашата лозинка ќе биде испратена криптирана."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Потребна е автентикација"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
 msgstr ""
+"Вие мора да се најавите за да имате пристап \"%s\".\n"
+"%s"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, fuzzy, c-format
 msgid "You must log in to access %s\n"
 msgstr ""
@@ -1083,39 +1085,39 @@ msgstr ""
 "конфигурационата информација за %s. Некои од твоите конфигурациони "
 "подесувања може да не работат коректно."
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "URLто кое GnomeHRef го активира"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Текст"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "Текстот на копчето"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "Ставете крај на светскиот глад"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Боја на врска"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "Боја користена за исцртување на линкот"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Ова копче ќе те однесе до URLто кое е прикажано"
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."

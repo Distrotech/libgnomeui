@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-libs 1.2.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-02-25 00:09+0730\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@my-penguin.org>\n"
 "Language-Team: Malay <gabai-penyumbang@lists.sourceforge.net>\n"
@@ -573,26 +573,26 @@ msgstr "_Kandungan"
 msgid "View help for this application"
 msgstr "Lihat bantuan bagi aplikasi ini"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Teks di Bawah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Teks Prioriti di Sebelah Ikon"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Ikon Sahaja"
 
 # libgnomeui/gnome-stock.c:844
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Teks Sahaja"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "Guna default desktop (%s)"
 
 # libgnomeui/gnome-app-util.c:93
@@ -703,16 +703,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Katalaluan anda akan dihantar dengan pengenkripsian."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Authentikasi Diperlukan"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
-msgstr " domain %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "Anda mesti log masuk untuk mengakses %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Anda mesti log masuk untuk mengakses %s\n"
@@ -1190,41 +1190,41 @@ msgstr ""
 "Setengah tetapan konfigurasi mugnkin tak berkerja dengan betul"
 
 # libgnomeui/gnome-calculator.c:1080
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "URL yang diaktifkan oleh GnomeHRef"
 
 # libgnomeui/gnome-stock.c:844
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Teks"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "Teks pada butang"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "Berakhirnya kebuluran dunia"
 
 # libgnomeui/gnome-color-picker.c:313
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Warna pautan"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "Warna digunakan untuk melukis pautan"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Butang ini akan membawa anda ke URI yang dipaparkan."
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1558,6 +1558,9 @@ msgstr "_Maklum Pemaju"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_Nyahpepijat"
+
+#~ msgid " domain %s"
+#~ msgstr " domain %s"
 
 # libgnomeui/gnome-app-helper.c:160
 #~ msgid "Exit the test"

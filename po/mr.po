@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2002-06-08 14:30+0530\n"
 "Last-Translator: Jitendra Shah <jitendras@vsnl.com>\n"
 "Language-Team: Marathi <www.indictrans.org>\n"
@@ -612,30 +612,30 @@ msgstr "अनुक्रमणीका"
 msgid "View help for this application"
 msgstr "या कार्यक्रमाची मदतपुस्तिका पहा"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "चिन्हांखाली गद्य दाखवा "
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "चिन्हांच्या बाजुला प्राध्यान्यक्रमातिल गद्य दाखवा"
 
 # libgnomeui/gnome-app-helper.c:2564
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 #, fuzzy
 msgid "Icons Only"
 msgstr "फक्त चिन्ह दाखवा"
 
 # libgnomeui/gnome-app-helper.c:2565
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 #, fuzzy
 msgid "Text Only"
 msgstr "फक्त गद्य दाखवा"
 
 # libgnomeui/gnome-app-helper.c:2616
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "डेस्कटाॅपचे सर्वसाधानरण समायोजन वापरा(%s)"
 
 # libgnomeui/gnome-app-util.c:99
@@ -748,16 +748,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
-msgid " domain %s"
+msgid "You must log in to access %s domain %s\n"
 msgstr ""
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr ""
@@ -1302,47 +1302,47 @@ msgstr ""
 "शकनार नाही"
 
 # libgnomeui/gnome-href.c:118
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
 # libgnomeui/gnome-href.c:119
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "GnomeHRef ने कार्यान्वित केलेला URL"
 
 # libgnomeui/gnome-href.c:126
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "गद्य"
 
 # libgnomeui/gnome-href.c:127
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "बटनावरिल नाव"
 
 # libgnomeui/gnome-href.c:128
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "जागतीक उपासमार थांबवा"
 
 # libgnomeui/gnome-href.c:134
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 #, fuzzy
 msgid "Link color"
 msgstr "साखळिचा रंग"
 
 # libgnomeui/gnome-href.c:135
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 #, fuzzy
 msgid "Color used to draw the link"
 msgstr "साखळीसाठी वापरलेला रंग"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "हे बटन तुम्हाला त्या URI वर घेवुन जाइल जे तुम्हाला दाखवत आहे"
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 #, fuzzy
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"

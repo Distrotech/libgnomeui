@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-03-08 15:11+0200\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -498,25 +498,25 @@ msgstr "_Зьмест"
 msgid "View help for this application"
 msgstr "Паказаць даведку па гэтаму дастасаваньню"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Тэкст пад значкамі"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Тэкст па-за значкамі"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Толькі значкі"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Толькі тэкст"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "Выкарыстоўваць дапомнасьці стальца (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -613,16 +613,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Ваш пароль будзе пераданы ў зашыфраваным выглядзе."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Патрабуецца высьвятленьне асобы"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
-msgstr " маёнтак %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "Вы мусіце ўвайсьці, каб мець доступ да \"%s\"\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Вы мусіце ўвайсьці, каб мець доступ да \"%s\"\n"
@@ -1071,39 +1071,39 @@ msgstr ""
 "Адбылася памылка пад час загрузкі ці захаваньня даньняў наладакад %s. Пэўныя "
 "з усталёвак могуць ня дзейнічаць правільна."
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "URL, які GnomeHRef задзейнічае"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Тэкст"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "Тэкст на кнопке"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "Канец сусьветнага голаду"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Колер спасылкі"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "Колер, які выкарыстоўваецца для спасылкі"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Гэтая кнопка выкліча пераход да пазначанаму на ёй URI"
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1404,6 +1404,9 @@ msgstr "Пав_едаміць"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "Ад_ладзіць"
+
+#~ msgid " domain %s"
+#~ msgstr " маёнтак %s"
 
 #~ msgid "Exit the test"
 #~ msgstr "Выйсьці з праверкі"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-03-13 13:11+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -496,25 +496,25 @@ msgstr "_Sadržaj"
 msgid "View help for this application"
 msgstr "Pogledaj pomoć za ovaj program"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Tekst ispod sličica"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Tekst prioriteta kraj sličica"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Samo ikone"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Samo tekst"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "Koristi uobičajenu radnu površinu (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -611,16 +611,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Vaša lozinka će biti šifrirano prenesena."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Zahtjev za autentifikaciju obavezan"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
-msgstr " domena %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "Morate se prijaviti za pristup %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Morate se prijaviti za pristup %s\n"
@@ -1067,39 +1067,39 @@ msgstr ""
 "Dogodila se greška tijekom učitavanja ili spremanja informacija o postavkama "
 "za %s. Moguće je da neke od postavki neće ispravno raditi."
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "URL koji pokreće GnomeHRef"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Tekst"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "Tekst na gumbu"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "Završi World Hunger"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Boja veze"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "Boja koja se koristi za crtanje veze"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Ovaj gumb će vam uzeti prikazani URI."
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1401,6 +1401,9 @@ msgstr "_Obavjesti razvijatelje"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_Ispravljanje grešaka"
+
+#~ msgid " domain %s"
+#~ msgstr " domena %s"
 
 #~ msgid "Exit the test"
 #~ msgstr "Isključi ispit"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui2 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-02-23 17:51-0600\n"
 "Last-Translator: Dinesh Nadarajah <dinesh_list@sbcglobal.net>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -496,25 +496,25 @@ msgstr "_உள்ளடக்கங்கள்"
 msgid "View help for this application"
 msgstr "இன்நிரலுக்கான உதவியைப் பார்க்கவும்"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "குறும்படங்களுக்குக் கீழ் உரை"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "குறும்படங்களுக்கு அருகில் முன்னுரிமை உரை"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "குறும்படங்கள் மட்டும்"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "உரை மட்டும்"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "கொடாநிலை கணிமேசையைப் பயன்படுத்தவும் (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -611,16 +611,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "உங்கள் கடவுச்சொல் மறைக்குறியாக அனுப்பப்படும்."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "பெயர்-கடவுச்சொல் வேண்டும்"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
-msgstr " களம் %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "%s அணுகலுக்கு நீங்கள் கடவுச்சொல் வழங்கவேண்டும்\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "%s அணுகலுக்கு நீங்கள் கடவுச்சொல் வழங்கவேண்டும்\n"
@@ -1051,39 +1051,39 @@ msgid ""
 "Some of your configuration settings may not work properly."
 msgstr ""
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "இணைய அஞ்சல் [இ.அ] (URL)"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "GnomeHRef தொடக்கப்படும் இணைய அஞ்சல் (URL)"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "உரை"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "பொத்தான் மேல் உள்ள உரை"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "உகுகப் பசியை நீக்குக"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "இணைப்பின் வண்ணம்"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "இணைப்பை வரைவதட்கு பயண்படுத்தப்படும் வண்ணம்"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr ""
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1371,6 +1371,9 @@ msgstr "_நிரலருக்கு தெரிவிக்கவும்"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_பிழை நீக்கு"
+
+#~ msgid " domain %s"
+#~ msgstr " களம் %s"
 
 #~ msgid "Exit the test"
 #~ msgstr "பரிசோதனையிலிருந்து வெளியேறு"

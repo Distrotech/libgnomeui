@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-02-23 18:08+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -858,27 +858,27 @@ msgstr "_Περιεχόμενα"
 msgid "View help for this application"
 msgstr "Προβολή βοήθειας για αυτήν την εφαρμογή"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Κείμενο Κάτω από Εικονίδια"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Κείμενο Προτεραιότητας Δίπλα στα Εικονίδια"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Μόνο Εικονίδια"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Μόνο Κείμενο"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "Χρήση προεπιλεγμένης επιφάνειας εργασίας (%s)"
 
 #
@@ -1012,16 +1012,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Ο κωδικός σας θα αποσταλεί με κρυπτογράφηση."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Απαιτείται πιστοποίηση"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
-msgstr "τομέας %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "Θα πρέπει να συνδεθείτε για να έχετε πρόσβαση στο %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Θα πρέπει να συνδεθείτε για να έχετε πρόσβαση στο %s\n"
@@ -1579,11 +1579,11 @@ msgstr ""
 "Σφάλμα κατά την φόρτωση ή αποθήκευση πληροφοριών ρύθμισης για %s. Μερικές "
 "από τις ρυθμίσεις σας μπορεί να μη λειτουργούν σωστά."
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "Το URL που ενεργοποιεί το GnomeHRef"
 
@@ -1611,31 +1611,31 @@ msgstr "Το URL που ενεργοποιεί το GnomeHRef"
 #
 # #-#-#-#-#  screem-el.po (screem 1.0)  #-#-#-#-#
 #
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Κείμενο"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "Το κείμενο στο κουμπί"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "Τερματίστε την Παγκόσμια Πείνα"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Χρώμα συνδέσμου"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "Το χρώμα που χρησιμοποιείται για το σχεδιασμό του συνδέσμου"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Το κουμπί που θα σας πάει στο URI που προβάλλει."
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -2093,6 +2093,9 @@ msgstr "Ενημέ_ρωση των προγραμματιστών"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "Εκσ_φαλμάτωση"
+
+#~ msgid " domain %s"
+#~ msgstr "τομέας %s"
 
 # #-#-#-#-#  bonobo-el.po (bonobo 0.34)  #-#-#-#-#
 #

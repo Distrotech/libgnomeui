@@ -1,3 +1,24 @@
+libgnomeui 2.7.1
+----------------
+
+What's new since 2.6.1
+
+* Improvements:
+	- Update to automake 1.7 (James Henstridge)
+	- Icon list API additions (Damien Carbery)
+
+* Bug fixes:
+	- Authentication manager fixes (Fernando Herrera)
+
+	- Various fixes (Steve Chaplin, Torsten Schoenfeld, Anders Carlsson,
+			 Leena Gunda, Christian Rose, Fernando Herrera,
+		         Takao Fujiwara, Damien Carbery, Martin Wehner)
+
+* Translations:
+	- Added Turkmen translation (Gurban Mühemmet Tewekgeli)
+	- Various updated translations (bg, no, es, zh_CN, sk, sq, cs, 
+					en_CA, en_GB, ko)
+
 libgnomeui 2.6.1 "Magmoor"
 --------------------------
 

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-02-29 12:11+0100\n"
 "Last-Translator: Arafat Medini <lumina@silverpen.de>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -502,25 +502,25 @@ msgstr "ال_محتويات"
 msgid "View help for this application"
 msgstr "عرض المساعدة لهذا التطبيق"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "النص تحت الأيقونات"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "الأولوية للنصوص بجانب الأيقونات"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "أيقونات فقط"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "نص فقط"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "استخدم سطح المكتب الافتراضي (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -617,16 +617,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "سترسل كلمة سرك مشفرة."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "التوثيق مطلوب"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
-msgstr " النطاق %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "يجب عليك التسجيل للنفاذ إلى %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "يجب عليك التسجيل للنفاذ إلى %s\n"
@@ -1067,39 +1067,39 @@ msgstr ""
 "حدث خطأ أثناء تحميل أو حفظ معلومات اﻻعدادات لـ %s. قد لا تعمل بعض تعيينات "
 "إعداداتك بشكل سليم."
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "العنوان"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "العنوان الذي ينشطه GnomeHRef"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "نص"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "نص على الزر"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "فلننهي جوع العالم"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "لون الوصلة"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "اللون المستخدم في رسم الوصلة"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "سيأخذك هذا الزر إلى العنوان الذي يعرضه."
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1395,6 +1395,9 @@ msgstr "إ_بلاغ المطورين"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_تنقيح"
+
+#~ msgid " domain %s"
+#~ msgstr " النطاق %s"
 
 #~ msgid "Exit the test"
 #~ msgstr "خروج من التجربة"

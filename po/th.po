@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-02-28 01:00-0600\n"
 "Last-Translator: Paisa Seeluangsawat <paisa@users.sf.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
@@ -497,25 +497,25 @@ msgstr "เ_นื้อหา"
 msgid "View help for this application"
 msgstr "แสดงวิธีใช้โปรแกรมนี้"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "ข้อความล่างไอคอน"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "ข้อความสำคัญข้างไอคอน"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "ไอคอนเท่านั้น"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "ข้อความเท่านั้น"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "ใช้ค่าปริยายของพื้นโต๊ะ (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -612,16 +612,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "รหัสผ่านของคุณจะถูกเข้ารหัสก่อนส่งออกไป"
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "ต้องผ่านการตรวจสอบสิทธิ์ก่อน"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
-msgstr " โดเมน %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "คุณต้องเข้าระบบถึงจะสามารถใช้ %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "คุณต้องเข้าระบบถึงจะสามารถใช้ %s\n"
@@ -1054,39 +1054,39 @@ msgid ""
 msgstr ""
 "เกิดข้อผิดพลาด ขณะอ่านหรือบันทึกค่าปรับแต่งสำหรับ %s  ค่าปรับแต่งบางค่า อาจจะทำงานไม่ถูกต้อง"
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "URL ที่ GnomeHRef เรียกดู"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "ข้อความ"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "ข้อความในปุ่ม"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "ขจัดความอดอยาก"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "สีลิงก์"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "สีสำหรับแสดงลิงก์"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "ปุ่มนี้จะนำคุณไปยัง URI ที่แสดง"
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1380,6 +1380,9 @@ msgstr "แ_จ้งผู้เขียน"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_ดีบัก"
+
+#~ msgid " domain %s"
+#~ msgstr " โดเมน %s"
 
 #~ msgid "Exit the test"
 #~ msgstr "ออกจากการทดสอบ"

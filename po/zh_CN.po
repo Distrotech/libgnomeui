@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-07 15:22+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-05-10 01:10+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -147,7 +147,6 @@ msgstr "关于 %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "文件(_F)"
 
@@ -205,7 +204,6 @@ msgid "_Game"
 msgstr "游戏(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "帮助(_H)"
 
@@ -402,11 +400,11 @@ msgstr "配置应用程序"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "关于(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "关于此应用程序"
 
@@ -434,7 +432,7 @@ msgstr "创建一个新窗口"
 msgid "_Close This Window"
 msgstr "关闭此窗口(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "关闭当前窗口"
 
@@ -1463,9 +1461,8 @@ msgstr "通知开发者(_I)"
 msgid "_Debug"
 msgstr "调试(_D)"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "退出测试"
+#~ msgid "Exit the test"
+#~ msgstr "退出测试"
 
 #~ msgid " domain %s"
 #~ msgstr " 域 %s"

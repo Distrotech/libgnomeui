@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-20 00:17+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-04-06 17:17+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -505,25 +505,25 @@ msgstr "Å_dvins"
 msgid "View help for this application"
 msgstr "Vey l' aidance po ç' programe chal"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Tecse pa dzo les imådjetes"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Prumiristé å tecse purade k' åzès imådjetes"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Rén k' les imådjetes"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Rén kel tecse"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "Eployî les prémetowès valixhances do scribanne (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -620,16 +620,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Vosse sicret serè-st evoyî ecripté."
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:295
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Otintifiaedje obligatwere"
 
 #: libgnomeui/gnome-authentication-manager.c:288
-#, c-format
-msgid " domain %s"
-msgstr " dominne %s"
+#, fuzzy, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "Vos vs divoz elodjî po-z aveur accès a %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:291
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Vos vs divoz elodjî po-z aveur accès a %s\n"
@@ -1072,39 +1072,39 @@ msgstr ""
 "Åk n' a nén stî tot tcherdjant ou schapant des informåcions d' apontiaedje "
 "po %s. Sacwants di vos apontiaedjes polèt èn nén ovrer comifåt."
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "Hårdêye"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "Li hårdêye ki GnomeHRef mete en alaedje"
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Tecse"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "Li tecse el boton"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "Fini avou l' fwin dins l' monde"
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Coleur do loyén"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "Coleur eployeye po dessiner l' loyén"
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Ci boton chal vos frè potchî al hårdêye k' i mostere."
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1409,6 +1409,9 @@ msgstr "El d_ire åzès programeus"
 #: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_Disbugaedje"
+
+#~ msgid " domain %s"
+#~ msgstr " dominne %s"
 
 #~ msgid "Exit the test"
 #~ msgstr "Moussî foû do sayaedje"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ňPACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-02 20:07+0200\n"
+"POT-Creation-Date: 2004-05-31 23:58+0200\n"
 "PO-Revision-Date: 2004-05-25 17:46+0330\n"
 "Last-Translator: Gurban Mühemmet Tewekgeli <gmtavakkoli@yahoo.com>\n"
 "Language-Team: Turkmen <kakilikgroup@yahoo.com>\n"
@@ -142,7 +142,6 @@ msgstr "%s barada"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Faýl"
 
@@ -200,7 +199,6 @@ msgid "_Game"
 msgstr "_Oýunlr"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ýardam"
 
@@ -391,11 +389,11 @@ msgstr "Programi tenzim et"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "_Barada"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "Bu progrma barada"
 
@@ -422,7 +420,7 @@ msgstr "Täze äpişge bejer"
 msgid "_Close This Window"
 msgstr "Bu _Äpişgeni Ýap"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "Bu äpişgeni ýap"
 
@@ -502,25 +500,25 @@ msgstr "_Mazmunlar"
 msgid "View help for this application"
 msgstr "Bu program üçin ýardam görkez"
 
-#: libgnomeui/gnome-app-helper.c:2567
+#: libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "Metin Tymsallaryň Astinda"
 
-#: libgnomeui/gnome-app-helper.c:2568
+#: libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "Möhüm Metinler Tymsallaryň Astinda"
 
-#: libgnomeui/gnome-app-helper.c:2569
+#: libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "Diňe Tymsallar"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "Diňe Metin"
 
-#: libgnomeui/gnome-app-helper.c:2631
-#, c-format
-msgid "Use desktop default (%s)"
+#: libgnomeui/gnome-app-helper.c:2634
+#, fuzzy, c-format
+msgid "Use Desktop Default (%s)"
 msgstr "Desktapiň öň bellenenni ullan (%s)"
 
 #: libgnomeui/gnome-app-util.c:99
@@ -615,16 +613,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr ""
 
 #: libgnomeui/gnome-authentication-manager.c:70
-#: libgnomeui/gnome-authentication-manager.c:287
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr ""
 
-#: libgnomeui/gnome-authentication-manager.c:280
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
-msgid " domain %s"
+msgid "You must log in to access %s domain %s\n"
 msgstr ""
 
-#: libgnomeui/gnome-authentication-manager.c:283
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr ""
@@ -1053,39 +1051,39 @@ msgid ""
 "Some of your configuration settings may not work properly."
 msgstr ""
 
-#: libgnomeui/gnome-href.c:122
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr ""
 
-#: libgnomeui/gnome-href.c:130
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "Metin"
 
-#: libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "Matin batun üstinde"
 
-#: libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr ""
 
-#: libgnomeui/gnome-href.c:138
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "Baglaýyş renki"
 
-#: libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr ""
 
-#: libgnomeui/gnome-href.c:170
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr ""
 
-#: libgnomeui/gnome-href.c:393
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1358,18 +1356,14 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr ""
 
-#: libgnomeui/gnome_segv.c:154
+#: libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
 msgstr "Programi _Ýene Başla"
 
-#: libgnomeui/gnome_segv.c:166
+#: libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
 msgstr ""
 
-#: libgnomeui/gnome_segv.c:177
+#: libgnomeui/gnome_segv.c:176
 msgid "_Debug"
-msgstr ""
-
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
 msgstr ""
