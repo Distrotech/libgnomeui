@@ -2,7 +2,8 @@
 
 libgnomeuiincludedir = $(includedir)/libgnomeui
 
-INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) @SUPPORTINCS@
+INCLUDES = -I.. -I$(srcdir)/.. -I$(includedir) @SUPPORTINCS@ \
+	-I$(top_srcdir)/support
 
 lib_LTLIBRARIES = libgnomeui.la
 noinst_PROGRAMS = ted_demo stock_demo
