@@ -576,13 +576,24 @@ clear_calc(GtkWidget *w, gpointer data)
 	return TRUE;
 }
 
+
+/**
+ * gnome_calculator_clear
+ * @gc: Pointer to GNOME calculator widget.
+ * @reset: %FALSE to zero, %TRUE to reset calculator completely
+ *
+ * Description:
+ * Resets the calculator back to zero.  If @reset is %TRUE, results
+ * stored in memory and the calculator mode are cleared also.
+ **/
+
 void
-gnome_calculator_clear(GnomeCalculator *gc, gint reset)
+gnome_calculator_clear(GnomeCalculator *gc, const gboolean reset)
 {
-	if(reset)
-		reset_calc(NULL,gc);
+	if (reset)
+		reset_calc(NULL, gc);
 	else
-		clear_calc(NULL,gc);
+		clear_calc(NULL, gc);
 }
 
 static gint
@@ -783,6 +794,17 @@ set_result_to(GnomeCalculator *gc, gdouble result)
 
 	return old;
 }
+
+
+/**
+ * gnome_calculator_set
+ * @gc: Pointer to GNOME calculator widget.
+ * @result: New value of calculator buffer.
+ *
+ * Description:
+ * Sets the value stored in the calculator's result buffer to the given
+ * @result.
+ **/
 
 void
 gnome_calculator_set(GnomeCalculator *gc, gdouble result)
@@ -1176,6 +1198,18 @@ gnome_calculator_init (GnomeCalculator *gc)
 	gtk_table_attach_defaults(GTK_TABLE(table),gc->invert_button,0,1,1,2);
 }
 
+
+/**
+ * gnome_calculator_new
+ *
+ * Description:
+ * Creates a calculator widget, a window with all the common buttons and
+ * functions found on a standard pocket calculator.
+ *
+ * Returns:
+ * Pointer to newly-created calculator widget.
+ **/
+
 GtkWidget *
 gnome_calculator_new (void)
 {
@@ -1202,3 +1236,24 @@ gnome_calculator_destroy (GtkObject *object)
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
+
+/* API docs for macros in gnome-calculator.h */
+
+/**
+ * gnome_calculator_get_result
+ * @gc: Pointer to GNOME calculator widget
+ *
+ * Returns:
+ * Value currently stored in calculator buffer.
+ **/
+
+/* MACDOC
+
+gdouble
+gnome_calculator_get_result (GnomeCalculator *gc)
+{
+	I am really a macro defined in gnome-calculator.h
+}
+
+END MACDOC */
+
