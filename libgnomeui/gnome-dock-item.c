@@ -931,7 +931,7 @@ gnome_dock_item_delete_event (GtkWidget *widget,
  * 
  * Returns: A new GnomeDockItem widget.
  **/
-static void
+void
 gnome_dock_item_construct (GnomeDockItem *new,
 			   const gchar *name,
 			   GnomeDockItemBehavior behavior)
