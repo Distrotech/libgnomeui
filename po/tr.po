@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2003-12-08 19:36+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-28 21:47+0000\n"
 "PO-Revision-Date: 2003-02-08 01:05+0200\n"
 "Last-Translator: Arman Aksoy (Armish) <armish@linux-sevenler.de>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
@@ -140,6 +141,7 @@ msgstr "%s Hakkında"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Dosya"
 
@@ -197,6 +199,7 @@ msgid "_Game"
 msgstr "_Oyun"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Yardım"
 
@@ -387,11 +390,11 @@ msgstr "Uygulamayı yapılandır"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Hakkında"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Bu program hakkında"
 
@@ -418,7 +421,7 @@ msgstr "Yeni bir pencere oluşturur"
 msgid "_Close This Window"
 msgstr "_Bu Pencereyi Kapat"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Pencereyi kapat"
 
@@ -1380,11 +1383,12 @@ msgid "Please visit the GNOME Application Crash page for more information"
 msgstr ""
 "Lütfen ayrıntılı bilgi için Gnome Uygulama göçmesi sayfasını ziyaret edin"
 
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Testten çık"
+
 #~ msgid "_Credits"
 #~ msgstr "_Geliştirenler"
-
-#~ msgid "Exit the test"
-#~ msgstr "Testten çık"
 
 #~ msgid "Find _Again"
 #~ msgstr "_Yeniden Bul"
