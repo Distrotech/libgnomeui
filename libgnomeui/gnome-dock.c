@@ -73,8 +73,6 @@ static void     gnome_dock_size_allocate       (GtkWidget *widget,
                                                 GtkAllocation *allocation);
 static void     gnome_dock_map                 (GtkWidget *widget);
 static void     gnome_dock_unmap               (GtkWidget *widget);
-static gint     gnome_dock_expose              (GtkWidget *widget,
-                                                GdkEventExpose *event);
 static void     gnome_dock_add                 (GtkContainer *container,
                                                 GtkWidget *child);
 static void     gnome_dock_remove              (GtkContainer *container,
@@ -104,10 +102,6 @@ static void     unmap_widget                     (GtkWidget *w);
 static void     unmap_widget_foreach             (gpointer data,
                                                 gpointer user_data);
 static void     unmap_band_list                  (GList *list);
-static void     expose_widget                  (GtkWidget *widget,
-                                                GdkEventExpose *event);
-static void     expose_band_list               (GList *list,
-                                                GdkEventExpose *event);
 static gboolean remove_from_band_list          (GList **list,
                                                 GnomeDockBand *child);
 static void     forall_helper                  (GList *list,
@@ -188,7 +182,6 @@ gnome_dock_class_init (GnomeDockClass *class)
   widget_class->size_allocate = gnome_dock_size_allocate;
   widget_class->map = gnome_dock_map;
   widget_class->unmap = gnome_dock_unmap;
-  widget_class->expose_event = gnome_dock_expose;
 
   container_class->add = gnome_dock_add;
   container_class->remove = gnome_dock_remove;
@@ -533,53 +526,6 @@ gnome_dock_unmap (GtkWidget *widget)
 
   if (GTK_WIDGET_CLASS (parent_class)->unmap != NULL)
     (* GTK_WIDGET_CLASS (parent_class)->unmap) (widget);
-}
-
-
-
-static void
-expose_widget (GtkWidget *widget, GdkEventExpose *event)
-{
-  if (widget != NULL && GTK_WIDGET_NO_WINDOW (widget))
-    {
-      GdkEventExpose child_event;
-
-      child_event = *event;
-      if (gtk_widget_intersect (widget, &event->area, &child_event.area))
-        gtk_widget_event (widget, (GdkEvent *) &child_event);
-    }
-}
-
-static void
-expose_band_list (GList *list, GdkEventExpose *event)
-{
-  while (list != NULL)
-    {
-      expose_widget (GTK_WIDGET (list->data), event);
-
-      list = list->next;
-    }
-}
-
-static gint
-gnome_dock_expose (GtkWidget *widget, GdkEventExpose *event)
-{
-  DEBUG (("Entering function"));
-  if (GTK_WIDGET_DRAWABLE (widget))
-    {
-      GnomeDock *dock;
-
-      dock = GNOME_DOCK (widget);
-
-      expose_widget (dock->client_area, event);
-
-      expose_band_list (dock->top_bands, event);
-      expose_band_list (dock->bottom_bands, event);
-      expose_band_list (dock->left_bands, event);
-      expose_band_list (dock->right_bands, event);
-    }
-
-  return FALSE;
 }
 
 

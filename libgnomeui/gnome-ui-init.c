@@ -128,9 +128,17 @@ static struct poptOption gtk_options [] = {
 	{ NULL, '\0', 0, NULL, 0}
 };
 
+static GnomeModuleRequirement gtk_requirements[] = {
+	/* We require libgnome setup to be run first as it
+	 * sets some strings for us, and inits user
+	 * directories */
+        {VERSION, &libgnome_module_info},
+        {NULL, NULL}
+};
+
 GnomeModuleInfo gtk_module_info = {
         "gtk", "1.2.5" /* aargh broken! */, "GTK",
-        NULL,
+        gtk_requirements,
         gtk_pre_args_parse, gtk_post_args_parse,
         gtk_options
 };
@@ -231,6 +239,8 @@ static void libgnomeui_segv_setup(gboolean post_arg_parse);
 static GnomeModuleRequirement libgnomeui_requirements[] = {
         {VERSION, &libgnome_module_info},
         {"1.2.5", &gtk_module_info},
+        {VERSION, &gnome_client_module_info},
+        {VERSION, &gnome_gconf_module_info},
         {NULL, NULL}
 };
 

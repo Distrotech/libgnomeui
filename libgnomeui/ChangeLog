@@ -1,3 +1,19 @@
+Sun Mar 25 02:13:43 2001  George Lebl <jirka@5z.com>
+
+	* gnome-app-helper.c: gconf_client is now a GObject, not GtkObject
+
+	* gnome-dock-band.c, gnome-dock-item.c, gnome-dock.c,
+	  gnome-druid-page.c, gnome-druid.c: synthesizing GDK_EXPOSE events
+	  apparently no longer works, what's more all this expose stuff is
+	  now handled by GtkContainer itself, so remove the redundant code
+	  and call the parent handler from expose functions that are left
+
+	* gnome-dock-item.c:  First check if "is_floating" property exists
+	  before settings it
+
+	* gnome-init.c:  the gtk module require libgnome module, the
+	  libgnomeui module requires the client and gconf modules
+
 Sat Mar 24 23:55:06 2001  George Lebl <jirka@5z.com>
 
 	* gnome-animator.c: include string.h to fix 64bitness

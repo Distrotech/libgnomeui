@@ -216,8 +216,6 @@ static gint
 gnome_druid_page_expose (GtkWidget               *widget,
 			 GdkEventExpose          *event)
 {
-	GdkEventExpose child_event;
-
 	g_return_val_if_fail (widget != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_DRUID_PAGE (widget), FALSE);
 	g_return_val_if_fail (event != NULL, FALSE);
@@ -226,11 +224,8 @@ gnome_druid_page_expose (GtkWidget               *widget,
 		gnome_druid_page_paint (widget, &event->area);
 
 	if (GTK_WIDGET_DRAWABLE (widget)) {
-		child_event = *event;
-		if (GTK_BIN (widget)->child && GTK_WIDGET_NO_WINDOW (GTK_BIN (widget)->child) &&
-		    gtk_widget_intersect (GTK_BIN (widget)->child, &event->area, &child_event.area)) {
-			gtk_widget_event (GTK_BIN (widget)->child, (GdkEvent*) &child_event);
-		}
+		return GNOME_CALL_PARENT_HANDLER_WITH_DEFAULT 
+			(GTK_WIDGET_CLASS, expose_event, (widget, event), FALSE);
 	}
 
 	return FALSE;

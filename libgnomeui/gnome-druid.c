@@ -481,7 +481,6 @@ gnome_druid_expose (GtkWidget      *widget,
 {
 	GnomeDruid *druid;
 	GtkWidget *child;
-	GdkEventExpose child_event;
 	GList *children;
 
 	g_return_val_if_fail (widget != NULL, FALSE);
@@ -490,39 +489,23 @@ gnome_druid_expose (GtkWidget      *widget,
 
 	if (GTK_WIDGET_DRAWABLE (widget)) {
 		druid = GNOME_DRUID (widget);
-		child_event = *event;
 		children = druid->_priv->children;
 
 		while (children) {
 			child = GTK_WIDGET (children->data);
 			children = children->next;
 
-			if (GTK_WIDGET_DRAWABLE (child) &&
-			    GTK_WIDGET_NO_WINDOW (child) &&
-			    gtk_widget_intersect (child, &event->area, &child_event.area)) {
-				gtk_widget_event (child, (GdkEvent*) &child_event);
-			}
+			gtk_container_propagate_expose (GTK_CONTAINER (widget),
+							child, event);
 		}
-		child = druid->back;
-		if (GTK_WIDGET_DRAWABLE (child) &&
-		    GTK_WIDGET_NO_WINDOW (child) &&
-		    gtk_widget_intersect (child, &event->area, &child_event.area))
-			gtk_widget_event (child, (GdkEvent*) &child_event);
-		child = druid->next;
-		if (GTK_WIDGET_DRAWABLE (child) &&
-		    GTK_WIDGET_NO_WINDOW (child) &&
-		    gtk_widget_intersect (child, &event->area, &child_event.area))
-			gtk_widget_event (child, (GdkEvent*) &child_event);
-		child = druid->cancel;
-		if (GTK_WIDGET_DRAWABLE (child) &&
-		    GTK_WIDGET_NO_WINDOW (child) &&
-		    gtk_widget_intersect (child, &event->area, &child_event.area))
-			gtk_widget_event (child, (GdkEvent*) &child_event);
-		child = druid->finish;
-		if (GTK_WIDGET_DRAWABLE (child) &&
-		    GTK_WIDGET_NO_WINDOW (child) &&
-		    gtk_widget_intersect (child, &event->area, &child_event.area))
-			gtk_widget_event (child, (GdkEvent*) &child_event);
+		gtk_container_propagate_expose (GTK_CONTAINER (widget),
+						druid->back, event);
+		gtk_container_propagate_expose (GTK_CONTAINER (widget),
+						druid->next, event);
+		gtk_container_propagate_expose (GTK_CONTAINER (widget),
+						druid->cancel, event);
+		gtk_container_propagate_expose (GTK_CONTAINER (widget),
+						druid->finish, event);
 	}
 	return FALSE;
 }

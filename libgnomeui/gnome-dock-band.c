@@ -25,6 +25,7 @@
 #include "gnome-dock.h"
 #include "gnome-dock-band.h"
 #include "gnome-dock-item.h"
+#include "gnome-macros.h"
 
 
 
@@ -68,9 +69,6 @@ static void     gnome_dock_band_size_allocate (GtkWidget *widget,
 
 static void     gnome_dock_band_map           (GtkWidget *widget);
 static void     gnome_dock_band_unmap         (GtkWidget *widget);
-
-static gint     gnome_dock_band_expose        (GtkWidget *widget,
-                                               GdkEventExpose *event);
 
 static void     gnome_dock_band_add           (GtkContainer *container,
                                                GtkWidget *child);
@@ -168,7 +166,6 @@ gnome_dock_band_class_init (GnomeDockBandClass *class)
 
   widget_class->map = gnome_dock_band_map;
   widget_class->unmap = gnome_dock_band_unmap;
-  widget_class->expose_event = gnome_dock_band_expose;
   widget_class->size_request = gnome_dock_band_size_request;
   widget_class->size_allocate = gnome_dock_band_size_allocate;
 
@@ -599,35 +596,6 @@ gnome_dock_band_unmap (GtkWidget *widget)
       if (GTK_WIDGET_VISIBLE (c->widget) && GTK_WIDGET_MAPPED (c->widget))
         gtk_widget_unmap (c->widget);
     }
-}
-
-static gint
-gnome_dock_band_expose (GtkWidget *widget, GdkEventExpose *event)
-{
-  if (GTK_WIDGET_DRAWABLE (widget))
-    {
-      GList *lp;
-      GnomeDockBand *band;
-      GdkEventExpose child_event;
-
-      band = GNOME_DOCK_BAND (widget);
-      child_event = *event;
-
-      for (lp = band->children; lp != NULL; lp = lp->next)
-        {
-          GnomeDockBandChild *c;
-          GtkWidget *w;
-
-          c = lp->data;
-
-          w = c->widget;
-          if (GTK_WIDGET_NO_WINDOW (w)
-              && gtk_widget_intersect (w, &event->area, &child_event.area))
-            gtk_widget_event (w, (GdkEvent *) &child_event);
-        }
-    }
-
-  return FALSE;
 }
 
 

@@ -33,6 +33,7 @@
 #include "gnome-dock-item.h"
 #include "gnome-cursors.h"
 #include "gnome-i18nP.h"
+#include "gnome-macros.h"
 
 struct _GnomeDockItemPrivate
 {
@@ -93,9 +94,7 @@ static void gnome_dock_item_add            (GtkContainer      *container,
 static void gnome_dock_item_remove         (GtkContainer      *container,
                                             GtkWidget         *widget);
 static void gnome_dock_item_paint          (GtkWidget         *widget,
-                                            GdkEventExpose    *event,
-                                            GdkRectangle      *area);
-static void gnome_dock_item_draw           (GtkWidget         *widget);
+                                            GdkEventExpose    *event);
 static gint gnome_dock_item_expose         (GtkWidget         *widget,
                                             GdkEventExpose    *event);
 static gint gnome_dock_item_button_changed (GtkWidget         *widget,
@@ -779,8 +778,7 @@ draw_textured_frame (GtkWidget *widget, GdkWindow *window, GdkRectangle *rect, G
 
 static void
 gnome_dock_item_paint (GtkWidget      *widget,
-                       GdkEventExpose *event,
-                       GdkRectangle   *area)
+                       GdkEventExpose *event)
 {
   GtkBin *bin;
   GnomeDockItem *di;
@@ -819,7 +817,7 @@ gnome_dock_item_paint (GtkWidget      *widget,
                   di->bin_window,
                   GTK_WIDGET_STATE (widget),
                   di->shadow_type,
-                  area, widget,
+                  NULL, widget,
                   "dockitem_bin",
                   0, 0, -1, -1);
   else
@@ -852,63 +850,14 @@ gnome_dock_item_paint (GtkWidget      *widget,
           rect.height = DRAG_HANDLE_SIZE;
         }
 
-      if (gdk_rectangle_intersect (event ? &event->area : area, &rect, &dest))
+      dest = rect;
+
+      if (event == NULL ||
+	  gdk_rectangle_intersect (&event->area, &rect, &dest))
 	draw_textured_frame (widget, di->bin_window, &rect,
 			     GTK_SHADOW_OUT,
-			     event ? &event->area : area);
+			     &dest);
     }    
-  
-  if (bin->child && GTK_WIDGET_VISIBLE (bin->child))
-    {
-      GdkRectangle child_area;
-      GdkEventExpose child_event;
-
-      if (!event) /* we were called from draw() */
-	{
-	  if (gtk_widget_intersect (bin->child, area, &child_area))
-	    gtk_widget_draw (bin->child, &child_area);
-	}
-      else /* we were called from expose() */
-	{
-	  child_event = *event;
-	  
-	  if (GTK_WIDGET_NO_WINDOW (bin->child) &&
-	      gtk_widget_intersect (bin->child, &event->area, &child_event.area))
-	    gtk_widget_event (bin->child, (GdkEvent *) &child_event);
-	}
-    }
-}
-
-static void
-gnome_dock_item_draw (GtkWidget    *widget)
-{
-  GnomeDockItem *di;
-
-  g_return_if_fail (widget != NULL);
-  g_return_if_fail (GNOME_IS_DOCK_ITEM (widget));
-
-  di = GNOME_DOCK_ITEM (widget);
-
-  if (GTK_WIDGET_DRAWABLE (widget))
-    {
-      if (di->is_floating)
-	{
-          GdkRectangle r;
-
-	  /* The area parameter does not make sense in this case, so
-	     we repaint everything.  */
-	  r.x = 0;
-	  r.y = 0;
-	  r.width = (2 * GTK_CONTAINER (di)->border_width
-                     + DRAG_HANDLE_SIZE);
-	  r.height = r.width + GTK_BIN (di)->child->allocation.height;
-	  r.width += GTK_BIN (di)->child->allocation.width;
-
-	  gnome_dock_item_paint (widget, NULL, &r);
-	}
-      else
-	gnome_dock_item_paint (widget, NULL, NULL);
-    }
 }
 
 static gint
@@ -920,8 +869,14 @@ gnome_dock_item_expose (GtkWidget      *widget,
   g_return_val_if_fail (event != NULL, FALSE);
 
   if (GTK_WIDGET_DRAWABLE (widget) && event->window != widget->window)
-    gnome_dock_item_paint (widget, event, NULL);
-  
+    {
+      gnome_dock_item_paint (widget, event);
+
+      return GNOME_CALL_PARENT_HANDLER_WITH_DEFAULT (GTK_WIDGET_CLASS,
+						     expose_event,
+						     (widget, event), FALSE);
+    }
+
   return FALSE;
 }
 
@@ -1067,9 +1022,10 @@ gnome_dock_item_set_floating (GnomeDockItem *item, gboolean val)
   /* If there is a child and it supports the 'is_floating' flag
    * set that too.
    */
-  if (item->bin.child != NULL) {
+  if (item->bin.child != NULL &&
+      g_object_class_find_property (G_OBJECT_GET_CLASS (item->bin.child),
+				    "is_floating") != NULL) {
     GValue value = { 0, };
-
     g_value_init (&value, G_TYPE_BOOLEAN);
     g_value_set_boolean (&value, val);
     g_object_set_property (G_OBJECT (item->bin.child), "is_floating", &value);
@@ -1378,7 +1334,7 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
   gtk_widget_size_allocate (GTK_WIDGET (item), &allocation);
 
   gdk_window_hide (GTK_WIDGET (item)->window);
-  gnome_dock_item_draw (GTK_WIDGET (item));
+  gtk_widget_queue_draw (GTK_WIDGET (item));
 
   gdk_window_set_transient_for(item->float_window,
                                gdk_window_get_toplevel(GTK_WIDGET (item)->window));

@@ -2520,9 +2520,9 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
 
         conf = gnome_get_gconf_client();
 
-        gtk_object_ref(GTK_OBJECT(conf));
+        g_object_ref (G_OBJECT (conf));
         gtk_object_set_data_full(GTK_OBJECT(toolbar), gnome_app_helper_gconf_client,
-                                 conf, (GtkDestroyNotify)gtk_object_unref);
+                                 conf, (GtkDestroyNotify)g_object_unref);
         
         /* Attach GConf settings */
 
@@ -2530,9 +2530,9 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                 gboolean bevels = TRUE;
                 guint notify_id;
 
-		gtk_object_ref(GTK_OBJECT(conf));
+		g_object_ref (G_OBJECT (conf));
 		gtk_object_set_data_full(GTK_OBJECT(dock_item), gnome_app_helper_gconf_client,
-					 conf, (GtkDestroyNotify)gtk_object_unref);
+					 conf, (GtkDestroyNotify)g_object_unref);
                 
                 bevels = gconf_client_get_bool(conf,
                                                "/desktop/gnome/toolbars/bevels",
