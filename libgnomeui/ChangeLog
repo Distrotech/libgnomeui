@@ -1,3 +1,7 @@
+Wed Jul 28 03:14:49 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap-entry.c: fix typo in the inline docs
+
 1999-07-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c: Updated all documentation comments.  All

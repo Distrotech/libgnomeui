@@ -567,7 +567,7 @@ gnome_pixmap_entry_set_preview_size(GnomePixmapEntry *pentry,
 }
 
 /**
- * gnome_pixmap_entry_get_filaname:
+ * gnome_pixmap_entry_get_filename:
  * @pentry: the GnomePixmapEntry to work with
  *
  * Description: Gets the file name of the image if it was possible
