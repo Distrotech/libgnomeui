@@ -1,13 +1,13 @@
 # traditional Chinese translation of libgnomeui.
-# Copyright (C) 2001-2003 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2002, 2003 Free Software Foundation, Inc.
 # Joe Man <trmetal@yahoo.com.hk>, 2001-2002.
 # Abel Cheung <maddog@linux.org.hk>, 2002-2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.2.0.1\n"
-"POT-Creation-Date: 2003-03-27 13:52+0100\n"
-"PO-Revision-Date: 2003-02-01 02:13+0800\n"
+"Project-Id-Version: libgnomeui 2.3.0\n"
+"POT-Creation-Date: 2003-05-17 16:41+0800\n"
+"PO-Revision-Date: 2003-05-17 16:40+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr "版權資訊字串"
 
 #: libgnomeui/gnome-about.c:368
 msgid "Copyright information for the program"
-msgstr "此程式的版權資訊"
+msgstr "該程式的版權資訊"
 
 #: libgnomeui/gnome-about.c:375
 msgid "Comments string"
@@ -65,7 +65,7 @@ msgstr "備註字串"
 
 #: libgnomeui/gnome-about.c:376
 msgid "Comments about the program"
-msgstr "有關本程式的說明文字"
+msgstr "有關該程式的說明文字"
 
 #: libgnomeui/gnome-about.c:382
 msgid "Authors"
@@ -114,7 +114,7 @@ msgstr "標誌"
 
 #: libgnomeui/gnome-about.c:414
 msgid "A logo for the about box"
-msgstr "顯示程式資訊的對話窗中使用的標誌"
+msgstr "顯示程式資訊的對話方塊中使用的標誌"
 
 #: libgnomeui/gnome-about.c:493
 #, c-format
@@ -143,33 +143,33 @@ msgstr "狀態列的互動性"
 
 #: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
-msgstr "要求狀態列所表現的互動性。"
+msgstr "指定狀態列可否接受用戶輸入。"
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
-msgstr "指定作業階段管理程序的代碼"
+msgstr "指定作業階段管理的識別碼"
 
-#: libgnomeui/gnome-client.c:860
+#: libgnomeui/gnome-client.c:863
 msgid "ID"
-msgstr "代碼"
+msgstr "識別碼"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
-msgstr "指定已儲存的設定檔的前置字串"
+msgstr "指定組態檔的前置字串"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:866
 msgid "PREFIX"
 msgstr "前置字串"
 
-#: libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
-msgstr "不連接到作業階段管理程式"
+msgstr "不連接到作業階段總管"
 
-#: libgnomeui/gnome-client.c:972
+#: libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "作業階段管理"
 
-#: libgnomeui/gnome-client.c:2470
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "取消登出"
 
@@ -183,7 +183,7 @@ msgstr "色彩選擇元件"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr "開啟用來選定顏色的對話窗"
+msgstr "開啟用來選取顏色的對話方塊"
 
 #: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -211,7 +211,7 @@ msgstr "時間下限"
 
 #: libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
-msgstr "彈出式時間元件中會顯示的最早時間"
+msgstr "時間選擇元件中第一個顯示的時間"
 
 #: libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
@@ -219,7 +219,7 @@ msgstr "時間上限"
 
 #: libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
-msgstr "彈出式時間元件中會顯示的最後時間"
+msgstr "時間選擇元件中最後一個顯示的時間"
 
 #: libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
@@ -269,7 +269,7 @@ msgstr "精靈的標題"
 
 #: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
-msgstr "標誌圖像"
+msgstr "標誌圖片"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
@@ -367,7 +367,7 @@ msgstr "URL"
 
 #: libgnomeui/gnome-href.c:123
 msgid "The URL that GnomeHRef activates"
-msgstr "鏈結元件 (GnomeHRef) 所啟動的 URL"
+msgstr "GnomeHRef(鏈結元件)所啟動的 URL"
 
 #: libgnomeui/gnome-href.c:130
 msgid "Text"
@@ -379,7 +379,7 @@ msgstr "按鈕中顯示的文字"
 
 #: libgnomeui/gnome-href.c:132
 msgid "End World Hunger"
-msgstr "結束世界飢荒"
+msgstr "結束全球飢荒"
 
 #: libgnomeui/gnome-href.c:138
 msgid "Link color"
@@ -416,7 +416,7 @@ msgstr "GNOME 圖形界面函式庫"
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:617
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "發生了非常嚴重的錯誤；無法顯示錯誤對話窗\n"
+msgstr "發生了非常嚴重的錯誤；無法顯示錯誤訊息對話方塊\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:631
@@ -425,7 +425,7 @@ msgid ""
 "Cannot display crash dialog\n"
 msgstr ""
 "程式記憶體區段錯誤！\n"
-"無法顯示錯誤對話窗\n"
+"無法顯示錯誤訊息對話方塊\n"
 
 #: libgnomeui/gnome_segv.c:100
 #, c-format
@@ -436,10 +436,10 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"GNOME 作業階段管理程式 (進程編號 %d) 不正常終止，\n"
+"GNOME 作業階段總管 (進程編號 %d) 不正常終止，\n"
 "原因是出現嚴重的錯誤 (%s)。\n"
-"當關閉此對話窗時，所有程式都會關閉，並且今次的作業階段也會終止。\n"
-"請在關閉此對話窗前儲存所有資料。"
+"當關閉本對話方塊後，所有程式都會關閉，並且今次的作業階段也會終止。\n"
+"請在關閉本對話方塊前儲存所有資料。"
 
 #: libgnomeui/gnome_segv.c:110
 #, c-format
@@ -518,6 +518,7 @@ msgstr "項目二的提示"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "檔案(_F)"
 
@@ -535,11 +536,11 @@ msgstr "編輯(_E)/"
 
 #: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "檢視(_V)"
+msgstr "顯示(_V)"
 
 #: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr "檢視(_V)/"
+msgstr "顯示(_V)/"
 
 #: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
@@ -575,6 +576,7 @@ msgid "_Game"
 msgstr "遊戲(_G)"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "求助(_H)"
 
@@ -634,7 +636,7 @@ msgstr "列印設定(_E)..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "設定目前印表機的頁面列印內容"
+msgstr "修改目前印表機的頁面列印設定"
 
 #. Close
 #: libgnomeui/gnome-app-helper.c:142
@@ -683,7 +685,7 @@ msgstr "貼上(_P)"
 
 #: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr "貼上剪貼板中的內容"
+msgstr "貼上剪貼簿中的內容"
 
 #. Clear
 #: libgnomeui/gnome-app-helper.c:171
@@ -710,7 +712,7 @@ msgstr "取消復原(_R)"
 
 #: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "重複進行上一個操作程序"
+msgstr "重複進行剛復原的操作程序"
 
 #. Find
 #: libgnomeui/gnome-app-helper.c:186
@@ -765,11 +767,11 @@ msgstr "修改有關本程式的設定"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "關於(_A)"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "顯示有關本程式的資訊"
 
@@ -796,7 +798,7 @@ msgstr "顯示新的視窗"
 msgid "_Close This Window"
 msgstr "關閉本視窗(_C)"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "關閉目前的視窗"
 
@@ -935,7 +937,7 @@ msgstr " ─ 確定？ (yes 或 no)"
 
 #: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
-msgstr "進度對話盒"
+msgstr "進度對話方塊"
 
 #: libgnomeui/gnome-app.c:153
 msgid "App ID"
@@ -969,11 +971,11 @@ msgstr "代表某檔案項目的獨有識別碼。它是在儲存檔案紀錄清
 
 #: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
-msgstr "瀏覽檔案對話窗標題"
+msgstr "檔案瀏覽對話方塊標題"
 
 #: libgnomeui/gnome-file-entry.c:230
 msgid "Title for the Browse file dialog."
-msgstr "瀏覽檔案的對話窗所使用的標題。"
+msgstr "瀏覽檔案的對話方塊所使用的標題。"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid "Directory Entry"
@@ -991,7 +993,7 @@ msgstr "Modal"
 
 #: libgnomeui/gnome-file-entry.c:247
 msgid "Whether the Browse file window should be modal."
-msgstr "瀏覽檔案對話窗應否不被其它視窗遮蔽。"
+msgstr "檔案瀏覽對話方塊應否不被其它視窗遮蔽。"
 
 #: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
@@ -1007,7 +1009,7 @@ msgstr "預設路徑"
 
 #: libgnomeui/gnome-file-entry.c:264
 msgid "Default path for the Browse file window."
-msgstr "瀏覽檔案對話窗中預設開啟的路徑。"
+msgstr "檔案瀏覽對話方塊中預設開啟的路徑。"
 
 #: libgnomeui/gnome-file-entry.c:271
 msgid "GnomeEntry"
@@ -1019,7 +1021,7 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"表示用來輸入檔案名稱的檔案欄位的 GnomeEntry。如果閣下想修改或查詢任何有關該 "
+"表示用來輸入檔案名稱的檔案欄位的 GnomeEntry。如果您想修改或查詢任何有關該 "
 "GnomeEntry 的參數，可以透過本屬性進行。"
 
 #: libgnomeui/gnome-file-entry.c:282
@@ -1032,7 +1034,7 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"表示用來輸入檔案名稱的檔案欄位的 GtkEntry。如果閣下想修改或查詢任何有關該 "
+"表示用來輸入檔案名稱的檔案欄位的 GtkEntry。如果您想修改或查詢任何有關該 "
 "GtkEntry 的參數，可以透過本屬性進行。"
 
 #: libgnomeui/gnome-file-entry.c:528
@@ -1053,7 +1055,7 @@ msgstr "瀏覽(_B)..."
 
 #: libgnomeui/gnome-file-entry.c:677
 msgid "Pop up a file selector to choose a file"
-msgstr "開啟檔案選擇視窗來選取檔案"
+msgstr "開啟檔案選擇窗來選取檔案"
 
 #: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1101,7 +1103,7 @@ msgstr "預覽文字"
 
 #: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "顯示對話窗中的預覽文字"
+msgstr "對話方塊中顯示的預覽文字"
 
 #: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
@@ -1143,8 +1145,8 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"程式“%s”正嘗試更改一些系統管理員或作業系統本身不容許更改的設定。某部份閣下更"
-"改的設定或許不會生效，或是無法儲存設定，供下次啟動程式時使用。"
+"程式“%s”正嘗試更改一些系統管理員或作業系統本身不容許更改的設定。某部份您更改"
+"的設定或許不會生效，或是無法儲存設定，供下次啟動程式時使用。"
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1161,7 +1163,7 @@ msgstr "代表某圖示項目的獨有識別碼。它是在儲存圖示紀錄清
 
 #: libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
-msgstr "瀏覽圖示對話窗所使用的標題。"
+msgstr "圖示瀏覽對話方塊所使用的標題。"
 
 #: libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
@@ -1169,7 +1171,7 @@ msgstr "Pixmap 目錄"
 
 #: libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
-msgstr "會在此目錄下搜尋圖示。"
+msgstr "會在該目錄下搜尋圖示。"
 
 #: libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
@@ -1184,7 +1186,7 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"圖示選擇窗。如果閣下想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進"
+"圖示選擇窗。如果您想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進"
 "行。"
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:983
@@ -1193,7 +1195,7 @@ msgstr "沒有圖示"
 
 #: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "無法找到水平容器元件，使用一般的檔案選取對話盒"
+msgstr "找不到水平容器元件，改用一般的選取檔案對話方塊"
 
 #: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
@@ -1205,7 +1207,7 @@ msgstr "圖示選擇窗"
 
 #: libgnomeui/gnome-icon-entry.c:755
 msgid "This dialog box lets you select an icon."
-msgstr "本對話窗可用來選取圖示。"
+msgstr "本對話方塊可用來選取圖示。"
 
 #: libgnomeui/gnome-icon-entry.c:761
 msgid "Icon selector"
@@ -1281,15 +1283,15 @@ msgstr "該 pixmap 項目應否顯示預覽。"
 
 #: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
 msgid "No Image"
-msgstr "沒有圖像"
+msgstr "沒有圖片"
 
 #: libgnomeui/gnome-pixmap-entry.c:205
 msgid "Image Preview"
-msgstr "圖像預覽"
+msgstr "圖片預覽"
 
 #: libgnomeui/gnome-pixmap-entry.c:206
 msgid "A preview of the image currently specified"
-msgstr "相應於目前指定的圖像的預覽"
+msgstr "相應於目前指定的圖片的預覽圖"
 
 #: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
@@ -1312,22 +1314,11 @@ msgstr "%x(%a) %T"
 
 #: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
-msgstr "Sans 14"
+msgstr "AR PL KaitiM Big5 14"
 
-#~ msgid "Exit the test"
-#~ msgstr "結束測試"
-
-#~ msgid "E_xit"
-#~ msgstr "結束(_X)"
-
-#~ msgid "Exit the program"
-#~ msgstr "結束程式"
-
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "視窗管理員所使用的程式名稱"
-
-#~ msgid "MODULE"
-#~ msgstr "模組"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "結束測試"
 
 #~ msgid "Unknown"
 #~ msgstr "不詳"
