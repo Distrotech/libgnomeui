@@ -368,7 +368,8 @@ gnome_href_clicked (GtkButton *button)
 
   g_return_if_fail(href->_priv->url != NULL);
 
-  if(!gnome_url_show(href->_priv->url)) {
+  /* FIXME: Use the error variable from gnome_url_show */
+  if(!gnome_url_show(href->_priv->url, NULL)) {
       GtkWidget *dialog = gtk_message_dialog_new(NULL, 0, GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_OK,
 						 _("Error occured while trying to launch the "
