@@ -1,5 +1,10 @@
 2004-08-25  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-icon-theme.c: (gnome_icon_theme_lookup_icon):
+	Merge leak fix from HEAD.
+
+2004-08-25  Kjartan Maraas  <kmaraas@gnome.org>
+
 	Merged from HEAD.
 
 	Fix #150075 and #150857.

@@ -318,6 +318,7 @@ gnome_icon_theme_lookup_icon (GnomeIconTheme      *icon_theme,
 	  icon_data->attach_points[i].x = points[i].x;
 	  icon_data->attach_points[i].y = points[i].y;
 	}
+      g_free (points);
     }
 
   if (icon_data_out != NULL &&
