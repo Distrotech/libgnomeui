@@ -340,7 +340,8 @@ client_set_ghash (GnomeClient *client, gchar *name, GHashTable *table)
   
   argc = g_hash_table_size (table);
 
-  g_return_if_fail (argc > 0);
+  if (argc == 0) 
+    return;
   
   /* Now initialize the 'vals' array.  */
   vals = g_new (SmPropValue, argc);
@@ -831,7 +832,8 @@ gnome_client_disable_master_connection (void)
 static void  
 master_client_clean_up (void)
 {
-  gnome_client_disconnect (master_client);
+  if (GNOME_CLIENT_CONNECTED (master_client))
+      gnome_client_disconnect (master_client);
 }
 
 static void
