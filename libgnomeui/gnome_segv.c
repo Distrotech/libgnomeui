@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
   int res;
   gchar *appname;
   gchar *bug_buddy_path = NULL;
+  int bb_sm_disable = 0;
 
   /* We do this twice to make sure we don't start running ourselves... :) */
   memset(&sa, 0, sizeof(sa));
@@ -52,10 +53,11 @@ int main(int argc, char *argv[])
   args = poptGetArgs(ctx);
   if (args && args[0] && args[1])
     {
-      if (strcmp(args[0], "gnome-session") == 0)
+      if (strcmp(g_filename_pointer (args[0]), "gnome-session") == 0)
         {
           msg = g_strdup_printf(_("The GNOME Session Manager (process %d) has crashed\ndue to a fatal error (%s).\nWhen you close this dialog, all applications will close and your session will exit.\nPlease save all your files before closing this dialog."),
                                 getppid(), g_strsignal(atoi(args[1])));
+          bb_sm_disable = 1;
         }
       else
         {
@@ -77,16 +79,13 @@ int main(int argc, char *argv[])
                                   GNOME_STOCK_BUTTON_CLOSE,
                                   NULL);
   
-  /* so we don't try to debug bug-buddy */
-  if (getenv("GNOME_CRASHED_APPNAME") == NULL)
+  bug_buddy_path = gnome_is_program_in_path ("bug-buddy");
+  if (bug_buddy_path != NULL)
     {
-      bug_buddy_path = gnome_is_program_in_path ("bug-buddy");
-      if (bug_buddy_path != NULL)
-        {
-          gnome_dialog_append_button(GNOME_DIALOG(mainwin),
-                                     _("Submit a bug report"));
-        }
+      gnome_dialog_append_button(GNOME_DIALOG(mainwin),
+                                 _("Submit a bug report"));
     }
+  
   /* Please download http://www.gnome.org/application_crashed-shtml.txt,
    * translate the plain text, and send the file to webmaster@gnome.org. */
   urlstr = g_strdup_printf("%s?app=%s%s%s&libsver=%s", 
@@ -106,16 +105,18 @@ int main(int argc, char *argv[])
 
   if (res == 1)
     {
-      gchar *env_str;
+      gchar *exec_str;
       int retval;
-      env_str = g_strdup_printf("GNOME_CRASHED_APPNAME=%s", appname);
-      putenv(env_str);
-      
-      env_str = g_strdup_printf("GNOME_CRASHED_PID=%d", getppid());
-      putenv(env_str);
 
-      g_assert (bug_buddy_path);
-      retval = system(bug_buddy_path);
+      g_assert(bug_buddy_path);
+      exec_str = g_strdup_printf("%s --appname=\"%s\" --pid=%d "
+                                 "--package-ver=\"%s\" %s", 
+                                 bug_buddy_path, appname, getppid(), 
+                                 app_version, bb_sm_disable 
+                                 ? "--sm-disable" : "");
+
+      retval = system(exec_str);
+      g_free(exec_str);
       if (retval == -1 || retval == 127)
         {
           g_warning("Couldn't run bug-buddy: %s", g_strerror(errno));

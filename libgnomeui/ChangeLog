@@ -1,3 +1,11 @@
+1999-11-11  Jacob Berkman  <jberkman@andrew.cmu.edu>
+
+	* gnome_segv.c (main): correctly detect if gnome-session
+	crashed when gnome-session was run with a full path (ie from
+	gdm2).   Disable SM on bug-buddy if gnome-session crashed,
+	and pass parameters to bug-buddy via command line options,
+	and not through the environment.
+
 Wed Nov 10 20:15:10 1999  George Lebl <jirka@5z.com>
 
 	* gnome-propertybox.c: use GPOINTER_TO_INT to cast from pointer
