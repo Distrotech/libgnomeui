@@ -1,3 +1,8 @@
+1999-11-13  Jacob Berkman  <jberkman@andrew.cmu.edu>
+
+	* gnome_segv.c (main): use g_basename() instead of
+	g_filename_pointer
+
 1999-11-11  Jacob Berkman  <jberkman@andrew.cmu.edu>
 
 	* gnome_segv.c (main): correctly detect if gnome-session
