@@ -259,7 +259,7 @@ gtk_pixmap_menu_item_size_request (GtkWidget      *widget,
 				   GtkRequisition *requisition)
 {
   GtkPixmapMenuItem *menu_item;
-  GtkRequisition req = {0, 0};
+  GtkRequisition req;
 
   g_return_if_fail (widget != NULL);
   g_return_if_fail (GTK_IS_MENU_ITEM (widget));
@@ -268,6 +268,9 @@ gtk_pixmap_menu_item_size_request (GtkWidget      *widget,
   GTK_WIDGET_CLASS(parent_class)->size_request(widget,requisition);
 
   menu_item = GTK_PIXMAP_MENU_ITEM (widget);
+
+  req.width = 0;
+  req.height = 0;
   
   if (menu_item->pixmap)
     gtk_widget_size_request(menu_item->pixmap, &req);
