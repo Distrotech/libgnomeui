@@ -160,17 +160,17 @@ iti_edition_accept (Iti *iti)
 
 	gtk_signal_emit (GTK_OBJECT (iti), iti_signals [TEXT_CHANGED], &accept);
 
-	if (accept) {
-		if (iti->is_text_allocated)
-			g_free (iti->text);
+	if (iti->editing){
+		if (accept) {
+			if (iti->is_text_allocated)
+				g_free (iti->text);
+			
+			iti->text = g_strdup (gtk_entry_get_text (priv->entry));
+			iti->is_text_allocated = 1;
+		}
 
-		iti->text = g_strdup (gtk_entry_get_text (priv->entry));
-		iti->is_text_allocated = 1;
-	}
-
-	if (iti->editing)
 		iti_stop_editing (iti);
-
+	}
 	layout_text (iti);
 
 	priv->need_text_update = TRUE;
