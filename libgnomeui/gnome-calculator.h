@@ -63,7 +63,12 @@ struct _GnomeCalculatorClass {
 
 guint		 gnome_calculator_get_type	(void);
 GtkWidget	*gnome_calculator_new		(void);
-void		 gnome_calculator_clear		(void);
+void		 gnome_calculator_clear		(GnomeCalculator *gc,
+						 gint reset);
+void		 gnome_calculator_set		(GnomeCalculator *gc,
+						 gdouble result);
+
+#define gnome_calculator_get_result(gc) (GNOME_CALCULATOR(gc)->result)
 
 END_GNOME_DECLS
 

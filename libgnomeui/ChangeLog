@@ -1,3 +1,11 @@
+Thu Jun 18 02:47:26 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-number-entry.[ch]: new entry type modeled after file
+	  entry, but for numbers. has a "browse" dialog with a
+	  calculator.
+
+	* gnome-calculator.[ch]: add some new functions for more control
+
 Thu Jun 18 00:40:27 1998  George Lebl  <jirka@5z.com>
 
 	* gnome-entry.c: use the new gnome_config prefix list functions

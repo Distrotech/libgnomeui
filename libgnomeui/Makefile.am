@@ -35,6 +35,7 @@ libgnomeui_la_SOURCES = \
 	gnome-geometry.c		\
 	gnome-entry.c			\
 	gnome-file-entry.c		\
+	gnome-number-entry.c		\
 	gnome-font-selector.c 		\
 	gnome-ice.c			\
 	gnome-icon-list.c		\
@@ -78,6 +79,7 @@ libgnomeuiinclude_HEADERS = 		\
 	gnome-dns.h			\
 	gnome-entry.h			\
 	gnome-file-entry.h		\
+	gnome-number-entry.h		\
 	gnome-font-selector.h 		\
 	gnome-geometry.h		\
 	gnome-ice.h			\

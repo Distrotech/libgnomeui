@@ -166,6 +166,9 @@ put_led_font(GnomeCalculator *gc)
 	gint i;
 	gint x;
 
+	if(!GTK_WIDGET_REALIZED(GTK_WIDGET(gc)))
+		return;
+
 	style = gtk_widget_get_style(gc->display);
 	gtk_pixmap_get(GTK_PIXMAP(gc->display), &p, NULL);
 
@@ -571,6 +574,15 @@ clear_calc(GtkWidget *w, gpointer data)
 	return TRUE;
 }
 
+void
+gnome_calculator_clear(GnomeCalculator *gc, gint reset)
+{
+	if(reset)
+		reset_calc(NULL,gc);
+	else
+		clear_calc(NULL,gc);
+}
+
 static gint
 add_digit(GtkWidget *w, gpointer data)
 {
@@ -768,6 +780,12 @@ set_result_to(GnomeCalculator *gc, gdouble result)
 	set_result(gc);
 
 	return old;
+}
+
+void
+gnome_calculator_set(GnomeCalculator *gc, gdouble result)
+{
+	set_result_to(gc,result);
 }
 
 static gint
