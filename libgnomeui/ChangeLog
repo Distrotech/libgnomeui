@@ -1,3 +1,19 @@
+1999-12-26  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi-child.[ch] (gnome_mdi_child_set_toolbar_template):
+	new function for setting child's toolbar template.
+	(gnome_mdi_child_set_toolbar_position): set default values for
+	toolbar insertion.
+	(gnome_mdi_child_add_toolbar): adds a toolbar to an app using
+	default values stored in the child.
+	* gnome-mdi.c (gnome_mdi_view_changed): take care of child's
+	toolbar.
+	(book_button_release): a fix to get the [view|child]_changed signal
+	emitted when a page is dropped on the notebook.
+	* gnome-mdiP.h: add a new #define for child's toolbar UIInfo key
+	and its name.
+	* gnome-mdi.h: indentation improvements.
+
 1999-12-25  Ettore Perazzoli  <ettore@gnu.org>
 
 	[From Morten Welinder <terra@diku.dk>]

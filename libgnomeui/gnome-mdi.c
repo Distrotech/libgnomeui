@@ -232,8 +232,10 @@ static void gnome_mdi_view_changed(GnomeMDI *mdi, GtkWidget *old_view)
 {
 	GList *menu_list = NULL, *children;
 	GtkWidget *parent = NULL, *view = mdi->active_view;
+	GtkWidget *toolbar;
 	GnomeApp *app = NULL, *old_app = NULL;
 	GnomeMDIChild *child;
+	GnomeDockItem *dock_item;
 	GnomeUIInfo *ui_info;
 	gpointer data;
 	gint pos, items;
@@ -259,11 +261,29 @@ static void gnome_mdi_view_changed(GnomeMDI *mdi, GtkWidget *old_view)
 	if(app == NULL)
 		app = old_app;
 
-	/* free previous child ui-info */
-	ui_info = gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY);
+	/* free previous child toolbar ui-info */
+	ui_info = gtk_object_get_data(GTK_OBJECT(app),
+								  GNOME_MDI_CHILD_TOOLBAR_INFO_KEY);
 	if(ui_info != NULL) {
 		free_ui_info_tree(ui_info);
-		gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, NULL);
+		gtk_object_set_data(GTK_OBJECT(app),
+							GNOME_MDI_CHILD_TOOLBAR_INFO_KEY, NULL);
+	}
+	ui_info = NULL;
+
+	/* remove old child's toolbar */
+	dock_item = gnome_app_get_dock_item_by_name(app,
+												GNOME_MDI_CHILD_TOOLBAR_NAME);
+	if(dock_item)
+		gtk_widget_destroy(GTK_WIDGET(dock_item));
+
+	/* free previous child menu ui-info */
+	ui_info = gtk_object_get_data(GTK_OBJECT(app),
+								  GNOME_MDI_CHILD_MENU_INFO_KEY);
+	if(ui_info != NULL) {
+		free_ui_info_tree(ui_info);
+		gtk_object_set_data(GTK_OBJECT(app),
+							GNOME_MDI_CHILD_MENU_INFO_KEY, NULL);
 	}
 	ui_info = NULL;
 	
@@ -311,10 +331,11 @@ static void gnome_mdi_view_changed(GnomeMDI *mdi, GtkWidget *old_view)
 		
 		/* create new child-specific menus */
 		if(parent) {
-			if( child->menu_template &&
-				( (ui_info = copy_ui_info_tree(child->menu_template)) != NULL) ) {
+			if(child->menu_template &&
+			   ((ui_info = copy_ui_info_tree(child->menu_template)) != NULL)) {
 				gnome_app_insert_menus_with_data(app, mdi->child_menu_path, ui_info, child);
-				gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
+				gtk_object_set_data(GTK_OBJECT(app),
+									GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
 				items = count_ui_info_items(ui_info);
 			}
 			else {
@@ -337,6 +358,18 @@ static void gnome_mdi_view_changed(GnomeMDI *mdi, GtkWidget *old_view)
 				else
 					items = 0;
 			}
+		}
+
+		/* insert the new toolbar */
+		if(child->toolbar_template &&
+		   ((ui_info = copy_ui_info_tree(child->toolbar_template)) != NULL)) {
+			toolbar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL,
+									  GTK_TOOLBAR_BOTH);
+			gnome_app_fill_toolbar_with_data(GTK_TOOLBAR(toolbar), ui_info,
+											 app->accel_group, child);
+			gnome_mdi_child_add_toolbar(child, app, GTK_TOOLBAR(toolbar));
+			gtk_object_set_data(GTK_OBJECT(app),
+								GNOME_MDI_CHILD_TOOLBAR_INFO_KEY, ui_info);
 		}
 	}
 	else
@@ -747,6 +780,17 @@ static gint book_button_release (GtkWidget *widget, GdkEventButton *e, gpointer 
 				if(old_book->cur_page) {
 					view = old_book->cur_page->child;
 					gtk_container_remove(GTK_CONTAINER(old_book), view);
+
+					/* a trick to make view_changed signal get emitted
+					   properly, taking care of updating the gnomeapps */
+					if(GTK_NOTEBOOK(new_book)->cur_page) {
+						mdi->active_view = GTK_NOTEBOOK(new_book)->cur_page->child;
+						mdi->active_child = gnome_mdi_get_child_from_view(mdi->active_view);
+					}
+					else {
+						mdi->active_view = NULL;
+						mdi->active_child = NULL;
+					}
 
 					book_add_view(GTK_NOTEBOOK(new_book), view);
 

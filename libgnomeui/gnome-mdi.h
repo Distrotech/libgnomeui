@@ -166,17 +166,17 @@ GnomeApp      *gnome_mdi_get_active_window   (GnomeMDI *mdi);
  * other hand, closing the last MDI window when no objects are registered
  * with the MDI will result in MDI being gtk_object_destroy()ed.
  */
-void          gnome_mdi_register            (GnomeMDI *mdi, GtkObject *object);
-void          gnome_mdi_unregister          (GnomeMDI *mdi, GtkObject *object);
+void          gnome_mdi_register             (GnomeMDI *mdi, GtkObject *object);
+void          gnome_mdi_unregister           (GnomeMDI *mdi, GtkObject *object);
 
 /*
  * convenience functions for retrieveing GnomeMDIChild and GnomeApp
  * objects associated with a particular view and for retrieveing the
  * visible view of a certain GnomeApp.
  */
-GnomeApp      *gnome_mdi_get_app_from_view    (GtkWidget *view);
-GnomeMDIChild *gnome_mdi_get_child_from_view  (GtkWidget *view);
-GtkWidget     *gnome_mdi_get_view_from_window (GnomeMDI *mdi, GnomeApp *app);
+GnomeApp      *gnome_mdi_get_app_from_view   (GtkWidget *view);
+GnomeMDIChild *gnome_mdi_get_child_from_view (GtkWidget *view);
+GtkWidget     *gnome_mdi_get_view_from_window(GnomeMDI *mdi, GnomeApp *app);
 
 /* the following functions are used to obtain pointers to the GnomeUIInfo
  * structures for a specified MDI GnomeApp widget. this might be useful for
@@ -185,9 +185,9 @@ GtkWidget     *gnome_mdi_get_view_from_window (GnomeMDI *mdi, GnomeApp *app);
  * GnomeUIInfo structures are exact copies of the template GnomeUIInfo trees
  * and are non-NULL only if templates are used for menu/toolbar creation.
  */
-GnomeUIInfo   *gnome_mdi_get_menubar_info     (GnomeApp *app);
-GnomeUIInfo   *gnome_mdi_get_toolbar_info     (GnomeApp *app);
-GnomeUIInfo   *gnome_mdi_get_child_menu_info  (GnomeApp *app);
+GnomeUIInfo   *gnome_mdi_get_menubar_info    (GnomeApp *app);
+GnomeUIInfo   *gnome_mdi_get_toolbar_info    (GnomeApp *app);
+GnomeUIInfo   *gnome_mdi_get_child_menu_info (GnomeApp *app);
 
 END_GNOME_DECLS
 

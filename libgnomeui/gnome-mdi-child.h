@@ -43,14 +43,14 @@ typedef struct _GnomeMDIChildClass  GnomeMDIChildClass;
  * is an abstract class. In order to use it, you have to either derive a
  * new class from it and set the proper virtual functions in its parent
  * GnomeMDIChildClass structure or use the GnomeMDIGenericChild class
- * that allows to specify the relevant functions on a per-instance basis
- * and can directly be used with GnomeMDI.
+ * that allows to specify the relevant functions on a per-instance instead
+ * on a per-class basis and can directly be used with GnomeMDI.
  */
 struct _GnomeMDIChild
 {
 	GtkObject object;
 
-	GtkObject *parent;
+	GtkObject *parent;               /* a pointer to the MDI */
 
 	gchar *name;
 
@@ -58,6 +58,11 @@ struct _GnomeMDIChild
 
 	GnomeUIInfo *menu_template;
 	GnomeUIInfo *toolbar_template;
+
+	/* default values for insertion of the child toolbar */
+	GnomeDockItemBehavior behavior;
+	GnomeDockPlacement placement;
+	gint band_num, band_pos, offset;
 };
 
 typedef GtkWidget *(*GnomeMDIChildViewCreator) (GnomeMDIChild *, gpointer);
@@ -82,15 +87,19 @@ struct _GnomeMDIChildClass
 	GnomeMDIChildLabelFunc   set_label;
 };
 
-guint         gnome_mdi_child_get_type         (void);
-
-GtkWidget     *gnome_mdi_child_add_view        (GnomeMDIChild *mdi_child);
-
-void          gnome_mdi_child_remove_view      (GnomeMDIChild *mdi_child, GtkWidget *view);
-
-void          gnome_mdi_child_set_name         (GnomeMDIChild *mdi_child, const gchar *name);
-
-void          gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl);
+guint     gnome_mdi_child_get_type    (void);
+GtkWidget *gnome_mdi_child_add_view   (GnomeMDIChild *mdi_child);
+void      gnome_mdi_child_remove_view (GnomeMDIChild *mdi_child, GtkWidget *view);
+void      gnome_mdi_child_set_name    (GnomeMDIChild *mdi_child, const gchar *name);
+void      gnome_mdi_child_set_menu_template(GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl);
+void      gnome_mdi_child_set_toolbar_template(GnomeMDIChild *mdi_child, GnomeUIInfo *toolbar_tmpl);
+void      gnome_mdi_child_set_toolbar_position(GnomeMDIChild *mdi_child,
+											   GnomeDockItemBehavior behavior,
+											   GnomeDockPlacement placement,
+											   gint band_num, gint band_pos,
+											   gint offset);
+void      gnome_mdi_child_add_toolbar(GnomeMDIChild *mdi_child, GnomeApp *app,
+									  GtkToolbar *toolbar);
 
 END_GNOME_DECLS
 

@@ -85,6 +85,12 @@ static void gnome_mdi_child_init (GnomeMDIChild *mdi_child)
 	mdi_child->name = NULL;
 	mdi_child->parent = NULL;
 	mdi_child->views = NULL;
+
+	mdi_child->behavior = GNOME_DOCK_ITEM_BEH_NORMAL;
+	mdi_child->placement = GNOME_DOCK_TOP;
+	mdi_child->band_num = 101;
+	mdi_child->band_pos = 0;
+	mdi_child->offset = 0;
 }
 
 static GtkWidget *gnome_mdi_child_create_view (GnomeMDIChild *child)
@@ -237,9 +243,71 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, const gchar *name)
  * to suit its needs. If no template is set, the create_menus virtual
  * function will be used for creating these menus (it has to return a
  * GList of menu items). If no such function is specified, the menubar will
- * be unchanged by MDI children.
+ * be unchanged by MDI children, but one can still modify the menubar
+ * using handlers for GnomeMDI view_changed or child_changed signal.
  **/
 void gnome_mdi_child_set_menu_template (GnomeMDIChild *mdi_child, GnomeUIInfo *menu_tmpl)
 {
 	mdi_child->menu_template = menu_tmpl;
+}
+
+/**
+ * gnome_mdi_child_set_toolbar_template:
+ * @mdi_child: A pointer to a GnomeMDIChild object.
+ * @toolbar_tmpl: A GnomeUIInfo array describing the child specific toolbar.
+ * 
+ * Description:
+ * Sets the template for a toolbar that is added and removed when different
+ * children get activated. If no template is specified, one can still add
+ * toolbars utilizing the GnomeMDI view_changed or child_changed signal.
+ **/
+void gnome_mdi_child_set_toolbar_template (GnomeMDIChild *mdi_child, GnomeUIInfo *toolbar_tmpl)
+{
+	mdi_child->toolbar_template = toolbar_tmpl;
+}
+
+/**
+ * gnome_mdi_child_set_toolbar_position:
+ * @mdi_child: A pointer to a GnomeMDIChild object.
+ * @behavior: GnomeDockItem's behavior for the toolbar
+ * @placement: what area of the dock the toolbar should be placed in.
+ * @band_num: what band to place toolbar in.
+ * @band_pos: the toolbar's position in its band.
+ * @offset: offset from the previous GnomeDockItem in the band.
+ * 
+ * Description:
+ * Sets the default values for adding the child's toolbar to a GnomeApp.
+ * These values are used by MDI's default view_changed handler and
+ * gnome_mdi_child_add_toolbar() function.
+ **/
+void gnome_mdi_child_set_toolbar_position(GnomeMDIChild *mdi_child,
+										  GnomeDockItemBehavior behavior,
+										  GnomeDockPlacement placement,
+										  gint band_num, gint band_pos,
+										  gint offset)
+{
+	mdi_child->behavior = behavior;
+	mdi_child->placement = placement;
+	mdi_child->band_num = band_num;
+	mdi_child->band_pos = band_pos;
+	mdi_child->offset = offset;
+}
+
+/**
+ * gnome_mdi_child_add_toolbar:
+ * @mdi_child: A pointer to a GnomeMDIChild object.
+ * @app: A pointer to a GnomeApp that contains the view of the @mdi_child
+ * @toolbar: The toolbar to be added.
+ *
+ * Description:
+ * Adds toolbar @toolbar to the GnomeApp @app using the default placement
+ * values stored in @mdi_child.
+ **/
+void gnome_mdi_child_add_toolbar(GnomeMDIChild *mdi_child, GnomeApp *app,
+								 GtkToolbar *toolbar)
+{
+	gnome_app_add_toolbar(app, toolbar, GNOME_MDI_CHILD_TOOLBAR_NAME,
+						  mdi_child->behavior, mdi_child->placement,
+						  mdi_child->band_num, mdi_child->band_pos,
+						  mdi_child->offset);
 }

@@ -38,12 +38,16 @@ BEGIN_GNOME_DECLS
 #define GNOME_MDI_TOOLBAR_INFO_KEY           "MDIToolbarUIInfo"
 #define GNOME_MDI_MENUBAR_INFO_KEY           "MDIMenubarUIInfo"
 #define GNOME_MDI_CHILD_MENU_INFO_KEY        "MDIChildMenuUIInfo"
+#define GNOME_MDI_CHILD_TOOLBAR_INFO_KEY     "MDIChildToolbarUIInfo"
 #define GNOME_MDI_CHILD_KEY                  "MDIChild"
 #define GNOME_MDI_ITEM_COUNT_KEY             "MDIChildMenuItems"
 #define GNOME_MDI_APP_KEY                    "MDIApp"
 
-/* declare the functions from gnome-mdi.c that other source files need,
-   but are a part of the public API */
+/* name for the child's toolbar */
+#define GNOME_MDI_CHILD_TOOLBAR_NAME         "MDIChildToolbar"
+
+/* declare the functions from gnome-mdi.c that other MDI source files need,
+   but are not part of the public API */
 void       gnome_mdi_child_list_remove (GnomeMDI *mdi, GnomeMDIChild *child);
 void       gnome_mdi_child_list_add    (GnomeMDI *mdi, GnomeMDIChild *child);
 GtkWidget *gnome_mdi_new_toplevel      (GnomeMDI *mdi);
