@@ -1,3 +1,7 @@
+Wed Jun 10 00:45:36 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gnome-init.c (our_gtk_options): Added help separator entry.
+
 Mon Jun  8 20:11:52 1998  Havoc Pennington  <hp@pobox.com>
 
 	* gnome-dateedit.c: #include <stdlib.h> for atoi.

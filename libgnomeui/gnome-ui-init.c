@@ -39,6 +39,7 @@ static GdkPixmap *imlib_image_loader(GdkWindow   *window,
    key number is used to look up the argument name we supply to Gtk.  */
 static struct argp_option our_gtk_options[] =
 {
+	{ N_("\nGtk toolkit options"), -1, NULL, OPTION_DOC,   NULL, -3 },
 	{ "gdk-debug",    -1, NULL,          OPTION_HIDDEN,    NULL, -2 },
 	{ "gdk-no-debug", -2, NULL,          OPTION_HIDDEN, NULL, 0 },
 	{ "display",      -3, N_("DISPLAY"), 0,	  N_("X display to use"), 0 },
