@@ -1,3 +1,8 @@
+1999-01-13  Felix Bellaby <felix@pooh.u-net.com>
+
+	* gnome-client.c (master_client_clean_up): disconnect the master
+	client at exit of app to prevent io errors on session manager side.
+
 1999-01-12  Manish Vachharajani <mvachhar@vger.rutgers.edu>
 
 	* gnome-ice.c (new_ice_connection): Set FD_CLOEXEC on 
