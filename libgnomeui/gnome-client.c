@@ -1,3 +1,4 @@
+
 /* gnome-client.c - GNOME session management client support
  *
  * Copyright (C) 1998 Carsten Schaar
@@ -40,6 +41,8 @@ extern char *program_invocation_short_name;
 #ifdef HAVE_LIBSM
 #include <X11/SM/SMlib.h>
 #endif /* HAVE_LIBSM */
+
+static GtkWidget *grab_widget = NULL;
 
 enum {
   SAVE_YOURSELF,
@@ -461,7 +464,6 @@ client_set_state (GnomeClient *client, GnomeClientState state)
 static void 
 client_save_phase_2_callback (SmcConn smc_conn, SmPointer client_data);
 
-
 static void
 client_save_yourself_possibly_done (GnomeClient *client)
 {
@@ -562,6 +564,11 @@ client_save_yourself_callback (SmcConn   smc_conn,
 
   client_set_state (client, GNOME_CLIENT_SAVING_PHASE_1);
 
+  if (!grab_widget) {
+    grab_widget = gtk_widget_new (gtk_widget_get_type (), NULL);
+  }
+  gtk_grab_add (grab_widget);
+
   gtk_signal_emit (GTK_OBJECT (client), 
 		   client_signals[SAVE_YOURSELF],
 		   1, 
@@ -582,6 +589,8 @@ client_die_callback (SmcConn smc_conn, SmPointer client_data)
 {
   GnomeClient *client= (GnomeClient*) client_data;
 
+  gtk_grab_remove (grab_widget);
+
   gtk_signal_emit (GTK_OBJECT (client), client_signals[DIE]);
 }
 
@@ -591,6 +600,8 @@ client_save_complete_callback (SmcConn smc_conn, SmPointer client_data)
 {
   GnomeClient *client = (GnomeClient*) client_data;
 
+  gtk_grab_remove (grab_widget);
+
   gtk_signal_emit (GTK_OBJECT (client), client_signals[SAVE_COMPLETE]);
 }
 
@@ -599,6 +610,8 @@ static void
 client_shutdown_cancelled_callback (SmcConn smc_conn, SmPointer client_data)
 {
   GnomeClient *client= (GnomeClient*) client_data;
+
+  gtk_grab_remove (grab_widget);
 
   gtk_signal_emit (GTK_OBJECT (client), client_signals[SHUTDOWN_CANCELLED]);
 }
@@ -688,11 +701,13 @@ client_parse_func (poptContext ctx,
 
   if (reason == POPT_CALLBACK_REASON_PRE) 
     {
+      /* needed on non-glibc systems: */
+      gnome_client_set_program (master_client, program_invocation_name);
       /* Argument parsing is starting.  We set the restart and the
 	 clone command to a default value, so other functions can use
 	 the master client while parsing the command line.  */
-      gnome_client_set_restart_command (master_client, 1,
-					&program_invocation_name);
+      gnome_client_set_restart_command (master_client, 1, 
+					&master_client->program);
       gnome_client_set_clone_command (master_client, 0, NULL);      
     }
   else if (reason == POPT_CALLBACK_REASON_POST)
@@ -1121,15 +1136,10 @@ gnome_client_new_without_connection (void)
   client->clone_command   = NULL;
   client->restart_command = NULL;
 
-#if 0
-  /* This suffers from an ordering problem on non-glibc machines.
-     `program_invocation_name' is not initialized yet.  */
+  /* Non-glibc systems do not get this set on the master_client until 
+     client_parse_func but this is not a problem.
+     The SM specs require explictly require that this is the value: */
   client->program = g_strdup (program_invocation_name);
-#else
-  /* This appears to be safe.  The `SmProgram' property does not
-     appear to be used to execute the program.  */
-  client->program = g_strdup (gnome_app_id);
-#endif
 
   return client;
 }
@@ -2098,8 +2108,9 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
 
 static void
 gnome_client_save_dialog_show (GnomeClient *client, gint key,
-			       GnomeDialogType type, GnomeDialog* dialog)
+			       GnomeDialogType type, gpointer data)
 {
+  GnomeDialog* dialog = GNOME_DIALOG (data);
   gboolean shutdown_cancelled;
   gint cancel_button = g_list_length (dialog->buttons);
 
