@@ -29,6 +29,9 @@
 #include <libart_lgpl/art_rgb_rgba_affine.h>
 #include "gnome-canvas-pixbuf.h"
 
+/* For GtkTypeAnchor */
+#include <gtk/gtkpacker.h>
+
 
 
 /* Private part of the GnomeCanvasPixbuf structure */
@@ -57,12 +60,15 @@ typedef struct {
 	guint x_in_pixels : 1;
 	guint y_set : 1;
 	guint y_in_pixels : 1;
-
+	
 	/* Whether the pixbuf has changed */
 	guint need_pixbuf_update : 1;
 
 	/* Whether the transformation or size have changed */
 	guint need_xform_update : 1;
+
+	/* Anchor */
+	GtkAnchorType anchor;
 } PixbufPrivate;
 
 
@@ -82,7 +88,8 @@ enum {
 	ARG_X_IN_PIXELS,
 	ARG_Y,
 	ARG_Y_SET,
-	ARG_Y_IN_PIXELS
+	ARG_Y_IN_PIXELS,
+	ARG_ANCHOR
 };
 
 static void gnome_canvas_pixbuf_class_init (GnomeCanvasPixbufClass *class);
@@ -176,7 +183,8 @@ gnome_canvas_pixbuf_class_init (GnomeCanvasPixbufClass *class)
 				 GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_Y_SET);
 	gtk_object_add_arg_type ("GnomeCanvasPixbuf::y_in_pixels",
 				 GTK_TYPE_BOOL, GTK_ARG_READWRITE, ARG_Y_IN_PIXELS);
-
+	gtk_object_add_arg_type ("GnomeCanvasPixbuf::anchor",
+				 GTK_TYPE_ANCHOR_TYPE, GTK_ARG_READWRITE, ARG_ANCHOR);
 
 	object_class->destroy = gnome_canvas_pixbuf_destroy;
 	object_class->set_arg = gnome_canvas_pixbuf_set_arg;
@@ -353,6 +361,12 @@ gnome_canvas_pixbuf_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		gnome_canvas_item_request_update (item);
 		break;
 
+	case ARG_ANCHOR:
+		priv->anchor = GTK_VALUE_ENUM (*arg);
+		priv->need_xform_update = TRUE;
+		gnome_canvas_item_request_update (item);
+		break;
+
 	default:
 		break;
 	}
@@ -419,6 +433,10 @@ gnome_canvas_pixbuf_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	case ARG_Y_IN_PIXELS:
 		GTK_VALUE_BOOL (*arg) = priv->y_in_pixels;
+		break;
+
+	case ARG_ANCHOR:
+		GTK_VALUE_ENUM (*arg) = priv->anchor;
 		break;
 
 	default:
@@ -538,7 +556,25 @@ compute_viewport_affine (GnomeCanvasPixbuf *gcp, double *viewport_affine, double
 	} else
 		ti_len = 1.0;
 
-	ti_len *= x;
+	switch (priv->anchow) {
+	case GTK_ANCHOR_NW:
+	case GTK_ANCHOR_W:
+	case GTK_ANCHOR_SW:
+		ti_len += x;
+		break;
+
+	case GTK_ANCHOR_N:
+	case GTK_ANCHOR_CENTER:
+	case GTK_ANCHOR_S:
+		ti_len *= (x - (w/ 2));
+		break;
+
+	case GTK_ANCHOR_NE:
+	case GTK_ANCHOR_E:
+	case GTK_ANCHOR_SE:
+		ti_len *= (x - w);
+		break;
+	}
 
 	if (priv->y_in_pixels) {
 		if (j_len > GNOME_CANVAS_EPSILON)
@@ -548,13 +584,31 @@ compute_viewport_affine (GnomeCanvasPixbuf *gcp, double *viewport_affine, double
 	} else
 		tj_len = 1.0;
 
-	tj_len *= y;
+	switch (priv->anchor) {
+	case GTK_ANCHOR_NW:
+	case GTK_ANCHOR_N:
+	case GTK_ANCHOR_NE:
+		tj_len *= y;
+		break;
+		
+	case GTK_ANCHOR_W:
+	case GTK_ANCHOR_CENTER:
+	case GTK_ANCHOR_S:
+		tj_len *= y - (h / 2);
+		break;
+
+	case GTK_ANCHOR_SW:
+	case GTK_ANCHOR_S:
+	case GTK_ANCHOR_SE:
+		tj_len *= y - h;
+		break;
+	}
 
 	/* Compute the final affine */
 
 	art_affine_scale (scale, si_len, sj_len);
 	art_affine_translate (translate, ti_len, tj_len);
-	art_affine_multiply (viewport_affine, scale, translate);
+  	art_affine_multiply (viewport_affine, scale, translate); 
 }
 
 /* Computes the affine transformation with which the pixbuf needs to be

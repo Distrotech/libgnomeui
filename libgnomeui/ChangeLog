@@ -1,3 +1,8 @@
+2000-09-24  Iain Holmes  <iain@helixcode.com>
+
+	* gnome-canvas-pixbuf.c: Add an ANCHOR argument, like GnomeCanvasImage
+	has.
+
 Sat Sep 23 17:34:17 2000  George Lebl <jirka@5z.com>
 
 	* gnome-calculator.c: use the gnome_i18n_push/pop_c_numeric_locale
