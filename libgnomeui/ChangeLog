@@ -1,5 +1,11 @@
 2001-05-09  Martin Baulig  <baulig@suse.de>
 
+	* gnome-entry.h (gnome_entry_new): Removed `history_id' argument.
+	(gnome_entry_new_full): Likewise.
+	* gnome-file-entry.h (gnome_file_entry_new): Likewise.
+
+2001-05-09  Martin Baulig  <baulig@suse.de>
+
 	* gnome-entry.h (gnome_entry_new_full): New function.
 
 	* gnome-file-entry.[ch]: New files; this already existed in

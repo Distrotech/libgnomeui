@@ -126,21 +126,9 @@ gnome_entry_construct (GnomeEntry         *gentry,
 		(GNOME_SELECTOR_CLIENT (gentry), corba_selector, uic);
 }
 
-
-/**
- * gnome_entry_new
- * @history_id: If not %NULL, the text id under which history data is stored
- *
- * Description: Creates a new GnomeEntry widget.  If  @history_id is
- * not %NULL, then the history list will be saved and restored between
- * uses under the given id.
- *
- * Returns: Newly-created GnomeEntry widget.
- */
 GtkWidget *
 gnome_entry_new_full (GnomeSelector      *selector,
-		      Bonobo_UIContainer  uic,
-		      const gchar        *history_id)
+		      Bonobo_UIContainer  uic)
 {
 	BonoboEventSource *event_source;
 	GtkWidget *entry_widget;
@@ -189,15 +177,13 @@ gnome_entry_new_full (GnomeSelector      *selector,
 }
 
 GtkWidget *
-gnome_entry_new (const gchar *history_id)
+gnome_entry_new (void)
 {
 	GnomeSelector *selector;
 
-	selector = g_object_new (gnome_selector_get_type (),
-				 "history_id", history_id,
-				 NULL);
+	selector = g_object_new (gnome_selector_get_type (), NULL);
 
-	return gnome_entry_new_full (selector, CORBA_OBJECT_NIL, history_id);
+	return gnome_entry_new_full (selector, CORBA_OBJECT_NIL);
 }
 
 GtkWidget *

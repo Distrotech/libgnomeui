@@ -109,27 +109,14 @@ gnome_file_entry_construct (GnomeFileEntry     *fentry,
 		(GNOME_ENTRY (fentry), corba_selector, uic);
 }
 
-
-/**
- * gnome_file_entry_new
- * @history_id: If not %NULL, the text id under which history data is stored
- *
- * Description: Creates a new GnomeFileEntry widget.  If  @history_id is
- * not %NULL, then the history list will be saved and restored between
- * uses under the given id.
- *
- * Returns: Newly-created GnomeFileEntry widget.
- */
 GtkWidget *
-gnome_file_entry_new (const gchar *history_id)
+gnome_file_entry_new (void)
 {
 	GnomeSelector *selector;
 
-	selector = g_object_new (gnome_file_selector_get_type (),
-				 "history_id", history_id,
-				 NULL);
+	selector = g_object_new (gnome_file_selector_get_type (), NULL);
 
-	return gnome_entry_new_full (selector, CORBA_OBJECT_NIL, history_id);
+	return gnome_entry_new_full (selector, CORBA_OBJECT_NIL);
 }
 
 GtkWidget *
