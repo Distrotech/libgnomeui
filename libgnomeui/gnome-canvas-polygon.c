@@ -61,30 +61,34 @@
 
 
 enum {
-	ARG_0,
-	ARG_POINTS,
-	ARG_FILL_COLOR,
-	ARG_FILL_COLOR_GDK,
-	ARG_FILL_COLOR_RGBA,
-	ARG_OUTLINE_COLOR,
-	ARG_OUTLINE_COLOR_GDK,
-	ARG_OUTLINE_COLOR_RGBA,
-	ARG_FILL_STIPPLE,
-	ARG_OUTLINE_STIPPLE,
-	ARG_WIDTH_PIXELS,
-	ARG_WIDTH_UNITS
+	PROP_0,
+	PROP_POINTS,
+	PROP_FILL_COLOR,
+	PROP_FILL_COLOR_GDK,
+	PROP_FILL_COLOR_RGBA,
+	PROP_OUTLINE_COLOR,
+	PROP_OUTLINE_COLOR_GDK,
+	PROP_OUTLINE_COLOR_RGBA,
+	PROP_FILL_STIPPLE,
+	PROP_OUTLINE_STIPPLE,
+	PROP_WIDTH_PIXELS,
+	PROP_WIDTH_UNITS
 };
 
 
 static void gnome_canvas_polygon_class_init (GnomeCanvasPolygonClass *class);
 static void gnome_canvas_polygon_init       (GnomeCanvasPolygon      *poly);
 static void gnome_canvas_polygon_destroy    (GtkObject               *object);
-static void gnome_canvas_polygon_set_arg    (GtkObject               *object,
-					     GtkArg                  *arg,
-					     guint                    arg_id);
-static void gnome_canvas_polygon_get_arg    (GtkObject               *object,
-					     GtkArg                  *arg,
-					     guint                    arg_id);
+static void gnome_canvas_polygon_set_property (GObject              *object,
+					       guint                 param_id,
+					       const GValue         *value,
+					       GParamSpec           *pspec,
+					       const gchar          *trailer);
+static void gnome_canvas_polygon_get_property (GObject              *object,
+					       guint                 param_id,
+					       GValue               *value,
+					       GParamSpec           *pspec,
+					       const gchar          *trailer);
 
 static void   gnome_canvas_polygon_update      (GnomeCanvasItem *item, double *affine, ArtSVP *clip_path, int flags);
 static void   gnome_canvas_polygon_realize     (GnomeCanvasItem *item);
@@ -127,29 +131,87 @@ gnome_canvas_polygon_get_type (void)
 static void
 gnome_canvas_polygon_class_init (GnomeCanvasPolygonClass *class)
 {
+	GObjectClass *gobject_class;
 	GtkObjectClass *object_class;
 	GnomeCanvasItemClass *item_class;
 
+	gobject_class = (GObjectClass *) class;
 	object_class = (GtkObjectClass *) class;
 	item_class = (GnomeCanvasItemClass *) class;
 
 	parent_class = gtk_type_class (gnome_canvas_item_get_type ());
 
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::points", GTK_TYPE_GNOME_CANVAS_POINTS, GTK_ARG_READWRITE, ARG_POINTS);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_FILL_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_FILL_COLOR_GDK);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_color_rgba", GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_FILL_COLOR_RGBA);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_color", GTK_TYPE_STRING, GTK_ARG_WRITABLE, ARG_OUTLINE_COLOR);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_color_gdk", GTK_TYPE_GDK_COLOR, GTK_ARG_READWRITE, ARG_OUTLINE_COLOR_GDK);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_color_rgba", GTK_TYPE_UINT, GTK_ARG_READWRITE, ARG_OUTLINE_COLOR_RGBA);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::fill_stipple", GDK_TYPE_DRAWABLE, GTK_ARG_READWRITE, ARG_FILL_STIPPLE);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::outline_stipple", GDK_TYPE_DRAWABLE, GTK_ARG_READWRITE, ARG_OUTLINE_STIPPLE);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::width_pixels", GTK_TYPE_UINT, GTK_ARG_WRITABLE, ARG_WIDTH_PIXELS);
-	gtk_object_add_arg_type ("GnomeCanvasPolygon::width_units", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, ARG_WIDTH_UNITS);
+	gobject_class->set_property = gnome_canvas_polygon_set_property;
+	gobject_class->get_property = gnome_canvas_polygon_get_property;
+
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_POINTS,
+                 g_param_spec_boxed ("points", NULL, NULL,
+				     GTK_TYPE_GNOME_CANVAS_POINTS,
+				     (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_COLOR,
+                 g_param_spec_string ("fill_color", NULL, NULL,
+                                      NULL,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_COLOR_GDK,
+                 g_param_spec_boxed ("fill_color_gdk", NULL, NULL,
+				     GTK_TYPE_GDK_COLOR,
+				     (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_COLOR_RGBA,
+                 g_param_spec_uint ("fill_color_rgba", NULL, NULL,
+				    0, G_MAXUINT, 0,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_OUTLINE_COLOR,
+                 g_param_spec_string ("outline_color", NULL, NULL,
+                                      NULL,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_OUTLINE_COLOR_GDK,
+                 g_param_spec_boxed ("outline_color_gdk", NULL, NULL,
+				     GTK_TYPE_GDK_COLOR,
+				     (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_OUTLINE_COLOR_RGBA,
+                 g_param_spec_uint ("outline_color_rgba", NULL, NULL,
+				    0, G_MAXUINT, 0,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_FILL_STIPPLE,
+                 g_param_spec_object ("fill_stipple", NULL, NULL,
+                                      GDK_TYPE_DRAWABLE,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_OUTLINE_STIPPLE,
+                 g_param_spec_object ("outline_stipple", NULL, NULL,
+                                      GDK_TYPE_DRAWABLE,
+                                      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_WIDTH_PIXELS,
+                 g_param_spec_uint ("width_pixels", NULL, NULL,
+				    0, G_MAXUINT, 0,
+				    (G_PARAM_READABLE | G_PARAM_WRITABLE)));
+        g_object_class_install_property
+                (gobject_class,
+                 PROP_WIDTH_UNITS,
+                 g_param_spec_double ("width_units", NULL, NULL,
+				      0.0, G_MAXDOUBLE, 0.0,
+				      (G_PARAM_READABLE | G_PARAM_WRITABLE)));
 
 	object_class->destroy = gnome_canvas_polygon_destroy;
-	object_class->set_arg = gnome_canvas_polygon_set_arg;
-	object_class->get_arg = gnome_canvas_polygon_get_arg;
 
 	item_class->update = gnome_canvas_polygon_update;
 	item_class->realize = gnome_canvas_polygon_realize;
@@ -388,7 +450,11 @@ set_outline_gc_width (GnomeCanvasPolygon *poly)
 }
 
 static void
-gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_canvas_polygon_set_property (GObject              *object,
+				   guint                 param_id,
+				   const GValue         *value,
+				   GParamSpec           *pspec,
+				   const gchar          *trailer)
 {
 	GnomeCanvasItem *item;
 	GnomeCanvasPolygon *poly;
@@ -397,13 +463,16 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	GdkColor *pcolor;
 	int have_pixel;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_POLYGON (object));
+
 	item = GNOME_CANVAS_ITEM (object);
 	poly = GNOME_CANVAS_POLYGON (object);
 	have_pixel = FALSE;
 
-	switch (arg_id) {
-	case ARG_POINTS:
-		points = GTK_VALUE_POINTER (*arg);
+	switch (param_id) {
+	case PROP_POINTS:
+		points = g_value_get_pointer (value);
 
 		if (poly->coords) {
 			g_free (poly->coords);
@@ -418,13 +487,13 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		gnome_canvas_item_request_update (item);
 		break;
 
-        case ARG_FILL_COLOR:
-	case ARG_FILL_COLOR_GDK:
-	case ARG_FILL_COLOR_RGBA:
-		switch (arg_id) {
-		case ARG_FILL_COLOR:
-			if (GTK_VALUE_STRING (*arg) &&
-			    gdk_color_parse (GTK_VALUE_STRING (*arg), &color))
+        case PROP_FILL_COLOR:
+	case PROP_FILL_COLOR_GDK:
+	case PROP_FILL_COLOR_RGBA:
+		switch (param_id) {
+		case PROP_FILL_COLOR:
+			if (g_value_get_string (value) &&
+			    gdk_color_parse (g_value_get_string (value), &color))
 				poly->fill_set = TRUE;
 			else
 				poly->fill_set = FALSE;
@@ -435,8 +504,8 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 					    0xff);
 			break;
 
-		case ARG_FILL_COLOR_GDK:
-			pcolor = GTK_VALUE_BOXED (*arg);
+		case PROP_FILL_COLOR_GDK:
+			pcolor = g_value_get_boxed (value);
 			poly->fill_set = pcolor != NULL;
 
 			if (pcolor) {
@@ -451,9 +520,9 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 					    0xff);
 			break;
 
-		case ARG_FILL_COLOR_RGBA:
+		case PROP_FILL_COLOR_RGBA:
 			poly->fill_set = TRUE;
-			poly->fill_color = GTK_VALUE_UINT (*arg);
+			poly->fill_color = g_value_get_uint (value);
 			break;
 		}
 #ifdef VERBOSE
@@ -469,13 +538,13 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
                 gnome_canvas_item_request_redraw_svp (item, poly->fill_svp);
 		break;
 
-        case ARG_OUTLINE_COLOR:
-	case ARG_OUTLINE_COLOR_GDK:
-	case ARG_OUTLINE_COLOR_RGBA:
-		switch (arg_id) {
-		case ARG_OUTLINE_COLOR:
-			if (GTK_VALUE_STRING (*arg) &&
-			    gdk_color_parse (GTK_VALUE_STRING (*arg), &color))
+        case PROP_OUTLINE_COLOR:
+	case PROP_OUTLINE_COLOR_GDK:
+	case PROP_OUTLINE_COLOR_RGBA:
+		switch (param_id) {
+		case PROP_OUTLINE_COLOR:
+			if (g_value_get_string (value) &&
+			    gdk_color_parse (g_value_get_string (value), &color))
 				poly->outline_set = TRUE;
 			else
 				poly->outline_set = FALSE;
@@ -486,8 +555,8 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 					       0xff);
 			break;
 
-		case ARG_OUTLINE_COLOR_GDK:
-			pcolor = GTK_VALUE_BOXED (*arg);
+		case PROP_OUTLINE_COLOR_GDK:
+			pcolor = g_value_get_boxed (value);
 			poly->outline_set = pcolor != NULL;
 
 			if (pcolor) {
@@ -502,9 +571,9 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 					       0xff);
 			break;
 
-		case ARG_OUTLINE_COLOR_RGBA:
+		case PROP_OUTLINE_COLOR_RGBA:
 			poly->outline_set = TRUE;
-			poly->outline_color = GTK_VALUE_UINT (*arg);
+			poly->outline_color = g_value_get_uint (value);
 			break;
 		}
 #ifdef VERBOSE
@@ -520,18 +589,18 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
                 gnome_canvas_item_request_redraw_svp (item, poly->outline_svp);
 		break;
 
-	case ARG_FILL_STIPPLE:
-		set_stipple (poly->fill_gc, &poly->fill_stipple, GTK_VALUE_BOXED (*arg), FALSE);
+	case PROP_FILL_STIPPLE:
+		set_stipple (poly->fill_gc, &poly->fill_stipple, g_value_get_boxed (value), FALSE);
 		gnome_canvas_item_request_update (item);
 		break;
 
-	case ARG_OUTLINE_STIPPLE:
-		set_stipple (poly->outline_gc, &poly->outline_stipple, GTK_VALUE_BOXED (*arg), FALSE);
+	case PROP_OUTLINE_STIPPLE:
+		set_stipple (poly->outline_gc, &poly->outline_stipple, g_value_get_boxed (value), FALSE);
 		gnome_canvas_item_request_update (item);
 		break;
 
-	case ARG_WIDTH_PIXELS:
-		poly->width = GTK_VALUE_UINT (*arg);
+	case PROP_WIDTH_PIXELS:
+		poly->width = g_value_get_uint (value);
 		poly->width_pixels = TRUE;
 		set_outline_gc_width (poly);
 #ifdef OLD_XFORM
@@ -541,8 +610,8 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 #endif
 		break;
 
-	case ARG_WIDTH_UNITS:
-		poly->width = fabs (GTK_VALUE_DOUBLE (*arg));
+	case PROP_WIDTH_UNITS:
+		poly->width = fabs (g_value_get_double (value));
 		poly->width_pixels = FALSE;
 		set_outline_gc_width (poly);
 #ifdef OLD_XFORM
@@ -553,68 +622,76 @@ gnome_canvas_polygon_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 		break;
 
 	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 }
 
 /* Allocates a GdkColor structure filled with the specified pixel, and puts it into the specified
- * arg for returning it in the get_arg method.
+ * value for returning it in the get_property method.
  */
 static void
-get_color_arg (GnomeCanvasPolygon *poly, gulong pixel, GtkArg *arg)
+get_color_value (GnomeCanvasPolygon *poly, gulong pixel, GValue *value)
 {
 	GdkColor *color;
 
 	color = g_new (GdkColor, 1);
 	color->pixel = pixel;
 	gdk_color_context_query_color (poly->item.canvas->cc, color);
-	GTK_VALUE_BOXED (*arg) = color;
+	g_value_set_boxed (value, color);
 }
 
 static void
-gnome_canvas_polygon_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_canvas_polygon_get_property (GObject              *object,
+				   guint                 param_id,
+				   GValue               *value,
+				   GParamSpec           *pspec,
+				   const gchar          *trailer)
 {
 	GnomeCanvasPolygon *poly;
 	GnomeCanvasPoints *points;
 
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_POLYGON (object));
+
 	poly = GNOME_CANVAS_POLYGON (object);
 
-	switch (arg_id) {
-	case ARG_POINTS:
+	switch (param_id) {
+	case PROP_POINTS:
 		if (poly->num_points != 0) {
 			points = gnome_canvas_points_new (poly->num_points);
 			memcpy (points->coords, poly->coords, 2 * poly->num_points * sizeof (double));
-			GTK_VALUE_POINTER (*arg) = points;
+			g_value_set_pointer (value, points);
 		} else
-			GTK_VALUE_POINTER (*arg) = NULL;
+			g_value_set_pointer (value, NULL);
 		break;
 
-	case ARG_FILL_COLOR_GDK:
-		get_color_arg (poly, poly->fill_pixel, arg);
+	case PROP_FILL_COLOR_GDK:
+		get_color_value (poly, poly->fill_pixel, value);
 		break;
 
-	case ARG_OUTLINE_COLOR_GDK:
-		get_color_arg (poly, poly->outline_pixel, arg);
+	case PROP_OUTLINE_COLOR_GDK:
+		get_color_value (poly, poly->outline_pixel, value);
 		break;
 
-	case ARG_FILL_COLOR_RGBA:
-		GTK_VALUE_UINT (*arg) = poly->fill_color;
+	case PROP_FILL_COLOR_RGBA:
+		g_value_set_uint (value, poly->fill_color);
 		break;
 
-	case ARG_OUTLINE_COLOR_RGBA:
-		GTK_VALUE_UINT (*arg) = poly->outline_color;
+	case PROP_OUTLINE_COLOR_RGBA:
+		g_value_set_uint (value, poly->outline_color);
 		break;
 
-	case ARG_FILL_STIPPLE:
-		GTK_VALUE_BOXED (*arg) = poly->fill_stipple;
+	case PROP_FILL_STIPPLE:
+		g_value_set_boxed (value, poly->fill_stipple);
 		break;
 
-	case ARG_OUTLINE_STIPPLE:
-		GTK_VALUE_BOXED (*arg) = poly->outline_stipple;
+	case PROP_OUTLINE_STIPPLE:
+		g_value_set_boxed (value, poly->outline_stipple);
 		break;
 
 	default:
-		arg->type = GTK_TYPE_INVALID;
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
 		break;
 	}
 }
