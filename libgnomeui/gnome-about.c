@@ -32,27 +32,24 @@
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-url.h>
+#include <libgnome/libgnome-init.h>
 #include "gnome-dialog.h"
 #include "gnome-dialog-util.h"
-#include "gnome-gconf.h"
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomecanvas/gnome-canvas-line.h>
 #include <libgnomecanvas/gnome-canvas-rect-ellipse.h>
 #include <libgnomecanvas/gnome-canvas-text.h>
 #include <libgnomecanvas/gnome-canvas-pixbuf.h>
 #include <libgnomecanvas/gnome-canvas-util.h>
+#include <bonobo/bonobo-config-database.h>
 #include "gnome-cursors.h"
 #include "gnome-stock.h"
-#include <gconf/gconf-client.h>
 #include <string.h>
 #include <gtk/gtk.h>
 
 #define GNOME_ABOUT_DEFAULT_WIDTH               100
 #define GNOME_ABOUT_MAX_WIDTH                   600
 #define BASE_LINE_SKIP                          0
-
-/* GConf prefix */
-#define GNOME_ABOUT_GCONF_PREFIX "/desktop/gnome/about"
 
 /* Layout */
 #define GNOME_ABOUT_PADDING_X 1
@@ -840,16 +837,13 @@ static void gnome_about_fill_options (GtkWidget *widget,
 {
 	GtkStyle *style;
     
-	GError *err = NULL;
-	GConfClient *client = gnome_get_gconf_client ();
+	Bonobo_ConfigDatabase cd = gnome_program_get_config_database (gnome_program_get ());
 
 	g_return_if_fail (priv != NULL);
 
 	/* Read GConf options */
-	priv->show_urls = gconf_client_get_bool
-		(client, GNOME_ABOUT_GCONF_PREFIX "/show_urls", &err);
-	priv->show_logo = gconf_client_get_bool
-		(client, GNOME_ABOUT_GCONF_PREFIX "/show_logo", &err);
+	priv->show_urls = bonobo_config_get_boolean (cd, "/about/show_urls", NULL);
+	priv->show_logo = bonobo_config_get_boolean (cd, "/about/show_logo", NULL);
 	
 	/* Create fonts and get colors*/
 	/* FIXME: dirty hack, but it solves i18n problem without rewriting the

@@ -46,7 +46,9 @@
 #include "gnome-macros.h"
 #include "gnome-selectorP.h"
 #include "gnome-uidefs.h"
-#include "gnome-gconf.h"
+
+#include <libgnome/libgnome-init.h>
+#include <bonobo/bonobo-config-database.h>
 
 #include <libgnomeuiP.h>
 
@@ -57,7 +59,7 @@ typedef struct _GnomeSelectorHistoryItem GnomeSelectorHistoryItem;
 typedef struct _GnomeSelectorAsyncData   GnomeSelectorAsyncData;
 
 struct _GnomeSelectorPrivate {
-    GConfClient *client;
+    Bonobo_ConfigDatabase db;
 
     gchar       *history_id;
     gchar       *dialog_title;
@@ -141,7 +143,9 @@ struct _GnomeSelectorAsyncHandle {
 };
 
 static void gnome_selector_load_all            (GnomeSelector *selector);
+#if 0
 static void gnome_selector_save_all            (GnomeSelector *selector);
+#endif
 
 static void gnome_selector_class_init          (GnomeSelectorClass *class);
 static void gnome_selector_init                (GnomeSelector      *selector);
@@ -1016,8 +1020,7 @@ do_construct_handler (GnomeSelector *selector)
 
     g_message (G_STRLOC);
 
-    priv->client = gnome_get_gconf_client ();
-    g_object_ref (G_OBJECT (priv->client));
+    priv->db = gnome_program_get_config_database (gnome_program_get ());
 
     priv->box = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 
@@ -1107,6 +1110,7 @@ gnome_selector_destroy (GtkObject *object)
 
     selector = GNOME_SELECTOR (object);
 
+#if 0
     if (selector->_priv->client) {
 	if (selector->_priv->flags & GNOME_SELECTOR_AUTO_SAVE_ALL)
 	    gnome_selector_save_all (selector);
@@ -1120,6 +1124,7 @@ gnome_selector_destroy (GtkObject *object)
 	g_object_unref (G_OBJECT (selector->_priv->client));
 	selector->_priv->client = NULL;
     }
+#endif
 
     if (selector->_priv->selector_widget) {
 	gtk_widget_unref (selector->_priv->selector_widget);
@@ -1743,7 +1748,7 @@ gnome_selector_set_history (GnomeSelector *selector, GSList *history)
     set_history_changed (selector);
 }
 
-static GSList *
+static GSList * G_GNUC_UNUSED
 _gnome_selector_history_to_list (GnomeSelector *selector, gboolean only_save)
 {
     GSList *thelist = NULL, *c;
@@ -1767,7 +1772,9 @@ _gnome_selector_history_to_list (GnomeSelector *selector, gboolean only_save)
 void
 gnome_selector_load_history (GnomeSelector *selector)
 {
+#if 0
     GSList *thelist;
+#endif
 
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
@@ -1775,6 +1782,7 @@ gnome_selector_load_history (GnomeSelector *selector)
     if (!selector->_priv->gconf_history_key)
 	return;
 
+#if 0
     thelist = gconf_client_get_list (selector->_priv->client,
 				     selector->_priv->gconf_history_key,
 				     GCONF_VALUE_STRING, NULL);
@@ -1783,13 +1791,16 @@ gnome_selector_load_history (GnomeSelector *selector)
 
     g_slist_foreach (thelist, (GFunc) g_free, NULL);
     g_slist_free (thelist);
+#endif
 }
 
 void
 gnome_selector_save_history (GnomeSelector *selector)
 {
+#if 0
     GSList *thelist;
     gboolean result;
+#endif
 
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
@@ -1797,6 +1808,7 @@ gnome_selector_save_history (GnomeSelector *selector)
     if (!selector->_priv->gconf_history_key)
 	return;
 
+#if 0
     thelist = _gnome_selector_history_to_list (selector, TRUE);
 
     result = gconf_client_set_list (selector->_priv->client,
@@ -1804,6 +1816,7 @@ gnome_selector_save_history (GnomeSelector *selector)
 				    GCONF_VALUE_STRING, thelist, NULL);
 
     g_slist_free (thelist);
+#endif
 }
 
 void
@@ -1892,18 +1905,16 @@ _gnome_selector_deep_free_slist (GSList *thelist)
     g_slist_free (thelist);
 }
 
+#if 0
 static void
 gnome_selector_save_all (GnomeSelector *selector)
 {
-#if 0
     GSList *uri_list;
     gboolean result;
-#endif
 
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
-#if 0
     if (!selector->_priv->gconf_uri_list_key)
 	return;
 
@@ -1915,8 +1926,8 @@ gnome_selector_save_all (GnomeSelector *selector)
 				    NULL);
 
     _gnome_selector_deep_free_slist (uri_list);
-#endif
 }
+#endif
 
 static void
 gnome_selector_load_all (GnomeSelector *selector)
