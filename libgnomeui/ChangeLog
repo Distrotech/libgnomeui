@@ -1,3 +1,7 @@
+Wed Apr 19 05:29:24 2000  George Lebl <jirka@5z.com>
+
+	* gnome-winhints.c: add preconditions all over the place
+
 Wed Apr 19 05:21:25 2000  George Lebl <jirka@5z.com>
 
 	* gnome-scores.[ch]: gnome_scores_display will return a pointer to

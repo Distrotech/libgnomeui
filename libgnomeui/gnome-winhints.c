@@ -78,6 +78,10 @@ gnome_win_hints_set_layer(GtkWidget *window, GnomeWinLayer layer)
   XEvent xev;
   GdkWindowPrivate *priv;
   gint prev_error;
+
+  g_return_if_fail(window != NULL);
+  g_return_if_fail(GTK_IS_WIDGET(window));
+  g_return_if_fail(GTK_WIDGET_REALIZED(window));
   
   if (need_init)
     gnome_win_hints_init();
@@ -124,6 +128,10 @@ gnome_win_hints_get_layer(GtkWidget *window)
   long layer;
   gint prev_error;
 
+  g_return_val_if_fail(window != NULL, WIN_LAYER_NORMAL);
+  g_return_val_if_fail(GTK_IS_WIDGET(window), WIN_LAYER_NORMAL);
+  g_return_val_if_fail(GTK_WIDGET_REALIZED(window), WIN_LAYER_NORMAL);
+
   if (need_init)
     gnome_win_hints_init();
   
@@ -154,6 +162,10 @@ gnome_win_hints_set_state(GtkWidget *window, GnomeWinState state)
   GdkWindowPrivate *priv;
   XEvent xev;
   gint prev_error;
+
+  g_return_if_fail(window != NULL);
+  g_return_if_fail(GTK_IS_WIDGET(window));
+  g_return_if_fail(GTK_WIDGET_REALIZED(window));
   
   if (need_init)
     gnome_win_hints_init();
@@ -207,6 +219,10 @@ gnome_win_hints_get_state(GtkWidget *window)
   unsigned long bytes_remain;
   unsigned char *prop;
   gint prev_error;
+
+  g_return_val_if_fail(window != NULL, 0);
+  g_return_val_if_fail(GTK_IS_WIDGET(window), 0);
+  g_return_val_if_fail(GTK_WIDGET_REALIZED(window), 0);
   
   if (need_init)
     gnome_win_hints_init();
@@ -238,6 +254,10 @@ gnome_win_hints_set_hints(GtkWidget *window,  GnomeWinHints skip)
   GdkWindowPrivate *priv;
   XEvent xev;
   gint prev_error;
+
+  g_return_if_fail(window != NULL);
+  g_return_if_fail(GTK_IS_WIDGET(window));
+  g_return_if_fail(GTK_WIDGET_REALIZED(window));
   
   if (need_init)
     gnome_win_hints_init();
@@ -286,6 +306,10 @@ gnome_win_hints_get_hints(GtkWidget *window)
   unsigned long bytes_remain;
   unsigned char *prop;
   gint prev_error;
+
+  g_return_val_if_fail(window != NULL, 0);
+  g_return_val_if_fail(GTK_IS_WIDGET(window), 0);
+  g_return_val_if_fail(GTK_WIDGET_REALIZED(window), 0);
   
   if (need_init)
     gnome_win_hints_init();
@@ -317,6 +341,10 @@ gnome_win_hints_set_workspace(GtkWidget *window, gint workspace)
   GdkWindowPrivate *priv;
   long data[1];
   gint prev_error;
+
+  g_return_if_fail(window != NULL);
+  g_return_if_fail(GTK_IS_WIDGET(window));
+  g_return_if_fail(GTK_WIDGET_REALIZED(window));
   
   if (need_init)
     gnome_win_hints_init();
@@ -343,6 +371,10 @@ gnome_win_hints_get_workspace(GtkWidget *window)
   unsigned long bytes_remain;
   unsigned char *prop;
   gint prev_error;
+
+  g_return_val_if_fail(window != NULL, 0);
+  g_return_val_if_fail(GTK_IS_WIDGET(window), 0);
+  g_return_val_if_fail(GTK_WIDGET_REALIZED(window), 0);
   
   if (need_init)
     gnome_win_hints_init();
@@ -497,6 +529,10 @@ gnome_win_hints_set_expanded_size(GtkWidget *window, gint x, gint y, gint width,
   long data[4];
   gint prev_error;
   
+  g_return_if_fail(window != NULL);
+  g_return_if_fail(GTK_IS_WIDGET(window));
+  g_return_if_fail(GTK_WIDGET_REALIZED(window));
+
   if (need_init)
     gnome_win_hints_init();
   
@@ -524,6 +560,10 @@ gnome_win_hints_get_expanded_size(GtkWidget *window, gint *x, gint *y, gint *wid
   unsigned long bytes_remain;
   unsigned char *prop;
   gint prev_error;
+
+  g_return_val_if_fail(window != NULL, FALSE);
+  g_return_val_if_fail(GTK_IS_WIDGET(window), FALSE);
+  g_return_val_if_fail(GTK_WIDGET_REALIZED(window), FALSE);
   
   if (need_init)
     gnome_win_hints_init();
@@ -561,6 +601,10 @@ gnome_win_hints_set_app_state(GtkWidget *window,  GnomeWinAppState state)
   GdkWindowPrivate *priv;
   long data[1];
   gint prev_error;
+
+  g_return_if_fail(window != NULL);
+  g_return_if_fail(GTK_IS_WIDGET(window));
+  g_return_if_fail(GTK_WIDGET_REALIZED(window));
   
   if (need_init)
     gnome_win_hints_init();
@@ -587,6 +631,10 @@ gnome_win_hints_get_app_state(GtkWidget *window)
   unsigned long bytes_remain;
   unsigned char *prop;
   gint prev_error;
+
+  g_return_val_if_fail(window != NULL, WIN_APP_STATE_NONE);
+  g_return_val_if_fail(GTK_IS_WIDGET(window), WIN_APP_STATE_NONE);
+  g_return_val_if_fail(GTK_WIDGET_REALIZED(window), WIN_APP_STATE_NONE);
   
   if (need_init)
     gnome_win_hints_init();
@@ -618,6 +666,10 @@ gnome_win_hints_set_moving(GtkWidget *window, gboolean moving)
   long data[1];
   gint prev_error;
   
+  g_return_if_fail(window != NULL);
+  g_return_if_fail(GTK_IS_WIDGET(window));
+  g_return_if_fail(GTK_WIDGET_REALIZED(window));
+
   if (need_init)
     gnome_win_hints_init();
   
