@@ -84,7 +84,7 @@ entry_changed(GtkWidget *widget, GnomeIconEntry *ientry)
 	
 	if(!t || !g_file_test (t,G_FILE_TEST_ISLINK|G_FILE_TEST_ISFILE) ||
 	   !(im = gdk_imlib_load_image (t))) {
-		if(GTK_IS_PIXMAP(child)) {
+		if(GNOME_IS_PIXMAP(child)) {
 			gtk_widget_destroy(child);
 			child = gtk_label_new(_("No Icon"));
 			gtk_widget_show(child);
@@ -596,7 +596,7 @@ char *
 gnome_icon_entry_get_filename(GnomeIconEntry *ientry)
 {
 	/*this happens if it doesn't exist or isn't an image*/
-	if(!GTK_IS_PIXMAP(GTK_BIN(ientry->pickbutton)->child))
+	if(!GNOME_IS_PIXMAP(GTK_BIN(ientry->pickbutton)->child))
 		return NULL;
 	return gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(ientry->fentry),
 					      TRUE);

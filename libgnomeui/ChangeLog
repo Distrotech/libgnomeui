@@ -1,3 +1,7 @@
+Wed Feb 24 15:23:28 1999  George Lebl  <jirka@5z.com>
+
+	* gnome-icon-entry.c: get rid of last remaints of gtk pixmap code
+
 1999-02-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-scores.c (gnome_scores_set_logo_pixmap): Kill gtk-pixmap
