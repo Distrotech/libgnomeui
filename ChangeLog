@@ -1,3 +1,8 @@
+2004-01-04  Anders Carlsson  <andersca@gnome.org>
+
+	* libgnomeui/gnome-password-dialog.h: Remove extra comma
+	in enumeration. (#130505, Franz Klammer).
+
 2003-12-30  Anders Carlsson  <andersca@gnome.org>
 
 	* libgnomeui/gnome-druid.c (gnome_druid_remove): 
