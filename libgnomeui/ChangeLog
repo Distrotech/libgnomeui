@@ -1,3 +1,11 @@
+Fri Aug 25 02:14:34 2000  George Lebl <jirka@5z.com>
+
+	* gnome-druid-page.[ch], gnome-druid-page-standard.[ch],
+	  gnome-druid-page-edge.[ch]:  Remove my brain damanges of last
+	  commit while keeping the fixes.  The canvas moved back into the
+	  widgets, the sidebar_shown thing was eliminated.  The thin blue
+	  lines on standard pages are gone as well.
+
 Thu Aug 24 03:29:46 2000  George Lebl <jirka@5z.com>
 
 	* Makefile.am: a bit of makefile cleanup

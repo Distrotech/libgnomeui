@@ -53,6 +53,8 @@ typedef struct _GnomeDruidPageEdgeClass   GnomeDruidPageEdgeClass;
 struct _GnomeDruidPageEdge
 {
 	GnomeDruidPage parent;
+
+	/*< public >*/
 	gchar *title;
 	gchar *text;
 	GdkPixbuf *logo_image;

@@ -67,10 +67,7 @@ struct _GnomeDruidPageClass
 };
 
 
-GtkType  gnome_druid_page_get_type (void);
-
-void     gnome_druid_page_construct		(GnomeDruidPage *druid_page,
-						 gboolean antialiased);
+GtkType  gnome_druid_page_get_type		(void);
 
 /* These are really to be only called from GnomeDruid */
 gboolean gnome_druid_page_next			(GnomeDruidPage *druid_page);
@@ -78,14 +75,6 @@ void     gnome_druid_page_prepare		(GnomeDruidPage *druid_page);
 gboolean gnome_druid_page_back			(GnomeDruidPage *druid_page);
 gboolean gnome_druid_page_cancel		(GnomeDruidPage *druid_page);
 void     gnome_druid_page_finish		(GnomeDruidPage *druid_page);
-
-void     gnome_druid_page_configure_canvas	(GnomeDruidPage *druid_page);
-
-GnomeCanvas * gnome_druid_page_get_canvas	(GnomeDruidPage *druid_page);
-gboolean gnome_druid_page_get_sidebar_shown	(GnomeDruidPage *druid_page);
-void     gnome_druid_page_set_sidebar_shown	(GnomeDruidPage *druid_page,
-						 gboolean sidebar_shown);
-
 
 END_GNOME_DECLS
 
