@@ -69,10 +69,8 @@ int main(int argc, char *argv[])
                                   GNOME_STOCK_BUTTON_CLOSE,
                                   NULL);
 
-  /* Before to change this link to something like
-   * http://www.gnome.org/application_crashed.LL.shtml,
-   * ask webmaster@gnome.org for a copy of the source shtml file, translate it,
-   * and send it back to him. */
+  /* Please download http://www.gnome.org/application_crashed-shtml.txt,
+   * translate the plain text, and send the file to webmaster@gnome.org. */
   urlbtn = gnome_href_new(_("http://www.gnome.org/application_crashed.shtml"),
                           _("Please visit the GNOME Application Crash page for more information"));
   gtk_widget_show(urlbtn);
