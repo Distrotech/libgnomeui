@@ -1,0 +1,1628 @@
+# Marathi translation of libgnomeui.po
+# Copyright (C) 2003 Jitendra Shah
+# FIRST AUTHOR Swapnil Hajare<dreamil1000a@yaho.com>, 2003.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui\n"
+"POT-Creation-Date: 2003-01-26 19:51+0100\n"
+"PO-Revision-Date: 2002-06-08 14:30+0530\n"
+"Last-Translator: Jitendra Shah <jitendras@vsnl.com>\n"
+"Language-Team: Marathi <www.indictrans.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: libgnomeui/gnome-about.c:194
+msgid "Credits"
+msgstr "श्रेय"
+
+#: libgnomeui/gnome-about.c:223
+#, fuzzy
+msgid "_Written by"
+msgstr "लेखक"
+
+#: libgnomeui/gnome-about.c:238
+#, fuzzy
+msgid "_Documented by"
+msgstr "दस्तावेज लेखक"
+
+#: libgnomeui/gnome-about.c:253
+#, fuzzy
+msgid "_Translated by"
+msgstr "भाषांतरकार"
+
+#. Add the credits button
+#: libgnomeui/gnome-about.c:310
+msgid "_Credits"
+msgstr "श्रेय"
+
+#: libgnomeui/gnome-about.c:352
+msgid "Program name"
+msgstr "कार्यक्रमाचे नाव"
+
+#: libgnomeui/gnome-about.c:353
+msgid "The name of the program"
+msgstr "कार्यक्रमाचे नाव"
+
+# libgnomeui/gnome-about.c:343
+#: libgnomeui/gnome-about.c:360
+msgid "Program version"
+msgstr "कार्यक्रमाची आवृत्ती "
+
+# libgnomeui/gnome-about.c:344
+#: libgnomeui/gnome-about.c:361
+msgid "The version of the program"
+msgstr "कार्यक्रमाची आवृत्ती"
+
+# libgnomeui/gnome-about.c:350
+#: libgnomeui/gnome-about.c:367
+msgid "Copyright string"
+msgstr "मालकी हक्क सूचना"
+
+# libgnomeui/gnome-about.c:351
+#: libgnomeui/gnome-about.c:368
+msgid "Copyright information for the program"
+msgstr "कार्यक्रमाच्या मालकीहक्कावीषयी माहीती"
+
+# libgnomeui/gnome-about.c:358
+#: libgnomeui/gnome-about.c:375
+msgid "Comments string"
+msgstr "प्रतिक्रीया "
+
+# libgnomeui/gnome-about.c:359
+#: libgnomeui/gnome-about.c:376
+msgid "Comments about the program"
+msgstr "कार्यक्रमावीषयी प्रतिक्रीया"
+
+# libgnomeui/gnome-about.c:365
+#: libgnomeui/gnome-about.c:382
+msgid "Authors"
+msgstr "लेखक"
+
+# libgnomeui/gnome-about.c:366
+#: libgnomeui/gnome-about.c:383
+msgid "List of authors of the programs"
+msgstr "कार्यक्रमाच्या लेखकांची यादी"
+
+# libgnomeui/gnome-about.c:368
+#: libgnomeui/gnome-about.c:385
+msgid "Author entry"
+msgstr "लेखक नोंद"
+
+# libgnomeui/gnome-about.c:369
+#: libgnomeui/gnome-about.c:386
+msgid "A single author entry"
+msgstr "एकमेव लेखकाची नोंद"
+
+# libgnomeui/gnome-about.c:376
+#: libgnomeui/gnome-about.c:393
+msgid "Documenters"
+msgstr "दस्तावेज"
+
+# libgnomeui/gnome-about.c:377
+#: libgnomeui/gnome-about.c:394
+msgid "List of people documenting the program"
+msgstr "कार्यक्रमाचे दस्तावेज बनवणार्यांची यादी"
+
+# libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:396
+msgid "Documenter entry"
+msgstr "दस्तावेज नोंद"
+
+# libgnomeui/gnome-about.c:380
+#: libgnomeui/gnome-about.c:397
+msgid "A single documenter entry"
+msgstr "एकमेव दस्तावेजची नोंद"
+
+# libgnomeui/gnome-about.c:388
+#: libgnomeui/gnome-about.c:405
+msgid "Translator credits"
+msgstr "भाषांतराचे श्रेय"
+
+# libgnomeui/gnome-about.c:389
+#: libgnomeui/gnome-about.c:406
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "भाषांतराचे श्रेय.हे वाक्य भाषांतरासाठी योग्य मानले जावे"
+
+# libgnomeui/gnome-about.c:396 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:413 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "लोगो"
+
+# libgnomeui/gnome-about.c:397
+#: libgnomeui/gnome-about.c:414
+msgid "A logo for the about box"
+msgstr "\"आम्ही कोण?\" साठी लोगो"
+
+# libgnomeui/gnome-about.c:476
+#: libgnomeui/gnome-about.c:493
+#, c-format
+msgid "About %s"
+msgstr "%s विषयी"
+
+# libgnomeui/gnome-appbar.c:762
+#: libgnomeui/gnome-appbar.c:747
+msgid "Has Progress"
+msgstr "ची प्रगती"
+
+# libgnomeui/gnome-appbar.c:763
+#: libgnomeui/gnome-appbar.c:748
+msgid "Create a progress widget."
+msgstr "एक प्रगती विडजेट निर्माण करा"
+
+# libgnomeui/gnome-appbar.c:770
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "ची स्थीती"
+
+# libgnomeui/gnome-appbar.c:771
+#: libgnomeui/gnome-appbar.c:756
+msgid "Create a status widget."
+msgstr "एक सधास्थिती विजेट तयार करा"
+
+# libgnomeui/gnome-appbar.c:778
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr "संवादशीलता"
+
+# libgnomeui/gnome-appbar.c:779
+#: libgnomeui/gnome-appbar.c:764
+msgid "Level of user activity required."
+msgstr "उपभोगत्यांशी सुसंवादासाठीचा आवश्यक स्तर"
+
+# libgnomeui/gnome-client.c:833
+#: libgnomeui/gnome-client.c:860
+msgid "Specify session management ID"
+msgstr "सत्र संचालन सुचक द्या"
+
+# libgnomeui/gnome-client.c:833
+#: libgnomeui/gnome-client.c:860
+msgid "ID"
+msgstr "सूचक"
+
+# libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-client.c:863
+msgid "Specify prefix of saved configuration"
+msgstr "संचयीत काॅनफिग्रेशनचा उपसर्ग(prefix) द्या"
+
+# libgnomeui/gnome-client.c:836
+#: libgnomeui/gnome-client.c:863
+msgid "PREFIX"
+msgstr "PREFIX"
+
+# libgnomeui/gnome-client.c:839
+#: libgnomeui/gnome-client.c:866
+msgid "Disable connection to session manager"
+msgstr "सत्र संचालकासाठी असलेला संपर्क विस्तापीत करा"
+
+# libgnomeui/gnome-client.c:945
+#: libgnomeui/gnome-client.c:972
+msgid "Session management"
+msgstr "सत्र संचालन"
+
+# libgnomeui/gnome-client.c:2483
+#: libgnomeui/gnome-client.c:2477
+msgid "Cancel Logout"
+msgstr "लाॅगआउट उद्द करा"
+
+# libgnomeui/gnome-color-picker.c:405
+#: libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "रंगावीषयीची चुकीची माहिती प्राप्त झाली\n"
+
+# libgnomeui/gnome-app-helper.c:171
+#: libgnomeui/gnome-color-picker.c:464
+#, fuzzy
+msgid "Color Selector"
+msgstr "संग निवडण्याची सहायक"
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "रंग निवडण्यासाठी एक संवदपट उघदा"
+
+# libgnomeui/gnome-color-picker.c:468
+#: libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "एक रंग निवडा"
+
+# libgnomeui/gnome-dateedit.c:468
+#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+msgid "Time"
+msgstr "वेळ"
+
+# libgnomeui/gnome-dateedit.c:469
+#: libgnomeui/gnome-dateedit.c:480
+msgid "The time currently selected"
+msgstr "सध्या निवडलेली वेळ"
+
+# libgnomeui/gnome-dateedit.c:481
+#: libgnomeui/gnome-dateedit.c:492
+msgid "DateEdit Flags"
+msgstr "दीनांक संपादन फ्लैग"
+
+# libgnomeui/gnome-dateedit.c:482
+#: libgnomeui/gnome-dateedit.c:493
+msgid "Flags for how DateEdit looks"
+msgstr "दिनांक संपादन कसे दिसावे यासाठी फ्लैग"
+
+# libgnomeui/gnome-dateedit.c:491
+#: libgnomeui/gnome-dateedit.c:502
+msgid "Lower Hour"
+msgstr "खालील वेळ"
+
+# libgnomeui/gnome-dateedit.c:492
+#: libgnomeui/gnome-dateedit.c:503
+msgid "Lower hour in the time popup selector"
+msgstr "पापअप चयनक खालील वेळ"
+
+# libgnomeui/gnome-dateedit.c:502
+#: libgnomeui/gnome-dateedit.c:513
+msgid "Upper Hour"
+msgstr "वरील वेळ"
+
+# libgnomeui/gnome-dateedit.c:503
+#: libgnomeui/gnome-dateedit.c:514
+msgid "Upper hour in the time popup selector"
+msgstr "पापअप चयनक मध्ये वरील वेळ"
+
+# libgnomeui/gnome-dateedit.c:513
+#: libgnomeui/gnome-dateedit.c:524
+msgid "Initial Time"
+msgstr "सुरवातीची वेळ"
+
+# libgnomeui/gnome-dateedit.c:514
+#: libgnomeui/gnome-dateedit.c:525
+msgid "The initial time"
+msgstr "प्रारंभिक वेळ"
+
+# libgnomeui/gnome-scores.c:97
+#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "दिनांक"
+
+# libgnomeui/gnome-file-entry.c:418
+#: libgnomeui/gnome-dateedit.c:752
+#, fuzzy
+msgid "Select Date"
+msgstr "दिनांक नीवडा"
+
+#: libgnomeui/gnome-dateedit.c:752
+msgid "Select the date from a calendar"
+msgstr "दिनदर्शीकेतुन दिनांक निवडा"
+
+# libgnomeui/gnome-dateedit.c:745
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:763
+msgid "Calendar"
+msgstr "दिनदर्शिका"
+
+# libgnomeui/gnome-file-entry.c:418
+#: libgnomeui/gnome-dateedit.c:784
+#, fuzzy
+msgid "Select Time"
+msgstr "वेळ निवडा"
+
+#: libgnomeui/gnome-dateedit.c:784
+msgid "Select the time from a list"
+msgstr "एका यादितुन वेळ निवडा"
+
+# libgnomeui/gnome-dateedit.c:975
+#: libgnomeui/gnome-dateedit.c:1003
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr "gnome_date_edit_get_date deprecated, user gnome_date_edit_get_time वापरा"
+
+# libgnomeui/gnome-druid-page-standard.c:121
+# libgnomeui/gnome-font-picker.c:155
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "शीर्षक"
+
+# libgnomeui/gnome-druid-page-standard.c:122
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "ड्रुइड चे शिर्षक"
+
+# libgnomeui/gnome-druid-page-standard.c:130
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "लोगो चित्र"
+
+# libgnomeui/gnome-druid-page-standard.c:137
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "वरील जलचित्र"
+
+# libgnomeui/gnome-druid-page-standard.c:138
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "शिर्षकासाठी जलचित्र"
+
+# libgnomeui/gnome-druid-page-standard.c:145
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "शीर्षकाची पृष्ठभुमी"
+
+# libgnomeui/gnome-druid-page-standard.c:146
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "शीर्षकाची पृष्ठभुमीग"
+
+# libgnomeui/gnome-druid-page-standard.c:153
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "शीर्षका चा पृष्ठरंग"
+
+# libgnomeui/gnome-druid-page-standard.c:154
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Gdk color च्या स्वरुपात शिर्षकाचा पृष्ठरंग"
+
+# libgnomeui/gnome-druid-page-standard.c:161
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "शीर्षक पृष्ठरंगाचा संच"
+ 
+# libgnomeui/gnome-druid-page-standard.c:162
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "शीर्षक पृष्ठरंग स्थापीत अकेला आहे"
+
+# libgnomeui/gnome-druid-page-standard.c:169
+# libgnomeui/gnome-druid-page-standard.c:177
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "पार्श्व रंग"
+
+# libgnomeui/gnome-druid-page-standard.c:170
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "पार्श्व रंग"
+
+# libgnomeui/gnome-druid-page-standard.c:178
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "Gdk color च्या स्वरुपात पार्श्व रंग"
+
+# libgnomeui/gnome-druid-page-standard.c:185
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "पार्श्व रंग स्थापीत केला आहे"
+
+# libgnomeui/gnome-druid-page-standard.c:186
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "पार्श्व रंग "
+
+# libgnomeui/gnome-druid-page-standard.c:193
+# libgnomeui/gnome-druid-page-standard.c:201
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Logo Background Color"
+msgstr "लोगो ची पार्श्वभूमी"
+
+# libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Logo Background color"
+msgstr "लोगो ची  पार्श्व रंग"
+
+# libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Logo Background color as a GdkColor"
+msgstr "Gdk color च्या स्वरुपात लोगो पार्श्वभुमी"
+
+# libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Logo Background color set"
+msgstr "लोगो पार्श्व भुमीचा संच"
+
+# libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Logo Background color is set"
+msgstr "लोगोची पार्श्वभुमीस्थापीत केली आहे"
+
+# libgnomeui/gnome-druid.c:150
+#: libgnomeui/gnome-druid.c:150
+msgid "Show Finish"
+msgstr "समाप्त दाखवा"
+
+# libgnomeui/gnome-druid.c:151
+#: libgnomeui/gnome-druid.c:151
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "'पुढे' या बटणाएवजी 'समाप्त' बटण दाखवा"
+
+# libgnomeui/gnome-druid.c:158
+#: libgnomeui/gnome-druid.c:158
+msgid "Show Help"
+msgstr "मदद दाखवा"
+
+# libgnomeui/gnome-druid.c:159
+#: libgnomeui/gnome-druid.c:159
+msgid "Show the 'Help' button"
+msgstr "'मदत' बटन दाखवा"
+
+# libgnomeui/gnome-href.c:118
+#: libgnomeui/gnome-href.c:122
+msgid "URL"
+msgstr "URL"
+
+# libgnomeui/gnome-href.c:119
+#: libgnomeui/gnome-href.c:123
+msgid "The URL that GnomeHRef activates"
+msgstr "GnomeHRef ने कार्यान्वित केलेला URL"
+
+# libgnomeui/gnome-href.c:126
+#: libgnomeui/gnome-href.c:130
+msgid "Text"
+msgstr "गद्य"
+
+# libgnomeui/gnome-href.c:127
+#: libgnomeui/gnome-href.c:131
+msgid "The text on the button"
+msgstr "बटनावरिल नाव"
+
+# libgnomeui/gnome-href.c:128
+#: libgnomeui/gnome-href.c:132
+msgid "End World Hunger"
+msgstr "जागतीक उपासमार थांबवा"
+
+# libgnomeui/gnome-href.c:134
+#: libgnomeui/gnome-href.c:138
+#, fuzzy
+msgid "Link color"
+msgstr "साखळिचा रंग"
+
+# libgnomeui/gnome-href.c:135
+#: libgnomeui/gnome-href.c:139
+#, fuzzy
+msgid "Color used to draw the link"
+msgstr "साखळीसाठी वापरलेला रंग"
+
+#: libgnomeui/gnome-href.c:170
+msgid "This button will take you to the URI that it displays."
+msgstr "हे बटन तुम्हाला त्या URI वर घेवुन जाइल जे तुम्हाला दाखवत आहे"
+
+#: libgnomeui/gnome-href.c:393
+#, fuzzy
+msgid ""
+"Error occured while trying to launch the URL handler.\n"
+"Please check the settings in the Control Center if they are correct."
+msgstr ""
+"URL नियंत्रक सुरु करताना चुक झालि\n"
+"निय्ंत्रण कक्षातील व्यवस्था पाहुन ती बरोबर आहे की नाही याची खातरजमा करा"
+#: libgnomeui/gnome-ui-init.c:113
+msgid "X display to use"
+msgstr "वापरण्यासाठीचे X दृश्य"
+
+#: libgnomeui/gnome-ui-init.c:113
+msgid "DISPLAY"
+msgstr "दाखवा"
+
+#: libgnomeui/gnome-ui-init.c:121
+msgid "GNOME GUI Library"
+msgstr "ग्नोम GUI लाइब्रेरी"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:618
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr "बऱ्याच ठीकाणी चुका झाल्याः चुक संदेश दाखवता येत नाही\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:632
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr "बऱ्याच ठिकाणी चुका झाल्याः चुक संदेशदाखवता येत नाही\n"
+
+#: libgnomeui/gnome_segv.c:100
+#, fuzzy, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"बऱ्याच ग्नोम सत्र संचालक (प्रक्रिया %s)बंद झाला आहे \n"
+"कारण एक गंभीर चुक झाली कारण सर्व कार्यक्ररम बंद होतील"
+"कृपया हा संवाद बंद करण्यापूर्वी आपल्या सर्व फाइल संचयीत करा"
+
+#: libgnomeui/gnome_segv.c:110
+#, fuzzy, c-format
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr " \"%1s\"हा कार्यक्रम (प्रक्रीया %d) बंद पडला आहे\n"
+"कारण एक गंभीर चुक झाली आहे\n"
+"(%2s)"
+
+#: libgnomeui/gnome_segv.c:122
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "असा वापर करा:gnome_segv2 कार्यक्रमाचे नाव संकेत-क्रमांक\n"
+
+#: libgnomeui/gnome_segv.c:140
+msgid "Submit a bug report"
+msgstr "चुक अहवालजम करा"
+
+#: libgnomeui/gnome_segv.c:151
+msgid "Debug"
+msgstr "चुक सुधारा"
+
+#: libgnomeui/gnome_segv.c:159
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#: libgnomeui/gnome_segv.c:165
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr "अधिकमाहितीकरता कृपया ग्नोम कार्यक्रम बिधाड पानावरजा"
+
+#: libgnomeui/gnome-stock-icons.c:137
+msgid "Table Borders"
+msgstr "तक्त्याच्या सिमा"
+
+#: libgnomeui/gnome-stock-icons.c:138
+msgid "Table Fill"
+msgstr "तक्त्यात भरा"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Bulleted List"
+msgstr "बिन्दुवार यादी"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Numbered List"
+msgstr "क्रमवार यादी"
+
+# libgnomeui/gnome-stock-icons.c:141
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Indent"
+msgstr "नीट मांडणी करा "
+
+# libgnomeui/gnome-stock-icons.c:142
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Un-Indent"
+msgstr "मांडणी रद्द करा"
+
+# libgnomeui/gnome-stock-icons.c:143
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "About"
+msgstr "आम्ही कोन?"
+
+# demos/mdi_demo.c:128
+#: demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "घटक1"
+
+# demos/mdi_demo.c:129
+#: demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "घटक क्र.1 साठी संकेत "
+
+# demos/mdi_demo.c:131
+#: demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "उपघटक 2"
+
+# demos/mdi_demo.c:132
+#: demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "घटक क्र. 2 साठी संकेत"
+
+# libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
+# test-gnome/testgnome.xml.h:5
+#. Some standard menus
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
+msgid "_File"
+msgstr "फाइल"
+
+# libgnomeui/gnome-app-helper.c:83
+#: libgnomeui/gnome-app-helper.c:83
+msgid "_File/"
+msgstr "फाइल"
+
+# libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "संपादन"
+
+# libgnomeui/gnome-app-helper.c:85
+#: libgnomeui/gnome-app-helper.c:85
+msgid "_Edit/"
+msgstr "संपादन"
+
+# libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "दृश्य"
+
+# libgnomeui/gnome-app-helper.c:87
+#: libgnomeui/gnome-app-helper.c:87
+msgid "_View/"
+msgstr "दृश्य"
+
+# libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "समायोजन"
+
+# libgnomeui/gnome-app-helper.c:89
+#: libgnomeui/gnome-app-helper.c:89
+msgid "_Settings/"
+msgstr "समायोजन"
+
+# libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
+#. If you have more then one New type, use this tree
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "नवीन"
+
+# libgnomeui/gnome-app-helper.c:91
+#: libgnomeui/gnome-app-helper.c:91
+msgid "_New/"
+msgstr "नवीन"
+
+# libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "फाइली"
+
+# libgnomeui/gnome-app-helper.c:93
+#: libgnomeui/gnome-app-helper.c:93
+msgid "Fi_les/"
+msgstr "फाइली"
+
+# libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "विन्डोज"
+
+# libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "खेळ"
+
+# libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
+# test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
+msgid "_Help"
+msgstr "मदत"
+
+# libgnomeui/gnome-app-helper.c:97
+#: libgnomeui/gnome-app-helper.c:97
+msgid "_Windows/"
+msgstr "विन्डोज"
+
+# libgnomeui/gnome-app-helper.c:109
+#. Open
+#: libgnomeui/gnome-app-helper.c:109
+msgid "_Open..."
+msgstr "खोला..."
+
+# libgnomeui/gnome-app-helper.c:109
+#: libgnomeui/gnome-app-helper.c:109
+msgid "Open a file"
+msgstr "एक फाइल खोला"
+
+# libgnomeui/gnome-app-helper.c:114
+#. Save
+#: libgnomeui/gnome-app-helper.c:114
+msgid "_Save"
+msgstr "संचयीत करा"
+
+# libgnomeui/gnome-app-helper.c:114
+#: libgnomeui/gnome-app-helper.c:114
+msgid "Save the current file"
+msgstr "सध्याची फाइल संचयीत करा"
+
+# libgnomeui/gnome-app-helper.c:119
+#. Save As
+#: libgnomeui/gnome-app-helper.c:119
+msgid "Save _As..."
+msgstr "या नावाने संचयीत करा"
+
+# libgnomeui/gnome-app-helper.c:120
+#: libgnomeui/gnome-app-helper.c:120
+msgid "Save the current file with a different name"
+msgstr "सध्याची फाइल दुसऱ्या नावाने संचयीत करा"
+
+# libgnomeui/gnome-app-helper.c:125
+#. Revert
+#: libgnomeui/gnome-app-helper.c:125
+msgid "_Revert"
+msgstr "आधीच्या स्थीतीत आणा"
+
+# libgnomeui/gnome-app-helper.c:126
+#: libgnomeui/gnome-app-helper.c:126
+msgid "Revert to a saved version of the file"
+msgstr "फाइलीच्या संचयीत आवृत्तीवर परत जा"
+
+# libgnomeui/gnome-app-helper.c:131
+#. Print
+#: libgnomeui/gnome-app-helper.c:131
+#, fuzzy
+msgid "_Print..."
+msgstr "छापा"
+
+# libgnomeui/gnome-app-helper.c:131
+#: libgnomeui/gnome-app-helper.c:131
+msgid "Print the current file"
+msgstr "सद्याची फाइल छापा"
+
+# libgnomeui/gnome-app-helper.c:136
+#. Print Setup
+#: libgnomeui/gnome-app-helper.c:136
+msgid "Print S_etup..."
+msgstr "छपाई समायोजन"
+
+# libgnomeui/gnome-app-helper.c:137
+#: libgnomeui/gnome-app-helper.c:137
+msgid "Setup the page settings for your current printer"
+msgstr "आपल्या सध्याच्या छपाइयंत्रासाठी पान समायोजन करा"
+
+# libgnomeui/gnome-app-helper.c:142
+#. Close
+#: libgnomeui/gnome-app-helper.c:142
+msgid "_Close"
+msgstr "बंद करा"
+
+# libgnomeui/gnome-app-helper.c:142
+#: libgnomeui/gnome-app-helper.c:142
+msgid "Close the current file"
+msgstr "सध्याची फाइल बंद करा"
+
+# libgnomeui/gnome-app-helper.c:155
+#. Exit
+#: libgnomeui/gnome-app-helper.c:147
+#, fuzzy
+msgid "_Quit"
+msgstr "बाहेर पडा"
+
+# libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:147
+#, fuzzy
+msgid "Quit the application"
+msgstr "या कार्यक्रमास बंद करा"
+
+# libgnomeui/gnome-app-helper.c:155
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: libgnomeui/gnome-app-helper.c:155
+#, fuzzy
+msgid "Cu_t"
+msgstr "कापा"
+
+# libgnomeui/gnome-app-helper.c:155
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cut the selection"
+msgstr "निवडलेला भाग कापा"
+
+# libgnomeui/gnome-app-helper.c:161
+#. 10
+#. Copy
+#: libgnomeui/gnome-app-helper.c:161
+msgid "_Copy"
+msgstr "नक्कल करा"
+
+# libgnomeui/gnome-app-helper.c:161
+#: libgnomeui/gnome-app-helper.c:161
+msgid "Copy the selection"
+msgstr "कापलेल्या भागाची नक्कल बनवा"
+
+# libgnomeui/gnome-app-helper.c:166
+#. Paste
+#: libgnomeui/gnome-app-helper.c:166
+msgid "_Paste"
+msgstr "चिपकवा"
+
+# libgnomeui/gnome-app-helper.c:166
+#: libgnomeui/gnome-app-helper.c:166
+msgid "Paste the clipboard"
+msgstr "क्लिपबोर्डवरील भाग चिटकवा"
+
+# libgnomeui/gnome-app-helper.c:171
+#. Clear
+#: libgnomeui/gnome-app-helper.c:171
+msgid "C_lear"
+msgstr "साफ करा"
+
+# libgnomeui/gnome-app-helper.c:171
+#: libgnomeui/gnome-app-helper.c:171
+msgid "Clear the selection"
+msgstr "नीवडलेला भाग साफ करा"
+
+# libgnomeui/gnome-app-helper.c:176
+#. Undo
+#: libgnomeui/gnome-app-helper.c:176
+msgid "_Undo"
+msgstr "आधिची प्रक्रिया रद्द करा"
+
+# libgnomeui/gnome-app-helper.c:176
+#: libgnomeui/gnome-app-helper.c:176
+msgid "Undo the last action"
+msgstr "या आधिची शेवटची प्रक्रीया रद्द करा"
+
+# libgnomeui/gnome-app-helper.c:181
+#. Redo
+#: libgnomeui/gnome-app-helper.c:181
+msgid "_Redo"
+msgstr "आधीच्या प्रक्रीया रद्द करा"
+
+# libgnomeui/gnome-app-helper.c:181
+#: libgnomeui/gnome-app-helper.c:181
+msgid "Redo the undone action"
+msgstr "रद्द केलेली प्रक्रिया पुन्हा करा"
+
+# libgnomeui/gnome-app-helper.c:186
+#. Find
+#: libgnomeui/gnome-app-helper.c:186
+msgid "_Find..."
+msgstr "शोधा"
+
+# libgnomeui/gnome-app-helper.c:186
+#: libgnomeui/gnome-app-helper.c:186
+msgid "Search for a string"
+msgstr "अक्षरसमुह शोधा"
+
+#. Find Again
+#: libgnomeui/gnome-app-helper.c:191
+msgid "Find Ne_xt"
+msgstr "यापुढील भागात शोधा"
+
+# libgnomeui/gnome-app-helper.c:192
+#: libgnomeui/gnome-app-helper.c:192
+msgid "Search again for the same string"
+msgstr "याच अक्षरसमुहास उन्हा शोधा"
+
+# libgnomeui/gnome-app-helper.c:197
+#. Replace
+#: libgnomeui/gnome-app-helper.c:197
+#, fuzzy
+msgid "R_eplace..."
+msgstr "एका अक्षरसमुहाच्या जागी दुसरा अक्षरसमुह टाका"
+
+# libgnomeui/gnome-app-helper.c:197
+#: libgnomeui/gnome-app-helper.c:197
+msgid "Replace a string"
+msgstr "एका अक्षरामुहाच्या जागी दुसरा अक्षरसमुह टाका"
+
+# libgnomeui/gnome-app-helper.c:202
+#. Properties
+#: libgnomeui/gnome-app-helper.c:202
+#, fuzzy
+msgid "_Properties"
+msgstr "गुणधर्म..."
+
+# libgnomeui/gnome-app-helper.c:203
+#: libgnomeui/gnome-app-helper.c:203
+msgid "Modify the file's properties"
+msgstr "फाइलचे गुणधर्म बदला"
+
+# libgnomeui/gnome-app-helper.c:211
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: libgnomeui/gnome-app-helper.c:211
+#, fuzzy
+msgid "Prefere_nces"
+msgstr "प्राधान्य"
+
+# libgnomeui/gnome-app-helper.c:212
+#: libgnomeui/gnome-app-helper.c:212
+msgid "Configure the application"
+msgstr "कार्यक्रमाचे गुणधर्म बदला"
+
+# libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+msgid "_About"
+msgstr "आम्ही कोण?"
+
+# libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+msgid "About this application"
+msgstr "या कार्यक्रमाविषयी"
+
+# libgnomeui/gnome-app-helper.c:225
+#: libgnomeui/gnome-app-helper.c:225
+#, fuzzy
+msgid "Select _All"
+msgstr "सर्व भागाची निवड करा"
+
+# libgnomeui/gnome-app-helper.c:226
+#: libgnomeui/gnome-app-helper.c:226
+msgid "Select everything"
+msgstr "सर्व काही निवडा"
+
+# libgnomeui/gnome-app-helper.c:234
+#.
+#. * Window menu
+#.
+#: libgnomeui/gnome-app-helper.c:234
+msgid "Create New _Window"
+msgstr "नविन विंडो तयार करा"
+
+# libgnomeui/gnome-app-helper.c:235
+#: libgnomeui/gnome-app-helper.c:235
+msgid "Create a new window"
+msgstr "सर्वकाही निवडा"
+
+# libgnomeui/gnome-app-helper.c:239
+#: libgnomeui/gnome-app-helper.c:239
+msgid "_Close This Window"
+msgstr "नविन विंडो तयार करा"
+
+# libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+msgid "Close the current window"
+msgstr "एक नवीन विंडो बंद करा"
+
+# libgnomeui/gnome-app-helper.c:248
+#.
+#. * The "Game" menu
+#.
+#: libgnomeui/gnome-app-helper.c:248
+msgid "_New game"
+msgstr "नवा डाव"
+
+# libgnomeui/gnome-app-helper.c:249
+#: libgnomeui/gnome-app-helper.c:249
+msgid "Start a new game"
+msgstr "ही विंडो बंद करा"
+
+# libgnomeui/gnome-app-helper.c:253
+#: libgnomeui/gnome-app-helper.c:253
+msgid "_Pause game"
+msgstr "खेळ थांबवा"
+
+# libgnomeui/gnome-app-helper.c:254
+#: libgnomeui/gnome-app-helper.c:254
+msgid "Pause the game"
+msgstr "खेळ पुन्हा सुरु करा"
+
+# libgnomeui/gnome-app-helper.c:258
+#: libgnomeui/gnome-app-helper.c:258
+msgid "_Restart game"
+msgstr "खेळ पुन्हा सुरु करा"
+
+# libgnomeui/gnome-app-helper.c:259
+#: libgnomeui/gnome-app-helper.c:259
+msgid "Restart the game"
+msgstr "खेळ पुन्हा सुरु करा"
+
+# libgnomeui/gnome-app-helper.c:263
+#: libgnomeui/gnome-app-helper.c:263
+msgid "_Undo move"
+msgstr "चाल रद्द करा"
+
+# libgnomeui/gnome-app-helper.c:264
+#: libgnomeui/gnome-app-helper.c:264
+msgid "Undo the last move"
+msgstr "शेवटची चाल रद्द करा"
+
+# libgnomeui/gnome-app-helper.c:268
+#: libgnomeui/gnome-app-helper.c:268
+msgid "_Redo move"
+msgstr "चाल पुन्हा करा"
+
+# libgnomeui/gnome-app-helper.c:269
+#: libgnomeui/gnome-app-helper.c:269
+msgid "Redo the undone move"
+msgstr "या आधी रद्द केलेली चाल पुन्हा करा"
+
+# libgnomeui/gnome-app-helper.c:273
+#: libgnomeui/gnome-app-helper.c:273
+msgid "_Hint"
+msgstr "संकेत"
+
+# libgnomeui/gnome-app-helper.c:274
+#: libgnomeui/gnome-app-helper.c:274
+msgid "Get a hint for your next move"
+msgstr "या आधि रद्द केलेलि चाल संकेत मिळवा"
+
+# libgnomeui/gnome-app-helper.c:279
+#. 30
+#: libgnomeui/gnome-app-helper.c:279
+msgid "_Scores..."
+msgstr "गुनफलक"
+
+# libgnomeui/gnome-app-helper.c:280
+#: libgnomeui/gnome-app-helper.c:280
+msgid "View the scores"
+msgstr "गुनफलक पहा"
+
+# libgnomeui/gnome-app-helper.c:284
+#: libgnomeui/gnome-app-helper.c:284
+msgid "_End game"
+msgstr "खेळ समाप्त करा"
+
+# libgnomeui/gnome-app-helper.c:285
+#: libgnomeui/gnome-app-helper.c:285
+msgid "End the current game"
+msgstr "सध्याचा डाव समाप्त करा"
+
+#: libgnomeui/gnome-app-helper.c:1143
+msgid "_Contents"
+msgstr "अनुक्रमणीका"
+
+# libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:1146
+#, fuzzy
+msgid "View help for this application"
+msgstr "या कार्यक्रमाची मदतपुस्तिका पहा"
+
+#: libgnomeui/gnome-app-helper.c:2566
+msgid "Text Below Icons"
+msgstr "चिन्हांखाली गद्य दाखवा "
+
+#: libgnomeui/gnome-app-helper.c:2567
+msgid "Priority Text Beside Icons"
+msgstr "चिन्हांच्या बाजुला प्राध्यान्यक्रमातिल गद्य दाखवा"
+
+# libgnomeui/gnome-app-helper.c:2564
+#: libgnomeui/gnome-app-helper.c:2568
+#, fuzzy
+msgid "Icons Only"
+msgstr "फक्त चिन्ह दाखवा"
+
+# libgnomeui/gnome-app-helper.c:2565
+#: libgnomeui/gnome-app-helper.c:2569
+#, fuzzy
+msgid "Text Only"
+msgstr "फक्त गद्य दाखवा"
+
+# libgnomeui/gnome-app-helper.c:2616
+#: libgnomeui/gnome-app-helper.c:2630
+#, c-format
+msgid "Use desktop default (%s)"
+msgstr "डेस्कटाॅपचे सर्वसाधानरण समायोजन वापरा(%s)"
+
+# libgnomeui/gnome-app-util.c:99
+#: libgnomeui/gnome-app-util.c:99
+msgid " (press return)"
+msgstr "(एंटर बटन दाबा)"
+
+# libgnomeui/gnome-app-util.c:141
+#: libgnomeui/gnome-app-util.c:141
+msgid "ERROR: "
+msgstr "चुकी: "
+
+# libgnomeui/gnome-app-util.c:178
+#: libgnomeui/gnome-app-util.c:178
+msgid "Warning: "
+msgstr "चेतावनी: "
+
+# libgnomeui/gnome-app-util.c:316
+#: libgnomeui/gnome-app-util.c:316
+msgid "y"
+msgstr "y"
+
+# libgnomeui/gnome-app-util.c:317
+#: libgnomeui/gnome-app-util.c:317
+msgid "yes"
+msgstr "योय"
+
+# libgnomeui/gnome-app-util.c:320
+#: libgnomeui/gnome-app-util.c:320
+msgid "n"
+msgstr "n"
+
+# libgnomeui/gnome-app-util.c:321
+#: libgnomeui/gnome-app-util.c:321
+msgid "no"
+msgstr "नाहीं"
+
+# libgnomeui/gnome-app-util.c:356
+#: libgnomeui/gnome-app-util.c:356
+msgid " (yes or no)"
+msgstr "(हो किंवा नाही)"
+
+# libgnomeui/gnome-app-util.c:357
+#: libgnomeui/gnome-app-util.c:357
+msgid "  - OK? (yes or no)"
+msgstr "OK? (हो किंवा नाही)"
+
+# libgnomeui/gnome-app-util.c:685
+#: libgnomeui/gnome-app-util.c:685
+msgid "Progress"
+msgstr "प्रगती"
+
+# libgnomeui/gnome-app.c:150
+#: libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr "कार्यक्रम सुचक"
+
+# libgnomeui/gnome-app.c:151
+#: libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr "कार्यक्रम सुचक शब्द"
+
+# libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
+#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
+msgid "History id"
+msgstr "इतिहास सुचक"
+
+# libgnomeui/gnome-entry.c:178
+#: libgnomeui/gnome-entry.c:200
+msgid "GTK entry"
+msgstr "GTK  नोंद"
+
+# libgnomeui/gnome-entry.c:179
+#: libgnomeui/gnome-entry.c:201
+msgid "The GTK entry"
+msgstr " GTK नोंद"
+
+# libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
+#: libgnomeui/gnome-file-entry.c:220 libgnomeui/gnome-icon-entry.c:176
+msgid "History ID"
+msgstr "इतिहास सुचक"
+
+# libgnomeui/gnome-file-entry.c:191
+#: libgnomeui/gnome-file-entry.c:221
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+"फाइलची नोंद केवळ डायरेक्ट्रीचे नाव देण्यासाठी वापरली जाते किंवा पुर्ण फाइलचे नाव देण्यासाठी वापरली जाते"
+
+# libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
+#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:185
+msgid "Browse Dialog Title"
+msgstr "संवाद शीर्षक पहा"
+
+# libgnomeui/gnome-file-entry.c:200
+#: libgnomeui/gnome-file-entry.c:230
+msgid "Title for the Browse file dialog."
+msgstr "फाइल पाहण्यासाठीच्या संवादाचे शिर्षक"
+
+# libgnomeui/gnome-file-entry.c:207
+#: libgnomeui/gnome-file-entry.c:237
+msgid "Directory Entry"
+msgstr "डायरेक्ट्री नोंद"
+
+# libgnomeui/gnome-file-entry.c:208
+#: libgnomeui/gnome-file-entry.c:238
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+"फाइलची नोंद केवळ डायरेक्ट्रीचे नाव देण्यासाठी वापरली जाते किंवा पुर्ण फाइलचे नाव देण्यासाठी वापरली जाते"
+
+# libgnomeui/gnome-file-entry.c:216
+#: libgnomeui/gnome-file-entry.c:246
+msgid "Modal"
+msgstr ""
+
+# libgnomeui/gnome-file-entry.c:217
+#: libgnomeui/gnome-file-entry.c:247
+msgid "Whether the Browse file window should be modal."
+msgstr "फाइल पाहण्याच्या विंडोसाठी सर्वसाधारण मार्ग"
+
+# libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-file-entry.c:254 libgnomeui/gnome-icon-entry.c:201
+msgid "Filename"
+msgstr "फाइलनाव"
+
+# libgnomeui/gnome-file-entry.c:225
+#: libgnomeui/gnome-file-entry.c:255
+msgid "Filename that should be displayed in the file entry."
+msgstr ""
+"फाइलच्या नोंदीत दखवण्याचे फाइलचे नाव"
+
+# libgnomeui/gnome-file-entry.c:233
+#: libgnomeui/gnome-file-entry.c:263
+msgid "Default Path"
+msgstr "सर्वसाधारन मार्ग"
+
+# libgnomeui/gnome-file-entry.c:234
+#: libgnomeui/gnome-file-entry.c:264
+msgid "Default path for the Browse file window."
+msgstr "फाइल फाहण्याच्या विंडोसाठी सर्वसाधारण मार्ग"
+
+# libgnomeui/gnome-file-entry.c:241
+#: libgnomeui/gnome-file-entry.c:271
+msgid "GnomeEntry"
+msgstr "जीनोम प्रविष्टि"
+
+# libgnomeui/gnome-file-entry.c:242
+#: libgnomeui/gnome-file-entry.c:272
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+"फाइल नोंद फाइलचे नाव देण्यासाठी वापरली जाणारी GnomeEntry"
+"तुम्ही या नोंदीचा वापर करुन तिच्या घटकांचे मुल्य बदलु शकता "
+
+# libgnomeui/gnome-file-entry.c:252
+#: libgnomeui/gnome-file-entry.c:282
+msgid "GtkEntry"
+msgstr ""
+
+# libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:283
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+"फाईल नाव देण्यासाठी वापरली जानारी GtkEntry"
+"तुम्ही या नोंदीचा वापर करुन तिच्या घटकांचे मुल्य बदलु शकता."
+
+# libgnomeui/gnome-file-entry.c:418
+#: libgnomeui/gnome-file-entry.c:527
+msgid "Select file"
+msgstr "फाइल निवडा"
+
+# libgnomeui/gnome-app-helper.c:166
+#: libgnomeui/gnome-file-entry.c:645
+#, fuzzy
+msgid "Path"
+msgstr "मार्ग"
+
+# libgnomeui/gnome-app-helper.c:114
+#: libgnomeui/gnome-file-entry.c:645
+#, fuzzy
+msgid "Path to file"
+msgstr "फाइलचा मार्ग"
+
+# libgnomeui/gnome-file-entry.c:592
+#: libgnomeui/gnome-file-entry.c:672
+#, fuzzy
+msgid "_Browse..."
+msgstr "संचार करा"
+
+#: libgnomeui/gnome-file-entry.c:673
+msgid "Pop up a file selector to choose a file"
+msgstr "फाइल निवडण्यासाठी विंडो उघडा"
+
+# libgnomeui/gnome-font-picker.c:66
+#: libgnomeui/gnome-font-picker.c:66
+msgid "sans 12"
+msgstr "sans 12"
+
+# libgnomeui/gnome-font-picker.c:67
+#: libgnomeui/gnome-font-picker.c:67
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "अइईउऊएऐओऔकखगघङचछजझञतथदधनटठडढणपफबभमयरलवशषसह"
+
+# libgnomeui/gnome-font-picker.c:68
+#: libgnomeui/gnome-font-picker.c:68
+msgid "Pick a Font"
+msgstr "एक फोन्ट निवडा"
+
+# libgnomeui/gnome-font-picker.c:156
+#: libgnomeui/gnome-font-picker.c:156
+msgid "The title of the selection dialog box"
+msgstr "नीवड संवाद विंडोचे शिर्षक"
+
+# libgnomeui/gnome-font-picker.c:164
+#: libgnomeui/gnome-font-picker.c:164
+msgid "Mode"
+msgstr "पद्धती"
+
+# libgnomeui/gnome-font-picker.c:165
+#: libgnomeui/gnome-font-picker.c:165
+msgid "The mode of operation of the font picker"
+msgstr "फोन्ट नीवडकर्त्याची कार्यपद्धती"
+
+# libgnomeui/gnome-font-picker.c:174
+#: libgnomeui/gnome-font-picker.c:174
+msgid "Font name"
+msgstr "फोन्ट नाव"
+
+# libgnomeui/gnome-font-picker.c:175
+#: libgnomeui/gnome-font-picker.c:175
+msgid "Name of the selected font"
+msgstr "निवडलेल्या फोन्टचे नाव"
+
+# libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+msgid "Font"
+msgstr "फोन्ट"
+
+# libgnomeui/gnome-font-picker.c:185
+#: libgnomeui/gnome-font-picker.c:185
+msgid "The selected GtkFont"
+msgstr "निवडलेला GtkFont"
+
+# libgnomeui/gnome-font-picker.c:192
+#: libgnomeui/gnome-font-picker.c:192
+msgid "Preview text"
+msgstr "पूर्वदर्शन गद्य"
+
+# libgnomeui/gnome-font-picker.c:193
+#: libgnomeui/gnome-font-picker.c:193
+msgid "Preview text shown in the dialog"
+msgstr "संवादादरम्यान दाखविले जाणारे पूर्व दर्शन गद्य"
+
+# libgnomeui/gnome-font-picker.c:201
+#: libgnomeui/gnome-font-picker.c:201
+
+msgid "Use font in label"
+msgstr "लेबलसाठी वापरला जाणारा फोन्ट"
+
+# libgnomeui/gnome-font-picker.c:202
+#: libgnomeui/gnome-font-picker.c:202
+msgid "Use font in the label in font info mode"
+msgstr "फॉंट माहितीदरम्यान लेबलसाठी वापरला जाणारा फाॅंट "
+
+# libgnomeui/gnome-font-picker.c:210
+#: libgnomeui/gnome-font-picker.c:210
+msgid "Font size for label"
+msgstr "लेबलसाठी फॉंटचा आकार"
+
+# libgnomeui/gnome-font-picker.c:211
+#: libgnomeui/gnome-font-picker.c:211
+msgid "Font size for label in font info mode"
+msgstr "फॉंट माहितिदरम्यान लेबलसाठी वापरल्या जाणाऱ्या फॉंटचा आकार"
+
+# libgnomeui/gnome-font-picker.c:221
+#: libgnomeui/gnome-font-picker.c:221
+msgid "Show size"
+msgstr "आकार दाखवा"
+
+# libgnomeui/gnome-font-picker.c:222
+#: libgnomeui/gnome-font-picker.c:222
+msgid "Show size in font info mode"
+msgstr "फॉंट माहितीदरम्यान आकार दाखवा"
+
+# libgnomeui/gnome-gconf-ui.c:61
+#: libgnomeui/gnome-gconf-ui.c:61
+msgid "GNOME GConf UI Support"
+msgstr "ग्नोम संवादपट आधार"
+
+# libgnomeui/gnome-gconf-ui.c:96
+#: libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "तपशील"
+
+# libgnomeui/gnome-gconf-ui.c:169
+#: libgnomeui/gnome-gconf-ui.c:169
+#, c-format
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr "\"%s\"हा कार्यक्रम असे बदल घडवुन आणण्याचा प्रयत्न करत आहे " 
+"जे ऑपरेटींग करण्याचा अधिकार तुम्हाला नाही."
+"कींवा पुढील वेळी कार्यक्रम वापरतानाअ सुरु होणार नाही"
+ 
+# libgnomeui/gnome-gconf-ui.c:176
+#: libgnomeui/gnome-gconf-ui.c:176
+#, c-format
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"%s साठीची वैयक्तीक माहीती साठवताना चुक झाली आहे"
+"तुम्ही निवडलेल्या काही गोष्टी अंमलात येउ शकनार नाही"
+
+# libgnomeui/gnome-icon-entry.c:164
+#: libgnomeui/gnome-icon-entry.c:177
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr "चिन्हाच्या नोंदीसाठीचा इकमेव सुचक.एतिहास यादीअ साठवताना"
+"याचा वापर केआ जाइल"
+
+# libgnomeui/gnome-icon-entry.c:173
+#: libgnomeui/gnome-icon-entry.c:186
+msgid "Title for the Browse icon dialog."
+msgstr "संचार-चिन्हक संवादाअसाठी शीर्षक"
+
+# libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:193
+msgid "Pixmap Directory"
+msgstr "बिंदु चित्र डायरेक्ट्री"
+
+# libgnomeui/gnome-icon-entry.c:181
+#: libgnomeui/gnome-icon-entry.c:194
+msgid "Directory that will be searched for icons."
+msgstr "या डायरेक्ट्रीत विन्हे शोधली जातील"
+
+# libgnomeui/gnome-icon-entry.c:189
+#: libgnomeui/gnome-icon-entry.c:202
+msgid "Filename that should be displayed in the icon entry."
+msgstr "वह फाइलनाम जो आइकान प्रविष्टि में प्रदर्शित होना है"
+
+# libgnomeui/gnome-icon-entry.c:197
+#: libgnomeui/gnome-icon-entry.c:210
+msgid "Picker dialog"
+msgstr ""
+
+# libgnomeui/gnome-icon-entry.c:198
+#: libgnomeui/gnome-icon-entry.c:211
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"अाइकान पिकर डायलाग . आप इस गुणधर्म का प्रयोग GtkDialog  को प्राप्त करने के लिए कर "
+"सकते हैं यदि आपको इसके किसी पैरामीटर को संशोधित करने का या किसी पैरामीटर से संबधित "
+"प्रश्न करने की आवश्यकता हो"
+
+# libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
+#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:979
+msgid "No Icon"
+msgstr "आइकान नाही"
+
+# libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
+#: libgnomeui/gnome-icon-entry.c:531 libgnomeui/gnome-pixmap-entry.c:386
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "सामान्य फाइल चयन का प्रयोग करने पर कोई hbox नहीं मिला"
+
+# libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-icon-entry.c:537 libgnomeui/gnome-pixmap-entry.c:392
+msgid "Preview"
+msgstr "पूर्व दर्शन"
+
+# libgnomeui/gnome-font-picker.c:156
+#: libgnomeui/gnome-icon-entry.c:750
+#, fuzzy
+msgid "Icon selection dialog"
+msgstr "चयन डायलाग बाक्स का शीर्षक"
+
+#: libgnomeui/gnome-icon-entry.c:751
+msgid "This dialog box lets you select an icon."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:757
+msgid "Icon selector"
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:758
+msgid "Please pick the icon you want."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:982
+msgid "Icon Selector"
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:983
+msgid "This button will open a window to let you select an icon."
+msgstr ""
+
+# libgnomeui/gnome-icon-entry.c:930
+#: libgnomeui/gnome-icon-entry.c:1006
+msgid "Browse"
+msgstr "ब्राउज"
+
+#: libgnomeui/gnome-icon-entry.c:1008
+msgid "Icon path"
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:1009
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr ""
+
+# libgnomeui/gnome-icon-sel.c:296
+#: libgnomeui/gnome-icon-sel.c:293
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr "Gnomeicon Section %s उपलब्ध नहीं है या वह एक डायरेक्टरी नहीं है"
+
+# libgnomeui/gnome-icon-sel.c:304
+#: libgnomeui/gnome-icon-sel.c:301
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr "Gnomeiconsection %s डायरेक्टरी नहीं खुल रही है"
+
+# libgnomeui/gnome-icon-sel.c:411
+#: libgnomeui/gnome-icon-sel.c:401
+msgid "Loading Icons..."
+msgstr "आइकान लोड हो रहे है"
+
+# libgnomeui/gnome-messagebox.c:110
+#: libgnomeui/gnome-messagebox.c:108
+msgid "Information"
+msgstr "सूचना"
+
+# libgnomeui/gnome-messagebox.c:115
+#: libgnomeui/gnome-messagebox.c:113
+msgid "Warning"
+msgstr "चेतावनी"
+
+# libgnomeui/gnome-messagebox.c:121
+#: libgnomeui/gnome-messagebox.c:119
+msgid "Error"
+msgstr "त्रुटि"
+
+# libgnomeui/gnome-messagebox.c:127
+#: libgnomeui/gnome-messagebox.c:125
+msgid "Question"
+msgstr "प्रश्न"
+
+# libgnomeui/gnome-messagebox.c:132
+#: libgnomeui/gnome-messagebox.c:130
+msgid "Message"
+msgstr "संदेश"
+
+# libgnomeui/gnome-pixmap-entry.c:118
+#: libgnomeui/gnome-pixmap-entry.c:113
+msgid "Do Preview"
+msgstr "पूर्व-दर्शन कराएं"
+
+# libgnomeui/gnome-pixmap-entry.c:119
+#: libgnomeui/gnome-pixmap-entry.c:114
+msgid "Whether the pixmap entry should have a preview."
+msgstr "क्या pixmap प्रविष्टि के लिए पूर्वदर्शन है"
+
+# libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
+#: libgnomeui/gnome-pixmap-entry.c:188 libgnomeui/gnome-pixmap-entry.c:450
+msgid "No Image"
+msgstr "कोई इमेज नहीं"
+
+# libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
+#: libgnomeui/gnome-pixmap-entry.c:205
+#, fuzzy
+msgid "Image Preview"
+msgstr "पूर्व दर्शन"
+
+# libgnomeui/gnome-dateedit.c:469
+#: libgnomeui/gnome-pixmap-entry.c:206
+#, fuzzy
+msgid "A preview of the image currently specified"
+msgstr "वर्तमान में चयनित समय"
+
+# libgnomeui/gnome-scores.c:78
+#: libgnomeui/gnome-scores.c:78
+msgid "Top Ten"
+msgstr "प्रारंभ के दस"
+
+# libgnomeui/gnome-scores.c:91
+#: libgnomeui/gnome-scores.c:91
+msgid "User"
+msgstr "उपयोगकर्ता"
+
+# libgnomeui/gnome-scores.c:94
+#: libgnomeui/gnome-scores.c:94
+msgid "Score"
+msgstr "स्कोर"
+
+# libgnomeui/gnome-scores.c:199
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: libgnomeui/gnome-scores.c:194
+msgid "%a %b %d %T %Y"
+msgstr "%a %b %d %T %Y"
+
+# libgnomeui/gnome-scores.c:412
+#: libgnomeui/gnome-scores.c:395
+msgid "Sans 14"
+msgstr "Sans 14"
+
+# test-gnome/testgnome.xml.h:3
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "test से बाहर जाएं"
+
+# libgnomeui/gnome-app-helper.c:147
+#~ msgid "E_xit"
+#~ msgstr "बाहर"
+
+# libgnomeui/gnome-app-helper.c:147
+#~ msgid "Exit the program"
+#~ msgstr "अनुप्रयोग से बाहर जाएं"
+
+# libgnomeui/gnome-app-helper.c:191
+#~ msgid "Find _Again"
+#~ msgstr "पुन खोजें"
+
+# libgnomeui/gnome-app-helper.c:2563
+#~ msgid "Both text and icons"
+#~ msgstr "पाठ्य तथा आइकान दोनो"
