@@ -489,13 +489,13 @@ icon_selected_cb (GnomeIconEntry * ientry)
 	g_return_if_fail (ientry != NULL);
 	g_return_if_fail (GNOME_IS_ICON_ENTRY (ientry));
 
-	gis =  gtk_object_get_user_data(GTK_OBJECT(ientry));
-	gnome_icon_selection_stop_loading(gis);
-	icon = gnome_icon_selection_get_icon(gis, TRUE);
+	gis =  gtk_object_get_user_data (GTK_OBJECT (ientry));
+	gnome_icon_selection_stop_loading (gis);
+	icon = gnome_icon_selection_get_icon (gis, TRUE);
 
 	if (icon != NULL) {
-		GtkWidget *e = gnome_icon_entry_gtk_entry(ientry);
-		gtk_entry_set_text(GTK_ENTRY(e),icon);
+		GtkWidget *e = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (ientry->_priv->fentry));
+		gtk_entry_set_text (GTK_ENTRY (e), icon);
 		entry_changed (NULL, ientry);
 	}
 

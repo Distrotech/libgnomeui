@@ -338,6 +338,14 @@ load_idle_func (gpointer data)
 	GnomeIconSelection * gis = data;
 	GList * list = gis->_priv->file_list;
 
+	if (list == NULL) {
+		if (gis->_priv->load_loop != NULL &&
+		    g_main_loop_is_running (gis->_priv->load_loop))
+			g_main_loop_quit (gis->_priv->load_loop);
+		gis->_priv->load_idle = 0;
+		return FALSE;
+	}
+
 	append_an_icon (gis, list->data);
 
 	g_free (list->data);

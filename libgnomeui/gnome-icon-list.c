@@ -985,7 +985,8 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 		"text", text,
 		"x", (double) DEFAULT_TEXT_SPACING,
 		"y", (double) gdk_pixbuf_get_height (im),
-		"clip_width", (double) gdk_pixbuf_get_width (im),
+		"width", (double) gdk_pixbuf_get_width (im),
+		"editable", priv->is_editable,
 		"anchor", GTK_ANCHOR_NW,
 		NULL));
 

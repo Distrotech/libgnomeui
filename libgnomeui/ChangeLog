@@ -1,3 +1,11 @@
+Sun Sep 30 12:55:02 2001  George Lebl <jirka@5z.com>
+
+	* gnome-icon-entry.c: eliminate warning on icon select
+
+	* gnome-icon-sel.c: fix segv on icon load
+
+	* gnome-icon-list.c: use correct properties for the rich text item
+
 Sat Sep 29 15:48:56 2001  George Lebl <jirka@5z.com>
 
 	* gnome-about.c: destroy the dialog when OK is pressed, just like the
