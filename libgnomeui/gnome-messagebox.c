@@ -1,5 +1,5 @@
 /* GNOME GUI Library
- * Copyright (C) 1997 Jay Painter
+ * Copyright (C) 1997, 1998 Jay Painter
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,6 +22,7 @@
 #include "gnome-messagebox.h"
 #include <string.h> /* for strcmp */
 #include <gtk/gtk.h>
+#include "libgnomeui/gnome-stock.h"
 
 /* Library must use dgettext, not gettext.  */
 #ifdef ENABLE_NLS
@@ -234,7 +235,7 @@ gnome_messagebox_new (gchar           *message,
 		if (text == NULL)
 			break;
 
-		button = gtk_button_new_with_label (text);
+		button = gnome_stock_or_ordinary_button (text);
 		GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
 		gtk_widget_set_usize (button, GNOME_MESSAGEBOX_BUTTON_WIDTH,
 				      GNOME_MESSAGEBOX_BUTTON_HEIGHT);

@@ -1,8 +1,22 @@
-/* GNOME GUI Library
- * Copyright (C) 1997, 1998 the Free Software Foundation
- *
- * Author: Eckehard Berns
- */
+/* Stock icons, buttons, and menu items.
+   Copyright (C) 1997, 1998 Free Software Foundation
+
+   The Gnome Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   The Gnome Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with the Gnome Library; see the file COPYING.LIB.  If not,
+   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.
+
+   Author: Eckehard Berns  */
 
 #ifndef __GNOME_STOCK_H__
 #define __GNOME_STOCK_H__
@@ -277,6 +291,12 @@ GnomeStockPixmapEntry *gnome_stock_pixmap_checkfor (char *icon, char *subtype);
 
 /* returns a default button widget for dialogs */
 GtkWidget             *gnome_stock_button          (char *type);
+
+/* Returns a button widget.  If the TYPE argument matches a
+   GNOME_STOCK_BUTTON_* define, then a stock button is created.
+   Otherwise, an ordinary button is created, and TYPE is given as the
+   label.  */
+GtkWidget             *gnome_stock_or_ordinary_button (char *type);
 
 
 /*  menus  */

@@ -1,8 +1,22 @@
-/* GNOME GUI Library
- * Copyright (C) 1997, 1998 the Free Software Foundation
- *
- * Author: Eckehard Berns
- */
+/* Stock icons, buttons, and menu items.
+   Copyright (C) 1997, 1998 Free Software Foundation
+
+   The Gnome Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   The Gnome Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with the Gnome Library; see the file COPYING.LIB.  If not,
+   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.
+
+   Author: Eckehard Berns  */
 
 #include <config.h>
 #include <stdlib.h>
@@ -785,17 +799,13 @@ gnome_stock_pixmap_checkfor(char *icon, char *subtype)
 
 
 
-GtkWidget *
-gnome_stock_button(char *type)
+static GtkWidget *
+stock_button_from_entry (char *type, GnomeStockPixmapEntry *entry)
 {
         GtkWidget *button, *label, *hbox;
-	GnomeStockPixmapEntry *entry;
 #ifdef BUTTON_WANT_ICON
         GtkWidget *pixmap;
 #endif /* BUTTON_WANT_ICON */
-
-	entry = lookup(type,GNOME_STOCK_PIXMAP_REGULAR,0);
-	g_assert(entry != NULL);
 
         button = gtk_button_new();
         hbox = gtk_hbox_new(FALSE, 0);
@@ -815,6 +825,28 @@ gnome_stock_button(char *type)
         return button;
 }
 
+GtkWidget *
+gnome_stock_button(char *type)
+{
+	GnomeStockPixmapEntry *entry;
+
+	entry = lookup(type,GNOME_STOCK_PIXMAP_REGULAR,0);
+	g_assert(entry != NULL);
+
+	return stock_button_from_entry (type, entry);
+}
+
+GtkWidget *
+gnome_stock_or_ordinary_button (char *type)
+{
+	GnomeStockPixmapEntry *entry;
+
+	entry = lookup(type,GNOME_STOCK_PIXMAP_REGULAR,0);
+	if (entry != NULL)
+		return stock_button_from_entry (type, entry);
+
+	return gtk_button_new_with_label (type);
+}
 
 
 
