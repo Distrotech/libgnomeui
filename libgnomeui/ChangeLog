@@ -1,3 +1,7 @@
+Mon Nov 23 01:25:26 PST 1998 Manish Singh <yosh@gimp.org>
+
+	* gnome-pixmap.c: remove reference to GTK_BASIC, it's gone now
+
 1998-11-22  Jay Painter <jpaint@serv.net>
 
 	* gnome-font-picker.c: fixed a dumb bug where the
