@@ -538,40 +538,51 @@ struct _GnomeUIBuilderData {
 	GtkDestroyNotify destroy_func;		/* Destroy notification function for language bindings */
 };
 
+/* Flush the accelerator definitions into the application specific
+ * configuration file ~/.gnome/accels/<app-id>.
+ */
+void gnome_accelerators_sync (void);
+     
 
 /* Fills the specified menu shell with items created from the specified
- * info, inserting them from the item no. pos on.  If the specified
- * accelgroup is not NULL, then the menu's hotkeys are put into that
- * accelgroup.  If accel_group is non-NULL and insert_shortcuts is
- * TRUE, then the shortcut keys (MOD1 + underlined letters) in the
- * items' labels will be put into the accel group as well.
+ * info, inserting them from the item no. pos on.
+ * The accel group will be used as the accel group for all newly created
+ * sub menus and serves as the global accel group for all menu item
+ * hotkeys. If it is passed as NULL, global hotkeys will be disabled.
+ * The uline_accels argument determines whether underline accelerators
+ * will be featured from the menu item labels.
  */
-void gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
-			  GtkAccelGroup *accel_group,
-			  gboolean insert_shortcuts, gint pos);
+void gnome_app_fill_menu (GtkMenuShell	*menu_shell,
+			  GnomeUIInfo	*uiinfo,
+			  GtkAccelGroup	*accel_group,
+			  gboolean	 uline_accels,
+			  gint		 pos);
 
 /* Same as gnome_app_fill_menu, but sets all the user data pointers to
  * the specified value.
  */
-void gnome_app_fill_menu_with_data (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
-				    GtkAccelGroup *accel_group,
-				    gboolean insert_shortcuts, gint pos,
-				    gpointer user_data);
+void gnome_app_fill_menu_with_data (GtkMenuShell	*menu_shell,
+				    GnomeUIInfo		*uiinfo,
+				    GtkAccelGroup	*accel_group,
+				    gboolean		 uline_accels,
+				    gint		 pos,
+				    gpointer		 user_data);
 
 /* Fills the specified menu shell with items created from the specified
  * info, inserting them from item no. pos on and using the specified
- * builder data -- this is intended for language bindings.  If the
- * specified accelgroup is not NULL, then the menu's hotkeys are put
- * into that accelgroup.  If accel_group is non-NULL and
- * insert_shortcuts is TRUE, then the shortcut keys (MOD1 + underlined
- * letters) in the items' labels will be put into the accel group as
- * well (this is useful for toplevel menu bars in which you want MOD1-F
- * to activate the "_File" menu, for example).
+ * builder data -- this is intended for language bindings.
+ * The accel group will be used as the accel group for all newly created
+ * sub menus and serves as the global accel group for all menu item
+ * hotkeys. If it is passed as NULL, global hotkeys will be disabled.
+ * The uline_accels argument determines whether underline accelerators
+ * will be featured from the menu item labels.
  */
-void gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
+void gnome_app_fill_menu_custom (GtkMenuShell	    *menu_shell,
+				 GnomeUIInfo	    *uiinfo,
 				 GnomeUIBuilderData *uibdata,
-				 GtkAccelGroup *accel_group,
-				 gboolean insert_shortcuts, gint pos);
+				 GtkAccelGroup	    *accel_group,
+				 gboolean	     uline_accels,
+				 gint		     pos);
 
 /* Converts GNOME_APP_UI_ITEM_CONFIGURABLE menu GnomeUIInfos to the
    corresponding standard GNOME_APP_UI_ITEMs.  gnome_app_create_menus

@@ -47,6 +47,7 @@ char *alloca ();
 #include <ctype.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
+#include "libgnome/libgnome.h"
 #include "libgnome/gnome-defs.h"
 #include "libgnome/gnome-util.h"
 #include "libgnome/gnome-config.h"
@@ -402,27 +403,69 @@ setup_accelerator (GtkAccelGroup *accel_group, GnomeUIInfo *uiinfo,
 					    uiinfo->ac_mods, accel_flags);
 }
 
+#ifndef	GTK_CHECK_VERSION
+GtkAccelGroup*
+gtk_menu_ensure_uline_accel_group (GtkMenu *menu)
+{
+  GtkAccelGroup *accel_group;
+
+  g_return_val_if_fail (GTK_IS_MENU (menu), NULL);
+
+  accel_group = gtk_object_get_data (GTK_OBJECT (menu), "GtkMenu-uline-accel-group");
+  if (!accel_group)
+    {
+      accel_group = gtk_accel_group_new ();
+      gtk_accel_group_attach (accel_group, GTK_OBJECT (menu));
+      gtk_object_set_data_full (GTK_OBJECT (menu),
+				"GtkMenu-uline-accel-group",
+				accel_group,
+				(GtkDestroyNotify) gtk_accel_group_unref);
+    }
+
+  return accel_group;
+}
+void
+gtk_item_factory_add_foreign (GtkWidget      *accel_widget,
+			      const gchar    *full_path,
+			      GtkAccelGroup  *accel_group,
+			      guint           keyval,
+			      GdkModifierType modifiers)
+{
+  if (accel_group)
+    gtk_widget_add_accelerator (accel_widget,
+				"activate",
+				accel_group,
+				keyval,
+				modifiers,
+				GTK_ACCEL_VISIBLE);
+}
+#endif
+
 /* Creates the accelerators for the underlined letter in a menu item's label. 
  * The keyval is what gtk_label_parse_uline() returned.  If accel_group is not 
  * NULL, then the keyval will be put with MOD1 as modifier in it (i.e. for 
- * Alt-F in the _File menu).  If menu_accel_group is not NULL, then the plain 
- * keyval will be put in it (this is for normal items).
+ * Alt-F in the _File menu).
  */
 static void
-setup_underlined_accelerator (GtkAccelGroup *accel_group, 
-		GtkAccelGroup *menu_accel_group, GtkWidget *menu_item, 
-		guint keyval)
+setup_uline_accel (GtkMenuShell  *menu_shell,
+		   GtkAccelGroup *accel_group,
+		   GtkWidget     *menu_item,
+		   guint          keyval)
 {
-	if (keyval == GDK_VoidSymbol)
-		return;
-
-	if (accel_group)
-		gtk_widget_add_accelerator (menu_item, "activate_item", 
-				accel_group, keyval, GDK_MOD1_MASK, 0);
-
-	if (menu_accel_group)
-		gtk_widget_add_accelerator (menu_item, "activate_item", 
-				menu_accel_group, keyval, 0, 0);
+	if (keyval != GDK_VoidSymbol) {
+		if (GTK_IS_MENU (menu_shell))
+			gtk_widget_add_accelerator (menu_item,
+						    "activate_item",
+						    gtk_menu_ensure_uline_accel_group (GTK_MENU (menu_shell)),
+						    keyval, 0,
+						    0);
+		if (accel_group)
+			gtk_widget_add_accelerator (menu_item,
+						    "activate_item", 
+						    accel_group,
+						    keyval, GDK_MOD1_MASK,
+						    0);
+	}
 }
 
 /* Callback to display hint in the statusbar when a menu item is 
@@ -760,6 +803,24 @@ gnome_app_install_menu_hints (GnomeApp *app,
     gnome_app_install_statusbar_menu_hints(GTK_STATUSBAR(app->statusbar), uiinfo);
 }
 
+static gint
+gnome_save_accels (gpointer data)
+{
+	gchar *file_name;
+
+	file_name = g_concat_dir_and_file (gnome_user_accels_dir, gnome_app_id);
+	gtk_item_factory_dump_rc (file_name, NULL, TRUE);
+	g_free (file_name);
+
+	return TRUE;
+}
+
+void
+gnome_accelerators_sync (void)
+{
+  gnome_save_accels (NULL);
+}
+
 /* Creates a menu item appropriate for the SEPARATOR, ITEM, TOGGLEITEM, or 
  * SUBTREE types.  If the item is inside a radio group, then a pointer to the 
  * group's list must be specified as well (*radio_group must be NULL for the 
@@ -767,9 +828,14 @@ gnome_app_install_menu_hints (GnomeApp *app,
  * menu item.
  */
 static void
-create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group, 
-		  GnomeUIBuilderData *uibdata, GtkAccelGroup *accel_group, 
-		  gboolean insert_shortcuts, GtkAccelGroup *menu_accel_group)
+create_menu_item (GtkMenuShell       *menu_shell,
+		  GnomeUIInfo        *uiinfo,
+		  int                 is_radio,
+		  GSList            **radio_group,
+		  GnomeUIBuilderData *uibdata,
+		  GtkAccelGroup      *accel_group,
+		  gboolean	      uline_accels,
+		  gint		      pos)
 {
 	GtkWidget *label;
 	GtkWidget *pixmap;
@@ -828,6 +894,12 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 		return;
 	}
 
+	if (!accel_group)
+		gtk_widget_lock_accelerators (uiinfo->widget);
+
+	gtk_widget_show (uiinfo->widget);
+	gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
+
 	/* If it is a separator, set it as insensitive so that it cannot be 
 	 * selected, and return -- there is nothing left to do.
 	 */
@@ -850,25 +922,74 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 	gtk_container_add (GTK_CONTAINER (uiinfo->widget), label);
 
 	gtk_accel_label_set_accel_widget (GTK_ACCEL_LABEL (label), 
-			uiinfo->widget);
+					  uiinfo->widget);
+	
+	/* setup underline accelerators
+	 */
+	if (uline_accels)
+		setup_uline_accel (menu_shell,
+				   accel_group,
+				   uiinfo->widget,
+				   keyval);
 
+	/* install global accelerator
+	 */
+	{
+		static guint save_accels_id = 0;
+		GString *gstring;
+		GtkWidget *widget;
+		
+		/* build up the menu item path */
+		gstring = g_string_new ("");
+		widget = uiinfo->widget;
+		while (widget) {
+			if (GTK_IS_MENU_ITEM (widget)) {
+				GtkWidget *child = GTK_BIN (widget)->child;
+				
+				if (GTK_IS_LABEL (child)) {
+					g_string_prepend (gstring, GTK_LABEL (child)->label);
+					g_string_prepend_c (gstring, '/');
+				}
+				widget = widget->parent;
+			} else if (GTK_IS_MENU (widget)) {
+				widget = gtk_menu_get_attach_widget (GTK_MENU (widget));
+				if (widget == NULL) {
+					g_string_prepend (gstring, "/-Orphan");
+					widget = NULL;
+				}
+			} else
+				widget = widget->parent;
+		}
+		g_string_prepend_c (gstring, '>');
+		g_string_prepend (gstring, gnome_app_id);
+		g_string_prepend_c (gstring, '<');
+
+		/* g_print ("######## menu item path: %s\n", gstring->str); */
+		
+		/* the item factory cares about installing the correct accelerator */
+		
+		gtk_item_factory_add_foreign (uiinfo->widget,
+					      gstring->str,
+					      accel_group,
+					      uiinfo->accelerator_key,
+					      uiinfo->ac_mods);
+		g_string_free (gstring, TRUE);
+
+		if (!save_accels_id)
+			save_accels_id = gtk_quit_add (1, gnome_save_accels, NULL);
+	}
+	
 	/* Set toggle information, if appropriate */
-
+	
 	if ((uiinfo->type == GNOME_APP_UI_TOGGLEITEM) || is_radio) {
 		gtk_check_menu_item_set_show_toggle
 			(GTK_CHECK_MENU_ITEM(uiinfo->widget), TRUE);
 		gtk_check_menu_item_set_active
 			(GTK_CHECK_MENU_ITEM (uiinfo->widget), FALSE);
 	}
-
-	/* Set the accelerators */
-
-	setup_accelerator (accel_group, uiinfo, "activate", GTK_ACCEL_VISIBLE);
-	setup_underlined_accelerator (insert_shortcuts ? accel_group : NULL,
-				      menu_accel_group, uiinfo->widget, keyval);
-
+	
 	/* Connect to the signal and set user data */
-
+	
 	type = uiinfo->type;
 	if (type == GNOME_APP_UI_SUBTREE_STOCK)
 		type = GNOME_APP_UI_SUBTREE;
@@ -890,7 +1011,7 @@ create_menu_item (GnomeUIInfo *uiinfo, int is_radio, GSList **radio_group,
 static int
 create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
 		GnomeUIBuilderData *uibdata, GtkAccelGroup *accel_group, 
-		GtkAccelGroup *menu_accel_group, gint pos)
+		gint pos)
 {
 	GSList *group;
 
@@ -903,15 +1024,9 @@ create_radio_menu_items (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 			break;
 
 		case GNOME_APP_UI_ITEM:
-			create_menu_item (uiinfo, TRUE, &group, uibdata, 
-					accel_group, FALSE, 
-					menu_accel_group);
-
-			gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
+			create_menu_item (menu_shell, uiinfo, TRUE, &group, uibdata, 
+					  accel_group, FALSE, pos);
 			pos++;
-
-			gtk_widget_show (uiinfo->widget);
-
 			break;
 
 		default:
@@ -939,8 +1054,7 @@ free_help_menu_entry (GtkWidget *widget, gpointer data)
 /* Creates the menu entries for help topics.  Returns the updated position 
  * value. */
 static int
-create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
-		GtkAccelGroup *menu_accel_group, gint pos)
+create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 {
 	char buf[1024];
 	char *topic_file;
@@ -995,10 +1109,10 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 
 		item = gtk_menu_item_new ();
 		label = create_label (s, &keyval);
-		gtk_container_add(GTK_CONTAINER (item), label);
-		setup_underlined_accelerator(NULL, menu_accel_group, item, 
-				keyval);
-
+		gtk_container_add (GTK_CONTAINER (item), label);
+		setup_uline_accel (menu_shell, NULL, item, keyval);
+		gtk_widget_lock_accelerators (item);
+		
 		gtk_signal_connect (GTK_OBJECT (item), "activate",
 				    (GtkSignalFunc) gnome_help_display, entry);
 		gtk_signal_connect (GTK_OBJECT (item), "destroy",
@@ -1016,26 +1130,6 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 				  several of them */
 
 	return pos;
-}
-
-/* Returns the menu's internal accel_group, or creates a new one if no 
- * accel_group was attached */
-static GtkAccelGroup *
-get_menu_accel_group (GtkMenuShell *menu_shell)
-{
-	GtkAccelGroup *ag;
-
-	ag = gtk_object_get_data (GTK_OBJECT (menu_shell), 
-			"gnome_menu_accel_group");
-
-	if (!ag) {
-		ag = gtk_accel_group_new ();
-		gtk_accel_group_attach (ag, GTK_OBJECT (menu_shell));
-		gtk_object_set_data (GTK_OBJECT (menu_shell), 
-				"gnome_menu_accel_group", ag);
-	}
-
-	return ag;
 }
 
 /* Performs signal connection as appropriate for interpreters or native bindings */
@@ -1062,22 +1156,25 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name,
  * @menu_shell:
  * @uiinfo:
  * @accel_group:
- * @insert_shortcuts:
+ * @uline_accels:
  * @pos:
  *
  * Description:
  * Fills the specified menu shell with items created from the specified
- * info, inserting them from the item no. pos on.  If the specified
- * accelgroup is not NULL, then the menu's hotkeys are put into that
- * accelgroup.  If accel_group is non-NULL and insert_shortcuts is
- * TRUE, then the shortcut keys (MOD1 + underlined letters) in the
- * items' labels will be put into the accel group as well.
+ * info, inserting them from the item no. pos on.
+ * The accel group will be used as the accel group for all newly created
+ * sub menus and serves as the global accel group for all menu item
+ * hotkeys. If it is passed as NULL, global hotkeys will be disabled.
+ * The uline_accels argument determines whether underline accelerators
+ * will be featured from the menu item labels.
  **/
 
 void
-gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
-		     GtkAccelGroup *accel_group, gboolean insert_shortcuts, 
-		     gint pos)
+gnome_app_fill_menu (GtkMenuShell  *menu_shell,
+		     GnomeUIInfo   *uiinfo, 
+		     GtkAccelGroup *accel_group,
+		     gboolean       uline_accels,
+		     gint           pos)
 {
 	GnomeUIBuilderData uibdata;
 
@@ -1093,7 +1190,7 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 	uibdata.destroy_func = NULL;
 
 	gnome_app_fill_menu_custom (menu_shell, uiinfo, &uibdata,
-				    accel_group, insert_shortcuts,
+				    accel_group, uline_accels,
 				    pos);
 	return;
 }
@@ -1104,7 +1201,7 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
  * @menu_shell:
  * @uiinfo:
  * @accel_group:
- * @insert_shortcuts:
+ * @uline_accels:
  * @pos:
  * @user_data:
  *
@@ -1112,9 +1209,12 @@ gnome_app_fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
  **/
 
 void
-gnome_app_fill_menu_with_data (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
-			       GtkAccelGroup *accel_group, gboolean insert_shortcuts, 
-			       gint pos, gpointer user_data)
+gnome_app_fill_menu_with_data (GtkMenuShell  *menu_shell,
+			       GnomeUIInfo   *uiinfo, 
+			       GtkAccelGroup *accel_group,
+			       gboolean       uline_accels,
+			       gint	      pos,
+			       gpointer       user_data)
 {
 	GnomeUIBuilderData uibdata;
 
@@ -1129,7 +1229,7 @@ gnome_app_fill_menu_with_data (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 	uibdata.destroy_func = NULL;
 
 	gnome_app_fill_menu_custom (menu_shell, uiinfo, &uibdata,
-				    accel_group, insert_shortcuts,
+				    accel_group, uline_accels,
 				    pos);
 }
 
@@ -1140,29 +1240,29 @@ gnome_app_fill_menu_with_data (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
  * @uiinfo:
  * @uibdata:
  * @accel_group:
- * @insert_shortcuts:
+ * @uline_accels:
  * @pos:
  *
  * Description:
  * Fills the specified menu shell with items created from the specified
  * info, inserting them from item no. pos on and using the specified
- * builder data -- this is intended for language bindings.  If the
- * specified accelgroup is not NULL, then the menu's hotkeys are put
- * into that accelgroup.  If accel_group is non-NULL and
- * insert_shortcuts is TRUE, then the shortcut keys (MOD1 + underlined
- * letters) in the items' labels will be put into the accel group as
- * well (this is useful for toplevel menu bars in which you want MOD1-F
- * to activate the "_File" menu, for example).
+ * builder data -- this is intended for language bindings.
+ * The accel group will be used as the accel group for all newly created
+ * sub menus and serves as the global accel group for all menu item
+ * hotkeys. If it is passed as NULL, global hotkeys will be disabled.
+ * The uline_accels argument determines whether underline accelerators
+ * will be featured from the menu item labels.
  **/
 
 void
-gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, 
+gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
+			    GnomeUIInfo        *uiinfo, 
 			    GnomeUIBuilderData *uibdata,
-			    GtkAccelGroup *accel_group, 
-			    gboolean insert_shortcuts, gint pos)
+			    GtkAccelGroup      *accel_group, 
+			    gboolean            uline_accels,
+			    gint                pos)
 {
 	GnomeUIBuilderData *orig_uibdata;
-	GtkAccelGroup *menu_accel_group;
 
 	g_return_if_fail (menu_shell != NULL);
 	g_return_if_fail (GTK_IS_MENU_SHELL (menu_shell));
@@ -1175,8 +1275,6 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 
 	orig_uibdata = uibdata;
 
-	menu_accel_group = get_menu_accel_group (menu_shell);
-
 	for (; uiinfo->type != GNOME_APP_UI_ENDOFINFO; uiinfo++)
 		switch (uiinfo->type) {
 		case GNOME_APP_UI_BUILDER_DATA:
@@ -1187,15 +1285,14 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 
 		case GNOME_APP_UI_HELP:
 			/* Create entries for the help topics */
-			pos = create_help_entries (menu_shell, uiinfo, 
-					menu_accel_group, pos);
+			pos = create_help_entries (menu_shell, uiinfo, pos);
 			break;
 
 		case GNOME_APP_UI_RADIOITEMS:
 			/* Create the radio item group */
 			pos = create_radio_menu_items (menu_shell, 
 					uiinfo->moreinfo, uibdata, accel_group, 
-					menu_accel_group, pos);
+					pos);
 			break;
 
 		case GNOME_APP_UI_SEPARATOR:
@@ -1205,13 +1302,13 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 		case GNOME_APP_UI_SUBTREE:
 		case GNOME_APP_UI_SUBTREE_STOCK:
 			if (uiinfo->type == GNOME_APP_UI_SUBTREE_STOCK)
-				create_menu_item (uiinfo, FALSE, NULL, uibdata, 
-						  accel_group, insert_shortcuts, 
-						  menu_accel_group);
+				create_menu_item (menu_shell, uiinfo, FALSE, NULL, uibdata, 
+						  accel_group, uline_accels,
+						  pos);
 			else
-				create_menu_item (uiinfo, FALSE, NULL, uibdata, 
-						  accel_group, insert_shortcuts, 
-						  menu_accel_group);
+				create_menu_item (menu_shell, uiinfo, FALSE, NULL, uibdata, 
+						  accel_group, uline_accels,
+						  pos);
 			
 			if (uiinfo->type == GNOME_APP_UI_SUBTREE ||
 			    uiinfo->type == GNOME_APP_UI_SUBTREE_STOCK) {
@@ -1223,21 +1320,18 @@ gnome_app_fill_menu_custom (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo,
 				menu = gtk_menu_new ();
 				gtk_menu_item_set_submenu
 					(GTK_MENU_ITEM(uiinfo->widget), menu);
+				gtk_menu_set_accel_group (GTK_MENU (menu), accel_group);
 				gnome_app_fill_menu_custom
 					(GTK_MENU_SHELL (menu), 
 					 uiinfo->moreinfo, orig_uibdata, 
-					 accel_group, FALSE, 0);
+					 accel_group, uline_accels, 0);
 				if (gnome_preferences_get_menus_have_tearoff ()) {
 					tearoff = gtk_tearoff_menu_item_new ();
 					gtk_widget_show (tearoff);
 					gtk_menu_prepend (GTK_MENU (menu), tearoff);
 				}
 			}
-
-			gtk_menu_shell_insert (menu_shell, uiinfo->widget, pos);
 			pos++;
-
-			gtk_widget_show (uiinfo->widget);
 			break;
 
 		default:
@@ -1401,16 +1495,17 @@ gnome_app_create_menus_custom (GnomeApp *app, GnomeUIInfo *uiinfo,
 	g_return_if_fail (uibdata != NULL);
 
 	menubar = gtk_menu_bar_new ();
-	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menubar), uiinfo, uibdata, 
-			app->accel_group, TRUE, 0);
 	gnome_app_set_menus (app, GTK_MENU_BAR (menubar));
+	gnome_app_fill_menu_custom (GTK_MENU_SHELL (menubar), uiinfo, uibdata, 
+				    app->accel_group, TRUE, 0);
 
-	if(gnome_preferences_get_menus_have_tearoff ()) {
-	  char *app_name;
-	  app_name = GTK_WINDOW(app)->title;
-	  if(!app_name)
-	    app_name = GNOME_APP(app)->name;
-	  gnome_app_set_tearoff_menu_titles(app, uiinfo, app_name);
+	if (gnome_preferences_get_menus_have_tearoff ()) {
+		gchar *app_name;
+
+		app_name = GTK_WINDOW (app)->title;
+		if (!app_name)
+			app_name = GNOME_APP (app)->name;
+		gnome_app_set_tearoff_menu_titles (app, uiinfo, app_name);
 	}
 }
 

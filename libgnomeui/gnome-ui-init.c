@@ -93,6 +93,7 @@ gnome_add_gtk_arg_callback(poptContext con,
 	}
 	
 	switch(reason) {
+	  gchar *file_name;
 	case POPT_CALLBACK_REASON_PRE:
 		gtk_args = g_ptr_array_new();
 		
@@ -133,6 +134,13 @@ gnome_add_gtk_arg_callback(poptContext con,
 #endif
 		gtk_args = NULL;
 		gnome_gtk_initialized = TRUE;
+		file_name = g_concat_dir_and_file (gnome_user_accels_dir, gnome_app_id);
+#ifdef	GTK_CHECK_VERSION
+		gtk_item_factory_parse_rc (file_name);
+#else
+		g_warning ("UPGRADE YOUR GTK+ VERSION TO AT LEAST 1.2.1");
+#endif
+		g_free (file_name);
 		break;
 	}
 }

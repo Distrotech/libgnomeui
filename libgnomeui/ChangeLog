@@ -1,3 +1,43 @@
+Wed Mar 17 00:25:53 1999  Tim Janik  <timj@gtk.org>
+
+	* gnome-app-helper.[hc]: added gnome_accelerators_sync() to flush
+	the accelerator config file.
+
+	* gnome-app-helper.c: added compatibility code so apps will at least run
+	with Gtk+1.2.0.
+
+	* gnome-init.c (gnome_add_gtk_arg_callback): don't call
+	gtk_item_factory_parse_rc() if we don't have gtk+1.2.1, issue
+	a warning in this case (as per quartic's request).
+
+Tue Mar 16 13:56:08 1999  Tim Janik  <timj@gtk.org>
+
+	* gnome-app-helper.c (create_menu_item): install a gtk_main_quit()
+	hook, that will save the accelerator paths upon exit of the
+	toplevel gtk_main() loop.
+
+	* gnome-init.c (gnome_add_gtk_arg_callback): parse item factory
+	accelerator paths from ~/.gnome/accels/<app-id> after gtk is
+	initialized.
+
+	* gnome-app-helper.c (create_help_entries): lock accelerators
+	right away since we don't feature them at all for help item.
+
+	* gnome-app.c (gnome_app_destroy): unref the accel_group.
+
+	* gnome-app-helper.c:
+	(gnome_app_fill_menu*): install accelerators sanely, set the
+	accel_group on newly created menus.
+	(create_menu_item): add the item to its shell and show it.
+	(create_radio_menu_items): 
+	(gnome_app_fill_menu_custom): rely on create_menu_item() to add the
+	item to the shell.
+	(create_help_entries): setup the underline accelerator directly if desired.
+	(gnome_app_fill_menu_custom): feature uline_accels on submenus.
+	(create_menu_item): lock acclerators if we don't have a accel_group.
+	(gnome_app_create_menus_custom): add the menu bar to the app before creating
+	the sub menus.
+
 1999-03-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas.c (gnome_canvas_item_get_bounds): Applied patch
