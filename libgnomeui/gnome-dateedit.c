@@ -108,11 +108,20 @@ GNOME_CLASS_BOILERPLATE(GnomeDateEdit, gnome_date_edit,
 			GtkHBox, GTK_TYPE_HBOX)
 
 static void
+grab_focus (GtkWidget *widget)
+{
+	GnomeDateEdit *gde = GNOME_DATE_EDIT (widget);
+	
+	GTK_WIDGET_CLASS (parent_class)->grab_focus (widget);
+	
+	gtk_widget_grab_focus (gde->_priv->date_entry);
+}
+
+static void
 hide_popup (GnomeDateEdit *gde)
 {
 	gtk_widget_hide (gde->_priv->cal_popup);
 	gtk_grab_remove (gde->_priv->cal_popup);
-	gdk_pointer_ungrab (GDK_CURRENT_TIME);
 }
 
 static void
@@ -237,13 +246,41 @@ position_popup (GnomeDateEdit *gde)
 	gtk_window_move (GTK_WINDOW (gde->_priv->cal_popup), x, y);
 }
 
+static gboolean
+popup_grab_on_window (GdkWindow *window,
+		      guint32    activate_time)
+{
+	if ((gdk_pointer_grab (window, TRUE,
+			       GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK |
+			       GDK_POINTER_MOTION_MASK,
+			       NULL, NULL, activate_time) == 0)) {
+		if (gdk_keyboard_grab (window, TRUE,
+				       activate_time) == 0)
+			return TRUE;
+		else {
+			gdk_pointer_ungrab (activate_time);
+			return FALSE;
+		}
+	}
+	return FALSE;
+}
+
 static void
 select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 {
 	const char *str;
 	GDate *date;
 	int month;
-
+	
+	/* Temporarily grab pointer and keyboard on a window we know exists; we
+	   + * do this so that the grab (with owner events == TRUE) affects
+	   + * events generated when the window is mapped, such as enter
+	   + * notify events on subwidgets. If the grab fails, bail out.
+	   + */
+	if (!popup_grab_on_window (widget->window,
+				   gtk_get_current_event_time ()))
+		return;
+	
 	str = gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry));
 
 	date = g_date_new ();
@@ -285,16 +322,16 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 
         position_popup (gde);
 
+	gtk_grab_add (gde->_priv->cal_popup);
+	
 	gtk_widget_show (gde->_priv->cal_popup);
 	gtk_widget_grab_focus (gde->_priv->calendar);
 
-	gtk_grab_add (gde->_priv->cal_popup);
-
-	gdk_pointer_grab (gde->_priv->cal_popup->window, TRUE,
-			  (GDK_BUTTON_PRESS_MASK
-			   | GDK_BUTTON_RELEASE_MASK
-			   | GDK_POINTER_MOTION_MASK),
-			  NULL, NULL, GDK_CURRENT_TIME);
+	/* Now transfer our grabs to the popup window; this
+	 * should always succeed.
+	 */
+	popup_grab_on_window (gde->_priv->cal_popup->window,
+			      gtk_get_current_event_time ());
 }
 
 typedef struct {
@@ -412,12 +449,15 @@ static void
 gnome_date_edit_class_init (GnomeDateEditClass *class)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) class;
+	GtkWidgetClass *widget_class = (GtkWidgetClass *) class;
 	GObjectClass *gobject_class = (GObjectClass *) class;
 
 	object_class = (GtkObjectClass*) class;
 
 	object_class->destroy = gnome_date_edit_destroy;
 
+	widget_class->grab_focus = grab_focus;
+	
 	gobject_class->finalize = gnome_date_edit_finalize;
 	gobject_class->get_property = gnome_date_edit_get_property;
 	gobject_class->set_property = gnome_date_edit_set_property;
@@ -507,6 +547,8 @@ gnome_date_edit_instance_init (GnomeDateEdit *gde)
 	gde->_priv->upper_hour = 19;
 	gde->_priv->flags = GNOME_DATE_EDIT_SHOW_TIME;
 	create_children (gde);
+
+	GTK_WIDGET_SET_FLAGS (gde, GTK_CAN_FOCUS);
 }
 
 static void

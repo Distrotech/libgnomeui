@@ -9,6 +9,15 @@
 	* libgnomeui/gnome-gconf-ui.c: (error_idle_func): set the default
 	reponse for the dialog and add a bevel around the TextView
 
+2002-03-22  Richard Hult  <rhult@codefactory.se>
+ 
+ 	* libgnomeui/gnome-dateedit.c (gnome_date_edit_class_init):
+ 	Override grab_focus.
+ 	(grab_focus): Grab focus on the entry.
+ 	(gnome_date_edit_instance_init): Set GTK_CAN_FOCUS flag. These
+ 	changes make GnomeDateEdit work as a target for mnemonic
+ 	activation.
+
 2002-03-22  Havoc Pennington  <hp@pobox.com>
 
 	* libgnomeui/gnome-gconf-ui.c (_gnomeui_gconf_lazy_init): remove
@@ -16,6 +25,22 @@
 	(error_idle_func): consider NO_WRITABLE_DATABASE to also mean 
 	"setting is locked down"
 
+Thu Mar 21 16:47:55 2002  Owen Taylor  <otaylor@redhat.com>
+
+        * libgnomeui/gnome-dateedit.c (select_clicked): 
+	Fix grabbing so that:
+	
+	 - it grabs the keyboard to the window, not just the mouse
+	 - it handles failure, and doesn't leave a window up
+	   with no grab.
+	 - it grabs before popping up the window. (Not really
+	   needed here because we pop up on button release, but 
+	   generally a good thing.)
+	
+	* libgnomeui/gnome-dateedit.c (hide_popup): Don't
+	need to ungrab the pointer, since hiding a window
+	automatically ungrabs.
+	
 2002-03-20  Cody Russell  <cody@jhu.edu>
 
 	* libgnomeui/gnome-icon-list.c: Fix a warning that appears with
