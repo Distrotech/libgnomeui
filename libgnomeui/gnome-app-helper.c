@@ -1071,13 +1071,17 @@ create_menu_item (GtkMenuShell       *menu_shell,
 
 		/* g_print ("######## menu item path: %s\n", gstring->str); */
 		
-		/* the item factory cares about installing the correct accelerator */
+		/* associate the key combo with the accel path */
+		if (uiinfo->accelerator_key)
+			gtk_accel_map_add_entry (gstring->str,
+						 uiinfo->accelerator_key,
+						 uiinfo->ac_mods);
+
+		/* associate the accel path with the menu item */
+		if (GTK_IS_MENU (menu_shell))
+			gtk_menu_item_set_accel_path(GTK_MENU_ITEM (uiinfo->widget),
+						     gstring->str);
 		
-		gtk_item_factory_add_foreign (uiinfo->widget,
-					      gstring->str,
-					      accel_group,
-					      uiinfo->accelerator_key,
-					      uiinfo->ac_mods);
 		g_string_free (gstring, TRUE);
 
 		if (!save_accels_id)
@@ -1514,6 +1518,13 @@ gnome_app_fill_menu_custom (GtkMenuShell       *menu_shell,
 	 * the subtrees */
 
 	orig_uibdata = uibdata;
+
+	/* if it is a GtkMenu, make sure the accel group is associated
+	 * with the menu */
+	if (GTK_IS_MENU (menu_shell) &&
+	    GTK_MENU (menu_shell)->accel_group == NULL)
+			gtk_menu_set_accel_group (GTK_MENU (menu_shell),
+						  accel_group);
 
 	for (; uiinfo->type != GNOME_APP_UI_ENDOFINFO; uiinfo++)
 		switch (uiinfo->type) {

@@ -303,6 +303,7 @@ static void
 libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
 {
         GnomeProgramPrivate_libgnomeui *priv = g_new0(GnomeProgramPrivate_libgnomeui, 1);
+        gchar *filename;
 
         gnome_type_init();
         /* #warning FIXME: here... gtk_rc ... */
@@ -315,8 +316,15 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
 
         _gnome_stock_icons_init ();
 
+        /* load the accelerators */
+        filename = g_build_filename (gnome_user_accels_dir_get (),
+                                     gnome_program_get_app_id (program),
+                                     NULL);
+        gtk_accel_map_load (filename);
+        g_free (filename);
+
 	bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	//bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 }
 
 static void
