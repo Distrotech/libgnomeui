@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the libgnomeui package.
 # Ge'ez Frontier Foundation <locales@geez.org>, 2002.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
@@ -477,7 +476,7 @@ msgstr "ለበለጠ መረጃ እባክዎን የGNOMEን ፕሮግራም ይ�
 
 #: libgnomeui/gnome-stock-icons.c:137
 msgid "Table Borders"
-msgstr "የሰንጠረዥ ወሰኖች"
+msgstr "የሠንጠረዥ ወሰኖች"
 
 #: libgnomeui/gnome-stock-icons.c:138
 msgid "Table Fill"
@@ -635,7 +634,7 @@ msgstr "የአሁኑን ፋይል አትም"
 #. Print Setup
 #: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "የህትመት ቅንጅት"
+msgstr "የህትመት ቅንጅት..."
 
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
@@ -738,7 +737,7 @@ msgstr "ያንኑ ሐረግ እንደገና አስስ"
 #. Replace
 #: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr "_ተካ"
+msgstr "_ተካ..."
 
 #: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
@@ -746,9 +745,8 @@ msgstr "ሐረጉን ተካ"
 
 #. Properties
 #: libgnomeui/gnome-app-helper.c:202
-#, fuzzy
 msgid "_Properties"
-msgstr "_ሁኔታዎች..."
+msgstr "_ሁኔታዎች"
 
 #: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
@@ -759,7 +757,6 @@ msgstr "የፋይሉን ሁኔታዎች አሻሽል"
 #.
 #. Settings
 #: libgnomeui/gnome-app-helper.c:211
-#, fuzzy
 msgid "Prefere_nces"
 msgstr "_ምርጫዎች"
 
