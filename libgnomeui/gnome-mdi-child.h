@@ -57,7 +57,7 @@ typedef GList     *(*GnomeMDIChildMenuCreator) (GnomeMDIChild *, GtkWidget *);
 typedef gchar     *(*GnomeMDIChildConfigFunc)  (GnomeMDIChild *);
 typedef GtkWidget *(*GnomeMDIChildLabelFunc)   (GnomeMDIChild *, GtkWidget *);
 
-/* note that if you override the set_book_label virtual function, it should return
+/* note that if you override the set_label virtual function, it should return
  * a new widget if its GtkWidget * parameter is NULL and modify and return the old
  * widget otherwise (see gnome-mdi-child.c/gnome_mdi_child_set_book_label()).
  */
@@ -69,7 +69,7 @@ struct _GnomeMDIChildClass
 	GnomeMDIChildViewCreator create_view;
 	GnomeMDIChildMenuCreator create_menus;
 	GnomeMDIChildConfigFunc  get_config_string;
-	GnomeMDIChildLabelFunc   set_book_label;
+	GnomeMDIChildLabelFunc   set_label;
 };
 
 guint         gnome_mdi_child_get_type         (void);

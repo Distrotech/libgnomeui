@@ -32,7 +32,7 @@
 static void       gnome_mdi_child_class_init       (GnomeMDIChildClass *klass);
 static void       gnome_mdi_child_init             (GnomeMDIChild *);
 static void       gnome_mdi_child_destroy          (GtkObject *);
-static GtkWidget *gnome_mdi_child_set_book_label   (GnomeMDIChild *, GtkWidget *);
+static GtkWidget *gnome_mdi_child_set_label        (GnomeMDIChild *, GtkWidget *);
 static GtkWidget *gnome_mdi_child_create_view      (GnomeMDIChild *);
 
 /* declare the functions from gnome-mdi.c that we need but are not public */
@@ -71,7 +71,7 @@ static void gnome_mdi_child_class_init (GnomeMDIChildClass *klass) {
 	klass->create_view = NULL;
 	klass->create_menus = NULL;
 	klass->get_config_string = NULL;
-	klass->set_book_label = gnome_mdi_child_set_book_label;
+	klass->set_label = gnome_mdi_child_set_label;
 
 	parent_class = gtk_type_class (gtk_object_get_type ());
 }
@@ -82,14 +82,14 @@ static void gnome_mdi_child_init (GnomeMDIChild *mdi_child) {
 	mdi_child->views = NULL;
 }
 
-/* the default set_book_label function: returns a GtkLabel with child->name
+/* the default set_label function: returns a GtkLabel with child->name
  * if you provide your own, it should return a new widget if its old_label
  * parameter is NULL and modify and return the old widget otherwise. it
  * should (obviously) NOT call the parent class handler!
  */
-static GtkWidget *gnome_mdi_child_set_book_label(GnomeMDIChild *child, GtkWidget *old_label) {
+static GtkWidget *gnome_mdi_child_set_label(GnomeMDIChild *child, GtkWidget *old_label) {
 #ifdef GNOME_ENABLE_DEBUG
-	printf("GnomeMDIChild: default set_book_label handler called!\n");
+	printf("GnomeMDIChild: default set_label handler called!\n");
 #endif
 
 	if(old_label) {

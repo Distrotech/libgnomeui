@@ -35,7 +35,7 @@ static GtkWidget  *gnome_mdi_generic_child_create_view      (GnomeMDIGenericChil
 static GList      *gnome_mdi_generic_child_create_menus     (GnomeMDIGenericChild *child,
 															 GtkWidget            *view);
 static gchar      *gnome_mdi_generic_child_get_config_string(GnomeMDIGenericChild *child);
-static GtkWidget  *gnome_mdi_generic_child_set_book_label   (GnomeMDIGenericChild *child,
+static GtkWidget  *gnome_mdi_generic_child_set_label        (GnomeMDIGenericChild *child,
 															 GtkWidget *old_label);
 
 static GnomeMDIChildClass *parent_class = NULL;
@@ -67,7 +67,7 @@ static void gnome_mdi_generic_child_class_init(GnomeMDIGenericChildClass *klass)
 
 	mdi_child_klass->create_view = (GnomeMDIChildViewCreator)gnome_mdi_generic_child_create_view;
 	mdi_child_klass->create_menus = (GnomeMDIChildMenuCreator)gnome_mdi_generic_child_create_menus;
-	mdi_child_klass->set_book_label = (GnomeMDIChildLabelFunc)gnome_mdi_generic_child_set_book_label;
+	mdi_child_klass->set_label = (GnomeMDIChildLabelFunc)gnome_mdi_generic_child_set_label;
 	mdi_child_klass->get_config_string = (GnomeMDIChildConfigFunc)gnome_mdi_generic_child_get_config_string;
 
 	parent_class = gtk_type_class(gnome_mdi_child_get_type());
@@ -76,7 +76,7 @@ static void gnome_mdi_generic_child_class_init(GnomeMDIGenericChildClass *klass)
 static void gnome_mdi_generic_child_init(GnomeMDIGenericChild *child) {
 	child->create_view = NULL;
 	child->create_menus = NULL;
-	child->set_book_label = NULL;
+	child->set_label = NULL;
 	child->get_config_string = NULL;
 	child->user_data;
 }
@@ -85,7 +85,7 @@ GnomeMDIGenericChild *gnome_mdi_generic_child_new(gchar                    *name
 												  GnomeMDIChildViewCreator create_view,
 												  GnomeMDIChildMenuCreator create_menus,
 												  GnomeMDIChildConfigFunc  get_config_string,
-												  GnomeMDIChildLabelFunc   set_book_label,
+												  GnomeMDIChildLabelFunc   set_label,
 												  gpointer                 user_data) {
 	GnomeMDIGenericChild *child;
 
@@ -95,7 +95,7 @@ GnomeMDIGenericChild *gnome_mdi_generic_child_new(gchar                    *name
 	child->create_view = create_view;
 	child->create_menus = create_menus;
 	child->get_config_string = get_config_string;
-	child->set_book_label = set_book_label;
+	child->set_label = set_label;
 	
 	child->user_data = user_data;
 
@@ -134,9 +134,9 @@ static gchar *gnome_mdi_generic_child_get_config_string(GnomeMDIGenericChild *ch
 	return NULL;
 }
 
-static GtkWidget *gnome_mdi_generic_child_set_book_label(GnomeMDIGenericChild *child, GtkWidget *old_label) {
-	if(child->set_book_label)
-		return child->set_book_label(GNOME_MDI_CHILD(child), old_label);
+static GtkWidget *gnome_mdi_generic_child_set_label(GnomeMDIGenericChild *child, GtkWidget *old_label) {
+	if(child->set_label)
+		return child->set_label(GNOME_MDI_CHILD(child), old_label);
 	else
-		return parent_class->set_book_label(GNOME_MDI_CHILD(child), old_label);
+		return parent_class->set_label(GNOME_MDI_CHILD(child), old_label);
 }

@@ -1,3 +1,10 @@
+1998-11-29  Jaka Mocnik  <jaka.mocnik@kiss.uni-lj.si>
+
+	* gnome-mdi.c, gnome-mdi-child.[ch], gnome-mdi-generic-child.[ch]:
+	changed all occurences of set_book_label to set_label.
+	* gnome-mdi.c (child_list_menu_*): use set_label function
+	to provide menu item labels as well as notebook page labels!
+	
 1998-11-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-sel.c (gnome_icon_selection_init): Fix to the new

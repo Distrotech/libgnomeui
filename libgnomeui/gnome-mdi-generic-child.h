@@ -49,7 +49,7 @@ struct _GnomeMDIGenericChild {
 	GnomeMDIChildViewCreator create_view;
 	GnomeMDIChildMenuCreator create_menus;
 	GnomeMDIChildConfigFunc  get_config_string;
-	GnomeMDIChildLabelFunc   set_book_label;
+	GnomeMDIChildLabelFunc   set_label;
 };
 
 struct _GnomeMDIGenericChildClass {
@@ -62,7 +62,7 @@ GnomeMDIGenericChild *gnome_mdi_generic_child_new(gchar *name,
                                                   GnomeMDIChildViewCreator create_view,
                                                   GnomeMDIChildMenuCreator create_menus,
                                                   GnomeMDIChildConfigFunc  get_config_string,
-                                                  GnomeMDIChildLabelFunc   set_book_label,
+                                                  GnomeMDIChildLabelFunc   set_label,
                                                   gpointer                 user_data);
 
 gpointer             gnome_mdi_generic_child_get_data(GnomeMDIGenericChild *child);
