@@ -1,5 +1,6 @@
 /* gnome-druid-page-standard.h
  * Copyright (C) 1999  Red Hat, Inc.
+ * Copyright (C) 2001  James M. Cape <jcape@ignore-your.tv>
  * All rights reserved.
  *
  * This library is free software; you can redistribute it and/or
@@ -24,7 +25,6 @@
 #define __GNOME_DRUID_PAGE_STANDARD_H__
 
 #include <gtk/gtk.h>
-#include <libgnomecanvas/gnome-canvas.h>
 #include "gnome-druid-page.h"
 
 G_BEGIN_DECLS
@@ -47,14 +47,13 @@ struct _GnomeDruidPageStandard
 
 	/*< public >*/
 	GtkWidget *vbox;
-	GdkPixbuf *logo_image;
-	GdkPixbuf *top_watermark_image;
-
 	gchar *title;
-
-	GdkColor background_color;
-	GdkColor logo_background_color;
-	GdkColor title_color;
+	GdkPixbuf *logo;
+	GdkPixbuf *top_watermark;
+	GdkColor title_foreground;
+	GdkColor background;
+	GdkColor logo_background;
+	GdkColor contents_background;
 	
 	/*< private >*/
 	GnomeDruidPageStandardPrivate *_priv;
@@ -64,31 +63,45 @@ struct _GnomeDruidPageStandardClass
 	GnomeDruidPageClass parent_class;
 };
 
+#ifndef GNOME_DISABLE_DEPRECATED
 
-GtkType    gnome_druid_page_standard_get_type      (void) G_GNUC_CONST;
-GtkWidget *gnome_druid_page_standard_new           (void);
-GtkWidget *gnome_druid_page_standard_new_aa        (void);
-GtkWidget *gnome_druid_page_standard_new_with_vals (gboolean		 antialiased,
-						    const gchar		*title,
-						    GdkPixbuf		*logo,
-						    GdkPixbuf		*top_watermark);
-void       gnome_druid_page_standard_construct     (GnomeDruidPageStandard *druid_page_standard,
-						    gboolean		 antialiased,
-						    const gchar		*title,
-						    GdkPixbuf		*logo,
-						    GdkPixbuf		*top_watermark);
-void       gnome_druid_page_standard_set_bg_color  (GnomeDruidPageStandard *druid_page_standard,
-						    GdkColor		*color);
-void       gnome_druid_page_standard_set_logo_bg_color(GnomeDruidPageStandard *druid_page_standard,
-						    GdkColor		*color);
-void       gnome_druid_page_standard_set_title_color(GnomeDruidPageStandard *druid_page_standard,
-						    GdkColor		*color);
-void       gnome_druid_page_standard_set_title     (GnomeDruidPageStandard *druid_page_standard,
-						    const gchar		*title);
-void       gnome_druid_page_standard_set_logo      (GnomeDruidPageStandard *druid_page_standard,
-						    GdkPixbuf		*logo_image);
-void       gnome_druid_page_standard_set_top_watermark(GnomeDruidPageStandard *druid_page_standard,
-						    GdkPixbuf		*top_watermark_image);
+#define gnome_druid_page_standard_set_bg_color      gnome_druid_page_standard_set_background
+#define gnome_druid_page_standard_set_logo_bg_color gnome_druid_page_standard_set_logo_background
+#define gnome_druid_page_standard_set_title_color   gnome_druid_page_standard_set_title_foreground
+
+#endif
+
+
+GtkType    gnome_druid_page_standard_get_type                (void) G_GNUC_CONST;
+GtkWidget *gnome_druid_page_standard_new                     (void);
+GtkWidget *gnome_druid_page_standard_new_with_vals           (const gchar            *title,
+							      GdkPixbuf              *logo,
+							      GdkPixbuf              *top_watermark);
+void       gnome_druid_page_standard_construct               (GnomeDruidPageStandard *druid_page_standard,
+							      const gchar	    *title,
+							      GdkPixbuf		    *logo,
+							      GdkPixbuf              *top_watermark);
+
+void       gnome_druid_page_standard_set_title               (GnomeDruidPageStandard *druid_page_standard,
+							      const gchar            *title);
+void       gnome_druid_page_standard_set_logo                (GnomeDruidPageStandard *druid_page_standard,
+							      GdkPixbuf              *logo_image);
+void       gnome_druid_page_standard_set_top_watermark       (GnomeDruidPageStandard *druid_page_standard,
+							      GdkPixbuf              *top_watermark_image);
+void       gnome_druid_page_standard_set_title_foreground    (GnomeDruidPageStandard *druid_page_standard,
+							      GdkColor               *color);
+void       gnome_druid_page_standard_set_background          (GnomeDruidPageStandard *druid_page_standard,
+							      GdkColor               *color);
+void       gnome_druid_page_standard_set_logo_background     (GnomeDruidPageStandard *druid_page_standard,
+							      GdkColor               *color);
+void       gnome_druid_page_standard_set_contents_background (GnomeDruidPageStandard *druid_page_standard,
+							      GdkColor               *color);
+
+/* Convenience Function */
+void       gnome_druid_page_standard_append_item             (GnomeDruidPageStandard *druid_page_standard,
+							      const gchar            *question_mnemonic,
+							      GtkWidget              *item,
+							      const gchar            *additional_info_markup);
 
 G_END_DECLS
 

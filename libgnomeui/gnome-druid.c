@@ -122,6 +122,22 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE, 0);
 
+	object_class->destroy = gnome_druid_destroy;
+	gobject_class->set_property = gnome_druid_set_property;
+	gobject_class->get_property = gnome_druid_get_property;
+	gobject_class->finalize = gnome_druid_finalize;
+	widget_class->size_request = gnome_druid_size_request;
+	widget_class->size_allocate = gnome_druid_size_allocate;
+	widget_class->map = gnome_druid_map;
+	widget_class->unmap = gnome_druid_unmap;
+	widget_class->expose_event = gnome_druid_expose;
+
+	container_class->forall = gnome_druid_forall;
+	container_class->add = gnome_druid_add;
+	container_class->remove = gnome_druid_remove;
+	container_class->child_type = gnome_druid_child_type;
+
+
 	g_object_class_install_property (gobject_class,
 					 PROP_SHOW_FINISH,
 					 g_param_spec_boolean ("show_finish",
@@ -137,21 +153,6 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 							       _("Show the 'Help' button"),
 							       FALSE,
 							       G_PARAM_READWRITE));
-
-	object_class->destroy = gnome_druid_destroy;
-	gobject_class->set_property = gnome_druid_set_property;
-	gobject_class->get_property = gnome_druid_get_property;
-	gobject_class->finalize = gnome_druid_finalize;
-	widget_class->size_request = gnome_druid_size_request;
-	widget_class->size_allocate = gnome_druid_size_allocate;
-	widget_class->map = gnome_druid_map;
-	widget_class->unmap = gnome_druid_unmap;
-	widget_class->expose_event = gnome_druid_expose;
-
-	container_class->forall = gnome_druid_forall;
-	container_class->add = gnome_druid_add;
-	container_class->remove = gnome_druid_remove;
-	container_class->child_type = gnome_druid_child_type;
 }
 
 static void

@@ -23,11 +23,14 @@ noinst_HEADERS = \
 	testgnome.h
 
 noinst_PROGRAMS = \
-	test-gnome
+	test-gnome test-druid
 
 test_gnome_SOURCES =		\
 	testgnome.c		\
 	$(noinst_HEADERS)
+
+test_druid_SOURCES =	\
+	testdruid.c
 
 EXTRA_DIST = 		\
 	bomb.xpm

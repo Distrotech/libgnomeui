@@ -1,3 +1,7 @@
+Sat Aug 25 00:33:41 2001  Jonathan Blandford  <jrb@redhat.com>
+
+	* testdruid.c (main): new test program.
+
 2001-08-24  Darin Adler  <darin@bentspoon.com>
 
 	* testgnome.c: (create_entry): Update for new API.

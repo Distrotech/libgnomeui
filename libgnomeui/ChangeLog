@@ -1,3 +1,9 @@
+Sat Aug 25 00:33:51 2001  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-druid-page-standard.c
+	(gnome_druid_page_standard_append_item): Modified patch from James
+	Cape to improve look of druid.  Added a convenience API.
+
 2001-08-24  Darin Adler  <darin@bentspoon.com>
 
 	* gnome-file-entry.h:
