@@ -62,6 +62,11 @@ static void delete_callback (GtkWidget *w)
   gtk_main_quit ();
 }
 
+static void layout_changed_callback (GtkWidget *w)
+{
+  puts ("Layout changed");
+}
+
 static void
 do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderData *uibdata)
 {
@@ -109,8 +114,8 @@ main (int argc, char **argv)
 
       if (i == 0)
         dock_items[i] = gnome_dock_item_new ("SomeBar",
-                                             /* GNOME_DOCK_ITEM_BEH_EXCLUSIVE */
-                                             GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
+                                             GNOME_DOCK_ITEM_BEH_EXCLUSIVE
+                                             | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
       else
         {
           gchar *name;
@@ -124,15 +129,15 @@ main (int argc, char **argv)
       gtk_container_add (GTK_CONTAINER (dock_items[i]), toolbars[i]);
 
       if (i < 3)
-        gnome_dock_layout_add (GNOME_DOCK_LAYOUT (layout),
-                               GNOME_DOCK_ITEM (dock_items[i]),
-                               GNOME_DOCK_POS_TOP,
-                               i, 0, 0);
+        gnome_dock_layout_add_item (GNOME_DOCK_LAYOUT (layout),
+                                    GNOME_DOCK_ITEM (dock_items[i]),
+                                    GNOME_DOCK_TOP,
+                                    i, 0, 0);
       else
-        gnome_dock_layout_add (GNOME_DOCK_LAYOUT (layout),
-                               GNOME_DOCK_ITEM (dock_items[i]),
-                               GNOME_DOCK_POS_BOTTOM,
-                               i - 4, 0, 0);
+        gnome_dock_layout_add_item (GNOME_DOCK_LAYOUT (layout),
+                                    GNOME_DOCK_ITEM (dock_items[i]),
+                                    GNOME_DOCK_BOTTOM,
+                                    i - 4, 0, 0);
 
       gtk_widget_show (toolbars[i]);
       gtk_widget_show (dock_items[i]);
@@ -159,6 +164,11 @@ main (int argc, char **argv)
   gtk_signal_connect (GTK_OBJECT (app),
                       "delete_event",
                       GTK_SIGNAL_FUNC (delete_callback),
+                      NULL);
+
+  gtk_signal_connect (GTK_OBJECT (dock),
+                      "layout_changed",
+                      GTK_SIGNAL_FUNC (layout_changed_callback),
                       NULL);
 
   gnome_dock_set_client_area (GNOME_DOCK (dock), client_frame);

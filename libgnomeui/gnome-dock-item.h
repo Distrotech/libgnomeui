@@ -71,6 +71,9 @@ struct _GnomeDockItem
 
   /* Start drag position (wrt widget->window).  */
   gint                  dragoff_x, dragoff_y;
+
+  /* Position of the floating window.  */
+  gint                  float_x, float_y;
 };
 
 struct _GnomeDockItemClass
@@ -100,7 +103,8 @@ gboolean       gnome_dock_item_set_orientation (GnomeDockItem *dock_item,
 
 GtkOrientation gnome_dock_item_get_orientation (GnomeDockItem *dock_item);
 
-GnomeDockItemBehavior gnome_dock_item_get_behavior (GnomeDockItem *dock_item);
+GnomeDockItemBehavior
+               gnome_dock_item_get_behavior    (GnomeDockItem *dock_item);
 
 /* Private methods.  */
 gboolean       gnome_dock_item_detach          (GnomeDockItem *item,
@@ -118,6 +122,11 @@ void           gnome_dock_item_drag_floating   (GnomeDockItem *item,
 void           gnome_dock_item_handle_size_request
                                                (GnomeDockItem *item,
                                                 GtkRequisition *requisition);
+
+void           gnome_dock_item_get_floating_position
+                                               (GnomeDockItem *item,
+                                                gint *x, gint *y);
+
 END_GNOME_DECLS
 
 #endif /* _GNOME_DOCK_ITEM_H */

@@ -19,34 +19,12 @@
 #include <gtk/gtkwindow.h>
 #include <libgnome/gnome-defs.h>
 
+#include "gnome-dock.h"
 
 BEGIN_GNOME_DECLS
 
-
-/* These define the possible positions for the menu bar and toolbars of the application window.
- * Note that a menu bar cannot be on the LEFT or RIGHT.
- */
-typedef enum 
-{
-	GNOME_APP_POS_TOP,
-	GNOME_APP_POS_BOTTOM,
-	GNOME_APP_POS_LEFT,
-	GNOME_APP_POS_RIGHT,
-	GNOME_APP_POS_FLOATING
-} GnomeAppWidgetPositionType;
-
-/* Everything gets put into a table that looks like:
- *
- * XXX
- * ABC
- * YYY
- *
- * There's one table element on top, three in the middle, and one on
- * the bottom.
- *
- * Obviously you can change the positions of things as needed
- * using the supplied function.
- */
+#define GNOME_APP_MENUBAR_NAME "Menubar"
+#define GNOME_APP_TOOLBAR_NAME "Toolbar"
 
 #define GNOME_APP(obj)         GTK_CHECK_CAST(obj, gnome_app_get_type(), GnomeApp)
 #define GNOME_APP_CLASS(class) GTK_CHECK_CAST_CLASS(class, gnome_app_get_type(), GnomeAppClass)
@@ -58,25 +36,37 @@ typedef struct _GnomeAppClass  GnomeAppClass;
 struct _GnomeApp {
 	GtkWindow parent_object;
 
-	char *name;			/* Application name */
-	char *prefix;			/* Prefix for gnome-config */
+	/* Application name. */
+	char *name;
 
-        /* FIXME: Most of this stuff will have to be removed.  */
-	GtkWidget *menubar;		/* The Menubar */
-	GtkWidget *toolbar;		/* The Toolbar */
-        GtkWidget *statusbar;		/* The Statusbar */
-	GtkWidget *contents;		/* The contents (dock->client_area) */
+	/* Prefix for gnome-config (used to save the layout).  */
+	char *prefix;
 
-	GtkWidget *vbox;	        /* The vbox widget that ties them all */
-
-	GtkAccelGroup *accel_group;	/* Main accelerator group for this window (hotkeys live here)*/
-
-        /* FIXME: this will be removed.  */
-	/* Positions for the menubar and the toolbar */
-	GnomeAppWidgetPositionType pos_menubar, pos_toolbar;
-
-        /* The main dock widget.  */
+        /* The dock.  */
         GtkWidget *dock;
+
+	/* The status bar.  */
+        GtkWidget *statusbar;
+
+	/* The vbox widget that ties them all */
+	GtkWidget *vbox;
+
+	/* The menubar.  This is a pointer to a widget contained into
+           the dock.  */
+	GtkWidget *menubar;
+
+	/* The contents.  This is a pointer to dock->client_area.  */
+	GtkWidget *contents;
+
+	/* Dock layout.  */
+	GnomeDockLayout *layout;
+
+	/* Main accelerator group for this window (hotkeys live here).  */
+	GtkAccelGroup *accel_group;
+
+	/* If TRUE, the application uses gnome-config to retrieve and
+           save the docking configuration automagically.  */
+	guint enable_layout_config : 1;
 };
 
 struct _GnomeAppClass {
@@ -108,13 +98,23 @@ void gnome_app_set_statusbar (GnomeApp *app, GtkWidget *statusbar);
 /* Sets the content area of the application window */
 void gnome_app_set_contents (GnomeApp *app, GtkWidget *contents);
 
-/* Sets the position of the toolbar */
-void gnome_app_toolbar_set_position (GnomeApp *app, GnomeAppWidgetPositionType pos_toolbar);
+void gnome_app_add_toolbar (GnomeApp *app,
+			    GtkToolbar *toolbar,
+			    const gchar *name,
+			    GnomeDockItemBehavior behavior,
+			    GnomeDockPlacement placement,
+			    gint band_num,
+			    gint band_position,
+			    gint offset);
 
-/* Sets the position of the menu bar */
-void gnome_app_menu_set_position (GnomeApp *app, GnomeAppWidgetPositionType pos_menu);
-
-
+void gnome_app_add_docked (GnomeApp *app,
+			   GtkWidget *widget,
+			   const gchar *name,
+			   GnomeDockItemBehavior behavior,
+			   GnomeDockPlacement placement,
+			   gint band_num,
+			   gint band_position,
+			   gint offset);
 END_GNOME_DECLS
 
 #endif /* GNOME_APP_H */

@@ -46,6 +46,13 @@
 
 
 
+enum {
+  LAYOUT_CHANGED,
+  LAST_SIGNAL
+};
+
+
+
 static void     gnome_dock_class_init          (GnomeDockClass *class);
 static void     gnome_dock_init                (GnomeDock *app);
 static void     gnome_dock_size_request        (GtkWidget *widget,
@@ -128,16 +135,20 @@ static void     drag_motion                    (GtkWidget *widget,
       
 static GnomeDockItem *get_docked_item_by_name  (GnomeDock *dock,
                                                 const gchar *name,
-                                                GnomeDockPositionType *position_return,
+                                                GnomeDockPlacement *placement_return,
                                                 guint *num_band_return,
                                                 guint *band_position_return,
                                                 guint *offset_return);
 static GnomeDockItem *get_floating_item_by_name (GnomeDock *dock,
                                                  const gchar *name);
 
+static void           connect_drag_signals      (GnomeDock *dock,
+                                                 GtkWidget *item);
 
 
 static GtkWidgetClass *parent_class = NULL;
+
+static guint dock_signals[LAST_SIGNAL] = { 0 };
 
 
 
@@ -163,6 +174,16 @@ gnome_dock_class_init (GnomeDockClass *class)
   container_class->add = gnome_dock_add;
   container_class->remove = gnome_dock_remove;
   container_class->forall = gnome_dock_forall;
+
+  dock_signals[LAYOUT_CHANGED] =
+    gtk_signal_new ("layout_changed",
+                    GTK_RUN_LAST,
+                    object_class->type,
+                    GTK_SIGNAL_OFFSET (GnomeDockClass, layout_changed),
+                    gtk_marshal_NONE__NONE,
+                    GTK_TYPE_NONE, 0);
+
+  gtk_object_class_add_signals (object_class, dock_signals, LAST_SIGNAL);
 }
 
 static void
@@ -523,7 +544,7 @@ gnome_dock_add (GtkContainer *container, GtkWidget *child)
   GnomeDock *dock;
 
   dock = GNOME_DOCK (container);
-  gnome_dock_add_item (dock, child, GNOME_DOCK_POS_TOP, 0, 0, 0, TRUE);
+  gnome_dock_add_item (dock, child, GNOME_DOCK_TOP, 0, 0, 0, TRUE);
 }
 
 static gboolean
@@ -812,6 +833,8 @@ drag_floating (GnomeDock *dock,
           gtk_widget_ref (item_widget);
 
           gnome_dock_item_detach (item, x, y);
+          gnome_dock_item_grab_pointer (item);
+
           gtk_container_remove (GTK_CONTAINER (item_widget->parent),
                                 item_widget);
           gtk_widget_set_parent (item_widget, dock_widget);
@@ -972,11 +995,14 @@ drag_end (GtkWidget *widget, gpointer data)
   item = GNOME_DOCK_ITEM (widget);
   dock = GNOME_DOCK (data);
 
-  /* Communicate all the bands that `item' is no longer being dragged.  */
+  /* Communicate to all the bands that `item' is no longer being
+     dragged.  */
   drag_end_bands (&dock->top_bands, item);
   drag_end_bands (&dock->bottom_bands, item);
   drag_end_bands (&dock->left_bands, item);
   drag_end_bands (&dock->right_bands, item);
+
+  gtk_signal_emit (GTK_OBJECT (data), dock_signals[LAYOUT_CHANGED]);
 }
 
 
@@ -1072,7 +1098,7 @@ drag_motion (GtkWidget *widget,
 static GnomeDockItem *
 get_docked_item_by_name (GnomeDock *dock,
                          const gchar *name,
-                         GnomeDockPositionType *position_return,
+                         GnomeDockPlacement *placement_return,
                          guint *num_band_return,
                          guint *band_position_return,
                          guint *offset_return)
@@ -1081,15 +1107,15 @@ get_docked_item_by_name (GnomeDock *dock,
     struct
     {
       GList *band_list;
-      GnomeDockPositionType position;
+      GnomeDockPlacement placement;
     }
     areas[] =
     {
-      { dock->top_bands, GNOME_DOCK_POS_TOP },
-      { dock->bottom_bands, GNOME_DOCK_POS_BOTTOM },
-      { dock->left_bands, GNOME_DOCK_POS_LEFT },
-      { dock->right_bands, GNOME_DOCK_POS_RIGHT },
-      { NULL, GNOME_DOCK_POS_FLOATING },
+      { dock->top_bands, GNOME_DOCK_TOP },
+      { dock->bottom_bands, GNOME_DOCK_BOTTOM },
+      { dock->left_bands, GNOME_DOCK_LEFT },
+      { dock->right_bands, GNOME_DOCK_RIGHT },
+      { NULL, GNOME_DOCK_FLOATING },
     }, *p;
     GtkWidget *item;
     GList *lp;
@@ -1114,8 +1140,8 @@ get_docked_item_by_name (GnomeDock *dock,
               {
                 if (num_band_return != NULL)
                   *num_band_return = num_band;
-                if (position_return != NULL)
-                  *position_return = areas->position;
+                if (placement_return != NULL)
+                  *placement_return = areas->placement;
 
                 return item;
               }
@@ -1141,6 +1167,22 @@ get_floating_item_by_name (GnomeDock *dock,
     }
 
   return NULL;
+}
+
+static void
+connect_drag_signals (GnomeDock *dock,
+                      GtkWidget *item)
+{
+  if (GNOME_IS_DOCK_ITEM (item))
+    {
+      DEBUG (("here"));
+      gtk_signal_connect (GTK_OBJECT (item), "dock_drag_begin",
+                          GTK_SIGNAL_FUNC (drag_begin), (gpointer) dock);
+      gtk_signal_connect (GTK_OBJECT (item), "dock_drag_motion",
+                          GTK_SIGNAL_FUNC (drag_motion), (gpointer) dock);
+      gtk_signal_connect (GTK_OBJECT (item), "dock_drag_end",
+                          GTK_SIGNAL_FUNC (drag_end), (gpointer) dock);
+    }
 }
 
 
@@ -1190,7 +1232,7 @@ gnome_dock_new (void)
 void
 gnome_dock_add_item (GnomeDock *dock,
                      GtkWidget *item,
-                     GnomeDockPositionType edge,
+                     GnomeDockPlacement placement,
                      guint band_num,
                      guint offset,
                      gint position,
@@ -1200,28 +1242,28 @@ gnome_dock_add_item (GnomeDock *dock,
   GList **band_ptr;
   GList *p;
 
-  DEBUG (("edge %d band_num %d offset %d position %d in_new_band %d",
-          edge, band_num, offset, position, in_new_band));
+  DEBUG (("side %d band_num %d offset %d position %d in_new_band %d",
+          side, band_num, offset, position, in_new_band));
 
-  switch (edge)
+  switch (placement)
     {
-    case GNOME_DOCK_POS_TOP:
+    case GNOME_DOCK_TOP:
       band_ptr = &dock->top_bands;
       break;
-    case GNOME_DOCK_POS_BOTTOM:
+    case GNOME_DOCK_BOTTOM:
       band_ptr = &dock->bottom_bands;
       break;
-    case GNOME_DOCK_POS_LEFT:
+    case GNOME_DOCK_LEFT:
       band_ptr = &dock->left_bands;
       break;
-    case GNOME_DOCK_POS_RIGHT:
+    case GNOME_DOCK_RIGHT:
       band_ptr = &dock->right_bands;
       break;
-    case GNOME_DOCK_POS_FLOATING:
-      g_warning ("Floating dock items not supported (yet).");
+    case GNOME_DOCK_FLOATING:
+      g_warning ("Floating dock items not supported by `gnome_dock_add_item'.");
       return;
     default:
-      g_error ("Unknown dock position.");
+      g_error ("Unknown dock placement.");
       return;
     }
 
@@ -1251,8 +1293,8 @@ gnome_dock_add_item (GnomeDock *dock,
           p = g_list_last (*band_ptr);
         }
 
-      if (edge == GNOME_DOCK_POS_TOP
-          || edge == GNOME_DOCK_POS_BOTTOM)
+      if (placement == GNOME_DOCK_TOP
+          || placement == GNOME_DOCK_BOTTOM)
         gnome_dock_band_set_orientation (GNOME_DOCK_BAND (new_band),
                                          GTK_ORIENTATION_HORIZONTAL);
       else
@@ -1267,16 +1309,30 @@ gnome_dock_add_item (GnomeDock *dock,
   c = (GnomeDockChild *) p->data;
   gnome_dock_band_insert (c->band, item, offset, position);
 
-  if (GNOME_IS_DOCK_ITEM (item))
-    {
-      DEBUG (("here"));
-      gtk_signal_connect (GTK_OBJECT (item), "dock_drag_begin",
-                          GTK_SIGNAL_FUNC (drag_begin), (gpointer) dock);
-      gtk_signal_connect (GTK_OBJECT (item), "dock_drag_motion",
-                          GTK_SIGNAL_FUNC (drag_motion), (gpointer) dock);
-      gtk_signal_connect (GTK_OBJECT (item), "dock_drag_end",
-                          GTK_SIGNAL_FUNC (drag_end), (gpointer) dock);
-    }
+  connect_drag_signals (dock, item);
+}
+
+void
+gnome_dock_add_floating_item (GnomeDock *dock,
+                              GtkWidget *widget,
+                              gint x, gint y,
+                              GtkOrientation orientation)
+{
+  g_return_if_fail (GNOME_IS_DOCK_ITEM (widget));
+
+  gnome_dock_item_set_orientation (GNOME_DOCK_ITEM (widget), orientation);
+
+  gtk_widget_ref (widget);
+  if (widget->parent != NULL)
+    gtk_container_remove (GTK_CONTAINER (widget->parent), widget);
+  gtk_widget_set_parent (widget, GTK_WIDGET (dock));
+
+  gnome_dock_item_detach (GNOME_DOCK_ITEM (widget), x, y);
+  dock->floating_children = g_list_prepend (dock->floating_children, widget);
+
+  connect_drag_signals (dock, widget);
+
+  gtk_widget_unref (widget);
 }
 
 void
@@ -1320,10 +1376,16 @@ gnome_dock_set_client_area (GnomeDock *dock, GtkWidget *widget)
     gtk_widget_unref (widget);
 }
 
+GtkWidget *
+gnome_dock_get_client_area (GnomeDock *dock)
+{
+  return dock->client_area;
+}
+
 GnomeDockItem *
 gnome_dock_get_item_by_name (GnomeDock *dock,
                              const gchar *name,
-                             GnomeDockPositionType *position_return,
+                             GnomeDockPlacement *placement_return,
                              guint *num_band_return,
                              guint *band_position_return,
                              guint *offset_return)
@@ -1332,7 +1394,7 @@ gnome_dock_get_item_by_name (GnomeDock *dock,
 
   item = get_docked_item_by_name (dock,
                                   name,
-                                  position_return,
+                                  placement_return,
                                   num_band_return,
                                   band_position_return,
                                   offset_return);
@@ -1342,8 +1404,8 @@ gnome_dock_get_item_by_name (GnomeDock *dock,
   item = get_floating_item_by_name (dock, name);
   if (item != NULL)
     {
-      if (position_return != NULL)
-        *position_return = GNOME_DOCK_POS_FLOATING;
+      if (placement_return != NULL)
+        *placement_return = GNOME_DOCK_FLOATING;
       return item;
     }
 
@@ -1351,6 +1413,8 @@ gnome_dock_get_item_by_name (GnomeDock *dock,
 }
 
 
+
+/* Layout functions.  */
 
 static void
 layout_add_floating (GnomeDock *dock,
@@ -1360,23 +1424,25 @@ layout_add_floating (GnomeDock *dock,
 
   for (lp = dock->floating_children; lp != NULL; lp = lp->next)
     {
-      GtkWidget *widget;
+      GtkOrientation orientation;
       gint x, y;
+      GnomeDockItem *item;
 
-      widget = lp->data;
-      gdk_window_get_position (widget->window, &x, &y);
+      item = GNOME_DOCK_ITEM (lp->data);
 
-      gnome_dock_layout_add (layout,
-                             GNOME_DOCK_ITEM (widget),
-                             GNOME_DOCK_POS_FLOATING,
-                             0, x, y);
+      orientation = gnome_dock_item_get_orientation (item);
+      gnome_dock_item_get_floating_position (item, &x, &y);
+
+      gnome_dock_layout_add_floating_item (layout, item,
+                                           x, y,
+                                           orientation);
     }
 }
 
 static void
 layout_add_bands (GnomeDock *dock,
                   GnomeDockLayout *layout,
-                  GnomeDockPositionType position,
+                  GnomeDockPlacement placement,
                   GList *band_list)
 {
   guint band_num;
@@ -1389,25 +1455,30 @@ layout_add_bands (GnomeDock *dock,
       GnomeDockChild *child;
 
       child = lp->data;
-      gnome_dock_band_layout_add (child->band, layout, position, band_num);
+      gnome_dock_band_layout_add (child->band, layout, placement, band_num);
     }
 }
 
 GnomeDockLayout *
 gnome_dock_get_layout (GnomeDock *dock)
 {
-  GtkObject *new;
   GnomeDockLayout *layout;
 
-  new = gnome_dock_layout_new ();
-  layout = GNOME_DOCK_LAYOUT (new);
+  layout = gnome_dock_layout_new ();
 
-  layout_add_bands (dock, layout, GNOME_DOCK_POS_TOP, dock->top_bands);
-  layout_add_bands (dock, layout, GNOME_DOCK_POS_BOTTOM, dock->bottom_bands);
-  layout_add_bands (dock, layout, GNOME_DOCK_POS_LEFT, dock->left_bands);
-  layout_add_bands (dock, layout, GNOME_DOCK_POS_RIGHT, dock->right_bands);
+  layout_add_bands (dock, layout, GNOME_DOCK_TOP, dock->top_bands);
+  layout_add_bands (dock, layout, GNOME_DOCK_BOTTOM, dock->bottom_bands);
+  layout_add_bands (dock, layout, GNOME_DOCK_LEFT, dock->left_bands);
+  layout_add_bands (dock, layout, GNOME_DOCK_RIGHT, dock->right_bands);
 
   layout_add_floating (dock, layout);
 
   return layout;
+}
+
+gboolean
+gnome_dock_add_from_layout (GnomeDock *dock,
+                            GnomeDockLayout *layout)
+{
+  return gnome_dock_layout_add_to_dock (layout, dock);
 }

@@ -213,6 +213,9 @@ gnome_dock_item_init (GnomeDockItem *dock_item)
 
   dock_item->dragoff_x = 0;
   dock_item->dragoff_y = 0;
+
+  dock_item->float_x = 0;
+  dock_item->float_y = 0;
 }
 
 static void
@@ -289,7 +292,8 @@ gnome_dock_item_map (GtkWidget *widget)
   di = GNOME_DOCK_ITEM (widget);
 
   gdk_window_show (di->bin_window);
-  gdk_window_show (widget->window);
+  if (! di->is_floating)
+    gdk_window_show (widget->window);
 
   if (di->is_floating && !di->float_window_mapped)
     {
@@ -314,7 +318,17 @@ gnome_dock_item_map_event (GtkWidget *widget,
 
   dock_item = GNOME_DOCK_ITEM (widget);
   if (dock_item->grab_on_map_event)
-    gnome_dock_item_grab_pointer (dock_item);
+    {
+      gint x, y;
+
+      /* FIXME: This is an *ugly* hack!  */
+      gdk_window_get_pointer (NULL, &x, &y, NULL);
+
+      gnome_dock_item_detach (dock_item,
+                              x - dock_item->dragoff_x,
+                              y - dock_item->dragoff_y);
+      gnome_dock_item_grab_pointer (dock_item);
+    }
 
   return TRUE;
 }
@@ -408,6 +422,9 @@ gnome_dock_item_realize (GtkWidget *widget)
   gtk_style_set_background (widget->style, di->bin_window, GTK_WIDGET_STATE (di));
   gtk_style_set_background (widget->style, di->float_window, GTK_WIDGET_STATE (di));
   gdk_window_set_back_pixmap (widget->window, NULL, TRUE);
+
+  if (di->is_floating)
+    gnome_dock_item_detach (di, di->float_x, di->float_y);
 }
 
 static void
@@ -468,44 +485,36 @@ gnome_dock_item_size_request (GtkWidget      *widget,
   bin = GTK_BIN (widget);
   dock_item = GNOME_DOCK_ITEM (widget);
 
-  if (dock_item->is_floating)
+  /* If our child is not visible, we still request its size, since
+     we won't have any usefull hint for our size otherwise.  */
+  if (bin->child != NULL)
+    gtk_widget_size_request (bin->child, &bin->child->requisition);
+
+  if (dock_item->orientation == GTK_ORIENTATION_HORIZONTAL)
     {
-      requisition->width = 0;
-      requisition->height = 0;
+      requisition->width = DRAG_HANDLE_SIZE;
+      if (bin->child != NULL)
+        {
+          requisition->width += bin->child->requisition.width;
+          requisition->height = bin->child->requisition.height;
+        }
+      else
+        requisition->height = 0;
     }
   else
     {
-      /* If our child is not visible, we still request its size, since
-         we won't have any usefull hint for our size otherwise.  */
+      requisition->height = DRAG_HANDLE_SIZE;
       if (bin->child != NULL)
-        gtk_widget_size_request (bin->child, &bin->child->requisition);
-
-      if (dock_item->orientation == GTK_ORIENTATION_HORIZONTAL)
         {
-          requisition->width = DRAG_HANDLE_SIZE;
-          if (bin->child != NULL)
-            {
-              requisition->width += bin->child->requisition.width;
-              requisition->height = bin->child->requisition.height;
-            }
-          else
-            requisition->height = 0;
+          requisition->width = bin->child->requisition.width;
+          requisition->height += bin->child->requisition.height;
         }
       else
-        {
-          requisition->height = DRAG_HANDLE_SIZE;
-          if (bin->child != NULL)
-            {
-              requisition->width = bin->child->requisition.width;
-              requisition->height += bin->child->requisition.height;
-            }
-          else
-            requisition->width = 0;
-        }
-
-      requisition->width += GTK_CONTAINER (widget)->border_width * 2;
-      requisition->height += GTK_CONTAINER (widget)->border_width * 2;
+        requisition->width = 0;
     }
+
+  requisition->width += GTK_CONTAINER (widget)->border_width * 2;
+  requisition->height += GTK_CONTAINER (widget)->border_width * 2;
 }
 
 static void
@@ -827,7 +836,6 @@ gnome_dock_item_motion (GtkWidget      *widget,
   GnomeDockItem *di;
   gint new_x, new_y;
   gint ox, oy;
-  gint snap_x, snap_y;
   gboolean in_handle;
   GdkCursor *fleur;
 
@@ -848,7 +856,6 @@ gnome_dock_item_motion (GtkWidget      *widget,
   new_y += oy;
   new_x -= di->dragoff_x;
   new_y -= di->dragoff_y;
-  gdk_window_get_pointer (widget->window, &snap_x, &snap_y, NULL);
 
   gtk_signal_emit (GTK_OBJECT (widget),
                    dock_item_signals[DOCK_DRAG_MOTION],
@@ -1071,6 +1078,14 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
   if (item->behavior & GNOME_DOCK_ITEM_BEH_NEVER_DETACH)
     return FALSE;
 
+  item->float_x = x;
+  item->float_y = y;
+
+  item->is_floating = TRUE;
+
+  if (! GTK_WIDGET_REALIZED (item))
+    return TRUE;
+
   gtk_widget_size_request (GTK_WIDGET (item), &requisition);
 
   gdk_window_move_resize (item->float_window,
@@ -1086,11 +1101,8 @@ gnome_dock_item_detach (GnomeDockItem *item, gint x, gint y)
   gtk_widget_size_allocate (GTK_WIDGET (item), &allocation);
 
   item->float_window_mapped = TRUE;
-  item->is_floating = TRUE;
 
   gdk_window_hide (GTK_WIDGET (item)->window);
-  gnome_dock_item_grab_pointer (item);
-
   gnome_dock_item_draw (GTK_WIDGET (item), NULL);
 
   return TRUE;
@@ -1125,6 +1137,9 @@ gnome_dock_item_drag_floating (GnomeDockItem *item, gint x, gint y)
     {
       gdk_window_move (item->float_window, x, y);
       gdk_window_raise (item->float_window);
+
+      item->float_x = x;
+      item->float_y = y;
     }
 }
 
@@ -1148,4 +1163,17 @@ gnome_dock_item_handle_size_request (GnomeDockItem *item,
 
   requisition->width += container->border_width * 2;
   requisition->height += container->border_width * 2;
+}
+
+void
+gnome_dock_item_get_floating_position (GnomeDockItem *item,
+                                       gint *x, gint *y)
+{
+  if (GTK_WIDGET_REALIZED (item) && item->is_floating)
+    gdk_window_get_position (item->float_window, x, y);
+  else
+    {
+      *x = item->float_x;
+      *y = item->float_y;
+    }
 }

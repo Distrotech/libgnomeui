@@ -1769,7 +1769,7 @@ gnome_dock_band_get_item_by_name (GnomeDockBand *band,
 void
 gnome_dock_band_layout_add (GnomeDockBand *band,
                             GnomeDockLayout *layout,
-                            GnomeDockPositionType position,
+                            GnomeDockPlacement placement,
                             guint band_num)
 {
   guint child_num;
@@ -1786,9 +1786,9 @@ gnome_dock_band_layout_add (GnomeDockBand *band,
       item = child->widget;
 
       if (GNOME_IS_DOCK_ITEM (item))
-        gnome_dock_layout_add (layout,
-                               GNOME_DOCK_ITEM (item),
-                               position, band_num,
-                               child_num, child->offset);
+        gnome_dock_layout_add_item (layout,
+                                    GNOME_DOCK_ITEM (item),
+                                    placement, band_num,
+                                    child_num, child->offset);
     }
 }

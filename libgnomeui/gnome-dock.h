@@ -36,12 +36,12 @@ BEGIN_GNOME_DECLS
 
 typedef enum
 {
-  GNOME_DOCK_POS_TOP,
-  GNOME_DOCK_POS_RIGHT,
-  GNOME_DOCK_POS_BOTTOM,
-  GNOME_DOCK_POS_LEFT,
-  GNOME_DOCK_POS_FLOATING
-} GnomeDockPositionType;
+  GNOME_DOCK_TOP,
+  GNOME_DOCK_RIGHT,
+  GNOME_DOCK_BOTTOM,
+  GNOME_DOCK_LEFT,
+  GNOME_DOCK_FLOATING
+} GnomeDockPlacement;
 
 typedef struct _GnomeDock GnomeDock;
 typedef struct _GnomeDockClass GnomeDockClass;
@@ -81,30 +81,42 @@ struct _GnomeDock
 struct _GnomeDockClass
 {
   GtkContainerClass parent_class;
+
+  void (* layout_changed) (GnomeDock *dock);
 };
 
-GtkWidget     *gnome_dock_new              (void);
-guint          gnome_dock_get_type         (void);
-                                           
-void           gnome_dock_add_item         (GnomeDock             *dock,
-                                            GtkWidget             *item,
-                                            GnomeDockPositionType  edge,
-                                            guint                  band_num,
-                                            guint                  offset,
-                                            gint                   position,
-                                            gboolean               in_new_band);
-         
-void           gnome_dock_set_client_area  (GnomeDock             *dock,
-                                            GtkWidget             *widget);
- 
-GnomeDockItem *gnome_dock_get_item_by_name (GnomeDock *dock,
-                                            const gchar *name,
-                                            GnomeDockPositionType *position_return,
-                                            guint *num_band_return,
-                                            guint *band_position_return,
-                                            guint *offset_return);
+GtkWidget     *gnome_dock_new               (void);
+guint          gnome_dock_get_type          (void);
+                                            
+void           gnome_dock_add_item          (GnomeDock             *dock,
+                                             GtkWidget             *item,
+                                             GnomeDockPlacement  placement,
+                                             guint                  band_num,
+                                             guint                  offset,
+                                             gint                   position,
+                                             gboolean               in_new_band);
 
-GnomeDockLayout *gnome_dock_get_layout     (GnomeDock *dock);
+void           gnome_dock_add_floating_item (GnomeDock *dock,
+                                             GtkWidget *widget,
+                                             gint x, gint y,
+                                             GtkOrientation orientation);
+          
+void           gnome_dock_set_client_area   (GnomeDock             *dock,
+                                             GtkWidget             *widget);
+
+GtkWidget     *gnome_dock_get_client_area   (GnomeDock             *dock);
+  
+GnomeDockItem *gnome_dock_get_item_by_name  (GnomeDock *dock,
+                                             const gchar *name,
+                                             GnomeDockPlacement *placement_return,
+                                             guint *num_band_return,
+                                             guint *band_position_return,
+                                             guint *offset_return);
+ 
+GnomeDockLayout *gnome_dock_get_layout      (GnomeDock *dock);
+
+gboolean       gnome_dock_add_from_layout   (GnomeDock *dock,
+                                             GnomeDockLayout *layout);
 
 END_GNOME_DECLS
 

@@ -45,11 +45,25 @@ struct _GnomeDockLayoutItem
 {
   GnomeDockItem *item;
 
-  GnomeDockPositionType position;
+  GnomeDockPlacement placement;
 
-  gint band_num;
-  gint band_position;
-  gint offset;
+  union
+  {
+    struct
+    {
+      gint x;
+      gint y;
+      GtkOrientation orientation;
+    } floating;
+
+    struct
+    {
+      gint band_num;
+      gint band_position;
+      gint offset;
+    } docked;
+
+  } position;
 };
 
 struct _GnomeDockLayout
@@ -66,16 +80,22 @@ struct _GnomeDockLayoutClass
 
 
 
-GtkObject           *gnome_dock_layout_new      (void);
+GnomeDockLayout     *gnome_dock_layout_new      (void);
 guint                gnome_dock_layout_get_type (void);
    
-gboolean             gnome_dock_layout_add      (GnomeDockLayout *layout,
+gboolean             gnome_dock_layout_add_item (GnomeDockLayout *layout,
                                                  GnomeDockItem *item,
-                                                 GnomeDockPositionType position,
+                                                 GnomeDockPlacement placement,
                                                  gint band_num,
                                                  gint band_position,
                                                  gint offset);
    
+gboolean             gnome_dock_layout_add_floating_item
+                                                (GnomeDockLayout *layout,
+                                                 GnomeDockItem *item,
+                                                 gint x, gint y,
+                                                 GtkOrientation orientation);
+
 GnomeDockLayoutItem *gnome_dock_layout_get_item (GnomeDockLayout *layout,
                                                  GnomeDockItem *item);
 GnomeDockLayoutItem *gnome_dock_layout_get_item_by_name

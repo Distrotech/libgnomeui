@@ -1,3 +1,94 @@
+1998-12-14  Ettore Perazzoli  <ettore@comm2000.it>
+
+	* gnome-app.h (GNOME_APP_MENUBAR_NAME, GNOME_APP_TOOLBAR_NAME):
+	New public #defines.
+
+	* gnome-app.c (gnome_app_init): Create the layout.
+	(gnome_app_set_menus): Add the menu to the layout instead of
+ 	putting it into the dock directly.
+	(gnome_app_set_toolbar): Likewise.
+	(layout_changed): New private function.  If `enable_layout_config' 
+	is TRUE, it updates the layout configuration via gnome-config.
+	(gnome_app_realize): New function.  Save the dock configuration if 
+	`enable_layout_config' is TRUE.  Connect the "layout_change"
+	signal of the dock to `layout_changed()'.
+	(gnome_app_init): Install it.
+	(write_layout_config): New helper function.
+	(read_layout_config): New helper function.
+	(gnome_app_add_docked): New function.
+	(gnome_app_add_toolbar): New function.
+
+	* gnome-dock-layout.c (gnome_dock_layout_new): Return a
+	`GnomeDockLayout *' instead of `GtkObject *'.
+
+	* gnome-app.h: Reorganized with the following members: `name',
+ 	`prefix', `dock', `statusbar', `vbox', `menubar', `accel_group',
+ 	`contents'.  New member `auto_config_layout' to automagically
+ 	handle layout configurations.
+
+	* gnome-app.c (gnome_app_init): Do not initialize `pos_menubar'
+	and `pos_toolbar' anymore.
+	(gnome_app_toolbar_set_position): Removed.
+	(gnome_app_menu_set_position): Removed.
+
+	* gnome-app.h: Removed `pos_menubar' and `pos_toolbar' members.
+
+	* gnome-dock.c (gnome_dock_class_init): Add handler for the
+	"layout_changed" signal.
+	(drag_end): Emit "layout_changed".
+	(gnome_dock_add_from_layout): New function.
+	(gnome_dock_get_client_area): New function.
+
+	* gnome-dock.h (struct _GnomeDockClass): Added `layout_changed'
+ 	member.
+
+	* gnome-app.h (GnomeAppWidgetPositionType): Removed.
+
+	* gnome-app.c (get_orientation): Removed.
+
+	* gnome-dock-item.c (gnome_dock_item_get_floating_position): New
+ 	function.
+	(gnome_dock_item_map): If floating, do not map widget->window.
+
+	* gnome-dock.c (drag_floating): Grab the pointer after calling
+ 	`gnome_dock_item_detach()'.
+	(connect_drag_signals): New helper function.
+	(gnome_dock_add_item): Use it.
+	(gnome_dock_add_floating_item): Use it.
+
+	* gnome-dock-item.c (gnome_dock_item_init): Initialize `float_x'
+	and `float_y'.
+	(gnome_dock_item_detach): Set `float_x' and `float_y'.  Do not
+	move the window if the widget is not realized yet.  Do not grab
+	the pointer anymore.
+	(gnome_dock_item_realize): If floating, detach.
+	(gnome_dock_item_drag_floating): Update `float_x' and `float_y'.
+
+	* gnome-dock-item.h (struct _GnomeDockItem): New members
+	`float_x', `float_y' holding the position of the floating window.
+
+	* gnome-dock-layout.c (item_compare_func): Don't order floating
+ 	items.
+	(gnome_dock_layout_add): Renamed to `gnome_dock_layout_add_item'.
+	(gnome_dock_layout_add_floating_item): New function.
+
+	* gnome-dock.c (gnome_dock_add_floating_item): New function.
+
+	* gnome-dock-layout.h (struct _GnomeDockLayoutItem): Added union
+ 	`position' to store positions for docked and floating items
+ 	differently.  All the functions updated to handle it.
+
+	* gnome-dock.h (enum GnomeDockPositionType): Renamed to
+ 	`GnomeDockPlacement'.
+
+	* gnome-dock-item.c (gnome_dock_item_map_event): If
+ 	`grab_on_map_event' is set, call `gnome_dock_item_detach()' at the
+ 	current pointer position.
+	(gnome_dock_item_motion): Removed unused `snap_x', `snap_y'
+ 	variables and `gdk_window_get_pointer()' call.
+	(gnome_dock_item_size_request): Return real size even when
+ 	floating.
+
 1998-12-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gil_get_items_per_line): Fetch the widget

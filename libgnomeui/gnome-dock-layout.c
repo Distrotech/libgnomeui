@@ -25,6 +25,8 @@
 
 #include "gnome-dock-layout.h"
 
+/* TODO: handle incorrect GNOME_DOCK_ITEM_BEH_EXCLUSIVE situations.  */
+
 static GtkObjectClass *parent_class = NULL;
 
 
@@ -100,13 +102,20 @@ item_compare_func (gconstpointer a,
   item_a = a;
   item_b = b;
 
-  if (item_a->position != item_b->position)
-    return item_b->position - item_a->position;
+  if (item_a->placement != item_b->placement)
+    return item_b->placement - item_a->placement;
 
-  if (item_a->band_num != item_b->band_num)
-    return item_b->band_num - item_a->band_num;
+  if (item_a->placement == GNOME_DOCK_FLOATING)
+    return 0; /* Floating items don't need to be ordered.  */
+  else
+    {
+      if (item_a->position.docked.band_num != item_b->position.docked.band_num)
+        return (item_b->position.docked.band_num
+                - item_a->position.docked.band_num);
 
-  return item_b->band_position - item_a->band_position;
+      return (item_b->position.docked.band_position
+              - item_a->position.docked.band_position);
+    }
 }
 
 static gint
@@ -186,32 +195,32 @@ gnome_dock_layout_get_type (void)
   return layout_type;
 }
    
-GtkObject *
+GnomeDockLayout *
 gnome_dock_layout_new (void)
 {
   GnomeDockLayout *new;
 
   new = gtk_type_new (gnome_dock_layout_get_type ());
 
-  return GTK_OBJECT (new);
+  return new;
 }
 
 gboolean
-gnome_dock_layout_add (GnomeDockLayout *layout,
-                       GnomeDockItem *item,
-                       GnomeDockPositionType position,
-                       gint band_num,
-                       gint band_position,
-                       gint offset)
+gnome_dock_layout_add_item (GnomeDockLayout *layout,
+                            GnomeDockItem *item,
+                            GnomeDockPlacement placement,
+                            gint band_num,
+                            gint band_position,
+                            gint offset)
 {
   GnomeDockLayoutItem *new;
 
   new = g_new (GnomeDockLayoutItem, 1);
   new->item = item;
-  new->position = position;
-  new->band_num = band_num;
-  new->band_position = band_position;
-  new->offset = offset;
+  new->placement = placement;
+  new->position.docked.band_num = band_num;
+  new->position.docked.band_position = band_position;
+  new->position.docked.offset = offset;
 
   layout->items = g_list_prepend (layout->items, new);
 
@@ -220,6 +229,28 @@ gnome_dock_layout_add (GnomeDockLayout *layout,
   return TRUE;
 }
    
+gboolean
+gnome_dock_layout_add_floating_item (GnomeDockLayout *layout,
+                                     GnomeDockItem *item,
+                                     gint x, gint y,
+                                     GtkOrientation orientation)
+{
+  GnomeDockLayoutItem *new;
+
+  new = g_new (GnomeDockLayoutItem, 1);
+  new->item = item;
+  new->placement = GNOME_DOCK_FLOATING;
+  new->position.floating.x = x;
+  new->position.floating.y = y;
+  new->position.floating.orientation = orientation;
+
+  layout->items = g_list_prepend (layout->items, new);
+
+  gtk_object_ref (GTK_OBJECT (item));
+
+  return TRUE;
+}
+
 GnomeDockLayoutItem *
 gnome_dock_layout_get_item (GnomeDockLayout *layout,
                             GnomeDockItem *item)
@@ -286,7 +317,8 @@ gnome_dock_layout_add_to_dock (GnomeDockLayout *layout,
 {
   GnomeDockLayoutItem *item;
   GList *lp;
-  gint band_num;
+  GnomeDockPlacement last_placement;
+  gint last_band_num;
 
   if (layout->items == NULL)
     return FALSE;
@@ -294,21 +326,43 @@ gnome_dock_layout_add_to_dock (GnomeDockLayout *layout,
   layout->items = g_list_sort (layout->items, item_compare_func);
 
   item = layout->items->data;
-  band_num = item->band_num + 1;
+
+  last_placement = GNOME_DOCK_FLOATING;
+  last_band_num = 0;
 
   for (lp = layout->items; lp != NULL; lp = lp->next)
     {
       item = lp->data;
 
-      gnome_dock_add_item (dock,
-                           GTK_WIDGET (item->item),
-                           item->position,
-                           0,
-                           item->offset,
-                           0,
-                           band_num != item->band_num);
+      if (item->placement == GNOME_DOCK_FLOATING)
+        {
+          gnome_dock_add_floating_item (dock,
+                                        GTK_WIDGET (item->item),
+                                        item->position.floating.x,
+                                        item->position.floating.y,
+                                        item->position.floating.orientation);
+        }
+      else
+        {
+          gboolean need_new;
 
-      band_num = item->band_num;
+          if (last_placement != item->placement
+              || last_band_num != item->position.docked.band_num)
+            need_new = TRUE;
+          else
+            need_new = FALSE;
+
+          gnome_dock_add_item (dock,
+                               GTK_WIDGET (item->item),
+                               item->placement,
+                               0,
+                               item->position.docked.offset,
+                               0,
+                               need_new);
+
+          last_band_num = item->position.docked.band_num;
+          last_placement = item->placement;
+        }
 
       gtk_widget_show (GTK_WIDGET (item->item));
     }
@@ -348,12 +402,20 @@ gnome_dock_layout_create_string (GnomeDockLayout *layout)
           tmp = g_renew (char *, tmp, tmp_alloc);
         }
 
-      tmp[tmp_count] = g_strdup_printf ("%s\\%d,%d,%d,%d",
-                                        i->item->name,
-                                        i->position,
-                                        i->band_num,
-                                        i->band_position,
-                                        i->offset);
+      if (i->placement == GNOME_DOCK_FLOATING)
+        tmp[tmp_count] = g_strdup_printf ("%s\\%d,%d,%d,%d",
+                                          i->item->name,
+                                          (gint) i->placement,
+                                          i->position.floating.x,
+                                          i->position.floating.y,
+                                          i->position.floating.orientation);
+      else
+        tmp[tmp_count] = g_strdup_printf ("%s\\%d,%d,%d,%d",
+                                          i->item->name,
+                                          (gint) i->placement,
+                                          i->position.docked.band_num,
+                                          i->position.docked.band_position,
+                                          i->position.docked.offset);
 
       tmp_count++;
     }
@@ -394,21 +456,37 @@ gboolean gnome_dock_layout_parse_string (GnomeDockLayout *layout,
       if (lp != NULL)
         {
           GnomeDockLayoutItem *i;
-          gint position, band_num, band_position, offset;
+          gint p1, p2, p3, p4;
 
-          if (sscanf (*(p + 1), "%d,%d,%d,%d",
-                      &position, &band_num, &band_position, &offset) != 4)
+          if (sscanf (*(p + 1), "%d,%d,%d,%d", &p1, &p2, &p3, &p4) != 4)
             {
               g_strfreev (tmp);
               return FALSE;
             }
 
+          if (p1 != (gint) GNOME_DOCK_TOP
+              && p1 != (gint) GNOME_DOCK_BOTTOM
+              && p1 != (gint) GNOME_DOCK_LEFT
+              && p1 != (gint) GNOME_DOCK_RIGHT
+              && p1 != (gint) GNOME_DOCK_FLOATING)
+            return FALSE;
+          
           i = lp->data;
 
-          i->position = (GnomeDockPositionType) position;
-          i->band_num = band_num;
-          i->band_position = band_position;
-          i->offset = offset;
+          i->placement = (GnomeDockPlacement) p1;
+
+          if (i->placement == GNOME_DOCK_FLOATING)
+            {
+              i->position.floating.x = p2;
+              i->position.floating.y = p3;
+              i->position.floating.orientation = p4;
+            }
+          else
+            {
+              i->position.docked.band_num = p2;
+              i->position.docked.band_position = p3;
+              i->position.docked.offset = p4;
+            }
         }
 
       p += 2;

@@ -129,7 +129,7 @@ GnomeDockItem *gnome_dock_band_get_item_by_name (GnomeDockBand *band,
 
 void           gnome_dock_band_layout_add       (GnomeDockBand *band,
                                                  GnomeDockLayout *layout,
-                                                 GnomeDockPositionType position,
+                                                 GnomeDockPlacement placement,
                                                  guint band_num);
 END_GNOME_DECLS
 
