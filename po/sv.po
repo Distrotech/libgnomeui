@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"POT-Creation-Date: 2002-02-13 03:24+0100\n"
-"PO-Revision-Date: 2002-01-27 02:10+0100\n"
+"POT-Creation-Date: 2002-02-24 18:42+0100\n"
+"PO-Revision-Date: 2002-02-24 18:42+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,21 +17,19 @@ msgstr ""
 
 #: libgnomeui/gnome-about.c:187
 msgid "Credits"
-msgstr ""
+msgstr "Tack"
 
 #: libgnomeui/gnome-about.c:210
 msgid "Written by"
-msgstr ""
+msgstr "Skrivet av"
 
 #: libgnomeui/gnome-about.c:224
-#, fuzzy
 msgid "Documented by"
-msgstr "Dokumentatör"
+msgstr "Dokumenterat av"
 
 #: libgnomeui/gnome-about.c:238
-#, fuzzy
 msgid "Translated by"
-msgstr "Tack till översättare"
+msgstr "Översatt av"
 
 #: libgnomeui/gnome-about.c:335
 msgid "Program name"
@@ -144,35 +142,35 @@ msgstr "Interaktivitet"
 msgid "Level of user activity required."
 msgstr "Nivå på användarinteraktivitet som krävs."
 
-#: libgnomeui/gnome-client.c:832
+#: libgnomeui/gnome-client.c:833
 msgid "Specify session management ID"
 msgstr "Ange ID för sessionskontroll"
 
-#: libgnomeui/gnome-client.c:832
+#: libgnomeui/gnome-client.c:833
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:836
 msgid "Specify prefix of saved configuration"
 msgstr "Ange prefix på den sparade konfigurationen"
 
-#: libgnomeui/gnome-client.c:835
+#: libgnomeui/gnome-client.c:836
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:838
+#: libgnomeui/gnome-client.c:839
 msgid "Disable connection to session manager"
 msgstr "Stäng av koppling till sessionshanteraren"
 
-#: libgnomeui/gnome-client.c:944
+#: libgnomeui/gnome-client.c:945
 msgid "Session management"
 msgstr "Sessionshantering"
 
-#: libgnomeui/gnome-client.c:2478
+#: libgnomeui/gnome-client.c:2483
 msgid "Cancel Logout"
 msgstr "Avbryt utloggning"
 
-#: libgnomeui/gnome-color-picker.c:404
+#: libgnomeui/gnome-color-picker.c:405
 msgid "Received invalid color data\n"
 msgstr "Mottog ogiltig färgdata\n"
 
@@ -180,52 +178,52 @@ msgstr "Mottog ogiltig färgdata\n"
 msgid "Pick a color"
 msgstr "Välj en färg"
 
-#: libgnomeui/gnome-dateedit.c:430
+#: libgnomeui/gnome-dateedit.c:425
 msgid "Time"
 msgstr "Tid"
 
-#: libgnomeui/gnome-dateedit.c:431
+#: libgnomeui/gnome-dateedit.c:426
 msgid "The time currently selected"
 msgstr "Tiden som är vald för tillfället"
 
-#: libgnomeui/gnome-dateedit.c:443
+#: libgnomeui/gnome-dateedit.c:438
 msgid "DateEdit Flags"
 msgstr "DateEdit-flaggor"
 
-#: libgnomeui/gnome-dateedit.c:444
+#: libgnomeui/gnome-dateedit.c:439
 msgid "Flags for how DateEdit looks"
 msgstr "Flaggor för hur DateEdit ser ut"
 
-#: libgnomeui/gnome-dateedit.c:453
+#: libgnomeui/gnome-dateedit.c:448
 msgid "Lower Hour"
 msgstr "Minska timme"
 
-#: libgnomeui/gnome-dateedit.c:454
+#: libgnomeui/gnome-dateedit.c:449
 msgid "Lower hour in the time popup selector"
 msgstr "Minska timme i popup-tidsväljaren"
 
-#: libgnomeui/gnome-dateedit.c:464
+#: libgnomeui/gnome-dateedit.c:459
 msgid "Upper Hour"
 msgstr "Öka timme"
 
-#: libgnomeui/gnome-dateedit.c:465
+#: libgnomeui/gnome-dateedit.c:460
 msgid "Upper hour in the time popup selector"
 msgstr "Öka timme i popup-tidsväljaren"
 
-#: libgnomeui/gnome-dateedit.c:475
+#: libgnomeui/gnome-dateedit.c:470
 msgid "Initial Time"
 msgstr "Starttid"
 
-#: libgnomeui/gnome-dateedit.c:476
+#: libgnomeui/gnome-dateedit.c:471
 msgid "The initial time"
 msgstr "Starttiden"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:703
+#: libgnomeui/gnome-dateedit.c:700
 msgid "Calendar"
 msgstr "Kalender"
 
-#: libgnomeui/gnome-dateedit.c:935
+#: libgnomeui/gnome-dateedit.c:930
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date är föråldrat, använd gnome_date_edit_get_time"
 
@@ -316,19 +314,19 @@ msgstr "Logotypbakgrundsfärg är inställd"
 msgid "Logo Background color is set"
 msgstr "Logotypbakgrundsfärg är inställd"
 
-#: libgnomeui/gnome-druid.c:148
+#: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
 msgstr "Visa Slutför"
 
-#: libgnomeui/gnome-druid.c:149
+#: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Visa knappen \"Slutför\" istället för \"Nästa\"-knappen"
 
-#: libgnomeui/gnome-druid.c:156
+#: libgnomeui/gnome-druid.c:158
 msgid "Show Help"
 msgstr "Visa hjälp"
 
-#: libgnomeui/gnome-druid.c:157
+#: libgnomeui/gnome-druid.c:159
 msgid "Show the 'Help' button"
 msgstr "Visa \"Hjälp\"-knappen"
 
@@ -911,19 +909,19 @@ msgstr "_Avsluta spelet"
 msgid "End the current game"
 msgstr "Avsluta det aktuella spelet"
 
-#: libgnomeui/gnome-app-helper.c:2578
+#: libgnomeui/gnome-app-helper.c:2563
 msgid "Both text and icons"
 msgstr "Både text och ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2579
+#: libgnomeui/gnome-app-helper.c:2564
 msgid "Icons only"
 msgstr "Endast ikoner"
 
-#: libgnomeui/gnome-app-helper.c:2580
+#: libgnomeui/gnome-app-helper.c:2565
 msgid "Text only"
 msgstr "Endast text"
 
-#: libgnomeui/gnome-app-helper.c:2631
+#: libgnomeui/gnome-app-helper.c:2616
 #, c-format
 msgid "Use desktop default (%s)"
 msgstr "Använd skrivbordsstandard (%s)"
@@ -964,7 +962,7 @@ msgstr " (ja eller nej)"
 msgid "  - OK? (yes or no)"
 msgstr "  - OK? (ja eller nej)"
 
-#: libgnomeui/gnome-app-util.c:689
+#: libgnomeui/gnome-app-util.c:685
 msgid "Progress"
 msgstr "Förlopp"
 
@@ -976,23 +974,107 @@ msgstr "Program-ID"
 msgid "The application ID string"
 msgstr "Programmets ID-sträng"
 
-#: libgnomeui/gnome-entry.c:169 libgnomeui/gnome-entry.c:170
+#: libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
 msgid "History id"
 msgstr "Historik-id"
 
-#: libgnomeui/gnome-entry.c:176
+#: libgnomeui/gnome-entry.c:178
 msgid "GTK entry"
 msgstr "GTK-post"
 
-#: libgnomeui/gnome-entry.c:177
+#: libgnomeui/gnome-entry.c:179
 msgid "The GTK entry"
 msgstr "GTK-posten"
 
-#: libgnomeui/gnome-file-entry.c:347
+#: libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:160
+msgid "History ID"
+msgstr "Historik-id"
+
+#: libgnomeui/gnome-file-entry.c:191
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Unik identifierare för filposten. Detta kommer att användas för att spara "
+"historiklistan."
+
+#: libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:169
+msgid "Browse Dialog Title"
+msgstr "Bläddra dialiogtitel"
+
+#: libgnomeui/gnome-file-entry.c:200
+msgid "Title for the Browse file dialog."
+msgstr "Titel för filbläddringsdialogen."
+
+#: libgnomeui/gnome-file-entry.c:207
+msgid "Directory Entry"
+msgstr "Katalogpost"
+
+#: libgnomeui/gnome-file-entry.c:208
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+"Huruvida filposten används för att ange katalognamn eller fullständiga "
+"filnamn."
+
+#: libgnomeui/gnome-file-entry.c:216
+msgid "Modal"
+msgstr "Modal"
+
+#: libgnomeui/gnome-file-entry.c:217
+msgid "Whether the Browse file window should be modal."
+msgstr "Huruvida filbläddringsfönstret ska vara modalt."
+
+#: libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:185
+msgid "Filename"
+msgstr "Filnamn"
+
+#: libgnomeui/gnome-file-entry.c:225
+msgid "Filename that should be displayed in the file entry."
+msgstr "Filnamn som ska visas i filposten."
+
+#: libgnomeui/gnome-file-entry.c:233
+msgid "Default Path"
+msgstr "Standardsökväg"
+
+#: libgnomeui/gnome-file-entry.c:234
+msgid "Default path for the Browse file window."
+msgstr "Standardsökväg för filbläddringsfönstret."
+
+#: libgnomeui/gnome-file-entry.c:241
+msgid "GnomeEntry"
+msgstr "GnomeEntry"
+
+#: libgnomeui/gnome-file-entry.c:242
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+"GnomeEntry som filposten använder för inmatning av filnamn. Du kan använda "
+"denna egenskap för att få tag i den GnomeEntry som du behöver för att "
+"modifiera eller undersöka någon av dess parametrar."
+
+#: libgnomeui/gnome-file-entry.c:252
+msgid "GtkEntry"
+msgstr "GtkEntry"
+
+#: libgnomeui/gnome-file-entry.c:253
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+"GtkEntry som filposten använder för inmatning av filnamn. Du kan använda "
+"denna egenskap för att få tag i den GtkEntry som du behöver för att "
+"modifiera eller undersöka någon av dess parametrar."
+
+#: libgnomeui/gnome-file-entry.c:418
 msgid "Select file"
 msgstr "Välj fil"
 
-#: libgnomeui/gnome-file-entry.c:523
+#: libgnomeui/gnome-file-entry.c:592
 msgid "Browse..."
 msgstr "Bläddra..."
 
@@ -1100,33 +1182,69 @@ msgstr ""
 msgid "GConf error details: %s\n"
 msgstr "GConf-feldetaljer: %s\n"
 
-#: libgnomeui/gnome-icon-entry.c:257 libgnomeui/gnome-icon-entry.c:861
+#: libgnomeui/gnome-icon-entry.c:161
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Unik identifierare för ikonposten. Detta kommer att användas för att spara "
+"historiklistan."
+
+#: libgnomeui/gnome-icon-entry.c:170
+msgid "Title for the Browse icon dialog."
+msgstr "Titel för ikonbläddringsdialogen."
+
+#: libgnomeui/gnome-icon-entry.c:177
+msgid "Pixmap Directory"
+msgstr "Pixmapkatalog"
+
+#: libgnomeui/gnome-icon-entry.c:178
+msgid "Directory that will be searched for icons."
+msgstr "Katalog som ikoner kommer att sökas i."
+
+#: libgnomeui/gnome-icon-entry.c:186
+msgid "Filename that should be displayed in the icon entry."
+msgstr "Filnamn som ska visas i ikonposten."
+
+#: libgnomeui/gnome-icon-entry.c:194
+msgid "Picker dialog"
+msgstr "Väljardialog"
+
+#: libgnomeui/gnome-icon-entry.c:195
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"Ikonväljardialog. Du kan använda denna egenskap för att få tag i GtkDialog "
+"om du behöver ändra eller undersöka någon av dess egenskaper."
+
+#: libgnomeui/gnome-icon-entry.c:305 libgnomeui/gnome-icon-entry.c:907
 msgid "No Icon"
 msgstr "Ingen ikon"
 
-#: libgnomeui/gnome-icon-entry.c:461 libgnomeui/gnome-pixmap-entry.c:378
+#: libgnomeui/gnome-icon-entry.c:510 libgnomeui/gnome-pixmap-entry.c:386
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kan inte hitta en hbox, använder vanligt filval"
 
-#: libgnomeui/gnome-icon-entry.c:467 libgnomeui/gnome-pixmap-entry.c:384
+#: libgnomeui/gnome-icon-entry.c:516 libgnomeui/gnome-pixmap-entry.c:392
 msgid "Preview"
 msgstr "Förhandsgranska"
 
-#: libgnomeui/gnome-icon-entry.c:882
+#: libgnomeui/gnome-icon-entry.c:929
 msgid "Browse"
 msgstr "Bläddra"
 
-#: libgnomeui/gnome-icon-sel.c:297
+#: libgnomeui/gnome-icon-sel.c:296
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: \"%s\" finns inte eller är inte en katalog"
 
-#: libgnomeui/gnome-icon-sel.c:305
+#: libgnomeui/gnome-icon-sel.c:304
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: kunde inte öppna katalogen \"%s\""
 
-#: libgnomeui/gnome-icon-sel.c:414
+#: libgnomeui/gnome-icon-sel.c:411
 msgid "Loading Icons..."
 msgstr "Läser in ikoner..."
 
@@ -1150,7 +1268,15 @@ msgstr "Fråga"
 msgid "Message"
 msgstr "Meddelande"
 
-#: libgnomeui/gnome-pixmap-entry.c:184 libgnomeui/gnome-pixmap-entry.c:496
+#: libgnomeui/gnome-pixmap-entry.c:114
+msgid "Do Preview"
+msgstr "Förhandsgranska"
+
+#: libgnomeui/gnome-pixmap-entry.c:115
+msgid "Whether the pixmap entry should have a preview."
+msgstr "Huruvida pixmapposten ska ha en förhandsgranskning."
+
+#: libgnomeui/gnome-pixmap-entry.c:192 libgnomeui/gnome-pixmap-entry.c:504
 msgid "No Image"
 msgstr "Ingen bild"
 
@@ -1331,7 +1457,7 @@ msgstr "Avsluta testet"
 #~ msgstr "Maximerad vågrätt"
 
 #~ msgid "Hidden"
-#~ msgstr "Gömd"
+#~ msgstr "Dold"
 
 #~ msgid "Shaded"
 #~ msgstr "Ihoprullad"
@@ -1547,9 +1673,6 @@ msgstr "Avsluta testet"
 
 #~ msgid "The type of loop the GnomeAnimator uses"
 #~ msgstr "Slingtypen som GnomeAnimator använder"
-
-#~ msgid "Direction"
-#~ msgstr "Riktning"
 
 #~ msgid "Animation direction"
 #~ msgstr "Animationsriktning"
