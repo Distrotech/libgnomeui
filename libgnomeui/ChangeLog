@@ -1,3 +1,9 @@
+1998-10-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_item_hide): 
+	(gnome_canvas_item_show): The canvas needs to repick the current
+	item when an item is shown/hidden.
+
 1998-10-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-icon-list.c (gnome_icon_list_new): Thanks to Havoc for
