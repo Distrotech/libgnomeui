@@ -48,36 +48,41 @@
 #include "gnome-gconf.h"
 
 
-static void gnome_selector_class_init    (GnomeSelectorClass *class);
-static void gnome_selector_init          (GnomeSelector      *selector);
-static void gnome_selector_destroy       (GtkObject          *object);
-static void gnome_selector_finalize      (GObject            *object);
+static void gnome_selector_class_init          (GnomeSelectorClass *class);
+static void gnome_selector_init                (GnomeSelector      *selector);
+static void gnome_selector_destroy             (GtkObject          *object);
+static void gnome_selector_finalize            (GObject            *object);
 
-static void selector_set_arg             (GtkObject          *object,
-				          GtkArg             *arg,
-				          guint               arg_id);
-static void selector_get_arg             (GtkObject          *object,
-				          GtkArg             *arg,
-				          guint               arg_id);
+static void selector_set_arg                   (GtkObject          *object,
+                                                GtkArg             *arg,
+                                                guint               arg_id);
+static void selector_get_arg                   (GtkObject          *object,
+                                                GtkArg             *arg,
+                                                guint               arg_id);
 
-static void     update_handler           (GnomeSelector   *selector);
-static void     browse_handler           (GnomeSelector   *selector);
-static void     clear_handler            (GnomeSelector   *selector);
+static void     update_handler                 (GnomeSelector   *selector);
+static void     browse_handler                 (GnomeSelector   *selector);
+static void     clear_handler                  (GnomeSelector   *selector);
+static void     clear_default_handler          (GnomeSelector   *selector);
 
-static gboolean set_filename_handler     (GnomeSelector   *selector,
-                                          const gchar     *filename);
-static gboolean check_filename_handler   (GnomeSelector   *selector,
-                                          const gchar     *filename);
-static void     add_file_handler         (GnomeSelector   *selector,
-                                          const gchar     *filename);
-static gboolean check_directory_handler  (GnomeSelector   *selector,
-                                          const gchar     *filename);
-static void     add_directory_handler    (GnomeSelector   *selector,
-                                          const gchar     *directory);
-static void     update_file_list_handler (GnomeSelector   *selector);
+static gboolean set_filename_handler           (GnomeSelector   *selector,
+                                                const gchar     *filename);
+static gboolean check_filename_handler         (GnomeSelector   *selector,
+                                                const gchar     *filename);
+static void     add_file_handler               (GnomeSelector   *selector,
+                                                const gchar     *filename);
+static void     add_file_default_handler       (GnomeSelector   *selector,
+                                                const gchar     *filename);
+static gboolean check_directory_handler        (GnomeSelector   *selector,
+                                                const gchar     *filename);
+static void     add_directory_handler          (GnomeSelector   *selector,
+                                                const gchar     *directory);
+static void     add_directory_default_handler  (GnomeSelector   *selector,
+                                                const gchar     *directory);
+static void     update_file_list_handler       (GnomeSelector   *selector);
 
-static void     free_entry_func          (gpointer         data,
-					  gpointer         user_data);
+static void     free_entry_func                (gpointer         data,
+                                                gpointer         user_data);
 
 #define GNOME_SELECTOR_GCONF_DIR "/desktop/standard/gnome-selector"
 
@@ -90,11 +95,14 @@ enum {
 enum {
     BROWSE_SIGNAL,
     CLEAR_SIGNAL,
+    CLEAR_DEFAULT_SIGNAL,
     CHECK_FILENAME_SIGNAL,
     SET_FILENAME_SIGNAL,
     ADD_FILE_SIGNAL,
+    ADD_FILE_DEFAULT_SIGNAL,
     CHECK_DIRECTORY_SIGNAL,
     ADD_DIRECTORY_SIGNAL,
+    ADD_DIRECTORY_DEFAULT_SIGNAL,
     FREEZE_SIGNAL,
     UPDATE_SIGNAL,
     UPDATE_FILE_LIST_SIGNAL,
@@ -177,6 +185,15 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gtk_signal_default_marshaller,
 			GTK_TYPE_NONE,
 			0);
+    gnome_selector_signals [CLEAR_DEFAULT_SIGNAL] =
+	gtk_signal_new ("clear_default",
+			GTK_RUN_LAST,
+			GTK_CLASS_TYPE (object_class),
+			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+					   clear_default),
+			gtk_signal_default_marshaller,
+			GTK_TYPE_NONE,
+			0);
     gnome_selector_signals [FREEZE_SIGNAL] =
 	gtk_signal_new ("freeze",
 			GTK_RUN_LAST,
@@ -231,6 +248,15 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			gtk_marshal_NONE__POINTER,
 			GTK_TYPE_NONE, 1,
 			GTK_TYPE_STRING);
+    gnome_selector_signals [ADD_FILE_DEFAULT_SIGNAL] =
+	gtk_signal_new ("add_file_default",
+			GTK_RUN_LAST,
+			GTK_CLASS_TYPE (object_class),
+			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+					   add_file_default),
+			gtk_marshal_NONE__POINTER,
+			GTK_TYPE_NONE, 1,
+			GTK_TYPE_STRING);
     gnome_selector_signals [CHECK_DIRECTORY_SIGNAL] =
 	gtk_signal_new ("check_directory",
 			GTK_RUN_LAST,
@@ -246,6 +272,15 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 			GTK_CLASS_TYPE (object_class),
 			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
 					   add_directory),
+			gtk_marshal_NONE__POINTER,
+			GTK_TYPE_NONE, 1,
+			GTK_TYPE_STRING);
+    gnome_selector_signals [ADD_DIRECTORY_DEFAULT_SIGNAL] =
+	gtk_signal_new ("add_directory_default",
+			GTK_RUN_LAST,
+			GTK_CLASS_TYPE (object_class),
+			GTK_SIGNAL_OFFSET (GnomeSelectorClass,
+					   add_directory_default),
 			gtk_marshal_NONE__POINTER,
 			GTK_TYPE_NONE, 1,
 			GTK_TYPE_STRING);
@@ -324,13 +359,16 @@ gnome_selector_class_init (GnomeSelectorClass *class)
 
     class->browse = browse_handler;
     class->clear = clear_handler;
+    class->clear_default = clear_default_handler;
     class->update = update_handler;
 
     class->check_filename = check_filename_handler;
     class->set_filename = set_filename_handler;
     class->add_file = add_file_handler;
+    class->add_file_default = add_file_default_handler;
     class->check_directory = check_directory_handler;
     class->add_directory = add_directory_handler;
+    class->add_directory_default = add_directory_default_handler;
     class->update_file_list = update_file_list_handler;
 }
 
@@ -404,9 +442,19 @@ update_file_list_handler (GnomeSelector *selector)
     g_slist_free (selector->_priv->total_list);
     selector->_priv->total_list = NULL;
 
+    g_slist_foreach (selector->_priv->default_total_list,
+		     (GFunc) g_free, NULL);
+    g_slist_free (selector->_priv->default_total_list);
+    selector->_priv->default_total_list = NULL;
+
     for (c = selector->_priv->dir_list; c; c = c->next)
 	gtk_signal_emit (GTK_OBJECT (selector),
 			 gnome_selector_signals [ADD_DIRECTORY_SIGNAL],
+			 c->data);
+
+    for (c = selector->_priv->default_dir_list; c; c = c->next)
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [ADD_DIRECTORY_DEFAULT_SIGNAL],
 			 c->data);
 
     for (c = selector->_priv->file_list; c; c = c->next)
@@ -414,8 +462,16 @@ update_file_list_handler (GnomeSelector *selector)
 			 gnome_selector_signals [ADD_FILE_SIGNAL],
 			 c->data);
 
+    for (c = selector->_priv->default_file_list; c; c = c->next)
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [ADD_FILE_DEFAULT_SIGNAL],
+			 c->data);
+
     selector->_priv->total_list = g_slist_reverse
 	(selector->_priv->total_list);
+
+    selector->_priv->default_total_list = g_slist_reverse
+	(selector->_priv->default_total_list);
 
     selector->_priv->need_rebuild = FALSE;
 }
@@ -461,6 +517,23 @@ clear_handler (GnomeSelector *selector)
     selector->_priv->file_list = NULL;
 }
 
+static void
+clear_default_handler (GnomeSelector *selector)
+{
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+    g_slist_foreach (selector->_priv->default_dir_list, free_entry_func,
+		     selector);
+    g_slist_free (selector->_priv->default_dir_list);
+    selector->_priv->default_dir_list = NULL;
+
+    g_slist_foreach (selector->_priv->default_file_list, free_entry_func,
+		     selector);
+    g_slist_free (selector->_priv->default_file_list);
+    selector->_priv->default_file_list = NULL;
+}
+
 static gboolean
 check_filename_handler (GnomeSelector *selector, const gchar *filename)
 {
@@ -503,7 +576,7 @@ check_directory_handler (GnomeSelector *selector, const gchar *directory)
     return g_file_test (directory, G_FILE_TEST_ISDIR);
 }
 
-void
+static void
 add_file_handler (GnomeSelector *selector, const gchar *filename)
 {
     g_return_if_fail (selector != NULL);
@@ -520,8 +593,26 @@ add_file_handler (GnomeSelector *selector, const gchar *filename)
 	(selector->_priv->total_list, g_strdup (filename));
 }
 
-void
-add_directory_handler (GnomeSelector *selector, const gchar *directory)
+static void
+add_file_default_handler (GnomeSelector *selector, const gchar *filename)
+{
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+    g_return_if_fail (filename != NULL);
+
+    if (!g_file_test (filename, G_FILE_TEST_ISFILE)) {
+	g_warning ("GnomeSelector: '%s' is not a regular file",
+		   filename);
+	return;
+    }
+
+    selector->_priv->default_total_list = g_slist_prepend
+	(selector->_priv->default_total_list, g_strdup (filename));
+}
+
+static void
+_add_directory_handler (GnomeSelector *selector, const gchar *directory,
+			gboolean defaultp)
 {
     struct dirent *de;
     DIR *dp;
@@ -566,15 +657,42 @@ add_directory_handler (GnomeSelector *selector, const gchar *directory)
 	    continue;
 	}
 
-	gtk_signal_emit (GTK_OBJECT (selector),
-			 gnome_selector_signals [ADD_FILE_SIGNAL],
-			 full_path);
+	if (defaultp)
+	    gtk_signal_emit (GTK_OBJECT (selector),
+			     gnome_selector_signals [ADD_FILE_DEFAULT_SIGNAL],
+			     full_path);
+	else
+	    gtk_signal_emit (GTK_OBJECT (selector),
+			     gnome_selector_signals [ADD_FILE_SIGNAL],
+			     full_path);
 
 	g_free (full_path);
     }
 
     closedir (dp);
 }
+
+static void
+add_directory_handler (GnomeSelector *selector, const gchar *directory)
+{
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+    g_return_if_fail (directory != NULL);
+
+    _add_directory_handler (selector, directory, FALSE);
+}
+
+static void
+add_directory_default_handler (GnomeSelector *selector,
+				const gchar *directory)
+{
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+    g_return_if_fail (directory != NULL);
+
+    _add_directory_handler (selector, directory, TRUE);
+}
+
 
 /*
  * Misc callbacks.
@@ -588,9 +706,15 @@ browse_clicked_cb (GtkWidget *widget, gpointer data)
 }
 
 static void
+default_clicked_cb (GtkWidget *widget, gpointer data)
+{
+    gnome_selector_set_to_defaults (GNOME_SELECTOR (data));
+}
+
+static void
 clear_clicked_cb (GtkWidget *widget, gpointer data)
 {
-    gnome_selector_clear (GNOME_SELECTOR (data));
+    gnome_selector_clear (GNOME_SELECTOR (data), FALSE);
 }
 
 
@@ -639,6 +763,10 @@ gnome_selector_construct (GnomeSelector *selector,
 	    (GNOME_SELECTOR_GCONF_DIR, priv->history_id);
 	priv->gconf_history_key = gconf_concat_key_and_dir
 	    (priv->gconf_history_dir, "history");
+	priv->gconf_dir_list_key = gconf_concat_key_and_dir
+	    (priv->gconf_history_dir, "dir-list");
+	priv->gconf_file_list_key = gconf_concat_key_and_dir
+	    (priv->gconf_history_dir, "file-list");
 
 	gconf_client_add_dir (priv->client, priv->gconf_history_dir,
 			      GCONF_CLIENT_PRELOAD_NONE, NULL);
@@ -672,8 +800,7 @@ gnome_selector_construct (GnomeSelector *selector,
 	    return;
 	}
 
-	priv->browse_button = gtk_button_new_with_label
-	    (_("Browse..."));
+	priv->browse_button = gtk_button_new_with_label (_("Browse..."));
 
 	gtk_signal_connect (GTK_OBJECT (priv->browse_button),
 			    "clicked", browse_clicked_cb, selector);
@@ -682,9 +809,18 @@ gnome_selector_construct (GnomeSelector *selector,
 			    priv->browse_button, FALSE, FALSE, 0);
     }
 
+    if (flags & GNOME_SELECTOR_WANT_DEFAULT_BUTTON) {
+	priv->default_button = gtk_button_new_with_label (_("Default..."));
+
+	gtk_signal_connect (GTK_OBJECT (priv->default_button),
+			    "clicked", default_clicked_cb, selector);
+
+	gtk_box_pack_start (GTK_BOX (priv->hbox),
+			    priv->default_button, FALSE, FALSE, 0);
+    }
+
     if (flags & GNOME_SELECTOR_WANT_CLEAR_BUTTON) {
-	priv->clear_button = gtk_button_new_with_label
-	    (_("Clear..."));
+	priv->clear_button = gtk_button_new_with_label (_("Clear..."));
 
 	gtk_signal_connect (GTK_OBJECT (priv->clear_button),
 			    "clicked", clear_clicked_cb, selector);
@@ -703,6 +839,12 @@ gnome_selector_construct (GnomeSelector *selector,
 
     gtk_box_pack_start (GTK_BOX (selector), priv->box,
 			TRUE, TRUE, GNOME_PAD_SMALL);
+
+    if (priv->flags & GNOME_SELECTOR_AUTO_SAVE_HISTORY)
+	gnome_selector_load_history (selector);
+
+    if (priv->flags & GNOME_SELECTOR_AUTO_SAVE_ALL)
+	_gnome_selector_load_all (selector);
 }
 
 
@@ -719,6 +861,9 @@ gnome_selector_destroy (GtkObject *object)
     selector = GNOME_SELECTOR (object);
 
     if (selector->_priv->client) {
+	if (selector->_priv->flags & GNOME_SELECTOR_AUTO_SAVE_ALL)
+	    _gnome_selector_save_all (selector);
+
 	if (selector->_priv->gconf_history_dir)
 	    gconf_client_remove_dir
 		(selector->_priv->client,
@@ -767,6 +912,8 @@ gnome_selector_finalize (GObject *object)
 	g_free (selector->_priv->history_id);
 	g_free (selector->_priv->gconf_history_dir);
 	g_free (selector->_priv->gconf_history_key);
+	g_free (selector->_priv->gconf_dir_list_key);
+	g_free (selector->_priv->gconf_file_list_key);
     }
 
     g_free (selector->_priv);
@@ -864,7 +1011,8 @@ gnome_selector_check_directory (GnomeSelector *selector,
  */
 gboolean
 gnome_selector_prepend_directory (GnomeSelector *selector,
-				  const gchar *directory)
+				  const gchar *directory,
+				  gboolean defaultp)
 {
     g_return_val_if_fail (selector != NULL, FALSE);
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
@@ -873,8 +1021,12 @@ gnome_selector_prepend_directory (GnomeSelector *selector,
     if (!gnome_selector_check_directory (selector, directory))
 	return FALSE;
 
-    selector->_priv->dir_list = g_slist_prepend
-	(selector->_priv->dir_list, g_strdup (directory));
+    if (defaultp)
+	selector->_priv->default_dir_list = g_slist_prepend
+	    (selector->_priv->default_dir_list, g_strdup (directory));
+    else
+	selector->_priv->dir_list = g_slist_prepend
+	    (selector->_priv->dir_list, g_strdup (directory));
 
     selector->_priv->need_rebuild = TRUE;
 
@@ -898,7 +1050,8 @@ gnome_selector_prepend_directory (GnomeSelector *selector,
  */
 gboolean
 gnome_selector_append_directory (GnomeSelector *selector,
-				 const gchar *directory)
+				 const gchar *directory,
+				 gboolean defaultp)
 {
     g_return_val_if_fail (selector != NULL, FALSE);
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
@@ -907,8 +1060,12 @@ gnome_selector_append_directory (GnomeSelector *selector,
     if (!gnome_selector_check_directory (selector, directory))
 	return FALSE;
 
-    selector->_priv->dir_list = g_slist_append
-	(selector->_priv->dir_list, g_strdup (directory));
+    if (defaultp)
+	selector->_priv->default_dir_list = g_slist_append
+	    (selector->_priv->default_dir_list, g_strdup (directory));
+    else
+	selector->_priv->dir_list = g_slist_append
+	    (selector->_priv->dir_list, g_strdup (directory));
 
     selector->_priv->need_rebuild = TRUE;
 
@@ -932,7 +1089,8 @@ gnome_selector_append_directory (GnomeSelector *selector,
  */
 gboolean
 gnome_selector_prepend_file (GnomeSelector *selector,
-			     const gchar *filename)
+			     const gchar *filename,
+			     gboolean defaultp)
 {
     g_return_val_if_fail (selector != NULL, FALSE);
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
@@ -941,8 +1099,12 @@ gnome_selector_prepend_file (GnomeSelector *selector,
     if (!gnome_selector_check_filename (selector, filename))
 	return FALSE;
 
-    selector->_priv->file_list = g_slist_prepend
-	(selector->_priv->file_list, g_strdup (filename));
+    if (defaultp)
+	selector->_priv->default_file_list = g_slist_prepend
+	    (selector->_priv->default_file_list, g_strdup (filename));
+    else
+	selector->_priv->file_list = g_slist_prepend
+	    (selector->_priv->file_list, g_strdup (filename));
 
     selector->_priv->need_rebuild = TRUE;
 
@@ -966,7 +1128,8 @@ gnome_selector_prepend_file (GnomeSelector *selector,
  */
 gboolean
 gnome_selector_append_file (GnomeSelector *selector,
-			    const gchar *filename)
+			    const gchar *filename,
+			    gboolean defaultp)
 {
     g_return_val_if_fail (selector != NULL, FALSE);
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), FALSE);
@@ -975,8 +1138,12 @@ gnome_selector_append_file (GnomeSelector *selector,
     if (!gnome_selector_check_filename (selector, filename))
 	return FALSE;
 
-    selector->_priv->file_list = g_slist_append
-	(selector->_priv->file_list, g_strdup (filename));
+    if (defaultp)
+	selector->_priv->default_file_list = g_slist_append
+	    (selector->_priv->default_file_list, g_strdup (filename));
+    else
+	selector->_priv->file_list = g_slist_append
+	    (selector->_priv->file_list, g_strdup (filename));
 
     selector->_priv->need_rebuild = TRUE;
 
@@ -990,7 +1157,8 @@ gnome_selector_append_file (GnomeSelector *selector,
 
 GSList *
 gnome_selector_get_file_list (GnomeSelector *selector,
-			      gboolean include_dir_list)
+			      gboolean include_dir_list,
+			      gboolean defaultp)
 {
     g_return_val_if_fail (selector != NULL, NULL);
     g_return_val_if_fail (GNOME_IS_SELECTOR (selector), NULL);
@@ -999,9 +1167,15 @@ gnome_selector_get_file_list (GnomeSelector *selector,
 	gnome_selector_update_file_list (selector);
 
     if (include_dir_list)
-	return selector->_priv->total_list;
+	if (defaultp)
+	    return selector->_priv->default_total_list;
+	else
+	    return selector->_priv->total_list;
     else
-	return selector->_priv->file_list;
+	if (defaultp)
+	    return selector->_priv->default_file_list;
+	else
+	    return selector->_priv->file_list;
 }
 
 
@@ -1062,14 +1236,18 @@ gnome_selector_update (GnomeSelector *selector)
  * Returns:
  */
 void
-gnome_selector_clear (GnomeSelector *selector)
+gnome_selector_clear (GnomeSelector *selector, gboolean defaultp)
 {
     g_return_if_fail (selector != NULL);
     g_return_if_fail (GNOME_IS_SELECTOR (selector));
 
     gnome_selector_freeze (selector);
-    gtk_signal_emit (GTK_OBJECT (selector),
-		     gnome_selector_signals [CLEAR_SIGNAL]);
+    if (defaultp)
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [CLEAR_DEFAULT_SIGNAL]);
+    else
+	gtk_signal_emit (GTK_OBJECT (selector),
+			 gnome_selector_signals [CLEAR_SIGNAL]);
     gnome_selector_thaw (selector);
 
     selector->_priv->need_rebuild = TRUE;
@@ -1521,4 +1699,102 @@ gnome_selector_clear_history (GnomeSelector *selector)
     selector->_priv->history = NULL;
 
     set_history_changed (selector);
+}
+
+static GSList *
+_gnome_selector_copy_list (GSList *thelist)
+{
+    GSList *retval = NULL, *c;
+
+    for (c = thelist; c; c = c->next)
+	retval = g_slist_prepend (retval, g_strdup (c->data));
+
+    retval = g_slist_reverse (retval);
+    return retval;
+}
+
+static void
+_gnome_selector_free_list (GSList *thelist)
+{
+    g_slist_foreach (thelist, (GFunc) g_free, NULL);
+    g_slist_free (thelist);
+}
+
+void
+gnome_selector_set_to_defaults (GnomeSelector *selector)
+{
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+    _gnome_selector_free_list (selector->_priv->dir_list);
+    selector->_priv->dir_list = _gnome_selector_copy_list
+	(selector->_priv->default_dir_list);
+
+    _gnome_selector_free_list (selector->_priv->file_list);
+    selector->_priv->file_list = _gnome_selector_copy_list
+	(selector->_priv->default_file_list);
+
+    _gnome_selector_free_list (selector->_priv->total_list);
+    selector->_priv->total_list = _gnome_selector_copy_list
+	(selector->_priv->default_total_list);
+
+    selector->_priv->need_rebuild = TRUE;
+
+    if (selector->_priv->frozen)
+	selector->_priv->dirty = TRUE;
+    else
+	gnome_selector_update (selector);
+}
+
+void
+_gnome_selector_save_all (GnomeSelector *selector)
+{
+    gboolean result;
+
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+    if (!selector->_priv->gconf_dir_list_key ||
+	!selector->_priv->gconf_file_list_key)
+	return;
+
+    result = gconf_client_set_list (selector->_priv->client,
+				    selector->_priv->gconf_dir_list_key,
+				    GCONF_VALUE_STRING,
+				    selector->_priv->dir_list,
+				    NULL);
+
+    result = gconf_client_set_list (selector->_priv->client,
+				    selector->_priv->gconf_file_list_key,
+				    GCONF_VALUE_STRING,
+				    selector->_priv->file_list,
+				    NULL);
+}
+
+void
+_gnome_selector_load_all (GnomeSelector *selector)
+{
+    g_return_if_fail (selector != NULL);
+    g_return_if_fail (GNOME_IS_SELECTOR (selector));
+
+    if (!selector->_priv->gconf_dir_list_key ||
+	!selector->_priv->gconf_file_list_key)
+	return;
+
+    selector->_priv->dir_list = gconf_client_get_list
+	(selector->_priv->client,
+	 selector->_priv->gconf_dir_list_key,
+	 GCONF_VALUE_STRING, NULL);
+
+    selector->_priv->file_list = gconf_client_get_list
+	(selector->_priv->client,
+	 selector->_priv->gconf_file_list_key,
+	 GCONF_VALUE_STRING, NULL);
+
+    selector->_priv->need_rebuild = TRUE;
+
+    if (selector->_priv->frozen)
+	selector->_priv->dirty = TRUE;
+    else
+	gnome_selector_update (selector);
 }

@@ -1,5 +1,39 @@
 2000-08-06  Martin Baulig  <baulig@suse.de>
 
+	Added a default directory and file list to the GnomeSelector; this
+	has two benefits: first of all, you can have a "Default..." button
+	and when you click on it the file and directory lists are restored
+	to the original. The second thing is that we can save and later load
+	the current file and directory lists (for instance, when you click
+	on "Browse..." and use the browse dialog to add things).
+
+	* gnome-selector.h (GNOME_SELECTOR_AUTO_SAVE_HISTORY): New flag.
+	(GNOME_SELECTOR_AUTO_SAVE_ALL): New flag; if set, both the file
+	and directory list are saved using GConf.
+	(GNOME_SELECTOR_WANT_DEFAULT_BUTTON): New flag; if set, a "Default"
+	button is created which sets file and directory list to the defaults
+	when clicked.
+	(GNOME_SELECTOR_USER_FLAGS): #define this to be a mask of flags which
+	can be set in the _new() functions (G_S_AUTO_SAVE_HISTORY etc.).
+	(GnomeSelectorClass): Added `clear_default', `add_file_default' and
+	`add_directory_default' signals.
+	(gnome_selector_prepend_file): Added `defaultp' argument.
+	(gnome_selector_append_file): Likewise.
+	(gnome_selector_get_file_list): Likewise.
+	(gnome_selector_set_file_list): Likewise.
+	(gnome_selector_clear): Likewise.
+	(gnome_selector_prepend_directory): Likewise.
+	(gnome_selector_append_directory): Likewise.
+	(gnome_selector_get_directory_list): Likewise.
+	(gnome_selector_set_directory_list): Likewise.
+	(gnome_selector_set_to_defaults): New function.
+
+	* gnome-file-selector.h (gnome_file_selector_new): Added `flags'
+	argument.
+	* gnome-icon-selector.h (gnome_icon_selector_new): Likewise.
+
+2000-08-06  Martin Baulig  <baulig@suse.de>
+
 	* gnome-selector.c: Support history loading and saving.
 	(gnome_selector_get_history_id, gnome_selector_set_history_id):
 	Removed; it makes not much sense to change this after the widget

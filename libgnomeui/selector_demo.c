@@ -1,4 +1,3 @@
-/* -*- Mode: C; c-set-style: gnu indent-tabs-mode: t; c-basic-offset: 4; tab-width: 8 -*- */
 /*
  * Copyright (C) 2000 SuSE GmbH
  * Author: Martin Baulig <baulig@suse.de>
@@ -39,7 +38,8 @@ file_list_cb (void)
 {
     GSList *list, *c;
 
-    list = gnome_selector_get_file_list (GNOME_SELECTOR (iselector), TRUE);
+    list = gnome_selector_get_file_list (GNOME_SELECTOR (iselector),
+					 TRUE, FALSE);
 
     for (c = list; c; c = c->next) {
 	g_print ("FILE: `%s'\n", (gchar *) c->data);
@@ -72,7 +72,7 @@ save_history_cb (void)
 
 static GnomeUIInfo file_menu[] = {
     { GNOME_APP_UI_ITEM, "Exit", NULL, quit_cb, NULL, NULL,
-      GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT, 'X',
+      GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT, 'x',
       GDK_CONTROL_MASK, NULL },
     { GNOME_APP_UI_ENDOFINFO }
 };
@@ -179,7 +179,7 @@ main (int argc, char **argv)
     gtk_box_pack_start (GTK_BOX (vbox), frame1, FALSE, FALSE,
 			GNOME_PAD);
 
-    fselector = gnome_file_selector_new ("test", "Albert Einstein");
+    fselector = gnome_file_selector_new ("test", "Albert Einstein", 0);
 
     gtk_container_add (GTK_CONTAINER (frame1), fselector);
 
@@ -188,7 +188,9 @@ main (int argc, char **argv)
     gtk_box_pack_start (GTK_BOX (vbox), frame2, TRUE, TRUE,
 			GNOME_PAD);
 
-    iselector = gnome_icon_selector_new ("test2", NULL);
+    iselector = gnome_icon_selector_new ("test2", NULL,
+					 GNOME_SELECTOR_AUTO_SAVE_HISTORY |
+					 GNOME_SELECTOR_AUTO_SAVE_ALL);
 
     gnome_icon_selector_add_defaults (GNOME_ICON_SELECTOR (iselector));
 
