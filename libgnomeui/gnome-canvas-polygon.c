@@ -353,7 +353,7 @@ get_color_arg (GnomeCanvasPolygon *poly, gulong pixel, GtkArg *arg)
 }
 
 static void
-gnome_canvas_poly_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+gnome_canvas_polygon_get_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 {
 	GnomeCanvasPolygon *poly;
 	GnomeCanvasPoints *points;
