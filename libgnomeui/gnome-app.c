@@ -145,7 +145,7 @@ gnome_app_realize (GtkWidget *widget)
 	gnome_dock_add_from_layout (GNOME_DOCK (app->dock), app->layout);
 
 	gtk_widget_show (app->vbox);
-	gtk_widget_show_all (app->dock);
+	gtk_widget_show (app->dock);
 
 	if (app->enable_layout_config)
 		write_layout_config (app, app->layout);
@@ -266,6 +266,7 @@ gnome_app_set_contents (GnomeApp *app, GtkWidget *contents)
 	g_return_if_fail (app->contents == NULL);
 
 	gnome_dock_set_client_area (GNOME_DOCK (app->dock), contents);
+	gtk_widget_show (contents);
 
 	app->contents = contents;
 }
@@ -319,12 +320,12 @@ gnome_app_set_menus (GnomeApp *app, GtkMenuBar *menubar)
 		gnome_dock_layout_add_item (app->layout,
 					    GNOME_DOCK_ITEM (dock_item),
 					    GNOME_DOCK_TOP,
-					    -1, 0, 0);
+					    0, 0, 0);
 	else
 		gnome_dock_add_item(GNOME_DOCK(app->dock),
 				    GNOME_DOCK_ITEM (dock_item),
 				    GNOME_DOCK_TOP,
-				    -1, 0, 0, FALSE);
+				    0, 0, 0, TRUE);
 
 	gtk_widget_show (GTK_WIDGET (menubar));
 	gtk_widget_show (GTK_WIDGET (dock_item));
@@ -411,7 +412,7 @@ gnome_app_add_toolbar (GnomeApp *app,
 				     band_num,
 				     band_position,
 				     offset,
-				     FALSE);
+				     TRUE);
 
 	if (gnome_preferences_get_toolbar_relief ()) {
 		gtk_container_set_border_width (GTK_CONTAINER (dock_item), 1);
@@ -470,7 +471,7 @@ gnome_app_set_toolbar (GnomeApp *app,
 			       GNOME_APP_TOOLBAR_NAME,
 			       behavior,
 			       GNOME_DOCK_TOP,
-			       0, 0, 0);
+			       1, 0, 0);
 }
 
 
