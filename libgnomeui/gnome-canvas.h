@@ -142,6 +142,9 @@ typedef struct {
 	/* compute whether the item intersects the specified area */
 	GtkVisibility (*intersect) (GnomeCanvas *canvas, GnomeCanvasItem *item,
 				    double x, double y, double width, double height);
+
+	/* translate the item by the specified distance */
+	void (*translate) (GnomeCanvas *canvas, GnomeCanvasItem *item, double dx, double dy);
 } GnomeCanvasItemType;
 
 struct GnomeCanvasItem {
@@ -153,6 +156,8 @@ struct GnomeCanvasItem {
 					 * coordinates. This is set by the item-specific code.  The
 					 * bounding box contains x1 and y1, but not x2 and y2.
 					 */
+
+	gpointer user_data;		/* arbitrary data pointer */
 };
 
 
@@ -259,6 +264,9 @@ GnomeCanvasId gnome_canvas_create_tag (GnomeCanvas *canvas, GnomeCanvasKey tag);
  */
 void gnome_canvas_configure (GnomeCanvas *canvas, GnomeCanvasId cid, ...);
 
+/* Moves the specified item(s) by the specified distance. */
+void gnome_canvas_move (GnomeCanvas *canvas, GnomeCanvasId cid, double dx, double dy);
+
 /* Creates a binding for canvas items.  Event types may only be mouse, keyboard, and enter/leave events.
  * The "item_event" signal will be emitted when a bound event occurs.  This function returns the binding id.
  */
@@ -266,6 +274,12 @@ int gnome_canvas_bind (GnomeCanvas *canvas, GnomeCanvasId cid, GdkEventType type
 
 /* Removes a binding by binding id */
 void gnome_canvas_unbind (GnomeCanvas *canvas, int binding_id);
+
+/* Sets an arbitrary data pointer for the specified item */
+void gnome_canvas_set_user_data (GnomeCanvas *canvas, GnomeCanvasId cid, gpointer user_data);
+
+/* Gets the user data pointer from the specified item */
+gpointer gnome_canvas_get_user_data (GnomeCanvas *canvas, GnomeCanvasId cid);
 
 /* Sets the color of the canvas background. */
 void gnome_canvas_set_background (GnomeCanvas *canvas, GnomeCanvasColor color_type, ...);

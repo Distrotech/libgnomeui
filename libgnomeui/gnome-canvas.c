@@ -1032,6 +1032,40 @@ gnome_canvas_configure (GnomeCanvas *canvas, GnomeCanvasId cid, ...)
 	canvas->flags |= GNOME_CANVAS_NEED_REPICK;
 }
 
+struct move_scale_params {
+	double x;
+	double y;
+	double sx;
+	double sy;
+};
+
+static void
+move_item (GnomeCanvas *canvas, GnomeCanvasItem *item, va_list args, gpointer data)
+{
+	struct move_scale_params *params;
+
+	params = data;
+
+	gnome_canvas_request_redraw (canvas, item->x1, item->y1, item->x2, item->y2);
+	(* item->type->translate) (canvas, item, params->x, params->y);
+	gnome_canvas_request_redraw (canvas, item->x1, item->y1, item->x2, item->y2);
+}
+
+void
+gnome_canvas_move (GnomeCanvas *canvas, GnomeCanvasId cid, double dx, double dy)
+{
+	va_list args;
+	struct move_scale_params params;
+
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+
+	params.x = dx;
+	params.y = dy;
+
+	foreach_id (canvas, cid, move_item, args, &params);
+}
+
 int
 gnome_canvas_bind (GnomeCanvas *canvas, GnomeCanvasId cid, GdkEventType type, gpointer user_data)
 {
@@ -1051,6 +1085,32 @@ gnome_canvas_unbind (GnomeCanvas *canvas, int binding_id)
 	g_return_if_fail (GNOME_IS_CANVAS (canvas));
 
 	/* FIXME */
+}
+
+void
+gnome_canvas_set_user_data (GnomeCanvas *canvas, GnomeCanvasId cid, gpointer user_data)
+{
+	GnomeCanvasItem *item;
+
+	g_return_if_fail (canvas != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS (canvas));
+	g_return_if_fail (cid.type == GNOME_CANVAS_ID_ITEM);
+
+	item = (GnomeCanvasItem *) cid.data;
+	item->user_data = user_data;
+}
+
+gpointer
+gnome_canvas_get_user_data (GnomeCanvas *canvas, GnomeCanvasId cid)
+{
+	GnomeCanvasItem *item;
+
+	g_return_val_if_fail (canvas != NULL, NULL);
+	g_return_val_if_fail (GNOME_IS_CANVAS (canvas), NULL);
+	g_return_val_if_fail (cid.type == GNOME_CANVAS_ID_ITEM, NULL);
+
+	item = (GnomeCanvasItem *) cid.data;
+	return item->user_data;
 }
 
 void

@@ -39,6 +39,7 @@ static void          re_map            (GnomeCanvas *canvas, GnomeCanvasItem *it
 static void          re_unmap          (GnomeCanvas *canvas, GnomeCanvasItem *item);
 static void          re_draw           (GnomeCanvas *canvas, GnomeCanvasItem *item, GdkDrawable *drawable,
 					int x, int y, int width, int heigth);
+static void          re_translate      (GnomeCanvas *canvas, GnomeCanvasItem *item, double dx, double dy);
 
 static double        rect_point        (GnomeCanvas *canvas, GnomeCanvasItem *item, double x, double y);
 static GtkVisibility rect_intersect    (GnomeCanvas *canvas, GnomeCanvasItem *item,
@@ -62,7 +63,8 @@ static GnomeCanvasItemType rect_type = {
 	re_unmap,
 	re_draw,
 	rect_point,
-	rect_intersect
+	rect_intersect,
+	re_translate
 };
 
 static GnomeCanvasItemType ellipse_type = {
@@ -78,7 +80,8 @@ static GnomeCanvasItemType ellipse_type = {
 	re_unrealize,
 	re_draw,
 	ellipse_point,
-	ellipse_intersect
+	ellipse_intersect,
+	re_translate
 };
 
 void
@@ -103,10 +106,10 @@ re_calc_bounds (GnomeCanvas *canvas, RectEllipse *re)
 
 	/* Some safety fudging */
 
-	re->item.x1--;
-	re->item.y1--;
-	re->item.x2++;
-	re->item.y2++;
+	re->item.x1 -= 2;
+	re->item.y1 -= 2;
+	re->item.x2 += 2;
+	re->item.y2 += 2;
 }
 
 static void
@@ -366,6 +369,21 @@ re_draw (GnomeCanvas *canvas, GnomeCanvasItem *item, GdkDrawable *drawable,
 				      360 * 64);
 	} else
 		g_assert_not_reached ();
+}
+
+static void
+re_translate (GnomeCanvas *canvas, GnomeCanvasItem *item, double x, double y)
+{
+	RectEllipse *re;
+
+	re = (RectEllipse *) item;
+
+	re->x1 += x;
+	re->y1 += y;
+	re->x2 += x;
+	re->y2 += y;
+
+	re_calc_bounds (canvas, re);
 }
 
 static double
