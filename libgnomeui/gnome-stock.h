@@ -28,7 +28,7 @@
 #include <gtk/gtkpixmap.h>
 #include <gtk/gtkvbox.h>
 #include <gtk/gtkbutton.h>
-#include <libgnomeui/gnome-pixmap.h>
+#include "gnome-pixmap.h"
 /* #include <gdk_imlib.h> */
 
 

@@ -1,3 +1,12 @@
+1998-07-22  Havoc Pennington  <hp@pobox.com>
+
+	* gnome-stock.h: #include "gnome-pixmap.h" rather than
+  	<libgnomeui/gnome-pixmap.h>
+
+	* gnome-pixmap.h: #include gnome-defs.h so that this file
+	can be included without the rest of libgnomeui (e.g. in 
+	gnome--)
+
 1998-07-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-canvas-line.c (gnome_canvas_line_point): Finished

@@ -6,6 +6,7 @@
 #include <gtk/gtkwidget.h>
 #include <gdk_imlib.h>
 
+#include <libgnome/gnome-defs.h>
 
 BEGIN_GNOME_DECLS
 
