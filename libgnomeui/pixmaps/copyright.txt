@@ -1,4 +1,4 @@
-/* gnome stock icons in Imlib usable rgb data
+/* gnome stock icons in GdmPixbuf usable rgb data
  *
  * Copyright (C) 1997 the Free Software Foundation
  *

@@ -38,7 +38,7 @@ extern void init_gnome_stock_icons (void);
 
 #define GNOME_STOCK_TIMER "gnome-stock-timer"
 #define GNOME_STOCK_TIMER_STOP "gnome-stock-timer-stop"
-/* FIXME! No "trash" icon */
+#define GNOME_STOCK_TRASH "gnome-stock-trash"
 #define GNOME_STOCK_TRASH_FULL "gnome-stock-trash-full"
 
 #define GNOME_STOCK_SCORES "gnome-stock-scores"
@@ -116,8 +116,7 @@ extern void init_gnome_stock_icons (void);
 #define GNOME_STOCK_PIXMAP_MAIL_RPL    GNOME_STOCK_MAIL_RPL
 #define GNOME_STOCK_PIXMAP_MAIL_FWD    GNOME_STOCK_MAIL_FWD
 #define GNOME_STOCK_PIXMAP_MAIL_NEW    GNOME_STOCK_MAIL_NEW
-/* FIXME! No "trash" icon */
-#define GNOME_STOCK_PIXMAP_TRASH       "Trash"
+#define GNOME_STOCK_PIXMAP_TRASH       GNOME_STOCK_TRASH
 #define GNOME_STOCK_PIXMAP_TRASH_FULL  GNOME_STOCK_TRASH_FULL
 #define GNOME_STOCK_PIXMAP_UNDELETE    GTK_STOCK_UNDELETE
 #define GNOME_STOCK_PIXMAP_SPELLCHECK  GTK_STOCK_SPELL_CHECK
@@ -207,8 +206,7 @@ extern void init_gnome_stock_icons (void);
 #define GNOME_STOCK_MENU_MAIL_RPL     GNOME_STOCK_MAIL_RPL
 #define GNOME_STOCK_MENU_MAIL_FWD     GNOME_STOCK_MAIL_FWD
 #define GNOME_STOCK_MENU_MAIL_NEW     GNOME_STOCK_MAIL_NEW
-/* FIXME! no trash */
-#define GNOME_STOCK_MENU_TRASH        "Menu_Trash"
+#define GNOME_STOCK_MENU_TRASH        GNOME_STOCK_TRASH
 #define GNOME_STOCK_MENU_TRASH_FULL   GNOME_STOCK_TRASH_FULL
 #define GNOME_STOCK_MENU_UNDELETE     GTK_STOCK_UNDELETE
 #define GNOME_STOCK_MENU_TIMER        GNOME_STOCK_TIMER

@@ -1,3 +1,11 @@
+Thu Aug 30 16:04:02 2001  George Lebl <jirka@5z.com>
+
+	* gnome-stock-icons.[ch], pixmaps/stock_trash.png,
+	  pixmaps/Makefile.am: Add the trash icon so that now we have
+	  the full set of icons as in 1.0, that is mapped to the GTK ones.
+
+	* pixmaps/copyright.txt: comically this still mentioned Imlib
+
 Thu Aug 30 15:55:09 2001  George Lebl <jirka@5z.com>
 
 	* gnome-stock-icons.h: add all the deprecated gnome-stock id's and
