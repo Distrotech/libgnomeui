@@ -41,7 +41,7 @@ static void gnome_canvas_item_marshal_signal_1 (GtkObject     *object,
 						GtkArg        *args);
 
 static void gnome_canvas_item_class_init (GnomeCanvasItemClass *class);
-static void gnome_canvas_item_destroy    (GtkObject            *object);
+static void gnome_canvas_item_shutdown   (GtkObject            *object);
 
 
 static guint item_signals[ITEM_LAST_SIGNAL] = { 0 };
@@ -92,7 +92,7 @@ gnome_canvas_item_class_init (GnomeCanvasItemClass *class)
 
 	gtk_object_class_add_signals (object_class, item_signals, ITEM_LAST_SIGNAL);
 
-	object_class->destroy = gnome_canvas_item_destroy;
+	object_class->shutdown = gnome_canvas_item_shutdown;
 
 	class->reconfigure = NULL;
 	class->realize = NULL;
@@ -111,6 +111,9 @@ item_post_create_setup (GnomeCanvasItem *item)
 
 	obj = GTK_OBJECT (item);
 
+	gtk_object_ref (obj);
+	gtk_object_sink (obj);
+
 	gnome_canvas_group_add (GNOME_CANVAS_GROUP (item->parent), item);
 
 	if (GTK_WIDGET_REALIZED (item->canvas) && GNOME_CANVAS_ITEM_CLASS (obj->klass)->realize)
@@ -121,7 +124,6 @@ item_post_create_setup (GnomeCanvasItem *item)
 
 	gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
-
 	item->canvas->need_repick = TRUE;
 }
 
@@ -187,9 +189,31 @@ gnome_canvas_item_newv (GnomeCanvas *canvas, GnomeCanvasGroup *parent, GtkType t
 }
 
 static void
-gnome_canvas_item_destroy (GtkObject *object)
+gnome_canvas_item_shutdown (GtkObject *object)
 {
-	/* FIXME */
+	GnomeCanvasItem *item;
+
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (object));
+
+	item = GNOME_CANVAS_ITEM (object);
+
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	item->canvas->need_repick = TRUE;
+
+	if (item->parent) {
+		gnome_canvas_group_remove (GNOME_CANVAS_GROUP (item->parent), item);
+		gtk_object_unref (object);
+	}
+
+	if (GTK_WIDGET_MAPPED (item->canvas) && GNOME_CANVAS_ITEM_CLASS (item->object.klass)->unmap)
+		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->unmap) (item);
+
+	if (GTK_WIDGET_REALIZED (item->canvas) && GNOME_CANVAS_ITEM_CLASS (item->object.klass)->unrealize)
+		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->unrealize) (item);
+
+	if (GTK_OBJECT_CLASS (item_parent_class)->shutdown)
+		(* GTK_OBJECT_CLASS (item_parent_class)->shutdown) (object);
 }
 
 static void
@@ -221,7 +245,12 @@ gnome_canvas_item_set (GnomeCanvasItem *item, ...)
 	va_start (args2, item);
 
 	args = gtk_object_collect_args (&nargs, gtk_object_get_arg_type, args1, args2);
+
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	gtk_object_setv (GTK_OBJECT (item), nargs, args);
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	item->canvas->need_repick = TRUE;
+
 	g_free (args);
 
 	va_end (args1);
@@ -231,7 +260,10 @@ gnome_canvas_item_set (GnomeCanvasItem *item, ...)
 void
 gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args)
 {
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	gtk_object_setv (GTK_OBJECT (item), nargs, args);
+	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	item->canvas->need_repick = TRUE;
 }
 
 void
@@ -243,6 +275,28 @@ gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy)
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 	(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->translate) (item, dx, dy);
 	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
+	item->canvas->need_repick = TRUE;
+}
+
+void
+gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y)
+{
+	GnomeCanvasGroup *group;
+
+	g_return_if_fail (item != NULL);
+	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+
+	while (item->parent) {
+		group = GNOME_CANVAS_GROUP (item->parent);
+
+		if (x)
+			*x -= group->xpos;
+
+		if (y)
+			*y -= group->ypos;
+
+		item = item->parent;
+	}
 }
 
 void
@@ -270,8 +324,19 @@ gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y)
 /*** GnomeCanvasGroup ***/
 
 
+enum {
+	GROUP_ARG_0,
+	GROUP_ARG_X,
+	GROUP_ARG_Y
+};
+
+
 static void gnome_canvas_group_class_init  (GnomeCanvasGroupClass *class);
 static void gnome_canvas_group_init        (GnomeCanvasGroup      *group);
+static void gnome_canvas_group_set_arg     (GtkObject             *object,
+					    GtkArg                *arg,
+					    guint                  arg_id);
+static void gnome_canvas_group_destroy     (GtkObject             *object);
 
 static void   gnome_canvas_group_reconfigure (GnomeCanvasItem *item);
 static void   gnome_canvas_group_realize     (GnomeCanvasItem *item);
@@ -310,9 +375,17 @@ gnome_canvas_group_get_type (void)
 static void
 gnome_canvas_group_class_init (GnomeCanvasGroupClass *class)
 {
+	GtkObjectClass *object_class;
 	GnomeCanvasItemClass *item_class;
 
+	object_class = (GtkObjectClass *) class;
 	item_class = (GnomeCanvasItemClass *) class;
+
+	gtk_object_add_arg_type ("GnomeCanvasGroup::x", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, GROUP_ARG_X);
+	gtk_object_add_arg_type ("GnomeCanvasGroup::y", GTK_TYPE_DOUBLE, GTK_ARG_WRITABLE, GROUP_ARG_Y);
+
+	object_class->set_arg = gnome_canvas_group_set_arg;
+	object_class->destroy = gnome_canvas_group_destroy;
 
 	item_class->reconfigure = gnome_canvas_group_reconfigure;
 	item_class->realize = gnome_canvas_group_realize;
@@ -331,6 +404,41 @@ gnome_canvas_group_init (GnomeCanvasGroup *group)
 	group->ypos = 0.0;
 }
 
+static void
+gnome_canvas_group_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
+{
+	GnomeCanvasItem *item;
+	GnomeCanvasGroup *group;
+	int recalc;
+
+	item = GNOME_CANVAS_ITEM (object);
+	group = GNOME_CANVAS_GROUP (object);
+
+	recalc = FALSE;
+
+	switch (arg_id) {
+	case GROUP_ARG_X:
+		group->xpos = GTK_VALUE_DOUBLE (*arg);
+		recalc = TRUE;
+		break;
+
+	case GROUP_ARG_Y:
+		group->ypos = GTK_VALUE_DOUBLE (*arg);
+		recalc = TRUE;
+		break;
+
+	default:
+		break;
+	}
+
+	if (recalc) {
+		gnome_canvas_group_child_bounds (group, NULL);
+
+		if (item->parent)
+			gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
+	}
+}
+
 GnomeCanvasItem *
 gnome_canvas_group_new (GnomeCanvas *canvas)
 {
@@ -343,6 +451,12 @@ gnome_canvas_group_new (GnomeCanvas *canvas)
 	item->canvas = canvas;
 
 	return item;
+}
+
+static void
+gnome_canvas_group_destroy (GtkObject *object)
+{
+	/* FIXME */
 }
 
 static void
@@ -506,8 +620,10 @@ gnome_canvas_group_translate (GnomeCanvasItem *item, double dx, double dy)
 	group->xpos += dx;
 	group->ypos += dy;
 
-	if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure)
-		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+	gnome_canvas_group_child_bounds (group, NULL);
+
+	if (item->parent)
+		gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item->parent), item);
 }
 
 void
@@ -517,6 +633,8 @@ gnome_canvas_group_add (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 	g_return_if_fail (GNOME_IS_CANVAS_GROUP (group));
 	g_return_if_fail (item != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
+
+	/* FIXME: should we reference the item? */
 
 	if (!group->item_list) {
 		group->item_list = g_list_append (group->item_list, item);
@@ -528,38 +646,77 @@ gnome_canvas_group_add (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 }
 
 void
+gnome_canvas_group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item)
+{
+	/* FIXME */
+}
+
+void
 gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *item)
 {
 	GnomeCanvasItem *gitem;
+	GList *list;
+	int first;
 
 	g_return_if_fail (group != NULL);
 	g_return_if_fail (GNOME_IS_CANVAS_GROUP (group));
-	g_return_if_fail (item != NULL);
-	g_return_if_fail (GNOME_IS_CANVAS_ITEM (item));
-
-	if ((item->x1 == item->x2) || (item->y1 == item->y2))
-		return; /* empty bounding box */
-
-	/* FIXME: should we recompute the whole bounding box from all the items, or just follow the
-	 * "always grow" policy?
-	 */
+	g_return_if_fail (!item || GNOME_IS_CANVAS_ITEM (item));
 
 	gitem = GNOME_CANVAS_ITEM (group);
 
-	if (item->x1 < gitem->x1)
-		gitem->x1 = item->x1;
+	if (item) {
+		/* Just add the child's bounds to whatever we have now */
 
-	if (item->y1 < gitem->y1)
-		gitem->y1 = item->y1;
+		if ((item->x1 == item->x2) || (item->y1 == item->y2))
+			return; /* empty bounding box */
 
-	if (item->x2 > gitem->x2)
-		gitem->x2 = item->x2;
+		if (item->x1 < gitem->x1)
+			gitem->x1 = item->x1;
 
-	if (item->y2 > gitem->y2)
-		gitem->y2 = item->y2;
+		if (item->y1 < gitem->y1)
+			gitem->y1 = item->y1;
 
-	if (gitem->parent)
-		gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (gitem->parent), gitem);
+		if (item->x2 > gitem->x2)
+			gitem->x2 = item->x2;
+
+		if (item->y2 > gitem->y2)
+			gitem->y2 = item->y2;
+
+		/* Propagate upwards */
+
+		if (gitem->parent)
+			gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (gitem->parent), gitem);
+	} else {
+		/* Rebuild every sub-group's bounds and reconstruct our own bounds */
+
+		for (list = group->item_list, first = TRUE; list; list = list->next, first = FALSE) {
+			item = list->data;
+
+			if (GNOME_IS_CANVAS_GROUP (item))
+				gnome_canvas_group_child_bounds (GNOME_CANVAS_GROUP (item), NULL);
+			else if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure)
+					(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+
+			if (first) {
+				gitem->x1 = item->x1;
+				gitem->y1 = item->y1;
+				gitem->x2 = item->x2;
+				gitem->y2 = item->y2;
+			} else {
+				if (item->x1 < gitem->x1)
+					gitem->x1 = item->x1;
+
+				if (item->y1 < gitem->y1)
+					gitem->y1 = item->y1;
+
+				if (item->x2 > gitem->x2)
+					gitem->x2 = item->x2;
+
+				if (item->y2 > gitem->y2)
+					gitem->y2 = item->y2;
+			}
+		}
+	}
 }
 
 

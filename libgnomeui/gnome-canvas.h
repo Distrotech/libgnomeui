@@ -129,7 +129,10 @@ void gnome_canvas_item_setv (GnomeCanvasItem *item, guint nargs, GtkArg *args);
 /* Move an item by the specified amount */
 void gnome_canvas_item_move (GnomeCanvasItem *item, double dx, double dy);
 
-/* Convert item coordinates (relative to its parent) to world coordinates */
+/* These functions convert from a coordinate system to another.  "w" is world coordinates and "i" is
+ * item coordinates.
+ */
+void gnome_canvas_item_w2i (GnomeCanvasItem *item, double *x, double *y);
 void gnome_canvas_item_i2w (GnomeCanvasItem *item, double *x, double *y);
 
 
@@ -186,7 +189,14 @@ GnomeCanvasItem *gnome_canvas_group_new (GnomeCanvas *canvas);
 /* Add an item to the top of a group */
 void gnome_canvas_group_add (GnomeCanvasGroup *group, GnomeCanvasItem *item);
 
-/* For use only by item type implementations.  Notifies a group that a child's bounds have changed. */
+/* Remove an item from a group */
+void gnome_canvas_group_remove (GnomeCanvasGroup *group, GnomeCanvasItem *item);
+
+/* For use only by the core and item type implementations.  If item is non-null, then the group adds
+ * the item's bounds to the current group's bounds, and propagates it upwards in the item hierarchy.
+ * If item is NULL, then the group asks every sub-group to recalculate its bounds recursively, and
+ * then propagates the bounds change upwards in the hierarchy.
+ */
 void gnome_canvas_group_child_bounds (GnomeCanvasGroup *group, GnomeCanvasItem *item);
 
 

@@ -1,4 +1,21 @@
+1998-07-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_item_shutdown): Implemented
+	shutdown method, mostly stolen from GtkWidget.
+	(gnome_canvas_item_set): Request redraw and repick.
+	(gnome_canvas_item_setv): likewise
+	(gnome_canvas_item_move): likewise 
+
+	Implemented reference counting for items.  It is still missing in
+	several places.
+
 1998-07-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-canvas.c (gnome_canvas_group_child_bounds): Now can either
+	add an item's bounds to the group's bounds, or rebuild the entire
+	group's bounds recursively.
+	(gnome_canvas_item_w2i): New function to convert from world
+	coordinates to item coordinates.
 
 	* gnome-canvas.c (gnome_canvas_group_translate): Implemented
 	translate method.

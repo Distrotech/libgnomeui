@@ -147,8 +147,6 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 	item = GNOME_CANVAS_ITEM (object);
 	re = GNOME_CANVAS_RE (object);
 
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
-
 	calc_bounds = FALSE;
 	calc_gcs = FALSE;
 
@@ -217,8 +215,6 @@ gnome_canvas_re_set_arg (GtkObject *object, GtkArg *arg, guint arg_id)
 
 	if (calc_bounds)
 		recalc_bounds (re);
-		
-	gnome_canvas_request_redraw (item->canvas, item->x1, item->y1, item->x2, item->y2);
 }
 
 static void
@@ -287,8 +283,7 @@ gnome_canvas_re_translate (GnomeCanvasItem *item, double dx, double dy)
 	re->x2 += dx;
 	re->y2 += dy;
 
-	if (GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure)
-		(* GNOME_CANVAS_ITEM_CLASS (item->object.klass)->reconfigure) (item);
+	recalc_bounds (re);
 }
 
 
