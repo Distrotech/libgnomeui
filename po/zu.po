@@ -942,11 +942,11 @@ msgstr ""
 
 #: libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
-msgstr "Isingenisohele"
+msgstr "Ifastele ethikamezisayo"
 
 #: libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
-msgstr "Ingabe ifasitela lokuyaluza ihele libe yisingenisohele."
+msgstr "Ingabe ifasitela lokuyaluza ihele kumele libe yifasitela elithikamezisayo usasebenza kwelinye."
 
 #: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
@@ -1106,21 +1106,19 @@ msgstr "_Imininingwane"
 
 #: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
-#, fuzzy
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr "Isithobo \"%s\" sizame ukushintsha udaba lwakho lwesimo"
+msgstr "Isithobo \"%s\" sizame ukushintsha udaba lwakho lwesimo sokushintsha leso umlawuli wezinhlelo noma uhlelo lokusebenza umthengiseli wakho angakuvumeli ukuthi usishintshe. Ezinye zezinhlelo ozikhethile ngekhe zisebenze, noma ngeke zibuye zitholakale uma uphinda usebenzisa isithobo."
 
 #: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
-#, fuzzy
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
-msgstr "Kwenzeke iphutha isafaka kumbe ihlenga ulwazi ngesimo lwe %s."
+msgstr "Kwenzeke iphutha isafaka kumbe ihlenga ulwazi ngesimo lwe %s. Kokunye kokulungisa kwakho izinhlelo mhlabe ngekhe kusebenze kahle."
 
 #: libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1155,11 +1153,12 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Lenkinombho izamikisa ku URI leyo eyikhombisayo."
 
 #: libgnomeui/gnome-href.c:394
-#, fuzzy
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
-msgstr "Iphutha lenzekile isazama ukungenisa isiyaluzi solwembu esinephutha."
+msgstr ""
+"Iphutha lenzekile isazama ukungenisa isiyaluzi solwembu esinephutha.\n"
+"Sicela ukuthi uhlole izinhlelo phakathi kwe 'zithobo ezithandekayo' ithulusi lokuzithandela."
 
 #: libgnomeui/gnome-icon-entry.c:178
 msgid ""
@@ -1190,11 +1189,10 @@ msgid "Picker dialog"
 msgstr "Okuthatha ukushaya"
 
 #: libgnomeui/gnome-icon-entry.c:212
-#, fuzzy
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
-msgstr "Uphawu oluthatha ukushaya"
+msgstr "Uphawu oluthatha ukushaya. Unga sebenzisa lesisakha ukuthola GtkDialog uma udinga ukulungisa okanye ukubuza enye nenye yalezi zakha."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
@@ -1406,21 +1404,26 @@ msgstr ""
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:722
 #, c-format
-#, fuzzy
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
-msgstr "Iphutha elihlelekileyo!\n"
+msgstr ""
+"Iphutha elihlelekileyo!\n"
+"Ihlulekile ukubonisa ibhokisana lomonakalo\n"
 
 #: libgnomeui/gnome_segv.c:101
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
 "due to a fatal error (%s).\n"
 "When you close this dialog, all applications will close and your session "
 "will exit.\n"
 "Please save all your files before closing this dialog."
-msgstr "Umphathi wesiqephu GNOME (qhubeleka %d) uphukile\n"
+msgstr ""
+"Umphathi wesiqephu GNOME (qhubeleka %d) yonakele\n"
+"ngenxa yephuta elibi kakhulu (%s).\n"
+"Uma uvala lelifastelana, zonke izithobo ziovaleka futhi nesiqephu sakho sizo phuma.\n"
+"Sicela uvale bonke ohele bakho phambi kokuba uvale lelifastelana."
 
 #: libgnomeui/gnome_segv.c:112
 #, c-format
@@ -1459,3 +1462,4 @@ msgstr "_Hlola umonakalo"
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Phuma ekulingweni"
+
