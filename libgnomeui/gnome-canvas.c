@@ -575,6 +575,7 @@ gnome_canvas_item_grab (GnomeCanvasItem *item, guint event_mask, GdkCursor *curs
 
 	item->canvas->grabbed_item = item;
 	item->canvas->grabbed_event_mask = event_mask;
+	item->canvas->current_item = item; /* So that events go to the grabbed item */
 
 	return retval;
 }

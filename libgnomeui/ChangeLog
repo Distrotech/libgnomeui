@@ -1,5 +1,9 @@
 1998-08-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gnome-canvas.c (gnome_canvas_item_grab): Set the
+	canvas->current_item to the grabbed item to force events to go to
+	it.
+
 	* gnome-canvas-widget.h: 
 	* gnome-canvas-line.h:
 	* gnome-canvas-image.h:
