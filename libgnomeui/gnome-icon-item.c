@@ -101,13 +101,18 @@ recompute_bounding_box (Iti *iti)
 	GnomeCanvasItem *item = GNOME_CANVAS_ITEM (iti);
 	int nx1, ny1, nx2, ny2;
 	int w, height_changed, width_changed;
+	double dx, dy;
 
+	dx = dy = 0.0;
+
+	gnome_canvas_item_i2w (item, &dx, &dy);
+	
 	w = iti_get_width (iti, NULL);
 	
-	nx1 = iti->x + (iti->width - w) / 2 - MARGIN_X;
-	ny1 = iti->y;
-	nx2 = iti->x + (iti->width - w) / 2 + w + 2*MARGIN_X + 1;
-	ny2 = 2*MARGIN_Y + (iti->y + iti->ti->height + 1);
+	nx1 = dx + iti->x + (iti->width - w) / 2 - MARGIN_X;
+	ny1 = dy + iti->y;
+	nx2 = dx + iti->x + (iti->width - w) / 2 + w + 2*MARGIN_X + 1;
+	ny2 = dy + 2*MARGIN_Y + (iti->y + iti->ti->height + 1);
 		
 	/* See if our dimenssions match the item bounding box */
 	if (!(nx1 != item->x1 || ny1 != item->y1 || nx2 != item->x2 || ny2 != item->y2))
@@ -318,6 +323,10 @@ iti_paint_text (Iti *iti, GdkDrawable *drawable, int x, int y, GtkJustification 
 	GdkGC *gc, *bgc, *sgc, *bsgc;
         GList *item;
         int xpos, len;
+	double dx, dy;
+
+	dx = dy = 0.0;
+	gnome_canvas_item_i2w (GNOME_CANVAS_ITEM (iti), &dx, &dy);
 	
 	ti = iti->ti;
 	len = 0;
@@ -389,18 +398,18 @@ ication.",
 				px = x + xpos + offset;
 				gdk_draw_rectangle (
 					drawable, bg_gc, TRUE,
-					px, y - ti->font->ascent,
+					dx + px, dy + y - ti->font->ascent,
 					size, ti->baseline_skip);
 						    
 				gdk_draw_text (
 					drawable, ti->font, fg_gc,
-					px, y, text, 1);
+					dx + px, dy + y, text, 1);
 
 				if (cursor == i)
 					gdk_draw_line (
 						drawable, gc,
-						px-1, y - ti->font->ascent,
-						px-1, y + ti->font->descent-1);
+						dx + px-1, dy + y - ti->font->ascent,
+						dx + px-1, dy + y + ti->font->descent-1);
 
 				offset += size;
 			}
@@ -409,8 +418,8 @@ ication.",
 				
 				gdk_draw_line (
 					drawable, gc,
-					px-1, y - ti->font->ascent,
-					px-1, y + ti->font->descent-1);
+					dx + px-1, dy + y - ti->font->ascent,
+					dx + px-1, dy + y + ti->font->descent-1);
 			}
 		} else {
 			int xtra = iti->selected ? 2 : 0;
@@ -418,11 +427,11 @@ ication.",
 			bg_gc = iti->selected ? bsgc : bgc;
 
 			gdk_draw_rectangle (drawable, bg_gc, TRUE,
-					    x + xpos - xtra,
-					    y - ti->font->ascent - xtra,
+					    dx + x + xpos - xtra,
+					    dy + y - ti->font->ascent - xtra,
 					    gdk_string_width (ti->font, text) + xtra * 2,
 					    ti->baseline_skip + xtra*2);
-			gdk_draw_string (drawable, ti->font, fg_gc, x + xpos, y, text);
+			gdk_draw_string (drawable, ti->font, fg_gc, dx + x + xpos, dy + y, text);
 		}
 			
 		y += ti->baseline_skip;
