@@ -109,6 +109,10 @@ gint       gnome_dialog_run_and_close  (GnomeDialog *dialog);
    and pressing return will activate it. */
 void       gnome_dialog_set_default    (GnomeDialog *dialog,
 					gint         button);
+
+/* Makes the nth button the focused widget in the dialog */
+void       gnome_dialog_grab_focus     (GnomeDialog *dialog,
+					gint button);
 /* Set sensitivity of a button */
 void       gnome_dialog_set_sensitive  (GnomeDialog *dialog,
 					gint         button,

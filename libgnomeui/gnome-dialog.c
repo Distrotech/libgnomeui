@@ -751,8 +751,36 @@ gnome_dialog_set_default (GnomeDialog *dialog,
 
   list = g_list_nth (dialog->buttons, button);
 
-  if (list && list->data) {
+  if (list && list->data){
     gtk_widget_grab_default (GTK_WIDGET (list->data));
+    return;
+  }
+#ifdef GNOME_ENABLE_DEBUG
+  /* If we didn't find the button, complain */
+  g_warning("Button number %d does not appear to exist\n", button); 
+#endif
+}
+
+/**
+ * gnome_dialog_grab_focus: Makes a button grab the focus. T
+ * @dialog: #GnomeDialog to affect.
+ * @button: Number of the default button.
+ * 
+ * The button @button will grab the focus.  Use this for dialogs
+ * Where only buttons are displayed and you want to change the 
+ * default button.
+ **/
+void
+gnome_dialog_grab_focus (GnomeDialog *dialog, gint button)
+{
+  GList *list;
+
+  g_return_if_fail(dialog != NULL);
+  g_return_if_fail(GNOME_IS_DIALOG(dialog));
+
+  list = g_list_nth (dialog->buttons, button);
+
+  if (list && list->data){
     gtk_widget_grab_focus (GTK_WIDGET (list->data));
     return;
   }

@@ -1,3 +1,8 @@
+2001-01-22  Miguel de Icaza  <miguel@ximian.com>
+
+	* gnome-dialog.c (gnome_dialog_set_default): Do not grab focus.
+	(gnome_dialog_grab_focus): New API call.
+
 2001-01-15  Miguel de Icaza  <miguel@ximian.com>
 
 	* gnome-dialog.c (gnome_dialog_set_default): Grab focus as well. 
