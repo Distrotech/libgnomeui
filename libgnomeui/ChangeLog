@@ -1,3 +1,7 @@
+Thu Nov 26 21:20:10 1998  George Lebl  <jirka@5z.com>
+
+	* gnome-pixmap-entry.c: added inline docs
+
 1998-11-26  James Henstridge  <james@daa.com.au>
 
 	* gnometypes.c: added ability to register new boxed types.  This
