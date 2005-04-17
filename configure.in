@@ -9,7 +9,7 @@ AC_PREREQ(2.54)
 # set LIBGNOMEUI_BINARY_AGE and LIBGNOMEUI_INTERFACE_AGE to 0.
 #
 m4_define([libgnomeui_major_version], [2])
-m4_define([libgnomeui_minor_version], [10])
+m4_define([libgnomeui_minor_version], [11])
 m4_define([libgnomeui_micro_version], [0])
 m4_define([libgnomeui_interface_age], [0])
 # If you need a modifier for the version number. 
@@ -69,6 +69,19 @@ AC_PROG_CC
 AC_STDC_HEADERS
 AC_LIBTOOL_WIN32_DLL
 AM_PROG_LIBTOOL
+
+AC_CANONICAL_HOST
+case "$host" in
+  *-*-mingw*)
+    os_win32=yes
+    gnome_keyring_requirement=""
+    ;;
+  *)
+    os_win32=no
+    gnome_keyring_requirement="gnome-keyring-1"
+    ;;
+esac
+AM_CONDITIONAL(OS_WIN32, [test "$os_win32" = "yes"])
 
 GETTEXT_PACKAGE=libgnomeui-2.0
 AC_SUBST(GETTEXT_PACKAGE)
@@ -153,7 +166,7 @@ GNOMEUI_MODULES="dnl
   gconf-2.0 >= gconf_required_version dnl
   pango >= pango_required_version dnl
   gnome-vfs-2.0 >= gnomevfs_required_version dnl
-  gnome-keyring-1"
+  $gnome_keyring_requirement"
 PKG_CHECK_MODULES(LIBGNOMEUI, [$GNOMEUI_MODULES])
 LIBGNOMEUI_LIBS="$LIBGNOMEUI_LIBS $LIBJPEG"
 

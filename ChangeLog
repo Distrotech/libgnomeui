@@ -1,3 +1,10 @@
+2005-04-17  Tor Lillqvist  <tml@novell.com>
+
+	* configure.in (libgnomeui_minor_version): Post-branch version
+	bump to 2.11.0. The gnome-2-10 branch has version 2.10.x. Check
+	for Win32 (mingw), define OS_WIN32 Automake conditional. Don't
+	require gnome-keyring-1 on Win32.
+
 2005-03-26  Vincent Untz  <vincent@vuntz.net>
 
 	* file-chooser/gtkfilesystemgnomevfs.c:
