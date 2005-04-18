@@ -62,7 +62,9 @@
 	* libgnomeui/gnome-ui-win32.c: New file with Win32-only bits.
 	(DllMain): DLL entry point that tucks away the handle to the DLL.
 	(setup): Helper function that looks up the DLL's location at
-	run-time and determines the installation folder from it.
+	run-time using the recently added gnome_win32_get_prefixex()
+	function and forms the paths to those subdirectoris of if we are
+	interested in.
 	(_gnome_ui_get_localedir, _gnome_uid_get_datadir): Get the
 	run-time locale and data directories.
 

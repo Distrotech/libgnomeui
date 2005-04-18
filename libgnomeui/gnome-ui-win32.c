@@ -23,6 +23,8 @@
 #include <string.h>
 #include <glib.h>
 
+#include <libgnome/gnome-init.h>
+
 /* localedir uses system codepage as it is passed to the non-UTF8ified
  * gettext library
  */
@@ -60,7 +62,9 @@ static char *
 replace_prefix (const char *runtime_prefix,
                 const char *configure_time_path)
 {
-        if (strncmp (configure_time_path, LIBGNOMEUI_PREFIX "/", strlen (LIBGNOMEUI_PREFIX) + 1) == 0) {
+        if (runtime_prefix &&
+            strncmp (configure_time_path, LIBGNOMEUI_PREFIX "/",
+                     strlen (LIBGNOMEUI_PREFIX) + 1) == 0) {
                 return g_strconcat (runtime_prefix,
                                     configure_time_path + strlen (LIBGNOMEUI_PREFIX),
                                     NULL);
@@ -71,9 +75,8 @@ replace_prefix (const char *runtime_prefix,
 static void
 setup (void)
 {
-	char *full_prefix = NULL;  
-	char *short_prefix = NULL; 
-	char *p;
+	char *full_prefix;  
+	char *cp_prefix; 
 
         G_LOCK (mutex);
         if (localedir != NULL) {
@@ -81,71 +84,24 @@ setup (void)
                 return;
         }
 
-        if (GetVersion () < 0x80000000) {
-                /* NT-based Windows has wide char API */
-                wchar_t wcbfr[1000];
-                if (GetModuleFileNameW (hmodule, wcbfr,
-                                        G_N_ELEMENTS (wcbfr))) {
-                        full_prefix = g_utf16_to_utf8 (wcbfr, -1,
-                                                       NULL, NULL, NULL);
-                        if (GetShortPathNameW (wcbfr, wcbfr,
-                                               G_N_ELEMENTS (wcbfr)))
-                                short_prefix = g_utf16_to_utf8 (wcbfr, -1,
-                                                                NULL, NULL, NULL);
-                }
-        } else {
-                /* Win9x, yecch */
-                char cpbfr[1000];
-                if (GetModuleFileNameA (hmodule, cpbfr, G_N_ELEMENTS (cpbfr)))
-                        full_prefix = short_prefix =
-                                g_locale_to_utf8 (cpbfr, -1,
-                                                  NULL, NULL, NULL);
-        }
+        gnome_win32_get_prefixes (hmodule, &full_prefix, &cp_prefix);
 
-        if (full_prefix != NULL) {
-                p = strrchr (full_prefix, '\\');
-                if (p != NULL)
-                        *p = '\0';
-      
-                p = strrchr (full_prefix, '\\');
-                if (p && (g_ascii_strcasecmp (p + 1, "bin") == 0))
-                        *p = '\0';
-        } else {
-                full_prefix = "";
-        }
-
-        if (short_prefix != NULL) {
-                p = strrchr (short_prefix, '\\');
-                if (p != NULL)
-                        *p = '\0';
-      
-                p = strrchr (short_prefix, '\\');
-                if (p && (g_ascii_strcasecmp (p + 1, "bin") == 0))
-                        *p = '\0';
-        } else {
-                short_prefix = "";
-        }
-
-        localedir = replace_prefix (short_prefix, GNOMEUILOCALEDIR);
-        p = localedir;
-        localedir = g_locale_from_utf8 (localedir, -1, NULL, NULL, NULL);
-        g_free (p);
+        localedir = replace_prefix (cp_prefix, GNOMEUILOCALEDIR);
+        g_free (cp_prefix);
 
         datadir = replace_prefix (full_prefix, LIBGNOMEUI_DATADIR);
+        g_free (full_prefix);
 
 	G_UNLOCK (mutex);
 }
 
-const char *
-_gnome_ui_get_localedir (void)
-{
-        setup ();
-        return localedir;
+#define GETTER(varbl)                           \
+const char *                                    \
+_gnome_ui_get_##varbl (void)                    \
+{                                               \
+        setup ();                               \
+        return varbl;                           \
 }
 
-const char *
-_gnome_ui_get_datadir (void)
-{
-        setup ();
-        return datadir;
-}
+GETTER (localedir)
+GETTER (datadir)
