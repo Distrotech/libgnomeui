@@ -6,12 +6,7 @@ INCLUDES = \
 	-I$(top_srcdir)/libgnomeui			\
 	$(WARN_CFLAGS)					\
 	$(LIBGNOMEUI_CFLAGS)				\
-	-DGNOMEUILIBDIR=\""$(libdir)"\"			\
-	-DGNOMEUIDATADIR=\""$(datadir)"\"		\
-	-DGNOMEUIUIDIR=\""$(datadir)/ui"\"		\
 	-DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\
-	-DGNOMEUIBINDIR=\""$(bindir)"\"			\
-	-DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\"	\
 	-DGNOMEUISRCDIR=\""$(srcdir)"\"			\
 	-DG_LOG_DOMAIN=\"GnomeUI\"
 

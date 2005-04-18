@@ -45,6 +45,8 @@
 #include <libgnomevfs/gnome-vfs-drive.h>
 #include <glib/gi18n-lib.h>
 
+#include <glib/gstdio.h>
+
 #ifdef USE_GCONF
 #include <gconf/gconf-client.h>
 #endif
@@ -66,6 +68,13 @@ typedef struct _GtkFileSystemGnomeVFSClass GtkFileSystemGnomeVFSClass;
 #define GTK_FILE_SYSTEM_GNOME_VFS_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FILE_SYSTEM_GNOME_VFS, GtkFileSystemGnomeVFSClass))
 #define GTK_IS_FILE_SYSTEM_GNOME_VFS_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_FILE_SYSTEM_GNOME_VFS))
 #define GTK_FILE_SYSTEM_GNOME_VFS_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FILE_SYSTEM_GNOME_VFS, GtkFileSystemGnomeVFSClass))
+
+#ifdef G_OS_WIN32
+#define gnome_authentication_manager_push_async()
+#define gnome_authentication_manager_pop_async()
+#define gnome_authentication_manager_push_sync()
+#define gnome_authentication_manager_pop_sync()
+#endif
 
 static GType type_gtk_file_system_gnome_vfs = 0;
 static GType type_gtk_file_folder_gnome_vfs = 0;
@@ -1277,11 +1286,11 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
 
       if (filesystem_path)
 	{
-	  switch (filesystem_path[0])
-	    {
-	    case '/':
+	  if (g_path_is_absolute (filesystem_path))
 	      uri = gnome_vfs_get_uri_from_local_path (filesystem_path);
-	      break;
+	  else switch (filesystem_path[0])
+	    {
+#ifndef G_OS_WIN32
 	    case '~':
 	      /* deliberately falling into default case on fail */
 	      path = gnome_vfs_expand_initial_tilde (filesystem_path);
@@ -1293,6 +1302,7 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
 		}
 	      g_free (path);
 	      /* don't insert break here, read above comment */
+#endif
 	    default:
 	      escaped = gnome_vfs_escape_path_string (filesystem_path);
 	      base_dir = g_strconcat (base_uri, "/", NULL);
@@ -1572,7 +1582,7 @@ bookmark_list_write (GSList *bookmarks, GError **error)
 	  goto io_error;
 	}
 
-      if (rename (tmp_filename, filename) == -1)
+      if (g_rename (tmp_filename, filename) == -1)
 	{
 	  saved_errno = errno;
 	  goto io_error;
@@ -1599,7 +1609,7 @@ bookmark_list_write (GSList *bookmarks, GError **error)
   result = FALSE;
 
   if (fd != -1)
-    unlink (tmp_filename); /* again, not much error checking we can do here */
+    g_unlink (tmp_filename); /* again, not much error checking we can do here */
 
  out:
 

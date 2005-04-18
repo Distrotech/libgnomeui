@@ -48,6 +48,18 @@
 
 #include "libgnomeui-access.h"
 
+#ifdef G_OS_WIN32
+/* The use of strtok_r() in this file doesn't require us to use a real
+ * strtok_r(). (Which doesn't exist in Microsoft's C library.)
+ * Microsoft's strtok() uses a thread-local buffer, not a
+ * caller-allocated buffer like strtok_r(). But this is fine for the
+ * way it gets used here. To avoid gcc warnings about unused
+ * variables, use the third argument to store the return value from
+ * strtok().
+ */
+#define strtok_r(s, delim, ptrptr) (*(ptrptr) = strtok (s, delim))
+#endif
+
 struct _GnomeDateEditPrivate {
 	GtkWidget *date_entry;
 	GtkWidget *date_button;

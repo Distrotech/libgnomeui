@@ -763,7 +763,11 @@ calculate_locale (GnomeThemeFile   *df)
 {
   char *p, *lang;
 
+#ifndef G_OS_WIN32
   lang = g_strdup (setlocale (LC_MESSAGES, NULL));
+#else
+  lang = g_win32_getlocale ();
+#endif
   
   if (lang)
     {

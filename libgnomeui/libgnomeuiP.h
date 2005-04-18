@@ -39,6 +39,17 @@ G_BEGIN_DECLS
 
 void gnome_type_init(void);
 
+#ifdef G_OS_WIN32
+const char *_gnome_ui_get_localedir      (void);
+const char *_gnome_ui_get_datadir        (void);
+
+#undef GNOMEUILOCALEDIR
+#define GNOMEUILOCALEDIR _gnome_ui_get_localedir()
+#undef LIBGNOMEUI_DATADIR
+#define LIBGNOMEUI_DATADIR _gnome_ui_get_datadir()
+
+#endif
+
 G_END_DECLS
 
 #endif /* LIBGNOMEUIP_H */

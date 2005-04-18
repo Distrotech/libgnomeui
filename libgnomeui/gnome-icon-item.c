@@ -33,7 +33,6 @@
 #include <gtk/gtkwindow.h>
 #include <gdk/gdkkeysyms.h>
 #include <gdk/gdkrgb.h>
-#include <gdk/gdkx.h>
 #include <libart_lgpl/art_rgb_affine.h>
 #include <libart_lgpl/art_rgb_rgba_affine.h>
 #include <string.h>

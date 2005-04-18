@@ -2683,6 +2683,7 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 }
 
 /* Now leaving Hack City */
+#undef _
 #define _(x) gettext (x)
 
 static int

@@ -44,6 +44,7 @@
 #include <gtk/gtkviewport.h>
 #include <libgnome/gnome-macros.h>
 
+#include "libgnomeuiP.h"
 
 /* FIXME: More includes! */
 
@@ -659,8 +660,14 @@ gnome_about_set_property (GObject *object, guint prop_id, const GValue *value, G
 						   g_value_get_object (value));
 		}
 		else {
+			char *about_logo_file =
+				g_build_filename (LIBGNOMEUI_DATADIR,
+						  "pixmaps",
+						  "gnome-about-logo.png",
+						  NULL);
 			gtk_image_set_from_file (GTK_IMAGE (GNOME_ABOUT (object)->_priv->logo_image),
-						 GNOMEUIDATADIR"/pixmaps/gnome-about-logo.png");
+						 about_logo_file);
+			g_free (about_logo_file);
 		}
 		break;
 	case PROP_AUTHORS:

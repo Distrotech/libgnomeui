@@ -30,8 +30,11 @@
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  */
 #include <config.h>
+#include <glib.h>
 #include <sys/param.h>
+#ifndef G_OS_WIN32
 #include <pwd.h>
+#endif
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -102,6 +105,10 @@ static void fentry_get_property (GObject *object, guint param_id,
 				 GValue *value, GParamSpec *pspec);
 
 static void gnome_file_entry_editable_init (GtkEditableClass *iface);
+
+#ifdef G_OS_WIN32
+#define realpath(a, b) strcpy (b, a)
+#endif
 
 /* Property IDs */
 enum {
@@ -478,6 +485,7 @@ browse_dialog_kill (GtkWidget *widget, gpointer data)
 	fentry->fsw = NULL;
 }
 
+#ifndef G_OS_WIN32
 /* Does tilde (home directory) expansion on a string */
 static char *
 tilde_expand (const char *str)
@@ -516,6 +524,7 @@ tilde_expand (const char *str)
 
 	return g_strconcat (passwd->pw_dir, G_DIR_SEPARATOR_S, p, NULL);
 }
+#endif
 
 /* This is only used for the file dialog.  It can end up also being
  * the default path. */
@@ -533,11 +542,11 @@ build_filename (GnomeFileEntry *fentry)
 		(GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)));
 
 	if (text == NULL || text[0] == '\0')
-		return g_strconcat (fentry->default_path, "/", NULL);
+		return g_strconcat (fentry->default_path, G_DIR_SEPARATOR_S, NULL);
 
 	file = _gnome_file_entry_expand_filename (text, fentry->default_path);
 	if (file == NULL)
-		return g_strconcat (fentry->default_path, "/", NULL);
+		return g_strconcat (fentry->default_path, G_DIR_SEPARATOR_S, NULL);
 
 	/* Now append a '/' if it doesn't exist and we're in directory only
 	 * mode.  We also have to do this if the file exists and it *is* a
@@ -549,7 +558,7 @@ build_filename (GnomeFileEntry *fentry)
 	len = strlen (file);
 
 	if (len != 0
-	    && file[len - 1] != G_DIR_SEPARATOR
+	    && !G_IS_DIR_SEPARATOR (file[len - 1])
 	    && (fentry->_priv->directory_entry || g_file_test (file, G_FILE_TEST_IS_DIR))) {
 		gchar *tmp;
 
@@ -998,17 +1007,21 @@ _gnome_file_entry_expand_filename (const char *input, const char *default_dir)
 		return NULL;
 	} else if (input[0] == '\0') {
 		return g_strdup ("");
-	} else if (input[0] == G_DIR_SEPARATOR) {
+	} else if (g_path_is_absolute (input)) {
 		return g_strdup (input);
+#ifndef G_OS_WIN32
 	} else if (input[0] == '~') {
 		return tilde_expand (input);
+#endif
 	} else if (default_dir != NULL) {
 		char *ret = g_build_filename (default_dir, input, NULL);
+#ifndef G_OS_WIN32
 		if (ret[0] == '~') {
 			char *tmp = tilde_expand (ret);
 			g_free (ret);
 			return tmp;
 		}
+#endif
 		return ret;
 	} else {
 		char *cwd = g_get_current_dir ();

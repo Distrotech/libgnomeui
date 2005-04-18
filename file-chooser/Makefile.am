@@ -11,10 +11,6 @@ INCLUDES =					\
 	-D_POSIX_PTHREAD_SEMANTICS		\
 	-D_REENTRANT				\
 	-DG_DISABLE_DEPRECATED			\
-	-DDATADIR=\"$(datadir)\"		\
-	-DPREFIX=\"$(prefix)\"			\
-	-DLIBDIR=\"$(libdir)\"			\
-	-DSYSCONFDIR=\"$(sysconfdir)\"		\
 	$(NULL)
 
 module_flags = -export_dynamic -avoid-version -module -no-undefined

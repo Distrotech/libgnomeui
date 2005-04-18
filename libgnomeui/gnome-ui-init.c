@@ -35,7 +35,10 @@
 #include <unistd.h>
 #include <signal.h>
 #include <sys/types.h>
+#include <glib.h>
+#ifndef G_OS_WIN32
 #include <sys/wait.h>
+#endif
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
 #endif
@@ -86,10 +89,11 @@ static void libgnomeui_pre_args_parse	(GnomeProgram *app,
 					 GnomeModuleInfo *mod_info);
 static void libgnomeui_post_args_parse	(GnomeProgram *app,
 					 GnomeModuleInfo *mod_info);
-static void libgnomeui_rc_parse		(GnomeProgram *program,
-					 const gchar *command);
+static void libgnomeui_rc_parse		(GnomeProgram *program);
+#ifndef G_OS_WIN32
 static void libgnomeui_segv_setup	(GnomeProgram *program,
 					 gboolean post_arg_parse);
+#endif
 
 /* Prototype for a private gnome_stock function */
 void _gnome_stock_icons_init (void);
@@ -134,20 +138,25 @@ libgnomeui_module_info_get (void)
 
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[6];
+                int n = 0;
 
 		bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
 
-		req[0].required_version = "1.101.2";
-		req[0].module_info = LIBBONOBOUI_MODULE;
+		req[n].required_version = "1.101.2";
+		req[n].module_info = LIBBONOBOUI_MODULE;
+                n++;
+#ifndef G_OS_WIN32
+		req[n].required_version = VERSION;
+		req[n].module_info = gnome_client_module_info_get ();
+                n++;
+#endif
+		req[n].required_version = "1.1.1";
+		req[n].module_info = gnome_gconf_ui_module_info_get ();
+                n++;
 
-		req[1].required_version = VERSION;
-		req[1].module_info = gnome_client_module_info_get ();
-
-		req[2].required_version = "1.1.1";
-		req[2].module_info = gnome_gconf_ui_module_info_get ();
-
-		req[3].required_version = NULL;
-		req[3].module_info = NULL;
+		req[n].required_version = NULL;
+		req[n].module_info = NULL;
+                n++;
 
 		module_info.requirements = req;
 	}
@@ -288,9 +297,10 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 		g_object_set (G_OBJECT(app),
 			      LIBGNOMEUI_PARAM_CRASH_DIALOG, FALSE,
 			      NULL);
-
+#ifndef G_OS_WIN32
         if(do_crash_dialog)
                 libgnomeui_segv_setup (app, FALSE);
+#endif
 }
 
 #ifdef HAVE_ESD
@@ -535,10 +545,10 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         gchar *filename;
 
         gnome_type_init();
-        libgnomeui_rc_parse (program, g_get_prgname ());
-
+        libgnomeui_rc_parse (program);
+#ifndef G_OS_WIN32
         libgnomeui_segv_setup (program, TRUE);
-
+#endif
         priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
         priv->constructed = TRUE;
 
@@ -603,8 +613,9 @@ libgnomeui_arg_callback(poptContext con,
  * If you don't like it.. give me a good reason.
  */
 static void
-libgnomeui_rc_parse (GnomeProgram *program, const gchar *command)
+libgnomeui_rc_parse (GnomeProgram *program)
 {
+        gchar *command = g_get_prgname ();
 	gint i;
 	gint buf_len;
 	const gchar *buf = NULL;
@@ -614,7 +625,7 @@ libgnomeui_rc_parse (GnomeProgram *program, const gchar *command)
 	buf_len = strlen(command);
 	
 	for (i = 0; i < buf_len; i++) {
-		if (command[buf_len - i] == '/') {
+		if (G_IS_DIR_SEPARATOR (command[buf_len - i])) {
 			buf = &command[buf_len - i + 1];
 			break;
 		}
@@ -658,6 +669,8 @@ libgnomeui_rc_parse (GnomeProgram *program, const gchar *command)
 		g_free (file);
 	}
 }
+
+#ifndef G_OS_WIN32
 
 /* crash handler */
 static void libgnomeui_segv_handle(int signum);
@@ -758,7 +771,7 @@ static void libgnomeui_segv_handle(int signum)
                 program = gnome_program_get();
 
 		/* Child process */
-		execl (GNOMEUISERVERDIR "/gnome_segv2", GNOMEUISERVERDIR "/gnome_segv",
+		execl (LIBGNOMEUI_SERVERDIR "/gnome_segv2", LIBGNOMEUI_SERVERDIR "/gnome_segv",
 		       g_get_prgname (), buf,
 		       gnome_program_get_app_version (program), NULL);
 
@@ -771,6 +784,8 @@ static void libgnomeui_segv_handle(int signum)
 
 	in_segv--;
 }
+
+#endif
 
 /* #warning "Solve the sound events situation" */
 

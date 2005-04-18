@@ -109,7 +109,7 @@ get_vfs_mime_name (const char *mime_type)
   if (vfs_mime_name)
     {
       /* Handle absolute files */
-      if (vfs_mime_name[0] == '/')
+      if (g_path_is_absolute (vfs_mime_name))
 	return g_strdup (vfs_mime_name);
       
       p = strrchr(vfs_mime_name, '.');
@@ -279,7 +279,8 @@ gnome_icon_lookup (GtkIconTheme               *icon_theme,
   if (custom_icon)
     {
       /* WARNING: Does I/O for abs custom icons! */
-      if ((custom_icon[0] == '/' && g_file_test (custom_icon, G_FILE_TEST_IS_REGULAR)) ||
+      if ((g_path_is_absolute (custom_icon) &&
+	   g_file_test (custom_icon, G_FILE_TEST_IS_REGULAR)) ||
 	  gtk_icon_theme_has_icon (icon_theme, custom_icon))
 	return g_strdup (custom_icon);
     }
@@ -314,7 +315,8 @@ gnome_icon_lookup (GtkIconTheme               *icon_theme,
     {
       mime_name = get_vfs_mime_name (mime_type);
       if (mime_name &&
-	  ((mime_name[0] == '/' &&  g_file_test (mime_name, G_FILE_TEST_IS_REGULAR)) ||
+	  ((g_path_is_absolute (mime_name) &&
+	    g_file_test (mime_name, G_FILE_TEST_IS_REGULAR)) ||
 	   gtk_icon_theme_has_icon (icon_theme, mime_name)))
 	return mime_name;
       g_free (mime_name);

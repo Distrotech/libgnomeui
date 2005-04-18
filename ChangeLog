@@ -1,3 +1,88 @@
+2005-04-18  Tor Lillqvist  <tml@novell.com>
+
+	* libgnomeui-zip.in: New file, used to build zipfile distribution
+	of libgnomeui for Win32.
+
+	* configure.in
+	* Makefile.am: Add it.
+
+	* configure.in: Require GTK+ 2.6.0 (and thus GLib 2.6.0).
+
+	* */Makefile.am: Remove unused GNOME*DIR definitions for
+	clarity. In libgnomeui prefix the few remaining in libgnomeui with
+	LIBGNOMEUI_.
+
+	* file-chooser/gtkfilesystemgnomevfs.c: Don't use authentication
+	manager on Win32.
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	* file-chooser/testfilechooser.c
+	* libgnomeui/gnome-icon-entry.c
+	* libgnomeui/gnome-thumbnail.c: Use gstdio wrappers for better
+	localized filename support on Win32.
+
+	* libgnomeui/Makefile.am: Conditionalize platform-dependent
+	sources. No authentication manager (at least for now) or session
+	manager on Win32.
+
+	* libgnomeui/gnome-about.c (gnome_about_set_property): Form path
+	to logo file at run-time to accomodate for end-user selecatble
+	installation path on Win32.
+
+	* libgnomeui/gnome-app-util.c
+	* libgnomeui/gnome-icon-item.c
+	* libgnomeui/gnome-window.c: Remove unnecessary include of gdkx.h.
+
+	* libgnomeui/gnome-icon-lookup.c
+	* libgnomeui/gnome-file-entry.c: Use GLib path name functionality,
+	like g_path_is_absolute(), G_DIR_SEPARATOR, G_IS_DIR_SEPARATOR().
+
+	* libgnomeui/gnome-dateedit.c: No strtok_r() in the Microsoft C
+	library, use strtok() on Win32 and document why it is good enough
+	in this case.
+
+	* libgnomeui/gnome-file-entry.c: No realpath() in the Microsoft C
+	library, just use strcpy() for now. Don't support the tilde
+	convention on Win32, as it is not used on Windows, and furthermore
+	it's rather hard to find out the "home directory" (if any such
+	concept even can be said to exist) of other accounts anyway.
+
+	* libgnomeui/gnome-multiscreen.c (make_environment_for_screen):
+	Bypass on Win32 where GDK doesn't support multiple screens,
+	whatever they would be.
+
+	* libgnomeui/gnome-theme-parser.c (calculate_locale): Use
+	g_win32_getlocale() on Win32.
+
+	* libgnomeui/gnome-ui-init.c (libgnomeui_segv_setup,
+	libgnomeui_segv_handle): Don't try to handle segvs on Win32.
+	(libgnomeui_module_info_get): Don't require the client module on
+	Win32, as it isn't built.
+
+	* libgnomeui/gnome-ui-win32.c: New file with Win32-only bits.
+	(DllMain): DLL entry point that tucks away the handle to the DLL.
+	(setup): Helper function that looks up the DLL's location at
+	run-time and determines the installation folder from it.
+	(_gnome_ui_get_localedir, _gnome_uid_get_datadir): Get the
+	run-time locale and data directories.
+
+	* libgnomeui/gnome-thumbnail.c: Include g_chmod() implementation
+	if building against GLib < 2.7.0. Use GMutex instead of pthread
+	mutex. Use time() instead of calling gettimeofday() and then just
+	using the seconds.
+
+	* libgnomeui/gnome-window-icon.c (gnome_window_icon_init): Bypass
+	the session manager client code on Win32.
+
+	* libgnomeui/libgnomeuiP.h: On Win32 redefine the LIBGNOMEUI_*DIR
+	macros to call the _gnome_ui_get_*dir functions.
+
+	* libgnomeui/libgnomeui-2.0.pc.in: Require also gnome-vfs-2.0 as
+	libgnomeui includes its headers in its public headers.
+
+	* test-gnome/testgnome.c: Add comment that it is OK to use
+	configure-time pathnames also on Win32, as this is a test program.
+
 2005-04-17  Tor Lillqvist  <tml@novell.com>
 
 	* configure.in (libgnomeui_minor_version): Post-branch version

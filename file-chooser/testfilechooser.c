@@ -14,6 +14,8 @@
 #include "gtkfilesystemunix.h"
 #endif
 
+#include <glib/gstdio.h>
+
 static GtkWidget *preview_label;
 static GtkWidget *preview_image;
 
@@ -169,7 +171,7 @@ my_new_from_file_at_size (const char *filename,
 	g_return_val_if_fail (filename != NULL, NULL);
         g_return_val_if_fail (width > 0 && height > 0, NULL);
 
-	if (stat (filename, &st) != 0) {
+	if (g_stat (filename, &st) != 0) {
 		g_set_error (error,
 			     G_FILE_ERROR,
 			     g_file_error_from_errno (errno),
@@ -181,7 +183,7 @@ my_new_from_file_at_size (const char *filename,
 	if (!S_ISREG (st.st_mode))
 		return NULL;
 
-	f = fopen (filename, "rb");
+	f = g_fopen (filename, "rb");
 	if (!f) {
                 g_set_error (error,
                              G_FILE_ERROR,
@@ -260,7 +262,7 @@ update_preview_cb (GtkFileChooser *chooser)
       else
 	{
 	  struct stat buf;
-	  if (stat (filename, &buf) == 0)
+	  if (g_stat (filename, &buf) == 0)
 	    {
 	      gchar *preview_text;
 	      gchar *size_str;

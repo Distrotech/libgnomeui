@@ -24,7 +24,7 @@ m4_define([libgnomecanvas_required_version], [2.0.0])
 m4_define([libbonoboui_required_version],    [2.0.0])
 m4_define([gconf_required_version],          [1.1.11])
 m4_define([pango_required_version],          [1.1.2])
-m4_define([gtk_required_version],            [2.4.1])
+m4_define([gtk_required_version],            [2.6.0])
 m4_define([gnomevfs_required_version],       [2.7.3])
 m4_define([libglade_required_version],       [2.0.0])
 
@@ -70,7 +70,6 @@ AC_STDC_HEADERS
 AC_LIBTOOL_WIN32_DLL
 AM_PROG_LIBTOOL
 
-AC_CANONICAL_HOST
 case "$host" in
   *-*-mingw*)
     os_win32=yes
@@ -245,6 +244,7 @@ AC_SUBST(REBUILD)
 
 AC_CONFIG_FILES([
 Makefile
+libgnomeui-zip
 po/Makefile.in
 libgnomeui/Makefile
 libgnomeui/libgnomeui-2.0.pc

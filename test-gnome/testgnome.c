@@ -132,6 +132,10 @@ create_newwin(gboolean normal, gchar *appname, gchar *title)
 					   BONOBO_OBJREF(app->ui_container),
 					   NULL);
 
+	/* This is a test program only run on the build system, so
+	 * it's OK to use GNOMEUISRCDIR which is valid of course only
+	 * on the build system.
+	 */
 	bonobo_ui_util_set_ui (app->ui_component, "",
 			       GNOMEUISRCDIR "/testgnome.xml",
 			       appname, NULL);
@@ -392,7 +396,12 @@ create_druid(void)
 	GSList *radio_group;
 	druid_data *data;
 
-	/* load the images */
+	/* Load the images */
+	
+	/* This is a test program only run on the build system, so
+	 * it's OK to use the configuration-time GNOMEUIPIXMAPDIR from
+	 * the Makefile also on Win32.
+	 */
 	fname = g_strconcat (GNOMEUIPIXMAPDIR, "gnome-logo-icon.png", NULL);
 	if (fname)
 		/* FIXME: We must test GError */

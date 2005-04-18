@@ -26,6 +26,7 @@
 
 #include <string.h>
 
+#ifndef G_OS_WIN32
 extern char **environ;
 
 /**
@@ -73,6 +74,10 @@ make_environment_for_screen (GdkScreen *screen)
 
 	return retval;
 }
+
+#else
+#define make_environment_for_screen(screen) NULL
+#endif
 
 /**
  * gnome_url_show_on_screen:

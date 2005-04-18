@@ -5,7 +5,10 @@ SUBDIRS = pixmaps
 #
 # The targets
 #
+if OS_WIN32
+else
 libexec_PROGRAMS    = gnome_segv2
+endif
 lib_LTLIBRARIES = libgnomeui-2.la
 
 gnomehdir = $(includedir)/libgnomeui-2.0
@@ -19,18 +22,26 @@ libgnomeuiincludedir = $(includedir)/libgnomeui-2.0/libgnomeui
 INCLUDES = \
 	-I$(top_builddir)				\
 	-I$(top_srcdir)					\
-        -DGNOMEUILIBDIR=\""$(libdir)"\" 		\
-        -DGNOMEUIDATADIR=\""$(datadir)"\" 		\
-        -DGNOMEUIPIXMAPDIR=\""$(datadir)/pixmaps"\"	\
-        -DGNOMEUIICONDIR=\""$(datadir)/icons"\"	\
-        -DGNOMEUISERVERDIR=\""$(libexecdir)"\" 		\
-	-DGNOMEUILOCALSTATEDIR=\""$(localstatedir)"\" 	\
-	-DSYSCONFDIR=\""$(sysconfdir)"\"		\
+	-DLIBGNOMEUI_PREFIX=\""$(prefix)"\"		\
+        -DLIBGNOMEUI_DATADIR=\""$(datadir)"\" 		\
+        -DLIBGNOMEUI_SERVERDIR=\""$(libexecdir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	$(WARN_CFLAGS)					\
 	$(LIBGNOMEUI_CFLAGS)
 
 EXTRA_HEADERS = 
+
+if OS_WIN32
+platform_dep_sources = \
+	gnome-ui-win32.c
+else
+platform_dep_sources = \
+	gnome-authentication-manager.c  \
+	gnome-authentication-manager.h  \
+	gnome-authentication-manager-private.h  \
+	gnome-client.c
+endif
+
 
 libgnomeui_2_la_SOURCES = \
 	libgnomeui-access.c		\
@@ -88,10 +99,7 @@ libgnomeui_2_la_SOURCES = \
 	libgnomeuiP.h			\
 	gnome-password-dialog.c         \
 	gnome-password-dialog.h         \
-	gnome-authentication-manager.c  \
-	gnome-authentication-manager.h  \
-	gnome-authentication-manager-private.h  \
-	gnome-client.c
+	$(platform_dep_sources)
 
 ## this lists all the non-generated headers
 gnome_headers = \

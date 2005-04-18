@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# Build zipfiles for libgnomeui on Win32. Separate runtime and
+# developer ones. Run after make install.
+
+ZIP=/tmp/libgnomeui-@VERSION@.zip
+DEVZIP=/tmp/libgnomeui-dev-@VERSION@.zip
+
+current_minus_age=`expr @LIBGNOMEUI_CURRENT@ - @LIBGNOMEUI_AGE@`
+
+cd @prefix@
+rm $ZIP
+
+
+zip $ZIP -@ <<EOF
+bin/libgnomeui-2-$current_minus_age.dll
+lib/gtk-2.0/2.4.0/filesystems/libgnome-vfs.dll
+lib/libglade/2.0/libgnome.dll
+share/pixmaps/gnome-about-logo.png
+share/pixmaps/gnome-default-dlg.png
+share/pixmaps/gnome-error.png
+share/pixmaps/gnome-info.png
+share/pixmaps/gnome-question.png
+share/pixmaps/gnome-warning.png
+EOF
+
+zip $ZIP lib/locale/*/LC_MESSAGES/libgnomeui-2.0.mo
+
+rm $DEVZIP
+zip -r $DEVZIP -@ <<EOF
+lib/libgnomeui-2.dll.a
+lib/pkgconfig/libgnomeui-2.0.pc
+include/libgnomeui-2.0
+EOF

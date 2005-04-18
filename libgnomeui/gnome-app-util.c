@@ -38,7 +38,6 @@
 #include "gnome-uidefs.h"
 #include "gnome-appbar.h"
 
-#include <gdk/gdkx.h>
 #include <gtk/gtk.h>
 
 static gboolean

@@ -68,6 +68,8 @@
 #include <unistd.h>
 #include <string.h>
 
+#include <glib/gstdio.h>
+
 struct _GnomeIconEntryPrivate {
 	GtkWidget *fentry;
 	char *picked_file;
@@ -388,7 +390,7 @@ entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
 	if (!filename)
 		return;
 
-	stat (filename, &buf);
+	g_stat (filename, &buf);
 	if (S_ISDIR (buf.st_mode)) {
 		gnome_icon_selection_clear (GNOME_ICON_SELECTION (priv->icon_sel), TRUE);
 		gnome_icon_selection_add_directory (GNOME_ICON_SELECTION (priv->icon_sel), filename);

@@ -157,10 +157,12 @@ gnome_window_icon_init (void)
 	/* remove it from our environment */
 	gnome_unsetenv (GNOME_DESKTOP_ICON);
 
+#ifndef G_OS_WIN32
 	client = gnome_master_client ();
 	if (!GNOME_CLIENT_CONNECTED (client))
 		return;
 	
 	/* save it for restarts */
 	gnome_client_set_environment (client, GNOME_DESKTOP_ICON, filename);
+#endif
 }

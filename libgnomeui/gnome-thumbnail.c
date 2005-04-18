@@ -35,7 +35,6 @@
 #include <string.h>
 #include <glib.h>
 #include <stdio.h>
-#include <pthread.h>
 #include <libgnome/gnome-macros.h>
 #include <libgnome/gnome-init.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
@@ -44,6 +43,8 @@
 #include "gnome-gconf-ui.h"
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
+
+#include <glib/gstdio.h>
 
 #ifdef HAVE_LIBJPEG
 GdkPixbuf * _gnome_thumbnail_load_scaled_jpeg (const char *uri,
@@ -73,7 +74,7 @@ struct _GnomeThumbnailFactoryPrivate {
   time_t read_failed_mtime;
   long last_failed_time;
 
-  pthread_mutex_t lock;
+  GMutex *lock;
 
   GHashTable *scripts_hash;
   guint thumbnailers_notify;
@@ -92,6 +93,62 @@ GNOME_CLASS_BOILERPLATE (GnomeThumbnailFactory,
 static void gnome_thumbnail_factory_instance_init (GnomeThumbnailFactory      *factory);
 static void gnome_thumbnail_factory_class_init    (GnomeThumbnailFactoryClass *class);
 
+#if !GLIB_CHECK_VERSION (2,7,0)
+/* g_chmod lifted from GLib */
+#ifndef G_OS_WIN32
+#define g_chmod(filename, mode) chmod (filename, mode)
+#else
+static int
+g_chmod (const gchar *filename,
+	 int          mode)
+{
+#ifdef G_OS_WIN32
+  if (G_WIN32_HAVE_WIDECHAR_API ())
+    {
+      wchar_t *wfilename = g_utf8_to_utf16 (filename, -1, NULL, NULL, NULL);
+      int retval;
+      int save_errno;
+      
+      if (wfilename == NULL)
+	{
+	  errno = EINVAL;
+	  return -1;
+	}
+
+      retval = _wchmod (wfilename, mode);
+      save_errno = errno;
+
+      g_free (wfilename);
+
+      errno = save_errno;
+      return retval;
+    }
+  else
+    {    
+      gchar *cp_filename = g_locale_from_utf8 (filename, -1, NULL, NULL, NULL);
+      int retval;
+      int save_errno;
+
+      if (cp_filename == NULL)
+	{
+	  errno = EINVAL;
+	  return -1;
+	}
+
+      retval = chmod (cp_filename, mode);
+      save_errno = errno;
+
+      g_free (cp_filename);
+
+      errno = save_errno;
+      return retval;
+    }
+#else
+  return chmod (filename, mode);
+#endif
+}
+#endif	/* Win32 */
+#endif	/* GLib < 2.7.0 */
 
 static void
 thumbnail_info_free (gpointer data)
@@ -262,14 +319,14 @@ gnome_thumbnail_factory_reread_scripts (GnomeThumbnailFactory *factory)
 
   scripts_hash = read_scripts ();
 
-  pthread_mutex_lock (&priv->lock);
+  g_mutex_lock (priv->lock);
 
   if (priv->scripts_hash != NULL)
     g_hash_table_destroy (priv->scripts_hash);
   
   priv->scripts_hash = scripts_hash;
   
-  pthread_mutex_unlock (&priv->lock);
+  g_mutex_unlock (priv->lock);
 }
 
 static gboolean
@@ -280,9 +337,9 @@ reread_idle_callback (gpointer user_data)
 
   gnome_thumbnail_factory_reread_scripts (factory);
 
-  pthread_mutex_lock (&priv->lock);
+  g_mutex_lock (priv->lock);
   priv->reread_scheduled = 0;
-  pthread_mutex_unlock (&priv->lock);
+  g_mutex_unlock (priv->lock);
    
   return FALSE;
 }
@@ -296,7 +353,7 @@ schedule_reread (GConfClient* client,
   GnomeThumbnailFactory *factory = user_data;
   GnomeThumbnailFactoryPrivate *priv = factory->priv;
 
-  pthread_mutex_lock (&priv->lock);
+  g_mutex_lock (priv->lock);
 
   if (priv->reread_scheduled == 0)
     {
@@ -304,7 +361,7 @@ schedule_reread (GConfClient* client,
 					   factory);
     }
   
-  pthread_mutex_unlock (&priv->lock);
+  g_mutex_unlock (priv->lock);
 }
 
 
@@ -330,7 +387,7 @@ gnome_thumbnail_factory_instance_init (GnomeThumbnailFactory *factory)
   
   priv->scripts_hash = NULL;
   
-  pthread_mutex_init (&factory->priv->lock, NULL);
+  factory->priv->lock = g_mutex_new ();
 
   gnome_thumbnail_factory_reread_scripts (factory);
 
@@ -450,28 +507,28 @@ static void
 gnome_thumbnail_factory_ensure_uptodate (GnomeThumbnailFactory *factory)
 {
   char *path;
-  struct timeval tv;
+  time_t now;
   struct stat statbuf;
   GnomeThumbnailFactoryPrivate *priv = factory->priv;
 
-  gettimeofday (&tv, NULL);
+  time (&now);
   
   if (priv->last_existing_time != 0)
     {
       /* Shortcut to not stat on every lookup */
-      if (tv.tv_sec >= priv->last_existing_time &&
-	  tv.tv_sec < priv->last_existing_time + SECONDS_BETWEEN_STATS)
+      if (now >= priv->last_existing_time &&
+	  now < priv->last_existing_time + SECONDS_BETWEEN_STATS)
 	return;
     }
   
-  priv->last_existing_time = tv.tv_sec;
+  priv->last_existing_time = now;
       
   path = g_build_filename (g_get_home_dir (),
 			   ".thumbnails",
 			   (priv->size == GNOME_THUMBNAIL_SIZE_NORMAL)?"normal":"large",
 			   NULL);
   
-  if (stat(path, &statbuf) != 0)
+  if (g_stat(path, &statbuf) != 0)
     {
       g_free (path);
       return;
@@ -526,15 +583,15 @@ static void
 gnome_thumbnail_factory_ensure_failed_uptodate (GnomeThumbnailFactory *factory)
 {
   char *path;
-  struct timeval tv;
+  time_t now;
   struct stat statbuf;
   GnomeThumbnailFactoryPrivate *priv = factory->priv;
 
-  gettimeofday (&tv, NULL);
+  time (&now);
   if (priv->last_failed_time != 0)
     {
-      if (tv.tv_sec >= priv->last_failed_time &&
-	  tv.tv_sec < priv->last_failed_time + SECONDS_BETWEEN_STATS)
+      if (now >= priv->last_failed_time &&
+	  now < priv->last_failed_time + SECONDS_BETWEEN_STATS)
 	return;
     }
 
@@ -543,7 +600,7 @@ gnome_thumbnail_factory_ensure_failed_uptodate (GnomeThumbnailFactory *factory)
 			   factory->priv->application,
 			   NULL);
   
-  if (stat(path, &statbuf) != 0)
+  if (g_stat(path, &statbuf) != 0)
     {
       g_free (path);
       return;
@@ -556,7 +613,7 @@ gnome_thumbnail_factory_ensure_failed_uptodate (GnomeThumbnailFactory *factory)
     }
 
   priv->read_failed_mtime = statbuf.st_mtime;
-  priv->last_failed_time = tv.tv_sec;
+  priv->last_failed_time = now;
 
   read_md5_dir (path, priv->failed_thumbs);
 
@@ -586,7 +643,7 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
   gpointer value;
   struct ThumbnailInfo *info;
 
-  pthread_mutex_lock (&priv->lock);
+  g_mutex_lock (priv->lock);
 
   gnome_thumbnail_factory_ensure_uptodate (factory);
 
@@ -624,14 +681,14 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
 	  info->mtime == mtime &&
 	  strcmp (info->uri, uri) == 0)
 	{
-	  pthread_mutex_unlock (&priv->lock);
+	  g_mutex_unlock (priv->lock);
 	  return path;
 	}
       
       g_free (path);
     }
 
-  pthread_mutex_unlock (&priv->lock);
+  g_mutex_unlock (priv->lock);
   
   return NULL;
 }
@@ -663,7 +720,7 @@ gnome_thumbnail_factory_has_valid_failed_thumbnail (GnomeThumbnailFactory *facto
 
   res = FALSE;
 
-  pthread_mutex_lock (&priv->lock);
+  g_mutex_lock (priv->lock);
 
   gnome_thumbnail_factory_ensure_failed_uptodate (factory);
   
@@ -693,7 +750,7 @@ gnome_thumbnail_factory_has_valid_failed_thumbnail (GnomeThumbnailFactory *facto
 	  }
     }
 
-  pthread_mutex_unlock (&priv->lock);
+  g_mutex_unlock (priv->lock);
   
   return res;
 }
@@ -902,7 +959,7 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
 	      g_free (expanded_script);
 	    }
 	  
-	  unlink(tmpname);
+	  g_unlink(tmpname);
 	}
       if (tmpname)
         g_free (tmpname);
@@ -954,7 +1011,7 @@ make_thumbnail_dirs (GnomeThumbnailFactory *factory)
 				    NULL);
   if (!g_file_test (thumbnail_dir, G_FILE_TEST_IS_DIR))
     {
-      mkdir (thumbnail_dir, 0700);
+      g_mkdir (thumbnail_dir, 0700);
       res = TRUE;
     }
 
@@ -963,7 +1020,7 @@ make_thumbnail_dirs (GnomeThumbnailFactory *factory)
 				NULL);
   if (!g_file_test (image_dir, G_FILE_TEST_IS_DIR))
     {
-      mkdir (image_dir, 0700);
+      g_mkdir (image_dir, 0700);
       res = TRUE;
     }
 
@@ -988,7 +1045,7 @@ make_thumbnail_fail_dirs (GnomeThumbnailFactory *factory)
 				    NULL);
   if (!g_file_test (thumbnail_dir, G_FILE_TEST_IS_DIR))
     {
-      mkdir (thumbnail_dir, 0700);
+      g_mkdir (thumbnail_dir, 0700);
       res = TRUE;
     }
 
@@ -997,7 +1054,7 @@ make_thumbnail_fail_dirs (GnomeThumbnailFactory *factory)
 			       NULL);
   if (!g_file_test (fail_dir, G_FILE_TEST_IS_DIR))
     {
-      mkdir (fail_dir, 0700);
+      g_mkdir (fail_dir, 0700);
       res = TRUE;
     }
 
@@ -1006,7 +1063,7 @@ make_thumbnail_fail_dirs (GnomeThumbnailFactory *factory)
 			      NULL);
   if (!g_file_test (app_dir, G_FILE_TEST_IS_DIR))
     {
-      mkdir (app_dir, 0700);
+      g_mkdir (app_dir, 0700);
       res = TRUE;
     }
 
@@ -1046,11 +1103,11 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
   struct stat statbuf;
   struct ThumbnailInfo *info;
   
-  pthread_mutex_lock (&priv->lock);
+  g_mutex_lock (priv->lock);
   
   gnome_thumbnail_factory_ensure_uptodate (factory);
 
-  pthread_mutex_unlock (&priv->lock);
+  g_mutex_unlock (priv->lock);
   
   digest = g_malloc (16);
   thumb_md5 (uri, digest);
@@ -1071,13 +1128,13 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
 
   tmp_path = g_strconcat (path, ".XXXXXX", NULL);
 
-  tmp_fd = mkstemp (tmp_path);
+  tmp_fd = g_mkstemp (tmp_path);
   if (tmp_fd == -1 &&
       make_thumbnail_dirs (factory))
     {
       g_free (tmp_path);
       tmp_path = g_strconcat (path, ".XXXXXX", NULL);
-      tmp_fd = mkstemp (tmp_path);
+      tmp_fd = g_mkstemp (tmp_path);
     }
 
   if (tmp_fd == -1)
@@ -1101,14 +1158,14 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
 			       NULL);
   if (saved_ok)
     {
-      chmod (tmp_path, 0600);
-      rename(tmp_path, path);
+      g_chmod (tmp_path, 0600);
+      g_rename(tmp_path, path);
 
       info = g_new (struct ThumbnailInfo, 1);
       info->mtime = original_mtime;
       info->uri = g_strdup (uri);
       
-      pthread_mutex_lock (&priv->lock);
+      g_mutex_lock (priv->lock);
       
       g_hash_table_insert (factory->priv->existing_thumbs, digest, info);
       /* Make sure we don't re-read the directory. We should be uptodate
@@ -1117,10 +1174,10 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
        * thumbnails, but that shouldn't matter. (we would just redo them or
        * catch them later).
        */
-      if (stat(dir, &statbuf) == 0)
+      if (g_stat(dir, &statbuf) == 0)
 	factory->priv->read_existing_mtime = statbuf.st_mtime;
       
-      pthread_mutex_unlock (&priv->lock);
+      g_mutex_unlock (priv->lock);
     }
   else
     {
@@ -1159,11 +1216,11 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
   struct stat statbuf;
   GdkPixbuf *pixbuf;
   
-  pthread_mutex_lock (&priv->lock);
+  g_mutex_lock (priv->lock);
   
   gnome_thumbnail_factory_ensure_failed_uptodate (factory);
 
-  pthread_mutex_unlock (&priv->lock);
+  g_mutex_unlock (priv->lock);
 
   digest = g_malloc (16);
   thumb_md5 (uri, digest);
@@ -1184,13 +1241,13 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
 
   tmp_path = g_strconcat (path, ".XXXXXX", NULL);
 
-  tmp_fd = mkstemp (tmp_path);
+  tmp_fd = g_mkstemp (tmp_path);
   if (tmp_fd == -1 &&
       make_thumbnail_fail_dirs (factory))
     {
       g_free (tmp_path);
       tmp_path = g_strconcat (path, ".XXXXXX", NULL);
-      tmp_fd = mkstemp (tmp_path);
+      tmp_fd = g_mkstemp (tmp_path);
     }
 
   if (tmp_fd == -1)
@@ -1215,10 +1272,10 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
   g_object_unref (pixbuf);
   if (saved_ok)
     {
-      chmod (tmp_path, 0600);
-      rename(tmp_path, path);
+      g_chmod (tmp_path, 0600);
+      g_rename(tmp_path, path);
 
-      pthread_mutex_lock (&priv->lock);
+      g_mutex_lock (priv->lock);
       
       g_hash_table_insert (factory->priv->failed_thumbs, digest, NULL);
       /* Make sure we don't re-read the directory. We should be uptodate
@@ -1227,10 +1284,10 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
        * thumbnails, but that shouldn't matter. (we would just redo them or
        * catch them later).
        */
-      if (stat(dir, &statbuf) == 0)
+      if (g_stat(dir, &statbuf) == 0)
 	factory->priv->read_failed_mtime = statbuf.st_mtime;
       
-      pthread_mutex_unlock (&priv->lock);
+      g_mutex_unlock (priv->lock);
     }
   else
     g_free (digest);
