@@ -382,6 +382,10 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 #endif
 
 
+  bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET 
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+#endif
   name = g_build_filename (g_get_home_dir (), "Desktop", NULL);
   system_vfs->desktop_uri = (char *)gtk_file_system_filename_to_path (GTK_FILE_SYSTEM (system_vfs),
 								      name);

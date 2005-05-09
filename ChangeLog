@@ -1,3 +1,10 @@
+2005-05-09  Frederic Crozat  <fcrozat@mandriva.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_init):
+	ensure locales are UTF-8, needed for programs which
+	don't use libgnomeui directly (like firefox) (bug #168988).
+
 2005-04-18  Tor Lillqvist  <tml@novell.com>
 
 	* libgnomeui-zip.in: New file, used to build zipfile distribution
