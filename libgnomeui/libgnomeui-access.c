@@ -28,7 +28,7 @@
 static gint is_gail_loaded (GtkWidget *widget);
 
 /* variable that indicates whether GAIL is loaded or not */
-gint gail_loaded = -1;
+static gint gail_loaded = -1;
 
 /* Accessibility support routines for libgnomeui */
 static gint

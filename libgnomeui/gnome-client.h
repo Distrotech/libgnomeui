@@ -351,14 +351,14 @@ void         gnome_client_save_any_dialog       (GnomeClient *client,
 					         GtkDialog   *dialog);
 
 /* The following function may be called during a "save_youself" handler
-   when an error has occured during the save. The session manager decides 
+   when an error has occurred during the save. The session manager decides 
    when the dialog is shown and it will not be shown when the interact_style
    == GNOME_INTERACT_NONE.  A "Cancel Logout" button will be added 
    during a shutdown. */
 void         gnome_client_save_error_dialog      (GnomeClient *client,
 					          GtkDialog   *dialog);
 
-/* Request the session managaer to emit the "save_yourself" signal for 
+/* Request the session manager to emit the "save_yourself" signal for 
    a second time after all the clients in the session have ceased 
    interacting with the user and entered an idle state. This might be 
    useful if your app manages other apps and requires that they are in 
@@ -426,7 +426,7 @@ void         gnome_client_set_id                 (GnomeClient *client,
 
 /* Get the client id of a session management client object.  If this
    object has never been connected to a session manager and a client
-   id hasn't been set, this function return 'NULL'.  */
+   id hasn't been set, this function returns 'NULL'.  */
 const gchar*       gnome_client_get_id                 (GnomeClient *client);
 
 /* Get the client id from the last session.  If this client was not

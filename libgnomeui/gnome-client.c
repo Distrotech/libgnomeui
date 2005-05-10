@@ -2518,7 +2518,7 @@ gnome_client_save_any_dialog (GnomeClient *client, GtkDialog *dialog)
  * @dialog: Pointer to GNOME dialog widget (a #GtkDialog widget).
  *
  * Description:
- * May be called during a "save_youself" handler when an error has occured
+ * May be called during a "save_youself" handler when an error has occurred
  * during the save. The session manager decides when the dialog is shown, but
  * it will not be shown it unless the session manager is sending an interaction
  * style of #GNOME_INTERACT_ANY. A "Cancel Logout" button will be added

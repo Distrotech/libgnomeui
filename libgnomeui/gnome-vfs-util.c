@@ -87,21 +87,6 @@ gnome_gdk_pixbuf_new_from_uri (const char *uri)
 
     g_return_val_if_fail (uri != NULL, NULL);
 
-    /* FIXME bugzilla.eazel.com 1964: unfortunately, there are
-     * bugs in the gdk_pixbuf_loader stuff that make it not work
-     * for various image types like .xpms. Since
-     * gdk_pixbuf_new_from_file uses different code that does not
-     * have the same bugs and is better-tested, we call that when
-     * the file is local. This should be fixed (in gdk_pixbuf)
-     * eventually, then this hack can be removed.
-     */
-    local_path = gnome_vfs_get_local_path_from_uri (uri);
-    if (local_path != NULL) {
-	pixbuf = gdk_pixbuf_new_from_file (local_path, NULL);
-	g_free (local_path);
-	return pixbuf;
-    }
-	
     result = gnome_vfs_open (&handle,
 			     uri,
 			     GNOME_VFS_OPEN_READ);

@@ -439,7 +439,7 @@ static char *
 thumb_digest_to_ascii (unsigned char digest[16])
 {
   static char hex_digits[] = "0123456789abcdef";
-  unsigned char *res;
+  char *res;
   int i;
   
   res = g_malloc (33);
@@ -495,7 +495,7 @@ read_md5_dir (const char *path, GHashTable *hash_table)
 	      strcmp (dirent->d_name + 32, ".png") == 0)
 	    {
 	      digest = g_malloc (16);
-	      thumb_digest_from_ascii (dirent->d_name, digest);
+	      thumb_digest_from_ascii ((unsigned char *)dirent->d_name, (unsigned char *)digest);
 	      g_hash_table_insert (hash_table, digest, NULL);
 	    }
 	}

@@ -229,5 +229,7 @@ int main(int argc, char *argv[])
         }
     }
 
+  g_free (appname);
+
   return 0;
 }

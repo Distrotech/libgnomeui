@@ -1,3 +1,17 @@
+2005-05-11  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-client.c: Fix typos
+	* libgnomeui/gnome-client.h: Same
+	* libgnomeui/gnome-href.c: (gnome_href_clicked): Same
+	* libgnomeui/gnome-theme-parser.c: Make an array static const
+	* libgnomeui/gnome-thumbnail.c: (thumb_digest_to_ascii),
+	(read_md5_dir): Fix GCC4 warnings.
+	* libgnomeui/gnome-vfs-util.c: (gnome_gdk_pixbuf_new_from_uri):
+	Remove a hack and a corresponding FIXME that was added because
+	gdk_pixbuf_loader had problems with some file types back in the day.
+	* libgnomeui/gnome_segv.c: (main): Plug a leak.
+	* libgnomeui/libgnomeui-access.c: Make a var static.
+
 2005-05-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-authentication-manager.c:
