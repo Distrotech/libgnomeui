@@ -1,3 +1,10 @@
+2005-05-10  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-authentication-manager.c:
+	(present_authentication_dialog_nonblocking),
+	(present_full_authentication_dialog_nonblocking):
+	Merge fix for bug 134985 from HEAD.
+
 2005-05-09  Federico Mena Quintero  <federico@ximian.com>
 
 	Fix the GtkFileSystemGnomeVFS part of #301068:
