@@ -1,3 +1,24 @@
+2005-05-09  Federico Mena Quintero  <federico@ximian.com>
+
+	Merged from gnome-2-10:
+
+	Fix the GtkFileSystemGnomeVFS part of #301068:
+
+	* file-chooser/gtkfilesystemgnomevfs.c (struct
+	_GtkFileSystemGnomeVFS): Added these fields: afs_statbuf,
+	net_statbuf, have_afs, have_net.  They are used when we have AFS.
+	(struct _GtkFileFolderGnomeVFS): Added field is_afs_or_net.
+	(gtk_file_system_gnome_vfs_init): Check for AFS folders.
+	(gtk_file_system_gnome_vfs_get_folder): Fill the is_afs_or_net
+	field in the new folder.  Only install a folder monitor if this is
+	not an AFS folder.
+	(gtk_file_folder_gnome_vfs_list_children): Don't use load_dir() to
+	load AFS folders; use load_afs_dir().  Also, don't reverse the
+	list of children - the hash table of children is not ordered, so
+	reversing the list is pointless.
+	(load_afs_dir): New function; reads a folder without using
+	gnome-vfs as it doesn't support readdir() without stat().
+
 2005-05-09  Frederic Crozat  <fcrozat@mandriva.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c:

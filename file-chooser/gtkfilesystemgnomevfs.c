@@ -104,6 +104,14 @@ struct _GtkFileSystemGnomeVFS
 
   char *desktop_uri;
   char *home_uri;
+
+  /* For /afs and /net */
+  struct stat afs_statbuf;
+  struct stat net_statbuf;
+
+  guint have_afs : 1;
+  guint have_net : 1;
+
   guint locale_encoded_filenames : 1;
 };
 
@@ -135,6 +143,8 @@ struct _GtkFileFolderGnomeVFS
   GtkFileSystemGnomeVFS *system;
 
   GHashTable *children; /* NULL if destroyed */
+
+  guint is_afs_or_net : 1;
 };
 
 typedef struct _FolderChild FolderChild;
@@ -287,6 +297,10 @@ static void client_notify_cb (GConfClient *client,
 			      gpointer     data);
 #endif
 
+static gchar *make_child_uri (const gchar *base_uri,
+			      const gchar *child_name,
+			      GError     **error);
+
 static FolderChild *folder_child_new (const char       *uri,
 				      GnomeVFSFileInfo *info,
 				      gboolean          reloaded);
@@ -430,6 +444,17 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
     g_signal_connect_object (system_vfs->volume_monitor, "drive-disconnected",
 			     G_CALLBACK (drive_connect_disconnect_cb), system_vfs, 0);
 
+  /* Check for AFS */
+
+  if (stat ("/afs", &system_vfs->afs_statbuf) == 0)
+    system_vfs->have_afs = TRUE;
+  else
+    system_vfs->have_afs = FALSE;
+
+  if (stat ("/net", &system_vfs->net_statbuf) == 0)
+    system_vfs->have_net = TRUE;
+  else
+    system_vfs->have_net = FALSE;
 }
 
 static void
@@ -518,7 +543,7 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
   volume = gnome_vfs_volume_monitor_get_volume_for_path (system_vfs->volume_monitor, "/");
   if (volume)
     result = g_slist_prepend (result, volume);
-  
+
   return result;
 }
 
@@ -578,6 +603,7 @@ static void
 load_dir (GtkFileFolderGnomeVFS *folder_vfs)
 {
   int num_items;
+  GnomeVFSFileInfoOptions vfs_options;
 
   if (folder_vfs->async_handle)
     {
@@ -592,6 +618,11 @@ load_dir (GtkFileFolderGnomeVFS *folder_vfs)
   else
     num_items = ITEMS_PER_REMOTE_NOTIFICATION;
 
+  if (folder_vfs->is_afs_or_net)
+    vfs_options = GNOME_VFS_FILE_INFO_DEFAULT;
+  else
+    vfs_options = get_options (folder_vfs->types);
+
   gnome_vfs_async_load_directory (&folder_vfs->async_handle,
 				  folder_vfs->uri,
 				  get_options (folder_vfs->types),
@@ -599,6 +630,89 @@ load_dir (GtkFileFolderGnomeVFS *folder_vfs)
 				  GNOME_VFS_PRIORITY_DEFAULT,
 				  directory_load_callback, folder_vfs);
   gnome_authentication_manager_pop_async ();
+}
+
+static GnomeVFSFileInfo *
+vfs_info_new_from_afs_or_net_folder (const char *basename)
+{
+  GnomeVFSFileInfo *vfs_info;
+
+  vfs_info = gnome_vfs_file_info_new ();
+
+  vfs_info->name = g_strdup (basename);
+  vfs_info->valid_fields = GNOME_VFS_FILE_INFO_FIELDS_TYPE | GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE;
+  vfs_info->type = GNOME_VFS_FILE_TYPE_DIRECTORY;
+  vfs_info->mime_type = g_strdup ("x-directory/normal");
+
+  return vfs_info;
+}
+
+static void
+load_afs_dir (GtkFileFolderGnomeVFS *folder_vfs)
+{
+  GDir *dir;
+  char *pathname;
+  char *hostname;
+  const char *basename;
+  GSList *added_uris;
+  GSList *changed_uris;
+
+  g_assert (folder_vfs->is_afs_or_net);
+
+  pathname = g_filename_from_uri (folder_vfs->uri, &hostname, NULL);
+  g_assert (pathname != NULL); /* Must be already valid */
+  g_assert (hostname == NULL); /* Must be a local path */
+
+  dir = g_dir_open (pathname, 0, NULL);
+  if (!dir)
+    return;
+
+  added_uris = changed_uris = NULL;
+
+  while ((basename = g_dir_read_name (dir)) != NULL)
+    {
+      char *uri;
+      FolderChild *child;
+      GnomeVFSFileInfo *vfs_info;
+
+      uri = make_child_uri (folder_vfs->uri, basename, NULL);
+      if (!uri)
+	continue;
+
+      vfs_info = vfs_info_new_from_afs_or_net_folder (basename);
+
+      child = g_hash_table_lookup (folder_vfs->children, uri);
+      if (child)
+	{
+	  gnome_vfs_file_info_unref (child->info);
+
+	  child->info = vfs_info;
+	  gnome_vfs_file_info_ref (vfs_info);
+
+	  changed_uris = g_slist_prepend (changed_uris, child->uri);
+	}
+      else
+	{
+	  child = folder_child_new (uri, vfs_info, FALSE);
+	  g_hash_table_insert (folder_vfs->children, child->uri, child);
+
+	  added_uris = g_slist_prepend (added_uris, child->uri);
+	}
+
+      gnome_vfs_file_info_unref (vfs_info);
+      g_free (uri);
+    }
+
+  if (added_uris)
+    {
+      g_signal_emit_by_name (folder_vfs, "files-added", added_uris);
+      g_slist_free (added_uris);
+    }
+  if (changed_uris)
+    {
+      g_signal_emit_by_name (folder_vfs, "files-changed", changed_uris);
+      g_slist_free (changed_uris);
+    }
 }
 
 static char *
@@ -700,7 +814,6 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
     }
 
   vfs_info_type = vfs_info->type;
-  gnome_vfs_file_info_unref (vfs_info);
 
   if (vfs_info_type != GNOME_VFS_FILE_TYPE_DIRECTORY)
     {
@@ -710,24 +823,45 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 		   _("%s is not a folder"),
 		   uri);
       g_free (uri);
+      gnome_vfs_file_info_unref (vfs_info);
       return NULL;
     }
 
   folder_vfs = g_object_new (GTK_TYPE_FILE_FOLDER_GNOME_VFS, NULL);
 
-  gnome_authentication_manager_push_sync ();
+  /* Check for AFS */
+  if (GNOME_VFS_FILE_INFO_LOCAL (vfs_info)
+      && (vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_DEVICE) != 0
+      && (vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_INODE) != 0
+      && ((system_vfs->have_afs
+	   && system_vfs->afs_statbuf.st_dev == vfs_info->device
+	   && system_vfs->afs_statbuf.st_ino == vfs_info->inode)
+	  || (system_vfs->have_net
+	      && system_vfs->net_statbuf.st_dev == vfs_info->device
+	      && system_vfs->net_statbuf.st_ino == vfs_info->inode)))
+    folder_vfs->is_afs_or_net = TRUE;
+  else
+    folder_vfs->is_afs_or_net = FALSE;
+
+  gnome_vfs_file_info_unref (vfs_info);
+
   monitor = NULL;
-  result = gnome_vfs_monitor_add (&monitor,
-				  uri,
-				  GNOME_VFS_MONITOR_DIRECTORY,
-				  monitor_callback, folder_vfs);
-  gnome_authentication_manager_pop_sync ();
-  if (result != GNOME_VFS_OK && result != GNOME_VFS_ERROR_NOT_SUPPORTED)
+
+  if (!folder_vfs->is_afs_or_net)
     {
-      g_free (uri);
-      g_object_unref (folder_vfs);
-      set_vfs_error (result, uri, error);
-      return NULL;
+      gnome_authentication_manager_push_sync ();
+      result = gnome_vfs_monitor_add (&monitor,
+				      uri,
+				      GNOME_VFS_MONITOR_DIRECTORY,
+				      monitor_callback, folder_vfs);
+      gnome_authentication_manager_pop_sync ();
+      if (result != GNOME_VFS_OK && result != GNOME_VFS_ERROR_NOT_SUPPORTED)
+	{
+	  g_free (uri);
+	  g_object_unref (folder_vfs);
+	  set_vfs_error (result, uri, error);
+	  return NULL;
+	}
     }
 
   folder_vfs->system = system_vfs;
@@ -1431,7 +1565,7 @@ get_vfs_info (GtkFileSystem     *file_system,
     }
   
   gtk_file_path_free (parent_path);
-  
+
   return info;
   
 }
@@ -2071,13 +2205,14 @@ gtk_file_folder_gnome_vfs_list_children (GtkFileFolder  *folder,
 {
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
 
-  load_dir (folder_vfs);
+  if (folder_vfs->is_afs_or_net)
+    load_afs_dir (folder_vfs);
+  else
+    load_dir (folder_vfs);
   
   *children = NULL;
 
   g_hash_table_foreach (folder_vfs->children, list_children_foreach, children);
-
-  *children = g_slist_reverse (*children);
 
   return TRUE;
 }
@@ -2430,6 +2565,7 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
 	GnomeVFSFileInfo *vfs_info;
 
 	vfs_info = gnome_vfs_file_info_new ();
+
 	gnome_authentication_manager_push_sync ();
 	result = gnome_vfs_get_file_info (info_uri, vfs_info, get_options (folder_vfs->types));
 	gnome_authentication_manager_pop_sync ();
@@ -2480,7 +2616,7 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
     case GNOME_VFS_MONITOR_EVENT_METADATA_CHANGED:
       break;
     }
-  
+
   gdk_threads_leave ();
 }
 
