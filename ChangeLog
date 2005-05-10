@@ -1,3 +1,9 @@
+2005-05-10  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-file-entry.c: (gnome_file_entry_class_init):
+	Mark some property strings for translation. Remove corresponding
+	FIXME.
+
 2005-05-09  Federico Mena Quintero  <federico@ximian.com>
 
 	Merged from gnome-2-10:

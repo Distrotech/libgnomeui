@@ -312,13 +312,12 @@ gnome_file_entry_class_init (GnomeFileEntryClass *class)
 						 FALSE,
 						 G_PARAM_READWRITE));
 
-	/* FIXME: mark the property strings for translation in 2.7.x */
 	g_object_class_install_property (gobject_class,
 					 PROP_FILECHOOSER_ACTION,
 					 g_param_spec_enum (
 						 "filechooser_action",
-						 "GtkFileChooser Action",
-						 "The type of operation that the file selector is performing",
+						 _("GtkFileChooser Action"),
+						 _("The type of operation that the file selector is performing."),
 						 GTK_TYPE_FILE_CHOOSER_ACTION,
 						 GTK_FILE_CHOOSER_ACTION_OPEN,
 						 G_PARAM_READWRITE));
