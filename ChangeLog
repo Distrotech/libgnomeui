@@ -1,5 +1,14 @@
 2005-05-10  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-authentication-manager.c:
+	(present_authentication_dialog_nonblocking),
+	(present_full_authentication_dialog_nonblocking): Fix crash
+	when escaping the password dialog. Same patch made by both
+	Martin Wehner and Balamurali Viswanathan. Closes bug #134985
+	and a whole slew of dupes.
+
+2005-05-10  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-file-entry.c: (gnome_file_entry_class_init):
 	Mark some property strings for translation. Remove corresponding
 	FIXME.

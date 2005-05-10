@@ -144,14 +144,6 @@ authentication_dialog_button_clicked (GtkDialog *dialog,
 }
 
 static void
-authentication_dialog_closed (GtkDialog *dialog, CallbackInfo *info)
-{
-	DEBUG_MSG (("+%s\n", G_GNUC_FUNCTION));
-
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-}
-
-static void
 authentication_dialog_destroyed (GtkDialog *dialog, CallbackInfo *info)
 {
 	DEBUG_MSG (("+%s\n", G_GNUC_FUNCTION));
@@ -187,9 +179,6 @@ present_authentication_dialog_nonblocking (CallbackInfo *info)
 
 	g_signal_connect (dialog, "response", 
 			  G_CALLBACK (authentication_dialog_button_clicked), info);
-
-	g_signal_connect (dialog, "close", 
-			  G_CALLBACK (authentication_dialog_closed), info);
 
 	g_signal_connect (dialog, "destroy", 
 			  G_CALLBACK (authentication_dialog_destroyed), info);
@@ -436,9 +425,6 @@ present_full_authentication_dialog_nonblocking (FullCallbackInfo *info)
 
 	g_signal_connect (dialog, "response", 
 			  G_CALLBACK (full_authentication_dialog_button_clicked), info);
-
-	g_signal_connect (dialog, "close", 
-			  G_CALLBACK (authentication_dialog_closed), info);
 
 	g_signal_connect (dialog, "destroy", 
 			  G_CALLBACK (full_authentication_dialog_destroyed), info);
