@@ -1,3 +1,8 @@
+2005-05-11  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/ChangeLog-19990928: Typos
+	* libgnomeui/gnome-app-helper.c: Same
+
 2005-03-23  Dennis Cranston <dennis_cranston@yahoo.com>
 
 	* libgnomeui/gnome-app-helper.c:

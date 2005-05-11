@@ -1570,7 +1570,7 @@ gnome_app_create_menus_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
  * function.
  *
  * Identical to gnome_app_create_menus(), except that @user_data is passed to
- * all the callback funtions when signals are emitted.
+ * all the callback functions when signals are emitted.
  **/
 
 void

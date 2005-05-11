@@ -1071,8 +1071,8 @@ Wed Jun 23 14:48:29 1999  Raph Levien  <raph@gimp.org>
 
 	* gnome-dialog.c: Fix for bug #1453:
 The following patch fixes a problem with gnome-dialog.
-If the no buttons are requested the buttonbox doesn´t get initalized
-when using language bindings as the buttonbox is only initalized
+If the no buttons are requested the buttonbox doesn´t get initialized
+when using language bindings as the buttonbox is only initialized
 explicitly in the C part. Moving the code around a bit fixes this.
 	Report & patch from <jan@ifm.uni-hamburg.de>.
 
@@ -9183,7 +9183,7 @@ Sat Mar 21 00:45:10 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gnome-propertybox.c (gnome_property_box_new): Actually pack
 	widgets into frame.
-	(gnome_property_box_init): Initalize `items'.
+	(gnome_property_box_init): Initialize `items'.
 
 	* libgnomeui.h: Include gnome-propertybox.h.
 	* gnome-propertybox.h: New file.
