@@ -2,6 +2,7 @@
 
 	* libgnomeui/gnome-app-helper.c:
 	HIG Fix: use header capitalization for game menu items.
+	Closes bug #171435.
 
 2005-05-11  Kjartan Maraas  <kmaraas@gnome.org>
 
