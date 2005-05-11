@@ -741,7 +741,7 @@ gnome_file_entry_drag_data_received (GtkWidget        *widget,
 
 	entry = gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (widget));
 
-	uris = g_strsplit (selection_data->data, "\r\n", -1);
+	uris = g_strsplit ((char *)selection_data->data, "\r\n", -1);
 	if (uris == NULL) {
 		gtk_drag_finish (context, FALSE, FALSE, time);
 		return;

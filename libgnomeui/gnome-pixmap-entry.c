@@ -457,7 +457,7 @@ drag_data_get  (GtkWidget          *widget,
 	g_free(file);
 	gtk_selection_data_set (selection_data,
 				selection_data->target,
-				8, string, strlen(string)+1);
+				8, (unsigned char *)string, strlen(string)+1);
 	g_free(string);
 }
 

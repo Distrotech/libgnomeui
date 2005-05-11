@@ -80,7 +80,6 @@ gnome_gdk_pixbuf_new_from_uri (const char *uri)
     GnomeVFSResult result;
     GnomeVFSHandle *handle;
     char buffer[LOAD_BUFFER_SIZE];
-    char *local_path;
     GnomeVFSFileSize bytes_read;
     GdkPixbufLoader *loader;
     GdkPixbuf *pixbuf;	
@@ -107,7 +106,7 @@ gnome_gdk_pixbuf_new_from_uri (const char *uri)
 	    break;
 	}
 	if (!gdk_pixbuf_loader_write (loader,
-				      buffer,
+				      (unsigned char *)buffer,
 				      bytes_read,
 				      NULL)) {
 	    result = GNOME_VFS_ERROR_WRONG_FORMAT;

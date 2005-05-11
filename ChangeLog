@@ -1,5 +1,17 @@
 2005-05-11  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-file-entry.c: Fix gcc warnings.
+	(gnome_file_entry_drag_data_received): Same
+	* libgnomeui/gnome-href.c: (drag_data_get): Same
+	* libgnomeui/gnome-icon-entry.c: (drag_data_received),
+	(drag_data_get): Same
+	* libgnomeui/gnome-pixmap-entry.c: (drag_data_get): Same
+	* libgnomeui/gnome-thumbnail.c: (thumb_md5): Same
+	* libgnomeui/gnome-vfs-util.c: (gnome_gdk_pixbuf_new_from_uri):
+	Same and remove a now unused var.
+
+2005-05-11  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-client.c: Fix typos
 	* libgnomeui/gnome-client.h: Same
 	* libgnomeui/gnome-href.c: (gnome_href_clicked): Same

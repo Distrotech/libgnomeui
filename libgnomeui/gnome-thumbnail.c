@@ -1441,7 +1441,7 @@ thumb_md5 (const char *string, unsigned char digest[16])
   struct ThumbMD5Context md5_context;
   
   thumb_md5_init (&md5_context);
-  thumb_md5_update (&md5_context, string, strlen (string));
+  thumb_md5_update (&md5_context, (unsigned char *)string, strlen (string));
   thumb_md5_final (digest, &md5_context);
 }
 

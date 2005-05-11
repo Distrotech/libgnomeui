@@ -192,12 +192,12 @@ drag_data_get(GnomeHRef          *href,
 		char *s = g_strdup_printf("file:%s\r\n", href->_priv->url);
 		gtk_selection_data_set (selection_data,
 					selection_data->target,
-					8, s, strlen(s)+1);
+					8, (unsigned char *)s, strlen(s)+1);
 		g_free(s);
 	} else {
 		gtk_selection_data_set (selection_data,
 					selection_data->target,
-					8, href->_priv->url, strlen(href->_priv->url)+1);
+					8, (unsigned char *)href->_priv->url, strlen(href->_priv->url)+1);
 	}
 }
 

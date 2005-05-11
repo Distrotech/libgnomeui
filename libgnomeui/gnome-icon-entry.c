@@ -820,7 +820,7 @@ drag_data_received (GtkWidget        *widget,
 	GnomeVFSFileInfo *file_info;
 	int i;
 
-	uris = g_strsplit (selection_data->data, "\r\n", -1);
+	uris = g_strsplit ((char *)selection_data->data, "\r\n", -1);
 	if (uris == NULL) {
 		gtk_drag_finish (context, FALSE, FALSE, time);
 		return;
@@ -954,7 +954,7 @@ drag_data_get  (GtkWidget          *widget,
 	g_free(file);
 	gtk_selection_data_set (selection_data,
 				selection_data->target,
-				8, string, strlen(string)+1);
+				8, (unsigned char *)string, strlen(string)+1);
 	g_free(string);
 }
 
