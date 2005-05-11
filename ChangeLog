@@ -1,3 +1,8 @@
+2005-03-23  Dennis Cranston <dennis_cranston@yahoo.com>
+
+	* libgnomeui/gnome-app-helper.c:
+	HIG Fix: use header capitalization for game menu items.
+
 2005-05-11  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in:
