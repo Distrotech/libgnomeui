@@ -1,3 +1,9 @@
+2005-05-11  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in:
+	* libgnomeui/gnome-multiscreen.c:
+	Fix build on Apple Darwin. Bug #166087.
+
 2005-05-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-authentication-manager.c:
