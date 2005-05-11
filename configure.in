@@ -27,6 +27,7 @@ m4_define([pango_required_version],          [1.1.2])
 m4_define([gtk_required_version],            [2.6.0])
 m4_define([gnomevfs_required_version],       [2.7.3])
 m4_define([libglade_required_version],       [2.0.0])
+m4_define([gnome_keyring_required_version],       [0.4])
 
 dnl libtool versioning from libgnome
 
@@ -165,7 +166,7 @@ GNOMEUI_MODULES="dnl
   gconf-2.0 >= gconf_required_version dnl
   pango >= pango_required_version dnl
   gnome-vfs-2.0 >= gnomevfs_required_version dnl
-  $gnome_keyring_requirement"
+  $gnome_keyring_requirement >= gnome_keyring_required_version"
 PKG_CHECK_MODULES(LIBGNOMEUI, [$GNOMEUI_MODULES])
 LIBGNOMEUI_LIBS="$LIBGNOMEUI_LIBS $LIBJPEG"
 
@@ -209,6 +210,17 @@ libgnomeui. You can download the latest version from ftp://ftp.rpm.org/pub/rpm/d
 
 AC_CHECK_HEADERS(dlfcn.h dl.h utmp.h locale.h mcheck.h unistd.h)
 AC_CHECK_FUNCS(bind_textdomain_codeset)
+
+dnl Checks for Apple Darwin
+
+AC_CHECK_FUNC(_NSGetEnviron, have_ns_getenviron=yes)
+if test x$have_ns_getenviron = xyes; then
+  AC_DEFINE(HAVE_NSGETENVIRON, 1, [whether we have _NSGetEnviron])
+fi
+AC_CHECK_HEADER(crt_externs.h, have_crt_externs=yes)
+if test x$have_crt_externs = xyes; then
+  AC_DEFINE(HAVE_CRT_EXTERNS_H, 1, [whether we have crt_externs.h])
+fi
 
 dnl This is installed from GTK+ 2.0's gdk-pixbuf
 AC_PATH_PROG(GDK_PIXBUF_CSOURCE, gdk-pixbuf-csource)

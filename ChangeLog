@@ -1,5 +1,12 @@
 2005-05-11  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* configure.in:
+	* libgnomeui/gnome-multiscreen.c: Fix build on Apple Darwin.
+	Patch from Hans Petter Jansson <hpj at novell com>. Closes
+	bug #166087.
+
+2005-05-11  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-file-entry.c: Fix gcc warnings.
 	(gnome_file_entry_drag_data_received): Same
 	* libgnomeui/gnome-href.c: (drag_data_get): Same
