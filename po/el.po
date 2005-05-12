@@ -467,7 +467,7 @@ msgstr " _Ρυθμίση Εκτύπωσης..."
 #
 #: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "Καθορισμός των ρυθμίσεων σελίδας για τον τρέχον εκτυπωτή"
+msgstr "Καθορισμός των ρυθμίσεων σελίδας για τον τρέχοντα εκτυπωτή"
 
 # #-#-#-#-#  balsa-el.po (balsa 0.9.3.1)  #-#-#-#-#
 #
@@ -1106,7 +1106,7 @@ msgstr "Λήφθησαν μη έγκυρα δεδομένα χρώματος\n"
 
 #: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr "Άνοιγμα διαλόγου για τον καθορισμό του χρώματος"
+msgstr "Άνοιγμα διαλόγου για το καθορισμό του χρώματος"
 
 # #-#-#-#-#  memory.el.po (abiword 1.0)  #-#-#-#-#
 # #-#-#-#-#  gnome-libs-el.po (gnome-libs 1.2.12)  #-#-#-#-#
@@ -1624,7 +1624,7 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "Η εφαρμογή  \"%s\" προσπάθησε να αλλάξει ένα μέρος των ρυθμίσεων σας, στις "
-"οποίες δεν επιτρέπονται αλλαγές από τον διαχειριστή του συστήματος ή από τον "
+"οποίες δεν επιτρέπονται αλλαγές από το διαχειριστή του συστήματος ή από το "
 "διανομέα του λειτουργικού συστήματος. Κάποιες από τις ρυθμίσεις που "
 "επιλέξατε δε θα πραγματοποιηθούν, ή θα επανέλθουν στην προηγούμενή τους "
 "κατάσταση την επόμενη φορά που θα χρησιμοποιήσετε την εφαρμογή."
@@ -1635,7 +1635,7 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Σφάλμα κατά την φόρτωση ή αποθήκευση πληροφοριών ρύθμισης για %s. Μερικές "
+"Σφάλμα κατά τη φόρτωση ή αποθήκευση πληροφοριών ρύθμισης για %s. Μερικές "
 "από τις ρυθμίσεις σας μπορεί να μη λειτουργούν σωστά."
 
 #: libgnomeui/gnome-href.c:123
@@ -1903,7 +1903,7 @@ msgstr "Σύνδεση ως _χρήστης:"
 
 #: libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
-msgstr "Απομνημόνευση κωδικού για αυτή την συνεδρία"
+msgstr "Απομνημόνευση κωδικού για αυτή τη συνεδρία"
 
 #: libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
