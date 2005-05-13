@@ -38,8 +38,7 @@ else
 platform_dep_sources = \
 	gnome-authentication-manager.c  \
 	gnome-authentication-manager.h  \
-	gnome-authentication-manager-private.h  \
-	gnome-client.c
+	gnome-authentication-manager-private.h
 endif
 
 
@@ -54,6 +53,7 @@ libgnomeui_2_la_SOURCES = \
 	gnome-app-util.c		\
 	gnome-appbar.c			\
 	gnome-stock-icons.c		\
+	gnome-client.c			\
 	gnome-color-picker.c		\
 	gnome-dateedit.c		\
 	gnome-dialog.c			\

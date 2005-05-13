@@ -1,3 +1,12 @@
+2005-05-13  Tor Lillqvist  <tml@novell.com>
+
+	* libgnomeui/Makefile.am: Do include gnome-client.c also on
+	Win32. Presumably doesn't do anything awfully useful without any
+	Win32-specific code, but having it in libgnomeui means that apps
+	that call its functions don't need to ifdefify those calls.
+
+	* libgnomeui/gnome-client.c: Remove unnecessary includes.
+
 2005-05-11  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/ChangeLog-19990928: Typos

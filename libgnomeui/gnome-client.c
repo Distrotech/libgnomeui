@@ -27,7 +27,6 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
-#include <pwd.h>
 #include <string.h>
 #include <sys/types.h>
 #include <errno.h>
@@ -42,7 +41,6 @@
 #include "gnome-marshal.h"
 #include <gtk/gtk.h>
 #include <gdk/gdkprivate.h>
-#include <X11/Xatom.h>
 
 #include <libgnomeuiP.h>
 
