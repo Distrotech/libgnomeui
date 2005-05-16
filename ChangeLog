@@ -1,3 +1,9 @@
+2005-05-16  Tor Lillqvist  <tml@novell.com>
+
+	* libgnomeui/gnome-ui-init.c (libgnomeui_module_info_get): As we
+	do include gnome-client also on Win32 now (see below), do include
+	its module info.
+
 2005-05-13  Tor Lillqvist  <tml@novell.com>
 
 	* libgnomeui/Makefile.am: Do include gnome-client.c also on

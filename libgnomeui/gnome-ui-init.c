@@ -138,25 +138,20 @@ libgnomeui_module_info_get (void)
 
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[6];
-                int n = 0;
 
 		bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
 
-		req[n].required_version = "1.101.2";
-		req[n].module_info = LIBBONOBOUI_MODULE;
-                n++;
-#ifndef G_OS_WIN32
-		req[n].required_version = VERSION;
-		req[n].module_info = gnome_client_module_info_get ();
-                n++;
-#endif
-		req[n].required_version = "1.1.1";
-		req[n].module_info = gnome_gconf_ui_module_info_get ();
-                n++;
+		req[0].required_version = "1.101.2";
+		req[0].module_info = LIBBONOBOUI_MODULE;
 
-		req[n].required_version = NULL;
-		req[n].module_info = NULL;
-                n++;
+		req[1].required_version = VERSION;
+		req[1].module_info = gnome_client_module_info_get ();
+
+		req[2].required_version = "1.1.1";
+		req[2].module_info = gnome_gconf_ui_module_info_get ();
+
+		req[3].required_version = NULL;
+		req[3].module_info = NULL;
 
 		module_info.requirements = req;
 	}
