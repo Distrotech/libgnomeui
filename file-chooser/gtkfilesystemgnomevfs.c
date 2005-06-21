@@ -246,6 +246,11 @@ static gboolean gtk_file_system_gnome_vfs_remove_bookmark (GtkFileSystem     *fi
 							   const GtkFilePath *path,
 							   GError           **error);
 static GSList * gtk_file_system_gnome_vfs_list_bookmarks  (GtkFileSystem *file_system);
+static gchar  * gtk_file_system_gnome_vfs_get_bookmark_label (GtkFileSystem     *file_system,
+							      const GtkFilePath *path);
+static void     gtk_file_system_gnome_vfs_set_bookmark_label (GtkFileSystem     *file_system,
+							      const GtkFilePath *path,
+							      const gchar       *label);
 
 static GType gtk_file_folder_gnome_vfs_get_type   (void);
 static void  gtk_file_folder_gnome_vfs_class_init (GtkFileFolderGnomeVFSClass *class);
@@ -385,6 +390,8 @@ gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
   iface->insert_bookmark = gtk_file_system_gnome_vfs_insert_bookmark;
   iface->remove_bookmark = gtk_file_system_gnome_vfs_remove_bookmark;
   iface->list_bookmarks = gtk_file_system_gnome_vfs_list_bookmarks;
+  iface->get_bookmark_label = gtk_file_system_gnome_vfs_get_bookmark_label;
+  iface->set_bookmark_label = gtk_file_system_gnome_vfs_set_bookmark_label;
 }
 
 static void
@@ -1787,10 +1794,19 @@ gtk_file_system_gnome_vfs_insert_bookmark (GtkFileSystem     *file_system,
 
   for (l = bookmarks; l; l = l->next)
     {
-      const char *bookmark;
+      gchar *bookmark, *space;
 
       bookmark = l->data;
-      if (strcmp (bookmark, uri) == 0)
+
+      space = strchr (bookmark, ' ');
+      if (space)
+	*space = '\0';
+      if (strcmp (bookmark, uri) != 0)
+	{
+	  if (space)
+	    *space = ' ';
+	}
+      else
 	{
 	  g_set_error (error,
 		       GTK_FILE_SYSTEM_ERROR,
@@ -1835,10 +1851,19 @@ gtk_file_system_gnome_vfs_remove_bookmark (GtkFileSystem     *file_system,
 
   for (l = bookmarks; l; l = l->next)
     {
-      const char *bookmark;
+      gchar *bookmark, *space;
 
       bookmark = l->data;
-      if (strcmp (bookmark, uri) == 0)
+      space = strchr (bookmark, ' ');
+      if (space)
+	*space = '\0';
+
+      if (strcmp (bookmark, uri) != 0)
+	{
+	  if (space)
+	    *space = ' ';
+	}
+      else
 	{
 	  g_free (l->data);
 	  bookmarks = g_slist_remove_link (bookmarks, l);
@@ -1882,16 +1907,105 @@ gtk_file_system_gnome_vfs_list_bookmarks (GtkFileSystem *file_system)
 
   for (l = bookmarks; l; l = l->next)
     {
-      const char *name;
+      gchar *bookmark, *space;
 
-      name = l->data;
-      result = g_slist_prepend (result, gtk_file_system_uri_to_path (file_system, name));
+      bookmark = l->data;
+      space = strchr (bookmark, ' ');
+      if (space)
+	*space = '\0';
+      result = g_slist_prepend (result, gtk_file_system_uri_to_path (file_system, bookmark));
     }
 
   bookmark_list_free (bookmarks);
 
   result = g_slist_reverse (result);
   return result;
+}
+
+static gchar *
+gtk_file_system_gnome_vfs_get_bookmark_label (GtkFileSystem     *file_system,
+					      const GtkFilePath *path)
+{
+  GSList *bookmarks;
+  gchar *label;
+  GSList *l;
+  gchar *bookmark, *space, *uri;
+  
+  if (!bookmark_list_read (&bookmarks, NULL))
+    return NULL;
+
+  uri = gtk_file_system_path_to_uri (file_system, path);
+
+  label = NULL;
+  for (l = bookmarks; l && !label; l = l->next) 
+    {
+      bookmark = l->data;
+      space = strchr (bookmark, ' ');
+      if (!space)
+	continue;
+
+      *space = '\0';
+
+      if (strcmp (uri, bookmark) == 0)
+	label = g_strdup (space + 1);
+    }
+
+  g_free (uri);
+  bookmark_list_free (bookmarks);
+
+  return label;
+}
+
+static void
+gtk_file_system_gnome_vfs_set_bookmark_label (GtkFileSystem     *file_system,
+					      const GtkFilePath *path,
+					      const gchar       *label)
+{
+  GSList *bookmarks;
+  GSList *l;
+  gchar *bookmark, *space, *uri;
+  gboolean found;
+
+  if (!bookmark_list_read (&bookmarks, NULL))
+    return;
+
+  uri = gtk_file_system_path_to_uri (file_system, path);
+
+  found = FALSE;
+  for (l = bookmarks; l && !found; l = l->next) 
+    {
+      bookmark = l->data;
+      space = strchr (bookmark, ' ');
+      if (space)
+	*space = '\0';
+
+      if (strcmp (bookmark, uri) != 0)
+	{
+	  if (space)
+	    *space = ' ';
+	}
+      else
+	{
+	  g_free (bookmark);
+	  
+	  if (label && *label)
+	    l->data = g_strdup_printf ("%s %s", uri, label);
+	  else
+	    l->data = g_strdup (uri);
+
+	  found = TRUE;
+	  break;
+	}
+    }
+
+  if (found)
+    {
+      if (bookmark_list_write (bookmarks, NULL))
+	g_signal_emit_by_name (file_system, "bookmarks-changed", 0);
+    }
+  
+  g_free (uri);
+  bookmark_list_free (bookmarks);
 }
 
 #ifdef USE_GCONF
