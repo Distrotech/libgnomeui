@@ -928,9 +928,32 @@ gtk_file_system_gnome_vfs_volume_get_base_path (GtkFileSystem        *file_syste
 {
   char *uri;
 
-  if (GNOME_IS_VFS_DRIVE (volume))
-    uri = gnome_vfs_drive_get_activation_uri (GNOME_VFS_DRIVE (volume));
-  else if (GNOME_IS_VFS_VOLUME (volume))
+  if (GNOME_IS_VFS_DRIVE (volume)) {
+    GnomeVFSVolume *vfs_volume;
+
+    /* So... the drive may have grown a volume (from mounting it from
+     * the file chooser) which may have a different activation_uri
+     * than the drive since it may be mounted anywhere. In fact, the
+     * activation_uri is in the drive is only a guess (from
+     * e.g. /etc/fstab) at best.. at worst, the activation_uri in the
+     * drive may be completely bogus (if the drive was picked up from
+     * something different than e.g. /etc/fstab)..
+     *
+     * Quick solution here is to check if the drive has got a volume,
+     * and if so, use that activation_uri.
+     */
+
+    vfs_volume = gnome_vfs_drive_get_mounted_volume (GNOME_VFS_DRIVE (volume));
+    if (vfs_volume != NULL)
+      {
+        uri = gnome_vfs_volume_get_activation_uri (vfs_volume);
+	gnome_vfs_volume_unref (vfs_volume);
+      } 
+    else
+      {
+        uri = gnome_vfs_drive_get_activation_uri (GNOME_VFS_DRIVE (volume));
+      }
+  } else if (GNOME_IS_VFS_VOLUME (volume))
     uri = gnome_vfs_volume_get_activation_uri (GNOME_VFS_VOLUME (volume));
   else
     {

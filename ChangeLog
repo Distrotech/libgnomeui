@@ -1,3 +1,10 @@
+2005-06-21  David Zeuthen  <davidz@redhat.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_volume_get_base_path): Check GnomeVFSVolume
+	for activation_uri since the one on the drive may be incorrect.
+	See bug #308475.
+
 2005-06-21  Matthias Clasen  <mclasen@redhat.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c: Implement bookmark 
