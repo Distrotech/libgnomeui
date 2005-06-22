@@ -39,6 +39,7 @@
 #include <config.h>
 
 #include "gtkfilesystemgnomevfs.h"
+#include <gtk/gtkversion.h>
 
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-volume-monitor.h>
@@ -390,8 +391,10 @@ gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
   iface->insert_bookmark = gtk_file_system_gnome_vfs_insert_bookmark;
   iface->remove_bookmark = gtk_file_system_gnome_vfs_remove_bookmark;
   iface->list_bookmarks = gtk_file_system_gnome_vfs_list_bookmarks;
+#if GTK_CHECK_VERSION(2,7,0)
   iface->get_bookmark_label = gtk_file_system_gnome_vfs_get_bookmark_label;
   iface->set_bookmark_label = gtk_file_system_gnome_vfs_set_bookmark_label;
+#endif
 }
 
 static void

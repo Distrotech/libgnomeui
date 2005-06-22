@@ -1,3 +1,9 @@
+2005-06-22  Matthias Clasen  <mclasen@redhat.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c: Make the bookmark
+	renaming conditional on the GTK+ version we're building
+	against, pointed out by Alex Larsson.
+ 
 2005-06-21  David Zeuthen  <davidz@redhat.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c
