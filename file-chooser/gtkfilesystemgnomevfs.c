@@ -1777,10 +1777,19 @@ gtk_file_system_gnome_vfs_insert_bookmark (GtkFileSystem     *file_system,
 
   for (l = bookmarks; l; l = l->next)
     {
-      const char *bookmark;
+      char *bookmark, *space;
 
       bookmark = l->data;
-      if (strcmp (bookmark, uri) == 0)
+      
+      space = strchr (bookmark, ' ');
+      if (space)
+	*space = '\0';
+      if (strcmp (bookmark, uri) != 0)
+	{
+	  if (space)
+	    *space = ' ';
+	}
+      else
 	{
 	  g_set_error (error,
 		       GTK_FILE_SYSTEM_ERROR,
@@ -1825,10 +1834,19 @@ gtk_file_system_gnome_vfs_remove_bookmark (GtkFileSystem     *file_system,
 
   for (l = bookmarks; l; l = l->next)
     {
-      const char *bookmark;
+      char *bookmark, *space;
 
-      bookmark = l->data;
-      if (strcmp (bookmark, uri) == 0)
+      bookmark = (char *)l->data;
+      space = strchr (bookmark, ' ');
+      if (space)
+	*space = '\0';
+
+      if (strcmp (bookmark, uri) != 0)
+	{
+	  if (space)
+	    *space = ' ';
+	}
+      else
 	{
 	  g_free (l->data);
 	  bookmarks = g_slist_remove_link (bookmarks, l);
@@ -1872,10 +1890,14 @@ gtk_file_system_gnome_vfs_list_bookmarks (GtkFileSystem *file_system)
 
   for (l = bookmarks; l; l = l->next)
     {
-      const char *name;
-
-      name = l->data;
-      result = g_slist_prepend (result, gtk_file_system_uri_to_path (file_system, name));
+       char *bookmark, *space;
+  
+       bookmark = (char *)l->data;
+       space = strchr (bookmark, ' ');
+       if (space)
+	 *space = '\0';
+       
+       result = g_slist_prepend (result, gtk_file_system_uri_to_path (file_system, bookmark));
     }
 
   bookmark_list_free (bookmarks);

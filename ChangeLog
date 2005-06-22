@@ -1,3 +1,9 @@
+2005-06-22  Matthias Clasen <mclasen@redhat.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c: Ignore
+	everything after the first space in lines from
+	the .gtk-bookmarks file.
+	
 2005-05-11  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in:
