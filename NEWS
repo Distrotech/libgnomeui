@@ -4,25 +4,29 @@ libgnomeui 2.11.1
 What's new since 2.10.x
 
 Features:
-	- Port to Win32 (Tor)
+	- Port to Win32 (Tor Lillquist)
 	- Implement bookmark renaming in the file chooser
-	  (Matthias)
+	  (Matthias Clasen)
 
 Bug fixes:
 	- Make the file chooser work better with AFS
-	  (Federico)
+	  (Federico Mena Quintero)
 	- Fix crash when escaping the password dialog
-	  (Martin, Balamurali)
+	  (Martin Wehner, Balamurali V.)
 	- Fix crash when opening the panel properties dialog
-	  (Vincent)
+	  (Vincent Vuntz)
 	- Fix for possible wrong activation URI when drive is
-	  mounted from the file chooser (David)
+	  mounted from the file chooser (David Zeuthen)
+	- Fix icon entry button to not clip the label incorrectly
+	- Make it possible to select a folder in the file entry
+	  in the icon entry. (Christian Neumair)
 	- Make sure to use UTF-8 locales in the file chooser
 	  for apps that don't use libgnomeui directly such as
-	  Firefox (Frederic)
-	- HIGify the games menu entries (Dennis)
-	- Code cleanup and leak fixes (Kjartan)
-	- Build fixes (Kjartan, Hans Petter)
+	  Firefox (Frederic Crozat)
+	- HIGify the password dialog (Michael Terry)
+	- HIGify the games menu entries (Dennis Cranston)
+	- Code cleanup and leak fixes (Kjartan, Matthias)
+	- Build fixes (Kjartan, Hans Petter Jansson, Lazslo Peter)
 	- Fix GCC warnings (Kjartan)
 
 Translations:
