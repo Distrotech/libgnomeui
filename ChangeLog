@@ -1,5 +1,11 @@
 2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
 
+        * gnome-password-dialog.c: (add_row), (gnome_password_dialog_new):
+        HIGify the password dialog. Patch from Michael Terry. Closes
+        bug #169273.
+
+2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* configure.in: Bump version.
 	* libgnomeui/DEPENDS.libgnomeui: Remove this.
 	* libgnomeui/gnome-file-entry.c: (browse_dialog_ok):

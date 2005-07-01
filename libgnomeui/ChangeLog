@@ -1,9 +1,3 @@
-2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* gnome-password-dialog.c: (add_row), (gnome_password_dialog_new):
-	HIGify the password dialog. Patch from Michael Terry. Closes
-	bug #169273.
-
 2002-05-12  Glynn Foster  <glynn.foster@sun.com>
 
 	* gnome-about.c: (gnome_about_display_credits_dialog): Set the 
