@@ -1,5 +1,11 @@
 2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_init), (unref_folder),
+	(gtk_file_system_gnome_vfs_finalize): Merge fix for bug #800803.
+
+2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-icon-entry.c: (gnome_icon_entry_instance_init):
 	Merge fix for bug #142328 from HEAD.
 
