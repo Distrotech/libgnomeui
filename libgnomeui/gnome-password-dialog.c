@@ -203,7 +203,7 @@ add_row (GtkWidget *table, int row, const char *label_text, GtkWidget *entry, in
 	GtkWidget *label;
 
 	label = gtk_label_new_with_mnemonic (label_text);
-	gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 
 	gtk_table_attach (GTK_TABLE (table), label,
 			  0, 1,
@@ -307,7 +307,7 @@ gnome_password_dialog_new (const char	*dialog_title,
 	gtk_window_set_title (GTK_WINDOW (password_dialog), dialog_title);
 	gtk_dialog_add_buttons (GTK_DIALOG (password_dialog),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				GTK_STOCK_OK, GTK_RESPONSE_OK,
+				_("Co_nnect"), GTK_RESPONSE_OK,
 				NULL);
 
 	/* Setup the dialog */
@@ -315,6 +315,7 @@ gnome_password_dialog_new (const char	*dialog_title,
 
  	gtk_window_set_position (GTK_WINDOW (password_dialog), GTK_WIN_POS_CENTER);
 	gtk_window_set_modal (GTK_WINDOW (password_dialog), TRUE);
+	gtk_window_set_resizable (GTK_WINDOW (password_dialog), FALSE);
 
  	gtk_container_set_border_width (GTK_CONTAINER (password_dialog), DIALOG_BORDER_WIDTH);
 
@@ -332,7 +333,7 @@ gnome_password_dialog_new (const char	*dialog_title,
 			GTK_RADIO_BUTTON (password_dialog->details->connect_with_no_userpass_button));
         password_dialog->details->connect_with_userpass_button =
                 gtk_radio_button_new_with_mnemonic (
-			group, _("Connect as _user:"));
+			group, _("Connect as u_ser:"));
 
 	if (username != NULL && *username != 0) {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (password_dialog->details->connect_with_userpass_button), TRUE);
@@ -430,9 +431,9 @@ gnome_password_dialog_new (const char	*dialog_title,
 	gtk_widget_show_all (GTK_DIALOG (password_dialog)->vbox);
 
 	password_dialog->details->remember_session_button =
-		gtk_check_button_new_with_label (_("Remember password for this session"));
+		gtk_check_button_new_with_mnemonic (_("_Remember password for this session"));
 	password_dialog->details->remember_forever_button =
-		gtk_check_button_new_with_label (_("Save password in keyring"));
+		gtk_check_button_new_with_mnemonic (_("Save password in _keyring"));
 
 	gtk_box_pack_start (GTK_BOX (vbox), password_dialog->details->remember_session_button, 
 			    TRUE, TRUE, 6);
