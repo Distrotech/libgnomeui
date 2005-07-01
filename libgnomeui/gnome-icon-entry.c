@@ -1010,6 +1010,7 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 	gtk_widget_show (ientry->_priv->pickbutton);
 
 	ientry->_priv->fentry = gnome_file_entry_new (NULL, _("Browse"));
+	gnome_file_entry_set_directory_entry (GNOME_FILE_ENTRY (ientry->_priv->fentry), TRUE);
 	_add_atk_name_desc (ientry->_priv->fentry,
 			    _("Icon path"),
 			    _("Here you should enter the name of the directory "

@@ -1,5 +1,11 @@
 2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-icon-entry.c: (gnome_icon_entry_instance_init):
+	Make it possible to pick a folder in the icon entry. Patch from
+	Christian Neumair. Closes bug #142328
+
+2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
+
         * gnome-password-dialog.c: (add_row), (gnome_password_dialog_new):
         HIGify the password dialog. Patch from Michael Terry. Closes
         bug #169273.
