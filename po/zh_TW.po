@@ -7,13 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.7.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-23 22:05+0000\n"
-"PO-Revision-Date: 2004-09-10 07:24+0800\n"
+"POT-Creation-Date: 2005-07-01 21:40+0800\n"
+"PO-Revision-Date: 2005-07-01 21:46+0800\n"
 "Last-Translator: Abel Cheung <abel@oaka.org>\n"
 "Language-Team: Chinese (traditional) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -458,7 +458,6 @@ msgstr "關閉目前的視窗"
 #. * The "Game" menu
 #.
 #: ../libgnomeui/gnome-app-helper.c:248
-#, fuzzy
 msgid "_New Game"
 msgstr "新遊戲(_N)"
 
@@ -467,7 +466,6 @@ msgid "Start a new game"
 msgstr "開始新的遊戲"
 
 #: ../libgnomeui/gnome-app-helper.c:253
-#, fuzzy
 msgid "_Pause Game"
 msgstr "暫停遊戲(_P)"
 
@@ -476,7 +474,6 @@ msgid "Pause the game"
 msgstr "暫停今局遊戲"
 
 #: ../libgnomeui/gnome-app-helper.c:258
-#, fuzzy
 msgid "_Restart Game"
 msgstr "重新開始遊戲(_R)"
 
@@ -485,7 +482,6 @@ msgid "Restart the game"
 msgstr "重新開始今局遊戲"
 
 #: ../libgnomeui/gnome-app-helper.c:263
-#, fuzzy
 msgid "_Undo Move"
 msgstr "還原上一步(_U)"
 
@@ -494,7 +490,6 @@ msgid "Undo the last move"
 msgstr "取消剛進行的一步"
 
 #: ../libgnomeui/gnome-app-helper.c:268
-#, fuzzy
 msgid "_Redo Move"
 msgstr "取消還原(_R)"
 
@@ -520,7 +515,6 @@ msgid "View the scores"
 msgstr "觀看所得的積分"
 
 #: ../libgnomeui/gnome-app-helper.c:284
-#, fuzzy
 msgid "_End Game"
 msgstr "結束遊戲(_E)"
 
@@ -1000,32 +994,30 @@ msgid ""
 msgstr "使用新的 GtkFileChooser 元件還是 GtkFileSelection 元件來選擇檔案。"
 
 #: ../libgnomeui/gnome-file-entry.c:319
-#, fuzzy
 msgid "GtkFileChooser Action"
-msgstr "使用 GtkFileChooser"
+msgstr "GtkFileChooser 動作"
 
 #: ../libgnomeui/gnome-file-entry.c:320
-#, fuzzy
 msgid "The type of operation that the file selector is performing."
-msgstr "字型選擇窗的執行模式"
+msgstr "檔案選取器所進行的操作類型。"
 
-#: ../libgnomeui/gnome-file-entry.c:634 ../libgnomeui/gnome-file-entry.c:668
+#: ../libgnomeui/gnome-file-entry.c:635 ../libgnomeui/gnome-file-entry.c:669
 msgid "Select file"
 msgstr "選取檔案"
 
-#: ../libgnomeui/gnome-file-entry.c:794
+#: ../libgnomeui/gnome-file-entry.c:795
 msgid "Path"
 msgstr "路徑"
 
-#: ../libgnomeui/gnome-file-entry.c:794
+#: ../libgnomeui/gnome-file-entry.c:795
 msgid "Path to file"
 msgstr "檔案的路徑"
 
-#: ../libgnomeui/gnome-file-entry.c:821
+#: ../libgnomeui/gnome-file-entry.c:822
 msgid "_Browse..."
 msgstr "瀏覽(_B)..."
 
-#: ../libgnomeui/gnome-file-entry.c:822
+#: ../libgnomeui/gnome-file-entry.c:823
 msgid "Pop up a file selector to choose a file"
 msgstr "開啟檔案選擇窗來選取檔案"
 
@@ -1160,13 +1152,12 @@ msgid "This button will take you to the URI that it displays."
 msgstr "按下本按鈕後會顯示它所代表的網頁。"
 
 #: ../libgnomeui/gnome-href.c:394
-#, fuzzy
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "當嘗試啟動預設的網頁瀏覽器時發生錯誤。\n"
-"請檢查在「首選應用程式」內的有關設定是否正確。 "
+"請檢查在「首選應用程式」偏好設定工具內的有關設定是否正確。"
 
 #: ../libgnomeui/gnome-icon-entry.c:180
 msgid ""
@@ -1202,43 +1193,43 @@ msgstr ""
 "圖示選擇窗。如果您想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進"
 "行。"
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:982
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "沒有圖示"
 
-#: ../libgnomeui/gnome-icon-entry.c:752
+#: ../libgnomeui/gnome-icon-entry.c:755
 msgid "Icon selection dialog"
 msgstr "圖示選擇窗"
 
-#: ../libgnomeui/gnome-icon-entry.c:753
+#: ../libgnomeui/gnome-icon-entry.c:756
 msgid "This dialog box lets you select an icon."
 msgstr "本對話方塊可用來選取圖示。"
 
-#: ../libgnomeui/gnome-icon-entry.c:759
+#: ../libgnomeui/gnome-icon-entry.c:762
 msgid "Icon selector"
 msgstr "圖示選擇元件"
 
-#: ../libgnomeui/gnome-icon-entry.c:760
+#: ../libgnomeui/gnome-icon-entry.c:763
 msgid "Please pick the icon you want."
 msgstr "請選取希望使用的圖示。"
 
-#: ../libgnomeui/gnome-icon-entry.c:985
+#: ../libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "圖示選擇元件"
 
-#: ../libgnomeui/gnome-icon-entry.c:986
+#: ../libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "此按鈕可開啟用來選取圖示的視窗。"
 
-#: ../libgnomeui/gnome-icon-entry.c:1009
+#: ../libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "瀏覽"
 
-#: ../libgnomeui/gnome-icon-entry.c:1011
+#: ../libgnomeui/gnome-icon-entry.c:1015
 msgid "Icon path"
 msgstr "圖示的路徑"
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1016
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1290,23 +1281,27 @@ msgstr "網域(_D)："
 msgid "_Password:"
 msgstr "密碼(_P)："
 
-#: ../libgnomeui/gnome-password-dialog.c:330
+#: ../libgnomeui/gnome-password-dialog.c:310
+msgid "Co_nnect"
+msgstr "連線(_N)"
+
+#: ../libgnomeui/gnome-password-dialog.c:331
 msgid "Connect _anonymously"
 msgstr "以暱名方式連接(_A)"
 
-#: ../libgnomeui/gnome-password-dialog.c:335
-msgid "Connect as _user:"
-msgstr "以指定用戶身分連接(_U)："
+#: ../libgnomeui/gnome-password-dialog.c:336
+msgid "Connect as u_ser:"
+msgstr "以指定用戶身分連接(_S):"
 
 # Difficult to explain "session" to newbies -- Abel
-#: ../libgnomeui/gnome-password-dialog.c:433
-msgid "Remember password for this session"
-msgstr "登出前記住密碼"
+#: ../libgnomeui/gnome-password-dialog.c:434
+msgid "_Remember password for this session"
+msgstr "在此工作階段中記住密碼(_R)"
 
 # How can I translate "keyring"? -- Abel
-#: ../libgnomeui/gnome-password-dialog.c:435
-msgid "Save password in keyring"
-msgstr "在鑰匙圈中儲存密碼"
+#: ../libgnomeui/gnome-password-dialog.c:436
+msgid "Save password in _keyring"
+msgstr "在鑰匙圈中儲存密碼(_K)"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1471,23 +1466,3 @@ msgstr "偵錯(_D)"
 msgid "Exit the test"
 msgstr "結束測試"
 
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "程式“%s”(進程編號 %d) 不正常終止，\n"
-#~ "原因是出現嚴重的錯誤。\n"
-#~ "(%s)"
-
-#~ msgid "Submit a bug report"
-#~ msgstr "匯報錯誤報告"
-
-#~ msgid "Please visit the GNOME Application Crash page for more information"
-#~ msgstr "請到 GNOME 程式錯誤網頁獲取更多資訊"
-
-#~ msgid "_Credits"
-#~ msgstr "鳴謝(_C)"
-
-#~ msgid "Unknown"
-#~ msgstr "不詳"
