@@ -11,7 +11,7 @@ INCLUDES = \
 	-DG_LOG_DOMAIN=\"GnomeUI\"
 
 LDADD = \
-	$(top_builddir)/libgnomeui/libgnomeui-2.la $(LIBGNOMEUI_LIBS)
+	$(top_builddir)/libgnomeui/libgnomeui-2.la $(GNOME_TEST_LIBS)
 
 noinst_PROGRAMS = \
 	test-gnome test-druid test-entry test-iconlist test-password-dialog

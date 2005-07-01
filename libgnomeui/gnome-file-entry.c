@@ -459,6 +459,7 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 
 	utf8_filename = g_filename_to_utf8 (locale_filename, -1, NULL,
 					    NULL, NULL);
+	g_free (locale_filename);
 	gtk_entry_set_text (GTK_ENTRY (entry), utf8_filename);
 	g_free (utf8_filename);
 	/* Is this evil? */

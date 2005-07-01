@@ -1,12 +1,24 @@
+2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Bump version.
+	* libgnomeui/DEPENDS.libgnomeui: Remove this.
+	* libgnomeui/gnome-file-entry.c: (browse_dialog_ok):
+	Plug a leak.
+	* libgnomeui/gnome-icon-entry.c: (setup_preview),
+	(icon_selected_cb), (gil_icon_selected_cb): Plug a few leaks.
+	Closes bug #307491. (Kjartan)
+	* test-gnome/Makefile.am: Fix build on Solaris. Patch from
+	Lazslo Peter. Closes bug #307860.
+
 2005-06-22  Matthias Clasen  <mclasen@redhat.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c: Make the bookmark
 	renaming conditional on the GTK+ version we're building
 	against, pointed out by Alex Larsson.
- 
+
 2005-06-21  David Zeuthen  <davidz@redhat.com>
 
-	* file-chooser/gtkfilesystemgnomevfs.c
+	* file-chooser/gtkfilesystemgnomevfs.c:
 	(gtk_file_system_gnome_vfs_volume_get_base_path): Check GnomeVFSVolume
 	for activation_uri since the one on the drive may be incorrect.
 	See bug #308475.

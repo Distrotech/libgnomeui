@@ -10,8 +10,8 @@ AC_PREREQ(2.54)
 #
 m4_define([libgnomeui_major_version], [2])
 m4_define([libgnomeui_minor_version], [11])
-m4_define([libgnomeui_micro_version], [0])
-m4_define([libgnomeui_interface_age], [0])
+m4_define([libgnomeui_micro_version], [1])
+m4_define([libgnomeui_interface_age], [1])
 # If you need a modifier for the version number. 
 # Normally empty, but can be used to make "fixup" releases.
 m4_define([libgnomeui_extraversion], [])
@@ -169,6 +169,11 @@ GNOMEUI_MODULES="dnl
   $gnome_keyring_requirement >= gnome_keyring_required_version"
 PKG_CHECK_MODULES(LIBGNOMEUI, [$GNOMEUI_MODULES])
 LIBGNOMEUI_LIBS="$LIBGNOMEUI_LIBS $LIBJPEG"
+
+GNOME_TEST_MODULES="dnl
+  gdk-pixbuf-2.0 >= gtk_required_version"
+PKG_CHECK_MODULES(GNOME_TEST, [$GNOME_TEST_MODULES])
+GNOME_TEST_LIBS="$LIBGNOMEUI_LIBS $GNOME_TEST_LIBS"
 
 PKG_CHECK_MODULES(LIBGNOMEUI_COMPONENTS, [$GNOMEUI_MODULES])
 PKG_CHECK_MODULES(LIBGNOMEUI_DEMOS, [$GNOMEUI_MODULES])

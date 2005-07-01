@@ -434,6 +434,7 @@ setup_preview(GtkWidget *widget)
 	if(!p || !g_file_test (p,G_FILE_TEST_IS_SYMLINK | G_FILE_TEST_IS_REGULAR) ||
 	   !(pixbuf = gdk_pixbuf_new_from_file (p, NULL)))
 		return;
+	g_free (p);
 
 	w = gdk_pixbuf_get_width(pixbuf);
 	h = gdk_pixbuf_get_height(pixbuf);
@@ -563,6 +564,7 @@ icon_selected_cb (GnomeIconEntry * ientry)
 	icon = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY (ientry->_priv->fentry), FALSE);
 	
 	if (icon != NULL) {
+		g_free (priv->picked_file);
 		priv->picked_file = icon;
 		update_icon (ientry);
 		g_signal_emit (ientry, gnome_ientry_signals[CHANGED_SIGNAL], 0);
@@ -605,6 +607,7 @@ gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEnt
 	    event->type == GDK_2BUTTON_PRESS && ((GdkEventButton *)event)->button == 1) {
 		gnome_icon_selection_stop_loading
 			(GNOME_ICON_SELECTION (priv->icon_sel));
+		g_free (priv->picked_file);
 		priv->picked_file = icon;
 		icon = NULL;
 		update_icon (ientry);
