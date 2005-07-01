@@ -1003,9 +1003,6 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 	g_signal_connect (ientry->_priv->pickbutton, "clicked",
 			  G_CALLBACK (show_icon_selection),
 			  ientry);
-	/*FIXME: 60x60 is just larger then default 48x48, though icon sizes
-	  are supposed to be selectable I guess*/
-	gtk_widget_set_size_request (ientry->_priv->pickbutton, 60, 60);
 	gtk_container_add (GTK_CONTAINER (w), ientry->_priv->pickbutton);
 	gtk_widget_show (ientry->_priv->pickbutton);
 

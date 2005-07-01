@@ -1,5 +1,15 @@
 2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_init), (unref_folder),
+	(gtk_file_system_gnome_vfs_finalize):
+	Plug some leaks. Patch from Matthias Clasen. Closes bug #300803.
+	* libgnomeui/gnome-icon-entry.c: (gnome_icon_entry_instance_init):
+	Remove bogus size request that made the text go outside of
+	the button. Closes the libgnomeui part of bug #90932.
+
+2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-icon-entry.c: (gnome_icon_entry_instance_init):
 	Make it possible to pick a folder in the icon entry. Patch from
 	Christian Neumair. Closes bug #142328

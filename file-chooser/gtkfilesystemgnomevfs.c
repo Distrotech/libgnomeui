@@ -418,7 +418,7 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 								   g_get_home_dir ());
   
   system_vfs->locale_encoded_filenames = (getenv ("G_BROKEN_FILENAMES") != NULL);
-  system_vfs->folders = g_hash_table_new (g_str_hash, g_str_equal);
+  system_vfs->folders = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
 #ifdef USE_GCONF
   system_vfs->client = gconf_client_get_default ();
@@ -468,12 +468,21 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 }
 
 static void
+unref_folder (gpointer key, 
+	      gpointer value,
+	      gpointer data)
+{
+  g_object_unref (G_OBJECT (value));
+}
+
+static void
 gtk_file_system_gnome_vfs_finalize (GObject *object)
 {
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (object);
 
   g_free (system_vfs->desktop_uri);
   g_free (system_vfs->home_uri);
+  g_hash_table_foreach (system_vfs->folders, unref_folder, NULL);
   g_hash_table_destroy (system_vfs->folders);
 
 #ifdef USE_GCONF
