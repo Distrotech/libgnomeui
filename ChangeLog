@@ -1,5 +1,10 @@
 2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-icon-entry.c: (gnome_icon_entry_instance_init):
+	Merge fix for bug #142328 from HEAD.
+
+2005-07-01  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* configure.in:
 	* test-gnome/Makefile.am: Build fix for Solaris
 	From bug #307860.
