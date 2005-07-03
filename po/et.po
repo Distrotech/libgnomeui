@@ -1,6 +1,6 @@
 # libgnomeui eesti keele tõlge
 # Estonian translation of libgnomeui
-# 
+#
 # Copyright (C) 2002-2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
 #
@@ -54,7 +54,7 @@ msgstr "Tõrge järjehoidja salvestamisel (%s)"
 #: ../file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr "Fail '%s' kohta ei saa teavet hankida: %s"
+msgstr "Fail '%s' kohta pole võimalik teavet hankida: %s"
 
 #: ../file-chooser/testfilechooser.c:189
 #, c-format
@@ -470,7 +470,7 @@ msgstr "_Uus mäng"
 
 #: ../libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr "Alustab uut mängu"
+msgstr "Uue mängu alustamine"
 
 #: ../libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
@@ -478,7 +478,7 @@ msgstr "_Peata mäng"
 
 #: ../libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "Peatab mängu"
+msgstr "Mängupausi pidamine"
 
 #: ../libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
@@ -486,7 +486,7 @@ msgstr "_Taasalusta mäng"
 
 #: ../libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr "Alustab mängu otsast peale"
+msgstr "Mängu alustamine otsast peale"
 
 #: ../libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
@@ -494,7 +494,7 @@ msgstr "Käik _tagasi"
 
 #: ../libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "Unustab viimati tehtud käigu"
+msgstr "Viimati tehtud käigu unustamine"
 
 #: ../libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
@@ -502,7 +502,7 @@ msgstr "Käik _edasi"
 
 #: ../libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "Käib viimati tagasivõetud käigu uuesti"
+msgstr "Viimati tagasivõetud käigu uuesti tegemine"
 
 #: ../libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
@@ -519,7 +519,7 @@ msgstr "_Tulemused..."
 
 #: ../libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
-msgstr "Näitab tulemusi"
+msgstr "Tulemuste kuvamine"
 
 #: ../libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
@@ -527,7 +527,7 @@ msgstr "_Lõpeta mäng"
 
 #: ../libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
-msgstr "Lõpetab käesoleva mängu"
+msgstr "Käesoleva mängu lõpetamine"
 
 #: ../libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
@@ -752,7 +752,7 @@ msgstr "Kuupäev"
 
 #: ../libgnomeui/gnome-dateedit.c:752
 msgid "Select Date"
-msgstr "Vali kuupäev"
+msgstr "Kuupäeva valimine"
 
 #: ../libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
@@ -765,7 +765,7 @@ msgstr "Kalender"
 
 #: ../libgnomeui/gnome-dateedit.c:784
 msgid "Select Time"
-msgstr "Vali aeg"
+msgstr "Aja valimine"
 
 #: ../libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
@@ -905,11 +905,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
-msgstr ""
+msgstr "GTK sisestusväli"
 
 #: ../libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
-msgstr ""
+msgstr "GTK sisestusväli"
 
 #: ../libgnomeui/gnome-file-entry.c:229 ../libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
@@ -923,21 +923,23 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:238 ../libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
-msgstr ""
+msgstr "Lehitsemisdialoogi pealkiri"
 
 #: ../libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
-msgstr ""
+msgstr "Faililehitsemisdialoogi pealkiri."
 
 #: ../libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
-msgstr ""
+msgstr "Kataloogikirje"
 
 #: ../libgnomeui/gnome-file-entry.c:247
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
+"Kas faili sisestuskast on mõeldud katalooginimede või täielike failinimede "
+"jaoks."
 
 #: ../libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
@@ -945,7 +947,7 @@ msgstr "Modaalne"
 
 #: ../libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
-msgstr ""
+msgstr "Kas failivalimise dialoog peab olema modaalne."
 
 #: ../libgnomeui/gnome-file-entry.c:263 ../libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
@@ -953,7 +955,7 @@ msgstr "Failinimi"
 
 #: ../libgnomeui/gnome-file-entry.c:264
 msgid "Filename that should be displayed in the file entry."
-msgstr ""
+msgstr "Failinimi, mida peaks kuvatama faili sisestusväljal."
 
 #: ../libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
@@ -1029,7 +1031,7 @@ msgstr "Vali kirjatüüp"
 
 #: ../libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr ""
+msgstr "Valikudialoogi pealkiri"
 
 #: ../libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
@@ -1161,15 +1163,15 @@ msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
-msgstr ""
+msgstr "Pildikataloog"
 
 #: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
-msgstr ""
+msgstr "Kataloog, millest otsitakse ikoone."
 
 #: ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
-msgstr ""
+msgstr "Failinimi, mida peaks kuvatama ikooni sisestusväljal."
 
 #: ../libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
@@ -1191,7 +1193,7 @@ msgstr "Ikooni valimise dialoog"
 
 #: ../libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "See dialiig võimaldab sul ikooni valida."
 
 #: ../libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
@@ -1291,7 +1293,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
-msgstr ""
+msgstr "Kas pildi sisestusväli peab võimaldama eelvaadet."
 
 #: ../libgnomeui/gnome-pixmap-entry.c:189
 #: ../libgnomeui/gnome-pixmap-entry.c:479
@@ -1385,7 +1387,7 @@ msgstr "GNOME kasutajaliidese teek"
 #: ../libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Toimus mitu segmentimise viga, veadialoogi ei saa näidata\n"
+msgstr "Toimus mitu segmentimise viga, veadialoogi pole võimalik näidata\n"
 
 #. Eeeek! Can't show dialog
 #: ../libgnomeui/gnome-ui-init.c:722
@@ -1395,7 +1397,7 @@ msgid ""
 "Cannot display crash dialog\n"
 msgstr ""
 "Segmentimise viga!\n"
-"Krahhidialoodi ei saa näidata\n"
+"Krahhidialoodi pole võimalik näidata\n"
 
 #: ../libgnomeui/gnome_segv.c:101
 #, c-format
@@ -1427,6 +1429,8 @@ msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
+"Sul on võimalus teatada sellest arendajatele ja olla abiks selle puuduse "
+"kõrvaldamisel. Samas võid sa rakenduse taaskäivitada."
 
 #: ../libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
