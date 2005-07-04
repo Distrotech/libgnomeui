@@ -4,15 +4,15 @@
 # Benjamin Greiner <benjamin.greiner@gmx.net>, 2002.
 # Christian Meyer <chrisime@gnome.org>, 2002.
 # Christian Neumair <chris@gnome-de.org>, 2003, 2004.
-# Hendrik Richter <hendrik@gnome-de.org>, 2004.
+# Hendrik Richter <hendrik@gnome-de.org>, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-03-07 14:54+0100\n"
-"PO-Revision-Date: 2005-01-24 04:43+0100\n"
-"Last-Translator: Frank Arnold <frank@scirocco-5v-turbo.de>\n"
+"PO-Revision-Date: 2005-07-04 20:00+0200\n"
+"Last-Translator: Hendrik Richter <hendi@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -886,7 +886,7 @@ msgstr "Die Hintergrundfarbe des Logos wurde gesetzt"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
-msgstr "Abschlußknopf zeigen"
+msgstr "Abschlussknopf zeigen"
 
 #: libgnomeui/gnome-druid.c:151
 msgid "Show the 'Finish' button instead of the 'Next' button"
@@ -1211,7 +1211,7 @@ msgid ""
 "need to modify or query any of its properties."
 msgstr ""
 "Symbolauswahl-Dialog.  Sie können diese Eigenschaft verwenden, um den "
-"GtkDialog zu erhalten, falls Sie seine Eigenschfaten verändern oder abfragen "
+"GtkDialog zu erhalten, falls Sie seine Eigenschaften verändern oder abfragen "
 "müssen."
 
 #: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
@@ -1387,7 +1387,7 @@ msgstr "Punktierte Liste"
 
 #: libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
-msgstr "Numerierte Liste"
+msgstr "Nummerierte Liste"
 
 #: libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
