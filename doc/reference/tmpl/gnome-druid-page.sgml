@@ -19,9 +19,6 @@ the subsequent pages depend upon the choice made at some point).
 
 </para>
 
-<!-- ##### SECTION Stability_Level ##### -->
-
-
 <!-- ##### STRUCT GnomeDruidPage ##### -->
 <para>
 The widget for a aprticular page in a druid.

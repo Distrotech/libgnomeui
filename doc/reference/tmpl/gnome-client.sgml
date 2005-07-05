@@ -14,9 +14,6 @@ Interactions with the session manager.
 
 </para>
 
-<!-- ##### SECTION Stability_Level ##### -->
-
-
 <!-- ##### MACRO GNOME_CLIENT_CONNECTED ##### -->
 <para>
 Determine if the #GnomeClient instance has connected to the session manager

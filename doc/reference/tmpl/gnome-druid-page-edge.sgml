@@ -22,9 +22,6 @@ sequence of pages. Pages in the "middle" of a sequence should use
 
 </para>
 
-<!-- ##### SECTION Stability_Level ##### -->
-
-
 <!-- ##### ENUM GnomeEdgePosition ##### -->
 <para>
 

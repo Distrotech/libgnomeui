@@ -14,9 +14,6 @@ Standard defines used throughout libgnomeui.
 
 </para>
 
-<!-- ##### SECTION Stability_Level ##### -->
-
-
 <!-- ##### MACRO GNOME_PAD ##### -->
 <para>
 A sensible amount of padding (in pixels) to put around objects.
