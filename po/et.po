@@ -999,11 +999,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
-msgstr ""
+msgstr "GtkFileChooser toiming"
 
 #: ../libgnomeui/gnome-file-entry.c:320
 msgid "The type of operation that the file selector is performing."
-msgstr ""
+msgstr "Failivalija poolt teostatava operatsiooni tüüp."
 
 #: ../libgnomeui/gnome-file-entry.c:634 ../libgnomeui/gnome-file-entry.c:668
 msgid "Select file"
