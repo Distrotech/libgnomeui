@@ -78,7 +78,7 @@ case "$host" in
     ;;
   *)
     os_win32=no
-    gnome_keyring_requirement="gnome-keyring-1"
+    gnome_keyring_requirement="gnome-keyring-1 >= gnome_keyring_required_version"
     ;;
 esac
 AM_CONDITIONAL(OS_WIN32, [test "$os_win32" = "yes"])
@@ -166,7 +166,7 @@ GNOMEUI_MODULES="dnl
   gconf-2.0 >= gconf_required_version dnl
   pango >= pango_required_version dnl
   gnome-vfs-2.0 >= gnomevfs_required_version dnl
-  $gnome_keyring_requirement >= gnome_keyring_required_version"
+  $gnome_keyring_requirement"
 PKG_CHECK_MODULES(LIBGNOMEUI, [$GNOMEUI_MODULES])
 LIBGNOMEUI_LIBS="$LIBGNOMEUI_LIBS $LIBJPEG"
 
