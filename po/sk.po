@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-11 21:40+0200\n"
-"PO-Revision-Date: 2005-06-11 21:43+0200\n"
+"POT-Creation-Date: 2005-07-06 21:31+0200\n"
+"PO-Revision-Date: 2005-07-06 21:32+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -32,16 +32,16 @@ msgstr "Detská položka 2"
 msgid "Hint for item 2"
 msgstr "Rada pre položku 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:823
+#: ../file-chooser/gtkfilesystemgnomevfs.c:842
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nie je priečinok"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1055
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1097
 msgid "Filesystem"
 msgstr "Súborový systém"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1745
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1787
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ukladanie záložky zlyhalo (%s)"
@@ -1013,23 +1013,23 @@ msgstr "Akcia GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "Typ operácie, ktorú vykonáva okno pre výber súboru."
 
-#: ../libgnomeui/gnome-file-entry.c:634 ../libgnomeui/gnome-file-entry.c:668
+#: ../libgnomeui/gnome-file-entry.c:635 ../libgnomeui/gnome-file-entry.c:669
 msgid "Select file"
 msgstr "Vybrať súbor"
 
-#: ../libgnomeui/gnome-file-entry.c:794
+#: ../libgnomeui/gnome-file-entry.c:795
 msgid "Path"
 msgstr "Cesta"
 
-#: ../libgnomeui/gnome-file-entry.c:794
+#: ../libgnomeui/gnome-file-entry.c:795
 msgid "Path to file"
 msgstr "Cesta k súboru"
 
-#: ../libgnomeui/gnome-file-entry.c:821
+#: ../libgnomeui/gnome-file-entry.c:822
 msgid "_Browse..."
 msgstr "_Prezerať..."
 
-#: ../libgnomeui/gnome-file-entry.c:822
+#: ../libgnomeui/gnome-file-entry.c:823
 msgid "Pop up a file selector to choose a file"
 msgstr "Zobraziť okno pre výber súboru"
 
@@ -1173,7 +1173,8 @@ msgid ""
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Vyskytla sa chyba pri pokuse o spustenie predvoleného www prehliadača.\n"
-"Prosím skontrolujte vaše nastavenia v nástroji predvolieb 'Predvolené aplikácie'."
+"Prosím skontrolujte vaše nastavenia v nástroji predvolieb 'Predvolené "
+"aplikácie'."
 
 #: ../libgnomeui/gnome-icon-entry.c:180
 msgid ""
@@ -1211,31 +1212,31 @@ msgstr ""
 "Dialógové okno výberu ikony. Môžete použiť túto vlastnosť, aby ste získali "
 "GtkDialog, ak potrebujete zmeniť alebo zistiť niektoré z jeho vlastností."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:982
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "Bez ikony"
 
-#: ../libgnomeui/gnome-icon-entry.c:752
+#: ../libgnomeui/gnome-icon-entry.c:755
 msgid "Icon selection dialog"
 msgstr "Dialógové okno výberu ikony"
 
-#: ../libgnomeui/gnome-icon-entry.c:753
+#: ../libgnomeui/gnome-icon-entry.c:756
 msgid "This dialog box lets you select an icon."
 msgstr "Toto dialógové okno vám umožňuje vybrať ikonu."
 
-#: ../libgnomeui/gnome-icon-entry.c:759
+#: ../libgnomeui/gnome-icon-entry.c:762
 msgid "Icon selector"
 msgstr "Výber ikony"
 
-#: ../libgnomeui/gnome-icon-entry.c:760
+#: ../libgnomeui/gnome-icon-entry.c:763
 msgid "Please pick the icon you want."
 msgstr "Prosím vyberte ikonu, ktorú chcete."
 
-#: ../libgnomeui/gnome-icon-entry.c:985
+#: ../libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "Výber ikony"
 
-#: ../libgnomeui/gnome-icon-entry.c:986
+#: ../libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "Toto tlačítko otvorí okno, ktoré vám umožní zvoliť si ikonu."
 
@@ -1243,11 +1244,11 @@ msgstr "Toto tlačítko otvorí okno, ktoré vám umožní zvoliť si ikonu."
 msgid "Browse"
 msgstr "Prezerať"
 
-#: ../libgnomeui/gnome-icon-entry.c:1011
+#: ../libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Cesta k ikone"
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1299,21 +1300,25 @@ msgstr "_Doména:"
 msgid "_Password:"
 msgstr "_Heslo:"
 
-#: ../libgnomeui/gnome-password-dialog.c:330
+#: ../libgnomeui/gnome-password-dialog.c:310
+msgid "Co_nnect"
+msgstr "Pri_pojiť"
+
+#: ../libgnomeui/gnome-password-dialog.c:331
 msgid "Connect _anonymously"
 msgstr "Pripojiť _anonymne"
 
-#: ../libgnomeui/gnome-password-dialog.c:335
-msgid "Connect as _user:"
+#: ../libgnomeui/gnome-password-dialog.c:336
+msgid "Connect as u_ser:"
 msgstr "Pripojiť ako _používateľ:"
 
-#: ../libgnomeui/gnome-password-dialog.c:433
-msgid "Remember password for this session"
-msgstr "Zapamätať si heslo pre toto sedenie"
+#: ../libgnomeui/gnome-password-dialog.c:434
+msgid "_Remember password for this session"
+msgstr "_Zapamätať si heslo pre toto sedenie"
 
-#: ../libgnomeui/gnome-password-dialog.c:435
-msgid "Save password in keyring"
-msgstr "Uložiť heslo na zväzok kľúčov"
+#: ../libgnomeui/gnome-password-dialog.c:436
+msgid "Save password in _keyring"
+msgstr "Uložiť heslo na zväzok _kľúčov"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
