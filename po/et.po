@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-20 07:11+0000\n"
-"PO-Revision-Date: 2005-06-20 13:36+0300\n"
+"POT-Creation-Date: 2005-07-07 14:29+0000\n"
+"PO-Revision-Date: 2005-07-07 23:36+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -37,16 +37,16 @@ msgstr "Tütarkirje 2"
 msgid "Hint for item 2"
 msgstr "Vihje kirjele 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:823
+#: ../file-chooser/gtkfilesystemgnomevfs.c:842
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ei ole kataloog"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1055
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1097
 msgid "Filesystem"
 msgstr "Failisüsteem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1745
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1787
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Tõrge järjehoidja salvestamisel (%s)"
@@ -716,11 +716,11 @@ msgstr "Hetkel valitud aeg"
 
 #: ../libgnomeui/gnome-dateedit.c:504
 msgid "DateEdit Flags"
-msgstr ""
+msgstr "DateEdit lipud"
 
 #: ../libgnomeui/gnome-dateedit.c:505
 msgid "Flags for how DateEdit looks"
-msgstr ""
+msgstr "Lipud, mis määravad DateEdit'i väljanägemise"
 
 #: ../libgnomeui/gnome-dateedit.c:514
 msgid "Lower Hour"
@@ -901,7 +901,7 @@ msgstr "Näitab 'Abi' nuppu"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr ""
+msgstr "Ajaloo id"
 
 #: ../libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -913,13 +913,15 @@ msgstr "GTK sisestusväli"
 
 #: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
 msgid "History ID"
-msgstr ""
+msgstr "Ajaloo ID"
 
 #: ../libgnomeui/gnome-file-entry.c:237
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
+"Failikirje unikaalne identifikaator.  Selle abil leitakse kirje "
+"ajalooloendist."
 
 #: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
 msgid "Browse Dialog Title"
@@ -963,7 +965,7 @@ msgstr "Vaikimisi rada"
 
 #: ../libgnomeui/gnome-file-entry.c:280
 msgid "Default path for the Browse file window."
-msgstr ""
+msgstr "Vaikimisi rada failisirvimise aknale."
 
 #: ../libgnomeui/gnome-file-entry.c:287
 msgid "GnomeEntry"
@@ -1005,23 +1007,23 @@ msgstr "GtkFileChooser toiming"
 msgid "The type of operation that the file selector is performing."
 msgstr "Failivalija poolt teostatava operatsiooni tüüp."
 
-#: ../libgnomeui/gnome-file-entry.c:634 ../libgnomeui/gnome-file-entry.c:668
+#: ../libgnomeui/gnome-file-entry.c:635 ../libgnomeui/gnome-file-entry.c:669
 msgid "Select file"
 msgstr "Faili valimine"
 
-#: ../libgnomeui/gnome-file-entry.c:794
+#: ../libgnomeui/gnome-file-entry.c:795
 msgid "Path"
 msgstr "Rada"
 
-#: ../libgnomeui/gnome-file-entry.c:794
+#: ../libgnomeui/gnome-file-entry.c:795
 msgid "Path to file"
 msgstr "Faili rada"
 
-#: ../libgnomeui/gnome-file-entry.c:821
+#: ../libgnomeui/gnome-file-entry.c:822
 msgid "_Browse..."
 msgstr "_Vali..."
 
-#: ../libgnomeui/gnome-file-entry.c:822
+#: ../libgnomeui/gnome-file-entry.c:823
 msgid "Pop up a file selector to choose a file"
 msgstr ""
 
@@ -1167,7 +1169,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:189
 msgid "Title for the Browse icon dialog."
-msgstr ""
+msgstr "Ikoonisirvimisdialoogi pealkiri."
 
 #: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Pixmap Directory"
@@ -1191,31 +1193,31 @@ msgid ""
 "need to modify or query any of its properties."
 msgstr ""
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:982
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "Ikooni pole"
 
-#: ../libgnomeui/gnome-icon-entry.c:752
+#: ../libgnomeui/gnome-icon-entry.c:755
 msgid "Icon selection dialog"
 msgstr "Ikooni valimise dialoog"
 
-#: ../libgnomeui/gnome-icon-entry.c:753
+#: ../libgnomeui/gnome-icon-entry.c:756
 msgid "This dialog box lets you select an icon."
 msgstr "See dialiig võimaldab sul ikooni valida."
 
-#: ../libgnomeui/gnome-icon-entry.c:759
+#: ../libgnomeui/gnome-icon-entry.c:762
 msgid "Icon selector"
 msgstr "Ikoonivalija"
 
-#: ../libgnomeui/gnome-icon-entry.c:760
+#: ../libgnomeui/gnome-icon-entry.c:763
 msgid "Please pick the icon you want."
 msgstr "Palun vali ikoon, mida soovid."
 
-#: ../libgnomeui/gnome-icon-entry.c:985
+#: ../libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "Ikoonivalija"
 
-#: ../libgnomeui/gnome-icon-entry.c:986
+#: ../libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr ""
 
@@ -1223,11 +1225,11 @@ msgstr ""
 msgid "Browse"
 msgstr "Vali"
 
-#: ../libgnomeui/gnome-icon-entry.c:1011
+#: ../libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Ikooni rada"
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1279,21 +1281,25 @@ msgstr "_Domeen:"
 msgid "_Password:"
 msgstr "_Parool:"
 
-#: ../libgnomeui/gnome-password-dialog.c:330
+#: ../libgnomeui/gnome-password-dialog.c:310
+msgid "Co_nnect"
+msgstr "Ü_hendu"
+
+#: ../libgnomeui/gnome-password-dialog.c:331
 msgid "Connect _anonymously"
 msgstr "Ühendu _anonüümselt"
 
-#: ../libgnomeui/gnome-password-dialog.c:335
-msgid "Connect as _user:"
-msgstr "Ühendu _kasutajana:"
+#: ../libgnomeui/gnome-password-dialog.c:336
+msgid "Connect as u_ser:"
+msgstr "Ühendu ka_sutajana:"
 
-#: ../libgnomeui/gnome-password-dialog.c:433
-msgid "Remember password for this session"
-msgstr "Jäta parool selle sessiooni ajaks meelde"
+#: ../libgnomeui/gnome-password-dialog.c:434
+msgid "_Remember password for this session"
+msgstr "_Jäta parool selle sessiooni ajaks meelde"
 
-#: ../libgnomeui/gnome-password-dialog.c:435
-msgid "Save password in keyring"
-msgstr "Salvesta parool võtmekimbus"
+#: ../libgnomeui/gnome-password-dialog.c:436
+msgid "Save password in _keyring"
+msgstr "Salvesta parool _võtmerõngas"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
