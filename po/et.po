@@ -716,11 +716,11 @@ msgstr "Hetkel valitud aeg"
 
 #: ../libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
-msgstr ""
+msgstr "DateEdit lipud"
 
 #: ../libgnomeui/gnome-dateedit.c:493
 msgid "Flags for how DateEdit looks"
-msgstr ""
+msgstr "Lipud, mis määravad DateEdit'i väljanägemise"
 
 #: ../libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
@@ -901,7 +901,7 @@ msgstr "Näitab 'Abi' nuppu"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr ""
+msgstr "Ajaloo id"
 
 #: ../libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -913,13 +913,15 @@ msgstr "GTK sisestusväli"
 
 #: ../libgnomeui/gnome-file-entry.c:229 ../libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
-msgstr ""
+msgstr "Ajaloo ID"
 
 #: ../libgnomeui/gnome-file-entry.c:230
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
+"Failikirje unikaalne identifikaator.  Selle abil leitakse kirje "
+"ajalooloendist."
 
 #: ../libgnomeui/gnome-file-entry.c:238 ../libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
@@ -963,7 +965,7 @@ msgstr "Vaikimisi rada"
 
 #: ../libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
-msgstr ""
+msgstr "Vaikimisi rada failisirvimise aknale."
 
 #: ../libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
@@ -1159,7 +1161,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
-msgstr ""
+msgstr "Ikoonisirvimisdialoogi pealkiri."
 
 #: ../libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
