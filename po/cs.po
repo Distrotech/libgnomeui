@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-12 05:56+0000\n"
-"PO-Revision-Date: 2005-05-12 11:41+0200\n"
+"POT-Creation-Date: 2005-07-05 14:19+0000\n"
+"PO-Revision-Date: 2005-07-10 14:32+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,16 +32,16 @@ msgstr "Položka potomka 2"
 msgid "Hint for item 2"
 msgstr "Rada pro položku 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:823
+#: ../file-chooser/gtkfilesystemgnomevfs.c:842
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s není adresář"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1055
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1097
 msgid "Filesystem"
 msgstr "Systém souborů"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1745
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1787
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ukládání záložky selhalo (%s)"
@@ -662,31 +662,31 @@ msgstr "Pro přístup k %s v doméně %s se musíte přihlásit\n"
 msgid "You must log in to access %s\n"
 msgstr "Pro přístup k %s se musíte přihlásit\n"
 
-#: ../libgnomeui/gnome-client.c:863
+#: ../libgnomeui/gnome-client.c:861
 msgid "Specify session management ID"
 msgstr "Zadejte ID správy sezení"
 
-#: ../libgnomeui/gnome-client.c:863
+#: ../libgnomeui/gnome-client.c:861
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:866
+#: ../libgnomeui/gnome-client.c:864
 msgid "Specify prefix of saved configuration"
 msgstr "Zadejte předponu uloženého nastavení"
 
-#: ../libgnomeui/gnome-client.c:866
+#: ../libgnomeui/gnome-client.c:864
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: ../libgnomeui/gnome-client.c:869
+#: ../libgnomeui/gnome-client.c:867
 msgid "Disable connection to session manager"
 msgstr "Vypnout napojení na správce sezení"
 
-#: ../libgnomeui/gnome-client.c:975
+#: ../libgnomeui/gnome-client.c:973
 msgid "Session management"
 msgstr "Správa sezení"
 
-#: ../libgnomeui/gnome-client.c:2475
+#: ../libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "Zrušit odhlášení"
 
@@ -1012,23 +1012,23 @@ msgstr "Akce GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "Režim operace, kterou výběr souboru provádí."
 
-#: ../libgnomeui/gnome-file-entry.c:634 ../libgnomeui/gnome-file-entry.c:668
+#: ../libgnomeui/gnome-file-entry.c:635 ../libgnomeui/gnome-file-entry.c:669
 msgid "Select file"
 msgstr "Vyber soubor"
 
-#: ../libgnomeui/gnome-file-entry.c:794
+#: ../libgnomeui/gnome-file-entry.c:795
 msgid "Path"
 msgstr "Cesta"
 
-#: ../libgnomeui/gnome-file-entry.c:794
+#: ../libgnomeui/gnome-file-entry.c:795
 msgid "Path to file"
 msgstr "Cesta k souboru"
 
-#: ../libgnomeui/gnome-file-entry.c:821
+#: ../libgnomeui/gnome-file-entry.c:822
 msgid "_Browse..."
 msgstr "_Procházet..."
 
-#: ../libgnomeui/gnome-file-entry.c:822
+#: ../libgnomeui/gnome-file-entry.c:823
 msgid "Pop up a file selector to choose a file"
 msgstr "Zobrazí dialog pro výběr souboru"
 
@@ -1210,31 +1210,31 @@ msgstr ""
 "Dialog pro výběr ikony. Můžete použít tento atribut, chcete-li získat prvek "
 "GtkDialog a měnit nebo zjistit jeho parametry."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:982
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "Žádná ikona"
 
-#: ../libgnomeui/gnome-icon-entry.c:752
+#: ../libgnomeui/gnome-icon-entry.c:755
 msgid "Icon selection dialog"
 msgstr "Dialog výběru ikony"
 
-#: ../libgnomeui/gnome-icon-entry.c:753
+#: ../libgnomeui/gnome-icon-entry.c:756
 msgid "This dialog box lets you select an icon."
 msgstr "Toto dialogové okno vám umožní vybrat ikonu."
 
-#: ../libgnomeui/gnome-icon-entry.c:759
+#: ../libgnomeui/gnome-icon-entry.c:762
 msgid "Icon selector"
 msgstr "Výběr ikony"
 
-#: ../libgnomeui/gnome-icon-entry.c:760
+#: ../libgnomeui/gnome-icon-entry.c:763
 msgid "Please pick the icon you want."
 msgstr "Vyberte prosím ikonu, kterou chcete."
 
-#: ../libgnomeui/gnome-icon-entry.c:985
+#: ../libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "Výběr ikony"
 
-#: ../libgnomeui/gnome-icon-entry.c:986
+#: ../libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "Toto tlačítko otevře okno, ve kterém budete moci vybrat ikonu."
 
@@ -1242,11 +1242,11 @@ msgstr "Toto tlačítko otevře okno, ve kterém budete moci vybrat ikonu."
 msgid "Browse"
 msgstr "Procházet"
 
-#: ../libgnomeui/gnome-icon-entry.c:1011
+#: ../libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "Cesta k ikonám"
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1298,21 +1298,25 @@ msgstr "_Doména:"
 msgid "_Password:"
 msgstr "_Heslo:"
 
-#: ../libgnomeui/gnome-password-dialog.c:330
+#: ../libgnomeui/gnome-password-dialog.c:310
+msgid "Co_nnect"
+msgstr "_Připojit"
+
+#: ../libgnomeui/gnome-password-dialog.c:331
 msgid "Connect _anonymously"
 msgstr "Připojit se _anonymně"
 
-#: ../libgnomeui/gnome-password-dialog.c:335
-msgid "Connect as _user:"
+#: ../libgnomeui/gnome-password-dialog.c:336
+msgid "Connect as u_ser:"
 msgstr "Připojit se jako _uživatel:"
 
-#: ../libgnomeui/gnome-password-dialog.c:433
-msgid "Remember password for this session"
-msgstr "Zapamatovat si heslo po dobu sezení"
+#: ../libgnomeui/gnome-password-dialog.c:434
+msgid "_Remember password for this session"
+msgstr "Za_pamatovat si heslo po dobu sezení"
 
-#: ../libgnomeui/gnome-password-dialog.c:435
-msgid "Save password in keyring"
-msgstr "Uložit heslo do klíčenky"
+#: ../libgnomeui/gnome-password-dialog.c:436
+msgid "Save password in _keyring"
+msgstr "Uložit heslo do _klíčenky"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1411,7 +1415,7 @@ msgid "GNOME GUI Library"
 msgstr "GNOME GUI knihovna"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:721
+#: ../libgnomeui/gnome-ui-init.c:716
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1419,7 +1423,7 @@ msgstr ""
 "dialog\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:735
+#: ../libgnomeui/gnome-ui-init.c:730
 #, c-format
 msgid ""
 "Segmentation fault!\n"
