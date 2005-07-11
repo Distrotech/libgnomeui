@@ -187,6 +187,7 @@ fi
 dnl File Chooser stuff
 PKG_CHECK_MODULES(FILE_SYSTEM,
  [gtk+-2.0 >= gtk_required_version dnl
+  libgnome-2.0 >= libgnome_required_version dnl
   gnome-vfs-2.0 >= gnomevfs_required_version])
 
 GTK_BINARY_VERSION=`$PKG_CONFIG --variable=gtk_binary_version gtk+-2.0`
@@ -226,6 +227,16 @@ AC_CHECK_HEADER(crt_externs.h, have_crt_externs=yes)
 if test x$have_crt_externs = xyes; then
   AC_DEFINE(HAVE_CRT_EXTERNS_H, 1, [whether we have crt_externs.h])
 fi
+
+dnl For file-chooser/sucky-desktop-item.c.
+AC_ARG_WITH(kde-datadir, [  --with-kde-datadir=DIR  Location of KDE data])
+if test "x$with_kde_datadir" = x ; then
+  kde_datadir=/usr/share
+else
+  kde_datadir=$with_kde_datadir
+fi
+AC_DEFINE_UNQUOTED(KDE_ICONDIR, "$kde_datadir/icons",
+                   [The KDE icon directory])
 
 dnl This is installed from GTK+ 2.0's gdk-pixbuf
 AC_PATH_PROG(GDK_PIXBUF_CSOURCE, gdk-pixbuf-csource)

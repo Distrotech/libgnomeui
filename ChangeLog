@@ -1,3 +1,45 @@
+2005-07-11  Federico Mena Quintero  <federico@ximian.com>
+
+	Merged from gnome-2-10:
+
+	Add support for .desktop file links; fixes #136271:
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_get_folder): If the URI refers to a
+	.desktop link, read it, and try to get the destination URI
+	instead.  Also, clean up a bit by using helper functions.
+	(info_from_vfs_info): Take an error argument; we'll fill it in if
+	there is an error while reading a .desktop file.
+	(gtk_file_folder_gnome_vfs_get_info): Pass an error argument to
+	info_from_vfs_info().
+	(is_vfs_info_an_afs_folder): New helper function.
+	(get_desktop_link_uri): New helper function.
+	(get_options): Always request the MIME type, because we need to be
+	able to distinguish .desktop files.
+	(gtk_file_system_gnome_vfs_render_icon): If this is a .desktop
+	file, get the icon information from it.
+	(get_icon_from_desktop_file): New helper function.
+	(get_cached_icon): Take a GError parameter.  Allow loading icons
+	from absolute file names; these may come from the "Icon" attribute
+	in .desktop files.
+	(gtk_file_system_gnome_vfs_volume_render_icon): Pass the error
+	argument to get_cached_icon().
+	(gtk_file_system_gnome_vfs_render_icon): Likewise.
+
+	* configure.in: Add libgnome to the modules needed by the
+	file-chooser directory.
+	Add a --with-kde-datadir option for KDE_ICONDIR.
+
+	* file-chooser/sucky-desktop-item.[ch]: Sigh.  We need
+	GnomeDesktopItem for GtkFileSystemGnomeVFS, but that sucker lives
+	in the gnome-desktop module, which has libgnomeui as a dependency.
+	So I just copied the relevant files and replaced "gnome" with
+	"sucky".  To keep an optimistic outlook on life, those strings are
+	of equal length, so indentation is preserved.
+
+	* file-chooser/Makefile.am (libgnome_vfs_la_SOURCES): Added the
+	sucky files.
+
 2005-07-06  Tor Lillqvist  <tml@novell.com>
 
 	* configure.in: Fix syntax error in gnome-keyring requirement.

@@ -20,7 +20,7 @@ modules_LTLIBRARIES =				\
 	libgnome-vfs.la			\
 	$(NULL)
 
-libgnome_vfs_la_SOURCES = gtkfilesystemgnomevfs.c gtkfilesystemgnomevfs.h
+libgnome_vfs_la_SOURCES = gtkfilesystemgnomevfs.c gtkfilesystemgnomevfs.h sucky-desktop-item.c sucky-desktop-item.h
 libgnome_vfs_la_LDFLAGS = $(module_flags)
 libgnome_vfs_la_LIBADD = $(FILE_SYSTEM_LIBS)	\
 	$(top_builddir)/libgnomeui/libgnomeui-2.la

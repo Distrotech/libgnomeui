@@ -60,6 +60,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "sucky-desktop-item.h"
 
 #define BOOKMARKS_FILENAME ".gtk-bookmarks"
 #define BOOKMARKS_TMP_FILENAME ".gtk-bookmarks-XXXXXX"
@@ -271,7 +272,8 @@ static gboolean     gtk_file_folder_gnome_vfs_is_finished_loading (GtkFileFolder
 
 static GtkFileInfo *           info_from_vfs_info (const gchar      *uri,
 						   GnomeVFSFileInfo *vfs_info,
-						   GtkFileInfoType   types);
+						   GtkFileInfoType   types,
+						   GError          **error);
 static GnomeVFSFileInfoOptions get_options        (GtkFileInfoType   types);
 
 static void volume_mount_unmount_cb (GnomeVFSVolumeMonitor *monitor,
@@ -755,6 +757,93 @@ make_uri_canonical (const char *uri)
   return canonical;
 }
 
+/* Returns whether the MIME type of a vfs_info is "application/x-desktop" */
+static gboolean
+is_desktop_file (GnomeVFSFileInfo *vfs_info)
+{
+  return ((vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE) != 0
+	  && strcmp (gnome_vfs_file_info_get_mime_type (vfs_info), "application/x-desktop") == 0);
+}
+
+/* Returns whether a .desktop file indicates a link to a folder */
+static gboolean
+is_desktop_file_a_folder (SuckyDesktopItem *ditem)
+{
+  SuckyDesktopItemType ditem_type;
+
+  ditem_type = sucky_desktop_item_get_entry_type (ditem);
+
+  if (ditem_type != SUCKY_DESKTOP_ITEM_TYPE_LINK)
+    return FALSE;
+
+  /* FIXME: do we have to get the link URI and figure out its type?  For now,
+   * we'll just assume that it does link to a folder...
+   */
+
+  return TRUE;
+}
+
+/* Checks whether a vfs_info matches what we know about the AFS directories on
+ * the system.
+ */
+static gboolean
+is_vfs_info_an_afs_folder (GtkFileSystemGnomeVFS *system_vfs,
+			   GnomeVFSFileInfo      *vfs_info)
+{
+  return (GNOME_VFS_FILE_INFO_LOCAL (vfs_info)
+	  && (vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_DEVICE) != 0
+	  && (vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_INODE) != 0
+	  && ((system_vfs->have_afs
+	       && system_vfs->afs_statbuf.st_dev == vfs_info->device
+	       && system_vfs->afs_statbuf.st_ino == vfs_info->inode)
+	      || (system_vfs->have_net
+		  && system_vfs->net_statbuf.st_dev == vfs_info->device
+		  && system_vfs->net_statbuf.st_ino == vfs_info->inode)));
+}
+
+/* Returns the URL attribute for a .desktop file of type Link */
+static char *
+get_desktop_link_uri (const char *desktop_uri,
+		      GError    **error)
+{
+  SuckyDesktopItem *ditem;
+  const char *ditem_url;
+  char *ret_uri;
+
+  ditem = sucky_desktop_item_new_from_uri (desktop_uri, 0, error);
+  if (ditem == NULL)
+    return NULL;
+
+  ret_uri = NULL;
+
+  if (!is_desktop_file_a_folder (ditem))
+    {
+      g_set_error (error,
+		   GTK_FILE_SYSTEM_ERROR,
+		   GTK_FILE_SYSTEM_ERROR_NOT_FOLDER,
+		   _("%s is a link to something that is not a folder"),
+		   desktop_uri);
+      goto out;
+    }
+
+  ditem_url = sucky_desktop_item_get_string (ditem, SUCKY_DESKTOP_ITEM_URL);
+  if (ditem_url == NULL || strlen (ditem_url) == 0)
+    {
+      g_set_error (error,
+		   GTK_FILE_SYSTEM_ERROR,
+		   GTK_FILE_SYSTEM_ERROR_INVALID_URI,
+		   _("%s is a link without a destination location"),
+		   desktop_uri);
+      goto out;
+    }
+
+  ret_uri = g_strdup (ditem_url);
+
+ out:
+
+  sucky_desktop_item_unref (ditem);
+  return ret_uri;
+}
 
 static GtkFileFolder *
 gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
@@ -769,7 +858,6 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
   GnomeVFSMonitorHandle *monitor;
   GnomeVFSResult result;
   GnomeVFSFileInfo *vfs_info;
-  GnomeVFSFileType vfs_info_type;
 
   uri = make_uri_canonical (gtk_file_path_get_string (path));
   folder_vfs = g_hash_table_lookup (system_vfs->folders, uri);
@@ -832,9 +920,22 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 	}
     }
 
-  vfs_info_type = vfs_info->type;
+  if (is_desktop_file (vfs_info))
+    {
+      char *ditem_uri;
 
-  if (vfs_info_type != GNOME_VFS_FILE_TYPE_DIRECTORY)
+      ditem_uri = get_desktop_link_uri (uri, error);
+      if (ditem_uri == NULL)
+	{
+	  g_free (uri);
+	  gnome_vfs_file_info_unref (vfs_info);
+	  return NULL;
+	}
+
+      g_free (uri);
+      uri = ditem_uri;
+    }
+  else if (vfs_info->type != GNOME_VFS_FILE_TYPE_DIRECTORY)
     {
       g_set_error (error,
 		   GTK_FILE_SYSTEM_ERROR,
@@ -848,21 +949,10 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 
   folder_vfs = g_object_new (GTK_TYPE_FILE_FOLDER_GNOME_VFS, NULL);
 
-  /* Check for AFS */
-  if (GNOME_VFS_FILE_INFO_LOCAL (vfs_info)
-      && (vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_DEVICE) != 0
-      && (vfs_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_INODE) != 0
-      && ((system_vfs->have_afs
-	   && system_vfs->afs_statbuf.st_dev == vfs_info->device
-	   && system_vfs->afs_statbuf.st_ino == vfs_info->inode)
-	  || (system_vfs->have_net
-	      && system_vfs->net_statbuf.st_dev == vfs_info->device
-	      && system_vfs->net_statbuf.st_ino == vfs_info->inode)))
-    folder_vfs->is_afs_or_net = TRUE;
-  else
-    folder_vfs->is_afs_or_net = FALSE;
+  folder_vfs->is_afs_or_net = is_vfs_info_an_afs_folder (system_vfs, vfs_info);
 
   gnome_vfs_file_info_unref (vfs_info);
+  vfs_info = NULL;
 
   monitor = NULL;
 
@@ -1137,7 +1227,8 @@ icon_theme_changed (GtkIconTheme *icon_theme)
 static GdkPixbuf *
 get_cached_icon (GtkWidget   *widget,
 		 const gchar *name,
-		 gint         pixel_size)
+		 gint         pixel_size,
+		 GError     **error)
 {
   GtkIconTheme *icon_theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (widget));
   GHashTable *cache = g_object_get_data (G_OBJECT (icon_theme), "gnome-vfs-gtk-file-icon-cache");
@@ -1167,8 +1258,14 @@ get_cached_icon (GtkWidget   *widget,
       if (element->pixbuf)
 	g_object_unref (element->pixbuf);
       element->size = pixel_size;
-      element->pixbuf = gtk_icon_theme_load_icon (icon_theme, name,
-						  pixel_size, 0, NULL);
+
+      /* Normally, the names are raw icon names, not filenames.  If they happen
+       * to be filenames, then they likely came from a .desktop file
+       */
+      if (g_path_is_absolute (name))
+	element->pixbuf = gdk_pixbuf_new_from_file_at_size (name, pixel_size, pixel_size, error);
+      else
+	element->pixbuf = gtk_icon_theme_load_icon (icon_theme, name, pixel_size, 0, error);
     }
 
   return element->pixbuf ? g_object_ref (element->pixbuf) : NULL;
@@ -1218,7 +1315,7 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
 
   if (icon_name)
     {
-      pixbuf = get_cached_icon (widget, icon_name, pixel_size);
+      pixbuf = get_cached_icon (widget, icon_name, pixel_size, error);
       g_free (icon_name);
     }
   else
@@ -1613,6 +1710,36 @@ get_vfs_info (GtkFileSystem     *file_system,
 }
 
 static GdkPixbuf *
+get_icon_from_desktop_file (const char   *desktop_uri,
+			    GtkWidget    *widget,
+			    gint          pixel_size,
+			    GError      **error)
+{
+  SuckyDesktopItem *ditem;
+  const char *ditem_icon_name;
+  GdkPixbuf *ret_pixbuf;
+
+  ret_pixbuf = NULL;
+
+  ditem = sucky_desktop_item_new_from_uri (desktop_uri, 0, error);
+  if (ditem == NULL)
+    goto out;
+
+  ditem_icon_name = sucky_desktop_item_get_string (ditem, SUCKY_DESKTOP_ITEM_ICON);
+  if (ditem_icon_name == NULL || strlen (ditem_icon_name) == 0)
+    goto out;
+
+  ret_pixbuf = get_cached_icon (widget, ditem_icon_name, pixel_size, error);
+
+ out:
+
+  if (ditem)
+    sucky_desktop_item_unref (ditem);
+
+  return ret_pixbuf;
+}
+
+static GdkPixbuf *
 gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
 				       const GtkFilePath *path,
 				       GtkWidget         *widget,
@@ -1624,14 +1751,22 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
   const char *uri;
   GdkPixbuf *pixbuf;
   char *icon_name;
-  GnomeVFSFileInfo *info;
+  GnomeVFSFileInfo *vfs_info;
 
   system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
 
   pixbuf = NULL;
 
-  info = get_vfs_info (file_system, path, GTK_FILE_INFO_MIME_TYPE);
+  vfs_info = get_vfs_info (file_system, path, GTK_FILE_INFO_MIME_TYPE);
   uri = gtk_file_path_get_string (path);
+
+  if (is_desktop_file (vfs_info))
+    {
+      pixbuf = get_icon_from_desktop_file (uri, widget, pixel_size, error);
+      gnome_vfs_file_info_unref (vfs_info);
+      return pixbuf;
+    }
+
   if (strcmp (uri, system_vfs->desktop_uri) == 0)
     icon_name = g_strdup ("gnome-fs-desktop");
   else if (strcmp (uri, system_vfs->home_uri) == 0)
@@ -1641,20 +1776,20 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
 				   NULL,
 				   uri,
 				   NULL,
-				   info,
-				   info->mime_type,
+				   vfs_info,
+				   vfs_info->mime_type,
 				   GNOME_ICON_LOOKUP_FLAGS_NONE,
 				   NULL);
   if (icon_name)
     {
-      pixbuf = get_cached_icon (widget, icon_name, pixel_size);
+      pixbuf = get_cached_icon (widget, icon_name, pixel_size, error);
       g_free (icon_name);
     }
   else
-    pixbuf = NULL;
+    pixbuf = NULL; /* FIXME: in this case, we are missing GError information */
 
-  if (info)
-    gnome_vfs_file_info_unref (info);
+  if (vfs_info)
+    gnome_vfs_file_info_unref (vfs_info);
 
   return pixbuf;
 }
@@ -2322,7 +2457,7 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
 	  set_vfs_error (result, folder_vfs->uri, error);
 	}
       else
-	file_info = info_from_vfs_info (folder_vfs->uri, info, GTK_FILE_INFO_ALL);
+	file_info = info_from_vfs_info (folder_vfs->uri, info, GTK_FILE_INFO_ALL, error);
 
       gnome_vfs_file_info_unref (info);
       return file_info;
@@ -2331,7 +2466,7 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
   child = lookup_folder_child (folder, path, error);
 
   if (child)
-    return info_from_vfs_info (uri, child->info, folder_vfs->types);
+    return info_from_vfs_info (uri, child->info, folder_vfs->types, error);
   else
     return NULL;
 }
@@ -2379,14 +2514,12 @@ static GnomeVFSFileInfoOptions
 get_options (GtkFileInfoType types)
 {
   GnomeVFSFileInfoOptions options = GNOME_VFS_FILE_INFO_FOLLOW_LINKS;
-#if 0
-  if ((types & GTK_FILE_INFO_MIME_TYPE) || (types & GTK_FILE_INFO_ICON))
-#else
-  if (types & GTK_FILE_INFO_MIME_TYPE)
-#endif
-    {
-      options |= GNOME_VFS_FILE_INFO_GET_MIME_TYPE;
-    }
+
+  /* We need the MIME type regardless of what was requested, because we need to
+   * be able to distinguish .desktop files (application/x-desktop).  FIXME: can
+   * we get away with passing GNOME_VFS_FILE_INFO_FORCE_FAST_MIME_TYPE?
+   */
+  options |= GNOME_VFS_FILE_INFO_GET_MIME_TYPE;
 
   return options;
 }
@@ -2394,15 +2527,41 @@ get_options (GtkFileInfoType types)
 static GtkFileInfo *
 info_from_vfs_info (const gchar      *uri,
 		    GnomeVFSFileInfo *vfs_info,
-		    GtkFileInfoType   types)
+		    GtkFileInfoType   types,
+		    GError          **error)
 {
   GtkFileInfo *info = gtk_file_info_new ();
-  char *local_file;
-  char *display_name;
+  gboolean is_desktop;
+  SuckyDesktopItem *ditem;
+
+  /* Desktop files are special.  They can override the name, type, icon, etc. */
+
+  is_desktop = is_desktop_file (vfs_info);
+
+  ditem = NULL; /* shut up GCC */
+
+  if (is_desktop)
+    {
+      ditem = sucky_desktop_item_new_from_uri (uri, 0, error);
+      if (ditem == NULL)
+	return NULL;
+    }
+
+  /* Display name */
 
   if (types & GTK_FILE_INFO_DISPLAY_NAME)
     {
-      if (!vfs_info->name || strcmp (vfs_info->name, "/") == 0)
+      if (is_desktop)
+	{
+	  const char *name;
+
+	  name = sucky_desktop_item_get_localestring (ditem, SUCKY_DESKTOP_ITEM_NAME);
+	  if (name != NULL)
+	    gtk_file_info_set_display_name (info, name);
+	  else
+	    goto fetch_name_from_uri;
+	}
+      else if (!vfs_info->name || strcmp (vfs_info->name, "/") == 0)
 	{
 	  if (strcmp (uri, "file:///") == 0)
 	    gtk_file_info_set_display_name (info, "/");
@@ -2411,6 +2570,11 @@ info_from_vfs_info (const gchar      *uri,
 	}
       else
 	{
+	  char *local_file;
+	  char *display_name;
+
+	fetch_name_from_uri:
+
 	  local_file = gnome_vfs_get_local_path_from_uri (uri);
 	  if (local_file != NULL)
 	    {
@@ -2428,20 +2592,51 @@ info_from_vfs_info (const gchar      *uri,
 	}
     }
 
-  gtk_file_info_set_is_hidden (info, vfs_info->name && vfs_info->name[0] == '.');
-  gtk_file_info_set_is_folder (info, vfs_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY);
+  /* Hidden */
 
-#if 0
-  if ((types & GTK_FILE_INFO_MIME_TYPE) || (types & GTK_FILE_INFO_ICON))
-#else
-  if (types & GTK_FILE_INFO_MIME_TYPE)
-#endif
+  if (types & GTK_FILE_INFO_IS_HIDDEN)
     {
-      gtk_file_info_set_mime_type (info, vfs_info->mime_type);
+      gboolean is_hidden;
+
+      if (is_desktop)
+	is_hidden = sucky_desktop_item_get_boolean (ditem, SUCKY_DESKTOP_ITEM_HIDDEN);
+      else
+	is_hidden = (vfs_info->name && vfs_info->name[0] == '.');
+
+      gtk_file_info_set_is_hidden (info, is_hidden);
+    }
+
+  /* Folder */
+
+  if (types & GTK_FILE_INFO_IS_FOLDER)
+    {
+      gboolean is_folder;
+
+      if (is_desktop)
+	is_folder = is_desktop_file_a_folder (ditem);
+      else
+	is_folder = (vfs_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY);
+
+      gtk_file_info_set_is_folder (info, is_folder);
+    }
+
+  if (types & GTK_FILE_INFO_MIME_TYPE)
+    {
+      const char *mime_type;
+
+      if (is_desktop)
+	mime_type = "application/x-desktop"; /* FIXME: do we have to get the link URI and figure out its type? */
+      else
+	mime_type = vfs_info->mime_type;
+
+      gtk_file_info_set_mime_type (info, mime_type);
     }
 
   gtk_file_info_set_modification_time (info, vfs_info->mtime);
   gtk_file_info_set_size (info, vfs_info->size);
+
+  if (is_desktop)
+    sucky_desktop_item_unref (ditem);
 
   return info;
 }
