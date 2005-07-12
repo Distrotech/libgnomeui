@@ -1184,7 +1184,7 @@ gtk_file_system_gnome_vfs_volume_get_display_name (GtkFileSystem       *file_sys
     {
       uri = gnome_vfs_volume_get_activation_uri (GNOME_VFS_VOLUME (volume));
       if (strcmp (uri, "file:///") == 0)
-	display_name = g_strdup (_("Filesystem"));
+	display_name = g_strdup (_("File System"));
       else
 	display_name = gnome_vfs_volume_get_display_name (GNOME_VFS_VOLUME (volume));
       g_free (uri);

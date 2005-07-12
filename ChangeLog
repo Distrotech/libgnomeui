@@ -1,3 +1,9 @@
+2005-07-12  Matthias Clasen  <mclasen@redhat.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c: Follow
+	the Nautilus change and rename "Filesystem" to "File System",
+	string change.  (#310047, Vincent Noel)
+
 2005-07-11  Federico Mena Quintero  <federico@ximian.com>
 
 	Merged from gnome-2-10:
