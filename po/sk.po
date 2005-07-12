@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-06 21:31+0200\n"
-"PO-Revision-Date: 2005-07-06 21:32+0200\n"
+"POT-Creation-Date: 2005-07-12 20:04+0200\n"
+"PO-Revision-Date: 2005-07-12 20:05+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -32,16 +32,26 @@ msgstr "Detská položka 2"
 msgid "Hint for item 2"
 msgstr "Rada pre položku 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:842
+#: ../file-chooser/gtkfilesystemgnomevfs.c:824
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s je odkaz na niečo, čo nie je priečinok"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:835
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s je odkaz bez cieľového umiestnenia"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:943
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nie je priečinok"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1097
-msgid "Filesystem"
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1187
+msgid "File System"
 msgstr "Súborový systém"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1787
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1922
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ukladanie záložky zlyhalo (%s)"
