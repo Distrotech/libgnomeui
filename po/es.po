@@ -6,14 +6,13 @@
 # Héctor García Álvarez <hector@scouts-es.org>, 2001.
 # Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002.
 # Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2002,2003.
-# Francisco Javier F. Serrador <serrador@arrakis.es>, 2003.
-# Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2004, 2005.
+# Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2002-2005.
 msgid ""
 msgstr ""
-"Project-Id-Version: es\n"
+"Project-Id-Version: libgnomeui-2.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-06 17:27+0200\n"
-"PO-Revision-Date: 2005-07-06 17:30+0200\n"
+"POT-Creation-Date: 2005-07-13 23:43+0200\n"
+"PO-Revision-Date: 2005-07-13 23:45+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -39,16 +38,26 @@ msgstr "Elemento hijo 2"
 msgid "Hint for item 2"
 msgstr "Consejo para el elemento 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:842
+#: ../file-chooser/gtkfilesystemgnomevfs.c:824
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s es un enlace a algo que no es una carpeta"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:835
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s es un enlace sin un sitio de destino"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:943
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s no es una carpeta"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1097
-msgid "Filesystem"
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1187
+msgid "File System"
 msgstr "Sistema de archivos"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1787
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1922
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Se ha producido un error al guardar el marcador (%s)"
@@ -1181,8 +1190,10 @@ msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Ha ocurrido un error mientras se intentaba ejecutar el navegador web predeterminado.\n"
-"Compruebe su configuración en la herramienta de preferencias «Aplicaciones preferidas»."
+"Ha ocurrido un error mientras se intentaba ejecutar el navegador web "
+"predeterminado.\n"
+"Compruebe su configuración en la herramienta de preferencias «Aplicaciones "
+"preferidas»."
 
 #: ../libgnomeui/gnome-icon-entry.c:180
 msgid ""
