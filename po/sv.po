@@ -1,6 +1,6 @@
 # Swedish messages for libgnomeui.
-# Copyright (C) 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
-# Christian Rose <menthos@menthos.com>, 2001, 2002, 2003, 2004.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
+# Christian Rose <menthos@menthos.com>, 2001, 2002, 2003, 2004, 2005.
 # Mikael Hallendal <micke@codefactory.se>, 2002.
 #
 # $Id$
@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-07 14:54+0100\n"
-"PO-Revision-Date: 2004-07-24 11:33+0200\n"
+"POT-Creation-Date: 2005-07-16 12:42+0200\n"
+"PO-Revision-Date: 2005-07-16 12:43+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -33,16 +33,26 @@ msgstr "Barnobjekt 2"
 msgid "Hint for item 2"
 msgstr "Tips för objekt 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:697
+#: file-chooser/gtkfilesystemgnomevfs.c:805
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s är en länk till någonting som inte är en mapp"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:816
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s är en länk utan en målplats"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:924
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s är ingen mapp"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:908
+#: file-chooser/gtkfilesystemgnomevfs.c:1145
 msgid "Filesystem"
 msgstr "Filsystem"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1592
+#: file-chooser/gtkfilesystemgnomevfs.c:1879
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Sparande av bokmärke misslyckades (%s)"
@@ -178,6 +188,7 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Arkiv"
 
@@ -235,6 +246,7 @@ msgid "_Game"
 msgstr "_Spel"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjälp"
 
@@ -425,11 +437,11 @@ msgstr "Konfigurera programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om detta program"
 
@@ -456,7 +468,7 @@ msgstr "Skapa ett nytt fönster"
 msgid "_Close This Window"
 msgstr "_Stäng detta fönster"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Stäng det aktuella fönstret"
 
@@ -651,16 +663,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Ditt lösenord kommer att skickas krypterat."
 
 #: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:307
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Autentisering krävs"
 
-#: libgnomeui/gnome-authentication-manager.c:299
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Du måste logga in för att komma åt %s-domänen %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:301
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Du måste logga in för att komma åt %s\n"
@@ -1240,11 +1252,11 @@ msgstr "Denna knapp kommer att öppna ett fönster som låter dig välja en ikon
 msgid "Browse"
 msgstr "Bläddra"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
 msgstr "Ikonsökväg"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1011
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1475,8 +1487,48 @@ msgstr "_Meddela utvecklarna"
 msgid "_Debug"
 msgstr "_Felsök"
 
-#~ msgid "Exit the test"
-#~ msgstr "Avsluta testet"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Avsluta testet"
+
+#~ msgid "Error reading file '%s': %s"
+#~ msgstr "Fel vid läsning av filen \"%s\": %s"
+
+#~ msgid "Error rewinding file '%s': %s"
+#~ msgstr "Fel vid tillbakaspolning av filen \"%s\": %s"
+
+#~ msgid "No name"
+#~ msgstr "Inget namn"
+
+#~ msgid "File '%s' is not a regular file or directory."
+#~ msgstr "Filen \"%s\" är inte en vanlig fil eller katalog."
+
+#~ msgid "Error cannot find file id '%s'"
+#~ msgstr "Fel kan inte hitta fil-id \"%s\""
+
+#~ msgid "No filename to save to"
+#~ msgstr "Inget filnamn att spara i"
+
+#~ msgid "Starting %s"
+#~ msgstr "Startar %s"
+
+#~ msgid "No URL to launch"
+#~ msgstr "Ingen URL att starta"
+
+#~ msgid "Not a launchable item"
+#~ msgstr "Inte ett startbart objekt"
+
+#~ msgid "No command (Exec) to launch"
+#~ msgstr "Inget kommando (Exec) att spara"
+
+#~ msgid "Bad command (Exec) to launch"
+#~ msgstr "Felaktigt kommando (Exec) att starta"
+
+#~ msgid "Unknown encoding of: %s"
+#~ msgstr "Okänd kodning: %s"
+
+#~ msgid "Error writing file '%s': %s"
+#~ msgstr "Fel vid skrivning av filen \"%s\": %s"
 
 #~ msgid "%s is not a file"
 #~ msgstr "%s är ingen file"
