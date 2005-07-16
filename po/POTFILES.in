@@ -1,5 +1,8 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
 demos/mdi_demo.c
 file-chooser/gtkfilesystemgnomevfs.c
+file-chooser/sucky-desktop-item.c
 file-chooser/testfilechooser.c
 libgnomeui/gnome-about.c
 libgnomeui/gnome-app-helper.c
