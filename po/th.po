@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-06 10:27+0700\n"
-"PO-Revision-Date: 2005-06-06 10:34+0700\n"
+"POT-Creation-Date: 2005-07-16 21:33+0700\n"
+"PO-Revision-Date: 2005-07-16 21:47+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,19 +32,90 @@ msgstr "รายการลูกที่ 2"
 msgid "Hint for item 2"
 msgstr "ข้อแนะนำสำหรับรายการที่ 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:823
+#: file-chooser/gtkfilesystemgnomevfs.c:824
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s เป็นลิงก์เชื่อมไปยังสิ่งที่ไม่ใช่โฟลเดอร์"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:835
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s เป็นลิงก์ที่ไม่ระบุที่อยู่ปลายทาง"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:943
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ไม่ใช่โฟลเดอร์"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1055
-msgid "Filesystem"
+#: file-chooser/gtkfilesystemgnomevfs.c:1187
+msgid "File System"
 msgstr "ระบบแฟ้ม"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1745
+#: file-chooser/gtkfilesystemgnomevfs.c:1922
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "บันทึกบุ๊กมาร์กไม่สำเร็จ (%s)"
+
+#: file-chooser/sucky-desktop-item.c:217
+#: file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "เกิดข้อผิดพลาดขณะอ่านแฟ้ม '%s': %s"
+
+#: file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "เกิดข้อผิดพลาดขณะเลื่อนไปที่ต้นแฟ้ม '%s': %s"
+
+#: file-chooser/sucky-desktop-item.c:384
+#: file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "ไม่มีชื่อ"
+
+#: file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "แฟ้ม '%s' ไม่ใช่แฟ้มปกติหรือไดเรกทอรี"
+
+#: file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr "เกิดข้อผิดพลาด หาแฟ้ม '%s' ไม่พบ"
+
+#: file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr "ไม่มีชื่อแฟ้มที่จะใช้บันทึก"
+
+#: file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "กำลังเรียก %s"
+
+#: file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr "ไม่มี URL สำหรับเรียกโปรแกรม"
+
+#: file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr "ไม่ใช่รายการที่สามารถเรียกโปรแกรมได้"
+
+#: file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr "ไม่มีคำสั่งที่จะใช้เรียกโปรแกรม"
+
+#: file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr "คำสั่งที่ใช้เรียกโปรแกรมใช้ไม่ได้"
+
+#: file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr "ไม่รู้จักรหัสอักขระของ: %s"
+
+#: file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "เกิดข้อผิดพลาดขณะเขียนแฟ้ม '%s': %s"
 
 #: file-chooser/testfilechooser.c:178
 #, c-format
@@ -1001,23 +1072,23 @@ msgstr "การกระทำของ GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "ชนิดของการกระทำที่จะให้ตัวเลือกแฟ้มทำ"
 
-#: libgnomeui/gnome-file-entry.c:634 libgnomeui/gnome-file-entry.c:668
+#: libgnomeui/gnome-file-entry.c:635 libgnomeui/gnome-file-entry.c:669
 msgid "Select file"
 msgstr "เลือกแฟ้ม"
 
-#: libgnomeui/gnome-file-entry.c:794
+#: libgnomeui/gnome-file-entry.c:795
 msgid "Path"
 msgstr "พาธ"
 
-#: libgnomeui/gnome-file-entry.c:794
+#: libgnomeui/gnome-file-entry.c:795
 msgid "Path to file"
 msgstr "พาธไปยังแฟ้ม"
 
-#: libgnomeui/gnome-file-entry.c:821
+#: libgnomeui/gnome-file-entry.c:822
 msgid "_Browse..."
 msgstr "เ_รียกดู..."
 
-#: libgnomeui/gnome-file-entry.c:822
+#: libgnomeui/gnome-file-entry.c:823
 msgid "Pop up a file selector to choose a file"
 msgstr "แสดงหน้าต่างสำหรับเลือกแฟ้ม"
 
@@ -1196,31 +1267,31 @@ msgstr ""
 "กล่องโต้ตอบสำหรับเลือกไอคอน คุณสามารถใช้คุณสมบัตินี้เพื่อเข้าใช้ GtkDialog "
 "ในกรณีที่ต้องการแก้ไขหรืออ่านพารามิเตอร์ต่างๆ"
 
-#: libgnomeui/gnome-icon-entry.c:322 libgnomeui/gnome-icon-entry.c:982
+#: libgnomeui/gnome-icon-entry.c:322 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "ไม่มีไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:752
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "Icon selection dialog"
 msgstr "หน้าต่างเลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:753
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "This dialog box lets you select an icon."
 msgstr "สามารถใช้หน้าต่างนี้เลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:759
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Icon selector"
 msgstr "ตัวเลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:760
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Please pick the icon you want."
 msgstr "โปรดเลือกไอคอนที่ต้องการ"
 
-#: libgnomeui/gnome-icon-entry.c:985
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "ตัวเลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:986
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "ปุ่มนี้ใช้เปิดหน้าต่างสำหรับใช้เลือกไอคอน"
 
@@ -1228,11 +1299,11 @@ msgstr "ปุ่มนี้ใช้เปิดหน้าต่างสำ
 msgid "Browse"
 msgstr "เรียกดู"
 
-#: libgnomeui/gnome-icon-entry.c:1011
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "พาธของไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1284,21 +1355,25 @@ msgstr "โ_ดเมน"
 msgid "_Password:"
 msgstr "_รหัสผ่าน"
 
-#: libgnomeui/gnome-password-dialog.c:330
+#: libgnomeui/gnome-password-dialog.c:310
+msgid "Co_nnect"
+msgstr "เ_ชื่อมต่อ"
+
+#: libgnomeui/gnome-password-dialog.c:331
 msgid "Connect _anonymously"
 msgstr "เชื่อมต่อแบบ_นิรนาม"
 
-#: libgnomeui/gnome-password-dialog.c:335
-msgid "Connect as _user:"
+#: libgnomeui/gnome-password-dialog.c:336
+msgid "Connect as u_ser:"
 msgstr "เชื่อมต่อด้วยชื่อ_ผู้ใช้:"
 
-#: libgnomeui/gnome-password-dialog.c:433
-msgid "Remember password for this session"
-msgstr "จำรหัสผ่านไว้ใช้ในวาระนี้"
+#: libgnomeui/gnome-password-dialog.c:434
+msgid "_Remember password for this session"
+msgstr "_จำรหัสผ่านไว้ใช้ในวาระนี้"
 
-#: libgnomeui/gnome-password-dialog.c:435
-msgid "Save password in keyring"
-msgstr "บันทึกรหัสลงในพวงกุญแจ"
+#: libgnomeui/gnome-password-dialog.c:436
+msgid "Save password in _keyring"
+msgstr "บันทึกรหัสผ่านลงในพวง_กุญแจ"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
