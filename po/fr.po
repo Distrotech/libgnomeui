@@ -1,17 +1,17 @@
 # French translation of libgnomeui.
-# Copyright (C) 2001-2004 Free Software Foundation, Inc.
+# Copyright (C) 2001-2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
 #
-# maintainer: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2001-2004.
+# maintainer: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2001-2005.
 # Christophe Fergeau <teuf@users.sourceforge.net>, 2002
 # Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.8.0\n"
+"Project-Id-Version: libgnomeui 2.10.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-07 14:54+0100\n"
-"PO-Revision-Date: 2004-10-10 15:15+0200\n"
+"POT-Creation-Date: 2005-07-17 16:39+0200\n"
+"PO-Revision-Date: 2005-07-17 16:33+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,16 +34,26 @@ msgstr "Élément fils 2"
 msgid "Hint for item 2"
 msgstr "Astuce pour l'élément 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:697
+#: file-chooser/gtkfilesystemgnomevfs.c:805
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s est un lien vers quelque chose qui n'est pas un dossier"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:816
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s est un lien sans emplacement de destination"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:924
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s n'est pas un dossier"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:908
+#: file-chooser/gtkfilesystemgnomevfs.c:1145
 msgid "Filesystem"
 msgstr "Système de fichiers"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1592
+#: file-chooser/gtkfilesystemgnomevfs.c:1879
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "L'enregistrement des signets a échoué (%s)"
@@ -176,6 +186,7 @@ msgstr "À propos de %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fichier"
 
@@ -233,6 +244,7 @@ msgid "_Game"
 msgstr "_Jeu"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Aide"
 
@@ -423,11 +435,11 @@ msgstr "Configure l'application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "À _propos"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "À propos de cette application"
 
@@ -454,7 +466,7 @@ msgstr "Crée une nouvelle fenêtre"
 msgid "_Close This Window"
 msgstr "_Fermer cette fenêtre"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Ferme la fenêtre courante"
 
@@ -649,16 +661,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Votre mot de passe sera transmis chiffré."
 
 #: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:307
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Authentification requise"
 
-#: libgnomeui/gnome-authentication-manager.c:299
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Vous devez vous connecter pour accéder à %s dans le domaine %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:301
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Vous devez vous connecter pour accéder à %s\n"
@@ -1243,11 +1255,11 @@ msgstr "Ce bouton ouvrira une fenêtre vous permettant de choisir une icône."
 msgid "Browse"
 msgstr "Parcourir"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
 msgstr "Chemin de l'icône"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1011
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1480,5 +1492,6 @@ msgstr "_Informer les développeurs"
 msgid "_Debug"
 msgstr "_Débogage"
 
-#~ msgid "Exit the test"
-#~ msgstr "Quitter le test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Quitter le test"
