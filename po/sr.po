@@ -10,10 +10,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.6\n"
+"Project-Id-Version: libgnomeui 2.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-09 10:35+0200\n"
-"PO-Revision-Date: 2005-07-09 11:18+0200\n"
+"POT-Creation-Date: 2005-07-17 11:39+0200\n"
+"PO-Revision-Date: 2005-07-17 11:41+0200\n"
 "Last-Translator: Данило Шеган <danilo@gnome.org>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -36,19 +36,91 @@ msgstr "2. садржана ставка"
 msgid "Hint for item 2"
 msgstr "Савет за 2. ставку"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:842
+#: ../file-chooser/gtkfilesystemgnomevfs.c:824
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s је веза ка нечему што није фасцикла"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:835
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s је веза без одредишне путање"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:943
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s није фасцикла"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1097
-msgid "Filesystem"
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1187
+msgid "File System"
 msgstr "Систем датотека"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1787
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1922
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Неуспешно снимање обележивача (%s)"
+
+#: ../file-chooser/sucky-desktop-item.c:217
+#: ../file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "Грешка при читању датотеке „%s“: %s"
+
+#: ../file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "Грешка при премотавању датотеке „%s“: %s"
+
+#: ../file-chooser/sucky-desktop-item.c:384
+#: ../file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "Без имена"
+
+#: ../file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "Датотека „%s“ не представља обичну датотеку или директоријум."
+
+# bug: w00t?
+#: ../file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr "Грешка не може да нађе датотеку са ИБ-ом „%s“"
+
+#: ../file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr "Није дато име под којим сачувати"
+
+#: ../file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "Покрећем %s"
+
+#: ../file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr "Није дата адреса за покретање"
+
+#: ../file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr "Ставка није покретљива"
+
+#: ../file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr "Није дата наредба (Exec) за покретање"
+
+#: ../file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr "Лоша наредба (Exec) за покретање"
+
+#: ../file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr "Непознато кодирање за: %s"
+
+#: ../file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "Грешка при упису датотеке „%s“: %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -1127,14 +1199,20 @@ msgid ""
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr "Програм „%s“ је покушао да измени подешавања система за која ваш администратор или произвођач оперативног система не дозвољавају измене. Нека од изабраних поставки неће имати утицаја, или се неће користити при наредном покретању програма."
+msgstr ""
+"Програм „%s“ је покушао да измени подешавања система за која ваш "
+"администратор или произвођач оперативног система не дозвољавају измене. Нека "
+"од изабраних поставки неће имати утицаја, или се неће користити при наредном "
+"покретању програма."
 
 #: ../libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
-msgstr "Дошло је до грешке при учитавању или снимању података о подешавањима за %s. Нека од ваших подешавања можда неће исправно радити."
+msgstr ""
+"Дошло је до грешке при учитавању или снимању података о подешавањима за %s. "
+"Нека од ваших подешавања можда неће исправно радити."
 
 #: ../libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1343,7 +1421,7 @@ msgstr "Преглед тренутно наведене слике"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:414
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Не може пронаћи hbox, користи обичан изборнач датотека"
+msgstr "Не може пронаћи hbox, користи обичан избирач датотека"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:420
 msgid "Preview"
@@ -1445,7 +1523,8 @@ msgid ""
 msgstr ""
 "Гномов управник сесијама (процес %d) је пукао\n"
 "услед кобне грешке (%s).\n"
-"Када затворите ово прозорче, сви програми ће бити затворени, и ваша сесија окончана.\n"
+"Када затворите ово прозорче, сви програми ће бити затворени, и ваша сесија "
+"окончана.\n"
 "Сачувајте све ваше датотеке пре затварања овог прозорчета."
 
 #: ../libgnomeui/gnome_segv.c:112
