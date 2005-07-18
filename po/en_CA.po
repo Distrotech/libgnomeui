@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-03 18:35-0400\n"
-"PO-Revision-Date: 2005-07-03 17:09-0400\n"
+"POT-Creation-Date: 2005-07-18 04:57-0400\n"
+"PO-Revision-Date: 2005-07-18 17:09-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: Canadian English <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,19 +32,89 @@ msgstr "Child Item 2"
 msgid "Hint for item 2"
 msgstr "Hint for item 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:842
+#: file-chooser/gtkfilesystemgnomevfs.c:824
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s is a link to something that is not a folder"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:835
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s is a link without a destination location"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:943
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s is not a folder"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1097
-msgid "Filesystem"
-msgstr "Filesystem"
+#: file-chooser/gtkfilesystemgnomevfs.c:1187
+msgid "File System"
+msgstr "File System"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1787
+#: file-chooser/gtkfilesystemgnomevfs.c:1922
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Bookmark saving failed (%s)"
+
+#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "Error reading file '%s': %s"
+
+#: file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "Error rewinding file '%s': %s"
+
+#: file-chooser/sucky-desktop-item.c:384
+#: file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "No name"
+
+#: file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "File '%s' is not a regular file or directory."
+
+#: file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr "Error: cannot find file ID '%s'"
+
+#: file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr "No filename to save to"
+
+#: file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "Starting %s"
+
+#: file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr "No URL to launch"
+
+#: file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr "Not a launchable item"
+
+#: file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr "No command (Exec) to launch"
+
+#: file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr "Bad command (Exec) to launch"
+
+#: file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr "Unknown encoding of: %s"
+
+#: file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "Error writing file '%s': %s"
 
 #: file-chooser/testfilechooser.c:178
 #, c-format
