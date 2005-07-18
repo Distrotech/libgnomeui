@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-29 22:47+0000\n"
-"PO-Revision-Date: 2005-05-30 10:10+0800\n"
+"POT-Creation-Date: 2005-07-17 22:37+0000\n"
+"PO-Revision-Date: 2005-07-18 13:05+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -32,19 +32,90 @@ msgstr "子项目 2"
 msgid "Hint for item 2"
 msgstr "项目 2 的提示"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:823
+#: ../file-chooser/gtkfilesystemgnomevfs.c:824
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s 是指向非文件夹的链接"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:835
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s 是没有目的位置的链接"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:943
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s 不是文件夹"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1055
-msgid "Filesystem"
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1187
+msgid "File System"
 msgstr "文件系统"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1745
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1922
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "书签保存失败(%s)"
+
+#: ../file-chooser/sucky-desktop-item.c:217
+#: ../file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "读取文件“%s”出错：%s"
+
+#: ../file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "回绕文件“%s”出错：%s"
+
+#: ../file-chooser/sucky-desktop-item.c:384
+#: ../file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "无名"
+
+#: ../file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "文件“%s”不是普通文件或目录。"
+
+#: ../file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr "查找文件 ID“%s”出错"
+
+#: ../file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr "没有要保存到的文件名"
+
+#: ../file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "启动 %s"
+
+#: ../file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr "没有要调用的 URL"
+
+#: ../file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr "不是可调用的项目"
+
+#: ../file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr "没有要调用的命令(可执行文件)"
+
+#: ../file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr "调用的命令(可执行文件)无效"
+
+#: ../file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr "未知编码：%s"
+
+#: ../file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "写入文件“%s”出错：%s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -1046,27 +1117,27 @@ msgstr "GtkFileChooser 动作"
 msgid "The type of operation that the file selector is performing."
 msgstr "文件选择器正在执行的操作类型。"
 
-#: ../libgnomeui/gnome-file-entry.c:634 ../libgnomeui/gnome-file-entry.c:668
+#: ../libgnomeui/gnome-file-entry.c:635 ../libgnomeui/gnome-file-entry.c:669
 msgid "Select file"
 msgstr "选择文件"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-file-entry.c:794
+#: ../libgnomeui/gnome-file-entry.c:795
 msgid "Path"
 msgstr "路径"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-file-entry.c:794
+#: ../libgnomeui/gnome-file-entry.c:795
 msgid "Path to file"
 msgstr "文件路径"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-file-entry.c:821
+#: ../libgnomeui/gnome-file-entry.c:822
 msgid "_Browse..."
 msgstr "浏览(_B)..."
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-file-entry.c:822
+#: ../libgnomeui/gnome-file-entry.c:823
 msgid "Pop up a file selector to choose a file"
 msgstr "弹出用于选择文件的文件选择器"
 
@@ -1255,37 +1326,37 @@ msgstr ""
 "图标选取器对话框。如果您需要修改或查询 GtkDialog 的任何参数，可以使用此属性来"
 "获得 GtkDialog。"
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:982
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "无图标"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-icon-entry.c:752
+#: ../libgnomeui/gnome-icon-entry.c:755
 msgid "Icon selection dialog"
 msgstr "图标选择对话框"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:753
+#: ../libgnomeui/gnome-icon-entry.c:756
 msgid "This dialog box lets you select an icon."
 msgstr "您可以通过此对话框选择图标。"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:759
+#: ../libgnomeui/gnome-icon-entry.c:762
 msgid "Icon selector"
 msgstr "图标选择器"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:760
+#: ../libgnomeui/gnome-icon-entry.c:763
 msgid "Please pick the icon you want."
 msgstr "请选取需要的图标。"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:985
+#: ../libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "图标选择器"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:986
+#: ../libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "此按钮将打开一个窗口，您可以从中选择图标。"
 
@@ -1294,12 +1365,12 @@ msgid "Browse"
 msgstr "浏览"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:1011
+#: ../libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "图标路径"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1351,21 +1422,25 @@ msgstr "域(_D)："
 msgid "_Password:"
 msgstr "密码(_P)："
 
-#: ../libgnomeui/gnome-password-dialog.c:330
+#: ../libgnomeui/gnome-password-dialog.c:310
+msgid "Co_nnect"
+msgstr "连接(_N)"
+
+#: ../libgnomeui/gnome-password-dialog.c:331
 msgid "Connect _anonymously"
 msgstr "匿名连接(_A)"
 
-#: ../libgnomeui/gnome-password-dialog.c:335
-msgid "Connect as _user:"
-msgstr "连接身份(_U)："
+#: ../libgnomeui/gnome-password-dialog.c:336
+msgid "Connect as u_ser:"
+msgstr "连接身份(_S)："
 
-#: ../libgnomeui/gnome-password-dialog.c:433
-msgid "Remember password for this session"
-msgstr "此会话记住密码"
+#: ../libgnomeui/gnome-password-dialog.c:434
+msgid "_Remember password for this session"
+msgstr "此会话记住密码(_R)"
 
-#: ../libgnomeui/gnome-password-dialog.c:435
-msgid "Save password in keyring"
-msgstr "在密钥环中保存密码"
+#: ../libgnomeui/gnome-password-dialog.c:436
+msgid "Save password in _keyring"
+msgstr "在密钥环中保存密码(_K)"
 
 # SUN CHANGED MESSAGE
 #: ../libgnomeui/gnome-pixmap-entry.c:114
