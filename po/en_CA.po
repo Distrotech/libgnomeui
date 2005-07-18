@@ -1,6 +1,6 @@
-# English/Canada translation of libgnomeui
-# Copyright (C) 2004 Adam Weinberger and the GNOME Foundation
-# This file is distributed under the same licence as the PACKAGE package.
+# Canadian English translation of libgnomeui
+# Copyright (C) 2004-2005 Adam Weinberger and the GNOME Foundation
+# This file is distributed under the same licence as the libgnomeui package.
 # Adam Weinberger <adamw@gnome.org>, 2004.
 #
 #
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-07 14:54+0100\n"
-"PO-Revision-Date: 2004-09-24 17:09-0400\n"
+"POT-Creation-Date: 2005-07-18 04:58-0400\n"
+"PO-Revision-Date: 2005-07-18 17:09-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: Canadian English <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,16 +32,26 @@ msgstr "Child Item 2"
 msgid "Hint for item 2"
 msgstr "Hint for item 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:697
+#: file-chooser/gtkfilesystemgnomevfs.c:805
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s is a link to something that is not a folder"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:816
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s is a link without a destination location"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:924
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s is not a folder"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:908
+#: file-chooser/gtkfilesystemgnomevfs.c:1145
 msgid "Filesystem"
 msgstr "Filesystem"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1592
+#: file-chooser/gtkfilesystemgnomevfs.c:1879
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Bookmark saving failed (%s)"
@@ -172,6 +182,7 @@ msgstr "About %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
@@ -229,6 +240,7 @@ msgid "_Game"
 msgstr "_Game"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Help"
 
@@ -419,11 +431,11 @@ msgstr "Configure the application"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_About"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "About this application"
 
@@ -450,7 +462,7 @@ msgstr "Create a new window"
 msgid "_Close This Window"
 msgstr "_Close This Window"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Close the current window"
 
@@ -645,16 +657,16 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Your password will be transmitted encrypted."
 
 #: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:307
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "Authentication Required"
 
-#: libgnomeui/gnome-authentication-manager.c:299
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "You must log in to access %s domain %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:301
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "You must log in to access %s\n"
@@ -1230,11 +1242,11 @@ msgstr "This button will open a window to let you select an icon."
 msgid "Browse"
 msgstr "Browse"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
 msgstr "Icon path"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1011
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1464,5 +1476,6 @@ msgstr "_Inform Developers"
 msgid "_Debug"
 msgstr "_Debug"
 
-#~ msgid "Exit the test"
-#~ msgstr "Exit the test"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Exit the test"
