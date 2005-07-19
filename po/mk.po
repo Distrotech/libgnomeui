@@ -10,18 +10,21 @@
 # Ime Prezime <email@adresa.com>, 2003.
 # Ivan Stojmirov <stojmir@linux.net.mk>, 2003.
 # Arangel Angov <ufo@linux.net.mk>, 2004.
+# Арангел Ангов <ufo@linux.net.mk>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD.mk\n"
+"Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-12 14:30+0000\n"
-"PO-Revision-Date: 2005-07-12 23:30+0200\n"
-"Last-Translator: Arangel Angov <ufo@linux.net.mk>\n"
+"POT-Creation-Date: 2005-07-19 22:37+0000\n"
+"PO-Revision-Date: 2005-07-20 01:28+0200\n"
+"Last-Translator: Арангел Ангов <ufo@linux.net.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Plural-Forms: nplurals=3; plural= n==1 || n%10==1 ? 0 : 1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -55,13 +58,74 @@ msgid "%s is not a folder"
 msgstr "%s не е датотека"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1187
-msgid "Filesystem"
+msgid "File System"
 msgstr "Датотечен систем"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1922
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Зачувувањето на обележувачот е неуспешно (%s)"
+
+#: ../file-chooser/sucky-desktop-item.c:217
+#: ../file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "Грешка при читање на датотеката '%s': %s"
+
+#: ../file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "Грешка при мотање на датотеката '%s': %s"
+
+#: ../file-chooser/sucky-desktop-item.c:384
+#: ../file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "Без име"
+
+#: ../file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "Датотеката '%s' не е обична датотека или директориум."
+
+#: ../file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr "Грешка, не можам да ја најдам идентификацијата '%s'"
+
+#: ../file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr "Нема име на датотека за зачувување"
+
+#: ../file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "Подигнувам %s"
+
+#: ../file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr "Нема адреса за лансирање"
+
+#: ../file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr "Не е предмет што може да се лансира"
+
+#: ../file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr "Нема команда (извршлива) за лансирање"
+
+#: ../file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr "Лоша команда (извршлива) за лансирање"
+
+#: ../file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr "Непознат енкодинг на: %s"
+
+#: ../file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "Грешка при запишување во датотеката '%s': %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -75,8 +139,7 @@ msgstr "Не успеав да ја отворам датотеката '%s': %s
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Не успеав да ја вчитам сликата '%s': причината не е позната, најверојатно се "
 "работи за расипана датотека"
@@ -174,8 +237,7 @@ msgstr ""
 "ufo@linux.net.mk"
 
 #: ../libgnomeui/gnome-about.c:433
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "Заслуги за преведувачите."
 
 #: ../libgnomeui/gnome-about.c:440
@@ -790,8 +852,7 @@ msgstr "Одберете го времето од листа"
 
 #: ../libgnomeui/gnome-dateedit.c:1015
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_дата_измени_земи_дата смалено, користи gnome_дата_измени_земи_време"
+msgstr "gnome_дата_измени_земи_дата смалено, користи gnome_дата_измени_земи_време"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:121
 #: ../libgnomeui/gnome-font-picker.c:155
@@ -967,8 +1028,7 @@ msgstr "Модално"
 
 #: ../libgnomeui/gnome-file-entry.c:263
 msgid "Whether the Browse file window should be modal."
-msgstr ""
-"Без оглед на прозорецот за прелистување на датотеки мора да биде модален."
+msgstr "Без оглед на прозорецот за прелистување на датотеки мора да биде модален."
 
 #: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename"
@@ -1196,7 +1256,8 @@ msgid ""
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Се појави грешка при лансирањето на стандардниот веб прелистувач.\n"
-"Ве молам проверете ги Вашите поставувања со помош на алатката за „Преферирани апликации“."
+"Ве молам проверете ги Вашите поставувања со помош на алатката за "
+"„Преферирани апликации“."
 
 #: ../libgnomeui/gnome-icon-entry.c:180
 msgid ""
@@ -1263,8 +1324,7 @@ msgstr "Одбирач на икони"
 
 #: ../libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
-msgstr ""
-"Ова копче ќе ви отвори прозорец кој пак ќе ви овозможи да одберете икона."
+msgstr "Ова копче ќе ви отвори прозорец кој пак ќе ви овозможи да одберете икона."
 
 #: ../libgnomeui/gnome-icon-entry.c:1009
 msgid "Browse"
