@@ -1,7 +1,7 @@
 # translation of libgnomeui.HEAD.he.po to Hebrew
 # translation of libgnomeui.gnome-2-0.he.po to Hebrew
 # This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Copyright (C) 2005 THE PACKAGE'S COPYRIGHT HOLDER.
 # Gil Osher <dolfin@rpg.org.il>, 2002, 2004.
 # Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2002,2003.
 #
@@ -9,15 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-07 14:54+0100\n"
-"PO-Revision-Date: 2004-03-25 21:36+0000\n"
+"POT-Creation-Date: 2005-07-19 15:26+0300\n"
+"PO-Revision-Date: 2005-07-19 15:42+0300\n"
 "Last-Translator: Gil Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -35,139 +34,207 @@ msgstr "פריט ילד 2"
 msgid "Hint for item 2"
 msgstr "רמז עבור פריט 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:697
+#: file-chooser/gtkfilesystemgnomevfs.c:824
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "‏%s הוא קישור למשהו שאינו תיקייה"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:835
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "‏%s הוא קישור בלי מיקום יעד"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:943
 #, c-format
 msgid "%s is not a folder"
-msgstr ""
+msgstr "‏%s אינו תיקייה"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:908
-#, fuzzy
-msgid "Filesystem"
-msgstr "ק_בצים"
+#: file-chooser/gtkfilesystemgnomevfs.c:1187
+msgid "File System"
+msgstr "מערכת קבצים"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1592
+#: file-chooser/gtkfilesystemgnomevfs.c:1922
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "שמירת הסימניות נכשלה (%s)"
 
-#: file-chooser/testfilechooser.c:176
+#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "שגיאה בקריאת קובץ '%s': %s"
+
+#: file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "שגיאה בחזרה לאחור של קובץ '%s': %s"
+
+#: file-chooser/sucky-desktop-item.c:384
+#: file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "ללא שם"
+
+#: file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "הקובץ '%s' אינו קובץ רגיל או ספרייה"
+
+#: file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr "שגיאה , לא ניתן למצוא זיהוי קובץ '%s'"
+
+#: file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr "אין שם קובץ לשמירה"
+
+#: file-chooser/sucky-desktop-item.c:1797
+msgid "Starting %s"
+msgstr "מתחיל %s"
+
+#: file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr "אין כתובת לשיגור"
+
+#: file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr "הפריט אינו ניתן לשיגור"
+
+#: file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr "אין פקודה לשיגור"
+
+#: file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr "פקודה שגויה לשיגור"
+
+#: file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr "קידוד לא ידוע של: %s"
+
+#: file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "שגיאה בכתיבה לקובץ '%s': %s"
+
+#: file-chooser/testfilechooser.c:178
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "לא ניתן לקבל מידע עבור קובץ '%s': %s"
 
-#: file-chooser/testfilechooser.c:189
+#: file-chooser/testfilechooser.c:191
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "לא ניתן לפתוח קובץ '%s': %s"
 
-#: file-chooser/testfilechooser.c:228
+#: file-chooser/testfilechooser.c:230
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
+msgstr "לא ניתן לפתוח תמונה '%s': הסיבה לא ידועה"
 
-#: libgnomeui/gnome-about.c:198
+#: libgnomeui/gnome-about.c:199
 msgid "Credits"
 msgstr "תודות"
 
-#: libgnomeui/gnome-about.c:230
+#: libgnomeui/gnome-about.c:231
 msgid "Written by"
 msgstr "נכתב על-ידי"
 
-#: libgnomeui/gnome-about.c:245
+#: libgnomeui/gnome-about.c:246
 msgid "Documented by"
 msgstr "תועד על-ידי"
 
-#: libgnomeui/gnome-about.c:260
+#: libgnomeui/gnome-about.c:261
 msgid "Translated by"
 msgstr "תורגם על-ידי"
 
-#: libgnomeui/gnome-about.c:323
+#: libgnomeui/gnome-about.c:324
 msgid "C_redits"
 msgstr "_תודות"
 
-#: libgnomeui/gnome-about.c:378
+#: libgnomeui/gnome-about.c:379
 msgid "Program name"
 msgstr "שם התוכנית"
 
-#: libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:380
 msgid "The name of the program"
 msgstr "השם של התוכנית"
 
-#: libgnomeui/gnome-about.c:386
+#: libgnomeui/gnome-about.c:387
 msgid "Program version"
 msgstr "גירסת התוכנית"
 
-#: libgnomeui/gnome-about.c:387
+#: libgnomeui/gnome-about.c:388
 msgid "The version of the program"
 msgstr "הגירסה של התוכנית"
 
-#: libgnomeui/gnome-about.c:393
+#: libgnomeui/gnome-about.c:394
 msgid "Copyright string"
 msgstr "מחרוזת זכויות יוצרים"
 
-#: libgnomeui/gnome-about.c:394
+#: libgnomeui/gnome-about.c:395
 msgid "Copyright information for the program"
 msgstr "מידע על זכויות היוצרים של התוכנית"
 
-#: libgnomeui/gnome-about.c:401
+#: libgnomeui/gnome-about.c:402
 msgid "Comments string"
 msgstr "מחרוזת הערות"
 
-#: libgnomeui/gnome-about.c:402
+#: libgnomeui/gnome-about.c:403
 msgid "Comments about the program"
 msgstr "הערות על התוכנית"
 
-#: libgnomeui/gnome-about.c:408
+#: libgnomeui/gnome-about.c:409
 msgid "Authors"
 msgstr "מחברים"
 
-#: libgnomeui/gnome-about.c:409
+#: libgnomeui/gnome-about.c:410
 msgid "List of authors of the programs"
 msgstr "רשימת המחברים של התוכנית"
 
-#: libgnomeui/gnome-about.c:411
+#: libgnomeui/gnome-about.c:412
 msgid "Author entry"
 msgstr "שדה מחבר"
 
-#: libgnomeui/gnome-about.c:412
+#: libgnomeui/gnome-about.c:413
 msgid "A single author entry"
 msgstr "שדה מחבר יחיד"
 
-#: libgnomeui/gnome-about.c:419
+#: libgnomeui/gnome-about.c:420
 msgid "Documenters"
 msgstr "מתעדים"
 
-#: libgnomeui/gnome-about.c:420
+#: libgnomeui/gnome-about.c:421
 msgid "List of people documenting the program"
 msgstr "רשימת האנשים שתיעדו את התוכנית"
 
-#: libgnomeui/gnome-about.c:422
+#: libgnomeui/gnome-about.c:423
 msgid "Documenter entry"
 msgstr "שדה מתעד"
 
-#: libgnomeui/gnome-about.c:423
+#: libgnomeui/gnome-about.c:424
 msgid "A single documenter entry"
 msgstr "שדה מתעד יחיד"
 
-#: libgnomeui/gnome-about.c:431
+#: libgnomeui/gnome-about.c:432
 msgid "Translator credits"
 msgstr "תודות למתרגמים"
 
-#: libgnomeui/gnome-about.c:432
+#: libgnomeui/gnome-about.c:433
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "תודות למתרגמים. מחרוזת זו צריכה להיות מסומנת כניתנת לתרגום"
 
-#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:440 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "לוגו"
 
-#: libgnomeui/gnome-about.c:440
+#: libgnomeui/gnome-about.c:441
 msgid "A logo for the about box"
 msgstr "לוגו לתיבת האודות"
 
-#: libgnomeui/gnome-about.c:519
+#: libgnomeui/gnome-about.c:520
 #, c-format
 msgid "About %s"
 msgstr "אודות %s"
@@ -460,7 +527,7 @@ msgstr "סוגר את החלון הנוכחי"
 #. * The "Game" menu
 #.
 #: libgnomeui/gnome-app-helper.c:248
-msgid "_New game"
+msgid "_New Game"
 msgstr "_משחק חדש"
 
 #: libgnomeui/gnome-app-helper.c:249
@@ -468,7 +535,7 @@ msgid "Start a new game"
 msgstr "מתחיל משחק חדש"
 
 #: libgnomeui/gnome-app-helper.c:253
-msgid "_Pause game"
+msgid "_Pause Game"
 msgstr "_הפסק משחק"
 
 #: libgnomeui/gnome-app-helper.c:254
@@ -476,15 +543,15 @@ msgid "Pause the game"
 msgstr "מפסיק את המשחק"
 
 #: libgnomeui/gnome-app-helper.c:258
-msgid "_Restart game"
-msgstr "התחל מ_חדש משחק"
+msgid "_Restart Game"
+msgstr "התחל מ_שחק מחדש"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
 msgstr "מתחיל מחדש את המשחק"
 
 #: libgnomeui/gnome-app-helper.c:263
-msgid "_Undo move"
+msgid "_Undo Move"
 msgstr "ב_טל הזזה"
 
 #: libgnomeui/gnome-app-helper.c:264
@@ -492,8 +559,8 @@ msgid "Undo the last move"
 msgstr "מבטל את ההזזה האחרונה"
 
 #: libgnomeui/gnome-app-helper.c:268
-msgid "_Redo move"
-msgstr "ב_צע שוב הזזה"
+msgid "_Redo Move"
+msgstr "ב_צע הז_זה שוב"
 
 #: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
@@ -517,7 +584,7 @@ msgid "View the scores"
 msgstr "הצג את התוצאות"
 
 #: libgnomeui/gnome-app-helper.c:284
-msgid "_End game"
+msgid "_End Game"
 msgstr "_סיים משחק"
 
 #: libgnomeui/gnome-app-helper.c:285
@@ -549,47 +616,47 @@ msgid "Text Only"
 msgstr "טקסט בלבד"
 
 #: libgnomeui/gnome-app-helper.c:2634
-#, fuzzy, c-format
+#, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "השתמש בברירת המחדל של שולחן העבודה (%s)"
 
-#: libgnomeui/gnome-app-util.c:99
+#: libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
 msgstr " (הקש Enter)"
 
-#: libgnomeui/gnome-app-util.c:141
+#: libgnomeui/gnome-app-util.c:140
 msgid "ERROR: "
 msgstr "שגיאה: "
 
-#: libgnomeui/gnome-app-util.c:178
+#: libgnomeui/gnome-app-util.c:177
 msgid "Warning: "
 msgstr "אזהרה: "
 
-#: libgnomeui/gnome-app-util.c:316
+#: libgnomeui/gnome-app-util.c:315
 msgid "y"
 msgstr "כ"
 
-#: libgnomeui/gnome-app-util.c:317
+#: libgnomeui/gnome-app-util.c:316
 msgid "yes"
 msgstr "כן"
 
-#: libgnomeui/gnome-app-util.c:320
+#: libgnomeui/gnome-app-util.c:319
 msgid "n"
 msgstr "ל"
 
-#: libgnomeui/gnome-app-util.c:321
+#: libgnomeui/gnome-app-util.c:320
 msgid "no"
 msgstr "לא"
 
-#: libgnomeui/gnome-app-util.c:356
+#: libgnomeui/gnome-app-util.c:355
 msgid " (yes or no)"
 msgstr " (כן או לא)"
 
-#: libgnomeui/gnome-app-util.c:357
+#: libgnomeui/gnome-app-util.c:356
 msgid "  - OK? (yes or no)"
 msgstr "  - בסדר? (כן או לא)"
 
-#: libgnomeui/gnome-app-util.c:685
+#: libgnomeui/gnome-app-util.c:684
 msgid "Progress"
 msgstr "התקדמות"
 
@@ -647,45 +714,45 @@ msgid "Your password will be transmitted encrypted."
 msgstr "סיסמתך תשלח מוצפנת."
 
 #: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:307
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "אישור דרוש"
 
-#: libgnomeui/gnome-authentication-manager.c:299
-#, fuzzy, c-format
+#: libgnomeui/gnome-authentication-manager.c:288
+#, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "אתה חייב להתחבר כדי לגשת ל %s\n"
+msgstr "אתה חייב להתחבר כדי לגשת ל%s במתחם %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:301
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "אתה חייב להתחבר כדי לגשת ל %s\n"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:861
 msgid "Specify session management ID"
 msgstr "ציין מזהה מנהל תצורת הפעלה"
 
-#: libgnomeui/gnome-client.c:863
+#: libgnomeui/gnome-client.c:861
 msgid "ID"
 msgstr "זיהוי"
 
-#: libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:864
 msgid "Specify prefix of saved configuration"
 msgstr "ציין נתיב להגדרות השמורות"
 
-#: libgnomeui/gnome-client.c:866
+#: libgnomeui/gnome-client.c:864
 msgid "PREFIX"
 msgstr "נתיב"
 
-#: libgnomeui/gnome-client.c:869
+#: libgnomeui/gnome-client.c:867
 msgid "Disable connection to session manager"
 msgstr "כבה התחברות למנהל התצורה"
 
-#: libgnomeui/gnome-client.c:975
+#: libgnomeui/gnome-client.c:973
 msgid "Session management"
 msgstr "ניהול תצורות הפעלה"
 
-#: libgnomeui/gnome-client.c:2475
+#: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
 msgstr "בטל התחברות"
 
@@ -701,72 +768,72 @@ msgstr "פותח תיבת דו-שיח לציון צבע"
 msgid "Pick a color"
 msgstr "בחר צבע"
 
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+#: libgnomeui/gnome-dateedit.c:491 libgnomeui/gnome-dateedit.c:788
 msgid "Time"
 msgstr "זמן"
 
-#: libgnomeui/gnome-dateedit.c:480
+#: libgnomeui/gnome-dateedit.c:492
 msgid "The time currently selected"
 msgstr "הזמן הנוכחי שנבחר"
 
-#: libgnomeui/gnome-dateedit.c:492
+#: libgnomeui/gnome-dateedit.c:504
 msgid "DateEdit Flags"
 msgstr "דגלי DateEdit"
 
-#: libgnomeui/gnome-dateedit.c:493
+#: libgnomeui/gnome-dateedit.c:505
 msgid "Flags for how DateEdit looks"
 msgstr "דגלים הקובעים איך DateEdit יראה"
 
-#: libgnomeui/gnome-dateedit.c:502
+#: libgnomeui/gnome-dateedit.c:514
 msgid "Lower Hour"
 msgstr "שעה תחתית"
 
-#: libgnomeui/gnome-dateedit.c:503
+#: libgnomeui/gnome-dateedit.c:515
 msgid "Lower hour in the time popup selector"
 msgstr "שעה תחתית בבוחר הזמן הקופץ"
 
-#: libgnomeui/gnome-dateedit.c:513
+#: libgnomeui/gnome-dateedit.c:525
 msgid "Upper Hour"
 msgstr "שעה עילית"
 
-#: libgnomeui/gnome-dateedit.c:514
+#: libgnomeui/gnome-dateedit.c:526
 msgid "Upper hour in the time popup selector"
 msgstr "שעה עילית בבוחר הזמן הקופץ"
 
-#: libgnomeui/gnome-dateedit.c:524
+#: libgnomeui/gnome-dateedit.c:536
 msgid "Initial Time"
 msgstr "זמן אתחול"
 
-#: libgnomeui/gnome-dateedit.c:525
+#: libgnomeui/gnome-dateedit.c:537
 msgid "The initial time"
 msgstr "הזמן האתחול"
 
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+#: libgnomeui/gnome-dateedit.c:751 libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "תאריך"
 
-#: libgnomeui/gnome-dateedit.c:752
+#: libgnomeui/gnome-dateedit.c:764
 msgid "Select Date"
 msgstr "בחר תאריך"
 
-#: libgnomeui/gnome-dateedit.c:752
+#: libgnomeui/gnome-dateedit.c:764
 msgid "Select the date from a calendar"
 msgstr "בחר תאריך מלוח השנה"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:763
+#: libgnomeui/gnome-dateedit.c:775
 msgid "Calendar"
 msgstr "לוח שנה"
 
-#: libgnomeui/gnome-dateedit.c:784
+#: libgnomeui/gnome-dateedit.c:796
 msgid "Select Time"
 msgstr "בחר זמן"
 
-#: libgnomeui/gnome-dateedit.c:784
+#: libgnomeui/gnome-dateedit.c:796
 msgid "Select the time from a list"
 msgstr "בחר את הזמן מהרשימה"
 
-#: libgnomeui/gnome-dateedit.c:1003
+#: libgnomeui/gnome-dateedit.c:1015
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date לא רצוי, משתמש ב gnome_date_edit_get_time"
 
@@ -838,29 +905,24 @@ msgstr "צבע רקע נקבע"
 
 #: libgnomeui/gnome-druid-page-standard.c:193
 #: libgnomeui/gnome-druid-page-standard.c:201
-#, fuzzy
 msgid "Contents Background Color"
-msgstr "צבע רקע הלוגו"
+msgstr "צבע רקע התוכן"
 
 #: libgnomeui/gnome-druid-page-standard.c:194
-#, fuzzy
 msgid "Contents Background color"
-msgstr "צבע רקע הלוגו"
+msgstr "צבע רקע התוכן"
 
 #: libgnomeui/gnome-druid-page-standard.c:202
-#, fuzzy
 msgid "Contents Background color as a GdkColor"
-msgstr "צבע רקע כ GdkColor"
+msgstr "צבע רקע התוכן כGdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "קבע צבע רקע"
+msgstr "ערכת צבע רקע התוכן"
 
 #: libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "צבע רקע נקבע"
+msgstr "צבע רקע התוכן נקבע"
 
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
@@ -911,63 +973,63 @@ msgstr "ערך GTK"
 msgid "The GTK entry"
 msgstr "ערך ה GTK"
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
 msgid "History ID"
 msgstr "זיהוי היסטוריה"
 
-#: libgnomeui/gnome-file-entry.c:230
+#: libgnomeui/gnome-file-entry.c:237
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr "מזהה ייחודי לערך הקובץ.  לשימוש בעת שמירת רשימת ההיסטוריה."
 
-#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
+#: libgnomeui/gnome-file-entry.c:245 libgnomeui/gnome-icon-entry.c:188
 msgid "Browse Dialog Title"
 msgstr "כותרת תיבת דו-שיח עיון"
 
-#: libgnomeui/gnome-file-entry.c:239
+#: libgnomeui/gnome-file-entry.c:246
 msgid "Title for the Browse file dialog."
 msgstr "כותרת לתיבת הדו-שיח עיון."
 
-#: libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Directory Entry"
 msgstr "ערך ספרייה"
 
-#: libgnomeui/gnome-file-entry.c:247
+#: libgnomeui/gnome-file-entry.c:254
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr "האם ערך הקובץ הוא שמות ספריות או שמות קבצים מלאים."
 
-#: libgnomeui/gnome-file-entry.c:255
+#: libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
 msgstr "מודלי"
 
-#: libgnomeui/gnome-file-entry.c:256
+#: libgnomeui/gnome-file-entry.c:263
 msgid "Whether the Browse file window should be modal."
 msgstr "האם חלון הדפדוף בקבצים צריך להיות מודלי."
 
-#: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
+#: libgnomeui/gnome-file-entry.c:270 libgnomeui/gnome-icon-entry.c:204
 msgid "Filename"
 msgstr "שם הקובץ"
 
-#: libgnomeui/gnome-file-entry.c:264
+#: libgnomeui/gnome-file-entry.c:271
 msgid "Filename that should be displayed in the file entry."
 msgstr "שם הקובץ שצריך להיות מוצג בערך הקובץ."
 
-#: libgnomeui/gnome-file-entry.c:272
+#: libgnomeui/gnome-file-entry.c:279
 msgid "Default Path"
 msgstr "נתיב ברירת מחדל"
 
-#: libgnomeui/gnome-file-entry.c:273
+#: libgnomeui/gnome-file-entry.c:280
 msgid "Default path for the Browse file window."
 msgstr "נתיב ברירת מחדל לחלון העיון."
 
-#: libgnomeui/gnome-file-entry.c:280
+#: libgnomeui/gnome-file-entry.c:287
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: libgnomeui/gnome-file-entry.c:281
+#: libgnomeui/gnome-file-entry.c:288
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -977,11 +1039,11 @@ msgstr ""
 "הזה כדי לקבל את GnomeEntry אם אתה צריך לשנות או לבצע שאילתה על כל אחד "
 "מהפרמטרים שלו."
 
-#: libgnomeui/gnome-file-entry.c:291
+#: libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: libgnomeui/gnome-file-entry.c:292
+#: libgnomeui/gnome-file-entry.c:299
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -991,11 +1053,11 @@ msgstr ""
 "הזה כדי לקבל את GtkEntry אם אתה צריך לשנות או לבצע שאילתה על כל אחד "
 "מהפרמטרים שלו."
 
-#: libgnomeui/gnome-file-entry.c:302
+#: libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
 msgstr "השתמש ב GtkFileChooser"
 
-#: libgnomeui/gnome-file-entry.c:303
+#: libgnomeui/gnome-file-entry.c:310
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
@@ -1003,23 +1065,31 @@ msgstr ""
 "האם להשתמש בפריט GtkFileChooser החדש או בפריט GtkFileSelection כדי לבחור "
 "קבצים."
 
-#: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
+#: libgnomeui/gnome-file-entry.c:319
+msgid "GtkFileChooser Action"
+msgstr "פעולת GtkFileChooser"
+
+#: libgnomeui/gnome-file-entry.c:320
+msgid "The type of operation that the file selector is performing."
+msgstr "סוג הפעולה שבוחר הקבצים מבצע"
+
+#: libgnomeui/gnome-file-entry.c:635 libgnomeui/gnome-file-entry.c:669
 msgid "Select file"
 msgstr "בחר קובץ"
 
-#: libgnomeui/gnome-file-entry.c:786
+#: libgnomeui/gnome-file-entry.c:795
 msgid "Path"
 msgstr "נתיב"
 
-#: libgnomeui/gnome-file-entry.c:786
+#: libgnomeui/gnome-file-entry.c:795
 msgid "Path to file"
 msgstr "נתיב לקובץ"
 
-#: libgnomeui/gnome-file-entry.c:813
+#: libgnomeui/gnome-file-entry.c:822
 msgid "_Browse..."
 msgstr "_עיין..."
 
-#: libgnomeui/gnome-file-entry.c:814
+#: libgnomeui/gnome-file-entry.c:823
 msgid "Pop up a file selector to choose a file"
 msgstr "מקפיץ בוחר קבצים לבחירת קובץ"
 
@@ -1159,39 +1229,39 @@ msgstr "כפתור זה ייקח אותך לכתובת שהוא מציג."
 
 #: libgnomeui/gnome-href.c:394
 msgid ""
-"An error has occured while trying to launch the default web browser.\n"
+"An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "ארעה שגיאה בזמן ניסיון הפעלת דפדפן ברירת המחדל.\n"
 "אנא בדוק את הגדרותיך בכלי ההעדפות 'יישומים מועדפים'."
 
-#: libgnomeui/gnome-icon-entry.c:178
+#: libgnomeui/gnome-icon-entry.c:180
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr "מזהה ייחודי לערך הסמל.  זה ישמש לשמירת רשימת ההיסטוריה."
 
-#: libgnomeui/gnome-icon-entry.c:187
+#: libgnomeui/gnome-icon-entry.c:189
 msgid "Title for the Browse icon dialog."
 msgstr "כותרת לתיבת הדו-שיח בחר סמל."
 
-#: libgnomeui/gnome-icon-entry.c:194
+#: libgnomeui/gnome-icon-entry.c:196
 msgid "Pixmap Directory"
 msgstr "ספריית Pixmap"
 
-#: libgnomeui/gnome-icon-entry.c:195
+#: libgnomeui/gnome-icon-entry.c:197
 msgid "Directory that will be searched for icons."
 msgstr "הספרייה בה יחופשו הסמלים."
 
-#: libgnomeui/gnome-icon-entry.c:203
+#: libgnomeui/gnome-icon-entry.c:205
 msgid "Filename that should be displayed in the icon entry."
 msgstr "שם הקובץ שצריך להיות מוצג בשדה הסמל."
 
-#: libgnomeui/gnome-icon-entry.c:211
+#: libgnomeui/gnome-icon-entry.c:213
 msgid "Picker dialog"
 msgstr "תיבת בחירה"
 
-#: libgnomeui/gnome-icon-entry.c:212
+#: libgnomeui/gnome-icon-entry.c:214
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1199,43 +1269,43 @@ msgstr ""
 "תיבת דו-שיח לבחירת סמל.  אתה יכול להשתמש במאפיין זה כדי לקבל את ה GtkDialog "
 "אם אתה צריך לשנות או לבדוק כל אחד ממאפייניו."
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
+#: libgnomeui/gnome-icon-entry.c:322 libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
 msgstr "אין סמל"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: libgnomeui/gnome-icon-entry.c:755
 msgid "Icon selection dialog"
 msgstr "תיבת דו-שיח לבחירת סמל"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: libgnomeui/gnome-icon-entry.c:756
 msgid "This dialog box lets you select an icon."
 msgstr "תיבת הדו-שיח הזו נותנת לך לבחור סמל."
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: libgnomeui/gnome-icon-entry.c:762
 msgid "Icon selector"
 msgstr "בוחר סמל"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:763
 msgid "Please pick the icon you want."
 msgstr "אנא בחר את הסמל שאתה רוצה."
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
 msgstr "בוחר סמל"
 
-#: libgnomeui/gnome-icon-entry.c:984
+#: libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
 msgstr "כפתור זה יפתח חלון שייתן לך לבחור סמל."
 
-#: libgnomeui/gnome-icon-entry.c:1007
+#: libgnomeui/gnome-icon-entry.c:1009
 msgid "Browse"
 msgstr "עיין"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "נתיב סמל"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1287,21 +1357,25 @@ msgstr "_תחום:"
 msgid "_Password:"
 msgstr "_סיסמה:"
 
-#: libgnomeui/gnome-password-dialog.c:330
+#: libgnomeui/gnome-password-dialog.c:310
+msgid "Co_nnect"
+msgstr "ה_תחבר"
+
+#: libgnomeui/gnome-password-dialog.c:331
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "התחבר כ_אנונימי"
 
-#: libgnomeui/gnome-password-dialog.c:335
-msgid "Connect as _user:"
-msgstr ""
+#: libgnomeui/gnome-password-dialog.c:336
+msgid "Connect as u_ser:"
+msgstr "התחבר כ_משתמש:"
 
-#: libgnomeui/gnome-password-dialog.c:433
-msgid "Remember password for this session"
-msgstr "זכור סיסמה לתצורת הפעלה זו"
+#: libgnomeui/gnome-password-dialog.c:434
+msgid "_Remember password for this session"
+msgstr "זכור _סיסמה לתצורת הפעלה זו"
 
-#: libgnomeui/gnome-password-dialog.c:435
-msgid "Save password in keyring"
-msgstr "שמור סיסמה בצרור המפתחות"
+#: libgnomeui/gnome-password-dialog.c:436
+msgid "Save password in _keyring"
+msgstr "_שמור סיסמה בצרור המפתחות"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1382,30 +1456,30 @@ msgstr "ביטול הזחה"
 msgid "About"
 msgstr "אודות"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: libgnomeui/gnome-ui-init.c:121
 msgid "Disable Crash Dialog"
 msgstr "כבה את מסך ההתרסקות"
 
-#: libgnomeui/gnome-ui-init.c:119
+#: libgnomeui/gnome-ui-init.c:123
 msgid "X display to use"
 msgstr "תצוגת X לשימוש"
 
-#: libgnomeui/gnome-ui-init.c:119
+#: libgnomeui/gnome-ui-init.c:123
 msgid "DISPLAY"
 msgstr "תצוגה"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:131
 msgid "GNOME GUI Library"
 msgstr "ספריית ממשק המשתמש של GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:708
+#: libgnomeui/gnome-ui-init.c:716
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "מספר תקלות הקטעה אירעו בו זמנית; לא ניתן להציג תיבת דו-שיח לשגיאה\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:722
+#: libgnomeui/gnome-ui-init.c:730
 #, c-format
 msgid ""
 "Segmentation fault!\n"
