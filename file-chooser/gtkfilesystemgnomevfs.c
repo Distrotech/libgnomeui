@@ -48,10 +48,6 @@
 
 #include <glib/gstdio.h>
 
-#ifdef USE_GCONF
-#include <gconf/gconf-client.h>
-#endif
-
 #include <libgnomeui/gnome-icon-lookup.h>
 #include <libgnomeui/gnome-authentication-manager-private.h>
 
@@ -60,7 +56,50 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 #include "sucky-desktop-item.h"
+
+#undef PROFILE_FILE_CHOOSER
+#ifdef PROFILE_FILE_CHOOSER
+#define PROFILE_INDENT 4
+static int profile_indent;
+
+static void
+profile_add_indent (int indent)
+{
+  profile_indent += indent;
+  if (profile_indent < 0)
+    g_error ("You screwed up your indentation");
+}
+
+static void
+profile_log (const char *func, int indent, const char *msg1, const char *msg2)
+{
+  char *str;
+
+  if (indent < 0)
+    profile_add_indent (indent);
+
+  if (profile_indent == 0)
+    str = g_strdup_printf ("MARK: %s %s %s", func, msg1 ? msg1 : "", msg2 ? msg2 : "");
+  else
+    str = g_strdup_printf ("MARK: %*c %s %s %s", profile_indent - 1, ' ', func, msg1 ? msg1 : "", msg2 ? msg2 : "");
+
+  access (str, F_OK);
+  g_free (str);
+
+  if (indent > 0)
+    profile_add_indent (indent);
+}
+
+#define profile_start(x, y) profile_log (G_STRFUNC, PROFILE_INDENT, x, y)
+#define profile_end(x, y) profile_log (G_STRFUNC, -PROFILE_INDENT, x, y)
+#define profile_msg(x, y) profile_log (NULL, 0, x, y)
+#else
+#define profile_start(x, y)
+#define profile_end(x, y)
+#define profile_msg(x, y)
+#endif
 
 #define BOOKMARKS_FILENAME ".gtk-bookmarks"
 #define BOOKMARKS_TMP_FILENAME ".gtk-bookmarks-XXXXXX"
@@ -97,12 +136,6 @@ struct _GtkFileSystemGnomeVFS
   gulong volume_unmounted_id;
   gulong drive_connected_id;
   gulong drive_disconnected_id;
-
-#ifdef USE_GCONF
-  GConfClient *client;
-  guint client_notify_id;
-  GSList *bookmarks;
-#endif
 
   char *desktop_uri;
   char *home_uri;
@@ -169,12 +202,6 @@ struct _FolderChild
  * structures which don't have the flag set, and emit "files-removed" signals
  * for them.
  */
-
-#ifdef USE_GCONF
-/* GConf paths for the bookmarks; keep these two in sync */
-#define BOOKMARKS_KEY  "/desktop/gnome/interface/bookmark_folders"
-#define BOOKMARKS_PATH "/desktop/gnome/interface"
-#endif
 
 static void gtk_file_system_gnome_vfs_class_init (GtkFileSystemGnomeVFSClass *class);
 static void gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface         *iface);
@@ -294,17 +321,6 @@ static void monitor_callback        (GnomeVFSMonitorHandle    *handle,
 				     GnomeVFSMonitorEventType  event_type,
 				     gpointer                  user_data);
 
-#ifdef USE_GCONF
-static void set_bookmarks_from_value (GtkFileSystemGnomeVFS *system_vfs,
-				      GConfValue            *value,
-				      gboolean               emit_changed);
-
-static void client_notify_cb (GConfClient *client,
-			      guint        cnxn_id,
-			      GConfEntry  *entry,
-			      gpointer     data);
-#endif
-
 static gchar *make_child_uri (const gchar *base_uri,
 			      const gchar *child_name,
 			      GError     **error);
@@ -403,10 +419,8 @@ static void
 gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 {
   char *name;
-#ifdef USE_GCONF
-  GConfValue *value;
-#endif
 
+  profile_start ("start", NULL);
 
   bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
 #ifdef HAVE_BIND_TEXTDOMAIN_CODESET 
@@ -421,26 +435,6 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
   
   system_vfs->locale_encoded_filenames = (getenv ("G_BROKEN_FILENAMES") != NULL);
   system_vfs->folders = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-
-#ifdef USE_GCONF
-  system_vfs->client = gconf_client_get_default ();
-  system_vfs->bookmarks = NULL;
-
-  value = gconf_client_get (system_vfs->client, BOOKMARKS_KEY, NULL);
-  set_bookmarks_from_value (system_vfs, value, FALSE);
-  if (value)
-    gconf_value_free (value);
-
-  /* FIXME: use GError? */
-  gconf_client_add_dir (system_vfs->client, BOOKMARKS_PATH, GCONF_CLIENT_PRELOAD_NONE, NULL);
-
-  system_vfs->client_notify_id = gconf_client_notify_add (system_vfs->client,
-							  BOOKMARKS_KEY,
-							  client_notify_cb,
-							  system_vfs,
-							  NULL,
-							  NULL);
-#endif
 
   system_vfs->volume_monitor = gnome_vfs_get_volume_monitor ();
   system_vfs->volume_mounted_id =
@@ -467,6 +461,8 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
     system_vfs->have_net = TRUE;
   else
     system_vfs->have_net = FALSE;
+
+  profile_end ("end", NULL);
 }
 
 static void
@@ -486,12 +482,6 @@ gtk_file_system_gnome_vfs_finalize (GObject *object)
   g_free (system_vfs->home_uri);
   g_hash_table_foreach (system_vfs->folders, unref_folder, NULL);
   g_hash_table_destroy (system_vfs->folders);
-
-#ifdef USE_GCONF
-  gconf_client_notify_remove (system_vfs->client, system_vfs->client_notify_id);
-  g_object_unref (system_vfs->client);
-  gtk_file_paths_free (system_vfs->bookmarks);
-#endif
 
   g_signal_handler_disconnect (system_vfs->volume_monitor, system_vfs->volume_mounted_id);
   g_signal_handler_disconnect (system_vfs->volume_monitor, system_vfs->volume_unmounted_id);
@@ -516,6 +506,8 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
   GSList *result;
   GList *list;
   GList *l;
+
+  profile_start ("start", NULL);
 
   result = NULL;
 
@@ -565,6 +557,8 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
   if (volume)
     result = g_slist_prepend (result, volume);
 
+  profile_end ("end", NULL);
+
   return result;
 }
 
@@ -576,9 +570,14 @@ gtk_file_system_gnome_vfs_get_volume_for_path (GtkFileSystem     *file_system,
   GnomeVFSURI *uri;
   GnomeVFSVolume *volume;
 
+  profile_start ("start", (char *) path);
+
   uri = gnome_vfs_uri_new (gtk_file_path_get_string (path));
   if (!uri)
-    return NULL;
+    {
+      profile_end ("end", (char *) path);
+      return NULL;
+    }
 
   volume = NULL;
 
@@ -605,6 +604,8 @@ gtk_file_system_gnome_vfs_get_volume_for_path (GtkFileSystem     *file_system,
   if (uri)
     gnome_vfs_uri_unref (uri);
 
+  profile_end ("end", (char *) path);
+
   return (GtkFileSystemVolume *) volume;
 }
 
@@ -625,6 +626,8 @@ load_dir (GtkFileFolderGnomeVFS *folder_vfs)
 {
   int num_items;
   GnomeVFSFileInfoOptions vfs_options;
+
+  profile_start ("start", folder_vfs->uri);
 
   if (folder_vfs->async_handle)
     {
@@ -651,6 +654,8 @@ load_dir (GtkFileFolderGnomeVFS *folder_vfs)
 				  GNOME_VFS_PRIORITY_DEFAULT,
 				  directory_load_callback, folder_vfs);
   gnome_authentication_manager_pop_async ();
+
+  profile_end ("end", folder_vfs->uri);
 }
 
 static GnomeVFSFileInfo *
@@ -859,18 +864,22 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
   GnomeVFSResult result;
   GnomeVFSFileInfo *vfs_info;
 
+  profile_start ("start", (char *) path);
+
   uri = make_uri_canonical (gtk_file_path_get_string (path));
   folder_vfs = g_hash_table_lookup (system_vfs->folders, uri);
   if (folder_vfs)
     {
       folder_vfs->types |= types;
       g_free (uri);
+      profile_end ("returning cached folder", NULL);
       return g_object_ref (folder_vfs);
     }
 
   if (!gtk_file_system_get_parent (file_system, path, &parent_path, error))
     {
       g_free (uri);
+      profile_end ("returning NULL because of lack of parent", NULL);
       return NULL;
     }
 
@@ -895,6 +904,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 	  if (!child)
 	    {
 	      g_free (uri);
+	      profile_end ("returning NULL because lookup_folder_child_from_uri() failed", NULL);
 	      return NULL;
 	    }
 
@@ -916,6 +926,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 	  set_vfs_error (result, uri, error);
 	  gnome_vfs_file_info_unref (vfs_info);
 	  g_free (uri);
+	  profile_end ("returning NULL because couldn't get file info", NULL);
 	  return NULL;
 	}
     }
@@ -929,6 +940,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 	{
 	  g_free (uri);
 	  gnome_vfs_file_info_unref (vfs_info);
+	  profile_end ("returning NULL because couldn't get desktop link uri", NULL);
 	  return NULL;
 	}
 
@@ -944,6 +956,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 		   uri);
       g_free (uri);
       gnome_vfs_file_info_unref (vfs_info);
+      profile_end ("returning NULL because not a folder", NULL);
       return NULL;
     }
 
@@ -969,6 +982,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 	  g_free (uri);
 	  g_object_unref (folder_vfs);
 	  set_vfs_error (result, uri, error);
+	  profile_end ("returning NULL because couldn't add monitor", NULL);
 	  return NULL;
 	}
     }
@@ -984,6 +998,8 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 						(GDestroyNotify) folder_child_free);
 
   g_hash_table_insert (system_vfs->folders, folder_vfs->uri, folder_vfs);
+
+  profile_end ("end", (char *) path);
 
   return GTK_FILE_FOLDER (folder_vfs);
 }
@@ -1234,6 +1250,8 @@ get_cached_icon (GtkWidget   *widget,
   GHashTable *cache = g_object_get_data (G_OBJECT (icon_theme), "gnome-vfs-gtk-file-icon-cache");
   IconCacheElement *element;
 
+  profile_start ("start", name);
+
   if (!cache)
     {
       cache = g_hash_table_new_full (g_str_hash, g_str_equal,
@@ -1268,6 +1286,8 @@ get_cached_icon (GtkWidget   *widget,
 	element->pixbuf = gtk_icon_theme_load_icon (icon_theme, name, pixel_size, 0, error);
     }
 
+  profile_end ("end", name);
+
   return element->pixbuf ? g_object_ref (element->pixbuf) : NULL;
 }
 
@@ -1282,6 +1302,8 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
   char *icon_name, *uri;
   GdkPixbuf *pixbuf;
   GnomeVFSVolume *mounted_volume;
+
+  profile_start ("start", NULL);
 
   system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
 
@@ -1320,6 +1342,8 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
     }
   else
     pixbuf = NULL;
+
+  profile_end ("end", NULL);
 
   return pixbuf;
 }
@@ -1669,10 +1693,15 @@ get_vfs_info (GtkFileSystem     *file_system,
   GnomeVFSFileInfo *info;
   GtkFileSystemGnomeVFS *system_vfs;
 
+  profile_start ("start", (char *) path);
+
   system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
 
   if (!gtk_file_system_get_parent (file_system, path, &parent_path, NULL))
-    return NULL;
+    {
+      profile_end ("end with no parent", (char *) path);
+      return NULL;
+    }
   
   parent_uri = gtk_file_path_get_string (parent_path);
   info = NULL;
@@ -1704,6 +1733,8 @@ get_vfs_info (GtkFileSystem     *file_system,
     }
   
   gtk_file_path_free (parent_path);
+
+  profile_end ("end", (char *) path);
 
   return info;
   
@@ -1753,6 +1784,8 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
   char *icon_name;
   GnomeVFSFileInfo *vfs_info;
 
+  profile_start ("start", (char *) path);
+
   system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
 
   pixbuf = NULL;
@@ -1764,6 +1797,7 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
     {
       pixbuf = get_icon_from_desktop_file (uri, widget, pixel_size, error);
       gnome_vfs_file_info_unref (vfs_info);
+      profile_end ("end with icon from desktop file", (char *) path);
       return pixbuf;
     }
 
@@ -1790,6 +1824,8 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
 
   if (vfs_info)
     gnome_vfs_file_info_unref (vfs_info);
+
+  profile_end ("end", (char *) path);
 
   return pixbuf;
 }
@@ -1947,11 +1983,14 @@ gtk_file_system_gnome_vfs_insert_bookmark (GtkFileSystem     *file_system,
   gboolean result;
   GError *err;
 
+  profile_start ("start", (char *) path);
+
   err = NULL;
   if (!bookmark_list_read (&bookmarks, &err) && err->code != G_FILE_ERROR_NOENT)
     {
       g_propagate_error (error, err);
       g_error_free (err);
+      profile_end ("end; could not read bookmarks list", NULL);
       return FALSE;
     }
 
@@ -1999,6 +2038,8 @@ gtk_file_system_gnome_vfs_insert_bookmark (GtkFileSystem     *file_system,
   g_free (uri);
   bookmark_list_free (bookmarks);
 
+  profile_end ("end", (char *) path);
+
   return result;
 }
 
@@ -2012,8 +2053,13 @@ gtk_file_system_gnome_vfs_remove_bookmark (GtkFileSystem     *file_system,
   GSList *l;
   gboolean result;
 
+  profile_start ("start", (char *) path);
+
   if (!bookmark_list_read (&bookmarks, error))
-    return FALSE;
+    {
+      profile_end ("end, could not read bookmarks list", NULL);
+      return FALSE;
+    }
 
   result = FALSE;
 
@@ -2060,6 +2106,8 @@ gtk_file_system_gnome_vfs_remove_bookmark (GtkFileSystem     *file_system,
   g_free (uri);
   bookmark_list_free (bookmarks);
 
+  profile_end ("end", (char *) path);
+
   return result;
 }
 
@@ -2070,8 +2118,13 @@ gtk_file_system_gnome_vfs_list_bookmarks (GtkFileSystem *file_system)
   GSList *result;
   GSList *l;
 
+  profile_start ("start", NULL);
+
   if (!bookmark_list_read (&bookmarks, NULL))
-    return NULL;
+    {
+      profile_end ("end, could not read bookmarks list", NULL);
+      return NULL;
+    }
 
   result = NULL;
 
@@ -2089,6 +2142,9 @@ gtk_file_system_gnome_vfs_list_bookmarks (GtkFileSystem *file_system)
   bookmark_list_free (bookmarks);
 
   result = g_slist_reverse (result);
+
+  profile_end ("end", NULL);
+
   return result;
 }
 
@@ -2100,9 +2156,14 @@ gtk_file_system_gnome_vfs_get_bookmark_label (GtkFileSystem     *file_system,
   gchar *label;
   GSList *l;
   gchar *bookmark, *space, *uri;
+
+  profile_start ("start", (char *) path);
   
   if (!bookmark_list_read (&bookmarks, NULL))
-    return NULL;
+    {
+      profile_end ("end, could not read bookmarks list", NULL);
+      return NULL;
+    }
 
   uri = gtk_file_system_path_to_uri (file_system, path);
 
@@ -2123,6 +2184,8 @@ gtk_file_system_gnome_vfs_get_bookmark_label (GtkFileSystem     *file_system,
   g_free (uri);
   bookmark_list_free (bookmarks);
 
+  profile_end ("end", (char *) path);
+
   return label;
 }
 
@@ -2136,8 +2199,13 @@ gtk_file_system_gnome_vfs_set_bookmark_label (GtkFileSystem     *file_system,
   gchar *bookmark, *space, *uri;
   gboolean found;
 
+  profile_start ("start", (char *) path);
+
   if (!bookmark_list_read (&bookmarks, NULL))
-    return;
+    {
+      profile_end ("end, could not read bookmarks list", NULL);
+      return;
+    }
 
   uri = gtk_file_system_path_to_uri (file_system, path);
 
@@ -2176,111 +2244,9 @@ gtk_file_system_gnome_vfs_set_bookmark_label (GtkFileSystem     *file_system,
   
   g_free (uri);
   bookmark_list_free (bookmarks);
+
+  profile_end ("end", NULL);
 }
-
-#ifdef USE_GCONF
-static gboolean
-gtk_file_system_gnome_vfs_add_bookmark (GtkFileSystem     *file_system,
-					const GtkFilePath *path,
-					GError           **error)
-{
-  GtkFileSystemGnomeVFS *system_vfs;
-  GSList *list, *l;
-  gboolean result;
-
-  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
-
-  list = NULL;
-
-  for (l = system_vfs->bookmarks; l; l = l->next)
-    {
-      GtkFilePath *p;
-      const char *str;
-
-      p = l->data;
-      str = gtk_file_path_get_string (p);
-
-      list = g_slist_prepend (list, (gpointer) str);
-    }
-
-  list = g_slist_prepend (list, (gpointer) gtk_file_path_get_string (path));
-  list = g_slist_reverse (list);
-
-  result = gconf_client_set_list (system_vfs->client, BOOKMARKS_KEY,
-				  GCONF_VALUE_STRING,
-				  list,
-				  error);
-
-  g_slist_free (list);
-
-  return result;
-}
-
-static gboolean
-gtk_file_system_gnome_vfs_remove_bookmark (GtkFileSystem     *file_system,
-					   const GtkFilePath *path,
-					   GError           **error)
-{
-  GtkFileSystemGnomeVFS *system_vfs;
-  GSList *list, *l;
-  gboolean found;
-  gboolean result;
-
-  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
-
-  list = NULL;
-  found = FALSE;
-
-  for (l = system_vfs->bookmarks; l; l = l->next)
-    {
-      GtkFilePath *p;
-
-      p = l->data;
-      if (gtk_file_path_compare (path, p) != 0)
-	{
-	  const char *str;
-
-	  str = gtk_file_path_get_string (p);
-	  list = g_slist_prepend (list, (gpointer) str);
-	}
-      else
-	found = TRUE;
-    }
-
-  if (found)
-    {
-      list = g_slist_reverse (list);
-
-      result = gconf_client_set_list (system_vfs->client, BOOKMARKS_KEY,
-				      GCONF_VALUE_STRING,
-				      list,
-				      error);
-    }
-  else
-    {
-      g_set_error (error,
-		   GTK_FILE_SYSTEM_ERROR,
-		   GTK_FILE_SYSTEM_ERROR_FAILED,
-		   "Path %s is not in bookmarks",
-		   gtk_file_path_get_string (path));
-      result = FALSE;
-    }
-
-  g_slist_free (list);
-
-  return result;
-}
-
-static GSList *
-gtk_file_system_gnome_vfs_list_bookmarks (GtkFileSystem *file_system)
-{
-  GtkFileSystemGnomeVFS *system_vfs;
-
-  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
-
-  return gtk_file_paths_copy (system_vfs->bookmarks);
-}
-#endif
 
 /*
  * GtkFileFolderGnomeVFS
@@ -2376,9 +2342,14 @@ lookup_folder_child_from_uri (GtkFileFolder *folder,
   GnomeVFSFileInfo *vfs_info;
   GnomeVFSResult result;
 
+  profile_start ("start", uri);
+
   child = g_hash_table_lookup (folder_vfs->children, uri);
   if (child)
-    return child;
+    {
+      profile_end ("end, returning cached child", uri);
+      return child;
+    }
 
   /* We may not have loaded the file's information yet.
    */
@@ -2392,6 +2363,7 @@ lookup_folder_child_from_uri (GtkFileFolder *folder,
     {
       set_vfs_error (result, uri, error);
       gnome_vfs_file_info_unref (vfs_info);
+      profile_end ("end, could not get file info", uri);
       return NULL;
     }
   else
@@ -2405,6 +2377,8 @@ lookup_folder_child_from_uri (GtkFileFolder *folder,
       uris = g_slist_append (NULL, (char *) uri);
       g_signal_emit_by_name (folder_vfs, "files-added", uris);
       g_slist_free (uris);
+
+      profile_end ("end", uri);
 
       return child;
     }
@@ -2433,13 +2407,15 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
   const gchar *uri = gtk_file_path_get_string (path);
   FolderChild *child;
+  GtkFileInfo *file_info;
+
+  profile_start ("start", (char *) path);
 
   if (!path)
     {
       GnomeVFSURI *vfs_uri;
       GnomeVFSResult result;
       GnomeVFSFileInfo *info;
-      GtkFileInfo *file_info;
 
       vfs_uri = gnome_vfs_uri_new (folder_vfs->uri);
       g_assert (vfs_uri != NULL);
@@ -2460,15 +2436,22 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
 	file_info = info_from_vfs_info (folder_vfs->uri, info, GTK_FILE_INFO_ALL, error);
 
       gnome_vfs_file_info_unref (info);
+
+      profile_end ("end for non-child info", (char *) path);
+
       return file_info;
     }
 
   child = lookup_folder_child (folder, path, error);
 
   if (child)
-    return info_from_vfs_info (uri, child->info, folder_vfs->types, error);
+    file_info = info_from_vfs_info (uri, child->info, folder_vfs->types, error);
   else
-    return NULL;
+    file_info = NULL;
+
+  profile_end ("end", (char *) path);
+
+  return file_info;
 }
 
 static void
@@ -2489,6 +2472,8 @@ gtk_file_folder_gnome_vfs_list_children (GtkFileFolder  *folder,
 {
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
 
+  profile_start ("start", folder_vfs->uri);
+
   if (folder_vfs->is_afs_or_net)
     load_afs_dir (folder_vfs);
   else
@@ -2497,6 +2482,8 @@ gtk_file_folder_gnome_vfs_list_children (GtkFileFolder  *folder,
   *children = NULL;
 
   g_hash_table_foreach (folder_vfs->children, list_children_foreach, children);
+
+  profile_end ("end", folder_vfs->uri);
 
   return TRUE;
 }
@@ -2810,6 +2797,8 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
   GSList *added_uris = NULL;
   GSList *changed_uris = NULL;
 
+  profile_start ("start", NULL);
+
   /* This is called from an idle, we need to protect is as such */
   gdk_threads_enter ();
 
@@ -2818,7 +2807,11 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
    * directory_load_callback is just being called
    */
   if (folder_vfs->children == NULL)
-    return;
+    {
+      profile_end ("end", NULL);
+      gdk_threads_leave ();
+      return;
+    }
   
   for (tmp_list = list; tmp_list; tmp_list = tmp_list->next)
     {
@@ -2881,6 +2874,8 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
     }
 
   gdk_threads_leave ();
+
+  profile_end ("end", NULL);
 }
 
 static void
@@ -2893,12 +2888,18 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
   GtkFileFolderGnomeVFS *folder_vfs = user_data;
   GSList *uris;
 
+  profile_start ("start", info_uri);
+
   /* This is called from an idle, we need to protect is as such */
   gdk_threads_enter ();
 
   /* Check if destroyed */
   if (folder_vfs->children == NULL)
-    return;
+    {
+      gdk_threads_leave ();
+      profile_end ("end", info_uri);
+      return;
+    }
   
   switch (event_type)
     {
@@ -2962,6 +2963,8 @@ monitor_callback (GnomeVFSMonitorHandle   *handle,
     }
 
   gdk_threads_leave ();
+
+  profile_end ("end", info_uri);
 }
 
 static gboolean
@@ -2986,64 +2989,6 @@ has_valid_scheme (const char *uri)
 
   return *p == ':';
 }
-
-#ifdef USE_GCONF
-/* Sets the bookmarks list from a GConfValue */
-static void
-set_bookmarks_from_value (GtkFileSystemGnomeVFS *system_vfs,
-			  GConfValue            *value,
-			  gboolean               emit_changed)
-{
-  gtk_file_paths_free (system_vfs->bookmarks);
-  system_vfs->bookmarks = NULL;
-
-  if (value && gconf_value_get_list_type (value) == GCONF_VALUE_STRING)
-    {
-      GSList *list, *l;
-
-      list = gconf_value_get_list (value);
-
-      for (l = list; l; l = l->next)
-	{
-	  GConfValue *v;
-	  const char *uri;
-	  GtkFilePath *path;
-
-	  v = l->data;
-	  uri = gconf_value_get_string (v);
-	  path = gtk_file_system_uri_to_path (GTK_FILE_SYSTEM (system_vfs), uri);
-
-	  if (!path)
-	    continue;
-
-	  system_vfs->bookmarks = g_slist_prepend (system_vfs->bookmarks, path);
-	}
-
-      system_vfs->bookmarks = g_slist_reverse (system_vfs->bookmarks);
-    }
-
-  if (emit_changed)
-    g_signal_emit_by_name (system_vfs, "bookmarks-changed");
-}
-
-static void
-client_notify_cb (GConfClient *client,
-		  guint        cnxn_id,
-		  GConfEntry  *entry,
-		  gpointer     data)
-{
-  GtkFileSystemGnomeVFS *system_vfs;
-  GConfValue *value;
-
-  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (data);
-
-  if (strcmp (gconf_entry_get_key (entry), BOOKMARKS_KEY) != 0)
-    return;
-
-  value = gconf_entry_get_value (entry);
-  set_bookmarks_from_value (system_vfs, value, TRUE);
-}
-#endif
 
 /* GtkFileSystem module calls */
 

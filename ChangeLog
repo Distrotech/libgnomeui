@@ -1,3 +1,13 @@
+2005-07-12  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c: Kill all the GConf code
+	that was #ifdef-ed out - we haven't used it to load bookmarks for
+	a long time now.
+	(directory_load_callback): Call gdk_threads_leave() as well if we
+	return prematurely.
+	(monitor_callback): Likewise.
+	(*): Add a little bunch of code to aid profiling.
+
 2005-07-12  Matthias Clasen  <mclasen@redhat.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c: Follow
