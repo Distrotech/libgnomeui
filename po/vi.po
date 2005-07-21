@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-08 06:29+0000\n"
-"PO-Revision-Date: 2005-07-08 16:06+0700\n"
+"POT-Creation-Date: 2005-07-21 06:40+0000\n"
+"PO-Revision-Date: 2004-09-28 17:48+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@linuxmail.org>\n"
 "Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -31,35 +31,108 @@ msgstr "Sự kiện con 2"
 msgid "Hint for item 2"
 msgstr "Chỉ dẫn cho mục 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:842
+#: ../file-chooser/gtkfilesystemgnomevfs.c:829
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr ""
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:840
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr ""
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:955
 #, c-format
 msgid "%s is not a folder"
-msgstr "%s không phải là thư mục"
+msgstr ""
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1097
-msgid "Filesystem"
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1203
+#, fuzzy
+msgid "File System"
 msgstr "Hệ tập tin"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1787
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1958
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr "Lỗi lưu đánh dấu (%s)"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:217
+#: ../file-chooser/sucky-desktop-item.c:605
+#, fuzzy, c-format
+msgid "Error reading file '%s': %s"
+msgstr "Lỗi mở tập tin '%s': %s"
+
+#: ../file-chooser/sucky-desktop-item.c:285
+#, fuzzy, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "Lỗi mở tập tin '%s': %s"
+
+#: ../file-chooser/sucky-desktop-item.c:384
+#: ../file-chooser/sucky-desktop-item.c:3702
+#, fuzzy
+msgid "No name"
+msgstr "Tên phông"
+
+#: ../file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:1797
+#, fuzzy, c-format
+msgid "Starting %s"
+msgstr "_Thiết lập"
+
+#: ../file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:3990
+#, fuzzy, c-format
+msgid "Error writing file '%s': %s"
+msgstr "Lỗi mở tập tin '%s': %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr "Không thể lấy thông tin cho tập tin '%s': %s"
+msgstr ""
 
 #: ../file-chooser/testfilechooser.c:191
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr "Lỗi mở tập tin '%s': %s"
+msgstr ""
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "Lỗi nạp ảnh '%s': lý do không rõ, có thể do hư tập tin ảnh"
+msgstr ""
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
@@ -71,7 +144,7 @@ msgstr "Tác giả"
 
 #: ../libgnomeui/gnome-about.c:246
 msgid "Documented by"
-msgstr "Tài liệu tạo bởi"
+msgstr "Người viết tài liệu"
 
 #: ../libgnomeui/gnome-about.c:261
 msgid "Translated by"
@@ -459,6 +532,7 @@ msgstr "Đóng cửa sổ hiện thời"
 #. * The "Game" menu
 #.
 #: ../libgnomeui/gnome-app-helper.c:248
+#, fuzzy
 msgid "_New Game"
 msgstr "Trò chơi mớ_i"
 
@@ -467,6 +541,7 @@ msgid "Start a new game"
 msgstr "Khởi động một trò chơi mới"
 
 #: ../libgnomeui/gnome-app-helper.c:253
+#, fuzzy
 msgid "_Pause Game"
 msgstr "_Tạm ngừng chơi"
 
@@ -475,14 +550,16 @@ msgid "Pause the game"
 msgstr "Tạm ngừng trò chơi"
 
 #: ../libgnomeui/gnome-app-helper.c:258
+#, fuzzy
 msgid "_Restart Game"
-msgstr "_Chơi lại từ đầu"
+msgstr "_Khởi động chơi lại"
 
 #: ../libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
 msgstr "Khởi động trò chơi lại"
 
 #: ../libgnomeui/gnome-app-helper.c:263
+#, fuzzy
 msgid "_Undo Move"
 msgstr "_Hồi lại hành động"
 
@@ -491,8 +568,9 @@ msgid "Undo the last move"
 msgstr "Hủy chuyển động vừa rồi"
 
 #: ../libgnomeui/gnome-app-helper.c:268
+#, fuzzy
 msgid "_Redo Move"
-msgstr "_Thực hiện lại hành động"
+msgstr "_Làm lại hành động"
 
 #: ../libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
@@ -516,8 +594,9 @@ msgid "View the scores"
 msgstr "Xem điểm"
 
 #: ../libgnomeui/gnome-app-helper.c:284
+#, fuzzy
 msgid "_End Game"
-msgstr "_Kết thúc trò chơi"
+msgstr "_Kết thúc chơi"
 
 #: ../libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
@@ -1003,12 +1082,14 @@ msgstr ""
 "tin."
 
 #: ../libgnomeui/gnome-file-entry.c:319
+#, fuzzy
 msgid "GtkFileChooser Action"
-msgstr ""
+msgstr "Dùng GtkFileChooser"
 
 #: ../libgnomeui/gnome-file-entry.c:320
+#, fuzzy
 msgid "The type of operation that the file selector is performing."
-msgstr "Loại trình chọn tập tin được dùng."
+msgstr "Chế độ hoạt động của trình chọn phông"
 
 #: ../libgnomeui/gnome-file-entry.c:635 ../libgnomeui/gnome-file-entry.c:669
 msgid "Select file"
@@ -1165,12 +1246,14 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Nút này đưa bạn tới URI đang hiển thị."
 
 #: ../libgnomeui/gnome-href.c:394
+#, fuzzy
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Lỗi khởi động trình duyệt web mặc định.\n"
-"Vui lòng xem lại các thiết đặt trong phần 'Các ứng dụng ưa thích' của công cụ cấu hình."
+"Lỗi khi thử khởi động trình duyệt web mặc định.\n"
+"Vui lòng xem lại các thiết đặt trong phần 'Các ứng dụng ưa thích' của công "
+"cụ cấu hình."
 
 #: ../libgnomeui/gnome-icon-entry.c:180
 msgid ""
@@ -1302,19 +1385,21 @@ msgstr "_Kết nối"
 
 #: ../libgnomeui/gnome-password-dialog.c:331
 msgid "Connect _anonymously"
-msgstr "Kết nối _vô danh"
+msgstr ""
 
 #: ../libgnomeui/gnome-password-dialog.c:336
 msgid "Connect as u_ser:"
 msgstr "Kết nối dưới tên _người dùng:"
 
 #: ../libgnomeui/gnome-password-dialog.c:434
+#, fuzzy
 msgid "_Remember password for this session"
-msgstr "_Nhớ mật khẩu cho phiên làm việc này"
+msgstr "Nhớ mật khẩu cho phiên làm việc này"
 
 #: ../libgnomeui/gnome-password-dialog.c:436
+#, fuzzy
 msgid "Save password in _keyring"
-msgstr "Lưu mật khẩu trong )keyring"
+msgstr "Lưu mật khẩu trong keyring"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1483,107 +1568,107 @@ msgstr "_Debug"
 msgid "Exit the test"
 msgstr "Kết thúc thử"
 
-#~ msgid "Color Selector"
-#~ msgstr "Trình chọn Màu"
+msgid "Color Selector"
+msgstr "Trình chọn Màu"
 
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Ứng dụng \"%s\" (quá trình %d) đã bị đổ vỡ\n"
-#~ "do một sai lầm nguy hiểm.\n"
-#~ "(%s)"
+msgid ""
+"Application \"%s\" (process %d) has crashed\n"
+"due to a fatal error.\n"
+"(%s)"
+msgstr ""
+"Ứng dụng \"%s\" (quá trình %d) đã bị đổ vỡ\n"
+"do một sai lầm nguy hiểm.\n"
+"(%s)"
 
-#~ msgid "Submit a bug report"
-#~ msgstr "Trình ra một báo cáo rối "
+msgid "Submit a bug report"
+msgstr "Trình ra một báo cáo rối "
 
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+msgid "http://www.gnome.org/application_crashed.shtml"
+msgstr "http://www.gnome.org/application_crashed.shtml"
 
-#~ msgid "Please visit the GNOME Application Crash page for more information"
-#~ msgstr "Hãy xem trang the GNOME Application Crash để có thêm thông tin"
+msgid "Please visit the GNOME Application Crash page for more information"
+msgstr "Hãy xem trang the GNOME Application Crash để có thêm thông tin"
 
-#~ msgid "_Credits"
-#~ msgstr "_Công lao"
+msgid "_Credits"
+msgstr "_Công lao"
 
-#~ msgid "Find _Again"
-#~ msgstr "Tìm thêm"
+msgid "Find _Again"
+msgstr "Tìm thêm"
 
-#~ msgid "Both text and icons"
-#~ msgstr "Cả văn bản và các biểu tượng"
+msgid "Both text and icons"
+msgstr "Cả văn bản và các biểu tượng"
 
-#~ msgid "E_xit"
-#~ msgstr "Kết thúc"
+msgid "E_xit"
+msgstr "Kết thúc"
 
-#~ msgid "Exit the program"
-#~ msgstr "Kết thúc chương trình"
+msgid "Exit the program"
+msgstr "Kết thúc chương trình"
 
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Tập hợp các lỗi Gdk được định vị"
+msgid "Gdk debugging flags to set"
+msgstr "Tập hợp các lỗi Gdk được định vị"
 
-#~ msgid "FLAGS"
-#~ msgstr "CỜ"
+msgid "FLAGS"
+msgstr "CỜ"
 
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Tắt định vị các lỗi"
+msgid "Gdk debugging flags to unset"
+msgstr "Tắt định vị các lỗi"
 
-#~ msgid "Make X calls synchronous"
-#~ msgstr "Gọi X đồng bộ"
+msgid "Make X calls synchronous"
+msgstr "Gọi X đồng bộ"
 
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "Không dùng bộ nhớ phân chia cho X"
+msgid "Don't use X shared memory extension"
+msgstr "Không dùng bộ nhớ phân chia cho X"
 
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Tên chương trình dùng như ở quản lý cửa sổ"
+msgid "Program name as used by the window manager"
+msgstr "Tên chương trình dùng như ở quản lý cửa sổ"
 
-#~ msgid "NAME"
-#~ msgstr "TÊN"
+msgid "NAME"
+msgstr "TÊN"
 
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Cấp chương trình dùng ở quản lý cửa sổ"
+msgid "Program class as used by the window manager"
+msgstr "Cấp chương trình dùng ở quản lý cửa sổ"
 
-#~ msgid "CLASS"
-#~ msgstr "CẤP"
+msgid "CLASS"
+msgstr "CẤP"
 
-#~ msgid "HOST"
-#~ msgstr "MÁY CHỦ"
+msgid "HOST"
+msgstr "MÁY CHỦ"
 
-#~ msgid "PORT"
-#~ msgstr "CỔNG"
+msgid "PORT"
+msgstr "CỔNG"
 
-#~ msgid "STYLE"
-#~ msgstr "KIỂU"
+msgid "STYLE"
+msgstr "KIỂU"
 
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Tập hợp các lỗi Gtk+ được định vị"
+msgid "Gtk+ debugging flags to set"
+msgstr "Tập hợp các lỗi Gtk+ được định vị"
 
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Tắt các lỗi Gtk+ được định vị"
+msgid "Gtk+ debugging flags to unset"
+msgstr "Tắt các lỗi Gtk+ được định vị"
 
-#~ msgid "Make all warnings fatal"
-#~ msgstr "Làm tất cả cảnh cáo báo nguy hiểm"
+msgid "Make all warnings fatal"
+msgstr "Làm tất cả cảnh cáo báo nguy hiểm"
 
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "Tải thêm một môđun Gtk"
+msgid "Load an additional Gtk module"
+msgstr "Tải thêm một môđun Gtk"
 
-#~ msgid "MODULE"
-#~ msgstr "MÔĐUN"
+msgid "MODULE"
+msgstr "MÔĐUN"
 
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
+msgid "GTK+"
+msgstr "GTK+"
 
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "Các chi tiết sai sót của GConf: %s\n"
+msgid "GConf error details: %s\n"
+msgstr "Các chi tiết sai sót của GConf: %s\n"
 
-#~ msgid "Copyright font"
-#~ msgstr "Phông bản quyền"
+msgid "Copyright font"
+msgstr "Phông bản quyền"
 
-#~ msgid "Comments font"
-#~ msgstr "Phông các bình luận"
+msgid "Comments font"
+msgstr "Phông các bình luận"
 
-#~ msgid "Author"
-#~ msgstr "Tác giả"
+msgid "Author"
+msgstr "Tác giả"
 
-#~ msgid " domain %s"
-#~ msgstr " vùng %s"
+msgid " domain %s"
+msgstr " vùng %s"
