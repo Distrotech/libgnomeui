@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-13 14:29+0000\n"
-"PO-Revision-Date: 2005-07-14 10:50+0200\n"
+"POT-Creation-Date: 2005-07-23 14:37+0000\n"
+"PO-Revision-Date: 2005-07-23 18:32+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,29 +32,90 @@ msgstr "Položka potomka 2"
 msgid "Hint for item 2"
 msgstr "Rada pro položku 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:824
+#: ../file-chooser/gtkfilesystemgnomevfs.c:829
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s je odkaz na něco, co není adresář"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:835
+#: ../file-chooser/gtkfilesystemgnomevfs.c:840
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s je odkaz bez cílového umístění"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:943
+#: ../file-chooser/gtkfilesystemgnomevfs.c:955
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s není adresář"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1187
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1203
 msgid "File System"
 msgstr "Systém souborů"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1922
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1958
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ukládání záložky selhalo (%s)"
+
+#: ../file-chooser/sucky-desktop-item.c:217
+#: ../file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "Chyba při čtení souboru '%s': %s"
+
+#: ../file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "Chyba při převinování souboru '%s': %s"
+
+#: ../file-chooser/sucky-desktop-item.c:384
+#: ../file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "Bez názvu"
+
+#: ../file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "Soubor '%s' není obyčejný soubor ani adresář."
+
+#: ../file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr "Chyba, nemohu najít id souboru '%s'"
+
+#: ../file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr "Žádný název souboru, kam ukládat"
+
+#: ../file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "Spouštím %s"
+
+#: ../file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr "Žádné URL, které spustit"
+
+#: ../file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr "Není to spustitelná položka"
+
+#: ../file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr "Žádný příkaz (Exec), který spustit"
+
+#: ../file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr "Špatný příkaz (Exec), který spustit"
+
+#: ../file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr "Neznámé kódování: %s"
+
+#: ../file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "Chyba při zápisu souboru '%s': %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
