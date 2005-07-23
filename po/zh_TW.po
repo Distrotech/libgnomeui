@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.7.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-01 21:40+0800\n"
-"PO-Revision-Date: 2005-07-01 21:46+0800\n"
+"POT-Creation-Date: 2005-07-20 22:38+0000\n"
+"PO-Revision-Date: 2005-07-21 10:22+0800\n"
 "Last-Translator: Abel Cheung <abel@oaka.org>\n"
 "Language-Team: Chinese (traditional) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,19 +31,90 @@ msgstr "副項目二"
 msgid "Hint for item 2"
 msgstr "項目二的提示"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:833
+#: ../file-chooser/gtkfilesystemgnomevfs.c:829
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s 是連結到某些非資料夾的東西"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:840
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s 是一個沒有目的地位置的連結"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:955
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s 不是資料夾"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1088
-msgid "Filesystem"
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1203
+msgid "File System"
 msgstr "檔案系統"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1778
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1958
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "無法儲存書籤 (%s)"
+
+#: ../file-chooser/sucky-desktop-item.c:217
+#: ../file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "讀取檔案‘%s’時發生錯誤：%s"
+
+#: ../file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "回到檔案‘%s’的開始時發生錯誤：%s"
+
+#: ../file-chooser/sucky-desktop-item.c:384
+#: ../file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "沒有名稱"
+
+#: ../file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "檔案‘%s’不是一個正規的檔案式目錄。"
+
+#: ../file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr "錯誤無法尋找檔案 id ‘%s’"
+
+#: ../file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr "沒有檔案名稱來儲存"
+
+#: ../file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "正在執行 %s"
+
+#: ../file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr "沒有 URL 來執行"
+
+#: ../file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr "沒有可執行的項目"
+
+#: ../file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr "沒有指令(Exec)來執行"
+
+#: ../file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr "錯誤的指令(Exec)來執行"
+
+#: ../file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr "不明的編碼：%s"
+
+#: ../file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "寫入檔案時發生錯誤‘%s’：%s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -1221,15 +1292,15 @@ msgstr "圖示選擇元件"
 msgid "This button will open a window to let you select an icon."
 msgstr "此按鈕可開啟用來選取圖示的視窗。"
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1009
 msgid "Browse"
 msgstr "瀏覽"
 
-#: ../libgnomeui/gnome-icon-entry.c:1015
+#: ../libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
 msgstr "圖示的路徑"
 
-#: ../libgnomeui/gnome-icon-entry.c:1016
+#: ../libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
