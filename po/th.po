@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-07-16 21:33+0700\n"
-"PO-Revision-Date: 2005-07-16 21:47+0700\n"
+"PO-Revision-Date: 2005-07-23 13:05+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -229,11 +229,11 @@ msgstr "เครดิตสำหรับผู้แปล ควรตั�
 #: libgnomeui/gnome-about.c:440
 #: libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
-msgstr "โลโก"
+msgstr "โลโก้"
 
 #: libgnomeui/gnome-about.c:441
 msgid "A logo for the about box"
-msgstr "โลโกสำหรับหน้าต่างเกี่ยวกับ"
+msgstr "โลโก้สำหรับหน้าต่างเกี่ยวกับ"
 
 #: libgnomeui/gnome-about.c:520
 #, c-format
@@ -851,7 +851,7 @@ msgstr "หัวเรื่องของเครื่องมือวิ
 
 #: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
-msgstr "รูปโลโก"
+msgstr "รูปโลโก้"
 
 #: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
@@ -930,23 +930,23 @@ msgstr "สีพื้นหลังเนื้อหาถูกตั้ง
 #: libgnomeui/gnome-druid-page-standard.c:216
 #: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
-msgstr "สีพื้นหลังของโลโก"
+msgstr "สีพื้นหลังของโลโก้"
 
 #: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
-msgstr "สีพื้นหลังของโลโก"
+msgstr "สีพื้นหลังของโลโก้"
 
 #: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
-msgstr "สีพื้นหลังของโลโก ในรูป GdkColor"
+msgstr "สีพื้นหลังของโลโก้ ในรูป GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
-msgstr "สีพื้นหลังของโลโกถูกตั้ง"
+msgstr "สีพื้นหลังของโลโก้ถูกตั้ง"
 
 #: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
-msgstr "สีพื้นหลังของโลโกถูกตั้งแล้ว"
+msgstr "สีพื้นหลังของโลโก้ถูกตั้งแล้ว"
 
 #: libgnomeui/gnome-druid.c:150
 msgid "Show Finish"
