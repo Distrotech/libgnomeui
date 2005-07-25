@@ -1,5 +1,10 @@
 2005-07-25  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome_segv.c: (main): Add a window icon.
+	Closes bug #309739. Patch from Jaap A. Haitsma
+
+2005-07-25  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-druid.c: (gnome_druid_class_init),
 	(gnome_druid_accessible_get_n_children),
 	(gnome_druid_accessible_ref_child),

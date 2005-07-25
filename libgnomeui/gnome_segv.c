@@ -140,6 +140,7 @@ int main(int argc, char *argv[])
       return 1;
     }
   appname = g_strdup(args[0]);
+  gtk_window_set_default_icon_name ("stock_dialog-error");
   mainwin = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL,
                                                 GTK_MESSAGE_ERROR,
                                                 GTK_BUTTONS_NONE,
