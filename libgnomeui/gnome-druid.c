@@ -93,6 +93,9 @@ static void    gnome_druid_help_callback   (GtkWidget       *button,
 
 static guint druid_signals[LAST_SIGNAL] = { 0 };
 
+/* Accessibility Support */
+static AtkObject *gnome_druid_get_accessible  (GtkWidget   *widget);
+
 /* define the _get_type method and parent_class */
 GNOME_CLASS_BOILERPLATE(GnomeDruid, gnome_druid,
 			GtkContainer, GTK_TYPE_CONTAINER)
@@ -137,6 +140,7 @@ gnome_druid_class_init (GnomeDruidClass *klass)
 	widget_class->map = gnome_druid_map;
 	widget_class->unmap = gnome_druid_unmap;
 	widget_class->expose_event = gnome_druid_expose;
+	widget_class->get_accessible = gnome_druid_get_accessible;
 
 	container_class->forall = gnome_druid_forall;
 	container_class->add = gnome_druid_add;
@@ -1065,3 +1069,190 @@ gnome_druid_set_page (GnomeDruid *druid,
 		gtk_widget_set_sensitive (old, FALSE);
 	}
 }
+
+static int
+gnome_druid_accessible_get_n_children (AtkObject *accessible)
+{
+	GnomeDruid *druid;
+	GtkWidget *widget;
+
+	widget = GTK_ACCESSIBLE (accessible)->widget;
+	if (!widget)
+		return 0;
+
+	druid = GNOME_DRUID (widget);
+
+	return g_list_length (druid->_priv->children) + 1;
+}
+
+
+static AtkObject *
+gnome_druid_accessible_ref_child (AtkObject *accessible,
+                                  gint       index)
+{
+	GnomeDruid *druid;
+	GtkWidget *widget;
+	GList *children;
+	GList *tmp_list;
+	GtkWidget *child;
+	AtkObject *obj;
+
+	widget = GTK_ACCESSIBLE (accessible)->widget;
+	if (!widget)
+		return NULL;
+	
+	if (index < 0)
+		return NULL;
+	druid = GNOME_DRUID (widget);
+	children = druid->_priv->children;
+	if (index < g_list_length (children)) {
+		tmp_list = g_list_nth (children, index);
+		child = tmp_list->data;
+	} else if (index == g_list_length (children)) {
+		child = druid->_priv->bbox;
+	} else {
+		return NULL;
+	}
+	obj = gtk_widget_get_accessible (child);
+	g_object_ref (obj);
+	return obj;
+}
+
+static void
+gnome_druid_accessible_class_init (AtkObjectClass *klass)
+{
+	klass->get_n_children = gnome_druid_accessible_get_n_children;
+	klass->ref_child = gnome_druid_accessible_ref_child;
+}
+
+static GType
+gnome_druid_accessible_get_type (void)
+{
+	static GType type = 0;
+
+	if (!type) {
+		static GTypeInfo tinfo = {
+			0, /* class size */
+			(GBaseInitFunc) NULL, /* base init */
+			(GBaseFinalizeFunc) NULL, /* base finalize */
+			(GClassInitFunc) gnome_druid_accessible_class_init,
+			(GClassFinalizeFunc) NULL, /* class finalize */
+			NULL, /* class data */
+			0, /* instance size */
+			0, /* nb preallocs */
+			(GInstanceInitFunc) NULL, /* instance init */
+			NULL /* value table */
+		};
+		/*
+		 * Figure out the size of the class and instance
+		 * we are deriving from
+		 */
+		AtkObjectFactory *factory;
+		GType derived_type;
+		GTypeQuery query;
+		GType derived_atk_type;
+
+		derived_type = g_type_parent (GNOME_TYPE_DRUID);
+		factory = atk_registry_get_factory (atk_get_default_registry (),
+						    derived_type);
+		derived_atk_type = atk_object_factory_get_accessible_type (factory);
+		g_type_query (derived_atk_type, &query);
+		tinfo.class_size = query.class_size;
+		tinfo.instance_size = query.instance_size;
+ 
+		type = g_type_register_static (derived_atk_type, 
+					       "GnomeDruidAccessible", 
+					       &tinfo, 0);
+	}
+	return type;
+}
+
+static AtkObject *
+gnome_druid_accessible_new (GObject *obj)
+{
+	AtkObject *accessible;
+
+	g_return_val_if_fail (GNOME_IS_DRUID (obj), NULL);
+
+	accessible = g_object_new (gnome_druid_accessible_get_type (), NULL); 
+	atk_object_initialize (accessible, obj);
+
+	return accessible;
+}
+
+static GType
+gnome_druid_accessible_factory_get_accessible_type (void)
+{
+	return gnome_druid_accessible_get_type ();
+}
+
+static AtkObject*
+gnome_druid_accessible_factory_create_accessible (GObject *obj)
+{
+	return gnome_druid_accessible_new (obj);
+}
+
+static void
+gnome_druid_accessible_factory_class_init (AtkObjectFactoryClass *klass)
+{
+	klass->create_accessible = gnome_druid_accessible_factory_create_accessible;
+	klass->get_accessible_type = gnome_druid_accessible_factory_get_accessible_type;
+}
+
+static GType
+gnome_druid_accessible_factory_get_type (void)
+{
+	static GType type = 0;
+
+	if (!type) {
+		static const GTypeInfo tinfo = {
+			sizeof (AtkObjectFactoryClass),
+			NULL,           /* base_init */
+			NULL,           /* base_finalize */
+			(GClassInitFunc) gnome_druid_accessible_factory_class_init,
+			NULL,           /* class_finalize */
+			NULL,           /* class_data */
+			sizeof (AtkObjectFactory),
+			0,             /* n_preallocs */
+			NULL, NULL
+		};
+
+		type = g_type_register_static (ATK_TYPE_OBJECT_FACTORY, 
+					       "GnomeDruidAccessibleFactory",
+					       &tinfo, 0);
+	}
+	return type;
+}
+
+static AtkObject *
+gnome_druid_get_accessible (GtkWidget *widget)
+{
+	static gboolean first_time = TRUE;
+
+	if (first_time) {
+		AtkObjectFactory *factory;
+		AtkRegistry *registry;
+ 		GType derived_type; 
+		GType derived_atk_type; 
+
+		/*
+		 * Figure out whether accessibility is enabled by looking at the
+		 * type of the accessible object which would be created for
+		 * the parent type of GnomeDruid.
+		 */
+		derived_type = g_type_parent (GNOME_TYPE_DRUID);
+
+		registry = atk_get_default_registry ();
+		factory = atk_registry_get_factory (registry,
+						    derived_type);
+		derived_atk_type = atk_object_factory_get_accessible_type (factory);
+		if (g_type_is_a (derived_atk_type, GTK_TYPE_ACCESSIBLE))  {
+			atk_registry_set_factory_type (registry, 
+						       GNOME_TYPE_DRUID,
+						       gnome_druid_accessible_factory_get_type ());
+		}
+		first_time = FALSE;
+	} 
+	return GTK_WIDGET_CLASS (parent_class)->get_accessible (widget);
+}
+
