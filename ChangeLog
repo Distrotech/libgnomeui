@@ -1,3 +1,16 @@
+2005-07-25  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-druid.c: (gnome_druid_class_init),
+	(gnome_druid_accessible_get_n_children),
+	(gnome_druid_accessible_ref_child),
+	(gnome_druid_accessible_class_init),
+	(gnome_druid_accessible_get_type), (gnome_druid_accessible_new),
+	(gnome_druid_accessible_factory_get_accessible_type),
+	(gnome_druid_accessible_factory_create_accessible),
+	(gnome_druid_accessible_factory_class_init),
+	(gnome_druid_accessible_factory_get_type),
+	(gnome_druid_get_accessible): Merge fix for bug #157936
+
 2005-07-11  Federico Mena Quintero  <federico@ximian.com>
 
 	Add support for .desktop file links; fixes #136271:
