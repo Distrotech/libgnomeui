@@ -1,6 +1,6 @@
-# libgnomeui eesti keele tõlge
-# Estonian translation of libgnomeui
-# 
+# libgnomeui eesti keele tõlge.
+# Estonian translation of libgnomeui.
+#
 # Copyright (C) 2002-2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
 #
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-07 14:29+0000\n"
-"PO-Revision-Date: 2005-07-07 23:36+0300\n"
+"POT-Creation-Date: 2005-07-26 14:46+0000\n"
+"PO-Revision-Date: 2005-07-26 23:35+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -37,19 +37,90 @@ msgstr "Tütarkirje 2"
 msgid "Hint for item 2"
 msgstr "Vihje kirjele 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:842
+#: ../file-chooser/gtkfilesystemgnomevfs.c:829
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s on viit millelegi, mis pole kataloog"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:840
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s on ilma sihtkohata viit"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:955
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ei ole kataloog"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1097
-msgid "Filesystem"
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1203
+msgid "File System"
 msgstr "Failisüsteem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1787
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1958
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Tõrge järjehoidja salvestamisel (%s)"
+
+#: ../file-chooser/sucky-desktop-item.c:217
+#: ../file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "Viga faili '%s' lugemisel: %s"
+
+#: ../file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:384
+#: ../file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "Nimetu"
+
+#: ../file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "Fail '%s' pole tavaline fail ega kataloog."
+
+#: ../file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr "Puudub nimi, mille alla salvestada"
+
+#: ../file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "Käivitamine: %s"
+
+#: ../file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr ""
+
+#: ../file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "Viga faili '%s' kirjutamisel: %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -810,15 +881,15 @@ msgstr "Pealkirja värv"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
-msgstr ""
+msgstr "Pealkirja värv GdkColor-ina"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
-msgstr ""
+msgstr "Pealkirja taustavärv seatud"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
-msgstr ""
+msgstr "Pealkirja taustavärv on seatud"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:169
 #: ../libgnomeui/gnome-druid-page-standard.c:177
@@ -831,15 +902,15 @@ msgstr "Taustavärv"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr ""
+msgstr "Taustavärv GdkColor-ina"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
-msgstr ""
+msgstr "Taustavärv seatud"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
-msgstr ""
+msgstr "Taustavärv on seatud"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:193
 #: ../libgnomeui/gnome-druid-page-standard.c:201
@@ -852,15 +923,15 @@ msgstr "Sisukorra taustavärv"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:202
 msgid "Contents Background color as a GdkColor"
-msgstr ""
+msgstr "Sisu taustavärv GdkColor-ina"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:209
 msgid "Contents Background color set"
-msgstr ""
+msgstr "Sisu taustavärv seatud"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:210
 msgid "Contents Background color is set"
-msgstr ""
+msgstr "Sisu taustavärv on seatud"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:216
 #: ../libgnomeui/gnome-druid-page-standard.c:224
@@ -873,29 +944,29 @@ msgstr "Logo taustavärv"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
-msgstr ""
+msgstr "Logo taustavärv GdkColor-ina"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
-msgstr ""
+msgstr "Logo taustavärv seatud"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
-msgstr ""
+msgstr "Logo taustavärv on seatud"
 
-#: ../libgnomeui/gnome-druid.c:150
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show Finish"
 msgstr "Näita Rakenda-nuppu"
 
-#: ../libgnomeui/gnome-druid.c:151
+#: ../libgnomeui/gnome-druid.c:155
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Näitab 'Rakenda' nuppu 'Edasi' nupu asemel"
 
-#: ../libgnomeui/gnome-druid.c:158
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show Help"
 msgstr "Näita Abi"
 
-#: ../libgnomeui/gnome-druid.c:159
+#: ../libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
 msgstr "Näitab 'Abi' nuppu"
 
@@ -1122,6 +1193,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
+"%s seadistusandmete laadimisel või salvestamisel tekkis viga. Mõned sinu "
+"sätted ei pruugi õigesti toimida."
 
 #: ../libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1160,6 +1233,8 @@ msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
+"Vaikimisi veebisirvija käivitamisel tekkis viga. Palun kontrolli oma "
+"sektsiooni 'Eelistatud rakendused' sätteid."
 
 #: ../libgnomeui/gnome-icon-entry.c:180
 msgid ""
@@ -1227,13 +1302,13 @@ msgstr "Vali"
 
 #: ../libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
-msgstr "Ikooni rada"
+msgstr "Ikoonide rada"
 
 #: ../libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
+msgstr "Siia peaksid sa sisestama ikoonipiltide kataloogi nime."
 
 #: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1303,11 +1378,11 @@ msgstr "Salvesta parool _võtmerõngas"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
-msgstr ""
+msgstr "Eelvaatlus"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Kas pildi sisestusväli peab võimaldama eelvaadet."
+msgstr "Kas pildi sisestusväli peab võimaldama eelvaatlust."
 
 #: ../libgnomeui/gnome-pixmap-entry.c:189
 #: ../libgnomeui/gnome-pixmap-entry.c:479
@@ -1450,15 +1525,15 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Kasutamine: gnome_segv2 programminimi signr\n"
 
-#: ../libgnomeui/gnome_segv.c:153
+#: ../libgnomeui/gnome_segv.c:154
 msgid "_Restart Application"
 msgstr "_Taaskäivita rakendus"
 
-#: ../libgnomeui/gnome_segv.c:165
+#: ../libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
 msgstr "Teata _arendajatele"
 
-#: ../libgnomeui/gnome_segv.c:176
+#: ../libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Silur"
 
