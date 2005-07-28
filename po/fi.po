@@ -307,7 +307,7 @@ msgstr "_Peli"
 #: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr "_Ohje"
+msgstr "O_hje"
 
 #: ../libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
