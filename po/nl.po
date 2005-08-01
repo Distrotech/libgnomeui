@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-16 22:36+0000\n"
+"POT-Creation-Date: 2005-08-01 06:44+0000\n"
 "PO-Revision-Date: 2005-07-17 01:45+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -32,26 +32,26 @@ msgstr "Dochter-item 2"
 msgid "Hint for item 2"
 msgstr "Hint voor item 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:824
+#: ../file-chooser/gtkfilesystemgnomevfs.c:829
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s is een verwijzing naar iets dat geen map is"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:835
+#: ../file-chooser/gtkfilesystemgnomevfs.c:840
 #, c-format
 msgid "%s is a link without a destination location"
-msgstr "%s is een verwijzing zonder een doellokatie"
+msgstr "%s is een verwijzing zonder een doellocatie"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:943
+#: ../file-chooser/gtkfilesystemgnomevfs.c:955
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s is geen map"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1187
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1203
 msgid "File System"
 msgstr "Bestandssysteem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1922
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1958
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Opslaan van bladwijzer mislukt (%s)"
@@ -953,19 +953,19 @@ msgstr "Logo-achtergrondkleur ingesteld"
 msgid "Logo Background color is set"
 msgstr "Logo-achtergrondkleur is ingesteld"
 
-#: ../libgnomeui/gnome-druid.c:150
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show Finish"
 msgstr "'Voltooien' tonen"
 
-#: ../libgnomeui/gnome-druid.c:151
+#: ../libgnomeui/gnome-druid.c:155
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "De 'Voltooien'-knop tonen in plaats van de 'Volgende'-knop"
 
-#: ../libgnomeui/gnome-druid.c:158
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show Help"
 msgstr "'Hulp' tonen"
 
-#: ../libgnomeui/gnome-druid.c:159
+#: ../libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
 msgstr "De 'Hulp'-knop tonen"
 
@@ -1547,15 +1547,15 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Gebruik: gnome_segv2 appnaam signum\n"
 
-#: ../libgnomeui/gnome_segv.c:153
+#: ../libgnomeui/gnome_segv.c:154
 msgid "_Restart Application"
 msgstr "Toepassing he_rstarten"
 
-#: ../libgnomeui/gnome_segv.c:165
+#: ../libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
 msgstr "Ont_wikkelaars verwittigen"
 
-#: ../libgnomeui/gnome_segv.c:176
+#: ../libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Debuggen"
 
