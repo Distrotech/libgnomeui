@@ -1,3 +1,20 @@
+libgnomeui 2.11.2
+-----------------
+
+What's new since 2.11.1
+
+Features:
+	- Add support for .desktop file links in the file chooser
+	  (Federico)
+
+Bug fixes:
+	- Make buttons work as accessible children of GnomeDruid
+	  (Padraig)
+	- Add a window icon for the segv dialog (Jaap)
+
+Translations:
+	- Everyone :-)
+
 libgnomeui 2.11.1
 -----------------
 
