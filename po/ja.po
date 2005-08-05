@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-02 17:54+0900\n"
-"PO-Revision-Date: 2005-07-02 17:53+0900\n"
+"POT-Creation-Date: 2005-08-05 12:56+0900\n"
+"PO-Revision-Date: 2005-08-05 12:54+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -34,37 +34,108 @@ msgstr "子アイテム 2"
 msgid "Hint for item 2"
 msgstr "アイテム 2 のヒント"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:842
+#: ../file-chooser/gtkfilesystemgnomevfs.c:829
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s はフォルダではないものへのリンクです"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:840
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s のリンクが切れています"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:955
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s はフォルダではありません"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1097
-msgid "Filesystem"
-msgstr "ファイルシステム"
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1203
+msgid "File System"
+msgstr "ファイル・システム"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1787
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1958
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "ブックマークの保存に失敗しました (%s)"
 
+#: ../file-chooser/sucky-desktop-item.c:217
+#: ../file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "'%s' というファイルを開く際にエラー: %s"
+
+#: ../file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "'%s' というファイルを巻き戻す際にエラー: %s"
+
+#: ../file-chooser/sucky-desktop-item.c:384
+#: ../file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "名前なし"
+
+#: ../file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "'%s' は通常のファイルでもフォルダでもありません"
+
+#: ../file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr "'%s' という ID を持つファイルが見つかりません"
+
+#: ../file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr "保存する先のファイル名がありません"
+
+#: ../file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "%s の起動"
+
+#: ../file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr "起動する URL が不明です"
+
+#: ../file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr "起動可能なアイテムではありません"
+
+#: ../file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr "起動するコマンドが不明です"
+
+#: ../file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr "起動するコマンドが間違っています"
+
+#: ../file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr "%s のエンコーディングを特定できません"
+
+#: ../file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "'%s' というファイルを書き込む際にエラー: %s"
+
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr "ファイル '%s' の情報を取得できませんでした: %s"
+msgstr "'%s' というファイルの情報を取得できませんでした: %s"
 
 #: ../file-chooser/testfilechooser.c:191
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr "ファイル '%s' を開けませんでした: %s"
+msgstr "'%s' というファイルを開けませんでした: %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
-"画像 '%s' の読み込みに失敗しました: 理由は不明ですが、おそらく画像ファイルが"
-"壊れているようです"
+"'%s' という画像の読み込みに失敗しました: 理由は不明ですが、おそらく画像ファイ"
+"ルが壊れているようです"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
@@ -883,25 +954,25 @@ msgstr "ロゴの背景色の設定"
 msgid "Logo Background color is set"
 msgstr "セットされているロゴの背景色"
 
-#: ../libgnomeui/gnome-druid.c:150
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show Finish"
 msgstr "完了の表示"
 
-#: ../libgnomeui/gnome-druid.c:151
+#: ../libgnomeui/gnome-druid.c:155
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "[進む] ボタンではなく [完了] ボタンを表示する"
 
-#: ../libgnomeui/gnome-druid.c:158
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show Help"
 msgstr "ヘルプの表示"
 
-#: ../libgnomeui/gnome-druid.c:159
+#: ../libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
 msgstr "[ヘルプ] ボタンを表示する"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr "ヒストリ ID"
+msgstr "履歴 ID"
 
 #: ../libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -913,7 +984,7 @@ msgstr "GTK のエントリ"
 
 #: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
 msgid "History ID"
-msgstr "ヒストリ ID"
+msgstr "履歴 ID"
 
 #: ../libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1361,7 +1432,7 @@ msgstr "得点"
 #.
 #: ../libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr "%Y年%B%d日 (%a) %T"
+msgstr "%Y年%B%e日 (%a) %T"
 
 #: ../libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
@@ -1447,7 +1518,7 @@ msgstr ""
 #: ../libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "アプリケーション \"%s\" は突然終了しました。"
+msgstr "\"%s\" というアプリケーションが突然終了しました。"
 
 #: ../libgnomeui/gnome_segv.c:117
 #, c-format
@@ -1466,15 +1537,15 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法: gnome_segv2 アプリケーション名 シグナル番号\n"
 
-#: ../libgnomeui/gnome_segv.c:153
+#: ../libgnomeui/gnome_segv.c:154
 msgid "_Restart Application"
 msgstr "アプリの再起動(_R)"
 
-#: ../libgnomeui/gnome_segv.c:165
+#: ../libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
 msgstr "開発者へ通知する(_I)"
 
-#: ../libgnomeui/gnome_segv.c:176
+#: ../libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "デバッグする(_D)"
 
