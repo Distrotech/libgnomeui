@@ -1,308 +1,325 @@
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# translation of libgnomeui.HEAD.po to Nepali
 # This file is distributed under the same license as the libgnomeui package.
 # Pawan Chitrakar <pawan@nplinux.org> , 2004
-# 
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Jaydeep Bhusal <zaydeep@hotmail.com>, 2005.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-07 14:54+0100\n"
-"PO-Revision-Date: 2004-08-29 19:22+0545\n"
-"Last-Translator: Pawan Chitrakar <pawan@nplinux.org>\n"
+"POT-Creation-Date: 2005-08-05 09:00+0545\n"
+"PO-Revision-Date: 2005-06-02 10:29+0545\n"
+"Last-Translator: Jaydeep Bhusal <zaydeep@hotmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: Nplurals=2;plural=(n!=0)\n"
 
-#: demos/mdi_demo.c:128
+#: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
 msgstr "सानोतिनो आइटम १"
 
-#: demos/mdi_demo.c:129
+#: ../demos/mdi_demo.c:129
 msgid "Hint for item 1"
 msgstr "आइटमको लागि इसारा १"
 
-#: demos/mdi_demo.c:131
+#: ../demos/mdi_demo.c:131
 msgid "Child Item 2"
 msgstr "सानोतिनो आइटम २"
 
-#: demos/mdi_demo.c:132
+#: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "आइटमको लागि ईशारा २"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:697
+#: ../file-chooser/gtkfilesystemgnomevfs.c:805
 #, c-format
-msgid "%s is not a folder"
+msgid "%s is a link to something that is not a folder"
 msgstr ""
 
-#: file-chooser/gtkfilesystemgnomevfs.c:908
+#: ../file-chooser/gtkfilesystemgnomevfs.c:816
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr ""
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:924
+#, c-format
+msgid "%s is not a folder"
+msgstr "%s फोल्डर होइन"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1145
 msgid "Filesystem"
 msgstr "फाइल पद्धति"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1592
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1879
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "पृष्ठ चिन्ह संग्रह गर्न सकिएन (%s)"
 
-#: file-chooser/testfilechooser.c:176
+#: ../file-chooser/testfilechooser.c:176
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "'फाईल %s': %s को कुनै विवरण पाइएन"
 
-#: file-chooser/testfilechooser.c:189
+#: ../file-chooser/testfilechooser.c:189
 #, c-format
 msgid "Failed to open file '%s': %s"
 msgstr "'%s': %s फाइल खोल्न सकिएन"
 
-#: file-chooser/testfilechooser.c:228
+#: ../file-chooser/testfilechooser.c:228
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "चित्रलेख '%s'भर्न असफल : कारण थाहा भएन, सायद खराब चित्रलेख होला"
 
-#: libgnomeui/gnome-about.c:198
+#: ../libgnomeui/gnome-about.c:198
 msgid "Credits"
 msgstr "श्रेय"
 
-#: libgnomeui/gnome-about.c:230
+#: ../libgnomeui/gnome-about.c:230
 msgid "Written by"
 msgstr "लेखक"
 
-#: libgnomeui/gnome-about.c:245
+#: ../libgnomeui/gnome-about.c:245
 msgid "Documented by"
 msgstr "संकलक"
 
-#: libgnomeui/gnome-about.c:260
+#: ../libgnomeui/gnome-about.c:260
 msgid "Translated by"
 msgstr "अनुवादक"
 
-#: libgnomeui/gnome-about.c:323
+#: ../libgnomeui/gnome-about.c:323
 msgid "C_redits"
 msgstr "श्रे_य"
 
-#: libgnomeui/gnome-about.c:378
+#: ../libgnomeui/gnome-about.c:378
 msgid "Program name"
 msgstr "प्रोग्रामको नाम"
 
-#: libgnomeui/gnome-about.c:379
+#: ../libgnomeui/gnome-about.c:379
 msgid "The name of the program"
 msgstr "प्रोग्रामको नाम"
 
-#: libgnomeui/gnome-about.c:386
+#: ../libgnomeui/gnome-about.c:386
 msgid "Program version"
 msgstr "प्रोग्रामको संस्करण"
 
-#: libgnomeui/gnome-about.c:387
+#: ../libgnomeui/gnome-about.c:387
 msgid "The version of the program"
 msgstr "प्रोग्रामको संस्करण"
 
-#: libgnomeui/gnome-about.c:393
+#: ../libgnomeui/gnome-about.c:393
 msgid "Copyright string"
 msgstr "प्रतिलिपि अधिकार सूत्र"
 
-#: libgnomeui/gnome-about.c:394
+#: ../libgnomeui/gnome-about.c:394
 msgid "Copyright information for the program"
 msgstr "प्रोग्रामकोलागि प्रतिलिपि अधिकार सम्बन्धी जानकारी"
 
-#: libgnomeui/gnome-about.c:401
+#: ../libgnomeui/gnome-about.c:401
 msgid "Comments string"
 msgstr "टिप्पणि सूत्र"
 
-#: libgnomeui/gnome-about.c:402
+#: ../libgnomeui/gnome-about.c:402
 msgid "Comments about the program"
 msgstr "प्रोग्रामको बारेमा प्रतिक्रिया"
 
-#: libgnomeui/gnome-about.c:408
+#: ../libgnomeui/gnome-about.c:408
 msgid "Authors"
 msgstr "लेखकहरु"
 
-#: libgnomeui/gnome-about.c:409
+#: ../libgnomeui/gnome-about.c:409
 msgid "List of authors of the programs"
 msgstr "प्रोग्रामका लेखकहरुको सूची"
 
-#: libgnomeui/gnome-about.c:411
+#: ../libgnomeui/gnome-about.c:411
 msgid "Author entry"
 msgstr "लेखक प्रवेश"
 
-#: libgnomeui/gnome-about.c:412
+#: ../libgnomeui/gnome-about.c:412
 msgid "A single author entry"
 msgstr "एकमात्र लेखक प्रवेश"
 
-#: libgnomeui/gnome-about.c:419
+#: ../libgnomeui/gnome-about.c:419
 msgid "Documenters"
 msgstr "डकुमेन्टर्स"
 
-#: libgnomeui/gnome-about.c:420
+#: ../libgnomeui/gnome-about.c:420
 msgid "List of people documenting the program"
 msgstr "प्रोग्राम डकुमेन्टिङ गर्ने मानिसहरुको सूची"
 
-#: libgnomeui/gnome-about.c:422
+#: ../libgnomeui/gnome-about.c:422
 msgid "Documenter entry"
 msgstr "डकुमेन्टरको प्रवेश"
 
-#: libgnomeui/gnome-about.c:423
+#: ../libgnomeui/gnome-about.c:423
 msgid "A single documenter entry"
 msgstr "एकमात्र डकुमेन्टरको प्रवेश"
 
-#: libgnomeui/gnome-about.c:431
+#: ../libgnomeui/gnome-about.c:431
 msgid "Translator credits"
 msgstr "अनुवादकको श्रेय"
 
-#: libgnomeui/gnome-about.c:432
+#: ../libgnomeui/gnome-about.c:432
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "अनुवादलाई श्रेय. यो सूत्र अनुवाद गर्न योग्य भनी चिन्हित गरिने छ"
 
-#: libgnomeui/gnome-about.c:439 libgnomeui/gnome-druid-page-standard.c:129
+#: ../libgnomeui/gnome-about.c:439
+#: ../libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "चिन्ह"
 
-#: libgnomeui/gnome-about.c:440
+#: ../libgnomeui/gnome-about.c:440
 msgid "A logo for the about box"
 msgstr "बाकसको लागि चिन्ह"
 
-#: libgnomeui/gnome-about.c:519
+#: ../libgnomeui/gnome-about.c:519
 #, c-format
 msgid "About %s"
 msgstr "बारेमा %s"
 
 #  Some standard menus
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
+#: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_फाईल"
 
-#: libgnomeui/gnome-app-helper.c:83
+#: ../libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
 msgstr "_फाइल/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_काँट छाँट"
 
-#: libgnomeui/gnome-app-helper.c:85
+#: ../libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
 msgstr "_काँट छाँट/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_दृष्टि"
 
-#: libgnomeui/gnome-app-helper.c:87
+#: ../libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
 msgstr "_दृष्टि/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_मिलान"
 
-#: libgnomeui/gnome-app-helper.c:89
+#: ../libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
 msgstr "_मिलान"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_नयाँ"
 
-#: libgnomeui/gnome-app-helper.c:91
+#: ../libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
 msgstr "_नयाँ/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "फाइ_लहरु"
 
-#: libgnomeui/gnome-app-helper.c:93
+#: ../libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
 msgstr "फाइ_लहरु"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "विन्डोज"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_खेल"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
+#: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_सहयोग"
 
-#: libgnomeui/gnome-app-helper.c:97
+#: ../libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
 msgstr "_विन्डोज"
 
 #  Open
 #. Open
-#: libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
 msgstr "_खोल....."
 
-#: libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
 msgstr "फाईल खोल"
 
 #. Save
-#: libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
 msgstr "_बचत"
 
-#: libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
 msgstr " अहिलेको फाईल बचत गर"
 
 #. Save As
-#: libgnomeui/gnome-app-helper.c:119
+#: ../libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
 msgstr "_यस रुपमा बचत गर"
 
-#: libgnomeui/gnome-app-helper.c:120
+#: ../libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
 msgstr "अलग नाममा अहिलेको फाईल जम्मा गर"
 
 #. Revert
-#: libgnomeui/gnome-app-helper.c:125
+#: ../libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
 msgstr "_फर्काउ"
 
-#: libgnomeui/gnome-app-helper.c:126
+#: ../libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
 msgstr "फाइलको बचत गरेको संस्करणलाइ फर्काउ"
 
 #. Print
-#: libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
 msgstr "_टंकण..."
 
-#: libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
 msgstr "अहिलेको फाइल टंकण गर"
 
 #. Print Setup
-#: libgnomeui/gnome-app-helper.c:136
+#: ../libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
 msgstr "छापा उपकरण ज_डान"
 
-#: libgnomeui/gnome-app-helper.c:137
+#: ../libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
 msgstr "अहिलेको टंकणका लागि पेज सेटिङ्ग मिलाउ"
 
 #. Close
-#: libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
 msgstr "_बन्द"
 
-#: libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
 msgstr "अहिलेको फाईल बन्द गर"
 
 #. Exit
-#: libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
 msgstr "_बन्द गर"
 
-#: libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
 msgstr "अनुप्रयोग बन्द गर"
 
@@ -310,93 +327,93 @@ msgstr "अनुप्रयोग बन्द गर"
 #. * The "Edit" menu
 #.
 #. Cut
-#: libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
 msgstr "का_ट्नु"
 
-#: libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
 msgstr "छानिए जति काट"
 
 #. 10
 #. Copy
-#: libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
 msgstr "_नक्कल गर"
 
-#: libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
 msgstr "छानिए जति नक्कल गर"
 
 #. Paste
-#: libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:166
 msgid "_Paste"
 msgstr "_टाँस"
 
-#: libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
 msgstr "क्लिपबोर्ड टाँस"
 
 #. Clear
-#: libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:171
 msgid "C_lear"
 msgstr "स_फा"
 
-#: libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
 msgstr "छानिएजति सफा गर"
 
 #. Undo
-#: libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
 msgstr "अघिकै _कायम गर"
 
-#: libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
 msgstr "अघिको कार्यलाइ पहिलेकै स्थानमा राख"
 
 #. Redo
-#: libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
 msgstr "_फेरि गर"
 
-#: libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
 msgstr "बाकीँ काम पनि फेरि गर"
 
 #. Find
-#: libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
 msgstr "_खोज..."
 
-#: libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
 msgstr "एउटा सूत्रको लागि खोज"
 
 #. Find Again
-#: libgnomeui/gnome-app-helper.c:191
+#: ../libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
 msgstr "अर्को खोज"
 
-#: libgnomeui/gnome-app-helper.c:192
+#: ../libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
 msgstr "उही सूत्रको लागि फेरि खोज"
 
 #. Replace
-#: libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
 msgstr "फेरिराख..."
 
-#: libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
 msgstr "सूत्रलाइ पहिलेकै स्थानमा राख"
 
 #. Properties
-#: libgnomeui/gnome-app-helper.c:202
+#: ../libgnomeui/gnome-app-helper.c:202
 msgid "_Properties"
 msgstr "_बिषेशताहरू"
 
-#: libgnomeui/gnome-app-helper.c:203
+#: ../libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
 msgstr "फाईलको बिषेशताहरू फेरबदल गर"
 
@@ -404,11 +421,11 @@ msgstr "फाईलको बिषेशताहरू फेरबदल ग
 #. * The Settings menu
 #.
 #. Settings
-#: libgnomeui/gnome-app-helper.c:211
+#: ../libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
 msgstr "प्राथमि_कता"
 
-#: libgnomeui/gnome-app-helper.c:212
+#: ../libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
 msgstr "अनुप्रयोग मिलाऊ"
 
@@ -417,215 +434,215 @@ msgstr "अनुप्रयोग मिलाऊ"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_बारेमा"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "यो अनुप्रयोगका बारेमा"
 
-#: libgnomeui/gnome-app-helper.c:225
+#: ../libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
 msgstr "_सबै छान"
 
-#: libgnomeui/gnome-app-helper.c:226
+#: ../libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
 msgstr "सबैकुरा छान"
 
 #.
 #. * Window menu
 #.
-#: libgnomeui/gnome-app-helper.c:234
+#: ../libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
 msgstr "नयाँ _विन्डो बनाउ"
 
-#: libgnomeui/gnome-app-helper.c:235
+#: ../libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
 msgstr "एउटा नयाँ विन्डो बनाउ"
 
-#: libgnomeui/gnome-app-helper.c:239
+#: ../libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
 msgstr "यो विन्डो _बन्द गर"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "अहिलेको विन्डो बन्द गर"
 
 #.
 #. * The "Game" menu
 #.
-#: libgnomeui/gnome-app-helper.c:248
+#: ../libgnomeui/gnome-app-helper.c:248
 msgid "_New game"
 msgstr "_नयाँ खेल"
 
-#: libgnomeui/gnome-app-helper.c:249
+#: ../libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
 msgstr "नयाँ खेल सुरु गर"
 
-#: libgnomeui/gnome-app-helper.c:253
+#: ../libgnomeui/gnome-app-helper.c:253
 msgid "_Pause game"
 msgstr "खेल _रोक"
 
-#: libgnomeui/gnome-app-helper.c:254
+#: ../libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
 msgstr "खेल रोक"
 
-#: libgnomeui/gnome-app-helper.c:258
+#: ../libgnomeui/gnome-app-helper.c:258
 msgid "_Restart game"
 msgstr "खेल फेरि _सुरु गर"
 
-#: libgnomeui/gnome-app-helper.c:259
+#: ../libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
 msgstr "खेल फेरि सुरु गर"
 
-#: libgnomeui/gnome-app-helper.c:263
+#: ../libgnomeui/gnome-app-helper.c:263
 msgid "_Undo move"
 msgstr "_अघिकै  मुभ कायम गर"
 
-#: libgnomeui/gnome-app-helper.c:264
+#: ../libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
 msgstr "गएको मुभलाइ अघिकै कायम गर "
 
-#: libgnomeui/gnome-app-helper.c:268
+#: ../libgnomeui/gnome-app-helper.c:268
 msgid "_Redo move"
 msgstr "मुभलाइ फेरि कायम गर"
 
-#: libgnomeui/gnome-app-helper.c:269
+#: ../libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
 msgstr "पुरानै कायम गर"
 
-#: libgnomeui/gnome-app-helper.c:273
+#: ../libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
 msgstr "_इशारा"
 
-#: libgnomeui/gnome-app-helper.c:274
+#: ../libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
 msgstr "अर्को मुभकोलागि इशारालेउ"
 
 #. 30
-#: libgnomeui/gnome-app-helper.c:279
+#: ../libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
 msgstr "_स्कोर"
 
-#: libgnomeui/gnome-app-helper.c:280
+#: ../libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
 msgstr "स्कोर हेर"
 
-#: libgnomeui/gnome-app-helper.c:284
+#: ../libgnomeui/gnome-app-helper.c:284
 msgid "_End game"
 msgstr "खेल _समाप्त"
 
-#: libgnomeui/gnome-app-helper.c:285
+#: ../libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
 msgstr "अहिलेको खेल समाप्त गर"
 
-#: libgnomeui/gnome-app-helper.c:1143
+#: ../libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
 msgstr "_बिषयबस्तुहरु"
 
-#: libgnomeui/gnome-app-helper.c:1146
+#: ../libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "यो निवेदनकालागि सहयोग देखाउ"
 
-#: libgnomeui/gnome-app-helper.c:2570
+#: ../libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
 msgstr "पाठ मुनिको आईकनहरु"
 
-#: libgnomeui/gnome-app-helper.c:2571
+#: ../libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
 msgstr "संकेत चन्हबाहेक प्राथमिकता"
 
-#: libgnomeui/gnome-app-helper.c:2572
+#: ../libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
 msgstr "संकेतहरु मात्र"
 
-#: libgnomeui/gnome-app-helper.c:2573
+#: ../libgnomeui/gnome-app-helper.c:2573
 msgid "Text Only"
 msgstr "पाठ मात्र"
 
-#: libgnomeui/gnome-app-helper.c:2634
+#: ../libgnomeui/gnome-app-helper.c:2634
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "पुर्वनिर्धारित डेस्कटप प्रयोग गर (%s)"
 
-#: libgnomeui/gnome-app-util.c:99
+#: ../libgnomeui/gnome-app-util.c:99
 msgid " (press return)"
 msgstr "(फर्कमा थिच)"
 
-#: libgnomeui/gnome-app-util.c:141
+#: ../libgnomeui/gnome-app-util.c:141
 msgid "ERROR: "
 msgstr "गल्ती"
 
-#: libgnomeui/gnome-app-util.c:178
+#: ../libgnomeui/gnome-app-util.c:178
 msgid "Warning: "
 msgstr "चेतावनी"
 
-#: libgnomeui/gnome-app-util.c:316
+#: ../libgnomeui/gnome-app-util.c:316
 msgid "y"
 msgstr "हो"
 
-#: libgnomeui/gnome-app-util.c:317
+#: ../libgnomeui/gnome-app-util.c:317
 msgid "yes"
 msgstr "हो"
 
-#: libgnomeui/gnome-app-util.c:320
+#: ../libgnomeui/gnome-app-util.c:320
 msgid "n"
 msgstr "होइन"
 
-#: libgnomeui/gnome-app-util.c:321
+#: ../libgnomeui/gnome-app-util.c:321
 msgid "no"
 msgstr "होइन"
 
-#: libgnomeui/gnome-app-util.c:356
+#: ../libgnomeui/gnome-app-util.c:356
 msgid " (yes or no)"
 msgstr "(हो वा होइन)"
 
-#: libgnomeui/gnome-app-util.c:357
+#: ../libgnomeui/gnome-app-util.c:357
 msgid "  - OK? (yes or no)"
 msgstr "- हुन्छ?(हो वा हेइन)"
 
-#: libgnomeui/gnome-app-util.c:685
+#: ../libgnomeui/gnome-app-util.c:685
 msgid "Progress"
 msgstr "प्रगति"
 
-#: libgnomeui/gnome-app.c:153
+#: ../libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr "एपिपि आइडि"
 
-#: libgnomeui/gnome-app.c:154
+#: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "निवेदन आइडिको सूत्र"
 
-#: libgnomeui/gnome-appbar.c:747
+#: ../libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
 msgstr "प्रगतिक्रममा छ"
 
-#: libgnomeui/gnome-appbar.c:748
+#: ../libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
 msgstr "एउटा प्रगति औजार निर्माण गर "
 
-#: libgnomeui/gnome-appbar.c:755
+#: ../libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
 msgstr "औकातसंग"
 
-#: libgnomeui/gnome-appbar.c:756
+#: ../libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
 msgstr "एउटा हैसियत औजार निर्माण गर"
 
-#: libgnomeui/gnome-appbar.c:763
+#: ../libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
 msgstr "आन्तरिक क्रियाकलाप"
 
-#: libgnomeui/gnome-appbar.c:764
+#: ../libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
 msgstr "उपयोग कर्ताको क्रियाकलापको तह खोजियो"
 
-#: libgnomeui/gnome-authentication-manager.c:70
+#: ../libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "तपाँईको प्रोक्सी संजाल नियन्त्रकले सुरु गर्नुहोस् भन्छ.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:71
+#: ../libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -634,334 +651,334 @@ msgstr ""
 "\"%s\".\n"
 "%s सुविधाका लागि संजाल सुरु गर्नु पर्छ "
 
-#: libgnomeui/gnome-authentication-manager.c:74
+#: ../libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "तपाईँको पासवर्ड विसंकेतन नगरी पठाइने छ"
 
-#: libgnomeui/gnome-authentication-manager.c:75
+#: ../libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "तपाईँको पासवर्ड विसंकेतन गरेर पठाइने छ"
 
-#: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:307
+#: ../libgnomeui/gnome-authentication-manager.c:78
+#: ../libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "आधिकारिकता खोज्यो"
 
-#: libgnomeui/gnome-authentication-manager.c:299
+#: ../libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "तिमीले पहुँचभित्र %s प्रवेश गर्नै पर्छ %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:301
+#: ../libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "तिमीले पहुँचभित्र प्रवेश गर्नै पर्छ %s\n"
 
-#: libgnomeui/gnome-client.c:863
+#: ../libgnomeui/gnome-client.c:863
 msgid "Specify session management ID"
 msgstr "सेसन ब्यवस्थापन आईडी उल्लेख गर्नुहोस्"
 
-#: libgnomeui/gnome-client.c:863
+#: ../libgnomeui/gnome-client.c:863
 msgid "ID"
 msgstr "आइ डि"
 
-#: libgnomeui/gnome-client.c:866
+#: ../libgnomeui/gnome-client.c:866
 msgid "Specify prefix of saved configuration"
 msgstr "सुरक्षण गरेको गठन-समायोजनको उपसर्ग उल्लेख गर्नुहोस्"
 
-#: libgnomeui/gnome-client.c:866
+#: ../libgnomeui/gnome-client.c:866
 msgid "PREFIX"
 msgstr "उपसर्ग"
 
-#: libgnomeui/gnome-client.c:869
+#: ../libgnomeui/gnome-client.c:869
 msgid "Disable connection to session manager"
 msgstr "सेसन प्रबन्धकसँग सम्पर्क बिच्छेद गर"
 
-#: libgnomeui/gnome-client.c:975
+#: ../libgnomeui/gnome-client.c:975
 msgid "Session management"
 msgstr "सेसन प्रबन्ध"
 
-#: libgnomeui/gnome-client.c:2475
+#: ../libgnomeui/gnome-client.c:2475
 msgid "Cancel Logout"
 msgstr "बाहिर जाने रद्द गर"
 
-#: libgnomeui/gnome-color-picker.c:414
+#: ../libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "अमान्य रंगको तथ्याङ्क प्रात भयो \n"
 
-#: libgnomeui/gnome-color-picker.c:465
+#: ../libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "रंग परिचयको लागि सम्वाद खोल"
 
-#: libgnomeui/gnome-color-picker.c:487
+#: ../libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "एउटा रंग छान"
 
-#: libgnomeui/gnome-dateedit.c:479 libgnomeui/gnome-dateedit.c:776
+#: ../libgnomeui/gnome-dateedit.c:479 ../libgnomeui/gnome-dateedit.c:776
 msgid "Time"
 msgstr "समय"
 
-#: libgnomeui/gnome-dateedit.c:480
+#: ../libgnomeui/gnome-dateedit.c:480
 msgid "The time currently selected"
 msgstr "तत्काल छानिएको समय"
 
-#: libgnomeui/gnome-dateedit.c:492
+#: ../libgnomeui/gnome-dateedit.c:492
 msgid "DateEdit Flags"
 msgstr "तिथि मिति मिलान गर्ने ध्वजा चिन्ह"
 
-#: libgnomeui/gnome-dateedit.c:493
+#: ../libgnomeui/gnome-dateedit.c:493
 msgid "Flags for how DateEdit looks"
 msgstr "तिथि मिति मिलान तरिका हेर्ने ध्वजा चिन्ह"
 
-#: libgnomeui/gnome-dateedit.c:502
+#: ../libgnomeui/gnome-dateedit.c:502
 msgid "Lower Hour"
 msgstr "तल्लो समय"
 
-#: libgnomeui/gnome-dateedit.c:503
+#: ../libgnomeui/gnome-dateedit.c:503
 msgid "Lower hour in the time popup selector"
 msgstr "पपअप समय छनौटमा तल्लो समय"
 
-#: libgnomeui/gnome-dateedit.c:513
+#: ../libgnomeui/gnome-dateedit.c:513
 msgid "Upper Hour"
 msgstr "माथिल्लो समय"
 
-#: libgnomeui/gnome-dateedit.c:514
+#: ../libgnomeui/gnome-dateedit.c:514
 msgid "Upper hour in the time popup selector"
 msgstr "पपअप समय छनौटमा माथिल्लो समय"
 
-#: libgnomeui/gnome-dateedit.c:524
+#: ../libgnomeui/gnome-dateedit.c:524
 msgid "Initial Time"
 msgstr "सुरुको समय"
 
-#: libgnomeui/gnome-dateedit.c:525
+#: ../libgnomeui/gnome-dateedit.c:525
 msgid "The initial time"
 msgstr "सुरुको समय"
 
-#: libgnomeui/gnome-dateedit.c:739 libgnomeui/gnome-scores.c:97
+#: ../libgnomeui/gnome-dateedit.c:739 ../libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "मिति"
 
-#: libgnomeui/gnome-dateedit.c:752
+#: ../libgnomeui/gnome-dateedit.c:752
 msgid "Select Date"
 msgstr "छानिएको मिति"
 
-#: libgnomeui/gnome-dateedit.c:752
+#: ../libgnomeui/gnome-dateedit.c:752
 msgid "Select the date from a calendar"
 msgstr "पात्रोबाट मिति छान"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:763
+#: ../libgnomeui/gnome-dateedit.c:763
 msgid "Calendar"
 msgstr "पात्रो"
 
-#: libgnomeui/gnome-dateedit.c:784
+#: ../libgnomeui/gnome-dateedit.c:784
 msgid "Select Time"
 msgstr "समय छान"
 
-#: libgnomeui/gnome-dateedit.c:784
+#: ../libgnomeui/gnome-dateedit.c:784
 msgid "Select the time from a list"
 msgstr "सूचीबाट समय छान"
 
-#: libgnomeui/gnome-dateedit.c:1003
+#: ../libgnomeui/gnome-dateedit.c:1003
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "जीनोम_मिति_संपादन_प्रप्ती_मिति मिलेको छैन, जीनोम_मिति_संपादन_प्राप्ती_समय प्रयोग गर"
 
-#: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:155
+#: ../libgnomeui/gnome-druid-page-standard.c:121
+#: ../libgnomeui/gnome-font-picker.c:155
 msgid "Title"
 msgstr "शीर्षक"
 
-#: libgnomeui/gnome-druid-page-standard.c:122
+#: ../libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
 msgstr "पुरोहित(निरीक्षक)को शीर्षक"
 
-#: libgnomeui/gnome-druid-page-standard.c:130
+#: ../libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
 msgstr "तस्विर चिन्ह"
 
-#: libgnomeui/gnome-druid-page-standard.c:137
+#: ../libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
 msgstr "माथिल्लो वाटरमार्क"
 
-#: libgnomeui/gnome-druid-page-standard.c:138
+#: ../libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
 msgstr "माथिल्लोको लागि वाटरमार्क तस्विर"
 
-#: libgnomeui/gnome-druid-page-standard.c:145
+#: ../libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
 msgstr "पृष्टभूमिको शीर्षक"
 
-#: libgnomeui/gnome-druid-page-standard.c:146
+#: ../libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
 msgstr " शीर्षकको अगाडिको रंग"
 
-#: libgnomeui/gnome-druid-page-standard.c:153
+#: ../libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
 msgstr "अगाडिको रंग शीर्षक"
 
-#: libgnomeui/gnome-druid-page-standard.c:154
+#: ../libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
 msgstr "जिडिकेको रंग जस्तो शीर्षकको अगाडिको रंग"
 
-#: libgnomeui/gnome-druid-page-standard.c:161
+#: ../libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
 msgstr "शीर्षकको अगाडि रंग मिलान"
 
-#: libgnomeui/gnome-druid-page-standard.c:162
+#: ../libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
 msgstr "शीर्षकको अगाडिको रंग मिलान गरियो"
 
-#: libgnomeui/gnome-druid-page-standard.c:169
-#: libgnomeui/gnome-druid-page-standard.c:177
+#: ../libgnomeui/gnome-druid-page-standard.c:169
+#: ../libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
 msgstr "पछाडिको रंग"
 
-#: libgnomeui/gnome-druid-page-standard.c:170
+#: ../libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
 msgstr "पछाडिको रंग"
 
-#: libgnomeui/gnome-druid-page-standard.c:178
+#: ../libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
 msgstr "जिडिके रंग जस्तो पछाडिको रंग"
 
-#: libgnomeui/gnome-druid-page-standard.c:185
+#: ../libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
 msgstr "पछाडिको रंग मिलान"
 
-#: libgnomeui/gnome-druid-page-standard.c:186
+#: ../libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
 msgstr "शीर्षकको पछाडिको रंग मिलान गरियो"
 
-#: libgnomeui/gnome-druid-page-standard.c:193
-#: libgnomeui/gnome-druid-page-standard.c:201
+#: ../libgnomeui/gnome-druid-page-standard.c:193
+#: ../libgnomeui/gnome-druid-page-standard.c:201
 msgid "Contents Background Color"
 msgstr "पछाडिको रंगको चिन्ह"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: ../libgnomeui/gnome-druid-page-standard.c:194
 msgid "Contents Background color"
 msgstr "पछाडिको रंगको चिन्ह"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: ../libgnomeui/gnome-druid-page-standard.c:202
 msgid "Contents Background color as a GdkColor"
 msgstr "जिडिके रंग जस्तो पछाडिको रंग"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: ../libgnomeui/gnome-druid-page-standard.c:209
 msgid "Contents Background color set"
 msgstr "पछाडिको रंग मिलान"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: ../libgnomeui/gnome-druid-page-standard.c:210
 msgid "Contents Background color is set"
 msgstr "शीर्षकको पछाडिको रंग मिलान गरियो"
 
-#: libgnomeui/gnome-druid-page-standard.c:216
-#: libgnomeui/gnome-druid-page-standard.c:224
+#: ../libgnomeui/gnome-druid-page-standard.c:216
+#: ../libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "पछाडिको रंगको चिन्ह"
 
-#: libgnomeui/gnome-druid-page-standard.c:217
+#: ../libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "पछाडिको रंगको चिन्ह"
 
-#: libgnomeui/gnome-druid-page-standard.c:225
+#: ../libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "जिडिकेको रंगजस्तो पछाडिको रंगको चिन्ह"
 
-#: libgnomeui/gnome-druid-page-standard.c:232
+#: ../libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "पछाडिको रंगको चिन्ह मिलान"
 
-#: libgnomeui/gnome-druid-page-standard.c:233
+#: ../libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "चवन्हको पछाडिको रंग मिलान गरियो"
 
-#: libgnomeui/gnome-druid.c:150
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show Finish"
 msgstr "समाप्त भएको देखाऊ"
 
-#: libgnomeui/gnome-druid.c:151
+#: ../libgnomeui/gnome-druid.c:155
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "'अर्को'बटनको साटो 'समाप्त'बटन देखाऊ"
 
-#: libgnomeui/gnome-druid.c:158
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show Help"
 msgstr "सहयोग देखाऊ"
 
-#: libgnomeui/gnome-druid.c:159
+#: ../libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
 msgstr "'सहयोग'बटन देखाउ"
 
-#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
+#: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "इतिहास आइडी"
 
-#: libgnomeui/gnome-entry.c:200
+#: ../libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
 msgstr "जिटिके प्रविष्टि"
 
-#: libgnomeui/gnome-entry.c:201
+#: ../libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "जिटिके प्रविष्टि"
 
-#: libgnomeui/gnome-file-entry.c:229 libgnomeui/gnome-icon-entry.c:177
+#: ../libgnomeui/gnome-file-entry.c:229 ../libgnomeui/gnome-icon-entry.c:177
 msgid "History ID"
 msgstr "इतिहास आइडि"
 
-#: libgnomeui/gnome-file-entry.c:230
+#: ../libgnomeui/gnome-file-entry.c:230
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
 "फाइल प्रवेशकोलागि अनौठो परिचयकर्ता । यो पुरानो कुरा बचत गर्नको लागि प्रयोग हुनेछ"
 
-#: libgnomeui/gnome-file-entry.c:238 libgnomeui/gnome-icon-entry.c:186
+#: ../libgnomeui/gnome-file-entry.c:238 ../libgnomeui/gnome-icon-entry.c:186
 msgid "Browse Dialog Title"
 msgstr "सम्वाद शीर्षक हेर"
 
-#: libgnomeui/gnome-file-entry.c:239
+#: ../libgnomeui/gnome-file-entry.c:239
 msgid "Title for the Browse file dialog."
 msgstr "फाइल सम्बाद हेर्नका लागि शीर्षक"
 
-#: libgnomeui/gnome-file-entry.c:246
+#: ../libgnomeui/gnome-file-entry.c:246
 msgid "Directory Entry"
 msgstr "निर्देशिका प्रविष्टि"
 
-#: libgnomeui/gnome-file-entry.c:247
+#: ../libgnomeui/gnome-file-entry.c:247
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
 "फाइल प्रविष्टि निर्देशिका नाममा प्रवेश गर्न प्रयोग भएको छ वा फाइलनामका लागिमात्र "
 
-#: libgnomeui/gnome-file-entry.c:255
+#: ../libgnomeui/gnome-file-entry.c:255
 msgid "Modal"
 msgstr "नमुना"
 
-#: libgnomeui/gnome-file-entry.c:256
+#: ../libgnomeui/gnome-file-entry.c:256
 msgid "Whether the Browse file window should be modal."
 msgstr "फाइल हेर्ने विण्डो नमुना हुनसक्छ कि"
 
-#: libgnomeui/gnome-file-entry.c:263 libgnomeui/gnome-icon-entry.c:202
+#: ../libgnomeui/gnome-file-entry.c:263 ../libgnomeui/gnome-icon-entry.c:202
 msgid "Filename"
 msgstr "फाइलको नाम"
 
-#: libgnomeui/gnome-file-entry.c:264
+#: ../libgnomeui/gnome-file-entry.c:264
 msgid "Filename that should be displayed in the file entry."
 msgstr "फाइल प्रविष्टिमा देखिने फाइल नाम"
 
-#: libgnomeui/gnome-file-entry.c:272
+#: ../libgnomeui/gnome-file-entry.c:272
 msgid "Default Path"
 msgstr "पूर्वनिर्धारित मार्ग"
 
-#: libgnomeui/gnome-file-entry.c:273
+#: ../libgnomeui/gnome-file-entry.c:273
 msgid "Default path for the Browse file window."
 msgstr "फाइल हेर्ने विण्डोका लागि पूर्वनिर्धारित मार्ग"
 
-#: libgnomeui/gnome-file-entry.c:280
+#: ../libgnomeui/gnome-file-entry.c:280
 msgid "GnomeEntry"
 msgstr "जिनोम प्रविष्टि"
 
-#: libgnomeui/gnome-file-entry.c:281
+#: ../libgnomeui/gnome-file-entry.c:281
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -970,11 +987,11 @@ msgstr ""
 "फाइलनाम प्रविष्टिका लागि प्रयोग हुने जिनोम प्रविष्टि. जिनोम प्रविष्टिको आधार खोजी वा "
 "संशोधन गर्नुछ भने यो साधन प्रयोग गर्न सक्नुहुन्छ"
 
-#: libgnomeui/gnome-file-entry.c:291
+#: ../libgnomeui/gnome-file-entry.c:291
 msgid "GtkEntry"
 msgstr "जिटिके प्रविष्टि"
 
-#: libgnomeui/gnome-file-entry.c:292
+#: ../libgnomeui/gnome-file-entry.c:292
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -983,118 +1000,118 @@ msgstr ""
 "फाइलनाम प्रविष्टिका लागि प्रयोग हुने जिटिके प्रविष्टि. जिटिके प्रविष्टिको आधार खोजी वा "
 "संशोधन गर्नुछ भने यो साधन प्रयोग गर्न सक्नुहुन्छ"
 
-#: libgnomeui/gnome-file-entry.c:302
+#: ../libgnomeui/gnome-file-entry.c:302
 msgid "Use GtkFileChooser"
 msgstr "जिटिकेफाइल चयक प्रयोग गर"
 
-#: libgnomeui/gnome-file-entry.c:303
+#: ../libgnomeui/gnome-file-entry.c:303
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
 "नयाँ फाइल छान्नका लागि  जिटिकेफाइल चयक औजार वा जिटिकेफाइल छनौट औजार प्रयोग गर्नुपर्ला"
 
-#: libgnomeui/gnome-file-entry.c:626 libgnomeui/gnome-file-entry.c:660
+#: ../libgnomeui/gnome-file-entry.c:626 ../libgnomeui/gnome-file-entry.c:660
 msgid "Select file"
 msgstr "फाइल छान"
 
-#: libgnomeui/gnome-file-entry.c:786
+#: ../libgnomeui/gnome-file-entry.c:786
 msgid "Path"
 msgstr "बाटो"
 
-#: libgnomeui/gnome-file-entry.c:786
+#: ../libgnomeui/gnome-file-entry.c:786
 msgid "Path to file"
 msgstr "फाइलसम्म जाने बाटो"
 
-#: libgnomeui/gnome-file-entry.c:813
+#: ../libgnomeui/gnome-file-entry.c:813
 msgid "_Browse..."
 msgstr "_आँखिझ्यालबाट हेर्नु..."
 
-#: libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Pop up a file selector to choose a file"
 msgstr "फाइल छान्नका लागि फाइल चयक पप अप गर"
 
-#: libgnomeui/gnome-font-picker.c:66
+#: ../libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
 msgstr "सान्स १२"
 
-#: libgnomeui/gnome-font-picker.c:67
+#: ../libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "एएबिबिसिसिडिडिईईएफएफजीजीआईआईजेजेकेकेएलएलएमएमएनएनओओपीपीक्यूक्यूआरआरएसएसटीटीयुयुभीभीडब्ल्युडब्ल्युएक्सएक्सवाईवाईजेडजेड"
 
-#: libgnomeui/gnome-font-picker.c:68
+#: ../libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
 msgstr "लिपि टिप"
 
-#: libgnomeui/gnome-font-picker.c:156
+#: ../libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
 msgstr "छानिएको सम्बाद बाकसको शीर्षक"
 
-#: libgnomeui/gnome-font-picker.c:164
+#: ../libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
 msgstr "मोड"
 
-#: libgnomeui/gnome-font-picker.c:165
+#: ../libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
 msgstr "लिपि टिप्ने मोडको संचालन"
 
-#: libgnomeui/gnome-font-picker.c:174
+#: ../libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
 msgstr "लिपिको नाम"
 
-#: libgnomeui/gnome-font-picker.c:175
+#: ../libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
 msgstr "छानिएको लिपिको नाम"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "लिपि"
 
-#: libgnomeui/gnome-font-picker.c:185
+#: ../libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
 msgstr "छानिएको जिटिके लिपि"
 
-#: libgnomeui/gnome-font-picker.c:192
+#: ../libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
 msgstr "अक्षरको पूर्वदृष्य हेर"
 
-#: libgnomeui/gnome-font-picker.c:193
+#: ../libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
 msgstr "संवादमा देखिएको पाठको पूर्वदृष्य"
 
-#: libgnomeui/gnome-font-picker.c:201
+#: ../libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
 msgstr "लेवलमा लिपिको प्रयोग गर"
 
-#: libgnomeui/gnome-font-picker.c:202
+#: ../libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
 msgstr "लिपि सूचना मोडमा लेवलमा लिपिको प्रयोग गर"
 
-#: libgnomeui/gnome-font-picker.c:210
+#: ../libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
 msgstr "लेवलको लागि लिपिको आकार"
 
-#: libgnomeui/gnome-font-picker.c:211
+#: ../libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
 msgstr "लिपि सूचना मोडमा लेवलको लागि लिपिको आकार"
 
-#: libgnomeui/gnome-font-picker.c:221
+#: ../libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
 msgstr "आकार देखाउ"
 
-#: libgnomeui/gnome-font-picker.c:222
+#: ../libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
 msgstr "लिपि सूचना मोडमा आकार देखाउ"
 
-#: libgnomeui/gnome-gconf-ui.c:61
+#: ../libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
 msgstr "जीनोम जीसमायोजन युआई सहयोग"
 
-#: libgnomeui/gnome-gconf-ui.c:96
+#: ../libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
 msgstr "_विस्त्रित"
 
-#: libgnomeui/gnome-gconf-ui.c:169
+#: ../libgnomeui/gnome-gconf-ui.c:169
 #, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
@@ -1106,7 +1123,7 @@ msgstr ""
 "परिवर्तन गर्न दिँदैन.तपाईँले छानेको कुनै मिलानले काम नगर्नसक्छ वा तपाईँको कार्य दोस्रो "
 "पटकका लागि काम नगर्नसक्छ "
 
-#: libgnomeui/gnome-gconf-ui.c:176
+#: ../libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1115,39 +1132,39 @@ msgstr ""
 "%s का लागि भणारण गरिएको सूचना समायोजन वा लोडिङ्गमा गल्ती देखिन्छ. तपाईँले गरेको "
 "समायोजन मिलानले का नगर्नसक्छ"
 
-#: libgnomeui/gnome-href.c:123
+#: ../libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "युआरएल"
 
-#: libgnomeui/gnome-href.c:124
+#: ../libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "जीनोमएचआरएफ कृयाकलाप युआरएल "
 
-#: libgnomeui/gnome-href.c:131
+#: ../libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "पाठ"
 
-#: libgnomeui/gnome-href.c:132
+#: ../libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "बटनमा पाठ"
 
-#: libgnomeui/gnome-href.c:133
+#: ../libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "भोको संसारको अन्त्य"
 
-#: libgnomeui/gnome-href.c:139
+#: ../libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "जोडने रंग"
 
-#: libgnomeui/gnome-href.c:140
+#: ../libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "सम्बन्ध जोड्नका लागि प्रयोग गरिएको रंग"
 
-#: libgnomeui/gnome-href.c:171
+#: ../libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "यो बटनले तपाईँलाई युआरआईमा पुर्‍याउँछ जस्ले यसलाई देखाउँछ"
 
-#: libgnomeui/gnome-href.c:394
+#: ../libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occured while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1155,34 +1172,34 @@ msgstr ""
 "पूर्वनिर्धारित संजाल हेर्ने काम थाल्ने क्रममा गल्ती भेटियो .\n"
 "'प्राथमिकता दिइएको कार्य'को सक्षम औजार जाँच्नुहोस् "
 
-#: libgnomeui/gnome-icon-entry.c:178
+#: ../libgnomeui/gnome-icon-entry.c:178
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
 "चिन्ह प्रविष्टिका लागि उपयुक्त प्रदर्शक जुन पुरानो  सूची संरक्षण गर्न प्रयोग गरिनेछ । "
 
-#: libgnomeui/gnome-icon-entry.c:187
+#: ../libgnomeui/gnome-icon-entry.c:187
 msgid "Title for the Browse icon dialog."
 msgstr "आँखिझ्याल हेर्ने संवादचिन्हका लागि शीर्षक"
 
-#: libgnomeui/gnome-icon-entry.c:194
+#: ../libgnomeui/gnome-icon-entry.c:194
 msgid "Pixmap Directory"
 msgstr "पिक्सनक्सा निर्देशिका"
 
-#: libgnomeui/gnome-icon-entry.c:195
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Directory that will be searched for icons."
 msgstr "निर्देशिका जसले चिन्हको खोजी गर्नेछ"
 
-#: libgnomeui/gnome-icon-entry.c:203
+#: ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename that should be displayed in the icon entry."
 msgstr "चिन्ह प्रविष्टिमा देखिने फाइलनाम "
 
-#: libgnomeui/gnome-icon-entry.c:211
+#: ../libgnomeui/gnome-icon-entry.c:211
 msgid "Picker dialog"
 msgstr "चयकका लागि सम्बाद"
 
-#: libgnomeui/gnome-icon-entry.c:212
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1190,147 +1207,148 @@ msgstr ""
 "चिन्ह चयकका लागि सम्बाद.तपाईँलाई यसको क्षमता खोज्नु वा संशोधन गर्नुछ भने जीटिके संवाद "
 "प्राप्तगर्न यो क्षमता प्रयोगगर्न सक्नुहुन्छ "
 
-#: libgnomeui/gnome-icon-entry.c:320 libgnomeui/gnome-icon-entry.c:980
+#: ../libgnomeui/gnome-icon-entry.c:320 ../libgnomeui/gnome-icon-entry.c:980
 msgid "No Icon"
 msgstr "चिन्ह छैन"
 
-#: libgnomeui/gnome-icon-entry.c:750
+#: ../libgnomeui/gnome-icon-entry.c:750
 msgid "Icon selection dialog"
 msgstr "चिन्ह चयक संवाद"
 
-#: libgnomeui/gnome-icon-entry.c:751
+#: ../libgnomeui/gnome-icon-entry.c:751
 msgid "This dialog box lets you select an icon."
 msgstr "यो सम्बाद बाकसले तँपाइलाइ एउटा चिन्ह रोजाउनेछ"
 
-#: libgnomeui/gnome-icon-entry.c:757
+#: ../libgnomeui/gnome-icon-entry.c:757
 msgid "Icon selector"
 msgstr "चिन्ह चयनकर्ता"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: ../libgnomeui/gnome-icon-entry.c:758
 msgid "Please pick the icon you want."
 msgstr " आफुलाई चाहिएको चिन्ह लेऊ"
 
-#: libgnomeui/gnome-icon-entry.c:983
+#: ../libgnomeui/gnome-icon-entry.c:983
 msgid "Icon Selector"
 msgstr "चिन्ह चयनकर्ता"
 
-#: libgnomeui/gnome-icon-entry.c:984
+#: ../libgnomeui/gnome-icon-entry.c:984
 msgid "This button will open a window to let you select an icon."
 msgstr "तिमीले यो चिन्ह छानेपछि यो बटनले एउटा विन्डो खोल्नेछ"
 
-#: libgnomeui/gnome-icon-entry.c:1007
+#: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Browse"
 msgstr "हेर"
 
-#: libgnomeui/gnome-icon-entry.c:1009
+#: ../libgnomeui/gnome-icon-entry.c:1010
 msgid "Icon path"
 msgstr "चिन्हको बाटो"
 
-#: libgnomeui/gnome-icon-entry.c:1010
+#: ../libgnomeui/gnome-icon-entry.c:1011
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr "तपाईँले यस्तो निर्देशिकाको नाम दिनुपर्‍यो जहाँ चिन्हको तस्विर समावेश छ "
 
-#: libgnomeui/gnome-icon-sel.c:293
+#: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "जीनोम चिन्ह चयक : '%s' भेटिँदैन अथवा यो निर्देशिका नै होइन"
 
-#: libgnomeui/gnome-icon-sel.c:301
+#: ../libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "जीनोम चिन्ह चयकले '%s' निर्देशिका खोल्नसकेन"
 
-#: libgnomeui/gnome-icon-sel.c:401
+#: ../libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
 msgstr "चिन्हहरु लोडहुदैछ ..."
 
-#: libgnomeui/gnome-messagebox.c:109
+#: ../libgnomeui/gnome-messagebox.c:109
 msgid "Information"
 msgstr "सूचना"
 
-#: libgnomeui/gnome-messagebox.c:114
+#: ../libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
 msgstr "चेतावनी"
 
-#: libgnomeui/gnome-messagebox.c:120
+#: ../libgnomeui/gnome-messagebox.c:120
 msgid "Error"
 msgstr "गल्ती"
 
-#: libgnomeui/gnome-messagebox.c:126
+#: ../libgnomeui/gnome-messagebox.c:126
 msgid "Question"
 msgstr "प्रस्न"
 
-#: libgnomeui/gnome-messagebox.c:131
+#: ../libgnomeui/gnome-messagebox.c:131
 msgid "Message"
 msgstr "खबर"
 
-#: libgnomeui/gnome-password-dialog.c:252
+#: ../libgnomeui/gnome-password-dialog.c:252
 msgid "_Username:"
 msgstr "_प्रयोगकर्ताको नाम"
 
-#: libgnomeui/gnome-password-dialog.c:254
+#: ../libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
 msgstr "_डोमिन"
 
-#: libgnomeui/gnome-password-dialog.c:256
+#: ../libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
 msgstr "_प्रवेशचिन्ह"
 
-#: libgnomeui/gnome-password-dialog.c:330
+#: ../libgnomeui/gnome-password-dialog.c:330
 msgid "Connect _anonymously"
 msgstr "चिनारिबिना संपर्क गर"
 
-#: libgnomeui/gnome-password-dialog.c:335
+#: ../libgnomeui/gnome-password-dialog.c:335
 msgid "Connect as _user:"
 msgstr "उपयोगकर्ता बनेर संपर्क गर"
 
-#: libgnomeui/gnome-password-dialog.c:433
+#: ../libgnomeui/gnome-password-dialog.c:433
 msgid "Remember password for this session"
 msgstr "यो सत्रको लागि पासवर्ड यादगर"
 
-#: libgnomeui/gnome-password-dialog.c:435
+#: ../libgnomeui/gnome-password-dialog.c:435
 msgid "Save password in keyring"
 msgstr "की-रिङमा पासवर्ड बचतगर"
 
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
 msgstr "पूर्वदृष्य"
 
-#: libgnomeui/gnome-pixmap-entry.c:115
+#: ../libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr "जहाँ पिक्सनस्सा प्रविष्टि पूर्वदृष्य हुनसक्छ"
 
-#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
+#: ../libgnomeui/gnome-pixmap-entry.c:189
+#: ../libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "तस्विर छैन"
 
-#: libgnomeui/gnome-pixmap-entry.c:206
+#: ../libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
 msgstr " तस्विरको पूर्वदृष्य"
 
-#: libgnomeui/gnome-pixmap-entry.c:207
+#: ../libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
 msgstr "हालसालै निर्क्योल गरिएको तस्विरको पूर्वदृष्य"
 
-#: libgnomeui/gnome-pixmap-entry.c:414
+#: ../libgnomeui/gnome-pixmap-entry.c:414
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "सामान्य फाइल रोजाई प्रयोग गर्दा एचबाकस भेटिएन"
 
-#: libgnomeui/gnome-pixmap-entry.c:420
+#: ../libgnomeui/gnome-pixmap-entry.c:420
 msgid "Preview"
 msgstr "पूर्वदृष्य"
 
-#: libgnomeui/gnome-scores.c:78
+#: ../libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
 msgstr "प्रमुख दश"
 
-#: libgnomeui/gnome-scores.c:91
+#: ../libgnomeui/gnome-scores.c:91
 msgid "User"
 msgstr "प्रयोगकर्ता"
 
-#: libgnomeui/gnome-scores.c:94
+#: ../libgnomeui/gnome-scores.c:94
 msgid "Score"
 msgstr "स्कोर"
 
@@ -1339,67 +1357,67 @@ msgstr "स्कोर"
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: libgnomeui/gnome-scores.c:194
+#: ../libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
 
-#: libgnomeui/gnome-scores.c:395
+#: ../libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "सन्स १४"
 
-#: libgnomeui/gnome-stock-icons.c:139
+#: ../libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
 msgstr "टेवलको सिमाना"
 
-#: libgnomeui/gnome-stock-icons.c:140
+#: ../libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
 msgstr "टेवल भर"
 
-#: libgnomeui/gnome-stock-icons.c:141
+#: ../libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
 msgstr "द्रूतगतिको सूची"
 
-#: libgnomeui/gnome-stock-icons.c:142
+#: ../libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
 msgstr "संख्यात्मक सूची"
 
-#: libgnomeui/gnome-stock-icons.c:143
+#: ../libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
 msgstr "हरफ मिलान"
 
-#: libgnomeui/gnome-stock-icons.c:144
+#: ../libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
 msgstr "नमिलेको हरफ"
 
-#: libgnomeui/gnome-stock-icons.c:145
+#: ../libgnomeui/gnome-stock-icons.c:145
 msgid "About"
 msgstr "बारेमा"
 
-#: libgnomeui/gnome-ui-init.c:117
+#: ../libgnomeui/gnome-ui-init.c:117
 msgid "Disable Crash Dialog"
 msgstr "रद्दी संबाद निस्कृय पार"
 
-#: libgnomeui/gnome-ui-init.c:119
+#: ../libgnomeui/gnome-ui-init.c:119
 msgid "X display to use"
 msgstr "प्रयोगको लागि एक्स दृष्य"
 
-#: libgnomeui/gnome-ui-init.c:119
+#: ../libgnomeui/gnome-ui-init.c:119
 msgid "DISPLAY"
 msgstr "देखाऊ"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: ../libgnomeui/gnome-ui-init.c:127
 msgid "GNOME GUI Library"
 msgstr "जीनोम जीयुआई पुस्तकालय"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:708
+#: ../libgnomeui/gnome-ui-init.c:708
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "अनेक किसिमका खराब तत्वहरु भटियो; गल्ती संबाद देखाउन सकिँदैन\n"
 
 #  Eeeek! Can't show dialog
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:722
+#: ../libgnomeui/gnome-ui-init.c:722
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1408,7 +1426,7 @@ msgstr ""
 "टुक्रर्‍याउनेक्रममा गल्ती !\n"
 "रद्दी संबाद देखाउन सकिँदैन\n"
 
-#: libgnomeui/gnome_segv.c:101
+#: ../libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1422,38 +1440,39 @@ msgstr ""
 "यो संबाद बन्द गरेमा सबै कार्य बन्द हुन्छ र सेसन समाप्त हुन्छ.\n"
 "संबाद बन्दगर्नुभन्दा पहिले सबै फाइलहू सुरक्षण गर्नुहोस्"
 
-#: libgnomeui/gnome_segv.c:112
+#: ../libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
 msgstr "\"%s\" कार्य अचानक बन्दभयो"
 
-#: libgnomeui/gnome_segv.c:117
+#: ../libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
 msgstr "प्रकृया %d: %s"
 
-#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
 "यो समाधान गर्न यसको निर्माणकर्तालाई खबर गर्नुपर्‍यो अथवा यो कार्य पुन सुरुगर्नुपर्‍यो "
 
-#: libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "प्रयोग: जीनोम_segv2 कार्यनाम signum\n"
 
-#: libgnomeui/gnome_segv.c:153
+#: ../libgnomeui/gnome_segv.c:153
 msgid "_Restart Application"
 msgstr "निवेदन _फेरि सुरुगर "
 
-#: libgnomeui/gnome_segv.c:165
+#: ../libgnomeui/gnome_segv.c:165
 msgid "_Inform Developers"
 msgstr "सूचना विकासकर्ता"
 
-#: libgnomeui/gnome_segv.c:176
+#: ../libgnomeui/gnome_segv.c:176
 msgid "_Debug"
 msgstr "_सच्याउनु"
 
-#~ msgid "Exit the test"
-#~ msgstr "परीक्षणबाट बाहिर निक्ल"
+#: ../test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "परीक्षणबाट बाहिर निक्ल"
