@@ -1,3 +1,9 @@
+2005-08-14  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-ui-init.h: Move G_BEGIN_DECLS
+	after the #includes so it doesn't break build if 
+	an app includes this single file in a program.
+
 2005-08-05  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Post release version bump.
