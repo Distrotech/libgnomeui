@@ -1789,11 +1789,12 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
   system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
 
   pixbuf = NULL;
+  icon_name = NULL;
 
   vfs_info = get_vfs_info (file_system, path, GTK_FILE_INFO_MIME_TYPE);
   uri = gtk_file_path_get_string (path);
 
-  if (is_desktop_file (vfs_info))
+  if (vfs_info && is_desktop_file (vfs_info))
     {
       pixbuf = get_icon_from_desktop_file (uri, widget, pixel_size, error);
       gnome_vfs_file_info_unref (vfs_info);
@@ -1805,7 +1806,9 @@ gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
     icon_name = g_strdup ("gnome-fs-desktop");
   else if (strcmp (uri, system_vfs->home_uri) == 0)
     icon_name = g_strdup ("gnome-fs-home");
-  else
+  else if (strcmp (uri, "trash:///") == 0)
+    icon_name = g_strdup ("gnome-fs-trash-empty");
+  else if (vfs_info)
     icon_name = gnome_icon_lookup (icon_theme,
 				   NULL,
 				   uri,
