@@ -1,3 +1,12 @@
+libgnomeui 2.11.3
+-----------------
+
+What's new since 2.11.2
+
+Bug fixes:
+	- Don't crash on trash:/// bookmarks (Matthias)
+	- Fix build in gnome-ui-init.h
+
 libgnomeui 2.11.2
 -----------------
 
