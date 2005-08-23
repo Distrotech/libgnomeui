@@ -10,10 +10,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui\n"
+"Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-07-26 14:46+0000\n"
-"PO-Revision-Date: 2005-07-26 23:35+0300\n"
+"PO-Revision-Date: 2005-08-21 17:31+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Fail '%s' pole tavaline fail ega kataloog."
 #: ../file-chooser/sucky-desktop-item.c:796
 #, c-format
 msgid "Error cannot find file id '%s'"
-msgstr ""
+msgstr "Viga faili id '%s' leidmisel"
 
 #: ../file-chooser/sucky-desktop-item.c:842
 msgid "No filename to save to"
@@ -115,7 +115,7 @@ msgstr ""
 #: ../file-chooser/sucky-desktop-item.c:3759
 #, c-format
 msgid "Unknown encoding of: %s"
-msgstr ""
+msgstr "Tundmatu kodeering: %s"
 
 #: ../file-chooser/sucky-desktop-item.c:3990
 #, c-format
@@ -1116,11 +1116,11 @@ msgstr "Valikudialoogi pealkiri"
 
 #: ../libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
-msgstr ""
+msgstr "Režiim"
 
 #: ../libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr ""
+msgstr "Kirjatüübivalija toimingurežiim"
 
 #: ../libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
@@ -1140,11 +1140,11 @@ msgstr "Valitud GtkFont"
 
 #: ../libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr "Näidistekst"
+msgstr "Tekst eelvaatlemiseks"
 
 #: ../libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "Dialoogiaknas näidatav näidistekst"
+msgstr "Dialoogiaknas näidatav tekst eelvaatlemiseks"
 
 #: ../libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
@@ -1168,7 +1168,7 @@ msgstr "Näita suurust"
 
 #: ../libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr ""
+msgstr "Suuruse näitamine kirjatüübi andmererežiimis"
 
 #: ../libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
@@ -1294,7 +1294,7 @@ msgstr "Ikoonivalija"
 
 #: ../libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "Selle nupu abil avatakse ikoonivalimise aken."
 
 #: ../libgnomeui/gnome-icon-entry.c:1009
 msgid "Browse"
@@ -1395,7 +1395,7 @@ msgstr "Pildi eelvaade"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
-msgstr ""
+msgstr "Käesolevaga määratud pildi eelvaatlus"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:414
 msgid "Can't find an hbox, using a normal file selection"
@@ -1446,7 +1446,7 @@ msgstr "Numbriline loend"
 
 #: ../libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
-msgstr "Joondus"
+msgstr "Taane"
 
 #: ../libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
