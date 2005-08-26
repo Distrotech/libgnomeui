@@ -1,3 +1,9 @@
+2005-08-26  Matthias Clasen  <mclasen@redhat.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c (folder_purge_and_unmark): 
+	Pass the address of the closure struct to the 
+	g_hash_table_foreach_steal() call.  (#314586)
+
 ====================== 2.11.3 ======================
 
 2005-08-19  Kjartan Maraas  <kmaraas@gnome.org>

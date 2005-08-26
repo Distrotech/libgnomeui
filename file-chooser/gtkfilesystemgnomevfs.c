@@ -2767,7 +2767,7 @@ folder_purge_and_unmark (GtkFileFolderGnomeVFS *folder_vfs)
   struct purge_closure closure;
 
   closure.removed_uris = NULL;
-  g_hash_table_foreach_steal (folder_vfs->children, purge_fn, folder_vfs);
+  g_hash_table_foreach_steal (folder_vfs->children, purge_fn, &closure);
 
   if (closure.removed_uris)
     {
