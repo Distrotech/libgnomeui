@@ -1,5 +1,10 @@
 2005-08-26  Federico Mena Quintero  <federico@ximian.com>
 
+	* file-chooser/gtkfilesystemgnomevfs.c: Oops, set this back to
+	"#undef PROFILE_FILE_CHOOSER".
+
+2005-08-26  Federico Mena Quintero  <federico@ximian.com>
+
 	* file-chooser/gtkfilesystemgnomevfs.c (fs_module_init): See how
 	long it takes to call gnome_vfs_init().
 

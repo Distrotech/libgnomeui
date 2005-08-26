@@ -59,7 +59,7 @@
 #include <unistd.h>
 #include "sucky-desktop-item.h"
 
-#define PROFILE_FILE_CHOOSER
+#undef PROFILE_FILE_CHOOSER
 #ifdef PROFILE_FILE_CHOOSER
 #define PROFILE_INDENT 4
 static int profile_indent;
