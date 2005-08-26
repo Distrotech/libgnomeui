@@ -59,7 +59,7 @@
 #include <unistd.h>
 #include "sucky-desktop-item.h"
 
-#undef PROFILE_FILE_CHOOSER
+#define PROFILE_FILE_CHOOSER
 #ifdef PROFILE_FILE_CHOOSER
 #define PROFILE_INDENT 4
 static int profile_indent;
@@ -436,7 +436,10 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
   system_vfs->locale_encoded_filenames = (getenv ("G_BROKEN_FILENAMES") != NULL);
   system_vfs->folders = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
+  profile_start ("gnome_vfs_get_volume_monitor start", NULL);
   system_vfs->volume_monitor = gnome_vfs_get_volume_monitor ();
+  profile_end ("gnome_vfs_get_volume_monitor end", NULL);
+
   system_vfs->volume_mounted_id =
     g_signal_connect_object (system_vfs->volume_monitor, "volume-mounted",
 			     G_CALLBACK (volume_mount_unmount_cb), system_vfs, 0);
@@ -3002,6 +3005,7 @@ GtkFileSystem *fs_module_create (void);
 void 
 fs_module_init (GTypeModule    *module)
 {
+  profile_start ("start", "will call gnome_vfs_init()");
 
   gnome_vfs_init ();
 
@@ -3077,6 +3081,8 @@ fs_module_init (GTypeModule    *module)
    */
 
   g_type_class_ref (type_gtk_file_system_gnome_vfs);
+
+  profile_end ("end", NULL);
 }
 
 void 

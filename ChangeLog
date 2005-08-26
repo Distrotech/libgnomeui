@@ -1,3 +1,8 @@
+2005-08-26  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c (fs_module_init): See how
+	long it takes to call gnome_vfs_init().
+
 2005-08-26  Matthias Clasen  <mclasen@redhat.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c (folder_purge_and_unmark): 
