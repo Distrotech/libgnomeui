@@ -8,10 +8,10 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.10.1\n"
+"Project-Id-Version: libgnomeui 2.11.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-17 16:53+0200\n"
-"PO-Revision-Date: 2005-07-17 16:33+0200\n"
+"POT-Creation-Date: 2005-08-27 15:15+0200\n"
+"PO-Revision-Date: 2005-08-27 14:38+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,91 +34,89 @@ msgstr "Élément fils 2"
 msgid "Hint for item 2"
 msgstr "Astuce pour l'élément 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:824
+#: file-chooser/gtkfilesystemgnomevfs.c:832
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s est un lien vers quelque chose qui n'est pas un dossier"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:835
+#: file-chooser/gtkfilesystemgnomevfs.c:843
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s est un lien sans emplacement de destination"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:943
+#: file-chooser/gtkfilesystemgnomevfs.c:958
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s n'est pas un dossier"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1187
-#, fuzzy
+#: file-chooser/gtkfilesystemgnomevfs.c:1206
 msgid "File System"
 msgstr "Système de fichiers"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1922
+#: file-chooser/gtkfilesystemgnomevfs.c:1964
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "L'enregistrement des signets a échoué (%s)"
 
 #: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "Error reading file '%s': %s"
-msgstr "L'ouverture du fichier « %s » a échoué : %s"
+msgstr "Erreur lors de la lecture du fichier « %s » : %s"
 
 #: file-chooser/sucky-desktop-item.c:285
-#, fuzzy, c-format
+#, c-format
 msgid "Error rewinding file '%s': %s"
-msgstr "L'ouverture du fichier « %s » a échoué : %s"
+msgstr "Erreur lors du rembobinage du fichier « %s » : %s"
 
 #: file-chooser/sucky-desktop-item.c:384
 #: file-chooser/sucky-desktop-item.c:3702
-#, fuzzy
 msgid "No name"
-msgstr "Nom de la police"
+msgstr "Aucun nom"
 
 #: file-chooser/sucky-desktop-item.c:620
 #, c-format
 msgid "File '%s' is not a regular file or directory."
-msgstr ""
+msgstr "Le fichier « %s » n'est pas un fichier régulier ou un répertoire."
 
 #: file-chooser/sucky-desktop-item.c:796
 #, c-format
 msgid "Error cannot find file id '%s'"
-msgstr ""
+msgstr "Erreur. Impossible de trouver l'id de fichier « %s »"
 
 #: file-chooser/sucky-desktop-item.c:842
 msgid "No filename to save to"
-msgstr ""
+msgstr "Aucun nom de fichier pour enregistrer"
 
 #: file-chooser/sucky-desktop-item.c:1797
-#, fuzzy, c-format
+#, c-format
 msgid "Starting %s"
-msgstr "_Paramètres"
+msgstr "Démarrage de %s"
 
 #: file-chooser/sucky-desktop-item.c:2036
 msgid "No URL to launch"
-msgstr ""
+msgstr "Aucune URL à lancer"
 
 #: file-chooser/sucky-desktop-item.c:2046
 msgid "Not a launchable item"
-msgstr ""
+msgstr "N'est pas un élément lançable"
 
 #: file-chooser/sucky-desktop-item.c:2056
 msgid "No command (Exec) to launch"
-msgstr ""
+msgstr "Aucune commande (Exec) à lancer"
 
 #: file-chooser/sucky-desktop-item.c:2069
 msgid "Bad command (Exec) to launch"
-msgstr ""
+msgstr "Mauvaise commande (Exec) à lancer"
 
 #: file-chooser/sucky-desktop-item.c:3759
 #, c-format
 msgid "Unknown encoding of: %s"
-msgstr ""
+msgstr "Codage inconnu : %s"
 
 #: file-chooser/sucky-desktop-item.c:3990
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing file '%s': %s"
-msgstr "L'ouverture du fichier « %s » a échoué : %s"
+msgstr "Erreur lors de l'écriture du fichier « %s » : %s"
 
 #: file-chooser/testfilechooser.c:178
 #, c-format
@@ -536,7 +534,6 @@ msgstr "Ferme la fenêtre courante"
 #. * The "Game" menu
 #.
 #: libgnomeui/gnome-app-helper.c:248
-#, fuzzy
 msgid "_New Game"
 msgstr "_Nouvelle partie"
 
@@ -545,7 +542,6 @@ msgid "Start a new game"
 msgstr "Commence une nouvelle partie"
 
 #: libgnomeui/gnome-app-helper.c:253
-#, fuzzy
 msgid "_Pause Game"
 msgstr "_Suspendre la partie"
 
@@ -554,7 +550,6 @@ msgid "Pause the game"
 msgstr "Suspend la partie"
 
 #: libgnomeui/gnome-app-helper.c:258
-#, fuzzy
 msgid "_Restart Game"
 msgstr "_Recommencer la partie"
 
@@ -563,7 +558,6 @@ msgid "Restart the game"
 msgstr "Recommence la partie"
 
 #: libgnomeui/gnome-app-helper.c:263
-#, fuzzy
 msgid "_Undo Move"
 msgstr "A_nnuler le mouvement"
 
@@ -572,7 +566,6 @@ msgid "Undo the last move"
 msgstr "Annule le dernier mouvement"
 
 #: libgnomeui/gnome-app-helper.c:268
-#, fuzzy
 msgid "_Redo Move"
 msgstr "_Refaire le mouvement"
 
@@ -598,7 +591,6 @@ msgid "View the scores"
 msgstr "Affiche les scores"
 
 #: libgnomeui/gnome-app-helper.c:284
-#, fuzzy
 msgid "_End Game"
 msgstr "_Arrêter la partie"
 
@@ -909,11 +901,11 @@ msgstr "Couleur d'arrière-plan"
 
 #: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr "Couleur d'arrère-plan en tant que GdkColor"
+msgstr "Couleur d'arrière-plan en tant que GdkColor"
 
 #: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
-msgstr "Couleur d'arrère-plan définie"
+msgstr "Couleur d'arrière-plan définie"
 
 #: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
@@ -961,19 +953,19 @@ msgstr "Couleur d'arrière-plan du logo définie"
 msgid "Logo Background color is set"
 msgstr "La couleur d'arrière-plan du logo est définie"
 
-#: libgnomeui/gnome-druid.c:150
+#: libgnomeui/gnome-druid.c:154
 msgid "Show Finish"
 msgstr "Afficher Terminer"
 
-#: libgnomeui/gnome-druid.c:151
+#: libgnomeui/gnome-druid.c:155
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Afficher le bouton « Terminer » au lieu du bouton « Suivant »"
 
-#: libgnomeui/gnome-druid.c:158
+#: libgnomeui/gnome-druid.c:162
 msgid "Show Help"
 msgstr "Afficher l'aide"
 
-#: libgnomeui/gnome-druid.c:159
+#: libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
 msgstr "Afficher le bouton « Aide »"
 
@@ -1086,14 +1078,12 @@ msgstr ""
 "le composant graphique GtkFileSelection pour sélectionner des fichiers."
 
 #: libgnomeui/gnome-file-entry.c:319
-#, fuzzy
 msgid "GtkFileChooser Action"
-msgstr "Utiliser GtkFileChooser"
+msgstr "Action GtkFileChooser"
 
 #: libgnomeui/gnome-file-entry.c:320
-#, fuzzy
 msgid "The type of operation that the file selector is performing."
-msgstr "Le mode de fonctionnemenent du sélecteur de polices"
+msgstr "Le type d'opération que le sélecteur de fichiers effectue."
 
 #: libgnomeui/gnome-file-entry.c:635 libgnomeui/gnome-file-entry.c:669
 msgid "Select file"
@@ -1138,7 +1128,7 @@ msgstr "Mode"
 
 #: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr "Le mode de fonctionnemenent du sélecteur de polices"
+msgstr "Le mode de fonctionnement du sélecteur de polices"
 
 #: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
@@ -1207,7 +1197,7 @@ msgstr ""
 "L'application « %s » a tenté de modifier un paramètre que votre "
 "administrateur système ou le fournisseur du système d'exploitation ne vous "
 "permet pas de changer. Certains des paramètres que vous avez sélectionnés ne "
-"prendront peut-être pas effet ou ne seront pas restorés la prochaine fois "
+"prendront peut-être pas effet ou ne seront pas restaurés la prochaine fois "
 "que vous utiliserez cette application."
 
 #: libgnomeui/gnome-gconf-ui.c:176
@@ -1253,7 +1243,6 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Ce bouton permet d'accéder à l'URI affichée."
 
 #: libgnomeui/gnome-href.c:394
-#, fuzzy
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1268,8 +1257,8 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Identifieur unique pour l'entrée d'icône.  Il sera utilisé pour enregistrer "
-"la liste d'historique."
+"Identificateur unique pour l'entrée d'icône.  Il sera utilisé pour "
+"enregistrer la liste d'historique."
 
 #: libgnomeui/gnome-icon-entry.c:189
 msgid "Title for the Browse icon dialog."
@@ -1392,26 +1381,23 @@ msgstr "_Mot de passe :"
 
 #: libgnomeui/gnome-password-dialog.c:310
 msgid "Co_nnect"
-msgstr ""
+msgstr "Co_nnecter"
 
 #: libgnomeui/gnome-password-dialog.c:331
 msgid "Connect _anonymously"
 msgstr "Se connecter _anonymement"
 
 #: libgnomeui/gnome-password-dialog.c:336
-#, fuzzy
 msgid "Connect as u_ser:"
 msgstr "Se connecter en tant qu'_utilisateur :"
 
 #: libgnomeui/gnome-password-dialog.c:434
-#, fuzzy
 msgid "_Remember password for this session"
-msgstr "Se souvenir du mot de passe pour cette session"
+msgstr "_Se souvenir du mot de passe pour cette session"
 
 #: libgnomeui/gnome-password-dialog.c:436
-#, fuzzy
 msgid "Save password in _keyring"
-msgstr "Enregistrer le mot de passe dans le porte-clé"
+msgstr "Enregistrer le mot de passe dans le _porte-clés"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1566,15 +1552,15 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Usage : gnome_segv2 nom-appli num-signal\n"
 
-#: libgnomeui/gnome_segv.c:153
+#: libgnomeui/gnome_segv.c:154
 msgid "_Restart Application"
 msgstr "_Redémarrer l'application"
 
-#: libgnomeui/gnome_segv.c:165
+#: libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
 msgstr "_Informer les développeurs"
 
-#: libgnomeui/gnome_segv.c:176
+#: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Débogage"
 
