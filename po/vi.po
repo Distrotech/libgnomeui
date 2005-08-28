@@ -1,23 +1,27 @@
-# Vietnamese translation of libgnomeui message catalog.
-# Copyright (C) 2000-2002 Free Software Foundation, Inc.
+# Vietnamese translation of LibGnomeUI.
+# Copyright © 2000-2005 Gnome i18n Project for Vietnamese.
 # Hoang Ngoc Tu <hntu@gmx.de>, 2000-2002.
 # Joern v. Kattchee <kattchee@cs.tu-berlin.de>, 2000-2002.
 # Nguyễn Thái Ngọc Duy <pclouds@vnlinux.org>, 2004.
+# Clytie Siddall <clytie@riverland.net.au>, 2005.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.0.x\n"
+"Project-Id-Version: libgnomeui 2.11.3 Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-21 06:40+0000\n"
-"PO-Revision-Date: 2004-09-28 17:48+0700\n"
-"Last-Translator: Trinh Minh Thanh <tmthanh@linuxmail.org>\n"
-"Language-Team: Gnome-Vi Team <Gnomevi-list@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2005-08-27 23:00+0000\n"
+"PO-Revision-Date: 2005-08-28 13:09+0930\n"
+"Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
+"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: LocFactoryEditor 1.2.2\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr "Sự kiện con 1"
+msgstr "Mục con 1"
 
 #: ../demos/mdi_demo.c:129
 msgid "Hint for item 1"
@@ -25,134 +29,132 @@ msgstr "Chỉ dẫn cho mục 1"
 
 #: ../demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr "Sự kiện con 2"
+msgstr "Mục con 2"
 
 #: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Chỉ dẫn cho mục 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:829
+#: ../file-chooser/gtkfilesystemgnomevfs.c:832
 #, c-format
 msgid "%s is a link to something that is not a folder"
-msgstr ""
+msgstr "%s là liên kết đến cái gì không phải là danh mục"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:840
+#: ../file-chooser/gtkfilesystemgnomevfs.c:843
 #, c-format
 msgid "%s is a link without a destination location"
-msgstr ""
+msgstr "%s là liên kết không có địa điểm đích"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:955
+#: ../file-chooser/gtkfilesystemgnomevfs.c:958
 #, c-format
 msgid "%s is not a folder"
-msgstr ""
+msgstr "%s không phải là danh mục"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1203
-#, fuzzy
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1206
 msgid "File System"
-msgstr "Hệ tập tin"
+msgstr "Hệ thống tập tin"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1958
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1964
 #, c-format
 msgid "Bookmark saving failed (%s)"
-msgstr ""
+msgstr "Việc lưu Đánh dấu đã thất bại (%s)."
 
 #: ../file-chooser/sucky-desktop-item.c:217
 #: ../file-chooser/sucky-desktop-item.c:605
-#, fuzzy, c-format
+#, c-format
 msgid "Error reading file '%s': %s"
-msgstr "Lỗi mở tập tin '%s': %s"
+msgstr "Gặp lỗi khi đọc tập tin « %s »: %s"
 
 #: ../file-chooser/sucky-desktop-item.c:285
-#, fuzzy, c-format
+#, c-format
 msgid "Error rewinding file '%s': %s"
-msgstr "Lỗi mở tập tin '%s': %s"
+msgstr "Gặp lỗi khi tua lại tập tin « %s »: %s"
 
 #: ../file-chooser/sucky-desktop-item.c:384
 #: ../file-chooser/sucky-desktop-item.c:3702
-#, fuzzy
 msgid "No name"
-msgstr "Tên phông"
+msgstr "Không tên"
 
 #: ../file-chooser/sucky-desktop-item.c:620
 #, c-format
 msgid "File '%s' is not a regular file or directory."
-msgstr ""
+msgstr "Tập tin « %s » không phải là tập tin hay thư mục chuẩn."
 
 #: ../file-chooser/sucky-desktop-item.c:796
 #, c-format
 msgid "Error cannot find file id '%s'"
-msgstr ""
+msgstr "Lỗi: không tìm thấy tập tin ID « %s »."
 
 #: ../file-chooser/sucky-desktop-item.c:842
 msgid "No filename to save to"
-msgstr ""
+msgstr "Không có tên tập tin nơi cần lưu gì."
 
 #: ../file-chooser/sucky-desktop-item.c:1797
-#, fuzzy, c-format
+#, c-format
 msgid "Starting %s"
-msgstr "_Thiết lập"
+msgstr "Đang sơ khởi %s"
 
 #: ../file-chooser/sucky-desktop-item.c:2036
 msgid "No URL to launch"
-msgstr ""
+msgstr "Không có địa chỉ Mạng cần khởi chạy."
 
 #: ../file-chooser/sucky-desktop-item.c:2046
 msgid "Not a launchable item"
-msgstr ""
+msgstr "Không phải là mục có khả năng khởi chạy."
 
 #: ../file-chooser/sucky-desktop-item.c:2056
 msgid "No command (Exec) to launch"
-msgstr ""
+msgstr "Không có lệnh (Exec: thực hiện) đối với việc khởi chạy."
 
 #: ../file-chooser/sucky-desktop-item.c:2069
 msgid "Bad command (Exec) to launch"
-msgstr ""
+msgstr "Lệnh sai (Exec: thực hiện) đối với việc khởi chạy."
 
 #: ../file-chooser/sucky-desktop-item.c:3759
 #, c-format
 msgid "Unknown encoding of: %s"
-msgstr ""
+msgstr "Không biết bảng mã của: %s"
 
 #: ../file-chooser/sucky-desktop-item.c:3990
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing file '%s': %s"
-msgstr "Lỗi mở tập tin '%s': %s"
+msgstr "Gặp lỗi khi ghi tập tin « %s »: %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr ""
+msgstr "Không thể lấy thông tin cho tập tin « %s »: %s"
 
 #: ../file-chooser/testfilechooser.c:191
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr ""
+msgstr "Không mở tập tin « %s » được: %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
+msgstr "Không tải ảnh « %s » được: không biết sao, rất có thể là tập tin ảnh bị hỏng."
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
-msgstr "Đóng góp"
+msgstr "Công trạng"
 
 #: ../libgnomeui/gnome-about.c:231
 msgid "Written by"
-msgstr "Tác giả"
+msgstr "Tác giả:"
 
 #: ../libgnomeui/gnome-about.c:246
 msgid "Documented by"
-msgstr "Người viết tài liệu"
+msgstr "Tác giả của tài liệu:"
 
 #: ../libgnomeui/gnome-about.c:261
 msgid "Translated by"
-msgstr "Người dịch"
+msgstr "Bản dịch:"
 
 #: ../libgnomeui/gnome-about.c:324
 msgid "C_redits"
-msgstr "Đóng _góp"
+msgstr "Công t_rạng"
 
 #: ../libgnomeui/gnome-about.c:379
 msgid "Program name"
@@ -160,7 +162,7 @@ msgstr "Tên chương trình"
 
 #: ../libgnomeui/gnome-about.c:380
 msgid "The name of the program"
-msgstr "Tên chương trình"
+msgstr "Tên của chương trình"
 
 #: ../libgnomeui/gnome-about.c:387
 msgid "Program version"
@@ -168,7 +170,7 @@ msgstr "Phiên bản chương trình"
 
 #: ../libgnomeui/gnome-about.c:388
 msgid "The version of the program"
-msgstr "Phiên bản chương trình"
+msgstr "Phiên bản của chương trình"
 
 #: ../libgnomeui/gnome-about.c:394
 msgid "Copyright string"
@@ -176,7 +178,7 @@ msgstr "Thông tin bản quyền"
 
 #: ../libgnomeui/gnome-about.c:395
 msgid "Copyright information for the program"
-msgstr "Thông tin bản quyền cho chương trình"
+msgstr "Thông tin bản quyền cho chương trình này."
 
 #: ../libgnomeui/gnome-about.c:402
 msgid "Comments string"
@@ -184,7 +186,7 @@ msgstr "Dòng ghi chú"
 
 #: ../libgnomeui/gnome-about.c:403
 msgid "Comments about the program"
-msgstr "Ghi chú về chương trình"
+msgstr "Ghi chú về chương trình này."
 
 #: ../libgnomeui/gnome-about.c:409
 msgid "Authors"
@@ -192,7 +194,7 @@ msgstr "Tác giả"
 
 #: ../libgnomeui/gnome-about.c:410
 msgid "List of authors of the programs"
-msgstr "Danh sách các tác giả của chương trình"
+msgstr "Danh sách các tác giả của chương trình này."
 
 #: ../libgnomeui/gnome-about.c:412
 msgid "Author entry"
@@ -200,7 +202,7 @@ msgstr "Mục nhập tác giả"
 
 #: ../libgnomeui/gnome-about.c:413
 msgid "A single author entry"
-msgstr "Mục nhập đơn cho tác giả"
+msgstr "Mục nhập đơn cho tác giả."
 
 #: ../libgnomeui/gnome-about.c:420
 msgid "Documenters"
@@ -208,7 +210,7 @@ msgstr "Người viết tài liệu"
 
 #: ../libgnomeui/gnome-about.c:421
 msgid "List of people documenting the program"
-msgstr "Danh sách những người viết tài liệu cho chương trình"
+msgstr "Danh sách những người viết tài liệu cho chương trình này."
 
 #: ../libgnomeui/gnome-about.c:423
 msgid "Documenter entry"
@@ -216,26 +218,26 @@ msgstr "Mục nhập cho nguời viết tài liệu "
 
 #: ../libgnomeui/gnome-about.c:424
 msgid "A single documenter entry"
-msgstr "Mục nhập đơn cho người viết tài liệu"
+msgstr "Mục nhập đơn cho người viết tài liệu."
 
 #: ../libgnomeui/gnome-about.c:432
 msgid "Translator credits"
-msgstr "Đóng góp dịch"
+msgstr "Công trạng người dịch"
 
 #: ../libgnomeui/gnome-about.c:433
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
-"Những người cộng tác dịch. Dòng tin này cần được dánh dấu có thể dịch được"
+"Những người cộng tác dịch. Dòng tin này cần được dánh dấu có thể dịch được."
 
 #: ../libgnomeui/gnome-about.c:440
 #: ../libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
-msgstr "Biểu tượng riêng"
+msgstr "Biểu hình"
 
 #: ../libgnomeui/gnome-about.c:441
 msgid "A logo for the about box"
-msgstr "Một biểu tượng riêng cho hộp trên"
+msgstr "Một biểu hình cho hộp giới thiệu"
 
 #: ../libgnomeui/gnome-about.c:520
 #, c-format
@@ -287,11 +289,11 @@ msgstr "Mớ_i/"
 
 #: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr "_Tập tin"
+msgstr "Tậ_p tin"
 
 #: ../libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr "_Tập tin/"
+msgstr "Tậ_p tin/"
 
 #: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
@@ -326,16 +328,16 @@ msgstr "_Lưu"
 
 #: ../libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr "Lưu tập tin hiện thời"
+msgstr "Lưu tập tin hiện có"
 
 #. Save As
 #: ../libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Lư_u mới..."
+msgstr "Lư_u là..."
 
 #: ../libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Lưu tập tin hiện thời với tên khác"
+msgstr "Lưu tập tin hiện thời với tên khác."
 
 #. Revert
 #: ../libgnomeui/gnome-app-helper.c:125
@@ -344,7 +346,7 @@ msgstr "_Hoàn nguyên"
 
 #: ../libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
-msgstr "Hoàn lại phiên bản đã lưu của tập tin"
+msgstr "Hoàn lại phiên bản đã lưu của tập tin."
 
 #. Print
 #: ../libgnomeui/gnome-app-helper.c:131
@@ -353,7 +355,7 @@ msgstr "_In..."
 
 #: ../libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr "In tập tin hiện thời"
+msgstr "In tập tin hiện có.."
 
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:136
@@ -362,7 +364,7 @@ msgstr "_Thiết lập In..."
 
 #: ../libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "Thiết lập thông số trang in cho máy in của bạn"
+msgstr "Thiết lập thông số trang in cho máy in hiện thời của bạn"
 
 #. Close
 #: ../libgnomeui/gnome-app-helper.c:142
@@ -371,7 +373,7 @@ msgstr "Đón_g"
 
 #: ../libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr "Đóng tập tin hiện thời"
+msgstr "Đóng tập tin hiện có."
 
 #. Exit
 #: ../libgnomeui/gnome-app-helper.c:147
@@ -380,7 +382,7 @@ msgstr "T_hoát"
 
 #: ../libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
-msgstr "Thoát khỏi ứng dụng"
+msgstr "Thoát khỏi ứng dụng."
 
 #.
 #. * The "Edit" menu
@@ -392,7 +394,7 @@ msgstr "Cắ_t"
 
 #: ../libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr "Cắt phần được chọn"
+msgstr "Cắt vùng chọn."
 
 #. 10
 #. Copy
@@ -402,7 +404,7 @@ msgstr "_Chép"
 
 #: ../libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
-msgstr "Sao chép phần đã chọn"
+msgstr "Sao chép vùng chọn."
 
 #. Paste
 #: ../libgnomeui/gnome-app-helper.c:166
@@ -411,16 +413,16 @@ msgstr "_Dán"
 
 #: ../libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
-msgstr "Ghép bản trích từ clipboard"
+msgstr "Dán nội dung của khay."
 
 #. Clear
 #: ../libgnomeui/gnome-app-helper.c:171
 msgid "C_lear"
-msgstr "_Xóa sạch"
+msgstr "_Xóa"
 
 #: ../libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
-msgstr "Xóa phần đã chọn"
+msgstr "Xóa vùng chọn."
 
 #. Undo
 #: ../libgnomeui/gnome-app-helper.c:176
@@ -429,7 +431,7 @@ msgstr "_Hồi lại"
 
 #: ../libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
-msgstr "Hồi lại hành động cuối cùng"
+msgstr "Hồi lại hành động cuối cùng."
 
 #. Redo
 #: ../libgnomeui/gnome-app-helper.c:181
@@ -438,7 +440,7 @@ msgstr "_Làm lại"
 
 #: ../libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
-msgstr "Làm lại lệnh chưa hoàn tất"
+msgstr "Làm lại hành động mới hoàn tất"
 
 #. Find
 #: ../libgnomeui/gnome-app-helper.c:186
@@ -447,16 +449,16 @@ msgstr "_Tìm..."
 
 #: ../libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
-msgstr "Tìm một chuỗi"
+msgstr "Tìm một chuỗi."
 
 #. Find Again
 #: ../libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "Tìm tiế_p"
+msgstr "Tìm _kế"
 
 #: ../libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr "Tìm thêm một chuỗi như vậy"
+msgstr "Tìm lần kết tiếp gặp chuỗi đó."
 
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:197
@@ -465,7 +467,7 @@ msgstr "Th_ay thế..."
 
 #: ../libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
-msgstr "Thay thế một chuỗi mới"
+msgstr "Thay thế một chuỗi."
 
 #. Properties
 #: ../libgnomeui/gnome-app-helper.c:202
@@ -474,7 +476,7 @@ msgstr "_Thuộc tính"
 
 #: ../libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
-msgstr "Sửa đổi các đặc tính của tập tin hiện thời"
+msgstr "Sửa đổi các đặc tính của tập tin hiện có."
 
 #.
 #. * The Settings menu
@@ -482,7 +484,7 @@ msgstr "Sửa đổi các đặc tính của tập tin hiện thời"
 #. Settings
 #: ../libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
-msgstr "_Tuỳ thích"
+msgstr "Tù_y thích"
 
 #: ../libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -499,15 +501,15 @@ msgstr "_Giới thiệu"
 
 #: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "Giới thiệu về ứng dụng này"
+msgstr "Giới thiệu ứng dụng này"
 
 #: ../libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
-msgstr "Chọn _Tất cả"
+msgstr "Chọn Tất _cả"
 
 #: ../libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
-msgstr "Chọn tất cả"
+msgstr "Chọn hết!"
 
 #.
 #. * Window menu
@@ -518,63 +520,58 @@ msgstr "Cửa sổ mớ_i"
 
 #: ../libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
-msgstr "Mở một Cửa sổ mới"
+msgstr "Mở một cửa sổ mới."
 
 #: ../libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr "Đón_g cửa sổ"
+msgstr "Đón_g cửa sổ này"
 
 #: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr "Đóng cửa sổ hiện thời"
+msgstr "Đóng cửa sổ hiện có."
 
 #.
 #. * The "Game" menu
 #.
 #: ../libgnomeui/gnome-app-helper.c:248
-#, fuzzy
 msgid "_New Game"
-msgstr "Trò chơi mớ_i"
+msgstr "Lượt chơi mớ_i"
 
 #: ../libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr "Khởi động một trò chơi mới"
+msgstr "Khởi động một lượt chơi mới."
 
 #: ../libgnomeui/gnome-app-helper.c:253
-#, fuzzy
 msgid "_Pause Game"
 msgstr "_Tạm ngừng chơi"
 
 #: ../libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
-msgstr "Tạm ngừng trò chơi"
+msgstr "Tạm ngừng trò chơi đang chạy."
 
 #: ../libgnomeui/gnome-app-helper.c:258
-#, fuzzy
 msgid "_Restart Game"
-msgstr "_Khởi động chơi lại"
+msgstr "_Khởi chạy chơi lại"
 
 #: ../libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr "Khởi động trò chơi lại"
+msgstr "Khởi chạy trò chơi lại."
 
 #: ../libgnomeui/gnome-app-helper.c:263
-#, fuzzy
 msgid "_Undo Move"
-msgstr "_Hồi lại hành động"
+msgstr "_Hồi lại lượt"
 
 #: ../libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "Hủy chuyển động vừa rồi"
+msgstr "Hủy lượt cuối cùng."
 
 #: ../libgnomeui/gnome-app-helper.c:268
-#, fuzzy
 msgid "_Redo Move"
-msgstr "_Làm lại hành động"
+msgstr "_Làm lại lượt"
 
 #: ../libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "Quay lại chuyển động đã không thực hiện"
+msgstr "Làm lại lượt mới hồi lại."
 
 #: ../libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
@@ -582,7 +579,7 @@ msgstr "_Chỉ dẫn"
 
 #: ../libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
-msgstr "Đưa một chỉ dẫn cho chuyển động tiếp theo của bạn"
+msgstr "Đưa một chỉ dẫn cho lươt tiếp theo của bạn."
 
 #. 30
 #: ../libgnomeui/gnome-app-helper.c:279
@@ -594,13 +591,12 @@ msgid "View the scores"
 msgstr "Xem điểm"
 
 #: ../libgnomeui/gnome-app-helper.c:284
-#, fuzzy
 msgid "_End Game"
 msgstr "_Kết thúc chơi"
 
 #: ../libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
-msgstr "Kết thúc trò chơi hiện thời"
+msgstr "Kết thúc trò chơi hiện có."
 
 #: ../libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
@@ -608,7 +604,7 @@ msgstr "_Nội dung"
 
 #: ../libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
-msgstr "Xem trợ giúp cho ứng dụng này"
+msgstr "Xem trợ giúp cho ứng dụng này."
 
 #: ../libgnomeui/gnome-app-helper.c:2570
 msgid "Text Below Icons"
@@ -616,7 +612,7 @@ msgstr "Chữ dưới hình"
 
 #: ../libgnomeui/gnome-app-helper.c:2571
 msgid "Priority Text Beside Icons"
-msgstr "Văn bản ưu tiên cạnh biểu tượng"
+msgstr "Văn bản ưu tiên cạnh biểu tượng."
 
 #: ../libgnomeui/gnome-app-helper.c:2572
 msgid "Icons Only"
@@ -629,11 +625,11 @@ msgstr "Chỉ có chữ"
 #: ../libgnomeui/gnome-app-helper.c:2634
 #, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Dùng Mặc định Desktop (%s)"
+msgstr "Dùng Mặc định Mặt bàn (%s)"
 
 #: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
-msgstr " (ấn return)"
+msgstr " (ấn phím Return)"
 
 #: ../libgnomeui/gnome-app-util.c:140
 msgid "ERROR: "
@@ -665,7 +661,7 @@ msgstr " (có hoặc không)"
 
 #: ../libgnomeui/gnome-app-util.c:356
 msgid "  - OK? (yes or no)"
-msgstr "  - OK? (có hoặc không)"
+msgstr "  - Được không? (có hoặc không)"
 
 #: ../libgnomeui/gnome-app-util.c:684
 msgid "Progress"
@@ -673,11 +669,11 @@ msgstr "Tiến triển"
 
 #: ../libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr "App ID"
+msgstr "ID ứngd"
 
 #: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
-msgstr "Chuỗi của ứng dụng ID"
+msgstr "Chuỗi nhận diện ứng dụng."
 
 #: ../libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
@@ -685,7 +681,7 @@ msgstr "Có tiến trình"
 
 #: ../libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
-msgstr "Tạo widget tiến trình."
+msgstr "Tạo ô điều khiển tiến trình."
 
 #: ../libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
@@ -693,7 +689,7 @@ msgstr "Có Trạng thái"
 
 #: ../libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
-msgstr "Tạo widget trạng thái."
+msgstr "Tạo ô điều khiển trạng thái."
 
 #: ../libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
@@ -705,7 +701,7 @@ msgstr "Mức độ hoạt động của người dùng được yêu cầu."
 
 #: ../libgnomeui/gnome-authentication-manager.c:70
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "HTTP Proxy yêu cầu bạn đăng nhập.\n"
+msgstr "Ủy nhiệm HTTP yêu cầu bạn đăng nhập.\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:71
 #, c-format
@@ -713,7 +709,7 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
-"Bạn phải đăng nhập để truy cập \"%s\".\n"
+"Bạn phải đăng nhập để truy cập « %s ».\n"
 "%s"
 
 #: ../libgnomeui/gnome-authentication-manager.c:74
@@ -732,16 +728,16 @@ msgstr "Yêu cầu xác thực"
 #: ../libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "Bạn phải đăng nhập để truy cập %s vùng %s\n"
+msgstr "Bạn phải đăng nhập để truy cập %s miền %s.\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr "Bạn phải đăng nhập để truy cập %s\n"
+msgstr "Bạn phải đăng nhập để truy cập %s.\n"
 
 #: ../libgnomeui/gnome-client.c:861
 msgid "Specify session management ID"
-msgstr "Định rõ ID quản lý phiên làm việc"
+msgstr "Định rõ ID quản lý phiên làm việc."
 
 #: ../libgnomeui/gnome-client.c:861
 msgid "ID"
@@ -749,7 +745,7 @@ msgstr "ID"
 
 #: ../libgnomeui/gnome-client.c:864
 msgid "Specify prefix of saved configuration"
-msgstr "Định rõ tiền tố của cấu hình được lưu"
+msgstr "Định rõ tiền tố của cấu hình được lưu."
 
 #: ../libgnomeui/gnome-client.c:864
 msgid "PREFIX"
@@ -757,7 +753,7 @@ msgstr "TIỀN TỐ"
 
 #: ../libgnomeui/gnome-client.c:867
 msgid "Disable connection to session manager"
-msgstr "Tắt kết nối với trình quản lý phiên làm việc"
+msgstr "Tắt kết nối với bộ quản lý phiên làm việc."
 
 #: ../libgnomeui/gnome-client.c:973
 msgid "Session management"
@@ -769,11 +765,11 @@ msgstr "Hủy bỏ Đăng xuất"
 
 #: ../libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
-msgstr "Nhận được dữ liệu màu không hợp lệ\n"
+msgstr "Nhận được dữ liệu màu không hợp lệ.\n"
 
 #: ../libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr "Mở hộp thoại chọn màu"
+msgstr "Mở hộp thoại chọn màu."
 
 #: ../libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -785,31 +781,31 @@ msgstr "Thời gian"
 
 #: ../libgnomeui/gnome-dateedit.c:492
 msgid "The time currently selected"
-msgstr "Thời gian hiện thời được chọn"
+msgstr "Thời gian hiện thời được chọn."
 
 #: ../libgnomeui/gnome-dateedit.c:504
 msgid "DateEdit Flags"
-msgstr "Cờ hiệu DateEdit"
+msgstr "Cờ DateEdit"
 
 #: ../libgnomeui/gnome-dateedit.c:505
 msgid "Flags for how DateEdit looks"
-msgstr "Cờ hiệu về hình thức DataEdit"
+msgstr "Cờ hiệu về hình thức DateEdit (hiệu chỉnh ngày)."
 
 #: ../libgnomeui/gnome-dateedit.c:514
 msgid "Lower Hour"
-msgstr "Giảm Giờ"
+msgstr "Giờ thập hơn"
 
 #: ../libgnomeui/gnome-dateedit.c:515
 msgid "Lower hour in the time popup selector"
-msgstr "Giảm giờ trong trình chọn thời gian bật lên"
+msgstr "Giờ nằm thập hơn trong bộ chọn thời gian bật lên."
 
 #: ../libgnomeui/gnome-dateedit.c:525
 msgid "Upper Hour"
-msgstr "Tăng Giờ"
+msgstr "Giờ cao hơn"
 
 #: ../libgnomeui/gnome-dateedit.c:526
 msgid "Upper hour in the time popup selector"
-msgstr "Tăng giờ trong trình chọn thời gian bật lên"
+msgstr "Giờ nằm cao hơn trong bộ chọn thời gian bật lên."
 
 #: ../libgnomeui/gnome-dateedit.c:536
 msgid "Initial Time"
@@ -817,7 +813,7 @@ msgstr "Thời gian sơ khởi"
 
 #: ../libgnomeui/gnome-dateedit.c:537
 msgid "The initial time"
-msgstr "Thời gian sơ khởi"
+msgstr "Thời gian sơ khởi."
 
 #: ../libgnomeui/gnome-dateedit.c:751 ../libgnomeui/gnome-scores.c:97
 msgid "Date"
@@ -829,7 +825,7 @@ msgstr "Chọn Ngày"
 
 #: ../libgnomeui/gnome-dateedit.c:764
 msgid "Select the date from a calendar"
-msgstr "Chọn ngày từ Lịch"
+msgstr "Chọn ngày từ lịch."
 
 #. Calendar label, only shown if the date editor has a time field
 #: ../libgnomeui/gnome-dateedit.c:775
@@ -842,12 +838,12 @@ msgstr "Chọn Thời gian"
 
 #: ../libgnomeui/gnome-dateedit.c:796
 msgid "Select the time from a list"
-msgstr "Chọn thời gian từ danh sách"
+msgstr "Chọn thời gian từ danh sách."
 
 #: ../libgnomeui/gnome-dateedit.c:1015
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
-"gnome_date_edit_get_date bị phản đối, hãy dùng gnome_date_edit_get_time"
+"« gnome_date_edit_get_date » bị phản đối, hãy dùng « gnome_date_edit_get_time »"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:121
 #: ../libgnomeui/gnome-font-picker.c:155
@@ -856,11 +852,11 @@ msgstr "Tiêu đề"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
-msgstr "Tiêu đề của druid"
+msgstr "Tiêu đề của đồ thuật."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
-msgstr "Ảnh biểu tượng riêng"
+msgstr "Ảnh biểu hình"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
@@ -868,15 +864,15 @@ msgstr "Thủy ấn đỉnh"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
-msgstr "Ảnh thủy ấn cho đỉnh"
+msgstr "Ảnh thủy ấn cho đỉnh."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
-msgstr "Tiêu đề nền trước"
+msgstr "Tiêu đề lên trước"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
-msgstr "Màu nền trước của tiêu đề"
+msgstr "Màu lên trước của tiêu đề."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
@@ -884,15 +880,15 @@ msgstr "Màu Nền Trước Của Tiêu Đề"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
-msgstr "Màu nền trước của tiêu đề như một GdkColor"
+msgstr "Màu lên trước của tiêu đề theo màu GdkColor."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
-msgstr "Tạo màu nền trước của tiêu đề"
+msgstr "Màu lên trước của tiêu đề đã đặt."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
-msgstr "Màu nền trước của tiêu đề đã được tạo"
+msgstr "Màu lên trước của tiêu đề đã được đặt."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:169
 #: ../libgnomeui/gnome-druid-page-standard.c:177
@@ -901,19 +897,19 @@ msgstr "Màu nền"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
-msgstr "Màu nền"
+msgstr "Màu nền."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr "Màu nền theo GdkColor"
+msgstr "Màu nền theo màu GdkColor."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
-msgstr "Tạo mầu nền sau"
+msgstr "Mầu nền sau đã đặt"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
-msgstr "Mầu nền sau đã được tạo"
+msgstr "Mầu nền sau đã được đặt."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:193
 #: ../libgnomeui/gnome-druid-page-standard.c:201
@@ -922,90 +918,87 @@ msgstr "Màu nền của nội dung"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:194
 msgid "Contents Background color"
-msgstr "Màu nền của nội dung"
+msgstr "Màu nền của nội dung."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:202
 msgid "Contents Background color as a GdkColor"
-msgstr "Màu nền của nội dung kiểu GdkColor"
+msgstr "Màu nền của nội dung theo GdkColor."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:209
-#, fuzzy
 msgid "Contents Background color set"
-msgstr "Tạo mầu nền sau"
+msgstr "Mầu nền của nội dung đã đặt."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:210
-#, fuzzy
 msgid "Contents Background color is set"
-msgstr "Mầu nền sau đã được tạo"
+msgstr "Mầu nền của nội dung đã được đặt."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:216
 #: ../libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
-msgstr "Mầu nền sau của biểu tượng riêng"
+msgstr "Mầu nền của biểu hình"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
-msgstr "Mầu nền sau của biểu tượng riêng"
+msgstr "Mầu nền của biểu hình."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
-msgstr "Mầu nền sau của biểu tượng riêng như một GdkColor"
+msgstr "Mầu nền của biểu hình theo GdkColor."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
-msgstr "Tạo mầu nền sau của biểu tượng riêng"
+msgstr "Mầu nền của biểu hình đã đặt."
 
 #: ../libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
-msgstr "Mầu nền sau của biểu tượng riêng đã được tạo"
+msgstr "Mầu nền của biểu hình đã được đặt."
 
-#: ../libgnomeui/gnome-druid.c:150
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show Finish"
-msgstr "Hiện nút ấn hoàn thành"
+msgstr "Hiện nút Xong"
 
-#: ../libgnomeui/gnome-druid.c:151
+#: ../libgnomeui/gnome-druid.c:155
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "Hiện nút ấn 'hoàn thành' thay cho nút 'ấn tiếp' theo"
+msgstr "Hiện nút « Xong » thay cho nút « Kế »."
 
-#: ../libgnomeui/gnome-druid.c:158
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show Help"
-msgstr "Hiện trợ giúp"
+msgstr "Hiện Trợ giúp"
 
-#: ../libgnomeui/gnome-druid.c:159
+#: ../libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
-msgstr "Hiện nút \"Trợ giúp\""
+msgstr "Hiện nút « Trợ giúp »."
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
 msgid "History id"
-msgstr "Biên sử id"
+msgstr "ID lịch sử"
 
 #: ../libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
-msgstr "Trường nhập số liệu của GTK"
+msgstr "Mục nhập GTK"
 
 #: ../libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
-msgstr "Trường nhập số liệu của GTK"
+msgstr "Mục nhập của GTK."
 
 #: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
 msgid "History ID"
-msgstr "Biên sử ID"
+msgstr "ID lịch sử"
 
 #: ../libgnomeui/gnome-file-entry.c:237
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Trình nhận dạng đơn nhất cho mục tập tin. Trình này sẽ được dùng để lưu vào "
-"biên sử."
+"Đồ nhận diện đơn nhất cho mục nhập tập tin. Nó sẽ được dùng để lưu danh sách lịch sử."
 
 #: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
 msgid "Browse Dialog Title"
-msgstr "Tựa đề Đối thoại Tìm"
+msgstr "Tựa đề Duyệt Đối thoại"
 
 #: ../libgnomeui/gnome-file-entry.c:246
 msgid "Title for the Browse file dialog."
-msgstr "Tựa đề cho đối thoại tập tin Tìm."
+msgstr "Tựa đề cho đối thoại « Duyệt tập tin »."
 
 #: ../libgnomeui/gnome-file-entry.c:253
 msgid "Directory Entry"
@@ -1020,11 +1013,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
-msgstr "Modal"
+msgstr "Cách thức"
 
 #: ../libgnomeui/gnome-file-entry.c:263
 msgid "Whether the Browse file window should be modal."
-msgstr "Cửa sổ duyệt tập tin có nên là cách thức hay không."
+msgstr "Cửa sổ duyệt tập tin có nên là cách thức (cần thiết đáp) hay không."
 
 #: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename"
@@ -1032,7 +1025,7 @@ msgstr "Tên tập tin"
 
 #: ../libgnomeui/gnome-file-entry.c:271
 msgid "Filename that should be displayed in the file entry."
-msgstr "Tên tập tin nên được hiển thị trong mục tập tin."
+msgstr "Tên tập tin nên được hiển thị trong mục nhập tập tin."
 
 #: ../libgnomeui/gnome-file-entry.c:279
 msgid "Default Path"
@@ -1040,7 +1033,7 @@ msgstr "Đường dẫn mặc định"
 
 #: ../libgnomeui/gnome-file-entry.c:280
 msgid "Default path for the Browse file window."
-msgstr "Đường dẫn mặc định cho cửa sổ duyệt tập tin."
+msgstr "Đường dẫn mặc định cho cửa sổ « Duyệt tập tin »."
 
 #: ../libgnomeui/gnome-file-entry.c:287
 msgid "GnomeEntry"
@@ -1052,8 +1045,8 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry là mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng nó "
-"để nhận GnomeEntry khi bạn cần thay đổi hay tra vấn bất kỳ một tham số nào "
+"GnomeEntry là mục nhập mà mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng nó "
+"để nhận GnomeEntry khi bạn cần sửa đổi hay truy vấn bất kỳ một tham số nào "
 "của nó."
 
 #: ../libgnomeui/gnome-file-entry.c:298
@@ -1066,8 +1059,8 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry là mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng nó để "
-"nhận GtkEntry khi bạn cần thay đổi hay tra vấn bất kỳ một tham số nào của nó."
+"GtkEntry mà mục nhập tập tin dùng để nhập tên tập tin. Bạn có thể dùng nó để "
+"nhận GtkEntry khi bạn cần sửa đổi hay truy vấn bất kỳ một tham số nào của nó."
 
 #: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
@@ -1078,18 +1071,16 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Dùng Widget mới GtkFileChooser hay dùng Widget GtkFileSelection để chọn tập "
+"Dùng ô điều khiển mới GtkFileChooser hay dùng ô điều khiển GtkFileSelection để chọn tập "
 "tin."
 
 #: ../libgnomeui/gnome-file-entry.c:319
-#, fuzzy
 msgid "GtkFileChooser Action"
-msgstr "Dùng GtkFileChooser"
+msgstr "Hành động GtkFileChooser"
 
 #: ../libgnomeui/gnome-file-entry.c:320
-#, fuzzy
 msgid "The type of operation that the file selector is performing."
-msgstr "Chế độ hoạt động của trình chọn phông"
+msgstr "Kiểu thao tác mà bộ chọn tập tin đang thực hiện."
 
 #: ../libgnomeui/gnome-file-entry.c:635 ../libgnomeui/gnome-file-entry.c:669
 msgid "Select file"
@@ -1109,7 +1100,7 @@ msgstr "_Duyệt..."
 
 #: ../libgnomeui/gnome-file-entry.c:823
 msgid "Pop up a file selector to choose a file"
-msgstr "Bật lên một trình chọn tập tin để chọn một tập tin"
+msgstr "Bật lên một bộ chọn tập tin để chọn một tập tin."
 
 #: ../libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1117,15 +1108,15 @@ msgstr "sans 12"
 
 #: ../libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "aăâbcdđeêghikôươằẩễốựỡ AĂÂBCDĐEÊGHIKÔƯƠẰẨỄỐỰỠ"
 
 #: ../libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
-msgstr "Chọn phông"
+msgstr "Chọn phông chữ"
 
 #: ../libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr "Tiêu đề của hộp thoại chọn lựa"
+msgstr "Tiêu đề của hộp thoại chọn lựa."
 
 #: ../libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
@@ -1133,15 +1124,15 @@ msgstr "Chế độ"
 
 #: ../libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr "Chế độ hoạt động của trình chọn phông"
+msgstr "Chế độ hoạt động của bộ chọn phông chữ."
 
 #: ../libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
-msgstr "Tên phông"
+msgstr "Tên phông chữ"
 
 #: ../libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr "Tên phông đã chọn"
+msgstr "Tên phông chữ đã chọn."
 
 #: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
 msgid "Font"
@@ -1149,7 +1140,7 @@ msgstr "Phông chữ"
 
 #: ../libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr "GTKFont được chọn"
+msgstr "GTKFont được chọn."
 
 #: ../libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
@@ -1157,31 +1148,31 @@ msgstr "Chuỗi xem thử"
 
 #: ../libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "Text xem thử được hiển thị trong hộp thoại"
+msgstr "Chuỗi xem thử được hiển thị trong hộp thoại."
 
 #: ../libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr "Phông dùng cho nhãn"
+msgstr "Dùng phông chữ cho nhãn"
 
 #: ../libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Dùng phông trong nhãn trong chế độ thông tin về phông"
+msgstr "Dùng phông chữ này cho nhãn trong chế độ thông tin về phông chữ."
 
 #: ../libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr "Cỡ phông cho nhãn"
+msgstr "Cỡ phông chữ cho nhãn"
 
 #: ../libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr "Cỡ phông cho nhãn trong chế độ thông tin về phông"
+msgstr "Cỡ phông chữ cho nhãn trong chế độ thông tin về phông."
 
 #: ../libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr "Hiện kích thước"
+msgstr "Hiện cỡ"
 
 #: ../libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr "Hiện kích thước trong chế độ thông tin phông"
+msgstr "Hiện kích thước trong chế độ thông tin phông chữ."
 
 #: ../libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
@@ -1199,7 +1190,7 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"Ứng dụng \"%s\"đã cố thay đổi một thực thể của cấu hình mà nhà quản trị hệ "
+"Ứng dụng « %s » đã cố thay đổi một thực thể của cấu hình mà nhà quản trị hệ "
 "thống hay nhà phân phối hệ điều hành không cho phép thay đổi. Một số thiết "
 "lập bạn chọn có thể không có tác dụng, hay không được khôi phục khi bạn dùng "
 "ứng dụng vào lần sau."
@@ -1210,7 +1201,7 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Một lỗi đã xuất hiện trong khi tải hoặc nhớ thông tin cấu hình cho %s. Một "
+"Gặp lỗi khi tải hoặc lưu thông tin cấu hình cho %s. Một "
 "vài thiết lập cấu hình có thể không làm việc chính xác."
 
 #: ../libgnomeui/gnome-href.c:123
@@ -1219,19 +1210,19 @@ msgstr "URL"
 
 #: ../libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
-msgstr "URL mà GnomeHRef làm hoạt động"
+msgstr "Địa chỉ Mạng mà GnomeHRef hoạt hóa."
 
 #: ../libgnomeui/gnome-href.c:131
 msgid "Text"
-msgstr "Văn bản"
+msgstr "Chữ"
 
 #: ../libgnomeui/gnome-href.c:132
 msgid "The text on the button"
-msgstr "Chữ trên nút ấn"
+msgstr "Chữ trên cái nút."
 
 #: ../libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
-msgstr "Chấm Dứt Nạn Đói Trên Thế Giới"
+msgstr "Chấm dứt Nạn đói trên Thế giới"
 
 #: ../libgnomeui/gnome-href.c:139
 msgid "Link color"
@@ -1239,33 +1230,32 @@ msgstr "Màu liên kết"
 
 #: ../libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
-msgstr "Màu dùng để kéo liên kết"
+msgstr "Màu dùng để vẽ liên kết."
 
 #: ../libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "Nút này đưa bạn tới URI đang hiển thị."
 
 #: ../libgnomeui/gnome-href.c:394
-#, fuzzy
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Lỗi khi thử khởi động trình duyệt web mặc định.\n"
-"Vui lòng xem lại các thiết đặt trong phần 'Các ứng dụng ưa thích' của công "
-"cụ cấu hình."
+"Gặp lỗi khi tcố khởi chạy trình duyệt Mạng mặc định.\n"
+"Vui lòng xem lại các thiết lập trong phần « Các ứng dụng ưa thích » của công "
+"cụ tùy thích."
 
 #: ../libgnomeui/gnome-icon-entry.c:180
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Trình nhận dạng đơn nhất cho mục nhập biểu tượng. Trình này sẽ được dùng để "
-"lưu vào biên sử."
+"Đồ nhận diện đơn nhất cho mục nhập biểu tượng. Nó sẽ được dùng để "
+"lưu vào lịch sử."
 
 #: ../libgnomeui/gnome-icon-entry.c:189
 msgid "Title for the Browse icon dialog."
-msgstr "Tựa đề cho đối thoại biểu tượng Tìm."
+msgstr "Tựa đề cho đối thoại « Duyệt biểu tượng »."
 
 #: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Pixmap Directory"
@@ -1277,7 +1267,7 @@ msgstr "Thư mục mà sẽ tìm các biểu tượng."
 
 #: ../libgnomeui/gnome-icon-entry.c:205
 msgid "Filename that should be displayed in the icon entry."
-msgstr "Tên tập tin được hiển thị trong sự nhập biểu tượng."
+msgstr "Tên tập tin nên được hiển thị trong sự nhập biểu tượng."
 
 #: ../libgnomeui/gnome-icon-entry.c:213
 msgid "Picker dialog"
@@ -1289,7 +1279,7 @@ msgid ""
 "need to modify or query any of its properties."
 msgstr ""
 "Đối thoại chọn biểu tượng. Bạn có thể dùng tích chất này để lấy GtkDialog "
-"nếu bạn cần để sửa đổi hoặc hỏi đáp các tính chất của nó."
+"nếu bạn cần để sửa đổi hoặc truy vấn bất cứ một tính chất nào của nó."
 
 #: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
@@ -1305,7 +1295,7 @@ msgstr "Hộp thoại này để bạn chọn biểu tượng."
 
 #: ../libgnomeui/gnome-icon-entry.c:762
 msgid "Icon selector"
-msgstr "Trình chọn Biểu tượng"
+msgstr "Bộ chọn Biểu tượng"
 
 #: ../libgnomeui/gnome-icon-entry.c:763
 msgid "Please pick the icon you want."
@@ -1313,7 +1303,7 @@ msgstr "Hãy chọn biểu tượng bạn muốn."
 
 #: ../libgnomeui/gnome-icon-entry.c:988
 msgid "Icon Selector"
-msgstr "Trình Chọn Biểu Tượng"
+msgstr "Bộ Chọn Biểu tượng"
 
 #: ../libgnomeui/gnome-icon-entry.c:989
 msgid "This button will open a window to let you select an icon."
@@ -1325,27 +1315,27 @@ msgstr "Duyệt"
 
 #: ../libgnomeui/gnome-icon-entry.c:1012
 msgid "Icon path"
-msgstr "Đường dẫn của biểu tượng"
+msgstr "Đường dẫn tới biểu tượng"
 
 #: ../libgnomeui/gnome-icon-entry.c:1013
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr "Tại đây bạn nên nhập tên thư mục chứa các biểu tượng."
+msgstr "Tại đây bạn nên nhập tên thư mục chứa các ảnh biểu tượng."
 
 #: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection:'%s' không tồn tại hay không phải là một thư mục"
+msgstr "GnomeIconSelection: « %s » không tồn tại hay không phải là một thư mục."
 
 #: ../libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection: Không mở được thư mục '%s'"
+msgstr "GnomeIconSelection: Không mở được thư mục « %s »."
 
 #: ../libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
-msgstr "Sự tải các biểu tượng..."
+msgstr "Đang tải các biểu tượng..."
 
 #: ../libgnomeui/gnome-messagebox.c:109
 msgid "Information"
@@ -1373,7 +1363,7 @@ msgstr "Tên _người dùng:"
 
 #: ../libgnomeui/gnome-password-dialog.c:254
 msgid "_Domain:"
-msgstr "_Vùng:"
+msgstr "_Miền:"
 
 #: ../libgnomeui/gnome-password-dialog.c:256
 msgid "_Password:"
@@ -1385,54 +1375,52 @@ msgstr "_Kết nối"
 
 #: ../libgnomeui/gnome-password-dialog.c:331
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "Kết nối _vô danh"
 
 #: ../libgnomeui/gnome-password-dialog.c:336
 msgid "Connect as u_ser:"
-msgstr "Kết nối dưới tên _người dùng:"
+msgstr "Kết nối với tư cách _người dùng:"
 
 #: ../libgnomeui/gnome-password-dialog.c:434
-#, fuzzy
 msgid "_Remember password for this session"
-msgstr "Nhớ mật khẩu cho phiên làm việc này"
+msgstr "_Nhớ mật khẩu cho phiên làm việc này"
 
 #: ../libgnomeui/gnome-password-dialog.c:436
-#, fuzzy
 msgid "Save password in _keyring"
-msgstr "Lưu mật khẩu trong keyring"
+msgstr "Lưu mật khẩu trong _vòng khóa"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
-msgstr "Xem trước"
+msgstr "Có khả năng xem thử"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
-msgstr "Mục nhập pixmap có nên xem trước hay không."
+msgstr "Mục nhập pixmap có nên xem thử hay không."
 
 #: ../libgnomeui/gnome-pixmap-entry.c:189
 #: ../libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
-msgstr "Không hình ảnh"
+msgstr "Không ảnh"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
-msgstr "Xem trước Ảnh"
+msgstr "Xem thử Ảnh"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
-msgstr "Hình xem trước của ảnh được chọn hiện thời"
+msgstr "Hình xem thử ảnh được chọn hiện có."
 
 #: ../libgnomeui/gnome-pixmap-entry.c:414
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Không tìm thấy hbox, hãy chọn một tập tin bình thường"
+msgstr "Không tìm thấy hbox nên đang dùng cách chọn tập tin bình thường."
 
 #: ../libgnomeui/gnome-pixmap-entry.c:420
 msgid "Preview"
-msgstr "Xem trước"
+msgstr "Xem thử"
 
 #: ../libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
-msgstr "Danh sách tốt nhất"
+msgstr "Mười Tốt nhất"
 
 #: ../libgnomeui/gnome-scores.c:91
 msgid "User"
@@ -1471,11 +1459,11 @@ msgstr "Danh sách đánh số"
 
 #: ../libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
-msgstr "Lui vào"
+msgstr "Thụt lề"
 
 #: ../libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
-msgstr "Không-lùi "
+msgstr "Bỏ thụt lề"
 
 #: ../libgnomeui/gnome-stock-icons.c:145
 msgid "About"
@@ -1483,27 +1471,25 @@ msgstr "Giới thiệu"
 
 #: ../libgnomeui/gnome-ui-init.c:121
 msgid "Disable Crash Dialog"
-msgstr "Tắt Hộp thoại Crash"
+msgstr "Tắt Hộp thoại Chạy hỏng"
 
 #: ../libgnomeui/gnome-ui-init.c:123
 msgid "X display to use"
-msgstr "Dùng hiển thị X"
+msgstr "Bộ trình bày X cần dùng."
 
 #: ../libgnomeui/gnome-ui-init.c:123
 msgid "DISPLAY"
-msgstr "DISPLAY"
+msgstr "BỘ TRÌNH BÀY"
 
 #: ../libgnomeui/gnome-ui-init.c:131
 msgid "GNOME GUI Library"
-msgstr "Thư viện của GNOME GUI"
+msgstr "Thư viện giao diện người dùng đồ họa của GNOME."
 
 #. dialog display isn't working out
 #: ../libgnomeui/gnome-ui-init.c:716
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Nhiều lỗi trong truy cập bộ nhớ xuất hiện; không hiển thị được đối thoại "
-"lỗi\n"
+msgstr "Gặp nhiều lỗi chia ra từng đoạn; không thể hiển thị hộp thoại lỗi.\n"
 
 #. Eeeek! Can't show dialog
 #: ../libgnomeui/gnome-ui-init.c:730
@@ -1512,8 +1498,8 @@ msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
-"Sự truy cập bộ nhớ có lỗi!\n"
-"Không thể hiển thị đối thoại đổ vỡ\n"
+"Gặp lỗi chia ra từng đoạn.\n"
+"Không thể hiển thị đối thoại chạy hỏng.\n"
 
 #: ../libgnomeui/gnome_segv.c:101
 #, c-format
@@ -1524,16 +1510,16 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"Bộ quản lý tác vụ GNOME (quá trình %d) đã bị đổ vỡ\n"
-"do một sai lầm nguy hiểm (%s).\n"
-"Nếu bạn đóng đối thoại này thì tất cả các ứng dụng cũng sẽ bị đóng và\n"
+"Bộ quản lý phiên làm việc GNOME (quá trình %d) đã chạy hỏng,\n"
+"do một lỗi nghiêm trọng (%s).\n"
+"Khi bạn đóng đối thoại này thì tất cả các ứng dụng cũng sẽ bị đóng và\n"
 "quá trình tác vụ của bạn sẽ bị ngừng lại.\n"
-"Hãy nhớ tất cả các văn bản của bạn trước khi đóng đối thoại này."
+"Hãy nhớ tất cả các tập tin của bạn trước khi đóng đối thoại này."
 
 #: ../libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "Ứng dụng \"%s\" kết thúc bất thường."
+msgstr "Ứng dụng « %s » đã kết thúc bất ngờ."
 
 #: ../libgnomeui/gnome_segv.c:117
 #, c-format
@@ -1546,129 +1532,24 @@ msgid ""
 "can restart the application right now."
 msgstr ""
 "Bạn có thể thông báo cho Nhà phát triển về những gì xảy ra để giúp họ khắc "
-"phục lỗi. Hoặc bạn có thể khởi động lại ứng dụng ngay bây giờ."
+"phục lỗi. Hoặc bạn có thể khởi chạy lại ứng dụng ngay bây giờ."
 
 #: ../libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Sử dụng: gnome_segv appname signum\n"
+msgstr "Cách sử dụng: gnome_segv appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:153
+#: ../libgnomeui/gnome_segv.c:154
 msgid "_Restart Application"
-msgstr "_Khởi động lại ứng dụng"
+msgstr "_Khởi chạy lại ứng dụng"
 
-#: ../libgnomeui/gnome_segv.c:165
+#: ../libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
 msgstr "_Thông báo cho Nhà phát triển"
 
-#: ../libgnomeui/gnome_segv.c:176
+#: ../libgnomeui/gnome_segv.c:177
 msgid "_Debug"
-msgstr "_Debug"
+msgstr "_Gỡ lỗi"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
-msgstr "Kết thúc thử"
-
-msgid "Color Selector"
-msgstr "Trình chọn Màu"
-
-msgid ""
-"Application \"%s\" (process %d) has crashed\n"
-"due to a fatal error.\n"
-"(%s)"
-msgstr ""
-"Ứng dụng \"%s\" (quá trình %d) đã bị đổ vỡ\n"
-"do một sai lầm nguy hiểm.\n"
-"(%s)"
-
-msgid "Submit a bug report"
-msgstr "Trình ra một báo cáo rối "
-
-msgid "http://www.gnome.org/application_crashed.shtml"
-msgstr "http://www.gnome.org/application_crashed.shtml"
-
-msgid "Please visit the GNOME Application Crash page for more information"
-msgstr "Hãy xem trang the GNOME Application Crash để có thêm thông tin"
-
-msgid "_Credits"
-msgstr "_Công lao"
-
-msgid "Find _Again"
-msgstr "Tìm thêm"
-
-msgid "Both text and icons"
-msgstr "Cả văn bản và các biểu tượng"
-
-msgid "E_xit"
-msgstr "Kết thúc"
-
-msgid "Exit the program"
-msgstr "Kết thúc chương trình"
-
-msgid "Gdk debugging flags to set"
-msgstr "Tập hợp các lỗi Gdk được định vị"
-
-msgid "FLAGS"
-msgstr "CỜ"
-
-msgid "Gdk debugging flags to unset"
-msgstr "Tắt định vị các lỗi"
-
-msgid "Make X calls synchronous"
-msgstr "Gọi X đồng bộ"
-
-msgid "Don't use X shared memory extension"
-msgstr "Không dùng bộ nhớ phân chia cho X"
-
-msgid "Program name as used by the window manager"
-msgstr "Tên chương trình dùng như ở quản lý cửa sổ"
-
-msgid "NAME"
-msgstr "TÊN"
-
-msgid "Program class as used by the window manager"
-msgstr "Cấp chương trình dùng ở quản lý cửa sổ"
-
-msgid "CLASS"
-msgstr "CẤP"
-
-msgid "HOST"
-msgstr "MÁY CHỦ"
-
-msgid "PORT"
-msgstr "CỔNG"
-
-msgid "STYLE"
-msgstr "KIỂU"
-
-msgid "Gtk+ debugging flags to set"
-msgstr "Tập hợp các lỗi Gtk+ được định vị"
-
-msgid "Gtk+ debugging flags to unset"
-msgstr "Tắt các lỗi Gtk+ được định vị"
-
-msgid "Make all warnings fatal"
-msgstr "Làm tất cả cảnh cáo báo nguy hiểm"
-
-msgid "Load an additional Gtk module"
-msgstr "Tải thêm một môđun Gtk"
-
-msgid "MODULE"
-msgstr "MÔĐUN"
-
-msgid "GTK+"
-msgstr "GTK+"
-
-msgid "GConf error details: %s\n"
-msgstr "Các chi tiết sai sót của GConf: %s\n"
-
-msgid "Copyright font"
-msgstr "Phông bản quyền"
-
-msgid "Comments font"
-msgstr "Phông các bình luận"
-
-msgid "Author"
-msgstr "Tác giả"
-
-msgid " domain %s"
-msgstr " vùng %s"
+msgstr "Thoát khỏi việc thử ra"
