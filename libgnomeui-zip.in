@@ -31,4 +31,5 @@ zip -r $DEVZIP -@ <<EOF
 lib/libgnomeui-2.dll.a
 lib/pkgconfig/libgnomeui-2.0.pc
 include/libgnomeui-2.0
+share/gtk-doc/html/libgnomeui
 EOF

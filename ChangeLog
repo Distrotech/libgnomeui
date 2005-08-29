@@ -1,3 +1,8 @@
+2005-08-29  Tor Lillqvist  <tml@novell.com>
+
+	* libgnomeui-zip.in: Include also documentation in the developer
+	zipfile.
+
 2005-08-26  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c: Oops, set this back to
