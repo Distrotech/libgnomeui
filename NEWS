@@ -1,3 +1,15 @@
+libgnomeui 2.11.4
+-----------------
+
+What's new since 2.11.3
+
+Bug fixes:
+	- Fix a bad crasher in the file selector (Matthias)
+	  http://bugzilla.gnome.org/show_bug.cgi?id=314586
+
+Translations:
+	- Estonian, French, Vietnamese
+
 libgnomeui 2.11.3
 -----------------
 
