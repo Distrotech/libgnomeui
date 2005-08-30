@@ -1,7 +1,13 @@
 2005-08-30  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-app-helper.c: Fix warning where _ got
+	defined twice which breaks the AIX compiler. Closes
+	bug #160956.
+
+2005-08-30  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/libgnomeui-2.0.pc.in: Add gnome-keyring-1 to the
-	Requires: line.
+	Requires: line. Bug #167675.
 
 2005-08-29  Tor Lillqvist  <tml@novell.com>
 

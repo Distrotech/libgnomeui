@@ -2550,6 +2550,10 @@ global_menu_item_activated (GtkWidget *item)
 }
 
 /* Welcome to Hack City, population: gnome-app-helper */
+/* Hack into the hack for the AIX pre-compiler. It barfs when stuff gets defined twice */
+#ifdef _
+#undef _
+#endif
 #define _(x) dgettext (GETTEXT_PACKAGE, x)
 
 static void
@@ -2683,7 +2687,9 @@ create_and_popup_toolbar_menu (GdkEventButton *event)
 }
 
 /* Now leaving Hack City */
+#ifdef _
 #undef _
+#endif
 #define _(x) gettext (x)
 
 static int
