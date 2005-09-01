@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-07 06:23+0000\n"
-"PO-Revision-Date: 2005-07-07 15:55+0530\n"
+"POT-Creation-Date: 2005-09-01 08:57+0000\n"
+"PO-Revision-Date: 2005-09-01 18:58+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 
 # demos/mdi_demo.c:128
 #: ../demos/mdi_demo.c:128
@@ -41,20 +42,93 @@ msgstr "शिशु वस्तु 2"
 msgid "Hint for item 2"
 msgstr "वस्तु 2 के बारे में संकेत"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:842
+#: ../file-chooser/gtkfilesystemgnomevfs.c:832
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s किसी का लिंक है जो कि फोल्डर नहीं है"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:843
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s एक लिंक है बिना गंतव्य स्थान के"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:958
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s फोल्डर नहीं है"
 
 # libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1097
-msgid "Filesystem"
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1206
+msgid "File System"
 msgstr "फ़ाइलसिस्टम"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1787
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1964
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "पुस्तकचिह्न सहेजना विफल (%s)"
+
+#: ../file-chooser/sucky-desktop-item.c:217
+#: ../file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "'%s' को पढ़ने में विफल: %s"
+
+#: ../file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "'%s' को फिर घुमाने में त्रुटि: %s"
+
+# libgnomeui/gnome-font-picker.c:174
+#: ../file-chooser/sucky-desktop-item.c:384
+#: ../file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "कोई नाम नहीं"
+
+#: ../file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "फाइल '%s' एक नियमित फाइल या निर्देशिका नहीं है."
+
+#: ../file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr "गलती त्रुटि id '%s' पाने में"
+
+#: ../file-chooser/sucky-desktop-item.c:842
+msgid "No filename to save to"
+msgstr "कोई फाइल नाम सहेजने को नहीं"
+
+# libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
+#: ../file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "%s का आरंभ कर रहा है"
+
+#: ../file-chooser/sucky-desktop-item.c:2036
+msgid "No URL to launch"
+msgstr "कोई URL लांच करने के नहीं"
+
+#: ../file-chooser/sucky-desktop-item.c:2046
+msgid "Not a launchable item"
+msgstr "कोई लांच करने योग्य मद नहीं "
+
+#: ../file-chooser/sucky-desktop-item.c:2056
+msgid "No command (Exec) to launch"
+msgstr "कोई समादेश (Exec) लांच करने के लिये नहीं"
+
+#: ../file-chooser/sucky-desktop-item.c:2069
+msgid "Bad command (Exec) to launch"
+msgstr "गलत समादेश (Exec) लांच करने के लिये"
+
+#: ../file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr "इसका अनजान एनकोडिंग: %s"
+
+#: ../file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "'%s' फाइल लिखने में त्रुटि: %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -662,26 +736,26 @@ msgstr "विषय सूची (_C)"
 msgid "View help for this application"
 msgstr "इस अनुप्रयोग हेतु मदद देखें"
 
-#: ../libgnomeui/gnome-app-helper.c:2570
+#: ../libgnomeui/gnome-app-helper.c:2574
 msgid "Text Below Icons"
 msgstr "चिह्नों के नीचे पाठ"
 
-#: ../libgnomeui/gnome-app-helper.c:2571
+#: ../libgnomeui/gnome-app-helper.c:2575
 msgid "Priority Text Beside Icons"
 msgstr "चिह्नों के बाजू से पाठ"
 
 # libgnomeui/gnome-app-helper.c:2564
-#: ../libgnomeui/gnome-app-helper.c:2572
+#: ../libgnomeui/gnome-app-helper.c:2576
 msgid "Icons Only"
 msgstr "सिर्फ चिह्न"
 
 # libgnomeui/gnome-app-helper.c:2565
-#: ../libgnomeui/gnome-app-helper.c:2573
+#: ../libgnomeui/gnome-app-helper.c:2577
 msgid "Text Only"
 msgstr "सिर्फ पाठ"
 
 # libgnomeui/gnome-app-helper.c:2616
-#: ../libgnomeui/gnome-app-helper.c:2634
+#: ../libgnomeui/gnome-app-helper.c:2638
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "डेस्कटॉप डिफाल्ट (%s) का उपयोग करें"
@@ -1085,22 +1159,22 @@ msgid "Logo Background color is set"
 msgstr "लोगो पृष्ठभूमि रंग नियत है"
 
 # libgnomeui/gnome-druid.c:150
-#: ../libgnomeui/gnome-druid.c:150
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show Finish"
 msgstr "सम्पन्न दिखाएँ"
 
 # libgnomeui/gnome-druid.c:151
-#: ../libgnomeui/gnome-druid.c:151
+#: ../libgnomeui/gnome-druid.c:155
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "'अगला' बटन के बजाए 'सम्पन्न' बटन दिखाएँ"
 
 # libgnomeui/gnome-druid.c:158
-#: ../libgnomeui/gnome-druid.c:158
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show Help"
 msgstr "मदद दिखाएँ"
 
 # libgnomeui/gnome-druid.c:159
-#: ../libgnomeui/gnome-druid.c:159
+#: ../libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
 msgstr "'मदद' बटन दिखाएँ"
 
@@ -1762,15 +1836,15 @@ msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "उपयोग: gnome_segv2 अनुप्रयोगनाम signum\n"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: ../libgnomeui/gnome_segv.c:153
+#: ../libgnomeui/gnome_segv.c:154
 msgid "_Restart Application"
 msgstr "अनुप्रयोग पुनःप्रारंभ करें (_R)"
 
-#: ../libgnomeui/gnome_segv.c:165
+#: ../libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
 msgstr "डेवलपर्स को बताएँ (_I)"
 
-#: ../libgnomeui/gnome_segv.c:176
+#: ../libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "डिबग (_D)"
 
