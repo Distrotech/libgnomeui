@@ -287,6 +287,25 @@ domain_entry_activate (GtkWidget *widget, GtkWidget *dialog)
 
 
 /* Public GnomePasswordDialog methods */
+
+/**
+ * gnome_password_dialog_new:
+ * @dialog_title: The title of the dialog
+ * @message: Message text for the dialog
+ * @username: The username to be used in the dialog
+ * @password: Password to be used
+ * @readonly_username: Boolean value that controls whether the user
+ * can edit the username or not
+ * 
+ * Description: Creates a new password dialog with an optional title, 
+ * message, username, password etc. The user will be given the option to
+ * save the password for this session only or store it permanently in her
+ * keyring.
+ * 
+ * Returns: A new password dialog.
+ *
+ * Since: 2.4
+ **/
 GtkWidget *
 gnome_password_dialog_new (const char	*dialog_title,
 			   const char	*message,
@@ -462,6 +481,17 @@ gnome_password_dialog_run_and_block (GnomePasswordDialog *password_dialog)
 	return button_clicked == GTK_RESPONSE_OK;
 }
 
+/**
+ * gnome_password_dialog_set_username:
+ * @password_dialog: A #GnomePasswordDialog
+ * @username: The username that should be set
+ *
+ * Description: Sets the username in the password dialog.
+ *
+ * Returns:
+ *
+ * Since: 2.4
+ **/
 void
 gnome_password_dialog_set_username (GnomePasswordDialog	*password_dialog,
 				       const char		*username)
@@ -473,6 +503,17 @@ gnome_password_dialog_set_username (GnomePasswordDialog	*password_dialog,
 			    username?username:"");
 }
 
+/**
+ * gnome_password_dialog_set_password:
+ * @password_dialog: A #GnomePasswordDialog
+ * @password: The password that should be set
+ *
+ * Description: Sets the password in the password dialog.
+ *
+ * Returns:
+ *
+ * Since: 2.4
+ **/
 void
 gnome_password_dialog_set_password (GnomePasswordDialog	*password_dialog,
 				       const char		*password)
@@ -483,6 +524,17 @@ gnome_password_dialog_set_password (GnomePasswordDialog	*password_dialog,
 			    password ? password : "");
 }
 
+/**
+ * gnome_password_dialog_set_domain:
+ * @password_dialog: A #GnomePasswordDialog
+ * @domain: The domain that should be set
+ *
+ * Description: Sets the domain to be used in the password dialog.
+ *
+ * Returns:
+ *
+ * Since: 2.4
+ **/
 void
 gnome_password_dialog_set_domain (GnomePasswordDialog	*password_dialog,
 				  const char		*domain)

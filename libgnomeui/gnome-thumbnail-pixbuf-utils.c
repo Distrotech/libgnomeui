@@ -48,6 +48,8 @@ GdkPixbuf * _gnome_thumbnail_load_scaled_jpeg (const char *uri,
  * large amounts.
  *
  * Return value: a scaled pixbuf
+ * 
+ * Since: 2.2
  **/
 GdkPixbuf *
 gnome_thumbnail_scale_down_pixbuf (GdkPixbuf *pixbuf,

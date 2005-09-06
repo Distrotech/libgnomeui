@@ -422,6 +422,8 @@ gnome_thumbnail_factory_class_init (GnomeThumbnailFactoryClass *class)
  * This function must be called on the main thread.
  * 
  * Return value: a new #GnomeThumbnailFactory
+ *
+ * Since: 2.2
  **/
 GnomeThumbnailFactory *
 gnome_thumbnail_factory_new (GnomeThumbnailSize size)
@@ -630,7 +632,9 @@ gnome_thumbnail_factory_ensure_failed_uptodate (GnomeThumbnailFactory *factory)
  *
  * Usage of this function is threadsafe.
  *
- * Return value: The absolute path of the thumbnail, or %NULL if none exist
+ * Return value: The absolute path of the thumbnail, or %NULL if none exist.
+ *
+ * Since: 2.2
  **/
 char *
 gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
@@ -705,7 +709,9 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
  *
  * Usage of this function is threadsafe.
  *
- * Return value: TRUE if there is a failed thumbnail for the file
+ * Return value: TRUE if there is a failed thumbnail for the file.
+ *
+ * Since: 2.2
  **/
 gboolean
 gnome_thumbnail_factory_has_valid_failed_thumbnail (GnomeThumbnailFactory *factory,
@@ -804,7 +810,9 @@ mimetype_supported_by_gdk_pixbuf (const char *mime_type)
  *
  * Usage of this function is threadsafe.
  *
- * Return value: TRUE if the file can be thumbnailed
+ * Return value: TRUE if the file can be thumbnailed.
+ *
+ * Since: 2.2
  **/
 gboolean
 gnome_thumbnail_factory_can_thumbnail (GnomeThumbnailFactory *factory,
@@ -912,7 +920,9 @@ expand_thumbnailing_script (const char *script,
  *
  * Usage of this function is threadsafe.
  *
- * Return value: thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise
+ * Return value: thumbnail pixbuf if thumbnailing succeeded, %NULL otherwise.
+ *
+ * Since: 2.2
  **/
 GdkPixbuf *
 gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
@@ -1086,6 +1096,8 @@ make_thumbnail_fail_dirs (GnomeThumbnailFactory *factory)
  * failed thumbnail is written.
  *
  * Usage of this function is threadsafe.
+ *
+ * Since: 2.2
  **/
 void
 gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
@@ -1200,6 +1212,8 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
  * to re-thumbnail the file later.
  *
  * Usage of this function is threadsafe.
+ *
+ * Since: 2.2
  **/
 void
 gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
@@ -1305,6 +1319,8 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
  * if you want to manually handle thumbnail files.
  *
  * Return value: A string with the MD5 digest of the uri string.
+ *
+ * Since: 2.2
  **/
 char *
 gnome_thumbnail_md5 (const char *uri)
@@ -1323,6 +1339,8 @@ gnome_thumbnail_md5 (const char *uri)
  * Returns the filename that a thumbnail of size @size for @uri would have.
  *
  * Return value: an absolute filename
+ *
+ * Since: 2.2
  **/
 char *
 gnome_thumbnail_path_for_uri (const char         *uri,
@@ -1356,6 +1374,8 @@ gnome_thumbnail_path_for_uri (const char         *uri,
  * Thumb::URI option in the png.
  *
  * Return value: TRUE if the thumbnail is for @uri
+ *
+ * Since: 2.2
  **/
 gboolean
 gnome_thumbnail_has_uri (GdkPixbuf          *pixbuf,
@@ -1380,6 +1400,8 @@ gnome_thumbnail_has_uri (GdkPixbuf          *pixbuf,
  * png options.
  *
  * Return value: TRUE if the thumbnail has the right @uri and @mtime
+ *
+ * Since: 2.2
  **/
 gboolean
 gnome_thumbnail_is_valid (GdkPixbuf          *pixbuf,

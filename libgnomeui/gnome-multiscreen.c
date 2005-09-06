@@ -96,6 +96,8 @@ make_environment_for_screen (GdkScreen *screen)
  *
  * Returns: %TRUE if everything went fine, %FALSE otherwise (in which case
  * @error will contain the actual error).
+ * 
+ * Since: 2.6
  **/
 gboolean
 gnome_url_show_on_screen (const char  *url,
@@ -128,6 +130,8 @@ gnome_url_show_on_screen (const char  *url,
  *
  * Returns: %TRUE on success, %FALSE otherwise (in which case @error will
  * contain the actual error).
+ *
+ * Since: 2.6
  **/
 gboolean
 gnome_help_display_on_screen (const char  *file_name,
@@ -156,6 +160,8 @@ gnome_help_display_on_screen (const char  *file_name,
  *
  * Returns: %TRUE on success, %FALSE otherwise (in which case @error will
  * contain the actual error).
+ *
+ * Since: 2.6
  **/
 gboolean
 gnome_help_display_with_doc_id_on_screen (GnomeProgram  *program,
@@ -195,6 +201,8 @@ gnome_help_display_with_doc_id_on_screen (GnomeProgram  *program,
  *
  * Returns: %TRUE on success, %FALSE otherwise (in which case @error will
  * contain the actual error).
+ *
+ * Since: 2.6
  **/
 gboolean
 gnome_help_display_desktop_on_screen (GnomeProgram  *program,
@@ -229,6 +237,8 @@ gnome_help_display_desktop_on_screen (GnomeProgram  *program,
  *
  * Returns: %TRUE on success, %FALSE otherwise (in which case @error will
  * contain the actual error).
+ *
+ * Since: 2.6
  **/
 gboolean
 gnome_help_display_uri_on_screen (const char  *help_uri,

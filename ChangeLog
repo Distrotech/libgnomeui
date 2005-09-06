@@ -1,3 +1,12 @@
+2005-09-06  Kjartan Maraas  <kmaraas@gnome.org>
+
+	No code is touched by these changes. :-)
+
+	* libgnomeui/gnome-multiscreen.c: API doc fixes
+	* libgnomeui/gnome-password-dialog.c: Same
+	* libgnomeui/gnome-thumbnail-pixbuf-utils.c: Same
+	* libgnomeui/gnome-thumbnail.c: Same.
+
 2005-08-31  Baris Cicek <baris@teamforce.name.tr>
 
 	* configure.in: Added ku to ALL_LINGUAS
