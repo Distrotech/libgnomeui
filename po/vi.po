@@ -7,10 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.11.3 Gnome HEAD\n"
+"Project-Id-Version: libgnomeui 2.12\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-08-27 23:00+0000\n"
-"PO-Revision-Date: 2005-08-28 13:09+0930\n"
+"PO-Revision-Date: 2005-09-16 18:00+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "Chỉ dẫn cho mục 2"
 #: ../file-chooser/gtkfilesystemgnomevfs.c:832
 #, c-format
 msgid "%s is a link to something that is not a folder"
-msgstr "%s là liên kết đến cái gì không phải là danh mục"
+msgstr "%s là liên kết đến cái gì không phải là thư mục"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:843
 #, c-format
@@ -48,7 +48,7 @@ msgstr "%s là liên kết không có địa điểm đích"
 #: ../file-chooser/gtkfilesystemgnomevfs.c:958
 #, c-format
 msgid "%s is not a folder"
-msgstr "%s không phải là danh mục"
+msgstr "%s không phải là thư mục"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1206
 msgid "File System"
@@ -369,7 +369,7 @@ msgstr "Thiết lập thông số trang in cho máy in hiện thời của bạn
 #. Close
 #: ../libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
-msgstr "Đón_g"
+msgstr "_Đóng"
 
 #: ../libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
@@ -524,7 +524,7 @@ msgstr "Mở một cửa sổ mới."
 
 #: ../libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
-msgstr "Đón_g cửa sổ này"
+msgstr "_Đóng cửa sổ này"
 
 #: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
