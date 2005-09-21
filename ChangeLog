@@ -1,3 +1,12 @@
+2005-09-21  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-file-entry.c: (browse_dialog_ok):
+	Fix a crasher. Fix from Petr Mladek. Closes
+	bug #315549.
+	* libgnomeui/gnome-pixmap-entry.c: (refresh_preview),
+	(setup_preview): Fix a crash on Solaris. Patch from
+	Vijaykumar Patwari. Closes bug #122703.
+
 ==================== 2.12.0 =====================
 
 2005-09-06  Kjartan Maraas  <kmaraas@gnome.org>
