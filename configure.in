@@ -179,10 +179,6 @@ PKG_CHECK_MODULES(LIBGNOMEUI_COMPONENTS, [$GNOMEUI_MODULES])
 PKG_CHECK_MODULES(LIBGNOMEUI_DEMOS, [$GNOMEUI_MODULES])
 PKG_CHECK_MODULES(LIBGNOMEUI_GLADE, [$GNOMEUI_MODULES dnl
   libglade-2.0 >= libglade_required_version])
-AC_PATH_PROG(LIBGLADE_CONVERT, libglade-convert)
-if test -z "$LIBGLADE_CONVERT" ; then
-	AC_MSG_WARN([libglade-convert (from libglade 2.0) is needed for the checks in the tests directory.])
-fi
 
 dnl File Chooser stuff
 PKG_CHECK_MODULES(FILE_SYSTEM,

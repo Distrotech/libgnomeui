@@ -1,3 +1,8 @@
+2005-09-21  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Remove useless check and warning about
+	libglade-convert (Jens Elkner). Closes bug #118532.
+
 2005-09-21  Ricardo Fernández Pascual  <ric@users.sourceforge.net>
 
 	* libgnomeui/gnome-druid.c (gnome_druid_back_callback): Skip
