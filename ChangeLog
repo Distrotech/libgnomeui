@@ -1,3 +1,9 @@
+2005-09-21  Ricardo Fernández Pascual  <ric@users.sourceforge.net>
+
+	* libgnomeui/gnome-druid.c (gnome_druid_back_callback): Skip
+	hidden pages, just like in gnome_druid_next_callback. Closes
+	bug #89145.
+
 2005-09-21  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-icon-entry.c: (setup_preview):

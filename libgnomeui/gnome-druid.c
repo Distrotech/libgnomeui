@@ -673,7 +673,16 @@ gnome_druid_back_callback (GtkWidget *button, GnomeDruid *druid)
 	/* Make sure that we have a next list item */
 	list = g_list_find (druid->_priv->children, druid->_priv->current);
 	g_return_if_fail (list->prev != NULL);
-	gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->prev->data));
+
+	list = list->prev;
+	while (list != NULL &&
+	       ! GTK_WIDGET_VISIBLE (list->data))
+		list = list->prev;
+	
+	if ( ! list)
+		return;
+
+	gnome_druid_set_page (druid, GNOME_DRUID_PAGE (list->data));
 }
 static void
 gnome_druid_next_callback (GtkWidget *button, GnomeDruid *druid)
