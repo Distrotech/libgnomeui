@@ -445,7 +445,7 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 	GtkWidget *fw;
 	GnomeFileEntry *fentry;
 	GtkWidget *entry;
-	const gchar *locale_filename;
+	gchar *locale_filename;
 	gchar *utf8_filename;
 
 	fw = GTK_WIDGET (data);
@@ -455,7 +455,7 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 	if (GTK_IS_FILE_CHOOSER (fentry->fsw))
 		locale_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (fw));
 	else
-		locale_filename = gtk_file_selection_get_filename (GTK_FILE_SELECTION (fw));
+		locale_filename = g_strdup (gtk_file_selection_get_filename (GTK_FILE_SELECTION (fw)));
 
 	utf8_filename = g_filename_to_utf8 (locale_filename, -1, NULL,
 					    NULL, NULL);

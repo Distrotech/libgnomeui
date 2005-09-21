@@ -181,7 +181,7 @@ refresh_preview(GnomePixmapEntry *pentry)
 		g_free(t);
 		return;
 	}
-	if(!t || !g_file_test(t,G_FILE_TEST_IS_SYMLINK|G_FILE_TEST_IS_REGULAR) ||
+	if(!t || !g_file_test(t,(G_FILE_TEST_IS_SYMLINK & !G_FILE_TEST_IS_DIR)|G_FILE_TEST_IS_REGULAR) ||
 	   !(pixbuf = gdk_pixbuf_new_from_file (t, NULL))) {
 		if (GTK_IS_IMAGE (pentry->_priv->preview)) {
 			gtk_drag_source_unset (pentry->_priv->preview_sw);
@@ -300,7 +300,7 @@ setup_preview(GtkTreeSelection *selection, GtkWidget *widget)
 	if(pp)
 		gtk_widget_destroy(pp);
 
-	if(!p || !g_file_test(p,G_FILE_TEST_IS_SYMLINK|G_FILE_TEST_IS_REGULAR) ||
+	if(!p || !g_file_test(p,(G_FILE_TEST_IS_SYMLINK & !G_FILE_TEST_IS_DIR) |G_FILE_TEST_IS_REGULAR) ||
 	   !(pixbuf = gdk_pixbuf_new_from_file (p, NULL)))
 		return;
 
