@@ -408,7 +408,7 @@ entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
 static void
 setup_preview(GtkWidget *widget)
 {
-	const gchar *p;
+	char *p;
 	GList *l;
 	GtkWidget *pp = NULL;
         GdkPixbuf *pixbuf, *scaled;
@@ -432,8 +432,11 @@ setup_preview(GtkWidget *widget)
 
 	p = gtk_file_chooser_get_filename(fc);
 	if(!p || !g_file_test (p,G_FILE_TEST_IS_SYMLINK | G_FILE_TEST_IS_REGULAR) ||
-	   !(pixbuf = gdk_pixbuf_new_from_file (p, NULL)))
+	   !(pixbuf = gdk_pixbuf_new_from_file (p, NULL))) {
+		g_free (p);
 		return;
+	}
+
 	g_free (p);
 
 	w = gdk_pixbuf_get_width(pixbuf);

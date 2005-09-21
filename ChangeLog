@@ -1,5 +1,10 @@
 2005-09-21  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-icon-entry.c: (setup_preview):
+	Free filename in the error case. Unconstify.
+
+2005-09-21  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-file-entry.c: (browse_dialog_ok):
 	Fix a crasher. Fix from Petr Mladek. Closes
 	bug #315549.
