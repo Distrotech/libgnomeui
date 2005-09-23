@@ -1,3 +1,8 @@
+2005-09-23  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c: Removed stale TODO
+	comment.
+
 2005-09-21  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Remove useless check and warning about

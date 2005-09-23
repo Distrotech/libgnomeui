@@ -30,12 +30,6 @@
  *            John Sullivan <sullivan@eazel.com>
  */
 
-/* TODO:
- * - handle local only property (should go in gtkfilechooserdefault 
- * - Don't we need desktop file link support?
- * - Keeping all the gnome-vfs-infos in the hashtable looks wasteful, but otherwise we'll do to much i/o
- */
-
 #include <config.h>
 
 #include "gtkfilesystemgnomevfs.h"
