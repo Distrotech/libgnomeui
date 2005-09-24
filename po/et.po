@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-07-26 14:46+0000\n"
-"PO-Revision-Date: 2005-08-21 17:31+0300\n"
+"PO-Revision-Date: 2005-09-23 01:52+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -1278,7 +1278,7 @@ msgstr "Ikooni valimise dialoog"
 
 #: ../libgnomeui/gnome-icon-entry.c:756
 msgid "This dialog box lets you select an icon."
-msgstr "See dialiig võimaldab sul ikooni valida."
+msgstr "See dialoog võimaldab sul ikooni valida."
 
 #: ../libgnomeui/gnome-icon-entry.c:762
 msgid "Icon selector"
