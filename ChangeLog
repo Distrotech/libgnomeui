@@ -1,3 +1,12 @@
+2005-09-27  Tor Lillqvist  <tml@novell.com>
+
+	* configure.in: Set GNOME_KEYRING to gnome-keyring-1 on Unix,
+	empty on Win32 (where we don't use gnome-keyring, at least not for
+	now). AC_SUBST it.
+
+	* libgnomeui/libgnomeui-2.0.pc.in: Correspondingly, use
+	@GNOME_KEYRING@.
+
 2005-09-21  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-file-entry.c: (browse_dialog_ok):
