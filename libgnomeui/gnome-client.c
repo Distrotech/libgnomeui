@@ -846,6 +846,22 @@ static void client_parse_func (poptContext ctx,
 			       enum poptCallbackReason reason,
 			       const struct poptOption *opt,
 			       const char *arg, void *data);
+
+static gboolean gnome_client_goption_sm_client_id (const gchar *option_name,
+						   const gchar *value,
+						   gpointer data,
+						   GError **error);
+
+static gboolean gnome_client_goption_sm_config_prefix (const gchar *option_name,
+						       const gchar *value,
+						       gpointer data,
+						       GError **error);
+
+static gboolean gnome_client_goption_sm_disable (const gchar *option_name,
+						 const gchar *value,
+						 gpointer data,
+						 GError **error);
+
 static void gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 static void gnome_client_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 
@@ -867,6 +883,22 @@ static const struct poptOption options[] = {
    N_("Disable connection to session manager"), NULL},
 
   {NULL, '\0', 0, NULL, 0}
+};
+
+static const GOptionEntry session_goptions[] = {
+  { "sm-client-id", '\0', 0, G_OPTION_ARG_CALLBACK,
+    gnome_client_goption_sm_client_id, 
+    N_("Specify session management ID"), N_("ID")},
+
+  { "sm-config-prefix", '\0', 0, G_OPTION_ARG_CALLBACK,
+    gnome_client_goption_sm_config_prefix, 
+    N_("Specify prefix of saved configuration"), N_("PREFIX")},
+
+  { "sm-disable", '\0', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
+    gnome_client_goption_sm_disable, 
+    N_("Disable connection to session manager"), NULL},
+
+  { NULL }
 };
 
 typedef struct {
@@ -978,6 +1010,16 @@ gnome_client_module_info_get (void)
 		NULL, NULL
 	};
 
+	GOptionGroup * option_group;
+	option_group = g_option_group_new ("gnome-session",
+					   N_("Session management"),
+					   N_("Show session management options"),
+					   NULL, NULL);
+	g_option_group_set_translation_domain (option_group, GETTEXT_PACKAGE);
+	g_option_group_add_entries(option_group, session_goptions);
+
+	module_info.expansion1 = (gpointer) option_group;
+
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[3];
 
@@ -1028,6 +1070,41 @@ client_parse_func (poptContext ctx,
   }
 }
 
+static gboolean
+gnome_client_goption_sm_client_id (const gchar *option_name,
+				   const gchar *value,
+				   gpointer data,
+				   GError **error)
+{
+	gnome_client_set_id (master_client, value);
+
+	return TRUE;
+}
+
+static gboolean
+gnome_client_goption_sm_disable (const gchar *option_name,
+				 const gchar *value,
+				 gpointer data,
+				 GError **error)
+{
+	g_object_set (G_OBJECT (gnome_program_get()),
+		      GNOME_CLIENT_PARAM_SM_CONNECT, FALSE, NULL);
+
+	return TRUE;
+}
+
+static gboolean
+gnome_client_goption_sm_config_prefix (const gchar *option_name,
+				       const gchar *value,
+				       gpointer data,
+				       GError **error)
+{
+	g_free (master_client->config_prefix);
+	master_client->config_prefix = g_strdup (value);
+	master_client_restored = TRUE;
+ 
+	return TRUE;
+}
 
 static void
 gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)

@@ -80,6 +80,14 @@ static void libgnomeui_arg_callback 	(poptContext con,
 					 const struct poptOption * opt,
 					 const char * arg,
 					 void * data);
+static gboolean libgnomeui_goption_disable_crash_dialog (const gchar *option_name,
+							 const gchar *value,
+							 gpointer data,
+							 GError **error);
+static gboolean libgnomeui_goption_display (const gchar *option_name,
+					    const gchar *value,
+					    gpointer data,
+					    GError **error);
 static void libgnomeui_init_pass	(const GnomeModuleInfo *mod_info);
 static void libgnomeui_class_init	(GnomeProgramClass *klass,
 					 const GnomeModuleInfo *mod_info);
@@ -124,6 +132,13 @@ static struct poptOption libgnomeui_options[] = {
 	{NULL, '\0', 0, NULL, 0, NULL, NULL}
 };
 
+static GOptionEntry libgnomeui_goptions[] = {
+	{ "disable-crash-dialog", '\0', G_OPTION_FLAG_NO_ARG,
+	  G_OPTION_ARG_CALLBACK, libgnomeui_goption_disable_crash_dialog,
+	  N_("Disable Crash Dialog"), NULL },
+	{ NULL }
+};
+
 const GnomeModuleInfo *
 libgnomeui_module_info_get (void)
 {
@@ -135,6 +150,16 @@ libgnomeui_module_info_get (void)
 		libgnomeui_init_pass, libgnomeui_class_init,
 		NULL, NULL
 	};
+
+	GOptionGroup * option_group;
+	option_group = g_option_group_new ("gnome-ui",
+					   N_("GNOME GUI Library"),
+					   N_("Show GNOME GUI options"),
+					   NULL, NULL);
+	g_option_group_set_translation_domain (option_group, GETTEXT_PACKAGE);
+	g_option_group_add_entries(option_group, libgnomeui_goptions);
+
+	module_info.expansion1 = (gpointer) option_group;
 
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[6];
@@ -591,6 +616,18 @@ libgnomeui_arg_callback(poptContext con,
         default:
                 break;
         }
+}
+
+static gboolean
+libgnomeui_goption_disable_crash_dialog (const gchar *option_name,
+					 const gchar *value,
+					 gpointer data,
+					 GError **error)
+{ 
+	g_object_set (G_OBJECT (gnome_program_get ()),
+		      LIBGNOMEUI_PARAM_CRASH_DIALOG, FALSE, NULL);
+
+	return TRUE;
 }
 
 /* automagically parse all the gtkrc files for us.

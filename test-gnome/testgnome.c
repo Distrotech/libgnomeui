@@ -1,7 +1,7 @@
 /* testGNOME - program similar to testgtk which shows gnome lib functions.
  *
  * Authors : Richard Hestilow <hestgray@ionet.net> (GNOME 1.x version)
- * 	     Carlos Perelló Marín <carlos@gnome-db.org> (Ported to GNOME 2.0)
+ * 	     Carlos Perellï¿½Marï¿½ <carlos@gnome-db.org> (Ported to GNOME 2.0)
  *
  * Copyright (C) 1998-2001 Free Software Foundation
  *
@@ -1500,7 +1500,7 @@ create_about_box (void)
 						NULL /* logo pixbuf */);
 	gtk_widget_show (about_box);
 }
-
+				
 int
 main (int argc, char **argv)
 {
@@ -1536,10 +1536,12 @@ main (int argc, char **argv)
 	GtkWidget *scrolled_window;
 	int i;
 
-	
 	gnome_program_init ("testGNOME", VERSION,
 			    LIBGNOMEUI_MODULE,
-			    argc, argv, NULL);
+			    argc, argv,
+			    GNOME_PARAM_GOPTION_CONTEXT,
+			    g_option_context_new ("test-gnome"),
+			    NULL);
 
 	app = create_newwin (FALSE, "testGNOME", "testGNOME");
 	gtk_window_set_default_size (GTK_WINDOW (app->app), 200, 300);
