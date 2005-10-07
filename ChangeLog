@@ -1,3 +1,8 @@
+2005-10-07  Nate Nielsen  <nielsen@memberwebs.com>
+
+	* libgnomeui/gnome-password-dialog.c: (dialog_show_callback)
+	Focus the first non-empty field. Bug #318026
+
 2005-09-29  Christian Persch  <chpe@cvs.gnome.org>
 
 	* configure.in: Require libgnome 2.13.0, and require libgnome

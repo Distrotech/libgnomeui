@@ -160,17 +160,34 @@ static void
 dialog_show_callback (GtkWidget *widget, gpointer callback_data)
 {
 	GnomePasswordDialog *password_dialog;
+	GtkWidget *focus = NULL;
+	const gchar *text;
 
 	password_dialog = GNOME_PASSWORD_DIALOG (callback_data);
 
+	if (GTK_WIDGET_VISIBLE (password_dialog->details->password_entry))
+		/* Password is the default place to focus */
+		focus = password_dialog->details->password_entry;
+
+	if (GTK_WIDGET_VISIBLE (password_dialog->details->domain_entry) &&
+	    !password_dialog->details->readonly_domain) {
+		/* Empty domain entry gets focus */
+		text = gtk_entry_get_text (GTK_ENTRY (password_dialog->details->domain_entry));
+		if (!focus || !text || !text[0])
+			focus = password_dialog->details->domain_entry;
+	}
+
 	if (GTK_WIDGET_VISIBLE (password_dialog->details->username_entry) &&
 	    !password_dialog->details->readonly_username) {
-		gtk_widget_grab_focus (password_dialog->details->username_entry);
-	} else if (GTK_WIDGET_VISIBLE (password_dialog->details->domain_entry) &&
-		   !password_dialog->details->readonly_domain) {
-		gtk_widget_grab_focus (password_dialog->details->domain_entry);
-	} else if (GTK_WIDGET_VISIBLE (password_dialog->details->password_entry)) {
-		gtk_widget_grab_focus (password_dialog->details->password_entry);
+		/* Empty username entry gets focus */
+		text = gtk_entry_get_text (GTK_ENTRY (password_dialog->details->username_entry));
+		if (!focus || !text || !text[0])
+			focus = password_dialog->details->username_entry;
+	}
+
+	if (focus) {
+		gtk_widget_grab_focus (focus);
+		gtk_editable_select_region (GTK_EDITABLE (focus), 0, -1);
 	}
 }
 
