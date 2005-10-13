@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-07-26 14:46+0000\n"
-"PO-Revision-Date: 2005-09-23 01:52+0300\n"
+"PO-Revision-Date: 2005-10-06 20:00+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -1096,7 +1096,7 @@ msgstr "_Vali..."
 
 #: ../libgnomeui/gnome-file-entry.c:823
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "Faili valimiseks mõeldud hüpikaken"
 
 #: ../libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1214,7 +1214,7 @@ msgstr "Tekst nupu peal"
 
 #: ../libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
-msgstr "Lõpeta maailma näljahädad"
+msgstr "Lõpetada maailma näljahädad"
 
 #: ../libgnomeui/gnome-href.c:139
 msgid "Link color"
@@ -1222,7 +1222,7 @@ msgstr "Lingi värv"
 
 #: ../libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
-msgstr "Lingi kuvamisel kasutatav värv"
+msgstr "Viida joonistamiseks kasutatav värvus"
 
 #: ../libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
@@ -1241,6 +1241,8 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
+"Ikoonikirje unikaalne identifikaator.  Seda kasutatakse ajalooloendi "
+"salvestamisel."
 
 #: ../libgnomeui/gnome-icon-entry.c:189
 msgid "Title for the Browse icon dialog."
@@ -1450,7 +1452,7 @@ msgstr "Taane"
 
 #: ../libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
-msgstr ""
+msgstr "Taande eemaldamine"
 
 #: ../libgnomeui/gnome-stock-icons.c:145
 msgid "About"
