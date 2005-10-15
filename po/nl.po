@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-01 06:44+0000\n"
+"POT-Creation-Date: 2005-10-15 12:39+0200\n"
 "PO-Revision-Date: 2005-07-17 01:45+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -32,26 +32,26 @@ msgstr "Dochter-item 2"
 msgid "Hint for item 2"
 msgstr "Hint voor item 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:829
+#: ../file-chooser/gtkfilesystemgnomevfs.c:832
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s is een verwijzing naar iets dat geen map is"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:840
+#: ../file-chooser/gtkfilesystemgnomevfs.c:843
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s is een verwijzing zonder een doellocatie"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:955
+#: ../file-chooser/gtkfilesystemgnomevfs.c:958
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s is geen map"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1203
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1206
 msgid "File System"
 msgstr "Bestandssysteem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1958
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1964
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Opslaan van bladwijzer mislukt (%s)"
@@ -606,23 +606,23 @@ msgstr "_Inhoud"
 msgid "View help for this application"
 msgstr "De hulp bij deze toepassing bekijken"
 
-#: ../libgnomeui/gnome-app-helper.c:2570
+#: ../libgnomeui/gnome-app-helper.c:2574
 msgid "Text Below Icons"
 msgstr "Tekst onder pictogrammen"
 
-#: ../libgnomeui/gnome-app-helper.c:2571
+#: ../libgnomeui/gnome-app-helper.c:2575
 msgid "Priority Text Beside Icons"
 msgstr "Prioriteitstekst naast pictogrammen"
 
-#: ../libgnomeui/gnome-app-helper.c:2572
+#: ../libgnomeui/gnome-app-helper.c:2576
 msgid "Icons Only"
 msgstr "Alleen pictogrammen"
 
-#: ../libgnomeui/gnome-app-helper.c:2573
+#: ../libgnomeui/gnome-app-helper.c:2577
 msgid "Text Only"
 msgstr "Aleen tekst"
 
-#: ../libgnomeui/gnome-app-helper.c:2634
+#: ../libgnomeui/gnome-app-helper.c:2638
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Bureaubladstandaard (%s) gebruiken"
@@ -1375,23 +1375,23 @@ msgstr "_Domein:"
 msgid "_Password:"
 msgstr "_Wachtwoord:"
 
-#: ../libgnomeui/gnome-password-dialog.c:310
+#: ../libgnomeui/gnome-password-dialog.c:329
 msgid "Co_nnect"
 msgstr "_Verbinden"
 
-#: ../libgnomeui/gnome-password-dialog.c:331
+#: ../libgnomeui/gnome-password-dialog.c:350
 msgid "Connect _anonymously"
 msgstr "A_noniem verbinden"
 
-#: ../libgnomeui/gnome-password-dialog.c:336
+#: ../libgnomeui/gnome-password-dialog.c:355
 msgid "Connect as u_ser:"
 msgstr "Verbinden als _gebruiker:"
 
-#: ../libgnomeui/gnome-password-dialog.c:434
+#: ../libgnomeui/gnome-password-dialog.c:453
 msgid "_Remember password for this session"
 msgstr "Wachtwoo_rd voor deze sessie onthouden"
 
-#: ../libgnomeui/gnome-password-dialog.c:436
+#: ../libgnomeui/gnome-password-dialog.c:455
 msgid "Save password in _keyring"
 msgstr "Wachtwoord op_slaan in sleutelbos"
 
