@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-26 14:46+0000\n"
+"POT-Creation-Date: 2005-10-14 05:37+0200\n"
 "PO-Revision-Date: 2005-10-06 20:00+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
@@ -37,22 +37,22 @@ msgstr "Tütarkirje 2"
 msgid "Hint for item 2"
 msgstr "Vihje kirjele 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:829
+#: ../file-chooser/gtkfilesystemgnomevfs.c:826
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s on viit millelegi, mis pole kataloog"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:840
+#: ../file-chooser/gtkfilesystemgnomevfs.c:837
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s on ilma sihtkohata viit"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:955
+#: ../file-chooser/gtkfilesystemgnomevfs.c:952
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ei ole kataloog"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1203
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1200
 msgid "File System"
 msgstr "Failisüsteem"
 
@@ -608,23 +608,23 @@ msgstr "_Sisukord"
 msgid "View help for this application"
 msgstr "Sirvib programmi abiteavet"
 
-#: ../libgnomeui/gnome-app-helper.c:2570
+#: ../libgnomeui/gnome-app-helper.c:2574
 msgid "Text Below Icons"
 msgstr "Tekst ikoonide all"
 
-#: ../libgnomeui/gnome-app-helper.c:2571
+#: ../libgnomeui/gnome-app-helper.c:2575
 msgid "Priority Text Beside Icons"
 msgstr "Tähtsam tekst ikoonide kõrval"
 
-#: ../libgnomeui/gnome-app-helper.c:2572
+#: ../libgnomeui/gnome-app-helper.c:2576
 msgid "Icons Only"
 msgstr "Ainult ikoonid"
 
-#: ../libgnomeui/gnome-app-helper.c:2573
+#: ../libgnomeui/gnome-app-helper.c:2577
 msgid "Text Only"
 msgstr "Ainult tekst"
 
-#: ../libgnomeui/gnome-app-helper.c:2634
+#: ../libgnomeui/gnome-app-helper.c:2638
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Kasuta töölaua vaikeväärtust (%s)"
@@ -737,31 +737,36 @@ msgstr ""
 msgid "You must log in to access %s\n"
 msgstr "Sa pead %s ligipääsuks sisse logima\n"
 
-#: ../libgnomeui/gnome-client.c:861
+#: ../libgnomeui/gnome-client.c:877 ../libgnomeui/gnome-client.c:891
 msgid "Specify session management ID"
 msgstr "Seansihalduse ID määramine"
 
-#: ../libgnomeui/gnome-client.c:861
+#: ../libgnomeui/gnome-client.c:877 ../libgnomeui/gnome-client.c:891
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:864
+#: ../libgnomeui/gnome-client.c:880 ../libgnomeui/gnome-client.c:895
 msgid "Specify prefix of saved configuration"
 msgstr "Salvestatud seadistuste eesliite määramine"
 
-#: ../libgnomeui/gnome-client.c:864
+#: ../libgnomeui/gnome-client.c:880 ../libgnomeui/gnome-client.c:895
 msgid "PREFIX"
 msgstr "EESLIIDE"
 
-#: ../libgnomeui/gnome-client.c:867
+#: ../libgnomeui/gnome-client.c:883 ../libgnomeui/gnome-client.c:899
 msgid "Disable connection to session manager"
 msgstr "Seansihalduri ühenduse keelamine"
 
-#: ../libgnomeui/gnome-client.c:973
+#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1015
 msgid "Session management"
 msgstr "Seansihaldus"
 
-#: ../libgnomeui/gnome-client.c:2473
+#: ../libgnomeui/gnome-client.c:1016
+#, fuzzy
+msgid "Show session management options"
+msgstr "Seansihaldus"
+
+#: ../libgnomeui/gnome-client.c:2550
 msgid "Cancel Logout"
 msgstr "Tühista väljalogimine"
 
@@ -1270,43 +1275,43 @@ msgid ""
 "need to modify or query any of its properties."
 msgstr ""
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:985
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:988
 msgid "No Icon"
 msgstr "Ikooni pole"
 
-#: ../libgnomeui/gnome-icon-entry.c:755
+#: ../libgnomeui/gnome-icon-entry.c:758
 msgid "Icon selection dialog"
 msgstr "Ikooni valimise dialoog"
 
-#: ../libgnomeui/gnome-icon-entry.c:756
+#: ../libgnomeui/gnome-icon-entry.c:759
 msgid "This dialog box lets you select an icon."
 msgstr "See dialoog võimaldab sul ikooni valida."
 
-#: ../libgnomeui/gnome-icon-entry.c:762
+#: ../libgnomeui/gnome-icon-entry.c:765
 msgid "Icon selector"
 msgstr "Ikoonivalija"
 
-#: ../libgnomeui/gnome-icon-entry.c:763
+#: ../libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "Palun vali ikoon, mida soovid."
 
-#: ../libgnomeui/gnome-icon-entry.c:988
+#: ../libgnomeui/gnome-icon-entry.c:991
 msgid "Icon Selector"
 msgstr "Ikoonivalija"
 
-#: ../libgnomeui/gnome-icon-entry.c:989
+#: ../libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
 msgstr "Selle nupu abil avatakse ikoonivalimise aken."
 
-#: ../libgnomeui/gnome-icon-entry.c:1009
+#: ../libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "Vali"
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1015
 msgid "Icon path"
 msgstr "Ikoonide rada"
 
-#: ../libgnomeui/gnome-icon-entry.c:1013
+#: ../libgnomeui/gnome-icon-entry.c:1016
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1346,35 +1351,35 @@ msgstr "Küsimus"
 msgid "Message"
 msgstr "Teade"
 
-#: ../libgnomeui/gnome-password-dialog.c:252
+#: ../libgnomeui/gnome-password-dialog.c:269
 msgid "_Username:"
 msgstr "_Kasutajanimi:"
 
-#: ../libgnomeui/gnome-password-dialog.c:254
+#: ../libgnomeui/gnome-password-dialog.c:271
 msgid "_Domain:"
 msgstr "_Domeen:"
 
-#: ../libgnomeui/gnome-password-dialog.c:256
+#: ../libgnomeui/gnome-password-dialog.c:273
 msgid "_Password:"
 msgstr "_Parool:"
 
-#: ../libgnomeui/gnome-password-dialog.c:310
+#: ../libgnomeui/gnome-password-dialog.c:346
 msgid "Co_nnect"
 msgstr "Ü_hendu"
 
-#: ../libgnomeui/gnome-password-dialog.c:331
+#: ../libgnomeui/gnome-password-dialog.c:367
 msgid "Connect _anonymously"
 msgstr "Ühendu _anonüümselt"
 
-#: ../libgnomeui/gnome-password-dialog.c:336
+#: ../libgnomeui/gnome-password-dialog.c:372
 msgid "Connect as u_ser:"
 msgstr "Ühendu ka_sutajana:"
 
-#: ../libgnomeui/gnome-password-dialog.c:434
+#: ../libgnomeui/gnome-password-dialog.c:470
 msgid "_Remember password for this session"
 msgstr "_Jäta parool selle sessiooni ajaks meelde"
 
-#: ../libgnomeui/gnome-password-dialog.c:436
+#: ../libgnomeui/gnome-password-dialog.c:472
 msgid "Save password in _keyring"
 msgstr "Salvesta parool _võtmerõngas"
 
@@ -1458,30 +1463,34 @@ msgstr "Taande eemaldamine"
 msgid "About"
 msgstr "Programmist lähemalt"
 
-#: ../libgnomeui/gnome-ui-init.c:121
+#: ../libgnomeui/gnome-ui-init.c:129 ../libgnomeui/gnome-ui-init.c:138
 msgid "Disable Crash Dialog"
 msgstr "Krahhidialoogi keelamine"
 
-#: ../libgnomeui/gnome-ui-init.c:123
+#: ../libgnomeui/gnome-ui-init.c:131
 msgid "X display to use"
 msgstr "X'i kuva, mida kasutada"
 
-#: ../libgnomeui/gnome-ui-init.c:123
+#: ../libgnomeui/gnome-ui-init.c:131
 msgid "DISPLAY"
 msgstr "KUVA"
 
-#: ../libgnomeui/gnome-ui-init.c:131
+#: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:156
 msgid "GNOME GUI Library"
 msgstr "GNOME kasutajaliidese teek"
 
+#: ../libgnomeui/gnome-ui-init.c:157
+msgid "Show GNOME GUI options"
+msgstr ""
+
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:716
+#: ../libgnomeui/gnome-ui-init.c:753
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Toimus mitu segmentimise viga, veadialoogi pole võimalik näidata\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:730
+#: ../libgnomeui/gnome-ui-init.c:767
 #, c-format
 msgid ""
 "Segmentation fault!\n"
