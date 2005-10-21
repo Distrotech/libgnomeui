@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-10-14 05:37+0200\n"
-"PO-Revision-Date: 2005-10-06 20:00+0300\n"
+"PO-Revision-Date: 2005-10-18 01:38+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -762,9 +762,8 @@ msgid "Session management"
 msgstr "Seansihaldus"
 
 #: ../libgnomeui/gnome-client.c:1016
-#, fuzzy
 msgid "Show session management options"
-msgstr "Seansihaldus"
+msgstr "Seansihalduse valikute näitamine"
 
 #: ../libgnomeui/gnome-client.c:2550
 msgid "Cancel Logout"
@@ -1153,19 +1152,19 @@ msgstr "Dialoogiaknas näidatav tekst eelvaatlemiseks"
 
 #: ../libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr ""
+msgstr "Kirjatüübi kasutamine sildil"
 
 #: ../libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr ""
+msgstr "Kirjatüübi kasutamine sildil kirjatüübi andmererežiimis"
 
 #: ../libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr ""
+msgstr "Sildi kirjatüübi suurus"
 
 #: ../libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr ""
+msgstr "Sildi kirjatüübi suurus kirjatüübi andmererežiimis"
 
 #: ../libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -1481,7 +1480,7 @@ msgstr "GNOME kasutajaliidese teek"
 
 #: ../libgnomeui/gnome-ui-init.c:157
 msgid "Show GNOME GUI options"
-msgstr ""
+msgstr "GNOME kasutajaliidese valikute näitamine"
 
 #. dialog display isn't working out
 #: ../libgnomeui/gnome-ui-init.c:753
