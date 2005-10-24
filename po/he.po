@@ -730,31 +730,31 @@ msgstr "אתה חייב להתחבר כדי לגשת ל %s\n"
 
 #: libgnomeui/gnome-client.c:861
 msgid "Specify session management ID"
-msgstr "ציין מזהה מנהל תצורת הפעלה"
+msgstr "Specify session management ID"
 
 #: libgnomeui/gnome-client.c:861
 msgid "ID"
-msgstr "זיהוי"
+msgstr "ID"
 
 #: libgnomeui/gnome-client.c:864
 msgid "Specify prefix of saved configuration"
-msgstr "ציין נתיב להגדרות השמורות"
+msgstr "Specify prefix of saved configuration"
 
 #: libgnomeui/gnome-client.c:864
 msgid "PREFIX"
-msgstr "נתיב"
+msgstr "PREFIX"
 
 #: libgnomeui/gnome-client.c:867
 msgid "Disable connection to session manager"
-msgstr "כבה התחברות למנהל התצורה"
+msgstr "Disable connection to session manager"
 
 #: libgnomeui/gnome-client.c:973
 msgid "Session management"
-msgstr "ניהול תצורות הפעלה"
+msgstr "Session management"
 
 #: libgnomeui/gnome-client.c:2473
 msgid "Cancel Logout"
-msgstr "בטל התחברות"
+msgstr "Cancel Logout"
 
 #: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
@@ -1470,13 +1470,13 @@ msgstr "DISPLAY"
 
 #: libgnomeui/gnome-ui-init.c:131
 msgid "GNOME GUI Library"
-msgstr "ספריית ממשק המשתמש של GNOME"
+msgstr "GNOME GUI Library"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:716
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "מספר תקלות הקטעה אירעו בו זמנית; לא ניתן להציג תיבת דו-שיח לשגיאה\n"
+msgstr "Multiple segmentation faults occurred; can't display error dialog\n"
 
 #. Eeeek! Can't show dialog
 #: libgnomeui/gnome-ui-init.c:730
@@ -1485,8 +1485,8 @@ msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
-"תקלת הקטעה!\n"
-"לא ניתן להציג את דו-שיח ההתרסקות\n"
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
 
 #: libgnomeui/gnome_segv.c:101
 #, c-format
