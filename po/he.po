@@ -1458,15 +1458,15 @@ msgstr "אודות"
 
 #: libgnomeui/gnome-ui-init.c:121
 msgid "Disable Crash Dialog"
-msgstr "כבה את מסך ההתרסקות"
+msgstr "Disable Crash Dialog"
 
 #: libgnomeui/gnome-ui-init.c:123
 msgid "X display to use"
-msgstr "תצוגת X לשימוש"
+msgstr "X display to use"
 
 #: libgnomeui/gnome-ui-init.c:123
 msgid "DISPLAY"
-msgstr "תצוגה"
+msgstr "DISPLAY"
 
 #: libgnomeui/gnome-ui-init.c:131
 msgid "GNOME GUI Library"
