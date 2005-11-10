@@ -1,3 +1,7 @@
+2005-11-10  Simos Xenitellis  <simos@gnome.org>
+
+	* configure.in: Added Tatar in ALL_LINGUAS.
+
 2005-10-07  Nate Nielsen  <nielsen@memberwebs.com>
 
 	* libgnomeui/gnome-password-dialog.c: (dialog_show_callback)
