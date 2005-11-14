@@ -1051,6 +1051,7 @@ char *
 gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 {
 	const char *text;
+	char *sys_text;
 	char *file;
 
 	g_return_val_if_fail (fentry != NULL, NULL);
@@ -1062,7 +1063,13 @@ gnome_file_entry_get_full_path(GnomeFileEntry *fentry, gboolean file_must_exist)
 	if (text == NULL || text[0] == '\0')
 		return NULL;
 
-	file = _gnome_file_entry_expand_filename (text, fentry->default_path);
+	sys_text = g_filename_from_utf8 (text, -1, NULL, NULL, NULL);
+	if (sys_text == NULL)
+		return NULL;
+	
+	file = _gnome_file_entry_expand_filename (sys_text, fentry->default_path);
+	g_free (sys_text);
+	
 	if (file == NULL)
 		return NULL;
 

@@ -1,3 +1,11 @@
+2005-11-14  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
+
+	* libgnomeui/gnome-file-entry.c: (gnome_file_entry_get_full_path):
+	
+	Convert text from entry to filename encoding before
+	returning it. Patch from Yydzero <yandong.yao@sun.com>,
+	bug #321144.
+
 2005-11-10  Simos Xenitellis  <simos@gnome.org>
 
 	* configure.in: Added Tatar in ALL_LINGUAS.
