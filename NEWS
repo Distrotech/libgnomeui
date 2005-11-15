@@ -1,3 +1,31 @@
+libgnomeui 2.13.0
+-----------------
+
+* Fix a crash in gnomefileentry (Petr Mladek) [#315549]
+* Fix a mem leak (Kjartan)
+* Skip hidden pages in GnomeDruid (Ricardo Fernández Pascual) [#89145]
+* Remove useless check and warning about (Jens Elkner) [#118532]
+* Don't use gnome-keyring on Win32 (Tor Lillqvist)
+* Add support for GOption argument parsing (Pawel Sliwowski, chpe) [#307312]
+* Focus the first non-empty field in the password dialog (Nate Nielsen) [#318026]
+* Convert text from the file entry to filename encoding before returning it. 
+  Patch from Yydzero <yandong.yao@sun.com>, [#321144]
+
+* Translation updates:
+	* Mahay Alam Khan (bn)
+	* Miloslav Trmac (cs)
+	* Marie Lund (da)
+	* Adam Weinberger (en_CA)
+	* Francisco Javier F. Serrador (es)
+	* Ivar Smolin (et)
+	* Ignacio Casal Quinteiro (gl)
+	* Reinout van Schouwen (nl)
+	* Marcel Telka (sk)
+	* Christian Rose (sv)
+	* Theppitak Karoonboonyanan (th)
+	* Albert Fazlí (tt)
+	* Funda Wang (zh_CN)
+
 libgnomeui 2.12.0
 -----------------
 
