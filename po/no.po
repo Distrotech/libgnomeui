@@ -1,13 +1,13 @@
 # Norwegian translation of libgnomeui (bokmål dialect).
 # Copyright (C) 1998-2003 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@gnome.org>, 1998-2003.
+# Kjartan Maraas <kmaraas@gnome.org>, 1998-2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.5.0\n"
+"Project-Id-Version: libgnomeui 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-24 16:58+0200\n"
-"PO-Revision-Date: 2005-07-24 17:02+0200\n"
+"POT-Creation-Date: 2005-11-15 12:41+0100\n"
+"PO-Revision-Date: 2005-11-15 12:44+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -30,22 +30,22 @@ msgstr "Avkom-oppføring 2"
 msgid "Hint for item 2"
 msgstr "Hint for oppføring 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:829
+#: ../file-chooser/gtkfilesystemgnomevfs.c:826
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s er en lenke til noe som ikke er en mappe"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:840
+#: ../file-chooser/gtkfilesystemgnomevfs.c:837
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s er en lenke uten mål"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:955
+#: ../file-chooser/gtkfilesystemgnomevfs.c:952
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s er ikke en mappe"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1203
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1200
 msgid "File System"
 msgstr "Filsystem"
 
@@ -601,23 +601,23 @@ msgstr "_Innhold"
 msgid "View help for this application"
 msgstr "Vis hjelp for denne applikasjonen"
 
-#: ../libgnomeui/gnome-app-helper.c:2570
+#: ../libgnomeui/gnome-app-helper.c:2574
 msgid "Text Below Icons"
 msgstr "Tekst under ikoner"
 
-#: ../libgnomeui/gnome-app-helper.c:2571
+#: ../libgnomeui/gnome-app-helper.c:2575
 msgid "Priority Text Beside Icons"
 msgstr "Prioritetstekst ved siden av ikoner"
 
-#: ../libgnomeui/gnome-app-helper.c:2572
+#: ../libgnomeui/gnome-app-helper.c:2576
 msgid "Icons Only"
 msgstr "Kun ikoner"
 
-#: ../libgnomeui/gnome-app-helper.c:2573
+#: ../libgnomeui/gnome-app-helper.c:2577
 msgid "Text Only"
 msgstr "Kun tekst"
 
-#: ../libgnomeui/gnome-app-helper.c:2634
+#: ../libgnomeui/gnome-app-helper.c:2638
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Bruk forvalg for skrivebord (%s)"
@@ -730,31 +730,35 @@ msgstr "Du må logge in for å aksessere %s, domene %s\n"
 msgid "You must log in to access %s\n"
 msgstr "Du må logge in for å aksessere %s\n"
 
-#: ../libgnomeui/gnome-client.c:861
+#: ../libgnomeui/gnome-client.c:877 ../libgnomeui/gnome-client.c:891
 msgid "Specify session management ID"
 msgstr "Spesifiser ID for sesjonskontroll"
 
-#: ../libgnomeui/gnome-client.c:861
+#: ../libgnomeui/gnome-client.c:877 ../libgnomeui/gnome-client.c:891
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:864
+#: ../libgnomeui/gnome-client.c:880 ../libgnomeui/gnome-client.c:895
 msgid "Specify prefix of saved configuration"
 msgstr "Spesifiser prefiks for lagret konfigurasjon"
 
-#: ../libgnomeui/gnome-client.c:864
+#: ../libgnomeui/gnome-client.c:880 ../libgnomeui/gnome-client.c:895
 msgid "PREFIX"
 msgstr "PREFIKS"
 
-#: ../libgnomeui/gnome-client.c:867
+#: ../libgnomeui/gnome-client.c:883 ../libgnomeui/gnome-client.c:899
 msgid "Disable connection to session manager"
 msgstr "Fjern forbindelse til sesjonsbehandler"
 
-#: ../libgnomeui/gnome-client.c:973
+#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1015
 msgid "Session management"
 msgstr "Sesjonshåndtering"
 
-#: ../libgnomeui/gnome-client.c:2473
+#: ../libgnomeui/gnome-client.c:1016
+msgid "Show session management options"
+msgstr "Vis alternativer for sesjonshåndtering"
+
+#: ../libgnomeui/gnome-client.c:2550
 msgid "Cancel Logout"
 msgstr "Avbryt utlogging"
 
@@ -947,19 +951,19 @@ msgstr "Bakgrunnsfarge for logo satt"
 msgid "Logo Background color is set"
 msgstr "Bakgrunnsfarge for logo er satt"
 
-#: ../libgnomeui/gnome-druid.c:150
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show Finish"
 msgstr "Vis Fullfør"
 
-#: ../libgnomeui/gnome-druid.c:151
+#: ../libgnomeui/gnome-druid.c:155
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Vis «Fullfør»-knappen i stedet for «Neste»-knappen"
 
-#: ../libgnomeui/gnome-druid.c:158
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show Help"
 msgstr "Vis Hjelp"
 
-#: ../libgnomeui/gnome-druid.c:159
+#: ../libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
 msgstr "Vis «Hjelp»-knappen"
 
@@ -1276,43 +1280,43 @@ msgstr ""
 "Ikonvelgerdialog. Du kan bruke denne egenskapen for å finne GtkDialog hvis "
 "du trenger å endre eller spørre på noen av egenskapene."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:985
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:988
 msgid "No Icon"
 msgstr "Uten ikon"
 
-#: ../libgnomeui/gnome-icon-entry.c:755
+#: ../libgnomeui/gnome-icon-entry.c:758
 msgid "Icon selection dialog"
 msgstr "Dialog for ikonvalg"
 
-#: ../libgnomeui/gnome-icon-entry.c:756
+#: ../libgnomeui/gnome-icon-entry.c:759
 msgid "This dialog box lets you select an icon."
 msgstr "Denne dialogen lar deg velge et ikon."
 
-#: ../libgnomeui/gnome-icon-entry.c:762
+#: ../libgnomeui/gnome-icon-entry.c:765
 msgid "Icon selector"
 msgstr "Ikonvalg"
 
-#: ../libgnomeui/gnome-icon-entry.c:763
+#: ../libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "Vennligst velg ikonet du ønsker."
 
-#: ../libgnomeui/gnome-icon-entry.c:988
+#: ../libgnomeui/gnome-icon-entry.c:991
 msgid "Icon Selector"
 msgstr "Ikonvalg"
 
-#: ../libgnomeui/gnome-icon-entry.c:989
+#: ../libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
 msgstr "Denne knappen vil åpne et vindu som lar deg velge et ikon."
 
-#: ../libgnomeui/gnome-icon-entry.c:1009
+#: ../libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "Bla gjennom"
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1015
 msgid "Icon path"
 msgstr "Ikonsti"
 
-#: ../libgnomeui/gnome-icon-entry.c:1013
+#: ../libgnomeui/gnome-icon-entry.c:1016
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1353,35 +1357,35 @@ msgstr "Spørsmål"
 msgid "Message"
 msgstr "Beskjed"
 
-#: ../libgnomeui/gnome-password-dialog.c:252
+#: ../libgnomeui/gnome-password-dialog.c:269
 msgid "_Username:"
 msgstr "Br_ukernavn:"
 
-#: ../libgnomeui/gnome-password-dialog.c:254
+#: ../libgnomeui/gnome-password-dialog.c:271
 msgid "_Domain:"
 msgstr "_Domene:"
 
-#: ../libgnomeui/gnome-password-dialog.c:256
+#: ../libgnomeui/gnome-password-dialog.c:273
 msgid "_Password:"
 msgstr "_Passord:"
 
-#: ../libgnomeui/gnome-password-dialog.c:310
+#: ../libgnomeui/gnome-password-dialog.c:346
 msgid "Co_nnect"
 msgstr "Ko_ble til"
 
-#: ../libgnomeui/gnome-password-dialog.c:331
+#: ../libgnomeui/gnome-password-dialog.c:367
 msgid "Connect _anonymously"
 msgstr "Koble til _anonymt"
 
-#: ../libgnomeui/gnome-password-dialog.c:336
+#: ../libgnomeui/gnome-password-dialog.c:372
 msgid "Connect as u_ser:"
 msgstr "Koble til som br_uker:"
 
-#: ../libgnomeui/gnome-password-dialog.c:434
+#: ../libgnomeui/gnome-password-dialog.c:470
 msgid "_Remember password for this session"
 msgstr "Husk passo_rdet for denne sesjonen"
 
-#: ../libgnomeui/gnome-password-dialog.c:436
+#: ../libgnomeui/gnome-password-dialog.c:472
 msgid "Save password in _keyring"
 msgstr "Lagre passord på nø_kkelring"
 
@@ -1465,30 +1469,34 @@ msgstr "Av-indenter"
 msgid "About"
 msgstr "Om"
 
-#: ../libgnomeui/gnome-ui-init.c:120
+#: ../libgnomeui/gnome-ui-init.c:129 ../libgnomeui/gnome-ui-init.c:138
 msgid "Disable Crash Dialog"
 msgstr "Deaktiver krasjdialog"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:131
 msgid "X display to use"
 msgstr "X-display som skal brukes"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:131
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:130
+#: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:156
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI-bibliotek"
 
+#: ../libgnomeui/gnome-ui-init.c:157
+msgid "Show GNOME GUI options"
+msgstr "Vis alternativer for GNOME brukergrensesnitt"
+
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:711
+#: ../libgnomeui/gnome-ui-init.c:753
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flere segmenteringsfeil oppstod; kan ikke vise feildialogen\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:725
+#: ../libgnomeui/gnome-ui-init.c:767
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1534,15 +1542,15 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Bruk: gnome_segv2 appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:153
+#: ../libgnomeui/gnome_segv.c:154
 msgid "_Restart Application"
 msgstr "Sta_rt applikasjonen på nytt"
 
-#: ../libgnomeui/gnome_segv.c:165
+#: ../libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
 msgstr "_Informer utviklerene"
 
-#: ../libgnomeui/gnome_segv.c:176
+#: ../libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Feilsøk"
 
