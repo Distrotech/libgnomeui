@@ -38,6 +38,7 @@
 #define ICON_NAME_SOCKET                "gnome-fs-socket"
 
 #define ICON_NAME_MIME_PREFIX           "gnome-mime-"
+#define ICON_NAME_MIME_SUFFIX           "-x-generic"
 
 #define SELF_THUMBNAIL_SIZE_THRESHOLD   32768
 
@@ -137,7 +138,7 @@ make_mime_name (const char *mime_type)
   while ((p = strchr(mime_type_without_slashes, '/')) != NULL)
     *p = '-';
   
-  icon_name = g_strconcat (ICON_NAME_MIME_PREFIX, mime_type_without_slashes, NULL);
+  icon_name = g_strdup (mime_type_without_slashes);
   g_free (mime_type_without_slashes);
   
   return icon_name;
@@ -164,13 +165,60 @@ make_generic_mime_name (const char *mime_type, gboolean embedd_text)
       if (strcmp ("text", generic_mime_type) == 0 && embedd_text)
 	icon_name = g_strdup ("gnome-fs-regular");
       else
-	icon_name = g_strconcat (ICON_NAME_MIME_PREFIX, generic_mime_type, NULL);
+	icon_name = g_strconcat (generic_mime_type, ICON_NAME_MIME_SUFFIX, NULL);
     }
   g_free (generic_mime_type);
   
   return icon_name;
 }
 
+static char *
+make_compat_mime_name (const char *mime_type, gboolean embedd_text)
+{
+  char *compat_mime_type, *icon_name;
+  char *p;
+
+  
+  if (mime_type == NULL) {
+    return NULL;
+  }
+
+  compat_mime_type = make_mime_name (mime_type);
+
+  icon_name = g_strconcat (ICON_NAME_MIME_PREFIX, compat_mime_type, NULL);
+  g_free (compat_mime_type);
+  
+  return icon_name;
+}
+
+
+static char *
+make_compat_generic_mime_name (const char *mime_type, gboolean embedd_text)
+{
+  char *generic_mime_type, *icon_name;
+  char *p;
+
+  
+  if (mime_type == NULL) {
+    return NULL;
+  }
+
+  generic_mime_type = g_strdup (mime_type);
+  
+  icon_name = NULL;
+  if ((p = strchr(generic_mime_type, '/')) != NULL)
+    {
+      *p = 0;
+
+      if (strcmp ("text", generic_mime_type) == 0 && embedd_text)
+	icon_name = g_strdup ("gnome-fs-regular");
+      else
+	icon_name = g_strconcat (ICON_NAME_PREFIX, generic_mime_type, NULL);
+    }
+  g_free (generic_mime_type);
+  
+  return icon_name;
+}
 
 static gboolean
 mimetype_supported_by_gdk_pixbuf (const char *mime_type)
@@ -327,6 +375,16 @@ gnome_icon_lookup (GtkIconTheme               *icon_theme,
       g_free (mime_name);
       
       mime_name = make_generic_mime_name (mime_type, flags & GNOME_ICON_LOOKUP_FLAGS_EMBEDDING_TEXT);
+      if (mime_name && gtk_icon_theme_has_icon (icon_theme, mime_name))
+	return mime_name;
+      g_free (mime_name);
+
+      mime_name = make_compat_mime_name (mime_type, flags & GNOME_ICON_LOOKUP_FLAGS_EMBEDDING_TEXT);
+      if (mime_name && gtk_icon_theme_has_icon (icon_theme, mime_name))
+	return mime_name;
+      g_free (mime_name);
+
+      mime_name = make_compat_generic_mime_name (mime_type, flags & GNOME_ICON_LOOKUP_FLAGS_EMBEDDING_TEXT);
       if (mime_name && gtk_icon_theme_has_icon (icon_theme, mime_name))
 	return mime_name;
       g_free (mime_name);

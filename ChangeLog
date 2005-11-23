@@ -1,3 +1,17 @@
+2005-11-23  Rodney Dawes  <dobey@novell.com>
+
+	* libgnomeui/gnome-icon-lookup.c: Define a suffix for the name spec
+	(make_mime_name): Use the straight mime type by default
+	(make_generic_mime_name): Use the generic part, with the fallback
+	generic suffix "-x-generic" from the name spec
+	(make_compat_mime_name): Method for using the compat method on gnome
+	for the specific mime type icons
+	(make_compat_generic_mime_name): Method for using the compat method
+	for the generic type icons
+	(gnome_icon_lookup): Add calls to the new compat methods so that we
+	don't break backward compatibility with themes that don't follow the
+	naming spec yet
+	
 2005-11-14  Nickolay V. Shmyrev  <nshmyrev@yandex.ru>
 
 	* libgnomeui/gnome-file-entry.c: (gnome_file_entry_get_full_path):
