@@ -1,5 +1,10 @@
 2005-11-23  Rodney Dawes  <dobey@novell.com>
 
+	* libgnomeui/gnome-icon-lookup.c (make_compat_generic_mime_name): Fix
+	typo in use of ICON_NAME_MIME_PREFIX
+
+2005-11-23  Rodney Dawes  <dobey@novell.com>
+
 	* libgnomeui/gnome-icon-lookup.c: Define a suffix for the name spec
 	(make_mime_name): Use the straight mime type by default
 	(make_generic_mime_name): Use the generic part, with the fallback

@@ -213,7 +213,7 @@ make_compat_generic_mime_name (const char *mime_type, gboolean embedd_text)
       if (strcmp ("text", generic_mime_type) == 0 && embedd_text)
 	icon_name = g_strdup ("gnome-fs-regular");
       else
-	icon_name = g_strconcat (ICON_NAME_PREFIX, generic_mime_type, NULL);
+	icon_name = g_strconcat (ICON_NAME_MIME_PREFIX, generic_mime_type, NULL);
     }
   g_free (generic_mime_type);
   
