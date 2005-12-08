@@ -817,6 +817,7 @@ gnome_entry_save_history (GnomeEntry *gentry)
 	gentry->_priv->saving_history = TRUE;
 	gconf_client_set_list (gentry->_priv->gconf_client, key, GCONF_VALUE_STRING, gconf_items, NULL);
 
+	g_slist_free (gconf_items);
 	g_free (key);
 }
 
