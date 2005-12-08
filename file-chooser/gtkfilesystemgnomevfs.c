@@ -622,7 +622,6 @@ static void
 load_dir (GtkFileFolderGnomeVFS *folder_vfs)
 {
   int num_items;
-  GnomeVFSFileInfoOptions vfs_options;
 
   profile_start ("start", folder_vfs->uri);
 
@@ -638,11 +637,6 @@ load_dir (GtkFileFolderGnomeVFS *folder_vfs)
     num_items = ITEMS_PER_LOCAL_NOTIFICATION;
   else
     num_items = ITEMS_PER_REMOTE_NOTIFICATION;
-
-  if (folder_vfs->is_afs_or_net)
-    vfs_options = GNOME_VFS_FILE_INFO_DEFAULT;
-  else
-    vfs_options = get_options (folder_vfs->types);
 
   gnome_vfs_async_load_directory (&folder_vfs->async_handle,
 				  folder_vfs->uri,
