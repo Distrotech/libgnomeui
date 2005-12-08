@@ -879,14 +879,7 @@ static void
 gnome_icon_text_item_destroy (GtkObject *object)
 {
 	GnomeIconTextItem *iti = GNOME_ICON_TEXT_ITEM (object);
-	GnomeCanvasItem *item = GNOME_CANVAS_ITEM (object);
 	GnomeIconTextItemPrivate *priv = iti->_priv;
-
-	gnome_canvas_request_redraw (item->canvas,
-				     ROUND (item->x1),
-				     ROUND (item->y1),
-				     ROUND (item->x2),
-				     ROUND (item->y2));
 
 	if (iti->text && iti->is_text_allocated) {
 		g_free (iti->text);

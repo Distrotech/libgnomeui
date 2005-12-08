@@ -1,5 +1,13 @@
 2005-12-08  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-icon-item.c (gnome_icon_text_item_destroy):
+	Don't request a redraw on the canvas here since that's already
+	done in gnome_canvas_item_dispose(). Fixes a GnomeCanvas-CRITICAL
+	warning in evolution, nautilus and possibly others. Closes
+	bug #323521.
+
+2005-12-08  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* file-chooser/gtkfilesystemgnomevfs.c (load_dir): Remove some
 	stale code.
 
