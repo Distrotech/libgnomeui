@@ -1,5 +1,11 @@
 2005-12-08  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-icon-entry.c (gnome_icon_text_item_destroy):
+	Fix critical warnings from the canvas. Merge from HEAD. Closes
+	bug 323521.
+
+2005-12-08  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* file-chooser/gtkfilesystemgnomevfs.c: (load_dir): Remove some
 	stale code.
 
