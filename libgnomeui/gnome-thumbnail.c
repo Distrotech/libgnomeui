@@ -983,7 +983,7 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
 	pixbuf = _gnome_thumbnail_load_scaled_jpeg (uri, size, size);
       else
 #endif
-	pixbuf = gnome_gdk_pixbuf_new_from_uri (uri);
+	pixbuf = gnome_gdk_pixbuf_new_from_uri_at_scale (uri, size, size, TRUE);
     }
       
   if (pixbuf == NULL)

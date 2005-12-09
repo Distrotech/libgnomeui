@@ -1,3 +1,13 @@
+2005-12-09  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-vfs-util.[ch]:
+	Add gnome_gdk_pixbuf_new_from_uri_at_scale
+
+	* libgnomeui/gnome-thumbnail.c:
+	Use gnome_gdk_pixbuf_new_from_uri_at_scale
+
+	Patch from Victor STINNER (#307885)
+
 2005-12-08  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-icon-item.c (gnome_icon_text_item_destroy):

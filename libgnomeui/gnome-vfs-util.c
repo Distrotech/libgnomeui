@@ -57,6 +57,13 @@ struct GnomeGdkPixbufAsyncHandle {
     char buffer[LOAD_BUFFER_SIZE];
 };
 
+typedef struct {
+    gint width;
+    gint height;
+    gboolean preserve_aspect_ratio;
+} SizePrepareContext;
+
+
 static void file_opened_callback (GnomeVFSAsyncHandle      *vfs_handle,
                                   GnomeVFSResult            result,
                                   gpointer                  callback_data);
@@ -73,9 +80,83 @@ static void load_done            (GnomeGdkPixbufAsyncHandle *handle,
                                   GnomeVFSResult            result,
                                   GdkPixbuf                *pixbuf);
 
-/* Loading a GdkPixbuf with a URI. */
+/**
+ * gnome_gdk_pixbuf_new_from_uri:
+ * @uri: the uri of an image
+ * 
+ * Loads a GdkPixbuf from the image file @uri points to
+ * 
+ * Return value: The pixbuf, or NULL on error
+ **/
 GdkPixbuf *
 gnome_gdk_pixbuf_new_from_uri (const char *uri)
+{
+	return gnome_gdk_pixbuf_new_from_uri_at_scale(uri, -1, -1, TRUE);
+}
+
+static void
+size_prepared_cb (GdkPixbufLoader *loader, 
+		  int              width,
+		  int              height,
+		  gpointer         data)
+{
+	SizePrepareContext *info = data;
+
+	g_return_if_fail (width > 0 && height > 0);
+
+	if (info->preserve_aspect_ratio && 
+	    (info->width > 0 || info->height > 0)) {
+		if (info->width < 0)
+		{
+			width = width * (double)info->height/(double)height;
+			height = info->height;
+		}
+		else if (info->height < 0)
+		{
+			height = height * (double)info->width/(double)width;
+			width = info->width;
+		}
+		else if ((double)height * (double)info->width >
+			 (double)width * (double)info->height) {
+			width = 0.5 + (double)width * (double)info->height / (double)height;
+			height = info->height;
+		} else {
+			height = 0.5 + (double)height * (double)info->width / (double)width;
+			width = info->width;
+		}
+	} else {
+		if (info->width > 0)
+			width = info->width;
+		if (info->height > 0)
+			height = info->height;
+	}
+	
+	gdk_pixbuf_loader_set_size (loader, width, height);
+}
+
+/**
+ * gnome_gdk_pixbuf_new_from_uri:
+ * @uri: the uri of an image
+ * @width: The width the image should have or -1 to not constrain the width
+ * @height: The height the image should have or -1 to not constrain the height
+ * @preserve_aspect_ratio: %TRUE to preserve the image's aspect ratio
+ * 
+ * Loads a GdkPixbuf from the image file @uri points to, scaling it to the
+ * desired size. If you pass -1 for @width or @height then the value
+ * specified in the file will be used.
+ *
+ * When preserving aspect ratio, if both height and width are set the size
+ * is picked such that the scaled image fits in a width * height rectangle.
+ * 
+ * Return value: The loaded pixbuf, or NULL on error
+ *
+ * Since: 2.14
+ **/
+GdkPixbuf *
+gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
+					gint        width,
+					gint        height,
+					gboolean    preserve_aspect_ratio)
 {
     GnomeVFSResult result;
     GnomeVFSHandle *handle;
@@ -83,6 +164,7 @@ gnome_gdk_pixbuf_new_from_uri (const char *uri)
     GnomeVFSFileSize bytes_read;
     GdkPixbufLoader *loader;
     GdkPixbuf *pixbuf;	
+    SizePrepareContext info;
 
     g_return_val_if_fail (uri != NULL, NULL);
 
@@ -94,6 +176,12 @@ gnome_gdk_pixbuf_new_from_uri (const char *uri)
     }
 
     loader = gdk_pixbuf_loader_new ();
+    if (1 <= width || 1 <= height) {
+        info.width = width;
+        info.height = height;
+        info.preserve_aspect_ratio = preserve_aspect_ratio;        
+        g_signal_connect (loader, "size-prepared", G_CALLBACK (size_prepared_cb), &info);
+    }
     while (1) {
 	result = gnome_vfs_read (handle,
 				 buffer,

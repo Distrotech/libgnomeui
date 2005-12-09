@@ -56,6 +56,14 @@ typedef void (*GnomeGdkPixbufDoneCallback) (GnomeGdkPixbufAsyncHandle *handle,
 GdkPixbuf *
 gnome_gdk_pixbuf_new_from_uri        (const char                 *uri);
 
+/* Loading a GdkPixbuf with a URI. The image will be scaled to fit in the
+ * requested size. */
+GdkPixbuf *
+gnome_gdk_pixbuf_new_from_uri_at_scale (const char                 *uri,
+                                       gint                        width,
+                                       gint                        height,
+                                       gboolean                    preserve_aspect_ratio);
+
 /* Same thing async. */
 GnomeGdkPixbufAsyncHandle *
 gnome_gdk_pixbuf_new_from_uri_async  (const char                 *uri,
