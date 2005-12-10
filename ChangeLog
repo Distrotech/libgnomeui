@@ -1,3 +1,8 @@
+2005-12-10  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-file-entry.c (build_filename): More
+	encoding fixes. Patch from Yydzero <yandong.yao@sun.com>.
+
 2005-12-09  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-vfs-util.[ch]:

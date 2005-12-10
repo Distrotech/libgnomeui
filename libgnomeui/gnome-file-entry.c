@@ -532,6 +532,7 @@ static gchar *
 build_filename (GnomeFileEntry *fentry)
 {
 	const char *text;
+	char *locale_text;
 	char *file;
 	int len;
 
@@ -544,7 +545,13 @@ build_filename (GnomeFileEntry *fentry)
 	if (text == NULL || text[0] == '\0')
 		return g_strconcat (fentry->default_path, G_DIR_SEPARATOR_S, NULL);
 
-	file = _gnome_file_entry_expand_filename (text, fentry->default_path);
+	locale_text = g_filename_from_utf8 (text, -1, NULL, NULL, NULL);
+	if (locale_text == NULL)
+		return g_strconcat (fentry->default_path, G_DIR_SEPARATOR_S, NULL);	
+	
+	file = _gnome_file_entry_expand_filename (locale_text, fentry->default_path);
+	g_free (locale_text);
+	
 	if (file == NULL)
 		return g_strconcat (fentry->default_path, G_DIR_SEPARATOR_S, NULL);
 
