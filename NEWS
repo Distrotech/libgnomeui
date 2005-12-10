@@ -1,6 +1,13 @@
 libgnomeui 2.13.0
 -----------------
 
+* Support the icon theme name spec (Dobey)
+* Remove some stale code in the file selector (Kjartan)
+* Fix a leak in gnome_entry_save_history() (Paolo Borelli) [ 
+* Fix a GnomeCanvas-CRITICAL warning in gnome-icon-item (Federico)
+  [#323521]
+* Scale images before doing a thumbnail to avoid
+  eating up all ram on very large images (Victor STINNER) [#307885] 
 * Fix a crash in gnomefileentry (Petr Mladek) [#315549]
 * Fix a mem leak (Kjartan)
 * Skip hidden pages in GnomeDruid (Ricardo Fernández Pascual) [#89145]
