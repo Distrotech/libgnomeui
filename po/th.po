@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-06 20:43+0700\n"
+"POT-Creation-Date: 2005-12-12 19:09+0100\n"
 "PO-Revision-Date: 2005-11-06 20:44+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -32,32 +32,31 @@ msgstr "รายการลูกที่ 2"
 msgid "Hint for item 2"
 msgstr "ข้อแนะนำสำหรับรายการที่ 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:826
+#: file-chooser/gtkfilesystemgnomevfs.c:820
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s เป็นลิงก์เชื่อมไปยังสิ่งที่ไม่ใช่โฟลเดอร์"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:837
+#: file-chooser/gtkfilesystemgnomevfs.c:831
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s เป็นลิงก์ที่ไม่ระบุที่อยู่ปลายทาง"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:952
+#: file-chooser/gtkfilesystemgnomevfs.c:946
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ไม่ใช่โฟลเดอร์"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1200
+#: file-chooser/gtkfilesystemgnomevfs.c:1194
 msgid "File System"
 msgstr "ระบบแฟ้ม"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1958
+#: file-chooser/gtkfilesystemgnomevfs.c:1952
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "บันทึกบุ๊กมาร์กไม่สำเร็จ (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217
-#: file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "เกิดข้อผิดพลาดขณะอ่านแฟ้ม '%s': %s"
@@ -83,6 +82,7 @@ msgid "Error cannot find file id '%s'"
 msgstr "เกิดข้อผิดพลาด หาแฟ้ม '%s' ไม่พบ"
 
 #: file-chooser/sucky-desktop-item.c:842
+#, c-format
 msgid "No filename to save to"
 msgstr "ไม่มีชื่อแฟ้มที่จะใช้บันทึก"
 
@@ -92,18 +92,22 @@ msgid "Starting %s"
 msgstr "กำลังเรียก %s"
 
 #: file-chooser/sucky-desktop-item.c:2036
+#, c-format
 msgid "No URL to launch"
 msgstr "ไม่มี URL สำหรับเรียกโปรแกรม"
 
 #: file-chooser/sucky-desktop-item.c:2046
+#, c-format
 msgid "Not a launchable item"
 msgstr "ไม่ใช่รายการที่สามารถเรียกโปรแกรมได้"
 
 #: file-chooser/sucky-desktop-item.c:2056
+#, c-format
 msgid "No command (Exec) to launch"
 msgstr "ไม่มีคำสั่งที่จะใช้เรียกโปรแกรม"
 
 #: file-chooser/sucky-desktop-item.c:2069
+#, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "คำสั่งที่ใช้เรียกโปรแกรมใช้ไม่ได้"
 
@@ -226,8 +230,7 @@ msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "เครดิตสำหรับผู้แปล ควรตั้งให้เป็นข้อความที่แปลได้"
 
-#: libgnomeui/gnome-about.c:440
-#: libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:440 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "โลโก้"
 
@@ -242,7 +245,6 @@ msgstr "เกี่ยวกับ %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
-#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "แ_ฟ้ม"
 
@@ -300,7 +302,6 @@ msgid "_Game"
 msgstr "เ_กม"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
-#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_วิธีใช้"
 
@@ -491,11 +492,11 @@ msgstr "ปรับแต่งโปรแกรม"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "เกี่ยวกับโปรแกรมนี้"
 
@@ -522,7 +523,7 @@ msgstr "สร้างหน้าต่างใหม่"
 msgid "_Close This Window"
 msgstr "ปิ_ดหน้าต่างนี้"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "ปิดหน้าต่างปัจจุบัน"
 
@@ -696,6 +697,7 @@ msgid "Level of user activity required."
 msgstr "ระดับการโต้ตอบกับผู้ใช้ที่ต้องใช้"
 
 #: libgnomeui/gnome-authentication-manager.c:70
+#, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "พร็อกซี HTTP ของคุณบังคับว่าคุณต้องเข้าระบบ\n"
 
@@ -1076,23 +1078,23 @@ msgstr "การกระทำของ GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "ชนิดของการกระทำที่จะให้ตัวเลือกแฟ้มทำ"
 
-#: libgnomeui/gnome-file-entry.c:635 libgnomeui/gnome-file-entry.c:669
+#: libgnomeui/gnome-file-entry.c:642 libgnomeui/gnome-file-entry.c:676
 msgid "Select file"
 msgstr "เลือกแฟ้ม"
 
-#: libgnomeui/gnome-file-entry.c:795
+#: libgnomeui/gnome-file-entry.c:802
 msgid "Path"
 msgstr "พาธ"
 
-#: libgnomeui/gnome-file-entry.c:795
+#: libgnomeui/gnome-file-entry.c:802
 msgid "Path to file"
 msgstr "พาธไปยังแฟ้ม"
 
-#: libgnomeui/gnome-file-entry.c:822
+#: libgnomeui/gnome-file-entry.c:829
 msgid "_Browse..."
 msgstr "เ_รียกดู..."
 
-#: libgnomeui/gnome-file-entry.c:823
+#: libgnomeui/gnome-file-entry.c:830
 msgid "Pop up a file selector to choose a file"
 msgstr "แสดงหน้าต่างสำหรับเลือกแฟ้ม"
 
@@ -1387,8 +1389,7 @@ msgstr "แสดงตัวอย่าง"
 msgid "Whether the pixmap entry should have a preview."
 msgstr "กำหนดว่าวิดเจ็ตเลือกภาพควรแสดงภาพตัวอย่างด้วยหรือไม่"
 
-#: libgnomeui/gnome-pixmap-entry.c:189
-#: libgnomeui/gnome-pixmap-entry.c:479
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "ไม่มีรูป"
 
@@ -1543,9 +1544,8 @@ msgstr "แ_จ้งผู้เขียน"
 msgid "_Debug"
 msgstr "_ดีบัก"
 
-#: test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "ออกจากการทดสอบ"
+#~ msgid "Exit the test"
+#~ msgstr "ออกจากการทดสอบ"
 
 #~ msgid " domain %s"
 #~ msgstr " โดเมน %s"

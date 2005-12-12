@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-25 14:06+0200\n"
+"POT-Creation-Date: 2005-12-12 19:09+0100\n"
 "PO-Revision-Date: 2005-10-25 21:30+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -16,367 +16,368 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../demos/mdi_demo.c:128
+#: demos/mdi_demo.c:128
 msgid "Child Item 1"
 msgstr "子项目 1"
 
-#: ../demos/mdi_demo.c:129
+#: demos/mdi_demo.c:129
 msgid "Hint for item 1"
 msgstr "项目 1 的提示"
 
-#: ../demos/mdi_demo.c:131
+#: demos/mdi_demo.c:131
 msgid "Child Item 2"
 msgstr "子项目 2"
 
-#: ../demos/mdi_demo.c:132
+#: demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "项目 2 的提示"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:826
+#: file-chooser/gtkfilesystemgnomevfs.c:820
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s 是指向非文件夹的链接"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:837
+#: file-chooser/gtkfilesystemgnomevfs.c:831
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s 是没有目的位置的链接"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:952
+#: file-chooser/gtkfilesystemgnomevfs.c:946
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s 不是文件夹"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1200
+#: file-chooser/gtkfilesystemgnomevfs.c:1194
 msgid "File System"
 msgstr "文件系统"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1958
+#: file-chooser/gtkfilesystemgnomevfs.c:1952
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "书签保存失败(%s)"
 
-#: ../file-chooser/sucky-desktop-item.c:217
-#: ../file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "读取文件“%s”出错：%s"
 
-#: ../file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:285
 #, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "回绕文件“%s”出错：%s"
 
-#: ../file-chooser/sucky-desktop-item.c:384
-#: ../file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:384
+#: file-chooser/sucky-desktop-item.c:3702
 msgid "No name"
 msgstr "无名"
 
-#: ../file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:620
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "文件“%s”不是普通文件或目录。"
 
-#: ../file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:796
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr "查找文件 ID“%s”出错"
 
-#: ../file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:842
+#, c-format
 msgid "No filename to save to"
 msgstr "没有要保存到的文件名"
 
-#: ../file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1797
 #, c-format
 msgid "Starting %s"
 msgstr "启动 %s"
 
-#: ../file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2036
+#, c-format
 msgid "No URL to launch"
 msgstr "没有要调用的 URL"
 
-#: ../file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2046
+#, c-format
 msgid "Not a launchable item"
 msgstr "不是可调用的项目"
 
-#: ../file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2056
+#, c-format
 msgid "No command (Exec) to launch"
 msgstr "没有要调用的命令(可执行文件)"
 
-#: ../file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2069
+#, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "调用的命令(可执行文件)无效"
 
-#: ../file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3759
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "未知编码：%s"
 
-#: ../file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:3990
 #, c-format
 msgid "Error writing file '%s': %s"
 msgstr "写入文件“%s”出错：%s"
 
-#: ../file-chooser/testfilechooser.c:178
+#: file-chooser/testfilechooser.c:178
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "无法获取文件“%s”的信息：%s"
 
-#: ../file-chooser/testfilechooser.c:191
+#: file-chooser/testfilechooser.c:191
 #, c-format
 msgid "Failed to open file '%s': %s"
 msgstr "打开文件“%s”失败：%s"
 
-#: ../file-chooser/testfilechooser.c:230
+#: file-chooser/testfilechooser.c:230
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "装入图像“%s”失败：原因未知，可能是图像文件损坏"
 
-#: ../libgnomeui/gnome-about.c:199
+#: libgnomeui/gnome-about.c:199
 msgid "Credits"
 msgstr "致谢"
 
-#: ../libgnomeui/gnome-about.c:231
+#: libgnomeui/gnome-about.c:231
 msgid "Written by"
 msgstr "作者"
 
-#: ../libgnomeui/gnome-about.c:246
+#: libgnomeui/gnome-about.c:246
 msgid "Documented by"
 msgstr "文档"
 
-#: ../libgnomeui/gnome-about.c:261
+#: libgnomeui/gnome-about.c:261
 msgid "Translated by"
 msgstr "翻译"
 
-#: ../libgnomeui/gnome-about.c:324
+#: libgnomeui/gnome-about.c:324
 msgid "C_redits"
 msgstr "致谢(_R)"
 
-#: ../libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:379
 msgid "Program name"
 msgstr "程序名"
 
-#: ../libgnomeui/gnome-about.c:380
+#: libgnomeui/gnome-about.c:380
 msgid "The name of the program"
 msgstr "程序的名字"
 
-#: ../libgnomeui/gnome-about.c:387
+#: libgnomeui/gnome-about.c:387
 msgid "Program version"
 msgstr "程序版本"
 
-#: ../libgnomeui/gnome-about.c:388
+#: libgnomeui/gnome-about.c:388
 msgid "The version of the program"
 msgstr "程序的版本"
 
-#: ../libgnomeui/gnome-about.c:394
+#: libgnomeui/gnome-about.c:394
 msgid "Copyright string"
 msgstr "版权字符串"
 
-#: ../libgnomeui/gnome-about.c:395
+#: libgnomeui/gnome-about.c:395
 msgid "Copyright information for the program"
 msgstr "关于程序的版权信息"
 
-#: ../libgnomeui/gnome-about.c:402
+#: libgnomeui/gnome-about.c:402
 msgid "Comments string"
 msgstr "注释字符串"
 
-#: ../libgnomeui/gnome-about.c:403
+#: libgnomeui/gnome-about.c:403
 msgid "Comments about the program"
 msgstr "关于程序的注释"
 
-#: ../libgnomeui/gnome-about.c:409
+#: libgnomeui/gnome-about.c:409
 msgid "Authors"
 msgstr "作者"
 
-#: ../libgnomeui/gnome-about.c:410
+#: libgnomeui/gnome-about.c:410
 msgid "List of authors of the programs"
 msgstr "程序作者的列表"
 
-#: ../libgnomeui/gnome-about.c:412
+#: libgnomeui/gnome-about.c:412
 msgid "Author entry"
 msgstr "作者项"
 
-#: ../libgnomeui/gnome-about.c:413
+#: libgnomeui/gnome-about.c:413
 msgid "A single author entry"
 msgstr "单个作者项"
 
-#: ../libgnomeui/gnome-about.c:420
+#: libgnomeui/gnome-about.c:420
 msgid "Documenters"
 msgstr "文档编写者"
 
-#: ../libgnomeui/gnome-about.c:421
+#: libgnomeui/gnome-about.c:421
 msgid "List of people documenting the program"
 msgstr "程序文档的编写者列表"
 
-#: ../libgnomeui/gnome-about.c:423
+#: libgnomeui/gnome-about.c:423
 msgid "Documenter entry"
 msgstr "文档编写者项"
 
-#: ../libgnomeui/gnome-about.c:424
+#: libgnomeui/gnome-about.c:424
 msgid "A single documenter entry"
 msgstr "单个文档编写者项"
 
-#: ../libgnomeui/gnome-about.c:432
+#: libgnomeui/gnome-about.c:432
 msgid "Translator credits"
 msgstr "翻译者致谢"
 
-#: ../libgnomeui/gnome-about.c:433
+#: libgnomeui/gnome-about.c:433
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "译者的姓名。这个字符串应标为可以翻译"
 
-#: ../libgnomeui/gnome-about.c:440
-#: ../libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:440 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "徽标"
 
-#: ../libgnomeui/gnome-about.c:441
+#: libgnomeui/gnome-about.c:441
 msgid "A logo for the about box"
 msgstr "用于关于对话框的徽标"
 
-#: ../libgnomeui/gnome-about.c:520
+#: libgnomeui/gnome-about.c:520
 #, c-format
 msgid "About %s"
 msgstr "关于 %s"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
-#: ../test-gnome/testgnome.xml.h:5
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
 msgid "_File"
 msgstr "文件(_F)"
 
-#: ../libgnomeui/gnome-app-helper.c:83
+#: libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
 msgstr "文件(_F)/"
 
-#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "编辑(_E)"
 
-#: ../libgnomeui/gnome-app-helper.c:85
+#: libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
 msgstr "编辑(_E)/"
 
-#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "查看(_V)"
 
-#: ../libgnomeui/gnome-app-helper.c:87
+#: libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
 msgstr "查看(_V)/"
 
-#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "设置(_S)"
 
-#: ../libgnomeui/gnome-app-helper.c:89
+#: libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
 msgstr "设置(_S)/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "新建(_N)"
 
-#: ../libgnomeui/gnome-app-helper.c:91
+#: libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
 msgstr "新建(_N)/"
 
-#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "文件(_L)"
 
-#: ../libgnomeui/gnome-app-helper.c:93
+#: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
 msgstr "文件(_L)/"
 
-#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "窗口(_W)"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "游戏(_G)"
 
-#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
-#: ../test-gnome/testgnome.xml.h:6
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../libgnomeui/gnome-app-helper.c:97
+#: libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
 msgstr "窗口(_W)/"
 
 #. Open
-#: ../libgnomeui/gnome-app-helper.c:109
+#: libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
 msgstr "打开(_O)..."
 
-#: ../libgnomeui/gnome-app-helper.c:109
+#: libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
 msgstr "打开一个文件"
 
 #. Save
-#: ../libgnomeui/gnome-app-helper.c:114
+#: libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
 msgstr "保存(_S)"
 
-#: ../libgnomeui/gnome-app-helper.c:114
+#: libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
 msgstr "保存当前文件"
 
 #. Save As
-#: ../libgnomeui/gnome-app-helper.c:119
+#: libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
 msgstr "另存为(_A)..."
 
-#: ../libgnomeui/gnome-app-helper.c:120
+#: libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
 msgstr "以其它的名称保存当前文件"
 
 #. Revert
-#: ../libgnomeui/gnome-app-helper.c:125
+#: libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
 msgstr "还原(_R)"
 
-#: ../libgnomeui/gnome-app-helper.c:126
+#: libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
 msgstr "恢复为已保存的文件"
 
 #. Print
-#: ../libgnomeui/gnome-app-helper.c:131
+#: libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
 msgstr "打印(_P)..."
 
-#: ../libgnomeui/gnome-app-helper.c:131
+#: libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
 msgstr "打印当前文件"
 
 #. Print Setup
-#: ../libgnomeui/gnome-app-helper.c:136
+#: libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
 msgstr "打印设置(_E)..."
 
-#: ../libgnomeui/gnome-app-helper.c:137
+#: libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
 msgstr "设定您当前使用的打印机的页面设置"
 
 #. Close
-#: ../libgnomeui/gnome-app-helper.c:142
+#: libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
 msgstr "关闭(_C)"
 
-#: ../libgnomeui/gnome-app-helper.c:142
+#: libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
 msgstr "关闭当前文件"
 
 #. Exit
-#: ../libgnomeui/gnome-app-helper.c:147
+#: libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
 msgstr "退出(_Q)"
 
-#: ../libgnomeui/gnome-app-helper.c:147
+#: libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
 msgstr "退出应用程序"
 
@@ -384,93 +385,93 @@ msgstr "退出应用程序"
 #. * The "Edit" menu
 #.
 #. Cut
-#: ../libgnomeui/gnome-app-helper.c:155
+#: libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
 msgstr "剪切(_T)"
 
-#: ../libgnomeui/gnome-app-helper.c:155
+#: libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
 msgstr "剪切选定内容"
 
 #. 10
 #. Copy
-#: ../libgnomeui/gnome-app-helper.c:161
+#: libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
 msgstr "复制(_C)"
 
-#: ../libgnomeui/gnome-app-helper.c:161
+#: libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
 msgstr "复制选定内容"
 
 #. Paste
-#: ../libgnomeui/gnome-app-helper.c:166
+#: libgnomeui/gnome-app-helper.c:166
 msgid "_Paste"
 msgstr "粘贴(_P)"
 
-#: ../libgnomeui/gnome-app-helper.c:166
+#: libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
 msgstr "粘贴剪贴板中的内容"
 
 #. Clear
-#: ../libgnomeui/gnome-app-helper.c:171
+#: libgnomeui/gnome-app-helper.c:171
 msgid "C_lear"
 msgstr "清除(_L)"
 
-#: ../libgnomeui/gnome-app-helper.c:171
+#: libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
 msgstr "清除选定内容"
 
 #. Undo
-#: ../libgnomeui/gnome-app-helper.c:176
+#: libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
 msgstr "撤消(_U)"
 
-#: ../libgnomeui/gnome-app-helper.c:176
+#: libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
 msgstr "撤消上一次所作的操作"
 
 #. Redo
-#: ../libgnomeui/gnome-app-helper.c:181
+#: libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
 msgstr "重做(_R)"
 
-#: ../libgnomeui/gnome-app-helper.c:181
+#: libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
 msgstr "重做撤消的操作"
 
 #. Find
-#: ../libgnomeui/gnome-app-helper.c:186
+#: libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
 msgstr "查找(_F)..."
 
-#: ../libgnomeui/gnome-app-helper.c:186
+#: libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
 msgstr "搜索一个字符串"
 
 #. Find Again
-#: ../libgnomeui/gnome-app-helper.c:191
+#: libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
 msgstr "查找下一个(_X)"
 
-#: ../libgnomeui/gnome-app-helper.c:192
+#: libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
 msgstr "再次搜索相同的字符串"
 
 #. Replace
-#: ../libgnomeui/gnome-app-helper.c:197
+#: libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
 msgstr "替换(_E)..."
 
-#: ../libgnomeui/gnome-app-helper.c:197
+#: libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
 msgstr "替换字符串"
 
 #. Properties
-#: ../libgnomeui/gnome-app-helper.c:202
+#: libgnomeui/gnome-app-helper.c:202
 msgid "_Properties"
 msgstr "属性(_P)"
 
-#: ../libgnomeui/gnome-app-helper.c:203
+#: libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
 msgstr "修改文件属性"
 
@@ -478,11 +479,11 @@ msgstr "修改文件属性"
 #. * The Settings menu
 #.
 #. Settings
-#: ../libgnomeui/gnome-app-helper.c:211
+#: libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
 msgstr "首选项(_N)"
 
-#: ../libgnomeui/gnome-app-helper.c:212
+#: libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
 msgstr "配置应用程序"
 
@@ -491,215 +492,216 @@ msgstr "配置应用程序"
 #. * And the "Help" menu
 #.
 #. About
-#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221
 msgid "_About"
 msgstr "关于(_A)"
 
-#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222
 msgid "About this application"
 msgstr "关于此应用程序"
 
-#: ../libgnomeui/gnome-app-helper.c:225
+#: libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
 msgstr "全部选中(_A)"
 
-#: ../libgnomeui/gnome-app-helper.c:226
+#: libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
 msgstr "全部选中"
 
 #.
 #. * Window menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:234
+#: libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
 msgstr "创建新窗口(_W)"
 
-#: ../libgnomeui/gnome-app-helper.c:235
+#: libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
 msgstr "创建一个新窗口"
 
-#: ../libgnomeui/gnome-app-helper.c:239
+#: libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
 msgstr "关闭此窗口(_C)"
 
-#: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240
 msgid "Close the current window"
 msgstr "关闭当前窗口"
 
 #.
 #. * The "Game" menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:248
+#: libgnomeui/gnome-app-helper.c:248
 msgid "_New Game"
 msgstr "新游戏(_N)"
 
-#: ../libgnomeui/gnome-app-helper.c:249
+#: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
 msgstr "开始新游戏"
 
-#: ../libgnomeui/gnome-app-helper.c:253
+#: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause Game"
 msgstr "暂停游戏(_P)"
 
-#: ../libgnomeui/gnome-app-helper.c:254
+#: libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
 msgstr "暂停游戏"
 
-#: ../libgnomeui/gnome-app-helper.c:258
+#: libgnomeui/gnome-app-helper.c:258
 msgid "_Restart Game"
 msgstr "重新开始游戏(_R)"
 
-#: ../libgnomeui/gnome-app-helper.c:259
+#: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
 msgstr "重新开始游戏"
 
-#: ../libgnomeui/gnome-app-helper.c:263
+#: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo Move"
 msgstr "撤消走法(_U)"
 
-#: ../libgnomeui/gnome-app-helper.c:264
+#: libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
 msgstr "撤消最后的走法"
 
-#: ../libgnomeui/gnome-app-helper.c:268
+#: libgnomeui/gnome-app-helper.c:268
 msgid "_Redo Move"
 msgstr "重做走法(_R)"
 
-#: ../libgnomeui/gnome-app-helper.c:269
+#: libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
 msgstr "重做撤消的走法"
 
-#: ../libgnomeui/gnome-app-helper.c:273
+#: libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
 msgstr "提示(_H)"
 
-#: ../libgnomeui/gnome-app-helper.c:274
+#: libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
 msgstr "为您提供下一步着法的提示"
 
 #. 30
-#: ../libgnomeui/gnome-app-helper.c:279
+#: libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
 msgstr "排行榜(_S)..."
 
-#: ../libgnomeui/gnome-app-helper.c:280
+#: libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
 msgstr "查看排行榜"
 
-#: ../libgnomeui/gnome-app-helper.c:284
+#: libgnomeui/gnome-app-helper.c:284
 msgid "_End Game"
 msgstr "结束游戏(_E)"
 
-#: ../libgnomeui/gnome-app-helper.c:285
+#: libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
 msgstr "结束当前游戏"
 
-#: ../libgnomeui/gnome-app-helper.c:1143
+#: libgnomeui/gnome-app-helper.c:1143
 msgid "_Contents"
 msgstr "目录(_C)"
 
-#: ../libgnomeui/gnome-app-helper.c:1146
+#: libgnomeui/gnome-app-helper.c:1146
 msgid "View help for this application"
 msgstr "查看此应用程序的帮助"
 
-#: ../libgnomeui/gnome-app-helper.c:2574
+#: libgnomeui/gnome-app-helper.c:2574
 msgid "Text Below Icons"
 msgstr "文字在图标之下"
 
-#: ../libgnomeui/gnome-app-helper.c:2575
+#: libgnomeui/gnome-app-helper.c:2575
 msgid "Priority Text Beside Icons"
 msgstr "优先的文字在图标旁"
 
-#: ../libgnomeui/gnome-app-helper.c:2576
+#: libgnomeui/gnome-app-helper.c:2576
 msgid "Icons Only"
 msgstr "仅有图标"
 
-#: ../libgnomeui/gnome-app-helper.c:2577
+#: libgnomeui/gnome-app-helper.c:2577
 msgid "Text Only"
 msgstr "仅有文字"
 
-#: ../libgnomeui/gnome-app-helper.c:2638
+#: libgnomeui/gnome-app-helper.c:2638
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "使用桌面默认值(%s)"
 
-#: ../libgnomeui/gnome-app-util.c:98
+#: libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
 msgstr " (按回车键)"
 
-#: ../libgnomeui/gnome-app-util.c:140
+#: libgnomeui/gnome-app-util.c:140
 msgid "ERROR: "
 msgstr "错误："
 
-#: ../libgnomeui/gnome-app-util.c:177
+#: libgnomeui/gnome-app-util.c:177
 msgid "Warning: "
 msgstr "警告："
 
-#: ../libgnomeui/gnome-app-util.c:315
+#: libgnomeui/gnome-app-util.c:315
 msgid "y"
 msgstr "y"
 
-#: ../libgnomeui/gnome-app-util.c:316
+#: libgnomeui/gnome-app-util.c:316
 msgid "yes"
 msgstr "是"
 
-#: ../libgnomeui/gnome-app-util.c:319
+#: libgnomeui/gnome-app-util.c:319
 msgid "n"
 msgstr "n"
 
-#: ../libgnomeui/gnome-app-util.c:320
+#: libgnomeui/gnome-app-util.c:320
 msgid "no"
 msgstr "否"
 
-#: ../libgnomeui/gnome-app-util.c:355
+#: libgnomeui/gnome-app-util.c:355
 msgid " (yes or no)"
 msgstr " (是 或 否)"
 
-#: ../libgnomeui/gnome-app-util.c:356
+#: libgnomeui/gnome-app-util.c:356
 msgid "  - OK? (yes or no)"
 msgstr "  - 确认？(是或否)"
 
-#: ../libgnomeui/gnome-app-util.c:684
+#: libgnomeui/gnome-app-util.c:684
 msgid "Progress"
 msgstr "进度"
 
-#: ../libgnomeui/gnome-app.c:153
+#: libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr "应用程序 ID"
 
-#: ../libgnomeui/gnome-app.c:154
+#: libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "应用程序 ID 字符串"
 
-#: ../libgnomeui/gnome-appbar.c:747
+#: libgnomeui/gnome-appbar.c:747
 msgid "Has Progress"
 msgstr "有进度"
 
-#: ../libgnomeui/gnome-appbar.c:748
+#: libgnomeui/gnome-appbar.c:748
 msgid "Create a progress widget."
 msgstr "创建进度部件。"
 
-#: ../libgnomeui/gnome-appbar.c:755
+#: libgnomeui/gnome-appbar.c:755
 msgid "Has Status"
 msgstr "有状态"
 
-#: ../libgnomeui/gnome-appbar.c:756
+#: libgnomeui/gnome-appbar.c:756
 msgid "Create a status widget."
 msgstr "创建状态部件。"
 
-#: ../libgnomeui/gnome-appbar.c:763
+#: libgnomeui/gnome-appbar.c:763
 msgid "Interactivity"
 msgstr "交互性"
 
-#: ../libgnomeui/gnome-appbar.c:764
+#: libgnomeui/gnome-appbar.c:764
 msgid "Level of user activity required."
 msgstr "需要的用户交互性级别。"
 
-#: ../libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:70
+#, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "您的 HTTP 代理需要您登录。\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:71
+#: libgnomeui/gnome-authentication-manager.c:71
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -708,336 +710,336 @@ msgstr ""
 "您必须登录才能访问“%s”。\n"
 "%s"
 
-#: ../libgnomeui/gnome-authentication-manager.c:74
+#: libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
 msgstr "您的密码将不加密传送。"
 
-#: ../libgnomeui/gnome-authentication-manager.c:75
+#: libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
 msgstr "您的密码将加密传送。"
 
-#: ../libgnomeui/gnome-authentication-manager.c:78
-#: ../libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:296
 msgid "Authentication Required"
 msgstr "需要身份认证"
 
-#: ../libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "您必须登录才能访问 %s 域 %s\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "您必须登录才能访问“%s”\n"
 
-#: ../libgnomeui/gnome-client.c:877 ../libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
 msgid "Specify session management ID"
 msgstr "设定会话管理器 ID 标识"
 
-#: ../libgnomeui/gnome-client.c:877 ../libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:880 ../libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
 msgid "Specify prefix of saved configuration"
 msgstr "设定保存的配置的前缀"
 
-#: ../libgnomeui/gnome-client.c:880 ../libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
 msgid "PREFIX"
 msgstr "前缀"
 
-#: ../libgnomeui/gnome-client.c:883 ../libgnomeui/gnome-client.c:899
+#: libgnomeui/gnome-client.c:883 libgnomeui/gnome-client.c:899
 msgid "Disable connection to session manager"
 msgstr "禁止连接到会话管理器"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1015
+#: libgnomeui/gnome-client.c:1005 libgnomeui/gnome-client.c:1015
 msgid "Session management"
 msgstr "会话管理"
 
-#: ../libgnomeui/gnome-client.c:1016
+#: libgnomeui/gnome-client.c:1016
 msgid "Show session management options"
 msgstr "显示会话管理选项"
 
-#: ../libgnomeui/gnome-client.c:2550
+#: libgnomeui/gnome-client.c:2550
 msgid "Cancel Logout"
 msgstr "取消注销"
 
-#: ../libgnomeui/gnome-color-picker.c:414
+#: libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "收到无效的颜色数据\n"
 
-#: ../libgnomeui/gnome-color-picker.c:465
+#: libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "打开指定颜色的对话框"
 
-#: ../libgnomeui/gnome-color-picker.c:487
+#: libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "选取颜色"
 
-#: ../libgnomeui/gnome-dateedit.c:491 ../libgnomeui/gnome-dateedit.c:788
+#: libgnomeui/gnome-dateedit.c:491 libgnomeui/gnome-dateedit.c:788
 msgid "Time"
 msgstr "时间"
 
-#: ../libgnomeui/gnome-dateedit.c:492
+#: libgnomeui/gnome-dateedit.c:492
 msgid "The time currently selected"
 msgstr "当前选中的时间"
 
-#: ../libgnomeui/gnome-dateedit.c:504
+#: libgnomeui/gnome-dateedit.c:504
 msgid "DateEdit Flags"
 msgstr "日期编辑标志"
 
-#: ../libgnomeui/gnome-dateedit.c:505
+#: libgnomeui/gnome-dateedit.c:505
 msgid "Flags for how DateEdit looks"
 msgstr "关于日期编辑外观的标志"
 
-#: ../libgnomeui/gnome-dateedit.c:514
+#: libgnomeui/gnome-dateedit.c:514
 msgid "Lower Hour"
 msgstr "较低小时"
 
-#: ../libgnomeui/gnome-dateedit.c:515
+#: libgnomeui/gnome-dateedit.c:515
 msgid "Lower hour in the time popup selector"
 msgstr "时间弹出选择器中的较低小时"
 
-#: ../libgnomeui/gnome-dateedit.c:525
+#: libgnomeui/gnome-dateedit.c:525
 msgid "Upper Hour"
 msgstr "较高小时"
 
-#: ../libgnomeui/gnome-dateedit.c:526
+#: libgnomeui/gnome-dateedit.c:526
 msgid "Upper hour in the time popup selector"
 msgstr "时间弹出选择器中的较高小时"
 
-#: ../libgnomeui/gnome-dateedit.c:536
+#: libgnomeui/gnome-dateedit.c:536
 msgid "Initial Time"
 msgstr "初始化时间"
 
-#: ../libgnomeui/gnome-dateedit.c:537
+#: libgnomeui/gnome-dateedit.c:537
 msgid "The initial time"
 msgstr "初始化时间"
 
-#: ../libgnomeui/gnome-dateedit.c:751 ../libgnomeui/gnome-scores.c:97
+#: libgnomeui/gnome-dateedit.c:751 libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "日期"
 
-#: ../libgnomeui/gnome-dateedit.c:764
+#: libgnomeui/gnome-dateedit.c:764
 msgid "Select Date"
 msgstr "选择日期"
 
-#: ../libgnomeui/gnome-dateedit.c:764
+#: libgnomeui/gnome-dateedit.c:764
 msgid "Select the date from a calendar"
 msgstr "从日历中选择日期"
 
 #. Calendar label, only shown if the date editor has a time field
-#: ../libgnomeui/gnome-dateedit.c:775
+#: libgnomeui/gnome-dateedit.c:775
 msgid "Calendar"
 msgstr "日历"
 
-#: ../libgnomeui/gnome-dateedit.c:796
+#: libgnomeui/gnome-dateedit.c:796
 msgid "Select Time"
 msgstr "选择时间"
 
-#: ../libgnomeui/gnome-dateedit.c:796
+#: libgnomeui/gnome-dateedit.c:796
 msgid "Select the time from a list"
 msgstr "从列表中选择时间"
 
-#: ../libgnomeui/gnome-dateedit.c:1015
+#: libgnomeui/gnome-dateedit.c:1015
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date 已过时，使用 gnome_date_edit_get_time"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:121
-#: ../libgnomeui/gnome-font-picker.c:155
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
 msgid "Title"
 msgstr "标题"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:122
+#: libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
 msgstr "Druid 的标题"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:130
+#: libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
 msgstr "徽标图像"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:137
+#: libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
 msgstr "顶层水印"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:138
+#: libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
 msgstr "顶层水印图像"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:145
+#: libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
 msgstr "标题前景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:146
+#: libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
 msgstr "标题的前景颜色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:153
+#: libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
 msgstr "标题前景颜色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:154
+#: libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
 msgstr "用 GdkColor 表示的标题前景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:161
+#: libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
 msgstr "设置标题前景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:162
+#: libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
 msgstr "已设置标题前景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:169
-#: ../libgnomeui/gnome-druid-page-standard.c:177
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
 msgstr "背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:170
+#: libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
 msgstr "背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:178
+#: libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
 msgstr "用 GdkColor 表示的背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:185
+#: libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
 msgstr "设置背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:186
+#: libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
 msgstr "已设置背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:193
-#: ../libgnomeui/gnome-druid-page-standard.c:201
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
 msgid "Contents Background Color"
 msgstr "内容背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:194
+#: libgnomeui/gnome-druid-page-standard.c:194
 msgid "Contents Background color"
 msgstr "内容背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:202
+#: libgnomeui/gnome-druid-page-standard.c:202
 msgid "Contents Background color as a GdkColor"
 msgstr "用 GdkColor 表示的内容背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:209
+#: libgnomeui/gnome-druid-page-standard.c:209
 msgid "Contents Background color set"
 msgstr "内容背景色设置"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:210
+#: libgnomeui/gnome-druid-page-standard.c:210
 msgid "Contents Background color is set"
 msgstr "内容背景色已设置"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:216
-#: ../libgnomeui/gnome-druid-page-standard.c:224
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "徽标背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:217
+#: libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "徽标背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:225
+#: libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "用 GdkColor 表示的徽标背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:232
+#: libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "设置徽标背景色"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:233
+#: libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "已设置徽标背景色"
 
-#: ../libgnomeui/gnome-druid.c:154
+#: libgnomeui/gnome-druid.c:154
 msgid "Show Finish"
 msgstr "显示“完成”"
 
-#: ../libgnomeui/gnome-druid.c:155
+#: libgnomeui/gnome-druid.c:155
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "显示“完成”按钮，而不是“下一个”按钮"
 
-#: ../libgnomeui/gnome-druid.c:162
+#: libgnomeui/gnome-druid.c:162
 msgid "Show Help"
 msgstr "显示“帮助”"
 
-#: ../libgnomeui/gnome-druid.c:163
+#: libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
 msgstr "显示“帮助”按钮"
 
-#: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
+#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
 msgid "History id"
 msgstr "历史 id"
 
-#: ../libgnomeui/gnome-entry.c:200
+#: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
 msgstr "GTK 项"
 
-#: ../libgnomeui/gnome-entry.c:201
+#: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "GTK 项"
 
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
 msgid "History ID"
 msgstr "历史 ID"
 
-#: ../libgnomeui/gnome-file-entry.c:237
+#: libgnomeui/gnome-file-entry.c:237
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr "文件项的唯一标识符。它用于保存历史列表。"
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-file-entry.c:245 libgnomeui/gnome-icon-entry.c:188
 msgid "Browse Dialog Title"
 msgstr "浏览对话框标题"
 
-#: ../libgnomeui/gnome-file-entry.c:246
+#: libgnomeui/gnome-file-entry.c:246
 msgid "Title for the Browse file dialog."
 msgstr "浏览文件对话框的标题。"
 
-#: ../libgnomeui/gnome-file-entry.c:253
+#: libgnomeui/gnome-file-entry.c:253
 msgid "Directory Entry"
 msgstr "目录项"
 
-#: ../libgnomeui/gnome-file-entry.c:254
+#: libgnomeui/gnome-file-entry.c:254
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr "文件项是否用于输入目录名称或完整的文件名。"
 
-#: ../libgnomeui/gnome-file-entry.c:262
+#: libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
 msgstr "模态"
 
-#: ../libgnomeui/gnome-file-entry.c:263
+#: libgnomeui/gnome-file-entry.c:263
 msgid "Whether the Browse file window should be modal."
 msgstr "浏览文件窗口是否为模态。"
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+#: libgnomeui/gnome-file-entry.c:270 libgnomeui/gnome-icon-entry.c:204
 msgid "Filename"
 msgstr "文件名"
 
-#: ../libgnomeui/gnome-file-entry.c:271
+#: libgnomeui/gnome-file-entry.c:271
 msgid "Filename that should be displayed in the file entry."
 msgstr "应该显示在文件项中的文件名。"
 
-#: ../libgnomeui/gnome-file-entry.c:279
+#: libgnomeui/gnome-file-entry.c:279
 msgid "Default Path"
 msgstr "默认路径"
 
-#: ../libgnomeui/gnome-file-entry.c:280
+#: libgnomeui/gnome-file-entry.c:280
 msgid "Default path for the Browse file window."
 msgstr "浏览文件窗口的默认路径。"
 
-#: ../libgnomeui/gnome-file-entry.c:287
+#: libgnomeui/gnome-file-entry.c:287
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-file-entry.c:288
+#: libgnomeui/gnome-file-entry.c:288
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1047,12 +1049,12 @@ msgstr ""
 "数，可以使用此属性来获得 GnomeEntry。"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-file-entry.c:298
+#: libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-file-entry.c:299
+#: libgnomeui/gnome-file-entry.c:299
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1061,132 +1063,132 @@ msgstr ""
 "文件项用来输入文件名的 GtkEntry。如果您需要修改或查询 GtkEntry 的任何参数，可"
 "以使用此属性来获得 GtkEntry。"
 
-#: ../libgnomeui/gnome-file-entry.c:309
+#: libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
 msgstr "使用 GtkFileChooser"
 
-#: ../libgnomeui/gnome-file-entry.c:310
+#: libgnomeui/gnome-file-entry.c:310
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
 "是使用新的 GtkFileChooser 部件，还是使用 GtkFileSelection 部件来选择文件。"
 
-#: ../libgnomeui/gnome-file-entry.c:319
+#: libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
 msgstr "GtkFileChooser 动作"
 
-#: ../libgnomeui/gnome-file-entry.c:320
+#: libgnomeui/gnome-file-entry.c:320
 msgid "The type of operation that the file selector is performing."
 msgstr "文件选择器正在执行的操作类型。"
 
-#: ../libgnomeui/gnome-file-entry.c:635 ../libgnomeui/gnome-file-entry.c:669
+#: libgnomeui/gnome-file-entry.c:642 libgnomeui/gnome-file-entry.c:676
 msgid "Select file"
 msgstr "选择文件"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-file-entry.c:795
+#: libgnomeui/gnome-file-entry.c:802
 msgid "Path"
 msgstr "路径"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-file-entry.c:795
+#: libgnomeui/gnome-file-entry.c:802
 msgid "Path to file"
 msgstr "文件路径"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-file-entry.c:822
+#: libgnomeui/gnome-file-entry.c:829
 msgid "_Browse..."
 msgstr "浏览(_B)..."
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-file-entry.c:823
+#: libgnomeui/gnome-file-entry.c:830
 msgid "Pop up a file selector to choose a file"
 msgstr "弹出用于选择文件的文件选择器"
 
-#: ../libgnomeui/gnome-font-picker.c:66
+#: libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
 msgstr "sans 12"
 
-#: ../libgnomeui/gnome-font-picker.c:67
+#: libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "GNOME 字体测试"
 
-#: ../libgnomeui/gnome-font-picker.c:68
+#: libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
 msgstr "选取字体"
 
-#: ../libgnomeui/gnome-font-picker.c:156
+#: libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
 msgstr "选择对话框的标题"
 
-#: ../libgnomeui/gnome-font-picker.c:164
+#: libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
 msgstr "模式"
 
-#: ../libgnomeui/gnome-font-picker.c:165
+#: libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
 msgstr "字符选择操作模式"
 
-#: ../libgnomeui/gnome-font-picker.c:174
+#: libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
 msgstr "字体名"
 
-#: ../libgnomeui/gnome-font-picker.c:175
+#: libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
 msgstr "选定字体的名称"
 
-#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "字体"
 
-#: ../libgnomeui/gnome-font-picker.c:185
+#: libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
 msgstr "选定的 GtkFont"
 
-#: ../libgnomeui/gnome-font-picker.c:192
+#: libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
 msgstr "预览文本"
 
-#: ../libgnomeui/gnome-font-picker.c:193
+#: libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
 msgstr "显示在对话框中的预览文本"
 
-#: ../libgnomeui/gnome-font-picker.c:201
+#: libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
 msgstr "标签中的字体"
 
-#: ../libgnomeui/gnome-font-picker.c:202
+#: libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
 msgstr "字体信息模式中标签施用的字体"
 
-#: ../libgnomeui/gnome-font-picker.c:210
+#: libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
 msgstr "标签字体尺寸"
 
-#: ../libgnomeui/gnome-font-picker.c:211
+#: libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
 msgstr "字体信息模式中标签使用的字体尺寸"
 
-#: ../libgnomeui/gnome-font-picker.c:221
+#: libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
 msgstr "显示尺寸"
 
-#: ../libgnomeui/gnome-font-picker.c:222
+#: libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
 msgstr "显示字体信息模式中的尺寸"
 
-#: ../libgnomeui/gnome-gconf-ui.c:61
+#: libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
 msgstr "GNOME GConf UI 支持"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-gconf-ui.c:96
+#: libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
 msgstr "细节(_D)"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-gconf-ui.c:169
+#: libgnomeui/gnome-gconf-ui.c:169
 #, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
@@ -1198,7 +1200,7 @@ msgstr ""
 "部分配置。您所选择的一部分设置可能不会生效，或者在您下次使用该应用程序时不会"
 "恢复。"
 
-#: ../libgnomeui/gnome-gconf-ui.c:176
+#: libgnomeui/gnome-gconf-ui.c:176
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1206,41 +1208,41 @@ msgid ""
 msgstr ""
 "在为 %s 装入或保存配置信息时发生错误。您的某些配置设置可能不能正常工作。"
 
-#: ../libgnomeui/gnome-href.c:123
+#: libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "URL"
 
-#: ../libgnomeui/gnome-href.c:124
+#: libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "GnomeHRef 激活的 URL"
 
-#: ../libgnomeui/gnome-href.c:131
+#: libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "文本"
 
-#: ../libgnomeui/gnome-href.c:132
+#: libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "按钮上的文本"
 
-#: ../libgnomeui/gnome-href.c:133
+#: libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "终结这世界上的饥饿"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-href.c:139
+#: libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "链接颜色"
 
-#: ../libgnomeui/gnome-href.c:140
+#: libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "用于绘制链接的颜色"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-href.c:171
+#: libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "此按钮将把您定向到它显示的 URI。"
 
-#: ../libgnomeui/gnome-href.c:394
+#: libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1249,39 +1251,39 @@ msgstr ""
 "请在检查“首选应用程序”中的设置是否正确。"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:180
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr "图标项的唯一标识符。它用于保存历史列表。"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: libgnomeui/gnome-icon-entry.c:189
 msgid "Title for the Browse icon dialog."
 msgstr "浏览图标对话框的标题。"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: libgnomeui/gnome-icon-entry.c:196
 msgid "Pixmap Directory"
 msgstr "像素图目录"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: libgnomeui/gnome-icon-entry.c:197
 msgid "Directory that will be searched for icons."
 msgstr "在其中搜索图标的目录。"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: libgnomeui/gnome-icon-entry.c:205
 msgid "Filename that should be displayed in the icon entry."
 msgstr "应该在图标项中显示的文件名。"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: libgnomeui/gnome-icon-entry.c:213
 msgid "Picker dialog"
 msgstr "选取器对话框"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: libgnomeui/gnome-icon-entry.c:214
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1289,234 +1291,233 @@ msgstr ""
 "图标选取器对话框。如果您需要修改或查询 GtkDialog 的任何参数，可以使用此属性来"
 "获得 GtkDialog。"
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:988
+#: libgnomeui/gnome-icon-entry.c:322 libgnomeui/gnome-icon-entry.c:988
 msgid "No Icon"
 msgstr "无图标"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:758
 msgid "Icon selection dialog"
 msgstr "图标选择对话框"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:759
+#: libgnomeui/gnome-icon-entry.c:759
 msgid "This dialog box lets you select an icon."
 msgstr "您可以通过此对话框选择图标。"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:765
+#: libgnomeui/gnome-icon-entry.c:765
 msgid "Icon selector"
 msgstr "图标选择器"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:766
+#: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "请选取需要的图标。"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:991
+#: libgnomeui/gnome-icon-entry.c:991
 msgid "Icon Selector"
 msgstr "图标选择器"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:992
+#: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
 msgstr "此按钮将打开一个窗口，您可以从中选择图标。"
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1012
 msgid "Browse"
 msgstr "浏览"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:1015
+#: libgnomeui/gnome-icon-entry.c:1015
 msgid "Icon path"
 msgstr "图标路径"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-icon-entry.c:1016
+#: libgnomeui/gnome-icon-entry.c:1016
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr "您应该在此输入图标图像所在目录的名称。"
 
-#: ../libgnomeui/gnome-icon-sel.c:293
+#: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection：“%s”不存在或者不是目录"
 
-#: ../libgnomeui/gnome-icon-sel.c:301
+#: libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection：无法打开目录“%s”"
 
-#: ../libgnomeui/gnome-icon-sel.c:401
+#: libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
 msgstr "正在装入图标..."
 
-#: ../libgnomeui/gnome-messagebox.c:109
+#: libgnomeui/gnome-messagebox.c:109
 msgid "Information"
 msgstr "信息"
 
-#: ../libgnomeui/gnome-messagebox.c:114
+#: libgnomeui/gnome-messagebox.c:114
 msgid "Warning"
 msgstr "警告"
 
-#: ../libgnomeui/gnome-messagebox.c:120
+#: libgnomeui/gnome-messagebox.c:120
 msgid "Error"
 msgstr "错误"
 
-#: ../libgnomeui/gnome-messagebox.c:126
+#: libgnomeui/gnome-messagebox.c:126
 msgid "Question"
 msgstr "问题"
 
-#: ../libgnomeui/gnome-messagebox.c:131
+#: libgnomeui/gnome-messagebox.c:131
 msgid "Message"
 msgstr "消息"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: libgnomeui/gnome-password-dialog.c:269
 msgid "_Username:"
 msgstr "用户名(_U)："
 
-#: ../libgnomeui/gnome-password-dialog.c:271
+#: libgnomeui/gnome-password-dialog.c:271
 msgid "_Domain:"
 msgstr "域(_D)："
 
-#: ../libgnomeui/gnome-password-dialog.c:273
+#: libgnomeui/gnome-password-dialog.c:273
 msgid "_Password:"
 msgstr "密码(_P)："
 
-#: ../libgnomeui/gnome-password-dialog.c:346
+#: libgnomeui/gnome-password-dialog.c:346
 msgid "Co_nnect"
 msgstr "连接(_N)"
 
-#: ../libgnomeui/gnome-password-dialog.c:367
+#: libgnomeui/gnome-password-dialog.c:367
 msgid "Connect _anonymously"
 msgstr "匿名连接(_A)"
 
-#: ../libgnomeui/gnome-password-dialog.c:372
+#: libgnomeui/gnome-password-dialog.c:372
 msgid "Connect as u_ser:"
 msgstr "连接身份(_S)："
 
-#: ../libgnomeui/gnome-password-dialog.c:470
+#: libgnomeui/gnome-password-dialog.c:470
 msgid "_Remember password for this session"
 msgstr "此会话记住密码(_R)"
 
-#: ../libgnomeui/gnome-password-dialog.c:472
+#: libgnomeui/gnome-password-dialog.c:472
 msgid "Save password in _keyring"
 msgstr "在密钥环中保存密码(_K)"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-pixmap-entry.c:114
+#: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
 msgstr "执行预览"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-pixmap-entry.c:115
+#: libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr "像素图项是否有预览。"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:189
-#: ../libgnomeui/gnome-pixmap-entry.c:479
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
 msgid "No Image"
 msgstr "无图像"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-pixmap-entry.c:206
+#: libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
 msgstr "图像预览"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-pixmap-entry.c:207
+#: libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
 msgstr "当前指定图像的预览"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:414
+#: libgnomeui/gnome-pixmap-entry.c:414
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "无法找到 hbox，使用普通文件选择"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:420
+#: libgnomeui/gnome-pixmap-entry.c:420
 msgid "Preview"
 msgstr "预览"
 
-#: ../libgnomeui/gnome-scores.c:78
+#: libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
 msgstr "前十名"
 
-#: ../libgnomeui/gnome-scores.c:91
+#: libgnomeui/gnome-scores.c:91
 msgid "User"
 msgstr "用户名"
 
-#: ../libgnomeui/gnome-scores.c:94
+#: libgnomeui/gnome-scores.c:94
 msgid "Score"
 msgstr "排行榜"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: ../libgnomeui/gnome-scores.c:194
+#: libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%Y-%m-%d(%A) %T"
 
-#: ../libgnomeui/gnome-scores.c:395
+#: libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: ../libgnomeui/gnome-stock-icons.c:139
+#: libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
 msgstr "桌面边缘"
 
-#: ../libgnomeui/gnome-stock-icons.c:140
+#: libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
 msgstr "填充表格"
 
-#: ../libgnomeui/gnome-stock-icons.c:141
+#: libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
 msgstr "符号列表"
 
-#: ../libgnomeui/gnome-stock-icons.c:142
+#: libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
 msgstr "编号列表"
 
-#: ../libgnomeui/gnome-stock-icons.c:143
+#: libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
 msgstr "文本缩进"
 
-#: ../libgnomeui/gnome-stock-icons.c:144
+#: libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
 msgstr "不缩进文本"
 
-#: ../libgnomeui/gnome-stock-icons.c:145
+#: libgnomeui/gnome-stock-icons.c:145
 msgid "About"
 msgstr "关于"
 
-#: ../libgnomeui/gnome-ui-init.c:129 ../libgnomeui/gnome-ui-init.c:138
+#: libgnomeui/gnome-ui-init.c:129 libgnomeui/gnome-ui-init.c:138
 msgid "Disable Crash Dialog"
 msgstr "禁用崩溃对话框"
 
-#: ../libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:131
 msgid "X display to use"
 msgstr "使用的 X 显示接口"
 
-#: ../libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:131
 msgid "DISPLAY"
 msgstr "显示"
 
-#: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:156
+#: libgnomeui/gnome-ui-init.c:146 libgnomeui/gnome-ui-init.c:156
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI 库"
 
-#: ../libgnomeui/gnome-ui-init.c:157
+#: libgnomeui/gnome-ui-init.c:157
 msgid "Show GNOME GUI options"
 msgstr "显示 GNOME GUI 选项"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:753
+#: libgnomeui/gnome-ui-init.c:753
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "发生了多个段错误； 无法显示错误对话框\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:767
+#: libgnomeui/gnome-ui-init.c:767
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1525,7 +1526,7 @@ msgstr ""
 "发生了段错误！\n"
 "无法显示错误对话框\n"
 
-#: ../libgnomeui/gnome_segv.c:101
+#: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
 "The GNOME Session Manager (process %d) has crashed\n"
@@ -1539,17 +1540,17 @@ msgstr ""
 "当您关闭该对话框时, 将关闭所有应用程序并终止您的会话。\n"
 "请在关闭该对话框之前保存所有您的文件。"
 
-#: ../libgnomeui/gnome_segv.c:112
+#: libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
 msgstr "应用程序“%s”异常退出。"
 
-#: ../libgnomeui/gnome_segv.c:117
+#: libgnomeui/gnome_segv.c:117
 #, c-format
 msgid "process %d: %s"
 msgstr "进程 %d：%s"
 
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
@@ -1557,23 +1558,22 @@ msgstr ""
 "您可以通知开发者所发生的一切，以便帮助他们修正此问题。不然，您可以立即重新启"
 "动应用程序。"
 
-#: ../libgnomeui/gnome_segv.c:137
+#: libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法：gnome_segv2 程序名 信号数\n"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome_segv.c:154
+#: libgnomeui/gnome_segv.c:154
 msgid "_Restart Application"
 msgstr "重新启动应用程序(_R)"
 
-#: ../libgnomeui/gnome_segv.c:166
+#: libgnomeui/gnome_segv.c:166
 msgid "_Inform Developers"
 msgstr "通知开发者(_I)"
 
-#: ../libgnomeui/gnome_segv.c:177
+#: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "调试(_D)"
 
-#: ../test-gnome/testgnome.xml.h:3
-msgid "Exit the test"
-msgstr "退出测试"
+#~ msgid "Exit the test"
+#~ msgstr "退出测试"
