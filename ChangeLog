@@ -1,5 +1,10 @@
 2005-12-23  Kristian Rietveld  <kris@imendio.com>
 
+	* gtk/gtkfilesystemgnomevfs.c (get_folder_complete_operation): start
+	supporting following desktop links to folders.
+
+2005-12-23  Kristian Rietveld  <kris@imendio.com>
+
 	* gtk/gtkfilesystemgnomevfs.c: adapt to new GtkFileSystem API
 	found in the kris-async-branch of gtk+.
 

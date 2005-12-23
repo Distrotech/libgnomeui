@@ -939,21 +939,28 @@ get_folder_complete_operation (struct GetFolderData *info)
   if (is_desktop_file (info->file_info))
     {
       char *ditem_uri;
+
+      g_hash_table_remove (folder_vfs->system->folders, folder_vfs->uri);
       
-      /* FIXME: desktop items are not yet supported */
-#if 0
-      ditem_uri = get_desktop_link_uri (result->uri, error);
+      ditem_uri = get_desktop_link_uri (folder_vfs->uri, &error);
       if (ditem_uri == NULL)
 	{
-	  gnome_vfs_file_info_unref (vfs_info);
-	  profile_end ("returning NULL because couldn't get desktop link uri", NULL);
-	  return;
+	  /* Couldn't get desktop link uri */
+	  (* info->callback) (GTK_FILE_SYSTEM_HANDLE (info->handle),
+			      NULL, error, info->callback_data);
+
+          g_object_unref (folder_vfs);
+	  goto out;
 	}
-#endif
+
+      g_free (folder_vfs->uri);
+      folder_vfs->uri = ditem_uri;
+
+      g_hash_table_insert (folder_vfs->system->folders, folder_vfs->uri,
+			   folder_vfs);
     }
   else if (info->file_info->type != GNOME_VFS_FILE_TYPE_DIRECTORY)
     {
-      folder_vfs->async_handle = NULL;
       g_set_error (&error,
 		   GTK_FILE_SYSTEM_ERROR,
 		   GTK_FILE_SYSTEM_ERROR_NOT_FOLDER,
