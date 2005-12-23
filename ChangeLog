@@ -1,3 +1,8 @@
+2005-12-23  Kristian Rietveld  <kris@imendio.com>
+
+	* gtk/gtkfilesystemgnomevfs.c: adapt to new GtkFileSystem API
+	found in the kris-async-branch of gtk+.
+
 2005-12-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-file-entry.c (build_filename): More
