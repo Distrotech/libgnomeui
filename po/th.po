@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-12-12 19:09+0100\n"
-"PO-Revision-Date: 2005-11-06 20:44+0700\n"
+"PO-Revision-Date: 2005-12-25 10:11+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -536,7 +536,7 @@ msgstr "เกมใ_หม่"
 
 #: libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
-msgstr "เริ่มเกมใหม่"
+msgstr "เปิดเกมใหม่"
 
 #: libgnomeui/gnome-app-helper.c:253
 msgid "_Pause Game"
@@ -552,7 +552,7 @@ msgstr "เ_ริ่มเล่นใหม่"
 
 #: libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
-msgstr "เริ่มเกมใหม่"
+msgstr "ตั้งต้นเกมใหม่"
 
 #: libgnomeui/gnome-app-helper.c:263
 msgid "_Undo Move"
@@ -735,7 +735,7 @@ msgstr "คุณต้องเข้าระบบถึงจะสามา
 
 #: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
 msgid "Specify session management ID"
-msgstr "บอก ID ของตัวจัดการวาระ"
+msgstr "บอก ID สำหรับการจัดการวาระ"
 
 #: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
 msgid "ID"
@@ -751,15 +751,15 @@ msgstr "PREFIX"
 
 #: libgnomeui/gnome-client.c:883 libgnomeui/gnome-client.c:899
 msgid "Disable connection to session manager"
-msgstr "ห้ามเชื่อมต่อไปยังตัวจัดการวาระ"
+msgstr "ห้ามเชื่อมต่อไปยังโปรแกรมจัดการวาระ"
 
 #: libgnomeui/gnome-client.c:1005 libgnomeui/gnome-client.c:1015
 msgid "Session management"
-msgstr "ตัวจัดการวาระ"
+msgstr "การจัดการวาระ"
 
 #: libgnomeui/gnome-client.c:1016
 msgid "Show session management options"
-msgstr "แสดงตัวเลือกของตัวจัดการวาระ"
+msgstr "แสดงตัวเลือกของการจัดการวาระ"
 
 #: libgnomeui/gnome-client.c:2550
 msgid "Cancel Logout"
@@ -1236,7 +1236,7 @@ msgid ""
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "เกิดข้อผิดพลาดขณะเรียกใช้เว็บเบราว์เซอร์ปริยาย\n"
-"โปรดตรวจดูค่าตั้งในหน้าต่าง 'โปรแกรมที่ชอบ'"
+"กรุณาตรวจสอบค่าตั้งของคุณในเครื่อมือปรับแต่ง 'โปรแกรมที่ชอบ'"
 
 #: libgnomeui/gnome-icon-entry.c:180
 msgid ""
@@ -1291,7 +1291,7 @@ msgstr "ตัวเลือกไอคอน"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
-msgstr "โปรดเลือกไอคอนที่ต้องการ"
+msgstr "กรุณาเลือกไอคอนที่ต้องการ"
 
 #: libgnomeui/gnome-icon-entry.c:991
 msgid "Icon Selector"
@@ -1505,10 +1505,10 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
-"ตัวจัดการวาระของ GNOME (โพรเซส %d) ไม่สามารถทำงานต่อได้\n"
-"เนื่องจากข้อผิดพลาด %s\n"
-"เมื่อคุณปิดหน้าต่างนี้ โปรแกรมทุกตัวจะถูกปิด และคุณจะออกจาก วาระการใช้งานนี้\n"
-"โปรดบันทึกแฟ้มทั้งหมดที่ต้องการก่อนจะปิดหน้าต่างนี้"
+"โปรแกรมจัดการวาระของ GNOME (โพรเซส %d) ไม่สามารถทำงานต่อได้\n"
+"เนื่องจากข้อผิดพลาดร้ายแรง (%s)\n"
+"เมื่อคุณปิดหน้าต่างนี้ โปรแกรมทุกตัวจะถูกปิด และคุณจะออกจากวาระการใช้งานนี้\n"
+"กรุณาบันทึกแฟ้มทั้งหมดก่อนจะปิดหน้าต่างนี้"
 
 #: libgnomeui/gnome_segv.c:112
 #, c-format
