@@ -240,9 +240,11 @@ changed_timeout_func(gpointer data)
 	tmp = changed_pentries;
 	changed_pentries = NULL;
 	if(tmp) {
+		GDK_THREADS_ENTER();
 		for(li=tmp;li!=NULL;li=g_slist_next(li)) {
 			refresh_preview(li->data);
 		}
+		GDK_THREADS_LEAVE();
 		g_slist_free(tmp);
 		return TRUE;
 	}

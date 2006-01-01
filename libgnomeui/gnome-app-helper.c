@@ -435,6 +435,8 @@ showing_pixmaps_changed_notify(GConfClient            *client,
                 new_setting = gconf_value_get_bool(value);
         }
 
+	GDK_THREADS_ENTER();
+
         if (new_setting && (mi->image == NULL)) {
                 GtkWidget *pixmap;
                 GnomeUIPixmapType pixmap_type;
@@ -457,6 +459,8 @@ showing_pixmaps_changed_notify(GConfClient            *client,
         } else if (!new_setting && (mi->image != NULL)) {
 		gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), NULL);
         }
+
+	GDK_THREADS_LEAVE();
 }
 
 /* Note that this function is also used for toolbars, don't assume
@@ -1320,6 +1324,8 @@ menus_have_tearoff_changed_notify(GConfClient            *client,
 	if (entry->value->type != GCONF_VALUE_BOOL)
 		return;
 
+	GDK_THREADS_ENTER();
+
 	menu = GTK_WIDGET (user_data);
 	
 	if (gconf_value_get_bool (entry->value)) {
@@ -1329,7 +1335,7 @@ menus_have_tearoff_changed_notify(GConfClient            *client,
 
 		if (tearoff) {
 			/* Do nothing */
-			return;
+			goto end;
 		}
 		
 		/* Add the tearoff */
@@ -1345,13 +1351,16 @@ menus_have_tearoff_changed_notify(GConfClient            *client,
 
 		if (!tearoff) {
 			/* Do nothing */
-			return;
+			goto end;
 		}
 		
 		/* Remove the tearoff */
 		gtk_widget_destroy (tearoff);
 		g_object_set_data (G_OBJECT (menu), "gnome-app-tearoff", NULL);
 	}
+
+ end:
+	GDK_THREADS_LEAVE();
 }
 
 
@@ -2467,7 +2476,9 @@ per_app_toolbar_style_changed_notify(GConfClient            *client,
                 }
         }
 
+	GDK_THREADS_ENTER();
         gtk_toolbar_set_style(toolbar, style);
+	GDK_THREADS_LEAVE();
 }
 
 static void
@@ -2511,7 +2522,9 @@ toolbar_style_changed_notify(GConfClient            *client,
 			style = GTK_TOOLBAR_BOTH;
         }
 
+	GDK_THREADS_ENTER();
         gtk_toolbar_set_style(toolbar, style);
+	GDK_THREADS_LEAVE();
 }
 
 static void

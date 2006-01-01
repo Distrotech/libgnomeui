@@ -353,6 +353,8 @@ load_idle_func (gpointer data)
 		return FALSE;
 	}
 
+	GDK_THREADS_ENTER();
+
 	append_an_icon (gis, list->data);
 
 	g_free (list->data);
@@ -367,6 +369,8 @@ load_idle_func (gpointer data)
 				       (double)gis->_priv->load_i / gis->_priv->load_file_count);
 
 	gis->_priv->load_i ++;
+
+	GDK_THREADS_LEAVE();
 
 	return TRUE;
 }

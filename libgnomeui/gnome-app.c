@@ -269,7 +269,9 @@ dock_item_changed_notify (GConfClient* client,
 		detachable = gconf_value_get_bool (entry->value);
 		
 		/* Update */
+		GDK_THREADS_ENTER();
 		bonobo_dock_item_set_locked (item, !detachable);
+		GDK_THREADS_LEAVE();
 	}
 }
 

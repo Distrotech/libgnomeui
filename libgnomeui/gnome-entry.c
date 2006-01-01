@@ -419,6 +419,8 @@ gnome_entry_history_changed (GConfClient* client,
 {
 	GnomeEntry *gentry;
 
+	GDK_THREADS_ENTER();
+
 	gentry = GNOME_ENTRY (user_data);
 
 	/* If we're getting a notification from saving our own
@@ -427,10 +429,13 @@ gnome_entry_history_changed (GConfClient* client,
 	if (gentry->_priv->saving_history) {
 		gentry->_priv->saving_history = FALSE;
 
-		return;
+		goto end;
 	}
 
 	gnome_entry_load_history (gentry);
+
+ end:
+	GDK_THREADS_LEAVE();
 }
 
 /* FIXME: Make this static */

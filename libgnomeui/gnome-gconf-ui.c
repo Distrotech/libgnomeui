@@ -148,6 +148,8 @@ error_idle_func (gpointer data)
         g_return_val_if_fail(eid.client != NULL, FALSE);
         g_return_val_if_fail(pending_errors != NULL, FALSE);
 
+        GDK_THREADS_ENTER();
+
         if (current_dialog == NULL) {
                 GtkWidget *dialog;
                 gboolean have_overridden = FALSE;
@@ -245,6 +247,8 @@ error_idle_func (gpointer data)
 
         gtk_window_present (GTK_WINDOW (current_dialog));
         
+        GDK_THREADS_LEAVE();
+
         return FALSE;
 }
 

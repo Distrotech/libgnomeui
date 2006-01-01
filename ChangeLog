@@ -1,5 +1,25 @@
 2006-01-01  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-app-helper.c: (showing_pixmaps_changed_notify),
+	(menus_have_tearoff_changed_notify),
+	(per_app_toolbar_style_changed_notify),
+	(toolbar_style_changed_notify):
+	* libgnomeui/gnome-app.c: (dock_item_changed_notify):
+	* libgnomeui/gnome-client.c: (client_save_yourself_callback),
+	(client_die_callback), (client_save_complete_callback),
+	(client_shutdown_cancelled_callback):
+	* libgnomeui/gnome-entry.c: (gnome_entry_history_changed):
+	* libgnomeui/gnome-gconf-ui.c: (error_idle_func):
+	* libgnomeui/gnome-icon-lookup.c: (make_compat_mime_name):
+	* libgnomeui/gnome-icon-sel.c: (load_idle_func):
+	* libgnomeui/gnome-pixmap-entry.c: (changed_timeout_func):
+	* libgnomeui/gnome-thumbnail-pixbuf-utils.c: (vfs_src):
+	* libgnomeui/gnome-ui-init.c: (event_sounds_changed_cb):
+	Apply a patch to improve thread safety issues all over the place
+	Patch from <jylefort at FreeBSD org>. Closes bug #152023 partially.
+
+2006-01-01  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-icon-lookup.c: (make_compat_mime_name):
 	Remove unused variable.
 	* libgnomeui/gnome-thumbnail-pixbuf-utils.c: (vfs_src):

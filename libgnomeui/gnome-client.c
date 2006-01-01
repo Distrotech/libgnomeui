@@ -611,7 +611,11 @@ client_save_yourself_callback (SmcConn   smc_conn,
   gboolean ret;
 
   if (!client_grab_widget)
-    client_grab_widget = gtk_widget_new (GTK_TYPE_INVISIBLE, NULL);
+    {
+      GDK_THREADS_ENTER();
+      client_grab_widget = gtk_widget_new (GTK_TYPE_INVISIBLE, NULL);
+      GDK_THREADS_LEAVE();
+    }
 
   /* The first SaveYourself after registering for the first time
    * is a special case (SM specs 7.2).
@@ -689,6 +693,8 @@ client_save_yourself_callback (SmcConn   smc_conn,
 
   client_set_state (client, GNOME_CLIENT_SAVING_PHASE_1);
 
+  GDK_THREADS_ENTER();
+
   if (gdk_pointer_is_grabbed())
     {
       gboolean waiting = TRUE;
@@ -702,11 +708,16 @@ client_save_yourself_callback (SmcConn   smc_conn,
   /* Check that we did not receive a shutdown cancelled while waiting
    * for the grab to be released. The grab should prevent it but ... */
   if (client->state != GNOME_CLIENT_SAVING_PHASE_1)
-    return;
+    {
+      GDK_THREADS_LEAVE();
+      return;
+    }
 
   gdk_pointer_ungrab (GDK_CURRENT_TIME);
   gdk_keyboard_ungrab (GDK_CURRENT_TIME);
   gtk_grab_add (client_grab_widget);
+
+  GDK_THREADS_LEAVE();
 
   name = g_strdup (gnome_client_get_global_config_prefix(client));
   name[strlen (name) - 1] = '\0';
@@ -768,7 +779,11 @@ client_die_callback (SmcConn smc_conn, SmPointer client_data)
   GnomeClient *client= (GnomeClient*) client_data;
 
   if (client_grab_widget)
-    gtk_grab_remove (client_grab_widget);
+    {
+      GDK_THREADS_ENTER();
+      gtk_grab_remove (client_grab_widget);
+      GDK_THREADS_LEAVE();
+    }
 
   g_signal_emit (client, client_signals[DIE], 0);
 }
@@ -780,7 +795,11 @@ client_save_complete_callback (SmcConn smc_conn, SmPointer client_data)
   GnomeClient *client = (GnomeClient*) client_data;
 
   if (client_grab_widget)
-    gtk_grab_remove (client_grab_widget);
+    {
+      GDK_THREADS_ENTER();
+      gtk_grab_remove (client_grab_widget);
+      GDK_THREADS_LEAVE();
+    }
 
   g_signal_emit (client, client_signals[SAVE_COMPLETE], 0);
 }
@@ -792,7 +811,11 @@ client_shutdown_cancelled_callback (SmcConn smc_conn, SmPointer client_data)
   GnomeClient *client= (GnomeClient*) client_data;
 
   if (client_grab_widget)
-    gtk_grab_remove (client_grab_widget);
+    {
+      GDK_THREADS_ENTER();
+      gtk_grab_remove (client_grab_widget);
+      GDK_THREADS_LEAVE();
+    }
 
   g_signal_emit (client, client_signals[SHUTDOWN_CANCELLED], 0);
 }

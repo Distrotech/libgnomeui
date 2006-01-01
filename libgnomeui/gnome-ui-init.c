@@ -518,8 +518,10 @@ event_sounds_changed_cb (GConfClient* client, guint cnxn_id, GConfEntry *entry, 
                                 gnome_gconf_get_bool ("/desktop/gnome/sound/event_sounds"));
 
         if (new_use_event_sounds && !use_event_sounds) {
+                GDK_THREADS_ENTER();
                 initialize_gtk_signal_relay ();
                 initialize_gnome_signal_relay ();
+                GDK_THREADS_LEAVE();
 	}
 
         use_event_sounds = new_use_event_sounds;
