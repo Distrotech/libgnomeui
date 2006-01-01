@@ -176,8 +176,6 @@ static char *
 make_compat_mime_name (const char *mime_type, gboolean embedd_text)
 {
   char *compat_mime_type, *icon_name;
-  char *p;
-
   
   if (mime_type == NULL) {
     return NULL;

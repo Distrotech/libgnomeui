@@ -278,7 +278,7 @@ term_source (j_decompress_ptr cinfo)
 static void
 vfs_src (j_decompress_ptr cinfo, Source *src, GnomeVFSHandle *handle)
 {
-	cinfo->src = src;
+	cinfo->src = (struct jpeg_source_mgr *)src;
 	src->pub.init_source = init_source;
 	src->pub.fill_input_buffer = fill_input_buffer;
 	src->pub.skip_input_data = skip_input_data;

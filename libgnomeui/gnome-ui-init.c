@@ -84,10 +84,6 @@ static gboolean libgnomeui_goption_disable_crash_dialog (const gchar *option_nam
 							 const gchar *value,
 							 gpointer data,
 							 GError **error);
-static gboolean libgnomeui_goption_display (const gchar *option_name,
-					    const gchar *value,
-					    gpointer data,
-					    GError **error);
 static void libgnomeui_init_pass	(const GnomeModuleInfo *mod_info);
 static void libgnomeui_class_init	(GnomeProgramClass *klass,
 					 const GnomeModuleInfo *mod_info);

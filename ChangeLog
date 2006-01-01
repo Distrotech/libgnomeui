@@ -1,3 +1,12 @@
+2006-01-01  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-icon-lookup.c: (make_compat_mime_name):
+	Remove unused variable.
+	* libgnomeui/gnome-thumbnail-pixbuf-utils.c: (vfs_src):
+	Add cast to avoid compiler warning.
+	* libgnomeui/gnome-ui-init.c: Remove prototype without matching
+	function implementation.
+
 2005-12-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-file-entry.c (build_filename): More
