@@ -3,6 +3,7 @@ libgnomeui 2.13.1
 
 * Thread safety fixes (jylefort at FreeBSD org)
 * Warning fixes (Kjartan)
+* Leak fixes in the GOption code (Christian Perch)
  
 libgnomeui 2.13.0
 -----------------
