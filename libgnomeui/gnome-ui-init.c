@@ -132,8 +132,24 @@ static GOptionEntry libgnomeui_goptions[] = {
 	{ "disable-crash-dialog", '\0', G_OPTION_FLAG_NO_ARG,
 	  G_OPTION_ARG_CALLBACK, libgnomeui_goption_disable_crash_dialog,
 	  N_("Disable Crash Dialog"), NULL },
+	/* --display is already handled by gtk+ */
 	{ NULL }
 };
+
+static GOptionGroup *
+libgnomeui_get_goption_group (void)
+{
+	GOptionGroup *option_group;
+
+	option_group = g_option_group_new ("gnome-ui",
+					   N_("GNOME GUI Library"),
+					   N_("Show GNOME GUI options"),
+					   NULL, NULL);
+	g_option_group_set_translation_domain (option_group, GETTEXT_PACKAGE);
+	g_option_group_add_entries(option_group, libgnomeui_goptions);
+
+	return option_group;
+}
 
 const GnomeModuleInfo *
 libgnomeui_module_info_get (void)
@@ -147,15 +163,7 @@ libgnomeui_module_info_get (void)
 		NULL, NULL
 	};
 
-	GOptionGroup * option_group;
-	option_group = g_option_group_new ("gnome-ui",
-					   N_("GNOME GUI Library"),
-					   N_("Show GNOME GUI options"),
-					   NULL, NULL);
-	g_option_group_set_translation_domain (option_group, GETTEXT_PACKAGE);
-	g_option_group_add_entries(option_group, libgnomeui_goptions);
-
-	module_info.expansion1 = (gpointer) option_group;
+	module_info.expansion1 = libgnomeui_get_goption_group;
 
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[6];

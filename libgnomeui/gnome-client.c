@@ -1021,6 +1021,21 @@ gnome_client_module_instance_init (GnomeProgram *program, GnomeModuleInfo *mod_i
     g_object_set_qdata (G_OBJECT (program), quark_gnome_program_private_gnome_client, priv);
 }
 
+static GOptionGroup *
+gnome_client_module_get_goption_group (void)
+{
+	GOptionGroup *option_group;
+
+	option_group = g_option_group_new ("gnome-session",
+					   N_("Session management"),
+					   N_("Show session management options"),
+					   NULL, NULL);
+	g_option_group_set_translation_domain (option_group, GETTEXT_PACKAGE);
+	g_option_group_add_entries(option_group, session_goptions);
+
+	return option_group;
+}
+
 const GnomeModuleInfo *
 gnome_client_module_info_get (void)
 {
@@ -1033,15 +1048,7 @@ gnome_client_module_info_get (void)
 		NULL, NULL
 	};
 
-	GOptionGroup * option_group;
-	option_group = g_option_group_new ("gnome-session",
-					   N_("Session management"),
-					   N_("Show session management options"),
-					   NULL, NULL);
-	g_option_group_set_translation_domain (option_group, GETTEXT_PACKAGE);
-	g_option_group_add_entries(option_group, session_goptions);
-
-	module_info.expansion1 = (gpointer) option_group;
+	module_info.expansion1 = gnome_client_module_get_goption_group;
 
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[3];

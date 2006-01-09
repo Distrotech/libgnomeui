@@ -1,3 +1,9 @@
+libgnomeui 2.13.1
+-----------------
+
+* Thread safety fixes (jylefort at FreeBSD org)
+* Warning fixes (Kjartan)
+ 
 libgnomeui 2.13.0
 -----------------
 

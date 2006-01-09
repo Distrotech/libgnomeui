@@ -1,3 +1,14 @@
+2006-01-09  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* NEWS: Update some.
+	* configure.in: Bump reqs for libgnome and libbonoboui.
+	* libgnomeui/gnome-client.c: 
+	(gnome_client_module_get_goption_group),
+	(gnome_client_module_info_get):
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_get_goption_group),
+	(libgnomeui_module_info_get): Fix leaks introduced by the move
+	to GOption. (Christian Perch). Closes bug #326237.
+
 2006-01-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-app-helper.c: (showing_pixmaps_changed_notify),
