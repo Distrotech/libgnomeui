@@ -1,3 +1,7 @@
+2006-01-13  Abel Cheung  <maddog@linuxhall.org>
+
+	* configure.in: Added "zh_HK" to ALL_LINGUAS.
+
 2005-12-08  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-icon-entry.c (gnome_icon_text_item_destroy):
