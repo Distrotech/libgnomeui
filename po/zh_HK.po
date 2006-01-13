@@ -1,4 +1,4 @@
-# Chinese (Taiwan) translation of libgnomeui.
+# Chinese (Hong Kong) translation of libgnomeui.
 # Copyright (C) 2001, 02, 03, 04, 06 Free Software Foundation, Inc.
 # Joe Man <trmetal@yahoo.com.hk>, 2001-02.
 # Abel Cheung <abel@oaka.org>, 2002-04, 06.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: libgnomeui 2.13.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-13 08:01+0800\n"
-"PO-Revision-Date: 2006-01-13 08:20+0800\n"
+"PO-Revision-Date: 2006-01-13 08:21+0800\n"
 "Last-Translator: Abel Cheung <abel@oaka.org>\n"
-"Language-Team: Chinese (Taiwan) <community@linuxhall.org>\n"
+"Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -704,16 +704,16 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
-"您必須登入方可存取「%s」。\n"
+"你必須登入方可存取「%s」。\n"
 "%s"
 
 #: ../libgnomeui/gnome-authentication-manager.c:74
 msgid "Your password will be transmitted unencrypted."
-msgstr "您的密碼會以沒有加密的方式傳送。"
+msgstr "你的密碼會以沒有加密的方式傳送。"
 
 #: ../libgnomeui/gnome-authentication-manager.c:75
 msgid "Your password will be transmitted encrypted."
-msgstr "您的密碼會以加密的方式傳送。"
+msgstr "你的密碼會以加密的方式傳送。"
 
 #: ../libgnomeui/gnome-authentication-manager.c:78
 #: ../libgnomeui/gnome-authentication-manager.c:296
@@ -724,12 +724,12 @@ msgstr "需要認證"
 #: ../libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "您必須登入方可存取 %s (網域 %s)\n"
+msgstr "你必須登入方可存取 %s (網域 %s)\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:290
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr "您必須登入方可存取 %s\n"
+msgstr "你必須登入方可存取 %s\n"
 
 #: ../libgnomeui/gnome-client.c:900 ../libgnomeui/gnome-client.c:914
 msgid "Specify session management ID"
@@ -1042,7 +1042,7 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"表示用來輸入檔案名稱的檔案欄位的 GnomeEntry。如果您想修改或查詢任何有關該 "
+"表示用來輸入檔案名稱的檔案欄位的 GnomeEntry。如果你想修改或查詢任何有關該 "
 "GnomeEntry 的參數，可以透過本屬性進行。"
 
 #: ../libgnomeui/gnome-file-entry.c:298
@@ -1055,7 +1055,7 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"表示用來輸入檔案名稱的檔案欄位的 GtkEntry。如果您想修改或查詢任何有關該 "
+"表示用來輸入檔案名稱的檔案欄位的 GtkEntry。如果你想修改或查詢任何有關該 "
 "GtkEntry 的參數，可以透過本屬性進行。"
 
 #: ../libgnomeui/gnome-file-entry.c:309
@@ -1184,7 +1184,7 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"程式「%s」正嘗試更改一些系統管理員或作業系統本身不容許更改的設定。某部份您更改"
+"程式「%s」正嘗試更改一些系統管理員或作業系統本身不容許更改的設定。某部份你更改"
 "的設定或許不會生效，或是無法儲存設定，供下次啟動程式時使用。"
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
@@ -1265,7 +1265,7 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"圖示選擇窗。如果您想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進"
+"圖示選擇窗。如果你想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進"
 "行。"
 
 #: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:988
@@ -1376,7 +1376,7 @@ msgstr "桌面環境結束之前記住密碼(_R)"
 # How can I translate "keyring"? -- Abel
 #: ../libgnomeui/gnome-password-dialog.c:472
 msgid "Save password in _keyring"
-msgstr "在鑰匙圈中儲存密碼(_K)"
+msgstr "在密碼匙圈中儲存密碼(_K)"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1523,7 +1523,7 @@ msgstr "進程編號 %d：%s"
 msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
-msgstr "您可以選擇通知程式開發人員，協助他們解決問題，或者直接重新啟動程式。"
+msgstr "你可以選擇通知程式開發人員，協助他們解決問題，或者直接重新啟動程式。"
 
 #: ../libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
