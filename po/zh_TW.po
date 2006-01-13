@@ -1,16 +1,16 @@
-# traditional Chinese translation of libgnomeui.
-# Copyright (C) 2001, 02, 03, 04 Free Software Foundation, Inc.
-# Joe Man <trmetal@yahoo.com.hk>, 2001-2002.
-# Abel Cheung <abel@oaka.org>, 2002-2004.
+# Chinese (Taiwan) translation of libgnomeui.
+# Copyright (C) 2001, 02, 03, 04, 06 Free Software Foundation, Inc.
+# Joe Man <trmetal@yahoo.com.hk>, 2001-02.
+# Abel Cheung <abel@oaka.org>, 2002-04, 06.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.12.1.1\n"
+"Project-Id-Version: libgnomeui 2.12.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-21 04:40+0800\n"
-"PO-Revision-Date: 2005-11-21 04:42+0800\n"
+"POT-Creation-Date: 2006-01-13 08:01+0800\n"
+"PO-Revision-Date: 2006-01-13 08:27+0800\n"
 "Last-Translator: Abel Cheung <abel@oaka.org>\n"
-"Language-Team: Chinese (traditional) <community@linuxhall.org>\n"
+"Language-Team: Chinese (Taiwan) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,26 +31,26 @@ msgstr "副項目二"
 msgid "Hint for item 2"
 msgstr "項目二的提示"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:832
+#: ../file-chooser/gtkfilesystemgnomevfs.c:826
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s 連結的目的地位置不是資料夾"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:843
+#: ../file-chooser/gtkfilesystemgnomevfs.c:837
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s 是一個沒有目的地位置的連結"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:958
+#: ../file-chooser/gtkfilesystemgnomevfs.c:952
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s 不是資料夾"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1206
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1200
 msgid "File System"
 msgstr "檔案系統"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1964
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1958
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "無法儲存書籤 (%s)"
@@ -59,12 +59,12 @@ msgstr "無法儲存書籤 (%s)"
 #: ../file-chooser/sucky-desktop-item.c:605
 #, c-format
 msgid "Error reading file '%s': %s"
-msgstr "讀取檔案‘%s’時發生錯誤：%s"
+msgstr "讀取檔案「%s」時發生錯誤：%s"
 
 #: ../file-chooser/sucky-desktop-item.c:285
 #, c-format
 msgid "Error rewinding file '%s': %s"
-msgstr "回到檔案‘%s’的開始時發生錯誤：%s"
+msgstr "回到檔案「%s」的開始時發生錯誤：%s"
 
 #: ../file-chooser/sucky-desktop-item.c:384
 #: ../file-chooser/sucky-desktop-item.c:3702
@@ -74,12 +74,12 @@ msgstr "沒有名稱"
 #: ../file-chooser/sucky-desktop-item.c:620
 #, c-format
 msgid "File '%s' is not a regular file or directory."
-msgstr "‘%s’不是一個普通的檔案或目錄。"
+msgstr "「%s」不是一個普通的檔案或目錄。"
 
 #: ../file-chooser/sucky-desktop-item.c:796
 #, c-format
 msgid "Error cannot find file id '%s'"
-msgstr "發生錯誤，無法尋找檔案 id ‘%s’"
+msgstr "發生錯誤，無法尋找檔案 id「%s」"
 
 #: ../file-chooser/sucky-desktop-item.c:842
 msgid "No filename to save to"
@@ -114,23 +114,23 @@ msgstr "不明的編碼：%s"
 #: ../file-chooser/sucky-desktop-item.c:3990
 #, c-format
 msgid "Error writing file '%s': %s"
-msgstr "寫入檔案‘%s’時發生錯誤：%s"
+msgstr "寫入檔案「%s」時發生錯誤：%s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr "無法擷取有關檔案‘%s’的資訊：%s"
+msgstr "無法擷取有關檔案「%s」的資訊：%s"
 
 #: ../file-chooser/testfilechooser.c:191
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr "無法開啟檔案‘%s’：%s"
+msgstr "無法開啟檔案「%s」：%s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "無法載入圖片‘%s’：原因不詳，有可能是圖片內容損壞"
+msgstr "無法載入圖片「%s」：原因不詳，有可能是圖片內容損壞"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
@@ -704,7 +704,7 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
-"您必須登入方可存取“%s”。\n"
+"您必須登入方可存取「%s」。\n"
 "%s"
 
 #: ../libgnomeui/gnome-authentication-manager.c:74
@@ -838,7 +838,7 @@ msgstr "從清單中選取時間"
 
 #: ../libgnomeui/gnome-dateedit.c:1015
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date 已過時，請使用 gnome_date_edit_get_time"
+msgstr "gnome_date_edit_get_date 已不建議使用，請改用 gnome_date_edit_get_time"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:121
 #: ../libgnomeui/gnome-font-picker.c:155
@@ -1070,7 +1070,7 @@ msgstr "GtkFileChooser 動作"
 
 #: ../libgnomeui/gnome-file-entry.c:320
 msgid "The type of operation that the file selector is performing."
-msgstr "檔案選取器所進行的操作類型。"
+msgstr "檔案選擇元件所進行的操作類型。"
 
 #: ../libgnomeui/gnome-file-entry.c:635 ../libgnomeui/gnome-file-entry.c:669
 msgid "Select file"
@@ -1180,8 +1180,8 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"程式“%s”正嘗試更改一些系統管理員或作業系統本身不容許更改的設定。某部份您更改"
-"的設定或許不會生效，或是無法儲存設定，供下次啟動程式時使用。"
+"程式「%s」正嘗試更改一些系統管理員或作業系統本身不容許更改的設定。某部份您更"
+"改的設定或許不會生效，或是無法儲存設定，供下次啟動程式時使用。"
 
 #: ../libgnomeui/gnome-gconf-ui.c:176
 #, c-format
@@ -1309,12 +1309,12 @@ msgstr "請在此處輸入載有圖示的目錄的名稱。"
 #: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection：‘%s’不存在或不是目錄"
+msgstr "GnomeIconSelection：「%s」不存在或不是目錄"
 
 #: ../libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection：無法開啟目錄‘%s’"
+msgstr "GnomeIconSelection：無法開啟目錄「%s」"
 
 #: ../libgnomeui/gnome-icon-sel.c:401
 msgid "Loading Icons..."
@@ -1364,10 +1364,10 @@ msgstr "以暱名方式連接(_A)"
 msgid "Connect as u_ser:"
 msgstr "以指定用戶身分連接(_S):"
 
-# Difficult to explain "session" to newbies -- Abel
+# (Abel) 對於用戶來說，甚麼叫「作業階段」？
 #: ../libgnomeui/gnome-password-dialog.c:453
 msgid "_Remember password for this session"
-msgstr "在此作業階段中記住密碼(_R)"
+msgstr "桌面環境結束之前記住密碼(_R)"
 
 # How can I translate "keyring"? -- Abel
 #: ../libgnomeui/gnome-password-dialog.c:455
@@ -1380,7 +1380,7 @@ msgstr "顯示預覽"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
-msgstr "該 pixmap 項目應否顯示預覽。"
+msgstr "該 pixmap 應否有預覽圖。"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:189
 #: ../libgnomeui/gnome-pixmap-entry.c:479
@@ -1504,7 +1504,7 @@ msgstr ""
 #: ../libgnomeui/gnome_segv.c:112
 #, c-format
 msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "程式“%s”不正常地結束。"
+msgstr "程式「%s」不正常地結束。"
 
 #: ../libgnomeui/gnome_segv.c:117
 #, c-format
