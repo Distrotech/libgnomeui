@@ -287,7 +287,11 @@ read_scripts (void)
 		escape = strchr (mimetype, '@');
 		if (escape != NULL)
 		  *escape = '/';
-		
+
+		/* Convert any remaining '@' to '+' in mimetype */
+		while ((escape = strchr (mimetype, '@')) != NULL)
+                  *escape = '+';
+
 		g_hash_table_insert (scripts_hash,
 				     g_strdup (mimetype), command);
 	      }
