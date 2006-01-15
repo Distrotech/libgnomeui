@@ -1,3 +1,10 @@
+2006-01-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-thumbnail.c: (gnome_thumbnail_factory_generate_thumbnail),
+	(gnome_thumbnail_factory_save_thumbnail), (thumb_md5_transform):
+	Save the width and height metadata as suggested by the spec. Patch
+	from James Cape. Closes bug #143470.
+
 2002-05-12  Glynn Foster  <glynn.foster@sun.com>
 
 	* gnome-about.c: (gnome_about_display_credits_dialog): Set the 
