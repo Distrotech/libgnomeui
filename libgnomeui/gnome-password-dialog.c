@@ -352,6 +352,7 @@ gnome_password_dialog_new (const char	*dialog_title,
  	gtk_window_set_position (GTK_WINDOW (password_dialog), GTK_WIN_POS_CENTER);
 	gtk_window_set_modal (GTK_WINDOW (password_dialog), TRUE);
 	gtk_window_set_resizable (GTK_WINDOW (password_dialog), FALSE);
+	gtk_window_set_keep_above (GTK_WINDOW (password_dialog), TRUE);
 
  	gtk_container_set_border_width (GTK_CONTAINER (password_dialog), DIALOG_BORDER_WIDTH);
 

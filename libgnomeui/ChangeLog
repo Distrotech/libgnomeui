@@ -1,5 +1,11 @@
 2006-01-15  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* gnome-password-dialog.c: (gnome_password_dialog_new):
+	Always keep the password dialog on top. Patch from Christian
+	Neumair. Reported as bug #163973 by Jorn Baayen.
+
+2006-01-15  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* gnome-thumbnail.c: (gnome_thumbnail_factory_generate_thumbnail),
 	(gnome_thumbnail_factory_save_thumbnail), (thumb_md5_transform):
 	Save the width and height metadata as suggested by the spec. Patch
