@@ -1,6 +1,9 @@
 libgnomeui 2.13.1
 -----------------
 
+* Fix mime type problem with the thumbnailer (Bastien)
+* Fix a crasher (Felix Riemann)
+* Fix leaks in the GOption code (Christian Perch)
 * Thread safety fixes (jylefort at FreeBSD org)
 * Warning fixes (Kjartan)
 * Leak fixes in the GOption code (Christian Perch)
