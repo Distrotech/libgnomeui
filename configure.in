@@ -10,8 +10,8 @@ AC_PREREQ(2.54)
 #
 m4_define([libgnomeui_major_version], [2])
 m4_define([libgnomeui_minor_version], [13])
-m4_define([libgnomeui_micro_version], [1])
-m4_define([libgnomeui_interface_age], [1])
+m4_define([libgnomeui_micro_version], [2])
+m4_define([libgnomeui_interface_age], [2])
 # If you need a modifier for the version number. 
 # Normally empty, but can be used to make "fixup" releases.
 m4_define([libgnomeui_extraversion], [])
@@ -19,7 +19,7 @@ m4_define([libgnomeui_extraversion], [])
 dnl Required versions of other packages
 m4_define([esound_required_version],         [0.2.26])
 m4_define([audiofile_required_version],      [0.2.3])
-m4_define([libgnome_required_version],       [2.13.5])
+m4_define([libgnome_required_version],       [2.13.7])
 m4_define([libgnomecanvas_required_version], [2.0.0])
 m4_define([libbonoboui_required_version],    [2.13.1])
 m4_define([gconf_required_version],          [1.1.11])

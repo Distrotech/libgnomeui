@@ -1,3 +1,8 @@
+libgnomeui 2.13.2
+-----------------
+
+* Sync GOption code with latest libgnome (Christian)
+
 libgnomeui 2.13.1
 -----------------
 
