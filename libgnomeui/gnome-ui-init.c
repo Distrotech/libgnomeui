@@ -163,7 +163,7 @@ libgnomeui_module_info_get (void)
 		NULL, NULL
 	};
 
-	module_info.expansion1 = libgnomeui_get_goption_group;
+	module_info.get_goption_group_func = libgnomeui_get_goption_group;
 
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[6];
