@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-12 19:09+0100\n"
+"POT-Creation-Date: 2006-01-16 18:01+0100\n"
 "PO-Revision-Date: 2004-09-12 13:44+0200\n"
 "Last-Translator: Francesco Marletta <francesco.marletta@tiscali.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -607,31 +607,31 @@ msgstr "_Fine partita"
 msgid "End the current game"
 msgstr "Termina la partita corrente"
 
-#: libgnomeui/gnome-app-helper.c:1143
+#: libgnomeui/gnome-app-helper.c:1147
 msgid "_Contents"
 msgstr "_Sommario"
 
-#: libgnomeui/gnome-app-helper.c:1146
+#: libgnomeui/gnome-app-helper.c:1150
 msgid "View help for this application"
 msgstr "Mosta la documentazione di questa applicazione"
 
-#: libgnomeui/gnome-app-helper.c:2574
+#: libgnomeui/gnome-app-helper.c:2587
 msgid "Text Below Icons"
 msgstr "Testo sotto le icone"
 
-#: libgnomeui/gnome-app-helper.c:2575
+#: libgnomeui/gnome-app-helper.c:2588
 msgid "Priority Text Beside Icons"
 msgstr "Testo prioritario accanto le icone"
 
-#: libgnomeui/gnome-app-helper.c:2576
+#: libgnomeui/gnome-app-helper.c:2589
 msgid "Icons Only"
 msgstr "Solo icone"
 
-#: libgnomeui/gnome-app-helper.c:2577
+#: libgnomeui/gnome-app-helper.c:2590
 msgid "Text Only"
 msgstr "Solo testo"
 
-#: libgnomeui/gnome-app-helper.c:2638
+#: libgnomeui/gnome-app-helper.c:2651
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Usare le impostazioni predefinite del desktop (%s)"
@@ -746,36 +746,36 @@ msgstr ""
 msgid "You must log in to access %s\n"
 msgstr "È necessario effettuare il login per accedere a \"%s\"\n"
 
-#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "Specify session management ID"
 msgstr "Spefica l'ID del gestore di sessione"
 
-#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "Specify prefix of saved configuration"
 msgstr "Specifica il prefisso della configurazione salvata"
 
-#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "PREFIX"
 msgstr "PREFISSO"
 
-#: libgnomeui/gnome-client.c:883 libgnomeui/gnome-client.c:899
+#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
 msgid "Disable connection to session manager"
 msgstr "Disabilita la connessione al gestore di sessione"
 
-#: libgnomeui/gnome-client.c:1005 libgnomeui/gnome-client.c:1015
+#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
 msgid "Session management"
 msgstr "Gestione della sessione"
 
-#: libgnomeui/gnome-client.c:1016
+#: libgnomeui/gnome-client.c:1031
 #, fuzzy
 msgid "Show session management options"
 msgstr "Gestione della sessione"
 
-#: libgnomeui/gnome-client.c:2550
+#: libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
 msgstr "Annulla uscita"
 
@@ -1207,7 +1207,7 @@ msgstr "Supporto GNOME GConf UI"
 msgid "_Details"
 msgstr "_Dettagli"
 
-#: libgnomeui/gnome-gconf-ui.c:169
+#: libgnomeui/gnome-gconf-ui.c:171
 #, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
@@ -1221,7 +1221,7 @@ msgstr ""
 "possono quindi non avere alcun effetto, oppure non potranno essere "
 "ripristinate al prossimo utilizzo di questa applicazione."
 
-#: libgnomeui/gnome-gconf-ui.c:176
+#: libgnomeui/gnome-gconf-ui.c:178
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1364,7 +1364,7 @@ msgstr "GnomeIconSelection: «%s» non esiste oppure non è una directory"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: impossibile aprire la directory «%s»"
 
-#: libgnomeui/gnome-icon-sel.c:401
+#: libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
 msgstr "Caricamento icone..."
 
@@ -1404,21 +1404,21 @@ msgstr "_Password:"
 msgid "Co_nnect"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:367
+#: libgnomeui/gnome-password-dialog.c:368
 msgid "Connect _anonymously"
 msgstr "Connessione _anonima"
 
-#: libgnomeui/gnome-password-dialog.c:372
+#: libgnomeui/gnome-password-dialog.c:373
 #, fuzzy
 msgid "Connect as u_ser:"
 msgstr "Connessione come _utente:"
 
-#: libgnomeui/gnome-password-dialog.c:470
+#: libgnomeui/gnome-password-dialog.c:471
 #, fuzzy
 msgid "_Remember password for this session"
 msgstr "Ricorda la password per questa sessione"
 
-#: libgnomeui/gnome-password-dialog.c:472
+#: libgnomeui/gnome-password-dialog.c:473
 #, fuzzy
 msgid "Save password in _keyring"
 msgstr "Salva la password nel portachiavi"
@@ -1431,7 +1431,7 @@ msgstr "Crea anteprima"
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Indica se il campo pixmap debba avere una anteprima."
 
-#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "Nessuna immagine"
 
@@ -1443,11 +1443,11 @@ msgstr "Anteprima immagine"
 msgid "A preview of the image currently specified"
 msgstr "Una anteprima dell'immagine correntemente specificata"
 
-#: libgnomeui/gnome-pixmap-entry.c:414
+#: libgnomeui/gnome-pixmap-entry.c:416
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Impossibile trovare un hbox, verrà usato un selettore di file normale."
 
-#: libgnomeui/gnome-pixmap-entry.c:420
+#: libgnomeui/gnome-pixmap-entry.c:422
 msgid "Preview"
 msgstr "Anteprima"
 
@@ -1502,28 +1502,28 @@ msgstr "Riduci rientro"
 msgid "About"
 msgstr "Informazioni"
 
-#: libgnomeui/gnome-ui-init.c:129 libgnomeui/gnome-ui-init.c:138
+#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
 msgid "Disable Crash Dialog"
 msgstr "Disabilita la finestra di dialogo di crash"
 
-#: libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:127
 msgid "X display to use"
 msgstr "Display X da utilizzare"
 
-#: libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:127
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:146 libgnomeui/gnome-ui-init.c:156
+#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
 msgid "GNOME GUI Library"
 msgstr "Libreria per la GUI di GNOME"
 
-#: libgnomeui/gnome-ui-init.c:157
+#: libgnomeui/gnome-ui-init.c:146
 msgid "Show GNOME GUI options"
 msgstr ""
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:753
+#: libgnomeui/gnome-ui-init.c:759
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1531,7 +1531,7 @@ msgstr ""
 "visualizzare la finestra di errore\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:767
+#: libgnomeui/gnome-ui-init.c:773
 #, c-format
 msgid ""
 "Segmentation fault!\n"

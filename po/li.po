@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0 cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-12 19:09+0100\n"
+"POT-Creation-Date: 2006-01-16 18:01+0100\n"
 "PO-Revision-Date: 2003-05-15 16:03+0000\n"
 "Last-Translator: Mathieu van Woerkom <mathieu.brabants.org>\n"
 "Language-Team: Limburgish <li.org>\n"
@@ -599,31 +599,31 @@ msgstr "Sjpel b_eèndige"
 msgid "End the current game"
 msgstr "'t hujige sjpel beèndige"
 
-#: libgnomeui/gnome-app-helper.c:1143
+#: libgnomeui/gnome-app-helper.c:1147
 msgid "_Contents"
 msgstr "_Inhaud"
 
-#: libgnomeui/gnome-app-helper.c:1146
+#: libgnomeui/gnome-app-helper.c:1150
 msgid "View help for this application"
 msgstr "De hulp bie dees toepassing bezeen"
 
-#: libgnomeui/gnome-app-helper.c:2574
+#: libgnomeui/gnome-app-helper.c:2587
 msgid "Text Below Icons"
 msgstr "Teks ónger piktogramme"
 
-#: libgnomeui/gnome-app-helper.c:2575
+#: libgnomeui/gnome-app-helper.c:2588
 msgid "Priority Text Beside Icons"
 msgstr "Prioriteitsteks naeve piktogramme"
 
-#: libgnomeui/gnome-app-helper.c:2576
+#: libgnomeui/gnome-app-helper.c:2589
 msgid "Icons Only"
 msgstr "Allein piktogramme"
 
-#: libgnomeui/gnome-app-helper.c:2577
+#: libgnomeui/gnome-app-helper.c:2590
 msgid "Text Only"
 msgstr "Allein teks"
 
-#: libgnomeui/gnome-app-helper.c:2638
+#: libgnomeui/gnome-app-helper.c:2651
 #, fuzzy, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Beroblaadsjtanderd (%s) gebroeke"
@@ -741,36 +741,36 @@ msgstr ""
 "Geer moot inlogge veur toegank te kriege tót \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "Specify session management ID"
 msgstr "Sessiemeister-ID sjpesifisere"
 
-#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "Specify prefix of saved configuration"
 msgstr "Geuf veurvoegsel van de opgesjlage kóngfiggerasie"
 
-#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "PREFIX"
 msgstr "VEURVOEGSEL"
 
-#: libgnomeui/gnome-client.c:883 libgnomeui/gnome-client.c:899
+#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
 msgid "Disable connection to session manager"
 msgstr "Verbènjing mit de sessiemeister oetsjakele"
 
-#: libgnomeui/gnome-client.c:1005 libgnomeui/gnome-client.c:1015
+#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
 msgid "Session management"
 msgstr "Sessie-meister"
 
-#: libgnomeui/gnome-client.c:1016
+#: libgnomeui/gnome-client.c:1031
 #, fuzzy
 msgid "Show session management options"
 msgstr "Sessie-meister"
 
-#: libgnomeui/gnome-client.c:2550
+#: libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
 msgstr "Aafmèljen annelere"
 
@@ -1201,7 +1201,7 @@ msgstr "GNOME GConf-UI-sjtiep"
 msgid "_Details"
 msgstr "_Detajs"
 
-#: libgnomeui/gnome-gconf-ui.c:169
+#: libgnomeui/gnome-gconf-ui.c:171
 #, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
@@ -1215,7 +1215,7 @@ msgstr ""
 "waere mäögelik genegeerd of zólle vergaete zeen, de naekste kier det geer de "
 "toepassing gebroek."
 
-#: libgnomeui/gnome-gconf-ui.c:176
+#: libgnomeui/gnome-gconf-ui.c:178
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1355,7 +1355,7 @@ msgstr "GnomeIconSelection: '%s' besjteit neet of is gein map"
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: kós map '%s' neet äöpene"
 
-#: libgnomeui/gnome-icon-sel.c:401
+#: libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
 msgstr "Piktogramme aan 't laje..."
 
@@ -1395,19 +1395,19 @@ msgstr "_Wachwaord"
 msgid "Co_nnect"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:367
+#: libgnomeui/gnome-password-dialog.c:368
 msgid "Connect _anonymously"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:372
+#: libgnomeui/gnome-password-dialog.c:373
 msgid "Connect as u_ser:"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:470
+#: libgnomeui/gnome-password-dialog.c:471
 msgid "_Remember password for this session"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:472
+#: libgnomeui/gnome-password-dialog.c:473
 msgid "Save password in _keyring"
 msgstr ""
 
@@ -1419,7 +1419,7 @@ msgstr "Maak Sjtaal"
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Of 't aafbiljings-inveurveldj ein sjtaal moot tuine."
 
-#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "Gein aafbiljing"
 
@@ -1431,11 +1431,11 @@ msgstr "Aafbiljingssjtaal"
 msgid "A preview of the image currently specified"
 msgstr "Ei sjtaal van de hujige afbiljing"
 
-#: libgnomeui/gnome-pixmap-entry.c:414
+#: libgnomeui/gnome-pixmap-entry.c:416
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Kós gein hbox vènje, gebroek ein normale besjtandjsseleksie"
 
-#: libgnomeui/gnome-pixmap-entry.c:420
+#: libgnomeui/gnome-pixmap-entry.c:422
 msgid "Preview"
 msgstr "Sjtaal"
 
@@ -1490,28 +1490,28 @@ msgstr "Oetsjpringe"
 msgid "About"
 msgstr "Euver"
 
-#: libgnomeui/gnome-ui-init.c:129 libgnomeui/gnome-ui-init.c:138
+#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
 msgid "Disable Crash Dialog"
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:127
 msgid "X display to use"
 msgstr "de te gebroeke X-display"
 
-#: libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:127
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:146 libgnomeui/gnome-ui-init.c:156
+#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI-bibeleteek"
 
-#: libgnomeui/gnome-ui-init.c:157
+#: libgnomeui/gnome-ui-init.c:146
 msgid "Show GNOME GUI options"
 msgstr ""
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:753
+#: libgnomeui/gnome-ui-init.c:759
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1519,7 +1519,7 @@ msgstr ""
 "tuine\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:767
+#: libgnomeui/gnome-ui-init.c:773
 #, c-format
 msgid ""
 "Segmentation fault!\n"

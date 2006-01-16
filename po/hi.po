@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-12 19:09+0100\n"
+"POT-Creation-Date: 2006-01-16 18:01+0100\n"
 "PO-Revision-Date: 2005-09-01 18:58+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -731,35 +731,35 @@ msgstr "खेल बन्द करें (_E)"
 msgid "End the current game"
 msgstr "वर्तमान खेल बन्द करें"
 
-#: libgnomeui/gnome-app-helper.c:1143
+#: libgnomeui/gnome-app-helper.c:1147
 msgid "_Contents"
 msgstr "विषय सूची (_C)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: libgnomeui/gnome-app-helper.c:1146
+#: libgnomeui/gnome-app-helper.c:1150
 msgid "View help for this application"
 msgstr "इस अनुप्रयोग हेतु मदद देखें"
 
-#: libgnomeui/gnome-app-helper.c:2574
+#: libgnomeui/gnome-app-helper.c:2587
 msgid "Text Below Icons"
 msgstr "चिह्नों के नीचे पाठ"
 
-#: libgnomeui/gnome-app-helper.c:2575
+#: libgnomeui/gnome-app-helper.c:2588
 msgid "Priority Text Beside Icons"
 msgstr "चिह्नों के बाजू से पाठ"
 
 # libgnomeui/gnome-app-helper.c:2564
-#: libgnomeui/gnome-app-helper.c:2576
+#: libgnomeui/gnome-app-helper.c:2589
 msgid "Icons Only"
 msgstr "सिर्फ चिह्न"
 
 # libgnomeui/gnome-app-helper.c:2565
-#: libgnomeui/gnome-app-helper.c:2577
+#: libgnomeui/gnome-app-helper.c:2590
 msgid "Text Only"
 msgstr "सिर्फ पाठ"
 
 # libgnomeui/gnome-app-helper.c:2616
-#: libgnomeui/gnome-app-helper.c:2638
+#: libgnomeui/gnome-app-helper.c:2651
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "डेस्कटॉप डिफाल्ट (%s) का उपयोग करें"
@@ -892,43 +892,43 @@ msgid "You must log in to access %s\n"
 msgstr "%s पर पहुँच आपको हेतु लॉगइन करना होगा.\n"
 
 # libgnomeui/gnome-client.c:833
-#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "Specify session management ID"
 msgstr "सत्र प्रबंधन आईडी निर्दिष्ट करें"
 
 # libgnomeui/gnome-client.c:833
-#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "ID"
 msgstr "आईडी"
 
 # libgnomeui/gnome-client.c:836
-#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "Specify prefix of saved configuration"
 msgstr "सहेजे गए कॉन्फ़िगरेशन का उपसर्ग निर्दिष्ट करें"
 
 # libgnomeui/gnome-client.c:836
-#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "PREFIX"
 msgstr "उपसर्ग"
 
 # libgnomeui/gnome-client.c:839
-#: libgnomeui/gnome-client.c:883 libgnomeui/gnome-client.c:899
+#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
 msgid "Disable connection to session manager"
 msgstr "सत्र प्रबंधक से संपर्क रद्द करें"
 
 # libgnomeui/gnome-client.c:945
-#: libgnomeui/gnome-client.c:1005 libgnomeui/gnome-client.c:1015
+#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
 msgid "Session management"
 msgstr "सत्र प्रबंधन"
 
 # libgnomeui/gnome-client.c:945
-#: libgnomeui/gnome-client.c:1016
+#: libgnomeui/gnome-client.c:1031
 #, fuzzy
 msgid "Show session management options"
 msgstr "सत्र प्रबंधन"
 
 # libgnomeui/gnome-client.c:2483
-#: libgnomeui/gnome-client.c:2550
+#: libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
 msgstr "लॉगआउट रद्द करें"
 
@@ -1449,7 +1449,7 @@ msgid "_Details"
 msgstr "विवरण (_D)"
 
 # libgnomeui/gnome-gconf-ui.c:169
-#: libgnomeui/gnome-gconf-ui.c:169
+#: libgnomeui/gnome-gconf-ui.c:171
 #, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
@@ -1463,7 +1463,7 @@ msgstr ""
 "होंगे."
 
 # libgnomeui/gnome-gconf-ui.c:176
-#: libgnomeui/gnome-gconf-ui.c:176
+#: libgnomeui/gnome-gconf-ui.c:178
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1619,7 +1619,7 @@ msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "गनोम-चिह्न-चयन '%s' डिरेक्ट्री खोल नहीं पाया"
 
 # libgnomeui/gnome-icon-sel.c:411
-#: libgnomeui/gnome-icon-sel.c:401
+#: libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
 msgstr "चिह्न लोड कर रहे..."
 
@@ -1664,19 +1664,19 @@ msgstr "पासवर्ड (_P):"
 msgid "Co_nnect"
 msgstr "जोड़ें (_n)"
 
-#: libgnomeui/gnome-password-dialog.c:367
+#: libgnomeui/gnome-password-dialog.c:368
 msgid "Connect _anonymously"
 msgstr "अनाम रूप में जोड़ें (_a)"
 
-#: libgnomeui/gnome-password-dialog.c:372
+#: libgnomeui/gnome-password-dialog.c:373
 msgid "Connect as u_ser:"
 msgstr "उपयोक्ता के रूप में जुड़ें (_s):"
 
-#: libgnomeui/gnome-password-dialog.c:470
+#: libgnomeui/gnome-password-dialog.c:471
 msgid "_Remember password for this session"
 msgstr "इस सत्र हेतु पासवर्ड याद रखें (_R)"
 
-#: libgnomeui/gnome-password-dialog.c:472
+#: libgnomeui/gnome-password-dialog.c:473
 msgid "Save password in _keyring"
 msgstr "कीरिंग में पासवर्ड सहेजें (_k)"
 
@@ -1691,7 +1691,7 @@ msgid "Whether the pixmap entry should have a preview."
 msgstr "क्या पिक्समैप प्रविष्टि में पूर्वावलोकन होना चाहिए."
 
 # libgnomeui/gnome-pixmap-entry.c:193 libgnomeui/gnome-pixmap-entry.c:505
-#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "कोई छवि नहीं"
 
@@ -1706,12 +1706,12 @@ msgid "A preview of the image currently specified"
 msgstr "वर्तमान में निर्दिष्ट छवि का पूर्वावलोकन"
 
 # libgnomeui/gnome-icon-entry.c:511 libgnomeui/gnome-pixmap-entry.c:387
-#: libgnomeui/gnome-pixmap-entry.c:414
+#: libgnomeui/gnome-pixmap-entry.c:416
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "कोई एचबक्सा नहीं मिला, सामान्य फ़ाइल चयन उपयोग"
 
 # libgnomeui/gnome-icon-entry.c:517 libgnomeui/gnome-pixmap-entry.c:393
-#: libgnomeui/gnome-pixmap-entry.c:420
+#: libgnomeui/gnome-pixmap-entry.c:422
 msgid "Preview"
 msgstr "पूर्वावलोकन"
 
@@ -1776,36 +1776,36 @@ msgstr "हाशिया हटाएँ"
 msgid "About"
 msgstr "के बारे में"
 
-#: libgnomeui/gnome-ui-init.c:129 libgnomeui/gnome-ui-init.c:138
+#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
 msgid "Disable Crash Dialog"
 msgstr "क्रै संवाद अक्षम करता है"
 
-#: libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:127
 msgid "X display to use"
 msgstr "उपयोग में एक्स प्रदर्शक"
 
-#: libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:127
 msgid "DISPLAY"
 msgstr "प्रदर्शक"
 
-#: libgnomeui/gnome-ui-init.c:146 libgnomeui/gnome-ui-init.c:156
+#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
 msgid "GNOME GUI Library"
 msgstr "गनोम जीयूआई लाइब्रेरी"
 
-#: libgnomeui/gnome-ui-init.c:157
+#: libgnomeui/gnome-ui-init.c:146
 msgid "Show GNOME GUI options"
 msgstr ""
 
 #  dialog display isn't working out
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:753
+#: libgnomeui/gnome-ui-init.c:759
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "बहु सेग्मेंटेशन फ़ॉल्ट हुए, त्रुटि संवाद दिखा नहीं सका\n"
 
 #  Eeeek! Can't show dialog
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:767
+#: libgnomeui/gnome-ui-init.c:773
 #, c-format
 msgid ""
 "Segmentation fault!\n"

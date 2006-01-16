@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.0.0cvs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-12 19:09+0100\n"
+"POT-Creation-Date: 2006-01-16 18:01+0100\n"
 "PO-Revision-Date: 2003-02-03 10:16+EDT\n"
 "Last-Translator: Ge'ez Frontier Foundation <locales@geez.org>\n"
 "Language-Team: Amharic <locales@geez.org>\n"
@@ -603,31 +603,31 @@ msgstr "_ጨዋታውን ጨርስ"
 msgid "End the current game"
 msgstr "አሁን ያለውን ጨዋታ ጨርስ"
 
-#: libgnomeui/gnome-app-helper.c:1143
+#: libgnomeui/gnome-app-helper.c:1147
 msgid "_Contents"
 msgstr "_ይዞታዎች"
 
-#: libgnomeui/gnome-app-helper.c:1146
+#: libgnomeui/gnome-app-helper.c:1150
 msgid "View help for this application"
 msgstr "ለእዚህ መጠቀሚያ ፕሮግራም መረጃ አሳይ"
 
-#: libgnomeui/gnome-app-helper.c:2574
+#: libgnomeui/gnome-app-helper.c:2587
 msgid "Text Below Icons"
 msgstr "ጽሑፍ ከምልክቶቹ ስር"
 
-#: libgnomeui/gnome-app-helper.c:2575
+#: libgnomeui/gnome-app-helper.c:2588
 msgid "Priority Text Beside Icons"
 msgstr "ከምልክቶቹ ጐን ቀዳሚ ጽሑፍ"
 
-#: libgnomeui/gnome-app-helper.c:2576
+#: libgnomeui/gnome-app-helper.c:2589
 msgid "Icons Only"
 msgstr "ምልክቶችን ብቻ"
 
-#: libgnomeui/gnome-app-helper.c:2577
+#: libgnomeui/gnome-app-helper.c:2590
 msgid "Text Only"
 msgstr "ጽሑፉን ብቻ"
 
-#: libgnomeui/gnome-app-helper.c:2638
+#: libgnomeui/gnome-app-helper.c:2651
 #, fuzzy, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "ነባሩን ሠሌዳ ይጠቀሙ (%s)"
@@ -739,36 +739,36 @@ msgstr ""
 msgid "You must log in to access %s\n"
 msgstr ""
 
-#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "Specify session management ID"
 msgstr "የጉባኤውን አስተዳደር መለያ ቍጥር ጥቀስ"
 
-#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "Specify prefix of saved configuration"
 msgstr "ተስተካክሎ የተቀመጠውን ባዕድ መነሻ ጥቀስ"
 
-#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "PREFIX"
 msgstr "ባዕድ መነሻ"
 
-#: libgnomeui/gnome-client.c:883 libgnomeui/gnome-client.c:899
+#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
 msgid "Disable connection to session manager"
 msgstr "ለአስተዳደሩ ጉባኤ ግንኙነቱን አቋርጥ "
 
-#: libgnomeui/gnome-client.c:1005 libgnomeui/gnome-client.c:1015
+#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
 msgid "Session management"
 msgstr "የመምሪያው ጉባኤ"
 
-#: libgnomeui/gnome-client.c:1016
+#: libgnomeui/gnome-client.c:1031
 #, fuzzy
 msgid "Show session management options"
 msgstr "የመምሪያው ጉባኤ"
 
-#: libgnomeui/gnome-client.c:2550
+#: libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
 msgstr "መዝጊያውን ይሰርዙ"
 
@@ -1193,7 +1193,7 @@ msgstr "የGNOME GConf UI መደገፊያ"
 msgid "_Details"
 msgstr "_ዝርዝሮች"
 
-#: libgnomeui/gnome-gconf-ui.c:169
+#: libgnomeui/gnome-gconf-ui.c:171
 #, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
@@ -1205,7 +1205,7 @@ msgstr ""
 "የማስተካከያዎትን አቅጣጫ ለመለወጥ ሙከራ አድርጓል። አንዳንድ የመረጡአቸው አቀማመጦች የመጠቀሚያ ፕሮግራሙን በሚቀጥለው "
 "ጊዜ ሲጠቀሙ ለውጦችን ላይ ቀበሉ ወይም ደግሞ እንደገና መልሰው ሳያወጧቸው ይችላሉ።"
 
-#: libgnomeui/gnome-gconf-ui.c:176
+#: libgnomeui/gnome-gconf-ui.c:178
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1338,7 +1338,7 @@ msgstr "GnomeIconSelection፦ '%s' የለም ወይንም ማውጫ አይደለ
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection፦ ማውጫውን መክፈት አልተቻለም '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:401
+#: libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
 msgstr "ምልክቶችን በመጫን ላይ..."
 
@@ -1378,19 +1378,19 @@ msgstr ""
 msgid "Co_nnect"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:367
+#: libgnomeui/gnome-password-dialog.c:368
 msgid "Connect _anonymously"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:372
+#: libgnomeui/gnome-password-dialog.c:373
 msgid "Connect as u_ser:"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:470
+#: libgnomeui/gnome-password-dialog.c:471
 msgid "_Remember password for this session"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:472
+#: libgnomeui/gnome-password-dialog.c:473
 msgid "Save password in _keyring"
 msgstr ""
 
@@ -1402,7 +1402,7 @@ msgstr "ቅድመ ዕይታውን ተጠቀም"
 msgid "Whether the pixmap entry should have a preview."
 msgstr "የቆሻብቀሮቆ መግቢያ ቅድመ ዕይታ ሊኖረው ይገባው እንደሆነ"
 
-#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "ምስል የለም"
 
@@ -1414,11 +1414,11 @@ msgstr "የምስሉ ቅድመ ዕይታ"
 msgid "A preview of the image currently specified"
 msgstr "አሁን ለተጠቀሰው ምስል ቅድመ ዕይታ"
 
-#: libgnomeui/gnome-pixmap-entry.c:414
+#: libgnomeui/gnome-pixmap-entry.c:416
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "መደበኛ የሆነውን የፋይል አመራረጥ በመጠቀም ሸሯቅብን ማግኘት አይቻልም"
 
-#: libgnomeui/gnome-pixmap-entry.c:420
+#: libgnomeui/gnome-pixmap-entry.c:422
 msgid "Preview"
 msgstr "ቅድመ ዕይታ"
 
@@ -1473,34 +1473,34 @@ msgstr "አንቀጽ የሌለው"
 msgid "About"
 msgstr "ስለ"
 
-#: libgnomeui/gnome-ui-init.c:129 libgnomeui/gnome-ui-init.c:138
+#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
 msgid "Disable Crash Dialog"
 msgstr ""
 
-#: libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:127
 msgid "X display to use"
 msgstr "Xን ለመጠቀም አሳይ"
 
-#: libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:127
 msgid "DISPLAY"
 msgstr "አሳይ"
 
-#: libgnomeui/gnome-ui-init.c:146 libgnomeui/gnome-ui-init.c:156
+#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
 msgid "GNOME GUI Library"
 msgstr "የGNOME GUI ስብስብ"
 
-#: libgnomeui/gnome-ui-init.c:157
+#: libgnomeui/gnome-ui-init.c:146
 msgid "Show GNOME GUI options"
 msgstr ""
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:753
+#: libgnomeui/gnome-ui-init.c:759
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "የተለያዩ ክፍሎች ላይ ስህተት ተከስቷል፥ ስሕተቱን ማሳየት አልተቻለም\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:767
+#: libgnomeui/gnome-ui-init.c:773
 #, c-format
 msgid ""
 "Segmentation fault!\n"

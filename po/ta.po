@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-12 19:09+0100\n"
+"POT-Creation-Date: 2006-01-16 18:01+0100\n"
 "PO-Revision-Date: 2004-08-20 17:02+0530\n"
 "Last-Translator: Jayaradha N <jaya@pune.redhat.com>\n"
 "Language-Team: Tamil <zhakanini@yahoogroups.com>\n"
@@ -607,31 +607,31 @@ msgstr "_விளையாட்டை முடி"
 msgid "End the current game"
 msgstr "தற்போதைய விளையாட்டை முடித்திடு"
 
-#: libgnomeui/gnome-app-helper.c:1143
+#: libgnomeui/gnome-app-helper.c:1147
 msgid "_Contents"
 msgstr "_உள்ளடக்கங்கள்"
 
-#: libgnomeui/gnome-app-helper.c:1146
+#: libgnomeui/gnome-app-helper.c:1150
 msgid "View help for this application"
 msgstr "இன்நிரலுக்கான உதவியைப் பார்க்கவும்"
 
-#: libgnomeui/gnome-app-helper.c:2574
+#: libgnomeui/gnome-app-helper.c:2587
 msgid "Text Below Icons"
 msgstr "குறும்படங்களுக்குக் கீழ் உரை"
 
-#: libgnomeui/gnome-app-helper.c:2575
+#: libgnomeui/gnome-app-helper.c:2588
 msgid "Priority Text Beside Icons"
 msgstr "குறும்படங்களுக்கு அருகில் முன்னுரிமை உரை"
 
-#: libgnomeui/gnome-app-helper.c:2576
+#: libgnomeui/gnome-app-helper.c:2589
 msgid "Icons Only"
 msgstr "குறும்படங்கள் மட்டும்"
 
-#: libgnomeui/gnome-app-helper.c:2577
+#: libgnomeui/gnome-app-helper.c:2590
 msgid "Text Only"
 msgstr "உரை மட்டும்"
 
-#: libgnomeui/gnome-app-helper.c:2638
+#: libgnomeui/gnome-app-helper.c:2651
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "இயல்பான கணினி மேசையை பயன்படுத்தவும் (%s)"
@@ -745,36 +745,36 @@ msgstr "%s டொமைன் ஐ அணுக %s ஆக உள்நுழை�
 msgid "You must log in to access %s\n"
 msgstr "%s அணுகலுக்கு நீங்கள் கடவுச்சொல் வழங்கவேண்டும்\n"
 
-#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "Specify session management ID"
 msgstr "அமர்வு மேலாண் எண்ணை குறிப்பிடு"
 
-#: libgnomeui/gnome-client.c:877 libgnomeui/gnome-client.c:891
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "ID"
 msgstr "எண்"
 
-#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "Specify prefix of saved configuration"
 msgstr "சேமித்த அமைப்பின் முற்சேர்க்கையை குறிப்பிடு"
 
-#: libgnomeui/gnome-client.c:880 libgnomeui/gnome-client.c:895
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "PREFIX"
 msgstr "முற்சேர்க்கை"
 
-#: libgnomeui/gnome-client.c:883 libgnomeui/gnome-client.c:899
+#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
 msgid "Disable connection to session manager"
 msgstr "அமர்வு மேலாளருடன் இருக்கும் இணைப்பை முடக்கு செய்"
 
-#: libgnomeui/gnome-client.c:1005 libgnomeui/gnome-client.c:1015
+#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
 msgid "Session management"
 msgstr "அமர்வு மேலாண்மை"
 
-#: libgnomeui/gnome-client.c:1016
+#: libgnomeui/gnome-client.c:1031
 #, fuzzy
 msgid "Show session management options"
 msgstr "அமர்வு மேலாண்மை"
 
-#: libgnomeui/gnome-client.c:2550
+#: libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
 msgstr "முடித்தலை நிறுத்து"
 
@@ -1199,7 +1199,7 @@ msgstr "கனோம் GConf UI ஆதரவு"
 msgid "_Details"
 msgstr "_விவரங்கள்"
 
-#: libgnomeui/gnome-gconf-ui.c:169
+#: libgnomeui/gnome-gconf-ui.c:171
 #, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
@@ -1211,7 +1211,7 @@ msgstr ""
 "மாற்றம் செய்ய விரும்புகிறீர்கள். நீங்கள் தேர்வு செய்த சில அமைப்புகள் அவற்றிற்கான விளைவை "
 "ஏற்படுத்தாது அல்லது அடுத்த முறை துவங்கும் போது பயன்பாடு நினைவில் கொள்ளாது"
 
-#: libgnomeui/gnome-gconf-ui.c:176
+#: libgnomeui/gnome-gconf-ui.c:178
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1347,7 +1347,7 @@ msgstr "GnomeIconSelection: '%s' இல்லை அல்லது அடைவ
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: '%s' அடைவு திறக்க முடியவில்லை"
 
-#: libgnomeui/gnome-icon-sel.c:401
+#: libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
 msgstr "குறும்படங்கள் ஏற்றப்படுகின்றன..."
 
@@ -1387,21 +1387,21 @@ msgstr "_கடவுச் சொல்:"
 msgid "Co_nnect"
 msgstr ""
 
-#: libgnomeui/gnome-password-dialog.c:367
+#: libgnomeui/gnome-password-dialog.c:368
 msgid "Connect _anonymously"
 msgstr "(_a)பெயரில்லாமல் இணை"
 
-#: libgnomeui/gnome-password-dialog.c:372
+#: libgnomeui/gnome-password-dialog.c:373
 #, fuzzy
 msgid "Connect as u_ser:"
 msgstr "(_u)பயனீட்டாளராக இணை"
 
-#: libgnomeui/gnome-password-dialog.c:470
+#: libgnomeui/gnome-password-dialog.c:471
 #, fuzzy
 msgid "_Remember password for this session"
 msgstr "இந்த அமர்வின் கடவுச்சொல்லை நினைவு கொள்ளவும்"
 
-#: libgnomeui/gnome-password-dialog.c:472
+#: libgnomeui/gnome-password-dialog.c:473
 #, fuzzy
 msgid "Save password in _keyring"
 msgstr "விசை-மோதிரத்தில் கடவுச்சொல்லை சேமிக்கவும்"
@@ -1414,7 +1414,7 @@ msgstr "முன்காட்டு"
 msgid "Whether the pixmap entry should have a preview."
 msgstr "பிக்ஸ்படம் நுளைவுக்கு முன்காட்சி இருக்கவேண்டுமா."
 
-#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:479
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "உருவம் கிடையாது"
 
@@ -1426,11 +1426,11 @@ msgstr "உருவ முன்காட்சி"
 msgid "A preview of the image currently specified"
 msgstr "தற்போது குறிப்பிட்ட உருவத்தின் முன்காட்சி"
 
-#: libgnomeui/gnome-pixmap-entry.c:414
+#: libgnomeui/gnome-pixmap-entry.c:416
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "hbox ஒன்றைக் காணவில்லை, சாதாரண கோப்பு தேர்தல் புழங்கப்படும்"
 
-#: libgnomeui/gnome-pixmap-entry.c:420
+#: libgnomeui/gnome-pixmap-entry.c:422
 msgid "Preview"
 msgstr "முன்காட்சி"
 
@@ -1485,34 +1485,34 @@ msgstr "உள்தள்ளாதே"
 msgid "About"
 msgstr "பற்றி"
 
-#: libgnomeui/gnome-ui-init.c:129 libgnomeui/gnome-ui-init.c:138
+#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
 msgid "Disable Crash Dialog"
 msgstr "முறிவு உரையாடலை முடக்குக"
 
-#: libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:127
 msgid "X display to use"
 msgstr "உபயோகிக்க வேண்டிய X காட்சி"
 
-#: libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:127
 msgid "DISPLAY"
 msgstr "காட்சி"
 
-#: libgnomeui/gnome-ui-init.c:146 libgnomeui/gnome-ui-init.c:156
+#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
 msgid "GNOME GUI Library"
 msgstr "கனோம் GUI நூலகம்"
 
-#: libgnomeui/gnome-ui-init.c:157
+#: libgnomeui/gnome-ui-init.c:146
 msgid "Show GNOME GUI options"
 msgstr ""
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:753
+#: libgnomeui/gnome-ui-init.c:759
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "பல பகுதியாக்கல் பிழைகள் நடைபெற்றுள்ளன; பிழை உரையாடலை காண்பிக்க முடியாது\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:767
+#: libgnomeui/gnome-ui-init.c:773
 #, c-format
 msgid ""
 "Segmentation fault!\n"
