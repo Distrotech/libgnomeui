@@ -104,6 +104,8 @@ size_prepared_cb (GdkPixbufLoader *loader,
 
 	g_return_if_fail (width > 0 && height > 0);
 
+	if (width < info->width && height < info->height) return;
+	
 	if (info->preserve_aspect_ratio && 
 	    (info->width > 0 || info->height > 0)) {
 		if (info->width < 0)

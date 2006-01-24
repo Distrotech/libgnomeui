@@ -1,3 +1,9 @@
+2006-01-24  Lucas Rocha  <lucasr@gnome.org>
+
+	* libgnomeui/gnome-vfs-util.c: (size_prepared_cb) leave pixbuf with
+	the original size if the image is smaller than the target thumbnail 
+	size.
+
 2006-01-16  Emmanuele Bassi  <ebassi@cvs.gnome.org>
 
 	* configure.in, NEWS: release 2.13.2.
