@@ -1,19 +1,19 @@
 # libgnomeui eesti keele tõlge.
 # Estonian translation of libgnomeui.
 #
-# Copyright (C) 2002-2005 Free Software Foundation, Inc.
+# Copyright (C) 2002-2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
 #
 # Tõivo Leedjärv <toivo@linux.ee>, 2002-2004.
 # Priit Laes <amd@tt.ee>, 2004.
-# Ivar Smolin <okul@linux.ee>, 2005.
+# Ivar Smolin <okul@linux.ee>, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.12\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-07-26 14:46+0000\n"
-"PO-Revision-Date: 2005-10-18 01:38+0300\n"
+"PO-Revision-Date: 2006-01-21 10:49+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -730,7 +730,7 @@ msgstr "Autentimine on vajalik"
 #: ../libgnomeui/gnome-authentication-manager.c:288
 #, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr ""
+msgstr "%s domeenile %s juurdepääsuks pead sa sisse logima\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:290
 #, c-format
@@ -853,7 +853,7 @@ msgstr "Pealkiri"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
-msgstr ""
+msgstr "Druiidi pealkiri"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
@@ -1262,13 +1262,15 @@ msgstr "Failinimi, mida peaks kuvatama ikooni sisestusväljal."
 
 #: ../libgnomeui/gnome-icon-entry.c:213
 msgid "Picker dialog"
-msgstr ""
+msgstr "Valikudialoog"
 
 #: ../libgnomeui/gnome-icon-entry.c:214
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
+"Ikoonivaliku dialoog. Selle abil saavutatakse suvalise omaduse muutmise või "
+"pärimise peale GtkDialog-tüüpi dialoogi käivitamine."
 
 #: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:985
 msgid "No Icon"
@@ -1401,7 +1403,7 @@ msgstr "Käesolevaga määratud pildi eelvaatlus"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:414
 msgid "Can't find an hbox, using a normal file selection"
-msgstr ""
+msgstr "Hbox'i pole võimalik leida, kasutatakse tavalist failivalikut"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:420
 msgid "Preview"
