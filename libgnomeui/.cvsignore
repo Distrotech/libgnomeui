@@ -18,3 +18,5 @@ libgnomeui-2.0-uninstalled.pc
 gnometypebuiltins.h
 gnome-marshal.c
 gnome-marshal.h
+stamp-gnome-marshal.h
+stamp-gnometypebuiltins.h

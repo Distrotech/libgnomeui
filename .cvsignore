@@ -38,3 +38,7 @@ libgnomeui2-*.tar.gz
 .using-gnome-libs-package
 sgml
 autom4te.cache
+gtk-doc.make
+libgnomeui-zip
+stamp-h1
+depcomp
