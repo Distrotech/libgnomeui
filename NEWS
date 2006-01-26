@@ -1,3 +1,9 @@
+libgnomeui 2.13.3
+-----------------
+
+* Don't scale up small images when creating thumbnails (Lucas Rocha)
+* Fix critical warning and crash in thumbnailer (Alex Larsson)
+
 libgnomeui 2.13.2
 -----------------
 
