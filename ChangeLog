@@ -1,3 +1,7 @@
+2006-01-26  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Release 2.13.3 and bump version again.
+
 2006-01-26  Alexander Larsson  <alexl@redhat.com>
 
 	* libgnomeui/gnome-thumbnail.c (gnome_thumbnail_factory_save_thumbnail):
