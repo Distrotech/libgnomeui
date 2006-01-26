@@ -1,3 +1,8 @@
+2006-01-26  Alexander Larsson  <alexl@redhat.com>
+
+	* libgnomeui/gnome-thumbnail.c (gnome_thumbnail_factory_save_thumbnail):
+	Don't feed NULL as width/height strings when saving thumbnail. (#327323)
+
 2006-01-24  Lucas Rocha  <lucasr@gnome.org>
 
 	* libgnomeui/gnome-vfs-util.c: (size_prepared_cb) leave pixbuf with

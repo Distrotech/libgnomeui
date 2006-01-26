@@ -1117,7 +1117,7 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
   unsigned char *digest;
   char *path, *md5, *file, *dir;
   char *tmp_path;
-  char *width, *height;
+  const char *width, *height;
   int tmp_fd;
   char mtime_str[21];
   gboolean saved_ok;
@@ -1171,16 +1171,31 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
   
   g_snprintf (mtime_str, 21, "%lu",  original_mtime);
   width = g_object_get_data (G_OBJECT (thumbnail), "gnome-thumbnail-width");
+  if (width == NULL)
+    width = gdk_pixbuf_get_option (thumbnail, "tEXt::Thumb::Image::Width");
   height = g_object_get_data (G_OBJECT (thumbnail), "gnome-thumbnail-height");
-  saved_ok  = gdk_pixbuf_save (thumbnail,
-			       tmp_path,
-			       "png", NULL,
-			       "tEXt::Thumb::Image::Width", width,
-			       "tEXt::Thumb::Image::Height", height,
-			       "tEXt::Thumb::URI", uri,
-			       "tEXt::Thumb::MTime", mtime_str,
-			       "tEXt::Software", "GNOME::ThumbnailFactory",
-			       NULL);
+  if (height == NULL)
+    height = gdk_pixbuf_get_option (thumbnail, "tEXt::Thumb::Image::Height");
+
+  if (width != NULL && height != NULL) 
+    saved_ok  = gdk_pixbuf_save (thumbnail,
+				 tmp_path,
+				 "png", NULL,
+				 "tEXt::Thumb::Image::Width", width,
+				 "tEXt::Thumb::Image::Height", height,
+				 "tEXt::Thumb::URI", uri,
+				 "tEXt::Thumb::MTime", mtime_str,
+				 "tEXt::Software", "GNOME::ThumbnailFactory",
+				 NULL);
+  else
+    saved_ok  = gdk_pixbuf_save (thumbnail,
+				 tmp_path,
+				 "png", NULL,
+				 "tEXt::Thumb::URI", uri,
+				 "tEXt::Thumb::MTime", mtime_str,
+				 "tEXt::Software", "GNOME::ThumbnailFactory",
+				 NULL);
+    
 
   if (saved_ok)
     {
