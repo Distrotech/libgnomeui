@@ -1,4 +1,4 @@
-# Changwoo Ryu <cwryu@debian.org>, 1998-2003, 2004
+# Changwoo Ryu <cwryu@debian.org>, 1998-2003, 2004-2006
 # Young-Ho, Cha <ganadist@mizi.com>, 2002
 #
 msgid ""
@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui 2.6.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-26 15:43+0100\n"
-"PO-Revision-Date: 2005-08-30 00:25+0900\n"
+"PO-Revision-Date: 2006-01-28 01:19+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
@@ -758,9 +758,8 @@ msgid "Session management"
 msgstr "세션 관리"
 
 #: libgnomeui/gnome-client.c:1031
-#, fuzzy
 msgid "Show session management options"
-msgstr "세션 관리"
+msgstr "세션 관리 옵션 표시"
 
 #: libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
@@ -1491,7 +1490,7 @@ msgstr "그놈 GUI 라이브러리"
 
 #: libgnomeui/gnome-ui-init.c:146
 msgid "Show GNOME GUI options"
-msgstr ""
+msgstr "그놈 GUI 옵션 표시"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:759
@@ -1558,6 +1557,3 @@ msgstr "개발자에게 알리기(_I)"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "디버깅(_D)"
-
-#~ msgid "Exit the test"
-#~ msgstr "테스트 끝내기"
