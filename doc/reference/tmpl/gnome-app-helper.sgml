@@ -1221,7 +1221,7 @@ Syntactic sugar for gnome_app_helper_gettext().
 
 <!-- ##### MACRO D_ ##### -->
 <para>
-Syntactic sugar for calling dgettext() with the domain set to lignome's message
+Syntactic sugar for calling dgettext() with the domain set to libgnome's message
 domain.
 </para>
 
