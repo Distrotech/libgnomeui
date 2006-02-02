@@ -1,3 +1,33 @@
+2006-02-01  Federico Mena Quintero  <federico@ximian.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(network_servers_volume_token):  New variable to hold a pointer to
+	a static string, which we can use as an opaque token for the fake
+	"Network Servers" volume.
+	(IS_NETWORK_SERVERS_VOLUME_TOKEN): New helper macro.
+	(gtk_file_system_gnome_vfs_volume_free): Ignore the token for the
+	Network Servers volume.
+	(gtk_file_system_gnome_vfs_volume_get_base_path): Return
+	"network:///" for the Network Servers volume.
+	(gtk_file_system_gnome_vfs_volume_get_is_mounted): Always return
+	"is mounted" for the Network Servers volume.
+	(gtk_file_system_gnome_vfs_volume_mount): Simply return TRUE for
+	the Network Servers volume.
+	(gtk_file_system_gnome_vfs_volume_get_display_name): Generate the
+	name for "Network Servers".
+	(gtk_file_system_gnome_vfs_volume_render_icon): Use the icon named
+	"gnome-fs-network" for Network Servers, like Nautilus does.
+	(is_desktop_file_a_folder): Also consider .desktop files of
+	Type=FSDevice to be folders.  This is the case for
+	smblink-root in network:///.
+
+2006-02-01  Federico Mena Quintero  <federico@ximian.com>
+
+	Branched for GNOME 2.14; the branch there is "libgnomeui-2-14",
+	anchored at the "LIBGNOMEUI_2_14_BRANCHPOINT" tag.
+
+	* configure.in: Bump to version 2.15.0, interface age 0.
+
 2006-01-29  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* doc/reference/tmpl/gnome-app-helper.sgml: Fix typo in the docs.

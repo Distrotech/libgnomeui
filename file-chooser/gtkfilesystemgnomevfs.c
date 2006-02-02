@@ -342,6 +342,14 @@ static GObjectClass *folder_parent_class;
 #define ITEMS_PER_LOCAL_NOTIFICATION 10000
 #define ITEMS_PER_REMOTE_NOTIFICATION 100
 
+/* The pointers we return for a GtkFileSystemVolume are opaque tokens; they are
+ * really pointers to GnomeVFSDrive or GnomeVFSVolume objects.  We need an extra
+ * token for the fake "Network Servers" volume.  So, we'll return the pointer to
+ * this particular string.
+ */
+static const char *network_servers_volume_token = "Network Servers";
+#define IS_NETWORK_SERVERS_VOLUME_TOKEN(volume) ((gpointer) (volume) == (gpointer) network_servers_volume_token)
+
 /*
  * GtkFileSystemGnomeVFS
  */
@@ -544,6 +552,10 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
     }
 
   g_list_free (list);
+
+  /* Network Servers */
+
+  result = g_slist_prepend (result, (gpointer) network_servers_volume_token);
 
   /* Done */
 
@@ -769,7 +781,8 @@ is_desktop_file_a_folder (SuckyDesktopItem *ditem)
 
   ditem_type = sucky_desktop_item_get_entry_type (ditem);
 
-  if (ditem_type != SUCKY_DESKTOP_ITEM_TYPE_LINK)
+  if (!(ditem_type == SUCKY_DESKTOP_ITEM_TYPE_LINK
+	|| ditem_type == SUCKY_DESKTOP_ITEM_TYPE_FSDEVICE))
     return FALSE;
 
   /* FIXME: do we have to get the link URI and figure out its type?  For now,
@@ -1023,7 +1036,9 @@ static void
 gtk_file_system_gnome_vfs_volume_free (GtkFileSystem        *file_system,
 				       GtkFileSystemVolume  *volume)
 {
-  if (GNOME_IS_VFS_DRIVE (volume))
+  if (IS_NETWORK_SERVERS_VOLUME_TOKEN (volume))
+    /* do nothing */;
+  else if (GNOME_IS_VFS_DRIVE (volume))
     gnome_vfs_drive_unref (GNOME_VFS_DRIVE (volume));
   else if (GNOME_IS_VFS_VOLUME (volume))
     gnome_vfs_volume_unref (GNOME_VFS_VOLUME (volume));
@@ -1037,7 +1052,9 @@ gtk_file_system_gnome_vfs_volume_get_base_path (GtkFileSystem        *file_syste
 {
   char *uri;
 
-  if (GNOME_IS_VFS_DRIVE (volume)) {
+  if (IS_NETWORK_SERVERS_VOLUME_TOKEN (volume))
+    return gtk_file_path_new_dup ("network:///");
+  else if (GNOME_IS_VFS_DRIVE (volume)) {
     GnomeVFSVolume *vfs_volume;
 
     /* So... the drive may have grown a volume (from mounting it from
@@ -1077,7 +1094,9 @@ static gboolean
 gtk_file_system_gnome_vfs_volume_get_is_mounted (GtkFileSystem        *file_system,
 						 GtkFileSystemVolume  *volume)
 {
-  if (GNOME_IS_VFS_DRIVE (volume))
+  if (IS_NETWORK_SERVERS_VOLUME_TOKEN (volume))
+    return TRUE;
+  else if (GNOME_IS_VFS_DRIVE (volume))
     return gnome_vfs_drive_is_mounted (GNOME_VFS_DRIVE (volume));
   else if (GNOME_IS_VFS_VOLUME (volume))
     return gnome_vfs_volume_is_mounted (GNOME_VFS_VOLUME (volume));
@@ -1129,7 +1148,9 @@ gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem        *file_system,
 {
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
 
-  if (GNOME_IS_VFS_DRIVE (volume))
+  if (IS_NETWORK_SERVERS_VOLUME_TOKEN (volume))
+    return TRUE;
+  else if (GNOME_IS_VFS_DRIVE (volume))
     {
       struct mount_closure closure;
 
@@ -1176,7 +1197,9 @@ gtk_file_system_gnome_vfs_volume_get_display_name (GtkFileSystem       *file_sys
   GnomeVFSVolume *mounted_volume;
 
   display_name = NULL;
-  if (GNOME_IS_VFS_DRIVE (volume))
+  if (IS_NETWORK_SERVERS_VOLUME_TOKEN (volume))
+    display_name = g_strdup (_("Network Servers"));
+  else if (GNOME_IS_VFS_DRIVE (volume))
     {
       mounted_volume = gnome_vfs_drive_get_mounted_volume (GNOME_VFS_DRIVE (volume));
       if (mounted_volume)
@@ -1299,7 +1322,9 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
   system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
 
   icon_name = NULL;
-  if (GNOME_IS_VFS_DRIVE (volume))
+  if (IS_NETWORK_SERVERS_VOLUME_TOKEN (volume))
+    icon_name = g_strdup ("gnome-fs-network");
+  else if (GNOME_IS_VFS_DRIVE (volume))
     {
       mounted_volume = gnome_vfs_drive_get_mounted_volume (GNOME_VFS_DRIVE (volume));
       if (mounted_volume)
