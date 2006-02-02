@@ -1,5 +1,5 @@
 # Përkthimi i mesazheve të libgnomeui në shqip
-# Copyright (C) 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
 #
 #
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-30 07:26+0100\n"
-"PO-Revision-Date: 2006-01-30 11:42+0100\n"
+"POT-Creation-Date: 2006-02-02 07:46+0100\n"
+"PO-Revision-Date: 2006-02-02 09:42+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -32,26 +32,30 @@ msgstr "Objekt bir 2"
 msgid "Hint for item 2"
 msgstr "Propozime për objektin 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:820
+#: ../file-chooser/gtkfilesystemgnomevfs.c:833
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s është një lidhje me diçka që nuk është një kartelë"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:844
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s është një lidhje me një pozicon që nuk ekziston"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:946
+#: ../file-chooser/gtkfilesystemgnomevfs.c:959
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nuk është kartelë"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1194
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1201
+msgid "Network Servers"
+msgstr "Server rrjeti"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1217
 msgid "File System"
 msgstr "File i sistemit"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1952
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1977
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ruajtja e libërshënuesit dështoi (%s)"
