@@ -1,23 +1,23 @@
+# translation of ru.po to Russian
 # translation of libgnomeui.HEAD.po to
-# Copyright (C) 2001-2002, 2005 Free Software Foundation, Inc.
+# Copyright (C) 2001-2002, 2005, 2006 Free Software Foundation, Inc.
+#
 # Valek Filippov <frob@df.ru>, 2001-2002.
 # Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2002-2003.
-# Leonid Kanter <leon@asplinux.ru>, 2005.
-#
+# Leonid Kanter <leon@asplinux.ru>, 2005, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD\n"
+"Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-26 15:43+0100\n"
-"PO-Revision-Date: 2005-08-31 18:47+0300\n"
+"PO-Revision-Date: 2006-02-03 15:36+0200\n"
 "Last-Translator: Leonid Kanter <leon@asplinux.ru>\n"
-"Language-Team:  <gnome-cyr@gnome.org>\n"
+"Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: KBabel 1.11\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -136,8 +136,7 @@ msgstr "Сбой при открытии файла \"%s\": %s"
 
 #: file-chooser/testfilechooser.c:230
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Сбой при загрузке изображения \"%s\": причина неизвестна, возможно, файл "
 "изображения повреждён"
@@ -231,10 +230,8 @@ msgid "Translator credits"
 msgstr "Благодарности переводчикам"
 
 #: libgnomeui/gnome-about.c:433
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Благодарности переводчикам. Эта строка должна быть помечена для перевода"
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "Благодарности переводчикам. Эта строка должна быть помечена для перевода"
 
 #: libgnomeui/gnome-about.c:440 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -764,9 +761,8 @@ msgid "Session management"
 msgstr "Управление сеансом"
 
 #: libgnomeui/gnome-client.c:1031
-#, fuzzy
 msgid "Show session management options"
-msgstr "Управление сеансом"
+msgstr "Отображать параметры управления сеансом"
 
 #: libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
@@ -1339,8 +1335,7 @@ msgstr "Здесь следует ввести имя каталога, где �
 #: libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr ""
-"GnomeIconSelection: Файл \"%s\" не существует или не является каталогом"
+msgstr "GnomeIconSelection: Файл \"%s\" не существует или не является каталогом"
 
 #: libgnomeui/gnome-icon-sel.c:301
 #, c-format
@@ -1500,7 +1495,7 @@ msgstr "Библиотека пользовательского интерфей
 
 #: libgnomeui/gnome-ui-init.c:146
 msgid "Show GNOME GUI options"
-msgstr ""
+msgstr "Отображать параметры GNOME GUI"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:759
@@ -1569,5 +1564,3 @@ msgstr "_Сообщить разработчикам"
 msgid "_Debug"
 msgstr "_Отладить"
 
-#~ msgid "Exit the test"
-#~ msgstr "Выйти из теста"
