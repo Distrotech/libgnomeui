@@ -1,3 +1,22 @@
+libgnomeui 2.12.1
+-----------------
+
+What's new since 2.12.0
+
+Bug fixes:
+	- Fix critical warnings from the canvas (Federico)
+	- Fix filename encoding in gnome-file-entry
+	  (Yydzero <yandong.yao@sun.com>)
+	- Fix a crash in the pixmap entry on Solaris
+	  (Vijaykumar Patwari)
+	- Fix a crash in gnome-file-entry (Petr Mladek)
+	- Fix list leak in gnome-file-entry (Paolo Borelli)
+
+Updated translations:
+	- Estonian, Chinese (Hong Kong), Chinese (traditional),
+	  Chinese (Taiwan), Hebrew, Danish, Bengali, Swedish,
+	  Italian, Vietnamese.
+ 
 libgnomeui 2.12.0
 -----------------
 
