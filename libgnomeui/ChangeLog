@@ -1,5 +1,11 @@
 2006-02-07  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* gnome-authentication-manager.c: (vfs_async_question_callback),
+	(vfs_question_callback): Patch to make the dialog thread safe.
+	Patch from (jylefort@FreeBSD.org). Closes bug #312180.
+
+2006-02-07  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* gnome-entry.c: (gnome_entry_class_init):
 	* gnome-icon-entry.c: (ientry_browse):
 	Reuse some existing strings to cut down on redundancy.
