@@ -190,8 +190,8 @@ gnome_entry_class_init (GnomeEntryClass *class)
 	g_object_class_install_property (gobject_class,
 					 PROP_HISTORY_ID,
 					 g_param_spec_string ("history_id",
-							      _("History id"),
-							      _("History id"),
+							      _("History ID"),
+							      _("History ID"),
 							      NULL,
 							      G_PARAM_READWRITE));
 	g_object_class_install_property (gobject_class,
