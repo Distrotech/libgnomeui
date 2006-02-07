@@ -1,3 +1,10 @@
+2006-02-07  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-entry.c: (gnome_entry_class_init):
+	* gnome-icon-entry.c: (ientry_browse):
+	Reuse some existing strings to cut down on redundancy.
+	Reported by Clytie Siddall. Closes bug #314767.
+
 2006-01-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-password-dialog.c: (gnome_password_dialog_new):

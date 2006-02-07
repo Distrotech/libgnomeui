@@ -762,7 +762,7 @@ ientry_browse(GnomeIconEntry *ientry)
 
 		priv->icon_sel = gnome_icon_selection_new ();
 		_add_atk_name_desc (priv->icon_sel,
-				    _("Icon selector"),
+				    _("Icon Selector"),
 				    _("Please pick the icon you want."));
 
 		gnome_icon_selection_add_directory (GNOME_ICON_SELECTION (priv->icon_sel),
