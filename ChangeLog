@@ -1,3 +1,10 @@
+2006-02-07  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* glade/glade-gnome.c: (druid_page_edge_new),
+	(glade_module_register_widgets): Fix initialization of
+	edge pages when using language bindings. Closes bug #150412.
+	Patch from Thayne Harbaugh.
+
 2006-02-01  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c

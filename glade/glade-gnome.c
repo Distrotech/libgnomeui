@@ -398,43 +398,64 @@ dialog_new (GladeXML *xml, GType widget_type,
     return dialog;
 }
 
-/* GnomeDruidPageEdge really sucks. */
-#if 0
-#define DRUID_SET_STRING(pos, POS, var)                                   \
-static void                                                               \
-druid_page_##pos##_set_##var (GladeXML *xml, GtkWidget *w,                  \
-			    const char *name, const char *value)          \
-{                                                                         \
+
+#define DRUID_SET_STRING(pos, POS, var)					    \
+static void								    \
+druid_page_##pos##_set_##var (GladeXML *xml, GtkWidget *w,		    \
+			    const char *name, const char *value)	    \
+{									    \
     gnome_druid_page_##pos##_set_##var (GNOME_DRUID_PAGE_##POS (w), value); \
 }
 
-#define DRUID_SET_COLOR(pos, POS, var)                                            \
-static void                                                                       \
-druid_page_##pos##_set_##var##_color (GladeXML *xml, GtkWidget *w,                          \
-			    const char *name, const char *value)                  \
-{                                                                                 \
-    GdkColor colour = { 0 };                                                      \
-    if (gdk_color_parse(value, &colour) &&                                        \
-	gdk_colormap_alloc_color (gtk_widget_get_default_colormap(),              \
-				  &colour, FALSE, TRUE)) {                        \
-    } else {                                                                      \
-	g_warning ("could not parse colour name `%s'", value);                    \
-	return;                                                                   \
-    }                                                                             \
-    gnome_druid_page_##pos##_set_##var##_color (GNOME_DRUID_PAGE_##POS (w), &colour); \
+#define DRUID_SET_COLOR(pos, POS, var)						\
+static void									\
+    druid_page_##pos##_set_##var##_color (GladeXML *xml, GtkWidget *w,		\
+			    const char *name, const char *value)		\
+{										\
+    GdkColor color = { 0 };							\
+    if (gdk_color_parse(value, &color) &&					\
+	gdk_colormap_alloc_color (gtk_widget_get_default_colormap(),		\
+				  &color, FALSE, TRUE)) {			\
+    } else {									\
+	g_warning ("could not parse color name `%s'", value);			\
+	return;									\
+    }										\
+    gnome_druid_page_##pos##_set_##var##_color (GNOME_DRUID_PAGE_##POS (w),	\
+						&color);			\
+}
+
+
+#define DRUID_SET_IMAGE(pos, POS, image)				\
+static void								\
+druid_page_##pos##_set_##image(GladeXML *xml, GtkWidget *w,		\
+			       const char *name, const char *value)	\
+{									\
+    GdkPixbuf *image;							\
+    char *filename;							\
+									\
+    filename = glade_xml_relative_file (xml, value);			\
+    image = gdk_pixbuf_new_from_file (filename, NULL);			\
+    g_free (filename);							\
+									\
+    gnome_druid_page_##pos##_set_##image(GNOME_DRUID_PAGE_##POS(w),	\
+                                         image);			\
+									\
+    g_object_unref (G_OBJECT (image));					\
 }
 
 
 DRUID_SET_STRING (edge, EDGE, title)
 DRUID_SET_STRING (edge, EDGE, text)
-DRUID_SET_COLOR (edge, EDGE, title)
-DRUID_SET_COLOR (edge, EDGE, text)
-DRUID_SET_COLOR (edge, EDGE, bg)
-DRUID_SET_COLOR (edge, EDGE, logo_bg)
-DRUID_SET_COLOR (edge, EDGE, textbox)
-#endif
+DRUID_SET_COLOR  (edge, EDGE, title)
+DRUID_SET_COLOR  (edge, EDGE, text)
+DRUID_SET_COLOR  (edge, EDGE, bg)
+DRUID_SET_COLOR  (edge, EDGE, logo_bg)
+DRUID_SET_COLOR  (edge, EDGE, textbox)
+DRUID_SET_IMAGE  (edge, EDGE, logo)
+DRUID_SET_IMAGE  (edge, EDGE, watermark)
+DRUID_SET_IMAGE  (edge, EDGE, top_watermark)
 
-/* this is a huge hack */
+
 static GtkWidget *
 druid_page_edge_new (GladeXML *xml, GType widget_type,
 		     GladeWidgetInfo *info)
@@ -473,27 +494,34 @@ druid_page_edge_new (GladeXML *xml, GType widget_type,
 	    text = value;
 	else if (!strcmp (name, "title"))
 	    title = value;
-	else if (!strcmp (name, "logo_image")) {
+	else if (!strcmp (name, "logo")) {
 	    if (logo)
 		g_object_unref (G_OBJECT (logo));
 	    filename = glade_xml_relative_file (xml, value);
 	    logo = gdk_pixbuf_new_from_file (filename, NULL);
 	    g_free (filename);
-	} else if (!strcmp (name, "watermark_image")) {
+	} else if (!strcmp (name, "watermark")) {
 	    if (watermark)
 		g_object_unref (G_OBJECT (watermark));
 	    filename = glade_xml_relative_file (xml, value);
 	    watermark = gdk_pixbuf_new_from_file (filename, NULL);
 	    g_free (filename);
+	} else if (!strcmp (name, "top_watermark")) {
+	    if (top_watermark)
+		g_object_unref (G_OBJECT (top_watermark));
+	    filename = glade_xml_relative_file (xml, value);
+	    top_watermark = gdk_pixbuf_new_from_file (filename, NULL);
+	    g_free (filename);
 	}
 
     }
 
-    druid = gnome_druid_page_edge_new_with_vals (
+    druid = glade_standard_build_widget (xml, widget_type, info);
+
+    gnome_druid_page_edge_construct (
+	GNOME_DRUID_PAGE_EDGE (druid),
 	position, TRUE, title, text,
 	logo, watermark, top_watermark);
-
-    
 
     if (logo)
 	g_object_unref (G_OBJECT (logo));
@@ -843,13 +871,16 @@ glade_module_register_widgets (void)
     glade_register_custom_prop (GNOME_TYPE_ABOUT, "authors", about_set_authors);
     glade_register_custom_prop (GNOME_TYPE_ABOUT, "translator_credits", about_set_translator_credits);
     glade_register_custom_prop (GNOME_TYPE_ABOUT, "documenters", about_set_documentors);
-    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "title", custom_noop);
-    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "text", custom_noop);
-    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "title_color", custom_noop);
-    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "text_color", custom_noop);
-    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "background_color", custom_noop);
-    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "logo_background_color", custom_noop);
-    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "textbox_color", custom_noop);
+    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "title", druid_page_edge_set_title);
+    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "text", druid_page_edge_set_text);
+    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "title_color", druid_page_edge_set_title_color);
+    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "text_color", druid_page_edge_set_text_color);
+    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "background_color", druid_page_edge_set_bg_color);
+    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "logo_background_color", druid_page_edge_set_logo_bg_color);
+    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "textbox_color", druid_page_edge_set_textbox_color);
+    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "logo", druid_page_edge_set_logo);
+    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "watermark", druid_page_edge_set_watermark);
+    glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "top_watermark", druid_page_edge_set_top_watermark);
     glade_register_custom_prop (GNOME_TYPE_DRUID_PAGE_EDGE, "position", custom_noop);
     glade_register_custom_prop (GTK_TYPE_IMAGE_MENU_ITEM, "stock_item", custom_noop);
     glade_register_custom_prop (GTK_TYPE_MENU_ITEM, "stock_item", custom_noop);
