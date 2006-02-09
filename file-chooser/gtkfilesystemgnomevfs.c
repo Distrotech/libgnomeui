@@ -1020,7 +1020,7 @@ gtk_file_system_gnome_vfs_create_folder (GtkFileSystem     *file_system,
   result = gnome_vfs_make_directory (uri,
 				     GNOME_VFS_PERM_USER_ALL |
 				     GNOME_VFS_PERM_GROUP_ALL |
-				     GNOME_VFS_PERM_OTHER_READ);
+				     GNOME_VFS_PERM_OTHER_READ | GNOME_VFS_PERM_OTHER_EXEC);
   gnome_authentication_manager_pop_sync ();
 
   if (result != GNOME_VFS_OK)

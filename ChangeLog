@@ -1,3 +1,18 @@
+2006-02-08  Federico Mena Quintero  <federico@ximian.com>
+
+	Merged from libgnomeui-2-14:
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_create_folder): Add o+x permission to
+	created folders; we were creating them with permissions 774
+	instead of 775.
+
+	* file-chooser/sucky-desktop-item.c
+	(make_spawn_environment_for_sn_context),
+	(make_environment_for_screen): Use g_listenv() instead of environ.
+	Patch by Mark McLoughlin <mark@skynet.ie>, taken from bug #124277.
+	Fixes bug #330350.
+
 2006-02-07  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* glade/glade-gnome.c: (druid_page_edge_new),
