@@ -1,0 +1,1724 @@
+# Georgian translation for LibGnomeUI.
+# Copyright © 2006 Ubuntu Georgian Translators.
+# Vladimer Sichinava <alinux@siena.linux.it>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"PO-Revision-Date: 2006-01-29 04:37+0100\n"
+"Last-Translator: Vladimer Sichinava <alinux@siena.linux.it; vlsichinava@gmail.com>\n"
+"Language-Team: Georgian <Ubuntu-Georgian-Translators@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+#: demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr ""
+
+#: demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr ""
+
+#: demos/mdi_demo.c:131
+#, fuzzy
+msgid "Child Item 2"
+msgstr "2"
+
+#: demos/mdi_demo.c:132
+#, fuzzy
+msgid "Hint for item 2"
+msgstr "2"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:820
+#, c-format
+#, fuzzy
+msgid "%s is a link to something that is not a folder"
+msgstr "a ბმული -სკენ a"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:831
+#, c-format
+#, fuzzy
+msgid "%s is a link without a destination location"
+msgstr "a ბმული a"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:946
+#, c-format
+#, fuzzy
+msgid "%s is not a folder"
+msgstr "a"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1194
+#, fuzzy
+msgid "File System"
+msgstr "ფაილთა სისტემა"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1952
+#, c-format
+#, fuzzy
+msgid "Bookmark saving failed (%s)"
+msgstr "სანიშნე"
+
+#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#, c-format
+#, fuzzy
+msgid "Error reading file '%s': %s"
+msgstr "შეცდომა '%s' ფაილის წაკითხვისას: %s"
+
+#: file-chooser/sucky-desktop-item.c:285
+#, c-format
+#, fuzzy
+msgid "Error rewinding file '%s': %s"
+msgstr "შეცდომა '%s' ფაილის  გადახვევისას : %s"
+
+#: file-chooser/sucky-desktop-item.c:384
+#: file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "უსახელო"
+
+#: file-chooser/sucky-desktop-item.c:620
+#, c-format
+#, fuzzy
+msgid "File '%s' is not a regular file or directory."
+msgstr "ფაილი '%s' არაა რეგულარული ფაილი ან დასტა"
+
+#: file-chooser/sucky-desktop-item.c:796
+#, c-format
+#, fuzzy
+msgid "Error cannot find file id '%s'"
+msgstr "შეცდომა: '%s' ფაილის იდენტიფიკატორის პოვნა შეუძლებელია"
+
+#: file-chooser/sucky-desktop-item.c:842
+#, c-format
+#, fuzzy
+msgid "No filename to save to"
+msgstr "ფაილის შესანახად საჭიროა სახელის მითითება"
+
+#: file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "%s-ის გაშვება"
+
+#: file-chooser/sucky-desktop-item.c:2036
+#, c-format
+#, fuzzy
+msgid "No URL to launch"
+msgstr "გასშვები URL მითითებული არაა"
+
+#: file-chooser/sucky-desktop-item.c:2046
+#, c-format
+#, fuzzy
+msgid "Not a launchable item"
+msgstr "გასაშვები ელემენტი არ არსებობს"
+
+#: file-chooser/sucky-desktop-item.c:2056
+#, c-format
+#, fuzzy
+msgid "No command (Exec) to launch"
+msgstr "შესასრულებელი ბრძანება (Exec) შეყვანილი არ არის"
+
+#: file-chooser/sucky-desktop-item.c:2069
+#, c-format
+#, fuzzy
+msgid "Bad command (Exec) to launch"
+msgstr "შესასრულებელი ბრძანება (Exec) არასწორია"
+
+#: file-chooser/sucky-desktop-item.c:3759
+#, c-format
+#, fuzzy
+msgid "Unknown encoding of: %s"
+msgstr "უცნობი კოდირება: %s"
+
+#: file-chooser/sucky-desktop-item.c:3990
+#, c-format
+#, fuzzy
+msgid "Error writing file '%s': %s"
+msgstr "შეცდომა '%s' ფაილის ჩაწერისას: %s"
+
+#: file-chooser/testfilechooser.c:178
+#, c-format
+#, fuzzy
+msgid "Could not get information for file '%s': %s"
+msgstr "ფაილი"
+
+#: file-chooser/testfilechooser.c:191
+#, c-format
+#, fuzzy
+msgid "Failed to open file '%s': %s"
+msgstr "ვერ ვხსნი '%s': %s ფაილს"
+
+#: file-chooser/testfilechooser.c:230
+#, c-format
+#, fuzzy
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr "ვერ შევასრულე -სკენ a ფაილი"
+
+#: libgnomeui/gnome-about.c:199
+msgid "Credits"
+msgstr "პროექტში მონაწილეობდნენ"
+
+#: libgnomeui/gnome-about.c:231
+msgid "Written by"
+msgstr "დაწერილია"
+
+#: libgnomeui/gnome-about.c:246
+msgid "Documented by"
+msgstr "დოკუმენტირებულია"
+
+#: libgnomeui/gnome-about.c:261
+msgid "Translated by"
+msgstr "თარგმანი შესრულებულია"
+
+#: libgnomeui/gnome-about.c:324
+msgid "C_redits"
+msgstr "პრ_ოექტში მონაწილეობდნენ"
+
+#: libgnomeui/gnome-about.c:379
+msgid "Program name"
+msgstr "პროგრამის სახელი"
+
+#: libgnomeui/gnome-about.c:380
+#, fuzzy
+msgid "The name of the program"
+msgstr "პროგრამა"
+
+#: libgnomeui/gnome-about.c:387
+#, fuzzy
+msgid "Program version"
+msgstr "პროგრამა ვერსია"
+
+#: libgnomeui/gnome-about.c:388
+#, fuzzy
+msgid "The version of the program"
+msgstr "ვერსია პროგრამა"
+
+#: libgnomeui/gnome-about.c:394
+msgid "Copyright string"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:395
+#, fuzzy
+msgid "Copyright information for the program"
+msgstr "პროგრამა"
+
+#: libgnomeui/gnome-about.c:402
+msgid "Comments string"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:403
+#, fuzzy
+msgid "Comments about the program"
+msgstr "პროგრამა"
+
+#: libgnomeui/gnome-about.c:409
+msgid "Authors"
+msgstr "ავტორები"
+
+#: libgnomeui/gnome-about.c:410
+#, fuzzy
+msgid "List of authors of the programs"
+msgstr "პროგრამის ავტორების სია:"
+
+#: libgnomeui/gnome-about.c:412
+msgid "Author entry"
+msgstr "ავტორი"
+
+#: libgnomeui/gnome-about.c:413
+#, fuzzy
+msgid "A single author entry"
+msgstr "ჩ/გ ავტორი"
+
+#: libgnomeui/gnome-about.c:420
+msgid "Documenters"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:421
+#, fuzzy
+msgid "List of people documenting the program"
+msgstr "სია პროგრამა"
+
+#: libgnomeui/gnome-about.c:423
+msgid "Documenter entry"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:424
+#, fuzzy
+msgid "A single documenter entry"
+msgstr "ჩ/გ"
+
+#: libgnomeui/gnome-about.c:432
+msgid "Translator credits"
+msgstr ""
+
+#: libgnomeui/gnome-about.c:433
+#, fuzzy
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "პროექტში მონაწილეობდნენ -სკენ"
+
+#: libgnomeui/gnome-about.c:440 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "ლოგო"
+
+#: libgnomeui/gnome-about.c:441
+#, fuzzy
+msgid "A logo for the about box"
+msgstr "ჩ/გ"
+
+#: libgnomeui/gnome-about.c:520
+#, c-format
+msgid "About %s"
+msgstr "%s პროგრამის შესახებ"
+
+#. Some standard menus
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+msgid "_File"
+msgstr "_ფაილი"
+
+#: libgnomeui/gnome-app-helper.c:83
+msgid "_File/"
+msgstr "_ფაილი/"
+
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "რ_ედაქტირებ"
+
+#: libgnomeui/gnome-app-helper.c:85
+msgid "_Edit/"
+msgstr "_რედაქტირება/"
+
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "_დაათვალიერება"
+
+#: libgnomeui/gnome-app-helper.c:87
+msgid "_View/"
+msgstr "_დათვალიერება/"
+
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "_პარამეტრები"
+
+#: libgnomeui/gnome-app-helper.c:89
+msgid "_Settings/"
+msgstr "_არამეტრები/"
+
+#. If you have more then one New type, use this tree
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "_ახალი"
+
+#: libgnomeui/gnome-app-helper.c:91
+msgid "_New/"
+msgstr "_sახალი/"
+
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:93
+msgid "Fi_les/"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "_ფანჯრები"
+
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "_თამაში"
+
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+msgid "_Help"
+msgstr "_დახმარება"
+
+#: libgnomeui/gnome-app-helper.c:97
+msgid "_Windows/"
+msgstr "_ფანჯრები/"
+
+#. Open
+#: libgnomeui/gnome-app-helper.c:109
+msgid "_Open..."
+msgstr "_გახსენი..."
+
+#: libgnomeui/gnome-app-helper.c:109
+msgid "Open a file"
+msgstr "ფაილის გახსნა"
+
+#. Save
+#: libgnomeui/gnome-app-helper.c:114
+msgid "_Save"
+msgstr "_შენახვა"
+
+#: libgnomeui/gnome-app-helper.c:114
+#, fuzzy
+msgid "Save the current file"
+msgstr "შენახვა ფაილი"
+
+#. Save As
+#: libgnomeui/gnome-app-helper.c:119
+msgid "Save _As..."
+msgstr "შენახვა _როგორც..."
+
+#: libgnomeui/gnome-app-helper.c:120
+#, fuzzy
+msgid "Save the current file with a different name"
+msgstr "შენახვა ფაილი a"
+
+#. Revert
+#: libgnomeui/gnome-app-helper.c:125
+msgid "_Revert"
+msgstr "_შებრუნება"
+
+#: libgnomeui/gnome-app-helper.c:126
+#, fuzzy
+msgid "Revert to a saved version of the file"
+msgstr "-სკენ a ვერსია ფაილი"
+
+#. Print
+#: libgnomeui/gnome-app-helper.c:131
+msgid "_Print..."
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:131
+#, fuzzy
+msgid "Print the current file"
+msgstr "ფაილი"
+
+#. Print Setup
+#: libgnomeui/gnome-app-helper.c:136
+msgid "Print S_etup..."
+msgstr "ბეჭდვის _რეგულირება..."
+
+#: libgnomeui/gnome-app-helper.c:137
+#, fuzzy
+msgid "Setup the page settings for your current printer"
+msgstr "ინსტალაცია"
+
+#. Close
+#: libgnomeui/gnome-app-helper.c:142
+msgid "_Close"
+msgstr "_დახურვა"
+
+#: libgnomeui/gnome-app-helper.c:142
+#, fuzzy
+msgid "Close the current file"
+msgstr "დახურვა ფაილი"
+
+#. Exit
+#: libgnomeui/gnome-app-helper.c:147
+msgid "_Quit"
+msgstr "_გასვლა"
+
+#: libgnomeui/gnome-app-helper.c:147
+msgid "Quit the application"
+msgstr "პოგრამიდან გამოსვლა"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cu_t"
+msgstr "ამო_ჭრა"
+
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cut the selection"
+msgstr ""
+
+#. 10
+#. Copy
+#: libgnomeui/gnome-app-helper.c:161
+msgid "_Copy"
+msgstr "_კოპირება"
+
+#: libgnomeui/gnome-app-helper.c:161
+#, fuzzy
+msgid "Copy the selection"
+msgstr "დააკოპირე"
+
+#. Paste
+#: libgnomeui/gnome-app-helper.c:166
+msgid "_Paste"
+msgstr "_ჩასმა"
+
+#: libgnomeui/gnome-app-helper.c:166
+msgid "Paste the clipboard"
+msgstr ""
+
+#. Clear
+#: libgnomeui/gnome-app-helper.c:171
+msgid "C_lear"
+msgstr "გა_წმენდა"
+
+#: libgnomeui/gnome-app-helper.c:171
+#, fuzzy
+msgid "Clear the selection"
+msgstr "გაწმენდა"
+
+#. Undo
+#: libgnomeui/gnome-app-helper.c:176
+msgid "_Undo"
+msgstr "_გაუქმება"
+
+#: libgnomeui/gnome-app-helper.c:176
+#, fuzzy
+msgid "Undo the last action"
+msgstr "დაბრუნება"
+
+#. Redo
+#: libgnomeui/gnome-app-helper.c:181
+msgid "_Redo"
+msgstr "_გამეორება"
+
+#: libgnomeui/gnome-app-helper.c:181
+msgid "Redo the undone action"
+msgstr ""
+
+#. Find
+#: libgnomeui/gnome-app-helper.c:186
+msgid "_Find..."
+msgstr "_ძიება..."
+
+#: libgnomeui/gnome-app-helper.c:186
+#, fuzzy
+msgid "Search for a string"
+msgstr "ძებნა a"
+
+#. Find Again
+#: libgnomeui/gnome-app-helper.c:191
+msgid "Find Ne_xt"
+msgstr "შემდეგის ძ_იება"
+
+#: libgnomeui/gnome-app-helper.c:192
+#, fuzzy
+msgid "Search again for the same string"
+msgstr "ძებნა"
+
+#. Replace
+#: libgnomeui/gnome-app-helper.c:197
+#, fuzzy
+msgid "R_eplace..."
+msgstr "R."
+
+#: libgnomeui/gnome-app-helper.c:197
+#, fuzzy
+msgid "Replace a string"
+msgstr "შეცვალე a"
+
+#. Properties
+#: libgnomeui/gnome-app-helper.c:202
+msgid "_Properties"
+msgstr "_თვისებები"
+
+#: libgnomeui/gnome-app-helper.c:203
+#, fuzzy
+msgid "Modify the file's properties"
+msgstr "ფაილი"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: libgnomeui/gnome-app-helper.c:211
+msgid "Prefere_nces"
+msgstr "პარამე_ტრები"
+
+#: libgnomeui/gnome-app-helper.c:212
+msgid "Configure the application"
+msgstr ""
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: libgnomeui/gnome-app-helper.c:221
+#, fuzzy
+msgid "_About"
+msgstr "_შესახებ"
+
+#: libgnomeui/gnome-app-helper.c:222
+#, fuzzy
+msgid "About this application"
+msgstr "პროგრამის შესახებ"
+
+#: libgnomeui/gnome-app-helper.c:225
+#, fuzzy
+msgid "Select _All"
+msgstr "მონიშნე _ყველა"
+
+#: libgnomeui/gnome-app-helper.c:226
+#, fuzzy
+msgid "Select everything"
+msgstr "მონიშვნა"
+
+#.
+#. * Window menu
+#.
+#: libgnomeui/gnome-app-helper.c:234
+#, fuzzy
+msgid "Create New _Window"
+msgstr "შექმნა ახალი ფანჯარა"
+
+#: libgnomeui/gnome-app-helper.c:235
+#, fuzzy
+msgid "Create a new window"
+msgstr "შექმნა a"
+
+#: libgnomeui/gnome-app-helper.c:239
+#, fuzzy
+msgid "_Close This Window"
+msgstr "დახურვა ფანჯარა"
+
+#: libgnomeui/gnome-app-helper.c:240
+#, fuzzy
+msgid "Close the current window"
+msgstr "დახურვა"
+
+#.
+#. * The "Game" menu
+#.
+#: libgnomeui/gnome-app-helper.c:248
+msgid "_New Game"
+msgstr "_ახალი თამაში"
+
+#: libgnomeui/gnome-app-helper.c:249
+msgid "Start a new game"
+msgstr "ახალი თამაშის გაშვება"
+
+#: libgnomeui/gnome-app-helper.c:253
+#, fuzzy
+msgid "_Pause Game"
+msgstr "პაუზა თამაში"
+
+#: libgnomeui/gnome-app-helper.c:254
+#, fuzzy
+msgid "Pause the game"
+msgstr "პაუზა"
+
+#: libgnomeui/gnome-app-helper.c:258
+#, fuzzy
+msgid "_Restart Game"
+msgstr "გადატვირთვა თამაში"
+
+#: libgnomeui/gnome-app-helper.c:259
+#, fuzzy
+msgid "Restart the game"
+msgstr "გადატვირთვა"
+
+#: libgnomeui/gnome-app-helper.c:263
+#, fuzzy
+msgid "_Undo Move"
+msgstr "დაბრუნება"
+
+#: libgnomeui/gnome-app-helper.c:264
+#, fuzzy
+msgid "Undo the last move"
+msgstr "დაბრუნება"
+
+#: libgnomeui/gnome-app-helper.c:268
+msgid "_Redo Move"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:269
+msgid "Redo the undone move"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:273
+msgid "_Hint"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:274
+#, fuzzy
+msgid "Get a hint for your next move"
+msgstr "a"
+
+#. 30
+#: libgnomeui/gnome-app-helper.c:279
+#, fuzzy
+msgid "_Scores..."
+msgstr "ქულათა ჯამი."
+
+#: libgnomeui/gnome-app-helper.c:280
+msgid "View the scores"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:284
+#, fuzzy
+msgid "_End Game"
+msgstr "თამაში"
+
+#: libgnomeui/gnome-app-helper.c:285
+msgid "End the current game"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:1147
+#, fuzzy
+msgid "_Contents"
+msgstr "_შინაარსი"
+
+#: libgnomeui/gnome-app-helper.c:1150
+msgid "View help for this application"
+msgstr ""
+
+#: libgnomeui/gnome-app-helper.c:2587
+#, fuzzy
+msgid "Text Below Icons"
+msgstr "ტექსტი ხატულები"
+
+#: libgnomeui/gnome-app-helper.c:2588
+#, fuzzy
+msgid "Priority Text Beside Icons"
+msgstr "ტექსტი ხატულები"
+
+#: libgnomeui/gnome-app-helper.c:2589
+#, fuzzy
+msgid "Icons Only"
+msgstr "მხოლოდ ხატულები"
+
+#: libgnomeui/gnome-app-helper.c:2590
+#, fuzzy
+msgid "Text Only"
+msgstr "მხოლოდ ტექსტი"
+
+#: libgnomeui/gnome-app-helper.c:2651
+#, c-format
+#, fuzzy
+msgid "Use Desktop Default (%s)"
+msgstr "გამოყენება სამუშაო მაგიდა ნაგულისხმევი"
+
+#: libgnomeui/gnome-app-util.c:98
+msgid " (press return)"
+msgstr ""
+
+#: libgnomeui/gnome-app-util.c:140
+msgid "ERROR: "
+msgstr ""
+
+#: libgnomeui/gnome-app-util.c:177
+msgid "Warning: "
+msgstr "გაფრთხილება: "
+
+#: libgnomeui/gnome-app-util.c:315
+msgid "y"
+msgstr ""
+
+#: libgnomeui/gnome-app-util.c:316
+msgid "yes"
+msgstr "დიახ"
+
+#: libgnomeui/gnome-app-util.c:319
+msgid "n"
+msgstr "არა"
+
+#: libgnomeui/gnome-app-util.c:320
+msgid "no"
+msgstr "არა"
+
+#: libgnomeui/gnome-app-util.c:355
+msgid " (yes or no)"
+msgstr "(დიახ ან არა)"
+
+#: libgnomeui/gnome-app-util.c:356
+#, fuzzy
+msgid "  - OK? (yes or no)"
+msgstr "OK დიახ ან არა"
+
+#: libgnomeui/gnome-app-util.c:684
+msgid "Progress"
+msgstr "პროგრესი"
+
+#: libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr "პროგრამის ID"
+
+#: libgnomeui/gnome-app.c:154
+#, fuzzy
+msgid "The application ID string"
+msgstr "ID"
+
+#: libgnomeui/gnome-appbar.c:747
+#, fuzzy
+msgid "Has Progress"
+msgstr "პროგრესი"
+
+#: libgnomeui/gnome-appbar.c:748
+#, fuzzy
+msgid "Create a progress widget."
+msgstr "შექმნა a."
+
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "აქვს სტატუსი"
+
+#: libgnomeui/gnome-appbar.c:756
+#, fuzzy
+msgid "Create a status widget."
+msgstr "შექმნა a."
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr ""
+
+#: libgnomeui/gnome-appbar.c:764
+#, fuzzy
+msgid "Level of user activity required."
+msgstr "საფეხური."
+
+#: libgnomeui/gnome-authentication-manager.c:70
+#, c-format
+#, fuzzy
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr "HTTP -სკენ n"
+
+#: libgnomeui/gnome-authentication-manager.c:71
+#, c-format
+#, fuzzy
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr "თქვენ -სკენ n"
+
+#: libgnomeui/gnome-authentication-manager.c:74
+msgid "Your password will be transmitted unencrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:75
+msgid "Your password will be transmitted encrypted."
+msgstr ""
+
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:296
+#, fuzzy
+msgid "Authentication Required"
+msgstr "აუთენტიფიკაცია"
+
+#: libgnomeui/gnome-authentication-manager.c:288
+#, c-format
+#, fuzzy
+msgid "You must log in to access %s domain %s\n"
+msgstr "თქვენ -სკენ n"
+
+#: libgnomeui/gnome-authentication-manager.c:290
+#, c-format
+#, fuzzy
+msgid "You must log in to access %s\n"
+msgstr "თქვენ -სკენ n"
+
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#, fuzzy
+msgid "Specify session management ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+msgid "ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+msgid "Specify prefix of saved configuration"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+msgid "PREFIX"
+msgstr ""
+
+#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
+#, fuzzy
+msgid "Disable connection to session manager"
+msgstr "გამორთე -სკენ"
+
+#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
+msgid "Session management"
+msgstr "სესიის მართვა"
+
+#: libgnomeui/gnome-client.c:1031
+#, fuzzy
+msgid "Show session management options"
+msgstr "ანახე"
+
+#: libgnomeui/gnome-client.c:2580
+msgid "Cancel Logout"
+msgstr "გამოსვლის შეწყვეტა"
+
+#: libgnomeui/gnome-color-picker.c:414
+#, fuzzy
+msgid "Received invalid color data\n"
+msgstr "n"
+
+#: libgnomeui/gnome-color-picker.c:465
+#, fuzzy
+msgid "Open a dialog to specify the color"
+msgstr "გახსენი a -სკენ"
+
+#: libgnomeui/gnome-color-picker.c:487
+#, fuzzy
+msgid "Pick a color"
+msgstr "აირჩიე ფერი"
+
+#: libgnomeui/gnome-dateedit.c:491 libgnomeui/gnome-dateedit.c:788
+msgid "Time"
+msgstr "დრო"
+
+#: libgnomeui/gnome-dateedit.c:492
+msgid "The time currently selected"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:504
+msgid "DateEdit Flags"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:505
+msgid "Flags for how DateEdit looks"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:514
+#, fuzzy
+msgid "Lower Hour"
+msgstr "ჩაწევა"
+
+#: libgnomeui/gnome-dateedit.c:515
+#, fuzzy
+msgid "Lower hour in the time popup selector"
+msgstr "ჩაწევა საათი"
+
+#: libgnomeui/gnome-dateedit.c:525
+msgid "Upper Hour"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:526
+#, fuzzy
+msgid "Upper hour in the time popup selector"
+msgstr "საათი"
+
+#: libgnomeui/gnome-dateedit.c:536
+#, fuzzy
+msgid "Initial Time"
+msgstr "დრო"
+
+#: libgnomeui/gnome-dateedit.c:537
+msgid "The initial time"
+msgstr ""
+
+#: libgnomeui/gnome-dateedit.c:751 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "თარიღი"
+
+#: libgnomeui/gnome-dateedit.c:764
+#, fuzzy
+msgid "Select Date"
+msgstr "მონიშვნა თარიღი"
+
+#: libgnomeui/gnome-dateedit.c:764
+#, fuzzy
+msgid "Select the date from a calendar"
+msgstr "მონიშვნა თარიღი a"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:775
+msgid "Calendar"
+msgstr "კალენდარი"
+
+#: libgnomeui/gnome-dateedit.c:796
+msgid "Select Time"
+msgstr "დროის მონიშვნა"
+
+#: libgnomeui/gnome-dateedit.c:796
+#, fuzzy
+msgid "Select the time from a list"
+msgstr "მონიშვნა a"
+
+#: libgnomeui/gnome-dateedit.c:1015
+#, fuzzy
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr "თარიღი თარიღი თარიღი"
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "სათაური"
+
+#: libgnomeui/gnome-druid-page-standard.c:122
+#, fuzzy
+msgid "Title of the druid"
+msgstr "სათაური"
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+#, fuzzy
+msgid "Logo image"
+msgstr "ლოგო"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+#, fuzzy
+msgid "Top Watermark"
+msgstr "ზემოთ"
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+#, fuzzy
+msgid "Watermark image for the top"
+msgstr "ზემოთ"
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+#, fuzzy
+msgid "Title Foreground"
+msgstr "სათაური"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr ""
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+#, fuzzy
+msgid "Title Foreground Color"
+msgstr "სათაური ფერი"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+#, fuzzy
+msgid "Foreground color of the title as a GdkColor"
+msgstr "a"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+#, fuzzy
+msgid "Title Foreground color set"
+msgstr "სათაური"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr ""
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+#, fuzzy
+msgid "Background Color"
+msgstr "ფონი ფერი"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+#, fuzzy
+msgid "Background color"
+msgstr "ფონის ფერი"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+#, fuzzy
+msgid "Background color as a GdkColor"
+msgstr "ფონი a"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+#, fuzzy
+msgid "Background color set"
+msgstr "ფონი"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+#, fuzzy
+msgid "Background color is set"
+msgstr "ფონი"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+#, fuzzy
+msgid "Contents Background Color"
+msgstr "შინაარსი ფონი ფერი"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+#, fuzzy
+msgid "Contents Background color"
+msgstr "შინაარსი ფონი"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+#, fuzzy
+msgid "Contents Background color as a GdkColor"
+msgstr "შინაარსი ფონი a"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+#, fuzzy
+msgid "Contents Background color set"
+msgstr "შინაარსი ფონი"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+#, fuzzy
+msgid "Contents Background color is set"
+msgstr "შინაარსი ფონი"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
+#, fuzzy
+msgid "Logo Background Color"
+msgstr "ლოგო ფონი ფერი"
+
+#: libgnomeui/gnome-druid-page-standard.c:217
+#, fuzzy
+msgid "Logo Background color"
+msgstr "ლოგო ფონი"
+
+#: libgnomeui/gnome-druid-page-standard.c:225
+#, fuzzy
+msgid "Logo Background color as a GdkColor"
+msgstr "ლოგო ფონი a"
+
+#: libgnomeui/gnome-druid-page-standard.c:232
+#, fuzzy
+msgid "Logo Background color set"
+msgstr "ლოგო ფონი"
+
+#: libgnomeui/gnome-druid-page-standard.c:233
+#, fuzzy
+msgid "Logo Background color is set"
+msgstr "ლოგო ფონი"
+
+#: libgnomeui/gnome-druid.c:154
+#, fuzzy
+msgid "Show Finish"
+msgstr "ანახე"
+
+#: libgnomeui/gnome-druid.c:155
+#, fuzzy
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "ანახე შემდეგი"
+
+#: libgnomeui/gnome-druid.c:162
+#, fuzzy
+msgid "Show Help"
+msgstr "ანახე დახმარება"
+
+#: libgnomeui/gnome-druid.c:163
+#, fuzzy
+msgid "Show the 'Help' button"
+msgstr "ანახე დახმარება"
+
+#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
+#, fuzzy
+msgid "History id"
+msgstr "ისტორია"
+
+#: libgnomeui/gnome-entry.c:200
+msgid "GTK entry"
+msgstr ""
+
+#: libgnomeui/gnome-entry.c:201
+msgid "The GTK entry"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+#, fuzzy
+msgid "History ID"
+msgstr "ისტორია ID"
+
+#: libgnomeui/gnome-file-entry.c:237
+#, fuzzy
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr "ფაილი -სკენ."
+
+#: libgnomeui/gnome-file-entry.c:245 libgnomeui/gnome-icon-entry.c:188
+#, fuzzy
+msgid "Browse Dialog Title"
+msgstr "ნუსხა პრივატი სათაური"
+
+#: libgnomeui/gnome-file-entry.c:246
+#, fuzzy
+msgid "Title for the Browse file dialog."
+msgstr "სათაური ნუსხა ფაილი."
+
+#: libgnomeui/gnome-file-entry.c:253
+#, fuzzy
+msgid "Directory Entry"
+msgstr "დასტა"
+
+#: libgnomeui/gnome-file-entry.c:254
+#, fuzzy
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr "ფაილი -სკენ ან."
+
+#: libgnomeui/gnome-file-entry.c:262
+msgid "Modal"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:263
+#, fuzzy
+msgid "Whether the Browse file window should be modal."
+msgstr "ნუსხა ფაილი."
+
+#: libgnomeui/gnome-file-entry.c:270 libgnomeui/gnome-icon-entry.c:204
+#, fuzzy
+msgid "Filename"
+msgstr "ფაილის სახელი"
+
+#: libgnomeui/gnome-file-entry.c:271
+#, fuzzy
+msgid "Filename that should be displayed in the file entry."
+msgstr "ფაილის სახელი ფაილი."
+
+#: libgnomeui/gnome-file-entry.c:279
+#, fuzzy
+msgid "Default Path"
+msgstr "ნაგულისხმევი გეზი"
+
+#: libgnomeui/gnome-file-entry.c:280
+#, fuzzy
+msgid "Default path for the Browse file window."
+msgstr "ნაგულისხმევი ნუსხა ფაილი."
+
+#: libgnomeui/gnome-file-entry.c:287
+msgid "GnomeEntry"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:288
+#, fuzzy
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr "ფაილი თქვენ -სკენ -სკენ ან."
+
+#: libgnomeui/gnome-file-entry.c:298
+msgid "GtkEntry"
+msgstr ""
+
+#: libgnomeui/gnome-file-entry.c:299
+#, fuzzy
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr "ფაილი თქვენ -სკენ -სკენ ან."
+
+#: libgnomeui/gnome-file-entry.c:309
+#, fuzzy
+msgid "Use GtkFileChooser"
+msgstr "გამოყენება"
+
+#: libgnomeui/gnome-file-entry.c:310
+#, fuzzy
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr "-სკენ ან -სკენ ფაილი."
+
+#: libgnomeui/gnome-file-entry.c:319
+#, fuzzy
+msgid "GtkFileChooser Action"
+msgstr "მოქმედება"
+
+#: libgnomeui/gnome-file-entry.c:320
+#, fuzzy
+msgid "The type of operation that the file selector is performing."
+msgstr "ტიპი ფაილი."
+
+#: libgnomeui/gnome-file-entry.c:642 libgnomeui/gnome-file-entry.c:676
+msgid "Select file"
+msgstr "ფაილის მონიშვნა"
+
+#: libgnomeui/gnome-file-entry.c:802
+msgid "Path"
+msgstr "გეზი"
+
+#: libgnomeui/gnome-file-entry.c:802
+msgid "Path to file"
+msgstr "გეზი ფაილისაკენ"
+
+#: libgnomeui/gnome-file-entry.c:829
+msgid "_Browse..."
+msgstr "_ნუსხა..."
+
+#: libgnomeui/gnome-file-entry.c:830
+#, fuzzy
+msgid "Pop up a file selector to choose a file"
+msgstr "a ფაილი -სკენ a ფაილი"
+
+#: libgnomeui/gnome-font-picker.c:66
+#, fuzzy
+msgid "sans 12"
+msgstr "12"
+
+#: libgnomeui/gnome-font-picker.c:67
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:68
+#, fuzzy
+msgid "Pick a Font"
+msgstr "a შრიფტი"
+
+#: libgnomeui/gnome-font-picker.c:156
+msgid "The title of the selection dialog box"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:164
+msgid "Mode"
+msgstr "მოდუსი"
+
+#: libgnomeui/gnome-font-picker.c:165
+msgid "The mode of operation of the font picker"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:174
+#, fuzzy
+msgid "Font name"
+msgstr "შრიფტი"
+
+#: libgnomeui/gnome-font-picker.c:175
+#, fuzzy
+msgid "Name of the selected font"
+msgstr "სახელი"
+
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+msgid "Font"
+msgstr "შრიფტი"
+
+#: libgnomeui/gnome-font-picker.c:185
+msgid "The selected GtkFont"
+msgstr ""
+
+#: libgnomeui/gnome-font-picker.c:192
+#, fuzzy
+msgid "Preview text"
+msgstr "წინასწარ ნახვა"
+
+#: libgnomeui/gnome-font-picker.c:193
+#, fuzzy
+msgid "Preview text shown in the dialog"
+msgstr "წინასწარ ნახვა"
+
+#: libgnomeui/gnome-font-picker.c:201
+#, fuzzy
+msgid "Use font in label"
+msgstr "გამოყენება"
+
+#: libgnomeui/gnome-font-picker.c:202
+#, fuzzy
+msgid "Use font in the label in font info mode"
+msgstr "გამოყენება"
+
+#: libgnomeui/gnome-font-picker.c:210
+#, fuzzy
+msgid "Font size for label"
+msgstr "შრიფტი სიდიდე"
+
+#: libgnomeui/gnome-font-picker.c:211
+#, fuzzy
+msgid "Font size for label in font info mode"
+msgstr "შრიფტი სიდიდე"
+
+#: libgnomeui/gnome-font-picker.c:221
+#, fuzzy
+msgid "Show size"
+msgstr "ანახე სიდიდე"
+
+#: libgnomeui/gnome-font-picker.c:222
+#, fuzzy
+msgid "Show size in font info mode"
+msgstr "ანახე სიდიდე"
+
+#: libgnomeui/gnome-gconf-ui.c:61
+#, fuzzy
+msgid "GNOME GConf UI Support"
+msgstr "GNOME"
+
+#: libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "_ცნობები"
+
+#: libgnomeui/gnome-gconf-ui.c:171
+#, c-format
+#, fuzzy
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr "-სკენ ან -სკენ ან."
+
+#: libgnomeui/gnome-gconf-ui.c:178
+#, c-format
+#, fuzzy
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr "შეცდომა ან."
+
+#: libgnomeui/gnome-href.c:123
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:124
+#, fuzzy
+msgid "The URL that GnomeHRef activates"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:131
+msgid "Text"
+msgstr "ტექსტი"
+
+#: libgnomeui/gnome-href.c:132
+msgid "The text on the button"
+msgstr ""
+
+#: libgnomeui/gnome-href.c:133
+msgid "End World Hunger"
+msgstr ""
+
+#: libgnomeui/gnome-href.c:139
+msgid "Link color"
+msgstr "ბმის ფერი"
+
+#: libgnomeui/gnome-href.c:140
+#, fuzzy
+msgid "Color used to draw the link"
+msgstr "ფერი -სკენ ბმული"
+
+#: libgnomeui/gnome-href.c:171
+#, fuzzy
+msgid "This button will take you to the URI that it displays."
+msgstr "-სკენ URI."
+
+#: libgnomeui/gnome-href.c:394
+#, fuzzy
+msgid ""
+"An error has occurred while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr "შეცდომა -სკენ საწყისი პროგრამები."
+
+#: libgnomeui/gnome-icon-entry.c:180
+#, fuzzy
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr "-სკენ."
+
+#: libgnomeui/gnome-icon-entry.c:189
+#, fuzzy
+msgid "Title for the Browse icon dialog."
+msgstr "სათაური ნუსხა."
+
+#: libgnomeui/gnome-icon-entry.c:196
+#, fuzzy
+msgid "Pixmap Directory"
+msgstr "დასტა"
+
+#: libgnomeui/gnome-icon-entry.c:197
+#, fuzzy
+msgid "Directory that will be searched for icons."
+msgstr "დასტა."
+
+#: libgnomeui/gnome-icon-entry.c:205
+#, fuzzy
+msgid "Filename that should be displayed in the icon entry."
+msgstr "ფაილის სახელი."
+
+#: libgnomeui/gnome-icon-entry.c:213
+msgid "Picker dialog"
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:214
+#, fuzzy
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr "ხატულა თქვენ -სკენ -სკენ ან."
+
+#: libgnomeui/gnome-icon-entry.c:322 libgnomeui/gnome-icon-entry.c:988
+msgid "No Icon"
+msgstr "არავითარი ხატულა"
+
+#: libgnomeui/gnome-icon-entry.c:758
+#, fuzzy
+msgid "Icon selection dialog"
+msgstr "ხატულა"
+
+#: libgnomeui/gnome-icon-entry.c:759
+msgid "This dialog box lets you select an icon."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:765
+#, fuzzy
+msgid "Icon selector"
+msgstr "ხატულა"
+
+#: libgnomeui/gnome-icon-entry.c:766
+msgid "Please pick the icon you want."
+msgstr ""
+
+#: libgnomeui/gnome-icon-entry.c:991
+#, fuzzy
+msgid "Icon Selector"
+msgstr "ხატულა"
+
+#: libgnomeui/gnome-icon-entry.c:992
+#, fuzzy
+msgid "This button will open a window to let you select an icon."
+msgstr "a -სკენ."
+
+#: libgnomeui/gnome-icon-entry.c:1012
+msgid "Browse"
+msgstr "ნუსხა"
+
+#: libgnomeui/gnome-icon-entry.c:1015
+#, fuzzy
+msgid "Icon path"
+msgstr "ხატულა"
+
+#: libgnomeui/gnome-icon-entry.c:1016
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr ""
+
+#: libgnomeui/gnome-icon-sel.c:293
+#, c-format
+#, fuzzy
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr "ან a"
+
+#: libgnomeui/gnome-icon-sel.c:301
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr ""
+
+#: libgnomeui/gnome-icon-sel.c:405
+#, fuzzy
+msgid "Loading Icons..."
+msgstr "ხატულები."
+
+#: libgnomeui/gnome-messagebox.c:109
+#, fuzzy
+msgid "Information"
+msgstr "ინფორმაცია"
+
+#: libgnomeui/gnome-messagebox.c:114
+#, fuzzy
+msgid "Warning"
+msgstr "გაფრთხილება"
+
+#: libgnomeui/gnome-messagebox.c:120
+msgid "Error"
+msgstr "შეცდომა"
+
+#: libgnomeui/gnome-messagebox.c:126
+#, fuzzy
+msgid "Question"
+msgstr "_შეკითხვა"
+
+#: libgnomeui/gnome-messagebox.c:131
+#, fuzzy
+msgid "Message"
+msgstr "შეტყობინება"
+
+#: libgnomeui/gnome-password-dialog.c:269
+msgid "_Username:"
+msgstr "_მომხმარებელი:"
+
+#: libgnomeui/gnome-password-dialog.c:271
+#, fuzzy
+msgid "_Domain:"
+msgstr "დომენი:"
+
+#: libgnomeui/gnome-password-dialog.c:273
+msgid "_Password:"
+msgstr "_პაროლი:"
+
+#: libgnomeui/gnome-password-dialog.c:346
+msgid "Co_nnect"
+msgstr ""
+
+#: libgnomeui/gnome-password-dialog.c:368
+#, fuzzy
+msgid "Connect _anonymously"
+msgstr "დაკავშირება"
+
+#: libgnomeui/gnome-password-dialog.c:373
+#, fuzzy
+msgid "Connect as u_ser:"
+msgstr "დაკავშირება u:"
+
+#: libgnomeui/gnome-password-dialog.c:471
+#, fuzzy
+msgid "_Remember password for this session"
+msgstr "დაიმახსოვრე"
+
+#: libgnomeui/gnome-password-dialog.c:473
+#, fuzzy
+msgid "Save password in _keyring"
+msgstr "შენახვა"
+
+#: libgnomeui/gnome-pixmap-entry.c:114
+#, fuzzy
+msgid "Do Preview"
+msgstr "წინასწარ ნახვა"
+
+#: libgnomeui/gnome-pixmap-entry.c:115
+#, fuzzy
+msgid "Whether the pixmap entry should have a preview."
+msgstr "a."
+
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:481
+#, fuzzy
+msgid "No Image"
+msgstr "არა სურათი"
+
+#: libgnomeui/gnome-pixmap-entry.c:206
+#, fuzzy
+msgid "Image Preview"
+msgstr "გამოსახულების წინასწარ ნახვა"
+
+#: libgnomeui/gnome-pixmap-entry.c:207
+#, fuzzy
+msgid "A preview of the image currently specified"
+msgstr "ჩ/გ"
+
+#: libgnomeui/gnome-pixmap-entry.c:416
+#, fuzzy
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "a ფაილი"
+
+#: libgnomeui/gnome-pixmap-entry.c:422
+msgid "Preview"
+msgstr "წინასწარ ნახვა"
+
+#: libgnomeui/gnome-scores.c:78
+msgid "Top Ten"
+msgstr "საუკეთესო ათეული"
+
+#: libgnomeui/gnome-scores.c:91
+msgid "User"
+msgstr "მომხმარებელი"
+
+#: libgnomeui/gnome-scores.c:94
+msgid "Score"
+msgstr ""
+
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: libgnomeui/gnome-scores.c:194
+#, fuzzy
+msgid "%a %b %d %T %Y"
+msgstr "a"
+
+#: libgnomeui/gnome-scores.c:395
+msgid "Sans 14"
+msgstr "Sans 14"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:141
+#, fuzzy
+msgid "Bulleted List"
+msgstr "სია"
+
+#: libgnomeui/gnome-stock-icons.c:142
+#, fuzzy
+msgid "Numbered List"
+msgstr "სია"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr ""
+
+#: libgnomeui/gnome-stock-icons.c:145
+#, fuzzy
+msgid "About"
+msgstr "პროგრამის შესახებ"
+
+#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
+#, fuzzy
+msgid "Disable Crash Dialog"
+msgstr "გამორთე პრივატი"
+
+#: libgnomeui/gnome-ui-init.c:127
+#, fuzzy
+msgid "X display to use"
+msgstr "-სკენ"
+
+#: libgnomeui/gnome-ui-init.c:127
+msgid "DISPLAY"
+msgstr ""
+
+#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
+#, fuzzy
+msgid "GNOME GUI Library"
+msgstr "GNOME"
+
+#: libgnomeui/gnome-ui-init.c:146
+#, fuzzy
+msgid "Show GNOME GUI options"
+msgstr "ანახე GNOME"
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:759
+#, c-format
+#, fuzzy
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr "შეცდომა n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:773
+#, c-format
+#, fuzzy
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr "n"
+
+#: libgnomeui/gnome_segv.c:101
+#, c-format
+#, fuzzy
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr "GNOME სესია მმართველი -სკენ a შეცდომა და ფაილი."
+
+#: libgnomeui/gnome_segv.c:112
+#, c-format
+#, fuzzy
+msgid "The Application \"%s\" has quit unexpectedly."
+msgstr "პროგრამა."
+
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr ""
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+#, fuzzy
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr "თქვენ -სკენ მარჯვნივ."
+
+#: libgnomeui/gnome_segv.c:137
+#, fuzzy
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "გამოყენება n"
+
+#: libgnomeui/gnome_segv.c:154
+#, fuzzy
+msgid "_Restart Application"
+msgstr "გადატვირთვა პროგრამა"
+
+#: libgnomeui/gnome_segv.c:166
+#, fuzzy
+msgid "_Inform Developers"
+msgstr "პროგრამისტები"
+
+#: libgnomeui/gnome_segv.c:177
+#, fuzzy
+msgid "_Debug"
+msgstr "გამა_რთვა"
+
