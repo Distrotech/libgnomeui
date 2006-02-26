@@ -1,3 +1,9 @@
+2006-02-24  Kjartan Maraas <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-icon-list.c: Fix from Harry Lu
+	to get rid of critical warnings in this code. Mostly
+	triggered in evolution. Closes bug #331219.
+
 2006-02-08  Federico Mena Quintero  <federico@ximian.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c
