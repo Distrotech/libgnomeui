@@ -17,6 +17,19 @@
 	Patch by Mark McLoughlin <mark@skynet.ie>, taken from bug #124277.
 	Fixes bug #330350.
 
+2006-02-07  Kjartan Maraas  <kmaraas@gnome.org>
+
+        * gnome-authentication-manager.c: (vfs_async_question_callback),
+        (vfs_question_callback): Patch to make the dialog thread safe.
+        Patch from (jylefort@FreeBSD.org). Closes bug #312180.
+
+2006-02-07  Kjartan Maraas  <kmaraas@gnome.org>
+
+        * gnome-entry.c: (gnome_entry_class_init):
+        * gnome-icon-entry.c: (ientry_browse):
+        Reuse some existing strings to cut down on redundancy.
+        Reported by Clytie Siddall. Closes bug #314767.
+
 2006-01-29  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* doc/reference/tmpl/gnome-app-helper.sgml: Fix typo in the docs.
@@ -49,6 +62,12 @@
 	member for parsing the command line arguments using GOption.
 	Closes bug #326846.
 
+2006-01-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+        * gnome-password-dialog.c: (gnome_password_dialog_new):
+        Always keep the password dialog on top. Patch from Christian
+        Neumair. Reported as bug #163973 by Jorn Baayen.
+
 2006-01-15  Kjartan Maraas <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-icon-lookup.c: (gnome_icon_lookup): Prevent
@@ -60,6 +79,13 @@
 	* libgnomeui/gnome-thumbnail.c: (read_scripts): transform the second
 	'@' in the GConf tree into a '+', to allow thumbnailing files with
 	a '+' in their mime-type (Closes: #326638)
+
+2006-01-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+        * gnome-thumbnail.c: (gnome_thumbnail_factory_generate_thumbnail),
+        (gnome_thumbnail_factory_save_thumbnail), (thumb_md5_transform):
+        Save the width and height metadata as suggested by the spec. Patch
+        from James Cape. Closes bug #143470.
 
 2006-01-13  Abel Cheung  <maddog@linuxhall.org>
 
