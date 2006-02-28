@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2005-07-20 01:28+0200\n"
 "Last-Translator: Арангел Ангов <ufo@linux.net.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
@@ -66,67 +66,67 @@ msgstr "Датотечен систем"
 msgid "Bookmark saving failed (%s)"
 msgstr "Зачувувањето на обележувачот е неуспешно (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "Грешка при читање на датотеката '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "Грешка при мотање на датотеката '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 msgid "No name"
 msgstr "Без име"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "Датотеката '%s' не е обична датотека или директориум."
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr "Грешка, не можам да ја најдам идентификацијата '%s'"
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr "Нема име на датотека за зачувување"
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, c-format
 msgid "Starting %s"
 msgstr "Подигнувам %s"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr "Нема адреса за лансирање"
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr "Не е предмет што може да се лансира"
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "Нема команда (извршлива) за лансирање"
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "Лоша команда (извршлива) за лансирање"
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "Непознат енкодинг на: %s"
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, c-format
 msgid "Error writing file '%s': %s"
 msgstr "Грешка при запишување во датотеката '%s': %s"
@@ -989,8 +989,9 @@ msgid "Show the 'Help' button"
 msgstr "Покажи го копчето 'Помош'"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
-msgstr "Историски id"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
+msgstr "Историски ID"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -999,10 +1000,6 @@ msgstr "GTK запис"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "GTK записот"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "Историски ID"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1321,17 +1318,13 @@ msgstr "Дијалог за избор на икони"
 msgid "This dialog box lets you select an icon."
 msgstr "Овој дијалог ви овозможува да изберете икона."
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "Одбирач на икони"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "Ве молам одберете ја иконата која што ја сакате."
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "Одбирач на икони"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1586,6 +1579,12 @@ msgstr "_Информирај ги развивачите"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Дебагирање"
+
+#~ msgid "History id"
+#~ msgstr "Историски id"
+
+#~ msgid "Icon selector"
+#~ msgstr "Одбирач на икони"
 
 #~ msgid "Exit the test"
 #~ msgstr "Излез од тестот"

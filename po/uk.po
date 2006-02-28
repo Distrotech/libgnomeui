@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2005-08-15 19:32+0200\n"
 "Last-Translator: Maxim Dziumanenko <mvd@mylinux.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -55,67 +55,67 @@ msgstr "Файлова система"
 msgid "Bookmark saving failed (%s)"
 msgstr "Не вдалось зберегти закладку (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "Помилка читання файлу '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "Помилка переміщення по файлу '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 msgid "No name"
 msgstr "Без назви"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "Файл '%s' не є звичайним файлом чи каталогом."
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr "Не вдається знайти ідентифікатор файлу '%s'"
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr "Не вказана назва файлу для збереження"
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, c-format
 msgid "Starting %s"
 msgstr "Запуск %s"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr "Відсутня URL для запуску"
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr "Не є виконуваним пунктом"
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "Відсутня команда (Exec) для запуску"
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "Неправильна команда (Exec) для запуску"
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "Невідоме кодування: %s"
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, c-format
 msgid "Error writing file '%s': %s"
 msgstr "Помилка запису файлу '%s': %s"
@@ -976,7 +976,8 @@ msgid "Show the 'Help' button"
 msgstr "Показати кнопку \"Довідка\""
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
 msgstr "Ідентифікатор історії"
 
 #: libgnomeui/gnome-entry.c:200
@@ -986,10 +987,6 @@ msgstr "Запис GTK"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "Запис GTK"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "Ідентифікатор історії"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1302,17 +1299,13 @@ msgstr "Діалог вибору значків"
 msgid "This dialog box lets you select an icon."
 msgstr "Цей діалог дозволяє вибрати значок."
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "Вибір значків"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "Виберіть бажаний значок."
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "Вибір значків"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1564,6 +1557,12 @@ msgstr "_Сповістити розробників"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Налагодження"
+
+#~ msgid "History id"
+#~ msgstr "Ідентифікатор історії"
+
+#~ msgid "Icon selector"
+#~ msgstr "Вибір значків"
 
 #~ msgid "Exit the test"
 #~ msgstr "Вийти з тесту"

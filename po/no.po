@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2005-11-15 12:44+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
@@ -54,67 +54,67 @@ msgstr "Filsystem"
 msgid "Bookmark saving failed (%s)"
 msgstr "Lagring av bokmerke feilet (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "Kunne ikke lese filen «%s»: %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "Kunne ikke gå til starten av fil «%s»: %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 msgid "No name"
 msgstr "Uten navn"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "Filen «%s» er ikke en vanlig fil eller mappe."
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr "Feil. Kan ikke finne fil-ID «%s»"
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr "Ingen filnavn å lagre til"
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, c-format
 msgid "Starting %s"
 msgstr "Starter %s"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr "Ingen URL å åpne"
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr "Oppføringen kan ikke kjøres"
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "Ingen kommando (Exec) å kjøre"
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "Ugyldig kommando (Exec)"
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "Ukjent koding av: %s"
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, c-format
 msgid "Error writing file '%s': %s"
 msgstr "Feil under skriving til fil «%s»: %s"
@@ -970,8 +970,9 @@ msgid "Show the 'Help' button"
 msgstr "Vis «Hjelp»-knappen"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
-msgstr "Historikk-id"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
+msgstr "Historikk-ID"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -980,10 +981,6 @@ msgstr "GTK-felt"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "GTK-feltet"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "Historikk-ID"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1294,17 +1291,13 @@ msgstr "Dialog for ikonvalg"
 msgid "This dialog box lets you select an icon."
 msgstr "Denne dialogen lar deg velge et ikon."
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "Ikonvalg"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "Vennligst velg ikonet du ønsker."
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "Ikonvalg"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1554,6 +1547,12 @@ msgstr "_Informer utviklerene"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Feilsøk"
+
+#~ msgid "History id"
+#~ msgstr "Historikk-id"
+
+#~ msgid "Icon selector"
+#~ msgstr "Ikonvalg"
 
 #~ msgid "Exit the test"
 #~ msgstr "Avslutt testprogrammet"

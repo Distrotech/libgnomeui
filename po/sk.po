@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2005-10-17 06:37+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -56,67 +56,67 @@ msgstr "Súborový systém"
 msgid "Bookmark saving failed (%s)"
 msgstr "Ukladanie záložky zlyhalo (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "Chyba pri otváraní súboru '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "Chyba pri previnutí súboru '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 msgid "No name"
 msgstr "Bez názvu"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "Súbor '%s' nie je bežný súbor alebo priečinok."
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr "Chyba; nepodarilo sa nájsť id súboru '%s'"
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr "Nebol zadaný názov súboru pre uloženie"
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, c-format
 msgid "Starting %s"
 msgstr "Spúšťanie %s"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr "Nie je URL na spustenie"
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr "Nie je to spustiteľná položka"
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "Bez príkazu (Spustiť) na spustenie"
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "Zlý príkaz (Spustiť) na spustenie"
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "Neznáme kódovanie: %s"
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, c-format
 msgid "Error writing file '%s': %s"
 msgstr "Chyba pri zápise do súboru '%s': %s"
@@ -975,7 +975,8 @@ msgid "Show the 'Help' button"
 msgstr "Zobraziť tlačítko 'Pomocník'"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
 msgstr "Identifikátor histórie"
 
 #: libgnomeui/gnome-entry.c:200
@@ -985,10 +986,6 @@ msgstr "Položka GTK"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "Položka GTK"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "Identifikátor histórie"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1301,17 +1298,13 @@ msgstr "Dialógové okno výberu ikony"
 msgid "This dialog box lets you select an icon."
 msgstr "Toto dialógové okno vám umožňuje vybrať ikonu."
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "Výber ikony"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "Prosím vyberte ikonu, ktorú chcete."
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "Výber ikony"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1562,6 +1555,12 @@ msgstr "_Informovať vývojárov"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Ladiť"
+
+#~ msgid "History id"
+#~ msgstr "Identifikátor histórie"
+
+#~ msgid "Icon selector"
+#~ msgstr "Výber ikony"
 
 #~ msgid "Exit the test"
 #~ msgstr "Ukončiť test"

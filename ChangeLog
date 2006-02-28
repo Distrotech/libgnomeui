@@ -1,3 +1,7 @@
+2006-02-28  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Release 2.13.90 and bump version.
+
 2006-02-24  Kjartan Maraas <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-icon-list.c: Fix from Harry Lu

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2005-12-17 00:00+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -58,67 +58,67 @@ msgstr "ファイル・システム"
 msgid "Bookmark saving failed (%s)"
 msgstr "ブックマークの保存に失敗しました (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "ファイル '%s' を開く際にエラー: %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "ファイル '%s' を巻き戻す際にエラー: %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 msgid "No name"
 msgstr "名前なし"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "'%s' は通常のファイルでもフォルダでもありません"
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr "'%s' という ID を持つファイルが見つかりません"
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr "保存する先のファイル名がありません"
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, c-format
 msgid "Starting %s"
 msgstr "%s の起動"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr "起動する URL が不明です"
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr "起動可能なアイテムではありません"
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "起動するコマンドが不明です"
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "起動するコマンドが間違っています"
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "%s のエンコーディングを特定できません"
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, c-format
 msgid "Error writing file '%s': %s"
 msgstr "ファイル '%s' を書き込む際にエラー: %s"
@@ -977,7 +977,8 @@ msgid "Show the 'Help' button"
 msgstr "[ヘルプ] ボタンを表示する"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
 msgstr "履歴 ID"
 
 #: libgnomeui/gnome-entry.c:200
@@ -987,10 +988,6 @@ msgstr "GTK エントリ"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "GTK のエントリ"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "履歴 ID"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1296,17 +1293,13 @@ msgstr "アイコン選択ダイアログ"
 msgid "This dialog box lets you select an icon."
 msgstr "アイコンの選択ダイアログを表示する"
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "アイコンの選択"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "アイコンを選んで下さい。"
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "アイコンの選択"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1557,6 +1550,12 @@ msgstr "開発者に報告する(_I)"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "デバッグする(_D)"
+
+#~ msgid "History id"
+#~ msgstr "履歴 ID"
+
+#~ msgid "Icon selector"
+#~ msgstr "アイコンの選択"
 
 #~ msgid "Exit the test"
 #~ msgstr "テストの終了"

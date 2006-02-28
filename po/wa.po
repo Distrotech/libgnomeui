@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.96.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2004-08-05 21:47+0200\n"
 "Last-Translator: Pablo Saratxaga <pablo@walon.org>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -61,68 +61,68 @@ msgstr "Sistinme di fitchîs"
 msgid "Bookmark saving failed (%s)"
 msgstr "Li schapaedje del rimåke a fwait berwete (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, fuzzy, c-format
 msgid "Error reading file '%s': %s"
 msgstr "Dji n' a savou drovi li fitchî «%s»: %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, fuzzy, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "Dji n' a savou drovi li fitchî «%s»: %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 #, fuzzy
 msgid "No name"
 msgstr "No del fonte"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, fuzzy, c-format
 msgid "Starting %s"
 msgstr "A_pontiaedjes"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, fuzzy, c-format
 msgid "Error writing file '%s': %s"
 msgstr "Dji n' a savou drovi li fitchî «%s»: %s"
@@ -990,7 +990,8 @@ msgid "Show the 'Help' button"
 msgstr "Mostrer li boton «Aidance»"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
 msgstr "ID d' l' istwere"
 
 #: libgnomeui/gnome-entry.c:200
@@ -1000,10 +1001,6 @@ msgstr "Intrêye GTK"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "L' intrêye GTK"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "ID d' l' istwere"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1315,17 +1312,13 @@ msgstr "Purnea di tchoezixhaedje des imådjetes"
 msgid "This dialog box lets you select an icon."
 msgstr "Ci purnea chal vos permete di tchoezi ene imådjete."
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "Tchoezixheu d' imådjetes"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "Tchoezixhoz l' imådjete ki vos vloz, s' i vs plait."
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "Tchoezixheu d' imådjetes"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1582,6 +1575,12 @@ msgstr "El d_ire åzès programeus"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Disbugaedje"
+
+#~ msgid "History id"
+#~ msgstr "ID d' l' istwere"
+
+#~ msgid "Icon selector"
+#~ msgstr "Tchoezixheu d' imådjetes"
 
 #~ msgid "Exit the test"
 #~ msgstr "Moussî foû do sayaedje"

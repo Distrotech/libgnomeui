@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2005-07-19 15:42+0300\n"
 "Last-Translator: Gil Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -58,67 +58,67 @@ msgstr "מערכת קבצים"
 msgid "Bookmark saving failed (%s)"
 msgstr "שמירת הסימניות נכשלה (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "שגיאה בקריאת קובץ '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "שגיאה בחזרה לאחור של קובץ '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 msgid "No name"
 msgstr "ללא שם"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "הקובץ '%s' אינו קובץ רגיל או ספרייה"
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr "שגיאה , לא ניתן למצוא זיהוי קובץ '%s'"
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr "אין שם קובץ לשמירה"
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, c-format
 msgid "Starting %s"
 msgstr "מתחיל %s"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr "אין כתובת לשיגור"
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr "הפריט אינו ניתן לשיגור"
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "אין פקודה לשיגור"
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "פקודה שגויה לשיגור"
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "קידוד לא ידוע של: %s"
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, c-format
 msgid "Error writing file '%s': %s"
 msgstr "שגיאה בכתיבה לקובץ '%s': %s"
@@ -974,7 +974,8 @@ msgid "Show the 'Help' button"
 msgstr "הצג את כפתור 'עזרה'"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
 msgstr "זיהוי היסטוריה"
 
 #: libgnomeui/gnome-entry.c:200
@@ -984,10 +985,6 @@ msgstr "ערך GTK"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "ערך ה GTK"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "זיהוי היסטוריה"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1293,17 +1290,13 @@ msgstr "תיבת דו-שיח לבחירת סמל"
 msgid "This dialog box lets you select an icon."
 msgstr "תיבת הדו-שיח הזו נותנת לך לבחור סמל."
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "בוחר סמל"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "אנא בחר את הסמל שאתה רוצה."
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "בוחר סמל"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1551,6 +1544,12 @@ msgstr "_דווח למפתחים"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_נפה"
+
+#~ msgid "History id"
+#~ msgstr "זיהוי היסטוריה"
+
+#~ msgid "Icon selector"
+#~ msgstr "בוחר סמל"
 
 #~ msgid " domain %s"
 #~ msgstr " תחום %s"

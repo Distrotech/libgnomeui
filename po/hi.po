@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2005-09-01 18:58+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -68,69 +68,69 @@ msgstr "फ़ाइलसिस्टम"
 msgid "Bookmark saving failed (%s)"
 msgstr "पुस्तकचिह्न सहेजना विफल (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "'%s' को पढ़ने में विफल: %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "'%s' को फिर घुमाने में त्रुटि: %s"
 
 # libgnomeui/gnome-font-picker.c:174
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 msgid "No name"
 msgstr "कोई नाम नहीं"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "फाइल '%s' एक नियमित फाइल या निर्देशिका नहीं है."
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr "गलती त्रुटि id '%s' पाने में"
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr "कोई फाइल नाम सहेजने को नहीं"
 
 # libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, c-format
 msgid "Starting %s"
 msgstr "%s का आरंभ कर रहा है"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr "कोई URL लांच करने के नहीं"
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr "कोई लांच करने योग्य मद नहीं "
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "कोई समादेश (Exec) लांच करने के लिये नहीं"
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "गलत समादेश (Exec) लांच करने के लिये"
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "इसका अनजान एनकोडिंग: %s"
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, c-format
 msgid "Error writing file '%s': %s"
 msgstr "'%s' फाइल लिखने में त्रुटि: %s"
@@ -1189,9 +1189,10 @@ msgstr "मदद दिखाएँ"
 msgid "Show the 'Help' button"
 msgstr "'मदद' बटन दिखाएँ"
 
-# libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
+# libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
 msgstr "इतिहास आईडी"
 
 # libgnomeui/gnome-entry.c:178
@@ -1203,11 +1204,6 @@ msgstr "जीटीके  प्रविष्टि"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "यह जीटीके प्रविष्टि"
-
-# libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "इतिहास आईडी"
 
 # libgnomeui/gnome-file-entry.c:191
 #: libgnomeui/gnome-file-entry.c:237
@@ -1575,17 +1571,13 @@ msgstr "चिह्न चयन संवाद"
 msgid "This dialog box lets you select an icon."
 msgstr "यह संवाद बक्सा आपको चिह्न चयन करने देता है"
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "चिह्न चयनक"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "कृपया चिह्न चुनें जो आप चाहते हैं."
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "चिह्न चयनक"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1863,6 +1855,13 @@ msgstr "डेवलपर्स को बताएँ (_I)"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "डिबग (_D)"
+
+# libgnomeui/gnome-entry.c:171 libgnomeui/gnome-entry.c:172
+#~ msgid "History id"
+#~ msgstr "इतिहास आईडी"
+
+#~ msgid "Icon selector"
+#~ msgstr "चिह्न चयनक"
 
 # test-gnome/testgnome.xml.h:3
 #~ msgid "Exit the test"

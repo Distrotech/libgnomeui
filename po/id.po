@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2005-08-30 22:23+0300\n"
 "Last-Translator: Mohammad DAMT <mdamt@bisnisweb.com>\n"
 "Language-Team: Indonesia <id@li.org>\n"
@@ -55,67 +55,67 @@ msgstr "Sistem Berkas"
 msgid "Bookmark saving failed (%s)"
 msgstr "Penyimpanan buku alamat gagal (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "Gagal membuka berkas '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "Gagal membuka berkas '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 msgid "No name"
 msgstr "Tidak ada nama"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "Berkas '%s' bukan berkas atau direktori"
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr "Kode berkas '%s' tidak dapat ditemukan"
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr "Nama berkas untuk disimpan belum ditentukan"
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, c-format
 msgid "Starting %s"
 msgstr "Menjalankan %s"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr "URL yang akan dijalankan tidak ada"
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr "Objek ini tidak dapat diluncurkan"
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "Perintah untuk peluncuran (eksekusi) tidak ada"
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "Perintah untuk peluncuran (eksekusi) salah"
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "Pengkodean %s tidak dikenal"
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, c-format
 msgid "Error writing file '%s': %s"
 msgstr "Gagal menulis berkas '%s': %s"
@@ -974,8 +974,9 @@ msgid "Show the 'Help' button"
 msgstr "Tampilkan tombol layar bantu"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
-msgstr "id History"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
+msgstr "ID History"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -984,10 +985,6 @@ msgstr "entri GTK"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "entri GTK"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "ID History"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1300,17 +1297,13 @@ msgstr "Dialog pemilih ikon"
 msgid "This dialog box lets you select an icon."
 msgstr "Kotak dialog ini untuk memilih ikon"
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "Pemilih Ikon"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "Silakan pilih ikon yang Anda suka."
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "Pemilih Ikon"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1560,6 +1553,12 @@ msgstr "Ber_i tahu Para Pembuat Program ini"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Debug"
+
+#~ msgid "History id"
+#~ msgstr "id History"
+
+#~ msgid "Icon selector"
+#~ msgstr "Pemilih Ikon"
 
 #~ msgid "Exit the test"
 #~ msgstr "Keluar dari tes"

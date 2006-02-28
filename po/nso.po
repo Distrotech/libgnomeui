@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.8-branch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2004-11-15 23:18+0200\n"
 "Last-Translator: Zuza Software Foundation <info@translate.org.za>\n"
 "Language-Team: Northern Sotho <translate-discuss-nso@lists.sourceforge.net>\n"
@@ -57,68 +57,68 @@ msgstr "Tshepedišo ya go faela"
 msgid "Bookmark saving failed (%s)"
 msgstr "Go boloka puku-tshwayo go paletšwe (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, fuzzy, c-format
 msgid "Error reading file '%s': %s"
 msgstr "E paletšwe ke go bula faele ya '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, fuzzy, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "E paletšwe ke go bula faele ya '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 #, fuzzy
 msgid "No name"
 msgstr "Leina la fonto"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, fuzzy, c-format
 msgid "Starting %s"
 msgstr "_Dipeakanyo"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, fuzzy, c-format
 msgid "Error writing file '%s': %s"
 msgstr "E paletšwe ke go bula faele ya '%s': %s"
@@ -987,8 +987,9 @@ msgid "Show the 'Help' button"
 msgstr "Bontšha konope ya 'Thušo'"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
-msgstr "Boitsebišo bja histori"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
+msgstr "Boitsebišo bja Histori"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -997,10 +998,6 @@ msgstr "Go tsena ga GTK"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "Go tsena ga GTK"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "Boitsebišo bja Histori"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1322,17 +1319,13 @@ msgstr "Poledišano ya kgetho ya leswao"
 msgid "This dialog box lets you select an icon."
 msgstr "Lepokisi le la poledišano le go dumelela go kgetha leswao."
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
-msgstr "Sekgethi sa leswao"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
+msgstr "Sekgethi sa Leswao"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "Hle kgetha leswao leo o le nyakago."
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "Sekgethi sa Leswao"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1590,6 +1583,12 @@ msgstr "_Tsebiša Batšweletši"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Fokotša diphošo"
+
+#~ msgid "History id"
+#~ msgstr "Boitsebišo bja histori"
+
+#~ msgid "Icon selector"
+#~ msgstr "Sekgethi sa leswao"
 
 #~ msgid "Exit the test"
 #~ msgstr "Etšwa tekong"

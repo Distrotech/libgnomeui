@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2005-12-25 10:11+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
@@ -56,67 +56,67 @@ msgstr "ระบบแฟ้ม"
 msgid "Bookmark saving failed (%s)"
 msgstr "บันทึกบุ๊กมาร์กไม่สำเร็จ (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "เกิดข้อผิดพลาดขณะอ่านแฟ้ม '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "เกิดข้อผิดพลาดขณะเลื่อนไปที่ต้นแฟ้ม '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 msgid "No name"
 msgstr "ไม่มีชื่อ"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "แฟ้ม '%s' ไม่ใช่แฟ้มปกติหรือไดเรกทอรี"
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr "เกิดข้อผิดพลาด หาแฟ้ม '%s' ไม่พบ"
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr "ไม่มีชื่อแฟ้มที่จะใช้บันทึก"
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, c-format
 msgid "Starting %s"
 msgstr "กำลังเรียก %s"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr "ไม่มี URL สำหรับเรียกโปรแกรม"
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr "ไม่ใช่รายการที่สามารถเรียกโปรแกรมได้"
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "ไม่มีคำสั่งที่จะใช้เรียกโปรแกรม"
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "คำสั่งที่ใช้เรียกโปรแกรมใช้ไม่ได้"
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "ไม่รู้จักรหัสอักขระของ: %s"
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, c-format
 msgid "Error writing file '%s': %s"
 msgstr "เกิดข้อผิดพลาดขณะเขียนแฟ้ม '%s': %s"
@@ -971,8 +971,9 @@ msgid "Show the 'Help' button"
 msgstr "แสดงปุ่ม 'วิธีใช้'"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
-msgstr "ชื่อประจำข้อมูลเก่า"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
+msgstr "ชื่อประจำแฟ้มเก่า"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -981,10 +982,6 @@ msgstr "GTK entry"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "วิดเจ็ต GTK entry"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "ชื่อประจำแฟ้มเก่า"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1285,17 +1282,13 @@ msgstr "หน้าต่างเลือกไอคอน"
 msgid "This dialog box lets you select an icon."
 msgstr "สามารถใช้หน้าต่างนี้เลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "ตัวเลือกไอคอน"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "กรุณาเลือกไอคอนที่ต้องการ"
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "ตัวเลือกไอคอน"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1543,6 +1536,12 @@ msgstr "แ_จ้งผู้เขียน"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_ดีบัก"
+
+#~ msgid "History id"
+#~ msgstr "ชื่อประจำข้อมูลเก่า"
+
+#~ msgid "Icon selector"
+#~ msgstr "ตัวเลือกไอคอน"
 
 #~ msgid "Exit the test"
 #~ msgstr "ออกจากการทดสอบ"

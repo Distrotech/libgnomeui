@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2004-12-02 13:18+0200\n"
 "Last-Translator: Zuza Software Foundation <info@translate.org.za>\n"
 "Language-Team: Zulu <translate-discuss-zu@lists.sourceforge.net>\n"
@@ -57,68 +57,68 @@ msgstr "Uhlelohele"
 msgid "Bookmark saving failed (%s)"
 msgstr "Ukuhlenga ngokuphawula kwezincwadi kwehlulekile (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, fuzzy, c-format
 msgid "Error reading file '%s': %s"
 msgstr "Ihlelekile ukuvula ihele '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, fuzzy, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "Ihlelekile ukuvula ihele '%s': %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 #, fuzzy
 msgid "No name"
 msgstr "Igama lesigamu sombhalo"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, fuzzy, c-format
 msgid "Starting %s"
 msgstr "_Izinhlelo"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, fuzzy, c-format
 msgid "Error writing file '%s': %s"
 msgstr "Ihlelekile ukuvula ihele '%s': %s"
@@ -984,7 +984,8 @@ msgid "Show the 'Help' button"
 msgstr "Khombisa inkinombho yo 'Sizo'"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
 msgstr "Umlando ukuzazisa"
 
 #: libgnomeui/gnome-entry.c:200
@@ -994,10 +995,6 @@ msgstr "Isingeniso GTK"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "Isingeniso GTK"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "Umlando ukuzazisa"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1315,17 +1312,13 @@ msgstr "Ukukhetha uphawu lokushaya"
 msgid "This dialog box lets you select an icon."
 msgstr "Lebhokisi yokushaya ikuvumela ukhethe uphawu."
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "Umkhethi phawu"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "Sicela ukhethe uphawu oludingayo."
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "Umkhethi phawu"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1579,6 +1572,12 @@ msgstr "_Tshela abathuthukisi"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "_Hlola umonakalo"
+
+#~ msgid "History id"
+#~ msgstr "Umlando ukuzazisa"
+
+#~ msgid "Icon selector"
+#~ msgstr "Umkhethi phawu"
 
 #~ msgid "Exit the test"
 #~ msgstr "Phuma ekulingweni"

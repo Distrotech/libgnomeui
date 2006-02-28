@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2005-09-02 03:20+0530\n"
 "Last-Translator: Amanpreet Singh Alam <amanpreetalam@yahoo.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
@@ -60,67 +60,67 @@ msgstr "ਫਾਇਲ ਸਿਸਟਮ"
 msgid "Bookmark saving failed (%s)"
 msgstr "ਬੁੱਕਮਾਰਕ ਨੂੰ ਸੰਭਾਲਣ ਵਿੱਚ ਗਲਤੀ(%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, c-format
 msgid "Error reading file '%s': %s"
 msgstr "ਫਾਇਲ '%s' ਖੋਲਣ ਵਿੱਚ ਗਲਤੀ: %s"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "ਫਾਇਲ '%s' ਮੁੜ ਚਲਾਉਣ ਵਿੱਚ ਗਲਤੀ: %s"
 
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 msgid "No name"
 msgstr "ਕੋਈ ਨਾਂ ਨਹੀਂ"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr "ਫਾਇਲ '%s' ਇੱਕ ਨਿਯਮਤ ਫਾਇਲ ਜਾਂ ਡਾਇਰੈਕਟਰੀ ਨਹੀਂ ਹੈ।"
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr "ਗਲਤੀ ਫਾਇਲ id '%s' ਖੋਜਿਆ ਨਹੀਂ ਜਾ ਸਕੀ"
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr "ਸੰਭਾਲਣ ਲਈ ਕੋਈ ਫਾਇਲ ਨਾਂ ਨਹੀਂ"
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, c-format
 msgid "Starting %s"
 msgstr "%s ਸ਼ੁਰੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr "ਚਲਾਉਣ ਲਈ ਕੋਈ URL ਨਹੀਂ ਹੈ"
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr "ਕੋਈ ਚੱਲਣਯੋਗ ਇਕਾਈ ਨਹੀਂ ਹੈ"
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr "ਚਲਾਉਣ ਲਈ ਕੋਈ ਕਮਾਂਡ ਨਹੀਂ ਹੈ"
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr "ਚਲਾਉਣ ਲਈ ਗਲਤ ਕਮਾਂਡ ਹੈ"
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr "ਅਣਜਾਣ ਕੋਡਿੰਗ: %s"
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, c-format
 msgid "Error writing file '%s': %s"
 msgstr "ਫਾਇਲ '%s' ਲਿਖਣ ਦੌਰਾਨ ਗਲਤੀ: %s"
@@ -977,8 +977,9 @@ msgid "Show the 'Help' button"
 msgstr "'ਸਹਾਇਤਾ' ਬਟਨ ਵੇਖਾਓ"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
-msgstr "ਅਤੀਤ id"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
+msgstr "ਅਤੀਤ ID"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -987,10 +988,6 @@ msgstr "GTK ਇੰਦਰਾਜ਼"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "GTK ਇੰਦਰਾਜ਼"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "ਅਤੀਤ ID"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1293,17 +1290,13 @@ msgstr "ਆਈਕਾਨ ਚੋਣਕਾਰ ਵਾਰਤਾਲਾਪ"
 msgid "This dialog box lets you select an icon."
 msgstr "ਇਹ ਵਾਰਤਾਲਾਪ ਤੁਹਾਨੂੰ ਆਈਕਾਨ ਚੁਣ ਦਾ ਮੌਕਾ ਦੇ ਰਿਹਾ ਹੈ।"
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
 msgstr "ਆਈਕਾਨ ਚੋਣਕਾਰ"
 
 #: libgnomeui/gnome-icon-entry.c:766
 msgid "Please pick the icon you want."
 msgstr "ਕਿਰਪਾ ਕਰਕੇ ਆਈਕਾਨ, ਜੋ ਤੁਸੀ ਚਾਹੁੰਦੇ ਹੋ, ਨੂੰ ਚੁਣੋ"
-
-#: libgnomeui/gnome-icon-entry.c:991
-msgid "Icon Selector"
-msgstr "ਆਈਕਾਨ ਚੋਣਕਾਰ"
 
 #: libgnomeui/gnome-icon-entry.c:992
 msgid "This button will open a window to let you select an icon."
@@ -1552,6 +1545,12 @@ msgstr "ਖੋਜੀਆਂ ਨੂੰ ਸੂਚਨਾ(_I)"
 #: libgnomeui/gnome_segv.c:177
 msgid "_Debug"
 msgstr "ਡੀਬੱਗ(_D)"
+
+#~ msgid "History id"
+#~ msgstr "ਅਤੀਤ id"
+
+#~ msgid "Icon selector"
+#~ msgstr "ਆਈਕਾਨ ਚੋਣਕਾਰ"
 
 #~ msgid "Exit the test"
 #~ msgstr "ਜਾਂਚ ਬੰਦ"

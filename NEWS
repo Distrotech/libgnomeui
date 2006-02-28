@@ -1,3 +1,14 @@
+libgnomeui 2.13.90
+------------------
+
+* Fix critical warnings in gnome-icon-list (Harry Lu)
+* Fix permissions on created directories in the file selector
+  (Federico)
+* Portability improvements in the file chooser (Mark)
+* Make the authentication dialog thread safe (jylefort at freebsd org)
+* Remove some redundant strings (Clytie Siddall)
+* Fix typo in the docs (Behdad)
+ 
 libgnomeui 2.13.3
 -----------------
 

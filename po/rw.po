@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"POT-Creation-Date: 2006-02-28 00:54+0100\n"
 "PO-Revision-Date: 2005-03-28 19:35-0700\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -69,69 +69,69 @@ msgstr "Idosiye"
 msgid "Bookmark saving failed (%s)"
 msgstr "Mu kubika Byanze"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
 #, fuzzy, c-format
 msgid "Error reading file '%s': %s"
 msgstr "Kuri Gufungura IDOSIYE"
 
-#: file-chooser/sucky-desktop-item.c:285
+#: file-chooser/sucky-desktop-item.c:283
 #, fuzzy, c-format
 msgid "Error rewinding file '%s': %s"
 msgstr "Kuri Gufungura IDOSIYE"
 
 # svx/sdi\svxslots.src:SID_ATTR_CHAR_FONT.text
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
+#: file-chooser/sucky-desktop-item.c:382
+#: file-chooser/sucky-desktop-item.c:3722
 #, fuzzy
 msgid "No name"
 msgstr "Izina ry'Umukono"
 
-#: file-chooser/sucky-desktop-item.c:620
+#: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:796
+#: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:842
+#: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:1797
+#: file-chooser/sucky-desktop-item.c:1817
 #, fuzzy, c-format
 msgid "Starting %s"
 msgstr "Amagenamiterere"
 
-#: file-chooser/sucky-desktop-item.c:2036
+#: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2046
+#: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2056
+#: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:2069
+#: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:3759
+#: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
 msgstr ""
 
-#: file-chooser/sucky-desktop-item.c:3990
+#: file-chooser/sucky-desktop-item.c:4010
 #, fuzzy, c-format
 msgid "Error writing file '%s': %s"
 msgstr "Kuri Gufungura IDOSIYE"
@@ -1244,8 +1244,9 @@ msgid "Show the 'Help' button"
 msgstr "Akabuto"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
 #, fuzzy
-msgid "History id"
+msgid "History ID"
 msgstr "ID"
 
 #: libgnomeui/gnome-entry.c:200
@@ -1257,11 +1258,6 @@ msgstr "Icyinjijwe"
 #, fuzzy
 msgid "The GTK entry"
 msgstr "Icyinjijwe"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-#, fuzzy
-msgid "History ID"
-msgstr "ID"
 
 #: libgnomeui/gnome-file-entry.c:237
 #, fuzzy
@@ -1628,20 +1624,15 @@ msgstr "Ihitamo Ikiganiro"
 msgid "This dialog box lets you select an icon."
 msgstr "Ikiganiro Agasanduku Guhitamo Agashushondanga"
 
-#: libgnomeui/gnome-icon-entry.c:765
+#: libgnomeui/gnome-icon-entry.c:765 libgnomeui/gnome-icon-entry.c:991
 #, fuzzy
-msgid "Icon selector"
+msgid "Icon Selector"
 msgstr "Ihitamo Ikiganiro"
 
 #: libgnomeui/gnome-icon-entry.c:766
 #, fuzzy
 msgid "Please pick the icon you want."
 msgstr "Agashushondanga"
-
-#: libgnomeui/gnome-icon-entry.c:991
-#, fuzzy
-msgid "Icon Selector"
-msgstr "Ihitamo Ikiganiro"
 
 #: libgnomeui/gnome-icon-entry.c:992
 #, fuzzy
@@ -1945,6 +1936,14 @@ msgstr ""
 #, fuzzy
 msgid "_Debug"
 msgstr "Kosora amakosa"
+
+#, fuzzy
+#~ msgid "History id"
+#~ msgstr "ID"
+
+#, fuzzy
+#~ msgid "Icon selector"
+#~ msgstr "Ihitamo Ikiganiro"
 
 #, fuzzy
 #~ msgid "Exit the test"
