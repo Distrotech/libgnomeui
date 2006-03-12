@@ -39,7 +39,7 @@
 #include <gtk/gtkvbox.h>
 #include <gtk/gtkradiobutton.h>
 
-struct GnomePasswordDialogDetails
+struct _GnomePasswordDialogDetails
 {
 	/* Attributes */
 	gboolean readonly_username;
@@ -485,6 +485,16 @@ gnome_password_dialog_new (const char	*dialog_title,
 	return GTK_WIDGET (password_dialog);
 }
 
+/**
+ * gnome_password_dialog_run_and_block:
+ * @password_dialog: A #GnomePasswordDialog
+ * 
+ * Description: Gets the user input from PasswordDialog.
+ * 
+ * Returns: %TRUE if "Connect" button is pressed. %FALSE if "Cancel"  button is pressed.
+ *
+ * Since: 2.4
+ **/
 gboolean
 gnome_password_dialog_run_and_block (GnomePasswordDialog *password_dialog)
 {
@@ -506,8 +516,6 @@ gnome_password_dialog_run_and_block (GnomePasswordDialog *password_dialog)
  *
  * Description: Sets the username in the password dialog.
  *
- * Returns:
- *
  * Since: 2.4
  **/
 void
@@ -528,8 +536,6 @@ gnome_password_dialog_set_username (GnomePasswordDialog	*password_dialog,
  *
  * Description: Sets the password in the password dialog.
  *
- * Returns:
- *
  * Since: 2.4
  **/
 void
@@ -547,9 +553,7 @@ gnome_password_dialog_set_password (GnomePasswordDialog	*password_dialog,
  * @password_dialog: A #GnomePasswordDialog
  * @domain: The domain that should be set
  *
- * Description: Sets the domain to be used in the password dialog.
- *
- * Returns:
+ * Description: Sets the domain field in the password dialog to @domain.
  *
  * Since: 2.4
  **/
@@ -564,7 +568,16 @@ gnome_password_dialog_set_domain (GnomePasswordDialog	*password_dialog,
 			    domain ? domain : "");
 }
 
-
+/**
+ * gnome_password_dialog_set_show_username:
+ * @password_dialog: A #GnomePasswordDialog
+ * @show: Boolean value that controls whether the username entry has to
+ * appear or not.
+ *
+ * Description: Shows or hides the username entry in the password dialog based on the value of @show. 
+ *
+ * Since: 2.6
+ **/
 void
 gnome_password_dialog_set_show_username (GnomePasswordDialog *password_dialog,
 					 gboolean             show)
@@ -579,6 +592,16 @@ gnome_password_dialog_set_show_username (GnomePasswordDialog *password_dialog,
 	}
 }
 
+/**
+ * gnome_password_dialog_set_show_domain:
+ * @password_dialog: A #GnomePasswordDialog
+ * @show: Boolean value that controls whether the domain entry has to 
+ * appear or not.
+ *
+ * Description: Shows or hides the domain field in the password dialog based on the value of @show.
+ *
+ * Since: 2.6
+ **/
 void
 gnome_password_dialog_set_show_domain (GnomePasswordDialog *password_dialog,
 				       gboolean             show)
@@ -593,6 +616,16 @@ gnome_password_dialog_set_show_domain (GnomePasswordDialog *password_dialog,
 	}
 }
 
+/**
+ * gnome_password_dialog_set_show_password:
+ * @password_dialog: A #GnomePasswordDialog
+ * @show: Boolean value that controls whether the password entry has to
+ * appear or not.
+ *
+ * Description: Shows or hides the password field in the password dialog based on the value of @show.
+ *
+ * Since: 2.6
+ **/
 void
 gnome_password_dialog_set_show_password (GnomePasswordDialog *password_dialog,
 					 gboolean             show)
@@ -607,6 +640,17 @@ gnome_password_dialog_set_show_password (GnomePasswordDialog *password_dialog,
 	}
 }
 
+/**
+ * gnome_password_dialog_set_readonly_username:
+ * @password_dialog: A #GnomePasswordDialog
+ * @readonly : Boolean value that controls whether the user
+ * can edit the username or not
+ * 
+ * Description: Sets the editable nature of the username field in the password 
+ * dialog based on the boolean value @readonly.
+ *  
+ * Since: 2.4
+ **/
 void
 gnome_password_dialog_set_readonly_username (GnomePasswordDialog	*password_dialog,
 						gboolean		readonly)
@@ -620,6 +664,17 @@ gnome_password_dialog_set_readonly_username (GnomePasswordDialog	*password_dialo
 				  !readonly);
 }
 
+/**
+ * gnome_password_dialog_set_readonly_domain:
+ * @password_dialog: A #GnomePasswordDialog
+ * @readonly : Boolean value that controls whether the user
+ * can edit the domain or not
+ *
+ * Description: Sets the editable nature of the domain field in the password
+ * dialog based on the boolean value @readonly.
+ *              
+ * Since: 2.6
+ **/
 void
 gnome_password_dialog_set_readonly_domain (GnomePasswordDialog	*password_dialog,
 					   gboolean		readonly)
@@ -633,6 +688,17 @@ gnome_password_dialog_set_readonly_domain (GnomePasswordDialog	*password_dialog,
 				  !readonly);
 }
 
+/**
+ * gnome_password_dialog_get_username:
+ * @password_dialog: A #GnomePasswordDialog
+ *
+ * Description: Gets the username from the password dialog.
+ *
+ * Returns: The username, a char*.
+ *
+ * Since: 2.4
+ **/
+  
 char *
 gnome_password_dialog_get_username (GnomePasswordDialog *password_dialog)
 {
@@ -641,6 +707,16 @@ gnome_password_dialog_get_username (GnomePasswordDialog *password_dialog)
 	return g_strdup (gtk_entry_get_text (GTK_ENTRY (password_dialog->details->username_entry)));
 }
 
+/**
+ * gnome_password_dialog_get_domain:
+ * @password_dialog: A #GnomePasswordDialog
+ *
+ * Description: Gets the domain name from the password dialog.
+ *
+ * Returns: The domain name, a char*.
+ *
+ * Since: 2.4
+ **/
 char *
 gnome_password_dialog_get_domain (GnomePasswordDialog *password_dialog)
 {
@@ -649,6 +725,16 @@ gnome_password_dialog_get_domain (GnomePasswordDialog *password_dialog)
 	return g_strdup (gtk_entry_get_text (GTK_ENTRY (password_dialog->details->domain_entry)));
 }
 
+/**
+ * gnome_password_dialog_get_password:
+ * @password_dialog: A #GnomePasswordDialog
+ *
+ * Description: Gets the password from the password dialog.
+ *
+ * Returns: The password, a char*.
+ *
+ * Since: 2.4
+ **/
 char *
 gnome_password_dialog_get_password (GnomePasswordDialog *password_dialog)
 {
@@ -657,6 +743,19 @@ gnome_password_dialog_get_password (GnomePasswordDialog *password_dialog)
 	return g_strdup (gtk_entry_get_text (GTK_ENTRY (password_dialog->details->password_entry)));
 }
 
+/**
+ * gnome_password_dialog_set_show_userpass_buttons:
+ * @password_dialog: A #GnomePasswordDialog
+ * @show_userpass_buttons: Boolean value that controls whether the radio buttons for connecting 
+ * anonymously and connecting as user should be shown or not.
+ *
+ * Description: Shows the radio buttons for connecting anonymously and connecting as user if 
+ * @show_userpass_buttons is #TRUE. Also makes the 'Username' and 'Password' fields greyed out if the 
+ * radio button for connecting anonymously is active. If @show_userpass_buttons is #FALSE, then these
+ * radio buttons are hidden and the 'Username' and 'Password' fields will be made active.
+ * 
+ * Since: 2.8
+ */
 void
 gnome_password_dialog_set_show_userpass_buttons (GnomePasswordDialog         *password_dialog,
                                                  gboolean                     show_userpass_buttons)
@@ -680,6 +779,16 @@ gnome_password_dialog_set_show_userpass_buttons (GnomePasswordDialog         *pa
         add_table_rows (password_dialog);
 }
 
+/**
+ * gnome_password_dialog_anon_selected:
+ * @password_dialog: A #GnomePasswordDialog
+ * 
+ * Description: Checks whether anonymous support is set to #TRUE and the radio button for connecting
+ * as anonymous user is active.
+ *
+ * Returns: #TRUE if anonymous support is set and the radio button is active, #FALSE otherwise.
+ *
+ **/
 gboolean
 gnome_password_dialog_anon_selected (GnomePasswordDialog *password_dialog)
 {
@@ -689,6 +798,17 @@ gnome_password_dialog_anon_selected (GnomePasswordDialog *password_dialog)
 				password_dialog->details->connect_with_no_userpass_button));
 }
 
+/**
+ * gnome_password_dialog_set_show_remember:
+ * @password_dialog: A #GnomePasswordDialog
+ * @show_remember: Boolean value that controls whether the check buttons for password retention
+ * should appear or not.
+ *
+ * Description: Shows or hides the check buttons to save password in keyring and remember password for 
+ * session based on the value of @show_remember.
+ *
+ * Since: 2.6
+ **/
 void
 gnome_password_dialog_set_show_remember (GnomePasswordDialog         *password_dialog,
 					 gboolean                     show_remember)
@@ -702,6 +822,16 @@ gnome_password_dialog_set_show_remember (GnomePasswordDialog         *password_d
 	}
 }
 
+/**
+ * gnome_password_dialog_set_remember:
+ * @password_dialog: A #GnomePasswordDialog.
+ * @remember: A #GnomePasswordDialogRemember.
+ *
+ * Description: Based on the value of #GnomePasswordDialogRemember, sets the state of
+ * the check buttons to remember password for the session and save password to keyring .
+ *
+ * Since: 2.6
+ **/
 void
 gnome_password_dialog_set_remember      (GnomePasswordDialog         *password_dialog,
 					 GnomePasswordDialogRemember  remember)
@@ -721,6 +851,18 @@ gnome_password_dialog_set_remember      (GnomePasswordDialog         *password_d
 				      forever);
 }
 
+/**
+ * gnome_password_dialog_get_remember:
+ * @password_dialog: A #GnomePasswordDialog
+ *
+ * Description: Gets the state of the check buttons to remember password for the session and save
+ * password to keyring.
+ *
+ * Returns: a #GnomePasswordDialogRemember, which indicates whether to remember the password for the session
+ * or forever.
+ *
+ * Since: 2.6
+ **/
 GnomePasswordDialogRemember
 gnome_password_dialog_get_remember (GnomePasswordDialog         *password_dialog)
 {

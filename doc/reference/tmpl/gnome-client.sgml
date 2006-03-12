@@ -198,6 +198,14 @@ connect to the session manager or not. Can be overridden by the user passing
 @Returns: 
 
 
+<!-- ##### FUNCTION gnome_client_module_info_get ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
 <!-- ##### FUNCTION gnome_client_set_global_config_prefix ##### -->
 <para>
 

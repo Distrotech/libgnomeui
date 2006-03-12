@@ -2,7 +2,7 @@
 GnomeThemeFile
 
 <!-- ##### SECTION Short_Description ##### -->
-
+APIs to  parse icon theme files.
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -19,7 +19,8 @@ GnomeThemeFile
 
 <!-- ##### STRUCT GnomeThemeFile ##### -->
 <para>
-
+A GnomeThemeFile contains information about the number of sections, pointers to the sections
+and information about the current locale.
 </para>
 
 

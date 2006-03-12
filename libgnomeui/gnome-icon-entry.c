@@ -1266,7 +1266,7 @@ gnome_icon_entry_set_history_id(GnomeIconEntry *ientry,
  *
  * Description:  Set the max_saved of the entry in the browse dialog
  *
- * Returns:
+ * Since: 2.4
  **/
 void
 gnome_icon_entry_set_max_saved(GnomeIconEntry *ientry,

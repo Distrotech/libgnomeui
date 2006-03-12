@@ -89,3 +89,11 @@ as the poptOption table.
 @argv: Argument vector (for example, argv as received by the main function).
 
 
+<!-- ##### FUNCTION gnome_gtk_module_info_get ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

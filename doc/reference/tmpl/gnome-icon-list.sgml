@@ -247,6 +247,14 @@ GnomeIconList
 @idx: 
 
 
+<!-- ##### FUNCTION gnome_icon_list_select_all ##### -->
+<para>
+
+</para>
+
+@gil: 
+
+
 <!-- ##### FUNCTION gnome_icon_list_unselect_icon ##### -->
 <para>
 

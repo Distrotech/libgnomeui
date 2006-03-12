@@ -23,10 +23,15 @@
 <!ENTITY libgnomeui-GnomeMDIGenericChild SYSTEM "xml/gnome-mdi-generic-child.xml">
 <!ENTITY libgnomeui-GnomeMDI SYSTEM "xml/gnome-mdi.xml">
 <!ENTITY libgnomeui-GnomeAppBar SYSTEM "xml/gnome-appbar.xml">
+<!ENTITY libgnomeui-GnomeAuthentication SYSTEM "xml/gnome-authentication.xml">
 <!ENTITY libgnomeui-GnomeDialog SYSTEM "xml/gnome-dialog.xml">
+<!ENTITY libgnomeui-GnomeIce SYSTEM "xml/gnome-ice.xml">
 <!ENTITY libgnomeui-GnomeIconEntry SYSTEM "xml/gnome-icon-entry.xml">
+<!ENTITY libgnomeui-GnomeIconItem SYSTEM "xml/gnome-icon-item.xml">
 <!ENTITY libgnomeui-GnomeIconSelection SYSTEM "xml/gnome-icon-sel.xml">
 <!ENTITY libgnomeui-GnomeMessageBox SYSTEM "xml/gnome-messagebox.xml">
+<!ENTITY libgnomeui-GnomeMultiScreen SYSTEM "xml/gnome-multi-screen.xml">
+<!ENTITY libgnomeui-GnomePassword SYSTEM "xml/gnome-password.xml">
 <!ENTITY libgnomeui-GnomePixmapEntry SYSTEM "xml/gnome-pixmap-entry.xml">
 <!ENTITY libgnomeui-GnomePixmap SYSTEM "xml/gnome-pixmap.xml">
 <!ENTITY libgnomeui-GnomePropertyBox SYSTEM "xml/gnome-propertybox.xml">
@@ -41,6 +46,7 @@
 <!ENTITY libgnomeui-gnome-uidefs SYSTEM "xml/gnome-uidefs.xml">
 <!ENTITY libgnomeui-gnome-vfs-util SYSTEM "xml/gnome-vfs-util.xml">
 <!ENTITY libgnomeui-gnome-window SYSTEM "xml/gnome-window.xml">
+<!ENTITY libgnomeui-gnome-window-icon SYSTEM "xml/gnome-window-icon.xml">
 <!ENTITY libgnomeui-gnome-popup-menu SYSTEM "xml/gnome-popup-menu.xml">
 <!ENTITY libgnomeui-gnometypebuiltins SYSTEM "xml/gnometypebuiltins.xml">
 <!ENTITY libgnomeui-object-index SYSTEM "xml/tree_index.sgml">
@@ -85,7 +91,11 @@
       &libgnomeui-GnomeAppBar;
       &libgnomeui-gnome-app-helper;
       &libgnomeui-gnome-window;
+      &libgnomeui-gnome-window-icon;
       &libgnomeui-GnomeAbout;
+      &libgnomeui-GnomeMultiScreen;
+      &libgnomeui-GnomeAuthentication;
+      &libgnomeui-GnomePassword;
       &libgnomeui-gnome-popup-menu;
     </sect1>
     <sect1 id="druids">
@@ -120,6 +130,8 @@
       &libgnomeui-GnomeFileEntry;
       &libgnomeui-GnomeFontPicker;
       &libgnomeui-GnomeHRef;
+      &libgnomeui-GnomeIconItem;
+      &libgnomeui-GnomeIce;
       &libgnomeui-GnomeIconEntry;
       &libgnomeui-GnomeIconList;
       &libgnomeui-GnomeIconLookup;

@@ -291,6 +291,8 @@ mimetype_supported_by_gdk_pixbuf (const char *mime_type)
  *
  * Returns: The name of an icon or an absolute filename of an image to
  *          use for the file.
+ *
+ * Since: 2.2
  **/
 char *
 gnome_icon_lookup (GtkIconTheme               *icon_theme,
@@ -413,6 +415,8 @@ gnome_icon_lookup (GtkIconTheme               *icon_theme,
  * 
  * Returns: The name of an icon or an absolute filename of an image to
  *          use for the file.
+ *
+ * Since: 2.2
  */
 char *
 gnome_icon_lookup_sync (GtkIconTheme            *icon_theme,

@@ -134,6 +134,15 @@ GnomeIconEntry
 @history_id: 
 
 
+<!-- ##### FUNCTION gnome_icon_entry_set_max_saved ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@max_saved: 
+
+
 <!-- ##### FUNCTION gnome_icon_entry_pick_dialog ##### -->
 <para>
 

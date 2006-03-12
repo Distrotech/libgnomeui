@@ -123,6 +123,12 @@ gnome_ice_io_error_handler (IceConn connection)
 
 #endif /* HAVE_LIBSM */
 
+/**
+ * gnome_ice_init:
+ *
+ * Initialises the ICE(Inter-Client Exchange). Used to make some initial calls into
+ * the ICE library in order to accept ICE connection .
+ */
 void
 gnome_ice_init (void)
 {

@@ -53,6 +53,16 @@
 
 static int gnome_authentication_manager_dialog_visible = 0;
 
+/**
+ * gnome_authentication_manager_dialog_is_visible:
+ *
+ * This function checks whether there are any references on the authentication dialog and returns a 
+ * a gboolean value.
+ *
+ * Returns: TRUE if there are any references on the authentication dialog, FALSE otherwise.
+ *
+ * Since: 2.8
+ */
 gboolean
 gnome_authentication_manager_dialog_is_visible (void)
 {
@@ -885,11 +895,19 @@ vfs_question_callback (gconstpointer in, size_t in_size,
 	GDK_THREADS_LEAVE ();
 }
 
-
-/* If you call this, and you use threads with gtk+, you must never
+/** 
+ * gnome_authentication_manager_init:
+ * 
+ * This function checks for thread support and does a thread initialisation, if the support 
+ * is available. Also sets the default sync and async gnome-vfs callbacks for various types
+ * of authentication.
+ * 
+ * Note: If you call this, and you use threads with gtk+, you must never
  * hold the gdk lock while doing synchronous gnome-vfs calls. Otherwise
  * an authentication callback presenting a dialog could try to grab the
  * already held gdk lock, causing a deadlock.
+ *
+ * Since: 2.4
  */
 void
 gnome_authentication_manager_init (void)
@@ -956,6 +974,14 @@ gnome_authentication_manager_init (void)
 
 }
 
+/**
+ * gnome_authentication_manager_push_async:
+ *
+ * This function calls gnome_vfs_async_module_callback_push() to set temporary async handlers for 
+ * the various types of authentication.
+ *  
+ * Since: 2.6
+ */
 void
 gnome_authentication_manager_push_async (void)
 {
@@ -986,6 +1012,14 @@ gnome_authentication_manager_push_async (void)
 					      NULL);
 }
 
+/**
+ * gnome_authentication_manager_pop_async:
+ *
+ * This function calls gnome_vfs_async_module_callback_pop() to remove all the temporary async 
+ * gnome-vfs callbacks associated with various types of authentication.
+ *
+ * Since: 2.6
+ */
 void
 gnome_authentication_manager_pop_async (void)
 {
@@ -997,6 +1031,14 @@ gnome_authentication_manager_pop_async (void)
 	gnome_vfs_async_module_callback_pop (GNOME_VFS_MODULE_CALLBACK_QUESTION);
 }
 
+/**
+ * gnome_authentication_manager_push_sync:
+ *
+ * This function calls gnome_vfs_module_callback_push() to set temperory handlers for 
+ * various types of authentication.
+ *
+ * Since: 2.6
+ */
 void
 gnome_authentication_manager_push_sync (void)
 {
@@ -1027,6 +1069,15 @@ gnome_authentication_manager_push_sync (void)
 					GINT_TO_POINTER (0),
 					NULL);
 }
+
+/**
+ * gnome_authentication_manager_pop_sync:
+ * 
+ * This function calls gnome_vfs_module_callback_pop() to remove all the gnome-vfs sync handlers associated
+ * with various types of authentication.
+ *
+ * Since: 2.6
+ */
 
 void
 gnome_authentication_manager_pop_sync (void)

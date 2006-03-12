@@ -35,18 +35,18 @@ G_BEGIN_DECLS
 #define GNOME_IS_PASSWORD_DIALOG(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_PASSWORD_DIALOG))
 #define GNOME_IS_PASSWORD_DIALOG_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PASSWORD_DIALOG))
 
-typedef struct GnomePasswordDialog        GnomePasswordDialog;
-typedef struct GnomePasswordDialogClass   GnomePasswordDialogClass;
-typedef struct GnomePasswordDialogDetails GnomePasswordDialogDetails;
+typedef struct _GnomePasswordDialog        GnomePasswordDialog;
+typedef struct _GnomePasswordDialogClass   GnomePasswordDialogClass;
+typedef struct _GnomePasswordDialogDetails GnomePasswordDialogDetails;
 
-struct GnomePasswordDialog
+struct _GnomePasswordDialog
 {
 	GtkDialog gtk_dialog;
 
 	GnomePasswordDialogDetails *details;
 };
 
-struct GnomePasswordDialogClass
+struct _GnomePasswordDialogClass
 {
 	GtkDialogClass parent_class;
 };
