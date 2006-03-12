@@ -1101,6 +1101,13 @@ gnome_icon_text_item_setxy (GnomeIconTextItem *iti, int x, int y)
 	gnome_canvas_item_request_update (GNOME_CANVAS_ITEM (iti));
 }
 
+/**
+ * gnome_icon_text_item_focus:
+ * @iti:  An icon text item.
+ * @focused: whether to set or unset the icon text item focus.
+ *
+ * Sets or unsets the focus on the icon text item depending on @focused.
+ **/
 void
 gnome_icon_text_item_focus (GnomeIconTextItem *iti, gboolean focused)
 {
@@ -1219,6 +1226,14 @@ gnome_icon_text_item_stop_editing (GnomeIconTextItem *iti,
 		iti_stop_editing (iti);
 }
 
+/**
+ * gnome_icon_text_item_get_editable:
+ * @iti: An icon text item.
+ *
+ * Retrieves the entry widget associated with the icon text.
+ * 
+ * Returns: a #GtkEditable if the entry widget is initialised, NULL otherwise.
+ **/
 GtkEditable *
 gnome_icon_text_item_get_editable  (GnomeIconTextItem *iti)
 {

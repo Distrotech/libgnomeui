@@ -1,3 +1,22 @@
+2006-03-12  Christian Persch  <chpe@cvs.gnome.org>
+
+	* doc/reference/libgnomeui-docs.sgml:
+	* doc/reference/libgnomeui-sections.txt:
+	* doc/reference/tmpl/gnome-ice.sgml:
+	* doc/reference/tmpl/gnome-theme-parse.sgml:
+	* libgnomeui/gnome-authentication-manager.c:
+	* libgnomeui/gnome-ice.c:
+	* libgnomeui/gnome-icon-entry.c:
+	* libgnomeui/gnome-icon-item.c:
+	* libgnomeui/gnome-icon-lookup.c:
+	* libgnomeui/gnome-password-dialog.c:
+	* libgnomeui/gnome-password-dialog.h:
+	* libgnomeui/gnome-theme-parser.c: 
+
+	Add documentation and Since: tags to a bunch of functions.
+	No code changes. Bug #313898, patch by dinoop.thomas@wipro.com.
+	Merged from stable.
+
 2006-02-26  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-icon-list.c: Merge fix for critical warnings

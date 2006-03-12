@@ -89,6 +89,15 @@ static GnomeThemeFileLine *   lookup_line    (GnomeThemeFile         *df,
 
 
 
+/**
+ * gnome_theme_file_parse_error_quark:
+ * 
+ * This function gets  a #GQuark representing the error string. 
+ *
+ * Returns: a #GQuark.
+ *
+ * Since: 2.2
+ **/
 GQuark
 gnome_theme_file_parse_error_quark (void)
 {
@@ -123,6 +132,14 @@ gnome_theme_file_section_free (GnomeThemeFileSection *section)
   g_free (section->lines);
 }
 
+/**
+ * gnome_theme_file_free:
+ * @df: a #GnomeThemeFile.
+ * 
+ * Frees the #GnomeThemeFile structure.
+ *
+ * Since: 2.2
+ **/
 void
 gnome_theme_file_free (GnomeThemeFile *df)
 {
@@ -545,7 +562,17 @@ report_error (GnomeThemeFileParser *parser,
     }
 }
 
-
+/**
+ * gnome_theme_file_new_from_string:
+ * @data:  the string used to create a #GnomeThemeFile.
+ * @error: location to store the error occuring, or NULL to ignore errors 
+ *
+ * Creates a #GnomeThemeFile from the data string passed.
+ * 
+ * Returns: a #GnomeThemeFile.
+ * 
+ * Since: 2.2
+ **/
 GnomeThemeFile *
 gnome_theme_file_new_from_string (char                       *data,
 				  GError                    **error)
@@ -582,6 +609,16 @@ gnome_theme_file_new_from_string (char                       *data,
   return parser.df;
 }
 
+/**
+ * gnome_theme_file_to_string:
+ * @df: A #GnomeThemeFile
+ *
+ * This function retrieves the string representing the #GnomeThemeFile.
+ *
+ * Returns: a char *.
+ *
+ * Since: 2.2
+ **/
 char *
 gnome_theme_file_to_string (GnomeThemeFile *df)
 {
@@ -685,12 +722,27 @@ lookup_line (GnomeThemeFile        *df,
   return NULL;
 }
 
+/**
+ * gnome_theme_file_get_raw:
+ * @df: A #GnomeThemeFile. 
+ * @section: the string representing the section name
+ * @keyname: the string representing the key name.
+ * @locale: the string representing the locale. 
+ * @val: a char**. 
+ *
+ * Searches section name and line in the #GnomeThemeFile data structure.
+ * If found, sets the @val to value field in GnomeThemeFileLine and returns a boolean value.
+ * 
+ * Returns: TRUE if section and line were found in the #GnomeThemeFile, FALSE otherwise.
+ * 
+ * Since: 2.2
+ **/ 
 gboolean
-gnome_theme_file_get_raw (GnomeThemeFile  *df,
-			    const char    *section_name,
-			    const char    *keyname,
-			    const char    *locale,
-			    char         **val)
+gnome_theme_file_get_raw (GnomeThemeFile	*df,
+			    const char		*section_name,
+			    const char    	*keyname,
+			    const char    	*locale,
+			    char         	**val)
 {
   GnomeThemeFileSection *section;
   GnomeThemeFileLine *line;
@@ -714,7 +766,16 @@ gnome_theme_file_get_raw (GnomeThemeFile  *df,
   return TRUE;
 }
 
-
+/**
+ * gnome_theme_file_foreach_section:
+ * @df: a #GnomeThemeFile.
+ * @func: a #GnomeThemeFileSectionFunc
+ * @user_data: a pointer to the user data.
+ * 
+ * Calls @func for each section in the #GnomeThemeFile with @user_data.
+ *
+ * Since: 2.2
+ **/
 void
 gnome_theme_file_foreach_section (GnomeThemeFile            *df,
 				  GnomeThemeFileSectionFunc  func,
@@ -732,12 +793,25 @@ gnome_theme_file_foreach_section (GnomeThemeFile            *df,
   return;
 }
 
+/**
+ * gnome_theme_file_foreach_key:
+ * @df: a #GnomeThemeFile.
+ * @section: name of the section
+ * @include_localized: a boolean value
+ * @func: a #GnomeThemeFileLineFunc.
+ * @user_data: a pointer to user_data.
+ * 
+ * Looks for the section @section_name. If found, this function calls @func for each line 
+ * in the section with fields of line and @user_data.
+ * 
+ * Since: 2.2
+ */ 
 void
 gnome_theme_file_foreach_key (GnomeThemeFile            *df,
-			      const char                  *section_name,
-			      gboolean                     include_localized,
-			      GnomeThemeFileLineFunc     func,
-			      gpointer                     user_data)
+			      const char		*section_name,
+			      gboolean			include_localized,
+			      GnomeThemeFileLineFunc	func,
+			      gpointer			user_data)
 {
   GnomeThemeFileSection *section;
   GnomeThemeFileLine *line;
@@ -795,6 +869,20 @@ calculate_locale (GnomeThemeFile   *df)
     }
 }
 
+/**
+ * gnome_theme_file_get_locale_string:
+ * @df: A #GnomeThemeFile
+ * @section: the section name.
+ * @keyname: the keyname.
+ * @val: a char **.
+ *
+ * Calculates the locale if the current_locale field of @df is NULL. Then calls gnome_theme_file_get_raw() with the 
+ * parameters and returns the boolean value obtained.
+ *
+ * Returns: a gboolean value.
+ *
+ * Since: 2.2
+ */
 gboolean
 gnome_theme_file_get_locale_string  (GnomeThemeFile  *df,
 				     const char      *section,
@@ -825,6 +913,20 @@ gnome_theme_file_get_locale_string  (GnomeThemeFile  *df,
   return gnome_theme_file_get_raw (df, section, keyname, NULL, val);
 }
 
+/**
+ * gnome_theme_file_get_string:
+ * @df: A #GnomeThemeFile.
+ * @section: the section name. 
+ * @keyname: the key name.
+ * @val: a char**.
+ *
+ * This function calls gnome_theme_file_get_raw() with the parameters and returns the 
+ * boolean value.
+ *
+ * Returns: a #gboolean value.
+ *
+ * Since: 2.2
+ **/
 gboolean
 gnome_theme_file_get_string (GnomeThemeFile   *df,
 			     const char       *section,
@@ -834,6 +936,20 @@ gnome_theme_file_get_string (GnomeThemeFile   *df,
   return gnome_theme_file_get_raw (df, section, keyname, NULL, val);
 }
 
+/**
+ * gnome_theme_file_get_integer:
+ * @df: a #GnomeThemeFile.
+ * @section: the section name.
+ * @keyname: the key name.
+ * @val: an int*.
+ *
+ * This function calls gnome_theme_file_get_raw() with the parameters. If gnome_theme_file_get_raw returns
+ * %TRUE, then converts the value string filled in by the function to an integer and writes it in @val.
+ * 
+ * Returns: %TRUE if gnome_theme_file_get_raw returns %TRUE, %FALSE otherwise. 
+ *
+ * Since: 2.2
+ **/ 
 gboolean
 gnome_theme_file_get_integer (GnomeThemeFile   *df,
 			      const char       *section,

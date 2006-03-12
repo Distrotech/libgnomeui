@@ -90,6 +90,17 @@ GnomeAppBarMsg
 </SECTION>
 
 <SECTION>
+<FILE>gnome-authentication</FILE>
+<TITLE>GnomeAuthentication</TITLE>
+gnome_authentication_manager_init
+gnome_authentication_manager_dialog_is_visible
+gnome_authentication_manager_pop_async
+gnome_authentication_manager_pop_sync
+gnome_authentication_manager_push_async
+gnome_authentication_manager_push_sync
+</SECTION>
+
+<SECTION>
 <FILE>gnome-client</FILE>
 GNOME_CLIENT_CONNECTED
 GnomeDialogType
@@ -104,6 +115,7 @@ GNOME_CLIENT_PARAM_SM_CONNECT
 gnome_master_client
 gnome_client_get_config_prefix
 gnome_client_get_global_config_prefix
+gnome_client_module_info_get
 gnome_client_set_global_config_prefix
 gnome_client_get_flags
 gnome_client_set_restart_style
@@ -138,7 +150,6 @@ gnome_client_request_interaction_interp
 gnome_interaction_key_return
 
 <SUBSECTION Private>
-gnome_ice_init
 GnomeClientState
 GNOME_CLIENT_MODULE
 gnome_client_module_info_get
@@ -272,6 +283,7 @@ GnomeDruidPageEdge
 gnome_druid_page_edge_new
 gnome_druid_page_edge_new_aa
 gnome_druid_page_edge_new_with_vals
+gnome_druid_page_edge_construct
 gnome_druid_page_edge_set_bg_color
 gnome_druid_page_edge_set_textbox_color
 gnome_druid_page_edge_set_logo_bg_color
@@ -510,6 +522,7 @@ gnome_icon_entry_get_filename
 gnome_icon_entry_set_filename
 gnome_icon_entry_set_browse_dialog_title
 gnome_icon_entry_set_history_id
+gnome_icon_entry_set_max_saved
 gnome_icon_entry_pick_dialog
 gnome_icon_entry_set_icon
 gnome_icon_entry_gnome_file_entry
@@ -574,6 +587,7 @@ gnome_icon_list_get_num_icons
 gnome_icon_list_get_selection_mode
 gnome_icon_list_set_selection_mode
 gnome_icon_list_select_icon
+gnome_icon_list_select_all
 gnome_icon_list_unselect_icon
 gnome_icon_list_unselect_all
 gnome_icon_list_get_selection
@@ -677,6 +691,42 @@ GNOME_ICON_SELECTION_GET_CLASS
 
 <SUBSECTION Private>
 GnomeIconSelectionPrivate
+
+</SECTION>
+
+<SECTION>
+<FILE>gnome-password</FILE>
+<TITLE>GnomePassword</TITLE>
+GnomePasswordDialog
+GnomePasswordDialogDetails
+GnomePasswordDialogRemember
+gnome_password_dialog_anon_selected
+gnome_password_dialog_get_domain
+gnome_password_dialog_get_password
+gnome_password_dialog_get_remember
+gnome_password_dialog_get_username
+gnome_password_dialog_new
+gnome_password_dialog_run_and_block
+gnome_password_dialog_set_domain
+gnome_password_dialog_set_password
+gnome_password_dialog_set_readonly_domain
+gnome_password_dialog_set_readonly_username
+gnome_password_dialog_set_remember
+gnome_password_dialog_set_show_domain
+gnome_password_dialog_set_show_password
+gnome_password_dialog_set_show_remember
+gnome_password_dialog_set_show_username
+gnome_password_dialog_set_show_userpass_buttons
+gnome_password_dialog_set_username
+
+<SUBSECTION Standard>
+GnomePasswordDialogClass
+GNOME_TYPE_PASSWORD_DIALOG
+gnome_password_dialog_get_type
+GNOME_PASSWORD_DIALOG
+GNOME_PASSWORD_DIALOG_CLASS
+GNOME_IS_PASSWORD_DIALOG
+GNOME_IS_PASSWORD_DIALOG_CLASS
 
 </SECTION>
 
@@ -846,6 +896,16 @@ GNOME_MESSAGE_BOX_GET_CLASS
 GnomeMessageBoxPrivate
 GnomeMessageBoxButton
 
+</SECTION>
+
+<SECTION>
+<FILE>gnome-multi-screen</FILE>
+<TITLE>GnomeMultiScreen</TITLE>
+gnome_url_show_on_screen
+gnome_help_display_on_screen
+gnome_help_display_with_doc_id_on_screen
+gnome_help_display_desktop_on_screen
+gnome_help_display_uri_on_screen
 </SECTION>
 
 <SECTION>
@@ -1333,6 +1393,7 @@ LIBGNOMEUI_PARAM_DISPLAY
 LIBGNOMEUI_PARAM_DEFAULT_ICON
 gnome_init_with_popt_table
 gnome_init
+gnome_gtk_module_info_get
 
 <SUBSECTION Private>
 libgnomeui_module_info_get
@@ -1485,3 +1546,9 @@ gnome_thumbnail_factory_get_type
 <FILE>gnome-stock-pixbufs</FILE>
 </SECTION>
 
+
+<SECTION>
+<FILE>gnome-ice</FILE>
+<TITLE>GnomeIce</TITLE>
+gnome_ice_init
+</SECTION>
