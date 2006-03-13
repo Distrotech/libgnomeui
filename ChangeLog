@@ -1,3 +1,9 @@
+==================== 2.14.0 =======================
+
+2006-03-13  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Release 2.14.0
+
 2006-03-12  Christian Persch  <chpe@cvs.gnome.org>
 
 	* doc/reference/libgnomeui-docs.sgml:

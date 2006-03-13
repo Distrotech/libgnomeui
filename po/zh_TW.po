@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.13.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-28 00:54+0100\n"
+"POT-Creation-Date: 2006-03-13 12:36+0100\n"
 "PO-Revision-Date: 2006-01-13 08:20+0800\n"
 "Last-Translator: Abel Cheung <abel@oaka.org>\n"
 "Language-Team: Chinese (Taiwan) <community@linuxhall.org>\n"
@@ -695,12 +695,12 @@ msgstr "狀態列的互動性"
 msgid "Level of user activity required."
 msgstr "指定狀態列可否接受用戶輸入。"
 
-#: libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:80
 #, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "HTTP 代理伺服器需要登入後方可使用。\n"
 
-#: libgnomeui/gnome-authentication-manager.c:71
+#: libgnomeui/gnome-authentication-manager.c:81
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -709,26 +709,26 @@ msgstr ""
 "您必須登入方可存取「%s」。\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:74
+#: libgnomeui/gnome-authentication-manager.c:84
 msgid "Your password will be transmitted unencrypted."
 msgstr "您的密碼會以沒有加密的方式傳送。"
 
-#: libgnomeui/gnome-authentication-manager.c:75
+#: libgnomeui/gnome-authentication-manager.c:85
 msgid "Your password will be transmitted encrypted."
 msgstr "您的密碼會以加密的方式傳送。"
 
-#: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:88
+#: libgnomeui/gnome-authentication-manager.c:306
 msgid "Authentication Required"
 msgstr "需要認證"
 
 # FIXME: "domain" really means network domain? -- Abel
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:298
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "您必須登入方可存取 %s (網域 %s)\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:300
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "您必須登入方可存取 %s\n"

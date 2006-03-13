@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-28 00:54+0100\n"
+"POT-Creation-Date: 2006-03-13 12:36+0100\n"
 "PO-Revision-Date: 2005-12-09 12:39+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
@@ -840,12 +840,12 @@ msgstr "પારસ્પરિકતા"
 msgid "Level of user activity required."
 msgstr "વપરાશકર્તા ક્રિયાનું સ્તર જરૂરી."
 
-#: libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:80
 #, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "તમારૂ HTTP પ્રોક્સી ઈચ્છે છે કે તમે પ્રવેશ કરો.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:71
+#: libgnomeui/gnome-authentication-manager.c:81
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -854,25 +854,25 @@ msgstr ""
 "પ્રાપ્ત કરવા માટે તમારે પ્રવેશ કરવો પડશે \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:74
+#: libgnomeui/gnome-authentication-manager.c:84
 msgid "Your password will be transmitted unencrypted."
 msgstr "તમારો પાસવર્ડ ગુપ્ત કોડમાં ફેરવયા વગર મોકલાશે."
 
-#: libgnomeui/gnome-authentication-manager.c:75
+#: libgnomeui/gnome-authentication-manager.c:85
 msgid "Your password will be transmitted encrypted."
 msgstr "તમારો પાસવર્ડ ગુપ્ત કોડમાં ફેરવયા પછી મોકલાશે."
 
-#: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:88
+#: libgnomeui/gnome-authentication-manager.c:306
 msgid "Authentication Required"
 msgstr "પ્રમાણિત કરવું જરૂરી છે"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:298
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "તમારે %s ચલાવવા માટે ડોમેઈન %s માં પ્રવેશવું જ પડશે\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:300
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "પ્રાપ્ત કરવા માટે તમારે પ્રવેશ કરવો પડશે %s\n"

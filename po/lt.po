@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-28 00:54+0100\n"
+"POT-Creation-Date: 2006-03-13 12:36+0100\n"
 "PO-Revision-Date: 2005-12-02 15:43+0200\n"
 "Last-Translator: Žygimantas Beručka <zygis@gnome.org>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -700,12 +700,12 @@ msgstr "Interaktyvumas"
 msgid "Level of user activity required."
 msgstr "Naudotojo atsako lygis būtinas"
 
-#: libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:80
 #, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Prie Jūsų HTTP tarpinio serverio reikia prisijungti.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:71
+#: libgnomeui/gnome-authentication-manager.c:81
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -714,25 +714,25 @@ msgstr ""
 "Norėdami pasiekti „%s“, turite prisijungti.\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:74
+#: libgnomeui/gnome-authentication-manager.c:84
 msgid "Your password will be transmitted unencrypted."
 msgstr "Jūsų slaptažodis bus perduotas neužkoduotas."
 
-#: libgnomeui/gnome-authentication-manager.c:75
+#: libgnomeui/gnome-authentication-manager.c:85
 msgid "Your password will be transmitted encrypted."
 msgstr "Jūsų slaptažodis bus perduotas užkoduotas."
 
-#: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:88
+#: libgnomeui/gnome-authentication-manager.c:306
 msgid "Authentication Required"
 msgstr "Būtinas autorizavimas"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:298
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Turite užsiregistruoti norėdami pasiekti %s domeną %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:300
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Jūs turite užsiregistruoti norėdami pasiekti „%s“\n"

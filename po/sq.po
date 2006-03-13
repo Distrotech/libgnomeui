@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-28 00:54+0100\n"
+"POT-Creation-Date: 2006-03-13 12:36+0100\n"
 "PO-Revision-Date: 2006-01-30 11:42+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -698,12 +698,12 @@ msgstr "Interaktiviteti"
 msgid "Level of user activity required."
 msgstr "Niveli i kërkuar i aktivitetit të pëdoruesit."
 
-#: libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:80
 #, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Proxy juaj HTTP kërkon identifikimin.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:71
+#: libgnomeui/gnome-authentication-manager.c:81
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -712,25 +712,25 @@ msgstr ""
 "Duhet të jeni identifikuar që të hyni tek \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:74
+#: libgnomeui/gnome-authentication-manager.c:84
 msgid "Your password will be transmitted unencrypted."
 msgstr "Fjalëkalimi juaj do të transmetohet i pakriptuar."
 
-#: libgnomeui/gnome-authentication-manager.c:75
+#: libgnomeui/gnome-authentication-manager.c:85
 msgid "Your password will be transmitted encrypted."
 msgstr "Fjalëkalimi juaj do të transmetohet i kriptuar."
 
-#: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:88
+#: libgnomeui/gnome-authentication-manager.c:306
 msgid "Authentication Required"
 msgstr "Është i nevojshëm identifikimi"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:298
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Duhet të jeni identifikuar që të hyni tek %s domain %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:300
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Duhet të jeni identifikuar që të hyni tek %s\n"

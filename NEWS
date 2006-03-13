@@ -1,3 +1,15 @@
+libgnomeui 2.14.0
+-----------------
+
+* Docs
+	- Update the API docs a lot (Dinoop Tomas)
+
+* Updated and new translations:
+	- cs (Petr Tomes), de (Hendrik Brandt), hu (Gabor Kelemen),
+	  it (Francesco Marletta), ka (Vladimer Sichinava)
+	  nn (Kjartan Maraas), pl (GNOME PL team), ro (Misu Moldavan),
+	  sv (Daniel Nylander)
+
 libgnomeui 2.13.90
 ------------------
 

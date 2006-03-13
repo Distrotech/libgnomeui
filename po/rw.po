@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-28 00:54+0100\n"
+"POT-Creation-Date: 2006-03-13 12:36+0100\n"
 "PO-Revision-Date: 2005-03-28 19:35-0700\n"
 "Last-Translator: Steve Murphy <murf@e-tools.com>\n"
 "Language-Team: Kinyarwanda <translation-team-rw@lists.sourceforge.net>\n"
@@ -910,39 +910,39 @@ msgstr ""
 msgid "Level of user activity required."
 msgstr "Bya Ukoresha: Umurimo Bya ngombwa"
 
-#: libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:80
 #, fuzzy, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Kuri LOG in"
 
-#: libgnomeui/gnome-authentication-manager.c:71
+#: libgnomeui/gnome-authentication-manager.c:81
 #, fuzzy, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr "LOG in Kuri"
 
-#: libgnomeui/gnome-authentication-manager.c:74
+#: libgnomeui/gnome-authentication-manager.c:84
 #, fuzzy
 msgid "Your password will be transmitted unencrypted."
 msgstr "Ijambobanga..."
 
-#: libgnomeui/gnome-authentication-manager.c:75
+#: libgnomeui/gnome-authentication-manager.c:85
 #, fuzzy
 msgid "Your password will be transmitted encrypted."
 msgstr "Ijambobanga... Bishunzwe:"
 
-#: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:88
+#: libgnomeui/gnome-authentication-manager.c:306
 msgid "Authentication Required"
 msgstr ""
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:298
 #, fuzzy, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "LOG in Kuri Urwego"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:300
 #, fuzzy, c-format
 msgid "You must log in to access %s\n"
 msgstr "LOG in Kuri"

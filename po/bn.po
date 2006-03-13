@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libGNOMEui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-28 00:54+0100\n"
+"POT-Creation-Date: 2006-03-13 12:36+0100\n"
 "PO-Revision-Date: 2005-09-30 17:34+0600\n"
 "Last-Translator: Mahay Alam Khan <makl10n@yahoo.com>\n"
 "Language-Team: Bangla <gnome-translation@bengalinux.org>\n"
@@ -699,12 +699,12 @@ msgstr "পারস্পরিক অংশগ্রহণ"
 msgid "Level of user activity required."
 msgstr "ব্যবহারকারির অংশগ্রহণের মাত্রা।"
 
-#: libgnomeui/gnome-authentication-manager.c:70
+#: libgnomeui/gnome-authentication-manager.c:80
 #, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "আপনাকে আপনার HTTP প্রক্সি-তে লগইন করতে হবে|\n"
 
-#: libgnomeui/gnome-authentication-manager.c:71
+#: libgnomeui/gnome-authentication-manager.c:81
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -713,25 +713,25 @@ msgstr ""
 "\"%s\"-কে পড়তে চাইলে আপনাকে লগইন করতে হবে।\n"
 " %s"
 
-#: libgnomeui/gnome-authentication-manager.c:74
+#: libgnomeui/gnome-authentication-manager.c:84
 msgid "Your password will be transmitted unencrypted."
 msgstr "আপনার পাসওয়ার্ডটি এনক্রিপ্ট করা ছাড়াই পাঠানো হবে। "
 
-#: libgnomeui/gnome-authentication-manager.c:75
+#: libgnomeui/gnome-authentication-manager.c:85
 msgid "Your password will be transmitted encrypted."
 msgstr "আপনার পাসওয়ার্ডটি এনক্রিপ্ট করে পাঠানো হবে। "
 
-#: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:88
+#: libgnomeui/gnome-authentication-manager.c:306
 msgid "Authentication Required"
 msgstr "ব্যবহারকারীর নাম এবং পাসওয়ার্ড দিতে হবে"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:298
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "%s - কে পড়তে চাইলে আপনাকে লগ-ইন করতে হবে %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:300
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "%s - কে পড়তে চাইলে আপনাকে লগ-ইন করতে হবে।\n"
