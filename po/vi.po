@@ -627,7 +627,7 @@ msgstr "Chỉ có chữ"
 #: libgnomeui/gnome-app-helper.c:2651
 #, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Dùng Mặc định Mặt bàn (%s)"
+msgstr "Dùng Mặc định Hệ thống (%s)"
 
 #: libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
