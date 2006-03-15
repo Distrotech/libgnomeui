@@ -1,5 +1,11 @@
 2006-03-15  Kristian Rietveld  <kris@imendio.com>
 
+	* gtk/gtkfilesystemgnomevfs.c: preserve the use of "info" as
+	identifier for GnomeVFSFileInfo and GtkFileInfo types, renamed all
+	other uses to something more appropriate.  (suggestion from Federico).
+
+2006-03-15  Kristian Rietveld  <kris@imendio.com>
+
 	* gtk/gtkfilesystemgnomevfs.c: get rid of the object data on the
 	handles, instead just use fields in the handle structure (Federico
 	Mena Quintero).
