@@ -1,3 +1,9 @@
+2006-03-15  Kristian Rietveld  <kris@imendio.com>
+
+	* gtk/gtkfilesystemgnomevfs.c: get rid of the object data on the
+	handles, instead just use fields in the handle structure (Federico
+	Mena Quintero).
+
 2005-12-23  Kristian Rietveld  <kris@imendio.com>
 
 	* gtk/gtkfilesystemgnomevfs.c (get_folder_complete_operation): start
