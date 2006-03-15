@@ -1276,11 +1276,7 @@ get_file_info_callback (GnomeVFSAsyncHandle *vfs_handle,
 
   gdk_threads_enter ();
 
-  if (vfs_handle != op_data->handle->vfs_handle)
-    {
-      gdk_threads_leave ();
-      return;
-    }
+  g_assert (op_data->handle->vfs_handle == vfs_handle);
 
   op_data->handle->vfs_handle = NULL;
 
@@ -1327,19 +1323,11 @@ gtk_file_system_gnome_vfs_get_info (GtkFileSystem                 *file_system,
 				    GtkFileSystemGetInfoCallback   callback,
 				    gpointer                       data)
 {
-  GnomeVFSFileInfo *vfs_info;
   GnomeVFSResult result;
-  GList *uris = NULL;
+  GList uris;
   GtkFileSystemHandleGnomeVFS *handle;
   struct GetFileInfoData *op_data;
   char *uri;
-
-  if (!path)
-    {
-      /* NULL path */
-      /* FIXME: report error via callback for this too? */
-      return NULL;
-    }
 
   uri = make_uri_canonical (gtk_file_path_get_string (path));
   handle = gtk_file_system_handle_gnome_vfs_new (file_system);
@@ -1350,22 +1338,22 @@ gtk_file_system_gnome_vfs_get_info (GtkFileSystem                 *file_system,
   op_data->callback = callback;
   op_data->callback_data = data;
 
-  vfs_info = gnome_vfs_file_info_new ();
-  uris = g_list_append (uris, gnome_vfs_uri_new (uri));
+  uris.prev = uris.next = NULL;
+  uris.data = gnome_vfs_uri_new (uri);
 
   op_data->handle->callback_type = CALLBACK_GET_FILE_INFO;
   op_data->handle->callback_data = op_data;
 
   gnome_authentication_manager_push_async ();
   gnome_vfs_async_get_file_info (&handle->vfs_handle,
-				 uris,
+				 &uris,
 				 get_options (types),
 				 GNOME_VFS_PRIORITY_DEFAULT,
 				 get_file_info_callback,
 				 op_data);
   gnome_authentication_manager_pop_async ();
 
-  gnome_vfs_uri_list_free (uris);
+  gnome_vfs_uri_unref (uris.data);
 
   return GTK_FILE_SYSTEM_HANDLE (handle);
 }
