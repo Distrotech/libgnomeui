@@ -1,5 +1,16 @@
 2006-03-15  Kristian Rietveld  <kris@imendio.com>
 
+	More suggestions from Federico.
+
+	* gtk/gtkfilesystemgnomevfs.c (get_file_info_callback): assert
+	when the handles don't match, just like
+	get_folder_file_info_callback(),
+	(gtk_file_system_gnome_vfs_get_info): remove check for !path,
+	since gtk_file_system_get_info() guards this, remove stale
+	gnome_vfs_file_info_new(), save a list allocation.
+
+2006-03-15  Kristian Rietveld  <kris@imendio.com>
+
 	* gtk/gtkfilesystemgnomevfs.c: preserve the use of "info" as
 	identifier for GnomeVFSFileInfo and GtkFileInfo types, renamed all
 	other uses to something more appropriate.  (suggestion from Federico).
