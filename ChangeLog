@@ -1,3 +1,18 @@
+2006-03-16  Kristian Rietveld  <kris@imendio.com>
+
+	Refactor of the _get_folder(), suggestions from Federico.
+
+	* gtk/gtkfilesystemgnomevfs.c (get_folder_complete_operation),
+	(get_folder_file_info_callback), (gtk_file_system_vfs_get_folder):
+	Defer creating the folder and updating the hash tables to the end
+	of get_folder_complete_operation(), avoids us having to remove
+	the folder from hash tables later if the folder doesn't exist,
+	fix desktop item link code and some misc fixes here and there,
+	(gtk_file_system_gnome_vfs_get_info): don't leak uri,
+	(cancel_operation_callback): remove code which removed the folder
+	from the hash table, plug memleaks, pass NULL instead of data->path
+	for the create folder operation.
+
 2006-03-15  Kristian Rietveld  <kris@imendio.com>
 
 	More suggestions from Federico.

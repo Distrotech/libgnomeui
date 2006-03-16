@@ -911,6 +911,8 @@ struct GetFolderData
   GtkFileFolderGnomeVFS *parent_folder;
   GnomeVFSFileInfo *file_info;
   GnomeVFSURI *uri;
+  char *vfs_uri;
+  GtkFileInfoType types;
 };
 
 static void
@@ -918,47 +920,31 @@ get_folder_complete_operation (struct GetFolderData *op_data)
 {
   GError *error = NULL;
   GnomeVFSMonitorHandle *monitor = NULL;
-  GtkFileFolderGnomeVFS *folder_vfs = op_data->folder_vfs;
+  GtkFileSystemGnomeVFS *system_vfs;
+  GtkFileFolderGnomeVFS *folder_vfs;
+  char *old_uri = op_data->vfs_uri;
+  gboolean free_old_uri = FALSE;
 
-  if (op_data->parent_folder
-      && !g_hash_table_lookup (op_data->parent_folder->children, folder_vfs->uri))
-    {
-      GSList *uris;
-      FolderChild *child;
-
-      /* Make sure this child is in the parent folder */
-      child = folder_child_new (folder_vfs->uri, op_data->file_info,
-                                op_data->parent_folder->async_handle ? TRUE : FALSE);
-
-      g_hash_table_replace (op_data->parent_folder->children, child->uri, child);
-
-      uris = g_slist_append (NULL, (char *) folder_vfs->uri);
-      g_signal_emit_by_name (op_data->parent_folder, "files-added", uris);
-      g_slist_free (uris);
-    }
+  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (GTK_FILE_SYSTEM_HANDLE (op_data->handle)->file_system);
 
   if (is_desktop_file (op_data->file_info))
     {
-      char *ditem_uri;
+      char *ditem_uri = NULL;
 
-      g_hash_table_remove (folder_vfs->system->folders, folder_vfs->uri);
-      
-      ditem_uri = get_desktop_link_uri (folder_vfs->uri, &error);
+      ditem_uri = get_desktop_link_uri (op_data->vfs_uri, &error);
       if (ditem_uri == NULL)
 	{
 	  /* Couldn't get desktop link uri */
 	  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
 				 NULL, error, op_data->callback_data);
 
-          g_object_unref (folder_vfs);
+	  g_free (op_data->vfs_uri);
+
 	  goto out;
 	}
 
-      g_free (folder_vfs->uri);
-      folder_vfs->uri = ditem_uri;
-
-      g_hash_table_insert (folder_vfs->system->folders, folder_vfs->uri,
-			   folder_vfs);
+      free_old_uri = TRUE;
+      op_data->vfs_uri = ditem_uri;
     }
   else if (op_data->file_info->type != GNOME_VFS_FILE_TYPE_DIRECTORY)
     {
@@ -968,20 +954,20 @@ get_folder_complete_operation (struct GetFolderData *op_data)
 		   _("%s is not a folder"),
 		   op_data->uri);
 
-      g_hash_table_remove (folder_vfs->system->folders, folder_vfs->uri);
-
       (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
 			     NULL, error, op_data->callback_data);
 
+      g_free (op_data->vfs_uri);
       g_error_free (error);
-      g_object_unref (folder_vfs);
 
       goto out;
     }
 
-  folder_vfs->is_afs_or_net = is_vfs_info_an_afs_folder (folder_vfs->system,
-                                                         op_data->file_info);
+  /* Create the folder */
+  folder_vfs = g_object_new (GTK_TYPE_FILE_FOLDER_GNOME_VFS, NULL);
 
+  folder_vfs->is_afs_or_net = is_vfs_info_an_afs_folder (system_vfs,
+						         op_data->file_info);
   if (!folder_vfs->is_afs_or_net)
     {
       GnomeVFSResult ret;
@@ -994,15 +980,46 @@ get_folder_complete_operation (struct GetFolderData *op_data)
       gnome_authentication_manager_pop_sync ();
       if (ret != GNOME_VFS_OK && ret != GNOME_VFS_ERROR_NOT_SUPPORTED)
 	{
-	  g_object_unref (folder_vfs);
-
 	  set_vfs_error (ret, gnome_vfs_uri_to_string (op_data->uri, 0), &error);
 
 	  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), NULL,
 				 error, op_data->callback_data);
 
+	  g_free (op_data->vfs_uri);
+	  g_object_unref (folder_vfs);
+
 	  goto out;
 	}
+    }
+
+  folder_vfs->system = system_vfs;
+  folder_vfs->uri = op_data->vfs_uri; /* takes ownership */
+  folder_vfs->types = op_data->types;
+  folder_vfs->monitor = NULL;
+  folder_vfs->async_handle = NULL;
+  folder_vfs->finished_loading = 0;
+  folder_vfs->children = g_hash_table_new_full (g_str_hash,
+						g_str_equal,
+						NULL,
+						(GDestroyNotify) folder_child_free);
+
+  g_hash_table_insert (system_vfs->folders, folder_vfs->uri, folder_vfs);
+
+  if (op_data->parent_folder
+      && !g_hash_table_lookup (op_data->parent_folder->children, old_uri))
+    {
+      GSList uris;
+      FolderChild *child;
+
+      /* Make sure this child is in the parent folder */
+      child = folder_child_new (old_uri, op_data->file_info,
+                                op_data->parent_folder->async_handle ? TRUE : FALSE);
+
+      g_hash_table_insert (op_data->parent_folder->children, child->uri, child);
+
+      uris.next = NULL;
+      uris.data = gtk_file_path_new_steal (old_uri);
+      g_signal_emit_by_name (op_data->parent_folder, "files-added", &uris);
     }
 
   folder_vfs->monitor = monitor;
@@ -1024,6 +1041,9 @@ out:
 
   op_data->handle->callback_type = 0;
   op_data->handle->callback_data = NULL;
+
+  if (free_old_uri)
+    g_free (old_uri);
 
   g_object_unref (op_data->handle);
   g_free (op_data);
@@ -1066,13 +1086,16 @@ get_folder_file_info_callback (GnomeVFSAsyncHandle *handle,
       set_vfs_error (result->result, gnome_vfs_uri_to_string (result->uri, 0), &error);
       folder_vfs->async_handle = NULL;
 
-      g_hash_table_remove (folder_vfs->system->folders, folder_vfs->uri);
-
       (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), NULL,
 			     error, op_data->callback_data);
 
-      g_object_unref (folder_vfs);
       g_error_free (error);
+
+      if (op_data->parent_folder)
+	g_object_unref (op_data->parent_folder);
+
+      op_data->handle->callback_type = 0;
+      op_data->handle->callback_data = NULL;
 
       g_object_unref (op_data->handle);
       g_free (op_data);
@@ -1082,6 +1105,7 @@ get_folder_file_info_callback (GnomeVFSAsyncHandle *handle,
 
   op_data->file_info = result->file_info;
   op_data->uri = result->uri;
+
   get_folder_complete_operation (op_data);
 
 out:
@@ -1185,26 +1209,10 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem                  *file_syste
 	}
     }
 
-  folder_vfs = g_object_new (GTK_TYPE_FILE_FOLDER_GNOME_VFS, NULL);
-
-  monitor = NULL;
-
-  folder_vfs->system = system_vfs;
-  folder_vfs->uri = uri; /* takes ownership */
-  folder_vfs->types = types;
-  folder_vfs->monitor = NULL;
-  folder_vfs->async_handle = NULL;
-  folder_vfs->finished_loading = 0;
-  folder_vfs->children = g_hash_table_new_full (g_str_hash,
-						g_str_equal,
-						NULL,
-						(GDestroyNotify) folder_child_free);
-
-  g_hash_table_insert (system_vfs->folders, folder_vfs->uri, folder_vfs);
-
   op_data = g_new0 (struct GetFolderData, 1);
   op_data->handle = gtk_file_system_handle_gnome_vfs_new (file_system);
-  op_data->folder_vfs = folder_vfs;
+  op_data->types = types;
+  op_data->vfs_uri = uri;
   op_data->callback = callback;
   op_data->callback_data = data;
   op_data->parent_folder = parent_folder;
@@ -1340,6 +1348,7 @@ gtk_file_system_gnome_vfs_get_info (GtkFileSystem                 *file_system,
 
   uris.prev = uris.next = NULL;
   uris.data = gnome_vfs_uri_new (uri);
+  g_free (uri);
 
   op_data->handle->callback_type = CALLBACK_GET_FILE_INFO;
   op_data->handle->callback_data = op_data;
@@ -1436,13 +1445,18 @@ cancel_operation_callback (gpointer data)
 	{
 	  struct GetFolderData *data = handle_vfs->callback_data;
 
-	  g_hash_table_remove (data->folder_vfs->system->folders, data->folder_vfs->uri);
-
 	  (* data->callback) (handle, NULL, NULL, data->callback_data);
 
-	  g_object_unref (data->folder_vfs);
+	  if (data->folder_vfs)
+	    g_object_unref (data->folder_vfs);
 	  if (data->parent_folder)
 	    g_object_unref (data->parent_folder);
+	  if (data->uri)
+	    gnome_vfs_uri_unref (data->uri);
+	  if (data->file_info)
+	    gnome_vfs_file_info_unref (data->file_info);
+	  if (data->vfs_uri)
+	    g_free (data->vfs_uri);
 	  g_free (data);
 	  break;
 	}
@@ -1461,7 +1475,7 @@ cancel_operation_callback (gpointer data)
 	{
 	  struct CreateFolderData *data = handle_vfs->callback_data;
 
-	  (* data->callback) (handle, data->path, NULL, data->callback_data);
+	  (* data->callback) (handle, NULL, NULL, data->callback_data);
 
 	  g_free (data);
 	  break;
