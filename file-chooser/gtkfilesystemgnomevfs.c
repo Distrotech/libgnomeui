@@ -1628,6 +1628,19 @@ out:
   gdk_threads_leave ();
 }
 
+static void
+volume_mount_idle_callback (gpointer data)
+{
+  struct VolumeMountData *op_data = data;
+
+  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+			 op_data->volume, NULL, op_data->callback_data);
+
+  g_object_unref (op_data->handle);
+  g_object_unref (op_data->volume);
+  g_free (op_data);
+}
+
 static GtkFileSystemHandle *
 gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem                    *file_system,
 					GtkFileSystemVolume              *volume,
@@ -1655,9 +1668,29 @@ gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem                    *file_s
       gnome_authentication_manager_push_sync ();
       gnome_vfs_drive_mount (GNOME_VFS_DRIVE (volume), volume_mount_cb, op_data);
       gnome_authentication_manager_pop_sync ();
+
+      return GTK_FILE_SYSTEM_HANDLE (op_data->handle);
     }
   else if (GNOME_IS_VFS_VOLUME (volume))
-    return NULL; /* It is already mounted */
+    {
+      struct VolumeMountData *op_data;
+      GtkFileSystemHandleGnomeVFS *handle;
+
+      handle = gtk_file_system_handle_gnome_vfs_new (file_system);
+
+      op_data = g_new0 (struct VolumeMountData, 1);
+      op_data->handle = g_object_ref (handle);
+      op_data->volume = g_object_ref (volume);
+      op_data->callback = callback;
+      op_data->callback_data = data;
+
+      op_data->handle->callback_type = CALLBACK_VOLUME_MOUNT;
+      op_data->handle->callback_data = op_data;
+
+      queue_vfs_idle_callback (volume_mount_idle_callback, op_data);
+
+      return GTK_FILE_SYSTEM_HANDLE (op_data->handle);
+    }
   else
     {
       g_warning ("%p is not a valid volume", volume);
@@ -3101,9 +3134,6 @@ static void
 folder_purge_and_unmark (GtkFileFolderGnomeVFS *folder_vfs)
 {
   struct purge_closure closure;
-
-  if (!folder_vfs->children)
-    return;
 
   closure.removed_uris = NULL;
   g_hash_table_foreach_steal (folder_vfs->children, purge_fn, &closure);

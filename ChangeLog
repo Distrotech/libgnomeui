@@ -1,5 +1,17 @@
 2006-03-16  Kristian Rietveld  <kris@imendio.com>
 
+	More Federico review work...
+
+	* gtk/gtkfilesystemgnomevfs.c (volume_mount_idle_callback): new
+	callback function,
+	(gtk_file_system_gnome_vfs_volume_mount): don't forget to return
+	the handle, don't return NULL when the volume is already mounted,
+	but call volume_mount_idle_callback() in an idle,
+	(folder_purge_and_unmark): don't check folder_vfs->children, since
+	that is already done in the only caller of this function.
+
+2006-03-16  Kristian Rietveld  <kris@imendio.com>
+
 	Refactor of the _get_folder(), suggestions from Federico.
 
 	* gtk/gtkfilesystemgnomevfs.c (get_folder_complete_operation),
