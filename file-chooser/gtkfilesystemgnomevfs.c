@@ -971,16 +971,26 @@ get_folder_complete_operation (struct GetFolderData *op_data)
   if (!folder_vfs->is_afs_or_net)
     {
       GnomeVFSResult ret;
+      char *tmp_uri;
+
+      tmp_uri = gnome_vfs_uri_to_string (op_data->uri, 0);
 
       gnome_authentication_manager_push_sync ();
       ret = gnome_vfs_monitor_add (&monitor,
-				   gnome_vfs_uri_to_string (op_data->uri, 0),
+				   tmp_uri,
 				   GNOME_VFS_MONITOR_DIRECTORY,
 				   monitor_callback, folder_vfs);
       gnome_authentication_manager_pop_sync ();
+
+      g_free (tmp_uri);
+
       if (ret != GNOME_VFS_OK && ret != GNOME_VFS_ERROR_NOT_SUPPORTED)
 	{
-	  set_vfs_error (ret, gnome_vfs_uri_to_string (op_data->uri, 0), &error);
+	  char *uri;
+
+	  uri = gnome_vfs_uri_to_string (op_data->uri, 0);
+	  set_vfs_error (ret, uri, &error);
+	  g_free (uri);
 
 	  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), NULL,
 				 error, op_data->callback_data);
@@ -1083,7 +1093,12 @@ get_folder_file_info_callback (GnomeVFSAsyncHandle *handle,
 
   if (result->result != GNOME_VFS_OK)
     {
-      set_vfs_error (result->result, gnome_vfs_uri_to_string (result->uri, 0), &error);
+      char *uri;
+
+      uri = gnome_vfs_uri_to_string (result->uri, 0);
+      set_vfs_error (result->result, uri, &error);
+      g_free (uri);
+
       folder_vfs->async_handle = NULL;
 
       (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), NULL,
@@ -1370,45 +1385,83 @@ gtk_file_system_gnome_vfs_get_info (GtkFileSystem                 *file_system,
 struct CreateFolderData
 {
   GtkFileSystemHandleGnomeVFS *handle;
-  const GtkFilePath *path;
+  GtkFilePath *path;
   GtkFileSystemCreateFolderCallback callback;
   gpointer callback_data;
+  gboolean error_reported;
 };
 
-static void
-create_folder_idle_callback (gpointer data)
+
+static int
+create_folder_progress_cb (GnomeVFSAsyncHandle      *vfs_handle,
+			   GnomeVFSXferProgressInfo *progress_info,
+			   gpointer                  data)
 {
-  GError *error = NULL;
-  GnomeVFSResult result;
-  const gchar *uri;
+  int ret = 0;
   struct CreateFolderData *op_data = data;
 
-  uri = gtk_file_path_get_string (op_data->path);
+  gdk_threads_enter ();
 
-  /* FIXME: there is no async call for this in gnome vfs */
-  gnome_authentication_manager_push_sync ();
-  result = gnome_vfs_make_directory (uri,
-				     GNOME_VFS_PERM_USER_ALL |
-				     GNOME_VFS_PERM_GROUP_ALL |
-				     GNOME_VFS_PERM_OTHER_READ);
-  gnome_authentication_manager_pop_sync ();
+  g_assert (op_data->handle->vfs_handle == vfs_handle);
 
-  if (result != GNOME_VFS_OK)
+  switch (progress_info->phase)
     {
-      set_vfs_error (result, uri, &error);
+      case GNOME_VFS_XFER_PHASE_COMPLETED:
+	if (!op_data->error_reported)
+	  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+				 op_data->path, NULL, op_data->callback_data);
+
+	break;
+
+      default:
+	switch (progress_info->status)
+	  {
+	    case GNOME_VFS_XFER_PROGRESS_STATUS_DUPLICATE:
+	      ret = GNOME_VFS_XFER_ERROR_ACTION_ABORT;
+	      /* fall through */
+	    case GNOME_VFS_XFER_PROGRESS_STATUS_VFSERROR:
+	      if (!op_data->error_reported)
+	        {
+		  GError *error = NULL;
+	
+		  set_vfs_error (progress_info->vfs_status,
+				 gtk_file_path_get_string (op_data->path),
+				 &error);
+
+		  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+					 op_data->path, error, op_data->callback_data);
+		  g_error_free (error);
+
+		  op_data->error_reported = TRUE;
+		}
+
+	      gdk_threads_leave ();
+
+	      return ret;
+
+	    case GNOME_VFS_XFER_PROGRESS_STATUS_OK:
+	      /* not completed, don't free the handle and op_data yet */
+	      gdk_threads_leave ();
+
+	      return 0;
+
+	    default:
+	      break;
+	  }
+	break;
     }
 
-  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
-			 op_data->path, error, op_data->callback_data);
-
-  if (error)
-    g_error_free (error);
-
+out:
   op_data->handle->callback_type = 0;
   op_data->handle->callback_data = NULL;
 
-  g_object_ref (op_data->handle);
+  g_object_unref (op_data->handle);
+  gtk_file_path_free (op_data->path);
   g_free (op_data);
+
+  gdk_threads_leave ();
+
+  return ret;
 }
 
 static GtkFileSystemHandle *
@@ -1417,6 +1470,8 @@ gtk_file_system_gnome_vfs_create_folder (GtkFileSystem                     *file
 					 GtkFileSystemCreateFolderCallback  callback,
 					 gpointer                           data)
 {
+  char *uri;
+  GList uris;
   struct CreateFolderData *op_data;
 
   op_data = g_new (struct CreateFolderData, 1);
@@ -1424,11 +1479,28 @@ gtk_file_system_gnome_vfs_create_folder (GtkFileSystem                     *file
   op_data->path = gtk_file_path_copy (path);
   op_data->callback = callback;
   op_data->callback_data = data;
+  op_data->error_reported = FALSE;
 
   op_data->handle->callback_type = CALLBACK_CREATE_FOLDER;
   op_data->handle->callback_data = op_data;
 
-  queue_vfs_idle_callback (create_folder_idle_callback, op_data);
+  uri = make_uri_canonical (gtk_file_path_get_string (path));
+  uris.prev = uris.next = NULL;
+  uris.data = gnome_vfs_uri_new (uri);
+  g_free (uri);
+
+  gnome_authentication_manager_push_async ();
+  gnome_vfs_async_xfer (&op_data->handle->vfs_handle,
+			NULL,
+			&uris,
+			GNOME_VFS_XFER_NEW_UNIQUE_DIRECTORY,
+			GNOME_VFS_XFER_ERROR_MODE_ABORT,
+			GNOME_VFS_XFER_OVERWRITE_MODE_ABORT,
+			GNOME_VFS_PRIORITY_DEFAULT,
+			create_folder_progress_cb, op_data,
+			NULL, NULL);
+
+  gnome_vfs_uri_unref (uris.data);
 
   return GTK_FILE_SYSTEM_HANDLE (g_object_ref (op_data->handle));
 }
@@ -1475,8 +1547,10 @@ cancel_operation_callback (gpointer data)
 	{
 	  struct CreateFolderData *data = handle_vfs->callback_data;
 
-	  (* data->callback) (handle, NULL, NULL, data->callback_data);
+	  if (!data->error_reported)
+	    (* data->callback) (handle, NULL, NULL, data->callback_data);
 
+	  gtk_file_path_free (data->path);
 	  g_free (data);
 	  break;
 	}

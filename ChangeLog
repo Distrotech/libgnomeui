@@ -1,3 +1,20 @@
+2006-03-21  Kristian Rietveld  <kris@imendio.com>
+
+	Asynchronous directory creation and some misc fixes.
+
+	* gtk/gtkfilesystemgnomefs.c (get_folder_complete_operation),
+	(get_folder_file_info_callback): don't leak return value of
+	gnome_vfs_uri_to_string (),
+	(create_folder_progress_cb): new callback function, replaces
+	the old create_folder_idle_callback,
+	(gtk_file_system_gnome_vfs_create_folder): create folder
+	asynchronously using gnome_vfs_async_xfer(). (Suggested by
+	Christian Neumair),
+	(cancel_operation_callback): only call the callback if no error
+	has been reported yet,
+	(struct CreateFolderData), (cancel_operation_callback): the path
+	field here should have never been const ...
+
 2006-03-16  Kristian Rietveld  <kris@imendio.com>
 
 	More Federico review work...
