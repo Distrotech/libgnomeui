@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-13 12:36+0100\n"
+"POT-Creation-Date: 2006-04-27 19:08+0300\n"
 "PO-Revision-Date: 2005-07-19 15:42+0300\n"
 "Last-Translator: Gil Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -737,32 +737,31 @@ msgstr "אתה חייב להתחבר כדי לגשת ל %s\n"
 
 #: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "Specify session management ID"
-msgstr "ציין מזהה מנהל תצורת הפעלה"
+msgstr "Specify session management ID"
 
 #: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
 msgid "ID"
-msgstr "זיהוי"
+msgstr "ID"
 
 #: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "Specify prefix of saved configuration"
-msgstr "ציין נתיב להגדרות השמורות"
+msgstr "Specify prefix of saved configuration"
 
 #: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
 msgid "PREFIX"
-msgstr "נתיב"
+msgstr "PREFIX"
 
 #: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
 msgid "Disable connection to session manager"
-msgstr "כבה התחברות למנהל התצורה"
+msgstr "Disable connection to session manager"
 
 #: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
 msgid "Session management"
-msgstr "ניהול תצורות הפעלה"
+msgstr "Session management"
 
 #: libgnomeui/gnome-client.c:1031
-#, fuzzy
 msgid "Show session management options"
-msgstr "ניהול תצורות הפעלה"
+msgstr "Show session management options"
 
 #: libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
@@ -1463,23 +1462,23 @@ msgstr "אודות"
 
 #: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
 msgid "Disable Crash Dialog"
-msgstr "כבה את מסך ההתרסקות"
+msgstr "Disable Crash Dialog"
 
 #: libgnomeui/gnome-ui-init.c:127
 msgid "X display to use"
-msgstr "תצוגת X לשימוש"
+msgstr "X display to use"
 
 #: libgnomeui/gnome-ui-init.c:127
 msgid "DISPLAY"
-msgstr "תצוגה"
+msgstr "DISPLAY"
 
 #: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
 msgid "GNOME GUI Library"
-msgstr "ספריית ממשק המשתמש של GNOME"
+msgstr "GNOME GUI Library"
 
 #: libgnomeui/gnome-ui-init.c:146
 msgid "Show GNOME GUI options"
-msgstr ""
+msgstr "Show GNOME GUI options"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:759
@@ -1494,9 +1493,8 @@ msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
-"תקלת הקטעה!\n"
-"לא ניתן להציג את דו-שיח ההתרסקות\n"
-
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
 #: libgnomeui/gnome_segv.c:101
 #, c-format
 msgid ""
