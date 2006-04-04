@@ -257,7 +257,6 @@ escape_string (const gchar *str, gboolean escape_first_space)
   gchar *res;
   char *q;
   const gchar *p;
-  const gchar *end;
 
   /* len + 1 is enough, because unescaping never makes the
    * string longer */
@@ -265,7 +264,6 @@ escape_string (const gchar *str, gboolean escape_first_space)
   
   p = str;
   q = res;
-  end = str + strlen (str);
 
   while (*p)
     {

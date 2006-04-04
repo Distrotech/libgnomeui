@@ -88,7 +88,7 @@ struct ThumbnailInfo {
 
 GNOME_CLASS_BOILERPLATE (GnomeThumbnailFactory,
 			 gnome_thumbnail_factory,
-			 GObject, G_TYPE_OBJECT);
+			 GObject, G_TYPE_OBJECT)
 
 static void gnome_thumbnail_factory_instance_init (GnomeThumbnailFactory      *factory);
 static void gnome_thumbnail_factory_class_init    (GnomeThumbnailFactoryClass *class);
@@ -1169,7 +1169,7 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
     }
   close (tmp_fd);
   
-  g_snprintf (mtime_str, 21, "%lu",  original_mtime);
+  g_snprintf (mtime_str, 21, "%ld",  original_mtime);
   width = g_object_get_data (G_OBJECT (thumbnail), "gnome-thumbnail-width");
   if (width == NULL)
     width = gdk_pixbuf_get_option (thumbnail, "tEXt::Thumb::Image::Width");
@@ -1303,7 +1303,7 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
     }
   close (tmp_fd);
   
-  g_snprintf (mtime_str, 21, "%lu",  mtime);
+  g_snprintf (mtime_str, 21, "%ld",  mtime);
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 1, 1);
   saved_ok  = gdk_pixbuf_save (pixbuf,
 			       tmp_path,

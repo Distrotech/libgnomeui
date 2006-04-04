@@ -1556,7 +1556,7 @@ void gnome_mdi_open_toplevel (GnomeMDI *mdi)
  **/
 void gnome_mdi_update_child (GnomeMDI *mdi, GnomeMDIChild *child)
 {
-	GtkWidget *view, *title;
+	GtkWidget *view;
 	GList *view_node;
 
 	g_return_if_fail(mdi != NULL);
@@ -1586,8 +1586,6 @@ void gnome_mdi_update_child (GnomeMDI *mdi, GnomeMDIChild *child)
 
 			tab_label = gtk_notebook_get_tab_label
 				(GTK_NOTEBOOK (view->parent), view);
-			if(tab_label != NULL)
-				title = child_set_label(child, tab_label);
 		}
 
 		view_node = g_list_next(view_node);

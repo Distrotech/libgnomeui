@@ -366,14 +366,14 @@ static void
 gil_relayout_icons_at (Gil *gil, int pos, int y)
 {
 	GnomeIconListPrivate *priv;
-	int col, row, text_height, icon_height;
+	int text_height, icon_height;
 	int items_per_line, n;
 	GList *line_icons;
 
 	priv = gil->_priv;
 	items_per_line = gil_get_items_per_line (gil);
 
-	col = row = text_height = icon_height = 0;
+	text_height = icon_height = 0;
 	line_icons = NULL;
 
 	for (n = pos; n < priv->icon_list->len; n++) {
@@ -1077,12 +1077,10 @@ static int
 icon_list_append (Gil *gil, Icon *icon)
 {
 	GnomeIconListPrivate *priv;
-	int pos;
 	AtkObject *accessible;
 
 	priv = gil->_priv;
 
-	pos = priv->icons++;
 	g_array_append_val(priv->icon_list, icon);
 
 	switch (priv->selection_mode) {
@@ -2226,7 +2224,6 @@ gil_style_set (GtkWidget *widget, GtkStyle *prev_style)
 
 	Gil *gil;
 	GnomeIconListPrivate *priv;
-	GtkStyle *style;
 	GnomeIconTextItem *item;
 	int item_count;
 
@@ -2235,8 +2232,6 @@ gil_style_set (GtkWidget *widget, GtkStyle *prev_style)
 
 	if (priv->icons) {
 		char *file_name;
-
-		style = gtk_widget_get_style (GTK_WIDGET(widget));
 
 		for (item_count=0; item_count < priv->icons; item_count++) {
 			item = gnome_icon_list_get_icon_text_item (gil, item_count);
@@ -2265,7 +2260,6 @@ gnome_icon_list_class_init (GilClass *gil_class)
 	GtkObjectClass *object_class;
 	GObjectClass *gobject_class;
 	GtkWidgetClass *widget_class;
-	GnomeCanvasClass *canvas_class;
 	GtkLayoutClass *layout_class;
 
 	GtkBindingSet *binding_set;
@@ -2275,7 +2269,6 @@ gnome_icon_list_class_init (GilClass *gil_class)
 	object_class = (GtkObjectClass *)   gil_class;
 	gobject_class = (GObjectClass *)    gil_class;
 	widget_class = (GtkWidgetClass *)   gil_class;
-	canvas_class = (GnomeCanvasClass *) gil_class;
 	layout_class = (GtkLayoutClass *)   gil_class;
 
 	gil_signals[SELECT_ICON] =
@@ -2451,7 +2444,6 @@ gil_adj_value_changed (GtkAdjustment *adj, Gil *gil)
 void
 gnome_icon_list_set_hadjustment (GnomeIconList *gil, GtkAdjustment *hadj)
 {
-	GilPrivate *priv;
 	GtkAdjustment *old_adjustment;
 
 	/* hadj isn't used but is here for compatibility with GtkScrolledWindow */
@@ -2461,8 +2453,6 @@ gnome_icon_list_set_hadjustment (GnomeIconList *gil, GtkAdjustment *hadj)
 
 	if (hadj)
 		g_return_if_fail (GTK_IS_ADJUSTMENT (hadj));
-
-	priv = gil->_priv;
 
 	if (gil->hadj == hadj)
 		return;
@@ -2504,7 +2494,6 @@ gnome_icon_list_set_hadjustment (GnomeIconList *gil, GtkAdjustment *hadj)
 void
 gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
 {
-	GilPrivate *priv;
 	GtkAdjustment *old_adjustment;
 
 	g_return_if_fail (gil != NULL);
@@ -2512,8 +2501,6 @@ gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
 
 	if (vadj)
 		g_return_if_fail (GTK_IS_ADJUSTMENT (vadj));
-
-	priv = gil->_priv;
 
 	if (gil->adj == vadj)
 		return;

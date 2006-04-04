@@ -540,9 +540,6 @@ void
 gnome_pixmap_entry_construct (GnomePixmapEntry *pentry, const gchar *history_id,
 			      const gchar *browse_dialog_title, gboolean do_preview)
 {
-	GtkWidget *gentry;
-	gentry = gnome_file_entry_gnome_entry(GNOME_FILE_ENTRY(pentry));
-
 	gnome_file_entry_construct (GNOME_FILE_ENTRY (pentry),
 				    history_id,
 				    browse_dialog_title);

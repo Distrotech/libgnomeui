@@ -94,12 +94,10 @@ gnome_dialog_class_init (GnomeDialogClass *klass)
   GtkObjectClass *object_class;
   GObjectClass *gobject_class;
   GtkWidgetClass *widget_class;
-  GtkWindowClass *window_class;
 
   object_class = (GtkObjectClass*) klass;
   gobject_class = (GObjectClass*) klass;
   widget_class = (GtkWidgetClass*) klass;
-  window_class = (GtkWindowClass*) klass;
 
   parent_class = g_type_class_peek_parent (klass);
 
@@ -1065,12 +1063,8 @@ static void gnome_dialog_destroy (GtkObject *object)
 
 static void gnome_dialog_finalize (GObject *object)
 {
-  GnomeDialog *dialog;
-
   g_return_if_fail(object != NULL);
   g_return_if_fail(GNOME_IS_DIALOG(object));
-
-  dialog = GNOME_DIALOG(object);
 
   if (G_OBJECT_CLASS(parent_class)->finalize)
     (* (G_OBJECT_CLASS(parent_class)->finalize))(object);

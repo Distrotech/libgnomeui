@@ -338,7 +338,7 @@ client_set_ghash (GnomeClient *client, gchar *name, GHashTable *table)
 
   g_free (vals);
 
-};
+}
 
 
 static void

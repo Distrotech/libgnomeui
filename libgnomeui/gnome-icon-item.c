@@ -167,9 +167,6 @@ update_pango_layout (GnomeIconTextItem *iti)
 static void
 iti_stop_editing (GnomeIconTextItem *iti)
 {
-	GnomeIconTextItemPrivate *priv;
-
-	priv = iti->_priv;
 	iti->editing = FALSE;
 	send_focus_event (iti, FALSE);
 	update_pango_layout (iti);
@@ -261,11 +258,9 @@ iti_stop_selecting (GnomeIconTextItem *iti, guint32 event_time)
 {
 	GnomeIconTextItemPrivate *priv;
 	GnomeCanvasItem *item;
-	GtkEditable *e;
 
 	priv = iti->_priv;
 	item = GNOME_CANVAS_ITEM (iti);
-	e = GTK_EDITABLE (priv->entry);
 
 	gnome_canvas_item_ungrab (item, event_time);
 	priv->selecting = FALSE;
@@ -553,7 +548,6 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 {
 	GtkWidget *widget;
 	GtkStyle *style;
-	GdkGC *gc, *bgc;
 	int xofs, yofs;
 	int text_xofs, text_yofs;
 	int w, h;
@@ -566,9 +560,6 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 	priv = iti->_priv;
 
 	style = GTK_WIDGET (GNOME_CANVAS_ITEM (iti)->canvas)->style;
-
-	gc = style->fg_gc [GTK_STATE_NORMAL];
-	bgc = style->bg_gc [GTK_STATE_NORMAL];
 
 	w = priv->layout_width + 2 * MARGIN_X;
 	h = priv->layout_height + 2 * MARGIN_Y;

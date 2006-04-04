@@ -167,7 +167,6 @@ dialog_clicked_cb(GnomeDialog * dialog, gint button, gpointer data)
 	cur_page_no = gtk_notebook_get_current_page (GTK_NOTEBOOK (pbox->notebook));
         if (cur_page_no >= 0) {
 	    gint page_no = 0;
-	    GtkWidget *page;
 
 	    page = gtk_notebook_get_nth_page (GTK_NOTEBOOK (pbox->notebook), 0);
 	    while (page != NULL) {

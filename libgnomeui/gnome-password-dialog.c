@@ -70,10 +70,6 @@ struct _GnomePasswordDialogDetails
 	gboolean anon_support_on;
 };
 
-/* Caption table rows indices */
-static const guint CAPTION_TABLE_USERNAME_ROW = 0;
-static const guint CAPTION_TABLE_PASSWORD_ROW = 1;
-
 /* Layout constants */
 static const guint DIALOG_BORDER_WIDTH = 6;
 static const guint CAPTION_TABLE_BORDER_WIDTH = 4;

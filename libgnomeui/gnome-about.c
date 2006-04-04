@@ -359,11 +359,9 @@ static void
 gnome_about_class_init (GnomeAboutClass *klass)
 {
 	GObjectClass *object_class;
-	GtkWidgetClass *widget_class;
 	GtkDialogClass *dialog_class;
 	
 	object_class = (GObjectClass *)klass;
-	widget_class = (GtkWidgetClass *)klass;
 	dialog_class = (GtkDialogClass *)klass;
 	
 	object_class->set_property = gnome_about_set_property;

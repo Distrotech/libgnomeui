@@ -89,7 +89,6 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 	GtkWidget *alignment;
 	GtkWidget *label;
 	char *s;
-	GtkStyle *style;
         const gchar* title_prefix = NULL;
         const gchar* appname;
 
@@ -99,7 +98,6 @@ gnome_message_box_construct (GnomeMessageBox       *messagebox,
 	g_return_if_fail (message_box_type != NULL);
 
 	atk_object_set_role (gtk_widget_get_accessible (GTK_WIDGET (messagebox)), ATK_ROLE_ALERT);
-	style = gtk_widget_get_style (GTK_WIDGET (messagebox));
 
 	/* Make noises, basically */
 	gnome_triggers_vdo(message, message_box_type, NULL);

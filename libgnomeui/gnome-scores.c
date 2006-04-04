@@ -66,7 +66,7 @@ static void gnome_scores_finalize   (GObject          *object);
  * Returns the GtkType for the GnomeScores widget
  */
 GNOME_CLASS_BOILERPLATE (GnomeScores, gnome_scores,
-			 GtkDialog, GTK_TYPE_DIALOG);
+			 GtkDialog, GTK_TYPE_DIALOG)
 
 static void
 gnome_scores_instance_init (GnomeScores *gs)

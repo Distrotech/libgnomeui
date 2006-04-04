@@ -465,12 +465,12 @@ druid_page_edge_new (GladeXML *xml, GType widget_type,
     int i;
 
     const char *title, *text;
-    const char *title_color, *text_color;
-    const char *bg_color, *logo_bg_color, *textbox_color;
+    const char *text_color;
+    const char *logo_bg_color, *textbox_color;
     char *filename;
     GdkPixbuf *logo, *watermark, *top_watermark;
 
-    title = text = title_color = text_color = bg_color = logo_bg_color = textbox_color = NULL;
+    title = text = NULL;
     logo = watermark = top_watermark = NULL;
 
     for (i = 0; i < info->n_properties; i++) {
@@ -480,16 +480,6 @@ druid_page_edge_new (GladeXML *xml, GType widget_type,
 	if (!strcmp (name, "position"))
 	    position = glade_enum_from_string (
 		GNOME_TYPE_EDGE_POSITION, value);
-	else if (!strcmp (name, "textbox_color"))
-	    textbox_color = value;
-	else if (!strcmp (name, "logo_background_color"))
-	    logo_bg_color = value;
-	else if (!strcmp (name, "background_color"))
-	    bg_color = value;
-	else if (!strcmp (name, "text_color"))
-	    text_color = value;
-	else if (!strcmp (name, "title_color"))
-	    title_color = value;
 	else if (!strcmp (name, "text"))
 	    text = value;
 	else if (!strcmp (name, "title"))

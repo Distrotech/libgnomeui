@@ -1,3 +1,46 @@
+2006-04-04  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Remove unneeded checks.
+	* glade/glade-gnome.c: (druid_page_edge_new): Remove unused code.
+	* libgnomeui/gnome-about.c: (gnome_about_class_init): Remove
+	unused code.
+	* libgnomeui/gnome-appbar.c: (gnome_appbar_class_init): Same.
+	* libgnomeui/gnome-authentication-manager.c:
+	(vfs_async_fill_authentication_callback),
+	(vfs_async_save_authentication_callback),
+	(vfs_save_authentication_callback): 
+	* libgnomeui/gnome-client.c: (client_set_ghash): Remove stray
+	semi-colon.
+	* libgnomeui/gnome-dialog.c: (gnome_dialog_class_init),
+	(gnome_dialog_finalize): More unused code.
+	* libgnomeui/gnome-druid-page-edge.c: Semicolon.
+	* libgnomeui/gnome-icon-item.c: (iti_stop_editing),
+	(iti_stop_selecting), (gnome_icon_text_item_draw): Unused code.
+	* libgnomeui/gnome-icon-list.c: (gil_relayout_icons_at), (if):
+	More unused code removal.
+	* libgnomeui/gnome-icon-theme.c:
+	(gnome_icon_theme_set_search_path),
+	(gnome_icon_theme_get_search_path),
+	(gnome_icon_theme_append_search_path),
+	(gnome_icon_theme_prepend_search_path),
+	(gnome_icon_theme_set_custom_theme), (gnome_icon_theme_has_icon),
+	(gnome_icon_theme_list_icons),
+	(gnome_icon_theme_get_example_icon_name),
+	(gnome_icon_theme_rescan_if_needed): More of the same.
+	* libgnomeui/gnome-mdi.c: (gnome_mdi_update_child): And some more.
+	* libgnomeui/gnome-messagebox.c: (gnome_message_box_construct):
+	Again.
+	* libgnomeui/gnome-password-dialog.c: Unused variables removed.
+	* libgnomeui/gnome-pixmap-entry.c: (gnome_pixmap_entry_construct):
+	Unused code.
+	* libgnomeui/gnome-propertybox.c: (dialog_clicked_cb): Same.
+	* libgnomeui/gnome-scores.c: Semicolon.
+	* libgnomeui/gnome-theme-parser.c: (escape_string): Unused code.
+	* libgnomeui/gnome-thumbnail.c: Semi-colon.
+	(gnome_thumbnail_factory_save_thumbnail),
+	(gnome_thumbnail_factory_create_failed_thumbnail): Fix format
+	specifiers.
+
 2006-03-12  Christian Persch  <chpe@cvs.gnome.org>
 
 	* doc/reference/libgnomeui-docs.sgml:

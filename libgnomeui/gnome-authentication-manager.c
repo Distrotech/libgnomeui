@@ -575,7 +575,7 @@ vfs_async_fill_authentication_callback (gconstpointer in, size_t in_size,
 	info->out_args = out_real;
 	info->response = response;
 	info->response_data = response_data;
-	
+	/* Check this return? */	
 	request = gnome_keyring_find_network_password (in_real->username,
 						       in_real->domain,
 						       in_real->server,
@@ -688,7 +688,7 @@ vfs_async_save_authentication_callback (gconstpointer in, size_t in_size,
 	info->out_args = out_real;
 	info->response = response;
 	info->response_data = response_data;
-	
+	/* Check this return? */	
 	request = gnome_keyring_set_network_password (in_real->keyring,
 						      in_real->username,
 						      in_real->domain,
@@ -710,7 +710,6 @@ vfs_save_authentication_callback (gconstpointer in, size_t in_size,
 				  gpointer user_data)
 {
 	GnomeVFSModuleCallbackSaveAuthenticationIn *in_real;
-	GnomeVFSModuleCallbackSaveAuthenticationOut *out_real;
 	GnomeKeyringResult result;
 	guint32 item;
 	
@@ -721,10 +720,9 @@ vfs_save_authentication_callback (gconstpointer in, size_t in_size,
 	g_return_if_fail (out != NULL);
 
 	in_real = (GnomeVFSModuleCallbackSaveAuthenticationIn *)in;
-	out_real = (GnomeVFSModuleCallbackSaveAuthenticationOut *)out;
 
 	DEBUG_MSG (("+%s uri:'%s' \n", G_GNUC_FUNCTION, in_real->uri));
-
+	/* Check this return? */
 	result = gnome_keyring_set_network_password_sync (in_real->keyring,
 							  in_real->username,
 							  in_real->domain,

@@ -198,10 +198,6 @@ gnome_icon_theme_set_search_path (GnomeIconTheme *icon_theme,
 				  const char *path[],
 				  int         n_elements)
 {
-  GnomeIconThemePrivate *priv;
-
-  priv = icon_theme->priv;
-
   gtk_icon_theme_set_search_path (get_gtk_theme (icon_theme),
 				  path, n_elements);
 }
@@ -212,10 +208,6 @@ gnome_icon_theme_get_search_path (GnomeIconTheme      *icon_theme,
 				  char                 **path[],
 				  int                   *n_elements)
 {
-  GnomeIconThemePrivate *priv;
-
-  priv = icon_theme->priv;
-  
   gtk_icon_theme_get_search_path (get_gtk_theme (icon_theme),
 				  path, n_elements);
 }
@@ -224,10 +216,6 @@ void
 gnome_icon_theme_append_search_path (GnomeIconTheme      *icon_theme,
 				     const char          *path)
 {
-  GnomeIconThemePrivate *priv;
-
-  priv = icon_theme->priv;
-
   gtk_icon_theme_append_search_path (get_gtk_theme (icon_theme), path);
 }
 
@@ -235,10 +223,6 @@ void
 gnome_icon_theme_prepend_search_path (GnomeIconTheme      *icon_theme,
 				       const char           *path)
 {
-  GnomeIconThemePrivate *priv;
-
-  priv = icon_theme->priv;
-  
   gtk_icon_theme_prepend_search_path (get_gtk_theme (icon_theme), path);
 }
 
@@ -246,10 +230,6 @@ void
 gnome_icon_theme_set_custom_theme (GnomeIconTheme *icon_theme,
 				   const char *theme_name)
 {
-  GnomeIconThemePrivate *priv;
-
-  priv = icon_theme->priv;
-
   gtk_icon_theme_set_custom_theme (get_gtk_theme (icon_theme), theme_name);
 }
 
@@ -337,10 +317,6 @@ gboolean
 gnome_icon_theme_has_icon (GnomeIconTheme      *icon_theme,
 			    const char           *icon_name)
 {
-  GnomeIconThemePrivate *priv;
-  
-  priv = icon_theme->priv;
-
   return gtk_icon_theme_has_icon (get_gtk_theme (icon_theme), icon_name);
 }
 
@@ -350,30 +326,18 @@ GList *
 gnome_icon_theme_list_icons (GnomeIconTheme *icon_theme,
 			     const char *context)
 {
-  GnomeIconThemePrivate *priv;
-  
-  priv = icon_theme->priv;
-
   return gtk_icon_theme_list_icons (get_gtk_theme (icon_theme), context);
 }
 
 char *
 gnome_icon_theme_get_example_icon_name (GnomeIconTheme *icon_theme)
 {
-  GnomeIconThemePrivate *priv;
-  
-  priv = icon_theme->priv;
-  
   return gtk_icon_theme_get_example_icon_name (get_gtk_theme (icon_theme));
 }
 
 gboolean
 gnome_icon_theme_rescan_if_needed (GnomeIconTheme *icon_theme)
 {
-  GnomeIconThemePrivate *priv;
-
-  priv = icon_theme->priv;
-  
   return gtk_icon_theme_rescan_if_needed (get_gtk_theme (icon_theme));
 }
 

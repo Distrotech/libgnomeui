@@ -23,7 +23,7 @@
 */
 
 /*
- * FIXME (for gnome 2.2):
+ * FIXME 
  *
  * This widget needs properties like GnomeDruidPageStandard
  */
@@ -74,7 +74,7 @@ static void gnome_druid_page_edge_prepare	(GnomeDruidPage		        *page,
 #define DRUID_PAGE_LEFT_WIDTH 100.0
 
 GNOME_CLASS_BOILERPLATE (GnomeDruidPageEdge, gnome_druid_page_edge,
-			 GnomeDruidPage, GNOME_TYPE_DRUID_PAGE);
+			 GnomeDruidPage, GNOME_TYPE_DRUID_PAGE)
 
 static void
 gnome_druid_page_edge_class_init (GnomeDruidPageEdgeClass *klass)
