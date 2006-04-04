@@ -136,10 +136,34 @@ static GOptionEntry libgnomeui_goptions[] = {
 	{ NULL }
 };
 
+void G_GNUC_INTERNAL
+_gnome_ui_gettext_init (gboolean bind_codeset)
+{
+	static gboolean initialized = FALSE;
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET	
+	static gboolean codeset_bound = FALSE;
+#endif
+
+	if (!initialized)
+	{
+		bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
+		initialized = TRUE;
+	}
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET	
+	if (!codeset_bound && bind_codeset)
+	{
+		bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+		codeset_bound = TRUE;
+	}
+#endif
+}
+
 static GOptionGroup *
 libgnomeui_get_goption_group (void)
 {
 	GOptionGroup *option_group;
+
+	_gnome_ui_gettext_init (TRUE);
 
 	option_group = g_option_group_new ("gnome-ui",
 					   N_("GNOME GUI Library"),
@@ -168,7 +192,7 @@ libgnomeui_module_info_get (void)
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[6];
 
-		bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
+		_gnome_ui_gettext_init (FALSE);
 
 		req[0].required_version = "1.101.2";
 		req[0].module_info = LIBBONOBOUI_MODULE;
@@ -585,10 +609,7 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         gtk_accel_map_load (filename);
         g_free (filename);
 
-	bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
-#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-#endif
+	_gnome_ui_gettext_init (TRUE);
 
         _gnome_stock_icons_init ();
 
