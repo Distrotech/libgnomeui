@@ -1020,7 +1020,7 @@ gnome_client_module_instance_init (GnomeProgram *program, GnomeModuleInfo *mod_i
 {
     GnomeProgramPrivate_gnome_client *priv = g_new0 (GnomeProgramPrivate_gnome_client, 1);
 
-    g_object_set_qdata (G_OBJECT (program), quark_gnome_program_private_gnome_client, priv);
+    g_object_set_qdata_full (G_OBJECT (program), quark_gnome_program_private_gnome_client, priv, g_free);
 }
 
 static GOptionGroup *

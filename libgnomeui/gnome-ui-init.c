@@ -229,6 +229,14 @@ static GQuark quark_gnome_program_private_libgnomeui = 0;
 static GQuark quark_gnome_program_class_libgnomeui = 0;
 
 static void
+libgnomeui_private_free (GnomeProgramPrivate_libgnomeui *priv)
+{
+	g_free (priv->display);
+	g_free (priv->default_icon);
+	g_free (priv);
+}
+
+static void
 libgnomeui_get_property (GObject *object, guint param_id, GValue *value,
                          GParamSpec *pspec)
 {
@@ -329,7 +337,9 @@ libgnomeui_instance_init (GnomeProgram *program, GnomeModuleInfo *mod_info)
 {
     GnomeProgramPrivate_libgnomeui *priv = g_new0 (GnomeProgramPrivate_libgnomeui, 1);
 
-    g_object_set_qdata (G_OBJECT (program), quark_gnome_program_private_libgnomeui, priv);
+    g_object_set_qdata_full (G_OBJECT (program),
+			     quark_gnome_program_private_libgnomeui,
+			     priv, (GDestroyNotify) libgnomeui_private_free);
 }
 
 static void

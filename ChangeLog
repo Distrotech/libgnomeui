@@ -1,5 +1,13 @@
 2006-04-04  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-client.c: (gnome_client_module_instance_init):
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_private_free),
+	(libgnomeui_instance_init): Fix leakage of private data
+	structures and their content. Patch from Christian Persch.
+	Closes bug #335742.
+
+2006-04-04  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-client.c:
 	(gnome_client_module_get_goption_group),
 	(gnome_client_module_info_get): 
