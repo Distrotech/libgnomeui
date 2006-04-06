@@ -88,6 +88,8 @@ static const char *sm_config_prefix_arg_name G_GNUC_UNUSED = "--sm-config-prefix
 static const char *sm_screen G_GNUC_UNUSED = "--screen";
 #endif
 
+extern void _gnome_ui_gettext_init (gboolean bind_codeset) G_GNUC_INTERNAL;
+
 /* The master client.  */
 static GnomeClient *master_client= NULL;
 
@@ -1018,13 +1020,15 @@ gnome_client_module_instance_init (GnomeProgram *program, GnomeModuleInfo *mod_i
 {
     GnomeProgramPrivate_gnome_client *priv = g_new0 (GnomeProgramPrivate_gnome_client, 1);
 
-    g_object_set_qdata (G_OBJECT (program), quark_gnome_program_private_gnome_client, priv);
+    g_object_set_qdata_full (G_OBJECT (program), quark_gnome_program_private_gnome_client, priv, g_free);
 }
 
 static GOptionGroup *
 gnome_client_module_get_goption_group (void)
 {
 	GOptionGroup *option_group;
+
+	_gnome_ui_gettext_init (TRUE);
 
 	option_group = g_option_group_new ("gnome-session",
 					   N_("Session management"),
@@ -1053,7 +1057,7 @@ gnome_client_module_info_get (void)
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[3];
 
-		bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
+		_gnome_ui_gettext_init (FALSE);
 
 		req[0].required_version = "1.3.7";
 		req[0].module_info = gnome_gtk_module_info_get ();

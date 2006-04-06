@@ -136,10 +136,36 @@ static GOptionEntry libgnomeui_goptions[] = {
 	{ NULL }
 };
 
+void _gnome_ui_gettext_init (gboolean) G_GNUC_INTERNAL;
+
+void G_GNUC_INTERNAL
+_gnome_ui_gettext_init (gboolean bind_codeset)
+{
+	static gboolean initialized = FALSE;
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET	
+	static gboolean codeset_bound = FALSE;
+#endif
+
+	if (!initialized)
+	{
+		bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
+		initialized = TRUE;
+	}
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET	
+	if (!codeset_bound && bind_codeset)
+	{
+		bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+		codeset_bound = TRUE;
+	}
+#endif
+}
+
 static GOptionGroup *
 libgnomeui_get_goption_group (void)
 {
 	GOptionGroup *option_group;
+
+	_gnome_ui_gettext_init (TRUE);
 
 	option_group = g_option_group_new ("gnome-ui",
 					   N_("GNOME GUI Library"),
@@ -168,7 +194,7 @@ libgnomeui_module_info_get (void)
 	if (module_info.requirements == NULL) {
 		static GnomeModuleRequirement req[6];
 
-		bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
+		_gnome_ui_gettext_init (FALSE);
 
 		req[0].required_version = "1.101.2";
 		req[0].module_info = LIBBONOBOUI_MODULE;
@@ -203,6 +229,14 @@ typedef struct {
 
 static GQuark quark_gnome_program_private_libgnomeui = 0;
 static GQuark quark_gnome_program_class_libgnomeui = 0;
+
+static void
+libgnomeui_private_free (GnomeProgramPrivate_libgnomeui *priv)
+{
+	g_free (priv->display);
+	g_free (priv->default_icon);
+	g_free (priv);
+}
 
 static void
 libgnomeui_get_property (GObject *object, guint param_id, GValue *value,
@@ -305,7 +339,9 @@ libgnomeui_instance_init (GnomeProgram *program, GnomeModuleInfo *mod_info)
 {
     GnomeProgramPrivate_libgnomeui *priv = g_new0 (GnomeProgramPrivate_libgnomeui, 1);
 
-    g_object_set_qdata (G_OBJECT (program), quark_gnome_program_private_libgnomeui, priv);
+    g_object_set_qdata_full (G_OBJECT (program),
+			     quark_gnome_program_private_libgnomeui,
+			     priv, (GDestroyNotify) libgnomeui_private_free);
 }
 
 static void
@@ -585,10 +621,7 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         gtk_accel_map_load (filename);
         g_free (filename);
 
-	bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
-#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-#endif
+	_gnome_ui_gettext_init (TRUE);
 
         _gnome_stock_icons_init ();
 
