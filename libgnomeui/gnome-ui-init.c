@@ -95,8 +95,7 @@ static void libgnomeui_post_args_parse	(GnomeProgram *app,
 					 GnomeModuleInfo *mod_info);
 static void libgnomeui_rc_parse		(GnomeProgram *program);
 #ifndef G_OS_WIN32
-static void libgnomeui_segv_setup	(GnomeProgram *program,
-					 gboolean post_arg_parse);
+static void libgnomeui_segv_setup	(GnomeProgram *program);
 #endif
 
 /* Prototype for a private gnome_stock function */
@@ -347,20 +346,16 @@ libgnomeui_instance_init (GnomeProgram *program, GnomeModuleInfo *mod_info)
 static void
 libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
-        gboolean do_crash_dialog = TRUE;
         const char *envar;
 
+        /* This is one of two places where the crash dialog can be disabled */
+        /* The other is the command line option --disable-crash-dialog, so */
+        /* we wait until post_args_parse before calling libgnomeui_segv_setup */
         envar = g_getenv("GNOME_DISABLE_CRASH_DIALOG");
-        if(envar)
-                do_crash_dialog = atoi(envar)?FALSE:TRUE;
-	if ( ! do_crash_dialog)
+        if (envar && atoi (envar))
 		g_object_set (G_OBJECT(app),
 			      LIBGNOMEUI_PARAM_CRASH_DIALOG, FALSE,
 			      NULL);
-#ifndef G_OS_WIN32
-        if(do_crash_dialog)
-                libgnomeui_segv_setup (app, FALSE);
-#endif
 }
 
 #ifdef HAVE_ESD
@@ -609,7 +604,7 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         gnome_type_init();
         libgnomeui_rc_parse (program);
 #ifndef G_OS_WIN32
-        libgnomeui_segv_setup (program, TRUE);
+        libgnomeui_segv_setup (program);
 #endif
         priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
         priv->constructed = TRUE;
@@ -747,7 +742,7 @@ libgnomeui_rc_parse (GnomeProgram *program)
 static void libgnomeui_segv_handle(int signum);
 
 static void
-libgnomeui_segv_setup (GnomeProgram *program, gboolean post_arg_parse)
+libgnomeui_segv_setup (GnomeProgram *program)
 {
         static struct sigaction *setptr;
         struct sigaction sa;
