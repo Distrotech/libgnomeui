@@ -1,3 +1,13 @@
+2006-04-18  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* .cvsignore:
+	* Makefile.am:
+	* configure.in:
+	* po/LINGUAS: Patch from Przemysław Grzegorczyk
+	to move libgnomeui to the new LINGUAS order.
+	Closes bug #338552.
+	* po/no.po: Remove this
+
 2006-04-13 Vladimer Sichinava  <vlsichinava@gmail.com>
 
         * configure.in: Added "ka" (Georgian) to ALL_LINGUAS
