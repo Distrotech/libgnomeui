@@ -1,5 +1,11 @@
 2006-04-18  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-ui-init.h: Define GNOME_GTK_MODULE
+	as gnome_gtk_module_info_get() which actually exists.
+	Pointed out by Seth in bug #81424.
+
+2006-04-18  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* images/Makefile.am: Don't install ancient icons
 	Patch from Marinus Schraal. Closes bug #169044.
 

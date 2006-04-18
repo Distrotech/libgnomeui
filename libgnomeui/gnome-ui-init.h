@@ -36,7 +36,7 @@ G_BEGIN_DECLS
 
 #define LIBGNOMEUI_MODULE libgnomeui_module_info_get()
 const GnomeModuleInfo * libgnomeui_module_info_get (void) G_GNUC_CONST;
-#define GNOME_GTK_MODULE gnomeui_gtk_module_info_get()
+#define GNOME_GTK_MODULE gnome_gtk_module_info_get()
 const GnomeModuleInfo * gnome_gtk_module_info_get (void) G_GNUC_CONST;
 
 
