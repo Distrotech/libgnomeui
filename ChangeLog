@@ -1,5 +1,10 @@
 2006-04-18  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* images/Makefile.am: Don't install ancient icons
+	Patch from Marinus Schraal. Closes bug #169044.
+
+2006-04-18  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* .cvsignore:
 	* Makefile.am:
 	* configure.in:
