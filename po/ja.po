@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-13 12:36+0100\n"
+"POT-Creation-Date: 2006-04-11 01:05+0200\n"
 "PO-Revision-Date: 2005-12-17 00:00+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
@@ -737,35 +737,35 @@ msgstr "%s (ドメイン %s) にアクセスするためにログインして下
 msgid "You must log in to access %s\n"
 msgstr "%s にアクセスするためにログインして下さい\n"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "Specify session management ID"
 msgstr "セッション・マネージメント ID を指定する"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "Specify prefix of saved configuration"
 msgstr "設定を保存する際のプレフィックスを指定する"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
+#: libgnomeui/gnome-client.c:908 libgnomeui/gnome-client.c:924
 msgid "Disable connection to session manager"
 msgstr "セッション・マネージャと接続しない"
 
-#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
+#: libgnomeui/gnome-client.c:1034 libgnomeui/gnome-client.c:1047
 msgid "Session management"
 msgstr "セッション管理"
 
-#: libgnomeui/gnome-client.c:1031
+#: libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "セッション管理のオプションを表示する"
 
-#: libgnomeui/gnome-client.c:2580
+#: libgnomeui/gnome-client.c:2584
 msgid "Cancel Logout"
 msgstr "ログアウトをキャンセルする"
 
@@ -1464,28 +1464,28 @@ msgstr "インデントなし"
 msgid "About"
 msgstr "情報"
 
-#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
+#: libgnomeui/gnome-ui-init.c:124 libgnomeui/gnome-ui-init.c:133
 msgid "Disable Crash Dialog"
 msgstr "クラッシュ・ダイアログを無効にする"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:126
 msgid "X display to use"
 msgstr "使用する X ディスプレイ"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:126
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
+#: libgnomeui/gnome-ui-init.c:170 libgnomeui/gnome-ui-init.c:183
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI ライブラリ"
 
-#: libgnomeui/gnome-ui-init.c:146
+#: libgnomeui/gnome-ui-init.c:171
 msgid "Show GNOME GUI options"
 msgstr "GNOME GUI オプションを表示する"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:787
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1493,7 +1493,7 @@ msgstr ""
 "ません\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:773
+#: libgnomeui/gnome-ui-init.c:801
 #, c-format
 msgid ""
 "Segmentation fault!\n"

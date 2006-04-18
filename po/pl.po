@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-13 12:36+0100\n"
+"POT-Creation-Date: 2006-04-11 01:05+0200\n"
 "PO-Revision-Date: 2006-02-25 13:59--100\n"
 "Last-Translator: Gnome PL Team <translators@gnomepl.org>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -737,35 +737,35 @@ msgstr "Aby uzyskać dostęp do %s domeny %s musisz się zalogować\n"
 msgid "You must log in to access %s\n"
 msgstr "Aby uzyskać dostęp do %s musisz się zalogować\n"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "Specify session management ID"
 msgstr "Określa identyfikator sesji"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "Specify prefix of saved configuration"
 msgstr "Określa przedrostek zapisanej konfiguracji"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
+#: libgnomeui/gnome-client.c:908 libgnomeui/gnome-client.c:924
 msgid "Disable connection to session manager"
 msgstr "Nie nawiązuje połączenia z menedżerem sesji"
 
-#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
+#: libgnomeui/gnome-client.c:1034 libgnomeui/gnome-client.c:1047
 msgid "Session management"
 msgstr "Zarządzanie sesją"
 
-#: libgnomeui/gnome-client.c:1031
+#: libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Wyświetla opcje zarządzania sesją"
 
-#: libgnomeui/gnome-client.c:2580
+#: libgnomeui/gnome-client.c:2584
 msgid "Cancel Logout"
 msgstr "Anuluj zakończenie sesji"
 
@@ -1476,28 +1476,28 @@ msgstr "Cofnij wcięcie"
 msgid "About"
 msgstr "Informacje o"
 
-#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
+#: libgnomeui/gnome-ui-init.c:124 libgnomeui/gnome-ui-init.c:133
 msgid "Disable Crash Dialog"
 msgstr "Wyłączenie okna błędu programu"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:126
 msgid "X display to use"
 msgstr "Wykorzystywany ekran X"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:126
 msgid "DISPLAY"
 msgstr "EKRAN X"
 
-#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
+#: libgnomeui/gnome-ui-init.c:170 libgnomeui/gnome-ui-init.c:183
 msgid "GNOME GUI Library"
 msgstr "Biblioteka GNOME GUI"
 
-#: libgnomeui/gnome-ui-init.c:146
+#: libgnomeui/gnome-ui-init.c:171
 msgid "Show GNOME GUI options"
 msgstr "Wyświetla opcje GUI GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:787
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1505,7 +1505,7 @@ msgstr ""
 "wyświetlić okna z informacją o błędzie\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:773
+#: libgnomeui/gnome-ui-init.c:801
 #, c-format
 msgid ""
 "Segmentation fault!\n"

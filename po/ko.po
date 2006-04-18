@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-13 12:36+0100\n"
+"POT-Creation-Date: 2006-04-11 01:05+0200\n"
 "PO-Revision-Date: 2006-01-28 01:19+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
@@ -733,35 +733,35 @@ msgstr "도메인 %s의 %s에 접근하려면 로그인을 해야 합니다\n"
 msgid "You must log in to access %s\n"
 msgstr "\"%s\"에 접근하려면 로그인을 해야 합니다\n"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "Specify session management ID"
 msgstr "세션 관리 id 지정"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "Specify prefix of saved configuration"
 msgstr "이미 저장된 설정의 앞부분을 지정"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "PREFIX"
 msgstr "<접두어>"
 
-#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
+#: libgnomeui/gnome-client.c:908 libgnomeui/gnome-client.c:924
 msgid "Disable connection to session manager"
 msgstr "세션 관리자에 연결하지 않음"
 
-#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
+#: libgnomeui/gnome-client.c:1034 libgnomeui/gnome-client.c:1047
 msgid "Session management"
 msgstr "세션 관리"
 
-#: libgnomeui/gnome-client.c:1031
+#: libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "세션 관리 옵션 표시"
 
-#: libgnomeui/gnome-client.c:2580
+#: libgnomeui/gnome-client.c:2584
 msgid "Cancel Logout"
 msgstr "로그아웃 취소"
 
@@ -1465,35 +1465,35 @@ msgstr "들이기-취소"
 msgid "About"
 msgstr "정보"
 
-#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
+#: libgnomeui/gnome-ui-init.c:124 libgnomeui/gnome-ui-init.c:133
 msgid "Disable Crash Dialog"
 msgstr "이상 종료 대화 상자를 사용하지 않습니다"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:126
 msgid "X display to use"
 msgstr "사용할 X 디스플레이"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:126
 msgid "DISPLAY"
 msgstr "<디스플레이>"
 
-#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
+#: libgnomeui/gnome-ui-init.c:170 libgnomeui/gnome-ui-init.c:183
 msgid "GNOME GUI Library"
 msgstr "그놈 GUI 라이브러리"
 
-#: libgnomeui/gnome-ui-init.c:146
+#: libgnomeui/gnome-ui-init.c:171
 msgid "Show GNOME GUI options"
 msgstr "그놈 GUI 옵션 표시"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:787
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "여러 개의 세그먼테이션 오류가 발생했습니다; 애러 창을 보여줄 수 없습니다\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:773
+#: libgnomeui/gnome-ui-init.c:801
 #, c-format
 msgid ""
 "Segmentation fault!\n"

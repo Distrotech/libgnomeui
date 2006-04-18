@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-13 12:36+0100\n"
+"POT-Creation-Date: 2006-04-11 01:05+0200\n"
 "PO-Revision-Date: 2005-12-09 12:39+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
@@ -878,42 +878,42 @@ msgid "You must log in to access %s\n"
 msgstr "પ્રાપ્ત કરવા માટે તમારે પ્રવેશ કરવો પડશે %s\n"
 
 # libgnomeui/gnome-client.c:833
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "Specify session management ID"
 msgstr "સત્ર વ્યવસ્થા ઓળખ સ્પષ્ટ કરો"
 
 # libgnomeui/gnome-client.c:833
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "ID"
 msgstr "ઓળખ"
 
 # libgnomeui/gnome-client.c:836
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "Specify prefix of saved configuration"
 msgstr "સંગ્રહિત રુપરેખાનું પૂર્વગ સ્પષ્ટ કરો"
 
 # libgnomeui/gnome-client.c:836
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "PREFIX"
 msgstr "પૂર્વગ"
 
 # libgnomeui/gnome-client.c:839
-#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
+#: libgnomeui/gnome-client.c:908 libgnomeui/gnome-client.c:924
 msgid "Disable connection to session manager"
 msgstr "સત્ર વ્યવસ્થાપક સાથેનો સંપર્ક નિષ્ક્રિય કરો"
 
 # libgnomeui/gnome-client.c:945
-#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
+#: libgnomeui/gnome-client.c:1034 libgnomeui/gnome-client.c:1047
 msgid "Session management"
 msgstr "સત્ર વ્યવસ્થા"
 
 # libgnomeui/gnome-client.c:945
-#: libgnomeui/gnome-client.c:1031
+#: libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "સત્ર વ્યવસ્થાપન વિકલ્પો બતાવો"
 
 # libgnomeui/gnome-client.c:2483
-#: libgnomeui/gnome-client.c:2580
+#: libgnomeui/gnome-client.c:2584
 msgid "Cancel Logout"
 msgstr "બહાર નીકળવાની પ્રક્રિયા રદ કરો"
 
@@ -1750,34 +1750,34 @@ msgstr "હાંસિયા વગરનું"
 msgid "About"
 msgstr "ના વિશે"
 
-#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
+#: libgnomeui/gnome-ui-init.c:124 libgnomeui/gnome-ui-init.c:133
 msgid "Disable Crash Dialog"
 msgstr "ક્રેશ સંવાદને નિષ્ક્રિય કરો"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:126
 msgid "X display to use"
 msgstr "X ડિસ્પ્લે વાપરો"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:126
 msgid "DISPLAY"
 msgstr "ડિસ્પ્લે"
 
-#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
+#: libgnomeui/gnome-ui-init.c:170 libgnomeui/gnome-ui-init.c:183
 msgid "GNOME GUI Library"
 msgstr "જીનોમ GUI પુસ્તકાલય"
 
-#: libgnomeui/gnome-ui-init.c:146
+#: libgnomeui/gnome-ui-init.c:171
 msgid "Show GNOME GUI options"
 msgstr "જીનોમ GUI વિકલ્પો બતાવો"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:787
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "ઘણાંબધાં વિભાગોની ભૂલો થઇ છે; સંવાદ દર્શાવી શકતું નથી\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:773
+#: libgnomeui/gnome-ui-init.c:801
 #, c-format
 msgid ""
 "Segmentation fault!\n"

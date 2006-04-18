@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.libgnomeui-2-14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-13 12:36+0100\n"
+"POT-Creation-Date: 2006-04-11 01:05+0200\n"
 "PO-Revision-Date: 2006-03-11 13:12+0530\n"
 "Last-Translator: A S Alam <apbrar@gmail.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
@@ -738,35 +738,35 @@ msgstr "ਤੁਹਾਨੂੰ ਡੋਮੇਨ %s  ਤੱਕ ਪਹੁੰਚਣ �
 msgid "You must log in to access %s\n"
 msgstr "ਤੁਹਾਨੂੰ %s ਤੱਕ ਪਹੁੰਚਣ ਲਈ ਦਾਖਲੇ (ਲਾਗਆਨ) ਦੀ ਲੋਡ਼\n"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "Specify session management ID"
 msgstr "ਸ਼ੈਸ਼ਨ ਪ੍ਰਬੰਧਨ ਸ਼ੰਨ-ਨੰ ਨਿਰਧਾਰਿਤ ਕਰੋ"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "Specify prefix of saved configuration"
 msgstr "ਸੰਭਾਲੀ ਸੰਰਚਨਾ ਲਈ ਅਗੇਤਰ ਦਿਓ"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "PREFIX"
 msgstr "ਅਗੇਤਰ"
 
-#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
+#: libgnomeui/gnome-client.c:908 libgnomeui/gnome-client.c:924
 msgid "Disable connection to session manager"
 msgstr "ਸ਼ੈਸ਼ਨ ਮੈਨੇਜਰ ਨਾਲ ਸਬੰਧ ਨੂੰ ਅਯੋਗ ਕਰੋ"
 
-#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
+#: libgnomeui/gnome-client.c:1034 libgnomeui/gnome-client.c:1047
 msgid "Session management"
 msgstr "ਸ਼ੈਸ਼ਨ ਪਰਬੰਧ"
 
-#: libgnomeui/gnome-client.c:1031
+#: libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "ਅਜਲਾਸ ਪਰਬੰਧ ਚੋਣਾਂ ਵੇਖਾਓ"
 
-#: libgnomeui/gnome-client.c:2580
+#: libgnomeui/gnome-client.c:2584
 msgid "Cancel Logout"
 msgstr "ਬਾਹਰੀ ਦਰ (ਲਾਗ ਆਉਟ) ਰੱਦ"
 
@@ -1460,34 +1460,34 @@ msgstr "ਹਾਸ਼ੀਏ ਤੋਂ ਦੂਰ ਨਾ ਕਰੋ"
 msgid "About"
 msgstr "ਬਾਰੇ"
 
-#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
+#: libgnomeui/gnome-ui-init.c:124 libgnomeui/gnome-ui-init.c:133
 msgid "Disable Crash Dialog"
 msgstr "ਗਲਤੀ (ਕਰੈਸ਼) ਵਾਰਤਾਲਾਪ ਅਯੋਗ"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:126
 msgid "X display to use"
 msgstr "X ਦਰਿਸ਼ ਵਰਤੋਂ"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:126
 msgid "DISPLAY"
 msgstr "ਦਰਿਸ਼"
 
-#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
+#: libgnomeui/gnome-ui-init.c:170 libgnomeui/gnome-ui-init.c:183
 msgid "GNOME GUI Library"
 msgstr "ਗਨੋਮ GUI ਲਾਇਬਰੇਰੀ"
 
-#: libgnomeui/gnome-ui-init.c:146
+#: libgnomeui/gnome-ui-init.c:171
 msgid "Show GNOME GUI options"
 msgstr "ਗਨੋਮ GUI ਚੋਣਾਂ ਵੇਖਾਓ"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:787
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "ਬਹੁ ਸਿਗਮਿਨਟੇਸ਼ਨ ਤਰੁੱਟੀ ਆਈ ਹੈ; ਗਲਤੀ ਵਾਰਤਾਲਾਪ ਨਹੀ ਵੇਖਾ ਸਕਦਾ ਹੈ\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:773
+#: libgnomeui/gnome-ui-init.c:801
 #, c-format
 msgid ""
 "Segmentation fault!\n"

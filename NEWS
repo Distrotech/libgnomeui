@@ -1,3 +1,10 @@
+libgnomeui 2.14.1
+-----------------
+
+* Fix --disable-crash-dialog (Loïc Minier)
+* Fix leaks (Christian Persch)
+* Fix gettext initialization (Christian Persch)
+
 libgnomeui 2.14.0
 -----------------
 
