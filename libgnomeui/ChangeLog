@@ -1,3 +1,8 @@
+2003-12-07  Diego Gonzalez  <diego@pemas.net>
+
+	* libgnomeui/gnome-icon-theme.[c-h]: mark as deprecated
+	* libgnomeui/gnome-theme-parser.[c-h]: mark as deprecated
+
 2006-02-07  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-authentication-manager.c: (vfs_async_question_callback),

@@ -20,6 +20,8 @@
 #ifndef GNOME_THEME_PARSER_H
 #define GNOME_THEME_PARSER_H
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #include <glib.h>
 
 G_BEGIN_DECLS
@@ -81,6 +83,8 @@ gboolean gnome_theme_file_get_string         (GnomeThemeFile   *df,
 gboolean gnome_theme_file_get_locale_string  (GnomeThemeFile   *df,
 					      const char       *section,
 					      const char       *keyname,
+#endif /* GNOME_DISABLE_DEPRECATED */
+
 					      char            **val);
 
 G_END_DECLS

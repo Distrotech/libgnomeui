@@ -17,6 +17,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -364,3 +366,4 @@ gnome_icon_data_dup (const GnomeIconData *icon_data)
   return copy;
 }
 
+#endif /* GNOME_DISABLE_DEPRECATED */

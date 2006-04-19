@@ -21,6 +21,8 @@
 #include <locale.h>
 #include <stdlib.h>
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #include "gnome-theme-parser.h"
 
 typedef struct _GnomeThemeFileSection GnomeThemeFileSection;
@@ -853,6 +855,7 @@ calculate_locale (GnomeThemeFile   *df)
   else
     lang = g_strdup ("C");
   
+#endif /* GNOME_DISABLE_DEPRECATED */
   p = strchr (lang, '_');
   if (p)
     {

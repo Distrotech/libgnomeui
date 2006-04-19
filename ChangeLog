@@ -1,3 +1,9 @@
+2006-04-19  Diego Gonzalez  <diego@pemas.net>
+
+	* libgnomeui/gnome-icon-theme.[c-h]: mark as deprecated
+	* libgnomeui/gnome-theme-parser.[c-h]: mark as deprecated
+	Closes bug #128827.
+
 2006-04-18  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-ui-init.h: Define GNOME_GTK_MODULE
