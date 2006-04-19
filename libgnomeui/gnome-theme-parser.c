@@ -855,7 +855,6 @@ calculate_locale (GnomeThemeFile   *df)
   else
     lang = g_strdup ("C");
   
-#endif /* GNOME_DISABLE_DEPRECATED */
   p = strchr (lang, '_');
   if (p)
     {
@@ -973,4 +972,6 @@ gnome_theme_file_get_integer (GnomeThemeFile   *df,
   return TRUE;
   
 }
+
+#endif /* GNOME_DISABLE_DEPRECATED */
 
