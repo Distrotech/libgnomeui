@@ -22,8 +22,6 @@
 
 #ifndef GNOME_DISABLE_DEPRECATED
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #include <glib-object.h>
 #include <gtk/gtkicontheme.h>
 
@@ -100,7 +98,6 @@ GtkIconTheme   *_gnome_icon_theme_get_gtk_icon_theme    (GnomeIconTheme       *i
 
 G_END_DECLS
 
-#endif /* GNOME_DISABLE_DEPRECATED */
 #endif  /* GNOME_DISABLE_DEPRECATED */
 
 
