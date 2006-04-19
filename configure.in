@@ -17,8 +17,6 @@ m4_define([libgnomeui_interface_age], [0])
 m4_define([libgnomeui_extraversion], [])
 
 dnl Required versions of other packages
-m4_define([esound_required_version],         [0.2.26])
-m4_define([audiofile_required_version],      [0.2.3])
 m4_define([libgnome_required_version],       [2.13.7])
 m4_define([libgnomecanvas_required_version], [2.0.0])
 m4_define([libbonoboui_required_version],    [2.13.1])
@@ -128,39 +126,27 @@ dnl
 dnl Start of pkg-config checks
 dnl
 
-dnl We first check for esound and audiofile (which has conditional
-dnl support built in)
-dnl
-SOUND_MODULES="esound >= esound_required_version dnl
-  audiofile >= audiofile_required_version"
-PKG_CHECK_MODULES(SOUND_TEST, [$SOUND_MODULES], [
-	AC_DEFINE(HAVE_LIBAUDIOFILE, 1,
-                  [Define to 1 if you have libaudiofile installed])
-	AC_DEFINE(HAVE_ESD, 1,
-                  [Define to 1 if you have libesd installed])
-	esd_msg=yes
-],[
-	SOUND_MODULES=""
-	esd_msg=no
-])
-
 dnl
 dnl libjpeg
 dnl
-  if test -z "$LIBJPEG"; then
-    AC_CHECK_LIB(jpeg, jpeg_start_decompress,
-      [AC_CHECK_HEADER(jpeglib.h,
-        jpeg_ok=yes,
-        jpeg_ok=no)],
-      AC_MSG_WARN(*** (jpeg library not found) ***), -lm)
-    if test "$jpeg_ok" = yes; then
-      JPEG='jpeg'; LIBJPEG='-ljpeg'
-      AC_DEFINE(HAVE_LIBJPEG, 1,
-                [Define to 1 if you have libjpeg installed])
-    else
-     AC_MSG_WARN(*** JPEG thumbnail loader will not be built (jpeg header file not found) ***)
-    fi
-  fi
+
+AC_ARG_WITH(libjpeg,  [  --without-libjpeg       build without JPEG support])
+if test x$with_libjpeg != xno && test -z "$LIBJPEG"; then
+	AC_CHECK_LIB(jpeg, jpeg_start_decompress,
+		[AC_CHECK_HEADER(jpeglib.h, jpeg_ok=yes, jpeg_ok=no)],
+		AC_MSG_WARN(*** (jpeg library not found) ***), -lm)
+	if test "$jpeg_ok" = yes; then
+		JPEG='jpeg'; LIBJPEG='-ljpeg'
+		AC_DEFINE(HAVE_LIBJPEG, 1, [Define to 1 if you have libjpeg installed])
+	fi
+fi
+
+if test x$with_libjpeg != xno && test -z "$LIBJPEG"; then
+	AC_MSG_ERROR([
+*** Checks for JPEG library failed. You can build without it by passing 
+*** --without-libjpeg to configure but the JPEG thumbnail loader will not
+*** be built then.])
+fi
 
 AC_SUBST(LIBJPEG)
 
@@ -291,6 +277,5 @@ doc/reference/version.xml
 
 AC_OUTPUT
 echo "configuration:
-	esd support: ${esd_msg}
 	doc build:   ${enable_gtk_doc}
 "

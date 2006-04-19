@@ -101,8 +101,6 @@ static void libgnomeui_segv_setup	(GnomeProgram *program);
 /* Prototype for a private gnome_stock function */
 void _gnome_stock_icons_init (void);
 
-#ifdef HAVE_ESD
-
 /* Whether to make noises when the user clicks a button, etc.  We cache it
  * in a boolean rather than querying GConf every time.
  */
@@ -110,8 +108,6 @@ static gboolean use_event_sounds;
 
 /* GConf client for monitoring the event sounds option */
 static GConfClient *gconf_client = NULL;
-
-#endif /* HAVE_ESD */
 
 
 enum { ARG_DISABLE_CRASH_DIALOG=1, ARG_DISPLAY };
@@ -358,7 +354,6 @@ libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 			      NULL);
 }
 
-#ifdef HAVE_ESD
 static gboolean
 relay_gnome_signal (GSignalInvocationHint *hint,
               	     guint n_param_values,
@@ -565,12 +560,10 @@ event_sounds_changed_cb (GConfClient* client, guint cnxn_id, GConfEntry *entry, 
 
         use_event_sounds = new_use_event_sounds;
 }
-#endif
 
 static void
 setup_event_listener (void)
 {
-#ifdef HAVE_ESD
         gconf_client = gconf_client_get_default ();
         if (!gconf_client)
                 return;
@@ -592,7 +585,6 @@ setup_event_listener (void)
                 initialize_gtk_signal_relay ();
                 initialize_gnome_signal_relay ();
 	 }
-#endif
 }
 
 static void

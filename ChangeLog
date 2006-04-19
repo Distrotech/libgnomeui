@@ -1,3 +1,11 @@
+2006-04-19  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Remove unneeded esd and audiofile checks and
+	add a switch to make libjpeg conditional.
+	* libgnomeui/gnome-ui-init.c: (event_sounds_changed_cb),
+	(setup_event_listener): Same
+	Closes bug #310974. Patch from Leonardo Boshell.
+
 2006-04-19  Diego Gonzalez  <diego@pemas.net>
 
 	* libgnomeui/gnome-icon-theme.[c-h]: mark as deprecated
