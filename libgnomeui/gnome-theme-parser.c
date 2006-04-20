@@ -21,8 +21,6 @@
 #include <locale.h>
 #include <stdlib.h>
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #include "gnome-theme-parser.h"
 
 typedef struct _GnomeThemeFileSection GnomeThemeFileSection;
@@ -972,6 +970,4 @@ gnome_theme_file_get_integer (GnomeThemeFile   *df,
   return TRUE;
   
 }
-
-#endif /* GNOME_DISABLE_DEPRECATED */
 
