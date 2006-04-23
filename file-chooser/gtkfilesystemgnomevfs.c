@@ -1099,8 +1099,6 @@ get_folder_file_info_callback (GnomeVFSAsyncHandle *handle,
       set_vfs_error (result->result, uri, &error);
       g_free (uri);
 
-      folder_vfs->async_handle = NULL;
-
       (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), NULL,
 			     error, op_data->callback_data);
 

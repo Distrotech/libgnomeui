@@ -1,3 +1,9 @@
+2006-04-23  Kristian Rietveld  <kris@imendio.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c (get_folder_file_info_callback):
+	don't access folder_vfs here anymore, since it is now created after the
+	get info operation finished.
+
 2006-03-21  Kristian Rietveld  <kris@imendio.com>
 
 	Asynchronous directory creation and some misc fixes.
