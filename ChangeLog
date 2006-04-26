@@ -1,3 +1,16 @@
+2006-04-26  Kristian Rietveld  <kris@imendio.com>
+
+	* file-chooser/sucky-desktop-item.[ch]: removed.
+
+	* file-chooser/Makefile.am: updated.
+
+	* file-chooser/gtkfilesystemgnomevfs.c (is_desktop_file_a_folder):
+	modified to take a GKeyFile,
+	(info_from_vfs_info): likewise,
+	(get_desktop_link_uri): now loads the .desktop file using
+	GKeyFile instead of SuckyDesktopItem,
+	(get_icon_name_from_desktop_file): removed.
+
 2006-04-23  Kristian Rietveld  <kris@imendio.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c (get_folder_file_info_callback):

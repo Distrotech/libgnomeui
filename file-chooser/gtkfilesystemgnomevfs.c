@@ -52,7 +52,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include "sucky-desktop-item.h"
 
 #undef PROFILE_FILE_CHOOSER
 #ifdef PROFILE_FILE_CHOOSER
@@ -98,6 +97,8 @@ profile_log (const char *func, int indent, const char *msg1, const char *msg2)
 
 #define BOOKMARKS_FILENAME ".gtk-bookmarks"
 #define BOOKMARKS_TMP_FILENAME ".gtk-bookmarks-XXXXXX"
+
+#define DESKTOP_GROUP "Desktop Entry"
 
 typedef struct _GtkFileSystemGnomeVFSClass GtkFileSystemGnomeVFSClass;
 
@@ -823,20 +824,23 @@ is_desktop_file (GnomeVFSFileInfo *vfs_info)
 
 /* Returns whether a .desktop file indicates a link to a folder */
 static gboolean
-is_desktop_file_a_folder (SuckyDesktopItem *ditem)
+is_desktop_file_a_folder (GKeyFile *desktop_file)
 {
-  SuckyDesktopItemType ditem_type;
+  gboolean ret;
+  gchar *type;
 
-  ditem_type = sucky_desktop_item_get_entry_type (ditem);
-
-  if (ditem_type != SUCKY_DESKTOP_ITEM_TYPE_LINK)
+  type = g_key_file_get_value (desktop_file, DESKTOP_GROUP, "Type", NULL);
+  if (!type)
     return FALSE;
+
+  ret = !strncmp (type, "Link", 4);
+  g_free  (type);
 
   /* FIXME: do we have to get the link URI and figure out its type?  For now,
    * we'll just assume that it does link to a folder...
    */
 
-  return TRUE;
+  return ret;
 }
 
 /* Checks whether a vfs_info matches what we know about the AFS directories on
@@ -862,17 +866,21 @@ static char *
 get_desktop_link_uri (const char *desktop_uri,
 		      GError    **error)
 {
-  SuckyDesktopItem *ditem;
-  const char *ditem_url;
-  char *ret_uri;
+  gboolean ret;
+  GKeyFile *desktop_file;
+  char *ditem_url;
+  char *tmp;
 
-  ditem = sucky_desktop_item_new_from_uri (desktop_uri, 0, error);
-  if (ditem == NULL)
+  desktop_file = g_key_file_new ();
+  tmp = gnome_vfs_get_local_path_from_uri (desktop_uri);
+  ret = g_key_file_load_from_file (desktop_file, tmp,
+				   G_KEY_FILE_KEEP_TRANSLATIONS, NULL);
+  g_free (tmp);
+
+  if (!ret)
     return NULL;
 
-  ret_uri = NULL;
-
-  if (!is_desktop_file_a_folder (ditem))
+  if (!is_desktop_file_a_folder (desktop_file))
     {
       g_set_error (error,
 		   GTK_FILE_SYSTEM_ERROR,
@@ -882,7 +890,7 @@ get_desktop_link_uri (const char *desktop_uri,
       goto out;
     }
 
-  ditem_url = sucky_desktop_item_get_string (ditem, SUCKY_DESKTOP_ITEM_URL);
+  ditem_url = g_key_file_get_value (desktop_file, DESKTOP_GROUP, "URL", NULL);
   if (ditem_url == NULL || strlen (ditem_url) == 0)
     {
       g_set_error (error,
@@ -893,12 +901,10 @@ get_desktop_link_uri (const char *desktop_uri,
       goto out;
     }
 
-  ret_uri = g_strdup (ditem_url);
-
  out:
+  g_key_file_free (desktop_file);
 
-  sucky_desktop_item_unref (ditem);
-  return ret_uri;
+  return ditem_url;
 }
 
 
@@ -2275,34 +2281,6 @@ gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem *file_system,
     return NULL;
 }
 
-static gchar *
-get_icon_name_from_desktop_file (const char   *desktop_uri)
-{
-  SuckyDesktopItem *ditem;
-  const char *ditem_icon_name;
-  char *ret = NULL;
-
-  ditem = sucky_desktop_item_new_from_uri (desktop_uri, 0, NULL);
-  if (ditem == NULL)
-    goto out;
-
-  ditem_icon_name = sucky_desktop_item_get_string (ditem, SUCKY_DESKTOP_ITEM_ICON);
-  if (ditem_icon_name == NULL || strlen (ditem_icon_name) == 0)
-    {
-      ret = NULL;
-      goto out;
-    }
-
-  ret = g_strdup (ditem_icon_name);
-
- out:
-
-  if (ditem)
-    sucky_desktop_item_unref (ditem);
-
-  return ret;
-}
-
 static void
 bookmark_list_free (GSList *list)
 {
@@ -2931,19 +2909,22 @@ info_from_vfs_info (GtkFileSystemGnomeVFS  *system_vfs,
 {
   GtkFileInfo *info = gtk_file_info_new ();
   gboolean is_desktop;
-  SuckyDesktopItem *ditem;
+  GKeyFile *desktop_file = NULL;
 
   /* Desktop files are special.  They can override the name, type, icon, etc. */
 
   is_desktop = is_desktop_file (vfs_info);
 
-  ditem = NULL; /* shut up GCC */
-
   if (is_desktop)
     {
-      ditem = sucky_desktop_item_new_from_uri (uri, 0, error);
-      if (ditem == NULL)
-	return NULL;
+      gboolean ret;
+      gchar *tmp;
+
+      tmp = gnome_vfs_get_local_path_from_uri (uri);
+      desktop_file = g_key_file_new ();
+      ret = g_key_file_load_from_file (desktop_file, tmp,
+				       G_KEY_FILE_KEEP_TRANSLATIONS, error);
+      g_free (tmp);
     }
 
   /* Display name */
@@ -2952,11 +2933,15 @@ info_from_vfs_info (GtkFileSystemGnomeVFS  *system_vfs,
     {
       if (is_desktop)
 	{
-	  const char *name;
+	  char *name;
 
-	  name = sucky_desktop_item_get_localestring (ditem, SUCKY_DESKTOP_ITEM_NAME);
+	  name = g_key_file_get_locale_string (desktop_file, DESKTOP_GROUP,
+					       "Name", NULL, NULL);
 	  if (name != NULL)
-	    gtk_file_info_set_display_name (info, name);
+	    {
+	      gtk_file_info_set_display_name (info, name);
+	      g_free (name);
+	    }
 	  else
 	    goto fetch_name_from_uri;
 	}
@@ -2998,7 +2983,7 @@ info_from_vfs_info (GtkFileSystemGnomeVFS  *system_vfs,
       gboolean is_hidden;
 
       if (is_desktop)
-	is_hidden = sucky_desktop_item_get_boolean (ditem, SUCKY_DESKTOP_ITEM_HIDDEN);
+	is_hidden = g_key_file_get_boolean (desktop_file, DESKTOP_GROUP, "Hidden", NULL);
       else
 	is_hidden = (vfs_info->name && vfs_info->name[0] == '.');
 
@@ -3012,7 +2997,7 @@ info_from_vfs_info (GtkFileSystemGnomeVFS  *system_vfs,
       gboolean is_folder;
 
       if (is_desktop)
-	is_folder = is_desktop_file_a_folder (ditem);
+	is_folder = is_desktop_file_a_folder (desktop_file);
       else
 	is_folder = (vfs_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY);
 
@@ -3038,7 +3023,7 @@ info_from_vfs_info (GtkFileSystemGnomeVFS  *system_vfs,
 
       if (types & GTK_FILE_INFO_MIME_TYPE && is_desktop)
         {
-	  icon_name = get_icon_name_from_desktop_file (uri);
+	  icon_name = g_key_file_get_value (desktop_file, DESKTOP_GROUP, "Icon", NULL);
 	  gtk_file_info_set_icon_name (info, icon_name);
 	  g_free (icon_name);
 	}
@@ -3067,7 +3052,7 @@ info_from_vfs_info (GtkFileSystemGnomeVFS  *system_vfs,
   gtk_file_info_set_size (info, vfs_info->size);
 
   if (is_desktop)
-    sucky_desktop_item_unref (ditem);
+    g_key_file_free (desktop_file);
 
   return info;
 }
