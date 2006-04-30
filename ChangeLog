@@ -1,3 +1,10 @@
+2006-04-30  Kristian Rietveld  <kris@imendio.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(get_folder_complete_operation): check the cache if the folder
+	wasn't added in the mean time, so we avoid adding the folder to the
+	cache twice.
+
 2006-04-26  Kristian Rietveld  <kris@imendio.com>
 
 	* file-chooser/sucky-desktop-item.[ch]: removed.

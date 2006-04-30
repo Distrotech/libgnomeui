@@ -933,6 +933,20 @@ get_folder_complete_operation (struct GetFolderData *op_data)
 
   system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (GTK_FILE_SYSTEM_HANDLE (op_data->handle)->file_system);
 
+  folder_vfs = g_hash_table_lookup (system_vfs->folders, op_data->vfs_uri);
+  if (folder_vfs)
+    {
+      /* returned this cached folder */
+      g_object_ref (folder_vfs);
+
+      (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+			     GTK_FILE_FOLDER (folder_vfs), NULL,
+			     op_data->callback_data);
+
+      g_free (op_data->vfs_uri);
+      goto out;
+    }
+
   if (is_desktop_file (op_data->file_info))
     {
       char *ditem_uri = NULL;
