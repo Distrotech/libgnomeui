@@ -266,10 +266,8 @@ static GtkFileSystemHandle *gtk_file_system_gnome_vfs_volume_mount    (GtkFileSy
 								       gpointer                          data);
 static gchar *      gtk_file_system_gnome_vfs_volume_get_display_name (GtkFileSystem       *file_system,
 								       GtkFileSystemVolume *volume);
-static GdkPixbuf *  gtk_file_system_gnome_vfs_volume_render_icon      (GtkFileSystem        *file_system,
+static gchar *      gtk_file_system_gnome_vfs_volume_get_icon_name    (GtkFileSystem        *file_system,
 								       GtkFileSystemVolume  *volume,
-								       GtkWidget            *widget,
-								       gint                  pixel_size,
 								       GError              **error);
 
 static gboolean       gtk_file_system_gnome_vfs_get_parent    (GtkFileSystem      *file_system,
@@ -295,12 +293,6 @@ static GtkFilePath *gtk_file_system_gnome_vfs_uri_to_path      (GtkFileSystem   
 								const gchar       *uri);
 static GtkFilePath *gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem     *file_system,
 								const gchar       *filename);
-
-static GdkPixbuf *gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
-							 const GtkFilePath *path,
-							 GtkWidget         *widget,
-							 gint               pixel_size,
-							 GError           **error);
 
 static gboolean gtk_file_system_gnome_vfs_insert_bookmark (GtkFileSystem     *file_system,
 							   const GtkFilePath *path,
@@ -456,7 +448,7 @@ gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
   iface->volume_get_is_mounted = gtk_file_system_gnome_vfs_volume_get_is_mounted;
   iface->volume_mount = gtk_file_system_gnome_vfs_volume_mount;
   iface->volume_get_display_name = gtk_file_system_gnome_vfs_volume_get_display_name;
-  iface->volume_render_icon = gtk_file_system_gnome_vfs_volume_render_icon;
+  iface->volume_get_icon_name = gtk_file_system_gnome_vfs_volume_get_icon_name;
   iface->get_parent = gtk_file_system_gnome_vfs_get_parent;
   iface->make_path = gtk_file_system_gnome_vfs_make_path;
   iface->parse = gtk_file_system_gnome_vfs_parse;
@@ -1826,96 +1818,13 @@ gtk_file_system_gnome_vfs_volume_get_display_name (GtkFileSystem       *file_sys
   return display_name;
 }
 
-typedef struct
-{
-  gint size;
-  GdkPixbuf *pixbuf;
-} IconCacheElement;
-
-static void
-icon_cache_element_free (IconCacheElement *element)
-{
-  if (element->pixbuf)
-    g_object_unref (element->pixbuf);
-  g_free (element);
-}
-
-static void
-icon_theme_changed (GtkIconTheme *icon_theme)
-{
-  GHashTable *cache;
-
-  /* Difference from the initial creation is that we don't
-   * reconnect the signal
-   */
-  cache = g_hash_table_new_full (g_str_hash, g_str_equal,
-				 (GDestroyNotify)g_free,
-				 (GDestroyNotify)icon_cache_element_free);
-  g_object_set_data_full (G_OBJECT (icon_theme), "gnome-vfs-gtk-file-icon-cache",
-			  cache, (GDestroyNotify)g_hash_table_destroy);
-}
-
-static GdkPixbuf *
-get_cached_icon (GtkWidget   *widget,
-		 const gchar *name,
-		 gint         pixel_size,
-		 GError     **error)
-{
-  GtkIconTheme *icon_theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (widget));
-  GHashTable *cache = g_object_get_data (G_OBJECT (icon_theme), "gnome-vfs-gtk-file-icon-cache");
-  IconCacheElement *element;
-
-  profile_start ("start", name);
-
-  if (!cache)
-    {
-      cache = g_hash_table_new_full (g_str_hash, g_str_equal,
-				     (GDestroyNotify)g_free,
-				     (GDestroyNotify)icon_cache_element_free);
-
-      g_object_set_data_full (G_OBJECT (icon_theme), "gnome-vfs-gtk-file-icon-cache",
-			      cache, (GDestroyNotify)g_hash_table_destroy);
-      g_signal_connect (icon_theme, "changed",
-			G_CALLBACK (icon_theme_changed), NULL);
-    }
-
-  element = g_hash_table_lookup (cache, name);
-  if (!element)
-    {
-      element = g_new0 (IconCacheElement, 1);
-      g_hash_table_insert (cache, g_strdup (name), element);
-    }
-
-  if (element->size != pixel_size)
-    {
-      if (element->pixbuf)
-	g_object_unref (element->pixbuf);
-      element->size = pixel_size;
-
-      /* Normally, the names are raw icon names, not filenames.  If they happen
-       * to be filenames, then they likely came from a .desktop file
-       */
-      if (g_path_is_absolute (name))
-	element->pixbuf = gdk_pixbuf_new_from_file_at_size (name, pixel_size, pixel_size, error);
-      else
-	element->pixbuf = gtk_icon_theme_load_icon (icon_theme, name, pixel_size, 0, error);
-    }
-
-  profile_end ("end", name);
-
-  return element->pixbuf ? g_object_ref (element->pixbuf) : NULL;
-}
-
-static GdkPixbuf *
-gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
-					      GtkFileSystemVolume  *volume,
-					      GtkWidget            *widget,
-					      gint                  pixel_size,
-					      GError              **error)
+static gchar *
+gtk_file_system_gnome_vfs_volume_get_icon_name (GtkFileSystem        *file_system,
+					        GtkFileSystemVolume  *volume,
+					        GError              **error)
 {
   GtkFileSystemGnomeVFS *system_vfs;
   char *icon_name, *uri;
-  GdkPixbuf *pixbuf;
   GnomeVFSVolume *mounted_volume;
 
   profile_start ("start", NULL);
@@ -1950,17 +1859,9 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
   else
     g_warning ("%p is not a valid volume", volume);
 
-  if (icon_name)
-    {
-      pixbuf = get_cached_icon (widget, icon_name, pixel_size, error);
-      g_free (icon_name);
-    }
-  else
-    pixbuf = NULL;
-
   profile_end ("end", NULL);
 
-  return pixbuf;
+  return icon_name;
 }
 
 static gboolean

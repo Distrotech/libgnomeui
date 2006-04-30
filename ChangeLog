@@ -1,6 +1,14 @@
 2006-04-30  Kristian Rietveld  <kris@imendio.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_volume_render_icon): removed,
+	(gtk_file_system_gnome_vfs_volume_get_icon_name): new function,
+	(gtk_file_system_gnome_vfs_iface_init): updated,
+	(get_cached_icon): removed along with icon caching code.
+
+2006-04-30  Kristian Rietveld  <kris@imendio.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
 	(get_folder_complete_operation): check the cache if the folder
 	wasn't added in the mean time, so we avoid adding the folder to the
 	cache twice.
