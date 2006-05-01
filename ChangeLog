@@ -1,3 +1,17 @@
+2006-05-02  Kristian Rietveld  <kris@imendio.com>
+
+	Merge of the asynchronous file chooser branch.  Please see the
+	kris-async-branch for more detailed ChangeLog entries.
+
+	* configure.in:
+	* file-chooser/Makefile.am:
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	Merge from kris-async-branch.
+
+	* file-chooser/sucky-desktop-item.h:
+	* file-chooser/sucky-desktop-item.c:
+	Merge from kris-async-branch (removed files).
+
 2006-04-19  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Remove unneeded esd and audiofile checks and

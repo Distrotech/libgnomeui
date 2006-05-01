@@ -36,6 +36,7 @@
 #include <gtk/gtkversion.h>
 
 #include <libgnomevfs/gnome-vfs.h>
+#include <libgnomevfs/gnome-vfs-file-info.h>
 #include <libgnomevfs/gnome-vfs-volume-monitor.h>
 #include <libgnomevfs/gnome-vfs-drive.h>
 #include <glib/gi18n-lib.h>
@@ -51,7 +52,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include "sucky-desktop-item.h"
 
 #undef PROFILE_FILE_CHOOSER
 #ifdef PROFILE_FILE_CHOOSER
@@ -98,6 +98,8 @@ profile_log (const char *func, int indent, const char *msg1, const char *msg2)
 #define BOOKMARKS_FILENAME ".gtk-bookmarks"
 #define BOOKMARKS_TMP_FILENAME ".gtk-bookmarks-XXXXXX"
 
+#define DESKTOP_GROUP "Desktop Entry"
+
 typedef struct _GtkFileSystemGnomeVFSClass GtkFileSystemGnomeVFSClass;
 
 #define GTK_FILE_SYSTEM_GNOME_VFS_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FILE_SYSTEM_GNOME_VFS, GtkFileSystemGnomeVFSClass))
@@ -113,6 +115,7 @@ typedef struct _GtkFileSystemGnomeVFSClass GtkFileSystemGnomeVFSClass;
 
 static GType type_gtk_file_system_gnome_vfs = 0;
 static GType type_gtk_file_folder_gnome_vfs = 0;
+static GType type_gtk_file_system_handle_gnome_vfs = 0;
 
 struct _GtkFileSystemGnomeVFSClass
 {
@@ -174,6 +177,7 @@ struct _GtkFileFolderGnomeVFS
   GHashTable *children; /* NULL if destroyed */
 
   guint is_afs_or_net : 1;
+  guint finished_loading : 1;
 };
 
 typedef struct _FolderChild FolderChild;
@@ -202,17 +206,53 @@ static void gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface         *if
 static void gtk_file_system_gnome_vfs_init       (GtkFileSystemGnomeVFS      *impl);
 static void gtk_file_system_gnome_vfs_finalize   (GObject                    *object);
 
+
+#define GTK_TYPE_FILE_SYSTEM_HANDLE_GNOME_VFS             (gtk_file_system_handle_gnome_vfs_get_type())
+#define GTK_FILE_SYSTEM_HANDLE_GNOME_VFS(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), GTK_TYPE_FILE_SYSTEM_HANDLE_GNOME_VFS, GtkFileSystemHandleGnomeVFS))
+#define GTK_IS_FILE_SYSTEM_HANDLE_GNOME_VFS(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GTK_TYPE_FILE_SYSTEM_HANDLE_GNOME_VFS))
+#define GTK_FILE_SYSTEM_HANDLE_GNOME_VFS_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), GTK_TYPE_FILE_SYSTEM_HANDLE_GNOME_VFS, GtkFileSystemHandleGnomeVFSClass))
+#define GTK_IS_FILE_SYSTEM_HANDLE_GNOME_VFS_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), GTK_TYPE_FILE_SYSTEM_HANDLE_GNOME_VFS))
+#define GTK_FILE_SYSTEM_HANDLE_GNOME_VFS_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), GTK_TYPE_FILE_SYSTEM_HANDLE_GNOME_VFS, GtkFileSystemHandleGnomeVFSClass))
+
+typedef struct _GtkFileSystemHandleGnomeVFS      GtkFileSystemHandleGnomeVFS;
+typedef struct _GtkFileSystemHandleGnomeVFSClass GtkFileSystemHandleGnomeVFSClass;
+
+struct _GtkFileSystemHandleGnomeVFS
+{
+  GtkFileSystemHandle parent_instance;
+
+  GnomeVFSAsyncHandle *vfs_handle;
+
+  gint callback_type;
+  gpointer callback_data;
+};
+
+struct _GtkFileSystemHandleGnomeVFSClass
+{
+  GtkFileSystemHandleClass parent_class;
+};
+
+
+
 static GSList *             gtk_file_system_gnome_vfs_list_volumes        (GtkFileSystem     *file_system);
 static GtkFileSystemVolume *gtk_file_system_gnome_vfs_get_volume_for_path (GtkFileSystem     *file_system,
 									   const GtkFilePath *path);
 
-static GtkFileFolder *gtk_file_system_gnome_vfs_get_folder    (GtkFileSystem      *file_system,
-							       const GtkFilePath  *path,
-							       GtkFileInfoType     types,
-							       GError            **error);
-static gboolean       gtk_file_system_gnome_vfs_create_folder (GtkFileSystem      *file_system,
-							       const GtkFilePath  *path,
-							       GError            **error);
+static GtkFileSystemHandle *gtk_file_system_gnome_vfs_get_folder (GtkFileSystem                  *file_system,
+								  const GtkFilePath              *path,
+								  GtkFileInfoType                 types,
+								  GtkFileSystemGetFolderCallback  callback,
+								  gpointer                        data);
+static GtkFileSystemHandle *gtk_file_system_gnome_vfs_get_info   (GtkFileSystem                  *file_system,
+								  const GtkFilePath              *path,
+								  GtkFileInfoType                 types,
+								  GtkFileSystemGetInfoCallback    callback,
+								  gpointer                        data);
+static GtkFileSystemHandle *gtk_file_system_gnome_vfs_create_folder (GtkFileSystem                     *file_system,
+								     const GtkFilePath                 *path,
+								     GtkFileSystemCreateFolderCallback  callback,
+								     gpointer                           data);
+static void                 gtk_file_system_gnome_vfs_cancel_operation (GtkFileSystemHandle               *handle);
 
 static void         gtk_file_system_gnome_vfs_volume_free             (GtkFileSystem       *file_system,
 								       GtkFileSystemVolume *volume);
@@ -220,15 +260,14 @@ static GtkFilePath *gtk_file_system_gnome_vfs_volume_get_base_path    (GtkFileSy
 								       GtkFileSystemVolume *volume);
 static gboolean     gtk_file_system_gnome_vfs_volume_get_is_mounted   (GtkFileSystem       *file_system,
 								       GtkFileSystemVolume *volume);
-static gboolean     gtk_file_system_gnome_vfs_volume_mount            (GtkFileSystem       *file_system,
-								       GtkFileSystemVolume *volume,
-								       GError             **error);
+static GtkFileSystemHandle *gtk_file_system_gnome_vfs_volume_mount    (GtkFileSystem                    *file_system,
+								       GtkFileSystemVolume              *volume,
+								       GtkFileSystemVolumeMountCallback  callback,
+								       gpointer                          data);
 static gchar *      gtk_file_system_gnome_vfs_volume_get_display_name (GtkFileSystem       *file_system,
 								       GtkFileSystemVolume *volume);
-static GdkPixbuf *  gtk_file_system_gnome_vfs_volume_render_icon      (GtkFileSystem        *file_system,
+static gchar *      gtk_file_system_gnome_vfs_volume_get_icon_name    (GtkFileSystem        *file_system,
 								       GtkFileSystemVolume  *volume,
-								       GtkWidget            *widget,
-								       gint                  pixel_size,
 								       GError              **error);
 
 static gboolean       gtk_file_system_gnome_vfs_get_parent    (GtkFileSystem      *file_system,
@@ -255,12 +294,6 @@ static GtkFilePath *gtk_file_system_gnome_vfs_uri_to_path      (GtkFileSystem   
 static GtkFilePath *gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem     *file_system,
 								const gchar       *filename);
 
-static GdkPixbuf *gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
-							 const GtkFilePath *path,
-							 GtkWidget         *widget,
-							 gint               pixel_size,
-							 GError           **error);
-
 static gboolean gtk_file_system_gnome_vfs_insert_bookmark (GtkFileSystem     *file_system,
 							   const GtkFilePath *path,
 							   gint               position,
@@ -282,6 +315,10 @@ static void  gtk_file_folder_gnome_vfs_init       (GtkFileFolderGnomeVFS      *i
 static void  gtk_file_folder_gnome_vfs_finalize   (GObject                    *object);
 static void  gtk_file_folder_gnome_vfs_dispose    (GObject                    *object);
 
+static GType gtk_file_system_handle_gnome_vfs_get_type (void);
+static void  gtk_file_system_handle_gnome_vfs_init     (GtkFileSystemHandleGnomeVFS *handle);
+static GtkFileSystemHandleGnomeVFS *gtk_file_system_handle_gnome_vfs_new (GtkFileSystem *file_system);
+
 static GtkFileInfo *gtk_file_folder_gnome_vfs_get_info      (GtkFileFolder      *folder,
 							     const GtkFilePath  *path,
 							     GError            **error);
@@ -291,10 +328,11 @@ static gboolean     gtk_file_folder_gnome_vfs_list_children (GtkFileFolder      
 
 static gboolean     gtk_file_folder_gnome_vfs_is_finished_loading (GtkFileFolder *folder);
 
-static GtkFileInfo *           info_from_vfs_info (const gchar      *uri,
-						   GnomeVFSFileInfo *vfs_info,
-						   GtkFileInfoType   types,
-						   GError          **error);
+static GtkFileInfo *           info_from_vfs_info (GtkFileSystemGnomeVFS  *system_vfs,
+						   const gchar            *uri,
+						   GnomeVFSFileInfo       *vfs_info,
+						   GtkFileInfoType         types,
+						   GError                **error);
 static GnomeVFSFileInfoOptions get_options        (GtkFileInfoType   types);
 
 static void volume_mount_unmount_cb (GnomeVFSVolumeMonitor *monitor,
@@ -330,11 +368,9 @@ static void     set_vfs_error     (GnomeVFSResult   result,
 static gboolean has_valid_scheme  (const char      *uri);
 
 static FolderChild *lookup_folder_child (GtkFileFolder     *folder,
-					 const GtkFilePath *path,
-					 GError           **error);
+					 const GtkFilePath *path);
 static FolderChild *lookup_folder_child_from_uri (GtkFileFolder     *folder,
-						  const char        *uri,
-						  GError           **error);
+						  const char        *uri);
 
 static GObjectClass *system_parent_class;
 static GObjectClass *folder_parent_class;
@@ -349,6 +385,25 @@ static GObjectClass *folder_parent_class;
  */
 static const char *network_servers_volume_token = "Network Servers";
 #define IS_NETWORK_SERVERS_VOLUME_TOKEN(volume) ((gpointer) (volume) == (gpointer) network_servers_volume_token)
+
+typedef void (* VfsIdleCallback) (gpointer data);
+
+struct vfs_idle_callback
+{
+  VfsIdleCallback callback;
+  gpointer callback_data;
+};
+
+static void queue_vfs_idle_callback (VfsIdleCallback callback, gpointer callback_data);
+
+
+enum
+{
+  CALLBACK_GET_FOLDER = 1,
+  CALLBACK_GET_FILE_INFO,
+  CALLBACK_CREATE_FOLDER,
+  CALLBACK_VOLUME_MOUNT
+};
 
 /*
  * GtkFileSystemGnomeVFS
@@ -393,13 +448,15 @@ gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
   iface->list_volumes = gtk_file_system_gnome_vfs_list_volumes;
   iface->get_volume_for_path = gtk_file_system_gnome_vfs_get_volume_for_path;
   iface->get_folder = gtk_file_system_gnome_vfs_get_folder;
+  iface->get_info = gtk_file_system_gnome_vfs_get_info;
   iface->create_folder = gtk_file_system_gnome_vfs_create_folder;
+  iface->cancel_operation = gtk_file_system_gnome_vfs_cancel_operation;
   iface->volume_free = gtk_file_system_gnome_vfs_volume_free;
   iface->volume_get_base_path = gtk_file_system_gnome_vfs_volume_get_base_path;
   iface->volume_get_is_mounted = gtk_file_system_gnome_vfs_volume_get_is_mounted;
   iface->volume_mount = gtk_file_system_gnome_vfs_volume_mount;
   iface->volume_get_display_name = gtk_file_system_gnome_vfs_volume_get_display_name;
-  iface->volume_render_icon = gtk_file_system_gnome_vfs_volume_render_icon;
+  iface->volume_get_icon_name = gtk_file_system_gnome_vfs_volume_get_icon_name;
   iface->get_parent = gtk_file_system_gnome_vfs_get_parent;
   iface->make_path = gtk_file_system_gnome_vfs_make_path;
   iface->parse = gtk_file_system_gnome_vfs_parse;
@@ -407,7 +464,6 @@ gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface *iface)
   iface->path_to_filename = gtk_file_system_gnome_vfs_path_to_filename;
   iface->uri_to_path = gtk_file_system_gnome_vfs_uri_to_path;
   iface->filename_to_path = gtk_file_system_gnome_vfs_filename_to_path;
-  iface->render_icon = gtk_file_system_gnome_vfs_render_icon;
   iface->insert_bookmark = gtk_file_system_gnome_vfs_insert_bookmark;
   iface->remove_bookmark = gtk_file_system_gnome_vfs_remove_bookmark;
   iface->list_bookmarks = gtk_file_system_gnome_vfs_list_bookmarks;
@@ -637,11 +693,8 @@ load_dir (GtkFileFolderGnomeVFS *folder_vfs)
 
   profile_start ("start", folder_vfs->uri);
 
-  if (folder_vfs->async_handle)
-    {
-      gnome_vfs_async_cancel (folder_vfs->async_handle);
-      g_hash_table_foreach (folder_vfs->children, unmark_all_fn, NULL);
-    }
+  if (folder_vfs->async_handle || folder_vfs->finished_loading)
+    return;
 
   gnome_authentication_manager_push_async ();
 
@@ -775,21 +828,23 @@ is_desktop_file (GnomeVFSFileInfo *vfs_info)
 
 /* Returns whether a .desktop file indicates a link to a folder */
 static gboolean
-is_desktop_file_a_folder (SuckyDesktopItem *ditem)
+is_desktop_file_a_folder (GKeyFile *desktop_file)
 {
-  SuckyDesktopItemType ditem_type;
+  gboolean ret;
+  gchar *type;
 
-  ditem_type = sucky_desktop_item_get_entry_type (ditem);
-
-  if (!(ditem_type == SUCKY_DESKTOP_ITEM_TYPE_LINK
-	|| ditem_type == SUCKY_DESKTOP_ITEM_TYPE_FSDEVICE))
+  type = g_key_file_get_value (desktop_file, DESKTOP_GROUP, "Type", NULL);
+  if (!type)
     return FALSE;
+
+  ret = !strncmp (type, "Link", 4) || !strncmp (type, "FSDevice", 8);
+  g_free  (type);
 
   /* FIXME: do we have to get the link URI and figure out its type?  For now,
    * we'll just assume that it does link to a folder...
    */
 
-  return TRUE;
+  return ret;
 }
 
 /* Checks whether a vfs_info matches what we know about the AFS directories on
@@ -815,17 +870,21 @@ static char *
 get_desktop_link_uri (const char *desktop_uri,
 		      GError    **error)
 {
-  SuckyDesktopItem *ditem;
-  const char *ditem_url;
-  char *ret_uri;
+  gboolean ret;
+  GKeyFile *desktop_file;
+  char *ditem_url;
+  char *tmp;
 
-  ditem = sucky_desktop_item_new_from_uri (desktop_uri, 0, error);
-  if (ditem == NULL)
+  desktop_file = g_key_file_new ();
+  tmp = gnome_vfs_get_local_path_from_uri (desktop_uri);
+  ret = g_key_file_load_from_file (desktop_file, tmp,
+				   G_KEY_FILE_KEEP_TRANSLATIONS, NULL);
+  g_free (tmp);
+
+  if (!ret)
     return NULL;
 
-  ret_uri = NULL;
-
-  if (!is_desktop_file_a_folder (ditem))
+  if (!is_desktop_file_a_folder (desktop_file))
     {
       g_set_error (error,
 		   GTK_FILE_SYSTEM_ERROR,
@@ -835,7 +894,7 @@ get_desktop_link_uri (const char *desktop_uri,
       goto out;
     }
 
-  ditem_url = sucky_desktop_item_get_string (ditem, SUCKY_DESKTOP_ITEM_URL);
+  ditem_url = g_key_file_get_value (desktop_file, DESKTOP_GROUP, "URL", NULL);
   if (ditem_url == NULL || strlen (ditem_url) == 0)
     {
       g_set_error (error,
@@ -846,27 +905,284 @@ get_desktop_link_uri (const char *desktop_uri,
       goto out;
     }
 
-  ret_uri = g_strdup (ditem_url);
-
  out:
+  g_key_file_free (desktop_file);
 
-  sucky_desktop_item_unref (ditem);
-  return ret_uri;
+  return ditem_url;
 }
 
-static GtkFileFolder *
-gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
-				      const GtkFilePath *path,
-				      GtkFileInfoType    types,
-				      GError           **error)
+
+struct GetFolderData
+{
+  GtkFileSystemHandleGnomeVFS *handle;
+  GtkFileSystemGetFolderCallback callback;
+  gpointer callback_data;
+  GtkFileFolderGnomeVFS *folder_vfs;
+  GtkFileFolderGnomeVFS *parent_folder;
+  GnomeVFSFileInfo *file_info;
+  GnomeVFSURI *uri;
+  char *vfs_uri;
+  GtkFileInfoType types;
+};
+
+static void
+get_folder_complete_operation (struct GetFolderData *op_data)
+{
+  GError *error = NULL;
+  GnomeVFSMonitorHandle *monitor = NULL;
+  GtkFileSystemGnomeVFS *system_vfs;
+  GtkFileFolderGnomeVFS *folder_vfs;
+  char *old_uri = op_data->vfs_uri;
+  gboolean free_old_uri = FALSE;
+
+  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (GTK_FILE_SYSTEM_HANDLE (op_data->handle)->file_system);
+
+  folder_vfs = g_hash_table_lookup (system_vfs->folders, op_data->vfs_uri);
+  if (folder_vfs)
+    {
+      /* returned this cached folder */
+      g_object_ref (folder_vfs);
+
+      (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+			     GTK_FILE_FOLDER (folder_vfs), NULL,
+			     op_data->callback_data);
+
+      g_free (op_data->vfs_uri);
+      goto out;
+    }
+
+  if (is_desktop_file (op_data->file_info))
+    {
+      char *ditem_uri = NULL;
+
+      ditem_uri = get_desktop_link_uri (op_data->vfs_uri, &error);
+      if (ditem_uri == NULL)
+	{
+	  /* Couldn't get desktop link uri */
+	  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+				 NULL, error, op_data->callback_data);
+
+	  g_free (op_data->vfs_uri);
+
+	  goto out;
+	}
+
+      free_old_uri = TRUE;
+      op_data->vfs_uri = ditem_uri;
+    }
+  else if (op_data->file_info->type != GNOME_VFS_FILE_TYPE_DIRECTORY)
+    {
+      g_set_error (&error,
+		   GTK_FILE_SYSTEM_ERROR,
+		   GTK_FILE_SYSTEM_ERROR_NOT_FOLDER,
+		   _("%s is not a folder"),
+		   op_data->uri);
+
+      (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+			     NULL, error, op_data->callback_data);
+
+      g_free (op_data->vfs_uri);
+      g_error_free (error);
+
+      goto out;
+    }
+
+  /* Create the folder */
+  folder_vfs = g_object_new (GTK_TYPE_FILE_FOLDER_GNOME_VFS, NULL);
+
+  folder_vfs->is_afs_or_net = is_vfs_info_an_afs_folder (system_vfs,
+						         op_data->file_info);
+  if (!folder_vfs->is_afs_or_net)
+    {
+      GnomeVFSResult ret;
+      char *tmp_uri;
+
+      tmp_uri = gnome_vfs_uri_to_string (op_data->uri, 0);
+
+      gnome_authentication_manager_push_sync ();
+      ret = gnome_vfs_monitor_add (&monitor,
+				   tmp_uri,
+				   GNOME_VFS_MONITOR_DIRECTORY,
+				   monitor_callback, folder_vfs);
+      gnome_authentication_manager_pop_sync ();
+
+      g_free (tmp_uri);
+
+      if (ret != GNOME_VFS_OK && ret != GNOME_VFS_ERROR_NOT_SUPPORTED)
+	{
+	  char *uri;
+
+	  uri = gnome_vfs_uri_to_string (op_data->uri, 0);
+	  set_vfs_error (ret, uri, &error);
+	  g_free (uri);
+
+	  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), NULL,
+				 error, op_data->callback_data);
+
+	  g_free (op_data->vfs_uri);
+	  g_object_unref (folder_vfs);
+
+	  goto out;
+	}
+    }
+
+  folder_vfs->system = system_vfs;
+  folder_vfs->uri = op_data->vfs_uri; /* takes ownership */
+  folder_vfs->types = op_data->types;
+  folder_vfs->monitor = NULL;
+  folder_vfs->async_handle = NULL;
+  folder_vfs->finished_loading = 0;
+  folder_vfs->children = g_hash_table_new_full (g_str_hash,
+						g_str_equal,
+						NULL,
+						(GDestroyNotify) folder_child_free);
+
+  g_hash_table_insert (system_vfs->folders, folder_vfs->uri, folder_vfs);
+
+  if (op_data->parent_folder
+      && !g_hash_table_lookup (op_data->parent_folder->children, old_uri))
+    {
+      GSList uris;
+      FolderChild *child;
+
+      /* Make sure this child is in the parent folder */
+      child = folder_child_new (old_uri, op_data->file_info,
+                                op_data->parent_folder->async_handle ? TRUE : FALSE);
+
+      g_hash_table_insert (op_data->parent_folder->children, child->uri, child);
+
+      uris.next = NULL;
+      uris.data = gtk_file_path_new_steal (old_uri);
+      g_signal_emit_by_name (op_data->parent_folder, "files-added", &uris);
+    }
+
+  folder_vfs->monitor = monitor;
+
+  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+			 GTK_FILE_FOLDER (folder_vfs), NULL,
+			 op_data->callback_data);
+
+
+  /* Now initiate a directory load */
+  if (folder_vfs->is_afs_or_net)
+    load_afs_dir (folder_vfs);
+  else
+    load_dir (folder_vfs);
+
+out:
+  if (op_data->parent_folder)
+    g_object_unref (op_data->parent_folder);
+
+  op_data->handle->callback_type = 0;
+  op_data->handle->callback_data = NULL;
+
+  if (free_old_uri)
+    g_free (old_uri);
+
+  g_object_unref (op_data->handle);
+  g_free (op_data);
+}
+
+static void
+get_folder_cached_callback (gpointer data)
+{
+  struct GetFolderData *op_data = data;
+
+  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+			 GTK_FILE_FOLDER (op_data->folder_vfs), NULL,
+			 op_data->callback_data);
+
+  g_object_unref (op_data->handle);
+  g_free (op_data);
+}
+
+static void
+get_folder_file_info_callback (GnomeVFSAsyncHandle *handle,
+                               GList               *results,
+                               gpointer             callback_data)
+{
+  GError *error = NULL;
+  GnomeVFSGetFileInfoResult *result;
+  struct GetFolderData *op_data = callback_data;
+  GtkFileFolderGnomeVFS *folder_vfs = op_data->folder_vfs;
+
+  gdk_threads_enter ();
+
+  g_assert (op_data->handle->vfs_handle == handle);
+  g_assert (g_list_length (results) == 1);
+
+  op_data->handle->vfs_handle = NULL;
+
+  result = results->data;
+
+  if (result->result != GNOME_VFS_OK)
+    {
+      char *uri;
+
+      uri = gnome_vfs_uri_to_string (result->uri, 0);
+      set_vfs_error (result->result, uri, &error);
+      g_free (uri);
+
+      (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), NULL,
+			     error, op_data->callback_data);
+
+      g_error_free (error);
+
+      if (op_data->parent_folder)
+	g_object_unref (op_data->parent_folder);
+
+      op_data->handle->callback_type = 0;
+      op_data->handle->callback_data = NULL;
+
+      g_object_unref (op_data->handle);
+      g_free (op_data);
+
+      goto out;
+    }
+
+  op_data->file_info = result->file_info;
+  op_data->uri = result->uri;
+
+  get_folder_complete_operation (op_data);
+
+out:
+  gdk_threads_leave ();
+}
+
+static void
+get_folder_vfs_info_cached_callback (gpointer data)
+{
+  GnomeVFSURI *uri;
+  GnomeVFSFileInfo *file_info;
+  struct GetFolderData *op_data = data;
+
+  uri = op_data->uri;
+  file_info = op_data->file_info;
+
+  get_folder_complete_operation (op_data);
+
+  gnome_vfs_uri_unref (uri);
+  gnome_vfs_file_info_unref (file_info);
+}
+
+static GtkFileSystemHandle *
+gtk_file_system_gnome_vfs_get_folder (GtkFileSystem                  *file_system,
+				      const GtkFilePath              *path,
+				      GtkFileInfoType                 types,
+				      GtkFileSystemGetFolderCallback  callback,
+				      gpointer                        data)
 {
   char *uri;
+  GList *uris = NULL;
   GtkFilePath *parent_path;
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
-  GtkFileFolderGnomeVFS *folder_vfs;
+  GtkFileFolderGnomeVFS *folder_vfs = NULL;
+  GtkFileFolderGnomeVFS *parent_folder = NULL;
   GnomeVFSMonitorHandle *monitor;
   GnomeVFSResult result;
   GnomeVFSFileInfo *vfs_info;
+  GnomeVFSFileInfoOptions options = 0;
+  struct GetFolderData *op_data = NULL;
 
   profile_start ("start", (char *) path);
 
@@ -875,12 +1191,28 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
   if (folder_vfs)
     {
       folder_vfs->types |= types;
+
       g_free (uri);
+      g_object_ref (folder_vfs);
+
+      op_data = g_new0 (struct GetFolderData, 1);
+      op_data->handle = gtk_file_system_handle_gnome_vfs_new (file_system);
+      op_data->folder_vfs = folder_vfs;
+      op_data->callback = callback;
+      op_data->callback_data = data;
+
+      queue_vfs_idle_callback (get_folder_cached_callback, op_data);
+
+      /* We don't have to initiate a reload to make up for the added
+       * types, since gnome-vfs loads all file info we need by
+       * default (and get_options() explicitly requests the mime type).
+       */
+
       profile_end ("returning cached folder", NULL);
-      return g_object_ref (folder_vfs);
+      return GTK_FILE_SYSTEM_HANDLE (g_object_ref (op_data->handle));
     }
 
-  if (!gtk_file_system_get_parent (file_system, path, &parent_path, error))
+  if (!gtk_file_system_get_parent (file_system, path, &parent_path, NULL))
     {
       g_free (uri);
       profile_end ("returning NULL because of lack of parent", NULL);
@@ -892,7 +1224,6 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
   if (parent_path)
     {
       char *parent_uri;
-      GtkFileFolderGnomeVFS *parent_folder;
 
       /* If the parent folder is loaded, make sure we exist in it */
       parent_uri = make_uri_canonical (gtk_file_path_get_string (parent_path));
@@ -904,132 +1235,377 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem     *file_system,
 	{
 	  FolderChild *child;
 
-	  child = lookup_folder_child_from_uri (GTK_FILE_FOLDER (parent_folder), uri, error);
-	  if (!child)
+	  child = lookup_folder_child_from_uri (GTK_FILE_FOLDER (parent_folder), uri);
+
+	  if (child)
 	    {
-	      g_free (uri);
-	      profile_end ("returning NULL because lookup_folder_child_from_uri() failed", NULL);
-	      return NULL;
+	      vfs_info = child->info;
+	      gnome_vfs_file_info_ref (vfs_info);
+	      g_assert (vfs_info != NULL);
 	    }
-
-	  vfs_info = child->info;
-	  gnome_vfs_file_info_ref (vfs_info);
-	  g_assert (vfs_info != NULL);
 	}
     }
 
-  if (!vfs_info)
+  op_data = g_new0 (struct GetFolderData, 1);
+  op_data->handle = gtk_file_system_handle_gnome_vfs_new (file_system);
+  op_data->types = types;
+  op_data->vfs_uri = uri;
+  op_data->callback = callback;
+  op_data->callback_data = data;
+  op_data->parent_folder = parent_folder;
+  if (vfs_info)
     {
-      vfs_info = gnome_vfs_file_info_new ();
-      gnome_authentication_manager_push_sync ();
-      result = gnome_vfs_get_file_info (uri, vfs_info, get_options (GTK_FILE_INFO_IS_FOLDER));
-      gnome_authentication_manager_pop_sync ();
-
-      if (result != GNOME_VFS_OK)
-	{
-	  set_vfs_error (result, uri, error);
-	  gnome_vfs_file_info_unref (vfs_info);
-	  g_free (uri);
-	  profile_end ("returning NULL because couldn't get file info", NULL);
-	  return NULL;
-	}
+      op_data->file_info = gnome_vfs_file_info_new ();
+      gnome_vfs_file_info_copy (op_data->file_info, vfs_info);
+      op_data->uri = gnome_vfs_uri_new (uri);
+    }
+  else
+    {
+      op_data->file_info = NULL;
+      op_data->uri = NULL;
     }
 
-  if (is_desktop_file (vfs_info))
+  if (parent_folder)
     {
-      char *ditem_uri;
-
-      ditem_uri = get_desktop_link_uri (uri, error);
-      if (ditem_uri == NULL)
-	{
-	  g_free (uri);
-	  gnome_vfs_file_info_unref (vfs_info);
-	  profile_end ("returning NULL because couldn't get desktop link uri", NULL);
-	  return NULL;
-	}
-
-      g_free (uri);
-      uri = ditem_uri;
+      g_object_ref (parent_folder);
+      options = get_options (parent_folder->types);
     }
-  else if (vfs_info->type != GNOME_VFS_FILE_TYPE_DIRECTORY)
+  options |= get_options (GTK_FILE_INFO_IS_FOLDER);
+
+  op_data->handle->callback_type = CALLBACK_GET_FOLDER;
+  op_data->handle->callback_data = op_data;
+
+  if (op_data->file_info)
     {
-      g_set_error (error,
-		   GTK_FILE_SYSTEM_ERROR,
-		   GTK_FILE_SYSTEM_ERROR_NOT_FOLDER,
-		   _("%s is not a folder"),
-		   uri);
-      g_free (uri);
-      gnome_vfs_file_info_unref (vfs_info);
-      profile_end ("returning NULL because not a folder", NULL);
-      return NULL;
+      queue_vfs_idle_callback (get_folder_vfs_info_cached_callback, op_data);
     }
-
-  folder_vfs = g_object_new (GTK_TYPE_FILE_FOLDER_GNOME_VFS, NULL);
-
-  folder_vfs->is_afs_or_net = is_vfs_info_an_afs_folder (system_vfs, vfs_info);
-
-  gnome_vfs_file_info_unref (vfs_info);
-  vfs_info = NULL;
-
-  monitor = NULL;
-
-  if (!folder_vfs->is_afs_or_net)
+  else
     {
-      gnome_authentication_manager_push_sync ();
-      result = gnome_vfs_monitor_add (&monitor,
-				      uri,
-				      GNOME_VFS_MONITOR_DIRECTORY,
-				      monitor_callback, folder_vfs);
-      gnome_authentication_manager_pop_sync ();
-      if (result != GNOME_VFS_OK && result != GNOME_VFS_ERROR_NOT_SUPPORTED)
-	{
-	  g_free (uri);
-	  g_object_unref (folder_vfs);
-	  set_vfs_error (result, uri, error);
-	  profile_end ("returning NULL because couldn't add monitor", NULL);
-	  return NULL;
-	}
+      uris = g_list_append (uris, gnome_vfs_uri_new (uri));
+
+      gnome_authentication_manager_push_async ();
+      gnome_vfs_async_get_file_info (&op_data->handle->vfs_handle,
+				     uris,
+				     options,
+				     GNOME_VFS_PRIORITY_DEFAULT,
+				     get_folder_file_info_callback,
+				     op_data);
+      gnome_authentication_manager_pop_async ();
+
+      gnome_vfs_uri_list_free (uris);
     }
-
-  folder_vfs->system = system_vfs;
-  folder_vfs->uri = uri; /* takes ownership */
-  folder_vfs->types = types;
-  folder_vfs->monitor = monitor;
-  folder_vfs->async_handle = NULL;
-  folder_vfs->children = g_hash_table_new_full (g_str_hash,
-						g_str_equal,
-						NULL,
-						(GDestroyNotify) folder_child_free);
-
-  g_hash_table_insert (system_vfs->folders, folder_vfs->uri, folder_vfs);
 
   profile_end ("end", (char *) path);
 
-  return GTK_FILE_FOLDER (folder_vfs);
+  return GTK_FILE_SYSTEM_HANDLE (g_object_ref (op_data->handle));
 }
 
-static gboolean
-gtk_file_system_gnome_vfs_create_folder (GtkFileSystem     *file_system,
-					 const GtkFilePath *path,
-					 GError           **error)
+struct GetFileInfoData
 {
-  const gchar *uri = gtk_file_path_get_string (path);
-  GnomeVFSResult result;
+  GtkFileSystemHandleGnomeVFS *handle;
+  GtkFileInfoType types;
+  GtkFileSystemGetInfoCallback callback;
+  gpointer callback_data;
+};
 
-  gnome_authentication_manager_push_sync ();
-  result = gnome_vfs_make_directory (uri,
-				     GNOME_VFS_PERM_USER_ALL |
-				     GNOME_VFS_PERM_GROUP_ALL |
-				     GNOME_VFS_PERM_OTHER_READ | GNOME_VFS_PERM_OTHER_EXEC);
-  gnome_authentication_manager_pop_sync ();
+static void
+get_file_info_callback (GnomeVFSAsyncHandle *vfs_handle,
+                        GList               *results,
+			gpointer             data)
+{
+  gchar *uri = NULL;
+  GError *error = NULL;
+  GtkFileInfo *file_info = NULL;
+  GnomeVFSGetFileInfoResult *result = results->data;
+  struct GetFileInfoData *op_data = data;
 
-  if (result != GNOME_VFS_OK)
+  gdk_threads_enter ();
+
+  g_assert (op_data->handle->vfs_handle == vfs_handle);
+
+  op_data->handle->vfs_handle = NULL;
+
+  uri = gnome_vfs_uri_to_string (result->uri, 0);
+
+  if (result->result != GNOME_VFS_OK)
     {
-      set_vfs_error (result, uri, error);
-      return FALSE;
+      set_vfs_error (result->result, uri, &error);
+
+      (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), NULL,
+			     error, op_data->callback_data);
+
+      goto out;
+    }
+  
+  file_info = info_from_vfs_info (GTK_FILE_SYSTEM_GNOME_VFS (GTK_FILE_SYSTEM_HANDLE (op_data->handle)->file_system),
+				  uri,
+                                  result->file_info,
+                                  op_data->types, &error);
+  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), file_info,
+			 error, op_data->callback_data);
+
+out:
+  if (uri)
+    g_free (uri);
+  if (error)
+    g_error_free (error);
+  if (file_info)
+    gtk_file_info_free (file_info);
+
+  op_data->handle->callback_type = 0;
+  op_data->handle->callback_data = NULL;
+
+  g_object_unref (op_data->handle);
+  g_free (op_data);
+
+  gdk_threads_leave ();
+}
+
+static GtkFileSystemHandle *
+gtk_file_system_gnome_vfs_get_info (GtkFileSystem                 *file_system,
+				    const GtkFilePath             *path,
+				    GtkFileInfoType                types,
+				    GtkFileSystemGetInfoCallback   callback,
+				    gpointer                       data)
+{
+  GnomeVFSResult result;
+  GList uris;
+  GtkFileSystemHandleGnomeVFS *handle;
+  struct GetFileInfoData *op_data;
+  char *uri;
+
+  uri = make_uri_canonical (gtk_file_path_get_string (path));
+  handle = gtk_file_system_handle_gnome_vfs_new (file_system);
+
+  op_data = g_new0 (struct GetFileInfoData, 1);
+  op_data->handle = g_object_ref (handle);
+  op_data->types = types;
+  op_data->callback = callback;
+  op_data->callback_data = data;
+
+  uris.prev = uris.next = NULL;
+  uris.data = gnome_vfs_uri_new (uri);
+  g_free (uri);
+
+  op_data->handle->callback_type = CALLBACK_GET_FILE_INFO;
+  op_data->handle->callback_data = op_data;
+
+  gnome_authentication_manager_push_async ();
+  gnome_vfs_async_get_file_info (&handle->vfs_handle,
+				 &uris,
+				 get_options (types),
+				 GNOME_VFS_PRIORITY_DEFAULT,
+				 get_file_info_callback,
+				 op_data);
+  gnome_authentication_manager_pop_async ();
+
+  gnome_vfs_uri_unref (uris.data);
+
+  return GTK_FILE_SYSTEM_HANDLE (handle);
+}
+
+struct CreateFolderData
+{
+  GtkFileSystemHandleGnomeVFS *handle;
+  GtkFilePath *path;
+  GtkFileSystemCreateFolderCallback callback;
+  gpointer callback_data;
+  gboolean error_reported;
+};
+
+
+static int
+create_folder_progress_cb (GnomeVFSAsyncHandle      *vfs_handle,
+			   GnomeVFSXferProgressInfo *progress_info,
+			   gpointer                  data)
+{
+  int ret = 0;
+  struct CreateFolderData *op_data = data;
+
+  gdk_threads_enter ();
+
+  g_assert (op_data->handle->vfs_handle == vfs_handle);
+
+  switch (progress_info->phase)
+    {
+      case GNOME_VFS_XFER_PHASE_COMPLETED:
+	if (!op_data->error_reported)
+	  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+				 op_data->path, NULL, op_data->callback_data);
+
+	break;
+
+      default:
+	switch (progress_info->status)
+	  {
+	    case GNOME_VFS_XFER_PROGRESS_STATUS_DUPLICATE:
+	      ret = GNOME_VFS_XFER_ERROR_ACTION_ABORT;
+	      /* fall through */
+	    case GNOME_VFS_XFER_PROGRESS_STATUS_VFSERROR:
+	      if (!op_data->error_reported)
+	        {
+		  GError *error = NULL;
+	
+		  set_vfs_error (progress_info->vfs_status,
+				 gtk_file_path_get_string (op_data->path),
+				 &error);
+
+		  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+					 op_data->path, error, op_data->callback_data);
+		  g_error_free (error);
+
+		  op_data->error_reported = TRUE;
+		}
+
+	      gdk_threads_leave ();
+
+	      return ret;
+
+	    case GNOME_VFS_XFER_PROGRESS_STATUS_OK:
+	      /* not completed, don't free the handle and op_data yet */
+	      gdk_threads_leave ();
+
+	      return 0;
+
+	    default:
+	      break;
+	  }
+	break;
     }
 
-  return TRUE;
+out:
+  op_data->handle->callback_type = 0;
+  op_data->handle->callback_data = NULL;
+
+  g_object_unref (op_data->handle);
+  gtk_file_path_free (op_data->path);
+  g_free (op_data);
+
+  gdk_threads_leave ();
+
+  return ret;
+}
+
+static GtkFileSystemHandle *
+gtk_file_system_gnome_vfs_create_folder (GtkFileSystem                     *file_system,
+					 const GtkFilePath                 *path,
+					 GtkFileSystemCreateFolderCallback  callback,
+					 gpointer                           data)
+{
+  char *uri;
+  GList uris;
+  struct CreateFolderData *op_data;
+
+  op_data = g_new (struct CreateFolderData, 1);
+  op_data->handle = gtk_file_system_handle_gnome_vfs_new (file_system);
+  op_data->path = gtk_file_path_copy (path);
+  op_data->callback = callback;
+  op_data->callback_data = data;
+  op_data->error_reported = FALSE;
+
+  op_data->handle->callback_type = CALLBACK_CREATE_FOLDER;
+  op_data->handle->callback_data = op_data;
+
+  uri = make_uri_canonical (gtk_file_path_get_string (path));
+  uris.prev = uris.next = NULL;
+  uris.data = gnome_vfs_uri_new (uri);
+  g_free (uri);
+
+  gnome_authentication_manager_push_async ();
+  gnome_vfs_async_xfer (&op_data->handle->vfs_handle,
+			NULL,
+			&uris,
+			GNOME_VFS_XFER_NEW_UNIQUE_DIRECTORY,
+			GNOME_VFS_XFER_ERROR_MODE_ABORT,
+			GNOME_VFS_XFER_OVERWRITE_MODE_ABORT,
+			GNOME_VFS_PRIORITY_DEFAULT,
+			create_folder_progress_cb, op_data,
+			NULL, NULL);
+
+  gnome_vfs_uri_unref (uris.data);
+
+  return GTK_FILE_SYSTEM_HANDLE (g_object_ref (op_data->handle));
+}
+
+static void
+cancel_operation_callback (gpointer data)
+{
+  GtkFileSystemHandle *handle = GTK_FILE_SYSTEM_HANDLE (data);
+  GtkFileSystemHandleGnomeVFS *handle_vfs = GTK_FILE_SYSTEM_HANDLE_GNOME_VFS (data);
+
+  switch (handle_vfs->callback_type)
+    {
+      case CALLBACK_GET_FOLDER:
+	{
+	  struct GetFolderData *data = handle_vfs->callback_data;
+
+	  (* data->callback) (handle, NULL, NULL, data->callback_data);
+
+	  if (data->folder_vfs)
+	    g_object_unref (data->folder_vfs);
+	  if (data->parent_folder)
+	    g_object_unref (data->parent_folder);
+	  if (data->uri)
+	    gnome_vfs_uri_unref (data->uri);
+	  if (data->file_info)
+	    gnome_vfs_file_info_unref (data->file_info);
+	  if (data->vfs_uri)
+	    g_free (data->vfs_uri);
+	  g_free (data);
+	  break;
+	}
+
+      case CALLBACK_GET_FILE_INFO:
+	{
+	  struct GetFileInfoData *data = handle_vfs->callback_data;
+
+	  (* data->callback) (handle, NULL, NULL, data->callback_data);
+
+	  g_free (data);
+	  break;
+	}
+
+      case CALLBACK_CREATE_FOLDER:
+	{
+	  struct CreateFolderData *data = handle_vfs->callback_data;
+
+	  if (!data->error_reported)
+	    (* data->callback) (handle, NULL, NULL, data->callback_data);
+
+	  gtk_file_path_free (data->path);
+	  g_free (data);
+	  break;
+	}
+    }
+
+  handle_vfs->callback_type = 0;
+  handle_vfs->callback_data = NULL;
+
+  g_object_unref (handle);
+}
+
+static void
+gtk_file_system_gnome_vfs_cancel_operation (GtkFileSystemHandle *handle)
+{
+  GtkFileSystemHandleGnomeVFS *handle_vfs = GTK_FILE_SYSTEM_HANDLE_GNOME_VFS (handle);
+
+  if (handle->cancelled)
+    return;
+
+  if (handle_vfs->vfs_handle)
+    {
+      if (handle_vfs->vfs_handle)
+        gnome_vfs_async_cancel (handle_vfs->vfs_handle);
+      handle_vfs->vfs_handle = NULL;
+
+      /* Volume mounts can't be cancelled right now... */
+      if (handle_vfs->callback_type == CALLBACK_VOLUME_MOUNT)
+	handle->cancelled = FALSE;
+      else
+        handle->cancelled = TRUE;
+
+      queue_vfs_idle_callback (cancel_operation_callback, handle);
+    }
 }
 
 static void
@@ -1107,12 +1683,12 @@ gtk_file_system_gnome_vfs_volume_get_is_mounted (GtkFileSystem        *file_syst
     }
 }
 
-struct mount_closure {
-  GtkFileSystemGnomeVFS *system_vfs;
-  GMainLoop *loop;
-  gboolean succeeded;
-  char *error;
-  char *detailed_error;
+struct VolumeMountData
+{
+  GtkFileSystemHandleGnomeVFS *handle;
+  GtkFileSystemVolume *volume;
+  GtkFileSystemVolumeMountCallback callback;
+  gpointer callback_data;
 };
 
 /* Used from gnome_vfs_{volume,drive}_mount() */
@@ -1122,71 +1698,109 @@ volume_mount_cb (gboolean succeeded,
 		 char    *detailed_error,
 		 gpointer data)
 {
-  struct mount_closure *closure;
+  GError *tmp_error = NULL;
+  struct VolumeMountData *op_data = data;
 
   gdk_threads_enter ();
-  
-  closure = data;
-
-  closure->succeeded = succeeded;
 
   if (!succeeded)
     {
-      closure->error = g_strdup (error);
-      closure->detailed_error = g_strdup (detailed_error);
+      g_set_error (&tmp_error,
+		   GTK_FILE_SYSTEM_ERROR,
+		   GTK_FILE_SYSTEM_ERROR_FAILED,
+		   "%s:\n%s",
+		   error, detailed_error);
     }
 
-  g_main_loop_quit (closure->loop);
+  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+			 op_data->volume,
+			 tmp_error, op_data->callback_data);
+
+  if (tmp_error)
+    g_error_free (tmp_error);
+
+out:
+  op_data->handle->callback_type = 0;
+  op_data->handle->callback_data = NULL;
+
+  g_object_unref (op_data->handle);
+  g_object_unref (op_data->volume);
+  g_free (op_data);
 
   gdk_threads_leave ();
 }
 
-static gboolean
-gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem        *file_system,
-					GtkFileSystemVolume  *volume,
-					GError              **error)
+static void
+volume_mount_idle_callback (gpointer data)
+{
+  struct VolumeMountData *op_data = data;
+
+  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
+			 op_data->volume, NULL, op_data->callback_data);
+
+  g_object_unref (op_data->handle);
+  g_object_unref (op_data->volume);
+  g_free (op_data);
+}
+
+static GtkFileSystemHandle *
+gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem                    *file_system,
+					GtkFileSystemVolume              *volume,
+					GtkFileSystemVolumeMountCallback  callback,
+					gpointer                          data)
 {
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
 
-  if (IS_NETWORK_SERVERS_VOLUME_TOKEN (volume))
-    return TRUE;
-  else if (GNOME_IS_VFS_DRIVE (volume))
+  if (GNOME_IS_VFS_DRIVE (volume))
     {
-      struct mount_closure closure;
+      struct VolumeMountData *op_data;
+      GtkFileSystemHandleGnomeVFS *handle;
 
-      closure.system_vfs = system_vfs;
-      closure.loop = g_main_loop_new (NULL, FALSE);
+      handle = gtk_file_system_handle_gnome_vfs_new (file_system);
+
+      op_data = g_new0 (struct VolumeMountData, 1);
+      op_data->handle = g_object_ref (handle);
+      op_data->volume = g_object_ref (volume);
+      op_data->callback = callback;
+      op_data->callback_data = data;
+
+      op_data->handle->callback_type = CALLBACK_VOLUME_MOUNT;
+      op_data->handle->callback_data = op_data;
+
       gnome_authentication_manager_push_sync ();
-      gnome_vfs_drive_mount (GNOME_VFS_DRIVE (volume), volume_mount_cb, &closure);
+      gnome_vfs_drive_mount (GNOME_VFS_DRIVE (volume), volume_mount_cb, op_data);
       gnome_authentication_manager_pop_sync ();
 
-      gdk_threads_leave ();
-      g_main_loop_run (closure.loop);
-      gdk_threads_enter ();
-      g_main_loop_unref (closure.loop);
-
-      if (closure.succeeded)
-	return TRUE;
-      else
-	{
-	  g_set_error (error,
-		       GTK_FILE_SYSTEM_ERROR,
-		       GTK_FILE_SYSTEM_ERROR_FAILED,
-		       "%s:\n%s",
-		       closure.error,
-		       closure.detailed_error);
-	  g_free (closure.error);
-	  g_free (closure.detailed_error);
-	  return FALSE;
-	}
+      return GTK_FILE_SYSTEM_HANDLE (op_data->handle);
     }
-  else if (GNOME_IS_VFS_VOLUME (volume))
-    return TRUE; /* It is already mounted */
+  else if (GNOME_IS_VFS_VOLUME (volume)
+	   || (IS_NETWORK_SERVERS_VOLUME_TOKEN (volume)))
+    {
+      struct VolumeMountData *op_data;
+      GtkFileSystemHandleGnomeVFS *handle;
+
+      handle = gtk_file_system_handle_gnome_vfs_new (file_system);
+
+      op_data = g_new0 (struct VolumeMountData, 1);
+      op_data->handle = g_object_ref (handle);
+      op_data->volume = g_object_ref (volume);
+      op_data->callback = callback;
+      op_data->callback_data = data;
+
+      op_data->handle->callback_type = CALLBACK_VOLUME_MOUNT;
+      op_data->handle->callback_data = op_data;
+
+      queue_vfs_idle_callback (volume_mount_idle_callback, op_data);
+
+      return GTK_FILE_SYSTEM_HANDLE (op_data->handle);
+    }
   else
     {
       g_warning ("%p is not a valid volume", volume);
-      return FALSE;
+      return NULL;
     }
+
+  return NULL;
 }
 
 static gchar *
@@ -1225,96 +1839,13 @@ gtk_file_system_gnome_vfs_volume_get_display_name (GtkFileSystem       *file_sys
   return display_name;
 }
 
-typedef struct
-{
-  gint size;
-  GdkPixbuf *pixbuf;
-} IconCacheElement;
-
-static void
-icon_cache_element_free (IconCacheElement *element)
-{
-  if (element->pixbuf)
-    g_object_unref (element->pixbuf);
-  g_free (element);
-}
-
-static void
-icon_theme_changed (GtkIconTheme *icon_theme)
-{
-  GHashTable *cache;
-
-  /* Difference from the initial creation is that we don't
-   * reconnect the signal
-   */
-  cache = g_hash_table_new_full (g_str_hash, g_str_equal,
-				 (GDestroyNotify)g_free,
-				 (GDestroyNotify)icon_cache_element_free);
-  g_object_set_data_full (G_OBJECT (icon_theme), "gnome-vfs-gtk-file-icon-cache",
-			  cache, (GDestroyNotify)g_hash_table_destroy);
-}
-
-static GdkPixbuf *
-get_cached_icon (GtkWidget   *widget,
-		 const gchar *name,
-		 gint         pixel_size,
-		 GError     **error)
-{
-  GtkIconTheme *icon_theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (widget));
-  GHashTable *cache = g_object_get_data (G_OBJECT (icon_theme), "gnome-vfs-gtk-file-icon-cache");
-  IconCacheElement *element;
-
-  profile_start ("start", name);
-
-  if (!cache)
-    {
-      cache = g_hash_table_new_full (g_str_hash, g_str_equal,
-				     (GDestroyNotify)g_free,
-				     (GDestroyNotify)icon_cache_element_free);
-
-      g_object_set_data_full (G_OBJECT (icon_theme), "gnome-vfs-gtk-file-icon-cache",
-			      cache, (GDestroyNotify)g_hash_table_destroy);
-      g_signal_connect (icon_theme, "changed",
-			G_CALLBACK (icon_theme_changed), NULL);
-    }
-
-  element = g_hash_table_lookup (cache, name);
-  if (!element)
-    {
-      element = g_new0 (IconCacheElement, 1);
-      g_hash_table_insert (cache, g_strdup (name), element);
-    }
-
-  if (element->size != pixel_size)
-    {
-      if (element->pixbuf)
-	g_object_unref (element->pixbuf);
-      element->size = pixel_size;
-
-      /* Normally, the names are raw icon names, not filenames.  If they happen
-       * to be filenames, then they likely came from a .desktop file
-       */
-      if (g_path_is_absolute (name))
-	element->pixbuf = gdk_pixbuf_new_from_file_at_size (name, pixel_size, pixel_size, error);
-      else
-	element->pixbuf = gtk_icon_theme_load_icon (icon_theme, name, pixel_size, 0, error);
-    }
-
-  profile_end ("end", name);
-
-  return element->pixbuf ? g_object_ref (element->pixbuf) : NULL;
-}
-
-static GdkPixbuf *
-gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
-					      GtkFileSystemVolume  *volume,
-					      GtkWidget            *widget,
-					      gint                  pixel_size,
-					      GError              **error)
+static gchar *
+gtk_file_system_gnome_vfs_volume_get_icon_name (GtkFileSystem        *file_system,
+					        GtkFileSystemVolume  *volume,
+					        GError              **error)
 {
   GtkFileSystemGnomeVFS *system_vfs;
   char *icon_name, *uri;
-  GdkPixbuf *pixbuf;
   GnomeVFSVolume *mounted_volume;
 
   profile_start ("start", NULL);
@@ -1351,17 +1882,9 @@ gtk_file_system_gnome_vfs_volume_render_icon (GtkFileSystem        *file_system,
   else
     g_warning ("%p is not a valid volume", volume);
 
-  if (icon_name)
-    {
-      pixbuf = get_cached_icon (widget, icon_name, pixel_size, error);
-      g_free (icon_name);
-    }
-  else
-    pixbuf = NULL;
-
   profile_end ("end", NULL);
 
-  return pixbuf;
+  return icon_name;
 }
 
 static gboolean
@@ -1680,7 +2203,7 @@ gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem *file_system,
   gchar *uri;
   
   if (!filename [0])
-	  return NULL;
+    return NULL;
 
   uri = gnome_vfs_get_uri_from_local_path (filename);
   if (uri)
@@ -1694,159 +2217,6 @@ gtk_file_system_gnome_vfs_filename_to_path (GtkFileSystem *file_system,
     }
   else
     return NULL;
-}
-
-
-static GnomeVFSFileInfo *
-get_vfs_info (GtkFileSystem     *file_system,
-	      const GtkFilePath *path,
-	      GtkFileInfoType    types)
-{
-  const char *parent_uri, *uri;
-  char *canonical_uri;
-  GtkFilePath *parent_path;
-  GtkFileFolderGnomeVFS *folder_vfs;
-  GnomeVFSFileInfo *info;
-  GtkFileSystemGnomeVFS *system_vfs;
-
-  profile_start ("start", (char *) path);
-
-  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
-
-  if (!gtk_file_system_get_parent (file_system, path, &parent_path, NULL))
-    {
-      profile_end ("end with no parent", (char *) path);
-      return NULL;
-    }
-  
-  parent_uri = gtk_file_path_get_string (parent_path);
-  info = NULL;
-  if (parent_uri != NULL)
-    {
-      canonical_uri = make_uri_canonical (parent_uri);
-      folder_vfs = g_hash_table_lookup (system_vfs->folders, canonical_uri);
-      g_free (canonical_uri);
-      if (folder_vfs &&
-	  (folder_vfs->types & types) == types)
-	{
-	  FolderChild *child;
-	  child = lookup_folder_child (GTK_FILE_FOLDER (folder_vfs), path, NULL);
-	  if (child)
-	    {
-	      info = child->info;
-	      gnome_vfs_file_info_ref (info);
-	    }
-	}
-    }
-  
-  if (info == NULL)
-    {
-      info = gnome_vfs_file_info_new ();
-      uri = gtk_file_path_get_string (path);
-      gnome_authentication_manager_push_sync ();
-      gnome_vfs_get_file_info (uri, info, get_options (types));
-      gnome_authentication_manager_pop_sync ();
-    }
-  
-  gtk_file_path_free (parent_path);
-
-  profile_end ("end", (char *) path);
-
-  return info;
-  
-}
-
-static GdkPixbuf *
-get_icon_from_desktop_file (const char   *desktop_uri,
-			    GtkWidget    *widget,
-			    gint          pixel_size,
-			    GError      **error)
-{
-  SuckyDesktopItem *ditem;
-  const char *ditem_icon_name;
-  GdkPixbuf *ret_pixbuf;
-
-  ret_pixbuf = NULL;
-
-  ditem = sucky_desktop_item_new_from_uri (desktop_uri, 0, error);
-  if (ditem == NULL)
-    goto out;
-
-  ditem_icon_name = sucky_desktop_item_get_string (ditem, SUCKY_DESKTOP_ITEM_ICON);
-  if (ditem_icon_name == NULL || strlen (ditem_icon_name) == 0)
-    goto out;
-
-  ret_pixbuf = get_cached_icon (widget, ditem_icon_name, pixel_size, error);
-
- out:
-
-  if (ditem)
-    sucky_desktop_item_unref (ditem);
-
-  return ret_pixbuf;
-}
-
-static GdkPixbuf *
-gtk_file_system_gnome_vfs_render_icon (GtkFileSystem     *file_system,
-				       const GtkFilePath *path,
-				       GtkWidget         *widget,
-				       gint               pixel_size,
-				       GError           **error)
-{
-  GtkIconTheme *icon_theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (widget));
-  GtkFileSystemGnomeVFS *system_vfs;
-  const char *uri;
-  GdkPixbuf *pixbuf;
-  char *icon_name;
-  GnomeVFSFileInfo *vfs_info;
-
-  profile_start ("start", (char *) path);
-
-  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
-
-  pixbuf = NULL;
-  icon_name = NULL;
-
-  vfs_info = get_vfs_info (file_system, path, GTK_FILE_INFO_MIME_TYPE);
-  uri = gtk_file_path_get_string (path);
-
-  if (vfs_info && is_desktop_file (vfs_info))
-    {
-      pixbuf = get_icon_from_desktop_file (uri, widget, pixel_size, error);
-      gnome_vfs_file_info_unref (vfs_info);
-      profile_end ("end with icon from desktop file", (char *) path);
-      return pixbuf;
-    }
-
-  if (strcmp (uri, system_vfs->desktop_uri) == 0)
-    icon_name = g_strdup ("gnome-fs-desktop");
-  else if (strcmp (uri, system_vfs->home_uri) == 0)
-    icon_name = g_strdup ("gnome-fs-home");
-  else if (strcmp (uri, "trash:///") == 0)
-    icon_name = g_strdup ("gnome-fs-trash-empty");
-  else if (vfs_info)
-    icon_name = gnome_icon_lookup (icon_theme,
-				   NULL,
-				   uri,
-				   NULL,
-				   vfs_info,
-				   vfs_info->mime_type,
-				   GNOME_ICON_LOOKUP_FLAGS_NONE,
-				   NULL);
-  if (icon_name)
-    {
-      pixbuf = get_cached_icon (widget, icon_name, pixel_size, error);
-      g_free (icon_name);
-    }
-  else
-    pixbuf = NULL; /* FIXME: in this case, we are missing GError information */
-
-  if (vfs_info)
-    gnome_vfs_file_info_unref (vfs_info);
-
-  profile_end ("end", (char *) path);
-
-  return pixbuf;
 }
 
 static void
@@ -2353,8 +2723,7 @@ gtk_file_folder_gnome_vfs_finalize (GObject *object)
 /* The URI must be canonicalized already */
 static FolderChild *
 lookup_folder_child_from_uri (GtkFileFolder *folder,
-			      const char    *uri,
-			      GError       **error)
+			      const char    *uri)
 {
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
   FolderChild *child;
@@ -2364,55 +2733,20 @@ lookup_folder_child_from_uri (GtkFileFolder *folder,
   profile_start ("start", uri);
 
   child = g_hash_table_lookup (folder_vfs->children, uri);
-  if (child)
-    {
-      profile_end ("end, returning cached child", uri);
-      return child;
-    }
+  profile_end ("end", uri);
 
-  /* We may not have loaded the file's information yet.
-   */
-
-  vfs_info = gnome_vfs_file_info_new ();
-  gnome_authentication_manager_push_sync ();
-  result = gnome_vfs_get_file_info (uri, vfs_info, get_options (folder_vfs->types));
-  gnome_authentication_manager_pop_sync ();
-
-  if (result != GNOME_VFS_OK)
-    {
-      set_vfs_error (result, uri, error);
-      gnome_vfs_file_info_unref (vfs_info);
-      profile_end ("end, could not get file info", uri);
-      return NULL;
-    }
-  else
-    {
-      GSList *uris;
-
-      child = folder_child_new (uri, vfs_info, folder_vfs->async_handle ? TRUE : FALSE);
-      gnome_vfs_file_info_unref (vfs_info);
-      g_hash_table_replace (folder_vfs->children, child->uri, child);
-
-      uris = g_slist_append (NULL, (char *) uri);
-      g_signal_emit_by_name (folder_vfs, "files-added", uris);
-      g_slist_free (uris);
-
-      profile_end ("end", uri);
-
-      return child;
-    }
+  return child;
 }
 
 static FolderChild *
 lookup_folder_child (GtkFileFolder     *folder,
-		     const GtkFilePath *path,
-		     GError           **error)
+		     const GtkFilePath *path)
 {
   char *uri;
   FolderChild *child;
 
   uri = make_uri_canonical (gtk_file_path_get_string (path));
-  child = lookup_folder_child_from_uri (folder, uri, error);
+  child = lookup_folder_child_from_uri (folder, uri);
   g_free (uri);
 
   return child;
@@ -2430,41 +2764,15 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
 
   profile_start ("start", (char *) path);
 
-  if (!path)
+ if (!path)
     {
-      GnomeVFSURI *vfs_uri;
-      GnomeVFSResult result;
-      GnomeVFSFileInfo *info;
-
-      vfs_uri = gnome_vfs_uri_new (folder_vfs->uri);
-      g_assert (vfs_uri != NULL);
-
-      g_return_val_if_fail (!gnome_vfs_uri_has_parent (vfs_uri), NULL);
-      gnome_vfs_uri_unref (vfs_uri);
-
-      info = gnome_vfs_file_info_new ();
-      gnome_authentication_manager_push_sync ();
-      result = gnome_vfs_get_file_info (folder_vfs->uri, info, get_options (GTK_FILE_INFO_ALL));
-      gnome_authentication_manager_pop_sync ();
-      if (result != GNOME_VFS_OK)
-	{
-	  file_info = NULL;
-	  set_vfs_error (result, folder_vfs->uri, error);
-	}
-      else
-	file_info = info_from_vfs_info (folder_vfs->uri, info, GTK_FILE_INFO_ALL, error);
-
-      gnome_vfs_file_info_unref (info);
-
-      profile_end ("end for non-child info", (char *) path);
-
-      return file_info;
+      return NULL;
     }
 
-  child = lookup_folder_child (folder, path, error);
+  child = lookup_folder_child (folder, path);
 
   if (child)
-    file_info = info_from_vfs_info (uri, child->info, folder_vfs->types, error);
+    file_info = info_from_vfs_info (folder_vfs->system, uri, child->info, folder_vfs->types, error);
   else
     file_info = NULL;
 
@@ -2512,7 +2820,7 @@ gtk_file_folder_gnome_vfs_is_finished_loading (GtkFileFolder *folder)
 {
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
 
-  return (folder_vfs->async_handle == NULL);
+  return folder_vfs->finished_loading;
 }
 
 
@@ -2531,26 +2839,30 @@ get_options (GtkFileInfoType types)
 }
 
 static GtkFileInfo *
-info_from_vfs_info (const gchar      *uri,
-		    GnomeVFSFileInfo *vfs_info,
-		    GtkFileInfoType   types,
-		    GError          **error)
+info_from_vfs_info (GtkFileSystemGnomeVFS  *system_vfs,
+		    const gchar            *uri,
+		    GnomeVFSFileInfo       *vfs_info,
+		    GtkFileInfoType         types,
+		    GError                **error)
 {
   GtkFileInfo *info = gtk_file_info_new ();
   gboolean is_desktop;
-  SuckyDesktopItem *ditem;
+  GKeyFile *desktop_file = NULL;
 
   /* Desktop files are special.  They can override the name, type, icon, etc. */
 
   is_desktop = is_desktop_file (vfs_info);
 
-  ditem = NULL; /* shut up GCC */
-
   if (is_desktop)
     {
-      ditem = sucky_desktop_item_new_from_uri (uri, 0, error);
-      if (ditem == NULL)
-	return NULL;
+      gboolean ret;
+      gchar *tmp;
+
+      tmp = gnome_vfs_get_local_path_from_uri (uri);
+      desktop_file = g_key_file_new ();
+      ret = g_key_file_load_from_file (desktop_file, tmp,
+				       G_KEY_FILE_KEEP_TRANSLATIONS, error);
+      g_free (tmp);
     }
 
   /* Display name */
@@ -2559,11 +2871,15 @@ info_from_vfs_info (const gchar      *uri,
     {
       if (is_desktop)
 	{
-	  const char *name;
+	  char *name;
 
-	  name = sucky_desktop_item_get_localestring (ditem, SUCKY_DESKTOP_ITEM_NAME);
+	  name = g_key_file_get_locale_string (desktop_file, DESKTOP_GROUP,
+					       "Name", NULL, NULL);
 	  if (name != NULL)
-	    gtk_file_info_set_display_name (info, name);
+	    {
+	      gtk_file_info_set_display_name (info, name);
+	      g_free (name);
+	    }
 	  else
 	    goto fetch_name_from_uri;
 	}
@@ -2605,7 +2921,7 @@ info_from_vfs_info (const gchar      *uri,
       gboolean is_hidden;
 
       if (is_desktop)
-	is_hidden = sucky_desktop_item_get_boolean (ditem, SUCKY_DESKTOP_ITEM_HIDDEN);
+	is_hidden = g_key_file_get_boolean (desktop_file, DESKTOP_GROUP, "Hidden", NULL);
       else
 	is_hidden = (vfs_info->name && vfs_info->name[0] == '.');
 
@@ -2619,7 +2935,7 @@ info_from_vfs_info (const gchar      *uri,
       gboolean is_folder;
 
       if (is_desktop)
-	is_folder = is_desktop_file_a_folder (ditem);
+	is_folder = is_desktop_file_a_folder (desktop_file);
       else
 	is_folder = (vfs_info->type == GNOME_VFS_FILE_TYPE_DIRECTORY);
 
@@ -2638,11 +2954,43 @@ info_from_vfs_info (const gchar      *uri,
       gtk_file_info_set_mime_type (info, mime_type);
     }
 
+  if (types & GTK_FILE_INFO_ICON)
+    {
+      gchar *icon_name;
+      GtkIconTheme *icon_theme = gtk_icon_theme_get_default (); /* FIXME: can't do better right now ... */
+
+      if (types & GTK_FILE_INFO_MIME_TYPE && is_desktop)
+        {
+	  icon_name = g_key_file_get_value (desktop_file, DESKTOP_GROUP, "Icon", NULL);
+	  gtk_file_info_set_icon_name (info, icon_name);
+	  g_free (icon_name);
+	}
+      else
+        {
+          if (strcmp (uri, system_vfs->desktop_uri) == 0)
+	    gtk_file_info_set_icon_name (info, "gnome-fs-desktop");
+          else if (strcmp (uri, system_vfs->home_uri) == 0)
+	    gtk_file_info_set_icon_name (info, "gnome-fs-home");
+          else if (strcmp (uri, "trash:///") == 0)
+	    gtk_file_info_set_icon_name (info, "gnome-fs-trash-empty");
+          else if (vfs_info)
+	    {
+	      icon_name = gnome_icon_lookup (icon_theme,
+				             NULL, uri, NULL,
+				             vfs_info, vfs_info->mime_type,
+				             GNOME_ICON_LOOKUP_FLAGS_NONE,
+				             NULL);
+	      gtk_file_info_set_icon_name (info, icon_name);
+	      g_free (icon_name);
+	    }
+	}
+    }
+
   gtk_file_info_set_modification_time (info, vfs_info->mtime);
   gtk_file_info_set_size (info, vfs_info->size);
 
   if (is_desktop)
-    sucky_desktop_item_unref (ditem);
+    g_key_file_free (desktop_file);
 
   return info;
 }
@@ -2887,6 +3235,7 @@ directory_load_callback (GnomeVFSAsyncHandle *handle,
   if (result != GNOME_VFS_OK)
     {
       folder_vfs->async_handle = NULL;
+      folder_vfs->finished_loading = 1;
 
       g_signal_emit_by_name (folder_vfs, "finished-loading");
       folder_purge_and_unmark (folder_vfs);
@@ -3009,6 +3358,78 @@ has_valid_scheme (const char *uri)
   return *p == ':';
 }
 
+
+/*
+ * GtkFileSystemHandleGnomeVFS
+ */
+static GType
+gtk_file_system_handle_gnome_vfs_get_type (void)
+{
+  return type_gtk_file_system_handle_gnome_vfs;
+}
+
+static void
+gtk_file_system_handle_gnome_vfs_init (GtkFileSystemHandleGnomeVFS *handle)
+{
+  handle->vfs_handle = NULL;
+}
+
+static GtkFileSystemHandleGnomeVFS *
+gtk_file_system_handle_gnome_vfs_new (GtkFileSystem *file_system)
+{
+  GtkFileSystemHandleGnomeVFS *handle;
+
+  handle = g_object_new (GTK_TYPE_FILE_SYSTEM_HANDLE_GNOME_VFS, NULL);
+  GTK_FILE_SYSTEM_HANDLE (handle)->file_system = file_system;
+
+  return handle;
+}
+
+/* some code for making callback calls from idle */
+static guint execute_vfs_callbacks_idle_id = 0;
+static GSList *vfs_callbacks = NULL;
+
+static gboolean
+execute_vfs_callbacks_idle (gpointer data)
+{
+  GSList *l;
+
+  GDK_THREADS_ENTER ();
+
+  for (l = vfs_callbacks; l; l = l->next)
+    {
+      struct vfs_idle_callback *cb = l->data;
+
+      (* cb->callback) (cb->callback_data);
+
+      g_free (cb);
+    }
+
+  g_slist_free (vfs_callbacks);
+  vfs_callbacks = NULL;
+
+  execute_vfs_callbacks_idle_id = 0;
+
+  GDK_THREADS_LEAVE ();
+
+  return FALSE;
+}
+
+static void
+queue_vfs_idle_callback (VfsIdleCallback callback, gpointer callback_data)
+{
+  struct vfs_idle_callback *cb;
+
+  cb = g_new (struct vfs_idle_callback, 1);
+  cb->callback = callback;
+  cb->callback_data = callback_data;
+
+  vfs_callbacks = g_slist_append (vfs_callbacks, cb);
+
+  if (!execute_vfs_callbacks_idle_id)
+    execute_vfs_callbacks_idle_id = g_idle_add (execute_vfs_callbacks_idle, NULL);
+}
+
 /* GtkFileSystem module calls */
 
 void fs_module_init (GTypeModule    *module);
@@ -3084,6 +3505,26 @@ fs_module_init (GTypeModule    *module)
 				 type_gtk_file_folder_gnome_vfs,
 				 GTK_TYPE_FILE_FOLDER,
 				 &file_folder_info);
+  }
+
+  {
+    static const GTypeInfo file_system_handle_gnome_vfs_info =
+      {
+	sizeof (GtkFileSystemHandleGnomeVFSClass),
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	sizeof (GtkFileSystemHandleGnomeVFS),
+	0,
+	(GInstanceInitFunc) gtk_file_system_handle_gnome_vfs_init,
+      };
+
+    type_gtk_file_system_handle_gnome_vfs = g_type_module_register_type (module,
+									 GTK_TYPE_FILE_SYSTEM_HANDLE,
+									 "GtkFileSystemHandleGnomeVFS",
+									 &file_system_handle_gnome_vfs_info, 0);
   }
 
   /* We ref the class so that the module won't get unloaded.  We need this
