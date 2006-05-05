@@ -42,4 +42,3 @@ gtk-doc.make
 libgnomeui-zip
 stamp-h1
 depcomp
-intltool-*
