@@ -1,3 +1,9 @@
+libgnomeui 2.15.1
+-----------------
+
+* Merge the async branch of the file chooser (Kris)
+* Other things
+
 libgnomeui 2.13.3
 -----------------
 
