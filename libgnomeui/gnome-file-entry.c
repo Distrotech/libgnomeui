@@ -485,6 +485,15 @@ browse_dialog_kill (GtkWidget *widget, gpointer data)
 	fentry->fsw = NULL;
 }
 
+static void
+setup_filter(GtkFileChooser *fc)
+{
+	GtkFileFilter *filter;
+	filter = gtk_file_filter_new();
+	gtk_file_filter_add_mime_type(filter, "x-directory/normal");
+	gtk_file_chooser_set_filter(fc, filter);
+}
+
 #ifndef G_OS_WIN32
 /* Does tilde (home directory) expansion on a string */
 static char *
@@ -655,6 +664,9 @@ browse_clicked(GnomeFileEntry *fentry)
 					       GTK_RESPONSE_ACCEPT);
 
 		fw = fentry->fsw;
+		if (fentry->_priv->directory_entry)
+			g_signal_connect(fw, "size-request",
+				G_CALLBACK(setup_filter), fentry);
 
 		gtk_dialog_set_default_response (GTK_DIALOG (fw), GTK_RESPONSE_ACCEPT);
 

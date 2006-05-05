@@ -514,6 +514,13 @@ ientry_finalize (GObject *object)
 }
 
 static void
+entry_changed(GtkEntry *entry)
+{
+	if (g_path_is_absolute(gtk_entry_get_text(entry)))
+		gtk_widget_activate(GTK_WIDGET(entry));
+}
+
+static void
 browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 {
 	GtkWidget *w;
@@ -533,6 +540,7 @@ browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 
 	g_return_if_fail (gtk_file_chooser_get_preview_widget (fc) == NULL);
 
+#if 0
 	w = gtk_frame_new("");
 	gtk_frame_set_shadow_type (GTK_FRAME (w), GTK_SHADOW_NONE);
 
@@ -549,6 +557,7 @@ browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 		setup_preview (GTK_WIDGET(fc));
 
 	g_free (path);
+#endif
 }
 
 static void
@@ -1037,6 +1046,8 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 	g_free(p);
 
 	w = gnome_file_entry_gtk_entry(GNOME_FILE_ENTRY(ientry->_priv->fentry));
+	g_signal_connect_after (w, "changed",
+				G_CALLBACK (entry_changed), ientry);
 
 	closure = g_cclosure_new (G_CALLBACK (entry_activated), ientry, NULL);
 	g_object_watch_closure (G_OBJECT (ientry), closure);

@@ -1,3 +1,11 @@
+2006-05-05  Travis Watkins  <alleykat@gmail.com>
+
+	* libgnomeui/gnome-icon-entry.c: Autoupdate icon list on dir change
+	and remove preview widget.
+	* libgnomeui/gnome-file-entry.c: Filter out regular files when using
+	with directory-entry.
+	Closes bug #340478.
+
 2006-05-02  Kristian Rietveld  <kris@imendio.com>
 
 	Merge of the asynchronous file chooser branch.  Please see the
