@@ -75,7 +75,7 @@ Tue Oct  5 02:35:47 1999  Owen Taylor  <otaylor@redhat.com>
 Fri Sep 24 01:24:40 1999  Tim Janik  <timj@gtk.org>
 
 	* gnome-canvas.c (gnome_canvas_new_aa): make the AA canvas warning a
-	message, so --g-fatal-warnings remains usefull (bug#2234).
+	message, so --g-fatal-warnings remains useful (bug#2234).
 
 1999-09-23  Martin Baulig  <martin@home-of-linux.org>
 
@@ -8138,7 +8138,7 @@ Wed May 20 17:30:19 CEST 1998  Eckehard Berns  <eb@berns.prima.de>
 	* gnome-stock.[ch]: added GNOME_STOCK_PIXMAP_TYPE_GPIXMAP to be able
 	to use GnomePixmaps as stock pixmaps.
 	(gnome_pixmap_button): added check for ButtonsUseLabels (don't know if
-	this is usefull though).
+	this is useful though).
 
 	* gnome-dialog.c (gnome_dialog_append_button): use
 	gnome_button_can_default.
