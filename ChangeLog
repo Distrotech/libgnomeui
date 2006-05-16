@@ -1,3 +1,7 @@
+2006-05-16  Christian Persch  <chpe@cvs.gnome.org>
+
+	* configure.in: Update intltool requirement to 0.35.
+
 2006-05-05  Travis Watkins  <alleykat@gmail.com>
 
 	* libgnomeui/gnome-icon-entry.c: Autoupdate icon list on dir change
