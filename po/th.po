@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
-"PO-Revision-Date: 2005-12-25 10:11+0700\n"
+"POT-Creation-Date: 2006-05-23 16:10+0700\n"
+"PO-Revision-Date: 2006-05-23 16:21+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,94 +32,33 @@ msgstr "รายการลูกที่ 2"
 msgid "Hint for item 2"
 msgstr "ข้อแนะนำสำหรับรายการที่ 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:820
+#: file-chooser/gtkfilesystemgnomevfs.c:892
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s เป็นลิงก์เชื่อมไปยังสิ่งที่ไม่ใช่โฟลเดอร์"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:831
+#: file-chooser/gtkfilesystemgnomevfs.c:903
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s เป็นลิงก์ที่ไม่ระบุที่อยู่ปลายทาง"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:946
+#: file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ไม่ใช่โฟลเดอร์"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1194
+#: file-chooser/gtkfilesystemgnomevfs.c:1815
+msgid "Network Servers"
+msgstr "เซิร์ฟเวอร์ในเครือข่าย"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1831
 msgid "File System"
 msgstr "ระบบแฟ้ม"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1952
+#: file-chooser/gtkfilesystemgnomevfs.c:2347
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "บันทึกบุ๊กมาร์กไม่สำเร็จ (%s)"
-
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
-#, c-format
-msgid "Error reading file '%s': %s"
-msgstr "เกิดข้อผิดพลาดขณะอ่านแฟ้ม '%s': %s"
-
-#: file-chooser/sucky-desktop-item.c:285
-#, c-format
-msgid "Error rewinding file '%s': %s"
-msgstr "เกิดข้อผิดพลาดขณะเลื่อนไปที่ต้นแฟ้ม '%s': %s"
-
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
-msgid "No name"
-msgstr "ไม่มีชื่อ"
-
-#: file-chooser/sucky-desktop-item.c:620
-#, c-format
-msgid "File '%s' is not a regular file or directory."
-msgstr "แฟ้ม '%s' ไม่ใช่แฟ้มปกติหรือไดเรกทอรี"
-
-#: file-chooser/sucky-desktop-item.c:796
-#, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "เกิดข้อผิดพลาด หาแฟ้ม '%s' ไม่พบ"
-
-#: file-chooser/sucky-desktop-item.c:842
-#, c-format
-msgid "No filename to save to"
-msgstr "ไม่มีชื่อแฟ้มที่จะใช้บันทึก"
-
-#: file-chooser/sucky-desktop-item.c:1797
-#, c-format
-msgid "Starting %s"
-msgstr "กำลังเรียก %s"
-
-#: file-chooser/sucky-desktop-item.c:2036
-#, c-format
-msgid "No URL to launch"
-msgstr "ไม่มี URL สำหรับเรียกโปรแกรม"
-
-#: file-chooser/sucky-desktop-item.c:2046
-#, c-format
-msgid "Not a launchable item"
-msgstr "ไม่ใช่รายการที่สามารถเรียกโปรแกรมได้"
-
-#: file-chooser/sucky-desktop-item.c:2056
-#, c-format
-msgid "No command (Exec) to launch"
-msgstr "ไม่มีคำสั่งที่จะใช้เรียกโปรแกรม"
-
-#: file-chooser/sucky-desktop-item.c:2069
-#, c-format
-msgid "Bad command (Exec) to launch"
-msgstr "คำสั่งที่ใช้เรียกโปรแกรมใช้ไม่ได้"
-
-#: file-chooser/sucky-desktop-item.c:3759
-#, c-format
-msgid "Unknown encoding of: %s"
-msgstr "ไม่รู้จักรหัสอักขระของ: %s"
-
-#: file-chooser/sucky-desktop-item.c:3990
-#, c-format
-msgid "Error writing file '%s': %s"
-msgstr "เกิดข้อผิดพลาดขณะเขียนแฟ้ม '%s': %s"
 
 #: file-chooser/testfilechooser.c:178
 #, c-format
@@ -157,94 +96,96 @@ msgstr "แปลโดย"
 msgid "C_redits"
 msgstr "เ_ครดิต"
 
-#: libgnomeui/gnome-about.c:379
+#: libgnomeui/gnome-about.c:377
 msgid "Program name"
 msgstr "ชื่อโปรแกรม"
 
-#: libgnomeui/gnome-about.c:380
+#: libgnomeui/gnome-about.c:378
 msgid "The name of the program"
 msgstr "ชื่อของโปรแกรม"
 
-#: libgnomeui/gnome-about.c:387
+#: libgnomeui/gnome-about.c:385
 msgid "Program version"
 msgstr "รุ่นโปรแกรม"
 
-#: libgnomeui/gnome-about.c:388
+#: libgnomeui/gnome-about.c:386
 msgid "The version of the program"
 msgstr "รุ่นของโปรแกรม"
 
-#: libgnomeui/gnome-about.c:394
+#: libgnomeui/gnome-about.c:392
 msgid "Copyright string"
 msgstr "ข้อความลิขสิทธิ์"
 
-#: libgnomeui/gnome-about.c:395
+#: libgnomeui/gnome-about.c:393
 msgid "Copyright information for the program"
 msgstr "ข้อความเกี่ยวกับลิขสิทธิ์ของโปรแกรม"
 
-#: libgnomeui/gnome-about.c:402
+#: libgnomeui/gnome-about.c:400
 msgid "Comments string"
 msgstr "ข้อความหมายเหตุ"
 
-#: libgnomeui/gnome-about.c:403
+#: libgnomeui/gnome-about.c:401
 msgid "Comments about the program"
 msgstr "ข้อความหมายเหตุเกี่ยวกับโปรแกรม"
 
-#: libgnomeui/gnome-about.c:409
+#: libgnomeui/gnome-about.c:407
 msgid "Authors"
 msgstr "ผู้เขียน"
 
-#: libgnomeui/gnome-about.c:410
+#: libgnomeui/gnome-about.c:408
 msgid "List of authors of the programs"
 msgstr "รายชื่อผู้เขียนโปรแกรมนี้"
 
-#: libgnomeui/gnome-about.c:412
+#: libgnomeui/gnome-about.c:410
 msgid "Author entry"
 msgstr "ผู้เขียนคนหนึ่ง"
 
-#: libgnomeui/gnome-about.c:413
+#: libgnomeui/gnome-about.c:411
 msgid "A single author entry"
 msgstr "ผู้เขียนคนหนึ่ง"
 
-#: libgnomeui/gnome-about.c:420
+#: libgnomeui/gnome-about.c:418
 msgid "Documenters"
 msgstr "ผู้เขียนเอกสาร"
 
-#: libgnomeui/gnome-about.c:421
+#: libgnomeui/gnome-about.c:419
 msgid "List of people documenting the program"
 msgstr "รายชื่อผู้เขียนเอกสารสำหรับโปรแกรมนี้"
 
-#: libgnomeui/gnome-about.c:423
+#: libgnomeui/gnome-about.c:421
 msgid "Documenter entry"
 msgstr "ผู้เขียนเอกสารคนหนึ่ง"
 
-#: libgnomeui/gnome-about.c:424
+#: libgnomeui/gnome-about.c:422
 msgid "A single documenter entry"
 msgstr "ผู้เขียนเอกสารคนหนึ่ง"
 
-#: libgnomeui/gnome-about.c:432
+#: libgnomeui/gnome-about.c:430
 msgid "Translator credits"
 msgstr "ผู้แปล"
 
-#: libgnomeui/gnome-about.c:433
+#: libgnomeui/gnome-about.c:431
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "เครดิตสำหรับผู้แปล ควรตั้งให้เป็นข้อความที่แปลได้"
 
-#: libgnomeui/gnome-about.c:440 libgnomeui/gnome-druid-page-standard.c:129
+#: libgnomeui/gnome-about.c:438
+#: libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "โลโก้"
 
-#: libgnomeui/gnome-about.c:441
+#: libgnomeui/gnome-about.c:439
 msgid "A logo for the about box"
 msgstr "โลโก้สำหรับหน้าต่างเกี่ยวกับ"
 
-#: libgnomeui/gnome-about.c:520
+#: libgnomeui/gnome-about.c:518
 #, c-format
 msgid "About %s"
 msgstr "เกี่ยวกับ %s"
 
 #. Some standard menus
 #: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "แ_ฟ้ม"
 
@@ -302,6 +243,7 @@ msgid "_Game"
 msgstr "เ_กม"
 
 #: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_วิธีใช้"
 
@@ -492,11 +434,11 @@ msgstr "ปรับแต่งโปรแกรม"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "เกี่ยวกับโปรแกรมนี้"
 
@@ -523,7 +465,7 @@ msgstr "สร้างหน้าต่างใหม่"
 msgid "_Close This Window"
 msgstr "ปิ_ดหน้าต่างนี้"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "ปิดหน้าต่างปัจจุบัน"
 
@@ -672,36 +614,35 @@ msgstr "App ID"
 msgid "The application ID string"
 msgstr "สตริงบ่งชี้โปรแกรม"
 
-#: libgnomeui/gnome-appbar.c:747
+#: libgnomeui/gnome-appbar.c:741
 msgid "Has Progress"
 msgstr "มีแถบความคืบหน้า"
 
-#: libgnomeui/gnome-appbar.c:748
+#: libgnomeui/gnome-appbar.c:742
 msgid "Create a progress widget."
 msgstr "สร้างวิดเจ็ตแสดงความคืบหน้า"
 
-#: libgnomeui/gnome-appbar.c:755
+#: libgnomeui/gnome-appbar.c:749
 msgid "Has Status"
 msgstr "มีแถบสถานะ"
 
-#: libgnomeui/gnome-appbar.c:756
+#: libgnomeui/gnome-appbar.c:750
 msgid "Create a status widget."
 msgstr "สร้างวิดเจ็ตแสดงสถานะ"
 
-#: libgnomeui/gnome-appbar.c:763
+#: libgnomeui/gnome-appbar.c:757
 msgid "Interactivity"
 msgstr "การโต้ตอบ"
 
-#: libgnomeui/gnome-appbar.c:764
+#: libgnomeui/gnome-appbar.c:758
 msgid "Level of user activity required."
 msgstr "ระดับการโต้ตอบกับผู้ใช้ที่ต้องใช้"
 
-#: libgnomeui/gnome-authentication-manager.c:70
-#, c-format
+#: libgnomeui/gnome-authentication-manager.c:80
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "พร็อกซี HTTP ของคุณบังคับว่าคุณต้องเข้าระบบ\n"
 
-#: libgnomeui/gnome-authentication-manager.c:71
+#: libgnomeui/gnome-authentication-manager.c:81
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -710,58 +651,58 @@ msgstr ""
 "คุณต้องเข้าระบบถึงจะสามารถอ่าน \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:74
+#: libgnomeui/gnome-authentication-manager.c:84
 msgid "Your password will be transmitted unencrypted."
 msgstr "รหัสผ่านของคุณจะถูกส่งออกไปโดยถูกไม่เข้ารหัส"
 
-#: libgnomeui/gnome-authentication-manager.c:75
+#: libgnomeui/gnome-authentication-manager.c:85
 msgid "Your password will be transmitted encrypted."
 msgstr "รหัสผ่านของคุณจะถูกเข้ารหัสก่อนส่งออกไป"
 
-#: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:296
+#: libgnomeui/gnome-authentication-manager.c:88
+#: libgnomeui/gnome-authentication-manager.c:306
 msgid "Authentication Required"
 msgstr "ต้องผ่านการตรวจสอบสิทธิ์ก่อน"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#: libgnomeui/gnome-authentication-manager.c:298
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "คุณต้องเข้าระบบถึงจะสามารถใช้ %s ที่โดเมน %s ได้\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: libgnomeui/gnome-authentication-manager.c:300
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "คุณต้องเข้าระบบถึงจะสามารถใช้ %s ได้\n"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "Specify session management ID"
 msgstr "บอก ID สำหรับการจัดการวาระ"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "Specify prefix of saved configuration"
 msgstr "บอกพาธไปแฟ้มปรับแต่ง"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
+#: libgnomeui/gnome-client.c:908 libgnomeui/gnome-client.c:924
 msgid "Disable connection to session manager"
 msgstr "ห้ามเชื่อมต่อไปยังโปรแกรมจัดการวาระ"
 
-#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
+#: libgnomeui/gnome-client.c:1034 libgnomeui/gnome-client.c:1047
 msgid "Session management"
 msgstr "การจัดการวาระ"
 
-#: libgnomeui/gnome-client.c:1031
+#: libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "แสดงตัวเลือกของการจัดการวาระ"
 
-#: libgnomeui/gnome-client.c:2580
+#: libgnomeui/gnome-client.c:2584
 msgid "Cancel Logout"
 msgstr "เลิกออกจากระบบ"
 
@@ -971,8 +912,9 @@ msgid "Show the 'Help' button"
 msgstr "แสดงปุ่ม 'วิธีใช้'"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
-msgstr "ชื่อประจำข้อมูลเก่า"
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
+msgstr "ชื่อประจำแฟ้มเก่า"
 
 #: libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
@@ -981,10 +923,6 @@ msgstr "GTK entry"
 #: libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "วิดเจ็ต GTK entry"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "ชื่อประจำแฟ้มเก่า"
 
 #: libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1078,23 +1016,23 @@ msgstr "การกระทำของ GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "ชนิดของการกระทำที่จะให้ตัวเลือกแฟ้มทำ"
 
-#: libgnomeui/gnome-file-entry.c:642 libgnomeui/gnome-file-entry.c:676
+#: libgnomeui/gnome-file-entry.c:651 libgnomeui/gnome-file-entry.c:688
 msgid "Select file"
 msgstr "เลือกแฟ้ม"
 
-#: libgnomeui/gnome-file-entry.c:802
+#: libgnomeui/gnome-file-entry.c:814
 msgid "Path"
 msgstr "พาธ"
 
-#: libgnomeui/gnome-file-entry.c:802
+#: libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
 msgstr "พาธไปยังแฟ้ม"
 
-#: libgnomeui/gnome-file-entry.c:829
+#: libgnomeui/gnome-file-entry.c:841
 msgid "_Browse..."
 msgstr "เ_รียกดู..."
 
-#: libgnomeui/gnome-file-entry.c:830
+#: libgnomeui/gnome-file-entry.c:842
 msgid "Pop up a file selector to choose a file"
 msgstr "แสดงหน้าต่างสำหรับเลือกแฟ้ม"
 
@@ -1273,43 +1211,39 @@ msgstr ""
 "กล่องโต้ตอบสำหรับเลือกไอคอน คุณสามารถใช้คุณสมบัตินี้เพื่อเข้าใช้ GtkDialog "
 "ในกรณีที่ต้องการแก้ไขหรืออ่านพารามิเตอร์ต่างๆ"
 
-#: libgnomeui/gnome-icon-entry.c:322 libgnomeui/gnome-icon-entry.c:988
+#: libgnomeui/gnome-icon-entry.c:322 libgnomeui/gnome-icon-entry.c:997
 msgid "No Icon"
 msgstr "ไม่มีไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: libgnomeui/gnome-icon-entry.c:767
 msgid "Icon selection dialog"
 msgstr "หน้าต่างเลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:759
+#: libgnomeui/gnome-icon-entry.c:768
 msgid "This dialog box lets you select an icon."
 msgstr "สามารถใช้หน้าต่างนี้เลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
-msgstr "ตัวเลือกไอคอน"
-
-#: libgnomeui/gnome-icon-entry.c:766
-msgid "Please pick the icon you want."
-msgstr "กรุณาเลือกไอคอนที่ต้องการ"
-
-#: libgnomeui/gnome-icon-entry.c:991
+#: libgnomeui/gnome-icon-entry.c:774 libgnomeui/gnome-icon-entry.c:1000
 msgid "Icon Selector"
 msgstr "ตัวเลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:992
+#: libgnomeui/gnome-icon-entry.c:775
+msgid "Please pick the icon you want."
+msgstr "กรุณาเลือกไอคอนที่ต้องการ"
+
+#: libgnomeui/gnome-icon-entry.c:1001
 msgid "This button will open a window to let you select an icon."
 msgstr "ปุ่มนี้ใช้เปิดหน้าต่างสำหรับใช้เลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: libgnomeui/gnome-icon-entry.c:1021
 msgid "Browse"
 msgstr "เรียกดู"
 
-#: libgnomeui/gnome-icon-entry.c:1015
+#: libgnomeui/gnome-icon-entry.c:1024
 msgid "Icon path"
 msgstr "พาธของไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:1016
+#: libgnomeui/gnome-icon-entry.c:1025
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1329,55 +1263,55 @@ msgstr "GnomeIconSelection: ไม่สามารถเปิดโฟลเ�
 msgid "Loading Icons..."
 msgstr "กำลังอ่านไอคอน..."
 
-#: libgnomeui/gnome-messagebox.c:109
+#: libgnomeui/gnome-messagebox.c:107
 msgid "Information"
 msgstr "โปรดทราบ"
 
-#: libgnomeui/gnome-messagebox.c:114
+#: libgnomeui/gnome-messagebox.c:112
 msgid "Warning"
 msgstr "คำเตือน"
 
-#: libgnomeui/gnome-messagebox.c:120
+#: libgnomeui/gnome-messagebox.c:118
 msgid "Error"
 msgstr "ผิดพลาด"
 
-#: libgnomeui/gnome-messagebox.c:126
+#: libgnomeui/gnome-messagebox.c:124
 msgid "Question"
 msgstr "คำถาม"
 
-#: libgnomeui/gnome-messagebox.c:131
+#: libgnomeui/gnome-messagebox.c:129
 msgid "Message"
 msgstr "ข้อความ"
 
-#: libgnomeui/gnome-password-dialog.c:269
+#: libgnomeui/gnome-password-dialog.c:265
 msgid "_Username:"
 msgstr "_ชื่อบัญชีผู้ใช้:"
 
-#: libgnomeui/gnome-password-dialog.c:271
+#: libgnomeui/gnome-password-dialog.c:267
 msgid "_Domain:"
 msgstr "โ_ดเมน"
 
-#: libgnomeui/gnome-password-dialog.c:273
+#: libgnomeui/gnome-password-dialog.c:269
 msgid "_Password:"
 msgstr "_รหัสผ่าน"
 
-#: libgnomeui/gnome-password-dialog.c:346
+#: libgnomeui/gnome-password-dialog.c:342
 msgid "Co_nnect"
 msgstr "เ_ชื่อมต่อ"
 
-#: libgnomeui/gnome-password-dialog.c:368
+#: libgnomeui/gnome-password-dialog.c:364
 msgid "Connect _anonymously"
 msgstr "เชื่อมต่อแบบ_นิรนาม"
 
-#: libgnomeui/gnome-password-dialog.c:373
+#: libgnomeui/gnome-password-dialog.c:369
 msgid "Connect as u_ser:"
 msgstr "เชื่อมต่อด้วยชื่อ_ผู้ใช้:"
 
-#: libgnomeui/gnome-password-dialog.c:471
+#: libgnomeui/gnome-password-dialog.c:467
 msgid "_Remember password for this session"
 msgstr "_จำรหัสผ่านไว้ใช้ในวาระนี้"
 
-#: libgnomeui/gnome-password-dialog.c:473
+#: libgnomeui/gnome-password-dialog.c:469
 msgid "Save password in _keyring"
 msgstr "บันทึกรหัสผ่านลงในพวง_กุญแจ"
 
@@ -1389,7 +1323,8 @@ msgstr "แสดงตัวอย่าง"
 msgid "Whether the pixmap entry should have a preview."
 msgstr "กำหนดว่าวิดเจ็ตเลือกภาพควรแสดงภาพตัวอย่างด้วยหรือไม่"
 
-#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:481
+#: libgnomeui/gnome-pixmap-entry.c:189
+#: libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "ไม่มีรูป"
 
@@ -1460,34 +1395,34 @@ msgstr "ลดย่อหน้า"
 msgid "About"
 msgstr "เกี่ยวกับ"
 
-#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
+#: libgnomeui/gnome-ui-init.c:120 libgnomeui/gnome-ui-init.c:129
 msgid "Disable Crash Dialog"
 msgstr "ปิดใช้หน้าต่างแจ้งข้อขัดข้อง"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:122
 msgid "X display to use"
 msgstr "X display ที่จะใช้"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: libgnomeui/gnome-ui-init.c:122
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
+#: libgnomeui/gnome-ui-init.c:166 libgnomeui/gnome-ui-init.c:179
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Library"
 
-#: libgnomeui/gnome-ui-init.c:146
+#: libgnomeui/gnome-ui-init.c:167
 msgid "Show GNOME GUI options"
 msgstr "แสดงตัวเลือก GUI ของ GNOME"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:759
+#: libgnomeui/gnome-ui-init.c:779
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "เกิด segmentation faults หลายอัน ไม่สามารถแสดงหน้าต่างแจ้งข้อผิดพลาด\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:773
+#: libgnomeui/gnome-ui-init.c:793
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1544,8 +1479,54 @@ msgstr "แ_จ้งผู้เขียน"
 msgid "_Debug"
 msgstr "_ดีบัก"
 
-#~ msgid "Exit the test"
-#~ msgstr "ออกจากการทดสอบ"
+#: test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "ออกจากการทดสอบ"
+
+#~ msgid "Error reading file '%s': %s"
+#~ msgstr "เกิดข้อผิดพลาดขณะอ่านแฟ้ม '%s': %s"
+
+#~ msgid "Error rewinding file '%s': %s"
+#~ msgstr "เกิดข้อผิดพลาดขณะเลื่อนไปที่ต้นแฟ้ม '%s': %s"
+
+#~ msgid "No name"
+#~ msgstr "ไม่มีชื่อ"
+
+#~ msgid "File '%s' is not a regular file or directory."
+#~ msgstr "แฟ้ม '%s' ไม่ใช่แฟ้มปกติหรือไดเรกทอรี"
+
+#~ msgid "Error cannot find file id '%s'"
+#~ msgstr "เกิดข้อผิดพลาด หาแฟ้ม '%s' ไม่พบ"
+
+#~ msgid "No filename to save to"
+#~ msgstr "ไม่มีชื่อแฟ้มที่จะใช้บันทึก"
+
+#~ msgid "Starting %s"
+#~ msgstr "กำลังเรียก %s"
+
+#~ msgid "No URL to launch"
+#~ msgstr "ไม่มี URL สำหรับเรียกโปรแกรม"
+
+#~ msgid "Not a launchable item"
+#~ msgstr "ไม่ใช่รายการที่สามารถเรียกโปรแกรมได้"
+
+#~ msgid "No command (Exec) to launch"
+#~ msgstr "ไม่มีคำสั่งที่จะใช้เรียกโปรแกรม"
+
+#~ msgid "Bad command (Exec) to launch"
+#~ msgstr "คำสั่งที่ใช้เรียกโปรแกรมใช้ไม่ได้"
+
+#~ msgid "Unknown encoding of: %s"
+#~ msgstr "ไม่รู้จักรหัสอักขระของ: %s"
+
+#~ msgid "Error writing file '%s': %s"
+#~ msgstr "เกิดข้อผิดพลาดขณะเขียนแฟ้ม '%s': %s"
+
+#~ msgid "History id"
+#~ msgstr "ชื่อประจำข้อมูลเก่า"
+
+#~ msgid "Icon selector"
+#~ msgstr "ตัวเลือกไอคอน"
 
 #~ msgid " domain %s"
 #~ msgstr " โดเมน %s"
