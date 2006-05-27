@@ -1,3 +1,10 @@
+2006-05-27  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-icon-entry.c: (update_icon), (entry_activated),
+	(setup_preview), (entry_changed): Fix critical warnings.
+	(Travis Watkins). Should close bug #341111. Also remove some
+	unneeded casts.
+
 2006-05-16  Christian Persch  <chpe@cvs.gnome.org>
 
 	* configure.in: Update intltool requirement to 0.35.
