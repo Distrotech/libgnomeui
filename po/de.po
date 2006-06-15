@@ -4,15 +4,15 @@
 # Benjamin Greiner <benjamin.greiner@gmx.net>, 2002.
 # Christian Meyer <chrisime@gnome.org>, 2002.
 # Christian Neumair <chris@gnome-de.org>, 2003, 2004.
-# Hendrik Richter <hendrik@gnome-de.org>, 2004, 2005.
+# Hendrik Richter <hendrikr@gnome.org>, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-25 18:25+0100\n"
-"PO-Revision-Date: 2006-02-25 18:24+0100\n"
-"Last-Translator: Hendrik Richter <hendi@gnome-de.org>\n"
+"PO-Revision-Date: 2006-06-15 17:24+0200\n"
+"Last-Translator: Hendrik Richter <hendrikr@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -322,7 +322,7 @@ msgstr "_Fenster/"
 #. Open
 #: ../libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
-msgstr "Ö_ffnen..."
+msgstr "Ö_ffnen …"
 
 #: ../libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
@@ -340,7 +340,7 @@ msgstr "Die momentan geöffnete Datei speichern"
 #. Save As
 #: ../libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
-msgstr "Speichern _unter..."
+msgstr "Speichern _unter …"
 
 #: ../libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
@@ -358,7 +358,7 @@ msgstr "Auf eine gespeicherte Version dieser Datei zurücksetzen"
 #. Print
 #: ../libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
-msgstr "_Drucken..."
+msgstr "_Drucken …"
 
 #: ../libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
@@ -367,7 +367,7 @@ msgstr "Die momentan geöffnete Datei drucken"
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "Drucker _einrichten..."
+msgstr "Drucker _einrichten …"
 
 #: ../libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
@@ -453,7 +453,7 @@ msgstr "Die zuletzt rückgängig gemachte Aktion wiederherstellen"
 #. Find
 #: ../libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
-msgstr "_Suchen..."
+msgstr "_Suchen …"
 
 #: ../libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
@@ -471,7 +471,7 @@ msgstr "Dieselbe Zeichenkette abermals suchen"
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr "_Ersetzen..."
+msgstr "_Ersetzen …"
 
 #: ../libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
@@ -592,7 +592,7 @@ msgstr "Einen Tipp für Ihren nächsten Zug abrufen"
 #. 30
 #: ../libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
-msgstr "Ruhmes_halle..."
+msgstr "Ruhmes_halle …"
 
 #: ../libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
@@ -1110,7 +1110,7 @@ msgstr "Pfad zur Datei"
 
 #: ../libgnomeui/gnome-file-entry.c:829
 msgid "_Browse..."
-msgstr "_Auswählen..."
+msgstr "_Auswählen …"
 
 #: ../libgnomeui/gnome-file-entry.c:830
 msgid "Pop up a file selector to choose a file"
@@ -1353,7 +1353,7 @@ msgstr "GnomeIconSelection: Verzeichnis »%s« konnte nicht geöffnet werden"
 
 #: ../libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
-msgstr "Symbole werden geladen..."
+msgstr "Symbole werden geladen …"
 
 #: ../libgnomeui/gnome-messagebox.c:109
 msgid "Information"
@@ -1581,3 +1581,6 @@ msgstr "_Fehlerdiagnose"
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Den Test beenden"
+
+
+
