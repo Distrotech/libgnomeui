@@ -149,7 +149,7 @@ create_newwin(gboolean normal, gchar *appname, gchar *title)
 static void
 color_set (GnomeColorPicker *cp, guint r, guint g, guint b, guint a)
 {
-	g_print ("Color set: %d %d %d %d\n", r, g, b, a);
+	g_print ("Color set: %u %u %u %u\n", r, g, b, a);
 }
 
 /* Creates a color picker with the specified parameters */
