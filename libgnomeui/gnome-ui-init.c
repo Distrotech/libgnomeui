@@ -54,6 +54,7 @@
 #include "gnome-gconf-ui.h"
 #include "gnome-ui-init.h"
 #include "gnome-stock-icons.h"
+#include "gnome-url.h"
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
@@ -70,6 +71,7 @@
 #include <gtk/gtktogglebutton.h>
 #include <gtk/gtkcheckmenuitem.h>
 #include <gtk/gtkmessagedialog.h>
+#include <gtk/gtkaboutdialog.h>
 
 /*****************************************************************************
  * libgnomeui
@@ -216,19 +218,66 @@ typedef struct {
 } GnomeProgramClass_libgnomeui;
 
 typedef struct {
-        gboolean constructed;
-	gchar	*display;
 	gchar	*default_icon;
-	gboolean show_crash_dialog;
+	guint constructed : 1;
+	guint show_crash_dialog : 1;
 } GnomeProgramPrivate_libgnomeui;
 
 static GQuark quark_gnome_program_private_libgnomeui = 0;
 static GQuark quark_gnome_program_class_libgnomeui = 0;
 
 static void
+show_url (GtkWidget *parent,
+	  const char *url)
+{
+	GdkScreen *screen;
+	GError *error = NULL;
+
+	screen = gtk_widget_get_screen (parent);
+
+	if (!gnome_url_show_on_screen (url, screen, &error))
+	{
+		GtkWidget *dialog;
+
+		dialog = gtk_message_dialog_new (GTK_WINDOW (parent),
+						 GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_OK,
+						 "%s", _("Could not open link"));
+		gtk_message_dialog_format_secondary_text
+			(GTK_MESSAGE_DIALOG (dialog), "%s", error->message);
+		g_error_free (error);
+
+		g_signal_connect (dialog, "response",
+				  G_CALLBACK (gtk_widget_destroy), NULL);
+		gtk_widget_show (dialog);
+	}
+}
+
+static void
+about_url_hook (GtkAboutDialog *about,
+		const char *link,
+		gpointer data)
+{
+	show_url (GTK_WIDGET (about), link);
+}
+
+static void
+about_email_hook (GtkAboutDialog *about,
+		  const char *email,
+		  gpointer data)
+{
+	char *address;
+
+	/* FIXME: escaping? */
+	address = g_strdup_printf ("mailto:%s", email);
+	show_url (GTK_WIDGET (about), address);
+	g_free (address);
+}
+
+static void
 libgnomeui_private_free (GnomeProgramPrivate_libgnomeui *priv)
 {
-	g_free (priv->display);
 	g_free (priv->default_icon);
 	g_free (priv);
 }
@@ -254,7 +303,7 @@ libgnomeui_get_property (GObject *object, guint param_id, GValue *value,
 	else if (param_id == cdata->crash_dialog_id)
 		g_value_set_boolean (value, priv->show_crash_dialog);
 	else if (param_id == cdata->display_id)
-		g_value_set_string (value, priv->display);
+		g_value_set_string (value, gdk_get_display_arg_name ());
 	else 
         	G_OBJECT_WARN_INVALID_PROPERTY_ID(object, param_id, pspec);
 }
@@ -278,9 +327,9 @@ libgnomeui_set_property (GObject *object, guint param_id,
 	if (param_id == cdata->default_icon_id)
 		priv->default_icon = g_strdup (g_value_get_string (value));
 	else if (param_id == cdata->crash_dialog_id)
-		priv->show_crash_dialog = g_value_get_boolean (value);
+		priv->show_crash_dialog = g_value_get_boolean (value) != FALSE;
 	else if (param_id == cdata->display_id)
-		priv->display = g_strdup (g_value_get_string (value));
+		; /* We don't need to store it, we get it from gdk when we need it */
 	else
                 G_OBJECT_WARN_INVALID_PROPERTY_ID(object, param_id, pspec);
 }
@@ -327,6 +376,9 @@ libgnomeui_class_init (GnomeProgramClass *klass, const GnomeModuleInfo *mod_info
                 g_param_spec_string (LIBGNOMEUI_PARAM_DEFAULT_ICON, NULL, NULL, NULL,
                                      (G_PARAM_READABLE | G_PARAM_WRITABLE |
                                       G_PARAM_CONSTRUCT_ONLY)));
+
+	gtk_about_dialog_set_url_hook (about_url_hook, NULL, NULL);
+	gtk_about_dialog_set_email_hook (about_email_hook, NULL, NULL);
 }
 
 static void
@@ -599,6 +651,7 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
         libgnomeui_segv_setup (program);
 #endif
         priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
+
         priv->constructed = TRUE;
 
         /* load the accelerators */
