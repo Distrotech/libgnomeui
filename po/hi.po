@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-18 06:45+0200\n"
-"PO-Revision-Date: 2006-04-18 12:53+0530\n"
+"POT-Creation-Date: 2006-06-22 07:25+0200\n"
+"PO-Revision-Date: 2006-06-22 10:58+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 
@@ -43,97 +44,34 @@ msgstr "शिशु वस्तु 2"
 msgid "Hint for item 2"
 msgstr "वस्तु 2 के बारे में संकेत"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:833
+#: ../file-chooser/gtkfilesystemgnomevfs.c:892
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s किसी का लिंक है जो कि फोल्डर नहीं है"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:844
+#: ../file-chooser/gtkfilesystemgnomevfs.c:903
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s एक लिंक है बिना गंतव्य स्थान के"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:959
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s फोल्डर नहीं है"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1201
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
 msgid "Network Servers"
 msgstr "संजाल सर्वर"
 
 # libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1217
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
 msgid "File System"
 msgstr "फ़ाइलसिस्टम"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1977
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "पुस्तकचिह्न सहेजना विफल (%s)"
-
-#: ../file-chooser/sucky-desktop-item.c:215
-#: ../file-chooser/sucky-desktop-item.c:603
-#, c-format
-msgid "Error reading file '%s': %s"
-msgstr "'%s' को पढ़ने में विफल: %s"
-
-#: ../file-chooser/sucky-desktop-item.c:283
-#, c-format
-msgid "Error rewinding file '%s': %s"
-msgstr "'%s' को फिर घुमाने में त्रुटि: %s"
-
-# libgnomeui/gnome-font-picker.c:174
-#: ../file-chooser/sucky-desktop-item.c:382
-#: ../file-chooser/sucky-desktop-item.c:3722
-msgid "No name"
-msgstr "कोई नाम नहीं"
-
-#: ../file-chooser/sucky-desktop-item.c:618
-#, c-format
-msgid "File '%s' is not a regular file or directory."
-msgstr "फाइल '%s' एक नियमित फाइल या निर्देशिका नहीं है."
-
-#: ../file-chooser/sucky-desktop-item.c:794
-#, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "गलती त्रुटि id '%s' पाने में"
-
-#: ../file-chooser/sucky-desktop-item.c:840
-msgid "No filename to save to"
-msgstr "कोई फाइल नाम सहेजने को नहीं"
-
-# libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
-#: ../file-chooser/sucky-desktop-item.c:1817
-#, c-format
-msgid "Starting %s"
-msgstr "%s का आरंभ कर रहा है"
-
-#: ../file-chooser/sucky-desktop-item.c:2056
-msgid "No URL to launch"
-msgstr "कोई URL लांच करने के नहीं"
-
-#: ../file-chooser/sucky-desktop-item.c:2066
-msgid "Not a launchable item"
-msgstr "कोई लांच करने योग्य मद नहीं "
-
-#: ../file-chooser/sucky-desktop-item.c:2076
-msgid "No command (Exec) to launch"
-msgstr "कोई समादेश (Exec) लांच करने के लिये नहीं"
-
-#: ../file-chooser/sucky-desktop-item.c:2089
-msgid "Bad command (Exec) to launch"
-msgstr "गलत समादेश (Exec) लांच करने के लिये"
-
-#: ../file-chooser/sucky-desktop-item.c:3779
-#, c-format
-msgid "Unknown encoding of: %s"
-msgstr "इसका अनजान एनकोडिंग: %s"
-
-#: ../file-chooser/sucky-desktop-item.c:4010
-#, c-format
-msgid "Error writing file '%s': %s"
-msgstr "'%s' फाइल लिखने में त्रुटि: %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -1319,26 +1257,26 @@ msgid "The type of operation that the file selector is performing."
 msgstr "संक्रिया का प्रकार जो फाइल विभाजक कर रहा है"
 
 # libgnomeui/gnome-file-entry.c:418
-#: ../libgnomeui/gnome-file-entry.c:642 ../libgnomeui/gnome-file-entry.c:676
+#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
 msgid "Select file"
 msgstr "फ़ाइल चुनें"
 
 # libgnomeui/gnome-app-helper.c:166
-#: ../libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
 msgstr "पथ"
 
 # libgnomeui/gnome-app-helper.c:114
-#: ../libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
 msgstr "फ़ाइल का पथ"
 
 # libgnomeui/gnome-file-entry.c:592
-#: ../libgnomeui/gnome-file-entry.c:829
+#: ../libgnomeui/gnome-file-entry.c:841
 msgid "_Browse..."
 msgstr "ब्राउज़ (_B)..."
 
-#: ../libgnomeui/gnome-file-entry.c:830
+#: ../libgnomeui/gnome-file-entry.c:842
 msgid "Pop up a file selector to choose a file"
 msgstr "फ़ाइल चयन के लिये फ़ाइल चयनक पॉपअप करें"
 
@@ -1555,41 +1493,41 @@ msgstr ""
 "आपको इसके किसी गुण को परिवर्धित करने या क्वैरी करने की आवश्यकता हो."
 
 # libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:988
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
 msgid "No Icon"
 msgstr "चिह्न नहीं"
 
 # libgnomeui/gnome-font-picker.c:156
-#: ../libgnomeui/gnome-icon-entry.c:758
+#: ../libgnomeui/gnome-icon-entry.c:767
 msgid "Icon selection dialog"
 msgstr "चिह्न चयन संवाद"
 
-#: ../libgnomeui/gnome-icon-entry.c:759
+#: ../libgnomeui/gnome-icon-entry.c:768
 msgid "This dialog box lets you select an icon."
 msgstr "यह संवाद बक्सा आपको चिह्न चयन करने देता है"
 
-#: ../libgnomeui/gnome-icon-entry.c:765 ../libgnomeui/gnome-icon-entry.c:991
+#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
 msgid "Icon Selector"
 msgstr "चिह्न चयनक"
 
-#: ../libgnomeui/gnome-icon-entry.c:766
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "Please pick the icon you want."
 msgstr "कृपया चिह्न चुनें जो आप चाहते हैं."
 
-#: ../libgnomeui/gnome-icon-entry.c:992
+#: ../libgnomeui/gnome-icon-entry.c:1001
 msgid "This button will open a window to let you select an icon."
 msgstr "यह बटन एक विंडो खोलेगा जहाँ से आप चिह्न चुन सकते हैं."
 
 # libgnomeui/gnome-icon-entry.c:930
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1021
 msgid "Browse"
 msgstr "ब्राउज़"
 
-#: ../libgnomeui/gnome-icon-entry.c:1015
+#: ../libgnomeui/gnome-icon-entry.c:1024
 msgid "Icon path"
 msgstr "चिह्न पथ"
 
-#: ../libgnomeui/gnome-icon-entry.c:1016
+#: ../libgnomeui/gnome-icon-entry.c:1025
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1766,36 +1704,40 @@ msgstr "हाशिया हटाएँ"
 msgid "About"
 msgstr "के बारे में"
 
-#: ../libgnomeui/gnome-ui-init.c:124 ../libgnomeui/gnome-ui-init.c:133
+#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
 msgid "Disable Crash Dialog"
 msgstr "क्रै संवाद अक्षम करता है"
 
-#: ../libgnomeui/gnome-ui-init.c:126
+#: ../libgnomeui/gnome-ui-init.c:124
 msgid "X display to use"
 msgstr "उपयोग में एक्स प्रदर्शक"
 
-#: ../libgnomeui/gnome-ui-init.c:126
+#: ../libgnomeui/gnome-ui-init.c:124
 msgid "DISPLAY"
 msgstr "प्रदर्शक"
 
-#: ../libgnomeui/gnome-ui-init.c:170 ../libgnomeui/gnome-ui-init.c:183
+#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
 msgid "GNOME GUI Library"
 msgstr "गनोम जीयूआई लाइब्रेरी"
 
-#: ../libgnomeui/gnome-ui-init.c:171
+#: ../libgnomeui/gnome-ui-init.c:169
 msgid "Show GNOME GUI options"
 msgstr "GNOME GUI विकल्प दिखायें"
 
+#: ../libgnomeui/gnome-ui-init.c:246
+msgid "Could not open link"
+msgstr "लिंक नहीं खोल सका"
+
 #  dialog display isn't working out
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:787
+#: ../libgnomeui/gnome-ui-init.c:832
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "बहु सेग्मेंटेशन फ़ॉल्ट हुए, त्रुटि संवाद दिखा नहीं सका\n"
 
 #  Eeeek! Can't show dialog
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:801
+#: ../libgnomeui/gnome-ui-init.c:846
 #, c-format
 msgid ""
 "Segmentation fault!\n"
