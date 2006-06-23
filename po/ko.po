@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.15.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-10 01:54+0900\n"
-"PO-Revision-Date: 2006-06-10 01:54+0900\n"
+"POT-Creation-Date: 2006-06-24 08:17+0900\n"
+"PO-Revision-Date: 2006-06-24 08:18+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
@@ -1407,35 +1407,39 @@ msgstr "들이기-취소"
 msgid "About"
 msgstr "정보"
 
-#: ../libgnomeui/gnome-ui-init.c:120 ../libgnomeui/gnome-ui-init.c:129
+#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
 msgid "Disable Crash Dialog"
 msgstr "이상 종료 대화 상자를 사용하지 않습니다"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:124
 msgid "X display to use"
 msgstr "사용할 X 디스플레이"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:124
 msgid "DISPLAY"
 msgstr "<디스플레이>"
 
-#: ../libgnomeui/gnome-ui-init.c:166 ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
 msgid "GNOME GUI Library"
 msgstr "그놈 GUI 라이브러리"
 
-#: ../libgnomeui/gnome-ui-init.c:167
+#: ../libgnomeui/gnome-ui-init.c:169
 msgid "Show GNOME GUI options"
 msgstr "그놈 GUI 옵션 표시"
 
+#: ../libgnomeui/gnome-ui-init.c:246
+msgid "Could not open link"
+msgstr "바로가기를 열 수 없습니다"
+
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:779
+#: ../libgnomeui/gnome-ui-init.c:832
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "여러 개의 세그먼테이션 오류가 발생했습니다; 애러 창을 보여줄 수 없습니다\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:793
+#: ../libgnomeui/gnome-ui-init.c:846
 #, c-format
 msgid ""
 "Segmentation fault!\n"
