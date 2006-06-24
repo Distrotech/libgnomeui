@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-23 16:10+0700\n"
-"PO-Revision-Date: 2006-05-23 16:21+0700\n"
+"POT-Creation-Date: 2006-06-24 21:16+0700\n"
+"PO-Revision-Date: 2006-05-24 21:17+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -1395,34 +1395,38 @@ msgstr "ลดย่อหน้า"
 msgid "About"
 msgstr "เกี่ยวกับ"
 
-#: libgnomeui/gnome-ui-init.c:120 libgnomeui/gnome-ui-init.c:129
+#: libgnomeui/gnome-ui-init.c:122 libgnomeui/gnome-ui-init.c:131
 msgid "Disable Crash Dialog"
 msgstr "ปิดใช้หน้าต่างแจ้งข้อขัดข้อง"
 
-#: libgnomeui/gnome-ui-init.c:122
+#: libgnomeui/gnome-ui-init.c:124
 msgid "X display to use"
 msgstr "X display ที่จะใช้"
 
-#: libgnomeui/gnome-ui-init.c:122
+#: libgnomeui/gnome-ui-init.c:124
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:166 libgnomeui/gnome-ui-init.c:179
+#: libgnomeui/gnome-ui-init.c:168 libgnomeui/gnome-ui-init.c:181
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Library"
 
-#: libgnomeui/gnome-ui-init.c:167
+#: libgnomeui/gnome-ui-init.c:169
 msgid "Show GNOME GUI options"
 msgstr "แสดงตัวเลือก GUI ของ GNOME"
 
+#: libgnomeui/gnome-ui-init.c:246
+msgid "Could not open link"
+msgstr "เปิดลิงก์ไม่สำเร็จ"
+
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:779
+#: libgnomeui/gnome-ui-init.c:832
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "เกิด segmentation faults หลายอัน ไม่สามารถแสดงหน้าต่างแจ้งข้อผิดพลาด\n"
+msgstr "เกิด segmentation faults หลายรายการ ไม่สามารถแสดงหน้าต่างแจ้งข้อผิดพลาด\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:793
+#: libgnomeui/gnome-ui-init.c:846
 #, c-format
 msgid ""
 "Segmentation fault!\n"
