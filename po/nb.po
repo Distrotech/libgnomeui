@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-04 12:47+0200\n"
-"PO-Revision-Date: 2006-04-04 12:48+0200\n"
+"POT-Creation-Date: 2006-06-26 21:48+0200\n"
+"PO-Revision-Date: 2006-06-26 21:48+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -30,94 +30,33 @@ msgstr "Avkom-oppføring 2"
 msgid "Hint for item 2"
 msgstr "Hint for oppføring 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:833
+#: ../file-chooser/gtkfilesystemgnomevfs.c:892
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s er en lenke til noe som ikke er en mappe"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:844
+#: ../file-chooser/gtkfilesystemgnomevfs.c:903
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s er en lenke uten mål"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:959
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s er ikke en mappe"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1201
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1813
 msgid "Network Servers"
 msgstr "Nettverkstjenere"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1217
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1829
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1977
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2345
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Lagring av bokmerke feilet (%s)"
-
-#: ../file-chooser/sucky-desktop-item.c:215
-#: ../file-chooser/sucky-desktop-item.c:603
-#, c-format
-msgid "Error reading file '%s': %s"
-msgstr "Kunne ikke lese filen «%s»: %s"
-
-#: ../file-chooser/sucky-desktop-item.c:283
-#, c-format
-msgid "Error rewinding file '%s': %s"
-msgstr "Kunne ikke gå til starten av fil «%s»: %s"
-
-#: ../file-chooser/sucky-desktop-item.c:382
-#: ../file-chooser/sucky-desktop-item.c:3722
-msgid "No name"
-msgstr "Uten navn"
-
-#: ../file-chooser/sucky-desktop-item.c:618
-#, c-format
-msgid "File '%s' is not a regular file or directory."
-msgstr "Filen «%s» er ikke en vanlig fil eller mappe."
-
-#: ../file-chooser/sucky-desktop-item.c:794
-#, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "Feil. Kan ikke finne fil-ID «%s»"
-
-#: ../file-chooser/sucky-desktop-item.c:840
-msgid "No filename to save to"
-msgstr "Ingen filnavn å lagre til"
-
-#: ../file-chooser/sucky-desktop-item.c:1817
-#, c-format
-msgid "Starting %s"
-msgstr "Starter %s"
-
-#: ../file-chooser/sucky-desktop-item.c:2056
-msgid "No URL to launch"
-msgstr "Ingen URL å åpne"
-
-#: ../file-chooser/sucky-desktop-item.c:2066
-msgid "Not a launchable item"
-msgstr "Oppføringen kan ikke kjøres"
-
-#: ../file-chooser/sucky-desktop-item.c:2076
-msgid "No command (Exec) to launch"
-msgstr "Ingen kommando (Exec) å kjøre"
-
-#: ../file-chooser/sucky-desktop-item.c:2089
-msgid "Bad command (Exec) to launch"
-msgstr "Ugyldig kommando (Exec)"
-
-#: ../file-chooser/sucky-desktop-item.c:3779
-#, c-format
-msgid "Unknown encoding of: %s"
-msgstr "Ukjent koding av: %s"
-
-#: ../file-chooser/sucky-desktop-item.c:4010
-#, c-format
-msgid "Error writing file '%s': %s"
-msgstr "Feil under skriving til fil «%s»: %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -762,7 +701,7 @@ msgstr "Sesjonshåndtering"
 msgid "Show session management options"
 msgstr "Vis alternativer for sesjonshåndtering"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2582
 msgid "Cancel Logout"
 msgstr "Avbryt utlogging"
 
@@ -1083,23 +1022,23 @@ msgstr "GtkFileChooser-handling"
 msgid "The type of operation that the file selector is performing."
 msgstr "Type operasjon som utføres av filvelgeren."
 
-#: ../libgnomeui/gnome-file-entry.c:642 ../libgnomeui/gnome-file-entry.c:676
+#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
 msgid "Select file"
 msgstr "Velg fil"
 
-#: ../libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
 msgstr "Sti"
 
-#: ../libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
 msgstr "Sti til fil"
 
-#: ../libgnomeui/gnome-file-entry.c:829
+#: ../libgnomeui/gnome-file-entry.c:841
 msgid "_Browse..."
 msgstr "_Bla gjennom..."
 
-#: ../libgnomeui/gnome-file-entry.c:830
+#: ../libgnomeui/gnome-file-entry.c:842
 msgid "Pop up a file selector to choose a file"
 msgstr "Vis en filvelger for å velge en fil"
 
@@ -1281,56 +1220,56 @@ msgstr ""
 "Ikonvelgerdialog. Du kan bruke denne egenskapen for å finne GtkDialog hvis "
 "du trenger å endre eller spørre på noen av egenskapene."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:988
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
 msgid "No Icon"
 msgstr "Uten ikon"
 
-#: ../libgnomeui/gnome-icon-entry.c:758
+#: ../libgnomeui/gnome-icon-entry.c:767
 msgid "Icon selection dialog"
 msgstr "Dialog for ikonvalg"
 
-#: ../libgnomeui/gnome-icon-entry.c:759
+#: ../libgnomeui/gnome-icon-entry.c:768
 msgid "This dialog box lets you select an icon."
 msgstr "Denne dialogen lar deg velge et ikon."
 
-#: ../libgnomeui/gnome-icon-entry.c:765 ../libgnomeui/gnome-icon-entry.c:991
+#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
 msgid "Icon Selector"
 msgstr "Ikonvalg"
 
-#: ../libgnomeui/gnome-icon-entry.c:766
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "Please pick the icon you want."
 msgstr "Vennligst velg ikonet du ønsker."
 
-#: ../libgnomeui/gnome-icon-entry.c:992
+#: ../libgnomeui/gnome-icon-entry.c:1001
 msgid "This button will open a window to let you select an icon."
 msgstr "Denne knappen vil åpne et vindu som lar deg velge et ikon."
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1021
 msgid "Browse"
 msgstr "Bla gjennom"
 
-#: ../libgnomeui/gnome-icon-entry.c:1015
+#: ../libgnomeui/gnome-icon-entry.c:1024
 msgid "Icon path"
 msgstr "Ikonsti"
 
-#: ../libgnomeui/gnome-icon-entry.c:1016
+#: ../libgnomeui/gnome-icon-entry.c:1025
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
 "Her skal du skrive inn navnet på katalogen hvor ikonbildene er lokalisert."
 
-#: ../libgnomeui/gnome-icon-sel.c:293
+#: ../libgnomeui/gnome-icon-sel.c:292
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: «%s» eksisterer ikke eller er ikke en katalog"
 
-#: ../libgnomeui/gnome-icon-sel.c:301
+#: ../libgnomeui/gnome-icon-sel.c:300
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: kunne ikke åpne katalog «%s»"
 
-#: ../libgnomeui/gnome-icon-sel.c:405
+#: ../libgnomeui/gnome-icon-sel.c:402
 msgid "Loading Icons..."
 msgstr "Laster ikoner..."
 
@@ -1378,11 +1317,11 @@ msgstr "Koble til _anonymt"
 msgid "Connect as u_ser:"
 msgstr "Koble til som br_uker:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
+#: ../libgnomeui/gnome-password-dialog.c:464
 msgid "_Remember password for this session"
 msgstr "Husk passo_rdet for denne sesjonen"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
+#: ../libgnomeui/gnome-password-dialog.c:466
 msgid "Save password in _keyring"
 msgstr "Lagre passord på nø_kkelring"
 
@@ -1466,15 +1405,15 @@ msgstr "Av-indenter"
 msgid "About"
 msgstr "Om"
 
-#: ../libgnomeui/gnome-ui-init.c:125 ../libgnomeui/gnome-ui-init.c:134
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "Deaktiver krasjdialog"
 
-#: ../libgnomeui/gnome-ui-init.c:127
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "X-display som skal brukes"
 
-#: ../libgnomeui/gnome-ui-init.c:127
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
@@ -1486,14 +1425,18 @@ msgstr "GNOME GUI-bibliotek"
 msgid "Show GNOME GUI options"
 msgstr "Vis alternativer for GNOME brukergrensesnitt"
 
+#: ../libgnomeui/gnome-ui-init.c:247
+msgid "Could not open link"
+msgstr "Kunne ikke åpne lenke"
+
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:790
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flere segmenteringsfeil oppstod; kan ikke vise feildialogen\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:804
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1554,3 +1497,42 @@ msgstr "_Feilsøk"
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Avslutt testprogrammet"
+
+#~ msgid "Error reading file '%s': %s"
+#~ msgstr "Kunne ikke lese filen «%s»: %s"
+
+#~ msgid "Error rewinding file '%s': %s"
+#~ msgstr "Kunne ikke gå til starten av fil «%s»: %s"
+
+#~ msgid "No name"
+#~ msgstr "Uten navn"
+
+#~ msgid "File '%s' is not a regular file or directory."
+#~ msgstr "Filen «%s» er ikke en vanlig fil eller mappe."
+
+#~ msgid "Error cannot find file id '%s'"
+#~ msgstr "Feil. Kan ikke finne fil-ID «%s»"
+
+#~ msgid "No filename to save to"
+#~ msgstr "Ingen filnavn å lagre til"
+
+#~ msgid "Starting %s"
+#~ msgstr "Starter %s"
+
+#~ msgid "No URL to launch"
+#~ msgstr "Ingen URL å åpne"
+
+#~ msgid "Not a launchable item"
+#~ msgstr "Oppføringen kan ikke kjøres"
+
+#~ msgid "No command (Exec) to launch"
+#~ msgstr "Ingen kommando (Exec) å kjøre"
+
+#~ msgid "Bad command (Exec) to launch"
+#~ msgstr "Ugyldig kommando (Exec)"
+
+#~ msgid "Unknown encoding of: %s"
+#~ msgstr "Ukjent koding av: %s"
+
+#~ msgid "Error writing file '%s': %s"
+#~ msgstr "Feil under skriving til fil «%s»: %s"
