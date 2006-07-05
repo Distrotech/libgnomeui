@@ -1,3 +1,4 @@
+# translation of eu.po to Basque
 # translation of libgnomeui.po to basque
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
@@ -8,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-24 19:44+0000\n"
-"PO-Revision-Date: 2006-05-24 19:44+0000\n"
+"POT-Creation-Date: 2006-07-05 19:11+0000\n"
+"PO-Revision-Date: 2006-07-05 19:11+0000\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -1413,28 +1414,32 @@ msgstr "Koskarik gabe"
 msgid "About"
 msgstr "Honi buruz"
 
-#: ../libgnomeui/gnome-ui-init.c:120 ../libgnomeui/gnome-ui-init.c:129
+#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
 msgid "Disable Crash Dialog"
 msgstr "Desgaitu kraskatze elkarrizketa-koadroa"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:124
 msgid "X display to use"
 msgstr "Erabili beharreko X bistaratzea"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:124
 msgid "DISPLAY"
 msgstr "BISTARATZEA"
 
-#: ../libgnomeui/gnome-ui-init.c:166 ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI liburutegia"
 
-#: ../libgnomeui/gnome-ui-init.c:167
+#: ../libgnomeui/gnome-ui-init.c:169
 msgid "Show GNOME GUI options"
 msgstr "Erakutsi GNOME interfazearen aukerak"
 
+#: ../libgnomeui/gnome-ui-init.c:246
+msgid "Could not open link"
+msgstr "Ezin izan da esteka ireki"
+
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:779
+#: ../libgnomeui/gnome-ui-init.c:832
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1442,7 +1447,7 @@ msgstr ""
 "koadroa bistaratu\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:793
+#: ../libgnomeui/gnome-ui-init.c:846
 #, c-format
 msgid ""
 "Segmentation fault!\n"
