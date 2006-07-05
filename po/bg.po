@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-21 09:43+0300\n"
-"PO-Revision-Date: 2006-05-21 09:44+0300\n"
+"POT-Creation-Date: 2006-07-05 16:28+0300\n"
+"PO-Revision-Date: 2006-07-05 16:28+0300\n"
 "Last-Translator: Vladimir Petkov <vpetkov@i-space.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -1416,28 +1416,32 @@ msgstr "Махане на отстъп"
 msgid "About"
 msgstr "Относно"
 
-#: ../libgnomeui/gnome-ui-init.c:120 ../libgnomeui/gnome-ui-init.c:129
+#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
 msgid "Disable Crash Dialog"
 msgstr "Спиране на диалоговия прозорец за грешките"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:124
 msgid "X display to use"
 msgstr "X дисплей за използване"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:124
 msgid "DISPLAY"
 msgstr "ДИСПЛЕЙ"
 
-#: ../libgnomeui/gnome-ui-init.c:166 ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
 msgid "GNOME GUI Library"
 msgstr "Библиотека за ГПИ на GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:167
+#: ../libgnomeui/gnome-ui-init.c:169
 msgid "Show GNOME GUI options"
 msgstr "Показване на настройките на интерфейса на GNOME"
 
+#: ../libgnomeui/gnome-ui-init.c:246
+msgid "Could not open link"
+msgstr "Връзката не може да бъде отворена"
+
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:779
+#: ../libgnomeui/gnome-ui-init.c:832
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1445,7 +1449,7 @@ msgstr ""
 "бъде показан\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:793
+#: ../libgnomeui/gnome-ui-init.c:846
 #, c-format
 msgid ""
 "Segmentation fault!\n"
