@@ -1,5 +1,10 @@
 2006-07-10  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_segv_handle):
+	Add missing XUngrabServer() call here. Closes bug #129930
+
+2006-07-10  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-client.c: (master_client_connect):
 	Fix bug #90345. Remove unneeded atexit() call.
 	(Owen Taylor)

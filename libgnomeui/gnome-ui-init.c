@@ -836,6 +836,7 @@ static void libgnomeui_segv_handle(int signum)
         /* Make sure we release grabs */
         gdk_pointer_ungrab(GDK_CURRENT_TIME);
         gdk_keyboard_ungrab(GDK_CURRENT_TIME);
+        XUngrabServer (GDK_DISPLAY ());
 
         gdk_flush();
         
