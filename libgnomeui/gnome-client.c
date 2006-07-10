@@ -1239,8 +1239,6 @@ master_client_connect (GnomeClient *client,
 		       gpointer     client_data)
 {
   gdk_set_sm_client_id (gnome_client_get_id (client));
-
-  g_atexit (master_client_clean_up);
 }
 
 static void
