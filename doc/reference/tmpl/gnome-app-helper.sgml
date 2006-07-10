@@ -176,12 +176,6 @@ this parameter set to the user data that was given in the relevant
 of the widget.
 </para>
 
-<!-- # Unused Parameters # -->
-@menu_shell: 
-@uiinfo: 
-@accel_group: 
-@uline_accels: 
-@pos: 
 
 
 <!-- ##### USER_FUNCTION GnomeUISignalConnectFunc ##### -->
@@ -405,8 +399,6 @@ instance.
 @path: 
 @uiinfo: 
 @uibdata: 
-<!-- # Unused Parameters # -->
-@menuinfo: 
 
 
 <!-- ##### FUNCTION gnome_app_insert_menus ##### -->
@@ -468,8 +460,6 @@ instance.
 
 @app: 
 @uiinfo: 
-<!-- # Unused Parameters # -->
-@uinfo: 
 
 
 <!-- ##### FUNCTION gnome_app_setup_toolbar ##### -->

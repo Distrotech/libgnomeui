@@ -198,6 +198,14 @@ connect to the session manager or not. Can be overridden by the user passing
 @Returns: 
 
 
+<!-- ##### FUNCTION gnome_client_module_info_get ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
 <!-- ##### FUNCTION gnome_client_set_global_config_prefix ##### -->
 <para>
 
@@ -351,8 +359,6 @@ gnome_client_set_discard_command (client, 3, argv);
 
 @client: 
 @id: 
-<!-- # Unused Parameters # -->
-@user_id: 
 
 
 <!-- ##### FUNCTION gnome_client_save_any_dialog ##### -->
@@ -448,8 +454,6 @@ gnome_client_set_discard_command (client, 3, argv);
 
 @client: 
 @id: 
-<!-- # Unused Parameters # -->
-@client_id: 
 
 
 <!-- ##### FUNCTION gnome_client_get_id ##### -->
@@ -488,10 +492,6 @@ gnome_client_set_discard_command (client, 3, argv);
 @dialog_type: 
 @function: 
 @data: 
-<!-- # Unused Parameters # -->
-@dialog: 
-@func: 
-@client_data: 
 
 
 <!-- ##### FUNCTION gnome_client_request_interaction_interp ##### -->
@@ -504,9 +504,6 @@ gnome_client_set_discard_command (client, 3, argv);
 @function: 
 @data: 
 @destroy: 
-<!-- # Unused Parameters # -->
-@dialog: 
-@func: 
 
 
 <!-- ##### FUNCTION gnome_interaction_key_return ##### -->

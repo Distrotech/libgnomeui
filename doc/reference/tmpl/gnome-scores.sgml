@@ -70,8 +70,6 @@ GnomeScores
 @txt: 
 @font: 
 @col: 
-<!-- # Unused Parameters # -->
-@color: 
 
 
 <!-- ##### FUNCTION gnome_scores_set_logo_pixmap ##### -->
@@ -81,8 +79,6 @@ GnomeScores
 
 @gs: 
 @pix_name: 
-<!-- # Unused Parameters # -->
-@logo: 
 
 
 <!-- ##### FUNCTION gnome_scores_set_logo_widget ##### -->
@@ -102,8 +98,6 @@ GnomeScores
 @gs: 
 @n: 
 @col: 
-<!-- # Unused Parameters # -->
-@pos: 
 
 
 <!-- ##### FUNCTION gnome_scores_set_def_color ##### -->

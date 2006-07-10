@@ -35,8 +35,6 @@ gnome-mdi-session
 @section: 
 @create_child_func: 
 @Returns: 
-<!-- # Unused Parameters # -->
-@child_create_func: 
 
 
 <!-- ##### FUNCTION gnome_mdi_save_state ##### -->

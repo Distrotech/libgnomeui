@@ -85,6 +85,21 @@ sequence of pages. Pages in the "middle" of a sequence should use
 @Returns: 
 
 
+<!-- ##### FUNCTION gnome_druid_page_edge_construct ##### -->
+<para>
+
+</para>
+
+@druid_page_edge: 
+@position: 
+@antialiased: 
+@title: 
+@text: 
+@logo: 
+@watermark: 
+@top_watermark: 
+
+
 <!-- ##### FUNCTION gnome_druid_page_edge_set_bg_color ##### -->
 <para>
 
@@ -173,7 +188,5 @@ sequence of pages. Pages in the "middle" of a sequence should use
 
 @druid_page_edge: 
 @top_watermark_image: 
-<!-- # Unused Parameters # -->
-@top_watermark: 
 
 

@@ -1,3 +1,11 @@
+libgnomeui 2.15.2
+-----------------
+
+* Add missing XUngrabServer() call in gnome-ui-init.c
+* Remove unneeded atexit() call in gnome-client.c
+* Set about dialog hooks (Christian Persch)
+* Loads of new and updated translations.
+
 libgnomeui 2.15.1
 -----------------
 

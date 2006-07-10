@@ -200,8 +200,6 @@ Create generic dialog boxes.
 
 @dialog: 
 @button_name: 
-<!-- # Unused Parameters # -->
-@name: 
 
 
 <!-- ##### FUNCTION gnome_dialog_append_buttonsv ##### -->
@@ -221,9 +219,6 @@ Create generic dialog boxes.
 @dialog: 
 @button_name: 
 @pixmap_name: 
-<!-- # Unused Parameters # -->
-@name: 
-@pixmap: 
 
 
 <!-- ##### FUNCTION gnome_dialog_append_buttons_with_pixmaps ##### -->
