@@ -6,14 +6,14 @@
 # Christophe Fergeau <teuf@users.sourceforge.net>, 2002
 # Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002.
 # Benoît Dejean <benoit@placenet.org>, 2006.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.14.0\n"
+"Project-Id-Version: libgnomeui 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-17 16:43+0200\n"
-"PO-Revision-Date: 2006-04-05 12:00+0200\n"
-"Last-Translator: Benoît Dejean <benoit@placenet.org>\n"
+"POT-Creation-Date: 2006-07-16 19:04+0200\n"
+"PO-Revision-Date: 2006-07-03 17:09+0100\n"
+"Last-Translator: Jonathan Ernst <jonathan@ernstfamily.ch>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +52,7 @@ msgstr "%s n'est pas un dossier"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1815
 msgid "Network Servers"
-msgstr ""
+msgstr "Serveurs réseau"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1831
 msgid "File System"
@@ -409,7 +409,7 @@ msgstr "Recherche de nouveau la même chaîne"
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
-msgstr "_Remplacer..."
+msgstr "Re_mplacer..."
 
 #: ../libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
@@ -615,7 +615,7 @@ msgstr "Progression"
 
 #: ../libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr "ID de l'app."
+msgstr "Identifiant de l'application"
 
 #: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
@@ -709,7 +709,7 @@ msgstr "Gestion de session"
 msgid "Show session management options"
 msgstr "Afficher les options de gestion de session"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2582
 msgid "Cancel Logout"
 msgstr "Annuler la demande de fin de session"
 
@@ -1234,7 +1234,7 @@ msgid ""
 msgstr ""
 "Boîte de dialogue de sélection d'icônes. Vous pouvez utiliser cette "
 "propriété pour obtenir le GtkDialog si vous devez modifier ou interroger "
-"n'importe laquelle de ses propriétés"
+"n'importe laquelle de ses propriétés."
 
 #: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
 msgid "No Icon"
@@ -1423,28 +1423,32 @@ msgstr "Désindenter"
 msgid "About"
 msgstr "À propos"
 
-#: ../libgnomeui/gnome-ui-init.c:120 ../libgnomeui/gnome-ui-init.c:129
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "Désactive la boîte de dialogue de crash"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "Visuel X à utiliser"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "VISUEL"
 
-#: ../libgnomeui/gnome-ui-init.c:166 ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
 msgstr "Bibliothèque d'interface graphique GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:167
+#: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
 msgstr "Afficher les options de l'interface graphique GNOME"
 
+#: ../libgnomeui/gnome-ui-init.c:247
+msgid "Could not open link"
+msgstr "Impossible d'ouvrir le lien"
+
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:779
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1452,7 +1456,7 @@ msgstr ""
 "boîte de dialogue d'erreur\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:793
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
