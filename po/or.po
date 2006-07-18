@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: or\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-05 23:50+0200\n"
-"PO-Revision-Date: 2006-07-07 11:39+0530\n"
+"PO-Revision-Date: 2006-07-18 13:10+0530\n"
 "Last-Translator: Subhransu Behera <arya_subhransu@yahoo.co.in>\n"
 "Language-Team: Oriya <oriya-group@lists.sarovar.org>\n"
 "MIME-Version: 1.0\n"
@@ -821,7 +821,7 @@ msgstr "ଶୀର୍ଷକ ଅଗ୍ରଭୂମି ରଙ୍ଗ"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
-msgstr "ଗୋଟିଏ GdkColor ପରି ଶୀର୍ଷକର ଅଗ୍ରଭୂମି ରଙ୍ଗ" 
+msgstr "ଗୋଟିଏ GdkColor ପରି ଶୀର୍ଷକର ଅଗ୍ରଭୂମି ରଙ୍ଗ"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
@@ -927,8 +927,7 @@ msgstr "GTK ପ୍ରବିଷ୍ଟି"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
-"ଫାଇଲ ଭରଣ ପାଇଁ ଅନନ୍ଯ ପରିଚୟ। ଇତିହାସ ତାଲିକାକୁ ସଂରକ୍ଷିତ କରିବା ପାଇଁ ଏହା ବ୍ଯବହାର କରାଯିବ।"
+msgstr "ଫାଇଲ ଭରଣ ପାଇଁ ଅନନ୍ଯ ପରିଚୟ। ଇତିହାସ ତାଲିକାକୁ ସଂରକ୍ଷିତ କରିବା ପାଇଁ ଏହା ବ୍ଯବହାର କରାଯିବ।"
 
 #: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
 msgid "Browse Dialog Title"
@@ -946,8 +945,7 @@ msgstr "ଡିରେକ୍ଟୋରି ପ୍ରବିଷ୍ଟି"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"ଡିରେକ୍ଟୋରି ନାମ ଏବଂ ସମ୍ପୂର୍ଣ୍ଣ ଫାଇଲ ନାମକୁ ଭରଣ କରିବା ପାଇଁ ଫାଇଲ ପ୍ରବିଷ୍ଟି ବ୍ଯବହ୍ରୁତ ହେଉଛି କି।"
+msgstr "ଡିରେକ୍ଟୋରି ନାମ ଏବଂ ସମ୍ପୂର୍ଣ୍ଣ ଫାଇଲ ନାମକୁ ଭରଣ କରିବା ପାଇଁ ଫାଇଲ ପ୍ରବିଷ୍ଟି ବ୍ଯବହ୍ରୁତ ହେଉଛି କି।"
 
 #: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
@@ -983,7 +981,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-
+"GnomeEntry ଗୋଟିଏ ଫାଇଲ ପ୍ରବିଷ୍ଟି ଫାଇଲ ଯାହାକୁ ଫାଇଲ ନାମ ମାନଙ୍କୁ ଭରଣ କରିବା ପାଇଁ ବ୍ଯବହାର କରାଯାଏ। ଆପଣ "
+"ଏହାର କୌଣସି ପାରାମିଟରକୁ ଆପଣ ରୂପାନ୍ତରିତ କରିବା ପାଇଁ କିମ୍ବା ପ୍ରଶ୍ନ ପଚାରିବା ପାଇଁ ଯଦି ଚାହୁଁଛନ୍ତି ତାହାହେଲେ ଏହି ଗୁଣକୁ "
+"GnomeEntry ପାଇବା ପାଇଁ ବ୍ଯବହାର କରି ପାରିବେ।"
 
 #: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
@@ -995,6 +995,9 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
+"GtkEntry ଗୋଟିଏ ଫାଇଲ ପ୍ରବିଷ୍ଟି ଫାଇଲ ଯାହାକୁ ଫାଇଲ ନାମ ମାନଙ୍କୁ ଭରଣ କରିବା ପାଇଁ ବ୍ଯବହାର କରାଯାଏ। ଆପଣ "
+"ଏହାର କୌଣସି ପାରାମିଟରକୁ ଆପଣ ରୂପାନ୍ତରିତ କରିବା ପାଇଁ କିମ୍ବା ପ୍ରଶ୍ନ ପଚାରିବା ପାଇଁ ଯଦି ଚାହୁଁଛନ୍ତି ତାହାହେଲେ ଏହି ଗୁଣକୁ "
+"GtkEntry ପାଇବା ପାଇଁ ବ୍ଯବହାର କରି ପାରିବେ।"
 
 #: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
@@ -1005,6 +1008,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
+"ଫାଇଲ ମାନଙ୍କୁ ଚୟନ କରିବା ପାଇଁ ନୂତନ GtkFileChooser ଓ୍ବିଜେଟ ଏବଂ GtkFileSelection ଓ୍ବିଜେଟ "
+"ମଧ୍ଯରୁ କାହାକୁ ବ୍ଯବହାର କରିବ।"
 
 #: ../libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
@@ -1122,6 +1127,9 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
+"\"%s\" ଅନୁପ୍ରୟୋଗଟି ଆପଣଙ୍କ ବିନ୍ଯାସର ଗୋଟିଏ ଲକ୍ଷଣକୁ ବଦଳାଇବା ପାଇଁ ଉଦ୍ଯମ କଲା ଯାହାକୁ ବଦଳଇବାର ଅନୁମତି "
+"ଆପଣଙ୍କୁ ଆପଣଙ୍କର ତନ୍ତ୍ରର ପ୍ରଶାସକ ଏବଂ ପ୍ରଚାଳନ ତନ୍ତ୍ର ବିକ୍ରେତା ଦେଇ ନାହାଁନ୍ତି। ଆପଣ ଚୟନ କରିଥିବା ବିନ୍ଯାସ ମାନଙ୍କୁ କିଛି "
+"ପ୍ରଭାବଶାଳୀ ହୋଇ ନ ପାରନ୍ତି, କିମ୍ବା ଆପଣ ପୂନର୍ବାର ଏହି ପ୍ରୟୋଗକୁ ବ୍ଯବହାର କଲେ ଏହା ପୁନଃସ୍ଥାପିତ ହୋଇ ନପାରେ।"
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
@@ -1129,6 +1137,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
+"%s ପାଇଁ ବିନ୍ଯାସ ସୂଚନା ଧାରଣ ଏବଂ ସଂରକ୍ଷଣ କରିବା ସମୟରେ ଗୋଟିଏ ତ୍ରୁଟି ପରିଲିଖିତ ହେଲା। ଆପଣଙ୍କର କିଛି ବିନ୍ଯାସ "
+"ବ୍ଯବସ୍ଥାପନ ସଠିକ ଭାବରେ କାର୍ଯ୍ଯ କରି ନ ପାରେ।"
 
 #: ../libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1148,7 +1158,7 @@ msgstr "ବଟନରେ ପାଠ୍ଯ"
 
 #: ../libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
-msgstr ""
+msgstr "ବିଶ୍ବରୁ କ୍ଷୁଧା ମିଟାନ୍ତୁ"
 
 #: ../libgnomeui/gnome-href.c:139
 msgid "Link color"
@@ -1167,12 +1177,15 @@ msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
+"ପୂର୍ବ ନିର୍ଦ୍ଧାରିତ ଓ୍ବେବ ବ୍ରାଉଜରକୁ ପ୍ରାରମ୍ଭ କରିବାର ପ୍ରଚେଷ୍ଟା କରୁଥିବା ସମୟରେ ଗୋଟିଏ ତ୍ରୁଟି ପରିଲିଖିତ ହେଲା।\n"
+"ଦୟାକରି ଆପଣଙ୍କର ବିନ୍ଯାସକୁ 'ଅନୁଗ୍ରହୀତ ପ୍ରୟୋଗ'ର ପ୍ରାଧାନ୍ଯ ଉପକରଣରେ ଯାଞ୍ଚ କରନ୍ତୁ।"
 
 #: ../libgnomeui/gnome-icon-entry.c:180
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
+"ଚିତ୍ରସଙ୍କେତ ପ୍ରବିଷ୍ଟି ପାଇଁ ଅନନ୍ଯ ପରିଚୟକ। ଏହା ଐତିହାସିକ ତାଲିକାକୁ ସଂରକ୍ଷଣ କରିବା ପାଇଁ ବ୍ଯବହ୍ରୁତ ହେବ।"
 
 #: ../libgnomeui/gnome-icon-entry.c:189
 msgid "Title for the Browse icon dialog."
@@ -1199,6 +1212,8 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
+"ଚିତ୍ରସଙ୍କେତ ଚୟନ ସଂଳାପ। ଆପଣ ଏହି ଗୁଣକୁ ପ୍ରୟୋଗ କରି GtkDialogକୁ ପାଇ ପାରିବେ ଯଦି ଆପଣ "
+"ଏହାର କୌଣସି ଗୁଣଧର୍ମକୁ ରୂପାନ୍ତରିତ କରିବା ପାଇଁ କିମ୍ବା ପ୍ରଶ୍ନ ପଚାରି ପାଇଁ ଚାହୁଁଛନ୍ତି।"
 
 #: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
 msgid "No Icon"
@@ -1236,8 +1251,7 @@ msgstr "ଚିତ୍ରସଙ୍କେତ ପଥ"
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
-msgstr ""
-"ଏଠାରେ ଆପଣ ଡିରେକ୍ଟୋରିର ନାମ ଭରଣ କରିବା ଉଚିତ ଯେଉଁଥିରେ ଚିତ୍ରସଙ୍କେତର ପ୍ରଚିଛବି ଅବସ୍ଥିତ ଅଛି।"
+msgstr "ଏଠାରେ ଆପଣ ଡିରେକ୍ଟୋରିର ନାମ ଭରଣ କରିବା ଉଚିତ ଯେଉଁଥିରେ ଚିତ୍ରସଙ୍କେତର ପ୍ରଚିଛବି ଅବସ୍ଥିତ ଅଛି।"
 
 #: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1434,6 +1448,11 @@ msgid ""
 "will exit.\n"
 "Please save all your files before closing this dialog."
 msgstr ""
+"ମାରାତ୍ମକ ତ୍ରୁଟି ଯୋଗୁଁ ନୋମ ଅଧିବେଶନ ପରିଚାଳକ (ପ୍ରକ୍ରିୟା %d)ଟି\n"
+"ନଷ୍ଟ ହୋଇଗଲା (%s)।\n"
+"ଆପଣ ଏହି ସଂଳାପକୁ ଅଟକାଇଲେ, ସମସ୍ତ ପ୍ରୟୋଗ ଗୁଡିକ ଅଟକିଯିବ ଏବଂ ଆପଣଙ୍କର "
+"ଅଧିବେଶନଟି ବନ୍ଦ ହୋଇଯିବ।\n"
+"ଦୟାକରି ସମସ୍ତ ଫାଇଲ ଗୁଡିକୁ ଏହି ସଂଳାପ ବନ୍ଦ ହେବା ପୂର୍ବରୁ ସଂରକ୍ଷିତ କରି ରଖନ୍ତୁ।"
 
 #: ../libgnomeui/gnome_segv.c:112
 #, c-format
@@ -1450,6 +1469,8 @@ msgid ""
 "You can inform the developers of what happened to help them fix it.  Or you "
 "can restart the application right now."
 msgstr ""
+"ଆପଣ ବିକାଶକାରୀ ମାନଙ୍କୁ କଣ ହୋଇଛି ତାହା ଜଣାଇ ପାରିବେ ଯାହାକି ତାଙ୍କୁ ଏହାକୁ ସଠିକ କରିବାରେ ସାହାଯ୍ଯ କରିବ। କିମ୍ବା ଆପଣ "
+"ପ୍ରୟୋଗକୁ ବର୍ତମାନ ପୁନଃପ୍ରାରମ୍ଭ କରି ପାରିବେ।"
 
 #: ../libgnomeui/gnome_segv.c:137
 msgid "Usage: gnome_segv2 appname signum\n"
