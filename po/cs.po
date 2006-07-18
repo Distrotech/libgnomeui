@@ -1,3 +1,4 @@
+# translation of cs.po to Czech
 # translation of cs.po to
 # Czech translation of libgnomeui.
 # Copyright (C) 2002, 2006 Free Software Foundation, Inc.
@@ -10,10 +11,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-21 13:51+0200\n"
-"PO-Revision-Date: 2006-06-21 13:51+0200\n"
+"POT-Creation-Date: 2006-07-18 13:29+0200\n"
+"PO-Revision-Date: 2006-07-18 13:31+0200\n"
 "Last-Translator: Jakub Friedl <jfriedl@suse.cz>\n"
-"Language-Team:  <cs@li.org>\n"
+"Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -604,7 +605,7 @@ msgstr " (ano nebo ne)"
 
 #: ../libgnomeui/gnome-app-util.c:356
 msgid "  - OK? (yes or no)"
-msgstr "  - OK? (ano nebo ne)"
+msgstr "  - Budiž? (ano nebo ne)"
 
 #: ../libgnomeui/gnome-app-util.c:684
 msgid "Progress"
@@ -706,7 +707,7 @@ msgstr "Správa sezení"
 msgid "Show session management options"
 msgstr "Zobrazit možnosti správy sezení"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2582
 msgid "Cancel Logout"
 msgstr "Zrušit odhlášení"
 
@@ -1410,32 +1411,32 @@ msgstr "Ododsazení"
 msgid "About"
 msgstr "O aplikaci"
 
-#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "Zakázat dialog havárie"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "Použitý displej X"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
+#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI knihovna"
 
-#: ../libgnomeui/gnome-ui-init.c:169
+#: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
 msgstr "Zobrazit možnosti GUI GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:246
+#: ../libgnomeui/gnome-ui-init.c:247
 msgid "Could not open link"
 msgstr "Nelze otevřít odkaz"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:832
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1443,7 +1444,7 @@ msgstr ""
 "dialog\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:846
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
