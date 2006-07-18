@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.dz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-28 01:30+0530\n"
-"PO-Revision-Date: 2006-06-12 17:30+0530\n"
+"POT-Creation-Date: 2006-07-18 23:10+0530\n"
+"PO-Revision-Date: 2006-07-18 17:41+0530\n"
 "Last-Translator: Mindu Dorji\n"
 "Language-Team: DZONGKHA <pgeyleg@dit.gov.bt>\n"
 "MIME-Version: 1.0\n"
@@ -708,7 +708,7 @@ msgstr "ལཱ་ཡུན་འཛིན་སྐྱོང༌།"
 msgid "Show session management options"
 msgstr "ལཱ་ཡུན་འཛིན་སྐྱོང༌གི་གདམ་ཁ་ཚུ་སྟོན།"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2582
 msgid "Cancel Logout"
 msgstr "ཕྱིར་བསྐྱོད་ཆ་མེད་གཏང༌།"
 
@@ -1414,38 +1414,38 @@ msgstr "འགོ་མཚམས་བཤོལ།"
 msgid "About"
 msgstr "སྐོར་ལས། "
 
-#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "བརྡབ་འཁྲུག་ཌའི་ལོག་ ལྕོགས་མིན་བཟོ།"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "ལག་ལེན་འཐབ་ནིའི་ ཨེགསི་བཀྲམ་སྟོན།"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "བཀྲམ་སྟོན།"
 
-#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
+#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
 msgstr "ཇི་ནོམ་ ཇི་ཡུ་ཨའི་ དཔེ་མཛོད།"
 
-#: ../libgnomeui/gnome-ui-init.c:169
+#: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
 msgstr "ཇི་ནོམ་ ཇི་ཡུ་ཨའི་གདམ་ཁ་ཚུ་སྟོན།"
 
-#: ../libgnomeui/gnome-ui-init.c:246
+#: ../libgnomeui/gnome-ui-init.c:247
 msgid "Could not open link"
-msgstr ""
+msgstr "འབྲེལ་ལམ་ཁ་ཕྱེ་མ་ཚུགས།"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:832
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "ཆ་ཤས་སྣ་མང་རྒྱས་པའི་སྐྱོན་བྱུང་ནུག འཛོལ་བའི་ཌའི་ལོག་དེ་ བཀྲམ་སྟོན་འབད་མི་ཚུགས་པས། \n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:846
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
