@@ -2,18 +2,19 @@
 # Copyright (C) 2001-2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
 #
-# maintainer: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2001-2005.
+# maintainer: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2001-2006.
 # Christophe Fergeau <teuf@users.sourceforge.net>, 2002
 # Sun G11n <gnome_int_l10n@ireland.sun.com>, 2002.
 # Benoît Dejean <benoit@placenet.org>, 2006.
+# Jonathan Ernst <jonathan@ernstfamily.ch>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-16 19:04+0200\n"
+"POT-Creation-Date: 2006-07-21 02:05+0200\n"
 "PO-Revision-Date: 2006-07-03 17:09+0100\n"
-"Last-Translator: Jonathan Ernst <jonathan@ernstfamily.ch>\n"
+"Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -210,11 +211,11 @@ msgstr "É_dition/"
 
 #: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "_Affichage"
+msgstr "Afficha_ge"
 
 #: ../libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr "_Affichage/"
+msgstr "Afficha_ge/"
 
 #: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
@@ -252,7 +253,7 @@ msgstr "_Jeu"
 #: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr "Aid_e"
+msgstr "_Aide"
 
 #: ../libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
