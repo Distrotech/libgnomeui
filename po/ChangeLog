@@ -1,11 +1,15 @@
+2006-07-21  Josep Puigdemont i Casamajó  <josep.puigdemont@gmail.com>
+
+	* ca.po: Updated Catalan translation.
+
 2006-07-21  Christophe Merlet  <redfox@redfoxcenter.org>
 
 	* fr.po: Updated French translation.
 
 2006-07-18  Guntupalli Karunakar  <karunakar@freedomink.org>
 
-        * dz.po: Updated Dzongkha translation by
-        Dzongkhalinux team, DIT
+	* dz.po: Updated Dzongkha translation by
+	Dzongkhalinux team, DIT
 
 2006-07-18  Jakub Friedl  <jfriedl@suse.cz>
 
@@ -30,7 +34,7 @@
 2006-07-07  Subhransu Behera  <arya_subhransu@yahoo.co.in>
 
 	* LINGUAS: Added Oriya to The List of Languages.
-   
+
 2006-07-06  Subhransu Behera  <arya_subhransu@yahoo.co.in>
 
 	* or.po: Added and Updated Oriya Translation.
