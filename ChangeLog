@@ -1,5 +1,10 @@
 2006-07-24  Fernando Herrera  <fernando.herrera-de-las-heras@nokia.com>
 
+	* NEWS:
+	* configure.in: Release 2.15.90
+
+2006-07-24  Fernando Herrera  <fernando.herrera-de-las-heras@nokia.com>
+
 	* libgnomeui/gnome_segv.c: (main): Removed the crashing dialog.
 	If GNOME_HACKER env variable is set, launch a gnome-terminal with
 	gdb attached to the crashing proccess, if not, just launch bug-buddy.
