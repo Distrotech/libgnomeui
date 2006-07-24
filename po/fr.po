@@ -10,10 +10,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.15.2\n"
+"Project-Id-Version: libgnomeui 2.15.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-21 02:05+0200\n"
-"PO-Revision-Date: 2006-07-03 17:09+0100\n"
+"POT-Creation-Date: 2006-07-24 21:28+0200\n"
+"PO-Revision-Date: 2006-07-24 21:22+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <redfox@redfoxcenter.org>\n"
 "Language-Team: Gnome French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -1466,57 +1466,62 @@ msgstr ""
 "Erreur de segmentation !\n"
 "Impossible d'afficher la boîte de dialogue de blocage\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"Le gestionnaire de sessions GNOME (processus %d) s'est\n"
-"bloqué à la suite d'une erreur fatale (%s).\n"
-"Lorsque vous fermerez cette boîte de dialogue, toutes les applications "
-"seront fermées et votre session sera terminée.\n"
-"Enregistrez tous vos fichiers en cours avant de fermer cette\n"
-"boîte de dialogue."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "L'application « %s » a quitté inopinément."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "processus %d : %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"Vous pouvez informer les développeurs de ce qui vient d'arriver pour les "
-"aider à résoudre le problème. Ou vous pouvez redémarrer l'application "
-"maintenant."
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:83
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Usage : gnome_segv2 nom-appli num-signal\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "_Redémarrer l'application"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "_Informer les développeurs"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_Débogage"
+#: ../libgnomeui/gnome_segv.c:136
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>L'application %s a planté.</b>\n"
+"\n"
+"Cependant, vous n'avez pas installé <b>bug-buddy</b>,\n"
+"l'outil de rapport d'anomalies GNOME. Si vous voulez\n"
+"nous aider a rendre GNOME meilleur, veuillez l'installer\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Quitter le test"
+
+#~ msgid ""
+#~ "The GNOME Session Manager (process %d) has crashed\n"
+#~ "due to a fatal error (%s).\n"
+#~ "When you close this dialog, all applications will close and your session "
+#~ "will exit.\n"
+#~ "Please save all your files before closing this dialog."
+#~ msgstr ""
+#~ "Le gestionnaire de sessions GNOME (processus %d) s'est\n"
+#~ "bloqué à la suite d'une erreur fatale (%s).\n"
+#~ "Lorsque vous fermerez cette boîte de dialogue, toutes les applications "
+#~ "seront fermées et votre session sera terminée.\n"
+#~ "Enregistrez tous vos fichiers en cours avant de fermer cette\n"
+#~ "boîte de dialogue."
+
+#~ msgid "The Application \"%s\" has quit unexpectedly."
+#~ msgstr "L'application « %s » a quitté inopinément."
+
+#~ msgid "process %d: %s"
+#~ msgstr "processus %d : %s"
+
+#~ msgid ""
+#~ "You can inform the developers of what happened to help them fix it.  Or "
+#~ "you can restart the application right now."
+#~ msgstr ""
+#~ "Vous pouvez informer les développeurs de ce qui vient d'arriver pour les "
+#~ "aider à résoudre le problème. Ou vous pouvez redémarrer l'application "
+#~ "maintenant."
+
+#~ msgid "_Restart Application"
+#~ msgstr "_Redémarrer l'application"
+
+#~ msgid "_Inform Developers"
+#~ msgstr "_Informer les développeurs"
+
+#~ msgid "_Debug"
+#~ msgstr "_Débogage"
