@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui-2.12\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-30 01:03+0200\n"
-"PO-Revision-Date: 2006-06-30 01:03+0200\n"
+"POT-Creation-Date: 2006-07-24 20:08+0200\n"
+"PO-Revision-Date: 2006-07-24 20:10+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -712,7 +712,7 @@ msgstr "Administración de sesiones"
 msgid "Show session management options"
 msgstr "Mostrar opciones de administración de sesión"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2582
 msgid "Cancel Logout"
 msgstr "Cancelar el cierre de sesión"
 
@@ -1422,32 +1422,32 @@ msgstr "Quitar sangrado"
 msgid "About"
 msgstr "Acerca de"
 
-#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "Desactivar el diálogo de cuelgue"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "Pantalla X a usar"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "PANTALLA"
 
-#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
+#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
 msgstr "Biblioteca del IGU de Gnome"
 
-#: ../libgnomeui/gnome-ui-init.c:169
+#: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
 msgstr "Mostrar opciones del IGU de Gnome"
 
-#: ../libgnomeui/gnome-ui-init.c:246
+#: ../libgnomeui/gnome-ui-init.c:247
 msgid "Could not open link"
 msgstr "No se pudo abrir el enlace"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:832
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1455,7 +1455,7 @@ msgstr ""
 "diálogo de error\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:846
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1464,58 +1464,63 @@ msgstr ""
 "¡Violación de segmento!\n"
 "No se puede mostrar el diálogo de error\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"El administrador de sesiones de Gnome (proceso %d) ha fallado\n"
-"debido a un error fatal (%s).\n"
-"Cuando cierre este diálogo, se cerrarán todas las aplicaciones y se cerrará "
-"su sesión.\n"
-"Por favor guarde todos los archivos antes de cerrar este diálogo."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "La aplicación «%s» ha terminado inesperadamente."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "proceso %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"Puede informar a los desarrolladores de lo que ocurrió para ayudarles a "
-"arreglarlo. O puede reiniciar la aplicación ahora mismo."
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:83
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Uso: gnome_segv2 nombre-de-aplicación número-de-señal\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "_Reiniciar la aplicación"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "_Informar a los desarrolladores"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_Depurar"
+#: ../libgnomeui/gnome_segv.c:136
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>La aplicación %s se ha colgado.</b>\n"
+"\n"
+"Sin embargo no tiene instalado <b>bug-buddy</b>, la\n"
+"herramienta de informes de cuelgues de GNOME. Si quiere\n"
+"ayudarnos a mejorar GNOME, instálela.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Salir del test"
+
+#~ msgid ""
+#~ "The GNOME Session Manager (process %d) has crashed\n"
+#~ "due to a fatal error (%s).\n"
+#~ "When you close this dialog, all applications will close and your session "
+#~ "will exit.\n"
+#~ "Please save all your files before closing this dialog."
+#~ msgstr ""
+#~ "El administrador de sesiones de Gnome (proceso %d) ha fallado\n"
+#~ "debido a un error fatal (%s).\n"
+#~ "Cuando cierre este diálogo, se cerrarán todas las aplicaciones y se "
+#~ "cerrará su sesión.\n"
+#~ "Por favor guarde todos los archivos antes de cerrar este diálogo."
+
+#~ msgid "The Application \"%s\" has quit unexpectedly."
+#~ msgstr "La aplicación «%s» ha terminado inesperadamente."
+
+#~ msgid "process %d: %s"
+#~ msgstr "proceso %d: %s"
+
+#~ msgid ""
+#~ "You can inform the developers of what happened to help them fix it.  Or "
+#~ "you can restart the application right now."
+#~ msgstr ""
+#~ "Puede informar a los desarrolladores de lo que ocurrió para ayudarles a "
+#~ "arreglarlo. O puede reiniciar la aplicación ahora mismo."
+
+#~ msgid "_Restart Application"
+#~ msgstr "_Reiniciar la aplicación"
+
+#~ msgid "_Inform Developers"
+#~ msgstr "_Informar a los desarrolladores"
+
+#~ msgid "_Debug"
+#~ msgstr "_Depurar"
 
 #~ msgid "Error reading file '%s': %s"
 #~ msgstr "Se produjo un error durante la lectura del archivo «%s»: %s"
