@@ -45,26 +45,14 @@
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
 
-enum {
-  RESPONSE_CLOSE,
-  RESPONSE_BUG_BUDDY,
-  RESPONSE_DEBUG,
-  RESPONSE_RESTART
-};
-
 int main(int argc, char *argv[])
 {
-  GtkWidget *mainwin;
-  gchar* msg;
   struct sigaction sa;
   poptContext ctx;
   const char **args;
   const char *app_version = NULL;
-  int res;
   gchar *appname;
   gchar *bug_buddy_path = NULL;
-  const char *debugger = NULL;
-  gchar *debugger_path = NULL;
   gchar *app_path = NULL;
   
   int bb_sm_disable = 0;
@@ -88,49 +76,7 @@ int main(int argc, char *argv[])
   sigaction(SIGSEGV, &sa, NULL);
 
   args = poptGetArgs(ctx);
-  if (args && args[0] && args[1])
-    {
-      char *base = g_path_get_basename (args[0]);
-      gsize bytes_read;
-      gsize bytes_written;
-      const char *utfstr = g_strsignal (atoi (args[1]));
-      char *progstr = g_locale_to_utf8 (args[0], -1, &bytes_read, &bytes_written, NULL);
-      
-      if (strcmp(base, "gnome-session") == 0)
-        {
-          msg = g_strdup_printf(_("The GNOME Session Manager (process %d) has crashed\n"
-                                  "due to a fatal error (%s).\n"
-                                  "When you close this dialog, all applications will close "
-                                  "and your session will exit.\n"
-                                  "Please save all your files before closing this dialog."),
-                                getppid(), utfstr);
-          bb_sm_disable = 1;
-        }
-      else
-        {
-          char *title;
-          title =  g_strdup_printf(_("The Application \"%s\" has quit unexpectedly."), 
-                                   progstr);
-          if (g_getenv ("GNOME_HACKER") != NULL)
-           {
-              char *procstr;
-              procstr = g_strdup_printf (_("process %d: %s"),getppid(), utfstr);
-              msg = g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>\n%s\n%s",title, procstr, _("You can inform the developers of what happened to help them fix it.  Or you can restart the application right now."));
-              g_free (procstr);
-           }
-         else
-           {
-              msg = g_strdup_printf("<span weight=\"bold\" size=\"larger\">%s</span>\n\n%s", title, _("You can inform the developers of what happened to help them fix it.  Or you can restart the application right now."));
-           }
-         g_free (title);
-        }
-
-      g_free(progstr);
-      g_free(base);
-      if(args[2])
-	app_version = args[2];
-    }
-  else
+  if (!args || !args[0] || !args[1])
     {
       gsize bytes_read;
       gsize bytes_written;
@@ -140,54 +86,26 @@ int main(int argc, char *argv[])
       return 1;
     }
   appname = g_strdup(args[0]);
-  gtk_window_set_default_icon_name ("stock_dialog-error");
-  mainwin = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL,
-                                                GTK_MESSAGE_ERROR,
-                                                GTK_BUTTONS_NONE,
-                                                msg);
-  gtk_dialog_set_default_response (GTK_DIALOG (mainwin), GTK_RESPONSE_CLOSE);
-  g_free(msg);
-
   app_path = g_find_program_in_path (appname);
-  if (app_path != NULL)
+  if (g_getenv("GNOME_HACKER")) 
     {
-      gtk_dialog_add_button (GTK_DIALOG(mainwin), _("_Restart Application"),
-                             RESPONSE_RESTART); 
+      gchar *exec_str;
+      int retval;
+
+      exec_str = g_strdup_printf("gnome-terminal --command=\"gdb %s %d\"",
+                                 appname, getppid());
+
+      retval = system(exec_str);
+      g_free(exec_str);
+      if (retval == -1 || retval == 127)
+        {
+          g_warning("Couldn't run debugger: %s", g_strerror(errno));
+        }
+      return 0;
     }
 
-  gtk_dialog_add_button (GTK_DIALOG(mainwin),
-			 GTK_STOCK_CLOSE,
-                         RESPONSE_CLOSE);
-  
   bug_buddy_path = g_find_program_in_path ("bug-buddy");
   if (bug_buddy_path != NULL)
-    {
-      gtk_dialog_add_button (GTK_DIALOG(mainwin),
-                            _("_Inform Developers"),
-                            RESPONSE_BUG_BUDDY);
-    }
-
-  debugger = g_getenv("GNOME_DEBUGGER");
-  if (debugger && strlen(debugger)>0)
-  {
-    debugger_path = g_find_program_in_path (debugger);
-    if (debugger_path != NULL)
-      {
-        gtk_dialog_add_button(GTK_DIALOG(mainwin),
-                              _("_Debug"),
-                              RESPONSE_DEBUG);
-      }
-  }
-  
-  res = gtk_dialog_run(GTK_DIALOG(mainwin));
-
-  if (res == RESPONSE_RESTART && (app_path != NULL))
-    {
-      g_spawn_command_line_async (app_path, NULL);
-    }
-
-
-  if (res == RESPONSE_BUG_BUDDY && (bug_buddy_path != NULL))
     {
       gchar *exec_str;
       int retval;
@@ -210,26 +128,19 @@ int main(int argc, char *argv[])
           g_warning("Couldn't run bug-buddy: %s", g_strerror(errno));
         }
     }
-  else if (res == RESPONSE_DEBUG || (res == RESPONSE_BUG_BUDDY && (bug_buddy_path == NULL)))
+  else
     {
-      gchar *exec_str;
-      int retval;
-
-      g_assert (debugger_path);
-      exec_str = g_strdup_printf("%s --appname=\"%s\" --pid=%d "
-                                 "--package-ver=\"%s\" %s", 
-                                 debugger_path, appname, getppid(), 
-                                 app_version, bb_sm_disable 
-                                 ? "--sm-disable" : "");
-
-      retval = system(exec_str);
-      g_free(exec_str);
-      if (retval == -1 || retval == 127)
-        {
-          g_warning("Couldn't run debugger: %s", g_strerror(errno));
-        }
+      GtkWidget *dialog;
+      dialog = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, 
+		                                   GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE,
+						   _("<b>The application %s has crashed.</b>\n\n"
+						    "However you don't have installed <b>bug-buddy</b>, the\n"
+						    "GNOME crash report tool. If you want to help us\n"
+						    "to make GNOME better, please, install it\n"), appname);
+      gtk_dialog_run (GTK_DIALOG (dialog));
     }
-
+      
+  
   g_free (appname);
 
   return 0;
