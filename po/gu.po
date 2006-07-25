@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-20 23:36+0200\n"
-"PO-Revision-Date: 2006-06-21 10:06+0530\n"
+"POT-Creation-Date: 2006-07-25 02:03+0200\n"
+"PO-Revision-Date: 2006-07-25 10:48+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,7 @@ msgstr ""
 "<magnet@magnet-i.com>\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -851,7 +852,7 @@ msgid "Show session management options"
 msgstr "સત્ર વ્યવસ્થાપન વિકલ્પો બતાવો"
 
 # libgnomeui/gnome-client.c:2483
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2582
 msgid "Cancel Logout"
 msgstr "બહાર નીકળવાની પ્રક્રિયા રદ કરો"
 
@@ -1687,38 +1688,38 @@ msgstr "હાંસિયા વગરનું"
 msgid "About"
 msgstr "ના વિશે"
 
-#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "ક્રેશ સંવાદને નિષ્ક્રિય કરો"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "X ડિસ્પ્લે વાપરો"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "ડિસ્પ્લે"
 
-#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
+#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
 msgstr "જીનોમ GUI પુસ્તકાલય"
 
-#: ../libgnomeui/gnome-ui-init.c:169
+#: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
 msgstr "જીનોમ GUI વિકલ્પો બતાવો"
 
-#: ../libgnomeui/gnome-ui-init.c:246
+#: ../libgnomeui/gnome-ui-init.c:247
 msgid "Could not open link"
 msgstr "કડી ખોલી શક્યા નહિં"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:832
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "ઘણાંબધાં વિભાગોની ભૂલો થઇ છે; સંવાદ દર્શાવી શકતું નથી\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:846
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1727,53 +1728,24 @@ msgstr ""
 "વિભાગમાં ભૂલ!\n"
 "ભંગાણ સંવાદ દર્શાવી શકતું નથી\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"ઘાતક ભૂલના કારણે જીનોમ સત્ર વ્યવસ્થાપક (પ્રક્રિયા %d) ભાંગી પડ્યુ (%s).\n"
-"જ્યારે તમે આ સંવાદ બંધ કરશો ત્યારે બધા કાર્યક્રમ બંધ થઇ જશે અને તમારુ સત્ર બહાર નીકળી જશે.\n"
-"સંવાદને બંધ કરતા પહેલા તમારી બધી ફાઇલોને સંગ્રહિત કરી લો."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "કાર્યક્રમ \"%s\" અનિચ્છનિય રીતે બંધ થઈ ગયો."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "પ્રક્રિયા %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"તમે સુધારવા માટે વિકસાવનારોને જણાવી શકો છો કે શું થયું હતું. અથવા તો તમે કાર્યક્રમને અત્યારે "
-"જ ફરીથી ચાલુ કરી શકો છો."
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:83
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "વપરાશ: gnome_segv2 appname signum\n"
 
-# libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "કાર્યક્રમ ફરીથી શરુ કરો (_R)"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "વિકસાવનારાઓને જાણ કરો (_I)"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "ભૂલ શોધો (_D)"
+#: ../libgnomeui/gnome_segv.c:136
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>કાર્યક્રમ %s ભાંગી પડ્યો.</b>\n"
+"\n"
+"છતાં તમારી પાસે <b>બગ-બડી</b> સ્થાપિત થયેલ નથી,\n"
+"જીનોમ ભંગાણ અહેવાલ સાધન. જો તમે અમને જીનોમને વધુ સારું\n"
+"બનાવવા માટે મદદ કરવા માંગો, તો મહેરબાની કરીને, તેને સ્થાપિત કરો\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
