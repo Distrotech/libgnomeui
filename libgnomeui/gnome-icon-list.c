@@ -1081,6 +1081,7 @@ icon_list_append (Gil *gil, Icon *icon)
 
 	priv = gil->_priv;
 
+	priv->icons++;
 	g_array_append_val(priv->icon_list, icon);
 
 	switch (priv->selection_mode) {
