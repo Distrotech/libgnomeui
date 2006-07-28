@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-24 21:16+0700\n"
-"PO-Revision-Date: 2006-05-24 21:17+0700\n"
+"POT-Creation-Date: 2006-07-28 17:16+0700\n"
+"PO-Revision-Date: 2006-07-28 17:19+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -702,7 +702,7 @@ msgstr "การจัดการวาระ"
 msgid "Show session management options"
 msgstr "แสดงตัวเลือกของการจัดการวาระ"
 
-#: libgnomeui/gnome-client.c:2584
+#: libgnomeui/gnome-client.c:2582
 msgid "Cancel Logout"
 msgstr "เลิกออกจากระบบ"
 
@@ -1395,38 +1395,38 @@ msgstr "ลดย่อหน้า"
 msgid "About"
 msgstr "เกี่ยวกับ"
 
-#: libgnomeui/gnome-ui-init.c:122 libgnomeui/gnome-ui-init.c:131
+#: libgnomeui/gnome-ui-init.c:123 libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "ปิดใช้หน้าต่างแจ้งข้อขัดข้อง"
 
-#: libgnomeui/gnome-ui-init.c:124
+#: libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "X display ที่จะใช้"
 
-#: libgnomeui/gnome-ui-init.c:124
+#: libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:168 libgnomeui/gnome-ui-init.c:181
+#: libgnomeui/gnome-ui-init.c:169 libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Library"
 
-#: libgnomeui/gnome-ui-init.c:169
+#: libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
 msgstr "แสดงตัวเลือก GUI ของ GNOME"
 
-#: libgnomeui/gnome-ui-init.c:246
+#: libgnomeui/gnome-ui-init.c:247
 msgid "Could not open link"
 msgstr "เปิดลิงก์ไม่สำเร็จ"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:832
+#: libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "เกิด segmentation faults หลายรายการ ไม่สามารถแสดงหน้าต่างแจ้งข้อผิดพลาด\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:846
+#: libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1435,57 +1435,62 @@ msgstr ""
 "Segmentation faults!\n"
 "ไม่สามารถแสดงหน้าต่างแจ้งข้อผิดพลาด\n"
 
-#: libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"โปรแกรมจัดการวาระของ GNOME (โพรเซส %d) ไม่สามารถทำงานต่อได้\n"
-"เนื่องจากข้อผิดพลาดร้ายแรง (%s)\n"
-"เมื่อคุณปิดหน้าต่างนี้ โปรแกรมทุกตัวจะถูกปิด และคุณจะออกจากวาระการใช้งานนี้\n"
-"กรุณาบันทึกแฟ้มทั้งหมดก่อนจะปิดหน้าต่างนี้"
-
-#: libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "โปรแกรม \"%s\" หยุดทำงานกระทันหัน"
-
-#: libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "โพรเซส %d: %s"
-
-#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"คุณสามารถแจ้งไปยังผู้เขียน เพื่อช่วยผู้เขียนแก้ไขข้อผิดพลาดนี้  "
-"หรือคุณอาจเรียกใช้โปรแกรมนี้ใหม่ตอนนี้เลยก็ได้"
-
-#: libgnomeui/gnome_segv.c:137
+#: libgnomeui/gnome_segv.c:83
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "วีธีใช้: gnome_segv2 appname signum\n"
 
-#: libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "เ_รียกใช้โปรแกรมใหม่"
-
-#: libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "แ_จ้งผู้เขียน"
-
-#: libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_ดีบัก"
+#: libgnomeui/gnome_segv.c:136
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>โปรแกรม %s ตาย</b>\n"
+"\n"
+"อย่างไรก็ดี คุณไม่ได้ติดตั้ง <b>bug-buddy</b> เครื่องมือรายงานบั๊ก\n"
+"ของ GNOME ไว้ ถ้าคุณประสงค์จะช่วยเราปรับปรุง GNOME กรุณาติดตั้ง\n"
+"เครื่องมือดังกล่าวด้วย\n"
 
 #: test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "ออกจากการทดสอบ"
+
+#~ msgid ""
+#~ "The GNOME Session Manager (process %d) has crashed\n"
+#~ "due to a fatal error (%s).\n"
+#~ "When you close this dialog, all applications will close and your session "
+#~ "will exit.\n"
+#~ "Please save all your files before closing this dialog."
+#~ msgstr ""
+#~ "โปรแกรมจัดการวาระของ GNOME (โพรเซส %d) ไม่สามารถทำงานต่อได้\n"
+#~ "เนื่องจากข้อผิดพลาดร้ายแรง (%s)\n"
+#~ "เมื่อคุณปิดหน้าต่างนี้ โปรแกรมทุกตัวจะถูกปิด และคุณจะออกจากวาระการใช้งานนี้\n"
+#~ "กรุณาบันทึกแฟ้มทั้งหมดก่อนจะปิดหน้าต่างนี้"
+
+#~ msgid "The Application \"%s\" has quit unexpectedly."
+#~ msgstr "โปรแกรม \"%s\" หยุดทำงานกระทันหัน"
+
+#~ msgid "process %d: %s"
+#~ msgstr "โพรเซส %d: %s"
+
+#~ msgid ""
+#~ "You can inform the developers of what happened to help them fix it.  Or "
+#~ "you can restart the application right now."
+#~ msgstr ""
+#~ "คุณสามารถแจ้งไปยังผู้เขียน เพื่อช่วยผู้เขียนแก้ไขข้อผิดพลาดนี้  "
+#~ "หรือคุณอาจเรียกใช้โปรแกรมนี้ใหม่ตอนนี้เลยก็ได้"
+
+#~ msgid "_Restart Application"
+#~ msgstr "เ_รียกใช้โปรแกรมใหม่"
+
+#~ msgid "_Inform Developers"
+#~ msgstr "แ_จ้งผู้เขียน"
+
+#~ msgid "_Debug"
+#~ msgstr "_ดีบัก"
 
 #~ msgid "Error reading file '%s': %s"
 #~ msgstr "เกิดข้อผิดพลาดขณะอ่านแฟ้ม '%s': %s"
