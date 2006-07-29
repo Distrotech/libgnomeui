@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-06 10:35+0300\n"
-"PO-Revision-Date: 2006-07-06 10:35+0300\n"
+"POT-Creation-Date: 2006-07-29 08:34+0300\n"
+"PO-Revision-Date: 2006-07-29 08:37+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -708,7 +708,7 @@ msgstr "Istunnonhallinta"
 msgid "Show session management options"
 msgstr "Näytä istunnonhallinnan asetukset"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2582
 msgid "Cancel Logout"
 msgstr "Peru ulos kirjautuminen"
 
@@ -1412,38 +1412,38 @@ msgstr "Poista sisennys"
 msgid "About"
 msgstr "Tietoja"
 
-#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "Poista kaatumisikkuna käytöstä"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "Käytettävä X-näyttö"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "NÄYTTÖ"
 
-#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
+#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
 msgstr "Gnomen käyttöliittymäasetukset"
 
-#: ../libgnomeui/gnome-ui-init.c:169
+#: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
 msgstr "Näytä Gnomen käyttöliittymäasetukset"
 
-#: ../libgnomeui/gnome-ui-init.c:246
+#: ../libgnomeui/gnome-ui-init.c:247
 msgid "Could not open link"
 msgstr "Linkkiä ei voi avata"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:832
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Monia muistialueen ylityksiä tapahtui: virheikkunaa ei voi näyttää\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:846
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1452,59 +1452,64 @@ msgstr ""
 "Muistinkäsittelyvirhe!\n"
 "Kaatumisikkunaa ei voi näyttää\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"GNOME-istunnonhallinta (prosessi %d) on kaatunut\n"
-"vakavaan virheeseen (%s).\n"
-"Kun suljet tämän valintaikkunan, kaikki ohjelmat sulkeutuvat ja tämä istunto "
-"loppuu.\n"
-"Tallenna kaikki avoinna olevat tiedostot ennen tämän valintaikkunan "
-"sulkemista."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "Sovellus \"%s\" on sulkeutunut odottamatta."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "prosessi %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"Voit ottaa yhteyttä sovelluksen kehittäjiin auttaaksesi heitä korjaamaan "
-"vian. Voit myös käynnistää ohjelman uudestaan nyt."
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:83
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Käyttö: gnome_segv2 sovellus signaali\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "Käynnistä ohjelma _uudelleen"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "_Ota yhteyttä kehittäjiin"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_Vianetsintä"
+#: ../libgnomeui/gnome_segv.c:136
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>Sovellus %s kaatui.</b>\n"
+"\n"
+"Ohjelmaa <b>bug-buddy</b>, jota Gnome käyttää vikaraporttien "
+"luontiin, ei ole asennettu. Asenna se, jos haluat lähettää "
+"vikaraportteja ja auttaa Gnomen kehitystyötä.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Lopeta testi"
+
+#~ msgid ""
+#~ "The GNOME Session Manager (process %d) has crashed\n"
+#~ "due to a fatal error (%s).\n"
+#~ "When you close this dialog, all applications will close and your session "
+#~ "will exit.\n"
+#~ "Please save all your files before closing this dialog."
+#~ msgstr ""
+#~ "GNOME-istunnonhallinta (prosessi %d) on kaatunut\n"
+#~ "vakavaan virheeseen (%s).\n"
+#~ "Kun suljet tämän valintaikkunan, kaikki ohjelmat sulkeutuvat ja tämä "
+#~ "istunto loppuu.\n"
+#~ "Tallenna kaikki avoinna olevat tiedostot ennen tämän valintaikkunan "
+#~ "sulkemista."
+
+#~ msgid "The Application \"%s\" has quit unexpectedly."
+#~ msgstr "Sovellus \"%s\" on sulkeutunut odottamatta."
+
+#~ msgid "process %d: %s"
+#~ msgstr "prosessi %d: %s"
+
+#~ msgid ""
+#~ "You can inform the developers of what happened to help them fix it.  Or "
+#~ "you can restart the application right now."
+#~ msgstr ""
+#~ "Voit ottaa yhteyttä sovelluksen kehittäjiin auttaaksesi heitä korjaamaan "
+#~ "vian. Voit myös käynnistää ohjelman uudestaan nyt."
+
+#~ msgid "_Restart Application"
+#~ msgstr "Käynnistä ohjelma _uudelleen"
+
+#~ msgid "_Inform Developers"
+#~ msgstr "_Ota yhteyttä kehittäjiin"
+
+#~ msgid "_Debug"
+#~ msgstr "_Vianetsintä"
 
 #~ msgid "Error reading file '%s': %s"
 #~ msgstr "Tiedoston \"%s\" lukeminen ei onnistunut: %s"
