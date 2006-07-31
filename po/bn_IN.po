@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libGNOMEui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-03 07:47+0200\n"
-"PO-Revision-Date: 2006-07-31 12:10+0530\n"
+"POT-Creation-Date: 2006-07-31 10:17+0200\n"
+"PO-Revision-Date: 2006-07-31 14:21+0530\n"
 "Last-Translator: Runa Bhattacharjee <runabh@gmail.com>\n"
 "Language-Team: Bengali India <gnome-translation@bengalinux.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -703,7 +704,7 @@ msgstr "সেশন পরিচালনা"
 msgid "Show session management options"
 msgstr "সেশন পরিচালনা সংক্রান্ত বিকল্প প্রদর্শন করা হবে"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2582
 msgid "Cancel Logout"
 msgstr "লগ-আউট বাতিল করা হবে"
 
@@ -931,7 +932,9 @@ msgstr "GTK এন্ট্রি"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr "ফাইল এন্ট্রির জন্য স্বতন্ত্র চিহ্ন।  পূর্ববর্তী তথ্যের তালিকা সংরক্ষণের জন্য এটি ব্যবহৃত হবে।"
+msgstr ""
+"ফাইল এন্ট্রির জন্য স্বতন্ত্র চিহ্ন।  পূর্ববর্তী তথ্যের তালিকা সংরক্ষণের জন্য এটি ব্যবহৃত "
+"হবে।"
 
 #: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
 msgid "Browse Dialog Title"
@@ -984,7 +987,10 @@ msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
-msgstr "ফাইলের নাম লেখার উদ্দেশ্যে ফাইল এন্ট্রি দ্বারা ব্যবহৃত GnomeEntry। কোনো পরামিতি পরিবর্তন অথবা অনুসন্ধান করার জন্য এই বৈশিষ্ট্যের সাহায্যে সংশ্লিষ্ট GnomeEntry প্রাপ্ত করা যাবে।"
+msgstr ""
+"ফাইলের নাম লেখার উদ্দেশ্যে ফাইল এন্ট্রি দ্বারা ব্যবহৃত GnomeEntry। কোনো পরামিতি "
+"পরিবর্তন অথবা অনুসন্ধান করার জন্য এই বৈশিষ্ট্যের সাহায্যে সংশ্লিষ্ট GnomeEntry প্রাপ্ত "
+"করা যাবে।"
 
 #: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
@@ -995,7 +1001,10 @@ msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
-msgstr "ফাইলের নাম লেখার উদ্দেশ্যে ফাইল এন্ট্রি দ্বারা ব্যবহৃত GtkEntry। কোনো পরামিতি পরিবর্তন অথবা অনুসন্ধান করার জন্য এই বৈশিষ্ট্যের সাহায্যে সংশ্লিষ্ট GtkEntry প্রাপ্ত করা যাবে।"
+msgstr ""
+"ফাইলের নাম লেখার উদ্দেশ্যে ফাইল এন্ট্রি দ্বারা ব্যবহৃত GtkEntry। কোনো পরামিতি "
+"পরিবর্তন অথবা অনুসন্ধান করার জন্য এই বৈশিষ্ট্যের সাহায্যে সংশ্লিষ্ট GtkEntry প্রাপ্ত "
+"করা যাবে।"
 
 #: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
@@ -1005,7 +1014,9 @@ msgstr "GtkFileChooser ব্যবহার করা হবে"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "ফাইল নির্বাচনের উদ্দেশ্যে নতুন GtkFileChooser widget অথবা GtkFileSelection উইজেটের মধ্যে যেটি ব্যবহৃত হবে।"
+msgstr ""
+"ফাইল নির্বাচনের উদ্দেশ্যে নতুন GtkFileChooser widget অথবা GtkFileSelection "
+"উইজেটের মধ্যে যেটি ব্যবহৃত হবে।"
 
 #: ../libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
@@ -1122,7 +1133,11 @@ msgid ""
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr "\"%s\" অ্যাপ্লিকেশনের দ্বারা কনফিগারেশনের কোনো বৈশিষ্ট্য পরিবর্তনের প্রচেষ্টা করা হয়েছে। সিস্টেম অ্যাডমিনিস্ট্রেটর অথবা অপারেটিং সিস্টেম উপলব্ধকারীর দ্বারা এই পরিবর্তন সমর্থনের অনুমতি উপস্থিত নেই। আপনার নির্বাচিত কয়েকটি বৈশিষ্ট্য সম্ভবত প্রয়োগ করা হবে না অথবা পরবর্তীবার অ্যাপ্লিকেশন আরম্ভ করার সময় পুনরুদ্ধার করা হবে না।"
+msgstr ""
+"\"%s\" অ্যাপ্লিকেশনের দ্বারা কনফিগারেশনের কোনো বৈশিষ্ট্য পরিবর্তনের প্রচেষ্টা করা "
+"হয়েছে। সিস্টেম অ্যাডমিনিস্ট্রেটর অথবা অপারেটিং সিস্টেম উপলব্ধকারীর দ্বারা এই "
+"পরিবর্তন সমর্থনের অনুমতি উপস্থিত নেই। আপনার নির্বাচিত কয়েকটি বৈশিষ্ট্য সম্ভবত প্রয়োগ "
+"করা হবে না অথবা পরবর্তীবার অ্যাপ্লিকেশন আরম্ভ করার সময় পুনরুদ্ধার করা হবে না।"
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
@@ -1130,8 +1145,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"%s'র কনফিগারেশন সংক্রান্ত তথ্য লোড অথবা সংরক্ষণ করতে সমস্যা উত্‌পন্ন হয়েছে। "
-"সিস্টেমের কয়েকটি কনফিগারেশনের বৈশিষ্ট্য সম্ভবত সঠিকরূপে চলবে না।"
+"%s'র কনফিগারেশন সংক্রান্ত তথ্য লোড অথবা সংরক্ষণ করতে সমস্যা উত্‌পন্ন হয়েছে। সিস্টেমের "
+"কয়েকটি কনফিগারেশনের বৈশিষ্ট্য সম্ভবত সঠিকরূপে চলবে না।"
 
 #: ../libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1171,13 +1186,16 @@ msgid ""
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "ডিফল্ট ওয়েব ব্রাউজার আরম্ভ করতে সমস্যা।\n"
-"অনুগ্রহ করে 'পছন্দসই অ্যাপ্লিকেশন' শীর্ষক পছন্দ সংক্রান্ত সরঞ্জামে আপনার নির্ধারিত বৈশিষ্ট্যের মান দেখুন।"
+"অনুগ্রহ করে 'পছন্দসই অ্যাপ্লিকেশন' শীর্ষক পছন্দ সংক্রান্ত সরঞ্জামে আপনার নির্ধারিত "
+"বৈশিষ্ট্যের মান দেখুন।"
 
 #: ../libgnomeui/gnome-icon-entry.c:180
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr "আইকনের এন্ট্রির জন্য স্বতন্ত্র পরিচিতি।  পূর্ববর্তী তথ্যের তালিকা সংরক্ষণের জন্য এটি ব্যবহৃত হবে।"
+msgstr ""
+"আইকনের এন্ট্রির জন্য স্বতন্ত্র পরিচিতি।  পূর্ববর্তী তথ্যের তালিকা সংরক্ষণের জন্য এটি "
+"ব্যবহৃত হবে।"
 
 #: ../libgnomeui/gnome-icon-entry.c:189
 msgid "Title for the Browse icon dialog."
@@ -1203,7 +1221,9 @@ msgstr "নির্বাচনের ডায়লগ বক্স"
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
-msgstr "আইকন নির্বাচনের ডায়লগ বক্স। কোনো বৈশিষ্ট্য পরিবর্তন অথবা অনুসন্ধানের উদ্দেশ্যে এই বৈশিষ্ট্যের সাহায্যে GtkDialog প্রাপ্ত করা যাবে।"
+msgstr ""
+"আইকন নির্বাচনের ডায়লগ বক্স। কোনো বৈশিষ্ট্য পরিবর্তন অথবা অনুসন্ধানের উদ্দেশ্যে এই "
+"বৈশিষ্ট্যের সাহায্যে GtkDialog প্রাপ্ত করা যাবে।"
 
 #: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
 msgid "No Icon"
@@ -1389,38 +1409,38 @@ msgstr "অবচ্ছেদ কমানো হবে"
 msgid "About"
 msgstr "পরিচিতি"
 
-#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "বিপর্যয় সংক্রান্ত ডায়লগ নিষ্ক্রিয় করা হবে"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "ব্যবহারের উদ্দেশ্যে X ডিসপ্লে"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
+#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI লাইব্রেরি"
 
-#: ../libgnomeui/gnome-ui-init.c:169
+#: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
 msgstr "GNOME GUI সংক্রান্ত বিকল্প প্রদর্শন করা হবে"
 
-#: ../libgnomeui/gnome-ui-init.c:246
+#: ../libgnomeui/gnome-ui-init.c:247
 msgid "Could not open link"
 msgstr "লিঙ্ক খোলা যায়নি"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:832
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "একাধিক সেগমেন্টেশন ফল্ট উত্‌পন্ন হয়েছে; ত্রুটি সংক্রান্ত ডায়লগ প্রদর্শন করা সম্ভব নয়\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:846
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1429,53 +1449,25 @@ msgstr ""
 "সেগমেন্টেশন ফল্ট উত্‌পন্ন হয়েছে!\n"
 "বিপর্যয় সংক্রান্ত ডায়লগ বক্স প্রদর্শন করা সম্ভব নয়\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"গুরুতর ত্রুটির ফলে GNOME Session Manager (প্রসেস %d)\n"
-"বিপর্যস্ত হয়েছে (%s) ।\n"
-"এই ডায়লগ বক্সটি বন্ধ করার পরে সর্বধরনের অ্যাপ্লিকেশন বন্ধ করে সেশান "
-"থেকে প্রস্থান করা হবে।\n"
-"অনুগ্রহ করে এই ডায়লগ বক্সটি বন্ধ করার পূর্বে সমস্ত ফাইল সংরক্ষণ করুন।"
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "অ্যাপ্লিকেশন \"%s\" অপ্রত্যাশিতরূপে বন্ধ করা হয়েছে।"
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "প্রসেস %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr "ডিভেলপারদেরকে এই সমস্যার সংশোধনে সহায়তা করতে উত্‌পন্ন সমস্যা সম্বন্ধে সূচিত করতে পারেন।  অথবা অ্যাপ্লিকেশনটি পুনরায় এই মুহূর্তে আরম্ভ করতে পারেন।"
-
 # FIXME
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:83
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "ব্যবহারপ্রণালী: gnome_segv2 appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "অ্যাপ্লিকেশন পুনরাম্ভ করুন (_R)"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "ডিভেলপারদের সূচিত করুন (_I)"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "ডিবাগ করুন (_D)"
+#: ../libgnomeui/gnome_segv.c:136
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>%s অ্যাপ্লিকেশনটি বিপর্যস্ত হয়েছে।</b>\n"
+"\n"
+"আপনার সিস্টেমে GNOME'র বিপর্যত সংক্রান্ত রিপোর্ট\n"
+"সরঞ্জাম <b>bug-buddy</b> ইনস্টল করা নেই। GNOME'কে আরো\n"
+"উন্নত করার প্রচেষ্টায় সহায়তা করতে অনুগ্রহ করে এটি ইনস্টল করুন\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
