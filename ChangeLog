@@ -1,3 +1,7 @@
+2006-07-31  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-client.c: Remove now unused static function.
+
 2006-07-26  Matthias Clasen  <mclasen@redhat.com>
 
 	* libgnomeui/gnome-icon-list.c (icon_list_append): Re-add

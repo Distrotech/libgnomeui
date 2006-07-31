@@ -1224,15 +1224,6 @@ gnome_client_disable_master_connection (void)
 }
 #endif /* GNOME_DISABLE_DEPRECATED_SOURCE */
 
-/* Called at exit to ensure the ice connection is closed cleanly
- * This avoids io errors on the session manager side */
-static void
-master_client_clean_up (void)
-{
-  if (master_client && GNOME_CLIENT_CONNECTED (master_client))
-      gnome_client_disconnect (master_client);
-}
-
 static void
 master_client_connect (GnomeClient *client,
 		       gboolean     restarted,
