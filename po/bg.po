@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-05 16:28+0300\n"
-"PO-Revision-Date: 2006-07-05 16:28+0300\n"
+"POT-Creation-Date: 2006-07-31 09:50+0300\n"
+"PO-Revision-Date: 2006-07-31 09:57+0300\n"
 "Last-Translator: Vladimir Petkov <vpetkov@i-space.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -604,7 +604,7 @@ msgstr " (да или не)"
 
 #: ../libgnomeui/gnome-app-util.c:356
 msgid "  - OK? (yes or no)"
-msgstr "  - OK? (да или не)"
+msgstr "  - ОК? (да или не)"
 
 #: ../libgnomeui/gnome-app-util.c:684
 msgid "Progress"
@@ -706,7 +706,7 @@ msgstr "Управление на сесиите"
 msgid "Show session management options"
 msgstr "Показване на настройките за управлението на сесиите"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2582
 msgid "Cancel Logout"
 msgstr "Прекъсване излизането от системата"
 
@@ -1416,32 +1416,32 @@ msgstr "Махане на отстъп"
 msgid "About"
 msgstr "Относно"
 
-#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "Спиране на диалоговия прозорец за грешките"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "X дисплей за използване"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "ДИСПЛЕЙ"
 
-#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
+#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
 msgstr "Библиотека за ГПИ на GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:169
+#: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
 msgstr "Показване на настройките на интерфейса на GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:246
+#: ../libgnomeui/gnome-ui-init.c:247
 msgid "Could not open link"
 msgstr "Връзката не може да бъде отворена"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:832
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1449,7 +1449,7 @@ msgstr ""
 "бъде показан\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:846
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1458,54 +1458,25 @@ msgstr ""
 "Сегментационна грешка!\n"
 "Диалогът за аварийно завършване не може да бъде показан\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"Мениджърът на сесии в GNOME (процес %d) завърши\n"
-"аварийно поради фатална грешка (%s).\n"
-"Когато затворите този диалог, всички програми ще бъдат\n"
-"затворени и вашата сесия ще завърши. Запазете всички\n"
-"отворени файлове преди да затворите този прозорец."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "Програмата „%s“ спря неочаквано."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "процес %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"Можете да информирате разработчиците за това, което се случи, и да им "
-"помогнете да разрешат проблема. Можете и да рестартирате програмата."
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:83
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Използване: gnome_segv2 appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "_Рестартиране на програмата"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "_Информиране на разработчиците"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_Изчистване на грешки"
+#: ../libgnomeui/gnome_segv.c:136
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>Приложението %s заби.</b>\n"
+"\n"
+"За жалост не сте инсталирали <b>bug-buddy</b> -\n"
+"инструментът на GNOME за докладване на такива\n"
+"проблеми. Ако искате да ни помогнете да направим\n"
+"GNOME по-добър, молим Ви да го инсталирате.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
