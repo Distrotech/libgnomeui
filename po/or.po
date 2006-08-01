@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: or\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-07-05 23:50+0200\n"
-"PO-Revision-Date: 2006-07-18 13:10+0530\n"
+"PO-Revision-Date: 2006-08-01 12:43+0530\n"
 "Last-Translator: Subhransu Behera <arya_subhransu@yahoo.co.in>\n"
 "Language-Team: Oriya <oriya-group@lists.sarovar.org>\n"
 "MIME-Version: 1.0\n"
@@ -162,7 +162,7 @@ msgstr "ଏକମାତ୍ର ଦସ୍ତାବେଜକର୍ତା ପ୍ର�
 
 #: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
-msgstr "ଅନୁବାଦକ ର ଶ୍ରେୟ"
+msgstr "ଶୁଭ୍ରାଂଶୁ ବେହେରା <arya_subhransu@yahoo.co.in>"
 
 #: ../libgnomeui/gnome-about.c:431
 msgid "Credits to the translators. This string should be marked as translatable"
