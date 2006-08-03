@@ -1677,6 +1677,9 @@ real_move_cursor (Gil *gil, GtkDirectionType dir, gboolean clear_selection)
 		break;
 	}
 
+	if (new_focus_icon < 0)
+		return;
+
 	if (clear_selection &&
 	    g_array_index (priv->icon_list, Icon *, new_focus_icon)->selected == FALSE) {
 		gnome_icon_list_unselect_all (gil);
