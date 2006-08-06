@@ -1,3 +1,9 @@
+libgnomeui 2.15.91
+------------------
+
+* Fixes to GnomeIconList (Matthias Clasen and Li Yuan)
+* Removed unused function (Kjartan Maraas)
+
 libgnomeui 2.15.90
 ------------------
 
