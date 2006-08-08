@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-05 19:11+0000\n"
-"PO-Revision-Date: 2006-07-05 19:11+0000\n"
+"POT-Creation-Date: 2006-08-08 10:21+0000\n"
+"PO-Revision-Date: 2006-08-08 10:24+0000\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
-"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -707,7 +707,7 @@ msgstr "Saio-kudeaketa"
 msgid "Show session management options"
 msgstr "Erakutsi saio-kudeaketaren aukerak"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "Utzi saioa amaitzea bertan behera"
 
@@ -1414,32 +1414,32 @@ msgstr "Koskarik gabe"
 msgid "About"
 msgstr "Honi buruz"
 
-#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "Desgaitu kraskatze elkarrizketa-koadroa"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "Erabili beharreko X bistaratzea"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "BISTARATZEA"
 
-#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
+#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI liburutegia"
 
-#: ../libgnomeui/gnome-ui-init.c:169
+#: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
 msgstr "Erakutsi GNOME interfazearen aukerak"
 
-#: ../libgnomeui/gnome-ui-init.c:246
+#: ../libgnomeui/gnome-ui-init.c:247
 msgid "Could not open link"
 msgstr "Ezin izan da esteka ireki"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:832
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1447,7 +1447,7 @@ msgstr ""
 "koadroa bistaratu\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:846
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1456,54 +1456,24 @@ msgstr ""
 "Segmentazio-hutsegitea!\n"
 "Ezin da errorearen elkarrizketa-koadroa bistaratu\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"GNOMEren saio-kudeatzaileak (%d prozesua) huts egin du errore\n"
-"larri baten (%s) ondorioz.\n"
-"Elkarrizketa hau ixten duzunean, aplikazio guztiak itxiko dira eta saioa "
-"amaituko da.\n"
-"Gorde zure fitxategi guztiak elkarrizketa hau itxi baino lehen."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "\"%s\" aplikazioa ustekabean amaitu da."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "%d prozesua: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"Garatzaileak gertatutakoari buruz jakinarazi ditzakezu arazoa konpontzeko. "
-"Edo bestela, aplikazioa berrabia dezakezu."
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:83
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Erabilera: gnome_segv2 aplikazio-izenaren seinale-zenbakia\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "_Berrabiatu aplikazioa"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "_Jakinarazi garatzaileei"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_Araztu"
+#: ../libgnomeui/gnome_segv.c:136
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>%s aplikazioa kraskatu egin da.</b>\n"
+"\n"
+"Hala ere, <b>bug-buddy</b> (kraskadurei buruz berri emateko GNOMEren \n"
+"tresna) ez dago instalatuta. GNOME hobetzen laguntzea nahiko bazenu, \n"
+"eskertuko genizuke instalatuko bazenu.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
