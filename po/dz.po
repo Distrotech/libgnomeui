@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.dz\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-18 23:10+0530\n"
-"PO-Revision-Date: 2006-07-18 17:41+0530\n"
+"POT-Creation-Date: 2006-08-10 01:54+0530\n"
+"PO-Revision-Date: 2006-08-09 12:27+0530\n"
 "Last-Translator: Mindu Dorji\n"
 "Language-Team: DZONGKHA <pgeyleg@dit.gov.bt>\n"
 "MIME-Version: 1.0\n"
@@ -708,7 +708,7 @@ msgstr "ལཱ་ཡུན་འཛིན་སྐྱོང༌།"
 msgid "Show session management options"
 msgstr "ལཱ་ཡུན་འཛིན་སྐྱོང༌གི་གདམ་ཁ་ཚུ་སྟོན།"
 
-#: ../libgnomeui/gnome-client.c:2582
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "ཕྱིར་བསྐྱོད་ཆ་མེད་གཏང༌།"
 
@@ -1454,58 +1454,63 @@ msgstr ""
 "ཆ་ཤས་རྒྱས་པའི་སྐྱོན། !\n"
 " བརྡབ་འཁྲུག་ཌའི་ལོག་དེ་ བཀྲམ་སྟོན་འབད་མི་ཚུགས་པས། \n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"ཇི་ནོམ་ལཱ་ཡུན་འཛིན་སྐྱོང་པ་(ལས་སྦྱོར་ %d) \n"
-"དེ་ ཚབས་ཆེན་འཛོལ་བ་(%s)ཅིག་ལུ་བརྟེན་ཏེ་ བརྡབ་འཁྲུག་བྱུང་ནུག\n"
-"ཌའི་ལོག་འདི་ཁ་བསྡམ་ད་ གློག་རིམ་ཆ་མཉམ་རང་ རང་བཞིན་གྱིས་ཁ་བསྡམ་ནི་ཨིནམ་ལས་ ཁྱོད་ཀྱི་ལཱ་ཡུན་དེ་ཡང་ "
-"ཕྱིར་འཐོན་འགྱོ་འོང༌། \n"
-"དེ་གིས་འབད་ ཌའི་ལོག་འདི་ ཁ་མ་བསྡམས་པའི་ཧེ་མར་ ཁྱོད་རའི་ཡིག་སྣོད་ཆ་མཉམ་་བསྲུང་གནང༌།"
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "གློག་རིམ་ \"%s\" དེ་ རེ་བ་མེད་པར་ སྤངས་ད་ནུག "
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "ལས་སྦྱོར་ %d:%s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"བཟོ་མི་ཚུ་གིས་ བཅོ་ཁ་བརྐྱབ་ནི་ལུ་ གྲོགས་རམ་གྱི་དོན་ལས་ ག་ཅི་བྱུང་ཡི་ག་ ཁྱོད་ཀྱིས་ཁོང་ལུ་བརྡ་སླབ་ཚུགས། དེ་"
-"མིན་རུང་ ཁྱོད་ཀྱིས་དེ་འཕྲལ་ལས་རང་ གློག་རིམ་དེ་ ལོག་འགོ་བཙུགས་རུང་བཏུབ།"
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:83
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "ལག་ལེན:_segv2 appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "གློག་རིམ་ལོག་འགོ་བཙུགས།(_R)"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "བཟོ་མི་ཚུ་ལུ་བརྡ་སླབས།(_I)"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "རྐྱེན་སེལ།(_D)"
+#: ../libgnomeui/gnome_segv.c:136
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>གློག་རིམ་%s དེ་བརྡབ་འཁྲུག་བྱུང་ནུག།</b>\n"
+"\n"
+"དེ་འབདཝ་ད་ ཁྱོད་ཀྱིས་ ཇི་ནོམ་བརྡབ་འཁྲུག་སྙན་ཞུའི་ལག་ཆས་ <b>བཱག་བ་ཌི་</b> དེ་\n"
+"གཞི་བཙུགས་མ་འབད་བས། ཁྱོད་ཀྱིས་ང་བཅས་ལུ་ ཇི་ནོམ་ལེགས་ཤོམ་བཟོ་ནི་ལུ་ གྲོགས་རམ་འབད་ནི་ཨིན་པ་ཅིན་\n"
+" འདི་གཞི་བཙུགས་འདབ་གནང་།\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "བརྟག་དཔྱད་ཕྱིར་འཐོན་འབད།"
+
+#~ msgid ""
+#~ "The GNOME Session Manager (process %d) has crashed\n"
+#~ "due to a fatal error (%s).\n"
+#~ "When you close this dialog, all applications will close and your session "
+#~ "will exit.\n"
+#~ "Please save all your files before closing this dialog."
+#~ msgstr ""
+#~ "ཇི་ནོམ་ལཱ་ཡུན་འཛིན་སྐྱོང་པ་(ལས་སྦྱོར་ %d) \n"
+#~ "དེ་ ཚབས་ཆེན་འཛོལ་བ་(%s)ཅིག་ལུ་བརྟེན་ཏེ་ བརྡབ་འཁྲུག་བྱུང་ནུག\n"
+#~ "ཌའི་ལོག་འདི་ཁ་བསྡམ་ད་ གློག་རིམ་ཆ་མཉམ་རང་ རང་བཞིན་གྱིས་ཁ་བསྡམ་ནི་ཨིནམ་ལས་ ཁྱོད་ཀྱི་ལཱ་ཡུན་དེ་"
+#~ "ཡང་ ཕྱིར་འཐོན་འགྱོ་འོང༌། \n"
+#~ "དེ་གིས་འབད་ ཌའི་ལོག་འདི་ ཁ་མ་བསྡམས་པའི་ཧེ་མར་ ཁྱོད་རའི་ཡིག་སྣོད་ཆ་མཉམ་་བསྲུང་གནང༌།"
+
+#~ msgid "The Application \"%s\" has quit unexpectedly."
+#~ msgstr "གློག་རིམ་ \"%s\" དེ་ རེ་བ་མེད་པར་ སྤངས་ད་ནུག "
+
+#~ msgid "process %d: %s"
+#~ msgstr "ལས་སྦྱོར་ %d:%s"
+
+#~ msgid ""
+#~ "You can inform the developers of what happened to help them fix it.  Or "
+#~ "you can restart the application right now."
+#~ msgstr ""
+#~ "བཟོ་མི་ཚུ་གིས་ བཅོ་ཁ་བརྐྱབ་ནི་ལུ་ གྲོགས་རམ་གྱི་དོན་ལས་ ག་ཅི་བྱུང་ཡི་ག་ ཁྱོད་ཀྱིས་ཁོང་ལུ་བརྡ་སླབ་"
+#~ "ཚུགས། དེ་མིན་རུང་ ཁྱོད་ཀྱིས་དེ་འཕྲལ་ལས་རང་ གློག་རིམ་དེ་ ལོག་འགོ་བཙུགས་རུང་བཏུབ།"
+
+#~ msgid "_Restart Application"
+#~ msgstr "གློག་རིམ་ལོག་འགོ་བཙུགས།(_R)"
+
+#~ msgid "_Inform Developers"
+#~ msgstr "བཟོ་མི་ཚུ་ལུ་བརྡ་སླབས།(_I)"
+
+#~ msgid "_Debug"
+#~ msgstr "རྐྱེན་སེལ།(_D)"
 
 #~ msgid "Error reading file '%s': %s"
 #~ msgstr "ཡིག་སྣོད་ ’%s’:%s ལྷག་ནི་ལུ་འཛོལ་བ།"
