@@ -202,6 +202,10 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 	    result = GNOME_VFS_ERROR_WRONG_FORMAT;
 	    break;
 	}
+
+	if (gdk_pixbuf_loader_get_pixbuf (loader) != NULL) {
+		break;
+	}
     }
 
     gdk_pixbuf_loader_close (loader, NULL);
