@@ -1,5 +1,12 @@
 2006-08-10  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-icon-entry.c: (entry_activated),
+	(browse_clicked): Fix from Vincent Vuntz to fix a crash with
+	gnome-desktop-item-edit. Should fix some critical warnings with
+	following crashes too. Closes bug #350425.
+
+2006-08-10  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-vfs-util.c:
 	(gnome_gdk_pixbuf_new_from_uri_at_scale): Fix from Christian
 	Neumair to avoid trashing memory on thumbnailing some files.
