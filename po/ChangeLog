@@ -1,7 +1,12 @@
+2006-08-10  Lucas Rocha  <lucasr@gnome.org>
+
+	* pt_BR.po: Updated Brazilian Portuguese translation
+	by Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>
+
 2006-08-10  Guntupalli Karunakar  <karunakar@freedomink.org>
 
-        * dz.po: Updated Dzongkha translation by
-        Dzongkhalinux team, DIT
+	* dz.po: Updated Dzongkha translation by
+	Dzongkhalinux team, DIT
 
 2006-08-08  Inaki Larranaga  <dooteo@euskalgnu.org>
 
@@ -22,7 +27,7 @@
 
 2006-07-31  Maxim Dziumanenko <dziumanenko@gmail.com>
 
-        * uk.po: Update Ukrainian translation.
+	* uk.po: Update Ukrainian translation.
 
 2006-07-31  Alexander Shopov  <ash@contact.bg>
 
