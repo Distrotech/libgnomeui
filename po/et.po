@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-02 15:41+0100\n"
-"PO-Revision-Date: 2006-03-05 09:13+0200\n"
+"PO-Revision-Date: 2006-08-10 21:32+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -102,19 +102,19 @@ msgstr "Käivitamine: %s"
 
 #: ../file-chooser/sucky-desktop-item.c:2036
 msgid "No URL to launch"
-msgstr ""
+msgstr "Puudub käivitatav URL"
 
 #: ../file-chooser/sucky-desktop-item.c:2046
 msgid "Not a launchable item"
-msgstr ""
+msgstr "Kirje pole käivitatav"
 
 #: ../file-chooser/sucky-desktop-item.c:2056
 msgid "No command (Exec) to launch"
-msgstr ""
+msgstr "Puudub käivitatav (exec) käsk"
 
 #: ../file-chooser/sucky-desktop-item.c:2069
 msgid "Bad command (Exec) to launch"
-msgstr ""
+msgstr "Vigane käivitatav (exec) käsk"
 
 #: ../file-chooser/sucky-desktop-item.c:3759
 #, c-format
@@ -388,7 +388,7 @@ msgstr "_Lõpeta"
 
 #: ../libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
-msgstr "Lõpetab programmi töö"
+msgstr "Programmi töö lõpetamine"
 
 #.
 #. * The "Edit" menu
