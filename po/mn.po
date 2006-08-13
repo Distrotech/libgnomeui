@@ -5,19 +5,20 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Sanlig Badral <badral@chinggis.com>, 2003.
 # Sanlig Badral <Badral@openmn.org>, 2003, 2004.
-# Sanlig Badral <badral@openmn.org>, 2004.
+# Sanlig Badral <badral@openmn.org>, 2004, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD\n"
+"Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-11 01:05+0200\n"
-"PO-Revision-Date: 2004-08-08 16:48+0100\n"
-"Last-Translator: Sanlig Badral <badral@users.sf.net>\n"
-"Language-Team: Mongolian <openmn-core@lists.sf.net>\n"
+"PO-Revision-Date: 2006-08-14 00:14+0200\n"
+"Last-Translator: Badral <badral@openmn.org>\n"
+"Language-Team: Mongolian <openmn-translation@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #: demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -38,12 +39,12 @@ msgstr "Хүү элемент 2 -н зөвлөмж"
 #: file-chooser/gtkfilesystemgnomevfs.c:820
 #, c-format
 msgid "%s is a link to something that is not a folder"
-msgstr ""
+msgstr "%s бол холбоос, хавтас биш"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:831
 #, c-format
 msgid "%s is a link without a destination location"
-msgstr ""
+msgstr "%s нь зорилгогүй холбоос байна"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:946
 #, c-format
@@ -51,7 +52,6 @@ msgid "%s is not a folder"
 msgstr "%s хавтас биш"
 
 #: file-chooser/gtkfilesystemgnomevfs.c:1194
-#, fuzzy
 msgid "File System"
 msgstr "Файл систем"
 
@@ -61,70 +61,69 @@ msgid "Bookmark saving failed (%s)"
 msgstr "Хавчуурга хадгалагдсангүй (%s)"
 
 #: file-chooser/sucky-desktop-item.c:215 file-chooser/sucky-desktop-item.c:603
-#, fuzzy, c-format
+#, c-format
 msgid "Error reading file '%s': %s"
-msgstr "'%s' файлыг нээхэд алдаа: %s"
+msgstr "'%s' файлыг уншихад алдаа: %s"
 
 #: file-chooser/sucky-desktop-item.c:283
-#, fuzzy, c-format
+#, c-format
 msgid "Error rewinding file '%s': %s"
-msgstr "'%s' файлыг нээхэд алдаа: %s"
+msgstr "'%s' файлыг буцаахад алдаа: %s"
 
 #: file-chooser/sucky-desktop-item.c:382
 #: file-chooser/sucky-desktop-item.c:3722
-#, fuzzy
 msgid "No name"
-msgstr "Бичгийн нэр"
+msgstr "Нэргүй"
 
 #: file-chooser/sucky-desktop-item.c:618
 #, c-format
 msgid "File '%s' is not a regular file or directory."
-msgstr ""
+msgstr "Файл '%s' энгийн файл эсвэл лавлах биш байна."
 
 #: file-chooser/sucky-desktop-item.c:794
 #, c-format
 msgid "Error cannot find file id '%s'"
-msgstr ""
+msgstr "Файл тт '%s' олдсонгүй. Алдаа"
 
 #: file-chooser/sucky-desktop-item.c:840
 #, c-format
 msgid "No filename to save to"
-msgstr ""
+msgstr "Хадгалах файлын нэр алга"
 
 #: file-chooser/sucky-desktop-item.c:1817
-#, fuzzy, c-format
+#, c-format
 msgid "Starting %s"
-msgstr "_Тохируулах"
+msgstr "%s эхлэлж байна"
 
 #: file-chooser/sucky-desktop-item.c:2056
 #, c-format
 msgid "No URL to launch"
-msgstr ""
+msgstr "Эхлүүлэх URL алга"
 
 #: file-chooser/sucky-desktop-item.c:2066
 #, c-format
 msgid "Not a launchable item"
-msgstr ""
+msgstr "Эхлүүлэх элемент алга"
 
 #: file-chooser/sucky-desktop-item.c:2076
 #, c-format
 msgid "No command (Exec) to launch"
-msgstr ""
+msgstr "Эхлүүлэх тушаал (Exec) алга"
 
 #: file-chooser/sucky-desktop-item.c:2089
 #, c-format
 msgid "Bad command (Exec) to launch"
-msgstr ""
+msgstr "Эхлүүлэх буруу тушаал (Exec)"
 
 #: file-chooser/sucky-desktop-item.c:3779
 #, c-format
 msgid "Unknown encoding of: %s"
-msgstr ""
+msgstr "Мэдэгдэхгүй кодчилол: %s"
 
 #: file-chooser/sucky-desktop-item.c:4010
-#, fuzzy, c-format
+#, c-format
 msgid "Error writing file '%s': %s"
-msgstr "'%s' файлыг нээхэд алдаа: %s"
+msgstr "'%s' файлыг бичихэд алдаа: %s"
 
 #: file-chooser/testfilechooser.c:178
 #, c-format
@@ -138,8 +137,7 @@ msgstr "'%s' файлыг нээхэд алдаа: %s"
 
 #: file-chooser/testfilechooser.c:230
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "'%s' зураг ачаалагдсангүй: шалгаан тодорхойгүй, магад зураг эвдэрчээ"
 
 #: libgnomeui/gnome-about.c:199
@@ -232,10 +230,8 @@ msgstr "Орчуулагч"
 
 # CHECK
 #: libgnomeui/gnome-about.c:433
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Орчуулагчдад талархал. Энэ үгс орчуулагдах боломжтойгоор тэмдэглэгджээ."
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "Орчуулагчдад талархал. Энэ үгс орчуулагдах боломжтойгоор тэмдэглэгджээ."
 
 #: libgnomeui/gnome-about.c:440 libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
@@ -538,7 +534,6 @@ msgstr "Энэ цонхыг хаах"
 #. * The "Game" menu
 #.
 #: libgnomeui/gnome-app-helper.c:248
-#, fuzzy
 msgid "_New Game"
 msgstr "_Шинэ тоглоом"
 
@@ -547,7 +542,6 @@ msgid "Start a new game"
 msgstr "Шинэ тоглоом эхлүүлэх"
 
 #: libgnomeui/gnome-app-helper.c:253
-#, fuzzy
 msgid "_Pause Game"
 msgstr "Тоглоом түр _зогсоох"
 
@@ -556,7 +550,6 @@ msgid "Pause the game"
 msgstr "Тоглоом түр _зогсоох"
 
 #: libgnomeui/gnome-app-helper.c:258
-#, fuzzy
 msgid "_Restart Game"
 msgstr "Тоглоом дахин _эхлүүлэх"
 
@@ -565,7 +558,6 @@ msgid "Restart the game"
 msgstr "Тоглоомыг эхнээс нь _эхлүүлэх"
 
 #: libgnomeui/gnome-app-helper.c:263
-#, fuzzy
 msgid "_Undo Move"
 msgstr "Нүүдэл _цуцлах"
 
@@ -574,7 +566,6 @@ msgid "Undo the last move"
 msgstr "Сүүлийн үйлдлийг цуцлах"
 
 #: libgnomeui/gnome-app-helper.c:268
-#, fuzzy
 msgid "_Redo Move"
 msgstr "Нүүдэл _сэргээх"
 
@@ -600,7 +591,6 @@ msgid "View the scores"
 msgstr "Дээд _амжилтуудыг харах"
 
 #: libgnomeui/gnome-app-helper.c:284
-#, fuzzy
 msgid "_End Game"
 msgstr "Тоглоом _дуусгах"
 
@@ -771,9 +761,8 @@ msgid "Session management"
 msgstr "Суулт зохион байгуулалт"
 
 #: libgnomeui/gnome-client.c:1035
-#, fuzzy
 msgid "Show session management options"
-msgstr "Суулт зохион байгуулалт"
+msgstr "Суулт зохион байгуулалтын тохиргоо харуулах"
 
 #: libgnomeui/gnome-client.c:2584
 msgid "Cancel Logout"
@@ -1024,8 +1013,7 @@ msgstr "Лавлахын бичлэг"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"Файлын бичлэг лавлахын нэрийн оруулах эсвэл файлын бүтэн нэр хэрэглэх эсэх."
+msgstr "Файлын бичлэг лавлахын нэрийн оруулах эсвэл файлын бүтэн нэр хэрэглэх эсэх."
 
 #: libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
@@ -1092,14 +1080,12 @@ msgstr ""
 "хэрэглэх эсэх"
 
 #: libgnomeui/gnome-file-entry.c:319
-#, fuzzy
 msgid "GtkFileChooser Action"
-msgstr "GtkFileChooser хэрэглэх"
+msgstr "GtkFileChooser Үйлдэл"
 
 #: libgnomeui/gnome-file-entry.c:320
-#, fuzzy
 msgid "The type of operation that the file selector is performing."
-msgstr "Бичиг сонгогчийн ажилын горим"
+msgstr "Гүйцэтгэгдэж буй файл сонгогчийн үйлдлийн төрөл"
 
 #: libgnomeui/gnome-file-entry.c:642 libgnomeui/gnome-file-entry.c:676
 msgid "Select file"
@@ -1256,13 +1242,12 @@ msgid "This button will take you to the URI that it displays."
 msgstr "Энэ товч таньд үүнийг харуулах URI хаягийг өгнө"
 
 #: libgnomeui/gnome-href.c:394
-#, fuzzy
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "Стандарт хөтөчийг ажиллуулхыг оролдоход алдаа гарлаа.\n"
-"Та түүнд хамаатай »Эрхэмлэсэн програмууд« гэсэн тохируулгын диалогоос "
+"Та түүнд хамаатай »Эрхэмлэсэн програмууд« гэсэн тохируулгын хэрэгслээс "
 "тохируулгаа зөв эсэхийг шалгана уу."
 
 #: libgnomeui/gnome-icon-entry.c:180
@@ -1388,26 +1373,23 @@ msgstr "_Нууц үг:"
 
 #: libgnomeui/gnome-password-dialog.c:346
 msgid "Co_nnect"
-msgstr ""
+msgstr "Хол_богдох"
 
 #: libgnomeui/gnome-password-dialog.c:368
 msgid "Connect _anonymously"
 msgstr "_Бүртгэлгүйгээр холбогдох"
 
 #: libgnomeui/gnome-password-dialog.c:373
-#, fuzzy
 msgid "Connect as u_ser:"
 msgstr "Х_эрэглэгчээр холбогдох:"
 
 #: libgnomeui/gnome-password-dialog.c:471
-#, fuzzy
 msgid "_Remember password for this session"
-msgstr "Энэ суултын нууц үгийг сана"
+msgstr "Энэ суултын нууц үгийг _сана"
 
 #: libgnomeui/gnome-password-dialog.c:473
-#, fuzzy
 msgid "Save password in _keyring"
-msgstr "Нууц үгийг түлхүүрийн холбоонд хадгал"
+msgstr "Нууц үгийг _keyring-д хадгал"
 
 #: libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1506,7 +1488,7 @@ msgstr "GNOME-GUI-сан"
 
 #: libgnomeui/gnome-ui-init.c:171
 msgid "Show GNOME GUI options"
-msgstr ""
+msgstr "GNOME GUI тохиргоог харуул"
 
 #. dialog display isn't working out
 #: libgnomeui/gnome-ui-init.c:787
@@ -1574,11 +1556,3 @@ msgstr "Хөгжүүлэгчидэд _мэдээлэх"
 msgid "_Debug"
 msgstr "Алдаа _оношилгоо"
 
-#~ msgid "History id"
-#~ msgstr "Түүхийн дугаар"
-
-#~ msgid "Icon selector"
-#~ msgstr "Эмблем сонгогч"
-
-#~ msgid "Exit the test"
-#~ msgstr "Тестийг дуусгах"
