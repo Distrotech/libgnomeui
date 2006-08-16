@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-20 15:18+0900\n"
-"PO-Revision-Date: 2006-05-20 15:12+0900\n"
-"Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
+"POT-Creation-Date: 2006-08-17 01:43+0900\n"
+"PO-Revision-Date: 2006-08-17 01:52+0900\n"
+"Last-Translator: Satoru SATOH <ss@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -706,7 +706,7 @@ msgstr "セッション管理"
 msgid "Show session management options"
 msgstr "セッション管理のオプションを表示する"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "ログアウトをキャンセルする"
 
@@ -1222,39 +1222,39 @@ msgstr ""
 "アイコンの選択ダイアログで、プロパティを変更したり取得する場合は、このプロパ"
 "ティで GtkDialog を取得できます。"
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:1005
 msgid "No Icon"
 msgstr "なし"
 
-#: ../libgnomeui/gnome-icon-entry.c:767
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "Icon selection dialog"
 msgstr "アイコン選択ダイアログ"
 
-#: ../libgnomeui/gnome-icon-entry.c:768
+#: ../libgnomeui/gnome-icon-entry.c:776
 msgid "This dialog box lets you select an icon."
 msgstr "アイコンの選択ダイアログを表示する"
 
-#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
+#: ../libgnomeui/gnome-icon-entry.c:782 ../libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon Selector"
 msgstr "アイコンの選択"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:783
 msgid "Please pick the icon you want."
 msgstr "アイコンを選んで下さい。"
 
-#: ../libgnomeui/gnome-icon-entry.c:1001
+#: ../libgnomeui/gnome-icon-entry.c:1009
 msgid "This button will open a window to let you select an icon."
 msgstr "このボタンを押すとアイコンを選べるウインドウを開きます"
 
-#: ../libgnomeui/gnome-icon-entry.c:1021
+#: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
 msgstr "参照"
 
-#: ../libgnomeui/gnome-icon-entry.c:1024
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Icon path"
 msgstr "アイコンのパス"
 
-#: ../libgnomeui/gnome-icon-entry.c:1025
+#: ../libgnomeui/gnome-icon-entry.c:1033
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1406,28 +1406,32 @@ msgstr "インデントなし"
 msgid "About"
 msgstr "情報"
 
-#: ../libgnomeui/gnome-ui-init.c:120 ../libgnomeui/gnome-ui-init.c:129
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
 msgstr "クラッシュ・ダイアログを無効にする"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "使用する X ディスプレイ"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:166 ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI ライブラリ"
 
-#: ../libgnomeui/gnome-ui-init.c:167
+#: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
 msgstr "GNOME GUI オプションを表示する"
 
+#: ../libgnomeui/gnome-ui-init.c:247
+msgid "Could not open link"
+msgstr "リンクを開けませんでした"
+
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:779
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1435,7 +1439,7 @@ msgstr ""
 "ません\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:793
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1444,55 +1448,58 @@ msgstr ""
 "セグメンテーション・フォルトが発生しました！\n"
 "クラッシュ・ダイログを表示できません\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"GNOME セッション・マネージャ (PID %d) が\n"
-"致命的なエラー (%s) によりクラッシュしました。\n"
-"このダイアログを閉じると全てのアプリケーションと共にセッションも終了しま"
-"す。\n"
-"このダイアログを閉じる前に、全てのファイルを保存して下さい。"
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "アプリケーション \"%s\" が突然終了しました。"
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "プロセス %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"ここで発生した問題の修正を手助けするために、開発者へ通知することができます。"
-"あるいは、今すぐアプリケーションを再起動することができます。"
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:83
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法: gnome_segv2 アプリケーション名 シグナル番号\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "アプリの再起動(_R)"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "開発者に報告する(_I)"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "デバッグする(_D)"
+#: ../libgnomeui/gnome_segv.c:136
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr "<b>アプリケーション %s はクラッシュしました。</b>\n\n"
+"しかし GNOME のクラッシュ報告ツール <b>bug-buddy</b> が\n"
+"インストールされていません。GNOME をよりよくするのを\n"
+"手助けしてくださるなら、bug-buddy をインストールして下さい。\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "テストの終了"
+
+#~ msgid ""
+#~ "The GNOME Session Manager (process %d) has crashed\n"
+#~ "due to a fatal error (%s).\n"
+#~ "When you close this dialog, all applications will close and your session "
+#~ "will exit.\n"
+#~ "Please save all your files before closing this dialog."
+#~ msgstr ""
+#~ "GNOME セッション・マネージャ (PID %d) が\n"
+#~ "致命的なエラー (%s) によりクラッシュしました。\n"
+#~ "このダイアログを閉じると全てのアプリケーションと共にセッションも終了しま"
+#~ "す。\n"
+#~ "このダイアログを閉じる前に、全てのファイルを保存して下さい。"
+
+#~ msgid "The Application \"%s\" has quit unexpectedly."
+#~ msgstr "アプリケーション \"%s\" が突然終了しました。"
+
+#~ msgid "process %d: %s"
+#~ msgstr "プロセス %d: %s"
+
+#~ msgid ""
+#~ "You can inform the developers of what happened to help them fix it.  Or "
+#~ "you can restart the application right now."
+#~ msgstr ""
+#~ "ここで発生した問題の修正を手助けするために、開発者へ通知することができま"
+#~ "す。あるいは、今すぐアプリケーションを再起動することができます。"
+
+#~ msgid "_Restart Application"
+#~ msgstr "アプリの再起動(_R)"
+
+#~ msgid "_Inform Developers"
+#~ msgstr "開発者に報告する(_I)"
+
+#~ msgid "_Debug"
+#~ msgstr "デバッグする(_D)"
