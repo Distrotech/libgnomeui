@@ -1,3 +1,10 @@
+2006-08-16  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-vfs-util.c:
+	(gnome_gdk_pixbuf_new_from_uri_at_scale): Revert the fix
+	for bug #345707 since it was wrong. New patch is in bugzilla
+	please test!
+
 2006-08-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-icon-entry.c: (entry_activated),
