@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-20 01:16+0200\n"
-"PO-Revision-Date: 2006-02-20 01:22+0200\n"
+"POT-Creation-Date: 2006-08-16 18:39+0300\n"
+"PO-Revision-Date: 2006-08-16 18:44+0300\n"
 "Last-Translator: Žygimantas Beručka <zygis@gnome.org>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -34,94 +34,33 @@ msgstr "Antrinis elementas 2"
 msgid "Hint for item 2"
 msgstr "Patarimas 2-am elementui"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:833
+#: ../file-chooser/gtkfilesystemgnomevfs.c:892
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s yra nuorada į kažką, kas nėra aplankas"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:844
+#: ../file-chooser/gtkfilesystemgnomevfs.c:903
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s yra nuoroda be paskirties vietos"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:959
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nėra aplankas"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1201
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
 msgid "Network Servers"
 msgstr "Tinklo serveriai"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1217
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
 msgid "File System"
 msgstr "Rinkmenų sistema"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1977
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Žymelės išsaugoti nepavyko (%s)"
-
-#: ../file-chooser/sucky-desktop-item.c:215
-#: ../file-chooser/sucky-desktop-item.c:603
-#, c-format
-msgid "Error reading file '%s': %s"
-msgstr "Klaida skaitant rinkmeną „%s“: %s"
-
-#: ../file-chooser/sucky-desktop-item.c:283
-#, c-format
-msgid "Error rewinding file '%s': %s"
-msgstr "Klaida atsukant rinkmeną „%s“: %s"
-
-#: ../file-chooser/sucky-desktop-item.c:382
-#: ../file-chooser/sucky-desktop-item.c:3722
-msgid "No name"
-msgstr "Be pavadinimo"
-
-#: ../file-chooser/sucky-desktop-item.c:618
-#, c-format
-msgid "File '%s' is not a regular file or directory."
-msgstr "Rinkmena „%s“ nėra paprasta rinkmena ar aplankas."
-
-#: ../file-chooser/sucky-desktop-item.c:794
-#, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "Klaida, nepavyko rasti rinkmenos id „%s“"
-
-#: ../file-chooser/sucky-desktop-item.c:840
-msgid "No filename to save to"
-msgstr "Nenurodytas saugomos rinkmenos vardas"
-
-#: ../file-chooser/sucky-desktop-item.c:1817
-#, c-format
-msgid "Starting %s"
-msgstr "Paleidžiama %s"
-
-#: ../file-chooser/sucky-desktop-item.c:2056
-msgid "No URL to launch"
-msgstr "Nėra paleidžiamo URL"
-
-#: ../file-chooser/sucky-desktop-item.c:2066
-msgid "Not a launchable item"
-msgstr "Nėra paleidžiamas elementas"
-
-#: ../file-chooser/sucky-desktop-item.c:2076
-msgid "No command (Exec) to launch"
-msgstr "Nėra paleidžiamos komandos (Exec)"
-
-#: ../file-chooser/sucky-desktop-item.c:2089
-msgid "Bad command (Exec) to launch"
-msgstr "Bloga paleidžiama komanda (Exec)"
-
-#: ../file-chooser/sucky-desktop-item.c:3779
-#, c-format
-msgid "Unknown encoding of: %s"
-msgstr "Nežinoma koduotė: %s"
-
-#: ../file-chooser/sucky-desktop-item.c:4010
-#, c-format
-msgid "Error writing file '%s': %s"
-msgstr "Klaida rašant rinkmeną „%s“: %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -161,89 +100,89 @@ msgstr "Išvertė"
 msgid "C_redits"
 msgstr "_Padėkos"
 
-#: ../libgnomeui/gnome-about.c:379
+#: ../libgnomeui/gnome-about.c:377
 msgid "Program name"
 msgstr "Programos pavadinimas"
 
-#: ../libgnomeui/gnome-about.c:380
+#: ../libgnomeui/gnome-about.c:378
 msgid "The name of the program"
 msgstr "Programos pavadinimas"
 
-#: ../libgnomeui/gnome-about.c:387
+#: ../libgnomeui/gnome-about.c:385
 msgid "Program version"
 msgstr "Programos versija"
 
-#: ../libgnomeui/gnome-about.c:388
+#: ../libgnomeui/gnome-about.c:386
 msgid "The version of the program"
 msgstr "Programos versija"
 
-#: ../libgnomeui/gnome-about.c:394
+#: ../libgnomeui/gnome-about.c:392
 msgid "Copyright string"
 msgstr "Autorinės teisės"
 
-#: ../libgnomeui/gnome-about.c:395
+#: ../libgnomeui/gnome-about.c:393
 msgid "Copyright information for the program"
 msgstr "Autorinių teisių informacija apie programą"
 
-#: ../libgnomeui/gnome-about.c:402
+#: ../libgnomeui/gnome-about.c:400
 msgid "Comments string"
 msgstr "Paaiškinimai"
 
-#: ../libgnomeui/gnome-about.c:403
+#: ../libgnomeui/gnome-about.c:401
 msgid "Comments about the program"
 msgstr "Paaiškinimas, ką programa daro"
 
-#: ../libgnomeui/gnome-about.c:409
+#: ../libgnomeui/gnome-about.c:407
 msgid "Authors"
 msgstr "Autoriai"
 
-#: ../libgnomeui/gnome-about.c:410
+#: ../libgnomeui/gnome-about.c:408
 msgid "List of authors of the programs"
 msgstr "Programos autorių sąrašas"
 
-#: ../libgnomeui/gnome-about.c:412
+#: ../libgnomeui/gnome-about.c:410
 msgid "Author entry"
 msgstr "Autoriaus laukas"
 
-#: ../libgnomeui/gnome-about.c:413
+#: ../libgnomeui/gnome-about.c:411
 msgid "A single author entry"
 msgstr "Vieno autoriaus laukas"
 
-#: ../libgnomeui/gnome-about.c:420
+#: ../libgnomeui/gnome-about.c:418
 msgid "Documenters"
 msgstr "Dokumentuotojai"
 
-#: ../libgnomeui/gnome-about.c:421
+#: ../libgnomeui/gnome-about.c:419
 msgid "List of people documenting the program"
 msgstr "Sąrašas žmonių, dokumentavusių programą"
 
-#: ../libgnomeui/gnome-about.c:423
+#: ../libgnomeui/gnome-about.c:421
 msgid "Documenter entry"
 msgstr "Dokumentuotojų laukas"
 
-#: ../libgnomeui/gnome-about.c:424
+#: ../libgnomeui/gnome-about.c:422
 msgid "A single documenter entry"
 msgstr "Vieno dokumentuotojo laukas"
 
-#: ../libgnomeui/gnome-about.c:432
+#: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
 msgstr "Vertėjai"
 
-#: ../libgnomeui/gnome-about.c:433
+#: ../libgnomeui/gnome-about.c:431
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "Padėkos vertėjams. Ši eilutė turi būti pažymėta kaip verčiama"
 
-#: ../libgnomeui/gnome-about.c:440
+#: ../libgnomeui/gnome-about.c:438
 #: ../libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
-#: ../libgnomeui/gnome-about.c:441
+#: ../libgnomeui/gnome-about.c:439
 msgid "A logo for the about box"
 msgstr "Logotipas „apie“ langui"
 
-#: ../libgnomeui/gnome-about.c:520
+#: ../libgnomeui/gnome-about.c:518
 #, c-format
 msgid "About %s"
 msgstr "Apie %s"
@@ -679,35 +618,35 @@ msgstr "Programos ID"
 msgid "The application ID string"
 msgstr "Programos ID eilutė"
 
-#: ../libgnomeui/gnome-appbar.c:747
+#: ../libgnomeui/gnome-appbar.c:741
 msgid "Has Progress"
 msgstr "Rodo pažangą"
 
-#: ../libgnomeui/gnome-appbar.c:748
+#: ../libgnomeui/gnome-appbar.c:742
 msgid "Create a progress widget."
 msgstr "Sukurti pažangos juostą"
 
-#: ../libgnomeui/gnome-appbar.c:755
+#: ../libgnomeui/gnome-appbar.c:749
 msgid "Has Status"
 msgstr "Rodo būseną"
 
-#: ../libgnomeui/gnome-appbar.c:756
+#: ../libgnomeui/gnome-appbar.c:750
 msgid "Create a status widget."
 msgstr "Sukurti būsenos valdymo elementą."
 
-#: ../libgnomeui/gnome-appbar.c:763
+#: ../libgnomeui/gnome-appbar.c:757
 msgid "Interactivity"
 msgstr "Interaktyvumas"
 
-#: ../libgnomeui/gnome-appbar.c:764
+#: ../libgnomeui/gnome-appbar.c:758
 msgid "Level of user activity required."
 msgstr "Naudotojo atsako lygis būtinas"
 
-#: ../libgnomeui/gnome-authentication-manager.c:70
+#: ../libgnomeui/gnome-authentication-manager.c:80
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Prie Jūsų HTTP tarpinio serverio reikia prisijungti.\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:71
+#: ../libgnomeui/gnome-authentication-manager.c:81
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -716,58 +655,58 @@ msgstr ""
 "Norėdami pasiekti „%s“, turite prisijungti.\n"
 "%s"
 
-#: ../libgnomeui/gnome-authentication-manager.c:74
+#: ../libgnomeui/gnome-authentication-manager.c:84
 msgid "Your password will be transmitted unencrypted."
 msgstr "Jūsų slaptažodis bus perduotas neužkoduotas."
 
-#: ../libgnomeui/gnome-authentication-manager.c:75
+#: ../libgnomeui/gnome-authentication-manager.c:85
 msgid "Your password will be transmitted encrypted."
 msgstr "Jūsų slaptažodis bus perduotas užkoduotas."
 
-#: ../libgnomeui/gnome-authentication-manager.c:78
-#: ../libgnomeui/gnome-authentication-manager.c:296
+#: ../libgnomeui/gnome-authentication-manager.c:88
+#: ../libgnomeui/gnome-authentication-manager.c:306
 msgid "Authentication Required"
 msgstr "Būtinas autorizavimas"
 
-#: ../libgnomeui/gnome-authentication-manager.c:288
+#: ../libgnomeui/gnome-authentication-manager.c:298
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Turite užsiregistruoti norėdami pasiekti %s domeną %s\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:290
+#: ../libgnomeui/gnome-authentication-manager.c:300
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Jūs turite užsiregistruoti norėdami pasiekti „%s“\n"
 
-#: ../libgnomeui/gnome-client.c:900 ../libgnomeui/gnome-client.c:914
+#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
 msgid "Specify session management ID"
 msgstr "Nurodyti sesijos tvarkymo ID"
 
-#: ../libgnomeui/gnome-client.c:900 ../libgnomeui/gnome-client.c:914
+#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:903 ../libgnomeui/gnome-client.c:918
+#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
 msgid "Specify prefix of saved configuration"
 msgstr "Nurodyti išsaugotų nuostatų priešdėlį"
 
-#: ../libgnomeui/gnome-client.c:903 ../libgnomeui/gnome-client.c:918
+#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
 msgid "PREFIX"
 msgstr "PRIEŠD"
 
-#: ../libgnomeui/gnome-client.c:906 ../libgnomeui/gnome-client.c:922
+#: ../libgnomeui/gnome-client.c:908 ../libgnomeui/gnome-client.c:924
 msgid "Disable connection to session manager"
 msgstr "Uždrausti prisijungimą prie sesijos tvarkyklės"
 
-#: ../libgnomeui/gnome-client.c:1030 ../libgnomeui/gnome-client.c:1043
+#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
 msgid "Session management"
 msgstr "Sesijos tvarkymas"
 
-#: ../libgnomeui/gnome-client.c:1031
+#: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Rodyti sesijų valdymo parinktis"
 
-#: ../libgnomeui/gnome-client.c:2580
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "Atšaukti atsijungimą"
 
@@ -996,8 +935,8 @@ msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Unikalus rinkmenos įrašo identifikatorius. Bus naudojamas išsaugant rinkmenų sąrašą "
-"atmintinėje."
+"Unikalus rinkmenos įrašo identifikatorius. Bus naudojamas išsaugant rinkmenų "
+"sąrašą atmintinėje."
 
 #: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
 msgid "Browse Dialog Title"
@@ -1016,8 +955,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Ar rinkmenos vardo įvedimo laukas gali būti naudojamas įvesti katalogų vardus "
-"arba pilnus kelius iki rinkmenų."
+"Ar rinkmenos vardo įvedimo laukas gali būti naudojamas įvesti katalogų "
+"vardus arba pilnus kelius iki rinkmenų."
 
 #: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
@@ -1053,8 +992,9 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry naudojama įvedant rinkmenų vardus. Galite naudoti šį požymį norėdami "
-"su GnomeEntry pakeisti arba patikrinti kokius nors rinkmenos parametrus."
+"GnomeEntry naudojama įvedant rinkmenų vardus. Galite naudoti šį požymį "
+"norėdami su GnomeEntry pakeisti arba patikrinti kokius nors rinkmenos "
+"parametrus."
 
 #: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
@@ -1066,8 +1006,9 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry naudojama įvedant rinkmenų vardus. Galite naudoti šį požymį norėdami su "
-"GtkEntry pakeisti arba patikrinti kokius nors rinkmenos parametrus."
+"GtkEntry naudojama įvedant rinkmenų vardus. Galite naudoti šį požymį "
+"norėdami su GtkEntry pakeisti arba patikrinti kokius nors rinkmenos "
+"parametrus."
 
 #: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
@@ -1078,8 +1019,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Ar rinkmenų pasirinkimui naudoti naują GtkFileChooser ar seną GtkFileSelection "
-"valdymo elementus."
+"Ar rinkmenų pasirinkimui naudoti naują GtkFileChooser ar seną "
+"GtkFileSelection valdymo elementus."
 
 #: ../libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
@@ -1089,23 +1030,23 @@ msgstr "GtkFileChooser veiksmas"
 msgid "The type of operation that the file selector is performing."
 msgstr "Rinkmenų parinkiklio atliekamos operacijos tipas."
 
-#: ../libgnomeui/gnome-file-entry.c:642 ../libgnomeui/gnome-file-entry.c:676
+#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
 msgid "Select file"
 msgstr "Pasirinkite rinkmeną"
 
-#: ../libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
 msgstr "Kelias"
 
-#: ../libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
 msgstr "Kelias iki rinkmenos"
 
-#: ../libgnomeui/gnome-file-entry.c:829
+#: ../libgnomeui/gnome-file-entry.c:841
 msgid "_Browse..."
 msgstr "_Naršyti..."
 
-#: ../libgnomeui/gnome-file-entry.c:830
+#: ../libgnomeui/gnome-file-entry.c:842
 msgid "Pop up a file selector to choose a file"
 msgstr "Iškviesti rinkmenų pažymėjimo langą rinkmenai parinkti"
 
@@ -1288,44 +1229,45 @@ msgstr ""
 "iškviesti GtkDialog, kai norite pakeisti arba užklausti kurią nors iš jo "
 "savybių."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:988
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:1005
 msgid "No Icon"
 msgstr "Nėra piktogramos"
 
-#: ../libgnomeui/gnome-icon-entry.c:758
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "Icon selection dialog"
 msgstr "Piktogramos pasirinkimo langas"
 
-#: ../libgnomeui/gnome-icon-entry.c:759
+#: ../libgnomeui/gnome-icon-entry.c:776
 msgid "This dialog box lets you select an icon."
 msgstr "Šis dialogas leidžia Jums pasirinkti piktogramą."
 
-#: ../libgnomeui/gnome-icon-entry.c:765 ../libgnomeui/gnome-icon-entry.c:991
+#: ../libgnomeui/gnome-icon-entry.c:782 ../libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon Selector"
 msgstr "Piktogramos pasirinkimas"
 
-#: ../libgnomeui/gnome-icon-entry.c:766
+#: ../libgnomeui/gnome-icon-entry.c:783
 msgid "Please pick the icon you want."
 msgstr "Pasirinkite norimą piktogramą."
 
-#: ../libgnomeui/gnome-icon-entry.c:992
+#: ../libgnomeui/gnome-icon-entry.c:1009
 msgid "This button will open a window to let you select an icon."
 msgstr "Šis mygtukas atidarys langą, kuriame galėsite pasitinkti piktogramą."
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
 msgstr "Naršyti"
 
-#: ../libgnomeui/gnome-icon-entry.c:1015
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Icon path"
 msgstr "Piktogramos kelias"
 
-#: ../libgnomeui/gnome-icon-entry.c:1016
+#: ../libgnomeui/gnome-icon-entry.c:1033
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
-"Čia jūs turėtumėte nurodyti aplanką, kuriame yra saugomi piktogramų paveikslėliai."
+"Čia jūs turėtumėte nurodyti aplanką, kuriame yra saugomi piktogramų "
+"paveikslėliai."
 
 #: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1341,55 +1283,55 @@ msgstr "GnomeIconSelection: nepavyko atverti aplanko „%s“"
 msgid "Loading Icons..."
 msgstr "Įkeliamos piktogramos..."
 
-#: ../libgnomeui/gnome-messagebox.c:109
+#: ../libgnomeui/gnome-messagebox.c:107
 msgid "Information"
 msgstr "Informacija"
 
-#: ../libgnomeui/gnome-messagebox.c:114
+#: ../libgnomeui/gnome-messagebox.c:112
 msgid "Warning"
 msgstr "Perspėjimas"
 
-#: ../libgnomeui/gnome-messagebox.c:120
+#: ../libgnomeui/gnome-messagebox.c:118
 msgid "Error"
 msgstr "Klaida"
 
-#: ../libgnomeui/gnome-messagebox.c:126
+#: ../libgnomeui/gnome-messagebox.c:124
 msgid "Question"
 msgstr "Klausimas"
 
-#: ../libgnomeui/gnome-messagebox.c:131
+#: ../libgnomeui/gnome-messagebox.c:129
 msgid "Message"
 msgstr "Pranešimas"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:265
 msgid "_Username:"
 msgstr "_Naudotojo vardas:"
 
-#: ../libgnomeui/gnome-password-dialog.c:271
+#: ../libgnomeui/gnome-password-dialog.c:267
 msgid "_Domain:"
 msgstr "_Sritis:"
 
-#: ../libgnomeui/gnome-password-dialog.c:273
+#: ../libgnomeui/gnome-password-dialog.c:269
 msgid "_Password:"
 msgstr "_Slaptažodis:"
 
-#: ../libgnomeui/gnome-password-dialog.c:346
+#: ../libgnomeui/gnome-password-dialog.c:342
 msgid "Co_nnect"
 msgstr "Prisi_jungti"
 
-#: ../libgnomeui/gnome-password-dialog.c:368
+#: ../libgnomeui/gnome-password-dialog.c:364
 msgid "Connect _anonymously"
 msgstr "Prisijungti _anonimiškai"
 
-#: ../libgnomeui/gnome-password-dialog.c:373
+#: ../libgnomeui/gnome-password-dialog.c:369
 msgid "Connect as u_ser:"
 msgstr "Prisijungti _naudotoju:"
 
-#: ../libgnomeui/gnome-password-dialog.c:471
+#: ../libgnomeui/gnome-password-dialog.c:467
 msgid "_Remember password for this session"
 msgstr "_Atsiminti slaptažodį šios sesijos metu"
 
-#: ../libgnomeui/gnome-password-dialog.c:473
+#: ../libgnomeui/gnome-password-dialog.c:469
 msgid "Save password in _keyring"
 msgstr "Išsaugoti slaptažodį raktų _rinkinyje"
 
@@ -1428,7 +1370,7 @@ msgstr "Pirmi dešimt"
 
 #: ../libgnomeui/gnome-scores.c:91
 msgid "User"
-msgstr "Vartotojas"
+msgstr "Naudotojas"
 
 #: ../libgnomeui/gnome-scores.c:94
 msgid "Score"
@@ -1473,90 +1415,65 @@ msgstr "Atitraukti"
 msgid "About"
 msgstr "Apie"
 
-#: ../libgnomeui/gnome-ui-init.c:125 ../libgnomeui/gnome-ui-init.c:134
+#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
 msgid "Disable Crash Dialog"
-msgstr "Atjungti nulūžimo dialogą"
+msgstr "Išjungti nulūžimo dialogą"
 
-#: ../libgnomeui/gnome-ui-init.c:127
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "X display to use"
 msgstr "Kurį X'ų ekraną naudoti"
 
-#: ../libgnomeui/gnome-ui-init.c:127
+#: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
 msgstr "EKRANAS"
 
-#: ../libgnomeui/gnome-ui-init.c:145 ../libgnomeui/gnome-ui-init.c:158
+#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
-msgstr "GNOME GUI biblioteka"
+msgstr "GNOME grafinės sąsajos biblioteka"
 
-#: ../libgnomeui/gnome-ui-init.c:146
+#: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
-msgstr "Rodyti GNOME GUI parinktis"
+msgstr "Rodyti GNOME grafinės sąsajos parinktis"
+
+#: ../libgnomeui/gnome-ui-init.c:247
+msgid "Could not open link"
+msgstr "Nepavyko atverti nuorodos"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:759
+#: ../libgnomeui/gnome-ui-init.c:833
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
-"Įvyko keletas segmentacijos klaidų; nepavyko parodyti klaidos dialogo\n"
+"Įvyko keletas segmentacijos klaidų; nepavyko parodyti klaidos lango\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:773
+#: ../libgnomeui/gnome-ui-init.c:848
 #, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "Segmentacijos klaida!\n"
-"Nepavyko parodyti nulūžimo dialogo\n"
+"Nepavyko parodyti nulūžimo lango\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"GNOME sesijos tvarkyklė (procesas %d) nulūžo\n"
-"dėl lemtingos klaidos (%s).\n"
-"Užvėrus šį dialogą, visos programos ir sesija bus užvertos.\n"
-"Prieš užverdami dialogą išsaugokite visas savo rinkmenas."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "Programa „%s“ netikėtai liovėsi veikusi."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "procesas %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"Galite informuoti kūrėjus apie tai, kas atsitiko, kad jie galėtų pataisyti "
-"klaidą, arba galite tuoj pat paleisti programą iš naujo."
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:83
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Naudojimas: gnome_segv2 programa signalas\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "Pe_rleisti programą"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "_Informuoti kūrėjus"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_Derinti"
+#: ../libgnomeui/gnome_segv.c:136
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>Programa %s nulūžo.</b>\n"
+"\n"
+"Tačiau Jūs neįdiegę <b>bug-buddy</b>, įrankio skirto\n"
+"pranešimui apie GNOME klaidas. Jeigu norite padėti\n"
+"mums pagerinti GNOME, įdiekite jį\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
