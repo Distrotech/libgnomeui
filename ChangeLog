@@ -1,3 +1,10 @@
+2006-08-17  Federico Mena Quintero  <federico@novell.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_parse): Don't append a '/' to the base
+	URI if it already has one.  See
+	https://bugzilla.novell.com/show_bug.cgi?id=184875.
+
 2006-08-16  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-vfs-util.c:

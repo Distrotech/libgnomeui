@@ -2112,7 +2112,8 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
     }
   else
     {
-      gchar *path_part, *path, *uri, *filesystem_path, *escaped, *base_dir;
+      gchar *path_part, *path, *uri, *filesystem_path, *escaped;
+      int len;
 
       if (last_slash == stripped)
 	path_part = g_strdup ("/");
@@ -2144,12 +2145,24 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
 	      /* don't insert break here, read above comment */
 #endif
 	    default:
-	      escaped = gnome_vfs_escape_path_string (filesystem_path);
-	      base_dir = g_strconcat (base_uri, "/", NULL);
-	      uri = gnome_vfs_uri_make_full_from_relative (base_dir, escaped);
-	      g_free (base_dir);
+	      len = strlen (base_uri);
+	      if (len != 0)
+		{
+		  escaped = gnome_vfs_escape_path_string (filesystem_path);
 
-	      g_free (escaped);
+		  if (base_uri[len - 1] != '/')
+		    {
+		      char *base_dir;
+
+		      base_dir = g_strconcat (base_uri, "/", NULL);
+		      uri = gnome_vfs_uri_make_full_from_relative (base_dir, escaped);
+		      g_free (base_dir);
+		    }
+		  else
+		    uri = gnome_vfs_uri_make_full_from_relative (base_uri, escaped);
+
+		  g_free (escaped);
+		}
 	    }
 
 	  g_free (filesystem_path);
