@@ -53,7 +53,6 @@ int main(int argc, char *argv[])
   const char *app_version = NULL;
   gchar *appname;
   gchar *bug_buddy_path = NULL;
-  gchar *app_path = NULL;
   
   int bb_sm_disable = 0;
 
@@ -86,7 +85,6 @@ int main(int argc, char *argv[])
       return 1;
     }
   appname = g_strdup(args[0]);
-  app_path = g_find_program_in_path (appname);
   if (g_getenv("GNOME_HACKER")) 
     {
       gchar *exec_str;

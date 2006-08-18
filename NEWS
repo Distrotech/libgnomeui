@@ -1,3 +1,9 @@
+libgnomeui 2.15.92
+------------------
+
+* Lots of fixes for the async file chooser (Federico)
+* 
+
 libgnomeui 2.15.91
 ------------------
 

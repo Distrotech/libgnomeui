@@ -1581,12 +1581,6 @@ void gnome_mdi_update_child (GnomeMDI *mdi, GnomeMDIChild *child)
 								 fullname);
 			g_free(fullname);
 		}
-		else if(mdi->mode == GNOME_MDI_NOTEBOOK) {
-			GtkWidget *tab_label;
-
-			tab_label = gtk_notebook_get_tab_label
-				(GTK_NOTEBOOK (view->parent), view);
-		}
 
 		view_node = g_list_next(view_node);
 	}
