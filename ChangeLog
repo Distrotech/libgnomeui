@@ -1,5 +1,36 @@
 2006-08-17  Federico Mena Quintero  <federico@novell.com>
 
+	* file-chooser/gtkfilesystemgnomevfs.c (struct
+	_GtkFileSystemGnomeVFS): Added a "handles" hash table.  We'll use
+	this to monitor which handles are still live when the file system
+	object is finalized.
+	(gtk_file_system_gnome_vfs_init): Initialize the "handles" hash
+	table.
+	(gtk_file_system_handle_gnome_vfs_new): Insert the new handle in
+	the system_vfs's hash table of handles.
+	(gtk_file_system_handle_gnome_vfs_class_init): Added a class_init
+	function for handles; register a finalizer.
+	(gtk_file_system_handle_gnome_vfs_finalize): Remove the handle
+	from the file system's hash table of handles.
+	(gtk_file_system_gnome_vfs_finalize): Check that we don't have any
+	outstanding handles at finalization time.
+	(check_handles_at_finalization): New helper function.
+	(get_folder_complete_operation): Set the op_data->vfs_uri (a
+	string) instead of the op_data->uri (a GnomeVFSURI) on the GError
+	message!
+	(gtk_file_system_gnome_vfs_get_folder): Removed unused variables.
+	(get_folder_file_info_callback): Likewise.
+	(gtk_file_system_gnome_vfs_get_info): Likewise.
+	(gtk_file_system_gnome_vfs_volume_mount): Likewise.
+	(lookup_folder_child_from_uri): Likewise.
+	(create_folder_progress_cb): Removed unused label.
+	(volume_mount_cb): Likewise.
+	(unmark_all_fn): Removed unused function.
+	(get_desktop_link_uri): Oops, initialize ditem_url.  Also, use the
+	passed-in GError for g_key_file_load_from_file().
+
+2006-08-17  Federico Mena Quintero  <federico@novell.com>
+
 	* file-chooser/gtkfilesystemgnomevfs.c
 	(gtk_file_system_gnome_vfs_parse): Don't append a '/' to the base
 	URI if it already has one.  See

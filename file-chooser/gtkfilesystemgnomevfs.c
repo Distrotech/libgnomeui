@@ -30,6 +30,11 @@
  *            John Sullivan <sullivan@eazel.com>
  */
 
+/* #define this if you want the program to crash when a file system gets
+ * finalized while async handles are still outstanding.
+ */
+#undef HANDLE_ME_HARDER
+
 #include <config.h>
 
 #include "gtkfilesystemgnomevfs.h"
@@ -140,6 +145,8 @@ struct _GtkFileSystemGnomeVFS
   /* For /afs and /net */
   struct stat afs_statbuf;
   struct stat net_statbuf;
+
+  GHashTable *handles;
 
   guint have_afs : 1;
   guint have_net : 1;
@@ -316,7 +323,9 @@ static void  gtk_file_folder_gnome_vfs_finalize   (GObject                    *o
 static void  gtk_file_folder_gnome_vfs_dispose    (GObject                    *object);
 
 static GType gtk_file_system_handle_gnome_vfs_get_type (void);
+static void  gtk_file_system_handle_gnome_vfs_class_init (GtkFileSystemHandleGnomeVFSClass *class);
 static void  gtk_file_system_handle_gnome_vfs_init     (GtkFileSystemHandleGnomeVFS *handle);
+static void  gtk_file_system_handle_gnome_vfs_finalize (GObject *object);
 static GtkFileSystemHandleGnomeVFS *gtk_file_system_handle_gnome_vfs_new (GtkFileSystem *file_system);
 
 static GtkFileInfo *gtk_file_folder_gnome_vfs_get_info      (GtkFileFolder      *folder,
@@ -374,6 +383,7 @@ static FolderChild *lookup_folder_child_from_uri (GtkFileFolder     *folder,
 
 static GObjectClass *system_parent_class;
 static GObjectClass *folder_parent_class;
+static GObjectClass *handle_parent_class;
 
 #define ITEMS_PER_LOCAL_NOTIFICATION 10000
 #define ITEMS_PER_REMOTE_NOTIFICATION 100
@@ -523,6 +533,8 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
   else
     system_vfs->have_net = FALSE;
 
+  system_vfs->handles = g_hash_table_new (g_direct_hash, g_direct_equal);
+
   profile_end ("end", NULL);
 }
 
@@ -535,9 +547,43 @@ unref_folder (gpointer key,
 }
 
 static void
+check_handle_fn (gpointer key, gpointer value, gpointer data)
+{
+  GtkFileSystemHandleGnomeVFS *handle;
+  int *num_live_handles;
+
+  handle = key;
+  num_live_handles = data;
+
+  (*num_live_handles)++;
+
+  g_warning ("file_system_gnome_vfs=%p still has handle=%p at finalization which is %s!",
+	     GTK_FILE_SYSTEM_HANDLE (handle)->file_system,
+	     handle,
+	     GTK_FILE_SYSTEM_HANDLE (handle)->cancelled ? "CANCELLED" : "NOT CANCELLED");
+}
+
+static void
+check_handles_at_finalization (GtkFileSystemGnomeVFS *system_vfs)
+{
+  int num_live_handles;
+
+  num_live_handles = 0;
+
+  g_hash_table_foreach (system_vfs->handles, check_handle_fn, &num_live_handles);
+#ifdef HANDLE_ME_HARDER
+  g_assert (num_live_handles == 0);
+#endif
+
+  g_hash_table_destroy (system_vfs->handles);
+}
+
+static void
 gtk_file_system_gnome_vfs_finalize (GObject *object)
 {
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (object);
+
+  check_handles_at_finalization (system_vfs);
 
   g_free (system_vfs->desktop_uri);
   g_free (system_vfs->home_uri);
@@ -674,17 +720,6 @@ gtk_file_system_gnome_vfs_get_volume_for_path (GtkFileSystem     *file_system,
   return (GtkFileSystemVolume *) volume;
 }
 
-
-static void
-unmark_all_fn  (gpointer  key,
-		gpointer  value,
-		gpointer  user_data)
-{
-  FolderChild *child;
-
-  child = value;
-  child->reloaded = FALSE;
-}
 
 static void
 load_dir (GtkFileFolderGnomeVFS *folder_vfs)
@@ -875,10 +910,12 @@ get_desktop_link_uri (const char *desktop_uri,
   char *ditem_url;
   char *tmp;
 
+  ditem_url = NULL;
+
   desktop_file = g_key_file_new ();
   tmp = gnome_vfs_get_local_path_from_uri (desktop_uri);
   ret = g_key_file_load_from_file (desktop_file, tmp,
-				   G_KEY_FILE_KEEP_TRANSLATIONS, NULL);
+				   G_KEY_FILE_KEEP_TRANSLATIONS, error);
   g_free (tmp);
 
   if (!ret)
@@ -976,7 +1013,7 @@ get_folder_complete_operation (struct GetFolderData *op_data)
 		   GTK_FILE_SYSTEM_ERROR,
 		   GTK_FILE_SYSTEM_ERROR_NOT_FOLDER,
 		   _("%s is not a folder"),
-		   op_data->uri);
+		   op_data->vfs_uri);
 
       (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
 			     NULL, error, op_data->callback_data);
@@ -1104,7 +1141,6 @@ get_folder_file_info_callback (GnomeVFSAsyncHandle *handle,
   GError *error = NULL;
   GnomeVFSGetFileInfoResult *result;
   struct GetFolderData *op_data = callback_data;
-  GtkFileFolderGnomeVFS *folder_vfs = op_data->folder_vfs;
 
   gdk_threads_enter ();
 
@@ -1178,8 +1214,6 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem                  *file_syste
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
   GtkFileFolderGnomeVFS *folder_vfs = NULL;
   GtkFileFolderGnomeVFS *parent_folder = NULL;
-  GnomeVFSMonitorHandle *monitor;
-  GnomeVFSResult result;
   GnomeVFSFileInfo *vfs_info;
   GnomeVFSFileInfoOptions options = 0;
   struct GetFolderData *op_data = NULL;
@@ -1368,7 +1402,6 @@ gtk_file_system_gnome_vfs_get_info (GtkFileSystem                 *file_system,
 				    GtkFileSystemGetInfoCallback   callback,
 				    gpointer                       data)
 {
-  GnomeVFSResult result;
   GList uris;
   GtkFileSystemHandleGnomeVFS *handle;
   struct GetFileInfoData *op_data;
@@ -1473,7 +1506,6 @@ create_folder_progress_cb (GnomeVFSAsyncHandle      *vfs_handle,
 	break;
     }
 
-out:
   op_data->handle->callback_type = 0;
   op_data->handle->callback_data = NULL;
 
@@ -1719,7 +1751,6 @@ volume_mount_cb (gboolean succeeded,
   if (tmp_error)
     g_error_free (tmp_error);
 
-out:
   op_data->handle->callback_type = 0;
   op_data->handle->callback_data = NULL;
 
@@ -1749,8 +1780,6 @@ gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem                    *file_s
 					GtkFileSystemVolumeMountCallback  callback,
 					gpointer                          data)
 {
-  GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
-
   if (GNOME_IS_VFS_DRIVE (volume))
     {
       struct VolumeMountData *op_data;
@@ -2740,8 +2769,6 @@ lookup_folder_child_from_uri (GtkFileFolder *folder,
 {
   GtkFileFolderGnomeVFS *folder_vfs = GTK_FILE_FOLDER_GNOME_VFS (folder);
   FolderChild *child;
-  GnomeVFSFileInfo *vfs_info;
-  GnomeVFSResult result;
 
   profile_start ("start", uri);
 
@@ -3382,18 +3409,53 @@ gtk_file_system_handle_gnome_vfs_get_type (void)
 }
 
 static void
+gtk_file_system_handle_gnome_vfs_class_init (GtkFileSystemHandleGnomeVFSClass *class)
+{
+  GObjectClass *gobject_class;
+
+  handle_parent_class = g_type_class_peek_parent (class);
+
+  gobject_class = (GObjectClass *) class;
+
+  gobject_class->finalize = gtk_file_system_handle_gnome_vfs_finalize;
+}
+
+static void
 gtk_file_system_handle_gnome_vfs_init (GtkFileSystemHandleGnomeVFS *handle)
 {
   handle->vfs_handle = NULL;
+}
+
+static void
+gtk_file_system_handle_gnome_vfs_finalize (GObject *object)
+{
+  GtkFileSystemHandleGnomeVFS *handle;
+  GtkFileSystemGnomeVFS *system_vfs;
+
+  handle = GTK_FILE_SYSTEM_HANDLE_GNOME_VFS (object);
+
+  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (GTK_FILE_SYSTEM_HANDLE (handle)->file_system);
+
+  g_assert (g_hash_table_lookup (system_vfs->handles, handle) != NULL);
+  g_hash_table_remove (system_vfs->handles, handle);
+
+  if (G_OBJECT_CLASS (handle_parent_class)->finalize)
+    G_OBJECT_CLASS (handle_parent_class)->finalize (object);
 }
 
 static GtkFileSystemHandleGnomeVFS *
 gtk_file_system_handle_gnome_vfs_new (GtkFileSystem *file_system)
 {
   GtkFileSystemHandleGnomeVFS *handle;
+  GtkFileSystemGnomeVFS *system_vfs;
+
+  system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
 
   handle = g_object_new (GTK_TYPE_FILE_SYSTEM_HANDLE_GNOME_VFS, NULL);
   GTK_FILE_SYSTEM_HANDLE (handle)->file_system = file_system;
+
+  g_assert (g_hash_table_lookup (system_vfs->handles, handle) == NULL);
+  g_hash_table_insert (system_vfs->handles, handle, handle);
 
   return handle;
 }
@@ -3524,11 +3586,11 @@ fs_module_init (GTypeModule    *module)
     static const GTypeInfo file_system_handle_gnome_vfs_info =
       {
 	sizeof (GtkFileSystemHandleGnomeVFSClass),
-	NULL,
-	NULL,
-	NULL,
-	NULL,
-	NULL,
+	NULL,           /* base_init */ 
+	NULL,           /* base_finalize */
+	(GClassInitFunc) gtk_file_system_handle_gnome_vfs_class_init,
+	NULL,           /* class_finalize */
+	NULL,           /* class_data */
 	sizeof (GtkFileSystemHandleGnomeVFS),
 	0,
 	(GInstanceInitFunc) gtk_file_system_handle_gnome_vfs_init,
