@@ -46,7 +46,10 @@
 /* Must be before all other gnome includes!! */
 #include "gnome-i18nP.h"
 
+#include <gdkconfig.h>
+#ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
+#endif
 #include <libgnome/libgnome.h>
 #include <bonobo/bonobo-ui-main.h>
 #include <gconf/gconf-client.h>
