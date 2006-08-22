@@ -1,3 +1,7 @@
+2006-08-22  Kristian Rietveld  <kris@imendio.com>
+
+	* file-chooser/Makefile.am: add WARN_CFLAGS to INCLUDES.
+
 2006-08-21  Tor Lillqvist  <tml@novell.com>
 
 	* libgnomeui/gnome-ui-init.c: Include <gdk/gdkx.h> only if
