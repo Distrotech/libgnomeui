@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.11.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-21 17:22+0200\n"
-"PO-Revision-Date: 2006-07-21 17:22+0200\n"
+"POT-Creation-Date: 2006-08-24 13:14+0200\n"
+"PO-Revision-Date: 2006-08-24 13:24+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team:  Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,30 +31,30 @@ msgstr "Element fill 2"
 msgid "Hint for item 2"
 msgstr "Pista per a l'element 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#: ../file-chooser/gtkfilesystemgnomevfs.c:929
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s és un enllaç a alguna cosa que no és una carpeta"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#: ../file-chooser/gtkfilesystemgnomevfs.c:940
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s és un enllaç sense destinació"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1015
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s no és una carpeta"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1844
 msgid "Network Servers"
 msgstr "Servidors de xarxa"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1860
 msgid "File System"
 msgstr "Sistema de fitxers"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2389
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ha fallat en desar l'adreça d'interès (%s)"
@@ -62,7 +62,7 @@ msgstr "Ha fallat en desar l'adreça d'interès (%s)"
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr "No s'ha pogut obtenir informació per al fitxer «%s»: %s"
+msgstr "No s'ha pogut obtenir informació del fitxer «%s»: %s"
 
 #: ../file-chooser/testfilechooser.c:191
 #, c-format
@@ -74,8 +74,8 @@ msgstr "No s'ha pogut obrir «%s»: %s"
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
-"No s'ha pogut carregar la imatge «%s»: es desconeix la raó, probablement és "
-"una imatge corrompuda"
+"No s'ha pogut carregar la imatge «%s»: es desconeix la raó, probablement "
+"sigui una imatge corrompuda"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
@@ -175,11 +175,11 @@ msgstr ""
 #: ../libgnomeui/gnome-about.c:438
 #: ../libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
-msgstr "Logo"
+msgstr "Logotip"
 
 #: ../libgnomeui/gnome-about.c:439
 msgid "A logo for the about box"
-msgstr "Un logo per al quadre Quant a "
+msgstr "Un logotip per al quadre Quant a "
 
 #: ../libgnomeui/gnome-about.c:518
 #, c-format
@@ -302,7 +302,7 @@ msgstr "Imprimeix el fitxer actual"
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "Configuració d'impr_essió..."
+msgstr "Configuració de la impr_essió..."
 
 #: ../libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
@@ -483,10 +483,12 @@ msgstr "Joc _nou"
 msgid "Start a new game"
 msgstr "Comença un joc nou"
 
+# FIXME (josep)
 #: ../libgnomeui/gnome-app-helper.c:253
 msgid "_Pause Game"
 msgstr "_Pausa el joc"
 
+# FIXME (josep)
 #: ../libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
 msgstr "Pausa el joc"
@@ -706,7 +708,7 @@ msgstr "Gestió de sessió"
 msgid "Show session management options"
 msgstr "Mostra opcions del gestió de sessions"
 
-#: ../libgnomeui/gnome-client.c:2582
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "Cancel·la la sortida"
 
@@ -718,6 +720,7 @@ msgstr "S'ha rebut dades de color invàlides\n"
 msgid "Open a dialog to specify the color"
 msgstr "Obre un diàleg per a especificar el color"
 
+# FIXME: trieu? (josep)
 #: ../libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "Tria un color"
@@ -803,7 +806,7 @@ msgstr "Títol de l'auxiliar"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
-msgstr "Imatge del logo"
+msgstr "Imatge del logotip"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
@@ -882,23 +885,23 @@ msgstr "El color de fons del contingut s'ha definit"
 #: ../libgnomeui/gnome-druid-page-standard.c:216
 #: ../libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
-msgstr "Logo del color de fons"
+msgstr "Logotip del color de fons"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
-msgstr "Logo del color de fons"
+msgstr "Logotip del color de fons"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
-msgstr "Logo del color de fons com un GdkColor"
+msgstr "Logotip del color de fons com un GdkColor"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
-msgstr "Logo del color de fons definit"
+msgstr "Logotip del color de fons definit"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
-msgstr "El logo del color de fons s'ha definit"
+msgstr "S'ha establert el logotip del color de fons"
 
 #: ../libgnomeui/gnome-druid.c:154
 msgid "Show Finish"
@@ -954,8 +957,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Si l'entrada de fitxers s'usa per introduir noms de directori o noms de "
-"fitxer sencers."
+"Si l'entrada de fitxers es fa servir per a introduir noms de directori o "
+"noms de fitxer sencers."
 
 #: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
@@ -1018,8 +1021,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Si s'ha d'usar el nou GtkFileChooser o el GtkFileSelection antic per a "
-"seleccionar fitxers."
+"Si s'ha de fer servir el nou GtkFileChooser o el GtkFileSelection antic per "
+"a seleccionar fitxers."
 
 #: ../libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
@@ -1234,40 +1237,40 @@ msgstr ""
 "aconseguir el GtkDialog si necessiteu modificar o consultar qualsevol dels "
 "seus paràmetres."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:1005
 msgid "No Icon"
 msgstr "Sense icona"
 
-#: ../libgnomeui/gnome-icon-entry.c:767
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "Icon selection dialog"
 msgstr "Diàleg de selecció d'icones"
 
-#: ../libgnomeui/gnome-icon-entry.c:768
+#: ../libgnomeui/gnome-icon-entry.c:776
 msgid "This dialog box lets you select an icon."
 msgstr "Aquest diàleg us permet seleccionar una icona."
 
-#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
+#: ../libgnomeui/gnome-icon-entry.c:782 ../libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon Selector"
 msgstr "Seleccionador d'icones"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:783
 msgid "Please pick the icon you want."
 msgstr "Seleccioneu la icona que voleu."
 
-#: ../libgnomeui/gnome-icon-entry.c:1001
+#: ../libgnomeui/gnome-icon-entry.c:1009
 msgid "This button will open a window to let you select an icon."
 msgstr ""
 "Aquest botó obrirà una finestra per a que pugueu seleccionar una icona."
 
-#: ../libgnomeui/gnome-icon-entry.c:1021
+#: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
 msgstr "Vés a"
 
-#: ../libgnomeui/gnome-icon-entry.c:1024
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Icon path"
 msgstr "Camí de les icones"
 
-#: ../libgnomeui/gnome-icon-entry.c:1025
+#: ../libgnomeui/gnome-icon-entry.c:1033
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1423,32 +1426,32 @@ msgstr "Dessagna"
 msgid "About"
 msgstr "Quant a"
 
-#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
+#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "Inhabilita el diàleg de fallades"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "Pantalla X per utilitzar"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "VISUALITZACIÓ"
 
-#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
+#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "Biblioteca GNOME GUI"
 
-#: ../libgnomeui/gnome-ui-init.c:170
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "Mostra opcions de la GUI del GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:247
+#: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
 msgstr "No s'ha pogut obrir l'enllaç"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:833
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1456,7 +1459,7 @@ msgstr ""
 "d'error\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:848
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1465,58 +1468,64 @@ msgstr ""
 "S'ha produït una violació de segment\n"
 "No es pot mostrar el diàleg d'error\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"El gestor de sessió del GNOME (procés %d) ha fallat\n"
-"degut a un error fatal (%s).\n"
-"Quan tanqueu aquest diàleg, totes les aplicacions es tancaran i es sortirà "
-"de la vostra sessió.\n"
-"Deseu tots els vostres fitxers abans de tancar aquest diàleg."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "L'aplicació «%s» ha acabat inesperadament."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "procés: %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"Podeu informar els desenvolupadors de què ha passat per a ajudar-los a "
-"arreglar-ho. O podeu reiniciar l'aplicació ara mateix."
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Forma d'ús: gnome_segv2 nomapp numsig\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "_Reinicia l'aplicació"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "_Informa els desenvolupadors"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_Depuració"
+#: ../libgnomeui/gnome_segv.c:134
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>L'aplicació %s ha fallat.</b>\n"
+"\n"
+"Tanmateix, no teniu instal·lat el <b>bug-buddy>,\n"
+"l'eina d'informes d'error del GNOME. Si voleu\n"
+"ajudar-nos a millorar el GNOME, instal·leu-lo\n"
+"si us plau\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Surt del test"
+
+#~ msgid ""
+#~ "The GNOME Session Manager (process %d) has crashed\n"
+#~ "due to a fatal error (%s).\n"
+#~ "When you close this dialog, all applications will close and your session "
+#~ "will exit.\n"
+#~ "Please save all your files before closing this dialog."
+#~ msgstr ""
+#~ "El gestor de sessió del GNOME (procés %d) ha fallat\n"
+#~ "degut a un error fatal (%s).\n"
+#~ "Quan tanqueu aquest diàleg, totes les aplicacions es tancaran i es "
+#~ "sortirà de la vostra sessió.\n"
+#~ "Deseu tots els vostres fitxers abans de tancar aquest diàleg."
+
+#~ msgid "The Application \"%s\" has quit unexpectedly."
+#~ msgstr "L'aplicació «%s» ha acabat inesperadament."
+
+#~ msgid "process %d: %s"
+#~ msgstr "procés: %d: %s"
+
+#~ msgid ""
+#~ "You can inform the developers of what happened to help them fix it.  Or "
+#~ "you can restart the application right now."
+#~ msgstr ""
+#~ "Podeu informar els desenvolupadors de què ha passat per a ajudar-los a "
+#~ "arreglar-ho. O podeu reiniciar l'aplicació ara mateix."
+
+#~ msgid "_Restart Application"
+#~ msgstr "_Reinicia l'aplicació"
+
+#~ msgid "_Inform Developers"
+#~ msgstr "_Informa els desenvolupadors"
+
+#~ msgid "_Debug"
+#~ msgstr "_Depuració"
 
 #~ msgid "Error reading file '%s': %s"
 #~ msgstr "S'ha produït un error en llegir el fitxer «%s»: %s"
