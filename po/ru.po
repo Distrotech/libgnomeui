@@ -8,15 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-02 07:46+0100\n"
-"PO-Revision-Date: 2006-02-02 12:12+0200\n"
-"Last-Translator: Leonid Kanter <leon@asplinux.ru>\n"
+"POT-Creation-Date: 2006-08-25 04:19+0400\n"
+"PO-Revision-Date: 2006-08-25 12:12+0400\n"
+"Last-Translator: Nickolay V. Shmyrev <nshmyrev@yandex.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -34,94 +35,33 @@ msgstr "Дочерний элемент 2"
 msgid "Hint for item 2"
 msgstr "Подсказка для элемента 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:833
+#: ../file-chooser/gtkfilesystemgnomevfs.c:929
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s является ссылкой на что-то, что не является папкой"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:844
+#: ../file-chooser/gtkfilesystemgnomevfs.c:940
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s является ссылкой без адреса назначения"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:959
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1015
 #, c-format
 msgid "%s is not a folder"
 msgstr "Путь \"%s\" не является каталогом"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1201
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1844
 msgid "Network Servers"
 msgstr "Сетевые серверы"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1217
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1860
 msgid "File System"
 msgstr "Файловая система"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1977
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2389
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Произошёл сбой при сохранении закладки (%s)"
-
-#: ../file-chooser/sucky-desktop-item.c:217
-#: ../file-chooser/sucky-desktop-item.c:605
-#, c-format
-msgid "Error reading file '%s': %s"
-msgstr "Ошибка чтения файла \"%s\": %s"
-
-#: ../file-chooser/sucky-desktop-item.c:285
-#, c-format
-msgid "Error rewinding file '%s': %s"
-msgstr "Ошибка прокрутки назад файла \"%s\": %s"
-
-#: ../file-chooser/sucky-desktop-item.c:384
-#: ../file-chooser/sucky-desktop-item.c:3702
-msgid "No name"
-msgstr "Нет имени"
-
-#: ../file-chooser/sucky-desktop-item.c:620
-#, c-format
-msgid "File '%s' is not a regular file or directory."
-msgstr "Файл '%s' не является обычным файлом или каталогом."
-
-#: ../file-chooser/sucky-desktop-item.c:796
-#, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "Ошибка: невозможно найти идентификатор файла '%s'"
-
-#: ../file-chooser/sucky-desktop-item.c:842
-msgid "No filename to save to"
-msgstr "Нет имени файла для сохранения"
-
-#: ../file-chooser/sucky-desktop-item.c:1797
-#, c-format
-msgid "Starting %s"
-msgstr "Запускается %s"
-
-#: ../file-chooser/sucky-desktop-item.c:2036
-msgid "No URL to launch"
-msgstr "Нет URL для запуска"
-
-#: ../file-chooser/sucky-desktop-item.c:2046
-msgid "Not a launchable item"
-msgstr "Не является запускаемым элементом"
-
-#: ../file-chooser/sucky-desktop-item.c:2056
-msgid "No command (Exec) to launch"
-msgstr "Нет команды (Exec) для запуска"
-
-#: ../file-chooser/sucky-desktop-item.c:2069
-msgid "Bad command (Exec) to launch"
-msgstr "Неверная команда (Exec) для запуска"
-
-#: ../file-chooser/sucky-desktop-item.c:3759
-#, c-format
-msgid "Unknown encoding of: %s"
-msgstr "Неизвестная кодировка: %s"
-
-#: ../file-chooser/sucky-desktop-item.c:3990
-#, c-format
-msgid "Error writing file '%s': %s"
-msgstr "Ошибка записи файла \"%s\": %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -135,7 +75,8 @@ msgstr "Сбой при открытии файла \"%s\": %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Сбой при загрузке изображения \"%s\": причина неизвестна, возможно, файл "
 "изображения повреждён"
@@ -160,88 +101,90 @@ msgstr "Перевод"
 msgid "C_redits"
 msgstr "_Авторы"
 
-#: ../libgnomeui/gnome-about.c:379
+#: ../libgnomeui/gnome-about.c:377
 msgid "Program name"
 msgstr "Имя программы"
 
-#: ../libgnomeui/gnome-about.c:380
+#: ../libgnomeui/gnome-about.c:378
 msgid "The name of the program"
 msgstr "Название программы"
 
-#: ../libgnomeui/gnome-about.c:387
+#: ../libgnomeui/gnome-about.c:385
 msgid "Program version"
 msgstr "Версия программы"
 
-#: ../libgnomeui/gnome-about.c:388
+#: ../libgnomeui/gnome-about.c:386
 msgid "The version of the program"
 msgstr "Версия программы"
 
-#: ../libgnomeui/gnome-about.c:394
+#: ../libgnomeui/gnome-about.c:392
 msgid "Copyright string"
 msgstr "Авторское право"
 
-#: ../libgnomeui/gnome-about.c:395
+#: ../libgnomeui/gnome-about.c:393
 msgid "Copyright information for the program"
 msgstr "Информация об авторских правах на программу"
 
-#: ../libgnomeui/gnome-about.c:402
+#: ../libgnomeui/gnome-about.c:400
 msgid "Comments string"
 msgstr "Строка комментария"
 
-#: ../libgnomeui/gnome-about.c:403
+#: ../libgnomeui/gnome-about.c:401
 msgid "Comments about the program"
 msgstr "Комментарий о программе"
 
-#: ../libgnomeui/gnome-about.c:409
+#: ../libgnomeui/gnome-about.c:407
 msgid "Authors"
 msgstr "Авторы"
 
-#: ../libgnomeui/gnome-about.c:410
+#: ../libgnomeui/gnome-about.c:408
 msgid "List of authors of the programs"
 msgstr "Список авторов программы"
 
-#: ../libgnomeui/gnome-about.c:412
+#: ../libgnomeui/gnome-about.c:410
 msgid "Author entry"
 msgstr "Автор"
 
-#: ../libgnomeui/gnome-about.c:413
+#: ../libgnomeui/gnome-about.c:411
 msgid "A single author entry"
 msgstr "Автор программы"
 
-#: ../libgnomeui/gnome-about.c:420
+#: ../libgnomeui/gnome-about.c:418
 msgid "Documenters"
 msgstr "Авторы документации"
 
-#: ../libgnomeui/gnome-about.c:421
+#: ../libgnomeui/gnome-about.c:419
 msgid "List of people documenting the program"
 msgstr "Список людей, писавших документацию к программе"
 
-#: ../libgnomeui/gnome-about.c:423
+#: ../libgnomeui/gnome-about.c:421
 msgid "Documenter entry"
 msgstr "Автор документации"
 
-#: ../libgnomeui/gnome-about.c:424
+#: ../libgnomeui/gnome-about.c:422
 msgid "A single documenter entry"
 msgstr "Автор документации к программе"
 
-#: ../libgnomeui/gnome-about.c:432
+#: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
 msgstr "Благодарности переводчикам"
 
-#: ../libgnomeui/gnome-about.c:433
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Благодарности переводчикам. Эта строка должна быть помечена для перевода"
+#: ../libgnomeui/gnome-about.c:431
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Благодарности переводчикам. Эта строка должна быть помечена для перевода"
 
-#: ../libgnomeui/gnome-about.c:440
+#: ../libgnomeui/gnome-about.c:438
 #: ../libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Эмблема"
 
-#: ../libgnomeui/gnome-about.c:441
+#: ../libgnomeui/gnome-about.c:439
 msgid "A logo for the about box"
 msgstr "Эмблема для окна \"О программе\""
 
-#: ../libgnomeui/gnome-about.c:520
+#: ../libgnomeui/gnome-about.c:518
 #, c-format
 msgid "About %s"
 msgstr "О программе \"%s\""
@@ -635,7 +578,7 @@ msgstr " (нажмите \"Enter\")"
 
 #: ../libgnomeui/gnome-app-util.c:140
 msgid "ERROR: "
-msgstr "ОШИБКА:"
+msgstr "ОШИБКА: "
 
 #: ../libgnomeui/gnome-app-util.c:177
 msgid "Warning: "
@@ -677,35 +620,35 @@ msgstr "Идентификатор приложения"
 msgid "The application ID string"
 msgstr "Строка идентификатора приложения"
 
-#: ../libgnomeui/gnome-appbar.c:747
+#: ../libgnomeui/gnome-appbar.c:741
 msgid "Has Progress"
 msgstr "Имеет строку продвижения"
 
-#: ../libgnomeui/gnome-appbar.c:748
+#: ../libgnomeui/gnome-appbar.c:742
 msgid "Create a progress widget."
 msgstr "Создавать виджет продвижения."
 
-#: ../libgnomeui/gnome-appbar.c:755
+#: ../libgnomeui/gnome-appbar.c:749
 msgid "Has Status"
 msgstr "Имеет строку состояния"
 
-#: ../libgnomeui/gnome-appbar.c:756
+#: ../libgnomeui/gnome-appbar.c:750
 msgid "Create a status widget."
 msgstr "Создавать виджет строки состояния."
 
-#: ../libgnomeui/gnome-appbar.c:763
+#: ../libgnomeui/gnome-appbar.c:757
 msgid "Interactivity"
 msgstr "Интерактивность"
 
-#: ../libgnomeui/gnome-appbar.c:764
+#: ../libgnomeui/gnome-appbar.c:758
 msgid "Level of user activity required."
 msgstr "Требуется активность пользователя."
 
-#: ../libgnomeui/gnome-authentication-manager.c:70
+#: ../libgnomeui/gnome-authentication-manager.c:80
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Прокси типа HTTP требует входа в сеанс.\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:71
+#: ../libgnomeui/gnome-authentication-manager.c:81
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -714,58 +657,58 @@ msgstr ""
 "Необходимо войти в сеанс, чтобы иметь доступ к \"%s\".\n"
 "%s"
 
-#: ../libgnomeui/gnome-authentication-manager.c:74
+#: ../libgnomeui/gnome-authentication-manager.c:84
 msgid "Your password will be transmitted unencrypted."
 msgstr "Ваш пароль будет передан незашифрованным."
 
-#: ../libgnomeui/gnome-authentication-manager.c:75
+#: ../libgnomeui/gnome-authentication-manager.c:85
 msgid "Your password will be transmitted encrypted."
 msgstr "Ваш пароль будет передан зашифрованным."
 
-#: ../libgnomeui/gnome-authentication-manager.c:78
-#: ../libgnomeui/gnome-authentication-manager.c:296
+#: ../libgnomeui/gnome-authentication-manager.c:88
+#: ../libgnomeui/gnome-authentication-manager.c:306
 msgid "Authentication Required"
 msgstr "Аутентификация требуется"
 
-#: ../libgnomeui/gnome-authentication-manager.c:288
+#: ../libgnomeui/gnome-authentication-manager.c:298
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Необходимо войти в сеанс, чтобы иметь доступ к \"%s\" домена \"%s\"\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:290
+#: ../libgnomeui/gnome-authentication-manager.c:300
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Необходимо войти в сеанс, чтобы иметь доступ к \"%s\"\n"
 
-#: ../libgnomeui/gnome-client.c:900 ../libgnomeui/gnome-client.c:914
+#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
 msgid "Specify session management ID"
 msgstr "Указать идентификатор управления сеансом"
 
-#: ../libgnomeui/gnome-client.c:900 ../libgnomeui/gnome-client.c:914
+#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:903 ../libgnomeui/gnome-client.c:918
+#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
 msgid "Specify prefix of saved configuration"
 msgstr "Указать префикс сохранённой конфигурации"
 
-#: ../libgnomeui/gnome-client.c:903 ../libgnomeui/gnome-client.c:918
+#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
 msgid "PREFIX"
 msgstr "ПРЕФИКС"
 
-#: ../libgnomeui/gnome-client.c:906 ../libgnomeui/gnome-client.c:922
+#: ../libgnomeui/gnome-client.c:908 ../libgnomeui/gnome-client.c:924
 msgid "Disable connection to session manager"
 msgstr "Отключить соединение с диспетчером сеанса"
 
-#: ../libgnomeui/gnome-client.c:1030 ../libgnomeui/gnome-client.c:1043
+#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
 msgid "Session management"
 msgstr "Управление сеансом"
 
-#: ../libgnomeui/gnome-client.c:1031
+#: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Отображать параметры управления сеансами"
 
-#: ../libgnomeui/gnome-client.c:2580
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "Отменить завершение сеанса"
 
@@ -977,7 +920,8 @@ msgid "Show the 'Help' button"
 msgstr "Показать кнопку \"Справка\""
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-msgid "History id"
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
 msgstr "Идентификатор истории"
 
 #: ../libgnomeui/gnome-entry.c:200
@@ -987,10 +931,6 @@ msgstr "Строка GTK"
 #: ../libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "Строка GTK"
-
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
-msgid "History ID"
-msgstr "Идентификатор истории"
 
 #: ../libgnomeui/gnome-file-entry.c:237
 msgid ""
@@ -1092,23 +1032,23 @@ msgstr "Действие GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "Тип действия, которое выполняет селектор файлов."
 
-#: ../libgnomeui/gnome-file-entry.c:642 ../libgnomeui/gnome-file-entry.c:676
+#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
 msgid "Select file"
 msgstr "Выбрать файл"
 
-#: ../libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
 msgstr "Путь"
 
-#: ../libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
 msgstr "Путь к файлу"
 
-#: ../libgnomeui/gnome-file-entry.c:829
+#: ../libgnomeui/gnome-file-entry.c:841
 msgid "_Browse..."
 msgstr "П_росмотреть..."
 
-#: ../libgnomeui/gnome-file-entry.c:830
+#: ../libgnomeui/gnome-file-entry.c:842
 msgid "Pop up a file selector to choose a file"
 msgstr "Вызвать диалог для выбора файла"
 
@@ -1291,43 +1231,39 @@ msgstr ""
 "Диалог выбора значков.Можно использовать это свойство для получения  диалога "
 "GtkDialog, если необходимо изменить или запросить любое из свойств."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:988
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:1005
 msgid "No Icon"
 msgstr "Нет значка"
 
-#: ../libgnomeui/gnome-icon-entry.c:758
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "Icon selection dialog"
 msgstr "Диалог выбора значков"
 
-#: ../libgnomeui/gnome-icon-entry.c:759
+#: ../libgnomeui/gnome-icon-entry.c:776
 msgid "This dialog box lets you select an icon."
 msgstr "Этот диалог позволяет выбрать значок."
 
-#: ../libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
-msgstr "Выбор значков"
-
-#: ../libgnomeui/gnome-icon-entry.c:766
-msgid "Please pick the icon you want."
-msgstr "Выберите желаемый значок."
-
-#: ../libgnomeui/gnome-icon-entry.c:991
+#: ../libgnomeui/gnome-icon-entry.c:782 ../libgnomeui/gnome-icon-entry.c:1008
 msgid "Icon Selector"
 msgstr "Выбор значков"
 
-#: ../libgnomeui/gnome-icon-entry.c:992
+#: ../libgnomeui/gnome-icon-entry.c:783
+msgid "Please pick the icon you want."
+msgstr "Выберите желаемый значок."
+
+#: ../libgnomeui/gnome-icon-entry.c:1009
 msgid "This button will open a window to let you select an icon."
 msgstr "Эта кнопка откроет окно, позволяющее выбрать значок."
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
 msgstr "Просмотреть"
 
-#: ../libgnomeui/gnome-icon-entry.c:1015
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Icon path"
 msgstr "Путь к значку"
 
-#: ../libgnomeui/gnome-icon-entry.c:1016
+#: ../libgnomeui/gnome-icon-entry.c:1033
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1336,7 +1272,8 @@ msgstr "Здесь следует ввести имя каталога, где �
 #: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr "GnomeIconSelection: Файл \"%s\" не существует или не является каталогом"
+msgstr ""
+"GnomeIconSelection: Файл \"%s\" не существует или не является каталогом"
 
 #: ../libgnomeui/gnome-icon-sel.c:301
 #, c-format
@@ -1347,55 +1284,55 @@ msgstr "GnomeIconSelection: не удалось открыть каталог \"
 msgid "Loading Icons..."
 msgstr "Идёт загрузка значков..."
 
-#: ../libgnomeui/gnome-messagebox.c:109
+#: ../libgnomeui/gnome-messagebox.c:107
 msgid "Information"
 msgstr "Информация"
 
-#: ../libgnomeui/gnome-messagebox.c:114
+#: ../libgnomeui/gnome-messagebox.c:112
 msgid "Warning"
 msgstr "Предупреждение"
 
-#: ../libgnomeui/gnome-messagebox.c:120
+#: ../libgnomeui/gnome-messagebox.c:118
 msgid "Error"
 msgstr "Ошибка"
 
-#: ../libgnomeui/gnome-messagebox.c:126
+#: ../libgnomeui/gnome-messagebox.c:124
 msgid "Question"
 msgstr "Вопрос"
 
-#: ../libgnomeui/gnome-messagebox.c:131
+#: ../libgnomeui/gnome-messagebox.c:129
 msgid "Message"
 msgstr "Сообщение"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:265
 msgid "_Username:"
 msgstr "И_мя пользователя:"
 
-#: ../libgnomeui/gnome-password-dialog.c:271
+#: ../libgnomeui/gnome-password-dialog.c:267
 msgid "_Domain:"
 msgstr "_Домен:"
 
-#: ../libgnomeui/gnome-password-dialog.c:273
+#: ../libgnomeui/gnome-password-dialog.c:269
 msgid "_Password:"
 msgstr "_Пароль:"
 
-#: ../libgnomeui/gnome-password-dialog.c:346
+#: ../libgnomeui/gnome-password-dialog.c:342
 msgid "Co_nnect"
 msgstr "_Подключиться"
 
-#: ../libgnomeui/gnome-password-dialog.c:368
+#: ../libgnomeui/gnome-password-dialog.c:364
 msgid "Connect _anonymously"
 msgstr "Подключиться _анонимно"
 
-#: ../libgnomeui/gnome-password-dialog.c:373
+#: ../libgnomeui/gnome-password-dialog.c:369
 msgid "Connect as u_ser:"
 msgstr "Подключиться _как пользователь:"
 
-#: ../libgnomeui/gnome-password-dialog.c:471
+#: ../libgnomeui/gnome-password-dialog.c:467
 msgid "_Remember password for this session"
 msgstr "_Запомнить пароль для этого сеанса"
 
-#: ../libgnomeui/gnome-password-dialog.c:473
+#: ../libgnomeui/gnome-password-dialog.c:469
 msgid "Save password in _keyring"
 msgstr "Сохранить пароль на _брелке"
 
@@ -1479,28 +1416,32 @@ msgstr "Вернуть отступ"
 msgid "About"
 msgstr "О программе"
 
-#: ../libgnomeui/gnome-ui-init.c:125 ../libgnomeui/gnome-ui-init.c:134
+#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "Отключить диалог сбоя приложения"
 
-#: ../libgnomeui/gnome-ui-init.c:127
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "Используемый дисплей X"
 
-#: ../libgnomeui/gnome-ui-init.c:127
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "ДИСПЛЕЙ"
 
-#: ../libgnomeui/gnome-ui-init.c:145 ../libgnomeui/gnome-ui-init.c:158
+#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "Библиотека пользовательского интерфейса среды Гном"
 
-#: ../libgnomeui/gnome-ui-init.c:146
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "Отображать параметры GNOME GUI"
 
+#: ../libgnomeui/gnome-ui-init.c:250
+msgid "Could not open link"
+msgstr "Не удалось открыть ссылку"
+
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:759
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1508,7 +1449,7 @@ msgstr ""
 "ошибке\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:773
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1517,56 +1458,26 @@ msgstr ""
 "Segmentation fault!\n"
 "Невозможно отобразить диалог крушения\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"Менеджер сеанса среды Гном (процесс %d) рухнул\n"
-"из-за фатальной ошибки (%s).\n"
-"Когда вы закроете этот диалог, все приложения закроются и ваша сессия "
-"завершится.\n"
-"Пожалуйста, сохраните все ваши файлы перед закрытием диалога."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "Приложение \"%s\" неожиданно завершилось."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "процесс %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"Вы можете сообщить о случившемся разработчикам, чтобы помочь исправить "
-"ошибку, или перезапустить приложение прямо сейчас."
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Использование: gnome_segv2 appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "_Перезапустить приложение"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "_Сообщить разработчикам"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_Отладить"
+#: ../libgnomeui/gnome_segv.c:134
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>Приложение %s неожиданно завершилось.</b>\n"
+"\n"
+"К сожалению, приложение для создания отчётов\n"
+"об ошибках рабочей среды GNOME <b>bug-buddy</b>\n"
+"не установлено. Если вы хотите помочь проекту\n"
+"GNOME, установите его.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Выйти из теста"
-
