@@ -1,25 +1,25 @@
 # Hungarian translation for libgnomeui.
-# Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
+#
 # Emese Kovacs <emese@gnome.hu>, 2002.
 # Szabolcs Ban <shooby@gnome.hu>, 2002.
 # Andras Timar <timar@gnome.hu>, 2002, 2003, 2004.
 # Laszlo Dvornik <dvornik@gnome.hu>, 2004.
-# Gabor Kelemen <kelemeng@gnome.hu>, 2004, 2005.
-#
+# Gabor Kelemen <kelemeng@gnome.hu>, 2004, 2005, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD.hu\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-15 12:15+0200\n"
-"PO-Revision-Date: 2005-08-14 23:28+0200\n"
+"POT-Creation-Date: 2006-08-17 12:13+0200\n"
+"PO-Revision-Date: 2006-08-26 10:14+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.1\n"
-"Plural-Forms:   nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -54,7 +54,7 @@ msgstr "%s nem mappa"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1815
 msgid "Network Servers"
-msgstr ""
+msgstr "Hálózati kiszolgálók"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1831
 msgid "File System"
@@ -77,8 +77,7 @@ msgstr "A(z) \"%s\" fájl megnyitása sikertelen: %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "A(z) \"%s\" kép betöltése sikertelen: az ok nem ismert, talán sérült a "
 "képfájl"
@@ -161,19 +160,18 @@ msgstr "A program dokumentációját író emberek listája"
 
 #: ../libgnomeui/gnome-about.c:421
 msgid "Documenter entry"
-msgstr "Doksiíró bejegyzés"
+msgstr "Dokumentációíró bejegyzés"
 
 #: ../libgnomeui/gnome-about.c:422
 msgid "A single documenter entry"
-msgstr "Egy doksiíró a sok közül"
+msgstr "Egy dokumentációíró a sok közül"
 
 #: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
 msgstr "Fordítók"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "A fordítók listája. Ez a karakterlánc fordítandó"
 
 #: ../libgnomeui/gnome-about.c:438
@@ -695,7 +693,7 @@ msgstr "Az elmentett beállítások előtagjának megadása"
 
 #: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
 msgid "PREFIX"
-msgstr "PREFIX"
+msgstr "ELŐTAG"
 
 #: ../libgnomeui/gnome-client.c:908 ../libgnomeui/gnome-client.c:924
 msgid "Disable connection to session manager"
@@ -706,9 +704,8 @@ msgid "Session management"
 msgstr "Munkamenet-kezelés"
 
 #: ../libgnomeui/gnome-client.c:1035
-#, fuzzy
 msgid "Show session management options"
-msgstr "Munkamenet-kezelés"
+msgstr "Munkamenet-kezelési beállítások megjelenítése"
 
 #: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
@@ -804,7 +801,7 @@ msgstr "Cím"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
-msgstr "A druida címe"
+msgstr "A varázsló címe"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
@@ -938,8 +935,7 @@ msgstr "A GTK-bejegyzés"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
-"A fájlbejegyzés egyedi azonosítója. Az előzménylistában ez lesz használva."
+msgstr "A fájlbejegyzés egyedi azonosítója. Az előzménylistában ez lesz használva."
 
 #: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
 msgid "Browse Dialog Title"
@@ -1425,7 +1421,7 @@ msgstr "Használandó X-megjelenítő"
 
 #: ../libgnomeui/gnome-ui-init.c:125
 msgid "DISPLAY"
-msgstr "DISPLAY"
+msgstr "MEGJELENÍTŐ"
 
 #: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
 msgid "GNOME GUI Library"
@@ -1433,11 +1429,11 @@ msgstr "GNOME GUI programkönyvtár"
 
 #: ../libgnomeui/gnome-ui-init.c:170
 msgid "Show GNOME GUI options"
-msgstr ""
+msgstr "GNOME GUI beállítások megjelenítése"
 
 #: ../libgnomeui/gnome-ui-init.c:247
 msgid "Could not open link"
-msgstr ""
+msgstr "A link nem nyitható meg"
 
 #. dialog display isn't working out
 #: ../libgnomeui/gnome-ui-init.c:833
@@ -1470,87 +1466,13 @@ msgid ""
 "GNOME crash report tool. If you want to help us\n"
 "to make GNOME better, please, install it\n"
 msgstr ""
+"<b>A(z) %s alkalmazás összeomlott.</b>\n"
+"\n"
+"Azonban nem telepítette a <b>bug-buddy</b>t, a\n"
+"GNOME hibajelenítő eszközét. Ha segíteni kíván a \n"
+"GNOME jobbá tételében, kérjük telepítse\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Kilépés a tesztből"
 
-#~ msgid "Error reading file '%s': %s"
-#~ msgstr "Hiba a(z) \"%s\" fájl olvasása közben: %s"
-
-#~ msgid "Error rewinding file '%s': %s"
-#~ msgstr "Hiba a(z) \"%s\" fájl visszacsévélése közben: %s"
-
-#~ msgid "No name"
-#~ msgstr "Névtelen"
-
-#~ msgid "File '%s' is not a regular file or directory."
-#~ msgstr "\"%s\" nem reguláris fájl vagy könyvtár."
-
-#~ msgid "Error cannot find file id '%s'"
-#~ msgstr "Hiba: nem található a(z) \"%s\" fájlazonosító"
-
-#~ msgid "No filename to save to"
-#~ msgstr "Nincs a mentendő fájlnak neve"
-
-#~ msgid "Starting %s"
-#~ msgstr "%s indítása"
-
-#~ msgid "No URL to launch"
-#~ msgstr "Nincs indítandó URL"
-
-#~ msgid "Not a launchable item"
-#~ msgstr "Az elem nem indítható"
-
-#~ msgid "No command (Exec) to launch"
-#~ msgstr "Nincs indítandó parancs (Exec)"
-
-#~ msgid "Bad command (Exec) to launch"
-#~ msgstr "Rossz indítandó parancs (Exec)"
-
-#~ msgid "Unknown encoding of: %s"
-#~ msgstr "Ismeretlen kódolás: %s"
-
-#~ msgid "Error writing file '%s': %s"
-#~ msgstr "Hiba a(z) \"%s\" fájl írása közben: %s"
-
-#~ msgid "History id"
-#~ msgstr "Előzmény ID"
-
-#~ msgid "Icon selector"
-#~ msgstr "Ikonválasztó"
-
-#~ msgid ""
-#~ "The GNOME Session Manager (process %d) has crashed\n"
-#~ "due to a fatal error (%s).\n"
-#~ "When you close this dialog, all applications will close and your session "
-#~ "will exit.\n"
-#~ "Please save all your files before closing this dialog."
-#~ msgstr ""
-#~ "The GNOME munkamenet-kezelő (PID %d) \n"
-#~ "%s végzetes hiba miatt összeomlott.\n"
-#~ "Amikor bezárja ezt az ablakot, minden alkalmazás bezáródik\n"
-#~ "és véget ér a munkamenet.\n"
-#~ "Mentsen minden fájlt az ablak bezárása előtt."
-
-#~ msgid "The Application \"%s\" has quit unexpectedly."
-#~ msgstr "A(z) %s alkalmazás váratlanul kilépett."
-
-#~ msgid "process %d: %s"
-#~ msgstr "%d. folyamat: %s"
-
-#~ msgid ""
-#~ "You can inform the developers of what happened to help them fix it.  Or "
-#~ "you can restart the application right now."
-#~ msgstr ""
-#~ "Értesítheti a fejlesztőket a történtekről, hogy segítsen nekik kijavítani "
-#~ "a hibát, vagy azon nyomban újraindíthatja az alkalmazást."
-
-#~ msgid "_Restart Application"
-#~ msgstr "Az alkalmazás új_raindítása"
-
-#~ msgid "_Inform Developers"
-#~ msgstr "A _fejlesztők értesítése"
-
-#~ msgid "_Debug"
-#~ msgstr "_Hibakeresés"
