@@ -88,7 +88,7 @@ static const char *sm_config_prefix_arg_name G_GNUC_UNUSED = "--sm-config-prefix
 static const char *sm_screen G_GNUC_UNUSED = "--screen";
 #endif
 
-extern void _gnome_ui_gettext_init (gboolean bind_codeset) G_GNUC_INTERNAL;
+G_GNUC_INTERNAL extern void _gnome_ui_gettext_init (gboolean bind_codeset);
 
 /* The master client.  */
 static GnomeClient *master_client= NULL;

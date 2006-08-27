@@ -137,7 +137,7 @@ static GOptionEntry libgnomeui_goptions[] = {
 	{ NULL }
 };
 
-void _gnome_ui_gettext_init (gboolean) G_GNUC_INTERNAL;
+G_GNUC_INTERNAL void _gnome_ui_gettext_init (gboolean);
 
 void G_GNUC_INTERNAL
 _gnome_ui_gettext_init (gboolean bind_codeset)

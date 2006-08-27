@@ -1,3 +1,14 @@
+2006-08-25  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* NEWS: Update
+	* configure.in: Bump version
+	* libgnomeui/gnome-client.c: Build fix for Solaris
+	Damien Carberry. Closes bug #352274.
+	* libgnomeui/gnome-icon-entry.c: Remove doubly included
+	header.
+	* libgnomeui/gnome-thumbnail-pixbuf-utils.c: Same.
+	* libgnomeui/gnome-ui-init.c: Build fix ref above.
+
 2006-08-22  Kristian Rietveld  <kris@imendio.com>
 
 	* file-chooser/Makefile.am: add WARN_CFLAGS to INCLUDES.

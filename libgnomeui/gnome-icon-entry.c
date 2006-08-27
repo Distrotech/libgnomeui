@@ -65,7 +65,6 @@
 #include "gnome-icon-entry.h"
 #include "libgnomeui-access.h"
 #include <sys/stat.h>
-#include <unistd.h>
 #include <string.h>
 
 #include <glib/gstdio.h>

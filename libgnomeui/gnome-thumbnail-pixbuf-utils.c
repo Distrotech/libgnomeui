@@ -190,7 +190,6 @@ gnome_thumbnail_scale_down_pixbuf (GdkPixbuf *pixbuf,
 #include <jpeglib.h>
 
 #include <libgnomevfs/gnome-vfs-types.h>
-#include <libgnomevfs/gnome-vfs-ops.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
 
 #define BUFFER_SIZE 16384
