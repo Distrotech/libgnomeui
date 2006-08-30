@@ -4,21 +4,22 @@
 # Copyright (C) 2001, 2002, 2003, 2004, 2006 Free Software Foundation, Inc.
 # Dinesh Nadarajah <n_dinesh@yahoo.com>, 2001, 2002, 2003.
 # Jayaradha N <jaya@pune.redhat.com>, 2004.
-# Felix <ifelix@redhat.com>, 2006.
+# Felix <ifelix25@gmail.com>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-07 07:11+0200\n"
-"PO-Revision-Date: 2006-06-07 14:57+0530\n"
-"Last-Translator: Felix <ifelix@redhat.com>\n"
+"POT-Creation-Date: 2006-08-30 09:57+0200\n"
+"PO-Revision-Date: 2006-08-30 16:52+0530\n"
+"Last-Translator: Felix <ifelix25@gmail.com>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"\n"
 "\n"
 "\n"
 
@@ -38,30 +39,30 @@ msgstr "சேய் உருப்படி 2"
 msgid "Hint for item 2"
 msgstr "உருப்படி 2'க்கு குறிப்பிடு"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#: ../file-chooser/gtkfilesystemgnomevfs.c:929
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s என்பது அடைவு அல்லாத ஏதோ ஒரு இணைப்பாகும்"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#: ../file-chooser/gtkfilesystemgnomevfs.c:940
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s என்பது இலக்கு இடம் இல்லாத இணைப்பாகும்"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1015
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s அடைவு இல்லை"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1844
 msgid "Network Servers"
 msgstr "பிணைய சேவையகங்கள்"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1860
 msgid "File System"
 msgstr "கோப்பு அமைப்பு"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2389
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "புத்தக குறி சேமிப்பதில் தோல்வி (%s)"
@@ -706,7 +707,7 @@ msgstr "அமர்வு மேலாண்மை"
 msgid "Show session management options"
 msgstr "அமர்வு மேலாண்மை விருப்பங்களை காட்டு"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "முடித்தலை நிறுத்து"
 
@@ -918,7 +919,7 @@ msgid "Show the 'Help' button"
 msgstr "'உதவி' பொத்தானைக் காண்பி"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "வரலாறு எண்"
 
@@ -936,7 +937,7 @@ msgid ""
 "list."
 msgstr "கோப்பு உள்ளீட்டின் தனிப்பட்ட அடையாளம். இது வரலாற்றை சேமிக்க உதவும்"
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "மேலோடு உரையாடல் தலைப்பு"
 
@@ -964,7 +965,7 @@ msgstr "Modal"
 msgid "Whether the Browse file window should be modal."
 msgstr "கோப்பை திற சாளரம் பொதுமாதிரியாக இருக்க வேண்டுமா"
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "கோப்புப் பெயர்"
 
@@ -1187,33 +1188,33 @@ msgstr ""
 "முன்னிருப்பு இணைய உலாவியை தொடங்கும் போது பிழை.\n"
 "உங்கள் 'விருப்பமான பயன்பாடு'களின் முன்னுரிமை கருவியில் அமைவுகளை சரிபார்க்கவும்."
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr "சின்னத்தின் உள்ளீட்டிற்கான தனி அடையாளம். இது வரலாற்றை பட்டியலில் சேமிக்க பயன்படும்"
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "குறும்படங்களுக்காக மேலோடு உரையாடலின் தலைப்பு"
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "Pixmap அடைவு"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "குறும்படங்களுக்காக தேடப்படும் அடைவு"
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "குறும்பட நுழைவில் காண்பிக்கப்பட வேண்டிய கோப்புப் பெயர்."
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "தெரிவுசெய்யும் உரையாடல்"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1221,39 +1222,39 @@ msgstr ""
 "சின்னம் தேர்வு உரையாடல் பெட்டி. இந்த பண்பை பயன்படுத்தி திருத்த மற்றும் கேள்விகள் கேட்க "
 "GtkDialog ஐ பெறலாம்."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
+#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "குறும்படம் இல்லை"
 
-#: ../libgnomeui/gnome-icon-entry.c:767
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "குறும்படத் தேர்ந்தெடுக்கும் உரையாடல்"
 
-#: ../libgnomeui/gnome-icon-entry.c:768
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "உரையாடலில் குறும்படம் தெரிவுசெய்யலாம்."
 
-#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
+#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "குறும்படத் தேர்ந்தெடுப்பவர்"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "உங்களுக்குத் தேவையான குறும்படத்தை தேர்ந்தெடுக்கவும்"
 
-#: ../libgnomeui/gnome-icon-entry.c:1001
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "பொத்தான், குறும்படங்களை தெரிவுசெய்வதற்கான சாளரத்தை திறக்கும்."
 
-#: ../libgnomeui/gnome-icon-entry.c:1021
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "மேலோடு..."
 
-#: ../libgnomeui/gnome-icon-entry.c:1024
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "குறும்படத்தின் பாதை"
 
-#: ../libgnomeui/gnome-icon-entry.c:1025
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1405,34 +1406,38 @@ msgstr "உள்தள்ளாதே"
 msgid "About"
 msgstr "பற்றி"
 
-#: ../libgnomeui/gnome-ui-init.c:120 ../libgnomeui/gnome-ui-init.c:129
+#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "முறிவு உரையாடலை முடக்குக"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "உபயோகிக்க வேண்டிய X காட்சி"
 
-#: ../libgnomeui/gnome-ui-init.c:122
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "காட்சி"
 
-#: ../libgnomeui/gnome-ui-init.c:166 ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "கனோம் GUI நூலகம்"
 
-#: ../libgnomeui/gnome-ui-init.c:167
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "GNOME GUI விருப்பங்களை காட்டு"
 
+#: ../libgnomeui/gnome-ui-init.c:250
+msgid "Could not open link"
+msgstr "இணைப்பினை திறக்க முடியவில்லை"
+
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:779
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "பல பகுதியாக்கல் பிழைகள் நடைபெற்றுள்ளன; பிழை உரையாடலை காண்பிக்க முடியாது\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:793
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1441,54 +1446,24 @@ msgstr ""
 "பகுதியாக்கல் பழுது!\n"
 "முறிவு உரையாடலை காண்பிக்க முடியாது\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"க்னோம் அமர்வு மேலாளர் (செயல் எண் %d) \n"
-"பிழை காரணமாக நொருங்கியது (%s).\n"
-"இந்த உரையாடல் பெட்டியை மூடினால், உங்கள் அமர்வில் உள்ள அத்தனை பயன்பாடுகளும் மூடப்பட்டு "
-"வெளியேற்றப்படுவீர்கள்\n"
-"மூடுவதற்கு முன் அனைத்து கோப்புகளையும் சேமிக்கவும்."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "\"%s\" செயற்பாடு எதிர்பாராமல் வெளியேறிவிட்டது."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "செயல் %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"உங்கள் நிரலாக்குபவர்களுக்கு தகவல் தெரிவித்து சிக்கலை சரி செய்ய உதவலாம் அல்லது பயன்பாட்டை "
-"மீண்டும் துவக்கலாம்"
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "புழங்குதல்: gnome_segv பயன்பாடு_பெயர் signum\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "செயல்பாடை மீண்டும் தொடங்கவும்"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "_நிரலருக்கு தெரிவிக்கவும்"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_பிழை நீக்கு"
+#: ../libgnomeui/gnome_segv.c:134
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>பயன்பாடு %s அழிக்கப்பட்டது.</b>\n"
+"\n"
+"எனினும் நீங்கள் <b>bug-buddy</b>ஐ நிறுவவில்லை, \n"
+"அது GNOME அழித்தல் அறிக்கையிடும் கருவி. நீங்கள் உதவ விரும்பினால்\n "
+"அதனை நிறுவவும்\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
