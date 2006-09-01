@@ -1,3 +1,52 @@
+2006-08-29  Federico Mena Quintero  <federico@novell.com>
+
+	Change the memory management and the cancellation semantics for
+	GtkFileSystem:
+
+	- You need to hit the idle loop for your callback to be called, just
+	  like in GnomeVFS.
+
+	- You do not need to ever ref/unref async handles; they are opaque
+	  cookies.
+
+	- Once you call gtk_file_system_cancel_operation(), you can assume
+	  that the callback corresponding to the handle will NOT be called.
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(check_handles_at_finalization): Replace conditional g_assert() by
+	a mandatory g_critical().
+	(OperationType): Make this a typedef'ed enum for the CALLBACK_*
+	enum values, so that the compiler will be able to catch more
+	errors for us.  Added OPERATION_INVALID.
+	(struct _GtkFileSystemHandleGnomeVFS): Renamed the callback_type
+	field to op_type.  Moved the fields from structs GetFolderData,
+	GetFileInfoData, CreateFolderData, VolumeMountData into a union
+	inside the main GtkFileSystemHandleGnomeVFS.  Removed the
+	callback_data field, since now the callback data *is* the handle
+	object itself.
+	(gtk_file_system_gnome_vfs_get_info,
+	gtk_file_system_gnome_vfs_create_folder,
+	gtk_file_system_gnome_vfs_volume_mount,
+	gtk_file_system_gnome_vfs_get_folder): Put the async data inside
+	the handle itself; not in a separate op_data.
+	(get_file_info_callback, create_folder_progress_cb,
+	volume_mount_idle_callback, volume_mount_cb): Rework to use the
+	data from the handle, not from the separate op_data.
+	(invalidate_and_unref_handle): New helper function.  Frees all the
+	operation-specific data in a handle, marks the handle as invalid,
+	and unrefs the handle.
+	(cancel_operation_callback): Removed.  User callbacks are no
+	longer called if the handle is cancelled.
+
+	* file-chooser/gtkfilesystemgnomevfs.c (enum FolderState): New
+	enum to allow various callers to load the same folder
+	simultaneously.
+	(struct _GtkFileFolderGnomeVFS): Added a "state" field; removed
+	the "finished_loading" flag.  Added a "waiting_handles" field for
+	the GtkFileSystemHandles which are waiting for the folder to load.
+
+	*** BRANCHED TO cancelation-changes ***
+
 2006-08-22  Kristian Rietveld  <kris@imendio.com>
 
 	* file-chooser/Makefile.am: add WARN_CFLAGS to INCLUDES.
