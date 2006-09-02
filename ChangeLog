@@ -1,3 +1,23 @@
+2006-09-02  Kristian Rietveld  <kris@imendio.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_dispose), (queue_vfs_idle_callback),
+	(gtk_file_system_gnome_vfs_init), (handle_cancel_operation_fn):
+	remove pending execute_vfs_callbacks_idle and pending vfs async
+	handles during dispose, execute all idle callbacks waiting to be
+	run in the next idle,
+	(gtk_file_system_gnome_vfs_get_folder),
+	(gtk_file_system_gnome_vfs_cancel_operation),
+	(gtk_file_systel_gnome_vfs_volume_mount),
+	(execute_vfs_callbacks_idle), (queue_vfs_idle_callback): refactor
+	to maintain a list of idle callbacks to call per file system instead
+	of globally, guard the file system during callback invocation,
+	(get_folder_file_info_callback), (get_file_info_callback),
+	(create_folder_progress_cb): guard the file system during callback
+	invocation,
+	(gtk_file_folder_gnome_vfs_get_info): set GError if uri doesn't
+	exist in the folder.
+
 2006-08-25  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* NEWS: Update

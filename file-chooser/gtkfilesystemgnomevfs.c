@@ -148,6 +148,9 @@ struct _GtkFileSystemGnomeVFS
 
   GHashTable *handles;
 
+  guint execute_vfs_callbacks_idle_id;
+  GSList *vfs_callbacks;
+
   guint have_afs : 1;
   guint have_net : 1;
 
@@ -211,6 +214,7 @@ struct _FolderChild
 static void gtk_file_system_gnome_vfs_class_init (GtkFileSystemGnomeVFSClass *class);
 static void gtk_file_system_gnome_vfs_iface_init (GtkFileSystemIface         *iface);
 static void gtk_file_system_gnome_vfs_init       (GtkFileSystemGnomeVFS      *impl);
+static void gtk_file_system_gnome_vfs_dispose    (GObject                    *object);
 static void gtk_file_system_gnome_vfs_finalize   (GObject                    *object);
 
 
@@ -362,6 +366,8 @@ static void monitor_callback        (GnomeVFSMonitorHandle    *handle,
 				     GnomeVFSMonitorEventType  event_type,
 				     gpointer                  user_data);
 
+static gboolean execute_vfs_callbacks_idle (gpointer data);
+
 static gchar *make_child_uri (const gchar *base_uri,
 			      const gchar *child_name,
 			      GError     **error);
@@ -404,7 +410,7 @@ struct vfs_idle_callback
   gpointer callback_data;
 };
 
-static void queue_vfs_idle_callback (VfsIdleCallback callback, gpointer callback_data);
+static void queue_vfs_idle_callback (GtkFileSystemGnomeVFS *system_vfs, VfsIdleCallback callback, gpointer callback_data);
 
 
 enum
@@ -449,6 +455,7 @@ gtk_file_system_gnome_vfs_class_init (GtkFileSystemGnomeVFSClass *class)
 
   system_parent_class = g_type_class_peek_parent (class);
 
+  gobject_class->dispose = gtk_file_system_gnome_vfs_dispose;
   gobject_class->finalize = gtk_file_system_gnome_vfs_finalize;
 }
 
@@ -535,6 +542,9 @@ gtk_file_system_gnome_vfs_init (GtkFileSystemGnomeVFS *system_vfs)
 
   system_vfs->handles = g_hash_table_new (g_direct_hash, g_direct_equal);
 
+  system_vfs->execute_vfs_callbacks_idle_id = 0;
+  system_vfs->vfs_callbacks = NULL;
+
   profile_end ("end", NULL);
 }
 
@@ -576,6 +586,39 @@ check_handles_at_finalization (GtkFileSystemGnomeVFS *system_vfs)
 #endif
 
   g_hash_table_destroy (system_vfs->handles);
+  system_vfs->handles = NULL;
+}
+
+static void
+handle_cancel_operation_fn (gpointer key, gpointer value, gpointer data)
+{
+  GtkFileSystemHandleGnomeVFS *handle;
+
+  handle = key;
+
+  if (handle->vfs_handle)
+    gnome_vfs_async_cancel (handle->vfs_handle);
+  handle->vfs_handle = NULL;
+}
+
+static void
+gtk_file_system_gnome_vfs_dispose (GObject *object)
+{
+  GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (object);
+
+  if (system_vfs->execute_vfs_callbacks_idle_id)
+    {
+      g_source_remove (system_vfs->execute_vfs_callbacks_idle_id);
+      system_vfs->execute_vfs_callbacks_idle_id = 0;
+
+      /* call pending callbacks */
+      execute_vfs_callbacks_idle (system_vfs);
+    }
+
+  /* cancel pending VFS operations */
+  g_hash_table_foreach (system_vfs->handles, handle_cancel_operation_fn, NULL);
+
+  system_parent_class->dispose (object);
 }
 
 static void
@@ -1141,11 +1184,15 @@ get_folder_file_info_callback (GnomeVFSAsyncHandle *handle,
   GError *error = NULL;
   GnomeVFSGetFileInfoResult *result;
   struct GetFolderData *op_data = callback_data;
+  GtkFileSystem *file_system;
 
   gdk_threads_enter ();
 
   g_assert (op_data->handle->vfs_handle == handle);
   g_assert (g_list_length (results) == 1);
+
+  file_system = GTK_FILE_SYSTEM_HANDLE (op_data->handle)->file_system;
+  g_object_ref (file_system);
 
   op_data->handle->vfs_handle = NULL;
 
@@ -1182,6 +1229,8 @@ get_folder_file_info_callback (GnomeVFSAsyncHandle *handle,
   get_folder_complete_operation (op_data);
 
 out:
+  g_object_unref (file_system);
+
   gdk_threads_leave ();
 }
 
@@ -1235,7 +1284,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem                  *file_syste
       op_data->callback = callback;
       op_data->callback_data = data;
 
-      queue_vfs_idle_callback (get_folder_cached_callback, op_data);
+      queue_vfs_idle_callback (system_vfs, get_folder_cached_callback, op_data);
 
       /* We don't have to initiate a reload to make up for the added
        * types, since gnome-vfs loads all file info we need by
@@ -1311,7 +1360,7 @@ gtk_file_system_gnome_vfs_get_folder (GtkFileSystem                  *file_syste
 
   if (op_data->file_info)
     {
-      queue_vfs_idle_callback (get_folder_vfs_info_cached_callback, op_data);
+      queue_vfs_idle_callback (system_vfs, get_folder_vfs_info_cached_callback, op_data);
     }
   else
     {
@@ -1352,8 +1401,12 @@ get_file_info_callback (GnomeVFSAsyncHandle *vfs_handle,
   GtkFileInfo *file_info = NULL;
   GnomeVFSGetFileInfoResult *result = results->data;
   struct GetFileInfoData *op_data = data;
+  GtkFileSystem *file_system;
 
   gdk_threads_enter ();
+
+  file_system = GTK_FILE_SYSTEM_HANDLE (op_data->handle)->file_system;
+  g_object_ref (file_system);
 
   g_assert (op_data->handle->vfs_handle == vfs_handle);
 
@@ -1391,6 +1444,8 @@ out:
 
   g_object_unref (op_data->handle);
   g_free (op_data);
+
+  g_object_unref (file_system);
 
   gdk_threads_leave ();
 }
@@ -1454,10 +1509,14 @@ create_folder_progress_cb (GnomeVFSAsyncHandle      *vfs_handle,
 {
   int ret = 0;
   struct CreateFolderData *op_data = data;
+  GtkFileSystem *file_system;
 
   gdk_threads_enter ();
 
   g_assert (op_data->handle->vfs_handle == vfs_handle);
+
+  file_system = GTK_FILE_SYSTEM_HANDLE (op_data->handle)->file_system;
+  g_object_ref (file_system);
 
   switch (progress_info->phase)
     {
@@ -1490,6 +1549,8 @@ create_folder_progress_cb (GnomeVFSAsyncHandle      *vfs_handle,
 		  op_data->error_reported = TRUE;
 		}
 
+	      g_object_unref (file_system);
+
 	      gdk_threads_leave ();
 
 	      return ret;
@@ -1497,6 +1558,8 @@ create_folder_progress_cb (GnomeVFSAsyncHandle      *vfs_handle,
 	    case GNOME_VFS_XFER_PROGRESS_STATUS_OK:
 	      /* not completed, don't free the handle and op_data yet */
 	      gdk_threads_leave ();
+
+	      g_object_unref (file_system);
 
 	      return 0;
 
@@ -1512,6 +1575,8 @@ create_folder_progress_cb (GnomeVFSAsyncHandle      *vfs_handle,
   g_object_unref (op_data->handle);
   gtk_file_path_free (op_data->path);
   g_free (op_data);
+
+  g_object_unref (file_system);
 
   gdk_threads_leave ();
 
@@ -1636,7 +1701,7 @@ gtk_file_system_gnome_vfs_cancel_operation (GtkFileSystemHandle *handle)
       else
         handle->cancelled = TRUE;
 
-      queue_vfs_idle_callback (cancel_operation_callback, handle);
+      queue_vfs_idle_callback (GTK_FILE_SYSTEM_GNOME_VFS (handle->file_system), cancel_operation_callback, handle);
     }
 }
 
@@ -1819,7 +1884,7 @@ gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem                    *file_s
       op_data->handle->callback_type = CALLBACK_VOLUME_MOUNT;
       op_data->handle->callback_data = op_data;
 
-      queue_vfs_idle_callback (volume_mount_idle_callback, op_data);
+      queue_vfs_idle_callback (GTK_FILE_SYSTEM_GNOME_VFS (file_system), volume_mount_idle_callback, op_data);
 
       return GTK_FILE_SYSTEM_HANDLE (op_data->handle);
     }
@@ -2814,7 +2879,19 @@ gtk_file_folder_gnome_vfs_get_info (GtkFileFolder     *folder,
   if (child)
     file_info = info_from_vfs_info (folder_vfs->system, uri, child->info, folder_vfs->types, error);
   else
-    file_info = NULL;
+    {
+      char *uri;
+
+      file_info = NULL;
+      uri = gtk_file_system_path_to_uri (folder_vfs->system, path);
+
+      g_set_error (error,
+		   GTK_FILE_SYSTEM_ERROR,
+		   GTK_FILE_SYSTEM_ERROR_NONEXISTENT,
+		   _("Error getting information for '%s'"),
+		   uri);
+      g_free (uri);
+    }
 
   profile_end ("end", (char *) path);
 
@@ -3461,17 +3538,21 @@ gtk_file_system_handle_gnome_vfs_new (GtkFileSystem *file_system)
 }
 
 /* some code for making callback calls from idle */
-static guint execute_vfs_callbacks_idle_id = 0;
-static GSList *vfs_callbacks = NULL;
-
 static gboolean
 execute_vfs_callbacks_idle (gpointer data)
 {
   GSList *l;
+  gboolean unref_file_system = TRUE;
+  GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (data);
 
   GDK_THREADS_ENTER ();
 
-  for (l = vfs_callbacks; l; l = l->next)
+  if (!system_vfs->execute_vfs_callbacks_idle_id)
+    unref_file_system = FALSE;
+  else
+    g_object_ref (system_vfs);
+
+  for (l = system_vfs->vfs_callbacks; l; l = l->next)
     {
       struct vfs_idle_callback *cb = l->data;
 
@@ -3480,10 +3561,13 @@ execute_vfs_callbacks_idle (gpointer data)
       g_free (cb);
     }
 
-  g_slist_free (vfs_callbacks);
-  vfs_callbacks = NULL;
+  g_slist_free (system_vfs->vfs_callbacks);
+  system_vfs->vfs_callbacks = NULL;
 
-  execute_vfs_callbacks_idle_id = 0;
+  if (unref_file_system)
+    g_object_unref (system_vfs);
+
+  system_vfs->execute_vfs_callbacks_idle_id = 0;
 
   GDK_THREADS_LEAVE ();
 
@@ -3491,7 +3575,9 @@ execute_vfs_callbacks_idle (gpointer data)
 }
 
 static void
-queue_vfs_idle_callback (VfsIdleCallback callback, gpointer callback_data)
+queue_vfs_idle_callback (GtkFileSystemGnomeVFS *system_vfs,
+			 VfsIdleCallback        callback,
+			 gpointer               callback_data)
 {
   struct vfs_idle_callback *cb;
 
@@ -3499,10 +3585,10 @@ queue_vfs_idle_callback (VfsIdleCallback callback, gpointer callback_data)
   cb->callback = callback;
   cb->callback_data = callback_data;
 
-  vfs_callbacks = g_slist_append (vfs_callbacks, cb);
+  system_vfs->vfs_callbacks = g_slist_append (system_vfs->vfs_callbacks, cb);
 
-  if (!execute_vfs_callbacks_idle_id)
-    execute_vfs_callbacks_idle_id = g_idle_add (execute_vfs_callbacks_idle, NULL);
+  if (!system_vfs->execute_vfs_callbacks_idle_id)
+    system_vfs->execute_vfs_callbacks_idle_id = g_idle_add (execute_vfs_callbacks_idle, system_vfs);
 }
 
 /* GtkFileSystem module calls */
