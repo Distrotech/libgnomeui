@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-29 08:34+0300\n"
-"PO-Revision-Date: 2006-07-29 08:37+0300\n"
+"POT-Creation-Date: 2006-09-03 08:52+0300\n"
+"PO-Revision-Date: 2006-09-03 08:53+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -35,33 +35,38 @@ msgstr "Lapsikohta 2"
 msgid "Hint for item 2"
 msgstr "Kohdan 2 vinkki"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#: ../file-chooser/gtkfilesystemgnomevfs.c:972
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s on linkki sijaintiin, joka ei ole kansio"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#: ../file-chooser/gtkfilesystemgnomevfs.c:983
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s on linkki, jonka kohde ei ole olemassa"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ei ole kansio"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
 msgid "Network Servers"
 msgstr "Verkkopalvelimet"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
 msgid "File System"
 msgstr "Tiedostojärjestelmä"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Kirjanmerkin tallentaminen epäonnistui (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "Virhe haettaessa tietoja kohteelle \"%s\""
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -708,7 +713,7 @@ msgstr "Istunnonhallinta"
 msgid "Show session management options"
 msgstr "Näytä istunnonhallinnan asetukset"
 
-#: ../libgnomeui/gnome-client.c:2582
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "Peru ulos kirjautuminen"
 
@@ -920,7 +925,7 @@ msgid "Show the 'Help' button"
 msgstr "Näytä ohjepainike"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "Historiikin ID"
 
@@ -940,7 +945,7 @@ msgstr ""
 "Yksilöllinen tiedostokentän tunniste. Tätä tarvitaan historiikkiluettelon "
 "tallentamiseen."
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "Selausikkunan otsikko"
 
@@ -966,7 +971,7 @@ msgstr "Modaalinen"
 msgid "Whether the Browse file window should be modal."
 msgstr "Onko selausikkuna modaalinen."
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "Tiedostonimi"
 
@@ -1192,7 +1197,7 @@ msgstr ""
 "Oletusasetuksena olevan WWW-selaimen käynnistyksessä tapahtui virhe.\n"
 "Tarkista, että suosittujen sovellusten asetukset ovat oikein."
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1200,27 +1205,27 @@ msgstr ""
 "Kuvakekohdan yksilöllinen tunniste. Tätä käytetään historiikkiluettelon "
 "tallentamiseen."
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "Kuvakkeiden selausikkunan otsikko."
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "Kuvakansio"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "Kansio, josta kuvakkeita etsitään."
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Tiedostonimi, joka näkyy tiedostokentässä."
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "Valitsinikkuna"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1228,39 +1233,39 @@ msgstr ""
 "Kuvakevalintaikkuna. Tämän ominaisuuden kautta voi saada GtkDialogin, jos "
 "sen ominaisuuksia tarvitsee muuttaa tai käyttää."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
+#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "Ei kuvaketta"
 
-#: ../libgnomeui/gnome-icon-entry.c:767
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "Kuvakkeenvalintaikkuna"
 
-#: ../libgnomeui/gnome-icon-entry.c:768
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "Tästä ikkunasta voit valita kuvakkeen."
 
-#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
+#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "Kuvakevalitsin"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "Valitse haluamasi kuvake."
 
-#: ../libgnomeui/gnome-icon-entry.c:1001
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "Tämä painike avaa ikkunan, josta voi valita kuvakkeen."
 
-#: ../libgnomeui/gnome-icon-entry.c:1021
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "Selaa"
 
-#: ../libgnomeui/gnome-icon-entry.c:1024
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "Kuvakkeen polku"
 
-#: ../libgnomeui/gnome-icon-entry.c:1025
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1412,38 +1417,38 @@ msgstr "Poista sisennys"
 msgid "About"
 msgstr "Tietoja"
 
-#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
+#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "Poista kaatumisikkuna käytöstä"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "Käytettävä X-näyttö"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "NÄYTTÖ"
 
-#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
+#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "Gnomen käyttöliittymäasetukset"
 
-#: ../libgnomeui/gnome-ui-init.c:170
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "Näytä Gnomen käyttöliittymäasetukset"
 
-#: ../libgnomeui/gnome-ui-init.c:247
+#: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
 msgstr "Linkkiä ei voi avata"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:833
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Monia muistialueen ylityksiä tapahtui: virheikkunaa ei voi näyttää\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:848
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1452,11 +1457,11 @@ msgstr ""
 "Muistinkäsittelyvirhe!\n"
 "Kaatumisikkunaa ei voi näyttää\n"
 
-#: ../libgnomeui/gnome_segv.c:83
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Käyttö: gnome_segv2 sovellus signaali\n"
 
-#: ../libgnomeui/gnome_segv.c:136
+#: ../libgnomeui/gnome_segv.c:134
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
@@ -1467,9 +1472,9 @@ msgid ""
 msgstr ""
 "<b>Sovellus %s kaatui.</b>\n"
 "\n"
-"Ohjelmaa <b>bug-buddy</b>, jota Gnome käyttää vikaraporttien "
-"luontiin, ei ole asennettu. Asenna se, jos haluat lähettää "
-"vikaraportteja ja auttaa Gnomen kehitystyötä.\n"
+"Ohjelmaa <b>bug-buddy</b>, jota Gnome käyttää vikaraporttien luontiin, ei "
+"ole asennettu. Asenna se, jos haluat lähettää vikaraportteja ja auttaa "
+"Gnomen kehitystyötä.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
