@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-15 17:14+0200\n"
-"PO-Revision-Date: 2006-08-15 20:47+0100\n"
+"POT-Creation-Date: 2006-09-03 03:24+0200\n"
+"PO-Revision-Date: 2006-09-03 05:30+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -34,33 +34,38 @@ msgstr "Barnobjekt 2"
 msgid "Hint for item 2"
 msgstr "Tips för objekt 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#: ../file-chooser/gtkfilesystemgnomevfs.c:972
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s är en länk till någonting som inte är en mapp"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#: ../file-chooser/gtkfilesystemgnomevfs.c:983
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s är en länk utan någon destinationsplats"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s är ingen mapp"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
 msgid "Network Servers"
 msgstr "Nätverksservrar"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Sparande av bokmärke misslyckades (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "Fel vid hämtning av information för \"%s\""
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -939,7 +944,7 @@ msgstr "Visa \"Hjälp\"-knappen"
 #: ../libgnomeui/gnome-entry.c:193
 #: ../libgnomeui/gnome-entry.c:194
 #: ../libgnomeui/gnome-file-entry.c:236
-#: ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "Historik-id"
 
@@ -956,7 +961,7 @@ msgid "Unique identifier for the file entry.  This will be used to save the hist
 msgstr "Unik identifierare för filposten. Detta kommer att användas för att spara historiklistan."
 
 #: ../libgnomeui/gnome-file-entry.c:245
-#: ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "Bläddra-dialogtitel"
 
@@ -981,7 +986,7 @@ msgid "Whether the Browse file window should be modal."
 msgstr "Huruvida filbläddringsfönstret ska vara modalt."
 
 #: ../libgnomeui/gnome-file-entry.c:270
-#: ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "Filnamn"
 
@@ -1182,69 +1187,69 @@ msgstr ""
 "Ett fel inträffade vid försök att starta standardwebbläsaren.\n"
 "Kontrollera dina inställningar i inställningsverktyget \"Föredragna program\"."
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid "Unique identifier for the icon entry.  This will be used to save the history list."
 msgstr "Unik identifierare för ikonposten. Detta kommer att användas för att spara historiklistan."
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "Titel för ikonbläddringsdialogen."
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "Pixmapkatalog"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "Katalog som ikoner kommer att sökas i."
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Filnamn som ska visas i ikonposten."
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "Väljardialog"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
 msgstr "Ikonväljardialog. Du kan använda denna egenskap för att få tag i GtkDialog om du behöver ändra eller undersöka någon av dess egenskaper."
 
-#: ../libgnomeui/gnome-icon-entry.c:322
-#: ../libgnomeui/gnome-icon-entry.c:1005
+#: ../libgnomeui/gnome-icon-entry.c:321
+#: ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "Ingen ikon"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "Ikonväljardialog"
 
-#: ../libgnomeui/gnome-icon-entry.c:776
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "Denna dialogruta låter dig välja en ikon."
 
-#: ../libgnomeui/gnome-icon-entry.c:782
-#: ../libgnomeui/gnome-icon-entry.c:1008
+#: ../libgnomeui/gnome-icon-entry.c:781
+#: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "Ikonväljare"
 
-#: ../libgnomeui/gnome-icon-entry.c:783
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "Välj den ikon du vill ha."
 
-#: ../libgnomeui/gnome-icon-entry.c:1009
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "Denna knapp kommer att öppna ett fönster som låter dig välja en ikon."
 
-#: ../libgnomeui/gnome-icon-entry.c:1029
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "Bläddra"
 
-#: ../libgnomeui/gnome-icon-entry.c:1032
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "Ikonsökväg"
 
-#: ../libgnomeui/gnome-icon-entry.c:1033
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Here you should enter the name of the directory where icon images are located."
 msgstr "Här bör du ange namnet på katalogen där ikonbilder finns."
 
@@ -1396,40 +1401,40 @@ msgstr "Ta bort indrag"
 msgid "About"
 msgstr "Om"
 
-#: ../libgnomeui/gnome-ui-init.c:123
-#: ../libgnomeui/gnome-ui-init.c:132
+#: ../libgnomeui/gnome-ui-init.c:126
+#: ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "Inaktivera kraschdialog"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "X-display som skall användas"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:169
-#: ../libgnomeui/gnome-ui-init.c:182
+#: ../libgnomeui/gnome-ui-init.c:172
+#: ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "GNOME-bibliotek för grafiska användargränssnitt"
 
-#: ../libgnomeui/gnome-ui-init.c:170
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "Visa alternativ för GNOME-gränssnitt"
 
-#: ../libgnomeui/gnome-ui-init.c:247
+#: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
 msgstr "Kunde inte öppna länk"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:833
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Flera segmenteringsfel har inträffat; kan inte visa felmeddelande\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:848
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1438,11 +1443,11 @@ msgstr ""
 "Segmenteringsfel!\n"
 "Kan inte visa kraschdialog\n"
 
-#: ../libgnomeui/gnome_segv.c:83
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Användning: gnome_segv2 programnamn signalnummer\n"
 
-#: ../libgnomeui/gnome_segv.c:136
+#: ../libgnomeui/gnome_segv.c:134
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
