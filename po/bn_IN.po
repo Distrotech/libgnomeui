@@ -4,20 +4,21 @@
 # Saugata Ghosh <e_saugata@vsnl.net>, 2003.
 # Mahay Alam Khan <makl10n@yahoo.com>, 2005.
 # Samia Niamatullah <mailsamia2001@yahoo.com>, 2005.
+# Runa Bhattacharjee <runabh@gmail.com>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libGNOMEui\n"
+"Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-01 01:19+0200\n"
-"PO-Revision-Date: 2006-07-31 14:21+0530\n"
+"POT-Creation-Date: 2006-09-03 12:54+0200\n"
+"PO-Revision-Date: 2006-09-03 19:41+0530\n"
 "Last-Translator: Runa Bhattacharjee <runabh@gmail.com>\n"
-"Language-Team: Bengali India <gnome-translation@bengalinux.org>\n"
+"Language-Team: Bengali India\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
 "\n"
 "\n"
 
@@ -37,33 +38,38 @@ msgstr "চাইল্ড আইটেম ১"
 msgid "Hint for item 2"
 msgstr "আইটেম ২'র জন্য ইঙ্গিত"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:929
+#: ../file-chooser/gtkfilesystemgnomevfs.c:972
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s দ্বারা কোনো ফোল্ডার নির্দেশ করা হয় না"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:940
+#: ../file-chooser/gtkfilesystemgnomevfs.c:983
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s লিঙ্ক দ্বারা কোনো অবস্থান নির্দেশ করা হয় না"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1015
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ফোল্ডার নয়"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1844
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
 msgid "Network Servers"
 msgstr "নেটওয়ার্ক সার্ভার"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1860
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
 msgid "File System"
 msgstr "ফাইল-সিস্টেম"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2389
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "বুকমার্ক সংরক্ষণে ব্যর্থ (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "'%s' সংক্রান্ত তথ্য প্রাপ্ত করতে ব্যর্থ"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -77,8 +83,7 @@ msgstr "'%s' ফাইল খুলতে ব্যর্থ: %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "'%s' ছবির ফাইল লোড করতে ব্যর্থ: কারণ অজানা, সম্ভবত ছবির ফাইলটি ক্ষতিগ্রস্থ"
 
 #: ../libgnomeui/gnome-about.c:199
@@ -170,8 +175,7 @@ msgid "Translator credits"
 msgstr "রুণা ভট্টচাচার্য (runabh@gmail.com)"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "অনুবাদকদের স্বীকৃতি। এই পংক্তিটি অনুবাদযোগ্য রূপে চিহ্নিত হওয়া আবশ্যক।"
 
 #: ../libgnomeui/gnome-about.c:438
@@ -955,8 +959,7 @@ msgstr "ডিরেক্টরি এন্ট্রি"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"ফাইল এন্ট্রির দ্বারা ডিরেক্টরির নাম অথবা সম্পূর্ণ ফাইলের নাম উল্লেখ করা হচ্ছে কি না"
+msgstr "ফাইল এন্ট্রির দ্বারা ডিরেক্টরির নাম অথবা সম্পূর্ণ ফাইলের নাম উল্লেখ করা হচ্ছে কি না"
 
 #: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
@@ -1441,8 +1444,7 @@ msgstr "লিঙ্ক খোলা যায়নি"
 #: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"একাধিক সেগমেন্টেশন ফল্ট উৎপন্ন হয়েছে; ত্রুটি সংক্রান্ত ডায়লগ প্রদর্শন করা সম্ভব নয়\n"
+msgstr "একাধিক সেগমেন্টেশন ফল্ট উৎপন্ন হয়েছে; ত্রুটি সংক্রান্ত ডায়লগ প্রদর্শন করা সম্ভব নয়\n"
 
 #. Eeeek! Can't show dialog
 #: ../libgnomeui/gnome-ui-init.c:851
@@ -1477,3 +1479,4 @@ msgstr ""
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "পরীক্ষা থেকে প্রস্থান করুন"
+
