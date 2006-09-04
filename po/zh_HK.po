@@ -1,4 +1,4 @@
-# Chinese (Taiwan) translation of libgnomeui.
+# Chinese (Hong Kong) translation of libgnomeui.
 # Copyright (C) 2001, 02, 03, 04, 06 Free Software Foundation, Inc.
 # Joe Man <trmetal@yahoo.com.hk>, 2001-02.
 # Abel Cheung <abel@oaka.org>, 2002-04, 06.
@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.15.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-01 23:32+0200\n"
-"PO-Revision-Date: 2006-07-31 16:14+0800\n"
+"POT-Creation-Date: 2006-09-04 20:18+0800\n"
+"PO-Revision-Date: 2006-09-04 20:28+0800\n"
 "Last-Translator: Abel Cheung <abel@oaka.org>\n"
-"Language-Team: Chinese (Taiwan) <community@linuxhall.org>\n"
+"Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,33 +31,38 @@ msgstr "副項目二"
 msgid "Hint for item 2"
 msgstr "項目二的提示"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#: ../file-chooser/gtkfilesystemgnomevfs.c:972
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s 連結的目的地位置不是資料夾"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#: ../file-chooser/gtkfilesystemgnomevfs.c:983
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s 是一個沒有目的地位置的連結"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s 不是資料夾"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
 msgid "Network Servers"
 msgstr "網絡伺服器"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
 msgid "File System"
 msgstr "檔案系統"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "無法儲存書籤 (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "無法取得‘%s’的資訊"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -289,20 +294,20 @@ msgstr "將檔案內容回復至已儲存的版本"
 #. Print
 #: ../libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
-msgstr "列印(_P)"
+msgstr "打印(_P)"
 
 #: ../libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr "列印目前的檔案"
+msgstr "打印目前的檔案"
 
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
-msgstr "列印設定(_E)..."
+msgstr "打印設定(_E)..."
 
 #: ../libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
-msgstr "修改目前印表機的頁面列印設定"
+msgstr "修改目前打印機的頁面打印設定"
 
 #. Close
 #: ../libgnomeui/gnome-app-helper.c:142
@@ -912,7 +917,7 @@ msgid "Show the 'Help' button"
 msgstr "顯示「求助」按鈕"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "紀錄代碼"
 
@@ -930,7 +935,7 @@ msgid ""
 "list."
 msgstr "代表某檔案項目的獨有識別碼。它是在儲存檔案紀錄清單時使用的。"
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "檔案瀏覽對話方塊標題"
 
@@ -956,7 +961,7 @@ msgstr "Modal"
 msgid "Whether the Browse file window should be modal."
 msgstr "檔案瀏覽對話方塊應否不被其它視窗遮蔽。"
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "檔案名稱"
 
@@ -981,9 +986,7 @@ msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
-msgstr ""
-"表示用來輸入檔案名稱的檔案欄位的 GnomeEntry。如果你想修改或查詢任何有關該 "
-"GnomeEntry 的參數，可以透過本屬性進行。"
+msgstr "表示用來輸入檔案名稱的檔案欄位的 GnomeEntry。如果你想修改或查詢任何有關該 GnomeEntry 的參數，可以透過本屬性進行。"
 
 #: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
@@ -994,9 +997,7 @@ msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
-msgstr ""
-"表示用來輸入檔案名稱的檔案欄位的 GtkEntry。如果你想修改或查詢任何有關該 "
-"GtkEntry 的參數，可以透過本屬性進行。"
+msgstr "表示用來輸入檔案名稱的檔案欄位的 GtkEntry。如果你想修改或查詢任何有關該 GtkEntry 的參數，可以透過本屬性進行。"
 
 #: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
@@ -1123,9 +1124,7 @@ msgid ""
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr ""
-"程式“%s”正嘗試更改一些系統管理員或作業系統本身不容許更改的設定。某部份你更改"
-"的設定或許不會生效，或是無法儲存設定，供下次啟動程式時使用。"
+msgstr "程式“%s”正嘗試更改一些系統管理員或作業系統本身不容許更改的設定。某部份你更改的設定或許不會生效，或是無法儲存設定，供下次啟動程式時使用。"
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
@@ -1174,73 +1173,71 @@ msgstr ""
 "當嘗試啟動預設的網頁瀏覽器時發生錯誤。\n"
 "請檢查在「首選應用程式」偏好設定工具內的有關設定是否正確。"
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr "代表某圖示項目的獨有識別碼。它是在儲存圖示紀錄清單時使用的。"
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "圖示瀏覽對話方塊所使用的標題。"
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "Pixmap 目錄"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "會在該目錄下搜尋圖示。"
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "在圖示項目中顯示的檔案名稱。"
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "圖示選擇窗"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
-msgstr ""
-"圖示選擇窗。如果你想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進"
-"行。"
+msgstr "圖示選擇窗。如果你想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進行。"
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
+#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "沒有圖示"
 
-#: ../libgnomeui/gnome-icon-entry.c:767
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "圖示選擇窗"
 
-#: ../libgnomeui/gnome-icon-entry.c:768
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "本對話方塊可用來選取圖示。"
 
-#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
+#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "圖示選擇元件"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "請選取希望使用的圖示。"
 
-#: ../libgnomeui/gnome-icon-entry.c:1001
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "此按鈕可開啟用來選取圖示的視窗。"
 
-#: ../libgnomeui/gnome-icon-entry.c:1021
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "瀏覽"
 
-#: ../libgnomeui/gnome-icon-entry.c:1024
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "圖示的路徑"
 
-#: ../libgnomeui/gnome-icon-entry.c:1025
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1395,38 +1392,38 @@ msgid "About"
 msgstr "關於"
 
 # Well, crash dialog is hard to translate and understand just by instinct
-#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
+#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "程式錯誤時不顯示任何對話方塊通知"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "準備使用的 X 畫面編號"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "畫面編號"
 
-#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
+#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "GNOME 圖形介面函式庫"
 
-#: ../libgnomeui/gnome-ui-init.c:170
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "顯示有關 GNOME 圖形介面的選項"
 
-#: ../libgnomeui/gnome-ui-init.c:247
+#: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
 msgstr "無法開啟連結"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:833
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "發生了非常嚴重的錯誤；無法顯示錯誤訊息對話方塊\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:848
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1435,11 +1432,11 @@ msgstr ""
 "程式記憶體區段錯誤！\n"
 "無法顯示錯誤訊息對話方塊\n"
 
-#: ../libgnomeui/gnome_segv.c:83
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法：gnome_segv2 程式名稱 訊號號碼\n"
 
-#: ../libgnomeui/gnome_segv.c:136
+#: ../libgnomeui/gnome_segv.c:134
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
@@ -1450,87 +1447,10 @@ msgid ""
 msgstr ""
 "<b>應用程式 %s 發生錯誤。</b>\n"
 "\n"
-"但是你沒有安裝 <b>bug-buddy</b>，GNOME 錯誤匯報工具。\n"
+"但是你沒有安裝 <b>bug-buddy</b>，GNOME 錯誤回報工具。\n"
 "如果你想協助我們使 GNOME 更完善，請安裝它\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "結束測試"
 
-#~ msgid "Error reading file '%s': %s"
-#~ msgstr "讀取檔案「%s」時發生錯誤：%s"
-
-#~ msgid "Error rewinding file '%s': %s"
-#~ msgstr "回到檔案「%s」的開始時發生錯誤：%s"
-
-#~ msgid "No name"
-#~ msgstr "沒有名稱"
-
-#~ msgid "File '%s' is not a regular file or directory."
-#~ msgstr "「%s」不是一個普通的檔案或目錄。"
-
-#~ msgid "Error cannot find file id '%s'"
-#~ msgstr "發生錯誤，無法尋找檔案 id「%s」"
-
-#~ msgid "No filename to save to"
-#~ msgstr "沒有檔案名稱來儲存"
-
-#~ msgid "Starting %s"
-#~ msgstr "正在執行 %s"
-
-#~ msgid "No URL to launch"
-#~ msgstr "沒有 URL 來執行"
-
-#~ msgid "Not a launchable item"
-#~ msgstr "不是可以執行的項目"
-
-#~ msgid "No command (Exec) to launch"
-#~ msgstr "沒有指令(Exec)可執行"
-
-#~ msgid "Bad command (Exec) to launch"
-#~ msgstr "準備執行的指令(Exec)有錯誤"
-
-#~ msgid "Unknown encoding of: %s"
-#~ msgstr "不明的編碼：%s"
-
-#~ msgid "Error writing file '%s': %s"
-#~ msgstr "寫入檔案「%s」時發生錯誤：%s"
-
-#~ msgid "History id"
-#~ msgstr "紀錄代碼"
-
-#~ msgid "Icon selector"
-#~ msgstr "圖示選擇元件"
-
-#~ msgid ""
-#~ "The GNOME Session Manager (process %d) has crashed\n"
-#~ "due to a fatal error (%s).\n"
-#~ "When you close this dialog, all applications will close and your session "
-#~ "will exit.\n"
-#~ "Please save all your files before closing this dialog."
-#~ msgstr ""
-#~ "GNOME 作業階段總管 (進程編號 %d) 不正常終止，\n"
-#~ "原因是出現嚴重的錯誤 (%s)。\n"
-#~ "當關閉本對話方塊後，所有程式都會關閉，並且今次的作業階段也會終止。\n"
-#~ "請在關閉本對話方塊前儲存所有資料。"
-
-#~ msgid "The Application \"%s\" has quit unexpectedly."
-#~ msgstr "程式「%s」不正常地結束。"
-
-#~ msgid "process %d: %s"
-#~ msgstr "進程編號 %d：%s"
-
-#~ msgid ""
-#~ "You can inform the developers of what happened to help them fix it.  Or "
-#~ "you can restart the application right now."
-#~ msgstr ""
-#~ "您可以選擇通知程式開發人員，協助他們解決問題，或者直接重新啟動程式。"
-
-#~ msgid "_Restart Application"
-#~ msgstr "重新啟動程式(_R)"
-
-#~ msgid "_Inform Developers"
-#~ msgstr "通知開發人員(_I)"
-
-#~ msgid "_Debug"
-#~ msgstr "偵錯(_D)"
