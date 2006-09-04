@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-17 01:43+0900\n"
-"PO-Revision-Date: 2006-08-17 01:52+0900\n"
+"POT-Creation-Date: 2006-09-04 18:03+0900\n"
+"PO-Revision-Date: 2006-09-04 18:04+0900\n"
 "Last-Translator: Satoru SATOH <ss@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -34,33 +34,38 @@ msgstr "子アイテム 2"
 msgid "Hint for item 2"
 msgstr "アイテム 2 のヒント"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#: ../file-chooser/gtkfilesystemgnomevfs.c:972
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "リンク %s が指しているのはフォルダではありません"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#: ../file-chooser/gtkfilesystemgnomevfs.c:983
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s のリンクが切れています"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s はフォルダではありません"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
 msgid "Network Servers"
 msgstr "ネットワークのサービス"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
 msgid "File System"
 msgstr "ファイル・システム"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "ブックマークの保存に失敗しました (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "'%s' の情報を取得できませんでした"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -918,7 +923,7 @@ msgid "Show the 'Help' button"
 msgstr "[ヘルプ] ボタンを表示する"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "履歴 ID"
 
@@ -937,7 +942,7 @@ msgid ""
 msgstr ""
 "ファイル・エントリの一意な識別子で、履歴リストを保存するのに使用されます。"
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "選択ダイアログのタイトル"
 
@@ -965,7 +970,7 @@ msgstr "モーダル"
 msgid "Whether the Browse file window should be modal."
 msgstr "ファイル選択ウインドウがモーダルかどうか"
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "ファイル名"
 
@@ -1188,33 +1193,33 @@ msgstr ""
 "デフォルトのウェブ・ブラウザを起動する際にエラーが発生しました。\n"
 "デスクトップの設定ある 'お気に入りのアプリ' の設定を確認して下さい。"
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr "アイコン・エントリの一意な識別子で履歴のリストの保存に使用されます。"
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "アイコン選択ダイアログのタイトル"
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "Pixmap フォルダ"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "アイコンを検索するフォルダ"
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "アイコン・エントリに表示されるファイル名"
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "選択ダイアログ"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1222,39 +1227,39 @@ msgstr ""
 "アイコンの選択ダイアログで、プロパティを変更したり取得する場合は、このプロパ"
 "ティで GtkDialog を取得できます。"
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:1005
+#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "なし"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "アイコン選択ダイアログ"
 
-#: ../libgnomeui/gnome-icon-entry.c:776
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "アイコンの選択ダイアログを表示する"
 
-#: ../libgnomeui/gnome-icon-entry.c:782 ../libgnomeui/gnome-icon-entry.c:1008
+#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "アイコンの選択"
 
-#: ../libgnomeui/gnome-icon-entry.c:783
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "アイコンを選んで下さい。"
 
-#: ../libgnomeui/gnome-icon-entry.c:1009
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "このボタンを押すとアイコンを選べるウインドウを開きます"
 
-#: ../libgnomeui/gnome-icon-entry.c:1029
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "参照"
 
-#: ../libgnomeui/gnome-icon-entry.c:1032
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "アイコンのパス"
 
-#: ../libgnomeui/gnome-icon-entry.c:1033
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1406,32 +1411,32 @@ msgstr "インデントなし"
 msgid "About"
 msgstr "情報"
 
-#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
+#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "クラッシュ・ダイアログを無効にする"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "使用する X ディスプレイ"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
+#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI ライブラリ"
 
-#: ../libgnomeui/gnome-ui-init.c:170
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "GNOME GUI オプションを表示する"
 
-#: ../libgnomeui/gnome-ui-init.c:247
+#: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
 msgstr "リンクを開けませんでした"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:833
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1439,7 +1444,7 @@ msgstr ""
 "ません\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:848
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1448,11 +1453,11 @@ msgstr ""
 "セグメンテーション・フォルトが発生しました！\n"
 "クラッシュ・ダイログを表示できません\n"
 
-#: ../libgnomeui/gnome_segv.c:83
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法: gnome_segv2 アプリケーション名 シグナル番号\n"
 
-#: ../libgnomeui/gnome_segv.c:136
+#: ../libgnomeui/gnome_segv.c:134
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
@@ -1460,7 +1465,9 @@ msgid ""
 "However you don't have installed <b>bug-buddy</b>, the\n"
 "GNOME crash report tool. If you want to help us\n"
 "to make GNOME better, please, install it\n"
-msgstr "<b>アプリケーション %s はクラッシュしました。</b>\n\n"
+msgstr ""
+"<b>アプリケーション %s はクラッシュしました。</b>\n"
+"\n"
 "しかし GNOME のクラッシュ報告ツール <b>bug-buddy</b> が\n"
 "インストールされていません。GNOME をよりよくするのを\n"
 "手助けしてくださるなら、bug-buddy をインストールして下さい。\n"
