@@ -1138,16 +1138,19 @@ get_folder_complete_operation (struct GetFolderData *op_data)
 
   folder_vfs->monitor = monitor;
 
+  g_object_ref (folder_vfs);
+
   (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
 			 GTK_FILE_FOLDER (folder_vfs), NULL,
 			 op_data->callback_data);
-
 
   /* Now initiate a directory load */
   if (folder_vfs->is_afs_or_net)
     load_afs_dir (folder_vfs);
   else
     load_dir (folder_vfs);
+
+  g_object_unref (folder_vfs);
 
 out:
   if (op_data->parent_folder)

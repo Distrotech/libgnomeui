@@ -1,3 +1,9 @@
+2006-09-04  Kristian Rietveld  <kris@imendio.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(get_folder_complete_operation): guard our newly created folder
+	during callback invocation.
+
 ======================== 2.16.0 ===========================
 
 2006-09-02  Kristian Rietveld  <kris@imendio.com>
