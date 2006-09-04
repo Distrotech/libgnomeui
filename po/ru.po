@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-25 04:19+0400\n"
+"POT-Creation-Date: 2006-09-05 00:30+0400\n"
 "PO-Revision-Date: 2006-08-25 12:12+0400\n"
 "Last-Translator: Nickolay V. Shmyrev <nshmyrev@yandex.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -35,38 +35,43 @@ msgstr "Дочерний элемент 2"
 msgid "Hint for item 2"
 msgstr "Подсказка для элемента 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:929
+#: ../file-chooser/gtkfilesystemgnomevfs.c:972
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s является ссылкой на что-то, что не является папкой"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:940
+#: ../file-chooser/gtkfilesystemgnomevfs.c:983
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s является ссылкой без адреса назначения"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1015
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
 #, c-format
 msgid "%s is not a folder"
 msgstr "Путь \"%s\" не является каталогом"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1844
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1912
 msgid "Network Servers"
 msgstr "Сетевые серверы"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1860
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1928
 msgid "File System"
 msgstr "Файловая система"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2389
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2457
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Произошёл сбой при сохранении закладки (%s)"
 
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2894
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "Не удалось получить информацию о \"%s\""
+
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr "Не удается получить информацию о файле \"%s\": %s"
+msgstr "Не удалось получить информацию о файле \"%s\": %s"
 
 #: ../file-chooser/testfilechooser.c:191
 #, c-format
@@ -920,7 +925,7 @@ msgid "Show the 'Help' button"
 msgstr "Показать кнопку \"Справка\""
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "Идентификатор истории"
 
@@ -940,7 +945,7 @@ msgstr ""
 "Уникальный идентификатор для файловой строки. Он будет использован для "
 "сохранения истории."
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "Заголовок диалога выбора файла"
 
@@ -968,7 +973,7 @@ msgstr "Модальный"
 msgid "Whether the Browse file window should be modal."
 msgstr "Должно ли окно выбора файла быть модальным."
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "Имя файла"
 
@@ -1195,7 +1200,7 @@ msgstr ""
 "Проверьте правильность установок в пункте \"Предпочитаемые приложения\" меню "
 "\"Настройки Рабочего стола\"."
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1203,27 +1208,27 @@ msgstr ""
 "Уникальный идентификатор для строки значка. Он будет использован для "
 "хранения истории."
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "Заголовок диалога выбора значка."
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "Каталог изображений"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "Каталог, в котором будет производиться поиск значков."
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Имя файла, которое должно быть отображено в строке значков."
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "Окно выбора"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1231,39 +1236,39 @@ msgstr ""
 "Диалог выбора значков.Можно использовать это свойство для получения  диалога "
 "GtkDialog, если необходимо изменить или запросить любое из свойств."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:1005
+#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "Нет значка"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "Диалог выбора значков"
 
-#: ../libgnomeui/gnome-icon-entry.c:776
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "Этот диалог позволяет выбрать значок."
 
-#: ../libgnomeui/gnome-icon-entry.c:782 ../libgnomeui/gnome-icon-entry.c:1008
+#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "Выбор значков"
 
-#: ../libgnomeui/gnome-icon-entry.c:783
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "Выберите желаемый значок."
 
-#: ../libgnomeui/gnome-icon-entry.c:1009
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "Эта кнопка откроет окно, позволяющее выбрать значок."
 
-#: ../libgnomeui/gnome-icon-entry.c:1029
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "Просмотреть"
 
-#: ../libgnomeui/gnome-icon-entry.c:1032
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "Путь к значку"
 
-#: ../libgnomeui/gnome-icon-entry.c:1033
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
