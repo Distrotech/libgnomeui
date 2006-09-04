@@ -1,11 +1,12 @@
-libgnomeui 2.15.92
+libgnomeui 2.16.0
 ------------------
 
-* Lots of fixes for the async file chooser (Federico)
+* Lots of fixes for the async file chooser (Federico, Kris)
 * Fix some problems with gnome-desktop-item-edir (Vincent)
 * Win32 portability fixes (Tor)
 * Build fixes for Solaris (Damien Carberry)
 * Cleanups etc (Kris, Kjartan)
+* Updated and new translations
 
 libgnomeui 2.15.91
 ------------------
