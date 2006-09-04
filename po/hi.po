@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-22 07:25+0200\n"
-"PO-Revision-Date: 2006-06-22 10:58+0530\n"
+"POT-Creation-Date: 2006-09-04 04:29+0200\n"
+"PO-Revision-Date: 2006-09-04 12:33+0530\n"
 "Last-Translator: Rajesh Ranjan <rranjan@redhat.com>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,6 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -44,34 +45,39 @@ msgstr "शिशु वस्तु 2"
 msgid "Hint for item 2"
 msgstr "वस्तु 2 के बारे में संकेत"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#: ../file-chooser/gtkfilesystemgnomevfs.c:972
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s किसी का लिंक है जो कि फोल्डर नहीं है"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#: ../file-chooser/gtkfilesystemgnomevfs.c:983
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s एक लिंक है बिना गंतव्य स्थान के"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s फोल्डर नहीं है"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
 msgid "Network Servers"
 msgstr "संजाल सर्वर"
 
 # libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
 msgid "File System"
 msgstr "फ़ाइलसिस्टम"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "पुस्तकचिह्न सहेजना विफल (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "'%s' के लिये सूचना पाने में त्रुटि"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -865,7 +871,7 @@ msgid "Show session management options"
 msgstr "सत्र प्रबंधन विकल्प दिखायें"
 
 # libgnomeui/gnome-client.c:2483
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "लॉगआउट रद्द करें"
 
@@ -1128,7 +1134,7 @@ msgstr "'मदद' बटन दिखाएँ"
 
 # libgnomeui/gnome-file-entry.c:190 libgnomeui/gnome-icon-entry.c:163
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "इतिहास आईडी"
 
@@ -1152,7 +1158,7 @@ msgstr ""
 "जाएगा."
 
 # libgnomeui/gnome-file-entry.c:199 libgnomeui/gnome-icon-entry.c:172
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "ब्राउज़ संवाद शीर्षक"
 
@@ -1186,7 +1192,7 @@ msgid "Whether the Browse file window should be modal."
 msgstr "क्या ब्राउज फ़ाइल विंडो मोडल हो."
 
 # libgnomeui/gnome-file-entry.c:224 libgnomeui/gnome-icon-entry.c:188
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "फ़ाइलनाम"
 
@@ -1452,39 +1458,39 @@ msgstr ""
 "कृपया वरीयताएँ उपकरण में अपनी वरीयता अनुप्रयोग विन्यास जाँचें."
 
 # libgnomeui/gnome-icon-entry.c:164
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr "चिह्न प्रविष्टि हेतु बेजोड़ पहचानकारक. इसका उपयोग इतिहास सूची सहेजने में किया जाएगा."
 
 # libgnomeui/gnome-icon-entry.c:173
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "ब्राउज चिह्न संवाद हेतु शीर्षक."
 
 # libgnomeui/gnome-icon-entry.c:180
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "पिक्समैप डिरेक्ट्री"
 
 # libgnomeui/gnome-icon-entry.c:181
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "चिह्नों हेतु ढूंढी जाने वाली डिरेक्ट्री"
 
 # libgnomeui/gnome-icon-entry.c:189
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "वह फ़ाइलनाम जो चिह्न प्रविष्टि में प्रदर्शित होना है"
 
 # libgnomeui/gnome-icon-entry.c:197
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "पिकर संवाद"
 
 # libgnomeui/gnome-icon-entry.c:198
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1493,41 +1499,41 @@ msgstr ""
 "आपको इसके किसी गुण को परिवर्धित करने या क्वैरी करने की आवश्यकता हो."
 
 # libgnomeui/gnome-icon-entry.c:306 libgnomeui/gnome-icon-entry.c:908
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
+#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "चिह्न नहीं"
 
 # libgnomeui/gnome-font-picker.c:156
-#: ../libgnomeui/gnome-icon-entry.c:767
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "चिह्न चयन संवाद"
 
-#: ../libgnomeui/gnome-icon-entry.c:768
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "यह संवाद बक्सा आपको चिह्न चयन करने देता है"
 
-#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
+#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "चिह्न चयनक"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "कृपया चिह्न चुनें जो आप चाहते हैं."
 
-#: ../libgnomeui/gnome-icon-entry.c:1001
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "यह बटन एक विंडो खोलेगा जहाँ से आप चिह्न चुन सकते हैं."
 
 # libgnomeui/gnome-icon-entry.c:930
-#: ../libgnomeui/gnome-icon-entry.c:1021
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "ब्राउज़"
 
-#: ../libgnomeui/gnome-icon-entry.c:1024
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "चिह्न पथ"
 
-#: ../libgnomeui/gnome-icon-entry.c:1025
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1704,40 +1710,40 @@ msgstr "हाशिया हटाएँ"
 msgid "About"
 msgstr "के बारे में"
 
-#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
+#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "क्रै संवाद अक्षम करता है"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "उपयोग में एक्स प्रदर्शक"
 
-#: ../libgnomeui/gnome-ui-init.c:124
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "प्रदर्शक"
 
-#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
+#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "गनोम जीयूआई लाइब्रेरी"
 
-#: ../libgnomeui/gnome-ui-init.c:169
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "GNOME GUI विकल्प दिखायें"
 
-#: ../libgnomeui/gnome-ui-init.c:246
+#: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
 msgstr "लिंक नहीं खोल सका"
 
 #  dialog display isn't working out
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:832
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "बहु सेग्मेंटेशन फ़ॉल्ट हुए, त्रुटि संवाद दिखा नहीं सका\n"
 
 #  Eeeek! Can't show dialog
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:846
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1746,55 +1752,24 @@ msgstr ""
 "सेग्मेंटेशन फ़ॉल्ट!\n"
 "क्रैश संवाद प्रदर्शित नहीं कर सका\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"गनोम सत्र प्रबंधक गंभीर त्रुटि के कारण (प्रक्रिया %d) खराब हो गया है\n"
-"(%s)\n"
-"जब आप इस संवाद को बंद करेंगे तब सभी अनुप्रयोग बंद हो जाएंगे \n"
-"तथा आपका सत्र बाहर हो जाएगा. \n"
-"इस संवाद बक्से को बंद करने से पूर्व कृपया अपनी सभी फ़ाइलों को सहेज लें."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "अनुप्रयोग \"%s\" अप्रत्याशित रूप से बाहर हो गया."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "प्रक्रिया %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"आपको डेवलपर्स को बता सकते हैं कि क्या हुआ था ताकि इसे सही करने में उन्हें मदद मिल सके. या "
-"आप अनुप्रयोग "
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "उपयोग: gnome_segv2 अनुप्रयोगनाम signum\n"
 
-# libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "अनुप्रयोग पुनःप्रारंभ करें (_R)"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "डेवलपर्स को बताएँ (_I)"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "डिबग (_D)"
+#: ../libgnomeui/gnome_segv.c:134
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>अनुप्रयोग %s क्रैश कर गया है.</b>\n"
+"\n"
+"हालांकि आपने <b>bug-buddy</b> अधिष्ठापित नहीं किया है,\n"
+"GNOME क्रैश रिपोर्ट औजार. अगर आप गनोम की मदद करना चाहते हैं\n"
+"GNOME को बेहतर बनाने के लिये, कृपया इसे अधिष्ठापित कीजिये\n"
 
 # test-gnome/testgnome.xml.h:3
 #: ../test-gnome/testgnome.xml.h:3
