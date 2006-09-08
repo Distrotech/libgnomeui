@@ -1,19 +1,22 @@
-# translation of libgnomeui.po to Georgian
+# translation of libgnomeui.HEAD.po to Georgian
+# Vladimer Sichinava <alinux@siena.linux.it>, 2006.
+# Vladimer Sichinava <vlsichinava@gmail.com>, 2006.
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER.
-# Vladimer Sichinava <alinux@siena.linux.it>, 2006.
 # Besik Meshveliani <besik28@gmail.com>
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-13 18:33+0200\n"
-"PO-Revision-Date: 2006-04-13 18:35+0200\n"
-"Last-Translator: Vladimer Sichinava <alinux@siena.linux.it>\n"
-"Language-Team: Georgian <geognome@googlegroups.com>\n"
+"POT-Creation-Date: 2006-09-08 17:36+0200\n"
+"PO-Revision-Date: 2006-09-08 23:19+0200\n"
+"Last-Translator: Vladimer Sichinava <vlsichinava@gmail.com>\n"
+"Language-Team: Georgian <www.gia.ge>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -31,94 +34,38 @@ msgstr "ქვეელემენტი 2"
 msgid "Hint for item 2"
 msgstr "2 ელემენტის მინიშნება"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:833
+#: ../file-chooser/gtkfilesystemgnomevfs.c:972
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s არის რაღაცის ბმული, რაც არ წარმოადგენს დასტას"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:844
+#: ../file-chooser/gtkfilesystemgnomevfs.c:983
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s მისამართი არის ბმული რომელსაც დანიშნულება არ გააჩნია"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:959
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s არ არის დასტა"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1201
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1912
 msgid "Network Servers"
 msgstr "ქსელის სერვერები"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1217
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1928
 msgid "File System"
 msgstr "ფაილთა-სისტემა"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1977
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2457
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "ვერ ვახერხებ ნიშნულის შენახვას (%s)"
 
-#: ../file-chooser/sucky-desktop-item.c:215
-#: ../file-chooser/sucky-desktop-item.c:603
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2894
 #, c-format
-msgid "Error reading file '%s': %s"
-msgstr "შეცდომაა '%s' ფაილის წაკითხვისას: %s"
-
-#: ../file-chooser/sucky-desktop-item.c:283
-#, c-format
-msgid "Error rewinding file '%s': %s"
-msgstr "შეცდომაა '%s' ფაილის  უკან გადახვევისას : %s"
-
-#: ../file-chooser/sucky-desktop-item.c:382
-#: ../file-chooser/sucky-desktop-item.c:3722
-msgid "No name"
-msgstr "უსახელო"
-
-#: ../file-chooser/sucky-desktop-item.c:618
-#, c-format
-msgid "File '%s' is not a regular file or directory."
-msgstr "ფაილი '%s' არაა რეგულარული ფაილი ან დასტა"
-
-#: ../file-chooser/sucky-desktop-item.c:794
-#, c-format
-msgid "Error cannot find file id '%s'"
-msgstr "შეცდომა: '%s' ფაილის იდენტიფიკატორის პოვნა შეუძლებელია"
-
-#: ../file-chooser/sucky-desktop-item.c:840
-msgid "No filename to save to"
-msgstr "ფაილის შესანახად საჭიროა სახელის მითითება"
-
-#: ../file-chooser/sucky-desktop-item.c:1817
-#, c-format
-msgid "Starting %s"
-msgstr "ვრთავ %s"
-
-#: ../file-chooser/sucky-desktop-item.c:2056
-msgid "No URL to launch"
-msgstr "მითითებული არაა გასაშვები URL"
-
-#: ../file-chooser/sucky-desktop-item.c:2066
-msgid "Not a launchable item"
-msgstr "გასაშვები ელემენტი არ არსებობს"
-
-#: ../file-chooser/sucky-desktop-item.c:2076
-msgid "No command (Exec) to launch"
-msgstr "შესასრულებელი ბრძანება (Exec) შეყვანილი არ არის"
-
-#: ../file-chooser/sucky-desktop-item.c:2089
-msgid "Bad command (Exec) to launch"
-msgstr "შესასრულებელი ბრძანება (Exec) არასწორია"
-
-#: ../file-chooser/sucky-desktop-item.c:3779
-#, c-format
-msgid "Unknown encoding of: %s"
-msgstr "უცნობი კოდირება: %s"
-
-#: ../file-chooser/sucky-desktop-item.c:4010
-#, c-format
-msgid "Error writing file '%s': %s"
-msgstr "ფაილის ჩაწერისას '%s' შეცდომაა: %s"
+msgid "Error getting information for '%s'"
+msgstr "შეუძლებელია ფაილის შესახებ ინფორმაციის მიღება: %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -132,8 +79,7 @@ msgstr "შეცდომაა '%s' ფაილის გახსნის�
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "გრაფიკული გამოსახულება '%s' ვერ ჩამოიტვირთა: მიზეზი უცნობია, შესაძლოა  "
 "ფაილია დაზიანებული"
@@ -227,8 +173,7 @@ msgid "Translator credits"
 msgstr "თარჯიმანი"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "მადლობები თარჯიმნებს. ეს სტრიქონებიც ასევე უნდა ითარგმნოს."
 
 #: ../libgnomeui/gnome-about.c:438
@@ -729,8 +674,7 @@ msgstr "აუთენტიფიკაცია აუცილებელ�
 #: ../libgnomeui/gnome-authentication-manager.c:298
 #, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr ""
-"აუცილებელია სეანსის დაწყება, რათა მისაწვდომი გახდეს \"%s\" დომეინით \"%s\"\n"
+msgstr "აუცილებელია სეანსის დაწყება, რათა მისაწვდომი გახდეს \"%s\" დომეინით \"%s\"\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:300
 #, c-format
@@ -765,7 +709,7 @@ msgstr "სესიის მართვა"
 msgid "Show session management options"
 msgstr "აჩვენე სეანსის მართვის პარამეტრები"
 
-#: ../libgnomeui/gnome-client.c:2584
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "გამოსვლის გაუქმება"
 
@@ -977,7 +921,7 @@ msgid "Show the 'Help' button"
 msgstr "აჩვენე ღილაკი 'დახმარება'"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "არქივის იდენტიფიკატორი"
 
@@ -993,10 +937,9 @@ msgstr "GTK ელემენტი"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
-"ფაილთა სტრიქონის უნუკალური იდენტიფიკატორი. ის გამოყენებულ იქნება არქივისთვის."
+msgstr "ფაილთა სტრიქონის უნუკალური იდენტიფიკატორი. ის გამოყენებულ იქნება არქივისთვის."
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "დიალოგის სათაურის დათვალიერება"
 
@@ -1024,7 +967,7 @@ msgstr "მოდალური"
 msgid "Whether the Browse file window should be modal."
 msgstr "უნდა იყოს თუ არა ფაილთა ამოსარჩევი ფანჯარა მოდალური."
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "ფაილის სახელი"
 
@@ -1088,23 +1031,23 @@ msgstr "GtkFileChooser-ის მოქმედება"
 msgid "The type of operation that the file selector is performing."
 msgstr "მოქმედების ტიპი, რომელსაც ასრულებს ფაილების სელექტორი."
 
-#: ../libgnomeui/gnome-file-entry.c:642 ../libgnomeui/gnome-file-entry.c:676
+#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
 msgid "Select file"
 msgstr "ფაილის მონიშვნა"
 
-#: ../libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
 msgstr "გზა"
 
-#: ../libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
 msgstr "ფაილისკენ გეზი"
 
-#: ../libgnomeui/gnome-file-entry.c:829
+#: ../libgnomeui/gnome-file-entry.c:841
 msgid "_Browse..."
 msgstr "დ_ათვალიარება..."
 
-#: ../libgnomeui/gnome-file-entry.c:830
+#: ../libgnomeui/gnome-file-entry.c:842
 msgid "Pop up a file selector to choose a file"
 msgstr "დიალოგური ფანჯრის გამოძახება ფაილის ამოსარჩევად"
 
@@ -1251,7 +1194,7 @@ msgstr ""
 "გადაამოწმეთ პარამეტრების სისწორე პუნქტში  'Preferred Applications' მენიუში "
 "\"სამუშაო მაგიდის პარამეტრები\"."
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1259,27 +1202,27 @@ msgstr ""
 "პიქტოგრამის სტრიქონის უნიკალური იდენტიფიკატორი. ის გამოიყენებულ იქნება "
 "არქივში შესანახად."
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "პიქტოგრამის ასარჩევი ფანჯრის სათაური."
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "გრაფიკულ გამოსახულებათა დასტა"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "დასტა,რომელშიც სადაც ხატულები იძებნება."
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "ფაილის სახელი, რომელიც უნდა აისახოს პიქტოგრამების სტრიქონში."
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "შესარჩევი ფანჯარა"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1288,39 +1231,39 @@ msgstr ""
 "გამოყენება GtkDialog დიალოგური ფანჯრის მისაღებად, თუ საჭირო გახდა ნებისმიერი "
 "მახასიათებლის მოთხოვნა ან შეცვლა."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:988
+#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "არავითარი პიქტოგრამა"
 
-#: ../libgnomeui/gnome-icon-entry.c:758
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "პიქტოგრამების შესარჩევი დიალოგური ფანჯარა"
 
-#: ../libgnomeui/gnome-icon-entry.c:759
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "ეს დიალოგური ფანჯარა იძლევა პიქტოგრამის ამორჩევის საშუალებას."
 
-#: ../libgnomeui/gnome-icon-entry.c:765 ../libgnomeui/gnome-icon-entry.c:991
+#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "პიქტოგრამის ამრჩევი"
 
-#: ../libgnomeui/gnome-icon-entry.c:766
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "ამოირჩიეთ სასურველი პიქტოგრამა"
 
-#: ../libgnomeui/gnome-icon-entry.c:992
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "ეს ღილაკი გახსნის ფანჯარას, სადაც შეგეძლებათ პიქტოგრამის არჩევა."
 
-#: ../libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "დათვალიერება"
 
-#: ../libgnomeui/gnome-icon-entry.c:1015
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "პიქტოგრამის გზა"
 
-#: ../libgnomeui/gnome-icon-entry.c:1016
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1472,28 +1415,32 @@ msgstr "აბზაცის გაუქმება"
 msgid "About"
 msgstr "პროგრამის შესახებ"
 
-#: ../libgnomeui/gnome-ui-init.c:124 ../libgnomeui/gnome-ui-init.c:133
+#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "პროგრამის შეცდომების ამსახველი დიალოგური ფანჯრის გამორთვა."
 
-#: ../libgnomeui/gnome-ui-init.c:126
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "გამოყენებული x დისპლეი"
 
-#: ../libgnomeui/gnome-ui-init.c:126
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "დისპლეი"
 
-#: ../libgnomeui/gnome-ui-init.c:170 ../libgnomeui/gnome-ui-init.c:183
+#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI ბიბლიოთეკა"
 
-#: ../libgnomeui/gnome-ui-init.c:171
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "აჩვენე GNOME GUI-ს ოფციები"
 
+#: ../libgnomeui/gnome-ui-init.c:250
+msgid "Could not open link"
+msgstr "შეუძლებელია ბმულის გახსნა"
+
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:787
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1501,7 +1448,7 @@ msgstr ""
 "ამხსნელი  დიალოგური ფანჯრის გამოტანას\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:801
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1510,54 +1457,24 @@ msgstr ""
 "სეგმენტაციური შეცდომა!\n"
 "შეუძლებელია გაფუჭების ამხსნელი დიალოგური ფანჯრის გამოტანა\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"GNOME სეანსის მენეჯერი (პროცესი %d) განადგურდა\n"
-"(%s) ფატალური შეცდომის გამო.\n"
-"როდესაც დახურავთ ამ დიალოგურ ფანჯარას, ყველა პროგრამა დაიხურება და თქვენი "
-"სესია დასრულდება.↵\n"
-"გთხოვთ შეინახოთ ყველა ფაილი სანამ ამ დიალოგურ ფანჯარას გათიშავთ."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "პროგრამა \"%s\" უცაბედად დასრულდა."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "პროცესი %d:·%s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"მომხდარის შესახებ შეგიძლიათ პროგრამის შემქმნელებს შეატყობინოთ, რათა მათ "
-"დაგეხმარონ შეცდომის აღმოფხვრაში, ან გადატვირთეთ პროგრამა."
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "გამოიყენება: gnome_segv2 appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "პროგრამის _გადატვირთვა"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "აცნობე პროგრამისტებს"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "გა_მართვა"
+#: ../libgnomeui/gnome_segv.c:134
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>პროგრამა %s უეცრად გაითიშა.</b>\n"
+"\n"
+"ამის და მიუხედავად <b>bug-buddy</b> არ არის ჩაყენებული,\n"
+"იგი აღმოჩენილი შეცდომების ნოტიფიკაცია-გაგზავნას ემსახურება,\n"
+"ბაგ-ბადის გამოყენება გნომს გააუმჯობესებს, ყველას დიდი მადლობა!\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
