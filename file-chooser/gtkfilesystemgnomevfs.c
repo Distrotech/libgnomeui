@@ -367,6 +367,7 @@ static void monitor_callback        (GnomeVFSMonitorHandle    *handle,
 				     gpointer                  user_data);
 
 static gboolean execute_vfs_callbacks_idle (gpointer data);
+static void     execute_vfs_callbacks      (gpointer data);
 
 static gchar *make_child_uri (const gchar *base_uri,
 			      const gchar *child_name,
@@ -612,7 +613,7 @@ gtk_file_system_gnome_vfs_dispose (GObject *object)
       system_vfs->execute_vfs_callbacks_idle_id = 0;
 
       /* call pending callbacks */
-      execute_vfs_callbacks_idle (system_vfs);
+      execute_vfs_callbacks (system_vfs);
     }
 
   /* cancel pending VFS operations */
@@ -3541,14 +3542,12 @@ gtk_file_system_handle_gnome_vfs_new (GtkFileSystem *file_system)
 }
 
 /* some code for making callback calls from idle */
-static gboolean
-execute_vfs_callbacks_idle (gpointer data)
+static void
+execute_vfs_callbacks (gpointer data)
 {
   GSList *l;
   gboolean unref_file_system = TRUE;
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (data);
-
-  GDK_THREADS_ENTER ();
 
   if (!system_vfs->execute_vfs_callbacks_idle_id)
     unref_file_system = FALSE;
@@ -3571,6 +3570,14 @@ execute_vfs_callbacks_idle (gpointer data)
     g_object_unref (system_vfs);
 
   system_vfs->execute_vfs_callbacks_idle_id = 0;
+}
+
+static gboolean
+execute_vfs_callbacks_idle (gpointer data)
+{
+  GDK_THREADS_ENTER ();
+
+  execute_vfs_callbacks (data);
 
   GDK_THREADS_LEAVE ();
 
