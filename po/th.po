@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-28 17:16+0700\n"
-"PO-Revision-Date: 2006-07-28 17:19+0700\n"
+"POT-Creation-Date: 2006-09-16 11:18+0700\n"
+"PO-Revision-Date: 2006-09-16 11:26+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,33 +32,38 @@ msgstr "รายการลูกที่ 2"
 msgid "Hint for item 2"
 msgstr "ข้อแนะนำสำหรับรายการที่ 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:892
+#: file-chooser/gtkfilesystemgnomevfs.c:973
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s เป็นลิงก์เชื่อมไปยังสิ่งที่ไม่ใช่โฟลเดอร์"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:903
+#: file-chooser/gtkfilesystemgnomevfs.c:984
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s เป็นลิงก์ที่ไม่ระบุที่อยู่ปลายทาง"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:978
+#: file-chooser/gtkfilesystemgnomevfs.c:1059
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ไม่ใช่โฟลเดอร์"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1815
+#: file-chooser/gtkfilesystemgnomevfs.c:1913
 msgid "Network Servers"
 msgstr "เซิร์ฟเวอร์ในเครือข่าย"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1831
+#: file-chooser/gtkfilesystemgnomevfs.c:1929
 msgid "File System"
 msgstr "ระบบแฟ้ม"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:2347
+#: file-chooser/gtkfilesystemgnomevfs.c:2458
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "บันทึกบุ๊กมาร์กไม่สำเร็จ (%s)"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:2895
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "อ่านข้อมูลเกี่ยวกับ '%s' ไม่สำเร็จ"
 
 #: file-chooser/testfilechooser.c:178
 #, c-format
@@ -702,7 +707,7 @@ msgstr "การจัดการวาระ"
 msgid "Show session management options"
 msgstr "แสดงตัวเลือกของการจัดการวาระ"
 
-#: libgnomeui/gnome-client.c:2582
+#: libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "เลิกออกจากระบบ"
 
@@ -912,7 +917,7 @@ msgid "Show the 'Help' button"
 msgstr "แสดงปุ่ม 'วิธีใช้'"
 
 #: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "ชื่อประจำแฟ้มเก่า"
 
@@ -930,7 +935,7 @@ msgid ""
 "list."
 msgstr "ชื่อประจำรายการแฟ้ม ใช้สำหรับบันทึกรายชื่อแฟ้มเก่าที่เคยเลือก"
 
-#: libgnomeui/gnome-file-entry.c:245 libgnomeui/gnome-icon-entry.c:188
+#: libgnomeui/gnome-file-entry.c:245 libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "ชื่อหน้าต่างเรียกดูแฟ้ม"
 
@@ -956,7 +961,7 @@ msgstr "โมดัล"
 msgid "Whether the Browse file window should be modal."
 msgstr "กำหนดว่าหน้าต่างเรียกดูแฟ้มควรเป็นหน้าต่างโมดัลหรือไม่"
 
-#: libgnomeui/gnome-file-entry.c:270 libgnomeui/gnome-icon-entry.c:204
+#: libgnomeui/gnome-file-entry.c:270 libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "ชื่อแฟ้ม"
 
@@ -1176,34 +1181,34 @@ msgstr ""
 "เกิดข้อผิดพลาดขณะเรียกใช้เว็บเบราว์เซอร์ปริยาย\n"
 "กรุณาตรวจสอบค่าตั้งของคุณในเครื่อมือปรับแต่ง 'โปรแกรมที่ชอบ'"
 
-#: libgnomeui/gnome-icon-entry.c:180
+#: libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr "ชื่อประจำรายการไอคอน ใช้สำหรับบันทึกรายชื่อไอคอนเก่าที่เคยเลือก"
 
-#: libgnomeui/gnome-icon-entry.c:189
+#: libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "ชื่อหน้าต่างเลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:196
+#: libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "โฟลเดอร์พิกซ์แมป"
 
-#: libgnomeui/gnome-icon-entry.c:197
+#: libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "โฟลเดอร์เก็บรูปไอคอน"
 
 # FIXME: What is this for?
-#: libgnomeui/gnome-icon-entry.c:205
+#: libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "ชื่อแฟ้มที่จะแสดงในรายการไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:213
+#: libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "หน้าต่างเลือก"
 
-#: libgnomeui/gnome-icon-entry.c:214
+#: libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1211,39 +1216,39 @@ msgstr ""
 "กล่องโต้ตอบสำหรับเลือกไอคอน คุณสามารถใช้คุณสมบัตินี้เพื่อเข้าใช้ GtkDialog "
 "ในกรณีที่ต้องการแก้ไขหรืออ่านพารามิเตอร์ต่างๆ"
 
-#: libgnomeui/gnome-icon-entry.c:322 libgnomeui/gnome-icon-entry.c:997
+#: libgnomeui/gnome-icon-entry.c:321 libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "ไม่มีไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:767
+#: libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "หน้าต่างเลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:768
+#: libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "สามารถใช้หน้าต่างนี้เลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:774 libgnomeui/gnome-icon-entry.c:1000
+#: libgnomeui/gnome-icon-entry.c:781 libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "ตัวเลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:775
+#: libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "กรุณาเลือกไอคอนที่ต้องการ"
 
-#: libgnomeui/gnome-icon-entry.c:1001
+#: libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "ปุ่มนี้ใช้เปิดหน้าต่างสำหรับใช้เลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:1021
+#: libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "เรียกดู"
 
-#: libgnomeui/gnome-icon-entry.c:1024
+#: libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "พาธของไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:1025
+#: libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1395,38 +1400,38 @@ msgstr "ลดย่อหน้า"
 msgid "About"
 msgstr "เกี่ยวกับ"
 
-#: libgnomeui/gnome-ui-init.c:123 libgnomeui/gnome-ui-init.c:132
+#: libgnomeui/gnome-ui-init.c:126 libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "ปิดใช้หน้าต่างแจ้งข้อขัดข้อง"
 
-#: libgnomeui/gnome-ui-init.c:125
+#: libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "X display ที่จะใช้"
 
-#: libgnomeui/gnome-ui-init.c:125
+#: libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: libgnomeui/gnome-ui-init.c:169 libgnomeui/gnome-ui-init.c:182
+#: libgnomeui/gnome-ui-init.c:172 libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Library"
 
-#: libgnomeui/gnome-ui-init.c:170
+#: libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "แสดงตัวเลือก GUI ของ GNOME"
 
-#: libgnomeui/gnome-ui-init.c:247
+#: libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
 msgstr "เปิดลิงก์ไม่สำเร็จ"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:833
+#: libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "เกิด segmentation faults หลายรายการ ไม่สามารถแสดงหน้าต่างแจ้งข้อผิดพลาด\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:848
+#: libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1435,11 +1440,11 @@ msgstr ""
 "Segmentation faults!\n"
 "ไม่สามารถแสดงหน้าต่างแจ้งข้อผิดพลาด\n"
 
-#: libgnomeui/gnome_segv.c:83
+#: libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "วีธีใช้: gnome_segv2 appname signum\n"
 
-#: libgnomeui/gnome_segv.c:136
+#: libgnomeui/gnome_segv.c:134
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
