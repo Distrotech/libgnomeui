@@ -102,6 +102,10 @@ int main(int argc, char *argv[])
       return 0;
     }
 
+  /* Give up if bug-buddy itself has aborted. */
+  if (strcmp (appname, "bug-buddy") == 0)
+    return 0;
+
   bug_buddy_path = g_find_program_in_path ("bug-buddy");
   if (bug_buddy_path != NULL)
     {
