@@ -58,10 +58,11 @@
     <releaseinfo>for libgnomeui &version;</releaseinfo>
   </bookinfo>
 
-  <chapter>
+  <part>
     <title>GNOME UI Library (libgnomeui)</title>
-    <sect1 id="initialization">
-      <title>Initialization and session management</title>
+
+    <chapter id="initialization">
+      <title>Initialization and Session Management</title>
       <para>
       This section includes functions and parameters used to initialise GNOME
       applications which use <application>libgnomeui</application> and to
@@ -77,9 +78,10 @@
       </para>
       &libgnomeui-gnome-ui-init;
       &libgnomeui-GnomeClient;
-    </sect1>
-    <sect1 id="application-mgmt">
-      <title>Application management</title>
+    </chapter>
+
+    <chapter id="application-mgmt">
+      <title>Application Management</title>
       <para>
       After initializing <application>libgnomeui</application>, a typical
       application will need to create its main application window, possibly
@@ -90,15 +92,12 @@
       &libgnomeui-GnomeApp;
       &libgnomeui-GnomeAppBar;
       &libgnomeui-gnome-app-helper;
-      &libgnomeui-gnome-window;
-      &libgnomeui-gnome-window-icon;
-      &libgnomeui-GnomeAbout;
       &libgnomeui-GnomeMultiScreen;
       &libgnomeui-GnomeAuthentication;
       &libgnomeui-GnomePassword;
-      &libgnomeui-gnome-popup-menu;
-    </sect1>
-    <sect1 id="druids">
+    </chapter>
+
+    <chapter id="druids">
       <title>Druids</title>
       <para>
       Druids (sometimes called <emphasis>Wizards</emphasis> on other systems)
@@ -120,31 +119,21 @@
       &libgnomeui-GnomeDruidPage;
       &libgnomeui-GnomeDruidPageEdge;
       &libgnomeui-GnomeDruidPageStandard;
-    </sect1>
-    <sect1 id="fixme">
+    </chapter>
+
+    <chapter id="fixme">
       <title>Miscellaneous Widgets</title>
-      &libgnomeui-GnomeColorPicker;
       &libgnomeui-GnomeDateEdit;
-      &libgnomeui-gnome-dialog-util;
-      &libgnomeui-GnomeEntry;
-      &libgnomeui-GnomeFileEntry;
-      &libgnomeui-GnomeFontPicker;
       &libgnomeui-GnomeHRef;
-      &libgnomeui-GnomeIconItem;
       &libgnomeui-GnomeIce;
       &libgnomeui-GnomeIconEntry;
-      &libgnomeui-GnomeIconList;
       &libgnomeui-GnomeIconLookup;
-      &libgnomeui-GnomeIconTheme;
       &libgnomeui-GnomeIconSelection;
-      &libgnomeui-GnomeThemeFile;
       &libgnomeui-GnomeThumbnail;
-      &libgnomeui-GnomePixmap;
-      &libgnomeui-GnomePixmapEntry;
-      &libgnomeui-GnomeScores;
-    </sect1>
-    <sect1 id="miscellaneous">
-      <title>Miscellaneous utility functions and macros</title>
+    </chapter>
+
+    <chapter id="miscellaneous">
+      <title>Miscellaneous Utility Functions and Macros</title>
       <para>
       This section collects together a number of useful auxillary functions
       that do not really fit into any other place in the hierarchy. These
@@ -156,21 +145,71 @@
       &libgnomeui-gnome-types;
       &libgnomeui-gnome-uidefs;
       &libgnomeui-gnome-vfs-util;
-    </sect1>
-    <sect1 id="deprecated">
-      <title>Deprecated modules</title>
+    </chapter>
+
+    <chapter id="deprecated">
+      <title>Deprecated Modules</title>
+      &libgnomeui-GnomeAbout;
       &libgnomeui-gnome-app-util;
+      &libgnomeui-GnomeColorPicker;
+      &libgnomeui-GnomeDialog;
+      &libgnomeui-gnome-dialog-util;
+      &libgnomeui-GnomeEntry;
+      &libgnomeui-GnomeFileEntry;
+      &libgnomeui-GnomeFontPicker;
+      &libgnomeui-GnomeIconList;
+      &libgnomeui-GnomeIconItem;
+      &libgnomeui-GnomeIconTheme;
       &libgnomeui-GnomeMDI;
       &libgnomeui-GnomeMDIChild;
       &libgnomeui-GnomeMDIGenericChild;
       &libgnomeui-gnome-mdi-session;
-      &libgnomeui-GnomeDialog;
       &libgnomeui-GnomeMessageBox;
+      &libgnomeui-GnomePixmap;
+      &libgnomeui-GnomePixmapEntry;
+      &libgnomeui-gnome-popup-menu;
       &libgnomeui-GnomePropertyBox;
-    </sect1>
-    <sect1 id="libgnomeui-objects">
+      &libgnomeui-GnomeScores;
+      &libgnomeui-GnomeThemeFile;
+      &libgnomeui-gnome-window;
+      &libgnomeui-gnome-window-icon;
+    </chapter>
+
+    <chapter id="libgnomeui-objects">
       <title>Object Hierarchy</title>
       &libgnomeui-object-index;
-    </sect1>
-  </chapter>
+    </chapter>
+  </part>
+
+  <index>
+    <title>Index</title>
+  </index>
+  <index role="deprecated">
+    <title>Index of deprecated symbols</title>
+  </index>
+  <index role="2.2">
+    <title>Index of new symbols in 2.2</title>
+  </index>
+  <index role="2.4">
+    <title>Index of new symbols in 2.4</title>
+  </index>
+  <index role="2.6">
+    <title>Index of new symbols in 2.6</title>
+  </index>
+  <index role="2.8">
+    <title>Index of new symbols in 2.8</title>
+  </index>
+  <index role="2.10">
+    <title>Index of new symbols in 2.10</title>
+  </index>
+  <index role="2.12">
+    <title>Index of new symbols in 2.12</title>
+  </index>
+  <index role="2.14">
+    <title>Index of new symbols in 2.14</title>
+  </index>
+  <index role="2.16">
+    <title>Index of new symbols in 2.16</title>
+  </index>
+
 </book>

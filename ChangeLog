@@ -1,5 +1,10 @@
 2006-09-26  Matthew Barnes  <mbarnes@redhat.com>
 
+	* doc/reference/libgnomeui-docs.sgml: Make the API documentation
+	easier to navigate (bug #357835).
+
+2006-09-26  Matthew Barnes  <mbarnes@redhat.com>
+
 	* libgnomeui/gnome_segv.c
 	(main): Give up if bug-buddy itself has aborted (bug #353760).
 
