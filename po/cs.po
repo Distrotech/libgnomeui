@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-18 13:29+0200\n"
-"PO-Revision-Date: 2006-07-18 13:31+0200\n"
+"POT-Creation-Date: 2006-10-04 17:04+0200\n"
+"PO-Revision-Date: 2006-10-04 17:06+0200\n"
 "Last-Translator: Jakub Friedl <jfriedl@suse.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -37,33 +37,38 @@ msgstr "Položka potomka 2"
 msgid "Hint for item 2"
 msgstr "Rada pro položku 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#: ../file-chooser/gtkfilesystemgnomevfs.c:973
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s je odkaz na něco, co není adresář"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#: ../file-chooser/gtkfilesystemgnomevfs.c:984
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s je odkaz bez cílového umístění"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1059
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s není adresář"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1913
 msgid "Network Servers"
 msgstr "Síťové servery"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1929
 msgid "File System"
 msgstr "Systém souborů"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2458
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ukládání záložky selhalo (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2895
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "Chyba získávání informací pro '%s'"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -707,7 +712,7 @@ msgstr "Správa sezení"
 msgid "Show session management options"
 msgstr "Zobrazit možnosti správy sezení"
 
-#: ../libgnomeui/gnome-client.c:2582
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "Zrušit odhlášení"
 
@@ -917,7 +922,7 @@ msgid "Show the 'Help' button"
 msgstr "Ukázat tlačítko 'Nápověda'"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "ID historie"
 
@@ -937,7 +942,7 @@ msgstr ""
 "Unikátní identifikátor pro výběr souboru. Bude použit pro uložení seznamu "
 "historie."
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "Nadpis dialogu probírání"
 
@@ -965,7 +970,7 @@ msgstr "Modální"
 msgid "Whether the Browse file window should be modal."
 msgstr "Jestli má být okno dialogu pro probírání modální."
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "Název souboru"
 
@@ -1191,7 +1196,7 @@ msgstr ""
 "Při pokusu o spuštění implicitního prohlížeče WWW došlo k chybě.\n"
 "Zkontrolujte prosím svá nastavení v nástroji 'Preferované aplikace'."
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1199,27 +1204,27 @@ msgstr ""
 "Unikátní identifikátor pro výběr ikony. Bude použit pro uložení seznamu "
 "historie."
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "Nadpis dialogu pro probírání ikonami."
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "Adresář obrázků"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "Adresář, ve kterém se budou hledat ikony."
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Název souboru, který by se měl zobrazovat ve výběru ikony."
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "Dialog pro výběr"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1227,39 +1232,39 @@ msgstr ""
 "Dialog pro výběr ikony. Můžete použít tento atribut, chcete-li získat prvek "
 "GtkDialog a měnit nebo zjistit jeho parametry."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
+#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "Žádná ikona"
 
-#: ../libgnomeui/gnome-icon-entry.c:767
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "Dialog výběru ikony"
 
-#: ../libgnomeui/gnome-icon-entry.c:768
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "Toto dialogové okno vám umožní vybrat ikonu."
 
-#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
+#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "Výběr ikony"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "Vyberte prosím ikonu, kterou chcete."
 
-#: ../libgnomeui/gnome-icon-entry.c:1001
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "Toto tlačítko otevře okno, ve kterém budete moci vybrat ikonu."
 
-#: ../libgnomeui/gnome-icon-entry.c:1021
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "Procházet"
 
-#: ../libgnomeui/gnome-icon-entry.c:1024
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "Cesta k ikonám"
 
-#: ../libgnomeui/gnome-icon-entry.c:1025
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1411,32 +1416,32 @@ msgstr "Ododsazení"
 msgid "About"
 msgstr "O aplikaci"
 
-#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
+#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "Zakázat dialog havárie"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "Použitý displej X"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
+#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI knihovna"
 
-#: ../libgnomeui/gnome-ui-init.c:170
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "Zobrazit možnosti GUI GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:247
+#: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
 msgstr "Nelze otevřít odkaz"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:833
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1444,7 +1449,7 @@ msgstr ""
 "dialog\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:848
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1453,54 +1458,24 @@ msgstr ""
 "Chyba Segmentation fault!\n"
 "Nemohu zobrazit dialog o havárii\n"
 
-#: ../libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"Správce sezení GNOME (proces %d) havaroval\n"
-"díky fatální chybě (%s).\n"
-"Poté, co zavřete tento dialog, budou všechny aplikace ukončeny a vaše sezení "
-"se ukončí.\n"
-"Uložte proto před zavřením tohoto dialogu všechny vaše soubory."
-
-#: ../libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "Aplikace \"%s\" neočekávaně skončila."
-
-#: ../libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "proces %d: %s"
-
-#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"Můžete vývojářům pomoci opravit to tím, že je informujete, co se stalo. Nebo "
-"můžete aplikaci hned spustit znovu."
-
-#: ../libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Použití: gnome_segv2 jménoaplikace čsignálu\n"
 
-#: ../libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "_Restartovat aplikaci"
-
-#: ../libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "_Informovat vývojáře"
-
-#: ../libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_Ladit"
+#: ../libgnomeui/gnome_segv.c:138
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>Aplikace %s spadla.</b>\n"
+"\n"
+"Nenainstalovali jste však <b>bug-buddy</b>, GNOME\n"
+"nástroj pro hlášení chyb. Pokud nám chcete pomoci\n"
+"vylepšit GNOME, nainstalujte ho prosím.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
