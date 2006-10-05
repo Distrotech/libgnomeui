@@ -1,0 +1,81 @@
+<!-- ##### SECTION Title ##### -->
+GnomeMultiScreen
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gnome_url_show_on_screen ##### -->
+<para>
+
+</para>
+
+@url: 
+@screen: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_help_display_on_screen ##### -->
+<para>
+
+</para>
+
+@file_name: 
+@link_id: 
+@screen: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_help_display_with_doc_id_on_screen ##### -->
+<para>
+
+</para>
+
+@program: 
+@doc_id: 
+@file_name: 
+@link_id: 
+@screen: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_help_display_desktop_on_screen ##### -->
+<para>
+
+</para>
+
+@program: 
+@doc_id: 
+@file_name: 
+@link_id: 
+@screen: 
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_help_display_uri_on_screen ##### -->
+<para>
+
+</para>
+
+@help_uri: 
+@screen: 
+@error: 
+@Returns: 
+
+
