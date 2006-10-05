@@ -959,7 +959,7 @@ get_desktop_link_uri (const char *desktop_uri,
 
   desktop_file = g_key_file_new ();
   
-  ret = gnome_vfs_read_entire_file (desktop_uri, tmpsize, &tmp);
+  ret = gnome_vfs_read_entire_file (desktop_uri, &tmpsize, &tmp);
   if (ret != GNOME_VFS_OK)
     return NULL;
 
@@ -2985,7 +2985,7 @@ info_from_vfs_info (GtkFileSystemGnomeVFS  *system_vfs,
       gchar *tmp;
       int tmpsize;
 
-      ret = gnome_vfs_read_entire_file (uri, tmpsize, &tmp);
+      ret = gnome_vfs_read_entire_file (uri, &tmpsize, &tmp);
 
       if (ret == GNOME_VFS_OK)
       {
