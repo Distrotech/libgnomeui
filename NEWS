@@ -1,3 +1,12 @@
+libgnomeui 2.16.1
+-----------------
+
+* Make network browsing work in the file chooser (Jan de Groot)
+* Remove some unused code (Kjartan)
+* Fix a deadlock and other stuff in the file chooser (Matthias, Kris)
+* API doc fixes (Matthew Barnes)
+* Handle bug-buddy aborting better in gnome_segv (Matthew)
+
 libgnomeui 2.16.0
 ------------------
 
