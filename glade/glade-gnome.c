@@ -465,8 +465,6 @@ druid_page_edge_new (GladeXML *xml, GType widget_type,
     int i;
 
     const char *title, *text;
-    const char *text_color;
-    const char *logo_bg_color, *textbox_color;
     char *filename;
     GdkPixbuf *logo, *watermark, *top_watermark;
 

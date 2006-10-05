@@ -1,3 +1,12 @@
+2006-10-05  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c: (get_desktop_link_uri),
+	(gtk_file_folder_gnome_vfs_get_info), (info_from_vfs_info):
+	Fix for bug #358638 - network browsing doesn't work. Patch from
+	Jan de Groot.
+	* glade/glade-gnome.c: (druid_page_edge_new): Remove more unused
+	bits.
+
 2006-09-26  Matthew Barnes  <mbarnes@redhat.com>
 
 	* doc/reference/libgnomeui-docs.sgml: Make the API documentation
