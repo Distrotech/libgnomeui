@@ -1009,17 +1009,17 @@ get_desktop_link_uri (const char *desktop_uri,
   GKeyFile *desktop_file;
   char *ditem_url;
   char *tmp;
+  int tmpsize;
 
   ditem_url = NULL;
 
-  /* FIXME: this doesn't work for SMB!  Gnome-VFS produces fake .desktop files
-   * which must be read with gnome-vfs operations, not
-   * g_key_file_load_from_file().
-   */
-
   desktop_file = g_key_file_new ();
-  tmp = gnome_vfs_get_local_path_from_uri (desktop_uri);
-  ret = g_key_file_load_from_file (desktop_file, tmp,
+
+  ret = gnome_vfs_read_entire_file (desktop_uri, tmpsize, &tmp);
+  if (ret != GNOME_VFS_OK)
+    return NULL;
+
+  ret = g_key_file_load_from_data (desktop_file, tmp, strlen(tmp),
 				   G_KEY_FILE_KEEP_TRANSLATIONS, error);
   g_free (tmp);
 
@@ -2992,16 +2992,17 @@ info_from_vfs_info (GtkFileSystemGnomeVFS  *system_vfs,
     {
       gboolean ret;
       gchar *tmp;
+      int tmpsize;
 
-      /* FIXME!!! desktop files must be read with gnome-vfs, since e.g. SMB generates
-       * fake .desktop files!
-       */
+      ret = gnome_vfs_read_entire_file (uri, tmpsize, &tmp);
 
-      tmp = gnome_vfs_get_local_path_from_uri (uri);
-      desktop_file = g_key_file_new ();
-      ret = g_key_file_load_from_file (desktop_file, tmp,
-				       G_KEY_FILE_KEEP_TRANSLATIONS, error);
-      g_free (tmp);
+      if (ret == GNOME_VFS_OK)
+      {
+        desktop_file = g_key_file_new ();
+        ret = g_key_file_load_from_data (desktop_file, tmp, strlen(tmp),
+					 G_KEY_FILE_KEEP_TRANSLATIONS, error);
+        g_free (tmp);
+      }
     }
 
   /* Display name */
