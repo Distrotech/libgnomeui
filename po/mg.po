@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: LIBGNOMEUI VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-09-11 08:39+0200\n"
-"PO-Revision-Date: 2006-09-21 23:08+0300\n"
-"Last-Translator: Fano Rajaonarisoa <fano@isvtec.com>\n"
+"PO-Revision-Date: 2006-10-06 22:54+0300\n"
+"Last-Translator: Fanomezana Rajaonarisoa <fano@isvtec.com>\n"
 "Language-Team: MALAGASY <i18n-malagasy-gnome@gna.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -972,455 +972,460 @@ msgid "Whether the file entry is being used to enter directory names or complete
 msgstr "Raha ampiasaina anoratana anaran-dahatahiry na anaran-drakitra feno ny banga amin'ilay rakitra."
 
 #: ../libgnomeui/gnome-file-entry.c:262
+#, fuzzy
 msgid "Modal"
-msgstr ""
+msgstr "Modal"
 
 #: ../libgnomeui/gnome-file-entry.c:263
 msgid "Whether the Browse file window should be modal."
-msgstr ""
+msgstr "Raha tokony ho modal ny takila fizahana rakitra."
 
 #: ../libgnomeui/gnome-file-entry.c:270
 #: ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
-msgstr ""
+msgstr "Anaran-drakitra"
 
 #: ../libgnomeui/gnome-file-entry.c:271
 msgid "Filename that should be displayed in the file entry."
-msgstr ""
+msgstr "Ny anarana tokony haseho miaraka amin'ilay rakitra."
 
 #: ../libgnomeui/gnome-file-entry.c:279
 msgid "Default Path"
-msgstr ""
+msgstr "Sori-dàlana lasitra"
 
 #: ../libgnomeui/gnome-file-entry.c:280
 msgid "Default path for the Browse file window."
-msgstr ""
+msgstr "Sori-dàlana lasitry ny takila fizahana rakitra."
 
 #: ../libgnomeui/gnome-file-entry.c:287
 msgid "GnomeEntry"
-msgstr ""
+msgstr "GnomeEntry"
 
 #: ../libgnomeui/gnome-file-entry.c:288
 msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
-msgstr ""
+msgstr "Ny GnomeEntry ampiasain'ny rakitra hanoratana anaran-drakitra.  Azonao ampiasaina hangalana ny GnomeEntry io toetoetra io raha  mila manova na mila fanazavana mikasika ny mpizahany ianao."
 
 #: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
-msgstr ""
+msgstr "GtkEntry"
 
 #: ../libgnomeui/gnome-file-entry.c:299
 msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
-msgstr ""
+msgstr "GtkEntry ampiasain'ny rakitra hanoratana anaran-drakitra.  Azonao ampiasaina hangalana ny GtkEntry io toetoetra io raha mila manova na mila fanazavana mikasika ny mpizahany ianao."
 
 #: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
-msgstr ""
+msgstr "Hampiasa ny GtkFileChooser"
 
 #: ../libgnomeui/gnome-file-entry.c:310
 msgid "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget to select files."
-msgstr ""
+msgstr "Raha toa ka hampiasa ny GtkFileChooser na ny GtkFileSelection rehefa hamaritra rakitra."
 
 #: ../libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
-msgstr ""
+msgstr "Asa mifandraika amin'ny GtkFileChooser"
 
 #: ../libgnomeui/gnome-file-entry.c:320
 msgid "The type of operation that the file selector is performing."
-msgstr ""
+msgstr "Ny karazan'asa ataon'ilay mpamaritra rakitra."
 
 #: ../libgnomeui/gnome-file-entry.c:651
 #: ../libgnomeui/gnome-file-entry.c:688
 msgid "Select file"
-msgstr ""
+msgstr "Hamaritra rakitra"
 
 #: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
-msgstr ""
+msgstr "Sori-dàlana"
 
 #: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
-msgstr ""
+msgstr "Ny sori-dàlana mankany amin'ilay rakitra"
 
 #: ../libgnomeui/gnome-file-entry.c:841
 msgid "_Browse..."
-msgstr ""
+msgstr "_Zahavo..."
 
 #: ../libgnomeui/gnome-file-entry.c:842
 msgid "Pop up a file selector to choose a file"
-msgstr ""
+msgstr "Manokatra takila fisafidiana rakitra"
 
 #: ../libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
-msgstr ""
+msgstr "sans 12"
 
 #: ../libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
 #: ../libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
-msgstr ""
+msgstr "Misafidiana endri-tsoratra iray"
 
 #: ../libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr ""
+msgstr "Ny lohatenin'ilay takila fisafidianana"
 
 #: ../libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
-msgstr ""
+msgstr "Fomba"
 
 #: ../libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
-msgstr ""
+msgstr "Ny fomba arahin'ilay mpisafidy endri-tsoratra"
 
 #: ../libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
-msgstr ""
+msgstr "Anaran'endri-tsoratra"
 
 #: ../libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr ""
+msgstr "Anaran'ilay endri-tsoratra nosafidiana"
 
 #: ../libgnomeui/gnome-font-picker.c:184
 #: ../libgnomeui/gnome-font-picker.c:979
 msgid "Font"
-msgstr ""
+msgstr "Endri-tsoratra"
 
 #: ../libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr ""
+msgstr "Ny endri-tsoratra GtkFont nosafidiana"
 
 #: ../libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr ""
+msgstr "Soratra ohatra"
 
 #: ../libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr ""
+msgstr "Soratra ohatra miseho anatin'ilay takila"
 
 #: ../libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr ""
+msgstr "Ampiasao amin'ny mari-tsoratra"
 
 #: ../libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr ""
+msgstr "Mampiasa ilay endri-tsoratra amin'ny mari-tsoratra (fomba lazan'endri-tsoratra)"
 
 #: ../libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr ""
+msgstr "Haben'ny endri-tsoratry ny mari-tsoratra"
 
 #: ../libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr ""
+msgstr "Ny haben'ny endri-tsoratry ny mari-tsoratra (fomba lazan'endri-tsoratra)"
 
 #: ../libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr ""
+msgstr "Asehoy ny habeny"
 
 #: ../libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr ""
+msgstr "Mampiseho ny habeny (fomba lazan'endri-tsoratra)"
 
 #: ../libgnomeui/gnome-gconf-ui.c:61
+#, fuzzy
 msgid "GNOME GConf UI Support"
-msgstr ""
+msgstr "Fandraisana an-tànana UI GConfn'ny GNOME"
 
 #: ../libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr ""
+msgstr "_Antsipiriany"
 
 #: ../libgnomeui/gnome-gconf-ui.c:171
 #, c-format
 msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
-msgstr ""
+msgstr "Ny rindranasa \"%s\" dia nanandrana nanova zavatra tanatin'ny kirakiran'ny rafitrao izay tsy avelan'ny mpitantana ny rafitrao na ny mpivarotra ny solosainao ovaina. Mety tsy hihatra na tsy hiverina amin'ny laoniny ny sasany amin'ireo safidy nofaritanao teo rehefa mandefa ilay rindranasa amin'ny manaraka ianao."
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
 msgid "An error occurred while loading or saving configuration information for %s. Some of your configuration settings may not work properly."
-msgstr ""
+msgstr "nisy olana teo am-pakana na teo am-pandraiketana ny lazan-kirakiran'ny %s. Mety tsy handeha araka ny tokony ho izy ny rindran'ny kirakiranao sasany."
 
 #: ../libgnomeui/gnome-href.c:123
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: ../libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
-msgstr ""
+msgstr "Ny URL alefan'ny GnomeHRef"
 
 #: ../libgnomeui/gnome-href.c:131
 msgid "Text"
-msgstr ""
+msgstr "Soratra"
 
 #: ../libgnomeui/gnome-href.c:132
 msgid "The text on the button"
-msgstr ""
+msgstr "Ny soratra eo amin'ilay tsindry"
 
 #: ../libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
-msgstr ""
+msgstr "Fongory ny hanohanana maneran-tany"
 
 #: ../libgnomeui/gnome-href.c:139
 msgid "Link color"
-msgstr ""
+msgstr "Lokon'ny rohy"
 
 #: ../libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
-msgstr ""
+msgstr "Ny loko ampiasaina hanoritana ilay rohy"
 
 #: ../libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
-msgstr ""
+msgstr "Hitondra anao mankany amin'ny URI miseho eo ity tsindry ity."
 
 #: ../libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
+"Nisy olana teo am-panandramana mandefa ny mpitety tranonkala lasitra.\n"
+"Jereo ny rindran'ny mpitetinao ao amin'ny famaritana safidy manokana\n"
+"'Rindranasa safidy'."
 
 #: ../libgnomeui/gnome-icon-entry.c:179
 msgid "Unique identifier for the icon entry.  This will be used to save the history list."
-msgstr ""
+msgstr "Famantarana tokana ho an'ny lazan'ilay kisary. Hampiasaina handraiketana ny lisitry ny diary izy io."
 
 #: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
-msgstr ""
+msgstr "Lohatenin'ny takilan'ny fizahana kisary."
 
 #: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
-msgstr ""
+msgstr "Lahatahirin'ny pixmap"
 
 #: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
-msgstr ""
+msgstr "Ny lahatahiry hizahana kisary."
 
 #: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
-msgstr ""
+msgstr "Ny anaran-drakitra tokony haseho eo amin'ilay kisary."
 
 #: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
-msgstr ""
+msgstr "Takilan'ny fisafidianana"
 
 #: ../libgnomeui/gnome-icon-entry.c:213
 msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
-msgstr ""
+msgstr "Takilan'ny fisafidianana kisary. Azonao ampiasaina hangalana ny GtkDialog io toetoetra io raha mila manova na mila fanazavana mikasika ny mpizahany ianao."
 
 #: ../libgnomeui/gnome-icon-entry.c:321
 #: ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
-msgstr ""
+msgstr "Tsy misy kisary"
 
 #: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
-msgstr ""
+msgstr "Takila fisafidianana kisary"
 
 #: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "Mamela anao hisafidy kisary ity takila ity."
 
 #: ../libgnomeui/gnome-icon-entry.c:781
 #: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
-msgstr ""
+msgstr "Mpisafidy kisary"
 
 #: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "Safidio ny kisary ilainao."
 
 #: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "Hanokatra takila ahafahanao misafidy kisary ity tsindry ity."
 
 #: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
-msgstr ""
+msgstr "Zahavo"
 
 #: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
-msgstr ""
+msgstr "Sori-dàlan'ny kisary"
 
 #: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Here you should enter the name of the directory where icon images are located."
-msgstr ""
+msgstr "Tokony soratanao eto ny anaran'ilay lahatahiry misy ny kisary."
 
 #: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
-msgstr ""
+msgstr "GnomeIconSelection: tsy misy na tsy lahatahiry ny '%s'"
 
 #: ../libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr ""
+msgstr "GnomeIconSelection: tsy nahasokatra ny '%s'"
 
 #: ../libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
-msgstr ""
+msgstr "Maka ireo kisary..."
 
 #: ../libgnomeui/gnome-messagebox.c:107
 msgid "Information"
-msgstr ""
+msgstr "Fampahalalana"
 
 #: ../libgnomeui/gnome-messagebox.c:112
 msgid "Warning"
-msgstr ""
+msgstr "Fampilazana"
 
 #: ../libgnomeui/gnome-messagebox.c:118
 msgid "Error"
-msgstr ""
+msgstr "Tsy fetezana"
 
 #: ../libgnomeui/gnome-messagebox.c:124
 msgid "Question"
-msgstr ""
+msgstr "Fanontaniana"
 
 #: ../libgnomeui/gnome-messagebox.c:129
 msgid "Message"
-msgstr ""
+msgstr "Hafatra"
 
 #: ../libgnomeui/gnome-password-dialog.c:265
 msgid "_Username:"
-msgstr ""
+msgstr "_Anaran'ny mpampiasa:"
 
 #: ../libgnomeui/gnome-password-dialog.c:267
 msgid "_Domain:"
-msgstr ""
+msgstr "_Domena:"
 
 #: ../libgnomeui/gnome-password-dialog.c:269
 msgid "_Password:"
-msgstr ""
+msgstr "_Teny fanalahidy:"
 
 #: ../libgnomeui/gnome-password-dialog.c:342
 msgid "Co_nnect"
-msgstr ""
+msgstr "_Hifandray"
 
 #: ../libgnomeui/gnome-password-dialog.c:364
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "_Fifandraisana tsy ahafantarana ny tena"
 
 #: ../libgnomeui/gnome-password-dialog.c:369
 msgid "Connect as u_ser:"
-msgstr ""
+msgstr "Hifandray amin'ny maha-mpa_piasa:"
 
 #: ../libgnomeui/gnome-password-dialog.c:467
 msgid "_Remember password for this session"
-msgstr ""
+msgstr "_Tadidio ny teny fanalahidin'ity session ity"
 
 #: ../libgnomeui/gnome-password-dialog.c:469
 msgid "Save password in _keyring"
-msgstr ""
+msgstr "Raiketo ao amin'ny _rojom-panalahidy"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
-msgstr ""
+msgstr "Manoza topimaso"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
-msgstr ""
+msgstr "Raha tokony asiana topimaso ny lazan'ny pixmap."
 
 #: ../libgnomeui/gnome-pixmap-entry.c:189
 #: ../libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
-msgstr ""
+msgstr "Tsy misy sarys"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
-msgstr ""
+msgstr "Topimason'ilay sary"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
-msgstr ""
+msgstr "Topimason'ny sary voafaritra"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:416
 msgid "Can't find an hbox, using a normal file selection"
-msgstr ""
+msgstr "Tsy mahita hbox. Hanao famaritana rakitra tsotra"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:422
 msgid "Preview"
-msgstr ""
+msgstr "Topimaso"
 
 #: ../libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
-msgstr ""
+msgstr "Ireo folo voalohanys"
 
 #: ../libgnomeui/gnome-scores.c:91
 msgid "User"
-msgstr ""
+msgstr "Mpampiasa"
 
 #: ../libgnomeui/gnome-scores.c:94
 msgid "Score"
-msgstr ""
+msgstr "Isa"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
 #: ../libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
-msgstr ""
+msgstr "%a %d %b %Y, %T"
 
 #: ../libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
-msgstr ""
+msgstr "Sans 14"
 
 #: ../libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
-msgstr ""
+msgstr "Sisin'ny fafana"
 
 #: ../libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
-msgstr ""
+msgstr "Lokon'ny atin'ny fafana"
 
 #: ../libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
-msgstr ""
+msgstr "Lisitra misy ny puce"
 
 #: ../libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
-msgstr ""
+msgstr "Lisitra misy ny isa"
 
 #: ../libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
-msgstr ""
+msgstr "Ahatao"
 
 #: ../libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
-msgstr ""
+msgstr "Aza ahataka"
 
 #: ../libgnomeui/gnome-stock-icons.c:145
 msgid "About"
-msgstr ""
+msgstr "Mombamomba"
 
 #: ../libgnomeui/gnome-ui-init.c:126
 #: ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "Atsaharo ny takila filazana fijanonana tampoka"
 
 #: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
-msgstr ""
+msgstr "Seho X ampiasaina"
 
 #: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
-msgstr ""
+msgstr "SEHO"
 
 #: ../libgnomeui/gnome-ui-init.c:172
 #: ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
-msgstr ""
+msgstr "Tahirim-boky GUIn'ny GNOME"
 
 #: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
-msgstr ""
+msgstr "Maneho ny safidin'ny GUIn'ny GNOME"
 
 #: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
-msgstr ""
+msgstr "Tsy nahasokatra ilay rohy"
 
 #. dialog display isn't working out
 #: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
+msgstr "Nisy olana mahakasika ny fanakantsanana maro nitranga; tsy afaka maneho ny takila filazana tsy fetezana\n"
 
 #. Eeeek! Can't show dialog
 #: ../libgnomeui/gnome-ui-init.c:851
@@ -1429,10 +1434,12 @@ msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
+"Olana amin'ny fanakantsanana!\n"
+"Tsy afaka maneho ny takila filazana fijanonana tampoka\n"
 
 #: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
-msgstr ""
+msgstr "Fampiasa: gnome_segv2 anar-rindranasa lah-fambara\n"
 
 #: ../libgnomeui/gnome_segv.c:134
 #, c-format
@@ -1443,7 +1450,12 @@ msgid ""
 "GNOME crash report tool. If you want to help us\n"
 "to make GNOME better, please, install it\n"
 msgstr ""
+"<b>Nijanona tampoka ny rindranasa %s.</b>\n"
+"\n"
+"Tsy napetrakao anefa ny <b>bug-buddy</b>, ilay\n"
+"fitaovana fitaterana kileman'ny GNOME. Apetrao izy io\n"
+"mba ahafahana mampivoatra ny GNOME\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
-msgstr ""
+msgstr "Hanajanona ny fitsapana"
