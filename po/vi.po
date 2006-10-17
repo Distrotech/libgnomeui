@@ -7,10 +7,10 @@
 # 
 msgid ""
 ""
-msgstr "Project-Id-Version: libgnomeui 2.11.3 Gnome HEAD\n"
+msgstr "Project-Id-Version: libgnomeui 2.16.0 Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-19 03:54+0200\n"
-"PO-Revision-Date: 2006-08-19 17:38+0930\n"
+"POT-Creation-Date: 2006-10-17 09:12+0200\n"
+"PO-Revision-Date: 2006-10-17 22:17+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -35,33 +35,38 @@ msgstr "Mục con 2"
 msgid "Hint for item 2"
 msgstr "Mẹo cho mục 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:929
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s là liên kết đến cái gì không phải là thư mục"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:940
+#: ../file-chooser/gtkfilesystemgnomevfs.c:989
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s là liên kết không có địa chỉ đích"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1015
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s không phải là thư mục"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1844
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1918
 msgid "Network Servers"
 msgstr "Máy phục vụ mạng"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1860
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1934
 msgid "File System"
 msgstr "Hệ thống tập tin"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2389
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2463
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Lỗi lưu đánh dấu (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2900
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "Lỗi lấy thông tin về « %s »"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -807,7 +812,8 @@ msgstr "Chọn giờ từ danh sách"
 
 #: ../libgnomeui/gnome-dateedit.c:1015
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "« gnome_date_edit_get_date » bị phản đối, hãy dùng « gnome_date_edit_get_time »"
+msgstr "« gnome_date_edit_get_date » bị phản đối, hãy dùng « "
+"gnome_date_edit_get_time »"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:121
 #: ../libgnomeui/gnome-font-picker.c:155
@@ -936,7 +942,7 @@ msgstr "Hiện nút « Trợ giúp »"
 #: ../libgnomeui/gnome-entry.c:193
 #: ../libgnomeui/gnome-entry.c:194
 #: ../libgnomeui/gnome-file-entry.c:236
-#: ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "ID lịch sử"
 
@@ -952,10 +958,11 @@ msgstr "Mục nhập GTK"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr "Đồ nhận diện duy nhất cho mục nhập tập tin. Nó sẽ được dùng để lưu danh sách lịch sử."
+msgstr "Đồ nhận diện duy nhất cho mục nhập tập tin. Nó sẽ được dùng để lưu danh sách "
+"lịch sử."
 
 #: ../libgnomeui/gnome-file-entry.c:245
-#: ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "Tựa thoại duyệt"
 
@@ -982,7 +989,7 @@ msgid "Whether the Browse file window should be modal."
 msgstr "Cửa sổ duyệt tập tin có nên là cách thức (cần thiết đáp) hay không."
 
 #: ../libgnomeui/gnome-file-entry.c:270
-#: ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "Tên tập tin"
 
@@ -1008,7 +1015,9 @@ msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
-msgstr "GnomeEntry mà mục nhập tập tin dùng để nhập tên tập tin. Bạn có khả năng dùng tài sản này để được GnomeEntry nếu bạn cần sửa đổi hay truy vấn tham số nào của nó."
+msgstr "GnomeEntry mà mục nhập tập tin dùng để nhập tên tập tin. Bạn có khả năng "
+"dùng tài sản này để được GnomeEntry nếu bạn cần sửa đổi hay truy vấn tham số "
+"nào của nó."
 
 # Name: don't translate / Tên: đừng dịch
 #: ../libgnomeui/gnome-file-entry.c:298
@@ -1020,7 +1029,9 @@ msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
-msgstr "GtkEntry mà mục nhập tập tin dùng để nhập tên tập tin. Bạn có khả năng dùng tài sản này để được GtkEntry nếu bạn cần sửa đổi hay truy vấn tham số nào của nó."
+msgstr "GtkEntry mà mục nhập tập tin dùng để nhập tên tập tin. Bạn có khả năng dùng "
+"tài sản này để được GtkEntry nếu bạn cần sửa đổi hay truy vấn tham số nào "
+"của nó."
 
 #: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
@@ -1030,7 +1041,8 @@ msgstr "Dùng GtkFileChooser"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr "Dùng ô điều khiển GtkFileChooser mới hay dùng ô điều khiển GtkFileSelection để chọn tập tin."
+msgstr "Dùng ô điều khiển GtkFileChooser mới hay dùng ô điều khiển GtkFileSelection "
+"để chọn tập tin."
 
 #: ../libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
@@ -1149,14 +1161,18 @@ msgid ""
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr "Ứng dụng « %s » đã thử thay đổi một thực thể của cấu hình mà nhà quản trị hệ thống hay nhà phân phối hệ điều hành không cho phép thay đổi. Một số thiết lập bạn chọn có thể không có tác dụng, hay không được khôi phục khi bạn dùng ứng dụng vào lần sau."
+msgstr "Ứng dụng « %s » đã thử thay đổi một thực thể của cấu hình mà nhà quản trị hệ "
+"thống hay nhà phân phối hệ điều hành không cho phép thay đổi. Một số thiết "
+"lập bạn chọn có thể không có tác dụng, hay không được khôi phục khi bạn dùng "
+"ứng dụng vào lần sau."
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
-msgstr "Gặp lỗi khi tải hoặc lưu thông tin cấu hình cho %s. Một vài thiết lập cấu hình có thể không làm việc chính xác."
+msgstr "Gặp lỗi khi tải hoặc lưu thông tin cấu hình cho %s. Một vài thiết lập cấu "
+"hình có thể không làm việc chính xác."
 
 #: ../libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1195,75 +1211,78 @@ msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr "Gặp lỗi khi thử khởi chạy trình duyệt Mạng mặc định.\n"
-"Hãy xem lại các thiết lập trong phần « Các ứng dụng ưa thích » của công cụ tùy thích."
+"Hãy xem lại các thiết lập trong phần « Các ứng dụng ưa thích » của công cụ "
+"tùy thích."
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr "Đồ nhận diện duy nhất cho mục nhập biểu tượng. Nó sẽ được dùng để lưu danh sách lịch sử."
+msgstr "Đồ nhận diện duy nhất cho mục nhập biểu tượng. Nó sẽ được dùng để lưu danh "
+"sách lịch sử."
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "Tựa cho đối thoại « Duyệt biểu tượng »."
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "Thư mục Pixmap"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "Thư mục nơi sẽ tìm các biểu tượng."
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Tên tập tin nên được hiển thị trong mục nhập biểu tượng."
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "Thoại kén"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
-msgstr "Đối thoại chọn biểu tượng. Bạn có khả năng dùng tài sản này để được GtkDialog nếu bạn cần sửa đổi hay truy vấn tham số nào của nó."
+msgstr "Đối thoại chọn biểu tượng. Bạn có khả năng dùng tài sản này để được "
+"GtkDialog nếu bạn cần sửa đổi hay truy vấn tham số nào của nó."
 
-#: ../libgnomeui/gnome-icon-entry.c:322
-#: ../libgnomeui/gnome-icon-entry.c:1005
+#: ../libgnomeui/gnome-icon-entry.c:321
+#: ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "Không biểu tượng"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "Thoại chọn biểu tượng"
 
-#: ../libgnomeui/gnome-icon-entry.c:776
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "Hộp thoại này để bạn chọn biểu tượng."
 
-#: ../libgnomeui/gnome-icon-entry.c:782
-#: ../libgnomeui/gnome-icon-entry.c:1008
+#: ../libgnomeui/gnome-icon-entry.c:781
+#: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "Bộ chọn biểu tượng"
 
-#: ../libgnomeui/gnome-icon-entry.c:783
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "Hãy chọn biểu tượng bạn muốn."
 
-#: ../libgnomeui/gnome-icon-entry.c:1009
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "Cãi nút này sẽ mở một cửa sổ để bạn chọn biểu tượng."
 
-#: ../libgnomeui/gnome-icon-entry.c:1029
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "Duyệt"
 
-#: ../libgnomeui/gnome-icon-entry.c:1032
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "Đường dẫn tới biểu tượng"
 
-#: ../libgnomeui/gnome-icon-entry.c:1033
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1416,40 +1435,40 @@ msgstr "Bỏ thụt lề"
 msgid "About"
 msgstr "Giới thiệu"
 
-#: ../libgnomeui/gnome-ui-init.c:123
-#: ../libgnomeui/gnome-ui-init.c:132
+#: ../libgnomeui/gnome-ui-init.c:126
+#: ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "Tắt hộp thoại chạy hỏng"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "Bộ trình bày X cần dùng"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "BỘ TRÌNH BÀY"
 
-#: ../libgnomeui/gnome-ui-init.c:169
-#: ../libgnomeui/gnome-ui-init.c:182
+#: ../libgnomeui/gnome-ui-init.c:172
+#: ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "Thư viện giao diện người dùng đồ họa của GNOME."
 
-#: ../libgnomeui/gnome-ui-init.c:170
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "Hiện các tùy chọn giao diện người dùng đồ họa GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:247
+#: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
 msgstr "Không thể mở liên kết"
 
 #.dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:833
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Gặp nhiều lỗi chia ra từng đoạn; không thể hiển thị hộp thoại lỗi\n"
 
 #.Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:848
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1461,7 +1480,7 @@ msgstr "Gặp lỗi chia ra từng đoạn.\n"
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Cách sử dụng: gnome_segv tên_ứng_dụng signum\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:138
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
