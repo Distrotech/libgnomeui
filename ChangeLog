@@ -1,5 +1,10 @@
 2006-10-23  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-app-helper.h: Add #include <bonobo/bonobo-i18n.h>
+	Closes bug #143336.
+
+2006-10-23  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-file-entry.c:
 	(gnome_file_entry_set_default_path): Fix build on Hurd.
 	Closes bug #110039. Patch from Christian Marillat.

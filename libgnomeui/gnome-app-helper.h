@@ -40,6 +40,7 @@
 
 #include <gtk/gtkstatusbar.h>
 
+#include <bonobo/bonobo-i18n.h>
 #include <libgnomeui/gnome-appbar.h>
 #include <libgnomeui/gnome-app.h>
 
