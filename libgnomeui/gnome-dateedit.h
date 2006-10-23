@@ -26,6 +26,7 @@
 #ifndef __GNOME_DATE_EDIT_H_
 #define __GNOME_DATE_EDIT_H_ 
 
+#include <time.h>
 #include <gtk/gtkhbox.h>
 
  
