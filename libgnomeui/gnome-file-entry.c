@@ -1003,12 +1003,21 @@ gnome_file_entry_set_title (GnomeFileEntry *fentry, const char *browse_dialog_ti
 void
 gnome_file_entry_set_default_path(GnomeFileEntry *fentry, const char *path)
 {
+#ifdef MAXPATHLEN
 	char rpath[MAXPATHLEN+1];
+#else
+	char *rpath;
+#endif
 	char *p;
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
 
+#ifdef MAXPATHLEN
 	if(path && realpath(path, rpath))
+#else
+	rpath = realpath(path, NULL);
+	if(path && rpath)
+#endif
 		p = g_strdup(rpath);
 	else
 		p = NULL;

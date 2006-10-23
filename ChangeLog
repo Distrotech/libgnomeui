@@ -1,5 +1,11 @@
 2006-10-23  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-file-entry.c:
+	(gnome_file_entry_set_default_path): Fix build on Hurd.
+	Closes bug #110039. Patch from Christian Marillat.
+
+2006-10-23  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-dateedit.h: Add #include <time.h>
 	Closes bug #361362.
 
