@@ -136,9 +136,10 @@ int main(int argc, char *argv[])
       dialog = gtk_message_dialog_new_with_markup (NULL, GTK_DIALOG_MODAL, 
 		                                   GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE,
 						   _("<b>The application %s has crashed.</b>\n\n"
-						    "However you don't have installed <b>bug-buddy</b>, the\n"
-						    "GNOME crash report tool. If you want to help us\n"
-						    "to make GNOME better, please, install it\n"), appname);
+						    "Please install <b>bug-buddy</b>, the\n"
+						    "GNOME crash report tool, which enables you\n"
+						    "to send the developers detailed information\n"
+						    "about the error.\n"), appname);
       gtk_dialog_run (GTK_DIALOG (dialog));
     }
       
