@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-03 08:52+0300\n"
-"PO-Revision-Date: 2006-09-03 08:53+0300\n"
+"POT-Creation-Date: 2006-11-16 08:13+0300\n"
+"PO-Revision-Date: 2006-11-16 08:17+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -35,35 +35,35 @@ msgstr "Lapsikohta 2"
 msgid "Hint for item 2"
 msgstr "Kohdan 2 vinkki"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:972
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s on linkki sijaintiin, joka ei ole kansio"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:983
+#: ../file-chooser/gtkfilesystemgnomevfs.c:989
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s on linkki, jonka kohde ei ole olemassa"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ei ole kansio"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1918
 msgid "Network Servers"
 msgstr "Verkkopalvelimet"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1934
 msgid "File System"
 msgstr "Tiedostojärjestelmä"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2463
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Kirjanmerkin tallentaminen epäonnistui (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2900
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Virhe haettaessa tietoja kohteelle \"%s\""
@@ -194,7 +194,7 @@ msgid "About %s"
 msgstr "Tietoja ohjelmasta %s"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:552
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tiedosto"
@@ -203,7 +203,7 @@ msgstr "_Tiedosto"
 msgid "_File/"
 msgstr "_Tiedosto/"
 
-#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:555
 msgid "_Edit"
 msgstr "_Muokkaa"
 
@@ -211,7 +211,7 @@ msgstr "_Muokkaa"
 msgid "_Edit/"
 msgstr "_Muokkaa/"
 
-#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:558
 msgid "_View"
 msgstr "_Näytä"
 
@@ -219,7 +219,7 @@ msgstr "_Näytä"
 msgid "_View/"
 msgstr "_Näytä/"
 
-#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:561
 msgid "_Settings"
 msgstr "_Asetukset"
 
@@ -228,7 +228,7 @@ msgid "_Settings/"
 msgstr "_Asetukset/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:327
 msgid "_New"
 msgstr "_Uusi"
 
@@ -236,7 +236,7 @@ msgstr "_Uusi"
 msgid "_New/"
 msgstr "_Uusi/"
 
-#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:564
 msgid "Fi_les"
 msgstr "Tie_dostot"
 
@@ -244,15 +244,15 @@ msgstr "Tie_dostot"
 msgid "Fi_les/"
 msgstr "Tie_dostot/"
 
-#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:567
 msgid "_Windows"
 msgstr "_Ikkunat"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:573
 msgid "_Game"
 msgstr "_Peli"
 
-#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:570
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "O_hje"
@@ -1461,20 +1461,21 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Käyttö: gnome_segv2 sovellus signaali\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:138
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>Sovellus %s kaatui.</b>\n"
 "\n"
-"Ohjelmaa <b>bug-buddy</b>, jota Gnome käyttää vikaraporttien luontiin, ei "
-"ole asennettu. Asenna se, jos haluat lähettää vikaraportteja ja auttaa "
-"Gnomen kehitystyötä.\n"
+"Asenna Gnomen vianilmoitustyökalu <b>bug-buddy</b>, "
+"jolla voit lähettää virheistä yksityiskohtaiset "
+"vianetsintätiedot.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
