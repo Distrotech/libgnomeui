@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-03 03:24+0200\n"
-"PO-Revision-Date: 2006-09-03 05:30+0100\n"
+"POT-Creation-Date: 2006-11-10 03:36+0000\n"
+"PO-Revision-Date: 2006-11-19 20:24+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -34,35 +34,35 @@ msgstr "Barnobjekt 2"
 msgid "Hint for item 2"
 msgstr "Tips för objekt 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:972
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s är en länk till någonting som inte är en mapp"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:983
+#: ../file-chooser/gtkfilesystemgnomevfs.c:989
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s är en länk utan någon destinationsplats"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s är ingen mapp"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1918
 msgid "Network Servers"
 msgstr "Nätverksservrar"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1934
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2463
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Sparande av bokmärke misslyckades (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2900
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Fel vid hämtning av information för \"%s\""
@@ -194,7 +194,7 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: ../libgnomeui/gnome-app-helper.c:82
-#: ../libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.h:552
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Arkiv"
@@ -204,7 +204,7 @@ msgid "_File/"
 msgstr "_Arkiv/"
 
 #: ../libgnomeui/gnome-app-helper.c:84
-#: ../libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.h:555
 msgid "_Edit"
 msgstr "_Redigera"
 
@@ -213,7 +213,7 @@ msgid "_Edit/"
 msgstr "_Redigera/"
 
 #: ../libgnomeui/gnome-app-helper.c:86
-#: ../libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.h:558
 msgid "_View"
 msgstr "_Visa"
 
@@ -222,7 +222,7 @@ msgid "_View/"
 msgstr "_Visa/"
 
 #: ../libgnomeui/gnome-app-helper.c:88
-#: ../libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.h:561
 msgid "_Settings"
 msgstr "_Inställningar"
 
@@ -232,7 +232,7 @@ msgstr "_Inställningar/"
 
 #. If you have more then one New type, use this tree
 #: ../libgnomeui/gnome-app-helper.c:90
-#: ../libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.h:327
 msgid "_New"
 msgstr "_Ny"
 
@@ -241,7 +241,7 @@ msgid "_New/"
 msgstr "_Ny/"
 
 #: ../libgnomeui/gnome-app-helper.c:92
-#: ../libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.h:564
 msgid "Fi_les"
 msgstr "Fi_ler"
 
@@ -250,17 +250,17 @@ msgid "Fi_les/"
 msgstr "Fi_ler/"
 
 #: ../libgnomeui/gnome-app-helper.c:94
-#: ../libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.h:567
 msgid "_Windows"
 msgstr "_Fönster"
 
 #: ../libgnomeui/gnome-app-helper.c:95
-#: ../libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.h:573
 msgid "_Game"
 msgstr "_Spel"
 
 #: ../libgnomeui/gnome-app-helper.c:96
-#: ../libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.h:570
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjälp"
@@ -1447,20 +1447,22 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Användning: gnome_segv2 programnamn signalnummer\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:138
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>Programmet %s har kraschat.</b>\n"
 "\n"
-"Dock har du inte installerat <b>bug-buddy</b>,\n"
-"GNOME:s kraschrapporteringsverktyg. Om du vill hjälpa\n"
-"oss att göra GNOME bättre, vänligen installera det\n"
+"Installera <b>bug-buddy</b>, GNOME:s\n"
+"kraschrapporteringsverktyg, som hjälper dig\n"
+"att skicka detaljerad information om felet\n"
+"till utvecklarna.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
