@@ -88,10 +88,15 @@ int main(int argc, char *argv[])
   if (g_getenv("GNOME_HACKER")) 
     {
       gchar *exec_str;
+      gchar *title;
       int retval;
 
-      exec_str = g_strdup_printf("gnome-terminal --command=\"gdb %s %d\"",
-                                 appname, getppid());
+      title = g_strdup_printf (_("Debugging %s"), appname);
+      exec_str = g_strdup_printf("gnome-terminal "
+                                 "--title=\"%s\" "
+                                 "--command=\"gdb %s %d\"",
+                                 title, appname, getppid());
+      g_free (title);
 
       retval = system(exec_str);
       g_free(exec_str);

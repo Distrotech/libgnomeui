@@ -1,3 +1,9 @@
+2006-11-19  Vincent Untz  <vuntz@gnome.org>
+
+	* libgnomeui/gnome_segv.c: (main): set title of the terminal used to
+	launch gdb
+	Fix bug #350886
+
 2006-11-09  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome_segv.c: (main): Fix wording in the dialog
