@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-10 03:36+0000\n"
-"PO-Revision-Date: 2006-11-19 20:24+0100\n"
+"POT-Creation-Date: 2006-11-20 03:39+0000\n"
+"PO-Revision-Date: 2006-11-29 22:32+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -1447,7 +1447,12 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Användning: gnome_segv2 programnamn signalnummer\n"
 
-#: ../libgnomeui/gnome_segv.c:138
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "Felsöker %s"
+
+#: ../libgnomeui/gnome_segv.c:143
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
