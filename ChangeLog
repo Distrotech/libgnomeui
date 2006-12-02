@@ -1,5 +1,12 @@
 2006-12-02  Christian Persch  <chpe@cvs.gnome.org>
 
+	* libgnomeui/gnome-password-dialog.c: (remember_button_toggled),
+	(gnome_password_dialog_init):
+
+	Notify when the remember mode changes.
+
+2006-12-02  Christian Persch  <chpe@cvs.gnome.org>
+
 	* libgnomeui/gnome-password-dialog.c:
 	(gnome_password_dialog_set_message),
 	(gnome_password_dialog_set_anon), (userpass_radio_button_toggled),

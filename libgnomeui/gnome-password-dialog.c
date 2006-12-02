@@ -231,6 +231,12 @@ domain_entry_activate (GtkWidget *widget, GtkWidget *dialog)
 }
 
 static void
+remember_button_toggled (GtkWidget *widget, GObject *dialog)
+{
+	g_object_notify (dialog, "remember-mode");
+}
+
+static void
 password_entry_activate (GtkWidget *widget, GnomePasswordDialog *password_dialog)
 {
 	gtk_window_activate_default (GTK_WINDOW (password_dialog));
@@ -344,8 +350,12 @@ gnome_password_dialog_init (GnomePasswordDialog *password_dialog)
 
 	priv->remember_session_button =
 		gtk_check_button_new_with_mnemonic (_("_Remember password for this session"));
+	g_signal_connect (priv->remember_session_button, "toggled",
+			  G_CALLBACK (remember_button_toggled), password_dialog);
 	priv->remember_forever_button =
 		gtk_check_button_new_with_mnemonic (_("Save password in _keyring"));
+	g_signal_connect (priv->remember_forever_button, "toggled",
+			  G_CALLBACK (remember_button_toggled), password_dialog);
 
 	gtk_box_pack_start (GTK_BOX (vbox), priv->remember_session_button, 
 			    FALSE, FALSE, 0);
