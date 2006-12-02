@@ -57,7 +57,6 @@ typedef enum {
 	GNOME_PASSWORD_DIALOG_REMEMBER_FOREVER
 } GnomePasswordDialogRemember;
 
-
 GtkType    gnome_password_dialog_get_type (void);
 GtkWidget* gnome_password_dialog_new      (const char *dialog_title,
 					   const char *message,

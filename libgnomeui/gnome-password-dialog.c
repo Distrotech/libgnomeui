@@ -3,7 +3,8 @@
 /* gnome-password-dialog.c - A use password prompting dialog widget.
 
    Copyright (C) 1999, 2000 Eazel, Inc.
-
+   Copyright (C) 2006 Christian Persch
+   
    The Gnome Library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License as
    published by the ree Software Foundation; either version 2 of the
@@ -23,9 +24,13 @@
 */
 
 #include <config.h>
+
+#include <string.h>
+
 #include "gnome-i18nP.h"
 #include "gnome-password-dialog.h"
-#include "gnome-stock-icons.h"
+#include "gnometypebuiltins.h"
+
 #include <gtk/gtkbox.h>
 #include <gtk/gtkcheckbutton.h>
 #include <gtk/gtkentry.h>
@@ -38,28 +43,22 @@
 #include <gtk/gtktable.h>
 #include <gtk/gtkvbox.h>
 #include <gtk/gtkradiobutton.h>
+#include <gtk/gtkalignment.h>
+#include <gtk/gtksizegroup.h>
+#include <gtk/gtkprogressbar.h>
+
+#define GNOME_PASSWORD_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GNOME_TYPE_PASSWORD_DIALOG, GnomePasswordDialogDetails))
+#define PARAM_STATIC G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB
 
 struct _GnomePasswordDialogDetails
 {
-	/* Attributes */
-	gboolean readonly_username;
-	gboolean readonly_domain;
-
-	gboolean show_username;
-	gboolean show_domain;
-	gboolean show_password;
-	
-	/* TODO: */
-	gboolean remember;
-	char *remember_label_text;
-
-	/* Internal widgetry and flags */
+	GtkWidget *message_label;
 	GtkWidget *username_entry;
-	GtkWidget *password_entry;
 	GtkWidget *domain_entry;
-	
+	GtkWidget *password_entry;
+	GtkWidget *table_alignment;
 	GtkWidget *table;
-	
+
 	GtkWidget *remember_session_button;
 	GtkWidget *remember_forever_button;
 
@@ -67,237 +66,733 @@ struct _GnomePasswordDialogDetails
 	GtkWidget *connect_with_no_userpass_button;
 	GtkWidget *connect_with_userpass_button;
 
-	gboolean anon_support_on;
+	/* Attributes */
+	guint readonly_username : 1;
+	guint readonly_domain : 1;
+	guint show_username : 1;
+	guint show_domain : 1;
+	guint show_password : 1;
+	guint show_remember : 1;
+	guint show_userpass_buttons : 1;
+	guint show_userpass_buttons_set : 1;
+	guint anonymous : 1;
+	guint anonymous_set : 1;
 };
 
-/* Layout constants */
-static const guint DIALOG_BORDER_WIDTH = 6;
-static const guint CAPTION_TABLE_BORDER_WIDTH = 4;
-
-/* GnomePasswordDialogClass methods */
-static void gnome_password_dialog_class_init (GnomePasswordDialogClass *password_dialog_class);
-static void gnome_password_dialog_init       (GnomePasswordDialog      *password_dialog);
-
-/* GObjectClass methods */
-static void gnome_password_dialog_finalize         (GObject                *object);
-
-
-/* GtkDialog callbacks */
-static void dialog_show_callback                 (GtkWidget              *widget,
-						  gpointer                callback_data);
-static void dialog_close_callback                (GtkWidget              *widget,
-						  gpointer                callback_data);
-
-static gpointer parent_class;
-
-GtkType
-gnome_password_dialog_get_type (void)
+enum
 {
-	static GType type = 0;
+	PROP_0,
+	PROP_SHOW_USERNAME,
+	PROP_SHOW_DOMAIN,
+	PROP_SHOW_PASSWORD,
+	PROP_SHOW_USERPASS_BUTTONS,
+	PROP_SHOW_REMEMBER,
+	PROP_READONLY_USERNAME,
+	PROP_READONLY_DOMAIN,
+	PROP_ANONYMOUS,
+	PROP_REMEMBER_MODE,
+	PROP_MESSAGE,
+	PROP_MESSAGE_MARKUP,
+	PROP_USERNAME,
+	PROP_DOMAIN,
+	PROP_PASSWORD,
+};
 
-	if (!type) {
-		static const GTypeInfo info = {
-			sizeof (GnomePasswordDialogClass),
-                        NULL, NULL,
-			(GClassInitFunc) gnome_password_dialog_class_init,
-                        NULL, NULL,
-			sizeof (GnomePasswordDialog), 0,
-			(GInstanceInitFunc) gnome_password_dialog_init,
-			NULL
-		};
+/* GtkDialog methods */
+static void gnome_password_dialog_show (GtkWidget              *widget);
 
-                type = g_type_register_static (gtk_dialog_get_type(), 
-					       "GnomePasswordDialog", 
-					       &info, 0);
+G_DEFINE_TYPE (GnomePasswordDialog, gnome_password_dialog, GTK_TYPE_DIALOG);
 
-		parent_class = g_type_class_ref (gtk_dialog_get_type());
+static void
+gnome_password_dialog_set_message (GnomePasswordDialog *password_dialog, const gchar *message, gboolean markup)
+{
+	GnomePasswordDialogDetails *priv = password_dialog->details;
+
+	if (message != NULL && message[0] != '\0') {
+		gtk_label_set_use_markup (GTK_LABEL (priv->message_label), markup);
+		gtk_label_set_label (GTK_LABEL (priv->message_label), message);
+		gtk_widget_show (priv->message_label);
+	} else {
+		gtk_label_set_label (GTK_LABEL (priv->message_label), "");
+		gtk_widget_hide (priv->message_label);
+	}
+}
+
+static void
+gnome_password_dialog_set_anon (GnomePasswordDialog *password_dialog, gboolean anonymous, gboolean explicit)
+{
+	GnomePasswordDialogDetails *priv = password_dialog->details;
+
+	priv->anonymous = anonymous;
+	priv->anonymous_set = explicit;
+
+	if (anonymous) {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->connect_with_no_userpass_button), TRUE);
+	} else {
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->connect_with_userpass_button), TRUE);
 	}
 
-	return type;
-}
+	gtk_widget_set_sensitive (priv->table_alignment, !anonymous || !priv->show_userpass_buttons);
 
-
-static void
-gnome_password_dialog_class_init (GnomePasswordDialogClass * klass)
-{
-	G_OBJECT_CLASS (klass)->finalize = gnome_password_dialog_finalize;
+	g_object_notify (G_OBJECT (password_dialog), "anonymous");
 }
 
 static void
-gnome_password_dialog_init (GnomePasswordDialog *password_dialog)
+userpass_radio_button_toggled (GtkWidget *widget, GnomePasswordDialog *password_dialog)
 {
-	password_dialog->details = g_new0 (GnomePasswordDialogDetails, 1);
-	password_dialog->details->show_username = TRUE;
-	password_dialog->details->show_password = TRUE;
-	password_dialog->details->anon_support_on = FALSE;
-}
+	GnomePasswordDialogDetails *priv = password_dialog->details;
 
-/* GObjectClass methods */
-static void
-gnome_password_dialog_finalize (GObject *object)
-{
-	GnomePasswordDialog *password_dialog;
+	priv->anonymous = widget == priv->connect_with_no_userpass_button;
+	priv->anonymous_set = TRUE;
+
+	gtk_widget_set_sensitive (priv->table_alignment, !priv->anonymous);
 	
-	password_dialog = GNOME_PASSWORD_DIALOG (object);
-
-	g_object_unref (password_dialog->details->username_entry);
-	g_object_unref (password_dialog->details->domain_entry);
-	g_object_unref (password_dialog->details->password_entry);
-
-	g_free (password_dialog->details->remember_label_text);
-	g_free (password_dialog->details);
-
-	if (G_OBJECT_CLASS (parent_class)->finalize != NULL)
-		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
+	g_object_notify (G_OBJECT (password_dialog),"anonymous");
 }
 
-/* GtkDialog callbacks */
-static void
-dialog_show_callback (GtkWidget *widget, gpointer callback_data)
-{
-	GnomePasswordDialog *password_dialog;
-	GtkWidget *focus = NULL;
-	const gchar *text;
-
-	password_dialog = GNOME_PASSWORD_DIALOG (callback_data);
-
-	if (GTK_WIDGET_VISIBLE (password_dialog->details->password_entry))
-		/* Password is the default place to focus */
-		focus = password_dialog->details->password_entry;
-
-	if (GTK_WIDGET_VISIBLE (password_dialog->details->domain_entry) &&
-	    !password_dialog->details->readonly_domain) {
-		/* Empty domain entry gets focus */
-		text = gtk_entry_get_text (GTK_ENTRY (password_dialog->details->domain_entry));
-		if (!focus || !text || !text[0])
-			focus = password_dialog->details->domain_entry;
-	}
-
-	if (GTK_WIDGET_VISIBLE (password_dialog->details->username_entry) &&
-	    !password_dialog->details->readonly_username) {
-		/* Empty username entry gets focus */
-		text = gtk_entry_get_text (GTK_ENTRY (password_dialog->details->username_entry));
-		if (!focus || !text || !text[0])
-			focus = password_dialog->details->username_entry;
-	}
-
-	if (focus) {
-		gtk_widget_grab_focus (focus);
-		gtk_editable_select_region (GTK_EDITABLE (focus), 0, -1);
-	}
-}
-
-static void
-dialog_close_callback (GtkWidget *widget, gpointer callback_data)
-{
-	gtk_widget_hide (widget);
-}
-
-static void
-userpass_radio_button_clicked (GtkWidget *widget, gpointer callback_data)
-{
-	GnomePasswordDialog *password_dialog;
-
-	password_dialog = GNOME_PASSWORD_DIALOG (callback_data);
-
-	if (widget == password_dialog->details->connect_with_no_userpass_button) {
-		gtk_widget_set_sensitive (
-			password_dialog->details->table, FALSE);
-	}
-	else { /* the other button */
-		gtk_widget_set_sensitive (
-                        password_dialog->details->table, TRUE);
-	}	
-}
-
-static void
-add_row (GtkWidget *table, int row, const char *label_text, GtkWidget *entry, int offset)
+static GtkWidget *
+add_row (GtkWidget *table, int row, const char *label_text, GtkWidget *entry)
 {
 	GtkWidget *label;
 
 	label = gtk_label_new_with_mnemonic (label_text);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 
-	gtk_table_attach (GTK_TABLE (table), label,
-			  0, 1,
-			  row, row + 1,
-			  GTK_FILL,
-			  (GTK_FILL|GTK_EXPAND),
-			  offset, 0);
-	
-	gtk_table_attach (GTK_TABLE (table), entry,
-			  1, 2,
-			  row, row + 1,
-			  (GTK_FILL|GTK_EXPAND),
-			  (GTK_FILL|GTK_EXPAND),
-			  0, 0);
-
+	gtk_table_attach_defaults (GTK_TABLE (table), label,
+				   0, 1, row, row + 1);
+	gtk_table_attach_defaults (GTK_TABLE (table), entry,
+				   1, 2, row, row + 1);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
+
+	return label;
 }
 
 static void
-remove_child (GtkWidget *child, GtkWidget *table)
+remove_child (GtkWidget *child, GtkContainer *container)
 {
-	gtk_container_remove (GTK_CONTAINER (table), child);
+	gtk_container_remove (container, child);
 }
 
 static void
-add_table_rows (GnomePasswordDialog *password_dialog)
+update_entries_table (GnomePasswordDialog *dialog)
 {
-	int row;
-	GtkWidget *table;
-	int offset;
+	GnomePasswordDialogDetails *priv = dialog->details;
+	int row = 0, n_rows;
 
-	if (password_dialog->details->anon_support_on) {
-		offset = 20;
+	gtk_container_foreach (GTK_CONTAINER (priv->table),
+			       (GtkCallback) remove_child, priv->table);
+
+	n_rows = priv->show_username +
+		 priv->show_domain +
+		 priv->show_password;
+	if (n_rows == 0) {
+		gtk_widget_hide (priv->table);
+		return;
 	}
-	else {
-		offset = 0;
+
+	gtk_table_resize (GTK_TABLE (priv->table), n_rows, 2);
+
+	if (priv->show_username) {
+		add_row (priv->table, row++, _("_Username:"), priv->username_entry);
+	}
+	if (priv->show_domain) {
+		add_row (priv->table, row++, _("_Domain:"), priv->domain_entry);
+	}
+	if (priv->show_password) {
+		add_row (priv->table, row++, _("_Password:"), priv->password_entry);
 	}
 
-	table = password_dialog->details->table;
-	/* This will not kill the entries, since they are ref:ed */
-	gtk_container_foreach (GTK_CONTAINER (table),
-			       (GtkCallback)remove_child, table);
-	
-	row = 0;
-	if (password_dialog->details->show_username)
-		add_row (table, row++, _("_Username:"), password_dialog->details->username_entry, offset);
-	if (password_dialog->details->show_domain)
-		add_row (table, row++, _("_Domain:"), password_dialog->details->domain_entry, offset);
-	if (password_dialog->details->show_password)
-		add_row (table, row++, _("_Password:"), password_dialog->details->password_entry, offset);
-
-	gtk_widget_show_all (table);
+	gtk_widget_show_all (priv->table);
 }
 
 static void
 username_entry_activate (GtkWidget *widget, GtkWidget *dialog)
 {
-	GnomePasswordDialog *password_dialog;
-
-	password_dialog = GNOME_PASSWORD_DIALOG (dialog);
+	GnomePasswordDialog *password_dialog = GNOME_PASSWORD_DIALOG (dialog);
+	GnomePasswordDialogDetails *priv = password_dialog->details;
 	
-	if (GTK_WIDGET_VISIBLE (password_dialog->details->domain_entry) &&
-	    GTK_WIDGET_SENSITIVE (password_dialog->details->domain_entry))
-		gtk_widget_grab_focus (password_dialog->details->domain_entry);
-	else if (GTK_WIDGET_VISIBLE (password_dialog->details->password_entry) &&
-		 GTK_WIDGET_SENSITIVE (password_dialog->details->password_entry))
-		gtk_widget_grab_focus (password_dialog->details->password_entry);
+	if (GTK_WIDGET_VISIBLE (priv->domain_entry) &&
+	    GTK_WIDGET_IS_SENSITIVE (priv->domain_entry))
+		gtk_widget_grab_focus (priv->domain_entry);
+	else if (GTK_WIDGET_VISIBLE (priv->password_entry) &&
+		 GTK_WIDGET_IS_SENSITIVE (priv->password_entry))
+		gtk_widget_grab_focus (priv->password_entry);
 }
 
 static void
 domain_entry_activate (GtkWidget *widget, GtkWidget *dialog)
 {
-	GnomePasswordDialog *password_dialog;
-
-	password_dialog = GNOME_PASSWORD_DIALOG (dialog);
+	GnomePasswordDialog *password_dialog = GNOME_PASSWORD_DIALOG (dialog);
+	GnomePasswordDialogDetails *priv = password_dialog->details;
 	
-	if (GTK_WIDGET_VISIBLE (password_dialog->details->password_entry) &&
-	    GTK_WIDGET_SENSITIVE (password_dialog->details->password_entry))
-		gtk_widget_grab_focus (password_dialog->details->password_entry);
+	if (GTK_WIDGET_VISIBLE (priv->password_entry) &&
+	    GTK_WIDGET_IS_SENSITIVE (priv->password_entry))
+		gtk_widget_grab_focus (priv->password_entry);
 }
 
+static void
+password_entry_activate (GtkWidget *widget, GnomePasswordDialog *password_dialog)
+{
+	gtk_window_activate_default (GTK_WINDOW (password_dialog));
+}
+
+static void
+gnome_password_dialog_init (GnomePasswordDialog *password_dialog)
+{
+	GnomePasswordDialogDetails *priv;
+	GtkDialog *dialog = GTK_DIALOG (password_dialog);
+	GtkWindow *window = GTK_WINDOW (password_dialog);
+	GtkWidget *hbox, *main_vbox, *vbox, *icon;
+	GSList *group;
+
+	priv = password_dialog->details = GNOME_PASSWORD_DIALOG_GET_PRIVATE (password_dialog);
+
+	priv->show_username = TRUE;
+	priv->show_password = TRUE;
+
+	/* Set the dialog up with HIG properties */
+	gtk_dialog_set_has_separator (dialog, FALSE);
+	gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
+	gtk_box_set_spacing (GTK_BOX (dialog->vbox), 2); /* 2 * 5 + 2 = 12 */
+	gtk_container_set_border_width (GTK_CONTAINER (dialog->action_area), 5);
+	gtk_box_set_spacing (GTK_BOX (dialog->action_area), 6);
+
+	gtk_window_set_resizable (window, FALSE);
+	gtk_window_set_icon_name (window, GTK_STOCK_DIALOG_AUTHENTICATION);
+
+	gtk_dialog_add_buttons (dialog,
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				_("Co_nnect"), GTK_RESPONSE_OK,
+				NULL);
+	gtk_dialog_set_default_response (dialog, GTK_RESPONSE_OK);
+
+	/* Build contents */
+	hbox = gtk_hbox_new (FALSE, 12);
+	gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
+	gtk_box_pack_start (GTK_BOX (dialog->vbox), hbox, FALSE, FALSE, 0);
+
+	icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_AUTHENTICATION, GTK_ICON_SIZE_DIALOG);
+	gtk_misc_set_alignment (GTK_MISC (icon), 0.5, 0.0);
+	gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+
+	main_vbox = gtk_vbox_new (FALSE, 18);
+	gtk_box_pack_start (GTK_BOX (hbox), main_vbox, FALSE, FALSE, 0);
+
+	priv->message_label = gtk_label_new (NULL);
+	gtk_misc_set_alignment (GTK_MISC (priv->message_label), 0.0, 0.5);
+	gtk_label_set_line_wrap (GTK_LABEL (priv->message_label), TRUE);
+	gtk_box_pack_start (GTK_BOX (main_vbox), GTK_WIDGET (priv->message_label),
+			    FALSE, FALSE, 0);
+	gtk_widget_set_no_show_all (priv->message_label, TRUE);
+
+	vbox = gtk_vbox_new (FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (main_vbox), vbox, FALSE, FALSE, 0);
+
+	/* the radio buttons for anonymous login */
+	priv->radio_vbox = gtk_vbox_new (FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->radio_vbox,
+			    FALSE, FALSE, 0);
+	gtk_widget_set_no_show_all (priv->radio_vbox, TRUE);
+
+	priv->connect_with_no_userpass_button =
+		gtk_radio_button_new_with_mnemonic (NULL, _("Connect _anonymously"));
+	group = gtk_radio_button_get_group (
+		GTK_RADIO_BUTTON (priv->connect_with_no_userpass_button));
+	priv->connect_with_userpass_button =
+		gtk_radio_button_new_with_mnemonic (
+			group, _("Connect as u_ser:"));
+
+	g_signal_connect (priv->connect_with_no_userpass_button, "toggled",
+			  G_CALLBACK (userpass_radio_button_toggled), password_dialog);
+	g_signal_connect (priv->connect_with_userpass_button, "toggled",
+			  G_CALLBACK (userpass_radio_button_toggled), password_dialog);	
+
+	gtk_box_pack_start (GTK_BOX (priv->radio_vbox),
+			    priv->connect_with_no_userpass_button,
+			    FALSE, FALSE, 0);	
+	gtk_box_pack_start (GTK_BOX (priv->radio_vbox),
+			    priv->connect_with_userpass_button,
+			    FALSE, FALSE, 0);
+	gtk_widget_show (priv->connect_with_no_userpass_button);
+	gtk_widget_show (priv->connect_with_userpass_button);
+
+	/* The table that holds the entries */
+	priv->table_alignment = gtk_alignment_new (0.0, 0.0, 1.0, 1.0);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->table_alignment, 
+			    FALSE, FALSE, 0);
+
+	priv->table = gtk_table_new (3, 2, FALSE);
+	gtk_table_set_col_spacings (GTK_TABLE (priv->table), 12);
+	gtk_table_set_row_spacings (GTK_TABLE (priv->table), 6);
+	gtk_container_add (GTK_CONTAINER (priv->table_alignment), priv->table);
+
+	priv->username_entry = g_object_ref_sink (gtk_entry_new ());
+	priv->domain_entry = g_object_ref_sink (gtk_entry_new ());
+	priv->password_entry = g_object_ref_sink (gtk_entry_new ());
+	gtk_entry_set_visibility (GTK_ENTRY (priv->password_entry), FALSE);
+
+	g_signal_connect (priv->username_entry, "activate",
+			  G_CALLBACK (username_entry_activate), password_dialog);
+	g_signal_connect (priv->domain_entry, "activate",
+			  G_CALLBACK (domain_entry_activate), password_dialog);
+	g_signal_connect (priv->password_entry, "activate",
+			  G_CALLBACK (password_entry_activate), password_dialog);
+	
+	update_entries_table (password_dialog);
+
+	gtk_widget_show_all (hbox);
+
+	priv->remember_session_button =
+		gtk_check_button_new_with_mnemonic (_("_Remember password for this session"));
+	priv->remember_forever_button =
+		gtk_check_button_new_with_mnemonic (_("Save password in _keyring"));
+
+	gtk_box_pack_start (GTK_BOX (vbox), priv->remember_session_button, 
+			    FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->remember_forever_button, 
+			    FALSE, FALSE, 0);
+}
+
+static GObject *
+gnome_password_dialog_constructor (GType type,
+				   guint n_construct_properties,
+				   GObjectConstructParam *construct_params)
+{
+	GObject *object;
+	GnomePasswordDialog *dialog;
+	GnomePasswordDialogDetails *priv;
+	const gchar *username;
+
+	object = G_OBJECT_CLASS (gnome_password_dialog_parent_class)->constructor
+			(type, n_construct_properties, construct_params);
+
+	dialog = GNOME_PASSWORD_DIALOG (object);
+	priv = dialog->details;
+
+	if (priv->show_userpass_buttons_set &&
+	    !priv->anonymous_set) {
+		username = gtk_entry_get_text (GTK_ENTRY (priv->username_entry));
+		gnome_password_dialog_set_anon (dialog,
+						username == NULL || username[0] == '\0', FALSE);
+	}
+
+	return object;
+}
+
+static void
+gnome_password_dialog_finalize (GObject *object)
+{
+	GnomePasswordDialog *password_dialog = GNOME_PASSWORD_DIALOG (object);
+	GnomePasswordDialogDetails *priv = password_dialog->details;
+
+	g_object_unref (priv->username_entry);
+	g_object_unref (priv->domain_entry);
+	g_object_unref (priv->password_entry);
+
+	G_OBJECT_CLASS (gnome_password_dialog_parent_class)->finalize (object);
+}
+
+static void
+gnome_password_dialog_set_property (GObject *object,
+				    guint prop_id,
+				    const GValue *value,
+				    GParamSpec *pspec)
+{
+	GnomePasswordDialog *dialog = GNOME_PASSWORD_DIALOG (object);
+
+	switch (prop_id)
+	{
+		case PROP_SHOW_USERNAME:
+			gnome_password_dialog_set_show_username (dialog, g_value_get_boolean (value));
+			break;
+		case PROP_SHOW_DOMAIN:
+			gnome_password_dialog_set_show_domain (dialog, g_value_get_boolean (value));
+			break;
+		case PROP_SHOW_PASSWORD:
+			gnome_password_dialog_set_show_password (dialog, g_value_get_boolean (value));
+			break;
+		case PROP_SHOW_USERPASS_BUTTONS:
+			gnome_password_dialog_set_show_userpass_buttons (dialog, g_value_get_boolean (value));
+			break;
+		case PROP_SHOW_REMEMBER:
+			gnome_password_dialog_set_show_remember (dialog, g_value_get_boolean (value));
+			break;
+		case PROP_READONLY_USERNAME:
+			gnome_password_dialog_set_readonly_username (dialog, g_value_get_boolean (value));
+			break;
+		case PROP_READONLY_DOMAIN:
+			gnome_password_dialog_set_readonly_domain (dialog, g_value_get_boolean (value));
+			break;
+		case PROP_ANONYMOUS:
+			gnome_password_dialog_set_anon (dialog, g_value_get_boolean (value), TRUE);
+			break;
+		case PROP_REMEMBER_MODE:
+			gnome_password_dialog_set_remember (dialog, g_value_get_enum (value));
+			break;
+		case PROP_MESSAGE:
+			gnome_password_dialog_set_message (dialog, g_value_get_string (value), FALSE);
+			break;
+		case PROP_MESSAGE_MARKUP:
+			gnome_password_dialog_set_message (dialog, g_value_get_string (value), TRUE);
+			break;
+		case PROP_USERNAME:
+			gnome_password_dialog_set_username (dialog, g_value_get_string (value));
+			break;
+		case PROP_DOMAIN:
+			gnome_password_dialog_set_domain (dialog, g_value_get_string (value));
+			break;
+		case PROP_PASSWORD:
+			gnome_password_dialog_set_password (dialog, g_value_get_string (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gnome_password_dialog_get_property (GObject *object,
+				    guint prop_id,
+				    GValue *value,
+				    GParamSpec *pspec)
+{
+	GnomePasswordDialog *dialog = GNOME_PASSWORD_DIALOG (object);
+	GnomePasswordDialogDetails *priv = dialog->details;
+
+	switch (prop_id)
+	{
+		case PROP_SHOW_USERNAME:
+			g_value_set_boolean (value, priv->show_username);
+			break;
+		case PROP_SHOW_DOMAIN:
+			g_value_set_boolean (value, priv->show_domain);
+			break;
+		case PROP_SHOW_PASSWORD:
+			g_value_set_boolean (value, priv->show_password);
+			break;
+		case PROP_SHOW_USERPASS_BUTTONS:
+			g_value_set_boolean (value, priv->show_userpass_buttons);
+			break;
+		case PROP_SHOW_REMEMBER:
+			g_value_set_boolean (value, priv->show_remember);
+			break;
+		case PROP_READONLY_USERNAME:
+			g_value_set_boolean (value, priv->readonly_username);
+			break;
+		case PROP_READONLY_DOMAIN:
+			g_value_set_boolean (value, priv->readonly_domain);
+			break;
+		case PROP_ANONYMOUS:
+			g_value_set_boolean (value, gnome_password_dialog_anon_selected (dialog));
+			break;
+		case PROP_REMEMBER_MODE:
+			g_value_set_enum (value, gnome_password_dialog_get_remember (dialog));
+			break;
+		case PROP_MESSAGE:
+		case PROP_MESSAGE_MARKUP:
+			g_value_set_string (value, gtk_label_get_label (GTK_LABEL (priv->message_label)));
+			break;
+		case PROP_USERNAME:
+			g_value_take_string (value, gnome_password_dialog_get_username (dialog));
+			break;
+		case PROP_DOMAIN:
+			g_value_take_string (value, gnome_password_dialog_get_domain (dialog));
+			break;
+		case PROP_PASSWORD:
+			g_value_take_string (value, gnome_password_dialog_get_password (dialog));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gnome_password_dialog_class_init (GnomePasswordDialogClass * klass)
+{
+	GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+	gnome_password_dialog_parent_class = (GObjectClass *) g_type_class_peek_parent (klass);
+
+	gobject_class->constructor = gnome_password_dialog_constructor;
+	gobject_class->finalize = gnome_password_dialog_finalize;
+	gobject_class->get_property = gnome_password_dialog_get_property;
+	gobject_class->set_property = gnome_password_dialog_set_property;
+
+	widget_class->show = gnome_password_dialog_show;
+
+	g_type_class_add_private (gobject_class, sizeof (GnomePasswordDialogDetails));
+
+	/**
+	* GnomePasswordDialog:show-username:
+	*
+	* Whether the username entry is shown.
+	*
+	* Since: 2.18
+	*/
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_SHOW_USERNAME,
+		 g_param_spec_boolean ("show-username",
+				       "show-username",
+				       "show-username",
+				       TRUE,
+				       G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:show-domain:
+	 *
+	 * Whether the domain entry is shown.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_SHOW_DOMAIN,
+		 g_param_spec_boolean ("show-domain",
+				       "show-domain",
+				       "show-domain",
+				       FALSE,
+				       G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:show-password:
+	 *
+	 * Whether the password entry is shown.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_SHOW_PASSWORD,
+		 g_param_spec_boolean ("show-password",
+				       "show-password",
+				       "show-password",
+				       TRUE,
+				       G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:show-userpass-buttons:
+	 *
+	 * Whether the dialog allows switching between anonymous and
+	 * user/password authentication.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_SHOW_USERPASS_BUTTONS,
+		 g_param_spec_boolean ("show-userpass-buttons",
+				       "show-userpass-buttons",
+				       "show-userpass-buttons",
+				       FALSE,
+				       G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:show-remember:
+	 *
+	 * Whether the dialog shows the remember in session and 
+	 * remember in keyring check boxes.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_SHOW_REMEMBER,
+		 g_param_spec_boolean ("show-remember",
+				       "show-remember",
+				       "show-remember",
+				       FALSE,
+				       G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:readonly-username:
+	 *
+	 * Whether the username entry is read-only.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_READONLY_USERNAME,
+		 g_param_spec_boolean ("readonly-username",
+				       "readonly-username",
+				       "readonly-username",
+				       FALSE,
+				       G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:readonly-domain:
+	 *
+	 * Whether the domain entry is read-only.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_READONLY_DOMAIN,
+		 g_param_spec_boolean ("readonly-domain",
+				       "readonly-domain",
+				       "readonly-domain",
+				       FALSE,
+				       G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:anonymous:
+	 *
+	 * Whether the anonymous option is chosen.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_ANONYMOUS,
+		 g_param_spec_boolean ("anonymous",
+				       "anonymous",
+				       "anonymous",
+				       FALSE,
+				       G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:remember-mode:
+	 *
+	 * The selected remember mode.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_REMEMBER_MODE,
+		 g_param_spec_enum ("remember-mode",
+				    "remember-mode",
+				    "remember-mode",
+				    GNOME_TYPE_PASSWORD_DIALOG_REMEMBER,
+				    GNOME_PASSWORD_DIALOG_REMEMBER_NOTHING,
+				    G_PARAM_READWRITE | PARAM_STATIC));
+	
+	/**
+	* GnomePasswordDialog:message:
+	 *
+	 * The message displayed in the password dialog.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_MESSAGE,
+		 g_param_spec_string ("message",
+				      "message",
+				      "message",
+				      NULL,
+				      G_PARAM_READWRITE | PARAM_STATIC));
+	
+	/**
+	* GnomePasswordDialog:message-markup:
+	 *
+	 * The message displayed in the password dialog, using pango markup.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_MESSAGE_MARKUP,
+		 g_param_spec_string ("message-markup",
+				      "message-markup",
+				      "message-markup",
+				      NULL,
+				      G_PARAM_READWRITE | PARAM_STATIC));
+	
+	/**
+	* GnomePasswordDialog:username:
+	 *
+	 * The typed username.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_USERNAME,
+		 g_param_spec_string ("username",
+				      "username",
+				      "username",
+				      NULL,
+				      G_PARAM_READWRITE | PARAM_STATIC));
+	
+	/**
+	* GnomePasswordDialog:domain:
+	 *
+	 * The typed domain.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_DOMAIN,
+		 g_param_spec_string ("domain",
+				      "domain",
+				      "domain",
+				      NULL,
+				      G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:password:
+	 *
+	 * The typed password.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_PASSWORD,
+		 g_param_spec_string ("password",
+				      "password",
+				      "password",
+				      NULL,
+				      G_PARAM_READWRITE | PARAM_STATIC));
+}
+
+/* GtkDialog callbacks */
+static void
+gnome_password_dialog_show (GtkWidget *widget)
+{
+	GnomePasswordDialog *password_dialog = GNOME_PASSWORD_DIALOG (widget);
+	GnomePasswordDialogDetails *priv = password_dialog->details;
+	GtkWidget *focus = NULL;
+	const gchar *text;
+
+	GTK_WIDGET_CLASS (gnome_password_dialog_parent_class)->show (widget);
+
+	if (GTK_WIDGET_VISIBLE (priv->password_entry) &&
+	    GTK_WIDGET_IS_SENSITIVE (priv->password_entry) &&
+	    priv->show_password)
+		/* Password is the default place to focus */
+		focus = priv->password_entry;
+
+	if (GTK_WIDGET_VISIBLE (priv->domain_entry) &&
+	    GTK_WIDGET_IS_SENSITIVE (priv->domain_entry) &&
+	    priv->show_domain) {
+		/* Empty domain entry gets focus */
+		text = gtk_entry_get_text (GTK_ENTRY (priv->domain_entry));
+		if (!focus || !text || !text[0])
+			focus = priv->domain_entry;
+	}
+
+	if (GTK_WIDGET_VISIBLE (priv->username_entry) &&
+	    GTK_WIDGET_IS_SENSITIVE (priv->username_entry) &&
+	    priv->show_username) {
+		/* Empty username entry gets focus */
+		text = gtk_entry_get_text (GTK_ENTRY (priv->username_entry));
+		if (!focus || !text || !text[0])
+			focus = priv->username_entry;
+	}
+
+	if (focus) {
+		gtk_widget_grab_focus (focus);
+	}
+}
 
 /* Public GnomePasswordDialog methods */
 
@@ -327,156 +822,25 @@ gnome_password_dialog_new (const char	*dialog_title,
 			   gboolean	 readonly_username)
 {
 	GnomePasswordDialog *password_dialog;
-	GtkWidget *table;
-	GtkLabel *message_label;
-	GtkWidget *hbox;
-	GtkWidget *vbox;
-	GtkWidget *dialog_icon;
-	GSList *group;
+	GtkWindow *window;
 
-	password_dialog = GNOME_PASSWORD_DIALOG (gtk_widget_new (gnome_password_dialog_get_type (), NULL));
+	password_dialog = g_object_new (GNOME_TYPE_PASSWORD_DIALOG,
+					"title", dialog_title,
+					"message", message,
+					"readonly-username", readonly_username,
+					NULL);
 
-	gtk_window_set_title (GTK_WINDOW (password_dialog), dialog_title);
-	gtk_dialog_add_buttons (GTK_DIALOG (password_dialog),
-				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				_("Co_nnect"), GTK_RESPONSE_OK,
-				NULL);
+	window = GTK_WINDOW (password_dialog);
 
-	/* Setup the dialog */
-	gtk_dialog_set_has_separator (GTK_DIALOG (password_dialog), FALSE);
-
- 	gtk_window_set_position (GTK_WINDOW (password_dialog), GTK_WIN_POS_CENTER);
-	gtk_window_set_modal (GTK_WINDOW (password_dialog), TRUE);
-	gtk_window_set_resizable (GTK_WINDOW (password_dialog), FALSE);
-	gtk_window_set_keep_above (GTK_WINDOW (password_dialog), TRUE);
-
- 	gtk_container_set_border_width (GTK_CONTAINER (password_dialog), DIALOG_BORDER_WIDTH);
-
-	gtk_dialog_set_default_response (GTK_DIALOG (password_dialog), GTK_RESPONSE_OK);
-
-	g_signal_connect (password_dialog, "show",
-			  G_CALLBACK (dialog_show_callback), password_dialog);
+ 	gtk_window_set_position (window, GTK_WIN_POS_CENTER);
+	gtk_window_set_modal (window, TRUE);
+	gtk_window_set_resizable (window, FALSE);
+	gtk_window_set_keep_above (window, TRUE);
 	g_signal_connect (password_dialog, "close",
-			  G_CALLBACK (dialog_close_callback), password_dialog);
-
-	/* the radio buttons for anonymous login */
-	password_dialog->details->connect_with_no_userpass_button =
-                gtk_radio_button_new_with_mnemonic (NULL, _("Connect _anonymously"));
-	group = gtk_radio_button_get_group (
-			GTK_RADIO_BUTTON (password_dialog->details->connect_with_no_userpass_button));
-        password_dialog->details->connect_with_userpass_button =
-                gtk_radio_button_new_with_mnemonic (
-			group, _("Connect as u_ser:"));
-
-	if (username != NULL && *username != 0) {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (password_dialog->details->connect_with_userpass_button), TRUE);
-	} else {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (password_dialog->details->connect_with_no_userpass_button), TRUE);
-	}
-	
-	
-	password_dialog->details->radio_vbox = gtk_vbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (password_dialog->details->radio_vbox),
-		password_dialog->details->connect_with_no_userpass_button,
-		FALSE, FALSE, 0);	
-	gtk_box_pack_start (GTK_BOX (password_dialog->details->radio_vbox),
-                password_dialog->details->connect_with_userpass_button,
-                FALSE, FALSE, 0);
-	g_signal_connect (password_dialog->details->connect_with_no_userpass_button, "clicked",
-                          G_CALLBACK (userpass_radio_button_clicked), password_dialog);
-	g_signal_connect (password_dialog->details->connect_with_userpass_button, "clicked",
-                          G_CALLBACK (userpass_radio_button_clicked), password_dialog);	
-
-	/* The table that holds the captions */
-	password_dialog->details->table = table = gtk_table_new (3, 2, FALSE);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 12);
-	gtk_table_set_row_spacings (GTK_TABLE (table), 6);
-
-	password_dialog->details->username_entry = gtk_entry_new ();
-	password_dialog->details->domain_entry = gtk_entry_new ();
-	password_dialog->details->password_entry = gtk_entry_new ();
-
-	/* We want to hold on to these during the table rearrangement */
-	g_object_ref (password_dialog->details->username_entry);
-	gtk_object_sink (GTK_OBJECT (password_dialog->details->username_entry));
-	g_object_ref (password_dialog->details->domain_entry);
-	gtk_object_sink (GTK_OBJECT (password_dialog->details->domain_entry));
-        g_object_ref (password_dialog->details->password_entry);
-	gtk_object_sink (GTK_OBJECT (password_dialog->details->password_entry));
-	
-	gtk_entry_set_visibility (GTK_ENTRY (password_dialog->details->password_entry), FALSE);
-
-	g_signal_connect (password_dialog->details->username_entry,
-			  "activate",
-			  G_CALLBACK (username_entry_activate),
-			  password_dialog);
-	g_signal_connect (password_dialog->details->domain_entry,
-			  "activate",
-			  G_CALLBACK (domain_entry_activate),
-			  password_dialog);
-	g_signal_connect_swapped (password_dialog->details->password_entry,
-				  "activate",
-				  G_CALLBACK (gtk_window_activate_default),
-				  password_dialog);
-	add_table_rows (password_dialog);
-
-	/* Adds some eye-candy to the dialog */
-	hbox = gtk_hbox_new (FALSE, 12);
-	dialog_icon = gtk_image_new_from_stock (GNOME_STOCK_AUTHENTICATION, GTK_ICON_SIZE_DIALOG);
-	gtk_misc_set_alignment (GTK_MISC (dialog_icon), 0.5, 0.0);
-	gtk_box_pack_start (GTK_BOX (hbox), dialog_icon, FALSE, FALSE, 0);
-
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (password_dialog)->vbox), 12);
- 	gtk_container_set_border_width (GTK_CONTAINER(hbox), 6);
-	gtk_box_set_spacing (GTK_BOX (hbox), 12);
-
-	/* Fills the vbox */
-	vbox = gtk_vbox_new (FALSE, 0);
-
-	if (message) {
-		message_label = GTK_LABEL (gtk_label_new (message));
-		gtk_label_set_justify (message_label, GTK_JUSTIFY_LEFT);
-		gtk_label_set_line_wrap (message_label, TRUE);
-
-		gtk_box_pack_start (GTK_BOX (vbox),
-				    GTK_WIDGET (message_label),
-				    TRUE,	/* expand */
-				    TRUE,	/* fill */
-				    5);		/* padding */
-	}
-	gtk_box_pack_start (GTK_BOX (vbox), password_dialog->details->radio_vbox,
-                            TRUE, TRUE, 5);
-	gtk_box_pack_start (GTK_BOX (vbox), table, 
-			    TRUE, TRUE, 5);
-
-	/* Configure the table */
-	gtk_container_set_border_width (GTK_CONTAINER (table),
-					CAPTION_TABLE_BORDER_WIDTH);
-
-	gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 5);
-
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (password_dialog)->vbox),
-			    hbox,
-			    TRUE,	/* expand */
-			    TRUE,	/* fill */
-			    0);       	/* padding */
-	
-	gtk_widget_show_all (GTK_DIALOG (password_dialog)->vbox);
-
-	password_dialog->details->remember_session_button =
-		gtk_check_button_new_with_mnemonic (_("_Remember password for this session"));
-	password_dialog->details->remember_forever_button =
-		gtk_check_button_new_with_mnemonic (_("Save password in _keyring"));
-
-	gtk_box_pack_start (GTK_BOX (vbox), password_dialog->details->remember_session_button, 
-			    TRUE, TRUE, 6);
-	gtk_box_pack_start (GTK_BOX (vbox), password_dialog->details->remember_forever_button, 
-			    TRUE, TRUE, 0);
-	
+			  G_CALLBACK (gtk_widget_hide), NULL);
 	
 	gnome_password_dialog_set_username (password_dialog, username);
 	gnome_password_dialog_set_password (password_dialog, password);
-	gnome_password_dialog_set_readonly_domain (password_dialog, readonly_username);
 	
 	return GTK_WIDGET (password_dialog);
 }
@@ -496,7 +860,6 @@ gnome_password_dialog_run_and_block (GnomePasswordDialog *password_dialog)
 {
 	gint button_clicked;
 
-	g_return_val_if_fail (password_dialog != NULL, FALSE);
 	g_return_val_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog), FALSE);
 
 	button_clicked = gtk_dialog_run (GTK_DIALOG (password_dialog));
@@ -516,13 +879,19 @@ gnome_password_dialog_run_and_block (GnomePasswordDialog *password_dialog)
  **/
 void
 gnome_password_dialog_set_username (GnomePasswordDialog	*password_dialog,
-				       const char		*username)
+				    const char		*username)
 {
-	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
-	g_return_if_fail (password_dialog->details->username_entry != NULL);
+	GnomePasswordDialogDetails *priv;
 
-	gtk_entry_set_text (GTK_ENTRY (password_dialog->details->username_entry),
-			    username?username:"");
+	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
+
+	priv = password_dialog->details;
+	g_return_if_fail (priv->username_entry != NULL);
+
+	gtk_entry_set_text (GTK_ENTRY (priv->username_entry),
+			    username ? username : "");
+
+	g_object_notify (G_OBJECT (password_dialog), "username");
 }
 
 /**
@@ -538,10 +907,16 @@ void
 gnome_password_dialog_set_password (GnomePasswordDialog	*password_dialog,
 				       const char		*password)
 {
+	GnomePasswordDialogDetails *priv;
+
 	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
 
-	gtk_entry_set_text (GTK_ENTRY (password_dialog->details->password_entry),
+	priv = password_dialog->details;
+
+	gtk_entry_set_text (GTK_ENTRY (priv->password_entry),
 			    password ? password : "");
+
+	g_object_notify (G_OBJECT (password_dialog), "password");
 }
 
 /**
@@ -557,11 +932,17 @@ void
 gnome_password_dialog_set_domain (GnomePasswordDialog	*password_dialog,
 				  const char		*domain)
 {
-	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
-	g_return_if_fail (password_dialog->details->domain_entry != NULL);
+	GnomePasswordDialogDetails *priv;
 
-	gtk_entry_set_text (GTK_ENTRY (password_dialog->details->domain_entry),
+	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
+
+	priv = password_dialog->details;
+	g_return_if_fail (priv->domain_entry != NULL);
+
+	gtk_entry_set_text (GTK_ENTRY (priv->domain_entry),
 			    domain ? domain : "");
+
+	g_object_notify (G_OBJECT (password_dialog), "domain");
 }
 
 /**
@@ -578,13 +959,19 @@ void
 gnome_password_dialog_set_show_username (GnomePasswordDialog *password_dialog,
 					 gboolean             show)
 {
-	g_return_if_fail (password_dialog != NULL);
+	GnomePasswordDialogDetails *priv;
+
 	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
 
-	show = !!show;
-	if (password_dialog->details->show_username != show) {
-		password_dialog->details->show_username = show;
-		add_table_rows (password_dialog);
+	priv = password_dialog->details;
+
+	show = show != FALSE;
+	if (priv->show_username != show) {
+		priv->show_username = show;
+
+		update_entries_table (password_dialog);
+
+		g_object_notify (G_OBJECT (password_dialog), "show-username");
 	}
 }
 
@@ -602,13 +989,19 @@ void
 gnome_password_dialog_set_show_domain (GnomePasswordDialog *password_dialog,
 				       gboolean             show)
 {
-	g_return_if_fail (password_dialog != NULL);
+	GnomePasswordDialogDetails *priv;
+
 	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
 
-	show = !!show;
-	if (password_dialog->details->show_domain != show) {
-		password_dialog->details->show_domain = show;
-		add_table_rows (password_dialog);
+	priv = password_dialog->details;
+
+	show = show != FALSE;
+	if (priv->show_domain != show) {
+		priv->show_domain = show;
+
+		update_entries_table (password_dialog);
+
+		g_object_notify (G_OBJECT (password_dialog), "show-domain");
 	}
 }
 
@@ -626,13 +1019,19 @@ void
 gnome_password_dialog_set_show_password (GnomePasswordDialog *password_dialog,
 					 gboolean             show)
 {
-	g_return_if_fail (password_dialog != NULL);
+	GnomePasswordDialogDetails *priv;
+
 	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
 
-	show = !!show;
-	if (password_dialog->details->show_password != show) {
-		password_dialog->details->show_password = show;
-		add_table_rows (password_dialog);
+	priv = password_dialog->details;
+
+	show = show != FALSE;
+	if (priv->show_password != show) {
+		priv->show_password = show;
+
+		update_entries_table (password_dialog);
+
+		g_object_notify (G_OBJECT (password_dialog), "show-password");
 	}
 }
 
@@ -649,15 +1048,22 @@ gnome_password_dialog_set_show_password (GnomePasswordDialog *password_dialog,
  **/
 void
 gnome_password_dialog_set_readonly_username (GnomePasswordDialog	*password_dialog,
-						gboolean		readonly)
+					     gboolean			 readonly)
 {
-	g_return_if_fail (password_dialog != NULL);
+	GnomePasswordDialogDetails *priv;
+
 	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
 
-	password_dialog->details->readonly_username = readonly;
+	priv = password_dialog->details;
 
-	gtk_widget_set_sensitive (password_dialog->details->username_entry,
-				  !readonly);
+	readonly = readonly != FALSE;
+
+	if (priv->readonly_username != readonly) {
+		priv->readonly_username = readonly;
+		gtk_widget_set_sensitive (priv->username_entry, !readonly);
+
+		g_object_notify (G_OBJECT (password_dialog), "readonly-username");
+	}
 }
 
 /**
@@ -675,13 +1081,21 @@ void
 gnome_password_dialog_set_readonly_domain (GnomePasswordDialog	*password_dialog,
 					   gboolean		readonly)
 {
-	g_return_if_fail (password_dialog != NULL);
+	GnomePasswordDialogDetails *priv;
+
 	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
 
-	password_dialog->details->readonly_domain = readonly;
+	priv = password_dialog->details;
 
-	gtk_widget_set_sensitive (password_dialog->details->domain_entry,
-				  !readonly);
+	readonly = readonly != FALSE;
+
+	if (priv->readonly_domain != readonly) {
+		priv->readonly_domain = readonly;
+
+		gtk_widget_set_sensitive (priv->domain_entry, !readonly);
+
+		g_object_notify (G_OBJECT (password_dialog), "readonly-domain");
+	}
 }
 
 /**
@@ -698,9 +1112,13 @@ gnome_password_dialog_set_readonly_domain (GnomePasswordDialog	*password_dialog,
 char *
 gnome_password_dialog_get_username (GnomePasswordDialog *password_dialog)
 {
+	GnomePasswordDialogDetails *priv;
+
 	g_return_val_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog), NULL);
 
-	return g_strdup (gtk_entry_get_text (GTK_ENTRY (password_dialog->details->username_entry)));
+	priv = password_dialog->details;
+
+	return g_strdup (gtk_entry_get_text (GTK_ENTRY (priv->username_entry)));
 }
 
 /**
@@ -716,9 +1134,13 @@ gnome_password_dialog_get_username (GnomePasswordDialog *password_dialog)
 char *
 gnome_password_dialog_get_domain (GnomePasswordDialog *password_dialog)
 {
+	GnomePasswordDialogDetails *priv;
+
 	g_return_val_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog), NULL);
+
+	priv = password_dialog->details;
 	
-	return g_strdup (gtk_entry_get_text (GTK_ENTRY (password_dialog->details->domain_entry)));
+	return g_strdup (gtk_entry_get_text (GTK_ENTRY (priv->domain_entry)));
 }
 
 /**
@@ -734,9 +1156,13 @@ gnome_password_dialog_get_domain (GnomePasswordDialog *password_dialog)
 char *
 gnome_password_dialog_get_password (GnomePasswordDialog *password_dialog)
 {
+	GnomePasswordDialogDetails *priv;
+
 	g_return_val_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog), NULL);
 
-	return g_strdup (gtk_entry_get_text (GTK_ENTRY (password_dialog->details->password_entry)));
+	priv = password_dialog->details;
+
+	return g_strdup (gtk_entry_get_text (GTK_ENTRY (priv->password_entry)));
 }
 
 /**
@@ -754,25 +1180,40 @@ gnome_password_dialog_get_password (GnomePasswordDialog *password_dialog)
  */
 void
 gnome_password_dialog_set_show_userpass_buttons (GnomePasswordDialog         *password_dialog,
-                                                 gboolean                     show_userpass_buttons)
+                                                 gboolean                     show)
 {
-        if (show_userpass_buttons) {
-                password_dialog->details->anon_support_on = TRUE;
-                gtk_widget_show (password_dialog->details->radio_vbox);
-                if (gtk_toggle_button_get_active (
-                        GTK_TOGGLE_BUTTON (password_dialog->details->connect_with_no_userpass_button))) {
-                        gtk_widget_set_sensitive (password_dialog->details->table, FALSE);
-                }
-                else {
-                        gtk_widget_set_sensitive (password_dialog->details->table, TRUE);
-                }
-        } else {
-                password_dialog->details->anon_support_on = FALSE;
-                gtk_widget_hide (password_dialog->details->radio_vbox);
-                gtk_widget_set_sensitive (password_dialog->details->table, TRUE);
-        }
-                                                                                                                             
-        add_table_rows (password_dialog);
+	GnomePasswordDialogDetails *priv;
+	const gchar *username;
+	gboolean sensitive = TRUE;
+
+	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
+
+	priv = password_dialog->details;
+
+	show = show != FALSE;
+	priv->show_userpass_buttons_set = TRUE;
+
+	if (priv->show_userpass_buttons != show) {
+		priv->show_userpass_buttons = show;	
+		g_object_set (priv->radio_vbox, "visible", priv->show_userpass_buttons, NULL);
+
+		if (show) {
+			sensitive = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->connect_with_no_userpass_button));
+		}
+
+		gtk_widget_set_sensitive (priv->table_alignment, sensitive);
+		gtk_alignment_set_padding (GTK_ALIGNMENT (priv->table_alignment),
+					   0, 0, show ? 12 : 0, 0);
+
+		/* Compute default */
+		if (!priv->anonymous_set) {
+			username = gtk_entry_get_text (GTK_ENTRY (priv->username_entry));
+			gnome_password_dialog_set_anon (password_dialog,
+					username == NULL || username[0] == '\0', FALSE);
+		}
+
+		g_object_notify (G_OBJECT (password_dialog), "readonly-domain");
+	}
 }
 
 /**
@@ -788,10 +1229,15 @@ gnome_password_dialog_set_show_userpass_buttons (GnomePasswordDialog         *pa
 gboolean
 gnome_password_dialog_anon_selected (GnomePasswordDialog *password_dialog)
 {
-	return password_dialog->details->anon_support_on &&
-		gtk_toggle_button_get_active (
-        		GTK_TOGGLE_BUTTON (
-				password_dialog->details->connect_with_no_userpass_button));
+	GnomePasswordDialogDetails *priv;
+	gboolean active;
+
+	g_return_val_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog), FALSE);
+
+	priv = password_dialog->details;
+	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->connect_with_no_userpass_button));
+
+	return priv->show_userpass_buttons && active;
 }
 
 /**
@@ -807,14 +1253,28 @@ gnome_password_dialog_anon_selected (GnomePasswordDialog *password_dialog)
  **/
 void
 gnome_password_dialog_set_show_remember (GnomePasswordDialog         *password_dialog,
-					 gboolean                     show_remember)
+					 gboolean                     show)
 {
-	if (show_remember) {
-		gtk_widget_show (password_dialog->details->remember_session_button);
-		gtk_widget_show (password_dialog->details->remember_forever_button);
-	} else {
-		gtk_widget_hide (password_dialog->details->remember_session_button);
-		gtk_widget_hide (password_dialog->details->remember_forever_button);
+	GnomePasswordDialogDetails *priv;
+
+	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
+
+	priv = password_dialog->details;
+
+	show = show != FALSE;
+
+	if (priv->show_remember != show) {
+		priv->show_remember = show;
+
+		if (show) {
+			gtk_widget_show (priv->remember_session_button);
+			gtk_widget_show (priv->remember_forever_button);
+		} else {
+			gtk_widget_hide (priv->remember_session_button);
+			gtk_widget_hide (priv->remember_forever_button);
+		}
+
+		g_object_notify (G_OBJECT (password_dialog), "show-remember");
 	}
 }
 
@@ -832,19 +1292,28 @@ void
 gnome_password_dialog_set_remember      (GnomePasswordDialog         *password_dialog,
 					 GnomePasswordDialogRemember  remember)
 {
+	GnomePasswordDialogDetails *priv;
 	gboolean session, forever;
 
-	session = FALSE;
-	forever = FALSE;
-	if (remember == GNOME_PASSWORD_DIALOG_REMEMBER_SESSION) {
-		session = TRUE;
-	} else if (remember == GNOME_PASSWORD_DIALOG_REMEMBER_FOREVER){
-		forever = TRUE;
+	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
+
+	priv = password_dialog->details;
+
+	if (gnome_password_dialog_get_remember (password_dialog) != remember) {
+		session = FALSE;
+		forever = FALSE;
+		if (remember == GNOME_PASSWORD_DIALOG_REMEMBER_SESSION) {
+			session = TRUE;
+		} else if (remember == GNOME_PASSWORD_DIALOG_REMEMBER_FOREVER){
+			forever = TRUE;
+		}
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->remember_session_button),
+					session);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->remember_forever_button),
+					forever);
+
+		g_object_notify (G_OBJECT (password_dialog), "remember-mode");
 	}
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (password_dialog->details->remember_session_button),
-				      session);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (password_dialog->details->remember_forever_button),
-				      forever);
 }
 
 /**
@@ -862,10 +1331,15 @@ gnome_password_dialog_set_remember      (GnomePasswordDialog         *password_d
 GnomePasswordDialogRemember
 gnome_password_dialog_get_remember (GnomePasswordDialog         *password_dialog)
 {
+	GnomePasswordDialogDetails *priv;
 	gboolean session, forever;
 
-	session = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (password_dialog->details->remember_session_button));
-	forever = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (password_dialog->details->remember_forever_button));
+	g_return_val_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog), GNOME_PASSWORD_DIALOG_REMEMBER_NOTHING);
+
+	priv = password_dialog->details;
+
+	session = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->remember_session_button));
+	forever = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->remember_forever_button));
 	if (forever) {
 		return GNOME_PASSWORD_DIALOG_REMEMBER_FOREVER;
 	} else if (session) {

@@ -1,3 +1,45 @@
+2006-12-02  Christian Persch  <chpe@cvs.gnome.org>
+
+	* libgnomeui/gnome-password-dialog.c:
+	(gnome_password_dialog_set_message),
+	(gnome_password_dialog_set_anon), (userpass_radio_button_toggled),
+	(add_row), (remove_child), (update_entries_table),
+	(username_entry_activate), (domain_entry_activate),
+	(password_entry_activate), (gnome_password_dialog_init),
+	(gnome_password_dialog_constructor),
+	(gnome_password_dialog_finalize),
+	(gnome_password_dialog_set_property),
+	(gnome_password_dialog_get_property),
+	(gnome_password_dialog_class_init), (gnome_password_dialog_show),
+	(gnome_password_dialog_new), (gnome_password_dialog_run_and_block),
+	(gnome_password_dialog_set_username),
+	(gnome_password_dialog_set_password),
+	(gnome_password_dialog_set_domain),
+	(gnome_password_dialog_set_show_username),
+	(gnome_password_dialog_set_show_domain),
+	(gnome_password_dialog_set_show_password),
+	(gnome_password_dialog_set_readonly_username),
+	(gnome_password_dialog_set_readonly_domain),
+	(gnome_password_dialog_get_username),
+	(gnome_password_dialog_get_domain),
+	(gnome_password_dialog_get_password),
+	(gnome_password_dialog_set_show_userpass_buttons),
+	(gnome_password_dialog_anon_selected),
+	(gnome_password_dialog_set_show_remember),
+	(gnome_password_dialog_set_remember),
+	(gnome_password_dialog_get_remember):
+	* libgnomeui/gnome-password-dialog.h:
+
+	Clean up GnomePasswordDialog. HIGify and add GObject properties.
+	Bug #344752.
+
+	A test-gnome/prop-editor.c:
+	A test-gnome/prop-editor.h:
+	* test-gnome/test-password-dialog.c: (quality_func),
+	(authenticate_boink_callback), (exit_callback):
+
+	Add property editor to test-password-dialog.
+
 2006-11-19  Vincent Untz  <vuntz@gnome.org>
 
 	* libgnomeui/gnome_segv.c: (main): set title of the terminal used to
