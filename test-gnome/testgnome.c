@@ -44,6 +44,7 @@ static const gchar *authors[] = {
 	"Jonathan Blandford",
 	"Carlos Perelló Marín",
 	"Martin Baulig",
+	"Test <test@example.com>",
 	NULL
 };
 
@@ -87,14 +88,16 @@ static void
 verb_HelpAbout_cb (BonoboUIComponent *uic, gpointer user_data, const char *cname)
 {
 	const char *documentors[] = { "Documentor1", "Documentor2", NULL };
-	GtkWidget *about = gnome_about_new ("GNOME Test Program", VERSION,
-					    "(C) 1998-2001 The Free Software Foundation",
-					    "Program to display GNOME functions.",
-					    authors,
-					    documentors,
-					    NULL,
-					    NULL);
-	gtk_widget_show (about);
+	gtk_show_about_dialog (NULL,
+			"name", "GNOME Test Program",
+		        "version", VERSION,
+			"copyright", "(C) 1998-2001 The Free Software Foundation",
+			"comments", "Program to display GNOME functions.",
+			"authors", authors,
+			"documenters", documentors,
+			"website", "http://www.gnome.org/",
+			"website-label", "GNOME Web Site",
+			NULL);
 }
 
 static BonoboUIVerb verbs[] = {
@@ -1529,6 +1532,7 @@ main (int argc, char **argv)
 		  { "about box", create_about_box }
 	  };
 	int nbuttons = sizeof (buttons) / sizeof (buttons[0]);
+	GnomeProgram *program;
 	TestGnomeApp *app;
 	GtkWidget *box1;
 	GtkWidget *box2;
@@ -1536,7 +1540,7 @@ main (int argc, char **argv)
 	GtkWidget *scrolled_window;
 	int i;
 
-	gnome_program_init ("testGNOME", VERSION,
+	program = gnome_program_init ("testGNOME", VERSION,
 			    LIBGNOMEUI_MODULE,
 			    argc, argv,
 			    GNOME_PARAM_GOPTION_CONTEXT,
@@ -1577,6 +1581,8 @@ main (int argc, char **argv)
 	gtk_widget_show (app->app);
 
 	gtk_main ();
+
+	g_object_unref (program);
 
 	return 0;
 }

@@ -1,5 +1,11 @@
 2006-12-02  Christian Persch  <chpe@cvs.gnome.org>
 
+	* test-gnome/testgnome.c: (verb_HelpAbout_cb), (main):
+
+	Don't leak the GnomeProgram.
+
+2006-12-02  Christian Persch  <chpe@cvs.gnome.org>
+
 	* libgnomeui/gnome-password-dialog.c: (remember_button_toggled),
 	(gnome_password_dialog_init):
 
