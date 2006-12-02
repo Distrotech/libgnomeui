@@ -24,6 +24,8 @@ test_druid_SOURCES =	\
 	testdruid.c
 
 test_password_dialog_SOURCES =	\
+	prop-editor.c \
+	prop-editor.h \
 	test-password-dialog.c
 
 test_entry_SOURCES = 	\
