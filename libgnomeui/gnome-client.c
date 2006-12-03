@@ -1092,8 +1092,7 @@ client_parse_func (poptContext ctx,
 		    GNOME_CLIENT_PARAM_SM_CONNECT, FALSE, NULL);
       break;
     case ARG_SM_CONFIG_PREFIX:
-      if(master_client->config_prefix)
-	g_free(master_client->config_prefix);
+      g_free(master_client->config_prefix);
       master_client->config_prefix= g_strdup (arg);
       master_client_restored = TRUE;
       break;

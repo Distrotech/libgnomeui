@@ -176,7 +176,7 @@ create_label (void)
 {
 	GtkWidget *label;
 	
-	label = gtk_label_new ("");
+	label = gtk_label_new (NULL);
 	gtk_label_set_selectable (GTK_LABEL (label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.0);
 	gtk_misc_set_padding (GTK_MISC (label), 8, 8);
@@ -446,7 +446,7 @@ static void
 gnome_about_set_comments (GnomeAbout *about, const gchar *comments)
 {
 	g_free (about->_priv->comments);
-	about->_priv->comments = comments ? g_strdup (comments) : NULL;
+	about->_priv->comments = g_strdup (comments);
 
 	gtk_label_set_text (GTK_LABEL (about->_priv->comments_label), about->_priv->comments);
 }
@@ -465,7 +465,7 @@ gnome_about_set_copyright (GnomeAbout *about, const gchar *copyright)
 	char *copyright_string, *tmp;
 	
 	g_free (about->_priv->copyright);
-	about->_priv->copyright = copyright ? g_strdup (copyright) : NULL;
+	about->_priv->copyright = g_strdup (copyright);
 
 	if (about->_priv->copyright != NULL) {
 		tmp = g_markup_escape_text (about->_priv->copyright, -1);
@@ -487,7 +487,7 @@ gnome_about_set_version (GnomeAbout *about, const gchar *version)
 	gchar *name_string, *tmp_name, *tmp_version;
 	
 	g_free (about->_priv->version);
-	about->_priv->version = version ? g_strdup (version) : NULL;
+	about->_priv->version = g_strdup (version);
 
 	tmp_name = g_markup_escape_text (about->_priv->name, -1);
 	

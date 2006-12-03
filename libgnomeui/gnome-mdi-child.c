@@ -197,9 +197,7 @@ void gnome_mdi_child_set_name(GnomeMDIChild *mdi_child, const gchar *name)
 		_gnome_mdi_child_list_menu_remove_item(GNOME_MDI(mdi_child->parent), mdi_child);
 
 	mdi_child->name = (gchar *)g_strdup(name);
-
-	if(old_name)
-		g_free(old_name);
+	g_free(old_name);
 
 	if(mdi_child->parent) {
 		_gnome_mdi_child_list_menu_add_item(GNOME_MDI(mdi_child->parent), mdi_child);

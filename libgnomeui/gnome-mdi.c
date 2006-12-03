@@ -734,9 +734,7 @@ static void app_clone(GnomeMDI *mdi, GnomeApp *app)
 	}
 
 	app_create(mdi, layout_string);
-
-	if(layout_string)
-		g_free(layout_string);
+	g_free(layout_string);
 }
 
 static gint app_close_top (GnomeApp *app, GdkEventAny *event, GnomeMDI *mdi)
@@ -1866,9 +1864,7 @@ void gnome_mdi_set_child_menu_path (GnomeMDI *mdi, const gchar *path)
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));
 
-	if(mdi->child_menu_path)
-		g_free(mdi->child_menu_path);
-
+	g_free(mdi->child_menu_path);
 	mdi->child_menu_path = g_strdup(path);
 }
 
@@ -1890,9 +1886,7 @@ void gnome_mdi_set_child_list_path (GnomeMDI *mdi, const gchar *path)
 	g_return_if_fail(mdi != NULL);
 	g_return_if_fail(GNOME_IS_MDI(mdi));
 
-	if(mdi->child_list_path)
-		g_free(mdi->child_list_path);
-
+	g_free(mdi->child_list_path);
 	mdi->child_list_path = g_strdup(path);
 }
 

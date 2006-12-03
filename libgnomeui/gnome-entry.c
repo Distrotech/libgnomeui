@@ -324,9 +324,7 @@ free_item (gpointer data, gpointer user_data)
 	struct item *item;
 
 	item = data;
-	if (item->text)
-		g_free (item->text);
-
+	g_free (item->text);
 	g_free (item);
 }
 

@@ -2892,9 +2892,7 @@ gnome_icon_list_set_separators (GnomeIconList *gil, const char *sep)
 
 	priv = gil->_priv;
 
-	if (priv->separators)
-		g_free (priv->separators);
-
+	g_free (priv->separators);
 	priv->separators = g_strdup (sep);
 
 	if (priv->frozen) {

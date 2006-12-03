@@ -1441,8 +1441,7 @@ get_file_info_callback (GnomeVFSAsyncHandle *vfs_handle,
 			 error, op_data->callback_data);
 
 out:
-  if (uri)
-    g_free (uri);
+  g_free (uri);
   if (error)
     g_error_free (error);
   if (file_info)
@@ -1655,8 +1654,7 @@ cancel_operation_callback (gpointer data)
 	    gnome_vfs_uri_unref (data->uri);
 	  if (data->file_info)
 	    gnome_vfs_file_info_unref (data->file_info);
-	  if (data->vfs_uri)
-	    g_free (data->vfs_uri);
+	  g_free (data->vfs_uri);
 	  g_free (data);
 	  break;
 	}

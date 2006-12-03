@@ -630,7 +630,7 @@ gnome_appbar_constructor (GType                  type,
       frame = gtk_frame_new (NULL);
       gtk_frame_set_shadow_type (GTK_FRAME(frame), GTK_SHADOW_IN);
 
-      ab->_priv->status = gtk_label_new ("");
+      ab->_priv->status = gtk_label_new (NULL);
       gtk_misc_set_alignment (GTK_MISC (ab->_priv->status), 0.0, 0.0);
       gtk_widget_set_size_request (ab->_priv->status, 1, -1);
 

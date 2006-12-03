@@ -604,13 +604,13 @@ file_entry_update_files(GtkWidget *w, GnomeFileEntry *fentry)
 	pp = g_strconcat("File name: ",p,NULL);
 	gtk_label_set_text(l1,pp);
 	g_free(pp);
-	if(p) g_free(p);
+	g_free(p);
 
 	p = gnome_file_entry_get_full_path(fentry,TRUE);
 	pp = g_strconcat("File name(if exists only): ",p,NULL);
 	gtk_label_set_text(l2,pp);
 	g_free(pp);
-	if(p) g_free(p);
+	g_free(p);
 }
 
 static void

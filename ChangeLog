@@ -1,3 +1,29 @@
+2006-12-03  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* NEWS: Update
+	* configure.in: Bump to 2.17.0
+	* file-chooser/gtkfilesystemgnomevfs.c: (get_file_info_callback),
+	(cancel_operation_callback):
+	* file-chooser/prop-editor.c: (property_widget):
+	* libgnomeui/gnome-about.c: (create_label),
+	(gnome_about_set_comments), (gnome_about_set_copyright),
+	(gnome_about_set_version):
+	* libgnomeui/gnome-appbar.c: (gnome_appbar_constructor):
+	* libgnomeui/gnome-client.c: (client_parse_func):
+	* libgnomeui/gnome-entry.c: (free_item):
+	* libgnomeui/gnome-file-entry.c: (gnome_file_entry_set_title):
+	* libgnomeui/gnome-href.c: (gnome_href_instance_init):
+	* libgnomeui/gnome-icon-list.c:
+	* libgnomeui/gnome-mdi-child.c: (gnome_mdi_child_set_name):
+	* libgnomeui/gnome-mdi.c: (app_clone),
+	(gnome_mdi_set_child_menu_path), (gnome_mdi_set_child_list_path):
+	* libgnomeui/gnome-scores.c: (gnome_scores_construct):
+	* libgnomeui/gnome-thumbnail.c:
+	(gnome_thumbnail_factory_generate_thumbnail):
+	* test-gnome/testgnome.c: (file_entry_update_files):
+	- g_free() and g_strdup() can handle NULL
+	- pass NULL instead of "" to gtk_label_new() to save a bit of work.
+
 2006-12-02  Christian Persch  <chpe@cvs.gnome.org>
 
 	* test-gnome/testgnome.c: (verb_HelpAbout_cb), (main):

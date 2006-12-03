@@ -619,7 +619,7 @@ property_widget (GObject *object, GParamSpec *spec, gboolean can_modify)
     }
   else if (type == G_TYPE_PARAM_POINTER)
     {
-      prop_edit = gtk_label_new ("");
+      prop_edit = gtk_label_new (NULL);
       
       g_object_connect_property (object, spec->name,
 				 G_CALLBACK (pointer_changed),
@@ -627,7 +627,7 @@ property_widget (GObject *object, GParamSpec *spec, gboolean can_modify)
     }
   else if (type == G_TYPE_PARAM_OBJECT)
     {
-      prop_edit = gtk_label_new ("");
+      prop_edit = gtk_label_new (NULL);
       
       g_object_connect_property (object, spec->name,
 				 G_CALLBACK (object_changed),

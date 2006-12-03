@@ -975,8 +975,7 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
 	  
 	  g_unlink(tmpname);
 	}
-      if (tmpname)
-        g_free (tmpname);
+      g_free (tmpname);
     }
 
   /* Fall back to gdk-pixbuf */

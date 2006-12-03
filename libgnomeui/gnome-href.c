@@ -147,7 +147,7 @@ gnome_href_instance_init (GnomeHRef *href)
 {
 	href->_priv = g_new0(GnomeHRefPrivate, 1);
 
-	href->_priv->label = gtk_label_new("");
+	href->_priv->label = gtk_label_new(NULL);
 	gtk_widget_ref(href->_priv->label);
 
 

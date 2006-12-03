@@ -201,7 +201,7 @@ gnome_scores_construct (  GnomeScores *gs,
 		tmp2[sizeof(tmp2)-1] = '\0'; /* just for sanity */
 
 		str_utf8 = g_locale_to_utf8 (tmp2, -1, NULL, NULL, NULL);
-		gs->_priv->label_times[i] = gtk_label_new (str_utf8 ? str_utf8 : "");
+		gs->_priv->label_times[i] = gtk_label_new (str_utf8 ? str_utf8 : NULL);
 		g_free (str_utf8);
 		gtk_widget_show ( gs->_priv->label_times[i] );
 		gtk_table_attach_defaults ( gs->_priv->table, gs->_priv->label_times[i], 2, 3, i+1, i+2);

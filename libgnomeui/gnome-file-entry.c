@@ -984,9 +984,7 @@ gnome_file_entry_set_title (GnomeFileEntry *fentry, const char *browse_dialog_ti
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
 
-	if (fentry->_priv->browse_dialog_title)
-		g_free (fentry->_priv->browse_dialog_title);
-
+	g_free (fentry->_priv->browse_dialog_title);
 	fentry->_priv->browse_dialog_title = g_strdup (browse_dialog_title); /* handles NULL correctly */
 }
 
