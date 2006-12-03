@@ -1,6 +1,7 @@
 libgnomeui 2.17.0
 -----------------
 
+* Small cleanups all over the place (Kjartan)
 * Clean up GnomePasswordDialog. HIGify and add GObject properties.
   (Christian Persch)
 * Fix wording in a dialog in the case where 
