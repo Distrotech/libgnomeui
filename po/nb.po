@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.15.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-11 09:20+0200\n"
-"PO-Revision-Date: 2006-09-11 09:21+0200\n"
+"POT-Creation-Date: 2006-12-04 16:03+0100\n"
+"PO-Revision-Date: 2006-12-04 16:05+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -30,35 +30,35 @@ msgstr "Avkom-oppføring 2"
 msgid "Hint for item 2"
 msgstr "Hint for oppføring 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:972
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s er en lenke til noe som ikke er en mappe"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:983
+#: ../file-chooser/gtkfilesystemgnomevfs.c:989
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s er en lenke uten mål"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s er ikke en mappe"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1912
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
 msgid "Network Servers"
 msgstr "Nettverkstjenere"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1928
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2457
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Lagring av bokmerke feilet (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2894
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Kunne ikke finne informasjon for «%s»"
@@ -664,16 +664,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Passordet ditt vil bli overført kryptert."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Autentisering kreves"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Du må logge in for å aksessere %s, domene %s\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Du må logge in for å aksessere %s\n"
@@ -706,7 +707,7 @@ msgstr "Sesjonshåndtering"
 msgid "Show session management options"
 msgstr "Vis alternativer for sesjonshåndtering"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "Avbryt utlogging"
 
@@ -1298,35 +1299,35 @@ msgstr "Spørsmål"
 msgid "Message"
 msgstr "Beskjed"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
 msgstr "Br_ukernavn:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
 msgstr "_Domene:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:202
 msgid "_Password:"
 msgstr "_Passord:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:271
 msgid "Co_nnect"
 msgstr "Ko_ble til"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:304
 msgid "Connect _anonymously"
 msgstr "Koble til _anonymt"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:309
 msgid "Connect as u_ser:"
 msgstr "Koble til som br_uker:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
+#: ../libgnomeui/gnome-password-dialog.c:352
 msgid "_Remember password for this session"
 msgstr "Husk passo_rdet for denne sesjonen"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
+#: ../libgnomeui/gnome-password-dialog.c:356
 msgid "Save password in _keyring"
 msgstr "Lagre passord på nø_kkelring"
 
@@ -1422,13 +1423,17 @@ msgstr "X-display som skal brukes"
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "GNOME GUI-bibliotek"
+#: ../libgnomeui/gnome-ui-init.c:172
+msgid "GNOME GUI Library:"
+msgstr "GNOME GUI-bibliotek:"
 
 #: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "Vis alternativer for GNOME brukergrensesnitt"
+
+#: ../libgnomeui/gnome-ui-init.c:185
+msgid "GNOME GUI Library"
+msgstr "GNOME GUI-bibliotek"
 
 #: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
@@ -1454,20 +1459,27 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Bruk: gnome_segv2 appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "Feilsøker %s"
+
+#: ../libgnomeui/gnome_segv.c:143
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>Programmet %s har krasjet.</b>\n"
 "\n"
-"Du har ikke installert <b>bug-buddy</b> som er et verktøy\n"
-"for å rapportere feil. Hvis du vil hjelpe oss å gjøre\n"
-"GNOME bedre bør du installere dette verktøyet\n"
+"Vennligst installer <b>bug-buddy</b>. Dette er\n"
+"et verktøy for å rapportere feil hvilket lar\n"
+"deg sende detaljert informasjon om feilen til\n"
+"utviklerene.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
