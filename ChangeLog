@@ -1,3 +1,9 @@
+2006-12-04  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-app-helper.h: Remove include that was causing
+	some apps to miscompile. Warning is better than not compiling.
+	Look at bug #143336.
+
 2006-12-03  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* NEWS: Update
