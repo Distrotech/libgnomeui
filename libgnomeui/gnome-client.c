@@ -1031,7 +1031,7 @@ gnome_client_module_get_goption_group (void)
 	_gnome_ui_gettext_init (TRUE);
 
 	option_group = g_option_group_new ("gnome-session",
-					   N_("Session management"),
+					   N_("Session management:"),
 					   N_("Show session management options"),
 					   NULL, NULL);
 	g_option_group_set_translation_domain (option_group, GETTEXT_PACKAGE);

@@ -1,5 +1,16 @@
 2006-12-04  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-authentication-manager.c:
+	(construct_full_password_dialog): Add translator comment
+	Closes bug #143698. Thanks to Alex for help with the wording.
+	* libgnomeui/gnome-client.c:
+	(gnome_client_module_get_goption_group):
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_get_goption_group):
+	Add colons after the option group name for consistency. Reported
+	by Davyd Madeley. Closes bug #350227.
+
+2006-12-04  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-app-helper.h: Remove include that was causing
 	some apps to miscompile. Warning is better than not compiling.
 	Look at bug #143336.

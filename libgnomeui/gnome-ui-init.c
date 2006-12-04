@@ -169,7 +169,7 @@ libgnomeui_get_goption_group (void)
 	_gnome_ui_gettext_init (TRUE);
 
 	option_group = g_option_group_new ("gnome-ui",
-					   N_("GNOME GUI Library"),
+					   N_("GNOME GUI Library:"),
 					   N_("Show GNOME GUI options"),
 					   NULL, NULL);
 	g_option_group_set_translation_domain (option_group, GETTEXT_PACKAGE);

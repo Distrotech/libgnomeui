@@ -295,6 +295,7 @@ construct_full_password_dialog (const GnomeVFSModuleCallbackFullAuthenticationIn
 		g_string_append_printf (name, "/%s", in_args->object);
 	}
 	if (in_args->domain != NULL) {
+		/* Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN." */
 		message = g_strdup_printf (_("You must log in to access %s domain %s\n"), name->str, in_args->domain);
 	} else {
 		message = g_strdup_printf (_("You must log in to access %s\n"), name->str);
