@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-02 19:07+0200\n"
-"PO-Revision-Date: 2006-09-02 20:35+0200\n"
+"POT-Creation-Date: 2006-12-11 11:20+0100\n"
+"PO-Revision-Date: 2006-12-11 11:21+0100\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -38,35 +38,35 @@ msgstr "Elemento hijo 2"
 msgid "Hint for item 2"
 msgstr "Consejo para el elemento 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:972
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s es un enlace a algo que no es una carpeta"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:983
+#: ../file-chooser/gtkfilesystemgnomevfs.c:989
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s es un enlace sin un sitio de destino"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s no es una carpeta"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
 msgid "Network Servers"
 msgstr "Servidores de red"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Se ha producido un error al guardar el marcador (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "No se ha podido obtener información para «%s»"
@@ -83,8 +83,11 @@ msgstr "Falló al abrir el archivo «%s»:%s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "No se ha podido cargar la imagen «%s»: razón no conocida, probablemente un archivo de imagen corrupto"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"No se ha podido cargar la imagen «%s»: razón no conocida, probablemente un "
+"archivo de imagen corrupto"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
@@ -175,7 +178,8 @@ msgid "Translator credits"
 msgstr "Créditos del traductor"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos para los traductores. Esta cadena debería estar marcada como "
 "traducible"
@@ -671,16 +675,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Su contraseña se transmitirá encriptada."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Se requiere autenticación"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Debe iniciar sesión para acceder a %s en el dominio %s\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Debe iniciar sesión para acceder a %s\n"
@@ -705,15 +710,19 @@ msgstr "PREFIJO"
 msgid "Disable connection to session manager"
 msgstr "Desactivar la conexión al administrador de sesiones"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Gestión de sesiones"
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "Gestión de sesiones:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Mostrar opciones de gestión de sesión"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Gestión de sesiones"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "Cancelar el cierre de sesión"
 
@@ -960,8 +969,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Indica si la entrada de archivo se usa para introducir nombres "
-"de directorios o nombres de archivos completos."
+"Indica si la entrada de archivo se usa para introducir nombres de "
+"directorios o nombres de archivos completos."
 
 #: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
@@ -1109,7 +1118,8 @@ msgstr "Usar tipografía en la etiqueta"
 
 #: ../libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr ""
+"Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: ../libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1310,35 +1320,35 @@ msgstr "Pregunta"
 msgid "Message"
 msgstr "Mensaje"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
 msgstr "_Usuario:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
 msgstr "_Dominio:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:202
 msgid "_Password:"
 msgstr "_Contraseña:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:271
 msgid "Co_nnect"
 msgstr "_Conectar"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:304
 msgid "Connect _anonymously"
 msgstr "Conectar _anónimamente"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:309
 msgid "Connect as u_ser:"
 msgstr "Conectar como _usuario:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
+#: ../libgnomeui/gnome-password-dialog.c:352
 msgid "_Remember password for this session"
 msgstr "_Recordar la contraseña para esta sesión"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
+#: ../libgnomeui/gnome-password-dialog.c:356
 msgid "Save password in _keyring"
 msgstr "Guardar contraseña en el _depósito de claves"
 
@@ -1434,13 +1444,17 @@ msgstr "Pantalla X a usar"
 msgid "DISPLAY"
 msgstr "PANTALLA"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "Biblioteca del IGU de Gnome"
+#: ../libgnomeui/gnome-ui-init.c:172
+msgid "GNOME GUI Library:"
+msgstr "Biblioteca del IGU de GNOME:"
 
 #: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "Mostrar opciones del IGU de GNOME"
+
+#: ../libgnomeui/gnome-ui-init.c:185
+msgid "GNOME GUI Library"
+msgstr "Biblioteca del IGU de Gnome"
 
 #: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
@@ -1468,22 +1482,28 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Uso: gnome_segv2 nombre-de-aplicación número-de-señal\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "Depurando %s"
+
+#: ../libgnomeui/gnome_segv.c:143
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>La aplicación %s se ha colgado.</b>\n"
 "\n"
-"Sin embargo no tiene instalado <b>bug-buddy</b>, la\n"
-"herramienta de informes de cuelgues de GNOME. Si quiere\n"
-"ayudarnos a mejorar GNOME, instálela.\n"
+"Instale <b>bug-buddy</b>, la herramienta\n"
+"de informe de cuelgues de GNOME, que le \n"
+"permite enviar a los desarrolladores\n"
+"información detallada acerca del error.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Salir del test"
-
