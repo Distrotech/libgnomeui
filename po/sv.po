@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-20 03:39+0000\n"
-"PO-Revision-Date: 2006-11-29 22:32+0100\n"
+"POT-Creation-Date: 2006-12-11 19:08+0100\n"
+"PO-Revision-Date: 2006-12-12 00:03+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -49,20 +49,20 @@ msgstr "%s är en länk utan någon destinationsplats"
 msgid "%s is not a folder"
 msgstr "%s är ingen mapp"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1918
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
 msgid "Network Servers"
 msgstr "Nätverksservrar"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1934
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2463
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Sparande av bokmärke misslyckades (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2900
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Fel vid hämtning av information för \"%s\""
@@ -194,7 +194,7 @@ msgstr "Om %s"
 
 #. Some standard menus
 #: ../libgnomeui/gnome-app-helper.c:82
-#: ../libgnomeui/gnome-app-helper.h:552
+#: ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Arkiv"
@@ -204,7 +204,7 @@ msgid "_File/"
 msgstr "_Arkiv/"
 
 #: ../libgnomeui/gnome-app-helper.c:84
-#: ../libgnomeui/gnome-app-helper.h:555
+#: ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Redigera"
 
@@ -213,7 +213,7 @@ msgid "_Edit/"
 msgstr "_Redigera/"
 
 #: ../libgnomeui/gnome-app-helper.c:86
-#: ../libgnomeui/gnome-app-helper.h:558
+#: ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Visa"
 
@@ -222,7 +222,7 @@ msgid "_View/"
 msgstr "_Visa/"
 
 #: ../libgnomeui/gnome-app-helper.c:88
-#: ../libgnomeui/gnome-app-helper.h:561
+#: ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Inställningar"
 
@@ -232,7 +232,7 @@ msgstr "_Inställningar/"
 
 #. If you have more then one New type, use this tree
 #: ../libgnomeui/gnome-app-helper.c:90
-#: ../libgnomeui/gnome-app-helper.h:327
+#: ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Ny"
 
@@ -241,7 +241,7 @@ msgid "_New/"
 msgstr "_Ny/"
 
 #: ../libgnomeui/gnome-app-helper.c:92
-#: ../libgnomeui/gnome-app-helper.h:564
+#: ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Fi_ler"
 
@@ -250,17 +250,17 @@ msgid "Fi_les/"
 msgstr "Fi_ler/"
 
 #: ../libgnomeui/gnome-app-helper.c:94
-#: ../libgnomeui/gnome-app-helper.h:567
+#: ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_Fönster"
 
 #: ../libgnomeui/gnome-app-helper.c:95
-#: ../libgnomeui/gnome-app-helper.h:573
+#: ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Spel"
 
 #: ../libgnomeui/gnome-app-helper.c:96
-#: ../libgnomeui/gnome-app-helper.h:570
+#: ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjälp"
@@ -681,16 +681,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Ditt lösenord kommer att skickas krypterat."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Autentisering krävs"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Du måste logga in för att komma åt %s-domänen %s\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Du måste logga in för att komma åt %s\n"
@@ -722,15 +723,18 @@ msgid "Disable connection to session manager"
 msgstr "Stäng av koppling till sessionshanteraren"
 
 #: ../libgnomeui/gnome-client.c:1034
-#: ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Sessionshantering"
+msgid "Session management:"
+msgstr "Sessionshantering:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Visa alternativ för sessionshantering"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Sessionshantering"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "Avbryt utloggning"
 
@@ -1287,35 +1291,35 @@ msgstr "Fråga"
 msgid "Message"
 msgstr "Meddelande"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
 msgstr "_Användarnamn:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
 msgstr "_Domän:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:202
 msgid "_Password:"
 msgstr "_Lösenord:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:271
 msgid "Co_nnect"
 msgstr "A_nslut"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:304
 msgid "Connect _anonymously"
 msgstr "Anslut _anonymt"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:309
 msgid "Connect as u_ser:"
 msgstr "Anslut som an_vändare:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
+#: ../libgnomeui/gnome-password-dialog.c:352
 msgid "_Remember password for this session"
 msgstr "_Kom ihåg lösenordet under denna session"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
+#: ../libgnomeui/gnome-password-dialog.c:356
 msgid "Save password in _keyring"
 msgstr "Spara lösenordet i nyckel_ring"
 
@@ -1415,13 +1419,16 @@ msgid "DISPLAY"
 msgstr "DISPLAY"
 
 #: ../libgnomeui/gnome-ui-init.c:172
-#: ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "GNOME-bibliotek för grafiska användargränssnitt"
+msgid "GNOME GUI Library:"
+msgstr "GNOME-bibliotek för grafiska användargränssnitt:"
 
 #: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "Visa alternativ för GNOME-gränssnitt"
+
+#: ../libgnomeui/gnome-ui-init.c:185
+msgid "GNOME GUI Library"
+msgstr "GNOME-bibliotek för grafiska användargränssnitt"
 
 #: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
