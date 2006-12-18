@@ -1,388 +1,339 @@
-# translation of libgnomeui.po to Arabic
+# translation of libgnomeui.HEAD.po to Arabic
 # Copyright (C) 2002 THE libgnomeui.HEAD.ar'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the libgnomeui.po package.
+#
+#
 # Arafat Medini <lumina@silverpen.de>, 2002,2003.
 # Isam Bayazidi <bayazidi@arabeyes.org>, 2002.
 #  <lumina@silverpen.de>, 2004.
 # Ayman Hourieh <aymanh@gmail.com>, 2004.
-#
-#
+# Khaled Hosny <khaledhosny@eglug.org>, 2006.
+# Djihed Afifi <djihed@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-26 15:43+0100\n"
-"PO-Revision-Date: 2004-08-04 17:25+0300\n"
-"Last-Translator: Ayman Hourieh <aymanh@gmail.com>\n"
-"Language-Team: Arabic <support@arabeyes.org>\n"
+"POT-Creation-Date: 2006-12-18 01:27+0000\n"
+"PO-Revision-Date: 2006-11-12 03:01+0100\n"
+"Last-Translator: Djihed Afifi <djihed@gmail.com>\n"
+"Language-Team: Arabeyes <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : "
+"3\n"
+"X-Poedit-Language: Arabic\n"
 
-#: demos/mdi_demo.c:128
+#: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
 msgstr "العنصر الإبن 1"
 
-#: demos/mdi_demo.c:129
+#: ../demos/mdi_demo.c:129
 msgid "Hint for item 1"
 msgstr "تلميحة للعنصر 1 "
 
-#: demos/mdi_demo.c:131
+#: ../demos/mdi_demo.c:131
 msgid "Child Item 2"
 msgstr "العنصر الإبن 2"
 
-#: demos/mdi_demo.c:132
+#: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "تلميحة للعنصر 2"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:820
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is a link to something that is not a folder"
-msgstr ""
+msgstr "%s: وصلة لشيء ليس بدليل"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:989
 #, c-format
 msgid "%s is a link without a destination location"
-msgstr ""
+msgstr "%s: وصلة بدون وصول"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:946
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ليس دليلاً"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1194
-#, fuzzy
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
+msgid "Network Servers"
+msgstr "خوادم الشبكة"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
 msgid "File System"
 msgstr "نظام الملفات"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:1952
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "فشل حفظ العلامة (%s)"
 
-#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
-#, fuzzy, c-format
-msgid "Error reading file '%s': %s"
-msgstr "فشل فتح الملف '%s': %s"
-
-#: file-chooser/sucky-desktop-item.c:285
-#, fuzzy, c-format
-msgid "Error rewinding file '%s': %s"
-msgstr "فشل فتح الملف '%s': %s"
-
-#: file-chooser/sucky-desktop-item.c:384
-#: file-chooser/sucky-desktop-item.c:3702
-#, fuzzy
-msgid "No name"
-msgstr "اسم الخطّ"
-
-#: file-chooser/sucky-desktop-item.c:620
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
 #, c-format
-msgid "File '%s' is not a regular file or directory."
-msgstr ""
+msgid "Error getting information for '%s'"
+msgstr "خطأ تلقي معلومات لـ '%s'"
 
-#: file-chooser/sucky-desktop-item.c:796
-#, c-format
-msgid "Error cannot find file id '%s'"
-msgstr ""
-
-#: file-chooser/sucky-desktop-item.c:842
-#, c-format
-msgid "No filename to save to"
-msgstr ""
-
-#: file-chooser/sucky-desktop-item.c:1797
-#, fuzzy, c-format
-msgid "Starting %s"
-msgstr "_تعيينات"
-
-#: file-chooser/sucky-desktop-item.c:2036
-#, c-format
-msgid "No URL to launch"
-msgstr ""
-
-#: file-chooser/sucky-desktop-item.c:2046
-#, c-format
-msgid "Not a launchable item"
-msgstr ""
-
-#: file-chooser/sucky-desktop-item.c:2056
-#, c-format
-msgid "No command (Exec) to launch"
-msgstr ""
-
-#: file-chooser/sucky-desktop-item.c:2069
-#, c-format
-msgid "Bad command (Exec) to launch"
-msgstr ""
-
-#: file-chooser/sucky-desktop-item.c:3759
-#, c-format
-msgid "Unknown encoding of: %s"
-msgstr ""
-
-#: file-chooser/sucky-desktop-item.c:3990
-#, fuzzy, c-format
-msgid "Error writing file '%s': %s"
-msgstr "فشل فتح الملف '%s': %s"
-
-#: file-chooser/testfilechooser.c:178
+#: ../file-chooser/testfilechooser.c:178
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "لم أستطع تلقي معلومات عن الملف '%s': %s"
 
-#: file-chooser/testfilechooser.c:191
+#: ../file-chooser/testfilechooser.c:191
 #, c-format
 msgid "Failed to open file '%s': %s"
 msgstr "فشل فتح الملف '%s': %s"
 
-#: file-chooser/testfilechooser.c:230
+#: ../file-chooser/testfilechooser.c:230
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "فشل تحميل الصّورة '%s': السبب مجهول، قد يكون ملف الصّورة تالفاً"
 
-#: libgnomeui/gnome-about.c:199
+#: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
 msgstr "المساهمون"
 
-#: libgnomeui/gnome-about.c:231
+#: ../libgnomeui/gnome-about.c:231
 msgid "Written by"
 msgstr "كُتب من طرف"
 
-#: libgnomeui/gnome-about.c:246
+#: ../libgnomeui/gnome-about.c:246
 msgid "Documented by"
 msgstr "وُثّق من طرف"
 
-#: libgnomeui/gnome-about.c:261
+#: ../libgnomeui/gnome-about.c:261
 msgid "Translated by"
 msgstr "تُرجم من طرف"
 
-#: libgnomeui/gnome-about.c:324
+#: ../libgnomeui/gnome-about.c:324
 msgid "C_redits"
 msgstr "الم_ساهمون"
 
-#: libgnomeui/gnome-about.c:379
+#: ../libgnomeui/gnome-about.c:377
 msgid "Program name"
 msgstr "اسم البرنامج"
 
-#: libgnomeui/gnome-about.c:380
+#: ../libgnomeui/gnome-about.c:378
 msgid "The name of the program"
 msgstr "اسم البرنامج"
 
-#: libgnomeui/gnome-about.c:387
+#: ../libgnomeui/gnome-about.c:385
 msgid "Program version"
 msgstr "إصدارة البرنامج"
 
-#: libgnomeui/gnome-about.c:388
+#: ../libgnomeui/gnome-about.c:386
 msgid "The version of the program"
 msgstr "إصدارة البرنامج"
 
-#: libgnomeui/gnome-about.c:394
+#: ../libgnomeui/gnome-about.c:392
 msgid "Copyright string"
 msgstr "نصّ حقوق الطبع"
 
-#: libgnomeui/gnome-about.c:395
+#: ../libgnomeui/gnome-about.c:393
 msgid "Copyright information for the program"
 msgstr "معلومات حقوق الطبع للبرنامج"
 
-#: libgnomeui/gnome-about.c:402
+#: ../libgnomeui/gnome-about.c:400
 msgid "Comments string"
 msgstr "نصّ التعليقات"
 
-#: libgnomeui/gnome-about.c:403
+#: ../libgnomeui/gnome-about.c:401
 msgid "Comments about the program"
 msgstr "تعليقات عن البرنامج"
 
-#: libgnomeui/gnome-about.c:409
+#: ../libgnomeui/gnome-about.c:407
 msgid "Authors"
 msgstr "المؤلّفون"
 
-#: libgnomeui/gnome-about.c:410
+#: ../libgnomeui/gnome-about.c:408
 msgid "List of authors of the programs"
 msgstr "قائمة مؤلّفي البرنامج"
 
-#: libgnomeui/gnome-about.c:412
+#: ../libgnomeui/gnome-about.c:410
 msgid "Author entry"
 msgstr "خانة المؤلّف"
 
-#: libgnomeui/gnome-about.c:413
+#: ../libgnomeui/gnome-about.c:411
 msgid "A single author entry"
 msgstr "خانة مفردة للمؤلّف"
 
-#: libgnomeui/gnome-about.c:420
+#: ../libgnomeui/gnome-about.c:418
 msgid "Documenters"
 msgstr "الموثّقون"
 
-#: libgnomeui/gnome-about.c:421
+#: ../libgnomeui/gnome-about.c:419
 msgid "List of people documenting the program"
 msgstr "قائمة موثّقي البرنامج"
 
-#: libgnomeui/gnome-about.c:423
+#: ../libgnomeui/gnome-about.c:421
 msgid "Documenter entry"
 msgstr "خانة الموّثق"
 
-#: libgnomeui/gnome-about.c:424
+#: ../libgnomeui/gnome-about.c:422
 msgid "A single documenter entry"
 msgstr "خانة مفردة للموثّق"
 
-#: libgnomeui/gnome-about.c:432
+#: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
 msgstr "المترجمون"
 
-#: libgnomeui/gnome-about.c:433
+#: ../libgnomeui/gnome-about.c:431
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "شكر للمترجمين. يجب تعليم هذا النصّ على انه قابل للترجمة"
 
-#: libgnomeui/gnome-about.c:440 libgnomeui/gnome-druid-page-standard.c:129
+#: ../libgnomeui/gnome-about.c:438
+#: ../libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "الشعار"
 
-#: libgnomeui/gnome-about.c:441
+#: ../libgnomeui/gnome-about.c:439
 msgid "A logo for the about box"
 msgstr "شعار لصندوق حول"
 
-#: libgnomeui/gnome-about.c:520
+#: ../libgnomeui/gnome-about.c:518
 #, c-format
 msgid "About %s"
 msgstr "حول %s"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
+#: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_ملف"
 
-#: libgnomeui/gnome-app-helper.c:83
+#: ../libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
 msgstr "_ملف/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_تحرير"
 
-#: libgnomeui/gnome-app-helper.c:85
+#: ../libgnomeui/gnome-app-helper.c:85
 msgid "_Edit/"
 msgstr "_تحرير/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_عرض"
 
-#: libgnomeui/gnome-app-helper.c:87
+#: ../libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
 msgstr "_عرض/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_تعيينات"
 
-#: libgnomeui/gnome-app-helper.c:89
+#: ../libgnomeui/gnome-app-helper.c:89
 msgid "_Settings/"
 msgstr "ت_عيينات/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_جديد"
 
-#: libgnomeui/gnome-app-helper.c:91
+#: ../libgnomeui/gnome-app-helper.c:91
 msgid "_New/"
 msgstr "_جديد/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "م_لفات"
 
-#: libgnomeui/gnome-app-helper.c:93
+#: ../libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
 msgstr "م_لفات/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_نوافذ"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_لعبة"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
+#: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_مساعدة"
 
-#: libgnomeui/gnome-app-helper.c:97
+#: ../libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
 msgstr "_نوافذ/"
 
 #. Open
-#: libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:109
 msgid "_Open..."
 msgstr "_فتح..."
 
-#: libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
 msgstr "فتح ملف"
 
 #. Save
-#: libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:114
 msgid "_Save"
 msgstr "_حفظ"
 
-#: libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
 msgstr "حفظ الملف الحالي"
 
 #. Save As
-#: libgnomeui/gnome-app-helper.c:119
+#: ../libgnomeui/gnome-app-helper.c:119
 msgid "Save _As..."
 msgstr "ح_فظ باسم..."
 
-#: libgnomeui/gnome-app-helper.c:120
+#: ../libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
 msgstr "حفظ الملف الحالي باسم مختلف"
 
 #. Revert
-#: libgnomeui/gnome-app-helper.c:125
+#: ../libgnomeui/gnome-app-helper.c:125
 msgid "_Revert"
 msgstr "ا_رتداد"
 
-#: libgnomeui/gnome-app-helper.c:126
+#: ../libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
 msgstr "ارتداد لنسخة محفوظة من الملف"
 
 #. Print
-#: libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:131
 msgid "_Print..."
 msgstr "_طباعة..."
 
-#: libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
 msgstr "طباعة الملف الحالي"
 
 #. Print Setup
-#: libgnomeui/gnome-app-helper.c:136
+#: ../libgnomeui/gnome-app-helper.c:136
 msgid "Print S_etup..."
 msgstr "_تعيين الطباعة..."
 
-#: libgnomeui/gnome-app-helper.c:137
+#: ../libgnomeui/gnome-app-helper.c:137
 msgid "Setup the page settings for your current printer"
 msgstr "إضبط إعدادات الصفحة لطابعتك الحالية"
 
 #. Close
-#: libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:142
 msgid "_Close"
 msgstr "_غلق"
 
-#: libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
 msgstr "غلق الملف الحالي"
 
 #. Exit
-#: libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
 msgstr "_إنهاء"
 
-#: libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
 msgstr "إنهاء التطبيق"
 
@@ -390,93 +341,93 @@ msgstr "إنهاء التطبيق"
 #. * The "Edit" menu
 #.
 #. Cut
-#: libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:155
 msgid "Cu_t"
 msgstr "_قصّ"
 
-#: libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
 msgstr "قصّ المنتقى"
 
 #. 10
 #. Copy
-#: libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:161
 msgid "_Copy"
 msgstr "_نسخ"
 
-#: libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:161
 msgid "Copy the selection"
 msgstr "نسخ المنتقى"
 
 #. Paste
-#: libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:166
 msgid "_Paste"
 msgstr "_لصق"
 
-#: libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:166
 msgid "Paste the clipboard"
 msgstr "لصق الحافظة"
 
 #. Clear
-#: libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:171
 msgid "C_lear"
 msgstr "_مسح"
 
-#: libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:171
 msgid "Clear the selection"
 msgstr "مسح المنتقى"
 
 #. Undo
-#: libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:176
 msgid "_Undo"
 msgstr "_تراجع"
 
-#: libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:176
 msgid "Undo the last action"
 msgstr "تراجع عن الفعل الأخير"
 
 #. Redo
-#: libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:181
 msgid "_Redo"
 msgstr "_تكرار"
 
-#: libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:181
 msgid "Redo the undone action"
 msgstr "تكرار الفعل المتراجع عنه"
 
 #. Find
-#: libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
 msgstr "_بحث..."
 
-#: libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
 msgstr "بحث عن نصّ"
 
 #. Find Again
-#: libgnomeui/gnome-app-helper.c:191
+#: ../libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
 msgstr "بحث عن ال_تالي"
 
-#: libgnomeui/gnome-app-helper.c:192
+#: ../libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
 msgstr "بحث مرة أخرى عن نفس النصّ"
 
 #. Replace
-#: libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:197
 msgid "R_eplace..."
 msgstr "_استبدال..."
 
-#: libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:197
 msgid "Replace a string"
 msgstr "استبدال نصّ"
 
 #. Properties
-#: libgnomeui/gnome-app-helper.c:202
+#: ../libgnomeui/gnome-app-helper.c:202
 msgid "_Properties"
 msgstr "_خصائص"
 
-#: libgnomeui/gnome-app-helper.c:203
+#: ../libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
 msgstr "تعديل خصائص الملف"
 
@@ -484,11 +435,11 @@ msgstr "تعديل خصائص الملف"
 #. * The Settings menu
 #.
 #. Settings
-#: libgnomeui/gnome-app-helper.c:211
+#: ../libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
 msgstr "_تفضيلات"
 
-#: libgnomeui/gnome-app-helper.c:212
+#: ../libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
 msgstr "إعداد التطبيق"
 
@@ -497,222 +448,215 @@ msgstr "إعداد التطبيق"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221
+#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_حول"
 
-#: libgnomeui/gnome-app-helper.c:222
+#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "حول هذا البرنامج"
 
-#: libgnomeui/gnome-app-helper.c:225
+#: ../libgnomeui/gnome-app-helper.c:225
 msgid "Select _All"
 msgstr "ا_نتقاء الكلّ"
 
-#: libgnomeui/gnome-app-helper.c:226
+#: ../libgnomeui/gnome-app-helper.c:226
 msgid "Select everything"
 msgstr "انتقاء كلّ شيء"
 
 #.
 #. * Window menu
 #.
-#: libgnomeui/gnome-app-helper.c:234
+#: ../libgnomeui/gnome-app-helper.c:234
 msgid "Create New _Window"
 msgstr "إ_نشاء نافذة جديدة"
 
-#: libgnomeui/gnome-app-helper.c:235
+#: ../libgnomeui/gnome-app-helper.c:235
 msgid "Create a new window"
 msgstr "إنشاء نافذة جديدة"
 
-#: libgnomeui/gnome-app-helper.c:239
+#: ../libgnomeui/gnome-app-helper.c:239
 msgid "_Close This Window"
 msgstr "_غلق هذه النافذة"
 
-#: libgnomeui/gnome-app-helper.c:240
+#: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "غلق النافذة الحالية"
 
 #.
 #. * The "Game" menu
 #.
-#: libgnomeui/gnome-app-helper.c:248
-#, fuzzy
+#: ../libgnomeui/gnome-app-helper.c:248
 msgid "_New Game"
 msgstr "_لعبة جديدة"
 
-#: libgnomeui/gnome-app-helper.c:249
+#: ../libgnomeui/gnome-app-helper.c:249
 msgid "Start a new game"
 msgstr "بدء لعبة جديدة"
 
-#: libgnomeui/gnome-app-helper.c:253
-#, fuzzy
+#: ../libgnomeui/gnome-app-helper.c:253
 msgid "_Pause Game"
-msgstr "إ_يقاف اللعبة"
+msgstr "_إيقاف اللعبة"
 
-#: libgnomeui/gnome-app-helper.c:254
+#: ../libgnomeui/gnome-app-helper.c:254
 msgid "Pause the game"
 msgstr "إيقاف اللعبة"
 
-#: libgnomeui/gnome-app-helper.c:258
-#, fuzzy
+#: ../libgnomeui/gnome-app-helper.c:258
 msgid "_Restart Game"
-msgstr "إ_عادة تشغيل اللعبة"
+msgstr "بدء اللّعبة من _جديد"
 
-#: libgnomeui/gnome-app-helper.c:259
+#: ../libgnomeui/gnome-app-helper.c:259
 msgid "Restart the game"
 msgstr "إعادة تشغيل اللعبة"
 
-#: libgnomeui/gnome-app-helper.c:263
-#, fuzzy
+#: ../libgnomeui/gnome-app-helper.c:263
 msgid "_Undo Move"
-msgstr "_تراجع عن الحركة"
+msgstr "_تراجع عن الحركة الأخيرة"
 
-#: libgnomeui/gnome-app-helper.c:264
+#: ../libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
 msgstr "تراجع عن الحركة الأخيرة"
 
-#: libgnomeui/gnome-app-helper.c:268
-#, fuzzy
+#: ../libgnomeui/gnome-app-helper.c:268
 msgid "_Redo Move"
-msgstr "_تكرار الحركة"
+msgstr "_تكرار الحركة الأخيرة"
 
-#: libgnomeui/gnome-app-helper.c:269
+#: ../libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
 msgstr "تكرار الحركة المتراجع عنها"
 
-#: libgnomeui/gnome-app-helper.c:273
+#: ../libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
 msgstr "_تلميحة"
 
-#: libgnomeui/gnome-app-helper.c:274
+#: ../libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
 msgstr "إحصل على تلميحة عن حركتك القادمة"
 
 #. 30
-#: libgnomeui/gnome-app-helper.c:279
+#: ../libgnomeui/gnome-app-helper.c:279
 msgid "_Scores..."
 msgstr "ال_نتائج..."
 
-#: libgnomeui/gnome-app-helper.c:280
+#: ../libgnomeui/gnome-app-helper.c:280
 msgid "View the scores"
 msgstr "عرض النتائج"
 
-#: libgnomeui/gnome-app-helper.c:284
-#, fuzzy
+#: ../libgnomeui/gnome-app-helper.c:284
 msgid "_End Game"
-msgstr "إ_نهاء اللعبة"
+msgstr "إ_نهاء اللعبة الحالية"
 
-#: libgnomeui/gnome-app-helper.c:285
+#: ../libgnomeui/gnome-app-helper.c:285
 msgid "End the current game"
 msgstr "إنهاء اللعبة الحالية"
 
-#: libgnomeui/gnome-app-helper.c:1147
+#: ../libgnomeui/gnome-app-helper.c:1147
 msgid "_Contents"
 msgstr "ال_محتويات"
 
-#: libgnomeui/gnome-app-helper.c:1150
+#: ../libgnomeui/gnome-app-helper.c:1150
 msgid "View help for this application"
 msgstr "عرض المساعدة لهذا التطبيق"
 
-#: libgnomeui/gnome-app-helper.c:2587
+#: ../libgnomeui/gnome-app-helper.c:2587
 msgid "Text Below Icons"
 msgstr "النصّ تحت الأيقونات"
 
-#: libgnomeui/gnome-app-helper.c:2588
+#: ../libgnomeui/gnome-app-helper.c:2588
 msgid "Priority Text Beside Icons"
 msgstr "الأولوية للنصوص بجانب الأيقونات"
 
-#: libgnomeui/gnome-app-helper.c:2589
+#: ../libgnomeui/gnome-app-helper.c:2589
 msgid "Icons Only"
 msgstr "أيقونات فقط"
 
-#: libgnomeui/gnome-app-helper.c:2590
+#: ../libgnomeui/gnome-app-helper.c:2590
 msgid "Text Only"
 msgstr "نص فقط"
 
-#: libgnomeui/gnome-app-helper.c:2651
+#: ../libgnomeui/gnome-app-helper.c:2651
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "استخدم افتراضي سطح المكتب (%s)"
 
-#: libgnomeui/gnome-app-util.c:98
+#: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
 msgstr " (إنقر زر الرجوع)"
 
-#: libgnomeui/gnome-app-util.c:140
+#: ../libgnomeui/gnome-app-util.c:140
 msgid "ERROR: "
 msgstr "الخطأ: "
 
-#: libgnomeui/gnome-app-util.c:177
+#: ../libgnomeui/gnome-app-util.c:177
 msgid "Warning: "
 msgstr "تحذير: "
 
-#: libgnomeui/gnome-app-util.c:315
+#: ../libgnomeui/gnome-app-util.c:315
 msgid "y"
 msgstr "ن"
 
-#: libgnomeui/gnome-app-util.c:316
+#: ../libgnomeui/gnome-app-util.c:316
 msgid "yes"
 msgstr "نعم"
 
-#: libgnomeui/gnome-app-util.c:319
+#: ../libgnomeui/gnome-app-util.c:319
 msgid "n"
 msgstr "ل"
 
-#: libgnomeui/gnome-app-util.c:320
+#: ../libgnomeui/gnome-app-util.c:320
 msgid "no"
 msgstr "لا"
 
-#: libgnomeui/gnome-app-util.c:355
+#: ../libgnomeui/gnome-app-util.c:355
 msgid " (yes or no)"
 msgstr " (نعم أو لا)"
 
-#: libgnomeui/gnome-app-util.c:356
+#: ../libgnomeui/gnome-app-util.c:356
 msgid "  - OK? (yes or no)"
 msgstr "  - موافق؟ (نعم أو لا)"
 
-#: libgnomeui/gnome-app-util.c:684
+#: ../libgnomeui/gnome-app-util.c:684
 msgid "Progress"
 msgstr "تقدّم"
 
-#: libgnomeui/gnome-app.c:153
+#: ../libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr "هويّة التطبيق"
 
-#: libgnomeui/gnome-app.c:154
+#: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "سلسلة هويّة التطبيق"
 
-#: libgnomeui/gnome-appbar.c:747
+#: ../libgnomeui/gnome-appbar.c:741
 msgid "Has Progress"
 msgstr "له تقدّم"
 
-#: libgnomeui/gnome-appbar.c:748
+#: ../libgnomeui/gnome-appbar.c:742
 msgid "Create a progress widget."
 msgstr "إنشاء قطعة تقدّم."
 
-#: libgnomeui/gnome-appbar.c:755
+#: ../libgnomeui/gnome-appbar.c:749
 msgid "Has Status"
 msgstr "له حالة"
 
-#: libgnomeui/gnome-appbar.c:756
+#: ../libgnomeui/gnome-appbar.c:750
 msgid "Create a status widget."
 msgstr "إنشاء قطعة حالة."
 
-#: libgnomeui/gnome-appbar.c:763
+#: ../libgnomeui/gnome-appbar.c:757
 msgid "Interactivity"
 msgstr "تفاعل"
 
-#: libgnomeui/gnome-appbar.c:764
+#: ../libgnomeui/gnome-appbar.c:758
 msgid "Level of user activity required."
 msgstr "مطلوب مستوى نشاط المستخدم."
 
-#: libgnomeui/gnome-authentication-manager.c:70
-#, c-format
+#: ../libgnomeui/gnome-authentication-manager.c:80
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "بروكسي الـ HTTP يتطلب منك التسجيل.\n"
 
-#: libgnomeui/gnome-authentication-manager.c:71
+#: ../libgnomeui/gnome-authentication-manager.c:81
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -721,337 +665,339 @@ msgstr ""
 "يجب أن تسجل لتنفذ إلى \"%s\".\n"
 "%s"
 
-#: libgnomeui/gnome-authentication-manager.c:74
+#: ../libgnomeui/gnome-authentication-manager.c:84
 msgid "Your password will be transmitted unencrypted."
 msgstr "سترسل كلمة سرّك غير مشفّرة."
 
-#: libgnomeui/gnome-authentication-manager.c:75
+#: ../libgnomeui/gnome-authentication-manager.c:85
 msgid "Your password will be transmitted encrypted."
 msgstr "سترسل كلمة سرّك مشفّرة."
 
-#: libgnomeui/gnome-authentication-manager.c:78
-#: libgnomeui/gnome-authentication-manager.c:296
+#: ../libgnomeui/gnome-authentication-manager.c:88
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "التوثيق مطلوب"
 
-#: libgnomeui/gnome-authentication-manager.c:288
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "يجب عليك التسجيل للنفاذ إلى %s النطاق %s\n"
 
-#: libgnomeui/gnome-authentication-manager.c:290
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "يجب عليك التسجيل للنفاذ إلى %s\n"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
 msgid "Specify session management ID"
 msgstr "حدّد هويّة إدارة الجلسة"
 
-#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
 msgid "ID"
 msgstr "هويّة"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
 msgid "Specify prefix of saved configuration"
 msgstr "حدّد سابقة للإعدادات المحفوظة"
 
-#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
 msgid "PREFIX"
 msgstr "سابقة"
 
-#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
+#: ../libgnomeui/gnome-client.c:908 ../libgnomeui/gnome-client.c:924
 msgid "Disable connection to session manager"
 msgstr "عطّل الإتصال بمدير الجلسة"
 
-#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
+#: ../libgnomeui/gnome-client.c:1034
+#, fuzzy
+msgid "Session management:"
+msgstr "إدارة الجلسة"
+
+#: ../libgnomeui/gnome-client.c:1035
+msgid "Show session management options"
+msgstr "عرض خيارات ادارة الجلسة"
+
+#: ../libgnomeui/gnome-client.c:1047
 msgid "Session management"
 msgstr "إدارة الجلسة"
 
-#: libgnomeui/gnome-client.c:1031
-#, fuzzy
-msgid "Show session management options"
-msgstr "إدارة الجلسة"
-
-#: libgnomeui/gnome-client.c:2580
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "إلغاء تسجيل الخروج"
 
-#: libgnomeui/gnome-color-picker.c:414
+#: ../libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
 msgstr "تقبلت بيانات لون غير سليمة\n"
 
-#: libgnomeui/gnome-color-picker.c:465
+#: ../libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
 msgstr "إفتح مربعاً لتحديد اللون"
 
-#: libgnomeui/gnome-color-picker.c:487
+#: ../libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
 msgstr "إنتقِ لوناً"
 
-#: libgnomeui/gnome-dateedit.c:491 libgnomeui/gnome-dateedit.c:788
+#: ../libgnomeui/gnome-dateedit.c:491 ../libgnomeui/gnome-dateedit.c:788
 msgid "Time"
 msgstr "الوقت"
 
-#: libgnomeui/gnome-dateedit.c:492
+#: ../libgnomeui/gnome-dateedit.c:492
 msgid "The time currently selected"
 msgstr "الوقت المنتقى حالياً"
 
-#: libgnomeui/gnome-dateedit.c:504
+#: ../libgnomeui/gnome-dateedit.c:504
 msgid "DateEdit Flags"
 msgstr "علامات تحرير الوقت"
 
-#: libgnomeui/gnome-dateedit.c:505
+#: ../libgnomeui/gnome-dateedit.c:505
 msgid "Flags for how DateEdit looks"
 msgstr "علامات كيفيّة مظهر تحرير الوقت"
 
-#: libgnomeui/gnome-dateedit.c:514
+#: ../libgnomeui/gnome-dateedit.c:514
 msgid "Lower Hour"
 msgstr "أدنى ساعة"
 
-#: libgnomeui/gnome-dateedit.c:515
+#: ../libgnomeui/gnome-dateedit.c:515
 msgid "Lower hour in the time popup selector"
 msgstr "الساعة الأدنى في منتقي الوقت المنبثق"
 
-#: libgnomeui/gnome-dateedit.c:525
+#: ../libgnomeui/gnome-dateedit.c:525
 msgid "Upper Hour"
 msgstr "الساعة العليا"
 
-#: libgnomeui/gnome-dateedit.c:526
+#: ../libgnomeui/gnome-dateedit.c:526
 msgid "Upper hour in the time popup selector"
 msgstr "الساعة العليا في منتقي الوقت المنبثق"
 
-#: libgnomeui/gnome-dateedit.c:536
+#: ../libgnomeui/gnome-dateedit.c:536
 msgid "Initial Time"
 msgstr "وقت أولي"
 
-#: libgnomeui/gnome-dateedit.c:537
+#: ../libgnomeui/gnome-dateedit.c:537
 msgid "The initial time"
 msgstr "الوقت الأوّلي"
 
-#: libgnomeui/gnome-dateedit.c:751 libgnomeui/gnome-scores.c:97
+#: ../libgnomeui/gnome-dateedit.c:751 ../libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "التاريخ"
 
-#: libgnomeui/gnome-dateedit.c:764
+#: ../libgnomeui/gnome-dateedit.c:764
 msgid "Select Date"
 msgstr "انتقِ تاريخاً"
 
-#: libgnomeui/gnome-dateedit.c:764
+#: ../libgnomeui/gnome-dateedit.c:764
 msgid "Select the date from a calendar"
 msgstr "انتقِ تاريخاً من التقويم"
 
 #. Calendar label, only shown if the date editor has a time field
-#: libgnomeui/gnome-dateedit.c:775
+#: ../libgnomeui/gnome-dateedit.c:775
 msgid "Calendar"
 msgstr "التقويم"
 
-#: libgnomeui/gnome-dateedit.c:796
+#: ../libgnomeui/gnome-dateedit.c:796
 msgid "Select Time"
 msgstr "انتقِ وقتاً"
 
-#: libgnomeui/gnome-dateedit.c:796
+#: ../libgnomeui/gnome-dateedit.c:796
 msgid "Select the time from a list"
 msgstr "انتقِ وقتاً من القائمة"
 
-#: libgnomeui/gnome-dateedit.c:1015
+#: ../libgnomeui/gnome-dateedit.c:1015
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date ملغاة، استخدم gnome_date_edit_get_time"
 
-#: libgnomeui/gnome-druid-page-standard.c:121
-#: libgnomeui/gnome-font-picker.c:155
+#: ../libgnomeui/gnome-druid-page-standard.c:121
+#: ../libgnomeui/gnome-font-picker.c:155
 msgid "Title"
 msgstr "العنوان"
 
-#: libgnomeui/gnome-druid-page-standard.c:122
+#: ../libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
 msgstr "عنوان المساعد"
 
-#: libgnomeui/gnome-druid-page-standard.c:130
+#: ../libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
 msgstr "صورة الشعار"
 
-#: libgnomeui/gnome-druid-page-standard.c:137
+#: ../libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
 msgstr "الشفّافة العليا"
 
-#: libgnomeui/gnome-druid-page-standard.c:138
+#: ../libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
 msgstr "صورة شفّافة للأعلى"
 
-#: libgnomeui/gnome-druid-page-standard.c:145
+#: ../libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
 msgstr "الواجهة الأمامية للعنوان"
 
-#: libgnomeui/gnome-druid-page-standard.c:146
+#: ../libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
 msgstr "لون الواجهة الأمامية للعنوان"
 
-#: libgnomeui/gnome-druid-page-standard.c:153
+#: ../libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
 msgstr "لون الواجهة الأمامية للعنوان"
 
-#: libgnomeui/gnome-druid-page-standard.c:154
+#: ../libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
 msgstr "لون الواجهة الأمامية للعنوان كـ GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:161
+#: ../libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
 msgstr "تعيين لون الواجهة الأمامية للعنوان"
 
-#: libgnomeui/gnome-druid-page-standard.c:162
+#: ../libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
 msgstr "تم تعيين لون الواجهة الأمامية للعنوان"
 
-#: libgnomeui/gnome-druid-page-standard.c:169
-#: libgnomeui/gnome-druid-page-standard.c:177
+#: ../libgnomeui/gnome-druid-page-standard.c:169
+#: ../libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
 msgstr "لون الواجهة الخلفية"
 
-#: libgnomeui/gnome-druid-page-standard.c:170
+#: ../libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
 msgstr "لون الواجهة الخلفية"
 
-#: libgnomeui/gnome-druid-page-standard.c:178
+#: ../libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
 msgstr "لون الواجهة الخلفية كـ GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:185
+#: ../libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
 msgstr "تعيين لون الواجهة الخلفية"
 
-#: libgnomeui/gnome-druid-page-standard.c:186
+#: ../libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
 msgstr "تم تعيين لون الواجهة الخلفية"
 
-#: libgnomeui/gnome-druid-page-standard.c:193
-#: libgnomeui/gnome-druid-page-standard.c:201
+#: ../libgnomeui/gnome-druid-page-standard.c:193
+#: ../libgnomeui/gnome-druid-page-standard.c:201
 msgid "Contents Background Color"
 msgstr "لون الواجهة الخلفية للمحتويات"
 
-#: libgnomeui/gnome-druid-page-standard.c:194
+#: ../libgnomeui/gnome-druid-page-standard.c:194
 msgid "Contents Background color"
 msgstr "لون الواجهة الخلفية للمحتويات"
 
-#: libgnomeui/gnome-druid-page-standard.c:202
+#: ../libgnomeui/gnome-druid-page-standard.c:202
 msgid "Contents Background color as a GdkColor"
 msgstr "لون الواجهة الخلفية للمحتويات كـ GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:209
+#: ../libgnomeui/gnome-druid-page-standard.c:209
 msgid "Contents Background color set"
 msgstr "تعيين لون الواجهة الخلفية للمحتويات"
 
-#: libgnomeui/gnome-druid-page-standard.c:210
+#: ../libgnomeui/gnome-druid-page-standard.c:210
 msgid "Contents Background color is set"
 msgstr "تم تعيين لون الواجهة الخلفية للمحتويات"
 
-#: libgnomeui/gnome-druid-page-standard.c:216
-#: libgnomeui/gnome-druid-page-standard.c:224
+#: ../libgnomeui/gnome-druid-page-standard.c:216
+#: ../libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "لون الواجهة الخلفية للشعار"
 
-#: libgnomeui/gnome-druid-page-standard.c:217
+#: ../libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "لون الواجهة الخلفية للشعار"
 
-#: libgnomeui/gnome-druid-page-standard.c:225
+#: ../libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "لون الواجهة الخلفية للشعار كـ GdkColor"
 
-#: libgnomeui/gnome-druid-page-standard.c:232
+#: ../libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "تعيين لون الواجهة الخلفية للشعار"
 
-#: libgnomeui/gnome-druid-page-standard.c:233
+#: ../libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "تم تعيين لون الواجهة الخلفية للشعار"
 
-#: libgnomeui/gnome-druid.c:154
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show Finish"
 msgstr "إظهار إنهاء"
 
-#: libgnomeui/gnome-druid.c:155
+#: ../libgnomeui/gnome-druid.c:155
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "أظهر زر 'إنهاء' بدل زر 'التالي'"
 
-#: libgnomeui/gnome-druid.c:162
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show Help"
 msgstr "إظهار المساعدة"
 
-#: libgnomeui/gnome-druid.c:163
+#: ../libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
 msgstr "إظهار زر 'مساعدة'"
 
-#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-msgid "History id"
-msgstr "هويّة التاريخ"
-
-#: libgnomeui/gnome-entry.c:200
-msgid "GTK entry"
-msgstr "خانة GTK"
-
-#: libgnomeui/gnome-entry.c:201
-msgid "The GTK entry"
-msgstr "خانة GTK"
-
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "هويّة التاريخ"
 
-#: libgnomeui/gnome-file-entry.c:237
+#: ../libgnomeui/gnome-entry.c:200
+msgid "GTK entry"
+msgstr "خانة GTK"
+
+#: ../libgnomeui/gnome-entry.c:201
+msgid "The GTK entry"
+msgstr "خانة GTK"
+
+#: ../libgnomeui/gnome-file-entry.c:237
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr "معرّف فريد لخانة الملفات.  سيستخدم لحفظ قائمة التاريخ."
 
-#: libgnomeui/gnome-file-entry.c:245 libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "عنوان حوارِ التصفّح"
 
-#: libgnomeui/gnome-file-entry.c:246
+#: ../libgnomeui/gnome-file-entry.c:246
 msgid "Title for the Browse file dialog."
 msgstr "عنوان لحوار تصفّح الملفات."
 
-#: libgnomeui/gnome-file-entry.c:253
+#: ../libgnomeui/gnome-file-entry.c:253
 msgid "Directory Entry"
 msgstr "خانة الدلائل"
 
-#: libgnomeui/gnome-file-entry.c:254
+#: ../libgnomeui/gnome-file-entry.c:254
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
 "ما إذا  خانة الملفات ستستخدم لإدخال أسماء الدلائل أو أسماء كاملة للملفات."
 
-#: libgnomeui/gnome-file-entry.c:262
+#: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
 msgstr "سائد"
 
-#: libgnomeui/gnome-file-entry.c:263
+#: ../libgnomeui/gnome-file-entry.c:263
 msgid "Whether the Browse file window should be modal."
 msgstr "ما إذا وجب أن تكون نافذة تصفّح الملفات سائدة."
 
-#: libgnomeui/gnome-file-entry.c:270 libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "اسم الملف"
 
-#: libgnomeui/gnome-file-entry.c:271
+#: ../libgnomeui/gnome-file-entry.c:271
 msgid "Filename that should be displayed in the file entry."
 msgstr "اسم الملف الذي يجب عرضه في خانة الملفات."
 
-#: libgnomeui/gnome-file-entry.c:279
+#: ../libgnomeui/gnome-file-entry.c:279
 msgid "Default Path"
 msgstr "المسار الافتراضي"
 
-#: libgnomeui/gnome-file-entry.c:280
+#: ../libgnomeui/gnome-file-entry.c:280
 msgid "Default path for the Browse file window."
 msgstr "المسار الافتراضي لنافذة تصفّح الملفات."
 
-#: libgnomeui/gnome-file-entry.c:287
+#: ../libgnomeui/gnome-file-entry.c:287
 msgid "GnomeEntry"
 msgstr "خانة جنوم"
 
-#: libgnomeui/gnome-file-entry.c:288
+#: ../libgnomeui/gnome-file-entry.c:288
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1060,11 +1006,11 @@ msgstr ""
 "خانة جنوم التي تستخدمها خانة الملفات لإدخال أسماء الملفات. يمكنك استخدام هذه "
 "الخاصيّة للحصول على GnomeEntry إذا أردت تعديل أو الاستعلام عن أيّ من عواملها."
 
-#: libgnomeui/gnome-file-entry.c:298
+#: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
 msgstr "خانة Gtk"
 
-#: libgnomeui/gnome-file-entry.c:299
+#: ../libgnomeui/gnome-file-entry.c:299
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1073,11 +1019,11 @@ msgstr ""
 "خانة Gtk هي التي تستخدمها خانة الملفات لإدخال أسماء الملفات. يمكنك استخدام "
 "هذه الخاصية للحصول على GtkEntry إذا أردت تعديل أو الإستعلام عن أي من عواملها."
 
-#: libgnomeui/gnome-file-entry.c:309
+#: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
 msgstr "استخدم GtkFileChooser"
 
-#: libgnomeui/gnome-file-entry.c:310
+#: ../libgnomeui/gnome-file-entry.c:310
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
@@ -1085,117 +1031,115 @@ msgstr ""
 "فيما إذا ستستخدم قطعة GtkFileChooser أو قطعة GtkFileSelection لانتقاء "
 "الملفات."
 
-#: libgnomeui/gnome-file-entry.c:319
-#, fuzzy
+#: ../libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
-msgstr "استخدم GtkFileChooser"
+msgstr "فعل GtkFileChooser"
 
-#: libgnomeui/gnome-file-entry.c:320
-#, fuzzy
+#: ../libgnomeui/gnome-file-entry.c:320
 msgid "The type of operation that the file selector is performing."
-msgstr "نسق عملية منتقي الخطوط"
+msgstr "نوع العملية التي يقوم بها منتقي الملفات."
 
-#: libgnomeui/gnome-file-entry.c:642 libgnomeui/gnome-file-entry.c:676
+#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
 msgid "Select file"
 msgstr "انتقِ ملفاً"
 
-#: libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
 msgstr "المسار"
 
-#: libgnomeui/gnome-file-entry.c:802
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
 msgstr "المسار إلى الملف"
 
-#: libgnomeui/gnome-file-entry.c:829
+#: ../libgnomeui/gnome-file-entry.c:841
 msgid "_Browse..."
 msgstr "_تصفّح..."
 
-#: libgnomeui/gnome-file-entry.c:830
+#: ../libgnomeui/gnome-file-entry.c:842
 msgid "Pop up a file selector to choose a file"
 msgstr "عرض منتقي ملفات لاختيار ملف"
 
-#: libgnomeui/gnome-font-picker.c:66
+#: ../libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
 msgstr "sans 12"
 
-#: libgnomeui/gnome-font-picker.c:67
+#: ../libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "أبجد هوز حطي كلمن سعفص قرشت ثغض ثخذ ضظغ"
 
-#: libgnomeui/gnome-font-picker.c:68
+#: ../libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
 msgstr "انتقِ خطاً"
 
-#: libgnomeui/gnome-font-picker.c:156
+#: ../libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
 msgstr "عنوان صندوق مربع حوار الانتقاء"
 
-#: libgnomeui/gnome-font-picker.c:164
+#: ../libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
 msgstr "نسق"
 
-#: libgnomeui/gnome-font-picker.c:165
+#: ../libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
 msgstr "نسق عملية منتقي الخطوط"
 
-#: libgnomeui/gnome-font-picker.c:174
+#: ../libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
 msgstr "اسم الخطّ"
 
-#: libgnomeui/gnome-font-picker.c:175
+#: ../libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
 msgstr "اسم الخطّ المنتقى"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "خطّ"
 
-#: libgnomeui/gnome-font-picker.c:185
+#: ../libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
 msgstr "خطّ Gtk المنتقى"
 
-#: libgnomeui/gnome-font-picker.c:192
+#: ../libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
 msgstr "نصّ المعاينة"
 
-#: libgnomeui/gnome-font-picker.c:193
+#: ../libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
 msgstr "نصّ المعاينة المعروض في مربّع الحوار"
 
-#: libgnomeui/gnome-font-picker.c:201
+#: ../libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
 msgstr "استخدم الخطّ في العنوان"
 
-#: libgnomeui/gnome-font-picker.c:202
+#: ../libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
 msgstr "استخدم الخطّ في العنوان عند نسق معلومات الخطوط"
 
-#: libgnomeui/gnome-font-picker.c:210
+#: ../libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
 msgstr "حجم الخطّ للعنوان"
 
-#: libgnomeui/gnome-font-picker.c:211
+#: ../libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
 msgstr "حجم الخطّ للعنوان في نسق معلومات الخطوط"
 
-#: libgnomeui/gnome-font-picker.c:221
+#: ../libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
 msgstr "عرض الحجم"
 
-#: libgnomeui/gnome-font-picker.c:222
+#: ../libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
 msgstr "عرض الحجم في نسق معلومات الخطوط"
 
-#: libgnomeui/gnome-gconf-ui.c:61
+#: ../libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
 msgstr "دعم جنوم GConf UI"
 
-#: libgnomeui/gnome-gconf-ui.c:96
+#: ../libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
 msgstr "ال_تفاصيل"
 
-#: libgnomeui/gnome-gconf-ui.c:171
+#: ../libgnomeui/gnome-gconf-ui.c:171
 #, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
@@ -1207,7 +1151,7 @@ msgstr ""
 "صانع نظام التشغيل بتغييرها. بعض التغييرات التي اخترتها لن يسري مفعولها أو لن "
 "يمكن استرجاعها في المرة القادمة التي تستخدم فيها التطبيق."
 
-#: libgnomeui/gnome-gconf-ui.c:178
+#: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1216,74 +1160,73 @@ msgstr ""
 "حدث خطأ أثناء تحميل أو حفظ معلومات اﻻعدادات لـ %s. قد لا تعمل بعض تعيينات "
 "إعداداتك بشكل سليم."
 
-#: libgnomeui/gnome-href.c:123
+#: ../libgnomeui/gnome-href.c:123
 msgid "URL"
 msgstr "العنوان"
 
-#: libgnomeui/gnome-href.c:124
+#: ../libgnomeui/gnome-href.c:124
 msgid "The URL that GnomeHRef activates"
 msgstr "العنوان الذي ينشّطه GnomeHRef"
 
-#: libgnomeui/gnome-href.c:131
+#: ../libgnomeui/gnome-href.c:131
 msgid "Text"
 msgstr "نصّ"
 
-#: libgnomeui/gnome-href.c:132
+#: ../libgnomeui/gnome-href.c:132
 msgid "The text on the button"
 msgstr "نصّ على الزرّ"
 
-#: libgnomeui/gnome-href.c:133
+#: ../libgnomeui/gnome-href.c:133
 msgid "End World Hunger"
 msgstr "فلننهي جوع العالم"
 
-#: libgnomeui/gnome-href.c:139
+#: ../libgnomeui/gnome-href.c:139
 msgid "Link color"
 msgstr "لون الوصلة"
 
-#: libgnomeui/gnome-href.c:140
+#: ../libgnomeui/gnome-href.c:140
 msgid "Color used to draw the link"
 msgstr "اللون المستخدم في رسم الوصلة"
 
-#: libgnomeui/gnome-href.c:171
+#: ../libgnomeui/gnome-href.c:171
 msgid "This button will take you to the URI that it displays."
 msgstr "سيأخذك هذا الزرّ إلى العنوان الذي يعرضه."
 
-#: libgnomeui/gnome-href.c:394
-#, fuzzy
+#: ../libgnomeui/gnome-href.c:394
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
 "حدث خطأ أثناء محاولة تشغيل المتصفح الافتراضي.\n"
-"الرجاء التأكد من إعدادات في أداة التفضيلات 'تطبيقي المفضل'."
+"الرجاء التأكد من الإعدادات في أداة التفضيلات 'تطبيقي المفضل'."
 
-#: libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr "معرّف وحيد لخانة الأيقونات. سيتم استخدامه لحفظ قائمة التاريخ."
 
-#: libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "عنوان لحوار أيقونة التصفح."
 
-#: libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "دليل بيكسماب"
 
-#: libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "الدليل الذي سيتم البحث فيه عن أيقونات."
 
-#: libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "اسم الملف الذي سيعرض في خانة الأيقونة."
 
-#: libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "حوار المنتقي"
 
-#: libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1291,224 +1234,227 @@ msgstr ""
 "حوار منتقي الأيقونات. يمكنك استخدام هذه الخاصية للحصول على GtkDialog إذا "
 "أردت تعديل أو الاستعلام عن أيّ من خواصّها."
 
-#: libgnomeui/gnome-icon-entry.c:322 libgnomeui/gnome-icon-entry.c:988
+#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "لا أيقونة"
 
-#: libgnomeui/gnome-icon-entry.c:758
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "حوار انتقاء الأيقونات"
 
-#: libgnomeui/gnome-icon-entry.c:759
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "يسمح لك صندوق الحوار هذا بانتقاء أيقونة."
 
-#: libgnomeui/gnome-icon-entry.c:765
-msgid "Icon selector"
-msgstr "منتقي الأيقونات"
-
-#: libgnomeui/gnome-icon-entry.c:766
-msgid "Please pick the icon you want."
-msgstr "الرجاء انتقاء الأيقونة التي تريدها."
-
-#: libgnomeui/gnome-icon-entry.c:991
+#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "منتقي الأيقونات"
 
-#: libgnomeui/gnome-icon-entry.c:992
+#: ../libgnomeui/gnome-icon-entry.c:782
+msgid "Please pick the icon you want."
+msgstr "الرجاء انتقاء الأيقونة التي تريدها."
+
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "سيفتح هذا الزرّ نافذة تسمح لك بانتقاء أيقونة."
 
-#: libgnomeui/gnome-icon-entry.c:1012
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "تصفّح"
 
-#: libgnomeui/gnome-icon-entry.c:1015
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "مسار الأيقونة"
 
-#: libgnomeui/gnome-icon-entry.c:1016
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr "يجب أن تدخل هنا اسم الدليل الذي فيه توجد صور الأيقونات."
 
-#: libgnomeui/gnome-icon-sel.c:293
+#: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: '%s' لا يوجد أو أنه ليس دليلًا"
 
-#: libgnomeui/gnome-icon-sel.c:301
+#: ../libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: لم أستطع فتح الدليل '%s'"
 
-#: libgnomeui/gnome-icon-sel.c:405
+#: ../libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
 msgstr "جاري تحميل الأيقونات..."
 
-#: libgnomeui/gnome-messagebox.c:109
+#: ../libgnomeui/gnome-messagebox.c:107
 msgid "Information"
 msgstr "معلومات"
 
-#: libgnomeui/gnome-messagebox.c:114
+#: ../libgnomeui/gnome-messagebox.c:112
 msgid "Warning"
 msgstr "تحذير"
 
-#: libgnomeui/gnome-messagebox.c:120
+#: ../libgnomeui/gnome-messagebox.c:118
 msgid "Error"
 msgstr "خطأ"
 
-#: libgnomeui/gnome-messagebox.c:126
+#: ../libgnomeui/gnome-messagebox.c:124
 msgid "Question"
 msgstr "سؤال"
 
-#: libgnomeui/gnome-messagebox.c:131
+#: ../libgnomeui/gnome-messagebox.c:129
 msgid "Message"
 msgstr "رسالة"
 
-#: libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
 msgstr "اسم ال_مستخدم:"
 
-#: libgnomeui/gnome-password-dialog.c:271
+#: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
 msgstr "ال_نطاق:"
 
-#: libgnomeui/gnome-password-dialog.c:273
+#: ../libgnomeui/gnome-password-dialog.c:202
 msgid "_Password:"
 msgstr "_كلمة السرّ:"
 
-#: libgnomeui/gnome-password-dialog.c:346
+#: ../libgnomeui/gnome-password-dialog.c:271
 msgid "Co_nnect"
-msgstr ""
+msgstr "ات_صال"
 
-#: libgnomeui/gnome-password-dialog.c:368
+#: ../libgnomeui/gnome-password-dialog.c:304
 msgid "Connect _anonymously"
 msgstr "الاتّصال كم_جهول"
 
-#: libgnomeui/gnome-password-dialog.c:373
-#, fuzzy
+#: ../libgnomeui/gnome-password-dialog.c:309
 msgid "Connect as u_ser:"
-msgstr "الاتّصال كم_ستخدم"
+msgstr "اتصال _كمستخدم:"
 
-#: libgnomeui/gnome-password-dialog.c:471
-#, fuzzy
+#: ../libgnomeui/gnome-password-dialog.c:352
 msgid "_Remember password for this session"
-msgstr "تذكر كلمة السرّ لهذه الجلسة"
+msgstr "ت_خزين كلمة المرور لهذه الجلسة"
 
-#: libgnomeui/gnome-password-dialog.c:473
-#, fuzzy
+#: ../libgnomeui/gnome-password-dialog.c:356
 msgid "Save password in _keyring"
-msgstr "حفظ كلمة السرّ في حلقة المفاتيح"
+msgstr "حفظ كلمة المرور في _حلقة مفاتيح"
 
-#: libgnomeui/gnome-pixmap-entry.c:114
+#: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
 msgstr "عاين"
 
-#: libgnomeui/gnome-pixmap-entry.c:115
+#: ../libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
 msgstr "ما إذا سيكون لخانة البيكسماب لمحة."
 
-#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:481
+#: ../libgnomeui/gnome-pixmap-entry.c:189
+#: ../libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "لا صورة"
 
-#: libgnomeui/gnome-pixmap-entry.c:206
+#: ../libgnomeui/gnome-pixmap-entry.c:206
 msgid "Image Preview"
 msgstr "لمحة صورة"
 
-#: libgnomeui/gnome-pixmap-entry.c:207
+#: ../libgnomeui/gnome-pixmap-entry.c:207
 msgid "A preview of the image currently specified"
 msgstr "لمحة للصورة المحدّدة حالياً"
 
-#: libgnomeui/gnome-pixmap-entry.c:416
+#: ../libgnomeui/gnome-pixmap-entry.c:416
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "لم اجد hbox، سأستخدم انتقاء الملفات العادي"
 
-#: libgnomeui/gnome-pixmap-entry.c:422
+#: ../libgnomeui/gnome-pixmap-entry.c:422
 msgid "Preview"
 msgstr "لمحة"
 
-#: libgnomeui/gnome-scores.c:78
+#: ../libgnomeui/gnome-scores.c:78
 msgid "Top Ten"
 msgstr "العشرة الأوائل"
 
-#: libgnomeui/gnome-scores.c:91
+#: ../libgnomeui/gnome-scores.c:91
 msgid "User"
 msgstr "المستخدم"
 
-#: libgnomeui/gnome-scores.c:94
+#: ../libgnomeui/gnome-scores.c:94
 msgid "Score"
 msgstr "النتيجة"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: libgnomeui/gnome-scores.c:194
+#: ../libgnomeui/gnome-scores.c:194
 msgid "%a %b %d %T %Y"
 msgstr "%a %d %b %Y %T"
 
-#: libgnomeui/gnome-scores.c:395
+#: ../libgnomeui/gnome-scores.c:395
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: libgnomeui/gnome-stock-icons.c:139
+#: ../libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
 msgstr "حدود الجداول"
 
-#: libgnomeui/gnome-stock-icons.c:140
+#: ../libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
 msgstr "ملء الجداول"
 
-#: libgnomeui/gnome-stock-icons.c:141
+#: ../libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
 msgstr "قوائم مرصّفة"
 
-#: libgnomeui/gnome-stock-icons.c:142
+#: ../libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
 msgstr "قوائم مرقّمة"
 
-#: libgnomeui/gnome-stock-icons.c:143
+#: ../libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
 msgstr "إزاحة"
 
-#: libgnomeui/gnome-stock-icons.c:144
+#: ../libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
 msgstr "إلغاء الإزاحة"
 
-#: libgnomeui/gnome-stock-icons.c:145
+#: ../libgnomeui/gnome-stock-icons.c:145
 msgid "About"
 msgstr "حول"
 
-#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
+#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
 msgid "Disable Crash Dialog"
 msgstr "إلغاء حوار الانهيار"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "X display to use"
 msgstr "شاشة X للاستخدام"
 
-#: libgnomeui/gnome-ui-init.c:127
+#: ../libgnomeui/gnome-ui-init.c:128
 msgid "DISPLAY"
 msgstr "شاشة"
 
-#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
+#: ../libgnomeui/gnome-ui-init.c:172
+#, fuzzy
+msgid "GNOME GUI Library:"
+msgstr "مكتبة واجهة المستخدم الرسوميّة لجنوم"
+
+#: ../libgnomeui/gnome-ui-init.c:173
+msgid "Show GNOME GUI options"
+msgstr "اعرض خيارات الواجهة جنوم"
+
+#: ../libgnomeui/gnome-ui-init.c:185
 msgid "GNOME GUI Library"
 msgstr "مكتبة واجهة المستخدم الرسوميّة لجنوم"
 
-#: libgnomeui/gnome-ui-init.c:146
-msgid "Show GNOME GUI options"
-msgstr ""
+#: ../libgnomeui/gnome-ui-init.c:250
+msgid "Could not open link"
+msgstr "تعذّر فتح الوصلة"
 
 #. dialog display isn't working out
-#: libgnomeui/gnome-ui-init.c:759
+#: ../libgnomeui/gnome-ui-init.c:836
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "حدثت أخطاء فادحة عديدة، لن يمكنني عرض حوار الإنهيار\n"
 
 #. Eeeek! Can't show dialog
-#: libgnomeui/gnome-ui-init.c:773
+#: ../libgnomeui/gnome-ui-init.c:851
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1517,53 +1463,31 @@ msgstr ""
 "خطأ فادح!\n"
 "لا يمكن عرض حوار الإنهيار\n"
 
-#: libgnomeui/gnome_segv.c:101
-#, c-format
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"لقد انهار مدير جلسات جنوم(العملية %d)\n"
-"بسبب خطأ فادح (%s).\n"
-"سيتم غلق جميع التطبيقات و ستخرج جلستك عند غلق الحوار هذا.\n"
-"الرجاء حفظ كل ملفاتك قبل غلق هذا الحوار."
-
-#: libgnomeui/gnome_segv.c:112
-#, c-format
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "انتهى التطبيق \"%s\" بصفة غير متوقّعة."
-
-#: libgnomeui/gnome_segv.c:117
-#, c-format
-msgid "process %d: %s"
-msgstr "العمليّة %d:·%s"
-
-#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"يمكنك إبلاغ المطورين بما حدث لمساعدتهم في إصلاحه.كما يمكنك إعادة تشغيل "
-"التطبيق الآن."
-
-#: libgnomeui/gnome_segv.c:137
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "الاستخدام: gnome_segv2 اسم-التطبيق رقم-الإشارة\n"
 
-#: libgnomeui/gnome_segv.c:154
-msgid "_Restart Application"
-msgstr "إ_عادة تشغيل التطبيق"
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr ""
 
-#: libgnomeui/gnome_segv.c:166
-msgid "_Inform Developers"
-msgstr "إ_بلاغ المطورين"
+#: ../libgnomeui/gnome_segv.c:143
+#, fuzzy, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
+msgstr ""
+"<b>انتهى %s بصورة غير متوقّعة.</b>\n"
+"\n"
+"لكن <b>باج بادي</b>, the\n"
+" غير مثبّت حالياإذا أردت مساعدتنا لتحسين جنوم\n"
+"الرجاء تثبيته\n"
 
-#: libgnomeui/gnome_segv.c:177
-msgid "_Debug"
-msgstr "_تنقيح"
-
-#~ msgid "Exit the test"
-#~ msgstr "خروج من التجربة"
+#: ../test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "خروج من التجربة"
