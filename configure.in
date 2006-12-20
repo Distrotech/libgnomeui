@@ -17,6 +17,7 @@ m4_define([libgnomeui_interface_age], [1])
 m4_define([libgnomeui_extraversion], [])
 
 dnl Required versions of other packages
+m4_define([libxml_required_version],         [2.4.20]) 
 m4_define([libgnome_required_version],       [2.13.7])
 m4_define([libgnomecanvas_required_version], [2.0.0])
 m4_define([libbonoboui_required_version],    [2.13.1])
@@ -151,6 +152,7 @@ fi
 AC_SUBST(LIBJPEG)
 
 GNOMEUI_MODULES="dnl
+  libxml-2.0 >= libxml_required_version dnl
   libgnome-2.0 >= libgnome_required_version dnl
   libgnomecanvas-2.0 >= libgnomecanvas_required_version dnl
   libbonoboui-2.0 >= libbonoboui_required_version dnl
