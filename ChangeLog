@@ -1,3 +1,9 @@
+2006-12-22  Fernando Herrera  <fherrera@onirica.com>
+
+	* libgnomeui/gnome_segv.c: (main): Add --disable-factory to
+	gnome-terminal for running gdb when GNOME_HACKER=1. It uses a
+	new terminal and prevents the crashed process to exit.
+
 2006-12-20  Paolo Borelli  <pborelli@katamail.com>
 
 	* configure.in: check for libxml to fix the build. bug #387961.

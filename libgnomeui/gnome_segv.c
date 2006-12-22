@@ -94,6 +94,7 @@ int main(int argc, char *argv[])
       title = g_strdup_printf (_("Debugging %s"), appname);
       exec_str = g_strdup_printf("gnome-terminal "
                                  "--title=\"%s\" "
+				 "--disable-factory "
                                  "--command=\"gdb %s %d\"",
                                  title, appname, getppid());
       g_free (title);
