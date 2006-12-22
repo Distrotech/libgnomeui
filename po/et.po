@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-07 09:57+0200\n"
-"PO-Revision-Date: 2006-09-07 20:26+0300\n"
+"POT-Creation-Date: 2006-12-19 03:07+0100\n"
+"PO-Revision-Date: 2006-12-19 12:24+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -37,35 +37,35 @@ msgstr "Tütarkirje 2"
 msgid "Hint for item 2"
 msgstr "Vihje kirjele 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:972
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s on viit millelegi, mis pole kataloog"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:983
+#: ../file-chooser/gtkfilesystemgnomevfs.c:989
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s on ilma sihtkohata viit"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ei ole kataloog"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1912
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
 msgid "Network Servers"
 msgstr "Võrguserverid"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1928
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
 msgid "File System"
 msgstr "Failisüsteem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2457
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Tõrge järjehoidja salvestamisel (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2894
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Viga '%s' kohta andmete hankimisel"
@@ -671,16 +671,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Sinu parool edastatakse krüpteeritult."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Autentimine on vajalik"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "%s domeenile %s juurdepääsuks pead sa sisse logima\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Sa pead %s ligipääsuks sisse logima\n"
@@ -705,15 +706,19 @@ msgstr "EESLIIDE"
 msgid "Disable connection to session manager"
 msgstr "Seansihalduri ühenduse keelamine"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Seansihaldus"
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "Seansihaldus:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Seansihalduse valikute näitamine"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Seansihaldus"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "Tühista väljalogimine"
 
@@ -1303,35 +1308,35 @@ msgstr "Küsimus"
 msgid "Message"
 msgstr "Teade"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
 msgstr "_Kasutajanimi:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
 msgstr "_Domeen:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:202
 msgid "_Password:"
 msgstr "_Parool:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:271
 msgid "Co_nnect"
 msgstr "Ü_hendu"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:304
 msgid "Connect _anonymously"
 msgstr "Ühendu _anonüümselt"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:309
 msgid "Connect as u_ser:"
 msgstr "Ühendu ka_sutajana:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
+#: ../libgnomeui/gnome-password-dialog.c:352
 msgid "_Remember password for this session"
 msgstr "_Jäta parool selle sessiooni ajaks meelde"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
+#: ../libgnomeui/gnome-password-dialog.c:356
 msgid "Save password in _keyring"
 msgstr "Salvesta parool _võtmerõngas"
 
@@ -1427,13 +1432,17 @@ msgstr "X'i kuva, mida kasutada"
 msgid "DISPLAY"
 msgstr "KUVA"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "GNOME kasutajaliidese teek"
+#: ../libgnomeui/gnome-ui-init.c:172
+msgid "GNOME GUI Library:"
+msgstr "GNOME kasutajaliidese teek:"
 
 #: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "GNOME kasutajaliidese valikute näitamine"
+
+#: ../libgnomeui/gnome-ui-init.c:185
+msgid "GNOME GUI Library"
+msgstr "GNOME kasutajaliidese teek"
 
 #: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
@@ -1459,99 +1468,28 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Kasutamine: gnome_segv2 programminimi signr\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "Silumine (%s)"
+
+#: ../libgnomeui/gnome_segv.c:143
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>Rakendus %s krahhis.</b>\n"
 "\n"
-"Kahjuks pole sul paigaldatud GNOME krahhidest\n"
-"teadaandmise tööriista <b>bug-buddy</b>. Kui Sa\n"
-"soovid GNOME parendamisele kaasa aidata, siis\n"
-"palun paigalda oma arvutisse see tööriist\n"
+"Palun paigalda oma arvutisse GNOME krahhidest\n"
+"raporteerimise vahend <b>bug-buddy</b>, siis\n"
+"on Sul võimalik tekkinud vea kohta arendajatele\n"
+"andmeid saata.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Välju testprogrammist"
-
-msgid "Error reading file '%s': %s"
-msgstr "Viga faili '%s' lugemisel: %s"
-
-msgid "No name"
-msgstr "Nimetu"
-
-msgid "File '%s' is not a regular file or directory."
-msgstr "Fail '%s' pole tavaline fail ega kataloog."
-
-msgid "Error cannot find file id '%s'"
-msgstr "Viga faili id '%s' leidmisel"
-
-msgid "No filename to save to"
-msgstr "Puudub nimi, mille alla salvestada"
-
-msgid "Starting %s"
-msgstr "Käivitamine: %s"
-
-msgid "No URL to launch"
-msgstr "Puudub käivitatav URL"
-
-msgid "Not a launchable item"
-msgstr "Kirje pole käivitatav"
-
-msgid "No command (Exec) to launch"
-msgstr "Puudub käivitatav (exec) käsk"
-
-msgid "Bad command (Exec) to launch"
-msgstr "Vigane käivitatav (exec) käsk"
-
-msgid "Unknown encoding of: %s"
-msgstr "Tundmatu kodeering: %s"
-
-msgid "Error writing file '%s': %s"
-msgstr "Viga faili '%s' kirjutamisel: %s"
-
-msgid "History id"
-msgstr "Ajaloo id"
-
-msgid "Icon selector"
-msgstr "Ikoonivalija"
-
-msgid ""
-"The GNOME Session Manager (process %d) has crashed\n"
-"due to a fatal error (%s).\n"
-"When you close this dialog, all applications will close and your session "
-"will exit.\n"
-"Please save all your files before closing this dialog."
-msgstr ""
-"GNOME'i sessioonihaldur (protsess nr %d) krahhis\n"
-"parandamatu vea tõttu (%s).\n"
-"Selle dialoogi sulgemisel lõpetatakse kõikide rakenduste töö ja seanss "
-"lõpeb.\n"
-"Enne selle dialoogi sulgemist salvesta palun kõik oma failid."
-
-msgid "The Application \"%s\" has quit unexpectedly."
-msgstr "Rakendus \"%s\" lõpetas ootamatult."
-
-msgid "process %d: %s"
-msgstr "protsess %d: %s"
-
-msgid ""
-"You can inform the developers of what happened to help them fix it.  Or you "
-"can restart the application right now."
-msgstr ""
-"Sul on võimalus teatada sellest arendajatele ja olla abiks selle puuduse "
-"kõrvaldamisel. Samas võid sa rakenduse taaskäivitada."
-
-msgid "_Restart Application"
-msgstr "_Taaskäivita rakendus"
-
-msgid "_Inform Developers"
-msgstr "Teata _arendajatele"
-
-msgid "_Debug"
-msgstr "_Silur"
