@@ -1,16 +1,16 @@
 # Vietnamese translation of LibGnomeUI.
-# Copyright © 2006 Gnome i18n Project for Vietnamese.
+# Copyright © 2007 Gnome i18n Project for Vietnamese.
 # Hoang Ngoc Tu <hntu@gmx.de>, 2000-2002.
 # Joern v. Kattchee <kattchee@cs.tu-berlin.de>, 2000-2002.
 # Nguyễn Thái Ngọc Duy <pclouds@vnlinux.org>, 2004.
-# Clytie Siddall <clytie@riverland.net.au>, 2005-2006.
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2007.
 # 
 msgid ""
 ""
 msgstr "Project-Id-Version: libgnomeui 2.16.0 Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-17 09:12+0200\n"
-"PO-Revision-Date: 2006-10-17 22:17+0930\n"
+"POT-Creation-Date: 2007-01-02 03:26+0000\n"
+"PO-Revision-Date: 2007-01-04 22:53+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -50,20 +50,20 @@ msgstr "%s là liên kết không có địa chỉ đích"
 msgid "%s is not a folder"
 msgstr "%s không phải là thư mục"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1918
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
 msgid "Network Servers"
 msgstr "Máy phục vụ mạng"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1934
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
 msgid "File System"
 msgstr "Hệ thống tập tin"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2463
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Lỗi lưu đánh dấu (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2900
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Lỗi lấy thông tin về « %s »"
@@ -679,16 +679,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Mật khẩu của bạn sẽ được gửi không mật mã."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Yêu cầu xác thực"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#.Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Bạn phải đăng nhập để truy cập %s miền %s\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Bạn phải đăng nhập để truy cập %s\n"
@@ -719,15 +720,18 @@ msgid "Disable connection to session manager"
 msgstr "Tắt khả năng kết nối với bộ quản lý phiên chạy"
 
 #: ../libgnomeui/gnome-client.c:1034
-#: ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Quản lý phiên chạy"
+msgid "Session management:"
+msgstr "Quản lý phiên chạy:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Hiện các tùy chọn quản lý phiên chạy"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Quản lý phiên chạy"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "Thôi đăng xuất"
 
@@ -1322,35 +1326,35 @@ msgstr "Câu hỏi"
 msgid "Message"
 msgstr "Thông điệp"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
 msgstr "Tên _người dùng:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
 msgstr "_Miền:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:202
 msgid "_Password:"
 msgstr "_Mật khẩu :"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:271
 msgid "Co_nnect"
 msgstr "Kết _nối"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:304
 msgid "Connect _anonymously"
 msgstr "Kết nối vô d_anh"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:309
 msgid "Connect as u_ser:"
 msgstr "Kết nối với tư cách _người dùng:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
+#: ../libgnomeui/gnome-password-dialog.c:352
 msgid "_Remember password for this session"
 msgstr "_Nhớ mật khẩu trong phiên chạy này"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
+#: ../libgnomeui/gnome-password-dialog.c:356
 msgid "Save password in _keyring"
 msgstr "Lưu mật khẩu trong vòng _khóa"
 
@@ -1449,13 +1453,16 @@ msgid "DISPLAY"
 msgstr "BỘ TRÌNH BÀY"
 
 #: ../libgnomeui/gnome-ui-init.c:172
-#: ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "Thư viện giao diện người dùng đồ họa của GNOME."
+msgid "GNOME GUI Library:"
+msgstr "Thư viện GUI GNOME:"
 
 #: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "Hiện các tùy chọn giao diện người dùng đồ họa GNOME"
+
+#: ../libgnomeui/gnome-ui-init.c:185
+msgid "GNOME GUI Library"
+msgstr "Thư viện giao diện người dùng đồ họa của GNOME."
 
 #: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
@@ -1480,19 +1487,26 @@ msgstr "Gặp lỗi chia ra từng đoạn.\n"
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Cách sử dụng: gnome_segv tên_ứng_dụng signum\n"
 
-#: ../libgnomeui/gnome_segv.c:138
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "Đang gỡ lỗi %s"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr "<b>Ứng dụng %s đã sụp đổ.</b>\n"
 "\n"
-"Bạn chưa cài đặt <b>bug-buddy</b>,\n"
-"công cụ thông báo lỗi của GNOME.\n"
-"Để giúp đỡ cải tiến GNOME, cài đặt nó nhé.\n"
+"Hãy cài đặt <b>bug-buddy</b>,\n"
+"công cụ thông báo lỗi của GNOME,\n"
+"mà cho bạn có khả năng gửi thông tin\n"
+"chi tiết về lỗi, để cải tiến ứng dụng này.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
