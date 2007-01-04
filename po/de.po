@@ -4,14 +4,14 @@
 # Benjamin Greiner <benjamin.greiner@gmx.net>, 2002.
 # Christian Meyer <chrisime@gnome.org>, 2002.
 # Christian Neumair <chris@gnome-de.org>, 2003, 2004.
-# Hendrik Richter <hendrikr@gnome.org>, 2004, 2005, 2006.
+# Hendrik Richter <hendrikr@gnome.org>, 2004, 2005, 2006, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-03 12:10+0200\n"
-"PO-Revision-Date: 2006-09-03 12:10+0200\n"
+"POT-Creation-Date: 2007-01-04 15:41+0100\n"
+"PO-Revision-Date: 2007-01-04 15:43+0100\n"
 "Last-Translator: Hendrik Richter <hendrikr@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,35 +34,35 @@ msgstr "Kindelement 2"
 msgid "Hint for item 2"
 msgstr "Hinweis für Kindelement 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:972
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s ist eine Verknüpfung zu etwas, was kein Ordner ist"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:983
+#: ../file-chooser/gtkfilesystemgnomevfs.c:989
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s ist eine Verknüpfung ohne Zielangabe"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ist kein Ordner"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
 msgid "Network Servers"
 msgstr "Netzwerk-Server"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
 msgid "File System"
 msgstr "Dateisystem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Speichern von Lesezeichen gescheitert (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Informationen zu »%s« konnten nicht abgerufen werden"
@@ -673,16 +673,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Ihr Passwort wird verschlüsselt übertragen."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Legitimation erforderlich"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Sie müssen sich anmelden, um auf %s, Domain %s zuzugreifen\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Sie müssen sich anmelden, um auf »%s« zuzugreifen\n"
@@ -707,15 +708,19 @@ msgstr "PRÄFIX"
 msgid "Disable connection to session manager"
 msgstr "Verbindung zum Sitzungsmanager deaktivieren"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Sitzungsverwaltung"
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "Sitzungsverwaltung:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Sitzungsverwaltungsoptionen anzeigen"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Sitzungsverwaltung"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "Abmelden abbrechen"
 
@@ -1319,35 +1324,35 @@ msgstr "Frage"
 msgid "Message"
 msgstr "Nachricht"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
 msgstr "_Benutzername:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
 msgstr "_Domäne:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:202
 msgid "_Password:"
 msgstr "_Passwort:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:271
 msgid "Co_nnect"
 msgstr "Verbi_nden"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:304
 msgid "Connect _anonymously"
 msgstr "A_nonym verbinden"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:309
 msgid "Connect as u_ser:"
 msgstr "Als _Benutzer verbinden:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
+#: ../libgnomeui/gnome-password-dialog.c:352
 msgid "_Remember password for this session"
 msgstr "_Innerhalb dieser Sitzung an Passwort erinnern"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
+#: ../libgnomeui/gnome-password-dialog.c:356
 msgid "Save password in _keyring"
 msgstr "Passwort in _Schlüsselbund speichern"
 
@@ -1445,13 +1450,17 @@ msgstr "Zu verwendente X-Anzeige"
 msgid "DISPLAY"
 msgstr "ANZEIGE"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "GNOME-GUI-Bibliothek"
+#: ../libgnomeui/gnome-ui-init.c:172
+msgid "GNOME GUI Library:"
+msgstr "GNOME-GUI-Bibliothek:"
 
 #: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "GNOME-GUI-Optionen anzeigen"
+
+#: ../libgnomeui/gnome-ui-init.c:185
+msgid "GNOME GUI Library"
+msgstr "GNOME-GUI-Bibliothek"
 
 #: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
@@ -1479,14 +1488,20 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Syntax: gnome_segv2 appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "Fehlerdiagnose von %s"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>Die Anwendung %s ist abgestürzt.</b>\n"
 "\n"
