@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-01 12:35+0200\n"
+"POT-Creation-Date: 2007-01-02 03:26+0000\n"
 "PO-Revision-Date: 2005-07-19 15:42+0300\n"
 "Last-Translator: Gil Osher <dolfin@rpg.org.il>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -49,20 +49,20 @@ msgstr "‏%s הוא קישור בלי מיקום יעד"
 msgid "%s is not a folder"
 msgstr "‏%s אינו תיקייה"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1918
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
 msgid "Network Servers"
 msgstr "שרתי רשת"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1934
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
 msgid "File System"
 msgstr "מערכת קבצים"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2463
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "שמירת הסימניות נכשלה (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2900
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "לא ניתן לקבל מידע עבור '%s'"
@@ -191,7 +191,7 @@ msgid "About %s"
 msgstr "אודות %s"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:552
+#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_קובץ"
@@ -200,7 +200,7 @@ msgstr "_קובץ"
 msgid "_File/"
 msgstr "_קובץ/"
 
-#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:555
+#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_עריכה"
 
@@ -208,7 +208,7 @@ msgstr "_עריכה"
 msgid "_Edit/"
 msgstr "_עריכה/"
 
-#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:558
+#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_תצוגה"
 
@@ -216,7 +216,7 @@ msgstr "_תצוגה"
 msgid "_View/"
 msgstr "_תצוגה/"
 
-#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:561
+#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_הגדרות"
 
@@ -225,7 +225,7 @@ msgid "_Settings/"
 msgstr "_הגדרות/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:327
+#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_חדש"
 
@@ -233,7 +233,7 @@ msgstr "_חדש"
 msgid "_New/"
 msgstr "_חדש/"
 
-#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:564
+#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "ק_בצים"
 
@@ -241,15 +241,15 @@ msgstr "ק_בצים"
 msgid "Fi_les/"
 msgstr "ק_בצים/"
 
-#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:567
+#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_חלונות"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:573
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_משחק"
 
-#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:570
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_עזרה"
@@ -667,16 +667,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "סיסמתך תשלח מוצפנת."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "אישור דרוש"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "אתה חייב להתחבר כדי לגשת ל%s במתחם %s\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "אתה חייב להתחבר כדי לגשת ל %s\n"
@@ -701,15 +702,19 @@ msgstr "PREFIX"
 msgid "Disable connection to session manager"
 msgstr "Disable connection to session manager"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Session management"
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "Session management:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Show session management options"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Session management"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "בטל התחברות"
 
@@ -1295,35 +1300,35 @@ msgstr "שאלה"
 msgid "Message"
 msgstr "הודעה"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
 msgstr "_שם משתמש:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
 msgstr "_תחום:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:202
 msgid "_Password:"
 msgstr "_סיסמה:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:271
 msgid "Co_nnect"
 msgstr "ה_תחבר"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:304
 msgid "Connect _anonymously"
 msgstr "התחבר כ_אנונימי"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:309
 msgid "Connect as u_ser:"
 msgstr "התחבר כ_משתמש:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
+#: ../libgnomeui/gnome-password-dialog.c:352
 msgid "_Remember password for this session"
 msgstr "זכור _סיסמה לתצורת הפעלה זו"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
+#: ../libgnomeui/gnome-password-dialog.c:356
 msgid "Save password in _keyring"
 msgstr "_שמור סיסמה בצרור המפתחות"
 
@@ -1419,13 +1424,17 @@ msgstr "X display to use"
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "GNOME GUI Library"
+#: ../libgnomeui/gnome-ui-init.c:172
+msgid "GNOME GUI Library:"
+msgstr "GNOME GUI Library:"
 
 #: ../libgnomeui/gnome-ui-init.c:173
 msgid "Show GNOME GUI options"
 msgstr "Show GNOME GUI options"
+
+#: ../libgnomeui/gnome-ui-init.c:185
+msgid "GNOME GUI Library"
+msgstr "GNOME GUI Library"
 
 #: ../libgnomeui/gnome-ui-init.c:250
 msgid "Could not open link"
@@ -1451,21 +1460,26 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "שימוש: gnome_segv2 appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:138
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "ניפוי %s"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "‏<b>היישום %s התרסק.</b>\n"
-"\n"
-"אבל כלי דיווח ההתרסקויות של GNOME, "
-"‏<b>bug-buddy</b>, "
-"אינו מותקן.\n"
-"אם ברצונך לעזור בשיפור GNOME, אנא התקן את כלי זה\n"
+"אנא התקן את"
+" <b>bug-buddy</b>,\n"
+" כלי דיווח ההתרסקויות של GNOME, אשר מאפשר לך\n"
+"לשלוח למפתחי היישום מידע מפורט אודות התקלה.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
