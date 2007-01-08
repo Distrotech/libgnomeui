@@ -1,3 +1,5 @@
+=============================== libgnomeui 2.17.1 ============================
+
 2007-01-08  Christian Neumair  <chris@gnome-de.org>
 
 	* file-chooser/gtkfilesystemgnomevfs.c: (make_uri_canonical): Don't

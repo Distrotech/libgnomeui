@@ -1,3 +1,24 @@
+libgnomeui 2.17.1
+-----------------
+
+* Fix hostname URI handling in the filechooser (Christian Neumair)
+* Implement support for new password including checking
+  password quality. (Christian Persch)
+* Reduce relocations (Christian Persch)
+* Code cleanups (Kjartan)
+* Build fix (Paolo Borelli)
+* Improved interfacing with gnome-terminal while debugging. (Fernando Herrera)
+
+* Translation updates
+
+  - Djihed Afifi (ar)
+  - Adam Weinberger (en_CA)
+  - David Lodge (en_GB)
+  - Francisco Javier F. Serrador (es)
+  - Priit Laes (et)
+  - Daniel Nylander (sv)
+  - Theppitak Karoonboonyanan (th)
+
 libgnomeui 2.17.0
 -----------------
 
