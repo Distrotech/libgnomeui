@@ -27,10 +27,10 @@
 
 #include <string.h>
 
-#include "gnome-i18nP.h"
 #include "gnome-password-dialog.h"
 #include "gnometypebuiltins.h"
 
+#include <glib/gi18n-lib.h>
 #include <gtk/gtkbox.h>
 #include <gtk/gtkcheckbutton.h>
 #include <gtk/gtkentry.h>
@@ -56,6 +56,9 @@ struct _GnomePasswordDialogDetails
 	GtkWidget *username_entry;
 	GtkWidget *domain_entry;
 	GtkWidget *password_entry;
+	GtkWidget *new_password_entry;
+	GtkWidget *confirm_new_password_entry;
+	GtkWidget *quality_meter;
 	GtkWidget *table_alignment;
 	GtkWidget *table;
 
@@ -66,12 +69,18 @@ struct _GnomePasswordDialogDetails
 	GtkWidget *connect_with_no_userpass_button;
 	GtkWidget *connect_with_userpass_button;
 
+	GnomePasswordDialogQualityFunc quality_func;
+	gpointer quality_data;
+	GDestroyNotify quality_dnotify;
+
 	/* Attributes */
 	guint readonly_username : 1;
 	guint readonly_domain : 1;
 	guint show_username : 1;
 	guint show_domain : 1;
 	guint show_password : 1;
+	guint show_new_password : 1;
+	guint show_new_password_quality : 1;
 	guint show_remember : 1;
 	guint show_userpass_buttons : 1;
 	guint show_userpass_buttons_set : 1;
@@ -85,6 +94,8 @@ enum
 	PROP_SHOW_USERNAME,
 	PROP_SHOW_DOMAIN,
 	PROP_SHOW_PASSWORD,
+	PROP_SHOW_NEW_PASSWORD,
+	PROP_SHOW_NEW_PASSWORD_QUALITY,
 	PROP_SHOW_USERPASS_BUTTONS,
 	PROP_SHOW_REMEMBER,
 	PROP_READONLY_USERNAME,
@@ -96,6 +107,7 @@ enum
 	PROP_USERNAME,
 	PROP_DOMAIN,
 	PROP_PASSWORD,
+	PROP_NEW_PASSWORD
 };
 
 /* GtkDialog methods */
@@ -184,7 +196,8 @@ update_entries_table (GnomePasswordDialog *dialog)
 
 	n_rows = priv->show_username +
 		 priv->show_domain +
-		 priv->show_password;
+		 priv->show_password +
+		 priv->show_new_password * (2 + priv->show_new_password_quality);
 	if (n_rows == 0) {
 		gtk_widget_hide (priv->table);
 		return;
@@ -200,6 +213,13 @@ update_entries_table (GnomePasswordDialog *dialog)
 	}
 	if (priv->show_password) {
 		add_row (priv->table, row++, _("_Password:"), priv->password_entry);
+	}
+	if (priv->show_new_password) {
+		add_row (priv->table, row++, _("_New password:"), priv->new_password_entry);
+		add_row (priv->table, row++, _("Con_firm password:"), priv->confirm_new_password_entry);
+	}
+	if (priv->show_new_password && priv->show_new_password_quality) {
+		add_row (priv->table, row++, _("Password quality:"), priv->quality_meter);
 	}
 
 	gtk_widget_show_all (priv->table);
@@ -228,6 +248,9 @@ domain_entry_activate (GtkWidget *widget, GtkWidget *dialog)
 	if (GTK_WIDGET_VISIBLE (priv->password_entry) &&
 	    GTK_WIDGET_IS_SENSITIVE (priv->password_entry))
 		gtk_widget_grab_focus (priv->password_entry);
+	else if (priv->show_new_password &&
+		 GTK_WIDGET_IS_SENSITIVE (priv->new_password_entry))
+		gtk_widget_grab_focus (priv->new_password_entry);
 }
 
 static void
@@ -239,7 +262,50 @@ remember_button_toggled (GtkWidget *widget, GObject *dialog)
 static void
 password_entry_activate (GtkWidget *widget, GnomePasswordDialog *password_dialog)
 {
-	gtk_window_activate_default (GTK_WINDOW (password_dialog));
+	GnomePasswordDialogDetails *priv = password_dialog->details;
+
+	if (!priv->show_new_password) {
+		gtk_window_activate_default (GTK_WINDOW (password_dialog));
+		return;
+	}
+
+	if (priv->show_new_password) {
+		gtk_widget_grab_focus (priv->new_password_entry);
+	}
+}
+
+static void
+new_password_entry_activate (GtkWidget *widget, GnomePasswordDialog *password_dialog)
+{
+	GnomePasswordDialogDetails *priv = password_dialog->details;
+
+	gtk_widget_grab_focus (priv->confirm_new_password_entry);
+}
+
+static void
+new_password_entries_changed (GtkWidget *entry, GnomePasswordDialog *password_dialog)
+{
+	GnomePasswordDialogDetails *priv = password_dialog->details;
+	const gchar *new_password, *confirm_password;
+	gdouble quality = 0.0;
+	gboolean accept;
+
+	new_password = gtk_entry_get_text (GTK_ENTRY (priv->new_password_entry));
+	confirm_password = gtk_entry_get_text (GTK_ENTRY (priv->confirm_new_password_entry));
+
+	if (priv->quality_func) {
+		quality = priv->quality_func (password_dialog,
+					      new_password,
+					      priv->quality_data);
+	}
+
+	accept = strcmp (new_password, confirm_password) == 0;
+	/* && (!priv->show_new_password_quality || quality > 0.5); */
+
+	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->quality_meter), quality);
+
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (password_dialog),
+					   GTK_RESPONSE_OK, accept);
 }
 
 static void
@@ -336,6 +402,10 @@ gnome_password_dialog_init (GnomePasswordDialog *password_dialog)
 	priv->domain_entry = g_object_ref_sink (gtk_entry_new ());
 	priv->password_entry = g_object_ref_sink (gtk_entry_new ());
 	gtk_entry_set_visibility (GTK_ENTRY (priv->password_entry), FALSE);
+	priv->new_password_entry = g_object_ref_sink (gtk_entry_new ());
+	gtk_entry_set_visibility (GTK_ENTRY (priv->new_password_entry), FALSE);
+	priv->confirm_new_password_entry = g_object_ref_sink (gtk_entry_new ());
+	gtk_entry_set_visibility (GTK_ENTRY (priv->confirm_new_password_entry), FALSE);
 
 	g_signal_connect (priv->username_entry, "activate",
 			  G_CALLBACK (username_entry_activate), password_dialog);
@@ -343,6 +413,17 @@ gnome_password_dialog_init (GnomePasswordDialog *password_dialog)
 			  G_CALLBACK (domain_entry_activate), password_dialog);
 	g_signal_connect (priv->password_entry, "activate",
 			  G_CALLBACK (password_entry_activate), password_dialog);
+	g_signal_connect (priv->new_password_entry, "activate",
+			  G_CALLBACK (new_password_entry_activate), password_dialog);
+	g_signal_connect_swapped (priv->confirm_new_password_entry, "activate",
+				  G_CALLBACK (gtk_window_activate_default),
+				  password_dialog);
+	g_signal_connect (priv->new_password_entry, "changed",
+			  G_CALLBACK (new_password_entries_changed), password_dialog);
+	g_signal_connect (priv->confirm_new_password_entry, "changed",
+			  G_CALLBACK (new_password_entries_changed), password_dialog);
+
+	priv->quality_meter = g_object_ref_sink (gtk_progress_bar_new ());
 	
 	update_entries_table (password_dialog);
 
@@ -398,6 +479,13 @@ gnome_password_dialog_finalize (GObject *object)
 	g_object_unref (priv->username_entry);
 	g_object_unref (priv->domain_entry);
 	g_object_unref (priv->password_entry);
+	g_object_unref (priv->new_password_entry);
+	g_object_unref (priv->confirm_new_password_entry);
+	g_object_unref (priv->quality_meter);
+
+	if (priv->quality_data && priv->quality_dnotify) {
+		priv->quality_dnotify (priv->quality_data);
+	}
 
 	G_OBJECT_CLASS (gnome_password_dialog_parent_class)->finalize (object);
 }
@@ -420,6 +508,12 @@ gnome_password_dialog_set_property (GObject *object,
 			break;
 		case PROP_SHOW_PASSWORD:
 			gnome_password_dialog_set_show_password (dialog, g_value_get_boolean (value));
+			break;
+		case PROP_SHOW_NEW_PASSWORD:
+			gnome_password_dialog_set_show_new_password (dialog, g_value_get_boolean (value));
+			break;
+		case PROP_SHOW_NEW_PASSWORD_QUALITY:
+			gnome_password_dialog_set_show_new_password_quality (dialog, g_value_get_boolean (value));
 			break;
 		case PROP_SHOW_USERPASS_BUTTONS:
 			gnome_password_dialog_set_show_userpass_buttons (dialog, g_value_get_boolean (value));
@@ -454,7 +548,10 @@ gnome_password_dialog_set_property (GObject *object,
 		case PROP_PASSWORD:
 			gnome_password_dialog_set_password (dialog, g_value_get_string (value));
 			break;
-
+		case PROP_NEW_PASSWORD:
+			gnome_password_dialog_set_new_password (dialog, g_value_get_string (value));
+			break;
+			
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -480,6 +577,12 @@ gnome_password_dialog_get_property (GObject *object,
 			break;
 		case PROP_SHOW_PASSWORD:
 			g_value_set_boolean (value, priv->show_password);
+			break;
+		case PROP_SHOW_NEW_PASSWORD:
+			g_value_set_boolean (value, priv->show_new_password);
+			break;
+		case PROP_SHOW_NEW_PASSWORD_QUALITY:
+			g_value_set_boolean (value, priv->show_new_password_quality);
 			break;
 		case PROP_SHOW_USERPASS_BUTTONS:
 			g_value_set_boolean (value, priv->show_userpass_buttons);
@@ -511,6 +614,9 @@ gnome_password_dialog_get_property (GObject *object,
 			break;
 		case PROP_PASSWORD:
 			g_value_take_string (value, gnome_password_dialog_get_password (dialog));
+			break;
+		case PROP_NEW_PASSWORD:
+			g_value_take_string (value, gnome_password_dialog_get_new_password (dialog));
 			break;
 
 		default:
@@ -582,6 +688,38 @@ gnome_password_dialog_class_init (GnomePasswordDialogClass * klass)
 				       "show-password",
 				       "show-password",
 				       TRUE,
+				       G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:show-new-password:
+	 *
+	 * Whether the new password and new password confirmation entries are shown.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_SHOW_NEW_PASSWORD,
+		 g_param_spec_boolean ("show-new-password",
+				       "show-new-password",
+				       "show-new-password",
+				       FALSE,
+				       G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:show-new-password-quality:
+	 *
+	 * Whether the new password quality meter is shown.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+		(gobject_class,
+		 PROP_SHOW_NEW_PASSWORD_QUALITY,
+		 g_param_spec_boolean ("show-new-password-quality",
+				       "show-new-password-quality",
+				       "show-new-password-quality",
+				       FALSE,
 				       G_PARAM_READWRITE | PARAM_STATIC));
 
 	/**
@@ -762,6 +900,23 @@ gnome_password_dialog_class_init (GnomePasswordDialogClass * klass)
 				      "password",
 				      NULL,
 				      G_PARAM_READWRITE | PARAM_STATIC));
+
+	/**
+	* GnomePasswordDialog:new-password:
+	 *
+	 * The typed new password, or %NULL if the input in the new password
+	 * and the new password confirmation fields don't match.
+	 *
+	 * Since: 2.18
+	 */
+	g_object_class_install_property
+			(gobject_class,
+			 PROP_NEW_PASSWORD,
+			 g_param_spec_string ("new-password",
+					      "new-password",
+					      "new-password",
+					      NULL,
+					      G_PARAM_READWRITE | PARAM_STATIC));
 }
 
 /* GtkDialog callbacks */
@@ -930,6 +1085,67 @@ gnome_password_dialog_set_password (GnomePasswordDialog	*password_dialog,
 }
 
 /**
+ * gnome_password_dialog_set_new_password:
+ * @password_dialog: A #GnomePasswordDialog
+ * @password: The new password that should be set
+ *
+ * Description: Sets the new password and new password confirmation fields
+ * in the password dialog.
+ *
+ * Since: 2.18
+ **/
+void
+gnome_password_dialog_set_new_password (GnomePasswordDialog *password_dialog, const gchar *password)
+{
+	GnomePasswordDialogDetails *priv;
+
+	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
+
+	priv = password_dialog->details;
+
+	gtk_entry_set_text (GTK_ENTRY (priv->new_password_entry), password ? password : "");
+	gtk_entry_set_text (GTK_ENTRY (priv->confirm_new_password_entry), password ? password : "");
+}
+
+/**
+ * gnome_password_dialog_set_password_quality_func:
+ * @password_dialog: A #GnomePasswordDialog
+ * @func: the new #GnomePasswordDialogQualityFunc
+ * @data: user data to pass to the quality func
+ * @destroy_notify:
+ *
+ * Description: Sets the function which measures the quality of the
+ * new password as it's typed.
+ *
+ * Since: 2.18
+ **/
+void
+gnome_password_dialog_set_password_quality_func (GnomePasswordDialog *password_dialog,
+						 GnomePasswordDialogQualityFunc func,
+						 gpointer data,
+						 GDestroyNotify destroy_notify)
+{
+	GnomePasswordDialogDetails *priv;
+	gpointer old_data;
+	GDestroyNotify dnotify;
+
+	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
+
+	priv = password_dialog->details;
+
+	old_data = priv->quality_data;
+	dnotify = priv->quality_dnotify;
+
+	priv->quality_func = func;
+	priv->quality_data = data;
+	priv->quality_dnotify = destroy_notify;
+
+	if (old_data && dnotify) {
+		dnotify (old_data);
+	}
+}
+
+/**
  * gnome_password_dialog_set_domain:
  * @password_dialog: A #GnomePasswordDialog
  * @domain: The domain that should be set
@@ -1042,6 +1258,67 @@ gnome_password_dialog_set_show_password (GnomePasswordDialog *password_dialog,
 		update_entries_table (password_dialog);
 
 		g_object_notify (G_OBJECT (password_dialog), "show-password");
+	}
+}
+
+/**
+ * gnome_password_dialog_set_show_new_password:
+ * @password_dialog: A #GnomePasswordDialog
+ * @show: Boolean value that controls whether the new password entry has to
+ * appear or not.
+ *
+ * Description: Shows or hides the new password and new password confirmation
+ * fields based on the value of @show.
+ *
+ * Since: 2.18
+ **/
+void
+gnome_password_dialog_set_show_new_password (GnomePasswordDialog *password_dialog,
+					     gboolean             show)
+{
+	GnomePasswordDialogDetails *priv;
+
+	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
+
+	priv = password_dialog->details;
+
+	show = show != FALSE;
+	if (priv->show_new_password != show) {
+		priv->show_new_password = show;
+
+		update_entries_table (password_dialog);
+
+		g_object_notify (G_OBJECT (password_dialog), "show-new-password");
+	}
+}
+
+/**
+ * gnome_password_dialog_set_show_new_password_quality:
+ * @password_dialog: A #GnomePasswordDialog
+ * @show: Boolean value that controls whether the new password quality meter will
+ * appear or not.
+ *
+ * Description: Shows or hides the new password quality meter.
+ *
+ * Since: 2.18
+ **/
+void
+gnome_password_dialog_set_show_new_password_quality (GnomePasswordDialog *password_dialog,
+						     gboolean             show)
+{
+	GnomePasswordDialogDetails *priv;
+
+	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
+
+	priv = password_dialog->details;
+
+	show = show != FALSE;
+	if (priv->show_new_password_quality != show) {
+		priv->show_new_password_quality = show;
+
+		update_entries_table (password_dialog);
+
+		g_object_notify (G_OBJECT (password_dialog), "show-new-password-quality");
 	}
 }
 
@@ -1173,6 +1450,36 @@ gnome_password_dialog_get_password (GnomePasswordDialog *password_dialog)
 	priv = password_dialog->details;
 
 	return g_strdup (gtk_entry_get_text (GTK_ENTRY (priv->password_entry)));
+}
+
+/**
+ * gnome_password_dialog_get_new_password:
+ * @password_dialog: A #GnomePasswordDialog
+ *
+ * Description: Gets the new password from the password dialog.
+ *
+ * Returns: The password, or %NULL if the entries in the new password
+ * field and the confirmation field don't match.
+ *
+ * Since: 2.18
+ **/
+char *
+gnome_password_dialog_get_new_password (GnomePasswordDialog *password_dialog)
+{
+	GnomePasswordDialogDetails *priv;
+	const gchar *new_password, *confirm_password;
+
+	g_return_val_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog), NULL);
+
+	priv = password_dialog->details;
+
+	new_password = gtk_entry_get_text (GTK_ENTRY (priv->new_password_entry));
+	confirm_password = gtk_entry_get_text (GTK_ENTRY (priv->confirm_new_password_entry));
+	if (strcmp (new_password, confirm_password) != 0) {
+		return NULL;
+	}
+
+	return g_strdup (new_password);
 }
 
 /**

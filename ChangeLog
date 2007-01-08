@@ -1,3 +1,24 @@
+2007-01-08  Christian Persch  <chpe@svn.gnome.org>
+
+	* doc/reference/libgnomeui-sections.txt:
+	* libgnomeui/gnome-password-dialog.c: (update_entries_table),
+	(domain_entry_activate), (password_entry_activate),
+	(new_password_entry_activate), (new_password_entries_changed),
+	(gnome_password_dialog_init), (gnome_password_dialog_finalize),
+	(gnome_password_dialog_set_property),
+	(gnome_password_dialog_get_property),
+	(gnome_password_dialog_class_init),
+	(gnome_password_dialog_set_new_password),
+	(gnome_password_dialog_set_password_quality_func),
+	(gnome_password_dialog_set_show_new_password),
+	(gnome_password_dialog_set_show_new_password_quality),
+	(gnome_password_dialog_get_new_password):
+	* libgnomeui/gnome-password-dialog.h:
+	* test-gnome/test-password-dialog.c: (quality_func),
+	(authenticate_boink_callback), (exit_callback), (main):
+	Implement new-password including password quality measuring for
+	GnomePasswordDialog. Bug #326851.
+
 2007-01-08  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* file-chooser/gtkfilesystemgnomevfs.c: (fs_module_init):

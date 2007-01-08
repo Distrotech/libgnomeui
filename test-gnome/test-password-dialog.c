@@ -9,9 +9,8 @@
 static GtkWidget *password_dialog = NULL;
 static GtkWidget *property_editor = NULL;
 
-#if 0
 static gdouble
-quality_func (const char *text, gpointer ptr)
+quality_func (GnomePasswordDialog *dialog, const char *text, gpointer ptr)
 {
 	const char *p;
 	gsize length;
@@ -56,7 +55,6 @@ quality_func (const char *text, gpointer ptr)
 
 	return (double) strength / 100.0;
 }
-#endif
 
 static void
 authenticate_boink_callback (GtkWidget *button, gpointer user_data)
@@ -76,10 +74,8 @@ authenticate_boink_callback (GtkWidget *button, gpointer user_data)
 
 		gnome_password_dialog_set_username (GNOME_PASSWORD_DIALOG (password_dialog), "foouser");
 		gnome_password_dialog_set_password (GNOME_PASSWORD_DIALOG (password_dialog), "sekret");
-#if 0
 		gnome_password_dialog_set_password_quality_func (GNOME_PASSWORD_DIALOG (password_dialog),
 								 quality_func, NULL, NULL);
-#endif
 
 		group = gtk_window_group_new ();
 		gtk_window_group_add_window (group, GTK_WINDOW (password_dialog));
@@ -100,33 +96,27 @@ authenticate_boink_callback (GtkWidget *button, gpointer user_data)
 
 	result = gnome_password_dialog_run_and_block (GNOME_PASSWORD_DIALOG (password_dialog));
 
-	username = gnome_password_dialog_get_username (GNOME_PASSWORD_DIALOG (password_dialog));
-	password = gnome_password_dialog_get_password (GNOME_PASSWORD_DIALOG (password_dialog));
-
-	g_assert (username != NULL);
-	g_assert (password != NULL);
-
 	if (result) {
+		username = gnome_password_dialog_get_username (GNOME_PASSWORD_DIALOG (password_dialog));
+		password = gnome_password_dialog_get_password (GNOME_PASSWORD_DIALOG (password_dialog));
+
 		g_print ("authentication submitted: username='%s' , password='%s'\n",
 			 username,
 			 password);
+
+	        g_free (username);
+	        g_free (password);
 	}
 	else {
 		g_print ("authentication cancelled:\n");
 	}
-	
-	g_free (username);
-	g_free (password);
 }
 
 static void
 exit_callback (GtkWidget *button, gpointer user_data)
 {
 	if (password_dialog != NULL) {
-		gtk_widget_destroy (password_dialog);
-	}
-	if (property_editor != NULL) {
-		gtk_widget_destroy (property_editor);
+		gtk_dialog_response (GTK_DIALOG (password_dialog), GTK_RESPONSE_CANCEL);
 	}
 
 	gtk_main_quit ();
@@ -139,10 +129,11 @@ main (int argc, char * argv[])
 	GtkWidget *vbox;
 	GtkWidget *authenticate_button;
 	GtkWidget *exit_button;
+	GnomeProgram *program;
 
-	gnome_program_init ("test-gnome-password-dialog", VERSION,
-			    libgnomeui_module_info_get (), argc, argv,
-			    NULL);
+	program = gnome_program_init ("test-gnome-password-dialog", VERSION,
+				      libgnomeui_module_info_get (), argc, argv,
+				      NULL);
 	
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	gtk_container_set_border_width (GTK_CONTAINER (window), 4);
@@ -162,13 +153,15 @@ main (int argc, char * argv[])
 			    "clicked",
 			    G_CALLBACK (exit_callback),
 			    NULL);
-
+	
 	gtk_box_pack_start (GTK_BOX (vbox), authenticate_button, TRUE, TRUE, 4);
 	gtk_box_pack_end (GTK_BOX (vbox), exit_button, TRUE, TRUE, 0);
 	
 	gtk_widget_show_all (window);
 
 	gtk_main ();
+
+	g_object_unref (program);
 
 	return 0;
 }

@@ -57,6 +57,10 @@ typedef enum {
 	GNOME_PASSWORD_DIALOG_REMEMBER_FOREVER
 } GnomePasswordDialogRemember;
 
+typedef gdouble (* GnomePasswordDialogQualityFunc) (GnomePasswordDialog *password_dialog,
+ 						    const char *password,
+						    gpointer user_data);
+
 GtkType    gnome_password_dialog_get_type (void);
 GtkWidget* gnome_password_dialog_new      (const char *dialog_title,
 					   const char *message,
@@ -73,12 +77,22 @@ void gnome_password_dialog_set_show_domain         (GnomePasswordDialog *passwor
 						    gboolean             show);
 void gnome_password_dialog_set_show_password       (GnomePasswordDialog *password_dialog,
 						    gboolean             show);
+void gnome_password_dialog_set_show_new_password   (GnomePasswordDialog *password_dialog,
+						    gboolean             show);
+void gnome_password_dialog_set_show_new_password_quality (GnomePasswordDialog *password_dialog,
+							  gboolean             show);
 void gnome_password_dialog_set_username            (GnomePasswordDialog *password_dialog,
 						    const char          *username);
 void gnome_password_dialog_set_domain              (GnomePasswordDialog *password_dialog,
 						    const char          *domain);
 void gnome_password_dialog_set_password            (GnomePasswordDialog *password_dialog,
 						    const char          *password);
+void gnome_password_dialog_set_new_password        (GnomePasswordDialog *password_dialog,
+						    const char          *password);
+void gnome_password_dialog_set_password_quality_func (GnomePasswordDialog *password_dialog,
+						      GnomePasswordDialogQualityFunc func,
+						      gpointer data,
+						      GDestroyNotify dnotify);
 void gnome_password_dialog_set_readonly_username   (GnomePasswordDialog *password_dialog,
 						    gboolean             readonly);
 void gnome_password_dialog_set_readonly_domain     (GnomePasswordDialog *password_dialog,
@@ -96,6 +110,7 @@ void                        gnome_password_dialog_set_show_userpass_buttons (Gno
 char *     gnome_password_dialog_get_username            (GnomePasswordDialog *password_dialog);
 char *     gnome_password_dialog_get_domain              (GnomePasswordDialog *password_dialog);
 char *     gnome_password_dialog_get_password            (GnomePasswordDialog *password_dialog);
+char *     gnome_password_dialog_get_new_password        (GnomePasswordDialog *password_dialog);
 
 gboolean   gnome_password_dialog_anon_selected 		 (GnomePasswordDialog *password_dialog);
 
