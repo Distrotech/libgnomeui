@@ -1,15 +1,3 @@
-2007-01-08  Kjartan Maraas  <kmaraas@gnome.org>
-
-	* gnome-dialog.c: (gnome_dialog_get_type):
-	* gnome-druid.c: (gnome_druid_accessible_get_type),
-	(gnome_druid_accessible_factory_get_type):
-	* gnome-entry.c: (gnome_entry_get_type):
-	* gnome-file-entry.c: (gnome_file_entry_get_type):
-	* gnome-ui-init.c: (libgnomeui_set_property):
-	Don't make all the GTypeInfo stuff static. Reduces
-	relocations. Patch from Christian Persch. Closes
-	bug #360628.
-
 2003-12-07  Diego Gonzalez  <diego@pemas.net>
 
 	* libgnomeui/gnome-icon-theme.[c-h]: mark as deprecated

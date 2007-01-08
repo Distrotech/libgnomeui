@@ -3623,7 +3623,7 @@ fs_module_init (GTypeModule    *module)
   gnome_vfs_init ();
 
   {
-    static const GTypeInfo file_system_gnome_vfs_info =
+    const GTypeInfo file_system_gnome_vfs_info =
       {
 	sizeof (GtkFileSystemGnomeVFSClass),
 	NULL,		/* base_init */
@@ -3635,7 +3635,7 @@ fs_module_init (GTypeModule    *module)
 	0,		/* n_preallocs */
 	(GInstanceInitFunc) gtk_file_system_gnome_vfs_init,
       };
-    static const GInterfaceInfo file_system_info =
+    const GInterfaceInfo file_system_info =
       {
 	(GInterfaceInitFunc) gtk_file_system_gnome_vfs_iface_init, /* interface_init */
 	NULL,			                              /* interface_finalize */
@@ -3656,7 +3656,7 @@ fs_module_init (GTypeModule    *module)
   }
 
   {
-    static const GTypeInfo file_folder_gnome_vfs_info =
+    const GTypeInfo file_folder_gnome_vfs_info =
       {
 	sizeof (GtkFileFolderGnomeVFSClass),
 	NULL,		/* base_init */
@@ -3669,7 +3669,7 @@ fs_module_init (GTypeModule    *module)
 	(GInstanceInitFunc) gtk_file_folder_gnome_vfs_init,
       };
     
-    static const GInterfaceInfo file_folder_info =
+    const GInterfaceInfo file_folder_info =
       {
 	(GInterfaceInitFunc) gtk_file_folder_gnome_vfs_iface_init, /* interface_init */
 	NULL,			                              /* interface_finalize */
@@ -3687,7 +3687,7 @@ fs_module_init (GTypeModule    *module)
   }
 
   {
-    static const GTypeInfo file_system_handle_gnome_vfs_info =
+    const GTypeInfo file_system_handle_gnome_vfs_info =
       {
 	sizeof (GtkFileSystemHandleGnomeVFSClass),
 	NULL,           /* base_init */ 

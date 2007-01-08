@@ -1,3 +1,16 @@
+2007-01-08  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c: (fs_module_init):
+	* libgnomeui/gnome-dialog.c: (gnome_dialog_get_type):
+	* libgnomeui/gnome-druid.c: (gnome_druid_accessible_get_type),
+	(gnome_druid_accessible_factory_get_type):
+	* libgnomeui/gnome-entry.c: (gnome_entry_get_type):
+	* libgnomeui/gnome-file-entry.c: (gnome_file_entry_get_type):
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_set_property):
+	Don't make all the GTypeInfo stuff static. Reduces
+	relocations. Patch from Christian Persch. Closes
+	bug #360628.
+
 2006-12-22  Fernando Herrera  <fherrera@onirica.com>
 
 	* libgnomeui/gnome_segv.c: (main): Add --disable-factory to
