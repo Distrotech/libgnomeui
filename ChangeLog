@@ -1,5 +1,14 @@
 2007-01-08  Christian Persch  <chpe@svn.gnome.org>
 
+	* libgnomeui/Makefile.am:
+	* libgnomeui/gnome-dialog.c: (gnome_dialog_get_type):
+	* libgnomeui/gnome-icon-list.c: (if):
+	* libgnomeui/gnome-icon-theme.c: (gnome_icon_theme_get_type):
+	* libgnomeui/gnome-ui-init.c: (show_url):
+	More static GTypeInfo reductions. Bug #360628.
+
+2007-01-08  Christian Persch  <chpe@svn.gnome.org>
+
 	* doc/reference/libgnomeui-sections.txt:
 	* libgnomeui/gnome-password-dialog.c: (update_entries_table),
 	(domain_entry_activate), (password_entry_activate),

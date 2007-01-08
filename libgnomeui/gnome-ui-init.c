@@ -76,6 +76,7 @@
 #include <gtk/gtkcheckmenuitem.h>
 #include <gtk/gtkmessagedialog.h>
 #include <gtk/gtkaboutdialog.h>
+#include <gtk/gtklinkbutton.h>
 
 /*****************************************************************************
  * libgnomeui
@@ -237,7 +238,8 @@ show_url (GtkWidget *parent,
 	GdkScreen *screen;
 	GError *error = NULL;
 
-	screen = gtk_widget_get_screen (parent);
+	if (parent != NULL)
+		screen = gtk_widget_get_screen (parent);
 
 	if (!gnome_url_show_on_screen (url, screen, &error))
 	{

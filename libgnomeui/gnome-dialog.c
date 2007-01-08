@@ -64,7 +64,7 @@ gnome_dialog_get_type (void)
 {
   static GType dialog_type = 0;
 
-  if (!dialog_type)
+  if (G_UNLIKELY (dialog_type == 0))
     {
       const GTypeInfo dialog_info =
       {

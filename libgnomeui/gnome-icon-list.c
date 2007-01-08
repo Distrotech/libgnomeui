@@ -3211,8 +3211,8 @@ gil_accessible_get_type (void)
 {
 	static GType type;
 
-	if (!type) {
-		static GInterfaceInfo selection_info = {
+	if (G_UNLIKELY (type == 0)) {
+		const GInterfaceInfo selection_info = {
 			(GInterfaceInitFunc) selection_interface_init,
 			NULL, /* interface_finalize */
 			NULL /* interface_data */
