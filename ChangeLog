@@ -1,3 +1,9 @@
+2007-01-08  Christian Neumair  <chris@gnome-de.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c: (make_uri_canonical): Don't
+	garble hostname URI with trailing slash by erroneously chopping
+	trailing slash. #334888.
+
 2007-01-08  Christian Persch  <chpe@svn.gnome.org>
 
 	* libgnomeui/Makefile.am:

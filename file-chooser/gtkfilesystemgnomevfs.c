@@ -876,6 +876,29 @@ load_afs_dir (GtkFileFolderGnomeVFS *folder_vfs)
     }
 }
 
+
+static gboolean
+uri_is_hostname_with_trailing_slash (const char *uri)
+{
+  char *p;
+
+  p = strstr (uri, "://");
+  if (p == NULL)
+    {
+      return FALSE;
+    }
+
+  p+=3;
+
+  p = strstr (p, "/");
+  if (p != NULL && *(p + 1) == '\0')
+    {
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
 static char *
 make_uri_canonical (const char *uri)
 {
@@ -884,12 +907,14 @@ make_uri_canonical (const char *uri)
   
   canonical = gnome_vfs_make_uri_canonical (uri);
 
-  /* Strip terminating / unless its foo:/ or foo:/// */
+  /* Strip terminating / unless its foo:/ or foo:///,
+   * or foo://bar/ */
   len = strlen (canonical);
   if (len > 2 &&
       canonical[len-1] == '/' &&
       canonical[len-2] != '/' &&
-      canonical[len-2] != ':')
+      canonical[len-2] != ':' &&
+      !uri_is_hostname_with_trailing_slash (canonical))
     {
       canonical[len-1] = 0;
     }
