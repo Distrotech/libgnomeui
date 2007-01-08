@@ -329,7 +329,7 @@ libgnomeui_set_property (GObject *object, guint param_id,
         priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
 
 	if (param_id == cdata->default_icon_id)
-		priv->default_icon = g_strdup (g_value_get_string (value));
+		priv->default_icon = g_value_dup_string (value);
 	else if (param_id == cdata->crash_dialog_id)
 		priv->show_crash_dialog = g_value_get_boolean (value) != FALSE;
 	else if (param_id == cdata->display_id)

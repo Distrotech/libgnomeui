@@ -103,7 +103,7 @@ gnome_entry_get_type (void)
 	static GType object_type = 0;
 
 	if (object_type == 0) {
-		static const GTypeInfo object_info = {
+		const GTypeInfo object_info = {
 			sizeof (GnomeEntryClass),
 			(GBaseInitFunc) NULL,
 			(GBaseFinalizeFunc) NULL,
@@ -116,7 +116,7 @@ gnome_entry_get_type (void)
 			NULL			/* value_table */
 		};
 
-		static const GInterfaceInfo editable_info =
+		const GInterfaceInfo editable_info =
 		{
 			(GInterfaceInitFunc) gnome_entry_editable_init,	 /* interface_init */
 			NULL,			                         /* interface_finalize */

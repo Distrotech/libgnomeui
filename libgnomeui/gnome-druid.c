@@ -1140,7 +1140,7 @@ gnome_druid_accessible_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		static GTypeInfo tinfo = {
+		GTypeInfo tinfo = {
 			0, /* class size */
 			(GBaseInitFunc) NULL, /* base init */
 			(GBaseFinalizeFunc) NULL, /* base finalize */
@@ -1214,7 +1214,7 @@ gnome_druid_accessible_factory_get_type (void)
 	static GType type = 0;
 
 	if (!type) {
-		static const GTypeInfo tinfo = {
+		const GTypeInfo tinfo = {
 			sizeof (AtkObjectFactoryClass),
 			NULL,           /* base_init */
 			NULL,           /* base_finalize */
