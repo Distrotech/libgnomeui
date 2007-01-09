@@ -665,6 +665,7 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
   /* User-visible drives */
 
   list = gnome_vfs_volume_monitor_get_connected_drives (system_vfs->volume_monitor);
+  list = g_list_sort (list, (GCompareFunc) gnome_vfs_drive_compare);
   for (l = list; l; l = l->next)
     {
       drive = GNOME_VFS_DRIVE (l->data);
@@ -680,6 +681,7 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
   /* User-visible volumes with no corresponding drives */
 
   list = gnome_vfs_volume_monitor_get_mounted_volumes (system_vfs->volume_monitor);
+  list = g_list_sort (list, (GCompareFunc) gnome_vfs_volume_compare);
   for (l = list; l; l = l->next)
     {
       volume = GNOME_VFS_VOLUME (l->data);
