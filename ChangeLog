@@ -1,3 +1,8 @@
+2007-01-09  Christian Persch  <chpe@svn.gnome.org>
+
+	* test-gnome/testentry.c: (main): Make the dialogue modal, to test bug
+	#89689.
+
 2007-01-09  Christian Neumair  <chris@gnome-de.org>
 
 	* libgnomeui/gtkfilesystemgnomevfs.c:

@@ -37,6 +37,8 @@ main (gint argc, gchar **argv)
 	gtk_container_add (GTK_CONTAINER (window), vbox);
 	gtk_widget_show_all (window);
 
+	gtk_window_set_modal (GTK_WINDOW (window), TRUE);
+
 	gtk_main ();
 	
 	return 0;
