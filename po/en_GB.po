@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-28 18:22+0000\n"
-"PO-Revision-Date: 2006-12-28 18:22-0000\n"
+"POT-Creation-Date: 2007-01-09 07:14+0000\n"
+"PO-Revision-Date: 2007-01-09 07:14-0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,35 +32,35 @@ msgstr "Child Item 2"
 msgid "Hint for item 2"
 msgstr "Hint for item 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1003
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s is a link to something that is not a folder"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:989
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1014
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s is a link without a destination location"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1089
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s is not a folder"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1941
 msgid "Network Servers"
 msgstr "Network Servers"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1957
 msgid "File System"
 msgstr "File System"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2486
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Bookmark saving failed (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2923
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Error getting information for '%s'"
@@ -1283,35 +1283,47 @@ msgstr "Question"
 msgid "Message"
 msgstr "Message"
 
-#: ../libgnomeui/gnome-password-dialog.c:196
+#: ../libgnomeui/gnome-password-dialog.c:209
 msgid "_Username:"
 msgstr "_Username:"
 
-#: ../libgnomeui/gnome-password-dialog.c:199
+#: ../libgnomeui/gnome-password-dialog.c:212
 msgid "_Domain:"
 msgstr "_Domain:"
 
-#: ../libgnomeui/gnome-password-dialog.c:202
+#: ../libgnomeui/gnome-password-dialog.c:215
 msgid "_Password:"
 msgstr "_Password:"
 
-#: ../libgnomeui/gnome-password-dialog.c:271
+#: ../libgnomeui/gnome-password-dialog.c:218
+msgid "_New password:"
+msgstr "_New password:"
+
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "Con_firm password:"
+msgstr "Con_firm password:"
+
+#: ../libgnomeui/gnome-password-dialog.c:222
+msgid "Password quality:"
+msgstr "Password quality:"
+
+#: ../libgnomeui/gnome-password-dialog.c:337
 msgid "Co_nnect"
 msgstr "Co_nnect"
 
-#: ../libgnomeui/gnome-password-dialog.c:304
+#: ../libgnomeui/gnome-password-dialog.c:370
 msgid "Connect _anonymously"
 msgstr "Connect _anonymously"
 
-#: ../libgnomeui/gnome-password-dialog.c:309
+#: ../libgnomeui/gnome-password-dialog.c:375
 msgid "Connect as u_ser:"
 msgstr "Connect as u_ser:"
 
-#: ../libgnomeui/gnome-password-dialog.c:352
+#: ../libgnomeui/gnome-password-dialog.c:433
 msgid "_Remember password for this session"
 msgstr "_Remember password for this session"
 
-#: ../libgnomeui/gnome-password-dialog.c:356
+#: ../libgnomeui/gnome-password-dialog.c:437
 msgid "Save password in _keyring"
 msgstr "Save password in _keyring"
 
@@ -1395,43 +1407,43 @@ msgstr "Un-Indent"
 msgid "About"
 msgstr "About"
 
-#: ../libgnomeui/gnome-ui-init.c:126
-#: ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:127
+#: ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "Disable Crash Dialogue"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "X display to use"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:172
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "GNOME GUI Library:"
 msgstr "GNOME GUI Library:"
 
-#: ../libgnomeui/gnome-ui-init.c:173
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "Show GNOME GUI options"
 
-#: ../libgnomeui/gnome-ui-init.c:185
+#: ../libgnomeui/gnome-ui-init.c:186
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI Library"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "Could not open link"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Multiple segmentation faults occurred; can't display error dialogue\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
