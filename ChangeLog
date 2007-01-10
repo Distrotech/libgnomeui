@@ -1,3 +1,13 @@
+2007-01-10  Christian Persch  <chpe@svn.gnome.org>
+
+	* libgnomeui/gnome-password-dialog.c: (add_row),
+	(gnome_password_dialog_init), (gnome_password_dialog_class_init),
+	(gnome_password_dialog_set_show_remember),
+	(gnome_password_dialog_set_remember),
+	(gnome_password_dialog_get_remember): Change remember checkbuttons to
+	radio buttons. Bug #322804, based on a patch by Fernando Herrera based
+	on a patch by Hiroyuki Ikezoe.
+
 2007-01-09  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-file-entry.c: (browse_clicked): Patch from Christope Fergeau

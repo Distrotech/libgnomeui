@@ -68,9 +68,11 @@ authenticate_boink_callback (GtkWidget *button, gpointer user_data)
 
 		password_dialog = g_object_new (GNOME_TYPE_PASSWORD_DIALOG,
 						"title", "Authenticate Me",
-						"message", "My secret message.",
+						"message", "Authenticate Me and make this text as long as possible so it starts to wrap",
 						NULL);
 		g_signal_connect (password_dialog, "destroy", G_CALLBACK (gtk_widget_destroyed), &password_dialog);
+
+/*		gtk_window_set_resizable (GTK_WINDOW (password_dialog), TRUE); */
 
 		gnome_password_dialog_set_username (GNOME_PASSWORD_DIALOG (password_dialog), "foouser");
 		gnome_password_dialog_set_password (GNOME_PASSWORD_DIALOG (password_dialog), "sekret");

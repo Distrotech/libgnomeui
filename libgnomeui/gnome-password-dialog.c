@@ -62,8 +62,8 @@ struct _GnomePasswordDialogDetails
 	GtkWidget *table_alignment;
 	GtkWidget *table;
 
-	GtkWidget *remember_session_button;
-	GtkWidget *remember_forever_button;
+	GtkWidget *remember_box;
+	GtkWidget *remember_buttons[3];
 
 	GtkWidget *radio_vbox;
 	GtkWidget *connect_with_no_userpass_button;
@@ -170,8 +170,9 @@ add_row (GtkWidget *table, int row, const char *label_text, GtkWidget *entry)
 	label = gtk_label_new_with_mnemonic (label_text);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 
-	gtk_table_attach_defaults (GTK_TABLE (table), label,
-				   0, 1, row, row + 1);
+	gtk_table_attach (GTK_TABLE (table), label,
+			  0, 1, row, row + 1,
+			  GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
 	gtk_table_attach_defaults (GTK_TABLE (table), entry,
 				   1, 2, row, row + 1);
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
@@ -341,14 +342,14 @@ gnome_password_dialog_init (GnomePasswordDialog *password_dialog)
 	/* Build contents */
 	hbox = gtk_hbox_new (FALSE, 12);
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), 5);
-	gtk_box_pack_start (GTK_BOX (dialog->vbox), hbox, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (dialog->vbox), hbox, TRUE, TRUE, 0);
 
 	icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_AUTHENTICATION, GTK_ICON_SIZE_DIALOG);
 	gtk_misc_set_alignment (GTK_MISC (icon), 0.5, 0.0);
 	gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
 
 	main_vbox = gtk_vbox_new (FALSE, 18);
-	gtk_box_pack_start (GTK_BOX (hbox), main_vbox, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), main_vbox, TRUE, TRUE, 0);
 
 	priv->message_label = gtk_label_new (NULL);
 	gtk_misc_set_alignment (GTK_MISC (priv->message_label), 0.0, 0.5);
@@ -429,19 +430,36 @@ gnome_password_dialog_init (GnomePasswordDialog *password_dialog)
 
 	gtk_widget_show_all (hbox);
 
-	priv->remember_session_button =
-		gtk_check_button_new_with_mnemonic (_("_Remember password for this session"));
-	g_signal_connect (priv->remember_session_button, "toggled",
+	priv->remember_box = gtk_vbox_new (FALSE, 6);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->remember_box,
+			    FALSE, FALSE, 0);
+	
+	priv->remember_buttons[0] =
+		gtk_radio_button_new_with_mnemonic (NULL, _("_Forget password immediately"));
+	g_signal_connect (priv->remember_buttons[0], "toggled",
 			  G_CALLBACK (remember_button_toggled), password_dialog);
-	priv->remember_forever_button =
-		gtk_check_button_new_with_mnemonic (_("Save password in _keyring"));
-	g_signal_connect (priv->remember_forever_button, "toggled",
+	priv->remember_buttons[1] =
+		gtk_radio_button_new_with_mnemonic_from_widget (
+			GTK_RADIO_BUTTON (priv->remember_buttons[0]),
+			_("_Remember password until you logout"));
+	g_signal_connect (priv->remember_buttons[1], "toggled",
+			  G_CALLBACK (remember_button_toggled), password_dialog);
+	priv->remember_buttons[2] =
+		gtk_radio_button_new_with_mnemonic_from_widget (
+			GTK_RADIO_BUTTON (priv->remember_buttons[0]),
+			_("_Remember forever"));
+	g_signal_connect (priv->remember_buttons[2], "toggled",
 			  G_CALLBACK (remember_button_toggled), password_dialog);
 
-	gtk_box_pack_start (GTK_BOX (vbox), priv->remember_session_button, 
+	gtk_box_pack_start (GTK_BOX (priv->remember_box), priv->remember_buttons[0],
 			    FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), priv->remember_forever_button, 
+	gtk_widget_show (priv->remember_buttons[0]);
+	gtk_box_pack_start (GTK_BOX (priv->remember_box), priv->remember_buttons[1],
 			    FALSE, FALSE, 0);
+	gtk_widget_show (priv->remember_buttons[1]);
+	gtk_box_pack_start (GTK_BOX (priv->remember_box), priv->remember_buttons[2],
+			    FALSE, FALSE, 0);
+	gtk_widget_show (priv->remember_buttons[2]);
 }
 
 static GObject *
@@ -743,7 +761,7 @@ gnome_password_dialog_class_init (GnomePasswordDialogClass * klass)
 	* GnomePasswordDialog:show-remember:
 	 *
 	 * Whether the dialog shows the remember in session and 
-	 * remember in keyring check boxes.
+	 * remember in keyring radion buttons.
 	 *
 	 * Since: 2.18
 	 */
@@ -1583,13 +1601,7 @@ gnome_password_dialog_set_show_remember (GnomePasswordDialog         *password_d
 	if (priv->show_remember != show) {
 		priv->show_remember = show;
 
-		if (show) {
-			gtk_widget_show (priv->remember_session_button);
-			gtk_widget_show (priv->remember_forever_button);
-		} else {
-			gtk_widget_hide (priv->remember_session_button);
-			gtk_widget_hide (priv->remember_forever_button);
-		}
+		g_object_set (priv->remember_box, "visible", show, NULL);
 
 		g_object_notify (G_OBJECT (password_dialog), "show-remember");
 	}
@@ -1610,26 +1622,16 @@ gnome_password_dialog_set_remember      (GnomePasswordDialog         *password_d
 					 GnomePasswordDialogRemember  remember)
 {
 	GnomePasswordDialogDetails *priv;
-	gboolean session, forever;
 
 	g_return_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog));
+	g_return_if_fail (remember >= GNOME_PASSWORD_DIALOG_REMEMBER_NOTHING &&
+			  remember <= GNOME_PASSWORD_DIALOG_REMEMBER_FOREVER);
 
 	priv = password_dialog->details;
 
 	if (gnome_password_dialog_get_remember (password_dialog) != remember) {
-		session = FALSE;
-		forever = FALSE;
-		if (remember == GNOME_PASSWORD_DIALOG_REMEMBER_SESSION) {
-			session = TRUE;
-		} else if (remember == GNOME_PASSWORD_DIALOG_REMEMBER_FOREVER){
-			forever = TRUE;
-		}
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->remember_session_button),
-					session);
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->remember_forever_button),
-					forever);
-
-		g_object_notify (G_OBJECT (password_dialog), "remember-mode");
+		/* This will emit notify::remember-mode by the remember_button_toggled callback */
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->remember_buttons[remember]), TRUE);
 	}
 }
 
@@ -1649,18 +1651,19 @@ GnomePasswordDialogRemember
 gnome_password_dialog_get_remember (GnomePasswordDialog         *password_dialog)
 {
 	GnomePasswordDialogDetails *priv;
-	gboolean session, forever;
+	GnomePasswordDialogRemember remember;
 
 	g_return_val_if_fail (GNOME_IS_PASSWORD_DIALOG (password_dialog), GNOME_PASSWORD_DIALOG_REMEMBER_NOTHING);
 
 	priv = password_dialog->details;
 
-	session = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->remember_session_button));
-	forever = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->remember_forever_button));
-	if (forever) {
-		return GNOME_PASSWORD_DIALOG_REMEMBER_FOREVER;
-	} else if (session) {
-		return GNOME_PASSWORD_DIALOG_REMEMBER_SESSION;
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->remember_buttons[GNOME_PASSWORD_DIALOG_REMEMBER_FOREVER]))) {
+		remember = GNOME_PASSWORD_DIALOG_REMEMBER_FOREVER;
+	} else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->remember_buttons[GNOME_PASSWORD_DIALOG_REMEMBER_SESSION]))) {
+		remember = GNOME_PASSWORD_DIALOG_REMEMBER_SESSION;
+	} else {
+		remember = GNOME_PASSWORD_DIALOG_REMEMBER_NOTHING;
 	}
-	return GNOME_PASSWORD_DIALOG_REMEMBER_NOTHING;
+
+	return remember;
 }
