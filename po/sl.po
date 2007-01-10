@@ -1,22 +1,26 @@
 # Slovenian translation file for Libgnomeui.
 # Copyright (C) 2002 Free Software Foundation, Inc.
-# Andraz Tori <andraz.tori1@guest.arnes.si> 2002
+# This file is distributed under the same license as the libgnomeui package.
+#
+# Andraz Tori <andraz.tori1@guest.arnes.si>, 2002.
+# Matic Žgur <mr.zgur@gmail.com>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-11 09:36+0200\n"
-"PO-Revision-Date: 2006-08-11 19:15+0100\n"
+"POT-Creation-Date: 2007-01-09 03:25+0000\n"
+"PO-Revision-Date: 2007-01-10 16:00+0100\n"
 "Last-Translator: Matic Žgur <mr.zgur@gmail.com>\n"
-"Language-Team: Slovenian <sl@li.org>\n"
+"Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Slovenian\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr "Predmet otroka 1"
+msgstr "Podrejeni predmet 1"
 
 #: ../demos/mdi_demo.c:129
 msgid "Hint for item 1"
@@ -24,39 +28,44 @@ msgstr "Namig za predmet 1"
 
 #: ../demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr "Predmet otroka 2"
+msgstr "Podrejeni predmet 2"
 
 #: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Namig za predmet 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1003
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s je povezava ne nekaj, kar ni mapa"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1014
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s je povezava brez cilja"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1089
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ni mapa"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1941
 msgid "Network Servers"
 msgstr "Omrežni strežniki"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1957
 msgid "File System"
 msgstr "Datotečni sistem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2486
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Shranjevanje zaznamka ni uspelo (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2923
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "Ni mogoče dobiti podatkov o '%s'"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -172,7 +181,7 @@ msgstr "Logotip"
 
 #: ../libgnomeui/gnome-about.c:439
 msgid "A logo for the about box"
-msgstr "Logotip za škatlo \"O programu\""
+msgstr "Logotip za okno \"O programu\""
 
 #: ../libgnomeui/gnome-about.c:518
 #, c-format
@@ -322,11 +331,11 @@ msgstr "Zapri trenutno datoteko"
 #. Exit
 #: ../libgnomeui/gnome-app-helper.c:147
 msgid "_Quit"
-msgstr "_Izhod"
+msgstr "_Končaj"
 
 #: ../libgnomeui/gnome-app-helper.c:147
 msgid "Quit the application"
-msgstr "Izhod iz programa"
+msgstr "Končaj program"
 
 #.
 #. * The "Edit" menu
@@ -389,7 +398,7 @@ msgstr "Obnovi razveljavljeno dejanje"
 #. Find
 #: ../libgnomeui/gnome-app-helper.c:186
 msgid "_Find..."
-msgstr "Po_išči ..."
+msgstr "_Najdi ..."
 
 #: ../libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
@@ -398,7 +407,7 @@ msgstr "Išči niz"
 #. Find Again
 #: ../libgnomeui/gnome-app-helper.c:191
 msgid "Find Ne_xt"
-msgstr "Poišči n_aprej"
+msgstr "Najdi n_aslednje"
 
 #: ../libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
@@ -563,11 +572,11 @@ msgstr "Prednostno besedilo poleg ikon"
 
 #: ../libgnomeui/gnome-app-helper.c:2589
 msgid "Icons Only"
-msgstr "Le ikone"
+msgstr "Samo ikone"
 
 #: ../libgnomeui/gnome-app-helper.c:2590
 msgid "Text Only"
-msgstr "Le besedilo"
+msgstr "Samo besedilo"
 
 #: ../libgnomeui/gnome-app-helper.c:2651
 #, c-format
@@ -668,16 +677,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Vaše geslo bo prenešeno šifrirano"
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Zahtevana je avtentifikacija"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Za dostop do %s domene %s se morate prijaviti\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Za dostop do %s se morate prijaviti\n"
@@ -708,15 +718,18 @@ msgid "Disable connection to session manager"
 msgstr "Izključi povezavo z upravljalnikom seje"
 
 #: ../libgnomeui/gnome-client.c:1034
-#: ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Upravljanje seje"
+msgid "Session management:"
+msgstr "Upravljanje seje:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Prikaži možnosti upravljanja seje"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Upravljanje seje"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "Prekliči odjavo"
 
@@ -921,16 +934,16 @@ msgstr "Namesto gumba \"Naprej\" Kaži gumb \"Končaj\""
 
 #: ../libgnomeui/gnome-druid.c:162
 msgid "Show Help"
-msgstr "Kaži pomoč"
+msgstr "Prikaži pomoč"
 
 #: ../libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
-msgstr "Kaži gumb \"Pomoč\""
+msgstr "Prikaži gumb \"Pomoč\""
 
 #: ../libgnomeui/gnome-entry.c:193
 #: ../libgnomeui/gnome-entry.c:194
 #: ../libgnomeui/gnome-file-entry.c:236
-#: ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "Id zgodovine"
 
@@ -947,13 +960,13 @@ msgid "Unique identifier for the file entry.  This will be used to save the hist
 msgstr "Edinstven identifikator za ta vnos datoteke.  To bo uporabljeno za shranjevanje seznama zgodovine."
 
 #: ../libgnomeui/gnome-file-entry.c:245
-#: ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "Naziv brskalnega dialoga"
 
 #: ../libgnomeui/gnome-file-entry.c:246
 msgid "Title for the Browse file dialog."
-msgstr "Naziv dialoga za brksanje datotek."
+msgstr "Naziv dialoga za brskanje datotek."
 
 #: ../libgnomeui/gnome-file-entry.c:253
 msgid "Directory Entry"
@@ -972,7 +985,7 @@ msgid "Whether the Browse file window should be modal."
 msgstr "Ali naj bo okno brskalnika datotek na vrhu."
 
 #: ../libgnomeui/gnome-file-entry.c:270
-#: ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "Ime datoteke"
 
@@ -1172,69 +1185,69 @@ msgstr ""
 "Ob poskusu zagona privzetega spletnega brskalnika je prišlo do napake.\n"
 "Preglejte svoje nastavitve v nastavitvah Zaželjenih programov."
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid "Unique identifier for the icon entry.  This will be used to save the history list."
 msgstr "Edinstven identifikator za vnos ikone.  To bo uporabljeno za shranitev seznama zgodovine."
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "Naziv dialoga za brksanje ikon."
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "Imenik slik"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "Imenik v katerem naj se iščejo ikone."
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Ime datoteke, ki naj bo prikazano v vnosu ikone."
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "Dialog izbirnika"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
 msgstr "Dialog izbirnika ikone.  To lastnost lahko uporabite za pridobitev GtkDialog, če morate spremeniti ali poizvedeti po katerikoli od njegovih lastnosti."
 
-#: ../libgnomeui/gnome-icon-entry.c:322
-#: ../libgnomeui/gnome-icon-entry.c:1005
+#: ../libgnomeui/gnome-icon-entry.c:321
+#: ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
-msgstr "Brez"
+msgstr "Brez ikon"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "Dialog izbire ikone"
 
-#: ../libgnomeui/gnome-icon-entry.c:776
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "Ta dialog vam omogoča izbrati ikono."
 
-#: ../libgnomeui/gnome-icon-entry.c:782
-#: ../libgnomeui/gnome-icon-entry.c:1008
+#: ../libgnomeui/gnome-icon-entry.c:781
+#: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "Izbirnik ikone"
 
-#: ../libgnomeui/gnome-icon-entry.c:783
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "Prosim, izberite ikono, ki jo želite."
 
-#: ../libgnomeui/gnome-icon-entry.c:1009
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "Ta gumb bo odpru okno, ki vam omogoča izbrati ikono."
 
-#: ../libgnomeui/gnome-icon-entry.c:1029
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "Brskaj"
 
-#: ../libgnomeui/gnome-icon-entry.c:1032
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "Pot do ikon"
 
-#: ../libgnomeui/gnome-icon-entry.c:1033
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Here you should enter the name of the directory where icon images are located."
 msgstr "Tu morate vpisati ime imenika kjer se nahajajo ikone."
 
@@ -1272,35 +1285,47 @@ msgstr "Vprašanje"
 msgid "Message"
 msgstr "Sporočilo"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:209
 msgid "_Username:"
 msgstr "_Uporabniško ime:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:212
 msgid "_Domain:"
 msgstr "_Domena:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:215
 msgid "_Password:"
 msgstr "_Geslo:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:218
+msgid "_New password:"
+msgstr "_Novo geslo:"
+
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "Con_firm password:"
+msgstr "_Potrdite geslo:"
+
+#: ../libgnomeui/gnome-password-dialog.c:222
+msgid "Password quality:"
+msgstr "_Kakovost gesla:"
+
+#: ../libgnomeui/gnome-password-dialog.c:337
 msgid "Co_nnect"
 msgstr "Po_veži"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:370
 msgid "Connect _anonymously"
 msgstr "Poveži _anonimno"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:375
 msgid "Connect as u_ser:"
 msgstr "Poveži kot u_porabnik"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
+#: ../libgnomeui/gnome-password-dialog.c:433
 msgid "_Remember password for this session"
 msgstr "_Zapomni si geslo za to sejo"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
+#: ../libgnomeui/gnome-password-dialog.c:437
 msgid "Save password in _keyring"
 msgstr "Shrani geslo v zbirko _ključev"
 
@@ -1327,7 +1352,7 @@ msgstr "Predogled trenutno navedene slike"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:416
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Ne najdem hbox-a, uporabljam običajno izbiranje datotek"
+msgstr "Ni mogoče najti hbox-a, uporabljam običajno izbiranje datotek"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:422
 msgid "Preview"
@@ -1384,40 +1409,43 @@ msgstr "Razveljavi zamik"
 msgid "About"
 msgstr "O"
 
-#: ../libgnomeui/gnome-ui-init.c:123
-#: ../libgnomeui/gnome-ui-init.c:132
+#: ../libgnomeui/gnome-ui-init.c:127
+#: ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "Onemogoči pogovorno okno ob sesutju"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "Zaslon X za uporabo"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "ZASLON"
 
-#: ../libgnomeui/gnome-ui-init.c:169
-#: ../libgnomeui/gnome-ui-init.c:182
-msgid "GNOME GUI Library"
-msgstr "Knjižnjica grafičnega vmesnika Gnome"
+#: ../libgnomeui/gnome-ui-init.c:173
+msgid "GNOME GUI Library:"
+msgstr "Knjižnjica grafičnega vmesnika za GNOME:"
 
-#: ../libgnomeui/gnome-ui-init.c:170
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "Prikaži možnosti GNOME UI"
 
-#: ../libgnomeui/gnome-ui-init.c:247
+#: ../libgnomeui/gnome-ui-init.c:186
+msgid "GNOME GUI Library"
+msgstr "Knjižnjica grafičnega vmesnika Gnome"
+
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "Ni bilo mogoče odprti povezave"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:833
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Zgodilo se je več segmentacijskih napak; ne morem prikazati dialoga z napako\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:848
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1426,24 +1454,31 @@ msgstr ""
 "Segmentacijska napaka!\n"
 "Ne morem prikazati dialoga z napako\n"
 
-#: ../libgnomeui/gnome_segv.c:83
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Uporaba: gnome_segv2 imeprograma štsignala\n"
 
-#: ../libgnomeui/gnome_segv.c:136
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "Razhroščevanje %s"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>Program %s se je sesul.</b>\n"
 "\n"
-"Toda, orodje GNOME za prijavo napak ob sesutju <b>bug-buddy</b>\n"
-"ni nameščeno. Če nam želite pomagati izboljšati GNOME,\n"
-"ga namestite\n"
+"Prosimo, namestite program <b>bug-buddy</b>,\n"
+"orodje za prijavljanje sesutij za GNOME, ki vam\n"
+"omogoča, da razvijalcem pošljete podrobne\n"
+"podatke o napaki.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
