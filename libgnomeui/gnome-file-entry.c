@@ -594,6 +594,7 @@ browse_clicked(GnomeFileEntry *fentry)
 	char *p;
 	GtkWidget *toplevel;
 	GClosure *closure;
+	gboolean modal_fentry = FALSE;
 
 	/*if it already exists make sure it's shown and raised*/
 	if (fentry->fsw) {
@@ -716,12 +717,14 @@ browse_clicked(GnomeFileEntry *fentry)
 
 	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (fentry));
 
-	if (GTK_WIDGET_TOPLEVEL (toplevel) && GTK_IS_WINDOW (toplevel))
+	if (GTK_WIDGET_TOPLEVEL (toplevel) && GTK_IS_WINDOW (toplevel)) {
 		gtk_window_set_transient_for (GTK_WINDOW (fw), GTK_WINDOW(toplevel));
+		modal_fentry = gtk_window_get_modal (GTK_WINDOW (toplevel));
+	}
 
 	g_object_set_data (G_OBJECT (fw), "gnome_file_entry", fentry);
 
-	if (fentry->_priv->is_modal)
+	if (fentry->_priv->is_modal || modal_fentry)
 		gtk_window_set_modal (GTK_WINDOW (fw), TRUE);
 
 	gtk_widget_show (fw);
