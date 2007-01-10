@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-01-09 03:25+0000\n"
-"PO-Revision-Date: 2007-01-10 16:00+0100\n"
+"PO-Revision-Date: 2007-01-10 16:06+0100\n"
 "Last-Translator: Matic Žgur <mr.zgur@gmail.com>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -34,35 +34,35 @@ msgstr "Podrejeni predmet 2"
 msgid "Hint for item 2"
 msgstr "Namig za predmet 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1003
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s je povezava ne nekaj, kar ni mapa"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1014
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s je povezava brez cilja"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1089
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ni mapa"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1941
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "Omrežni strežniki"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1957
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "Datotečni sistem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2486
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Shranjevanje zaznamka ni uspelo (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2923
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Ni mogoče dobiti podatkov o '%s'"
@@ -1033,24 +1033,24 @@ msgstr "Dejanje GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "Vrsta operacije, ki jo izvaja izbirnik pisav."
 
-#: ../libgnomeui/gnome-file-entry.c:651
-#: ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652
+#: ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "Izberi datoteko"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "Pot"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "Pot do datoteke"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "_Brskaj ..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "Pokaži izbirnik datotek za izbiro datoteke"
 
@@ -1285,49 +1285,53 @@ msgstr "Vprašanje"
 msgid "Message"
 msgstr "Sporočilo"
 
-#: ../libgnomeui/gnome-password-dialog.c:209
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_Uporabniško ime:"
 
-#: ../libgnomeui/gnome-password-dialog.c:212
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Domena:"
 
-#: ../libgnomeui/gnome-password-dialog.c:215
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Geslo:"
 
-#: ../libgnomeui/gnome-password-dialog.c:218
+#: ../libgnomeui/gnome-password-dialog.c:219
 msgid "_New password:"
 msgstr "_Novo geslo:"
 
-#: ../libgnomeui/gnome-password-dialog.c:219
+#: ../libgnomeui/gnome-password-dialog.c:220
 msgid "Con_firm password:"
 msgstr "_Potrdite geslo:"
 
-#: ../libgnomeui/gnome-password-dialog.c:222
+#: ../libgnomeui/gnome-password-dialog.c:223
 msgid "Password quality:"
 msgstr "_Kakovost gesla:"
 
-#: ../libgnomeui/gnome-password-dialog.c:337
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "Po_veži"
 
-#: ../libgnomeui/gnome-password-dialog.c:370
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "Poveži _anonimno"
 
-#: ../libgnomeui/gnome-password-dialog.c:375
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Poveži kot u_porabnik"
 
-#: ../libgnomeui/gnome-password-dialog.c:433
-msgid "_Remember password for this session"
-msgstr "_Zapomni si geslo za to sejo"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "_Takoj pozabi geslo"
 
-#: ../libgnomeui/gnome-password-dialog.c:437
-msgid "Save password in _keyring"
-msgstr "Shrani geslo v zbirko _ključev"
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "Zapomni si geslo do _odjave"
+
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "_Zapomni si za vedno"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1483,103 +1487,4 @@ msgstr ""
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Izhod iz preizkusa"
-
-#, fuzzy
-#~ msgid "No name"
-#~ msgstr "Ime pisave"
-
-#, fuzzy
-#~ msgid "Starting %s"
-#~ msgstr "Na_stavitve"
-#~ msgid "History id"
-#~ msgstr "Id zgodovine"
-#~ msgid "Icon selector"
-#~ msgstr "Izbirnik ikone"
-#~ msgid ""
-#~ "The GNOME Session Manager (process %d) has crashed\n"
-#~ "due to a fatal error (%s).\n"
-#~ "When you close this dialog, all applications will close and your session "
-#~ "will exit.\n"
-#~ "Please save all your files before closing this dialog."
-#~ msgstr ""
-#~ "GNOME upravljalnik sej (proces %d) se je sesul\n"
-#~ "zaradi usodne napake (%s).\n"
-#~ "Ko zaprete ta dialog se bodo zaprle vse aplikacije in seja se bo "
-#~ "končala.\n"
-#~ "Prosim, shranite vse svoje datoteke preden zaprete ta dialog."
-
-#, fuzzy
-#~ msgid "_Restart Application"
-#~ msgstr "Izhod iz programa"
-
-#, fuzzy
-#~ msgid "_Debug"
-#~ msgstr "Razhroščuj"
-#~ msgid "Color Selector"
-#~ msgstr "Izbirnik barv"
-#~ msgid ""
-#~ "Application \"%s\" (process %d) has crashed\n"
-#~ "due to a fatal error.\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Program \"%s\" (proces %d) se je zaradi\n"
-#~ " usodne napake sesul.\n"
-#~ "(%s)"
-#~ msgid "Submit a bug report"
-#~ msgstr "Pošlji poročilo o hrošču"
-#~ msgid "http://www.gnome.org/application_crashed.shtml"
-#~ msgstr "http://www.gnome.org/application_crashed.shtml"
-#~ msgid "Please visit the GNOME Application Crash page for more information"
-#~ msgstr "Za več informacij prosimo obiščite stran Sesutje programov GNOME"
-#~ msgid "_Credits"
-#~ msgstr "_Zasluge"
-#~ msgid "Find _Again"
-#~ msgstr "Poišči z_nova"
-#~ msgid "Both text and icons"
-#~ msgstr "Oboje besedilo in ikone"
-#~ msgid "Both text and icons when horizontal, just icons when vertical"
-#~ msgstr ""
-#~ "Oboje besedilo in ikone, ko je vodoraven, samo ikone, ko je navpičen"
-#~ msgid "E_xit"
-#~ msgstr "_Izhod"
-#~ msgid "Exit the program"
-#~ msgstr "Izhod iz programa"
-#~ msgid "Gdk debugging flags to set"
-#~ msgstr "Gdk razhroščevalne zastavice, ki naj bodo nastavljene"
-#~ msgid "FLAGS"
-#~ msgstr "ZASTAVICE"
-#~ msgid "Gdk debugging flags to unset"
-#~ msgstr "Gdk razhroščevalne zastavice, ki naj ne bodo nastavljene"
-#~ msgid "Make X calls synchronous"
-#~ msgstr "Naredi klice X sinhrone"
-#~ msgid "Don't use X shared memory extension"
-#~ msgstr "Ne uporabljal dodatka X za skupno rabo pomnilnika"
-#~ msgid "Program name as used by the window manager"
-#~ msgstr "Ime programa, kot ga uporablja upravljalnik oken"
-#~ msgid "NAME"
-#~ msgstr "IME"
-#~ msgid "Program class as used by the window manager"
-#~ msgstr "Razred programa, kot ga uporablja upravljalnik oken"
-#~ msgid "CLASS"
-#~ msgstr "RAZRED"
-#~ msgid "HOST"
-#~ msgstr "GOSTITELJ"
-#~ msgid "PORT"
-#~ msgstr "VRATA"
-#~ msgid "STYLE"
-#~ msgstr "SLOG"
-#~ msgid "Gtk+ debugging flags to set"
-#~ msgstr "Gtk+ razhroščevalne zastavice, ki naj bodo nastavljene"
-#~ msgid "Gtk+ debugging flags to unset"
-#~ msgstr "Gtk+ razhroščevalne zastavice, ki naj ne bodo nastavljene"
-#~ msgid "Make all warnings fatal"
-#~ msgstr "Naj bodo vsa opozorila usodna"
-#~ msgid "Load an additional Gtk module"
-#~ msgstr "Naloži dodaten Gtk modul"
-#~ msgid "MODULE"
-#~ msgstr "MODUL"
-#~ msgid "GTK+"
-#~ msgstr "GTK+"
-#~ msgid "GConf error details: %s\n"
-#~ msgstr "Podrobnosti napake GConf: %s\n"
 
