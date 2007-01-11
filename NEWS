@@ -1,3 +1,12 @@
+libgnomeui 2.17.2
+-----------------
+
+* Make tilde go to $HOME in the file chooser (Yevgen Muntyan)
+* Sort volumes and drives in the file chooser (Christian Neumair)
+* Change "remember" checkbuttons to radiobuttons in the password
+  dialog. (Fernando Herrera, Christian Persch, Hiroyuki Ikezoe)
+* Fix gnome-file-entry when packed in a modal window (Christophe Fergeau)
+ 
 libgnomeui 2.17.1
 -----------------
 
