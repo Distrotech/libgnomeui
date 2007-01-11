@@ -1,3 +1,10 @@
+2007-01-11  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_parse):
+	Make a single tilde '~' go to $HOME in the location entry.
+	Patch by Yevgen Muntyan. Closes part of bug #334168.
+
 2007-01-10  Christian Persch  <chpe@svn.gnome.org>
 
 	* libgnomeui/gnome-password-dialog.c: (add_row),
