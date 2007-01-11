@@ -1,3 +1,10 @@
+2007-01-11  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_parse): Merge fix for bug #334168 -
+	"Make tilde go to $HOME in the location entry. Patch from
+	Yevgen Muntyan.
+
 2007-01-09  Christian Neumair  <chris@gnome-de.org>
 
 	* libgnomeui/gtkfilesystemgnomevfs.c:
