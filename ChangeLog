@@ -1,3 +1,7 @@
+2007-01-12  Christian Persch  <chpe@svn.gnome.org>
+
+	* libgnomeui/gnome-app-util.h: Fix deprecations. Bug #395582.
+
 2007-01-11  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* file-chooser/gtkfilesystemgnomevfs.c:

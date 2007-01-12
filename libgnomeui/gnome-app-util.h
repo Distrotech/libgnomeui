@@ -29,7 +29,7 @@
   Convenience UI functions for use with GnomeApp 
   ****/
 
-#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+#ifndef GNOME_DISABLE_DEPRECATED
 
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include "gnome-app.h"
