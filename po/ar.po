@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-27 16:33+0000\n"
+"POT-Creation-Date: 2007-01-13 05:57+0000\n"
 "PO-Revision-Date: 2006-12-27 20:23+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -21,7 +21,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : 3\n"
+"Plural-Forms: Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && "
+"n<=10 ? 2 : 3\n"
 "X-Poedit-Language: Arabic\n"
 
 #: ../demos/mdi_demo.c:128
@@ -40,35 +41,35 @@ msgstr "العنصر الإبن 2"
 msgid "Hint for item 2"
 msgstr "تلميحة للعنصر 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s: وصلة لشيء ليس بدليل"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:989
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s: وصلة بدون وصول"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ليس دليلاً"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "خوادم الشبكة"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "نظام الملفات"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2491
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "فشل حفظ العلامة (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2928
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "خطأ تلقي معلومات لـ '%s'"
@@ -85,7 +86,8 @@ msgstr "فشل فتح الملف '%s': %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "فشل تحميل الصّورة '%s': السبب مجهول، قد يكون ملف الصّورة تالفاً"
 
 #: ../libgnomeui/gnome-about.c:199
@@ -177,7 +179,8 @@ msgid "Translator credits"
 msgstr "المترجمون"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "شكر للمترجمين. يجب تعليم هذا النصّ على انه قابل للترجمة"
 
 #: ../libgnomeui/gnome-about.c:438
@@ -962,7 +965,8 @@ msgstr "خانة الدلائل"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr "ما إذا  خانة الملفات ستستخدم لإدخال أسماء الدلائل أو أسماء كاملة للملفات."
+msgstr ""
+"ما إذا  خانة الملفات ستستخدم لإدخال أسماء الدلائل أو أسماء كاملة للملفات."
 
 #: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
@@ -1034,23 +1038,23 @@ msgstr "فعل GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "نوع العملية التي يقوم بها منتقي الملفات."
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "انتقِ ملفاً"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "المسار"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "المسار إلى الملف"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "_تصفّح..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "عرض منتقي ملفات لاختيار ملف"
 
@@ -1301,37 +1305,57 @@ msgstr "سؤال"
 msgid "Message"
 msgstr "رسالة"
 
-#: ../libgnomeui/gnome-password-dialog.c:196
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "اسم ال_مستخدم:"
 
-#: ../libgnomeui/gnome-password-dialog.c:199
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "ال_نطاق:"
 
-#: ../libgnomeui/gnome-password-dialog.c:202
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_كلمة السرّ:"
 
-#: ../libgnomeui/gnome-password-dialog.c:271
+#: ../libgnomeui/gnome-password-dialog.c:219
+#, fuzzy
+msgid "_New password:"
+msgstr "_كلمة السرّ:"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+#, fuzzy
+msgid "Con_firm password:"
+msgstr "_كلمة السرّ:"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+#, fuzzy
+msgid "Password quality:"
+msgstr "_كلمة السرّ:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "ات_صال"
 
-#: ../libgnomeui/gnome-password-dialog.c:304
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "الاتّصال كم_جهول"
 
-#: ../libgnomeui/gnome-password-dialog.c:309
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "اتصال _كمستخدم:"
 
-#: ../libgnomeui/gnome-password-dialog.c:352
-msgid "_Remember password for this session"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr ""
+
+#: ../libgnomeui/gnome-password-dialog.c:444
+#, fuzzy
+msgid "_Remember password until you logout"
 msgstr "ت_خزين كلمة المرور لهذه الجلسة"
 
-#: ../libgnomeui/gnome-password-dialog.c:356
-msgid "Save password in _keyring"
-msgstr "حفظ كلمة المرور في _حلقة مفاتيح"
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr ""
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1413,42 +1437,42 @@ msgstr "إلغاء الإزاحة"
 msgid "About"
 msgstr "حول"
 
-#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "إلغاء حوار الانهيار"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "شاشة X للاستخدام"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "شاشة"
 
-#: ../libgnomeui/gnome-ui-init.c:172
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "GNOME GUI Library:"
 msgstr "مكتبة واجهة المستخدم الرسوميّة لجنوم:"
 
-#: ../libgnomeui/gnome-ui-init.c:173
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "اعرض خيارات الواجهة جنوم"
 
-#: ../libgnomeui/gnome-ui-init.c:185
+#: ../libgnomeui/gnome-ui-init.c:186
 msgid "GNOME GUI Library"
 msgstr "مكتبة واجهة المستخدم الرسوميّة لجنوم"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "تعذّر فتح الوصلة"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "حدثت أخطاء فادحة عديدة، لن يمكنني عرض حوار الإنهيار\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1487,3 +1511,5 @@ msgstr ""
 msgid "Exit the test"
 msgstr "خروج من التجربة"
 
+#~ msgid "Save password in _keyring"
+#~ msgstr "حفظ كلمة المرور في _حلقة مفاتيح"
