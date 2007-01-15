@@ -205,6 +205,12 @@ gnome_thumbnail_factory_finalize (GObject *object)
       g_hash_table_destroy (priv->scripts_hash);
       priv->scripts_hash = NULL;
     }
+
+  if (priv->lock)
+    {
+      g_mutex_free (priv->lock);
+      priv->lock = NULL;
+    }
   
   g_free (priv);
   factory->priv = NULL;
@@ -391,7 +397,7 @@ gnome_thumbnail_factory_instance_init (GnomeThumbnailFactory *factory)
   
   priv->scripts_hash = NULL;
   
-  factory->priv->lock = g_mutex_new ();
+  priv->lock = g_mutex_new ();
 
   gnome_thumbnail_factory_reread_scripts (factory);
 

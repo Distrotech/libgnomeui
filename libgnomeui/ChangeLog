@@ -1,3 +1,8 @@
+2007-01-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-thumbnail.c: (gnome_thumbnail_factory_finalize),
+	(gnome_thumbnail_factory_instance_init):
+
 2003-12-07  Diego Gonzalez  <diego@pemas.net>
 
 	* libgnomeui/gnome-icon-theme.[c-h]: mark as deprecated

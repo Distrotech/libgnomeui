@@ -1,5 +1,11 @@
 2007-01-15  Kjartan Maraas  <kmaraas@gnome.org>
 
+        * gnome-thumbnail.c: (gnome_thumbnail_factory_finalize),
+	  (gnome_thumbnail_factory_instance_init): Fix GMutex leak.
+	  Patch from Jens Granseuer. Closes bug #396075.
+
+2007-01-15  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* demos/animator_demo.c: (main):
 	* demos/mdi_demo.c: (main):
 	* demos/test-file-saver.c: (main):
