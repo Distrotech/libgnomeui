@@ -7,22 +7,21 @@
 # Isam Bayazidi <bayazidi@arabeyes.org>, 2002.
 #  <lumina@silverpen.de>, 2004.
 # Ayman Hourieh <aymanh@gmail.com>, 2004.
-# Khaled Hosny <khaledhosny@eglug.org>, 2006.
+# Khaled Hosny <khaledhosny@eglug.org>, 2006, 2007.
 # Djihed Afifi <djihed@gmail.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-01-13 05:57+0000\n"
-"PO-Revision-Date: 2006-12-27 20:23+0200\n"
+"PO-Revision-Date: 2007-01-13 14:41+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
-"Language-Team: Arabic <support@arabeyes.org>\n"
+"Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && "
-"n<=10 ? 2 : 3\n"
+"Plural-Forms: Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : 3\n"
 "X-Poedit-Language: Arabic\n"
 
 #: ../demos/mdi_demo.c:128
@@ -44,7 +43,7 @@ msgstr "تلميحة للعنصر 2"
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
-msgstr "%s: وصلة لشيء ليس بدليل"
+msgstr "%s: وصلة لشيء ليس مجلّدا"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
@@ -54,7 +53,7 @@ msgstr "%s: وصلة بدون وصول"
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
-msgstr "%s ليس دليلاً"
+msgstr "%s ليس مجلّدا"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
@@ -86,8 +85,7 @@ msgstr "فشل فتح الملف '%s': %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "فشل تحميل الصّورة '%s': السبب مجهول، قد يكون ملف الصّورة تالفاً"
 
 #: ../libgnomeui/gnome-about.c:199
@@ -179,8 +177,7 @@ msgid "Translator credits"
 msgstr "المترجمون"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "شكر للمترجمين. يجب تعليم هذا النصّ على انه قابل للترجمة"
 
 #: ../libgnomeui/gnome-about.c:438
@@ -965,8 +962,7 @@ msgstr "خانة الدلائل"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"ما إذا  خانة الملفات ستستخدم لإدخال أسماء الدلائل أو أسماء كاملة للملفات."
+msgstr "ما إذا  خانة الملفات ستستخدم لإدخال أسماء الدلائل أو أسماء كاملة للملفات."
 
 #: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
@@ -1318,44 +1314,40 @@ msgid "_Password:"
 msgstr "_كلمة السرّ:"
 
 #: ../libgnomeui/gnome-password-dialog.c:219
-#, fuzzy
 msgid "_New password:"
-msgstr "_كلمة السرّ:"
+msgstr "كلمة سر _جديدة:"
 
 #: ../libgnomeui/gnome-password-dialog.c:220
-#, fuzzy
 msgid "Con_firm password:"
-msgstr "_كلمة السرّ:"
+msgstr "أكِّد كلمة ال_سرّ:"
 
 #: ../libgnomeui/gnome-password-dialog.c:223
-#, fuzzy
 msgid "Password quality:"
-msgstr "_كلمة السرّ:"
+msgstr "جودة كلمة السرّ:"
 
 #: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
-msgstr "ات_صال"
+msgstr "ات_صِّل"
 
 #: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
-msgstr "الاتّصال كم_جهول"
+msgstr "اتّصل كم_جهول"
 
 #: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
-msgstr "اتصال _كمستخدم:"
+msgstr "اتصل _كمستخدم:"
 
 #: ../libgnomeui/gnome-password-dialog.c:438
 msgid "_Forget password immediately"
-msgstr ""
+msgstr "ا_نسى كلمة السرِّ حالاً"
 
 #: ../libgnomeui/gnome-password-dialog.c:444
-#, fuzzy
 msgid "_Remember password until you logout"
-msgstr "ت_خزين كلمة المرور لهذه الجلسة"
+msgstr "_تذكّر كلمة السر حتى خروجك"
 
 #: ../libgnomeui/gnome-password-dialog.c:450
 msgid "_Remember forever"
-msgstr ""
+msgstr "_تذكّر للأبد"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1511,5 +1503,3 @@ msgstr ""
 msgid "Exit the test"
 msgstr "خروج من التجربة"
 
-#~ msgid "Save password in _keyring"
-#~ msgstr "حفظ كلمة المرور في _حلقة مفاتيح"
