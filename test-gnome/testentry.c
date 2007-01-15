@@ -7,8 +7,9 @@ gint
 main (gint argc, gchar **argv)
 {
 	GtkWidget *window, *entry, *frame, *vbox;
+	GnomeProgram *program;
 	
-	gnome_program_init ("testentry", "1.0",
+	program = gnome_program_init ("testentry", "1.0",
 			    libgnomeui_module_info_get (),
 			    argc, argv,
 			    NULL);
@@ -40,6 +41,7 @@ main (gint argc, gchar **argv)
 	gtk_window_set_modal (GTK_WINDOW (window), TRUE);
 
 	gtk_main ();
+	g_object_unref (program);
 	
 	return 0;
 }

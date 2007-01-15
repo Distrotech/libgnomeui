@@ -243,7 +243,9 @@ app_created_cb (GnomeMDI *mdi, BonoboWindow *win, BonoboUIComponent *component)
 int
 main(int argc, char **argv)
 {
-  gnome_program_init ("mdi_demo", "2.0", &libgnomeui_module_info,
+  GnomeProgram *program;
+
+  program = gnome_program_init ("mdi_demo", "2.0", &libgnomeui_module_info,
 					  argc, argv, NULL);
 
 #if 1
@@ -262,6 +264,8 @@ main(int argc, char **argv)
   gnome_mdi_open_toplevel(mdi);
 
   gtk_main ();
+
+  g_object_unref (program);
 
   return 0;
 }

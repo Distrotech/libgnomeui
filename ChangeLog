@@ -1,3 +1,14 @@
+2007-01-15  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* demos/animator_demo.c: (main):
+	* demos/mdi_demo.c: (main):
+	* demos/test-file-saver.c: (main):
+	* demos/test-recently-used.c: (main):
+	* test-gnome/testentry.c: (main):
+	* test-gnome/testiconlist.c: (main):
+	* tests/test-libglade-gnome-noupgrade.c: (main):
+	Fix leaks of GnomeProgram.
+
 2007-01-12  Christian Persch  <chpe@svn.gnome.org>
 
 	* libgnomeui/gnome-app-util.h: Fix deprecations. Bug #395582.

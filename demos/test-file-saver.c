@@ -29,8 +29,9 @@ int
 main(int argc, char** argv)
 {
         GtkWidget *fs;
-  
-        gnome_program_init("test-file-saver", "0.1",
+        GnomeProgram *program;
+ 
+        program = gnome_program_init("test-file-saver", "0.1",
                            argc, argv, GNOMEUI_INIT, GNOME_GCONF_INIT,
                            NULL);
 
@@ -48,6 +49,8 @@ main(int argc, char** argv)
         gtk_widget_show(fs);
         
         gtk_main();
+
+        g_object_unref (program);
 
         return 0;
 }

@@ -10,6 +10,7 @@ int
 main (int argc, char *argv[])
 {
 	GladeXML *xml;
+	GnomeProgram *program;
 #if 1
 	GLogLevelFlags fatal_mask;
 
@@ -17,7 +18,7 @@ main (int argc, char *argv[])
 	g_log_set_always_fatal (fatal_mask | G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL);
 #endif
 
-	gnome_program_init ("test-libglade-gnome-noupgrade", "0.1",
+	program = gnome_program_init ("test-libglade-gnome-noupgrade", "0.1",
 			    LIBGNOMEUI_MODULE,
 			    argc, argv, NULL);
 
@@ -42,6 +43,6 @@ main (int argc, char *argv[])
 	}
 
 	g_object_unref (G_OBJECT (xml));
-
+	g_object_unref (program);
 	return 0;
 }

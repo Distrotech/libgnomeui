@@ -118,6 +118,7 @@ item_changed(GnomeRecentlyUsed* recently_used, GnomeRecentDocument* doc, gpointe
 int
 main(int argc, char** argv)
 {
+        GnomeProgram *program;
         GtkWidget *window;
         GtkWidget *menu;
         GtkWidget *vbox;
@@ -127,7 +128,7 @@ main(int argc, char** argv)
         GSList *list;
         GSList *iter;
         
-        gnome_program_init("test-recently-used", "0.1",
+        program = gnome_program_init("test-recently-used", "0.1",
                            argc, argv, GNOMEUI_INIT, GNOME_GCONF_INIT,
                            NULL);
 
@@ -197,6 +198,8 @@ main(int argc, char** argv)
         gtk_widget_show_all(window);
         
         gtk_main();
+
+        g_object_unref (program);
 
         return 0;
 }

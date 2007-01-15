@@ -31,13 +31,14 @@ toggle_start_stop_cb (GtkWidget * widget, gpointer data)
 int
 main (int argc, char *argv[])
 {
+  GnomeProgram *program;
   GtkWidget *window;
   GtkWidget *button;
   GtkWidget *animator;
   GdkPixbuf *pixbuf;
   char *s;
 
-  gnome_program_init ("gnome-animator", VERSION, &libgnomeui_module_info,
+  program = gnome_program_init ("gnome-animator", VERSION, &libgnomeui_module_info,
 		      argc, argv, NULL);
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -70,6 +71,8 @@ main (int argc, char *argv[])
   gnome_animator_start (GNOME_ANIMATOR (animator));
 
   gtk_main ();
+
+  g_object_unref (program);
 
   return 0;
 }

@@ -16,11 +16,12 @@ unselect_icon (GtkWidget *widget, gint num, GdkEvent *event)
 gint
 main (gint argc, gchar **argv)
 {
+	GnomeProgram *program;
 	GtkWidget *window, *scrolled_window, *icon_list, *vbox, *button;
 	GSList *ids, *list;
 	gint i;
 	
-	gnome_program_init ("testiconlist", "0.0",
+	program = gnome_program_init ("testiconlist", "0.0",
 			    LIBGNOMEUI_MODULE,
 			    argc, argv, NULL);
 
@@ -85,6 +86,8 @@ main (gint argc, gchar **argv)
 	gtk_widget_show_all (window);
 
 	gtk_main ();
+
+	g_object_unref (program);
 	
 	return 0;
 }
