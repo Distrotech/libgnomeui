@@ -1,6 +1,6 @@
 # Swedish messages for libgnomeui.
-# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
-# Daniel Nylander <po@danielnylander.se>, 2006.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+# Daniel Nylander <po@danielnylander.se>, 2006, 2007.
 # Christian Rose <menthos@menthos.com>, 2001, 2002, 2003, 2004, 2005.
 # Mikael Hallendal <micke@codefactory.se>, 2002.
 #
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-09 03:25+0000\n"
-"PO-Revision-Date: 2007-01-09 16:47+0100\n"
+"POT-Creation-Date: 2007-01-10 15:02+0000\n"
+"PO-Revision-Date: 2007-01-18 00:31+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -34,35 +34,35 @@ msgstr "Barnobjekt 2"
 msgid "Hint for item 2"
 msgstr "Tips för objekt 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1003
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s är en länk till någonting som inte är en mapp"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1014
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s är en länk utan någon destinationsplats"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1089
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s är ingen mapp"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1941
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "Nätverksservrar"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1957
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2486
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Sparande av bokmärke misslyckades (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2923
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Fel vid hämtning av information för \"%s\""
@@ -1038,24 +1038,24 @@ msgstr "GtkFileChooser-åtgärd"
 msgid "The type of operation that the file selector is performing."
 msgstr "Typen av åtgärd som filväljaren utför."
 
-#: ../libgnomeui/gnome-file-entry.c:651
-#: ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652
+#: ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "Välj fil"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "Sökväg"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "Sökväg till en fil"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "_Bläddra..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "Visa en filväljare för att välja en fil"
 
@@ -1291,49 +1291,53 @@ msgstr "Fråga"
 msgid "Message"
 msgstr "Meddelande"
 
-#: ../libgnomeui/gnome-password-dialog.c:209
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_Användarnamn:"
 
-#: ../libgnomeui/gnome-password-dialog.c:212
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Domän:"
 
-#: ../libgnomeui/gnome-password-dialog.c:215
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Lösenord:"
 
-#: ../libgnomeui/gnome-password-dialog.c:218
+#: ../libgnomeui/gnome-password-dialog.c:219
 msgid "_New password:"
 msgstr "_Nytt lösenord:"
 
-#: ../libgnomeui/gnome-password-dialog.c:219
+#: ../libgnomeui/gnome-password-dialog.c:220
 msgid "Con_firm password:"
 msgstr "_Bekräfta lösenordet:"
 
-#: ../libgnomeui/gnome-password-dialog.c:222
+#: ../libgnomeui/gnome-password-dialog.c:223
 msgid "Password quality:"
 msgstr "Lösenordskvalitet:"
 
-#: ../libgnomeui/gnome-password-dialog.c:337
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "A_nslut"
 
-#: ../libgnomeui/gnome-password-dialog.c:370
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "Anslut _anonymt"
 
-#: ../libgnomeui/gnome-password-dialog.c:375
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Anslut som an_vändare:"
 
-#: ../libgnomeui/gnome-password-dialog.c:433
-msgid "_Remember password for this session"
-msgstr "_Kom ihåg lösenordet under denna session"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "_Glöm lösenordet omedelbart"
 
-#: ../libgnomeui/gnome-password-dialog.c:437
-msgid "Save password in _keyring"
-msgstr "Spara lösenordet i nyckel_ring"
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "_Kom ihåg lösenordet tills du loggar ut"
+
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "_Kom ihåg för alltid"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1492,6 +1496,8 @@ msgstr ""
 msgid "Exit the test"
 msgstr "Avsluta testet"
 
+#~ msgid "Save password in _keyring"
+#~ msgstr "Spara lösenordet i nyckel_ring"
 #~ msgid "Error reading file '%s': %s"
 #~ msgstr "Fel vis läsning av filen \"%s\": %s"
 #~ msgid "Error rewinding file '%s': %s"
