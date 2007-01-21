@@ -1,3 +1,14 @@
+2007-01-21  Chris Wilson <chris@chris-wilson.co.uk>
+
+	Bug 398357 – Does not include $(X_CFLAGS)
+
+	X_CFLAGS are used for testing the presence of libSM during
+	configure, but not whilst building. This results in a build
+	failure under a hosted environment.
+
+	* configure.in:
+		Fix the asymmetry and the X_CFLAGS to LIBGNOMEUI_CFLAGS.
+
 2007-01-15  Kjartan Maraas  <kmaraas@gnome.org>
 
         * gnome-thumbnail.c: (gnome_thumbnail_factory_finalize),
