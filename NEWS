@@ -1,3 +1,13 @@
+libgnomeui 2.17.90
+
+* Fix gnome-file-entry in a modal dialog (Christophe Fergeau)
+* Fix leaks (Kjartan, Chris, Jens Granseuer)
+* Sort Volumes and drives in the file chooser (Christian Neumair)
+* Make a single tilde '~' go to $HOME in the location entry.
+  (Yevgen Muntyev)
+* Change remember checkbuttons to radiobuttons in the password dialog
+  (Fernando Herrera, Christian Persch, Hiroyuki Ikezoe)  
+
 libgnomeui 2.17.2
 -----------------
 
