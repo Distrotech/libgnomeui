@@ -7,15 +7,15 @@
 #
 # Tõivo Leedjärv <toivo@linux.ee>, 2002-2004.
 # Priit Laes <amd@store20.com>, 2004, 2006.
-# Ivar Smolin <okul@linux.ee>, 2005, 2006.
+# Ivar Smolin <okul@linux.ee>, 2005-2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-09 03:25+0000\n"
-"PO-Revision-Date: 2006-12-19 12:24+0200\n"
-"Last-Translator: Priit Laes <amd@store20.com>\n"
+"POT-Creation-Date: 2007-01-10 15:02+0000\n"
+"PO-Revision-Date: 2007-01-18 23:57+0200\n"
+"Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,35 +38,35 @@ msgstr "Tütarkirje 2"
 msgid "Hint for item 2"
 msgstr "Vihje kirjele 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1003
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s on viit millelegi, mis pole kataloog"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1014
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s on ilma sihtkohata viit"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1089
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ei ole kataloog"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1941
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "Võrguserverid"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1957
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "Failisüsteem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2486
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Tõrge järjehoidja salvestamisel (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2923
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Viga '%s' kohta andmete hankimisel"
@@ -1039,23 +1039,23 @@ msgstr "GtkFileChooser toiming"
 msgid "The type of operation that the file selector is performing."
 msgstr "Failivalija poolt teostatava operatsiooni tüüp."
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "Faili valimine"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "Rada"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "Faili rada"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "_Vali..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "Faili valimiseks mõeldud hüpikaken"
 
@@ -1309,49 +1309,53 @@ msgstr "Küsimus"
 msgid "Message"
 msgstr "Teade"
 
-#: ../libgnomeui/gnome-password-dialog.c:209
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_Kasutajanimi:"
 
-#: ../libgnomeui/gnome-password-dialog.c:212
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Domeen:"
 
-#: ../libgnomeui/gnome-password-dialog.c:215
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Parool:"
 
-#: ../libgnomeui/gnome-password-dialog.c:218
+#: ../libgnomeui/gnome-password-dialog.c:219
 msgid "_New password:"
 msgstr "_Uus parool:"
 
-#: ../libgnomeui/gnome-password-dialog.c:219
+#: ../libgnomeui/gnome-password-dialog.c:220
 msgid "Con_firm password:"
 msgstr "_Parool veelkord:"
 
-#: ../libgnomeui/gnome-password-dialog.c:222
+#: ../libgnomeui/gnome-password-dialog.c:223
 msgid "Password quality:"
 msgstr "_Parooli kvaliteet:"
 
-#: ../libgnomeui/gnome-password-dialog.c:337
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "Ü_hendu"
 
-#: ../libgnomeui/gnome-password-dialog.c:370
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "Ühendu _anonüümselt"
 
-#: ../libgnomeui/gnome-password-dialog.c:375
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Ühendu ka_sutajana:"
 
-#: ../libgnomeui/gnome-password-dialog.c:433
-msgid "_Remember password for this session"
-msgstr "_Jäta parool selle sessiooni ajaks meelde"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "_Unusta parool koheselt"
 
-#: ../libgnomeui/gnome-password-dialog.c:437
-msgid "Save password in _keyring"
-msgstr "Salvesta parool _võtmerõngas"
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "_Jäta parool kuni väljalogimiseni meelde"
+
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "_Jäta igavesti meelde"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
