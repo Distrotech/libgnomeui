@@ -2147,14 +2147,13 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
   stripped = g_strchug (g_strdup (str));
 
   last_slash = strrchr (stripped, '/');
-
-  if (!last_slash && *str != '~')
+  if (!last_slash)
     {
       *folder = gtk_file_path_copy (base_path);
       *file_part = g_strdup (stripped);
       result = TRUE;
     }
-  else if (last_slash && has_valid_scheme (stripped))
+  else if (has_valid_scheme (stripped))
     {
       gchar *scheme;
       gchar *host_name;
@@ -2246,10 +2245,8 @@ gtk_file_system_gnome_vfs_parse (GtkFileSystem     *file_system,
 
       if (last_slash == stripped)
 	path_part = g_strdup ("/");
-      else if (last_slash)
-	path_part = g_strndup (stripped, last_slash - stripped);
       else
-        path_part = g_strdup (stripped);
+	path_part = g_strndup (stripped, last_slash - stripped);
 
       uri = NULL;
 

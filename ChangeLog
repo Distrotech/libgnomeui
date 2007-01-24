@@ -1,3 +1,10 @@
+2007-01-24  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_parse): Revert the patch to
+	add support for using a single tilde '~' to go to $HOME
+	since it caused crashes and apparently can't work anyway.
+
 =========================== 2.17.90 ============================
 
 2007-01-22  Kjartan Maraas  <kmaraas@gnome.org>
