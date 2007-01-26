@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-04 15:41+0100\n"
-"PO-Revision-Date: 2007-01-04 15:43+0100\n"
+"POT-Creation-Date: 2007-01-26 11:09+0100\n"
+"PO-Revision-Date: 2007-01-26 11:12+0100\n"
 "Last-Translator: Hendrik Richter <hendrikr@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,35 +34,35 @@ msgstr "Kindelement 2"
 msgid "Hint for item 2"
 msgstr "Hinweis für Kindelement 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s ist eine Verknüpfung zu etwas, was kein Ordner ist"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:989
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s ist eine Verknüpfung ohne Zielangabe"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ist kein Ordner"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "Netzwerk-Server"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "Dateisystem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Speichern von Lesezeichen gescheitert (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Informationen zu »%s« konnten nicht abgerufen werden"
@@ -1045,23 +1045,23 @@ msgstr "GtkFileChooser-Aktion"
 msgid "The type of operation that the file selector is performing."
 msgstr "Der Operationstyp den der Dateiauswähler durchführt."
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "Datei auswählen"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "Pfad"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "Pfad zur Datei"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "_Auswählen …"
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "Dateiauswahl aufklappen um eine Datei zu wählen"
 
@@ -1324,37 +1324,53 @@ msgstr "Frage"
 msgid "Message"
 msgstr "Nachricht"
 
-#: ../libgnomeui/gnome-password-dialog.c:196
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_Benutzername:"
 
-#: ../libgnomeui/gnome-password-dialog.c:199
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Domäne:"
 
-#: ../libgnomeui/gnome-password-dialog.c:202
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Passwort:"
 
-#: ../libgnomeui/gnome-password-dialog.c:271
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "_Neues Passwort:"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "Passwort _bestätigen:"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "Passwortqualität:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "Verbi_nden"
 
-#: ../libgnomeui/gnome-password-dialog.c:304
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "A_nonym verbinden"
 
-#: ../libgnomeui/gnome-password-dialog.c:309
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Als _Benutzer verbinden:"
 
-#: ../libgnomeui/gnome-password-dialog.c:352
-msgid "_Remember password for this session"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "Passwort sofort _vergessen"
+
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
 msgstr "_Innerhalb dieser Sitzung an Passwort erinnern"
 
-#: ../libgnomeui/gnome-password-dialog.c:356
-msgid "Save password in _keyring"
-msgstr "Passwort in _Schlüsselbund speichern"
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "Für immer e_rinnern"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1438,36 +1454,36 @@ msgstr "Ausrücken"
 msgid "About"
 msgstr "Info"
 
-#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "Absturzdialog deaktivieren"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "Zu verwendente X-Anzeige"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "ANZEIGE"
 
-#: ../libgnomeui/gnome-ui-init.c:172
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "GNOME GUI Library:"
 msgstr "GNOME-GUI-Bibliothek:"
 
-#: ../libgnomeui/gnome-ui-init.c:173
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "GNOME-GUI-Optionen anzeigen"
 
-#: ../libgnomeui/gnome-ui-init.c:185
+#: ../libgnomeui/gnome-ui-init.c:186
 msgid "GNOME GUI Library"
 msgstr "GNOME-GUI-Bibliothek"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "Verknüpfung konnte nicht geöffnet werden"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1475,7 +1491,7 @@ msgstr ""
 "angezeigt werden.\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1513,6 +1529,9 @@ msgstr ""
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Den Test beenden"
+
+#~ msgid "Save password in _keyring"
+#~ msgstr "Passwort in _Schlüsselbund speichern"
 
 #~ msgid "Error reading file '%s': %s"
 #~ msgstr "Datei »%s« konnte nicht gelesen werden: %s"
