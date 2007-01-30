@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.15.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-28 19:07+0100\n"
-"PO-Revision-Date: 2007-01-28 19:14+0100\n"
-"Last-Translator: Robert-André Mauchin <zebob.m@gmail.com>\n"
+"POT-Creation-Date: 2007-01-30 20:48+0100\n"
+"PO-Revision-Date: 2007-01-29 13:17+0100\n"
+"Last-Translator: Jonathan Ernst <jonathan@ernstfamily.ch>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1337,19 +1337,16 @@ msgid "_Password:"
 msgstr "_Mot de passe :"
 
 #: ../libgnomeui/gnome-password-dialog.c:219
-#, fuzzy
 msgid "_New password:"
-msgstr "_Mot de passe :"
+msgstr "_Nouveau mot de passe :"
 
 #: ../libgnomeui/gnome-password-dialog.c:220
-#, fuzzy
 msgid "Con_firm password:"
-msgstr "_Mot de passe :"
+msgstr "Con_firmez le mot de passe :"
 
 #: ../libgnomeui/gnome-password-dialog.c:223
-#, fuzzy
 msgid "Password quality:"
-msgstr "_Mot de passe :"
+msgstr "Qualité du mot de passe :"
 
 #: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
@@ -1365,16 +1362,15 @@ msgstr "Se connecter en tant qu'_utilisateur :"
 
 #: ../libgnomeui/gnome-password-dialog.c:438
 msgid "_Forget password immediately"
-msgstr ""
+msgstr "_Oublier le mot de passe immédiatement"
 
 #: ../libgnomeui/gnome-password-dialog.c:444
-#, fuzzy
 msgid "_Remember password until you logout"
-msgstr "_Se souvenir du mot de passe pour cette session"
+msgstr "_Se souvenir du mot de passe jusqu'à la déconnexion"
 
 #: ../libgnomeui/gnome-password-dialog.c:450
 msgid "_Remember forever"
-msgstr ""
+msgstr "_S'en souvenir pour toujours"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
