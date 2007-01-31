@@ -166,6 +166,9 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
     GnomeVFSFileSize bytes_read;
     GdkPixbufLoader *loader;
     GdkPixbuf *pixbuf;	
+    GdkPixbufAnimation *animation;
+    GdkPixbufAnimationIter *iter;
+    gboolean has_frame;
     SizePrepareContext info;
 
     g_return_val_if_fail (uri != NULL, NULL);
@@ -184,7 +187,10 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
         info.preserve_aspect_ratio = preserve_aspect_ratio;        
         g_signal_connect (loader, "size-prepared", G_CALLBACK (size_prepared_cb), &info);
     }
-    while (1) {
+
+    has_frame = FALSE;
+
+    while (!has_frame) {
 	result = gnome_vfs_read (handle,
 				 buffer,
 				 sizeof (buffer),
@@ -201,6 +207,15 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 				      NULL)) {
 	    result = GNOME_VFS_ERROR_WRONG_FORMAT;
 	    break;
+	}
+
+	animation = gdk_pixbuf_loader_get_animation (loader);
+	if (animation) {
+		iter = gdk_pixbuf_animation_get_iter (animation, 0);
+		if (!gdk_pixbuf_animation_iter_on_currently_loading_frame (iter)) {
+			has_frame = TRUE;
+		}
+		g_object_unref (iter);
 	}
     }
 

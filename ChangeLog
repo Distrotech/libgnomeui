@@ -1,3 +1,10 @@
+2007-01-31  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-vfs-util.c:
+	(gnome_gdk_pixbuf_new_from_uri_at_scale):
+	Try not to eat all memory when thumbnailing animations.
+	Should close bug #345707.
+
 2007-01-24  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* file-chooser/gtkfilesystemgnomevfs.c:
