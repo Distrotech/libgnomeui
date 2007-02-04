@@ -1,12 +1,12 @@
-# Changwoo Ryu <cwryu@debian.org>, 1998-2003, 2004-2006
+# Changwoo Ryu <cwryu@debian.org>, 1998-2003, 2004-2006, 2007
 # Young-Ho, Cha <ganadist@mizi.com>, 2002
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.15.1\n"
+"Project-Id-Version: libgnomeui 2.17.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-27 03:09+0900\n"
-"PO-Revision-Date: 2006-07-27 03:12+0900\n"
+"POT-Creation-Date: 2007-02-05 02:48+0900\n"
+"PO-Revision-Date: 2007-02-05 02:53+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr-hackers@lists.kldp.net>\n"
 "MIME-Version: 1.0\n"
@@ -30,33 +30,38 @@ msgstr "하위 항목 2"
 msgid "Hint for item 2"
 msgstr "항목 2의 힌트"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s은(는) 폴더가 아닌 무언가에 대한 바로 가기입니다"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s은(는) 대상 위치가 없는 바로 가기입니다"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s은(는) 폴더가 아닙니다"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "네트워크 서버"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "파일 시스템"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "책갈피 저장이 실패했습니다 (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "'%s'에 대한 정보를 가져올 수 없습니다"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -660,16 +665,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "열쇠글이 암호화된 상태로 전송됩니다."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "인증이 필요합니다"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "도메인 %s의 %s에 접근하려면 로그인을 해야 합니다\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "\"%s\"에 접근하려면 로그인을 해야 합니다\n"
@@ -694,15 +700,19 @@ msgstr "<접두어>"
 msgid "Disable connection to session manager"
 msgstr "세션 관리자에 연결하지 않음"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "세션 관리"
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "세션 관리:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "세션 관리 옵션 표시"
 
-#: ../libgnomeui/gnome-client.c:2582
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "세션 관리"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "로그아웃 취소"
 
@@ -915,7 +925,7 @@ msgid "Show the 'Help' button"
 msgstr "도움말 단추를 보여줍니다"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "히스토리 ID"
 
@@ -935,7 +945,7 @@ msgstr ""
 "파일 엔트리의 유일하게 구별 가능한 ID.  이 ID는 히스토리를 저장하는 데 쓰입니"
 "다."
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "찾아보기 대화 상자 제목"
 
@@ -963,7 +973,7 @@ msgstr "모달"
 msgid "Whether the Browse file window should be modal."
 msgstr "찾아보기 파일 창이 모달인지 여부."
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "파일이름"
 
@@ -1025,23 +1035,23 @@ msgstr "GtkFileChooser 동작"
 msgid "The type of operation that the file selector is performing."
 msgstr "글꼴 선택 상자의 동작 종류."
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "파일 선택"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "경로"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "파일의 경로"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "찾아보기(_B)..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "파일을 선택할 수 있는 파일 선택 창을 띄웁니다"
 
@@ -1187,7 +1197,7 @@ msgstr ""
 "기본 웹 브라우저를 시작하려는 데 오류가 발생했습니다.\n"
 "'기본 프로그램'에서 설정사항이 올바른 지 확인하십시오."
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1195,27 +1205,27 @@ msgstr ""
 "아이콘 엔트리의 유일하게 구별 가능한 ID.  이 ID는 히스토리를 저장하는 데 쓰입"
 "니다."
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
 msgstr "찾아보기 아이콘 대화 상자의 제목."
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
 msgstr "픽스맵 폴더"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:196
 msgid "Directory that will be searched for icons."
 msgstr "아이콘을 찾을 폴더."
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
 msgstr "아이콘 엔트리에 보여야 할 파일이름."
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
 msgstr "선택 대화상자"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1223,39 +1233,39 @@ msgstr ""
 "아이콘 선택 대화 상자.  이 등록 정보를 사용해 GtkDialog를 얻어 내 그 파라미터"
 "의 값을 알아보거나 바꿀 수 있습니다."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
+#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "아이콘 없음"
 
-#: ../libgnomeui/gnome-icon-entry.c:767
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
 msgstr "아이콘 선택 대화 상자"
 
-#: ../libgnomeui/gnome-icon-entry.c:768
+#: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
 msgstr "대화 상자에서 아이콘을 선택할 수 있습니다."
 
-#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
+#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "아이콘 선택"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
 msgstr "원하는 아이콘을 선택하십시오."
 
-#: ../libgnomeui/gnome-icon-entry.c:1001
+#: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
 msgstr "이 단추를 누르면 아이콘을 선택할 수 있는 창이 열립니다."
 
-#: ../libgnomeui/gnome-icon-entry.c:1021
+#: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
 msgstr "찾아보기"
 
-#: ../libgnomeui/gnome-icon-entry.c:1024
+#: ../libgnomeui/gnome-icon-entry.c:1031
 msgid "Icon path"
 msgstr "아이콘 경로"
 
-#: ../libgnomeui/gnome-icon-entry.c:1025
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1295,37 +1305,53 @@ msgstr "물음"
 msgid "Message"
 msgstr "메시지"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "사용자이름(_U):"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "도메인(_D):"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "열쇠글(_P):"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "새 열쇠글(_N):"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "열쇠글 확인(_F):"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "열쇠글 복잡도:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "연결(_N)"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "익명으로 연결(_A)"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "다음 사용자로 연결(_S):"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
-msgid "_Remember password for this session"
-msgstr "이 세션동안 열쇠글 기억(_R)"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "열쇠글 기억하지 않기(_F)"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
-msgid "Save password in _keyring"
-msgstr "키링에 열쇠글 저장(_K)"
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "로그아웃까지 열쇠글 기억(_R)"
+
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "계속 기억(_R)"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1407,39 +1433,43 @@ msgstr "들이기-취소"
 msgid "About"
 msgstr "정보"
 
-#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "이상 종료 대화 상자를 사용하지 않습니다"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "사용할 X 디스플레이"
 
-#: ../libgnomeui/gnome-ui-init.c:125
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "<디스플레이>"
 
-#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
-msgid "GNOME GUI Library"
-msgstr "그놈 GUI 라이브러리"
+#: ../libgnomeui/gnome-ui-init.c:173
+msgid "GNOME GUI Library:"
+msgstr "그놈 GUI 라이브러리:"
 
-#: ../libgnomeui/gnome-ui-init.c:170
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "그놈 GUI 옵션 표시"
 
-#: ../libgnomeui/gnome-ui-init.c:247
+#: ../libgnomeui/gnome-ui-init.c:186
+msgid "GNOME GUI Library"
+msgstr "그놈 GUI 라이브러리"
+
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "바로가기를 열 수 없습니다"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:833
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "여러 개의 세그먼테이션 오류가 발생했습니다; 애러 창을 보여줄 수 없습니다\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:848
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1448,105 +1478,31 @@ msgstr ""
 "세그멘테이션 오류!\n"
 "이상 종료 대화 창을 보여줄 수 없습니다\n"
 
-#: ../libgnomeui/gnome_segv.c:83
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "사용법: gnome_segv2 프로그램명 시그널번호\n"
 
-#: ../libgnomeui/gnome_segv.c:136
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "디버깅 - %s"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>%s 프로그램이 비정상적으로 끝났습니다.</b>\n"
 "\n"
-"하지만 그놈 문제점 보고 프로그램 <b>버그버디</b>를\n"
-"설치하지 않았습니다. 그놈을 더 훌륭하게 만드는 데\n"
-"도움을 주시려면, 버그버디를 설치해 주십시오\n"
+"그놈 문제점 보고 프로그램인 <b>버그버디</b>를\n"
+"설치하십시오. 이 프로그램을 이용하면 문제점에\n"
+"대한 자세한 정보를 개발자에게 보낼 수 있습니다.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
-msgstr "테스트 나가기"
-
-#~ msgid ""
-#~ "The GNOME Session Manager (process %d) has crashed\n"
-#~ "due to a fatal error (%s).\n"
-#~ "When you close this dialog, all applications will close and your session "
-#~ "will exit.\n"
-#~ "Please save all your files before closing this dialog."
-#~ msgstr ""
-#~ "그놈 세션 관리자가 (프로세스 %d) 치명적인 문제가 (%s) 발생하여 \n"
-#~ "비정상적으로 끝났습니다.\n"
-#~ "이 대화창을 닫으면, 모든 프로그램이 마칠 것이고 현재 세션이\n"
-#~ "끝납니다.\n"
-#~ "이 대화창을 닫기 전에 파일을 저장해 주십시오."
-
-#~ msgid "The Application \"%s\" has quit unexpectedly."
-#~ msgstr "\"%s\" 프로그램이 예상치 못하게 끝났습니다."
-
-#~ msgid "process %d: %s"
-#~ msgstr "프로세스 %d: %s"
-
-#~ msgid ""
-#~ "You can inform the developers of what happened to help them fix it.  Or "
-#~ "you can restart the application right now."
-#~ msgstr ""
-#~ "개발자에게 무슨 일이 일어났는 지 알려주면 이 문제점을 고치는 데 도움이 됩"
-#~ "니다.  아니면 지금 프로그램을 다시 시작할 수 있습니다."
-
-#~ msgid "_Restart Application"
-#~ msgstr "프로그램 다시 시작(_R)"
-
-#~ msgid "_Inform Developers"
-#~ msgstr "개발자에게 알리기(_I)"
-
-#~ msgid "_Debug"
-#~ msgstr "디버깅(_D)"
-
-#~ msgid "Error reading file '%s': %s"
-#~ msgstr "'%s' 파일을 읽는 데 오류가 발생했습니다: %s"
-
-#~ msgid "Error rewinding file '%s': %s"
-#~ msgstr "'%s' 파일을 뒤로 돌리는 데 오류가 발생했습니다: %s"
-
-#~ msgid "No name"
-#~ msgstr "이름 없음"
-
-#~ msgid "File '%s' is not a regular file or directory."
-#~ msgstr "'%s' 파일은 일반 파일도 아니고 디렉토리가 아닙니다."
-
-#~ msgid "Error cannot find file id '%s'"
-#~ msgstr "'%s' 파일 아이디를 찾을 수 없습니다"
-
-#~ msgid "No filename to save to"
-#~ msgstr "저장할 파일이름이 없습니다"
-
-#~ msgid "Starting %s"
-#~ msgstr "%s 시작하는 중"
-
-#~ msgid "No URL to launch"
-#~ msgstr "시작할 URL이 없습니다"
-
-#~ msgid "Not a launchable item"
-#~ msgstr "시작할 수 있는 항목이 아닙니다"
-
-#~ msgid "No command (Exec) to launch"
-#~ msgstr "시작할 (Exec) 명령어가 없습니다"
-
-#~ msgid "Bad command (Exec) to launch"
-#~ msgstr "시작할 (Exec) 명령어가 잘못되었습니다"
-
-#~ msgid "Unknown encoding of: %s"
-#~ msgstr "다음의 인코딩을 알 수 없습니다: %s"
-
-#~ msgid "Error writing file '%s': %s"
-#~ msgstr "'%s' 파일에 쓰는 데 오류가 발생했습니다: %s"
-
-#~ msgid "History id"
-#~ msgstr "히스토리 ID"
-
-#~ msgid "Icon selector"
-#~ msgstr "아이콘 선택"
+msgstr "테스트 끝내기"
