@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-17 18:03+0700\n"
-"PO-Revision-Date: 2007-01-17 18:09+0700\n"
+"POT-Creation-Date: 2007-02-11 15:41+0700\n"
+"PO-Revision-Date: 2007-02-11 15:41+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -55,12 +55,12 @@ msgstr "เซิร์ฟเวอร์ในเครือข่าย"
 msgid "File System"
 msgstr "ระบบแฟ้ม"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:2491
+#: file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "บันทึกบุ๊กมาร์กไม่สำเร็จ (%s)"
 
-#: file-chooser/gtkfilesystemgnomevfs.c:2928
+#: file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "อ่านข้อมูลเกี่ยวกับ '%s' ไม่สำเร็จ"
@@ -189,7 +189,7 @@ msgid "About %s"
 msgstr "เกี่ยวกับ %s"
 
 #. Some standard menus
-#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+#: libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
 #: test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "แ_ฟ้ม"
@@ -198,7 +198,7 @@ msgstr "แ_ฟ้ม"
 msgid "_File/"
 msgstr "แ_ฟ้ม/"
 
-#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+#: libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "แ_ก้ไข"
 
@@ -206,7 +206,7 @@ msgstr "แ_ก้ไข"
 msgid "_Edit/"
 msgstr "แ_ก้ไข/"
 
-#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+#: libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "มุ_มมอง"
 
@@ -214,7 +214,7 @@ msgstr "มุ_มมอง"
 msgid "_View/"
 msgstr "มุ_มมอง/"
 
-#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+#: libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_ตั้งค่า"
 
@@ -223,7 +223,7 @@ msgid "_Settings/"
 msgstr "_ตั้งค่า/"
 
 #. If you have more then one New type, use this tree
-#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+#: libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "ใ_หม่"
 
@@ -231,23 +231,23 @@ msgstr "ใ_หม่"
 msgid "_New/"
 msgstr "ใ_หม่/"
 
-#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+#: libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr "_หลายแฟ้ม"
+msgstr "แฟ้_มต่างๆ"
 
 #: libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr "_หลายแฟ้ม/"
+msgstr "แฟ้_มต่างๆ/"
 
-#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+#: libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_หน้าต่าง"
 
-#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+#: libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "เ_กม"
 
-#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+#: libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
 #: test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_วิธีใช้"
@@ -439,11 +439,11 @@ msgstr "ปรับแต่งโปรแกรม"
 #. * And the "Help" menu
 #.
 #. About
-#: libgnomeui/gnome-app-helper.c:221 test-gnome/testgnome.xml.h:4
+#: libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "เ_กี่ยวกับ"
 
-#: libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
+#: libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "เกี่ยวกับโปรแกรมนี้"
 
@@ -470,7 +470,7 @@ msgstr "สร้างหน้าต่างใหม่"
 msgid "_Close This Window"
 msgstr "ปิ_ดหน้าต่างนี้"
 
-#: libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
+#: libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "ปิดหน้าต่างปัจจุบัน"
 
@@ -680,23 +680,23 @@ msgstr "คุณต้องเข้าระบบถึงจะสามา
 msgid "You must log in to access %s\n"
 msgstr "คุณต้องเข้าระบบถึงจะสามารถใช้ %s ได้\n"
 
-#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
+#: libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
 msgid "Specify session management ID"
 msgstr "บอก ID สำหรับการจัดการวาระ"
 
-#: libgnomeui/gnome-client.c:902 libgnomeui/gnome-client.c:916
+#: libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
 msgid "ID"
 msgstr "ID"
 
-#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
+#: libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
 msgid "Specify prefix of saved configuration"
 msgstr "บอกพาธไปแฟ้มปรับแต่ง"
 
-#: libgnomeui/gnome-client.c:905 libgnomeui/gnome-client.c:920
+#: libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: libgnomeui/gnome-client.c:908 libgnomeui/gnome-client.c:924
+#: libgnomeui/gnome-client.c:908 ../libgnomeui/gnome-client.c:924
 msgid "Disable connection to session manager"
 msgstr "ห้ามเชื่อมต่อไปยังโปรแกรมจัดการวาระ"
 
@@ -728,7 +728,7 @@ msgstr "เปิดหน้าต่างเลือกสี"
 msgid "Pick a color"
 msgstr "เลือกสี"
 
-#: libgnomeui/gnome-dateedit.c:491 libgnomeui/gnome-dateedit.c:788
+#: libgnomeui/gnome-dateedit.c:491 ../libgnomeui/gnome-dateedit.c:788
 msgid "Time"
 msgstr "เวลา"
 
@@ -768,7 +768,7 @@ msgstr "เวลาเริ่มต้น"
 msgid "The initial time"
 msgstr "เวลาเริ่มต้น"
 
-#: libgnomeui/gnome-dateedit.c:751 libgnomeui/gnome-scores.c:97
+#: libgnomeui/gnome-dateedit.c:751 ../libgnomeui/gnome-scores.c:97
 msgid "Date"
 msgstr "วันที่"
 
@@ -921,8 +921,8 @@ msgstr "แสดงวิธีใช้"
 msgid "Show the 'Help' button"
 msgstr "แสดงปุ่ม 'วิธีใช้'"
 
-#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
-#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:178
+#: libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
+#: libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
 msgid "History ID"
 msgstr "ชื่อประจำแฟ้มเก่า"
 
@@ -940,7 +940,7 @@ msgid ""
 "list."
 msgstr "ชื่อประจำรายการแฟ้ม ใช้สำหรับบันทึกรายชื่อแฟ้มเก่าที่เคยเลือก"
 
-#: libgnomeui/gnome-file-entry.c:245 libgnomeui/gnome-icon-entry.c:187
+#: libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
 msgstr "ชื่อหน้าต่างเรียกดูแฟ้ม"
 
@@ -966,7 +966,7 @@ msgstr "โมดัล"
 msgid "Whether the Browse file window should be modal."
 msgstr "กำหนดว่าหน้าต่างเรียกดูแฟ้มควรเป็นหน้าต่างโมดัลหรือไม่"
 
-#: libgnomeui/gnome-file-entry.c:270 libgnomeui/gnome-icon-entry.c:203
+#: libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
 msgstr "ชื่อแฟ้ม"
 
@@ -1026,7 +1026,7 @@ msgstr "การกระทำของ GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "ชนิดของการกระทำที่จะให้ตัวเลือกแฟ้มทำ"
 
-#: libgnomeui/gnome-file-entry.c:652 libgnomeui/gnome-file-entry.c:689
+#: libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "เลือกแฟ้ม"
 
@@ -1078,7 +1078,7 @@ msgstr "ชื่ออักษร"
 msgid "Name of the selected font"
 msgstr "ชื่ออักษรที่เลือก"
 
-#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+#: libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "แบบอักษร"
 
@@ -1221,7 +1221,7 @@ msgstr ""
 "กล่องโต้ตอบสำหรับเลือกไอคอน คุณสามารถใช้คุณสมบัตินี้เพื่อเข้าใช้ GtkDialog "
 "ในกรณีที่ต้องการแก้ไขหรืออ่านพารามิเตอร์ต่างๆ"
 
-#: libgnomeui/gnome-icon-entry.c:321 libgnomeui/gnome-icon-entry.c:1004
+#: libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
 msgstr "ไม่มีไอคอน"
 
@@ -1233,7 +1233,7 @@ msgstr "หน้าต่างเลือกไอคอน"
 msgid "This dialog box lets you select an icon."
 msgstr "สามารถใช้หน้าต่างนี้เลือกไอคอน"
 
-#: libgnomeui/gnome-icon-entry.c:781 libgnomeui/gnome-icon-entry.c:1007
+#: libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
 msgstr "ตัวเลือกไอคอน"
 
@@ -1421,7 +1421,7 @@ msgstr "ลดย่อหน้า"
 msgid "About"
 msgstr "เกี่ยวกับ"
 
-#: libgnomeui/gnome-ui-init.c:127 libgnomeui/gnome-ui-init.c:136
+#: libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "ปิดใช้หน้าต่างแจ้งข้อขัดข้อง"
 
