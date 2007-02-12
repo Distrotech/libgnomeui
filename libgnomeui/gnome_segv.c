@@ -124,6 +124,7 @@ int main(int argc, char *argv[])
                                  bug_buddy_path, appname, getppid(), 
                                  app_version, bb_sm_disable 
                                  ? "--sm-disable" : "");
+      g_free (bug_buddy_path);
 #ifdef HAVE_SETENV
       setenv ("BUG_BUDDY_GNOME_VERSION", "2.0 (" VERSION ")", 1);
 #else

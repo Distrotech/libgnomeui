@@ -1,3 +1,20 @@
+libgnomeui 2.17.91
+
+* Revert the single tilde patch since it didn't work
+* Don't eat memory like mad when thumbnailing animated
+  gifs. (Matthias Clasen)
+* Updated translations:
+  - Khaled Hosny (ar)
+  - Josep Puigdemont i Casamajó (ca)
+  - Hendrik Richter (de)
+  - David Lodge (en_GB)
+  - Ivar Smolin (et)
+  - Robert-André Mauchin (fr)
+  - Changwoo Ryu (ko)
+  - Wouter Bolsterlee (nl)
+  - Duarte Loreto (pt)
+  - Theppitak Karoonboonyanan (th)
+
 libgnomeui 2.17.90
 
 * Fix gnome-file-entry in a modal dialog (Christophe Fergeau)
