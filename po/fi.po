@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 1.112.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-16 08:13+0300\n"
-"PO-Revision-Date: 2006-11-16 08:17+0300\n"
+"POT-Creation-Date: 2007-02-12 18:16+0300\n"
+"PO-Revision-Date: 2007-02-12 18:23+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -35,35 +35,35 @@ msgstr "Lapsikohta 2"
 msgid "Hint for item 2"
 msgstr "Kohdan 2 vinkki"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s on linkki sijaintiin, joka ei ole kansio"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:989
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s on linkki, jonka kohde ei ole olemassa"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ei ole kansio"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1918
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "Verkkopalvelimet"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1934
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "Tiedostojärjestelmä"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2463
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Kirjanmerkin tallentaminen epäonnistui (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2900
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Virhe haettaessa tietoja kohteelle \"%s\""
@@ -194,7 +194,7 @@ msgid "About %s"
 msgstr "Tietoja ohjelmasta %s"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:552
+#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Tiedosto"
@@ -203,7 +203,7 @@ msgstr "_Tiedosto"
 msgid "_File/"
 msgstr "_Tiedosto/"
 
-#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:555
+#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Muokkaa"
 
@@ -211,7 +211,7 @@ msgstr "_Muokkaa"
 msgid "_Edit/"
 msgstr "_Muokkaa/"
 
-#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:558
+#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Näytä"
 
@@ -219,7 +219,7 @@ msgstr "_Näytä"
 msgid "_View/"
 msgstr "_Näytä/"
 
-#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:561
+#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Asetukset"
 
@@ -228,7 +228,7 @@ msgid "_Settings/"
 msgstr "_Asetukset/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:327
+#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Uusi"
 
@@ -236,7 +236,7 @@ msgstr "_Uusi"
 msgid "_New/"
 msgstr "_Uusi/"
 
-#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:564
+#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Tie_dostot"
 
@@ -244,15 +244,15 @@ msgstr "Tie_dostot"
 msgid "Fi_les/"
 msgstr "Tie_dostot/"
 
-#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:567
+#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_Ikkunat"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:573
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Peli"
 
-#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:570
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "O_hje"
@@ -670,17 +670,18 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Salasanasi välittyy salattuna."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Todennus vaaditaan"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr ""
 "Osoitteen \"%s\" verkkoalueen \"%s\" käyttämiseksi täytyy kirjautua sisään.\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Osoitteen \"%s\" käyttämiseksi täytyy kirjautua sisään.\n"
@@ -705,15 +706,19 @@ msgstr "ETULIITE"
 msgid "Disable connection to session manager"
 msgstr "Katkaise yhteys istunnonhallintaan"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Istunnonhallinta"
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "Istunnonhallinta:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Näytä istunnonhallinnan asetukset"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Istunnonhallinta"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "Peru ulos kirjautuminen"
 
@@ -1035,23 +1040,23 @@ msgstr "GtkFileChooserin toiminto"
 msgid "The type of operation that the file selector is performing."
 msgstr "Tiedostovalitseman suorittaman toiminnon tyyppi."
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "Valitse tiedosto"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "Polku"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "Tiedoston polku"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "_Selaa..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "Avaa tiedoston valitsin"
 
@@ -1305,37 +1310,53 @@ msgstr "Kysymys"
 msgid "Message"
 msgstr "Viesti"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_Tunnus:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Verkkoalue:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Salasana:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "_Uusi salasana:"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "_Vahvista salasana:"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "_Salasanan laatu:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "_Yhdistä"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "Yhdistä _nimettömänä"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Yhdistä _käyttäjänä:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
-msgid "_Remember password for this session"
-msgstr "Muista _salasana tämän istunnon ajan"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "_Unohda salasana heti"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
-msgid "Save password in _keyring"
-msgstr "Tallenna salasana _avainrenkaaseen"
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "Muista _salasana, kunnes kirjaudut ulos"
+
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "_Muista salasana pysyvästi"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1417,38 +1438,42 @@ msgstr "Poista sisennys"
 msgid "About"
 msgstr "Tietoja"
 
-#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "Poista kaatumisikkuna käytöstä"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "Käytettävä X-näyttö"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "NÄYTTÖ"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "Gnomen käyttöliittymäasetukset"
-
 #: ../libgnomeui/gnome-ui-init.c:173
+msgid "GNOME GUI Library:"
+msgstr "Gnomen käyttöliittymäkirjasto:"
+
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "Näytä Gnomen käyttöliittymäasetukset"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:186
+msgid "GNOME GUI Library"
+msgstr "Gnomen käyttöliittymäasetukset"
+
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "Linkkiä ei voi avata"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "Monia muistialueen ylityksiä tapahtui: virheikkunaa ei voi näyttää\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1461,7 +1486,12 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Käyttö: gnome_segv2 sovellus signaali\n"
 
-#: ../libgnomeui/gnome_segv.c:138
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "Ohjelman %s vianetsintä"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
@@ -1473,13 +1503,15 @@ msgid ""
 msgstr ""
 "<b>Sovellus %s kaatui.</b>\n"
 "\n"
-"Asenna Gnomen vianilmoitustyökalu <b>bug-buddy</b>, "
-"jolla voit lähettää virheistä yksityiskohtaiset "
-"vianetsintätiedot.\n"
+"Asenna Gnomen vianilmoitustyökalu <b>bug-buddy</b>, jolla voit lähettää "
+"virheistä yksityiskohtaiset vianetsintätiedot.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Lopeta testi"
+
+#~ msgid "Save password in _keyring"
+#~ msgstr "Tallenna salasana _avainrenkaaseen"
 
 #~ msgid ""
 #~ "The GNOME Session Manager (process %d) has crashed\n"
