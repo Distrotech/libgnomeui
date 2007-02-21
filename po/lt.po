@@ -4,13 +4,14 @@
 # Gediminas Paulauskas <menesis@delfi.lt>, 2000-2004.
 # Tomas Kuliavas <tokul@users.sourceforge.net>, 2004.
 # Žygimantas Beručka <zygis@gnome.org>, 2004-2007.
+# Mantas Kriaučiūnas <mantas@akl.lt>, 2006-2007.
 # 
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-14 13:46+0200\n"
+"POT-Creation-Date: 2007-02-22 01:57+0200\n"
 "PO-Revision-Date: 2007-01-14 13:50+0200\n"
 "Last-Translator: Žygimantas Beručka <zygis@gnome.org>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -55,14 +56,14 @@ msgstr "Tinklo serveriai"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
-msgstr "Rinkmenų sistema"
+msgstr "Failų sistema"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2491
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Žymelės išsaugoti nepavyko (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2928
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Nepavyko gauti informacijos apie „%s“"
@@ -70,12 +71,12 @@ msgstr "Nepavyko gauti informacijos apie „%s“"
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr "Nepavyko gauti informacijos apie rinkmeną „%s“: %s"
+msgstr "Nepavyko gauti informacijos apie failą „%s“: %s"
 
 #: ../file-chooser/testfilechooser.c:191
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr "Nepavyko atverti rinkmenos „%s“: %s"
+msgstr "Nepavyko atverti failo „%s“: %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
@@ -83,7 +84,7 @@ msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Nepavyko atverti paveikslėlio „%s“: priežastis nežinoma, tikriausiai "
-"sugadinta rinkmena"
+"sugadintas failas"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
@@ -196,11 +197,11 @@ msgstr "Apie %s"
 #: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
-msgstr "_Rinkmena"
+msgstr "_Failas"
 
 #: ../libgnomeui/gnome-app-helper.c:83
 msgid "_File/"
-msgstr "_Rinkmena/"
+msgstr "_Failas/"
 
 #: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
@@ -212,11 +213,11 @@ msgstr "_Keisti/"
 
 #: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "R_odymas"
+msgstr "_Rodymas"
 
 #: ../libgnomeui/gnome-app-helper.c:87
 msgid "_View/"
-msgstr "R_odymas/"
+msgstr "_Rodymas/"
 
 #: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
@@ -237,11 +238,11 @@ msgstr "_Nauja/"
 
 #: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr "Rin_kmenos"
+msgstr "Fai_lai"
 
 #: ../libgnomeui/gnome-app-helper.c:93
 msgid "Fi_les/"
-msgstr "Rin_kmenos/"
+msgstr "Fai_lai/"
 
 #: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
@@ -267,7 +268,7 @@ msgstr "_Atverti..."
 
 #: ../libgnomeui/gnome-app-helper.c:109
 msgid "Open a file"
-msgstr "Atverti rinkmeną"
+msgstr "Atverti failą"
 
 #. Save
 #: ../libgnomeui/gnome-app-helper.c:114
@@ -276,7 +277,7 @@ msgstr "Iš_saugoti"
 
 #: ../libgnomeui/gnome-app-helper.c:114
 msgid "Save the current file"
-msgstr "Išsaugoti esamą rinkmeną"
+msgstr "Išsaugoti esamą failą"
 
 #. Save As
 #: ../libgnomeui/gnome-app-helper.c:119
@@ -285,7 +286,7 @@ msgstr "Išsaugoti k_aip..."
 
 #: ../libgnomeui/gnome-app-helper.c:120
 msgid "Save the current file with a different name"
-msgstr "Išsaugoti esamą rinkmeną kitu vardu"
+msgstr "Išsaugoti esamą failą kitu vardu"
 
 #. Revert
 #: ../libgnomeui/gnome-app-helper.c:125
@@ -294,7 +295,7 @@ msgstr "Atsta_tyti"
 
 #: ../libgnomeui/gnome-app-helper.c:126
 msgid "Revert to a saved version of the file"
-msgstr "Atstatyti išsaugotą rinkmenos versiją"
+msgstr "Atstatyti išsaugotą failo versiją"
 
 #. Print
 #: ../libgnomeui/gnome-app-helper.c:131
@@ -303,7 +304,7 @@ msgstr "S_pausdinti..."
 
 #: ../libgnomeui/gnome-app-helper.c:131
 msgid "Print the current file"
-msgstr "Spausdinti esamą rinkmeną"
+msgstr "Spausdinti esamą failą"
 
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:136
@@ -321,7 +322,7 @@ msgstr "_Užverti"
 
 #: ../libgnomeui/gnome-app-helper.c:142
 msgid "Close the current file"
-msgstr "Užverti esamą rinkmeną"
+msgstr "Užverti esamą failą"
 
 #. Exit
 #: ../libgnomeui/gnome-app-helper.c:147
@@ -424,7 +425,7 @@ msgstr "_Savybės..."
 
 #: ../libgnomeui/gnome-app-helper.c:203
 msgid "Modify the file's properties"
-msgstr "Keisti rinkmenos savybes"
+msgstr "Keisti failo savybes"
 
 #.
 #. * The Settings menu
@@ -507,19 +508,19 @@ msgstr "Paleisti žaidimą iš naujo"
 
 #: ../libgnomeui/gnome-app-helper.c:263
 msgid "_Undo Move"
-msgstr "Atša_ukti veiksmą"
+msgstr "Atša_ukti ėjimą"
 
 #: ../libgnomeui/gnome-app-helper.c:264
 msgid "Undo the last move"
-msgstr "Atšaukti paskutinį veiksmą"
+msgstr "Atšaukti paskutinį ėjimą"
 
 #: ../libgnomeui/gnome-app-helper.c:268
 msgid "_Redo Move"
-msgstr "Paka_rtoti veiksmą"
+msgstr "Paka_rtoti ėjimą"
 
 #: ../libgnomeui/gnome-app-helper.c:269
 msgid "Redo the undone move"
-msgstr "Pakartoti atšauktą veiksmą"
+msgstr "Pakartoti atšauktą ėjimą"
 
 #: ../libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
@@ -945,8 +946,8 @@ msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Unikalus rinkmenos įrašo identifikatorius. Bus naudojamas išsaugant rinkmenų "
-"sąrašą atmintinėje."
+"Unikalus failo įrašo identifikatorius. Bus naudojamas išsaugant failų sąrašą "
+"atmintinėje."
 
 #: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
@@ -954,7 +955,7 @@ msgstr "Pasirinkimo lango antraštė"
 
 #: ../libgnomeui/gnome-file-entry.c:246
 msgid "Title for the Browse file dialog."
-msgstr "Rinkmenų pasirinkimo dialogo pavadinimas"
+msgstr "Failų pasirinkimo dialogo pavadinimas"
 
 #: ../libgnomeui/gnome-file-entry.c:253
 msgid "Directory Entry"
@@ -965,8 +966,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"Ar rinkmenos vardo įvedimo laukas gali būti naudojamas įvesti katalogų "
-"vardus arba pilnus kelius iki rinkmenų."
+"Ar failo vardo įvedimo laukas gali būti naudojamas įvesti katalogų vardus "
+"arba pilnus kelius iki failų."
 
 #: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
@@ -974,15 +975,15 @@ msgstr "Modalinis"
 
 #: ../libgnomeui/gnome-file-entry.c:263
 msgid "Whether the Browse file window should be modal."
-msgstr "Ar rinkmenų pasirinkimo langas turi būti nepriklausomas."
+msgstr "Ar failų pasirinkimo langas turi būti nepriklausomas."
 
 #: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
 msgid "Filename"
-msgstr "Rinkmenos pavadinimas"
+msgstr "Failo pavadinimas"
 
 #: ../libgnomeui/gnome-file-entry.c:271
 msgid "Filename that should be displayed in the file entry."
-msgstr "Rinkmenos pavadinimas, kuris turi būti rodomas rinkmenos įraše."
+msgstr "Failo pavadinimas, rodomas failo įraše."
 
 #: ../libgnomeui/gnome-file-entry.c:279
 msgid "Default Path"
@@ -990,7 +991,7 @@ msgstr "Standartinis kelias"
 
 #: ../libgnomeui/gnome-file-entry.c:280
 msgid "Default path for the Browse file window."
-msgstr "Numatytasis kelias rinkmenos pasirinkimo lange."
+msgstr "Numatytasis kelias failo pasirinkimo lange."
 
 #: ../libgnomeui/gnome-file-entry.c:287
 msgid "GnomeEntry"
@@ -1002,9 +1003,8 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"GnomeEntry naudojama įvedant rinkmenų vardus. Galite naudoti šį požymį "
-"norėdami su GnomeEntry pakeisti arba patikrinti kokius nors rinkmenos "
-"parametrus."
+"GnomeEntry naudojama įvedant failų vardus. Galite naudoti šį požymį norėdami "
+"su GnomeEntry pakeisti arba patikrinti kokius nors failo parametrus."
 
 #: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
@@ -1016,9 +1016,8 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry naudojama įvedant rinkmenų vardus. Galite naudoti šį požymį "
-"norėdami su GtkEntry pakeisti arba patikrinti kokius nors rinkmenos "
-"parametrus."
+"GtkEntry naudojama įvedant failų vardus. Galite naudoti šį požymį norėdami "
+"su GtkEntry pakeisti arba patikrinti kokius nors failo parametrus."
 
 #: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
@@ -1029,8 +1028,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Ar rinkmenų pasirinkimui naudoti naują GtkFileChooser ar seną "
-"GtkFileSelection valdymo elementus."
+"Ar failų pasirinkimui naudoti naują GtkFileChooser ar seną GtkFileSelection "
+"valdymo elementus."
 
 #: ../libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
@@ -1038,11 +1037,11 @@ msgstr "GtkFileChooser veiksmas"
 
 #: ../libgnomeui/gnome-file-entry.c:320
 msgid "The type of operation that the file selector is performing."
-msgstr "Rinkmenų parinkiklio atliekamos operacijos tipas."
+msgstr "Failų parinkiklio atliekamos operacijos tipas."
 
 #: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
-msgstr "Pasirinkite rinkmeną"
+msgstr "Pasirinkite failą"
 
 #: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
@@ -1050,7 +1049,7 @@ msgstr "Kelias"
 
 #: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
-msgstr "Kelias iki rinkmenos"
+msgstr "Kelias iki failo"
 
 #: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
@@ -1058,7 +1057,7 @@ msgstr "_Naršyti..."
 
 #: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
-msgstr "Iškviesti rinkmenų pažymėjimo langą rinkmenai parinkti"
+msgstr "Iškviesti failų pažymėjimo langą failui parinkti"
 
 #: ../libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
@@ -1224,7 +1223,7 @@ msgstr "Aplankas, kuriame bus ieškoma piktogramų."
 
 #: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
-msgstr "Rinkmenos pavadinimas, kuris turėtų būti rodomas piktogramos įraše."
+msgstr "Failo pavadinimas, rodomas piktogramos įraše."
 
 #: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
@@ -1261,7 +1260,7 @@ msgstr "Pasirinkite norimą piktogramą."
 
 #: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
-msgstr "Šis mygtukas atidarys langą, kuriame galėsite pasitinkti piktogramą."
+msgstr "Šis mygtukas atidarys langą, kuriame galėsite pasirinkti piktogramą."
 
 #: ../libgnomeui/gnome-icon-entry.c:1028
 msgid "Browse"
@@ -1384,7 +1383,7 @@ msgstr "Dabar pasirinkto piešinio peržiūra"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:416
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Nerastas hbox, naudojamas paprastas rinkmenos pasirinkimas"
+msgstr "Nerastas hbox, naudojant paprastą failų pasirinkimą"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:422
 msgid "Preview"
