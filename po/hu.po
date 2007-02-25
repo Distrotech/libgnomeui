@@ -1,24 +1,24 @@
 # Hungarian translation for libgnomeui.
-# Copyright (C) 2002, 2003, 2004, 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2002, 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
 #
 # Emese Kovacs <emese@gnome.hu>, 2002.
 # Szabolcs Ban <shooby@gnome.hu>, 2002.
 # Andras Timar <timar@gnome.hu>, 2002, 2003, 2004.
 # Laszlo Dvornik <dvornik@gnome.hu>, 2004.
-# Gabor Kelemen <kelemeng@gnome.hu>, 2004, 2005, 2006.
+# Gabor Kelemen <kelemeng@gnome.hu>, 2004, 2005, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-19 12:02+0200\n"
-"PO-Revision-Date: 2006-10-20 01:24+0200\n"
+"POT-Creation-Date: 2007-01-10 15:02+0000\n"
+"PO-Revision-Date: 2007-02-24 12:15+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #: ../demos/mdi_demo.c:128
@@ -37,35 +37,35 @@ msgstr "2. gyermekelem"
 msgid "Hint for item 2"
 msgstr "Javaslat a 2. gyermekelemhez"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s egy link valamire, ami nem mappa"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:989
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s egy link célhely nélkül"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nem mappa"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1918
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "Hálózati kiszolgálók"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1934
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "Fájlrendszer"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2463
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Könyvjelző mentése sikertelen (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2900
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Nem lehet információt szerezni a következőről: \"%s\""
@@ -433,7 +433,7 @@ msgstr "A fájl tulajdonságainak módosítása"
 #. Settings
 #: ../libgnomeui/gnome-app-helper.c:211
 msgid "Prefere_nces"
-msgstr "_Beállítások"
+msgstr "Beállítás_ok"
 
 #: ../libgnomeui/gnome-app-helper.c:212
 msgid "Configure the application"
@@ -650,7 +650,7 @@ msgstr "A felhasználótól elvárható aktivitás."
 
 #: ../libgnomeui/gnome-authentication-manager.c:80
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "A HTTP-proxy megköveteli a bejelentkezést.\n"
+msgstr "A HTTP proxy megköveteli a bejelentkezést.\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:81
 #, c-format
@@ -670,16 +670,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "A jelszava titkosítással kerül átvitelre."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Hitelesítés szükséges"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Be kell jelentkeznie a(z) %s tartomány %s eléréséhez\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Be kell jelentkeznie a(z) %s eléréséhez.\n"
@@ -704,15 +705,19 @@ msgstr "ELŐTAG"
 msgid "Disable connection to session manager"
 msgstr "A munkamenet-kezelőhöz való csatlakozás tiltása"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Munkamenet-kezelés"
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "Munkamenet-kezelés:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Munkamenet-kezelési beállítások megjelenítése"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Munkamenet-kezelés"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "Mégsem lép ki"
 
@@ -795,9 +800,7 @@ msgstr "Válassza ki az időt a listából"
 
 #: ../libgnomeui/gnome-dateedit.c:1015
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"A gnome_date_edit_get_date már elavult, használja a gnome_date_edit_get_time-"
-"ot"
+msgstr "A gnome_date_edit_get_date már elavult, használja a gnome_date_edit_get_time-ot"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:121
 #: ../libgnomeui/gnome-font-picker.c:155
@@ -1034,23 +1037,23 @@ msgstr "GtkFileChooser művelet"
 msgid "The type of operation that the file selector is performing."
 msgstr "A fájlválasztó által végzett művelet típusa."
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "Fájl kiválasztása"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "Útvonal"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "Útvonal a fájlhoz"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "_Böngészés..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "Megjelenik egy fájlkezelő-ablak egy fájl kiválasztásához"
 
@@ -1304,37 +1307,53 @@ msgstr "Kérdés"
 msgid "Message"
 msgstr "Üzenet"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_Felhasználónév:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Tartomány:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Jelszó:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "Új jels_zó:"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "Jelszó _megerősítése:"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "Jelszó minősége:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "Kap_csolódás"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "Kapcsolódás _névtelenül"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Kapcsolódás _felhasználóként:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
-msgid "_Remember password for this session"
-msgstr "Jelszó meg_jegyzése erre a munkamenetre"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "Jelszó a_zonnali elfelejtése"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
-msgid "Save password in _keyring"
-msgstr "Jelszó mentése a _kulcstartóra"
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "Jelszó meg_jegyzése kijelentkezésig"
+
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "Meg_jegyzés örökre"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1416,32 +1435,36 @@ msgstr "Behúzás csökkentése"
 msgid "About"
 msgstr "Névjegy"
 
-#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "Az Összeomlás párbeszédablak tiltása"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "Használandó X-megjelenítő"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "MEGJELENÍTŐ"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "GNOME GUI programkönyvtár"
-
 #: ../libgnomeui/gnome-ui-init.c:173
+msgid "GNOME GUI Library:"
+msgstr "GNOME GUI programkönyvtár:"
+
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "GNOME GUI beállítások megjelenítése"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:186
+msgid "GNOME GUI Library"
+msgstr "GNOME GUI programkönyvtár"
+
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "A link nem nyitható meg"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1449,7 +1472,7 @@ msgstr ""
 "sikertelen\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1462,20 +1485,27 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Használat: gnome_segv2 appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:138
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "%s hibakeresése"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>A(z) %s alkalmazás összeomlott.</b>\n"
 "\n"
-"Azonban nem telepítette a <b>bug-buddy</b>t, a\n"
-"GNOME hibajelenítő eszközét. Ha segíteni kíván a \n"
-"GNOME jobbá tételében, kérjük telepítse\n"
+"Telepítse a <b>bug-buddy</b>t, a\n"
+"GNOME hibajelenítő eszközét, amely lehetővé teszi\n"
+"a hibával kapcsolatos részletes információk\n"
+"küldését a fejlesztőknek.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
