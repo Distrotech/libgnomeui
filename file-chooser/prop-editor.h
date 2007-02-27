@@ -16,10 +16,11 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
-#include <gtk/gtkwidget.h>
 
 #ifndef __PROP_EDITOR_H__
 #define __PROP_EDITOR_H__
+
+#include <gtk/gtkwidget.h>
 
 G_BEGIN_DECLS
 

@@ -17,10 +17,11 @@
  * window managers such as TWM and Window Maker.
  *
  */
-#ifndef GNOME_DISABLE_DEPRECATED
 
 #ifndef GNOME_WINDOW_ICON_H
 #define GNOME_WINDOW_ICON_H
+
+#ifndef GNOME_DISABLE_DEPRECATED
 
 #include <gtk/gtkwindow.h>
 
@@ -40,6 +41,7 @@ void gnome_window_icon_init (void);
 
 G_END_DECLS
 
+#endif /* GNOME_DISABLE_DEPRECATED */
+
 #endif /* GNOME_WINDOW_ICON_H */
 
-#endif /* GNOME_DISABLE_DEPRECATED */

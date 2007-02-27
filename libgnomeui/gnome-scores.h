@@ -43,14 +43,13 @@
  *
  */
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #ifndef GNOME_SCORES_H
 #define GNOME_SCORES_H
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #include <time.h>
 #include <gtk/gtk.h>
-
 
 G_BEGIN_DECLS
 
@@ -181,6 +180,8 @@ void gnome_scores_set_current_player (
 		);
 G_END_DECLS
 
-#endif /* GNOME_SCORES_H */
 
 #endif /* GNOME_DISABLE_DEPRECATED */
+
+#endif /* GNOME_SCORES_H */
+

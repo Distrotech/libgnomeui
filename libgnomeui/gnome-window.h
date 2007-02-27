@@ -12,10 +12,10 @@
  * of setting the windows titles in the future..
  */
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #ifndef GNOME_WINDOW_H
 #define GNOME_WINDOW_H
+
+#ifndef GNOME_DISABLE_DEPRECATED
 
 #include <gtk/gtkwindow.h>
 
@@ -29,6 +29,7 @@ void gnome_window_toplevel_set_title (GtkWindow *window,
 
 G_END_DECLS
 
+#endif /* GNOME_DISABLE_DEPRECATED */
+
 #endif /* GNOME_WINDOW_H */
 
-#endif /* GNOME_DISABLE_DEPRECATED */

@@ -32,18 +32,15 @@
  * Author: George Lebl <jirka@5z.com>
  */
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #ifndef GNOME_PIXMAP_ENTRY_H
 #define GNOME_PIXMAP_ENTRY_H
 
+#ifndef GNOME_DISABLE_DEPRECATED
 
 #include <gtk/gtkvbox.h>
 #include <libgnomeui/gnome-file-entry.h>
 
-
 G_BEGIN_DECLS
-
 
 #define GNOME_TYPE_PIXMAP_ENTRY            (gnome_pixmap_entry_get_type ())
 #define GNOME_PIXMAP_ENTRY(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_PIXMAP_ENTRY, GnomePixmapEntry))
@@ -54,7 +51,6 @@ G_BEGIN_DECLS
 
 /* Note:  This derives from GnomeFileEntry and thus supports GtkEditable
  * interface */
-
 
 typedef struct _GnomePixmapEntry        GnomePixmapEntry;
 typedef struct _GnomePixmapEntryPrivate GnomePixmapEntryPrivate;
@@ -118,6 +114,7 @@ gchar      *gnome_pixmap_entry_get_filename(GnomePixmapEntry *pentry);
 
 G_END_DECLS
 
+#endif /* GNOME_DISABLE_DEPRECATED */
+
 #endif
 
-#endif /* GNOME_DISABLE_DEPRECATED */

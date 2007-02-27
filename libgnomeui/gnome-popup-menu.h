@@ -24,19 +24,16 @@
   @NOTATION@
 */
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #ifndef GNOME_POPUPMENU_H
 #define GNOME_POPUPMENU_H
 
+#ifndef GNOME_DISABLE_DEPRECATED
 
 #include <gtk/gtkmenu.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
 
-
 G_BEGIN_DECLS
-
 
 /* These routines are documented in gnome-popup-menu.c */
 
@@ -63,6 +60,6 @@ void gnome_gtk_widget_add_popup_items (GtkWidget *widget, GnomeUIInfo *uiinfo, g
 
 G_END_DECLS
 
-#endif
-
 #endif /* GNOME_DISABLE_DEPRECATED */
+
+#endif /* GNOME_POPUPMENU_H */

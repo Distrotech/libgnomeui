@@ -29,19 +29,16 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #ifndef GNOME_ENTRY_H
 #define GNOME_ENTRY_H
 
+#ifndef GNOME_DISABLE_DEPRECATED
 
 #include <glib.h>
 #include <gtk/gtkcombo.h>
 #include <gtk/gtkeditable.h>
 
-
 G_BEGIN_DECLS
-
 
 #define GNOME_TYPE_ENTRY            (gnome_entry_get_type ())
 #define GNOME_ENTRY(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ENTRY, GnomeEntry))
@@ -53,7 +50,6 @@ G_BEGIN_DECLS
 /* This also supports the GtkEditable interface so
  * to get text use the gtk_editable_get_chars method
  * on this object */
-
 
 typedef struct _GnomeEntry        GnomeEntry;
 typedef struct _GnomeEntryPrivate GnomeEntryPrivate;
@@ -104,6 +100,7 @@ void         gnome_entry_clear_history    (GnomeEntry  *gentry);
 
 G_END_DECLS
 
-#endif
-
 #endif /* GNOME_DISABLE_DEPRECATED */
+
+#endif /* GNOME_ENTRY_H */
+

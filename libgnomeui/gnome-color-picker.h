@@ -27,17 +27,15 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #ifndef GNOME_COLOR_PICKER_H
 #define GNOME_COLOR_PICKER_H
 
+#ifndef GNOME_DISABLE_DEPRECATED
 
 #include <gtk/gtkbutton.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 G_BEGIN_DECLS
-
 
 /* The GnomeColorPicker widget is a simple color picker in a button.  The button displays a sample
  * of the currently selected color.  When the user clicks on the button, a color selection dialog
@@ -82,7 +80,6 @@ struct _GnomeColorPickerClass {
 	gpointer padding2;
 };
 
-
 /* Standard Gtk function */
 GType gnome_color_picker_get_type (void) G_GNUC_CONST;
 
@@ -113,9 +110,8 @@ gboolean gnome_color_picker_get_use_alpha (GnomeColorPicker *cp);
 void gnome_color_picker_set_title (GnomeColorPicker *cp, const gchar *title);
 const char * gnome_color_picker_get_title (GnomeColorPicker *cp);
 
-
 G_END_DECLS
 
-#endif
-
 #endif /* GNOME_DISABLE_DEPRECATED */
+
+#endif /* GNOME_COLOR_PICKER_H */

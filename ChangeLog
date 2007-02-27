@@ -1,5 +1,22 @@
 2007-02-27  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* file-chooser/prop-editor.h:
+	* libgnomeui/gnome-about.h:
+	* libgnomeui/gnome-color-picker.h:
+	* libgnomeui/gnome-dialog.h:
+	* libgnomeui/gnome-entry.h:
+	* libgnomeui/gnome-font-picker.h:
+	* libgnomeui/gnome-icon-item.h:
+	* libgnomeui/gnome-icon-list.h:
+	* libgnomeui/gnome-pixmap-entry.h:
+	* libgnomeui/gnome-popup-menu.h:
+	* libgnomeui/gnome-scores.h:
+	* libgnomeui/gnome-window-icon.h:
+	* libgnomeui/gnome-window.h:
+	Fix header guards.
+
+2007-02-27  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* file-chooser/gtkfilesystemgnomevfs.c:
 	(gtk_file_folder_gnome_vfs_dispose), (fs_module_init):
 	* glade/glade-gnome.c:

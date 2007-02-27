@@ -22,10 +22,10 @@
    Author: Anders Carlsson <andersca@codefactory.se>
 */
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #ifndef __GNOME_ABOUT_H__
 #define __GNOME_ABOUT_H__
+
+#ifndef GNOME_DISABLE_DEPRECATED
 
 #include <gtk/gtkdialog.h>
 
@@ -82,6 +82,7 @@ void gnome_about_construct (GnomeAbout *about,
 
 G_END_DECLS
 
+#endif /* GNOME_DISABLE_DEPRECATED */
+
 #endif /* __GNOME_ABOUT_H__ */
 
-#endif /* GNOME_DISABLE_DEPRECATED */

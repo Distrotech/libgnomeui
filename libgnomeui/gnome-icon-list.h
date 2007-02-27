@@ -32,11 +32,10 @@
  *   Miguel de Icaza <miguel@nuclecu.unam.mx>
  */
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #ifndef _GNOME_ICON_LIST_H_
 #define _GNOME_ICON_LIST_H_
 
+#ifndef GNOME_DISABLE_DEPRECATED
 
 #include <libgnomecanvas/gnome-canvas.h>
 #include <libgnomecanvas/gnome-canvas-rich-text.h>
@@ -213,10 +212,9 @@ GnomeIconTextItem *gnome_icon_list_get_icon_text_item (GnomeIconList *gil,
 GnomeCanvasPixbuf *gnome_icon_list_get_icon_pixbuf_item (GnomeIconList *gil,
 							 int idx);
 
-
-
 G_END_DECLS
+
+#endif /* GNOME_DISABLE_DEPRECATED */
 
 #endif /* _GNOME_ICON_LIST_H_ */
 
-#endif /* GNOME_DISABLE_DEPRECATED */

@@ -18,13 +18,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Cambridge, MA 02139, USA.
  */
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #ifndef GNOME_FONT_PICKER_H
 #define GNOME_FONT_PICKER_H
 
-#include <gtk/gtkbutton.h>
+#ifndef GNOME_DISABLE_DEPRECATED
 
+#include <gtk/gtkbutton.h>
 
 G_BEGIN_DECLS
 
@@ -39,7 +38,6 @@ typedef enum {
     GNOME_FONT_PICKER_MODE_UNKNOWN
 } GnomeFontPickerMode;
         
-
 #define GNOME_TYPE_FONT_PICKER            (gnome_font_picker_get_type ())
 #define GNOME_FONT_PICKER(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_FONT_PICKER, GnomeFontPicker))
 #define GNOME_FONT_PICKER_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_FONT_PICKER, GnomeFontPickerClass))
@@ -115,10 +113,9 @@ const gchar* gnome_font_picker_get_preview_text (GnomeFontPicker *gfp);
 void	   gnome_font_picker_set_preview_text (GnomeFontPicker *gfp,
                                                const gchar     *text);
 
-
 G_END_DECLS
 
-    
+#endif /* GTK_DISABLE_DEPRECATED */
+
 #endif /* GNOME_FONT_PICKER_H */
 
-#endif /* GTK_DISABLE_DEPRECATED */
