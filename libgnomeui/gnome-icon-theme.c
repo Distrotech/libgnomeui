@@ -63,7 +63,7 @@ gnome_icon_theme_get_type (void)
 	  NULL,           /* class_data */
 	  sizeof (GnomeIconTheme),
 	  0,              /* n_preallocs */
-	  (GInstanceInitFunc) gnome_icon_theme_init,
+	  (GInstanceInitFunc) gnome_icon_theme_init
 	};
 
       type = g_type_register_static (G_TYPE_OBJECT, "GnomeIconTheme", &info, 0);

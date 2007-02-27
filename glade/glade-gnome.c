@@ -93,7 +93,7 @@ static const gnomeuiinfo_map_t gnome_uiinfo_mapping[] = {
     { "UNDO_ITEM", GNOMEUIINFO_MENU_UNDO_ITEM(NULL, NULL) },
     { "UNDO_MOVE_ITEM", GNOMEUIINFO_MENU_UNDO_MOVE_ITEM(NULL, NULL) },
     { "VIEW_TREE", GNOMEUIINFO_MENU_VIEW_TREE(tmptree) },
-    { "WINDOWS_TREE", GNOMEUIINFO_MENU_WINDOWS_TREE(tmptree) },
+    { "WINDOWS_TREE", GNOMEUIINFO_MENU_WINDOWS_TREE(tmptree) }
 };
 
 static int

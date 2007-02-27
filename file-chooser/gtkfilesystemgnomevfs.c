@@ -2852,6 +2852,8 @@ gtk_file_folder_gnome_vfs_dispose (GObject *object)
       g_object_ref (object);
       g_idle_add ((GSourceFunc)unref_at_idle, object);
     }
+
+  G_OBJECT_CLASS (folder_parent_class)->dispose (object);
 }
 
 
@@ -3660,7 +3662,7 @@ fs_module_init (GTypeModule    *module)
 	NULL,		/* class_data */
 	sizeof (GtkFileSystemGnomeVFS),
 	0,		/* n_preallocs */
-	(GInstanceInitFunc) gtk_file_system_gnome_vfs_init,
+	(GInstanceInitFunc) gtk_file_system_gnome_vfs_init
       };
     const GInterfaceInfo file_system_info =
       {
@@ -3693,7 +3695,7 @@ fs_module_init (GTypeModule    *module)
 	NULL,		/* class_data */
 	sizeof (GtkFileFolderGnomeVFS),
 	0,		/* n_preallocs */
-	(GInstanceInitFunc) gtk_file_folder_gnome_vfs_init,
+	(GInstanceInitFunc) gtk_file_folder_gnome_vfs_init
       };
     
     const GInterfaceInfo file_folder_info =
@@ -3724,7 +3726,7 @@ fs_module_init (GTypeModule    *module)
 	NULL,           /* class_data */
 	sizeof (GtkFileSystemHandleGnomeVFS),
 	0,
-	(GInstanceInitFunc) gtk_file_system_handle_gnome_vfs_init,
+	(GInstanceInitFunc) gtk_file_system_handle_gnome_vfs_init
       };
 
     type_gtk_file_system_handle_gnome_vfs = g_type_module_register_type (module,
