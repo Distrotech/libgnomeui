@@ -1,3 +1,7 @@
+2007-03-01  Tor Lillqvist  <tml@novell.com>
+
+	* configure.in: Don't require "x11" on Windows.
+
 2007-02-28  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Fix link with -z defs ldflags.

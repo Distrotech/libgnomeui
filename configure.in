@@ -77,11 +77,13 @@ case "$host" in
   *-*-mingw*)
     os_win32=yes
     gnome_keyring_requirement=""
+    x11_requirement=""
     GNOME_KEYRING=""
     ;;
   *)
     os_win32=no
     gnome_keyring_requirement="gnome-keyring-1 >= gnome_keyring_required_version"
+    x11_requirement="x11"
     GNOME_KEYRING="gnome-keyring-1"
     ;;
 esac
@@ -161,7 +163,7 @@ GNOMEUI_MODULES="dnl
   glib-2.0 >= glib_required_version
   gnome-vfs-2.0 >= gnomevfs_required_version dnl
   $gnome_keyring_requirement dnl
-  x11"
+  $x11_requirement"
 PKG_CHECK_MODULES(LIBGNOMEUI, [$GNOMEUI_MODULES])
 LIBGNOMEUI_CFLAGS="$X_CFLAGS $LIBGNOMEUI_CFLAGS"
 LIBGNOMEUI_LIBS="$LIBGNOMEUI_LIBS $LIBJPEG"
