@@ -160,7 +160,8 @@ GNOMEUI_MODULES="dnl
   pango >= pango_required_version dnl
   glib-2.0 >= glib_required_version
   gnome-vfs-2.0 >= gnomevfs_required_version dnl
-  $gnome_keyring_requirement"
+  $gnome_keyring_requirement dnl
+  x11"
 PKG_CHECK_MODULES(LIBGNOMEUI, [$GNOMEUI_MODULES])
 LIBGNOMEUI_CFLAGS="$X_CFLAGS $LIBGNOMEUI_CFLAGS"
 LIBGNOMEUI_LIBS="$LIBGNOMEUI_LIBS $LIBJPEG"

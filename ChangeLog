@@ -1,3 +1,8 @@
+2007-02-28  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Fix link with -z defs ldflags.
+	Loïc Minier. Closes bug #409278.
+
 2007-02-27  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* test-gnome/testgnome.c: (main): Shave off
