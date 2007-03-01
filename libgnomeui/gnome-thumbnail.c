@@ -1103,7 +1103,7 @@ make_thumbnail_fail_dirs (GnomeThumbnailFactory *factory)
  * @factory: a #GnomeThumbnailFactory
  * @thumbnail: the thumbnail as a pixbuf 
  * @uri: the uri of a file
- * @original_mtime: the mime type of the file
+ * @original_mtime: the modification time of the original file 
  *
  * Saves @thumbnail at the right place. If the save fails a
  * failed thumbnail is written.
@@ -1240,7 +1240,7 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
  * gnome_thumbnail_factory_create_failed_thumbnail:
  * @factory: a #GnomeThumbnailFactory
  * @uri: the uri of a file
- * @mtime: the mime type of the file
+ * @mtime: the modification time of the file
  *
  * Creates a failed thumbnail for the file so that we don't try
  * to re-thumbnail the file later.
