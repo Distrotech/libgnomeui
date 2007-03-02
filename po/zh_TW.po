@@ -1,15 +1,17 @@
 # Chinese (Taiwan) translation of libgnomeui.
-# Copyright (C) 2001, 02, 03, 04, 06 Free Software Foundation, Inc.
+# Copyright (C) 2001, 02, 03, 04, 06, 07 Free Software Foundation, Inc.
 # Joe Man <trmetal@yahoo.com.hk>, 2001-02.
 # Abel Cheung <abel@oaka.org>, 2002-04, 06.
-#
+# 
+# 
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.15.90\n"
+"Project-Id-Version: libgnomeui 2.17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-04 20:18+0800\n"
-"PO-Revision-Date: 2006-09-04 20:27+0800\n"
-"Last-Translator: Abel Cheung <abel@oaka.org>\n"
+"POT-Creation-Date: 2007-02-25 03:21+0000\n"
+"PO-Revision-Date: 2007-02-26 10:23+0800\n"
+"Last-Translator: Woodman Tuen <wmtuen@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,35 +33,35 @@ msgstr "副項目二"
 msgid "Hint for item 2"
 msgstr "項目二的提示"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:972
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s 連結的目的地位置不是資料夾"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:983
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s 是一個沒有目的地位置的連結"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s 不是資料夾"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "網路伺服器"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "檔案系統"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "無法儲存書籤 (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "無法取得‘%s’的資訊"
@@ -604,7 +606,7 @@ msgstr " (yes 或 no)"
 
 #: ../libgnomeui/gnome-app-util.c:356
 msgid "  - OK? (yes or no)"
-msgstr " ─ 確定？(yes 或 no)"
+msgstr "  - 確定？(yes 或 no)"
 
 #: ../libgnomeui/gnome-app-util.c:684
 msgid "Progress"
@@ -664,17 +666,18 @@ msgid "Your password will be transmitted encrypted."
 msgstr "您的密碼會以加密的方式傳送。"
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "需要認證"
 
 # FIXME: "domain" really means network domain? -- Abel
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "您必須登入方可存取 %s (網域 %s)\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "您必須登入方可存取 %s\n"
@@ -699,15 +702,19 @@ msgstr "前置字串"
 msgid "Disable connection to session manager"
 msgstr "不連接到作業階段總管"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "作業階段管理"
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "作業階段管理："
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "顯示有關作業階段管理的選項"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "作業階段管理"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "取消登出"
 
@@ -986,7 +993,9 @@ msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
-msgstr "表示用來輸入檔案名稱的檔案欄位的 GnomeEntry。如果您想修改或查詢任何有關該 GnomeEntry 的參數，可以透過本屬性進行。"
+msgstr ""
+"表示用來輸入檔案名稱的檔案欄位的 GnomeEntry。如果您想修改或查詢任何有關該 "
+"GnomeEntry 的參數，可以透過本屬性進行。"
 
 #: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
@@ -997,7 +1006,9 @@ msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
-msgstr "表示用來輸入檔案名稱的檔案欄位的 GtkEntry。如果您想修改或查詢任何有關該 GtkEntry 的參數，可以透過本屬性進行。"
+msgstr ""
+"表示用來輸入檔案名稱的檔案欄位的 GtkEntry。如果您想修改或查詢任何有關該 "
+"GtkEntry 的參數，可以透過本屬性進行。"
 
 #: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
@@ -1017,23 +1028,23 @@ msgstr "GtkFileChooser 動作"
 msgid "The type of operation that the file selector is performing."
 msgstr "檔案選擇元件所進行的操作類型。"
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "選取檔案"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "路徑"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "檔案的路徑"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "瀏覽(_B)..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "開啟檔案選擇窗來選取檔案"
 
@@ -1124,7 +1135,9 @@ msgid ""
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr "程式“%s”正嘗試變更一些系統管理員或作業系統本身不容許變更的設定。某部份您變更的設定或許不會生效，或是無法儲存設定，供下次啟動程式時使用。"
+msgstr ""
+"程式“%s”正嘗試變更一些系統管理員或作業系統本身不容許變更的設定。某部份您變更"
+"的設定或許不會生效，或是無法儲存設定，供下次啟動程式時使用。"
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
@@ -1203,7 +1216,9 @@ msgstr "圖示選擇窗"
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
-msgstr "圖示選擇窗。如果您想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進行。"
+msgstr ""
+"圖示選擇窗。如果您想修改或查詢任何有關該 GtkDialog 的參數，可以透過本屬性進"
+"行。"
 
 #: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
@@ -1277,39 +1292,54 @@ msgstr "問題"
 msgid "Message"
 msgstr "訊息"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "使用者名稱(_U)："
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "網域(_D)："
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "密碼(_P)："
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "新密碼(_N)："
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "確認密碼(_F)："
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "密碼品質："
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "連線(_N)"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "以暱名方式連接(_A)"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "以指定使用者連接(_S)："
 
-# (Abel) 對於用戶來說，甚麼叫「作業階段」？
-#: ../libgnomeui/gnome-password-dialog.c:467
-msgid "_Remember password for this session"
-msgstr "桌面環境結束之前記住密碼(_R)"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "立即忘記密碼(_F)"
 
-# How can I translate "keyring"? -- Abel
-#: ../libgnomeui/gnome-password-dialog.c:469
-msgid "Save password in _keyring"
-msgstr "在鑰匙圈中儲存密碼(_K)"
+# (Abel) 對於用戶來說，甚麼叫「作業階段」？
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "登出前記住密碼(_R)"
+
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "永遠記下密碼(_R)"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1392,38 +1422,42 @@ msgid "About"
 msgstr "關於"
 
 # Well, crash dialog is hard to translate and understand just by instinct
-#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "程式錯誤時不顯示任何對話方塊通知"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "準備使用的 X 畫面編號"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "畫面編號"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "GNOME 圖形介面函式庫"
-
 #: ../libgnomeui/gnome-ui-init.c:173
+msgid "GNOME GUI Library:"
+msgstr "GNOME 圖形介面函式庫："
+
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "顯示有關 GNOME 圖形介面的選項"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:186
+msgid "GNOME GUI Library"
+msgstr "GNOME 圖形介面函式庫"
+
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "無法開啟連結"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "發生了非常嚴重的錯誤；無法顯示錯誤訊息對話方塊\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1436,21 +1470,30 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "用法：gnome_segv2 程式名稱 訊號號碼\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "除錯 %s"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>應用程式 %s 發生錯誤。</b>\n"
 "\n"
-"但是您沒有安裝 <b>bug-buddy</b>，GNOME 錯誤回報工具。\n"
-"如果您想協助我們使 GNOME 更完善，請安裝它\n"
+"請安裝 <b>bug-buddy</b>，GNOME 錯誤回報工具。\n"
+"這樣您可以將有關此錯誤的詳細資料傳送給開發人員。\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "結束測試"
 
+# How can I translate "keyring"? -- Abel
+#~ msgid "Save password in _keyring"
+#~ msgstr "在鑰匙圈中儲存密碼(_K)"
