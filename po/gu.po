@@ -1,23 +1,24 @@
 # translation of libgnomeui.HEAD.gu.po to Gujarati
 # translation of gu.po to Gujarati
-# Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
 # MagNet <magnet@magnet-i.com>, 2004.
-# Ankit Patel <ankit@redhat.com>, 2004.
+# Ankit Patel <ankit@redhat.com>, 2004, 2007.
 # Ankit Patel <ankit644@yahoo.com>, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-04 04:29+0200\n"
-"PO-Revision-Date: 2006-09-04 09:48+0530\n"
-"Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
-"Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2007-01-10 15:02+0000\n"
+"PO-Revision-Date: 2007-03-02 12:43+0530\n"
+"Last-Translator: Ankit Patel <ankit@redhat.com>\n"
+"Language-Team: Gujarati <fedora-trans-gu@redhat.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "<magnet@magnet-i.com>\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -48,36 +49,36 @@ msgstr "બાળ વસ્તુ ૨"
 msgid "Hint for item 2"
 msgstr "વસ્તુ ૨ માટે સંકેત"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:972
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s એ કંઈકની કડી છે કે જે ફોલ્ડર નથી"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:983
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s એ અંતિમ મુકામ સ્થાન વિનાની કડી છે"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s એ ફોલ્ડર નથી"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "નેટવર્ક સર્વરો"
 
 # libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "ફાઈલ સિસ્ટમ"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "બુકમાર્ક સંગ્રહવામાં નિષ્ફળ (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "'%s' માટે જાણકારી મેળવવામાં ભૂલ"
@@ -808,16 +809,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "તમારો પાસવર્ડ ગુપ્ત કોડમાં ફેરવયા પછી મોકલાશે."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "પ્રમાણિત કરવું જરૂરી છે"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "તમારે %s ચલાવવા માટે ડોમેઈન %s માં પ્રવેશવું જ પડશે\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "પ્રાપ્ત કરવા માટે તમારે પ્રવેશ કરવો પડશે %s\n"
@@ -848,17 +850,22 @@ msgid "Disable connection to session manager"
 msgstr "સત્ર વ્યવસ્થાપક સાથેનો સંપર્ક નિષ્ક્રિય કરો"
 
 # libgnomeui/gnome-client.c:945
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "સત્ર વ્યવસ્થા"
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "સત્ર વ્યવસ્થાપન:"
 
 # libgnomeui/gnome-client.c:945
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "સત્ર વ્યવસ્થાપન વિકલ્પો બતાવો"
 
+# libgnomeui/gnome-client.c:945
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "સત્ર વ્યવસ્થા"
+
 # libgnomeui/gnome-client.c:2483
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "બહાર નીકળવાની પ્રક્રિયા રદ કરો"
 
@@ -1249,26 +1256,26 @@ msgid "The type of operation that the file selector is performing."
 msgstr "પ્રક્રિયાનો પ્રકાર કે જે ફાઈલ પસંદગીકારક કરી રહ્યો છે."
 
 # libgnomeui/gnome-file-entry.c:418
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "ફાઇલ પસંદ કરો"
 
 # libgnomeui/gnome-app-helper.c:166
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "પથ"
 
 # libgnomeui/gnome-app-helper.c:114
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "ફાઇલ સુધીનો પથ"
 
 # libgnomeui/gnome-file-entry.c:592
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "શોધો (_B)..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "ફાઇલ પસંદ કરવા માટે ફાઇલ પસંદ કરનારને પૉપ-અપ કરો"
 
@@ -1567,37 +1574,53 @@ msgstr "પ્રશ્ન"
 msgid "Message"
 msgstr "સંદેશો"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "વપરાશકર્તા નામ (_U):"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "પ્રદેશ (_D):"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "પાસવર્ડ (_P):"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "નવો પાસવર્ડ (_N):"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "ખાતરી પાસવર્ડ (_f):"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "પાસવર્ડ ગુણવત્તા:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "જોડો (_n)"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "અનામી રીતે જોડાવો (_a)"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "વપરાશકર્તા તરીકે જોડાવો (_s):"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
-msgid "_Remember password for this session"
-msgstr "આ સત્ર માટે પાસવર્ડ યાદ રાખો (_R)"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "પાસવર્ડ તુરંત જ ભૂલી જાવ (_F)"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
-msgid "Save password in _keyring"
-msgstr "કીરીંગમાં પાસવર્ડ સંગ્રહ કરો (_k)"
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "જ્યાં સુધી તમે બહાર નીકળો નહિં ત્યાં સુધી પાસવર્ડ યાદ રાખો (_R)"
+
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "હંમેશ માટે યાદ રાખો (_R)"
 
 # libgnomeui/gnome-pixmap-entry.c:118
 #: ../libgnomeui/gnome-pixmap-entry.c:114
@@ -1694,38 +1717,42 @@ msgstr "હાંસિયા વગરનું"
 msgid "About"
 msgstr "ના વિશે"
 
-#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "ક્રેશ સંવાદને નિષ્ક્રિય કરો"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "X ડિસ્પ્લે વાપરો"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "ડિસ્પ્લે"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "જીનોમ GUI પુસ્તકાલય"
-
 #: ../libgnomeui/gnome-ui-init.c:173
+msgid "GNOME GUI Library:"
+msgstr "જીનોમ GUI લાઈબ્રેરી:"
+
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "જીનોમ GUI વિકલ્પો બતાવો"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:186
+msgid "GNOME GUI Library"
+msgstr "જીનોમ GUI પુસ્તકાલય"
+
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "કડી ખોલી શક્યા નહિં"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "ઘણાંબધાં વિભાગોની ભૂલો થઇ છે; સંવાદ દર્શાવી શકતું નથી\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1738,20 +1765,27 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "વપરાશ: gnome_segv2 appname signum\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "ડિબગીંગ %s"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>કાર્યક્રમ %s ભાંગી પડ્યો.</b>\n"
 "\n"
-"છતાં તમારી પાસે <b>બગ-બડી</b> સ્થાપિત થયેલ નથી,\n"
-"જીનોમ ભંગાણ અહેવાલ સાધન. જો તમે અમને જીનોમને વધુ સારું\n"
-"બનાવવા માટે મદદ કરવા માંગો, તો મહેરબાની કરીને, તેને સ્થાપિત કરો\n"
+"મહેરબાની કરીને <b>બગ-બડી</b>,\n"
+"જીનોમ ભંગાણ અહેવાલ સાધન સ્થાપિત કરો, કે જે તમને\n"
+"વિકાસકર્તાઓને ભૂલ વિશે વિગતવાર જાણકારી\n"
+"મોકલવા માટે સક્રિય કરે છે.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
