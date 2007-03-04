@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 21:38+0900\n"
-"PO-Revision-Date: 2007-03-04 21:38+0900\n"
+"POT-Creation-Date: 2007-03-04 22:51+0900\n"
+"PO-Revision-Date: 2007-03-04 22:49+0900\n"
 "Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -20,19 +20,19 @@ msgstr ""
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr "子アイテム 1"
+msgstr "子アイテム１"
 
 #: ../demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr "アイテム 1 のヒント"
+msgstr "アイテム１のヒント"
 
 #: ../demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr "子アイテム 2"
+msgstr "子アイテム２"
 
 #: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr "アイテム 2 のヒント"
+msgstr "アイテム２のヒント"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
@@ -342,7 +342,7 @@ msgstr "切取り(_T)"
 
 #: ../libgnomeui/gnome-app-helper.c:155
 msgid "Cut the selection"
-msgstr "選択範囲をクリップボードへ切り取ります"
+msgstr "選択範囲を切り取ってクリップボードへコピーします"
 
 #. 10
 #. Copy
@@ -621,7 +621,7 @@ msgstr "アプリの ID"
 
 #: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
-msgstr "アプリケーション ID の文字列"
+msgstr "アプリケーション ID を表す文字列です"
 
 #: ../libgnomeui/gnome-appbar.c:741
 msgid "Has Progress"
@@ -629,7 +629,7 @@ msgstr "進捗状況あり"
 
 #: ../libgnomeui/gnome-appbar.c:742
 msgid "Create a progress widget."
-msgstr "進捗状況ウィジットを生成する"
+msgstr "プログレス・ウィジェットを生成します"
 
 #: ../libgnomeui/gnome-appbar.c:749
 msgid "Has Status"
@@ -637,7 +637,7 @@ msgstr "ステータスあり"
 
 #: ../libgnomeui/gnome-appbar.c:750
 msgid "Create a status widget."
-msgstr "ステータス・ウィジットを生成する"
+msgstr "ステータス・ウィジェットを生成します"
 
 #: ../libgnomeui/gnome-appbar.c:757
 msgid "Interactivity"
@@ -645,11 +645,11 @@ msgstr "応答性"
 
 #: ../libgnomeui/gnome-appbar.c:758
 msgid "Level of user activity required."
-msgstr "必要とされるユーザのアクティビティのレベル"
+msgstr "必要となるアクティビティのレベルです"
 
 #: ../libgnomeui/gnome-authentication-manager.c:80
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "お使いの HTTP プロキシにログインする必要があります。\n"
+msgstr "HTTP プロキシにログインする必要があります。\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:81
 #, c-format
@@ -722,7 +722,7 @@ msgstr "ログアウトをキャンセルする"
 
 #: ../libgnomeui/gnome-color-picker.c:414
 msgid "Received invalid color data\n"
-msgstr "おかしな色データを受けとりました\n"
+msgstr "おかしな色を表すデータを受けとりました\n"
 
 #: ../libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
@@ -1001,8 +1001,8 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"ファイル名入力に使用される GnomeEntry で、このパラメータの変更や取得が必要な"
-"場合は、このプロパティで GnomeEntry を参照できます。"
+"ファイル名入力に使用される GnomeEntry です (このパラメータの変更や取得が必要"
+"な場合は、このプロパティで GnomeEntry を参照できます)"
 
 #: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
@@ -1047,7 +1047,7 @@ msgstr "パス"
 
 #: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
-msgstr "ファイルのパス"
+msgstr "ファイルのパスです"
 
 #: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
@@ -1095,7 +1095,7 @@ msgstr "フォント"
 
 #: ../libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr "選択したフォント (GtkFont 型) です"
+msgstr "選択したフォント名 (GtkFont 型) です"
 
 #: ../libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
@@ -1207,7 +1207,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
-msgstr "アイコン選択ダイアログのタイトル"
+msgstr "アイコン選択ダイアログのタイトルです"
 
 #: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
@@ -1251,7 +1251,7 @@ msgstr "アイコンの選択"
 
 #: ../libgnomeui/gnome-icon-entry.c:782
 msgid "Please pick the icon you want."
-msgstr "アイコンを選んで下さい"
+msgstr "アイコンを指定します"
 
 #: ../libgnomeui/gnome-icon-entry.c:1008
 msgid "This button will open a window to let you select an icon."
