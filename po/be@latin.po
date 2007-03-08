@@ -1,0 +1,1512 @@
+# Biełaruski pierakład libgnomeui.HEAD.po
+# Copyright (C) 2007 THE libgnomeui.HEAD's COPYRIGHT HOLDER
+# Alaksandar Navicki <zolak@lacinka.org> 2007. www.lacinka.org
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui.HEAD.pl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-03-08 12:53+0200\n"
+"PO-Revision-Date: 2007-03-07 23:55+0100\n"
+"Last-Translator: Alaksandar Navicki <zolak@lacinka.org>\n"
+"Language-Team: Belarusian Latin <i18n@mova.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Belarsian Latin\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "Element-naščadak 1"
+
+#: ../demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "Padkazka da 1-ha elementu"
+
+#: ../demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "Element-naščadak 2"
+
+#: ../demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "Padkazka da 2-ha elementu"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s źjaŭlajecca spasyłkaj na niešta, što nie źjaŭlajecca tečkaj"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s źjaŭlajecca pustoj spasyłkaj"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
+#, c-format
+msgid "%s is not a folder"
+msgstr "%s nie źjaŭlajecca tečkaj"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
+msgid "Network Servers"
+msgstr "Sietkavyja servery"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
+msgid "File System"
+msgstr "Fajłavaja systema"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Zachavać zakładki nie ŭdałosia (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "Pamyłka atrymańnia infarmacyi dla \"%s\""
+
+#: ../file-chooser/testfilechooser.c:178
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "Niemahčyma atrymać infarmacyju dla fajłu \"%s\": %s"
+
+#: ../file-chooser/testfilechooser.c:191
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Nie ŭdałosia adčynić fajł \"%s\": %s"
+
+#: ../file-chooser/testfilechooser.c:230
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Zahruzka vyjavy \"%s\" nie ŭdałasia: pryčyna nieviadomaja, chutčej za ŭsio "
+"paškodžany fajł."
+
+#: ../libgnomeui/gnome-about.c:199
+msgid "Credits"
+msgstr "Zasłuhi"
+
+#: ../libgnomeui/gnome-about.c:231
+msgid "Written by"
+msgstr "Prahrama"
+
+#: ../libgnomeui/gnome-about.c:246
+msgid "Documented by"
+msgstr "Dakumentacyja"
+
+#: ../libgnomeui/gnome-about.c:261
+msgid "Translated by"
+msgstr "Pierakład"
+
+#: ../libgnomeui/gnome-about.c:324
+msgid "C_redits"
+msgstr "Z_asłuhi"
+
+#: ../libgnomeui/gnome-about.c:377
+msgid "Program name"
+msgstr "Nazva prahramy"
+
+#: ../libgnomeui/gnome-about.c:378
+msgid "The name of the program"
+msgstr "Nazva prahramy"
+
+#: ../libgnomeui/gnome-about.c:385
+msgid "Program version"
+msgstr "Versija prahramy"
+
+#: ../libgnomeui/gnome-about.c:386
+msgid "The version of the program"
+msgstr "Versija prahramy"
+
+#: ../libgnomeui/gnome-about.c:392
+msgid "Copyright string"
+msgstr "Radok aŭtarskich pravoŭ"
+
+#: ../libgnomeui/gnome-about.c:393
+msgid "Copyright information for the program"
+msgstr "Infarmacyja na temu aŭtarskich pravoŭ na prahramu"
+
+#: ../libgnomeui/gnome-about.c:400
+msgid "Comments string"
+msgstr "Radok kamentaroŭ"
+
+#: ../libgnomeui/gnome-about.c:401
+msgid "Comments about the program"
+msgstr "Kamentary na temu prahramy"
+
+#: ../libgnomeui/gnome-about.c:407
+msgid "Authors"
+msgstr "Aŭtary"
+
+#: ../libgnomeui/gnome-about.c:408
+msgid "List of authors of the programs"
+msgstr "Śpis aŭtaraŭ prahramy"
+
+#: ../libgnomeui/gnome-about.c:410
+msgid "Author entry"
+msgstr "Aŭtar"
+
+#: ../libgnomeui/gnome-about.c:411
+msgid "A single author entry"
+msgstr "Adzin aŭtar"
+
+#: ../libgnomeui/gnome-about.c:418
+msgid "Documenters"
+msgstr "Aŭtary dakumentacyi"
+
+#: ../libgnomeui/gnome-about.c:419
+msgid "List of people documenting the program"
+msgstr "Śpis asobaŭ, jakija pracavali nad dakumentacyjaj prahramy"
+
+#: ../libgnomeui/gnome-about.c:421
+msgid "Documenter entry"
+msgstr "Aŭtar dakumentacyi"
+
+#: ../libgnomeui/gnome-about.c:422
+msgid "A single documenter entry"
+msgstr "Adzin aŭtar dakumentacyi"
+
+#: ../libgnomeui/gnome-about.c:430
+msgid "Translator credits"
+msgstr "Zasłuhi pierakładčykaŭ"
+
+#: ../libgnomeui/gnome-about.c:431
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "Zasłuhi pierakładčykaŭ. Treba, kab hety radok možna było pierakłaści."
+
+#: ../libgnomeui/gnome-about.c:438
+#: ../libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "Lahatyp"
+
+#: ../libgnomeui/gnome-about.c:439
+msgid "A logo for the about box"
+msgstr "Lahatyp u vaknie z infarmacyjaj ab prahramie"
+
+#: ../libgnomeui/gnome-about.c:518
+#, c-format
+msgid "About %s"
+msgstr "Ab prahramie %s"
+
+#. Some standard menus
+#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
+#: ../test-gnome/testgnome.xml.h:5
+msgid "_File"
+msgstr "_Fajł"
+
+#: ../libgnomeui/gnome-app-helper.c:83
+msgid "_File/"
+msgstr "_Fajł/"
+
+#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "_Redahavańnie"
+
+#: ../libgnomeui/gnome-app-helper.c:85
+msgid "_Edit/"
+msgstr "_Redahavańnie/"
+
+#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "_Vyhlad"
+
+#: ../libgnomeui/gnome-app-helper.c:87
+msgid "_View/"
+msgstr "_Vyhlad/"
+
+#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "_Nałady"
+
+#: ../libgnomeui/gnome-app-helper.c:89
+msgid "_Settings/"
+msgstr "_Nałady/"
+
+#. If you have more then one New type, use this tree
+#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "_Novy"
+
+#: ../libgnomeui/gnome-app-helper.c:91
+msgid "_New/"
+msgstr "_Novy/"
+
+#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "F_ajły"
+
+#: ../libgnomeui/gnome-app-helper.c:93
+msgid "Fi_les/"
+msgstr "F_ajły/"
+
+#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "V_okny"
+
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "_Hulnia"
+
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
+#: ../test-gnome/testgnome.xml.h:6
+msgid "_Help"
+msgstr "Dapamo_ha"
+
+#: ../libgnomeui/gnome-app-helper.c:97
+msgid "_Windows/"
+msgstr "V_okny/"
+
+#. Open
+#: ../libgnomeui/gnome-app-helper.c:109
+msgid "_Open..."
+msgstr "_Adčyni..."
+
+#: ../libgnomeui/gnome-app-helper.c:109
+msgid "Open a file"
+msgstr "Adčyniaje fajł"
+
+#. Save
+#: ../libgnomeui/gnome-app-helper.c:114
+msgid "_Save"
+msgstr "_Zapišy"
+
+#: ../libgnomeui/gnome-app-helper.c:114
+msgid "Save the current file"
+msgstr "Zapisvaje dziejny fajł"
+
+#. Save As
+#: ../libgnomeui/gnome-app-helper.c:119
+msgid "Save _As..."
+msgstr "Z_apišy jak..."
+
+#: ../libgnomeui/gnome-app-helper.c:120
+msgid "Save the current file with a different name"
+msgstr "Zapisvaje dziejny fajł pad inšaj nazvaj"
+
+#. Revert
+#: ../libgnomeui/gnome-app-helper.c:125
+msgid "_Revert"
+msgstr "_Viarni"
+
+#: ../libgnomeui/gnome-app-helper.c:126
+msgid "Revert to a saved version of the file"
+msgstr "Viartaje fajł da zapisanaj versii"
+
+#. Print
+#: ../libgnomeui/gnome-app-helper.c:131
+msgid "_Print..."
+msgstr "Vy_drukuj..."
+
+#: ../libgnomeui/gnome-app-helper.c:131
+msgid "Print the current file"
+msgstr "Drukuje dziejny fajł"
+
+#. Print Setup
+#: ../libgnomeui/gnome-app-helper.c:136
+msgid "Print S_etup..."
+msgstr "Nałady vydruku..."
+
+#: ../libgnomeui/gnome-app-helper.c:137
+msgid "Setup the page settings for your current printer"
+msgstr "Madyfikuje nałady staronki dla dziejnaj drukarki"
+
+#. Close
+#: ../libgnomeui/gnome-app-helper.c:142
+msgid "_Close"
+msgstr "Za_čyni"
+
+#: ../libgnomeui/gnome-app-helper.c:142
+msgid "Close the current file"
+msgstr "Začyniaje dziejny fajł"
+
+#. Exit
+#: ../libgnomeui/gnome-app-helper.c:147
+msgid "_Quit"
+msgstr "Za_konč"
+
+#: ../libgnomeui/gnome-app-helper.c:147
+msgid "Quit the application"
+msgstr "Zakančvaje dziejańnie aplikacyi"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: ../libgnomeui/gnome-app-helper.c:155
+msgid "Cu_t"
+msgstr "_Vytni"
+
+#: ../libgnomeui/gnome-app-helper.c:155
+msgid "Cut the selection"
+msgstr "Vycinaje zaznačanaje"
+
+#. 10
+#. Copy
+#: ../libgnomeui/gnome-app-helper.c:161
+msgid "_Copy"
+msgstr "S_kapijuj"
+
+#: ../libgnomeui/gnome-app-helper.c:161
+msgid "Copy the selection"
+msgstr "Kapijuje zaznačanaje"
+
+#. Paste
+#: ../libgnomeui/gnome-app-helper.c:166
+msgid "_Paste"
+msgstr "Uk_lej"
+
+#: ../libgnomeui/gnome-app-helper.c:166
+msgid "Paste the clipboard"
+msgstr "Uklejvaje źmieściva buferu abmienu"
+
+#. Clear
+#: ../libgnomeui/gnome-app-helper.c:171
+msgid "C_lear"
+msgstr "Vyč_yść"
+
+#: ../libgnomeui/gnome-app-helper.c:171
+msgid "Clear the selection"
+msgstr "Čyścić zaznačanaje"
+
+#. Undo
+#: ../libgnomeui/gnome-app-helper.c:176
+msgid "_Undo"
+msgstr "_Viarni"
+
+#: ../libgnomeui/gnome-app-helper.c:176
+msgid "Undo the last action"
+msgstr "Viartaje apošniaje dziejańnie"
+
+#. Redo
+#: ../libgnomeui/gnome-app-helper.c:181
+msgid "_Redo"
+msgstr "U_znavi"
+
+#: ../libgnomeui/gnome-app-helper.c:181
+msgid "Redo the undone action"
+msgstr "Uznaŭlaje viernutaje dziejańnie"
+
+#. Find
+#: ../libgnomeui/gnome-app-helper.c:186
+msgid "_Find..."
+msgstr "_Znajdzi..."
+
+#: ../libgnomeui/gnome-app-helper.c:186
+msgid "Search for a string"
+msgstr "Šukaje tekst"
+
+#. Find Again
+#: ../libgnomeui/gnome-app-helper.c:191
+msgid "Find Ne_xt"
+msgstr "Znajdzi zno_ŭ"
+
+#: ../libgnomeui/gnome-app-helper.c:192
+msgid "Search again for the same string"
+msgstr "Šukaje znoŭ toj samy tekst"
+
+#. Replace
+#: ../libgnomeui/gnome-app-helper.c:197
+msgid "R_eplace..."
+msgstr "Z_amiani..."
+
+#: ../libgnomeui/gnome-app-helper.c:197
+msgid "Replace a string"
+msgstr "Zamianiaje tekst"
+
+#. Properties
+#: ../libgnomeui/gnome-app-helper.c:202
+msgid "_Properties"
+msgstr "_Ułaścivaści"
+
+#: ../libgnomeui/gnome-app-helper.c:203
+msgid "Modify the file's properties"
+msgstr "Madyfikuje ŭłaścivaści fajłu"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: ../libgnomeui/gnome-app-helper.c:211
+msgid "Prefere_nces"
+msgstr "N_ałady"
+
+#: ../libgnomeui/gnome-app-helper.c:212
+msgid "Configure the application"
+msgstr "Kanfihuruje prahramu"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:4
+msgid "_About"
+msgstr "_Pra prahramu"
+
+#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
+msgid "About this application"
+msgstr "Infarmacyja pra prahramu"
+
+#: ../libgnomeui/gnome-app-helper.c:225
+msgid "Select _All"
+msgstr "Zaznač u_sio"
+
+#: ../libgnomeui/gnome-app-helper.c:226
+msgid "Select everything"
+msgstr "Zaznačaje ŭsio"
+
+#.
+#. * Window menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:234
+msgid "Create New _Window"
+msgstr "S_tvary novaje vakno"
+
+#: ../libgnomeui/gnome-app-helper.c:235
+msgid "Create a new window"
+msgstr "Stvaraje novaje vakno"
+
+#: ../libgnomeui/gnome-app-helper.c:239
+msgid "_Close This Window"
+msgstr "Za_čyni vakno"
+
+#: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
+msgid "Close the current window"
+msgstr "Začyniaje hetaje vakno"
+
+#.
+#. * The "Game" menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:248
+msgid "_New Game"
+msgstr "_Novaja hulnia"
+
+#: ../libgnomeui/gnome-app-helper.c:249
+msgid "Start a new game"
+msgstr "Pačynaje novuju hulniu"
+
+#: ../libgnomeui/gnome-app-helper.c:253
+msgid "_Pause Game"
+msgstr "_Prypyni hulniu"
+
+#: ../libgnomeui/gnome-app-helper.c:254
+msgid "Pause the game"
+msgstr "Prypyniaje hulniu"
+
+#: ../libgnomeui/gnome-app-helper.c:258
+msgid "_Restart Game"
+msgstr "R_estartuj hulniu"
+
+#: ../libgnomeui/gnome-app-helper.c:259
+msgid "Restart the game"
+msgstr "Pačynaje hulniu ad pačatku"
+
+#: ../libgnomeui/gnome-app-helper.c:263
+msgid "_Undo Move"
+msgstr "_Viarni ruch"
+
+#: ../libgnomeui/gnome-app-helper.c:264
+msgid "Undo the last move"
+msgstr "Viartaje apošni ruch"
+
+#: ../libgnomeui/gnome-app-helper.c:268
+msgid "_Redo Move"
+msgstr "_Uznavi ruch"
+
+#: ../libgnomeui/gnome-app-helper.c:269
+msgid "Redo the undone move"
+msgstr "Uznaŭlaje viernuty ruch"
+
+#: ../libgnomeui/gnome-app-helper.c:273
+msgid "_Hint"
+msgstr "P_adkažy"
+
+#: ../libgnomeui/gnome-app-helper.c:274
+msgid "Get a hint for your next move"
+msgstr "Padkazvaje čarhovy ruch"
+
+#. 30
+#: ../libgnomeui/gnome-app-helper.c:279
+msgid "_Scores..."
+msgstr "_Vyniki..."
+
+#: ../libgnomeui/gnome-app-helper.c:280
+msgid "View the scores"
+msgstr "Pakazvaje vyniki"
+
+#: ../libgnomeui/gnome-app-helper.c:284
+msgid "_End Game"
+msgstr "_Zakonč hulniu"
+
+#: ../libgnomeui/gnome-app-helper.c:285
+msgid "End the current game"
+msgstr "Zakančvaje dziejnuju hulniu"
+
+#: ../libgnomeui/gnome-app-helper.c:1147
+msgid "_Contents"
+msgstr "_Źmieściva"
+
+#: ../libgnomeui/gnome-app-helper.c:1150
+msgid "View help for this application"
+msgstr "Pakazvaje dapamohu na temu aplikacyi"
+
+#: ../libgnomeui/gnome-app-helper.c:2587
+msgid "Text Below Icons"
+msgstr "Tekst pad ikonami"
+
+#: ../libgnomeui/gnome-app-helper.c:2588
+msgid "Priority Text Beside Icons"
+msgstr "Važny tekst pobač ikonaŭ"
+
+#: ../libgnomeui/gnome-app-helper.c:2589
+msgid "Icons Only"
+msgstr "Tolki ikony"
+
+#: ../libgnomeui/gnome-app-helper.c:2590
+msgid "Text Only"
+msgstr "Tolki tekst"
+
+#: ../libgnomeui/gnome-app-helper.c:2651
+#, c-format
+msgid "Use Desktop Default (%s)"
+msgstr "Vykarystaj zmoŭčanyja nałady asiarodździa (%s)"
+
+#: ../libgnomeui/gnome-app-util.c:98
+msgid " (press return)"
+msgstr " (naciśni return)"
+
+#: ../libgnomeui/gnome-app-util.c:140
+msgid "ERROR: "
+msgstr "PAMYŁKA: "
+
+#: ../libgnomeui/gnome-app-util.c:177
+msgid "Warning: "
+msgstr "Aściaroha: "
+
+#: ../libgnomeui/gnome-app-util.c:315
+msgid "y"
+msgstr "t"
+
+#: ../libgnomeui/gnome-app-util.c:316
+msgid "yes"
+msgstr "tak"
+
+#: ../libgnomeui/gnome-app-util.c:319
+msgid "n"
+msgstr "n"
+
+#: ../libgnomeui/gnome-app-util.c:320
+msgid "no"
+msgstr "nie"
+
+#: ../libgnomeui/gnome-app-util.c:355
+msgid " (yes or no)"
+msgstr " (tak albo nie)"
+
+#: ../libgnomeui/gnome-app-util.c:356
+msgid "  - OK? (yes or no)"
+msgstr " - OK? (tak albo nie)"
+
+#: ../libgnomeui/gnome-app-util.c:684
+msgid "Progress"
+msgstr "Prahres"
+
+#: ../libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr "ID aplikacyi"
+
+#: ../libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr "Tekstavy identyfikatar aplikacyi"
+
+#: ../libgnomeui/gnome-appbar.c:741
+msgid "Has Progress"
+msgstr "Panel prahresu"
+
+#: ../libgnomeui/gnome-appbar.c:742
+msgid "Create a progress widget."
+msgstr "Stvary widget paneli prahresu."
+
+#: ../libgnomeui/gnome-appbar.c:749
+msgid "Has Status"
+msgstr "Panel stanu"
+
+#: ../libgnomeui/gnome-appbar.c:750
+msgid "Create a status widget."
+msgstr "Stvary widget paneli stanu."
+
+#: ../libgnomeui/gnome-appbar.c:757
+msgid "Interactivity"
+msgstr "Interaktyŭnaść"
+
+#: ../libgnomeui/gnome-appbar.c:758
+msgid "Level of user activity required."
+msgstr "Uzrovień vymahanaj aktyŭnaści karystalnika."
+
+#: ../libgnomeui/gnome-authentication-manager.c:80
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr "Proxy-server HTTP vymahaje aŭtaryzacyi.\n"
+
+#: ../libgnomeui/gnome-authentication-manager.c:81
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+"Kab atrymać dostup da \"%s\", treba aŭtaryzavacca.\n"
+"%s"
+
+#: ../libgnomeui/gnome-authentication-manager.c:84
+msgid "Your password will be transmitted unencrypted."
+msgstr "Tvoj parol budzie dasłany biez vykarystańnia šyfravańnia."
+
+#: ../libgnomeui/gnome-authentication-manager.c:85
+msgid "Your password will be transmitted encrypted."
+msgstr "Tvoj parol budzie dasłany z vykarystańniem šyfravańnia."
+
+#: ../libgnomeui/gnome-authentication-manager.c:88
+#: ../libgnomeui/gnome-authentication-manager.c:307
+msgid "Authentication Required"
+msgstr "Vymahanaja aŭtaryzacyja"
+
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
+#, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "Kab atrymać dostup da %s z damenu %s, musiš aŭtaryzavacca\n"
+
+#: ../libgnomeui/gnome-authentication-manager.c:301
+#, c-format
+msgid "You must log in to access %s\n"
+msgstr "Kab atrymać dostup da %s, musiš aŭtaryzavacca\n"
+
+#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+msgid "Specify session management ID"
+msgstr "Akreśl identyfikatar sesii"
+
+#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+msgid "ID"
+msgstr "ID"
+
+#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+msgid "Specify prefix of saved configuration"
+msgstr "Akreśli prefiks zapisanaj kanfihuracyi"
+
+#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+msgid "PREFIX"
+msgstr "PREFIKS"
+
+#: ../libgnomeui/gnome-client.c:908 ../libgnomeui/gnome-client.c:924
+msgid "Disable connection to session manager"
+msgstr "Nie spałučajsia z kiraŭnikom sesijaŭ"
+
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "Kiravańnie sesijaj:"
+
+#: ../libgnomeui/gnome-client.c:1035
+msgid "Show session management options"
+msgstr "Pakažy opcyi kiravańnia sesijami"
+
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Kiravańnie sesijami"
+
+#: ../libgnomeui/gnome-client.c:2572
+msgid "Cancel Logout"
+msgstr "Anuluj zakančeńnie sesii"
+
+#: ../libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "Atrymanyja niapravilnyja źviestki ab kolery\n"
+
+#: ../libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "Adčyni vakno, jakoje dazvalaje abrać koler"
+
+#: ../libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "Abiary koler"
+
+#: ../libgnomeui/gnome-dateedit.c:491 ../libgnomeui/gnome-dateedit.c:788
+msgid "Time"
+msgstr "Čas"
+
+#: ../libgnomeui/gnome-dateedit.c:492
+msgid "The time currently selected"
+msgstr "Dziejna abrany čas"
+
+#: ../libgnomeui/gnome-dateedit.c:504
+msgid "DateEdit Flags"
+msgstr "Značniki DateEdit"
+
+#: ../libgnomeui/gnome-dateedit.c:505
+msgid "Flags for how DateEdit looks"
+msgstr "Značniki, što akreślivajuć vyhlad DateEdit"
+
+#: ../libgnomeui/gnome-dateedit.c:514
+msgid "Lower Hour"
+msgstr "Nižniaja hadzina"
+
+#: ../libgnomeui/gnome-dateedit.c:515
+msgid "Lower hour in the time popup selector"
+msgstr "Nižniaja miaža času ŭ śpisie vybaru času"
+
+#: ../libgnomeui/gnome-dateedit.c:525
+msgid "Upper Hour"
+msgstr "Vierchniaja hadzina"
+
+#: ../libgnomeui/gnome-dateedit.c:526
+msgid "Upper hour in the time popup selector"
+msgstr "Vierchniaja miaža času ŭ śpisie vybaru času"
+
+#: ../libgnomeui/gnome-dateedit.c:536
+msgid "Initial Time"
+msgstr "Pačatkovy čas"
+
+#: ../libgnomeui/gnome-dateedit.c:537
+msgid "The initial time"
+msgstr "Pačatkovy čas"
+
+#: ../libgnomeui/gnome-dateedit.c:751 ../libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Data"
+
+#: ../libgnomeui/gnome-dateedit.c:764
+msgid "Select Date"
+msgstr "Abiary datu"
+
+#: ../libgnomeui/gnome-dateedit.c:764
+msgid "Select the date from a calendar"
+msgstr "Abiary datu z kalandara"
+
+#. Calendar label, only shown if the date editor has a time field
+#: ../libgnomeui/gnome-dateedit.c:775
+msgid "Calendar"
+msgstr "Kalandar"
+
+#: ../libgnomeui/gnome-dateedit.c:796
+msgid "Select Time"
+msgstr "Abiary čas"
+
+#: ../libgnomeui/gnome-dateedit.c:796
+msgid "Select the time from a list"
+msgstr "Abiary čas sa śpisu"
+
+#: ../libgnomeui/gnome-dateedit.c:1015
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+"Funkcyja gnome_date_edit_get_date sastarełaja, užyj gnome_date_edit_get_time"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:121
+#: ../libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "Zahałovak"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "Zahałovak druida"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "Vyjava lahatypu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "Vierchni vodny znak"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "Vyjava vodnaha znaku ŭviersie"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "Koler zahałoŭku"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "Koler zahałoŭku"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "Koler zahałoŭku"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Koler zahałoŭku jak GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "Akreśleny koler zahałoŭku"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "Koler zahałoŭku abrany"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:169
+#: ../libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "Koler fonu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "Koler fonu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "Koler fonu jak GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "Abrany koler fonu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "Koler fonu abrany"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:193
+#: ../libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Koler fonu źmieściva"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Koler fonu źmieściva"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Koler fonu źmieściva jak GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Abrany koler fonu źmieściva"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Koler fonu źmieściva abrany"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:216
+#: ../libgnomeui/gnome-druid-page-standard.c:224
+msgid "Logo Background Color"
+msgstr "Koler fonu lahatypu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:217
+msgid "Logo Background color"
+msgstr "Koler fonu lahatypu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:225
+msgid "Logo Background color as a GdkColor"
+msgstr "Koler fonu lahatypu jak GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:232
+msgid "Logo Background color set"
+msgstr "Akreśleny koler fonu lahatypu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:233
+msgid "Logo Background color is set"
+msgstr "Koler fonu lahatypu abrany"
+
+#: ../libgnomeui/gnome-druid.c:154
+msgid "Show Finish"
+msgstr "Knopka \"Zakonč\""
+
+#: ../libgnomeui/gnome-druid.c:155
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Akreślivaje, ci zamiest knopki \"Napierad\" pakazvać knopku \"Zakonč\""
+
+#: ../libgnomeui/gnome-druid.c:162
+msgid "Show Help"
+msgstr "Knopka \"Dapamoha\""
+
+#: ../libgnomeui/gnome-druid.c:163
+msgid "Show the 'Help' button"
+msgstr "Akreślivaje, ci pakazvać knopku \"Dapamoha\""
+
+#: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
+msgid "History ID"
+msgstr "ID historyi"
+
+#: ../libgnomeui/gnome-entry.c:200
+msgid "GTK entry"
+msgstr "Element GTK+"
+
+#: ../libgnomeui/gnome-entry.c:201
+msgid "The GTK entry"
+msgstr "Element GTK+"
+
+#: ../libgnomeui/gnome-file-entry.c:237
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Unikalny identyfikatar fajłu. Jaho ŭžyvajuć pry zapisie śpisu historyi."
+
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
+msgid "Browse Dialog Title"
+msgstr "Zahałovak vakna vybaru fajłu"
+
+#: ../libgnomeui/gnome-file-entry.c:246
+msgid "Title for the Browse file dialog."
+msgstr "Zahałovak vakna vybaru fajłu."
+
+#: ../libgnomeui/gnome-file-entry.c:253
+msgid "Directory Entry"
+msgstr "Kataloh"
+
+#: ../libgnomeui/gnome-file-entry.c:254
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+"Akreślivaje, ci identyfikatar fajłu ŭžyvajecca dziela ŭviadzieńnia nazvy "
+"katalohu, ci poŭnaj nazvy fajłu."
+
+#: ../libgnomeui/gnome-file-entry.c:262
+msgid "Modal"
+msgstr "Madalnaje"
+
+#: ../libgnomeui/gnome-file-entry.c:263
+msgid "Whether the Browse file window should be modal."
+msgstr "Akreślivaje, ci vakno vybaru fajłu pavinna być madalnym."
+
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
+msgid "Filename"
+msgstr "Nazva fajłu"
+
+#: ../libgnomeui/gnome-file-entry.c:271
+msgid "Filename that should be displayed in the file entry."
+msgstr "Nazva fajłu, jakaja pavinna być bačnaja ŭ poli vybaru fajłu."
+
+#: ../libgnomeui/gnome-file-entry.c:279
+msgid "Default Path"
+msgstr "Zmoŭčanaja ściežka"
+
+#: ../libgnomeui/gnome-file-entry.c:280
+msgid "Default path for the Browse file window."
+msgstr "Zmoŭčanaja ściežka dla vakna vybaru fajłu."
+
+#: ../libgnomeui/gnome-file-entry.c:287
+msgid "GnomeEntry"
+msgstr "GnomeEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:288
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+"Abjekt GnomeEntry, užyvany identyfikataram fajłu dziela ŭviadzieńnia nazvy "
+"fajłu. Možna skarystać hetuju ŭłaścivaść dziela atrymańnia abjektu "
+"GnomeEntry, kali chočaš zamianić albo paznajomicca ź niejkimi jahonymi "
+"parametrami."
+
+#: ../libgnomeui/gnome-file-entry.c:298
+msgid "GtkEntry"
+msgstr "GtkEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:299
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+"Abjekt GtkEntry, užyvany identyfikataram fajłu dziela ŭviadzieńnia nazvy "
+"fajłu. Možna skarystać hetuju ŭłaścivaść dziela atrymańnia abjektu "
+"GnomeEntry, kali chočaš zamianić albo paznajomicca ź niejkimi jahonymi "
+"parametrami."
+
+#: ../libgnomeui/gnome-file-entry.c:309
+msgid "Use GtkFileChooser"
+msgstr "Vykarystańnie GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:310
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+"Akreślivaje, ci vykarystać novy widget GtkFileChooser ci GtkFileSelection "
+"dziela vybaru fajłu."
+
+#: ../libgnomeui/gnome-file-entry.c:319
+msgid "GtkFileChooser Action"
+msgstr "Dziejańnie GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:320
+msgid "The type of operation that the file selector is performing."
+msgstr "Typ dziejańnia, jakoje vykonvaje vakno vybaru fajłu."
+
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
+msgid "Select file"
+msgstr "Abiary fajł"
+
+#: ../libgnomeui/gnome-file-entry.c:817
+msgid "Path"
+msgstr "Ściežka"
+
+#: ../libgnomeui/gnome-file-entry.c:817
+msgid "Path to file"
+msgstr "Ściežka da fajłu"
+
+#: ../libgnomeui/gnome-file-entry.c:844
+msgid "_Browse..."
+msgstr "_Prahladaj..."
+
+#: ../libgnomeui/gnome-file-entry.c:845
+msgid "Pop up a file selector to choose a file"
+msgstr "Adčyniaje vakno vybaru fajłu"
+
+#: ../libgnomeui/gnome-font-picker.c:66
+msgid "sans 12"
+msgstr "sans 12"
+
+#: ../libgnomeui/gnome-font-picker.c:67
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcĆćČčDdEeFfGgHhIiJjKkLlŁłMmNnŃńOoPpRrSsŚśŠšTtUuŬŭVvYyZzŹźŽž"
+
+#: ../libgnomeui/gnome-font-picker.c:68
+msgid "Pick a Font"
+msgstr "Vybiary šryft"
+
+#: ../libgnomeui/gnome-font-picker.c:156
+msgid "The title of the selection dialog box"
+msgstr "Zahałovak vakna vybaru"
+
+#: ../libgnomeui/gnome-font-picker.c:164
+msgid "Mode"
+msgstr "Režym"
+
+#: ../libgnomeui/gnome-font-picker.c:165
+msgid "The mode of operation of the font picker"
+msgstr "Režym dziejańnia widgetu vybaru šryftu"
+
+#: ../libgnomeui/gnome-font-picker.c:174
+msgid "Font name"
+msgstr "Nazva šryftu"
+
+#: ../libgnomeui/gnome-font-picker.c:175
+msgid "Name of the selected font"
+msgstr "Nazva abranaha šryftu"
+
+#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
+msgid "Font"
+msgstr "Šryft"
+
+#: ../libgnomeui/gnome-font-picker.c:185
+msgid "The selected GtkFont"
+msgstr "Abrany GtkFont"
+
+#: ../libgnomeui/gnome-font-picker.c:192
+msgid "Preview text"
+msgstr "Pieradahlad tekstu"
+
+#: ../libgnomeui/gnome-font-picker.c:193
+msgid "Preview text shown in the dialog"
+msgstr "Tekst, užyvany dziela pieradahladu ŭnutry vakna"
+
+#: ../libgnomeui/gnome-font-picker.c:201
+msgid "Use font in label"
+msgstr "Vykarystańnie šryftu na etykiecie"
+
+#: ../libgnomeui/gnome-font-picker.c:202
+msgid "Use font in the label in font info mode"
+msgstr "Vykarystańnie šryftu na etykiecie ŭ režymie infarmacyi ab šryfcie"
+
+#: ../libgnomeui/gnome-font-picker.c:210
+msgid "Font size for label"
+msgstr "Pamier šryftu etykiety"
+
+#: ../libgnomeui/gnome-font-picker.c:211
+msgid "Font size for label in font info mode"
+msgstr "Pamier šryftu etykiety ŭ režymie infarmacyi ab šryfcie"
+
+#: ../libgnomeui/gnome-font-picker.c:221
+msgid "Show size"
+msgstr "Pakazvaj pamier"
+
+#: ../libgnomeui/gnome-font-picker.c:222
+msgid "Show size in font info mode"
+msgstr "Pakazvaj pamier u režymie infarmacyi ab šryfcie"
+
+#: ../libgnomeui/gnome-gconf-ui.c:61
+msgid "GNOME GConf UI Support"
+msgstr "Absłuhoŭvańnie UI GConfa dla GNOME"
+
+#: ../libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "_Padrabiaznaści"
+
+#: ../libgnomeui/gnome-gconf-ui.c:171
+#, c-format
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr ""
+"Aplikacyja \"%s\" pasprabavała zamianić častku kanfihuracyi, jakaja była "
+"abaronienaja ad źmienaŭ administrataram albo stvaralnikam systemy. "
+"Niekatoryja nałady mohuć być nia ŭličanyja pry čarhovym uklučeńni aplikacyi."
+
+#: ../libgnomeui/gnome-gconf-ui.c:178
+#, c-format
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"Pry adčytańni albo zapisie naładaŭ %s adbyłasia pamyłka. Niekatoryja nałady "
+"mohuć nie pracavać pravilna."
+
+#: ../libgnomeui/gnome-href.c:123
+msgid "URL"
+msgstr "URL"
+
+#: ../libgnomeui/gnome-href.c:124
+msgid "The URL that GnomeHRef activates"
+msgstr "URL, jaki aktyvizuje GnomeHRef"
+
+#: ../libgnomeui/gnome-href.c:131
+msgid "Text"
+msgstr "Tekst"
+
+#: ../libgnomeui/gnome-href.c:132
+msgid "The text on the button"
+msgstr "Tekst na knopcy"
+
+#: ../libgnomeui/gnome-href.c:133
+msgid "End World Hunger"
+msgstr "Baraćba z hoładam u śviecie"
+
+#: ../libgnomeui/gnome-href.c:139
+msgid "Link color"
+msgstr "Koler spasyłki"
+
+#: ../libgnomeui/gnome-href.c:140
+msgid "Color used to draw the link"
+msgstr "Koler, užyvany pry pakazie spasyłki"
+
+#: ../libgnomeui/gnome-href.c:171
+msgid "This button will take you to the URI that it displays."
+msgstr "Hetaja knopka adčyniaje dakument z-pad URI, jaki jana apisvaje."
+
+#: ../libgnomeui/gnome-href.c:394
+msgid ""
+"An error has occurred while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"Pry zapusku zmoŭčanaha web-hartača adbyłasia pamyłka.\n"
+"Spraŭdź nałady ŭ kanfihuracyjnaj pryładzie \"Pažadanyja aplikacyi\"."
+
+#: ../libgnomeui/gnome-icon-entry.c:179
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Unikalny identyfikatar ikony. Jaho ŭžyvajuć pry zapisie śpisu historyi."
+
+#: ../libgnomeui/gnome-icon-entry.c:188
+msgid "Title for the Browse icon dialog."
+msgstr "Zahałovak vakna vybaru ikony."
+
+#: ../libgnomeui/gnome-icon-entry.c:195
+msgid "Pixmap Directory"
+msgstr "Kataloh piksmapaŭ"
+
+#: ../libgnomeui/gnome-icon-entry.c:196
+msgid "Directory that will be searched for icons."
+msgstr "Kataloh, u jakim buduć šukać ikony."
+
+#: ../libgnomeui/gnome-icon-entry.c:204
+msgid "Filename that should be displayed in the icon entry."
+msgstr "Nazva fajłu, pakazanaja na ikonie."
+
+#: ../libgnomeui/gnome-icon-entry.c:212
+msgid "Picker dialog"
+msgstr "Vakno vybaru ikony"
+
+#: ../libgnomeui/gnome-icon-entry.c:213
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"Vakno vybaru ikony. Možna ŭžyć hetuju ŭłaścivaść, kab atrymać abjekt "
+"GtkDialog, kali chočaš źmianić albo paznajomicca ź niejkimi jahonymi "
+"parametrami."
+
+#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
+msgid "No Icon"
+msgstr "Biez ikony"
+
+#: ../libgnomeui/gnome-icon-entry.c:774
+msgid "Icon selection dialog"
+msgstr "Vakno vybaru ikony"
+
+#: ../libgnomeui/gnome-icon-entry.c:775
+msgid "This dialog box lets you select an icon."
+msgstr "Hetaje vakno dazvalaje abirać ikony."
+
+#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
+msgid "Icon Selector"
+msgstr "Vybar ikony"
+
+#: ../libgnomeui/gnome-icon-entry.c:782
+msgid "Please pick the icon you want."
+msgstr "Abiary adnu z ikon."
+
+#: ../libgnomeui/gnome-icon-entry.c:1008
+msgid "This button will open a window to let you select an icon."
+msgstr "Hetaja knopka adčyniaje vakno, jakoje dazvalaje abrać ikonu."
+
+#: ../libgnomeui/gnome-icon-entry.c:1028
+msgid "Browse"
+msgstr "Prahladaj"
+
+#: ../libgnomeui/gnome-icon-entry.c:1031
+msgid "Icon path"
+msgstr "Ściežka ikony"
+
+#: ../libgnomeui/gnome-icon-entry.c:1032
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr "Tut treba ŭvieści nazvu katalohu, u jakim źmieščanyja fajły ikon."
+
+#: ../libgnomeui/gnome-icon-sel.c:293
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr "GnomeIconSelection: \"%s\" nie isnuje albo nie źjaŭlajecca kataloham"
+
+#: ../libgnomeui/gnome-icon-sel.c:301
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr "GnomeIconSelection: niemahčyma adčynić kataloh \"%s\""
+
+#: ../libgnomeui/gnome-icon-sel.c:405
+msgid "Loading Icons..."
+msgstr "Zahruzka ikon..."
+
+#: ../libgnomeui/gnome-messagebox.c:107
+msgid "Information"
+msgstr "Infarmacyja"
+
+#: ../libgnomeui/gnome-messagebox.c:112
+msgid "Warning"
+msgstr "Aściaroha"
+
+#: ../libgnomeui/gnome-messagebox.c:118
+msgid "Error"
+msgstr "Pamyłka"
+
+#: ../libgnomeui/gnome-messagebox.c:124
+msgid "Question"
+msgstr "Pytańnie"
+
+#: ../libgnomeui/gnome-messagebox.c:129
+msgid "Message"
+msgstr "Paviedamleńnie"
+
+#: ../libgnomeui/gnome-password-dialog.c:210
+msgid "_Username:"
+msgstr "_Karystalnik:"
+
+#: ../libgnomeui/gnome-password-dialog.c:213
+msgid "_Domain:"
+msgstr "_Damen:"
+
+#: ../libgnomeui/gnome-password-dialog.c:216
+msgid "_Password:"
+msgstr "_Parol:"
+
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "_Novy parol:"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "_Paćvierdžańnie parolu:"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "Jakaść parolu:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
+msgid "Co_nnect"
+msgstr "S_pałučy"
+
+#: ../libgnomeui/gnome-password-dialog.c:371
+msgid "Connect _anonymously"
+msgstr "Ananimnaje _spałučeńnie"
+
+#: ../libgnomeui/gnome-password-dialog.c:376
+msgid "Connect as u_ser:"
+msgstr "Spałučeńnie ŭ jakaści _karystalnika:"
+
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "_Zabudź parol adrazu ž"
+
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "Zapaminaj _parol da momantu vyjścia"
+
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "_Zapomni nazaŭždy"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:114
+msgid "Do Preview"
+msgstr "Pieradahlad"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:115
+msgid "Whether the pixmap entry should have a preview."
+msgstr "Akreślivaje, ci treba pakazvać pieradahlad dla piksmapaŭ."
+
+#: ../libgnomeui/gnome-pixmap-entry.c:189
+#: ../libgnomeui/gnome-pixmap-entry.c:481
+msgid "No Image"
+msgstr "Biez vyjavy"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:206
+msgid "Image Preview"
+msgstr "Pieradahlad vyjavy"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:207
+msgid "A preview of the image currently specified"
+msgstr "Pieradahlad dziejna akreślenaj vyjavy"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:416
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Niemahčyma adšukać widget hbox, vykarystańnie zvyčajnaha vybaru fajłu"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:422
+msgid "Preview"
+msgstr "Pieradahlad"
+
+#: ../libgnomeui/gnome-scores.c:78
+msgid "Top Ten"
+msgstr "Śpis najlepšych"
+
+#: ../libgnomeui/gnome-scores.c:91
+msgid "User"
+msgstr "Karystalnik"
+
+#: ../libgnomeui/gnome-scores.c:94
+msgid "Score"
+msgstr "Vynik"
+
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: ../libgnomeui/gnome-scores.c:194
+msgid "%a %b %d %T %Y"
+msgstr "%a %d %b %T %Y"
+
+#: ../libgnomeui/gnome-scores.c:395
+msgid "Sans 14"
+msgstr "Sans 14"
+
+#: ../libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Bierahi tablicy"
+
+#: ../libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Zaliŭka tablicy"
+
+#: ../libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Punktavany śpis"
+
+#: ../libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "Numeravany śpis"
+
+#: ../libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Vodstup abzacu"
+
+#: ../libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "Viarni vodstup"
+
+#: ../libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Infarmacyja"
+
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
+msgid "Disable Crash Dialog"
+msgstr "Vykluč vakno pamyłki prahramy"
+
+#: ../libgnomeui/gnome-ui-init.c:129
+msgid "X display to use"
+msgstr "Vykarystoŭvaj ekran X"
+
+#: ../libgnomeui/gnome-ui-init.c:129
+msgid "DISPLAY"
+msgstr "EKRAN"
+
+#: ../libgnomeui/gnome-ui-init.c:173
+msgid "GNOME GUI Library:"
+msgstr "Biblijateka GNOME GUI:"
+
+#: ../libgnomeui/gnome-ui-init.c:174
+msgid "Show GNOME GUI options"
+msgstr "Pakažy opcyi hrafičnaha interfejsu GNOME"
+
+#: ../libgnomeui/gnome-ui-init.c:186
+msgid "GNOME GUI Library"
+msgstr "Biblijateka GNOME GUI"
+
+#: ../libgnomeui/gnome-ui-init.c:252
+msgid "Could not open link"
+msgstr "Niemahčyma adčynić spasyłku"
+
+#. dialog display isn't working out
+#: ../libgnomeui/gnome-ui-init.c:838
+#, c-format
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr ""
+"Niekalki razoŭ adbylisia parušeńni sehmentacyi; niemahčyma pakazać vakno z "
+"infarmacyjaj ab pamyłcy\n"
+
+#. Eeeek! Can't show dialog
+#: ../libgnomeui/gnome-ui-init.c:853
+#, c-format
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Parušeńnie sehmentacyi!\n"
+"Niemahčyma pakazać vakno z infarmacyjaj ab pamyłcy\n"
+
+#: ../libgnomeui/gnome_segv.c:82
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Užyćcio: gnome_segv2 appname signum\n"
+
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "Adładžvańnie %s"
+
+#: ../libgnomeui/gnome_segv.c:144
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
+msgstr ""
+"<b>Avaryja aplikacyi %s.</b>\n"
+"\n"
+"Zainstaluj <b>bug-buddy</b>, pryładu\n"
+"infarmavańnia ab pamyłkach GNOME, jakaja dazvolić\n"
+"dasyłać prahramistam padrabiaznuju infarmacyju\n"
+"pra pamyłki.\n"
+
+#: ../test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Zakonč test"
