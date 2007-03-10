@@ -1,15 +1,15 @@
 # Romanian translation for libgnomeui
-# Copyright (C) 2002 - 2006 Free Software Foundation, Inc.
+# Copyright (C) 2002 - 2007 Free Software Foundation, Inc.
 # Mugurel Tudor <mugurelu@gmail.com>, 2002, 2003.
 # Marius Andreiana <marius galuna.ro>, 2003.
-# Mişu Moldovan <dumol@gnome.ro>, 2003 - 2006.
+# Mişu Moldovan <dumol@gnome.ro>, 2003 - 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-03 21:27+0200\n"
-"PO-Revision-Date: 2006-09-04 02:33+0300\n"
+"POT-Creation-Date: 2007-01-10 15:02+0000\n"
+"PO-Revision-Date: 2007-03-11 00:31+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@gnome.ro>\n"
 "Language-Team: <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -32,35 +32,35 @@ msgstr "Element copil 2"
 msgid "Hint for item 2"
 msgstr "Sugestie pentru elementul 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:972
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s este o legătură către ceva ce nu e un director"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:983
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s este o legătură fără o locaţie de destinaţie"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nu este un director"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "Servere reţea"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "Sistem de fişiere"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Salvare eşuată favorit (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Nu s-au putut obţine detalii pentru „%s”"
@@ -667,16 +667,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "Parola va fi trimisă criptat."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Se cere autentificare"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Trebuie să va autentificaţi pentru a accesa %s în domeniul %s.\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Trebuie să va autentificaţi pentru a accesa %s.\n"
@@ -701,15 +702,19 @@ msgstr "PREFIX"
 msgid "Disable connection to session manager"
 msgstr "Dezactivează conexiunea la administratorul sesiunii"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Administrare sesiune"
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "Administrare sesiune:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Arată opţiunile de administrare a sesiunilor"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Administrare sesiune"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "Renunţă la ieşire"
 
@@ -1033,23 +1038,23 @@ msgstr "Acţiune GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "Tipul operaţiunii efectuate de selectorul de fişiere."
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "Selectaţi un fişier"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "Cale"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "Calea către fişier"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "_Selectare..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "Deschide un selector de fişiere pentru a alege un fişier"
 
@@ -1306,37 +1311,53 @@ msgstr "Întrebare"
 msgid "Message"
 msgstr "Mesaj"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_Nume utilizator:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Domeniu:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Parola:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "Parolă _nouă:"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "Con_firmare parolă:"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "Calitate parolă:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "Co_nectare"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "Conectare _anonimă"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Conectare ca _utilizatorul:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
-msgid "_Remember password for this session"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "_Uită imediat parola"
+
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
 msgstr "_Reţine parola pentru această sesiune"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
-msgid "Save password in _keyring"
-msgstr "Salvează parola într-un inel de c_hei"
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "Reţine pentru _totdeauna"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1418,32 +1439,36 @@ msgstr "Deindentare"
 msgid "About"
 msgstr "Despre"
 
-#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "Dezactivare dialog blocare"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "Display X de folosit"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "Bibliotecă GNOME GUI"
-
 #: ../libgnomeui/gnome-ui-init.c:173
+msgid "GNOME GUI Library:"
+msgstr "Bibliotecă GNOME GUI:"
+
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "Arată opţiunile GNOME GUI"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:186
+msgid "GNOME GUI Library"
+msgstr "Bibliotecă GNOME GUI"
+
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "Nu s-a putut deschide linkul"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1451,7 +1476,7 @@ msgstr ""
 "eroare\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1464,22 +1489,118 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Utilizare: gnome_segv2 aplicaţie semnal\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "Depanare %s"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>Aplicaţia %s s-a terminat neaşteptat.</b>\n"
 "\n"
-"Se pare însă că <b>bug-buddy</b>, unealta de raportare a\n"
-"acestui tip de probleme, nu este instalat. Dacă doriţi să\n"
-"ne ajutaţi să îmbunătăţim GNOME, vă rugăm să o instalaţi.\n"
+"Instalaţi <b>bug-buddy</b>, unealta GNOME de raportare a\n"
+"acestui tip de probleme, pentru a putea trimite informaţii\n"
+"detaliate despre această eroare.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Ieşire din test"
- 
+
+#: ../src/users/user-settings.c:448
+msgid "User name has invalid characters"
+msgstr "Numele utilizatorului conţine caractere invalide"
+
+#: ../src/users/user-settings.c:449
+msgid ""
+"Please set a valid user name consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr ""
+"Introduceţi un nume de utilizator valid, format dintr-o literă mică urmată "
+"de litere mici şi numere."
+
+#: ../src/users/user-settings.c:453
+#, c-format
+msgid "User name \"%s\" already exists"
+msgstr "Numele de utilizator „%s” există deja"
+
+#: ../src/users/user-settings.c:480
+#, c-format
+msgid "Invalid character \"%c\" in comment"
+msgstr "Caracter invalid „%c” în comentariu"
+
+#: ../src/users/user-settings.c:481
+msgid "Check that this character is not used."
+msgstr "Verificaţi ca acest caracter să nu fie folosit."
+
+#: ../src/users/user-settings.c:498
+msgid "Incomplete path in home directory"
+msgstr "Cale incompletă pentru directorul propriu"
+
+#: ../src/users/user-settings.c:499
+msgid ""
+"Please enter full path for home directory\n"
+"<span size=\"smaller\">i.e.: /home/john</span>."
+msgstr ""
+"Introduceţi calea completă pentru directorul propriu\n"
+"<span size=\"smaller\">de ex.: /home/alex</span>."
+
+#: ../src/users/user-settings.c:515
+msgid "Administrator account's user ID should not be modified"
+msgstr "ID-ul utilizatorului „root” nu ar trebui modificat"
+
+#: ../src/users/user-settings.c:531
+msgid "Incomplete path in shell"
+msgstr "Cale incompletă pentru shell"
+
+#: ../src/users/user-settings.c:532
+msgid ""
+"Please enter full path for shell\n"
+"<span size=\"smaller\">i.e.: /bin/bash</span>."
+msgstr ""
+"Introduceţi o cale completă pentru shell\n"
+"<span size=\"smaller\">de ex.: /bin/bash</span>."
+
+#: ../src/users/user-settings.c:560
+msgid "Password is too short"
+msgstr "Parola este prea scurtă"
+
+#: ../src/users/user-settings.c:561
+msgid ""
+"User passwords must be longer than 6 characters and preferably formed by "
+"numbers, letters and special characters."
+msgstr ""
+"Parolele utilizatorilor trebuie să fie mai mari de şase caractere şi să "
+"conţină pe cât posibil numere, litere şi caractere speciale."
+
+#: ../src/users/user-settings.c:564
+msgid "Password confirmation is not correct"
+msgstr "Parola nu a fost corect confirmată"
+
+#: ../src/users/user-settings.c:565
+msgid "Check that you have provided the same password in both text fields."
+msgstr "Verificaţi ca parolele din cele două câmpuri să fie identice."
+
+#: ../src/users/users-table.c:44
+msgid "Name"
+msgstr "Nume"
+
+#: ../src/users/users-table.c:63
+msgid "Login name"
+msgstr "Nume utilizator"
+
+#: ../src/users/users-table.c:70
+msgid "Home directory"
+msgstr "Director propriu"
+
+#: ../src/users/users-tool.c:191
+msgid "Users settings"
+msgstr "Setări utilizator"
+
