@@ -2852,7 +2852,6 @@ gtk_file_folder_gnome_vfs_dispose (GObject *object)
       g_object_ref (object);
       g_idle_add ((GSourceFunc)unref_at_idle, object);
     }
-  folder_parent_class->dispose (object);
 }
 
 
