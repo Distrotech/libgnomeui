@@ -1,5 +1,12 @@
 ============================= 2.18.0 ========================
 
+2007-03-12  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in:
+	* libgnomeui/Makefile.am:
+	Fix build with systems that don't have x11.pc.
+	Patch from Loïc Minier. Closes bug #416889.
+
 2007-03-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-thumbnail.c:

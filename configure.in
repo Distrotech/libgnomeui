@@ -73,18 +73,50 @@ AC_STDC_HEADERS
 AC_LIBTOOL_WIN32_DLL
 AM_PROG_LIBTOOL
 
+dnl
+dnl Check for -lX11 (for XUngrabServer in gnome-ui-init.c) and set
+dnl X11_CFLAGS and X11_LIBS
+dnl
+
+GNOME_HAVE_X11=yes
+PKG_CHECK_MODULES(X11, x11, :, [
+# pkg-config modules not found (only present since X11R7); use old-style
+# detection
+AC_PATH_XTRA
+# X found
+if test x$no_x != xyes ; then
+    libgnomeui_save_cflags="$CFLAGS"
+    libgnomeui_save_libs="$LIBS"
+    CFLAGS="$X_CFLAGS"
+    LIBS="$X_PRE_LIBS $X_LIBS $X_EXTRA_LIBS"
+    AC_CHECK_LIB(X11,
+                 XUngrabServer,
+                 [X11_CFLAGS="$X_CFLAGS"
+                  X11_LIBS="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"],
+                 GNOME_HAVE_X11=no)
+    CFLAGS="$libgnomeui_save_cflags"
+    LIBS="$libgnomeui_save_libs"
+else
+    GNOME_HAVE_X11=no
+fi
+])
+
+
+
 case "$host" in
   *-*-mingw*)
     os_win32=yes
     gnome_keyring_requirement=""
-    x11_requirement=""
     GNOME_KEYRING=""
     ;;
   *)
     os_win32=no
     gnome_keyring_requirement="gnome-keyring-1 >= gnome_keyring_required_version"
-    x11_requirement="x11"
     GNOME_KEYRING="gnome-keyring-1"
+
+    if test x$GNOME_HAVE_X11 != xyes ; then
+        AC_MSG_ERROR([libX11 not found])
+    fi
     ;;
 esac
 AM_CONDITIONAL(OS_WIN32, [test "$os_win32" = "yes"])
@@ -107,23 +139,34 @@ dnl
 dnl Check for -lSM (for gnome-client)
 dnl
 
-AC_PATH_XTRA
-
-SM_LIBS=""
-sm_save_cppflags="$CPPFLAGS"
-CPPFLAGS="$CPPFLAGS $X_CFLAGS"
-
 GNOME_HAVE_SM=true
-AC_CHECK_LIB(SM, SmcSaveYourselfDone,
-	[SM_LIBS="$X_LIBS -lSM -lICE"],GNOME_HAVE_SM=false,
-	$X_LIBS -lICE)
-AC_CHECK_HEADERS(X11/SM/SMlib.h,,GNOME_HAVE_SM=false)
+PKG_CHECK_MODULES(SM, sm ice, :, [
+# pkg-config modules not found (only present since X11R7); use old-style
+# detection
+AC_PATH_XTRA
+# X found
+if test x$no_x != xyes ; then
+    libgnomeui_save_cflags="$CFLAGS"
+    libgnomeui_save_libs="$LIBS"
+    CFLAGS="$X_CFLAGS"
+    LIBS="$X_PRE_LIBS $X_LIBS $X_EXTRA_LIBS"
+    AC_CHECK_LIB(SM,
+                 SmcSaveYourselfDone,
+                 [SM_CFLAGS="$X_CFLAGS"
+                  SM_LIBS="$X_PRE_LIBS $X_LIBS -lSM -lICE $X_EXTRA_LIBS"],
+                 GNOME_HAVE_SM=false,
+                 $X_LIBS -lICE)
+    AC_CHECK_HEADERS(X11/SM/SMlib.h, :, GNOME_HAVE_SM=false)
+    CFLAGS="$libgnomeui_save_cflags"
+    LIBS="$libgnomeui_save_libs"
+else
+    GNOME_HAVE_SM=false
+fi
+
 if test "$GNOME_HAVE_SM" = true; then
 	AC_DEFINE(HAVE_LIBSM, 1, [Define to 1 if you have libSM installed])
 fi
-
-AC_SUBST(SM_LIBS)
-CPPFLAGS="$sm_save_cppflags"
+])
 
 dnl
 dnl Start of pkg-config checks
@@ -162,8 +205,7 @@ GNOMEUI_MODULES="dnl
   pango >= pango_required_version dnl
   glib-2.0 >= glib_required_version
   gnome-vfs-2.0 >= gnomevfs_required_version dnl
-  $gnome_keyring_requirement dnl
-  $x11_requirement"
+  $gnome_keyring_requirement"
 PKG_CHECK_MODULES(LIBGNOMEUI, [$GNOMEUI_MODULES])
 LIBGNOMEUI_CFLAGS="$X_CFLAGS $LIBGNOMEUI_CFLAGS"
 LIBGNOMEUI_LIBS="$LIBGNOMEUI_LIBS $LIBJPEG"

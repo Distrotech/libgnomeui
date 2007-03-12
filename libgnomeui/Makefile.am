@@ -253,7 +253,8 @@ libgnomeui_2_la_LDFLAGS = \
 
 libgnomeui_2_la_LIBADD = \
 	$(LIBGNOMEUI_LIBS)			\
-	$(SM_LIBS)
+	$(SM_LIBS)				\
+	$(X11_LIBS)
 
 LDADD = \
 	libgnomeui-2.la $(LIBGNOMEUI_LIBS)
