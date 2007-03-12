@@ -1,3 +1,25 @@
+libgnomeui 2.18.0
+
+* Lots of code cleanups
+* Build fixes (Loïc Minier)
+* Doc fixes (John Millikin)
+* Updated translations
+  - Albanian (Laurent Dhima)
+  - Belarusian (Ales Navicki)
+  - Bengali Indian (Runa Bhattacharjee)
+  - Brazilian Portugese (Leonardo Ferreira Fontenelle)
+  - Dzongkha (Pema Geyleg)
+  - Greek (Simos Xenitellis)
+  - Gujarati (Ankit Patel)
+  - Japanese (Takeshi AIHANA)
+  - Lithuanian (Gintautas Miliauskas)
+  - Macedonian (Jovan Naumovski)
+  - Romanian (Mişu Moldovan)
+  - Russian (Leonid Kanter)
+  - Serbian (Goran Rakić)
+  - Simplified Chinese (Funda Wang) 
+  - Tamil (I Felix)
+
 libgnomeui 2.17.92
 
 * Dist MAINTAINERS (Kjartan)
