@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-30 09:57+0200\n"
+"POT-Creation-Date: 2007-01-10 15:02+0000\n"
 "PO-Revision-Date: 2006-08-30 16:52+0530\n"
 "Last-Translator: Felix <ifelix25@gmail.com>\n"
 "Language-Team: Tamil <ta@li.org>\n"
@@ -18,7 +18,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -39,33 +40,38 @@ msgstr "சேய் உருப்படி 2"
 msgid "Hint for item 2"
 msgstr "உருப்படி 2'க்கு குறிப்பிடு"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:929
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s என்பது அடைவு அல்லாத ஏதோ ஒரு இணைப்பாகும்"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:940
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s என்பது இலக்கு இடம் இல்லாத இணைப்பாகும்"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1015
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s அடைவு இல்லை"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1844
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "பிணைய சேவையகங்கள்"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1860
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "கோப்பு அமைப்பு"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2389
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "புத்தக குறி சேமிப்பதில் தோல்வி (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
+#, fuzzy, c-format
+msgid "Error getting information for '%s'"
+msgstr "'%s' கோப்புக்கான தகவலை பெற முடியவில்லை: %s"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -79,7 +85,8 @@ msgstr "'%s' ஐ திறப்பதில் தோல்வி: %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "'%s' பிம்பத்தை ஏற்றுவதில் தோல்வி:காரணம் தெரியவில்லை : பிம்பம் சிதைந்திருக்கலாம்"
 
 #: ../libgnomeui/gnome-about.c:199
@@ -171,7 +178,8 @@ msgid "Translator credits"
 msgstr "மொழிபெயற்றோர் புகழ்"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr "மொழிபெயற்றோர் புகழ். இச்சரம் மொழிபெயர்க்கக்கூடியதாக குறிக்க வேண்டும்"
 
 #: ../libgnomeui/gnome-about.c:438
@@ -665,16 +673,17 @@ msgid "Your password will be transmitted encrypted."
 msgstr "உங்கள் கடவுச்சொல் மறைக்குறியாக அனுப்பப்படும்."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "பெயர்-கடவுச்சொல் வேண்டும்"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "%s டொமைன் ஐ அணுக %s ஆக உள்நுழைந்திருக்க வேண்டும்\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "%s அணுகலுக்கு நீங்கள் கடவுச்சொல் வழங்கவேண்டும்\n"
@@ -699,15 +708,20 @@ msgstr "முற்சேர்க்கை"
 msgid "Disable connection to session manager"
 msgstr "அமர்வு மேலாளருடன் இருக்கும் இணைப்பை முடக்கு செய்"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
+#: ../libgnomeui/gnome-client.c:1034
+#, fuzzy
+msgid "Session management:"
 msgstr "அமர்வு மேலாண்மை"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "அமர்வு மேலாண்மை விருப்பங்களை காட்டு"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "அமர்வு மேலாண்மை"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "முடித்தலை நிறுத்து"
 
@@ -1027,23 +1041,23 @@ msgstr "GtkFileChooser செயல்"
 msgid "The type of operation that the file selector is performing."
 msgstr "கோப்பு தேர்வாளர் செய்யும் செயல்பாடுகளின் வகை"
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "கோப்பு தெரிவுசெய்க"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "பாதை"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "கோப்பின் பாதை"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "_மேலோடு..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "கோப்பு தெரிவுசெய்வதற்கு 'கோப்பு தெரிவு உரையாடல்' காட்டுக"
 
@@ -1294,37 +1308,57 @@ msgstr "கேள்வி"
 msgid "Message"
 msgstr "தகவல்"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_பயனர்பெயர்:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_களம்:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_கடவுச் சொல்:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:219
+#, fuzzy
+msgid "_New password:"
+msgstr "_கடவுச் சொல்:"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+#, fuzzy
+msgid "Con_firm password:"
+msgstr "_கடவுச் சொல்:"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+#, fuzzy
+msgid "Password quality:"
+msgstr "_கடவுச் சொல்:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "இணை (_n)"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "(_a)பெயரில்லாமல் இணை"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "பயனராக இணை: (_s)"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
-msgid "_Remember password for this session"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr ""
+
+#: ../libgnomeui/gnome-password-dialog.c:444
+#, fuzzy
+msgid "_Remember password until you logout"
 msgstr "இந்த அமர்விற்கு கடவுச்சொல்லை நினைவு கொள்ளவும் (_R)"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
-msgid "Save password in _keyring"
-msgstr "keyringல் கடவுச்சொல்லை சேமிக்கவும் (_k)"
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr ""
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1406,38 +1440,43 @@ msgstr "உள்தள்ளாதே"
 msgid "About"
 msgstr "பற்றி"
 
-#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "முறிவு உரையாடலை முடக்குக"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "உபயோகிக்க வேண்டிய X காட்சி"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "காட்சி"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
+#: ../libgnomeui/gnome-ui-init.c:173
+#, fuzzy
+msgid "GNOME GUI Library:"
 msgstr "கனோம் GUI நூலகம்"
 
-#: ../libgnomeui/gnome-ui-init.c:173
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "GNOME GUI விருப்பங்களை காட்டு"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:186
+msgid "GNOME GUI Library"
+msgstr "கனோம் GUI நூலகம்"
+
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "இணைப்பினை திறக்க முடியவில்லை"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr "பல பகுதியாக்கல் பிழைகள் நடைபெற்றுள்ளன; பிழை உரையாடலை காண்பிக்க முடியாது\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1450,22 +1489,30 @@ msgstr ""
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "புழங்குதல்: gnome_segv பயன்பாடு_பெயர் signum\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:94
 #, c-format
+msgid "Debugging %s"
+msgstr ""
+
+#: ../libgnomeui/gnome_segv.c:144
+#, fuzzy, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>பயன்பாடு %s அழிக்கப்பட்டது.</b>\n"
 "\n"
 "எனினும் நீங்கள் <b>bug-buddy</b>ஐ நிறுவவில்லை, \n"
-"அது GNOME அழித்தல் அறிக்கையிடும் கருவி. நீங்கள் உதவ விரும்பினால்\n "
-"அதனை நிறுவவும்\n"
+"அது GNOME அழித்தல் அறிக்கையிடும் கருவி. நீங்கள் உதவ விரும்பினால்\n"
+" அதனை நிறுவவும்\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "சோதனையிலிருந்து வெளியேறவும்"
 
+#~ msgid "Save password in _keyring"
+#~ msgstr "keyringல் கடவுச்சொல்லை சேமிக்கவும் (_k)"
