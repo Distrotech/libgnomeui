@@ -162,11 +162,11 @@ if test x$no_x != xyes ; then
 else
     GNOME_HAVE_SM=false
 fi
+])
 
 if test "$GNOME_HAVE_SM" = true; then
 	AC_DEFINE(HAVE_LIBSM, 1, [Define to 1 if you have libSM installed])
 fi
-])
 
 dnl
 dnl Start of pkg-config checks

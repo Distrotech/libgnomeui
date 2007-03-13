@@ -1,3 +1,8 @@
+2007-03-14  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Fix a problem with the previous patch
+	(Loïc Minier). Closes bug #416889.
+
 ============================= 2.18.0 ========================
 
 2007-03-12  Kjartan Maraas  <kmaraas@gnome.org>
