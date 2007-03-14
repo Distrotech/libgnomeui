@@ -1,3 +1,8 @@
+libgnomeui 2.18.1
+
+* Fix problem with the build fixes from the previous
+  release.
+
 libgnomeui 2.18.0
 
 * Lots of code cleanups
