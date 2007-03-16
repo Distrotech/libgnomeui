@@ -350,6 +350,7 @@ _gnome_thumbnail_load_scaled_jpeg (const char *uri,
 				   int         target_width,
 				   int         target_height)
 {
+	GdkPixbuf *pixbuf;
 	struct jpeg_decompress_struct cinfo;
 	Source src;
 	ErrorHandlerData jerr;
@@ -454,13 +455,20 @@ _gnome_thumbnail_load_scaled_jpeg (const char *uri,
 	
 	gnome_vfs_close (handle);
 	
-	return gdk_pixbuf_new_from_data (pixels, GDK_COLORSPACE_RGB,
-					 cinfo.out_color_components == 4 ? TRUE : FALSE,
-					 8,
-					 cinfo.output_width,
-					 cinfo.output_height,
-					 cinfo.output_width * out_n_components,
-					 free_buffer, NULL);
+	pixbuf = gdk_pixbuf_new_from_data (pixels, GDK_COLORSPACE_RGB,
+					   cinfo.out_color_components == 4 ? TRUE : FALSE,
+					   8,
+					   cinfo.output_width,
+					   cinfo.output_height,
+					   cinfo.output_width * out_n_components,
+					   free_buffer, NULL);
+
+	g_object_set_data (G_OBJECT (pixbuf), "gnome-original-width",
+			   GINT_TO_POINTER (cinfo.image_width));
+	g_object_set_data (G_OBJECT (pixbuf), "gnome-original-height",
+			   GINT_TO_POINTER (cinfo.image_height));
+
+	return pixbuf;
 }
 
 #endif /* HAVE_LIBJPEG */

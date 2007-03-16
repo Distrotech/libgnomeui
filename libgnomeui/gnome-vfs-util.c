@@ -60,6 +60,8 @@ struct GnomeGdkPixbufAsyncHandle {
 typedef struct {
     gint width;
     gint height;
+    gint input_width;
+    gint input_height;
     gboolean preserve_aspect_ratio;
 } SizePrepareContext;
 
@@ -104,6 +106,9 @@ size_prepared_cb (GdkPixbufLoader *loader,
 
 	g_return_if_fail (width > 0 && height > 0);
 
+	info->input_width = width;
+	info->input_height = height;
+	
 	if (width < info->width && height < info->height) return;
 	
 	if (info->preserve_aspect_ratio && 
@@ -184,6 +189,7 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
     if (1 <= width || 1 <= height) {
         info.width = width;
         info.height = height;
+	info.input_width = info.input_height = 0;
         info.preserve_aspect_ratio = preserve_aspect_ratio;        
         g_signal_connect (loader, "size-prepared", G_CALLBACK (size_prepared_cb), &info);
     }
@@ -235,6 +241,11 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
     }
     g_object_unref (G_OBJECT (loader));
 
+    g_object_set_data (G_OBJECT (pixbuf), "gnome-original-width",
+		       GINT_TO_POINTER (info.input_width));
+    g_object_set_data (G_OBJECT (pixbuf), "gnome-original-height",
+		       GINT_TO_POINTER (info.input_height));
+    
     return pixbuf;
 }
 

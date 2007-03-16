@@ -1,3 +1,21 @@
+2007-03-16  Claudio Saavedra  <csaavedra@alumnos.utalca.cl>
+
+	* libgnomeui/gnome-thumbnail-pixbuf-utils.c:
+	(_gnome_thumbnail_load_scaled_jpeg): Set 
+	"gnome-original-width/height" properties in the generated pixbuf.
+	* libgnomeui/gnome-vfs-util.c: (size_prepared_cb),
+	(gnome_gdk_pixbuf_new_from_uri_at_scale): Set 
+	"gnome-original-width/height" properties in the generated pixbuf.
+	* libgnomeui/gnome-thumbnail.c:
+	(gnome_thumbnail_factory_generate_thumbnail),
+	(gnome_thumbnail_factory_save_thumbnail):
+	Set the "gnome-original-width/height" properties as metadata in the 
+	generated thumbnail. Preserve such info if the helper thumbnailer 
+	already provided it.
+
+	Correctly set tEXt::Image::Width and tEXt::Image::Height metadata 
+	tags in thumbnails. Closes bug #143470 and bug #356930.
+
 2007-03-14  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in: Fix a problem with the previous patch

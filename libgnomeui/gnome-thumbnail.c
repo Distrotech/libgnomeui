@@ -942,6 +942,9 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
   GdkPixbuf *pixbuf, *scaled;
   char *script, *expanded_script;
   int width, height, size;
+  int original_width = 0;
+  int original_height = 0;
+  char dimension[12];
   double scale;
   int exit_status;
   char *tmpname;
@@ -993,30 +996,51 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
       else
 #endif
 	pixbuf = gnome_gdk_pixbuf_new_from_uri_at_scale (uri, size, size, TRUE);
+
+      original_width = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (pixbuf),
+							   "gnome-original-width"));
+      original_height = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (pixbuf),
+							    "gnome-original-height"));
     }
       
   if (pixbuf == NULL)
     return NULL;
 
   width = gdk_pixbuf_get_width (pixbuf);
-  g_object_set_data_full (G_OBJECT (pixbuf), "gnome-thumbnail-width",
-			  g_strdup_printf ("%d", width), g_free);
   height = gdk_pixbuf_get_height (pixbuf);
-  g_object_set_data_full (G_OBJECT (pixbuf), "gnome-thumbnail-height",
-			  g_strdup_printf ("%d", height), g_free);
-
+  
   if (width > size || height > size)
     {
+      const gchar *orig_width, *orig_height;
       scale = (double)size / MAX (width, height);
 
       scaled = gnome_thumbnail_scale_down_pixbuf (pixbuf,
 						  floor (width * scale + 0.5),
 						  floor (height * scale + 0.5));
 
+      orig_width = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Width");
+      orig_height = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Height");
+
+      if (orig_width) {
+	      gdk_pixbuf_set_option (scaled, "tEXt::Thumb::Image::Width", orig_width);
+      }
+      if (orig_height) {
+	      gdk_pixbuf_set_option (scaled, "tEXt::Thumb::Image::Height", orig_height);
+      }
+      
       g_object_unref (pixbuf);
       pixbuf = scaled;
     }
   
+  if (original_width > 0) {
+	  g_snprintf (dimension, sizeof (dimension), "%i", original_width);
+	  gdk_pixbuf_set_option (pixbuf, "tEXt::Thumb::Image::Width", dimension);
+  }
+  if (original_height > 0) {
+	  g_snprintf (dimension, sizeof (dimension), "%i", original_height);
+	  gdk_pixbuf_set_option (pixbuf, "tEXt::Thumb::Image::Height", dimension);
+  }
+
   return pixbuf;
 }
 
@@ -1175,12 +1199,8 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
   close (tmp_fd);
   
   g_snprintf (mtime_str, 21, "%ld",  original_mtime);
-  width = g_object_get_data (G_OBJECT (thumbnail), "gnome-thumbnail-width");
-  if (width == NULL)
-    width = gdk_pixbuf_get_option (thumbnail, "tEXt::Thumb::Image::Width");
-  height = g_object_get_data (G_OBJECT (thumbnail), "gnome-thumbnail-height");
-  if (height == NULL)
-    height = gdk_pixbuf_get_option (thumbnail, "tEXt::Thumb::Image::Height");
+  width = gdk_pixbuf_get_option (thumbnail, "tEXt::Thumb::Image::Width");
+  height = gdk_pixbuf_get_option (thumbnail, "tEXt::Thumb::Image::Height");
 
   if (width != NULL && height != NULL) 
     saved_ok  = gdk_pixbuf_save (thumbnail,
