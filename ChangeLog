@@ -1,3 +1,8 @@
+2007-03-17  Christian Persch  <chpe@gnome.org>
+
+	* libgnomeui/gnome-href.c: (gnome_href_set_url):
+	* libgnomeui/gnome-href.h: Deprecate GnomeHref. Bug #396452.
+
 2007-03-16  Claudio Saavedra  <csaavedra@alumnos.utalca.cl>
 
 	* libgnomeui/gnome-thumbnail-pixbuf-utils.c:

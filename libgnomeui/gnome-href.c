@@ -20,11 +20,13 @@
   @NOTATION@
 */
 
+#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
+
 #include "config.h"
 #include <libgnome/gnome-macros.h>
 
 /* Must be before all other gnome includes!! */
-#include "gnome-i18nP.h"
+#include <glib/gi18n-lib.h>
 
 #include <string.h> /* for strlen */
 
@@ -59,29 +61,6 @@ static void drag_data_get    		(GnomeHRef          *href,
 					 guint               info,
 					 guint               time,
 					 gpointer            data);
-
-static const GtkTargetEntry http_drop_types[] = {
-	{ "text/uri-list",       0, 0 },
-	{ "x-url/http",          0, 0 },
-	{ "_NETSCAPE_URL",       0, 0 }
-};
-static const GtkTargetEntry ftp_drop_types[] = {
-	{ "text/uri-list",       0, 0 },
-	{ "x-url/ftp",           0, 0 },
-	{ "_NETSCAPE_URL",       0, 0 }
-};
-static const GtkTargetEntry other_drop_types[] = {
-	{ "text/uri-list",       0, 0 },
-	{ "_NETSCAPE_URL",       0, 0 }
-};
-
-static const gint n_http_drop_types =
-   sizeof(http_drop_types) / sizeof(http_drop_types[0]);
-static const gint n_ftp_drop_types =
-   sizeof(ftp_drop_types) / sizeof(ftp_drop_types[0]);
-static const gint n_other_drop_types =
-   sizeof(other_drop_types) / sizeof(other_drop_types[0]);
-
 
 enum {
 	PROP_0,
@@ -269,19 +248,36 @@ void gnome_href_set_url(GnomeHRef *href, const gchar *url) {
   href->_priv->url = g_strdup(url);
   if(strncmp(url, "http://", 7) == 0 ||
      strncmp(url, "https://", 8) == 0) {
+	  const GtkTargetEntry http_drop_types[] = {
+	    { "text/uri-list",       0, 0 },
+	    { "x-url/http",          0, 0 },
+	    { "_NETSCAPE_URL",       0, 0 }
+	  };
+
 	  gtk_drag_source_set (GTK_WIDGET(href),
 			       GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
-			       http_drop_types, n_http_drop_types,
+			       http_drop_types, G_N_ELEMENTS (http_drop_types),
 			       GDK_ACTION_COPY);
   } else if(strncmp(url, "ftp://", 6) == 0) {
+	  const GtkTargetEntry ftp_drop_types[] = {
+	    { "text/uri-list",       0, 0 },
+	    { "x-url/ftp",           0, 0 },
+	    { "_NETSCAPE_URL",       0, 0 }
+	  };
+
 	  gtk_drag_source_set (GTK_WIDGET(href),
 			       GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
-			       ftp_drop_types, n_ftp_drop_types,
+			       ftp_drop_types, G_N_ELEMENTS (ftp_drop_types),
 			       GDK_ACTION_COPY);
   } else {
+	  const GtkTargetEntry other_drop_types[] = {
+	    { "text/uri-list",       0, 0 },
+	    { "_NETSCAPE_URL",       0, 0 }
+	  };
+
 	  gtk_drag_source_set (GTK_WIDGET(href),
 			       GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
-			       other_drop_types, n_other_drop_types,
+			       other_drop_types, G_N_ELEMENTS (other_drop_types),
 			       GDK_ACTION_COPY);
   }
 }
@@ -333,8 +329,6 @@ gnome_href_set_text (GnomeHRef *href, const gchar *text)
   g_free(markup);
 }
 
-#ifndef GNOME_DISABLE_DEPRECATED_SOURCE
-
 /**
  * gnome_href_get_label
  * @href: Pointer to GnomeHRef widget
@@ -370,8 +364,6 @@ gnome_href_set_label (GnomeHRef *href, const gchar *label)
 	g_warning("gnome_href_set_label is deprecated, use gnome_href_set_text");
 	gnome_href_set_text(href, label);
 }
-
-#endif /* not GNOME_DISABLE_DEPRECATED_SOURCE */
 
 static void
 gnome_href_clicked (GtkButton *button)
@@ -533,3 +525,5 @@ gnome_href_get_property (GObject *object,
 		break;
 	}
 }
+
+#endif /* not GNOME_DISABLE_DEPRECATED_SOURCE */
