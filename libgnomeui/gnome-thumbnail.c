@@ -450,7 +450,7 @@ gnome_thumbnail_factory_new (GnomeThumbnailSize size)
 static char *
 thumb_digest_to_ascii (unsigned char digest[16])
 {
-  static char hex_digits[] = "0123456789abcdef";
+  static const char hex_digits[] = "0123456789abcdef";
   char *res;
   int i;
   
@@ -968,7 +968,7 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
 
       fd = g_file_open_tmp (".gnome_thumbnail.XXXXXX", &tmpname, &error);
 
-      if (fd)
+      if (fd != -1)
 	{
 	  close (fd);
 
