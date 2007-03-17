@@ -44,7 +44,7 @@
 #endif
 
 /* Must be before all other gnome includes!! */
-#include "gnome-i18nP.h"
+#include <glib/gi18n-lib.h>
 
 #include <gdkconfig.h>
 #ifdef GDK_WINDOWING_X11
@@ -116,27 +116,7 @@ static gboolean use_event_sounds;
 /* GConf client for monitoring the event sounds option */
 static GConfClient *gconf_client = NULL;
 
-
 enum { ARG_DISABLE_CRASH_DIALOG=1, ARG_DISPLAY };
-
-static struct poptOption libgnomeui_options[] = {
-        {NULL, '\0', POPT_ARG_INTL_DOMAIN, GETTEXT_PACKAGE, 0, NULL, NULL},
-	{NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
-	 &libgnomeui_arg_callback, 0, NULL, NULL},
-	{"disable-crash-dialog", '\0', POPT_ARG_NONE, NULL, ARG_DISABLE_CRASH_DIALOG,
-        N_("Disable Crash Dialog"), NULL},
-        {"display", '\0', POPT_ARG_STRING|POPT_ARGFLAG_DOC_HIDDEN, NULL, ARG_DISPLAY,
-         N_("X display to use"), N_("DISPLAY")},
-	{NULL, '\0', 0, NULL, 0, NULL, NULL}
-};
-
-static GOptionEntry libgnomeui_goptions[] = {
-	{ "disable-crash-dialog", '\0', G_OPTION_FLAG_NO_ARG,
-	  G_OPTION_ARG_CALLBACK, libgnomeui_goption_disable_crash_dialog,
-	  N_("Disable Crash Dialog"), NULL },
-	/* --display is already handled by gtk+ */
-	{ NULL }
-};
 
 G_GNUC_INTERNAL void _gnome_ui_gettext_init (gboolean);
 
@@ -165,6 +145,13 @@ _gnome_ui_gettext_init (gboolean bind_codeset)
 static GOptionGroup *
 libgnomeui_get_goption_group (void)
 {
+	const GOptionEntry libgnomeui_goptions[] = {
+		{ "disable-crash-dialog", '\0', G_OPTION_FLAG_NO_ARG,
+		  G_OPTION_ARG_CALLBACK, libgnomeui_goption_disable_crash_dialog,
+		  N_("Disable Crash Dialog"), NULL },
+		  /* --display is already handled by gtk+ */
+		{ NULL }
+	};
 	GOptionGroup *option_group;
 
 	_gnome_ui_gettext_init (TRUE);
@@ -182,6 +169,17 @@ libgnomeui_get_goption_group (void)
 const GnomeModuleInfo *
 libgnomeui_module_info_get (void)
 {
+	static struct poptOption libgnomeui_options[] = {
+		{ NULL, '\0', POPT_ARG_INTL_DOMAIN, GETTEXT_PACKAGE, 0, NULL, NULL },
+		{ NULL, '\0', POPT_ARG_CALLBACK|POPT_CBFLAG_PRE|POPT_CBFLAG_POST,
+		  &libgnomeui_arg_callback, 0, NULL, NULL },
+		{ "disable-crash-dialog", '\0', POPT_ARG_NONE, NULL, ARG_DISABLE_CRASH_DIALOG,
+		  N_("Disable Crash Dialog"), NULL },
+		{ "display", '\0', POPT_ARG_STRING|POPT_ARGFLAG_DOC_HIDDEN, NULL, ARG_DISPLAY,
+		  N_("X display to use"), N_("DISPLAY") },
+		{ NULL, '\0', 0, NULL, 0, NULL, NULL }
+	};
+
 	static GnomeModuleInfo module_info = {
 		"libgnomeui", VERSION, N_("GNOME GUI Library"),
 		NULL, libgnomeui_instance_init,
@@ -238,8 +236,7 @@ show_url (GtkWidget *parent,
 	GdkScreen *screen;
 	GError *error = NULL;
 
-	if (parent != NULL)
-		screen = gtk_widget_get_screen (parent);
+	screen = gtk_widget_get_screen (parent);
 
 	if (!gnome_url_show_on_screen (url, screen, &error))
 	{
@@ -798,13 +795,9 @@ libgnomeui_segv_setup (GnomeProgram *program)
         static struct sigaction *setptr;
         struct sigaction sa;
         gboolean do_crash_dialog = TRUE;
-        GValue value = { 0, };
 
-        g_value_init (&value, G_TYPE_BOOLEAN);
-        g_object_get_property (G_OBJECT (program),
-                               LIBGNOMEUI_PARAM_CRASH_DIALOG, &value);
-        do_crash_dialog = g_value_get_boolean (&value);
-        g_value_unset (&value);
+        g_object_get (program, LIBGNOMEUI_PARAM_CRASH_DIALOG,
+		      &do_crash_dialog, NULL);
 
         if(do_crash_dialog) {
                 memset(&sa, 0, sizeof(sa));
@@ -947,13 +940,9 @@ gnome_init_with_popt_table (const char *app_id,
 				      NULL);
 
         if(return_ctx) {
-                GValue value = { 0, };
-
-                g_value_init (&value, G_TYPE_POINTER);
-                g_object_get_property (G_OBJECT (program),
-                                       GNOME_PARAM_POPT_CONTEXT, &value);
-                *return_ctx = g_value_peek_pointer (&value);
-                g_value_unset (&value);
+                poptContext context;
+                g_object_get (program, GNOME_PARAM_POPT_CONTEXT, &context, NULL);
+                *return_ctx = context;
         }
 
         return 0;

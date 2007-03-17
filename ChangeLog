@@ -1,5 +1,12 @@
 2007-03-18  Christian Persch  <chpe@gnome.org>
 
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_get_goption_group),
+	(libgnomeui_module_info_get), (show_url), (libgnomeui_segv_setup),
+	(gnome_init_with_popt_table): No need to make the GOptionEntry table
+	static. Move the popt table to the get_module function.
+
+2007-03-18  Christian Persch  <chpe@gnome.org>
+
 	* libgnomeui/gnome-thumbnail.c:	(gnome_thumbnail_factory_generate_thumbnail):
 	Correctly check for invalid FD. Bug #413641.
 
