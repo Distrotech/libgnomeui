@@ -852,6 +852,7 @@ client_interact_callback (SmcConn smc_conn, SmPointer client_data)
 /*****************************************************************************/
 /* Managing the master client */
 
+#if 0
 /* The following environment variables will be set on the master
    client, if they are defined the programs environment.  The array
    must end with a NULL entry.
@@ -863,6 +864,7 @@ static char* master_environment[]=
 {
   NULL
 };
+#endif
 
 /********* gnome_client module */
 
@@ -890,41 +892,7 @@ static gboolean gnome_client_goption_sm_disable (const gchar *option_name,
 static void gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 static void gnome_client_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info);
 
-/* Command-line arguments understood by this module.  */
 enum { ARG_SM_CLIENT_ID=1, ARG_SM_CONFIG_PREFIX, ARG_SM_DISABLE };
-static const struct poptOption options[] = {
-  {NULL, '\0', POPT_ARG_INTL_DOMAIN, GETTEXT_PACKAGE, 0, NULL, NULL},
-
-  {NULL, '\0', POPT_ARG_CALLBACK | POPT_CBFLAG_PRE | POPT_CBFLAG_POST,
-   client_parse_func, 0, NULL, NULL},
-
-  {"sm-client-id", '\0', POPT_ARG_STRING, NULL, ARG_SM_CLIENT_ID,
-   N_("Specify session management ID"), N_("ID")},
-
-  {"sm-config-prefix", '\0', POPT_ARG_STRING, NULL, ARG_SM_CONFIG_PREFIX,
-   N_("Specify prefix of saved configuration"), N_("PREFIX")},
-
-  {"sm-disable", '\0', POPT_ARG_NONE, NULL, ARG_SM_DISABLE,
-   N_("Disable connection to session manager"), NULL},
-
-  {NULL, '\0', 0, NULL, 0}
-};
-
-static const GOptionEntry session_goptions[] = {
-  { "sm-client-id", '\0', 0, G_OPTION_ARG_CALLBACK,
-    gnome_client_goption_sm_client_id, 
-    N_("Specify session management ID"), N_("ID")},
-
-  { "sm-config-prefix", '\0', 0, G_OPTION_ARG_CALLBACK,
-    gnome_client_goption_sm_config_prefix, 
-    N_("Specify prefix of saved configuration"), N_("PREFIX")},
-
-  { "sm-disable", '\0', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
-    gnome_client_goption_sm_disable, 
-    N_("Disable connection to session manager"), NULL},
-
-  { NULL }
-};
 
 typedef struct {
 	guint sm_connect_id;
@@ -1026,6 +994,18 @@ gnome_client_module_instance_init (GnomeProgram *program, GnomeModuleInfo *mod_i
 static GOptionGroup *
 gnome_client_module_get_goption_group (void)
 {
+	const GOptionEntry session_goptions[] = {
+		{ "sm-client-id", '\0', 0, G_OPTION_ARG_CALLBACK,
+		  gnome_client_goption_sm_client_id,
+		  N_("Specify session management ID"), N_("ID")},
+		{ "sm-config-prefix", '\0', 0, G_OPTION_ARG_CALLBACK,
+		  gnome_client_goption_sm_config_prefix,
+		  N_("Specify prefix of saved configuration"), N_("PREFIX")},
+		{ "sm-disable", '\0', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
+		  gnome_client_goption_sm_disable,
+		  N_("Disable connection to session manager"), NULL},
+		{ NULL }
+	};
 	GOptionGroup *option_group;
 
 	_gnome_ui_gettext_init (TRUE);
@@ -1043,6 +1023,25 @@ gnome_client_module_get_goption_group (void)
 const GnomeModuleInfo *
 gnome_client_module_info_get (void)
 {
+	/* Command-line arguments understood by this module.  */
+	static const struct poptOption options[] = {
+		{ NULL, '\0', POPT_ARG_INTL_DOMAIN, GETTEXT_PACKAGE, 0, NULL, NULL },
+
+		{ NULL, '\0', POPT_ARG_CALLBACK | POPT_CBFLAG_PRE | POPT_CBFLAG_POST,
+		  client_parse_func, 0, NULL, NULL },
+
+		{ "sm-client-id", '\0', POPT_ARG_STRING, NULL, ARG_SM_CLIENT_ID,
+		  N_("Specify session management ID"), N_("ID") },
+
+		{ "sm-config-prefix", '\0', POPT_ARG_STRING, NULL, ARG_SM_CONFIG_PREFIX,
+		  N_("Specify prefix of saved configuration"), N_("PREFIX") },
+
+		{ "sm-disable", '\0', POPT_ARG_NONE, NULL, ARG_SM_DISABLE,
+		  N_("Disable connection to session manager"), NULL },
+
+		{ NULL, '\0', 0, NULL, 0 }
+	};
+
 	static GnomeModuleInfo module_info = {
 		"gnome-client", VERSION, N_("Session management"),
 		NULL, gnome_client_module_instance_init,
@@ -1142,7 +1141,9 @@ gnome_client_goption_sm_config_prefix (const gchar *option_name,
 static void
 gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
+#if 0
   int i;
+#endif
   char *cwd;
 
   /* Make sure the Gtk+ type system is initialized.  */
@@ -1160,6 +1161,7 @@ gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
   /* Initialise ICE */
   gnome_ice_init ();
 
+#if 0
   /* Set the master client's environment.  */
   for (i= 0; master_environment[i]; i++)
     {
@@ -1170,6 +1172,7 @@ gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 				      master_environment[i],
 				      value);
     }
+#endif
 
   cwd = g_get_current_dir();
   if (cwd != NULL)
@@ -1191,12 +1194,8 @@ static void
 gnome_client_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
   gboolean do_connect = TRUE;
-  GValue value = { 0, };
 
-  g_value_init (&value, G_TYPE_BOOLEAN);
-  g_object_get_property (G_OBJECT (app), GNOME_CLIENT_PARAM_SM_CONNECT, &value);
-  do_connect = g_value_get_boolean (&value);
-  g_value_unset (&value);
+  g_object_get (G_OBJECT (app), GNOME_CLIENT_PARAM_SM_CONNECT, &do_connect, NULL);
 
   /* We're done, so we can connect to the session manager now.  */
   if (do_connect)

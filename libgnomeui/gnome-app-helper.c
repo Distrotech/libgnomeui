@@ -287,7 +287,7 @@ static GnomeUIInfo menu_defaults[] = {
           0,  (GdkModifierType) 0, NULL }
 };
 
-static gchar *menu_names[] =
+static const gchar *menu_names[] =
 {
   /* 0 */
   "new",

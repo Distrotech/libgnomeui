@@ -789,13 +789,10 @@ gnome_file_entry_drag_data_received (GtkWidget        *widget,
 	gtk_entry_set_text (GTK_ENTRY (entry), file);
 }
 
-#define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
-
 static void
 gnome_file_entry_init (GnomeFileEntry *fentry)
 {
 	GtkWidget *button, *the_gtk_entry;
-	static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
 	GtkWidget *hbox;
 
 	gtk_box_set_spacing (GTK_BOX (fentry), 4);
@@ -832,7 +829,9 @@ gnome_file_entry_init (GnomeFileEntry *fentry)
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
-			   drop_types, ELEMENTS (drop_types), GDK_ACTION_COPY);
+			   NULL, 0,
+                           GDK_ACTION_COPY);
+        gtk_drag_dest_add_uri_targets (GTK_WIDGET (fentry));
 
 	g_signal_connect (fentry, "drag_data_received",
 			  G_CALLBACK (gnome_file_entry_drag_data_received),

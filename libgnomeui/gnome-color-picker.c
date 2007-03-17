@@ -125,9 +125,7 @@ static void gnome_color_picker_get_property (GObject            *object,
 					     GParamSpec         *pspec);
 
 
-static guint color_picker_signals[LAST_SIGNAL] = { 0 };
-
-static GtkTargetEntry drop_types[] = { { "application/x-color", 0, 0 } };
+static guint color_picker_signals[LAST_SIGNAL];
 
 GNOME_CLASS_BOILERPLATE (GnomeColorPicker, gnome_color_picker,
 			 GtkButton, GTK_TYPE_BUTTON)
@@ -453,6 +451,9 @@ gnome_color_picker_instance_init (GnomeColorPicker *cp)
 {
 	GtkWidget *alignment;
 	GtkWidget *frame;
+	const GtkTargetEntry drop_types[] = {
+		{ "application/x-color", 0, 0 }
+	};
 
 	/* Create the widgets */
 	cp->_priv = g_new0(GnomeColorPickerPrivate, 1);
@@ -508,10 +509,10 @@ gnome_color_picker_instance_init (GnomeColorPicker *cp)
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
-			   drop_types, 1, GDK_ACTION_COPY);
+			   drop_types, G_N_ELEMENTS (drop_types), GDK_ACTION_COPY);
 	gtk_drag_source_set (GTK_WIDGET(cp),
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
-			     drop_types, 1,
+			     drop_types, G_N_ELEMENTS (drop_types),
 			     GDK_ACTION_COPY);
 	g_signal_connect (cp, "drag_data_received",
 			  G_CALLBACK (drag_data_received), cp);

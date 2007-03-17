@@ -86,8 +86,6 @@ static void pentry_set_property (GObject *object, guint param_id,
 static void pentry_get_property (GObject *object, guint param_id,
 				 GValue *value, GParamSpec *pspec);
 
-static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
-
 /* Property IDs */
 enum {
 	PROP_0,
@@ -214,15 +212,17 @@ refresh_preview(GnomePixmapEntry *pentry)
 					  G_CALLBACK (drag_data_get), pentry);
 			gtk_drag_source_set (pentry->_priv->preview,
 					     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
-					     drop_types, 1,
+					     NULL, 0,
 					     GDK_ACTION_COPY);
+			gtk_drag_source_add_uri_targets (pentry->_priv->preview);
 		}
 		g_signal_connect (G_OBJECT (pentry->_priv->preview->parent), "drag_data_get",
 				  G_CALLBACK (drag_data_get), pentry);
 		gtk_drag_source_set (pentry->_priv->preview->parent,
 				     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
-				     drop_types, 1,
+				     NULL, 0,
 				     GDK_ACTION_COPY);
+		gtk_drag_source_add_uri_targets (pentry->_priv->preview->parent);
 	}
 	g_free(pentry->_priv->last_preview);
 	pentry->_priv->last_preview = t;

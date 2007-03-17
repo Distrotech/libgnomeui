@@ -114,8 +114,6 @@ static void ientry_browse               (GnomeIconEntry *ientry);
 static gboolean ientry_mnemonic_activate (GtkWidget *widget, gboolean group_cycling);
 static void icon_selected_cb (GnomeIconEntry * ientry);
 
-static GtkTargetEntry drop_types[] = { { "text/uri-list", 0, 0 } };
-
 /* Property IDs */
 enum {
 	PROP_0,
@@ -357,15 +355,16 @@ update_icon (GnomeIconEntry *ientry)
 					  G_CALLBACK (drag_data_get), ientry);
 			gtk_drag_source_set (child,
 					     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
-					     drop_types, 1,
+					     NULL, 0,
 					     GDK_ACTION_COPY);
+			gtk_drag_source_add_uri_targets (child);
 		}
 	}
 	g_object_unref (scaled);
 #if 0
 	gtk_drag_source_set (ientry->_priv->pickbutton,
 			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
-			     drop_types, 1,
+			     drop_types, G_N_ELEMENTS (drop_types),
 			     GDK_ACTION_COPY);
 #endif
 }
@@ -1011,7 +1010,9 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
 			   GTK_DEST_DEFAULT_DROP,
-			   drop_types, 1, GDK_ACTION_COPY);
+			   NULL, 0,
+			   GDK_ACTION_COPY);
+	gtk_drag_dest_add_uri_targets (GTK_WIDGET (ientry->_priv->pickbutton));
 	g_signal_connect (ientry->_priv->pickbutton, "drag_data_received",
 			  G_CALLBACK (drag_data_received),
 			  ientry);

@@ -1,5 +1,20 @@
 2007-03-18  Christian Persch  <chpe@gnome.org>
 
+	* libgnomeui/gnome-app-helper.c:
+	* libgnomeui/gnome-client.c:
+	(gnome_client_module_get_goption_group),
+	(gnome_client_module_info_get), (gnome_client_pre_args_parse),
+	(gnome_client_post_args_parse):
+	* libgnomeui/gnome-color-picker.c:
+	(gnome_color_picker_instance_init):
+	* libgnomeui/gnome-file-entry.c: (gnome_file_entry_init):
+	* libgnomeui/gnome-icon-entry.c: (update_icon),
+	(gnome_icon_entry_instance_init):
+	* libgnomeui/gnome-pixmap-entry.c: (refresh_preview): Remove or
+	de-statify unnecessarily static data, and remove some unused code.
+
+2007-03-18  Christian Persch  <chpe@gnome.org>
+
 	* libgnomeui/Makefile.am:
 	* libgnomeui/gnome-about.c:
 	* libgnomeui/gnome-app-helper.c:
