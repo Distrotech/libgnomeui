@@ -31,13 +31,12 @@
  * Major cleanups and rearrangements by Federico Mena and Justin Maurer.
  */
 
-#ifdef HAVE_CONFIG_H
-#  include <config.h>
-#endif
+#include <config.h>
 
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
 #include <gdk/gdkkeysyms.h>
@@ -49,12 +48,12 @@
 #include <libgnome/gnome-help.h>
 #include <libgnome/gnome-config.h>
 
-/* Note that this file must include gnome-i18n, and not gnome-i18nP, so that
+/* Note that this file must include gi18n, and not gi18n-lib, so that
  * _() is the same as the one seen by the application.  This is moderately
  * bogus; we should just call gettext() directly here.
  */
+#include <glib/gi18n.h>
 
-#include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-program.h>
 #include <libgnome/gnome-gconf.h>
 #include <libgnome/gnome-init.h>

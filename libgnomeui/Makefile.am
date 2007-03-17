@@ -94,7 +94,6 @@ libgnomeui_2_la_SOURCES = \
 	gnome-vfs-util.c		\
 	gnome-window.c			\
 	gnome-window-icon.c		\
-	gnome-i18nP.h			\
 	gnome-gconf-ui.h		\
 	libgnomeuiP.h			\
 	gnome-password-dialog.c         \

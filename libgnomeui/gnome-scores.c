@@ -24,23 +24,22 @@
  */
 
 /*
- * G(NOME|TK) Scores Widget by Horacio J. Peña <horape@compendium.com.ar>
+ * G(NOME|TK) Scores Widget by Horacio J. PeÃ±a <horape@compendium.com.ar>
  *
  */
 
 #include <config.h>
-#include <libgnome/gnome-macros.h>
 
 #include <string.h>
 #include <time.h>
+
+#include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 
-#include "gnome-i18nP.h"
-
+#include <libgnome/gnome-macros.h>
 #include <libgnome/gnome-util.h>
 #include <libgnome/gnome-config.h>
 #include <libgnome/gnome-score.h>
-#include <libgnome/gnome-i18n.h>
 
 #include "gnome-scores.h"
 

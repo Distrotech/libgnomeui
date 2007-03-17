@@ -48,7 +48,7 @@
 #define BONOBO_UI_INTERNAL
 
 /* Must be before all other gnome includes!! */
-#include "gnome-i18nP.h"
+#include <glib/gi18n-lib.h>
 
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-program.h>

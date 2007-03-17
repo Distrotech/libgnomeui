@@ -26,7 +26,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <glib-object.h>
-#include <libgnome/gnome-i18n.h>
 
 #include "gnome-vfs-util.h"
 

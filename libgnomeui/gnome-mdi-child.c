@@ -29,7 +29,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#include "gnome-i18nP.h"
+#include <glib/gi18n-lib.h>
 
 #include "gnome-app.h"
 #include "gnome-app-helper.h"

@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "gnome-i18nP.h"
+#include <glib/gi18n-lib.h>
 
 #ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 

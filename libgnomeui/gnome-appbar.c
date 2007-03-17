@@ -26,17 +26,19 @@
  */
 
 #include "config.h"
-#include <libgnome/gnome-macros.h>
-#include <gtk/gtk.h>
-#include <gdk/gdkkeysyms.h>
 
 #include <string.h> /* for strlen */
 
+#include <glib/gi18n-lib.h>
+
+#include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
+
+#include <libgnome/gnome-macros.h>
+#include <libgnome/gnome-util.h>
+
 #include "gnome-appbar.h"
 #include "gnome-gconf-ui.h"
-
-#include <libgnome/gnome-util.h>
-#include <libgnome/gnome-i18n.h>
 
 #include "gnome-uidefs.h"
 #include "gnometypebuiltins.h"

@@ -28,25 +28,27 @@
  *
  * Author: Miguel de Icaza
  */
+
 #include <config.h>
-#include <libgnome/gnome-macros.h>
 
 #include <time.h>
 #include <string.h>
 #include <stdlib.h> /* atoi */
 #include <stdio.h>
+
+#include <glib/gi18n-lib.h>
+
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
 
-/* Must be before all other gnome includes!! */
-#include "gnome-i18nP.h"
-
-#include "gnome-dateedit.h"
+#include <libgnome/gnome-macros.h>
 #include <libgnome/gnome-i18n.h>
 
 #include "gnometypebuiltins.h"
 
 #include "libgnomeui-access.h"
+
+#include "gnome-dateedit.h"
 
 #ifdef G_OS_WIN32
 /* The use of strtok_r() in this file doesn't require us to use a real

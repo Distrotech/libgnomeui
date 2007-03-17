@@ -30,7 +30,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 
-#include "gnome-i18nP.h"
+#include <glib/gi18n-lib.h>
 
 #include <libgnome/gnome-config.h>
 #include <libgnome/gnome-util.h>

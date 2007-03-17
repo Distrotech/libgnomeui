@@ -33,11 +33,13 @@
  */
 
 #include <config.h>
+
+#include <glib/gi18n-lib.h>
+
 #include "gnome-authentication-manager.h"
 #include "gnome-authentication-manager-private.h"
 
 #include <gnome.h>
-#include <libgnome/gnome-i18n.h>
 #include "gnome-password-dialog.h"
 #include <libgnomevfs/gnome-vfs-module-callback.h>
 #include <libgnomevfs/gnome-vfs-standard-callbacks.h>

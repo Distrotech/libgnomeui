@@ -49,7 +49,7 @@
 #include <gtk/gtkscrolledwindow.h>
 #include <gtk/gtktreeview.h>
 
-#include "gnome-i18nP.h"
+#include <glib/gi18n-lib.h>
 
 #include <libgnome/gnome-util.h>
 #include "gnome-file-entry.h"

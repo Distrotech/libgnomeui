@@ -25,7 +25,7 @@
 
 #ifndef GNOME_DISABLE_DEPRECATED_SOURCE
 
-#include "gnome-i18nP.h"
+#include <glib/gi18n-lib.h>
 
 #include "gnome-dialog.h"
 #include "gnome-messagebox.h"
