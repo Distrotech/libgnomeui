@@ -1,22 +1,21 @@
-# translation of eu.po to Basque
-# translation of libgnomeui.po to basque
+# translation of libgnomeui.HEAD.po to Basque
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2004.
-# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2004, 2005, 2006.
 #
+# Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2004.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2004, 2005, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: eu\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-08 10:21+0000\n"
-"PO-Revision-Date: 2006-08-08 10:24+0000\n"
+"POT-Creation-Date: 2007-03-30 18:41+0200\n"
+"PO-Revision-Date: 2007-03-28 20:49+0200\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../demos/mdi_demo.c:128
@@ -35,33 +34,38 @@ msgstr "2. elementu umea"
 msgid "Hint for item 2"
 msgstr "2. elementurako aholkua"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s(e)k karpeta ez den zerbaiti estekatzen dio"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s(e)k helburuko kokaleku gabeko esteka da"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ez da karpeta bat"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "Sareko zerbitzariak"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "Fitxategi-sistema"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Huts egin du liburu-marka gordetzean (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "Errorea '%s'(r)en informazioa lortzean"
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -75,7 +79,8 @@ msgstr "Huts egin du '%s' fitxategia irekitzean: %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Huts egin du '%s' irudia kargatzean: arrazoi ezezaguna, agian fitxategia "
 "hondatuta dago"
@@ -171,8 +176,10 @@ msgstr ""
 "(<hizkpol@ej-gv.es>)"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Itzultzaileen kredituak. Kate honek itzulgarri gisa markatuta egon behar du"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Itzultzaileen kredituak. Kate honek itzulgarri gisa markatuta egon behar du"
 
 #: ../libgnomeui/gnome-about.c:438
 #: ../libgnomeui/gnome-druid-page-standard.c:129
@@ -189,142 +196,142 @@ msgid "About %s"
 msgstr "%s(r)i buruz "
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:81 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fitxategia"
 
-#: ../libgnomeui/gnome-app-helper.c:83
+#: ../libgnomeui/gnome-app-helper.c:82
 msgid "_File/"
 msgstr "_Fitxategia/"
 
-#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Editatu"
 
-#: ../libgnomeui/gnome-app-helper.c:85
+#: ../libgnomeui/gnome-app-helper.c:84
 msgid "_Edit/"
 msgstr "_Editatu/"
 
-#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Ikusi"
 
-#: ../libgnomeui/gnome-app-helper.c:87
+#: ../libgnomeui/gnome-app-helper.c:86
 msgid "_View/"
 msgstr "_Ikusi/"
 
-#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "E_zarpenak"
 
-#: ../libgnomeui/gnome-app-helper.c:89
+#: ../libgnomeui/gnome-app-helper.c:88
 msgid "_Settings/"
 msgstr "E_zarpenak/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "Be_rria"
 
-#: ../libgnomeui/gnome-app-helper.c:91
+#: ../libgnomeui/gnome-app-helper.c:90
 msgid "_New/"
 msgstr "_Berria/"
 
-#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Fitxa_tegiak"
 
-#: ../libgnomeui/gnome-app-helper.c:93
+#: ../libgnomeui/gnome-app-helper.c:92
 msgid "Fi_les/"
 msgstr "Fitxa_tegiak/"
 
-#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "Lei_hoak"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "J_okoa"
 
-#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "La_guntza"
 
-#: ../libgnomeui/gnome-app-helper.c:97
+#: ../libgnomeui/gnome-app-helper.c:96
 msgid "_Windows/"
 msgstr "_Leihoak/"
 
 #. Open
-#: ../libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:108
 msgid "_Open..."
 msgstr "_Ireki..."
 
-#: ../libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:108
 msgid "Open a file"
 msgstr "Ireki fitxategi bat"
 
 #. Save
-#: ../libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:113
 msgid "_Save"
 msgstr "_Gorde"
 
-#: ../libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:113
 msgid "Save the current file"
 msgstr "Gorde uneko fitxategia "
 
 #. Save As
-#: ../libgnomeui/gnome-app-helper.c:119
+#: ../libgnomeui/gnome-app-helper.c:118
 msgid "Save _As..."
 msgstr "Gorde _honela..."
 
-#: ../libgnomeui/gnome-app-helper.c:120
+#: ../libgnomeui/gnome-app-helper.c:119
 msgid "Save the current file with a different name"
 msgstr "Gorde uneko fitxategia beste izen batekin"
 
 #. Revert
-#: ../libgnomeui/gnome-app-helper.c:125
+#: ../libgnomeui/gnome-app-helper.c:124
 msgid "_Revert"
 msgstr "_Leheneratu"
 
-#: ../libgnomeui/gnome-app-helper.c:126
+#: ../libgnomeui/gnome-app-helper.c:125
 msgid "Revert to a saved version of the file"
 msgstr "Itzuli fitxategiaren gordetako bertsio batera"
 
 #. Print
-#: ../libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:130
 msgid "_Print..."
 msgstr "Inpri_matu..."
 
-#: ../libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:130
 msgid "Print the current file"
 msgstr "Inprimatu uneko fitxategia"
 
 #. Print Setup
-#: ../libgnomeui/gnome-app-helper.c:136
+#: ../libgnomeui/gnome-app-helper.c:135
 msgid "Print S_etup..."
 msgstr "Prestatu i_nprimatzeko"
 
-#: ../libgnomeui/gnome-app-helper.c:137
+#: ../libgnomeui/gnome-app-helper.c:136
 msgid "Setup the page settings for your current printer"
 msgstr "Konfiguratu orrialde-ezarpenak zure uneko inprimagailuarentzat "
 
 #. Close
-#: ../libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:141
 msgid "_Close"
 msgstr "It_xi"
 
-#: ../libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:141
 msgid "Close the current file"
 msgstr "Uneko fitxategia ixten du"
 
 #. Exit
-#: ../libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:146
 msgid "_Quit"
 msgstr "Irte_n"
 
-#: ../libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:146
 msgid "Quit the application"
 msgstr "Aplikaziotik irteten du"
 
@@ -332,93 +339,93 @@ msgstr "Aplikaziotik irteten du"
 #. * The "Edit" menu
 #.
 #. Cut
-#: ../libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:154
 msgid "Cu_t"
 msgstr "Ebak_i"
 
-#: ../libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:154
 msgid "Cut the selection"
 msgstr "Hautapena ebakitzen du"
 
 #. 10
 #. Copy
-#: ../libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:160
 msgid "_Copy"
 msgstr "K_opiatu"
 
-#: ../libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:160
 msgid "Copy the selection"
 msgstr "Hautapena kopiatzen du"
 
 #. Paste
-#: ../libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:165
 msgid "_Paste"
 msgstr "I_tsatsi"
 
-#: ../libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:165
 msgid "Paste the clipboard"
 msgstr "Arbelaren edukia itsasten du"
 
 #. Clear
-#: ../libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:170
 msgid "C_lear"
 msgstr "G_arbitu"
 
-#: ../libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:170
 msgid "Clear the selection"
 msgstr "Hautapena garbitzen du"
 
 #. Undo
-#: ../libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:175
 msgid "_Undo"
 msgstr "_Desegin"
 
-#: ../libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:175
 msgid "Undo the last action"
 msgstr "Azken ekintza desegiten du"
 
 #. Redo
-#: ../libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:180
 msgid "_Redo"
 msgstr "_Berregin"
 
-#: ../libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:180
 msgid "Redo the undone action"
 msgstr "Desegindako ekintza berregiten du"
 
 #. Find
-#: ../libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:185
 msgid "_Find..."
 msgstr "Bila_tu..."
 
-#: ../libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:185
 msgid "Search for a string"
 msgstr "Kate bat bilatzen du"
 
 #. Find Again
-#: ../libgnomeui/gnome-app-helper.c:191
+#: ../libgnomeui/gnome-app-helper.c:190
 msgid "Find Ne_xt"
 msgstr "Bilatu hurren_goa"
 
-#: ../libgnomeui/gnome-app-helper.c:192
+#: ../libgnomeui/gnome-app-helper.c:191
 msgid "Search again for the same string"
 msgstr "Kate bera berriro bilatzen du"
 
 #. Replace
-#: ../libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:196
 msgid "R_eplace..."
 msgstr "Orde_ztu..."
 
-#: ../libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:196
 msgid "Replace a string"
 msgstr "Kate bat ordezten du"
 
 #. Properties
-#: ../libgnomeui/gnome-app-helper.c:202
+#: ../libgnomeui/gnome-app-helper.c:201
 msgid "_Properties"
 msgstr "_Propietateak"
 
-#: ../libgnomeui/gnome-app-helper.c:203
+#: ../libgnomeui/gnome-app-helper.c:202
 msgid "Modify the file's properties"
 msgstr "Fitxategiaren propietateak aldatzen ditu"
 
@@ -426,11 +433,11 @@ msgstr "Fitxategiaren propietateak aldatzen ditu"
 #. * The Settings menu
 #.
 #. Settings
-#: ../libgnomeui/gnome-app-helper.c:211
+#: ../libgnomeui/gnome-app-helper.c:210
 msgid "Prefere_nces"
 msgstr "Hobes_penak"
 
-#: ../libgnomeui/gnome-app-helper.c:212
+#: ../libgnomeui/gnome-app-helper.c:211
 msgid "Configure the application"
 msgstr "Aplikazioa konfiguratzen du"
 
@@ -439,134 +446,134 @@ msgstr "Aplikazioa konfiguratzen du"
 #. * And the "Help" menu
 #.
 #. About
-#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:4
+#: ../libgnomeui/gnome-app-helper.c:220 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "Honi _buruz"
 
-#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
+#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Aplikazio honi buruz"
 
-#: ../libgnomeui/gnome-app-helper.c:225
+#: ../libgnomeui/gnome-app-helper.c:224
 msgid "Select _All"
 msgstr "_Hautatu dena"
 
-#: ../libgnomeui/gnome-app-helper.c:226
+#: ../libgnomeui/gnome-app-helper.c:225
 msgid "Select everything"
 msgstr "Dena hautatzen du"
 
 #.
 #. * Window menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:234
+#: ../libgnomeui/gnome-app-helper.c:233
 msgid "Create New _Window"
 msgstr "Sortu lei_ho berria"
 
-#: ../libgnomeui/gnome-app-helper.c:235
+#: ../libgnomeui/gnome-app-helper.c:234
 msgid "Create a new window"
 msgstr "Leiho berria sortzen du"
 
-#: ../libgnomeui/gnome-app-helper.c:239
+#: ../libgnomeui/gnome-app-helper.c:238
 msgid "_Close This Window"
 msgstr "It_xi leiho hau"
 
-#: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
+#: ../libgnomeui/gnome-app-helper.c:239 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Uneko leihoa ixten du"
 
 #.
 #. * The "Game" menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:248
+#: ../libgnomeui/gnome-app-helper.c:247
 msgid "_New Game"
 msgstr "_Joko berria"
 
-#: ../libgnomeui/gnome-app-helper.c:249
+#: ../libgnomeui/gnome-app-helper.c:248
 msgid "Start a new game"
 msgstr "Beste joko bat hasten du"
 
-#: ../libgnomeui/gnome-app-helper.c:253
+#: ../libgnomeui/gnome-app-helper.c:252
 msgid "_Pause Game"
 msgstr "_Pausarazi jokoa"
 
-#: ../libgnomeui/gnome-app-helper.c:254
+#: ../libgnomeui/gnome-app-helper.c:253
 msgid "Pause the game"
 msgstr "Jokoa pausarazten du"
 
-#: ../libgnomeui/gnome-app-helper.c:258
+#: ../libgnomeui/gnome-app-helper.c:257
 msgid "_Restart Game"
 msgstr "_Berrabiarazi jokoa"
 
-#: ../libgnomeui/gnome-app-helper.c:259
+#: ../libgnomeui/gnome-app-helper.c:258
 msgid "Restart the game"
 msgstr "Jokoa berrabiarazten du"
 
-#: ../libgnomeui/gnome-app-helper.c:263
+#: ../libgnomeui/gnome-app-helper.c:262
 msgid "_Undo Move"
 msgstr "_Desegin mugimendua"
 
-#: ../libgnomeui/gnome-app-helper.c:264
+#: ../libgnomeui/gnome-app-helper.c:263
 msgid "Undo the last move"
 msgstr "Azken mugimendua desegiten du"
 
-#: ../libgnomeui/gnome-app-helper.c:268
+#: ../libgnomeui/gnome-app-helper.c:267
 msgid "_Redo Move"
 msgstr "Berregin _mugimendua"
 
-#: ../libgnomeui/gnome-app-helper.c:269
+#: ../libgnomeui/gnome-app-helper.c:268
 msgid "Redo the undone move"
 msgstr "Desegindako mugimendua berregiten du"
 
-#: ../libgnomeui/gnome-app-helper.c:273
+#: ../libgnomeui/gnome-app-helper.c:272
 msgid "_Hint"
 msgstr "_Aholkua"
 
-#: ../libgnomeui/gnome-app-helper.c:274
+#: ../libgnomeui/gnome-app-helper.c:273
 msgid "Get a hint for your next move"
 msgstr "Hurrengo mugimendua iradokitzen du"
 
 #. 30
-#: ../libgnomeui/gnome-app-helper.c:279
+#: ../libgnomeui/gnome-app-helper.c:278
 msgid "_Scores..."
 msgstr "_Puntuazioak..."
 
-#: ../libgnomeui/gnome-app-helper.c:280
+#: ../libgnomeui/gnome-app-helper.c:279
 msgid "View the scores"
 msgstr "Puntuazioak erakusten ditu"
 
-#: ../libgnomeui/gnome-app-helper.c:284
+#: ../libgnomeui/gnome-app-helper.c:283
 msgid "_End Game"
 msgstr "_Amaitu jokoa"
 
-#: ../libgnomeui/gnome-app-helper.c:285
+#: ../libgnomeui/gnome-app-helper.c:284
 msgid "End the current game"
 msgstr "Uneko jokoa amaitzen du"
 
-#: ../libgnomeui/gnome-app-helper.c:1147
+#: ../libgnomeui/gnome-app-helper.c:1146
 msgid "_Contents"
 msgstr "_Edukia"
 
-#: ../libgnomeui/gnome-app-helper.c:1150
+#: ../libgnomeui/gnome-app-helper.c:1149
 msgid "View help for this application"
 msgstr "Ikusi laguntza aplikazio honetarako"
 
-#: ../libgnomeui/gnome-app-helper.c:2587
+#: ../libgnomeui/gnome-app-helper.c:2586
 msgid "Text Below Icons"
 msgstr "Testua ikono azpian"
 
-#: ../libgnomeui/gnome-app-helper.c:2588
+#: ../libgnomeui/gnome-app-helper.c:2587
 msgid "Priority Text Beside Icons"
 msgstr "Lehentasunezko testua ikonoen ondoan "
 
-#: ../libgnomeui/gnome-app-helper.c:2589
+#: ../libgnomeui/gnome-app-helper.c:2588
 msgid "Icons Only"
 msgstr "Ikonoak bakarrik"
 
-#: ../libgnomeui/gnome-app-helper.c:2590
+#: ../libgnomeui/gnome-app-helper.c:2589
 msgid "Text Only"
 msgstr "Testua bakarrik"
 
-#: ../libgnomeui/gnome-app-helper.c:2651
+#: ../libgnomeui/gnome-app-helper.c:2650
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Erabili mahaigain lehenetsia (%s)"
@@ -619,35 +626,35 @@ msgstr "Aplikazioaren IDa"
 msgid "The application ID string"
 msgstr "Aplikazioaren ID katea"
 
-#: ../libgnomeui/gnome-appbar.c:741
+#: ../libgnomeui/gnome-appbar.c:743
 msgid "Has Progress"
 msgstr "Aurrerapena du"
 
-#: ../libgnomeui/gnome-appbar.c:742
+#: ../libgnomeui/gnome-appbar.c:744
 msgid "Create a progress widget."
 msgstr "Sortu aurrerapen-trepeta."
 
-#: ../libgnomeui/gnome-appbar.c:749
+#: ../libgnomeui/gnome-appbar.c:751
 msgid "Has Status"
 msgstr "Egoera du"
 
-#: ../libgnomeui/gnome-appbar.c:750
+#: ../libgnomeui/gnome-appbar.c:752
 msgid "Create a status widget."
 msgstr "Sortu egoera-trepeta."
 
-#: ../libgnomeui/gnome-appbar.c:757
+#: ../libgnomeui/gnome-appbar.c:759
 msgid "Interactivity"
 msgstr "Interaktibotasuna"
 
-#: ../libgnomeui/gnome-appbar.c:758
+#: ../libgnomeui/gnome-appbar.c:760
 msgid "Level of user activity required."
 msgstr "Behar den erabiltzailearen jarduera-maila."
 
-#: ../libgnomeui/gnome-authentication-manager.c:80
+#: ../libgnomeui/gnome-authentication-manager.c:82
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "HTTP Proxy-ak saioa hasteko eskatzen dizu.\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:81
+#: ../libgnomeui/gnome-authentication-manager.c:83
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -656,141 +663,147 @@ msgstr ""
 "Saioa hasi behar duzu \"%s\" atzitzeko.\n"
 "%s"
 
-#: ../libgnomeui/gnome-authentication-manager.c:84
+#: ../libgnomeui/gnome-authentication-manager.c:86
 msgid "Your password will be transmitted unencrypted."
 msgstr "Zure pasahitza enkriptatu gabe transmitituko da."
 
-#: ../libgnomeui/gnome-authentication-manager.c:85
+#: ../libgnomeui/gnome-authentication-manager.c:87
 msgid "Your password will be transmitted encrypted."
 msgstr "Zure pasahitza enkriptatuta transmitituko da."
 
-#: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:90
+#: ../libgnomeui/gnome-authentication-manager.c:309
 msgid "Authentication Required"
 msgstr "Autentifikazioa behar da"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Saioa hasi behar duzu \"%s\" atzitzeko (%s domeinuan).\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:303
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Saioa hasi behar duzu \"%s\" atzitzeko.\n"
 
-#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "Specify session management ID"
 msgstr "Zehaztu saio-kudeaketaren IDa"
 
-#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "ID"
 msgstr "IDa"
 
-#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "Specify prefix of saved configuration"
 msgstr "Zehaztu gordetako konfigurazioaren aurrizkia"
 
-#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "PREFIX"
 msgstr "AURRIZKIA"
 
-#: ../libgnomeui/gnome-client.c:908 ../libgnomeui/gnome-client.c:924
+#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
 msgstr "Desgaitu saio-kudeatzailearekiko konexioa"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Saio-kudeaketa"
+#: ../libgnomeui/gnome-client.c:1014
+msgid "Session management:"
+msgstr "Saio-kudeaketa:"
 
-#: ../libgnomeui/gnome-client.c:1035
+#: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
 msgstr "Erakutsi saio-kudeaketaren aukerak"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1046
+msgid "Session management"
+msgstr "Saio-kudeaketa"
+
+#: ../libgnomeui/gnome-client.c:2571
 msgid "Cancel Logout"
 msgstr "Utzi saioa amaitzea bertan behera"
 
-#: ../libgnomeui/gnome-color-picker.c:414
+#: ../libgnomeui/gnome-color-picker.c:412
 msgid "Received invalid color data\n"
 msgstr "Kolore-datu okerrak jaso ditut\n"
 
-#: ../libgnomeui/gnome-color-picker.c:465
+#: ../libgnomeui/gnome-color-picker.c:466
 msgid "Open a dialog to specify the color"
 msgstr "Ireki elkarrizketa-koadroa kolorea zehazteko"
 
-#: ../libgnomeui/gnome-color-picker.c:487
+#: ../libgnomeui/gnome-color-picker.c:488
 msgid "Pick a color"
 msgstr "Aukeratu kolorea"
 
-#: ../libgnomeui/gnome-dateedit.c:491 ../libgnomeui/gnome-dateedit.c:788
+#: ../libgnomeui/gnome-dateedit.c:493 ../libgnomeui/gnome-dateedit.c:790
 msgid "Time"
 msgstr "Ordua"
 
-#: ../libgnomeui/gnome-dateedit.c:492
+#: ../libgnomeui/gnome-dateedit.c:494
 msgid "The time currently selected"
 msgstr "Unean hautatutako ordua"
 
-#: ../libgnomeui/gnome-dateedit.c:504
+#: ../libgnomeui/gnome-dateedit.c:506
 msgid "DateEdit Flags"
 msgstr "DateEdit-en banderak"
 
-#: ../libgnomeui/gnome-dateedit.c:505
+#: ../libgnomeui/gnome-dateedit.c:507
 msgid "Flags for how DateEdit looks"
 msgstr "DateEdit-en itxurarako banderak"
 
-#: ../libgnomeui/gnome-dateedit.c:514
+#: ../libgnomeui/gnome-dateedit.c:516
 msgid "Lower Hour"
 msgstr "Lehenagoko ordua"
 
-#: ../libgnomeui/gnome-dateedit.c:515
+#: ../libgnomeui/gnome-dateedit.c:517
 msgid "Lower hour in the time popup selector"
 msgstr "Lehenagoko ordua orduaren hautatzailean"
 
-#: ../libgnomeui/gnome-dateedit.c:525
+#: ../libgnomeui/gnome-dateedit.c:527
 msgid "Upper Hour"
 msgstr "Geroagoko ordua"
 
-#: ../libgnomeui/gnome-dateedit.c:526
+#: ../libgnomeui/gnome-dateedit.c:528
 msgid "Upper hour in the time popup selector"
 msgstr "Geroagoko ordua orduaren hautatzailean"
 
-#: ../libgnomeui/gnome-dateedit.c:536
+#: ../libgnomeui/gnome-dateedit.c:538
 msgid "Initial Time"
 msgstr "Hasiera-ordua"
 
-#: ../libgnomeui/gnome-dateedit.c:537
+#: ../libgnomeui/gnome-dateedit.c:539
 msgid "The initial time"
 msgstr "Hasteko ordua"
 
-#: ../libgnomeui/gnome-dateedit.c:751 ../libgnomeui/gnome-scores.c:97
+#: ../libgnomeui/gnome-dateedit.c:753 ../libgnomeui/gnome-scores.c:96
 msgid "Date"
 msgstr "Data"
 
-#: ../libgnomeui/gnome-dateedit.c:764
+#: ../libgnomeui/gnome-dateedit.c:766
 msgid "Select Date"
 msgstr "Hautatu data"
 
-#: ../libgnomeui/gnome-dateedit.c:764
+#: ../libgnomeui/gnome-dateedit.c:766
 msgid "Select the date from a calendar"
 msgstr "Hautatu data egutegitik"
 
 #. Calendar label, only shown if the date editor has a time field
-#: ../libgnomeui/gnome-dateedit.c:775
+#: ../libgnomeui/gnome-dateedit.c:777
 msgid "Calendar"
 msgstr "Egutegia"
 
-#: ../libgnomeui/gnome-dateedit.c:796
+#: ../libgnomeui/gnome-dateedit.c:798
 msgid "Select Time"
 msgstr "Hautatu ordua"
 
-#: ../libgnomeui/gnome-dateedit.c:796
+#: ../libgnomeui/gnome-dateedit.c:798
 msgid "Select the time from a list"
 msgstr "Hautatu ordua zerrendatik"
 
-#: ../libgnomeui/gnome-dateedit.c:1015
+#: ../libgnomeui/gnome-dateedit.c:1017
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date zaharkitua dago, erabili gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date zaharkitua dago, erabili gnome_date_edit_get_time"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:121
 #: ../libgnomeui/gnome-font-picker.c:155
@@ -900,24 +913,24 @@ msgstr "Logotipoaren atzeko planoaren kolorea ezarrita"
 msgid "Logo Background color is set"
 msgstr "Logotipoaren atzeko planoaren kolorea ezarrita dago"
 
-#: ../libgnomeui/gnome-druid.c:154
+#: ../libgnomeui/gnome-druid.c:153
 msgid "Show Finish"
 msgstr "Erakutsi 'Amaitu'"
 
-#: ../libgnomeui/gnome-druid.c:155
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Erakutsi 'Amaitu' botoia 'Hurrengoa' botoiaren ordez"
 
-#: ../libgnomeui/gnome-druid.c:162
+#: ../libgnomeui/gnome-druid.c:161
 msgid "Show Help"
 msgstr "Erakutsi 'Laguntza'"
 
-#: ../libgnomeui/gnome-druid.c:163
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show the 'Help' button"
 msgstr "Erakutsi 'Laguntza' botoia"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
 msgstr "Historiaren IDa"
 
@@ -937,7 +950,7 @@ msgstr ""
 "Fitxategirako identifikatzaile esklusiboa. Historia-zerrenda gordetzeko "
 "erabiliko da."
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr "Arakatu elkarrizketa-koadroaren izenburua"
 
@@ -963,9 +976,10 @@ msgstr "Modala"
 
 #: ../libgnomeui/gnome-file-entry.c:263
 msgid "Whether the Browse file window should be modal."
-msgstr "'Arakatu fitxategia' leihoak modala izan behar duen ala ez adierazten du."
+msgstr ""
+"'Arakatu fitxategia' leihoak modala izan behar duen ala ez adierazten du."
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "Fitxategi-izena"
 
@@ -1029,7 +1043,7 @@ msgstr "GtkFileChooser ekintza"
 msgid "The type of operation that the file selector is performing."
 msgstr "Eragiketa-mota fitxategi-hautatzailek darabilena"
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "Hautatu fitxategia"
 
@@ -1041,11 +1055,11 @@ msgstr "Bide-izena"
 msgid "Path to file"
 msgstr "Fitxategiaren bide-izena "
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:843
 msgid "_Browse..."
 msgstr "_Arakatu..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "Pop up a file selector to choose a file"
 msgstr "Fitxategi-hautatzailea agertzen da fitxategia aukeratzeko"
 
@@ -1153,39 +1167,39 @@ msgstr ""
 "edo gordetzean. Konfigurazio-ezarpen batzuek baliteke behar bezala ez "
 "funtzionatzea."
 
-#: ../libgnomeui/gnome-href.c:123
+#: ../libgnomeui/gnome-href.c:102
 msgid "URL"
 msgstr "URLa"
 
-#: ../libgnomeui/gnome-href.c:124
+#: ../libgnomeui/gnome-href.c:103
 msgid "The URL that GnomeHRef activates"
 msgstr "GnomeHRef-ek aktibatzen duen URLa"
 
-#: ../libgnomeui/gnome-href.c:131
+#: ../libgnomeui/gnome-href.c:110
 msgid "Text"
 msgstr "Testua"
 
-#: ../libgnomeui/gnome-href.c:132
+#: ../libgnomeui/gnome-href.c:111
 msgid "The text on the button"
 msgstr "Botoiko testua"
 
-#: ../libgnomeui/gnome-href.c:133
+#: ../libgnomeui/gnome-href.c:112
 msgid "End World Hunger"
 msgstr "Bukatu munduko gosearekin"
 
-#: ../libgnomeui/gnome-href.c:139
+#: ../libgnomeui/gnome-href.c:118
 msgid "Link color"
 msgstr "Estekaren kolorea"
 
-#: ../libgnomeui/gnome-href.c:140
+#: ../libgnomeui/gnome-href.c:119
 msgid "Color used to draw the link"
 msgstr "Esteka marrazteko erabilitako kolorea"
 
-#: ../libgnomeui/gnome-href.c:171
+#: ../libgnomeui/gnome-href.c:150
 msgid "This button will take you to the URI that it displays."
 msgstr "Botoi honek bistaratzen duen URIra eramango zaitu."
 
-#: ../libgnomeui/gnome-href.c:394
+#: ../libgnomeui/gnome-href.c:386
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1193,7 +1207,7 @@ msgstr ""
 "Errorea gertatu da web arakatzaile lehenetsia abiatzen saiatzean.\n"
 "Egiaztatu ezarpenak 'Hobetsitako aplikazioak' hobespen-tresnan."
 
-#: ../libgnomeui/gnome-icon-entry.c:180
+#: ../libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1201,27 +1215,27 @@ msgstr ""
 "Ikonoaren identifikatzaile esklusiboa. Historia-zerrenda gordetzeko "
 "erabiliko da."
 
-#: ../libgnomeui/gnome-icon-entry.c:189
+#: ../libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
 msgstr "'Arakatu ikonoa' elkarrizketa-koadroaren izenburua."
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
 msgstr "Pixmap-en direktorioa"
 
-#: ../libgnomeui/gnome-icon-entry.c:197
+#: ../libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
 msgstr "Ikonoak direktorio honetan bilatuko dira."
 
-#: ../libgnomeui/gnome-icon-entry.c:205
+#: ../libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Ikonoan bistaratu behar den fitxategi-izena."
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
 msgstr "'Hautatzailea' elkarrizketa-koadroa"
 
-#: ../libgnomeui/gnome-icon-entry.c:214
+#: ../libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1230,39 +1244,39 @@ msgstr ""
 "GtkDialog eskuratzeko, bere propietateren bat aldatu edo kontsultatu behar "
 "baduzu."
 
-#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
+#: ../libgnomeui/gnome-icon-entry.c:319 ../libgnomeui/gnome-icon-entry.c:1003
 msgid "No Icon"
 msgstr "Ikonorik ez"
 
-#: ../libgnomeui/gnome-icon-entry.c:767
+#: ../libgnomeui/gnome-icon-entry.c:773
 msgid "Icon selection dialog"
 msgstr "Ikonoa hautatzeko elkarrizketa-koadroa"
 
-#: ../libgnomeui/gnome-icon-entry.c:768
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "This dialog box lets you select an icon."
 msgstr "Elkarrizketa-koadro honen bidez ikonoak hauta ditzakezu."
 
-#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
+#: ../libgnomeui/gnome-icon-entry.c:780 ../libgnomeui/gnome-icon-entry.c:1006
 msgid "Icon Selector"
 msgstr "Ikono-hautatzailea"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:781
 msgid "Please pick the icon you want."
 msgstr "Aukeratu nahi duzun ikonoa."
 
-#: ../libgnomeui/gnome-icon-entry.c:1001
+#: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "This button will open a window to let you select an icon."
 msgstr "Botoi honek leiho bat irekiko du eta han ikonoak hauta ditzakezu."
 
-#: ../libgnomeui/gnome-icon-entry.c:1021
+#: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
 msgstr "Arakatu"
 
-#: ../libgnomeui/gnome-icon-entry.c:1024
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Icon path"
 msgstr "Ikonoaren bide-izena"
 
-#: ../libgnomeui/gnome-icon-entry.c:1025
+#: ../libgnomeui/gnome-icon-entry.c:1033
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1302,56 +1316,72 @@ msgstr "Galdera"
 msgid "Message"
 msgstr "Mezua"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_Erabiltzaile-izena:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Domeinua:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Pasahitza:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "Pasahitz _berria:"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "Berretsi _pasahitza:"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "Pasahitzaren kalitatea:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "_Konektatu"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "Konektatu _anonimo gisa"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Konektatu _erabiltzaile gisa:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
-msgid "_Remember password for this session"
-msgstr "_Gogoratu pasahitza saio honetan"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "_Ahaztu pasahitza berehala"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
-msgid "Save password in _keyring"
-msgstr "Gorde pasahitza gako-_sortan"
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "_Gogoratu pasahitza saio amaitu arte"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:114
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "_Gogoratu beti"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:112
 msgid "Do Preview"
 msgstr "Bistaratu aurrebista"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:115
+#: ../libgnomeui/gnome-pixmap-entry.c:113
 msgid "Whether the pixmap entry should have a preview."
 msgstr "pixmap sarrerak aurrebista eduki behar duen ala ez adierazten du."
 
-#: ../libgnomeui/gnome-pixmap-entry.c:189
+#: ../libgnomeui/gnome-pixmap-entry.c:187
 #: ../libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "Ez dago irudirik"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:206
+#: ../libgnomeui/gnome-pixmap-entry.c:204
 msgid "Image Preview"
 msgstr "Irudiaren aurrebista"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:207
+#: ../libgnomeui/gnome-pixmap-entry.c:205
 msgid "A preview of the image currently specified"
 msgstr "Unean adierazitako irudiaren aurrebista"
 
@@ -1363,26 +1393,26 @@ msgstr "Ezin da hbox-a aurkitu, fitxategi-hautapen normala erabiliko da"
 msgid "Preview"
 msgstr "Aurrebista"
 
-#: ../libgnomeui/gnome-scores.c:78
+#: ../libgnomeui/gnome-scores.c:77
 msgid "Top Ten"
 msgstr "Hamar onenak"
 
-#: ../libgnomeui/gnome-scores.c:91
+#: ../libgnomeui/gnome-scores.c:90
 msgid "User"
 msgstr "Erabiltzailea"
 
-#: ../libgnomeui/gnome-scores.c:94
+#: ../libgnomeui/gnome-scores.c:93
 msgid "Score"
 msgstr "Puntuazioa"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: ../libgnomeui/gnome-scores.c:194
+#: ../libgnomeui/gnome-scores.c:193
 msgid "%a %b %d %T %Y"
 msgstr "%a %Y %b %d %T"
 
-#: ../libgnomeui/gnome-scores.c:395
+#: ../libgnomeui/gnome-scores.c:394
 msgid "Sans 14"
 msgstr "Sans 14"
 
@@ -1414,32 +1444,36 @@ msgstr "Koskarik gabe"
 msgid "About"
 msgstr "Honi buruz"
 
-#: ../libgnomeui/gnome-ui-init.c:123 ../libgnomeui/gnome-ui-init.c:132
+#: ../libgnomeui/gnome-ui-init.c:151 ../libgnomeui/gnome-ui-init.c:177
 msgid "Disable Crash Dialog"
 msgstr "Desgaitu kraskatze elkarrizketa-koadroa"
 
-#: ../libgnomeui/gnome-ui-init.c:125
-msgid "X display to use"
-msgstr "Erabili beharreko X bistaratzea"
+#: ../libgnomeui/gnome-ui-init.c:160
+msgid "GNOME GUI Library:"
+msgstr "GNOME GUI liburutegia:"
 
-#: ../libgnomeui/gnome-ui-init.c:125
-msgid "DISPLAY"
-msgstr "BISTARATZEA"
-
-#: ../libgnomeui/gnome-ui-init.c:169 ../libgnomeui/gnome-ui-init.c:182
-msgid "GNOME GUI Library"
-msgstr "GNOME GUI liburutegia"
-
-#: ../libgnomeui/gnome-ui-init.c:170
+#: ../libgnomeui/gnome-ui-init.c:161
 msgid "Show GNOME GUI options"
 msgstr "Erakutsi GNOME interfazearen aukerak"
 
-#: ../libgnomeui/gnome-ui-init.c:247
+#: ../libgnomeui/gnome-ui-init.c:179
+msgid "X display to use"
+msgstr "Erabili beharreko X bistaratzea"
+
+#: ../libgnomeui/gnome-ui-init.c:179
+msgid "DISPLAY"
+msgstr "BISTARATZEA"
+
+#: ../libgnomeui/gnome-ui-init.c:184
+msgid "GNOME GUI Library"
+msgstr "GNOME GUI liburutegia"
+
+#: ../libgnomeui/gnome-ui-init.c:249
 msgid "Could not open link"
 msgstr "Ezin izan da esteka ireki"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:833
+#: ../libgnomeui/gnome-ui-init.c:831
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1447,7 +1481,7 @@ msgstr ""
 "koadroa bistaratu\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:848
+#: ../libgnomeui/gnome-ui-init.c:846
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1456,26 +1490,31 @@ msgstr ""
 "Segmentazio-hutsegitea!\n"
 "Ezin da errorearen elkarrizketa-koadroa bistaratu\n"
 
-#: ../libgnomeui/gnome_segv.c:83
+#: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Erabilera: gnome_segv2 aplikazio-izenaren seinale-zenbakia\n"
 
-#: ../libgnomeui/gnome_segv.c:136
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "%s(r)en arazketa"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>%s aplikazioa kraskatu egin da.</b>\n"
 "\n"
-"Hala ere, <b>bug-buddy</b> (kraskadurei buruz berri emateko GNOMEren \n"
-"tresna) ez dago instalatuta. GNOME hobetzen laguntzea nahiko bazenu, \n"
-"eskertuko genizuke instalatuko bazenu.\n"
+"Instalatu  <b>bug-buddy</b>,  \n"
+"kraskadurei buruz garatzaileei berri emateko GNOMEren \n"
+"tresna.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Irten probatik"
-
