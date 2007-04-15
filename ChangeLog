@@ -1,3 +1,7 @@
+2007-04-15  Christophe Merlet  <redfox@redfoxcenter.org>
+
+	* configure.in: Added "oc" (Occitan) to ALL_LINGUAS.
+
 2006-07-18  Li Yuan      <li.yuan@sun.com>
 
 	* gnome-icon-list.c (real_move_cursor): Merge from HEAD.
