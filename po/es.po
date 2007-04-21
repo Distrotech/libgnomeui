@@ -1,19 +1,18 @@
-# traducción de es.po al Spanish
+# Translation into spanish of libgnomeui.
 # Héctor García Álvarez <hector@scouts-es.org>, 2001.
 # Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002.
 # Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2002,2003.
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2002-2005, 2006.
-# translation of es.po to Spanish
-# Translation into spanish of libgnomeui.
-# Copyright © 2001-2003, 2006 Free Software Foundation, Inc.
+# Jorge González <jorgegonz@svn.gnome.org>, 2007.
 # Francisco Javier Fernández <serrador@arrakis.es> (Revision)
+# Copyright © 2001-2003, 2006, 2007 Free Software Foundation, Inc.
 msgid ""
 msgstr ""
-"Project-Id-Version: es\n"
+"Project-Id-Version: libgnomeui.HEAD.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-11 11:20+0100\n"
-"PO-Revision-Date: 2006-12-11 11:21+0100\n"
-"Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
+"POT-Creation-Date: 2007-01-10 15:02+0000\n"
+"PO-Revision-Date: 2007-04-21 18:57+0200\n"
+"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,35 +37,35 @@ msgstr "Elemento hijo 2"
 msgid "Hint for item 2"
 msgstr "Consejo para el elemento 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s es un enlace a algo que no es una carpeta"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:989
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s es un enlace sin un sitio de destino"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1064
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s no es una carpeta"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1916
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "Servidores de red"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1932
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "Sistema de archivos"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2461
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Se ha producido un error al guardar el marcador (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2898
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "No se ha podido obtener información para «%s»"
@@ -83,8 +82,7 @@ msgstr "Falló al abrir el archivo «%s»:%s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "No se ha podido cargar la imagen «%s»: razón no conocida, probablemente un "
 "archivo de imagen corrupto"
@@ -178,8 +176,7 @@ msgid "Translator credits"
 msgstr "Créditos del traductor"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
+msgid "Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos para los traductores. Esta cadena debería estar marcada como "
 "traducible"
@@ -1044,23 +1041,23 @@ msgstr "Acción de GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "El tipo de operación que el selector está realizando."
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "Seleccionar archivo"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "Ruta"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "Ruta al archivo"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "E_xaminar…"
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "Emerger un selector de archivos para elegir un archivo"
 
@@ -1118,8 +1115,7 @@ msgstr "Usar tipografía en la etiqueta"
 
 #: ../libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr ""
-"Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: ../libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1320,37 +1316,53 @@ msgstr "Pregunta"
 msgid "Message"
 msgstr "Mensaje"
 
-#: ../libgnomeui/gnome-password-dialog.c:196
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_Usuario:"
 
-#: ../libgnomeui/gnome-password-dialog.c:199
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Dominio:"
 
-#: ../libgnomeui/gnome-password-dialog.c:202
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Contraseña:"
 
-#: ../libgnomeui/gnome-password-dialog.c:271
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "Contraseña _nueva:"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "Con_firmar contraseña:"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "Calidad de la contraseña:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "_Conectar"
 
-#: ../libgnomeui/gnome-password-dialog.c:304
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "Conectar _anónimamente"
 
-#: ../libgnomeui/gnome-password-dialog.c:309
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Conectar como _usuario:"
 
-#: ../libgnomeui/gnome-password-dialog.c:352
-msgid "_Remember password for this session"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "_Olvidar la contraseña inmediatamente"
+
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
 msgstr "_Recordar la contraseña para esta sesión"
 
-#: ../libgnomeui/gnome-password-dialog.c:356
-msgid "Save password in _keyring"
-msgstr "Guardar contraseña en el _depósito de claves"
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "_Recordar por siempre"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1432,36 +1444,36 @@ msgstr "Quitar sangrado"
 msgid "About"
 msgstr "Acerca de"
 
-#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
 msgstr "Desactivar el diálogo de cuelgue"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "Pantalla X a usar"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "PANTALLA"
 
-#: ../libgnomeui/gnome-ui-init.c:172
+#: ../libgnomeui/gnome-ui-init.c:173
 msgid "GNOME GUI Library:"
 msgstr "Biblioteca del IGU de GNOME:"
 
-#: ../libgnomeui/gnome-ui-init.c:173
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "Mostrar opciones del IGU de GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:185
+#: ../libgnomeui/gnome-ui-init.c:186
 msgid "GNOME GUI Library"
 msgstr "Biblioteca del IGU de Gnome"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "No se pudo abrir el enlace"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
@@ -1469,7 +1481,7 @@ msgstr ""
 "diálogo de error\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
@@ -1487,7 +1499,7 @@ msgstr "Uso: gnome_segv2 nombre-de-aplicación número-de-señal\n"
 msgid "Debugging %s"
 msgstr "Depurando %s"
 
-#: ../libgnomeui/gnome_segv.c:143
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
@@ -1507,3 +1519,4 @@ msgstr ""
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Salir del test"
+
