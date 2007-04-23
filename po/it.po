@@ -2,14 +2,14 @@
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Christopher R. Gabriel <cgabriel@cgabriel.org>, 2001
 # Alessio Frusciante <algol@firenze.linux.it>, 2003.
-# Francesco Marletta <francesco.marletta@tiscali.it>, 2004-2006.
+# Francesco Marletta <francesco.marletta@tiscali.it>, 2004-2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-03 18:12+0200\n"
-"PO-Revision-Date: 2006-09-03 19:51+0200\n"
+"POT-Creation-Date: 2007-04-23 16:03+0200\n"
+"PO-Revision-Date: 2007-04-03 21:13+0200\n"
 "Last-Translator: Francesco Marletta <francesco.marletta@tiscali.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr "Oggetto figlio 1"
 
 #: ../demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr "Suggerimento per l'oggetto 1"
+msgstr "Consiglio per l'oggetto 1"
 
 #: ../demos/mdi_demo.c:131
 msgid "Child Item 2"
@@ -30,40 +30,40 @@ msgstr "Oggetto figlio 2"
 
 #: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr "Suggerimento per l'oggetto 2"
+msgstr "Consiglio per l'oggetto 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:972
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s è un collegamento a qualcosa che non è una cartella"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:983
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s è un collegamento senza posizione di destinazione"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s non è una cartella"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1909
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
 msgid "Network Servers"
 msgstr "Server di rete"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
 msgid "File System"
 msgstr "File system"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2454
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Salvataggio del segnalibro fallito (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2891
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
 #, c-format
 msgid "Error getting information for '%s'"
-msgstr "Errore nell'ottenere informazioni per '%s'"
+msgstr "Errore nell'ottenere informazioni per \"%s\""
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
@@ -81,11 +81,11 @@ msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Caricamento dell'immagine \"%s\" fallito: motivo sconosciuto, probabilmente "
-"il file che la contiene è corrotto"
+"si tratta di un file di immagine corrotto"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
-msgstr "Ringraziamenti"
+msgstr "Riconoscimenti"
 
 #: ../libgnomeui/gnome-about.c:231
 msgid "Written by"
@@ -101,7 +101,7 @@ msgstr "Tradotto da"
 
 #: ../libgnomeui/gnome-about.c:324
 msgid "C_redits"
-msgstr "_Ringraziamenti"
+msgstr "_Riconoscimenti"
 
 #: ../libgnomeui/gnome-about.c:377
 msgid "Program name"
@@ -169,13 +169,14 @@ msgstr "Campo per un singolo autore della documentazione"
 
 #: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
-msgstr "Ringraziamenti traduzione"
+msgstr "Riconoscimenti traduzione"
 
 #: ../libgnomeui/gnome-about.c:431
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr ""
-"Lista dei traduttori. Questa stringa deve essere marcata come traducibile"
+"Riconoscimenti ai traduttori. Questa stringa deve essere marcata come "
+"traducibile"
 
 #: ../libgnomeui/gnome-about.c:438
 #: ../libgnomeui/gnome-druid-page-standard.c:129
@@ -184,7 +185,7 @@ msgstr "Logo"
 
 #: ../libgnomeui/gnome-about.c:439
 msgid "A logo for the about box"
-msgstr "Un logo per la finestra delle informazioni"
+msgstr "Un logo per il dialogo delle informazioni"
 
 #: ../libgnomeui/gnome-about.c:518
 #, c-format
@@ -523,11 +524,11 @@ msgstr "Ripete la mossa annullata"
 
 #: ../libgnomeui/gnome-app-helper.c:273
 msgid "_Hint"
-msgstr "_Suggerisci"
+msgstr "_Consiglia"
 
 #: ../libgnomeui/gnome-app-helper.c:274
 msgid "Get a hint for your next move"
-msgstr "Mostra un suggerimento per la prossima mossa"
+msgstr "Mostra un consiglio per la prossima mossa"
 
 #. 30
 #: ../libgnomeui/gnome-app-helper.c:279
@@ -552,7 +553,7 @@ msgstr "_Sommario"
 
 #: ../libgnomeui/gnome-app-helper.c:1150
 msgid "View help for this application"
-msgstr "Mosta la documentazione di questa applicazione"
+msgstr "Mostra la documentazione di questa applicazione"
 
 #: ../libgnomeui/gnome-app-helper.c:2587
 msgid "Text Below Icons"
@@ -669,17 +670,18 @@ msgid "Your password will be transmitted encrypted."
 msgstr "La password sarà trasmessa cifrata."
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:307
 msgid "Authentication Required"
 msgstr "Richiesta autenticazione"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr ""
 "È necessario effettuare il login per accedere a \"%s\" nel dominio \"%s\"\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "È necessario effettuare il login per accedere a \"%s\"\n"
@@ -704,15 +706,19 @@ msgstr "PREFISSO"
 msgid "Disable connection to session manager"
 msgstr "Disabilita la connessione al gestore di sessione"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Gestione della sessione"
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Session management:"
+msgstr "Gestione della sessione:"
 
 #: ../libgnomeui/gnome-client.c:1035
 msgid "Show session management options"
 msgstr "Mostra le opzioni di gestione della sessione"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Gestione della sessione"
+
+#: ../libgnomeui/gnome-client.c:2572
 msgid "Cancel Logout"
 msgstr "Annulla uscita"
 
@@ -1036,23 +1042,23 @@ msgstr "Azione GtkFileChooser"
 msgid "The type of operation that the file selector is performing."
 msgstr "Il tipo di operazione che il selettore di file sta eseguendo."
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "Selezionare file"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path"
 msgstr "Percorso"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:817
 msgid "Path to file"
 msgstr "Percorso del file"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "_Browse..."
 msgstr "S_foglia..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:845
 msgid "Pop up a file selector to choose a file"
 msgstr "Apre un selettore di file per scegliere un file"
 
@@ -1238,9 +1244,9 @@ msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"Finestra di dialogo del selettore di icone. Si può usare questa proprietà "
-"per ottenere un GtkDialog nel caso fosse necessario modificare o interrogare "
-"una sua proprietà"
+"Dialogo del selettore di icone. Si può usare questa proprietà per ottenere "
+"un GtkDialog nel caso fosse necessario modificare o interrogare una sua "
+"proprietà"
 
 #: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
@@ -1252,7 +1258,7 @@ msgstr "Dialogo di selezione icona"
 
 #: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
-msgstr "Questa finestra di dialogo consente di selezionare un'icona."
+msgstr "Questo dialogo consente di selezionare un'icona."
 
 #: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
@@ -1315,37 +1321,53 @@ msgstr "Domanda"
 msgid "Message"
 msgstr "Messaggio"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "Nome _utente:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Dominio:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Password:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "_Nuova password:"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "Con_ferma password:"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "Qualità password:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "Co_nnetti"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "Connessione _anonima"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Connetti come _utente:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
-msgid "_Remember password for this session"
-msgstr "_Ricorda la password per questa sessione"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "_Dimentica immediatamente la password"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
-msgid "Save password in _keyring"
-msgstr "Salva la password nel portac_hiavi"
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "_Ricorda la password fino al termine della sessione"
+
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "_Ricorda per sempre"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:114
 msgid "Do Preview"
@@ -1409,11 +1431,11 @@ msgstr "Riempimento tabella"
 
 #: ../libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
-msgstr "Lista puntata"
+msgstr "Elenco puntato"
 
 #: ../libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
-msgstr "Lista numerata"
+msgstr "Elenco numerato"
 
 #: ../libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
@@ -1427,66 +1449,77 @@ msgstr "Riduci rientro"
 msgid "About"
 msgstr "Informazioni"
 
-#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
-msgstr "Disabilita la finestra di dialogo di crash"
+msgstr "Disabilita il dialogo di crash"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
 msgstr "Display X da utilizzare"
 
-#: ../libgnomeui/gnome-ui-init.c:128
+#: ../libgnomeui/gnome-ui-init.c:129
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "Libreria per la GUI di GNOME"
-
 #: ../libgnomeui/gnome-ui-init.c:173
+msgid "GNOME GUI Library:"
+msgstr "Libreria per la GUI di GNOME:"
+
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "Show GNOME GUI options"
 msgstr "Mostra le opzioni della GUI di GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:186
+msgid "GNOME GUI Library"
+msgstr "Libreria per la GUI di GNOME"
+
+#: ../libgnomeui/gnome-ui-init.c:252
 msgid "Could not open link"
 msgstr "Impossibile aprire il collegamento"
 
 #. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
+#: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 msgstr ""
 "Si sono verificati errori di segmentazione multipli; impossibile "
-"visualizzare la finestra di errore\n"
+"visualizzare il dialogo di errore\n"
 
 #. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
+#: ../libgnomeui/gnome-ui-init.c:853
 #, c-format
 msgid ""
 "Segmentation fault!\n"
 "Cannot display crash dialog\n"
 msgstr ""
 "Errore di segmentazione!\n"
-"Impossibile mostrare la finestra di dialogo relativa\n"
+"Impossibile mostrare il dialogo di crash\n"
 
 #: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
 msgstr "Uso: gnome_segv2 NOME_APPL NUM_SEGN\n"
 
-#: ../libgnomeui/gnome_segv.c:134
+#: ../libgnomeui/gnome_segv.c:94
+#, c-format
+msgid "Debugging %s"
+msgstr "Debug di %s"
+
+#: ../libgnomeui/gnome_segv.c:144
 #, c-format
 msgid ""
 "<b>The application %s has crashed.</b>\n"
 "\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
+"Please install <b>bug-buddy</b>, the\n"
+"GNOME crash report tool, which enables you\n"
+"to send the developers detailed information\n"
+"about the error.\n"
 msgstr ""
 "<b>L'applicazione %s è terminata inaspettatamente.</b>\n"
 "\n"
-"Tuttavia non + stato installato <b>bug-buddy</b>, lo\n"
-"strumento di report dei crolli di GNOME. Se volete darci\n"
-"una mano a rendere GNOME migliore, per favore, installatelo\n"
+"Installare <b>bug-buddy</b>, lo strumento di\n"
+"report dei crash di GNOME, che permetterà di\n"
+"inviare informazioni dettagliate sull'errore\n"
+"agli sviluppatori.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
