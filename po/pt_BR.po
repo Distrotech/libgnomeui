@@ -6,14 +6,15 @@
 # Raphael Higino <raphaelh@uai.com.br>, 2004, 2005.
 # Claudio André <claudio.andre@correios.net.br>, 2006.
 # Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>, 2006-2007.
+# Washington Lins <washington-lins@uol.com.br>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-09 03:41-0300\n"
-"PO-Revision-Date: 2007-03-09 03:15-0300\n"
-"Last-Translator: Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>\n"
+"POT-Creation-Date: 2007-05-05 22:19-0300\n"
+"PO-Revision-Date: 2007-05-05 22:23-0300\n"
+"Last-Translator: Washington Lins <washington-lins@uol.com.br>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -404,7 +405,7 @@ msgstr "_Localizar..."
 
 #: ../libgnomeui/gnome-app-helper.c:186
 msgid "Search for a string"
-msgstr "Localiza uma expressão"
+msgstr "Pesquisa uma expressão"
 
 #. Find Again
 #: ../libgnomeui/gnome-app-helper.c:191
@@ -413,7 +414,7 @@ msgstr "Localizar _Novamente"
 
 #: ../libgnomeui/gnome-app-helper.c:192
 msgid "Search again for the same string"
-msgstr "Localiza novamente a mesma expressão"
+msgstr "Pesquisa novamente a mesma expressão"
 
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:197

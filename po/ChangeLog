@@ -1,3 +1,8 @@
+2007-05-05  Leonardo Ferreira Fontenelle  <leonardof@svn.gnome.org>
+
+	* pt_BR.po: Fixed translation of "search" in Brazilian Portuguese
+	translation, by Washington Lins <washington-lins@uol.com.br>.
+
 2007-04-23  Luca Ferretti  <elle.uca@libero.it>
 
 	* it.po: Updated Italian translation by Francesco Marletta.
