@@ -35,6 +35,10 @@
 #include <string.h>
 #include <glib.h>
 #include <stdio.h>
+
+#define GDK_PIXBUF_ENABLE_BACKEND
+#include <gdk-pixbuf/gdk-pixbuf.h>
+
 #include <libgnome/gnome-macros.h>
 #include <libgnome/gnome-init.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
@@ -43,7 +47,6 @@
 #include "gnome-gconf-ui.h"
 #include <gconf/gconf.h>
 #include <gconf/gconf-client.h>
-
 #include <glib/gstdio.h>
 
 #ifdef HAVE_LIBJPEG
@@ -949,6 +952,9 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
   int exit_status;
   char *tmpname;
 
+  g_return_val_if_fail (uri != NULL, NULL);
+  g_return_val_if_fail (mime_type != NULL, NULL);
+
   /* Doesn't access any volatile fields in factory, so it's threadsafe */
   
   size = 128;
@@ -997,10 +1003,13 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
 #endif
 	pixbuf = gnome_gdk_pixbuf_new_from_uri_at_scale (uri, size, size, TRUE);
 
-      original_width = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (pixbuf),
-							   "gnome-original-width"));
-      original_height = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (pixbuf),
-							    "gnome-original-height"));
+      if (pixbuf != NULL)
+        {
+          original_width = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (pixbuf),
+                                                               "gnome-original-width"));
+          original_height = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (pixbuf),
+                                                                "gnome-original-height"));
+        }
     }
       
   if (pixbuf == NULL)
@@ -1021,10 +1030,10 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
       orig_width = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Width");
       orig_height = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Height");
 
-      if (orig_width) {
+      if (orig_width > 0) {
 	      gdk_pixbuf_set_option (scaled, "tEXt::Thumb::Image::Width", orig_width);
       }
-      if (orig_height) {
+      if (orig_height > 0) {
 	      gdk_pixbuf_set_option (scaled, "tEXt::Thumb::Image::Height", orig_height);
       }
       
