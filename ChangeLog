@@ -1,3 +1,9 @@
+2007-05-21  Richard Hult  <richard@imendio.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_list_volumes): Fix cut-and-paste typo,
+	only unref the drive when we have one, bug #439420.
+
 2007-05-16  Christian Persch  <chpe@gnome.org>
 
 	* libgnomeui/gnome-thumbnail.c:

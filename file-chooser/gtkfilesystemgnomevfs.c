@@ -688,15 +688,12 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
       drive = gnome_vfs_volume_get_drive (volume);
 
       if (!drive && gnome_vfs_volume_is_user_visible (volume))
-	{
-	  gnome_vfs_drive_unref (drive);
-	  result = g_slist_prepend (result, volume);
-	}
+        result = g_slist_prepend (result, volume);
       else
-	{
-	  gnome_vfs_drive_unref (drive);
-	  gnome_vfs_volume_unref (volume);
-	}
+        gnome_vfs_volume_unref (volume);
+
+      if (drive)
+        gnome_vfs_drive_unref (drive);
     }
 
   g_list_free (list);
