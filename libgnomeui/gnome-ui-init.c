@@ -875,20 +875,24 @@ static void libgnomeui_segv_handle(int signum)
 		_exit(1);
 	} else /* pid == 0 */ {
                 GnomeProgram *program;
+                const char *app_version;
 		char buf[32];
 
 		g_snprintf(buf, sizeof(buf), "%d", signum);
 
                 program = gnome_program_get();
+                if (program) {
+                  app_version = gnome_program_get_app_version (program);
+                } else {
+                  app_version = "(indeterminate)";
+                }
 
 		/* Child process */
 		execl (LIBGNOMEUI_SERVERDIR "/gnome_segv2", LIBGNOMEUI_SERVERDIR "/gnome_segv",
-		       g_get_prgname (), buf,
-		       gnome_program_get_app_version (program), NULL);
+		       g_get_prgname (), buf, app_version, NULL);
 
                 execlp ("gnome_segv2", "gnome_segv2",
-			g_get_prgname (), buf,
-			gnome_program_get_app_version (program), NULL);
+			g_get_prgname (), buf, app_version, NULL);
 
                 _exit(99);
 	}
