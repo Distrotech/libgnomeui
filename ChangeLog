@@ -1,3 +1,9 @@
+2007-05-22  Christian Persch  <chpe@gnome.org>
+
+	* libgnomeui/gnome-ui-init.c: (libgnomeui_segv_handle): Don't crash in
+	the crash handler when we cannot get the global GnomeProgram. Bug
+	#438832.
+
 2007-05-21  Richard Hult  <richard@imendio.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c:
