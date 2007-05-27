@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-05 22:19-0300\n"
-"PO-Revision-Date: 2007-04-08 09:44-0400\n"
+"POT-Creation-Date: 2007-05-27 02:43-0300\n"
+"PO-Revision-Date: 2007-05-20 16:39+0000\n"
 "Last-Translator: Washington Lins <washington-lins@uol.com.br>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -36,35 +36,35 @@ msgstr "Item Filho 2"
 msgid "Hint for item 2"
 msgstr "Dica para item 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1002
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s é um link para algo que não é uma pasta"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1013
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s é um link sem uma localização de destino"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1088
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s não é uma pasta"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1940
 msgid "Network Servers"
 msgstr "Servidores de Rede"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1956
 msgid "File System"
 msgstr "Sistema de Arquivos"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2485
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Falha ao salvar o marcador (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2922
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Erro ao obter informações sobre \"%s\""
@@ -178,7 +178,8 @@ msgstr ""
 "David Barzilay <barzilay@redhat.com>\n"
 "Raphael Higino <raphaelh@uai.com.br>\n"
 "Claudio André <claudio.andre@correios.net.br>\n"
-"Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>"
+"Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>\n"
+"Washington Lins <washington-lins@uol.com.br>"
 
 #: ../libgnomeui/gnome-about.c:431
 msgid ""
