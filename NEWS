@@ -1,6 +1,26 @@
 libgnomeui 2.19.0
 
+What's new since 2.18.0
+
 * Fix a problem with the build fixes from 2.18.0
+* Correctly set width/height metadata in thumbnails. (Claudio Saavedra, #143470,
+  #356930)
+* Deprecate GnomeHref (Christian Persch, #396452)
+* File descriptor fixes in thumbnailing code (Christian Persch, #413641)
+* Many code fixes and cleanup, p.g. #408660 (Christian Persch)
+* Only unref the drive when we have one, (Richard Hult, #439420)
+* Don't crash in the crash handler when we cannot get the global GnomeProgram
+  (Christian Persch, #438832)
+* Updated translations
+  - pt_BR: Leonardo Ferreira Fontenelle
+  - oc: Christophe Merlet, Kokoyaya
+  - it: Luca Ferretti
+  - ku: Erdal Ronahi
+  - eu: Inaki Larranaga Murgoitio
+  - gl: Ignacio Casal Quinteiro
+  - or: Subhransu Behera
+  - es: Jorge Gonzalez
+  - he: Yair Hershkovitz
 
 libgnomeui 2.18.0
 

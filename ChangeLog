@@ -1,3 +1,9 @@
+============================= 2.19.0 ========================
+
+2007-06-18  Claudio Saavedra  <csaavedra@alumnos.utalca.cl>
+
+	* NEWS: Prepare the 2.19.0 release.
+
 2007-05-22  Christian Persch  <chpe@gnome.org>
 
 	* libgnomeui/gnome-ui-init.c: (libgnomeui_segv_handle): Don't crash in
