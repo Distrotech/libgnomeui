@@ -1,3 +1,8 @@
+2007-06-23  Christian Persch  <chpe@gnome.org>
+
+	* libgnomeui/libgnomeui-2.0.pc.in: Use Requires.private for nonpublic
+	requirements. Bug #396255, patch by J.H.M. Dassen (Ray).
+
 2007-06-18  Claudio Saavedra  <csaavedra@alumnos.utalca.cl>
 
 	* configure.in: Post release version bump.
