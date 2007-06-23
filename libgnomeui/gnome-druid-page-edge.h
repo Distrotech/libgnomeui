@@ -24,6 +24,8 @@
 #ifndef __GNOME_DRUID_PAGE_EDGE_H__
 #define __GNOME_DRUID_PAGE_EDGE_H__
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #include <gtk/gtk.h>
 #include <libgnomecanvas/gnome-canvas.h>
 #include "gnome-druid-page.h"
@@ -155,5 +157,7 @@ void       gnome_druid_page_edge_set_top_watermark (GnomeDruidPageEdge *druid_pa
 						    GdkPixbuf          *top_watermark_image);
 
 G_END_DECLS
+
+#endif /* GNOME_DISABLE_DEPRECATED */
 
 #endif /* __GNOME_DRUID_PAGE_EDGE_H__ */

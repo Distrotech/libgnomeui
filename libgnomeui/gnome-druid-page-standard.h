@@ -24,6 +24,8 @@
 #ifndef __GNOME_DRUID_PAGE_STANDARD_H__
 #define __GNOME_DRUID_PAGE_STANDARD_H__
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #include <gtk/gtk.h>
 #include "gnome-druid-page.h"
 
@@ -81,13 +83,9 @@ struct _GnomeDruidPageStandardClass
 	gpointer padding2;
 };
 
-#ifndef GNOME_DISABLE_DEPRECATED
-
 #define gnome_druid_page_standard_set_bg_color      gnome_druid_page_standard_set_background
 #define gnome_druid_page_standard_set_logo_bg_color gnome_druid_page_standard_set_logo_background
 #define gnome_druid_page_standard_set_title_color   gnome_druid_page_standard_set_title_foreground
-
-#endif
 
 
 GType      gnome_druid_page_standard_get_type                (void) G_GNUC_CONST;
@@ -118,6 +116,8 @@ void       gnome_druid_page_standard_append_item             (GnomeDruidPageStan
 							      const gchar            *additional_info);
 
 G_END_DECLS
+
+#endif /* GNOME_DISABLE_DEPRECATED */
 
 #endif /* __GNOME_DRUID_PAGE_STANDARD_H__ */
 

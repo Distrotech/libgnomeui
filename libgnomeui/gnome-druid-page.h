@@ -23,6 +23,8 @@
 #ifndef __GNOME_DRUID_PAGE_H__
 #define __GNOME_DRUID_PAGE_H__
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #include <gtk/gtk.h>
 
 #include <libgnomecanvas/gnome-canvas.h>
@@ -81,6 +83,8 @@ gboolean   gnome_druid_page_cancel              (GnomeDruidPage *druid_page);
 void       gnome_druid_page_finish              (GnomeDruidPage *druid_page);
 
 G_END_DECLS
+
+#endif /* GNOME_DISABLE_DEPRECATED */
 
 #endif /* __GNOME_DRUID_PAGE_H__ */
 

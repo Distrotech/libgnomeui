@@ -24,6 +24,8 @@
 #ifndef __GNOME_DRUID_H__
 #define __GNOME_DRUID_H__
 
+#ifndef GNOME_DISABLE_DEPRECATED
+
 #include <gtk/gtk.h>
 #include "gnome-druid-page.h"
 
@@ -93,5 +95,7 @@ void       gnome_druid_construct_with_window (GnomeDruid *druid,
 					      GtkWidget **window);
 
 G_END_DECLS
+
+#endif /* GNOME_DISABLE_DEPRECATED */
 
 #endif /* __GNOME_DRUID_H__ */

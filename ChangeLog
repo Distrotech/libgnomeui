@@ -1,3 +1,11 @@
+2007-06-23  Matthew Barnes  <mbarnes@redhat.com>
+
+	* libgnomeui/gnome-druid-page.h:
+	* libgnomeui/gnome-druid-page-edge.h:
+	* libgnomeui/gnome-druid.h:
+	* libgnomeui/gnome-druid-page-standard.h: Deprecate, use
+	GtkAssistant instead.  Bug #429178.
+
 2007-06-23  Christian Persch  <chpe@gnome.org>
 
 	* libgnomeui/libgnomeui-2.0.pc.in: Use Requires.private for nonpublic
