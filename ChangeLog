@@ -1,3 +1,10 @@
+2007-06-26  Kjartan Maraas <kmaraas@gnome.org>
+
+	* libgnomeui/libgnomeui-2.0.pc.in: Add libbonoboui-2.0 to Requires
+	again since it seems we broke the build in at least gnome-panel.
+	Both gnome-app.h and gnome-app-helper.h exposes BonoboDock and
+	BonoboDockItem.
+
 2007-06-23  Matthew Barnes  <mbarnes@redhat.com>
 
 	* libgnomeui/gnome-druid-page.h:
