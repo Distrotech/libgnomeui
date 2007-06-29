@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-10 15:02+0000\n"
-"PO-Revision-Date: 2007-02-25 08:29+0530\n"
+"POT-Creation-Date: 2007-02-25 03:02+0000\n"
+"PO-Revision-Date: 2007-06-29 09:34+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi <punjabi-l10n@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -22,19 +22,19 @@ msgstr ""
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr "ਚਲਾਇਡ ਇਕਾਈ 1"
+msgstr "ਚਲਾਇਡ ਆਈਟਮ 1"
 
 #: ../demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr "ਇਕਾਈ 1 ਲਈ ਸੰਕੇਤ"
+msgstr "ਆਈਟਮ 1 ਲਈ ਸੰਕੇਤ"
 
 #: ../demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr "ਚਲਾਇਡ ਇਕਾਈ 2"
+msgstr "ਚਲਾਇਡ ਆਈਟਮ 2"
 
 #: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr "ਇਕਾਈ 2 ਲਈ ਸੰਕੇਤ"
+msgstr "ਆਈਟਮ 2 ਲਈ ਸੰਕੇਤ"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1005
 #, c-format
@@ -162,11 +162,11 @@ msgstr "ਕਾਰਜ ਦੇ ਦਸਤਾਵੇਜ਼ ਤਿਆਰ ਕਰਨ ਵ�
 
 #: ../libgnomeui/gnome-about.c:421
 msgid "Documenter entry"
-msgstr "ਦਸਤਾਵੇਜ਼ ਇੰਦਰਾਜ਼"
+msgstr "ਦਸਤਾਵੇਜ਼ ਐਂਟਰੀ"
 
 #: ../libgnomeui/gnome-about.c:422
 msgid "A single documenter entry"
-msgstr "ਇੱਕ ਦਸਤਾਵੇਜ਼ੀ ਲਈ ਇੰਦਰਾਜ਼"
+msgstr "ਇੱਕ ਦਸਤਾਵੇਜ਼ੀ ਲਈ ਐਂਟਰੀ"
 
 #: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
@@ -252,7 +252,7 @@ msgstr "ਖੇਡ(_G)"
 #: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr "ਸਹਾਇਤਾ(_H)"
+msgstr "ਮੱਦਦ(_H)"
 
 #: ../libgnomeui/gnome-app-helper.c:97
 msgid "_Windows/"
@@ -550,7 +550,7 @@ msgstr "ਭਾਗ(_C)"
 
 #: ../libgnomeui/gnome-app-helper.c:1150
 msgid "View help for this application"
-msgstr "ਇਸ ਕਾਰਜ ਲਈ ਸਹਾਇਤਾ ਵੇਖੋ"
+msgstr "ਇਸ ਕਾਰਜ ਲਈ ਮੱਦਦ ਵੇਖੋ"
 
 #: ../libgnomeui/gnome-app-helper.c:2587
 msgid "Text Below Icons"
@@ -571,7 +571,7 @@ msgstr "ਸ਼ਬਦ ਹੀ"
 #: ../libgnomeui/gnome-app-helper.c:2651
 #, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "ਮੂਲ ਡਿਸਕਟਾਪ (%s) ਵਰਤੋਂ"
+msgstr "ਮੂਲ ਡੈਸਕਟਾਪ (%s) ਵਰਤੋਂ"
 
 #: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
@@ -583,7 +583,7 @@ msgstr "ਗਲਤੀ: "
 
 #: ../libgnomeui/gnome-app-util.c:177
 msgid "Warning: "
-msgstr "ਚੇਤਵਾਨੀ: "
+msgstr "ਚੇਤਾਵਨੀ: "
 
 #: ../libgnomeui/gnome-app-util.c:315
 msgid "y"
@@ -647,7 +647,7 @@ msgstr "ਉਪਭੋਗੀ ਦੀ ਲੋਡ਼ੀਦੀ ਕਾਰਵਾਈ ਦ�
 
 #: ../libgnomeui/gnome-authentication-manager.c:80
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "ਤੁਹਾਡੀ HTTP ਪਰਾਕਸੀ, ਜੋ ਕਿ ਲਾਗਆਨ ਲਈ ਲੋਡ਼ੀਦਾ ਹੈ।\n"
+msgstr "ਤੁਹਾਡੀ HTTP ਪਰਾਕਸੀ, ਜੋ ਕਿ ਲਾਗਇਨ ਲਈ ਲੋਡ਼ੀਦਾ ਹੈ।\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:81
 #, c-format
@@ -655,7 +655,7 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
-"ਤੁਹਾਨੂੰ \"%s\" ਵਰਤਣ ਲਈ ਲਾਗਆਨ ਕਰਨਾ ਪਵੇਗਾ\n"
+"ਤੁਹਾਨੂੰ \"%s\" ਵਰਤਣ ਲਈ ਲਾਗਇਨ ਕਰਨਾ ਪਵੇਗਾ\n"
 "%s"
 
 #: ../libgnomeui/gnome-authentication-manager.c:84
@@ -675,12 +675,12 @@ msgstr "ਪਰਮਾਣਕਿਤਾ ਲੋੜੀਦੀ"
 #: ../libgnomeui/gnome-authentication-manager.c:299
 #, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "ਤੁਹਾਨੂੰ ਡੋਮੇਨ %2$s %1$s ਵਰਤਣ ਲਈ ਲਾਗਆਨ ਦੀ ਲੋਡ਼ ਹੈ\n"
+msgstr "ਤੁਹਾਨੂੰ ਡੋਮੇਨ %2$s %1$s ਵਰਤਣ ਲਈ ਲਾਗਇਨ ਦੀ ਲੋਡ਼ ਹੈ\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr "ਤੁਹਾਨੂੰ %s ਵਰਤਣ ਲਈ ਲਾਗਆਨ ਦੀ ਲੋਡ਼ ਹੈ\n"
+msgstr "ਤੁਹਾਨੂੰ %s ਵਰਤਣ ਲਈ ਲਾਗਇਨ ਦੀ ਲੋਡ਼ ਹੈ\n"
 
 #: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
 msgid "Specify session management ID"
@@ -724,7 +724,7 @@ msgstr "ਗਲਤ ਰੰਗ ਡੈਟਾ ਮਿਲਿਆ ਹੈ\n"
 
 #: ../libgnomeui/gnome-color-picker.c:465
 msgid "Open a dialog to specify the color"
-msgstr "ਰੰਗ ਦੇਣ ਲਈ ਵਾਰਤਾਲਾਪ ਖੋਲ੍ਹੋ"
+msgstr "ਰੰਗ ਦੇਣ ਲਈ ਡਾਈਲਾਗ ਖੋਲ੍ਹੋ"
 
 #: ../libgnomeui/gnome-color-picker.c:487
 msgid "Pick a color"
@@ -797,9 +797,7 @@ msgstr "ਇੱਕ ਲਿਸਟ 'ਚੋਂ ਸਮਾਂ ਚੁਣੋ"
 
 #: ../libgnomeui/gnome-dateedit.c:1015
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_date_edit_get_date ਬਰਤਰਫ਼ ਕੀਤਾ ਗਿਆ, "
-"gnome_date_edit_get_time ਵਰਤੋਂ"
+msgstr "gnome_date_edit_get_date ਬਰਤਰਫ਼ ਕੀਤਾ ਗਿਆ, gnome_date_edit_get_time ਵਰਤੋਂ"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:121
 #: ../libgnomeui/gnome-font-picker.c:155
@@ -808,7 +806,7 @@ msgstr "ਟਾਇਟਲ"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
-msgstr "ਡਰੂੲਡ ਦਾ ਸਿਰਲੇਖ"
+msgstr "ਡਰੂੲਡ ਦਾ ਟਾਇਟਲ"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
@@ -919,11 +917,11 @@ msgstr "'ਅਗਲੇ' ਬਟਨ ਦੀ ਬਜਾਏ 'ਸਮਾਪਤ' ਬਟਨ
 
 #: ../libgnomeui/gnome-druid.c:162
 msgid "Show Help"
-msgstr "ਸਹਾਇਤਾ ਵੇਖਾਓ"
+msgstr "ਮੱਦਦ ਵੇਖੋ"
 
 #: ../libgnomeui/gnome-druid.c:163
 msgid "Show the 'Help' button"
-msgstr "'ਸਹਾਇਤਾ' ਬਟਨ ਵੇਖਾਓ"
+msgstr "'ਮੱਦਦ' ਬਟਨ ਵੇਖਾਓ"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
 #: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
@@ -932,39 +930,35 @@ msgstr "ਅਤੀਤ ID"
 
 #: ../libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
-msgstr "GTK ਇੰਦਰਾਜ਼"
+msgstr "GTK ਐਂਟਰੀ"
 
 #: ../libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
-msgstr "GTK ਇੰਦਰਾਜ਼"
+msgstr "GTK ਐਂਟਰੀ"
 
 #: ../libgnomeui/gnome-file-entry.c:237
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
-"ਫਾਇਲ ਇੰਦਰਾਜ਼ ਲਈ ਵੱਖਰਾ ਸ਼ੰਨਾਖਤੀ ਹੈ। ਇਹ ਅਤੀਤ ਸੂਚੀ ਵਿੱਚ ਸੰਭਾਲਣ ਲਈ ਵਰਤਿਆ "
-"ਜਾਵੇਗਾ।"
+msgstr "ਫਾਇਲ ਐਂਟਰੀ ਲਈ ਵੱਖਰਾ ਸ਼ੰਨਾਖਤੀ ਹੈ। ਇਹ ਅਤੀਤ ਸੂਚੀ ਵਿੱਚ ਸੰਭਾਲਣ ਲਈ ਵਰਤਿਆ ਜਾਵੇਗਾ।"
 
 #: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
 msgid "Browse Dialog Title"
-msgstr "ਝਲਕ ਵਾਰਤਾਲਾਪ ਨਾਂ"
+msgstr "ਝਲਕ ਡਾਈਲਾਗ ਨਾਂ"
 
 #: ../libgnomeui/gnome-file-entry.c:246
 msgid "Title for the Browse file dialog."
-msgstr "ਫਾਇਲ ਵਾਰਤਾਲਾਪ ਝਲਕਾਰੇ ਲਈ ਨਾਂ"
+msgstr "ਫਾਇਲ ਡਾਈਲਾਗ ਝਲਕਾਰੇ ਲਈ ਨਾਂ"
 
 #: ../libgnomeui/gnome-file-entry.c:253
 msgid "Directory Entry"
-msgstr "ਡਾਇਰੈਕਟਰੀ ਇੰਦਰਾਜ਼"
+msgstr "ਡਾਇਰੈਕਟਰੀ ਐਂਟਰੀ"
 
 #: ../libgnomeui/gnome-file-entry.c:254
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"ਕੀ ਫਾਇਲ ਇੰਦਰਾਜ਼, ਡਾਇਰੈਕਟਰੀ ਨਾਂ ਦੇਣ ਲਈ ਵਰਤਿਆ ਜਾਵੇਗਾ ਜਾਂ ਪੂਰਾ ਫਾਇਲ ਨਾਂ "
-"ਦੇਣ ਲਈ।"
+msgstr "ਕੀ ਫਾਇਲ ਐਂਟਰੀ, ਡਾਇਰੈਕਟਰੀ ਨਾਂ ਦੇਣ ਲਈ ਵਰਤਿਆ ਜਾਵੇਗਾ ਜਾਂ ਪੂਰਾ ਫਾਇਲ ਨਾਂ ਦੇਣ ਲਈ।"
 
 #: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
@@ -980,7 +974,7 @@ msgstr "ਫਾਇਲ ਨਾਂ"
 
 #: ../libgnomeui/gnome-file-entry.c:271
 msgid "Filename that should be displayed in the file entry."
-msgstr "ਫਾਇਲ ਨਾਂ, ਜੋ ਕਿ ਫਾਇਲ ਇੰਦਰਾਜ਼ ਵਿੱਚ ਦਿੱਸੇਗਾ।"
+msgstr "ਫਾਇਲ ਨਾਂ, ਜੋ ਕਿ ਫਾਇਲ ਐਂਟਰੀ ਵਿੱਚ ਦਿੱਸੇਗਾ।"
 
 #: ../libgnomeui/gnome-file-entry.c:279
 msgid "Default Path"
@@ -988,11 +982,11 @@ msgstr "ਮੂਲ ਮਾਰਗ"
 
 #: ../libgnomeui/gnome-file-entry.c:280
 msgid "Default path for the Browse file window."
-msgstr "ਮੂਲ ਮਾਰਗ,ਜੋ ਕਿ ਫਾਇਲ ਝਰੋਖਾ ਝਲਕ ਲਈ ਵਰਤਿਆ ਜਾਵੇ।"
+msgstr "ਮੂਲ ਮਾਰਗ, ਜੋ ਕਿ ਫਾਇਲ ਝਰੋਖਾ ਝਲਕ ਲਈ ਵਰਤਿਆ ਜਾਵੇ।"
 
 #: ../libgnomeui/gnome-file-entry.c:287
 msgid "GnomeEntry"
-msgstr "ਗਨੋਮ ਇੰਦਰਾਜ਼"
+msgstr "ਗਨੋਮ ਐਂਟਰੀ"
 
 #: ../libgnomeui/gnome-file-entry.c:288
 msgid ""
@@ -1000,8 +994,8 @@ msgid ""
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
 msgstr ""
-"ਗਨੋਮ-ਇੰਦਰਾਜ਼, ਜੋ ਕਿ ਫਾਇਲ-ਇੰਦਰਾਜ਼ ਫਾਇਲ-ਨਾਂ ਭਰਨ ਲਈ ਵਰਤਦਾ ਹੈ। ਤੁਸੀ ਇਸ "
-"ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ ਗਨੋਮ-ਇੰਦਰਾਜ਼ ਨੂੰ ਵੇਖਣ ਲਈ ਵਰਤ ਸਕਦੇ ਹੋ, ਜੇਕਰ ਤੁਸੀ ਕੋਈ ਪੈਰਾਮੀਟਰ ਨੂੰ ਸੁਧਾਰਨਾ ਚਾਹੁੰਦੇ ਹੋ।"
+"ਗਨੋਮ-ਐਂਟਰੀ, ਜੋ ਕਿ ਫਾਇਲ-ਐਂਟਰੀ ਫਾਇਲ-ਨਾਂ ਭਰਨ ਲਈ ਵਰਤਦਾ ਹੈ। ਤੁਸੀ ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ ਗਨੋਮ-ਐਂਟਰੀ "
+"ਨੂੰ ਵੇਖਣ ਲਈ ਵਰਤ ਸਕਦੇ ਹੋ, ਜੇਕਰ ਤੁਸੀ ਕੋਈ ਪੈਰਾਮੀਟਰ ਨੂੰ ਸੁਧਾਰਨਾ ਚਾਹੁੰਦੇ ਹੋ।"
 
 #: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
@@ -1013,8 +1007,8 @@ msgid ""
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
 msgstr ""
-"GtkEntry ਜੋ ਕਿ ਫਾਇਲ-ਇੰਦਰਾਜ਼ ਫਾਇਲ-ਨਾਂ ਭਰਨ ਲਈ ਵਰਤਦਾ ਹੈ। ਤੁਸੀ ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ GtkEntry "
-"ਨੂੰ ਵੇਖਣ ਲਈ ਵਰਤ ਸਕਦੇ ਹੋ, ਜੇਕਰ ਤੁਸੀ ਕੋਈ ਪੈਰਾਮੀਟਰ ਨੂੰ ਸੁਧਾਰਨਾ ਚਾਹੁੰਦੇ ਹੋ।"
+"GtkEntry ਜੋ ਕਿ ਫਾਇਲ-ਐਂਟਰੀ ਫਾਇਲ-ਨਾਂ ਭਰਨ ਲਈ ਵਰਤਦਾ ਹੈ। ਤੁਸੀ ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ GtkEntry ਨੂੰ "
+"ਵੇਖਣ ਲਈ ਵਰਤ ਸਕਦੇ ਹੋ, ਜੇਕਰ ਤੁਸੀ ਕੋਈ ਪੈਰਾਮੀਟਰ ਨੂੰ ਸੁਧਾਰਨਾ ਚਾਹੁੰਦੇ ਹੋ।"
 
 #: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
@@ -1025,8 +1019,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"ਕੀ ਚੁਣੀਆਂ ਫਾਇਲਾਂ ਲਈ ਨਵਾਂ GtkFileChooser ਵਿਦਗਿਟ ਜਾਂ GtkFileSelection "
-"ਵਿਦਗਿਟ ਵਰਤਣਾ ਹੈ।"
+"ਕੀ ਚੁਣੀਆਂ ਫਾਇਲਾਂ ਲਈ ਨਵਾਂ GtkFileChooser ਵਿਦਗਿਟ ਜਾਂ GtkFileSelection ਵਿਦਗਿਟ ਵਰਤਣਾ "
+"ਹੈ।"
 
 #: ../libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
@@ -1070,7 +1064,7 @@ msgstr "ਫੋਂਟ ਚੁਣੋ"
 
 #: ../libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr "ਚੋਣਕਾਰ ਵਾਰਤਾਲਾਪ ਡੱਬੇ ਦਾ ਸਿਰਲੇਖ"
+msgstr "ਚੋਣਕਾਰ ਡਾਈਲਾਗ ਬਾਕਸ ਦਾ ਟਾਇਟਲ"
 
 #: ../libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
@@ -1102,7 +1096,7 @@ msgstr "ਪਾਠ ਝਲਕ"
 
 #: ../libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
-msgstr "ਵਾਰਤਾਲਾਪ ਵਿੱਚ ਸ਼ਬਦਾਂ ਦੀ ਝਲਕ"
+msgstr "ਡਾਈਲਾਗ ਵਿੱਚ ਸ਼ਬਦਾਂ ਦੀ ਝਲਕ"
 
 #: ../libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
@@ -1145,8 +1139,8 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "ਕਾਰਜ \"%s\" ਨੇ ਤੁਹਾਡੀ ਉਸ ਸੰਰਚਨਾ ਨੂੰ ਤਬਦੀਲ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ ਕੀਤੀ ਹੈ, ਜਿਸ ਨੂੰ ਤੁਹਾਡਾ ਸਿਸਟਮ "
-"ਪਰਸ਼ਾਸ਼ਕ ਜਾਂ ਓਪਰੇਟੀਇੰਗ ਸਿਸਟਮ ਦਾ ਵਿਕਰੇਤਾ ਤਬਦੀਲ ਕਰਨ ਦੀ ਇਜ਼ਾਜਤ ਨਹੀ ਦਿੰਦਾ ਹੈ। ਕੁਝ ਸੈਟਿੰਗ, "
-"ਜੋ ਤੁਸੀਂ ਕੀਤੇ ਹਨ, ਉਹ ਪ੍ਰਭਾਵੀ ਨਹੀ ਹੋਣਗੇ ਜਾਂ ਅਗਲੀ ਵਾਰ ਕਾਰਜ ਚਲਾਉਣ 'ਤੇ ਲੋਡ ਨਹੀਂ ਹੋਣਗੇ।"
+"ਪਰਸ਼ਾਸ਼ਕ ਜਾਂ ਓਪਰੇਟੀਇੰਗ ਸਿਸਟਮ ਦਾ ਵਿਕਰੇਤਾ ਤਬਦੀਲ ਕਰਨ ਦੀ ਇਜ਼ਾਜਤ ਨਹੀਂ ਦਿੰਦਾ ਹੈ। ਕੁਝ ਸੈਟਿੰਗ, ਜੋ "
+"ਤੁਸੀਂ ਕੀਤੇ ਹਨ, ਉਹ ਪ੍ਰਭਾਵੀ ਨਹੀਂ ਹੋਣਗੇ ਜਾਂ ਅਗਲੀ ਵਾਰ ਕਾਰਜ ਚਲਾਉਣ 'ਤੇ ਲੋਡ ਨਹੀਂ ਹੋਣਗੇ।"
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
@@ -1154,8 +1148,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"%s ਲਈ ਸੰਰਚਨਾ ਜਾਣਕਾਰੀ ਲੋਡ ਕਰਨ ਜਾਂ ਸੰਭਾਲਣ ਵਿੱਚ ਗਲਤੀ ਹੈ। ਕੁਝ ਸੰਰਚਨਾ "
-"ਸਥਾਪਨ ਠੀਕ ਕੰਮ ਨਹੀਂ ਕਰੇਗੀ।"
+"%s ਲਈ ਸੰਰਚਨਾ ਜਾਣਕਾਰੀ ਲੋਡ ਕਰਨ ਜਾਂ ਸੰਭਾਲਣ ਵਿੱਚ ਗਲਤੀ ਹੈ। ਕੁਝ ਸੰਰਚਨਾ ਸਥਾਪਨ ਠੀਕ ਕੰਮ ਨਹੀਂ "
+"ਕਰੇਗੀ।"
 
 #: ../libgnomeui/gnome-href.c:123
 msgid "URL"
@@ -1201,13 +1195,11 @@ msgstr ""
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
-"ਆਈਕਾਨ ਇੰਦਰਾਜ਼ ਲਈ ਵੱਖਰਾ ਸ਼ੰਨਖਾਤੀ। ਇਹ ਅਤੀਤ ਸੂਚੀ ਵਿੱਚ ਸੰਭਾਲਣ ਲਈ "
-"ਵਰਤਿਆ ਜਾਵੇਗਾ।"
+msgstr "ਆਈਕਾਨ ਐਂਟਰੀ ਲਈ ਵੱਖਰਾ ਸ਼ੰਨਖਾਤੀ। ਇਹ ਅਤੀਤ ਸੂਚੀ ਵਿੱਚ ਸੰਭਾਲਣ ਲਈ ਵਰਤਿਆ ਜਾਵੇਗਾ।"
 
 #: ../libgnomeui/gnome-icon-entry.c:188
 msgid "Title for the Browse icon dialog."
-msgstr "ਆਈਕਾਨ ਵਾਰਤਾਲਾਪ ਝਲਕ ਦਾ ਸਿਰਲੇਖ"
+msgstr "ਆਈਕਾਨ ਡਾਈਲਾਗ ਝਲਕ ਦਾ ਸਿਰਲੇਖ"
 
 #: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Pixmap Directory"
@@ -1219,19 +1211,19 @@ msgstr "ਡਾਇਰੈਕਟਰੀ, ਜੋ ਕਿ ਆਈਕਾਨ ਖੋਜ ਲ
 
 #: ../libgnomeui/gnome-icon-entry.c:204
 msgid "Filename that should be displayed in the icon entry."
-msgstr "ਫਾਇਲ ਨਾਂ, ਜੋ ਕਿ ਆਈਕਾਨ ਇੰਦਰਾਜ਼ ਵਿੱਚ ਦਿੱਸੇਗਾ।"
+msgstr "ਫਾਇਲ ਨਾਂ, ਜੋ ਕਿ ਆਈਕਾਨ ਐਂਟਰੀ ਵਿੱਚ ਦਿੱਸੇਗਾ।"
 
 #: ../libgnomeui/gnome-icon-entry.c:212
 msgid "Picker dialog"
-msgstr "ਚੋਣ ਵਾਰਤਾਲਾਪ"
+msgstr "ਚੋਣ ਡਾਈਲਾਗ"
 
 #: ../libgnomeui/gnome-icon-entry.c:213
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
 msgstr ""
-"ਆਈਕਾਨ ਚੋਣਕਾਰ ਵਾਰਤਾਲਾਪ ਹੈ। ਇਹ ਵਿਸ਼ੇਸਤਾ ਨਾਲ ਤੁਸੀ GtkDialog ਖੋਲ੍ਹ "
-"ਸਕਦੇ ਹੋ, ਜੇਕਰ ਤੁਹਾਨੂੰ ਇਸ ਦੀ ਕੋਈ ਵਿਸ਼ੇਸਤਾ ਤਬਦੀਲ ਕਰਨ ਦੀ ਲੋਡ਼ ਹੈ।"
+"ਆਈਕਾਨ ਚੋਣਕਾਰ ਡਾਈਲਾਗ ਹੈ। ਇਹ ਵਿਸ਼ੇਸਤਾ ਨਾਲ ਤੁਸੀ GtkDialog ਖੋਲ੍ਹ ਸਕਦੇ ਹੋ, ਜੇਕਰ ਤੁਹਾਨੂੰ ਇਸ "
+"ਦੀ ਕੋਈ ਵਿਸ਼ੇਸਤਾ ਤਬਦੀਲ ਕਰਨ ਦੀ ਲੋਡ਼ ਹੈ।"
 
 #: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
 msgid "No Icon"
@@ -1239,11 +1231,11 @@ msgstr "ਆਈਕਾਨ ਨਹੀਂ"
 
 #: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Icon selection dialog"
-msgstr "ਆਈਕਾਨ ਚੋਣਕਾਰ ਵਾਰਤਾਲਾਪ"
+msgstr "ਆਈਕਾਨ ਚੋਣਕਾਰ ਡਾਈਲਾਗ"
 
 #: ../libgnomeui/gnome-icon-entry.c:775
 msgid "This dialog box lets you select an icon."
-msgstr "ਇਹ ਵਾਰਤਾਲਾਪ ਤੁਹਾਨੂੰ ਆਈਕਾਨ ਚੁਣ ਦਾ ਮੌਕਾ ਦੇ ਰਿਹਾ ਹੈ।"
+msgstr "ਇਹ ਡਾਈਲਾਗ ਤੁਹਾਨੂੰ ਆਈਕਾਨ ਚੁਣ ਦਾ ਮੌਕਾ ਦੇ ਰਿਹਾ ਹੈ।"
 
 #: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
 msgid "Icon Selector"
@@ -1359,7 +1351,7 @@ msgstr "ਝਲਕ ਵੇਖਾਓ"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:115
 msgid "Whether the pixmap entry should have a preview."
-msgstr "ਕੀ ਪੈਕਸਮੈਪ ਦੇ ਇੰਦਰਾਜ਼ ਦੀ ਝਲਕ ਉਪਲੱਬਧ ਹੋਵੇ।"
+msgstr "ਕੀ ਪੈਕਸਮੈਪ ਦੇ ਐਂਟਰੀ ਦੀ ਝਲਕ ਉਪਲੱਬਧ ਹੋਵੇ।"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:189
 #: ../libgnomeui/gnome-pixmap-entry.c:481
@@ -1407,11 +1399,11 @@ msgstr "Sans 14"
 
 #: ../libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
-msgstr "ਸਾਰਣੀ ਹਾਸ਼ੀਆ"
+msgstr "ਟੇਬਲ ਹਾਸ਼ੀਆ"
 
 #: ../libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
-msgstr "ਸਾਰਣੀ ਭਰੋ"
+msgstr "ਟੇਬਲ ਭਰੋ"
 
 #: ../libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
@@ -1435,7 +1427,7 @@ msgstr "ਇਸ ਬਾਰੇ"
 
 #: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
 msgid "Disable Crash Dialog"
-msgstr "ਨਸ਼ਟ ਵਾਰਤਾਲਾਪ ਆਯੋਗ"
+msgstr "ਨਸ਼ਟ ਡਾਈਲਾਗ ਆਯੋਗ"
 
 #: ../libgnomeui/gnome-ui-init.c:129
 msgid "X display to use"
@@ -1465,7 +1457,7 @@ msgstr "ਲਿੰਕ ਖੋਲ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ"
 #: ../libgnomeui/gnome-ui-init.c:838
 #, c-format
 msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "ਬਹੁ ਸਿਗਮਿਨਟੇਸ਼ਨ ਤਰੁੱਟੀ ਆਈ ਹੈ; ਗਲਤੀ ਵਾਰਤਾਲਾਪ ਨਹੀ ਵੇਖਾ ਸਕਦਾ ਹੈ\n"
+msgstr "ਬਹੁ ਸਿਗਮਿਨਟੇਸ਼ਨ ਤਰੁੱਟੀ ਆਈ ਹੈ; ਗਲਤੀ ਡਾਈਲਾਗ ਨਹੀਂ ਵੇਖਾ ਸਕਦਾ ਹੈ\n"
 
 #. Eeeek! Can't show dialog
 #: ../libgnomeui/gnome-ui-init.c:853
@@ -1475,7 +1467,7 @@ msgid ""
 "Cannot display crash dialog\n"
 msgstr ""
 "ਸਿਗਮਿਨਟੇਸ਼ਨ ਤਰੁੱਟੀਪੂਰਨ ਹੈ!\n"
-"ਨਸ਼ਟ ਵਾਰਤਾਲਾਪ ਨਹੀ ਵੇਖਿਆ ਜਾ ਸਕਦਾ ਹੈ\n"
+"ਨਸ਼ਟ ਡਾਈਲਾਗ ਨਹੀਂ ਵੇਖਿਆ ਜਾ ਸਕਦਾ ਹੈ\n"
 
 #: ../libgnomeui/gnome_segv.c:82
 msgid "Usage: gnome_segv2 appname signum\n"
