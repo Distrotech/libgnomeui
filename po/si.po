@@ -49,12 +49,12 @@ msgid "%s is not a folder"
 msgstr ""
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1940
-#, fuzzy
+ 
 msgid "Network Servers"
 msgstr "ජාල සේවාදායක"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1956
-#, fuzzy
+ 
 msgid "File System"
 msgstr "ගොනු පද්ධතිය"
 
@@ -70,49 +70,49 @@ msgstr ""
 
 #: ../file-chooser/testfilechooser.c:178
 #, c-format
-#, fuzzy
+ 
 msgid "Could not get information for file '%s': %s"
 msgstr "'%s' ගොනුව සඳහා තොරතුරු ලබා ගැනීමට හොහැකි විය: %s"
 
 #: ../file-chooser/testfilechooser.c:191
 #, c-format
-#, fuzzy
+ 
 msgid "Failed to open file '%s': %s"
 msgstr "'%s' ගොනුව විවෘත කිරීම අපහසුවිය: %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-#, fuzzy
+ 
 msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr "'%s'පිළිඹිබුව පූරණය දෝෂසහිතයි: හේතුව නොදන්නා අතර සමහරවිට දූෂිත පිළිඹිබු ගොනුවක් විය හැක"
 
 #: ../libgnomeui/gnome-about.c:199
-#, fuzzy
+ 
 msgid "Credits"
 msgstr "ස්තුතිය"
 
 #: ../libgnomeui/gnome-about.c:231
-#, fuzzy
+ 
 msgid "Written by"
 msgstr "රචනා කළේ"
 
 #: ../libgnomeui/gnome-about.c:246
-#, fuzzy
+ 
 msgid "Documented by"
 msgstr "ලේඛනාරූඩ කළේ"
 
 #: ../libgnomeui/gnome-about.c:261
-#, fuzzy
+ 
 msgid "Translated by"
 msgstr "පරිවර්තනය කළේ"
 
 #: ../libgnomeui/gnome-about.c:324
-#, fuzzy
+ 
 msgid "C_redits"
 msgstr "ස්තුතිය (_r)"
 
 #: ../libgnomeui/gnome-about.c:377
-#, fuzzy
+ 
 msgid "Program name"
 msgstr "වැඩ සටහන් නම"
 
@@ -121,12 +121,12 @@ msgid "The name of the program"
 msgstr ""
 
 #: ../libgnomeui/gnome-about.c:385
-#, fuzzy
+ 
 msgid "Program version"
 msgstr "වැඩ සටහන් වෙළුම"
 
 #: ../libgnomeui/gnome-about.c:386
-#, fuzzy
+ 
 msgid "The version of the program"
 msgstr "වැඩ සටහනේ වෙළුම"
 
@@ -143,12 +143,12 @@ msgid "Comments string"
 msgstr ""
 
 #: ../libgnomeui/gnome-about.c:401
-#, fuzzy
+ 
 msgid "Comments about the program"
 msgstr "වැඩසටහන පිළිබද අදහස්"
 
 #: ../libgnomeui/gnome-about.c:407
-#, fuzzy
+ 
 msgid "Authors"
 msgstr "නිර්මාණකරුවන්"
 
@@ -165,12 +165,12 @@ msgid "A single author entry"
 msgstr ""
 
 #: ../libgnomeui/gnome-about.c:418
-#, fuzzy
+ 
 msgid "Documenters"
 msgstr "ලේඛණ"
 
 #: ../libgnomeui/gnome-about.c:419
-#, fuzzy
+ 
 msgid "List of people documenting the program"
 msgstr "වැඩසටහන ලේඛණණාරුඩ කළ පිරිස"
 
@@ -183,7 +183,7 @@ msgid "A single documenter entry"
 msgstr ""
 
 #: ../libgnomeui/gnome-about.c:430
-#, fuzzy
+ 
 msgid "Translator credits"
 msgstr "පරිවර්තන ස්තුතිය"
 
@@ -193,7 +193,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-about.c:438
 #: ../libgnomeui/gnome-druid-page-standard.c:129
-#, fuzzy
+ 
 msgid "Logo"
 msgstr "ලාංජනය"
 
@@ -203,14 +203,14 @@ msgstr ""
 
 #: ../libgnomeui/gnome-about.c:518
 #, c-format
-#, fuzzy
+ 
 msgid "About %s"
 msgstr "%s සම්බන්ධව"
 
 #. Some standard menus
 #: ../libgnomeui/gnome-app-helper.c:81 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
-#, fuzzy
+ 
 msgid "_File"
 msgstr "ගොනු (_F)"
 
@@ -219,7 +219,7 @@ msgid "_File/"
 msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:554
-#, fuzzy
+ 
 msgid "_Edit"
 msgstr "සැකසුම් (_E)"
 
@@ -228,7 +228,7 @@ msgid "_Edit/"
 msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:557
-#, fuzzy
+ 
 msgid "_View"
 msgstr "දසුන (_V)"
 
@@ -237,7 +237,7 @@ msgid "_View/"
 msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:560
-#, fuzzy
+ 
 msgid "_Settings"
 msgstr "සැකසුම් (_S)"
 
@@ -247,7 +247,7 @@ msgstr ""
 
 #. If you have more then one New type, use this tree
 #: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:326
-#, fuzzy
+ 
 msgid "_New"
 msgstr "නව (_N)"
 
@@ -273,7 +273,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
-#, fuzzy
+ 
 msgid "_Help"
 msgstr "උදව් (_H)"
 
@@ -283,40 +283,40 @@ msgstr ""
 
 #. Open
 #: ../libgnomeui/gnome-app-helper.c:108
-#, fuzzy
+ 
 msgid "_Open..."
 msgstr "විවෘත කරන්න... (_O)"
 
 #: ../libgnomeui/gnome-app-helper.c:108
-#, fuzzy
+ 
 msgid "Open a file"
 msgstr "ගොනුව විවෘත කරන්න"
 
 #. Save
 #: ../libgnomeui/gnome-app-helper.c:113
-#, fuzzy
+ 
 msgid "_Save"
 msgstr "සුරකින්න (_S)"
 
 #: ../libgnomeui/gnome-app-helper.c:113
-#, fuzzy
+ 
 msgid "Save the current file"
 msgstr "දැනට භාවිතාවන ගොනුව සුරකින්න"
 
 #. Save As
 #: ../libgnomeui/gnome-app-helper.c:118
-#, fuzzy
+ 
 msgid "Save _As..."
 msgstr "සුරකින අයුර... (_A)"
 
 #: ../libgnomeui/gnome-app-helper.c:119
-#, fuzzy
+ 
 msgid "Save the current file with a different name"
 msgstr "දැනට භාවිතාවන ගොනුව වෙනස් නමකින් සුරකින්න"
 
 #. Revert
 #: ../libgnomeui/gnome-app-helper.c:124
-#, fuzzy
+ 
 msgid "_Revert"
 msgstr "පෙර තත්වයට පත් කිරීම (_R)"
 
@@ -326,7 +326,7 @@ msgstr ""
 
 #. Print
 #: ../libgnomeui/gnome-app-helper.c:130
-#, fuzzy
+ 
 msgid "_Print..."
 msgstr "මුද්‍රණය... (_P)"
 
@@ -345,18 +345,18 @@ msgstr ""
 
 #. Close
 #: ../libgnomeui/gnome-app-helper.c:141
-#, fuzzy
+ 
 msgid "_Close"
 msgstr "වසන්න (_C)"
 
 #: ../libgnomeui/gnome-app-helper.c:141
-#, fuzzy
+ 
 msgid "Close the current file"
 msgstr "දැනට භාවිතාවන ගොනුව වසන්න"
 
 #. Exit
 #: ../libgnomeui/gnome-app-helper.c:146
-#, fuzzy
+ 
 msgid "_Quit"
 msgstr "ඉවත් වන්න (_Q)"
 
@@ -369,30 +369,30 @@ msgstr ""
 #.
 #. Cut
 #: ../libgnomeui/gnome-app-helper.c:154
-#, fuzzy
+ 
 msgid "Cu_t"
 msgstr "කපන්න (_t)"
 
 #: ../libgnomeui/gnome-app-helper.c:154
-#, fuzzy
+ 
 msgid "Cut the selection"
 msgstr "තෝරාගත් කොටස කපන්න"
 
 #. 10
 #. Copy
 #: ../libgnomeui/gnome-app-helper.c:160
-#, fuzzy
+ 
 msgid "_Copy"
 msgstr "පිටපත් කරන්න (_C)"
 
 #: ../libgnomeui/gnome-app-helper.c:160
-#, fuzzy
+ 
 msgid "Copy the selection"
 msgstr "තෝරාගත් කොටස අලවන්න"
 
 #. Paste
 #: ../libgnomeui/gnome-app-helper.c:165
-#, fuzzy
+ 
 msgid "_Paste"
 msgstr "අලවන්න (_P)"
 
@@ -411,29 +411,29 @@ msgstr ""
 
 #. Undo
 #: ../libgnomeui/gnome-app-helper.c:175
-#, fuzzy
+ 
 msgid "_Undo"
 msgstr "අහෝසි (_U)"
 
 #: ../libgnomeui/gnome-app-helper.c:175
-#, fuzzy
+ 
 msgid "Undo the last action"
 msgstr "අවසාන ක්‍රියාව අහොසි කරන්න"
 
 #. Redo
 #: ../libgnomeui/gnome-app-helper.c:180
-#, fuzzy
+ 
 msgid "_Redo"
 msgstr "යළි කරන්න (_R)"
 
 #: ../libgnomeui/gnome-app-helper.c:180
-#, fuzzy
+ 
 msgid "Redo the undone action"
 msgstr "අහොසි කළ කොටස යළි කරන්න"
 
 #. Find
 #: ../libgnomeui/gnome-app-helper.c:185
-#, fuzzy
+ 
 msgid "_Find..."
 msgstr "සොයන්න... (_F)"
 
@@ -443,7 +443,7 @@ msgstr ""
 
 #. Find Again
 #: ../libgnomeui/gnome-app-helper.c:190
-#, fuzzy
+ 
 msgid "Find Ne_xt"
 msgstr "මීළඟ සෙවුම (_x)"
 
@@ -462,7 +462,7 @@ msgstr ""
 
 #. Properties
 #: ../libgnomeui/gnome-app-helper.c:201
-#, fuzzy
+ 
 msgid "_Properties"
 msgstr "වත්කම් (_P)"
 
@@ -475,12 +475,12 @@ msgstr ""
 #.
 #. Settings
 #: ../libgnomeui/gnome-app-helper.c:210
-#, fuzzy
+ 
 msgid "Prefere_nces"
 msgstr "අභිප්‍රේත (_n)"
 
 #: ../libgnomeui/gnome-app-helper.c:211
-#, fuzzy
+ 
 msgid "Configure the application"
 msgstr "යෙදුම මානකරණය කරන්න"
 
@@ -490,17 +490,17 @@ msgstr "යෙදුම මානකරණය කරන්න"
 #.
 #. About
 #: ../libgnomeui/gnome-app-helper.c:220 ../test-gnome/testgnome.xml.h:4
-#, fuzzy
+ 
 msgid "_About"
 msgstr "සම්බන්ධව (_A)"
 
 #: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:1
-#, fuzzy
+ 
 msgid "About this application"
 msgstr "මෙම යෙදුම සම්බන්ධව"
 
 #: ../libgnomeui/gnome-app-helper.c:224
-#, fuzzy
+ 
 msgid "Select _All"
 msgstr "සියල්ල තෝරන්න (_A)"
 
@@ -596,7 +596,7 @@ msgid "End the current game"
 msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:1146
-#, fuzzy
+ 
 msgid "_Contents"
 msgstr "අන්තර්ගත (_C)"
 
@@ -650,7 +650,7 @@ msgid "n"
 msgstr ""
 
 #: ../libgnomeui/gnome-app-util.c:320
-#, fuzzy
+ 
 msgid "no"
 msgstr "නැත"
 
@@ -770,7 +770,7 @@ msgid "Cancel Logout"
 msgstr ""
 
 #: ../libgnomeui/gnome-color-picker.c:412
-#, fuzzy
+ 
 msgid "Received invalid color data\n"
 msgstr "සාවද්‍ය වර්‍ණ දත්ත ලැබුනි\n"
 
@@ -779,12 +779,12 @@ msgid "Open a dialog to specify the color"
 msgstr ""
 
 #: ../libgnomeui/gnome-color-picker.c:488
-#, fuzzy
+ 
 msgid "Pick a color"
 msgstr "වර්‍ණයක් තොරාගන්න"
 
 #: ../libgnomeui/gnome-dateedit.c:493 ../libgnomeui/gnome-dateedit.c:790
-#, fuzzy
+ 
 msgid "Time"
 msgstr "වේලාව"
 
@@ -825,7 +825,7 @@ msgid "The initial time"
 msgstr ""
 
 #: ../libgnomeui/gnome-dateedit.c:753 ../libgnomeui/gnome-scores.c:96
-#, fuzzy
+ 
 msgid "Date"
 msgstr "දිනය"
 
@@ -856,7 +856,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:121
 #: ../libgnomeui/gnome-font-picker.c:155
-#, fuzzy
+ 
 msgid "Title"
 msgstr "සිරස්තලය"
 
@@ -902,17 +902,17 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:169
 #: ../libgnomeui/gnome-druid-page-standard.c:177
-#, fuzzy
+ 
 msgid "Background Color"
 msgstr "පසුබිම් වර්‍ණය"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:170
-#, fuzzy
+ 
 msgid "Background color"
 msgstr "පසුබිම් වර්‍ණය"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:178
-#, fuzzy
+ 
 msgid "Background color as a GdkColor"
 msgstr "පසුබිම් වර්‍ණය GdkColor ලෙස"
 
@@ -1096,7 +1096,7 @@ msgid "Path to file"
 msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:843
-#, fuzzy
+ 
 msgid "_Browse..."
 msgstr "ගවේෂණය... (_B)"
 
@@ -1113,7 +1113,7 @@ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:68
-#, fuzzy
+ 
 msgid "Pick a Font"
 msgstr "අක්‍ෂර රටාවක් තෝරන්න"
 
@@ -1138,7 +1138,7 @@ msgid "Name of the selected font"
 msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
-#, fuzzy
+ 
 msgid "Font"
 msgstr "අක්‍ෂර"
 
@@ -1183,7 +1183,7 @@ msgid "GNOME GConf UI Support"
 msgstr ""
 
 #: ../libgnomeui/gnome-gconf-ui.c:96
-#, fuzzy
+ 
 msgid "_Details"
 msgstr "විස්තර (_D)"
 
@@ -1204,7 +1204,7 @@ msgid ""
 msgstr ""
 
 #: ../libgnomeui/gnome-href.c:102
-#, fuzzy
+ 
 msgid "URL"
 msgstr "URL"
 
@@ -1213,7 +1213,7 @@ msgid "The URL that GnomeHRef activates"
 msgstr ""
 
 #: ../libgnomeui/gnome-href.c:110
-#, fuzzy
+ 
 msgid "Text"
 msgstr "පෙළ"
 
@@ -1300,7 +1300,7 @@ msgid "This button will open a window to let you select an icon."
 msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:1029
-#, fuzzy
+ 
 msgid "Browse"
 msgstr "ගවේෂණය"
 
@@ -1329,32 +1329,32 @@ msgid "Loading Icons..."
 msgstr ""
 
 #: ../libgnomeui/gnome-messagebox.c:107
-#, fuzzy
+ 
 msgid "Information"
 msgstr "තොරතුරු"
 
 #: ../libgnomeui/gnome-messagebox.c:112
-#, fuzzy
+ 
 msgid "Warning"
 msgstr "අවවාදය"
 
 #: ../libgnomeui/gnome-messagebox.c:118
-#, fuzzy
+ 
 msgid "Error"
 msgstr "දෝෂය"
 
 #: ../libgnomeui/gnome-messagebox.c:124
-#, fuzzy
+ 
 msgid "Question"
 msgstr "ප්‍රශ්නය"
 
 #: ../libgnomeui/gnome-messagebox.c:129
-#, fuzzy
+ 
 msgid "Message"
 msgstr "පණිවිඩ"
 
 #: ../libgnomeui/gnome-password-dialog.c:210
-#, fuzzy
+ 
 msgid "_Username:"
 msgstr "පරිශීලක නම (_U):"
 
@@ -1363,7 +1363,7 @@ msgid "_Domain:"
 msgstr ""
 
 #: ../libgnomeui/gnome-password-dialog.c:216
-#, fuzzy
+ 
 msgid "_Password:"
 msgstr "රහස්පදය: (_P)"
 
@@ -1429,7 +1429,7 @@ msgid "Can't find an hbox, using a normal file selection"
 msgstr ""
 
 #: ../libgnomeui/gnome-pixmap-entry.c:422
-#, fuzzy
+ 
 msgid "Preview"
 msgstr "පුර්ව දර්ශනය"
 
@@ -1438,7 +1438,7 @@ msgid "Top Ten"
 msgstr ""
 
 #: ../libgnomeui/gnome-scores.c:90
-#, fuzzy
+ 
 msgid "User"
 msgstr "පරිශිලක"
 
@@ -1470,7 +1470,7 @@ msgid "Bulleted List"
 msgstr ""
 
 #: ../libgnomeui/gnome-stock-icons.c:142
-#, fuzzy
+ 
 msgid "Numbered List"
 msgstr "අංකිත ලැයිස්තුව"
 
@@ -1499,12 +1499,12 @@ msgid "Show GNOME GUI options"
 msgstr ""
 
 #: ../libgnomeui/gnome-ui-init.c:179
-#, fuzzy
+ 
 msgid "X display to use"
 msgstr "භාවිතයට ඇති X දර්ශනය"
 
 #: ../libgnomeui/gnome-ui-init.c:179
-#, fuzzy
+ 
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
