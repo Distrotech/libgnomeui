@@ -11,6 +11,8 @@ What's new since 2.18.0
 * Only unref the drive when we have one, (Richard Hult, #439420)
 * Don't crash in the crash handler when we cannot get the global GnomeProgram
   (Christian Persch, #438832)
+* Added orientation tag support to thumbnailing. Requires
+  bump in gtk+ version to 2.11.5 (Michael Chudobiak, #440978).
 * Updated translations
   - pt_BR: Leonardo Ferreira Fontenelle
   - oc: Christophe Merlet, Kokoyaya

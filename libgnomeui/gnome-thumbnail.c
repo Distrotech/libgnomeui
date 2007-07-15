@@ -49,12 +49,6 @@
 #include <gconf/gconf-client.h>
 #include <glib/gstdio.h>
 
-#ifdef HAVE_LIBJPEG
-GdkPixbuf * _gnome_thumbnail_load_scaled_jpeg (const char *uri,
-					       int         target_width,
-					       int         target_height);
-#endif
-
 #define SECONDS_BETWEEN_STATS 10
 
 struct ThumbMD5Context {
@@ -942,7 +936,7 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
 					    const char            *uri,
 					    const char            *mime_type)
 {
-  GdkPixbuf *pixbuf, *scaled;
+  GdkPixbuf *pixbuf, *scaled, *tmp_pixbuf;
   char *script, *expanded_script;
   int width, height, size;
   int original_width = 0;
@@ -996,12 +990,7 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
   /* Fall back to gdk-pixbuf */
   if (pixbuf == NULL)
     {
-#ifdef HAVE_LIBJPEG
-      if (strcmp (mime_type, "image/jpeg") == 0)
-	pixbuf = _gnome_thumbnail_load_scaled_jpeg (uri, size, size);
-      else
-#endif
-	pixbuf = gnome_gdk_pixbuf_new_from_uri_at_scale (uri, size, size, TRUE);
+      pixbuf = gnome_gdk_pixbuf_new_from_uri_at_scale (uri, size, size, TRUE);
 
       if (pixbuf != NULL)
         {
@@ -1014,6 +1003,13 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
       
   if (pixbuf == NULL)
     return NULL;
+
+  /* The pixbuf loader may attach an "orientation" option to the pixbuf,
+     if the tiff or exif jpeg file had an orientation tag. Rotate/flip
+     the pixbuf as specified by this tag, if present. */
+  tmp_pixbuf = gdk_pixbuf_apply_embedded_orientation (pixbuf);
+  g_object_unref (pixbuf);
+  pixbuf = tmp_pixbuf;
 
   width = gdk_pixbuf_get_width (pixbuf);
   height = gdk_pixbuf_get_height (pixbuf);
