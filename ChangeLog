@@ -7,7 +7,8 @@
 	(gnome_thumbnail_factory_generate_thumbnail): Add orientation tag
 	support to the thumbnailer. Bumped gtk+ requirement to 2.11.5 
 	for orientation support. Removed the internal fast-scaling jpeg 
-	decoder, because gdk-pixbuf now provides this feature.
+	decoder, because gdk-pixbuf now provides this feature. 
+	Bug #440978.
 
 2007-06-27  Christian Persch  <chpe@gnome.org>
 
