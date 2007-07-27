@@ -5,10 +5,6 @@ SUBDIRS = pixmaps
 #
 # The targets
 #
-if OS_WIN32
-else
-libexec_PROGRAMS    = gnome_segv2
-endif
 lib_LTLIBRARIES = libgnomeui-2.la
 
 gnomehdir = $(includedir)/libgnomeui-2.0
@@ -234,8 +230,6 @@ distclean-local:
 	fi
 
 #######################
-
-gnome_segv2_SOURCES = gnome_segv.c
 
 EXTRA_DIST =					\
 	AUTHORS					\

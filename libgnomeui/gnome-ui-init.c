@@ -96,14 +96,9 @@ static void libgnomeui_class_init	(GnomeProgramClass *klass,
 					 const GnomeModuleInfo *mod_info);
 static void libgnomeui_instance_init	(GnomeProgram *program,
 					 GnomeModuleInfo *mod_info);
-static void libgnomeui_pre_args_parse	(GnomeProgram *app,
-					 GnomeModuleInfo *mod_info);
 static void libgnomeui_post_args_parse	(GnomeProgram *app,
 					 GnomeModuleInfo *mod_info);
 static void libgnomeui_rc_parse		(GnomeProgram *program);
-#ifndef G_OS_WIN32
-static void libgnomeui_segv_setup	(GnomeProgram *program);
-#endif
 
 /* Prototype for a private gnome_stock function */
 void _gnome_stock_icons_init (void);
@@ -146,7 +141,7 @@ static GOptionGroup *
 libgnomeui_get_goption_group (void)
 {
 	const GOptionEntry libgnomeui_goptions[] = {
-		{ "disable-crash-dialog", '\0', G_OPTION_FLAG_NO_ARG,
+		{ "disable-crash-dialog", '\0', G_OPTION_FLAG_NO_ARG | G_OPTION_FLAG_HIDDEN,
 		  G_OPTION_ARG_CALLBACK, libgnomeui_goption_disable_crash_dialog,
 		  N_("Disable Crash Dialog"), NULL },
 		  /* --display is already handled by gtk+ */
@@ -183,7 +178,7 @@ libgnomeui_module_info_get (void)
 	static GnomeModuleInfo module_info = {
 		"libgnomeui", VERSION, N_("GNOME GUI Library"),
 		NULL, libgnomeui_instance_init,
-		libgnomeui_pre_args_parse, libgnomeui_post_args_parse,
+		NULL, libgnomeui_post_args_parse,
 		libgnomeui_options,
 		libgnomeui_init_pass, libgnomeui_class_init,
 		NULL, NULL
@@ -392,21 +387,6 @@ libgnomeui_instance_init (GnomeProgram *program, GnomeModuleInfo *mod_info)
     g_object_set_qdata_full (G_OBJECT (program),
 			     quark_gnome_program_private_libgnomeui,
 			     priv, (GDestroyNotify) libgnomeui_private_free);
-}
-
-static void
-libgnomeui_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
-{
-        const char *envar;
-
-        /* This is one of two places where the crash dialog can be disabled */
-        /* The other is the command line option --disable-crash-dialog, so */
-        /* we wait until post_args_parse before calling libgnomeui_segv_setup */
-        envar = g_getenv("GNOME_DISABLE_CRASH_DIALOG");
-        if (envar && atoi (envar))
-		g_object_set (G_OBJECT(app),
-			      LIBGNOMEUI_PARAM_CRASH_DIALOG, FALSE,
-			      NULL);
 }
 
 static gboolean
@@ -650,9 +630,6 @@ libgnomeui_post_args_parse(GnomeProgram *program, GnomeModuleInfo *mod_info)
 
         gnome_type_init();
         libgnomeui_rc_parse (program);
-#ifndef G_OS_WIN32
-        libgnomeui_segv_setup (program);
-#endif
         priv = g_object_get_qdata(G_OBJECT(program), quark_gnome_program_private_libgnomeui);
 
         priv->constructed = TRUE;
@@ -783,124 +760,6 @@ libgnomeui_rc_parse (GnomeProgram *program)
 		g_free (file);
 	}
 }
-
-#ifndef G_OS_WIN32
-
-/* crash handler */
-static void libgnomeui_segv_handle(int signum);
-
-static void
-libgnomeui_segv_setup (GnomeProgram *program)
-{
-        static struct sigaction *setptr;
-        struct sigaction sa;
-        gboolean do_crash_dialog = TRUE;
-
-        g_object_get (program, LIBGNOMEUI_PARAM_CRASH_DIALOG,
-		      &do_crash_dialog, NULL);
-
-        if(do_crash_dialog) {
-                memset(&sa, 0, sizeof(sa));
-                setptr = &sa;
-
-                sa.sa_handler = (gpointer)libgnomeui_segv_handle;
-
-                sigaction(SIGSEGV, setptr, NULL);
-                sigaction(SIGABRT, setptr, NULL);
-                sigaction(SIGTRAP, setptr, NULL);
-                sigaction(SIGFPE, setptr, NULL);
-                sigaction(SIGBUS, setptr, NULL);
-        }
-
-}
-
-static void libgnomeui_segv_handle(int signum)
-{
-	static int in_segv = 0;
-        struct sigaction sa;
-	pid_t pid;
-	
-	sa.sa_handler = NULL;
-	in_segv++;
-
-        if (in_segv > 2) {
-                /* The fprintf() was segfaulting, we are just totally hosed */
-                _exit(1);
-        } else if (in_segv > 1) {
-                /* dialog display isn't working out */
-                fprintf(stderr, _("Multiple segmentation faults occurred; can't display error dialog\n"));
-                _exit(1);
-        }
-
-        /* Make sure we release grabs */
-        gdk_pointer_ungrab(GDK_CURRENT_TIME);
-        gdk_keyboard_ungrab(GDK_CURRENT_TIME);
-        XUngrabServer (GDK_DISPLAY ());
-
-        gdk_flush();
-        
-	pid = fork();
-
-	if (pid < 0) {
-		/* Eeeek! Can't show dialog */
-                fprintf (stderr, _("Segmentation fault!\n"
-				   "Cannot display crash dialog\n"));
-
-                /* Don't use app attributes here - a lot of things are probably hosed */
-		if (g_getenv ("GNOME_DUMP_CORE")) {
-                        /* Reset SIGABRT so we don't get called again. */
-                        sa.sa_handler = SIG_DFL;
-                        sigaction (SIGABRT, &sa, NULL);
-	                abort ();
-                }
-
-		_exit(1);
-	} else if (pid > 0) {
-                /* Wait for user to see the dialog, then exit. */
-                /* Why wait at all? Because we want to allow people to attach to the
-		   process */
-		int estatus;
-		pid_t eret;
-
-		eret = waitpid(pid, &estatus, 0);
-
-                /* Don't use app attributes here - a lot of things are probably hosed */
-		if(g_getenv("GNOME_DUMP_CORE")) {
-                        /* Reset SIGABRT so we don't get called again. */
-                        sa.sa_handler = SIG_DFL;
-                        sigaction (SIGABRT, &sa, NULL);
-	                abort ();
-                }
-
-		_exit(1);
-	} else /* pid == 0 */ {
-                GnomeProgram *program;
-                const char *app_version;
-		char buf[32];
-
-		g_snprintf(buf, sizeof(buf), "%d", signum);
-
-                program = gnome_program_get();
-                if (program) {
-                  app_version = gnome_program_get_app_version (program);
-                } else {
-                  app_version = "(indeterminate)";
-                }
-
-		/* Child process */
-		execl (LIBGNOMEUI_SERVERDIR "/gnome_segv2", LIBGNOMEUI_SERVERDIR "/gnome_segv",
-		       g_get_prgname (), buf, app_version, NULL);
-
-                execlp ("gnome_segv2", "gnome_segv2",
-			g_get_prgname (), buf, app_version, NULL);
-
-                _exit(99);
-	}
-
-	in_segv--;
-}
-
-#endif
 
 /* #warning "Solve the sound events situation" */
 
