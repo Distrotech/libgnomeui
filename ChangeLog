@@ -1,3 +1,10 @@
+2007-07-28  Christian Persch  <chpe@gnome.org>
+
+	* configure.in:
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_init): Use xdg-user-dirs to get Destkop
+	directory shortcut. Bug #459854, patch by Luca Ferretti.
+
 2007-07-27  Fernando Herrera  <fernando.herrera-de-las-heras@nokia.com>
 
 	* libgnomeui/Makefile.am:
