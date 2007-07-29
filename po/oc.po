@@ -73,7 +73,7 @@ msgstr "Impossible d'obténer las informacions pel fichièr '%s' : %s"
 #: ../file-chooser/testfilechooser.c:191
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr "Impossible de dubrir le fichièr '%s' : %s"
+msgstr "Impossible de dobrir le fichièr '%s' : %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
@@ -270,7 +270,7 @@ msgstr "_Dubrir..."
 
 #: ../libgnomeui/gnome-app-helper.c:108
 msgid "Open a file"
-msgstr "Dubrir un fichièr"
+msgstr "Dobrir un fichièr"
 
 #. Save
 #: ../libgnomeui/gnome-app-helper.c:113
@@ -320,11 +320,11 @@ msgstr "Configurar la compaginacion per vòstra estampadoira"
 #. Close
 #: ../libgnomeui/gnome-app-helper.c:141
 msgid "_Close"
-msgstr "_Barrar"
+msgstr "_Tampar"
 
 #: ../libgnomeui/gnome-app-helper.c:141
 msgid "Close the current file"
-msgstr "Barrar lo fichièr actual"
+msgstr "Tampar lo fichièr actual"
 
 #. Exit
 #: ../libgnomeui/gnome-app-helper.c:146
@@ -475,11 +475,11 @@ msgstr "Crear una fenèstra nova"
 
 #: ../libgnomeui/gnome-app-helper.c:238
 msgid "_Close This Window"
-msgstr "_Barrar la fenèstra"
+msgstr "_Tampar la fenèstra"
 
 #: ../libgnomeui/gnome-app-helper.c:239 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr "Barrar la fenèstra activa"
+msgstr "Tampar la fenèstra activa"
 
 #.
 #. * The "Game" menu
@@ -539,7 +539,7 @@ msgstr "_Marcas..."
 
 #: ../libgnomeui/gnome-app-helper.c:279
 msgid "View the scores"
-msgstr "Mostrar las marcas"
+msgstr "Visualizar las marcas"
 
 #: ../libgnomeui/gnome-app-helper.c:283
 msgid "_End Game"
@@ -555,7 +555,7 @@ msgstr "_Somari"
 
 #: ../libgnomeui/gnome-app-helper.c:1149
 msgid "View help for this application"
-msgstr "Mostrar l'ajuda de l'aplicacion"
+msgstr "Visualizar l'ajuda de l'aplicacion"
 
 #: ../libgnomeui/gnome-app-helper.c:2586
 msgid "Text Below Icons"
@@ -713,7 +713,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
-msgstr "Mostrar las opcions de gestion de session"
+msgstr "Visualizar las opcions de gestion de session"
 
 #: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
@@ -729,7 +729,7 @@ msgstr "Donadas de color invalidas recebudas\n"
 
 #: ../libgnomeui/gnome-color-picker.c:466
 msgid "Open a dialog to specify the color"
-msgstr "Dubrir una bóstia per definir la color"
+msgstr "Dobrir una bóstia per definir la color"
 
 #: ../libgnomeui/gnome-color-picker.c:488
 msgid "Pick a color"
@@ -914,7 +914,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid.c:153
 msgid "Show Finish"
-msgstr "Mostrar Terminar"
+msgstr "Visualizar Terminar"
 
 #: ../libgnomeui/gnome-druid.c:154
 msgid "Show the 'Finish' button instead of the 'Next' button"
@@ -922,11 +922,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid.c:161
 msgid "Show Help"
-msgstr "Mostrar l'ajuda"
+msgstr "Visualizar l'ajuda"
 
 #: ../libgnomeui/gnome-druid.c:162
 msgid "Show the 'Help' button"
-msgstr "Mostrar lo boton 'Ajuda'"
+msgstr "Visualizar lo boton 'Ajuda'"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
 #: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:176
@@ -1120,7 +1120,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr "Mostrar talha"
+msgstr "Visualizar talha"
 
 #: ../libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
@@ -1275,7 +1275,7 @@ msgstr "GnomeIconSelection : '%s' existís pas o es pas un repertòri"
 #: ../libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection : impossible de dubrir lo repertòri '%s'"
+msgstr "GnomeIconSelection : impossible de dobrir lo repertòri '%s'"
 
 #: ../libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
@@ -1439,7 +1439,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-ui-init.c:161
 msgid "Show GNOME GUI options"
-msgstr "Mostrar las opcions de l'interfaç grafica GNOME"
+msgstr "Visualizar las opcions de l'interfaç grafica GNOME"
 
 #: ../libgnomeui/gnome-ui-init.c:179
 msgid "X display to use"
@@ -1455,7 +1455,7 @@ msgstr "Bibliotèca d'interfaç grafica GNOME"
 
 #: ../libgnomeui/gnome-ui-init.c:249
 msgid "Could not open link"
-msgstr "Impossible de dubrir lo ligam"
+msgstr "Impossible de dobrir lo ligam"
 
 #. dialog display isn't working out
 #: ../libgnomeui/gnome-ui-init.c:831
