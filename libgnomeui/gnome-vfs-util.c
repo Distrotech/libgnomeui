@@ -237,14 +237,13 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
     pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
     if (pixbuf != NULL) {
 	g_object_ref (G_OBJECT (pixbuf));
+	g_object_set_data (G_OBJECT (pixbuf), "gnome-original-width",
+			   GINT_TO_POINTER (info.input_width));
+	g_object_set_data (G_OBJECT (pixbuf), "gnome-original-height",
+			   GINT_TO_POINTER (info.input_height));
     }
     g_object_unref (G_OBJECT (loader));
 
-    g_object_set_data (G_OBJECT (pixbuf), "gnome-original-width",
-		       GINT_TO_POINTER (info.input_width));
-    g_object_set_data (G_OBJECT (pixbuf), "gnome-original-height",
-		       GINT_TO_POINTER (info.input_height));
-    
     return pixbuf;
 }
 
