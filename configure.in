@@ -10,7 +10,7 @@ AC_PREREQ(2.54)
 #
 m4_define([libgnomeui_major_version], [2])
 m4_define([libgnomeui_minor_version], [19])
-m4_define([libgnomeui_micro_version], [1])
+m4_define([libgnomeui_micro_version], [90])
 m4_define([libgnomeui_interface_age], [1])
 # If you need a modifier for the version number. 
 # Normally empty, but can be used to make "fixup" releases.
