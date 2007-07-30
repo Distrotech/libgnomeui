@@ -31,6 +31,5 @@ libgnomeui/gnome-scores.c
 libgnomeui/gnome-scores.h
 libgnomeui/gnome-stock-icons.c
 libgnomeui/gnome-ui-init.c
-libgnomeui/gnome_segv.c
 test-gnome/testgnome.c
 test-gnome/testgnome.xml
