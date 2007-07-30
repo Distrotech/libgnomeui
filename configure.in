@@ -39,7 +39,9 @@ m4_define([libgnomeui_version], [libgnomeui_major_version().libgnomeui_minor_ver
 
 AC_INIT([libgnomeui], [libgnomeui_version],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=libgnomeui])
+
 AC_CONFIG_SRCDIR([libgnomeui/libgnomeui.h])
+AC_CONFIG_HEADERS([config.h])
 
 LIBGNOMEUI_MAJOR_VERSION=libgnomeui_major_version
 LIBGNOMEUI_MINOR_VERSION=libgnomeui_minor_version
@@ -57,7 +59,6 @@ AC_SUBST(LIBGNOMEUI_REVISION)
 AC_SUBST(LIBGNOMEUI_AGE)
 
 AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-bzip2])
-AM_CONFIG_HEADER(config.h)
 
 AM_MAINTAINER_MODE
 
