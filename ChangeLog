@@ -1,3 +1,12 @@
+============================= 2.19.1 ========================
+
+2007-07-30  Christian Persch  <chpe@gnome.org>
+
+	* autogen.sh:
+	* configure.in:
+	* file-chooser/Makefile.am:
+	* libgnomeui/Makefile.am: Build fixes.
+
 2007-07-29  Christian Persch  <chpe@gnome.org>
 
 	* libgnomeui/gnome-vfs-util.c:

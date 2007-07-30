@@ -22,6 +22,7 @@ INCLUDES = \
         -DLIBGNOMEUI_DATADIR=\""$(datadir)"\" 		\
         -DLIBGNOMEUI_SERVERDIR=\""$(libexecdir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
+	-DGNOMEUILOCALEDIR="\"$(datadir)/locale\""	\
 	$(WARN_CFLAGS)					\
 	$(LIBGNOMEUI_CFLAGS)
 

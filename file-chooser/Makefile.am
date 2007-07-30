@@ -5,6 +5,7 @@ INCLUDES =					\
 	-I$(top_builddir)			\
 	$(FILE_SYSTEM_CFLAGS)			\
 	$(WARN_CFLAGS)				\
+	-DGNOMEUILOCALEDIR="\"$(datadir)/locale\""	\
 	-D_FILE_OFFSET_BITS=64			\
 	-D_BSD_SOURCE				\
 	-D_GNU_SOURCE				\
