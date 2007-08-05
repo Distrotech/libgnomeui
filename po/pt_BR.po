@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-05-20 03:50+0100\n"
-"PO-Revision-Date: 2007-05-20 16:39+0000\n"
+"PO-Revision-Date: 2007-07-07 21:56-0300\n"
 "Last-Translator: Washington Lins <washington-lins@uol.com.br>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -556,7 +556,7 @@ msgid "End the current game"
 msgstr "Termina o jogo atual"
 
 #: ../libgnomeui/gnome-app-helper.c:1147
-msgid "_Contents"
+msgid "S_umário"
 msgstr "_Conteúdo"
 
 #: ../libgnomeui/gnome-app-helper.c:1150
