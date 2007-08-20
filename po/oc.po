@@ -188,7 +188,7 @@ msgstr "Lògo"
 
 #: ../libgnomeui/gnome-about.c:439
 msgid "A logo for the about box"
-msgstr "Un lògo per la bóstia A prepaus"
+msgstr "Un lògo per la brustia A prepaus"
 
 #: ../libgnomeui/gnome-about.c:518
 #, c-format
@@ -729,7 +729,7 @@ msgstr "Donadas de color invalidas recebudas\n"
 
 #: ../libgnomeui/gnome-color-picker.c:466
 msgid "Open a dialog to specify the color"
-msgstr "Dobrir una bóstia per definir la color"
+msgstr "Dobrir una brustia per definir la color"
 
 #: ../libgnomeui/gnome-color-picker.c:488
 msgid "Pick a color"
@@ -951,11 +951,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
-msgstr "Titol de la bóstia de seleccion de fichièrs"
+msgstr "Titol de la brustia de seleccion de fichièrs"
 
 #: ../libgnomeui/gnome-file-entry.c:246
 msgid "Title for the Browse file dialog."
-msgstr "Titol de la bóstia de seleccion de fichièrs."
+msgstr "Titol de la brustia de seleccion de fichièrs."
 
 #: ../libgnomeui/gnome-file-entry.c:253
 msgid "Directory Entry"
