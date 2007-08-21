@@ -11,10 +11,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui\n"
+"Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-10 15:02+0000\n"
-"PO-Revision-Date: 2007-01-18 23:57+0200\n"
+"POT-Creation-Date: 2007-01-24 20:00+0000\n"
+"PO-Revision-Date: 2007-08-20 19:27+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -628,7 +628,7 @@ msgstr "Rakenduse ID string"
 
 #: ../libgnomeui/gnome-appbar.c:741
 msgid "Has Progress"
-msgstr "Edeneb"
+msgstr "Omab edenemist"
 
 #: ../libgnomeui/gnome-appbar.c:742
 msgid "Create a progress widget."
@@ -636,7 +636,7 @@ msgstr "Edenemise vidina loomine."
 
 #: ../libgnomeui/gnome-appbar.c:749
 msgid "Has Status"
-msgstr "Olek"
+msgstr "Omab olekut"
 
 #: ../libgnomeui/gnome-appbar.c:750
 msgid "Create a status widget."
@@ -644,11 +644,11 @@ msgstr "Olekuvidina loomine."
 
 #: ../libgnomeui/gnome-appbar.c:757
 msgid "Interactivity"
-msgstr "Interaktiivsus"
+msgstr "Interaktiivne"
 
 #: ../libgnomeui/gnome-appbar.c:758
 msgid "Level of user activity required."
-msgstr "Kasutaja vajaliku sekkumise tase."
+msgstr "Kasutajapoolse vajaliku sekkumise tase."
 
 #: ../libgnomeui/gnome-authentication-manager.c:80
 msgid "Your HTTP Proxy requires you to log in.\n"
