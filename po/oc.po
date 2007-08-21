@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-04-15 20:00+0200\n"
-"PO-Revision-Date: 2007-08-07 14:07+0200\n"
+"POT-Creation-Date: 2007-08-20 17:51+0100\n"
+"PO-Revision-Date: 2007-08-21 00:50+0200\n"
 "Last-Translator: Yannig MARCHEGAY (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,35 +32,35 @@ msgstr "Element enfant 2"
 msgid "Hint for item 2"
 msgstr "Astúcia pel element 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1002
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s es un ligam cap a quicòm qu'es pas un repertòri"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1013
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s es un ligam sens emplaçament de destinacion"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1088
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s es pas un repertòri"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1940
 msgid "Network Servers"
 msgstr "Servidors ret"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1956
 msgid "File System"
 msgstr "Sistèma de fichièrs"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2485
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "L'enregistrament dels favorits a pas capitat (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2922
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Impossible d'obténer las informacions per '%s'"
@@ -215,7 +215,7 @@ msgstr "_Edicion/"
 
 #: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "_Visualizar"
+msgstr "_Visualizacion"
 
 #: ../libgnomeui/gnome-app-helper.c:86
 msgid "_View/"
@@ -324,7 +324,7 @@ msgstr "_Tampar"
 
 #: ../libgnomeui/gnome-app-helper.c:141
 msgid "Close the current file"
-msgstr "Tampar lo fichièr actual"
+msgstr "Tampar lo fichièr actiu"
 
 #. Exit
 #: ../libgnomeui/gnome-app-helper.c:146
@@ -448,7 +448,7 @@ msgstr "Configurar l'aplicacion"
 #. About
 #: ../libgnomeui/gnome-app-helper.c:220 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "_A prepaus de"
+msgstr "_A prepaus"
 
 #: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
@@ -979,7 +979,7 @@ msgstr "Indica la fenèstra de seleccion de fichièrs deu èsser modala."
 
 #: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
-msgstr "Nom de fichièr"
+msgstr "Nom del fichièr"
 
 #: ../libgnomeui/gnome-file-entry.c:271
 msgid "Filename that should be displayed in the file entry."
@@ -1107,7 +1107,8 @@ msgstr "Utilisar la poliça dins l'etiqueta"
 
 #: ../libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Utilizar la poliça de las etiquetas dins lo mòde d'info de las poliças"
+msgstr ""
+"Utilizar la poliça de las etiquetas dins lo mòde d'info de las poliças"
 
 #: ../libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1120,7 +1121,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr "Visualizar talha"
+msgstr "Visualizar la talha"
 
 #: ../libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
@@ -1323,7 +1324,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-password-dialog.c:223
 msgid "Password quality:"
-msgstr ""
+msgstr "Qualitat del mot de pas :"
 
 #: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
@@ -1384,7 +1385,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-scores.c:90
 msgid "User"
-msgstr "Usuari"
+msgstr "Utilizaire"
 
 #: ../libgnomeui/gnome-scores.c:93
 msgid "Score"
@@ -1429,73 +1430,49 @@ msgstr ""
 msgid "About"
 msgstr "A prepaus de"
 
-#: ../libgnomeui/gnome-ui-init.c:151 ../libgnomeui/gnome-ui-init.c:177
+#: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:172
 msgid "Disable Crash Dialog"
 msgstr ""
 
-#: ../libgnomeui/gnome-ui-init.c:160
+#: ../libgnomeui/gnome-ui-init.c:155
 msgid "GNOME GUI Library:"
 msgstr ""
 
-#: ../libgnomeui/gnome-ui-init.c:161
+#: ../libgnomeui/gnome-ui-init.c:156
 msgid "Show GNOME GUI options"
 msgstr "Visualizar las opcions de l'interfaç grafica GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "X display to use"
 msgstr "Ecran X d'utilizar"
 
-#: ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "DISPLAY"
 msgstr ""
 
-#: ../libgnomeui/gnome-ui-init.c:184
+#: ../libgnomeui/gnome-ui-init.c:179
 msgid "GNOME GUI Library"
 msgstr "Bibliotèca d'interfaç grafica GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:249
+#: ../libgnomeui/gnome-ui-init.c:244
 msgid "Could not open link"
 msgstr "Impossible de dobrir lo ligam"
-
-#. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:831
-#, c-format
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"I a agut mai d'una error de segmentacion ; impossible de visualizar la "
-"fenèstra d'errors\n"
-
-#. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:846
-#, c-format
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"Error de segmentacion !\n"
-"Impossible de visualizar la fenèstra d'errors\n"
-
-#: ../libgnomeui/gnome_segv.c:82
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Sintaxi : gnome_segv2 nom-appli num-signal\n"
-
-#: ../libgnomeui/gnome_segv.c:94
-#, c-format
-msgid "Debugging %s"
-msgstr ""
-
-#: ../libgnomeui/gnome_segv.c:144
-#, c-format
-msgid ""
-"<b>The application %s has crashed.</b>\n"
-"\n"
-"Please install <b>bug-buddy</b>, the\n"
-"GNOME crash report tool, which enables you\n"
-"to send the developers detailed information\n"
-"about the error.\n"
-msgstr ""
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Sortir del tèst"
 
+#~ msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+#~ msgstr ""
+#~ "I a agut mai d'una error de segmentacion ; impossible de visualizar la "
+#~ "fenèstra d'errors\n"
+
+#~ msgid ""
+#~ "Segmentation fault!\n"
+#~ "Cannot display crash dialog\n"
+#~ msgstr ""
+#~ "Error de segmentacion !\n"
+#~ "Impossible de visualizar la fenèstra d'errors\n"
+
+#~ msgid "Usage: gnome_segv2 appname signum\n"
+#~ msgstr "Sintaxi : gnome_segv2 nom-appli num-signal\n"
