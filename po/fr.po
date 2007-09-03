@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.15.92\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-20 12:43+0200\n"
-"PO-Revision-Date: 2007-08-20 12:47+0200\n"
+"POT-Creation-Date: 2007-09-03 12:30+0200\n"
+"PO-Revision-Date: 2007-09-03 12:24+0200\n"
 "Last-Translator: Stéphane Raimbault <stephane.raimbault@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -716,7 +716,7 @@ msgstr "Gestion de session :"
 
 #: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
-msgstr "Afficher les options de gestion de session"
+msgstr "Affiche les options de gestion de session"
 
 #: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
@@ -1456,7 +1456,7 @@ msgstr "À propos"
 
 #: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:172
 msgid "Disable Crash Dialog"
-msgstr "Désactive la boîte de dialogue de crash"
+msgstr "Désactive la boîte de dialogue d'arrêt brutal"
 
 #: ../libgnomeui/gnome-ui-init.c:155
 msgid "GNOME GUI Library:"
@@ -1464,7 +1464,7 @@ msgstr "Bibliothèque d'interface graphique GNOME :"
 
 #: ../libgnomeui/gnome-ui-init.c:156
 msgid "Show GNOME GUI options"
-msgstr "Afficher les options de l'interface graphique GNOME"
+msgstr "Affiche les options de l'interface graphique GNOME"
 
 #: ../libgnomeui/gnome-ui-init.c:174
 msgid "X display to use"
@@ -1485,36 +1485,3 @@ msgstr "Impossible d'ouvrir le lien"
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Quitter le test"
-
-#~ msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-#~ msgstr ""
-#~ "Plusieurs erreurs de segmentation sont survenues ; impossible d'afficher "
-#~ "la boîte de dialogue d'erreur\n"
-
-#~ msgid ""
-#~ "Segmentation fault!\n"
-#~ "Cannot display crash dialog\n"
-#~ msgstr ""
-#~ "Erreur de segmentation !\n"
-#~ "Impossible d'afficher la boîte de dialogue de blocage\n"
-
-#~ msgid "Usage: gnome_segv2 appname signum\n"
-#~ msgstr "Usage : gnome_segv2 nom-appli num-signal\n"
-
-#~ msgid "Debugging %s"
-#~ msgstr "Débogage de %s"
-
-#~ msgid ""
-#~ "<b>The application %s has crashed.</b>\n"
-#~ "\n"
-#~ "Please install <b>bug-buddy</b>, the\n"
-#~ "GNOME crash report tool, which enables you\n"
-#~ "to send the developers detailed information\n"
-#~ "about the error.\n"
-#~ msgstr ""
-#~ "<b>L'application %s s'est arrêté brutalement.</b>\n"
-#~ "\n"
-#~ "Veuillez installer <b>Bug Buddy</b>, l'outil\n"
-#~ "de rapport d'anomalies GNOME, qui vous permettra\n"
-#~ "d'envoyer aux développeurs des informations détaillées\n"
-#~ "sur l'erreur.\n"
