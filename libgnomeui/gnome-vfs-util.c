@@ -216,7 +216,7 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 
 	animation = gdk_pixbuf_loader_get_animation (loader);
 	if (animation) {
-		iter = gdk_pixbuf_animation_get_iter (animation, 0);
+		iter = gdk_pixbuf_animation_get_iter (animation, NULL);
 		if (!gdk_pixbuf_animation_iter_on_currently_loading_frame (iter)) {
 			has_frame = TRUE;
 		}

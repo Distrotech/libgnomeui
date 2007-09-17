@@ -1,3 +1,18 @@
+libgnomeui 2.20.0
+
+* Create tar.bz2 in dist (Christian Persch)
+* Updated translations:
+  - Arabic (Khaled Hosny)
+  - Brazilian Portugese (Leonardo Ferreira Fontenelle)
+  - Bulgarian (Alexander Shopov)
+  - Canadian English (Adam Weinberger)
+  - Estonian (Ivar Smolin)
+  - Finnish (Ilkka Tuohela)
+  - French (Stéphane Raimbault)
+  - Georgian (Vladimer Sichinava)
+  - Malayalam (Ani Peter)
+  - Portugese (Duarte Loreto)
+
 libgnomeui 2.19.1
 
 * Fix crash in thumbnailing code (#452907, Felix Riemann)
