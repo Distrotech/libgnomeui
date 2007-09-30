@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui 2.15.92\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-03 12:30+0200\n"
-"PO-Revision-Date: 2007-09-03 12:24+0200\n"
+"PO-Revision-Date: 2007-09-30 21:23+0200\n"
 "Last-Translator: Stéphane Raimbault <stephane.raimbault@gmail.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -566,20 +566,20 @@ msgstr "Texte sous les icônes"
 
 #: ../libgnomeui/gnome-app-helper.c:2587
 msgid "Priority Text Beside Icons"
-msgstr "Priorité au texte à coté des icônes"
+msgstr "Priorité au texte à côté des icônes"
 
 #: ../libgnomeui/gnome-app-helper.c:2588
 msgid "Icons Only"
-msgstr "Icônes seulement"
+msgstr "Icônes uniquement"
 
 #: ../libgnomeui/gnome-app-helper.c:2589
 msgid "Text Only"
-msgstr "Texte seulement"
+msgstr "Texte uniquement"
 
 #: ../libgnomeui/gnome-app-helper.c:2650
 #, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Utiliser la valeur par défaut du bureau (%s)"
+msgstr "Utiliser les paramètres par défaut du bureau (%s)"
 
 #: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
