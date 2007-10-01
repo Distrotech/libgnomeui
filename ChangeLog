@@ -1,5 +1,11 @@
 2007-10-01  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-file-entry.c: (browse_dialog_ok),
+	(browse_clicked): Fix a crash when user gives a URL
+	without trailing '/'.
+
+2007-10-01  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-dateedit.c: (gnome_date_edit_set_time),
 	(create_children):
 	* libgnomeui/gnome-dateedit.h: Add option to show seconds.

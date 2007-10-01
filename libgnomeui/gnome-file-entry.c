@@ -457,6 +457,9 @@ browse_dialog_ok (GtkWidget *widget, gpointer data)
 	else
 		locale_filename = g_strdup (gtk_file_selection_get_filename (GTK_FILE_SELECTION (fw)));
 
+	if (!locale_filename)
+		return;
+
 	utf8_filename = g_filename_to_utf8 (locale_filename, -1, NULL,
 					    NULL, NULL);
 	g_free (locale_filename);
