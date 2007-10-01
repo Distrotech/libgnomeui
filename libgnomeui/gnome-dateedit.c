@@ -707,11 +707,21 @@ gnome_date_edit_set_time (GnomeDateEdit *gde, time_t the_time)
 
 	/* Set the time */
 	if (gde->_priv->flags & GNOME_DATE_EDIT_24_HR) {
-		if (strftime (buffer, sizeof (buffer), "%H:%M", mytm) == 0)
-			strcpy (buffer, "???");
+		if (gde->_priv->flags & GNOME_DATE_EDIT_DISPLAY_SECONDS) {
+			if (strftime (buffer, sizeof (buffer), "%H:%M:%S", mytm) == 0)
+    				strcpy (buffer, "???");
+        	} else {
+			if (strftime (buffer, sizeof (buffer), "%H:%M", mytm) == 0)
+    				strcpy (buffer, "???");
+        	}
 	} else {
-		if (strftime (buffer, sizeof (buffer), "%I:%M %p", mytm) == 0)
-			strcpy (buffer, "???");
+		if (gde->_priv->flags & GNOME_DATE_EDIT_DISPLAY_SECONDS) {
+			if (strftime (buffer, sizeof (buffer), "%I:%M:%S %p", mytm) == 0)
+				strcpy (buffer, "???");
+        	} else {
+			if (strftime (buffer, sizeof (buffer), "%I:%M %p", mytm) == 0)
+				strcpy (buffer, "???");
+        	}
 	}
 	buffer[sizeof(buffer)-1] = '\0';
 

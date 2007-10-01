@@ -1,5 +1,13 @@
 2007-10-01  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-dateedit.c: (gnome_date_edit_set_time),
+	(create_children):
+	* libgnomeui/gnome-dateedit.h: Add option to show seconds.
+	Patch from Goedson Teixeira Paixao <goedson@debian.org>
+	Closes bug #473410.
+
+2007-10-01  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* configure.in: Go to 2.21.0.
 
 ============================= 2.20.0 =======================
