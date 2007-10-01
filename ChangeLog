@@ -1,5 +1,9 @@
 2007-10-01  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-scores.c: Document the no scores case.
+
+2007-10-01  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-file-entry.c: (browse_dialog_ok),
 	(browse_clicked): Fix a crash when user gives a URL
 	without trailing '/'.

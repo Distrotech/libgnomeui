@@ -464,7 +464,8 @@ gnome_scores_set_logo_pixmap (GnomeScores *gs, const gchar *pix_name)
  *
  * Description:  Does all the work of displaying the best scores.
  * It calls gnome_score_get_notables to retrieve the info, creates the window,
- * and show it.
+ * and show it. If there are no scores nothing is displayed and the recommended practise
+ * is to disable the scores menu entry in this case.
  *
  * Returns:  If a dialog is displayed return it's pointer.  It can also
  * be %NULL if no dialog is displayed
