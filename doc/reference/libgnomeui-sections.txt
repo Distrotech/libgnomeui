@@ -995,6 +995,7 @@ GNOME_PROPERTY_BOX_DIRTY
 <FILE>gnome-scores</FILE>
 <TITLE>GnomeScores</TITLE>
 GnomeScores
+gnome_scores_display
 gnome_scores_display_with_pixmap
 gnome_scores_new
 gnome_scores_construct

@@ -90,63 +90,6 @@ GNOME_CLASS_BOILERPLATE (GnomeThumbnailFactory,
 static void gnome_thumbnail_factory_instance_init (GnomeThumbnailFactory      *factory);
 static void gnome_thumbnail_factory_class_init    (GnomeThumbnailFactoryClass *class);
 
-#if !GLIB_CHECK_VERSION (2,7,0)
-/* g_chmod lifted from GLib */
-#ifndef G_OS_WIN32
-#define g_chmod(filename, mode) chmod (filename, mode)
-#else
-static int
-g_chmod (const gchar *filename,
-	 int          mode)
-{
-#ifdef G_OS_WIN32
-  if (G_WIN32_HAVE_WIDECHAR_API ())
-    {
-      wchar_t *wfilename = g_utf8_to_utf16 (filename, -1, NULL, NULL, NULL);
-      int retval;
-      int save_errno;
-      
-      if (wfilename == NULL)
-	{
-	  errno = EINVAL;
-	  return -1;
-	}
-
-      retval = _wchmod (wfilename, mode);
-      save_errno = errno;
-
-      g_free (wfilename);
-
-      errno = save_errno;
-      return retval;
-    }
-  else
-    {    
-      gchar *cp_filename = g_locale_from_utf8 (filename, -1, NULL, NULL, NULL);
-      int retval;
-      int save_errno;
-
-      if (cp_filename == NULL)
-	{
-	  errno = EINVAL;
-	  return -1;
-	}
-
-      retval = chmod (cp_filename, mode);
-      save_errno = errno;
-
-      g_free (cp_filename);
-
-      errno = save_errno;
-      return retval;
-    }
-#else
-  return chmod (filename, mode);
-#endif
-}
-#endif	/* Win32 */
-#endif	/* GLib < 2.7.0 */
-
 static void
 thumbnail_info_free (gpointer data)
 {
@@ -1026,10 +969,10 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
       orig_width = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Width");
       orig_height = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Height");
 
-      if (orig_width > 0) {
+      if (*orig_width > 0) {
 	      gdk_pixbuf_set_option (scaled, "tEXt::Thumb::Image::Width", orig_width);
       }
-      if (orig_height > 0) {
+      if (*orig_height > 0) {
 	      gdk_pixbuf_set_option (scaled, "tEXt::Thumb::Image::Height", orig_height);
       }
       

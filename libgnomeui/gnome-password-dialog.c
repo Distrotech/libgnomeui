@@ -113,7 +113,7 @@ enum
 /* GtkDialog methods */
 static void gnome_password_dialog_show (GtkWidget              *widget);
 
-G_DEFINE_TYPE (GnomePasswordDialog, gnome_password_dialog, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (GnomePasswordDialog, gnome_password_dialog, GTK_TYPE_DIALOG)
 
 static void
 gnome_password_dialog_set_message (GnomePasswordDialog *password_dialog, const gchar *message, gboolean markup)

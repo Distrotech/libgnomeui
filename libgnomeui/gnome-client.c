@@ -23,6 +23,8 @@
   @NOTATION@
 */
 
+#define _XOPEN_SOURCE 500
+
 #include <config.h>
 #include <stdlib.h>
 #include <stdarg.h>

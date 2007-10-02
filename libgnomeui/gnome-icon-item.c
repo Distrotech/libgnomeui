@@ -96,7 +96,7 @@ enum {
 static guint iti_signals [LAST_SIGNAL] = { 0 };
 
 GNOME_CLASS_BOILERPLATE (GnomeIconTextItem, gnome_icon_text_item,
-			 GnomeCanvasItem, GNOME_TYPE_CANVAS_ITEM);
+			 GnomeCanvasItem, GNOME_TYPE_CANVAS_ITEM)
 
 static void
 send_focus_event (GnomeIconTextItem *iti, gboolean in)

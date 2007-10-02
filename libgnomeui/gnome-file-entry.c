@@ -29,6 +29,9 @@
  *
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  */
+
+#define _XOPEN_SOURCE 500
+
 #include <config.h>
 #include <glib.h>
 #include <sys/param.h>

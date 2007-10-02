@@ -1,3 +1,19 @@
+2007-10-02  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* doc/reference/tmpl/gnome-dateedit.sgml:
+	* file-chooser/testfilechooser.c: #include <config.h> 
+	* libgnomeui/gnome-client.c: Compiler warning fixes.
+	* libgnomeui/gnome-dateedit.c: Same
+	* libgnomeui/gnome-file-entry.c: Again
+	* libgnomeui/gnome-icon-entry.c: Improve string.
+	Closes bug #315205.
+	* libgnomeui/gnome-icon-item.c: Compiler warnings
+	* libgnomeui/gnome-password-dialog.c: Compiler warnings
+	* libgnomeui/gnome-propertybox.c: Compiler warnings
+	* libgnomeui/gnome-thumbnail.c: Remove obsolete g_chmod
+	ripped from glib now that we depend on a newer glib anyway.
+	Also fix some warnings from a recent patch.
+
 2007-10-01  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-scores.c: Document the no scores case.

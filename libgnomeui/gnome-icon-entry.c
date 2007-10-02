@@ -316,7 +316,7 @@ update_icon (GnomeIconEntry *ientry)
 		if(GTK_IS_IMAGE(child)) {
 			gtk_drag_source_unset (ientry->_priv->pickbutton);
 			gtk_widget_destroy(child);
-			child = gtk_label_new(_("No Icon"));
+			child = gtk_label_new(_("Choose Icon"));
 			gtk_widget_show(child);
 			gtk_container_add(GTK_CONTAINER(ientry->_priv->pickbutton),
 					  child);
@@ -1000,7 +1000,7 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 	w = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
 	gtk_widget_show(w);
 	gtk_box_pack_start (GTK_BOX (ientry), w, TRUE, TRUE, 0);
-	ientry->_priv->pickbutton = gtk_button_new_with_label(_("No Icon"));
+	ientry->_priv->pickbutton = gtk_button_new_with_label(_("Choose Icon"));
 	/* Set our accessible name and description */
 	_add_atk_name_desc (GTK_WIDGET (ientry->_priv->pickbutton),
 			    _("Icon Selector"),
