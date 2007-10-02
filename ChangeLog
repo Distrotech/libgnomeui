@@ -1,3 +1,15 @@
+2007-10-02  Federico Mena Quintero  <federico@novell.com>
+
+	Merged from trunk:
+
+	Fix https://bugzilla.novell.com/show_bug.cgi?id=330187 - CD-ROMs
+	do not appear in the file chooser.
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_list_volumes): Use the same code as in
+	Nautilus to populate the drive/volume list in the file chooser.
+	This way we have the same results, in the same order as Nautilus.
+
 ============================= 2.20.0 =======================
 
 2007-07-30  Christian Persch  <chpe@gnome.org>
