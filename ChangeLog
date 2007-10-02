@@ -1,3 +1,7 @@
+2007-10-03  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-client.h: Another typo fix.
+
 2007-10-03  Kjartan Maraas <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-app-helper.c: (create_pixmap),

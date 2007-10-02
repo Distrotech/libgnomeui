@@ -410,7 +410,7 @@ GnomeClient *gnome_client_new_without_connection (void);
 
 /* Try to connect to a session manager.  If the client was created
    with a valid session management client id, we will try to connect
-   to the manager with this old id.  If the connection was successfull,
+   to the manager with this old id.  If the connection was successful,
    the "connect" signal will be emitted, after some default properties
    have been sent to the session manager.  */
 void         gnome_client_connect                (GnomeClient *client);
