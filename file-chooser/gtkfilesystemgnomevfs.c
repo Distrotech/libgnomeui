@@ -654,62 +654,95 @@ gtk_file_system_gnome_vfs_list_volumes (GtkFileSystem *file_system)
   GtkFileSystemGnomeVFS *system_vfs = GTK_FILE_SYSTEM_GNOME_VFS (file_system);
   GnomeVFSVolume *volume;
   GnomeVFSDrive *drive;
+  GList *drives;
+  GList *volumes;
   GSList *result;
-  GList *list;
   GList *l;
+  GList *ll;
 
   profile_start ("start", NULL);
 
   result = NULL;
 
-  /* User-visible drives */
-
-  list = gnome_vfs_volume_monitor_get_connected_drives (system_vfs->volume_monitor);
-  list = g_list_sort (list, (GCompareFunc) gnome_vfs_drive_compare);
-  for (l = list; l; l = l->next)
-    {
-      drive = GNOME_VFS_DRIVE (l->data);
-
-      if (gnome_vfs_drive_is_user_visible (drive))
-	result = g_slist_prepend (result, drive);
-      else
-	gnome_vfs_drive_unref (drive);
-    }
-
-  g_list_free (list);
-
-  /* User-visible volumes with no corresponding drives */
-
-  list = gnome_vfs_volume_monitor_get_mounted_volumes (system_vfs->volume_monitor);
-  list = g_list_sort (list, (GCompareFunc) gnome_vfs_volume_compare);
-  for (l = list; l; l = l->next)
-    {
-      volume = GNOME_VFS_VOLUME (l->data);
-      drive = gnome_vfs_volume_get_drive (volume);
-
-      if (!drive && gnome_vfs_volume_is_user_visible (volume))
-        result = g_slist_prepend (result, volume);
-      else
-        gnome_vfs_volume_unref (volume);
-
-      if (drive)
-        gnome_vfs_drive_unref (drive);
-    }
-
-  g_list_free (list);
+  /* Add root, first in the list */
+  volume = gnome_vfs_volume_monitor_get_volume_for_path (system_vfs->volume_monitor, "/");
+  if (volume)
+    result = g_slist_prepend (result, volume);
 
   /* Network Servers */
 
   result = g_slist_prepend (result, (gpointer) network_servers_volume_token);
 
+  /* Keep this code in sync with nautilus/src/nautilus-places-sidebar.c:update_places()
+   * {{{
+   */
+
+  /* for all drives add all its volumes */
+
+  drives = gnome_vfs_volume_monitor_get_connected_drives (system_vfs->volume_monitor);
+  drives = g_list_sort (drives, (GCompareFunc)gnome_vfs_drive_compare);
+  for (l = drives; l != NULL; l = l->next)
+    {
+      drive = l->data;
+      if (!gnome_vfs_drive_is_user_visible (drive))
+	{
+	  gnome_vfs_drive_unref (drive);
+	  continue;
+	}
+
+      if (gnome_vfs_drive_is_mounted (drive))
+	{
+	  /* The drive is mounted, add all its volumes */
+	  volumes = gnome_vfs_drive_get_mounted_volumes (drive);
+	  volumes = g_list_sort (volumes, (GCompareFunc)gnome_vfs_volume_compare);
+	  for (ll = volumes; ll != NULL; ll = ll->next)
+	    {
+	      volume = ll->data;
+	      if (!gnome_vfs_volume_is_user_visible (volume))
+		{
+		  gnome_vfs_volume_unref (volume);
+		  continue;
+		}
+	      result = g_slist_prepend (result, volume);
+	    }
+	  g_list_free (volumes);
+
+	  gnome_vfs_drive_unref (drive);
+	}
+      else
+	{
+	  /* The drive is unmounted but visible, add it.
+	   * This is for drives like floppy that can't be
+	   * auto-mounted */
+	  result = g_slist_prepend (result, drive);
+	}		
+    }
+  g_list_free (drives);
+
+  /* add mounted volumes that has no drive (ftp, sftp,...) */
+
+  volumes = gnome_vfs_volume_monitor_get_mounted_volumes (system_vfs->volume_monitor);
+  volumes = g_list_sort (volumes, (GCompareFunc)gnome_vfs_volume_compare);
+  for (l = volumes; l != NULL; l = l->next)
+    {
+      volume = l->data;
+      drive = gnome_vfs_volume_get_drive (volume);
+      if (!gnome_vfs_volume_is_user_visible (volume) || drive != NULL)
+	{
+	  gnome_vfs_drive_unref (drive);
+	  gnome_vfs_volume_unref (volume);
+	  continue;
+	}
+
+      result = g_slist_prepend (result, volume);
+    }
+  g_list_free (volumes);
+
+  /* }}} */
+
   /* Done */
 
   result = g_slist_reverse (result);
-
-  /* Add root, first in the list */
-  volume = gnome_vfs_volume_monitor_get_volume_for_path (system_vfs->volume_monitor, "/");
-  if (volume)
-    result = g_slist_prepend (result, volume);
 
   profile_end ("end", NULL);
 

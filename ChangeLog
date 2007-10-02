@@ -1,3 +1,13 @@
+2007-10-02  Federico Mena Quintero  <federico@novell.com>
+
+	Fix https://bugzilla.novell.com/show_bug.cgi?id=330187 - CD-ROMs
+	do not appear in the file chooser.
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_list_volumes): Use the same code as in
+	Nautilus to populate the drive/volume list in the file chooser.
+	This way we have the same results, in the same order as Nautilus.
+
 2007-10-02  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* doc/reference/tmpl/gnome-dateedit.sgml:
