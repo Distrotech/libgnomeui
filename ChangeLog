@@ -1,3 +1,12 @@
+2007-10-03  Kjartan Maraas <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-app-helper.c: (create_pixmap),
+	(gnome_app_install_statusbar_menu_hints),
+	(gnome_app_find_menu_pos), (per_app_toolbar_style_changed_notify),
+	(toolbar_style_changed_notify), (style_menu_item_activated),
+	(global_menu_item_activated), (create_and_popup_toolbar_menu): Fix a
+	typo in a comment and remove a bunch of trailing whitespace.
+
 2007-10-02  Federico Mena Quintero  <federico@novell.com>
 
 	Fix https://bugzilla.novell.com/show_bug.cgi?id=330187 - CD-ROMs

@@ -31,7 +31,9 @@
  * Major cleanups and rearrangements by Federico Mena and Justin Maurer.
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
+#endif
 
 #include <string.h>
 #include <stdio.h>
@@ -2190,7 +2192,7 @@ gnome_app_find_menu_pos (GtkWidget *parent, const gchar *path, gint *pos)
  * insert the item as the first one in the menubar, "File/" will insert it as
  * the first one in the File menu, "File/Settings" will insert it after the
  * Setting item in the File menu use of "File/<Separator>" should be obvious.
- * However, the use of "<Seperator>" stops after the first separator.
+ * However, the use of "<Separator>" stops after the first separator.
  **/
 
 void
