@@ -85,9 +85,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
-msgstr ""
-"La còla occitana de revirada d'Ubuntu <ubuntu-l10n-oci@lists.ubuntu.com>, "
-"2006"
+msgstr "Yannig MARCHEGAY (Kokoyaya) <yannig@marchegay.org>"
 
 #: ../libgnomeui/gnome-about.c:231
 msgid "Written by"
@@ -807,7 +805,7 @@ msgstr "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 #: ../libgnomeui/gnome-druid-page-standard.c:121
 #: ../libgnomeui/gnome-font-picker.c:155
 msgid "Title"
-msgstr "Titol"
+msgstr "Títol"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
@@ -827,27 +825,27 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
-msgstr "Primièr plan del titol"
+msgstr "Primièr plan del títol"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
-msgstr "Color del primièr plan del titol"
+msgstr "Color del primièr plan del títol"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
-msgstr "Color del primièr plan del titol"
+msgstr "Color del primièr plan del títol"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
-msgstr "Color de primièr plan del titol coma GdkColor"
+msgstr "Color de primièr plan del títol coma GdkColor"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
-msgstr "Color del primièr plan del titol definida"
+msgstr "Color del primièr plan del títol definida"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
-msgstr "La color del primièr plan del titol es definida"
+msgstr "La color del primièr plan del títol es definida"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:169
 #: ../libgnomeui/gnome-druid-page-standard.c:177
@@ -951,11 +949,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
-msgstr "Titol de la brustia de seleccion de fichièrs"
+msgstr "Títol de la brustia de seleccion de fichièrs"
 
 #: ../libgnomeui/gnome-file-entry.c:246
 msgid "Title for the Browse file dialog."
-msgstr "Titol de la brustia de seleccion de fichièrs."
+msgstr "Títol de la brustia de seleccion de fichièrs."
 
 #: ../libgnomeui/gnome-file-entry.c:253
 msgid "Directory Entry"
