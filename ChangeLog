@@ -1,3 +1,13 @@
+2007-10-04  Kjartan Maraas  <kmaraas@gnome.org>
+
+	Remove these. They haven't been used in ages.
+
+	* tests/Makefile.am:
+	* tests/test-icon-theme.c:
+	* tests/test-libglade-gnome-noupgrade.c:
+	* tests/test-libglade-gnome.c:
+	* tests/test-libglade-gnome.glade:
+
 2007-10-04  Christian Persch  <chpe@gnome.org>
 
 	* libgnomeui/Makefile.am: Define GNOME_EXPLICIT_TRANSLATION_DOMAIN so
