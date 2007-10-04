@@ -1,3 +1,9 @@
+2007-10-04  Christian Persch  <chpe@gnome.org>
+
+	* libgnomeui/Makefile.am: Define GNOME_EXPLICIT_TRANSLATION_DOMAIN so
+	we get the right _() define. Based on a patch by Takao Fujiwara, bug
+	#483263.
+
 2007-10-03  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-client.h: Another typo fix.
