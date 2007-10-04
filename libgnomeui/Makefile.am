@@ -23,6 +23,7 @@ INCLUDES = \
         -DLIBGNOMEUI_SERVERDIR=\""$(libexecdir)"\" 	\
 	-DG_LOG_DOMAIN=\"GnomeUI\"			\
 	-DGNOMEUILOCALEDIR="\"$(datadir)/locale\""	\
+	-DGNOME_EXPLICIT_TRANSLATION_DOMAIN="GETTEXT_PACKAGE"	\
 	$(WARN_CFLAGS)					\
 	$(LIBGNOMEUI_CFLAGS)
 
