@@ -380,6 +380,7 @@ static void         folder_child_free (FolderChild *child);
 
 static void     set_vfs_error     (GnomeVFSResult   result,
 				   const gchar     *uri,
+				   const gchar     *format,
 				   GError         **error);
 static gboolean has_valid_scheme  (const char      *uri);
 
@@ -1156,7 +1157,7 @@ get_folder_complete_operation (struct GetFolderData *op_data)
 	  char *uri;
 
 	  uri = gnome_vfs_uri_to_string (op_data->uri, 0);
-	  set_vfs_error (ret, uri, &error);
+	  set_vfs_error (ret, uri, _("Could not monitor '%s': %s"), &error);
 	  g_free (uri);
 
 	  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), NULL,
@@ -1269,7 +1270,7 @@ get_folder_file_info_callback (GnomeVFSAsyncHandle *handle,
       char *uri;
 
       uri = gnome_vfs_uri_to_string (result->uri, 0);
-      set_vfs_error (result->result, uri, &error);
+      set_vfs_error (result->result, uri, _("Could not get info for '%s': %s"), &error);
       g_free (uri);
 
       (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), NULL,
@@ -1482,7 +1483,7 @@ get_file_info_callback (GnomeVFSAsyncHandle *vfs_handle,
 
   if (result->result != GNOME_VFS_OK)
     {
-      set_vfs_error (result->result, uri, &error);
+      set_vfs_error (result->result, uri, _("Could not get info for '%s': %s"), &error);
 
       (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle), NULL,
 			     error, op_data->callback_data);
@@ -1605,6 +1606,7 @@ create_folder_progress_cb (GnomeVFSAsyncHandle      *vfs_handle,
 	
 		  set_vfs_error (progress_info->vfs_status,
 				 gtk_file_path_get_string (op_data->path),
+				 _("Could not create '%s': %s"),
 				 &error);
 
 		  (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
@@ -2056,7 +2058,7 @@ gtk_file_system_gnome_vfs_get_parent (GtkFileSystem     *file_system,
 
   if (uri == NULL)
     {
-      set_vfs_error (GNOME_VFS_ERROR_INVALID_URI, gtk_file_path_get_string (path), error);
+      set_vfs_error (GNOME_VFS_ERROR_INVALID_URI, gtk_file_path_get_string (path), _("'%s': %s"), error);
       return FALSE;
     }
   
@@ -3207,9 +3209,17 @@ folder_child_free (FolderChild *child)
   g_free (child);
 }
 
+/* If uri != NULL, then 'format' should be of this form:
+ *     "Could not frobnicate '%s': %s"
+ * On the other hand, if uri == NULL, set 'format' to something like
+ *     "Could not fubarize: %s"
+ *  In either case, the %s at the end will be replaced by gnome_vfs_result_to_string(result).
+ */
+ 
 static void
 set_vfs_error (GnomeVFSResult result,
 	       const gchar   *uri,
+	       const gchar   *format,
 	       GError       **error)
 {
   GtkFileSystemError errcode = GTK_FILE_SYSTEM_ERROR_FAILED;
@@ -3239,7 +3249,7 @@ set_vfs_error (GnomeVFSResult result,
       g_set_error (error,
 		   GTK_FILE_SYSTEM_ERROR,
 		   errcode,
-		   "error accessing '%s': %s",
+		   format,
 		   uri,
 		   gnome_vfs_result_to_string (result));
     }
@@ -3248,7 +3258,7 @@ set_vfs_error (GnomeVFSResult result,
       g_set_error (error,
 		   GTK_FILE_SYSTEM_ERROR,
 		   errcode,
-		   "VFS error: %s",
+		   format,
 		   gnome_vfs_result_to_string (result));
     }
 }
