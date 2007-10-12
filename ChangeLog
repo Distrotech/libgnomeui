@@ -1,5 +1,18 @@
 2007-10-12  Federico Mena Quintero  <federico@novell.com>
 
+    	Fix http://bugzilla.gnome.org/show_bug.cgi?id=464383 - In the file
+	chooser, errors are not reported correctly when creating a folder
+	fails.
+
+    	* file-chooser/gtkfilesystemgnomevfs.c
+    	(gtk_file_system_gnome_vfs_create_folder): Use
+    	GNOME_VFS_XFER_ERROR_MODE_QUERY instead of
+    	GNOME_VFS_XFER_ERROR_MODE_ABORT so that our progress/error
+    	callback will be called if the mkdir() fails.  Patch by Richard
+    	Hult <richard@imendio.com>.
+
+2007-10-12  Federico Mena Quintero  <federico@novell.com>
+
 	Fix http://bugzilla.gnome.org/show_bug.cgi?id=485922 - Errors from
 	GtkFileSystemGnomeVFS are not translated, and are too general.
 

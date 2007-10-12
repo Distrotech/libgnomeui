@@ -1680,7 +1680,7 @@ gtk_file_system_gnome_vfs_create_folder (GtkFileSystem                     *file
 			NULL,
 			&uris,
 			GNOME_VFS_XFER_NEW_UNIQUE_DIRECTORY,
-			GNOME_VFS_XFER_ERROR_MODE_ABORT,
+			GNOME_VFS_XFER_ERROR_MODE_QUERY,
 			GNOME_VFS_XFER_OVERWRITE_MODE_ABORT,
 			GNOME_VFS_PRIORITY_DEFAULT,
 			create_folder_progress_cb, op_data,
