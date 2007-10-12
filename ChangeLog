@@ -1,3 +1,18 @@
+2007-10-12  Federico Mena Quintero  <federico@novell.com>
+
+	Fix http://bugzilla.gnome.org/show_bug.cgi?id=485922 - Errors from
+	GtkFileSystemGnomeVFS are not translated, and are too general.
+
+	* file-chooser/gtkfilesystemgnomevfs.c (set_vfs_error): Take in a
+	'format' argument instead of using hardcoded, untranslated
+	strings.
+	(get_folder_complete_operation): Use a specific error message for
+	set_vfs_error().
+	(get_folder_file_info_callback): Likewise.
+	(get_file_info_callback): Likewise.
+	(create_folder_progress_cb): Likewise.
+	(gtk_file_system_gnome_vfs_get_parent): Likewise.
+
 2007-10-04  Kjartan Maraas  <kmaraas@gnome.org>
 
 	Remove these. They haven't been used in ages.
