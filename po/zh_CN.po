@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-02 12:35+0100\n"
-"PO-Revision-Date: 2007-10-02 22:20+0800\n"
-"Last-Translator: YangZhang <zyangmath@gmail.com>\n"
-"Language-Team: Chinese i18n <i18n-zh@googlegroups.com>\n"
+"POT-Creation-Date: 2007-10-12 07:44+0100\n"
+"PO-Revision-Date: 2007-10-15 14:12+0800\n"
+"Last-Translator: Funda Wang <fundawang@gmail.com>\n"
+"Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,50 +32,71 @@ msgstr "子项目 2"
 msgid "Hint for item 2"
 msgstr "项目 2 的提示"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1002
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1036
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s 是指向非文件夹的链接"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1013
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1047
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s 是没有目的位置的链接"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1088
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1122
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s 不是文件夹"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1940
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1160
+#, c-format
+msgid "Could not monitor '%s': %s"
+msgstr "无法监视“%s”：%s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1273
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1486
+#, c-format
+msgid "Could not get info for '%s': %s"
+msgstr "无法获取“%s”的信息：%s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1609
+#, c-format
+msgid "Could not create '%s': %s"
+msgstr "无法创建“%s”：%s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1975
 msgid "Network Servers"
 msgstr "网络服务器"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1956
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1991
 msgid "File System"
 msgstr "文件系统"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2485
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2061
+#, c-format
+msgid "'%s': %s"
+msgstr "“%s”：%s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2520
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "书签保存失败(%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2922
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2957
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "无法获取文件“%s”的信息"
 
-#: ../file-chooser/testfilechooser.c:181
+#: ../file-chooser/testfilechooser.c:178
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "无法获取文件“%s”的信息：%s"
 
-#: ../file-chooser/testfilechooser.c:194
+#: ../file-chooser/testfilechooser.c:191
 #, c-format
 msgid "Failed to open file '%s': %s"
 msgstr "打开文件“%s”失败：%s"
 
-#: ../file-chooser/testfilechooser.c:233
+#: ../file-chooser/testfilechooser.c:230
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
@@ -680,39 +701,39 @@ msgstr "您必须登录才能访问 %s 域 %s\n"
 msgid "You must log in to access %s\n"
 msgstr "您必须登录才能访问“%s”\n"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "Specify session management ID"
 msgstr "设定会话管理器 ID 标识"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "Specify prefix of saved configuration"
 msgstr "设定保存的配置的前缀"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "PREFIX"
 msgstr "前缀"
 
-#: ../libgnomeui/gnome-client.c:1008 ../libgnomeui/gnome-client.c:1042
+#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
 msgstr "禁止连接到会话管理器"
 
-#: ../libgnomeui/gnome-client.c:1016
+#: ../libgnomeui/gnome-client.c:1014
 msgid "Session management:"
 msgstr "会话管理："
 
-#: ../libgnomeui/gnome-client.c:1017
+#: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
 msgstr "显示会话管理选项"
 
-#: ../libgnomeui/gnome-client.c:1048
+#: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
 msgstr "会话管理"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:2571
 msgid "Cancel Logout"
 msgstr "取消注销"
 
@@ -728,72 +749,72 @@ msgstr "打开指定颜色的对话框"
 msgid "Pick a color"
 msgstr "选取颜色"
 
-#: ../libgnomeui/gnome-dateedit.c:495 ../libgnomeui/gnome-dateedit.c:802
+#: ../libgnomeui/gnome-dateedit.c:493 ../libgnomeui/gnome-dateedit.c:790
 msgid "Time"
 msgstr "时间"
 
-#: ../libgnomeui/gnome-dateedit.c:496
+#: ../libgnomeui/gnome-dateedit.c:494
 msgid "The time currently selected"
 msgstr "当前选中的时间"
 
-#: ../libgnomeui/gnome-dateedit.c:508
+#: ../libgnomeui/gnome-dateedit.c:506
 msgid "DateEdit Flags"
 msgstr "日期编辑标志"
 
-#: ../libgnomeui/gnome-dateedit.c:509
+#: ../libgnomeui/gnome-dateedit.c:507
 msgid "Flags for how DateEdit looks"
 msgstr "关于日期编辑外观的标志"
 
-#: ../libgnomeui/gnome-dateedit.c:518
+#: ../libgnomeui/gnome-dateedit.c:516
 msgid "Lower Hour"
 msgstr "较低小时"
 
-#: ../libgnomeui/gnome-dateedit.c:519
+#: ../libgnomeui/gnome-dateedit.c:517
 msgid "Lower hour in the time popup selector"
 msgstr "时间弹出选择器中的较低小时"
 
-#: ../libgnomeui/gnome-dateedit.c:529
+#: ../libgnomeui/gnome-dateedit.c:527
 msgid "Upper Hour"
 msgstr "较高小时"
 
-#: ../libgnomeui/gnome-dateedit.c:530
+#: ../libgnomeui/gnome-dateedit.c:528
 msgid "Upper hour in the time popup selector"
 msgstr "时间弹出选择器中的较高小时"
 
-#: ../libgnomeui/gnome-dateedit.c:540
+#: ../libgnomeui/gnome-dateedit.c:538
 msgid "Initial Time"
 msgstr "初始化时间"
 
-#: ../libgnomeui/gnome-dateedit.c:541
+#: ../libgnomeui/gnome-dateedit.c:539
 msgid "The initial time"
 msgstr "初始化时间"
 
-#: ../libgnomeui/gnome-dateedit.c:765 ../libgnomeui/gnome-scores.c:96
+#: ../libgnomeui/gnome-dateedit.c:753 ../libgnomeui/gnome-scores.c:96
 msgid "Date"
 msgstr "日期"
 
-#: ../libgnomeui/gnome-dateedit.c:778
+#: ../libgnomeui/gnome-dateedit.c:766
 msgid "Select Date"
 msgstr "选择日期"
 
-#: ../libgnomeui/gnome-dateedit.c:778
+#: ../libgnomeui/gnome-dateedit.c:766
 msgid "Select the date from a calendar"
 msgstr "从日历中选择日期"
 
 #. Calendar label, only shown if the date editor has a time field
-#: ../libgnomeui/gnome-dateedit.c:789
+#: ../libgnomeui/gnome-dateedit.c:777
 msgid "Calendar"
 msgstr "日历"
 
-#: ../libgnomeui/gnome-dateedit.c:810
+#: ../libgnomeui/gnome-dateedit.c:798
 msgid "Select Time"
 msgstr "选择时间"
 
-#: ../libgnomeui/gnome-dateedit.c:810
+#: ../libgnomeui/gnome-dateedit.c:798
 msgid "Select the time from a list"
 msgstr "从列表中选择时间"
 
-#: ../libgnomeui/gnome-dateedit.c:1029
+#: ../libgnomeui/gnome-dateedit.c:1017
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date 已过时，使用 gnome_date_edit_get_time"
 
@@ -922,7 +943,7 @@ msgid "Show the 'Help' button"
 msgstr "显示“帮助”按钮"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:239 ../libgnomeui/gnome-icon-entry.c:176
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
 msgstr "历史 ID"
 
@@ -934,60 +955,60 @@ msgstr "GTK 项"
 msgid "The GTK entry"
 msgstr "GTK 项"
 
-#: ../libgnomeui/gnome-file-entry.c:240
+#: ../libgnomeui/gnome-file-entry.c:237
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr "文件项的唯一标识符。它用于保存历史列表。"
 
-#: ../libgnomeui/gnome-file-entry.c:248 ../libgnomeui/gnome-icon-entry.c:185
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr "浏览对话框标题"
 
-#: ../libgnomeui/gnome-file-entry.c:249
+#: ../libgnomeui/gnome-file-entry.c:246
 msgid "Title for the Browse file dialog."
 msgstr "浏览文件对话框的标题。"
 
-#: ../libgnomeui/gnome-file-entry.c:256
+#: ../libgnomeui/gnome-file-entry.c:253
 msgid "Directory Entry"
 msgstr "目录项"
 
-#: ../libgnomeui/gnome-file-entry.c:257
+#: ../libgnomeui/gnome-file-entry.c:254
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr "文件项是否用于输入目录名称或完整的文件名。"
 
-#: ../libgnomeui/gnome-file-entry.c:265
+#: ../libgnomeui/gnome-file-entry.c:262
 msgid "Modal"
 msgstr "模态"
 
-#: ../libgnomeui/gnome-file-entry.c:266
+#: ../libgnomeui/gnome-file-entry.c:263
 msgid "Whether the Browse file window should be modal."
 msgstr "浏览文件窗口是否为模态。"
 
-#: ../libgnomeui/gnome-file-entry.c:273 ../libgnomeui/gnome-icon-entry.c:201
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "文件名"
 
-#: ../libgnomeui/gnome-file-entry.c:274
+#: ../libgnomeui/gnome-file-entry.c:271
 msgid "Filename that should be displayed in the file entry."
 msgstr "应该显示在文件项中的文件名。"
 
-#: ../libgnomeui/gnome-file-entry.c:282
+#: ../libgnomeui/gnome-file-entry.c:279
 msgid "Default Path"
 msgstr "默认路径"
 
-#: ../libgnomeui/gnome-file-entry.c:283
+#: ../libgnomeui/gnome-file-entry.c:280
 msgid "Default path for the Browse file window."
 msgstr "浏览文件窗口的默认路径。"
 
-#: ../libgnomeui/gnome-file-entry.c:290
+#: ../libgnomeui/gnome-file-entry.c:287
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-file-entry.c:291
+#: ../libgnomeui/gnome-file-entry.c:288
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -997,12 +1018,12 @@ msgstr ""
 "数，可以使用此属性来获得 GnomeEntry。"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-file-entry.c:301
+#: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-file-entry.c:302
+#: ../libgnomeui/gnome-file-entry.c:299
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1011,46 +1032,46 @@ msgstr ""
 "文件项用来输入文件名的 GtkEntry。如果您需要修改或查询 GtkEntry 的任何参数，可"
 "以使用此属性来获得 GtkEntry。"
 
-#: ../libgnomeui/gnome-file-entry.c:312
+#: ../libgnomeui/gnome-file-entry.c:309
 msgid "Use GtkFileChooser"
 msgstr "使用 GtkFileChooser"
 
-#: ../libgnomeui/gnome-file-entry.c:313
+#: ../libgnomeui/gnome-file-entry.c:310
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
 "是使用新的 GtkFileChooser 部件，还是使用 GtkFileSelection 部件来选择文件。"
 
-#: ../libgnomeui/gnome-file-entry.c:322
+#: ../libgnomeui/gnome-file-entry.c:319
 msgid "GtkFileChooser Action"
 msgstr "GtkFileChooser 动作"
 
-#: ../libgnomeui/gnome-file-entry.c:323
+#: ../libgnomeui/gnome-file-entry.c:320
 msgid "The type of operation that the file selector is performing."
 msgstr "文件选择器正在执行的操作类型。"
 
-#: ../libgnomeui/gnome-file-entry.c:658 ../libgnomeui/gnome-file-entry.c:695
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "选择文件"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-file-entry.c:820
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
 msgstr "路径"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-file-entry.c:820
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
 msgstr "文件路径"
 
 # SUN CHANGED MESSAGE
-#: ../libgnomeui/gnome-file-entry.c:849
+#: ../libgnomeui/gnome-file-entry.c:843
 msgid "_Browse..."
 msgstr "浏览(_B)..."
 
 # SUN NEW TRANSLATION
-#: ../libgnomeui/gnome-file-entry.c:850
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "Pop up a file selector to choose a file"
 msgstr "弹出用于选择文件的文件选择器"
 
@@ -1240,8 +1261,8 @@ msgstr ""
 "获得 GtkDialog。"
 
 #: ../libgnomeui/gnome-icon-entry.c:319 ../libgnomeui/gnome-icon-entry.c:1003
-msgid "Choose Icon"
-msgstr "选择图标"
+msgid "No Icon"
+msgstr "无图标"
 
 # SUN CHANGED MESSAGE
 #: ../libgnomeui/gnome-icon-entry.c:773
