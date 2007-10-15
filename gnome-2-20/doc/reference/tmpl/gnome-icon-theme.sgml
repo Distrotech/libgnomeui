@@ -1,0 +1,174 @@
+<!-- ##### SECTION Title ##### -->
+GnomeIconTheme
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomeIconThemeClass ##### -->
+<para>
+
+</para>
+
+@parent_class: 
+@changed: 
+
+<!-- ##### TYPEDEF GnomeIconTheme ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_icon_theme_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_get_search_path ##### -->
+<para>
+
+</para>
+
+@theme: 
+@path: 
+@n_elements: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_set_search_path ##### -->
+<para>
+
+</para>
+
+@theme: 
+@path: 
+@n_elements: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_get_allow_svg ##### -->
+<para>
+
+</para>
+
+@theme: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_set_allow_svg ##### -->
+<para>
+
+</para>
+
+@theme: 
+@allow_svg: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_get_example_icon_name ##### -->
+<para>
+
+</para>
+
+@theme: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_append_search_path ##### -->
+<para>
+
+</para>
+
+@theme: 
+@path: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_prepend_search_path ##### -->
+<para>
+
+</para>
+
+@theme: 
+@path: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_set_custom_theme ##### -->
+<para>
+
+</para>
+
+@theme: 
+@theme_name: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_lookup_icon ##### -->
+<para>
+
+</para>
+
+@theme: 
+@icon_name: 
+@size: 
+@icon_data: 
+@base_size: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_has_icon ##### -->
+<para>
+
+</para>
+
+@theme: 
+@icon_name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_list_icons ##### -->
+<para>
+
+</para>
+
+@theme: 
+@context: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_theme_rescan_if_needed ##### -->
+<para>
+
+</para>
+
+@theme: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_data_dup ##### -->
+<para>
+
+</para>
+
+@icon_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_data_free ##### -->
+<para>
+
+</para>
+
+@icon_data: 
+
+

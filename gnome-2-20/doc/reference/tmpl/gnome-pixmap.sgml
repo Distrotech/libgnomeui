@@ -1,0 +1,120 @@
+<!-- ##### SECTION Title ##### -->
+GnomePixmap
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomePixmapPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GnomePixmap ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_pixmap_new_from_file ##### -->
+<para>
+
+</para>
+
+@filename: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_pixmap_new_from_file_at_size ##### -->
+<para>
+
+</para>
+
+@filename: 
+@width: 
+@height: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_pixmap_new_from_xpm_d ##### -->
+<para>
+
+</para>
+
+@xpm_data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_pixmap_new_from_xpm_d_at_size ##### -->
+<para>
+
+</para>
+
+@xpm_data: 
+@width: 
+@height: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_pixmap_new_from_gnome_pixmap ##### -->
+<para>
+
+</para>
+
+@gpixmap: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_pixmap_load_file ##### -->
+<para>
+
+</para>
+
+@gpixmap: 
+@filename: 
+
+
+<!-- ##### FUNCTION gnome_pixmap_load_file_at_size ##### -->
+<para>
+
+</para>
+
+@gpixmap: 
+@filename: 
+@width: 
+@height: 
+
+
+<!-- ##### FUNCTION gnome_pixmap_load_xpm_d ##### -->
+<para>
+
+</para>
+
+@gpixmap: 
+@xpm_data: 
+
+
+<!-- ##### FUNCTION gnome_pixmap_load_xpm_d_at_size ##### -->
+<para>
+
+</para>
+
+@gpixmap: 
+@xpm_data: 
+@width: 
+@height: 
+
+

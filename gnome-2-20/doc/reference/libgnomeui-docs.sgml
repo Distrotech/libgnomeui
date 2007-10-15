@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY libgnomeui-GnomeAbout SYSTEM "xml/gnome-about.xml">
+<!ENTITY libgnomeui-GnomeMDIChild SYSTEM "xml/gnome-mdi-child.xml">
+<!ENTITY libgnomeui-GnomeClient SYSTEM "xml/gnome-client.xml">
+<!ENTITY libgnomeui-GnomeColorPicker SYSTEM "xml/gnome-color-picker.xml">
+<!ENTITY libgnomeui-GnomeDateEdit SYSTEM "xml/gnome-dateedit.xml">
+<!ENTITY libgnomeui-GnomeDruidPageEdge SYSTEM "xml/gnome-druid-page-edge.xml">
+<!ENTITY libgnomeui-GnomeFileEntry SYSTEM "xml/gnome-file-entry.xml">
+<!ENTITY libgnomeui-GnomeDruidPageStandard SYSTEM "xml/gnome-druid-page-standard.xml">
+<!ENTITY libgnomeui-GnomeDruidPage SYSTEM "xml/gnome-druid-page.xml">
+<!ENTITY libgnomeui-GnomeDruid SYSTEM "xml/gnome-druid.xml">
+<!ENTITY libgnomeui-GnomeEntry SYSTEM "xml/gnome-entry.xml">
+<!ENTITY libgnomeui-GnomeFontPicker SYSTEM "xml/gnome-font-picker.xml">
+<!ENTITY libgnomeui-GnomeHRef SYSTEM "xml/gnome-href.xml">
+<!ENTITY libgnomeui-GnomeIconList SYSTEM "xml/gnome-icon-list.xml">
+<!ENTITY libgnomeui-GnomeIconLookup SYSTEM "xml/gnome-icon-lookup.xml">
+<!ENTITY libgnomeui-GnomeIconTheme SYSTEM "xml/gnome-icon-theme.xml">
+<!ENTITY libgnomeui-GnomeThemeFile SYSTEM "xml/gnome-theme-parse.xml">
+<!ENTITY libgnomeui-GnomeThumbnail SYSTEM "xml/gnome-thumbnail.xml">
+<!ENTITY libgnomeui-GnomeApp SYSTEM "xml/gnome-app.xml">
+<!ENTITY libgnomeui-GnomeMDIGenericChild SYSTEM "xml/gnome-mdi-generic-child.xml">
+<!ENTITY libgnomeui-GnomeMDI SYSTEM "xml/gnome-mdi.xml">
+<!ENTITY libgnomeui-GnomeAppBar SYSTEM "xml/gnome-appbar.xml">
+<!ENTITY libgnomeui-GnomeAuthentication SYSTEM "xml/gnome-authentication.xml">
+<!ENTITY libgnomeui-GnomeDialog SYSTEM "xml/gnome-dialog.xml">
+<!ENTITY libgnomeui-GnomeIce SYSTEM "xml/gnome-ice.xml">
+<!ENTITY libgnomeui-GnomeIconEntry SYSTEM "xml/gnome-icon-entry.xml">
+<!ENTITY libgnomeui-GnomeIconItem SYSTEM "xml/gnome-icon-item.xml">
+<!ENTITY libgnomeui-GnomeIconSelection SYSTEM "xml/gnome-icon-sel.xml">
+<!ENTITY libgnomeui-GnomeMessageBox SYSTEM "xml/gnome-messagebox.xml">
+<!ENTITY libgnomeui-GnomeMultiScreen SYSTEM "xml/gnome-multi-screen.xml">
+<!ENTITY libgnomeui-GnomePassword SYSTEM "xml/gnome-password.xml">
+<!ENTITY libgnomeui-GnomePixmapEntry SYSTEM "xml/gnome-pixmap-entry.xml">
+<!ENTITY libgnomeui-GnomePixmap SYSTEM "xml/gnome-pixmap.xml">
+<!ENTITY libgnomeui-GnomePropertyBox SYSTEM "xml/gnome-propertybox.xml">
+<!ENTITY libgnomeui-GnomeScores SYSTEM "xml/gnome-scores.xml">
+<!ENTITY libgnomeui-gnome-app-helper SYSTEM "xml/gnome-app-helper.xml">
+<!ENTITY libgnomeui-gnome-app-util SYSTEM "xml/gnome-app-util.xml">
+<!ENTITY libgnomeui-gnome-mdi-session SYSTEM "xml/gnome-mdi-session.xml">
+<!ENTITY libgnomeui-gnome-ui-init SYSTEM "xml/gnome-ui-init.xml">
+<!ENTITY libgnomeui-gnome-dialog-util SYSTEM "xml/gnome-dialog-util.xml">
+<!ENTITY libgnomeui-gnome-stock-icons SYSTEM "xml/gnome-stock-icons.xml">
+<!ENTITY libgnomeui-gnome-types SYSTEM "xml/gnome-types.xml">
+<!ENTITY libgnomeui-gnome-uidefs SYSTEM "xml/gnome-uidefs.xml">
+<!ENTITY libgnomeui-gnome-vfs-util SYSTEM "xml/gnome-vfs-util.xml">
+<!ENTITY libgnomeui-gnome-window SYSTEM "xml/gnome-window.xml">
+<!ENTITY libgnomeui-gnome-window-icon SYSTEM "xml/gnome-window-icon.xml">
+<!ENTITY libgnomeui-gnome-popup-menu SYSTEM "xml/gnome-popup-menu.xml">
+<!ENTITY libgnomeui-gnometypebuiltins SYSTEM "xml/gnometypebuiltins.xml">
+<!ENTITY libgnomeui-object-index SYSTEM "xml/tree_index.sgml">
+<!ENTITY version SYSTEM "version.xml">
+]>
+<book id="index">
+  <bookinfo>
+    <title>GNOME UI Library Reference Manual</title>
+    <releaseinfo>for libgnomeui &version;</releaseinfo>
+  </bookinfo>
+
+  <part>
+    <title>GNOME UI Library (libgnomeui)</title>
+
+    <chapter id="initialization">
+      <title>Initialization and Session Management</title>
+      <para>
+      This section includes functions and parameters used to initialise GNOME
+      applications which use <application>libgnomeui</application> and to
+      handle interactions with whatever session manager is running when the
+      application starts up.
+      </para>
+      <para>
+      A typical application will call <function>gnome_program_init</function>
+      (from <filename>libgnome/libgnome.h</filename>) with parameters from the
+      gnome-ui-init section and will then possibly have further interactions
+      (beyond the initial default setup performed by
+      <function>gnome_program_init</function>) with the session manager.
+      </para>
+      &libgnomeui-gnome-ui-init;
+      &libgnomeui-GnomeClient;
+    </chapter>
+
+    <chapter id="application-mgmt">
+      <title>Application Management</title>
+      <para>
+      After initializing <application>libgnomeui</application>, a typical
+      application will need to create its main application window, possibly
+      with some non-standard decorations, create its credit (or About) box and
+      get ready to enter the main loop. The functions in this section provide
+      the facility for carrying out all of these operations.
+      </para>
+      &libgnomeui-GnomeApp;
+      &libgnomeui-GnomeAppBar;
+      &libgnomeui-gnome-app-helper;
+      &libgnomeui-GnomeMultiScreen;
+      &libgnomeui-GnomeAuthentication;
+      &libgnomeui-GnomePassword;
+    </chapter>
+
+    <chapter id="druids">
+      <title>Druids</title>
+      <para>
+      Druids (sometimes called <emphasis>Wizards</emphasis> on other systems)
+      are a series of dialog boxes that lead the user through a task that is
+      serial in nature (that is, it has a natural beginning, sequence through
+      the pages and an end).
+      </para>
+      <para>
+      Some applications (for example GNOME Lokkit -- for setting up simple
+      firewall settings) are purely a series of screens that extract some
+      information from the user and then performs an action based on that data.
+      Other applications may be more traditional in nature, however they may
+      wish to run the user through a series of question the first time they run
+      the application; such as to set things up correctly or to import
+      settings from another program. Both these types of programs can use the
+      various druid functions to make their implementation easier.
+      </para>
+      &libgnomeui-GnomeDruid;
+      &libgnomeui-GnomeDruidPage;
+      &libgnomeui-GnomeDruidPageEdge;
+      &libgnomeui-GnomeDruidPageStandard;
+    </chapter>
+
+    <chapter id="fixme">
+      <title>Miscellaneous Widgets</title>
+      &libgnomeui-GnomeDateEdit;
+      &libgnomeui-GnomeHRef;
+      &libgnomeui-GnomeIce;
+      &libgnomeui-GnomeIconEntry;
+      &libgnomeui-GnomeIconLookup;
+      &libgnomeui-GnomeIconSelection;
+      &libgnomeui-GnomeThumbnail;
+    </chapter>
+
+    <chapter id="miscellaneous">
+      <title>Miscellaneous Utility Functions and Macros</title>
+      <para>
+      This section collects together a number of useful auxillary functions
+      that do not really fit into any other place in the hierarchy. These
+      include the standard constants for icons, some standard type macros,
+      function templates and functions for loading images.
+      </para>
+      &libgnomeui-gnome-stock-icons;
+      &libgnomeui-gnometypebuiltins;
+      &libgnomeui-gnome-types;
+      &libgnomeui-gnome-uidefs;
+      &libgnomeui-gnome-vfs-util;
+    </chapter>
+
+    <chapter id="deprecated">
+      <title>Deprecated Modules</title>
+      &libgnomeui-GnomeAbout;
+      &libgnomeui-gnome-app-util;
+      &libgnomeui-GnomeColorPicker;
+      &libgnomeui-GnomeDialog;
+      &libgnomeui-gnome-dialog-util;
+      &libgnomeui-GnomeEntry;
+      &libgnomeui-GnomeFileEntry;
+      &libgnomeui-GnomeFontPicker;
+      &libgnomeui-GnomeIconList;
+      &libgnomeui-GnomeIconItem;
+      &libgnomeui-GnomeIconTheme;
+      &libgnomeui-GnomeMDI;
+      &libgnomeui-GnomeMDIChild;
+      &libgnomeui-GnomeMDIGenericChild;
+      &libgnomeui-gnome-mdi-session;
+      &libgnomeui-GnomeMessageBox;
+      &libgnomeui-GnomePixmap;
+      &libgnomeui-GnomePixmapEntry;
+      &libgnomeui-gnome-popup-menu;
+      &libgnomeui-GnomePropertyBox;
+      &libgnomeui-GnomeScores;
+      &libgnomeui-GnomeThemeFile;
+      &libgnomeui-gnome-window;
+      &libgnomeui-gnome-window-icon;
+    </chapter>
+
+    <chapter id="libgnomeui-objects">
+      <title>Object Hierarchy</title>
+      &libgnomeui-object-index;
+    </chapter>
+  </part>
+
+  <index>
+    <title>Index</title>
+  </index>
+  <index role="deprecated">
+    <title>Index of deprecated symbols</title>
+  </index>
+  <index role="2.2">
+    <title>Index of new symbols in 2.2</title>
+  </index>
+  <index role="2.4">
+    <title>Index of new symbols in 2.4</title>
+  </index>
+  <index role="2.6">
+    <title>Index of new symbols in 2.6</title>
+  </index>
+  <index role="2.8">
+    <title>Index of new symbols in 2.8</title>
+  </index>
+  <index role="2.10">
+    <title>Index of new symbols in 2.10</title>
+  </index>
+  <index role="2.12">
+    <title>Index of new symbols in 2.12</title>
+  </index>
+  <index role="2.14">
+    <title>Index of new symbols in 2.14</title>
+  </index>
+  <index role="2.16">
+    <title>Index of new symbols in 2.16</title>
+  </index>
+
+</book>

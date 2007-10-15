@@ -1,0 +1,67 @@
+<!-- ##### SECTION Title ##### -->
+GnomeIconLookup
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### ENUM GnomeIconLookupFlags ##### -->
+<para>
+
+</para>
+
+@GNOME_ICON_LOOKUP_FLAGS_NONE: 
+@GNOME_ICON_LOOKUP_FLAGS_EMBEDDING_TEXT: 
+@GNOME_ICON_LOOKUP_FLAGS_SHOW_SMALL_IMAGES_AS_THEMSELVES: 
+@GNOME_ICON_LOOKUP_FLAGS_ALLOW_SVG_AS_THEMSELVES: 
+
+<!-- ##### ENUM GnomeIconLookupResultFlags ##### -->
+<para>
+
+</para>
+
+@GNOME_ICON_LOOKUP_RESULT_FLAGS_NONE: 
+@GNOME_ICON_LOOKUP_RESULT_FLAGS_THUMBNAIL: 
+
+<!-- ##### FUNCTION gnome_icon_lookup ##### -->
+<para>
+
+</para>
+
+@icon_theme: 
+@thumbnail_factory: 
+@file_uri: 
+@custom_icon: 
+@file_info: 
+@mime_type: 
+@flags: 
+@result: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_lookup_sync ##### -->
+<para>
+
+</para>
+
+@icon_theme: 
+@thumbnail_factory: 
+@file_uri: 
+@custom_icon: 
+@flags: 
+@result: 
+@Returns: 
+
+

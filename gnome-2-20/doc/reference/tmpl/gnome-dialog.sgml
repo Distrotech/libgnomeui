@@ -1,0 +1,337 @@
+<!-- ##### SECTION Title ##### -->
+GnomeDialog
+
+<!-- ##### SECTION Short_Description ##### -->
+Create generic dialog boxes.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomeDialog ##### -->
+<para>
+
+</para>
+
+@vbox: 
+
+<!-- ##### SIGNAL GnomeDialog::clicked ##### -->
+<para>
+
+</para>
+
+@dialog: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GnomeDialog::close ##### -->
+<para>
+
+</para>
+
+@dialog: the object which received the signal.
+@Returns: 
+
+<!-- ##### FUNCTION gnome_dialog_new ##### -->
+<para>
+
+</para>
+
+@title: 
+@Varargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_dialog_newv ##### -->
+<para>
+
+</para>
+
+@title: 
+@buttons: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_dialog_set_parent ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@parent: 
+
+
+<!-- ##### FUNCTION gnome_dialog_button_connect ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@button: 
+@callback: 
+@data: 
+
+
+<!-- ##### FUNCTION gnome_dialog_button_connect_object ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@button: 
+@callback: 
+@obj: 
+
+
+<!-- ##### FUNCTION gnome_dialog_run ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_dialog_run_and_close ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_dialog_set_default ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@button: 
+
+
+<!-- ##### FUNCTION gnome_dialog_grab_focus ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@button: 
+
+
+<!-- ##### FUNCTION gnome_dialog_set_sensitive ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@button: 
+@setting: 
+
+
+<!-- ##### FUNCTION gnome_dialog_set_accelerator ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@button: 
+@accelerator_key: 
+@accelerator_mods: 
+
+
+<!-- ##### FUNCTION gnome_dialog_close ##### -->
+<para>
+
+</para>
+
+@dialog: 
+
+
+<!-- ##### FUNCTION gnome_dialog_close_hides ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@just_hide: 
+
+
+<!-- ##### FUNCTION gnome_dialog_set_close ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@click_closes: 
+
+
+<!-- ##### FUNCTION gnome_dialog_editable_enters ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@editable: 
+
+
+<!-- ##### FUNCTION gnome_dialog_append_buttons ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@first: 
+@Varargs: 
+
+
+<!-- ##### FUNCTION gnome_dialog_append_button ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@button_name: 
+
+
+<!-- ##### FUNCTION gnome_dialog_append_buttonsv ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@buttons: 
+
+
+<!-- ##### FUNCTION gnome_dialog_append_button_with_pixmap ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@button_name: 
+@pixmap_name: 
+
+
+<!-- ##### FUNCTION gnome_dialog_append_buttons_with_pixmaps ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@names: 
+@pixmaps: 
+
+
+<!-- ##### FUNCTION gnome_dialog_construct ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@title: 
+@ap: 
+
+
+<!-- ##### FUNCTION gnome_dialog_constructv ##### -->
+<para>
+
+</para>
+
+@dialog: 
+@title: 
+@buttons: 
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_OK ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_CANCEL ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_YES ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_NO ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_CLOSE ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_APPLY ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_HELP ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_NEXT ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_PREV ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_UP ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_DOWN ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_STOCK_BUTTON_FONT ##### -->
+<para>
+This button has been replaced by one in GTK+ and new code should use that.
+</para>
+
+
+

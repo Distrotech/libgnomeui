@@ -1,0 +1,319 @@
+<!-- ##### SECTION Title ##### -->
+gnometypebuiltins
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO GNOME_TYPE_UI_INFO_TYPE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_ui_info_type_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_UI_INFO_CONFIGURABLE_TYPES ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_ui_info_configurable_types_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_UI_PIXMAP_TYPE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_ui_pixmap_type_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_INTERACT_STYLE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_interact_style_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_DIALOG_TYPE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_dialog_type_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_SAVE_STYLE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_save_style_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_RESTART_STYLE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_restart_style_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_CLIENT_STATE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_client_state_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_CLIENT_FLAGS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_client_flags_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_DATE_EDIT_FLAGS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_date_edit_flags_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_EDGE_POSITION ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_edge_position_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_FONT_PICKER_MODE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_font_picker_mode_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_ICON_LIST_MODE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_icon_list_mode_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_MDI_MODE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_mdi_mode_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_PREFERENCES_TYPE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_preferences_type_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_THUMBNAIL_SIZE ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_thumbnail_size_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_ICON_LOOKUP_FLAGS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_icon_lookup_flags_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_ICON_LOOKUP_RESULT_FLAGS ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_icon_lookup_result_flags_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_ICON_THEME ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_icon_theme_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### MACRO GNOME_TYPE_THUMBNAIL_FACTORY ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gnome_thumbnail_factory_get_type ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+

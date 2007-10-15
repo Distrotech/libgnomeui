@@ -1,0 +1,99 @@
+<!-- ##### SECTION Title ##### -->
+GnomeMessageBox
+
+<!-- ##### SECTION Short_Description ##### -->
+Create standard message boxes.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO GNOME_MESSAGE_BOX_INFO ##### -->
+<para>
+A constant that can be passed to gnome_message_box_new() to specify the type of
+message box to create.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MESSAGE_BOX_WARNING ##### -->
+<para>
+A constant that can be passed to gnome_message_box_new() to specify the type of
+message box to create.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MESSAGE_BOX_ERROR ##### -->
+<para>
+A constant that can be passed to gnome_message_box_new() to specify the type of
+message box to create.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MESSAGE_BOX_QUESTION ##### -->
+<para>
+A constant that can be passed to gnome_message_box_new() to specify the type of
+message box to create.
+</para>
+
+
+
+<!-- ##### MACRO GNOME_MESSAGE_BOX_GENERIC ##### -->
+<para>
+A constant that can be passed to gnome_message_box_new() to specify the type of
+message box to create.
+</para>
+
+
+
+<!-- ##### STRUCT GnomeMessageBox ##### -->
+<para>
+
+</para>
+
+@dialog: 
+
+<!-- ##### FUNCTION gnome_message_box_new ##### -->
+<para>
+
+</para>
+
+@message: 
+@message_box_type: 
+@Varargs: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_message_box_newv ##### -->
+<para>
+
+</para>
+
+@message: 
+@message_box_type: 
+@buttons: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_message_box_construct ##### -->
+<para>
+
+</para>
+
+@messagebox: 
+@message: 
+@message_box_type: 
+@buttons: 
+
+

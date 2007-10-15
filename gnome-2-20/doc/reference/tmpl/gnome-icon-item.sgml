@@ -1,0 +1,153 @@
+<!-- ##### SECTION Title ##### -->
+GnomeIconTextItem
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomeIconTextItem ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GnomeIconTextItem::editing-started ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconTextItem::editing-stopped ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconTextItem::height-changed ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconTextItem::selection-started ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconTextItem::selection-stopped ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconTextItem::text-changed ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+@Returns: 
+
+<!-- ##### SIGNAL GnomeIconTextItem::width-changed ##### -->
+<para>
+
+</para>
+
+@icontextitem: the object which received the signal.
+
+<!-- ##### FUNCTION gnome_icon_text_item_configure ##### -->
+<para>
+
+</para>
+
+@iti: 
+@x: 
+@y: 
+@width: 
+@fontname: 
+@text: 
+@is_editable: 
+@is_static: 
+
+
+<!-- ##### FUNCTION gnome_icon_text_item_setxy ##### -->
+<para>
+
+</para>
+
+@iti: 
+@x: 
+@y: 
+
+
+<!-- ##### FUNCTION gnome_icon_text_item_select ##### -->
+<para>
+
+</para>
+
+@iti: 
+@sel: 
+
+
+<!-- ##### FUNCTION gnome_icon_text_item_focus ##### -->
+<para>
+
+</para>
+
+@iti: 
+@focused: 
+
+
+<!-- ##### FUNCTION gnome_icon_text_item_get_text ##### -->
+<para>
+
+</para>
+
+@iti: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_text_item_start_editing ##### -->
+<para>
+
+</para>
+
+@iti: 
+
+
+<!-- ##### FUNCTION gnome_icon_text_item_stop_editing ##### -->
+<para>
+
+</para>
+
+@iti: 
+@accept: 
+
+
+<!-- ##### FUNCTION gnome_icon_text_item_get_editable ##### -->
+<para>
+
+</para>
+
+@iti: 
+@Returns: 
+
+

@@ -1,0 +1,209 @@
+<!-- ##### SECTION Title ##### -->
+GnomeFileEntry
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomeFileEntry ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GnomeFileEntry::activate ##### -->
+<para>
+
+</para>
+
+@fileentry: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeFileEntry::browse-clicked ##### -->
+<para>
+
+</para>
+
+@fileentry: the object which received the signal.
+
+<!-- ##### ARG GnomeFileEntry:browse-dialog-title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:default-path ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:directory-entry ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:filechooser-action ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:filename ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:gnome-entry ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:gtk-entry ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:history-id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:modal ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFileEntry:use-filechooser ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gnome_file_entry_new ##### -->
+<para>
+
+</para>
+
+@history_id: 
+@browse_dialog_title: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_construct ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@history_id: 
+@browse_dialog_title: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_gnome_entry ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_gtk_entry ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_set_title ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@browse_dialog_title: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_set_default_path ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@path: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_set_directory_entry ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@directory_entry: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_get_directory_entry ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_get_full_path ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@file_must_exist: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_set_filename ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@filename: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_set_modal ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@is_modal: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_get_modal ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_file_entry_set_directory ##### -->
+<para>
+
+</para>
+
+@fentry: 
+@directory_entry: 
+
+

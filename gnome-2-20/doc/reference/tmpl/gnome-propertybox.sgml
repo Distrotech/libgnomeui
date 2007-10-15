@@ -1,0 +1,86 @@
+<!-- ##### SECTION Title ##### -->
+GnomePropertyBox
+
+<!-- ##### SECTION Short_Description ##### -->
+Create a tabbed dialog for setting properties and preferences.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomePropertyBox ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GnomePropertyBox::apply ##### -->
+<para>
+
+</para>
+
+@propertybox: the object which received the signal.
+@arg1: the notebook page number which emitted the signal.
+
+<!-- ##### SIGNAL GnomePropertyBox::help ##### -->
+<para>
+
+</para>
+
+@propertybox: the object which received the signal.
+@arg1: the notebook page number which emitted the signal.
+
+<!-- ##### FUNCTION gnome_property_box_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_property_box_changed ##### -->
+<para>
+
+</para>
+
+@property_box: 
+
+
+<!-- ##### FUNCTION gnome_property_box_set_modified ##### -->
+<para>
+
+</para>
+
+@property_box: 
+@state: 
+
+
+<!-- ##### FUNCTION gnome_property_box_append_page ##### -->
+<para>
+
+</para>
+
+@property_box: 
+@child: 
+@tab_label: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_property_box_set_state ##### -->
+<para>
+
+</para>
+
+@property_box: 
+@state: 
+
+

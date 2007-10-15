@@ -1,0 +1,460 @@
+<!-- ##### SECTION Title ##### -->
+GnomeIconList
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### ENUM GnomeIconListMode ##### -->
+<para>
+
+</para>
+
+@GNOME_ICON_LIST_ICONS: 
+@GNOME_ICON_LIST_TEXT_BELOW: 
+@GNOME_ICON_LIST_TEXT_RIGHT: 
+
+<!-- ##### STRUCT GnomeIconList ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GnomeIconList::focus-icon ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GnomeIconList::move-cursor ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### SIGNAL GnomeIconList::select-icon ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+@arg1: 
+@event: 
+
+<!-- ##### SIGNAL GnomeIconList::text-changed ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+@arg1: 
+@arg2: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeIconList::toggle-cursor-selection ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconList::unselect-icon ##### -->
+<para>
+
+</para>
+
+@iconlist: the object which received the signal.
+@arg1: 
+@event: 
+
+<!-- ##### FUNCTION gnome_icon_list_new ##### -->
+<para>
+
+</para>
+
+@icon_width: 
+@adj: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_construct ##### -->
+<para>
+
+</para>
+
+@gil: 
+@icon_width: 
+@adj: 
+@flags: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_hadjustment ##### -->
+<para>
+
+</para>
+
+@gil: 
+@hadj: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_vadjustment ##### -->
+<para>
+
+</para>
+
+@gil: 
+@vadj: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_freeze ##### -->
+<para>
+
+</para>
+
+@gil: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_thaw ##### -->
+<para>
+
+</para>
+
+@gil: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_insert ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pos: 
+@icon_filename: 
+@text: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_insert_pixbuf ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pos: 
+@im: 
+@icon_filename: 
+@text: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_append ##### -->
+<para>
+
+</para>
+
+@gil: 
+@icon_filename: 
+@text: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_append_pixbuf ##### -->
+<para>
+
+</para>
+
+@gil: 
+@im: 
+@icon_filename: 
+@text: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_clear ##### -->
+<para>
+
+</para>
+
+@gil: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_remove ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pos: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_get_num_icons ##### -->
+<para>
+
+</para>
+
+@gil: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_get_selection_mode ##### -->
+<para>
+
+</para>
+
+@gil: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_selection_mode ##### -->
+<para>
+
+</para>
+
+@gil: 
+@mode: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_select_icon ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pos: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_select_all ##### -->
+<para>
+
+</para>
+
+@gil: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_unselect_icon ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pos: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_unselect_all ##### -->
+<para>
+
+</para>
+
+@gil: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_get_selection ##### -->
+<para>
+
+</para>
+
+@gil: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_focus_icon ##### -->
+<para>
+
+</para>
+
+@gil: 
+@idx: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_icon_width ##### -->
+<para>
+
+</para>
+
+@gil: 
+@w: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_row_spacing ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pixels: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_col_spacing ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pixels: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_text_spacing ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pixels: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_icon_border ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pixels: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_separators ##### -->
+<para>
+
+</para>
+
+@gil: 
+@sep: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_get_icon_filename ##### -->
+<para>
+
+</para>
+
+@gil: 
+@idx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_find_icon_from_filename ##### -->
+<para>
+
+</para>
+
+@gil: 
+@filename: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_icon_data ##### -->
+<para>
+
+</para>
+
+@gil: 
+@idx: 
+@data: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_set_icon_data_full ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pos: 
+@data: 
+@destroy: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_find_icon_from_data ##### -->
+<para>
+
+</para>
+
+@gil: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_get_icon_data ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pos: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_moveto ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pos: 
+@yalign: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_icon_is_visible ##### -->
+<para>
+
+</para>
+
+@gil: 
+@pos: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_get_icon_at ##### -->
+<para>
+
+</para>
+
+@gil: 
+@x: 
+@y: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_get_items_per_line ##### -->
+<para>
+
+</para>
+
+@gil: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_get_icon_text_item ##### -->
+<para>
+
+</para>
+
+@gil: 
+@idx: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_list_get_icon_pixbuf_item ##### -->
+<para>
+
+</para>
+
+@gil: 
+@idx: 
+@Returns: 
+
+

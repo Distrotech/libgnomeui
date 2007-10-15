@@ -1,0 +1,1568 @@
+# Indonesia translation of libgnomeui.
+# Copyright (C) 2005 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Mohammad DAMT <mdamt@bisnisweb.com>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui HEAD\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-01-26 15:43+0100\n"
+"PO-Revision-Date: 2005-08-30 22:23+0300\n"
+"Last-Translator: Mohammad DAMT <mdamt@bisnisweb.com>\n"
+"Language-Team: Indonesia <id@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "Objek Anak 1"
+
+#: demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "Petunjuk untuk objek 1"
+
+#: demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "Objek anak 2"
+
+#: demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "Petunjuk untuk objek 2"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:820
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "%s merupakan taut ke objek yang bukan folder"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:831
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "%s merupakan taut tanpa lokasi tujuan"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:946
+#, c-format
+msgid "%s is not a folder"
+msgstr "%s bukan folder"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1194
+msgid "File System"
+msgstr "Sistem Berkas"
+
+#: file-chooser/gtkfilesystemgnomevfs.c:1952
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Penyimpanan buku alamat gagal (%s)"
+
+#: file-chooser/sucky-desktop-item.c:217 file-chooser/sucky-desktop-item.c:605
+#, c-format
+msgid "Error reading file '%s': %s"
+msgstr "Gagal membuka berkas '%s': %s"
+
+#: file-chooser/sucky-desktop-item.c:285
+#, c-format
+msgid "Error rewinding file '%s': %s"
+msgstr "Gagal membuka berkas '%s': %s"
+
+#: file-chooser/sucky-desktop-item.c:384
+#: file-chooser/sucky-desktop-item.c:3702
+msgid "No name"
+msgstr "Tidak ada nama"
+
+#: file-chooser/sucky-desktop-item.c:620
+#, c-format
+msgid "File '%s' is not a regular file or directory."
+msgstr "Berkas '%s' bukan berkas atau direktori"
+
+#: file-chooser/sucky-desktop-item.c:796
+#, c-format
+msgid "Error cannot find file id '%s'"
+msgstr "Kode berkas '%s' tidak dapat ditemukan"
+
+#: file-chooser/sucky-desktop-item.c:842
+#, c-format
+msgid "No filename to save to"
+msgstr "Nama berkas untuk disimpan belum ditentukan"
+
+#: file-chooser/sucky-desktop-item.c:1797
+#, c-format
+msgid "Starting %s"
+msgstr "Menjalankan %s"
+
+#: file-chooser/sucky-desktop-item.c:2036
+#, c-format
+msgid "No URL to launch"
+msgstr "URL yang akan dijalankan tidak ada"
+
+#: file-chooser/sucky-desktop-item.c:2046
+#, c-format
+msgid "Not a launchable item"
+msgstr "Objek ini tidak dapat diluncurkan"
+
+#: file-chooser/sucky-desktop-item.c:2056
+#, c-format
+msgid "No command (Exec) to launch"
+msgstr "Perintah untuk peluncuran (eksekusi) tidak ada"
+
+#: file-chooser/sucky-desktop-item.c:2069
+#, c-format
+msgid "Bad command (Exec) to launch"
+msgstr "Perintah untuk peluncuran (eksekusi) salah"
+
+#: file-chooser/sucky-desktop-item.c:3759
+#, c-format
+msgid "Unknown encoding of: %s"
+msgstr "Pengkodean %s tidak dikenal"
+
+#: file-chooser/sucky-desktop-item.c:3990
+#, c-format
+msgid "Error writing file '%s': %s"
+msgstr "Gagal menulis berkas '%s': %s"
+
+#: file-chooser/testfilechooser.c:178
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "Tidak mendapatkan informasi untuk berkas '%s': %s"
+
+#: file-chooser/testfilechooser.c:191
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Gagal untuk membuka berkas '%s': %s"
+
+#: file-chooser/testfilechooser.c:230
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Gagal membaca gambar '%s': alasan tidak ketahui, kemungkinan berkas gambar "
+"yang rusak"
+
+#: libgnomeui/gnome-about.c:199
+msgid "Credits"
+msgstr "Penyusun"
+
+#: libgnomeui/gnome-about.c:231
+msgid "Written by"
+msgstr "Dibuat oleh"
+
+#: libgnomeui/gnome-about.c:246
+msgid "Documented by"
+msgstr "Dokumentasi oleh"
+
+#: libgnomeui/gnome-about.c:261
+msgid "Translated by"
+msgstr "Alih bahasa oleh"
+
+#: libgnomeui/gnome-about.c:324
+msgid "C_redits"
+msgstr "_Penyusun"
+
+#: libgnomeui/gnome-about.c:379
+msgid "Program name"
+msgstr "Nama program"
+
+#: libgnomeui/gnome-about.c:380
+msgid "The name of the program"
+msgstr "Nama program"
+
+#: libgnomeui/gnome-about.c:387
+msgid "Program version"
+msgstr "Versi program"
+
+#: libgnomeui/gnome-about.c:388
+msgid "The version of the program"
+msgstr "Versi program"
+
+#: libgnomeui/gnome-about.c:394
+msgid "Copyright string"
+msgstr "Kalimat hak cipta"
+
+#: libgnomeui/gnome-about.c:395
+msgid "Copyright information for the program"
+msgstr "Informasi hak cipta program"
+
+#: libgnomeui/gnome-about.c:402
+msgid "Comments string"
+msgstr "Kalimat komentar"
+
+#: libgnomeui/gnome-about.c:403
+msgid "Comments about the program"
+msgstr "Komentar mengenai program ini"
+
+#: libgnomeui/gnome-about.c:409
+msgid "Authors"
+msgstr "Penulis"
+
+#: libgnomeui/gnome-about.c:410
+msgid "List of authors of the programs"
+msgstr "Daftar penulis program"
+
+#: libgnomeui/gnome-about.c:412
+msgid "Author entry"
+msgstr "Penulis"
+
+#: libgnomeui/gnome-about.c:413
+msgid "A single author entry"
+msgstr "Penulis"
+
+#: libgnomeui/gnome-about.c:420
+msgid "Documenters"
+msgstr "Pembuat dokumentasi"
+
+#: libgnomeui/gnome-about.c:421
+msgid "List of people documenting the program"
+msgstr "Daftar pembuat dokumentasi program"
+
+#: libgnomeui/gnome-about.c:423
+msgid "Documenter entry"
+msgstr "Pembuat dokumentasi"
+
+#: libgnomeui/gnome-about.c:424
+msgid "A single documenter entry"
+msgstr "Pembuat dokumentasi"
+
+#: libgnomeui/gnome-about.c:432
+msgid "Translator credits"
+msgstr "Pengalih Bahasa"
+
+#: libgnomeui/gnome-about.c:433
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "Daftar penterjemah. Ini tidak boleh diterjemahkan"
+
+#: libgnomeui/gnome-about.c:440 libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "Logo"
+
+#: libgnomeui/gnome-about.c:441
+msgid "A logo for the about box"
+msgstr "Logo untuk kotak keterangan program"
+
+#: libgnomeui/gnome-about.c:520
+#, c-format
+msgid "About %s"
+msgstr "Informasi tentang %s"
+
+#. Some standard menus
+#: libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:551
+msgid "_File"
+msgstr "_Berkas"
+
+#: libgnomeui/gnome-app-helper.c:83
+msgid "_File/"
+msgstr "_Berkas/"
+
+#: libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "_Ubah"
+
+#: libgnomeui/gnome-app-helper.c:85
+msgid "_Edit/"
+msgstr "_Ubah/"
+
+#: libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "_Lihat"
+
+#: libgnomeui/gnome-app-helper.c:87
+msgid "_View/"
+msgstr "_Lihat/"
+
+#: libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "_Pengaturan"
+
+#: libgnomeui/gnome-app-helper.c:89
+msgid "_Settings/"
+msgstr "_Pengaturan/"
+
+#. If you have more then one New type, use this tree
+#: libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "Bar_u"
+
+#: libgnomeui/gnome-app-helper.c:91
+msgid "_New/"
+msgstr "Bar_u/"
+
+#: libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "_Berkas"
+
+#: libgnomeui/gnome-app-helper.c:93
+msgid "Fi_les/"
+msgstr "_Berkas/"
+
+#: libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "_Jendela"
+
+#: libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "_Permainan"
+
+#: libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:569
+msgid "_Help"
+msgstr "Ba_ntuan"
+
+#: libgnomeui/gnome-app-helper.c:97
+msgid "_Windows/"
+msgstr "_Jendela/"
+
+#. Open
+#: libgnomeui/gnome-app-helper.c:109
+msgid "_Open..."
+msgstr "_Buka..."
+
+#: libgnomeui/gnome-app-helper.c:109
+msgid "Open a file"
+msgstr "Buka berkas"
+
+#. Save
+#: libgnomeui/gnome-app-helper.c:114
+msgid "_Save"
+msgstr "_Simpan"
+
+#: libgnomeui/gnome-app-helper.c:114
+msgid "Save the current file"
+msgstr "Simpan berkas yang aktif sekarang"
+
+#. Save As
+#: libgnomeui/gnome-app-helper.c:119
+msgid "Save _As..."
+msgstr "Simp_an dengan nama lain..."
+
+#: libgnomeui/gnome-app-helper.c:120
+msgid "Save the current file with a different name"
+msgstr "Simpan berkas yang aktif sekarang dengan nama yang lain"
+
+#. Revert
+#: libgnomeui/gnome-app-helper.c:125
+msgid "_Revert"
+msgstr "_Kembalikan ke semula"
+
+#: libgnomeui/gnome-app-helper.c:126
+msgid "Revert to a saved version of the file"
+msgstr "Kembalikan ke berkas semula yang tersimpan sebelumnya"
+
+#. Print
+#: libgnomeui/gnome-app-helper.c:131
+msgid "_Print..."
+msgstr "_Cetak..."
+
+#: libgnomeui/gnome-app-helper.c:131
+msgid "Print the current file"
+msgstr "Cetak berkas yang aktif sekarang"
+
+#. Print Setup
+#: libgnomeui/gnome-app-helper.c:136
+msgid "Print S_etup..."
+msgstr "A_tur Cetakan..."
+
+#: libgnomeui/gnome-app-helper.c:137
+msgid "Setup the page settings for your current printer"
+msgstr "Atur halaman untuk pencetak yang aktif"
+
+#. Close
+#: libgnomeui/gnome-app-helper.c:142
+msgid "_Close"
+msgstr "_Tutup"
+
+#: libgnomeui/gnome-app-helper.c:142
+msgid "Close the current file"
+msgstr "Tutup berkas yang aktif sekarang"
+
+#. Exit
+#: libgnomeui/gnome-app-helper.c:147
+msgid "_Quit"
+msgstr "_Keluar"
+
+#: libgnomeui/gnome-app-helper.c:147
+msgid "Quit the application"
+msgstr "Keluar dari aplikasi"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cu_t"
+msgstr "Po_tong"
+
+#: libgnomeui/gnome-app-helper.c:155
+msgid "Cut the selection"
+msgstr "Potong bagian yang dipilih"
+
+#. 10
+#. Copy
+#: libgnomeui/gnome-app-helper.c:161
+msgid "_Copy"
+msgstr "S_alin"
+
+#: libgnomeui/gnome-app-helper.c:161
+msgid "Copy the selection"
+msgstr "Salin bagian yang dipilih"
+
+#. Paste
+#: libgnomeui/gnome-app-helper.c:166
+msgid "_Paste"
+msgstr "Tem_pel"
+
+#: libgnomeui/gnome-app-helper.c:166
+msgid "Paste the clipboard"
+msgstr "Tempelkan isi clipboard"
+
+#. Clear
+#: libgnomeui/gnome-app-helper.c:171
+msgid "C_lear"
+msgstr "Hapus"
+
+#: libgnomeui/gnome-app-helper.c:171
+msgid "Clear the selection"
+msgstr "Hapus bagian yang dipilih"
+
+#. Undo
+#: libgnomeui/gnome-app-helper.c:176
+msgid "_Undo"
+msgstr "_Batalkan"
+
+#: libgnomeui/gnome-app-helper.c:176
+msgid "Undo the last action"
+msgstr "Batalkan kegiatan terakhir"
+
+#. Redo
+#: libgnomeui/gnome-app-helper.c:181
+msgid "_Redo"
+msgstr "_Jadi Lagi"
+
+#: libgnomeui/gnome-app-helper.c:181
+msgid "Redo the undone action"
+msgstr "Jadikan kembali kegiatan yang dibatalkan"
+
+#. Find
+#: libgnomeui/gnome-app-helper.c:186
+msgid "_Find..."
+msgstr "_Cari..."
+
+#: libgnomeui/gnome-app-helper.c:186
+msgid "Search for a string"
+msgstr "Cari kata"
+
+#. Find Again
+#: libgnomeui/gnome-app-helper.c:191
+msgid "Find Ne_xt"
+msgstr "Cari La_gi"
+
+#: libgnomeui/gnome-app-helper.c:192
+msgid "Search again for the same string"
+msgstr "Cari lagi kata yang sama"
+
+#. Replace
+#: libgnomeui/gnome-app-helper.c:197
+msgid "R_eplace..."
+msgstr "_Ganti..."
+
+#: libgnomeui/gnome-app-helper.c:197
+msgid "Replace a string"
+msgstr "Ganti suatu kata dengan kata yang lain"
+
+#. Properties
+#: libgnomeui/gnome-app-helper.c:202
+msgid "_Properties"
+msgstr "_Properti"
+
+#: libgnomeui/gnome-app-helper.c:203
+msgid "Modify the file's properties"
+msgstr "Ganti properti berkas"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: libgnomeui/gnome-app-helper.c:211
+msgid "Prefere_nces"
+msgstr "Pengatura_n"
+
+#: libgnomeui/gnome-app-helper.c:212
+msgid "Configure the application"
+msgstr "Konfigurasikan aplikasi"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: libgnomeui/gnome-app-helper.c:221
+msgid "_About"
+msgstr "_Informasi Program"
+
+#: libgnomeui/gnome-app-helper.c:222
+msgid "About this application"
+msgstr "Informasi tentang aplikasi ini"
+
+#: libgnomeui/gnome-app-helper.c:225
+msgid "Select _All"
+msgstr "Pilih Semu_anya"
+
+#: libgnomeui/gnome-app-helper.c:226
+msgid "Select everything"
+msgstr "Pilih semuanya"
+
+#.
+#. * Window menu
+#.
+#: libgnomeui/gnome-app-helper.c:234
+msgid "Create New _Window"
+msgstr "Buat _Jendela Baru"
+
+#: libgnomeui/gnome-app-helper.c:235
+msgid "Create a new window"
+msgstr "Buat jendela baru"
+
+#: libgnomeui/gnome-app-helper.c:239
+msgid "_Close This Window"
+msgstr "_Tutup Jendela Ini"
+
+#: libgnomeui/gnome-app-helper.c:240
+msgid "Close the current window"
+msgstr "Tutup jendela ini"
+
+#.
+#. * The "Game" menu
+#.
+#: libgnomeui/gnome-app-helper.c:248
+msgid "_New Game"
+msgstr "Mainkan Permainan _Baru"
+
+#: libgnomeui/gnome-app-helper.c:249
+msgid "Start a new game"
+msgstr "Mulai permainan baru"
+
+#: libgnomeui/gnome-app-helper.c:253
+msgid "_Pause Game"
+msgstr "_Istirahatkan Permainan"
+
+#: libgnomeui/gnome-app-helper.c:254
+msgid "Pause the game"
+msgstr "Hentikan gim sebentar"
+
+#: libgnomeui/gnome-app-helper.c:258
+msgid "_Restart Game"
+msgstr "_Ulagi Permainan"
+
+#: libgnomeui/gnome-app-helper.c:259
+msgid "Restart the game"
+msgstr "Ulangi permainan"
+
+#: libgnomeui/gnome-app-helper.c:263
+msgid "_Undo Move"
+msgstr "_Batalkan Langkah"
+
+#: libgnomeui/gnome-app-helper.c:264
+msgid "Undo the last move"
+msgstr "Batalkan langkah terakhir"
+
+#: libgnomeui/gnome-app-helper.c:268
+msgid "_Redo Move"
+msgstr "_Kembalikan Langkah"
+
+#: libgnomeui/gnome-app-helper.c:269
+msgid "Redo the undone move"
+msgstr "Lakukan langkah yang dibatalkan"
+
+#: libgnomeui/gnome-app-helper.c:273
+msgid "_Hint"
+msgstr "_Petunjuk"
+
+#: libgnomeui/gnome-app-helper.c:274
+msgid "Get a hint for your next move"
+msgstr "Petunjuk untuk langkah berikutnya"
+
+#. 30
+#: libgnomeui/gnome-app-helper.c:279
+msgid "_Scores..."
+msgstr "_Daftar Nilai..."
+
+#: libgnomeui/gnome-app-helper.c:280
+msgid "View the scores"
+msgstr "Lihat perolehan angka"
+
+#: libgnomeui/gnome-app-helper.c:284
+msgid "_End Game"
+msgstr "H_entikan Permainan"
+
+#: libgnomeui/gnome-app-helper.c:285
+msgid "End the current game"
+msgstr "Hentikan permainan"
+
+#: libgnomeui/gnome-app-helper.c:1147
+msgid "_Contents"
+msgstr "Daftar _Isi"
+
+#: libgnomeui/gnome-app-helper.c:1150
+msgid "View help for this application"
+msgstr "Lihat layar bantu aplikasi ini"
+
+#: libgnomeui/gnome-app-helper.c:2587
+msgid "Text Below Icons"
+msgstr "Teks di bawah ikon"
+
+#: libgnomeui/gnome-app-helper.c:2588
+msgid "Priority Text Beside Icons"
+msgstr "Prioritas teks di samping ikon"
+
+#: libgnomeui/gnome-app-helper.c:2589
+msgid "Icons Only"
+msgstr "Ikon saja"
+
+#: libgnomeui/gnome-app-helper.c:2590
+msgid "Text Only"
+msgstr "Teks saja"
+
+#: libgnomeui/gnome-app-helper.c:2651
+#, c-format
+msgid "Use Desktop Default (%s)"
+msgstr "Gunakan Standar Desktop (%s)"
+
+#: libgnomeui/gnome-app-util.c:98
+msgid " (press return)"
+msgstr " (tekan Enter)"
+
+#: libgnomeui/gnome-app-util.c:140
+msgid "ERROR: "
+msgstr "ERROR:"
+
+#: libgnomeui/gnome-app-util.c:177
+msgid "Warning: "
+msgstr "Peringatan:"
+
+#: libgnomeui/gnome-app-util.c:315
+msgid "y"
+msgstr "y"
+
+#: libgnomeui/gnome-app-util.c:316
+msgid "yes"
+msgstr "ya"
+
+#: libgnomeui/gnome-app-util.c:319
+msgid "n"
+msgstr "t"
+
+#: libgnomeui/gnome-app-util.c:320
+msgid "no"
+msgstr "tidak"
+
+#: libgnomeui/gnome-app-util.c:355
+msgid " (yes or no)"
+msgstr " (ya atau tidak)"
+
+#: libgnomeui/gnome-app-util.c:356
+msgid "  - OK? (yes or no)"
+msgstr "  - OK? (ya atau tidak)"
+
+#: libgnomeui/gnome-app-util.c:684
+msgid "Progress"
+msgstr "Kemajuan"
+
+#: libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr "ID App"
+
+#: libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr "String ID Aplikasi"
+
+#: libgnomeui/gnome-appbar.c:747
+msgid "Has Progress"
+msgstr "Memiliki Kemajuan"
+
+#: libgnomeui/gnome-appbar.c:748
+msgid "Create a progress widget."
+msgstr "Buat widget kemajuan"
+
+#: libgnomeui/gnome-appbar.c:755
+msgid "Has Status"
+msgstr "Memiliki Status"
+
+#: libgnomeui/gnome-appbar.c:756
+msgid "Create a status widget."
+msgstr "Buat widget status"
+
+#: libgnomeui/gnome-appbar.c:763
+msgid "Interactivity"
+msgstr "Interaktif"
+
+#: libgnomeui/gnome-appbar.c:764
+msgid "Level of user activity required."
+msgstr "Derajat interaktif program"
+
+#: libgnomeui/gnome-authentication-manager.c:70
+#, c-format
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr "Proxy HTTP memerlukan informasi login.\n"
+
+#: libgnomeui/gnome-authentication-manager.c:71
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+"Anda harus login dulu sebelum bisa masuk ke \"%s\".\n"
+"%s"
+
+#: libgnomeui/gnome-authentication-manager.c:74
+msgid "Your password will be transmitted unencrypted."
+msgstr "Sandi Anda akan dikirimkan tanpa enkripsi."
+
+#: libgnomeui/gnome-authentication-manager.c:75
+msgid "Your password will be transmitted encrypted."
+msgstr "Sandi Anda akan dikirimkan lewat jalur terenkripsi"
+
+#: libgnomeui/gnome-authentication-manager.c:78
+#: libgnomeui/gnome-authentication-manager.c:296
+msgid "Authentication Required"
+msgstr "Anda harus login terlebih dahulu"
+
+#: libgnomeui/gnome-authentication-manager.c:288
+#, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "Anda harus login untuk masuk %s domain %s\n"
+
+#: libgnomeui/gnome-authentication-manager.c:290
+#, c-format
+msgid "You must log in to access %s\n"
+msgstr "Anda harus login dulu sebelum bisa masuk ke %s\n"
+
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+msgid "Specify session management ID"
+msgstr "Tuliskan ID manajemen sesi"
+
+#: libgnomeui/gnome-client.c:900 libgnomeui/gnome-client.c:914
+msgid "ID"
+msgstr "ID"
+
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+msgid "Specify prefix of saved configuration"
+msgstr "Tuliskan prefiks konfigurasi yang telah disimpan"
+
+#: libgnomeui/gnome-client.c:903 libgnomeui/gnome-client.c:918
+msgid "PREFIX"
+msgstr "PREFIX"
+
+#: libgnomeui/gnome-client.c:906 libgnomeui/gnome-client.c:922
+msgid "Disable connection to session manager"
+msgstr "Matikan koneksi ke manajer sesi"
+
+#: libgnomeui/gnome-client.c:1030 libgnomeui/gnome-client.c:1043
+msgid "Session management"
+msgstr "Manajemen sesi"
+
+#: libgnomeui/gnome-client.c:1031
+#, fuzzy
+msgid "Show session management options"
+msgstr "Manajemen sesi"
+
+#: libgnomeui/gnome-client.c:2580
+msgid "Cancel Logout"
+msgstr "Batalkan Logout"
+
+#: libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "Ada menerima data warna yang salah\n"
+
+#: libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "Buka dialog untuk memilih warna"
+
+#: libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "Pilih warna"
+
+#: libgnomeui/gnome-dateedit.c:491 libgnomeui/gnome-dateedit.c:788
+msgid "Time"
+msgstr "Waktu"
+
+#: libgnomeui/gnome-dateedit.c:492
+msgid "The time currently selected"
+msgstr "Waktu yang dipilih"
+
+#: libgnomeui/gnome-dateedit.c:504
+msgid "DateEdit Flags"
+msgstr "Flag DateEdit"
+
+#: libgnomeui/gnome-dateedit.c:505
+msgid "Flags for how DateEdit looks"
+msgstr "Flag untuk menentukan bagaimana tampilan DateEdit"
+
+#: libgnomeui/gnome-dateedit.c:514
+msgid "Lower Hour"
+msgstr "Nilai bawah Jam"
+
+#: libgnomeui/gnome-dateedit.c:515
+msgid "Lower hour in the time popup selector"
+msgstr "Nilai jam bawah pada pemilih waktu"
+
+#: libgnomeui/gnome-dateedit.c:525
+msgid "Upper Hour"
+msgstr "Nilai Atas Jam"
+
+#: libgnomeui/gnome-dateedit.c:526
+msgid "Upper hour in the time popup selector"
+msgstr "Nilai atas jam pada pemilih waktu"
+
+#: libgnomeui/gnome-dateedit.c:536
+msgid "Initial Time"
+msgstr "Waktu awal"
+
+#: libgnomeui/gnome-dateedit.c:537
+msgid "The initial time"
+msgstr "Waktu awal"
+
+#: libgnomeui/gnome-dateedit.c:751 libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Tanggal"
+
+#: libgnomeui/gnome-dateedit.c:764
+msgid "Select Date"
+msgstr "Pilih tanggal"
+
+#: libgnomeui/gnome-dateedit.c:764
+msgid "Select the date from a calendar"
+msgstr "Pilih tanggal dari kalender"
+
+#. Calendar label, only shown if the date editor has a time field
+#: libgnomeui/gnome-dateedit.c:775
+msgid "Calendar"
+msgstr "Kalender"
+
+#: libgnomeui/gnome-dateedit.c:796
+msgid "Select Time"
+msgstr "Pilih waktu"
+
+#: libgnomeui/gnome-dateedit.c:796
+msgid "Select the time from a list"
+msgstr "Pilih waktu dari daftar"
+
+#: libgnomeui/gnome-dateedit.c:1015
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+"Jangan gunakan gnome_date_edit_get_date, gunakan gnome_date_edit_get_time"
+
+#: libgnomeui/gnome-druid-page-standard.c:121
+#: libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "Judul"
+
+#: libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "Judul druid"
+
+#: libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "Gambar logo"
+
+#: libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "Tanda air atas"
+
+#: libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "Gambar tanda air untuk bagian atas"
+
+#: libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "Judul latar depan"
+
+#: libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "Warna latar depan judul"
+
+#: libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "Warna latar depan judul"
+
+#: libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Warna latar depan judul dalam format GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "Warna latar depan judul sudah diset"
+
+#: libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "Warna latar depan judul sudah diset"
+
+#: libgnomeui/gnome-druid-page-standard.c:169
+#: libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "Warna latar belakang"
+
+#: libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "Warna latar belakang"
+
+#: libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "Warna latar belakang dalam format GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "Warna latar belakang sudah diset"
+
+#: libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "Warna latar belakang sudah diset"
+
+#: libgnomeui/gnome-druid-page-standard.c:193
+#: libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Warna Latar Belakang Isi"
+
+#: libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Warna Latar Belakang Isi"
+
+#: libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Warna Latar Belakang dalam WarnaGdk"
+
+#: libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Warna Latar Belakang isi sudah diset"
+
+#: libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Warna Latar Belakang Isi sudah diset"
+
+#: libgnomeui/gnome-druid-page-standard.c:216
+#: libgnomeui/gnome-druid-page-standard.c:224
+msgid "Logo Background Color"
+msgstr "Warna latar belakang logo"
+
+#: libgnomeui/gnome-druid-page-standard.c:217
+msgid "Logo Background color"
+msgstr "Warna latar belakang logo"
+
+#: libgnomeui/gnome-druid-page-standard.c:225
+msgid "Logo Background color as a GdkColor"
+msgstr "Warna latar logo dalam bentuk GdkColor"
+
+#: libgnomeui/gnome-druid-page-standard.c:232
+msgid "Logo Background color set"
+msgstr "Warna latar logo sudah diset"
+
+#: libgnomeui/gnome-druid-page-standard.c:233
+msgid "Logo Background color is set"
+msgstr "Warna latar logo sudah diset"
+
+#: libgnomeui/gnome-druid.c:154
+msgid "Show Finish"
+msgstr "Tampilkan tombol Selesai"
+
+#: libgnomeui/gnome-druid.c:155
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Tampilkan tombol 'Selesai', bukan tombol 'Selanjutnya'"
+
+#: libgnomeui/gnome-druid.c:162
+msgid "Show Help"
+msgstr "Tampilkan layar bantu"
+
+#: libgnomeui/gnome-druid.c:163
+msgid "Show the 'Help' button"
+msgstr "Tampilkan tombol layar bantu"
+
+#: libgnomeui/gnome-entry.c:193 libgnomeui/gnome-entry.c:194
+msgid "History id"
+msgstr "id History"
+
+#: libgnomeui/gnome-entry.c:200
+msgid "GTK entry"
+msgstr "entri GTK"
+
+#: libgnomeui/gnome-entry.c:201
+msgid "The GTK entry"
+msgstr "entri GTK"
+
+#: libgnomeui/gnome-file-entry.c:236 libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
+msgstr "ID History"
+
+#: libgnomeui/gnome-file-entry.c:237
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Nama unik untuk entri berkas. Nama ini akan digunakan untuk menyimpan "
+"catatan sejarah berkas."
+
+#: libgnomeui/gnome-file-entry.c:245 libgnomeui/gnome-icon-entry.c:188
+msgid "Browse Dialog Title"
+msgstr "Judul Dialog Pencari Berkas"
+
+#: libgnomeui/gnome-file-entry.c:246
+msgid "Title for the Browse file dialog."
+msgstr "Judul untuk dialog pencari berkas"
+
+#: libgnomeui/gnome-file-entry.c:253
+msgid "Directory Entry"
+msgstr "Entri Direktori"
+
+#: libgnomeui/gnome-file-entry.c:254
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+"Menentukan apakah entri berkas digunakan untuk memasuki nama direktori atau "
+"nama berkas yang lengkap atau tidak"
+
+#: libgnomeui/gnome-file-entry.c:262
+msgid "Modal"
+msgstr "Selalu di atas (modal)"
+
+#: libgnomeui/gnome-file-entry.c:263
+msgid "Whether the Browse file window should be modal."
+msgstr ""
+"Menentukan apakah jendela pencari berkas selalu berada di atas atau tidak."
+
+#: libgnomeui/gnome-file-entry.c:270 libgnomeui/gnome-icon-entry.c:204
+msgid "Filename"
+msgstr "Nama berkas"
+
+#: libgnomeui/gnome-file-entry.c:271
+msgid "Filename that should be displayed in the file entry."
+msgstr "Nama berkas yang ditampilkan pada entri berkas"
+
+#: libgnomeui/gnome-file-entry.c:279
+msgid "Default Path"
+msgstr "Path standar"
+
+#: libgnomeui/gnome-file-entry.c:280
+msgid "Default path for the Browse file window."
+msgstr "Path standar untuk jendela pencari berkas."
+
+#: libgnomeui/gnome-file-entry.c:287
+msgid "GnomeEntry"
+msgstr "GnomeEntry"
+
+#: libgnomeui/gnome-file-entry.c:288
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+"GnomeEntry yang digunakan oleh entri berkas untuk memasukkan nama file. Anda "
+"dapat menggunakan properi ini untuk mendapatkan GnomeEntry pada saat ingin "
+"merubah atau mencari parameternya."
+
+#: libgnomeui/gnome-file-entry.c:298
+msgid "GtkEntry"
+msgstr "GtkEntry"
+
+#: libgnomeui/gnome-file-entry.c:299
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+"GtkEntry yang digunakan oleh entri berkas untuk memasukkan nama file. Anda "
+"dapat menggunakan properi ini untuk mendapatkan GtkEntry pada saat ingin "
+"merubah atau mencari parameternya."
+
+#: libgnomeui/gnome-file-entry.c:309
+msgid "Use GtkFileChooser"
+msgstr "Gunakan GtkFileChooser"
+
+#: libgnomeui/gnome-file-entry.c:310
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+"Pilih apakah menggunakan GtkFileChooser atau GtkFileSelection untuk memilih "
+"file."
+
+#: libgnomeui/gnome-file-entry.c:319
+msgid "GtkFileChooser Action"
+msgstr "Aksi GtkFileChooser"
+
+#: libgnomeui/gnome-file-entry.c:320
+msgid "The type of operation that the file selector is performing."
+msgstr "Jenis operasi yang dilakukan pemilih berkas"
+
+#: libgnomeui/gnome-file-entry.c:642 libgnomeui/gnome-file-entry.c:676
+msgid "Select file"
+msgstr "Pilih berkas"
+
+#: libgnomeui/gnome-file-entry.c:802
+msgid "Path"
+msgstr "Path"
+
+#: libgnomeui/gnome-file-entry.c:802
+msgid "Path to file"
+msgstr "Path berkas"
+
+#: libgnomeui/gnome-file-entry.c:829
+msgid "_Browse..."
+msgstr "_Cari..."
+
+#: libgnomeui/gnome-file-entry.c:830
+msgid "Pop up a file selector to choose a file"
+msgstr "Tampilkan pencari berkas untuk memilih berkas"
+
+#: libgnomeui/gnome-font-picker.c:66
+msgid "sans 12"
+msgstr "sans 12"
+
+#: libgnomeui/gnome-font-picker.c:67
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+
+#: libgnomeui/gnome-font-picker.c:68
+msgid "Pick a Font"
+msgstr "Pilih Fonta"
+
+#: libgnomeui/gnome-font-picker.c:156
+msgid "The title of the selection dialog box"
+msgstr "Judul kotak pemilih"
+
+#: libgnomeui/gnome-font-picker.c:164
+msgid "Mode"
+msgstr "Mode"
+
+#: libgnomeui/gnome-font-picker.c:165
+msgid "The mode of operation of the font picker"
+msgstr "Mode operasi pemilih fonta"
+
+#: libgnomeui/gnome-font-picker.c:174
+msgid "Font name"
+msgstr "Nama fonta"
+
+#: libgnomeui/gnome-font-picker.c:175
+msgid "Name of the selected font"
+msgstr "Nama fonta yang dipilih"
+
+#: libgnomeui/gnome-font-picker.c:184 libgnomeui/gnome-font-picker.c:979
+msgid "Font"
+msgstr "Fonta"
+
+#: libgnomeui/gnome-font-picker.c:185
+msgid "The selected GtkFont"
+msgstr "GtkFont yang dipilih"
+
+#: libgnomeui/gnome-font-picker.c:192
+msgid "Preview text"
+msgstr "Contoh teks"
+
+#: libgnomeui/gnome-font-picker.c:193
+msgid "Preview text shown in the dialog"
+msgstr "Lihat contoh teks dalam dialog"
+
+#: libgnomeui/gnome-font-picker.c:201
+msgid "Use font in label"
+msgstr "Gunakan fonta dalam label"
+
+#: libgnomeui/gnome-font-picker.c:202
+msgid "Use font in the label in font info mode"
+msgstr "Gunakan fonta dalam label pada mode info fonta"
+
+#: libgnomeui/gnome-font-picker.c:210
+msgid "Font size for label"
+msgstr "Ukuran fonta untuk label"
+
+#: libgnomeui/gnome-font-picker.c:211
+msgid "Font size for label in font info mode"
+msgstr "Ukuran fonta untuk label pada mode info fonta"
+
+#: libgnomeui/gnome-font-picker.c:221
+msgid "Show size"
+msgstr "Tampilkan ukuran"
+
+#: libgnomeui/gnome-font-picker.c:222
+msgid "Show size in font info mode"
+msgstr "Tampilkan ukuran pada mode info fonta"
+
+#: libgnomeui/gnome-gconf-ui.c:61
+msgid "GNOME GConf UI Support"
+msgstr "Dukungan UI GConf GNOME"
+
+#: libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "_Detil"
+
+#: libgnomeui/gnome-gconf-ui.c:171
+#, c-format
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr ""
+"Aplikasi \"%s\" berusaha merubah konfigurasi yang seharusnya tidak diizinkan "
+"oleh administrator sistem atau pabrik sistem operasi. Ada seting yang telah "
+"dipilih sebelumnya tidak akan berpengaruh, atau tidak dikembalikan ke nilai "
+"semula saat Anda menjalankan aplikasi ini."
+
+#: libgnomeui/gnome-gconf-ui.c:178
+#, c-format
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"Ada error saat membuka atau menyimpan informasi konfigurasi %s. Ada beberapa "
+"seting konfigurasi yang tidak berjalan semestinya."
+
+#: libgnomeui/gnome-href.c:123
+msgid "URL"
+msgstr "URL"
+
+#: libgnomeui/gnome-href.c:124
+msgid "The URL that GnomeHRef activates"
+msgstr "URL yang ditampilkan saat GnomehRef aktif"
+
+#: libgnomeui/gnome-href.c:131
+msgid "Text"
+msgstr "Teks"
+
+#: libgnomeui/gnome-href.c:132
+msgid "The text on the button"
+msgstr "Teks pada tombol"
+
+#: libgnomeui/gnome-href.c:133
+msgid "End World Hunger"
+msgstr "Hentikan Kelaparan di Dunia"
+
+#: libgnomeui/gnome-href.c:139
+msgid "Link color"
+msgstr "Warna Link"
+
+#: libgnomeui/gnome-href.c:140
+msgid "Color used to draw the link"
+msgstr "Warna yang digunakan untuk menggambar link"
+
+#: libgnomeui/gnome-href.c:171
+msgid "This button will take you to the URI that it displays."
+msgstr "Tombol ini akan menampilkan URI bila ditekan"
+
+#: libgnomeui/gnome-href.c:394
+msgid ""
+"An error has occurred while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"Ada error saat menjalankan perambah web standar.\n"
+"Silakan periksa setelan pada program 'Aplikasi Pilihan'."
+
+#: libgnomeui/gnome-icon-entry.c:180
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Nama unik untuk entri ikon. Nama ini akan digunakan untuk menyimpan daftar "
+"histori."
+
+#: libgnomeui/gnome-icon-entry.c:189
+msgid "Title for the Browse icon dialog."
+msgstr "Judul dialog pencari icon."
+
+#: libgnomeui/gnome-icon-entry.c:196
+msgid "Pixmap Directory"
+msgstr "Direktori Pixmap"
+
+#: libgnomeui/gnome-icon-entry.c:197
+msgid "Directory that will be searched for icons."
+msgstr "Nama direktori yang akan digunakan untuk pencarian ikon."
+
+#: libgnomeui/gnome-icon-entry.c:205
+msgid "Filename that should be displayed in the icon entry."
+msgstr "Nama berkas yang ditampilkan pada entri ikon"
+
+#: libgnomeui/gnome-icon-entry.c:213
+msgid "Picker dialog"
+msgstr "Dialog pilih"
+
+#: libgnomeui/gnome-icon-entry.c:214
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"Dialog pemilih ikon. Anda bisa menggunakan properti ini untuk mendapatkan "
+"nilai GtkDialog saat mendah merubah atau mencari nilai propertinya."
+
+#: libgnomeui/gnome-icon-entry.c:322 libgnomeui/gnome-icon-entry.c:988
+msgid "No Icon"
+msgstr "Tanpa ikon"
+
+#: libgnomeui/gnome-icon-entry.c:758
+msgid "Icon selection dialog"
+msgstr "Dialog pemilih ikon"
+
+#: libgnomeui/gnome-icon-entry.c:759
+msgid "This dialog box lets you select an icon."
+msgstr "Kotak dialog ini untuk memilih ikon"
+
+#: libgnomeui/gnome-icon-entry.c:765
+msgid "Icon selector"
+msgstr "Pemilih Ikon"
+
+#: libgnomeui/gnome-icon-entry.c:766
+msgid "Please pick the icon you want."
+msgstr "Silakan pilih ikon yang Anda suka."
+
+#: libgnomeui/gnome-icon-entry.c:991
+msgid "Icon Selector"
+msgstr "Pemilih Ikon"
+
+#: libgnomeui/gnome-icon-entry.c:992
+msgid "This button will open a window to let you select an icon."
+msgstr "Tombol ini akan membuka window untuk memilih ikon."
+
+#: libgnomeui/gnome-icon-entry.c:1012
+msgid "Browse"
+msgstr "Rambah"
+
+#: libgnomeui/gnome-icon-entry.c:1015
+msgid "Icon path"
+msgstr "Path ikon"
+
+#: libgnomeui/gnome-icon-entry.c:1016
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr "Silakan Anda masukkan nama direktori tempat gambar ikon-ikon berada."
+
+#: libgnomeui/gnome-icon-sel.c:293
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr "GnomeIconSelection: %s tidak ada atau bukan direktori"
+
+#: libgnomeui/gnome-icon-sel.c:301
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr "GnomeIconSelection: tidak dapat membuka direktori '%s'"
+
+#: libgnomeui/gnome-icon-sel.c:405
+msgid "Loading Icons..."
+msgstr "Membuka Ikon..."
+
+#: libgnomeui/gnome-messagebox.c:109
+msgid "Information"
+msgstr "Informasi"
+
+#: libgnomeui/gnome-messagebox.c:114
+msgid "Warning"
+msgstr "Peringatan"
+
+#: libgnomeui/gnome-messagebox.c:120
+msgid "Error"
+msgstr "Error"
+
+#: libgnomeui/gnome-messagebox.c:126
+msgid "Question"
+msgstr "Pertanyaan"
+
+#: libgnomeui/gnome-messagebox.c:131
+msgid "Message"
+msgstr "Pesan"
+
+#: libgnomeui/gnome-password-dialog.c:269
+msgid "_Username:"
+msgstr "Nama Pengg_una:"
+
+#: libgnomeui/gnome-password-dialog.c:271
+msgid "_Domain:"
+msgstr "Ranah/_Domain:"
+
+#: libgnomeui/gnome-password-dialog.c:273
+msgid "_Password:"
+msgstr "_Sandi:"
+
+#: libgnomeui/gnome-password-dialog.c:346
+msgid "Co_nnect"
+msgstr "Sambu_ng"
+
+#: libgnomeui/gnome-password-dialog.c:368
+msgid "Connect _anonymously"
+msgstr "Sambungkan secara _anonim"
+
+#: libgnomeui/gnome-password-dialog.c:373
+msgid "Connect as u_ser:"
+msgstr "Sambungkan sebagai pengg_una:"
+
+#: libgnomeui/gnome-password-dialog.c:471
+msgid "_Remember password for this session"
+msgstr "Simpan sandi untuk sesi ini"
+
+#: libgnomeui/gnome-password-dialog.c:473
+msgid "Save password in _keyring"
+msgstr "Simpan sandi pada _keyring"
+
+#: libgnomeui/gnome-pixmap-entry.c:114
+msgid "Do Preview"
+msgstr "Lihat Gambar"
+
+#: libgnomeui/gnome-pixmap-entry.c:115
+msgid "Whether the pixmap entry should have a preview."
+msgstr ""
+"Menentukan apakah entri pixmap bisa dilihat contoh gambarnya atau tidak."
+
+#: libgnomeui/gnome-pixmap-entry.c:189 libgnomeui/gnome-pixmap-entry.c:481
+msgid "No Image"
+msgstr "Tanpa Gambar"
+
+#: libgnomeui/gnome-pixmap-entry.c:206
+msgid "Image Preview"
+msgstr "Lihat contoh gambar"
+
+#: libgnomeui/gnome-pixmap-entry.c:207
+msgid "A preview of the image currently specified"
+msgstr "Contoh gambar yang dipilih"
+
+#: libgnomeui/gnome-pixmap-entry.c:416
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Tidak dapat menemukan hbox, sekarang menggunakan pemilih file"
+
+#: libgnomeui/gnome-pixmap-entry.c:422
+msgid "Preview"
+msgstr "Lihat Gambar"
+
+#: libgnomeui/gnome-scores.c:78
+msgid "Top Ten"
+msgstr "Sepuluh Besar"
+
+#: libgnomeui/gnome-scores.c:91
+msgid "User"
+msgstr "Pengguna"
+
+#: libgnomeui/gnome-scores.c:94
+msgid "Score"
+msgstr "Nilai"
+
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: libgnomeui/gnome-scores.c:194
+msgid "%a %b %d %T %Y"
+msgstr "%a, %d %b %Y, %T"
+
+#: libgnomeui/gnome-scores.c:395
+msgid "Sans 14"
+msgstr "Sans 14"
+
+#: libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Bingkai Tabel"
+
+#: libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Isian Tabel"
+
+#: libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "List Bulet"
+
+#: libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "List bernomor"
+
+#: libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Indentasi"
+
+#: libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "Jangan beri indent"
+
+#: libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Informasi Program"
+
+#: libgnomeui/gnome-ui-init.c:125 libgnomeui/gnome-ui-init.c:134
+msgid "Disable Crash Dialog"
+msgstr "Matikan Dialog Crash"
+
+#: libgnomeui/gnome-ui-init.c:127
+msgid "X display to use"
+msgstr "Display X yang hendak digunakan"
+
+#: libgnomeui/gnome-ui-init.c:127
+msgid "DISPLAY"
+msgstr "DISPLAY"
+
+#: libgnomeui/gnome-ui-init.c:145 libgnomeui/gnome-ui-init.c:158
+msgid "GNOME GUI Library"
+msgstr "Pustaka GUI GNOME"
+
+#: libgnomeui/gnome-ui-init.c:146
+msgid "Show GNOME GUI options"
+msgstr ""
+
+#. dialog display isn't working out
+#: libgnomeui/gnome-ui-init.c:759
+#, c-format
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr "Ada segmentation fault terjadi; tidak dapat menampilkan dialog error\n"
+
+#. Eeeek! Can't show dialog
+#: libgnomeui/gnome-ui-init.c:773
+#, c-format
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Segmentation fault!\n"
+"Tidak dapat menampilkan dialog crash\n"
+
+#: libgnomeui/gnome_segv.c:101
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"Manajer Sesi GNOME (proses %d) telah crash\n"
+"karena ada error yang fatal (%s).\n"
+"Saat Anda menutup dialog ini, semua aplikasi akan ditutup dan sesi ini akan "
+"dihentikan.\n"
+"Silakan simpan semua berkas sebelum menutup dialog ini."
+
+#: libgnomeui/gnome_segv.c:112
+#, c-format
+msgid "The Application \"%s\" has quit unexpectedly."
+msgstr "Aplikasi \"%s\" mati mendadak."
+
+#: libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr "proses %d: %s"
+
+#: libgnomeui/gnome_segv.c:118 libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+"Silakan beritahu para pembuat program kejadian ini agar dapat diperbaiki. "
+"Atau jika tidak mau silakan jalankan ulang aplikasinya."
+
+#: libgnomeui/gnome_segv.c:137
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Cara pakai: gnome_segv2 nama_aplikasi signum\n"
+
+#: libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "Jalankan _Ulang Aplikasi Ini"
+
+#: libgnomeui/gnome_segv.c:166
+msgid "_Inform Developers"
+msgstr "Ber_i tahu Para Pembuat Program ini"
+
+#: libgnomeui/gnome_segv.c:177
+msgid "_Debug"
+msgstr "_Debug"
+
+#~ msgid "Exit the test"
+#~ msgstr "Keluar dari tes"
+
+#~ msgid " domain %s"
+#~ msgstr " domain %s"

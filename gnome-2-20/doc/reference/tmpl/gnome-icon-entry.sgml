@@ -1,0 +1,190 @@
+<!-- ##### SECTION Title ##### -->
+GnomeIconEntry
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomeIconEntryPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GnomeIconEntry ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GnomeIconEntry::browse ##### -->
+<para>
+
+</para>
+
+@iconentry: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeIconEntry::changed ##### -->
+<para>
+
+</para>
+
+@iconentry: the object which received the signal.
+
+<!-- ##### ARG GnomeIconEntry:browse-dialog-title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:filename ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:history-id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:pick-dialog ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeIconEntry:pixmap-subdir ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gnome_icon_entry_new ##### -->
+<para>
+
+</para>
+
+@history_id: 
+@browse_dialog_title: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_construct ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@history_id: 
+@browse_dialog_title: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_set_pixmap_subdir ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@subdir: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_get_filename ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_set_filename ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@filename: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_set_browse_dialog_title ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@browse_dialog_title: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_set_history_id ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@history_id: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_set_max_saved ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@max_saved: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_pick_dialog ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_set_icon ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@filename: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_gnome_file_entry ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_gnome_entry ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_entry_gtk_entry ##### -->
+<para>
+
+</para>
+
+@ientry: 
+@Returns: 
+
+

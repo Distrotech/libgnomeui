@@ -1,0 +1,1461 @@
+# MALAGASY TRANSLATION OF LIBGNOMEUI.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Thierry Randrianiriana <thierry@isvtec.com>, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: LIBGNOMEUI VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-09-11 08:39+0200\n"
+"PO-Revision-Date: 2006-10-06 22:54+0300\n"
+"Last-Translator: Fanomezana Rajaonarisoa <fano@isvtec.com>\n"
+"Language-Team: MALAGASY <i18n-malagasy-gnome@gna.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "Zana-tsingataharo 1"
+
+#: ../demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "Toro ho an'ny singataharo 1"
+
+#: ../demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "Zana-tsingataharo 2"
+
+#: ../demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "Toro ho an'ny singataharo 2"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:972
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "Rohy mankany amina zavatra tsy lahatahiry ny %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:983
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "Rohy tsy manana toerana ivantanana ny %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1058
+#, c-format
+msgid "%s is not a folder"
+msgstr "Tsy lahatahiry ny %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1912
+msgid "Network Servers"
+msgstr "Mpizara rezo"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1928
+msgid "File System"
+msgstr "Rafi-drakitra"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2457
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Tsy nahomby ny fandraiketana rohy (%s)"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2894
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr "Nisy olana teo am-pakana ny lazan'ny '%s'"
+
+#: ../file-chooser/testfilechooser.c:178
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "Tsy afaka naka ny lazan'ny rakitra '%s': %s"
+
+#: ../file-chooser/testfilechooser.c:191
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Tsy afaka nanoktra ny rakitra '%s': %s"
+
+#: ../file-chooser/testfilechooser.c:230
+#, c-format
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr "Tsy afaka naka ny sary '%s': tsy fantatra ny antony; mety  simba ilay raki-tsary"
+
+#: ../libgnomeui/gnome-about.c:199
+msgid "Credits"
+msgstr "Fankasitrahana"
+
+#: ../libgnomeui/gnome-about.c:231
+msgid "Written by"
+msgstr "Nosoratan'i"
+
+#: ../libgnomeui/gnome-about.c:246
+msgid "Documented by"
+msgstr "Novatsian'i"
+
+#: ../libgnomeui/gnome-about.c:261
+msgid "Translated by"
+msgstr "Nadikan'i"
+
+#: ../libgnomeui/gnome-about.c:324
+msgid "C_redits"
+msgstr "_Fankasitrahana"
+
+#: ../libgnomeui/gnome-about.c:377
+msgid "Program name"
+msgstr "Anaran'ilay rindranasa"
+
+#: ../libgnomeui/gnome-about.c:378
+msgid "The name of the program"
+msgstr "Ny anaran'ilay rindranasa"
+
+#: ../libgnomeui/gnome-about.c:385
+msgid "Program version"
+msgstr "Kinovan'ilay rindranasa"
+
+#: ../libgnomeui/gnome-about.c:386
+msgid "The version of the program"
+msgstr "Ny kinovan'ilay rindranasa"
+
+#: ../libgnomeui/gnome-about.c:392
+msgid "Copyright string"
+msgstr "Laha-dazan'ny fameran-jo"
+
+#: ../libgnomeui/gnome-about.c:393
+msgid "Copyright information for the program"
+msgstr "Laza mikasika ny fameran-jo ho an'ilay rindranasa"
+
+#: ../libgnomeui/gnome-about.c:400
+msgid "Comments string"
+msgstr "Laha-dazan'ny teny fanampiny"
+
+#: ../libgnomeui/gnome-about.c:401
+msgid "Comments about the program"
+msgstr "Filazalazana momba ilay rindranasa"
+
+#: ../libgnomeui/gnome-about.c:407
+msgid "Authors"
+msgstr "Mpamorona"
+
+#: ../libgnomeui/gnome-about.c:408
+msgid "List of authors of the programs"
+msgstr "Lisitry ny mpamorona ireo rindranasa"
+
+#: ../libgnomeui/gnome-about.c:410
+#, fuzzy
+msgid "Author entry"
+msgstr "Anaran'ny mpamorona"
+
+#: ../libgnomeui/gnome-about.c:411
+msgid "A single author entry"
+msgstr "Anaram-panoratra tokana"
+
+#: ../libgnomeui/gnome-about.c:418
+msgid "Documenters"
+msgstr "Mpamatsy tahirin-kevitra"
+
+#: ../libgnomeui/gnome-about.c:419
+msgid "List of people documenting the program"
+msgstr "lisitr'ireo olona mamatsy ara-tahirin-kevitra ilay rindranasa"
+
+#: ../libgnomeui/gnome-about.c:421
+msgid "Documenter entry"
+msgstr "Anaran-tahirin-kevitra"
+
+#: ../libgnomeui/gnome-about.c:422
+msgid "A single documenter entry"
+msgstr "Anaran-tahirin-kevitra tokana"
+
+#: ../libgnomeui/gnome-about.c:430
+msgid "Translator credits"
+msgstr "Fankasitrahana ny mpandika teny"
+
+#: ../libgnomeui/gnome-about.c:431
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "Fankasitrahana ho an'ny mpandika teny. Tokony hofaritana ho azo adika ity laha-daza ity"
+
+#: ../libgnomeui/gnome-about.c:438
+#: ../libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "Logo"
+
+#: ../libgnomeui/gnome-about.c:439
+msgid "A logo for the about box"
+msgstr "Fango atao ao amin'ny takilan'ny mombamomba"
+
+#: ../libgnomeui/gnome-about.c:518
+#, c-format
+msgid "About %s"
+msgstr "Mombamomba ny %s"
+
+#. Some standard menus
+#: ../libgnomeui/gnome-app-helper.c:82
+#: ../libgnomeui/gnome-app-helper.h:551
+#: ../test-gnome/testgnome.xml.h:5
+msgid "_File"
+msgstr "_Rakitra"
+
+#: ../libgnomeui/gnome-app-helper.c:83
+msgid "_File/"
+msgstr "_Rakitra/"
+
+#: ../libgnomeui/gnome-app-helper.c:84
+#: ../libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "_Fanovana"
+
+#: ../libgnomeui/gnome-app-helper.c:85
+msgid "_Edit/"
+msgstr "_Fanovana/"
+
+#: ../libgnomeui/gnome-app-helper.c:86
+#: ../libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "_Seho"
+
+#: ../libgnomeui/gnome-app-helper.c:87
+msgid "_View/"
+msgstr "_Seho/"
+
+#: ../libgnomeui/gnome-app-helper.c:88
+#: ../libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "_Fandrindrana"
+
+#: ../libgnomeui/gnome-app-helper.c:89
+msgid "_Settings/"
+msgstr "_Fandrindrana/"
+
+#. If you have more then one New type, use this tree
+#: ../libgnomeui/gnome-app-helper.c:90
+#: ../libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "_Vaovao"
+
+#: ../libgnomeui/gnome-app-helper.c:91
+msgid "_New/"
+msgstr "_Vaovao/"
+
+#: ../libgnomeui/gnome-app-helper.c:92
+#: ../libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "Raki_tra"
+
+#: ../libgnomeui/gnome-app-helper.c:93
+msgid "Fi_les/"
+msgstr "Raki_tra/"
+
+#: ../libgnomeui/gnome-app-helper.c:94
+#: ../libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "_Fikandrana"
+
+#: ../libgnomeui/gnome-app-helper.c:95
+#: ../libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "_Lalao"
+
+#: ../libgnomeui/gnome-app-helper.c:96
+#: ../libgnomeui/gnome-app-helper.h:569
+#: ../test-gnome/testgnome.xml.h:6
+msgid "_Help"
+msgstr "_Toro-làlana"
+
+#: ../libgnomeui/gnome-app-helper.c:97
+msgid "_Windows/"
+msgstr "_Fikandrana/"
+
+#. Open
+#: ../libgnomeui/gnome-app-helper.c:109
+msgid "_Open..."
+msgstr "_Sokafy..."
+
+#: ../libgnomeui/gnome-app-helper.c:109
+msgid "Open a file"
+msgstr "Manokatra rakitra iray"
+
+#. Save
+#: ../libgnomeui/gnome-app-helper.c:114
+msgid "_Save"
+msgstr "_Raiketo"
+
+#: ../libgnomeui/gnome-app-helper.c:114
+msgid "Save the current file"
+msgstr "Mandraikitra io rakitra io"
+
+#. Save As
+#: ../libgnomeui/gnome-app-helper.c:119
+msgid "Save _As..."
+msgstr "Raiketo _toy izao..."
+
+#: ../libgnomeui/gnome-app-helper.c:120
+msgid "Save the current file with a different name"
+msgstr "Mandraikitra io rakitra io amin'ny anarana hafa"
+
+#. Revert
+#: ../libgnomeui/gnome-app-helper.c:125
+msgid "_Revert"
+msgstr "_Ahemory"
+
+#: ../libgnomeui/gnome-app-helper.c:126
+msgid "Revert to a saved version of the file"
+msgstr "Mihemotra mankany amin'ny endrik'ilay rakitra voaraikitra"
+
+#. Print
+#: ../libgnomeui/gnome-app-helper.c:131
+msgid "_Print..."
+msgstr "_Atontay..."
+
+#: ../libgnomeui/gnome-app-helper.c:131
+msgid "Print the current file"
+msgstr "Manonta io rakitra io"
+
+#. Print Setup
+#: ../libgnomeui/gnome-app-helper.c:136
+msgid "Print S_etup..."
+msgstr "_Fandrindrana ny fanontana..."
+
+#: ../libgnomeui/gnome-app-helper.c:137
+msgid "Setup the page settings for your current printer"
+msgstr "Mamaritra ny kirakiran'ny pejy amin'ny mpanonta-printy ampiasainao"
+
+#. Close
+#: ../libgnomeui/gnome-app-helper.c:142
+msgid "_Close"
+msgstr "_Hidio"
+
+#: ../libgnomeui/gnome-app-helper.c:142
+msgid "Close the current file"
+msgstr "Manidy io rakitra io"
+
+#. Exit
+#: ../libgnomeui/gnome-app-helper.c:147
+msgid "_Quit"
+msgstr "_Ajanony"
+
+#: ../libgnomeui/gnome-app-helper.c:147
+msgid "Quit the application"
+msgstr "Manajanona ilay rindranasa"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: ../libgnomeui/gnome-app-helper.c:155
+msgid "Cu_t"
+msgstr "_Esory"
+
+#: ../libgnomeui/gnome-app-helper.c:155
+msgid "Cut the selection"
+msgstr "Manesotra izay voafaritra"
+
+#. 10
+#. Copy
+#: ../libgnomeui/gnome-app-helper.c:161
+msgid "_Copy"
+msgstr "_Adikao"
+
+#: ../libgnomeui/gnome-app-helper.c:161
+msgid "Copy the selection"
+msgstr "Mandika izay voafaritra"
+
+#. Paste
+#: ../libgnomeui/gnome-app-helper.c:166
+msgid "_Paste"
+msgstr "_Apetao"
+
+#: ../libgnomeui/gnome-app-helper.c:166
+msgid "Paste the clipboard"
+msgstr "Mametaka izay ao anatin'ny fanindri-taratasy"
+
+#. Clear
+#: ../libgnomeui/gnome-app-helper.c:171
+msgid "C_lear"
+msgstr "_Foano"
+
+#: ../libgnomeui/gnome-app-helper.c:171
+msgid "Clear the selection"
+msgstr "Manafoana izay voafaritra"
+
+#. Undo
+#: ../libgnomeui/gnome-app-helper.c:176
+msgid "_Undo"
+msgstr "_Foano"
+
+#: ../libgnomeui/gnome-app-helper.c:176
+msgid "Undo the last action"
+msgstr "Manafoana ny asa natao farany"
+
+#. Redo
+#: ../libgnomeui/gnome-app-helper.c:181
+msgid "_Redo"
+msgstr "_Avereno"
+
+#: ../libgnomeui/gnome-app-helper.c:181
+msgid "Redo the undone action"
+msgstr "Mamerina ny asa nofoanana"
+
+#. Find
+#: ../libgnomeui/gnome-app-helper.c:186
+msgid "_Find..."
+msgstr "_Hikaroka..."
+
+#: ../libgnomeui/gnome-app-helper.c:186
+msgid "Search for a string"
+msgstr "Hikaroka laha-daza iray"
+
+#. Find Again
+#: ../libgnomeui/gnome-app-helper.c:191
+msgid "Find Ne_xt"
+msgstr "_Manaraka"
+
+#: ../libgnomeui/gnome-app-helper.c:192
+msgid "Search again for the same string"
+msgstr "Mikaroka ny laha-daza sahala manaraka"
+
+#. Replace
+#: ../libgnomeui/gnome-app-helper.c:197
+msgid "R_eplace..."
+msgstr "_Soloy..."
+
+#: ../libgnomeui/gnome-app-helper.c:197
+msgid "Replace a string"
+msgstr "Manolo laha-daza iray"
+
+#. Properties
+#: ../libgnomeui/gnome-app-helper.c:202
+msgid "_Properties"
+msgstr "_Toetoetra"
+
+#: ../libgnomeui/gnome-app-helper.c:203
+msgid "Modify the file's properties"
+msgstr "Manova ny toetoetr'ilay rakitra"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: ../libgnomeui/gnome-app-helper.c:211
+msgid "Prefere_nces"
+msgstr "Safidy manokana"
+
+#: ../libgnomeui/gnome-app-helper.c:212
+msgid "Configure the application"
+msgstr "Mikirakira ilay rindranasa"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: ../libgnomeui/gnome-app-helper.c:221
+#: ../test-gnome/testgnome.xml.h:4
+msgid "_About"
+msgstr "Mombamomba"
+
+#: ../libgnomeui/gnome-app-helper.c:222
+#: ../test-gnome/testgnome.xml.h:1
+msgid "About this application"
+msgstr "Mombamomba ilay rindranasa"
+
+#: ../libgnomeui/gnome-app-helper.c:225
+msgid "Select _All"
+msgstr "Farito izy _rehetra"
+
+#: ../libgnomeui/gnome-app-helper.c:226
+msgid "Select everything"
+msgstr "Mamaritra ny rehetra"
+
+#.
+#. * Window menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:234
+msgid "Create New _Window"
+msgstr "Hamorona _fikandrana  vaovao"
+
+#: ../libgnomeui/gnome-app-helper.c:235
+msgid "Create a new window"
+msgstr "Mamorona fikandrana vaovao"
+
+#: ../libgnomeui/gnome-app-helper.c:239
+msgid "_Close This Window"
+msgstr "_Hidio ity fikandrana ity"
+
+#: ../libgnomeui/gnome-app-helper.c:240
+#: ../test-gnome/testgnome.xml.h:2
+msgid "Close the current window"
+msgstr "Manidy ny fikandrana iasana"
+
+#.
+#. * The "Game" menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:248
+msgid "_New Game"
+msgstr "_Lalao vaovao"
+
+#: ../libgnomeui/gnome-app-helper.c:249
+msgid "Start a new game"
+msgstr "Manomboka lalao vaovao"
+
+#: ../libgnomeui/gnome-app-helper.c:253
+msgid "_Pause Game"
+msgstr "_Aatoy"
+
+#: ../libgnomeui/gnome-app-helper.c:254
+msgid "Pause the game"
+msgstr "Mampiato ny lalao"
+
+#: ../libgnomeui/gnome-app-helper.c:258
+msgid "_Restart Game"
+msgstr "_Tohizo"
+
+#: ../libgnomeui/gnome-app-helper.c:259
+msgid "Restart the game"
+msgstr "Manohy ny lalao"
+
+#: ../libgnomeui/gnome-app-helper.c:263
+msgid "_Undo Move"
+msgstr "_Foano ilay hetsika teo"
+
+#: ../libgnomeui/gnome-app-helper.c:264
+msgid "Undo the last move"
+msgstr "Manafoana ny hetsika natao farany"
+
+#: ../libgnomeui/gnome-app-helper.c:268
+msgid "_Redo Move"
+msgstr "_Avereno ilay hetsika teo"
+
+#: ../libgnomeui/gnome-app-helper.c:269
+msgid "Redo the undone move"
+msgstr "Mamerina ny hetsika nofoanana"
+
+#: ../libgnomeui/gnome-app-helper.c:273
+msgid "_Hint"
+msgstr "_Toro"
+
+#: ../libgnomeui/gnome-app-helper.c:274
+msgid "Get a hint for your next move"
+msgstr "Manome toro ho an'ny hetsikao manaraka"
+
+#. 30
+#: ../libgnomeui/gnome-app-helper.c:279
+msgid "_Scores..."
+msgstr "_Isa..."
+
+#: ../libgnomeui/gnome-app-helper.c:280
+msgid "View the scores"
+msgstr "Maneho ny isa azo"
+
+#: ../libgnomeui/gnome-app-helper.c:284
+msgid "_End Game"
+msgstr "_Farano ny lalao"
+
+#: ../libgnomeui/gnome-app-helper.c:285
+msgid "End the current game"
+msgstr "Mamarana io lalao io"
+
+#: ../libgnomeui/gnome-app-helper.c:1147
+msgid "_Contents"
+msgstr "_Mpiaty"
+
+#: ../libgnomeui/gnome-app-helper.c:1150
+msgid "View help for this application"
+msgstr "Maneho ny toro-làlana mikasika io rindranasa io"
+
+#: ../libgnomeui/gnome-app-helper.c:2587
+msgid "Text Below Icons"
+msgstr "Soratra ambanin'ny kisary"
+
+#: ../libgnomeui/gnome-app-helper.c:2588
+msgid "Priority Text Beside Icons"
+msgstr "Soratra hamehana akaikin'ny kisary"
+
+#: ../libgnomeui/gnome-app-helper.c:2589
+msgid "Icons Only"
+msgstr "Kisary fotsiny"
+
+#: ../libgnomeui/gnome-app-helper.c:2590
+msgid "Text Only"
+msgstr "Soratra fotsiny"
+
+#: ../libgnomeui/gnome-app-helper.c:2651
+#, c-format
+msgid "Use Desktop Default (%s)"
+msgstr "Ampiasao ny sanda lasitry ny sehatrasa (%s)"
+
+#: ../libgnomeui/gnome-app-util.c:98
+msgid " (press return)"
+msgstr "(tsindrio ny Entrer)"
+
+#: ../libgnomeui/gnome-app-util.c:140
+msgid "ERROR: "
+msgstr "TSY FETEZANA:"
+
+#: ../libgnomeui/gnome-app-util.c:177
+msgid "Warning: "
+msgstr "Fampilazana:"
+
+#: ../libgnomeui/gnome-app-util.c:315
+msgid "y"
+msgstr "e"
+
+#: ../libgnomeui/gnome-app-util.c:316
+msgid "yes"
+msgstr "eny"
+
+#: ../libgnomeui/gnome-app-util.c:319
+msgid "n"
+msgstr "t"
+
+#: ../libgnomeui/gnome-app-util.c:320
+msgid "no"
+msgstr "tsia"
+
+#: ../libgnomeui/gnome-app-util.c:355
+msgid " (yes or no)"
+msgstr " (eny na tsia)"
+
+#: ../libgnomeui/gnome-app-util.c:356
+msgid "  - OK? (yes or no)"
+msgstr "  - OK? (eny na tsia)"
+
+#: ../libgnomeui/gnome-app-util.c:684
+msgid "Progress"
+msgstr "Fivoarana"
+
+#: ../libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr "IDn'ilay rindranasa"
+
+#: ../libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr "Ny laha-dazan'ny IDn'ilay rindranasa"
+
+#: ../libgnomeui/gnome-appbar.c:741
+msgid "Has Progress"
+msgstr "Manana fivoarana"
+
+#: ../libgnomeui/gnome-appbar.c:742
+msgid "Create a progress widget."
+msgstr "Mamorona fanehoana fivoarana."
+
+#: ../libgnomeui/gnome-appbar.c:749
+msgid "Has Status"
+msgstr "Manana toetra"
+
+#: ../libgnomeui/gnome-appbar.c:750
+msgid "Create a status widget."
+msgstr "Mamorona fanehoana toetra."
+
+#: ../libgnomeui/gnome-appbar.c:757
+msgid "Interactivity"
+msgstr "Fandraisana anjara"
+
+#: ../libgnomeui/gnome-appbar.c:758
+msgid "Level of user activity required."
+msgstr "Ny fandraisanan'ny mpampiasa anjara takiana."
+
+#: ../libgnomeui/gnome-authentication-manager.c:80
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr "Mila anao manokatra session ny HTTP Proxy-nao.\n"
+
+#: ../libgnomeui/gnome-authentication-manager.c:81
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+"Tsy maintsy manokatra session ianao vao afaka mampiasa ny \"%s\".\n"
+"%s"
+
+#: ../libgnomeui/gnome-authentication-manager.c:84
+msgid "Your password will be transmitted unencrypted."
+msgstr "Halefa tsy voasora-miafina ny teny fanalahidinao."
+
+#: ../libgnomeui/gnome-authentication-manager.c:85
+msgid "Your password will be transmitted encrypted."
+msgstr "Halefa voasora-miafina ny teny fanalahidinao."
+
+#: ../libgnomeui/gnome-authentication-manager.c:88
+#: ../libgnomeui/gnome-authentication-manager.c:306
+msgid "Authentication Required"
+msgstr "Ilaina ny fanamarinana"
+
+#: ../libgnomeui/gnome-authentication-manager.c:298
+#, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "Mila manokatra session ianao vao afaka mampiasa ny domenan'ny %s %s\n"
+
+#: ../libgnomeui/gnome-authentication-manager.c:300
+#, c-format
+msgid "You must log in to access %s\n"
+msgstr "Tsy maintsy manokatra session ianao vao afaka mampiasa ny %s\n"
+
+#: ../libgnomeui/gnome-client.c:902
+#: ../libgnomeui/gnome-client.c:916
+msgid "Specify session management ID"
+msgstr "Mamaritra ny IDn'ny fandrindrana session"
+
+#: ../libgnomeui/gnome-client.c:902
+#: ../libgnomeui/gnome-client.c:916
+msgid "ID"
+msgstr "ID"
+
+#: ../libgnomeui/gnome-client.c:905
+#: ../libgnomeui/gnome-client.c:920
+msgid "Specify prefix of saved configuration"
+msgstr "Mamaritra ny tovon'ny kirakira voaraikitra"
+
+#: ../libgnomeui/gnome-client.c:905
+#: ../libgnomeui/gnome-client.c:920
+msgid "PREFIX"
+msgstr "TOVONA"
+
+#: ../libgnomeui/gnome-client.c:908
+#: ../libgnomeui/gnome-client.c:924
+msgid "Disable connection to session manager"
+msgstr "Manatsahatra ny fifandraisana amin'ny mpandrindra session"
+
+#: ../libgnomeui/gnome-client.c:1034
+#: ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Fandrindrana session"
+
+#: ../libgnomeui/gnome-client.c:1035
+msgid "Show session management options"
+msgstr "Maneho ny safidin'ny fandrindrana session"
+
+#: ../libgnomeui/gnome-client.c:2573
+msgid "Cancel Logout"
+msgstr "Foano ny fivoahana"
+
+#: ../libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "Nahazo lazan-doko tsy ekena\n"
+
+#: ../libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "Manokatra takila hamaritana ilay loko"
+
+#: ../libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "Misafidiana loko iray"
+
+#: ../libgnomeui/gnome-dateedit.c:491
+#: ../libgnomeui/gnome-dateedit.c:788
+msgid "Time"
+msgstr "Fotoana"
+
+#: ../libgnomeui/gnome-dateedit.c:492
+msgid "The time currently selected"
+msgstr "Ny fotoana nosafidiana"
+
+#: ../libgnomeui/gnome-dateedit.c:504
+msgid "DateEdit Flags"
+msgstr "Saina DateEdit"
+
+#: ../libgnomeui/gnome-dateedit.c:505
+msgid "Flags for how DateEdit looks"
+msgstr "Saina fanehoana ny endriky ny DateEdit"
+
+#: ../libgnomeui/gnome-dateedit.c:514
+msgid "Lower Hour"
+msgstr "Ora ambany"
+
+#: ../libgnomeui/gnome-dateedit.c:515
+#, fuzzy
+msgid "Lower hour in the time popup selector"
+msgstr "Ora ambany ao anatin'ny mpisafidy fotoana popup"
+
+#: ../libgnomeui/gnome-dateedit.c:525
+msgid "Upper Hour"
+msgstr "Ora ambony"
+
+#: ../libgnomeui/gnome-dateedit.c:526
+#, fuzzy
+msgid "Upper hour in the time popup selector"
+msgstr "Ora ambony ao anatin'ny mpisafidy fotoana popup"
+
+#: ../libgnomeui/gnome-dateedit.c:536
+msgid "Initial Time"
+msgstr "Ora iaingana"
+
+#: ../libgnomeui/gnome-dateedit.c:537
+msgid "The initial time"
+msgstr "Ny ora iaingana"
+
+#: ../libgnomeui/gnome-dateedit.c:751
+#: ../libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Daty"
+
+#: ../libgnomeui/gnome-dateedit.c:764
+msgid "Select Date"
+msgstr "Farito ny daty"
+
+#: ../libgnomeui/gnome-dateedit.c:764
+msgid "Select the date from a calendar"
+msgstr "Farito ao anaty kalandrie ny daty "
+
+#. Calendar label, only shown if the date editor has a time field
+#: ../libgnomeui/gnome-dateedit.c:775
+msgid "Calendar"
+msgstr "Kalandrie"
+
+#: ../libgnomeui/gnome-dateedit.c:796
+msgid "Select Time"
+msgstr "Farito ny ora"
+
+#: ../libgnomeui/gnome-dateedit.c:796
+msgid "Select the time from a list"
+msgstr "Farito avy ao anaty lisitra ny ora "
+
+#: ../libgnomeui/gnome-dateedit.c:1015
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr "Tsy ampiasaina intsony ny gnome_date_edit_get_date; gnome_date_edit_get_time ampiasaina"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:121
+#: ../libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "Lohateny"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "Ny lohatenin'ilay druide"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "Sary amin'ilay fango"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "Watermark ambony"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "Sary watermark atao eo ambony"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "Ny tavan'ilay lohateny"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "Lokon-tavan'ilay lohateny"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "Lokon'ny tavan'ny lohateny"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Lokon-tavan'ilay lohateny amin'ny maha-GdkColor azy"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "Voafaritra ny lokon-tavan'ilay lohateny"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "Voafaritra ny lokon-tavan'ilay lohateny"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:169
+#: ../libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "Loko afara"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "Loko afara"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "Loko afara amin'ny maha-GdkColor azy"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "Voafaritra ny loko afara"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "Voafaritra ny loko afara"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:193
+#: ../libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Loko afaran'ny mpiaty"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Lok afaran'ny mpiaty"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Loko afaran'ny mpiaty amin'ny maha-GdkColor azy"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Voafaritra ny loko afaran'ny mpiaty"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Voafaritra ny loko afaran'ny mpiaty"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:216
+#: ../libgnomeui/gnome-druid-page-standard.c:224
+msgid "Logo Background Color"
+msgstr "Lok afaran'ny fango"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:217
+msgid "Logo Background color"
+msgstr "Loko afaran'ny fango"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:225
+msgid "Logo Background color as a GdkColor"
+msgstr "Loko afaran'ny fango amin'ny maha-GdkColor azy"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:232
+msgid "Logo Background color set"
+msgstr "Voafaritra ny loko afaran'ny fango"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:233
+msgid "Logo Background color is set"
+msgstr "Voafaritra ny loko afaran'ny fango"
+
+#: ../libgnomeui/gnome-druid.c:154
+msgid "Show Finish"
+msgstr "Asehoy ny vita"
+
+#: ../libgnomeui/gnome-druid.c:155
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Maneho ny tsindry 'Vita' fa tsy 'Manaraka'"
+
+#: ../libgnomeui/gnome-druid.c:162
+msgid "Show Help"
+msgstr "Asehoy ny toro-làlana"
+
+#: ../libgnomeui/gnome-druid.c:163
+msgid "Show the 'Help' button"
+msgstr "Maneho ny tsindry 'Toro-làlana'"
+
+#: ../libgnomeui/gnome-entry.c:193
+#: ../libgnomeui/gnome-entry.c:194
+#: ../libgnomeui/gnome-file-entry.c:236
+#: ../libgnomeui/gnome-icon-entry.c:178
+msgid "History ID"
+msgstr "IDn'ny diary"
+
+#: ../libgnomeui/gnome-entry.c:200
+msgid "GTK entry"
+msgstr "Fidirana GTK"
+
+#: ../libgnomeui/gnome-entry.c:201
+msgid "The GTK entry"
+msgstr "Ny fidiran'ny GTK"
+
+#: ../libgnomeui/gnome-file-entry.c:237
+msgid "Unique identifier for the file entry.  This will be used to save the history list."
+msgstr "Famantarana tokana ho an'ilay anaran-drakitra. Hampiasaina handraiketana ny lisitry ny diary izy io."
+
+#: ../libgnomeui/gnome-file-entry.c:245
+#: ../libgnomeui/gnome-icon-entry.c:187
+msgid "Browse Dialog Title"
+msgstr "Lohatenin'ny takilan'ny fizahana rakitra"
+
+#: ../libgnomeui/gnome-file-entry.c:246
+msgid "Title for the Browse file dialog."
+msgstr "Lohatenin'ny takila fizahana rakitra."
+
+#: ../libgnomeui/gnome-file-entry.c:253
+msgid "Directory Entry"
+msgstr "snaran-dahatahiry"
+
+#: ../libgnomeui/gnome-file-entry.c:254
+msgid "Whether the file entry is being used to enter directory names or complete filenames."
+msgstr "Raha ampiasaina anoratana anaran-dahatahiry na anaran-drakitra feno ny banga amin'ilay rakitra."
+
+#: ../libgnomeui/gnome-file-entry.c:262
+#, fuzzy
+msgid "Modal"
+msgstr "Modal"
+
+#: ../libgnomeui/gnome-file-entry.c:263
+msgid "Whether the Browse file window should be modal."
+msgstr "Raha tokony ho modal ny takila fizahana rakitra."
+
+#: ../libgnomeui/gnome-file-entry.c:270
+#: ../libgnomeui/gnome-icon-entry.c:203
+msgid "Filename"
+msgstr "Anaran-drakitra"
+
+#: ../libgnomeui/gnome-file-entry.c:271
+msgid "Filename that should be displayed in the file entry."
+msgstr "Ny anarana tokony haseho miaraka amin'ilay rakitra."
+
+#: ../libgnomeui/gnome-file-entry.c:279
+msgid "Default Path"
+msgstr "Sori-dàlana lasitra"
+
+#: ../libgnomeui/gnome-file-entry.c:280
+msgid "Default path for the Browse file window."
+msgstr "Sori-dàlana lasitry ny takila fizahana rakitra."
+
+#: ../libgnomeui/gnome-file-entry.c:287
+msgid "GnomeEntry"
+msgstr "GnomeEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:288
+msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
+msgstr "Ny GnomeEntry ampiasain'ny rakitra hanoratana anaran-drakitra.  Azonao ampiasaina hangalana ny GnomeEntry io toetoetra io raha  mila manova na mila fanazavana mikasika ny mpizahany ianao."
+
+#: ../libgnomeui/gnome-file-entry.c:298
+msgid "GtkEntry"
+msgstr "GtkEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:299
+msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
+msgstr "GtkEntry ampiasain'ny rakitra hanoratana anaran-drakitra.  Azonao ampiasaina hangalana ny GtkEntry io toetoetra io raha mila manova na mila fanazavana mikasika ny mpizahany ianao."
+
+#: ../libgnomeui/gnome-file-entry.c:309
+msgid "Use GtkFileChooser"
+msgstr "Hampiasa ny GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:310
+msgid "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget to select files."
+msgstr "Raha toa ka hampiasa ny GtkFileChooser na ny GtkFileSelection rehefa hamaritra rakitra."
+
+#: ../libgnomeui/gnome-file-entry.c:319
+msgid "GtkFileChooser Action"
+msgstr "Asa mifandraika amin'ny GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:320
+msgid "The type of operation that the file selector is performing."
+msgstr "Ny karazan'asa ataon'ilay mpamaritra rakitra."
+
+#: ../libgnomeui/gnome-file-entry.c:651
+#: ../libgnomeui/gnome-file-entry.c:688
+msgid "Select file"
+msgstr "Hamaritra rakitra"
+
+#: ../libgnomeui/gnome-file-entry.c:814
+msgid "Path"
+msgstr "Sori-dàlana"
+
+#: ../libgnomeui/gnome-file-entry.c:814
+msgid "Path to file"
+msgstr "Ny sori-dàlana mankany amin'ilay rakitra"
+
+#: ../libgnomeui/gnome-file-entry.c:841
+msgid "_Browse..."
+msgstr "_Zahavo..."
+
+#: ../libgnomeui/gnome-file-entry.c:842
+msgid "Pop up a file selector to choose a file"
+msgstr "Manokatra takila fisafidiana rakitra"
+
+#: ../libgnomeui/gnome-font-picker.c:66
+msgid "sans 12"
+msgstr "sans 12"
+
+#: ../libgnomeui/gnome-font-picker.c:67
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+
+#: ../libgnomeui/gnome-font-picker.c:68
+msgid "Pick a Font"
+msgstr "Misafidiana endri-tsoratra iray"
+
+#: ../libgnomeui/gnome-font-picker.c:156
+msgid "The title of the selection dialog box"
+msgstr "Ny lohatenin'ilay takila fisafidianana"
+
+#: ../libgnomeui/gnome-font-picker.c:164
+msgid "Mode"
+msgstr "Fomba"
+
+#: ../libgnomeui/gnome-font-picker.c:165
+msgid "The mode of operation of the font picker"
+msgstr "Ny fomba arahin'ilay mpisafidy endri-tsoratra"
+
+#: ../libgnomeui/gnome-font-picker.c:174
+msgid "Font name"
+msgstr "Anaran'endri-tsoratra"
+
+#: ../libgnomeui/gnome-font-picker.c:175
+msgid "Name of the selected font"
+msgstr "Anaran'ilay endri-tsoratra nosafidiana"
+
+#: ../libgnomeui/gnome-font-picker.c:184
+#: ../libgnomeui/gnome-font-picker.c:979
+msgid "Font"
+msgstr "Endri-tsoratra"
+
+#: ../libgnomeui/gnome-font-picker.c:185
+msgid "The selected GtkFont"
+msgstr "Ny endri-tsoratra GtkFont nosafidiana"
+
+#: ../libgnomeui/gnome-font-picker.c:192
+msgid "Preview text"
+msgstr "Soratra ohatra"
+
+#: ../libgnomeui/gnome-font-picker.c:193
+msgid "Preview text shown in the dialog"
+msgstr "Soratra ohatra miseho anatin'ilay takila"
+
+#: ../libgnomeui/gnome-font-picker.c:201
+msgid "Use font in label"
+msgstr "Ampiasao amin'ny mari-tsoratra"
+
+#: ../libgnomeui/gnome-font-picker.c:202
+msgid "Use font in the label in font info mode"
+msgstr "Mampiasa ilay endri-tsoratra amin'ny mari-tsoratra (fomba lazan'endri-tsoratra)"
+
+#: ../libgnomeui/gnome-font-picker.c:210
+msgid "Font size for label"
+msgstr "Haben'ny endri-tsoratry ny mari-tsoratra"
+
+#: ../libgnomeui/gnome-font-picker.c:211
+msgid "Font size for label in font info mode"
+msgstr "Ny haben'ny endri-tsoratry ny mari-tsoratra (fomba lazan'endri-tsoratra)"
+
+#: ../libgnomeui/gnome-font-picker.c:221
+msgid "Show size"
+msgstr "Asehoy ny habeny"
+
+#: ../libgnomeui/gnome-font-picker.c:222
+msgid "Show size in font info mode"
+msgstr "Mampiseho ny habeny (fomba lazan'endri-tsoratra)"
+
+#: ../libgnomeui/gnome-gconf-ui.c:61
+#, fuzzy
+msgid "GNOME GConf UI Support"
+msgstr "Fandraisana an-tànana UI GConfn'ny GNOME"
+
+#: ../libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "_Antsipiriany"
+
+#: ../libgnomeui/gnome-gconf-ui.c:171
+#, c-format
+msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
+msgstr "Ny rindranasa \"%s\" dia nanandrana nanova zavatra tanatin'ny kirakiran'ny rafitrao izay tsy avelan'ny mpitantana ny rafitrao na ny mpivarotra ny solosainao ovaina. Mety tsy hihatra na tsy hiverina amin'ny laoniny ny sasany amin'ireo safidy nofaritanao teo rehefa mandefa ilay rindranasa amin'ny manaraka ianao."
+
+#: ../libgnomeui/gnome-gconf-ui.c:178
+#, c-format
+msgid "An error occurred while loading or saving configuration information for %s. Some of your configuration settings may not work properly."
+msgstr "nisy olana teo am-pakana na teo am-pandraiketana ny lazan-kirakiran'ny %s. Mety tsy handeha araka ny tokony ho izy ny rindran'ny kirakiranao sasany."
+
+#: ../libgnomeui/gnome-href.c:123
+msgid "URL"
+msgstr "URL"
+
+#: ../libgnomeui/gnome-href.c:124
+msgid "The URL that GnomeHRef activates"
+msgstr "Ny URL alefan'ny GnomeHRef"
+
+#: ../libgnomeui/gnome-href.c:131
+msgid "Text"
+msgstr "Soratra"
+
+#: ../libgnomeui/gnome-href.c:132
+msgid "The text on the button"
+msgstr "Ny soratra eo amin'ilay tsindry"
+
+#: ../libgnomeui/gnome-href.c:133
+msgid "End World Hunger"
+msgstr "Fongory ny hanohanana maneran-tany"
+
+#: ../libgnomeui/gnome-href.c:139
+msgid "Link color"
+msgstr "Lokon'ny rohy"
+
+#: ../libgnomeui/gnome-href.c:140
+msgid "Color used to draw the link"
+msgstr "Ny loko ampiasaina hanoritana ilay rohy"
+
+#: ../libgnomeui/gnome-href.c:171
+msgid "This button will take you to the URI that it displays."
+msgstr "Hitondra anao mankany amin'ny URI miseho eo ity tsindry ity."
+
+#: ../libgnomeui/gnome-href.c:394
+msgid ""
+"An error has occurred while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"Nisy olana teo am-panandramana mandefa ny mpitety tranonkala lasitra.\n"
+"Jereo ny rindran'ny mpitetinao ao amin'ny famaritana safidy manokana\n"
+"'Rindranasa safidy'."
+
+#: ../libgnomeui/gnome-icon-entry.c:179
+msgid "Unique identifier for the icon entry.  This will be used to save the history list."
+msgstr "Famantarana tokana ho an'ny lazan'ilay kisary. Hampiasaina handraiketana ny lisitry ny diary izy io."
+
+#: ../libgnomeui/gnome-icon-entry.c:188
+msgid "Title for the Browse icon dialog."
+msgstr "Lohatenin'ny takilan'ny fizahana kisary."
+
+#: ../libgnomeui/gnome-icon-entry.c:195
+msgid "Pixmap Directory"
+msgstr "Lahatahirin'ny pixmap"
+
+#: ../libgnomeui/gnome-icon-entry.c:196
+msgid "Directory that will be searched for icons."
+msgstr "Ny lahatahiry hizahana kisary."
+
+#: ../libgnomeui/gnome-icon-entry.c:204
+msgid "Filename that should be displayed in the icon entry."
+msgstr "Ny anaran-drakitra tokony haseho eo amin'ilay kisary."
+
+#: ../libgnomeui/gnome-icon-entry.c:212
+msgid "Picker dialog"
+msgstr "Takilan'ny fisafidianana"
+
+#: ../libgnomeui/gnome-icon-entry.c:213
+msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
+msgstr "Takilan'ny fisafidianana kisary. Azonao ampiasaina hangalana ny GtkDialog io toetoetra io raha mila manova na mila fanazavana mikasika ny mpizahany ianao."
+
+#: ../libgnomeui/gnome-icon-entry.c:321
+#: ../libgnomeui/gnome-icon-entry.c:1004
+msgid "No Icon"
+msgstr "Tsy misy kisary"
+
+#: ../libgnomeui/gnome-icon-entry.c:774
+msgid "Icon selection dialog"
+msgstr "Takila fisafidianana kisary"
+
+#: ../libgnomeui/gnome-icon-entry.c:775
+msgid "This dialog box lets you select an icon."
+msgstr "Mamela anao hisafidy kisary ity takila ity."
+
+#: ../libgnomeui/gnome-icon-entry.c:781
+#: ../libgnomeui/gnome-icon-entry.c:1007
+msgid "Icon Selector"
+msgstr "Mpisafidy kisary"
+
+#: ../libgnomeui/gnome-icon-entry.c:782
+msgid "Please pick the icon you want."
+msgstr "Safidio ny kisary ilainao."
+
+#: ../libgnomeui/gnome-icon-entry.c:1008
+msgid "This button will open a window to let you select an icon."
+msgstr "Hanokatra takila ahafahanao misafidy kisary ity tsindry ity."
+
+#: ../libgnomeui/gnome-icon-entry.c:1028
+msgid "Browse"
+msgstr "Zahavo"
+
+#: ../libgnomeui/gnome-icon-entry.c:1031
+msgid "Icon path"
+msgstr "Sori-dàlan'ny kisary"
+
+#: ../libgnomeui/gnome-icon-entry.c:1032
+msgid "Here you should enter the name of the directory where icon images are located."
+msgstr "Tokony soratanao eto ny anaran'ilay lahatahiry misy ny kisary."
+
+#: ../libgnomeui/gnome-icon-sel.c:293
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr "GnomeIconSelection: tsy misy na tsy lahatahiry ny '%s'"
+
+#: ../libgnomeui/gnome-icon-sel.c:301
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr "GnomeIconSelection: tsy nahasokatra ny '%s'"
+
+#: ../libgnomeui/gnome-icon-sel.c:405
+msgid "Loading Icons..."
+msgstr "Maka ireo kisary..."
+
+#: ../libgnomeui/gnome-messagebox.c:107
+msgid "Information"
+msgstr "Fampahalalana"
+
+#: ../libgnomeui/gnome-messagebox.c:112
+msgid "Warning"
+msgstr "Fampilazana"
+
+#: ../libgnomeui/gnome-messagebox.c:118
+msgid "Error"
+msgstr "Tsy fetezana"
+
+#: ../libgnomeui/gnome-messagebox.c:124
+msgid "Question"
+msgstr "Fanontaniana"
+
+#: ../libgnomeui/gnome-messagebox.c:129
+msgid "Message"
+msgstr "Hafatra"
+
+#: ../libgnomeui/gnome-password-dialog.c:265
+msgid "_Username:"
+msgstr "_Anaran'ny mpampiasa:"
+
+#: ../libgnomeui/gnome-password-dialog.c:267
+msgid "_Domain:"
+msgstr "_Domena:"
+
+#: ../libgnomeui/gnome-password-dialog.c:269
+msgid "_Password:"
+msgstr "_Teny fanalahidy:"
+
+#: ../libgnomeui/gnome-password-dialog.c:342
+msgid "Co_nnect"
+msgstr "_Hifandray"
+
+#: ../libgnomeui/gnome-password-dialog.c:364
+msgid "Connect _anonymously"
+msgstr "_Fifandraisana tsy ahafantarana ny tena"
+
+#: ../libgnomeui/gnome-password-dialog.c:369
+msgid "Connect as u_ser:"
+msgstr "Hifandray amin'ny maha-mpa_piasa:"
+
+#: ../libgnomeui/gnome-password-dialog.c:467
+msgid "_Remember password for this session"
+msgstr "_Tadidio ny teny fanalahidin'ity session ity"
+
+#: ../libgnomeui/gnome-password-dialog.c:469
+msgid "Save password in _keyring"
+msgstr "Raiketo ao amin'ny _rojom-panalahidy"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:114
+msgid "Do Preview"
+msgstr "Manoza topimaso"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:115
+msgid "Whether the pixmap entry should have a preview."
+msgstr "Raha tokony asiana topimaso ny lazan'ny pixmap."
+
+#: ../libgnomeui/gnome-pixmap-entry.c:189
+#: ../libgnomeui/gnome-pixmap-entry.c:481
+msgid "No Image"
+msgstr "Tsy misy sarys"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:206
+msgid "Image Preview"
+msgstr "Topimason'ilay sary"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:207
+msgid "A preview of the image currently specified"
+msgstr "Topimason'ny sary voafaritra"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:416
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Tsy mahita hbox. Hanao famaritana rakitra tsotra"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:422
+msgid "Preview"
+msgstr "Topimaso"
+
+#: ../libgnomeui/gnome-scores.c:78
+msgid "Top Ten"
+msgstr "Ireo folo voalohanys"
+
+#: ../libgnomeui/gnome-scores.c:91
+msgid "User"
+msgstr "Mpampiasa"
+
+#: ../libgnomeui/gnome-scores.c:94
+msgid "Score"
+msgstr "Isa"
+
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: ../libgnomeui/gnome-scores.c:194
+msgid "%a %b %d %T %Y"
+msgstr "%a %d %b %Y, %T"
+
+#: ../libgnomeui/gnome-scores.c:395
+msgid "Sans 14"
+msgstr "Sans 14"
+
+#: ../libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Sisin'ny fafana"
+
+#: ../libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Lokon'ny atin'ny fafana"
+
+#: ../libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Lisitra misy ny puce"
+
+#: ../libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "Lisitra misy ny isa"
+
+#: ../libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Ahatao"
+
+#: ../libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "Aza ahataka"
+
+#: ../libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Mombamomba"
+
+#: ../libgnomeui/gnome-ui-init.c:126
+#: ../libgnomeui/gnome-ui-init.c:135
+msgid "Disable Crash Dialog"
+msgstr "Atsaharo ny takila filazana fijanonana tampoka"
+
+#: ../libgnomeui/gnome-ui-init.c:128
+msgid "X display to use"
+msgstr "Seho X ampiasaina"
+
+#: ../libgnomeui/gnome-ui-init.c:128
+msgid "DISPLAY"
+msgstr "SEHO"
+
+#: ../libgnomeui/gnome-ui-init.c:172
+#: ../libgnomeui/gnome-ui-init.c:185
+msgid "GNOME GUI Library"
+msgstr "Tahirim-boky GUIn'ny GNOME"
+
+#: ../libgnomeui/gnome-ui-init.c:173
+msgid "Show GNOME GUI options"
+msgstr "Maneho ny safidin'ny GUIn'ny GNOME"
+
+#: ../libgnomeui/gnome-ui-init.c:250
+msgid "Could not open link"
+msgstr "Tsy nahasokatra ilay rohy"
+
+#. dialog display isn't working out
+#: ../libgnomeui/gnome-ui-init.c:836
+#, c-format
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr "Nisy olana mahakasika ny fanakantsanana maro nitranga; tsy afaka maneho ny takila filazana tsy fetezana\n"
+
+#. Eeeek! Can't show dialog
+#: ../libgnomeui/gnome-ui-init.c:851
+#, c-format
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Olana amin'ny fanakantsanana!\n"
+"Tsy afaka maneho ny takila filazana fijanonana tampoka\n"
+
+#: ../libgnomeui/gnome_segv.c:82
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Fampiasa: gnome_segv2 anar-rindranasa lah-fambara\n"
+
+#: ../libgnomeui/gnome_segv.c:134
+#, c-format
+msgid ""
+"<b>The application %s has crashed.</b>\n"
+"\n"
+"However you don't have installed <b>bug-buddy</b>, the\n"
+"GNOME crash report tool. If you want to help us\n"
+"to make GNOME better, please, install it\n"
+msgstr ""
+"<b>Nijanona tampoka ny rindranasa %s.</b>\n"
+"\n"
+"Tsy napetrakao anefa ny <b>bug-buddy</b>, ilay\n"
+"fitaovana fitaterana kileman'ny GNOME. Apetrao izy io\n"
+"mba ahafahana mampivoatra ny GNOME\n"
+
+#: ../test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Hanajanona ny fitsapana"

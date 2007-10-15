@@ -1,0 +1,112 @@
+<!-- ##### SECTION Title ##### -->
+GnomeIconSelection
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomeIconSelection ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_icon_selection_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_selection_add_defaults ##### -->
+<para>
+
+</para>
+
+@gis: 
+
+
+<!-- ##### FUNCTION gnome_icon_selection_add_directory ##### -->
+<para>
+
+</para>
+
+@gis: 
+@dir: 
+
+
+<!-- ##### FUNCTION gnome_icon_selection_show_icons ##### -->
+<para>
+
+</para>
+
+@gis: 
+
+
+<!-- ##### FUNCTION gnome_icon_selection_clear ##### -->
+<para>
+
+</para>
+
+@gis: 
+@not_shown: 
+
+
+<!-- ##### FUNCTION gnome_icon_selection_get_icon ##### -->
+<para>
+
+</para>
+
+@gis: 
+@full_path: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_selection_select_icon ##### -->
+<para>
+
+</para>
+
+@gis: 
+@filename: 
+
+
+<!-- ##### FUNCTION gnome_icon_selection_stop_loading ##### -->
+<para>
+
+</para>
+
+@gis: 
+
+
+<!-- ##### FUNCTION gnome_icon_selection_get_gil ##### -->
+<para>
+
+</para>
+
+@gis: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_icon_selection_get_box ##### -->
+<para>
+
+</para>
+
+@gis: 
+@Returns: 
+
+

@@ -1,0 +1,348 @@
+<!-- ##### SECTION Title ##### -->
+GnomeMDI
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### ENUM GnomeMDIMode ##### -->
+<para>
+
+</para>
+
+@GNOME_MDI_NOTEBOOK: 
+@GNOME_MDI_TOPLEVEL: 
+@GNOME_MDI_MODAL: 
+@GNOME_MDI_DEFAULT_MODE: 
+
+<!-- ##### STRUCT GnomeMDI ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GnomeMDI::add-child ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@arg1: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeMDI::add-view ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@widget: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeMDI::app-created ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GnomeMDI::child-changed ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GnomeMDI::remove-child ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@arg1: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeMDI::remove-view ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@widget: 
+@Returns: 
+
+<!-- ##### SIGNAL GnomeMDI::view-changed ##### -->
+<para>
+
+</para>
+
+@mdi: the object which received the signal.
+@widget: 
+
+<!-- ##### FUNCTION gnome_mdi_new ##### -->
+<para>
+
+</para>
+
+@appname: 
+@title: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_set_mode ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@mode: 
+
+
+<!-- ##### FUNCTION gnome_mdi_set_menubar_template ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@menu_tmpl: 
+
+
+<!-- ##### FUNCTION gnome_mdi_set_toolbar_template ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@tbar_tmpl: 
+
+
+<!-- ##### FUNCTION gnome_mdi_set_child_menu_path ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@path: 
+
+
+<!-- ##### FUNCTION gnome_mdi_set_child_list_path ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@path: 
+
+
+<!-- ##### FUNCTION gnome_mdi_add_view ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@child: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_add_toplevel_view ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@child: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_remove_view ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@view: 
+@force: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_get_active_view ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_set_active_view ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@view: 
+
+
+<!-- ##### FUNCTION gnome_mdi_add_child ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@child: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_remove_child ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@child: 
+@force: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_remove_all ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@force: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_open_toplevel ##### -->
+<para>
+
+</para>
+
+@mdi: 
+
+
+<!-- ##### FUNCTION gnome_mdi_update_child ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@child: 
+
+
+<!-- ##### FUNCTION gnome_mdi_get_active_child ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_find_child ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@name: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_get_active_window ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_register ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@object: 
+
+
+<!-- ##### FUNCTION gnome_mdi_unregister ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@object: 
+
+
+<!-- ##### FUNCTION gnome_mdi_get_app_from_view ##### -->
+<para>
+
+</para>
+
+@view: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_get_child_from_view ##### -->
+<para>
+
+</para>
+
+@view: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_get_view_from_window ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@app: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_get_menubar_info ##### -->
+<para>
+
+</para>
+
+@app: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_get_toolbar_info ##### -->
+<para>
+
+</para>
+
+@app: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_get_child_menu_info ##### -->
+<para>
+
+</para>
+
+@app: 
+@Returns: 
+
+

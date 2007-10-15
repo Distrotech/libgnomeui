@@ -1,0 +1,48 @@
+<!-- ##### SECTION Title ##### -->
+gnome-mdi-session
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### USER_FUNCTION GnomeMDIChildCreator ##### -->
+<para>
+
+</para>
+
+@Param1: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_restore_state ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@section: 
+@create_child_func: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_mdi_save_state ##### -->
+<para>
+
+</para>
+
+@mdi: 
+@section: 
+
+

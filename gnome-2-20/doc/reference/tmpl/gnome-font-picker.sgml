@@ -1,0 +1,216 @@
+<!-- ##### SECTION Title ##### -->
+GnomeFontPicker
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### ENUM GnomeFontPickerMode ##### -->
+<para>
+
+</para>
+
+@GNOME_FONT_PICKER_MODE_PIXMAP: 
+@GNOME_FONT_PICKER_MODE_FONT_INFO: 
+@GNOME_FONT_PICKER_MODE_USER_WIDGET: 
+@GNOME_FONT_PICKER_MODE_UNKNOWN: 
+
+<!-- ##### STRUCT GnomeFontPickerPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GnomeFontPicker ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GnomeFontPicker::font-set ##### -->
+<para>
+
+</para>
+
+@fontpicker: the object which received the signal.
+@arg1: 
+
+<!-- ##### ARG GnomeFontPicker:font ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:font-name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:label-font-size ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:mode ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:preview-text ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:show-size ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:title ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeFontPicker:use-font-in-label ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gnome_font_picker_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_set_title ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@title: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_get_title ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_get_mode ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_set_mode ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@mode: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_fi_set_use_font_in_label ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@use_font_in_label: 
+@size: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_fi_set_show_size ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@show_size: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_uw_set_widget ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@widget: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_uw_get_widget ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_get_font_name ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_get_font ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_set_font_name ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@fontname: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_get_preview_text ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_font_picker_set_preview_text ##### -->
+<para>
+
+</para>
+
+@gfp: 
+@text: 
+
+

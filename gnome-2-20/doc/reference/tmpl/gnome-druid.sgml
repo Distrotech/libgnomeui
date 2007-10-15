@@ -1,0 +1,150 @@
+<!-- ##### SECTION Title ##### -->
+GnomeDruid
+
+<!-- ##### SECTION Short_Description ##### -->
+Widget for sequentially stepping through some pages.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomeDruid ##### -->
+<para>
+The widget which ultimately holds all of the druid's pages and information.
+This is the widget which the application developer then places inside an outer
+widget, such as a dialog box for ultimate display.
+</para>
+
+
+<!-- ##### SIGNAL GnomeDruid::cancel ##### -->
+<para>
+
+</para>
+
+@druid: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeDruid::help ##### -->
+<para>
+
+</para>
+
+@druid: the object which received the signal.
+
+<!-- ##### ARG GnomeDruid:show-finish ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeDruid:show-help ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gnome_druid_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_druid_set_buttons_sensitive ##### -->
+<para>
+
+</para>
+
+@druid: 
+@back_sensitive: 
+@next_sensitive: 
+@cancel_sensitive: 
+@help_sensitive: 
+
+
+<!-- ##### FUNCTION gnome_druid_set_show_finish ##### -->
+<para>
+
+</para>
+
+@druid: 
+@show_finish: 
+
+
+<!-- ##### FUNCTION gnome_druid_set_show_help ##### -->
+<para>
+
+</para>
+
+@druid: 
+@show_help: 
+
+
+<!-- ##### FUNCTION gnome_druid_prepend_page ##### -->
+<para>
+
+</para>
+
+@druid: 
+@page: 
+
+
+<!-- ##### FUNCTION gnome_druid_insert_page ##### -->
+<para>
+
+</para>
+
+@druid: 
+@back_page: 
+@page: 
+
+
+<!-- ##### FUNCTION gnome_druid_append_page ##### -->
+<para>
+
+</para>
+
+@druid: 
+@page: 
+
+
+<!-- ##### FUNCTION gnome_druid_set_page ##### -->
+<para>
+
+</para>
+
+@druid: 
+@page: 
+
+
+<!-- ##### FUNCTION gnome_druid_new_with_window ##### -->
+<para>
+
+</para>
+
+@title: 
+@parent: 
+@close_on_cancel: 
+@window: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_druid_construct_with_window ##### -->
+<para>
+
+</para>
+
+@druid: 
+@title: 
+@parent: 
+@close_on_cancel: 
+@window: 
+
+

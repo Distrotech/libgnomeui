@@ -1,0 +1,46 @@
+<!-- ##### SECTION Title ##### -->
+gnome-types
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### USER_FUNCTION GnomeStringCallback ##### -->
+<para>
+
+</para>
+
+@string: 
+@data: 
+
+
+<!-- ##### USER_FUNCTION GnomeReplyCallback ##### -->
+<para>
+
+</para>
+
+@reply: 
+@data: 
+
+
+<!-- ##### ENUM GnomePreferencesType ##### -->
+<para>
+
+</para>
+
+@GNOME_PREFERENCES_NEVER: 
+@GNOME_PREFERENCES_USER: 
+@GNOME_PREFERENCES_ALWAYS: 
+

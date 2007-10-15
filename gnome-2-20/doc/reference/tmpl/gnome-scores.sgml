@@ -1,0 +1,138 @@
+<!-- ##### SECTION Title ##### -->
+GnomeScores
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomeScores ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### FUNCTION gnome_scores_display_with_pixmap ##### -->
+<para>
+
+</para>
+
+@pixmap_logo: 
+@app_name: 
+@level: 
+@pos: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_scores_new ##### -->
+<para>
+
+</para>
+
+@n_scores: 
+@names: 
+@scores: 
+@times: 
+@clear: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_scores_construct ##### -->
+<para>
+
+</para>
+
+@gs: 
+@n_scores: 
+@names: 
+@scores: 
+@times: 
+@clear: 
+
+
+<!-- ##### FUNCTION gnome_scores_set_logo_label ##### -->
+<para>
+
+</para>
+
+@gs: 
+@txt: 
+@font: 
+@col: 
+
+
+<!-- ##### FUNCTION gnome_scores_set_logo_pixmap ##### -->
+<para>
+
+</para>
+
+@gs: 
+@pix_name: 
+
+
+<!-- ##### FUNCTION gnome_scores_set_logo_widget ##### -->
+<para>
+
+</para>
+
+@gs: 
+@w: 
+
+
+<!-- ##### FUNCTION gnome_scores_set_color ##### -->
+<para>
+
+</para>
+
+@gs: 
+@n: 
+@col: 
+
+
+<!-- ##### FUNCTION gnome_scores_set_def_color ##### -->
+<para>
+
+</para>
+
+@gs: 
+@col: 
+
+
+<!-- ##### FUNCTION gnome_scores_set_colors ##### -->
+<para>
+
+</para>
+
+@gs: 
+@col: 
+
+
+<!-- ##### FUNCTION gnome_scores_set_logo_label_title ##### -->
+<para>
+
+</para>
+
+@gs: 
+@txt: 
+
+
+<!-- ##### FUNCTION gnome_scores_set_current_player ##### -->
+<para>
+
+</para>
+
+@gs: 
+@i: 
+
+

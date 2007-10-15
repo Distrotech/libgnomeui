@@ -1,0 +1,33 @@
+<!-- ##### SECTION Title ##### -->
+gnome-window
+
+<!-- ##### SECTION Short_Description ##### -->
+Convenience functions for setting window attributes.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+This module is a convenience wrapper for some similar functions in GTK+. This
+allows all GNOME applications to have a consistent way of setting their window
+and dialog titles. It is possible that in the future, a configurable way of
+setting window titles may be added.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gnome_window_toplevel_set_title ##### -->
+<para>
+
+</para>
+
+@window: 
+@doc_name: 
+@app_name: 
+@extension: 
+
+

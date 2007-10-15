@@ -1,0 +1,104 @@
+<!-- ##### SECTION Title ##### -->
+GnomeHRef
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomeHRef ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### ARG GnomeHRef:text ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeHRef:url ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeHRef:link-color ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gnome_href_new ##### -->
+<para>
+
+</para>
+
+@url: 
+@text: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_href_set_url ##### -->
+<para>
+
+</para>
+
+@href: 
+@url: 
+
+
+<!-- ##### FUNCTION gnome_href_get_url ##### -->
+<para>
+
+</para>
+
+@href: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_href_set_text ##### -->
+<para>
+
+</para>
+
+@href: 
+@text: 
+
+
+<!-- ##### FUNCTION gnome_href_get_text ##### -->
+<para>
+
+</para>
+
+@href: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_href_set_label ##### -->
+<para>
+
+</para>
+
+@href: 
+@label: 
+
+
+<!-- ##### FUNCTION gnome_href_get_label ##### -->
+<para>
+
+</para>
+
+@href: 
+@Returns: 
+
+

@@ -1,0 +1,229 @@
+<!-- ##### SECTION Title ##### -->
+gnome-dialog-util
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### FUNCTION gnome_ok_dialog ##### -->
+<para>
+
+</para>
+
+@message: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_ok_dialog_parented ##### -->
+<para>
+
+</para>
+
+@message: 
+@parent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_error_dialog ##### -->
+<para>
+
+</para>
+
+@error: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_error_dialog_parented ##### -->
+<para>
+
+</para>
+
+@error: 
+@parent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_warning_dialog ##### -->
+<para>
+
+</para>
+
+@warning: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_warning_dialog_parented ##### -->
+<para>
+
+</para>
+
+@warning: 
+@parent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_question_dialog ##### -->
+<para>
+
+</para>
+
+@question: 
+@callback: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_question_dialog_parented ##### -->
+<para>
+
+</para>
+
+@question: 
+@callback: 
+@data: 
+@parent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_question_dialog_modal ##### -->
+<para>
+
+</para>
+
+@question: 
+@callback: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_question_dialog_modal_parented ##### -->
+<para>
+
+</para>
+
+@question: 
+@callback: 
+@data: 
+@parent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_ok_cancel_dialog ##### -->
+<para>
+
+</para>
+
+@message: 
+@callback: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_ok_cancel_dialog_parented ##### -->
+<para>
+
+</para>
+
+@message: 
+@callback: 
+@data: 
+@parent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_ok_cancel_dialog_modal ##### -->
+<para>
+
+</para>
+
+@message: 
+@callback: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_ok_cancel_dialog_modal_parented ##### -->
+<para>
+
+</para>
+
+@message: 
+@callback: 
+@data: 
+@parent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_request_string_dialog ##### -->
+<para>
+
+</para>
+
+@prompt: 
+@callback: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_request_string_dialog_parented ##### -->
+<para>
+
+</para>
+
+@prompt: 
+@callback: 
+@data: 
+@parent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_request_password_dialog ##### -->
+<para>
+
+</para>
+
+@prompt: 
+@callback: 
+@data: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_request_password_dialog_parented ##### -->
+<para>
+
+</para>
+
+@prompt: 
+@callback: 
+@data: 
+@parent: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_request_dialog ##### -->
+<para>
+
+</para>
+
+@password: 
+@prompt: 
+@default_text: 
+@max_length: 
+@callback: 
+@data: 
+@parent: 
+@Returns: 
+
+

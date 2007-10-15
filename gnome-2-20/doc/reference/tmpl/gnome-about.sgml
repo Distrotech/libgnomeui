@@ -1,0 +1,102 @@
+<!-- ##### SECTION Title ##### -->
+GnomeAbout
+
+<!-- ##### SECTION Short_Description ##### -->
+Display author, documenter and translator credits for an application.
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+The GnomeAbout widget is used as the standard way of displaying credits in an
+application. Typically, it will be called when a user selects the
+<literal>About...</literal> option from the <literal>Help</literal> menu. With
+one simple function call, the application can then display all of the
+appropriate information.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT GnomeAbout ##### -->
+<para>
+A dialog box widget containing all of the relevant credit information and
+displaying as three notebook pages.
+</para>
+
+
+<!-- ##### ARG GnomeAbout:authors ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:comments ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:copyright ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:documenters ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:logo ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:translator-credits ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAbout:version ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gnome_about_new ##### -->
+<para>
+
+</para>
+
+@name: 
+@version: 
+@copyright: 
+@comments: 
+@authors: 
+@documenters: 
+@translator_credits: 
+@logo_pixbuf: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_about_construct ##### -->
+<para>
+
+</para>
+
+@about: 
+@name: 
+@version: 
+@copyright: 
+@comments: 
+@authors: 
+@documenters: 
+@translator_credits: 
+@logo_pixbuf: 
+
+

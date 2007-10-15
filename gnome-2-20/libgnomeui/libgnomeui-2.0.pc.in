@@ -1,0 +1,13 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+libgnomeui_serverdir=@libexecdir@
+
+Name: libgnomeui
+Description: libgnomeui
+Requires: libgnome-2.0 libbonoboui-2.0 libgnomecanvas-2.0 gtk+-2.0 gdk-pixbuf-2.0 gnome-vfs-2.0
+Requires.private: libart-2.0 gconf-2.0 @GNOME_KEYRING@ 
+Version: @VERSION@
+Libs: -L${libdir} -lgnomeui-2 @SM_LIBS@
+Cflags: -I${includedir}/libgnomeui-2.0

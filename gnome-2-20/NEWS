@@ -1,0 +1,601 @@
+libgnomeui 2.20.1
+
+* i18n fixing (Christian Persch, Takao Fujiwara)
+* CD-ROMs not shown in the file chooser (Federico Meña Quintero)
+* Better user feedback when creating a dir fails (Richard Hult)
+* Fix http://bugzilla.gnome.org/show_bug.cgi?id=485922 - Errors from
+  GtkFileSystemGnomeVFS are not translated, and are too general. (Federico Meña Quintero)
+* Updated translations.
+  - Belarusian (Ihar Hrachyshka)
+  - Bengali (Khandakar Mujahidul Islam)
+  - Bulgarian (Alexander Shopov)
+  - French (Stephane Raimbault)
+  - Gujararti (Ankit Patel)
+  - Japanese (Takeshi AIHANA)
+  - Korean (Changwoo Ryu)
+  - Norwegian bokmål (Kjartan)
+  - Norwegian nynorsk (Kjartan)
+  - Spanish (Jorge Gonzalez)
+  - Swedish (Daniel Nylander)
+  - Turkish (Fatih Erguven)
+
+libgnomeui 2.20.0
+
+* Create tar.bz2 in dist (Christian Persch)
+* Updated translations:
+  - Arabic (Khaled Hosny)
+  - Brazilian Portugese (Leonardo Ferreira Fontenelle)
+  - Bulgarian (Alexander Shopov)
+  - Canadian English (Adam Weinberger)
+  - Estonian (Ivar Smolin)
+  - Finnish (Ilkka Tuohela)
+  - French (Stéphane Raimbault)
+  - Georgian (Vladimer Sichinava)
+  - Malayalam (Ani Peter)
+  - Portugese (Duarte Loreto)
+
+libgnomeui 2.19.1
+
+* Fix crash in thumbnailing code (#452907, Felix Riemann)
+* Use xdg-user-dirs to get Destkop directory shortcut (#459854, Luca Ferretti)
+* Remove segv handler (Fernando Herrera)
+* Add orientation tag support to the thumbnailer (#440978, Michael J. Chudobiak)
+* Deprecate GnomeDruid (#429178, Matthew Barnes)
+* Use Requires.private for nonpublic requirements (#396255; J.H.M. Dassen (Ray))
+
+libgnomeui 2.19.0
+
+What's new since 2.18.0
+
+* Fix a problem with the build fixes from 2.18.0
+* Correctly set width/height metadata in thumbnails. (Claudio Saavedra, #143470,
+  #356930)
+* Deprecate GnomeHref (Christian Persch, #396452)
+* File descriptor fixes in thumbnailing code (Christian Persch, #413641)
+* Many code fixes and cleanup, p.g. #408660 (Christian Persch)
+* Only unref the drive when we have one, (Richard Hult, #439420)
+* Don't crash in the crash handler when we cannot get the global GnomeProgram
+  (Christian Persch, #438832)
+* Added orientation tag support to thumbnailing. Requires
+  bump in gtk+ version to 2.11.5 (Michael Chudobiak, #440978).
+* Updated translations
+  - pt_BR: Leonardo Ferreira Fontenelle
+  - oc: Christophe Merlet, Kokoyaya
+  - it: Luca Ferretti
+  - ku: Erdal Ronahi
+  - eu: Inaki Larranaga Murgoitio
+  - gl: Ignacio Casal Quinteiro
+  - or: Subhransu Behera
+  - es: Jorge Gonzalez
+  - he: Yair Hershkovitz
+
+libgnomeui 2.18.0
+
+* Lots of code cleanups
+* Build fixes (Loïc Minier)
+* Doc fixes (John Millikin)
+* Updated translations
+  - Albanian (Laurent Dhima)
+  - Belarusian (Ales Navicki)
+  - Bengali Indian (Runa Bhattacharjee)
+  - Brazilian Portugese (Leonardo Ferreira Fontenelle)
+  - Dzongkha (Pema Geyleg)
+  - Greek (Simos Xenitellis)
+  - Gujarati (Ankit Patel)
+  - Japanese (Takeshi AIHANA)
+  - Lithuanian (Gintautas Miliauskas)
+  - Macedonian (Jovan Naumovski)
+  - Romanian (Mişu Moldovan)
+  - Russian (Leonid Kanter)
+  - Serbian (Goran Rakić)
+  - Simplified Chinese (Funda Wang) 
+  - Tamil (I Felix)
+
+libgnomeui 2.17.92
+
+* Dist MAINTAINERS (Kjartan)
+* Updated translations:
+  - Illka Tuohela (fi)
+  - Gabor Kelemen (hu)
+  - Takeshi AIHANA (ja)
+  - Gintautas Miliauskas (lt)
+  - GNOME PL Team (pl)
+  - Leonardo Ferreira Fontenelle (pt_BR)
+  - Nguyễn Thái Ngọc Duy (vi)
+
+libgnomeui 2.17.91
+
+* Revert the single tilde patch since it didn't work
+* Don't eat memory like mad when thumbnailing animated
+  gifs. (Matthias Clasen)
+* Updated translations:
+  - Khaled Hosny (ar)
+  - Josep Puigdemont i Casamajó (ca)
+  - Hendrik Richter (de)
+  - David Lodge (en_GB)
+  - Ivar Smolin (et)
+  - Robert-André Mauchin (fr)
+  - Changwoo Ryu (ko)
+  - Wouter Bolsterlee (nl)
+  - Duarte Loreto (pt)
+  - Theppitak Karoonboonyanan (th)
+
+libgnomeui 2.17.90
+
+* Fix gnome-file-entry in a modal dialog (Christophe Fergeau)
+* Fix leaks (Kjartan, Chris, Jens Granseuer)
+* Sort Volumes and drives in the file chooser (Christian Neumair)
+* Make a single tilde '~' go to $HOME in the location entry.
+  (Yevgen Muntyev)
+* Change remember checkbuttons to radiobuttons in the password dialog
+  (Fernando Herrera, Christian Persch, Hiroyuki Ikezoe)  
+
+libgnomeui 2.17.2
+-----------------
+
+* Make tilde go to $HOME in the file chooser (Yevgen Muntyan)
+* Sort volumes and drives in the file chooser (Christian Neumair)
+* Change "remember" checkbuttons to radiobuttons in the password
+  dialog. (Fernando Herrera, Christian Persch, Hiroyuki Ikezoe)
+* Fix gnome-file-entry when packed in a modal window (Christophe Fergeau)
+ 
+libgnomeui 2.17.1
+-----------------
+
+* Fix hostname URI handling in the filechooser (Christian Neumair)
+* Implement support for new password including checking
+  password quality. (Christian Persch)
+* Reduce relocations (Christian Persch)
+* Code cleanups (Kjartan)
+* Build fix (Paolo Borelli)
+* Improved interfacing with gnome-terminal while debugging. (Fernando Herrera)
+
+* Translation updates
+
+  - Djihed Afifi (ar)
+  - Adam Weinberger (en_CA)
+  - David Lodge (en_GB)
+  - Francisco Javier F. Serrador (es)
+  - Priit Laes (et)
+  - Daniel Nylander (sv)
+  - Theppitak Karoonboonyanan (th)
+
+libgnomeui 2.17.0
+-----------------
+
+* Small cleanups all over the place (Kjartan)
+* Clean up GnomePasswordDialog. HIGify and add GObject properties.
+  (Christian Persch)
+* Fix wording in a dialog in the case where 
+  Bug Buddy isn't installed (jrb, bill nottingham)
+* Set title of the terminal used to launch gdb (Vincent)
+
+* Translation updates
+  - Daniel Nylander (sv)
+  - Ilkka Tuohela (fi)
+  - Yair Hershkovitz (he)
+ 
+libgnomeui 2.16.2
+-----------------
+
+* Build fixes (Christian Marillat and others)
+
+libgnomeui 2.16.1
+-----------------
+
+* Make network browsing work in the file chooser (Jan de Groot)
+* Remove some unused code (Kjartan)
+* Fix a deadlock and other stuff in the file chooser (Matthias, Kris)
+* API doc fixes (Matthew Barnes)
+* Handle bug-buddy aborting better in gnome_segv (Matthew)
+
+libgnomeui 2.16.0
+------------------
+
+* Lots of fixes for the async file chooser (Federico, Kris)
+* Fix some problems with gnome-desktop-item-edir (Vincent)
+* Win32 portability fixes (Tor)
+* Build fixes for Solaris (Damien Carberry)
+* Cleanups etc (Kris, Kjartan)
+* Updated and new translations
+
+libgnomeui 2.15.91
+------------------
+
+* Fixes to GnomeIconList (Matthias Clasen and Li Yuan)
+* Removed unused function (Kjartan Maraas)
+
+libgnomeui 2.15.90
+------------------
+
+* Remove crash dialog
+
+libgnomeui 2.15.2
+-----------------
+
+* Add missing XUngrabServer() call in gnome-ui-init.c
+* Remove unneeded atexit() call in gnome-client.c
+* Set about dialog hooks (Christian Persch)
+* Loads of new and updated translations.
+
+libgnomeui 2.15.1
+-----------------
+
+* Merge the async branch of the file chooser (Kris)
+* Other things
+
+libgnomeui 2.13.3
+-----------------
+
+* Don't scale up small images when creating thumbnails (Lucas Rocha)
+* Fix critical warning and crash in thumbnailer (Alex Larsson)
+
+libgnomeui 2.13.2
+-----------------
+
+* Sync GOption code with latest libgnome (Christian)
+
+libgnomeui 2.13.1
+-----------------
+
+* Fix mime type problem with the thumbnailer (Bastien)
+* Fix a crasher (Felix Riemann)
+* Fix leaks in the GOption code (Christian Perch)
+* Thread safety fixes (jylefort at FreeBSD org)
+* Warning fixes (Kjartan)
+* Leak fixes in the GOption code (Christian Perch)
+ 
+libgnomeui 2.13.0
+-----------------
+
+* Support the icon theme name spec (Dobey)
+* Remove some stale code in the file selector (Kjartan)
+* Fix a leak in gnome_entry_save_history() (Paolo Borelli) [ 
+* Fix a GnomeCanvas-CRITICAL warning in gnome-icon-item (Federico)
+  [#323521]
+* Scale images before doing a thumbnail to avoid
+  eating up all ram on very large images (Victor STINNER) [#307885] 
+* Fix a crash in gnomefileentry (Petr Mladek) [#315549]
+* Fix a mem leak (Kjartan)
+* Skip hidden pages in GnomeDruid (Ricardo Fernández Pascual) [#89145]
+* Remove useless check and warning about (Jens Elkner) [#118532]
+* Don't use gnome-keyring on Win32 (Tor Lillqvist)
+* Add support for GOption argument parsing (Pawel Sliwowski, chpe) [#307312]
+* Focus the first non-empty field in the password dialog (Nate Nielsen) [#318026]
+* Convert text from the file entry to filename encoding before returning it. 
+  Patch from Yydzero <yandong.yao@sun.com>, [#321144]
+
+* Translation updates:
+	* Mahay Alam Khan (bn)
+	* Miloslav Trmac (cs)
+	* Marie Lund (da)
+	* Adam Weinberger (en_CA)
+	* Francisco Javier F. Serrador (es)
+	* Ivar Smolin (et)
+	* Ignacio Casal Quinteiro (gl)
+	* Reinout van Schouwen (nl)
+	* Marcel Telka (sk)
+	* Christian Rose (sv)
+	* Theppitak Karoonboonyanan (th)
+	* Albert Fazlí (tt)
+	* Funda Wang (zh_CN)
+
+libgnomeui 2.12.0
+-----------------
+
+What's new since 2.11.4
+
+Bug fixes:
+	- API doc updates (Kjartan)
+	- Fix a compiler warning that broke compilation on AIX
+	- Add gnome-keyring to Requires in the pkg-config file
+	- Include developer docs in the devel zip file for Win32 (Tor)
+
+Updated translations:
+	- Basque, Galician, Indonesian, Korean, Kurkish,
+	  Russian, Turkish.
+
+libgnomeui 2.11.4
+-----------------
+
+What's new since 2.11.3
+
+Bug fixes:
+	- Fix a bad crasher in the file selector (Matthias)
+	  http://bugzilla.gnome.org/show_bug.cgi?id=314586
+
+Translations:
+	- Estonian, French, Vietnamese
+
+libgnomeui 2.11.3
+-----------------
+
+What's new since 2.11.2
+
+Bug fixes:
+	- Don't crash on trash:/// bookmarks (Matthias)
+	- Fix build in gnome-ui-init.h
+
+libgnomeui 2.11.2
+-----------------
+
+What's new since 2.11.1
+
+Features:
+	- Add support for .desktop file links in the file chooser
+	  (Federico)
+
+Bug fixes:
+	- Make buttons work as accessible children of GnomeDruid
+	  (Padraig)
+	- Add a window icon for the segv dialog (Jaap)
+
+Translations:
+	- Everyone :-)
+
+libgnomeui 2.11.1
+-----------------
+
+What's new since 2.10.x
+
+Features:
+	- Port to Win32 (Tor Lillquist)
+	- Implement bookmark renaming in the file chooser
+	  (Matthias Clasen)
+
+Bug fixes:
+	- Make the file chooser work better with AFS
+	  (Federico Mena Quintero)
+	- Fix crash when escaping the password dialog
+	  (Martin Wehner, Balamurali V.)
+	- Fix crash when opening the panel properties dialog
+	  (Vincent Vuntz)
+	- Fix for possible wrong activation URI when drive is
+	  mounted from the file chooser (David Zeuthen)
+	- Fix icon entry button to not clip the label incorrectly
+	- Make it possible to select a folder in the file entry
+	  in the icon entry. (Christian Neumair)
+	- Make sure to use UTF-8 locales in the file chooser
+	  for apps that don't use libgnomeui directly such as
+	  Firefox (Frederic Crozat)
+	- HIGify the password dialog (Michael Terry)
+	- HIGify the games menu entries (Dennis Cranston)
+	- Code cleanup and leak fixes (Kjartan, Matthias)
+	- Build fixes (Kjartan, Hans Petter Jansson, Lazslo Peter)
+	- Fix GCC warnings (Kjartan)
+
+Translations:
+	- Updated Bulgarian (bg), Canadian English (en_CA), Czech (cs),
+	  Danish (da), Greek (el), Estonian (et), Norwegian bokmål (nb), 
+	  Dutch (nl), Kinyarwanda (rw), Slovak (sk), 
+	  Thai (th), Simplified Chinese (zh_CN), Traditional Chinese (zh_TW)
+	    
+libgnomeui 2.10.0
+-----------------
+
+What's new since 2.9.2
+
+* Translations:
+	- Updated Russian (ru), Lithuanian (lt), Indonesian (id)
+
+libgnomeui 2.9.2
+----------------
+
+What's new since 2.9.1
+
+* Bug fixes:
+	- Fix thread safety issues in the file chooser (Alex)
+	- Fix issues with loading/reloading in the file chooser
+	  (Federico)
+
+* Translations:
+	* Added Xhosa (xh)
+	* Updated Belarusian (be), Czech (cs), Estii (el), 
+	  Spanish (es), Greek (el), Finnish (fi), Lithuanian (lt), 
+	  Norwegian bokmål (no/nb), Persian (fa), Thai (th),
+	  Welsh (cy), 
+ 
+libgnomeui 2.9.1
+----------------
+
+What's new since 2.8.1
+
+* Bug fixes:
+	- Portability fixes (TheWrittenWord)
+	- Fix a leak in the file chooser (Christian Persch)
+	- Use correct size for external thumbnailing scripts
+	  (Fernando Herrera)
+	- Fix compiler warnings (Kjartan)
+	- Make gnome-app more robust against programmer mistakes
+	  (scott at asofyet org)
+
+* Translations:
+	- Updated translations (bg cy, de, en_CA, es, fr, it, ko, nso, rw, zu)
+
+
+libgnomeui 2.8.1
+----------------
+
+What's new since 2.8.0
+
+* Bug fixes:
+	- Removed prototypes for removed functions gnome_entry_construct and
+	  gnome_href_construct (J.H.M. Dassen (Ray))
+
+libgnomeui 2.8.0
+----------------
+
+What's new since 2.7.2
+
+* Bug fixes:
+	- Improved GnomeDruid theme support (Rodney Dawes)
+	- File chooser backend fixes (Federico Mena Quintero, 
+				      Colin Walters)
+	- Authentication manager and password dialog support for
+	  anonymous logins (Laszlo Kovacs)
+	- Various fixes (Kjartan Maraas, Eric Zhao, William Jon McCann,
+			 Alexander Larsson)
+
+* Translations:
+	- New Breton translation (Thierry Vignaud)
+	- New Bostnian translation (Kenan Hadžiavdić)
+	- New Galician translation (Jesus Bravo Alvarez)
+	- Various updated translations (ar, az, bg, ca, cs, cy, da,
+					de, el, en_CA, en_GB, es, eu,
+					fi, gl, gu, hi, hu, ja, ko,
+					lt, mn, ms, ne, nl, nn, no,
+					pa, pl, pt, pt_BR, ro, ru, sk,
+					sq, sr, sv, tr, uk, wa, zh_CN,
+					zh_TW)
+
+libgnomeui 2.7.2
+----------------
+
+What's new since 2.7.1
+
+* Bug fixes:
+	- Fix GnomeDruid to be theme compliant (Rodney Dawes)
+	- Fixes to the VFS file-chooser backend (Federico Quintero,
+	Colin Walters)
+	- Support for anonymous logins in authentication manager (Laszlo
+	Kovacs)
+
+* Translations:
+	- Various updated translations (ne)
+
+libgnomeui 2.7.1
+----------------
+
+What's new since 2.6.1
+
+* Improvements:
+	- Update to automake 1.7 (James Henstridge)
+	- Icon list API additions (Damien Carbery)
+
+* Bug fixes:
+	- Authentication manager fixes (Fernando Herrera)
+
+	- Various fixes (Steve Chaplin, Torsten Schoenfeld, Anders Carlsson,
+			 Leena Gunda, Christian Rose, Fernando Herrera,
+		         Takao Fujiwara, Damien Carbery, Martin Wehner)
+
+* Translations:
+	- Added Turkmen translation (Gurban Mühemmet Tewekgeli)
+	- Various updated translations (bg, no, es, zh_CN, sk, sq, cs, 
+					en_CA, en_GB, ko)
+
+libgnomeui 2.6.1 "Magmoor"
+--------------------------
+
+What's new since 2.6.0
+
+* Improvements:
+	- File system loading notification support (Federico Mena Quintero)
+
+* Bug fixes:
+	- Authentication manager fixes (Alexander Larsson)
+	- File system fixes (Federico, Alexander)
+	- Various bugfixes (Padraig O'Brian, Anders Carlsson)
+
+* Translations:
+	- Added Punjabi translation (Amanpreet Singh Alam)
+	- Added Gujarati translation (Gujurati Team)
+	- Added Maori translation (John C Barstow)
+	- Added Basque translation (Iñaki Larrañaga)
+	- Added Afrikaans translation (Zuza Software Foundation)
+	- Various updated translations (ca, et, eu, he, hu, id, is, nn, wa)
+
+libgnomeui 2.6.0 "Zeb"
+----------------------
+
+What's new since 2.4
+
+* Improvements:
+	- Mass deprecation of broken widgets (Jonathan Blandford)
+	- Keyring support in authentication manager (Alexander Larsson)
+	- Multi-screen versions of the help and url display methods 
+	  (Mark McLoughlin)
+	- New stock icons (Jakub Steiner)
+	- Deprecate GnomeIconTheme for GtkIconTheme (Alexander Larsson)
+	- Improved crash dialog (Fernando Herrera)
+	- Make entries support the new file chooser (Fernando Hererra, 
+						     Mark McLoughlin, 
+						     Carlos Garnacho Parro)
+	- Gnome VFS file chooser backend (Alexander Larsson, 
+					  Federico Mena Quintero, 
+					  Owen Taylor)
+
+* Bug fixes:
+	- HIG fixes for gnome-scores (Alex Duggan)
+	- Translate program arguments (Hidetoshi Tajima)
+	- Icon list fixes (Federico Mena Quintero, Michael Zucchi)
+	- Session management fixes (Christian Persch)
+	- Handle toolbar orientation in gnome-app-helper (Bryan Forbes)
+	- Various bug fixes (Anders Carlsson, Joe Marcus Clarke, 
+		             Dennis Cranston, Fernando Herrera, Richard Hult, 
+			     Alexander Larsson, George Lebl, Kjartan Maraas, 
+			     Padraig O'Brian, Carlos Romero, Jeffrey Steadfast,
+			     Balamurali Viswanathan)
+
+
+* Translations:
+	- Added Canadian English translation (Adam Weinberger, 
+					      Alexander Winston)
+	- Added Croatian translation (Robert Sedak)
+	- Added Marathi translation (Jitendra Shah)
+	- Added Serbian Jekavian translation (Bojan Suzić)
+	- Added Thai translation (Theppitak Karoonboonyanan, 
+				  Paisa Seeluangsawat)
+
+	- Updated Albanian translation (Laurent Dhima)
+	- Updated Arabic translation (Arafat Medini)
+	- Updated Azerbaijani translation (Mətin Əmirov)
+	- Updated Belarusian translation (Ales Nyakhaychyk)
+	- Updated Bengali translation (Sayamindu Dasgupta)
+	- Updated Brazilian Portuguese translation (Raphael Higino, 
+						    Augusta Margues da Silva)
+	- Updated British English translation (Gareth Owen)
+	- Updated Czech translation (Miloslav Trmac)
+ 	- Updated Danish translation (Ole Laursen)
+	- Updated Dutch translation (Kess van den Broek, Reinout van Schouwen)
+	- Updated Estonian translation (Priit Laes)
+	- Updated Finnish translation (Pauli Virtanen)
+	
+ 	- Updated French translation (Christphe Fergeau, Christophe Merlet)
+
+	- Updated German translation (Christian Neumair)
+	- Updated Greek translation (Nikos Charonitakis, Kostas Papadimas)
+
+	- Updated Hindi translation (Guntupalli Karunakar)
+	- Updated Hungarian translation (Andras Timar)
+	- Updated Irish translation (Alastair McKinstry)
+	- Updated Italian translation (Alesso Frusciante, Francesco Marletta)
+
+	- Updated Korean translation (Changwoo Ryu)
+	- Updated Japanese translation (Takeshi AIHANA)
+
+	- Updated Latvian translation (Pēteris Krišjānis)
+	- Updated Lithuanian translation (Žygimantas Beručka, Tomas Kuliavas)
+	- Updated Malay translation (Hasbullah Bin Pit)
+	- Updated Mongolian translation (Sanlig Badral)
+
+	- Updated Norwegian translation (Kjartan Maraas)
+	- Updated Norwegian Nynorsk translation (Åsmund Skjæveland)
+
+	- Updated Polish translation (GNOME PL Team)
+
+	- Updated Portuguese translation (Duarte Loreto)
+	- Updated Romanian translation (Mişu Moldovan)
+	- Updated Russian translation (Russian Team)
+	
+	- Updated Serbian translations (Danilo Šegan, Bojan Suzic)
+	- Updated Simplified Chinese translation (Funda Wang)
+
+	- Updated Slovak translation (Marcel Telka)
+
+	- Updated Spanish translation (Francisco Javier F. Serrador)
+	- Updated Swedish translation (Christian Rose)
+	- Updated Tamil translation (Dinesh Nadarajah)
+	- Updated Ukranian translation (Maxim Dziumanenko)
+
+	- Updated Welsh translation (Dafydd Harries)

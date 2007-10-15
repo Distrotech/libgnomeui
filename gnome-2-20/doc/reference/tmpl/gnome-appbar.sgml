@@ -1,0 +1,208 @@
+<!-- ##### SECTION Title ##### -->
+GnomeAppBar
+
+<!-- ##### SECTION Short_Description ##### -->
+An application status and progress bar widget
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+A #GnomeAppBar widget sits (usually) at the bottom of an application window and
+contains a progress bar (for indicating time consuming tasks and their
+completion status) and/or a status bar for sending short one-line message to
+the user. It is also possible (in theory) for the user to edit the contents of
+the status bar, should the application developer choose to allow that, however
+<emphasis>note that this is not really working</emphasis> in the present
+implementation, so developers are recommended to avoid using interactive status
+bars and use proper editable widgets instead.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO GNOME_APPBAR_HAS_STATUS ##### -->
+<para>
+Whether or not the application bar contains a status box.
+</para>
+
+@appbar: A #GnomeAppBar instance.
+@Returns: %TRUE is a status box is contained in the appbar.
+
+
+<!-- ##### MACRO GNOME_APPBAR_HAS_PROGRESS ##### -->
+<para>
+Whether or not the application bar contains a status box.
+</para>
+
+@appbar: A #GnomeAppBar instance.
+@Returns: %TRUE is a status box is contained in the appbar.
+
+
+<!-- ##### MACRO GNOME_APPBAR_INTERACTIVE ##### -->
+<para>
+Whether or not the user can edit the text in the statusbar portion of a
+#GnomeAppBar instance.
+</para>
+
+@ab: A #GnomeAppBar instance.
+@Returns: %TRUE if the user can edit the statusbar text.
+
+
+<!-- ##### STRUCT GnomeAppBar ##### -->
+<para>
+This widget contains the status bar and progress bar (if they are requested).
+After creating a #GnomeAppBar widget (via gnome_appbar_new(), for example), it
+can then be passed to gnome_app_set_statusbar() to add it to the main
+application window.
+</para>
+
+
+<!-- ##### SIGNAL GnomeAppBar::clear-prompt ##### -->
+<para>
+
+</para>
+
+@appbar: the object which received the signal.
+
+<!-- ##### SIGNAL GnomeAppBar::user-response ##### -->
+<para>
+
+</para>
+
+@appbar: the object which received the signal.
+
+<!-- ##### ARG GnomeAppBar:has-progress ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAppBar:has-status ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GnomeAppBar:interactivity ##### -->
+<para>
+
+</para>
+
+<!-- ##### FUNCTION gnome_appbar_new ##### -->
+<para>
+
+</para>
+
+@has_progress: 
+@has_status: 
+@interactivity: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_appbar_set_status ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@status: 
+
+
+<!-- ##### FUNCTION gnome_appbar_get_status ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_appbar_set_default ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@default_status: 
+
+
+<!-- ##### FUNCTION gnome_appbar_push ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@status: 
+
+
+<!-- ##### FUNCTION gnome_appbar_pop ##### -->
+<para>
+
+</para>
+
+@appbar: 
+
+
+<!-- ##### FUNCTION gnome_appbar_clear_stack ##### -->
+<para>
+
+</para>
+
+@appbar: 
+
+
+<!-- ##### FUNCTION gnome_appbar_set_progress_percentage ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@percentage: 
+
+
+<!-- ##### FUNCTION gnome_appbar_get_progress ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gnome_appbar_refresh ##### -->
+<para>
+
+</para>
+
+@appbar: 
+
+
+<!-- ##### FUNCTION gnome_appbar_set_prompt ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@prompt: 
+@modal: 
+
+
+<!-- ##### FUNCTION gnome_appbar_clear_prompt ##### -->
+<para>
+
+</para>
+
+@appbar: 
+
+
+<!-- ##### FUNCTION gnome_appbar_get_response ##### -->
+<para>
+
+</para>
+
+@appbar: 
+@Returns: 
+
+

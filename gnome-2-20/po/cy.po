@@ -1,0 +1,1596 @@
+# libgnomeui yn Gymraeg.
+# This file is distributed under the same license as the libgnomeui package.
+# www.gyfieithu.co.uk <kyfieithu@dotmon.com>, 2003
+# and gnome-cy@pengwyn.linux.org.uk mailing list.
+# Dafydd Harries <daf@muse.19inch.net>, 2003 2004.
+#
+# Typo-fixes from Gareth Bowker.
+#
+# adnabyddiaeth, adnabyddwr, dynodwr, neu dynodydd? Rhaid dewis.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-06-29 20:07+0100\n"
+"PO-Revision-Date: 2006-06-29 20:06+0100\n"
+"Last-Translator: Rhys Jones <rhys@sucs.org>\n"
+"Language-Team: Cymraeg <gnome-cy@pengwyn.linux.org.uk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "Eitem Plentyn 1"
+
+#: ../demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "Awgrymiad ynghylch eitem 1"
+
+#: ../demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "Eitem Plentyn 1"
+
+#: ../demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "Awgrymiad ynghylch eitem 2"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:892
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr "Mae %s yn gyswllt at rywbeth nad yw'n blygell"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:903
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr "Mae %s yn gyswllt heb leoliad cyrchfan"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:978
+#, c-format
+msgid "%s is not a folder"
+msgstr "Nid yw %s yn blygell"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1815
+msgid "Network Servers"
+msgstr "Gweinyddion Rhwydwaith"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1831
+msgid "File System"
+msgstr "System Ffeil"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2347
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr "Methwyd cadw llyfrnodau (%s)"
+
+#: ../file-chooser/testfilechooser.c:178
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr "Methwyd cyrchu gwybodaeth am y ffeil '%s': %s"
+
+#: ../file-chooser/testfilechooser.c:191
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "Methwyd agor ffeil '%s': %s"
+
+#: ../file-chooser/testfilechooser.c:230
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+"Methwyd llwytho delwedd '%s': rheswm anhysbys, ffeil delwedd lygredig, mae'n "
+"debyg"
+
+#: ../libgnomeui/gnome-about.c:199
+msgid "Credits"
+msgstr "Rhestr Clod"
+
+#: ../libgnomeui/gnome-about.c:231
+msgid "Written by"
+msgstr "Ysgrifennwyd gan"
+
+#: ../libgnomeui/gnome-about.c:246
+msgid "Documented by"
+msgstr "Dogfennaeth gan"
+
+#: ../libgnomeui/gnome-about.c:261
+msgid "Translated by"
+msgstr "Cyfieithwyd gan"
+
+#: ../libgnomeui/gnome-about.c:324
+msgid "C_redits"
+msgstr "Rhestr _Glod"
+
+#: ../libgnomeui/gnome-about.c:377
+msgid "Program name"
+msgstr "Enw rhaglen"
+
+#: ../libgnomeui/gnome-about.c:378
+msgid "The name of the program"
+msgstr "Enw'r rhaglen"
+
+#: ../libgnomeui/gnome-about.c:385
+msgid "Program version"
+msgstr "Fersiwn y rhaglen"
+
+#: ../libgnomeui/gnome-about.c:386
+msgid "The version of the program"
+msgstr "Fersiwn y rhaglen"
+
+#: ../libgnomeui/gnome-about.c:392
+msgid "Copyright string"
+msgstr "Y llinyn hawlfraint"
+
+#: ../libgnomeui/gnome-about.c:393
+msgid "Copyright information for the program"
+msgstr "Gwybodaeth ynghylch hawlfraint y rhaglen"
+
+#: ../libgnomeui/gnome-about.c:400
+msgid "Comments string"
+msgstr "Llinyn sylw"
+
+#: ../libgnomeui/gnome-about.c:401
+msgid "Comments about the program"
+msgstr "Sylwadau ynghylch y rhaglen"
+
+#: ../libgnomeui/gnome-about.c:407
+msgid "Authors"
+msgstr "Awduron"
+
+#: ../libgnomeui/gnome-about.c:408
+msgid "List of authors of the programs"
+msgstr "Rhestr awduron"
+
+#: ../libgnomeui/gnome-about.c:410
+msgid "Author entry"
+msgstr "Cofnod awdur"
+
+#: ../libgnomeui/gnome-about.c:411
+msgid "A single author entry"
+msgstr "Cofnod awdur sengl"
+
+#: ../libgnomeui/gnome-about.c:418
+msgid "Documenters"
+msgstr "Ysgrifenwyr dogfennaeth"
+
+#: ../libgnomeui/gnome-about.c:419
+msgid "List of people documenting the program"
+msgstr "Rhestr o bobl yn ysgrifennu dogfennaeth ynghylch y rhaglen"
+
+#: ../libgnomeui/gnome-about.c:421
+msgid "Documenter entry"
+msgstr "Cofnod ysgrifennwr dogfennaeth"
+
+#: ../libgnomeui/gnome-about.c:422
+msgid "A single documenter entry"
+msgstr "Cofnod ysgrifennwr dogfennaeth sengl"
+
+#: ../libgnomeui/gnome-about.c:430
+msgid "Translator credits"
+msgstr "Diolchiadau cyfieithwyr"
+
+#: ../libgnomeui/gnome-about.c:431
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "Diolchiadau i'r cyfieithwyr. Dylid marcio'r llinyn hwn yn gyfieithadwy"
+
+#: ../libgnomeui/gnome-about.c:438
+#: ../libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "Logo"
+
+#: ../libgnomeui/gnome-about.c:439
+msgid "A logo for the about box"
+msgstr "Logo ar gyfer y blwch ynghylch"
+
+#: ../libgnomeui/gnome-about.c:518
+#, c-format
+msgid "About %s"
+msgstr "Ynghylch %s"
+
+#. Some standard menus
+#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
+#: ../test-gnome/testgnome.xml.h:5
+msgid "_File"
+msgstr "_Ffeil"
+
+#: ../libgnomeui/gnome-app-helper.c:83
+msgid "_File/"
+msgstr "_Ffeil/"
+
+#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "_Golygu"
+
+#: ../libgnomeui/gnome-app-helper.c:85
+msgid "_Edit/"
+msgstr "_Golygu/"
+
+#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "G_olwg"
+
+#: ../libgnomeui/gnome-app-helper.c:87
+msgid "_View/"
+msgstr "G_olwg/"
+
+#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "_Gosodiadau"
+
+#: ../libgnomeui/gnome-app-helper.c:89
+msgid "_Settings/"
+msgstr "_Gosodiadau/"
+
+#. If you have more then one New type, use this tree
+#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "_Newydd"
+
+#: ../libgnomeui/gnome-app-helper.c:91
+msgid "_New/"
+msgstr "_Newydd/"
+
+#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "_Ffeiliau"
+
+#: ../libgnomeui/gnome-app-helper.c:93
+msgid "Fi_les/"
+msgstr "_Ffeiliau/"
+
+#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "_Ffenestri"
+
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "_Gêm"
+
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
+#: ../test-gnome/testgnome.xml.h:6
+msgid "_Help"
+msgstr "_Cymorth"
+
+#: ../libgnomeui/gnome-app-helper.c:97
+msgid "_Windows/"
+msgstr "_Ffenestri/"
+
+#. Open
+#: ../libgnomeui/gnome-app-helper.c:109
+msgid "_Open..."
+msgstr "_Agor..."
+
+#: ../libgnomeui/gnome-app-helper.c:109
+msgid "Open a file"
+msgstr "Agor ffeil"
+
+#. Save
+#: ../libgnomeui/gnome-app-helper.c:114
+msgid "_Save"
+msgstr "_Cadw"
+
+#: ../libgnomeui/gnome-app-helper.c:114
+msgid "Save the current file"
+msgstr "_Cadw'r ffeil cyfredol"
+
+#. Save As
+#: ../libgnomeui/gnome-app-helper.c:119
+msgid "Save _As..."
+msgstr "Cadw _Fel..."
+
+#: ../libgnomeui/gnome-app-helper.c:120
+msgid "Save the current file with a different name"
+msgstr "Cadw'r ffeil cyfredol gydag enw newydd"
+
+#. Revert
+#: ../libgnomeui/gnome-app-helper.c:125
+msgid "_Revert"
+msgstr "_Dychwelyd"
+
+# Checkme: "a"? Only one, isn't there?
+#: ../libgnomeui/gnome-app-helper.c:126
+msgid "Revert to a saved version of the file"
+msgstr "Dychwelyd at fersiwn o'r ffeil yma a gadwyd"
+
+#. Print
+#: ../libgnomeui/gnome-app-helper.c:131
+msgid "_Print..."
+msgstr "_Argraffu..."
+
+#: ../libgnomeui/gnome-app-helper.c:131
+msgid "Print the current file"
+msgstr "Argraffu'r ffeil cyfredol"
+
+#. Print Setup
+#: ../libgnomeui/gnome-app-helper.c:136
+msgid "Print S_etup..."
+msgstr "Gosod _Argraffydd..."
+
+#: ../libgnomeui/gnome-app-helper.c:137
+msgid "Setup the page settings for your current printer"
+msgstr "Newid y cyfluniad tudalen ar gyfer eich argraffydd cyfredol"
+
+#. Close
+#: ../libgnomeui/gnome-app-helper.c:142
+msgid "_Close"
+msgstr "_Cau"
+
+#: ../libgnomeui/gnome-app-helper.c:142
+msgid "Close the current file"
+msgstr "Cau'r ffeil cyfredol"
+
+#. Exit
+#: ../libgnomeui/gnome-app-helper.c:147
+msgid "_Quit"
+msgstr "_Gadael"
+
+#: ../libgnomeui/gnome-app-helper.c:147
+msgid "Quit the application"
+msgstr "Gadael y rhaglen"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: ../libgnomeui/gnome-app-helper.c:155
+msgid "Cu_t"
+msgstr "_Torri"
+
+#: ../libgnomeui/gnome-app-helper.c:155
+msgid "Cut the selection"
+msgstr "Torri'r dewis"
+
+#. 10
+#. Copy
+#: ../libgnomeui/gnome-app-helper.c:161
+msgid "_Copy"
+msgstr "_Copïo"
+
+#: ../libgnomeui/gnome-app-helper.c:161
+msgid "Copy the selection"
+msgstr "Copïo'r dewis"
+
+#. Paste
+#: ../libgnomeui/gnome-app-helper.c:166
+msgid "_Paste"
+msgstr "_Gludo"
+
+#: ../libgnomeui/gnome-app-helper.c:166
+msgid "Paste the clipboard"
+msgstr "Gludo'r clipfwrdd"
+
+#. Clear
+#: ../libgnomeui/gnome-app-helper.c:171
+msgid "C_lear"
+msgstr "_Clirio"
+
+#: ../libgnomeui/gnome-app-helper.c:171
+msgid "Clear the selection"
+msgstr "Clirio'r dewis"
+
+#. Undo
+#: ../libgnomeui/gnome-app-helper.c:176
+msgid "_Undo"
+msgstr "_Dadwneud"
+
+#: ../libgnomeui/gnome-app-helper.c:176
+msgid "Undo the last action"
+msgstr "Dadwneud y weithred ddiwethaf"
+
+#. Redo
+#: ../libgnomeui/gnome-app-helper.c:181
+msgid "_Redo"
+msgstr "_Ail-wneud"
+
+#: ../libgnomeui/gnome-app-helper.c:181
+msgid "Redo the undone action"
+msgstr "Ail-wneud y weithred gafodd ei ddadwneud"
+
+# Checkme: Was chwilio. Considered canfod. Now darganfod. Gareth sed.
+#. Find
+#: ../libgnomeui/gnome-app-helper.c:186
+msgid "_Find..."
+msgstr "_Darganfod..."
+
+#: ../libgnomeui/gnome-app-helper.c:186
+msgid "Search for a string"
+msgstr "Chwilio am linyn"
+
+# Checkme: see above.
+#. Find Again
+#: ../libgnomeui/gnome-app-helper.c:191
+msgid "Find Ne_xt"
+msgstr "Darganfod y _Nesaf"
+
+#: ../libgnomeui/gnome-app-helper.c:192
+msgid "Search again for the same string"
+msgstr "Chwilio eto am yr un llinyn"
+
+#. Replace
+#: ../libgnomeui/gnome-app-helper.c:197
+msgid "R_eplace..."
+msgstr "_Newid..."
+
+#: ../libgnomeui/gnome-app-helper.c:197
+msgid "Replace a string"
+msgstr "Newid llinyn"
+
+#. Properties
+#: ../libgnomeui/gnome-app-helper.c:202
+msgid "_Properties"
+msgstr "_Priodweddau"
+
+#: ../libgnomeui/gnome-app-helper.c:203
+msgid "Modify the file's properties"
+msgstr "Newid priodweddau'r ffeil"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: ../libgnomeui/gnome-app-helper.c:211
+msgid "Prefere_nces"
+msgstr "_Hoffterau"
+
+#: ../libgnomeui/gnome-app-helper.c:212
+msgid "Configure the application"
+msgstr "Cyflunio'r rhaglen"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:4
+msgid "_About"
+msgstr "_Ynghylch"
+
+#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
+msgid "About this application"
+msgstr "Ynghylch y rhaglen hon"
+
+#: ../libgnomeui/gnome-app-helper.c:225
+msgid "Select _All"
+msgstr "Dewis _Popeth"
+
+#: ../libgnomeui/gnome-app-helper.c:226
+msgid "Select everything"
+msgstr "Dewis popeth"
+
+#.
+#. * Window menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:234
+msgid "Create New _Window"
+msgstr "Creu Ffenest _Newydd"
+
+#: ../libgnomeui/gnome-app-helper.c:235
+msgid "Create a new window"
+msgstr "Creu ffenest newydd"
+
+#: ../libgnomeui/gnome-app-helper.c:239
+msgid "_Close This Window"
+msgstr "_Cau'r Ffenest Hon"
+
+#: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
+msgid "Close the current window"
+msgstr "Cau'r ffenest gyfredol hon"
+
+#.
+#. * The "Game" menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:248
+msgid "_New Game"
+msgstr "Gêm _newydd"
+
+#: ../libgnomeui/gnome-app-helper.c:249
+msgid "Start a new game"
+msgstr "Dechrau gêm newydd"
+
+#: ../libgnomeui/gnome-app-helper.c:253
+msgid "_Pause Game"
+msgstr "_Seibio'r gêm"
+
+#: ../libgnomeui/gnome-app-helper.c:254
+msgid "Pause the game"
+msgstr "Seibio'r gêm"
+
+#: ../libgnomeui/gnome-app-helper.c:258
+msgid "_Restart Game"
+msgstr "_Ailddechrau'r gêm"
+
+#: ../libgnomeui/gnome-app-helper.c:259
+msgid "Restart the game"
+msgstr "Ailddechrau'r gêm"
+
+#: ../libgnomeui/gnome-app-helper.c:263
+msgid "_Undo Move"
+msgstr "_Dadwneud symudiad"
+
+#: ../libgnomeui/gnome-app-helper.c:264
+msgid "Undo the last move"
+msgstr "Dadwneud y symudiad diwethaf"
+
+#: ../libgnomeui/gnome-app-helper.c:268
+msgid "_Redo Move"
+msgstr "_Ail-wneud symudiad"
+
+#: ../libgnomeui/gnome-app-helper.c:269
+msgid "Redo the undone move"
+msgstr "Ail-wneud y symudiad gafodd ei ddadwneud"
+
+#: ../libgnomeui/gnome-app-helper.c:273
+msgid "_Hint"
+msgstr "_Awgrymiad"
+
+#: ../libgnomeui/gnome-app-helper.c:274
+msgid "Get a hint for your next move"
+msgstr "Dangos awgrymiad ar gyfer eich symudiad nesaf"
+
+#. 30
+#: ../libgnomeui/gnome-app-helper.c:279
+msgid "_Scores..."
+msgstr "_Sgorau..."
+
+#: ../libgnomeui/gnome-app-helper.c:280
+msgid "View the scores"
+msgstr "Dangos y sgorau"
+
+#: ../libgnomeui/gnome-app-helper.c:284
+msgid "_End Game"
+msgstr "_Gorffen y gêm"
+
+#: ../libgnomeui/gnome-app-helper.c:285
+msgid "End the current game"
+msgstr "Gorffen y gêm gyfredol hon"
+
+#: ../libgnomeui/gnome-app-helper.c:1147
+msgid "_Contents"
+msgstr "_Cynnwys"
+
+#: ../libgnomeui/gnome-app-helper.c:1150
+msgid "View help for this application"
+msgstr "Dangos cymorth ar gyfer y rhaglen hon"
+
+#: ../libgnomeui/gnome-app-helper.c:2587
+msgid "Text Below Icons"
+msgstr "Testun Islaw Eiconau"
+
+#: ../libgnomeui/gnome-app-helper.c:2588
+msgid "Priority Text Beside Icons"
+msgstr "Testun Pwysig Wrth Ochr Eiconau"
+
+#: ../libgnomeui/gnome-app-helper.c:2589
+msgid "Icons Only"
+msgstr "Eiconau'n Unig"
+
+#: ../libgnomeui/gnome-app-helper.c:2590
+msgid "Text Only"
+msgstr "Testun yn Unig"
+
+#: ../libgnomeui/gnome-app-helper.c:2651
+#, c-format
+msgid "Use Desktop Default (%s)"
+msgstr "Defnyddio Rhagosodiad y Penbwrdd (%s)"
+
+#: ../libgnomeui/gnome-app-util.c:98
+msgid " (press return)"
+msgstr " (gwasgwch return)"
+
+#: ../libgnomeui/gnome-app-util.c:140
+msgid "ERROR: "
+msgstr "GWALL: "
+
+#: ../libgnomeui/gnome-app-util.c:177
+msgid "Warning: "
+msgstr "Rhybudd: "
+
+#: ../libgnomeui/gnome-app-util.c:315
+msgid "y"
+msgstr "i"
+
+#: ../libgnomeui/gnome-app-util.c:316
+msgid "yes"
+msgstr "ie"
+
+#: ../libgnomeui/gnome-app-util.c:319
+msgid "n"
+msgstr "n"
+
+#: ../libgnomeui/gnome-app-util.c:320
+msgid "no"
+msgstr "na"
+
+#: ../libgnomeui/gnome-app-util.c:355
+msgid " (yes or no)"
+msgstr " (ie neu na)"
+
+#: ../libgnomeui/gnome-app-util.c:356
+msgid "  - OK? (yes or no)"
+msgstr " - Iawn? (ie neu na)"
+
+#: ../libgnomeui/gnome-app-util.c:684
+msgid "Progress"
+msgstr "Cynnydd"
+
+#: ../libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr "ID Rhaglen"
+
+#: ../libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr "Llinyn ID y rhaglen"
+
+#: ../libgnomeui/gnome-appbar.c:741
+msgid "Has Progress"
+msgstr "Ganddo Gynnydd"
+
+#: ../libgnomeui/gnome-appbar.c:742
+msgid "Create a progress widget."
+msgstr "Creu teclyn cynnydd."
+
+#: ../libgnomeui/gnome-appbar.c:749
+msgid "Has Status"
+msgstr "Efo Statws"
+
+#: ../libgnomeui/gnome-appbar.c:750
+msgid "Create a status widget."
+msgstr "Creu teclyn statws."
+
+#: ../libgnomeui/gnome-appbar.c:757
+msgid "Interactivity"
+msgstr "Rhyngweithredaeth"
+
+#: ../libgnomeui/gnome-appbar.c:758
+msgid "Level of user activity required."
+msgstr "Faint o weithredoedd gan y defnyddiwr sydd angen."
+
+#: ../libgnomeui/gnome-authentication-manager.c:80
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr "Mae eich Dirprwy HTTP yn mynnu mewngofnodiad.\n"
+
+#: ../libgnomeui/gnome-authentication-manager.c:81
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+"Mae'n rhaid mewngofnodi er mwyn cyrchu \"%s\".\n"
+"%s"
+
+#: ../libgnomeui/gnome-authentication-manager.c:84
+msgid "Your password will be transmitted unencrypted."
+msgstr "Caiff eich cyfrinair ei drosglwyddo heb ei amgryptio."
+
+#: ../libgnomeui/gnome-authentication-manager.c:85
+msgid "Your password will be transmitted encrypted."
+msgstr "Caiff eich cyfrinair ei drosglwyddo wedi ei amgryptio."
+
+# EFALLAI
+#: ../libgnomeui/gnome-authentication-manager.c:88
+#: ../libgnomeui/gnome-authentication-manager.c:306
+msgid "Authentication Required"
+msgstr "Mynnir Dilysiad"
+
+#: ../libgnomeui/gnome-authentication-manager.c:298
+#, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "Mae'n rhaid mewngofnodi er mwyn cyrchu %s parth %s.\n"
+
+#: ../libgnomeui/gnome-authentication-manager.c:300
+#, c-format
+msgid "You must log in to access %s\n"
+msgstr "Mae'n rhaid mewngofnodi er mwyn cyrchu %s.\n"
+
+# Checkme: what is this talking about?
+#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+msgid "Specify session management ID"
+msgstr "Penodi adnabyddiaeth i'r rheolaeth sesiwn"
+
+#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+msgid "ID"
+msgstr "ADNABYDDIAETH"
+
+#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+msgid "Specify prefix of saved configuration"
+msgstr "Penodi rhagddodiad cyfluniad wedi ei gadw"
+
+#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+msgid "PREFIX"
+msgstr "RHAGDDODIAD"
+
+#: ../libgnomeui/gnome-client.c:908 ../libgnomeui/gnome-client.c:924
+msgid "Disable connection to session manager"
+msgstr "Anablu'r cysylltiad i'r rheolwr sesiynau"
+
+#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
+msgid "Session management"
+msgstr "Rheolaeth sesiynau"
+
+#: ../libgnomeui/gnome-client.c:1035
+msgid "Show session management options"
+msgstr "Dangos opsiynau rheoli sesiwn"
+
+#: ../libgnomeui/gnome-client.c:2584
+msgid "Cancel Logout"
+msgstr "Canslo Allgofnodi"
+
+#: ../libgnomeui/gnome-color-picker.c:414
+msgid "Received invalid color data\n"
+msgstr "Derbyniwyd data lliw annilys\n"
+
+#: ../libgnomeui/gnome-color-picker.c:465
+msgid "Open a dialog to specify the color"
+msgstr "Agor deialog er mwyn dewis y lliw"
+
+#: ../libgnomeui/gnome-color-picker.c:487
+msgid "Pick a color"
+msgstr "Dewiswch liw"
+
+#: ../libgnomeui/gnome-dateedit.c:491 ../libgnomeui/gnome-dateedit.c:788
+msgid "Time"
+msgstr "Amser"
+
+#: ../libgnomeui/gnome-dateedit.c:492
+msgid "The time currently selected"
+msgstr "Yr amser a dewiswyd ar hyn o bryd"
+
+#: ../libgnomeui/gnome-dateedit.c:504
+msgid "DateEdit Flags"
+msgstr "Baneri DateEdit"
+
+#: ../libgnomeui/gnome-dateedit.c:505
+msgid "Flags for how DateEdit looks"
+msgstr "Baneri ar gyfer ymddangosiad DateEdit"
+
+#: ../libgnomeui/gnome-dateedit.c:514
+msgid "Lower Hour"
+msgstr "Awr Is"
+
+#: ../libgnomeui/gnome-dateedit.c:515
+msgid "Lower hour in the time popup selector"
+msgstr "Yr awr is yn y dewisydd amser"
+
+#: ../libgnomeui/gnome-dateedit.c:525
+msgid "Upper Hour"
+msgstr "Awr Uwch"
+
+#: ../libgnomeui/gnome-dateedit.c:526
+msgid "Upper hour in the time popup selector"
+msgstr "Yr awr uwch yn y dewisydd amser"
+
+#: ../libgnomeui/gnome-dateedit.c:536
+msgid "Initial Time"
+msgstr "Amser Cychwynnol"
+
+#: ../libgnomeui/gnome-dateedit.c:537
+msgid "The initial time"
+msgstr "Yr amser cychwynnol"
+
+#: ../libgnomeui/gnome-dateedit.c:751 ../libgnomeui/gnome-scores.c:97
+msgid "Date"
+msgstr "Dyddiad"
+
+#: ../libgnomeui/gnome-dateedit.c:764
+msgid "Select Date"
+msgstr "Dewiswch Ddyddiad"
+
+# Checkme: how many calendars? from "the" calendar better?
+#: ../libgnomeui/gnome-dateedit.c:764
+msgid "Select the date from a calendar"
+msgstr "Dewiswch y dyddiad o galendr"
+
+#. Calendar label, only shown if the date editor has a time field
+#: ../libgnomeui/gnome-dateedit.c:775
+msgid "Calendar"
+msgstr "Calendr"
+
+#: ../libgnomeui/gnome-dateedit.c:796
+msgid "Select Time"
+msgstr "Dewiswch Amser"
+
+# Checkme: a list? the list? what list?
+#: ../libgnomeui/gnome-dateedit.c:796
+msgid "Select the time from a list"
+msgstr "Dewiswch yr amser o restr"
+
+#: ../libgnomeui/gnome-dateedit.c:1015
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+"dirmygwyd gnome_date_edit_get_date, defnyddiwch gnome_date_edit_get_time"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:121
+#: ../libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "Teitl"
+
+# Checkme: terminology, English?
+#: ../libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "Teitl y derwydd"
+
+# Checkme:
+# This is "the image file which contains the logo", and a comment would help
+#: ../libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "Delwedd logo"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "Dyfrnod Brig"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "Delwedd dyfrnod ar gyfer y brig"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "Blaendir y Teitl"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "Lliw blaendir y teitl"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "Lliw Blaendir y Teitl"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Lliw blaendir y teitl fel GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "Gosodwyd lliw blaendir y teitl"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "Mae lliw blaendir y teitl wedi ei osod"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:169
+#: ../libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "Lliw'r Cefndir"
+
+# TRWSIO
+#: ../libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "Lliw'r cefndir"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "Lliw'r cefndir fel GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "Gosodwyd lliw cefndir"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "Mae lliw'r cefndir wedi ei osod"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:193
+#: ../libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "Lliw Cefndir y Cynnwys"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "Lliw Cefndir y cynnwys"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "Lliw Cefndir y Cynnwys fel GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "Lliw Cefndir Cynnwys wedi gosod"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "Mae Lliw Cefndir y Cynnwys wedi ei osod"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:216
+#: ../libgnomeui/gnome-druid-page-standard.c:224
+msgid "Logo Background Color"
+msgstr "Lliw Cefndir y Logo"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:217
+msgid "Logo Background color"
+msgstr "Lliw Cefndir y Logo"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:225
+msgid "Logo Background color as a GdkColor"
+msgstr "Lliw Cefndir y Logo fel GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:232
+msgid "Logo Background color set"
+msgstr "Lliw Cefndir y Logo wedi ei osod"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:233
+msgid "Logo Background color is set"
+msgstr "Mae Lliw Cefndir y Logo wedi ei osod"
+
+#: ../libgnomeui/gnome-druid.c:154
+msgid "Show Finish"
+msgstr "Dangos Gorffen"
+
+#: ../libgnomeui/gnome-druid.c:155
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Dangos y botwm 'Gorffen' yn lle'r botwm 'Nesaf'"
+
+#: ../libgnomeui/gnome-druid.c:162
+msgid "Show Help"
+msgstr "Dangos Cymorth"
+
+#: ../libgnomeui/gnome-druid.c:163
+msgid "Show the 'Help' button"
+msgstr "Dangos y botwm 'Cymorth'"
+
+#: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:179
+msgid "History ID"
+msgstr "Adnabyddiaeth Hanes"
+
+#: ../libgnomeui/gnome-entry.c:200
+msgid "GTK entry"
+msgstr "Cofnod GTK"
+
+#: ../libgnomeui/gnome-entry.c:201
+msgid "The GTK entry"
+msgstr "Y cofnod GTK"
+
+#: ../libgnomeui/gnome-file-entry.c:237
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Dynodwr unigryw i'r cofnod ffeil. Fe gaiff ei ddefnyddio er mwyn cadw'r "
+"rhestr hanes."
+
+# Checkme Noun noun noun.
+# Checkme See tooltip.
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:188
+msgid "Browse Dialog Title"
+msgstr "Teitl y Deialog Pori"
+
+#: ../libgnomeui/gnome-file-entry.c:246
+msgid "Title for the Browse file dialog."
+msgstr "Teitl ar gyfer y deialog ffeil Pori."
+
+#: ../libgnomeui/gnome-file-entry.c:253
+msgid "Directory Entry"
+msgstr "Cofnod Cyfeiriadur"
+
+#: ../libgnomeui/gnome-file-entry.c:254
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+"A ydy'r cofnod ffeil yn cael ei ddefnyddio er mwyn penodi enwau "
+"cyfeiriaduron neu enwau ffeiliau cyflawn."
+
+#: ../libgnomeui/gnome-file-entry.c:262
+msgid "Modal"
+msgstr "Modal"
+
+# modal -> moddol (Termiadur Ysgol)
+#: ../libgnomeui/gnome-file-entry.c:263
+msgid "Whether the Browse file window should be modal."
+msgstr "A ddylai'r ffenest ffeil Pori fod yn foddol."
+
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:204
+msgid "Filename"
+msgstr "Enw Ffeil"
+
+#: ../libgnomeui/gnome-file-entry.c:271
+msgid "Filename that should be displayed in the file entry."
+msgstr "Yr enw ffeil dylid ei ddangos yn y cofnod ffeil."
+
+#: ../libgnomeui/gnome-file-entry.c:279
+msgid "Default Path"
+msgstr "Llwybr Rhagosodedig"
+
+#: ../libgnomeui/gnome-file-entry.c:280
+msgid "Default path for the Browse file window."
+msgstr "Y llwybr rhagosodedig ar gyfer y ffenest ffeil Pori."
+
+#: ../libgnomeui/gnome-file-entry.c:287
+msgid "GnomeEntry"
+msgstr "GnomeEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:288
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+"Y GnomeEntry mae'r cofnod ffeil yn ei ddefnyddio er mwyn mewnbynnu enwau "
+"ffeiliau. Gallwch ddefnyddio'r briodwedd hon er mwyn cael y GnomeEntry os "
+"ydych angen edrych ar neu newid ei briodweddau."
+
+#: ../libgnomeui/gnome-file-entry.c:298
+msgid "GtkEntry"
+msgstr "GtkEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:299
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+"Y GtkEntry mae'r cofnod ffeil yn ei ddefnyddio er mwyn mewnbynnu enwau "
+"ffeiliau. Gallwch ddefnyddio'r briodwedd hon er mwyn cael y GtkEntry os "
+"ydych angen edrych ar neu newid ei briodweddau."
+
+#: ../libgnomeui/gnome-file-entry.c:309
+msgid "Use GtkFileChooser"
+msgstr "Defnyddio GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:310
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+"A ddylid defnyddio'r teclyn GtkFileChooser newydd neu'r teclyn "
+"GtkFileSelection er mwyn dewis ffeiliau."
+
+#: ../libgnomeui/gnome-file-entry.c:319
+msgid "GtkFileChooser Action"
+msgstr "Gweithred GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:320
+msgid "The type of operation that the file selector is performing."
+msgstr "Y math o weithred mae'r dewisydd ffeil yn ei berfformio."
+
+#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+msgid "Select file"
+msgstr "Dewis ffeil"
+
+#: ../libgnomeui/gnome-file-entry.c:814
+msgid "Path"
+msgstr "Llwybr"
+
+#: ../libgnomeui/gnome-file-entry.c:814
+msgid "Path to file"
+msgstr "Llwybr i ffeil"
+
+#: ../libgnomeui/gnome-file-entry.c:841
+msgid "_Browse..."
+msgstr "_Pori..."
+
+#: ../libgnomeui/gnome-file-entry.c:842
+msgid "Pop up a file selector to choose a file"
+msgstr "Dangos dewisydd ffeil er mwyn dewis ffeil"
+
+#: ../libgnomeui/gnome-font-picker.c:66
+msgid "sans 12"
+msgstr "sans 12"
+
+# msgstr "AaBbCcCHchDdDDddEeFfFFffGgNGngHhIiJjLlLLllMmNnOoPpRrRHrhSsTtTHthUuWwYy"
+#: ../libgnomeui/gnome-font-picker.c:67
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz áèïôŵŷ"
+
+#: ../libgnomeui/gnome-font-picker.c:68
+msgid "Pick a Font"
+msgstr "Dewiswch Ffont"
+
+#: ../libgnomeui/gnome-font-picker.c:156
+msgid "The title of the selection dialog box"
+msgstr "Teitl y blwch deialog dewis"
+
+#: ../libgnomeui/gnome-font-picker.c:164
+msgid "Mode"
+msgstr "Modd"
+
+#: ../libgnomeui/gnome-font-picker.c:165
+msgid "The mode of operation of the font picker"
+msgstr "Modd gweithredu'r dewisydd ffont"
+
+#: ../libgnomeui/gnome-font-picker.c:174
+msgid "Font name"
+msgstr "Enw ffont"
+
+#: ../libgnomeui/gnome-font-picker.c:175
+msgid "Name of the selected font"
+msgstr "Enw'r ffont a ddewiswyd"
+
+#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
+msgid "Font"
+msgstr "Ffont"
+
+#: ../libgnomeui/gnome-font-picker.c:185
+msgid "The selected GtkFont"
+msgstr "Y GtkFont a ddewiswyd"
+
+#: ../libgnomeui/gnome-font-picker.c:192
+msgid "Preview text"
+msgstr "Testun rhagolwg"
+
+#: ../libgnomeui/gnome-font-picker.c:193
+msgid "Preview text shown in the dialog"
+msgstr "Y testun rhagolwg a ddangosir yn y deialog"
+
+#: ../libgnomeui/gnome-font-picker.c:201
+msgid "Use font in label"
+msgstr "Defnyddio'r ffont yn y label"
+
+#: ../libgnomeui/gnome-font-picker.c:202
+msgid "Use font in the label in font info mode"
+msgstr "Defnyddio'r ffont yn y label yn y modd \"font info\""
+
+#: ../libgnomeui/gnome-font-picker.c:210
+msgid "Font size for label"
+msgstr "Maint y ffont ar gyfer y label"
+
+#: ../libgnomeui/gnome-font-picker.c:211
+msgid "Font size for label in font info mode"
+msgstr "Maint y ffont ar gyfer y label yn y modd \"font info\""
+
+#: ../libgnomeui/gnome-font-picker.c:221
+msgid "Show size"
+msgstr "Dangos maint"
+
+#: ../libgnomeui/gnome-font-picker.c:222
+msgid "Show size in font info mode"
+msgstr "Dangos maint y ffont yn y modd \"font info\""
+
+#: ../libgnomeui/gnome-gconf-ui.c:61
+msgid "GNOME GConf UI Support"
+msgstr "Cefnogaeth UI GNOME GConf"
+
+#: ../libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "_Manylion"
+
+#: ../libgnomeui/gnome-gconf-ui.c:171
+#, c-format
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr ""
+"Fe geisiodd y rhaglen \"%s\" newid agwedd o'ch cyfluniad mae gweinyddwr eich "
+"system neu werthwr eich system weithredu wedi eich gwahardd rhag newid. "
+"Efallai ni fydd rhai o'ch gosodiadau yn cymryd effaith, neu ni chaent eu "
+"hadfer y tro nesaf rydych yn defnyddio'r rhaglen."
+
+#: ../libgnomeui/gnome-gconf-ui.c:178
+#, c-format
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"Roedd gwall wrth lwytho neu gadw gwybodaeth cyfluniad ar gyfer %s. Efallai "
+"ni fydd rhai gosodiadau yn gweithio'n gywir."
+
+#: ../libgnomeui/gnome-href.c:123
+msgid "URL"
+msgstr "LAU"
+
+#: ../libgnomeui/gnome-href.c:124
+msgid "The URL that GnomeHRef activates"
+msgstr "Y LAU mae GnomeHRef yn ei weithredu"
+
+#: ../libgnomeui/gnome-href.c:131
+msgid "Text"
+msgstr "Testun"
+
+#: ../libgnomeui/gnome-href.c:132
+msgid "The text on the button"
+msgstr "Y testun ar y botwm"
+
+#: ../libgnomeui/gnome-href.c:133
+msgid "End World Hunger"
+msgstr "Terfynwch newyn byd-eang"
+
+#: ../libgnomeui/gnome-href.c:139
+msgid "Link color"
+msgstr "Lliw cyswllt"
+
+#: ../libgnomeui/gnome-href.c:140
+msgid "Color used to draw the link"
+msgstr "Y lliw a ddefnyddir ar gyfer y cyswllt"
+
+#: ../libgnomeui/gnome-href.c:171
+msgid "This button will take you to the URI that it displays."
+msgstr "Fe fydd y botwm hwn yn eich cymryd i'r LAU mae'n ei ddangos."
+
+#: ../libgnomeui/gnome-href.c:394
+msgid ""
+"An error has occurred while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"Digwyddodd gwall wrth geisio lansio'r porwr gwe rhagosodedig.\n"
+"Gwiriwch y gosodiadau yn y ddeialog 'Rhaglenni Amgen' os gwelwch yn dda."
+
+#: ../libgnomeui/gnome-icon-entry.c:180
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Dynodydd unigryw ar gyfer y cofnod eicon. Fe ddefnyddir hyn ar gyfer cadw'r "
+"rhestr hanes."
+
+#: ../libgnomeui/gnome-icon-entry.c:189
+msgid "Title for the Browse icon dialog."
+msgstr "Teitl ar gyfer y deialog eicon Pori."
+
+#: ../libgnomeui/gnome-icon-entry.c:196
+msgid "Pixmap Directory"
+msgstr "Cyfeiriadur Mapiau Picseli"
+
+#: ../libgnomeui/gnome-icon-entry.c:197
+msgid "Directory that will be searched for icons."
+msgstr "Y cyfeiriadur a edrychir am eiconau ynddi."
+
+#: ../libgnomeui/gnome-icon-entry.c:205
+msgid "Filename that should be displayed in the icon entry."
+msgstr "Yr enw ffeil a ddylid dangos yn y cofnod eicon."
+
+#: ../libgnomeui/gnome-icon-entry.c:213
+msgid "Picker dialog"
+msgstr "Deialog dewis"
+
+#: ../libgnomeui/gnome-icon-entry.c:214
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"Deialog dewis eicon. Gallwch ddefnyddio'r briodwedd hon er mwyn cael y "
+"GtkDialog os ydych angen edrych ar neu newid ei briodweddau."
+
+#: ../libgnomeui/gnome-icon-entry.c:322 ../libgnomeui/gnome-icon-entry.c:997
+msgid "No Icon"
+msgstr "Dim Eicon"
+
+#: ../libgnomeui/gnome-icon-entry.c:767
+msgid "Icon selection dialog"
+msgstr "Deialog dewis eicon"
+
+#: ../libgnomeui/gnome-icon-entry.c:768
+msgid "This dialog box lets you select an icon."
+msgstr "Mae'r blwch deialog yma yn caniatáu i chi ddewis eicon."
+
+#: ../libgnomeui/gnome-icon-entry.c:774 ../libgnomeui/gnome-icon-entry.c:1000
+msgid "Icon Selector"
+msgstr "Dewisydd Eicon"
+
+#: ../libgnomeui/gnome-icon-entry.c:775
+msgid "Please pick the icon you want."
+msgstr "Dewiswch yr eicon yr hoffech os gwelwch yn dda."
+
+#: ../libgnomeui/gnome-icon-entry.c:1001
+msgid "This button will open a window to let you select an icon."
+msgstr ""
+"Fe fydd y botwm yma yn agor ffenest er mwyn caniatáu i chi ddewis eicon."
+
+#: ../libgnomeui/gnome-icon-entry.c:1021
+msgid "Browse"
+msgstr "Pori"
+
+#: ../libgnomeui/gnome-icon-entry.c:1024
+msgid "Icon path"
+msgstr "Llwybr eiconau"
+
+#: ../libgnomeui/gnome-icon-entry.c:1025
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr "Yma fe ddylech roi enw'r cyfeiriadur sy'n cynnwys delweddau eicon."
+
+#: ../libgnomeui/gnome-icon-sel.c:293
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr "GnomeIconSelection: nid yw '%s' yn bodoli, neu nid cyfeiriadur ydyw"
+
+#: ../libgnomeui/gnome-icon-sel.c:301
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr "GnomeIconSelection: methwyd agor cyfeiriadur '%s'"
+
+#: ../libgnomeui/gnome-icon-sel.c:405
+msgid "Loading Icons..."
+msgstr "Llwytho Eiconau..."
+
+#: ../libgnomeui/gnome-messagebox.c:107
+msgid "Information"
+msgstr "Gwybodaeth"
+
+#: ../libgnomeui/gnome-messagebox.c:112
+msgid "Warning"
+msgstr "Rhybudd"
+
+#: ../libgnomeui/gnome-messagebox.c:118
+msgid "Error"
+msgstr "Gwall"
+
+#: ../libgnomeui/gnome-messagebox.c:124
+msgid "Question"
+msgstr "Cwestiwn"
+
+#: ../libgnomeui/gnome-messagebox.c:129
+msgid "Message"
+msgstr "Neges"
+
+#: ../libgnomeui/gnome-password-dialog.c:265
+msgid "_Username:"
+msgstr "_Enw Defnyddiwr:"
+
+#: ../libgnomeui/gnome-password-dialog.c:267
+msgid "_Domain:"
+msgstr "_Parth:"
+
+#: ../libgnomeui/gnome-password-dialog.c:269
+msgid "_Password:"
+msgstr "_Cyfrinair:"
+
+#: ../libgnomeui/gnome-password-dialog.c:342
+msgid "Co_nnect"
+msgstr "_Cysylltu"
+
+#: ../libgnomeui/gnome-password-dialog.c:364
+msgid "Connect _anonymously"
+msgstr "Cysylltu'n _ddienw"
+
+#: ../libgnomeui/gnome-password-dialog.c:369
+msgid "Connect as u_ser:"
+msgstr "Cysylltu fel d_efnyddiwr:"
+
+#: ../libgnomeui/gnome-password-dialog.c:467
+msgid "_Remember password for this session"
+msgstr "_Cofio'r cyfrinair ar gyfer y sesiwn hon"
+
+#: ../libgnomeui/gnome-password-dialog.c:469
+msgid "Save password in _keyring"
+msgstr "_Cadw'r cyfrinair yn y storfa allweddi"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:114
+msgid "Do Preview"
+msgstr "Dangos Rhagolwg"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:115
+msgid "Whether the pixmap entry should have a preview."
+msgstr "A ddylai'r cofnod map picseli gael rhagolwg."
+
+#: ../libgnomeui/gnome-pixmap-entry.c:189
+#: ../libgnomeui/gnome-pixmap-entry.c:481
+msgid "No Image"
+msgstr "Dim Darlun"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:206
+msgid "Image Preview"
+msgstr "Rhagolwg Darlun"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:207
+msgid "A preview of the image currently specified"
+msgstr "Rhagolwg o'r darlun wedi ei benodi'n gyfredol"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:416
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Methu canfod hbox, defnyddio dewisydd ffeil arferol"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:422
+msgid "Preview"
+msgstr "Rhagolwg"
+
+#: ../libgnomeui/gnome-scores.c:78
+msgid "Top Ten"
+msgstr "Deg Uchaf"
+
+#: ../libgnomeui/gnome-scores.c:91
+msgid "User"
+msgstr "Defnyddiwr"
+
+#: ../libgnomeui/gnome-scores.c:94
+msgid "Score"
+msgstr "Sgôr"
+
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: ../libgnomeui/gnome-scores.c:194
+msgid "%a %b %d %T %Y"
+msgstr "%a %b %d %T %Y"
+
+#: ../libgnomeui/gnome-scores.c:395
+msgid "Sans 14"
+msgstr "Sans 14"
+
+#: ../libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Borderi Tabl"
+
+#: ../libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Llenwi Tabl"
+
+#: ../libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Rhestr Fwledig"
+
+#: ../libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "Rhestr wedi ei Rhifo"
+
+#: ../libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Mewnoli"
+
+#: ../libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "Dad-Fewnoli"
+
+#: ../libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Ynghylch y rhaglen"
+
+#: ../libgnomeui/gnome-ui-init.c:122 ../libgnomeui/gnome-ui-init.c:131
+msgid "Disable Crash Dialog"
+msgstr "Analluogi'r Deialog Chwaliad"
+
+#: ../libgnomeui/gnome-ui-init.c:124
+msgid "X display to use"
+msgstr "Y dangosydd X i'w ddefnyddio"
+
+# EFALLAI - angen gwirio'r cyd-destun
+#: ../libgnomeui/gnome-ui-init.c:124
+msgid "DISPLAY"
+msgstr "DANGOSYDD"
+
+#: ../libgnomeui/gnome-ui-init.c:168 ../libgnomeui/gnome-ui-init.c:181
+msgid "GNOME GUI Library"
+msgstr "Llyfrgell GUI GNOME"
+
+#: ../libgnomeui/gnome-ui-init.c:169
+msgid "Show GNOME GUI options"
+msgstr "Dangos opsiynau GUI GNOME"
+
+#: ../libgnomeui/gnome-ui-init.c:246
+msgid "Could not open link"
+msgstr "Methwyd agor cyswllt"
+
+#. dialog display isn't working out
+#: ../libgnomeui/gnome-ui-init.c:832
+#, c-format
+msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+msgstr "Digwyddodd sawl gwall segmentu; ni ellir dangos y deialog gwall\n"
+
+#. Eeeek! Can't show dialog
+#: ../libgnomeui/gnome-ui-init.c:846
+#, c-format
+msgid ""
+"Segmentation fault!\n"
+"Cannot display crash dialog\n"
+msgstr ""
+"Gwall segmentu!\n"
+"Methu dangos y deialog chwalfa\n"
+
+#: ../libgnomeui/gnome_segv.c:101
+#, c-format
+msgid ""
+"The GNOME Session Manager (process %d) has crashed\n"
+"due to a fatal error (%s).\n"
+"When you close this dialog, all applications will close and your session "
+"will exit.\n"
+"Please save all your files before closing this dialog."
+msgstr ""
+"Mae'r Rheolwr Sesiynau GNOME (y proses %d) wedi chwalu\n"
+"oherwydd gwall terfynol (%s).\n"
+"Ar ôl i chi gau'r deialog hwn, fe fydd pob rhaglen yn cau ac fe fydd eich "
+"sesiwn yn terfynu.\n"
+"Arbedwch eich ffeiliau i gyd cyn cau'r deialog hwn os gwelwch yn dda."
+
+#: ../libgnomeui/gnome_segv.c:112
+#, c-format
+msgid "The Application \"%s\" has quit unexpectedly."
+msgstr "Mae'r rhaglen \"%s\" wedi terfynu'n annisgwyl."
+
+#: ../libgnomeui/gnome_segv.c:117
+#, c-format
+msgid "process %d: %s"
+msgstr "proses %d: %s"
+
+#: ../libgnomeui/gnome_segv.c:118 ../libgnomeui/gnome_segv.c:123
+msgid ""
+"You can inform the developers of what happened to help them fix it.  Or you "
+"can restart the application right now."
+msgstr ""
+"Gallwch ddweud wrth ddatblygwyr y rhaglen beth ddigwyddodd er mwyn eu "
+"cynorthwyo nhw i'w drwsio. Neu gallwch ailgychwyn y rhaglen nawr."
+
+#: ../libgnomeui/gnome_segv.c:137
+msgid "Usage: gnome_segv2 appname signum\n"
+msgstr "Defnydd: gnome_segv2 enwrhaglen rhifsignal\n"
+
+#: ../libgnomeui/gnome_segv.c:154
+msgid "_Restart Application"
+msgstr "_Ailgychwyn y Rhaglen"
+
+#: ../libgnomeui/gnome_segv.c:166
+msgid "_Inform Developers"
+msgstr "_Cysylltu â'r Datblygwyr"
+
+#: ../libgnomeui/gnome_segv.c:177
+msgid "_Debug"
+msgstr "_Datnamu"
+
+#: ../test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Gadael y prawf"
+
+#~ msgid "Error reading file '%s': %s"
+#~ msgstr "Gwall wrth ddarllen ffeil '%s': %s"
+
+#~ msgid "Error rewinding file '%s': %s"
+#~ msgstr "Gwall wrth ddirwyn ffeil '%s' yn ôl: %s"
+
+#~ msgid "No name"
+#~ msgstr "Dim enw"
+
+#~ msgid "File '%s' is not a regular file or directory."
+#~ msgstr "Nid yw '%s' yn ffeil arferol na'n blygell."
+
+#~ msgid "Error cannot find file id '%s'"
+#~ msgstr "Gwall: methu canfod ID ffeil '%s'"
+
+#~ msgid "No filename to save to"
+#~ msgstr "Dim enw ffeil er mwyn cadw"
+
+#~ msgid "Starting %s"
+#~ msgstr "Yn cychwyn %s"
+
+#~ msgid "No URL to launch"
+#~ msgstr "Dim LAU i'w lansio"
+
+#~ msgid "Not a launchable item"
+#~ msgstr "Ddim yn eitem a ellir ei lansio"
+
+#~ msgid "No command (Exec) to launch"
+#~ msgstr "Dim gweithred (Exec) i'w lansio"
+
+#~ msgid "Bad command (Exec) to launch"
+#~ msgstr "Gweithred wael (Exec) i'w lansio"
+
+#~ msgid "Unknown encoding of: %s"
+#~ msgstr "Amgodiad anhysbys o: %s"
+
+#~ msgid "Error writing file '%s': %s"
+#~ msgstr "Gwall wrth ysgrifennu at y ffeil '%s': %s"
+
+#~ msgid "History id"
+#~ msgstr "Adnabyddiaeth hanes"
+
+#~ msgid "Icon selector"
+#~ msgstr "Dewisydd eicon"
+
+#~ msgid " domain %s"
+#~ msgstr " parth %s"
+
+#~ msgid "Color Selector"
+#~ msgstr "Dewisydd Lliw"
+
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "Mae'r rhaglen \"%s\" (proses %d) wedi chwalu\n"
+#~ "oherwydd gwall terfynol.\n"
+#~ "(%s)"
+
+#~ msgid "Submit a bug report"
+#~ msgstr "Anfon adroddiad nam"
+
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr "Ymwelwch â'r dudalen Chwal Rhaglen GNOME ar gyfer mwy o wybodaeth"
+
+#~ msgid "_Credits"
+#~ msgstr "_Diolchiadau"
