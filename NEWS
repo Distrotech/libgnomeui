@@ -1,3 +1,24 @@
+libgnomeui 2.20.1
+
+* i18n fixing (Christian Persch, Takao Fujiwara)
+* CD-ROMs not shown in the file chooser (Federico Meña Quintero)
+* Better user feedback when creating a dir fails (Richard Hult)
+* Fix http://bugzilla.gnome.org/show_bug.cgi?id=485922 - Errors from
+  GtkFileSystemGnomeVFS are not translated, and are too general. (Federico Meña Quintero)
+* Updated translations.
+  - Belarusian (Ihar Hrachyshka)
+  - Bengali (Khandakar Mujahidul Islam)
+  - Bulgarian (Alexander Shopov)
+  - French (Stephane Raimbault)
+  - Gujararti (Ankit Patel)
+  - Japanese (Takeshi AIHANA)
+  - Korean (Changwoo Ryu)
+  - Norwegian bokmål (Kjartan)
+  - Norwegian nynorsk (Kjartan)
+  - Spanish (Jorge Gonzalez)
+  - Swedish (Daniel Nylander)
+  - Turkish (Fatih Erguven)
+
 libgnomeui 2.20.0
 
 * Create tar.bz2 in dist (Christian Persch)
