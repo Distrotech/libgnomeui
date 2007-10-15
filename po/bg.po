@@ -7,10 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui trunk\n"
+"Project-Id-Version: libgnomeui gnome-2-20\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-11 11:47+0300\n"
-"PO-Revision-Date: 2007-09-11 07:58+0300\n"
+"POT-Creation-Date: 2007-10-15 07:24+0300\n"
+"PO-Revision-Date: 2007-10-15 07:26+0300\n"
 "Last-Translator: Alexander Shopov <ash@contact.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,35 +34,56 @@ msgstr "Дъщерен елемент 2"
 msgid "Hint for item 2"
 msgstr "Подсказка за елемент 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1002
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1036
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s е връзка, към обект, който не е папка"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1013
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1047
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s е връзка, която не сочи към нищо"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1088
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1122
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s не е папка"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1940
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1160
+#, c-format
+msgid "Could not monitor '%s': %s"
+msgstr "Не може да се наблюдава „%s“: %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1273
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1486
+#, c-format
+msgid "Could not get info for '%s': %s"
+msgstr "Не може да бъде получена информация за „%s“: %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1609
+#, c-format
+msgid "Could not create '%s': %s"
+msgstr "Не може да бъде създаден „%s“: %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1975
 msgid "Network Servers"
 msgstr "Мрежови сървъри"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1956
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1991
 msgid "File System"
 msgstr "Файлова система"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2485
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2061
+#, c-format
+msgid "'%s': %s"
+msgstr "„%s“: %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2520
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Запазването на отметката е неуспешно (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2922
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2957
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Грешка при получаването на информация за „%s“"
