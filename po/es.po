@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.gnome-2-20.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-12 07:44+0100\n"
-"PO-Revision-Date: 2007-10-13 18:33+0200\n"
+"POT-Creation-Date: 2007-10-13 17:41+0100\n"
+"PO-Revision-Date: 2007-10-15 19:00+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -572,7 +572,7 @@ msgstr "Finaliza el juego actual"
 
 #: ../libgnomeui/gnome-app-helper.c:1146
 msgid "_Contents"
-msgstr "_Contenido"
+msgstr "_Índice"
 
 #: ../libgnomeui/gnome-app-helper.c:1149
 msgid "View help for this application"
