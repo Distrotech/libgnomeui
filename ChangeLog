@@ -1,5 +1,10 @@
 2007-10-17  Vincent Untz  <vuntz@gnome.org>
 
+	* NEWS:
+	* configure.in: version 2.20.1.1
+
+2007-10-17  Vincent Untz  <vuntz@gnome.org>
+
 	Revert the patch for bug #485922. It breaks string freeze.
 
 	* file-chooser/gtkfilesystemgnomevfs.c:

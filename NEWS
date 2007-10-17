@@ -1,3 +1,13 @@
+libgnomeui 2.20.1.1
+
+* Fix crash in thumbnail (Fernando Herrera, Christian Persch)
+* Revert change that added new strings [bug #485922] (Vincent Untz)
+* Updated translations.
+  - Hebrew (Gil Osher)
+  - Italian (Francesco Marletta)
+  - Spanish (Jorge Gonzalez)
+  - Slovenian (Matej Urbančič)
+
 libgnomeui 2.20.1
 
 * i18n fixing (Christian Persch, Takao Fujiwara)
