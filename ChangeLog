@@ -1,3 +1,13 @@
+2007-10-17  Vincent Untz  <vuntz@gnome.org>
+
+	Revert the patch for bug #485922. It breaks string freeze.
+
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(get_folder_complete_operation), (get_folder_file_info_callback),
+	(get_file_info_callback), (create_folder_progress_cb),
+	(gtk_file_system_gnome_vfs_get_parent), (set_vfs_error): see
+	Federico's message on 2007-10-12 :-)
+
 2007-10-17  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-thumbnail.c:
