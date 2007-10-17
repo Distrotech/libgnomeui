@@ -969,10 +969,10 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
       orig_width = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Width");
       orig_height = gdk_pixbuf_get_option (pixbuf, "tEXt::Thumb::Image::Height");
 
-      if (*orig_width > 0) {
+      if (orig_width != NULL) {
 	      gdk_pixbuf_set_option (scaled, "tEXt::Thumb::Image::Width", orig_width);
       }
-      if (*orig_height > 0) {
+      if (orig_height != NULL) {
 	      gdk_pixbuf_set_option (scaled, "tEXt::Thumb::Image::Height", orig_height);
       }
       

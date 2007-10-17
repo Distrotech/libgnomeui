@@ -1,3 +1,9 @@
+2007-10-17  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-thumbnail.c:
+	(gnome_thumbnail_factory_generate_thumbnail):
+	Fix a crash (Fernando, Christian). Closes bug #487117.
+
 2007-10-12  Federico Mena Quintero  <federico@novell.com>
 
     	Fix http://bugzilla.gnome.org/show_bug.cgi?id=464383 - In the file
