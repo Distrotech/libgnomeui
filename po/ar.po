@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-26 14:22-0700\n"
+"POT-Creation-Date: 2007-10-21 20:04+0100\n"
 "PO-Revision-Date: 2007-02-22 20:37+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -41,35 +41,35 @@ msgstr "العنصر الإبن 2"
 msgid "Hint for item 2"
 msgstr "تلميحة للعنصر 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1002
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1035
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s وصلة لشيء ليس مجلّدا"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1013
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1046
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s وصلة بدون وصول"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1088
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1121
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ليس مجلّدا"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1940
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1973
 msgid "Network Servers"
 msgstr "خوادم الشبكة"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1956
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1989
 msgid "File System"
 msgstr "نظام الملفات"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2485
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2518
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "فشل حفظ العلامة (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2922
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2955
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "خطأ تلقي معلومات لـ '%s'"
@@ -653,6 +653,7 @@ msgid "Level of user activity required."
 msgstr "مطلوب مستوى نشاط المستخدم."
 
 #: ../libgnomeui/gnome-authentication-manager.c:82
+#, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "بروكسي الـ HTTP يتطلب منك التسجيل.\n"
 
