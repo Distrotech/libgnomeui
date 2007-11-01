@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.pl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-14 20:04+0300\n"
+"POT-Creation-Date: 2007-11-01 13:15+0200\n"
 "PO-Revision-Date: 2007-10-14 20:06+0300\n"
 "Last-Translator: Alaksandar Navicki <zolak@lacinka.org>\n"
 "Language-Team: Belarusian Latin <i18n@mova.org>\n"
@@ -32,56 +32,35 @@ msgstr "Element-naščadak 2"
 msgid "Hint for item 2"
 msgstr "Padkazka da 2-ha elementu"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1036
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1035
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s źjaŭlajecca spasyłkaj na niešta, što nie źjaŭlajecca tečkaj"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1047
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1046
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s źjaŭlajecca pustoj spasyłkaj"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1122
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1121
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nie źjaŭlajecca tečkaj"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1160
-#, c-format
-msgid "Could not monitor '%s': %s"
-msgstr "Niemahčyma nazirać za \"%s\": %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1273
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1486
-#, c-format
-msgid "Could not get info for '%s': %s"
-msgstr "Niemahčyma atrymać infarmacyju dla \"%s\": %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1609
-#, c-format
-msgid "Could not create '%s': %s"
-msgstr "Niemahčyma stvaryć \"%s\": %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1975
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1973
 msgid "Network Servers"
 msgstr "Sietkavyja servery"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1991
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1989
 msgid "File System"
 msgstr "Fajłavaja systema"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2061
-#, c-format
-msgid "'%s': %s"
-msgstr "\"%s\": %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2520
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2518
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Zachavać zakładki nie ŭdałosia (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2957
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2955
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Pamyłka atrymańnia infarmacyi dla \"%s\""
@@ -223,11 +202,11 @@ msgstr "_Fajł/"
 
 #: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr "_Redahavańnie"
+msgstr "_Redahuj"
 
 #: ../libgnomeui/gnome-app-helper.c:84
 msgid "_Edit/"
-msgstr "_Redahavańnie/"
+msgstr "_Redahuj/"
 
 #: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
@@ -667,6 +646,7 @@ msgid "Level of user activity required."
 msgstr "Uzrovień vymahanaj aktyŭnaści karystalnika."
 
 #: ../libgnomeui/gnome-authentication-manager.c:82
+#, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Proxy-server HTTP vymahaje aŭtaryzacyi.\n"
 
@@ -1487,6 +1467,18 @@ msgstr "Niemahčyma adčynić spasyłku"
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Zakonč test"
+
+#~ msgid "Could not monitor '%s': %s"
+#~ msgstr "Niemahčyma nazirać za \"%s\": %s"
+
+#~ msgid "Could not get info for '%s': %s"
+#~ msgstr "Niemahčyma atrymać infarmacyju dla \"%s\": %s"
+
+#~ msgid "Could not create '%s': %s"
+#~ msgstr "Niemahčyma stvaryć \"%s\": %s"
+
+#~ msgid "'%s': %s"
+#~ msgstr "\"%s\": %s"
 
 #~ msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 #~ msgstr ""
