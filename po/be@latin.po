@@ -223,11 +223,11 @@ msgstr "_Fajł/"
 
 #: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr "_Redahavańnie"
+msgstr "_Redahuj"
 
 #: ../libgnomeui/gnome-app-helper.c:86
 msgid "_Edit/"
-msgstr "_Redahavańnie/"
+msgstr "_Redahuj/"
 
 #: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
