@@ -876,11 +876,6 @@ static void client_parse_func (poptContext ctx,
 			       const struct poptOption *opt,
 			       const char *arg, void *data);
 
-static gboolean gnome_client_goption_sm_client_id (const gchar *option_name,
-						   const gchar *value,
-						   gpointer data,
-						   GError **error);
-
 static gboolean gnome_client_goption_sm_config_prefix (const gchar *option_name,
 						       const gchar *value,
 						       gpointer data,
@@ -903,6 +898,8 @@ typedef struct {
 typedef struct {
         gboolean sm_connect;
 } GnomeProgramPrivate_gnome_client;
+
+static gchar *gnome_client_goption_sm_client_id = NULL;
 
 static GQuark quark_gnome_program_private_gnome_client = 0;
 static GQuark quark_gnome_program_class_gnome_client = 0;
@@ -997,8 +994,8 @@ static GOptionGroup *
 gnome_client_module_get_goption_group (void)
 {
 	const GOptionEntry session_goptions[] = {
-		{ "sm-client-id", '\0', 0, G_OPTION_ARG_CALLBACK,
-		  gnome_client_goption_sm_client_id,
+		{ "sm-client-id", '\0', 0, G_OPTION_ARG_STRING,
+		  &gnome_client_goption_sm_client_id,
 		  N_("Specify session management ID"), N_("ID")},
 		{ "sm-config-prefix", '\0', 0, G_OPTION_ARG_CALLBACK,
 		  gnome_client_goption_sm_config_prefix,
@@ -1105,17 +1102,6 @@ client_parse_func (poptContext ctx,
 }
 
 static gboolean
-gnome_client_goption_sm_client_id (const gchar *option_name,
-				   const gchar *value,
-				   gpointer data,
-				   GError **error)
-{
-	gnome_client_set_id (master_client, value);
-
-	return TRUE;
-}
-
-static gboolean
 gnome_client_goption_sm_disable (const gchar *option_name,
 				 const gchar *value,
 				 gpointer data,
@@ -1198,6 +1184,26 @@ gnome_client_post_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
   gboolean do_connect = TRUE;
 
   g_object_get (G_OBJECT (app), GNOME_CLIENT_PARAM_SM_CONNECT, &do_connect, NULL);
+
+  if (gnome_client_goption_sm_client_id != NULL)
+    {
+      gnome_client_set_id (master_client, gnome_client_goption_sm_client_id);
+      g_free (gnome_client_goption_sm_client_id);
+      gnome_client_goption_sm_client_id = NULL;
+    }
+  else
+    {
+      const gchar *desktop_autostart_id;
+
+      desktop_autostart_id = g_getenv ("DESKTOP_AUTOSTART_ID");
+
+      if (desktop_autostart_id != NULL)
+        gnome_client_set_id (master_client, desktop_autostart_id);
+    }
+
+  /* Unset DESKTOP_AUTOSTART_ID in order to avoid child processes to
+   * use the same client id. */
+  g_unsetenv ("DESKTOP_AUTOSTART_ID");
 
   /* We're done, so we can connect to the session manager now.  */
   if (do_connect)

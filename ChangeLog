@@ -1,3 +1,9 @@
+2007-11-13  Lucas Rocha  <lucasr@gnome.org>
+
+	* libgnomeui/gnome-client.c (gnome_client_post_args_parse): try to get
+	the session client ID from DESKTOP_AUTOSTART_ID environment variable
+	in case the --sm-client-id is not used. Closes bug #496571.
+
 2007-10-17  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-thumbnail.c:
@@ -6,16 +12,16 @@
 
 2007-10-12  Federico Mena Quintero  <federico@novell.com>
 
-    	Fix http://bugzilla.gnome.org/show_bug.cgi?id=464383 - In the file
+	Fix http://bugzilla.gnome.org/show_bug.cgi?id=464383 - In the file
 	chooser, errors are not reported correctly when creating a folder
 	fails.
-
-    	* file-chooser/gtkfilesystemgnomevfs.c
-    	(gtk_file_system_gnome_vfs_create_folder): Use
-    	GNOME_VFS_XFER_ERROR_MODE_QUERY instead of
-    	GNOME_VFS_XFER_ERROR_MODE_ABORT so that our progress/error
-    	callback will be called if the mkdir() fails.  Patch by Richard
-    	Hult <richard@imendio.com>.
+	
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_create_folder): Use
+	GNOME_VFS_XFER_ERROR_MODE_QUERY instead of
+	GNOME_VFS_XFER_ERROR_MODE_ABORT so that our progress/error
+	callback will be called if the mkdir() fails.  Patch by Richard
+	Hult <richard@imendio.com>.
 
 2007-10-12  Federico Mena Quintero  <federico@novell.com>
 
