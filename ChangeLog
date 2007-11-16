@@ -1,3 +1,9 @@
+2007-11-16  Frederic Crozat  <fcrozat@mandriva.com>
+
+	* libgnomeui/gnome-app-helper.c: Don't call gconf to
+	get global toolbar style, rely on xsettings instead. Closes bug
+	#497380.
+
 2007-11-13  Lucas Rocha  <lucasr@gnome.org>
 
 	* libgnomeui/gnome-client.c (gnome_client_post_args_parse): try to get

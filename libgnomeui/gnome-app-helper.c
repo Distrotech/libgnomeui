@@ -2032,9 +2032,6 @@ gnome_app_create_toolbar_custom (GnomeApp *app, GnomeUIInfo *uiinfo, GnomeUIBuil
 	toolbar = gtk_toolbar_new ();
 	gtk_toolbar_set_orientation (GTK_TOOLBAR (toolbar),
 				     GTK_ORIENTATION_HORIZONTAL);
-	/* FIXME: isn't this set by some of that gtk+2->gconf magic goo? */
-	gtk_toolbar_set_style (GTK_TOOLBAR (toolbar),
-			       GTK_TOOLBAR_BOTH);
 	gnome_app_fill_toolbar_custom(GTK_TOOLBAR (toolbar), uiinfo, uibdata,
 			app->accel_group);
 	gnome_app_set_toolbar (app, GTK_TOOLBAR (toolbar));
@@ -2456,24 +2453,7 @@ per_app_toolbar_style_changed_notify(GConfClient            *client,
                                          gconf_value_get_string(value),
                                          (gint*)&style)) {
                         got_it = TRUE;
-                }
-        }
-
-        /* Fall back to global setting */
-        if (!got_it) {
-                gchar *str;
-
-                str = gconf_client_get_string(client,
-                                              "/desktop/gnome/interface/toolbar_style",
-                                              NULL);
-
-                if (str) {
-			if (!gconf_string_to_enum (toolbar_styles,
-						   str,
-						   (gint *)&style))
-				style = GTK_TOOLBAR_BOTH;
-
-                        g_free(str);
+                        gtk_toolbar_set_style(toolbar, style);
                 }
         }
 
@@ -2779,33 +2759,10 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                                          str,
                                          (gint*)&toolbar_style)) {
                         got_it = TRUE;
+                        gtk_toolbar_set_style (toolbar, toolbar_style);
                 }
 
                 g_free(str);
-
-                /* Try global default */
-                if (!got_it) {
-                        str = gconf_client_get_string(conf,
-                                                      "/desktop/gnome/interface/toolbar_style",
-                                                      NULL);
-
-                        if (str != NULL) {
-                                if (!gconf_string_to_enum(toolbar_styles,
-							  str,
-							  (gint*)&toolbar_style))
-					toolbar_style = GTK_TOOLBAR_BOTH;
-                                g_free(str);
-                        }
-                }
-
-                notify_id = gconf_client_notify_add(conf,
-                                                    "/desktop/gnome/interface/toolbar_style",
-                                                    toolbar_style_changed_notify,
-                                                    toolbar, NULL, NULL);
-
-                g_signal_connect(toolbar, "destroy",
-				 G_CALLBACK(remove_notify_cb),
-				 GINT_TO_POINTER(notify_id));
 
                 notify_id = gconf_client_notify_add(conf,
                                                     per_app_key,
@@ -2817,8 +2774,6 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
 				 GINT_TO_POINTER(notify_id));
 
                 g_free(per_app_key);
-
-                gtk_toolbar_set_style (toolbar, toolbar_style);
         }
 }
 
