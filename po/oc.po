@@ -1,20 +1,23 @@
+# translation of oc.po to Occitan
 # Occitan translation of libgnomeui.
 # Copyright (C) 2007 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
+#
+#
 # Yannig MARCHEGAY (Kokoyaya) <yannig@marchegay.org>, 2007.
-# 
-# 
+# Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.19.0\n"
+"Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-08-21 12:14+0100\n"
-"PO-Revision-Date: 2007-08-21 00:50+0200\n"
-"Last-Translator: Yannig MARCHEGAY (Kokoyaya) <yannig@marchegay.org>\n"
-"Language-Team: Occitan <en@li.org>\n"
+"PO-Revision-Date: 2007-11-20 14:32+0100\n"
+"Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
+"Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -77,8 +80,7 @@ msgstr "Impossible de dobrir le fichièr '%s' : %s"
 
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Impossible de cargar l'imatge '%s' : rason desconeguda, probable que siá "
 "corrompuda"
@@ -174,10 +176,8 @@ msgstr ""
 "2006"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid ""
-"Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"Credits als reviraires. Aquesta cadena deu èsser marcada coma revirabla"
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr "Credits als reviraires. Aquesta cadena deu èsser marcada coma revirabla"
 
 #: ../libgnomeui/gnome-about.c:438
 #: ../libgnomeui/gnome-druid-page-standard.c:129
@@ -454,7 +454,7 @@ msgstr "A prepaus del logicial"
 
 #: ../libgnomeui/gnome-app-helper.c:224
 msgid "Select _All"
-msgstr "_Tot seleccionar"
+msgstr "Seleccionar un fichièr"
 
 #: ../libgnomeui/gnome-app-helper.c:225
 msgid "Select everything"
@@ -977,7 +977,7 @@ msgstr "Indica la fenèstra de seleccion de fichièrs deu èsser modala."
 
 #: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
-msgstr "Nom del fichièr"
+msgstr "Nom de fichièr"
 
 #: ../libgnomeui/gnome-file-entry.c:271
 msgid "Filename that should be displayed in the file entry."
@@ -1113,8 +1113,7 @@ msgstr "Talha de la poliça per las etiquetas"
 
 #: ../libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
-msgstr ""
-"Talha de la poliça per las etiquetas dins lo mòde d'info de las poliças"
+msgstr "Talha de la poliça per las etiquetas dins lo mòde d'info de las poliças"
 
 #: ../libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
@@ -1248,8 +1247,7 @@ msgstr "Causissètz l'icònas que volètz."
 
 #: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "This button will open a window to let you select an icon."
-msgstr ""
-"Aqueste boton dobrirà una fenèstra que vos permet de seleccionar una icòna."
+msgstr "Aqueste boton dobrirà una fenèstra que vos permet de seleccionar una icòna."
 
 #: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
@@ -1317,7 +1315,7 @@ msgstr "_Novèl mot de pas :"
 
 #: ../libgnomeui/gnome-password-dialog.c:220
 msgid "Con_firm password:"
-msgstr ""
+msgstr "Con_firmatz lo mot de pas :"
 
 #: ../libgnomeui/gnome-password-dialog.c:223
 msgid "Password quality:"
@@ -1459,17 +1457,3 @@ msgstr "Impossible de dobrir lo ligam"
 msgid "Exit the test"
 msgstr "Sortir del tèst"
 
-#~ msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-#~ msgstr ""
-#~ "I a agut mai d'una error de segmentacion ; impossible de visualizar la "
-#~ "fenèstra d'errors\n"
-
-#~ msgid ""
-#~ "Segmentation fault!\n"
-#~ "Cannot display crash dialog\n"
-#~ msgstr ""
-#~ "Error de segmentacion !\n"
-#~ "Impossible de visualizar la fenèstra d'errors\n"
-
-#~ msgid "Usage: gnome_segv2 appname signum\n"
-#~ msgstr "Sintaxi : gnome_segv2 nom-appli num-signal\n"
