@@ -1,3 +1,13 @@
+2007-12-15  Christian Persch  <chpe@gnome.org>
+
+	* configure.in:
+	* libgnomeui/gnome-thumbnail.c: (gnome_thumbnail_factory_lookup),
+	(gnome_thumbnail_factory_has_valid_failed_thumbnail),
+	(gnome_thumbnail_factory_save_thumbnail),
+	(gnome_thumbnail_factory_create_failed_thumbnail),
+	(gnome_thumbnail_md5), (gnome_thumbnail_is_valid): Use GChecksum. Bug
+	#501866.
+
 2007-11-16  Frederic Crozat  <fcrozat@mandriva.com>
 
 	* libgnomeui/gnome-app-helper.c: Don't call gconf to
