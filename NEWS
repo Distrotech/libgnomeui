@@ -1,3 +1,20 @@
+libgnomeui 2.21.4
+
+* Remove MD5 code, and use GChecksum (#501866)
+* Don't use GConf for getting the toolbar style (#497380)
+* Fall back to DESKTOP_AUTOSTART_ID as startup ID (#496571)
+* Fix a crash in the thumbnailer (#487117)
+* Fix error reporting on directory creation failure in the gnome-vfs filesystem
+  backend (#464383)
+* Make error messages in the gnome-vfs filesystem backend translatable,
+  and improve the messaged (#485922)
+* Fix i18n (#483263)
+* Warning fixes (#315205)
+* Fix a crash in the filename entry widget when entering a path	without trailing '/'
+* Allow showing seconds in the date chooser (#473410)
+* Translation updates
+
+
 libgnomeui 2.20.0
 
 * Create tar.bz2 in dist (Christian Persch)

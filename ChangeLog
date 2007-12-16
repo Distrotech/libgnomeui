@@ -28,7 +28,7 @@
 
 2007-10-12  Federico Mena Quintero  <federico@novell.com>
 
-	Fix http://bugzilla.gnome.org/show_bug.cgi?id=464383 - In the file
+	Fix bug #464383 - In the file
 	chooser, errors are not reported correctly when creating a folder
 	fails.
 	
@@ -41,7 +41,7 @@
 
 2007-10-12  Federico Mena Quintero  <federico@novell.com>
 
-	Fix http://bugzilla.gnome.org/show_bug.cgi?id=485922 - Errors from
+	Fix bug #485922 - Errors from
 	GtkFileSystemGnomeVFS are not translated, and are too general.
 
 	* file-chooser/gtkfilesystemgnomevfs.c (set_vfs_error): Take in a
