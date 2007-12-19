@@ -101,7 +101,7 @@ static void libgnomeui_post_args_parse	(GnomeProgram *app,
 static void libgnomeui_rc_parse		(GnomeProgram *program);
 
 /* Prototype for a private gnome_stock function */
-void _gnome_stock_icons_init (void);
+G_GNUC_INTERNAL void _gnome_stock_icons_init (void);
 
 /* Whether to make noises when the user clicks a button, etc.  We cache it
  * in a boolean rather than querying GConf every time.

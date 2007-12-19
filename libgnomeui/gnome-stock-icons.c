@@ -34,7 +34,7 @@
 #include "pixmaps/gnome-stock-pixbufs.h"
 
 /* Prototype for a private function */
-void _gnome_stock_icons_init (void);
+G_GNUC_INTERNAL void _gnome_stock_icons_init (void);
 
 static void G_GNUC_UNUSED
 add_sized (GtkIconFactory *factory,
@@ -145,7 +145,7 @@ static GtkStockItem builtin_items [] =
     { GNOME_STOCK_ABOUT, N_("About"), 0, 0, GETTEXT_PACKAGE }
 };
 
-void
+void G_GNUC_INTERNAL
 _gnome_stock_icons_init (void)
 {
     static gboolean initialized = FALSE;

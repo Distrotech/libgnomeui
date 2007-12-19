@@ -1,5 +1,11 @@
 2007-12-20  Christian Persch  <chpe@gnome.org>
 
+	* libgnomeui/gnome-stock-icons.c:
+	* libgnomeui/gnome-ui-init.c: Mark _gnome_stock_icons_init with
+	G_GNUC_INTERNAL.
+
+2007-12-20  Christian Persch  <chpe@gnome.org>
+
 	* libgnomeui/gnome-thumbnail.c: (gnome_thumbnail_factory_lookup),
 	(gnome_thumbnail_factory_has_valid_failed_thumbnail),
 	(gnome_thumbnail_factory_save_thumbnail),
