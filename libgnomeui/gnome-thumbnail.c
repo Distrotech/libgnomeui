@@ -571,13 +571,13 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
   gpointer value;
   struct ThumbnailInfo *info;
   GChecksum *checksum;
-  guint8 *digest = NULL;
-  gsize digest_len;
+  guint8 digest[16];
+  gsize digest_len = sizeof (digest);
 
   checksum = g_checksum_new (G_CHECKSUM_MD5);
   g_checksum_update (checksum, (const guchar *) uri, strlen (uri));
 
-  g_checksum_get_digest (checksum, &digest, &digest_len);
+  g_checksum_get_digest (checksum, digest, &digest_len);
   g_assert (digest_len == 16);
 
   g_mutex_lock (priv->lock);
@@ -601,8 +601,9 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
 	  info = load_thumbnail_info (path);
 	  if (info)
 	    {
-	      g_hash_table_insert (priv->existing_thumbs, digest, info);
-              digest = NULL; /* consumed */
+	      g_hash_table_insert (priv->existing_thumbs,
+                                   g_memdup (digest, sizeof (digest)),
+                                   info);
 	    }
 	}
       else
@@ -623,7 +624,6 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
   g_mutex_unlock (priv->lock);
   
   g_checksum_free (checksum);
-  g_free (digest);
 
   return NULL;
 }
@@ -654,13 +654,13 @@ gnome_thumbnail_factory_has_valid_failed_thumbnail (GnomeThumbnailFactory *facto
   GdkPixbuf *pixbuf;
   gboolean res;
   GChecksum *checksum;
-  guint8 *digest = NULL;
-  gsize digest_len;
+  guint8 digest[16];
+  gsize digest_len = sizeof (digest);
 
   checksum = g_checksum_new (G_CHECKSUM_MD5);
   g_checksum_update (checksum, (const guchar *) uri, strlen (uri));
 
-  g_checksum_get_digest (checksum, &digest, &digest_len);
+  g_checksum_get_digest (checksum, digest, &digest_len);
   g_assert (digest_len == 16);
 
   res = FALSE;
@@ -694,7 +694,6 @@ gnome_thumbnail_factory_has_valid_failed_thumbnail (GnomeThumbnailFactory *facto
   g_mutex_unlock (priv->lock);
 
   g_checksum_free (checksum);
-  g_free (digest);
 
   return res;
 }
@@ -1088,13 +1087,13 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
   struct stat statbuf;
   struct ThumbnailInfo *info;
   GChecksum *checksum;
-  guint8 *digest = NULL;
-  gsize digest_len;
+  guint8 digest[16];
+  gsize digest_len = sizeof (digest);
 
   checksum = g_checksum_new (G_CHECKSUM_MD5);
   g_checksum_update (checksum, (const guchar *) uri, strlen (uri));
 
-  g_checksum_get_digest (checksum, &digest, &digest_len);
+  g_checksum_get_digest (checksum, digest, &digest_len);
   g_assert (digest_len == 16);
 
   g_mutex_lock (priv->lock);
@@ -1132,7 +1131,6 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
       g_free (dir);
       g_free (tmp_path);
       g_free (path);
-      g_free (digest);
       return;
     }
   close (tmp_fd);
@@ -1172,7 +1170,9 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
       
       g_mutex_lock (priv->lock);
       
-      g_hash_table_insert (factory->priv->existing_thumbs, digest, info);
+      g_hash_table_insert (factory->priv->existing_thumbs,
+                           g_memdup (digest, sizeof (digest)),
+                           info);
       /* Make sure we don't re-read the directory. We should be uptodate
        * with all previous changes du to the ensure_uptodate above.
        * There is still a small window here where we might miss exisiting
@@ -1186,7 +1186,6 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
     }
   else
     {
-      g_free (digest);
       gnome_thumbnail_factory_create_failed_thumbnail (factory, uri, original_mtime);
     }
 
@@ -1222,13 +1221,13 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
   struct stat statbuf;
   GdkPixbuf *pixbuf;
   GChecksum *checksum;
-  guint8 *digest = NULL;
-  gsize digest_len;
+  guint8 digest[16];
+  gsize digest_len = sizeof (digest);
 
   checksum = g_checksum_new (G_CHECKSUM_MD5);
   g_checksum_update (checksum, (const guchar *) uri, strlen (uri));
 
-  g_checksum_get_digest (checksum, &digest, &digest_len);
+  g_checksum_get_digest (checksum, digest, &digest_len);
   g_assert (digest_len == 16);
 
   g_mutex_lock (priv->lock);
@@ -1265,7 +1264,6 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
       g_free (dir);
       g_free (tmp_path);
       g_free (path);
-      g_free (digest);
       return;
     }
   close (tmp_fd);
@@ -1287,7 +1285,9 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
 
       g_mutex_lock (priv->lock);
       
-      g_hash_table_insert (factory->priv->failed_thumbs, digest, NULL);
+      g_hash_table_insert (factory->priv->failed_thumbs,
+                           g_memdup (digest, sizeof (digest)),
+                           NULL);
       /* Make sure we don't re-read the directory. We should be uptodate
        * with all previous changes du to the ensure_uptodate above.
        * There is still a small window here where we might miss exisiting
@@ -1299,8 +1299,6 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
       
       g_mutex_unlock (priv->lock);
     }
-  else
-    g_free (digest);
 
   g_free (dir);
   g_free (path);

@@ -1,3 +1,11 @@
+2007-12-20  Christian Persch  <chpe@gnome.org>
+
+	* libgnomeui/gnome-thumbnail.c: (gnome_thumbnail_factory_lookup),
+	(gnome_thumbnail_factory_has_valid_failed_thumbnail),
+	(gnome_thumbnail_factory_save_thumbnail),
+	(gnome_thumbnail_factory_create_failed_thumbnail): Adapt to new API
+	for g_checksum_get_digest.
+
 2007-12-15  Christian Persch  <chpe@gnome.org>
 
 	* configure.in:
