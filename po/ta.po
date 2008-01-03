@@ -5,15 +5,16 @@
 # Dinesh Nadarajah <n_dinesh@yahoo.com>, 2001, 2002, 2003.
 # Jayaradha N <jaya@pune.redhat.com>, 2004.
 # Felix <ifelix25@gmail.com>, 2006.
+# தங்கம் அருண் <thangam.arunx@gmail.com>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-10 15:02+0000\n"
+"POT-Creation-Date: 2007-10-17 22:39+0100\n"
 "PO-Revision-Date: 2006-08-30 16:52+0530\n"
-"Last-Translator: Felix <ifelix25@gmail.com>\n"
-"Language-Team: Tamil <ta@li.org>\n"
+"Last-Translator: தங்கம் அருண் <thangam.arunx@gmail.com>\n"
+"Language-Team: தமிழ் <ubuntu-l10n-tam@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,35 +41,35 @@ msgstr "சேய் உருப்படி 2"
 msgid "Hint for item 2"
 msgstr "உருப்படி 2'க்கு குறிப்பிடு"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1035
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s என்பது அடைவு அல்லாத ஏதோ ஒரு இணைப்பாகும்"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1046
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s என்பது இலக்கு இடம் இல்லாத இணைப்பாகும்"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1121
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s அடைவு இல்லை"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1973
 msgid "Network Servers"
 msgstr "பிணைய சேவையகங்கள்"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1989
 msgid "File System"
 msgstr "கோப்பு அமைப்பு"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2518
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "புத்தக குறி சேமிப்பதில் தோல்வி (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2955
 #, fuzzy, c-format
 msgid "Error getting information for '%s'"
 msgstr "'%s' கோப்புக்கான தகவலை பெற முடியவில்லை: %s"
@@ -103,7 +104,7 @@ msgstr "ஆவணமாக்கல் எழுதியவர்"
 
 #: ../libgnomeui/gnome-about.c:261
 msgid "Translated by"
-msgstr "மொழிபெயர்ப்பாலர்"
+msgstr "மொழிபெயர்ப்பாளர்"
 
 #: ../libgnomeui/gnome-about.c:324
 msgid "C_redits"
@@ -131,7 +132,7 @@ msgstr "படியுரிமைச் சரம்"
 
 #: ../libgnomeui/gnome-about.c:393
 msgid "Copyright information for the program"
-msgstr "இன்த நிரலின் படியுரிமைத் தகவல்"
+msgstr "இந்த நிரலின் படியுரிமைத் தகவல்"
 
 #: ../libgnomeui/gnome-about.c:400
 msgid "Comments string"
@@ -143,19 +144,19 @@ msgstr "இன்த நிரலைப்பற்றியான குறி�
 
 #: ../libgnomeui/gnome-about.c:407
 msgid "Authors"
-msgstr "ஆசிாியர்கள்"
+msgstr "ஆசிரியர்கள்"
 
 #: ../libgnomeui/gnome-about.c:408
 msgid "List of authors of the programs"
-msgstr "இன் நிரலை எழுதிய ஆசிாியர்கள்"
+msgstr "இன் நிரலை எழுதிய ஆசிரியர்கள்"
 
 #: ../libgnomeui/gnome-about.c:410
 msgid "Author entry"
-msgstr "ஆசிாியர் பதிவிடம்"
+msgstr "ஆசிரியர் பதிவிடம்"
 
 #: ../libgnomeui/gnome-about.c:411
 msgid "A single author entry"
-msgstr "ஓரு ஆசிாியர் பதிவிடம்"
+msgstr "ஓரு ஆசிரியர் பதிவிடம்"
 
 #: ../libgnomeui/gnome-about.c:418
 msgid "Documenters"
@@ -197,142 +198,142 @@ msgid "About %s"
 msgstr "%s பற்றி"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:81 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_கோப்பு"
 
-#: ../libgnomeui/gnome-app-helper.c:83
+#: ../libgnomeui/gnome-app-helper.c:82
 msgid "_File/"
 msgstr "_கோப்பு/"
 
-#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_தொகு"
 
-#: ../libgnomeui/gnome-app-helper.c:85
+#: ../libgnomeui/gnome-app-helper.c:84
 msgid "_Edit/"
 msgstr "_தொகு/"
 
-#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_காட்சி"
 
-#: ../libgnomeui/gnome-app-helper.c:87
+#: ../libgnomeui/gnome-app-helper.c:86
 msgid "_View/"
 msgstr "_காட்சி/"
 
-#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_அமைப்புகள்"
 
-#: ../libgnomeui/gnome-app-helper.c:89
+#: ../libgnomeui/gnome-app-helper.c:88
 msgid "_Settings/"
 msgstr "_அமைப்புகள்/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_புதியது"
 
-#: ../libgnomeui/gnome-app-helper.c:91
+#: ../libgnomeui/gnome-app-helper.c:90
 msgid "_New/"
 msgstr "_புதியது/"
 
-#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "கோ_ப்புகள்"
 
-#: ../libgnomeui/gnome-app-helper.c:93
+#: ../libgnomeui/gnome-app-helper.c:92
 msgid "Fi_les/"
 msgstr "கோ_ப்புகள்/"
 
-#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_சாளரங்கள்"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_விளையாட்டு"
 
-#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_உதவி"
 
-#: ../libgnomeui/gnome-app-helper.c:97
+#: ../libgnomeui/gnome-app-helper.c:96
 msgid "_Windows/"
 msgstr "_சாளரங்கள்/"
 
 #. Open
-#: ../libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:108
 msgid "_Open..."
 msgstr "_திற..."
 
-#: ../libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:108
 msgid "Open a file"
 msgstr "ஒரு கோப்பைத் திற"
 
 #. Save
-#: ../libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:113
 msgid "_Save"
 msgstr "_சேமி"
 
-#: ../libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:113
 msgid "Save the current file"
 msgstr "தற்போதைய கோப்பைச் சேமி"
 
 #. Save As
-#: ../libgnomeui/gnome-app-helper.c:119
+#: ../libgnomeui/gnome-app-helper.c:118
 msgid "Save _As..."
 msgstr "வேறு பெயரில் _சேமி..."
 
-#: ../libgnomeui/gnome-app-helper.c:120
+#: ../libgnomeui/gnome-app-helper.c:119
 msgid "Save the current file with a different name"
 msgstr "தற்போதைய கோப்பை வேறு பெயரில் சேமி"
 
 #. Revert
-#: ../libgnomeui/gnome-app-helper.c:125
+#: ../libgnomeui/gnome-app-helper.c:124
 msgid "_Revert"
 msgstr "நிலைமீட்டு"
 
-#: ../libgnomeui/gnome-app-helper.c:126
+#: ../libgnomeui/gnome-app-helper.c:125
 msgid "Revert to a saved version of the file"
 msgstr "இந்த கோப்பின் சேமித்த ஓர் பதிவுக்குப் பின்செல்"
 
 #. Print
-#: ../libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:130
 msgid "_Print..."
 msgstr "_அச்சிடு..."
 
-#: ../libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:130
 msgid "Print the current file"
 msgstr "தற்போதைய கோப்பை அச்சிடு"
 
 #. Print Setup
-#: ../libgnomeui/gnome-app-helper.c:136
+#: ../libgnomeui/gnome-app-helper.c:135
 msgid "Print S_etup..."
 msgstr "அச்சிடுவதை _அமை..."
 
-#: ../libgnomeui/gnome-app-helper.c:137
+#: ../libgnomeui/gnome-app-helper.c:136
 msgid "Setup the page settings for your current printer"
 msgstr "தற்போதைய அச்சுப்பொறிக்கான பக்கத்தை அமைவுசெய்"
 
 #. Close
-#: ../libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:141
 msgid "_Close"
 msgstr "_மூடு"
 
-#: ../libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:141
 msgid "Close the current file"
 msgstr "தற்போதைய கோப்பை மூடு"
 
 #. Exit
-#: ../libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:146
 msgid "_Quit"
 msgstr "வெளிச்செல்"
 
-#: ../libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:146
 msgid "Quit the application"
 msgstr "இந்த செயல்பாட்டிலிருந்து வெளிச்செல்"
 
@@ -340,93 +341,93 @@ msgstr "இந்த செயல்பாட்டிலிருந்து �
 #. * The "Edit" menu
 #.
 #. Cut
-#: ../libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:154
 msgid "Cu_t"
 msgstr "வெ_ட்டு"
 
-#: ../libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:154
 msgid "Cut the selection"
 msgstr "தெரிவுசெய்ததை வெட்டு"
 
 #. 10
 #. Copy
-#: ../libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:160
 msgid "_Copy"
 msgstr "_நகல்"
 
-#: ../libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:160
 msgid "Copy the selection"
 msgstr "தெரிவுசெய்ததை நகல்செய்"
 
 #. Paste
-#: ../libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:165
 msgid "_Paste"
 msgstr "_ஒட்டு"
 
-#: ../libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:165
 msgid "Paste the clipboard"
 msgstr "பிடிப்புப் பலகையை ஒட்டு"
 
 #. Clear
-#: ../libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:170
 msgid "C_lear"
 msgstr "துப்பர_வாக்கு"
 
-#: ../libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:170
 msgid "Clear the selection"
 msgstr "தெரிவுசெய்ததை துப்பரவாக்கு"
 
 #. Undo
-#: ../libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:175
 msgid "_Undo"
 msgstr "_கவில்"
 
-#: ../libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:175
 msgid "Undo the last action"
 msgstr "கடைசி செயலை கவில்செய்"
 
 #. Redo
-#: ../libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:180
 msgid "_Redo"
 msgstr "_மீண்டும்"
 
-#: ../libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:180
 msgid "Redo the undone action"
 msgstr "கவில்செய்த செயலை மீண்டும் செய்"
 
 #. Find
-#: ../libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:185
 msgid "_Find..."
 msgstr "_கண்டுபிடி"
 
-#: ../libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:185
 msgid "Search for a string"
 msgstr "சரம் ஒன்றுக்காக தேடு"
 
 #. Find Again
-#: ../libgnomeui/gnome-app-helper.c:191
+#: ../libgnomeui/gnome-app-helper.c:190
 msgid "Find Ne_xt"
 msgstr "அ_டுத்ததைக் கண்டுபிடி"
 
-#: ../libgnomeui/gnome-app-helper.c:192
+#: ../libgnomeui/gnome-app-helper.c:191
 msgid "Search again for the same string"
 msgstr "அதே சரத்துக்காக மறுபடியும் தேடு"
 
 #. Replace
-#: ../libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:196
 msgid "R_eplace..."
 msgstr "இ_டமாற்று..."
 
-#: ../libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:196
 msgid "Replace a string"
 msgstr "ஒரு சரத்தை மாற்று"
 
 #. Properties
-#: ../libgnomeui/gnome-app-helper.c:202
+#: ../libgnomeui/gnome-app-helper.c:201
 msgid "_Properties"
 msgstr "_பண்புகள்"
 
-#: ../libgnomeui/gnome-app-helper.c:203
+#: ../libgnomeui/gnome-app-helper.c:202
 msgid "Modify the file's properties"
 msgstr "கோப்பின் பண்புகளை மாற்றியமைக்கவும்"
 
@@ -434,11 +435,11 @@ msgstr "கோப்பின் பண்புகளை மாற்றிய�
 #. * The Settings menu
 #.
 #. Settings
-#: ../libgnomeui/gnome-app-helper.c:211
+#: ../libgnomeui/gnome-app-helper.c:210
 msgid "Prefere_nces"
 msgstr "விருப்பங்_கள்"
 
-#: ../libgnomeui/gnome-app-helper.c:212
+#: ../libgnomeui/gnome-app-helper.c:211
 msgid "Configure the application"
 msgstr "செயல்பாட்டை அமை வடிவப்படுத்து"
 
@@ -447,134 +448,134 @@ msgstr "செயல்பாட்டை அமை வடிவப்படு�
 #. * And the "Help" menu
 #.
 #. About
-#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:4
+#: ../libgnomeui/gnome-app-helper.c:220 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "பற்றி"
 
-#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
+#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "இந்த செயல்பாட்டைப் பற்றி"
 
-#: ../libgnomeui/gnome-app-helper.c:225
+#: ../libgnomeui/gnome-app-helper.c:224
 msgid "Select _All"
 msgstr "அனைத்தையும் தெரிவு செய்க"
 
-#: ../libgnomeui/gnome-app-helper.c:226
+#: ../libgnomeui/gnome-app-helper.c:225
 msgid "Select everything"
 msgstr "அனைத்தையும் தெரிவு செய்"
 
 #.
 #. * Window menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:234
+#: ../libgnomeui/gnome-app-helper.c:233
 msgid "Create New _Window"
 msgstr "புதிய சாளரத்தைப் _படை"
 
-#: ../libgnomeui/gnome-app-helper.c:235
+#: ../libgnomeui/gnome-app-helper.c:234
 msgid "Create a new window"
 msgstr "புதிய ஒரு சாளரத்தைப் படை"
 
-#: ../libgnomeui/gnome-app-helper.c:239
+#: ../libgnomeui/gnome-app-helper.c:238
 msgid "_Close This Window"
 msgstr "_இந்த சாளரத்தை மூடு"
 
-#: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
+#: ../libgnomeui/gnome-app-helper.c:239 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "தற்போதைய சாளரத்தை மூடு"
 
 #.
 #. * The "Game" menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:248
+#: ../libgnomeui/gnome-app-helper.c:247
 msgid "_New Game"
 msgstr "புதிய விளையாட்டு (_N)"
 
-#: ../libgnomeui/gnome-app-helper.c:249
+#: ../libgnomeui/gnome-app-helper.c:248
 msgid "Start a new game"
 msgstr "புதிய விளையாட்டு ஒன்றைத் தொடங்கு"
 
-#: ../libgnomeui/gnome-app-helper.c:253
+#: ../libgnomeui/gnome-app-helper.c:252
 msgid "_Pause Game"
 msgstr "விளையாட்டை இடைநிறுத்து (_P)"
 
-#: ../libgnomeui/gnome-app-helper.c:254
+#: ../libgnomeui/gnome-app-helper.c:253
 msgid "Pause the game"
 msgstr "விளையாட்டை நிறுத்திவை"
 
-#: ../libgnomeui/gnome-app-helper.c:258
+#: ../libgnomeui/gnome-app-helper.c:257
 msgid "_Restart Game"
 msgstr "விளையாட்டை மீண்டும் தொடங்கு (_R)"
 
-#: ../libgnomeui/gnome-app-helper.c:259
+#: ../libgnomeui/gnome-app-helper.c:258
 msgid "Restart the game"
 msgstr "விளையாட்டை மறுபடியும் தொடங்கு"
 
-#: ../libgnomeui/gnome-app-helper.c:263
+#: ../libgnomeui/gnome-app-helper.c:262
 msgid "_Undo Move"
 msgstr "நகர்வினை மறை (_U)"
 
-#: ../libgnomeui/gnome-app-helper.c:264
+#: ../libgnomeui/gnome-app-helper.c:263
 msgid "Undo the last move"
 msgstr "கடைசி நகர்வினை மறை"
 
-#: ../libgnomeui/gnome-app-helper.c:268
+#: ../libgnomeui/gnome-app-helper.c:267
 msgid "_Redo Move"
 msgstr "நகர்வினை மீளச்செய் (_R)"
 
-#: ../libgnomeui/gnome-app-helper.c:269
+#: ../libgnomeui/gnome-app-helper.c:268
 msgid "Redo the undone move"
 msgstr "கவில்செய்த செயலை மீண்டும் செய்"
 
-#: ../libgnomeui/gnome-app-helper.c:273
+#: ../libgnomeui/gnome-app-helper.c:272
 msgid "_Hint"
 msgstr "_குறிப்பிடு"
 
-#: ../libgnomeui/gnome-app-helper.c:274
+#: ../libgnomeui/gnome-app-helper.c:273
 msgid "Get a hint for your next move"
 msgstr "உங்களின் அடுத்த நகர்வுக்கு குறிப்பிடு பெறவும்"
 
 #. 30
-#: ../libgnomeui/gnome-app-helper.c:279
+#: ../libgnomeui/gnome-app-helper.c:278
 msgid "_Scores..."
 msgstr "_புள்ளிகள்..."
 
-#: ../libgnomeui/gnome-app-helper.c:280
+#: ../libgnomeui/gnome-app-helper.c:279
 msgid "View the scores"
 msgstr "புள்ளிகளை பார்க்கவும்"
 
-#: ../libgnomeui/gnome-app-helper.c:284
+#: ../libgnomeui/gnome-app-helper.c:283
 msgid "_End Game"
 msgstr "விளையாட்டை முடி (_E)"
 
-#: ../libgnomeui/gnome-app-helper.c:285
+#: ../libgnomeui/gnome-app-helper.c:284
 msgid "End the current game"
 msgstr "தற்போதைய விளையாட்டை முடித்திடு"
 
-#: ../libgnomeui/gnome-app-helper.c:1147
+#: ../libgnomeui/gnome-app-helper.c:1146
 msgid "_Contents"
 msgstr "_உள்ளடக்கங்கள்"
 
-#: ../libgnomeui/gnome-app-helper.c:1150
+#: ../libgnomeui/gnome-app-helper.c:1149
 msgid "View help for this application"
 msgstr "இன்நிரலுக்கான உதவியைப் பார்க்கவும்"
 
-#: ../libgnomeui/gnome-app-helper.c:2587
+#: ../libgnomeui/gnome-app-helper.c:2586
 msgid "Text Below Icons"
 msgstr "குறும்படங்களுக்குக் கீழ் உரை"
 
-#: ../libgnomeui/gnome-app-helper.c:2588
+#: ../libgnomeui/gnome-app-helper.c:2587
 msgid "Priority Text Beside Icons"
 msgstr "குறும்படங்களுக்கு அருகில் முன்னுரிமை உரை"
 
-#: ../libgnomeui/gnome-app-helper.c:2589
+#: ../libgnomeui/gnome-app-helper.c:2588
 msgid "Icons Only"
 msgstr "குறும்படங்கள் மட்டும்"
 
-#: ../libgnomeui/gnome-app-helper.c:2590
+#: ../libgnomeui/gnome-app-helper.c:2589
 msgid "Text Only"
 msgstr "உரை மட்டும்"
 
-#: ../libgnomeui/gnome-app-helper.c:2651
+#: ../libgnomeui/gnome-app-helper.c:2650
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "இயல்பான கணினி மேசையை பயன்படுத்தவும் (%s)"
@@ -627,35 +628,35 @@ msgstr "நிரல் எண்"
 msgid "The application ID string"
 msgstr "நிரலின் அடையாள சரம்"
 
-#: ../libgnomeui/gnome-appbar.c:741
+#: ../libgnomeui/gnome-appbar.c:743
 msgid "Has Progress"
 msgstr "முன்னேற்றம் உண்டு"
 
-#: ../libgnomeui/gnome-appbar.c:742
+#: ../libgnomeui/gnome-appbar.c:744
 msgid "Create a progress widget."
 msgstr "முன்னேற்ற விட்செட் ஒன்றை உருவாக்கு."
 
-#: ../libgnomeui/gnome-appbar.c:749
+#: ../libgnomeui/gnome-appbar.c:751
 msgid "Has Status"
 msgstr "நிகழ்நிலை உண்டு"
 
-#: ../libgnomeui/gnome-appbar.c:750
+#: ../libgnomeui/gnome-appbar.c:752
 msgid "Create a status widget."
 msgstr "நிகழ்நிலை விட்செட் உருவாக்கு."
 
-#: ../libgnomeui/gnome-appbar.c:757
+#: ../libgnomeui/gnome-appbar.c:759
 msgid "Interactivity"
 msgstr "ஊடாடுதல்"
 
-#: ../libgnomeui/gnome-appbar.c:758
+#: ../libgnomeui/gnome-appbar.c:760
 msgid "Level of user activity required."
 msgstr "வேண்டிய பயனர் செயற்பாடு அளவு."
 
-#: ../libgnomeui/gnome-authentication-manager.c:80
+#: ../libgnomeui/gnome-authentication-manager.c:82
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "உங்கள் http பதிவாணைக்கு பெயரும் கடவுச்சொல்லும் வேண்டும்.\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:81
+#: ../libgnomeui/gnome-authentication-manager.c:83
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -664,145 +665,145 @@ msgstr ""
 "\"%s\" அணுகலுக்கு நீங்கள் கடவுச்சொல் வழங்கவேண்டும்.\n"
 "%s"
 
-#: ../libgnomeui/gnome-authentication-manager.c:84
+#: ../libgnomeui/gnome-authentication-manager.c:86
 msgid "Your password will be transmitted unencrypted."
 msgstr "உங்கள் கடவுச்சொல் மறைக்குறியாக செலுத்தம் செய்யப்படாது."
 
-#: ../libgnomeui/gnome-authentication-manager.c:85
+#: ../libgnomeui/gnome-authentication-manager.c:87
 msgid "Your password will be transmitted encrypted."
 msgstr "உங்கள் கடவுச்சொல் மறைக்குறியாக அனுப்பப்படும்."
 
-#: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:307
+#: ../libgnomeui/gnome-authentication-manager.c:90
+#: ../libgnomeui/gnome-authentication-manager.c:309
 msgid "Authentication Required"
 msgstr "பெயர்-கடவுச்சொல் வேண்டும்"
 
 #. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
-#: ../libgnomeui/gnome-authentication-manager.c:299
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "%s டொமைன் ஐ அணுக %s ஆக உள்நுழைந்திருக்க வேண்டும்\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:301
+#: ../libgnomeui/gnome-authentication-manager.c:303
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "%s அணுகலுக்கு நீங்கள் கடவுச்சொல் வழங்கவேண்டும்\n"
 
-#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "Specify session management ID"
 msgstr "அமர்வு மேலாண் எண்ணை குறிப்பிடு"
 
-#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "ID"
 msgstr "எண்"
 
-#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "Specify prefix of saved configuration"
 msgstr "சேமித்த அமைப்பின் முற்சேர்க்கையை குறிப்பிடு"
 
-#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "PREFIX"
 msgstr "முற்சேர்க்கை"
 
-#: ../libgnomeui/gnome-client.c:908 ../libgnomeui/gnome-client.c:924
+#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
 msgstr "அமர்வு மேலாளருடன் இருக்கும் இணைப்பை முடக்கு செய்"
 
-#: ../libgnomeui/gnome-client.c:1034
+#: ../libgnomeui/gnome-client.c:1014
 #, fuzzy
 msgid "Session management:"
 msgstr "அமர்வு மேலாண்மை"
 
-#: ../libgnomeui/gnome-client.c:1035
+#: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
 msgstr "அமர்வு மேலாண்மை விருப்பங்களை காட்டு"
 
-#: ../libgnomeui/gnome-client.c:1047
+#: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
 msgstr "அமர்வு மேலாண்மை"
 
-#: ../libgnomeui/gnome-client.c:2572
+#: ../libgnomeui/gnome-client.c:2571
 msgid "Cancel Logout"
 msgstr "முடித்தலை நிறுத்து"
 
-#: ../libgnomeui/gnome-color-picker.c:414
+#: ../libgnomeui/gnome-color-picker.c:412
 msgid "Received invalid color data\n"
 msgstr "பிழையான வண்ணத் தரவு கிடைக்கப்பட்டுள்ளது\n"
 
-#: ../libgnomeui/gnome-color-picker.c:465
+#: ../libgnomeui/gnome-color-picker.c:466
 msgid "Open a dialog to specify the color"
 msgstr "வண்ணத்தை தெரிவு செய்வதட்கு ஒர் உரையாடலைத் திறக்கவும்"
 
-#: ../libgnomeui/gnome-color-picker.c:487
+#: ../libgnomeui/gnome-color-picker.c:488
 msgid "Pick a color"
 msgstr "ஒரு நிறத்தை தேர்ந்தெடு"
 
-#: ../libgnomeui/gnome-dateedit.c:491 ../libgnomeui/gnome-dateedit.c:788
+#: ../libgnomeui/gnome-dateedit.c:493 ../libgnomeui/gnome-dateedit.c:790
 msgid "Time"
 msgstr "நேரம்"
 
-#: ../libgnomeui/gnome-dateedit.c:492
+#: ../libgnomeui/gnome-dateedit.c:494
 msgid "The time currently selected"
 msgstr "தற்போது தெறிவுசெய்யப்பட்டுள்ள நேரம்"
 
-#: ../libgnomeui/gnome-dateedit.c:504
+#: ../libgnomeui/gnome-dateedit.c:506
 msgid "DateEdit Flags"
 msgstr "DateEdit கொடிகள்"
 
-#: ../libgnomeui/gnome-dateedit.c:505
+#: ../libgnomeui/gnome-dateedit.c:507
 msgid "Flags for how DateEdit looks"
 msgstr "DateEdit எப்படி காண்பிக்கப்படும் என்பதன் கொடிகள்"
 
-#: ../libgnomeui/gnome-dateedit.c:514
+#: ../libgnomeui/gnome-dateedit.c:516
 msgid "Lower Hour"
 msgstr "கீழ் அரை-மணி"
 
-#: ../libgnomeui/gnome-dateedit.c:515
+#: ../libgnomeui/gnome-dateedit.c:517
 msgid "Lower hour in the time popup selector"
 msgstr "நேரம் தெரிவியில் கீழ் மணி"
 
-#: ../libgnomeui/gnome-dateedit.c:525
+#: ../libgnomeui/gnome-dateedit.c:527
 msgid "Upper Hour"
 msgstr "மேல் அரை-மணி"
 
-#: ../libgnomeui/gnome-dateedit.c:526
+#: ../libgnomeui/gnome-dateedit.c:528
 msgid "Upper hour in the time popup selector"
 msgstr "நேரம் தெரிவியில் மேல் மணி"
 
-#: ../libgnomeui/gnome-dateedit.c:536
+#: ../libgnomeui/gnome-dateedit.c:538
 msgid "Initial Time"
 msgstr "தொடக்க நேரம்"
 
-#: ../libgnomeui/gnome-dateedit.c:537
+#: ../libgnomeui/gnome-dateedit.c:539
 msgid "The initial time"
 msgstr "தொடக்க நேரம்"
 
-#: ../libgnomeui/gnome-dateedit.c:751 ../libgnomeui/gnome-scores.c:97
+#: ../libgnomeui/gnome-dateedit.c:753 ../libgnomeui/gnome-scores.c:96
 msgid "Date"
 msgstr "திகதி"
 
-#: ../libgnomeui/gnome-dateedit.c:764
+#: ../libgnomeui/gnome-dateedit.c:766
 msgid "Select Date"
 msgstr "திகதியை தெரிவுசெய்யவும்"
 
-#: ../libgnomeui/gnome-dateedit.c:764
+#: ../libgnomeui/gnome-dateedit.c:766
 msgid "Select the date from a calendar"
 msgstr "பஞ்சாங்கத்திலிருந்து திகதியை தெரிவுசெய்"
 
 #. Calendar label, only shown if the date editor has a time field
-#: ../libgnomeui/gnome-dateedit.c:775
+#: ../libgnomeui/gnome-dateedit.c:777
 msgid "Calendar"
 msgstr "பஞ்சாங்கம்"
 
-#: ../libgnomeui/gnome-dateedit.c:796
+#: ../libgnomeui/gnome-dateedit.c:798
 msgid "Select Time"
 msgstr "நேரத்தை தெரிவுசெய்யவும்"
 
-#: ../libgnomeui/gnome-dateedit.c:796
+#: ../libgnomeui/gnome-dateedit.c:798
 msgid "Select the time from a list"
 msgstr "ஒர்ப் பட்டியிலிருந்து நேரத்தை தெரிவுசெய்"
 
-#: ../libgnomeui/gnome-dateedit.c:1015
+#: ../libgnomeui/gnome-dateedit.c:1017
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date பயன்படுத்த வேண்டாம், gnome_date_edit_get_time "
@@ -885,7 +886,7 @@ msgstr "உள்ளடக்கத்தின் பின்னணி வண�
 
 #: ../libgnomeui/gnome-druid-page-standard.c:202
 msgid "Contents Background color as a GdkColor"
-msgstr " Gdநிறமாக உள்ளடக்கத்தின்க பின்னணி வண்ணம்"
+msgstr " Gdkநிறமாக உள்ளடக்கத்தின்க பின்னணி வண்ணம்"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:209
 msgid "Contents Background color set"
@@ -916,24 +917,24 @@ msgstr "சின்னத்தின் பின்னணி வண்ணம�
 msgid "Logo Background color is set"
 msgstr "சின்னத்தின் பின்னணி வண்ணம் அமைக்கப்பட்டுள்ளது"
 
-#: ../libgnomeui/gnome-druid.c:154
+#: ../libgnomeui/gnome-druid.c:153
 msgid "Show Finish"
 msgstr "முடிவைக் காண்பி"
 
-#: ../libgnomeui/gnome-druid.c:155
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "'அடுத்த' பொத்தானுக்காப் பதிலாக 'முடி' பொத்தான் காட்டுக"
 
-#: ../libgnomeui/gnome-druid.c:162
+#: ../libgnomeui/gnome-druid.c:161
 msgid "Show Help"
 msgstr "உதவியைக் காண்பிக"
 
-#: ../libgnomeui/gnome-druid.c:163
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show the 'Help' button"
 msgstr "'உதவி' பொத்தானைக் காண்பி"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
+#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
 msgstr "வரலாறு எண்"
 
@@ -951,7 +952,7 @@ msgid ""
 "list."
 msgstr "கோப்பு உள்ளீட்டின் தனிப்பட்ட அடையாளம். இது வரலாற்றை சேமிக்க உதவும்"
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
+#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr "மேலோடு உரையாடல் தலைப்பு"
 
@@ -979,7 +980,7 @@ msgstr "Modal"
 msgid "Whether the Browse file window should be modal."
 msgstr "கோப்பை திற சாளரம் பொதுமாதிரியாக இருக்க வேண்டுமா"
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
+#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "கோப்புப் பெயர்"
 
@@ -997,7 +998,7 @@ msgstr "கோப்பு 'மேலோடு' சாளரத்தின் �
 
 #: ../libgnomeui/gnome-file-entry.c:287
 msgid "GnomeEntry"
-msgstr "GnomeEntry"
+msgstr "கனோம் நுழைவு"
 
 #: ../libgnomeui/gnome-file-entry.c:288
 msgid ""
@@ -1010,7 +1011,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:298
 msgid "GtkEntry"
-msgstr "GtkEntry"
+msgstr "Gtk நுழைவு"
 
 #: ../libgnomeui/gnome-file-entry.c:299
 msgid ""
@@ -1045,19 +1046,19 @@ msgstr "கோப்பு தேர்வாளர் செய்யும் 
 msgid "Select file"
 msgstr "கோப்பு தெரிவுசெய்க"
 
-#: ../libgnomeui/gnome-file-entry.c:817
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
 msgstr "பாதை"
 
-#: ../libgnomeui/gnome-file-entry.c:817
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
 msgstr "கோப்பின் பாதை"
 
-#: ../libgnomeui/gnome-file-entry.c:844
+#: ../libgnomeui/gnome-file-entry.c:843
 msgid "_Browse..."
 msgstr "_மேலோடு..."
 
-#: ../libgnomeui/gnome-file-entry.c:845
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "Pop up a file selector to choose a file"
 msgstr "கோப்பு தெரிவுசெய்வதற்கு 'கோப்பு தெரிவு உரையாடல்' காட்டுக"
 
@@ -1162,39 +1163,39 @@ msgstr ""
 "%s க்கான அமைப்புத்தகவலை சேமிக்கும் போது அல்லது ஏற்றும் போது பிழை நேர்ந்தது. சில "
 "அமைப்புகள் சரியாக வேலை செய்யாமல் போகலாம்"
 
-#: ../libgnomeui/gnome-href.c:123
+#: ../libgnomeui/gnome-href.c:102
 msgid "URL"
 msgstr "இணைய அஞ்சல் [இ.அ] (URL)"
 
-#: ../libgnomeui/gnome-href.c:124
+#: ../libgnomeui/gnome-href.c:103
 msgid "The URL that GnomeHRef activates"
 msgstr "GnomeHRef தொடக்கப்படும் இணைய அஞ்சல் (URL)"
 
-#: ../libgnomeui/gnome-href.c:131
+#: ../libgnomeui/gnome-href.c:110
 msgid "Text"
 msgstr "உரை"
 
-#: ../libgnomeui/gnome-href.c:132
+#: ../libgnomeui/gnome-href.c:111
 msgid "The text on the button"
 msgstr "பொத்தான் மேல் உள்ள உரை"
 
-#: ../libgnomeui/gnome-href.c:133
+#: ../libgnomeui/gnome-href.c:112
 msgid "End World Hunger"
 msgstr "உகுகப் பசியை நீக்குக"
 
-#: ../libgnomeui/gnome-href.c:139
+#: ../libgnomeui/gnome-href.c:118
 msgid "Link color"
 msgstr "இணைப்பின் வண்ணம்"
 
-#: ../libgnomeui/gnome-href.c:140
+#: ../libgnomeui/gnome-href.c:119
 msgid "Color used to draw the link"
 msgstr "இணைப்பை வரைவதட்கு பயண்படுத்தப்படும் வண்ணம்"
 
-#: ../libgnomeui/gnome-href.c:171
+#: ../libgnomeui/gnome-href.c:150
 msgid "This button will take you to the URI that it displays."
 msgstr "இந்த பட்டன் நீங்கள் பார்க்க வேண்டிய URI க்கு உங்களை அழைத்துச்செல்லும்"
 
-#: ../libgnomeui/gnome-href.c:394
+#: ../libgnomeui/gnome-href.c:386
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1202,33 +1203,33 @@ msgstr ""
 "முன்னிருப்பு இணைய உலாவியை தொடங்கும் போது பிழை.\n"
 "உங்கள் 'விருப்பமான பயன்பாடு'களின் முன்னுரிமை கருவியில் அமைவுகளை சரிபார்க்கவும்."
 
-#: ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr "சின்னத்தின் உள்ளீட்டிற்கான தனி அடையாளம். இது வரலாற்றை பட்டியலில் சேமிக்க பயன்படும்"
 
-#: ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
 msgstr "குறும்படங்களுக்காக மேலோடு உரையாடலின் தலைப்பு"
 
-#: ../libgnomeui/gnome-icon-entry.c:195
+#: ../libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
 msgstr "Pixmap அடைவு"
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
 msgstr "குறும்படங்களுக்காக தேடப்படும் அடைவு"
 
-#: ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
 msgstr "குறும்பட நுழைவில் காண்பிக்கப்பட வேண்டிய கோப்புப் பெயர்."
 
-#: ../libgnomeui/gnome-icon-entry.c:212
+#: ../libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
 msgstr "தெரிவுசெய்யும் உரையாடல்"
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1236,39 +1237,39 @@ msgstr ""
 "சின்னம் தேர்வு உரையாடல் பெட்டி. இந்த பண்பை பயன்படுத்தி திருத்த மற்றும் கேள்விகள் கேட்க "
 "GtkDialog ஐ பெறலாம்."
 
-#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
+#: ../libgnomeui/gnome-icon-entry.c:319 ../libgnomeui/gnome-icon-entry.c:1003
 msgid "No Icon"
 msgstr "குறும்படம் இல்லை"
 
-#: ../libgnomeui/gnome-icon-entry.c:774
+#: ../libgnomeui/gnome-icon-entry.c:773
 msgid "Icon selection dialog"
 msgstr "குறும்படத் தேர்ந்தெடுக்கும் உரையாடல்"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "This dialog box lets you select an icon."
 msgstr "உரையாடலில் குறும்படம் தெரிவுசெய்யலாம்."
 
-#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
+#: ../libgnomeui/gnome-icon-entry.c:780 ../libgnomeui/gnome-icon-entry.c:1006
 msgid "Icon Selector"
 msgstr "குறும்படத் தேர்ந்தெடுப்பவர்"
 
-#: ../libgnomeui/gnome-icon-entry.c:782
+#: ../libgnomeui/gnome-icon-entry.c:781
 msgid "Please pick the icon you want."
 msgstr "உங்களுக்குத் தேவையான குறும்படத்தை தேர்ந்தெடுக்கவும்"
 
-#: ../libgnomeui/gnome-icon-entry.c:1008
+#: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "This button will open a window to let you select an icon."
 msgstr "பொத்தான், குறும்படங்களை தெரிவுசெய்வதற்கான சாளரத்தை திறக்கும்."
 
-#: ../libgnomeui/gnome-icon-entry.c:1028
+#: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
 msgstr "மேலோடு..."
 
-#: ../libgnomeui/gnome-icon-entry.c:1031
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Icon path"
 msgstr "குறும்படத்தின் பாதை"
 
-#: ../libgnomeui/gnome-icon-entry.c:1032
+#: ../libgnomeui/gnome-icon-entry.c:1033
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1323,17 +1324,17 @@ msgstr "_கடவுச் சொல்:"
 #: ../libgnomeui/gnome-password-dialog.c:219
 #, fuzzy
 msgid "_New password:"
-msgstr "_கடவுச் சொல்:"
+msgstr "_புதி கடவுச் சொல்:"
 
 #: ../libgnomeui/gnome-password-dialog.c:220
 #, fuzzy
 msgid "Con_firm password:"
-msgstr "_கடவுச் சொல்:"
+msgstr "_கடவுச் சொல்லை உறுதிச்செய்:"
 
 #: ../libgnomeui/gnome-password-dialog.c:223
 #, fuzzy
 msgid "Password quality:"
-msgstr "_கடவுச் சொல்:"
+msgstr "_கடவுச் சொல் தரம்:"
 
 #: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
@@ -1349,7 +1350,7 @@ msgstr "பயனராக இணை: (_s)"
 
 #: ../libgnomeui/gnome-password-dialog.c:438
 msgid "_Forget password immediately"
-msgstr ""
+msgstr "கடவுச்சொல்லை உடனே மறந்துவிடு"
 
 #: ../libgnomeui/gnome-password-dialog.c:444
 #, fuzzy
@@ -1358,26 +1359,26 @@ msgstr "இந்த அமர்விற்கு கடவுச்சொல�
 
 #: ../libgnomeui/gnome-password-dialog.c:450
 msgid "_Remember forever"
-msgstr ""
+msgstr "எப்போதும் ஞாபகமிருக்கட்டும்"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:114
+#: ../libgnomeui/gnome-pixmap-entry.c:112
 msgid "Do Preview"
 msgstr "முன்காட்டு"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:115
+#: ../libgnomeui/gnome-pixmap-entry.c:113
 msgid "Whether the pixmap entry should have a preview."
 msgstr "பிக்ஸ்படம் நுளைவுக்கு முன்காட்சி இருக்கவேண்டுமா."
 
-#: ../libgnomeui/gnome-pixmap-entry.c:189
+#: ../libgnomeui/gnome-pixmap-entry.c:187
 #: ../libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "உருவம் கிடையாது"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:206
+#: ../libgnomeui/gnome-pixmap-entry.c:204
 msgid "Image Preview"
 msgstr "உருவ முன்காட்சி"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:207
+#: ../libgnomeui/gnome-pixmap-entry.c:205
 msgid "A preview of the image currently specified"
 msgstr "தற்போது குறிப்பிட்ட உருவத்தின் முன்காட்சி"
 
@@ -1389,26 +1390,26 @@ msgstr "hbox ஒன்றைக் காணவில்லை, சாதார�
 msgid "Preview"
 msgstr "முன்காட்சி"
 
-#: ../libgnomeui/gnome-scores.c:78
+#: ../libgnomeui/gnome-scores.c:77
 msgid "Top Ten"
 msgstr "முதல் பத்து"
 
-#: ../libgnomeui/gnome-scores.c:91
+#: ../libgnomeui/gnome-scores.c:90
 msgid "User"
 msgstr "பயனர்"
 
-#: ../libgnomeui/gnome-scores.c:94
+#: ../libgnomeui/gnome-scores.c:93
 msgid "Score"
 msgstr "புள்ளி"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: ../libgnomeui/gnome-scores.c:194
+#: ../libgnomeui/gnome-scores.c:193
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
 
-#: ../libgnomeui/gnome-scores.c:395
+#: ../libgnomeui/gnome-scores.c:394
 msgid "Sans 14"
 msgstr "Sans 14"
 
@@ -1440,79 +1441,66 @@ msgstr "உள்தள்ளாதே"
 msgid "About"
 msgstr "பற்றி"
 
-#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
+#: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:172
 msgid "Disable Crash Dialog"
 msgstr "முறிவு உரையாடலை முடக்குக"
 
-#: ../libgnomeui/gnome-ui-init.c:129
-msgid "X display to use"
-msgstr "உபயோகிக்க வேண்டிய X காட்சி"
-
-#: ../libgnomeui/gnome-ui-init.c:129
-msgid "DISPLAY"
-msgstr "காட்சி"
-
-#: ../libgnomeui/gnome-ui-init.c:173
+#: ../libgnomeui/gnome-ui-init.c:155
 #, fuzzy
 msgid "GNOME GUI Library:"
 msgstr "கனோம் GUI நூலகம்"
 
-#: ../libgnomeui/gnome-ui-init.c:174
+#: ../libgnomeui/gnome-ui-init.c:156
 msgid "Show GNOME GUI options"
-msgstr "GNOME GUI விருப்பங்களை காட்டு"
+msgstr "கனோம் GUI விருப்பங்களை காட்டு"
 
-#: ../libgnomeui/gnome-ui-init.c:186
+#: ../libgnomeui/gnome-ui-init.c:174
+msgid "X display to use"
+msgstr "உபயோகிக்க வேண்டிய X காட்சி"
+
+#: ../libgnomeui/gnome-ui-init.c:174
+msgid "DISPLAY"
+msgstr "காட்சி"
+
+#: ../libgnomeui/gnome-ui-init.c:179
 msgid "GNOME GUI Library"
 msgstr "கனோம் GUI நூலகம்"
 
-#: ../libgnomeui/gnome-ui-init.c:252
+#: ../libgnomeui/gnome-ui-init.c:244
 msgid "Could not open link"
 msgstr "இணைப்பினை திறக்க முடியவில்லை"
-
-#. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:838
-#, c-format
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "பல பகுதியாக்கல் பிழைகள் நடைபெற்றுள்ளன; பிழை உரையாடலை காண்பிக்க முடியாது\n"
-
-#. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:853
-#, c-format
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"பகுதியாக்கல் பழுது!\n"
-"முறிவு உரையாடலை காண்பிக்க முடியாது\n"
-
-#: ../libgnomeui/gnome_segv.c:82
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "புழங்குதல்: gnome_segv பயன்பாடு_பெயர் signum\n"
-
-#: ../libgnomeui/gnome_segv.c:94
-#, c-format
-msgid "Debugging %s"
-msgstr ""
-
-#: ../libgnomeui/gnome_segv.c:144
-#, fuzzy, c-format
-msgid ""
-"<b>The application %s has crashed.</b>\n"
-"\n"
-"Please install <b>bug-buddy</b>, the\n"
-"GNOME crash report tool, which enables you\n"
-"to send the developers detailed information\n"
-"about the error.\n"
-msgstr ""
-"<b>பயன்பாடு %s அழிக்கப்பட்டது.</b>\n"
-"\n"
-"எனினும் நீங்கள் <b>bug-buddy</b>ஐ நிறுவவில்லை, \n"
-"அது GNOME அழித்தல் அறிக்கையிடும் கருவி. நீங்கள் உதவ விரும்பினால்\n"
-" அதனை நிறுவவும்\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "சோதனையிலிருந்து வெளியேறவும்"
+
+#~ msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+#~ msgstr "பல பகுதியாக்கல் பிழைகள் நடைபெற்றுள்ளன; பிழை உரையாடலை காண்பிக்க முடியாது\n"
+
+#~ msgid ""
+#~ "Segmentation fault!\n"
+#~ "Cannot display crash dialog\n"
+#~ msgstr ""
+#~ "பகுதியாக்கல் பழுது!\n"
+#~ "முறிவு உரையாடலை காண்பிக்க முடியாது\n"
+
+#~ msgid "Usage: gnome_segv2 appname signum\n"
+#~ msgstr "புழங்குதல்: gnome_segv பயன்பாடு_பெயர் signum\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "<b>The application %s has crashed.</b>\n"
+#~ "\n"
+#~ "Please install <b>bug-buddy</b>, the\n"
+#~ "GNOME crash report tool, which enables you\n"
+#~ "to send the developers detailed information\n"
+#~ "about the error.\n"
+#~ msgstr ""
+#~ "<b>பயன்பாடு %s அழிக்கப்பட்டது.</b>\n"
+#~ "\n"
+#~ "எனினும் நீங்கள் <b>bug-buddy</b>ஐ நிறுவவில்லை, \n"
+#~ "அது GNOME அழித்தல் அறிக்கையிடும் கருவி. நீங்கள் உதவ விரும்பினால்\n"
+#~ " அதனை நிறுவவும்\n"
 
 #~ msgid "Save password in _keyring"
 #~ msgstr "keyringல் கடவுச்சொல்லை சேமிக்கவும் (_k)"
