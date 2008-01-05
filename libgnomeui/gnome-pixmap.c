@@ -124,7 +124,6 @@ gnome_pixmap_new_from_file_at_size (const gchar *filename, gint width, gint heig
 
 	g_return_val_if_fail (filename != NULL, NULL);
 
-        error = NULL;
 	pixbuf = gdk_pixbuf_new_from_file (filename, &error);
         if (error != NULL) {
                 g_warning (G_STRLOC ": cannot open %s: %s",
@@ -252,7 +251,6 @@ gnome_pixmap_load_file_at_size (GnomePixmap *gpixmap,
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));
 	g_return_if_fail (filename != NULL);
 
-        error = NULL;
 	pixbuf = gdk_pixbuf_new_from_file (filename, &error);
         if (error != NULL) {
                 g_warning (G_STRLOC ": cannot open %s: %s",

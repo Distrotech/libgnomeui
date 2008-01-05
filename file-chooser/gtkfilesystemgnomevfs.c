@@ -2547,7 +2547,6 @@ gtk_file_system_gnome_vfs_insert_bookmark (GtkFileSystem     *file_system,
 
   profile_start ("start", (char *) path);
 
-  err = NULL;
   if (!bookmark_list_read (&bookmarks, &err) && err->code != G_FILE_ERROR_NOENT)
     {
       g_propagate_error (error, err);
