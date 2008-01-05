@@ -120,7 +120,7 @@ gnome_pixmap_new_from_file_at_size (const gchar *filename, gint width, gint heig
 {
 	GtkWidget *retval = NULL;
 	GdkPixbuf *pixbuf;
-        GError *error;
+        GError *error = NULL;
 
 	g_return_val_if_fail (filename != NULL, NULL);
 
@@ -246,7 +246,7 @@ gnome_pixmap_load_file_at_size (GnomePixmap *gpixmap,
 				int width, int height)
 {
 	GdkPixbuf *pixbuf;
-        GError *error;
+        GError *error = NULL;
 
 	g_return_if_fail (gpixmap != NULL);
 	g_return_if_fail (GNOME_IS_PIXMAP (gpixmap));

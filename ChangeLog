@@ -1,3 +1,10 @@
+2008-01-05  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* file-chooser/gtkfilesystemgnomevfs.c:
+	(gtk_file_system_gnome_vfs_insert_bookmark):
+	* libgnomeui/gnome-pixmap.c: (gnome_pixmap_new_from_file_at_size),
+	(gnome_pixmap_load_file_at_size): Init all GError's to NULL.
+
 2007-12-20  Christian Persch  <chpe@gnome.org>
 
 	* libgnomeui/gnome-stock-icons.c:

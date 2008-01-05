@@ -2543,7 +2543,7 @@ gtk_file_system_gnome_vfs_insert_bookmark (GtkFileSystem     *file_system,
   GSList *l;
   char *uri;
   gboolean result;
-  GError *err;
+  GError *err = NULL;
 
   profile_start ("start", (char *) path);
 
