@@ -1,3 +1,9 @@
+2008-01-14  Carlos Garnacho  <carlos@imendio.com>
+
+	* file-chooser/gtkfilesystemgio.[ch]: Add Gio GtkFileSystem
+	implementation. #509262
+	* configure.in, file-chooser/Makefile.am: Add autofoo.
+
 2008-01-05  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* file-chooser/gtkfilesystemgnomevfs.c:
