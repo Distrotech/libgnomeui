@@ -1,3 +1,10 @@
+===================== 2.21.x ======================
+
+2008-01-14  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* NEWS: Update
+	* configure.in: 2.21.5.
+
 2008-01-14  Carlos Garnacho  <carlos@imendio.com>
 
 	* file-chooser/gtkfilesystemgio.[ch]: Add Gio GtkFileSystem

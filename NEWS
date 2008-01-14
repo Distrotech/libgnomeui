@@ -1,5 +1,6 @@
-libgnomeui 2.21.4
+libgnomeui 2.21.5
 
+* Gio based GtkFileSystem implementation (#509262) 
 * Remove MD5 code, and use GChecksum (#501866)
 * Don't use GConf for getting the toolbar style (#497380)
 * Fall back to DESKTOP_AUTOSTART_ID as startup ID (#496571)
