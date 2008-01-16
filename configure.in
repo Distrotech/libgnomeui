@@ -27,7 +27,7 @@ m4_define([glib_required_version],           [2.15.0])
 m4_define([gtk_required_version],            [2.11.5])
 m4_define([gnomevfs_required_version],       [2.7.3])
 m4_define([libglade_required_version],       [2.0.0])
-m4_define([gnome_keyring_required_version],       [0.4])
+m4_define([gnome_keyring_required_version],  [0.4])
 m4_define([gio_required_version],            [2.15.2])
 
 dnl libtool versioning from libgnome
@@ -269,16 +269,6 @@ AC_CHECK_HEADER(crt_externs.h, have_crt_externs=yes)
 if test x$have_crt_externs = xyes; then
   AC_DEFINE(HAVE_CRT_EXTERNS_H, 1, [whether we have crt_externs.h])
 fi
-
-dnl For file-chooser/sucky-desktop-item.c.
-AC_ARG_WITH(kde-datadir, [  --with-kde-datadir=DIR  Location of KDE data])
-if test "x$with_kde_datadir" = x ; then
-  kde_datadir=/usr/share
-else
-  kde_datadir=$with_kde_datadir
-fi
-AC_DEFINE_UNQUOTED(KDE_ICONDIR, "$kde_datadir/icons",
-                   [The KDE icon directory])
 
 dnl This is installed from GTK+ 2.0's gdk-pixbuf
 AC_PATH_PROG(GDK_PIXBUF_CSOURCE, gdk-pixbuf-csource)
