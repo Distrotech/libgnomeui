@@ -11,7 +11,6 @@ current_minus_age=`expr @LIBGNOMEUI_CURRENT@ - @LIBGNOMEUI_AGE@`
 cd @prefix@
 rm $ZIP
 
-
 zip $ZIP -@ <<EOF
 bin/libgnomeui-2-$current_minus_age.dll
 lib/gtk-2.0/2.4.0/filesystems/libgnome-vfs.dll
@@ -24,7 +23,11 @@ share/pixmaps/gnome-question.png
 share/pixmaps/gnome-warning.png
 EOF
 
-zip $ZIP lib/locale/*/LC_MESSAGES/libgnomeui-2.0.mo
+if [ -f share/locale/de/LC_MESSAGES/libgnomeui-2.0.mo ]; then
+  zip $ZIP share/locale/*/LC_MESSAGES/libgnomeui-2.0.mo
+else
+  zip $ZIP lib/locale/*/LC_MESSAGES/libgnomeui-2.0.mo
+fi
 
 rm $DEVZIP
 zip -r $DEVZIP -@ <<EOF

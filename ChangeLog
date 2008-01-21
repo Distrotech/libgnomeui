@@ -1,3 +1,8 @@
+2008-01-22  Tor Lillqvist  <tml@novell.com>
+
+	* libgnomeui-zip.in: Look for catalogs in share/locale first, as
+	that is where they will be with a properly built GNU gettext.
+
 2008-01-16  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* Makefile.am: 
