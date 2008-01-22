@@ -1,3 +1,10 @@
+2008-01-23  Tor Lillqvist  <tml@novell.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(gtk_file_system_gnome_vfs_volume_mount): No
+	gnome_vfs_drive_mount() on Win32, at least for now, so bypass this
+	function and call g_warning() on Win32.
+
 2008-01-22  Tor Lillqvist  <tml@novell.com>
 
 	* libgnomeui-zip.in: Look for catalogs in share/locale first, as

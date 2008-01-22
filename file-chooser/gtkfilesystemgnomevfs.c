@@ -1911,6 +1911,7 @@ gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem                    *file_s
 					GtkFileSystemVolumeMountCallback  callback,
 					gpointer                          data)
 {
+#ifndef G_OS_WIN32
   if (GNOME_IS_VFS_DRIVE (volume))
     {
       struct VolumeMountData *op_data;
@@ -1959,6 +1960,9 @@ gtk_file_system_gnome_vfs_volume_mount (GtkFileSystem                    *file_s
       g_warning ("%p is not a valid volume", volume);
       return NULL;
     }
+#else
+  g_warning ("gnome_vfs_drive_mount() not implemented on Win32");
+#endif
 
   return NULL;
 }
