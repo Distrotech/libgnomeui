@@ -13,14 +13,9 @@ rm $ZIP
 
 zip $ZIP -@ <<EOF
 bin/libgnomeui-2-$current_minus_age.dll
-lib/gtk-2.0/2.4.0/filesystems/libgnome-vfs.dll
+lib/gtk-2.0/@GTK_BINARY_VERSION@/filesystems/libgio.dll
 lib/libglade/2.0/libgnome.dll
 share/pixmaps/gnome-about-logo.png
-share/pixmaps/gnome-default-dlg.png
-share/pixmaps/gnome-error.png
-share/pixmaps/gnome-info.png
-share/pixmaps/gnome-question.png
-share/pixmaps/gnome-warning.png
 EOF
 
 if [ -f share/locale/de/LC_MESSAGES/libgnomeui-2.0.mo ]; then
