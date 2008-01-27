@@ -1,4 +1,4 @@
-# translation of libgnomeui.HEAD.po to Arabic
+# translation of libgnomeui.HEAD.ar.po to Arabic
 # translation of libgnomeui.HEAD.ar.po to
 # Copyright (C) 2002 THE libgnomeui.HEAD.ar'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the libgnomeui.po package.
@@ -8,21 +8,21 @@
 # Isam Bayazidi <bayazidi@arabeyes.org>, 2002.
 #  <lumina@silverpen.de>, 2004.
 # Ayman Hourieh <aymanh@gmail.com>, 2004.
-# Khaled Hosny <khaledhosny@eglug.org>, 2006, 2007.
+# Khaled Hosny <khaledhosny@eglug.org>, 2006, 2007, 2008.
 # Djihed Afifi <djihed@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD\n"
+"Project-Id-Version: libgnomeui.HEAD.ar\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-23 21:44+0100\n"
-"PO-Revision-Date: 2007-12-26 21:45+0200\n"
+"PO-Revision-Date: 2008-01-26 17:51+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n>=3 && n<=10 ? 3 : n>=11 && n<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Poedit-Language: Arabic\n"
 
 #: ../demos/mdi_demo.c:128
@@ -44,17 +44,17 @@ msgstr "تلميحة للعنصر 2"
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1036
 #, c-format
 msgid "%s is a link to something that is not a folder"
-msgstr "%s وصلة لشيء ليس مجلّدا"
+msgstr "‏%s وصلة لشيء ليس مجلّدا"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1047
 #, c-format
 msgid "%s is a link without a destination location"
-msgstr "%s وصلة بدون وصول"
+msgstr "‏%s وصلة بدون وِجهة"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1122
 #, c-format
 msgid "%s is not a folder"
-msgstr "%s ليس مجلّدا"
+msgstr "‏%s ليس مجلّدا"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1160
 #, c-format
@@ -112,7 +112,7 @@ msgstr "فشل تحميل الصّورة '%s': السبب مجهول، قد يك
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
-msgstr "شكر"
+msgstr "شكْر"
 
 #: ../libgnomeui/gnome-about.c:231
 msgid "Written by"
@@ -120,7 +120,7 @@ msgstr "كَتَبَهُ"
 
 #: ../libgnomeui/gnome-about.c:246
 msgid "Documented by"
-msgstr "وَثّقَهُ"
+msgstr "وَثّقهُ"
 
 #: ../libgnomeui/gnome-about.c:261
 msgid "Translated by"
@@ -128,7 +128,7 @@ msgstr "تَرجَمَهُ"
 
 #: ../libgnomeui/gnome-about.c:324
 msgid "C_redits"
-msgstr "_شكر"
+msgstr "_شكْر"
 
 #: ../libgnomeui/gnome-about.c:377
 msgid "Program name"
@@ -180,15 +180,15 @@ msgstr "خانة مفردة للمؤلّف"
 
 #: ../libgnomeui/gnome-about.c:418
 msgid "Documenters"
-msgstr "الموثّقون"
+msgstr "المُوَثِّقون"
 
 #: ../libgnomeui/gnome-about.c:419
 msgid "List of people documenting the program"
-msgstr "قائمة موثّقي البرنامج"
+msgstr "قائمة مُوثِّقي البرنامج"
 
 #: ../libgnomeui/gnome-about.c:421
 msgid "Documenter entry"
-msgstr "خانة الموّثق"
+msgstr "خانة المُوثِّق"
 
 #: ../libgnomeui/gnome-about.c:422
 msgid "A single documenter entry"
@@ -196,11 +196,11 @@ msgstr "خانة مفردة للموثّق"
 
 #: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
-msgstr "المترجمون"
+msgstr "شكْر للمترجمين"
 
 #: ../libgnomeui/gnome-about.c:431
 msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "شكر للمترجمين. يجب تعليم هذا النصّ على انه قابل للترجمة"
+msgstr "شكْر للمترجمين. يجب تعليم هذا النصّ على انه قابل للترجمة"
 
 #: ../libgnomeui/gnome-about.c:438
 #: ../libgnomeui/gnome-druid-page-standard.c:129
@@ -230,7 +230,7 @@ msgstr "_ملف/"
 #: ../libgnomeui/gnome-app-helper.c:85
 #: ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr "_تحرير"
+msgstr "_حرّر"
 
 #: ../libgnomeui/gnome-app-helper.c:86
 msgid "_Edit/"
@@ -239,7 +239,7 @@ msgstr "_تحرير/"
 #: ../libgnomeui/gnome-app-helper.c:87
 #: ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "_عرض"
+msgstr "ا_عرض"
 
 #: ../libgnomeui/gnome-app-helper.c:88
 msgid "_View/"
@@ -248,11 +248,11 @@ msgstr "_عرض/"
 #: ../libgnomeui/gnome-app-helper.c:89
 #: ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
-msgstr "إ_عدادات"
+msgstr "الإ_عدادات"
 
 #: ../libgnomeui/gnome-app-helper.c:90
 msgid "_Settings/"
-msgstr "إ_عدادات/"
+msgstr "الإ_عدادات/"
 
 #. If you have more then one New type, use this tree
 #: ../libgnomeui/gnome-app-helper.c:91
