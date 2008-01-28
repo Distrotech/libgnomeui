@@ -1,3 +1,5 @@
+======================= libgnomeui 2.21.90 =====================
+
 2008-01-28  Christian Persch  <chpe@gnome.org>
 
 	* libgnomeui/gnome-authentication-manager.c: Use G_STRFUNC instead of
