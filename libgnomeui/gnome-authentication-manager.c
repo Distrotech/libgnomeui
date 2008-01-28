@@ -141,7 +141,7 @@ authentication_dialog_button_clicked (GtkDialog *dialog,
 				      gint button_number, 
 				      CallbackInfo *info)
 {
-	DEBUG_MSG (("+%s button: %d\n", G_GNUC_FUNCTION, button_number));
+	DEBUG_MSG (("+%s button: %d\n", G_STRFUNC, button_number));
 
 	if (button_number == GTK_RESPONSE_OK) {
 		info->out_args->username 
@@ -158,7 +158,7 @@ authentication_dialog_button_clicked (GtkDialog *dialog,
 static void
 authentication_dialog_destroyed (GtkDialog *dialog, CallbackInfo *info)
 {
-	DEBUG_MSG (("+%s\n", G_GNUC_FUNCTION));
+	DEBUG_MSG (("+%s\n", G_STRFUNC));
 
 	gnome_authentication_manager_dialog_visible--;
 	mark_callback_completed (info);	
@@ -227,7 +227,7 @@ vfs_async_authentication_callback (gconstpointer in, size_t in_size,
 
 	is_proxy_authentication = (user_data == GINT_TO_POINTER (1));
 
-	DEBUG_MSG (("+%s uri:'%s' is_proxy_auth: %u\n", G_GNUC_FUNCTION, in_real->uri, (unsigned) is_proxy_authentication));
+	DEBUG_MSG (("+%s uri:'%s' is_proxy_auth: %u\n", G_STRFUNC, in_real->uri, (unsigned) is_proxy_authentication));
 
 	info = g_new (CallbackInfo, 1);
 
@@ -239,7 +239,7 @@ vfs_async_authentication_callback (gconstpointer in, size_t in_size,
 
 	present_authentication_dialog_nonblocking (info);
 
-	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+	DEBUG_MSG (("-%s\n", G_STRFUNC));
 
 	GDK_THREADS_LEAVE ();
 }
@@ -266,11 +266,11 @@ vfs_authentication_callback (gconstpointer in, size_t in_size,
 
 	is_proxy_authentication = (user_data == GINT_TO_POINTER (1));
 
-	DEBUG_MSG (("+%s uri:'%s' is_proxy_auth: %u\n", G_GNUC_FUNCTION, in_real->uri, (unsigned) is_proxy_authentication));
+	DEBUG_MSG (("+%s uri:'%s' is_proxy_auth: %u\n", G_STRFUNC, in_real->uri, (unsigned) is_proxy_authentication));
 
 	present_authentication_dialog_blocking (is_proxy_authentication, in_real, out_real);
 
-	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+	DEBUG_MSG (("-%s\n", G_STRFUNC));
 
 	GDK_THREADS_LEAVE ();
 }
@@ -392,7 +392,7 @@ full_authentication_dialog_button_clicked (GtkDialog *dialog,
 					   gint button_number, 
 					   FullCallbackInfo *info)
 {
-	DEBUG_MSG (("+%s button: %d\n", G_GNUC_FUNCTION, button_number));
+	DEBUG_MSG (("+%s button: %d\n", G_STRFUNC, button_number));
 
 	full_auth_get_result_from_dialog (GNOME_PASSWORD_DIALOG (dialog),
 					  info->out_args,
@@ -404,7 +404,7 @@ full_authentication_dialog_button_clicked (GtkDialog *dialog,
 static void
 full_authentication_dialog_destroyed (GtkDialog *dialog, FullCallbackInfo *info)
 {
-	DEBUG_MSG (("+%s\n", G_GNUC_FUNCTION));
+	DEBUG_MSG (("+%s\n", G_STRFUNC));
 
 	info->response (info->response_data);
 	g_free (info);
@@ -471,7 +471,7 @@ vfs_async_full_authentication_callback (gconstpointer in, size_t in_size,
 	in_real = (GnomeVFSModuleCallbackFullAuthenticationIn *)in;
 	out_real = (GnomeVFSModuleCallbackFullAuthenticationOut *)out;
 
-	DEBUG_MSG (("+%s uri:'%s' \n", G_GNUC_FUNCTION, in_real->uri));
+	DEBUG_MSG (("+%s uri:'%s' \n", G_STRFUNC, in_real->uri));
 
 	info = g_new (FullCallbackInfo, 1);
 
@@ -482,7 +482,7 @@ vfs_async_full_authentication_callback (gconstpointer in, size_t in_size,
 
 	present_full_authentication_dialog_nonblocking (info);
 
-	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+	DEBUG_MSG (("-%s\n", G_STRFUNC));
 
 	GDK_THREADS_LEAVE ();
 }
@@ -506,11 +506,11 @@ vfs_full_authentication_callback (gconstpointer in, size_t in_size,
 	in_real = (GnomeVFSModuleCallbackFullAuthenticationIn *)in;
 	out_real = (GnomeVFSModuleCallbackFullAuthenticationOut *)out;
 
-	DEBUG_MSG (("+%s uri:'%s'\n", G_GNUC_FUNCTION, in_real->uri));
+	DEBUG_MSG (("+%s uri:'%s'\n", G_STRFUNC, in_real->uri));
 
 	present_full_authentication_dialog_blocking (in_real, out_real);
 
-	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+	DEBUG_MSG (("-%s\n", G_STRFUNC));
 
 	GDK_THREADS_LEAVE ();
 }
@@ -570,7 +570,7 @@ vfs_async_fill_authentication_callback (gconstpointer in, size_t in_size,
 	in_real = (GnomeVFSModuleCallbackFillAuthenticationIn *)in;
 	out_real = (GnomeVFSModuleCallbackFillAuthenticationOut *)out;
 
-	DEBUG_MSG (("+%s uri:'%s' \n", G_GNUC_FUNCTION, in_real->uri));
+	DEBUG_MSG (("+%s uri:'%s' \n", G_STRFUNC, in_real->uri));
 
 	info = g_new (FillCallbackInfo, 1);
 
@@ -589,7 +589,7 @@ vfs_async_fill_authentication_callback (gconstpointer in, size_t in_size,
 						       fill_auth_callback,
 						       info, g_free);
 
-	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+	DEBUG_MSG (("-%s\n", G_STRFUNC));
 }
 
 static void /* GnomeVFSModuleCallback */
@@ -612,7 +612,7 @@ vfs_fill_authentication_callback (gconstpointer in, size_t in_size,
 	in_real = (GnomeVFSModuleCallbackFillAuthenticationIn *)in;
 	out_real = (GnomeVFSModuleCallbackFillAuthenticationOut *)out;
 
-	DEBUG_MSG (("+%s uri:'%s' \n", G_GNUC_FUNCTION, in_real->uri));
+	DEBUG_MSG (("+%s uri:'%s' \n", G_STRFUNC, in_real->uri));
 
 	result = gnome_keyring_find_network_password_sync (in_real->username,
 							   in_real->domain,
@@ -638,7 +638,7 @@ vfs_fill_authentication_callback (gconstpointer in, size_t in_size,
 		gnome_keyring_network_password_list_free (list);
 	}
 
-	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+	DEBUG_MSG (("-%s\n", G_STRFUNC));
 }
 
 typedef struct {
@@ -683,7 +683,7 @@ vfs_async_save_authentication_callback (gconstpointer in, size_t in_size,
 	in_real = (GnomeVFSModuleCallbackSaveAuthenticationIn *)in;
 	out_real = (GnomeVFSModuleCallbackSaveAuthenticationOut *)out;
 
-	DEBUG_MSG (("+%s uri:'%s' \n", G_GNUC_FUNCTION, in_real->uri));
+	DEBUG_MSG (("+%s uri:'%s' \n", G_STRFUNC, in_real->uri));
 
 	info = g_new (SaveCallbackInfo, 1);
 
@@ -704,7 +704,7 @@ vfs_async_save_authentication_callback (gconstpointer in, size_t in_size,
 						      save_auth_callback,
 						      info, g_free);
 
-	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+	DEBUG_MSG (("-%s\n", G_STRFUNC));
 }
 
 static void /* GnomeVFSModuleCallback */
@@ -724,7 +724,7 @@ vfs_save_authentication_callback (gconstpointer in, size_t in_size,
 
 	in_real = (GnomeVFSModuleCallbackSaveAuthenticationIn *)in;
 
-	DEBUG_MSG (("+%s uri:'%s' \n", G_GNUC_FUNCTION, in_real->uri));
+	DEBUG_MSG (("+%s uri:'%s' \n", G_STRFUNC, in_real->uri));
 	/* Check this return? */
 	result = gnome_keyring_set_network_password_sync (in_real->keyring,
 							  in_real->username,
@@ -737,7 +737,7 @@ vfs_save_authentication_callback (gconstpointer in, size_t in_size,
 							  in_real->password,
 							  &item);
 
-	DEBUG_MSG (("-%s\n", G_GNUC_FUNCTION));
+	DEBUG_MSG (("-%s\n", G_STRFUNC));
 }
 
 typedef struct {

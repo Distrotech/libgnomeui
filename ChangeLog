@@ -1,3 +1,8 @@
+2008-01-28  Christian Persch  <chpe@gnome.org>
+
+	* libgnomeui/gnome-authentication-manager.c: Use G_STRFUNC instead of
+	the deprecated G_GNUC_FUNCTION.
+
 2008-01-25  Tor Lillqvist  <tml@novell.com>
 
 	* libgnomeui-zip.in: Use @GTK_BINARY_VERSION@ instead of
