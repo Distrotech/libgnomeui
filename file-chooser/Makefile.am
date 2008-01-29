@@ -20,15 +20,13 @@ INCLUDES =					\
 module_flags = -export_dynamic -avoid-version -module -no-undefined
 modulesdir = $(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/filesystems
 
-if OS_WIN32
-else
-libgnome_vfs = libgnome-vfs.la
-endif
-
-modules_LTLIBRARIES =			\
-	$(libgnome_vfs)			\
-	libgio.la			\
+modules_LTLIBRARIES = \
+	libgio.la \
 	$(NULL)
+
+if !OS_WIN32
+modules_LTLIBRARIES += libgnome-vfs.la
+endif
 
 libgnome_vfs_la_SOURCES = gtkfilesystemgnomevfs.c gtkfilesystemgnomevfs.h
 libgnome_vfs_la_LDFLAGS = $(module_flags)
@@ -41,4 +39,3 @@ libgio_la_LIBADD = $(GIO_FILE_SYSTEM_LIBS)
 
 EXTRA_DIST = \
 	testfilechooser.c
-
