@@ -279,7 +279,7 @@ msgstr "_Ajuda"
 
 #: ../libgnomeui/gnome-app-helper.c:98
 msgid "_Windows/"
-msgstr "_Fenèstras"
+msgstr "_Fenèstras/"
 
 #. Open
 #: ../libgnomeui/gnome-app-helper.c:110
@@ -1334,7 +1334,7 @@ msgstr "Mot de _pas :"
 
 #: ../libgnomeui/gnome-password-dialog.c:219
 msgid "_New password:"
-msgstr "_Novèl mot de pas :"
+msgstr "Mot de pas _novèl :"
 
 #: ../libgnomeui/gnome-password-dialog.c:220
 msgid "Con_firm password:"
