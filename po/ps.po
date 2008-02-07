@@ -1,0 +1,1463 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: GNOME\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-02-07 21:58+0100\n"
+"PO-Revision-Date: 2008-02-05 11:17-0800\n"
+"Last-Translator: Zabeeh khan <Zabeehkhan@gmail.com>\n"
+"Language-Team: Pashto <pakhtosoft@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Pashto, Pushto\n"
+"X-Poedit-Country: AFGHANISTAN\n"
+
+#: ../demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "وړوکی توکی ۱"
+
+#: ../demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "د ۱ وړوکي توکي لپاره اشاره"
+
+#: ../demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "وړوکی توکی ۲"
+
+#: ../demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "د ۲ وړوکي توکي لپاره اشاره"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1036
+#, c-format
+msgid "%s is a link to something that is not a folder"
+msgstr ""
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1047
+#, c-format
+msgid "%s is a link without a destination location"
+msgstr ""
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1122
+#, c-format
+msgid "%s is not a folder"
+msgstr "يوه پوښۍ نه ده %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1160
+#, c-format
+msgid "Could not monitor '%s': %s"
+msgstr ""
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1273
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1486
+#, c-format
+msgid "Could not get info for '%s': %s"
+msgstr ""
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1609
+#, c-format
+msgid "Could not create '%s': %s"
+msgstr "%s :نه شي جوړولی '%s'"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1979
+msgid "Network Servers"
+msgstr "جاليز پالنګران"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1995
+msgid "File System"
+msgstr "دوتنه غونډال"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2065
+#, c-format
+msgid "'%s': %s"
+msgstr "'%s': %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2524
+#, c-format
+msgid "Bookmark saving failed (%s)"
+msgstr ""
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2960
+#, c-format
+msgid "Error getting information for '%s'"
+msgstr ""
+
+#: ../file-chooser/testfilechooser.c:181
+#, c-format
+msgid "Could not get information for file '%s': %s"
+msgstr ""
+
+#: ../file-chooser/testfilechooser.c:194
+#, c-format
+msgid "Failed to open file '%s': %s"
+msgstr "%s :دوتنې په پرانيستلو کښې پاتې راغی '%s' د"
+
+#: ../file-chooser/testfilechooser.c:233
+#, c-format
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:199
+msgid "Credits"
+msgstr "باورونه"
+
+#: ../libgnomeui/gnome-about.c:231
+msgid "Written by"
+msgstr "ليکوالان"
+
+#: ../libgnomeui/gnome-about.c:246
+msgid "Documented by"
+msgstr "لاسوندونکي"
+
+#: ../libgnomeui/gnome-about.c:261
+msgid "Translated by"
+msgstr "ژباړنان"
+
+#: ../libgnomeui/gnome-about.c:324
+msgid "C_redits"
+msgstr "ب_اورونه"
+
+#: ../libgnomeui/gnome-about.c:377
+msgid "Program name"
+msgstr "کړنلار نوم"
+
+#: ../libgnomeui/gnome-about.c:378
+msgid "The name of the program"
+msgstr "د کړنلار نوم"
+
+#: ../libgnomeui/gnome-about.c:385
+msgid "Program version"
+msgstr "کړنلار نسخه"
+
+#: ../libgnomeui/gnome-about.c:386
+msgid "The version of the program"
+msgstr "د کړنلار نسخه"
+
+#: ../libgnomeui/gnome-about.c:392
+msgid "Copyright string"
+msgstr "چاپرښتې مزی"
+
+#: ../libgnomeui/gnome-about.c:393
+msgid "Copyright information for the program"
+msgstr "د کړنلار لپاره د چاپرښتې خبرتياوې"
+
+#: ../libgnomeui/gnome-about.c:400
+msgid "Comments string"
+msgstr "څرګندون مزی"
+
+#: ../libgnomeui/gnome-about.c:401
+msgid "Comments about the program"
+msgstr "د کړنلار په اړه څرګندون"
+
+#: ../libgnomeui/gnome-about.c:407
+msgid "Authors"
+msgstr "ليکوالان"
+
+#: ../libgnomeui/gnome-about.c:408
+msgid "List of authors of the programs"
+msgstr "د کړنلارو د ليکوالانو لړ"
+
+#: ../libgnomeui/gnome-about.c:410
+msgid "Author entry"
+msgstr "ليکوال ننوت"
+
+#: ../libgnomeui/gnome-about.c:411
+msgid "A single author entry"
+msgstr "يو يوګړی ليکوال ننوت"
+
+#: ../libgnomeui/gnome-about.c:418
+msgid "Documenters"
+msgstr "لاسوندونکی"
+
+#: ../libgnomeui/gnome-about.c:419
+msgid "List of people documenting the program"
+msgstr "د هغه وګړو لړ چې کړنلار لاسوندوي"
+
+#: ../libgnomeui/gnome-about.c:421
+msgid "Documenter entry"
+msgstr "لاسوندونکی ننوت"
+
+#: ../libgnomeui/gnome-about.c:422
+msgid "A single documenter entry"
+msgstr "يو يوګړی لاسوندونکی ننوت"
+
+#: ../libgnomeui/gnome-about.c:430
+msgid "Translator credits"
+msgstr "ژباړنانو خبرتياوې"
+
+#: ../libgnomeui/gnome-about.c:431
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "د ژباړنانو نومونه. دا مزی بايد لکه ژباړل کېدونکی نښه شي"
+
+#: ../libgnomeui/gnome-about.c:438
+#: ../libgnomeui/gnome-druid-page-standard.c:129
+msgid "Logo"
+msgstr "نښان"
+
+#: ../libgnomeui/gnome-about.c:439
+msgid "A logo for the about box"
+msgstr "د په اړه بکس لپاره يو نښان"
+
+#: ../libgnomeui/gnome-about.c:518
+#, c-format
+msgid "About %s"
+msgstr "په اړه %s د"
+
+#. Some standard menus
+#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:551
+#: ../test-gnome/testgnome.xml.h:5
+msgid "_File"
+msgstr "دوتنه_"
+
+#: ../libgnomeui/gnome-app-helper.c:84
+msgid "_File/"
+msgstr "/دوتنه_"
+
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "سمون_"
+
+#: ../libgnomeui/gnome-app-helper.c:86
+msgid "_Edit/"
+msgstr "/سمون_"
+
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "ليد_"
+
+#: ../libgnomeui/gnome-app-helper.c:88
+msgid "_View/"
+msgstr "/ليد_"
+
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "امستنې_"
+
+#: ../libgnomeui/gnome-app-helper.c:90
+msgid "_Settings/"
+msgstr "/امستنې_"
+
+#. If you have more then one New type, use this tree
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "نوی_"
+
+#: ../libgnomeui/gnome-app-helper.c:92
+msgid "_New/"
+msgstr "/نوی_"
+
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "دو_تنې"
+
+#: ../libgnomeui/gnome-app-helper.c:94
+msgid "Fi_les/"
+msgstr "/دو_تنې"
+
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "کړکۍ_"
+
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "لوبې_"
+
+#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:569
+#: ../test-gnome/testgnome.xml.h:6
+msgid "_Help"
+msgstr "مرسته_"
+
+#: ../libgnomeui/gnome-app-helper.c:98
+msgid "_Windows/"
+msgstr "/کړکۍ_"
+
+#. Open
+#: ../libgnomeui/gnome-app-helper.c:110
+msgid "_Open..."
+msgstr "...پرانيستل_"
+
+#: ../libgnomeui/gnome-app-helper.c:110
+msgid "Open a file"
+msgstr "کومه دوتنه پرانيستل"
+
+#. Save
+#: ../libgnomeui/gnome-app-helper.c:115
+msgid "_Save"
+msgstr "ساتل_"
+
+#: ../libgnomeui/gnome-app-helper.c:115
+msgid "Save the current file"
+msgstr "اوسنۍ دوتنه ساتل"
+
+#. Save As
+#: ../libgnomeui/gnome-app-helper.c:120
+msgid "Save _As..."
+msgstr "...ساتل _پر"
+
+#: ../libgnomeui/gnome-app-helper.c:121
+msgid "Save the current file with a different name"
+msgstr "اوسنۍ دوتنه په کوم بل نوم ساتل"
+
+#. Revert
+#: ../libgnomeui/gnome-app-helper.c:126
+msgid "_Revert"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:127
+msgid "Revert to a saved version of the file"
+msgstr ""
+
+#. Print
+#: ../libgnomeui/gnome-app-helper.c:132
+msgid "_Print..."
+msgstr "...چاپول_"
+
+#: ../libgnomeui/gnome-app-helper.c:132
+msgid "Print the current file"
+msgstr "اوسنۍ دوتنه چاپول"
+
+#. Print Setup
+#: ../libgnomeui/gnome-app-helper.c:137
+msgid "Print S_etup..."
+msgstr "...چاپ ا_مسته"
+
+#: ../libgnomeui/gnome-app-helper.c:138
+msgid "Setup the page settings for your current printer"
+msgstr "خپل اوسني چاپګر لپاره مخ امستنې امستل"
+
+#. Close
+#: ../libgnomeui/gnome-app-helper.c:143
+msgid "_Close"
+msgstr "بندول_"
+
+#: ../libgnomeui/gnome-app-helper.c:143
+msgid "Close the current file"
+msgstr "اوسنۍ دوتنه بندول"
+
+#. Exit
+#: ../libgnomeui/gnome-app-helper.c:148
+msgid "_Quit"
+msgstr "بندول_"
+
+#: ../libgnomeui/gnome-app-helper.c:148
+msgid "Quit the application"
+msgstr "کاريال بندول"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: ../libgnomeui/gnome-app-helper.c:156
+msgid "Cu_t"
+msgstr "سکڼ_ل"
+
+#: ../libgnomeui/gnome-app-helper.c:156
+msgid "Cut the selection"
+msgstr "ټاکنه سکڼل"
+
+#. 10
+#. Copy
+#: ../libgnomeui/gnome-app-helper.c:162
+msgid "_Copy"
+msgstr "لمېسل_"
+
+#: ../libgnomeui/gnome-app-helper.c:162
+msgid "Copy the selection"
+msgstr "ټاکنه لمېسل"
+
+#. Paste
+#: ../libgnomeui/gnome-app-helper.c:167
+msgid "_Paste"
+msgstr "سرېښل_"
+
+#: ../libgnomeui/gnome-app-helper.c:167
+msgid "Paste the clipboard"
+msgstr "ټوټه دړه سرېښل"
+
+#. Clear
+#: ../libgnomeui/gnome-app-helper.c:172
+msgid "C_lear"
+msgstr "پ_اکول"
+
+#: ../libgnomeui/gnome-app-helper.c:172
+msgid "Clear the selection"
+msgstr "ټاکنه پاکول"
+
+#. Undo
+#: ../libgnomeui/gnome-app-helper.c:177
+msgid "_Undo"
+msgstr "ناکړ_"
+
+#: ../libgnomeui/gnome-app-helper.c:177
+msgid "Undo the last action"
+msgstr "تېر شوی چار ناکړول"
+
+#. Redo
+#: ../libgnomeui/gnome-app-helper.c:182
+msgid "_Redo"
+msgstr "بياکړ_"
+
+#: ../libgnomeui/gnome-app-helper.c:182
+msgid "Redo the undone action"
+msgstr "ناشوی چار بيا کول"
+
+#. Find
+#: ../libgnomeui/gnome-app-helper.c:187
+msgid "_Find..."
+msgstr "...لټون_"
+
+#: ../libgnomeui/gnome-app-helper.c:187
+msgid "Search for a string"
+msgstr "کوم مزی لټول"
+
+#. Find Again
+#: ../libgnomeui/gnome-app-helper.c:192
+msgid "Find Ne_xt"
+msgstr "رات_لونکی لټول"
+
+#: ../libgnomeui/gnome-app-helper.c:193
+msgid "Search again for the same string"
+msgstr "همدا مزی بيا لټول"
+
+#. Replace
+#: ../libgnomeui/gnome-app-helper.c:198
+msgid "R_eplace..."
+msgstr "...ځ_ایناستی"
+
+#: ../libgnomeui/gnome-app-helper.c:198
+msgid "Replace a string"
+msgstr "کوم مزی ځایناستول"
+
+#. Properties
+#: ../libgnomeui/gnome-app-helper.c:203
+msgid "_Properties"
+msgstr "ځانتياوې_"
+
+#: ../libgnomeui/gnome-app-helper.c:204
+msgid "Modify the file's properties"
+msgstr "د دوتنې ځانتياوې بدلول"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: ../libgnomeui/gnome-app-helper.c:212
+msgid "Prefere_nces"
+msgstr "غوراو_ي"
+
+#: ../libgnomeui/gnome-app-helper.c:213
+msgid "Configure the application"
+msgstr "کاريال سازول"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:4
+msgid "_About"
+msgstr "په اړه_"
+
+#: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
+msgid "About this application"
+msgstr "د دې کاريال په اړه"
+
+#: ../libgnomeui/gnome-app-helper.c:226
+msgid "Select _All"
+msgstr "ټول ټاکل_"
+
+#: ../libgnomeui/gnome-app-helper.c:227
+msgid "Select everything"
+msgstr "هرڅه ټاکل"
+
+#.
+#. * Window menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:235
+msgid "Create New _Window"
+msgstr "نوې _کړکۍ جوړول"
+
+#: ../libgnomeui/gnome-app-helper.c:236
+msgid "Create a new window"
+msgstr "يوه نوې کړکۍ جوړول"
+
+#: ../libgnomeui/gnome-app-helper.c:240
+msgid "_Close This Window"
+msgstr "دا کړکۍ بندول_"
+
+#: ../libgnomeui/gnome-app-helper.c:241 ../test-gnome/testgnome.xml.h:2
+msgid "Close the current window"
+msgstr "اوسنۍ کړکۍ بندول"
+
+#.
+#. * The "Game" menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:249
+msgid "_New Game"
+msgstr "نوې لوبه_"
+
+#: ../libgnomeui/gnome-app-helper.c:250
+msgid "Start a new game"
+msgstr "يوه نوې لوبه پېلول"
+
+#: ../libgnomeui/gnome-app-helper.c:254
+msgid "_Pause Game"
+msgstr "لوبه ځنډول_"
+
+#: ../libgnomeui/gnome-app-helper.c:255
+msgid "Pause the game"
+msgstr "لوبه ځنډول"
+
+#: ../libgnomeui/gnome-app-helper.c:259
+msgid "_Restart Game"
+msgstr "لوبه بياپېلول_"
+
+#: ../libgnomeui/gnome-app-helper.c:260
+msgid "Restart the game"
+msgstr "لوبه بياپېلول"
+
+#: ../libgnomeui/gnome-app-helper.c:264
+msgid "_Undo Move"
+msgstr "خوځښت ناکړ_"
+
+#: ../libgnomeui/gnome-app-helper.c:265
+msgid "Undo the last move"
+msgstr "تېر شوی خوځښت ناکړول"
+
+#: ../libgnomeui/gnome-app-helper.c:269
+msgid "_Redo Move"
+msgstr "خوځښت بياکړ_"
+
+#: ../libgnomeui/gnome-app-helper.c:270
+msgid "Redo the undone move"
+msgstr "ناکړ خوځښت بيا کول"
+
+#: ../libgnomeui/gnome-app-helper.c:274
+msgid "_Hint"
+msgstr "اشاره_"
+
+#: ../libgnomeui/gnome-app-helper.c:275
+msgid "Get a hint for your next move"
+msgstr "د خپل راتلونکي خوځښت لپاره اشاره اخېستل"
+
+#. 30
+#: ../libgnomeui/gnome-app-helper.c:280
+msgid "_Scores..."
+msgstr "...نمبرې_"
+
+#: ../libgnomeui/gnome-app-helper.c:281
+msgid "View the scores"
+msgstr "نمبرې ښودل"
+
+#: ../libgnomeui/gnome-app-helper.c:285
+msgid "_End Game"
+msgstr "لوبه بندول_"
+
+#: ../libgnomeui/gnome-app-helper.c:286
+msgid "End the current game"
+msgstr "اوسنۍ لوبه بندول"
+
+#: ../libgnomeui/gnome-app-helper.c:1148
+msgid "_Contents"
+msgstr "منځپانګې_"
+
+#: ../libgnomeui/gnome-app-helper.c:1151
+msgid "View help for this application"
+msgstr "د دې کاريال مرسته ښودل"
+
+#: ../libgnomeui/gnome-app-helper.c:2568
+msgid "Text Below Icons"
+msgstr "ليکنه د انځورنونو لاندې"
+
+#: ../libgnomeui/gnome-app-helper.c:2569
+msgid "Priority Text Beside Icons"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:2570
+msgid "Icons Only"
+msgstr "يوازې انځورنونه"
+
+#: ../libgnomeui/gnome-app-helper.c:2571
+msgid "Text Only"
+msgstr "يوازې ليکنه"
+
+#: ../libgnomeui/gnome-app-helper.c:2632
+#, c-format
+msgid "Use Desktop Default (%s)"
+msgstr "(%s) د سرپاڼې تلواله کارول"
+
+#: ../libgnomeui/gnome-app-util.c:98
+msgid " (press return)"
+msgstr " (راستنيزه ووهﺉ)"
+
+#: ../libgnomeui/gnome-app-util.c:140
+msgid "ERROR: "
+msgstr ":تېروتنه"
+
+#: ../libgnomeui/gnome-app-util.c:177
+msgid "Warning: "
+msgstr "خبرتيا"
+
+#: ../libgnomeui/gnome-app-util.c:315
+msgid "y"
+msgstr "ه"
+
+#: ../libgnomeui/gnome-app-util.c:316
+msgid "yes"
+msgstr "هو"
+
+#: ../libgnomeui/gnome-app-util.c:319
+msgid "n"
+msgstr "ن"
+
+#: ../libgnomeui/gnome-app-util.c:320
+msgid "no"
+msgstr "نه"
+
+#: ../libgnomeui/gnome-app-util.c:355
+msgid " (yes or no)"
+msgstr " (هو يا نه)"
+
+#: ../libgnomeui/gnome-app-util.c:356
+msgid "  - OK? (yes or no)"
+msgstr "(هوکې؟ (هو يا نه -  "
+
+#: ../libgnomeui/gnome-app-util.c:684
+msgid "Progress"
+msgstr "پرمختګ"
+
+#: ../libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr "کاريال پېژند"
+
+#: ../libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr "د کاريال پېژند مزی"
+
+#: ../libgnomeui/gnome-appbar.c:743
+msgid "Has Progress"
+msgstr "پرمختګ لري"
+
+#: ../libgnomeui/gnome-appbar.c:744
+msgid "Create a progress widget."
+msgstr ".پرمختګ وړوکی جوړول"
+
+#: ../libgnomeui/gnome-appbar.c:751
+msgid "Has Status"
+msgstr "انکړ لري"
+
+#: ../libgnomeui/gnome-appbar.c:752
+msgid "Create a status widget."
+msgstr ".انکړ وړوکی جوړول"
+
+#: ../libgnomeui/gnome-appbar.c:759
+msgid "Interactivity"
+msgstr ""
+
+#: ../libgnomeui/gnome-appbar.c:760
+msgid "Level of user activity required."
+msgstr ""
+
+#: ../libgnomeui/gnome-authentication-manager.c:82
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr ""
+
+#: ../libgnomeui/gnome-authentication-manager.c:83
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+"لاس رسي لپاره بايد تاسې ننوځئ \"%s\" د\n"
+"%s"
+
+#: ../libgnomeui/gnome-authentication-manager.c:86
+msgid "Your password will be transmitted unencrypted."
+msgstr ""
+
+#: ../libgnomeui/gnome-authentication-manager.c:87
+msgid "Your password will be transmitted encrypted."
+msgstr ""
+
+#: ../libgnomeui/gnome-authentication-manager.c:90
+#: ../libgnomeui/gnome-authentication-manager.c:309
+msgid "Authentication Required"
+msgstr "کرونه اړينه ده"
+
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:301
+#, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr ""
+
+#: ../libgnomeui/gnome-authentication-manager.c:303
+#, c-format
+msgid "You must log in to access %s\n"
+msgstr "ته لاس رسي لپاره بايد تاسو ننوځئ %s\n"
+
+#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
+msgid "Specify session management ID"
+msgstr "ناستې سمبالونې پېژند وټاکئ"
+
+#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
+msgid "ID"
+msgstr "پېژند"
+
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+msgid "Specify prefix of saved configuration"
+msgstr "د ساتل شوې سازونې مختاړی وټاکئ"
+
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+msgid "PREFIX"
+msgstr "مختاړی"
+
+#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
+msgid "Disable connection to session manager"
+msgstr "ناستې سمبالګر سره اړيکه ناوړول"
+
+#: ../libgnomeui/gnome-client.c:1013
+msgid "Session management:"
+msgstr ":ناستې سمبالونه"
+
+#: ../libgnomeui/gnome-client.c:1014
+msgid "Show session management options"
+msgstr "د ناستې سمبالونې غوراوي ښودل"
+
+#: ../libgnomeui/gnome-client.c:1045
+msgid "Session management"
+msgstr "ناستې سمبالونه"
+
+#: ../libgnomeui/gnome-client.c:2579
+msgid "Cancel Logout"
+msgstr "وتون بندول"
+
+#: ../libgnomeui/gnome-color-picker.c:412
+msgid "Received invalid color data\n"
+msgstr "ناسم رنګ اومتوک لاس ته راغی\n"
+
+#: ../libgnomeui/gnome-color-picker.c:466
+msgid "Open a dialog to specify the color"
+msgstr "د رنګ ټاکلو لپاره يوه کړکۍ پرانيستل"
+
+#: ../libgnomeui/gnome-color-picker.c:488
+msgid "Pick a color"
+msgstr "رنګ اوچتول"
+
+#: ../libgnomeui/gnome-dateedit.c:495 ../libgnomeui/gnome-dateedit.c:802
+msgid "Time"
+msgstr "مهال"
+
+#: ../libgnomeui/gnome-dateedit.c:496
+msgid "The time currently selected"
+msgstr "هغه مهال چې اوس ټاکل شوی"
+
+#: ../libgnomeui/gnome-dateedit.c:508
+msgid "DateEdit Flags"
+msgstr "جنډې DateEdit"
+
+#: ../libgnomeui/gnome-dateedit.c:509
+msgid "Flags for how DateEdit looks"
+msgstr "څنګه ښکارېدنې لپاره جنډې DateEdit د"
+
+#: ../libgnomeui/gnome-dateedit.c:518
+msgid "Lower Hour"
+msgstr "کوزه ګېنټه"
+
+#: ../libgnomeui/gnome-dateedit.c:519
+msgid "Lower hour in the time popup selector"
+msgstr "په مهال بړبوکيز ټاکونکي کښې کوزه ګېنټه"
+
+#: ../libgnomeui/gnome-dateedit.c:529
+msgid "Upper Hour"
+msgstr "بره ګېنټه"
+
+#: ../libgnomeui/gnome-dateedit.c:530
+msgid "Upper hour in the time popup selector"
+msgstr "په مهال بړبوکيز ټاکونکي کښې بره ګېنټه"
+
+#: ../libgnomeui/gnome-dateedit.c:540
+msgid "Initial Time"
+msgstr "پېليز مهال"
+
+#: ../libgnomeui/gnome-dateedit.c:541
+msgid "The initial time"
+msgstr "د پېل مهال"
+
+#: ../libgnomeui/gnome-dateedit.c:765 ../libgnomeui/gnome-scores.c:96
+msgid "Date"
+msgstr "نېټه"
+
+#: ../libgnomeui/gnome-dateedit.c:778
+msgid "Select Date"
+msgstr "نېټه ټاکل"
+
+#: ../libgnomeui/gnome-dateedit.c:778
+msgid "Select the date from a calendar"
+msgstr "د کليز نه يوه نېټه ټاکل"
+
+#. Calendar label, only shown if the date editor has a time field
+#: ../libgnomeui/gnome-dateedit.c:789
+msgid "Calendar"
+msgstr "کليز"
+
+#: ../libgnomeui/gnome-dateedit.c:810
+msgid "Select Time"
+msgstr "مهال ټاکل"
+
+#: ../libgnomeui/gnome-dateedit.c:810
+msgid "Select the time from a list"
+msgstr "مهال د يو لړ نه ټاکل"
+
+#: ../libgnomeui/gnome-dateedit.c:1029
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:121
+#: ../libgnomeui/gnome-font-picker.c:155
+msgid "Title"
+msgstr "سرليک"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:122
+msgid "Title of the druid"
+msgstr "د ډريوډ سرليک"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:130
+msgid "Logo image"
+msgstr "نښان انځور"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:137
+msgid "Top Watermark"
+msgstr "پاسنۍ اوبنښه"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:138
+msgid "Watermark image for the top"
+msgstr "د پاس لپاره اوبنښه انځور"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:145
+msgid "Title Foreground"
+msgstr "سرليک پاسليد"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:146
+msgid "Foreground color of the title"
+msgstr "د سرليک پاسليد رنګ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:153
+msgid "Title Foreground Color"
+msgstr "سرليک پاسليد رنګ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:154
+msgid "Foreground color of the title as a GdkColor"
+msgstr "GdkColor د سرليک پاسليد رنګ لکه يو"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:161
+msgid "Title Foreground color set"
+msgstr "د سرليک پاسليد رنګ غونډ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:162
+msgid "Foreground color of the title is set"
+msgstr "د سرليک پاسليد رنګ ټاکل شوی"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:169
+#: ../libgnomeui/gnome-druid-page-standard.c:177
+msgid "Background Color"
+msgstr "شاليد رنګ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:170
+msgid "Background color"
+msgstr "شاليد رنګ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:178
+msgid "Background color as a GdkColor"
+msgstr "GdkColor شاليد رنګ لکه يو"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:185
+msgid "Background color set"
+msgstr "د شاليد رنګ غوڼد"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:186
+msgid "Background color is set"
+msgstr "شاليد رنګ ټاکل شوی"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:193
+#: ../libgnomeui/gnome-druid-page-standard.c:201
+msgid "Contents Background Color"
+msgstr "د منځپانګې شاليد رنګ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:194
+msgid "Contents Background color"
+msgstr "د منځپانګې شاليد رنګ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:202
+msgid "Contents Background color as a GdkColor"
+msgstr "GdkColor د منځپانګې شاليد رنګ لکه يو"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:209
+msgid "Contents Background color set"
+msgstr "د منځپانګې شاليد رنګ غونډ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:210
+msgid "Contents Background color is set"
+msgstr "د منځپانګې شاليد رنګ ټاکل شوی"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:216
+#: ../libgnomeui/gnome-druid-page-standard.c:224
+msgid "Logo Background Color"
+msgstr "د نښان شاليد رنګ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:217
+msgid "Logo Background color"
+msgstr "د نښان شاليد رنګ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:225
+msgid "Logo Background color as a GdkColor"
+msgstr "GdkColor د نښان شاليد رنګ لکه يو"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:232
+msgid "Logo Background color set"
+msgstr "د نښان شاليد رنګ غونډ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:233
+msgid "Logo Background color is set"
+msgstr "د نښان شاليد رنګ ټاکل شوی"
+
+#: ../libgnomeui/gnome-druid.c:153
+msgid "Show Finish"
+msgstr "بشپړول ښودل"
+
+#: ../libgnomeui/gnome-druid.c:154
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "د 'راتلونکی' په ځای د 'بشپړول' تڼۍ ښودل"
+
+#: ../libgnomeui/gnome-druid.c:161
+msgid "Show Help"
+msgstr "مرسته ښودل"
+
+#: ../libgnomeui/gnome-druid.c:162
+msgid "Show the 'Help' button"
+msgstr "مرسته' تڼۍ ښودل'"
+
+#: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
+#: ../libgnomeui/gnome-file-entry.c:239 ../libgnomeui/gnome-icon-entry.c:176
+msgid "History ID"
+msgstr "د مخينې پېژند"
+
+#: ../libgnomeui/gnome-entry.c:200
+msgid "GTK entry"
+msgstr "ننوت GTK"
+
+#: ../libgnomeui/gnome-entry.c:201
+msgid "The GTK entry"
+msgstr "ننوت GTK د"
+
+#: ../libgnomeui/gnome-file-entry.c:240
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:248 ../libgnomeui/gnome-icon-entry.c:185
+msgid "Browse Dialog Title"
+msgstr "د لټول کړکۍ سرليک"
+
+#: ../libgnomeui/gnome-file-entry.c:249
+msgid "Title for the Browse file dialog."
+msgstr "د دوتنه لټول کړکۍ سرليک"
+
+#: ../libgnomeui/gnome-file-entry.c:256
+msgid "Directory Entry"
+msgstr "پوښۍ ننوت"
+
+#: ../libgnomeui/gnome-file-entry.c:257
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:265
+msgid "Modal"
+msgstr "بېلګه"
+
+#: ../libgnomeui/gnome-file-entry.c:266
+msgid "Whether the Browse file window should be modal."
+msgstr "که چېرې بايد د دوتنه لټول کړکۍ بېلګه وي"
+
+#: ../libgnomeui/gnome-file-entry.c:273 ../libgnomeui/gnome-icon-entry.c:201
+msgid "Filename"
+msgstr "دوتنې نوم"
+
+#: ../libgnomeui/gnome-file-entry.c:274
+msgid "Filename that should be displayed in the file entry."
+msgstr ".هغه دوتنه نوم چې بايد دوتنې ننوت کښې وښودل شي"
+
+#: ../libgnomeui/gnome-file-entry.c:282
+msgid "Default Path"
+msgstr "تلواله يونلور"
+
+#: ../libgnomeui/gnome-file-entry.c:283
+msgid "Default path for the Browse file window."
+msgstr ".د دوتنه لټول کړکۍ تلواله يونلور"
+
+#: ../libgnomeui/gnome-file-entry.c:290
+msgid "GnomeEntry"
+msgstr "GnomeEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:291
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:301
+msgid "GtkEntry"
+msgstr "GtkEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:302
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:312
+msgid "Use GtkFileChooser"
+msgstr "کارول GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:313
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:322
+msgid "GtkFileChooser Action"
+msgstr "چار GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:323
+msgid "The type of operation that the file selector is performing."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:658 ../libgnomeui/gnome-file-entry.c:695
+msgid "Select file"
+msgstr "دوتنه ټاکل"
+
+#: ../libgnomeui/gnome-file-entry.c:820
+msgid "Path"
+msgstr "يونلور"
+
+#: ../libgnomeui/gnome-file-entry.c:820
+msgid "Path to file"
+msgstr "د دوتنې يونلور"
+
+#: ../libgnomeui/gnome-file-entry.c:849
+msgid "_Browse..."
+msgstr "...لټول_"
+
+#: ../libgnomeui/gnome-file-entry.c:850
+msgid "Pop up a file selector to choose a file"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:66
+msgid "sans 12"
+msgstr "sans ۱۲"
+
+#: ../libgnomeui/gnome-font-picker.c:67
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:68
+msgid "Pick a Font"
+msgstr "ليکبڼه اوچتول"
+
+#: ../libgnomeui/gnome-font-picker.c:156
+msgid "The title of the selection dialog box"
+msgstr "د ټاکنې کړکۍ سرليک"
+
+#: ../libgnomeui/gnome-font-picker.c:164
+msgid "Mode"
+msgstr "اکر"
+
+#: ../libgnomeui/gnome-font-picker.c:165
+msgid "The mode of operation of the font picker"
+msgstr "د ليکبڼې اوچتوونکي د چلښت اکر"
+
+#: ../libgnomeui/gnome-font-picker.c:174
+msgid "Font name"
+msgstr "ليکبڼې نوم"
+
+#: ../libgnomeui/gnome-font-picker.c:175
+msgid "Name of the selected font"
+msgstr "د ټاکل شوې ليکبڼې نوم"
+
+#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
+msgid "Font"
+msgstr "ليکبڼه"
+
+#: ../libgnomeui/gnome-font-picker.c:185
+msgid "The selected GtkFont"
+msgstr "GtkFont ټاکل شوی"
+
+#: ../libgnomeui/gnome-font-picker.c:192
+msgid "Preview text"
+msgstr "ليکنې مخليد"
+
+#: ../libgnomeui/gnome-font-picker.c:193
+msgid "Preview text shown in the dialog"
+msgstr "په کړکۍ کښې د ښودل شوې ليکنې مخليد"
+
+#: ../libgnomeui/gnome-font-picker.c:201
+msgid "Use font in label"
+msgstr "په نښکه کښې ليکبڼه کارول"
+
+#: ../libgnomeui/gnome-font-picker.c:202
+msgid "Use font in the label in font info mode"
+msgstr "په ليکبڼې خبرتياوې اکر کښې په نښکو کښې ليکبڼې کارول"
+
+#: ../libgnomeui/gnome-font-picker.c:210
+msgid "Font size for label"
+msgstr "د نښکې د ليکبڼې کچ"
+
+#: ../libgnomeui/gnome-font-picker.c:211
+msgid "Font size for label in font info mode"
+msgstr "په ليکبڼې خبرتياوې اکر کښې د نښکو د ليکبڼې کچ"
+
+#: ../libgnomeui/gnome-font-picker.c:221
+msgid "Show size"
+msgstr "کچ ښودل"
+
+#: ../libgnomeui/gnome-font-picker.c:222
+msgid "Show size in font info mode"
+msgstr "په ليکبڼې خبرتياوې اکر کښې کچ ښودل"
+
+#: ../libgnomeui/gnome-gconf-ui.c:61
+msgid "GNOME GConf UI Support"
+msgstr "GNOME GConf UI Support"
+
+#: ../libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "خبرتياوې_"
+
+#: ../libgnomeui/gnome-gconf-ui.c:171
+#, c-format
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr ""
+
+#: ../libgnomeui/gnome-gconf-ui.c:178
+#, c-format
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+
+#: ../libgnomeui/gnome-href.c:102
+msgid "URL"
+msgstr "URL"
+
+#: ../libgnomeui/gnome-href.c:103
+msgid "The URL that GnomeHRef activates"
+msgstr ""
+
+#: ../libgnomeui/gnome-href.c:110
+msgid "Text"
+msgstr "ليکنه"
+
+#: ../libgnomeui/gnome-href.c:111
+msgid "The text on the button"
+msgstr "د تڼۍ پر سر ليکنه"
+
+#: ../libgnomeui/gnome-href.c:112
+msgid "End World Hunger"
+msgstr "نړېواله لوږه پايول "
+
+#: ../libgnomeui/gnome-href.c:118
+msgid "Link color"
+msgstr "پېوند رنګ"
+
+#: ../libgnomeui/gnome-href.c:119
+msgid "Color used to draw the link"
+msgstr "هغه رنګ چې پېوند پرې انځوريږي"
+
+#: ../libgnomeui/gnome-href.c:150
+msgid "This button will take you to the URI that it displays."
+msgstr ""
+
+#: ../libgnomeui/gnome-href.c:386
+msgid ""
+"An error has occurred while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:177
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:186
+msgid "Title for the Browse icon dialog."
+msgstr "د انځورن لټول کړکۍ سرليک"
+
+#: ../libgnomeui/gnome-icon-entry.c:193
+msgid "Pixmap Directory"
+msgstr "پوښۍ Pixmap"
+
+#: ../libgnomeui/gnome-icon-entry.c:194
+msgid "Directory that will be searched for icons."
+msgstr ".هغه پوښۍ چې د انځورنونو لپاره به ولټول شي"
+
+#: ../libgnomeui/gnome-icon-entry.c:202
+msgid "Filename that should be displayed in the icon entry."
+msgstr ".هغه دوتنه نوم چې انځورن ننوت کښې بايد وښودل شي"
+
+#: ../libgnomeui/gnome-icon-entry.c:210
+msgid "Picker dialog"
+msgstr "اوچتوونکی کړکۍ"
+
+#: ../libgnomeui/gnome-icon-entry.c:211
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:319 ../libgnomeui/gnome-icon-entry.c:1003
+msgid "Choose Icon"
+msgstr "انځورن ټاکل"
+
+#: ../libgnomeui/gnome-icon-entry.c:773
+msgid "Icon selection dialog"
+msgstr "انځورن ټاکنې کړکۍ"
+
+#: ../libgnomeui/gnome-icon-entry.c:774
+msgid "This dialog box lets you select an icon."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:780 ../libgnomeui/gnome-icon-entry.c:1006
+msgid "Icon Selector"
+msgstr "انڅورن ټاکونکی"
+
+#: ../libgnomeui/gnome-icon-entry.c:781
+msgid "Please pick the icon you want."
+msgstr ".مهرباني وکړﺉ يو انځورن اوچت کړﺉ"
+
+#: ../libgnomeui/gnome-icon-entry.c:1007
+msgid "This button will open a window to let you select an icon."
+msgstr ".دا تڼۍ به يوه کړکۍ پرانيزي چې تاسو به پکښې انځورن ټاکلی شﺉ"
+
+#: ../libgnomeui/gnome-icon-entry.c:1029
+msgid "Browse"
+msgstr "لټول"
+
+#: ../libgnomeui/gnome-icon-entry.c:1032
+msgid "Icon path"
+msgstr "انځورن يونلور"
+
+#: ../libgnomeui/gnome-icon-entry.c:1033
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-sel.c:293
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-sel.c:301
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-sel.c:405
+msgid "Loading Icons..."
+msgstr "...انځورنونه لېښل کيږي"
+
+#: ../libgnomeui/gnome-messagebox.c:107
+msgid "Information"
+msgstr "خبرتيا"
+
+#: ../libgnomeui/gnome-messagebox.c:112
+msgid "Warning"
+msgstr "خبرتيا"
+
+#: ../libgnomeui/gnome-messagebox.c:118
+msgid "Error"
+msgstr "تېروتنه"
+
+#: ../libgnomeui/gnome-messagebox.c:124
+msgid "Question"
+msgstr "پوښتنه"
+
+#: ../libgnomeui/gnome-messagebox.c:129
+msgid "Message"
+msgstr "استوزه"
+
+#: ../libgnomeui/gnome-password-dialog.c:210
+msgid "_Username:"
+msgstr ":کارننوم_"
+
+#: ../libgnomeui/gnome-password-dialog.c:213
+msgid "_Domain:"
+msgstr ":شپول_"
+
+#: ../libgnomeui/gnome-password-dialog.c:216
+msgid "_Password:"
+msgstr ":تېرنويې_"
+
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr ":نوې تېرنويې_"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr ":تېرنويې باو_رييل"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr ":د پټنوم ښوالی"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
+msgid "Co_nnect"
+msgstr "پېوند_ول"
+
+#: ../libgnomeui/gnome-password-dialog.c:371
+msgid "Connect _anonymously"
+msgstr "بېنومه پېوندېدل_"
+
+#: ../libgnomeui/gnome-password-dialog.c:376
+msgid "Connect as u_ser:"
+msgstr ":لکه ک_ارن پېوندېدل"
+
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "تېرنويې دستي له ياده ويستل_"
+
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
+msgstr "تېرنويې تر هغه ياد ساتل چې ووځﺉ_"
+
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "تل ياد ساتل_"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:112
+msgid "Do Preview"
+msgstr "مخليد کول"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:113
+msgid "Whether the pixmap entry should have a preview."
+msgstr ""
+
+#: ../libgnomeui/gnome-pixmap-entry.c:187
+#: ../libgnomeui/gnome-pixmap-entry.c:481
+msgid "No Image"
+msgstr "هېڅ انځور"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:204
+msgid "Image Preview"
+msgstr "انځور مخليد"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:205
+msgid "A preview of the image currently specified"
+msgstr ""
+
+#: ../libgnomeui/gnome-pixmap-entry.c:416
+msgid "Can't find an hbox, using a normal file selection"
+msgstr ""
+
+#: ../libgnomeui/gnome-pixmap-entry.c:422
+msgid "Preview"
+msgstr "مخليد"
+
+#: ../libgnomeui/gnome-scores.c:77
+msgid "Top Ten"
+msgstr "لس جګ"
+
+#: ../libgnomeui/gnome-scores.c:90
+msgid "User"
+msgstr "کارن"
+
+#: ../libgnomeui/gnome-scores.c:93
+msgid "Score"
+msgstr "نمبر"
+
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: ../libgnomeui/gnome-scores.c:193
+msgid "%a %b %d %T %Y"
+msgstr "%a %b %d %T %Y"
+
+#: ../libgnomeui/gnome-scores.c:394
+msgid "Sans 14"
+msgstr "Sans ۱۴"
+
+#: ../libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "لښتيال بريدونه"
+
+#: ../libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "لښتيال ډکون"
+
+#: ../libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "ګولۍ لړ"
+
+#: ../libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "شمېريز لړ"
+
+#: ../libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "سرتشه"
+
+#: ../libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr ""
+
+#: ../libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "په اړه"
+
+#: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:172
+msgid "Disable Crash Dialog"
+msgstr ""
+
+#: ../libgnomeui/gnome-ui-init.c:155
+msgid "GNOME GUI Library:"
+msgstr ":کتابتون GUI د جنومي"
+
+#: ../libgnomeui/gnome-ui-init.c:156
+msgid "Show GNOME GUI options"
+msgstr "غوراوي ښودل GUI د جنومي"
+
+#: ../libgnomeui/gnome-ui-init.c:174
+msgid "X display to use"
+msgstr "ښوون X د کارولو لپاره"
+
+#: ../libgnomeui/gnome-ui-init.c:174
+msgid "DISPLAY"
+msgstr "ښوون"
+
+#: ../libgnomeui/gnome-ui-init.c:179
+msgid "GNOME GUI Library"
+msgstr "کتابتون GUI د جنومي"
+
+#: ../libgnomeui/gnome-ui-init.c:244
+msgid "Could not open link"
+msgstr "پېوند نه شي پرانيستلی"
+
+#: ../test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "ازموينه بندول"
