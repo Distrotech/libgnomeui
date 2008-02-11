@@ -1120,7 +1120,7 @@ gtk_file_system_gio_volume_mount (GtkFileSystem                    *file_system,
       GMountOperation *mount_op;
 
       mount_op = g_mount_operation_new ();
-      g_volume_mount (volume, mount_op, handle->cancellable, volume_mount_cb, handle);
+      g_volume_mount (volume, 0, mount_op, handle->cancellable, volume_mount_cb, handle);
       g_object_unref (mount_op);
     }
 
