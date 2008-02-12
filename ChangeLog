@@ -1,3 +1,10 @@
+2008-02-11  Carlos Garnacho  <carlos@imendio.com>
+
+	* file-chooser/gtkfilesystemgio.c: Just pass the cancellable to the
+	GtkFileFolderGio object, this way it doesn't have to deal with already
+	freed data if the GtkFileSystemGio has been already disposed and there
+	were async callbacks pending. Bug #514743.
+
 ======================= libgnomeui 2.21.91 =====================
 
 2008-02-11  Alexander Larsson  <alexl@redhat.com>

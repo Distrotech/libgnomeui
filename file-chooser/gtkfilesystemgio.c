@@ -99,7 +99,7 @@ struct GtkFileFolderGio
 {
   GObject parent_instance;
 
-  GtkFileSystemGio *file_system;
+  GCancellable *cancellable;
   GFile *parent_file;
   GHashTable *children;
   GFileMonitor *directory_monitor;
@@ -609,7 +609,6 @@ enumerator_files_callback (GObject      *source_object,
 			   GAsyncResult *result,
 			   gpointer      user_data)
 {
-  GtkFileSystemGio *file_system;
   GFileEnumerator *enumerator;
   GtkFileFolderGio *folder;
   GError *error = NULL;
@@ -617,7 +616,6 @@ enumerator_files_callback (GObject      *source_object,
   GList *files, *f;
 
   folder = GTK_FILE_FOLDER_GIO (user_data);
-  file_system = folder->file_system;
   enumerator = G_FILE_ENUMERATOR (source_object);
   files = g_file_enumerator_next_files_finish (enumerator, result, &error);
 
@@ -649,7 +647,7 @@ enumerator_files_callback (GObject      *source_object,
 
   g_file_enumerator_next_files_async (enumerator, FILES_PER_QUERY,
 				      G_PRIORITY_DEFAULT,
-				      file_system->cancellable,
+				      folder->cancellable,
 				      enumerator_files_callback,
 				      folder);
 
@@ -706,7 +704,7 @@ enumerate_children_callback (GObject      *source_object,
   if (enumerator)
     {
       folder = g_object_new (GTK_TYPE_FILE_FOLDER_GIO, NULL);
-      folder->file_system = file_system;
+      folder->cancellable = g_object_ref (file_system->cancellable);
       folder->parent_file = g_object_ref (file);
       folder->children = g_hash_table_new_full (g_str_hash, g_str_equal,
 						(GDestroyNotify) g_free,
@@ -723,7 +721,7 @@ enumerate_children_callback (GObject      *source_object,
 
       g_file_enumerator_next_files_async (enumerator, FILES_PER_QUERY,
 					  G_PRIORITY_DEFAULT,
-					  file_system->cancellable,
+					  folder->cancellable,
 					  enumerator_files_callback,
 					  g_object_ref (folder));
       g_object_unref (enumerator);
@@ -1715,6 +1713,9 @@ gtk_file_folder_gio_finalize (GObject *object)
 
   if (folder->directory_monitor)
     g_object_unref (folder->directory_monitor);
+
+  if (folder->cancellable)
+    g_object_unref (folder->cancellable);
 
   g_hash_table_unref (folder->children);
   G_OBJECT_CLASS (gtk_file_folder_gio_parent_class)->finalize (object);
