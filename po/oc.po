@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-27 00:04+0100\n"
+"POT-Creation-Date: 2008-02-19 20:26+0100\n"
 "PO-Revision-Date: 2007-12-27 13:34+0100\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -65,25 +65,25 @@ msgstr ""
 msgid "Could not create '%s': %s"
 msgstr ""
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1975
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1979
 msgid "Network Servers"
 msgstr "Servidors ret"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1991
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1995
 msgid "File System"
 msgstr "Sistèma de fichièrs"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2061
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2065
 #, c-format
 msgid "'%s': %s"
 msgstr ""
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2520
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2524
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "L'enregistrament dels favorits a pas capitat (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2957
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2960
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Impossible d'obténer las entresenhas per '%s'"
@@ -1479,4 +1479,3 @@ msgstr "Impossible de dobrir lo ligam"
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Sortir del tèst"
-
