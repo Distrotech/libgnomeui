@@ -594,7 +594,7 @@ msgstr "Sonque tèxt"
 #: ../libgnomeui/gnome-app-helper.c:2632
 #, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Utilisar la valor per defaut del burèu (%s)"
+msgstr "Utilizar la valor per defaut del burèu (%s)"
 
 #: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
@@ -1036,7 +1036,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:312
 msgid "Use GtkFileChooser"
-msgstr "Utilisar GtkFileChooser"
+msgstr "Utilizar GtkFileChooser"
 
 #: ../libgnomeui/gnome-file-entry.c:313
 msgid ""
@@ -1122,7 +1122,7 @@ msgstr "Tèxt de visualizacion mostrat dins la fenèstra"
 
 #: ../libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
-msgstr "Utilisar la poliça dins l'etiqueta"
+msgstr "Utilizar la poliça dins l'etiqueta"
 
 #: ../libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
