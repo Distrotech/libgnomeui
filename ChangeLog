@@ -1,3 +1,9 @@
+2008-02-25  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* gnome-app-helper.c (toolbar_style_changed_notify): Remove unused
+	static function. This change went into 2.21.92 but I forgot to add
+	the changelog before making the tarball...
+
 ======================= libgnomeui 2.21.92 ======================
 
 2008-02-25  Alexander Larsson  <alexl@redhat.com>
