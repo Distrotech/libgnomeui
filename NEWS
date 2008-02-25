@@ -1,3 +1,7 @@
+libgnomeui 2.21.92
+
+* More gio work in the filechooser
+
 libgnomeui 2.21.91
 
 * Works with gio 2.15.5.
