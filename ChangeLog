@@ -1,3 +1,8 @@
+2008-02-25  Alexander Larsson  <alexl@redhat.com>
+
+	* file-chooser/gtkfilesystemgio.c (gtk_file_system_gio_get_volume_for_path):
+	Update for the glib g_file_contains_file -> g_file_has_prefix rename.
+
 2008-02-11  Carlos Garnacho  <carlos@imendio.com>
 
 	* file-chooser/gtkfilesystemgio.c: Just pass the cancellable to the

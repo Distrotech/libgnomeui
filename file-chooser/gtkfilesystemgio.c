@@ -584,7 +584,7 @@ gtk_file_system_gio_get_volume_for_path (GtkFileSystem     *file_system,
 
           mount = list->data;
           root = g_mount_get_root (mount);
-          if (g_file_contains_file (root, file))
+          if (g_file_has_prefix (file, root))
             {
               mount = list->data;
               break;
