@@ -2,19 +2,19 @@
 # Estonian translation of libgnomeui.
 #
 # Copyright (C) 2002-2006 Free Software Foundation, Inc.
-# Copyright (C) 2007 The Gnome Project.
+# Copyright (C) 2007, 2008 The Gnome Project.
 # This file is distributed under the same license as the libgnomeui package.
 #
 # Tõivo Leedjärv <toivo@linux.ee>, 2002-2004.
 # Priit Laes <amd@store20.com>, 2004, 2006.
-# Ivar Smolin <okul@linux.ee>, 2005-2007.
+# Ivar Smolin <okul@linux.ee>, 2005-2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-12 07:28+0100\n"
-"PO-Revision-Date: 2007-10-21 14:15+0300\n"
+"PO-Revision-Date: 2008-02-24 12:32+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -54,20 +54,20 @@ msgid "%s is not a folder"
 msgstr "%s ei ole kataloog"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1160
-#, fuzzy, c-format
+#, c-format
 msgid "Could not monitor '%s': %s"
-msgstr "Fail '%s' kohta pole võimalik teavet hankida: %s"
+msgstr "Faili '%s' pole võimalik monitoorida: %s"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1273
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1486
-#, fuzzy, c-format
+#, c-format
 msgid "Could not get info for '%s': %s"
-msgstr "Fail '%s' kohta pole võimalik teavet hankida: %s"
+msgstr "Faili '%s' andmeid pole võimalik hankida: %s"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1609
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create '%s': %s"
-msgstr "Fail '%s' kohta pole võimalik teavet hankida: %s"
+msgstr "Faili '%s' pole võimalik luua: %s"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1975
 msgid "Network Servers"
@@ -95,7 +95,7 @@ msgstr "Viga '%s' kohta andmete hankimisel"
 #: ../file-chooser/testfilechooser.c:181
 #, c-format
 msgid "Could not get information for file '%s': %s"
-msgstr "Fail '%s' kohta pole võimalik teavet hankida: %s"
+msgstr "Faili '%s' kohta pole võimalik teavet hankida: %s"
 
 #: ../file-chooser/testfilechooser.c:194
 #, c-format
@@ -1440,7 +1440,7 @@ msgstr "Tabeli täidis"
 
 #: ../libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
-msgstr "Mummudega loend"
+msgstr "Täpploetelu"
 
 #: ../libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
@@ -1489,34 +1489,3 @@ msgstr "Viita pole võimalik avada"
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Välju testprogrammist"
-
-#~ msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-#~ msgstr "Toimus mitu segmentimise viga, veadialoogi pole võimalik näidata\n"
-
-#~ msgid ""
-#~ "Segmentation fault!\n"
-#~ "Cannot display crash dialog\n"
-#~ msgstr ""
-#~ "Segmentimise viga!\n"
-#~ "Krahhidialoodi pole võimalik näidata\n"
-
-#~ msgid "Usage: gnome_segv2 appname signum\n"
-#~ msgstr "Kasutamine: gnome_segv2 programminimi signr\n"
-
-#~ msgid "Debugging %s"
-#~ msgstr "Silumine (%s)"
-
-#~ msgid ""
-#~ "<b>The application %s has crashed.</b>\n"
-#~ "\n"
-#~ "Please install <b>bug-buddy</b>, the\n"
-#~ "GNOME crash report tool, which enables you\n"
-#~ "to send the developers detailed information\n"
-#~ "about the error.\n"
-#~ msgstr ""
-#~ "<b>Rakendus %s krahhis.</b>\n"
-#~ "\n"
-#~ "Palun paigalda oma arvutisse GNOME krahhidest\n"
-#~ "raporteerimise vahend <b>bug-buddy</b>, siis\n"
-#~ "on Sul võimalik tekkinud vea kohta arendajatele\n"
-#~ "andmeid saata.\n"
