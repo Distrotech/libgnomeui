@@ -1,14 +1,14 @@
 # translation of libgnomeui.HEAD.gu.po to Gujarati
 # MagNet <magnet@magnet-i.com>, 2004.
-# Ankit Patel <ankit@redhat.com>, 2004, 2007.
+# Ankit Patel <ankit@redhat.com>, 2004, 2007, 2008.
 # Ankit Patel <ankit644@yahoo.com>, 2005, 2006.
-# Copyright (C) 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005, 2006, 2007, 2008 Free Software Foundation, Inc.
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-02 12:35+0100\n"
-"PO-Revision-Date: 2007-10-02 18:14+0530\n"
+"POT-Creation-Date: 2007-10-12 07:28+0100\n"
+"PO-Revision-Date: 2008-02-29 16:12+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati <fedora-trans-gu@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 "<magnet@magnet-i.com>\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -49,36 +50,57 @@ msgstr "બાળ વસ્તુ ૨"
 msgid "Hint for item 2"
 msgstr "વસ્તુ ૨ માટે સંકેત"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1002
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1036
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s એ કંઈકની કડી છે કે જે ફોલ્ડર નથી"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1013
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1047
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s એ અંતિમ મુકામ સ્થાન વિનાની કડી છે"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1088
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1122
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s એ ફોલ્ડર નથી"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1940
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1160
+#, c-format
+msgid "Could not monitor '%s': %s"
+msgstr "'%s' મોનીટર કરી શક્યા નહિં: %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1273
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1486
+#, c-format
+msgid "Could not get info for '%s': %s"
+msgstr "'%s' માટે જાણકારી મેળવી શક્યા નહિં: %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1609
+#, c-format
+msgid "Could not create '%s': %s"
+msgstr "'%s' બનાવી શક્યા નહિં: %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1975
 msgid "Network Servers"
 msgstr "નેટવર્ક સર્વરો"
 
 # libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1956
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1991
 msgid "File System"
 msgstr "ફાઈલ સિસ્ટમ"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2485
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2061
+#, c-format
+msgid "'%s': %s"
+msgstr "'%s': %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2520
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "બુકમાર્ક સંગ્રહવામાં નિષ્ફળ (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2922
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2957
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "'%s' માટે જાણકારી મેળવવામાં ભૂલ"
@@ -234,174 +256,174 @@ msgstr "%s ના વિશે"
 # libgnomeui/gnome-app-helper.c:82 libgnomeui/gnome-app-helper.h:513
 # test-gnome/testgnome.xml.h:5
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:81 ../libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ફાઇલ (_F)"
 
 # libgnomeui/gnome-app-helper.c:83
-#: ../libgnomeui/gnome-app-helper.c:82
+#: ../libgnomeui/gnome-app-helper.c:84
 msgid "_File/"
 msgstr "ફાઇલ (_F)/"
 
 # libgnomeui/gnome-app-helper.c:84 libgnomeui/gnome-app-helper.h:516
-#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "ફેરફાર કરો (_E)"
 
 # libgnomeui/gnome-app-helper.c:85
-#: ../libgnomeui/gnome-app-helper.c:84
+#: ../libgnomeui/gnome-app-helper.c:86
 msgid "_Edit/"
 msgstr "ફેરફાર કરો(_E)/"
 
 # libgnomeui/gnome-app-helper.c:86 libgnomeui/gnome-app-helper.h:519
-#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "જુઓ (_V)"
 
 # libgnomeui/gnome-app-helper.c:87
-#: ../libgnomeui/gnome-app-helper.c:86
+#: ../libgnomeui/gnome-app-helper.c:88
 msgid "_View/"
 msgstr "જુઓ (_V)/"
 
 # libgnomeui/gnome-app-helper.c:88 libgnomeui/gnome-app-helper.h:522
-#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "સુયોજના (_S)"
 
 # libgnomeui/gnome-app-helper.c:89
-#: ../libgnomeui/gnome-app-helper.c:88
+#: ../libgnomeui/gnome-app-helper.c:90
 msgid "_Settings/"
 msgstr "સુયોજના (_S)/"
 
 # libgnomeui/gnome-app-helper.c:90 libgnomeui/gnome-app-helper.h:295
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "નવુ (_N)"
 
 # libgnomeui/gnome-app-helper.c:91
-#: ../libgnomeui/gnome-app-helper.c:90
+#: ../libgnomeui/gnome-app-helper.c:92
 msgid "_New/"
 msgstr "નવુ (_N)/"
 
 # libgnomeui/gnome-app-helper.c:92 libgnomeui/gnome-app-helper.h:525
-#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "ફાઇલો (_l)"
 
 # libgnomeui/gnome-app-helper.c:93
-#: ../libgnomeui/gnome-app-helper.c:92
+#: ../libgnomeui/gnome-app-helper.c:94
 msgid "Fi_les/"
 msgstr "ફાઇલો (_l)/"
 
 # libgnomeui/gnome-app-helper.c:94 libgnomeui/gnome-app-helper.h:528
-#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "વિન્ડો (_W)"
 
 # libgnomeui/gnome-app-helper.c:95 libgnomeui/gnome-app-helper.h:534
-#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "રમત (_G)"
 
 # libgnomeui/gnome-app-helper.c:96 libgnomeui/gnome-app-helper.h:531
 # test-gnome/testgnome.xml.h:6
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "મદદ (_H)"
 
 # libgnomeui/gnome-app-helper.c:97
-#: ../libgnomeui/gnome-app-helper.c:96
+#: ../libgnomeui/gnome-app-helper.c:98
 msgid "_Windows/"
 msgstr "વિન્ડો (_W)/"
 
 # libgnomeui/gnome-app-helper.c:109
 #. Open
-#: ../libgnomeui/gnome-app-helper.c:108
+#: ../libgnomeui/gnome-app-helper.c:110
 msgid "_Open..."
 msgstr "ખોલો (_O)..."
 
 # libgnomeui/gnome-app-helper.c:109
-#: ../libgnomeui/gnome-app-helper.c:108
+#: ../libgnomeui/gnome-app-helper.c:110
 msgid "Open a file"
 msgstr "એક ફાઇલ ખોલો"
 
 # libgnomeui/gnome-app-helper.c:114
 #. Save
-#: ../libgnomeui/gnome-app-helper.c:113
+#: ../libgnomeui/gnome-app-helper.c:115
 msgid "_Save"
 msgstr "સંગ્રહ કરો (_S)"
 
 # libgnomeui/gnome-app-helper.c:114
-#: ../libgnomeui/gnome-app-helper.c:113
+#: ../libgnomeui/gnome-app-helper.c:115
 msgid "Save the current file"
 msgstr "વર્તમાન ફાઇલનો સંગ્રહ કરો"
 
 # libgnomeui/gnome-app-helper.c:119
 #. Save As
-#: ../libgnomeui/gnome-app-helper.c:118
+#: ../libgnomeui/gnome-app-helper.c:120
 msgid "Save _As..."
 msgstr "આ નામથી સંગ્રહ કરો (_A) ..."
 
 # libgnomeui/gnome-app-helper.c:120
-#: ../libgnomeui/gnome-app-helper.c:119
+#: ../libgnomeui/gnome-app-helper.c:121
 msgid "Save the current file with a different name"
 msgstr "વર્તમાન ફાઇલનો બીજા નામથી સંગ્રહ કરો"
 
 # libgnomeui/gnome-app-helper.c:125
 #. Revert
-#: ../libgnomeui/gnome-app-helper.c:124
+#: ../libgnomeui/gnome-app-helper.c:126
 msgid "_Revert"
 msgstr "પાછા ફરો (_R)"
 
 # libgnomeui/gnome-app-helper.c:126
-#: ../libgnomeui/gnome-app-helper.c:125
+#: ../libgnomeui/gnome-app-helper.c:127
 msgid "Revert to a saved version of the file"
 msgstr "ફાઇલની સંગ્રહિત આવૃત્તિ પર પાછા ફરો"
 
 # libgnomeui/gnome-app-helper.c:131
 #. Print
-#: ../libgnomeui/gnome-app-helper.c:130
+#: ../libgnomeui/gnome-app-helper.c:132
 msgid "_Print..."
 msgstr "છાપો (_P)..."
 
 # libgnomeui/gnome-app-helper.c:131
-#: ../libgnomeui/gnome-app-helper.c:130
+#: ../libgnomeui/gnome-app-helper.c:132
 msgid "Print the current file"
 msgstr "વર્તમાન ફાઇલને છાપો"
 
 # libgnomeui/gnome-app-helper.c:136
 #. Print Setup
-#: ../libgnomeui/gnome-app-helper.c:135
+#: ../libgnomeui/gnome-app-helper.c:137
 msgid "Print S_etup..."
 msgstr "છાપવા માટેનું સુયોજન (_e)..."
 
 # libgnomeui/gnome-app-helper.c:137
-#: ../libgnomeui/gnome-app-helper.c:136
+#: ../libgnomeui/gnome-app-helper.c:138
 msgid "Setup the page settings for your current printer"
 msgstr "તમારા વર્તમાન પ્રિન્ટર માટે પાનાની સુયોજના નક્કી કરો"
 
 # libgnomeui/gnome-app-helper.c:142
 #. Close
-#: ../libgnomeui/gnome-app-helper.c:141
+#: ../libgnomeui/gnome-app-helper.c:143
 msgid "_Close"
 msgstr "બંધ કરો (_C)"
 
 # libgnomeui/gnome-app-helper.c:142
-#: ../libgnomeui/gnome-app-helper.c:141
+#: ../libgnomeui/gnome-app-helper.c:143
 msgid "Close the current file"
 msgstr "વર્તમાન ફાઇલ બંધ કરો"
 
 # libgnomeui/gnome-app-helper.c:155
 #. Exit
-#: ../libgnomeui/gnome-app-helper.c:146
+#: ../libgnomeui/gnome-app-helper.c:148
 msgid "_Quit"
 msgstr "બહાર નીકળો (_Q)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: ../libgnomeui/gnome-app-helper.c:146
+#: ../libgnomeui/gnome-app-helper.c:148
 msgid "Quit the application"
 msgstr "કાર્યક્રમમાંથી બહાર નીકળો"
 
@@ -410,111 +432,111 @@ msgstr "કાર્યક્રમમાંથી બહાર નીકળો"
 #. * The "Edit" menu
 #.
 #. Cut
-#: ../libgnomeui/gnome-app-helper.c:154
+#: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cu_t"
 msgstr "કાપો (_t)"
 
 # libgnomeui/gnome-app-helper.c:155
-#: ../libgnomeui/gnome-app-helper.c:154
+#: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cut the selection"
 msgstr "પસંદગીને કાપો"
 
 # libgnomeui/gnome-app-helper.c:161
 #. 10
 #. Copy
-#: ../libgnomeui/gnome-app-helper.c:160
+#: ../libgnomeui/gnome-app-helper.c:162
 msgid "_Copy"
 msgstr "નકલ બનાવો (_C)"
 
 # libgnomeui/gnome-app-helper.c:161
-#: ../libgnomeui/gnome-app-helper.c:160
+#: ../libgnomeui/gnome-app-helper.c:162
 msgid "Copy the selection"
 msgstr "પસંદગીની નકલ બનાવો"
 
 # libgnomeui/gnome-app-helper.c:166
 #. Paste
-#: ../libgnomeui/gnome-app-helper.c:165
+#: ../libgnomeui/gnome-app-helper.c:167
 msgid "_Paste"
 msgstr "ચોંટાડો (_P)"
 
 # libgnomeui/gnome-app-helper.c:166
-#: ../libgnomeui/gnome-app-helper.c:165
+#: ../libgnomeui/gnome-app-helper.c:167
 msgid "Paste the clipboard"
 msgstr "કલીપબોર્ડને ચિટકાડો"
 
 # libgnomeui/gnome-app-helper.c:171
 #. Clear
-#: ../libgnomeui/gnome-app-helper.c:170
+#: ../libgnomeui/gnome-app-helper.c:172
 msgid "C_lear"
 msgstr "સાફ કરો (_l)"
 
 # libgnomeui/gnome-app-helper.c:171
-#: ../libgnomeui/gnome-app-helper.c:170
+#: ../libgnomeui/gnome-app-helper.c:172
 msgid "Clear the selection"
 msgstr "પસંદગીને સાફ કરો"
 
 # libgnomeui/gnome-app-helper.c:176
 #. Undo
-#: ../libgnomeui/gnome-app-helper.c:175
+#: ../libgnomeui/gnome-app-helper.c:177
 msgid "_Undo"
 msgstr "છેલ્લી પ્રક્રિયાને રદ કરો (_U)"
 
 # libgnomeui/gnome-app-helper.c:176
-#: ../libgnomeui/gnome-app-helper.c:175
+#: ../libgnomeui/gnome-app-helper.c:177
 msgid "Undo the last action"
 msgstr "છેલ્લે કરેલી પ્રક્રિયાને રદ કરો"
 
 # libgnomeui/gnome-app-helper.c:181
 #. Redo
-#: ../libgnomeui/gnome-app-helper.c:180
+#: ../libgnomeui/gnome-app-helper.c:182
 msgid "_Redo"
 msgstr "ફરીથી કરો (_R)"
 
 # libgnomeui/gnome-app-helper.c:181
-#: ../libgnomeui/gnome-app-helper.c:180
+#: ../libgnomeui/gnome-app-helper.c:182
 msgid "Redo the undone action"
 msgstr "રદ કરાયેલી પ્રક્રિયાને ફરીથી કરો"
 
 # libgnomeui/gnome-app-helper.c:186
 #. Find
-#: ../libgnomeui/gnome-app-helper.c:185
+#: ../libgnomeui/gnome-app-helper.c:187
 msgid "_Find..."
 msgstr "શોધો (_F)..."
 
 # libgnomeui/gnome-app-helper.c:186
-#: ../libgnomeui/gnome-app-helper.c:185
+#: ../libgnomeui/gnome-app-helper.c:187
 msgid "Search for a string"
 msgstr "શબ્દમાળાને શોધો"
 
 #. Find Again
-#: ../libgnomeui/gnome-app-helper.c:190
+#: ../libgnomeui/gnome-app-helper.c:192
 msgid "Find Ne_xt"
 msgstr "પછીનું શોધો (_x)"
 
 # libgnomeui/gnome-app-helper.c:192
-#: ../libgnomeui/gnome-app-helper.c:191
+#: ../libgnomeui/gnome-app-helper.c:193
 msgid "Search again for the same string"
 msgstr "એજ શબ્દમાળાને ફરીથી શોધો"
 
 # libgnomeui/gnome-app-helper.c:197
 #. Replace
-#: ../libgnomeui/gnome-app-helper.c:196
+#: ../libgnomeui/gnome-app-helper.c:198
 msgid "R_eplace..."
 msgstr "થી બદલો (_e)..."
 
 # libgnomeui/gnome-app-helper.c:197
-#: ../libgnomeui/gnome-app-helper.c:196
+#: ../libgnomeui/gnome-app-helper.c:198
 msgid "Replace a string"
 msgstr "શબ્દમાળાને બદલો"
 
 # libgnomeui/gnome-app-helper.c:202
 #. Properties
-#: ../libgnomeui/gnome-app-helper.c:201
+#: ../libgnomeui/gnome-app-helper.c:203
 msgid "_Properties"
 msgstr "ગુણધર્મો (_P)"
 
 # libgnomeui/gnome-app-helper.c:203
-#: ../libgnomeui/gnome-app-helper.c:202
+#: ../libgnomeui/gnome-app-helper.c:204
 msgid "Modify the file's properties"
 msgstr "ફાઇલના ગુણધર્મોને બદલો"
 
@@ -523,12 +545,12 @@ msgstr "ફાઇલના ગુણધર્મોને બદલો"
 #. * The Settings menu
 #.
 #. Settings
-#: ../libgnomeui/gnome-app-helper.c:210
+#: ../libgnomeui/gnome-app-helper.c:212
 msgid "Prefere_nces"
 msgstr "પ્રાથમિકતાઓ (_n)"
 
 # libgnomeui/gnome-app-helper.c:212
-#: ../libgnomeui/gnome-app-helper.c:211
+#: ../libgnomeui/gnome-app-helper.c:213
 msgid "Configure the application"
 msgstr "કાર્યક્રમની રુપરેખા બનાવો"
 
@@ -538,22 +560,22 @@ msgstr "કાર્યક્રમની રુપરેખા બનાવો"
 #. * And the "Help" menu
 #.
 #. About
-#: ../libgnomeui/gnome-app-helper.c:220 ../test-gnome/testgnome.xml.h:4
+#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "ના વિશે (_A)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:1
+#: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "આ કાર્યક્રમ વિશે"
 
 # libgnomeui/gnome-app-helper.c:225
-#: ../libgnomeui/gnome-app-helper.c:224
+#: ../libgnomeui/gnome-app-helper.c:226
 msgid "Select _All"
 msgstr "બધુ પસંદ કરો (_A)"
 
 # libgnomeui/gnome-app-helper.c:226
-#: ../libgnomeui/gnome-app-helper.c:225
+#: ../libgnomeui/gnome-app-helper.c:227
 msgid "Select everything"
 msgstr "બધી વસ્તુઓને પસંદ કરો"
 
@@ -561,22 +583,22 @@ msgstr "બધી વસ્તુઓને પસંદ કરો"
 #.
 #. * Window menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:233
+#: ../libgnomeui/gnome-app-helper.c:235
 msgid "Create New _Window"
 msgstr "નવી વિન્ડો બનાવો (_W)"
 
 # libgnomeui/gnome-app-helper.c:235
-#: ../libgnomeui/gnome-app-helper.c:234
+#: ../libgnomeui/gnome-app-helper.c:236
 msgid "Create a new window"
 msgstr "એક નવી વિન્ડો બનાવો"
 
 # libgnomeui/gnome-app-helper.c:239
-#: ../libgnomeui/gnome-app-helper.c:238
+#: ../libgnomeui/gnome-app-helper.c:240
 msgid "_Close This Window"
 msgstr "આ વિન્ડો બંધ કરો (_C)"
 
 # libgnomeui/gnome-app-helper.c:240 test-gnome/testgnome.xml.h:2
-#: ../libgnomeui/gnome-app-helper.c:239 ../test-gnome/testgnome.xml.h:2
+#: ../libgnomeui/gnome-app-helper.c:241 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "વર્તમાન વિન્ડો બંધ કરો"
 
@@ -584,115 +606,115 @@ msgstr "વર્તમાન વિન્ડો બંધ કરો"
 #.
 #. * The "Game" menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:247
+#: ../libgnomeui/gnome-app-helper.c:249
 msgid "_New Game"
 msgstr "નવી રમત (_N)"
 
 # libgnomeui/gnome-app-helper.c:249
-#: ../libgnomeui/gnome-app-helper.c:248
+#: ../libgnomeui/gnome-app-helper.c:250
 msgid "Start a new game"
 msgstr "એક નવી રમત શરૂ કરો"
 
 # libgnomeui/gnome-app-helper.c:253
-#: ../libgnomeui/gnome-app-helper.c:252
+#: ../libgnomeui/gnome-app-helper.c:254
 msgid "_Pause Game"
 msgstr "રમત અટકાવો (_P)"
 
 # libgnomeui/gnome-app-helper.c:254
-#: ../libgnomeui/gnome-app-helper.c:253
+#: ../libgnomeui/gnome-app-helper.c:255
 msgid "Pause the game"
 msgstr "રમત અટકાવો"
 
 # libgnomeui/gnome-app-helper.c:258
-#: ../libgnomeui/gnome-app-helper.c:257
+#: ../libgnomeui/gnome-app-helper.c:259
 msgid "_Restart Game"
 msgstr "રમત ફરી શરૂ કરો (_R)"
 
 # libgnomeui/gnome-app-helper.c:259
-#: ../libgnomeui/gnome-app-helper.c:258
+#: ../libgnomeui/gnome-app-helper.c:260
 msgid "Restart the game"
 msgstr "રમત ફરી શરૂ કરો"
 
 # libgnomeui/gnome-app-helper.c:263
-#: ../libgnomeui/gnome-app-helper.c:262
+#: ../libgnomeui/gnome-app-helper.c:264
 msgid "_Undo Move"
 msgstr "ચાલને રદ કરો (_U)"
 
 # libgnomeui/gnome-app-helper.c:264
-#: ../libgnomeui/gnome-app-helper.c:263
+#: ../libgnomeui/gnome-app-helper.c:265
 msgid "Undo the last move"
 msgstr "છેલ્લી ચાલને રદ કરો"
 
 # libgnomeui/gnome-app-helper.c:268
-#: ../libgnomeui/gnome-app-helper.c:267
+#: ../libgnomeui/gnome-app-helper.c:269
 msgid "_Redo Move"
 msgstr "ચાલને ફરીથી ચાલો (_R)"
 
 # libgnomeui/gnome-app-helper.c:269
-#: ../libgnomeui/gnome-app-helper.c:268
+#: ../libgnomeui/gnome-app-helper.c:270
 msgid "Redo the undone move"
 msgstr "રદ કરાયેલી ચાલને ફરીથી ચાલો"
 
 # libgnomeui/gnome-app-helper.c:273
-#: ../libgnomeui/gnome-app-helper.c:272
+#: ../libgnomeui/gnome-app-helper.c:274
 msgid "_Hint"
 msgstr "સંકેત (_H)"
 
 # libgnomeui/gnome-app-helper.c:274
-#: ../libgnomeui/gnome-app-helper.c:273
+#: ../libgnomeui/gnome-app-helper.c:275
 msgid "Get a hint for your next move"
 msgstr "તમારી હવેની ચાલ માટે સંકેત મેળવો"
 
 # libgnomeui/gnome-app-helper.c:279
 #. 30
-#: ../libgnomeui/gnome-app-helper.c:278
+#: ../libgnomeui/gnome-app-helper.c:280
 msgid "_Scores..."
 msgstr "ગુણ (_S)..."
 
 # libgnomeui/gnome-app-helper.c:280
-#: ../libgnomeui/gnome-app-helper.c:279
+#: ../libgnomeui/gnome-app-helper.c:281
 msgid "View the scores"
 msgstr "ગુણ જુઓ"
 
 # libgnomeui/gnome-app-helper.c:284
-#: ../libgnomeui/gnome-app-helper.c:283
+#: ../libgnomeui/gnome-app-helper.c:285
 msgid "_End Game"
 msgstr "રમત પૂરી કરો (_E)"
 
 # libgnomeui/gnome-app-helper.c:285
-#: ../libgnomeui/gnome-app-helper.c:284
+#: ../libgnomeui/gnome-app-helper.c:286
 msgid "End the current game"
 msgstr "વર્તમાન રમત પૂરી કરો"
 
-#: ../libgnomeui/gnome-app-helper.c:1146
+#: ../libgnomeui/gnome-app-helper.c:1148
 msgid "_Contents"
 msgstr "સમાવિષ્ટ વસ્તુઓ (_C)"
 
 # libgnomeui/gnome-app-helper.c:222 test-gnome/testgnome.xml.h:1
-#: ../libgnomeui/gnome-app-helper.c:1149
+#: ../libgnomeui/gnome-app-helper.c:1151
 msgid "View help for this application"
 msgstr "આ કાર્યક્રમ માટે મદદ જુઓ"
 
-#: ../libgnomeui/gnome-app-helper.c:2586
+#: ../libgnomeui/gnome-app-helper.c:2588
 msgid "Text Below Icons"
 msgstr "ચિહ્નની નીચેનું લખાણ"
 
-#: ../libgnomeui/gnome-app-helper.c:2587
+#: ../libgnomeui/gnome-app-helper.c:2589
 msgid "Priority Text Beside Icons"
 msgstr "ચિહ્નની બાજુમાં પ્રાથમિક લખાણ"
 
 # libgnomeui/gnome-app-helper.c:2564
-#: ../libgnomeui/gnome-app-helper.c:2588
+#: ../libgnomeui/gnome-app-helper.c:2590
 msgid "Icons Only"
 msgstr "ફક્ત ચિહ્નો"
 
 # libgnomeui/gnome-app-helper.c:2565
-#: ../libgnomeui/gnome-app-helper.c:2589
+#: ../libgnomeui/gnome-app-helper.c:2591
 msgid "Text Only"
 msgstr "ફક્ત લખાણ"
 
 # libgnomeui/gnome-app-helper.c:2616
-#: ../libgnomeui/gnome-app-helper.c:2650
+#: ../libgnomeui/gnome-app-helper.c:2652
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "મૂળભુત ડેસ્કટોપ વાપરો (%s)"
