@@ -6,11 +6,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2\n"
+"Project-Id-Version: libgnomeui 2.22.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-01-10 18:03+0100\n"
-"PO-Revision-Date: 2007-10-16 14:55+0200\n"
-"Last-Translator: Francesco Marletta <francesco.marletta@tiscali.it>\n"
+"POT-Creation-Date: 2008-02-29 16:52+0100\n"
+"PO-Revision-Date: 2008-03-02 11:14+0100\n"
+"Last-Translator: Luca Ferretti <elle.uca@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,26 +66,26 @@ msgstr "Impossibile ottenere informazioni per \"%s\": %s"
 msgid "Could not create '%s': %s"
 msgstr "Impossibile creare \"%s\": %s"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1975
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1979
 msgid "Network Servers"
 msgstr "Server di rete"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1991
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1995
 msgid "File System"
 msgstr "File system"
 
 # GNOME-2-20-1
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2061
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2065
 #, c-format
 msgid "'%s': %s"
 msgstr "\"%s\": %s"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2520
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2524
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Salvataggio del segnalibro fallito (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2956
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2960
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Errore nell'ottenere informazioni per \"%s\""
@@ -339,11 +339,15 @@ msgstr "Stampa il file corrente"
 # GNOME-2-20-1
 # s/stampa/pagina
 #
+# GNOME-2-22
+# s/imposta/impostazione
+# setup è sostantivo, set up è verbo
+#
 # L'HIG dice che dovrebbe essere Page Setup, ed ho seguito le linee guida
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:137
 msgid "Print S_etup..."
-msgstr "_Imposta pagina..."
+msgstr "_Impostazione pagina..."
 
 #: ../libgnomeui/gnome-app-helper.c:138
 msgid "Setup the page settings for your current printer"
@@ -403,9 +407,10 @@ msgstr "Incolla gli appunti"
 msgid "C_lear"
 msgstr "Pu_lisci"
 
+# GNOME-2-22
 #: ../libgnomeui/gnome-app-helper.c:172
 msgid "Clear the selection"
-msgstr "Cancella la selezione"
+msgstr "Pulisce la selezione"
 
 #. Undo
 #: ../libgnomeui/gnome-app-helper.c:177
@@ -1287,10 +1292,10 @@ msgstr ""
 "un GtkDialog nel caso fosse necessario modificare o interrogare una sua "
 "proprietà"
 
+# GNOME-2-22
 #: ../libgnomeui/gnome-icon-entry.c:319 ../libgnomeui/gnome-icon-entry.c:1003
-#, fuzzy
 msgid "Choose Icon"
-msgstr "Nessuna icona"
+msgstr "Scelta icona"
 
 #: ../libgnomeui/gnome-icon-entry.c:773
 msgid "Icon selection dialog"
@@ -1385,17 +1390,22 @@ msgstr "Con_ferma password:"
 msgid "Password quality:"
 msgstr "Qualità password:"
 
+# GNOME-2-22
+# cambiato acceleratore per collisione
 #: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
-msgstr "Co_nnetti"
+msgstr "_Connetti"
 
+# GNOME-2-22
 #: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
-msgstr "Connessione _anonima"
+msgstr "Connetti in modo _anonimo"
 
+# GNOME-2-22
+# cambiato acceleratore per collisione
 #: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
-msgstr "Connetti come _utente:"
+msgstr "Connetti come u_tente:"
 
 #: ../libgnomeui/gnome-password-dialog.c:438
 msgid "_Forget password immediately"
@@ -1405,9 +1415,11 @@ msgstr "_Dimentica immediatamente la password"
 msgid "_Remember password until you logout"
 msgstr "_Ricorda la password fino al termine della sessione"
 
+# GNOME-2-22
+# cambiato acceleratore per collisione
 #: ../libgnomeui/gnome-password-dialog.c:450
 msgid "_Remember forever"
-msgstr "_Ricorda per sempre"
+msgstr "Ricorda per _sempre"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:112
 msgid "Do Preview"
@@ -1520,36 +1532,3 @@ msgstr "Impossibile aprire il collegamento"
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Termina il test"
-
-#~ msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-#~ msgstr ""
-#~ "Si sono verificati errori di segmentazione multipli; impossibile "
-#~ "visualizzare il dialogo di errore\n"
-
-#~ msgid ""
-#~ "Segmentation fault!\n"
-#~ "Cannot display crash dialog\n"
-#~ msgstr ""
-#~ "Errore di segmentazione!\n"
-#~ "Impossibile mostrare il dialogo di crash\n"
-
-#~ msgid "Usage: gnome_segv2 appname signum\n"
-#~ msgstr "Uso: gnome_segv2 NOME_APPL NUM_SEGN\n"
-
-#~ msgid "Debugging %s"
-#~ msgstr "Debug di %s"
-
-#~ msgid ""
-#~ "<b>The application %s has crashed.</b>\n"
-#~ "\n"
-#~ "Please install <b>bug-buddy</b>, the\n"
-#~ "GNOME crash report tool, which enables you\n"
-#~ "to send the developers detailed information\n"
-#~ "about the error.\n"
-#~ msgstr ""
-#~ "<b>L'applicazione %s è terminata inaspettatamente.</b>\n"
-#~ "\n"
-#~ "Installare <b>bug-buddy</b>, lo strumento di\n"
-#~ "report dei crash di GNOME, che permetterà di\n"
-#~ "inviare informazioni dettagliate sull'errore\n"
-#~ "agli sviluppatori.\n"
