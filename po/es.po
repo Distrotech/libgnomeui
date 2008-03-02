@@ -1,19 +1,20 @@
-# Translation into spanish of libgnomeui.
+# translation of libgnomeui.HEAD.po to Español
 # Héctor García Álvarez <hector@scouts-es.org>, 2001.
 # Germán Poo Caamaño <gpoo@ubiobio.cl>, 2002.
 # Juan Manuel García Molina <juanma_gm@wanadoo.es>, 2002,2003.
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2002-2005, 2006.
-# Jorge González <jorgegonz@svn.gnome.org>, 2007.
+# Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008.
+# Translation into spanish of libgnomeui.
 # Francisco Javier Fernández <serrador@arrakis.es> (Revision)
-# Copyright © 2001-2003, 2006, 2007 Free Software Foundation, Inc.
+# Copyright © 2001-2003, 2006, 2007, 2008 Free Software Foundation, Inc.
 msgid ""
 msgstr ""
-"Project-Id-Version: es\n"
+"Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-13 17:38+0100\n"
-"PO-Revision-Date: 2007-10-15 18:58+0200\n"
+"POT-Creation-Date: 2007-10-15 17:59+0100\n"
+"PO-Revision-Date: 2008-03-02 16:11+0100\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
-"Language-Team: Spanish <traductores@es.gnome.org>\n"
+"Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -686,11 +687,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-authentication-manager.c:86
 msgid "Your password will be transmitted unencrypted."
-msgstr "Su contraseña se transmitirá sin encriptar."
+msgstr "Su contraseña se transmitirá sin cifrar."
 
 #: ../libgnomeui/gnome-authentication-manager.c:87
 msgid "Your password will be transmitted encrypted."
-msgstr "Su contraseña se transmitirá encriptada."
+msgstr "Su contraseña se transmitirá cifrada."
 
 #: ../libgnomeui/gnome-authentication-manager.c:90
 #: ../libgnomeui/gnome-authentication-manager.c:309
