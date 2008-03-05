@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui 2.22.x\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-02-29 16:52+0100\n"
-"PO-Revision-Date: 2008-03-02 11:14+0100\n"
+"PO-Revision-Date: 2008-03-05 14:28+0100\n"
 "Last-Translator: Luca Ferretti <elle.uca@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -100,13 +100,12 @@ msgstr "Impossibile ottenere informazioni per il file \"%s\": %s"
 msgid "Failed to open file '%s': %s"
 msgstr "Apertura del file \"%s\" fallita: %s"
 
+# GNOME-2-22
 #: ../file-chooser/testfilechooser.c:233
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
-"Caricamento dell'immagine \"%s\" fallito: motivo sconosciuto, probabilmente "
-"si tratta di un file di immagine corrotto"
+msgstr "Caricamento dell'immagine \"%s\" fallito: motivo sconosciuto, probabilmente si tratta di un file di immagine danneggiato"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
@@ -687,10 +686,11 @@ msgstr "Interattività"
 msgid "Level of user activity required."
 msgstr "Livello di interazione con l'utente richiesto."
 
+# GNOME-2-22
 #: ../libgnomeui/gnome-authentication-manager.c:82
 #, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "Il proxy HTTP in uso richiede di effettuare il login.\n"
+msgstr "Il proxy HTTP in uso richiede di effettuare l'accesso.\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:83
 #, c-format
@@ -1217,9 +1217,10 @@ msgstr ""
 msgid "URL"
 msgstr "URL"
 
+# GNOME-2-22
 #: ../libgnomeui/gnome-href.c:103
 msgid "The URL that GnomeHRef activates"
-msgstr "La URL attivata da GnomeHRef"
+msgstr "L'URL attivato da GnomeHRef"
 
 #: ../libgnomeui/gnome-href.c:110
 msgid "Text"
@@ -1241,19 +1242,19 @@ msgstr "Colore del collegamento"
 msgid "Color used to draw the link"
 msgstr "Colore da utilizzare per disegnare il collegamento"
 
+# GNOME-2-22
 #: ../libgnomeui/gnome-href.c:150
 msgid "This button will take you to the URI that it displays."
-msgstr "Questo pulsante condurrà all'URI mostrata."
+msgstr "Questo pulsante condurrà all'URI mostrato"
 
+# GNOME-2-22
 #: ../libgnomeui/gnome-href.c:386
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"Si è verificato un errore nel tentativo di avviare il browser web "
-"predefinito.\n"
-"Controllare le proprie impostazioni nello strumento di preferenza "
-"'Applicazioni preferite'."
+"Si è verificato un errore nel tentativo di avviare il browser web predefinito.\n"
+"Controllare le proprie impostazioni nello strumento di preferenza «Applicazioni preferite»."
 
 #: ../libgnomeui/gnome-icon-entry.c:177
 msgid ""
@@ -1283,14 +1284,12 @@ msgstr "Nome del file che dovrebbe essere mostrato nel campo icona."
 msgid "Picker dialog"
 msgstr "Finestra di dialogo del selettore"
 
+# GNOME-2-22
 #: ../libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
-msgstr ""
-"Dialogo del selettore di icone. Si può usare questa proprietà per ottenere "
-"un GtkDialog nel caso fosse necessario modificare o interrogare una sua "
-"proprietà"
+msgstr "Dialogo del selettore di icone. È possibile usare questa proprietà per ottenere un GtkDialog nel caso fosse necessario modificare o interrogare una sua proprietà"
 
 # GNOME-2-22
 #: ../libgnomeui/gnome-icon-entry.c:319 ../libgnomeui/gnome-icon-entry.c:1003
@@ -1309,13 +1308,15 @@ msgstr "Questo dialogo consente di selezionare un'icona."
 msgid "Icon Selector"
 msgstr "Selettore icona"
 
+# GNOME-2-22
 #: ../libgnomeui/gnome-icon-entry.c:781
 msgid "Please pick the icon you want."
-msgstr "Scegliere una icona."
+msgstr "Scegliere un'icona."
 
+# GNOME-2-22
 #: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "This button will open a window to let you select an icon."
-msgstr "Questo pulsante apre una finestra dove selezionare una icona."
+msgstr "Questo pulsante apre una finestra dove selezionare un'icona."
 
 #: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
