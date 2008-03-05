@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui 2.22.x\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-02-29 16:52+0100\n"
-"PO-Revision-Date: 2008-03-05 14:28+0100\n"
+"PO-Revision-Date: 2008-03-05 21:39+0100\n"
 "Last-Translator: Luca Ferretti <elle.uca@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -726,9 +726,10 @@ msgstr ""
 msgid "You must log in to access %s\n"
 msgstr "È necessario effettuare il login per accedere a \"%s\"\n"
 
+# GNOME-2-22
 #: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
 msgid "Specify session management ID"
-msgstr "Spefica l'ID del gestore di sessione"
+msgstr "Specifica l'ID del gestore di sessione"
 
 #: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
 msgid "ID"
