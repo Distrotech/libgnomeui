@@ -1,3 +1,8 @@
+2008-03-06  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* file-chooser/gtkfilesystemgio.c: (get_icon_string):
+	Fix for a crash in the gio backend. Patch from Alex Larsson.
+
 2008-02-25  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* gnome-app-helper.c (toolbar_style_changed_notify): Remove unused
