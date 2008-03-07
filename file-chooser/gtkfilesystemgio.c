@@ -768,6 +768,41 @@ gtk_file_system_gio_get_folder (GtkFileSystem                  *file_system,
 }
 
 static gchar *
+get_icon_for_special_directory (const char *uri)
+{
+  const char *special_dir;
+  char *special_uri;
+
+  if (!uri)
+    return NULL;
+
+  if (strcmp (uri, "file:///") == 0)
+    return "gnome-dev-harddisk";
+
+  special_dir = g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP);
+  special_uri = g_filename_to_uri (special_dir, NULL, NULL);
+  if (strcmp (uri, special_uri) == 0)
+    {
+      g_free (special_uri);
+      return "gnome-fs-desktop";
+    }
+
+  g_free (special_uri);
+
+  special_dir = g_get_home_dir ();
+  special_uri = g_filename_to_uri (special_dir, NULL, NULL);
+  if (strcmp (uri, special_uri) == 0)
+    {
+      g_free (special_uri);
+      return "gnome-fs-home";
+    }
+
+  g_free (special_uri);
+
+  return NULL;
+}
+
+static gchar *
 get_icon_string (GIcon *icon)
 {
   gchar *name = NULL;
@@ -798,7 +833,8 @@ get_icon_string (GIcon *icon)
 }
 
 static GtkFileInfo *
-translate_file_info (GFileInfo *file_info)
+translate_file_info (const char *uri,
+		     GFileInfo *file_info)
 {
   GtkFileInfo *info;
   gboolean is_folder;
@@ -822,14 +858,24 @@ translate_file_info (GFileInfo *file_info)
     gtk_file_info_set_icon_name (info, thumbnail_path);
   else
     {
-      GIcon *icon;
-      gchar *name;
+      const gchar *icon_name;
 
-      icon = g_file_info_get_icon (file_info);
-      name = get_icon_string (icon);
-      gtk_file_info_set_icon_name (info, name);
+      icon_name = get_icon_for_special_directory (uri);
+      if (icon_name)
+        {
+          gtk_file_info_set_icon_name (info, icon_name);
+	}
+      else
+        {
+          GIcon *icon;
+          gchar *name;
 
-      g_free (name);
+	  icon = g_file_info_get_icon (file_info);
+	  name = get_icon_string (icon);
+	  gtk_file_info_set_icon_name (info, name);
+
+	  g_free (name);
+	}
     }
 
   return info;
@@ -883,7 +929,11 @@ query_info_callback (GObject      *source_object,
 
   if (file_info)
     {
-      info = translate_file_info (file_info);
+      char *uri;
+
+      uri = g_file_get_uri (file);
+      info = translate_file_info (uri, file_info);
+      g_free (uri);
       g_object_unref (file_info);
     }
   else if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_MOUNTED) && !handle->tried_mount)
@@ -1220,6 +1270,19 @@ gtk_file_system_gio_volume_get_icon_name (GtkFileSystem        *file_system,
   else if (g_type_is_a (G_OBJECT_TYPE (file_system_volume), G_TYPE_MOUNT))
     {
       GMount *mount = G_MOUNT (file_system_volume);
+      GFile *file;
+      const char *icon_name;
+      char *uri;
+
+      file = g_mount_get_root (mount);
+      uri = g_file_get_uri (file);
+      g_object_unref (file);
+
+      icon_name = get_icon_for_special_directory (uri);
+      g_free (uri);
+      if (icon_name)
+        return g_strdup (icon_name);
+
       icon = g_mount_get_icon (mount);
     }
 
@@ -1774,15 +1837,17 @@ gtk_file_folder_gio_get_info (GtkFileFolder      *folder,
 {
   GtkFileFolderGio *folder_gio;
   GFileInfo *file_info;
+  const char *uri;
 
   DEBUG ("folder_get_info");
 
   folder_gio = GTK_FILE_FOLDER_GIO (folder);
+  uri = gtk_file_path_get_string (path);
   file_info = g_hash_table_lookup (folder_gio->children,
-				   gtk_file_path_get_string (path));
+				   uri);
 
   if (file_info)
-    return translate_file_info (file_info);
+    return translate_file_info (uri, file_info);
 
   return NULL;
 }
