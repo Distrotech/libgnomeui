@@ -88,6 +88,7 @@ struct GtkFileSystemHandleGio
   guint source_id;
   gpointer callback;
   gpointer data;
+  guint tried_mount : 1;
 };
 
 struct GtkFileFolderGioClass
@@ -196,6 +197,9 @@ static gchar *               gtk_file_system_gio_get_bookmark_label (GtkFileSyst
 static void                  gtk_file_system_gio_set_bookmark_label (GtkFileSystem                *file_system,
 								     const GtkFilePath            *path,
 								     const gchar                  *label);
+static void                  query_info_callback                    (GObject      *source_object,
+								     GAsyncResult *result,
+								     gpointer      user_data);
 
 /* GtkFileFolderGio methods */
 static GType gtk_file_folder_gio_get_type       (void);
@@ -832,6 +836,35 @@ translate_file_info (GFileInfo *file_info)
 }
 
 static void
+mount_async_callback (GObject      *source_object,
+		      GAsyncResult *result,
+		      gpointer      user_data)
+{
+  GtkFileSystemHandleGio *handle;
+  GError *error = NULL;
+  GFile *file;
+
+  DEBUG ("mount_async_callback");
+
+  g_message ("tried to mount something");
+
+  file = G_FILE (source_object);
+  handle = GTK_FILE_SYSTEM_HANDLE_GIO (user_data);
+  if (g_file_mount_enclosing_volume_finish (file, result, &error))
+    {
+      g_file_query_info_async (file, "standard,time,thumbnail::*", 0, 0,
+			       handle->cancellable,
+			       query_info_callback,
+			       handle);
+    }
+  else
+    {
+      ((GtkFileSystemGetInfoCallback) handle->callback) (GTK_FILE_SYSTEM_HANDLE (handle),
+							 NULL, error, handle->data);
+    }
+}
+
+static void
 query_info_callback (GObject      *source_object,
 		     GAsyncResult *result,
 		     gpointer      user_data)
@@ -852,6 +885,17 @@ query_info_callback (GObject      *source_object,
     {
       info = translate_file_info (file_info);
       g_object_unref (file_info);
+    }
+  else if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_MOUNTED) && !handle->tried_mount)
+    {
+      /* If it's not mounted, try to mount it ourselves */
+      g_error_free (error);
+      handle->tried_mount = TRUE;
+      g_file_mount_enclosing_volume (file, G_MOUNT_MOUNT_NONE, NULL,
+				     handle->cancellable,
+				     mount_async_callback,
+				     handle);
+      return;
     }
 
   ((GtkFileSystemGetInfoCallback) handle->callback) (GTK_FILE_SYSTEM_HANDLE (handle),
@@ -882,6 +926,7 @@ gtk_file_system_gio_get_info (GtkFileSystem                *file_system,
   handle->cancellable = g_cancellable_new ();
   handle->callback = callback;
   handle->data = data;
+  handle->tried_mount = FALSE;
 
   g_file_query_info_async (file, "standard,time,thumbnail::*", 0, 0,
 			   handle->cancellable,

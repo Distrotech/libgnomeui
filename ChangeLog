@@ -1,3 +1,10 @@
+2008-03-07  Bastien Nocera  <hadess@hadess.net>
+
+	* file-chooser/gtkfilesystemgio.c (mount_async_callback),
+	(query_info_callback), (gtk_file_system_gio_get_info):
+	Try to mount remote locations when getting the file info
+	fails with a "Not mounted" error (Closes: #520615)
+
 2008-03-06  Federico Mena Quintero  <federico@novell.com>
 
 	* file-chooser/gtkfilesystemgnomevfs.c
