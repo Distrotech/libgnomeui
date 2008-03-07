@@ -849,7 +849,6 @@ get_icon_string (GIcon *icon)
 
       icon_file = g_file_icon_get_file (G_FILE_ICON (icon));
       name = g_file_get_path (icon_file);
-      g_object_unref (icon_file);
     }
 
   return name;
