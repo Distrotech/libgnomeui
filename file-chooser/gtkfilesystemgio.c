@@ -21,6 +21,7 @@
 #include <config.h>
 #include <gio/gio.h>
 #include <glib-object.h>
+#include <glib/gi18n-lib.h>
 #include <gtk/gtk.h>
 #include <string.h>
 #include "gtkfilesystemgio.h"
@@ -215,6 +216,14 @@ static gboolean              gtk_file_folder_gio_list_children    (GtkFileFolder
 								   GError                        **error);
 static gboolean              gtk_file_folder_gio_is_finished_loading (GtkFileFolder               *folder);
 
+/* The pointers we return for a GtkFileSystemVolume are opaque tokens; they are
+ * really pointers to GDrive, GVolume or GMount objects.  We need an extra
+ * token for the fake "File System" volume.  So, we'll return the pointer to
+ * this particular string.
+ */
+static const char *root_volume_token = "File System";
+#define IS_ROOT_VOLUME_TOKEN(volume) ((gpointer) (volume) == (gpointer) root_volume_token)
+
 /* GtkFileSystem module methods */
 void                         fs_module_init     (GTypeModule    *module);
 void                         fs_module_exit     (void);
@@ -267,6 +276,8 @@ get_volumes_list (GtkFileSystemGio *file_system)
 
   if (file_system->volumes)
     {
+      /* Remove the first one by hand */
+      file_system->volumes = g_slist_remove (file_system->volumes, file_system->volumes->data);
       g_slist_foreach (file_system->volumes, (GFunc) g_object_unref, NULL);
       g_slist_free (file_system->volumes);
       file_system->volumes = NULL;
@@ -372,6 +383,9 @@ get_volumes_list (GtkFileSystemGio *file_system)
       g_object_unref (mount);
     }
   g_list_free (mounts);
+
+  /* And finally, add the root volume to the front of the list */
+  file_system->volumes = g_slist_prepend (file_system->volumes, (gpointer) root_volume_token);
 }
 
 static void
@@ -452,6 +466,8 @@ gtk_file_system_gio_dispose (GObject *object)
 
   if (impl->volumes)
     {
+      /* Remove the first one by hand */
+      impl->volumes = g_slist_remove (impl->volumes, impl->volumes->data);
       g_slist_foreach (impl->volumes, (GFunc) g_object_unref, NULL);
       g_slist_free (impl->volumes);
       impl->volumes = NULL;
@@ -559,7 +575,8 @@ gtk_file_system_gio_list_volumes (GtkFileSystem *file_system)
 
   file_system_gio = GTK_FILE_SYSTEM_GIO (file_system);
   list = g_slist_copy (file_system_gio->volumes);
-  g_slist_foreach (list, (GFunc) g_object_ref, NULL);
+  /* Don't try to ref the "File System" one */
+  g_slist_foreach (list->next, (GFunc) g_object_ref, NULL);
 
   return list;
 }
@@ -572,15 +589,21 @@ gtk_file_system_gio_get_volume_for_path (GtkFileSystem     *file_system,
   GFile *file;
   GMount *mount;
   GSList *list;
+  const char *uri;
 
   DEBUG ("get_volume_for_path");
 
+  uri = gtk_file_path_get_string (path);
+  if (strcmp (uri, "file:///") == 0)
+    return (GtkFileSystemVolume *) root_volume_token;
+
   file_system_gio = GTK_FILE_SYSTEM_GIO (file_system);
-  file = get_file_from_path (path);
+  file = g_file_new_for_uri (uri);
 
   g_return_val_if_fail (file != NULL, NULL);
 
-  for (list = file_system_gio->volumes; list; list = list->next)
+  /* Skip the first item on the list! */
+  for (list = file_system_gio->volumes->next; list; list = list->next)
     {
       if (g_type_is_a (G_OBJECT_TYPE (list->data), G_TYPE_MOUNT))
         {
@@ -1074,6 +1097,9 @@ gtk_file_system_gio_volume_free (GtkFileSystem       *file_system,
 				 GtkFileSystemVolume *volume)
 {
   DEBUG ("volume_free");
+  if (IS_ROOT_VOLUME_TOKEN(volume))
+    return;
+
   g_object_unref (G_OBJECT (volume));
 }
 
@@ -1085,6 +1111,9 @@ gtk_file_system_gio_volume_get_base_path (GtkFileSystem       *file_system,
   GtkFilePath *path;
 
   DEBUG ("volume_get_base_path");
+
+  if (IS_ROOT_VOLUME_TOKEN (file_system_volume))
+    return gtk_file_path_new_dup ("file:///");
 
   path = NULL;
 
@@ -1121,6 +1150,9 @@ gtk_file_system_gio_volume_get_is_mounted (GtkFileSystem       *file_system,
   gboolean mounted;
 
   DEBUG ("volume_get_is_mounted");
+
+  if (IS_ROOT_VOLUME_TOKEN (file_system_volume))
+    return TRUE;
 
   mounted = FALSE;
 
@@ -1228,6 +1260,9 @@ gtk_file_system_gio_volume_get_display_name (GtkFileSystem       *file_system,
 
   DEBUG ("volume_get_display_name");
 
+  if (IS_ROOT_VOLUME_TOKEN (file_system_volume))
+    return g_strdup (_("File System"));
+
   if (g_type_is_a (G_OBJECT_TYPE (file_system_volume), G_TYPE_DRIVE))
     {
       GDrive *drive = G_DRIVE (file_system_volume);
@@ -1256,6 +1291,9 @@ gtk_file_system_gio_volume_get_icon_name (GtkFileSystem        *file_system,
   GIcon *icon = NULL;
 
   DEBUG ("volume_get_icon_name");
+
+  if (IS_ROOT_VOLUME_TOKEN (file_system_volume))
+    return g_strdup ("gnome-dev-harddisk");
 
   if (g_type_is_a (G_OBJECT_TYPE (file_system_volume), G_TYPE_DRIVE))
     {

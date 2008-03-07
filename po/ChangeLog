@@ -1,3 +1,8 @@
+2008-03-07  Bastien Nocera  <hadess@hadess.net>
+
+	* POTFILES.in: Add the gio backend as to be translated,
+	no new strings (they're already in the gnome-vfs backend)
+
 2008-03-07  Alexander Nyakhaychyk  <nab@mail.by>
 
 	* be.po: Updated Belarusian Translation.

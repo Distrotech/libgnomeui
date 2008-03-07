@@ -1,5 +1,17 @@
 2008-03-07  Bastien Nocera  <hadess@hadess.net>
 
+	* file-chooser/gtkfilesystemgio.c (get_volumes_list),
+	(gtk_file_system_gio_dispose), (gtk_file_system_gio_list_volumes),
+	(gtk_file_system_gio_get_volume_for_path),
+	(gtk_file_system_gio_volume_free),
+	(gtk_file_system_gio_volume_get_base_path),
+	(gtk_file_system_gio_volume_get_is_mounted),
+	(gtk_file_system_gio_volume_get_display_name),
+	(gtk_file_system_gio_volume_get_icon_name): Show the "File System"
+	mount in the file chooser's shortcuts (Closes: #520889)
+
+2008-03-07  Bastien Nocera  <hadess@hadess.net>
+
 	* file-chooser/gtkfilesystemgio.c (get_icon_for_special_directory),
 	(translate_file_info), (query_info_callback),
 	(gtk_file_system_gio_volume_get_icon_name),
