@@ -1,15 +1,15 @@
 # Romanian translation for libgnomeui
-# Copyright (C) 2002 - 2007 Free Software Foundation, Inc.
+# Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 # Mugurel Tudor <mugurelu@gmail.com>, 2002, 2003.
 # Marius Andreiana <marius galuna.ro>, 2003.
-# Mişu Moldovan <dumol@gnome.ro>, 2003 - 2007.
+# Mişu Moldovan <dumol@gnome.ro>, 2003 - 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-10 15:02+0000\n"
-"PO-Revision-Date: 2007-03-11 00:31+0200\n"
+"POT-Creation-Date: 2007-10-12 07:28+0100\n"
+"PO-Revision-Date: 2008-03-03 00:23+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@gnome.ro>\n"
 "Language-Team: <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -32,50 +32,71 @@ msgstr "Element copil 2"
 msgid "Hint for item 2"
 msgstr "Sugestie pentru elementul 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1005
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1036
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s este o legătură către ceva ce nu e un director"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1016
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1047
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s este o legătură fără o locaţie de destinaţie"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1091
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1122
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s nu este un director"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1943
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1160
+#, c-format
+msgid "Could not monitor '%s': %s"
+msgstr "Nu s-a putut monitoriza „%s”: %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1273
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1486
+#, c-format
+msgid "Could not get info for '%s': %s"
+msgstr "Nu s-au putut obţine detalii pentru „%s”: %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1609
+#, c-format
+msgid "Could not create '%s': %s"
+msgstr "Nu s-a putut crea „%s”: %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1975
 msgid "Network Servers"
 msgstr "Servere reţea"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1959
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1991
 msgid "File System"
 msgstr "Sistem de fişiere"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2488
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2061
+#, c-format
+msgid "'%s': %s"
+msgstr "„%s”: %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2520
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Salvare eşuată favorit (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2925
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2957
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Nu s-au putut obţine detalii pentru „%s”"
 
-#: ../file-chooser/testfilechooser.c:178
+#: ../file-chooser/testfilechooser.c:181
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "Nu s-au putut obţine detalii pentru fişierul „%s”: %s"
 
-#: ../file-chooser/testfilechooser.c:191
+#: ../file-chooser/testfilechooser.c:194
 #, c-format
 msgid "Failed to open file '%s': %s"
 msgstr "Nu s-a putut deschide fişierul „%s”: %s"
 
-#: ../file-chooser/testfilechooser.c:230
+#: ../file-chooser/testfilechooser.c:233
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
@@ -191,142 +212,142 @@ msgid "About %s"
 msgstr "Despre %s"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fişier"
 
-#: ../libgnomeui/gnome-app-helper.c:83
+#: ../libgnomeui/gnome-app-helper.c:84
 msgid "_File/"
 msgstr "_Fişier/"
 
-#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Editare"
 
-#: ../libgnomeui/gnome-app-helper.c:85
+#: ../libgnomeui/gnome-app-helper.c:86
 msgid "_Edit/"
 msgstr "_Editare/"
 
-#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Vizualizare"
 
-#: ../libgnomeui/gnome-app-helper.c:87
+#: ../libgnomeui/gnome-app-helper.c:88
 msgid "_View/"
 msgstr "_Vizualizare/"
 
-#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Setări"
 
-#: ../libgnomeui/gnome-app-helper.c:89
+#: ../libgnomeui/gnome-app-helper.c:90
 msgid "_Settings/"
 msgstr "_Setări/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Nou"
 
-#: ../libgnomeui/gnome-app-helper.c:91
+#: ../libgnomeui/gnome-app-helper.c:92
 msgid "_New/"
 msgstr "_Nou/"
 
-#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Fişie_re"
 
-#: ../libgnomeui/gnome-app-helper.c:93
+#: ../libgnomeui/gnome-app-helper.c:94
 msgid "Fi_les/"
 msgstr "Fişie_re/"
 
-#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "Fere_stre"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Joc"
 
-#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Ajutor"
 
-#: ../libgnomeui/gnome-app-helper.c:97
+#: ../libgnomeui/gnome-app-helper.c:98
 msgid "_Windows/"
 msgstr "Fere_stre/"
 
 #. Open
-#: ../libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:110
 msgid "_Open..."
 msgstr "_Deschide..."
 
-#: ../libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:110
 msgid "Open a file"
 msgstr "Deschide un fişier"
 
 #. Save
-#: ../libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:115
 msgid "_Save"
 msgstr "_Salvează"
 
-#: ../libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:115
 msgid "Save the current file"
 msgstr "Salvează fişierul curent"
 
 #. Save As
-#: ../libgnomeui/gnome-app-helper.c:119
+#: ../libgnomeui/gnome-app-helper.c:120
 msgid "Save _As..."
 msgstr "Salvează c_a..."
 
-#: ../libgnomeui/gnome-app-helper.c:120
+#: ../libgnomeui/gnome-app-helper.c:121
 msgid "Save the current file with a different name"
 msgstr "Salvează fişierul curent cu un alt nume"
 
 #. Revert
-#: ../libgnomeui/gnome-app-helper.c:125
+#: ../libgnomeui/gnome-app-helper.c:126
 msgid "_Revert"
 msgstr "Restaurea_ză"
 
-#: ../libgnomeui/gnome-app-helper.c:126
+#: ../libgnomeui/gnome-app-helper.c:127
 msgid "Revert to a saved version of the file"
 msgstr "Restaurează la o versiune anterior salvată a fişierului"
 
 #. Print
-#: ../libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:132
 msgid "_Print..."
 msgstr "_Tipăreşte..."
 
-#: ../libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:132
 msgid "Print the current file"
 msgstr "Tipăreşte fişierul curent"
 
 #. Print Setup
-#: ../libgnomeui/gnome-app-helper.c:136
+#: ../libgnomeui/gnome-app-helper.c:137
 msgid "Print S_etup..."
 msgstr "Setări ti_părire..."
 
-#: ../libgnomeui/gnome-app-helper.c:137
+#: ../libgnomeui/gnome-app-helper.c:138
 msgid "Setup the page settings for your current printer"
 msgstr "Setările paginii pentru imprimanta curentă"
 
 #. Close
-#: ../libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:143
 msgid "_Close"
 msgstr "În_chide"
 
-#: ../libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:143
 msgid "Close the current file"
 msgstr "Închide fişierul curent"
 
 #. Exit
-#: ../libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:148
 msgid "_Quit"
 msgstr "_Ieşire"
 
-#: ../libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:148
 msgid "Quit the application"
 msgstr "Ieşire din aplicaţie"
 
@@ -334,93 +355,93 @@ msgstr "Ieşire din aplicaţie"
 #. * The "Edit" menu
 #.
 #. Cut
-#: ../libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cu_t"
 msgstr "_Taie"
 
-#: ../libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cut the selection"
 msgstr "Taie selecţia"
 
 #. 10
 #. Copy
-#: ../libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:162
 msgid "_Copy"
 msgstr "_Copiază"
 
-#: ../libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:162
 msgid "Copy the selection"
 msgstr "Copiază selecţia"
 
 #. Paste
-#: ../libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:167
 msgid "_Paste"
 msgstr "_Lipeşte"
 
-#: ../libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:167
 msgid "Paste the clipboard"
 msgstr "Lipeşte din clipboard"
 
 #. Clear
-#: ../libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:172
 msgid "C_lear"
 msgstr "Şter_ge"
 
-#: ../libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:172
 msgid "Clear the selection"
 msgstr "Şterge selecţia"
 
 #. Undo
-#: ../libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:177
 msgid "_Undo"
 msgstr "Anulea_ză"
 
-#: ../libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:177
 msgid "Undo the last action"
 msgstr "Anulează ultima acţiune"
 
 #. Redo
-#: ../libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:182
 msgid "_Redo"
 msgstr "Re_fă"
 
-#: ../libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:182
 msgid "Redo the undone action"
 msgstr "Refă ultima acţiune anulată"
 
 #. Find
-#: ../libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:187
 msgid "_Find..."
 msgstr "C_aută..."
 
-#: ../libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:187
 msgid "Search for a string"
 msgstr "Caută un anumit text"
 
 #. Find Again
-#: ../libgnomeui/gnome-app-helper.c:191
+#: ../libgnomeui/gnome-app-helper.c:192
 msgid "Find Ne_xt"
 msgstr "Caută _următorul"
 
-#: ../libgnomeui/gnome-app-helper.c:192
+#: ../libgnomeui/gnome-app-helper.c:193
 msgid "Search again for the same string"
 msgstr "Caută din nou acelaşi text"
 
 #. Replace
-#: ../libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:198
 msgid "R_eplace..."
 msgstr "Î_nlocuieşte..."
 
-#: ../libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:198
 msgid "Replace a string"
 msgstr "Înlocuieşte un text"
 
 #. Properties
-#: ../libgnomeui/gnome-app-helper.c:202
+#: ../libgnomeui/gnome-app-helper.c:203
 msgid "_Properties"
 msgstr "_Proprietăţi"
 
-#: ../libgnomeui/gnome-app-helper.c:203
+#: ../libgnomeui/gnome-app-helper.c:204
 msgid "Modify the file's properties"
 msgstr "Modifică proprietăţile fişierului"
 
@@ -428,11 +449,11 @@ msgstr "Modifică proprietăţile fişierului"
 #. * The Settings menu
 #.
 #. Settings
-#: ../libgnomeui/gnome-app-helper.c:211
+#: ../libgnomeui/gnome-app-helper.c:212
 msgid "Prefere_nces"
 msgstr "_Preferinţe"
 
-#: ../libgnomeui/gnome-app-helper.c:212
+#: ../libgnomeui/gnome-app-helper.c:213
 msgid "Configure the application"
 msgstr "Configurare aplicaţie"
 
@@ -441,134 +462,134 @@ msgstr "Configurare aplicaţie"
 #. * And the "Help" menu
 #.
 #. About
-#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:4
+#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Despre"
 
-#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
+#: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Despre această aplicaţie"
 
-#: ../libgnomeui/gnome-app-helper.c:225
+#: ../libgnomeui/gnome-app-helper.c:226
 msgid "Select _All"
 msgstr "Selectează t_ot"
 
-#: ../libgnomeui/gnome-app-helper.c:226
+#: ../libgnomeui/gnome-app-helper.c:227
 msgid "Select everything"
 msgstr "Selectează totul"
 
 #.
 #. * Window menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:234
+#: ../libgnomeui/gnome-app-helper.c:235
 msgid "Create New _Window"
 msgstr "Creează _fereastră nouă"
 
-#: ../libgnomeui/gnome-app-helper.c:235
+#: ../libgnomeui/gnome-app-helper.c:236
 msgid "Create a new window"
 msgstr "Creează o fereastră nouă"
 
-#: ../libgnomeui/gnome-app-helper.c:239
+#: ../libgnomeui/gnome-app-helper.c:240
 msgid "_Close This Window"
 msgstr "În_chide această fereastră"
 
-#: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
+#: ../libgnomeui/gnome-app-helper.c:241 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Închide fereastra curentă"
 
 #.
 #. * The "Game" menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:248
+#: ../libgnomeui/gnome-app-helper.c:249
 msgid "_New Game"
 msgstr "_Joc nou"
 
-#: ../libgnomeui/gnome-app-helper.c:249
+#: ../libgnomeui/gnome-app-helper.c:250
 msgid "Start a new game"
 msgstr "Începe un joc nou"
 
-#: ../libgnomeui/gnome-app-helper.c:253
+#: ../libgnomeui/gnome-app-helper.c:254
 msgid "_Pause Game"
 msgstr "_Pauză joc"
 
-#: ../libgnomeui/gnome-app-helper.c:254
+#: ../libgnomeui/gnome-app-helper.c:255
 msgid "Pause the game"
 msgstr "Întrerupe temporar jocul"
 
-#: ../libgnomeui/gnome-app-helper.c:258
+#: ../libgnomeui/gnome-app-helper.c:259
 msgid "_Restart Game"
 msgstr "_Restartează jocul"
 
-#: ../libgnomeui/gnome-app-helper.c:259
+#: ../libgnomeui/gnome-app-helper.c:260
 msgid "Restart the game"
 msgstr "Restartează jocul"
 
-#: ../libgnomeui/gnome-app-helper.c:263
+#: ../libgnomeui/gnome-app-helper.c:264
 msgid "_Undo Move"
 msgstr "Anulea_ză mişcarea"
 
-#: ../libgnomeui/gnome-app-helper.c:264
+#: ../libgnomeui/gnome-app-helper.c:265
 msgid "Undo the last move"
 msgstr "Anulează ultima mişcare"
 
-#: ../libgnomeui/gnome-app-helper.c:268
+#: ../libgnomeui/gnome-app-helper.c:269
 msgid "_Redo Move"
 msgstr "Re_fă mişcarea"
 
-#: ../libgnomeui/gnome-app-helper.c:269
+#: ../libgnomeui/gnome-app-helper.c:270
 msgid "Redo the undone move"
 msgstr "Refă ultima mişcare anulată"
 
-#: ../libgnomeui/gnome-app-helper.c:273
+#: ../libgnomeui/gnome-app-helper.c:274
 msgid "_Hint"
 msgstr "Su_gestie"
 
-#: ../libgnomeui/gnome-app-helper.c:274
+#: ../libgnomeui/gnome-app-helper.c:275
 msgid "Get a hint for your next move"
 msgstr "Primeşte o sugestie pentru următoarea mişcare"
 
 #. 30
-#: ../libgnomeui/gnome-app-helper.c:279
+#: ../libgnomeui/gnome-app-helper.c:280
 msgid "_Scores..."
 msgstr "_Scoruri..."
 
-#: ../libgnomeui/gnome-app-helper.c:280
+#: ../libgnomeui/gnome-app-helper.c:281
 msgid "View the scores"
 msgstr "Arată scorurile"
 
-#: ../libgnomeui/gnome-app-helper.c:284
+#: ../libgnomeui/gnome-app-helper.c:285
 msgid "_End Game"
 msgstr "_Termină jocul"
 
-#: ../libgnomeui/gnome-app-helper.c:285
+#: ../libgnomeui/gnome-app-helper.c:286
 msgid "End the current game"
 msgstr "Termină jocul curent"
 
-#: ../libgnomeui/gnome-app-helper.c:1147
+#: ../libgnomeui/gnome-app-helper.c:1148
 msgid "_Contents"
 msgstr "_Cuprins"
 
-#: ../libgnomeui/gnome-app-helper.c:1150
+#: ../libgnomeui/gnome-app-helper.c:1151
 msgid "View help for this application"
 msgstr "Citiţi ajutorul pentru această aplicaţie"
 
-#: ../libgnomeui/gnome-app-helper.c:2587
+#: ../libgnomeui/gnome-app-helper.c:2588
 msgid "Text Below Icons"
 msgstr "Text sub iconiţe"
 
-#: ../libgnomeui/gnome-app-helper.c:2588
+#: ../libgnomeui/gnome-app-helper.c:2589
 msgid "Priority Text Beside Icons"
 msgstr "Text prioritar lângă iconiţe"
 
-#: ../libgnomeui/gnome-app-helper.c:2589
+#: ../libgnomeui/gnome-app-helper.c:2590
 msgid "Icons Only"
 msgstr "Doar iconiţe"
 
-#: ../libgnomeui/gnome-app-helper.c:2590
+#: ../libgnomeui/gnome-app-helper.c:2591
 msgid "Text Only"
 msgstr "Doar text"
 
-#: ../libgnomeui/gnome-app-helper.c:2651
+#: ../libgnomeui/gnome-app-helper.c:2652
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Utilizează setările GNOME (%s)"
@@ -621,35 +642,35 @@ msgstr "ID aplicaţie"
 msgid "The application ID string"
 msgstr "ID-ul aplicaţiei"
 
-#: ../libgnomeui/gnome-appbar.c:741
+#: ../libgnomeui/gnome-appbar.c:743
 msgid "Has Progress"
 msgstr "Are progres"
 
-#: ../libgnomeui/gnome-appbar.c:742
+#: ../libgnomeui/gnome-appbar.c:744
 msgid "Create a progress widget."
 msgstr "Creează un widget de progres"
 
-#: ../libgnomeui/gnome-appbar.c:749
+#: ../libgnomeui/gnome-appbar.c:751
 msgid "Has Status"
 msgstr "Are stare"
 
-#: ../libgnomeui/gnome-appbar.c:750
+#: ../libgnomeui/gnome-appbar.c:752
 msgid "Create a status widget."
 msgstr "Creează un widget de stare"
 
-#: ../libgnomeui/gnome-appbar.c:757
+#: ../libgnomeui/gnome-appbar.c:759
 msgid "Interactivity"
 msgstr "Interactivitate"
 
-#: ../libgnomeui/gnome-appbar.c:758
+#: ../libgnomeui/gnome-appbar.c:760
 msgid "Level of user activity required."
 msgstr "Nivelul cerut de activitate al utilizatorului."
 
-#: ../libgnomeui/gnome-authentication-manager.c:80
+#: ../libgnomeui/gnome-authentication-manager.c:82
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Proxy-ul HTTP setat necesită autentificare.\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:81
+#: ../libgnomeui/gnome-authentication-manager.c:83
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -658,144 +679,144 @@ msgstr ""
 "Trebuie să va autentificaţi pentru a accesa „%s”.\n"
 "%s"
 
-#: ../libgnomeui/gnome-authentication-manager.c:84
+#: ../libgnomeui/gnome-authentication-manager.c:86
 msgid "Your password will be transmitted unencrypted."
 msgstr "Parola va fi trimisă necriptat."
 
-#: ../libgnomeui/gnome-authentication-manager.c:85
+#: ../libgnomeui/gnome-authentication-manager.c:87
 msgid "Your password will be transmitted encrypted."
 msgstr "Parola va fi trimisă criptat."
 
-#: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:307
+#: ../libgnomeui/gnome-authentication-manager.c:90
+#: ../libgnomeui/gnome-authentication-manager.c:309
 msgid "Authentication Required"
 msgstr "Se cere autentificare"
 
 #. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
-#: ../libgnomeui/gnome-authentication-manager.c:299
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Trebuie să va autentificaţi pentru a accesa %s în domeniul %s.\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:301
+#: ../libgnomeui/gnome-authentication-manager.c:303
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Trebuie să va autentificaţi pentru a accesa %s.\n"
 
-#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "Specify session management ID"
 msgstr "Specifică ID-ul de administrare a sesiunii"
 
-#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
 msgid "Specify prefix of saved configuration"
 msgstr "Specifică prefixul configuraţiei salvate"
 
-#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: ../libgnomeui/gnome-client.c:908 ../libgnomeui/gnome-client.c:924
+#: ../libgnomeui/gnome-client.c:1008 ../libgnomeui/gnome-client.c:1042
 msgid "Disable connection to session manager"
 msgstr "Dezactivează conexiunea la administratorul sesiunii"
 
-#: ../libgnomeui/gnome-client.c:1034
+#: ../libgnomeui/gnome-client.c:1016
 msgid "Session management:"
 msgstr "Administrare sesiune:"
 
-#: ../libgnomeui/gnome-client.c:1035
+#: ../libgnomeui/gnome-client.c:1017
 msgid "Show session management options"
 msgstr "Arată opţiunile de administrare a sesiunilor"
 
-#: ../libgnomeui/gnome-client.c:1047
+#: ../libgnomeui/gnome-client.c:1048
 msgid "Session management"
 msgstr "Administrare sesiune"
 
-#: ../libgnomeui/gnome-client.c:2572
+#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "Renunţă la ieşire"
 
-#: ../libgnomeui/gnome-color-picker.c:414
+#: ../libgnomeui/gnome-color-picker.c:412
 msgid "Received invalid color data\n"
 msgstr "Am primit date invalide despre culoare\n"
 
-#: ../libgnomeui/gnome-color-picker.c:465
+#: ../libgnomeui/gnome-color-picker.c:466
 msgid "Open a dialog to specify the color"
 msgstr "Deschide un dialog pentru specificarea culorii"
 
-#: ../libgnomeui/gnome-color-picker.c:487
+#: ../libgnomeui/gnome-color-picker.c:488
 msgid "Pick a color"
 msgstr "Alege o culoare"
 
-#: ../libgnomeui/gnome-dateedit.c:491 ../libgnomeui/gnome-dateedit.c:788
+#: ../libgnomeui/gnome-dateedit.c:495 ../libgnomeui/gnome-dateedit.c:802
 msgid "Time"
 msgstr "Oră"
 
-#: ../libgnomeui/gnome-dateedit.c:492
+#: ../libgnomeui/gnome-dateedit.c:496
 msgid "The time currently selected"
 msgstr "Ora selectată curent"
 
-#: ../libgnomeui/gnome-dateedit.c:504
+#: ../libgnomeui/gnome-dateedit.c:508
 msgid "DateEdit Flags"
 msgstr "Fanioane „DateEdit”"
 
-#: ../libgnomeui/gnome-dateedit.c:505
+#: ../libgnomeui/gnome-dateedit.c:509
 msgid "Flags for how DateEdit looks"
 msgstr "Fanioane referitoare la tipul „DateEdit”"
 
-#: ../libgnomeui/gnome-dateedit.c:514
+#: ../libgnomeui/gnome-dateedit.c:518
 msgid "Lower Hour"
 msgstr "Ora inferioară"
 
-#: ../libgnomeui/gnome-dateedit.c:515
+#: ../libgnomeui/gnome-dateedit.c:519
 msgid "Lower hour in the time popup selector"
 msgstr "Ora inferioară din selectorul popup al orei"
 
-#: ../libgnomeui/gnome-dateedit.c:525
+#: ../libgnomeui/gnome-dateedit.c:529
 msgid "Upper Hour"
 msgstr "Ora superioară"
 
-#: ../libgnomeui/gnome-dateedit.c:526
+#: ../libgnomeui/gnome-dateedit.c:530
 msgid "Upper hour in the time popup selector"
 msgstr "Ora superioară din selectorul popup al orei"
 
-#: ../libgnomeui/gnome-dateedit.c:536
+#: ../libgnomeui/gnome-dateedit.c:540
 msgid "Initial Time"
 msgstr "Oră iniţială"
 
-#: ../libgnomeui/gnome-dateedit.c:537
+#: ../libgnomeui/gnome-dateedit.c:541
 msgid "The initial time"
 msgstr "Ora iniţială"
 
-#: ../libgnomeui/gnome-dateedit.c:751 ../libgnomeui/gnome-scores.c:97
+#: ../libgnomeui/gnome-dateedit.c:765 ../libgnomeui/gnome-scores.c:96
 msgid "Date"
 msgstr "Dată"
 
-#: ../libgnomeui/gnome-dateedit.c:764
+#: ../libgnomeui/gnome-dateedit.c:778
 msgid "Select Date"
 msgstr "Selectaţi data"
 
-#: ../libgnomeui/gnome-dateedit.c:764
+#: ../libgnomeui/gnome-dateedit.c:778
 msgid "Select the date from a calendar"
 msgstr "Selectaţi data dintr-un calendar"
 
 #. Calendar label, only shown if the date editor has a time field
-#: ../libgnomeui/gnome-dateedit.c:775
+#: ../libgnomeui/gnome-dateedit.c:789
 msgid "Calendar"
 msgstr "Calendar"
 
-#: ../libgnomeui/gnome-dateedit.c:796
+#: ../libgnomeui/gnome-dateedit.c:810
 msgid "Select Time"
 msgstr "Selectaţi ora"
 
-#: ../libgnomeui/gnome-dateedit.c:796
+#: ../libgnomeui/gnome-dateedit.c:810
 msgid "Select the time from a list"
 msgstr "Selectaţi ora dintr-o listă"
 
-#: ../libgnomeui/gnome-dateedit.c:1015
+#: ../libgnomeui/gnome-dateedit.c:1029
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr ""
 "gnome_date_edit_get_date este depăşit, utilizaţi gnome_date_edit_get_time"
@@ -908,24 +929,24 @@ msgstr "Culoarea de fundal pentru siglă setată"
 msgid "Logo Background color is set"
 msgstr "Culoarea de fundal pentru siglă este setată"
 
-#: ../libgnomeui/gnome-druid.c:154
+#: ../libgnomeui/gnome-druid.c:153
 msgid "Show Finish"
 msgstr "Arată „Terminare”"
 
-#: ../libgnomeui/gnome-druid.c:155
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Arată butonul „Terminare” în locul butonului „Următorul”"
 
-#: ../libgnomeui/gnome-druid.c:162
+#: ../libgnomeui/gnome-druid.c:161
 msgid "Show Help"
 msgstr "Arată „Ajutor”"
 
-#: ../libgnomeui/gnome-druid.c:163
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show the 'Help' button"
 msgstr "Arată butonul „Ajutor”"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
+#: ../libgnomeui/gnome-file-entry.c:239 ../libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
 msgstr "ID istoric"
 
@@ -937,7 +958,7 @@ msgstr "Intrare GTK"
 msgid "The GTK entry"
 msgstr "Intrarea GTK"
 
-#: ../libgnomeui/gnome-file-entry.c:237
+#: ../libgnomeui/gnome-file-entry.c:240
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -945,19 +966,19 @@ msgstr ""
 "Identificator unic pentru intrarea fişierului. Acesta va fi folosit pentru a "
 "salva lista istoricului."
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
+#: ../libgnomeui/gnome-file-entry.c:248 ../libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr "Titlul dialogului de selectare"
 
-#: ../libgnomeui/gnome-file-entry.c:246
+#: ../libgnomeui/gnome-file-entry.c:249
 msgid "Title for the Browse file dialog."
 msgstr "Titlu pentru dialogul de selectare fişier"
 
-#: ../libgnomeui/gnome-file-entry.c:253
+#: ../libgnomeui/gnome-file-entry.c:256
 msgid "Directory Entry"
 msgstr "Intrare directoare"
 
-#: ../libgnomeui/gnome-file-entry.c:254
+#: ../libgnomeui/gnome-file-entry.c:257
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -965,35 +986,35 @@ msgstr ""
 "Specifică dacă intrarea fişierelor este folosită pentru a introduce nume de "
 "directoare sau nume complete de fişiere."
 
-#: ../libgnomeui/gnome-file-entry.c:262
+#: ../libgnomeui/gnome-file-entry.c:265
 msgid "Modal"
 msgstr "Modală"
 
-#: ../libgnomeui/gnome-file-entry.c:263
+#: ../libgnomeui/gnome-file-entry.c:266
 msgid "Whether the Browse file window should be modal."
 msgstr "Specifică dacă fereastra de selectare fişier ar trebui să fie modală."
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
+#: ../libgnomeui/gnome-file-entry.c:273 ../libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "Nume fişier"
 
-#: ../libgnomeui/gnome-file-entry.c:271
+#: ../libgnomeui/gnome-file-entry.c:274
 msgid "Filename that should be displayed in the file entry."
 msgstr "Numele fişierului care ar trebui afişat în intrarea fişierelor."
 
-#: ../libgnomeui/gnome-file-entry.c:279
+#: ../libgnomeui/gnome-file-entry.c:282
 msgid "Default Path"
 msgstr "Cale implicită"
 
-#: ../libgnomeui/gnome-file-entry.c:280
+#: ../libgnomeui/gnome-file-entry.c:283
 msgid "Default path for the Browse file window."
 msgstr "Calea implicită pentru fereastra de selectare fişier."
 
-#: ../libgnomeui/gnome-file-entry.c:287
+#: ../libgnomeui/gnome-file-entry.c:290
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:288
+#: ../libgnomeui/gnome-file-entry.c:291
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1004,11 +1025,11 @@ msgstr ""
 "dacă aveţi nevoie să modificaţi sau să interogaţi oricare dintre parametrii "
 "săi."
 
-#: ../libgnomeui/gnome-file-entry.c:298
+#: ../libgnomeui/gnome-file-entry.c:301
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:299
+#: ../libgnomeui/gnome-file-entry.c:302
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1018,11 +1039,11 @@ msgstr ""
 "fişierelor. Puteţi folosi această proprietate pentru a afla GtkEntry dacă "
 "aveţi nevoie să modificaţi sau să interogaţi oricare dintre parametrii săi."
 
-#: ../libgnomeui/gnome-file-entry.c:309
+#: ../libgnomeui/gnome-file-entry.c:312
 msgid "Use GtkFileChooser"
 msgstr "Utilizează GtkFileChooser"
 
-#: ../libgnomeui/gnome-file-entry.c:310
+#: ../libgnomeui/gnome-file-entry.c:313
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
@@ -1030,31 +1051,31 @@ msgstr ""
 "Specifică dacă se va utiliza un widget GtkFileChooser sau un widget "
 "GtkFileSelection pentru a selecta fişiere."
 
-#: ../libgnomeui/gnome-file-entry.c:319
+#: ../libgnomeui/gnome-file-entry.c:322
 msgid "GtkFileChooser Action"
 msgstr "Acţiune GtkFileChooser"
 
-#: ../libgnomeui/gnome-file-entry.c:320
+#: ../libgnomeui/gnome-file-entry.c:323
 msgid "The type of operation that the file selector is performing."
 msgstr "Tipul operaţiunii efectuate de selectorul de fişiere."
 
-#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
+#: ../libgnomeui/gnome-file-entry.c:658 ../libgnomeui/gnome-file-entry.c:695
 msgid "Select file"
 msgstr "Selectaţi un fişier"
 
-#: ../libgnomeui/gnome-file-entry.c:817
+#: ../libgnomeui/gnome-file-entry.c:820
 msgid "Path"
 msgstr "Cale"
 
-#: ../libgnomeui/gnome-file-entry.c:817
+#: ../libgnomeui/gnome-file-entry.c:820
 msgid "Path to file"
 msgstr "Calea către fişier"
 
-#: ../libgnomeui/gnome-file-entry.c:844
+#: ../libgnomeui/gnome-file-entry.c:849
 msgid "_Browse..."
 msgstr "_Selectare..."
 
-#: ../libgnomeui/gnome-file-entry.c:845
+#: ../libgnomeui/gnome-file-entry.c:850
 msgid "Pop up a file selector to choose a file"
 msgstr "Deschide un selector de fişiere pentru a alege un fişier"
 
@@ -1161,39 +1182,39 @@ msgstr ""
 "configurare pentru %s. Unele setări de configurare s-ar putea să nu "
 "funcţioneze corect."
 
-#: ../libgnomeui/gnome-href.c:123
+#: ../libgnomeui/gnome-href.c:102
 msgid "URL"
 msgstr "URL"
 
-#: ../libgnomeui/gnome-href.c:124
+#: ../libgnomeui/gnome-href.c:103
 msgid "The URL that GnomeHRef activates"
 msgstr "URL-ul activat de GnomeHRef"
 
-#: ../libgnomeui/gnome-href.c:131
+#: ../libgnomeui/gnome-href.c:110
 msgid "Text"
 msgstr "Text"
 
-#: ../libgnomeui/gnome-href.c:132
+#: ../libgnomeui/gnome-href.c:111
 msgid "The text on the button"
 msgstr "Textul butonului"
 
-#: ../libgnomeui/gnome-href.c:133
+#: ../libgnomeui/gnome-href.c:112
 msgid "End World Hunger"
 msgstr "Rezolvă problemele globale ale omenirii"
 
-#: ../libgnomeui/gnome-href.c:139
+#: ../libgnomeui/gnome-href.c:118
 msgid "Link color"
 msgstr "Culoare legături"
 
-#: ../libgnomeui/gnome-href.c:140
+#: ../libgnomeui/gnome-href.c:119
 msgid "Color used to draw the link"
 msgstr "Culoarea folosită la afişarea legăturilor"
 
-#: ../libgnomeui/gnome-href.c:171
+#: ../libgnomeui/gnome-href.c:150
 msgid "This button will take you to the URI that it displays."
 msgstr "Acest buton vă va duce către URI-ul afişat."
 
-#: ../libgnomeui/gnome-href.c:394
+#: ../libgnomeui/gnome-href.c:386
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1201,7 +1222,7 @@ msgstr ""
 "Eroare la lansarea navigatorului web implicit.\n"
 "Verificaţi setărilor din modulul de preferinţe „Aplicaţii preferate”."
 
-#: ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1209,27 +1230,27 @@ msgstr ""
 "Identificator unic pentru intrarea iconiţelor. Acesta va fi folosit pentru a "
 "salva istoricul."
 
-#: ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
 msgstr "Titlu pentru dialogul de selectare iconiţe."
 
-#: ../libgnomeui/gnome-icon-entry.c:195
+#: ../libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
 msgstr "Director pixmap"
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
 msgstr "Directorul în care vor fi căutate iconiţele."
 
-#: ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Numele fişierului care ar trebui să fie afişat în intrarea iconiţelor."
 
-#: ../libgnomeui/gnome-icon-entry.c:212
+#: ../libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
 msgstr "Dialog de selectare"
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1238,39 +1259,39 @@ msgstr ""
 "a obţine GtkDialog dacă aveţi nevoie de modificarea sau interogarea "
 "oricăreia dintre proprietăţile sale."
 
-#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
-msgid "No Icon"
-msgstr "Fără iconiţă"
+#: ../libgnomeui/gnome-icon-entry.c:319 ../libgnomeui/gnome-icon-entry.c:1003
+msgid "Choose Icon"
+msgstr "Alegere iconiţă"
 
-#: ../libgnomeui/gnome-icon-entry.c:774
+#: ../libgnomeui/gnome-icon-entry.c:773
 msgid "Icon selection dialog"
 msgstr "Dialog de selectare iconiţe"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "This dialog box lets you select an icon."
 msgstr "Acest dialog vă oferă posibilitatea de a selecta o iconiţă."
 
-#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
+#: ../libgnomeui/gnome-icon-entry.c:780 ../libgnomeui/gnome-icon-entry.c:1006
 msgid "Icon Selector"
 msgstr "Selector iconiţă"
 
-#: ../libgnomeui/gnome-icon-entry.c:782
+#: ../libgnomeui/gnome-icon-entry.c:781
 msgid "Please pick the icon you want."
 msgstr "Vă rugăm alegeţi iconiţa dorită."
 
-#: ../libgnomeui/gnome-icon-entry.c:1008
+#: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "This button will open a window to let you select an icon."
 msgstr "Acest buton va deschide o fereastră pentru a selecta o iconiţă."
 
-#: ../libgnomeui/gnome-icon-entry.c:1028
+#: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
 msgstr "Selectare"
 
-#: ../libgnomeui/gnome-icon-entry.c:1031
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Icon path"
 msgstr "Cale iconiţă"
 
-#: ../libgnomeui/gnome-icon-entry.c:1032
+#: ../libgnomeui/gnome-icon-entry.c:1033
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1359,24 +1380,24 @@ msgstr "_Reţine parola pentru această sesiune"
 msgid "_Remember forever"
 msgstr "Reţine pentru _totdeauna"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:114
+#: ../libgnomeui/gnome-pixmap-entry.c:112
 msgid "Do Preview"
 msgstr "Arată previzualizare"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:115
+#: ../libgnomeui/gnome-pixmap-entry.c:113
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Dacă intrarea pixmap ar trebui să aibă o previzualizare."
 
-#: ../libgnomeui/gnome-pixmap-entry.c:189
+#: ../libgnomeui/gnome-pixmap-entry.c:187
 #: ../libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "Nici o imagine"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:206
+#: ../libgnomeui/gnome-pixmap-entry.c:204
 msgid "Image Preview"
 msgstr "Previzualizare imagine"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:207
+#: ../libgnomeui/gnome-pixmap-entry.c:205
 msgid "A preview of the image currently specified"
 msgstr "O previzualizare a imaginii specificate"
 
@@ -1388,26 +1409,26 @@ msgstr "Nu pot găsi un „hbox” folosind un selector de fişiere normal"
 msgid "Preview"
 msgstr "Previzualizare"
 
-#: ../libgnomeui/gnome-scores.c:78
+#: ../libgnomeui/gnome-scores.c:77
 msgid "Top Ten"
 msgstr "Top 10"
 
-#: ../libgnomeui/gnome-scores.c:91
+#: ../libgnomeui/gnome-scores.c:90
 msgid "User"
 msgstr "Utilizator"
 
-#: ../libgnomeui/gnome-scores.c:94
+#: ../libgnomeui/gnome-scores.c:93
 msgid "Score"
 msgstr "Scor"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: ../libgnomeui/gnome-scores.c:194
+#: ../libgnomeui/gnome-scores.c:193
 msgid "%a %b %d %T %Y"
 msgstr "%a %d %b %Y, %T"
 
-#: ../libgnomeui/gnome-scores.c:395
+#: ../libgnomeui/gnome-scores.c:394
 msgid "Sans 14"
 msgstr "Sans 14"
 
@@ -1439,168 +1460,136 @@ msgstr "Deindentare"
 msgid "About"
 msgstr "Despre"
 
-#: ../libgnomeui/gnome-ui-init.c:127 ../libgnomeui/gnome-ui-init.c:136
+#: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:172
 msgid "Disable Crash Dialog"
 msgstr "Dezactivare dialog blocare"
 
-#: ../libgnomeui/gnome-ui-init.c:129
-msgid "X display to use"
-msgstr "Display X de folosit"
-
-#: ../libgnomeui/gnome-ui-init.c:129
-msgid "DISPLAY"
-msgstr "DISPLAY"
-
-#: ../libgnomeui/gnome-ui-init.c:173
+#: ../libgnomeui/gnome-ui-init.c:155
 msgid "GNOME GUI Library:"
 msgstr "Bibliotecă GNOME GUI:"
 
-#: ../libgnomeui/gnome-ui-init.c:174
+#: ../libgnomeui/gnome-ui-init.c:156
 msgid "Show GNOME GUI options"
 msgstr "Arată opţiunile GNOME GUI"
 
-#: ../libgnomeui/gnome-ui-init.c:186
+#: ../libgnomeui/gnome-ui-init.c:174
+msgid "X display to use"
+msgstr "Display X de folosit"
+
+#: ../libgnomeui/gnome-ui-init.c:174
+msgid "DISPLAY"
+msgstr "DISPLAY"
+
+#: ../libgnomeui/gnome-ui-init.c:179
 msgid "GNOME GUI Library"
 msgstr "Bibliotecă GNOME GUI"
 
-#: ../libgnomeui/gnome-ui-init.c:252
+#: ../libgnomeui/gnome-ui-init.c:244
 msgid "Could not open link"
 msgstr "Nu s-a putut deschide linkul"
-
-#. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:838
-#, c-format
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Au intervenit mai multe erori de segmentare. Nu se poate afişa dialogul de "
-"eroare\n"
-
-#. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:853
-#, c-format
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"Eroare de segmentare!\n"
-"Nu se poate afişa dialogul de blocare\n"
-
-#: ../libgnomeui/gnome_segv.c:82
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Utilizare: gnome_segv2 aplicaţie semnal\n"
-
-#: ../libgnomeui/gnome_segv.c:94
-#, c-format
-msgid "Debugging %s"
-msgstr "Depanare %s"
-
-#: ../libgnomeui/gnome_segv.c:144
-#, c-format
-msgid ""
-"<b>The application %s has crashed.</b>\n"
-"\n"
-"Please install <b>bug-buddy</b>, the\n"
-"GNOME crash report tool, which enables you\n"
-"to send the developers detailed information\n"
-"about the error.\n"
-msgstr ""
-"<b>Aplicaţia %s s-a terminat neaşteptat.</b>\n"
-"\n"
-"Instalaţi <b>bug-buddy</b>, unealta GNOME de raportare a\n"
-"acestui tip de probleme, pentru a putea trimite informaţii\n"
-"detaliate despre această eroare.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Ieşire din test"
 
-#: ../src/users/user-settings.c:448
-msgid "User name has invalid characters"
-msgstr "Numele utilizatorului conţine caractere invalide"
+#~ msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+#~ msgstr ""
+#~ "Au intervenit mai multe erori de segmentare. Nu se poate afişa dialogul "
+#~ "de eroare\n"
 
-#: ../src/users/user-settings.c:449
-msgid ""
-"Please set a valid user name consisting of a lower case letter followed by "
-"lower case letters and numbers."
-msgstr ""
-"Introduceţi un nume de utilizator valid, format dintr-o literă mică urmată "
-"de litere mici şi numere."
+#~ msgid ""
+#~ "Segmentation fault!\n"
+#~ "Cannot display crash dialog\n"
+#~ msgstr ""
+#~ "Eroare de segmentare!\n"
+#~ "Nu se poate afişa dialogul de blocare\n"
 
-#: ../src/users/user-settings.c:453
-#, c-format
-msgid "User name \"%s\" already exists"
-msgstr "Numele de utilizator „%s” există deja"
+#~ msgid "Usage: gnome_segv2 appname signum\n"
+#~ msgstr "Utilizare: gnome_segv2 aplicaţie semnal\n"
 
-#: ../src/users/user-settings.c:480
-#, c-format
-msgid "Invalid character \"%c\" in comment"
-msgstr "Caracter invalid „%c” în comentariu"
+#~ msgid "Debugging %s"
+#~ msgstr "Depanare %s"
 
-#: ../src/users/user-settings.c:481
-msgid "Check that this character is not used."
-msgstr "Verificaţi ca acest caracter să nu fie folosit."
+#~ msgid ""
+#~ "<b>The application %s has crashed.</b>\n"
+#~ "\n"
+#~ "Please install <b>bug-buddy</b>, the\n"
+#~ "GNOME crash report tool, which enables you\n"
+#~ "to send the developers detailed information\n"
+#~ "about the error.\n"
+#~ msgstr ""
+#~ "<b>Aplicaţia %s s-a terminat neaşteptat.</b>\n"
+#~ "\n"
+#~ "Instalaţi <b>bug-buddy</b>, unealta GNOME de raportare a\n"
+#~ "acestui tip de probleme, pentru a putea trimite informaţii\n"
+#~ "detaliate despre această eroare.\n"
 
-#: ../src/users/user-settings.c:498
-msgid "Incomplete path in home directory"
-msgstr "Cale incompletă pentru directorul propriu"
+#~ msgid "User name has invalid characters"
+#~ msgstr "Numele utilizatorului conţine caractere invalide"
 
-#: ../src/users/user-settings.c:499
-msgid ""
-"Please enter full path for home directory\n"
-"<span size=\"smaller\">i.e.: /home/john</span>."
-msgstr ""
-"Introduceţi calea completă pentru directorul propriu\n"
-"<span size=\"smaller\">de ex.: /home/alex</span>."
+#~ msgid ""
+#~ "Please set a valid user name consisting of a lower case letter followed "
+#~ "by lower case letters and numbers."
+#~ msgstr ""
+#~ "Introduceţi un nume de utilizator valid, format dintr-o literă mică "
+#~ "urmată de litere mici şi numere."
 
-#: ../src/users/user-settings.c:515
-msgid "Administrator account's user ID should not be modified"
-msgstr "ID-ul utilizatorului „root” nu ar trebui modificat"
+#~ msgid "User name \"%s\" already exists"
+#~ msgstr "Numele de utilizator „%s” există deja"
 
-#: ../src/users/user-settings.c:531
-msgid "Incomplete path in shell"
-msgstr "Cale incompletă pentru shell"
+#~ msgid "Invalid character \"%c\" in comment"
+#~ msgstr "Caracter invalid „%c” în comentariu"
 
-#: ../src/users/user-settings.c:532
-msgid ""
-"Please enter full path for shell\n"
-"<span size=\"smaller\">i.e.: /bin/bash</span>."
-msgstr ""
-"Introduceţi o cale completă pentru shell\n"
-"<span size=\"smaller\">de ex.: /bin/bash</span>."
+#~ msgid "Check that this character is not used."
+#~ msgstr "Verificaţi ca acest caracter să nu fie folosit."
 
-#: ../src/users/user-settings.c:560
-msgid "Password is too short"
-msgstr "Parola este prea scurtă"
+#~ msgid "Incomplete path in home directory"
+#~ msgstr "Cale incompletă pentru directorul propriu"
 
-#: ../src/users/user-settings.c:561
-msgid ""
-"User passwords must be longer than 6 characters and preferably formed by "
-"numbers, letters and special characters."
-msgstr ""
-"Parolele utilizatorilor trebuie să fie mai mari de şase caractere şi să "
-"conţină pe cât posibil numere, litere şi caractere speciale."
+#~ msgid ""
+#~ "Please enter full path for home directory\n"
+#~ "<span size=\"smaller\">i.e.: /home/john</span>."
+#~ msgstr ""
+#~ "Introduceţi calea completă pentru directorul propriu\n"
+#~ "<span size=\"smaller\">de ex.: /home/alex</span>."
 
-#: ../src/users/user-settings.c:564
-msgid "Password confirmation is not correct"
-msgstr "Parola nu a fost corect confirmată"
+#~ msgid "Administrator account's user ID should not be modified"
+#~ msgstr "ID-ul utilizatorului „root” nu ar trebui modificat"
 
-#: ../src/users/user-settings.c:565
-msgid "Check that you have provided the same password in both text fields."
-msgstr "Verificaţi ca parolele din cele două câmpuri să fie identice."
+#~ msgid "Incomplete path in shell"
+#~ msgstr "Cale incompletă pentru shell"
 
-#: ../src/users/users-table.c:44
-msgid "Name"
-msgstr "Nume"
+#~ msgid ""
+#~ "Please enter full path for shell\n"
+#~ "<span size=\"smaller\">i.e.: /bin/bash</span>."
+#~ msgstr ""
+#~ "Introduceţi o cale completă pentru shell\n"
+#~ "<span size=\"smaller\">de ex.: /bin/bash</span>."
 
-#: ../src/users/users-table.c:63
-msgid "Login name"
-msgstr "Nume utilizator"
+#~ msgid "Password is too short"
+#~ msgstr "Parola este prea scurtă"
 
-#: ../src/users/users-table.c:70
-msgid "Home directory"
-msgstr "Director propriu"
+#~ msgid ""
+#~ "User passwords must be longer than 6 characters and preferably formed by "
+#~ "numbers, letters and special characters."
+#~ msgstr ""
+#~ "Parolele utilizatorilor trebuie să fie mai mari de şase caractere şi să "
+#~ "conţină pe cât posibil numere, litere şi caractere speciale."
 
-#: ../src/users/users-tool.c:191
-msgid "Users settings"
-msgstr "Setări utilizator"
+#~ msgid "Password confirmation is not correct"
+#~ msgstr "Parola nu a fost corect confirmată"
 
+#~ msgid "Check that you have provided the same password in both text fields."
+#~ msgstr "Verificaţi ca parolele din cele două câmpuri să fie identice."
+
+#~ msgid "Name"
+#~ msgstr "Nume"
+
+#~ msgid "Login name"
+#~ msgstr "Nume utilizator"
+
+#~ msgid "Home directory"
+#~ msgstr "Director propriu"
+
+#~ msgid "Users settings"
+#~ msgstr "Setări utilizator"
