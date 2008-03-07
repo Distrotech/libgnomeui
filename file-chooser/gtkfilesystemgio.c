@@ -915,8 +915,6 @@ mount_async_callback (GObject      *source_object,
 
   DEBUG ("mount_async_callback");
 
-  g_message ("tried to mount something");
-
   file = G_FILE (source_object);
   handle = GTK_FILE_SYSTEM_HANDLE_GIO (user_data);
   if (g_file_mount_enclosing_volume_finish (file, result, &error))

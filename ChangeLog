@@ -1,5 +1,10 @@
 2008-03-07  Bastien Nocera  <hadess@hadess.net>
 
+	* file-chooser/gtkfilesystemgio.c (mount_async_callback):
+	Remove debug message
+
+2008-03-07  Bastien Nocera  <hadess@hadess.net>
+
 	* file-chooser/gtkfilesystemgio.c (get_volumes_list),
 	(gtk_file_system_gio_dispose), (gtk_file_system_gio_list_volumes),
 	(gtk_file_system_gio_get_volume_for_path),
