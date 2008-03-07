@@ -1,3 +1,5 @@
+========================== libgnome 2.21.93 =======================
+
 2008-03-07  Bastien Nocera  <hadess@hadess.net>
 
 	* file-chooser/gtkfilesystemgio.c (mount_async_callback):

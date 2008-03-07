@@ -1,3 +1,15 @@
+libgnomeui 2.21.93
+
+* Remove some dead code
+* Fix a crash in the gio file chooser backend
+* Fix a race in the gnome-vfs file chooser backend
+* Use proper icons for "/", the Desktop and the user's 
+  home directory 
+* Show the "File System" mount in the file chooser's
+  shortcuts
+* Try to mount remote locations when getting the file info
+  fails with a "Not mounted" error
+
 libgnomeui 2.21.92
 
 * More gio work in the filechooser
