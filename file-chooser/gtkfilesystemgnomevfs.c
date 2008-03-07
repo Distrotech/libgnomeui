@@ -1087,6 +1087,8 @@ get_folder_complete_operation (struct GetFolderData *op_data)
       /* returned this cached folder */
       g_object_ref (folder_vfs);
 
+      folder_vfs->types |= op_data->types;
+
       (* op_data->callback) (GTK_FILE_SYSTEM_HANDLE (op_data->handle),
 			     GTK_FILE_FOLDER (folder_vfs), NULL,
 			     op_data->callback_data);

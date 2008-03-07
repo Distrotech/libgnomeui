@@ -1,3 +1,13 @@
+2008-03-06  Federico Mena Quintero  <federico@novell.com>
+
+	* file-chooser/gtkfilesystemgnomevfs.c
+	(get_folder_complete_operation): Patch from Michael Meeks
+	<michael.meeks@novell.com> for
+	http://bugzilla.gnome.org/show_bug.cgi?id=520767 - fix a race
+	condition when two threads request the same folder and it's not
+	loaded yet --- the last one to get the folder wouldn't get all the
+	GtkFileInfoType flags it requested.
+
 2008-03-06  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* file-chooser/gtkfilesystemgio.c: (get_icon_string):
