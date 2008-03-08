@@ -1,25 +1,24 @@
-# translation of cs.po to Czech
-# translation of cs.po to
 # Czech translation of libgnomeui.
-# Copyright (C) 2002, 2006 Free Software Foundation, Inc.
-# Copyright (C) 2004, 2005, 2006 Miloslav Trmac <mitr@volny.cz>
+# Copyright (C) 2002, 2006, 2008 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005, 2006 Miloslav Trmac <mitr@volny.cz>.
+# This file is distributed under the same license as the libgnomeui package.
 # Michal Bukovjan <bukm@centrum.cz>, 2002.
-# Miloslav Trmac <mitr@volny.cz>, 2003 - 2006.
+# Miloslav Trmac <mitr@volny.cz>, 2003, 2004, 2005, 2006.
 # Jakub Friedl <jfriedl@suse.cz>, 2006.
+# Petr Kovar <pknbe@volny.cz>, 2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: cs\n"
+"Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-04 17:04+0200\n"
-"PO-Revision-Date: 2006-10-04 17:06+0200\n"
-"Last-Translator: Jakub Friedl <jfriedl@suse.cz>\n"
+"POT-Creation-Date: 2008-03-08 01:45+0100\n"
+"PO-Revision-Date: 2008-03-08 00:39+0100\n"
+"Last-Translator: Petr Kovar <pknbe@volny.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
-"Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -37,59 +36,82 @@ msgstr "Položka potomka 2"
 msgid "Hint for item 2"
 msgstr "Rada pro položku 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:973
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1036
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s je odkaz na něco, co není adresář"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:984
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1047
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s je odkaz bez cílového umístění"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1059
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1124
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s není adresář"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1913
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1162
+#, c-format
+msgid "Could not monitor '%s': %s"
+msgstr "Nelze sledovat \"%s\": %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1275
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1488
+#, c-format
+msgid "Could not get info for '%s': %s"
+msgstr "Nelze získat informace o \"%s\": %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1611
+#, c-format
+msgid "Could not create '%s': %s"
+msgstr "Nelze vytvořit \"%s\": %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1981
 msgid "Network Servers"
 msgstr "Síťové servery"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1929
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1997
+#: ../file-chooser/gtkfilesystemgio.c:1261
 msgid "File System"
 msgstr "Systém souborů"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2458
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2067
+#, c-format
+msgid "'%s': %s"
+msgstr "\"%s\": %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2526
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Ukládání záložky selhalo (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2895
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2962
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Chyba získávání informací pro '%s'"
 
-#: ../file-chooser/testfilechooser.c:178
+#: ../file-chooser/testfilechooser.c:181
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "Nemohu získat informace o souboru '%s': %s"
 
-#: ../file-chooser/testfilechooser.c:191
+#: ../file-chooser/testfilechooser.c:194
 #, c-format
 msgid "Failed to open file '%s': %s"
 msgstr "Nemohu otevřít soubor '%s': %s"
 
-#: ../file-chooser/testfilechooser.c:230
+#: ../file-chooser/testfilechooser.c:233
 #, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
+msgid ""
+"Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Nemohu načíst obrázek '%s': neznámý důvod, pravděpodobně poškozený soubor "
 "obrázku"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
-msgstr "Kredity"
+msgstr "Zásluhy"
 
 #: ../libgnomeui/gnome-about.c:231
 msgid "Written by"
@@ -105,7 +127,7 @@ msgstr "Přeložili"
 
 #: ../libgnomeui/gnome-about.c:324
 msgid "C_redits"
-msgstr "_Kredity"
+msgstr "Zá_sluhy"
 
 #: ../libgnomeui/gnome-about.c:377
 msgid "Program name"
@@ -173,11 +195,12 @@ msgstr "Jediná položka pro dokumentaristu"
 
 #: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
-msgstr "Kredity překladatelů"
+msgstr "Zásluhy překladatelů"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Kredity překladatelů. Tento řetězec by měl být označen k přeložení."
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "Zásluhy překladatelů. Tento řetězec by měl být označen k přeložení."
 
 #: ../libgnomeui/gnome-about.c:438
 #: ../libgnomeui/gnome-druid-page-standard.c:129
@@ -194,142 +217,142 @@ msgid "About %s"
 msgstr "O %s"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:82 ../libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Soubor"
 
-#: ../libgnomeui/gnome-app-helper.c:83
+#: ../libgnomeui/gnome-app-helper.c:84
 msgid "_File/"
 msgstr "_Soubor/"
 
-#: ../libgnomeui/gnome-app-helper.c:84 ../libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Upravit"
 
-#: ../libgnomeui/gnome-app-helper.c:85
+#: ../libgnomeui/gnome-app-helper.c:86
 msgid "_Edit/"
 msgstr "_Upravit/"
 
-#: ../libgnomeui/gnome-app-helper.c:86 ../libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Zobrazit"
 
-#: ../libgnomeui/gnome-app-helper.c:87
+#: ../libgnomeui/gnome-app-helper.c:88
 msgid "_View/"
 msgstr "_Zobrazit/"
 
-#: ../libgnomeui/gnome-app-helper.c:88 ../libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "Nastav_ení"
 
-#: ../libgnomeui/gnome-app-helper.c:89
+#: ../libgnomeui/gnome-app-helper.c:90
 msgid "_Settings/"
 msgstr "Nastav_ení/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:90 ../libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Nový"
 
-#: ../libgnomeui/gnome-app-helper.c:91
+#: ../libgnomeui/gnome-app-helper.c:92
 msgid "_New/"
 msgstr "_Nový/"
 
-#: ../libgnomeui/gnome-app-helper.c:92 ../libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Sou_bory"
 
-#: ../libgnomeui/gnome-app-helper.c:93
+#: ../libgnomeui/gnome-app-helper.c:94
 msgid "Fi_les/"
 msgstr "Sou_bory/"
 
-#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "_Okna"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Hra"
 
-#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: ../libgnomeui/gnome-app-helper.c:97
+#: ../libgnomeui/gnome-app-helper.c:98
 msgid "_Windows/"
 msgstr "_Okna/"
 
 #. Open
-#: ../libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:110
 msgid "_Open..."
 msgstr "_Otevřít..."
 
-#: ../libgnomeui/gnome-app-helper.c:109
+#: ../libgnomeui/gnome-app-helper.c:110
 msgid "Open a file"
 msgstr "Otevřít soubor"
 
 #. Save
-#: ../libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:115
 msgid "_Save"
 msgstr "_Uložit"
 
-#: ../libgnomeui/gnome-app-helper.c:114
+#: ../libgnomeui/gnome-app-helper.c:115
 msgid "Save the current file"
 msgstr "Uložit aktuální soubor"
 
 #. Save As
-#: ../libgnomeui/gnome-app-helper.c:119
+#: ../libgnomeui/gnome-app-helper.c:120
 msgid "Save _As..."
 msgstr "Uložit _jako..."
 
-#: ../libgnomeui/gnome-app-helper.c:120
+#: ../libgnomeui/gnome-app-helper.c:121
 msgid "Save the current file with a different name"
 msgstr "Uložit aktuální soubor pod jiným názvem"
 
 #. Revert
-#: ../libgnomeui/gnome-app-helper.c:125
+#: ../libgnomeui/gnome-app-helper.c:126
 msgid "_Revert"
 msgstr "V_rátit"
 
-#: ../libgnomeui/gnome-app-helper.c:126
+#: ../libgnomeui/gnome-app-helper.c:127
 msgid "Revert to a saved version of the file"
 msgstr "Návrat k uložené verzi souboru"
 
 #. Print
-#: ../libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:132
 msgid "_Print..."
 msgstr "_Tisk..."
 
-#: ../libgnomeui/gnome-app-helper.c:131
+#: ../libgnomeui/gnome-app-helper.c:132
 msgid "Print the current file"
 msgstr "Vytisknout aktuální soubor"
 
 #. Print Setup
-#: ../libgnomeui/gnome-app-helper.c:136
+#: ../libgnomeui/gnome-app-helper.c:137
 msgid "Print S_etup..."
 msgstr "_Nastavení tisku..."
 
-#: ../libgnomeui/gnome-app-helper.c:137
+#: ../libgnomeui/gnome-app-helper.c:138
 msgid "Setup the page settings for your current printer"
 msgstr "Nastavit parametry stránky pro vaši aktuální tiskárnu"
 
 #. Close
-#: ../libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:143
 msgid "_Close"
 msgstr "_Zavřít"
 
-#: ../libgnomeui/gnome-app-helper.c:142
+#: ../libgnomeui/gnome-app-helper.c:143
 msgid "Close the current file"
 msgstr "Zavřít tento soubor"
 
 #. Exit
-#: ../libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:148
 msgid "_Quit"
 msgstr "U_končit"
 
-#: ../libgnomeui/gnome-app-helper.c:147
+#: ../libgnomeui/gnome-app-helper.c:148
 msgid "Quit the application"
 msgstr "Ukončit aplikaci"
 
@@ -337,93 +360,93 @@ msgstr "Ukončit aplikaci"
 #. * The "Edit" menu
 #.
 #. Cut
-#: ../libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cu_t"
 msgstr "_Vyjmout"
 
-#: ../libgnomeui/gnome-app-helper.c:155
+#: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cut the selection"
 msgstr "Vyjmout výběr"
 
 #. 10
 #. Copy
-#: ../libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:162
 msgid "_Copy"
 msgstr "_Kopírovat"
 
-#: ../libgnomeui/gnome-app-helper.c:161
+#: ../libgnomeui/gnome-app-helper.c:162
 msgid "Copy the selection"
 msgstr "Kopírovat výběr"
 
 #. Paste
-#: ../libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:167
 msgid "_Paste"
 msgstr "V_ložit"
 
-#: ../libgnomeui/gnome-app-helper.c:166
+#: ../libgnomeui/gnome-app-helper.c:167
 msgid "Paste the clipboard"
 msgstr "Vložit obsah schránky"
 
 #. Clear
-#: ../libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:172
 msgid "C_lear"
 msgstr "S_mazat"
 
-#: ../libgnomeui/gnome-app-helper.c:171
+#: ../libgnomeui/gnome-app-helper.c:172
 msgid "Clear the selection"
 msgstr "Smazat výběr"
 
 #. Undo
-#: ../libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:177
 msgid "_Undo"
 msgstr "_Zpět"
 
-#: ../libgnomeui/gnome-app-helper.c:176
+#: ../libgnomeui/gnome-app-helper.c:177
 msgid "Undo the last action"
 msgstr "Vrátit zpět poslední akci"
 
 #. Redo
-#: ../libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:182
 msgid "_Redo"
 msgstr "Zn_ovu"
 
-#: ../libgnomeui/gnome-app-helper.c:181
+#: ../libgnomeui/gnome-app-helper.c:182
 msgid "Redo the undone action"
 msgstr "Znovu provést vrácenou akci"
 
 #. Find
-#: ../libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:187
 msgid "_Find..."
 msgstr "_Najít..."
 
-#: ../libgnomeui/gnome-app-helper.c:186
+#: ../libgnomeui/gnome-app-helper.c:187
 msgid "Search for a string"
 msgstr "Hledat řetězec"
 
 #. Find Again
-#: ../libgnomeui/gnome-app-helper.c:191
+#: ../libgnomeui/gnome-app-helper.c:192
 msgid "Find Ne_xt"
 msgstr "Najít _další"
 
-#: ../libgnomeui/gnome-app-helper.c:192
+#: ../libgnomeui/gnome-app-helper.c:193
 msgid "Search again for the same string"
 msgstr "Hledat znovu stejný řetězec"
 
 #. Replace
-#: ../libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:198
 msgid "R_eplace..."
 msgstr "Na_hradit..."
 
-#: ../libgnomeui/gnome-app-helper.c:197
+#: ../libgnomeui/gnome-app-helper.c:198
 msgid "Replace a string"
 msgstr "Nahradit řetězec"
 
 #. Properties
-#: ../libgnomeui/gnome-app-helper.c:202
+#: ../libgnomeui/gnome-app-helper.c:203
 msgid "_Properties"
 msgstr "V_lastnosti"
 
-#: ../libgnomeui/gnome-app-helper.c:203
+#: ../libgnomeui/gnome-app-helper.c:204
 msgid "Modify the file's properties"
 msgstr "Upravit vlastnosti souboru"
 
@@ -431,11 +454,11 @@ msgstr "Upravit vlastnosti souboru"
 #. * The Settings menu
 #.
 #. Settings
-#: ../libgnomeui/gnome-app-helper.c:211
+#: ../libgnomeui/gnome-app-helper.c:212
 msgid "Prefere_nces"
 msgstr "_Nastavení"
 
-#: ../libgnomeui/gnome-app-helper.c:212
+#: ../libgnomeui/gnome-app-helper.c:213
 msgid "Configure the application"
 msgstr "Nastavit tuto aplikaci"
 
@@ -444,134 +467,134 @@ msgstr "Nastavit tuto aplikaci"
 #. * And the "Help" menu
 #.
 #. About
-#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:4
+#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "O _aplikaci"
 
-#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:1
+#: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "O této aplikaci"
 
-#: ../libgnomeui/gnome-app-helper.c:225
+#: ../libgnomeui/gnome-app-helper.c:226
 msgid "Select _All"
 msgstr "Vybr_at vše"
 
-#: ../libgnomeui/gnome-app-helper.c:226
+#: ../libgnomeui/gnome-app-helper.c:227
 msgid "Select everything"
 msgstr "Vybrat všechno"
 
 #.
 #. * Window menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:234
+#: ../libgnomeui/gnome-app-helper.c:235
 msgid "Create New _Window"
 msgstr "_Vytvořit nové okno"
 
-#: ../libgnomeui/gnome-app-helper.c:235
+#: ../libgnomeui/gnome-app-helper.c:236
 msgid "Create a new window"
 msgstr "Vytvořit nové okno"
 
-#: ../libgnomeui/gnome-app-helper.c:239
+#: ../libgnomeui/gnome-app-helper.c:240
 msgid "_Close This Window"
 msgstr "_Zavřít toto okno"
 
-#: ../libgnomeui/gnome-app-helper.c:240 ../test-gnome/testgnome.xml.h:2
+#: ../libgnomeui/gnome-app-helper.c:241 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Zavřít aktuální okno"
 
 #.
 #. * The "Game" menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:248
+#: ../libgnomeui/gnome-app-helper.c:249
 msgid "_New Game"
 msgstr "_Nová hra"
 
-#: ../libgnomeui/gnome-app-helper.c:249
+#: ../libgnomeui/gnome-app-helper.c:250
 msgid "Start a new game"
 msgstr "Začít novou hru"
 
-#: ../libgnomeui/gnome-app-helper.c:253
+#: ../libgnomeui/gnome-app-helper.c:254
 msgid "_Pause Game"
 msgstr "_Pozastavit hru"
 
-#: ../libgnomeui/gnome-app-helper.c:254
+#: ../libgnomeui/gnome-app-helper.c:255
 msgid "Pause the game"
 msgstr "Pozastavit hru"
 
-#: ../libgnomeui/gnome-app-helper.c:258
+#: ../libgnomeui/gnome-app-helper.c:259
 msgid "_Restart Game"
 msgstr "Začít h_ru znovu"
 
-#: ../libgnomeui/gnome-app-helper.c:259
+#: ../libgnomeui/gnome-app-helper.c:260
 msgid "Restart the game"
 msgstr "Znovu začít tuto hru"
 
-#: ../libgnomeui/gnome-app-helper.c:263
+#: ../libgnomeui/gnome-app-helper.c:264
 msgid "_Undo Move"
 msgstr "Tah _zpět"
 
-#: ../libgnomeui/gnome-app-helper.c:264
+#: ../libgnomeui/gnome-app-helper.c:265
 msgid "Undo the last move"
 msgstr "Vzít poslední tah zpět"
 
-#: ../libgnomeui/gnome-app-helper.c:268
+#: ../libgnomeui/gnome-app-helper.c:269
 msgid "_Redo Move"
 msgstr "Tah zn_ovu"
 
-#: ../libgnomeui/gnome-app-helper.c:269
+#: ../libgnomeui/gnome-app-helper.c:270
 msgid "Redo the undone move"
 msgstr "Provést znovu tah vzatý zpět"
 
-#: ../libgnomeui/gnome-app-helper.c:273
+#: ../libgnomeui/gnome-app-helper.c:274
 msgid "_Hint"
 msgstr "_Rada"
 
-#: ../libgnomeui/gnome-app-helper.c:274
+#: ../libgnomeui/gnome-app-helper.c:275
 msgid "Get a hint for your next move"
 msgstr "Získat radu pro váš další tah"
 
 #. 30
-#: ../libgnomeui/gnome-app-helper.c:279
+#: ../libgnomeui/gnome-app-helper.c:280
 msgid "_Scores..."
 msgstr "_Skóre..."
 
-#: ../libgnomeui/gnome-app-helper.c:280
+#: ../libgnomeui/gnome-app-helper.c:281
 msgid "View the scores"
 msgstr "Zobrazit skóre"
 
-#: ../libgnomeui/gnome-app-helper.c:284
+#: ../libgnomeui/gnome-app-helper.c:285
 msgid "_End Game"
 msgstr "Kon_ec hry"
 
-#: ../libgnomeui/gnome-app-helper.c:285
+#: ../libgnomeui/gnome-app-helper.c:286
 msgid "End the current game"
 msgstr "Ukončit současnou hru"
 
-#: ../libgnomeui/gnome-app-helper.c:1147
+#: ../libgnomeui/gnome-app-helper.c:1148
 msgid "_Contents"
 msgstr "_Obsah"
 
-#: ../libgnomeui/gnome-app-helper.c:1150
+#: ../libgnomeui/gnome-app-helper.c:1151
 msgid "View help for this application"
 msgstr "Prohlížet nápovědu pro tuto aplikaci"
 
-#: ../libgnomeui/gnome-app-helper.c:2587
+#: ../libgnomeui/gnome-app-helper.c:2568
 msgid "Text Below Icons"
 msgstr "Text pod ikonami"
 
-#: ../libgnomeui/gnome-app-helper.c:2588
+#: ../libgnomeui/gnome-app-helper.c:2569
 msgid "Priority Text Beside Icons"
 msgstr "Důležitý text vedle ikon"
 
-#: ../libgnomeui/gnome-app-helper.c:2589
+#: ../libgnomeui/gnome-app-helper.c:2570
 msgid "Icons Only"
 msgstr "Pouze ikony"
 
-#: ../libgnomeui/gnome-app-helper.c:2590
+#: ../libgnomeui/gnome-app-helper.c:2571
 msgid "Text Only"
 msgstr "Pouze text"
 
-#: ../libgnomeui/gnome-app-helper.c:2651
+#: ../libgnomeui/gnome-app-helper.c:2632
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Použít implicitní nastavení pracovní plochy (%s)"
@@ -624,35 +647,36 @@ msgstr "App ID"
 msgid "The application ID string"
 msgstr "Řetězec ID aplikace"
 
-#: ../libgnomeui/gnome-appbar.c:741
+#: ../libgnomeui/gnome-appbar.c:743
 msgid "Has Progress"
 msgstr "Má průběh"
 
-#: ../libgnomeui/gnome-appbar.c:742
+#: ../libgnomeui/gnome-appbar.c:744
 msgid "Create a progress widget."
 msgstr "Vytvořit prvek průběhu."
 
-#: ../libgnomeui/gnome-appbar.c:749
+#: ../libgnomeui/gnome-appbar.c:751
 msgid "Has Status"
 msgstr "Má stav"
 
-#: ../libgnomeui/gnome-appbar.c:750
+#: ../libgnomeui/gnome-appbar.c:752
 msgid "Create a status widget."
 msgstr "Vytvořit prvek stavu."
 
-#: ../libgnomeui/gnome-appbar.c:757
+#: ../libgnomeui/gnome-appbar.c:759
 msgid "Interactivity"
 msgstr "Interaktivita"
 
-#: ../libgnomeui/gnome-appbar.c:758
+#: ../libgnomeui/gnome-appbar.c:760
 msgid "Level of user activity required."
 msgstr "Úroveň požadované uživatelské aktivity."
 
-#: ../libgnomeui/gnome-authentication-manager.c:80
+#: ../libgnomeui/gnome-authentication-manager.c:82
+#, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Vaše HTTP proxy vyžaduje, abyste se přihlásili.\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:81
+#: ../libgnomeui/gnome-authentication-manager.c:83
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -661,141 +685,147 @@ msgstr ""
 "Pro přístup k \"%s\" se musíte přihlásit.\n"
 "%s"
 
-#: ../libgnomeui/gnome-authentication-manager.c:84
+#: ../libgnomeui/gnome-authentication-manager.c:86
 msgid "Your password will be transmitted unencrypted."
 msgstr "Vaše heslo bude přenášeno nešifrovaně."
 
-#: ../libgnomeui/gnome-authentication-manager.c:85
+#: ../libgnomeui/gnome-authentication-manager.c:87
 msgid "Your password will be transmitted encrypted."
 msgstr "Vaše heslo bude přenášeno šifrovaně."
 
-#: ../libgnomeui/gnome-authentication-manager.c:88
-#: ../libgnomeui/gnome-authentication-manager.c:306
+#: ../libgnomeui/gnome-authentication-manager.c:90
+#: ../libgnomeui/gnome-authentication-manager.c:309
 msgid "Authentication Required"
 msgstr "Vyžadována autentizace"
 
-#: ../libgnomeui/gnome-authentication-manager.c:298
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "Pro přístup k %s v doméně %s se musíte přihlásit\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:300
+#: ../libgnomeui/gnome-authentication-manager.c:303
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Pro přístup k %s se musíte přihlásit\n"
 
-#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
 msgid "Specify session management ID"
 msgstr "Zadejte ID správy sezení"
 
-#: ../libgnomeui/gnome-client.c:902 ../libgnomeui/gnome-client.c:916
+#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "Specify prefix of saved configuration"
 msgstr "Zadejte předponu uloženého nastavení"
 
-#: ../libgnomeui/gnome-client.c:905 ../libgnomeui/gnome-client.c:920
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: ../libgnomeui/gnome-client.c:908 ../libgnomeui/gnome-client.c:924
+#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
 msgid "Disable connection to session manager"
 msgstr "Vypnout napojení na správce sezení"
 
-#: ../libgnomeui/gnome-client.c:1034 ../libgnomeui/gnome-client.c:1047
-msgid "Session management"
-msgstr "Správa sezení"
+#: ../libgnomeui/gnome-client.c:1013
+msgid "Session management:"
+msgstr "Správa sezení:"
 
-#: ../libgnomeui/gnome-client.c:1035
+#: ../libgnomeui/gnome-client.c:1014
 msgid "Show session management options"
 msgstr "Zobrazit možnosti správy sezení"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:1045
+msgid "Session management"
+msgstr "Správa sezení"
+
+#: ../libgnomeui/gnome-client.c:2579
 msgid "Cancel Logout"
 msgstr "Zrušit odhlášení"
 
-#: ../libgnomeui/gnome-color-picker.c:414
+#: ../libgnomeui/gnome-color-picker.c:412
 msgid "Received invalid color data\n"
 msgstr "Obdrženy neplatné údaje o barvě\n"
 
-#: ../libgnomeui/gnome-color-picker.c:465
+#: ../libgnomeui/gnome-color-picker.c:466
 msgid "Open a dialog to specify the color"
 msgstr "Otevře dialog pro zadání barvy"
 
-#: ../libgnomeui/gnome-color-picker.c:487
+#: ../libgnomeui/gnome-color-picker.c:488
 msgid "Pick a color"
 msgstr "Vyberte barvu"
 
-#: ../libgnomeui/gnome-dateedit.c:491 ../libgnomeui/gnome-dateedit.c:788
+#: ../libgnomeui/gnome-dateedit.c:495 ../libgnomeui/gnome-dateedit.c:802
 msgid "Time"
 msgstr "Čas"
 
-#: ../libgnomeui/gnome-dateedit.c:492
+#: ../libgnomeui/gnome-dateedit.c:496
 msgid "The time currently selected"
 msgstr "Právě vybraný čas"
 
-#: ../libgnomeui/gnome-dateedit.c:504
+#: ../libgnomeui/gnome-dateedit.c:508
 msgid "DateEdit Flags"
 msgstr "Příznaky DateEdit"
 
-#: ../libgnomeui/gnome-dateedit.c:505
+#: ../libgnomeui/gnome-dateedit.c:509
 msgid "Flags for how DateEdit looks"
 msgstr "Příznaky vzhledu prvku DateEdit"
 
-#: ../libgnomeui/gnome-dateedit.c:514
+#: ../libgnomeui/gnome-dateedit.c:518
 msgid "Lower Hour"
 msgstr "Nižší hodina"
 
-#: ../libgnomeui/gnome-dateedit.c:515
+#: ../libgnomeui/gnome-dateedit.c:519
 msgid "Lower hour in the time popup selector"
 msgstr "Nižší hodina ve vyskakovacím výběru času"
 
-#: ../libgnomeui/gnome-dateedit.c:525
+#: ../libgnomeui/gnome-dateedit.c:529
 msgid "Upper Hour"
 msgstr "Vyšší hodina"
 
-#: ../libgnomeui/gnome-dateedit.c:526
+#: ../libgnomeui/gnome-dateedit.c:530
 msgid "Upper hour in the time popup selector"
 msgstr "Vyšší hodina ve vyskakovacím výběru času"
 
-#: ../libgnomeui/gnome-dateedit.c:536
+#: ../libgnomeui/gnome-dateedit.c:540
 msgid "Initial Time"
 msgstr "Výchozí čas"
 
-#: ../libgnomeui/gnome-dateedit.c:537
+#: ../libgnomeui/gnome-dateedit.c:541
 msgid "The initial time"
 msgstr "Výchozí čas"
 
-#: ../libgnomeui/gnome-dateedit.c:751 ../libgnomeui/gnome-scores.c:97
+#: ../libgnomeui/gnome-dateedit.c:765 ../libgnomeui/gnome-scores.c:96
 msgid "Date"
 msgstr "Datum"
 
-#: ../libgnomeui/gnome-dateedit.c:764
+#: ../libgnomeui/gnome-dateedit.c:778
 msgid "Select Date"
 msgstr "Vyberte datum"
 
-#: ../libgnomeui/gnome-dateedit.c:764
+#: ../libgnomeui/gnome-dateedit.c:778
 msgid "Select the date from a calendar"
 msgstr "Vyberte datum z kalendáře"
 
 #. Calendar label, only shown if the date editor has a time field
-#: ../libgnomeui/gnome-dateedit.c:775
+#: ../libgnomeui/gnome-dateedit.c:789
 msgid "Calendar"
 msgstr "Kalendář"
 
-#: ../libgnomeui/gnome-dateedit.c:796
+#: ../libgnomeui/gnome-dateedit.c:810
 msgid "Select Time"
 msgstr "Vyberte čas"
 
-#: ../libgnomeui/gnome-dateedit.c:796
+#: ../libgnomeui/gnome-dateedit.c:810
 msgid "Select the time from a list"
 msgstr "Vyberte čas ze seznamu"
 
-#: ../libgnomeui/gnome-dateedit.c:1015
+#: ../libgnomeui/gnome-dateedit.c:1029
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date je zastaralé, používejte gnome_date_edit_get_time"
+msgstr ""
+"gnome_date_edit_get_date je zastaralé, používejte gnome_date_edit_get_time"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:121
 #: ../libgnomeui/gnome-font-picker.c:155
@@ -905,24 +935,24 @@ msgstr "Barva pozadí loga nastavena"
 msgid "Logo Background color is set"
 msgstr "Barva pozadí loga je nastavena"
 
-#: ../libgnomeui/gnome-druid.c:154
+#: ../libgnomeui/gnome-druid.c:153
 msgid "Show Finish"
 msgstr "Ukázat Ukončit"
 
-#: ../libgnomeui/gnome-druid.c:155
+#: ../libgnomeui/gnome-druid.c:154
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Ukázat tlačítko 'Ukončit' místo tlačítka 'Další'"
 
-#: ../libgnomeui/gnome-druid.c:162
+#: ../libgnomeui/gnome-druid.c:161
 msgid "Show Help"
 msgstr "Ukázat Nápovědu"
 
-#: ../libgnomeui/gnome-druid.c:163
+#: ../libgnomeui/gnome-druid.c:162
 msgid "Show the 'Help' button"
 msgstr "Ukázat tlačítko 'Nápověda'"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:178
+#: ../libgnomeui/gnome-file-entry.c:239 ../libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
 msgstr "ID historie"
 
@@ -934,7 +964,7 @@ msgstr "Položka GTK"
 msgid "The GTK entry"
 msgstr "Položka GTK"
 
-#: ../libgnomeui/gnome-file-entry.c:237
+#: ../libgnomeui/gnome-file-entry.c:240
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -942,19 +972,19 @@ msgstr ""
 "Unikátní identifikátor pro výběr souboru. Bude použit pro uložení seznamu "
 "historie."
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:187
+#: ../libgnomeui/gnome-file-entry.c:248 ../libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr "Nadpis dialogu probírání"
 
-#: ../libgnomeui/gnome-file-entry.c:246
+#: ../libgnomeui/gnome-file-entry.c:249
 msgid "Title for the Browse file dialog."
-msgstr "Nadpis dialogu pro probírání souborů"
+msgstr "Nadpis dialogu pro probírání souborů."
 
-#: ../libgnomeui/gnome-file-entry.c:253
+#: ../libgnomeui/gnome-file-entry.c:256
 msgid "Directory Entry"
 msgstr "Výběr adresáře"
 
-#: ../libgnomeui/gnome-file-entry.c:254
+#: ../libgnomeui/gnome-file-entry.c:257
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -962,35 +992,35 @@ msgstr ""
 "Jestli je výběr souboru použit pro zadání adresářů nebo úplných názvů "
 "souborů."
 
-#: ../libgnomeui/gnome-file-entry.c:262
+#: ../libgnomeui/gnome-file-entry.c:265
 msgid "Modal"
 msgstr "Modální"
 
-#: ../libgnomeui/gnome-file-entry.c:263
+#: ../libgnomeui/gnome-file-entry.c:266
 msgid "Whether the Browse file window should be modal."
 msgstr "Jestli má být okno dialogu pro probírání modální."
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:203
+#: ../libgnomeui/gnome-file-entry.c:273 ../libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "Název souboru"
 
-#: ../libgnomeui/gnome-file-entry.c:271
+#: ../libgnomeui/gnome-file-entry.c:274
 msgid "Filename that should be displayed in the file entry."
 msgstr "Název souboru, který se má zobrazit ve výběru souboru."
 
-#: ../libgnomeui/gnome-file-entry.c:279
+#: ../libgnomeui/gnome-file-entry.c:282
 msgid "Default Path"
 msgstr "Výchozí cesta"
 
-#: ../libgnomeui/gnome-file-entry.c:280
+#: ../libgnomeui/gnome-file-entry.c:283
 msgid "Default path for the Browse file window."
 msgstr "Počáteční cesta pro okno s dialogem pro probírání."
 
-#: ../libgnomeui/gnome-file-entry.c:287
+#: ../libgnomeui/gnome-file-entry.c:290
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:288
+#: ../libgnomeui/gnome-file-entry.c:291
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1000,11 +1030,11 @@ msgstr ""
 "atribut lze použít k získání prvku GnomeEntry, chcete-li měnit nebo zjistit "
 "jeho parametry."
 
-#: ../libgnomeui/gnome-file-entry.c:298
+#: ../libgnomeui/gnome-file-entry.c:301
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:299
+#: ../libgnomeui/gnome-file-entry.c:302
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1014,11 +1044,11 @@ msgstr ""
 "atribut lze použít k získání prvku GtkEntry, chcete-li měnit nebo zjistit "
 "jeho parametry."
 
-#: ../libgnomeui/gnome-file-entry.c:309
+#: ../libgnomeui/gnome-file-entry.c:312
 msgid "Use GtkFileChooser"
 msgstr "Používat GtkFileChooser"
 
-#: ../libgnomeui/gnome-file-entry.c:310
+#: ../libgnomeui/gnome-file-entry.c:313
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
@@ -1026,31 +1056,31 @@ msgstr ""
 "Jestli pro výběr souborů používat nový widget GtkFileChooser nebo widget "
 "GtkFileSelection."
 
-#: ../libgnomeui/gnome-file-entry.c:319
+#: ../libgnomeui/gnome-file-entry.c:322
 msgid "GtkFileChooser Action"
 msgstr "Akce GtkFileChooser"
 
-#: ../libgnomeui/gnome-file-entry.c:320
+#: ../libgnomeui/gnome-file-entry.c:323
 msgid "The type of operation that the file selector is performing."
 msgstr "Režim operace, kterou výběr souboru provádí."
 
-#: ../libgnomeui/gnome-file-entry.c:651 ../libgnomeui/gnome-file-entry.c:688
+#: ../libgnomeui/gnome-file-entry.c:658 ../libgnomeui/gnome-file-entry.c:695
 msgid "Select file"
 msgstr "Vyber soubor"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:820
 msgid "Path"
 msgstr "Cesta"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:820
 msgid "Path to file"
 msgstr "Cesta k souboru"
 
-#: ../libgnomeui/gnome-file-entry.c:841
+#: ../libgnomeui/gnome-file-entry.c:849
 msgid "_Browse..."
 msgstr "_Procházet..."
 
-#: ../libgnomeui/gnome-file-entry.c:842
+#: ../libgnomeui/gnome-file-entry.c:850
 msgid "Pop up a file selector to choose a file"
 msgstr "Zobrazí dialog pro výběr souboru"
 
@@ -1156,39 +1186,39 @@ msgstr ""
 "Nastala chyba při nahrávání nebo ukládání informací o vašem nastavení pro %"
 "s. Některé volby vašeho nastavení nemusí fungovat správně."
 
-#: ../libgnomeui/gnome-href.c:123
+#: ../libgnomeui/gnome-href.c:102
 msgid "URL"
 msgstr "URL"
 
-#: ../libgnomeui/gnome-href.c:124
+#: ../libgnomeui/gnome-href.c:103
 msgid "The URL that GnomeHRef activates"
 msgstr "URL, které aktivuje prvek GnomeHRef"
 
-#: ../libgnomeui/gnome-href.c:131
+#: ../libgnomeui/gnome-href.c:110
 msgid "Text"
 msgstr "Text"
 
-#: ../libgnomeui/gnome-href.c:132
+#: ../libgnomeui/gnome-href.c:111
 msgid "The text on the button"
 msgstr "Text na tlačítku"
 
-#: ../libgnomeui/gnome-href.c:133
+#: ../libgnomeui/gnome-href.c:112
 msgid "End World Hunger"
 msgstr "Ukončit hlad ve světě"
 
-#: ../libgnomeui/gnome-href.c:139
+#: ../libgnomeui/gnome-href.c:118
 msgid "Link color"
 msgstr "Barva odkazu"
 
-#: ../libgnomeui/gnome-href.c:140
+#: ../libgnomeui/gnome-href.c:119
 msgid "Color used to draw the link"
 msgstr "Barva, kterou se vykresluje odkaz"
 
-#: ../libgnomeui/gnome-href.c:171
+#: ../libgnomeui/gnome-href.c:150
 msgid "This button will take you to the URI that it displays."
 msgstr "Toto tlačítko vás zavede na adresu URI, kterou zobrazuje."
 
-#: ../libgnomeui/gnome-href.c:394
+#: ../libgnomeui/gnome-href.c:386
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1196,7 +1226,7 @@ msgstr ""
 "Při pokusu o spuštění implicitního prohlížeče WWW došlo k chybě.\n"
 "Zkontrolujte prosím svá nastavení v nástroji 'Preferované aplikace'."
 
-#: ../libgnomeui/gnome-icon-entry.c:179
+#: ../libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1204,27 +1234,27 @@ msgstr ""
 "Unikátní identifikátor pro výběr ikony. Bude použit pro uložení seznamu "
 "historie."
 
-#: ../libgnomeui/gnome-icon-entry.c:188
+#: ../libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
 msgstr "Nadpis dialogu pro probírání ikonami."
 
-#: ../libgnomeui/gnome-icon-entry.c:195
+#: ../libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
 msgstr "Adresář obrázků"
 
-#: ../libgnomeui/gnome-icon-entry.c:196
+#: ../libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
 msgstr "Adresář, ve kterém se budou hledat ikony."
 
-#: ../libgnomeui/gnome-icon-entry.c:204
+#: ../libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Název souboru, který by se měl zobrazovat ve výběru ikony."
 
-#: ../libgnomeui/gnome-icon-entry.c:212
+#: ../libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
 msgstr "Dialog pro výběr"
 
-#: ../libgnomeui/gnome-icon-entry.c:213
+#: ../libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1232,39 +1262,39 @@ msgstr ""
 "Dialog pro výběr ikony. Můžete použít tento atribut, chcete-li získat prvek "
 "GtkDialog a měnit nebo zjistit jeho parametry."
 
-#: ../libgnomeui/gnome-icon-entry.c:321 ../libgnomeui/gnome-icon-entry.c:1004
-msgid "No Icon"
-msgstr "Žádná ikona"
+#: ../libgnomeui/gnome-icon-entry.c:319 ../libgnomeui/gnome-icon-entry.c:1003
+msgid "Choose Icon"
+msgstr "Vybrat ikonu"
 
-#: ../libgnomeui/gnome-icon-entry.c:774
+#: ../libgnomeui/gnome-icon-entry.c:773
 msgid "Icon selection dialog"
 msgstr "Dialog výběru ikony"
 
-#: ../libgnomeui/gnome-icon-entry.c:775
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "This dialog box lets you select an icon."
 msgstr "Toto dialogové okno vám umožní vybrat ikonu."
 
-#: ../libgnomeui/gnome-icon-entry.c:781 ../libgnomeui/gnome-icon-entry.c:1007
+#: ../libgnomeui/gnome-icon-entry.c:780 ../libgnomeui/gnome-icon-entry.c:1006
 msgid "Icon Selector"
 msgstr "Výběr ikony"
 
-#: ../libgnomeui/gnome-icon-entry.c:782
+#: ../libgnomeui/gnome-icon-entry.c:781
 msgid "Please pick the icon you want."
 msgstr "Vyberte prosím ikonu, kterou chcete."
 
-#: ../libgnomeui/gnome-icon-entry.c:1008
+#: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "This button will open a window to let you select an icon."
 msgstr "Toto tlačítko otevře okno, ve kterém budete moci vybrat ikonu."
 
-#: ../libgnomeui/gnome-icon-entry.c:1028
+#: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
 msgstr "Procházet"
 
-#: ../libgnomeui/gnome-icon-entry.c:1031
+#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Icon path"
 msgstr "Cesta k ikonám"
 
-#: ../libgnomeui/gnome-icon-entry.c:1032
+#: ../libgnomeui/gnome-icon-entry.c:1033
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1304,56 +1334,72 @@ msgstr "Otázka"
 msgid "Message"
 msgstr "Zpráva"
 
-#: ../libgnomeui/gnome-password-dialog.c:265
+#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_Jméno uživatele:"
 
-#: ../libgnomeui/gnome-password-dialog.c:267
+#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Doména:"
 
-#: ../libgnomeui/gnome-password-dialog.c:269
+#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Heslo:"
 
-#: ../libgnomeui/gnome-password-dialog.c:342
+#: ../libgnomeui/gnome-password-dialog.c:219
+msgid "_New password:"
+msgstr "Nové _heslo:"
+
+#: ../libgnomeui/gnome-password-dialog.c:220
+msgid "Con_firm password:"
+msgstr "Potvrdit h_eslo:"
+
+#: ../libgnomeui/gnome-password-dialog.c:223
+msgid "Password quality:"
+msgstr "Síla hesla:"
+
+#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "_Připojit"
 
-#: ../libgnomeui/gnome-password-dialog.c:364
+#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "Připojit se _anonymně"
 
-#: ../libgnomeui/gnome-password-dialog.c:369
+#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Připojit se jako _uživatel:"
 
-#: ../libgnomeui/gnome-password-dialog.c:467
-msgid "_Remember password for this session"
+#: ../libgnomeui/gnome-password-dialog.c:438
+msgid "_Forget password immediately"
+msgstr "Zapomenou_t heslo okamžitě"
+
+#: ../libgnomeui/gnome-password-dialog.c:444
+msgid "_Remember password until you logout"
 msgstr "Za_pamatovat si heslo po dobu sezení"
 
-#: ../libgnomeui/gnome-password-dialog.c:469
-msgid "Save password in _keyring"
-msgstr "Uložit heslo do _klíčenky"
+#: ../libgnomeui/gnome-password-dialog.c:450
+msgid "_Remember forever"
+msgstr "Pa_matovat si navždy"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:114
+#: ../libgnomeui/gnome-pixmap-entry.c:112
 msgid "Do Preview"
 msgstr "Dělat náhled"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:115
+#: ../libgnomeui/gnome-pixmap-entry.c:113
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Jestli by měl mít výběr obrázku náhled."
 
-#: ../libgnomeui/gnome-pixmap-entry.c:189
+#: ../libgnomeui/gnome-pixmap-entry.c:187
 #: ../libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "Žádný obrázek"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:206
+#: ../libgnomeui/gnome-pixmap-entry.c:204
 msgid "Image Preview"
 msgstr "Náhled obrázku"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:207
+#: ../libgnomeui/gnome-pixmap-entry.c:205
 msgid "A preview of the image currently specified"
 msgstr "Náhled právě vybraného obrázku"
 
@@ -1365,26 +1411,26 @@ msgstr "Nemohu najít hbox, používám se běžný výběr souboru"
 msgid "Preview"
 msgstr "Náhled"
 
-#: ../libgnomeui/gnome-scores.c:78
+#: ../libgnomeui/gnome-scores.c:77
 msgid "Top Ten"
 msgstr "Horních deset"
 
-#: ../libgnomeui/gnome-scores.c:91
+#: ../libgnomeui/gnome-scores.c:90
 msgid "User"
 msgstr "Uživatel"
 
-#: ../libgnomeui/gnome-scores.c:94
+#: ../libgnomeui/gnome-scores.c:93
 msgid "Score"
 msgstr "Skóre"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: ../libgnomeui/gnome-scores.c:194
+#: ../libgnomeui/gnome-scores.c:193
 msgid "%a %b %d %T %Y"
 msgstr "%T %a %d. %b %Y"
 
-#: ../libgnomeui/gnome-scores.c:395
+#: ../libgnomeui/gnome-scores.c:394
 msgid "Sans 14"
 msgstr "Sans 14"
 
@@ -1416,68 +1462,34 @@ msgstr "Ododsazení"
 msgid "About"
 msgstr "O aplikaci"
 
-#: ../libgnomeui/gnome-ui-init.c:126 ../libgnomeui/gnome-ui-init.c:135
+#: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:172
 msgid "Disable Crash Dialog"
 msgstr "Zakázat dialog havárie"
 
-#: ../libgnomeui/gnome-ui-init.c:128
-msgid "X display to use"
-msgstr "Použitý displej X"
+#: ../libgnomeui/gnome-ui-init.c:155
+msgid "GNOME GUI Library:"
+msgstr "Knihovna GNOME GUI:"
 
-#: ../libgnomeui/gnome-ui-init.c:128
-msgid "DISPLAY"
-msgstr "DISPLAY"
-
-#: ../libgnomeui/gnome-ui-init.c:172 ../libgnomeui/gnome-ui-init.c:185
-msgid "GNOME GUI Library"
-msgstr "GNOME GUI knihovna"
-
-#: ../libgnomeui/gnome-ui-init.c:173
+#: ../libgnomeui/gnome-ui-init.c:156
 msgid "Show GNOME GUI options"
 msgstr "Zobrazit možnosti GUI GNOME"
 
-#: ../libgnomeui/gnome-ui-init.c:250
+#: ../libgnomeui/gnome-ui-init.c:174
+msgid "X display to use"
+msgstr "Použitý displej X"
+
+#: ../libgnomeui/gnome-ui-init.c:174
+msgid "DISPLAY"
+msgstr "DISPLEJ"
+
+#: ../libgnomeui/gnome-ui-init.c:179
+msgid "GNOME GUI Library"
+msgstr "GNOME GUI knihovna"
+
+#: ../libgnomeui/gnome-ui-init.c:244
 msgid "Could not open link"
 msgstr "Nelze otevřít odkaz"
-
-#. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:836
-#, c-format
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr ""
-"Vyskytlo se několik chyb 'segmentation fault'; nemohu zobrazit chybový "
-"dialog\n"
-
-#. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:851
-#, c-format
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"Chyba Segmentation fault!\n"
-"Nemohu zobrazit dialog o havárii\n"
-
-#: ../libgnomeui/gnome_segv.c:82
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Použití: gnome_segv2 jménoaplikace čsignálu\n"
-
-#: ../libgnomeui/gnome_segv.c:138
-#, c-format
-msgid ""
-"<b>The application %s has crashed.</b>\n"
-"\n"
-"However you don't have installed <b>bug-buddy</b>, the\n"
-"GNOME crash report tool. If you want to help us\n"
-"to make GNOME better, please, install it\n"
-msgstr ""
-"<b>Aplikace %s spadla.</b>\n"
-"\n"
-"Nenainstalovali jste však <b>bug-buddy</b>, GNOME\n"
-"nástroj pro hlášení chyb. Pokud nám chcete pomoci\n"
-"vylepšit GNOME, nainstalujte ho prosím.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Ukončit test"
-
