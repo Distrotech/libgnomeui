@@ -1,3 +1,10 @@
+========================== libgnome 2.22.0  =======================
+
+	* configure.in: Bump version.
+	* NEWS: Update.
+	* file-chooser/gtkfilesystemgio.c: Fixes to threading to
+	avoid a hang in the file chooser. (Bastien)
+
 ========================== libgnome 2.21.93 =======================
 
 2008-03-07  Bastien Nocera  <hadess@hadess.net>

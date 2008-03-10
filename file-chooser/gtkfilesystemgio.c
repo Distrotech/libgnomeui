@@ -396,7 +396,9 @@ volumes_drives_changed (GVolumeMonitor *volume_monitor,
   GtkFileSystemGio *impl;
 
   impl = GTK_FILE_SYSTEM_GIO (user_data);
+  gdk_threads_enter ();
   g_signal_emit_by_name (impl, "volumes-changed");
+  gdk_threads_leave ();
 }
 
 static gchar *
@@ -654,7 +656,9 @@ enumerator_files_callback (GObject      *source_object,
 				     NULL, NULL, NULL);
 
       folder->finished_loading = TRUE;
+      gdk_threads_enter ();
       g_signal_emit_by_name (folder, "finished-loading", 0);
+      gdk_threads_leave ();
       g_object_unref (folder);
       return;
     }
@@ -678,7 +682,9 @@ enumerator_files_callback (GObject      *source_object,
 				      enumerator_files_callback,
 				      folder);
 
+  gdk_threads_enter ();
   g_signal_emit_by_name (folder, "files-added", added_files);
+  gdk_threads_leave ();
   g_slist_foreach (added_files, (GFunc) g_free, NULL);
   g_slist_free (added_files);
 
@@ -701,10 +707,14 @@ directory_monitor_changed (GFileMonitor      *monitor,
   switch (event)
     {
     case G_FILE_MONITOR_EVENT_CREATED:
+      gdk_threads_enter ();
       g_signal_emit_by_name (folder, "files-added", files);
+      gdk_threads_leave ();
       break;
     case G_FILE_MONITOR_EVENT_DELETED:
+      gdk_threads_enter ();
       g_signal_emit_by_name (folder, "files-removed", files);
+      gdk_threads_leave ();
       break;
     default:
       break;
@@ -754,9 +764,11 @@ enumerate_children_callback (GObject      *source_object,
       g_object_unref (enumerator);
     }
 
+  gdk_threads_enter ();
   ((GtkFileSystemGetFolderCallback) handle->callback) (GTK_FILE_SYSTEM_HANDLE (handle),
 						       GTK_FILE_FOLDER (folder),
 						       error, handle->data);
+  gdk_threads_leave ();
 }
 
 static GtkFileSystemHandle *
@@ -925,8 +937,10 @@ mount_async_callback (GObject      *source_object,
     }
   else
     {
+      gdk_threads_enter ();
       ((GtkFileSystemGetInfoCallback) handle->callback) (GTK_FILE_SYSTEM_HANDLE (handle),
 							 NULL, error, handle->data);
+      gdk_threads_leave ();
     }
 }
 
@@ -968,8 +982,10 @@ query_info_callback (GObject      *source_object,
       return;
     }
 
+  gdk_threads_enter ();
   ((GtkFileSystemGetInfoCallback) handle->callback) (GTK_FILE_SYSTEM_HANDLE (handle),
 						     info, error, handle->data);
+  gdk_threads_leave ();
 
   if (info)
     gtk_file_info_free (info);
@@ -1028,8 +1044,11 @@ create_folder_callback (gpointer data)
 
   g_file_make_directory (file, handle->cancellable, &error);
 
+  gdk_threads_enter ();
   ((GtkFileSystemCreateFolderCallback) handle->callback) (GTK_FILE_SYSTEM_HANDLE (handle),
 							  idle_data->path, error, handle->data);
+  gdk_threads_leave ();
+
   g_object_unref (file);
   gtk_file_path_free (idle_data->path);
   g_slice_free (CreateFolderData, idle_data);
@@ -1184,9 +1203,12 @@ volume_mount_cb (GObject *source_object,
 
   g_volume_mount_finish (G_VOLUME (source_object), res, &error);
 
+  gdk_threads_enter ();
   ((GtkFileSystemVolumeMountCallback) handle->callback) (GTK_FILE_SYSTEM_HANDLE (handle),
                                                          (GtkFileSystemVolume *) source_object,
                                                          error, handle->data);
+  gdk_threads_leave ();
+
   if (error)
     g_error_free (error);
 }
@@ -1203,9 +1225,12 @@ drive_poll_for_media_cb (GObject *source_object,
 
   g_drive_poll_for_media_finish (G_DRIVE (source_object), res, &error);
 
+  gdk_threads_enter ();
   ((GtkFileSystemVolumeMountCallback) handle->callback) (GTK_FILE_SYSTEM_HANDLE (handle),
                                                          (GtkFileSystemVolume *) source_object,
                                                          error, handle->data);
+  gdk_threads_leave ();
+
   if (error)
     g_error_free (error);
 }
