@@ -1,5 +1,18 @@
 2008-03-10  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-app-helper.c:
+	Remove unused static function.
+	* libgnomeui/gnome-dialog.c:
+	Mark a function as static.
+	* libgnomeui/gnome-font-picker.c:
+	(gnome_font_picker_create_inside):
+	Mark function as static.
+	* libgnomeui/gnome-vfs-util.c:
+	(gnome_gdk_pixbuf_new_from_uri_at_scale):
+	NULL vs. 0.
+
+2008-03-10  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* configure.in: Post release version bump.
 
 ========================== libgnome 2.22.0.1 ======================

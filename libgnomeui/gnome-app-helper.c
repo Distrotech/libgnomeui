@@ -2463,52 +2463,6 @@ per_app_toolbar_style_changed_notify(GConfClient            *client,
 }
 
 static void
-toolbar_style_changed_notify(GConfClient            *client,
-                             guint                   cnxn_id,
-			     GConfEntry             *entry,
-                             gpointer                user_data)
-{
-        GtkToolbarStyle style = GTK_TOOLBAR_BOTH;
-        GtkWidget *w = user_data;
-        GtkToolbar *toolbar = GTK_TOOLBAR(w);
-        gchar *per_app_key;
-        gchar *str;
-        gboolean got_it = FALSE;
-	GConfValue *value;
-
-        /* Check for app-specific override */
-        per_app_key = gnome_gconf_get_gnome_libs_settings_relative("toolbar_style");
-        str = gconf_client_get_string(client, per_app_key, NULL);
-        g_free(per_app_key);
-
-        if (str) {
-                if (gconf_string_to_enum(toolbar_styles,
-                                         str,
-                                         (gint*)&style)) {
-                        got_it = TRUE;
-                }
-                g_free(str);
-        }
-
-	value = gconf_entry_get_value (entry);
-
-        /* If no per-app setting use this new global setting */
-        if (!got_it &&
-            value &&
-            value->type == GCONF_VALUE_STRING &&
-            gconf_value_get_string(value) != NULL) {
-		if (!gconf_string_to_enum (toolbar_styles,
-					   gconf_value_get_string (value),
-					   (gint *)&style))
-			style = GTK_TOOLBAR_BOTH;
-        }
-
-	GDK_THREADS_ENTER();
-        gtk_toolbar_set_style(toolbar, style);
-	GDK_THREADS_LEAVE();
-}
-
-static void
 style_menu_item_activated (GtkWidget *item, GtkToolbarStyle style)
 {
 	GConfClient *conf;

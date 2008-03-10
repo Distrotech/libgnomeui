@@ -1070,6 +1070,7 @@ static void gnome_dialog_finalize (GObject *object)
     (* (G_OBJECT_CLASS(parent_class)->finalize))(object);
 }
 
+static
 void gnome_dialog_close_real(GnomeDialog * dialog)
 {
   g_return_if_fail(dialog != NULL);
