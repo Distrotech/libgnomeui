@@ -1,5 +1,5 @@
 # Danish translation of libgnomeui.
-# Copyright (C) 1998, 99, 2000, 01, 02, 03, 04 Free Software Foundation, Inc.
+# Copyright (C) 1998-2008 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
 # Keld Simonsen <keld@dkuug.dk>, 2001.
 # Kjartan Maraas <kmaraas@gnome.org>, 1998, 1999, 2000
@@ -7,6 +7,7 @@
 # Martin Willemoes Hansen <mwh@sysrq.dk>, 2004 - 2005.
 # Marie Lund <marielund@post.cybercity.dk>, 2005.
 # Kenneth Nielsen <k.nielsen81@gmail.com>, 2007.
+# Ask Hjorth Larsen <asklarsen@gmail.com>, 2008.
 #
 # Se po-filen til Gtk+ for nogle konventioner.
 #
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-24 20:08+0200\n"
-"PO-Revision-Date: 2007-04-14 20:30+0200\n"
-"Last-Translator: Kenneth Nielsen <k.nielsen81@gmail.com>\n"
+"POT-Creation-Date: 2008-03-11 00:16+0100\n"
+"PO-Revision-Date: 2008-03-10 14:48+0100\n"
+"Last-Translator: Ask Hjorth Larsen <asklarsen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,50 +39,72 @@ msgstr "Afkom-element 2"
 msgid "Hint for item 2"
 msgstr "Tip til element 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1002
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1036
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s er en henvisning til noget som ikke er en mappe"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1013
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1047
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s er en henvisning uden bestemmelsessted"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1088
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1124
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s er ikke en mappe"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1940
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1162
+#, c-format
+msgid "Could not monitor '%s': %s"
+msgstr "Kunne ikke overvåge \"%s\": %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1275
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1488
+#, c-format
+msgid "Could not get info for '%s': %s"
+msgstr "Kunne ikke skaffe oplysninger om \"%s\": %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1611
+#, c-format
+msgid "Could not create '%s': %s"
+msgstr "Kunne ikke oprette \"%s\": %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1981
 msgid "Network Servers"
 msgstr "Netværksservere"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1956
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1997
+#: ../file-chooser/gtkfilesystemgio.c:1283
 msgid "File System"
 msgstr "Filsystem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2485
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2067
+#, c-format
+msgid "'%s': %s"
+msgstr "\"%s\": %s"
+
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2526
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Bogmærkegemning mislykkedes (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2922
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2962
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Fejl ved indhentning af information for \"%s\""
 
-#: ../file-chooser/testfilechooser.c:178
+#: ../file-chooser/testfilechooser.c:181
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "Kunne ikke skaffe oplysninger om filen \"%s\": %s"
 
-#: ../file-chooser/testfilechooser.c:191
+#: ../file-chooser/testfilechooser.c:194
 #, c-format
 msgid "Failed to open file '%s': %s"
 msgstr "Kunne ikke åbne filen \"%s\": %s"
 
-#: ../file-chooser/testfilechooser.c:230
+#: ../file-chooser/testfilechooser.c:233
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
@@ -197,142 +220,142 @@ msgid "About %s"
 msgstr "Om %s"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:81 ../libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fil"
 
-#: ../libgnomeui/gnome-app-helper.c:82
+#: ../libgnomeui/gnome-app-helper.c:84
 msgid "_File/"
 msgstr "_Fil/"
 
-#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "R_edigér"
 
-#: ../libgnomeui/gnome-app-helper.c:84
+#: ../libgnomeui/gnome-app-helper.c:86
 msgid "_Edit/"
 msgstr "R_edigér/"
 
-#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Vis"
 
-#: ../libgnomeui/gnome-app-helper.c:86
+#: ../libgnomeui/gnome-app-helper.c:88
 msgid "_View/"
 msgstr "_Vis/"
 
-#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Indstillinger"
 
-#: ../libgnomeui/gnome-app-helper.c:88
+#: ../libgnomeui/gnome-app-helper.c:90
 msgid "_Settings/"
 msgstr "_Indstillinger/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Ny"
 
-#: ../libgnomeui/gnome-app-helper.c:90
+#: ../libgnomeui/gnome-app-helper.c:92
 msgid "_New/"
 msgstr "_Ny/"
 
-#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Fi_ler"
 
-#: ../libgnomeui/gnome-app-helper.c:92
+#: ../libgnomeui/gnome-app-helper.c:94
 msgid "Fi_les/"
 msgstr "Fi_ler/"
 
-#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "Vin_duer"
 
-#: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Spil"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: ../libgnomeui/gnome-app-helper.c:96
+#: ../libgnomeui/gnome-app-helper.c:98
 msgid "_Windows/"
 msgstr "Vin_duer/"
 
 #. Open
-#: ../libgnomeui/gnome-app-helper.c:108
+#: ../libgnomeui/gnome-app-helper.c:110
 msgid "_Open..."
 msgstr "_Åbn..."
 
-#: ../libgnomeui/gnome-app-helper.c:108
+#: ../libgnomeui/gnome-app-helper.c:110
 msgid "Open a file"
 msgstr "Åbn en fil"
 
 #. Save
-#: ../libgnomeui/gnome-app-helper.c:113
+#: ../libgnomeui/gnome-app-helper.c:115
 msgid "_Save"
 msgstr "_Gem"
 
-#: ../libgnomeui/gnome-app-helper.c:113
+#: ../libgnomeui/gnome-app-helper.c:115
 msgid "Save the current file"
 msgstr "Gem den aktuelle fil"
 
 #. Save As
-#: ../libgnomeui/gnome-app-helper.c:118
+#: ../libgnomeui/gnome-app-helper.c:120
 msgid "Save _As..."
 msgstr "Gem _som..."
 
-#: ../libgnomeui/gnome-app-helper.c:119
+#: ../libgnomeui/gnome-app-helper.c:121
 msgid "Save the current file with a different name"
 msgstr "Gem den aktuelle fil under et nyt navn"
 
 #. Revert
-#: ../libgnomeui/gnome-app-helper.c:124
+#: ../libgnomeui/gnome-app-helper.c:126
 msgid "_Revert"
 msgstr "_Forkast"
 
-#: ../libgnomeui/gnome-app-helper.c:125
+#: ../libgnomeui/gnome-app-helper.c:127
 msgid "Revert to a saved version of the file"
 msgstr "Forkast ændringerne og gå tilbage til en gemt version af filen"
 
 #. Print
-#: ../libgnomeui/gnome-app-helper.c:130
+#: ../libgnomeui/gnome-app-helper.c:132
 msgid "_Print..."
 msgstr "_Udskriv..."
 
-#: ../libgnomeui/gnome-app-helper.c:130
+#: ../libgnomeui/gnome-app-helper.c:132
 msgid "Print the current file"
 msgstr "Udskriv den aktuelle fil"
 
 #. Print Setup
-#: ../libgnomeui/gnome-app-helper.c:135
+#: ../libgnomeui/gnome-app-helper.c:137
 msgid "Print S_etup..."
 msgstr "Udskrifts_indstillinger..."
 
-#: ../libgnomeui/gnome-app-helper.c:136
+#: ../libgnomeui/gnome-app-helper.c:138
 msgid "Setup the page settings for your current printer"
 msgstr "Tilpas sideindstillingerne for den aktuelle printer"
 
 #. Close
-#: ../libgnomeui/gnome-app-helper.c:141
+#: ../libgnomeui/gnome-app-helper.c:143
 msgid "_Close"
 msgstr "_Luk"
 
-#: ../libgnomeui/gnome-app-helper.c:141
+#: ../libgnomeui/gnome-app-helper.c:143
 msgid "Close the current file"
 msgstr "Luk den aktuelle fil"
 
 #. Exit
-#: ../libgnomeui/gnome-app-helper.c:146
+#: ../libgnomeui/gnome-app-helper.c:148
 msgid "_Quit"
 msgstr "_Afslut"
 
-#: ../libgnomeui/gnome-app-helper.c:146
+#: ../libgnomeui/gnome-app-helper.c:148
 msgid "Quit the application"
 msgstr "Afslut dette program"
 
@@ -340,93 +363,93 @@ msgstr "Afslut dette program"
 #. * The "Edit" menu
 #.
 #. Cut
-#: ../libgnomeui/gnome-app-helper.c:154
+#: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cu_t"
 msgstr "Kl_ip"
 
-#: ../libgnomeui/gnome-app-helper.c:154
+#: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cut the selection"
 msgstr "Klip det markerede"
 
 #. 10
 #. Copy
-#: ../libgnomeui/gnome-app-helper.c:160
+#: ../libgnomeui/gnome-app-helper.c:162
 msgid "_Copy"
 msgstr "_Kopiér"
 
-#: ../libgnomeui/gnome-app-helper.c:160
+#: ../libgnomeui/gnome-app-helper.c:162
 msgid "Copy the selection"
 msgstr "Kopiér det markerede"
 
 #. Paste
-#: ../libgnomeui/gnome-app-helper.c:165
+#: ../libgnomeui/gnome-app-helper.c:167
 msgid "_Paste"
 msgstr "_Indsæt"
 
-#: ../libgnomeui/gnome-app-helper.c:165
+#: ../libgnomeui/gnome-app-helper.c:167
 msgid "Paste the clipboard"
 msgstr "Indsæt fra klippebordet"
 
 #. Clear
-#: ../libgnomeui/gnome-app-helper.c:170
+#: ../libgnomeui/gnome-app-helper.c:172
 msgid "C_lear"
 msgstr "_Ryd"
 
-#: ../libgnomeui/gnome-app-helper.c:170
+#: ../libgnomeui/gnome-app-helper.c:172
 msgid "Clear the selection"
 msgstr "Ryd det markerede"
 
 #. Undo
-#: ../libgnomeui/gnome-app-helper.c:175
+#: ../libgnomeui/gnome-app-helper.c:177
 msgid "_Undo"
 msgstr "_Fortryd"
 
-#: ../libgnomeui/gnome-app-helper.c:175
+#: ../libgnomeui/gnome-app-helper.c:177
 msgid "Undo the last action"
 msgstr "Fortryd den sidste handling"
 
 #. Redo
-#: ../libgnomeui/gnome-app-helper.c:180
+#: ../libgnomeui/gnome-app-helper.c:182
 msgid "_Redo"
 msgstr "_Omgør"
 
-#: ../libgnomeui/gnome-app-helper.c:180
+#: ../libgnomeui/gnome-app-helper.c:182
 msgid "Redo the undone action"
 msgstr "Omgør den fortrudte handling"
 
 #. Find
-#: ../libgnomeui/gnome-app-helper.c:185
+#: ../libgnomeui/gnome-app-helper.c:187
 msgid "_Find..."
 msgstr "_Find..."
 
-#: ../libgnomeui/gnome-app-helper.c:185
+#: ../libgnomeui/gnome-app-helper.c:187
 msgid "Search for a string"
 msgstr "Søg efter et tekststykke"
 
 #. Find Again
-#: ../libgnomeui/gnome-app-helper.c:190
+#: ../libgnomeui/gnome-app-helper.c:192
 msgid "Find Ne_xt"
 msgstr "Find n_æste"
 
-#: ../libgnomeui/gnome-app-helper.c:191
+#: ../libgnomeui/gnome-app-helper.c:193
 msgid "Search again for the same string"
 msgstr "Søg igen efter det samme tekststykke"
 
 #. Replace
-#: ../libgnomeui/gnome-app-helper.c:196
+#: ../libgnomeui/gnome-app-helper.c:198
 msgid "R_eplace..."
 msgstr "_Erstat..."
 
-#: ../libgnomeui/gnome-app-helper.c:196
+#: ../libgnomeui/gnome-app-helper.c:198
 msgid "Replace a string"
 msgstr "Erstat tekststykke"
 
 #. Properties
-#: ../libgnomeui/gnome-app-helper.c:201
+#: ../libgnomeui/gnome-app-helper.c:203
 msgid "_Properties"
 msgstr "E_genskaber"
 
-#: ../libgnomeui/gnome-app-helper.c:202
+#: ../libgnomeui/gnome-app-helper.c:204
 msgid "Modify the file's properties"
 msgstr "Ændr filens egenskaber"
 
@@ -434,11 +457,11 @@ msgstr "Ændr filens egenskaber"
 #. * The Settings menu
 #.
 #. Settings
-#: ../libgnomeui/gnome-app-helper.c:210
+#: ../libgnomeui/gnome-app-helper.c:212
 msgid "Prefere_nces"
 msgstr "_Indstillinger"
 
-#: ../libgnomeui/gnome-app-helper.c:211
+#: ../libgnomeui/gnome-app-helper.c:213
 msgid "Configure the application"
 msgstr "Konfigurér programmet"
 
@@ -447,134 +470,134 @@ msgstr "Konfigurér programmet"
 #. * And the "Help" menu
 #.
 #. About
-#: ../libgnomeui/gnome-app-helper.c:220 ../test-gnome/testgnome.xml.h:4
+#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Om"
 
-#: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:1
+#: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Om dette program"
 
-#: ../libgnomeui/gnome-app-helper.c:224
+#: ../libgnomeui/gnome-app-helper.c:226
 msgid "Select _All"
 msgstr "Marker _alt"
 
-#: ../libgnomeui/gnome-app-helper.c:225
+#: ../libgnomeui/gnome-app-helper.c:227
 msgid "Select everything"
 msgstr "Markér det hele"
 
 #.
 #. * Window menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:233
+#: ../libgnomeui/gnome-app-helper.c:235
 msgid "Create New _Window"
 msgstr "Opret nyt _vindue"
 
-#: ../libgnomeui/gnome-app-helper.c:234
+#: ../libgnomeui/gnome-app-helper.c:236
 msgid "Create a new window"
 msgstr "Opret et nyt vindue"
 
-#: ../libgnomeui/gnome-app-helper.c:238
+#: ../libgnomeui/gnome-app-helper.c:240
 msgid "_Close This Window"
 msgstr "L_uk dette vindue"
 
-#: ../libgnomeui/gnome-app-helper.c:239 ../test-gnome/testgnome.xml.h:2
+#: ../libgnomeui/gnome-app-helper.c:241 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Luk det aktuelle vindue"
 
 #.
 #. * The "Game" menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:247
+#: ../libgnomeui/gnome-app-helper.c:249
 msgid "_New Game"
 msgstr "_Nyt spil"
 
-#: ../libgnomeui/gnome-app-helper.c:248
+#: ../libgnomeui/gnome-app-helper.c:250
 msgid "Start a new game"
 msgstr "Start et nyt spil"
 
-#: ../libgnomeui/gnome-app-helper.c:252
+#: ../libgnomeui/gnome-app-helper.c:254
 msgid "_Pause Game"
 msgstr "_Pause spil"
 
-#: ../libgnomeui/gnome-app-helper.c:253
+#: ../libgnomeui/gnome-app-helper.c:255
 msgid "Pause the game"
 msgstr "Sæt spillet på pause"
 
-#: ../libgnomeui/gnome-app-helper.c:257
+#: ../libgnomeui/gnome-app-helper.c:259
 msgid "_Restart Game"
 msgstr "_Genstart spil"
 
-#: ../libgnomeui/gnome-app-helper.c:258
+#: ../libgnomeui/gnome-app-helper.c:260
 msgid "Restart the game"
 msgstr "Start spillet igen"
 
-#: ../libgnomeui/gnome-app-helper.c:262
+#: ../libgnomeui/gnome-app-helper.c:264
 msgid "_Undo Move"
 msgstr "_Fortryd træk"
 
-#: ../libgnomeui/gnome-app-helper.c:263
+#: ../libgnomeui/gnome-app-helper.c:265
 msgid "Undo the last move"
 msgstr "Fortryd sidste træk"
 
-#: ../libgnomeui/gnome-app-helper.c:267
+#: ../libgnomeui/gnome-app-helper.c:269
 msgid "_Redo Move"
 msgstr "_Omgør træk"
 
-#: ../libgnomeui/gnome-app-helper.c:268
+#: ../libgnomeui/gnome-app-helper.c:270
 msgid "Redo the undone move"
 msgstr "Omgør det fortrudte træk"
 
-#: ../libgnomeui/gnome-app-helper.c:272
+#: ../libgnomeui/gnome-app-helper.c:274
 msgid "_Hint"
 msgstr "_Tip"
 
-#: ../libgnomeui/gnome-app-helper.c:273
+#: ../libgnomeui/gnome-app-helper.c:275
 msgid "Get a hint for your next move"
 msgstr "Giv et råd til det næste træk"
 
 #. 30
-#: ../libgnomeui/gnome-app-helper.c:278
+#: ../libgnomeui/gnome-app-helper.c:280
 msgid "_Scores..."
 msgstr "_Resultater..."
 
-#: ../libgnomeui/gnome-app-helper.c:279
+#: ../libgnomeui/gnome-app-helper.c:281
 msgid "View the scores"
 msgstr "Vis point fra tidligere spil"
 
-#: ../libgnomeui/gnome-app-helper.c:283
+#: ../libgnomeui/gnome-app-helper.c:285
 msgid "_End Game"
 msgstr "_Afslut spillet"
 
-#: ../libgnomeui/gnome-app-helper.c:284
+#: ../libgnomeui/gnome-app-helper.c:286
 msgid "End the current game"
 msgstr "Afslut det aktuelle spil"
 
-#: ../libgnomeui/gnome-app-helper.c:1146
+#: ../libgnomeui/gnome-app-helper.c:1148
 msgid "_Contents"
 msgstr "_Indhold"
 
-#: ../libgnomeui/gnome-app-helper.c:1149
+#: ../libgnomeui/gnome-app-helper.c:1151
 msgid "View help for this application"
 msgstr "Vis hjælp til dette program"
 
-#: ../libgnomeui/gnome-app-helper.c:2586
+#: ../libgnomeui/gnome-app-helper.c:2522
 msgid "Text Below Icons"
 msgstr "Tekst under ikoner"
 
-#: ../libgnomeui/gnome-app-helper.c:2587
+#: ../libgnomeui/gnome-app-helper.c:2523
 msgid "Priority Text Beside Icons"
 msgstr "Prioriteret tekst ved siden af ikoner"
 
-#: ../libgnomeui/gnome-app-helper.c:2588
+#: ../libgnomeui/gnome-app-helper.c:2524
 msgid "Icons Only"
 msgstr "Kun ikoner"
 
-#: ../libgnomeui/gnome-app-helper.c:2589
+#: ../libgnomeui/gnome-app-helper.c:2525
 msgid "Text Only"
 msgstr "Kun tekst"
 
-#: ../libgnomeui/gnome-app-helper.c:2650
+#: ../libgnomeui/gnome-app-helper.c:2586
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Benyt forvalgt for skrivebord (%s)"
@@ -652,6 +675,7 @@ msgid "Level of user activity required."
 msgstr "Niveau af brugeraktivitet påkrævet"
 
 #: ../libgnomeui/gnome-authentication-manager.c:82
+#, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "HTTP-mellemværten kræver at du logger på.\n"
 
@@ -688,39 +712,39 @@ msgstr "Du skal logge på for at tilgå %s domæne %s\n"
 msgid "You must log in to access %s\n"
 msgstr "Du skal logge på for at tilgå %s\n"
 
-#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
+#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
 msgid "Specify session management ID"
 msgstr "Angiv ID for sessionshåndtering"
 
-#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
+#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "Specify prefix of saved configuration"
 msgstr "Angiv præfiks for gemt konfiguration"
 
-#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "PREFIX"
 msgstr "PRÆFIKS"
 
-#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
+#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
 msgid "Disable connection to session manager"
 msgstr "Deaktivér forbindelse til sessionshåndtering"
 
-#: ../libgnomeui/gnome-client.c:1014
+#: ../libgnomeui/gnome-client.c:1013
 msgid "Session management:"
 msgstr "Sessionshåndtering:"
 
-#: ../libgnomeui/gnome-client.c:1015
+#: ../libgnomeui/gnome-client.c:1014
 msgid "Show session management options"
 msgstr "Vis valgmuligheder for sessionshåndtering"
 
-#: ../libgnomeui/gnome-client.c:1046
+#: ../libgnomeui/gnome-client.c:1045
 msgid "Session management"
 msgstr "Sessionshåndtering"
 
-#: ../libgnomeui/gnome-client.c:2571
+#: ../libgnomeui/gnome-client.c:2579
 msgid "Cancel Logout"
 msgstr "Annullér log ud"
 
@@ -736,72 +760,72 @@ msgstr "Åbn et vindue til at vælge farven"
 msgid "Pick a color"
 msgstr "Vælg en farve"
 
-#: ../libgnomeui/gnome-dateedit.c:493 ../libgnomeui/gnome-dateedit.c:790
+#: ../libgnomeui/gnome-dateedit.c:495 ../libgnomeui/gnome-dateedit.c:802
 msgid "Time"
 msgstr "Tid"
 
-#: ../libgnomeui/gnome-dateedit.c:494
+#: ../libgnomeui/gnome-dateedit.c:496
 msgid "The time currently selected"
 msgstr "Den aktuelt valgte tid"
 
-#: ../libgnomeui/gnome-dateedit.c:506
+#: ../libgnomeui/gnome-dateedit.c:508
 msgid "DateEdit Flags"
 msgstr "DateEdit-flag"
 
-#: ../libgnomeui/gnome-dateedit.c:507
+#: ../libgnomeui/gnome-dateedit.c:509
 msgid "Flags for how DateEdit looks"
 msgstr "Flag for hvordan DateEdit ser ud"
 
-#: ../libgnomeui/gnome-dateedit.c:516
+#: ../libgnomeui/gnome-dateedit.c:518
 msgid "Lower Hour"
 msgstr "Nedre timetal"
 
-#: ../libgnomeui/gnome-dateedit.c:517
+#: ../libgnomeui/gnome-dateedit.c:519
 msgid "Lower hour in the time popup selector"
 msgstr "Nedre timetal i vælgeren"
 
-#: ../libgnomeui/gnome-dateedit.c:527
+#: ../libgnomeui/gnome-dateedit.c:529
 msgid "Upper Hour"
 msgstr "Øvre timetal"
 
-#: ../libgnomeui/gnome-dateedit.c:528
+#: ../libgnomeui/gnome-dateedit.c:530
 msgid "Upper hour in the time popup selector"
 msgstr "Øvre timetal i vælgeren"
 
-#: ../libgnomeui/gnome-dateedit.c:538
+#: ../libgnomeui/gnome-dateedit.c:540
 msgid "Initial Time"
 msgstr "Oprindelig tid"
 
-#: ../libgnomeui/gnome-dateedit.c:539
+#: ../libgnomeui/gnome-dateedit.c:541
 msgid "The initial time"
 msgstr "Den oprindelig tid"
 
-#: ../libgnomeui/gnome-dateedit.c:753 ../libgnomeui/gnome-scores.c:96
+#: ../libgnomeui/gnome-dateedit.c:765 ../libgnomeui/gnome-scores.c:96
 msgid "Date"
 msgstr "Dato"
 
-#: ../libgnomeui/gnome-dateedit.c:766
+#: ../libgnomeui/gnome-dateedit.c:778
 msgid "Select Date"
 msgstr "Vælg dato"
 
-#: ../libgnomeui/gnome-dateedit.c:766
+#: ../libgnomeui/gnome-dateedit.c:778
 msgid "Select the date from a calendar"
 msgstr "Vælg datoen fra en kalender"
 
 #. Calendar label, only shown if the date editor has a time field
-#: ../libgnomeui/gnome-dateedit.c:777
+#: ../libgnomeui/gnome-dateedit.c:789
 msgid "Calendar"
 msgstr "Kalender"
 
-#: ../libgnomeui/gnome-dateedit.c:798
+#: ../libgnomeui/gnome-dateedit.c:810
 msgid "Select Time"
 msgstr "Vælg tiden"
 
-#: ../libgnomeui/gnome-dateedit.c:798
+#: ../libgnomeui/gnome-dateedit.c:810
 msgid "Select the time from a list"
 msgstr "Vælg tiden fra en liste"
 
-#: ../libgnomeui/gnome-dateedit.c:1017
+#: ../libgnomeui/gnome-dateedit.c:1029
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date er forældet, brug gnome_date_edit_get_time"
 
@@ -931,7 +955,7 @@ msgid "Show the 'Help' button"
 msgstr "Vis 'Hjælp'-knappen"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:176
+#: ../libgnomeui/gnome-file-entry.c:239 ../libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
 msgstr "Historik-id"
 
@@ -943,7 +967,7 @@ msgstr "GTK-indtastningsfelt"
 msgid "The GTK entry"
 msgstr "GTK-indtastningsfeltet"
 
-#: ../libgnomeui/gnome-file-entry.c:237
+#: ../libgnomeui/gnome-file-entry.c:240
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -951,54 +975,54 @@ msgstr ""
 "Unikt navn til filindtastningen - dette bliver brugt til at gemme "
 "historiklisten"
 
-#: ../libgnomeui/gnome-file-entry.c:245 ../libgnomeui/gnome-icon-entry.c:185
+#: ../libgnomeui/gnome-file-entry.c:248 ../libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr "Gennemsetitel"
 
-#: ../libgnomeui/gnome-file-entry.c:246
+#: ../libgnomeui/gnome-file-entry.c:249
 msgid "Title for the Browse file dialog."
 msgstr "Titel på filvælgervinduet"
 
-#: ../libgnomeui/gnome-file-entry.c:253
+#: ../libgnomeui/gnome-file-entry.c:256
 msgid "Directory Entry"
 msgstr "Mappeindtastning"
 
-#: ../libgnomeui/gnome-file-entry.c:254
+#: ../libgnomeui/gnome-file-entry.c:257
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
 "Om filindtastningen bruges til at indtaste mappenavne eller fuldføre filnavne"
 
-#: ../libgnomeui/gnome-file-entry.c:262
+#: ../libgnomeui/gnome-file-entry.c:265
 msgid "Modal"
 msgstr "Enerådende"
 
-#: ../libgnomeui/gnome-file-entry.c:263
+#: ../libgnomeui/gnome-file-entry.c:266
 msgid "Whether the Browse file window should be modal."
 msgstr "Om filvælgervinduet skal være enerådende"
 
-#: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:201
+#: ../libgnomeui/gnome-file-entry.c:273 ../libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "Filnavn"
 
-#: ../libgnomeui/gnome-file-entry.c:271
+#: ../libgnomeui/gnome-file-entry.c:274
 msgid "Filename that should be displayed in the file entry."
 msgstr "Filnavn som bliver vist i filindtastningen"
 
-#: ../libgnomeui/gnome-file-entry.c:279
+#: ../libgnomeui/gnome-file-entry.c:282
 msgid "Default Path"
 msgstr "Forvalgt sti"
 
-#: ../libgnomeui/gnome-file-entry.c:280
+#: ../libgnomeui/gnome-file-entry.c:283
 msgid "Default path for the Browse file window."
 msgstr "Den forvalgte sti for filvælgervinduet"
 
-#: ../libgnomeui/gnome-file-entry.c:287
+#: ../libgnomeui/gnome-file-entry.c:290
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:288
+#: ../libgnomeui/gnome-file-entry.c:291
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1008,11 +1032,11 @@ msgstr ""
 "bruge denne egenskab til at få fat i GnomeEntry'en hvis du har behov for at "
 "ændre eller kende nogle af dens parametre"
 
-#: ../libgnomeui/gnome-file-entry.c:298
+#: ../libgnomeui/gnome-file-entry.c:301
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:299
+#: ../libgnomeui/gnome-file-entry.c:302
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1022,11 +1046,11 @@ msgstr ""
 "bruge denne egenskab til at få fat i GtkEntry'en hvis du har behov for at "
 "ændre eller kende nogle af dens parametre"
 
-#: ../libgnomeui/gnome-file-entry.c:309
+#: ../libgnomeui/gnome-file-entry.c:312
 msgid "Use GtkFileChooser"
 msgstr "Benyt GtkFileChooser"
 
-#: ../libgnomeui/gnome-file-entry.c:310
+#: ../libgnomeui/gnome-file-entry.c:313
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
@@ -1034,31 +1058,31 @@ msgstr ""
 "Om den nye GtkFileChooser-kontrol eller GtkFileSelection-kontrollen skal "
 "bruges til at vælge filer."
 
-#: ../libgnomeui/gnome-file-entry.c:319
+#: ../libgnomeui/gnome-file-entry.c:322
 msgid "GtkFileChooser Action"
 msgstr "GtkFileChooser-handling"
 
-#: ../libgnomeui/gnome-file-entry.c:320
+#: ../libgnomeui/gnome-file-entry.c:323
 msgid "The type of operation that the file selector is performing."
 msgstr "Typen af handling som filvælgeren udføre."
 
-#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
+#: ../libgnomeui/gnome-file-entry.c:658 ../libgnomeui/gnome-file-entry.c:695
 msgid "Select file"
 msgstr "Vælg fil"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:820
 msgid "Path"
 msgstr "Sti"
 
-#: ../libgnomeui/gnome-file-entry.c:814
+#: ../libgnomeui/gnome-file-entry.c:820
 msgid "Path to file"
 msgstr "Sti til fil"
 
-#: ../libgnomeui/gnome-file-entry.c:843
+#: ../libgnomeui/gnome-file-entry.c:849
 msgid "_Browse..."
 msgstr "_Gennemse..."
 
-#: ../libgnomeui/gnome-file-entry.c:844
+#: ../libgnomeui/gnome-file-entry.c:850
 msgid "Pop up a file selector to choose a file"
 msgstr "Vis et vindue til at vælge en fil"
 
@@ -1094,7 +1118,7 @@ msgstr "Skrifttypenavn"
 msgid "Name of the selected font"
 msgstr "Navnet på den valgte skrifttype"
 
-#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
+#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:980
 msgid "Font"
 msgstr "Skrifttype"
 
@@ -1241,12 +1265,9 @@ msgstr ""
 "underliggende GtkDialog hvis du har behov for at ændre eller kende nogle af "
 "dens parametre"
 
-# med et linjeskift her kommer det til at passe fint med den forhåndenværende plads
 #: ../libgnomeui/gnome-icon-entry.c:319 ../libgnomeui/gnome-icon-entry.c:1003
-msgid "No Icon"
-msgstr ""
-"Intet\n"
-"ikon"
+msgid "Choose Icon"
+msgstr "Vælg ikon"
 
 #: ../libgnomeui/gnome-icon-entry.c:773
 msgid "Icon selection dialog"
@@ -1447,79 +1468,68 @@ msgstr "Fjern indrykninger"
 msgid "About"
 msgstr "Om"
 
-#: ../libgnomeui/gnome-ui-init.c:151 ../libgnomeui/gnome-ui-init.c:177
+#: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:172
 msgid "Disable Crash Dialog"
 msgstr "Deaktivér nedbrudsvindue"
 
-#: ../libgnomeui/gnome-ui-init.c:160
+#: ../libgnomeui/gnome-ui-init.c:155
 msgid "GNOME GUI Library:"
 msgstr "GNOME GUI-bibliotek:"
 
-#: ../libgnomeui/gnome-ui-init.c:161
+#: ../libgnomeui/gnome-ui-init.c:156
 msgid "Show GNOME GUI options"
 msgstr "Vis valgmuligheder for GNOME GUI"
 
-#: ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "X display to use"
 msgstr "X-terminal som skal bruges"
 
-#: ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:174
 msgid "DISPLAY"
 msgstr "TERMINAL"
 
-#: ../libgnomeui/gnome-ui-init.c:184
+#: ../libgnomeui/gnome-ui-init.c:179
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI-bibliotek"
 
-#: ../libgnomeui/gnome-ui-init.c:249
+#: ../libgnomeui/gnome-ui-init.c:244
 msgid "Could not open link"
 msgstr "Kunne ikke åbne henvisning"
-
-#. dialog display isn't working out
-#: ../libgnomeui/gnome-ui-init.c:831
-#, c-format
-msgid "Multiple segmentation faults occurred; can't display error dialog\n"
-msgstr "Flere segmentfejl opstod; kan ikke vise fejlvinduet\n"
-
-#. Eeeek! Can't show dialog
-#: ../libgnomeui/gnome-ui-init.c:846
-#, c-format
-msgid ""
-"Segmentation fault!\n"
-"Cannot display crash dialog\n"
-msgstr ""
-"Segmentfejl!\n"
-"Kan ikke vise nedbrudsvinduet\n"
-
-#: ../libgnomeui/gnome_segv.c:82
-msgid "Usage: gnome_segv2 appname signum\n"
-msgstr "Brug: gnome_segv2 programnavn signum\n"
-
-#: ../libgnomeui/gnome_segv.c:94
-#, c-format
-msgid "Debugging %s"
-msgstr "Fejlfinder i %s"
-
-#: ../libgnomeui/gnome_segv.c:144
-#, c-format
-msgid ""
-"<b>The application %s has crashed.</b>\n"
-"\n"
-"Please install <b>bug-buddy</b>, the\n"
-"GNOME crash report tool, which enables you\n"
-"to send the developers detailed information\n"
-"about the error.\n"
-msgstr ""
-"<b>Programmet %s er gået ned.</b>\n"
-"\n"
-"Installér venligst <b>bug-buddy</b> (Fejl-Frede)\n"
-"som er GNOMEs fejlrapporteringsværktøj. Dette\n"
-"program sætter dig i stand til at sende detaljerede\n"
-"fejlrapporter af sted til programudviklerne.\n"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Afslut testprogrammet"
+
+#~ msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+#~ msgstr "Flere segmentfejl opstod; kan ikke vise fejlvinduet\n"
+
+#~ msgid ""
+#~ "Segmentation fault!\n"
+#~ "Cannot display crash dialog\n"
+#~ msgstr ""
+#~ "Segmentfejl!\n"
+#~ "Kan ikke vise nedbrudsvinduet\n"
+
+#~ msgid "Usage: gnome_segv2 appname signum\n"
+#~ msgstr "Brug: gnome_segv2 programnavn signum\n"
+
+#~ msgid "Debugging %s"
+#~ msgstr "Fejlfinder i %s"
+
+#~ msgid ""
+#~ "<b>The application %s has crashed.</b>\n"
+#~ "\n"
+#~ "Please install <b>bug-buddy</b>, the\n"
+#~ "GNOME crash report tool, which enables you\n"
+#~ "to send the developers detailed information\n"
+#~ "about the error.\n"
+#~ msgstr ""
+#~ "<b>Programmet %s er gået ned.</b>\n"
+#~ "\n"
+#~ "Installér venligst <b>bug-buddy</b> (Fejl-Frede)\n"
+#~ "som er GNOMEs fejlrapporteringsværktøj. Dette\n"
+#~ "program sætter dig i stand til at sende detaljerede\n"
+#~ "fejlrapporter af sted til programudviklerne.\n"
 
 #~ msgid "Error reading file '%s': %s"
 #~ msgstr "Fejl ved læsning af filen \"%s\": %s"
