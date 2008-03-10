@@ -1,3 +1,7 @@
+libgnomeui 2.22.0.1
+
+* Fix another hang in the file chooser.
+
 libgnomeui 2.22.0
 
 * Fix hang in the file chooser backend.

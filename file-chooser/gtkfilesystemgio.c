@@ -1044,11 +1044,8 @@ create_folder_callback (gpointer data)
 
   g_file_make_directory (file, handle->cancellable, &error);
 
-  gdk_threads_enter ();
   ((GtkFileSystemCreateFolderCallback) handle->callback) (GTK_FILE_SYSTEM_HANDLE (handle),
 							  idle_data->path, error, handle->data);
-  gdk_threads_leave ();
-
   g_object_unref (file);
   gtk_file_path_free (idle_data->path);
   g_slice_free (CreateFolderData, idle_data);
