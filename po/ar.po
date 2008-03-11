@@ -200,7 +200,7 @@ msgstr "شكْر للمترجمين"
 
 #: ../libgnomeui/gnome-about.c:431
 msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "شكْر للمترجمين. يجب تعليم هذا النصّ على انه قابل للترجمة"
+msgstr "شكْر للمترجمين. يجب تعليم هذا النصّ على أنه قابل للترجمة"
 
 #: ../libgnomeui/gnome-about.c:438
 #: ../libgnomeui/gnome-druid-page-standard.c:129
@@ -359,11 +359,11 @@ msgstr "اغلق الملف الحالي"
 #. Exit
 #: ../libgnomeui/gnome-app-helper.c:148
 msgid "_Quit"
-msgstr "ا_نهِ"
+msgstr "أ_نهِ"
 
 #: ../libgnomeui/gnome-app-helper.c:148
 msgid "Quit the application"
-msgstr "انهِ التطبيق"
+msgstr "أنهِ التطبيق"
 
 #.
 #. * The "Edit" menu
@@ -576,11 +576,11 @@ msgstr "اعرض النتائج"
 
 #: ../libgnomeui/gnome-app-helper.c:285
 msgid "_End Game"
-msgstr "ا_نهِ اللعبة"
+msgstr "أ_نهِ اللعبة"
 
 #: ../libgnomeui/gnome-app-helper.c:286
 msgid "End the current game"
-msgstr "انهِ اللعبة الحالية"
+msgstr "أنهِ اللعبة الحالية"
 
 #: ../libgnomeui/gnome-app-helper.c:1148
 msgid "_Contents"
@@ -955,19 +955,19 @@ msgstr "تم ضبط لون خلفية الشعار"
 
 #: ../libgnomeui/gnome-druid.c:153
 msgid "Show Finish"
-msgstr "اظهر \"انهِ\""
+msgstr "أظهر \"أنهِ\""
 
 #: ../libgnomeui/gnome-druid.c:154
 msgid "Show the 'Finish' button instead of the 'Next' button"
-msgstr "اظهر زر 'انهِ' بدل زر 'التالي'"
+msgstr "أظهر زر 'أنهِ' بدل زر 'التالي'"
 
 #: ../libgnomeui/gnome-druid.c:161
 msgid "Show Help"
-msgstr "اظهر المساعدة"
+msgstr "أظهر المساعدة"
 
 #: ../libgnomeui/gnome-druid.c:162
 msgid "Show the 'Help' button"
-msgstr "اظهر زر 'مساعدة'"
+msgstr "أظهر زر 'مساعدة'"
 
 #: ../libgnomeui/gnome-entry.c:193
 #: ../libgnomeui/gnome-entry.c:194
@@ -1150,11 +1150,11 @@ msgstr "حجم الخطّ للعنوان في نمط معلومات الخطوط
 
 #: ../libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr "اظهر الحجم"
+msgstr "أظهر الحجم"
 
 #: ../libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
-msgstr "اظهر الحجم في نمط معلومات الخطوط"
+msgstr "أظهر الحجم في نمط معلومات الخطوط"
 
 #: ../libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
