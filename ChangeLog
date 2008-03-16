@@ -1,3 +1,16 @@
+2008-03-16  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in:
+	* libgnomeui/gnome-vfs-util.c:
+	(gnome_gdk_pixbuf_new_from_uri_at_scale),
+	(gnome_gdk_pixbuf_new_from_uri_async),
+	(input_stream_ready_callback), (input_stream_read_callback),
+	(free_pixbuf_load_handle), (load_done),
+	(gnome_gdk_pixbuf_new_from_uri_cancel):
+	* test-gnome/Makefile.am: Patch from David Zeuthen
+	to fix thumbnailing on gphoto2:// trash:// and obex:// etc.
+	Closes bug #517276.
+
 2008-03-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-app-helper.c:

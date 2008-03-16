@@ -14,7 +14,7 @@ LDADD = \
 	$(top_builddir)/libgnomeui/libgnomeui-2.la $(GNOME_TEST_LIBS)
 
 noinst_PROGRAMS = \
-	test-gnome test-druid test-entry test-iconlist test-password-dialog
+	test-gnome test-druid test-entry test-iconlist test-password-dialog test-gnomegdkpixbuf
 
 test_gnome_SOURCES =		\
 	testgnome.c		\
@@ -33,6 +33,9 @@ test_entry_SOURCES = 	\
 
 test_iconlist_SOURCES = 	\
 	testiconlist.c
+
+test_gnomegdkpixbuf_SOURCES = 	\
+	testgnomegdkpixbuf.c
 
 EXTRA_DIST = 		\
 	bomb.xpm	\

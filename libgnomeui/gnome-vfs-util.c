@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <glib-object.h>
+#include <gio/gio.h>
 
 #include "gnome-vfs-util.h"
 
@@ -48,7 +49,10 @@
 #define LOAD_BUFFER_SIZE 4096
 
 struct GnomeGdkPixbufAsyncHandle {
-    GnomeVFSAsyncHandle *vfs_handle;
+    GFile *file;
+    GFileInputStream *file_input_stream;
+    GCancellable *cancellable;
+
     GnomeGdkPixbufLoadCallback load_callback;
     GnomeGdkPixbufDoneCallback done_callback;
     gpointer callback_data;
@@ -65,18 +69,12 @@ typedef struct {
 } SizePrepareContext;
 
 
-static void file_opened_callback (GnomeVFSAsyncHandle      *vfs_handle,
-                                  GnomeVFSResult            result,
-                                  gpointer                  callback_data);
-static void file_read_callback   (GnomeVFSAsyncHandle      *vfs_handle,
-                                  GnomeVFSResult            result,
-                                  gpointer                  buffer,
-                                  GnomeVFSFileSize          bytes_requested,
-                                  GnomeVFSFileSize          bytes_read,
-                                  gpointer                  callback_data);
-static void file_closed_callback (GnomeVFSAsyncHandle      *handle,
-                                  GnomeVFSResult            result,
-                                  gpointer                  callback_data);
+static void input_stream_read_callback (GObject *source_object,
+					GAsyncResult *res,
+					gpointer user_data);
+static void input_stream_ready_callback (GObject *source_object,
+					 GAsyncResult *res,
+					 gpointer user_data);
 static void load_done            (GnomeGdkPixbufAsyncHandle *handle,
                                   GnomeVFSResult            result,
                                   GdkPixbuf                *pixbuf);
@@ -165,7 +163,6 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 					gboolean    preserve_aspect_ratio)
 {
     GnomeVFSResult result;
-    GnomeVFSHandle *handle;
     char buffer[LOAD_BUFFER_SIZE];
     GnomeVFSFileSize bytes_read;
     GdkPixbufLoader *loader;
@@ -174,13 +171,15 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
     GdkPixbufAnimationIter *iter;
     gboolean has_frame;
     SizePrepareContext info;
+    GFile *file;
+    GFileInputStream *file_input_stream;
 
     g_return_val_if_fail (uri != NULL, NULL);
 
-    result = gnome_vfs_open (&handle,
-			     uri,
-			     GNOME_VFS_OPEN_READ);
-    if (result != GNOME_VFS_OK) {
+    file = g_file_new_for_uri (uri);
+    file_input_stream = g_file_read (file, NULL, NULL);
+    if (file_input_stream == NULL) {
+	g_object_unref (file);
 	return NULL;
     }
 
@@ -195,17 +194,22 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 
     has_frame = FALSE;
 
+    result = GNOME_VFS_ERROR_GENERIC;
     while (!has_frame) {
-	result = gnome_vfs_read (handle,
-				 buffer,
-				 sizeof (buffer),
-				 &bytes_read);
-	if (result != GNOME_VFS_OK) {
+
+	bytes_read = g_input_stream_read (G_INPUT_STREAM (file_input_stream),
+					  buffer,
+					  sizeof (buffer),
+					  NULL,
+					  NULL);
+	if (bytes_read == -1) {
 	    break;
 	}
+	result = GNOME_VFS_OK;
 	if (bytes_read == 0) {
 	    break;
 	}
+
 	if (!gdk_pixbuf_loader_write (loader,
 				      (unsigned char *)buffer,
 				      bytes_read,
@@ -226,13 +230,17 @@ gnome_gdk_pixbuf_new_from_uri_at_scale (const char *uri,
 
     gdk_pixbuf_loader_close (loader, NULL);
     
-    if (result != GNOME_VFS_OK && result != GNOME_VFS_ERROR_EOF) {
+    if (result != GNOME_VFS_OK) {
 	g_object_unref (G_OBJECT (loader));
-	gnome_vfs_close (handle);
+	g_input_stream_close (G_INPUT_STREAM (file_input_stream), NULL, NULL);
+	g_object_unref (file_input_stream);
+	g_object_unref (file);
 	return NULL;
     }
 
-    gnome_vfs_close (handle);
+    g_input_stream_close (G_INPUT_STREAM (file_input_stream), NULL, NULL);
+    g_object_unref (file_input_stream);
+    g_object_unref (file);
 
     pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
     if (pixbuf != NULL) {
@@ -260,98 +268,86 @@ gnome_gdk_pixbuf_new_from_uri_async (const char *uri,
     handle->done_callback = done_callback;
     handle->callback_data = callback_data;
 
-    gnome_vfs_async_open (&handle->vfs_handle,
-			  uri,
-			  GNOME_VFS_OPEN_READ,
-			  GNOME_VFS_PRIORITY_DEFAULT,
-			  file_opened_callback,
-			  handle);
-
+    handle->file = g_file_new_for_uri (uri);
+    handle->cancellable = g_cancellable_new ();
+    g_file_read_async (handle->file, 
+		       G_PRIORITY_DEFAULT, 
+		       handle->cancellable, 
+		       input_stream_ready_callback, 
+		       handle);
     return handle;
 }
 
-static void
-file_opened_callback (GnomeVFSAsyncHandle *vfs_handle,
-		      GnomeVFSResult result,
-		      gpointer callback_data)
+static void 
+input_stream_ready_callback (GObject *source_object,
+			     GAsyncResult *res,
+			     gpointer user_data)
 {
-    GnomeGdkPixbufAsyncHandle *handle;
+    GError *error = NULL;
+    GnomeGdkPixbufAsyncHandle *handle = user_data;
 
-    handle = callback_data;
-    g_assert (handle->vfs_handle == vfs_handle);
-
-    if (result != GNOME_VFS_OK) {
-	load_done (handle, result, NULL);
+    handle->file_input_stream = g_file_read_finish (G_FILE (source_object),
+						    res, NULL);
+    if (handle->file_input_stream == NULL) {
+	/* TODO: could map the GError more precisely to the GnomeVFSError */
+	load_done (handle, GNOME_VFS_ERROR_GENERIC, NULL);
 	return;
     }
 
     handle->loader = gdk_pixbuf_loader_new ();
 
-    gnome_vfs_async_read (handle->vfs_handle,
-			  handle->buffer,
-			  sizeof (handle->buffer),
-			  file_read_callback,
-			  handle);
+    g_input_stream_read_async (G_INPUT_STREAM (handle->file_input_stream),
+			       handle->buffer,
+			       sizeof (handle->buffer),
+			       G_PRIORITY_DEFAULT,
+			       handle->cancellable,
+			       input_stream_read_callback,
+			       handle);
 }
 
-static void
-file_read_callback (GnomeVFSAsyncHandle *vfs_handle,
-		    GnomeVFSResult result,
-		    gpointer buffer,
-		    GnomeVFSFileSize bytes_requested,
-		    GnomeVFSFileSize bytes_read,
-		    gpointer callback_data)
+static void 
+input_stream_read_callback (GObject *source_object,
+			    GAsyncResult *res,
+			    gpointer user_data)
 {
-    GnomeGdkPixbufAsyncHandle *handle;
+    GnomeGdkPixbufAsyncHandle *handle = user_data;
+    gssize bytes_read;
+    GnomeVFSResult result;
 
-    handle = callback_data;
-    g_assert (handle->vfs_handle == vfs_handle);
-    g_assert (handle->buffer == buffer);
-
-    if (result == GNOME_VFS_OK && bytes_read != 0) {
+    bytes_read = g_input_stream_read_finish (G_INPUT_STREAM (source_object),
+					     res, NULL);
+    if (bytes_read == -1) {
+	/* TODO: could map the GError more precisely */
+	result = GNOME_VFS_ERROR_GENERIC;
+    } else if (bytes_read > 0) {
 	if (!gdk_pixbuf_loader_write (handle->loader,
-				      buffer,
+				      (const guchar *) handle->buffer,
 				      bytes_read,
 				      NULL)) {
 	    result = GNOME_VFS_ERROR_WRONG_FORMAT;
+	} else {
+	    /* read more */
+	    g_input_stream_read_async (G_INPUT_STREAM (handle->file_input_stream),
+				       handle->buffer,
+				       sizeof (handle->buffer),
+				       G_PRIORITY_DEFAULT,
+				       handle->cancellable,
+				       input_stream_read_callback,
+				       handle);
+	    return;
 	}
-	gnome_vfs_async_read (handle->vfs_handle,
-			      handle->buffer,
-			      sizeof (handle->buffer),
-			      file_read_callback,
-			      handle);
-	return;
+    } else {
+	/* EOF */
+	result = GNOME_VFS_OK;
     }
 
-    switch (result) {
-    case GNOME_VFS_OK:
-	if (bytes_read == 0) {
-	    GdkPixbuf *pixbuf;
-
-	    pixbuf = gdk_pixbuf_loader_get_pixbuf (handle->loader);
-	    load_done (handle, result, pixbuf);
-	}
-	break;
-    case GNOME_VFS_ERROR_EOF:
-	{
-	    GdkPixbuf *pixbuf;
-
-	    pixbuf = gdk_pixbuf_loader_get_pixbuf (handle->loader);
-	    load_done (handle, pixbuf ? GNOME_VFS_OK : result, pixbuf);
-	}
-	break;
-    default:
+    if (result == GNOME_VFS_OK) {
+	GdkPixbuf *pixbuf;
+	pixbuf = gdk_pixbuf_loader_get_pixbuf (handle->loader);
+	load_done (handle, result, pixbuf);
+    } else {
 	load_done (handle, result, NULL);
-	break;
     }
-}
-
-static void
-file_closed_callback (GnomeVFSAsyncHandle *handle,
-		      GnomeVFSResult result,
-		      gpointer callback_data)
-{
-    g_assert (callback_data == NULL);
 }
 
 static void
@@ -363,6 +359,17 @@ free_pixbuf_load_handle (GnomeGdkPixbufAsyncHandle *handle)
 	gdk_pixbuf_loader_close (handle->loader, NULL);
 	g_object_unref (G_OBJECT (handle->loader));
     }
+    if (handle->file_input_stream != NULL) {
+        g_input_stream_close (G_INPUT_STREAM (handle->file_input_stream), NULL, NULL);
+        g_object_unref (handle->file_input_stream);
+    }
+    if (handle->file != NULL) {
+        g_object_unref (handle->file);
+    }
+    if (handle->cancellable != NULL) {
+        g_object_unref (handle->cancellable);
+    }
+
     g_free (handle);
 }
 
@@ -371,12 +378,6 @@ load_done (GnomeGdkPixbufAsyncHandle *handle,
 	   GnomeVFSResult result,
 	   GdkPixbuf *pixbuf)
 {
-    if (handle->vfs_handle != NULL) {
-	if (result != GNOME_VFS_OK)
-	    gnome_vfs_async_cancel (handle->vfs_handle);
-	else
-	    gnome_vfs_async_close (handle->vfs_handle, file_closed_callback, NULL);
-    }
     (* handle->load_callback) (handle, result, pixbuf, handle->callback_data);
     free_pixbuf_load_handle (handle);
 }
@@ -387,8 +388,8 @@ gnome_gdk_pixbuf_new_from_uri_cancel (GnomeGdkPixbufAsyncHandle *handle)
     if (handle == NULL) {
 	return;
     }
-    if (handle->vfs_handle != NULL) {
-	gnome_vfs_async_cancel (handle->vfs_handle);
+    if (handle->cancellable != NULL) {
+	g_cancellable_cancel (handle->cancellable);
     }
     free_pixbuf_load_handle (handle);
 }

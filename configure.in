@@ -24,6 +24,7 @@ m4_define([libbonoboui_required_version],    [2.13.1])
 m4_define([gconf_required_version],          [1.1.11])
 m4_define([pango_required_version],          [1.1.2])
 m4_define([glib_required_version],           [2.15.0])
+m4_define([gio_required_version],            [2.15.0])
 m4_define([gtk_required_version],            [2.11.5])
 m4_define([gnomevfs_required_version],       [2.7.3])
 m4_define([libglade_required_version],       [2.0.0])
@@ -205,6 +206,7 @@ GNOMEUI_MODULES="dnl
   gconf-2.0 >= gconf_required_version dnl
   pango >= pango_required_version dnl
   glib-2.0 >= glib_required_version
+  gio-2.0 >= gio_required_version
   gnome-vfs-2.0 >= gnomevfs_required_version dnl
   $gnome_keyring_requirement"
 PKG_CHECK_MODULES(LIBGNOMEUI, [$GNOMEUI_MODULES])
