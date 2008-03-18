@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-07 23:34+0100\n"
-"PO-Revision-Date: 2008-03-08 12:51+0100\n"
+"POT-Creation-Date: 2008-03-17 17:45+0100\n"
+"PO-Revision-Date: 2008-03-18 16:53+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -69,6 +69,7 @@ msgid "Network Servers"
 msgstr "Server rrjeti"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1997
+#: ../file-chooser/gtkfilesystemgio.c:1283
 msgid "File System"
 msgstr "File i sistemit"
 
@@ -92,16 +93,18 @@ msgstr "Gabim gjatë marrjes së informacioneve për '%s'"
 msgid "Could not get information for file '%s': %s"
 msgstr "E pamundur marrja e informacioneve për file '%s': %s"
 
+# (pofilter) puncspacing: checks for bad spacing after punctuation
 #: ../file-chooser/testfilechooser.c:194
 #, c-format
 msgid "Failed to open file '%s': %s"
-msgstr "Hapja e file '%s' dështoi: %s"
+msgstr "E pamundur hapja e file '%s': %s"
 
+# (pofilter) puncspacing: checks for bad spacing after punctuation
 #: ../file-chooser/testfilechooser.c:233
 #, c-format
 msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
-"Leximi i figurës '%s' dështoi: shkaku nuk njihet, ndoshta file është i "
+"Hapja e figurës '%s' dështoi: shkaku nuk njihet, ndoshta file është i "
 "dëmtuar"
 
 #: ../libgnomeui/gnome-about.c:199
@@ -140,6 +143,7 @@ msgstr "Versioni i programit"
 msgid "The version of the program"
 msgstr "Versioni i programit"
 
+# (pofilter) simplecaps: checks the capitalisation of two strings isn't wildly different
 #: ../libgnomeui/gnome-about.c:392
 msgid "Copyright string"
 msgstr "Teksti i Copyright"
@@ -190,7 +194,7 @@ msgstr "Një zë i vetëm dokumentuesi"
 
 #: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
-msgstr "Falenderime përkthyesit"
+msgstr "Të dhëna mbi përkthyesin"
 
 #: ../libgnomeui/gnome-about.c:431
 msgid "Credits to the translators. This string should be marked as translatable"
@@ -210,12 +214,14 @@ msgstr "Një logo për dritaren e informacioneve"
 msgid "About %s"
 msgstr "Informacione mbi %s"
 
+# (pofilter) unchanged: please translate
 #. Some standard menus
 #: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_File"
 
+# (pofilter) unchanged: please translate
 #: ../libgnomeui/gnome-app-helper.c:84
 msgid "_File/"
 msgstr "_File/"
@@ -247,16 +253,18 @@ msgstr "_Rregullime/"
 #. If you have more then one New type, use this tree
 #: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
-msgstr "_E re"
+msgstr "_I ri"
 
 #: ../libgnomeui/gnome-app-helper.c:92
 msgid "_New/"
 msgstr "_E re/"
 
+# (pofilter) unchanged: please translate
 #: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr "Fi_les"
+msgstr "Fi_le"
 
+# (pofilter) unchanged: please translate
 #: ../libgnomeui/gnome-app-helper.c:94
 msgid "Fi_les/"
 msgstr "Fi_les/"
@@ -308,7 +316,7 @@ msgstr "Ruaj file aktual me një emër tjetër"
 #. Revert
 #: ../libgnomeui/gnome-app-helper.c:126
 msgid "_Revert"
-msgstr "_Kthe mbrapa"
+msgstr "_Rikthe"
 
 #: ../libgnomeui/gnome-app-helper.c:127
 msgid "Revert to a saved version of the file"
@@ -323,6 +331,7 @@ msgstr "_Printim..."
 msgid "Print the current file"
 msgstr "Printo file aktual"
 
+# (pofilter) endpunc: checks whether punctuation at the end of the strings match
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:137
 msgid "Print S_etup..."
@@ -427,6 +436,7 @@ msgid "Search again for the same string"
 msgstr "Kërko akoma për të njëjtën frazë"
 
 # (pofilter) accelerators: accelerator _ appears before an invalid accelerator character 'ë' (eg. space)
+# (pofilter) isreview: Check if the unit has been marked review.
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:198
 msgid "R_eplace..."
@@ -544,6 +554,7 @@ msgstr "Përsërit lëvizjen e anulluar"
 msgid "_Hint"
 msgstr "_Propozim"
 
+# (pofilter) endwhitespace: checks whether whitespace at the end of the strings matches
 #: ../libgnomeui/gnome-app-helper.c:275
 msgid "Get a hint for your next move"
 msgstr "Kërko këshilla për lëvizjen në vazhdim "
@@ -573,23 +584,23 @@ msgstr "_Përmbajtja"
 msgid "View help for this application"
 msgstr "Shiko ndihmën në lidhje me këtë program"
 
-#: ../libgnomeui/gnome-app-helper.c:2568
+#: ../libgnomeui/gnome-app-helper.c:2522
 msgid "Text Below Icons"
 msgstr "Tekst poshtë ikonave"
 
-#: ../libgnomeui/gnome-app-helper.c:2569
+#: ../libgnomeui/gnome-app-helper.c:2523
 msgid "Priority Text Beside Icons"
 msgstr "Tekst përparsor krahas ikonave"
 
-#: ../libgnomeui/gnome-app-helper.c:2570
+#: ../libgnomeui/gnome-app-helper.c:2524
 msgid "Icons Only"
 msgstr "Vetëm ikona"
 
-#: ../libgnomeui/gnome-app-helper.c:2571
+#: ../libgnomeui/gnome-app-helper.c:2525
 msgid "Text Only"
 msgstr "Vetëm tekst"
 
-#: ../libgnomeui/gnome-app-helper.c:2632
+#: ../libgnomeui/gnome-app-helper.c:2586
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Përdor të prezgjedhurin e ambientit të punës (%s)"
@@ -598,6 +609,8 @@ msgstr "Përdor të prezgjedhurin e ambientit të punës (%s)"
 msgid " (press return)"
 msgstr " (shtyp return)"
 
+# (pofilter) endwhitespace: checks whether whitespace at the end of the strings matches
+# (pofilter) acronyms: acronyms should not be translated: ERROR
 #: ../libgnomeui/gnome-app-util.c:140
 msgid "ERROR: "
 msgstr "GABIM:"
@@ -638,6 +651,7 @@ msgstr "Ecuria"
 msgid "App ID"
 msgstr "ID e aplikativit"
 
+# (pofilter) acronyms: acronyms should not be translated: ID
 #: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "Stringa identifikuese e programit"
@@ -716,6 +730,7 @@ msgstr "ID"
 msgid "Specify prefix of saved configuration"
 msgstr "Specifiko prefiksin e konfigurimit të ruajtur"
 
+# (pofilter) acronyms: acronyms should not be translated: PREFIX
 #: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "PREFIX"
 msgstr "PREFIKSI"
@@ -913,11 +928,11 @@ msgstr "Ngjyra e sfondit të përmbajtjes u vendos"
 #: ../libgnomeui/gnome-druid-page-standard.c:216
 #: ../libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
-msgstr "Ngjyra e sfondit të logo-s"
+msgstr "Ngjyra e sfondit të stemës"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
-msgstr "Ngjyra e sfondit të logo"
+msgstr "Ngjyra e sfondit të stemës"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
@@ -931,10 +946,13 @@ msgstr "Rregullimi i ngjyrës së sfondit të logo-s"
 msgid "Logo Background color is set"
 msgstr "Ngjyra e sfondit të logo u përcaktua"
 
+# (pofilter) singlequoting: checks whether singlequoting is consistent between the two strings
 #: ../libgnomeui/gnome-druid.c:153
 msgid "Show Finish"
 msgstr "Shfaq pulsantin 'Fund'"
 
+# (pofilter) singlequoting: checks whether singlequoting is consistent between the two strings
+# (pofilter) doublequoting: checks whether doublequoting is consistent between the two strings
 #: ../libgnomeui/gnome-druid.c:154
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Shfaq pulsantin 'Fund' në vend të pulsantit \"Vazhdo\""
@@ -960,6 +978,7 @@ msgstr "Fusha GTK"
 msgid "The GTK entry"
 msgstr "Fusha GTK"
 
+# (pofilter) doublespacing: checks for bad double-spaces by comparing to original
 #: ../libgnomeui/gnome-file-entry.c:240
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
@@ -968,10 +987,12 @@ msgstr ""
 "Identifikues i vetëm për fushën file. Do të përdoret për të ruajtur listën e "
 "historikut."
 
+# (pofilter) singlequoting: checks whether singlequoting is consistent between the two strings
 #: ../libgnomeui/gnome-file-entry.c:248 ../libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr "Titulli i dritares së dialogut 'Shfleto'"
 
+# (pofilter) singlequoting: checks whether singlequoting is consistent between the two strings
 #: ../libgnomeui/gnome-file-entry.c:249
 msgid "Title for the Browse file dialog."
 msgstr "Titulli për dritaren e dialogut 'Shfleto file'."
@@ -992,6 +1013,7 @@ msgstr ""
 msgid "Modal"
 msgstr "Modale"
 
+# (pofilter) singlequoting: checks whether singlequoting is consistent between the two strings
 #: ../libgnomeui/gnome-file-entry.c:266
 msgid "Whether the Browse file window should be modal."
 msgstr "Tregon nëse dritarja 'Shfleto file' duhet të jetë modale."
@@ -1008,10 +1030,12 @@ msgstr "Emri i file që duhet të shfaqet në fushën file."
 msgid "Default Path"
 msgstr "Pozicioni i prezgjedhur"
 
+# (pofilter) singlequoting: checks whether singlequoting is consistent between the two strings
 #: ../libgnomeui/gnome-file-entry.c:283
 msgid "Default path for the Browse file window."
 msgstr "Pozicioni i prezgjedhur për dritaren 'Shfleto file'."
 
+# (pofilter) unchanged: please translate
 #: ../libgnomeui/gnome-file-entry.c:290
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
@@ -1026,6 +1050,7 @@ msgstr ""
 "shfrytëzoni këtë veçori për të marrë GtkEntry nëse ju duhet të ndryshoni apo "
 "të kërkoni njërin nga parametrat e tij."
 
+# (pofilter) unchanged: please translate
 #: ../libgnomeui/gnome-file-entry.c:301
 msgid "GtkEntry"
 msgstr "GtkEntry"
@@ -1080,10 +1105,12 @@ msgstr "_Shfleto..."
 msgid "Pop up a file selector to choose a file"
 msgstr "Hap një zgjedhës files nga i cili mund të zgjidhet një file"
 
+# (pofilter) unchanged: please translate
 #: ../libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
 msgstr "sans 12"
 
+# (pofilter) unchanged: please translate
 #: ../libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
@@ -1112,7 +1139,7 @@ msgstr "Emri i gërmave"
 msgid "Name of the selected font"
 msgstr "Emri i gërmës së zgjedhur"
 
-#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
+#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:980
 msgid "Font"
 msgstr "Gërmat"
 
@@ -1173,6 +1200,7 @@ msgstr ""
 "operativ. Disa nga ndryshimet e kryera nga ju nuk do të kenë efekt, ose do "
 "t'a humbasin efektin herën e ardhshme që do të përdorni këtë program."
 
+# (pofilter) doublespacing: checks for bad double-spaces by comparing to original
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
 msgid ""
@@ -1210,10 +1238,12 @@ msgstr "Ngjyra e lidhjes"
 msgid "Color used to draw the link"
 msgstr "Ngjyra që duhet përdorur për të shfaqur lidhjen"
 
+# (pofilter) acronyms: acronyms should not be translated: URI
 #: ../libgnomeui/gnome-href.c:150
 msgid "This button will take you to the URI that it displays."
 msgstr "Ky pulsant ju çon tek adresa URl e shkruar."
 
+# (pofilter) puncspacing: checks for bad spacing after punctuation
 #: ../libgnomeui/gnome-href.c:386
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
@@ -1222,6 +1252,7 @@ msgstr ""
 "Gabim gjatë lëshimit të shfletuesit web të prezgjedhur.\n"
 "Kontrollo konfigurimin tek instrumenti i preferimeve 'Programet e preferuar'."
 
+# (pofilter) sentencecount: The number of sentences differ: 2 versus 1
 #: ../libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
@@ -1230,6 +1261,7 @@ msgstr ""
 "Identifikues i veçantë për fushën ikonë  Do të përdoret për të ruajtur "
 "listën e kronollogjisë."
 
+# (pofilter) singlequoting: checks whether singlequoting is consistent between the two strings
 #: ../libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
 msgstr "Titulli i dritares së dialogut 'Shfleto ikonat'."
@@ -1335,6 +1367,7 @@ msgstr "Mesazh"
 msgid "_Username:"
 msgstr "_Përdoruesi:"
 
+# (pofilter) unchanged: please translate
 #: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Domain:"
@@ -1383,6 +1416,7 @@ msgstr "_Kujto gjithmonë"
 msgid "Do Preview"
 msgstr "Krijo pamjen e parë"
 
+# (pofilter) endpunc: checks whether punctuation at the end of the strings match
 #: ../libgnomeui/gnome-pixmap-entry.c:113
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Tregon nëse fusha pixmap duhet të ketë një pamje të parë"
@@ -1420,6 +1454,7 @@ msgstr "Përdoruesi"
 msgid "Score"
 msgstr "Pikë"
 
+# (pofilter) unchanged: please translate
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
@@ -1427,13 +1462,14 @@ msgstr "Pikë"
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
 
+# (pofilter) unchanged: please translate
 #: ../libgnomeui/gnome-scores.c:394
 msgid "Sans 14"
 msgstr "Sans 14"
 
 #: ../libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
-msgstr "Kornizat e tabelës"
+msgstr "Korniza e tabelës"
 
 #: ../libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
@@ -1471,13 +1507,14 @@ msgstr "Libraria GUI e GNOME:"
 msgid "Show GNOME GUI options"
 msgstr "Shfaq opsionet GUI të GNOME"
 
+# (pofilter) simplecaps: checks the capitalisation of two strings isn't wildly different
 #: ../libgnomeui/gnome-ui-init.c:174
 msgid "X display to use"
 msgstr "Monitori X që duhet përdorur"
 
 #: ../libgnomeui/gnome-ui-init.c:174
 msgid "DISPLAY"
-msgstr "DISPLAY"
+msgstr "MONITORI"
 
 #: ../libgnomeui/gnome-ui-init.c:179
 msgid "GNOME GUI Library"
