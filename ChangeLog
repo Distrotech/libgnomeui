@@ -1,3 +1,7 @@
+2008-03-19  Sebastien Bacher  <seb128@ubuntu.com>
+
+	* configure.in: don't duplicate the gio requirement
+
 2008-03-16  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* configure.in:
