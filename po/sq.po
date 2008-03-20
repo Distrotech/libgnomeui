@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-17 17:45+0100\n"
-"PO-Revision-Date: 2008-03-18 16:53+0100\n"
+"PO-Revision-Date: 2008-03-20 11:54+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -244,7 +244,7 @@ msgstr "_Shiko/"
 
 #: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
-msgstr "_Rregullimet"
+msgstr "_Rregullime"
 
 #: ../libgnomeui/gnome-app-helper.c:90
 msgid "_Settings/"
@@ -271,11 +271,11 @@ msgstr "Fi_les/"
 
 #: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
-msgstr "_Dritaret"
+msgstr "_Dritare"
 
 #: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
-msgstr "_Loja"
+msgstr "_Lojë"
 
 #: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
@@ -369,7 +369,7 @@ msgstr "Pre_je"
 
 #: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cut the selection"
-msgstr "Shkëput pjesën e zgjedhur"
+msgstr "Preje zgjedhjen"
 
 #. 10
 #. Copy
@@ -379,7 +379,7 @@ msgstr "_Kopjo"
 
 #: ../libgnomeui/gnome-app-helper.c:162
 msgid "Copy the selection"
-msgstr "Kopjo pjesën e zgjedhur"
+msgstr "Kopjo zgjedhjen"
 
 #. Paste
 #: ../libgnomeui/gnome-app-helper.c:167
@@ -478,7 +478,7 @@ msgstr "_Informacione"
 
 #: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "Informacione mbi këtë program"
+msgstr "Informacione në lidhje me këtë aplikativ"
 
 #: ../libgnomeui/gnome-app-helper.c:226
 msgid "Select _All"
@@ -501,7 +501,7 @@ msgstr "Krijo një dritare të re"
 
 #: ../libgnomeui/gnome-app-helper.c:240
 msgid "_Close This Window"
-msgstr "_Mbylle këtë dritare"
+msgstr "_Mbyll këtë dritare"
 
 #: ../libgnomeui/gnome-app-helper.c:241 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
@@ -544,7 +544,7 @@ msgstr "Anullo lëvizjen e fundit"
 
 #: ../libgnomeui/gnome-app-helper.c:269
 msgid "_Redo Move"
-msgstr "_Përsërit lëvizjen"
+msgstr "_Ripërsërit lëvizjen"
 
 #: ../libgnomeui/gnome-app-helper.c:270
 msgid "Redo the undone move"
@@ -570,7 +570,7 @@ msgstr "Shiko pikët"
 
 #: ../libgnomeui/gnome-app-helper.c:285
 msgid "_End Game"
-msgstr "_Fundi i lojës"
+msgstr "_Mbaro lojën"
 
 #: ../libgnomeui/gnome-app-helper.c:286
 msgid "End the current game"
@@ -869,7 +869,7 @@ msgstr "Ngjyra e ballit të titullit"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
-msgstr "Ngjyra e ballit të titullit"
+msgstr "Ngjyra në plan të parë për titujt"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
@@ -1349,7 +1349,7 @@ msgstr "Informacione"
 
 #: ../libgnomeui/gnome-messagebox.c:112
 msgid "Warning"
-msgstr "Kujdes"
+msgstr "Paralajmërim"
 
 #: ../libgnomeui/gnome-messagebox.c:118
 msgid "Error"
@@ -1361,7 +1361,7 @@ msgstr "Pyetje"
 
 #: ../libgnomeui/gnome-messagebox.c:129
 msgid "Message"
-msgstr "Mesazh"
+msgstr "Mesazhi"
 
 #: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
