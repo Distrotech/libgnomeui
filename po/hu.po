@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-12 07:28+0100\n"
-"PO-Revision-Date: 2008-02-26 00:23+0100\n"
+"POT-Creation-Date: 2008-02-25 23:28+0000\n"
+"PO-Revision-Date: 2008-03-30 22:33+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@fsf.hu>\n"
 "MIME-Version: 1.0\n"
@@ -68,25 +68,25 @@ msgstr "A(z) „%s” információi nem kérhetők le: %s"
 msgid "Could not create '%s': %s"
 msgstr "A(z) „%s” nem hozható létre: %s"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1975
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1979
 msgid "Network Servers"
 msgstr "Hálózati kiszolgálók"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1991
+#: ../file-chooser/gtkfilesystemgnomevfs.c:1995
 msgid "File System"
 msgstr "Fájlrendszer"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2061
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2065
 #, c-format
 msgid "'%s': %s"
 msgstr "„%s”: %s"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2520
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2524
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Könyvjelző mentése sikertelen (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2957
+#: ../file-chooser/gtkfilesystemgnomevfs.c:2960
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Nem lehet információt szerezni a következőről: „%s”"
@@ -104,9 +104,7 @@ msgstr "A(z) „%s” fájl megnyitása sikertelen: %s"
 #: ../file-chooser/testfilechooser.c:233
 #, c-format
 msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
-"A(z) „%s” kép betöltése sikertelen: az ok nem ismert, talán sérült a "
-"képfájl"
+msgstr "A(z) „%s” kép betöltése sikertelen: az ok nem ismert, talán sérült a képfájl"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
@@ -576,23 +574,23 @@ msgstr "_Tartalom"
 msgid "View help for this application"
 msgstr "Az alkalmazás súgójának megtekintése"
 
-#: ../libgnomeui/gnome-app-helper.c:2588
+#: ../libgnomeui/gnome-app-helper.c:2568
 msgid "Text Below Icons"
 msgstr "Szöveg az ikonok alatt"
 
-#: ../libgnomeui/gnome-app-helper.c:2589
+#: ../libgnomeui/gnome-app-helper.c:2569
 msgid "Priority Text Beside Icons"
 msgstr "Lényeges szöveg az ikonok mellett"
 
-#: ../libgnomeui/gnome-app-helper.c:2590
+#: ../libgnomeui/gnome-app-helper.c:2570
 msgid "Icons Only"
 msgstr "Csak ikonok"
 
-#: ../libgnomeui/gnome-app-helper.c:2591
+#: ../libgnomeui/gnome-app-helper.c:2571
 msgid "Text Only"
 msgstr "Csak szöveg"
 
-#: ../libgnomeui/gnome-app-helper.c:2652
+#: ../libgnomeui/gnome-app-helper.c:2632
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Munkaasztal alapértelmezésének használata (%s)"
@@ -670,6 +668,7 @@ msgid "Level of user activity required."
 msgstr "A felhasználótól elvárható aktivitás."
 
 #: ../libgnomeui/gnome-authentication-manager.c:82
+#, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "A HTTP proxy megköveteli a bejelentkezést.\n"
 
@@ -706,39 +705,39 @@ msgstr "Be kell jelentkeznie a(z) %s tartomány %s eléréséhez\n"
 msgid "You must log in to access %s\n"
 msgstr "Be kell jelentkeznie a(z) %s eléréséhez.\n"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
 msgid "Specify session management ID"
 msgstr "A munkamenet-kezelő azonosítójának megadása"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
 msgid "ID"
 msgstr "Azonosító"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "Specify prefix of saved configuration"
 msgstr "Az elmentett beállítások előtagjának megadása"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "PREFIX"
 msgstr "ELŐTAG"
 
-#: ../libgnomeui/gnome-client.c:1008 ../libgnomeui/gnome-client.c:1042
+#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
 msgid "Disable connection to session manager"
 msgstr "A munkamenet-kezelőhöz való csatlakozás tiltása"
 
-#: ../libgnomeui/gnome-client.c:1016
+#: ../libgnomeui/gnome-client.c:1013
 msgid "Session management:"
 msgstr "Munkamenet-kezelés:"
 
-#: ../libgnomeui/gnome-client.c:1017
+#: ../libgnomeui/gnome-client.c:1014
 msgid "Show session management options"
 msgstr "Munkamenet-kezelési beállítások megjelenítése"
 
-#: ../libgnomeui/gnome-client.c:1048
+#: ../libgnomeui/gnome-client.c:1045
 msgid "Session management"
 msgstr "Munkamenet-kezelés"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:2579
 msgid "Cancel Logout"
 msgstr "Mégsem lép ki"
 
@@ -970,11 +969,11 @@ msgstr "A fájlbejegyzés egyedi azonosítója. Az előzménylistában ez lesz h
 
 #: ../libgnomeui/gnome-file-entry.c:248 ../libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
-msgstr "A Böngészés párbeszédablak címe"
+msgstr "A Tallózás párbeszédablak címe"
 
 #: ../libgnomeui/gnome-file-entry.c:249
 msgid "Title for the Browse file dialog."
-msgstr "A Böngészés párbeszédablak címe."
+msgstr "A Tallózás párbeszédablak címe."
 
 #: ../libgnomeui/gnome-file-entry.c:256
 msgid "Directory Entry"
@@ -994,7 +993,7 @@ msgstr "Kizárólagos"
 
 #: ../libgnomeui/gnome-file-entry.c:266
 msgid "Whether the Browse file window should be modal."
-msgstr "A fájl böngészése ablak kizárólagos-e."
+msgstr "A Tallózás ablak kizárólagos-e."
 
 #: ../libgnomeui/gnome-file-entry.c:273 ../libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
@@ -1010,7 +1009,7 @@ msgstr "Alapértelmezett útvonal"
 
 #: ../libgnomeui/gnome-file-entry.c:283
 msgid "Default path for the Browse file window."
-msgstr "A fájl böngészése párbeszédablak alapértelmezett útvonala."
+msgstr "A Tallózás párbeszédablak alapértelmezett útvonala."
 
 #: ../libgnomeui/gnome-file-entry.c:290
 msgid "GnomeEntry"
@@ -1074,7 +1073,7 @@ msgstr "Útvonal a fájlhoz"
 
 #: ../libgnomeui/gnome-file-entry.c:849
 msgid "_Browse..."
-msgstr "_Böngészés..."
+msgstr "_Tallózás..."
 
 #: ../libgnomeui/gnome-file-entry.c:850
 msgid "Pop up a file selector to choose a file"
@@ -1284,7 +1283,7 @@ msgstr "Ez a gomb egy ikonválasztó párbeszédablakot nyit meg."
 
 #: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
-msgstr "Böngészés"
+msgstr "Tallózás"
 
 #: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Icon path"
