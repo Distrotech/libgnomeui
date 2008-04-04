@@ -1,5 +1,10 @@
 2008-04-04  Carlos Garnacho  <carlos@imendio.com>
 
+	* file-chooser/gtkfilesystemgio.c (get_icon_string): check whether the
+	GFileIcon doesn't return a NULL GFile, Bug #522005.
+
+2008-04-04  Carlos Garnacho  <carlos@imendio.com>
+
 	* file-chooser/gtkfilesystemgio.c (get_icon_for_special_directory):
 	compare GFiles instead of uris, make more robust against failed
 	conversions, Bug #524781.

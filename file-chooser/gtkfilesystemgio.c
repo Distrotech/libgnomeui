@@ -858,7 +858,9 @@ get_icon_string (GIcon *icon)
       GFile *icon_file;
 
       icon_file = g_file_icon_get_file (G_FILE_ICON (icon));
-      name = g_file_get_path (icon_file);
+
+      if (icon_file)
+	name = g_file_get_path (icon_file);
     }
 
   return name;
