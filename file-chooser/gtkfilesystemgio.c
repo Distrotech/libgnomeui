@@ -803,36 +803,34 @@ gtk_file_system_gio_get_folder (GtkFileSystem                  *file_system,
 }
 
 static gchar *
-get_icon_for_special_directory (const char *uri)
+get_icon_for_special_directory (GFile *file)
 {
-  const char *special_dir;
-  char *special_uri;
+  GFile *special_file;
+  gboolean equal;
 
-  if (!uri)
-    return NULL;
+  /* check for root directory */
+  special_file = g_file_get_parent (file);
 
-  if (strcmp (uri, "file:///") == 0)
+  if (!special_file)
     return "gnome-dev-harddisk";
 
-  special_dir = g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP);
-  special_uri = g_filename_to_uri (special_dir, NULL, NULL);
-  if (strcmp (uri, special_uri) == 0)
-    {
-      g_free (special_uri);
-      return "gnome-fs-desktop";
-    }
+  g_object_unref (special_file);
 
-  g_free (special_uri);
+  /* check for desktop */
+  special_file = g_file_new_for_path (g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP));
+  equal = g_file_equal (file, special_file);
+  g_object_unref (special_file);
 
-  special_dir = g_get_home_dir ();
-  special_uri = g_filename_to_uri (special_dir, NULL, NULL);
-  if (strcmp (uri, special_uri) == 0)
-    {
-      g_free (special_uri);
-      return "gnome-fs-home";
-    }
+  if (equal)
+    return "gnome-fs-desktop";
 
-  g_free (special_uri);
+  /* check for home */
+  special_file = g_file_new_for_path (g_get_home_dir ());
+  equal = g_file_equal (file, special_file);
+  g_object_unref (special_file);
+
+  if (equal)
+    return "gnome-fs-home";
 
   return NULL;
 }
@@ -867,7 +865,7 @@ get_icon_string (GIcon *icon)
 }
 
 static GtkFileInfo *
-translate_file_info (const char *uri,
+translate_file_info (GFile     *file,
 		     GFileInfo *file_info)
 {
   GtkFileInfo *info;
@@ -894,7 +892,7 @@ translate_file_info (const char *uri,
     {
       const gchar *icon_name;
 
-      icon_name = get_icon_for_special_directory (uri);
+      icon_name = get_icon_for_special_directory (file);
       if (icon_name)
         {
           gtk_file_info_set_icon_name (info, icon_name);
@@ -963,11 +961,7 @@ query_info_callback (GObject      *source_object,
 
   if (file_info)
     {
-      char *uri;
-
-      uri = g_file_get_uri (file);
-      info = translate_file_info (uri, file_info);
-      g_free (uri);
+      info = translate_file_info (file, file_info);
       g_object_unref (file_info);
     }
   else if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_NOT_MOUNTED) && !handle->tried_mount)
@@ -1327,16 +1321,13 @@ gtk_file_system_gio_volume_get_icon_name (GtkFileSystem        *file_system,
   else if (g_type_is_a (G_OBJECT_TYPE (file_system_volume), G_TYPE_MOUNT))
     {
       GMount *mount = G_MOUNT (file_system_volume);
-      GFile *file;
       const char *icon_name;
-      char *uri;
+      GFile *file;
 
       file = g_mount_get_root (mount);
-      uri = g_file_get_uri (file);
+      icon_name = get_icon_for_special_directory (file);
       g_object_unref (file);
 
-      icon_name = get_icon_for_special_directory (uri);
-      g_free (uri);
       if (icon_name)
         return g_strdup (icon_name);
 
@@ -1902,9 +1893,17 @@ gtk_file_folder_gio_get_info (GtkFileFolder      *folder,
   uri = gtk_file_path_get_string (path);
   file_info = g_hash_table_lookup (folder_gio->children,
 				   uri);
-
   if (file_info)
-    return translate_file_info (uri, file_info);
+    {
+      GtkFileInfo *info;
+      GFile *file;
+
+      file = g_file_new_for_uri (uri);
+      info = translate_file_info (file, file_info);
+      g_object_unref (file);
+
+      return info;
+    }
 
   return NULL;
 }
