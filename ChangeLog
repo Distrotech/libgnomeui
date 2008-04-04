@@ -1,5 +1,11 @@
 2008-04-04  Carlos Garnacho  <carlos@imendio.com>
 
+	* file-chooser/gtkfilesystemgio.c (gtk_file_system_gio_dispose):
+	GVolumeMonitor may survive the GtkFileSystemGio object, disconnect all
+	connected signals before disposing the reference to it. Bug #513082.
+
+2008-04-04  Carlos Garnacho  <carlos@imendio.com>
+
 	* file-chooser/gtkfilesystemgio.c (get_icon_string): check whether the
 	GFileIcon doesn't return a NULL GFile, Bug #522005.
 

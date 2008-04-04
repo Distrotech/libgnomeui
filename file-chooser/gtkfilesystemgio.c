@@ -476,7 +476,10 @@ gtk_file_system_gio_dispose (GObject *object)
     }
 
   if (impl->volume_monitor)
-    g_object_unref (impl->volume_monitor);
+    {
+      g_signal_handlers_disconnect_by_func (impl->volume_monitor, volumes_drives_changed, impl);
+      g_object_unref (impl->volume_monitor);
+    }
 
   G_OBJECT_CLASS (gtk_file_system_gio_parent_class)->dispose (object);
 }
