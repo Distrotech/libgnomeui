@@ -1552,16 +1552,8 @@ read_bookmarks_file (void)
   g_free (filename);
 
   if (!g_file_load_contents (file, NULL, &contents,
-			     NULL, NULL, &error))
-    {
-      if (error)
-	{
-	  g_critical (error->message);
-	  g_error_free (error);
-	}
-
-      return NULL;
-    }
+			     NULL, NULL, NULL))
+    return NULL;
 
   lines = g_strsplit (contents, "\n", -1);
 

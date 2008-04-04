@@ -1,5 +1,11 @@
 2008-04-04  Carlos Garnacho  <carlos@imendio.com>
 
+	* file-chooser/gtkfilesystemgio.c (read_bookmarks_file): Be more
+	permissive if the .gtk-bookmarks file can't be opened, it's not
+	critical error worthy at all. Fixes #523003
+
+2008-04-04  Carlos Garnacho  <carlos@imendio.com>
+
 	* file-chooser/gtkfilesystemgio.c
 	(gtk_file_system_gio_get_volume_for_path): Do not spew a critical
 	warning if there are no mounts. Fixes #515783.
