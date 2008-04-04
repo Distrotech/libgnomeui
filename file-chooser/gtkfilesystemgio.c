@@ -592,7 +592,7 @@ gtk_file_system_gio_get_volume_for_path (GtkFileSystem     *file_system,
 {
   GtkFileSystemGio *file_system_gio;
   GFile *file;
-  GMount *mount;
+  GMount *mount = NULL;
   GSList *list;
   const char *uri;
 
@@ -610,22 +610,21 @@ gtk_file_system_gio_get_volume_for_path (GtkFileSystem     *file_system,
   /* Skip the first item on the list! */
   for (list = file_system_gio->volumes->next; list; list = list->next)
     {
-      if (g_type_is_a (G_OBJECT_TYPE (list->data), G_TYPE_MOUNT))
-        {
-          GFile *root;
+      GFile *root;
+      gboolean in_mount;
 
-          mount = list->data;
-          root = g_mount_get_root (mount);
-          if (g_file_has_prefix (file, root))
-            {
-              mount = list->data;
-              break;
-            }
-          g_object_unref (root);
+      if (!G_IS_MOUNT (list->data))
+	continue;
 
-          mount = NULL;
-        }
+      root = g_mount_get_root (list->data);
+      in_mount = g_file_has_prefix (file, root);
+      g_object_unref (root);
 
+      if (in_mount)
+	{
+	  mount = list->data;
+	  break;
+	}
     }
 
   g_object_unref (file);

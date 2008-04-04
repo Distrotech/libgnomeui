@@ -1,5 +1,12 @@
 2008-04-04  Carlos Garnacho  <carlos@imendio.com>
 
+	* file-chooser/gtkfilesystemgio.c
+	(gtk_file_system_gio_get_volume_for_path): Do not spew a critical
+	warning if there are no mounts. Fixes #515783.
+	Also, do not leak root when the enclosing mount is found.
+
+2008-04-04  Carlos Garnacho  <carlos@imendio.com>
+
 	* file-chooser/gtkfilesystemgio.c (gtk_file_system_gio_dispose):
 	GVolumeMonitor may survive the GtkFileSystemGio object, disconnect all
 	connected signals before disposing the reference to it. Bug #513082.
