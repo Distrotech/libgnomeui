@@ -909,9 +909,9 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
 	      exit_status == 0)
 	    {
 	      pixbuf = gdk_pixbuf_new_from_file (tmpname, NULL);
-	      g_free (expanded_script);
 	    }
-	  
+
+	  g_free (expanded_script);
 	  g_unlink(tmpname);
 	}
       g_free (tmpname);
