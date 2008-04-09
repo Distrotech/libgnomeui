@@ -1,3 +1,17 @@
+libgnomeui 2.22.1
+
+* Cleanups (Kjartan)
+* Use Gio for thumbnailing (David Zeuthen)
+* Fix several crashes and critical warnings in the gio file chooser backend (Carlos)
+* Plug a leak (Federico)
+* Updated translations.
+  - ar (Khaled Hosny)
+  - da (Kenneth Nielsen)
+  - el (Nikos Charonitakis)
+  - et (Ivar Smolin)
+  - hu (Gabor Kelemen)
+  - sq (Laurent Dhima)
+
 libgnomeui 2.22.0.1
 
 * Fix another hang in the file chooser.
