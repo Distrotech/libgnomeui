@@ -1,3 +1,11 @@
+2008-05-20  Bastien Nocera  <hadess@hadess.net>
+
+	* file-chooser/gtkfilesystemgio.c (translate_file_info):
+	Handle the display name being empty, and deduct it from the
+	name, fixes a crash when the info doesn't have a display name
+	set (Closes: #523699)
+	(read_bookmarks_file): remove unused variable
+
 2008-04-09  Carlos Garnacho  <carlos@imendio.com>
 
 	* configure.in: Post release version bump.

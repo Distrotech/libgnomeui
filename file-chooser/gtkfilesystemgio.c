@@ -875,13 +875,24 @@ translate_file_info (GFile     *file,
   GtkFileInfo *info;
   gboolean is_folder;
   GTimeVal mtime;
-  const gchar *thumbnail_path;
+  const gchar *thumbnail_path, *display_name;
 
   info = gtk_file_info_new ();
   is_folder = (g_file_info_get_file_type (file_info) == G_FILE_TYPE_DIRECTORY);
   g_file_info_get_modification_time (file_info, &mtime);
 
-  gtk_file_info_set_display_name (info, g_file_info_get_display_name (file_info));
+  display_name = g_file_info_get_display_name (file_info);
+  if (display_name == NULL) {
+    const gchar *name;
+    gchar *d_name;
+
+    name = g_file_info_get_name (file_info);
+    d_name = g_filename_display_name (name);
+    gtk_file_info_set_display_name (info, d_name);
+    g_free (d_name);
+  } else {
+    gtk_file_info_set_display_name (info, display_name);
+  }
   gtk_file_info_set_is_folder (info, is_folder);
   gtk_file_info_set_is_hidden (info, g_file_info_get_is_hidden (file_info));
   gtk_file_info_set_mime_type (info, g_file_info_get_content_type (file_info));
@@ -1542,7 +1553,6 @@ read_bookmarks_file (void)
 {
   gchar *filename, *contents;
   gchar **lines, *space;
-  GError *error = NULL;
   GList *bookmarks = NULL;
   GFile *file;
   gint i;
