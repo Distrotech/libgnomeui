@@ -1895,6 +1895,9 @@ gtk_file_folder_gio_get_info (GtkFileFolder      *folder,
 
   DEBUG ("folder_get_info");
 
+  if (path == NULL)
+    return NULL;
+
   folder_gio = GTK_FILE_FOLDER_GIO (folder);
   uri = gtk_file_path_get_string (path);
   file_info = g_hash_table_lookup (folder_gio->children,

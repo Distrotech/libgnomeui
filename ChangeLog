@@ -1,3 +1,8 @@
+2008-05-20  Jan Arne Petersen  <jpetersen@jpetersen.org>
+
+	* file-chooser/gtkfilesystemgio.c: (gtk_file_folder_gio_get_info):
+	Fix crash if path is NULL (Closes: #532962)
+
 2008-05-20  Bastien Nocera  <hadess@hadess.net>
 
 	* file-chooser/gtkfilesystemgio.c (translate_file_info):
