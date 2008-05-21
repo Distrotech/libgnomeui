@@ -173,30 +173,6 @@ dnl
 dnl Start of pkg-config checks
 dnl
 
-dnl
-dnl libjpeg
-dnl
-
-AC_ARG_WITH(libjpeg,  [  --without-libjpeg       build without JPEG support])
-if test x$with_libjpeg != xno && test -z "$LIBJPEG"; then
-	AC_CHECK_LIB(jpeg, jpeg_start_decompress,
-		[AC_CHECK_HEADER(jpeglib.h, jpeg_ok=yes, jpeg_ok=no)],
-		AC_MSG_WARN(*** (jpeg library not found) ***), -lm)
-	if test "$jpeg_ok" = yes; then
-		JPEG='jpeg'; LIBJPEG='-ljpeg'
-		AC_DEFINE(HAVE_LIBJPEG, 1, [Define to 1 if you have libjpeg installed])
-	fi
-fi
-
-if test x$with_libjpeg != xno && test -z "$LIBJPEG"; then
-	AC_MSG_ERROR([
-*** Checks for JPEG library failed. You can build without it by passing 
-*** --without-libjpeg to configure but the JPEG thumbnail loader will not
-*** be built then.])
-fi
-
-AC_SUBST(LIBJPEG)
-
 GNOMEUI_MODULES="dnl
   libxml-2.0 >= libxml_required_version dnl
   libgnome-2.0 >= libgnome_required_version dnl
