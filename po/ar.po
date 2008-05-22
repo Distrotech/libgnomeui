@@ -75,7 +75,7 @@ msgstr "تعذّر إنشاء '%s': %s"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1981
 msgid "Network Servers"
-msgstr "خوادم الشبكة"
+msgstr "خواديم الشبكة"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1997
 #: ../file-chooser/gtkfilesystemgio.c:1283
