@@ -417,6 +417,11 @@ gtk_file_system_gio_init (GtkFileSystemGio *impl)
 
   DEBUG ("init");
 
+  bindtextdomain (GETTEXT_PACKAGE, GNOMEUILOCALEDIR);
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET 
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+#endif
+
   impl->volume_monitor = g_volume_monitor_get ();
 
   path = get_bookmarks_filename ();
