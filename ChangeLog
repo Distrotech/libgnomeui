@@ -1,3 +1,9 @@
+2008-05-28  Carlos Garnacho  <carlos@imendio.com>
+
+	* file-chooser/gtkfilesystemgio.c: Improve bookmarks handling by not
+	returning a reversed list in read_bookmarks_file(), which makes things
+	more straighforward. Fixes #530978.
+
 2008-05-27  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* file-chooser/gtkfilesystemgio.c: (gtk_file_system_gio_init):

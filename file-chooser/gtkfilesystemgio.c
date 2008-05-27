@@ -1595,7 +1595,7 @@ read_bookmarks_file (void)
   g_free (contents);
   g_object_unref (file);
 
-  return bookmarks;
+  return g_list_reverse (bookmarks);
 }
 
 static void
@@ -1606,12 +1606,6 @@ save_bookmarks_file (GList *bookmarks)
   GString *contents;
   GList *elem;
   GFile *file;
-
-  /* read_bookmarks_file returns the list reversed
-   * in order to just prepend elements in list_bookmarks,
-   * so to keep the same order we have to reverse it here
-   */
-  bookmarks = g_list_reverse (bookmarks);
 
   filename = get_bookmarks_filename ();
   file = g_file_new_for_path (filename);
@@ -1764,6 +1758,7 @@ gtk_file_system_gio_list_bookmarks (GtkFileSystem *file_system)
 
   DEBUG ("list_bookmarks");
   bookmarks = read_bookmarks_file ();
+  bookmarks = g_list_reverse (bookmarks);
 
   for (elem = bookmarks; elem; elem = elem->next)
     {
