@@ -1,3 +1,9 @@
+2008-06-03  Felix Riemann  <friemann@svn.gnome.org>
+
+	* file-chooser/gtkfilesystemgio.c:
+	(gtk_file_system_gio_volume_get_icon_name):
+	Stop leaking GIcons. Fixes bug #536393.
+
 2008-06-03  Christian Persch  <chpe@gnome.org>
 
 	* configure.in: Post-branching version bump.

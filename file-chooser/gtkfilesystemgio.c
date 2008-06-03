@@ -1355,6 +1355,7 @@ gtk_file_system_gio_volume_get_icon_name (GtkFileSystem        *file_system,
     }
 
   name = get_icon_string (icon);
+  g_object_unref (icon);
 
   return name;
 }
