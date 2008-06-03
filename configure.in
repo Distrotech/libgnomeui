@@ -9,8 +9,8 @@ AC_PREREQ(2.54)
 # set LIBGNOMEUI_BINARY_AGE and LIBGNOMEUI_INTERFACE_AGE to 0.
 #
 m4_define([libgnomeui_major_version], [2])
-m4_define([libgnomeui_minor_version], [22])
-m4_define([libgnomeui_micro_version], [2])
+m4_define([libgnomeui_minor_version], [23])
+m4_define([libgnomeui_micro_version], [3])
 m4_define([libgnomeui_interface_age], [0])
 # If you need a modifier for the version number. 
 # Normally empty, but can be used to make "fixup" releases.
@@ -23,9 +23,9 @@ m4_define([libgnomecanvas_required_version], [2.0.0])
 m4_define([libbonoboui_required_version],    [2.13.1])
 m4_define([gconf_required_version],          [1.1.11])
 m4_define([pango_required_version],          [1.1.2])
-m4_define([glib_required_version],           [2.15.0])
-m4_define([gio_required_version],            [2.15.2])
-m4_define([gtk_required_version],            [2.11.5])
+m4_define([glib_required_version],           [2.16.0])
+m4_define([gio_required_version],            [2.16.0])
+m4_define([gtk_required_version],            [2.12.0])
 m4_define([gnomevfs_required_version],       [2.7.3])
 m4_define([libglade_required_version],       [2.0.0])
 m4_define([gnome_keyring_required_version],  [0.4])
