@@ -351,8 +351,6 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
   g_checksum_get_digest (checksum, digest, &digest_len);
   g_assert (digest_len == 16);
 
-  g_mutex_lock (priv->lock);
-
   file = g_strconcat (g_checksum_get_string (checksum), ".png", NULL);
   
   path = g_build_filename (g_get_home_dir (),

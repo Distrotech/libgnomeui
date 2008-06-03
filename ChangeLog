@@ -1,5 +1,10 @@
 2008-06-03  Christian Neumair  <cneumair@gnome.org>
 
+	* libgnomeui/gnome-thumbnail.c (gnome_thumbnail_factory_lookup):
+	Do not take thumbnail factory lock.
+
+2008-06-03  Christian Neumair  <cneumair@gnome.org>
+
 	* libgnomeui/gnome-thumbnail.c (gnome_thumbnail_factory_finalize),
 	(gnome_thumbnail_factory_init), (gnome_thumbnail_factory_lookup),
 	(gnome_thumbnail_factory_has_valid_failed_thumbnail),
