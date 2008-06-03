@@ -1,3 +1,12 @@
+2008-06-03  Christian Neumair  <cneumair@gnome.org>
+
+	* libgnomeui/gnome-thumbnail.c (gnome_thumbnail_factory_finalize),
+	(gnome_thumbnail_factory_init), (gnome_thumbnail_factory_lookup),
+	(gnome_thumbnail_factory_has_valid_failed_thumbnail),
+	(gnome_thumbnail_factory_save_thumbnail),
+	(gnome_thumbnail_factory_create_failed_thumbnail):
+	Get rid of in-memory thumbnail cache. Fixes #430123.
+
 2008-06-03  Felix Riemann  <friemann@svn.gnome.org>
 
 	* file-chooser/gtkfilesystemgio.c:
