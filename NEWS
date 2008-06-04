@@ -1,3 +1,20 @@
+libgnomeui 2.23.3
+
+* Fix a crash in the gio file choose backend when a display name doesn't exist
+  (Bastien Nocera)
+* Fix a crash in the gio file choose backend when a path is NULL (Jan Arne
+  Petersen)
+* Stop pretending libgnomeui depends on libjpeg (Tor)
+* Properly initialize gettext in the gio file chooser backend (Andrew
+  Zabolotny)
+* Improve bookmarks in the gio file chooser backend (Carlos Garnacho)
+* Do not leak GIcons in the gio file chooser backend (Felix Riemann)
+* Get rid of in-memory thumbnail cache (Christian Neumair)
+* Updated translations.
+  - en_GB (Philip Withnall)
+  - ar (Khaled Hosny)
+  - mn (Badral Sanligiin)
+
 libgnomeui 2.22.1
 
 * Cleanups (Kjartan)
