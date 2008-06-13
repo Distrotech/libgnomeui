@@ -1,8 +1,4 @@
-AUTOMAKE_OPTIONS = 1.7
-
-DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
-
-SUBDIRS = libgnomeui file-chooser glade images demos test-gnome doc po
+SUBDIRS = libgnomeui glade images demos test-gnome doc po
 
 EXTRA_DIST = \
 	COPYING.LIB		\
@@ -17,3 +13,5 @@ DISTCLEANFILES = \
 	intltool-extract	\
 	intltool-merge		\
 	intltool-update
+
+DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
