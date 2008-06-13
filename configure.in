@@ -272,7 +272,6 @@ po/Makefile.in
 libgnomeui/Makefile
 libgnomeui/libgnomeui-2.0.pc
 libgnomeui/pixmaps/Makefile
-file-chooser/Makefile
 glade/Makefile
 images/Makefile
 demos/Makefile
