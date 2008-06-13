@@ -1,3 +1,15 @@
+2008-06-13  Christian Persch  <chpe@gnome.org>
+
+	* autogen.sh:
+	* configure.in:
+	* Makefile.am: Update intltool req and fix dist.
+
+2008-06-13  Christian Persch  <chpe@gnome.org>
+
+	* configure.in:
+	* Makefile.am:
+	R file-chooser/*: Remove the filechooser backends. Bug #538025.
+
 2008-06-04  Vincent Untz  <vuntz@gnome.org>
 
 	* configure.in: post-release bump to 2.23.4
