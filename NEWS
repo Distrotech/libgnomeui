@@ -1,3 +1,7 @@
+libgnomeui 2.23.4
+
+* Remove the filechooser backends (#538025)
+
 libgnomeui 2.23.3
 
 * Fix a crash in the gio file choose backend when a display name doesn't exist
