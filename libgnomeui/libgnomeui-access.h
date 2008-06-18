@@ -28,8 +28,7 @@
 #include <atk/atkregistry.h>
 #include <atk/atkrelationset.h>
 #include <atk/atkobjectfactory.h>
-#include <gtk/gtkwidget.h>
-#include <gtk/gtklabel.h>
+#include <gtk/gtk.h>
 
 void _add_atk_name_desc   (GtkWidget *widget, gchar *name, gchar *desc);
 void _add_atk_description (GtkWidget *widget, gchar *desc);

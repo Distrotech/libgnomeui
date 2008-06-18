@@ -12,7 +12,7 @@
 #include "libgnome/gnome-util.h"
 #include "libgnomeui/gnome-window-icon.h"
 
-#include <gdk/gdkpixbuf.h>
+#include <gdk/gdk.h>
 #include "libgnomeui/gnome-client.h"
 
 #include <stdlib.h>

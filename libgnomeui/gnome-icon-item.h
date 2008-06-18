@@ -31,8 +31,7 @@
 #ifndef GNOME_DISABLE_DEPRECATED
 
 #include <libgnomecanvas/gnome-canvas.h>
-#include <gtk/gtkeditable.h>
-#include <gtk/gtkentry.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

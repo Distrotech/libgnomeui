@@ -20,8 +20,7 @@
  * Boston, MA 02111-1307, USA.
  */
 #include <config.h>
-#include <gtk/gtkwidget.h>
-#include <gtk/gtkaccessible.h>
+#include <gtk/gtk.h>
 #include <atk/atkrelationset.h>
 #include "libgnomeui-access.h"
 

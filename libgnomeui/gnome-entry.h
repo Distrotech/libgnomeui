@@ -35,8 +35,7 @@
 #ifndef GNOME_DISABLE_DEPRECATED
 
 #include <glib.h>
-#include <gtk/gtkcombo.h>
-#include <gtk/gtkeditable.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

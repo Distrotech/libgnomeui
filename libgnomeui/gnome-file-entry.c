@@ -45,15 +45,7 @@
 #include <libgnome/gnome-macros.h>
 #include <libgnomevfs/gnome-vfs-uri.h>
 #include <libgnomevfs/gnome-vfs-utils.h>
-#include <gtk/gtkbutton.h>
-#include <gtk/gtkdnd.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtkfilesel.h>
-#include <gtk/gtkfilechooserdialog.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtkdialog.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtksignal.h>
+#include <gtk/gtk.h>
 
 /* Must be before all other gnome includes!! */
 #include <glib/gi18n-lib.h>

@@ -30,14 +30,7 @@
 #include <config.h>
 #include <libgnome/gnome-macros.h>
 
-#include <gtk/gtkmain.h>
-#include <gtk/gtkalignment.h>
-#include <gtk/gtkcolorsel.h>
-#include <gtk/gtkcolorseldialog.h>
-#include <gtk/gtkdnd.h>
-#include <gtk/gtkdrawingarea.h>
-#include <gtk/gtkframe.h>
-#include <gtk/gtksignal.h>
+#include <gtk/gtk.h>
 
 /* Must be before all other gnome includes!! */
 #include <glib/gi18n-lib.h>
@@ -45,7 +38,6 @@
 #include "gnome-marshal.h"
 #include "gnome-color-picker.h"
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtkbutton.h>
 
 #include <libgnomeuiP.h>
 

@@ -29,7 +29,7 @@
 
 #ifndef GNOME_DISABLE_DEPRECATED
 
-#include <gtk/gtkmenu.h>
+#include <gtk/gtk.h>
 #include <libgnomeui/gnome-app.h>
 #include <libgnomeui/gnome-app-helper.h>
 

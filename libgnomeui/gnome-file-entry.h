@@ -36,7 +36,7 @@
 
 
 #include <libgnomeui/gnome-entry.h>
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 
 #ifndef GNOME_DISABLE_DEPRECATED
 

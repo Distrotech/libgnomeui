@@ -26,10 +26,7 @@
 #ifndef GNOME_DISABLE_DEPRECATED
 
 #include <gdk/gdk.h>
-#include <gtk/gtkwindow.h>
-#include <gtk/gtkeditable.h>
-#include <gtk/gtkaccelgroup.h>
-#include <gtk/gtkstock.h>
+#include <gtk/gtk.h>
 
 #include <stdarg.h>
 

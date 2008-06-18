@@ -37,9 +37,7 @@
 #ifndef GNOME_APP_H
 #define GNOME_APP_H
 
-#include <gtk/gtkmenubar.h>
-#include <gtk/gtktoolbar.h>
-#include <gtk/gtkwindow.h>
+#include <gtk/gtk.h>
 
 #include <bonobo/bonobo-dock.h>
 

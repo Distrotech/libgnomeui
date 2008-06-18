@@ -28,11 +28,9 @@
 #include <config.h>
 #include <math.h>
 #include <libgnome/gnome-macros.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkwindow.h>
+#include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-#include <gdk/gdkrgb.h>
+#include <gdk/gdk.h>
 #include <libart_lgpl/art_rgb_affine.h>
 #include <libart_lgpl/art_rgb_rgba_affine.h>
 #include <string.h>

@@ -29,19 +29,7 @@
 
 #include "gnome-stock-icons.h"
 
-#include <gtk/gtkalignment.h>
-#include <gtk/gtkbbox.h>
-#include <gtk/gtkbutton.h>
-#include <gtk/gtkdialog.h>
-#include <gtk/gtkhbox.h>
-#include <gtk/gtkimage.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtknotebook.h>
-#include <gtk/gtkscrolledwindow.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtktextview.h>
-#include <gtk/gtkvbox.h>
-#include <gtk/gtkviewport.h>
+#include <gtk/gtk.h>
 #include <libgnome/gnome-macros.h>
 
 #include "libgnomeuiP.h"

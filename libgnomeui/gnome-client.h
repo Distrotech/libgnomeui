@@ -28,8 +28,7 @@
 
 #include <unistd.h>
 #include <sys/types.h>
-#include <gtk/gtkobject.h>
-#include <gtk/gtkdialog.h>
+#include <gtk/gtk.h>
 
 #include <libgnome/gnome-program.h>
 

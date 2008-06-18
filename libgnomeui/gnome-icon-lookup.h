@@ -23,7 +23,7 @@
 #ifndef GNOME_ICON_LOOKUP_H
 #define GNOME_ICON_LOOKUP_H
 
-#include <gtk/gtkicontheme.h>
+#include <gtk/gtk.h>
 #include <libgnomevfs/gnome-vfs-file-info.h>
 #include <libgnomeui/gnome-thumbnail.h>
 /* We used to include this, so keep doing it for backwards compat */

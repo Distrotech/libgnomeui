@@ -35,7 +35,7 @@
 
 #ifndef GNOME_DISABLE_DEPRECATED
 
-#include <gtk/gtkimage.h>
+#include <gtk/gtk.h>
 
 
 G_BEGIN_DECLS

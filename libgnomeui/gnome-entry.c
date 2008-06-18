@@ -36,10 +36,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtklist.h>
-#include <gtk/gtklistitem.h>
-#include <gtk/gtksignal.h>
+#include <gtk/gtk.h>
 
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-program.h>

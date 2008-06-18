@@ -1,5 +1,5 @@
 #include <config.h>
-#include <gtk/gtktypeutils.h>
+#include <gtk/gtk.h>
 #include <libgnomeui.h>
 
 void gnome_type_init (void);

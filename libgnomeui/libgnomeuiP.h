@@ -28,7 +28,6 @@
 #define LIBGNOMEUIP_H
 
 #include <glib.h>
-#include <gtk/gtktypeutils.h>
 
 
 #include <libgnome/libgnome.h>

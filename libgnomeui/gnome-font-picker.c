@@ -25,15 +25,7 @@
 /* Must be before all other gnome includes!! */
 #include <glib/gi18n-lib.h>
 
-#include <gtk/gtksignal.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkalignment.h>
-#include <gtk/gtkhbox.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkvseparator.h>
-#include <gtk/gtkfontsel.h>
-#include <gtk/gtkimage.h>
-#include <gtk/gtkstock.h>
+#include <gtk/gtk.h>
 
 #include "gnome-stock-icons.h"
 #include "gnometypebuiltins.h"

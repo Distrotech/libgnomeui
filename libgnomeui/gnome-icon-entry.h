@@ -38,8 +38,8 @@
 #define GNOME_ICON_ENTRY_H
 
 
-#include <glib/gmacros.h>
-#include <gtk/gtkvbox.h>
+#include <glib.h>
+#include <gtk/gtk.h>
 #include <libgnomeui/gnome-file-entry.h>
 
 

@@ -28,9 +28,7 @@
 #ifndef __GNOME_APPBAR_H__
 #define __GNOME_APPBAR_H__
 
-#include <gtk/gtkhbox.h>
-#include <gtk/gtkprogressbar.h>
-
+#include <gtk/gtk.h>
 
 #include "gnome-types.h"
 

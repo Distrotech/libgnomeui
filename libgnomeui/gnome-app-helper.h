@@ -38,7 +38,7 @@
 #ifndef GNOME_APP_HELPER_H
 #define GNOME_APP_HELPER_H
 
-#include <gtk/gtkstatusbar.h>
+#include <gtk/gtk.h>
 
 #include <libgnomeui/gnome-appbar.h>
 #include <libgnomeui/gnome-app.h>

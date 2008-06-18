@@ -23,7 +23,7 @@
 
 #ifndef GNOME_DISABLE_DEPRECATED
 
-#include <gtk/gtkbutton.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

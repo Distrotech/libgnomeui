@@ -31,21 +31,7 @@
 #include "gnometypebuiltins.h"
 
 #include <glib/gi18n-lib.h>
-#include <gtk/gtkbox.h>
-#include <gtk/gtkcheckbutton.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtkhbox.h>
-#include <gtk/gtkimage.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtktable.h>
-#include <gtk/gtkvbox.h>
-#include <gtk/gtkradiobutton.h>
-#include <gtk/gtkalignment.h>
-#include <gtk/gtksizegroup.h>
-#include <gtk/gtkprogressbar.h>
+#include <gtk/gtk.h>
 
 #define GNOME_PASSWORD_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GNOME_TYPE_PASSWORD_DIALOG, GnomePasswordDialogDetails))
 #define PARAM_STATIC G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB

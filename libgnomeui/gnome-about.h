@@ -27,7 +27,7 @@
 
 #ifndef GNOME_DISABLE_DEPRECATED
 
-#include <gtk/gtkdialog.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 

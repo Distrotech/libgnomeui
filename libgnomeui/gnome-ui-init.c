@@ -64,19 +64,7 @@
 
 #include "libgnomeuiP.h"
 
-#include <gtk/gtkversion.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtkaccelmap.h>
-
-/* for sound events */
-#include <gtk/gtkmenuitem.h>
-#include <gtk/gtkbutton.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtktogglebutton.h>
-#include <gtk/gtkcheckmenuitem.h>
-#include <gtk/gtkmessagedialog.h>
-#include <gtk/gtkaboutdialog.h>
-#include <gtk/gtklinkbutton.h>
+#include <gtk/gtk.h>
 
 /*****************************************************************************
  * libgnomeui

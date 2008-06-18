@@ -36,18 +36,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
-#include <gtk/gtkbutton.h>
-#include <gtk/gtkdnd.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtkfilesel.h>
-#include <gtk/gtkfilechooser.h>
-#include <gtk/gtkframe.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkmain.h>
-#include <gtk/gtksignal.h>
-#include <gtk/gtkpixmap.h>
-#include <gtk/gtkscrolledwindow.h>
-#include <gtk/gtktreeview.h>
+#include <gtk/gtk.h>
 
 #include <glib/gi18n-lib.h>
 

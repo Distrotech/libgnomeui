@@ -29,13 +29,7 @@
 #include "gnome-druid.h"
 #include "gnome-uidefs.h"
 
-/* FIXME: Are these includes needed */
-#include <gtk/gtklabel.h>
-#include <gtk/gtklayout.h>
-#include <gtk/gtkimage.h>
-#include <gtk/gtkeventbox.h>
-#include <gtk/gtkvbox.h>
-#include <gtk/gtkhbox.h>
+#include <gtk/gtk.h>
 #include <string.h>
 #include "gnome-druid-page-standard.h"
 

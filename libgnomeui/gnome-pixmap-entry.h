@@ -37,7 +37,7 @@
 
 #ifndef GNOME_DISABLE_DEPRECATED
 
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 #include <libgnomeui/gnome-file-entry.h>
 
 G_BEGIN_DECLS
