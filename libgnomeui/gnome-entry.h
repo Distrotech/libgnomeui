@@ -40,11 +40,11 @@
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_ENTRY            (gnome_entry_get_type ())
-#define GNOME_ENTRY(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ENTRY, GnomeEntry))
-#define GNOME_ENTRY_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ENTRY, GnomeEntryClass))
-#define GNOME_IS_ENTRY(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ENTRY))
-#define GNOME_IS_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ENTRY))
-#define GNOME_ENTRY_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_ENTRY, GnomeEntryClass))
+#define GNOME_ENTRY(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_ENTRY, GnomeEntry))
+#define GNOME_ENTRY_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ENTRY, GnomeEntryClass))
+#define GNOME_IS_ENTRY(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_ENTRY))
+#define GNOME_IS_ENTRY_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ENTRY))
+#define GNOME_ENTRY_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_ENTRY, GnomeEntryClass))
 
 /* This also supports the GtkEditable interface so
  * to get text use the gtk_editable_get_chars method

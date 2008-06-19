@@ -71,7 +71,7 @@ static gint    gnome_druid_expose          (GtkWidget       *widget,
 					    GdkEventExpose  *event);
 static void    gnome_druid_map             (GtkWidget       *widget);
 static void    gnome_druid_unmap           (GtkWidget       *widget);
-static GtkType gnome_druid_child_type      (GtkContainer    *container);
+static GType gnome_druid_child_type      (GtkContainer    *container);
 static void    gnome_druid_add             (GtkContainer    *widget,
 					    GtkWidget       *page);
 static void    gnome_druid_remove          (GtkContainer    *widget,
@@ -479,7 +479,7 @@ gnome_druid_size_allocate (GtkWidget *widget,
 	}
 }
 
-static GtkType
+static GType
 gnome_druid_child_type (GtkContainer *container)
 {
 	return GNOME_TYPE_DRUID_PAGE;

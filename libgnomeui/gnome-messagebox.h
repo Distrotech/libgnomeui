@@ -29,11 +29,11 @@
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_MESSAGE_BOX            (gnome_message_box_get_type ())
-#define GNOME_MESSAGE_BOX(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_MESSAGE_BOX, GnomeMessageBox))
-#define GNOME_MESSAGE_BOX_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_MESSAGE_BOX, GnomeMessageBoxClass))
-#define GNOME_IS_MESSAGE_BOX(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_MESSAGE_BOX))
-#define GNOME_IS_MESSAGE_BOX_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_MESSAGE_BOX))
-#define GNOME_MESSAGE_BOX_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_MESSAGE_BOX, GnomeMessageBoxClass))
+#define GNOME_MESSAGE_BOX(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_MESSAGE_BOX, GnomeMessageBox))
+#define GNOME_MESSAGE_BOX_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_MESSAGE_BOX, GnomeMessageBoxClass))
+#define GNOME_IS_MESSAGE_BOX(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_MESSAGE_BOX))
+#define GNOME_IS_MESSAGE_BOX_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_MESSAGE_BOX))
+#define GNOME_MESSAGE_BOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_MESSAGE_BOX, GnomeMessageBoxClass))
 
 
 #define GNOME_MESSAGE_BOX_INFO      "info"

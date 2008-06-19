@@ -36,11 +36,11 @@
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_MDI            (gnome_mdi_get_type ())
-#define GNOME_MDI(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_MDI, GnomeMDI))
-#define GNOME_MDI_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_MDI, GnomeMDIClass))
-#define GNOME_IS_MDI(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_MDI))
-#define GNOME_IS_MDI_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_MDI))
-#define GNOME_MDI_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_MDI, GnomeMDIClass))
+#define GNOME_MDI(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_MDI, GnomeMDI))
+#define GNOME_MDI_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_MDI, GnomeMDIClass))
+#define GNOME_IS_MDI(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_MDI))
+#define GNOME_IS_MDI_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_MDI))
+#define GNOME_MDI_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_MDI, GnomeMDIClass))
 
 typedef struct _GnomeMDI        GnomeMDI;
 typedef struct _GnomeMDIClass   GnomeMDIClass;

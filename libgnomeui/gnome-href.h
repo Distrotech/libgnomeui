@@ -32,11 +32,11 @@
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_HREF            (gnome_href_get_type ())
-#define GNOME_HREF(obj)            (GTK_CHECK_CAST((obj), GNOME_TYPE_HREF, GnomeHRef))
-#define GNOME_HREF_CLASS(klass)    (GTK_CHECK_CLASS_CAST((klass), GNOME_TYPE_HREF, GnomeHRefClass))
-#define GNOME_IS_HREF(obj)         (GTK_CHECK_TYPE((obj), GNOME_TYPE_HREF))
-#define GNOME_IS_HREF_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_HREF))
-#define GNOME_HREF_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_HREF, GnomeHRefClass))
+#define GNOME_HREF(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj), GNOME_TYPE_HREF, GnomeHRef))
+#define GNOME_HREF_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass), GNOME_TYPE_HREF, GnomeHRefClass))
+#define GNOME_IS_HREF(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj), GNOME_TYPE_HREF))
+#define GNOME_IS_HREF_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_HREF))
+#define GNOME_HREF_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_HREF, GnomeHRefClass))
 
 typedef struct _GnomeHRef        GnomeHRef;
 typedef struct _GnomeHRefPrivate GnomeHRefPrivate;

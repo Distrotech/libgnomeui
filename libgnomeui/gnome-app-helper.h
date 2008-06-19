@@ -618,7 +618,7 @@ struct _GnomeUIBuilderData {
 	gpointer data;
 	gboolean is_interp;
 	GtkCallbackMarshal relay_func;
-	GtkDestroyNotify destroy_func;
+	GDestroyNotify destroy_func;
 };
 
 /* Flush the accelerator definitions into the application specific
@@ -685,7 +685,7 @@ void gnome_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo);
  */
 void gnome_app_create_menus_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
 				    GtkCallbackMarshal relay_func, gpointer data,
-				    GtkDestroyNotify destroy_func);
+				    GDestroyNotify destroy_func);
 
 /* Constructs a menu bar, sets all the user data pointers to the specified value, and attaches it to
  * the specified application window.
@@ -723,7 +723,7 @@ void gnome_app_create_toolbar (GnomeApp *app, GnomeUIInfo *uiinfo);
  */
 void gnome_app_create_toolbar_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
 				      GtkCallbackMarshal relay_func, gpointer data,
-				      GtkDestroyNotify destroy_func);
+				      GDestroyNotify destroy_func);
 
 /* Constructs a toolbar, sets all the user data pointers to the specified value, and attaches it to
  * the specified application window.
@@ -769,7 +769,7 @@ void gnome_app_insert_menus_with_data (GnomeApp *app, const gchar *path, GnomeUI
 
 void gnome_app_insert_menus_interp (GnomeApp *app, const gchar *path, GnomeUIInfo *menuinfo,
 				    GtkCallbackMarshal relay_func, gpointer data,
-				    GtkDestroyNotify destroy_func);
+				    GDestroyNotify destroy_func);
 
 
 /* Activate the menu item hints, displaying in the given appbar.

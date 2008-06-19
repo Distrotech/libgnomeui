@@ -46,11 +46,11 @@ G_BEGIN_DECLS
  */
 
 #define GNOME_TYPE_COLOR_PICKER            (gnome_color_picker_get_type ())
-#define GNOME_COLOR_PICKER(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_COLOR_PICKER, GnomeColorPicker))
-#define GNOME_COLOR_PICKER_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_COLOR_PICKER, GnomeColorPickerClass))
-#define GNOME_IS_COLOR_PICKER(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_COLOR_PICKER))
-#define GNOME_IS_COLOR_PICKER_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_COLOR_PICKER))
-#define GNOME_COLOR_PICKER_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_COLOR_PICKER, GnomeColorPickerClass))
+#define GNOME_COLOR_PICKER(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_COLOR_PICKER, GnomeColorPicker))
+#define GNOME_COLOR_PICKER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_COLOR_PICKER, GnomeColorPickerClass))
+#define GNOME_IS_COLOR_PICKER(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_COLOR_PICKER))
+#define GNOME_IS_COLOR_PICKER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_COLOR_PICKER))
+#define GNOME_COLOR_PICKER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_COLOR_PICKER, GnomeColorPickerClass))
 
 
 typedef struct _GnomeColorPicker        GnomeColorPicker;

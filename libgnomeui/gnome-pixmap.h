@@ -41,11 +41,11 @@
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_PIXMAP            (gnome_pixmap_get_type ())
-#define GNOME_PIXMAP(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_PIXMAP, GnomePixmap))
-#define GNOME_PIXMAP_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PIXMAP, GnomePixmapClass))
-#define GNOME_IS_PIXMAP(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_PIXMAP))
-#define GNOME_IS_PIXMAP_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PIXMAP))
-#define GNOME_PIXMAP_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_PIXMAP, GnomePixmapClass))
+#define GNOME_PIXMAP(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_PIXMAP, GnomePixmap))
+#define GNOME_PIXMAP_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PIXMAP, GnomePixmapClass))
+#define GNOME_IS_PIXMAP(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_PIXMAP))
+#define GNOME_IS_PIXMAP_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PIXMAP))
+#define GNOME_PIXMAP_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_PIXMAP, GnomePixmapClass))
 
 /* Note:
  * You should use GtkImage if you can, this is just a compatibility wrapper to get

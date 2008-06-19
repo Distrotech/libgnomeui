@@ -30,10 +30,10 @@
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_PASSWORD_DIALOG            (gnome_password_dialog_get_type ())
-#define GNOME_PASSWORD_DIALOG(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_PASSWORD_DIALOG, GnomePasswordDialog))
-#define GNOME_PASSWORD_DIALOG_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PASSWORD_DIALOG, GnomePasswordDialogClass))
-#define GNOME_IS_PASSWORD_DIALOG(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_PASSWORD_DIALOG))
-#define GNOME_IS_PASSWORD_DIALOG_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PASSWORD_DIALOG))
+#define GNOME_PASSWORD_DIALOG(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_PASSWORD_DIALOG, GnomePasswordDialog))
+#define GNOME_PASSWORD_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PASSWORD_DIALOG, GnomePasswordDialogClass))
+#define GNOME_IS_PASSWORD_DIALOG(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_PASSWORD_DIALOG))
+#define GNOME_IS_PASSWORD_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PASSWORD_DIALOG))
 
 typedef struct _GnomePasswordDialog        GnomePasswordDialog;
 typedef struct _GnomePasswordDialogClass   GnomePasswordDialogClass;
@@ -61,7 +61,7 @@ typedef gdouble (* GnomePasswordDialogQualityFunc) (GnomePasswordDialog *passwor
  						    const char *password,
 						    gpointer user_data);
 
-GtkType    gnome_password_dialog_get_type (void);
+GType    gnome_password_dialog_get_type (void);
 GtkWidget* gnome_password_dialog_new      (const char *dialog_title,
 					   const char *message,
 					   const char *username,

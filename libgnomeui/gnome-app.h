@@ -48,11 +48,11 @@ G_BEGIN_DECLS
 
 
 #define GNOME_TYPE_APP            (gnome_app_get_type ())
-#define GNOME_APP(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_APP, GnomeApp))
-#define GNOME_APP_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_APP, GnomeAppClass))
-#define GNOME_IS_APP(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_APP))
-#define GNOME_IS_APP_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_APP))
-#define GNOME_APP_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_APP, GnomeAppClass))
+#define GNOME_APP(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_APP, GnomeApp))
+#define GNOME_APP_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_APP, GnomeAppClass))
+#define GNOME_IS_APP(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_APP))
+#define GNOME_IS_APP_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_APP))
+#define GNOME_APP_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_APP, GnomeAppClass))
 
 
 typedef struct _GnomeApp        GnomeApp;

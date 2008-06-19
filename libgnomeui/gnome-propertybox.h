@@ -31,11 +31,11 @@
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_PROPERTY_BOX            (gnome_property_box_get_type ())
-#define GNOME_PROPERTY_BOX(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_PROPERTY_BOX, GnomePropertyBox))
-#define GNOME_PROPERTY_BOX_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PROPERTY_BOX, GnomePropertyBoxClass))
-#define GNOME_IS_PROPERTY_BOX(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_PROPERTY_BOX))
-#define GNOME_IS_PROPERTY_BOX_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PROPERTY_BOX))
-#define GNOME_PROPERTY_BOX_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_PROPERTY_BOX, GnomePropertyBoxClass))
+#define GNOME_PROPERTY_BOX(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_PROPERTY_BOX, GnomePropertyBox))
+#define GNOME_PROPERTY_BOX_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PROPERTY_BOX, GnomePropertyBoxClass))
+#define GNOME_IS_PROPERTY_BOX(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_PROPERTY_BOX))
+#define GNOME_IS_PROPERTY_BOX_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PROPERTY_BOX))
+#define GNOME_PROPERTY_BOX_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_PROPERTY_BOX, GnomePropertyBoxClass))
 
 /*the flag used on the notebook pages to see if a change happened on a certain page or not*/
 #define GNOME_PROPERTY_BOX_DIRTY	"gnome_property_box_dirty"

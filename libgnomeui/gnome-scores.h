@@ -54,11 +54,11 @@
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_SCORES            (gnome_scores_get_type ())
-#define GNOME_SCORES(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_SCORES, GnomeScores))
-#define GNOME_SCORES_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_SCORES, GnomeScoresClass))
-#define GNOME_IS_SCORES(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_SCORES))
-#define GNOME_IS_SCORES_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_SCORES))
-#define GNOME_SCORES_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_SCORES, GnomeScoresClass))
+#define GNOME_SCORES(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_SCORES, GnomeScores))
+#define GNOME_SCORES_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_SCORES, GnomeScoresClass))
+#define GNOME_IS_SCORES(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_SCORES))
+#define GNOME_IS_SCORES_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_SCORES))
+#define GNOME_SCORES_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_SCORES, GnomeScoresClass))
 
 typedef struct _GnomeScores        GnomeScores;
 typedef struct _GnomeScoresPrivate GnomeScoresPrivate;

@@ -150,7 +150,7 @@ void gnome_mdi_generic_child_set_view_creator_full (GnomeMDIGenericChild *child,
 												    GnomeMDIChildViewCreator func,
 													GtkCallbackMarshal marshal,
 													gpointer data,
-													GtkDestroyNotify notify)
+													GDestroyNotify notify)
 {
 	if(child->create_view_dn)
 		child->create_view_dn(child->create_view_data);
@@ -198,7 +198,7 @@ void gnome_mdi_generic_child_set_menu_creator_full (GnomeMDIGenericChild *child,
 													GnomeMDIChildMenuCreator func,
 													GtkCallbackMarshal marshal,
 													gpointer data,
-													GtkDestroyNotify notify)
+													GDestroyNotify notify)
 {
 	if(child->create_menus_dn)
 		child->create_menus_dn(child->create_menus_data);
@@ -243,7 +243,7 @@ void gnome_mdi_generic_child_set_config_func_full (GnomeMDIGenericChild *child,
 												   GnomeMDIChildConfigFunc func,
 												   GtkCallbackMarshal marshal,
 												   gpointer data,
-												   GtkDestroyNotify notify)
+												   GDestroyNotify notify)
 {
 	if(child->get_config_string_dn)
 		child->get_config_string_dn(child->get_config_string_data);
@@ -292,7 +292,7 @@ void gnome_mdi_generic_child_set_label_func_full (GnomeMDIGenericChild *child,
 												  GnomeMDIChildLabelFunc func,
 												  GtkCallbackMarshal marshal,
 												  gpointer data,
-												  GtkDestroyNotify notify)
+												  GDestroyNotify notify)
 {
 	if(child->set_label_dn)
 		child->set_label_dn(child->set_label_data);

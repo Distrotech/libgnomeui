@@ -1,3 +1,52 @@
+2008-06-19  Christian Persch  <chpe@gnome.org>
+
+	* demos/test-recently-used.c: (add_to_menu):
+	* libgnomeui/gnome-app-helper.c: (gnome_app_create_menus_interp),
+	(gnome_app_create_toolbar_interp), (gnome_app_insert_menus_interp):
+	* libgnomeui/gnome-app-helper.h:
+	* libgnomeui/gnome-app.h:
+	* libgnomeui/gnome-appbar.h:
+	* libgnomeui/gnome-client.c: (interaction_key_new),
+	(gnome_client_request_interaction_internal),
+	(gnome_client_request_interaction_interp):
+	* libgnomeui/gnome-client.h:
+	* libgnomeui/gnome-color-picker.h:
+	* libgnomeui/gnome-dateedit.c:
+	* libgnomeui/gnome-dateedit.h:
+	* libgnomeui/gnome-dialog.h:
+	* libgnomeui/gnome-druid-page-edge.h:
+	* libgnomeui/gnome-druid-page-standard.h:
+	* libgnomeui/gnome-druid-page.h:
+	* libgnomeui/gnome-druid.c:
+	* libgnomeui/gnome-druid.h:
+	* libgnomeui/gnome-entry.h:
+	* libgnomeui/gnome-file-entry.h:
+	* libgnomeui/gnome-font-picker.h:
+	* libgnomeui/gnome-href.h:
+	* libgnomeui/gnome-icon-entry.h:
+	* libgnomeui/gnome-icon-item.h:
+	* libgnomeui/gnome-icon-list.h:
+	* libgnomeui/gnome-icon-sel.h:
+	* libgnomeui/gnome-mdi-child.h:
+	* libgnomeui/gnome-mdi-generic-child.c:
+	(gnome_mdi_generic_child_set_view_creator_full),
+	(gnome_mdi_generic_child_set_menu_creator_full),
+	(gnome_mdi_generic_child_set_config_func_full),
+	(gnome_mdi_generic_child_set_label_func_full):
+	* libgnomeui/gnome-mdi-generic-child.h:
+	* libgnomeui/gnome-mdi.h:
+	* libgnomeui/gnome-messagebox.h:
+	* libgnomeui/gnome-password-dialog.h:
+	* libgnomeui/gnome-pixmap-entry.h:
+	* libgnomeui/gnome-pixmap.h:
+	* libgnomeui/gnome-propertybox.h:
+	* libgnomeui/gnome-scores.c:
+	* libgnomeui/gnome-scores.h:
+	* libgnomeui/gnometypebuiltins_vars.c: Use GType and the
+        G_TYPE_* macros instead of the deprecated GtkType and GTK_* macros.
+        Allows building libgnomeui using programmes with
+	GTK_DISABLE_DEPRECATED again.
+
 2008-06-18  Felix Riemann  <friemann@svn.gnome.org>
 
 	* libgnomeui/*.c:

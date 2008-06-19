@@ -43,11 +43,11 @@
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_PIXMAP_ENTRY            (gnome_pixmap_entry_get_type ())
-#define GNOME_PIXMAP_ENTRY(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_PIXMAP_ENTRY, GnomePixmapEntry))
-#define GNOME_PIXMAP_ENTRY_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PIXMAP_ENTRY, GnomePixmapEntryClass))
-#define GNOME_IS_PIXMAP_ENTRY(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_PIXMAP_ENTRY))
-#define GNOME_IS_PIXMAP_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PIXMAP_ENTRY))
-#define GNOME_PIXMAP_ENTRY_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_PIXMAP_ENTRY, GnomePixmapEntryClass))
+#define GNOME_PIXMAP_ENTRY(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_PIXMAP_ENTRY, GnomePixmapEntry))
+#define GNOME_PIXMAP_ENTRY_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_PIXMAP_ENTRY, GnomePixmapEntryClass))
+#define GNOME_IS_PIXMAP_ENTRY(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_PIXMAP_ENTRY))
+#define GNOME_IS_PIXMAP_ENTRY_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_PIXMAP_ENTRY))
+#define GNOME_PIXMAP_ENTRY_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_PIXMAP_ENTRY, GnomePixmapEntryClass))
 
 /* Note:  This derives from GnomeFileEntry and thus supports GtkEditable
  * interface */

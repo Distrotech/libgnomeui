@@ -1182,7 +1182,7 @@ create_help_entries (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, gint pos)
 typedef struct
 {
 	GtkCallbackMarshal relay_func;
-	GtkDestroyNotify destroy_func;
+	GDestroyNotify destroy_func;
 	gpointer user_data;
 } SavedData;
 
@@ -1553,7 +1553,7 @@ gnome_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo)
 void
 gnome_app_create_menus_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
 		GtkCallbackMarshal relay_func, gpointer data,
-		GtkDestroyNotify destroy_func)
+		GDestroyNotify destroy_func)
 {
 	GnomeUIBuilderData uibdata;
 
@@ -1959,7 +1959,7 @@ gnome_app_create_toolbar (GnomeApp *app, GnomeUIInfo *uiinfo)
 void
 gnome_app_create_toolbar_interp (GnomeApp *app, GnomeUIInfo *uiinfo,
 				 GtkCallbackMarshal relay_func, gpointer data,
-				 GtkDestroyNotify destroy_func)
+				 GDestroyNotify destroy_func)
 {
 	GnomeUIBuilderData uibdata;
 
@@ -2396,7 +2396,7 @@ gnome_app_insert_menus_with_data (GnomeApp *app, const gchar *path,
 void
 gnome_app_insert_menus_interp (GnomeApp *app, const gchar *path,
 		GnomeUIInfo *menuinfo, GtkCallbackMarshal relay_func,
-		gpointer data, GtkDestroyNotify destroy_func)
+		gpointer data, GDestroyNotify destroy_func)
 {
 	GnomeUIBuilderData uidata =
 	{

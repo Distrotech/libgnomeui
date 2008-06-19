@@ -60,7 +60,7 @@ add_to_menu(GtkWidget* menu, GnomeRecentDocument *doc)
         gnome_recent_document_ref(doc);
         gtk_object_set_data_full(GTK_OBJECT(mi), "doc", 
                                  doc,
-                                 (GtkDestroyNotify)gnome_recent_document_unref);
+                                 (GDestroyNotify)gnome_recent_document_unref);
 
         gtk_object_set_data(GTK_OBJECT(mi), "label", label);
         

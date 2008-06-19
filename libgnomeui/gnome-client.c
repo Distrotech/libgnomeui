@@ -121,7 +121,7 @@ struct _InteractionKey
   gboolean               interp;
   GnomeInteractFunction  function;
   gpointer               data;
-  GtkDestroyNotify       destroy;
+  GDestroyNotify       destroy;
 };
 
 
@@ -135,7 +135,7 @@ interaction_key_new (GnomeClient           *client,
 		     gboolean               interp,
 		     GnomeInteractFunction  function,
 		     gpointer               data,
-		     GtkDestroyNotify       destroy)
+		     GDestroyNotify       destroy)
 {
   static gint tag= 1;
 
@@ -2518,7 +2518,7 @@ gnome_client_request_interaction_internal (GnomeClient           *client,
 					   gboolean               interp,
 					   GnomeInteractFunction  function,
 					   gpointer               data,
-					   GtkDestroyNotify       destroy)
+					   GDestroyNotify       destroy)
 {
 #ifdef HAVE_LIBSM
   Status          status;
@@ -2703,7 +2703,7 @@ gnome_client_request_interaction_interp (GnomeClient *client,
 					 GnomeDialogType dialog_type,
 					 GtkCallbackMarshal function,
 					 gpointer data,
-					 GtkDestroyNotify destroy)
+					 GDestroyNotify destroy)
 {
   g_return_if_fail (client != NULL);
   g_return_if_fail (GNOME_IS_CLIENT (client));

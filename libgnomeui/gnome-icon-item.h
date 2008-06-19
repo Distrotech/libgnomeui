@@ -40,11 +40,11 @@ typedef struct _GnomeIconTextItemClass   GnomeIconTextItemClass;
 typedef struct _GnomeIconTextItemPrivate GnomeIconTextItemPrivate;
 
 #define GNOME_TYPE_ICON_TEXT_ITEM            (gnome_icon_text_item_get_type ())
-#define GNOME_ICON_TEXT_ITEM(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_ICON_TEXT_ITEM, GnomeIconTextItem))
-#define GNOME_ICON_TEXT_ITEM_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ICON_TEXT_ITEM, GnomeIconTextItemClass))
-#define GNOME_IS_ICON_TEXT_ITEM(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_ICON_TEXT_ITEM))
-#define GNOME_IS_ICON_TEXT_ITEM_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ICON_TEXT_ITEM))
-#define GNOME_ICON_TEXT_ITEM_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_ICON_TEXT_ITEM, GnomeIconTextItemClass))
+#define GNOME_ICON_TEXT_ITEM(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_ICON_TEXT_ITEM, GnomeIconTextItem))
+#define GNOME_ICON_TEXT_ITEM_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_ICON_TEXT_ITEM, GnomeIconTextItemClass))
+#define GNOME_IS_ICON_TEXT_ITEM(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_ICON_TEXT_ITEM))
+#define GNOME_IS_ICON_TEXT_ITEM_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_ICON_TEXT_ITEM))
+#define GNOME_ICON_TEXT_ITEM_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_ICON_TEXT_ITEM, GnomeIconTextItemClass))
 
 struct _GnomeIconTextItem {
 	GnomeCanvasItem parent_instance;

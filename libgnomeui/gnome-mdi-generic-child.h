@@ -35,11 +35,11 @@
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_MDI_GENERIC_CHILD            (gnome_mdi_generic_child_get_type ())
-#define GNOME_MDI_GENERIC_CHILD(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_MDI_GENERIC_CHILD, GnomeMDIGenericChild))
-#define GNOME_MDI_GENERIC_CHILD_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_MDI_GENERIC_CHILD, GnomeMDIGenericChildClass))
-#define GNOME_IS_MDI_GENERIC_CHILD(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_MDI_GENERIC_CHILD))
-#define GNOME_IS_MDI_GENERIC_CHILD_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_MDI_GENERIC_CHILD))
-#define GNOME_MDI_GENERIC_CHILD_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_MDI_GENERIC_CHILD, GnomeMDIGenericChildClass))
+#define GNOME_MDI_GENERIC_CHILD(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_MDI_GENERIC_CHILD, GnomeMDIGenericChild))
+#define GNOME_MDI_GENERIC_CHILD_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_MDI_GENERIC_CHILD, GnomeMDIGenericChildClass))
+#define GNOME_IS_MDI_GENERIC_CHILD(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_MDI_GENERIC_CHILD))
+#define GNOME_IS_MDI_GENERIC_CHILD_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_MDI_GENERIC_CHILD))
+#define GNOME_MDI_GENERIC_CHILD_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_MDI_GENERIC_CHILD, GnomeMDIGenericChildClass))
 /* The source backward-compatibility macro GNOME_IS_MDI_MDI_CHILD(obj)
    is in gnome-compat.h.  */
 
@@ -59,7 +59,7 @@ struct _GnomeMDIGenericChild {
 
 	GtkCallbackMarshal create_view_cbm, create_menus_cbm,
 		               get_config_string_cbm, set_label_cbm;
-	GtkDestroyNotify   create_view_dn, create_menus_dn,
+	GDestroyNotify   create_view_dn, create_menus_dn,
 		               get_config_string_dn, set_label_dn;
 	gpointer           create_view_data, create_menus_data,
 		               get_config_string_data, set_label_data;
@@ -82,7 +82,7 @@ void gnome_mdi_generic_child_set_view_creator_full(GnomeMDIGenericChild *child,
 												   GnomeMDIChildViewCreator func,
 												   GtkCallbackMarshal marshal,
 												   gpointer data,
-												   GtkDestroyNotify notify);
+												   GDestroyNotify notify);
 void gnome_mdi_generic_child_set_menu_creator     (GnomeMDIGenericChild *child,
 												   GnomeMDIChildMenuCreator func,
                                                    gpointer data);
@@ -90,7 +90,7 @@ void gnome_mdi_generic_child_set_menu_creator_full(GnomeMDIGenericChild *child,
 												   GnomeMDIChildMenuCreator func,
 												   GtkCallbackMarshal marshal,
 												   gpointer data,
-												   GtkDestroyNotify notify);
+												   GDestroyNotify notify);
 void gnome_mdi_generic_child_set_config_func      (GnomeMDIGenericChild *child,
 												   GnomeMDIChildConfigFunc func,
                                                    gpointer data);
@@ -98,7 +98,7 @@ void gnome_mdi_generic_child_set_config_func_full (GnomeMDIGenericChild *child,
 												   GnomeMDIChildConfigFunc func,
 												   GtkCallbackMarshal marshal,
 												   gpointer data,
-												   GtkDestroyNotify notify);
+												   GDestroyNotify notify);
 void gnome_mdi_generic_child_set_label_func       (GnomeMDIGenericChild *child,
 												   GnomeMDIChildLabelFunc func,
                                                    gpointer data);
@@ -106,7 +106,7 @@ void gnome_mdi_generic_child_set_label_func_full  (GnomeMDIGenericChild *child,
 												   GnomeMDIChildLabelFunc func,
 												   GtkCallbackMarshal marshal,
 												   gpointer data,
-												   GtkDestroyNotify notify);
+												   GDestroyNotify notify);
 
 
 G_END_DECLS

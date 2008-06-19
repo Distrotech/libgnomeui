@@ -35,11 +35,11 @@
 G_BEGIN_DECLS
 
 #define GNOME_TYPE_CLIENT            (gnome_client_get_type ())
-#define GNOME_CLIENT(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_CLIENT, GnomeClient))
-#define GNOME_CLIENT_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CLIENT, GnomeClientClass))
-#define GNOME_IS_CLIENT(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_CLIENT))
-#define GNOME_IS_CLIENT_CLASS(klass) (GTK_CHECK_CLASS_TYPE (((klass), GNOME_TYPE_CLIENT))
-#define GNOME_CLIENT_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_CLIENT, GnomeClientClass))
+#define GNOME_CLIENT(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_CLIENT, GnomeClient))
+#define GNOME_CLIENT_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_CLIENT, GnomeClientClass))
+#define GNOME_IS_CLIENT(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_CLIENT))
+#define GNOME_IS_CLIENT_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE (((klass), GNOME_TYPE_CLIENT))
+#define GNOME_CLIENT_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_CLIENT, GnomeClientClass))
 
 #define GNOME_CLIENT_CONNECTED(obj) (GNOME_CLIENT (obj)->smc_conn)
 
@@ -456,7 +456,7 @@ void         gnome_client_request_interaction_interp (GnomeClient *client,
 						      GnomeDialogType dialog_type,
 						      GtkCallbackMarshal function,
 						      gpointer data,
-						      GtkDestroyNotify destroy);
+						      GDestroyNotify destroy);
 
 /* 'gnome_interaction_key_return' is used to tell gnome, that you are
    finished with interaction */

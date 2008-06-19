@@ -120,7 +120,7 @@ static const char *strftime_date_format = "%x";
 /**
  * gnome_date_edit_get_type:
  *
- * Returns the GtkType for the GnomeDateEdit widget
+ * Returns the GType for the GnomeDateEdit widget
  */
 /* The following macro defines the get_type */
 GNOME_CLASS_BOILERPLATE(GnomeDateEdit, gnome_date_edit,

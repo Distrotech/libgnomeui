@@ -44,11 +44,11 @@ G_BEGIN_DECLS
 
 
 #define GNOME_TYPE_FILE_ENTRY            (gnome_file_entry_get_type ())
-#define GNOME_FILE_ENTRY(obj)            (GTK_CHECK_CAST ((obj), GNOME_TYPE_FILE_ENTRY, GnomeFileEntry))
-#define GNOME_FILE_ENTRY_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), GNOME_TYPE_FILE_ENTRY, GnomeFileEntryClass))
-#define GNOME_IS_FILE_ENTRY(obj)         (GTK_CHECK_TYPE ((obj), GNOME_TYPE_FILE_ENTRY))
-#define GNOME_IS_FILE_ENTRY_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_FILE_ENTRY))
-#define GNOME_FILE_ENTRY_GET_CLASS(obj)  (GTK_CHECK_GET_CLASS ((obj), GNOME_TYPE_FILE_ENTRY, GnomeFileEntryClass))
+#define GNOME_FILE_ENTRY(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_TYPE_FILE_ENTRY, GnomeFileEntry))
+#define GNOME_FILE_ENTRY_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_TYPE_FILE_ENTRY, GnomeFileEntryClass))
+#define GNOME_IS_FILE_ENTRY(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_TYPE_FILE_ENTRY))
+#define GNOME_IS_FILE_ENTRY_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_TYPE_FILE_ENTRY))
+#define GNOME_FILE_ENTRY_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_TYPE_FILE_ENTRY, GnomeFileEntryClass))
 
 /* Note:  This supports GtkEditable interface */
 
