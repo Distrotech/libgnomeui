@@ -1,3 +1,12 @@
+libgnomeui 2.22.3
+
+* Stop leaking GIcons (#536393)
+* Improve bookmarks handling (#530978)
+* Initialize gettext properly (#534814)
+* Fix crash if path is NULL (#532962)
+* Fix a crash when the info doesn't have a display name set (#523699)
+* Translation updates
+
 libgnomeui 2.22.1
 
 * Cleanups (Kjartan)
