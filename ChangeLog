@@ -1,3 +1,8 @@
+2008-07-04 11:23:32  Tim Janik  <timj@imendio.com>
+
+	* doc/reference/tmpl/gnome-druid-page.sgml: Fixed typo, fixes:
+	Bug 541258 - Typo.
+
 2008-06-19  Christian Persch  <chpe@gnome.org>
 
 	* demos/test-recently-used.c: (add_to_menu):
