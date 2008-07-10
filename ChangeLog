@@ -1,3 +1,9 @@
+2008-07-10  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* libgnomeui/gnome-client.h: Add missing paren to the
+	GNOME_IS_CLIENT definition. Noted by <antalk at chello hu>
+	Closes bug #540614
+
 2008-07-04 11:23:32  Tim Janik  <timj@imendio.com>
 
 	* doc/reference/tmpl/gnome-druid-page.sgml: Fixed typo, fixes:
