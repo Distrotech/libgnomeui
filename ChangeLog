@@ -1,3 +1,10 @@
+2008-07-12  Felix Riemann  <friemann@svn.gnome.org>
+
+	* libgnomeui/gnome-thumbnail.c:
+	(gnome_thumbnail_factory_save_thumbnail),
+	(gnome_thumbnail_factory_create_failed_thumbnail):
+	Fix leaked GChecksums. Fixes bug #542592.
+
 2008-07-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* libgnomeui/gnome-client.h: Add missing paren to the

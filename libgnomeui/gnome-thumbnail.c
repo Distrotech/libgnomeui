@@ -841,6 +841,8 @@ gnome_thumbnail_factory_save_thumbnail (GnomeThumbnailFactory *factory,
 			   NULL);
   g_free (file);
 
+  g_checksum_free (checksum);
+
   tmp_path = g_strconcat (path, ".XXXXXX", NULL);
 
   tmp_fd = g_mkstemp (tmp_path);
@@ -946,6 +948,8 @@ gnome_thumbnail_factory_create_failed_thumbnail (GnomeThumbnailFactory *factory,
 			   file,
 			   NULL);
   g_free (file);
+
+  g_checksum_free (checksum);
 
   tmp_path = g_strconcat (path, ".XXXXXX", NULL);
 
