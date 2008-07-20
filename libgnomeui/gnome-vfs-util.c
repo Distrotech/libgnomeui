@@ -283,7 +283,6 @@ input_stream_ready_callback (GObject *source_object,
 			     GAsyncResult *res,
 			     gpointer user_data)
 {
-    GError *error = NULL;
     GnomeGdkPixbufAsyncHandle *handle = user_data;
 
     handle->file_input_stream = g_file_read_finish (G_FILE (source_object),

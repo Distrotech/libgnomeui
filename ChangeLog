@@ -1,3 +1,8 @@
+2008-07-20  Cosimo Cecchi  <cosimoc@gnome.org>
+
+	* libgnomeui/gnome-vfs-util.c: (input_stream_ready_callback):
+	Remove unused variable.
+
 2008-07-12  Felix Riemann  <friemann@svn.gnome.org>
 
 	* libgnomeui/gnome-thumbnail.c:
