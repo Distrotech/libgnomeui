@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-22 17:36-0200\n"
-"PO-Revision-Date: 2007-12-22 17:38-0200\n"
-"Last-Translator: Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>\n"
+"PO-Revision-Date: 2008-07-24 13:29-0300\n"
+"Last-Translator: Vladimir Melo <vladimirmelo.psi@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -360,7 +360,7 @@ msgstr "Sai_r"
 
 #: ../libgnomeui/gnome-app-helper.c:148
 msgid "Quit the application"
-msgstr "Sai da aplicação"
+msgstr "Sai do aplicativo"
 
 #.
 #. * The "Edit" menu
@@ -466,7 +466,7 @@ msgstr "_Preferências"
 
 #: ../libgnomeui/gnome-app-helper.c:213
 msgid "Configure the application"
-msgstr "Configura a aplicação"
+msgstr "Configura o aplicativo"
 
 #. 20
 #.
@@ -479,7 +479,7 @@ msgstr "_Sobre"
 
 #: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "Sobre esta aplicação"
+msgstr "Sobre este aplicativo"
 
 #: ../libgnomeui/gnome-app-helper.c:226
 msgid "Select _All"
@@ -582,7 +582,7 @@ msgstr "S_umário"
 
 #: ../libgnomeui/gnome-app-helper.c:1151
 msgid "View help for this application"
-msgstr "Mostra a ajuda para esta aplicação"
+msgstr "Mostra a ajuda para este aplicativo"
 
 #: ../libgnomeui/gnome-app-helper.c:2568
 msgid "Text Below Icons"
@@ -651,7 +651,7 @@ msgstr "ID da Aplicação"
 
 #: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
-msgstr "A expressão ID da aplicação"
+msgstr "A expressão ID do aplicativo"
 
 #: ../libgnomeui/gnome-appbar.c:743
 msgid "Has Progress"
@@ -1176,10 +1176,10 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"A aplicação \"%s\" tentou alterar um aspecto da sua configuração que o "
+"O aplicativo \"%s\" tentou alterar um aspecto da sua configuração que o "
 "administrador ou fabricante do sistema não permite que seja alterada. "
 "Algumas configurações que você selecionou podem não fazer efeito, ou "
-"perdidas na próxima vez que você usar esta aplicação."
+"perdidas na próxima vez que você usar este aplicativo."
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
@@ -1229,7 +1229,7 @@ msgid ""
 msgstr ""
 "Ocorreu um erro ao tentar lançar o navegador padrão da web.\n"
 "Favor verificar suas configurações na ferramenta de preferências "
-"\"Aplicações Preferenciais\"."
+"\"Aplicativos Preferenciais\"."
 
 #: ../libgnomeui/gnome-icon-entry.c:177
 msgid ""
@@ -1528,7 +1528,7 @@ msgstr "Sair do teste"
 #~ "to send the developers detailed information\n"
 #~ "about the error.\n"
 #~ msgstr ""
-#~ "<b>A aplicação %s travou.</b>\n"
+#~ "<b>O aplicativo %s travou.</b>\n"
 #~ "\n"
 #~ "Por favor, instale a <b>Ferramenta de Relatório de Erros</b>do GNOME, que "
 #~ "lhe permite enviar informações detalhadas sobre\n"
@@ -1585,12 +1585,12 @@ msgstr "Sair do teste"
 #~ msgstr ""
 #~ "O Gerenciador de Sessões GNOME (processo %d) travou\n"
 #~ "devido a um erro fatal (%s).\n"
-#~ "Ao fechar este diálogo, todas as aplicações terminarão e sua sessão será "
-#~ "encerrada.\n"
+#~ "Ao fechar este diálogo, todos os aplicativos terminarão e você sairá da "
+#~ "sessão.\n"
 #~ "Por favor salve todos seus arquivos antes de fechar este diálogo."
 
 #~ msgid "The Application \"%s\" has quit unexpectedly."
-#~ msgstr "O programa \"%s\" terminou inesperadamente."
+#~ msgstr "O aplicativo \"%s\" saiu inesperadamente."
 
 #~ msgid "process %d: %s"
 #~ msgstr "processo %d: %s"
@@ -1600,10 +1600,10 @@ msgstr "Sair do teste"
 #~ "you can restart the application right now."
 #~ msgstr ""
 #~ "Você pode informar aos desenvolvedores sobre o que aconteceu para ajudá-"
-#~ "los a corrigir isso. Ou você pode reiniciar o programa agora mesmo."
+#~ "los a corrigir isso. Ou você pode reiniciar o aplicativo agora mesmo."
 
 #~ msgid "_Restart Application"
-#~ msgstr "_Reiniciar a aplicação"
+#~ msgstr "_Reiniciar o aplicativo"
 
 #~ msgid "_Inform Developers"
 #~ msgstr "_Informar aos Desenvolvedores"
