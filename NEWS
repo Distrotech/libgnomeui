@@ -1,3 +1,10 @@
+libgnomeui 2.23.90
+
+* Fix gtk+ includes for the new order (Felix Riemann)
+* Use GType and friends instead of deprecated ones (Christian Persch)
+* Don't leak GChecksums in the thumbnailer (Felix Riemann)
+* Various cleanups (Tim Janik, Cosimo Cecchi)
+
 libgnomeui 2.23.4
 
 * Remove the filechooser backends (#538025)

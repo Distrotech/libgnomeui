@@ -1,3 +1,5 @@
+========================= 2.23.90 =========================
+
 2008-07-20  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* libgnomeui/gnome-vfs-util.c: (input_stream_ready_callback):
