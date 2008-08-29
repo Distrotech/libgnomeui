@@ -11,12 +11,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-15 17:59+0100\n"
-"PO-Revision-Date: 2008-03-02 16:11+0100\n"
+"POT-Creation-Date: 2008-06-14 13:37+0000\n"
+"PO-Revision-Date: 2008-08-29 10:30+0200\n"
 "Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type:  text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Germán Poo Caamaño <gpoo@ubiobio.cl>\n"
 "X-Generator: KBabel 1.11.4\n"
@@ -37,77 +37,6 @@ msgstr "Elemento hijo 2"
 #: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Consejo para el elemento 2"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1036
-#, c-format
-msgid "%s is a link to something that is not a folder"
-msgstr "%s es un enlace a algo que no es una carpeta"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1047
-#, c-format
-msgid "%s is a link without a destination location"
-msgstr "%s es un enlace sin un sitio de destino"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1122
-#, c-format
-msgid "%s is not a folder"
-msgstr "%s no es una carpeta"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1160
-#, c-format
-msgid "Could not monitor '%s': %s"
-msgstr "No se pudo monitorizar «%s»: %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1273
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1486
-#, c-format
-msgid "Could not get info for '%s': %s"
-msgstr "No se pudo obtener información para «%s»: %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1609
-#, c-format
-msgid "Could not create '%s': %s"
-msgstr "No se pudo crear «%s»: %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1975
-msgid "Network Servers"
-msgstr "Servidores de red"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1991
-msgid "File System"
-msgstr "Sistema de archivos"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2061
-#, c-format
-msgid "'%s': %s"
-msgstr "«%s»: %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2520
-#, c-format
-msgid "Bookmark saving failed (%s)"
-msgstr "Se ha producido un error al guardar el marcador (%s)"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2957
-#, c-format
-msgid "Error getting information for '%s'"
-msgstr "No se ha podido obtener información para «%s»"
-
-#: ../file-chooser/testfilechooser.c:181
-#, c-format
-msgid "Could not get information for file '%s': %s"
-msgstr "No se pudo obtener información para el archivo «%s»: %s"
-
-#: ../file-chooser/testfilechooser.c:194
-#, c-format
-msgid "Failed to open file '%s': %s"
-msgstr "Falló al abrir el archivo «%s»:%s"
-
-#: ../file-chooser/testfilechooser.c:233
-#, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
-"No se ha podido cargar la imagen «%s»: razón no conocida, probablemente un "
-"archivo de imagen corrupto"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
@@ -198,7 +127,8 @@ msgid "Translator credits"
 msgstr "Créditos del traductor"
 
 #: ../libgnomeui/gnome-about.c:431
-msgid "Credits to the translators. This string should be marked as translatable"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
 msgstr ""
 "Créditos para los traductores. Esta cadena debería estar marcada como "
 "traducible"
@@ -470,7 +400,7 @@ msgstr "Configura la aplicación"
 #. About
 #: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "_Acerca de"
+msgstr "Acerca _de"
 
 #: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
@@ -579,23 +509,23 @@ msgstr "_Índice"
 msgid "View help for this application"
 msgstr "Vea la ayuda para esta aplicación"
 
-#: ../libgnomeui/gnome-app-helper.c:2588
+#: ../libgnomeui/gnome-app-helper.c:2522
 msgid "Text Below Icons"
 msgstr "Texto bajo los iconos"
 
-#: ../libgnomeui/gnome-app-helper.c:2589
+#: ../libgnomeui/gnome-app-helper.c:2523
 msgid "Priority Text Beside Icons"
 msgstr "Texto prioritario al lado de los iconos"
 
-#: ../libgnomeui/gnome-app-helper.c:2590
+#: ../libgnomeui/gnome-app-helper.c:2524
 msgid "Icons Only"
 msgstr "Sólo los iconos"
 
-#: ../libgnomeui/gnome-app-helper.c:2591
+#: ../libgnomeui/gnome-app-helper.c:2525
 msgid "Text Only"
 msgstr "Sólo el texto"
 
-#: ../libgnomeui/gnome-app-helper.c:2652
+#: ../libgnomeui/gnome-app-helper.c:2586
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Usar lo preestablecido en el escritorio (%s)"
@@ -673,6 +603,7 @@ msgid "Level of user activity required."
 msgstr "Nivel requerido de actividad del usuario."
 
 #: ../libgnomeui/gnome-authentication-manager.c:82
+#, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Su proxy HTTP necesita que inicie sesión en él.\n"
 
@@ -709,39 +640,39 @@ msgstr "Debe iniciar sesión para acceder a %s en el dominio %s\n"
 msgid "You must log in to access %s\n"
 msgstr "Debe iniciar sesión para acceder a %s\n"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
 msgid "Specify session management ID"
 msgstr "Especificar un ID de gestión de sesión"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "Specify prefix of saved configuration"
 msgstr "Especificar un prefijo de la configuración guardada"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
+#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "PREFIX"
 msgstr "PREFIJO"
 
-#: ../libgnomeui/gnome-client.c:1008 ../libgnomeui/gnome-client.c:1042
+#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
 msgid "Disable connection to session manager"
 msgstr "Desactivar la conexión al administrador de sesiones"
 
-#: ../libgnomeui/gnome-client.c:1016
+#: ../libgnomeui/gnome-client.c:1013
 msgid "Session management:"
 msgstr "Gestión de sesiones:"
 
-#: ../libgnomeui/gnome-client.c:1017
+#: ../libgnomeui/gnome-client.c:1014
 msgid "Show session management options"
 msgstr "Mostrar opciones de gestión de sesión"
 
-#: ../libgnomeui/gnome-client.c:1048
+#: ../libgnomeui/gnome-client.c:1045
 msgid "Session management"
 msgstr "Gestión de sesiones"
 
-#: ../libgnomeui/gnome-client.c:2573
+#: ../libgnomeui/gnome-client.c:2579
 msgid "Cancel Logout"
 msgstr "Cancelar el cierre de sesión"
 
@@ -1115,7 +1046,7 @@ msgstr "Nombre de la tipografía"
 msgid "Name of the selected font"
 msgstr "Nombre de la tipografía seleccionada"
 
-#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
+#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:980
 msgid "Font"
 msgstr "Tipografía"
 
@@ -1137,7 +1068,8 @@ msgstr "Usar tipografía en la etiqueta"
 
 #: ../libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
-msgstr "Usar tipografías en las etiquetas en el modo de información de tipografía"
+msgstr ""
+"Usar tipografías en las etiquetas en el modo de información de tipografía"
 
 #: ../libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
@@ -1498,3 +1430,47 @@ msgstr "No se pudo abrir el enlace"
 msgid "Exit the test"
 msgstr "Salir del test"
 
+#~ msgid "%s is a link to something that is not a folder"
+#~ msgstr "%s es un enlace a algo que no es una carpeta"
+
+#~ msgid "%s is a link without a destination location"
+#~ msgstr "%s es un enlace sin un sitio de destino"
+
+#~ msgid "%s is not a folder"
+#~ msgstr "%s no es una carpeta"
+
+#~ msgid "Could not monitor '%s': %s"
+#~ msgstr "No se pudo monitorizar «%s»: %s"
+
+#~ msgid "Could not get info for '%s': %s"
+#~ msgstr "No se pudo obtener información para «%s»: %s"
+
+#~ msgid "Could not create '%s': %s"
+#~ msgstr "No se pudo crear «%s»: %s"
+
+#~ msgid "Network Servers"
+#~ msgstr "Servidores de red"
+
+#~ msgid "File System"
+#~ msgstr "Sistema de archivos"
+
+#~ msgid "'%s': %s"
+#~ msgstr "«%s»: %s"
+
+#~ msgid "Bookmark saving failed (%s)"
+#~ msgstr "Se ha producido un error al guardar el marcador (%s)"
+
+#~ msgid "Error getting information for '%s'"
+#~ msgstr "No se ha podido obtener información para «%s»"
+
+#~ msgid "Could not get information for file '%s': %s"
+#~ msgstr "No se pudo obtener información para el archivo «%s»: %s"
+
+#~ msgid "Failed to open file '%s': %s"
+#~ msgstr "Falló al abrir el archivo «%s»:%s"
+
+#~ msgid ""
+#~ "Failed to load image '%s': reason not known, probably a corrupt image file"
+#~ msgstr ""
+#~ "No se ha podido cargar la imagen «%s»: razón no conocida, probablemente un "
+#~ "archivo de imagen corrupto"
