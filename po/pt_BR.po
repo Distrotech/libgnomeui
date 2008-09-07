@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-02 17:30-0400\n"
-"PO-Revision-Date: 2008-09-02 19:47-0400\n"
+"PO-Revision-Date: 2008-09-07 19:17-0400\n"
 "Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -508,7 +508,7 @@ msgstr "Termina o jogo atual"
 
 #: ../libgnomeui/gnome-app-helper.c:1148
 msgid "_Contents"
-msgstr "_Índice"
+msgstr "S_umário"
 
 #: ../libgnomeui/gnome-app-helper.c:1151
 msgid "View help for this application"
@@ -589,7 +589,7 @@ msgstr "Tem progresso"
 
 #: ../libgnomeui/gnome-appbar.c:744
 msgid "Create a progress widget."
-msgstr "Criar um componente de progresso."
+msgstr "Criar um widget de progresso."
 
 #: ../libgnomeui/gnome-appbar.c:751
 msgid "Has Status"
@@ -597,7 +597,7 @@ msgstr "Tem status"
 
 #: ../libgnomeui/gnome-appbar.c:752
 msgid "Create a status widget."
-msgstr "Criar um componente de status."
+msgstr "Criar um widget de status."
 
 #: ../libgnomeui/gnome-appbar.c:759
 msgid "Interactivity"
@@ -924,8 +924,8 @@ msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr ""
-"A entrada de arquivo é usada para digitar nomes de diretórios ou "
-"nomes completos de arquivo."
+"Se a entrada de arquivo está sendo usada para digitar nomes de diretórios ou "
+"nomes de arquivos completos."
 
 #: ../libgnomeui/gnome-file-entry.c:257
 msgid "Modal"
@@ -933,7 +933,7 @@ msgstr "Modal"
 
 #: ../libgnomeui/gnome-file-entry.c:258
 msgid "Whether the Browse file window should be modal."
-msgstr "A janela de seleção de arquivos deve ser modal."
+msgstr "Se a janela de seleção de arquivo deve ser modal."
 
 #: ../libgnomeui/gnome-file-entry.c:265 ../libgnomeui/gnome-icon-entry.c:191
 msgid "Filename"
@@ -988,7 +988,7 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Usar o novo componente GtkFileChooser ao invés do antigo GtkFileSelection "
+"Usar o novo widget GtkFileChooser ao invés do antigo GtkFileSelection "
 "para selecionar arquivos."
 
 #: ../libgnomeui/gnome-file-entry.c:314
@@ -1236,7 +1236,7 @@ msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
-"Aqui você deve entrar o nome do diretório onde os ícones estão "
+"Aqui você deve digitar o nome do diretório onde os ícones estão "
 "localizados."
 
 #: ../libgnomeui/gnome-icon-sel.c:293
