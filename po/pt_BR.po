@@ -5,7 +5,7 @@
 # David Barzilay <barzilay@redhat.com>, 2003.
 # Raphael Higino <raphaelh@uai.com.br>, 2004, 2005.
 # Claudio André <claudio.andre@correios.net.br>, 2006.
-# Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>, 2006-2007.
+# Leonardo Ferreira Fontenelle <leonardof@gnome.org>, 2006-2007.
 # Washington Lins <washington-lins@uol.com.br>, 2007.
 # Og Maciel <ogmaciel@gnome.org>, 2008.
 #
@@ -128,7 +128,7 @@ msgstr ""
 "David Barzilay <barzilay@redhat.com>\n"
 "Raphael Higino <In memoriam>\n"
 "Claudio André <claudio.andre@correios.net.br>\n"
-"Leonardo Ferreira Fontenelle <leo.fontenelle@gmail.com>\n"
+"Leonardo Ferreira Fontenelle <leonardof@gnome.org>\n"
 "Washington Lins <washington-lins@uol.com.br>\n"
 "Og Maciel <ogmaciel@gnome.org>"
 
@@ -471,7 +471,7 @@ msgstr "_Desfazer jogada"
 
 #: ../libgnomeui/gnome-app-helper.c:265
 msgid "Undo the last move"
-msgstr "Desfaze a última jogada"
+msgstr "Desfaz a última jogada"
 
 #: ../libgnomeui/gnome-app-helper.c:269
 msgid "_Redo Move"
