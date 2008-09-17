@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-25 23:28+0000\n"
-"PO-Revision-Date: 2008-03-30 22:33+0200\n"
+"POT-Creation-Date: 2008-06-14 13:37+0000\n"
+"PO-Revision-Date: 2008-09-17 02:37+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng@gnome.hu>\n"
 "Language-Team: Hungarian <gnome@fsf.hu>\n"
 "MIME-Version: 1.0\n"
@@ -36,75 +36,6 @@ msgstr "2. gyermekelem"
 #: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Javaslat a 2. gyermekelemhez"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1036
-#, c-format
-msgid "%s is a link to something that is not a folder"
-msgstr "%s egy link valamire, ami nem mappa"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1047
-#, c-format
-msgid "%s is a link without a destination location"
-msgstr "%s egy link célhely nélkül"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1122
-#, c-format
-msgid "%s is not a folder"
-msgstr "%s nem mappa"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1160
-#, c-format
-msgid "Could not monitor '%s': %s"
-msgstr "A(z) „%s” nem figyelhető meg: %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1273
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1486
-#, c-format
-msgid "Could not get info for '%s': %s"
-msgstr "A(z) „%s” információi nem kérhetők le: %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1609
-#, c-format
-msgid "Could not create '%s': %s"
-msgstr "A(z) „%s” nem hozható létre: %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1979
-msgid "Network Servers"
-msgstr "Hálózati kiszolgálók"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1995
-msgid "File System"
-msgstr "Fájlrendszer"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2065
-#, c-format
-msgid "'%s': %s"
-msgstr "„%s”: %s"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2524
-#, c-format
-msgid "Bookmark saving failed (%s)"
-msgstr "Könyvjelző mentése sikertelen (%s)"
-
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2960
-#, c-format
-msgid "Error getting information for '%s'"
-msgstr "Nem lehet információt szerezni a következőről: „%s”"
-
-#: ../file-chooser/testfilechooser.c:181
-#, c-format
-msgid "Could not get information for file '%s': %s"
-msgstr "Nem lehet információt szerezni a(z) „%s” fájlról: %s"
-
-#: ../file-chooser/testfilechooser.c:194
-#, c-format
-msgid "Failed to open file '%s': %s"
-msgstr "A(z) „%s” fájl megnyitása sikertelen: %s"
-
-#: ../file-chooser/testfilechooser.c:233
-#, c-format
-msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr "A(z) „%s” kép betöltése sikertelen: az ok nem ismert, talán sérült a képfájl"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
@@ -283,7 +214,7 @@ msgstr "_Ablakok/"
 #. Open
 #: ../libgnomeui/gnome-app-helper.c:110
 msgid "_Open..."
-msgstr "_Megnyitás..."
+msgstr "_Megnyitás…"
 
 #: ../libgnomeui/gnome-app-helper.c:110
 msgid "Open a file"
@@ -301,7 +232,7 @@ msgstr "A jelenlegi fájl mentése"
 #. Save As
 #: ../libgnomeui/gnome-app-helper.c:120
 msgid "Save _As..."
-msgstr "Men_tés másként..."
+msgstr "Men_tés másként…"
 
 #: ../libgnomeui/gnome-app-helper.c:121
 msgid "Save the current file with a different name"
@@ -319,7 +250,7 @@ msgstr "Visszatérés a fájl egy korábban mentett változatához"
 #. Print
 #: ../libgnomeui/gnome-app-helper.c:132
 msgid "_Print..."
-msgstr "_Nyomtatás..."
+msgstr "_Nyomtatás…"
 
 #: ../libgnomeui/gnome-app-helper.c:132
 msgid "Print the current file"
@@ -328,7 +259,7 @@ msgstr "A jelenlegi fájl nyomtatása"
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:137
 msgid "Print S_etup..."
-msgstr "_Oldalbeállítás..."
+msgstr "_Oldalbeállítás…"
 
 #: ../libgnomeui/gnome-app-helper.c:138
 msgid "Setup the page settings for your current printer"
@@ -413,7 +344,7 @@ msgstr "A visszavont művelet ismételt végrehajtása"
 #. Find
 #: ../libgnomeui/gnome-app-helper.c:187
 msgid "_Find..."
-msgstr "_Keresés..."
+msgstr "_Keresés…"
 
 #: ../libgnomeui/gnome-app-helper.c:187
 msgid "Search for a string"
@@ -431,7 +362,7 @@ msgstr "A keresésben megadott karakterlánc következő előfordulása"
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:198
 msgid "R_eplace..."
-msgstr "_Csere..."
+msgstr "_Csere…"
 
 #: ../libgnomeui/gnome-app-helper.c:198
 msgid "Replace a string"
@@ -552,7 +483,7 @@ msgstr "Tipp a következő lépéshez"
 #. 30
 #: ../libgnomeui/gnome-app-helper.c:280
 msgid "_Scores..."
-msgstr "_Pontszámok..."
+msgstr "_Pontszámok…"
 
 #: ../libgnomeui/gnome-app-helper.c:281
 msgid "View the scores"
@@ -574,26 +505,26 @@ msgstr "_Tartalom"
 msgid "View help for this application"
 msgstr "Az alkalmazás súgójának megtekintése"
 
-#: ../libgnomeui/gnome-app-helper.c:2568
+#: ../libgnomeui/gnome-app-helper.c:2522
 msgid "Text Below Icons"
 msgstr "Szöveg az ikonok alatt"
 
-#: ../libgnomeui/gnome-app-helper.c:2569
+#: ../libgnomeui/gnome-app-helper.c:2523
 msgid "Priority Text Beside Icons"
 msgstr "Lényeges szöveg az ikonok mellett"
 
-#: ../libgnomeui/gnome-app-helper.c:2570
+#: ../libgnomeui/gnome-app-helper.c:2524
 msgid "Icons Only"
 msgstr "Csak ikonok"
 
-#: ../libgnomeui/gnome-app-helper.c:2571
+#: ../libgnomeui/gnome-app-helper.c:2525
 msgid "Text Only"
 msgstr "Csak szöveg"
 
-#: ../libgnomeui/gnome-app-helper.c:2632
+#: ../libgnomeui/gnome-app-helper.c:2586
 #, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Munkaasztal alapértelmezésének használata (%s)"
+msgstr "Asztali környezet alapértelmezésének használata (%s)"
 
 #: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
@@ -1073,7 +1004,7 @@ msgstr "Útvonal a fájlhoz"
 
 #: ../libgnomeui/gnome-file-entry.c:849
 msgid "_Browse..."
-msgstr "_Tallózás..."
+msgstr "_Tallózás…"
 
 #: ../libgnomeui/gnome-file-entry.c:850
 msgid "Pop up a file selector to choose a file"
@@ -1111,7 +1042,7 @@ msgstr "Betűkészlet neve"
 msgid "Name of the selected font"
 msgstr "A kiválasztott betűkészlet neve"
 
-#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
+#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:980
 msgid "Font"
 msgstr "Betűkészlet"
 
@@ -1307,7 +1238,7 @@ msgstr "GnomeIconSelection: „%s” könyvtár megnyitása sikertelen"
 
 #: ../libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
-msgstr "Ikonok betöltése..."
+msgstr "Ikonok betöltése…"
 
 #: ../libgnomeui/gnome-messagebox.c:107
 msgid "Information"
