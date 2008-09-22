@@ -1,3 +1,8 @@
+libgnomeui 2.24.0
+
+* Updated translations
+  (af, ar, es, hu, it, kn, mai, or, pt, pt_BR, ro, sr, ta, te)
+
 libgnomeui 2.23.90
 
 * Fix gtk+ includes for the new order (Felix Riemann)

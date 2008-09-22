@@ -1,3 +1,10 @@
+========================= 2.24.0 ==========================
+
+2008-09-22  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* NEWS: Update
+	* configure.in: 2.24.0
+
 ========================= 2.23.90 =========================
 
 2008-07-20  Cosimo Cecchi  <cosimoc@gnome.org>
