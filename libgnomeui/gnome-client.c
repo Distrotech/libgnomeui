@@ -740,6 +740,7 @@ client_save_yourself_callback (SmcConn   smc_conn,
     {
       unlink (name);
       close (fd);
+      g_free (client->config_prefix);
       client->config_prefix = g_strconcat (name+strlen(name) - len, "/", NULL);
 
       if (client == master_client)
