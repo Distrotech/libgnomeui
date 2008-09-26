@@ -351,6 +351,12 @@ update_icon (GnomeIconEntry *ientry)
 		}
 	}
 	g_object_unref (scaled);
+#if 0
+	gtk_drag_source_set (ientry->_priv->pickbutton,
+			     GDK_BUTTON1_MASK|GDK_BUTTON3_MASK,
+			     drop_types, G_N_ELEMENTS (drop_types),
+			     GDK_ACTION_COPY);
+#endif
 }
 
 static void
@@ -390,6 +396,65 @@ entry_activated(GtkWidget *widget, GnomeIconEntry *ientry)
 		gtk_widget_hide (ientry->_priv->pick_dialog);
 	}
 }
+
+#if 0
+static void
+setup_preview(GtkWidget *widget)
+{
+	char *p;
+	GList *l;
+	GtkWidget *pp = NULL;
+        GdkPixbuf *pixbuf, *scaled;
+	int w,h;
+	GtkWidget *frame;
+	GtkFileChooser *fc;
+
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (GTK_IS_WIDGET (widget));
+
+	fc = GTK_FILE_CHOOSER (widget);
+	frame = gtk_file_chooser_get_preview_widget (fc);
+	
+	if((l = gtk_container_get_children(GTK_CONTAINER(frame))) != NULL) {
+		pp = l->data;
+		g_list_free(l);
+	}
+
+	if(pp)
+		gtk_widget_destroy(pp);
+
+	p = gtk_file_chooser_get_filename(fc);
+	if(!p || !g_file_test (p,G_FILE_TEST_IS_SYMLINK | G_FILE_TEST_IS_REGULAR) ||
+	   !(pixbuf = gdk_pixbuf_new_from_file (p, NULL))) {
+		g_free (p);
+		return;
+	}
+
+	g_free (p);
+
+	w = gdk_pixbuf_get_width(pixbuf);
+	h = gdk_pixbuf_get_height(pixbuf);
+	if(w>h) {
+		if(w>100) {
+			h = h*(100.0/w);
+			w = 100;
+		}
+	} else {
+		if(h>100) {
+			w = w*(100.0/h);
+			h = 100;
+		}
+	}
+
+	scaled = gdk_pixbuf_scale_simple (pixbuf, w, h, GDK_INTERP_BILINEAR);
+        g_object_unref (pixbuf);
+	pp = gtk_image_new_from_pixbuf (scaled);
+        g_object_unref (scaled);
+
+	gtk_widget_show(pp);
+	gtk_container_add(GTK_CONTAINER(frame),pp);
+}
+#endif
 
 static void
 ientry_destroy (GtkObject *object)
@@ -453,6 +518,11 @@ static void
 browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 {
 	GtkFileChooser *fc;
+#if 0
+	GtkWidget *w;
+	GClosure *closure;
+	gchar *path;
+#endif
 
 	g_return_if_fail (fentry != NULL);
 	g_return_if_fail (GNOME_IS_FILE_ENTRY (fentry));
@@ -465,6 +535,25 @@ browse_clicked(GnomeFileEntry *fentry, GnomeIconEntry *ientry)
 	fc = GTK_FILE_CHOOSER (fentry->fsw);
 
 	g_return_if_fail (gtk_file_chooser_get_preview_widget (fc) == NULL);
+
+#if 0
+	w = gtk_frame_new("");
+	gtk_frame_set_shadow_type (GTK_FRAME (w), GTK_SHADOW_NONE);
+
+	gtk_file_chooser_set_preview_widget (fc, w);
+	gtk_widget_set_size_request (w, 110, 110);
+
+	closure = g_cclosure_new (G_CALLBACK (setup_preview), NULL, NULL);
+	g_object_watch_closure (G_OBJECT (fc), closure);
+	g_signal_connect_closure (fc, "update-preview",
+				  closure, FALSE);
+
+	/* the path can be already set */
+	if ((path = gtk_file_chooser_get_filename (fc)) != NULL)
+		setup_preview (GTK_WIDGET(fc));
+
+	g_free (path);
+#endif
 }
 
 static void

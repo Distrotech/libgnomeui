@@ -185,6 +185,20 @@ menushell_build_children (GladeXML *xml, GtkWidget *w,
 	gtk_menu_item_remove_submenu(GTK_MENU_ITEM(child));
 	glade_xml_set_common_params(xml, child, cwinfo);
     }
+
+#if 0
+    if (uline)
+	glade_xml_pop_uline_accel(xml);
+#endif
+#if 0
+    if (strcmp(info->classname, "GtkMenuBar") != 0 &&
+	gnome_preferences_get_menus_have_tearoff()) {
+	GtkWidget *tearoff = gtk_tearoff_menu_item_new();
+	
+	gtk_menu_prepend(GTK_MENU(w), tearoff);
+	gtk_widget_show(tearoff);
+    }
+#endif
 }
 
 static void
@@ -335,6 +349,17 @@ app_build_children (GladeXML *xml, GtkWidget *parent,
 	} else {
 	    child = glade_xml_build_widget (xml, cinfo->child);
 
+#if 0
+	    g_object_ref (G_OBJECT (child));
+	    gtk_widget_freeze_child_notify (child);
+	    for (j = 0; j < info->children[i].n_properties; j++)
+		glade_xml_set_packing_property (
+			xml, GNOME_APP (parent)->vbox, child,
+			cinfo->properties[j].name,
+			cinfo->properties[j].value);
+	    gtk_widget_thaw_child_notify(child);
+	    g_object_unref(G_OBJECT(child));
+#endif
 	}
     }
 }
@@ -635,6 +660,10 @@ app_find_internal_child (GladeXML *xml, GtkWidget *parent,
 {
     if (!strcmp (childname, "dock"))
 	return GNOME_APP (parent)->dock;
+#if 0
+    else if (!strcmp (childname, "appbar"))
+	return GNOME_APP (parent)->statusbar;
+#endif
 
     return NULL;
 }

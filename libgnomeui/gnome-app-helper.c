@@ -766,8 +766,40 @@ gnome_app_ui_configure_configurable (GnomeUIInfo* uiinfo)
 	gint ac_mods;
 
 	if ( type != GNOME_APP_CONFIGURABLE_ITEM_NEW ) {
+#if 0
+	        gboolean label_def;
+		gchar *label_string;
+		gchar *label;
+	        gboolean hint_def;
+		gchar *hint_string;
+		gchar *hint;
+
+		label_string = g_strdup_sprintf( "/Gnome/Menus/Menu-%s-label", menu_names[(int) type] );
+		label = gnome_config_get_string_with_default( label_string, &label_def);
+		if ( label_def )
+		  uiinfo->label = label;
+		else
+		  {
+#endif
 		    uiinfo->label = menu_defaults[(int) type].label;
+#if 0
+		    g_free( label );
+		  }
+		g_free( label_string );
+
+		hint_string = g_strdup_sprintf( "/Gnome/Menus/Menu-%s-hint", menu_names[(int) type] );
+		hint = gnome_config_get_string_with_default( hint_string, &hint_def);
+		if ( hint_def )
+		  uiinfo->hint = hint;
+		else
+		  {
+#endif
 		    uiinfo->hint = menu_defaults[(int) type].hint;
+#if 0
+		    g_free( hint );
+		  }
+		g_free( hint_string );
+#endif
 	}
 	uiinfo->pixmap_type = menu_defaults[(int) type].pixmap_type;
 	uiinfo->pixmap_info = menu_defaults[(int) type].pixmap_info;

@@ -740,7 +740,6 @@ client_save_yourself_callback (SmcConn   smc_conn,
     {
       unlink (name);
       close (fd);
-      g_free (client->config_prefix);
       client->config_prefix = g_strconcat (name+strlen(name) - len, "/", NULL);
 
       if (client == master_client)
@@ -854,6 +853,20 @@ client_interact_callback (SmcConn smc_conn, SmPointer client_data)
 
 /*****************************************************************************/
 /* Managing the master client */
+
+#if 0
+/* The following environment variables will be set on the master
+   client, if they are defined the programs environment.  The array
+   must end with a NULL entry.
+   For now we have no entries.  You might think that saving DISPLAY,
+   or HOME, or something like that would be right.  It isn't.  We
+   definitely want to inherit these values from the user's (possibly
+   changing) environment.  */
+static char* master_environment[]=
+{
+  NULL
+};
+#endif
 
 /********* gnome_client module */
 
@@ -1116,6 +1129,9 @@ gnome_client_goption_sm_config_prefix (const gchar *option_name,
 static void
 gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 {
+#if 0
+  int i;
+#endif
   char *cwd;
 
   /* Make sure the Gtk+ type system is initialized.  */
@@ -1132,6 +1148,19 @@ gnome_client_pre_args_parse(GnomeProgram *app, GnomeModuleInfo *mod_info)
 
   /* Initialise ICE */
   gnome_ice_init ();
+
+#if 0
+  /* Set the master client's environment.  */
+  for (i= 0; master_environment[i]; i++)
+    {
+      const char *value= g_getenv (master_environment[i]);
+
+      if (value)
+	gnome_client_set_environment (master_client,
+				      master_environment[i],
+				      value);
+    }
+#endif
 
   cwd = g_get_current_dir();
   if (cwd != NULL)

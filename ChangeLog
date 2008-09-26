@@ -1,7 +1,24 @@
 2008-09-26  Kjartan Maraas  <kmaraas@gnome.org>
 
-	* gnome-client.c: (client_save_yourself_callback):
-	Fix a small leak. (Matthias Clasen) Closes bug #552930.
+	reviewed by: <delete if not using a buddy>
+
+	* AUTHORS:
+	* glade/glade-gnome.c: (menushell_build_children),
+	(app_build_children), (app_find_internal_child):
+	* libgnomeui/gnome-app-helper.c:
+	(gnome_app_ui_configure_configurable):
+	* libgnomeui/gnome-client.c: (gnome_client_pre_args_parse):
+	* libgnomeui/gnome-dateedit.c: (select_clicked), (fill_time_popup),
+	(gnome_date_edit_get_time):
+	* libgnomeui/gnome-druid.c: (gnome_druid_size_request),
+	(gnome_druid_size_allocate), (gnome_druid_map),
+	(gnome_druid_unmap), (gnome_druid_forall), (gnome_druid_expose):
+	* libgnomeui/gnome-icon-entry.c: (update_icon), (setup_preview),
+	(browse_clicked):
+	* libgnomeui/gnome-icon-item.c: (gnome_icon_text_item_draw):
+	* libgnomeui/gnome-icon-list.c: (selection_many_icon_event), (if):
+	* libgnomeui/gnome-mdi-session.c: (restore_window):
+	* test-gnome/testgnome.c:
 
 ========================= 2.24.0 ==========================
 
