@@ -1,5 +1,10 @@
 2008-09-26  Kjartan Maraas  <kmaraas@gnome.org>
 
+	* libgnomeui/gnome-thumbnail.c: (mimetype_supported_by_gdk_pixbuf):
+	Fix another leak. (Matthias Clasen), closes bug #553276.
+
+2008-09-26  Kjartan Maraas  <kmaraas@gnome.org>
+
 	* libgnomeui/gnome-client.c: (client_save_yourself_callback):
 	Fix a small leak. (Matthias Clasen), closes bug #552930.
 

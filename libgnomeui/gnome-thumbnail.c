@@ -442,7 +442,7 @@ mimetype_supported_by_gdk_pixbuf (const char *mime_type)
 	if (!formats_hash) {
 		GSList *formats, *list;
 		
-		formats_hash = g_hash_table_new (g_str_hash, g_str_equal);
+		formats_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
 		formats = gdk_pixbuf_get_formats ();
 		list = formats;
