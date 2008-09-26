@@ -1,7 +1,7 @@
 /* testGNOME - program similar to testgtk which shows gnome lib functions.
  *
  * Authors : Richard Hestilow <hestgray@ionet.net> (GNOME 1.x version)
- * 	     Carlos Perell�Mar� <carlos@gnome-db.org> (Ported to GNOME 2.0)
+ * 	     Carlos Perelló Marín <carlos@gnome-db.org> (Ported to GNOME 2.0)
  *
  * Copyright (C) 1998-2001 Free Software Foundation
  *

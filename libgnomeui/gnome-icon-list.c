@@ -823,13 +823,6 @@ selection_many_icon_event (Gil *gil, Icon *icon, int idx, int on_text, GdkEvent 
 			emit_select (gil, TRUE, idx, event);
 			do_select = FALSE;
 		}
-#if 0
-		} else if (icon->selected && on_text && priv->is_editable
-			   && event->button.button == 1) {
-			priv->edit_pending = TRUE;
-			do_select = FALSE;
-		}
-#endif
 
 		if (do_select)
 			do_select_many (gil, icon, idx, event, TRUE);
@@ -917,76 +910,6 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 	}
 }
 
-#if 0
-/* Handler for the editing_started signal of an icon text item.  We block the
- * event handler so that it will not be called while the text is being edited.
- */
-static void G_GNUC_UNUSED
-editing_started (GnomeIconTextItem *iti, gpointer data)
-{
-	Icon *icon;
-
-	icon = data;
-	g_signal_handler_block (iti, icon->text_event_id);
-	gil_unselect_all (GIL (GNOME_CANVAS_ITEM (iti)->canvas), NULL, icon);
-}
-
-/* Handler for the editing_stopped signal of an icon text item.  We unblock the
- * event handler so that we can get events from it again.
- */
-static void G_GNUC_UNUSED
-editing_stopped (GnomeIconTextItem *iti, gpointer data)
-{
-	Icon *icon;
-
-	icon = data;
-	g_signal_handler_unblock (iti, icon->text_event_id);
-}
-
-static gboolean G_GNUC_UNUSED
-text_changed (GnomeCanvasItem *item, Icon *icon)
-{
-	Gil *gil;
-	gboolean accept;
-	gchar *text = NULL;
-	int idx;
-
-	gil = GIL (item->canvas);
-	accept = TRUE;
-
-	idx = gil_icon_to_index (gil, icon);
-	g_object_get (G_OBJECT (icon->text), "text", &text, NULL);
-	g_signal_emit (gil, gil_signals[TEXT_CHANGED], 0,
-		       idx, text,
-		       &accept);
-
-	return accept;
-}
-
-static void G_GNUC_UNUSED
-height_changed (GnomeCanvasItem *item, Icon *icon)
-{
-	Gil *gil;
-	GnomeIconListPrivate *priv;
-	int n;
-
-	gil = GIL (item->canvas);
-	priv = gil->_priv;
-
-	if (!GTK_WIDGET_REALIZED (gil))
-		return;
-
-	if (priv->frozen) {
-		priv->dirty = TRUE;
-		return;
-	}
-
-	n = gil_icon_to_index (gil, icon);
-	gil_layout_from_line (gil, n / gil_get_items_per_line (gil));
-	gil_scrollbar_adjust (gil);
-}
-#endif
-
 static Icon *
 icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 		      const char *icon_filename, const char *text)
@@ -1034,23 +957,6 @@ icon_new_from_pixbuf (GnomeIconList *gil, GdkPixbuf *im,
 	icon->text_event_id = g_signal_connect (G_OBJECT (icon->text), "event",
 						G_CALLBACK (icon_event),
 						icon);
-
-#if 0
-	g_signal_connect (G_OBJECT (icon->text), "editing_started",
-			  G_CALLBACK (editing_started),
-			  icon);
-	g_signal_connect (G_OBJECT (icon->text), "editing_stopped",
-			  G_CALLBACK (editing_stopped),
-			  icon);
-
-	g_signal_connect (G_OBJECT (icon->text), "text_changed",
-			  G_CALLBACK (text_changed),
-			  icon);
-	g_signal_connect (G_OBJECT (icon->text), "height_changed",
-			  G_CALLBACK (height_changed),
-			  icon);
-#endif
-
 	return icon;
 }
 

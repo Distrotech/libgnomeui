@@ -305,29 +305,7 @@ select_clicked (GtkWidget *widget, GnomeDateEdit *gde)
 
 	g_date_free (date);
 
-	/* FIXME: the preceeding needs further checking to see if it's correct,
-	 * the following is so utterly wrong that it doesn't even deserve to be
-	 * just commented out, but I didn't want to cut it right now */
-#if 0
-	struct tm mtm = {0};
-        /* This code is pretty much just copied from gtk_date_edit_get_date */
-      	sscanf (gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry)), "%d/%d/%d",
-		&mtm.tm_mon, &mtm.tm_mday, &mtm.tm_year);
-
-	mtm.tm_mon = CLAMP (mtm.tm_mon, 1, 12);
-	mtm.tm_mday = CLAMP (mtm.tm_mday, 1, 31);
-
-        mtm.tm_mon--;
-
-	/* Hope the user does not actually mean years early in the A.D. days...
-	 * This date widget will obviously not work for a history program :-)
-	 */
-	if (mtm.tm_year >= 1900)
-		mtm.tm_year -= 1900;
-
-	gtk_calendar_select_month (GTK_CALENDAR (gde->_priv->calendar), mtm.tm_mon, 1900 + mtm.tm_year);
-        gtk_calendar_select_day (GTK_CALENDAR (gde->_priv->calendar), mtm.tm_mday);
-#endif
+	/* FIXME: the preceeding needs further checking to see if it's correct */
 
         position_popup (gde);
 
@@ -404,16 +382,6 @@ fill_time_popup (GtkWidget *widget, GnomeDateEdit *gde)
 		item = gtk_menu_item_new_with_label (str_utf8 ? str_utf8 : "");
 		g_free (str_utf8);
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-#if 0
-		hit = g_new (hour_info_t, 1);
-		hit->hour = g_strdup (buffer);
-		hit->gde  = gde;
-		g_signal_connect_data (item, "activate",
-				       G_CALLBACK (set_time),
-				       hit,
-				       (GCallbackNotify) free_resources,
-				       0);
-#endif
 		gtk_widget_show (item);
 
 		submenu = gtk_menu_new ();
@@ -939,25 +907,7 @@ gnome_date_edit_get_time (GnomeDateEdit *gde)
 
 	g_date_free (date);
 
-	/* FIXME: the preceeding needs further checking to see if it's correct,
-	 * the following is so utterly wrong that it doesn't even deserve to be
-	 * just commented out, but I didn't want to cut it right now */
-#if 0
-	sscanf (gtk_entry_get_text (GTK_ENTRY (gde->_priv->date_entry)), "%d/%d/%d",
-		&tm.tm_mon, &tm.tm_mday, &tm.tm_year);
-
-	tm.tm_mon = CLAMP (tm.tm_mon, 1, 12);
-	tm.tm_mday = CLAMP (tm.tm_mday, 1, 31);
-
-	tm.tm_mon--;
-
-	/* Hope the user does not actually mean years early in the A.D. days...
-	 * This date widget will obviously not work for a history program :-)
-	 */
-	if (tm.tm_year >= 1900)
-		tm.tm_year -= 1900;
-
-#endif
+	/* FIXME: the preceeding needs further checking to see if it's correct */
 
 	if (gde->_priv->flags & GNOME_DATE_EDIT_SHOW_TIME) {
 		char *tokp, *temp;

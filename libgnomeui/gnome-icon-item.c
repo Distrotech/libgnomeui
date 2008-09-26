@@ -593,12 +593,6 @@ gnome_icon_text_item_draw (GnomeCanvasItem *item, GdkDrawable *drawable,
 				 iti->selected ? GTK_STATE_SELECTED: GTK_STATE_NORMAL,
 				 &r, widget, NULL,
 				 xofs, yofs, w - 1, h - 1);
-#if 0
-		gtk_draw_focus (style,
-				drawable,
-				xofs, yofs,
-				w - 1, h - 1);
-#endif
 	}
 
 	if (iti->editing) {

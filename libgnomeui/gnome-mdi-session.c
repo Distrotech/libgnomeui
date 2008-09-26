@@ -179,23 +179,6 @@ restore_window (GnomeMDI *mdi, const gchar *section, GPtrArray *child_list,
 	g_snprintf (key, sizeof(key), "%s/mdi_window_layout_%lx", section, window);
 	string = gnome_config_get_string (key);
 	if (!string) return;
-
-#if 0
-	{
-		GnomeApp *app = mdi->active_window;
-		BonoboDockLayout *layout;
-
-		printf("app->layout == %08lx\n", app->layout);
-
-		/* this should be a nasty hack before dock-layout gets a bit better
-		   don't even know if it works, though ;) */
-		layout = bonobo_dock_get_layout(BONOBO_DOCK(app->dock));
-		bonobo_dock_layout_parse_string(mdi->active_window->layout, string);
-		gtk_container_forall(GTK_CONTAINER(app->dock), remove_items, app->dock);
-		bonobo_dock_add_from_layout(BONOBO_DOCK(app->dock), layout);
-		g_object_unref (G_OBJECT(layout));
-	}
-#endif
 }
 
 static void
