@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-02 17:30-0400\n"
+"POT-Creation-Date: 2008-10-04 10:11-0400\n"
 "PO-Revision-Date: 2008-09-07 19:17-0400\n"
 "Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr "Item Filho 1"
+msgstr "Item filho 1"
 
 #: ../demos/mdi_demo.c:129
 msgid "Hint for item 1"
@@ -31,7 +31,7 @@ msgstr "Dica para item 1"
 
 #: ../demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr "Item Filho 2"
+msgstr "Item filho 2"
 
 #: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
@@ -496,7 +496,7 @@ msgstr "P_ontuações..."
 
 #: ../libgnomeui/gnome-app-helper.c:281
 msgid "View the scores"
-msgstr "Mostra as pontuações"
+msgstr "Vê as pontuações"
 
 #: ../libgnomeui/gnome-app-helper.c:285
 msgid "_End Game"
@@ -645,39 +645,39 @@ msgstr "Você deve iniciar uma sessão para acessar %s domínio %s\n"
 msgid "You must log in to access %s\n"
 msgstr "Você deve iniciar uma sessão para acessar %s\n"
 
-#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "Specify session management ID"
 msgstr "Especifica a ID do gerenciador de sessão"
 
-#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "Specify prefix of saved configuration"
 msgstr "Especifica o prefixo da configuração salva"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "PREFIX"
 msgstr "PREFIXO"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
+#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
 msgstr "Desabilita conexão ao gerenciador de sessão"
 
-#: ../libgnomeui/gnome-client.c:1013
+#: ../libgnomeui/gnome-client.c:1014
 msgid "Session management:"
 msgstr "Gerenciamento de sessão:"
 
-#: ../libgnomeui/gnome-client.c:1014
+#: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
 msgstr "Mostra opções de gerenciamento de sessão"
 
-#: ../libgnomeui/gnome-client.c:1045
+#: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
 msgstr "Gerenciamento de sessão"
 
-#: ../libgnomeui/gnome-client.c:2579
+#: ../libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
 msgstr "Cancelar término da sessão"
 
@@ -962,8 +962,8 @@ msgid ""
 "its parameters."
 msgstr ""
 "GnomeEntry que a entrada de arquivos usa para inserir nomes de arquivos. "
-"Você pode usar esta propriedade para obter o GnomeEntry se você "
-"precisa modificar ou verificar qualquer um dos seus parâmetros."
+"Você pode usar esta propriedade para obter o GnomeEntry se você precisa "
+"modificar ou verificar qualquer um dos seus parâmetros."
 
 #: ../libgnomeui/gnome-file-entry.c:293
 msgid "GtkEntry"
@@ -976,8 +976,8 @@ msgid ""
 "parameters."
 msgstr ""
 "GtkEntry usada pela entrada de arquivos para inserir nomes de arquivos. Você "
-"pode usar esta propriedade para obter o GnomeEntry se você precisa modificar ou "
-"verificar qualquer um dos seus parâmetros."
+"pode usar esta propriedade para obter o GnomeEntry se você precisa modificar "
+"ou verificar qualquer um dos seus parâmetros."
 
 #: ../libgnomeui/gnome-file-entry.c:304
 msgid "Use GtkFileChooser"
@@ -988,8 +988,8 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"Usar o novo widget GtkFileChooser ao invés do antigo GtkFileSelection "
-"para selecionar arquivos."
+"Usar o novo widget GtkFileChooser ao invés do antigo GtkFileSelection para "
+"selecionar arquivos."
 
 #: ../libgnomeui/gnome-file-entry.c:314
 msgid "GtkFileChooser Action"
@@ -1109,8 +1109,8 @@ msgid ""
 msgstr ""
 "O aplicativo \"%s\" tentou alterar um aspecto da sua configuração que o "
 "administrador ou fabricante do sistema não permite que seja alterado. "
-"Algumas configurações que você selecionou podem não fazer efeito, ou "
-"serem restauradas na próxima vez que você usar este aplicativo."
+"Algumas configurações que você selecionou podem não fazer efeito, ou serem "
+"restauradas na próxima vez que você usar este aplicativo."
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
@@ -1118,8 +1118,8 @@ msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
 msgstr ""
-"Ocorreu um erro ao carregar ou salvar as configurações para %s. Algumas de suas "
-"configurações podem não funcionar corretamente."
+"Ocorreu um erro ao carregar ou salvar as configurações para %s. Algumas de "
+"suas configurações podem não funcionar corretamente."
 
 #: ../libgnomeui/gnome-href.c:102
 msgid "URL"
@@ -1167,8 +1167,8 @@ msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
 msgstr ""
-"Identificador único para a entrada de ícone. Isto será usado para salvar a lista "
-"do histórico."
+"Identificador único para a entrada de ícone. Isto será usado para salvar a "
+"lista do histórico."
 
 #: ../libgnomeui/gnome-icon-entry.c:176
 msgid "Title for the Browse icon dialog."
@@ -1236,8 +1236,7 @@ msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
-"Aqui você deve digitar o nome do diretório onde os ícones estão "
-"localizados."
+"Aqui você deve digitar o nome do diretório onde os ícones estão localizados."
 
 #: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1344,8 +1343,8 @@ msgstr "Uma visualização da imagem especificada"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:405
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Não é possível encontrar uma hbox, usando uma seleção "
-"normal de arquivos"
+msgstr ""
+"Não é possível encontrar uma hbox, usando uma seleção normal de arquivos"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:411
 msgid "Preview"
