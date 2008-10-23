@@ -1,0 +1,1425 @@
+# translation of libgnomeui-2.0.po to Asturian
+# Asturian translation for libgnomeui
+# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
+# This file is distributed under the same license as the libgnomeui package.
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
+# Xose S. Puente <xspuente@gmail.com>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui-2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-10-23 15:42+0200\n"
+"PO-Revision-Date: 2008-09-17 01:06+0000\n"
+"Last-Translator: Esbardu <esguil@terra.es>\n"
+"Language-Team: Asturian <xspuente@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2008-10-22 08:48+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: ../demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "Elementu fíu 1"
+
+#: ../demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "Conseyu pa elementu 1"
+
+#: ../demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "Elementu fíu 2"
+
+#: ../demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "Conseyu pal elementu 2"
+
+#: ../libgnomeui/gnome-about.c:187
+msgid "Credits"
+msgstr "Creitos"
+
+#: ../libgnomeui/gnome-about.c:219
+msgid "Written by"
+msgstr "Escritu por"
+
+#: ../libgnomeui/gnome-about.c:234
+msgid "Documented by"
+msgstr "Documentao por"
+
+#: ../libgnomeui/gnome-about.c:249
+msgid "Translated by"
+msgstr "Tornao por"
+
+#: ../libgnomeui/gnome-about.c:312
+msgid "C_redits"
+msgstr "C_reitos"
+
+#: ../libgnomeui/gnome-about.c:365
+msgid "Program name"
+msgstr "Nome del programa"
+
+#: ../libgnomeui/gnome-about.c:366
+msgid "The name of the program"
+msgstr "El nome del programa"
+
+#: ../libgnomeui/gnome-about.c:373
+msgid "Program version"
+msgstr "Versión del programa"
+
+#: ../libgnomeui/gnome-about.c:374
+msgid "The version of the program"
+msgstr "La versión del programa"
+
+#: ../libgnomeui/gnome-about.c:380
+msgid "Copyright string"
+msgstr "Llinia de drechos de copia"
+
+#: ../libgnomeui/gnome-about.c:381
+msgid "Copyright information for the program"
+msgstr "Información de drechos de copia del programa"
+
+#: ../libgnomeui/gnome-about.c:388
+msgid "Comments string"
+msgstr "Cadena comentada"
+
+#: ../libgnomeui/gnome-about.c:389
+msgid "Comments about the program"
+msgstr "Comentarios al rodiu del programa"
+
+#: ../libgnomeui/gnome-about.c:395
+msgid "Authors"
+msgstr "Autor"
+
+#: ../libgnomeui/gnome-about.c:396
+msgid "List of authors of the programs"
+msgstr "Llista d'autores de los programes"
+
+#: ../libgnomeui/gnome-about.c:398
+msgid "Author entry"
+msgstr "Entrada d'autor"
+
+#: ../libgnomeui/gnome-about.c:399
+msgid "A single author entry"
+msgstr "Entrada d'un solu autor"
+
+#: ../libgnomeui/gnome-about.c:406
+msgid "Documenters"
+msgstr "Documentalistes"
+
+#: ../libgnomeui/gnome-about.c:407
+msgid "List of people documenting the program"
+msgstr "Llista de xente que fizo la documentacion del programa"
+
+#: ../libgnomeui/gnome-about.c:409
+msgid "Documenter entry"
+msgstr "Entrada del documentador"
+
+#: ../libgnomeui/gnome-about.c:410
+msgid "A single documenter entry"
+msgstr "Una entrada cenciella pal documentador"
+
+#: ../libgnomeui/gnome-about.c:418
+msgid "Translator credits"
+msgstr "Creditos tornadores"
+
+#: ../libgnomeui/gnome-about.c:419
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Créitos pa los traductores. Esta cadena tendría de tar conseñada como "
+"traducible"
+
+#: ../libgnomeui/gnome-about.c:426
+#: ../libgnomeui/gnome-druid-page-standard.c:123
+msgid "Logo"
+msgstr "Logotipu"
+
+#: ../libgnomeui/gnome-about.c:427
+msgid "A logo for the about box"
+msgstr "Un logu pa la caxa acerca de"
+
+#: ../libgnomeui/gnome-about.c:506
+#, c-format
+msgid "About %s"
+msgstr "Al rodiu %s"
+
+#. Some standard menus
+#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:551
+#: ../test-gnome/testgnome.xml.h:5
+msgid "_File"
+msgstr "_Ficheru"
+
+#: ../libgnomeui/gnome-app-helper.c:84
+msgid "_File/"
+msgstr "_Ficheru/"
+
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "R_emanar"
+
+#: ../libgnomeui/gnome-app-helper.c:86
+msgid "_Edit/"
+msgstr "R_emanar/"
+
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "_Ver"
+
+#: ../libgnomeui/gnome-app-helper.c:88
+msgid "_View/"
+msgstr "_Ver/"
+
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "_Configuración"
+
+#: ../libgnomeui/gnome-app-helper.c:90
+msgid "_Settings/"
+msgstr "_Configuración/"
+
+#. If you have more then one New type, use this tree
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "_Nuevu"
+
+#: ../libgnomeui/gnome-app-helper.c:92
+msgid "_New/"
+msgstr "_Nuevu/"
+
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "Fi_cheros"
+
+#: ../libgnomeui/gnome-app-helper.c:94
+msgid "Fi_les/"
+msgstr "Fi_cheros/"
+
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "_Ventanes"
+
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "_Xuegu"
+
+#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:569
+#: ../test-gnome/testgnome.xml.h:6
+msgid "_Help"
+msgstr "_Ayuda"
+
+#: ../libgnomeui/gnome-app-helper.c:98
+msgid "_Windows/"
+msgstr "_Ventanes/"
+
+#. Open
+#: ../libgnomeui/gnome-app-helper.c:110
+msgid "_Open..."
+msgstr "_Abrir..."
+
+#: ../libgnomeui/gnome-app-helper.c:110
+msgid "Open a file"
+msgstr "Abrir un ficheru"
+
+#. Save
+#: ../libgnomeui/gnome-app-helper.c:115
+msgid "_Save"
+msgstr "_Guardar"
+
+#: ../libgnomeui/gnome-app-helper.c:115
+msgid "Save the current file"
+msgstr "Guardar esti ficheru"
+
+#. Save As
+#: ../libgnomeui/gnome-app-helper.c:120
+msgid "Save _As..."
+msgstr "Guard_ar Como..."
+
+#: ../libgnomeui/gnome-app-helper.c:121
+msgid "Save the current file with a different name"
+msgstr "Guardar esti ficheru con un nome estremáu"
+
+#. Revert
+#: ../libgnomeui/gnome-app-helper.c:126
+msgid "_Revert"
+msgstr "_Revertir"
+
+#: ../libgnomeui/gnome-app-helper.c:127
+msgid "Revert to a saved version of the file"
+msgstr "Revertir a la versión guardada d'esti ficheru"
+
+#. Print
+#: ../libgnomeui/gnome-app-helper.c:132
+msgid "_Print..."
+msgstr "Im_prentar..."
+
+#: ../libgnomeui/gnome-app-helper.c:132
+msgid "Print the current file"
+msgstr "Imprentar esti ficheru"
+
+#. Print Setup
+#: ../libgnomeui/gnome-app-helper.c:137
+msgid "Print S_etup..."
+msgstr "Confi_guración d'Imprentación..."
+
+#: ../libgnomeui/gnome-app-helper.c:138
+msgid "Setup the page settings for your current printer"
+msgstr "Configurar los parámetros de páxina pa la so impresora"
+
+#. Close
+#: ../libgnomeui/gnome-app-helper.c:143
+msgid "_Close"
+msgstr "_Zarrar"
+
+#: ../libgnomeui/gnome-app-helper.c:143
+msgid "Close the current file"
+msgstr "Zarrar esti ficheru"
+
+#. Exit
+#: ../libgnomeui/gnome-app-helper.c:148
+msgid "_Quit"
+msgstr "_Colar"
+
+#: ../libgnomeui/gnome-app-helper.c:148
+msgid "Quit the application"
+msgstr "Colar del programa"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: ../libgnomeui/gnome-app-helper.c:156
+msgid "Cu_t"
+msgstr "Cor_tar"
+
+#: ../libgnomeui/gnome-app-helper.c:156
+msgid "Cut the selection"
+msgstr "Cortar la esbilla"
+
+#. 10
+#. Copy
+#: ../libgnomeui/gnome-app-helper.c:162
+msgid "_Copy"
+msgstr "_Copiar"
+
+#: ../libgnomeui/gnome-app-helper.c:162
+msgid "Copy the selection"
+msgstr "Copiar la esbilla"
+
+#. Paste
+#: ../libgnomeui/gnome-app-helper.c:167
+msgid "_Paste"
+msgstr "A_pegar"
+
+#: ../libgnomeui/gnome-app-helper.c:167
+msgid "Paste the clipboard"
+msgstr "Apegar lo que tea nel portapapeles"
+
+#. Clear
+#: ../libgnomeui/gnome-app-helper.c:172
+msgid "C_lear"
+msgstr "L_limpiar"
+
+#: ../libgnomeui/gnome-app-helper.c:172
+msgid "Clear the selection"
+msgstr "Llimpiar la esbilla"
+
+#. Undo
+#: ../libgnomeui/gnome-app-helper.c:177
+msgid "_Undo"
+msgstr "Desfacer"
+
+#: ../libgnomeui/gnome-app-helper.c:177
+msgid "Undo the last action"
+msgstr "Desfacer la última aición"
+
+#. Redo
+#: ../libgnomeui/gnome-app-helper.c:182
+msgid "_Redo"
+msgstr "_Refacer"
+
+#: ../libgnomeui/gnome-app-helper.c:182
+msgid "Redo the undone action"
+msgstr "Refacer l'aición desfecha"
+
+#. Find
+#: ../libgnomeui/gnome-app-helper.c:187
+msgid "_Find..."
+msgstr "_Atopar..."
+
+#: ../libgnomeui/gnome-app-helper.c:187
+msgid "Search for a string"
+msgstr "Restolar una frase"
+
+#. Find Again
+#: ../libgnomeui/gnome-app-helper.c:192
+msgid "Find Ne_xt"
+msgstr "Atopar Sig_uiente"
+
+#: ../libgnomeui/gnome-app-helper.c:193
+msgid "Search again for the same string"
+msgstr "Restolar de nuevo lo mesmo"
+
+#. Replace
+#: ../libgnomeui/gnome-app-helper.c:198
+msgid "R_eplace..."
+msgstr "R_eemplazar..."
+
+#: ../libgnomeui/gnome-app-helper.c:198
+msgid "Replace a string"
+msgstr "Reemplazar daqué"
+
+#. Properties
+#: ../libgnomeui/gnome-app-helper.c:203
+msgid "_Properties"
+msgstr "_Propiedaes"
+
+#: ../libgnomeui/gnome-app-helper.c:204
+msgid "Modify the file's properties"
+msgstr "Modificar les propiedades del ficheru"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: ../libgnomeui/gnome-app-helper.c:212
+msgid "Prefere_nces"
+msgstr "Prefere_ncies"
+
+#: ../libgnomeui/gnome-app-helper.c:213
+msgid "Configure the application"
+msgstr "Configurar el programa"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:4
+msgid "_About"
+msgstr "_Al rodiu"
+
+#: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
+msgid "About this application"
+msgstr "Al rodiu d'esti programa"
+
+#: ../libgnomeui/gnome-app-helper.c:226
+msgid "Select _All"
+msgstr "Esbill_alo Too"
+
+#: ../libgnomeui/gnome-app-helper.c:227
+msgid "Select everything"
+msgstr "Esbillalo too"
+
+#.
+#. * Window menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:235
+msgid "Create New _Window"
+msgstr "Crear una _Ventana Nueva"
+
+#: ../libgnomeui/gnome-app-helper.c:236
+msgid "Create a new window"
+msgstr "Crear una ventana nueva"
+
+#: ../libgnomeui/gnome-app-helper.c:240
+msgid "_Close This Window"
+msgstr "_Zarrar Esta Ventana"
+
+#: ../libgnomeui/gnome-app-helper.c:241 ../test-gnome/testgnome.xml.h:2
+msgid "Close the current window"
+msgstr "Zarrar esta ventana"
+
+#.
+#. * The "Game" menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:249
+msgid "_New Game"
+msgstr "Xuegu _Nuevu"
+
+#: ../libgnomeui/gnome-app-helper.c:250
+msgid "Start a new game"
+msgstr "Entamar un nuevu xuegu"
+
+#: ../libgnomeui/gnome-app-helper.c:254
+msgid "_Pause Game"
+msgstr "_Parar Xuegu"
+
+#: ../libgnomeui/gnome-app-helper.c:255
+msgid "Pause the game"
+msgstr "Parar el xuegu"
+
+#: ../libgnomeui/gnome-app-helper.c:259
+msgid "_Restart Game"
+msgstr "_Reaniciar Xuegu"
+
+#: ../libgnomeui/gnome-app-helper.c:260
+msgid "Restart the game"
+msgstr "Reaniciar el xuegu"
+
+#: ../libgnomeui/gnome-app-helper.c:264
+msgid "_Undo Move"
+msgstr "_Desfacer Mover"
+
+#: ../libgnomeui/gnome-app-helper.c:265
+msgid "Undo the last move"
+msgstr "Desfacer l'últimu movimientu"
+
+#: ../libgnomeui/gnome-app-helper.c:269
+msgid "_Redo Move"
+msgstr "_Refacer Mover"
+
+#: ../libgnomeui/gnome-app-helper.c:270
+msgid "Redo the undone move"
+msgstr "Refái el caberu movimientu fechu"
+
+#: ../libgnomeui/gnome-app-helper.c:274
+msgid "_Hint"
+msgstr "C_onseyu"
+
+#: ../libgnomeui/gnome-app-helper.c:275
+msgid "Get a hint for your next move"
+msgstr "Obtién un conseyu pal so próximu movimientu"
+
+#. 30
+#: ../libgnomeui/gnome-app-helper.c:280
+msgid "_Scores..."
+msgstr "_Puntuaciones..."
+
+#: ../libgnomeui/gnome-app-helper.c:281
+msgid "View the scores"
+msgstr "Ver les puntuaciones"
+
+#: ../libgnomeui/gnome-app-helper.c:285
+msgid "_End Game"
+msgstr "_Fin Xuegu"
+
+#: ../libgnomeui/gnome-app-helper.c:286
+msgid "End the current game"
+msgstr "Fin xuegu actual"
+
+#: ../libgnomeui/gnome-app-helper.c:1148
+msgid "_Contents"
+msgstr "_Conteníos"
+
+#: ../libgnomeui/gnome-app-helper.c:1151
+msgid "View help for this application"
+msgstr "Ver gabitu d'esta aplicación"
+
+#: ../libgnomeui/gnome-app-helper.c:2522
+msgid "Text Below Icons"
+msgstr "Iconos Testu d'Abaxu"
+
+#: ../libgnomeui/gnome-app-helper.c:2523
+msgid "Priority Text Beside Icons"
+msgstr "Testu prioritariu al delláu de los iconos"
+
+#: ../libgnomeui/gnome-app-helper.c:2524
+msgid "Icons Only"
+msgstr "Sólo Iconos"
+
+#: ../libgnomeui/gnome-app-helper.c:2525
+msgid "Text Only"
+msgstr "Sólo Testu"
+
+#: ../libgnomeui/gnome-app-helper.c:2586
+#, c-format
+msgid "Use Desktop Default (%s)"
+msgstr "Usar Escritoriu por Defectu (%s)"
+
+#: ../libgnomeui/gnome-app-util.c:98
+msgid " (press return)"
+msgstr " (Calca Enter)"
+
+#: ../libgnomeui/gnome-app-util.c:140
+msgid "ERROR: "
+msgstr "ERROR: "
+
+#: ../libgnomeui/gnome-app-util.c:177
+msgid "Warning: "
+msgstr "Alvertencia: "
+
+#: ../libgnomeui/gnome-app-util.c:315
+msgid "y"
+msgstr "y"
+
+#: ../libgnomeui/gnome-app-util.c:316
+msgid "yes"
+msgstr "sí"
+
+#: ../libgnomeui/gnome-app-util.c:319
+msgid "n"
+msgstr "n"
+
+#: ../libgnomeui/gnome-app-util.c:320
+msgid "no"
+msgstr "non"
+
+#: ../libgnomeui/gnome-app-util.c:355
+msgid " (yes or no)"
+msgstr " (sí o non)"
+
+#: ../libgnomeui/gnome-app-util.c:356
+msgid "  - OK? (yes or no)"
+msgstr "  - ¿Val? (sí o non)"
+
+#: ../libgnomeui/gnome-app-util.c:684
+msgid "Progress"
+msgstr "Progresu"
+
+#: ../libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr "ID Aplicación"
+
+#: ../libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr "La cadena ID aplicación"
+
+#: ../libgnomeui/gnome-appbar.c:743
+msgid "Has Progress"
+msgstr "Tien progresu"
+
+#: ../libgnomeui/gnome-appbar.c:744
+msgid "Create a progress widget."
+msgstr "Creya un nuevu widget de progresu."
+
+#: ../libgnomeui/gnome-appbar.c:751
+msgid "Has Status"
+msgstr "Tien estau"
+
+#: ../libgnomeui/gnome-appbar.c:752
+msgid "Create a status widget."
+msgstr "Creya un widget d'estáu."
+
+#: ../libgnomeui/gnome-appbar.c:759
+msgid "Interactivity"
+msgstr "Interactividá"
+
+#: ../libgnomeui/gnome-appbar.c:760
+msgid "Level of user activity required."
+msgstr "Nivel d'actividá d'usuariu requeríu"
+
+#: ../libgnomeui/gnome-authentication-manager.c:82
+#, c-format
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr "El to Proxy HTTP requier que tes identificau.\n"
+
+#: ../libgnomeui/gnome-authentication-manager.c:83
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+"Tienes que tar identificau \"%s\".\n"
+"%s"
+
+#: ../libgnomeui/gnome-authentication-manager.c:86
+msgid "Your password will be transmitted unencrypted."
+msgstr "La to clave será unviada ensín encriptar"
+
+#: ../libgnomeui/gnome-authentication-manager.c:87
+msgid "Your password will be transmitted encrypted."
+msgstr "La to clave sedrá unviada encriptada"
+
+#: ../libgnomeui/gnome-authentication-manager.c:90
+#: ../libgnomeui/gnome-authentication-manager.c:309
+msgid "Authentication Required"
+msgstr "Fai falta identificase"
+
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:301
+#, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "Tienes que tar identificau p'aceder %s domain %s\n"
+
+#: ../libgnomeui/gnome-authentication-manager.c:303
+#, c-format
+msgid "You must log in to access %s\n"
+msgstr "Tienes d'identificate p'acceder %s\n"
+
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
+msgid "Specify session management ID"
+msgstr "Especificar ID xestor de sesión"
+
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
+msgid "ID"
+msgstr "ID"
+
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
+msgid "Specify prefix of saved configuration"
+msgstr "Especificar prefixu de la configuración guardada"
+
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
+msgid "PREFIX"
+msgstr "PREFIXU"
+
+#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
+msgid "Disable connection to session manager"
+msgstr "Desconectar xestor de sesión"
+
+#: ../libgnomeui/gnome-client.c:1014
+msgid "Session management:"
+msgstr "Xestor de sesión"
+
+#: ../libgnomeui/gnome-client.c:1015
+msgid "Show session management options"
+msgstr "Ver opciones xestor sesión"
+
+#: ../libgnomeui/gnome-client.c:1046
+msgid "Session management"
+msgstr "Xestor sesión"
+
+#: ../libgnomeui/gnome-client.c:2580
+msgid "Cancel Logout"
+msgstr "Cancelar Logout"
+
+#: ../libgnomeui/gnome-color-picker.c:404
+msgid "Received invalid color data\n"
+msgstr "Recibió datos de color nun válidos\n"
+
+#: ../libgnomeui/gnome-color-picker.c:458
+msgid "Open a dialog to specify the color"
+msgstr "Abrir un diálogu pa especificar el color"
+
+#: ../libgnomeui/gnome-color-picker.c:480
+msgid "Pick a color"
+msgstr "Escueya un color"
+
+#: ../libgnomeui/gnome-dateedit.c:495 ../libgnomeui/gnome-dateedit.c:802
+msgid "Time"
+msgstr "Tiempu"
+
+#: ../libgnomeui/gnome-dateedit.c:496
+msgid "The time currently selected"
+msgstr "Tiempu selecionau agora"
+
+#: ../libgnomeui/gnome-dateedit.c:508
+msgid "DateEdit Flags"
+msgstr "Opciones de DateEdit"
+
+#: ../libgnomeui/gnome-dateedit.c:509
+msgid "Flags for how DateEdit looks"
+msgstr "Opciones sobro l'aldéu de DateEdit"
+
+#: ../libgnomeui/gnome-dateedit.c:518
+msgid "Lower Hour"
+msgstr "Hora Menor"
+
+#: ../libgnomeui/gnome-dateedit.c:519
+msgid "Lower hour in the time popup selector"
+msgstr "Hora menor nel selector popup de tiempu"
+
+#: ../libgnomeui/gnome-dateedit.c:529
+msgid "Upper Hour"
+msgstr "Hora Mayor"
+
+#: ../libgnomeui/gnome-dateedit.c:530
+msgid "Upper hour in the time popup selector"
+msgstr "Hora mayor nel selector popup de tiempu"
+
+#: ../libgnomeui/gnome-dateedit.c:540
+msgid "Initial Time"
+msgstr "Tiempu d'Entamu"
+
+#: ../libgnomeui/gnome-dateedit.c:541
+msgid "The initial time"
+msgstr "El tiempu d'entamu"
+
+#: ../libgnomeui/gnome-dateedit.c:765 ../libgnomeui/gnome-scores.c:96
+msgid "Date"
+msgstr "Fecha"
+
+#: ../libgnomeui/gnome-dateedit.c:778
+msgid "Select Date"
+msgstr "Fecha selecionada"
+
+#: ../libgnomeui/gnome-dateedit.c:778
+msgid "Select the date from a calendar"
+msgstr "Selecionar fecha dende un calendariu"
+
+#. Calendar label, only shown if the date editor has a time field
+#: ../libgnomeui/gnome-dateedit.c:789
+msgid "Calendar"
+msgstr "Calendariu"
+
+#: ../libgnomeui/gnome-dateedit.c:810
+msgid "Select Time"
+msgstr "Tiempu Selecionau"
+
+#: ../libgnomeui/gnome-dateedit.c:810
+msgid "Select the time from a list"
+msgstr "Seleciona'l tiempu dende una llista"
+
+#: ../libgnomeui/gnome-dateedit.c:1029
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr "gnome_date_edit_get_date en desusu, usa gnome_date_edit_get_time"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:115
+#: ../libgnomeui/gnome-font-picker.c:147
+msgid "Title"
+msgstr "Títulu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:116
+msgid "Title of the druid"
+msgstr "Títulu del asistente"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:124
+msgid "Logo image"
+msgstr "Semeya logo"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:131
+msgid "Top Watermark"
+msgstr "Conseña d'agua superior"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:132
+msgid "Watermark image for the top"
+msgstr "Marca d'agua arriba"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:139
+msgid "Title Foreground"
+msgstr "Títulu Primer Planu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:140
+msgid "Foreground color of the title"
+msgstr "Collor títulu primer planu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:147
+msgid "Title Foreground Color"
+msgstr "Collor Títulu Primer Planu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:148
+msgid "Foreground color of the title as a GdkColor"
+msgstr "Collor del títulu de Primer Planu como un GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:155
+msgid "Title Foreground color set"
+msgstr "Establecer collor de Títulu Primer Planu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:156
+msgid "Foreground color of the title is set"
+msgstr "Establecíu collor de Títulu Primer Planu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:163
+#: ../libgnomeui/gnome-druid-page-standard.c:171
+msgid "Background Color"
+msgstr "Color de Fondu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:164
+msgid "Background color"
+msgstr "Collor de fondu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:172
+msgid "Background color as a GdkColor"
+msgstr "Collor de fondu como un GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:179
+msgid "Background color set"
+msgstr "Establecer collor fondu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:180
+msgid "Background color is set"
+msgstr "Establecíu collor fondu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:187
+#: ../libgnomeui/gnome-druid-page-standard.c:195
+msgid "Contents Background Color"
+msgstr "Conteníu Collor Fondu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:188
+msgid "Contents Background color"
+msgstr "Conteníu collor Fondu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:196
+msgid "Contents Background color as a GdkColor"
+msgstr "Conteníu collor Fondu como un GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:203
+msgid "Contents Background color set"
+msgstr "Establecer Conteníos collor Fondu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:204
+msgid "Contents Background color is set"
+msgstr "Establecíu collor Fondu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:210
+#: ../libgnomeui/gnome-druid-page-standard.c:218
+msgid "Logo Background Color"
+msgstr "Collor Fondu Logu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:211
+msgid "Logo Background color"
+msgstr "Collor Primer Planu Logu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:219
+msgid "Logo Background color as a GdkColor"
+msgstr "Collor Fondu Logu como un GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:226
+msgid "Logo Background color set"
+msgstr "Establecer collor Fondu Logu"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:227
+msgid "Logo Background color is set"
+msgstr "Establecíu collor Fondu Logu"
+
+#: ../libgnomeui/gnome-druid.c:153
+msgid "Show Finish"
+msgstr "Ver Final"
+
+#: ../libgnomeui/gnome-druid.c:154
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "Amosar el botón «Finar» n'arróu del botón «Siguiente»"
+
+#: ../libgnomeui/gnome-druid.c:161
+msgid "Show Help"
+msgstr "Ver gabitu"
+
+#: ../libgnomeui/gnome-druid.c:162
+msgid "Show the 'Help' button"
+msgstr "Ver el botón \"Gabitu\""
+
+#: ../libgnomeui/gnome-entry.c:190 ../libgnomeui/gnome-entry.c:191
+#: ../libgnomeui/gnome-file-entry.c:231 ../libgnomeui/gnome-icon-entry.c:166
+msgid "History ID"
+msgstr "ID Hestoria"
+
+#: ../libgnomeui/gnome-entry.c:197
+msgid "GTK entry"
+msgstr "Entrada GTK"
+
+#: ../libgnomeui/gnome-entry.c:198
+msgid "The GTK entry"
+msgstr "La entrada GTK"
+
+#: ../libgnomeui/gnome-file-entry.c:232
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Identificador únicu pal ficheru introducíu. Esti será usau pa guardar "
+"l'hestorial"
+
+#: ../libgnomeui/gnome-file-entry.c:240 ../libgnomeui/gnome-icon-entry.c:175
+msgid "Browse Dialog Title"
+msgstr "Títulu Dialogu Explorar"
+
+#: ../libgnomeui/gnome-file-entry.c:241
+msgid "Title for the Browse file dialog."
+msgstr "Títulu pal dialogu d'esploración d'archivos"
+
+#: ../libgnomeui/gnome-file-entry.c:248
+msgid "Directory Entry"
+msgstr "Entrada nel Directoriu"
+
+#: ../libgnomeui/gnome-file-entry.c:249
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+"Indica si la entrada d'archivu s'usa pa introducir direutamente nomes de "
+"direutorios o nomes d'archivos completos."
+
+#: ../libgnomeui/gnome-file-entry.c:257
+msgid "Modal"
+msgstr "Modal"
+
+#: ../libgnomeui/gnome-file-entry.c:258
+msgid "Whether the Browse file window should be modal."
+msgstr "Cuando la ventana del Explorador debiera ser modal."
+
+#: ../libgnomeui/gnome-file-entry.c:265 ../libgnomeui/gnome-icon-entry.c:191
+msgid "Filename"
+msgstr "Nome de ficheru"
+
+#: ../libgnomeui/gnome-file-entry.c:266
+msgid "Filename that should be displayed in the file entry."
+msgstr "Nome del archivu debiera ser visualizau nel ficheru introducíu"
+
+#: ../libgnomeui/gnome-file-entry.c:274
+msgid "Default Path"
+msgstr "Ruta por defectu"
+
+#: ../libgnomeui/gnome-file-entry.c:275
+msgid "Default path for the Browse file window."
+msgstr "Ruta por defectu pa la ventana del Esplorador"
+
+#: ../libgnomeui/gnome-file-entry.c:282
+msgid "GnomeEntry"
+msgstr "GnomeEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:283
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+"GnomeEntry usa la entrada d'archivu pa introducir nomes d'archivos. Pue usar "
+"esta propiedá pa algamar GnomeEntry si necesita camudar o consultar "
+"cualesquier de los sos parámetros."
+
+#: ../libgnomeui/gnome-file-entry.c:293
+msgid "GtkEntry"
+msgstr "GtkEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:294
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+"GnomeEntry usa la entrada d'archivu pa introducir nomes d'archivos. Pue usar "
+"esta propiedá pa algamar GnomeEntry si necesita camudar o consultar "
+"cualesquier de los sos parámetros."
+
+#: ../libgnomeui/gnome-file-entry.c:304
+msgid "Use GtkFileChooser"
+msgstr "Usar GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:305
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+"Indica si hai d'usar el widget nuevu GtkFileChooser o l'antigu "
+"GtkFileSelection pa seleicionar archivos."
+
+#: ../libgnomeui/gnome-file-entry.c:314
+msgid "GtkFileChooser Action"
+msgstr "Acion GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:315
+msgid "The type of operation that the file selector is performing."
+msgstr "La mena d'operación qu'el seleutor ta faciendo."
+
+#: ../libgnomeui/gnome-file-entry.c:650 ../libgnomeui/gnome-file-entry.c:687
+msgid "Select file"
+msgstr "Selecionar archivu"
+
+#: ../libgnomeui/gnome-file-entry.c:812
+msgid "Path"
+msgstr "Ruta"
+
+#: ../libgnomeui/gnome-file-entry.c:812
+msgid "Path to file"
+msgstr "Ruta al archivu"
+
+#: ../libgnomeui/gnome-file-entry.c:841
+msgid "_Browse..."
+msgstr "_Güeyar..."
+
+#: ../libgnomeui/gnome-file-entry.c:842
+msgid "Pop up a file selector to choose a file"
+msgstr "Abrir selector de ficheru pa escoyer un archivu"
+
+#: ../libgnomeui/gnome-font-picker.c:58
+msgid "sans 12"
+msgstr "sans 12"
+
+#: ../libgnomeui/gnome-font-picker.c:59
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+
+#: ../libgnomeui/gnome-font-picker.c:60
+msgid "Pick a Font"
+msgstr "Escueya Fonte"
+
+#: ../libgnomeui/gnome-font-picker.c:148
+msgid "The title of the selection dialog box"
+msgstr "El títulu d'un diálogu de seleción"
+
+#: ../libgnomeui/gnome-font-picker.c:156
+msgid "Mode"
+msgstr "Mou"
+
+#: ../libgnomeui/gnome-font-picker.c:157
+msgid "The mode of operation of the font picker"
+msgstr "El mou d'operación del seleutor de tipografíes"
+
+#: ../libgnomeui/gnome-font-picker.c:166
+msgid "Font name"
+msgstr "Nome fonte"
+
+#: ../libgnomeui/gnome-font-picker.c:167
+msgid "Name of the selected font"
+msgstr "Nome de la fonte selecionada"
+
+#: ../libgnomeui/gnome-font-picker.c:176 ../libgnomeui/gnome-font-picker.c:972
+msgid "Font"
+msgstr "Fonte"
+
+#: ../libgnomeui/gnome-font-picker.c:177
+msgid "The selected GtkFont"
+msgstr "La selecionada GtkFont"
+
+#: ../libgnomeui/gnome-font-picker.c:184
+msgid "Preview text"
+msgstr "Preview testu"
+
+#: ../libgnomeui/gnome-font-picker.c:185
+msgid "Preview text shown in the dialog"
+msgstr "Preview testu mostrándolu nel diálogu"
+
+#: ../libgnomeui/gnome-font-picker.c:193
+msgid "Use font in label"
+msgstr "Usar fonte na etiqueta"
+
+#: ../libgnomeui/gnome-font-picker.c:194
+msgid "Use font in the label in font info mode"
+msgstr "Usar tipografíes nes etiquetes, nel mou d'información de tipografía"
+
+#: ../libgnomeui/gnome-font-picker.c:202
+msgid "Font size for label"
+msgstr "Tamañu fonte pa la etiqueta"
+
+#: ../libgnomeui/gnome-font-picker.c:203
+msgid "Font size for label in font info mode"
+msgstr "Tamañu de la tipografía pal mou d'información de tipografíes"
+
+#: ../libgnomeui/gnome-font-picker.c:213
+msgid "Show size"
+msgstr "Mostrar tamañu"
+
+#: ../libgnomeui/gnome-font-picker.c:214
+msgid "Show size in font info mode"
+msgstr "Amuesa'l tamañu en mou información de la tipografía"
+
+#: ../libgnomeui/gnome-gconf-ui.c:61
+msgid "GNOME GConf UI Support"
+msgstr "Supporte GNOME GConf"
+
+#: ../libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "_Detalles"
+
+#: ../libgnomeui/gnome-gconf-ui.c:171
+#, c-format
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr ""
+"La aplicación «%s» tentó camudar un aspeutu de la so configuración que'l "
+"alministrador del sistema o el proveedor del sistema operativu nun-y dexa "
+"camudar. Dalgunes de les opciones que tien elexíes pue que nun causen "
+"efeutu, o pue que nun se guarden pa la siguiente vegada qu'use l'aplicación."
+
+#: ../libgnomeui/gnome-gconf-ui.c:178
+#, c-format
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"Un error ocurrió mientres se cargaba o guardaba información de configuración "
+"pa %s. Dalgo de la to configuración puede nun trabayar apropiadamente."
+
+#: ../libgnomeui/gnome-href.c:102
+msgid "URL"
+msgstr "URL"
+
+#: ../libgnomeui/gnome-href.c:103
+msgid "The URL that GnomeHRef activates"
+msgstr "La URL qu'autiva GnomeHRef"
+
+#: ../libgnomeui/gnome-href.c:110
+msgid "Text"
+msgstr "Testu"
+
+#: ../libgnomeui/gnome-href.c:111
+msgid "The text on the button"
+msgstr "El testu del botón"
+
+#: ../libgnomeui/gnome-href.c:112
+msgid "End World Hunger"
+msgstr "Desaniciar la fame mundial"
+
+#: ../libgnomeui/gnome-href.c:118
+msgid "Link color"
+msgstr "Collor enllaz"
+
+#: ../libgnomeui/gnome-href.c:119
+msgid "Color used to draw the link"
+msgstr "Collor usau pa debuxar l'enllaz"
+
+#: ../libgnomeui/gnome-href.c:150
+msgid "This button will take you to the URI that it displays."
+msgstr "Esti botón llevará-y a la URI qu'amuesa."
+
+#: ../libgnomeui/gnome-href.c:386
+msgid ""
+"An error has occurred while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"Un error fue atopau mientres s'intentaba llanzar el navegador web por "
+"defectu.\n"
+"Por favor, chequea los tos axustes na ferramienta 'Preferred Applications'."
+
+#: ../libgnomeui/gnome-icon-entry.c:167
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr ""
+"Identificador únicu pa la entrada del iconu. Usaráse pa guardar na llista "
+"hestórica."
+
+#: ../libgnomeui/gnome-icon-entry.c:176
+msgid "Title for the Browse icon dialog."
+msgstr "Títulu pal iconu del diálogu del esaminador."
+
+#: ../libgnomeui/gnome-icon-entry.c:183
+msgid "Pixmap Directory"
+msgstr "Directoriu Pixmap"
+
+#: ../libgnomeui/gnome-icon-entry.c:184
+msgid "Directory that will be searched for icons."
+msgstr "Directoriu usau pa buscar iconos."
+
+#: ../libgnomeui/gnome-icon-entry.c:192
+msgid "Filename that should be displayed in the icon entry."
+msgstr "Nome del archivu que tendría d'amosase na entrada del iconu."
+
+#: ../libgnomeui/gnome-icon-entry.c:200
+msgid "Picker dialog"
+msgstr "Diálogu de seleición"
+
+#: ../libgnomeui/gnome-icon-entry.c:201
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"Diálogu del seleutor d'iconos. Pue usar esta propiedá p'algamar el GtkDialog "
+"si necesita camudar o consultar dalguna de les sos propiedaes."
+
+#: ../libgnomeui/gnome-icon-entry.c:309 ../libgnomeui/gnome-icon-entry.c:993
+msgid "Choose Icon"
+msgstr "Escoyer Iconu"
+
+#: ../libgnomeui/gnome-icon-entry.c:763
+msgid "Icon selection dialog"
+msgstr "Diálogu seleción iconu"
+
+#: ../libgnomeui/gnome-icon-entry.c:764
+msgid "This dialog box lets you select an icon."
+msgstr "Esti diálogu devuelvete un iconu selecionau"
+
+#: ../libgnomeui/gnome-icon-entry.c:770 ../libgnomeui/gnome-icon-entry.c:996
+msgid "Icon Selector"
+msgstr "Selector d'Iconu"
+
+#: ../libgnomeui/gnome-icon-entry.c:771
+msgid "Please pick the icon you want."
+msgstr "Por favor, calca l'iconu que quies."
+
+#: ../libgnomeui/gnome-icon-entry.c:997
+msgid "This button will open a window to let you select an icon."
+msgstr "Esti botón abrirá una ventana pa que seleciones un iconu."
+
+#: ../libgnomeui/gnome-icon-entry.c:1019
+msgid "Browse"
+msgstr "Esplorar"
+
+#: ../libgnomeui/gnome-icon-entry.c:1022
+msgid "Icon path"
+msgstr "Ruta iconu"
+
+#: ../libgnomeui/gnome-icon-entry.c:1023
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr ""
+"Equí debieres introducir el nome del directoriu onde tan almacenaes les "
+"semeyes d'iconos."
+
+#: ../libgnomeui/gnome-icon-sel.c:293
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr "GnomeIconSelection: '%s' nun esiste o nun ye un directoriu"
+
+#: ../libgnomeui/gnome-icon-sel.c:301
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr "GnomeIconSelection: nun pudo abrise directoriu '%s'"
+
+#: ../libgnomeui/gnome-icon-sel.c:405
+msgid "Loading Icons..."
+msgstr "Cargando Iconos..."
+
+#: ../libgnomeui/gnome-messagebox.c:107
+msgid "Information"
+msgstr "Información"
+
+#: ../libgnomeui/gnome-messagebox.c:112
+msgid "Warning"
+msgstr "Avisu"
+
+#: ../libgnomeui/gnome-messagebox.c:118
+msgid "Error"
+msgstr "Error"
+
+#: ../libgnomeui/gnome-messagebox.c:124
+msgid "Question"
+msgstr "Entruga"
+
+#: ../libgnomeui/gnome-messagebox.c:129
+msgid "Message"
+msgstr "Mensaxe"
+
+#: ../libgnomeui/gnome-password-dialog.c:196
+msgid "_Username:"
+msgstr "_Usuariu:"
+
+#: ../libgnomeui/gnome-password-dialog.c:199
+msgid "_Domain:"
+msgstr "_Dominiu:"
+
+#: ../libgnomeui/gnome-password-dialog.c:202
+msgid "_Password:"
+msgstr "_Contraseña:"
+
+#: ../libgnomeui/gnome-password-dialog.c:205
+msgid "_New password:"
+msgstr "_Contraseña nueva:"
+
+#: ../libgnomeui/gnome-password-dialog.c:206
+msgid "Con_firm password:"
+msgstr "Con_firmar contraseña:"
+
+#: ../libgnomeui/gnome-password-dialog.c:209
+msgid "Password quality:"
+msgstr "Calidá de la contraseña:"
+
+#: ../libgnomeui/gnome-password-dialog.c:324
+msgid "Co_nnect"
+msgstr "Co_nectar"
+
+#: ../libgnomeui/gnome-password-dialog.c:357
+msgid "Connect _anonymously"
+msgstr "Conectar _anonimamente"
+
+#: ../libgnomeui/gnome-password-dialog.c:362
+msgid "Connect as u_ser:"
+msgstr "Conectar como u_suariu:"
+
+#: ../libgnomeui/gnome-password-dialog.c:424
+msgid "_Forget password immediately"
+msgstr "_Remembrar clave inmediatamente"
+
+#: ../libgnomeui/gnome-password-dialog.c:430
+msgid "_Remember password until you logout"
+msgstr "_Remembrar clave fasta te desconectes"
+
+#: ../libgnomeui/gnome-password-dialog.c:436
+msgid "_Remember forever"
+msgstr "_Remembrar siempre"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:101
+msgid "Do Preview"
+msgstr "Facer Preview"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:102
+msgid "Whether the pixmap entry should have a preview."
+msgstr "Indica si la entrada de la imaxe tien de tener una vista preliminar."
+
+#: ../libgnomeui/gnome-pixmap-entry.c:176
+#: ../libgnomeui/gnome-pixmap-entry.c:470
+msgid "No Image"
+msgstr "Nun hai Imaxe"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:193
+msgid "Image Preview"
+msgstr "Prever Imaxe"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:194
+msgid "A preview of the image currently specified"
+msgstr "Una vista preliminar de l'imaxe especificada anguaño"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:405
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "Nun puede atopase hbox, usando una seleción d'archivu normal"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:411
+msgid "Preview"
+msgstr "Entever"
+
+#: ../libgnomeui/gnome-scores.c:77
+msgid "Top Ten"
+msgstr "Top Ten"
+
+#: ../libgnomeui/gnome-scores.c:90
+msgid "User"
+msgstr "Usuariu"
+
+#: ../libgnomeui/gnome-scores.c:93
+msgid "Score"
+msgstr "Puntuación"
+
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: ../libgnomeui/gnome-scores.c:193
+msgid "%a %b %d %T %Y"
+msgstr "%a %b %d %T %Y"
+
+#: ../libgnomeui/gnome-scores.c:394
+msgid "Sans 14"
+msgstr "Sans 14"
+
+#: ../libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "Bordes Tabla"
+
+#: ../libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "Rellenar Tabla"
+
+#: ../libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Llista de topos"
+
+#: ../libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "Llista Numberada"
+
+#: ../libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "Sangría"
+
+#: ../libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "Quitar sangráu"
+
+#: ../libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Al rodiu"
+
+#: ../libgnomeui/gnome-ui-init.c:134 ../libgnomeui/gnome-ui-init.c:160
+msgid "Disable Crash Dialog"
+msgstr "Desautivar el diálogu de cuelgue"
+
+#: ../libgnomeui/gnome-ui-init.c:143
+msgid "GNOME GUI Library:"
+msgstr "Llibrería GNOME GUI:"
+
+#: ../libgnomeui/gnome-ui-init.c:144
+msgid "Show GNOME GUI options"
+msgstr "Ver opciones GNOME GUI"
+
+#: ../libgnomeui/gnome-ui-init.c:162
+msgid "X display to use"
+msgstr "Visualizador X pa usar"
+
+#: ../libgnomeui/gnome-ui-init.c:162
+msgid "DISPLAY"
+msgstr "VISUALIZADOR"
+
+#: ../libgnomeui/gnome-ui-init.c:167
+msgid "GNOME GUI Library"
+msgstr "Llibrería GNOME GUI"
+
+#: ../libgnomeui/gnome-ui-init.c:232
+msgid "Could not open link"
+msgstr "Nun pudo abrise enllaz"
+
+#: ../test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr "Salir de la prueba"
