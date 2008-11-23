@@ -629,9 +629,8 @@ gnome_thumbnail_factory_generate_thumbnail (GnomeThumbnailFactory *factory,
   if (script)
     {
       int fd;
-      GError *error = NULL;
 
-      fd = g_file_open_tmp (".gnome_thumbnail.XXXXXX", &tmpname, &error);
+      fd = g_file_open_tmp (".gnome_thumbnail.XXXXXX", &tmpname, NULL);
 
       if (fd != -1)
 	{

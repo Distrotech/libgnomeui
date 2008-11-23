@@ -1,6 +1,11 @@
 2008-11-23  Christian Persch  <chpe@gnome.org>
 
 	* libgnomeui/gnome-thumbnail.c:
+	(gnome_thumbnail_factory_generate_thumbnail): Don't leak on error.
+
+2008-11-23  Christian Persch  <chpe@gnome.org>
+
+	* libgnomeui/gnome-thumbnail.c:
 	(gnome_thumbnail_factory_generate_thumbnail): Don't free invalid
 	memory. Bug #561988.
 
