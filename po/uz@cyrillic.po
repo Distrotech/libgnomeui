@@ -1,16 +1,16 @@
-# translation of libgnomeui-2.0.po to uzbek
+# translation of uz@cyrillic.po to Uzbek
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Nurali Abdurahmonov <mavnur@gmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui-2.0\n"
+"Project-Id-Version: uz@cyrillic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-01 11:08+0500\n"
-"PO-Revision-Date: 2008-03-01 11:12+0500\n"
+"PO-Revision-Date: 2008-12-11 22:10+0500\n"
 "Last-Translator: Nurali Abdurahmonov <mavnur@gmail.com>\n"
-"Language-Team: uzbek\n"
+"Language-Team: Uzbek\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,12 +35,12 @@ msgstr ""
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1035
 #, c-format
 msgid "%s is a link to something that is not a folder"
-msgstr ""
+msgstr "%s жилд бўлмаган нарсага боғланган боғлама"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1046
 #, c-format
 msgid "%s is a link without a destination location"
-msgstr ""
+msgstr "%s манзили бўлмаган боғлама"
 
 #: ../file-chooser/gtkfilesystemgnomevfs.c:1121
 #, c-format
@@ -78,7 +78,7 @@ msgstr "'%s' файлини очишда хатолик юз берди: %s"
 #: ../file-chooser/testfilechooser.c:230
 #, c-format
 msgid "Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
+msgstr "'%s'расмини юклаб бўлмади, бунга сабаб файл бузуқ бўлиши мумкин"
 
 #: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
@@ -90,7 +90,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-about.c:246
 msgid "Documented by"
-msgstr ""
+msgstr "Ҳужжатлаштирганлар"
 
 #: ../libgnomeui/gnome-about.c:261
 msgid "Translated by"
@@ -142,35 +142,35 @@ msgstr "Дастур муаллифлари"
 
 #: ../libgnomeui/gnome-about.c:410
 msgid "Author entry"
-msgstr ""
+msgstr "Муаллиф"
 
 #: ../libgnomeui/gnome-about.c:411
 msgid "A single author entry"
-msgstr ""
+msgstr "Дастур муаллифи"
 
 #: ../libgnomeui/gnome-about.c:418
 msgid "Documenters"
-msgstr ""
+msgstr "Қўлланма муаллифлари"
 
 #: ../libgnomeui/gnome-about.c:419
 msgid "List of people documenting the program"
-msgstr ""
+msgstr "Дастурга қўлланма тузганлар рўйхати"
 
 #: ../libgnomeui/gnome-about.c:421
 msgid "Documenter entry"
-msgstr ""
+msgstr "Қўлланма муаллифи"
 
 #: ../libgnomeui/gnome-about.c:422
 msgid "A single documenter entry"
-msgstr ""
+msgstr "Дастур қўлланмаси муаллифи "
 
 #: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
-msgstr ""
+msgstr "Таржимонлар"
 
 #: ../libgnomeui/gnome-about.c:431
 msgid "Credits to the translators. This string should be marked as translatable"
-msgstr ""
+msgstr "Таржимонлар. Бу қатор таржима қилиш учун белгиланиши керак"
 
 #: ../libgnomeui/gnome-about.c:438
 #: ../libgnomeui/gnome-druid-page-standard.c:129
@@ -184,33 +184,33 @@ msgstr ""
 #: ../libgnomeui/gnome-about.c:518
 #, c-format
 msgid "About %s"
-msgstr ""
+msgstr "%s ҳақида"
 
 #. Some standard menus
 #: ../libgnomeui/gnome-app-helper.c:81 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
-msgstr ""
+msgstr "_Файл"
 
 #: ../libgnomeui/gnome-app-helper.c:82
 msgid "_File/"
-msgstr ""
+msgstr "_Файл/"
 
 #: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr ""
+msgstr "_Таҳрирлаш"
 
 #: ../libgnomeui/gnome-app-helper.c:84
 msgid "_Edit/"
-msgstr ""
+msgstr "_Таҳрирлаш/"
 
 #: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr ""
+msgstr "_Кўриниш"
 
 #: ../libgnomeui/gnome-app-helper.c:86
 msgid "_View/"
-msgstr ""
+msgstr "_Кўриниш/"
 
 #: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
@@ -223,54 +223,54 @@ msgstr ""
 #. If you have more then one New type, use this tree
 #: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
-msgstr ""
+msgstr "_Янги"
 
 #: ../libgnomeui/gnome-app-helper.c:90
 msgid "_New/"
-msgstr ""
+msgstr "_Янги/"
 
 #: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr ""
+msgstr "Фай_ллар"
 
 #: ../libgnomeui/gnome-app-helper.c:92
 msgid "Fi_les/"
-msgstr ""
+msgstr "Фай_ллар/"
 
 #: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
-msgstr ""
+msgstr "_Ойналар"
 
 #: ../libgnomeui/gnome-app-helper.c:94 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
-msgstr ""
+msgstr "_Ўйин"
 
 #: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr ""
+msgstr "_Ёрдам"
 
 #: ../libgnomeui/gnome-app-helper.c:96
 msgid "_Windows/"
-msgstr ""
+msgstr "_Ойналар/"
 
 #. Open
 #: ../libgnomeui/gnome-app-helper.c:108
 msgid "_Open..."
-msgstr ""
+msgstr "_Очиш..."
 
 #: ../libgnomeui/gnome-app-helper.c:108
 msgid "Open a file"
-msgstr ""
+msgstr "Файлни очиш"
 
 #. Save
 #: ../libgnomeui/gnome-app-helper.c:113
 msgid "_Save"
-msgstr ""
+msgstr "_Сақлаш"
 
 #: ../libgnomeui/gnome-app-helper.c:113
 msgid "Save the current file"
-msgstr ""
+msgstr "Жорий файлни сақлаш"
 
 #. Save As
 #: ../libgnomeui/gnome-app-helper.c:118
@@ -279,7 +279,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:119
 msgid "Save the current file with a different name"
-msgstr ""
+msgstr "Жорий файлни бошқа ном билан сақлаш"
 
 #. Revert
 #: ../libgnomeui/gnome-app-helper.c:124
@@ -311,20 +311,20 @@ msgstr ""
 #. Close
 #: ../libgnomeui/gnome-app-helper.c:141
 msgid "_Close"
-msgstr ""
+msgstr "_Ёпиш"
 
 #: ../libgnomeui/gnome-app-helper.c:141
 msgid "Close the current file"
-msgstr ""
+msgstr "Жорий файлни ёпиш"
 
 #. Exit
 #: ../libgnomeui/gnome-app-helper.c:146
 msgid "_Quit"
-msgstr ""
+msgstr "_Чиқиш"
 
 #: ../libgnomeui/gnome-app-helper.c:146
 msgid "Quit the application"
-msgstr ""
+msgstr "Дастурдан чиқиш"
 
 #.
 #. * The "Edit" menu
