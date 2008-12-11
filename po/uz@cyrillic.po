@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: uz@cyrillic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-01 11:08+0500\n"
-"PO-Revision-Date: 2008-12-11 22:10+0500\n"
+"PO-Revision-Date: 2008-12-11 22:37+0500\n"
 "Last-Translator: Nurali Abdurahmonov <mavnur@gmail.com>\n"
 "Language-Team: Uzbek\n"
 "MIME-Version: 1.0\n"
@@ -342,16 +342,16 @@ msgstr ""
 #. Copy
 #: ../libgnomeui/gnome-app-helper.c:160
 msgid "_Copy"
-msgstr ""
+msgstr "_Нусха олиш"
 
 #: ../libgnomeui/gnome-app-helper.c:160
 msgid "Copy the selection"
-msgstr ""
+msgstr "Танлангандан нусха олиш"
 
 #. Paste
 #: ../libgnomeui/gnome-app-helper.c:165
 msgid "_Paste"
-msgstr ""
+msgstr "_Қўйиш"
 
 #: ../libgnomeui/gnome-app-helper.c:165
 msgid "Paste the clipboard"
@@ -369,11 +369,11 @@ msgstr ""
 #. Undo
 #: ../libgnomeui/gnome-app-helper.c:175
 msgid "_Undo"
-msgstr ""
+msgstr "_Бекор қилиш"
 
 #: ../libgnomeui/gnome-app-helper.c:175
 msgid "Undo the last action"
-msgstr ""
+msgstr "Охирги амални бекор қилиш"
 
 #. Redo
 #: ../libgnomeui/gnome-app-helper.c:180
@@ -387,7 +387,7 @@ msgstr ""
 #. Find
 #: ../libgnomeui/gnome-app-helper.c:185
 msgid "_Find..."
-msgstr ""
+msgstr "_Қидириш..."
 
 #: ../libgnomeui/gnome-app-helper.c:185
 msgid "Search for a string"
@@ -405,7 +405,7 @@ msgstr ""
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:196
 msgid "R_eplace..."
-msgstr ""
+msgstr "А_лмаштириш..."
 
 #: ../libgnomeui/gnome-app-helper.c:196
 msgid "Replace a string"
@@ -414,7 +414,7 @@ msgstr ""
 #. Properties
 #: ../libgnomeui/gnome-app-helper.c:201
 msgid "_Properties"
-msgstr ""
+msgstr "_Хоссалари"
 
 #: ../libgnomeui/gnome-app-helper.c:202
 msgid "Modify the file's properties"
@@ -426,7 +426,7 @@ msgstr ""
 #. Settings
 #: ../libgnomeui/gnome-app-helper.c:210
 msgid "Prefere_nces"
-msgstr ""
+msgstr "Пара_метрлар"
 
 #: ../libgnomeui/gnome-app-helper.c:211
 msgid "Configure the application"
@@ -439,15 +439,15 @@ msgstr ""
 #. About
 #: ../libgnomeui/gnome-app-helper.c:220 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr ""
+msgstr "Дастур _ҳақида"
 
 #: ../libgnomeui/gnome-app-helper.c:221 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr ""
+msgstr "Дастур ҳақида"
 
 #: ../libgnomeui/gnome-app-helper.c:224
 msgid "Select _All"
-msgstr ""
+msgstr "_Ҳаммасини танлаш"
 
 #: ../libgnomeui/gnome-app-helper.c:225
 msgid "Select everything"
@@ -458,30 +458,30 @@ msgstr ""
 #.
 #: ../libgnomeui/gnome-app-helper.c:233
 msgid "Create New _Window"
-msgstr ""
+msgstr "Янги _ойна яратиш"
 
 #: ../libgnomeui/gnome-app-helper.c:234
 msgid "Create a new window"
-msgstr ""
+msgstr "Янги ойна яратади"
 
 #: ../libgnomeui/gnome-app-helper.c:238
 msgid "_Close This Window"
-msgstr ""
+msgstr "Ушбу _ойнани ёпиш"
 
 #: ../libgnomeui/gnome-app-helper.c:239 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr ""
+msgstr "Жорий ойнани ёпади"
 
 #.
 #. * The "Game" menu
 #.
 #: ../libgnomeui/gnome-app-helper.c:247
 msgid "_New Game"
-msgstr ""
+msgstr "_Янги ўйин"
 
 #: ../libgnomeui/gnome-app-helper.c:248
 msgid "Start a new game"
-msgstr ""
+msgstr "Янги ўйин бошлайди"
 
 #: ../libgnomeui/gnome-app-helper.c:252
 msgid "_Pause Game"
@@ -493,11 +493,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:257
 msgid "_Restart Game"
-msgstr ""
+msgstr "Ўйинни _қайта бошлаш"
 
 #: ../libgnomeui/gnome-app-helper.c:258
 msgid "Restart the game"
-msgstr ""
+msgstr "Ўйинни қайтадан бошлайди"
 
 #: ../libgnomeui/gnome-app-helper.c:262
 msgid "_Undo Move"
@@ -534,11 +534,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:283
 msgid "_End Game"
-msgstr ""
+msgstr "Ўйинни _тугатиш"
 
 #: ../libgnomeui/gnome-app-helper.c:284
 msgid "End the current game"
-msgstr ""
+msgstr "Жорий ўйинни тугатади"
 
 #: ../libgnomeui/gnome-app-helper.c:1146
 msgid "_Contents"
@@ -558,11 +558,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:2588
 msgid "Icons Only"
-msgstr ""
+msgstr "Фақат нишончалар"
 
 #: ../libgnomeui/gnome-app-helper.c:2589
 msgid "Text Only"
-msgstr ""
+msgstr "Фақат матн"
 
 #: ../libgnomeui/gnome-app-helper.c:2650
 #, c-format
@@ -571,39 +571,39 @@ msgstr ""
 
 #: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
-msgstr ""
+msgstr " (\"Enter\" ни босинг)"
 
 #: ../libgnomeui/gnome-app-util.c:140
 msgid "ERROR: "
-msgstr ""
+msgstr "ХАТО: "
 
 #: ../libgnomeui/gnome-app-util.c:177
 msgid "Warning: "
-msgstr ""
+msgstr "Огоҳлантириш: "
 
 #: ../libgnomeui/gnome-app-util.c:315
 msgid "y"
-msgstr ""
+msgstr "ҳ"
 
 #: ../libgnomeui/gnome-app-util.c:316
 msgid "yes"
-msgstr ""
+msgstr "ҳа"
 
 #: ../libgnomeui/gnome-app-util.c:319
 msgid "n"
-msgstr ""
+msgstr "й"
 
 #: ../libgnomeui/gnome-app-util.c:320
 msgid "no"
-msgstr ""
+msgstr "йўқ"
 
 #: ../libgnomeui/gnome-app-util.c:355
 msgid " (yes or no)"
-msgstr ""
+msgstr " (ҳа ёки йўқ)"
 
 #: ../libgnomeui/gnome-app-util.c:356
 msgid "  - OK? (yes or no)"
-msgstr ""
+msgstr "  - OK? (ҳа ёки йўқ)"
 
 #: ../libgnomeui/gnome-app-util.c:684
 msgid "Progress"
@@ -611,7 +611,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr ""
+msgstr "Дастур ID'си"
 
 #: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
