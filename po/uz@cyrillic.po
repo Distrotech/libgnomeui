@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: uz@cyrillic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-01 11:08+0500\n"
-"PO-Revision-Date: 2008-12-11 22:37+0500\n"
+"PO-Revision-Date: 2008-12-21 15:17+0500\n"
 "Last-Translator: Nurali Abdurahmonov <mavnur@gmail.com>\n"
 "Language-Team: Uzbek\n"
 "MIME-Version: 1.0\n"
@@ -214,11 +214,11 @@ msgstr "_Кўриниш/"
 
 #: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
-msgstr ""
+msgstr "_Мосламалар"
 
 #: ../libgnomeui/gnome-app-helper.c:88
 msgid "_Settings/"
-msgstr ""
+msgstr "_Мосламалар/"
 
 #. If you have more then one New type, use this tree
 #: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:326
@@ -284,29 +284,29 @@ msgstr "Жорий файлни бошқа ном билан сақлаш"
 #. Revert
 #: ../libgnomeui/gnome-app-helper.c:124
 msgid "_Revert"
-msgstr ""
+msgstr "_Тиклаш"
 
 #: ../libgnomeui/gnome-app-helper.c:125
 msgid "Revert to a saved version of the file"
-msgstr ""
+msgstr "Файлни сақланган версиясини тиклаш"
 
 #. Print
 #: ../libgnomeui/gnome-app-helper.c:130
 msgid "_Print..."
-msgstr ""
+msgstr "_Босиб чиқариш..."
 
 #: ../libgnomeui/gnome-app-helper.c:130
 msgid "Print the current file"
-msgstr ""
+msgstr "Жорий файлни босиб чиқариш"
 
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:135
 msgid "Print S_etup..."
-msgstr ""
+msgstr "Босиб чиқариш _мосламалари..."
 
 #: ../libgnomeui/gnome-app-helper.c:136
 msgid "Setup the page settings for your current printer"
-msgstr ""
+msgstr "Жорий принтер учун саҳифа параметрларини мослаш"
 
 #. Close
 #: ../libgnomeui/gnome-app-helper.c:141
@@ -332,11 +332,11 @@ msgstr "Дастурдан чиқиш"
 #. Cut
 #: ../libgnomeui/gnome-app-helper.c:154
 msgid "Cu_t"
-msgstr ""
+msgstr "Ке_сиш"
 
 #: ../libgnomeui/gnome-app-helper.c:154
 msgid "Cut the selection"
-msgstr ""
+msgstr "Танланганни кесиш"
 
 #. 10
 #. Copy
@@ -355,16 +355,16 @@ msgstr "_Қўйиш"
 
 #: ../libgnomeui/gnome-app-helper.c:165
 msgid "Paste the clipboard"
-msgstr ""
+msgstr "Клипборддан қўйиш"
 
 #. Clear
 #: ../libgnomeui/gnome-app-helper.c:170
 msgid "C_lear"
-msgstr ""
+msgstr "_Тозалаш"
 
 #: ../libgnomeui/gnome-app-helper.c:170
 msgid "Clear the selection"
-msgstr ""
+msgstr "Танланганни тозалаш"
 
 #. Undo
 #: ../libgnomeui/gnome-app-helper.c:175
@@ -378,11 +378,11 @@ msgstr "Охирги амални бекор қилиш"
 #. Redo
 #: ../libgnomeui/gnome-app-helper.c:180
 msgid "_Redo"
-msgstr ""
+msgstr "_Қайтариш"
 
 #: ../libgnomeui/gnome-app-helper.c:180
 msgid "Redo the undone action"
-msgstr ""
+msgstr "Бекор қилинган амални қайтариш"
 
 #. Find
 #: ../libgnomeui/gnome-app-helper.c:185
@@ -396,7 +396,7 @@ msgstr ""
 #. Find Again
 #: ../libgnomeui/gnome-app-helper.c:190
 msgid "Find Ne_xt"
-msgstr ""
+msgstr "_Кейингини қидириш"
 
 #: ../libgnomeui/gnome-app-helper.c:191
 msgid "Search again for the same string"
@@ -418,7 +418,7 @@ msgstr "_Хоссалари"
 
 #: ../libgnomeui/gnome-app-helper.c:202
 msgid "Modify the file's properties"
-msgstr ""
+msgstr "Файл хоссаларини ўзгартириш"
 
 #.
 #. * The Settings menu
@@ -430,7 +430,7 @@ msgstr "Пара_метрлар"
 
 #: ../libgnomeui/gnome-app-helper.c:211
 msgid "Configure the application"
-msgstr ""
+msgstr "Дастурни мослаш"
 
 #. 20
 #.
@@ -451,7 +451,7 @@ msgstr "_Ҳаммасини танлаш"
 
 #: ../libgnomeui/gnome-app-helper.c:225
 msgid "Select everything"
-msgstr ""
+msgstr "Ҳаммасини танлаш"
 
 #.
 #. * Window menu
@@ -485,15 +485,15 @@ msgstr "Янги ўйин бошлайди"
 
 #: ../libgnomeui/gnome-app-helper.c:252
 msgid "_Pause Game"
-msgstr ""
+msgstr "Ўйинни _вақт. тўхтатиш"
 
 #: ../libgnomeui/gnome-app-helper.c:253
 msgid "Pause the game"
-msgstr ""
+msgstr "Ўйинни вақт. тўхтатиш"
 
 #: ../libgnomeui/gnome-app-helper.c:257
 msgid "_Restart Game"
-msgstr "Ўйинни _қайта бошлаш"
+msgstr "1Ўйинни _қайта бошлаш"
 
 #: ../libgnomeui/gnome-app-helper.c:258
 msgid "Restart the game"
@@ -501,36 +501,36 @@ msgstr "Ўйинни қайтадан бошлайди"
 
 #: ../libgnomeui/gnome-app-helper.c:262
 msgid "_Undo Move"
-msgstr ""
+msgstr "Юришни _бекор қилиш"
 
 #: ../libgnomeui/gnome-app-helper.c:263
 msgid "Undo the last move"
-msgstr ""
+msgstr "Охирги юришни бекор қилиш"
 
 #: ../libgnomeui/gnome-app-helper.c:267
 msgid "_Redo Move"
-msgstr ""
+msgstr "Юришни _қайтариш"
 
 #: ../libgnomeui/gnome-app-helper.c:268
 msgid "Redo the undone move"
-msgstr ""
+msgstr "Бекор  қилинган юришни қайтариш"
 
 #: ../libgnomeui/gnome-app-helper.c:272
 msgid "_Hint"
-msgstr ""
+msgstr "_Ёрдам"
 
 #: ../libgnomeui/gnome-app-helper.c:273
 msgid "Get a hint for your next move"
-msgstr ""
+msgstr "Навбатдаги юриш учун ёрдам олиш"
 
 #. 30
 #: ../libgnomeui/gnome-app-helper.c:278
 msgid "_Scores..."
-msgstr ""
+msgstr "_Очколар..."
 
 #: ../libgnomeui/gnome-app-helper.c:279
 msgid "View the scores"
-msgstr ""
+msgstr "Очколарни кўриш"
 
 #: ../libgnomeui/gnome-app-helper.c:283
 msgid "_End Game"
@@ -550,7 +550,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:2586
 msgid "Text Below Icons"
-msgstr ""
+msgstr "Матн нишончалар остида"
 
 #: ../libgnomeui/gnome-app-helper.c:2587
 msgid "Priority Text Beside Icons"
@@ -567,7 +567,7 @@ msgstr "Фақат матн"
 #: ../libgnomeui/gnome-app-helper.c:2650
 #, c-format
 msgid "Use Desktop Default (%s)"
-msgstr ""
+msgstr "Иш столи андозасидан (%s) фойдаланиш"
 
 #: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
@@ -639,12 +639,12 @@ msgstr ""
 
 #: ../libgnomeui/gnome-appbar.c:760
 msgid "Level of user activity required."
-msgstr ""
+msgstr "Фойдаланувчи фаоллик даражаси талаб қилинади."
 
 #: ../libgnomeui/gnome-authentication-manager.c:82
 #, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr ""
+msgstr "HTTP прокси сеансга киришни талаб қилади.\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:83
 #, c-format
@@ -655,16 +655,16 @@ msgstr ""
 
 #: ../libgnomeui/gnome-authentication-manager.c:86
 msgid "Your password will be transmitted unencrypted."
-msgstr ""
+msgstr "Махфий сўзингиз шифрланмасдан жўнатилади."
 
 #: ../libgnomeui/gnome-authentication-manager.c:87
 msgid "Your password will be transmitted encrypted."
-msgstr ""
+msgstr "Махфий сўзингиз шифрланиб жўнатилади."
 
 #: ../libgnomeui/gnome-authentication-manager.c:90
 #: ../libgnomeui/gnome-authentication-manager.c:309
 msgid "Authentication Required"
-msgstr ""
+msgstr "Тасдиқлаш талаб қилинади"
 
 #. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
 #: ../libgnomeui/gnome-authentication-manager.c:301
@@ -687,51 +687,51 @@ msgstr ""
 
 #: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "Specify prefix of saved configuration"
-msgstr ""
+msgstr "Сақланган мослама префиксини кўрсатиш"
 
 #: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "PREFIX"
-msgstr ""
+msgstr "ПРЕФИКС"
 
 #: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
-msgstr ""
+msgstr "Сеанс бошқарувчиси билан алоқани узиш"
 
 #: ../libgnomeui/gnome-client.c:1014
 msgid "Session management:"
-msgstr ""
+msgstr "Сеанс бошқаруви:"
 
 #: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
-msgstr ""
+msgstr "Сеанс бошқаруви параметрларини кўрсатиш"
 
 #: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
-msgstr ""
+msgstr "Сеанс бошқаруви"
 
 #: ../libgnomeui/gnome-client.c:2571
 msgid "Cancel Logout"
-msgstr ""
+msgstr "Тизимдан чиқишни бекор қилиш"
 
 #: ../libgnomeui/gnome-color-picker.c:412
 msgid "Received invalid color data\n"
-msgstr ""
+msgstr "Нотўғри ранг малумотлари олинди\n"
 
 #: ../libgnomeui/gnome-color-picker.c:466
 msgid "Open a dialog to specify the color"
-msgstr ""
+msgstr "Рангни аниқлаш диалогини очиш"
 
 #: ../libgnomeui/gnome-color-picker.c:488
 msgid "Pick a color"
-msgstr ""
+msgstr "Ранг танлаш"
 
 #: ../libgnomeui/gnome-dateedit.c:493 ../libgnomeui/gnome-dateedit.c:790
 msgid "Time"
-msgstr ""
+msgstr "Вақт"
 
 #: ../libgnomeui/gnome-dateedit.c:494
 msgid "The time currently selected"
-msgstr ""
+msgstr "Жорий танланган вақт"
 
 #: ../libgnomeui/gnome-dateedit.c:506
 msgid "DateEdit Flags"
@@ -767,28 +767,28 @@ msgstr ""
 
 #: ../libgnomeui/gnome-dateedit.c:753 ../libgnomeui/gnome-scores.c:96
 msgid "Date"
-msgstr ""
+msgstr "Сана"
 
 #: ../libgnomeui/gnome-dateedit.c:766
 msgid "Select Date"
-msgstr ""
+msgstr "Санани танланг"
 
 #: ../libgnomeui/gnome-dateedit.c:766
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Тақвимдан санани танланг"
 
 #. Calendar label, only shown if the date editor has a time field
 #: ../libgnomeui/gnome-dateedit.c:777
 msgid "Calendar"
-msgstr ""
+msgstr "Тақвим"
 
 #: ../libgnomeui/gnome-dateedit.c:798
 msgid "Select Time"
-msgstr ""
+msgstr "Вақтни танланг"
 
 #: ../libgnomeui/gnome-dateedit.c:798
 msgid "Select the time from a list"
-msgstr ""
+msgstr "Рўйхатдан вақтни танланг"
 
 #: ../libgnomeui/gnome-dateedit.c:1017
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -842,23 +842,23 @@ msgstr ""
 #: ../libgnomeui/gnome-druid-page-standard.c:169
 #: ../libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
-msgstr ""
+msgstr "Орқа фон ранги"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
-msgstr ""
+msgstr "Орқа фон ранги"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
-msgstr ""
+msgstr "GdkColor форматидаги орқа фон ранги"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
-msgstr ""
+msgstr "Орқа фон ранглар тўплами"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
-msgstr ""
+msgstr "Орқа фон ранги ўрнатилди"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:193
 #: ../libgnomeui/gnome-druid-page-standard.c:201
@@ -904,7 +904,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid.c:153
 msgid "Show Finish"
-msgstr ""
+msgstr "Тугатиш тугмасини кўрсатиш"
 
 #: ../libgnomeui/gnome-druid.c:154
 msgid "Show the 'Finish' button instead of the 'Next' button"
@@ -916,7 +916,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid.c:162
 msgid "Show the 'Help' button"
-msgstr ""
+msgstr "'Ёрдам' тугмасини кўрсатиш"
 
 #: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
 #: ../libgnomeui/gnome-file-entry.c:236 ../libgnomeui/gnome-icon-entry.c:176
@@ -965,7 +965,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:270 ../libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
-msgstr ""
+msgstr "Файл номи"
 
 #: ../libgnomeui/gnome-file-entry.c:271
 msgid "Filename that should be displayed in the file entry."
@@ -973,7 +973,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:279
 msgid "Default Path"
-msgstr ""
+msgstr "Андоза йўл"
 
 #: ../libgnomeui/gnome-file-entry.c:280
 msgid "Default path for the Browse file window."
@@ -1021,19 +1021,19 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
-msgstr ""
+msgstr "Файлни танлаш"
 
 #: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
-msgstr ""
+msgstr "Йўл"
 
 #: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
-msgstr ""
+msgstr "Файл йўли"
 
 #: ../libgnomeui/gnome-file-entry.c:843
 msgid "_Browse..."
-msgstr ""
+msgstr "_Танлаш..."
 
 #: ../libgnomeui/gnome-file-entry.c:844
 msgid "Pop up a file selector to choose a file"
@@ -1041,7 +1041,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
-msgstr ""
+msgstr "sans 12"
 
 #: ../libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
@@ -1053,7 +1053,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
-msgstr ""
+msgstr "Танлаш диалог қутиси сарлавҳаси"
 
 #: ../libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
@@ -1065,23 +1065,23 @@ msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
-msgstr ""
+msgstr "Шрифт номи"
 
 #: ../libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
-msgstr ""
+msgstr "Танланган шрифт номи"
 
 #: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
 msgid "Font"
-msgstr ""
+msgstr "Шрифт"
 
 #: ../libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
-msgstr ""
+msgstr "Танланган GtkFont шрифти"
 
 #: ../libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
-msgstr ""
+msgstr "Матн намунаси"
 
 #: ../libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
@@ -1105,7 +1105,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
-msgstr ""
+msgstr "Ўлчамини кўрсатиш"
 
 #: ../libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
@@ -1117,7 +1117,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr ""
+msgstr "_Тафсилотлар"
 
 #: ../libgnomeui/gnome-gconf-ui.c:171
 #, c-format
@@ -1137,7 +1137,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-href.c:102
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: ../libgnomeui/gnome-href.c:103
 msgid "The URL that GnomeHRef activates"
@@ -1145,11 +1145,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-href.c:110
 msgid "Text"
-msgstr ""
+msgstr "Матн"
 
 #: ../libgnomeui/gnome-href.c:111
 msgid "The text on the button"
-msgstr ""
+msgstr "Тугмадаги матн"
 
 #: ../libgnomeui/gnome-href.c:112
 msgid "End World Hunger"
@@ -1157,7 +1157,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-href.c:118
 msgid "Link color"
-msgstr ""
+msgstr "Боғлама ранги"
 
 #: ../libgnomeui/gnome-href.c:119
 msgid "Color used to draw the link"
@@ -1197,7 +1197,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
-msgstr ""
+msgstr "Танлаш ойнаси"
 
 #: ../libgnomeui/gnome-icon-entry.c:211
 msgid ""
@@ -1211,23 +1211,23 @@ msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:773
 msgid "Icon selection dialog"
-msgstr ""
+msgstr "Нишонча танлаш ойнаси"
 
 #: ../libgnomeui/gnome-icon-entry.c:774
 msgid "This dialog box lets you select an icon."
-msgstr ""
+msgstr "Ушбу диалог ойнаси нишонча танлаш имкониятини беради."
 
 #: ../libgnomeui/gnome-icon-entry.c:780 ../libgnomeui/gnome-icon-entry.c:1006
 msgid "Icon Selector"
-msgstr ""
+msgstr "Нишонча танлагич"
 
 #: ../libgnomeui/gnome-icon-entry.c:781
 msgid "Please pick the icon you want."
-msgstr ""
+msgstr "Марҳамат истаган нишончангизни танланг."
 
 #: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "This button will open a window to let you select an icon."
-msgstr ""
+msgstr "Бу тугма нишонча танлаш ойнасини очади."
 
 #: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
@@ -1235,7 +1235,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Icon path"
-msgstr ""
+msgstr "Нишонча йўли"
 
 #: ../libgnomeui/gnome-icon-entry.c:1033
 msgid ""
@@ -1255,59 +1255,59 @@ msgstr ""
 
 #: ../libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
-msgstr ""
+msgstr "Нишончалар юкланмоқда..."
 
 #: ../libgnomeui/gnome-messagebox.c:107
 msgid "Information"
-msgstr ""
+msgstr "Маълумот"
 
 #: ../libgnomeui/gnome-messagebox.c:112
 msgid "Warning"
-msgstr ""
+msgstr "Огоҳлантириш"
 
 #: ../libgnomeui/gnome-messagebox.c:118
 msgid "Error"
-msgstr ""
+msgstr "Хатолик"
 
 #: ../libgnomeui/gnome-messagebox.c:124
 msgid "Question"
-msgstr ""
+msgstr "Савол"
 
 #: ../libgnomeui/gnome-messagebox.c:129
 msgid "Message"
-msgstr ""
+msgstr "Хабар"
 
 #: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
-msgstr ""
+msgstr "Фойдаланувчи номи: "
 
 #: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
-msgstr ""
+msgstr "_Домен:"
 
 #: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
-msgstr ""
+msgstr "_Махфий сўз:"
 
 #: ../libgnomeui/gnome-password-dialog.c:219
 msgid "_New password:"
-msgstr ""
+msgstr "_Янги махфий сўз:"
 
 #: ../libgnomeui/gnome-password-dialog.c:220
 msgid "Con_firm password:"
-msgstr ""
+msgstr "Махфий сўзни _тасдиқланг:"
 
 #: ../libgnomeui/gnome-password-dialog.c:223
 msgid "Password quality:"
-msgstr ""
+msgstr "Махфий сўзнинг сифати:"
 
 #: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
-msgstr ""
+msgstr "Ула_ниш"
 
 #: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
-msgstr ""
+msgstr "_Махфий уланиш"
 
 #: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
@@ -1315,15 +1315,15 @@ msgstr ""
 
 #: ../libgnomeui/gnome-password-dialog.c:438
 msgid "_Forget password immediately"
-msgstr ""
+msgstr "Махфий сўзни дарҳол _унутиш"
 
 #: ../libgnomeui/gnome-password-dialog.c:444
 msgid "_Remember password until you logout"
-msgstr ""
+msgstr "Махфий сўзни сеансдан чиққунча _эслаб қолиш"
 
 #: ../libgnomeui/gnome-password-dialog.c:450
 msgid "_Remember forever"
-msgstr ""
+msgstr "Доим _эслаб қолиш"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:112
 msgid "Do Preview"
@@ -1340,7 +1340,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-pixmap-entry.c:204
 msgid "Image Preview"
-msgstr ""
+msgstr "Расмни олдиндан кўриш"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:205
 msgid "A preview of the image currently specified"
@@ -1360,11 +1360,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-scores.c:90
 msgid "User"
-msgstr ""
+msgstr "Фойдаланувчи"
 
 #: ../libgnomeui/gnome-scores.c:93
 msgid "Score"
-msgstr ""
+msgstr "Ҳисоб"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
@@ -1375,11 +1375,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-scores.c:394
 msgid "Sans 14"
-msgstr ""
+msgstr "Sans 14"
 
 #: ../libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
-msgstr ""
+msgstr "Жадвал чегаралари"
 
 #: ../libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
@@ -1387,11 +1387,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
-msgstr ""
+msgstr "Белгили рўйхат"
 
 #: ../libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
-msgstr ""
+msgstr "Рақамли рўйхат"
 
 #: ../libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
@@ -1403,19 +1403,19 @@ msgstr ""
 
 #: ../libgnomeui/gnome-stock-icons.c:145
 msgid "About"
-msgstr ""
+msgstr "Дастур ҳақида"
 
 #: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:172
 msgid "Disable Crash Dialog"
-msgstr ""
+msgstr "Носозлик диалогини ўчириш"
 
 #: ../libgnomeui/gnome-ui-init.c:155
 msgid "GNOME GUI Library:"
-msgstr ""
+msgstr "GNOME фойдаланувчи интерфейси кутубхонаси:"
 
 #: ../libgnomeui/gnome-ui-init.c:156
 msgid "Show GNOME GUI options"
-msgstr ""
+msgstr "GNOME фойдаланувчи интерфейси параметрларини кўрсатиш"
 
 #: ../libgnomeui/gnome-ui-init.c:174
 msgid "X display to use"
@@ -1423,15 +1423,15 @@ msgstr ""
 
 #: ../libgnomeui/gnome-ui-init.c:174
 msgid "DISPLAY"
-msgstr ""
+msgstr "Дисплей"
 
 #: ../libgnomeui/gnome-ui-init.c:179
 msgid "GNOME GUI Library"
-msgstr ""
+msgstr "GNOME фойдаланувчи интерфейси кутубхонаси"
 
 #: ../libgnomeui/gnome-ui-init.c:244
 msgid "Could not open link"
-msgstr ""
+msgstr "Боғламани очиб бўлмади"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
