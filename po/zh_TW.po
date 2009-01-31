@@ -2,17 +2,17 @@
 # Copyright (C) 2001, 02, 03, 04, 06, 07 Free Software Foundation, Inc.
 # Joe Man <trmetal@yahoo.com.hk>, 2001-02.
 # Abel Cheung <abel@oaka.org>, 2002-04, 06.
-#
+# Woodman Tuen <wmtuen@gmail.com>, 2007.
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui 2.23.5.2\n"
+"Project-Id-Version: libgnomeui 2.24.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-07-13 16:52+0800\n"
+"POT-Creation-Date: 2009-01-30 22:43+0800\n"
 "PO-Revision-Date: 2007-02-26 10:23+0800\n"
 "Last-Translator: Woodman Tuen <wmtuen@gmail.com>\n"
-"Language-Team: Chinese (Taiwan) <community@linuxhall.org>\n"
+"Language-Team: Chinese (Taiwan) <zh-l10n@lists.linux.org.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -71,7 +71,7 @@ msgstr "程式的版本"
 
 #: ../libgnomeui/gnome-about.c:380
 msgid "Copyright string"
-msgstr "版權資訊字串"
+msgstr "版權資訊"
 
 #: ../libgnomeui/gnome-about.c:381
 msgid "Copyright information for the program"
@@ -79,11 +79,11 @@ msgstr "該程式的版權資訊"
 
 #: ../libgnomeui/gnome-about.c:388
 msgid "Comments string"
-msgstr "備註字串"
+msgstr "程式說明"
 
 #: ../libgnomeui/gnome-about.c:389
 msgid "Comments about the program"
-msgstr "有關該程式的說明文字"
+msgstr "有關該程式的說明"
 
 #: ../libgnomeui/gnome-about.c:395
 msgid "Authors"
@@ -107,7 +107,7 @@ msgstr "文件編寫員"
 
 #: ../libgnomeui/gnome-about.c:407
 msgid "List of people documenting the program"
-msgstr "為程式編寫文件的人員的名單"
+msgstr "為程式編寫文件的人員名單"
 
 #: ../libgnomeui/gnome-about.c:409
 msgid "Documenter entry"
@@ -124,7 +124,7 @@ msgstr "鳴謝翻譯者"
 #: ../libgnomeui/gnome-about.c:419
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr "向翻譯者致謝。本字串應該被標記為可翻譯的字串。"
+msgstr "翻譯者的相關訊息。本字串應該被標記為可翻譯的字串"
 
 #: ../libgnomeui/gnome-about.c:426
 #: ../libgnomeui/gnome-druid-page-standard.c:123
@@ -168,11 +168,11 @@ msgstr "顯示(_V)/"
 
 #: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
-msgstr "設定(_S)"
+msgstr "設定值(_S)"
 
 #: ../libgnomeui/gnome-app-helper.c:90
 msgid "_Settings/"
-msgstr "設定(_S)/"
+msgstr "設定值(_S)/"
 
 #. If you have more then one New type, use this tree
 #: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:326
@@ -215,7 +215,7 @@ msgstr "開啟(_O)..."
 
 #: ../libgnomeui/gnome-app-helper.c:110
 msgid "Open a file"
-msgstr "開啟現有的檔案"
+msgstr "開啟檔案"
 
 #. Save
 #: ../libgnomeui/gnome-app-helper.c:115
@@ -233,7 +233,7 @@ msgstr "另存新檔(_A)..."
 
 #: ../libgnomeui/gnome-app-helper.c:121
 msgid "Save the current file with a different name"
-msgstr "將目前的檔案用另一名稱儲存"
+msgstr "以另一個名稱儲存目前的檔案"
 
 #. Revert
 #: ../libgnomeui/gnome-app-helper.c:126
@@ -242,7 +242,7 @@ msgstr "回復(_R)"
 
 #: ../libgnomeui/gnome-app-helper.c:127
 msgid "Revert to a saved version of the file"
-msgstr "將檔案內容回復至已儲存的版本"
+msgstr "將檔案還原為已儲存的版本"
 
 #. Print
 #: ../libgnomeui/gnome-app-helper.c:132
@@ -274,11 +274,11 @@ msgstr "關閉目前的檔案"
 #. Exit
 #: ../libgnomeui/gnome-app-helper.c:148
 msgid "_Quit"
-msgstr "離開(_Q)"
+msgstr "結束(_Q)"
 
 #: ../libgnomeui/gnome-app-helper.c:148
 msgid "Quit the application"
-msgstr "離開程式"
+msgstr "結束這個程式"
 
 #.
 #. * The "Edit" menu
@@ -290,7 +290,7 @@ msgstr "剪下(_T)"
 
 #: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cut the selection"
-msgstr "剪下選定的內容"
+msgstr "剪下選取範圍"
 
 #. 10
 #. Copy
@@ -300,7 +300,7 @@ msgstr "複製(_C)"
 
 #: ../libgnomeui/gnome-app-helper.c:162
 msgid "Copy the selection"
-msgstr "複製選定的內容"
+msgstr "複製選取的內容"
 
 #. Paste
 #: ../libgnomeui/gnome-app-helper.c:167
@@ -309,7 +309,7 @@ msgstr "貼上(_P)"
 
 #: ../libgnomeui/gnome-app-helper.c:167
 msgid "Paste the clipboard"
-msgstr "貼上剪貼簿中的內容"
+msgstr "貼上剪貼簿的內容"
 
 #. Clear
 #: ../libgnomeui/gnome-app-helper.c:172
@@ -327,7 +327,7 @@ msgstr "復原(_U)"
 
 #: ../libgnomeui/gnome-app-helper.c:177
 msgid "Undo the last action"
-msgstr "取消上一個操作程序"
+msgstr "復原最後一個動作"
 
 #. Redo
 #: ../libgnomeui/gnome-app-helper.c:182
@@ -336,12 +336,12 @@ msgstr "取消復原(_R)"
 
 #: ../libgnomeui/gnome-app-helper.c:182
 msgid "Redo the undone action"
-msgstr "重複進行剛復原的操作程序"
+msgstr "重複剛復原的操作程序"
 
 #. Find
 #: ../libgnomeui/gnome-app-helper.c:187
 msgid "_Find..."
-msgstr "搜尋(_F)..."
+msgstr "尋找(_F)..."
 
 #: ../libgnomeui/gnome-app-helper.c:187
 msgid "Search for a string"
@@ -350,7 +350,7 @@ msgstr "搜尋字串"
 #. Find Again
 #: ../libgnomeui/gnome-app-helper.c:192
 msgid "Find Ne_xt"
-msgstr "繼續搜尋(_X)"
+msgstr "找下一個(_X)"
 
 #: ../libgnomeui/gnome-app-helper.c:193
 msgid "Search again for the same string"
@@ -368,7 +368,7 @@ msgstr "取代字串"
 #. Properties
 #: ../libgnomeui/gnome-app-helper.c:203
 msgid "_Properties"
-msgstr "屬性(_P)..."
+msgstr "屬性(_P)"
 
 #: ../libgnomeui/gnome-app-helper.c:204
 msgid "Modify the file's properties"
@@ -384,7 +384,7 @@ msgstr "偏好設定(_N)"
 
 #: ../libgnomeui/gnome-app-helper.c:213
 msgid "Configure the application"
-msgstr "修改有關本程式的設定"
+msgstr "設定此程式"
 
 #. 20
 #.
@@ -397,7 +397,7 @@ msgstr "關於(_A)"
 
 #: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "顯示有關本程式的資訊"
+msgstr "關於此程式"
 
 #: ../libgnomeui/gnome-app-helper.c:226
 msgid "Select _All"
@@ -431,7 +431,7 @@ msgstr "關閉目前的視窗"
 #.
 #: ../libgnomeui/gnome-app-helper.c:249
 msgid "_New Game"
-msgstr "新遊戲(_N)"
+msgstr "開新局(_N)"
 
 #: ../libgnomeui/gnome-app-helper.c:250
 msgid "Start a new game"
@@ -443,7 +443,7 @@ msgstr "暫停遊戲(_P)"
 
 #: ../libgnomeui/gnome-app-helper.c:255
 msgid "Pause the game"
-msgstr "暫停今局遊戲"
+msgstr "暫停遊戲"
 
 #: ../libgnomeui/gnome-app-helper.c:259
 msgid "_Restart Game"
@@ -451,23 +451,23 @@ msgstr "重新開始遊戲(_R)"
 
 #: ../libgnomeui/gnome-app-helper.c:260
 msgid "Restart the game"
-msgstr "重新開始今局遊戲"
+msgstr "再玩這一局"
 
 #: ../libgnomeui/gnome-app-helper.c:264
 msgid "_Undo Move"
-msgstr "還原上一步(_U)"
+msgstr "回手(_U)"
 
 #: ../libgnomeui/gnome-app-helper.c:265
 msgid "Undo the last move"
-msgstr "取消剛進行的一步"
+msgstr "還原上一步"
 
 #: ../libgnomeui/gnome-app-helper.c:269
 msgid "_Redo Move"
-msgstr "取消還原(_R)"
+msgstr "取消回手(_R)"
 
 #: ../libgnomeui/gnome-app-helper.c:270
 msgid "Redo the undone move"
-msgstr "重新執行剛取消的一步"
+msgstr "重新進行剛才還原的一步"
 
 #: ../libgnomeui/gnome-app-helper.c:274
 msgid "_Hint"
@@ -475,7 +475,7 @@ msgstr "提示(_H)"
 
 #: ../libgnomeui/gnome-app-helper.c:275
 msgid "Get a hint for your next move"
-msgstr "獲取下一步的提示"
+msgstr "給下一步的提示"
 
 #. 30
 #: ../libgnomeui/gnome-app-helper.c:280
@@ -484,7 +484,7 @@ msgstr "分數(_S)..."
 
 #: ../libgnomeui/gnome-app-helper.c:281
 msgid "View the scores"
-msgstr "觀看所得的積分"
+msgstr "顯示分數"
 
 #: ../libgnomeui/gnome-app-helper.c:285
 msgid "_End Game"
@@ -598,7 +598,7 @@ msgstr "指定狀態列可否接受用戶輸入。"
 #: ../libgnomeui/gnome-authentication-manager.c:82
 #, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "HTTP 代理伺服器需要登入後方可使用。\n"
+msgstr "您的 HTTP 代理伺服器要求您登入。\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:83
 #, c-format
@@ -620,7 +620,7 @@ msgstr "您的密碼會以加密的方式傳送。"
 #: ../libgnomeui/gnome-authentication-manager.c:90
 #: ../libgnomeui/gnome-authentication-manager.c:309
 msgid "Authentication Required"
-msgstr "需要認證"
+msgstr "要求驗證"
 
 # FIXME: "domain" really means network domain? -- Abel
 #. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
@@ -634,61 +634,61 @@ msgstr "您必須登入方可存取 %s (網域 %s)\n"
 msgid "You must log in to access %s\n"
 msgstr "您必須登入方可存取 %s\n"
 
-#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "Specify session management ID"
-msgstr "指定作業階段管理的識別碼"
+msgstr "指定作業階段管理 ID"
 
-#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "ID"
-msgstr "識別碼"
+msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "Specify prefix of saved configuration"
 msgstr "指定組態檔的前置字串"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "PREFIX"
 msgstr "前置字串"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
+#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
-msgstr "不連接到作業階段總管"
+msgstr "停用到作業階段管理程式的連線"
 
-#: ../libgnomeui/gnome-client.c:1013
+#: ../libgnomeui/gnome-client.c:1014
 msgid "Session management:"
 msgstr "作業階段管理："
 
-#: ../libgnomeui/gnome-client.c:1014
+#: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
 msgstr "顯示有關作業階段管理的選項"
 
-#: ../libgnomeui/gnome-client.c:1045
+#: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
 msgstr "作業階段管理"
 
-#: ../libgnomeui/gnome-client.c:2579
+#: ../libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
 msgstr "取消登出"
 
 #: ../libgnomeui/gnome-color-picker.c:404
 msgid "Received invalid color data\n"
-msgstr "接收到無效的色彩資料\n"
+msgstr "收到了無效的顏色資料\n"
 
 #: ../libgnomeui/gnome-color-picker.c:458
 msgid "Open a dialog to specify the color"
-msgstr "開啟用來選取顏色的對話方塊"
+msgstr "開啟用來選取顏色的對話盒"
 
 #: ../libgnomeui/gnome-color-picker.c:480
 msgid "Pick a color"
-msgstr "選取顏色"
+msgstr "挑選顏色"
 
 #: ../libgnomeui/gnome-dateedit.c:495 ../libgnomeui/gnome-dateedit.c:802
 msgid "Time"
-msgstr "時間"
+msgstr "時刻"
 
 #: ../libgnomeui/gnome-dateedit.c:496
 msgid "The time currently selected"
-msgstr "目前選定的時間"
+msgstr "目前選定的時刻"
 
 #: ../libgnomeui/gnome-dateedit.c:508
 msgid "DateEdit Flags"
@@ -728,7 +728,7 @@ msgstr "日期"
 
 #: ../libgnomeui/gnome-dateedit.c:778
 msgid "Select Date"
-msgstr "選取日期"
+msgstr "選擇日期"
 
 #: ../libgnomeui/gnome-dateedit.c:778
 msgid "Select the date from a calendar"
@@ -741,11 +741,11 @@ msgstr "日曆"
 
 #: ../libgnomeui/gnome-dateedit.c:810
 msgid "Select Time"
-msgstr "選取時間"
+msgstr "選擇時刻"
 
 #: ../libgnomeui/gnome-dateedit.c:810
 msgid "Select the time from a list"
-msgstr "從清單中選取時間"
+msgstr "從清單中選取時刻"
 
 #: ../libgnomeui/gnome-dateedit.c:1029
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -807,7 +807,7 @@ msgstr "背景顏色"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:172
 msgid "Background color as a GdkColor"
-msgstr "以 GdkColor 方式表示的背景顏色"
+msgstr "背景顏色（以 GdkColor 表示）"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:179
 msgid "Background color set"
@@ -1010,7 +1010,7 @@ msgstr "The following is Chinese: '中文測試'"
 
 #: ../libgnomeui/gnome-font-picker.c:60
 msgid "Pick a Font"
-msgstr "選取字型"
+msgstr "請選擇字型"
 
 #: ../libgnomeui/gnome-font-picker.c:148
 msgid "The title of the selection dialog box"
@@ -1050,7 +1050,7 @@ msgstr "對話方塊中顯示的預覽文字"
 
 #: ../libgnomeui/gnome-font-picker.c:193
 msgid "Use font in label"
-msgstr "字型本身反映在名稱內"
+msgstr "字型本身反映在標籤內"
 
 #: ../libgnomeui/gnome-font-picker.c:194
 msgid "Use font in the label in font info mode"
@@ -1078,7 +1078,7 @@ msgstr "GNOME GConf 用戶介面支援"
 
 #: ../libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr "細節(_D)"
+msgstr "詳細資料(_D)"
 
 #: ../libgnomeui/gnome-gconf-ui.c:171
 #, c-format
@@ -1120,7 +1120,7 @@ msgstr "結束全球飢荒"
 
 #: ../libgnomeui/gnome-href.c:118
 msgid "Link color"
-msgstr "鏈結顏色"
+msgstr "連結顏色"
 
 #: ../libgnomeui/gnome-href.c:119
 msgid "Color used to draw the link"
@@ -1246,27 +1246,27 @@ msgstr "訊息"
 
 #: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
-msgstr "使用者名稱(_U)："
+msgstr "使用者名稱(_U):"
 
 #: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
-msgstr "網域(_D)："
+msgstr "網域(_D):"
 
 #: ../libgnomeui/gnome-password-dialog.c:202
 msgid "_Password:"
-msgstr "密碼(_P)："
+msgstr "密碼(_P):"
 
 #: ../libgnomeui/gnome-password-dialog.c:205
 msgid "_New password:"
-msgstr "新密碼(_N)："
+msgstr "新密碼(_N):"
 
 #: ../libgnomeui/gnome-password-dialog.c:206
 msgid "Con_firm password:"
-msgstr "確認密碼(_F)："
+msgstr "確認密碼(_F):"
 
 #: ../libgnomeui/gnome-password-dialog.c:209
 msgid "Password quality:"
-msgstr "密碼品質："
+msgstr "密碼品質:"
 
 #: ../libgnomeui/gnome-password-dialog.c:324
 msgid "Co_nnect"
@@ -1274,11 +1274,11 @@ msgstr "連線(_N)"
 
 #: ../libgnomeui/gnome-password-dialog.c:357
 msgid "Connect _anonymously"
-msgstr "以暱名方式連接(_A)"
+msgstr "匿名連線(_A)"
 
 #: ../libgnomeui/gnome-password-dialog.c:362
 msgid "Connect as u_ser:"
-msgstr "以指定使用者連接(_S)："
+msgstr "以使用者連線(_S):"
 
 #: ../libgnomeui/gnome-password-dialog.c:424
 msgid "_Forget password immediately"
@@ -1287,11 +1287,11 @@ msgstr "立即忘記密碼(_F)"
 # (Abel) 對於用戶來說，甚麼叫「作業階段」？
 #: ../libgnomeui/gnome-password-dialog.c:430
 msgid "_Remember password until you logout"
-msgstr "登出前記住密碼(_R)"
+msgstr "在您登出前記住密碼(_R)"
 
 #: ../libgnomeui/gnome-password-dialog.c:436
 msgid "_Remember forever"
-msgstr "永遠記下密碼(_R)"
+msgstr "永遠記住密碼(_R)"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:101
 msgid "Do Preview"
@@ -1359,7 +1359,7 @@ msgstr "無序號清單"
 
 #: ../libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
-msgstr "序號清單"
+msgstr "編號式清單"
 
 #: ../libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
@@ -1380,7 +1380,7 @@ msgstr "程式錯誤時不顯示任何對話方塊通知"
 
 #: ../libgnomeui/gnome-ui-init.c:143
 msgid "GNOME GUI Library:"
-msgstr "GNOME 圖形介面函式庫："
+msgstr "GNOME 圖形介面程式庫："
 
 #: ../libgnomeui/gnome-ui-init.c:144
 msgid "Show GNOME GUI options"
@@ -1388,15 +1388,15 @@ msgstr "顯示有關 GNOME 圖形介面的選項"
 
 #: ../libgnomeui/gnome-ui-init.c:162
 msgid "X display to use"
-msgstr "準備使用的 X 畫面編號"
+msgstr "使用的 X 畫面"
 
 #: ../libgnomeui/gnome-ui-init.c:162
 msgid "DISPLAY"
-msgstr "畫面編號"
+msgstr "畫面"
 
 #: ../libgnomeui/gnome-ui-init.c:167
 msgid "GNOME GUI Library"
-msgstr "GNOME 圖形介面函式庫"
+msgstr "GNOME 圖形介面程式庫"
 
 #: ../libgnomeui/gnome-ui-init.c:232
 msgid "Could not open link"
@@ -1440,14 +1440,14 @@ msgstr "結束測試"
 #~ msgstr "無法取得‘%s’的資訊"
 
 #~ msgid "Could not get information for file '%s': %s"
-#~ msgstr "無法擷取有關檔案‘%s’的資訊：%s"
+#~ msgstr "無法取得檔案「%s」的資訊：%s"
 
 #~ msgid "Failed to open file '%s': %s"
-#~ msgstr "無法開啟檔案‘%s’：%s"
+#~ msgstr "開啟檔案「%s」失敗：%s"
 
 #~ msgid ""
 #~ "Failed to load image '%s': reason not known, probably a corrupt image file"
-#~ msgstr "無法載入圖片‘%s’：原因不詳，有可能是圖片內容損壞"
+#~ msgstr "無法載入圖片檔「%s」：原因不明，可能檔案已經損毀"
 
 #~ msgid "Multiple segmentation faults occurred; can't display error dialog\n"
 #~ msgstr "發生了非常嚴重的錯誤；無法顯示錯誤訊息對話方塊\n"
