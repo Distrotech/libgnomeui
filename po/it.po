@@ -1,16 +1,18 @@
 # Italian localization for libgnomeui-2
-# Copyright (C) 2001 Free Software Foundation, Inc.
+# Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
 # Christopher R. Gabriel <cgabriel@cgabriel.org>, 2001
 # Alessio Frusciante <algol@firenze.linux.it>, 2003.
-# Francesco Marletta <francesco.marletta@tiscali.it>, 2004-2008.
+# Francesco Marletta <francesco.marletta@tiscali.it>, 2004, 205, 2006, 20007, 2008, 2009.
 #
+# Francesco Marletta <francesco.marletta@tiscali.it>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.24\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-09-17 00:38+0000\n"
-"PO-Revision-Date: 2008-09-03 22:57+0200\n"
-"Last-Translator: Luca Ferretti <elle.uca@libero.it>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=libgnomeui&component=general\n"
+"POT-Creation-Date: 2009-02-06 05:14+0000\n"
+"PO-Revision-Date: 2009-02-27 13:44+0100\n"
+"Last-Translator: Francesco Marletta <francesco.marletta@tiscali.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -652,39 +654,39 @@ msgid "You must log in to access %s\n"
 msgstr "È necessario effettuare il login per accedere a \"%s\"\n"
 
 # GNOME-2-22
-#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "Specify session management ID"
 msgstr "Specifica l'ID del gestore di sessione"
 
-#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "Specify prefix of saved configuration"
 msgstr "Specifica il prefisso della configurazione salvata"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "PREFIX"
 msgstr "PREFISSO"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
+#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
 msgstr "Disabilita la connessione al gestore di sessione"
 
-#: ../libgnomeui/gnome-client.c:1013
+#: ../libgnomeui/gnome-client.c:1014
 msgid "Session management:"
 msgstr "Gestione della sessione:"
 
-#: ../libgnomeui/gnome-client.c:1014
+#: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
 msgstr "Mostra le opzioni di gestione della sessione"
 
-#: ../libgnomeui/gnome-client.c:1045
+#: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
 msgstr "Gestione della sessione"
 
-#: ../libgnomeui/gnome-client.c:2579
+#: ../libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
 msgstr "Annulla uscita"
 
