@@ -1,3 +1,10 @@
+libgnomeui 2.24.1
+
+* Make it work with deprecations enabled in glib/gtk+
+* Fix leaks (Matthias Clasen, Christian Persch)
+* Updated translations
+  (ar, ast, bg, hi, it, la, lv, ko, or, pt_BR, uz, zh_HK, zh_TW)
+ 
 libgnomeui 2.24.0
 
 * Updated translations
