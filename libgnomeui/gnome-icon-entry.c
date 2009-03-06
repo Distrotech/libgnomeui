@@ -34,6 +34,9 @@
  * icon selection based on original dentry-edit code which was:
  *	Written by: Havoc Pennington, based on code by John Ellis.
  */
+
+#undef GTK_DISABLE_DEPRECATED
+
 #include <config.h>
 #include <libgnome/gnome-macros.h>
 
@@ -472,7 +475,7 @@ ientry_destroy (GtkObject *object)
 	ientry->_priv->picked_file = NULL;
 
 	if (ientry->_priv->fentry != NULL)
-		gtk_widget_unref (ientry->_priv->fentry);
+		g_object_unref (ientry->_priv->fentry);
 	ientry->_priv->fentry = NULL;
 
 	if (ientry->_priv->pick_dialog != NULL)
@@ -1022,7 +1025,7 @@ gnome_icon_entry_instance_init (GnomeIconEntry *ientry)
 			    _("Icon path"),
 			    _("Here you should enter the name of the directory "
 			      "where icon images are located."));
-	gtk_widget_ref (ientry->_priv->fentry);
+	g_object_ref (ientry->_priv->fentry);
 	g_signal_connect_after (ientry->_priv->fentry, "browse_clicked",
 				G_CALLBACK (browse_clicked),
 				ientry);

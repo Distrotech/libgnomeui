@@ -702,11 +702,11 @@ client_save_yourself_callback (SmcConn   smc_conn,
   if (gdk_pointer_is_grabbed())
     {
       gboolean waiting = TRUE;
-      gint id = gtk_timeout_add (4000, end_wait, &waiting);
+      gint id = g_timeout_add (4000, end_wait, &waiting);
 
       while (gdk_pointer_is_grabbed() && waiting)
 	gtk_main_iteration();
-      gtk_timeout_remove (id);
+      g_source_remove (id);
     }
 
   /* Check that we did not receive a shutdown cancelled while waiting

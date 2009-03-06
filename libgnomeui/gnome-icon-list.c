@@ -1437,7 +1437,7 @@ gil_destroy (GtkObject *object)
 	}
 
 	if (gil->_priv->timer_tag != 0) {
-		gtk_timeout_remove (gil->_priv->timer_tag);
+		g_source_remove (gil->_priv->timer_tag);
 		gil->_priv->timer_tag = 0;
 	}
 
@@ -2010,7 +2010,7 @@ gil_button_release (GtkWidget *widget, GdkEventButton *event)
 	priv->selecting = FALSE;
 
 	if (priv->timer_tag != 0) {
-		gtk_timeout_remove (priv->timer_tag);
+		g_source_remove (priv->timer_tag);
 		priv->timer_tag = 0;
 	}
 
@@ -2073,7 +2073,7 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 	if (absolute_y < 0 || absolute_y > widget->allocation.height) {
 
 		if (priv->timer_tag == 0)
-			priv->timer_tag = gtk_timeout_add (SCROLL_TIMEOUT, scroll_timeout, gil);
+			priv->timer_tag = g_timeout_add (SCROLL_TIMEOUT, scroll_timeout, gil);
 
 		if (absolute_y < 0)
 			priv->value_diff = absolute_y;
@@ -2089,7 +2089,7 @@ gil_motion_notify (GtkWidget *widget, GdkEventMotion *event)
 		 */
 		priv->value_diff /= 4;
 	} else if (priv->timer_tag != 0) {
-		gtk_timeout_remove (priv->timer_tag);
+		g_source_remove (priv->timer_tag);
 		priv->timer_tag = 0;
 	}
 
@@ -2514,17 +2514,16 @@ gnome_icon_list_set_vadjustment (GnomeIconList *gil, GtkAdjustment *vadj)
 	if (gil->adj) {
 		g_signal_handlers_disconnect_matched (gil->adj, G_SIGNAL_MATCH_DATA,
 						      0, 0, NULL, NULL, gil);
-		g_object_unref (G_OBJECT (gil->adj));
+		g_object_unref (gil->adj);
 	}
 
 	gil->adj = vadj;
 
 	if (gil->adj) {
-		g_object_ref (G_OBJECT (gil->adj));
-		gtk_object_sink (GTK_OBJECT (gil->adj));
-		g_signal_connect (G_OBJECT (gil->adj), "value_changed",
+		g_object_ref_sink (gil->adj);
+		g_signal_connect (gil->adj, "value_changed",
 				  G_CALLBACK (gil_adj_value_changed), gil);
-		g_signal_connect (G_OBJECT (gil->adj), "changed",
+		g_signal_connect (gil->adj, "changed",
 				  G_CALLBACK (gil_adj_value_changed), gil);
 	}
 

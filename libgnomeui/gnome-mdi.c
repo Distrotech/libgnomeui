@@ -240,7 +240,7 @@ static void gnome_mdi_destroy (GtkObject *object)
 
 	gnome_mdi_remove_all(mdi, TRUE);
 
-	gtk_object_sink(GTK_OBJECT(object));
+	g_object_ref_sink(GTK_OBJECT(object));
 
 	if(GTK_OBJECT_CLASS(parent_class)->destroy)
 		(* GTK_OBJECT_CLASS(parent_class)->destroy)(object);
@@ -1168,7 +1168,7 @@ gint gnome_mdi_add_view (GnomeMDI *mdi, GnomeMDIChild *child)
 	   when removed from its parent later, as we want it to
 	   stay valid until removed from the child with a call
 	   to gnome_mdi_child_remove_view() */
-	gtk_widget_ref(view);
+	g_object_ref(view);
 
 	if(!GTK_WIDGET_VISIBLE(view))
 		gtk_widget_show(view);
@@ -1246,7 +1246,7 @@ gint gnome_mdi_add_toplevel_view (GnomeMDI *mdi, GnomeMDIChild *child)
 	   when removed from its parent later, as we want it to
 	   stay valid until removed from the child with a call
 	   to gnome_mdi_child_remove_view() */
-	gtk_widget_ref(view);
+	g_object_ref(view);
 
 	if(!GTK_WIDGET_VISIBLE(view))
 		gtk_widget_show(view);
@@ -1450,7 +1450,7 @@ gint gnome_mdi_remove_child (GnomeMDI *mdi, GnomeMDIChild *child, gint force)
 
 	child->parent = NULL;
 
-	gtk_object_sink(GTK_OBJECT(child));
+	g_object_ref_sink(GTK_OBJECT(child));
 
 	if(mdi->mode == GNOME_MDI_MODAL && mdi->children) {
 		GnomeMDIChild *next_child = mdi->children->data;

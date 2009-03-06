@@ -28,6 +28,8 @@
  * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
+#undef GTK_DISABLE_DEPRECATED
+
 #include <config.h>
 #include <libgnome/gnome-macros.h>
 

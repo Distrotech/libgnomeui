@@ -22,6 +22,8 @@
 
 /* this file is only built if GNOME support is enabled */
 
+#undef GTK_DISABLE_DEPRECATED
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

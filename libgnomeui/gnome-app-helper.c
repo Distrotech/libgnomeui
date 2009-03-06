@@ -31,6 +31,8 @@
  * Major cleanups and rearrangements by Federico Mena and Justin Maurer.
  */
 
+#undef GTK_DISABLE_DEPRECATED
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

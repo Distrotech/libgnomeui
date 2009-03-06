@@ -241,7 +241,7 @@ remove_message_timeout (MessageInfo * mi)
 static void
 remove_timeout_cb ( GtkWidget * app, MessageInfo * mi )
 {
-  gtk_timeout_remove(mi->timeoutid);
+  g_source_remove(mi->timeoutid);
   g_free(mi);
 }
 
@@ -279,9 +279,9 @@ gnome_app_flash (GnomeApp * app, const gchar * flash)
     mi = g_new(MessageInfo, 1);
 
     mi->timeoutid =
-      gtk_timeout_add ( flash_length,
-			(GtkFunction) remove_message_timeout,
-			mi );
+      g_timeout_add (flash_length,
+		     (GtkFunction) remove_message_timeout,
+		      mi);
 
     mi->handlerid =
       g_signal_connect (G_OBJECT(app),
@@ -766,9 +766,9 @@ gnome_app_progress_timeout (GnomeApp * app,
     progress_dialog (description, key);
   }
 
-  key->timeout_tag = gtk_timeout_add ( interval,
-				       (GtkFunction) progress_timeout_cb,
-				       key );
+  key->timeout_tag = g_timeout_add (interval,
+				    (GtkFunction) progress_timeout_cb,
+				    key);
 
   /* Make sure progress stops if the app is destroyed. */
   key->handler_id = g_signal_connect(app, "destroy",
@@ -852,7 +852,7 @@ void gnome_app_set_progress (GnomeAppProgressKey key, gdouble percent)
 static void progress_timeout_remove(ProgressKeyReal * key)
 {
   if (key->timeout_tag != INVALID_TIMEOUT) {
-    gtk_timeout_remove(key->timeout_tag);
+    g_source_remove (key->timeout_tag);
     key->timeout_tag = INVALID_TIMEOUT;
   }
 }

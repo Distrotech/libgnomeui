@@ -453,7 +453,7 @@ gnome_pixmap_button(GtkWidget *pixmap, const char *text)
 		gtk_box_pack_start(GTK_BOX(hbox), pixmap,
 				   FALSE, FALSE, 0);
 	} else {
-                gtk_widget_unref(pixmap);
+                g_object_unref(pixmap);
         }
 
 	return button;

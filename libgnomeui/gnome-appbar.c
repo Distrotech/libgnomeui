@@ -712,7 +712,7 @@ gnome_appbar_class_init (GnomeAppBarClass *class)
 
   gobject_class = (GObjectClass *) class;
 
-  parent_class = GTK_HBOX_CLASS (gtk_type_class (GTK_TYPE_HBOX));
+  parent_class = GTK_HBOX_CLASS (g_type_class_ref (GTK_TYPE_HBOX));
 
   gobject_class->constructor  = gnome_appbar_constructor;
   gobject_class->get_property = gnome_appbar_get_property;

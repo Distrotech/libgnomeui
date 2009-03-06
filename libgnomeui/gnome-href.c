@@ -127,7 +127,7 @@ gnome_href_instance_init (GnomeHRef *href)
 	href->_priv = g_new0(GnomeHRefPrivate, 1);
 
 	href->_priv->label = gtk_label_new(NULL);
-	gtk_widget_ref(href->_priv->label);
+	g_object_ref(href->_priv->label);
 
 
 	gtk_button_set_relief(GTK_BUTTON(href), GTK_RELIEF_NONE);
@@ -406,7 +406,7 @@ gnome_href_destroy (GtkObject *object)
 	href = GNOME_HREF (object);
 
 	if (href->_priv->label != NULL) {
-		gtk_widget_unref (href->_priv->label);
+		g_object_unref (href->_priv->label);
 		href->_priv->label = NULL;
 	}
 

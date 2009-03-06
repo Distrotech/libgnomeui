@@ -1,3 +1,5 @@
+#undef GTK_DISABLE_DEPRECATED
+
 #include <config.h>
 #include <gtk/gtk.h>
 #include <libgnomeui.h>

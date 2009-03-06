@@ -326,8 +326,7 @@ gnome_popup_menu_attach (GtkWidget *popup, GtkWidget *widget,
 
 	/* Ref/sink the popup menu so that we take "ownership" of it */
 
-	g_object_ref (G_OBJECT (popup));
-	gtk_object_sink (GTK_OBJECT (popup));
+	g_object_ref_sink (popup);
 
 	/* Store the user data pointer in the widget -- we will use it later when the menu has to be
 	 * invoked.

@@ -30,6 +30,8 @@
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  */
 
+#undef GTK_DISABLE_DEPRECATED
+
 #define _XOPEN_SOURCE 500
 
 #include <config.h>

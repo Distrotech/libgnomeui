@@ -30,6 +30,9 @@
  *
  * Author: George Lebl <jirka@5z.com>
  */
+
+#undef GTK_DISABLE_DEPRECATED
+
 #include <config.h>
 #include <libgnome/gnome-macros.h>
 

@@ -176,7 +176,7 @@ void gnome_mdi_child_remove_view(GnomeMDIChild *mdi_child, GtkWidget *view)
 {
 	mdi_child->views = g_list_remove(mdi_child->views, view);
 
-	gtk_widget_unref(view);
+	g_object_unref(view);
 }
 
 /**

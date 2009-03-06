@@ -267,7 +267,7 @@ gnome_default_gconf_client_error_handler (GConfClient                  *client,
         pending_errors = g_slist_append(pending_errors, g_error_copy(error));
 
         if (error_handler_idle == 0) {
-                error_handler_idle = gtk_idle_add (error_idle_func, NULL);
+                error_handler_idle = g_idle_add (error_idle_func, NULL);
         }
 }
 

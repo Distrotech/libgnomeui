@@ -1,3 +1,42 @@
+2009-03-06  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* configure.in: Correct version. We're at 2.24.1 not .2
+	* glade/glade-gnome.c:
+	* libgnomeui/gnome-app-helper.c:
+	* libgnomeui/gnome-app-util.c: (remove_timeout_cb),
+	(gnome_app_flash), (gnome_app_progress_timeout),
+	(progress_timeout_remove):
+	* libgnomeui/gnome-appbar.c: (gnome_appbar_class_init):
+	* libgnomeui/gnome-authentication-manager.c:
+	* libgnomeui/gnome-client.c: (client_save_yourself_callback):
+	* libgnomeui/gnome-dateedit.c:
+	* libgnomeui/gnome-dialog.c: (gnome_pixmap_button):
+	* libgnomeui/gnome-entry.c:
+	* libgnomeui/gnome-file-entry.c:
+	* libgnomeui/gnome-gconf-ui.c:
+	(gnome_default_gconf_client_error_handler):
+	* libgnomeui/gnome-href.c: (gnome_href_instance_init),
+	(gnome_href_destroy):
+	* libgnomeui/gnome-icon-entry.c: (ientry_destroy),
+	(gnome_icon_entry_instance_init):
+	* libgnomeui/gnome-icon-list.c: (if):
+	* libgnomeui/gnome-mdi-child.c: (gnome_mdi_child_remove_view):
+	* libgnomeui/gnome-mdi.c: (gnome_mdi_destroy),
+	(gnome_mdi_add_view), (gnome_mdi_add_toplevel_view),
+	(gnome_mdi_remove_child):
+	* libgnomeui/gnome-pixmap-entry.c:
+	* libgnomeui/gnome-popup-menu.c: (gnome_popup_menu_attach):
+	* libgnomeui/gnometypes.c:
+	* test-gnome/test-password-dialog.c:
+	* test-gnome/testdruid.c:
+	* test-gnome/testentry.c:
+	* test-gnome/testgnome.c:
+	* test-gnome/testgnomegdkpixbuf.c:
+	* test-gnome/testiconlist.c:
+	- Port to non-deprecated glib/gtk+ api and make
+	it build with deprecations enabled where there's still
+	porting to do.
+
 2008-12-07  Cosimo Cecchi  <cosimoc@gnome.org>
 
 	* libgnomeui/gnome-vfs-util.c:
