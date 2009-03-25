@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Shankar Prasad <svenkate@redhat.com>, 2008.
+# Shankar Prasad <svenkate@redhat.com>, 2008, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui.HEAD.kn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-14 13:37+0000\n"
-"PO-Revision-Date: 2008-08-23 00:37+0530\n"
+"POT-Creation-Date: 2008-11-07 14:34+0100\n"
+"PO-Revision-Date: 2009-03-25 12:16+0530\n"
 "Last-Translator: Shankar Prasad <svenkate@redhat.com>\n"
 "Language-Team: Kannada <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,116 +34,116 @@ msgstr "ಉಪ ಅಂಶ ೨"
 msgid "Hint for item 2"
 msgstr "ಅಂಶ ೨ ಕ್ಕೆ ಸುಳಿವು"
 
-#: ../libgnomeui/gnome-about.c:199
+#: ../libgnomeui/gnome-about.c:187
 msgid "Credits"
 msgstr "ಮನ್ನಣೆಗಳು"
 
-#: ../libgnomeui/gnome-about.c:231
+#: ../libgnomeui/gnome-about.c:219
 msgid "Written by"
 msgstr "ಬರೆದವರು"
 
-#: ../libgnomeui/gnome-about.c:246
+#: ../libgnomeui/gnome-about.c:234
 msgid "Documented by"
 msgstr "ದಸ್ತಾವೇಜು ಮಾಡಿದವರು"
 
-#: ../libgnomeui/gnome-about.c:261
+#: ../libgnomeui/gnome-about.c:249
 msgid "Translated by"
 msgstr "ಅನುವಾದಕರು"
 
-#: ../libgnomeui/gnome-about.c:324
+#: ../libgnomeui/gnome-about.c:312
 msgid "C_redits"
 msgstr "ಮನ್ನಣೆಗಳು(_r)"
 
-#: ../libgnomeui/gnome-about.c:377
+#: ../libgnomeui/gnome-about.c:365
 msgid "Program name"
 msgstr "ಪ್ರೊಗ್ರಾಂನ ಹೆಸರು"
 
-#: ../libgnomeui/gnome-about.c:378
+#: ../libgnomeui/gnome-about.c:366
 msgid "The name of the program"
 msgstr "ಪ್ರೊಗ್ರಾಂನ ಹೆಸರು"
 
-#: ../libgnomeui/gnome-about.c:385
+#: ../libgnomeui/gnome-about.c:373
 msgid "Program version"
 msgstr "ಪ್ರೊಗ್ರಾಂನ ಆವೃತ್ತಿ"
 
-#: ../libgnomeui/gnome-about.c:386
+#: ../libgnomeui/gnome-about.c:374
 msgid "The version of the program"
 msgstr "ಪ್ರೊಗ್ರಾಂನ ಆವೃತ್ತಿ"
 
-#: ../libgnomeui/gnome-about.c:392
+#: ../libgnomeui/gnome-about.c:380
 msgid "Copyright string"
 msgstr "ಹಕ್ಕಿನ ಮಾಹಿತಿ"
 
-#: ../libgnomeui/gnome-about.c:393
+#: ../libgnomeui/gnome-about.c:381
 msgid "Copyright information for the program"
 msgstr "ಪ್ರೊಗ್ರಾಂನ ಹಕ್ಕಿನ ಬಗೆಗಿನ ಮಾಹಿತಿ"
 
-#: ../libgnomeui/gnome-about.c:400
+#: ../libgnomeui/gnome-about.c:388
 msgid "Comments string"
 msgstr "ಟಿಪ್ಪಣಿಗಳ ವಾಕ್ಯ"
 
-#: ../libgnomeui/gnome-about.c:401
+#: ../libgnomeui/gnome-about.c:389
 msgid "Comments about the program"
 msgstr "ಪ್ರೋಗ್ರಾಂ ಬಗೆಗಿನ ಟಿಪ್ಪಣಿ"
 
-#: ../libgnomeui/gnome-about.c:407
+#: ../libgnomeui/gnome-about.c:395
 msgid "Authors"
 msgstr "ಲೇಖಕರು"
 
-#: ../libgnomeui/gnome-about.c:408
+#: ../libgnomeui/gnome-about.c:396
 msgid "List of authors of the programs"
 msgstr "ಪ್ರೋಗ್ರಾಂ ಅನ್ನು ಬರೆದವರ ಪಟ್ಟಿ"
 
-#: ../libgnomeui/gnome-about.c:410
+#: ../libgnomeui/gnome-about.c:398
 msgid "Author entry"
 msgstr "ಲೇಖಕರ ನಮೂದು"
 
-#: ../libgnomeui/gnome-about.c:411
+#: ../libgnomeui/gnome-about.c:399
 msgid "A single author entry"
 msgstr "ಒಬ್ಬ ಲೇಖಕನ ನಮೂದು"
 
-#: ../libgnomeui/gnome-about.c:418
+#: ../libgnomeui/gnome-about.c:406
 msgid "Documenters"
 msgstr "ದಸ್ತಾವೇಜು ಮಾಡಿದವರು"
 
-#: ../libgnomeui/gnome-about.c:419
+#: ../libgnomeui/gnome-about.c:407
 msgid "List of people documenting the program"
 msgstr "ಪ್ರೋಗ್ರಾಂ ಅನ್ನು ದಸ್ತಾವೇಜುಗೊಳಿಸಿದವರ ಪಟ್ಟಿ"
 
-#: ../libgnomeui/gnome-about.c:421
+#: ../libgnomeui/gnome-about.c:409
 msgid "Documenter entry"
 msgstr "ದಸ್ತಾವೇಜುಗೊಳಿಸಿದವರ ನಮೂದು"
 
-#: ../libgnomeui/gnome-about.c:422
+#: ../libgnomeui/gnome-about.c:410
 msgid "A single documenter entry"
 msgstr "ಒಬ್ಬ ದಸ್ತಾವೇಜುಗಾರನ ನಮೂದು"
 
-#: ../libgnomeui/gnome-about.c:430
-#, fuzzy
+#: ../libgnomeui/gnome-about.c:418
 msgid "Translator credits"
-msgstr "ರೇಣುಕಾ ಪ್ರಸಾದ್ <rennie606@yahoo.co.in>, ಶಂಕರ್ ಪ್ರಸಾದ್ <svenkate@redhat.com>"
+msgstr ""
+"ರೇಣುಕಾ ಪ್ರಸಾದ್ <rennie606@yahoo.co.in>;\n"
+"ಶಂಕರ್ ಪ್ರಸಾದ್ <svenkate@redhat.com>"
 
-#: ../libgnomeui/gnome-about.c:431
+#: ../libgnomeui/gnome-about.c:419
 msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "ತರ್ಜುಮೆದಾರರಿಗೆ ಗೌರವ ಸಲ್ಲಿಕೆ. ಈ ವಾಕ್ಯವನ್ನು ಅನುವಾದ ಮಾಡಬಹುದೆಂದು ಗುರುತು ಹಾಕಬೇಕು."
+msgstr "ತರ್ಜುಮೆದಾರರಿಗೆ ಗೌರವ ಸಲ್ಲಿಕೆ. ಈ ವಾಕ್ಯವನ್ನು ಅನುವಾದ ಮಾಡಬಹುದೆಂದು ಗುರುತು ಹಾಕಬೇಕು"
 
-#: ../libgnomeui/gnome-about.c:438
-#: ../libgnomeui/gnome-druid-page-standard.c:129
+#: ../libgnomeui/gnome-about.c:426
+#: ../libgnomeui/gnome-druid-page-standard.c:123
 msgid "Logo"
 msgstr "ಚಿಹ್ನೆ"
 
-#: ../libgnomeui/gnome-about.c:439
+#: ../libgnomeui/gnome-about.c:427
 msgid "A logo for the about box"
 msgstr "ಇದರ ಬಗೆಗಿನ ಬಾಕ್ಸಿಗಾಗಿನ ಒಂದು ಚಿಹ್ನೆ"
 
-#: ../libgnomeui/gnome-about.c:518
+#: ../libgnomeui/gnome-about.c:506
 #, c-format
 msgid "About %s"
 msgstr "%s ಬಗ್ಗೆ"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:83
-#: ../libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "ಕಡತ(_F)"
@@ -152,8 +152,7 @@ msgstr "ಕಡತ(_F)"
 msgid "_File/"
 msgstr "ಕಡತ/(_F)"
 
-#: ../libgnomeui/gnome-app-helper.c:85
-#: ../libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "ಸಂಪಾದನೆ(_E)"
 
@@ -161,8 +160,7 @@ msgstr "ಸಂಪಾದನೆ(_E)"
 msgid "_Edit/"
 msgstr "ಸಂಪಾದನೆ/(_E)"
 
-#: ../libgnomeui/gnome-app-helper.c:87
-#: ../libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "ನೋಟ(_V)"
 
@@ -170,8 +168,7 @@ msgstr "ನೋಟ(_V)"
 msgid "_View/"
 msgstr "ನೋಟ/(_V)"
 
-#: ../libgnomeui/gnome-app-helper.c:89
-#: ../libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "ಸಂಯೋಜನೆಗಳು(_S)"
 
@@ -180,8 +177,7 @@ msgid "_Settings/"
 msgstr "ಸಂಯೋಜನೆಗಳು/(_S)"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:91
-#: ../libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "ಹೊಸತು(_N)"
 
@@ -189,8 +185,7 @@ msgstr "ಹೊಸತು(_N)"
 msgid "_New/"
 msgstr "ಹೊಸತು(_N)"
 
-#: ../libgnomeui/gnome-app-helper.c:93
-#: ../libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "ಕಡತಗಳು(_l)"
 
@@ -198,18 +193,15 @@ msgstr "ಕಡತಗಳು(_l)"
 msgid "Fi_les/"
 msgstr "ಕಡತಗಳು/(_l)"
 
-#: ../libgnomeui/gnome-app-helper.c:95
-#: ../libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "ವಿಂಡೋಗಳು(_W)"
 
-#: ../libgnomeui/gnome-app-helper.c:96
-#: ../libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "ಆಟ(_G)"
 
-#: ../libgnomeui/gnome-app-helper.c:97
-#: ../libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "ನೆರವು(_H)"
@@ -382,7 +374,7 @@ msgstr "ಗುಣಲಕ್ಷಣಗಳು(_P)"
 
 #: ../libgnomeui/gnome-app-helper.c:204
 msgid "Modify the file's properties"
-msgstr "ಕಡತದ ಗುಣಗಳನ್ನು ಮಾರ್ಪಡಿಸು."
+msgstr "ಕಡತದ ಗುಣಗಳನ್ನು ಮಾರ್ಪಡಿಸು"
 
 #.
 #. * The Settings menu
@@ -401,13 +393,11 @@ msgstr "ಅನ್ವಯವನ್ನು ಸಂರಚಿಸಿ"
 #. * And the "Help" menu
 #.
 #. About
-#: ../libgnomeui/gnome-app-helper.c:222
-#: ../test-gnome/testgnome.xml.h:4
+#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "ತಂತ್ರಾಂಶದ ಬಗ್ಗೆ(_A)"
 
-#: ../libgnomeui/gnome-app-helper.c:223
-#: ../test-gnome/testgnome.xml.h:1
+#: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "ಈ ಅನ್ವಯದ ಬಗ್ಗೆ"
 
@@ -434,8 +424,7 @@ msgstr "ಹೊಸ ವಿಂಡೋವನ್ನು ನಿರ್ಮಿಸು"
 msgid "_Close This Window"
 msgstr "ಈಗಿನ ವಿಂಡೋವನ್ನು ಮುಚ್ಚು(_C)"
 
-#: ../libgnomeui/gnome-app-helper.c:241
-#: ../test-gnome/testgnome.xml.h:2
+#: ../libgnomeui/gnome-app-helper.c:241 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "ಈಗಿನ ವಿಂಡೋವನ್ನು ಮುಚ್ಚು"
 
@@ -602,7 +591,7 @@ msgstr "ಒಂದು ಸ್ಥಿತಿ ವಿಜೆಟ್ ಅನ್ನು ನ�
 
 #: ../libgnomeui/gnome-appbar.c:759
 msgid "Interactivity"
-msgstr ""
+msgstr "ಸಂವಾದಾತ್ಮಕತೆ"
 
 #: ../libgnomeui/gnome-appbar.c:760
 msgid "Level of user activity required."
@@ -646,61 +635,55 @@ msgstr "%s ಕ್ಷೇತ್ರ %s ಅನ್ನು ನಿಲುಕಿಸಿಕ�
 msgid "You must log in to access %s\n"
 msgstr "%s ಅನ್ನು ನಿಲುಕಿಸಿಕೊಳ್ಳಲು ನೀವು ಒಳ ಪ್ರವೇಶಿಸಬೇಕಾಗುತ್ತದೆ\n"
 
-#: ../libgnomeui/gnome-client.c:999
-#: ../libgnomeui/gnome-client.c:1033
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "Specify session management ID"
-msgstr "ಅಧಿವೇಶನದ ನಿರ್ವಹಣಾ ಐಡಿಯನ್ನು ಸೂಚಿಸು."
+msgstr "ಅಧಿವೇಶನದ ನಿರ್ವಹಣಾ ಐಡಿಯನ್ನು ಸೂಚಿಸು"
 
-#: ../libgnomeui/gnome-client.c:999
-#: ../libgnomeui/gnome-client.c:1033
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "ID"
 msgstr "ಐಡಿ"
 
-#: ../libgnomeui/gnome-client.c:1002
-#: ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "Specify prefix of saved configuration"
 msgstr "ಉಳಿಸಲಾದ ಸಂಯೋಜನೆಯ ಪ್ರಿಫಿಕ್ಸನ್ನು ಸೂಚಿಸಿ"
 
-#: ../libgnomeui/gnome-client.c:1002
-#: ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "PREFIX"
 msgstr "PREFIX"
 
-#: ../libgnomeui/gnome-client.c:1005
-#: ../libgnomeui/gnome-client.c:1039
+#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
 msgstr "ಅಧಿವೇಶನದ ಮ್ಯಾನೇಜರಿನೊಂದಿಗೆ ಸಂಪರ್ಕವನ್ನು ಕಡಿದು ಹಾಕು"
 
-#: ../libgnomeui/gnome-client.c:1013
+#: ../libgnomeui/gnome-client.c:1014
 msgid "Session management:"
 msgstr "ಅಧಿವೇಶನದ ನಿರ್ವಹಣೆ:"
 
-#: ../libgnomeui/gnome-client.c:1014
+#: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
 msgstr "ಅಧಿವೇಶನದ ನಿರ್ವಹಣೆಯ ಆಯ್ಕೆಗಳನ್ನು ತೋರಿಸು"
 
-#: ../libgnomeui/gnome-client.c:1045
+#: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
 msgstr "ಅಧಿವೇಶನದ ನಿರ್ವಹಣೆ"
 
-#: ../libgnomeui/gnome-client.c:2579
+#: ../libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
 msgstr "ಹೊರನಡೆಯುವುದನ್ನು ರದ್ದುಗೊಳಿಸು"
 
-#: ../libgnomeui/gnome-color-picker.c:412
+#: ../libgnomeui/gnome-color-picker.c:404
 msgid "Received invalid color data\n"
 msgstr "ಅಮಾನ್ಯ ಬಣ್ಣದ ಮಾಹಿತಿಯನ್ನು ಪಡೆಯಲಾಗಿದೆ\n"
 
-#: ../libgnomeui/gnome-color-picker.c:466
+#: ../libgnomeui/gnome-color-picker.c:458
 msgid "Open a dialog to specify the color"
 msgstr "ಬಣ್ಣವನ್ನು ಸೂಚಿಸಲು ಒಂದು ಸಂವಾದವನ್ನು ತೆರೆ"
 
-#: ../libgnomeui/gnome-color-picker.c:488
+#: ../libgnomeui/gnome-color-picker.c:480
 msgid "Pick a color"
 msgstr "ಒಂದು ಬಣ್ಣವನ್ನು ಆರಿಸಿ"
 
-#: ../libgnomeui/gnome-dateedit.c:495
-#: ../libgnomeui/gnome-dateedit.c:802
+#: ../libgnomeui/gnome-dateedit.c:495 ../libgnomeui/gnome-dateedit.c:802
 msgid "Time"
 msgstr "ಸಮಯ"
 
@@ -740,8 +723,7 @@ msgstr "ಆರಂಭದ ಸಮಯ"
 msgid "The initial time"
 msgstr "ಆರಂಭದ ಸಮಯ"
 
-#: ../libgnomeui/gnome-dateedit.c:765
-#: ../libgnomeui/gnome-scores.c:96
+#: ../libgnomeui/gnome-dateedit.c:765 ../libgnomeui/gnome-scores.c:96
 msgid "Date"
 msgstr "ದಿನಾಂಕ"
 
@@ -768,120 +750,115 @@ msgstr "ಪಟ್ಟಿಯಿಂದ ಸಮಯವನ್ನು ಆಯ್ಕೆಮ�
 
 #: ../libgnomeui/gnome-dateedit.c:1029
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date ಅನ್ನು ತೆಗೆದು ಹಾಕಲಾಗಿದೆ, ಬದಲಿಗೆ gnome_date_edit_get_time ಅನ್ನು ಬಳಸಿ"
+msgstr ""
+"gnome_date_edit_get_date ಅನ್ನು ತೆಗೆದು ಹಾಕಲಾಗಿದೆ, ಬದಲಿಗೆ "
+"gnome_date_edit_get_time ಅನ್ನು ಬಳಸಿ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:121
-#: ../libgnomeui/gnome-font-picker.c:155
+#: ../libgnomeui/gnome-druid-page-standard.c:115
+#: ../libgnomeui/gnome-font-picker.c:147
 msgid "Title"
 msgstr "ಶೀರ್ಷಿಕೆ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:122
+#: ../libgnomeui/gnome-druid-page-standard.c:116
 msgid "Title of the druid"
 msgstr "ಗಾರುಡಿಯ ಶೀರ್ಷಿಕೆ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:130
+#: ../libgnomeui/gnome-druid-page-standard.c:124
 msgid "Logo image"
 msgstr "ಚಿಹ್ನೆಯ ಚಿತ್ರ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:137
+#: ../libgnomeui/gnome-druid-page-standard.c:131
 msgid "Top Watermark"
 msgstr "ಮೇಲ್ಭಾಗದ ವಾಟರ್ಮಾರ್ಕ್"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:138
-#, fuzzy
+#: ../libgnomeui/gnome-druid-page-standard.c:132
 msgid "Watermark image for the top"
-msgstr "ಮೇಲ್ಭಾಗದಲ್ಲಿ ವಾಟರ್ಮಾರ್ಕಿನ ಚಿತ್ರ"
+msgstr "ಮೇಲ್ಭಾಗಕ್ಕಾಗಿ ವಾಟರ್ಮಾರ್ಕಿನ ಚಿತ್ರ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:145
-#, fuzzy
+#: ../libgnomeui/gnome-druid-page-standard.c:139
 msgid "Title Foreground"
 msgstr "ಶೀರ್ಷಿಕೆಯ ಮುಂಭಾಗ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:146
-#, fuzzy
+#: ../libgnomeui/gnome-druid-page-standard.c:140
 msgid "Foreground color of the title"
 msgstr "ಶೀರ್ಷಿಕೆಯ ಮುಂಭಾಗದ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:153
-#, fuzzy
+#: ../libgnomeui/gnome-druid-page-standard.c:147
 msgid "Title Foreground Color"
 msgstr "ಶೀರ್ಷಿಕೆಯ ಮುಂಭಾಗದ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:154
-#, fuzzy
+#: ../libgnomeui/gnome-druid-page-standard.c:148
 msgid "Foreground color of the title as a GdkColor"
-msgstr "GdkColor ಆಗಿ ಶೀರ್ಷಿಕೆಯ ಮುಂಭಾಗದ ಬಣ್ಣ"
+msgstr "ಒಂದು GdkColor ಆಗಿ ಶೀರ್ಷಿಕೆಯ ಮುಂಭಾಗದ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:161
-#, fuzzy
+#: ../libgnomeui/gnome-druid-page-standard.c:155
 msgid "Title Foreground color set"
 msgstr "ಶೀರ್ಷಿಕೆಯ ಮುಂಭಾಗದ ಬಣ್ಣದ ಹೊಂದಿಕೆ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:162
-#, fuzzy
+#: ../libgnomeui/gnome-druid-page-standard.c:156
 msgid "Foreground color of the title is set"
 msgstr "ಶೀರ್ಷಿಕೆಯ ಮುಂಭಾಗದ ಬಣ್ಣವನ್ನು ಹೊಂದಿಸಲಾಗಿದೆ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:169
-#: ../libgnomeui/gnome-druid-page-standard.c:177
+#: ../libgnomeui/gnome-druid-page-standard.c:163
+#: ../libgnomeui/gnome-druid-page-standard.c:171
 msgid "Background Color"
 msgstr "ಹಿನ್ನಲೆ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:170
+#: ../libgnomeui/gnome-druid-page-standard.c:164
 msgid "Background color"
 msgstr "ಹಿನ್ನಲೆ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:178
+#: ../libgnomeui/gnome-druid-page-standard.c:172
 msgid "Background color as a GdkColor"
 msgstr "GdkColor ಆಗಿ ಹಿನ್ನಲೆ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:185
+#: ../libgnomeui/gnome-druid-page-standard.c:179
 msgid "Background color set"
 msgstr "ಹಿನ್ನಲೆ ಬಣ್ಣದ ಹೊಂದಿಕೆ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:186
+#: ../libgnomeui/gnome-druid-page-standard.c:180
 msgid "Background color is set"
 msgstr "ಹಿನ್ನಲೆ ಬಣ್ಣವನ್ನು ಹೊಂದಿಸಲಾಗಿದೆ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:193
-#: ../libgnomeui/gnome-druid-page-standard.c:201
+#: ../libgnomeui/gnome-druid-page-standard.c:187
+#: ../libgnomeui/gnome-druid-page-standard.c:195
 msgid "Contents Background Color"
 msgstr "ಒಳವಿಷಯಗಳ ಹಿನ್ನಲೆ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:194
+#: ../libgnomeui/gnome-druid-page-standard.c:188
 msgid "Contents Background color"
 msgstr "ಒಳವಿಷಯಗಳ ಹಿನ್ನಲೆ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:202
+#: ../libgnomeui/gnome-druid-page-standard.c:196
 msgid "Contents Background color as a GdkColor"
 msgstr "GdkColor ಆಗಿ ಒಳವಿಷಯಗಳ ಹಿನ್ನಲೆ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:209
+#: ../libgnomeui/gnome-druid-page-standard.c:203
 msgid "Contents Background color set"
 msgstr "ಒಳವಿಷಯಗಳ ಹಿನ್ನಲೆ ಬಣ್ಣದ ಹೊಂದಿಕೆ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:210
+#: ../libgnomeui/gnome-druid-page-standard.c:204
 msgid "Contents Background color is set"
 msgstr "ಒಳವಿಷಯಗಳ ಹಿನ್ನಲೆ ಬಣ್ಣವನ್ನು ಹೊಂದಿಸಲಾಗಿದೆ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:216
-#: ../libgnomeui/gnome-druid-page-standard.c:224
+#: ../libgnomeui/gnome-druid-page-standard.c:210
+#: ../libgnomeui/gnome-druid-page-standard.c:218
 msgid "Logo Background Color"
 msgstr "ಚಿಹ್ನೆಯ ಹಿನ್ನಲೆಯ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:217
+#: ../libgnomeui/gnome-druid-page-standard.c:211
 msgid "Logo Background color"
 msgstr "ಚಿಹ್ನೆಯ ಹಿನ್ನಲೆಯ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:225
+#: ../libgnomeui/gnome-druid-page-standard.c:219
 msgid "Logo Background color as a GdkColor"
 msgstr "GdkColor ಆಗಿ ಚಿಹ್ನೆಯ ಹಿನ್ನಲೆಯ ಬಣ್ಣ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:232
+#: ../libgnomeui/gnome-druid-page-standard.c:226
 msgid "Logo Background color set"
 msgstr "ಚಿಹ್ನೆಯ ಹಿನ್ನಲೆ ಬಣ್ಣದ ಹೊಂದಿಕೆ"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:233
+#: ../libgnomeui/gnome-druid-page-standard.c:227
 msgid "Logo Background color is set"
 msgstr "ಚಿಹ್ನೆಯ ಹಿನ್ನಲೆ ಬಣ್ಣವನ್ನು ಹೊಂದಿಸಲಾಗಿದೆ"
 
@@ -901,190 +878,198 @@ msgstr "ನೆರವನ್ನು ತೋರಿಸಿ"
 msgid "Show the 'Help' button"
 msgstr "'ನೆರವು' ಗುಂಡಿಯನ್ನು ತೋರಿಸು"
 
-#: ../libgnomeui/gnome-entry.c:193
-#: ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:239
-#: ../libgnomeui/gnome-icon-entry.c:176
+#: ../libgnomeui/gnome-entry.c:190 ../libgnomeui/gnome-entry.c:191
+#: ../libgnomeui/gnome-file-entry.c:231 ../libgnomeui/gnome-icon-entry.c:166
 msgid "History ID"
 msgstr "ಇತಿಹಾಸ ಐಡಿ"
 
-#: ../libgnomeui/gnome-entry.c:200
+#: ../libgnomeui/gnome-entry.c:197
 msgid "GTK entry"
 msgstr "GTK ನಮೂದು"
 
-#: ../libgnomeui/gnome-entry.c:201
+#: ../libgnomeui/gnome-entry.c:198
 msgid "The GTK entry"
 msgstr "GTK ನಮೂದು"
 
-#: ../libgnomeui/gnome-file-entry.c:240
-msgid "Unique identifier for the file entry.  This will be used to save the history list."
+#: ../libgnomeui/gnome-file-entry.c:232
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
 msgstr "ಕಡತದ ನಮೂದಿಗಾಗಿ ವಿಶಿಷ್ಟವಾದ ಗುರುತು. ಇದು ಇತಿಹಾಸ ಪಟ್ಟಿಯನ್ನು ಉಳಿಸಲು ಬಳಸಲಾಗುತ್ತದೆ."
 
-#: ../libgnomeui/gnome-file-entry.c:248
-#: ../libgnomeui/gnome-icon-entry.c:185
+#: ../libgnomeui/gnome-file-entry.c:240 ../libgnomeui/gnome-icon-entry.c:175
 msgid "Browse Dialog Title"
 msgstr "ಸಂವಾದದ ಶೀರ್ಷಿಕೆಯನ್ನು ವೀಕ್ಷಿಸು"
 
-#: ../libgnomeui/gnome-file-entry.c:249
+#: ../libgnomeui/gnome-file-entry.c:241
 msgid "Title for the Browse file dialog."
 msgstr "ಕಡತ ವೀಕ್ಷಿಸುವ ಸಂವಾದದ ಶೀರ್ಷಿಕೆ."
 
-#: ../libgnomeui/gnome-file-entry.c:256
+#: ../libgnomeui/gnome-file-entry.c:248
 msgid "Directory Entry"
 msgstr "ಕೋಶ ನಮೂದು"
 
-#: ../libgnomeui/gnome-file-entry.c:257
-msgid "Whether the file entry is being used to enter directory names or complete filenames."
-msgstr "ಕಡತದ ನಮೂದನ್ನು ಕೋಶ ಹೆಸರುಗಳನ್ನು ಅಥವಾ ಕಡತದ ಸಂಪೂರ್ಣ ಹೆಸರುಗಳನ್ನು ನಮೂದಿಸಲು ಬಳಸಲಾಗುತ್ತಿದೆಯೆ."
+#: ../libgnomeui/gnome-file-entry.c:249
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr ""
+"ಕಡತದ ನಮೂದನ್ನು ಕೋಶ ಹೆಸರುಗಳನ್ನು ಅಥವಾ ಕಡತದ ಸಂಪೂರ್ಣ ಹೆಸರುಗಳನ್ನು ನಮೂದಿಸಲು "
+"ಬಳಸಲಾಗುತ್ತಿದೆಯೆ."
 
-#: ../libgnomeui/gnome-file-entry.c:265
+#: ../libgnomeui/gnome-file-entry.c:257
 msgid "Modal"
 msgstr "ಮೋಡಲ್"
 
-#: ../libgnomeui/gnome-file-entry.c:266
+#: ../libgnomeui/gnome-file-entry.c:258
 msgid "Whether the Browse file window should be modal."
 msgstr "ಕಡತ ವೀಕ್ಷಿಸುವ ವಿಂಡೋ ಮೋಡಲ್ ಆಗಿರಬೇಕೆ."
 
-#: ../libgnomeui/gnome-file-entry.c:273
-#: ../libgnomeui/gnome-icon-entry.c:201
+#: ../libgnomeui/gnome-file-entry.c:265 ../libgnomeui/gnome-icon-entry.c:191
 msgid "Filename"
 msgstr "ಕಡತದ ಹೆಸರು"
 
-#: ../libgnomeui/gnome-file-entry.c:274
+#: ../libgnomeui/gnome-file-entry.c:266
 msgid "Filename that should be displayed in the file entry."
 msgstr "ಕಡತಗಳ ನಮೂದಿನಲ್ಲಿ ತೋರಿಸಬೇಕಾದ ಕಡತದ ಹೆಸರು."
 
-#: ../libgnomeui/gnome-file-entry.c:282
+#: ../libgnomeui/gnome-file-entry.c:274
 msgid "Default Path"
 msgstr "ಡಿಫಾಲ್ಟ್ ಮಾರ್ಗ"
 
-#: ../libgnomeui/gnome-file-entry.c:283
+#: ../libgnomeui/gnome-file-entry.c:275
 msgid "Default path for the Browse file window."
-msgstr "ಕಡತ ವೀಕ್ಷಿಸುವ ವಿಂಡೋನ ಡಿಫಾಲ್ಟ್ ಮಾರ್ಗ"
+msgstr "ಕಡತ ವೀಕ್ಷಿಸುವ ವಿಂಡೋನ ಪೂರ್ವನಿಯೋಜಿತ ಮಾರ್ಗ."
 
-#: ../libgnomeui/gnome-file-entry.c:290
+#: ../libgnomeui/gnome-file-entry.c:282
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:291
-msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
-msgstr ""
+#: ../libgnomeui/gnome-file-entry.c:283
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr "ಕಡತಹೆಸರುಗಳನ್ನು ನಮೂದಿಸಲು ಕಡತದ ನಮೂದು ಬಳಸುವ GnomeEntry.  ನೀವು ಇದನ್ನು GnomeEntry ಯ ಯಾವುದಾದರೂ ನಿಯತಾಂಕಗಳನ್ನು ಮಾರ್ಪಡಿಸಲು ಅಥವ ಪ್ರಶ್ನಿಸಬೇಕಿದ್ದಲ್ಲಿ GnomeEntry ಯನ್ನು ಪಡೆದುಕೊಳ್ಳಲು ಬಳಸಬಹುದು."
 
-#: ../libgnomeui/gnome-file-entry.c:301
+#: ../libgnomeui/gnome-file-entry.c:293
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:302
-msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
-msgstr ""
+#: ../libgnomeui/gnome-file-entry.c:294
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr "ಕಡತಹೆಸರುಗಳನ್ನು ನಮೂದಿಸಲು ಕಡತದ ನಮೂದು ಬಳಸುವ GtkEntry.  ನೀವು ಇದನ್ನು GtkEntry ಯ ಯಾವುದಾದರೂ ನಿಯತಾಂಕಗಳನ್ನು ಮಾರ್ಪಡಿಸಲು ಅಥವ ಪ್ರಶ್ನಿಸಬೇಕಿದ್ದಲ್ಲಿ GtkEntry ಯನ್ನು ಪಡೆದುಕೊಳ್ಳಲು ಬಳಸಬಹುದು."
 
-#: ../libgnomeui/gnome-file-entry.c:312
+#: ../libgnomeui/gnome-file-entry.c:304
 msgid "Use GtkFileChooser"
 msgstr "Use GtkFileChooser"
 
-#: ../libgnomeui/gnome-file-entry.c:313
-msgid "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget to select files."
-msgstr ""
+#: ../libgnomeui/gnome-file-entry.c:305
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr "ಕಡತಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಲು ಹೊಸ GtkFileChooser ವಿಜೆಟ್ ಅಥವ GtkFileSelection ವಿಜೆಟ್‌ ಅನ್ನು ಬಳಸಬೇಕೆ."
 
-#: ../libgnomeui/gnome-file-entry.c:322
+#: ../libgnomeui/gnome-file-entry.c:314
 msgid "GtkFileChooser Action"
-msgstr "GtkFileChooser Action"
+msgstr "GtkFileChooser ಕಾರ್ಯ"
 
-#: ../libgnomeui/gnome-file-entry.c:323
+#: ../libgnomeui/gnome-file-entry.c:315
 msgid "The type of operation that the file selector is performing."
 msgstr "ಕಡತದ ಆಯ್ಕೆಗಾರ ಮಾಡುತ್ತಿರುವ ಕೆಲಸದ ಬಗೆ."
 
-#: ../libgnomeui/gnome-file-entry.c:658
-#: ../libgnomeui/gnome-file-entry.c:695
+#: ../libgnomeui/gnome-file-entry.c:650 ../libgnomeui/gnome-file-entry.c:687
 msgid "Select file"
 msgstr "ಕಡತವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ"
 
-#: ../libgnomeui/gnome-file-entry.c:820
+#: ../libgnomeui/gnome-file-entry.c:812
 msgid "Path"
 msgstr "ಮಾರ್ಗ"
 
-#: ../libgnomeui/gnome-file-entry.c:820
+#: ../libgnomeui/gnome-file-entry.c:812
 msgid "Path to file"
 msgstr "ಕಡತದ ಮಾರ್ಗ"
 
-#: ../libgnomeui/gnome-file-entry.c:849
+#: ../libgnomeui/gnome-file-entry.c:841
 msgid "_Browse..."
 msgstr "ವೀಕ್ಷಿಸು(_B)..."
 
-#: ../libgnomeui/gnome-file-entry.c:850
+#: ../libgnomeui/gnome-file-entry.c:842
 msgid "Pop up a file selector to choose a file"
 msgstr "ಒಂದು ಕಡತವನ್ನು ಆಯ್ಕೆ ಮಾಡಲು ಕಡತ ಆಯ್ಕೆಗಾರನನ್ನು ಕಾಣಿಸು"
 
-#: ../libgnomeui/gnome-font-picker.c:66
+#: ../libgnomeui/gnome-font-picker.c:58
 msgid "sans 12"
 msgstr "sans 12"
 
-#: ../libgnomeui/gnome-font-picker.c:67
+#: ../libgnomeui/gnome-font-picker.c:59
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
-#: ../libgnomeui/gnome-font-picker.c:68
+#: ../libgnomeui/gnome-font-picker.c:60
 msgid "Pick a Font"
 msgstr "ಆಕ್ಷರ ಶೈಲಿಯನ್ನು ಆಯ್ಕೆ ಮಾಡು"
 
-#: ../libgnomeui/gnome-font-picker.c:156
+#: ../libgnomeui/gnome-font-picker.c:148
 msgid "The title of the selection dialog box"
-msgstr "ಆಯ್ಕೆ ಮಾಡಿದ ಡೈಲಾಗ್ ಡಬ್ಬದ ಹೆಸರು"
+msgstr "ಆಯ್ಕೆ ಮಾಡಿದ ಸಂವಾದ ಚೌಕದ ಹೆಸರು"
 
-#: ../libgnomeui/gnome-font-picker.c:164
+#: ../libgnomeui/gnome-font-picker.c:156
 msgid "Mode"
 msgstr "ಸ್ಥಿತಿ"
 
-#: ../libgnomeui/gnome-font-picker.c:165
+#: ../libgnomeui/gnome-font-picker.c:157
 msgid "The mode of operation of the font picker"
 msgstr "ಲಿಪಿಯನ್ನು ಎತ್ತುವ ಕೆಲಸದ ಮೋಡ್"
 
-#: ../libgnomeui/gnome-font-picker.c:174
+#: ../libgnomeui/gnome-font-picker.c:166
 msgid "Font name"
 msgstr "ಅಕ್ಷರ ಶೈಲಿಯ ಹೆಸರು"
 
-#: ../libgnomeui/gnome-font-picker.c:175
+#: ../libgnomeui/gnome-font-picker.c:167
 msgid "Name of the selected font"
 msgstr "ಆಯ್ಕೆ ಮಾಡಿದ ಲಿಪಿಯ ಹೆಸರು"
 
-#: ../libgnomeui/gnome-font-picker.c:184
-#: ../libgnomeui/gnome-font-picker.c:980
+#: ../libgnomeui/gnome-font-picker.c:176 ../libgnomeui/gnome-font-picker.c:972
 msgid "Font"
 msgstr "ಅಕ್ಷರ ಶೈಲಿ"
 
-#: ../libgnomeui/gnome-font-picker.c:185
+#: ../libgnomeui/gnome-font-picker.c:177
 msgid "The selected GtkFont"
 msgstr "ಆಯ್ಕೆ ಮಾಡಿದ Gtk ಲಿಪಿ"
 
-#: ../libgnomeui/gnome-font-picker.c:192
+#: ../libgnomeui/gnome-font-picker.c:184
 msgid "Preview text"
 msgstr "ಮುನ್ನೊಟ ಪಠ್ಯ"
 
-#: ../libgnomeui/gnome-font-picker.c:193
+#: ../libgnomeui/gnome-font-picker.c:185
 msgid "Preview text shown in the dialog"
-msgstr "ಡೈಲಾಗ್ ನಲ್ಲಿ ತೋರಿಸಿರುವ ಅಕ್ಷರದ ಮುನ್ನೋಟ"
+msgstr "ಸಂವಾದದಲ್ಲಿ ತೋರಿಸಿರುವ ಪಠ್ಯದ ಮುನ್ನೋಟ"
 
-#: ../libgnomeui/gnome-font-picker.c:201
+#: ../libgnomeui/gnome-font-picker.c:193
 msgid "Use font in label"
-msgstr "ಲೇಬಲ್ ನಲ್ಲಿ ಅಕ್ಷರವನ್ನು ಬಳಸಿ"
+msgstr "ಲೇಬಲ್ ನಲ್ಲಿ ಅಕ್ಷರಶೈಲಿಯನ್ನು ಬಳಸಿ"
+
+#: ../libgnomeui/gnome-font-picker.c:194
+msgid "Use font in the label in font info mode"
+msgstr "ಅಕ್ಷರಶೈಲಿಯನ್ನು ಲೇಬಲ್‌ನಲ್ಲಿ ಅಕ್ಷರ ಶೈಲಿ ಮಾಹಿತಿ ಕ್ರಮದಲ್ಲಿ ಬಳಸಿ"
 
 #: ../libgnomeui/gnome-font-picker.c:202
-msgid "Use font in the label in font info mode"
-msgstr "ಅಕ್ಷರವನ್ನು ಲೇಬಲ್ ನಲ್ಲಿ ಅಕ್ಷರ ಇನ್ಫೋ ಮೋಡ್ ನಲ್ಲಿ ಬಳಸಿ"
-
-#: ../libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
-msgstr "ಲೇಬಲ್ಲಿಗೆ ಅಕ್ಷರದ ಗಾತ್ರ"
+msgstr "ಲೇಬಲ್ಲಿಗೆ ಅಕ್ಷರಶೈಲಿಯ ಗಾತ್ರ"
 
-#: ../libgnomeui/gnome-font-picker.c:211
+#: ../libgnomeui/gnome-font-picker.c:203
 msgid "Font size for label in font info mode"
 msgstr "ಅಕ್ಷರಶೈಲಿಯ ಮಾಹಿತಿ ವಿಧಾನದಲ್ಲಿ ಲೇಬಲ್‌ನ ಗಾತ್ರ"
 
-#: ../libgnomeui/gnome-font-picker.c:221
+#: ../libgnomeui/gnome-font-picker.c:213
 msgid "Show size"
 msgstr "ಗಾತ್ರವನ್ನು ತೋರಿಸು"
 
-#: ../libgnomeui/gnome-font-picker.c:222
+#: ../libgnomeui/gnome-font-picker.c:214
 msgid "Show size in font info mode"
 msgstr "ಅಕ್ಷರಶೈಲಿಯ ಮಾಹಿತಿ ವಿಧಾನದಲ್ಲಿ ಗಾತ್ರವನ್ನು ತೋರಿಸು"
 
@@ -1098,13 +1083,21 @@ msgstr "ವಿವರಗಳು(_D)"
 
 #: ../libgnomeui/gnome-gconf-ui.c:171
 #, c-format
-msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
-msgstr ""
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr "ನಿಮ್ಮ ಗಣಕ ವ್ಯವಸ್ಥಾಪಕರು ಅಥವ ಕಾರ್ಯ ವ್ಯವಸ್ಥೆ ಮಾರಾಟಗಾರರು ನಿಮಗೆ ಬದಲಾಯಿಸಲು ಅನುಮತಿಸದೆ ಇರುವ ನಿಮ್ಮ ಸಂರಚನೆಯ ಒಂದು ರೂಪವನ್ನು ಬದಲಾಯಿಸಲು ಅನ್ವಯ \"%s\" ಪ್ರಯತ್ನಿಸಿದೆ. ನೀವು ಆಯ್ಕೆ ಮಾಡಿದ ಕೆಲವು ಬದಲಾವಣೆಗಳು ಕಾರ್ಯ ರೂಪಕ್ಕೆ ಬರದೆ ಹೋಗಬಹುದು, ಅಥವ ನೀವು ಅನ್ವಯವನ್ನು ಮುಂದಿನ ಬಾರಿ ಬಳಸಿದಾಗ ಮರಳಿ ಸ್ಥಾಪಿಸಲಾಗದೆ ಹೋಗಬಹುದು."
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
-msgid "An error occurred while loading or saving configuration information for %s. Some of your configuration settings may not work properly."
-msgstr "%s ಗಾಗಿ ಸಂರಚನಾ ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡುವಾಗ ಅಥವ ಉಳಿಸುವಾಗ ಒಂದು ದೋಷ ಉಂಟಾಗಿದೆ. ನಿಮ್ಮ ಕೆಲವು ಸಂರಚನಾ ಸಂಯೋಜನೆಗಳು ಸಮರ್ಪಕವಾಗಿ ಕೆಲಸ ಮಾಡುವುದಿಲ್ಲ."
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"%s ಗಾಗಿ ಸಂರಚನಾ ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡುವಾಗ ಅಥವ ಉಳಿಸುವಾಗ ಒಂದು ದೋಷ ಉಂಟಾಗಿದೆ. ನಿಮ್ಮ "
+"ಕೆಲವು ಸಂರಚನಾ ಸಂಯೋಜನೆಗಳು ಸಮರ್ಪಕವಾಗಿ ಕೆಲಸ ಮಾಡುವುದಿಲ್ಲ."
 
 #: ../libgnomeui/gnome-href.c:102
 msgid "URL"
@@ -1146,70 +1139,74 @@ msgstr ""
 "ಡೀಫಾಲ್ಟ್ ಜಾಲ ವೀಕ್ಷಕವನ್ನು ಆರಂಭಿಸಲು ಪ್ರಯತ್ನಿಸಿದಾಗ ಒಂದು ದೋಷವು ಎದುರಾಗಿದೆ.\n"
 "ದಯವಿಟ್ಟು 'ಐಚ್ಛಿಕ ಅನ್ವಯಗಳು' ಆದ್ಯತಾ ಉಪಕರಣದಲ್ಲಿ ನಿಮ್ಮ ಸಂಯೋಜನೆಗಳನ್ನು ಪರೀಕ್ಷಿಸಿ."
 
-#: ../libgnomeui/gnome-icon-entry.c:177
-msgid "Unique identifier for the icon entry.  This will be used to save the history list."
+#: ../libgnomeui/gnome-icon-entry.c:167
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
 msgstr "ಚಿಹ್ನೆಯ ನಮೂದಿಗೆ ವಿಶಿಷ್ಟ ಗುರುತು.  ಇದು ಇತಿಹಾಸ ಪಟ್ಟಿಯನ್ನು ಉಳಿಸಲು ಬಳಸಲಾಗುತ್ತದೆ."
 
-#: ../libgnomeui/gnome-icon-entry.c:186
+#: ../libgnomeui/gnome-icon-entry.c:176
 msgid "Title for the Browse icon dialog."
 msgstr "ವೀಕ್ಷಣೆ ಚಿಹ್ನೆಯ ಸಂವಾದದ ಶೀರ್ಷಿಕೆ."
 
-#: ../libgnomeui/gnome-icon-entry.c:193
+#: ../libgnomeui/gnome-icon-entry.c:183
 msgid "Pixmap Directory"
 msgstr "ಪಿಕ್ಸ್‍ಮ್ಯಾಪ್ ಕೋಶ"
 
-#: ../libgnomeui/gnome-icon-entry.c:194
+#: ../libgnomeui/gnome-icon-entry.c:184
 msgid "Directory that will be searched for icons."
 msgstr "ಚಿಹ್ನೆಗಳಿಗಾಗಿ ಹುಡುಕಬೇಕಿರುವ ಕೋಶ."
 
-#: ../libgnomeui/gnome-icon-entry.c:202
+#: ../libgnomeui/gnome-icon-entry.c:192
 msgid "Filename that should be displayed in the icon entry."
 msgstr "ಚಿಹ್ನೆಯ ನಮೂದಿನಲ್ಲಿ ತೋರಿಸಬೇಕಿರುವ ಕಡತದ ಹೆಸರು."
 
-#: ../libgnomeui/gnome-icon-entry.c:210
+#: ../libgnomeui/gnome-icon-entry.c:200
 msgid "Picker dialog"
 msgstr "ಆಯುವ ಸಂವಾದ"
 
-#: ../libgnomeui/gnome-icon-entry.c:211
-msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
-msgstr ""
+#: ../libgnomeui/gnome-icon-entry.c:201
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr "ಚಿಹ್ನೆ ಆಯುವ ಸಂವಾದ.  ಈ ಗುಣವನ್ನು ನೀವು GtkDialog ನ ಯಾವುದೆ ಗುಣಗಳನ್ನು ಮಾರ್ಪಡಿಸಲು ಅಥವ ಪ್ರಶ್ನಿಸುವ ಅಗತ್ಯವಿದ್ದಲ್ಲಿ GtkDialog ಅನ್ನು ಪಡೆಯಲು ಬಳಸಬಹುದಾಗಿದೆ."
 
-#: ../libgnomeui/gnome-icon-entry.c:319
-#: ../libgnomeui/gnome-icon-entry.c:1003
+#: ../libgnomeui/gnome-icon-entry.c:309 ../libgnomeui/gnome-icon-entry.c:993
 msgid "Choose Icon"
 msgstr "ಚಿಹ್ನೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ"
 
-#: ../libgnomeui/gnome-icon-entry.c:773
+#: ../libgnomeui/gnome-icon-entry.c:763
 msgid "Icon selection dialog"
 msgstr "ಚಿಹ್ನೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡುವ ಸಂವಾದ"
 
-#: ../libgnomeui/gnome-icon-entry.c:774
+#: ../libgnomeui/gnome-icon-entry.c:764
 msgid "This dialog box lets you select an icon."
 msgstr "ಈ ಸಂವಾದ ಪೆಟ್ಟಿಗೆಯು ನಿಮಗೆ ಚಿಹ್ನೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಲು ಅನುವು ಮಾಡಿಕೊಡುತ್ತದೆ."
 
-#: ../libgnomeui/gnome-icon-entry.c:780
-#: ../libgnomeui/gnome-icon-entry.c:1006
+#: ../libgnomeui/gnome-icon-entry.c:770 ../libgnomeui/gnome-icon-entry.c:996
 msgid "Icon Selector"
 msgstr "ಚಿಹ್ನೆಯ ಆಯ್ಕೆಗಾರ"
 
-#: ../libgnomeui/gnome-icon-entry.c:781
+#: ../libgnomeui/gnome-icon-entry.c:771
 msgid "Please pick the icon you want."
 msgstr "ದಯವಿಟ್ಟು ನಿಮಗೆ ಬೇಕಾದ ಚಿಹ್ನೆಯನ್ನು ಆರಿಸಿ."
 
-#: ../libgnomeui/gnome-icon-entry.c:1007
+#: ../libgnomeui/gnome-icon-entry.c:997
 msgid "This button will open a window to let you select an icon."
 msgstr "ಈ ಗುಂಡಿಯು ಒಂದು ಚಿಹ್ನೆಯನ್ನು ಆರಿಸಲು ಅನುವಾಗುವಂತೆ ಒಂದು ವಿಂಡೋವನ್ನು ತೆರೆಯುತ್ತದೆ."
 
-#: ../libgnomeui/gnome-icon-entry.c:1029
+#: ../libgnomeui/gnome-icon-entry.c:1019
 msgid "Browse"
 msgstr "ವೀಕ್ಷಿಸು"
 
-#: ../libgnomeui/gnome-icon-entry.c:1032
+#: ../libgnomeui/gnome-icon-entry.c:1022
 msgid "Icon path"
 msgstr "ಚಿಹ್ನೆಯ ಮಾರ್ಗ"
 
-#: ../libgnomeui/gnome-icon-entry.c:1033
-msgid "Here you should enter the name of the directory where icon images are located."
+#: ../libgnomeui/gnome-icon-entry.c:1023
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
 msgstr "ಚಿಹ್ನೆಯ ಚಿತ್ರಗಳು ಇರುವಂತಹ ಕೋಶದ ಹೆಸರನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸ ಬೇಕು."
 
 #: ../libgnomeui/gnome-icon-sel.c:293
@@ -1246,80 +1243,80 @@ msgstr "ಪ್ರಶ್ನೆ"
 msgid "Message"
 msgstr "ಸಂದೇಶ"
 
-#: ../libgnomeui/gnome-password-dialog.c:210
+#: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
 msgstr "ಬಳಕೆದಾರ ಹೆಸರು(_U):"
 
-#: ../libgnomeui/gnome-password-dialog.c:213
+#: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
 msgstr "ಕ್ಷೇತ್ರ(_D):"
 
-#: ../libgnomeui/gnome-password-dialog.c:216
+#: ../libgnomeui/gnome-password-dialog.c:202
 msgid "_Password:"
 msgstr "ಗುಪ್ತಪದ(_P):"
 
-#: ../libgnomeui/gnome-password-dialog.c:219
+#: ../libgnomeui/gnome-password-dialog.c:205
 msgid "_New password:"
 msgstr "ಹೊಸ ಗುಪ್ತಪದ(_N):"
 
-#: ../libgnomeui/gnome-password-dialog.c:220
+#: ../libgnomeui/gnome-password-dialog.c:206
 msgid "Con_firm password:"
 msgstr "ಗುಪ್ತಪದ ಖಚಿತಪಡಿಸು(_f):"
 
-#: ../libgnomeui/gnome-password-dialog.c:223
+#: ../libgnomeui/gnome-password-dialog.c:209
 msgid "Password quality:"
 msgstr "ಗುಪ್ತಪದದ ಗುಣಮಟ್ಟ:"
 
-#: ../libgnomeui/gnome-password-dialog.c:338
+#: ../libgnomeui/gnome-password-dialog.c:324
 msgid "Co_nnect"
 msgstr "ಸಂಪರ್ಕ ಕಲ್ಪಿಸು(_n)"
 
-#: ../libgnomeui/gnome-password-dialog.c:371
+#: ../libgnomeui/gnome-password-dialog.c:357
 msgid "Connect _anonymously"
 msgstr "ಅನಾಮಧೇಯವಾಗಿ ಸಂಪರ್ಕಿತಗೊಳ್ಳು(_a)"
 
-#: ../libgnomeui/gnome-password-dialog.c:376
+#: ../libgnomeui/gnome-password-dialog.c:362
 msgid "Connect as u_ser:"
 msgstr "ಈ ಬಳಕೆದಾರನಾಗಿ ಆಗಿ ಸಂಪರ್ಕಿತನಾಗು(_s):"
 
-#: ../libgnomeui/gnome-password-dialog.c:438
+#: ../libgnomeui/gnome-password-dialog.c:424
 msgid "_Forget password immediately"
 msgstr "ಗುಪ್ತಪದವನ್ನು ಈ ಕೂಡಲೆ ಮರೆತುಬಿಡು(_F)"
 
-#: ../libgnomeui/gnome-password-dialog.c:444
+#: ../libgnomeui/gnome-password-dialog.c:430
 msgid "_Remember password until you logout"
 msgstr "ನೀವು ಹೊರನಡೆಯುವವರೆಗೂ ಗುಪ್ತಪದವನ್ನು ನೆನಪಿಟ್ಟುಕೊ(_R)"
 
-#: ../libgnomeui/gnome-password-dialog.c:450
+#: ../libgnomeui/gnome-password-dialog.c:436
 msgid "_Remember forever"
 msgstr "ಯಾವಾಗಲೂ ನೆನಪಿನಲ್ಲಿಟ್ಟುಕೋ(_R)"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:112
+#: ../libgnomeui/gnome-pixmap-entry.c:101
 msgid "Do Preview"
 msgstr "ಮುನ್ನೋಟವನ್ನು ನೋಡು"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:113
+#: ../libgnomeui/gnome-pixmap-entry.c:102
 msgid "Whether the pixmap entry should have a preview."
 msgstr "ಪಿಕ್ಸ್‍ಮ್ಯಾಪ್ ನಮೂದು ಒಂದು್ನೋಟವನ್ನು ಹೊಂದಿರಬೇಕೆ."
 
-#: ../libgnomeui/gnome-pixmap-entry.c:187
-#: ../libgnomeui/gnome-pixmap-entry.c:481
+#: ../libgnomeui/gnome-pixmap-entry.c:176
+#: ../libgnomeui/gnome-pixmap-entry.c:470
 msgid "No Image"
 msgstr "ಯಾವ ಚಿತ್ರವು ಇಲ್ಲ"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:204
+#: ../libgnomeui/gnome-pixmap-entry.c:193
 msgid "Image Preview"
 msgstr "ಚಿತ್ರದ ಮುನ್ನೋಟ"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:205
+#: ../libgnomeui/gnome-pixmap-entry.c:194
 msgid "A preview of the image currently specified"
 msgstr "ಈಗ ಸೂಚಿಸಲಾದ ಚಿತ್ರದ ಒಂದು ಮುನ್ನೋಟ"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:416
+#: ../libgnomeui/gnome-pixmap-entry.c:405
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "ಒಂದು hbox ಅನ್ನು ಹುಡುಕಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ, ಸಾಮಾನ್ಯ ಕಡತದ ಆಯ್ಕೆಯನ್ನು ಬಳಸಲಾಗುತ್ತಿದೆ"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:422
+#: ../libgnomeui/gnome-pixmap-entry.c:411
 msgid "Preview"
 msgstr "ಮುನ್ನೋಟ"
 
@@ -1374,32 +1371,31 @@ msgstr "ಇಂಡೆಂಟ್ ಇಲ್ಲದ"
 msgid "About"
 msgstr "ತಂತ್ರಾಂಶದ ಬಗ್ಗೆ"
 
-#: ../libgnomeui/gnome-ui-init.c:146
-#: ../libgnomeui/gnome-ui-init.c:172
+#: ../libgnomeui/gnome-ui-init.c:134 ../libgnomeui/gnome-ui-init.c:160
 msgid "Disable Crash Dialog"
 msgstr "ಕುಸಿತ ಸಂವಾದವನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸು"
 
-#: ../libgnomeui/gnome-ui-init.c:155
+#: ../libgnomeui/gnome-ui-init.c:143
 msgid "GNOME GUI Library:"
 msgstr "GNOME GUI ಲೈಬ್ರರಿ:"
 
-#: ../libgnomeui/gnome-ui-init.c:156
+#: ../libgnomeui/gnome-ui-init.c:144
 msgid "Show GNOME GUI options"
 msgstr "GNOME GUI ಆಯ್ಕೆಗಳನ್ನು ತೋರಿಸು"
 
-#: ../libgnomeui/gnome-ui-init.c:174
+#: ../libgnomeui/gnome-ui-init.c:162
 msgid "X display to use"
 msgstr "ಬಳಕೆಗಾಗಿ X ಪ್ರದರ್ಶಕ"
 
-#: ../libgnomeui/gnome-ui-init.c:174
+#: ../libgnomeui/gnome-ui-init.c:162
 msgid "DISPLAY"
 msgstr "DISPLAY"
 
-#: ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:167
 msgid "GNOME GUI Library"
 msgstr "GNOME GUI ಲೈಬ್ರರಿ"
 
-#: ../libgnomeui/gnome-ui-init.c:244
+#: ../libgnomeui/gnome-ui-init.c:232
 msgid "Could not open link"
 msgstr "ಕೊಂಡಿಯನ್ನು ತೆರೆಯಲಾಗಲಿಲ್ಲ"
 
