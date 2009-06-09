@@ -2,19 +2,19 @@
 # Estonian translation of libgnomeui.
 #
 # Copyright (C) 2002-2006 Free Software Foundation, Inc.
-# Copyright (C) 2007, 2008 The Gnome Project.
+# Copyright (C) 2007-2009 The Gnome Project.
 # This file is distributed under the same license as the libgnomeui package.
 #
 # Tõivo Leedjärv <toivo@linux.ee>, 2002-2004.
 # Priit Laes <amd@store20.com>, 2004, 2006.
-# Ivar Smolin <okul@linux.ee>, 2005-2008.
+# Ivar Smolin <okul@linux.ee>, 2005-2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-12 07:28+0100\n"
-"PO-Revision-Date: 2008-03-25 16:45+0200\n"
+"PO-Revision-Date: 2009-06-09 18:07+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -22,337 +22,257 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
 msgstr "Tütarkirje 1"
 
-#: ../demos/mdi_demo.c:129
 msgid "Hint for item 1"
 msgstr "Vihje kirjele 1"
 
-#: ../demos/mdi_demo.c:131
 msgid "Child Item 2"
 msgstr "Tütarkirje 2"
 
-#: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
 msgstr "Vihje kirjele 2"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1036
 #, c-format
 msgid "%s is a link to something that is not a folder"
 msgstr "%s on viit millelegi, mis pole kataloog"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1047
 #, c-format
 msgid "%s is a link without a destination location"
 msgstr "%s on ilma sihtkohata viit"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1122
 #, c-format
 msgid "%s is not a folder"
 msgstr "%s ei ole kataloog"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1160
 #, c-format
 msgid "Could not monitor '%s': %s"
 msgstr "Faili '%s' pole võimalik monitoorida: %s"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1273
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1486
 #, c-format
 msgid "Could not get info for '%s': %s"
 msgstr "Faili '%s' andmeid pole võimalik hankida: %s"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1609
 #, c-format
 msgid "Could not create '%s': %s"
 msgstr "Faili '%s' pole võimalik luua: %s"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1975
 msgid "Network Servers"
 msgstr "Võrguserverid"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:1991
 msgid "File System"
 msgstr "Failisüsteem"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2061
 #, c-format
 msgid "'%s': %s"
 msgstr "'%s': %s"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2520
 #, c-format
 msgid "Bookmark saving failed (%s)"
 msgstr "Tõrge järjehoidja salvestamisel (%s)"
 
-#: ../file-chooser/gtkfilesystemgnomevfs.c:2957
 #, c-format
 msgid "Error getting information for '%s'"
 msgstr "Viga '%s' kohta andmete hankimisel"
 
-#: ../file-chooser/testfilechooser.c:181
 #, c-format
 msgid "Could not get information for file '%s': %s"
 msgstr "Faili '%s' kohta pole võimalik teavet hankida: %s"
 
-#: ../file-chooser/testfilechooser.c:194
 #, c-format
 msgid "Failed to open file '%s': %s"
 msgstr "Tõrge faili '%s' avamisel: %s"
 
-#: ../file-chooser/testfilechooser.c:233
 #, c-format
 msgid ""
 "Failed to load image '%s': reason not known, probably a corrupt image file"
 msgstr ""
 "Tõrge pildi '%s' avamisel: põhjus teadmata, arvatavasti on pildifail rikutud"
 
-#: ../libgnomeui/gnome-about.c:199
 msgid "Credits"
 msgstr "Autorid"
 
-#: ../libgnomeui/gnome-about.c:231
 msgid "Written by"
 msgstr "Programmeerimine"
 
-#: ../libgnomeui/gnome-about.c:246
 msgid "Documented by"
 msgstr "Dokumentatsioon"
 
-#: ../libgnomeui/gnome-about.c:261
 msgid "Translated by"
 msgstr "Tõlge"
 
-#: ../libgnomeui/gnome-about.c:324
 msgid "C_redits"
 msgstr "_Autorid"
 
-#: ../libgnomeui/gnome-about.c:377
 msgid "Program name"
 msgstr "Programmi nimi"
 
-#: ../libgnomeui/gnome-about.c:378
 msgid "The name of the program"
 msgstr "Programmi nimi"
 
-#: ../libgnomeui/gnome-about.c:385
 msgid "Program version"
 msgstr "Programmi versioon"
 
-#: ../libgnomeui/gnome-about.c:386
 msgid "The version of the program"
 msgstr "Programmi versioon"
 
-#: ../libgnomeui/gnome-about.c:392
 msgid "Copyright string"
 msgstr "Autoriõiguse teade"
 
-#: ../libgnomeui/gnome-about.c:393
 msgid "Copyright information for the program"
 msgstr "Teave programmi autoriõiguste kohta"
 
-#: ../libgnomeui/gnome-about.c:400
 msgid "Comments string"
 msgstr "Komentaarid"
 
-#: ../libgnomeui/gnome-about.c:401
 msgid "Comments about the program"
 msgstr "Komentaarid programmi kohta"
 
-#: ../libgnomeui/gnome-about.c:407
 msgid "Authors"
 msgstr "Autorid"
 
-#: ../libgnomeui/gnome-about.c:408
 msgid "List of authors of the programs"
 msgstr "Programmi autorite nimekiri"
 
-#: ../libgnomeui/gnome-about.c:410
 msgid "Author entry"
 msgstr "Autori sisestusväli"
 
-#: ../libgnomeui/gnome-about.c:411
 msgid "A single author entry"
 msgstr "Ühe autori sisestusväli"
 
-#: ../libgnomeui/gnome-about.c:418
 msgid "Documenters"
 msgstr "Dokumenteerijad"
 
-#: ../libgnomeui/gnome-about.c:419
 msgid "List of people documenting the program"
 msgstr "Programmi dokumentatsiooni kirjutajate nimekiri"
 
-#: ../libgnomeui/gnome-about.c:421
 msgid "Documenter entry"
 msgstr "Dokumenteerija sisestusväli"
 
-#: ../libgnomeui/gnome-about.c:422
 msgid "A single documenter entry"
 msgstr "Ühe dokumenteerija sisestusväli"
 
-#: ../libgnomeui/gnome-about.c:430
 msgid "Translator credits"
 msgstr "Tõlkijad"
 
-#: ../libgnomeui/gnome-about.c:431
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
 msgstr "Programmi tõlkijad. Selle stringi peaks tõlgitavaks märkima"
 
-#: ../libgnomeui/gnome-about.c:438
-#: ../libgnomeui/gnome-druid-page-standard.c:129
 msgid "Logo"
 msgstr "Logo"
 
-#: ../libgnomeui/gnome-about.c:439
 msgid "A logo for the about box"
 msgstr "Programmi logo lähema teabe aknas"
 
-#: ../libgnomeui/gnome-about.c:518
 #, c-format
 msgid "About %s"
 msgstr "Lähem teave \"%s\" kohta"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:551
-#: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Fail"
 
-#: ../libgnomeui/gnome-app-helper.c:84
 msgid "_File/"
 msgstr "_Fail/"
 
-#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
 msgstr "_Redaktor"
 
-#: ../libgnomeui/gnome-app-helper.c:86
 msgid "_Edit/"
 msgstr "_Redaktor/"
 
-#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Vaade"
 
-#: ../libgnomeui/gnome-app-helper.c:88
 msgid "_View/"
 msgstr "_Vaade/"
 
-#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
 msgstr "_Sätted"
 
-#: ../libgnomeui/gnome-app-helper.c:90
 msgid "_Settings/"
 msgstr "_Sätted/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Uus"
 
-#: ../libgnomeui/gnome-app-helper.c:92
 msgid "_New/"
 msgstr "_Uus/"
 
-#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "Fai_lid"
 
-#: ../libgnomeui/gnome-app-helper.c:94
 msgid "Fi_les/"
 msgstr "Fai_lid/"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
 msgstr "A_knad"
 
-#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_Mäng"
 
-#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:569
-#: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "A_bi"
 
-#: ../libgnomeui/gnome-app-helper.c:98
 msgid "_Windows/"
 msgstr "A_knad/"
 
 #. Open
-#: ../libgnomeui/gnome-app-helper.c:110
 msgid "_Open..."
 msgstr "_Ava..."
 
-#: ../libgnomeui/gnome-app-helper.c:110
 msgid "Open a file"
 msgstr "Avab faili"
 
 #. Save
-#: ../libgnomeui/gnome-app-helper.c:115
 msgid "_Save"
 msgstr "_Salvesta"
 
-#: ../libgnomeui/gnome-app-helper.c:115
 msgid "Save the current file"
 msgstr "Salvestab aktiivse faili"
 
 #. Save As
-#: ../libgnomeui/gnome-app-helper.c:120
 msgid "Save _As..."
 msgstr "Salvesta _kui..."
 
-#: ../libgnomeui/gnome-app-helper.c:121
 msgid "Save the current file with a different name"
 msgstr "Salvestab aktiivse failo teise nimega"
 
 #. Revert
-#: ../libgnomeui/gnome-app-helper.c:126
 msgid "_Revert"
 msgstr "_Taasta"
 
-#: ../libgnomeui/gnome-app-helper.c:127
 msgid "Revert to a saved version of the file"
 msgstr "Faili salvestatud versiooni taastamine"
 
 #. Print
-#: ../libgnomeui/gnome-app-helper.c:132
 msgid "_Print..."
 msgstr "_Prindi..."
 
-#: ../libgnomeui/gnome-app-helper.c:132
 msgid "Print the current file"
 msgstr "Aktiivse faili printimine"
 
 #. Print Setup
-#: ../libgnomeui/gnome-app-helper.c:137
 msgid "Print S_etup..."
 msgstr "Printimise _sätted..."
 
-#: ../libgnomeui/gnome-app-helper.c:138
 msgid "Setup the page settings for your current printer"
 msgstr "Lehekülje sätete seadmine sinu praegusele printerile sobivaks"
 
 #. Close
-#: ../libgnomeui/gnome-app-helper.c:143
 msgid "_Close"
 msgstr "S_ulge"
 
-#: ../libgnomeui/gnome-app-helper.c:143
 msgid "Close the current file"
 msgstr "Aktiivse faili sulgemine"
 
 #. Exit
-#: ../libgnomeui/gnome-app-helper.c:148
 msgid "_Quit"
 msgstr "_Lõpeta"
 
-#: ../libgnomeui/gnome-app-helper.c:148
 msgid "Quit the application"
 msgstr "Programmi töö lõpetamine"
 
@@ -360,93 +280,73 @@ msgstr "Programmi töö lõpetamine"
 #. * The "Edit" menu
 #.
 #. Cut
-#: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cu_t"
 msgstr "_Lõika"
 
-#: ../libgnomeui/gnome-app-helper.c:156
 msgid "Cut the selection"
 msgstr "Valiku väljalõikamine"
 
 #. 10
 #. Copy
-#: ../libgnomeui/gnome-app-helper.c:162
 msgid "_Copy"
 msgstr "_Kopeeri"
 
-#: ../libgnomeui/gnome-app-helper.c:162
 msgid "Copy the selection"
 msgstr "Valiku kopeerimine"
 
 #. Paste
-#: ../libgnomeui/gnome-app-helper.c:167
 msgid "_Paste"
 msgstr "_Aseta"
 
-#: ../libgnomeui/gnome-app-helper.c:167
 msgid "Paste the clipboard"
 msgstr "Lõikelaua sisu asetamine"
 
 #. Clear
-#: ../libgnomeui/gnome-app-helper.c:172
 msgid "C_lear"
 msgstr "_Tühjenda"
 
-#: ../libgnomeui/gnome-app-helper.c:172
 msgid "Clear the selection"
 msgstr "Valiku tühjendamine"
 
 #. Undo
-#: ../libgnomeui/gnome-app-helper.c:177
 msgid "_Undo"
 msgstr "_Unusta"
 
-#: ../libgnomeui/gnome-app-helper.c:177
 msgid "Undo the last action"
 msgstr "Viimase toimingu unustamine"
 
 #. Redo
-#: ../libgnomeui/gnome-app-helper.c:182
 msgid "_Redo"
 msgstr "Uu_esti"
 
-#: ../libgnomeui/gnome-app-helper.c:182
 msgid "Redo the undone action"
 msgstr "Unustatud toimingu taastamine"
 
 #. Find
-#: ../libgnomeui/gnome-app-helper.c:187
 msgid "_Find..."
 msgstr "_Otsi..."
 
-#: ../libgnomeui/gnome-app-helper.c:187
 msgid "Search for a string"
 msgstr "Stringi otsimine"
 
 #. Find Again
-#: ../libgnomeui/gnome-app-helper.c:192
 msgid "Find Ne_xt"
 msgstr "Otsi _järgmine..."
 
-#: ../libgnomeui/gnome-app-helper.c:193
 msgid "Search again for the same string"
 msgstr "Sama stringi uuesti otsimine"
 
 #. Replace
-#: ../libgnomeui/gnome-app-helper.c:198
 msgid "R_eplace..."
 msgstr "A_senda..."
 
-#: ../libgnomeui/gnome-app-helper.c:198
 msgid "Replace a string"
 msgstr "Stringi asendamine"
 
 #. Properties
-#: ../libgnomeui/gnome-app-helper.c:203
 msgid "_Properties"
 msgstr "_Omadused"
 
-#: ../libgnomeui/gnome-app-helper.c:204
 msgid "Modify the file's properties"
 msgstr "Faili omaduste redigeerimine"
 
@@ -454,11 +354,9 @@ msgstr "Faili omaduste redigeerimine"
 #. * The Settings menu
 #.
 #. Settings
-#: ../libgnomeui/gnome-app-helper.c:212
 msgid "Prefere_nces"
 msgstr "_Eelistused"
 
-#: ../libgnomeui/gnome-app-helper.c:213
 msgid "Configure the application"
 msgstr "Programmi seadistamine"
 
@@ -467,215 +365,164 @@ msgstr "Programmi seadistamine"
 #. * And the "Help" menu
 #.
 #. About
-#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_Programmist lähemalt"
 
-#: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "Selle programmi kohta teabe kuvamine"
 
-#: ../libgnomeui/gnome-app-helper.c:226
 msgid "Select _All"
 msgstr "_Vali kõik"
 
-#: ../libgnomeui/gnome-app-helper.c:227
 msgid "Select everything"
 msgstr "Kõige valimine"
 
 #.
 #. * Window menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:235
 msgid "Create New _Window"
 msgstr "Loo uus _aken"
 
-#: ../libgnomeui/gnome-app-helper.c:236
 msgid "Create a new window"
 msgstr "Uue akna loomine"
 
-#: ../libgnomeui/gnome-app-helper.c:240
 msgid "_Close This Window"
 msgstr "_Sulge see aken"
 
-#: ../libgnomeui/gnome-app-helper.c:241 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Käesoleva akna sulgemine"
 
 #.
 #. * The "Game" menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:249
 msgid "_New Game"
 msgstr "_Uus mäng"
 
-#: ../libgnomeui/gnome-app-helper.c:250
 msgid "Start a new game"
 msgstr "Uue mängu alustamine"
 
-#: ../libgnomeui/gnome-app-helper.c:254
 msgid "_Pause Game"
 msgstr "_Pausi mäng"
 
-#: ../libgnomeui/gnome-app-helper.c:255
 msgid "Pause the game"
 msgstr "Mängupausi pidamine"
 
-#: ../libgnomeui/gnome-app-helper.c:259
 msgid "_Restart Game"
 msgstr "_Taasalusta mäng"
 
-#: ../libgnomeui/gnome-app-helper.c:260
 msgid "Restart the game"
 msgstr "Mängu alustamine otsast peale"
 
-#: ../libgnomeui/gnome-app-helper.c:264
 msgid "_Undo Move"
 msgstr "Käik _tagasi"
 
-#: ../libgnomeui/gnome-app-helper.c:265
 msgid "Undo the last move"
 msgstr "Viimati tehtud käigu unustamine"
 
-#: ../libgnomeui/gnome-app-helper.c:269
 msgid "_Redo Move"
 msgstr "Käik _uuesti"
 
-#: ../libgnomeui/gnome-app-helper.c:270
 msgid "Redo the undone move"
 msgstr "Viimati tagasivõetud käigu uuesti tegemine"
 
-#: ../libgnomeui/gnome-app-helper.c:274
 msgid "_Hint"
 msgstr "_Vihje"
 
-#: ../libgnomeui/gnome-app-helper.c:275
 msgid "Get a hint for your next move"
 msgstr "Vihje järgmise võimaliku käigu kohta"
 
 #. 30
-#: ../libgnomeui/gnome-app-helper.c:280
 msgid "_Scores..."
 msgstr "_Tulemused..."
 
-#: ../libgnomeui/gnome-app-helper.c:281
 msgid "View the scores"
 msgstr "Tulemuste kuvamine"
 
-#: ../libgnomeui/gnome-app-helper.c:285
 msgid "_End Game"
 msgstr "_Lõpeta mäng"
 
-#: ../libgnomeui/gnome-app-helper.c:286
 msgid "End the current game"
 msgstr "Käesoleva mängu lõpetamine"
 
-#: ../libgnomeui/gnome-app-helper.c:1148
 msgid "_Contents"
 msgstr "_Sisukord"
 
-#: ../libgnomeui/gnome-app-helper.c:1151
 msgid "View help for this application"
 msgstr "Programmi abiteabe vaatamine"
 
-#: ../libgnomeui/gnome-app-helper.c:2588
 msgid "Text Below Icons"
 msgstr "Tekst ikoonide all"
 
-#: ../libgnomeui/gnome-app-helper.c:2589
 msgid "Priority Text Beside Icons"
 msgstr "Tähtsam tekst ikoonide kõrval"
 
-#: ../libgnomeui/gnome-app-helper.c:2590
 msgid "Icons Only"
 msgstr "Ainult ikoonid"
 
-#: ../libgnomeui/gnome-app-helper.c:2591
 msgid "Text Only"
 msgstr "Ainult tekst"
 
-#: ../libgnomeui/gnome-app-helper.c:2652
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Töölaua vaikeväärtuste kasutamine (%s)"
 
-#: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
 msgstr " (vajuta sisestusklahvi)"
 
-#: ../libgnomeui/gnome-app-util.c:140
 msgid "ERROR: "
 msgstr "VIGA: "
 
-#: ../libgnomeui/gnome-app-util.c:177
 msgid "Warning: "
 msgstr "Hoiatus: "
 
-#: ../libgnomeui/gnome-app-util.c:315
 msgid "y"
 msgstr "j"
 
-#: ../libgnomeui/gnome-app-util.c:316
 msgid "yes"
 msgstr "jah"
 
-#: ../libgnomeui/gnome-app-util.c:319
 msgid "n"
 msgstr "e"
 
-#: ../libgnomeui/gnome-app-util.c:320
 msgid "no"
 msgstr "ei"
 
-#: ../libgnomeui/gnome-app-util.c:355
 msgid " (yes or no)"
 msgstr " (jah või ei)"
 
-#: ../libgnomeui/gnome-app-util.c:356
 msgid "  - OK? (yes or no)"
 msgstr " - sobib? (jah või ei)"
 
-#: ../libgnomeui/gnome-app-util.c:684
 msgid "Progress"
 msgstr "Edenemine"
 
-#: ../libgnomeui/gnome-app.c:153
 msgid "App ID"
 msgstr "Rak ID"
 
-#: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
 msgstr "Rakenduse ID string"
 
-#: ../libgnomeui/gnome-appbar.c:743
 msgid "Has Progress"
 msgstr "Omab edenemist"
 
-#: ../libgnomeui/gnome-appbar.c:744
 msgid "Create a progress widget."
 msgstr "Edenemise vidina loomine."
 
-#: ../libgnomeui/gnome-appbar.c:751
 msgid "Has Status"
 msgstr "Omab olekut"
 
-#: ../libgnomeui/gnome-appbar.c:752
 msgid "Create a status widget."
 msgstr "Olekuvidina loomine."
 
-#: ../libgnomeui/gnome-appbar.c:759
 msgid "Interactivity"
 msgstr "Interaktiivne"
 
-#: ../libgnomeui/gnome-appbar.c:760
 msgid "Level of user activity required."
 msgstr "Kasutajapoolse vajaliku sekkumise tase."
 
-#: ../libgnomeui/gnome-authentication-manager.c:82
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "Sinu HTTP-proxi nõuab sisselogimist.\n"
+msgstr "Sinu HTTP-proksi nõuab sisselogimist.\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:83
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -684,285 +531,211 @@ msgstr ""
 "Sa pead \"%s\" ligipääsuks sisse logima.\n"
 "%s"
 
-#: ../libgnomeui/gnome-authentication-manager.c:86
 msgid "Your password will be transmitted unencrypted."
 msgstr "Sinu parool edastatakse krüpteerimata."
 
-#: ../libgnomeui/gnome-authentication-manager.c:87
 msgid "Your password will be transmitted encrypted."
 msgstr "Sinu parool edastatakse krüpteeritult."
 
-#: ../libgnomeui/gnome-authentication-manager.c:90
-#: ../libgnomeui/gnome-authentication-manager.c:309
 msgid "Authentication Required"
 msgstr "Autentimine on vajalik"
 
 #. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
-#: ../libgnomeui/gnome-authentication-manager.c:301
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "%s domeenile %s juurdepääsuks pead sa sisse logima\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:303
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "Sa pead %s ligipääsuks sisse logima\n"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "Specify session management ID"
 msgstr "Seansihalduse ID määramine"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
 msgid "ID"
 msgstr "ID"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
 msgid "Specify prefix of saved configuration"
 msgstr "Salvestatud seadistuste eesliite määramine"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
 msgid "PREFIX"
 msgstr "EESLIIDE"
 
-#: ../libgnomeui/gnome-client.c:1008 ../libgnomeui/gnome-client.c:1042
 msgid "Disable connection to session manager"
-msgstr "Seansihalduri ühenduse keelamine"
+msgstr "Seansihalduriga ühendumise keelamine"
 
-#: ../libgnomeui/gnome-client.c:1016
 msgid "Session management:"
 msgstr "Seansihaldus:"
 
-#: ../libgnomeui/gnome-client.c:1017
 msgid "Show session management options"
 msgstr "Seansihalduse valikute näitamine"
 
-#: ../libgnomeui/gnome-client.c:1048
 msgid "Session management"
 msgstr "Seansihaldus"
 
-#: ../libgnomeui/gnome-client.c:2573
 msgid "Cancel Logout"
 msgstr "Tühista väljalogimine"
 
-#: ../libgnomeui/gnome-color-picker.c:412
 msgid "Received invalid color data\n"
 msgstr "Võeti vastu vigased värviandmed\n"
 
-#: ../libgnomeui/gnome-color-picker.c:466
 msgid "Open a dialog to specify the color"
 msgstr "Värvi määramiseks dialoogiakna avamine"
 
-#: ../libgnomeui/gnome-color-picker.c:488
 msgid "Pick a color"
 msgstr "Vali värv"
 
-#: ../libgnomeui/gnome-dateedit.c:495 ../libgnomeui/gnome-dateedit.c:802
 msgid "Time"
 msgstr "Aeg"
 
-#: ../libgnomeui/gnome-dateedit.c:496
 msgid "The time currently selected"
 msgstr "Hetkel valitud aeg"
 
-#: ../libgnomeui/gnome-dateedit.c:508
 msgid "DateEdit Flags"
 msgstr "DateEdit lipud"
 
-#: ../libgnomeui/gnome-dateedit.c:509
 msgid "Flags for how DateEdit looks"
 msgstr "Lipud, mis määravad DateEdit'i väljanägemise"
 
-#: ../libgnomeui/gnome-dateedit.c:518
 msgid "Lower Hour"
 msgstr "Väikseim tund"
 
-#: ../libgnomeui/gnome-dateedit.c:519
 msgid "Lower hour in the time popup selector"
 msgstr "Väikseim tund, mis määratakse ajavalimise hüpikaknale"
 
-#: ../libgnomeui/gnome-dateedit.c:529
 msgid "Upper Hour"
 msgstr "Suurim tund"
 
-#: ../libgnomeui/gnome-dateedit.c:530
 msgid "Upper hour in the time popup selector"
 msgstr "Suurim tund, mis määratakse ajavalimise hüpikaknale"
 
-#: ../libgnomeui/gnome-dateedit.c:540
 msgid "Initial Time"
 msgstr "Aja lähteväärtus"
 
-#: ../libgnomeui/gnome-dateedit.c:541
 msgid "The initial time"
 msgstr "Aja lähtestamisel kasutatav väärtus"
 
-#: ../libgnomeui/gnome-dateedit.c:765 ../libgnomeui/gnome-scores.c:96
 msgid "Date"
 msgstr "Kuupäev"
 
-#: ../libgnomeui/gnome-dateedit.c:778
 msgid "Select Date"
 msgstr "Kuupäeva valimine"
 
-#: ../libgnomeui/gnome-dateedit.c:778
 msgid "Select the date from a calendar"
 msgstr "Kuupäeva valimine kalendrist"
 
 #. Calendar label, only shown if the date editor has a time field
-#: ../libgnomeui/gnome-dateedit.c:789
 msgid "Calendar"
 msgstr "Kalender"
 
-#: ../libgnomeui/gnome-dateedit.c:810
 msgid "Select Time"
 msgstr "Aja valimine"
 
-#: ../libgnomeui/gnome-dateedit.c:810
 msgid "Select the time from a list"
 msgstr "Aja valimine loendist"
 
-#: ../libgnomeui/gnome-dateedit.c:1029
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date on taunitav, kasuta gnome_date_edit_get_time"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:121
-#: ../libgnomeui/gnome-font-picker.c:155
 msgid "Title"
 msgstr "Pealkiri"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:122
 msgid "Title of the druid"
 msgstr "Druiidi pealkiri"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:130
 msgid "Logo image"
 msgstr "Logopilt"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:137
 msgid "Top Watermark"
 msgstr "Pealmine vesimärk"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:138
 msgid "Watermark image for the top"
 msgstr "Vesimärgipile pealmise kihi jaoks"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:145
 msgid "Title Foreground"
 msgstr "Pealkirja värv"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:146
 msgid "Foreground color of the title"
 msgstr "Pealkirja teksti värv"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:153
 msgid "Title Foreground Color"
 msgstr "Pealkirja värv"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:154
 msgid "Foreground color of the title as a GdkColor"
 msgstr "Pealkirja värv GdkColor-ina"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:161
 msgid "Title Foreground color set"
 msgstr "Pealkirja taustavärv seatud"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:162
 msgid "Foreground color of the title is set"
 msgstr "Pealkirja taustavärv on seatud"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:169
-#: ../libgnomeui/gnome-druid-page-standard.c:177
 msgid "Background Color"
 msgstr "Taustavärv"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:170
 msgid "Background color"
 msgstr "Taustavärv"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:178
 msgid "Background color as a GdkColor"
 msgstr "Taustavärv GdkColor-ina"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:185
 msgid "Background color set"
 msgstr "Taustavärv seatud"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:186
 msgid "Background color is set"
 msgstr "Taustavärv on seatud"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:193
-#: ../libgnomeui/gnome-druid-page-standard.c:201
 msgid "Contents Background Color"
 msgstr "Sisukorra taustavärv"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:194
 msgid "Contents Background color"
 msgstr "Sisukorra taustavärv"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:202
 msgid "Contents Background color as a GdkColor"
 msgstr "Sisu taustavärv GdkColor-ina"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:209
 msgid "Contents Background color set"
 msgstr "Sisu taustavärv seatud"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:210
 msgid "Contents Background color is set"
 msgstr "Sisu taustavärv on seatud"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:216
-#: ../libgnomeui/gnome-druid-page-standard.c:224
 msgid "Logo Background Color"
 msgstr "Logo taustavärv"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:217
 msgid "Logo Background color"
 msgstr "Logo taustavärv"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:225
 msgid "Logo Background color as a GdkColor"
 msgstr "Logo taustavärv GdkColor-ina"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:232
 msgid "Logo Background color set"
 msgstr "Logo taustavärv seatud"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:233
 msgid "Logo Background color is set"
 msgstr "Logo taustavärv on seatud"
 
-#: ../libgnomeui/gnome-druid.c:153
 msgid "Show Finish"
 msgstr "Näita Rakenda-nuppu"
 
-#: ../libgnomeui/gnome-druid.c:154
 msgid "Show the 'Finish' button instead of the 'Next' button"
 msgstr "Näitab 'Rakenda' nuppu 'Edasi' nupu asemel"
 
-#: ../libgnomeui/gnome-druid.c:161
 msgid "Show Help"
 msgstr "Näita Abi"
 
-#: ../libgnomeui/gnome-druid.c:162
 msgid "Show the 'Help' button"
 msgstr "Näitab 'Abi' nuppu"
 
-#: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:239 ../libgnomeui/gnome-icon-entry.c:176
 msgid "History ID"
 msgstr "Ajaloo ID"
 
-#: ../libgnomeui/gnome-entry.c:200
 msgid "GTK entry"
 msgstr "GTK sisestusväli"
 
-#: ../libgnomeui/gnome-entry.c:201
 msgid "The GTK entry"
 msgstr "GTK sisestusväli"
 
-#: ../libgnomeui/gnome-file-entry.c:240
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
@@ -970,19 +743,15 @@ msgstr ""
 "Failikirje unikaalne identifikaator.  Selle abil leitakse kirje "
 "ajalooloendist."
 
-#: ../libgnomeui/gnome-file-entry.c:248 ../libgnomeui/gnome-icon-entry.c:185
 msgid "Browse Dialog Title"
 msgstr "Sirvimisdialoogi pealkiri"
 
-#: ../libgnomeui/gnome-file-entry.c:249
 msgid "Title for the Browse file dialog."
 msgstr "Failisirvimisdialoogi pealkiri."
 
-#: ../libgnomeui/gnome-file-entry.c:256
 msgid "Directory Entry"
 msgstr "Kataloogikirje"
 
-#: ../libgnomeui/gnome-file-entry.c:257
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
@@ -990,35 +759,27 @@ msgstr ""
 "Kas faili sisestuskast on mõeldud katalooginimede või täielike failinimede "
 "jaoks."
 
-#: ../libgnomeui/gnome-file-entry.c:265
 msgid "Modal"
 msgstr "Modaalne"
 
-#: ../libgnomeui/gnome-file-entry.c:266
 msgid "Whether the Browse file window should be modal."
 msgstr "Kas failivalimise dialoog peab olema modaalne."
 
-#: ../libgnomeui/gnome-file-entry.c:273 ../libgnomeui/gnome-icon-entry.c:201
 msgid "Filename"
 msgstr "Failinimi"
 
-#: ../libgnomeui/gnome-file-entry.c:274
 msgid "Filename that should be displayed in the file entry."
 msgstr "Failinimi, mida peaks kuvatama faili sisestusväljal."
 
-#: ../libgnomeui/gnome-file-entry.c:282
 msgid "Default Path"
 msgstr "Vaikimisi rada"
 
-#: ../libgnomeui/gnome-file-entry.c:283
 msgid "Default path for the Browse file window."
 msgstr "Vaikimisi rada failisirvimise aknale."
 
-#: ../libgnomeui/gnome-file-entry.c:290
 msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:291
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -1027,11 +788,9 @@ msgstr ""
 "Failikirje väli kasutab GnomeEntry välja failinime sisestamiseks. See omadus "
 "on mõeldud GnomeEntry parameetrite hankimiseks või muutmiseks."
 
-#: ../libgnomeui/gnome-file-entry.c:301
 msgid "GtkEntry"
 msgstr "GtkEntry"
 
-#: ../libgnomeui/gnome-file-entry.c:302
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -1040,11 +799,9 @@ msgstr ""
 "Failikirje väli kasutab GtkEntry välja failinime sisestamiseks. See omadus "
 "on mõeldud GtkEntry parameetrite hankimiseks või muutmiseks."
 
-#: ../libgnomeui/gnome-file-entry.c:312
 msgid "Use GtkFileChooser"
 msgstr "GtkFileChooser'i kasutamine"
 
-#: ../libgnomeui/gnome-file-entry.c:313
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
@@ -1052,115 +809,87 @@ msgstr ""
 "Kas failide avamisel peab kasutama uut GtkFileChooser vidinat või "
 "GtkFileSelection vidinat."
 
-#: ../libgnomeui/gnome-file-entry.c:322
 msgid "GtkFileChooser Action"
 msgstr "GtkFileChooser toiming"
 
-#: ../libgnomeui/gnome-file-entry.c:323
 msgid "The type of operation that the file selector is performing."
 msgstr "Failivalija poolt teostatava operatsiooni tüüp."
 
-#: ../libgnomeui/gnome-file-entry.c:658 ../libgnomeui/gnome-file-entry.c:695
 msgid "Select file"
 msgstr "Faili valimine"
 
-#: ../libgnomeui/gnome-file-entry.c:820
 msgid "Path"
 msgstr "Rada"
 
-#: ../libgnomeui/gnome-file-entry.c:820
 msgid "Path to file"
 msgstr "Faili rada"
 
-#: ../libgnomeui/gnome-file-entry.c:849
 msgid "_Browse..."
 msgstr "_Vali..."
 
-#: ../libgnomeui/gnome-file-entry.c:850
 msgid "Pop up a file selector to choose a file"
 msgstr "Faili valimiseks mõeldud hüpikaken"
 
-#: ../libgnomeui/gnome-font-picker.c:66
 msgid "sans 12"
 msgstr "sans 12"
 
-#: ../libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsŠšZzŽžTtUuVvWwÕõÄäÖöÜüXxYy"
 
-#: ../libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
 msgstr "Vali kirjatüüp"
 
-#: ../libgnomeui/gnome-font-picker.c:156
 msgid "The title of the selection dialog box"
 msgstr "Valikudialoogi pealkiri"
 
-#: ../libgnomeui/gnome-font-picker.c:164
 msgid "Mode"
 msgstr "Režiim"
 
-#: ../libgnomeui/gnome-font-picker.c:165
 msgid "The mode of operation of the font picker"
 msgstr "Kirjatüübivalija toimingurežiim"
 
-#: ../libgnomeui/gnome-font-picker.c:174
 msgid "Font name"
 msgstr "Kirjatüübi nimi"
 
-#: ../libgnomeui/gnome-font-picker.c:175
 msgid "Name of the selected font"
 msgstr "Valitud kirjatüübi nimi"
 
-#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:979
 msgid "Font"
 msgstr "Kirjatüüp"
 
-#: ../libgnomeui/gnome-font-picker.c:185
 msgid "The selected GtkFont"
 msgstr "Valitud GtkFont"
 
-#: ../libgnomeui/gnome-font-picker.c:192
 msgid "Preview text"
 msgstr "Tekst eelvaatlemiseks"
 
-#: ../libgnomeui/gnome-font-picker.c:193
 msgid "Preview text shown in the dialog"
 msgstr "Dialoogiaknas näidatav tekst eelvaatlemiseks"
 
-#: ../libgnomeui/gnome-font-picker.c:201
 msgid "Use font in label"
 msgstr "Kirjatüübi kasutamine sildil"
 
-#: ../libgnomeui/gnome-font-picker.c:202
 msgid "Use font in the label in font info mode"
 msgstr "Kirjatüübi kasutamine sildil kirjatüübi andmererežiimis"
 
-#: ../libgnomeui/gnome-font-picker.c:210
 msgid "Font size for label"
 msgstr "Sildi kirjatüübi suurus"
 
-#: ../libgnomeui/gnome-font-picker.c:211
 msgid "Font size for label in font info mode"
 msgstr "Sildi kirjatüübi suurus kirjatüübi andmererežiimis"
 
-#: ../libgnomeui/gnome-font-picker.c:221
 msgid "Show size"
 msgstr "Näita suurust"
 
-#: ../libgnomeui/gnome-font-picker.c:222
 msgid "Show size in font info mode"
 msgstr "Suuruse näitamine kirjatüübi andmererežiimis"
 
-#: ../libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
 msgstr "GNOME GConf UI tugi"
 
-#: ../libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
 msgstr "Ü_ksikasjad"
 
-#: ../libgnomeui/gnome-gconf-ui.c:171
 #, c-format
 msgid ""
 "The application \"%s\" attempted to change an aspect of your configuration "
@@ -1173,7 +902,6 @@ msgstr ""
 "ei pruugi rakenduda või need tuleb rakenduse järgmise käivitamise ajal "
 "taastada."
 
-#: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
@@ -1182,39 +910,30 @@ msgstr ""
 "%s seadistusandmete laadimisel või salvestamisel tekkis viga. Mõned sinu "
 "sätted ei pruugi õigesti toimida."
 
-#: ../libgnomeui/gnome-href.c:102
 msgid "URL"
 msgstr "URL"
 
-#: ../libgnomeui/gnome-href.c:103
 msgid "The URL that GnomeHRef activates"
 msgstr "URL, mille GnomeHRef aktiveerib"
 
-#: ../libgnomeui/gnome-href.c:110
 msgid "Text"
 msgstr "Tekst"
 
-#: ../libgnomeui/gnome-href.c:111
 msgid "The text on the button"
 msgstr "Tekst nupu peal"
 
-#: ../libgnomeui/gnome-href.c:112
 msgid "End World Hunger"
-msgstr "Lõpetada maailma näljahädad"
+msgstr "Lõpeta maailma näljahädad"
 
-#: ../libgnomeui/gnome-href.c:118
 msgid "Link color"
 msgstr "Lingi värv"
 
-#: ../libgnomeui/gnome-href.c:119
 msgid "Color used to draw the link"
-msgstr "Viida joonistamiseks kasutatav värvus"
+msgstr "Viida kuvamiseks kasutatav värvus"
 
-#: ../libgnomeui/gnome-href.c:150
 msgid "This button will take you to the URI that it displays."
 msgstr "See nupp viib nupul kuvatavale URI-le."
 
-#: ../libgnomeui/gnome-href.c:386
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
@@ -1222,7 +941,6 @@ msgstr ""
 "Vaikimisi veebisirvija käivitamisel tekkis viga. Palun kontrolli oma "
 "sektsiooni 'Eelistatud rakendused' sätteid."
 
-#: ../libgnomeui/gnome-icon-entry.c:177
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
@@ -1230,27 +948,21 @@ msgstr ""
 "Ikoonikirje unikaalne identifikaator.  Seda kasutatakse ajalooloendi "
 "salvestamisel."
 
-#: ../libgnomeui/gnome-icon-entry.c:186
 msgid "Title for the Browse icon dialog."
 msgstr "Ikoonisirvimisdialoogi pealkiri."
 
-#: ../libgnomeui/gnome-icon-entry.c:193
 msgid "Pixmap Directory"
 msgstr "Pildikataloog"
 
-#: ../libgnomeui/gnome-icon-entry.c:194
 msgid "Directory that will be searched for icons."
 msgstr "Kataloog, millest otsitakse ikoone."
 
-#: ../libgnomeui/gnome-icon-entry.c:202
 msgid "Filename that should be displayed in the icon entry."
 msgstr "Failinimi, mida peaks kuvatama ikooni sisestusväljal."
 
-#: ../libgnomeui/gnome-icon-entry.c:210
 msgid "Picker dialog"
 msgstr "Valikudialoog"
 
-#: ../libgnomeui/gnome-icon-entry.c:211
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1258,234 +970,177 @@ msgstr ""
 "Ikoonivaliku dialoog. Selle abil saavutatakse suvalise omaduse muutmise või "
 "pärimise peale GtkDialog-tüüpi dialoogi käivitamine."
 
-#: ../libgnomeui/gnome-icon-entry.c:319 ../libgnomeui/gnome-icon-entry.c:1003
 msgid "Choose Icon"
 msgstr "Ikooni valimine"
 
-#: ../libgnomeui/gnome-icon-entry.c:773
 msgid "Icon selection dialog"
 msgstr "Ikooni valimise dialoog"
 
-#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "This dialog box lets you select an icon."
 msgstr "See dialoog võimaldab sul ikooni valida."
 
-#: ../libgnomeui/gnome-icon-entry.c:780 ../libgnomeui/gnome-icon-entry.c:1006
 msgid "Icon Selector"
 msgstr "Ikoonivalija"
 
-#: ../libgnomeui/gnome-icon-entry.c:781
 msgid "Please pick the icon you want."
 msgstr "Palun vali ikoon, mida soovid."
 
-#: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "This button will open a window to let you select an icon."
 msgstr "Selle nupu abil avatakse ikoonivalimise aken."
 
-#: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
 msgstr "Vali"
 
-#: ../libgnomeui/gnome-icon-entry.c:1032
 msgid "Icon path"
 msgstr "Ikoonide rada"
 
-#: ../libgnomeui/gnome-icon-entry.c:1033
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr "Siia peaksid sa sisestama ikoonipiltide kataloogi nime."
 
-#: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
 msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
 msgstr "GnomeIconSelection: '%s' ei ole olemas või pole tegemist kataloogiga"
 
-#: ../libgnomeui/gnome-icon-sel.c:301
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
 msgstr "GnomeIconSelection: kausta '%s' ei suudeta avada"
 
-#: ../libgnomeui/gnome-icon-sel.c:405
 msgid "Loading Icons..."
 msgstr "Ikoonide laadimine..."
 
-#: ../libgnomeui/gnome-messagebox.c:107
 msgid "Information"
 msgstr "Teave"
 
-#: ../libgnomeui/gnome-messagebox.c:112
 msgid "Warning"
 msgstr "Hoiatus"
 
-#: ../libgnomeui/gnome-messagebox.c:118
 msgid "Error"
 msgstr "Viga"
 
-#: ../libgnomeui/gnome-messagebox.c:124
 msgid "Question"
 msgstr "Küsimus"
 
-#: ../libgnomeui/gnome-messagebox.c:129
 msgid "Message"
 msgstr "Teade"
 
-#: ../libgnomeui/gnome-password-dialog.c:210
 msgid "_Username:"
 msgstr "_Kasutajanimi:"
 
-#: ../libgnomeui/gnome-password-dialog.c:213
 msgid "_Domain:"
 msgstr "_Domeen:"
 
-#: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
 msgstr "_Parool:"
 
-#: ../libgnomeui/gnome-password-dialog.c:219
 msgid "_New password:"
 msgstr "_Uus parool:"
 
-#: ../libgnomeui/gnome-password-dialog.c:220
 msgid "Con_firm password:"
 msgstr "_Parool veelkord:"
 
-#: ../libgnomeui/gnome-password-dialog.c:223
 msgid "Password quality:"
 msgstr "_Parooli kvaliteet:"
 
-#: ../libgnomeui/gnome-password-dialog.c:338
 msgid "Co_nnect"
 msgstr "Ü_hendu"
 
-#: ../libgnomeui/gnome-password-dialog.c:371
 msgid "Connect _anonymously"
 msgstr "Ühendu _anonüümselt"
 
-#: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
 msgstr "Ühendu ka_sutajana:"
 
-#: ../libgnomeui/gnome-password-dialog.c:438
 msgid "_Forget password immediately"
 msgstr "_Unusta parool koheselt"
 
-#: ../libgnomeui/gnome-password-dialog.c:444
 msgid "_Remember password until you logout"
 msgstr "Jäta parool kuni _väljalogimiseni meelde"
 
-#: ../libgnomeui/gnome-password-dialog.c:450
 msgid "_Remember forever"
 msgstr "_Jäta igavesti meelde"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:112
 msgid "Do Preview"
 msgstr "Eelvaatlus"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:113
 msgid "Whether the pixmap entry should have a preview."
 msgstr "Kas pildi sisestusväli peab võimaldama eelvaatlust."
 
-#: ../libgnomeui/gnome-pixmap-entry.c:187
-#: ../libgnomeui/gnome-pixmap-entry.c:481
 msgid "No Image"
 msgstr "Pilti pole"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:204
 msgid "Image Preview"
 msgstr "Pildi eelvaade"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:205
 msgid "A preview of the image currently specified"
 msgstr "Käesolevaga määratud pildi eelvaatlus"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:416
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "Hbox'i pole võimalik leida, kasutatakse tavalist failivalikut"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:422
 msgid "Preview"
 msgstr "Eelvaade"
 
-#: ../libgnomeui/gnome-scores.c:77
 msgid "Top Ten"
 msgstr "Kümme paremat"
 
-#: ../libgnomeui/gnome-scores.c:90
 msgid "User"
 msgstr "Kasutaja"
 
-#: ../libgnomeui/gnome-scores.c:93
 msgid "Score"
 msgstr "Punkte"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
-#: ../libgnomeui/gnome-scores.c:193
 msgid "%a %b %d %T %Y"
 msgstr "%d. %b %Y %H:%M"
 
-#: ../libgnomeui/gnome-scores.c:394
 msgid "Sans 14"
 msgstr "Sans 14"
 
-#: ../libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
 msgstr "Tabeli äärised"
 
-#: ../libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
 msgstr "Tabeli täidis"
 
-#: ../libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
 msgstr "Täpploetelu"
 
-#: ../libgnomeui/gnome-stock-icons.c:142
 msgid "Numbered List"
 msgstr "Numbriline loend"
 
-#: ../libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
 msgstr "Taane"
 
-#: ../libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
 msgstr "Taande eemaldamine"
 
-#: ../libgnomeui/gnome-stock-icons.c:145
 msgid "About"
 msgstr "Programmist lähemalt"
 
-#: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:172
 msgid "Disable Crash Dialog"
 msgstr "Krahhidialoogi keelamine"
 
-#: ../libgnomeui/gnome-ui-init.c:155
 msgid "GNOME GUI Library:"
 msgstr "GNOME kasutajaliidese teek:"
 
-#: ../libgnomeui/gnome-ui-init.c:156
 msgid "Show GNOME GUI options"
 msgstr "GNOME kasutajaliidese valikute näitamine"
 
-#: ../libgnomeui/gnome-ui-init.c:174
 msgid "X display to use"
 msgstr "X'i kuva, mida kasutada"
 
-#: ../libgnomeui/gnome-ui-init.c:174
 msgid "DISPLAY"
 msgstr "KUVA"
 
-#: ../libgnomeui/gnome-ui-init.c:179
 msgid "GNOME GUI Library"
 msgstr "GNOME kasutajaliidese teek"
 
-#: ../libgnomeui/gnome-ui-init.c:244
 msgid "Could not open link"
 msgstr "Viita pole võimalik avada"
 
-#: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Välju testprogrammist"
