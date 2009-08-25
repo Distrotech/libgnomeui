@@ -371,7 +371,7 @@ gnome_thumbnail_factory_lookup (GnomeThumbnailFactory *factory,
     return path;
 
   g_free (path);
-  return FALSE;
+  return NULL;
 }
 
 /**
