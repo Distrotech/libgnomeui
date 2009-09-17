@@ -1,16 +1,16 @@
-# Breton (brezhoneg) translation of the  libGNOMEui package
-# Copyright (C) 2004 Thierry Vignaud <tvignaud@mandriva.com>.
-# This file is distributed under the same license as the libGNOMEui package.
-# Thierry Vignaud <tvignaud@mandriva.com>
+# Breton translation of the  libgnomeui package
+# Copyright (C) 2004 The GNOME Foundation
+# This file is distributed under the same license as the libgnomeui package.
+# Thierry Vignaud <tvignaud@mandrakesoft.com>, 2004.
 # Jamy <jamybzh@free.fr>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libGNOMEui\n"
+"Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-03-09 10:08+0000\n"
-"PO-Revision-Date: 2009-07-30 12:19+0100\n"
-"Last-Translator: Denis\n"
+"PO-Revision-Date: 2009-08-31 07:09+0000\n"
+"Last-Translator: Breizh <Unknown>\n"
 "Language-Team: br <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,15 +74,15 @@ msgstr "Hedad Copyright"
 
 #: ../libgnomeui/gnome-about.c:381
 msgid "Copyright information for the program"
-msgstr "Stlennoù Copyright evit ar goulev"
+msgstr "Titouroù Copyright evit ar goulev"
 
 #: ../libgnomeui/gnome-about.c:388
 msgid "Comments string"
-msgstr "Hedad askelennoù"
+msgstr "Hedad an askelennoù"
 
 #: ../libgnomeui/gnome-about.c:389
 msgid "Comments about the program"
-msgstr "Askellennoù diwar-benn ar goulev"
+msgstr "Askelennoù diwar-benn ar goulev"
 
 #: ../libgnomeui/gnome-about.c:395
 msgid "Authors"
@@ -90,15 +90,15 @@ msgstr "Aozerion"
 
 #: ../libgnomeui/gnome-about.c:396
 msgid "List of authors of the programs"
-msgstr "Roll an aozerion ar goulevioù"
+msgstr "Roll aozerion goulevioù"
 
 #: ../libgnomeui/gnome-about.c:398
 msgid "Author entry"
-msgstr "Enankad aozer"
+msgstr "Maezienn aozer"
 
 #: ../libgnomeui/gnome-about.c:399
 msgid "A single author entry"
-msgstr "Ur enankad aozer hepken"
+msgstr "Ur maezienn aozer hepken"
 
 #: ../libgnomeui/gnome-about.c:406
 msgid "Documenters"
@@ -106,32 +106,34 @@ msgstr "Teuliourien"
 
 #: ../libgnomeui/gnome-about.c:407
 msgid "List of people documenting the program"
-msgstr "Roll an dud o titouriñ ar goulev"
+msgstr "Listenn an dud o titouriñ ar programm"
 
 #: ../libgnomeui/gnome-about.c:409
 msgid "Documenter entry"
-msgstr "Enankad teuliour"
+msgstr "Maezienn teuliour"
 
 #: ../libgnomeui/gnome-about.c:410
 msgid "A single documenter entry"
-msgstr "Ur enankad teuliour hepken"
+msgstr "Ur maezienn teuliour hepken"
 
 #: ../libgnomeui/gnome-about.c:418
 msgid "Translator credits"
 msgstr "Trugarez d'an droourien"
 
 #: ../libgnomeui/gnome-about.c:419
-msgid "Credits to the translators. This string should be marked as translatable"
-msgstr "Trugarez d'an diorroerien. Ret eo bezañ merket e-giz troiñ ar chadenn-mañ"
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr ""
+"Trugarez d'an diorroerien. Ret eo bezañ merket e-giz troiñ ar chadenn-mañ"
 
 #: ../libgnomeui/gnome-about.c:426
 #: ../libgnomeui/gnome-druid-page-standard.c:123
 msgid "Logo"
-msgstr "Siell"
+msgstr "Logo"
 
 #: ../libgnomeui/gnome-about.c:427
 msgid "A logo for the about box"
-msgstr "Ur siell evit ar voest Diwar-Benn"
+msgstr "Ul logo evit ar voest Diwar-Benn"
 
 #: ../libgnomeui/gnome-about.c:506
 #, c-format
@@ -139,8 +141,7 @@ msgid "About %s"
 msgstr "Diwar-benn %s"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:85
-#: ../libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
 msgstr "_Restr"
@@ -149,17 +150,15 @@ msgstr "_Restr"
 msgid "_File/"
 msgstr "_Restr/"
 
-#: ../libgnomeui/gnome-app-helper.c:87
-#: ../libgnomeui/gnome-app-helper.h:554
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
-msgstr "_Embann"
+msgstr "K_emmañ"
 
 #: ../libgnomeui/gnome-app-helper.c:88
 msgid "_Edit/"
-msgstr "_Embann/"
+msgstr "K_emmañ/"
 
-#: ../libgnomeui/gnome-app-helper.c:89
-#: ../libgnomeui/gnome-app-helper.h:557
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
 msgstr "_Gwel"
 
@@ -167,18 +166,16 @@ msgstr "_Gwel"
 msgid "_View/"
 msgstr "_Gwel/"
 
-#: ../libgnomeui/gnome-app-helper.c:91
-#: ../libgnomeui/gnome-app-helper.h:560
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
-msgstr "_Arventennoù"
+msgstr "_Dibarzhoù"
 
 #: ../libgnomeui/gnome-app-helper.c:92
 msgid "_Settings/"
-msgstr "_Arventennoù/"
+msgstr "_Dibarzhoù/"
 
 #. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:93
-#: ../libgnomeui/gnome-app-helper.h:326
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:326
 msgid "_New"
 msgstr "_Nevez"
 
@@ -186,8 +183,7 @@ msgstr "_Nevez"
 msgid "_New/"
 msgstr "_Nevez/"
 
-#: ../libgnomeui/gnome-app-helper.c:95
-#: ../libgnomeui/gnome-app-helper.h:563
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
 msgstr "_Restroù"
 
@@ -195,25 +191,22 @@ msgstr "_Restroù"
 msgid "Fi_les/"
 msgstr "_Restroù/"
 
-#: ../libgnomeui/gnome-app-helper.c:97
-#: ../libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
-msgstr "_Prenistri"
+msgstr "_Prenestrer"
 
-#: ../libgnomeui/gnome-app-helper.c:98
-#: ../libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:98 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
 msgstr "_C'hoari"
 
-#: ../libgnomeui/gnome-app-helper.c:99
-#: ../libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:99 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
 msgstr "_Skoazell"
 
 #: ../libgnomeui/gnome-app-helper.c:100
 msgid "_Windows/"
-msgstr "_Prenistri/"
+msgstr "_Prenestrer/"
 
 #. Open
 #: ../libgnomeui/gnome-app-helper.c:112
@@ -249,12 +242,12 @@ msgstr "_Stumm diaraog"
 
 #: ../libgnomeui/gnome-app-helper.c:129
 msgid "Revert to a saved version of the file"
-msgstr "Adlakaat en e-sav un handelv gwaredet ar restr"
+msgstr "Adlakaat en e-sav un handev gwaredet ar restr"
 
 #. Print
 #: ../libgnomeui/gnome-app-helper.c:134
 msgid "_Print..."
-msgstr "_Moullañ ..."
+msgstr "_Moulañ ..."
 
 #: ../libgnomeui/gnome-app-helper.c:134
 msgid "Print the current file"
@@ -285,11 +278,11 @@ msgstr "_Kuitaat"
 
 #: ../libgnomeui/gnome-app-helper.c:150
 msgid "Quit the application"
-msgstr "Kuitaat an arload"
+msgstr "Kuitaat ar poellad"
 
-#.
+#. 
 #. * The "Edit" menu
-#.
+#. 
 #. Cut
 #: ../libgnomeui/gnome-app-helper.c:158
 msgid "Cu_t"
@@ -316,7 +309,7 @@ msgstr "_Pegañ"
 
 #: ../libgnomeui/gnome-app-helper.c:169
 msgid "Paste the clipboard"
-msgstr "Pegañ ar golver"
+msgstr "Pegañ ar bouez paperioù"
 
 #. Clear
 #: ../libgnomeui/gnome-app-helper.c:174
@@ -325,16 +318,16 @@ msgstr "_Goullonderiñ"
 
 #: ../libgnomeui/gnome-app-helper.c:174
 msgid "Clear the selection"
-msgstr "Skarzhañ an diuzad"
+msgstr "Dilemel an diuzadur"
 
 #. Undo
 #: ../libgnomeui/gnome-app-helper.c:179
 msgid "_Undo"
-msgstr "_Dizober"
+msgstr "_Freuzañ"
 
 #: ../libgnomeui/gnome-app-helper.c:179
 msgid "Undo the last action"
-msgstr "Dizober ar gwezhiadur diwezhañ"
+msgstr "Nullañ an ober diwezhañ"
 
 #. Redo
 #: ../libgnomeui/gnome-app-helper.c:184
@@ -343,7 +336,7 @@ msgstr "_Adober"
 
 #: ../libgnomeui/gnome-app-helper.c:184
 msgid "Redo the undone action"
-msgstr "Adober ar gwezhiadur disgraet"
+msgstr "Adober an oberenn nullet"
 
 #. Find
 #: ../libgnomeui/gnome-app-helper.c:189
@@ -352,7 +345,7 @@ msgstr "_Kavout ..."
 
 #: ../libgnomeui/gnome-app-helper.c:189
 msgid "Search for a string"
-msgstr "Klask un hedad"
+msgstr "Klask ur chadenn"
 
 #. Find Again
 #: ../libgnomeui/gnome-app-helper.c:194
@@ -361,7 +354,7 @@ msgstr "Kavout a-_heul"
 
 #: ../libgnomeui/gnome-app-helper.c:195
 msgid "Search again for the same string"
-msgstr "Adklask ar memes hedad"
+msgstr "Adklask ar memes chadenn"
 
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:200
@@ -370,7 +363,7 @@ msgstr "_Erlec'hiañ ..."
 
 #: ../libgnomeui/gnome-app-helper.c:200
 msgid "Replace a string"
-msgstr "Erlec'hiañ un hedad"
+msgstr "Erlec'hiañ ur chadenn"
 
 #. Properties
 #: ../libgnomeui/gnome-app-helper.c:205
@@ -379,11 +372,11 @@ msgstr "_Perzhioù"
 
 #: ../libgnomeui/gnome-app-helper.c:206
 msgid "Modify the file's properties"
-msgstr "Kemmañ perzhioù ar restr"
+msgstr "Kemmañ ar restr"
 
-#.
+#. 
 #. * The Settings menu
-#.
+#. 
 #. Settings
 #: ../libgnomeui/gnome-app-helper.c:214
 msgid "Prefere_nces"
@@ -394,31 +387,29 @@ msgid "Configure the application"
 msgstr "Kefluniañ an arload"
 
 #. 20
-#.
+#. 
 #. * And the "Help" menu
-#.
+#. 
 #. About
-#: ../libgnomeui/gnome-app-helper.c:224
-#: ../test-gnome/testgnome.xml.h:4
+#: ../libgnomeui/gnome-app-helper.c:224 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
 msgstr "_A-zivout"
 
-#: ../libgnomeui/gnome-app-helper.c:225
-#: ../test-gnome/testgnome.xml.h:1
+#: ../libgnomeui/gnome-app-helper.c:225 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
-msgstr "A-zivout ar meziant-mañ"
+msgstr "Diwar-benn an arload-mañ"
 
 #: ../libgnomeui/gnome-app-helper.c:228
 msgid "Select _All"
-msgstr "Diuz an _Holl"
+msgstr "Diuz an &Holl"
 
 #: ../libgnomeui/gnome-app-helper.c:229
 msgid "Select everything"
 msgstr "Diuzañ pep tra"
 
-#.
+#. 
 #. * Window menu
-#.
+#. 
 #: ../libgnomeui/gnome-app-helper.c:237
 msgid "Create New _Window"
 msgstr "Krouiñ ur _Prenestr Nevez"
@@ -431,14 +422,13 @@ msgstr "Krouiñ ur prenestr nevez"
 msgid "_Close This Window"
 msgstr "Serriñ ar _Prenestr-mañ"
 
-#: ../libgnomeui/gnome-app-helper.c:243
-#: ../test-gnome/testgnome.xml.h:2
+#: ../libgnomeui/gnome-app-helper.c:243 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "Serriñ ar prenestr red"
 
-#.
+#. 
 #. * The "Game" menu
-#.
+#. 
 #: ../libgnomeui/gnome-app-helper.c:251
 msgid "_New Game"
 msgstr "C'Hoari _Nevez"
@@ -477,7 +467,7 @@ msgstr "_Adlakaat en e-sav an dilec'h"
 
 #: ../libgnomeui/gnome-app-helper.c:272
 msgid "Redo the undone move"
-msgstr "Adober al lusk nullet"
+msgstr "Adober al lusk diwezhañ nullet"
 
 #: ../libgnomeui/gnome-app-helper.c:276
 msgid "_Hint"
@@ -510,7 +500,7 @@ msgstr "Endal_c'hadoù"
 
 #: ../libgnomeui/gnome-app-helper.c:1153
 msgid "View help for this application"
-msgstr "Diskouez skoazell an arload"
+msgstr "Gwelou skoazell an arload-mañ"
 
 #: ../libgnomeui/gnome-app-helper.c:2524
 msgid "Text Below Icons"
@@ -522,11 +512,11 @@ msgstr "Kentwir testenn e-kichen arlunioù"
 
 #: ../libgnomeui/gnome-app-helper.c:2526
 msgid "Icons Only"
-msgstr "Arlunioù hepken"
+msgstr "Arlunoù hepken"
 
 #: ../libgnomeui/gnome-app-helper.c:2527
 msgid "Text Only"
-msgstr "Testenn hepken"
+msgstr "Skrid hepken"
 
 #: ../libgnomeui/gnome-app-helper.c:2588
 #, c-format
@@ -539,7 +529,7 @@ msgstr " (pouezit stokell kas)"
 
 #: ../libgnomeui/gnome-app-util.c:140
 msgid "ERROR: "
-msgstr "FAZI: "
+msgstr "FAZI : "
 
 #: ../libgnomeui/gnome-app-util.c:177
 msgid "Warning: "
@@ -571,7 +561,7 @@ msgstr "  - Mat eo ? (ya pe n'eo ket)"
 
 #: ../libgnomeui/gnome-app-util.c:684
 msgid "Progress"
-msgstr "Araokadenn"
+msgstr "Araokadur"
 
 #: ../libgnomeui/gnome-app.c:153
 msgid "App ID"
@@ -579,15 +569,15 @@ msgstr "ID an arload"
 
 #: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
-msgstr "An hedad identelezh an arload"
+msgstr "Ar chadenn identelezh an arload"
 
 #: ../libgnomeui/gnome-appbar.c:743
 msgid "Has Progress"
-msgstr "En deus un araokadenn"
+msgstr "En deus un araokadur"
 
 #: ../libgnomeui/gnome-appbar.c:744
 msgid "Create a progress widget."
-msgstr "Krouiñ ur parzh grafek araokadenn"
+msgstr "Krouiñ ur parzh grafek araokadur"
 
 #: ../libgnomeui/gnome-appbar.c:751
 msgid "Has Status"
@@ -599,11 +589,11 @@ msgstr "Krouiñ ur parzh grafek stad."
 
 #: ../libgnomeui/gnome-appbar.c:759
 msgid "Interactivity"
-msgstr "Etreoberiantiz"
+msgstr "Etreoberiad"
 
 #: ../libgnomeui/gnome-appbar.c:760
 msgid "Level of user activity required."
-msgstr "Live oberiantiz implijer a ret."
+msgstr "Live oberad implijer a ret."
 
 #: ../libgnomeui/gnome-authentication-manager.c:84
 #, c-format
@@ -643,42 +633,37 @@ msgstr ""
 msgid "You must log in to access %s\n"
 msgstr "Ret eo deoc'h lugañ evit mont e %s\n"
 
-#: ../libgnomeui/gnome-client.c:1000
-#: ../libgnomeui/gnome-client.c:1034
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "Specify session management ID"
-msgstr "Dibab ID ardoadur an estez"
+msgstr "Dibab ID merañ an dalc'hadoù"
 
-#: ../libgnomeui/gnome-client.c:1000
-#: ../libgnomeui/gnome-client.c:1034
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "ID"
 msgstr "Hennader (ID)"
 
-#: ../libgnomeui/gnome-client.c:1003
-#: ../libgnomeui/gnome-client.c:1037
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "Specify prefix of saved configuration"
 msgstr ""
 
-#: ../libgnomeui/gnome-client.c:1003
-#: ../libgnomeui/gnome-client.c:1037
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "PREFIX"
 msgstr "RAKGER"
 
-#: ../libgnomeui/gnome-client.c:1006
-#: ../libgnomeui/gnome-client.c:1040
+#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
-msgstr "Lazhañ kennask ouzh ardoer an estez"
+msgstr "Lazhañ kevreadenn ar merour dalc'hadoù"
 
 #: ../libgnomeui/gnome-client.c:1014
 msgid "Session management:"
-msgstr "Ardoadur an estez:"
+msgstr "Merour estez:"
 
 #: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
-msgstr "Diskouez dibarzhioù ardeiñ an estez :"
+msgstr ""
 
 #: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
-msgstr "Ardoadur an estez"
+msgstr "Merour an estezioù"
 
 #: ../libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
@@ -696,8 +681,7 @@ msgstr ""
 msgid "Pick a color"
 msgstr "Dibab ul liv"
 
-#: ../libgnomeui/gnome-dateedit.c:497
-#: ../libgnomeui/gnome-dateedit.c:804
+#: ../libgnomeui/gnome-dateedit.c:497 ../libgnomeui/gnome-dateedit.c:804
 msgid "Time"
 msgstr "Eur"
 
@@ -707,7 +691,7 @@ msgstr "An eur diuzet a-vremañ"
 
 #: ../libgnomeui/gnome-dateedit.c:510
 msgid "DateEdit Flags"
-msgstr ""
+msgstr "Bannielloù DateEdit"
 
 #: ../libgnomeui/gnome-dateedit.c:511
 msgid "Flags for how DateEdit looks"
@@ -737,8 +721,7 @@ msgstr ""
 msgid "The initial time"
 msgstr ""
 
-#: ../libgnomeui/gnome-dateedit.c:767
-#: ../libgnomeui/gnome-scores.c:96
+#: ../libgnomeui/gnome-dateedit.c:767 ../libgnomeui/gnome-scores.c:96
 msgid "Date"
 msgstr "Deiziad"
 
@@ -765,7 +748,7 @@ msgstr "Diuzit un eur en el listenn"
 
 #: ../libgnomeui/gnome-dateedit.c:1031
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date diamzeret, arverañ gnome_date_edit_get_time"
+msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:115
 #: ../libgnomeui/gnome-font-picker.c:147
@@ -774,7 +757,7 @@ msgstr "Titl"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:116
 msgid "Title of the druid"
-msgstr "Titl an drouiz"
+msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:124
 msgid "Logo image"
@@ -790,23 +773,23 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:139
 msgid "Title Foreground"
-msgstr "Rakva an titl"
+msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:140
 msgid "Foreground color of the title"
-msgstr "Liv rakva an titl"
+msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:147
 msgid "Title Foreground Color"
-msgstr "Liv rakva an titl"
+msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:148
 msgid "Foreground color of the title as a GdkColor"
-msgstr "Liv rakva an titl evel ul GdkColor"
+msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:155
 msgid "Title Foreground color set"
-msgstr "Arventenniñ liv rakva an titl"
+msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:156
 msgid "Foreground color of the title is set"
@@ -823,11 +806,11 @@ msgstr "Liv an drekleur"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:172
 msgid "Background color as a GdkColor"
-msgstr "Liv an drekleur evel ul GdkColor"
+msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:179
 msgid "Background color set"
-msgstr "Arventenniñ liv an drekleur"
+msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:180
 msgid "Background color is set"
@@ -891,27 +874,26 @@ msgstr "Diskouez ar skoazell"
 msgid "Show the 'Help' button"
 msgstr ""
 
-#: ../libgnomeui/gnome-entry.c:192
-#: ../libgnomeui/gnome-entry.c:193
-#: ../libgnomeui/gnome-file-entry.c:233
-#: ../libgnomeui/gnome-icon-entry.c:169
+#: ../libgnomeui/gnome-entry.c:192 ../libgnomeui/gnome-entry.c:193
+#: ../libgnomeui/gnome-file-entry.c:233 ../libgnomeui/gnome-icon-entry.c:169
 msgid "History ID"
 msgstr ""
 
 #: ../libgnomeui/gnome-entry.c:199
 msgid "GTK entry"
-msgstr "Enankad GTK"
+msgstr ""
 
 #: ../libgnomeui/gnome-entry.c:200
 msgid "The GTK entry"
-msgstr "Enankad GTK"
-
-#: ../libgnomeui/gnome-file-entry.c:234
-msgid "Unique identifier for the file entry.  This will be used to save the history list."
 msgstr ""
 
-#: ../libgnomeui/gnome-file-entry.c:242
-#: ../libgnomeui/gnome-icon-entry.c:178
+#: ../libgnomeui/gnome-file-entry.c:234
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:242 ../libgnomeui/gnome-icon-entry.c:178
 msgid "Browse Dialog Title"
 msgstr ""
 
@@ -921,10 +903,12 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:250
 msgid "Directory Entry"
-msgstr "Enankad an teuliad "
+msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:251
-msgid "Whether the file entry is being used to enter directory names or complete filenames."
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
 msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:259
@@ -935,8 +919,7 @@ msgstr ""
 msgid "Whether the Browse file window should be modal."
 msgstr ""
 
-#: ../libgnomeui/gnome-file-entry.c:267
-#: ../libgnomeui/gnome-icon-entry.c:194
+#: ../libgnomeui/gnome-file-entry.c:267 ../libgnomeui/gnome-icon-entry.c:194
 msgid "Filename"
 msgstr "Anv ar restr"
 
@@ -957,7 +940,10 @@ msgid "GnomeEntry"
 msgstr "GnomeEntry"
 
 #: ../libgnomeui/gnome-file-entry.c:285
-msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
 msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:295
@@ -965,33 +951,37 @@ msgid "GtkEntry"
 msgstr "GtkEntry"
 
 #: ../libgnomeui/gnome-file-entry.c:296
-msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
 msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:306
 msgid "Use GtkFileChooser"
-msgstr "Arverañ GtkChooser"
+msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:307
-msgid "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget to select files."
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
 msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:316
 msgid "GtkFileChooser Action"
-msgstr "Gwezhiadur GtkFileChooser"
+msgstr "Oberenn GtkFileChooser"
 
 #: ../libgnomeui/gnome-file-entry.c:317
 msgid "The type of operation that the file selector is performing."
 msgstr ""
 
-#: ../libgnomeui/gnome-file-entry.c:652
-#: ../libgnomeui/gnome-file-entry.c:689
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "Diuzit ar restr"
 
 #: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
-msgstr "Treug"
+msgstr "Hent"
 
 #: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
@@ -1037,8 +1027,7 @@ msgstr "Anv an nodrezh"
 msgid "Name of the selected font"
 msgstr "Anv an nodrezh diuzet"
 
-#: ../libgnomeui/gnome-font-picker.c:176
-#: ../libgnomeui/gnome-font-picker.c:972
+#: ../libgnomeui/gnome-font-picker.c:176 ../libgnomeui/gnome-font-picker.c:972
 msgid "Font"
 msgstr "Nodrezh"
 
@@ -1056,7 +1045,7 @@ msgstr "Testenn alberz diskouezet er voest kendiviz"
 
 #: ../libgnomeui/gnome-font-picker.c:193
 msgid "Use font in label"
-msgstr "Arverañ an nodrezh er skritellig"
+msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:194
 msgid "Use font in the label in font info mode"
@@ -1064,7 +1053,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:202
 msgid "Font size for label"
-msgstr "Ment an nodrezh evit ar skritellig"
+msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:203
 msgid "Font size for label in font info mode"
@@ -1088,12 +1077,18 @@ msgstr "_Munudoù"
 
 #: ../libgnomeui/gnome-gconf-ui.c:171
 #, c-format
-msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
 msgstr ""
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
-msgid "An error occurred while loading or saving configuration information for %s. Some of your configuration settings may not work properly."
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
 msgstr ""
 
 #: ../libgnomeui/gnome-href.c:102
@@ -1110,7 +1105,7 @@ msgstr "Testenn"
 
 #: ../libgnomeui/gnome-href.c:111
 msgid "The text on the button"
-msgstr "An testenn war an afell"
+msgstr ""
 
 #: ../libgnomeui/gnome-href.c:112
 msgid "End World Hunger"
@@ -1135,7 +1130,9 @@ msgid ""
 msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:170
-msgid "Unique identifier for the icon entry.  This will be used to save the history list."
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
 msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:179
@@ -1144,7 +1141,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:186
 msgid "Pixmap Directory"
-msgstr "Teuliad Pixmap"
+msgstr "Renkell Pixmap"
 
 #: ../libgnomeui/gnome-icon-entry.c:187
 msgid "Directory that will be searched for icons."
@@ -1159,11 +1156,12 @@ msgid "Picker dialog"
 msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:204
-msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
 msgstr ""
 
-#: ../libgnomeui/gnome-icon-entry.c:312
-#: ../libgnomeui/gnome-icon-entry.c:996
+#: ../libgnomeui/gnome-icon-entry.c:312 ../libgnomeui/gnome-icon-entry.c:996
 msgid "Choose Icon"
 msgstr "Diuzañ un arlun"
 
@@ -1175,14 +1173,13 @@ msgstr ""
 msgid "This dialog box lets you select an icon."
 msgstr ""
 
-#: ../libgnomeui/gnome-icon-entry.c:773
-#: ../libgnomeui/gnome-icon-entry.c:999
+#: ../libgnomeui/gnome-icon-entry.c:773 ../libgnomeui/gnome-icon-entry.c:999
 msgid "Icon Selector"
 msgstr "Diuzer arlunioù"
 
 #: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Please pick the icon you want."
-msgstr "Pakañ un arlun mar plij"
+msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:1000
 msgid "This button will open a window to let you select an icon."
@@ -1197,7 +1194,9 @@ msgid "Icon path"
 msgstr "Treug an arlun"
 
 #: ../libgnomeui/gnome-icon-entry.c:1026
-msgid "Here you should enter the name of the directory where icon images are located."
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
 msgstr ""
 
 #: ../libgnomeui/gnome-icon-sel.c:293
@@ -1236,7 +1235,7 @@ msgstr "Kemennad"
 
 #: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
-msgstr "Anv an ar_veriad :"
+msgstr "Anv _arveriad :"
 
 #: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
@@ -1325,7 +1324,7 @@ msgstr "Merk"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
-#.
+#. 
 #: ../libgnomeui/gnome-scores.c:193
 msgid "%a %b %d %T %Y"
 msgstr ""
@@ -1352,7 +1351,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
-msgstr "Dilinennañ"
+msgstr ""
 
 #: ../libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
@@ -1362,18 +1361,17 @@ msgstr ""
 msgid "About"
 msgstr "Diwar-benn"
 
-#: ../libgnomeui/gnome-ui-init.c:134
-#: ../libgnomeui/gnome-ui-init.c:160
+#: ../libgnomeui/gnome-ui-init.c:134 ../libgnomeui/gnome-ui-init.c:160
 msgid "Disable Crash Dialog"
 msgstr ""
 
 #: ../libgnomeui/gnome-ui-init.c:143
 msgid "GNOME GUI Library:"
-msgstr "Levraoueg GUI GNOME :"
+msgstr ""
 
 #: ../libgnomeui/gnome-ui-init.c:144
 msgid "Show GNOME GUI options"
-msgstr "Diskouez dibarzhioù GUI GNOME"
+msgstr ""
 
 #: ../libgnomeui/gnome-ui-init.c:162
 msgid "X display to use"
@@ -1381,18 +1379,16 @@ msgstr "Diskouez X da implij"
 
 #: ../libgnomeui/gnome-ui-init.c:162
 msgid "DISPLAY"
-msgstr "DISKOUEZ"
+msgstr "DISKWEL"
 
 #: ../libgnomeui/gnome-ui-init.c:167
 msgid "GNOME GUI Library"
-msgstr "Levraoueg GUI GNOME"
+msgstr ""
 
 #: ../libgnomeui/gnome-ui-init.c:232
 msgid "Could not open link"
 msgstr ""
 
 #: ../test-gnome/testgnome.xml.h:3
-#, fuzzy
 msgid "Exit the test"
 msgstr "Kuitaat an test"
-
