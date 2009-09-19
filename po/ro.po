@@ -2,14 +2,14 @@
 # Copyright (C) 2002 - 2008 Free Software Foundation, Inc.
 # Mugurel Tudor <mugurelu@gmail.com>, 2002, 2003.
 # Marius Andreiana <marius galuna.ro>, 2003.
-# Mișu Moldovan <dumol@gnome.ro>, 2003 - 2008.
+# Mișu Moldovan <dumol@gnome.ro>, 2003 - 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-06-14 13:37+0000\n"
-"PO-Revision-Date: 2008-09-18 22:37+0300\n"
+"PO-Revision-Date: 2009-09-20 00:25+0300\n"
 "Last-Translator: Mișu Moldovan <dumol@gnome.ro>\n"
 "Language-Team: <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgstr "Documentație"
 
 #: ../libgnomeui/gnome-about.c:419
 msgid "List of people documenting the program"
-msgstr "Lista persoanelor care au documentat programul"
+msgstr "Lista persoanelor ce au documentat programul"
 
 #: ../libgnomeui/gnome-about.c:421
 msgid "Documenter entry"
@@ -255,11 +255,11 @@ msgstr "Tipărește fișierul curent"
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:137
 msgid "Print S_etup..."
-msgstr "Opțiuni ti_părire..."
+msgstr "Opțiuni de ti_părire..."
 
 #: ../libgnomeui/gnome-app-helper.c:138
 msgid "Setup the page settings for your current printer"
-msgstr "Opțiunile paginii pentru imprimanta curentă"
+msgstr "Alegeți opțiunile paginii pentru imprimanta curentă"
 
 #. Close
 #: ../libgnomeui/gnome-app-helper.c:143
@@ -344,7 +344,7 @@ msgstr "C_aută..."
 
 #: ../libgnomeui/gnome-app-helper.c:187
 msgid "Search for a string"
-msgstr "Caută un anumit text"
+msgstr "Caută un anumit șir text"
 
 #. Find Again
 #: ../libgnomeui/gnome-app-helper.c:192
@@ -353,7 +353,7 @@ msgstr "Caută _următorul"
 
 #: ../libgnomeui/gnome-app-helper.c:193
 msgid "Search again for the same string"
-msgstr "Caută din nou același text"
+msgstr "Caută din nou același șir text"
 
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:198
@@ -362,7 +362,7 @@ msgstr "Î_nlocuiește..."
 
 #: ../libgnomeui/gnome-app-helper.c:198
 msgid "Replace a string"
-msgstr "Înlocuiește un text"
+msgstr "Înlocuiește un șir text"
 
 #. Properties
 #: ../libgnomeui/gnome-app-helper.c:203
@@ -520,7 +520,7 @@ msgstr "Doar text"
 #: ../libgnomeui/gnome-app-helper.c:2586
 #, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "Utilizează opțiunile GNOME (%s)"
+msgstr "Utilizează opțiunile implicite (%s)"
 
 #: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
@@ -576,7 +576,7 @@ msgstr "Are progres"
 
 #: ../libgnomeui/gnome-appbar.c:744
 msgid "Create a progress widget."
-msgstr "Creează un widget de progres"
+msgstr "Creează un widget de progres."
 
 #: ../libgnomeui/gnome-appbar.c:751
 msgid "Has Status"
@@ -584,7 +584,7 @@ msgstr "Are stare"
 
 #: ../libgnomeui/gnome-appbar.c:752
 msgid "Create a status widget."
-msgstr "Creează un widget de stare"
+msgstr "Creează un widget de stare."
 
 #: ../libgnomeui/gnome-appbar.c:759
 msgid "Interactivity"
@@ -605,7 +605,7 @@ msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
 msgstr ""
-"Trebuie să va autentificați pentru a accesa „%s”.\n"
+"Trebuie să vă autentificați pentru a accesa „%s”.\n"
 "%s"
 
 #: ../libgnomeui/gnome-authentication-manager.c:86
@@ -658,7 +658,7 @@ msgstr "Administrare sesiune:"
 
 #: ../libgnomeui/gnome-client.c:1014
 msgid "Show session management options"
-msgstr "Arată opțiunile de administrare a sesiunilor"
+msgstr "Arată opțiunile de administrare a sesiunii"
 
 #: ../libgnomeui/gnome-client.c:1045
 msgid "Session management"
@@ -670,7 +670,7 @@ msgstr "Renunță la ieșire"
 
 #: ../libgnomeui/gnome-color-picker.c:412
 msgid "Received invalid color data\n"
-msgstr "Am primit date invalide despre culoare\n"
+msgstr "S-au primit date invalide despre culoare\n"
 
 #: ../libgnomeui/gnome-color-picker.c:466
 msgid "Open a dialog to specify the color"
@@ -1014,7 +1014,7 @@ msgstr "sans 12"
 
 #: ../libgnomeui/gnome-font-picker.c:67
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaĂăÂâBbCcDdEeFfGgHhIiÎîJjKkLlMmNnOoPpQqRrSsȘșȘșTtȚțȚțUuVvWwXxYyZz"
+msgstr "AaĂăÂâBbCcDdEeFfGgHhIiÎîJjKkLlMmNnOoPpQqRrSsŞşȘșTtŢţȚțUuVvWwXxYyZz"
 
 #: ../libgnomeui/gnome-font-picker.c:68
 msgid "Pick a Font"
@@ -1098,7 +1098,7 @@ msgid ""
 msgstr ""
 "Aplicația „%s” a încercat să schimbe un aspect al configurării pe care "
 "administratorul de sistem sau sistemul de operare nu îl permite. Unele "
-"opțiuni pe care le-ați selectat s-ar putea să nu aibă efect, sau s-ar putea "
+"opțiuni pe care le-ați selectat s-ar putea să nu aibă efect sau s-ar putea "
 "ca ele să nu poată fi restaurate la următoarea utilizare a aplicației."
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
@@ -1206,11 +1206,12 @@ msgstr "Selector iconiță"
 
 #: ../libgnomeui/gnome-icon-entry.c:781
 msgid "Please pick the icon you want."
-msgstr "Vă rugăm alegeți iconița dorită."
+msgstr "Alegeți iconița dorită."
 
 #: ../libgnomeui/gnome-icon-entry.c:1007
 msgid "This button will open a window to let you select an icon."
-msgstr "Acest buton va deschide o fereastră pentru a selecta o iconiță."
+msgstr ""
+"Acest buton va deschide o fereastră ce vă va permite selectarea unei iconițe."
 
 #: ../libgnomeui/gnome-icon-entry.c:1029
 msgid "Browse"
@@ -1225,7 +1226,7 @@ msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
-"Aici ar trebui să introduceți numele directorului care conține iconițele."
+"Aici ar trebui să introduceți numele directorului ce conține iconițele."
 
 #: ../libgnomeui/gnome-icon-sel.c:293
 #, c-format
@@ -1271,7 +1272,7 @@ msgstr "_Domeniu:"
 
 #: ../libgnomeui/gnome-password-dialog.c:216
 msgid "_Password:"
-msgstr "_Parola:"
+msgstr "_Parolă:"
 
 #: ../libgnomeui/gnome-password-dialog.c:219
 msgid "_New password:"
@@ -1295,7 +1296,7 @@ msgstr "Conectare _anonimă"
 
 #: ../libgnomeui/gnome-password-dialog.c:376
 msgid "Connect as u_ser:"
-msgstr "Conectare ca _utilizatorul:"
+msgstr "Conectare ca utili_zatorul:"
 
 #: ../libgnomeui/gnome-password-dialog.c:438
 msgid "_Forget password immediately"
@@ -1303,7 +1304,7 @@ msgstr "_Uită imediat parola"
 
 #: ../libgnomeui/gnome-password-dialog.c:444
 msgid "_Remember password until you logout"
-msgstr "_Reține parola pentru această sesiune"
+msgstr "Reține parola pentru această _sesiune"
 
 #: ../libgnomeui/gnome-password-dialog.c:450
 msgid "_Remember forever"
@@ -1332,7 +1333,7 @@ msgstr "O previzualizare a imaginii specificate"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:416
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "Nu pot găsi un „hbox” folosind un selector de fișiere normal"
+msgstr "Nu s-a putut găsi un „hbox” folosind un selector de fișiere normal"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:422
 msgid "Preview"
