@@ -1,17 +1,17 @@
-# translation of libgnomeui.HEAD.te.po to Telugu
+# translation of libgnomeui.master.te.po to Telugu
 # Telugu translation of libgnomeui
 # Copyright (C) 2005 Free Software Foundation, Andhra Pradesh.
 # This file is distributed under the same license as the libgnomeui package
 #
 #
 # Prajasakti Localisation Team <localisation@prajasakti.com>, 2005.
-# Krishna Babu K <kkrothap@redhat.com>, 2008.
+# Krishna Babu K <kkrothap@redhat.com>, 2008, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.HEAD.te\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-14 13:37+0000\n"
-"PO-Revision-Date: 2008-09-19 17:23+0530\n"
+"Project-Id-Version: libgnomeui.master.te\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=libgnomeui&component=general\n"
+"POT-Creation-Date: 2009-05-02 13:10+0000\n"
+"PO-Revision-Date: 2009-09-22 18:37+0530\n"
 "Last-Translator: Krishna Babu K <kkrothap@redhat.com>\n"
 "Language-Team: Telugu <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -36,251 +37,251 @@ msgstr "చిన్నారి అంశం 2"
 msgid "Hint for item 2"
 msgstr "అంశం 2కు సూచన"
 
-#: ../libgnomeui/gnome-about.c:199
+#: ../libgnomeui/gnome-about.c:187
 msgid "Credits"
 msgstr "గుర్తింపులు"
 
-#: ../libgnomeui/gnome-about.c:231
+#: ../libgnomeui/gnome-about.c:219
 msgid "Written by"
 msgstr "లిఖించబడిన"
 
-#: ../libgnomeui/gnome-about.c:246
+#: ../libgnomeui/gnome-about.c:234
 msgid "Documented by"
 msgstr "లిఖించినవారు"
 
-#: ../libgnomeui/gnome-about.c:261
+#: ../libgnomeui/gnome-about.c:249
 msgid "Translated by"
 msgstr "అనువదించిన వారు"
 
-#: ../libgnomeui/gnome-about.c:324
+#: ../libgnomeui/gnome-about.c:312
 msgid "C_redits"
-msgstr "_గుర్తింపులు"
+msgstr "గుర్తింపులు (_r)"
 
-#: ../libgnomeui/gnome-about.c:377
+#: ../libgnomeui/gnome-about.c:365
 msgid "Program name"
 msgstr "కార్యక్రమ నామము"
 
-#: ../libgnomeui/gnome-about.c:378
+#: ../libgnomeui/gnome-about.c:366
 msgid "The name of the program"
 msgstr "ప్రోగ్రామ్ యొక్క నామము"
 
-#: ../libgnomeui/gnome-about.c:385
+#: ../libgnomeui/gnome-about.c:373
 msgid "Program version"
 msgstr "కార్యక్రమం వివరణ"
 
-#: ../libgnomeui/gnome-about.c:386
+#: ../libgnomeui/gnome-about.c:374
 msgid "The version of the program"
 msgstr "ప్రోగ్రామ్ యొక్క వర్షన్"
 
-#: ../libgnomeui/gnome-about.c:392
+#: ../libgnomeui/gnome-about.c:380
 msgid "Copyright string"
 msgstr "నకలుహక్కు పదబంధం"
 
-#: ../libgnomeui/gnome-about.c:393
+#: ../libgnomeui/gnome-about.c:381
 msgid "Copyright information for the program"
 msgstr "కార్యక్రమం యొక్క నకలుహక్కు సమాచారం"
 
-#: ../libgnomeui/gnome-about.c:400
+#: ../libgnomeui/gnome-about.c:388
 msgid "Comments string"
 msgstr "వ్యాఖ్యల పదబంధం"
 
-#: ../libgnomeui/gnome-about.c:401
+#: ../libgnomeui/gnome-about.c:389
 msgid "Comments about the program"
 msgstr "కార్యక్రమంపై వ్యాఖ్యానాలు"
 
-#: ../libgnomeui/gnome-about.c:407
+#: ../libgnomeui/gnome-about.c:395
 msgid "Authors"
 msgstr "మూలకర్తలు"
 
-#: ../libgnomeui/gnome-about.c:408
+#: ../libgnomeui/gnome-about.c:396
 msgid "List of authors of the programs"
 msgstr "కార్యక్రమాల మూలకర్తల జాబితా"
 
-#: ../libgnomeui/gnome-about.c:410
+#: ../libgnomeui/gnome-about.c:398
 msgid "Author entry"
 msgstr "మూలకర్త ప్రవేశం"
 
-#: ../libgnomeui/gnome-about.c:411
+#: ../libgnomeui/gnome-about.c:399
 msgid "A single author entry"
 msgstr "ఒకేఒక మూలకర్తకు ప్రవేశం"
 
-#: ../libgnomeui/gnome-about.c:418
+#: ../libgnomeui/gnome-about.c:406
 msgid "Documenters"
 msgstr "లేఖకులు"
 
-#: ../libgnomeui/gnome-about.c:419
+#: ../libgnomeui/gnome-about.c:407
 msgid "List of people documenting the program"
 msgstr "ప్రోగ్రామ్‌ను పత్రికీకరణ చేసిన వారియొక్క జాబితా"
 
-#: ../libgnomeui/gnome-about.c:421
+#: ../libgnomeui/gnome-about.c:409
 msgid "Documenter entry"
 msgstr "లేఖకుని ప్రవేశం"
 
-#: ../libgnomeui/gnome-about.c:422
+#: ../libgnomeui/gnome-about.c:410
 msgid "A single documenter entry"
 msgstr "ఒంటరి లేఖకుని ప్రవేశము"
 
-#: ../libgnomeui/gnome-about.c:430
+#: ../libgnomeui/gnome-about.c:418
 msgid "Translator credits"
 msgstr ""
-"Prajasakti Localisation Team <localisation@prajasakti.com>, 2005."
-"కృష్ణబాబు క్రొత్తపల్లి <kkrothap@redhat.com> 2008."
+"Prajasakti Localisation Team <localisation@prajasakti.com>, 2005.కృష్ణబాబు "
+"క్రొత్తపల్లి <kkrothap@redhat.com> 2008."
 
-#: ../libgnomeui/gnome-about.c:431
+#: ../libgnomeui/gnome-about.c:419
 msgid "Credits to the translators. This string should be marked as translatable"
 msgstr "అనువాదకులకు శుభాకాంక్షలు. ఈ పదబంధం అనువాదమునకు గుర్తు"
 
-#: ../libgnomeui/gnome-about.c:438
-#: ../libgnomeui/gnome-druid-page-standard.c:129
+#: ../libgnomeui/gnome-about.c:426
+#: ../libgnomeui/gnome-druid-page-standard.c:123
 msgid "Logo"
 msgstr "గుర్తు(లోగో)"
 
-#: ../libgnomeui/gnome-about.c:439
+#: ../libgnomeui/gnome-about.c:427
 msgid "A logo for the about box"
 msgstr "గురించి పేటిక గుర్తు"
 
-#: ../libgnomeui/gnome-about.c:518
+#: ../libgnomeui/gnome-about.c:506
 #, c-format
 msgid "About %s"
 msgstr "%s గురించి"
 
 #. Some standard menus
-#: ../libgnomeui/gnome-app-helper.c:83 ../libgnomeui/gnome-app-helper.h:551
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
-msgstr "_దస్త్రం"
-
-#: ../libgnomeui/gnome-app-helper.c:84
-msgid "_File/"
-msgstr "_దస్త్రం/"
-
-#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:554
-msgid "_Edit"
-msgstr "సరి_చేయు"
+msgstr "దస్త్రం (_F)"
 
 #: ../libgnomeui/gnome-app-helper.c:86
-msgid "_Edit/"
-msgstr "సరి_చేయు/"
+msgid "_File/"
+msgstr "దస్త్రం/ (_F)"
 
-#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:557
-msgid "_View"
-msgstr "_దర్శనం"
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "సరిచేయు (_E)"
 
 #: ../libgnomeui/gnome-app-helper.c:88
-msgid "_View/"
-msgstr "_దర్శనం/"
+msgid "_Edit/"
+msgstr "సరిచేయు/ (_E)"
 
-#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:560
-msgid "_Settings"
-msgstr "_అమరికలు"
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "దర్శనం (_V)"
 
 #: ../libgnomeui/gnome-app-helper.c:90
-msgid "_Settings/"
-msgstr "_అమరికలు/"
+msgid "_View/"
+msgstr "దర్శనం/ (_V)"
 
-#. If you have more then one New type, use this tree
-#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:326
-msgid "_New"
-msgstr "_కొత్త"
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "అమరికలు (_S)"
 
 #: ../libgnomeui/gnome-app-helper.c:92
-msgid "_New/"
-msgstr "_కొత్త/"
+msgid "_Settings/"
+msgstr "అమరికలు/ (_S)"
 
-#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:563
-msgid "Fi_les"
-msgstr "దస్త్ర_ములు"
+#. If you have more then one New type, use this tree
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "కొత్త (_N)"
 
 #: ../libgnomeui/gnome-app-helper.c:94
+msgid "_New/"
+msgstr "కొత్త/ (_N)"
+
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "దస్త్రములు (_l)"
+
+#: ../libgnomeui/gnome-app-helper.c:96
 msgid "Fi_les/"
-msgstr "దస్త్ర_ములు"
+msgstr "దస్త్రములు (_l)"
 
-#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:566
+#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
-msgstr "_గవాక్షాలు"
+msgstr "గవాక్షాలు (_W)"
 
-#: ../libgnomeui/gnome-app-helper.c:96 ../libgnomeui/gnome-app-helper.h:572
+#: ../libgnomeui/gnome-app-helper.c:98 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
-msgstr "_ఆట"
+msgstr "ఆట (_G)"
 
-#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:569
+#: ../libgnomeui/gnome-app-helper.c:99 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
 msgid "_Help"
-msgstr "_సహాయం"
+msgstr "సహాయం (_H)"
 
-#: ../libgnomeui/gnome-app-helper.c:98
+#: ../libgnomeui/gnome-app-helper.c:100
 msgid "_Windows/"
-msgstr "_గవాక్షాలు/"
+msgstr "గవాక్షాలు/ (_W)"
 
 #. Open
-#: ../libgnomeui/gnome-app-helper.c:110
+#: ../libgnomeui/gnome-app-helper.c:112
 msgid "_Open..."
-msgstr "_తెరువు. ..."
+msgstr "తెరువు... (_O)"
 
-#: ../libgnomeui/gnome-app-helper.c:110
+#: ../libgnomeui/gnome-app-helper.c:112
 msgid "Open a file"
 msgstr "దస్త్రమును తెరువు"
 
 #. Save
-#: ../libgnomeui/gnome-app-helper.c:115
+#: ../libgnomeui/gnome-app-helper.c:117
 msgid "_Save"
-msgstr "_దాచు"
+msgstr "దాచు (_S)"
 
-#: ../libgnomeui/gnome-app-helper.c:115
+#: ../libgnomeui/gnome-app-helper.c:117
 msgid "Save the current file"
 msgstr "ప్రస్తుత దస్త్రమును దాచు"
 
 #. Save As
-#: ../libgnomeui/gnome-app-helper.c:120
+#: ../libgnomeui/gnome-app-helper.c:122
 msgid "Save _As..."
-msgstr "_ఇదేవిధంగా దాచు"
+msgstr "ఇదేవిధంగా దాచు... (_A)"
 
-#: ../libgnomeui/gnome-app-helper.c:121
+#: ../libgnomeui/gnome-app-helper.c:123
 msgid "Save the current file with a different name"
 msgstr "వేరొక నామముతో ప్రస్తుత దస్త్రమును దాచుము"
 
 #. Revert
-#: ../libgnomeui/gnome-app-helper.c:126
+#: ../libgnomeui/gnome-app-helper.c:128
 msgid "_Revert"
-msgstr "_యథాస్థితికి తెమ్ము"
+msgstr "యథాస్థితికి తెమ్ము (_R)"
 
-#: ../libgnomeui/gnome-app-helper.c:127
+#: ../libgnomeui/gnome-app-helper.c:129
 msgid "Revert to a saved version of the file"
 msgstr "దాచబడిన వివరణ దస్త్రమును పూర్వస్థితికి తెమ్ము"
 
 #. Print
-#: ../libgnomeui/gnome-app-helper.c:132
+#: ../libgnomeui/gnome-app-helper.c:134
 msgid "_Print..."
-msgstr "_ముద్రణ..."
+msgstr "ముద్రణ... (_P)"
 
-#: ../libgnomeui/gnome-app-helper.c:132
+#: ../libgnomeui/gnome-app-helper.c:134
 msgid "Print the current file"
 msgstr "ప్రస్తుత దస్త్రమును ముద్రించు"
 
 #. Print Setup
-#: ../libgnomeui/gnome-app-helper.c:137
+#: ../libgnomeui/gnome-app-helper.c:139
 msgid "Print S_etup..."
-msgstr "ముద్రణను _అమర్చిపెట్టు..."
+msgstr "ముద్రణను అమర్చిపెట్టు... (_e)"
 
-#: ../libgnomeui/gnome-app-helper.c:138
+#: ../libgnomeui/gnome-app-helper.c:140
 msgid "Setup the page settings for your current printer"
 msgstr "మీ ప్రస్తుత ముద్రణాయంత్రం కోసం పుట అమరికలను అమర్చిపెట్టు"
 
 #. Close
-#: ../libgnomeui/gnome-app-helper.c:143
+#: ../libgnomeui/gnome-app-helper.c:145
 msgid "_Close"
-msgstr "_మూయుము"
+msgstr "మూయుము (_C)"
 
-#: ../libgnomeui/gnome-app-helper.c:143
+#: ../libgnomeui/gnome-app-helper.c:145
 msgid "Close the current file"
 msgstr "ప్రస్తుత దస్త్రంను మూయుము"
 
 #. Exit
-#: ../libgnomeui/gnome-app-helper.c:148
+#: ../libgnomeui/gnome-app-helper.c:150
 msgid "_Quit"
-msgstr "_నిష్క్రమణ"
+msgstr "నిష్క్రమణ (_Q)"
 
-#: ../libgnomeui/gnome-app-helper.c:148
+#: ../libgnomeui/gnome-app-helper.c:150
 msgid "Quit the application"
 msgstr "కార్యక్షేత్ర నిష్క్రమణ"
 
@@ -288,93 +289,93 @@ msgstr "కార్యక్షేత్ర నిష్క్రమణ"
 #. * The "Edit" menu
 #.
 #. Cut
-#: ../libgnomeui/gnome-app-helper.c:156
+#: ../libgnomeui/gnome-app-helper.c:158
 msgid "Cu_t"
-msgstr "కో_యు"
+msgstr "కోయు (_t)"
 
-#: ../libgnomeui/gnome-app-helper.c:156
+#: ../libgnomeui/gnome-app-helper.c:158
 msgid "Cut the selection"
 msgstr "ఎంపికచేసినదాన్ని కోయు"
 
 #. 10
 #. Copy
-#: ../libgnomeui/gnome-app-helper.c:162
+#: ../libgnomeui/gnome-app-helper.c:164
 msgid "_Copy"
-msgstr "_నకలు"
+msgstr "నకలు (_C)"
 
-#: ../libgnomeui/gnome-app-helper.c:162
+#: ../libgnomeui/gnome-app-helper.c:164
 msgid "Copy the selection"
 msgstr "ఎంపికచేసినదాని నకలు"
 
 #. Paste
-#: ../libgnomeui/gnome-app-helper.c:167
+#: ../libgnomeui/gnome-app-helper.c:169
 msgid "_Paste"
-msgstr "_అతికించు"
+msgstr "అతికించు (_P)"
 
-#: ../libgnomeui/gnome-app-helper.c:167
+#: ../libgnomeui/gnome-app-helper.c:169
 msgid "Paste the clipboard"
 msgstr "క్లిప్ బోర్డును అతికించు"
 
 #. Clear
-#: ../libgnomeui/gnome-app-helper.c:172
+#: ../libgnomeui/gnome-app-helper.c:174
 msgid "C_lear"
-msgstr "శు_భ్రపర్చు"
+msgstr "శుభ్రపర్చు (_l)"
 
-#: ../libgnomeui/gnome-app-helper.c:172
+#: ../libgnomeui/gnome-app-helper.c:174
 msgid "Clear the selection"
 msgstr "ఎంపిక చేసినదాన్ని శుభ్రపర్చు"
 
 #. Undo
-#: ../libgnomeui/gnome-app-helper.c:177
+#: ../libgnomeui/gnome-app-helper.c:179
 msgid "_Undo"
-msgstr "_చేసింది రద్దు"
+msgstr "చేసింది రద్దు (_U)"
 
-#: ../libgnomeui/gnome-app-helper.c:177
+#: ../libgnomeui/gnome-app-helper.c:179
 msgid "Undo the last action"
 msgstr "చివరిగాచేసిన చర్యను చేయవద్దు"
 
 #. Redo
-#: ../libgnomeui/gnome-app-helper.c:182
+#: ../libgnomeui/gnome-app-helper.c:184
 msgid "_Redo"
-msgstr "_మళ్ళీచేయి"
+msgstr "మళ్ళీచేయి (_R)"
 
-#: ../libgnomeui/gnome-app-helper.c:182
+#: ../libgnomeui/gnome-app-helper.c:184
 msgid "Redo the undone action"
 msgstr "వదిలివేయబడిన క్రియను మళ్ళీచేయి"
 
 #. Find
-#: ../libgnomeui/gnome-app-helper.c:187
+#: ../libgnomeui/gnome-app-helper.c:189
 msgid "_Find..."
-msgstr "_వెతుకు..."
+msgstr "వెతుకు... (_F)"
 
-#: ../libgnomeui/gnome-app-helper.c:187
+#: ../libgnomeui/gnome-app-helper.c:189
 msgid "Search for a string"
 msgstr "పదబంధం కోసం వెతుకు"
 
 #. Find Again
-#: ../libgnomeui/gnome-app-helper.c:192
+#: ../libgnomeui/gnome-app-helper.c:194
 msgid "Find Ne_xt"
-msgstr "తర్వా_తదాన్ని వెతుకు"
+msgstr "తర్వాతదాన్ని వెతుకు (_x)"
 
-#: ../libgnomeui/gnome-app-helper.c:193
+#: ../libgnomeui/gnome-app-helper.c:195
 msgid "Search again for the same string"
 msgstr "ఇదేరకమైన పదబంధం కోసం మళ్ళీ వెతుకు"
 
 #. Replace
-#: ../libgnomeui/gnome-app-helper.c:198
+#: ../libgnomeui/gnome-app-helper.c:200
 msgid "R_eplace..."
-msgstr "పు_నఃస్థాపించు"
+msgstr "పునఃస్థాపించు... (_e)"
 
-#: ../libgnomeui/gnome-app-helper.c:198
+#: ../libgnomeui/gnome-app-helper.c:200
 msgid "Replace a string"
 msgstr "పదబంధమును పునఃస్థాపించు"
 
 #. Properties
-#: ../libgnomeui/gnome-app-helper.c:203
+#: ../libgnomeui/gnome-app-helper.c:205
 msgid "_Properties"
-msgstr "_లక్షణాలు"
+msgstr "లక్షణాలు (_P)"
 
-#: ../libgnomeui/gnome-app-helper.c:204
+#: ../libgnomeui/gnome-app-helper.c:206
 msgid "Modify the file's properties"
 msgstr "దస్త్రముయొక్క లక్షణములను సవరించుము"
 
@@ -382,11 +383,11 @@ msgstr "దస్త్రముయొక్క లక్షణములను �
 #. * The Settings menu
 #.
 #. Settings
-#: ../libgnomeui/gnome-app-helper.c:212
+#: ../libgnomeui/gnome-app-helper.c:214
 msgid "Prefere_nces"
-msgstr "అభీష్టా_లు"
+msgstr "అభీష్టాలు (_n)"
 
-#: ../libgnomeui/gnome-app-helper.c:213
+#: ../libgnomeui/gnome-app-helper.c:215
 msgid "Configure the application"
 msgstr "కార్యక్షేత్ర రూపకరణ"
 
@@ -395,134 +396,134 @@ msgstr "కార్యక్షేత్ర రూపకరణ"
 #. * And the "Help" menu
 #.
 #. About
-#: ../libgnomeui/gnome-app-helper.c:222 ../test-gnome/testgnome.xml.h:4
+#: ../libgnomeui/gnome-app-helper.c:224 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
-msgstr "_గురించి"
+msgstr "గురించి (_A)"
 
-#: ../libgnomeui/gnome-app-helper.c:223 ../test-gnome/testgnome.xml.h:1
+#: ../libgnomeui/gnome-app-helper.c:225 ../test-gnome/testgnome.xml.h:1
 msgid "About this application"
 msgstr "ఈ కార్యక్షేత్రం గురించి"
 
-#: ../libgnomeui/gnome-app-helper.c:226
+#: ../libgnomeui/gnome-app-helper.c:228
 msgid "Select _All"
-msgstr "మొత్తాన్ని _ఎంచు"
+msgstr "మొత్తాన్ని ఎంచు (_A)"
 
-#: ../libgnomeui/gnome-app-helper.c:227
+#: ../libgnomeui/gnome-app-helper.c:229
 msgid "Select everything"
 msgstr "అన్నింటినీ ఎంపికచేయి"
 
 #.
 #. * Window menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:235
+#: ../libgnomeui/gnome-app-helper.c:237
 msgid "Create New _Window"
-msgstr "కొత్త _గవాక్షమును సృష్టించు"
+msgstr "కొత్త గవాక్షమును సృష్టించు (_W)"
 
-#: ../libgnomeui/gnome-app-helper.c:236
+#: ../libgnomeui/gnome-app-helper.c:238
 msgid "Create a new window"
 msgstr "కొత్త గవాక్షమును సృష్టించు"
 
-#: ../libgnomeui/gnome-app-helper.c:240
+#: ../libgnomeui/gnome-app-helper.c:242
 msgid "_Close This Window"
-msgstr "ఈ గవాక్షమును _మూయుము"
+msgstr "ఈ గవాక్షమును మూయుము (_C)"
 
-#: ../libgnomeui/gnome-app-helper.c:241 ../test-gnome/testgnome.xml.h:2
+#: ../libgnomeui/gnome-app-helper.c:243 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
 msgstr "ప్రస్తుత గవాక్షమును మూయుము"
 
 #.
 #. * The "Game" menu
 #.
-#: ../libgnomeui/gnome-app-helper.c:249
+#: ../libgnomeui/gnome-app-helper.c:251
 msgid "_New Game"
 msgstr "కొత్త ఆట (_N)"
 
-#: ../libgnomeui/gnome-app-helper.c:250
+#: ../libgnomeui/gnome-app-helper.c:252
 msgid "Start a new game"
 msgstr "కొత్త ఆటను ప్రారంభించు"
 
-#: ../libgnomeui/gnome-app-helper.c:254
+#: ../libgnomeui/gnome-app-helper.c:256
 msgid "_Pause Game"
 msgstr "ఆటను నిలుపుము (_P)"
 
-#: ../libgnomeui/gnome-app-helper.c:255
+#: ../libgnomeui/gnome-app-helper.c:257
 msgid "Pause the game"
 msgstr "ఆటను నిలుపు"
 
-#: ../libgnomeui/gnome-app-helper.c:259
+#: ../libgnomeui/gnome-app-helper.c:261
 msgid "_Restart Game"
 msgstr "ఆటను పునఃప్రారంభించుము (_R)"
 
-#: ../libgnomeui/gnome-app-helper.c:260
+#: ../libgnomeui/gnome-app-helper.c:262
 msgid "Restart the game"
 msgstr "ఆటను పునఃప్రారంభించు"
 
-#: ../libgnomeui/gnome-app-helper.c:264
+#: ../libgnomeui/gnome-app-helper.c:266
 msgid "_Undo Move"
 msgstr "కదలికను చేయవద్దు (_U)"
 
-#: ../libgnomeui/gnome-app-helper.c:265
+#: ../libgnomeui/gnome-app-helper.c:267
 msgid "Undo the last move"
 msgstr "చివరిగాచేసిన కదలికను చేయవద్దు"
 
-#: ../libgnomeui/gnome-app-helper.c:269
+#: ../libgnomeui/gnome-app-helper.c:271
 msgid "_Redo Move"
 msgstr "కదలికను మళ్ళీచేయుము (_R)"
 
-#: ../libgnomeui/gnome-app-helper.c:270
+#: ../libgnomeui/gnome-app-helper.c:272
 msgid "Redo the undone move"
 msgstr "వదిలివేయబడినదాన్ని మళ్ళీచేయి"
 
-#: ../libgnomeui/gnome-app-helper.c:274
+#: ../libgnomeui/gnome-app-helper.c:276
 msgid "_Hint"
-msgstr "_సూచన"
+msgstr "సూచన (_H)"
 
-#: ../libgnomeui/gnome-app-helper.c:275
+#: ../libgnomeui/gnome-app-helper.c:277
 msgid "Get a hint for your next move"
 msgstr "తర్వాతి ఎత్తు నుండి ఒక సూచనను పొందు"
 
 #. 30
-#: ../libgnomeui/gnome-app-helper.c:280
+#: ../libgnomeui/gnome-app-helper.c:282
 msgid "_Scores..."
 msgstr "స్కోరులు (_S)..."
 
-#: ../libgnomeui/gnome-app-helper.c:281
+#: ../libgnomeui/gnome-app-helper.c:283
 msgid "View the scores"
 msgstr "స్కోరుల దర్శనం"
 
-#: ../libgnomeui/gnome-app-helper.c:285
+#: ../libgnomeui/gnome-app-helper.c:287
 msgid "_End Game"
 msgstr "ఆట ముగిసినది (_E)"
 
-#: ../libgnomeui/gnome-app-helper.c:286
+#: ../libgnomeui/gnome-app-helper.c:288
 msgid "End the current game"
 msgstr "ప్రస్తుత ఆటను ముగించు"
 
-#: ../libgnomeui/gnome-app-helper.c:1148
+#: ../libgnomeui/gnome-app-helper.c:1150
 msgid "_Contents"
-msgstr "_సారములు"
+msgstr "సారములు (_C)"
 
-#: ../libgnomeui/gnome-app-helper.c:1151
+#: ../libgnomeui/gnome-app-helper.c:1153
 msgid "View help for this application"
 msgstr "ఈ కార్యక్షేత్రం యొక్క సహాయాన్ని ప్రదర్శించు"
 
-#: ../libgnomeui/gnome-app-helper.c:2522
+#: ../libgnomeui/gnome-app-helper.c:2524
 msgid "Text Below Icons"
 msgstr "ప్రతిమల కింది పాఠము"
 
-#: ../libgnomeui/gnome-app-helper.c:2523
+#: ../libgnomeui/gnome-app-helper.c:2525
 msgid "Priority Text Beside Icons"
 msgstr "ప్రతిమల పక్కనున్న ముఖ్యపాఠం"
 
-#: ../libgnomeui/gnome-app-helper.c:2524
+#: ../libgnomeui/gnome-app-helper.c:2526
 msgid "Icons Only"
 msgstr "ప్రతిమలు మాత్రమే"
 
-#: ../libgnomeui/gnome-app-helper.c:2525
+#: ../libgnomeui/gnome-app-helper.c:2527
 msgid "Text Only"
 msgstr "పాఠము మాత్రమే"
 
-#: ../libgnomeui/gnome-app-helper.c:2586
+#: ../libgnomeui/gnome-app-helper.c:2588
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "డెస్కుటాపు అప్రమేయాన్ని వుపయోగించుము (%s)"
@@ -599,12 +600,12 @@ msgstr "ఆదానప్రదానం"
 msgid "Level of user activity required."
 msgstr "ఇనియోగదారుని క్రియావసర సూచి."
 
-#: ../libgnomeui/gnome-authentication-manager.c:82
+#: ../libgnomeui/gnome-authentication-manager.c:84
 #, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "మీ హెచ్...టి.టి.పి. ప్రోక్సీ మీ ప్రవేశాన్ని కోరుతున్నది. \n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:83
+#: ../libgnomeui/gnome-authentication-manager.c:85
 #, c-format
 msgid ""
 "You must log in to access \"%s\".\n"
@@ -613,252 +614,252 @@ msgstr ""
 "\"%s\" తో సాంగత్యం కొరకు మీ ప్రవేశం అవసరం.\n"
 "%s"
 
-#: ../libgnomeui/gnome-authentication-manager.c:86
+#: ../libgnomeui/gnome-authentication-manager.c:88
 msgid "Your password will be transmitted unencrypted."
 msgstr "మీ రహస్యపదం రహస్యపరచకుండా పంపబడును."
 
-#: ../libgnomeui/gnome-authentication-manager.c:87
+#: ../libgnomeui/gnome-authentication-manager.c:89
 msgid "Your password will be transmitted encrypted."
 msgstr "మీ రహస్యపదాన్ని రహస్యపరచి పంపబడును"
 
-#: ../libgnomeui/gnome-authentication-manager.c:90
-#: ../libgnomeui/gnome-authentication-manager.c:309
+#: ../libgnomeui/gnome-authentication-manager.c:92
+#: ../libgnomeui/gnome-authentication-manager.c:311
 msgid "Authentication Required"
 msgstr "ప్రామాణీకరణ అవసరం"
 
 #. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
-#: ../libgnomeui/gnome-authentication-manager.c:301
+#: ../libgnomeui/gnome-authentication-manager.c:303
 #, c-format
 msgid "You must log in to access %s domain %s\n"
 msgstr "%s డొమైన్ %sతో సాంగత్యికరించుటకు మీ ప్రవేశం అవసరం\n"
 
-#: ../libgnomeui/gnome-authentication-manager.c:303
+#: ../libgnomeui/gnome-authentication-manager.c:305
 #, c-format
 msgid "You must log in to access %s\n"
 msgstr "%s తో సాంగత్యం కొరకు మీ ప్రవేశం అవసరం.\n"
 
-#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "Specify session management ID"
 msgstr "సెషన్ నిర్వహణ గుచి ని నిర్దిష్టం చేయి"
 
-#: ../libgnomeui/gnome-client.c:999 ../libgnomeui/gnome-client.c:1033
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "ID"
 msgstr "గుచి"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "Specify prefix of saved configuration"
 msgstr "దాచబడిన రూపకరణ ఉపసర్గను నిర్దిష్టంచేయి"
 
-#: ../libgnomeui/gnome-client.c:1002 ../libgnomeui/gnome-client.c:1036
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "PREFIX"
 msgstr "ఉపసర్గ"
 
-#: ../libgnomeui/gnome-client.c:1005 ../libgnomeui/gnome-client.c:1039
+#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
 msgstr "సెషన్ అభికర్తతో బంధంను నిరుపయోగం చేయి"
 
-#: ../libgnomeui/gnome-client.c:1013
+#: ../libgnomeui/gnome-client.c:1014
 msgid "Session management:"
 msgstr "సెషన్ నిర్వహణ:"
 
-#: ../libgnomeui/gnome-client.c:1014
+#: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
 msgstr "సెషన్ నిర్వహణ ఐచ్చికాలను చూపుము"
 
-#: ../libgnomeui/gnome-client.c:1045
+#: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
 msgstr "సెషన్ నిర్వహణ"
 
-#: ../libgnomeui/gnome-client.c:2579
+#: ../libgnomeui/gnome-client.c:2580
 msgid "Cancel Logout"
 msgstr "లాగ్అవుట్ రద్దుచేయి"
 
-#: ../libgnomeui/gnome-color-picker.c:412
+#: ../libgnomeui/gnome-color-picker.c:404
 msgid "Received invalid color data\n"
 msgstr "నిస్సారమైన రంగు దత్తాంశాన్ని స్వీకరించినది\n"
 
-#: ../libgnomeui/gnome-color-picker.c:466
+#: ../libgnomeui/gnome-color-picker.c:458
 msgid "Open a dialog to specify the color"
 msgstr "రంగును పేర్కొనుటకు సంభాషణను ప్రారంభించు"
 
-#: ../libgnomeui/gnome-color-picker.c:488
+#: ../libgnomeui/gnome-color-picker.c:480
 msgid "Pick a color"
 msgstr "రంగును ఎన్నుకో"
 
-#: ../libgnomeui/gnome-dateedit.c:495 ../libgnomeui/gnome-dateedit.c:802
+#: ../libgnomeui/gnome-dateedit.c:497 ../libgnomeui/gnome-dateedit.c:804
 msgid "Time"
 msgstr "సమయము"
 
-#: ../libgnomeui/gnome-dateedit.c:496
+#: ../libgnomeui/gnome-dateedit.c:498
 msgid "The time currently selected"
 msgstr "ప్రస్తుతం ఎంపికకాబడిన సమయము"
 
-#: ../libgnomeui/gnome-dateedit.c:508
+#: ../libgnomeui/gnome-dateedit.c:510
 msgid "DateEdit Flags"
 msgstr "తారీఖుసరిచేయు ఫ్లాగ్స్"
 
-#: ../libgnomeui/gnome-dateedit.c:509
+#: ../libgnomeui/gnome-dateedit.c:511
 msgid "Flags for how DateEdit looks"
 msgstr "తారీఖుసరిచేయు గుర్తింపునకు ఫ్లాగ్స్"
 
-#: ../libgnomeui/gnome-dateedit.c:518
+#: ../libgnomeui/gnome-dateedit.c:520
 msgid "Lower Hour"
 msgstr "దిగువ గంట"
 
-#: ../libgnomeui/gnome-dateedit.c:519
+#: ../libgnomeui/gnome-dateedit.c:521
 msgid "Lower hour in the time popup selector"
 msgstr "సమయం యెంపికచేయు పాప్అప్‌లోని దిగువ గంట"
 
-#: ../libgnomeui/gnome-dateedit.c:529
+#: ../libgnomeui/gnome-dateedit.c:531
 msgid "Upper Hour"
 msgstr "ఎగువ గంట"
 
-#: ../libgnomeui/gnome-dateedit.c:530
+#: ../libgnomeui/gnome-dateedit.c:532
 msgid "Upper hour in the time popup selector"
 msgstr "సమయం యెంపికచేయు పాప్అప్‌లోని ఎగువ గంట"
 
-#: ../libgnomeui/gnome-dateedit.c:540
+#: ../libgnomeui/gnome-dateedit.c:542
 msgid "Initial Time"
 msgstr "ప్రాథమిక సమయం"
 
-#: ../libgnomeui/gnome-dateedit.c:541
+#: ../libgnomeui/gnome-dateedit.c:543
 msgid "The initial time"
 msgstr "ప్రాధమిక సమయం"
 
-#: ../libgnomeui/gnome-dateedit.c:765 ../libgnomeui/gnome-scores.c:96
+#: ../libgnomeui/gnome-dateedit.c:767 ../libgnomeui/gnome-scores.c:96
 msgid "Date"
 msgstr "తారీఖు"
 
-#: ../libgnomeui/gnome-dateedit.c:778
+#: ../libgnomeui/gnome-dateedit.c:780
 msgid "Select Date"
 msgstr "తారీఖును ఎంచు"
 
-#: ../libgnomeui/gnome-dateedit.c:778
+#: ../libgnomeui/gnome-dateedit.c:780
 msgid "Select the date from a calendar"
 msgstr "క్యాలెండర్ నుండి తారీఖును ఎంపికచేయి"
 
 #. Calendar label, only shown if the date editor has a time field
-#: ../libgnomeui/gnome-dateedit.c:789
+#: ../libgnomeui/gnome-dateedit.c:791
 msgid "Calendar"
 msgstr "క్యాలెండర్"
 
-#: ../libgnomeui/gnome-dateedit.c:810
+#: ../libgnomeui/gnome-dateedit.c:812
 msgid "Select Time"
 msgstr "సమయాన్ని ఎంచు"
 
-#: ../libgnomeui/gnome-dateedit.c:810
+#: ../libgnomeui/gnome-dateedit.c:812
 msgid "Select the time from a list"
 msgstr "జాబితానుండి సమయాన్ని ఎంపిక చేయి"
 
-#: ../libgnomeui/gnome-dateedit.c:1029
+#: ../libgnomeui/gnome-dateedit.c:1031
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
 msgstr "gnome_date_edit_get_date అడ్డుపడుచున్నది,  gnome_date_edit_get_time ఉపయోగించండి"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:121
-#: ../libgnomeui/gnome-font-picker.c:155
+#: ../libgnomeui/gnome-druid-page-standard.c:115
+#: ../libgnomeui/gnome-font-picker.c:147
 msgid "Title"
 msgstr "శీర్షిక"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:122
+#: ../libgnomeui/gnome-druid-page-standard.c:116
 msgid "Title of the druid"
 msgstr "డ్రుయిడ్ యొక్క శీర్షిక"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:130
+#: ../libgnomeui/gnome-druid-page-standard.c:124
 msgid "Logo image"
 msgstr "గుర్తు ప్రతిబింబము"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:137
+#: ../libgnomeui/gnome-druid-page-standard.c:131
 msgid "Top Watermark"
 msgstr "పై పారదర్శకగుర్తు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:138
+#: ../libgnomeui/gnome-druid-page-standard.c:132
 msgid "Watermark image for the top"
 msgstr "పైవాటికి పారదర్శక ప్రతిరూపములు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:145
+#: ../libgnomeui/gnome-druid-page-standard.c:139
 msgid "Title Foreground"
 msgstr "శీర్షిక ఫోర్‌గ్రౌండ్"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:146
+#: ../libgnomeui/gnome-druid-page-standard.c:140
 msgid "Foreground color of the title"
 msgstr "శీర్షికయొక్క ఫోర్‌గ్రౌండ్ రంగు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:153
+#: ../libgnomeui/gnome-druid-page-standard.c:147
 msgid "Title Foreground Color"
 msgstr "శీర్షిక ఫోర్‌గ్రౌండ్ రంగు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:154
+#: ../libgnomeui/gnome-druid-page-standard.c:148
 msgid "Foreground color of the title as a GdkColor"
 msgstr "శీర్షికయొక్క ఫోర్‌గ్రౌండ్ రంగు జిటికె రంగుగా"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:161
+#: ../libgnomeui/gnome-druid-page-standard.c:155
 msgid "Title Foreground color set"
 msgstr "శీర్షిక ఫోర్‌గ్రౌండ్ రంగు అమర్చబడినది"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:162
+#: ../libgnomeui/gnome-druid-page-standard.c:156
 msgid "Foreground color of the title is set"
 msgstr "శీర్షిక యొక్క ఫోర్‌గ్రౌండ్ రంగు అమర్చబడినది"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:169
-#: ../libgnomeui/gnome-druid-page-standard.c:177
+#: ../libgnomeui/gnome-druid-page-standard.c:163
+#: ../libgnomeui/gnome-druid-page-standard.c:171
 msgid "Background Color"
 msgstr "బ్యాక్‌గ్రౌండ్ రంగు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:170
+#: ../libgnomeui/gnome-druid-page-standard.c:164
 msgid "Background color"
 msgstr "బ్యాక్‌గ్రౌండ్ రంగు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:178
+#: ../libgnomeui/gnome-druid-page-standard.c:172
 msgid "Background color as a GdkColor"
 msgstr "బ్యాక్‌గ్రౌండ్ రంగు జిడికె రంగుగా"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:185
+#: ../libgnomeui/gnome-druid-page-standard.c:179
 msgid "Background color set"
 msgstr "బ్యాక్‌గ్రౌండ్ రంగు అమర్చు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:186
+#: ../libgnomeui/gnome-druid-page-standard.c:180
 msgid "Background color is set"
 msgstr "బ్యాక్‌గ్రౌండ్ రంగు అమర్చబడినది"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:193
-#: ../libgnomeui/gnome-druid-page-standard.c:201
+#: ../libgnomeui/gnome-druid-page-standard.c:187
+#: ../libgnomeui/gnome-druid-page-standard.c:195
 msgid "Contents Background Color"
 msgstr "బ్యాక్‌గ్రౌండ్ రంగు సారములు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:194
+#: ../libgnomeui/gnome-druid-page-standard.c:188
 msgid "Contents Background color"
 msgstr "బ్యాక్‌గ్రౌండ్ రంగు సారములు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:202
+#: ../libgnomeui/gnome-druid-page-standard.c:196
 msgid "Contents Background color as a GdkColor"
 msgstr "బ్యాక్‌గ్రౌండ్ రంగు సారం, జిడికె రంగుగా"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:209
+#: ../libgnomeui/gnome-druid-page-standard.c:203
 msgid "Contents Background color set"
 msgstr "బ్యాక్‌గ్రౌండ్ రంగుసారములను అమర్చు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:210
+#: ../libgnomeui/gnome-druid-page-standard.c:204
 msgid "Contents Background color is set"
 msgstr "బ్యాక్‌గ్రౌండ్ రంగుసారములను అమర్చు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:216
-#: ../libgnomeui/gnome-druid-page-standard.c:224
+#: ../libgnomeui/gnome-druid-page-standard.c:210
+#: ../libgnomeui/gnome-druid-page-standard.c:218
 msgid "Logo Background Color"
 msgstr "గుర్తు బ్యాక్‌గ్రౌండ్ రంగు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:217
+#: ../libgnomeui/gnome-druid-page-standard.c:211
 msgid "Logo Background color"
 msgstr "గుర్తు బ్యాక్‌గ్రౌండ్ రంగు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:225
+#: ../libgnomeui/gnome-druid-page-standard.c:219
 msgid "Logo Background color as a GdkColor"
 msgstr "జిడికెరంగువలె గుర్తు బ్యాక్‌గ్రౌండ్ రంగు"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:232
+#: ../libgnomeui/gnome-druid-page-standard.c:226
 msgid "Logo Background color set"
 msgstr "గుర్తు బ్యాక్‌గ్రౌండ్ రంగు అమర్చబడింది"
 
-#: ../libgnomeui/gnome-druid-page-standard.c:233
+#: ../libgnomeui/gnome-druid-page-standard.c:227
 msgid "Logo Background color is set"
 msgstr "గుర్తు బ్యాక్‌గ్రౌండు రంగు అమర్చబడింది"
 
@@ -878,74 +879,72 @@ msgstr "సహాయాన్ని చూపు"
 msgid "Show the 'Help' button"
 msgstr "'సహాయ' బొత్తాన్ని చూపు"
 
-#: ../libgnomeui/gnome-entry.c:193 ../libgnomeui/gnome-entry.c:194
-#: ../libgnomeui/gnome-file-entry.c:239 ../libgnomeui/gnome-icon-entry.c:176
+#: ../libgnomeui/gnome-entry.c:192 ../libgnomeui/gnome-entry.c:193
+#: ../libgnomeui/gnome-file-entry.c:233 ../libgnomeui/gnome-icon-entry.c:169
 msgid "History ID"
 msgstr "చరిత్ర గుచి"
 
-#: ../libgnomeui/gnome-entry.c:200
+#: ../libgnomeui/gnome-entry.c:199
 msgid "GTK entry"
 msgstr "జిటికె ప్రవేశం"
 
-#: ../libgnomeui/gnome-entry.c:201
+#: ../libgnomeui/gnome-entry.c:200
 msgid "The GTK entry"
 msgstr "GTK ప్రవేశము"
 
-#: ../libgnomeui/gnome-file-entry.c:240
+#: ../libgnomeui/gnome-file-entry.c:234
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
-"దస్త్రము ప్రవేశముకొరకు ఏక గురింపుకారి.  ఇది చరిత్ర జాబితాను భద్రపరచుటకు "
-"వుపయోగపడుతుంది."
+msgstr "దస్త్రము ప్రవేశముకొరకు ఏక గురింపుకారి.  ఇది చరిత్ర జాబితాను భద్రపరచుటకు వుపయోగపడుతుంది."
 
-#: ../libgnomeui/gnome-file-entry.c:248 ../libgnomeui/gnome-icon-entry.c:185
+#: ../libgnomeui/gnome-file-entry.c:242 ../libgnomeui/gnome-icon-entry.c:178
 msgid "Browse Dialog Title"
 msgstr "వివరణ శీర్షికను అన్వేషించు"
 
-#: ../libgnomeui/gnome-file-entry.c:249
+#: ../libgnomeui/gnome-file-entry.c:243
 msgid "Title for the Browse file dialog."
 msgstr "అన్వేషించిన దస్త్రపు డైలాగ్ కొరకు శీర్షిక."
 
-#: ../libgnomeui/gnome-file-entry.c:256
+#: ../libgnomeui/gnome-file-entry.c:250
 msgid "Directory Entry"
 msgstr "డైరెక్టరీ ప్రవేశం"
 
-#: ../libgnomeui/gnome-file-entry.c:257
+#: ../libgnomeui/gnome-file-entry.c:251
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
 msgstr "డైరెక్టరీ నామములను లేదా పూర్తి దస్త్రనామములను ప్రవేశపెట్టుటకు ఈ దస్త్ర ప్రవేశం వాడబడిందా?."
 
-#: ../libgnomeui/gnome-file-entry.c:265
+#: ../libgnomeui/gnome-file-entry.c:259
 msgid "Modal"
 msgstr "రకము,మాదిరి"
 
-#: ../libgnomeui/gnome-file-entry.c:266
+#: ../libgnomeui/gnome-file-entry.c:260
 msgid "Whether the Browse file window should be modal."
 msgstr "ఎంపిక చేసుకొనబడిన దస్త్ర గవాక్షము నమూనాగా వుండవల్సిందేనా?"
 
-#: ../libgnomeui/gnome-file-entry.c:273 ../libgnomeui/gnome-icon-entry.c:201
+#: ../libgnomeui/gnome-file-entry.c:267 ../libgnomeui/gnome-icon-entry.c:194
 msgid "Filename"
 msgstr "దస్త్రనామము"
 
-#: ../libgnomeui/gnome-file-entry.c:274
+#: ../libgnomeui/gnome-file-entry.c:268
 msgid "Filename that should be displayed in the file entry."
 msgstr "దస్త్రనామమును దస్త్ర ప్రవేశంలో ప్రదర్శించవలెను"
 
-#: ../libgnomeui/gnome-file-entry.c:282
+#: ../libgnomeui/gnome-file-entry.c:276
 msgid "Default Path"
 msgstr "అప్రమేయ త్రోవ"
 
-#: ../libgnomeui/gnome-file-entry.c:283
+#: ../libgnomeui/gnome-file-entry.c:277
 msgid "Default path for the Browse file window."
 msgstr "దస్త్ర గవాక్ష అన్వేషణకు అప్రమేయ త్రోవ."
 
-#: ../libgnomeui/gnome-file-entry.c:290
+#: ../libgnomeui/gnome-file-entry.c:284
 msgid "GnomeEntry"
 msgstr "గ్నోమ్ ప్రవేశం"
 
-#: ../libgnomeui/gnome-file-entry.c:291
+#: ../libgnomeui/gnome-file-entry.c:285
 msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
@@ -954,11 +953,11 @@ msgstr ""
 "దస్త్రనామములు దస్త్ర ప్రవేశంలో చేర్చుటకు గ్నోమ్ ప్రవేశము.మీరు ఈ లక్షణమును ఉపయోగించి గ్నోమ్ ప్రవేశమును "
 "మార్చవచ్చు లేదా ఏదేని పరామితులను పొందవచ్చు. "
 
-#: ../libgnomeui/gnome-file-entry.c:301
+#: ../libgnomeui/gnome-file-entry.c:295
 msgid "GtkEntry"
 msgstr "జిటికె ప్రవేశం"
 
-#: ../libgnomeui/gnome-file-entry.c:302
+#: ../libgnomeui/gnome-file-entry.c:296
 msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
@@ -967,113 +966,113 @@ msgstr ""
 "జిటికె ప్రవేశం, దస్త్రనామమును తీసుకొనుటకు దస్త్ర ప్రవేశం.మీరు ఈ లక్షణమును ఉపయోగించి జిటికె "
 "ప్రవేశమును  మార్చవచ్చు లేదా ఏదేని పరామితులను పొందవచ్చు.  "
 
-#: ../libgnomeui/gnome-file-entry.c:312
+#: ../libgnomeui/gnome-file-entry.c:306
 msgid "Use GtkFileChooser"
 msgstr "జిటికె దస్త్ర ఎంపికదారును వాడు"
 
-#: ../libgnomeui/gnome-file-entry.c:313
+#: ../libgnomeui/gnome-file-entry.c:307
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr "దస్త్రములను ఎంపిక చేయుటకు కొత్త జిటికె దస్త్ర ఎంపికదారు విడ్జెట్ లేదా జిటికె దస్త్రమును వాడండి."
 
-#: ../libgnomeui/gnome-file-entry.c:322
+#: ../libgnomeui/gnome-file-entry.c:316
 msgid "GtkFileChooser Action"
 msgstr "జిటికెదస్త్రఎంపికదారును చర్య"
 
-#: ../libgnomeui/gnome-file-entry.c:323
+#: ../libgnomeui/gnome-file-entry.c:317
 msgid "The type of operation that the file selector is performing."
 msgstr "దస్త్ర ఎంపికదారు జరుపుతున్న ఆపరేషన్‌యొక్క రకము."
 
-#: ../libgnomeui/gnome-file-entry.c:658 ../libgnomeui/gnome-file-entry.c:695
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
 msgstr "దస్త్రమును ఎంచు"
 
-#: ../libgnomeui/gnome-file-entry.c:820
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
 msgstr "త్రోవ"
 
-#: ../libgnomeui/gnome-file-entry.c:820
+#: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path to file"
 msgstr "దస్త్రమునకు త్రోవ"
 
-#: ../libgnomeui/gnome-file-entry.c:849
+#: ../libgnomeui/gnome-file-entry.c:843
 msgid "_Browse..."
-msgstr "_అన్వేషించు..."
+msgstr "అన్వేషించు... (_B)"
 
-#: ../libgnomeui/gnome-file-entry.c:850
+#: ../libgnomeui/gnome-file-entry.c:844
 msgid "Pop up a file selector to choose a file"
 msgstr "దస్త్రమును ఎంపిక చేసుకొందుకు దస్త్ర ఎంపికను ప్రత్యక్షంచేయి"
 
-#: ../libgnomeui/gnome-font-picker.c:66
+#: ../libgnomeui/gnome-font-picker.c:58
 msgid "sans 12"
 msgstr "సాన్స్12"
 
-#: ../libgnomeui/gnome-font-picker.c:67
+#: ../libgnomeui/gnome-font-picker.c:59
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "అఆఇఈఉఊఋబుూఎఏఒఓఔఅంఅఃకఖగఘజ్ఞచఛజఝజ్ఞటఠడఢణతతదధనపఫబభమయరలవశసషహళక్షఱ"
 
-#: ../libgnomeui/gnome-font-picker.c:68
+#: ../libgnomeui/gnome-font-picker.c:60
 msgid "Pick a Font"
 msgstr "అక్షరశైలిని ఎన్నుకో"
 
-#: ../libgnomeui/gnome-font-picker.c:156
+#: ../libgnomeui/gnome-font-picker.c:148
 msgid "The title of the selection dialog box"
 msgstr "ఎంపిక డైలాగ్ పెట్టెయొక్క శీర్షిక"
 
-#: ../libgnomeui/gnome-font-picker.c:164
+#: ../libgnomeui/gnome-font-picker.c:156
 msgid "Mode"
 msgstr "రీతి"
 
-#: ../libgnomeui/gnome-font-picker.c:165
+#: ../libgnomeui/gnome-font-picker.c:157
 msgid "The mode of operation of the font picker"
 msgstr "ఫాంటు తీసుకొనుదానియొక్క ఆపరేషన్ రీతి"
 
-#: ../libgnomeui/gnome-font-picker.c:174
+#: ../libgnomeui/gnome-font-picker.c:166
 msgid "Font name"
 msgstr "అక్షరశైలి నామము"
 
-#: ../libgnomeui/gnome-font-picker.c:175
+#: ../libgnomeui/gnome-font-picker.c:167
 msgid "Name of the selected font"
 msgstr "ఎంపికచేయబడిన అక్షరశైలి నామము"
 
-#: ../libgnomeui/gnome-font-picker.c:184 ../libgnomeui/gnome-font-picker.c:980
+#: ../libgnomeui/gnome-font-picker.c:176 ../libgnomeui/gnome-font-picker.c:972
 msgid "Font"
 msgstr "అక్షరశైలి"
 
-#: ../libgnomeui/gnome-font-picker.c:185
+#: ../libgnomeui/gnome-font-picker.c:177
 msgid "The selected GtkFont"
 msgstr "ఎంపికచేసిన జిటికెఫాంటు"
 
-#: ../libgnomeui/gnome-font-picker.c:192
+#: ../libgnomeui/gnome-font-picker.c:184
 msgid "Preview text"
 msgstr "పాఠ్య ఉపదర్శిని"
 
-#: ../libgnomeui/gnome-font-picker.c:193
+#: ../libgnomeui/gnome-font-picker.c:185
 msgid "Preview text shown in the dialog"
 msgstr "సంభాషణలో చూపబడిన పాఠ్య ఉపదర్శిని"
 
-#: ../libgnomeui/gnome-font-picker.c:201
+#: ../libgnomeui/gnome-font-picker.c:193
 msgid "Use font in label"
 msgstr "ఈ లేబుల్ లో అక్షరశైలిని వాడు"
 
-#: ../libgnomeui/gnome-font-picker.c:202
+#: ../libgnomeui/gnome-font-picker.c:194
 msgid "Use font in the label in font info mode"
 msgstr "అక్షరశైలి సమాచార క్రియా లేబుల్ లో అక్షరశైలిని వాడు"
 
-#: ../libgnomeui/gnome-font-picker.c:210
+#: ../libgnomeui/gnome-font-picker.c:202
 msgid "Font size for label"
 msgstr "లేబుల్ అక్షరశైలి పరిమాణం"
 
-#: ../libgnomeui/gnome-font-picker.c:211
+#: ../libgnomeui/gnome-font-picker.c:203
 msgid "Font size for label in font info mode"
 msgstr "అక్షరశైలి సమాచార క్రియలో లేబుల్ అక్షరశైలి పరిమాణం"
 
-#: ../libgnomeui/gnome-font-picker.c:221
+#: ../libgnomeui/gnome-font-picker.c:213
 msgid "Show size"
 msgstr "పరిమాణమును చూపుము"
 
-#: ../libgnomeui/gnome-font-picker.c:222
+#: ../libgnomeui/gnome-font-picker.c:214
 msgid "Show size in font info mode"
 msgstr "అక్షరశైలి సమాచార విధాన పరిమాణమును చూపుము"
 
@@ -1083,7 +1082,7 @@ msgstr "గ్నోమ్ జికాన్ఫ్ యుఐ సహకారం
 
 #: ../libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
-msgstr "_వివరాలు"
+msgstr "వివరాలు (_D)"
 
 #: ../libgnomeui/gnome-gconf-ui.c:171
 #, c-format
@@ -1093,11 +1092,9 @@ msgid ""
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
 msgstr ""
-"సిస్టమ్ నిర్వాహకి మరియు ఆపరేటింగ్ సిస్టమ్ అమ్మకందారు మిమ్ములను మార్చుటకు "
-"అనుమతించని మీ ఆకృతీకరణలోని వొకదశను మార్చుటకు అనువర్తనం \"%s\" "
-"ప్రయత్నించింది. మీరు యెంచుకొనిన అమరికలలో కొన్ని ప్రభావితంకాకపోవచ్చు, "
-"లేదా తరువాతసారి మీరు ఆ అనువర్తనమును వుపయోగించనప్పుడు "
-"తిరిగివుంచబడక పోవచ్చు."
+"సిస్టమ్ నిర్వాహకి మరియు ఆపరేటింగ్ సిస్టమ్ అమ్మకందారు మిమ్ములను మార్చుటకు అనుమతించని మీ ఆకృతీకరణలోని "
+"వొకదశను మార్చుటకు అనువర్తనం \"%s\" ప్రయత్నించింది. మీరు యెంచుకొనిన అమరికలలో కొన్ని "
+"ప్రభావితంకాకపోవచ్చు, లేదా తరువాతసారి మీరు ఆ అనువర్తనమును వుపయోగించనప్పుడు తిరిగివుంచబడక పోవచ్చు."
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
@@ -1148,35 +1145,33 @@ msgstr ""
 "అప్రమేయ వెబ్ అన్వేషణిని ఆరంభించుటకు ప్రయత్నిస్తున్నప్పుడు వొక దోషము యెదురైంది.\n"
 "దయచేసి మీఅమరికలను 'అభీష్ట అనువర్తనముల' అభీష్ట సాధనమునందు ఎంచుకొనుము."
 
-#: ../libgnomeui/gnome-icon-entry.c:177
+#: ../libgnomeui/gnome-icon-entry.c:170
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
-"ప్రతిమ ప్రవేశమునకు ఏక గుర్తింపుకారి.  ఇది చరిత్ర జాబితాను భద్రపరచుటకు "
-"వుపయోగించబడుతుంది."
+msgstr "ప్రతిమ ప్రవేశమునకు ఏక గుర్తింపుకారి.  ఇది చరిత్ర జాబితాను భద్రపరచుటకు వుపయోగించబడుతుంది."
 
-#: ../libgnomeui/gnome-icon-entry.c:186
+#: ../libgnomeui/gnome-icon-entry.c:179
 msgid "Title for the Browse icon dialog."
 msgstr "అన్వేషణ ప్రతిమ డైలాగ్ కొరకు శీర్షిక."
 
-#: ../libgnomeui/gnome-icon-entry.c:193
+#: ../libgnomeui/gnome-icon-entry.c:186
 msgid "Pixmap Directory"
 msgstr "పిక్స్మ్యాప్ డైరెక్టరీ"
 
-#: ../libgnomeui/gnome-icon-entry.c:194
+#: ../libgnomeui/gnome-icon-entry.c:187
 msgid "Directory that will be searched for icons."
 msgstr "ప్రతిమలను వెదుకుటకు డైరెక్టరీ"
 
-#: ../libgnomeui/gnome-icon-entry.c:202
+#: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Filename that should be displayed in the icon entry."
 msgstr "దస్త్రనామమును ప్రతిమ ప్రవేశంలో ప్రదర్శించవలెను"
 
-#: ../libgnomeui/gnome-icon-entry.c:210
+#: ../libgnomeui/gnome-icon-entry.c:203
 msgid "Picker dialog"
 msgstr "సంభాషణ ఏరివేత"
 
-#: ../libgnomeui/gnome-icon-entry.c:211
+#: ../libgnomeui/gnome-icon-entry.c:204
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
@@ -1184,39 +1179,39 @@ msgstr ""
 "ప్రతిమను తీసుకొను సంభాషణ. మీరు ఈ లక్షణమును ఉపయోగించుకొని, మార్చవలెనన్న లేదా తెలుసుకోవాలనుకున్నా "
 "జిటికెసంభాషణ."
 
-#: ../libgnomeui/gnome-icon-entry.c:319 ../libgnomeui/gnome-icon-entry.c:1003
+#: ../libgnomeui/gnome-icon-entry.c:312 ../libgnomeui/gnome-icon-entry.c:996
 msgid "Choose Icon"
 msgstr "ప్రతిమను ఎంచుకొనుము"
 
-#: ../libgnomeui/gnome-icon-entry.c:773
+#: ../libgnomeui/gnome-icon-entry.c:766
 msgid "Icon selection dialog"
 msgstr "ప్రతిమ ఎంపిక సంభాషణ"
 
-#: ../libgnomeui/gnome-icon-entry.c:774
+#: ../libgnomeui/gnome-icon-entry.c:767
 msgid "This dialog box lets you select an icon."
 msgstr "ఈ డైలాగ్ పెట్టె మిమ్ములను వొక ప్రతిమను యెంచుకోనిస్తుంది."
 
-#: ../libgnomeui/gnome-icon-entry.c:780 ../libgnomeui/gnome-icon-entry.c:1006
+#: ../libgnomeui/gnome-icon-entry.c:773 ../libgnomeui/gnome-icon-entry.c:999
 msgid "Icon Selector"
 msgstr "ప్రతిమ ఎంపికదారు"
 
-#: ../libgnomeui/gnome-icon-entry.c:781
+#: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Please pick the icon you want."
 msgstr "దయచేసి మీకు కావాల్సిన ప్రతిమను ఎన్నుకో."
 
-#: ../libgnomeui/gnome-icon-entry.c:1007
+#: ../libgnomeui/gnome-icon-entry.c:1000
 msgid "This button will open a window to let you select an icon."
 msgstr "మిమ్ముల్ని ప్రతిమను ఎంచుకొనివ్వుటకు ఈ బటన్ విండోను తెరుస్తుంది."
 
-#: ../libgnomeui/gnome-icon-entry.c:1029
+#: ../libgnomeui/gnome-icon-entry.c:1022
 msgid "Browse"
 msgstr "అన్వేషించు"
 
-#: ../libgnomeui/gnome-icon-entry.c:1032
+#: ../libgnomeui/gnome-icon-entry.c:1025
 msgid "Icon path"
 msgstr "ప్రతిమ త్రోవ"
 
-#: ../libgnomeui/gnome-icon-entry.c:1033
+#: ../libgnomeui/gnome-icon-entry.c:1026
 msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
@@ -1256,80 +1251,80 @@ msgstr "ప్రశ్న"
 msgid "Message"
 msgstr "సందేశము"
 
-#: ../libgnomeui/gnome-password-dialog.c:210
+#: ../libgnomeui/gnome-password-dialog.c:196
 msgid "_Username:"
-msgstr "_వినియోగదారు నామము:"
+msgstr "వినియోగదారు నామము: (_U)"
 
-#: ../libgnomeui/gnome-password-dialog.c:213
+#: ../libgnomeui/gnome-password-dialog.c:199
 msgid "_Domain:"
 msgstr "డొమైన్ (_D)"
 
-#: ../libgnomeui/gnome-password-dialog.c:216
+#: ../libgnomeui/gnome-password-dialog.c:202
 msgid "_Password:"
-msgstr "_రహస్యపదం:"
+msgstr "రహస్యపదం: (_P)"
 
-#: ../libgnomeui/gnome-password-dialog.c:219
+#: ../libgnomeui/gnome-password-dialog.c:205
 msgid "_New password:"
 msgstr "కొత్త సంకేతపదము (_N):"
 
-#: ../libgnomeui/gnome-password-dialog.c:220
+#: ../libgnomeui/gnome-password-dialog.c:206
 msgid "Con_firm password:"
 msgstr "సంకేతపదమును నిర్ధారించుము (_f):"
 
-#: ../libgnomeui/gnome-password-dialog.c:223
+#: ../libgnomeui/gnome-password-dialog.c:209
 msgid "Password quality:"
 msgstr "సంకేతపదము నాణ్యత:"
 
-#: ../libgnomeui/gnome-password-dialog.c:338
+#: ../libgnomeui/gnome-password-dialog.c:324
 msgid "Co_nnect"
 msgstr "అనుసంధానించు (_n)"
 
-#: ../libgnomeui/gnome-password-dialog.c:371
+#: ../libgnomeui/gnome-password-dialog.c:357
 msgid "Connect _anonymously"
 msgstr "పేరులేకుండా అనుసంధానించు (_a)"
 
-#: ../libgnomeui/gnome-password-dialog.c:376
+#: ../libgnomeui/gnome-password-dialog.c:362
 msgid "Connect as u_ser:"
 msgstr "వినియోగదారిలా అనుసంధానించు (_s):"
 
-#: ../libgnomeui/gnome-password-dialog.c:438
+#: ../libgnomeui/gnome-password-dialog.c:424
 msgid "_Forget password immediately"
 msgstr "సంకేతపదమును తక్షణమే మరచిపొమ్ము (_F)"
 
-#: ../libgnomeui/gnome-password-dialog.c:444
+#: ../libgnomeui/gnome-password-dialog.c:430
 msgid "_Remember password until you logout"
 msgstr "మీరు లాగ్అవుట్ అగునంతవరకు సంకేతపదమును గుర్తుంచుకొనుము (_R)"
 
-#: ../libgnomeui/gnome-password-dialog.c:450
+#: ../libgnomeui/gnome-password-dialog.c:436
 msgid "_Remember forever"
 msgstr "ఎప్పటికి గుర్తుంచుకొనుము (_R)"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:112
+#: ../libgnomeui/gnome-pixmap-entry.c:104
 msgid "Do Preview"
 msgstr "ఉపదర్శనంచేయి"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:113
+#: ../libgnomeui/gnome-pixmap-entry.c:105
 msgid "Whether the pixmap entry should have a preview."
 msgstr "పిక్స్మ్యాప్ ప్రవేశానికి ఉపదర్శనం కావాల్సిందేనా?"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:187
-#: ../libgnomeui/gnome-pixmap-entry.c:481
+#: ../libgnomeui/gnome-pixmap-entry.c:179
+#: ../libgnomeui/gnome-pixmap-entry.c:473
 msgid "No Image"
 msgstr "ప్రతిరూపం లేదు"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:204
+#: ../libgnomeui/gnome-pixmap-entry.c:196
 msgid "Image Preview"
 msgstr "ప్రతిరూపం ఉపదర్శనం"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:205
+#: ../libgnomeui/gnome-pixmap-entry.c:197
 msgid "A preview of the image currently specified"
 msgstr "ప్రస్తుతం నిర్దేశించబడిన ప్రతిరూపం యొక్క ఉపదర్శనం"
 
-#: ../libgnomeui/gnome-pixmap-entry.c:416
+#: ../libgnomeui/gnome-pixmap-entry.c:408
 msgid "Can't find an hbox, using a normal file selection"
 msgstr "సాధారణ దస్త్ర ఎంపికను ఉపయోగించి హెచ్  పేటికను కనుగొనలేకపోయింది."
 
-#: ../libgnomeui/gnome-pixmap-entry.c:422
+#: ../libgnomeui/gnome-pixmap-entry.c:414
 msgid "Preview"
 msgstr "ఉపదర్శనం"
 
@@ -1384,31 +1379,31 @@ msgstr "మధ్యఖాళీ-లేని"
 msgid "About"
 msgstr "గురించి"
 
-#: ../libgnomeui/gnome-ui-init.c:146 ../libgnomeui/gnome-ui-init.c:172
+#: ../libgnomeui/gnome-ui-init.c:134 ../libgnomeui/gnome-ui-init.c:160
 msgid "Disable Crash Dialog"
 msgstr "కుప్పకూలినప్పుడు వచ్చు 'సంభాషణ'ను నిరుపయోగం చేయి"
 
-#: ../libgnomeui/gnome-ui-init.c:155
+#: ../libgnomeui/gnome-ui-init.c:143
 msgid "GNOME GUI Library:"
 msgstr "GNOME GUI లైబ్రరీ:"
 
-#: ../libgnomeui/gnome-ui-init.c:156
+#: ../libgnomeui/gnome-ui-init.c:144
 msgid "Show GNOME GUI options"
 msgstr "GNOME GUI ఐచ్చికాలను చూపుము"
 
-#: ../libgnomeui/gnome-ui-init.c:174
+#: ../libgnomeui/gnome-ui-init.c:162
 msgid "X display to use"
 msgstr "X ప్రదర్శన కొరకు ఉపయోగించు"
 
-#: ../libgnomeui/gnome-ui-init.c:174
+#: ../libgnomeui/gnome-ui-init.c:162
 msgid "DISPLAY"
 msgstr "ప్రదర్శించు"
 
-#: ../libgnomeui/gnome-ui-init.c:179
+#: ../libgnomeui/gnome-ui-init.c:167
 msgid "GNOME GUI Library"
 msgstr "గ్నోమ్ జియుఐ గ్రంథాలయం"
 
-#: ../libgnomeui/gnome-ui-init.c:244
+#: ../libgnomeui/gnome-ui-init.c:232
 msgid "Could not open link"
 msgstr "లింకును తెరువలేము"
 
