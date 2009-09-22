@@ -1,3 +1,63 @@
+libgnomeui 2.24.2
+
+Amanpreet Singh Alam (1):
+      updating for Gnome Punjabi Translation by A S Alam
+
+Andre Klapper (1):
+      Updated Crimean Tatar translation by Reşat SABIQ.
+
+Ask H. Larsen (1):
+      Updated Danish translation
+
+Carles Ferrando (2):
+      Added Catalan (Valencian) translation
+      Added Catalan (Valencian) translation
+
+Denis ARNAUD (1):
+      Updated breton translation
+
+Denis Arnaud (1):
+      Updated breton translation
+
+Djihed Afifi (1):
+      Updated Arabic translation
+
+Dumitru Mișu Moldovan (1):
+      Updated Romanian translation
+
+Ignacio Casal Quinteiro (1):
+      Updated Galician translation
+
+Ivar Smolin (1):
+      Updating Estonian translation
+
+Jamil Ahmed (1):
+      Updated Bengali translation
+
+Jorge Gonzalez (1):
+      Updated Spanish translation
+
+Kjartan Maraas (1):
+      returning FALSE in a pointer function
+
+Ni Hui (1):
+      Updated Simplified Chinese translation.
+
+Og B. Maciel (1):
+      Updated mailing list address.
+
+Shankar Prasad (1):
+      updated kn.po
+
+Sweta Kothari (1):
+      Updated Gujarati Translations
+
+Zabeeh Khan (1):
+      Updated Pashto translation
+
+krishnababu k (1):
+      Updated Telugu Translation
+
 libgnomeui 2.24.1
 
 * Make it work with deprecations enabled in glib/gtk+
