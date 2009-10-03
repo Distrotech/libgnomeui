@@ -164,7 +164,7 @@ BUILT_SOURCES = gnometypebuiltins.h gnometypebuiltins.c gnometype_inits.c \
 gnometypebuiltins.h: stamp-gnometypebuiltins.h
 	@true
 stamp-gnometypebuiltins.h: @REBUILD@ $(gnome_headers)
-	(cd $(srcdir) \
+	$(AM_V_GEN) (cd $(srcdir) \
 	&& glib-mkenums \
 			--fhead "#ifndef __GNOMETYPEBUILTINS_H__\n" \
 			--fhead "#define __GNOMETYPEBUILTINS_H__ 1\n\n" \
@@ -181,7 +181,7 @@ stamp-gnometypebuiltins.h: @REBUILD@ $(gnome_headers)
 	&& echo timestamp > $(@F)
 
 gnometypebuiltins.c: @REBUILD@ $(gnome_headers) gnometypebuiltins.h
-	(cd $(srcdir) \
+	$(AM_V_GEN) (cd $(srcdir) \
 	&& glib-mkenums \
 			--fhead "#include \"libgnomeui.h\"\n\n" \
 			--fhead "#include \"gnometypebuiltins.h\"\n\n" \
@@ -199,7 +199,7 @@ gnometypebuiltins.c: @REBUILD@ $(gnome_headers) gnometypebuiltins.h
 	&& rm -f xgen-gtc
 
 gnometype_inits.c: @REBUILD@ $(gnome_headers)
-	(cd $(srcdir) \
+	$(AM_V_GEN) (cd $(srcdir) \
 	&& glib-mkenums \
 			--fprod "\n/* enumerations from \"@filename@\" */" \
 			--vtail "    (void) @enum_name@_get_type ();\n" \
@@ -208,15 +208,15 @@ gnometype_inits.c: @REBUILD@ $(gnome_headers)
 	&& rm -f xgen-gtic
 
 gnome-marshal.h: stamp-gnome-marshal.h
-	@true
+	$(AM_V_GEN) true
 stamp-gnome-marshal.h: @REBUILD@ gnome-marshal.list
-	glib-genmarshal --prefix=_gnome_marshal $(srcdir)/gnome-marshal.list --header >> xgen-gmh \
+	$(AM_V_GEN) glib-genmarshal --prefix=_gnome_marshal $(srcdir)/gnome-marshal.list --header >> xgen-gmh \
 	&& (cmp -s xgen-gmh gnome-marshal.h || cp xgen-gmh gnome-marshal.h) \
 	&& rm -f xgen-gmh xgen-gmh~ \
 	&& echo timestamp > $(@F)
 
 gnome-marshal.c: @REBUILD@ gnome-marshal.list
-	glib-genmarshal --prefix=_gnome_marshal $(srcdir)/gnome-marshal.list --body >> xgen-gmc \
+	$(AM_V_GEN) glib-genmarshal --prefix=_gnome_marshal $(srcdir)/gnome-marshal.list --body >> xgen-gmc \
 	&& cp xgen-gmc gnome-marshal.c \
 	&& rm -f xgen-gmc xgen-gmc~
 

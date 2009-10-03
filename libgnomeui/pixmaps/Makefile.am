@@ -43,10 +43,8 @@ BUILT_SOURCES = gnome-stock-pixbufs.h
 CLEANFILES = $(BUILT_SOURCES)
 
 gnome-stock-pixbufs.h: @GDK_PIXBUF_CSOURCE@ $(stock_images)
-	-rm -f gnome-stock-pixbufs.h
-	var=`echo "$(stock_images)" | sed -e 's,stock_\([^\.]*\)\.png,stock_\1 $(srcdir)/stock_\1.png,g'` ; \
+	@-rm -f gnome-stock-pixbufs.h
+	$(AM_V_GEN) var=`echo "$(stock_images)" | sed -e 's,stock_\([^\.]*\)\.png,stock_\1 $(srcdir)/stock_\1.png,g'` ; \
 	   @GDK_PIXBUF_CSOURCE@ --raw --build-list $$var > pixbufs-tmp && \
 	   cat $(srcdir)/copyright.txt pixbufs-tmp > gnome-stock-pixbufs.h
-	-rm -f pixbufs-tmp
-
-
+	@-rm -f pixbufs-tmp
