@@ -24,10 +24,7 @@
 #define __LIBGNOMEUI_ACCESS_H__
 
 #include <glib-object.h>
-#include <atk/atkobject.h>
-#include <atk/atkregistry.h>
-#include <atk/atkrelationset.h>
-#include <atk/atkobjectfactory.h>
+#include <atk/atk.h>
 #include <gtk/gtk.h>
 
 void _add_atk_name_desc   (GtkWidget *widget, gchar *name, gchar *desc);

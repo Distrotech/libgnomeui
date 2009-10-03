@@ -21,7 +21,6 @@
  */
 #include <config.h>
 #include <gtk/gtk.h>
-#include <atk/atkrelationset.h>
 #include "libgnomeui-access.h"
 
 static gint is_gail_loaded (GtkWidget *widget);
