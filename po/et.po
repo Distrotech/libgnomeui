@@ -5,16 +5,16 @@
 # Copyright (C) 2007-2009 The Gnome Project.
 # This file is distributed under the same license as the libgnomeui package.
 #
-# Tõivo Leedjärv <toivo@linux.ee>, 2002-2004.
-# Priit Laes <amd@store20.com>, 2004, 2006.
-# Ivar Smolin <okul@linux.ee>, 2005-2009.
+# Tõivo Leedjärv <toivo linux ee>, 2002-2004.
+# Priit Laes <amd store20 com>, 2004, 2006.
+# Ivar Smolin <okul linux ee>, 2005-2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui HEAD\n"
+"Project-Id-Version: libgnomeui MASTER\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-12 07:28+0100\n"
-"PO-Revision-Date: 2009-06-09 18:07+0300\n"
+"PO-Revision-Date: 2009-11-22 09:26+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -532,10 +532,10 @@ msgstr ""
 "%s"
 
 msgid "Your password will be transmitted unencrypted."
-msgstr "Sinu parool edastatakse krüpteerimata."
+msgstr "Sinu parool edastatakse krüptimata."
 
 msgid "Your password will be transmitted encrypted."
-msgstr "Sinu parool edastatakse krüpteeritult."
+msgstr "Sinu parool edastatakse krüptitult."
 
 msgid "Authentication Required"
 msgstr "Autentimine on vajalik"
