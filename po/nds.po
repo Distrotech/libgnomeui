@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=libgnomeui&component=general\n"
 "POT-Creation-Date: 2009-11-07 23:10+0000\n"
-"PO-Revision-Date: 2009-11-27 02:30+0100\n"
+"PO-Revision-Date: 2009-11-28 03:21+0100\n"
 "Last-Translator: Nils-Christoph Fiedler <fiedler@medienkompanie.de>\n"
 "Language-Team: Low German <nds-lowgerman@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -333,7 +333,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:179
 msgid "Undo the last action"
-msgstr ""
+msgstr "De leste Aktschoon torüggnehmen"
 
 #. Redo
 #: ../libgnomeui/gnome-app-helper.c:184
@@ -456,11 +456,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-app-helper.c:261
 msgid "_Restart Game"
-msgstr ""
+msgstr "Speel _nej starten"
 
 #: ../libgnomeui/gnome-app-helper.c:262
 msgid "Restart the game"
-msgstr ""
+msgstr "Speel nej starten"
 
 #: ../libgnomeui/gnome-app-helper.c:266
 msgid "_Undo Move"
@@ -741,24 +741,24 @@ msgstr "Dag"
 
 #: ../libgnomeui/gnome-dateedit.c:780
 msgid "Select Date"
-msgstr ""
+msgstr "Dag wählen"
 
 #: ../libgnomeui/gnome-dateedit.c:780
 msgid "Select the date from a calendar"
-msgstr ""
+msgstr "Dag ut 'em kalenner wählen"
 
 #. Calendar label, only shown if the date editor has a time field
 #: ../libgnomeui/gnome-dateedit.c:791
 msgid "Calendar"
-msgstr ""
+msgstr "Kalenner"
 
 #: ../libgnomeui/gnome-dateedit.c:812
 msgid "Select Time"
-msgstr ""
+msgstr "Tied wählen"
 
 #: ../libgnomeui/gnome-dateedit.c:812
 msgid "Select the time from a list"
-msgstr ""
+msgstr "Tied ut'e List wählen"
 
 #: ../libgnomeui/gnome-dateedit.c:1031
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
@@ -775,7 +775,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:124
 msgid "Logo image"
-msgstr ""
+msgstr "Emblembill"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:131
 msgid "Top Watermark"
@@ -812,7 +812,7 @@ msgstr ""
 #: ../libgnomeui/gnome-druid-page-standard.c:163
 #: ../libgnomeui/gnome-druid-page-standard.c:171
 msgid "Background Color"
-msgstr ""
+msgstr "Achtergrundklöör"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:164
 msgid "Background color"
@@ -820,7 +820,7 @@ msgstr "Achtergrundklöör"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:172
 msgid "Background color as a GdkColor"
-msgstr ""
+msgstr "Achtergrundklöör as eene GdkKlöör"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:179
 msgid "Background color set"
@@ -882,26 +882,26 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid.c:161
 msgid "Show Help"
-msgstr ""
+msgstr "Hölp opwiesen"
 
 #: ../libgnomeui/gnome-druid.c:162
 msgid "Show the 'Help' button"
-msgstr ""
+msgstr "'Hölp'-Knopp opwiesen"
 
 #: ../libgnomeui/gnome-entry.c:192
 #: ../libgnomeui/gnome-entry.c:193
 #: ../libgnomeui/gnome-file-entry.c:233
 #: ../libgnomeui/gnome-icon-entry.c:169
 msgid "History ID"
-msgstr ""
+msgstr "Historie ID"
 
 #: ../libgnomeui/gnome-entry.c:199
 msgid "GTK entry"
-msgstr ""
+msgstr "GTK Indrag"
 
 #: ../libgnomeui/gnome-entry.c:200
 msgid "The GTK entry"
-msgstr ""
+msgstr "De GTK Indrag"
 
 #: ../libgnomeui/gnome-file-entry.c:234
 msgid "Unique identifier for the file entry.  This will be used to save the history list."
@@ -951,7 +951,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:284
 msgid "GnomeEntry"
-msgstr ""
+msgstr "GnomeIndrag"
 
 #: ../libgnomeui/gnome-file-entry.c:285
 msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
@@ -1020,7 +1020,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:156
 msgid "Mode"
-msgstr ""
+msgstr "Modus"
 
 #: ../libgnomeui/gnome-font-picker.c:157
 msgid "The mode of operation of the font picker"
@@ -1028,16 +1028,16 @@ msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:166
 msgid "Font name"
-msgstr ""
+msgstr "Schriftartnaam"
 
 #: ../libgnomeui/gnome-font-picker.c:167
 msgid "Name of the selected font"
-msgstr ""
+msgstr "Naam vun de utwählte Schriftart"
 
 #: ../libgnomeui/gnome-font-picker.c:176
 #: ../libgnomeui/gnome-font-picker.c:972
 msgid "Font"
-msgstr ""
+msgstr "Schriftart"
 
 #: ../libgnomeui/gnome-font-picker.c:177
 msgid "The selected GtkFont"
@@ -1045,7 +1045,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-font-picker.c:184
 msgid "Preview text"
-msgstr ""
+msgstr "Textutblick"
 
 #: ../libgnomeui/gnome-font-picker.c:185
 msgid "Preview text shown in the dialog"
@@ -1077,7 +1077,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-gconf-ui.c:61
 msgid "GNOME GConf UI Support"
-msgstr ""
+msgstr "GNOME GConf UI Unnerstütten"
 
 #: ../libgnomeui/gnome-gconf-ui.c:96
 msgid "_Details"
@@ -1095,7 +1095,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-href.c:102
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: ../libgnomeui/gnome-href.c:103
 msgid "The URL that GnomeHRef activates"
@@ -1103,19 +1103,19 @@ msgstr ""
 
 #: ../libgnomeui/gnome-href.c:110
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #: ../libgnomeui/gnome-href.c:111
 msgid "The text on the button"
-msgstr ""
+msgstr "De Text op de Knopp"
 
 #: ../libgnomeui/gnome-href.c:112
 msgid "End World Hunger"
-msgstr ""
+msgstr "Welthunger beennen"
 
 #: ../libgnomeui/gnome-href.c:118
 msgid "Link color"
-msgstr ""
+msgstr "Verknüppenklöör"
 
 #: ../libgnomeui/gnome-href.c:119
 msgid "Color used to draw the link"
@@ -1149,7 +1149,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:195
 msgid "Filename that should be displayed in the icon entry."
-msgstr ""
+msgstr "Dateinaam, de in de icon Indrag opwiest werrn schall."
 
 #: ../libgnomeui/gnome-icon-entry.c:203
 msgid "Picker dialog"
@@ -1175,7 +1175,7 @@ msgstr ""
 #: ../libgnomeui/gnome-icon-entry.c:773
 #: ../libgnomeui/gnome-icon-entry.c:999
 msgid "Icon Selector"
-msgstr ""
+msgstr "Icon Wähler"
 
 #: ../libgnomeui/gnome-icon-entry.c:774
 msgid "Please pick the icon you want."
@@ -1265,11 +1265,11 @@ msgstr "_Anonym verbinnen"
 
 #: ../libgnomeui/gnome-password-dialog.c:362
 msgid "Connect as u_ser:"
-msgstr ""
+msgstr "As _Bruker verbinnen:"
 
 #: ../libgnomeui/gnome-password-dialog.c:424
 msgid "_Forget password immediately"
-msgstr ""
+msgstr "Passwoord just _vergeten"
 
 #: ../libgnomeui/gnome-password-dialog.c:430
 msgid "_Remember password until you logout"
@@ -1294,7 +1294,7 @@ msgstr "Keen Bill"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:196
 msgid "Image Preview"
-msgstr ""
+msgstr "Billutblick"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:197
 msgid "A preview of the image currently specified"
@@ -1310,7 +1310,7 @@ msgstr "Utblick"
 
 #: ../libgnomeui/gnome-scores.c:77
 msgid "Top Ten"
-msgstr ""
+msgstr "Top Tein"
 
 #: ../libgnomeui/gnome-scores.c:90
 msgid "User"
@@ -1318,14 +1318,14 @@ msgstr "Bruker"
 
 #: ../libgnomeui/gnome-scores.c:93
 msgid "Score"
-msgstr ""
+msgstr "Rutkamen"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
 #.
 #: ../libgnomeui/gnome-scores.c:193
 msgid "%a %b %d %T %Y"
-msgstr ""
+msgstr "%a %b %d %T %Y"
 
 #: ../libgnomeui/gnome-scores.c:394
 msgid "Sans 14"
@@ -1333,7 +1333,7 @@ msgstr "Sans 14"
 
 #: ../libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
-msgstr ""
+msgstr "Tabellkanten"
 
 #: ../libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
@@ -1366,11 +1366,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-ui-init.c:143
 msgid "GNOME GUI Library:"
-msgstr ""
+msgstr "GNOME GUI Bökerie:"
 
 #: ../libgnomeui/gnome-ui-init.c:144
 msgid "Show GNOME GUI options"
-msgstr ""
+msgstr "GNOME GUI Optschoonen opwiesen"
 
 #: ../libgnomeui/gnome-ui-init.c:162
 msgid "X display to use"
@@ -1382,11 +1382,11 @@ msgstr "DISPLAY"
 
 #: ../libgnomeui/gnome-ui-init.c:167
 msgid "GNOME GUI Library"
-msgstr ""
+msgstr "GNOME GUI Bökerie"
 
 #: ../libgnomeui/gnome-ui-init.c:232
 msgid "Could not open link"
-msgstr ""
+msgstr "Künn de Verknüppen nich opmaken"
 
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
