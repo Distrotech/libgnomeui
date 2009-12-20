@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=libgnomeui&component=general\n"
 "POT-Creation-Date: 2009-11-07 23:10+0000\n"
-"PO-Revision-Date: 2009-11-28 03:21+0100\n"
+"PO-Revision-Date: 2009-12-20 15:59+0100\n"
 "Last-Translator: Nils-Christoph Fiedler <fiedler@medienkompanie.de>\n"
 "Language-Team: Low German <nds-lowgerman@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -17,19 +17,19 @@ msgstr ""
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
-msgstr ""
+msgstr "Kinnelement 1"
 
 #: ../demos/mdi_demo.c:129
 msgid "Hint for item 1"
-msgstr ""
+msgstr "Henwies för Element 1"
 
 #: ../demos/mdi_demo.c:131
 msgid "Child Item 2"
-msgstr ""
+msgstr "Kinnelement 2"
 
 #: ../demos/mdi_demo.c:132
 msgid "Hint for item 2"
-msgstr ""
+msgstr "Henwies för Element 2"
 
 #: ../libgnomeui/gnome-about.c:187
 msgid "Credits"
@@ -69,7 +69,7 @@ msgstr "De Verschoon vun de Programm"
 
 #: ../libgnomeui/gnome-about.c:380
 msgid "Copyright string"
-msgstr ""
+msgstr "Koperschodreeg"
 
 #: ../libgnomeui/gnome-about.c:381
 msgid "Copyright information for the program"
@@ -77,7 +77,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-about.c:388
 msgid "Comments string"
-msgstr ""
+msgstr "Kommentarreeg"
 
 #: ../libgnomeui/gnome-about.c:389
 msgid "Comments about the program"
@@ -97,7 +97,7 @@ msgstr "Authorenindrag"
 
 #: ../libgnomeui/gnome-about.c:399
 msgid "A single author entry"
-msgstr ""
+msgstr "Een eenfacher Schrieverindrag"
 
 #: ../libgnomeui/gnome-about.c:406
 msgid "Documenters"
@@ -130,7 +130,7 @@ msgstr "Emblem"
 
 #: ../libgnomeui/gnome-about.c:427
 msgid "A logo for the about box"
-msgstr ""
+msgstr "Een Emblem för de Över-Kist"
 
 #: ../libgnomeui/gnome-about.c:506
 #, c-format
@@ -142,7 +142,7 @@ msgstr "Över %s"
 #: ../libgnomeui/gnome-app-helper.h:551
 #: ../test-gnome/testgnome.xml.h:5
 msgid "_File"
-msgstr "_datei"
+msgstr "_Datei"
 
 #: ../libgnomeui/gnome-app-helper.c:86
 msgid "_File/"
@@ -244,7 +244,7 @@ msgstr "Düsse Datei mit ee'm annern Naam spiekern"
 #. Revert
 #: ../libgnomeui/gnome-app-helper.c:128
 msgid "_Revert"
-msgstr ""
+msgstr "_Umdreihn"
 
 #: ../libgnomeui/gnome-app-helper.c:129
 msgid "Revert to a saved version of the file"
@@ -329,7 +329,7 @@ msgstr "De Utwahl opklaren"
 #. Undo
 #: ../libgnomeui/gnome-app-helper.c:179
 msgid "_Undo"
-msgstr ""
+msgstr "_Torüggnehmen"
 
 #: ../libgnomeui/gnome-app-helper.c:179
 msgid "Undo the last action"
@@ -338,11 +338,11 @@ msgstr "De leste Aktschoon torüggnehmen"
 #. Redo
 #: ../libgnomeui/gnome-app-helper.c:184
 msgid "_Redo"
-msgstr ""
+msgstr "_Wedderholen"
 
 #: ../libgnomeui/gnome-app-helper.c:184
 msgid "Redo the undone action"
-msgstr ""
+msgstr "De torüggnehmte Aktschoon wedderholen"
 
 #. Find
 #: ../libgnomeui/gnome-app-helper.c:189
@@ -360,7 +360,7 @@ msgstr "_Nähsten finnen"
 
 #: ../libgnomeui/gnome-app-helper.c:195
 msgid "Search again for the same string"
-msgstr ""
+msgstr "Nohmal nah düsser Reeg söken"
 
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:200
@@ -369,7 +369,7 @@ msgstr "_Överschrieven"
 
 #: ../libgnomeui/gnome-app-helper.c:200
 msgid "Replace a string"
-msgstr ""
+msgstr "Eene Reeg överschrieven"
 
 #. Properties
 #: ../libgnomeui/gnome-app-helper.c:205
@@ -448,11 +448,11 @@ msgstr "Een nejes Speel starten"
 
 #: ../libgnomeui/gnome-app-helper.c:256
 msgid "_Pause Game"
-msgstr ""
+msgstr "_Middag maken"
 
 #: ../libgnomeui/gnome-app-helper.c:257
 msgid "Pause the game"
-msgstr ""
+msgstr "Middag maken"
 
 #: ../libgnomeui/gnome-app-helper.c:261
 msgid "_Restart Game"
@@ -464,19 +464,19 @@ msgstr "Speel nej starten"
 
 #: ../libgnomeui/gnome-app-helper.c:266
 msgid "_Undo Move"
-msgstr ""
+msgstr "_Verschuven torüggnehmen"
 
 #: ../libgnomeui/gnome-app-helper.c:267
 msgid "Undo the last move"
-msgstr ""
+msgstr "Dat leste Verschuven torüggnehmen"
 
 #: ../libgnomeui/gnome-app-helper.c:271
 msgid "_Redo Move"
-msgstr ""
+msgstr "Verschuven _wedderholen"
 
 #: ../libgnomeui/gnome-app-helper.c:272
 msgid "Redo the undone move"
-msgstr ""
+msgstr "Dat torüggnehmte Verschuven wedderholen"
 
 #: ../libgnomeui/gnome-app-helper.c:276
 msgid "_Hint"
@@ -484,7 +484,7 @@ msgstr "_Henwies"
 
 #: ../libgnomeui/gnome-app-helper.c:277
 msgid "Get a hint for your next move"
-msgstr ""
+msgstr "Een Henwies för den nahsten Treck kregen"
 
 #. 30
 #: ../libgnomeui/gnome-app-helper.c:282
@@ -501,7 +501,7 @@ msgstr "Speel _beennen"
 
 #: ../libgnomeui/gnome-app-helper.c:288
 msgid "End the current game"
-msgstr ""
+msgstr "Aktuelles Speel beennen"
 
 #: ../libgnomeui/gnome-app-helper.c:1150
 msgid "_Contents"
@@ -530,11 +530,11 @@ msgstr "Just Text"
 #: ../libgnomeui/gnome-app-helper.c:2588
 #, c-format
 msgid "Use Desktop Default (%s)"
-msgstr ""
+msgstr "Schrievdiskstandard bruken (%s)"
 
 #: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
-msgstr ""
+msgstr "(Return drücken)"
 
 #: ../libgnomeui/gnome-app-util.c:140
 msgid "ERROR: "
@@ -574,7 +574,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr ""
+msgstr "Programm ID"
 
 #: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
@@ -598,7 +598,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-appbar.c:759
 msgid "Interactivity"
-msgstr ""
+msgstr "Interaktivität"
 
 #: ../libgnomeui/gnome-appbar.c:760
 msgid "Level of user activity required."
@@ -627,7 +627,7 @@ msgstr ""
 #: ../libgnomeui/gnome-authentication-manager.c:92
 #: ../libgnomeui/gnome-authentication-manager.c:311
 msgid "Authentication Required"
-msgstr ""
+msgstr "Authentifikatschoon nödig"
 
 #. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
 #: ../libgnomeui/gnome-authentication-manager.c:303
@@ -704,7 +704,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-dateedit.c:510
 msgid "DateEdit Flags"
-msgstr ""
+msgstr "DateEdit Flags"
 
 #: ../libgnomeui/gnome-dateedit.c:511
 msgid "Flags for how DateEdit looks"
@@ -779,15 +779,15 @@ msgstr "Emblembill"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:131
 msgid "Top Watermark"
-msgstr ""
+msgstr "Watermark boven"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:132
 msgid "Watermark image for the top"
-msgstr ""
+msgstr "Watermarkbill för boven"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:139
 msgid "Title Foreground"
-msgstr ""
+msgstr "Titlvordergrund"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:140
 msgid "Foreground color of the title"
@@ -795,7 +795,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid-page-standard.c:147
 msgid "Title Foreground Color"
-msgstr ""
+msgstr "Titelvordergrundklöör"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:148
 msgid "Foreground color of the title as a GdkColor"
@@ -874,7 +874,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-druid.c:153
 msgid "Show Finish"
-msgstr ""
+msgstr "Fertig opwiesen"
 
 #: ../libgnomeui/gnome-druid.c:154
 msgid "Show the 'Finish' button instead of the 'Next' button"
@@ -918,7 +918,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:250
 msgid "Directory Entry"
-msgstr ""
+msgstr "Verteeknisindrag"
 
 #: ../libgnomeui/gnome-file-entry.c:251
 msgid "Whether the file entry is being used to enter directory names or complete filenames."
@@ -926,7 +926,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-file-entry.c:259
 msgid "Modal"
-msgstr ""
+msgstr "Modal"
 
 #: ../libgnomeui/gnome-file-entry.c:260
 msgid "Whether the Browse file window should be modal."
@@ -1281,7 +1281,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-pixmap-entry.c:104
 msgid "Do Preview"
-msgstr ""
+msgstr "Utblick erstellen"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:105
 msgid "Whether the pixmap entry should have a preview."
@@ -1374,7 +1374,7 @@ msgstr "GNOME GUI Optschoonen opwiesen"
 
 #: ../libgnomeui/gnome-ui-init.c:162
 msgid "X display to use"
-msgstr ""
+msgstr "X Billschirm to bruken"
 
 #: ../libgnomeui/gnome-ui-init.c:162
 msgid "DISPLAY"
