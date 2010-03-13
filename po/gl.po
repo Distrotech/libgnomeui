@@ -1,6 +1,4 @@
-# translation of gl.po to Galego
-# translation of libgnomeui.gnome-2-16.po to
-# Galician translation of gnome-desktop.
+# translation of libgnomeui to Galician
 # Copyright (C) 1999-2004 Jesús Bravo Álvarez
 #
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
@@ -13,14 +11,16 @@
 # Ignacio Casal Quinteiro <icq@svn.gnome.org>, 2008.
 # Mancomún - Centro de Referencia e Servizos de Software Libre <g11n@mancomun.org>, 2009.
 # Fran Diéguez <frandieguez@ubuntu.com>, 2010.
+# Francisco Diéguez <frandieguez@ubuntu.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-15 13:34+0100\n"
-"PO-Revision-Date: 2010-02-03 23:48+0100\n"
-"Last-Translator: Fran Diéguez <frandieguez@ubuntu.com>\n"
-"Language-Team: Gallician <proxecto@trasno.net>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=libgnomeui&component=general\n"
+"POT-Creation-Date: 2010-02-23 22:07+0000\n"
+"PO-Revision-Date: 2010-03-06 21:57+0100\n"
+"Last-Translator: Francisco Diéguez <frandieguez@ubuntu.com>\n"
+"Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -315,7 +315,7 @@ msgstr "Copiar a selección"
 #. Paste
 #: ../libgnomeui/gnome-app-helper.c:169
 msgid "_Paste"
-msgstr "C_olar"
+msgstr "_Pegar"
 
 #: ../libgnomeui/gnome-app-helper.c:169
 msgid "Paste the clipboard"
@@ -1435,47 +1435,3 @@ msgstr "Non foi posíbel abrir a ligazón"
 msgid "Exit the test"
 msgstr "Saír da proba"
 
-#~ msgid "%s is a link to something that is not a folder"
-#~ msgstr "%s é unha ligazón a algo que non é un cartafol"
-
-#~ msgid "%s is a link without a destination location"
-#~ msgstr "%s é unha ligazón sen unha localización de destino"
-
-#~ msgid "%s is not a folder"
-#~ msgstr "%s non é un cartafol"
-
-#~ msgid "Could not monitor '%s': %s"
-#~ msgstr "Non se puido monitorizar '%s': %s"
-
-#~ msgid "Could not get info for '%s': %s"
-#~ msgstr "Non se puido obter información para '%s': %s"
-
-#~ msgid "Could not create '%s': %s"
-#~ msgstr "Non se puido crear '%s': %s"
-
-#~ msgid "Network Servers"
-#~ msgstr "Servidores de rede"
-
-#~ msgid "File System"
-#~ msgstr "Sistema de ficheiros"
-
-#~ msgid "'%s': %s"
-#~ msgstr "'%s': %s"
-
-#~ msgid "Bookmark saving failed (%s)"
-#~ msgstr "Fallo ao gardar o marcador (%s)"
-
-#~ msgid "Error getting information for '%s'"
-#~ msgstr "Erro ao obter información de '%s'"
-
-#~ msgid "Could not get information for file '%s': %s"
-#~ msgstr "Non se pode obter información do ficheiro '%s': %s"
-
-#~ msgid "Failed to open file '%s': %s"
-#~ msgstr "Fallo ao abrir o ficheiro '%s': %s"
-
-#~ msgid ""
-#~ "Failed to load image '%s': reason not known, probably a corrupt image file"
-#~ msgstr ""
-#~ "Fallo ao cargar a imaxe '%s': causa descoñecida, probablemente o ficheiro "
-#~ "está corrompido"
