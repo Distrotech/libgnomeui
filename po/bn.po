@@ -5,15 +5,16 @@
 # Mahay Alam Khan <makl10n@yahoo.com>, 2005.
 # Samia Niamatullah <mailsamia2001@yahoo.com>, 2005.
 # Maruf Ovee <maruf@ankur.org.bd>, 2009.
+# Israt Jahan <israt@ankur.org.bd>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui\n"
+"Project-Id-Version: bn\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=libgnomeui&component=general\n"
-"POT-Creation-Date: 2009-07-31 10:30+0000\n"
-"PO-Revision-Date: 2009-07-22 14:54+0700\n"
-"Last-Translator: Maruf Ovee <maruf@ankur.org.bd>\n"
+"POT-Creation-Date: 2009-08-06 14:45+0000\n"
+"PO-Revision-Date: 2010-03-07 14:54+0600\n"
+"Last-Translator: Israt Jahan <israt@ankur.org.bd>\n"
 "Language-Team: Bengali <ankur-bd-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +38,7 @@ msgstr "আইটেম ২ এর জন্য ইঙ্গিত"
 
 #: ../libgnomeui/gnome-about.c:187
 msgid "Credits"
-msgstr "স্বীকৃতি"
+msgstr "অবদান"
 
 #: ../libgnomeui/gnome-about.c:219
 msgid "Written by"
@@ -53,7 +54,7 @@ msgstr "অনুবাদ করেছেন"
 
 #: ../libgnomeui/gnome-about.c:312
 msgid "C_redits"
-msgstr "স্বীকৃতি (_r)"
+msgstr "অবদান (_r)"
 
 #: ../libgnomeui/gnome-about.c:365
 msgid "Program name"
@@ -73,11 +74,11 @@ msgstr "প্রোগ্রামটির সংস্করণ"
 
 #: ../libgnomeui/gnome-about.c:380
 msgid "Copyright string"
-msgstr "স্বত্বাধিকার স্ট্রিং"
+msgstr "কপিরাইট স্ট্রিং"
 
 #: ../libgnomeui/gnome-about.c:381
 msgid "Copyright information for the program"
-msgstr "প্রোগ্রামের স্বত্বাধিকার সম্পর্কে তথ্য"
+msgstr "প্রোগ্রামের কপিরাইট সম্পর্কে তথ্য"
 
 #: ../libgnomeui/gnome-about.c:388
 msgid "Comments string"
@@ -122,13 +123,13 @@ msgstr "একক সহায়িকা লেখকের সংক্রান
 #: ../libgnomeui/gnome-about.c:418
 msgid "Translator credits"
 msgstr ""
-"মাহে আলম খান <makl10n@yahoo.com>\n"
-" (অঙ্কুর প্রকল্পের তরফ থেকে)"
+"মাহে আলম খান <makl10n@yahoo.com>, ইসরাত জাহান <israt@ankur.org.bd>\n (অঙ্কুর "
+"প্রকল্পের তরফ থেকে)"
 
 #: ../libgnomeui/gnome-about.c:419
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr "অনুবাদকারীর স্বীকৃতি। এই স্ট্রিংটি অনুবাদযোগ্য হিসেবে চিহ্নিত করা উচিত"
+msgstr "অনুবাদকারীর অবদান। এই স্ট্রিংটি অনুবাদযোগ্য হিসেবে চিহ্নিত করা উচিত"
 
 #: ../libgnomeui/gnome-about.c:426
 #: ../libgnomeui/gnome-druid-page-standard.c:123
@@ -164,11 +165,11 @@ msgstr "সম্পাদনা/ (_E)"
 
 #: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
-msgstr "ভিউ (_V)"
+msgstr "প্রদর্শন (_V)"
 
 #: ../libgnomeui/gnome-app-helper.c:90
 msgid "_View/"
-msgstr "ভিউ/ (_V)"
+msgstr "প্রদর্শন/ (_V)"
 
 #: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
@@ -176,7 +177,7 @@ msgstr "সেটিংস (_S)"
 
 #: ../libgnomeui/gnome-app-helper.c:92
 msgid "_Settings/"
-msgstr "সেটিংস/  (_S)"
+msgstr "সেটিংস/ (_S)"
 
 #. If you have more then one New type, use this tree
 #: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:326
@@ -197,7 +198,7 @@ msgstr "ফাইলসমূহ/ (_l)"
 
 #: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
-msgstr "_উইন্ডোজ (_W)"
+msgstr "উইন্ডোজ (_W)"
 
 #: ../libgnomeui/gnome-app-helper.c:98 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
@@ -233,7 +234,7 @@ msgstr "বর্তমান ফাইলটি সংরক্ষণ করু
 #. Save As
 #: ../libgnomeui/gnome-app-helper.c:122
 msgid "Save _As..."
-msgstr "নতুন করে সংরক্ষণ... (_A)"
+msgstr "নতুন ভাবে সংরক্ষণ... (_A)"
 
 #: ../libgnomeui/gnome-app-helper.c:123
 msgid "Save the current file with a different name"
@@ -251,7 +252,7 @@ msgstr "ফাইলটিকে পূর্বের সংরক্ষিত 
 #. Print
 #: ../libgnomeui/gnome-app-helper.c:134
 msgid "_Print..."
-msgstr "মুদ্রন... (_P)"
+msgstr "মুদ্রণ... (_P)"
 
 #: ../libgnomeui/gnome-app-helper.c:134
 msgid "Print the current file"
@@ -260,11 +261,11 @@ msgstr "বর্তমান ফাইলটিকে মুদ্রন কর
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:139
 msgid "Print S_etup..."
-msgstr "মুদ্রনের বৈশিষ্ট্যাবলী... (_e)"
+msgstr "মুদ্রণের বৈশিষ্ট্যাবলী... (_e)"
 
 #: ../libgnomeui/gnome-app-helper.c:140
 msgid "Setup the page settings for your current printer"
-msgstr "আপনার মুদ্রনের জন্য পাতার সেটিংস নির্ধারণ করুন"
+msgstr "আপনার মুদ্রণের জন্য পৃষ্ঠার সেটিংস নির্ধারণ করুন"
 
 #. Close
 #: ../libgnomeui/gnome-app-helper.c:145
@@ -300,16 +301,16 @@ msgstr "নির্বাচিত অংশটি কাটুন"
 #. Copy
 #: ../libgnomeui/gnome-app-helper.c:164
 msgid "_Copy"
-msgstr "অনুলিপি করুন (_C)"
+msgstr "অনুলিপি (_C)"
 
 #: ../libgnomeui/gnome-app-helper.c:164
 msgid "Copy the selection"
-msgstr "চিহ্নিত অংশটিকে কপি করুন"
+msgstr "চিহ্নিত অংশটিকে অনুলিপি করুন"
 
 #. Paste
 #: ../libgnomeui/gnome-app-helper.c:169
 msgid "_Paste"
-msgstr "প্রতিলেপন করুন (_P)"
+msgstr "প্রতিলেপন (_P)"
 
 #: ../libgnomeui/gnome-app-helper.c:169
 msgid "Paste the clipboard"
@@ -349,7 +350,7 @@ msgstr "খুঁজুন... (_F)"
 
 #: ../libgnomeui/gnome-app-helper.c:189
 msgid "Search for a string"
-msgstr "একটি স্ট্রিং এর জন্য খুঁজুন"
+msgstr "একটি স্ট্রিং খুঁজুন"
 
 #. Find Again
 #: ../libgnomeui/gnome-app-helper.c:194
@@ -358,7 +359,7 @@ msgstr "পরবর্তীটি খুঁজুন (_x)"
 
 #: ../libgnomeui/gnome-app-helper.c:195
 msgid "Search again for the same string"
-msgstr "আবারো একই স্ট্রিং এর জন্য খুঁজুন"
+msgstr "আবারো একই স্ট্রিং খুঁজুন"
 
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:200
@@ -500,7 +501,7 @@ msgstr "চলতি খেলাটি শেষ করুন"
 
 #: ../libgnomeui/gnome-app-helper.c:1150
 msgid "_Contents"
-msgstr "সূচী (_C)"
+msgstr "বিষয়বস্তু (_C)"
 
 #: ../libgnomeui/gnome-app-helper.c:1153
 msgid "View help for this application"
@@ -533,7 +534,7 @@ msgstr " (এন্টার চাপুন)"
 
 #: ../libgnomeui/gnome-app-util.c:140
 msgid "ERROR: "
-msgstr "ERROR: "
+msgstr "ত্রুটি: "
 
 #: ../libgnomeui/gnome-app-util.c:177
 msgid "Warning: "
@@ -615,11 +616,11 @@ msgstr ""
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
 msgid "Your password will be transmitted unencrypted."
-msgstr "আপনার পাসওয়ার্ডটি এনক্রিপ্ট করা ছাড়াই পাঠানো হবে। "
+msgstr "আপনার পাসওয়ার্ডটি এনক্রিপ্ট করা ছাড়াই পাঠানো হবে।"
 
 #: ../libgnomeui/gnome-authentication-manager.c:89
 msgid "Your password will be transmitted encrypted."
-msgstr "আপনার পাসওয়ার্ডটি এনক্রিপ্ট করে পাঠানো হবে। "
+msgstr "আপনার পাসওয়ার্ডটি এনক্রিপ্ট করে পাঠানো হবে।"
 
 #: ../libgnomeui/gnome-authentication-manager.c:92
 #: ../libgnomeui/gnome-authentication-manager.c:311
@@ -647,11 +648,11 @@ msgstr "আইডি"
 
 #: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "Specify prefix of saved configuration"
-msgstr "সংরক্ষিত কনফিগারেশনের উপসর্গ উল্লেখ করুন"
+msgstr "সংরক্ষিত কনফিগারেশনের প্রিফিক্স উল্লেখ করুন"
 
 #: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
 msgid "PREFIX"
-msgstr "PREFIX"
+msgstr "প্রিফিক্স"
 
 #: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
@@ -679,7 +680,7 @@ msgstr "অকার্যকর রং এর ডাটা গ্রহণ ক�
 
 #: ../libgnomeui/gnome-color-picker.c:458
 msgid "Open a dialog to specify the color"
-msgstr "রং উল্লেখ করার জন্য একটি ডায়ালগ খোলা হোক"
+msgstr "রং উল্লেখ করার জন্য একটি ডায়ালগ খুলুন"
 
 #: ../libgnomeui/gnome-color-picker.c:480
 msgid "Pick a color"
@@ -899,8 +900,8 @@ msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
 msgstr ""
-"ফাইল এন্ট্রির একক শনাক্তকারক।  ইতিহাসের তালিকা সংরক্ষণ করার জন্য এটিকে ব্যবহার করা "
-"হবে।"
+"ফাইল এন্ট্রির একক শনাক্তকারক। ইতিহাসের তালিকা সংরক্ষণ করার জন্য এটিকে "
+"ব্যবহার করা হবে।"
 
 #: ../libgnomeui/gnome-file-entry.c:242 ../libgnomeui/gnome-icon-entry.c:178
 msgid "Browse Dialog Title"
@@ -983,12 +984,12 @@ msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
 msgstr ""
-"ফাইল নির্বাচন করার জন্য নতুন GtkFileChooser উইজেট নাকি GtkFileSelection উইজেট "
-"ব্যবহৃত হবে"
+"ফাইল নির্বাচন করার জন্য নতুন GtkFileChooser উইজেট নাকি GtkFileSelection "
+"উইজেট ব্যবহৃত হবে।"
 
 #: ../libgnomeui/gnome-file-entry.c:316
 msgid "GtkFileChooser Action"
-msgstr "GtkFileChooser ব্যবহার"
+msgstr "GtkFileChooser কাজ"
 
 #: ../libgnomeui/gnome-file-entry.c:317
 msgid "The type of operation that the file selector is performing."
@@ -1016,7 +1017,7 @@ msgstr "ফাইল বাছাই করার জন্য একটি ফ�
 
 #: ../libgnomeui/gnome-font-picker.c:58
 msgid "sans 12"
-msgstr "sans 12"
+msgstr "স্যানস ১২"
 
 #: ../libgnomeui/gnome-font-picker.c:59
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
@@ -1068,7 +1069,7 @@ msgstr "লেবেলে এই ফন্ট ব্যবহার করু�
 
 #: ../libgnomeui/gnome-font-picker.c:194
 msgid "Use font in the label in font info mode"
-msgstr "ফন্ট ইনফো মোডে লেবেলের জন্য এই ফন্ট ব্যবহার করুন"
+msgstr "ফন্ট তথ্য সম্পর্কিত মোডে লেবেলের জন্য এই ফন্ট ব্যবহার করুন"
 
 #: ../libgnomeui/gnome-font-picker.c:202
 msgid "Font size for label"
@@ -1103,9 +1104,9 @@ msgid ""
 "may not be restored next time you use the application."
 msgstr ""
 "অ্যাপলিকেশন \"%s\" আপনার কনফিগারেশনের একটি অংশ পরিবর্তনের চেষ্টা করেছে, কিন্তু "
-"আপনার সিস্টেম প্রশাসক বা অপারেটিং সিস্টেম নির্মাতা, কেউই এ ধরনের পরিবর্তন অনুমোদন "
-"করে না।আপনার নির্বাচিত কতগুলো সেটিংস হয়তো কোনো প্রভাব ফেলবে না কিংবা পরবর্তীতে "
-"যখন অ্যাপলিকেশনটি ব্যবহার করবেন তখনও প্রযোজ্য হবে না।"
+"আপনার সিস্টেম প্রশাসক বা অপারেটিং সিস্টেম নির্মাতা, কেউই এ ধরনের পরিবর্তন "
+"অনুমোদন করে না। আপনার নির্বাচিত কতগুলো সেটিংস হয়তো কোনো প্রভাব ফেলবে না "
+"কিংবা পরবর্তীতে যখন অ্যাপলিকেশনটি ব্যবহার করবেন তখনও প্রযোজ্য হবে না।"
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
@@ -1146,15 +1147,15 @@ msgstr "যে রং দিয়ে লিংকটি আঁকা হবে"
 
 #: ../libgnomeui/gnome-href.c:150
 msgid "This button will take you to the URI that it displays."
-msgstr "এই বোতামটি চাপলে আপনি লিখিত URI-টি দেখতে পাবেন"
+msgstr "এই বোতামটি চাপলে আপনি লিখিত URI-টি দেখতে পাবেন।"
 
 #: ../libgnomeui/gnome-href.c:386
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
 msgstr ""
-"ডিফল্ট ওয়েব ব্রাউজার চালাতে সমস্যা হয়েছে।\n"
-"অনুগ্রহ করে 'পছন্দসই অ্যাপলিকেশন' এর পছন্দ টুলে আপনার সেটিংস পরীক্ষা করুন।"
+"ডিফল্ট ওয়েব ব্রাউজার চালাতে সমস্যা হয়েছে।\nঅনুগ্রহ করে 'পছন্দসই অ্যাপলিকেশন' "
+"এর পছন্দ টুলে আপনার সেটিংস পরীক্ষা করুন।"
 
 #: ../libgnomeui/gnome-icon-entry.c:170
 msgid ""
@@ -1194,7 +1195,7 @@ msgstr ""
 
 #: ../libgnomeui/gnome-icon-entry.c:312 ../libgnomeui/gnome-icon-entry.c:996
 msgid "Choose Icon"
-msgstr "আইকন পছন্দ করুন"
+msgstr "আইকন বেছে নিন"
 
 #: ../libgnomeui/gnome-icon-entry.c:766
 msgid "Icon selection dialog"
@@ -1214,7 +1215,7 @@ msgstr "অনুগ্রহ করে আপনার পছন্দের �
 
 #: ../libgnomeui/gnome-icon-entry.c:1000
 msgid "This button will open a window to let you select an icon."
-msgstr "এই বাটনটি চাপলে একটি উইন্ডো খুলে গিয়ে আপনাকে আইকন নির্বাচন করতে দেবে।"
+msgstr "এই বোতামটি চাপলে একটি উইন্ডো খুলে গিয়ে আপনাকে আইকন নির্বাচন করতে দেবে।"
 
 #: ../libgnomeui/gnome-icon-entry.c:1022
 msgid "Browse"
@@ -1282,11 +1283,11 @@ msgstr "নতুন পাসওয়ার্ড: (_N)"
 
 #: ../libgnomeui/gnome-password-dialog.c:206
 msgid "Con_firm password:"
-msgstr "নিশ্চিত পাসওয়ার্ড: (_f)"
+msgstr "পাসওয়ার্ড নিশ্চিত করুন: (_f)"
 
 #: ../libgnomeui/gnome-password-dialog.c:209
 msgid "Password quality:"
-msgstr "পাসওয়ার্ডের মান:"
+msgstr "পাসওয়ার্ডের গুণগতমান:"
 
 #: ../libgnomeui/gnome-password-dialog.c:324
 msgid "Co_nnect"
@@ -1298,11 +1299,11 @@ msgstr "অজ্ঞাতভাবে সংযোগ স্থাপন কর
 
 #: ../libgnomeui/gnome-password-dialog.c:362
 msgid "Connect as u_ser:"
-msgstr "ব্যবহারকারী হিসেবে সংযোগ স্থাপন করুন (_s)"
+msgstr "ব্যবহারকারী হিসেবে সংযোগ স্থাপন করুন: (_s)"
 
 #: ../libgnomeui/gnome-password-dialog.c:424
 msgid "_Forget password immediately"
-msgstr "তৎক্ষনাত পাসওয়ার্ড ভুলে যান (_F)"
+msgstr "তৎক্ষনাৎ পাসওয়ার্ড ভুলে যান (_F)"
 
 #: ../libgnomeui/gnome-password-dialog.c:430
 msgid "_Remember password until you logout"
@@ -1314,7 +1315,7 @@ msgstr "সবসময় মনে রাখুন (_R)"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:104
 msgid "Do Preview"
-msgstr "প্রাকদর্শন করুন"
+msgstr "প্রাকদর্শন দেখানো হবে"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:105
 msgid "Whether the pixmap entry should have a preview."
@@ -1335,7 +1336,7 @@ msgstr "বর্তমানে উল্লেখিত ছবির প্র
 
 #: ../libgnomeui/gnome-pixmap-entry.c:408
 msgid "Can't find an hbox, using a normal file selection"
-msgstr "hbox খুঁজে পাইনি। তাই সাধারণ ফাইল বাছাইকারী বাক্স ব্যবহার করছি"
+msgstr "hbox খুঁজে পায়নি। তাই সাধারণ ফাইল বাছাইকারী বাক্স ব্যবহার করা হচ্ছে"
 
 #: ../libgnomeui/gnome-pixmap-entry.c:414
 msgid "Preview"
@@ -1362,15 +1363,15 @@ msgstr "%a %b %d %T %Y"
 
 #: ../libgnomeui/gnome-scores.c:394
 msgid "Sans 14"
-msgstr "Sans 14"
+msgstr "স্যানস ১৪"
 
 #: ../libgnomeui/gnome-stock-icons.c:139
 msgid "Table Borders"
-msgstr "টেবিলের সীমানা"
+msgstr "সারণির সীমানা"
 
 #: ../libgnomeui/gnome-stock-icons.c:140
 msgid "Table Fill"
-msgstr "টেবিল পূরণ করা"
+msgstr "সারণি ভরাট করা"
 
 #: ../libgnomeui/gnome-stock-icons.c:141
 msgid "Bulleted List"
@@ -1386,7 +1387,7 @@ msgstr "ইন্ডেন্ট"
 
 #: ../libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
-msgstr "ইন্ডেন্ট কমাও"
+msgstr "ইন্ডেন্ট উঠিয়ে ফেলা"
 
 #: ../libgnomeui/gnome-stock-icons.c:145
 msgid "About"
@@ -1394,7 +1395,7 @@ msgstr "পরিচিতি"
 
 #: ../libgnomeui/gnome-ui-init.c:134 ../libgnomeui/gnome-ui-init.c:160
 msgid "Disable Crash Dialog"
-msgstr "ক্র্যাশ ডায়ালগ নিস্ক্রিয় করে দাও"
+msgstr "ক্র্যাশ ডায়ালগ নিস্ক্রিয় করা হবে"
 
 #: ../libgnomeui/gnome-ui-init.c:143
 msgid "GNOME GUI Library:"
@@ -1402,7 +1403,7 @@ msgstr "GNOME GUI লাইব্রেরি:"
 
 #: ../libgnomeui/gnome-ui-init.c:144
 msgid "Show GNOME GUI options"
-msgstr "GNOME GUI অপশন দেখাও"
+msgstr "GNOME GUI অপশন দেখানো হবে"
 
 #: ../libgnomeui/gnome-ui-init.c:162
 msgid "X display to use"
@@ -1410,7 +1411,7 @@ msgstr "ব্যবহার করার জন্য X প্রদর্শ�
 
 #: ../libgnomeui/gnome-ui-init.c:162
 msgid "DISPLAY"
-msgstr "DISPLAY"
+msgstr "প্রদর্শন"
 
 #: ../libgnomeui/gnome-ui-init.c:167
 msgid "GNOME GUI Library"
