@@ -1,3 +1,10 @@
+libgnomeui 2.24.3
+
+* Enable silent build using AM_SILENT_RULES (Christian Persch)
+* Fix the build with ATK_DISABLE_SINGLE_INCLUDES (Christian Persch)
+* Updated translations
+  (bn, cy, en@shaw, et, gl, lt, nds)
+
 libgnomeui 2.24.2
 
 Amanpreet Singh Alam (1):
