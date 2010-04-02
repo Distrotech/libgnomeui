@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libgnomeui 2.11.90\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-02-15 00:24+0100\n"
-"PO-Revision-Date: 2008-02-14 10:57+0100\n"
+"PO-Revision-Date: 2010-04-02 18:38+0200\n"
 "Last-Translator: Gil Forcada <gilforcada@guifi.net>\n"
 "Language-Team:  Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -1301,7 +1301,7 @@ msgid ""
 "Here you should enter the name of the directory where icon images are "
 "located."
 msgstr ""
-"Aquí heu de introduir el nom del directori on es troben les imatges d'icones."
+"Aquí heu d'introduir el nom del directori on es troben les imatges d'icones."
 
 # No es tradueix GnomeIconSelection, és el nom d'un widget. jm
 #: ../libgnomeui/gnome-icon-sel.c:293
