@@ -10,9 +10,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=libgnomeui&component=general\n"
 "POT-Creation-Date: 2010-04-18 07:29+0000\n"
-"PO-Revision-Date: 2010-06-05 09:49+0000\n"
+"PO-Revision-Date: 2010-07-10 12:53+0200\n"
 "Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
 "Language-Team: Esperanto <ubuntu-l10n-eo@lists.launchpad.net>\n"
 "MIME-Version: 1.0\n"
@@ -20,6 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2010-06-05 09:52+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -238,7 +240,7 @@ msgstr "_Konservi kiel..."
 
 #: ../libgnomeui/gnome-app-helper.c:123
 msgid "Save the current file with a different name"
-msgstr "Konservi aktualan dosieron kun malsama nomo"
+msgstr "Konservi la aktualan dosieron kun alia nomo"
 
 #. Revert
 #: ../libgnomeui/gnome-app-helper.c:128
@@ -252,20 +254,20 @@ msgstr "Malfari al konservita versio de la dosiero"
 #. Print
 #: ../libgnomeui/gnome-app-helper.c:134
 msgid "_Print..."
-msgstr "_Printi..."
+msgstr "_Presi..."
 
 #: ../libgnomeui/gnome-app-helper.c:134
 msgid "Print the current file"
-msgstr "Printi la aktualan dosieron"
+msgstr "Presi la aktualan dosieron"
 
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:139
 msgid "Print S_etup..."
-msgstr "Print-_agordo..."
+msgstr "Pres-_agordo..."
 
 #: ../libgnomeui/gnome-app-helper.c:140
 msgid "Setup the page settings for your current printer"
-msgstr "Agordu la paĝagordon por via aktuala printilo"
+msgstr "Agordu la paĝagordon por via aktuala presilo"
 
 #. Close
 #: ../libgnomeui/gnome-app-helper.c:145
@@ -285,9 +287,9 @@ msgstr "_Ĉesi"
 msgid "Quit the application"
 msgstr "Fermi la aplikaĵon"
 
-#. 
+#.
 #. * The "Edit" menu
-#. 
+#.
 #. Cut
 #: ../libgnomeui/gnome-app-helper.c:158
 msgid "Cu_t"
@@ -379,9 +381,9 @@ msgstr "_Atributoj"
 msgid "Modify the file's properties"
 msgstr "Modifi la dosieratributojn"
 
-#. 
+#.
 #. * The Settings menu
-#. 
+#.
 #. Settings
 #: ../libgnomeui/gnome-app-helper.c:214
 msgid "Prefere_nces"
@@ -392,9 +394,9 @@ msgid "Configure the application"
 msgstr "Agordi la aplikaĵon"
 
 #. 20
-#. 
+#.
 #. * And the "Help" menu
-#. 
+#.
 #. About
 #: ../libgnomeui/gnome-app-helper.c:224 ../test-gnome/testgnome.xml.h:4
 msgid "_About"
@@ -412,9 +414,9 @@ msgstr "Elekti ĉi_on"
 msgid "Select everything"
 msgstr "Elekti ĉion"
 
-#. 
+#.
 #. * Window menu
-#. 
+#.
 #: ../libgnomeui/gnome-app-helper.c:237
 msgid "Create New _Window"
 msgstr "_Krei novan fenestron"
@@ -431,9 +433,9 @@ msgstr "_Fermi tiun fenestron"
 msgid "Close the current window"
 msgstr "Fermi la aktualan fenestron"
 
-#. 
+#.
 #. * The "Game" menu
-#. 
+#.
 #: ../libgnomeui/gnome-app-helper.c:251
 msgid "_New Game"
 msgstr "_Nova ludo"
@@ -1354,7 +1356,7 @@ msgstr "Poentoj"
 
 #. TRANSLATORS NOTE: Date format used when showing scores in games.
 #. * Please refer to manpage of strftime(3) for complete reference.
-#. 
+#.
 #: ../libgnomeui/gnome-scores.c:193
 msgid "%a %b %d %T %Y"
 msgstr "%a %b %d %T %Y"
