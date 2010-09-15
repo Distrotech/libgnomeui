@@ -1,0 +1,1398 @@
+# Kazakh translation for libgnomeui
+# Copyright (C) 2010 HZ
+# This file is distributed under the same license as the libgnomeui package.
+# Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: libgnomeui master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=libgnomeui&component=general\n"
+"POT-Creation-Date: 2010-07-11 07:42+0000\n"
+"PO-Revision-Date: 2010-08-23 22:46+0600\n"
+"Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
+"Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Poedit-Language: Kazakh\n"
+"X-Poedit-Country: KAZAKHSTAN\n"
+
+#: ../demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr ""
+
+#: ../demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr ""
+
+#: ../demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr ""
+
+#: ../demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:187
+msgid "Credits"
+msgstr "Жасағандар"
+
+#: ../libgnomeui/gnome-about.c:219
+msgid "Written by"
+msgstr "Жазған"
+
+#: ../libgnomeui/gnome-about.c:234
+msgid "Documented by"
+msgstr "Құжаттаманы жазған"
+
+#: ../libgnomeui/gnome-about.c:249
+msgid "Translated by"
+msgstr "Аударған"
+
+#: ../libgnomeui/gnome-about.c:312
+msgid "C_redits"
+msgstr "Ж_асағандар"
+
+#: ../libgnomeui/gnome-about.c:365
+msgid "Program name"
+msgstr "Бағдарлама аты"
+
+#: ../libgnomeui/gnome-about.c:366
+msgid "The name of the program"
+msgstr "Бағдарламаның аты"
+
+#: ../libgnomeui/gnome-about.c:373
+msgid "Program version"
+msgstr "Бағдарлама нұсқасы"
+
+#: ../libgnomeui/gnome-about.c:374
+msgid "The version of the program"
+msgstr "Бағдарламаның нұсқасы"
+
+#: ../libgnomeui/gnome-about.c:380
+msgid "Copyright string"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:381
+msgid "Copyright information for the program"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:388
+msgid "Comments string"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:389
+msgid "Comments about the program"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:395
+msgid "Authors"
+msgstr "Авторлары"
+
+#: ../libgnomeui/gnome-about.c:396
+msgid "List of authors of the programs"
+msgstr "Бағдарлама авторларының тізімі"
+
+#: ../libgnomeui/gnome-about.c:398
+msgid "Author entry"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:399
+msgid "A single author entry"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:406
+msgid "Documenters"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:407
+msgid "List of people documenting the program"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:409
+msgid "Documenter entry"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:410
+msgid "A single documenter entry"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:418
+msgid "Translator credits"
+msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2010"
+
+#: ../libgnomeui/gnome-about.c:419
+msgid "Credits to the translators. This string should be marked as translatable"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:426
+#: ../libgnomeui/gnome-druid-page-standard.c:123
+msgid "Logo"
+msgstr "Лого"
+
+#: ../libgnomeui/gnome-about.c:427
+msgid "A logo for the about box"
+msgstr ""
+
+#: ../libgnomeui/gnome-about.c:506
+#, c-format
+msgid "About %s"
+msgstr "%s туралы"
+
+#. Some standard menus
+#: ../libgnomeui/gnome-app-helper.c:85
+#: ../libgnomeui/gnome-app-helper.h:551
+#: ../test-gnome/testgnome.xml.h:5
+msgid "_File"
+msgstr "_Файл"
+
+#: ../libgnomeui/gnome-app-helper.c:86
+msgid "_File/"
+msgstr "_Файл/"
+
+#: ../libgnomeui/gnome-app-helper.c:87
+#: ../libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "Тү_зету"
+
+#: ../libgnomeui/gnome-app-helper.c:88
+msgid "_Edit/"
+msgstr "Тү_зету/"
+
+#: ../libgnomeui/gnome-app-helper.c:89
+#: ../libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "_Түрі"
+
+#: ../libgnomeui/gnome-app-helper.c:90
+msgid "_View/"
+msgstr "_Түрі/"
+
+#: ../libgnomeui/gnome-app-helper.c:91
+#: ../libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "Ба_птаулар"
+
+#: ../libgnomeui/gnome-app-helper.c:92
+msgid "_Settings/"
+msgstr "Ба_птаулар/"
+
+#. If you have more then one New type, use this tree
+#: ../libgnomeui/gnome-app-helper.c:93
+#: ../libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "Ж_аңа"
+
+#: ../libgnomeui/gnome-app-helper.c:94
+msgid "_New/"
+msgstr "Ж_аңа/"
+
+#: ../libgnomeui/gnome-app-helper.c:95
+#: ../libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "Файл_дар"
+
+#: ../libgnomeui/gnome-app-helper.c:96
+msgid "Fi_les/"
+msgstr "Файл_дар/"
+
+#: ../libgnomeui/gnome-app-helper.c:97
+#: ../libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "_Терезелер"
+
+#: ../libgnomeui/gnome-app-helper.c:98
+#: ../libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "О_йын"
+
+#: ../libgnomeui/gnome-app-helper.c:99
+#: ../libgnomeui/gnome-app-helper.h:569
+#: ../test-gnome/testgnome.xml.h:6
+msgid "_Help"
+msgstr "_Көмек"
+
+#: ../libgnomeui/gnome-app-helper.c:100
+msgid "_Windows/"
+msgstr "_Терезелер/"
+
+#. Open
+#: ../libgnomeui/gnome-app-helper.c:112
+msgid "_Open..."
+msgstr "А_шу..."
+
+#: ../libgnomeui/gnome-app-helper.c:112
+msgid "Open a file"
+msgstr "Файлды ашу"
+
+#. Save
+#: ../libgnomeui/gnome-app-helper.c:117
+msgid "_Save"
+msgstr "_Сақтау"
+
+#: ../libgnomeui/gnome-app-helper.c:117
+msgid "Save the current file"
+msgstr ""
+
+#. Save As
+#: ../libgnomeui/gnome-app-helper.c:122
+msgid "Save _As..."
+msgstr "Қала_йша сақтау"
+
+#: ../libgnomeui/gnome-app-helper.c:123
+msgid "Save the current file with a different name"
+msgstr ""
+
+#. Revert
+#: ../libgnomeui/gnome-app-helper.c:128
+msgid "_Revert"
+msgstr "Қай_тару"
+
+#: ../libgnomeui/gnome-app-helper.c:129
+msgid "Revert to a saved version of the file"
+msgstr ""
+
+#. Print
+#: ../libgnomeui/gnome-app-helper.c:134
+msgid "_Print..."
+msgstr "Бас_паға шығару..."
+
+#: ../libgnomeui/gnome-app-helper.c:134
+msgid "Print the current file"
+msgstr ""
+
+#. Print Setup
+#: ../libgnomeui/gnome-app-helper.c:139
+msgid "Print S_etup..."
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:140
+msgid "Setup the page settings for your current printer"
+msgstr ""
+
+#. Close
+#: ../libgnomeui/gnome-app-helper.c:145
+msgid "_Close"
+msgstr "_Жабу"
+
+#: ../libgnomeui/gnome-app-helper.c:145
+msgid "Close the current file"
+msgstr "Ағымдағы файлды жабу"
+
+#. Exit
+#: ../libgnomeui/gnome-app-helper.c:150
+msgid "_Quit"
+msgstr "_Шығу"
+
+#: ../libgnomeui/gnome-app-helper.c:150
+msgid "Quit the application"
+msgstr ""
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: ../libgnomeui/gnome-app-helper.c:158
+msgid "Cu_t"
+msgstr "Қ_иып алу"
+
+#: ../libgnomeui/gnome-app-helper.c:158
+msgid "Cut the selection"
+msgstr "Ерекшелеуді қиып алу"
+
+#. 10
+#. Copy
+#: ../libgnomeui/gnome-app-helper.c:164
+msgid "_Copy"
+msgstr "_Көшіру"
+
+#: ../libgnomeui/gnome-app-helper.c:164
+msgid "Copy the selection"
+msgstr "Ерекшелеуді көшіру"
+
+#. Paste
+#: ../libgnomeui/gnome-app-helper.c:169
+msgid "_Paste"
+msgstr "Кірі_стіру"
+
+#: ../libgnomeui/gnome-app-helper.c:169
+msgid "Paste the clipboard"
+msgstr "Алмасу буферінен кірістіру"
+
+#. Clear
+#: ../libgnomeui/gnome-app-helper.c:174
+msgid "C_lear"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:174
+msgid "Clear the selection"
+msgstr ""
+
+#. Undo
+#: ../libgnomeui/gnome-app-helper.c:179
+msgid "_Undo"
+msgstr "Бол_дырмау"
+
+#: ../libgnomeui/gnome-app-helper.c:179
+msgid "Undo the last action"
+msgstr ""
+
+#. Redo
+#: ../libgnomeui/gnome-app-helper.c:184
+msgid "_Redo"
+msgstr "Қа_йталау"
+
+#: ../libgnomeui/gnome-app-helper.c:184
+msgid "Redo the undone action"
+msgstr ""
+
+#. Find
+#: ../libgnomeui/gnome-app-helper.c:189
+msgid "_Find..."
+msgstr "Та_бу..."
+
+#: ../libgnomeui/gnome-app-helper.c:189
+msgid "Search for a string"
+msgstr ""
+
+#. Find Again
+#: ../libgnomeui/gnome-app-helper.c:194
+msgid "Find Ne_xt"
+msgstr "Ке_лесіні табу"
+
+#: ../libgnomeui/gnome-app-helper.c:195
+msgid "Search again for the same string"
+msgstr ""
+
+#. Replace
+#: ../libgnomeui/gnome-app-helper.c:200
+msgid "R_eplace..."
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:200
+msgid "Replace a string"
+msgstr ""
+
+#. Properties
+#: ../libgnomeui/gnome-app-helper.c:205
+msgid "_Properties"
+msgstr "Қас_иеттері"
+
+#: ../libgnomeui/gnome-app-helper.c:206
+msgid "Modify the file's properties"
+msgstr ""
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: ../libgnomeui/gnome-app-helper.c:214
+msgid "Prefere_nces"
+msgstr "Бап_таулар"
+
+#: ../libgnomeui/gnome-app-helper.c:215
+msgid "Configure the application"
+msgstr ""
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: ../libgnomeui/gnome-app-helper.c:224
+#: ../test-gnome/testgnome.xml.h:4
+msgid "_About"
+msgstr "О_сы туралы"
+
+#: ../libgnomeui/gnome-app-helper.c:225
+#: ../test-gnome/testgnome.xml.h:1
+msgid "About this application"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:228
+msgid "Select _All"
+msgstr "Б_арлығын таңдау"
+
+#: ../libgnomeui/gnome-app-helper.c:229
+msgid "Select everything"
+msgstr ""
+
+#.
+#. * Window menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:237
+msgid "Create New _Window"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:238
+msgid "Create a new window"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:242
+msgid "_Close This Window"
+msgstr "Бұ_л терезені жабу"
+
+#: ../libgnomeui/gnome-app-helper.c:243
+#: ../test-gnome/testgnome.xml.h:2
+msgid "Close the current window"
+msgstr ""
+
+#.
+#. * The "Game" menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:251
+msgid "_New Game"
+msgstr "Ж_аңа ойын"
+
+#: ../libgnomeui/gnome-app-helper.c:252
+msgid "Start a new game"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:256
+msgid "_Pause Game"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:257
+msgid "Pause the game"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:261
+msgid "_Restart Game"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:262
+msgid "Restart the game"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:266
+msgid "_Undo Move"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:267
+msgid "Undo the last move"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:271
+msgid "_Redo Move"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:272
+msgid "Redo the undone move"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:276
+#, fuzzy
+msgid "_Hint"
+msgstr "Ережелер туралы"
+
+#: ../libgnomeui/gnome-app-helper.c:277
+msgid "Get a hint for your next move"
+msgstr ""
+
+#. 30
+#: ../libgnomeui/gnome-app-helper.c:282
+msgid "_Scores..."
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:283
+msgid "View the scores"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:287
+msgid "_End Game"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:288
+msgid "End the current game"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:1150
+msgid "_Contents"
+msgstr "Құра_масы"
+
+#: ../libgnomeui/gnome-app-helper.c:1153
+msgid "View help for this application"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:2524
+msgid "Text Below Icons"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:2525
+msgid "Priority Text Beside Icons"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-helper.c:2526
+msgid "Icons Only"
+msgstr "Тек таңбашалар"
+
+#: ../libgnomeui/gnome-app-helper.c:2527
+msgid "Text Only"
+msgstr "Тек мәтін"
+
+#: ../libgnomeui/gnome-app-helper.c:2588
+#, c-format
+msgid "Use Desktop Default (%s)"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-util.c:98
+msgid " (press return)"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-util.c:140
+msgid "ERROR: "
+msgstr "ҚАТЕ: "
+
+#: ../libgnomeui/gnome-app-util.c:177
+msgid "Warning: "
+msgstr "Ескерту"
+
+#: ../libgnomeui/gnome-app-util.c:315
+msgid "y"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-util.c:316
+msgid "yes"
+msgstr "иә"
+
+#: ../libgnomeui/gnome-app-util.c:319
+msgid "n"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-util.c:320
+msgid "no"
+msgstr "жоқ"
+
+#: ../libgnomeui/gnome-app-util.c:355
+msgid " (yes or no)"
+msgstr " (иә не жоқ)"
+
+#: ../libgnomeui/gnome-app-util.c:356
+msgid "  - OK? (yes or no)"
+msgstr ""
+
+#: ../libgnomeui/gnome-app-util.c:684
+msgid "Progress"
+msgstr "Барысы"
+
+#: ../libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr ""
+
+#: ../libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr ""
+
+#: ../libgnomeui/gnome-appbar.c:743
+msgid "Has Progress"
+msgstr ""
+
+#: ../libgnomeui/gnome-appbar.c:744
+msgid "Create a progress widget."
+msgstr ""
+
+#: ../libgnomeui/gnome-appbar.c:751
+msgid "Has Status"
+msgstr ""
+
+#: ../libgnomeui/gnome-appbar.c:752
+msgid "Create a status widget."
+msgstr ""
+
+#: ../libgnomeui/gnome-appbar.c:759
+msgid "Interactivity"
+msgstr ""
+
+#: ../libgnomeui/gnome-appbar.c:760
+msgid "Level of user activity required."
+msgstr ""
+
+#: ../libgnomeui/gnome-authentication-manager.c:84
+#, c-format
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr ""
+
+#: ../libgnomeui/gnome-authentication-manager.c:85
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+
+#: ../libgnomeui/gnome-authentication-manager.c:88
+msgid "Your password will be transmitted unencrypted."
+msgstr ""
+
+#: ../libgnomeui/gnome-authentication-manager.c:89
+msgid "Your password will be transmitted encrypted."
+msgstr ""
+
+#: ../libgnomeui/gnome-authentication-manager.c:92
+#: ../libgnomeui/gnome-authentication-manager.c:311
+msgid "Authentication Required"
+msgstr "Аутентификация керек"
+
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:303
+#, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr ""
+
+#: ../libgnomeui/gnome-authentication-manager.c:305
+#, c-format
+msgid "You must log in to access %s\n"
+msgstr ""
+
+#: ../libgnomeui/gnome-client.c:1000
+#: ../libgnomeui/gnome-client.c:1034
+msgid "Specify session management ID"
+msgstr "Сессия менеджментінің ID-і"
+
+#: ../libgnomeui/gnome-client.c:1000
+#: ../libgnomeui/gnome-client.c:1034
+msgid "ID"
+msgstr "ID"
+
+#: ../libgnomeui/gnome-client.c:1003
+#: ../libgnomeui/gnome-client.c:1037
+msgid "Specify prefix of saved configuration"
+msgstr ""
+
+#: ../libgnomeui/gnome-client.c:1003
+#: ../libgnomeui/gnome-client.c:1037
+msgid "PREFIX"
+msgstr "PREFIX"
+
+#: ../libgnomeui/gnome-client.c:1006
+#: ../libgnomeui/gnome-client.c:1040
+msgid "Disable connection to session manager"
+msgstr "Сессиялар менеджеріне байланыстарды сөндіру"
+
+#: ../libgnomeui/gnome-client.c:1014
+msgid "Session management:"
+msgstr "Сессияларды басқару"
+
+#: ../libgnomeui/gnome-client.c:1015
+msgid "Show session management options"
+msgstr "Сессия менеджмент опцияларын көрсету"
+
+#: ../libgnomeui/gnome-client.c:1046
+msgid "Session management"
+msgstr "Сессияларды басқару"
+
+#: ../libgnomeui/gnome-client.c:2580
+msgid "Cancel Logout"
+msgstr ""
+
+#: ../libgnomeui/gnome-color-picker.c:404
+msgid "Received invalid color data\n"
+msgstr "Алынған түс мәні қате\n"
+
+#: ../libgnomeui/gnome-color-picker.c:458
+msgid "Open a dialog to specify the color"
+msgstr "Түсті таңдау үшін сұхбат терезесін ашу"
+
+#: ../libgnomeui/gnome-color-picker.c:480
+msgid "Pick a color"
+msgstr "Түсті таңдаңыз"
+
+#: ../libgnomeui/gnome-dateedit.c:497
+#: ../libgnomeui/gnome-dateedit.c:804
+msgid "Time"
+msgstr "Уақыт"
+
+#: ../libgnomeui/gnome-dateedit.c:498
+msgid "The time currently selected"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:510
+msgid "DateEdit Flags"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:511
+msgid "Flags for how DateEdit looks"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:520
+msgid "Lower Hour"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:521
+msgid "Lower hour in the time popup selector"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:531
+msgid "Upper Hour"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:532
+msgid "Upper hour in the time popup selector"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:542
+msgid "Initial Time"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:543
+msgid "The initial time"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:767
+#: ../libgnomeui/gnome-scores.c:96
+msgid "Date"
+msgstr "Күн"
+
+#: ../libgnomeui/gnome-dateedit.c:780
+msgid "Select Date"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:780
+msgid "Select the date from a calendar"
+msgstr ""
+
+#. Calendar label, only shown if the date editor has a time field
+#: ../libgnomeui/gnome-dateedit.c:791
+msgid "Calendar"
+msgstr "Күнтізбе"
+
+#: ../libgnomeui/gnome-dateedit.c:812
+msgid "Select Time"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:812
+msgid "Select the time from a list"
+msgstr ""
+
+#: ../libgnomeui/gnome-dateedit.c:1031
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:115
+#: ../libgnomeui/gnome-font-picker.c:147
+msgid "Title"
+msgstr "Атауы"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:116
+msgid "Title of the druid"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:124
+msgid "Logo image"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:131
+msgid "Top Watermark"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:132
+msgid "Watermark image for the top"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:139
+msgid "Title Foreground"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:140
+msgid "Foreground color of the title"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:147
+msgid "Title Foreground Color"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:148
+msgid "Foreground color of the title as a GdkColor"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:155
+msgid "Title Foreground color set"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:156
+msgid "Foreground color of the title is set"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:163
+#: ../libgnomeui/gnome-druid-page-standard.c:171
+msgid "Background Color"
+msgstr "Фон түсі"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:164
+msgid "Background color"
+msgstr "Фон түсі"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:172
+msgid "Background color as a GdkColor"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:179
+msgid "Background color set"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:180
+msgid "Background color is set"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:187
+#: ../libgnomeui/gnome-druid-page-standard.c:195
+msgid "Contents Background Color"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:188
+msgid "Contents Background color"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:196
+msgid "Contents Background color as a GdkColor"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:203
+msgid "Contents Background color set"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:204
+msgid "Contents Background color is set"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:210
+#: ../libgnomeui/gnome-druid-page-standard.c:218
+msgid "Logo Background Color"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:211
+msgid "Logo Background color"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:219
+msgid "Logo Background color as a GdkColor"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:226
+msgid "Logo Background color set"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid-page-standard.c:227
+msgid "Logo Background color is set"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid.c:153
+msgid "Show Finish"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid.c:154
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr ""
+
+#: ../libgnomeui/gnome-druid.c:161
+msgid "Show Help"
+msgstr "Көмекті көрсету"
+
+#: ../libgnomeui/gnome-druid.c:162
+msgid "Show the 'Help' button"
+msgstr ""
+
+#: ../libgnomeui/gnome-entry.c:192
+#: ../libgnomeui/gnome-entry.c:193
+#: ../libgnomeui/gnome-file-entry.c:233
+#: ../libgnomeui/gnome-icon-entry.c:169
+msgid "History ID"
+msgstr ""
+
+#: ../libgnomeui/gnome-entry.c:199
+msgid "GTK entry"
+msgstr ""
+
+#: ../libgnomeui/gnome-entry.c:200
+msgid "The GTK entry"
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:234
+msgid "Unique identifier for the file entry.  This will be used to save the history list."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:242
+#: ../libgnomeui/gnome-icon-entry.c:178
+msgid "Browse Dialog Title"
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:243
+msgid "Title for the Browse file dialog."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:250
+msgid "Directory Entry"
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:251
+msgid "Whether the file entry is being used to enter directory names or complete filenames."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:259
+msgid "Modal"
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:260
+msgid "Whether the Browse file window should be modal."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:267
+#: ../libgnomeui/gnome-icon-entry.c:194
+msgid "Filename"
+msgstr "Файл аты"
+
+#: ../libgnomeui/gnome-file-entry.c:268
+msgid "Filename that should be displayed in the file entry."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:276
+msgid "Default Path"
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:277
+msgid "Default path for the Browse file window."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:284
+msgid "GnomeEntry"
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:285
+msgid "GnomeEntry that the file entry uses for entering filenames.  You can use this property to get the GnomeEntry if you need to modify or query any of its parameters."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:295
+msgid "GtkEntry"
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:296
+msgid "GtkEntry that the file entry uses for entering filenames.  You can use this property to get the GtkEntry if you need to modify or query any of its parameters."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:306
+msgid "Use GtkFileChooser"
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:307
+msgid "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget to select files."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:316
+msgid "GtkFileChooser Action"
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:317
+msgid "The type of operation that the file selector is performing."
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:652
+#: ../libgnomeui/gnome-file-entry.c:689
+msgid "Select file"
+msgstr "Файлды таңдаңыз"
+
+#: ../libgnomeui/gnome-file-entry.c:814
+msgid "Path"
+msgstr "Жол"
+
+#: ../libgnomeui/gnome-file-entry.c:814
+msgid "Path to file"
+msgstr ""
+
+#: ../libgnomeui/gnome-file-entry.c:843
+msgid "_Browse..."
+msgstr "Қара_п шығу..."
+
+#: ../libgnomeui/gnome-file-entry.c:844
+msgid "Pop up a file selector to choose a file"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:58
+msgid "sans 12"
+msgstr "sans 12"
+
+#: ../libgnomeui/gnome-font-picker.c:59
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:60
+msgid "Pick a Font"
+msgstr "Қаріпті таңдаңыз"
+
+#: ../libgnomeui/gnome-font-picker.c:148
+msgid "The title of the selection dialog box"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:156
+msgid "Mode"
+msgstr "Режимі"
+
+#: ../libgnomeui/gnome-font-picker.c:157
+msgid "The mode of operation of the font picker"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:166
+msgid "Font name"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:167
+msgid "Name of the selected font"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:176
+#: ../libgnomeui/gnome-font-picker.c:972
+msgid "Font"
+msgstr "Қаріп"
+
+#: ../libgnomeui/gnome-font-picker.c:177
+msgid "The selected GtkFont"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:184
+msgid "Preview text"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:185
+msgid "Preview text shown in the dialog"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:193
+msgid "Use font in label"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:194
+msgid "Use font in the label in font info mode"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:202
+msgid "Font size for label"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:203
+msgid "Font size for label in font info mode"
+msgstr ""
+
+#: ../libgnomeui/gnome-font-picker.c:213
+msgid "Show size"
+msgstr "Өлшемін көрсету"
+
+#: ../libgnomeui/gnome-font-picker.c:214
+msgid "Show size in font info mode"
+msgstr ""
+
+#: ../libgnomeui/gnome-gconf-ui.c:61
+msgid "GNOME GConf UI Support"
+msgstr ""
+
+#: ../libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "Көбір_ек"
+
+#: ../libgnomeui/gnome-gconf-ui.c:171
+#, c-format
+msgid "The application \"%s\" attempted to change an aspect of your configuration that your system administrator or operating system vendor does not allow you to change. Some of the settings you have selected may not take effect, or may not be restored next time you use the application."
+msgstr ""
+
+#: ../libgnomeui/gnome-gconf-ui.c:178
+#, c-format
+msgid "An error occurred while loading or saving configuration information for %s. Some of your configuration settings may not work properly."
+msgstr ""
+
+#: ../libgnomeui/gnome-href.c:102
+msgid "URL"
+msgstr "URL"
+
+#: ../libgnomeui/gnome-href.c:103
+msgid "The URL that GnomeHRef activates"
+msgstr ""
+
+#: ../libgnomeui/gnome-href.c:110
+msgid "Text"
+msgstr "Мәтін"
+
+#: ../libgnomeui/gnome-href.c:111
+msgid "The text on the button"
+msgstr ""
+
+#: ../libgnomeui/gnome-href.c:112
+msgid "End World Hunger"
+msgstr ""
+
+#: ../libgnomeui/gnome-href.c:118
+msgid "Link color"
+msgstr ""
+
+#: ../libgnomeui/gnome-href.c:119
+msgid "Color used to draw the link"
+msgstr ""
+
+#: ../libgnomeui/gnome-href.c:150
+msgid "This button will take you to the URI that it displays."
+msgstr ""
+
+#: ../libgnomeui/gnome-href.c:386
+msgid ""
+"An error has occurred while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:170
+msgid "Unique identifier for the icon entry.  This will be used to save the history list."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:179
+msgid "Title for the Browse icon dialog."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:186
+msgid "Pixmap Directory"
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:187
+msgid "Directory that will be searched for icons."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:195
+msgid "Filename that should be displayed in the icon entry."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:203
+msgid "Picker dialog"
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:204
+msgid "Icon picker dialog.  You can use this property to get the GtkDialog if you need to modify or query any of its properties."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:312
+#: ../libgnomeui/gnome-icon-entry.c:996
+msgid "Choose Icon"
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:766
+msgid "Icon selection dialog"
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:767
+msgid "This dialog box lets you select an icon."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:773
+#: ../libgnomeui/gnome-icon-entry.c:999
+msgid "Icon Selector"
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:774
+msgid "Please pick the icon you want."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:1000
+msgid "This button will open a window to let you select an icon."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:1022
+msgid "Browse"
+msgstr "Қарап шығу"
+
+#: ../libgnomeui/gnome-icon-entry.c:1025
+msgid "Icon path"
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-entry.c:1026
+msgid "Here you should enter the name of the directory where icon images are located."
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-sel.c:293
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-sel.c:301
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr ""
+
+#: ../libgnomeui/gnome-icon-sel.c:405
+msgid "Loading Icons..."
+msgstr ""
+
+#: ../libgnomeui/gnome-messagebox.c:107
+msgid "Information"
+msgstr "Ақпарат"
+
+#: ../libgnomeui/gnome-messagebox.c:112
+msgid "Warning"
+msgstr "Ескерту"
+
+#: ../libgnomeui/gnome-messagebox.c:118
+msgid "Error"
+msgstr "Қате"
+
+#: ../libgnomeui/gnome-messagebox.c:124
+msgid "Question"
+msgstr "Сұрақ"
+
+#: ../libgnomeui/gnome-messagebox.c:129
+msgid "Message"
+msgstr "Хабарлама"
+
+#: ../libgnomeui/gnome-password-dialog.c:196
+msgid "_Username:"
+msgstr "_Пайдаланушы аты:"
+
+#: ../libgnomeui/gnome-password-dialog.c:199
+msgid "_Domain:"
+msgstr "До_мен:"
+
+#: ../libgnomeui/gnome-password-dialog.c:202
+msgid "_Password:"
+msgstr "_Пароль:"
+
+#: ../libgnomeui/gnome-password-dialog.c:205
+msgid "_New password:"
+msgstr "Жаңа _пароль:"
+
+#: ../libgnomeui/gnome-password-dialog.c:206
+msgid "Con_firm password:"
+msgstr ""
+
+#: ../libgnomeui/gnome-password-dialog.c:209
+msgid "Password quality:"
+msgstr ""
+
+#: ../libgnomeui/gnome-password-dialog.c:324
+msgid "Co_nnect"
+msgstr ""
+
+#: ../libgnomeui/gnome-password-dialog.c:357
+msgid "Connect _anonymously"
+msgstr ""
+
+#: ../libgnomeui/gnome-password-dialog.c:362
+msgid "Connect as u_ser:"
+msgstr ""
+
+#: ../libgnomeui/gnome-password-dialog.c:424
+msgid "_Forget password immediately"
+msgstr "Парольді _көп ұзамай ұмыту"
+
+#: ../libgnomeui/gnome-password-dialog.c:430
+msgid "_Remember password until you logout"
+msgstr ""
+
+#: ../libgnomeui/gnome-password-dialog.c:436
+msgid "_Remember forever"
+msgstr "Әрқаша_нға есте сақтау"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:104
+msgid "Do Preview"
+msgstr ""
+
+#: ../libgnomeui/gnome-pixmap-entry.c:105
+msgid "Whether the pixmap entry should have a preview."
+msgstr ""
+
+#: ../libgnomeui/gnome-pixmap-entry.c:179
+#: ../libgnomeui/gnome-pixmap-entry.c:473
+msgid "No Image"
+msgstr ""
+
+#: ../libgnomeui/gnome-pixmap-entry.c:196
+msgid "Image Preview"
+msgstr ""
+
+#: ../libgnomeui/gnome-pixmap-entry.c:197
+msgid "A preview of the image currently specified"
+msgstr ""
+
+#: ../libgnomeui/gnome-pixmap-entry.c:408
+msgid "Can't find an hbox, using a normal file selection"
+msgstr ""
+
+#: ../libgnomeui/gnome-pixmap-entry.c:414
+msgid "Preview"
+msgstr "Алдын-ала қарау"
+
+#: ../libgnomeui/gnome-scores.c:77
+msgid "Top Ten"
+msgstr ""
+
+#: ../libgnomeui/gnome-scores.c:90
+msgid "User"
+msgstr "Пайдаланушы"
+
+#: ../libgnomeui/gnome-scores.c:93
+msgid "Score"
+msgstr "Нәтиже"
+
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: ../libgnomeui/gnome-scores.c:193
+msgid "%a %b %d %T %Y"
+msgstr ""
+
+#: ../libgnomeui/gnome-scores.c:394
+msgid "Sans 14"
+msgstr ""
+
+#: ../libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr ""
+
+#: ../libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr ""
+
+#: ../libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr ""
+
+#: ../libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr ""
+
+#: ../libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr ""
+
+#: ../libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr ""
+
+#: ../libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "Осы туралы"
+
+#: ../libgnomeui/gnome-ui-init.c:134
+#: ../libgnomeui/gnome-ui-init.c:160
+msgid "Disable Crash Dialog"
+msgstr ""
+
+#: ../libgnomeui/gnome-ui-init.c:143
+msgid "GNOME GUI Library:"
+msgstr ""
+
+#: ../libgnomeui/gnome-ui-init.c:144
+msgid "Show GNOME GUI options"
+msgstr ""
+
+#: ../libgnomeui/gnome-ui-init.c:162
+msgid "X display to use"
+msgstr "Қолданылатын X дисплейі"
+
+#: ../libgnomeui/gnome-ui-init.c:162
+msgid "DISPLAY"
+msgstr "DISPLAY"
+
+#: ../libgnomeui/gnome-ui-init.c:167
+msgid "GNOME GUI Library"
+msgstr ""
+
+#: ../libgnomeui/gnome-ui-init.c:232
+msgid "Could not open link"
+msgstr ""
+
+#: ../test-gnome/testgnome.xml.h:3
+msgid "Exit the test"
+msgstr ""
+
