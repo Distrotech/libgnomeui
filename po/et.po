@@ -1005,7 +1005,7 @@ msgstr "GnomeIconSelection: '%s' ei ole olemas või pole tegemist kataloogiga"
 
 #, c-format
 msgid "GnomeIconSelection: couldn't open directory '%s'"
-msgstr "GnomeIconSelection: kausta '%s' ei suudeta avada"
+msgstr "GnomeIconSelection: kausta '%s' pole võimalik avada"
 
 msgid "Loading Icons..."
 msgstr "Ikoonide laadimine..."
