@@ -1,3 +1,8 @@
+libgnomeui 2.24.4
+
+* New and updated translations
+  (ca, br, eo, et, in, ja, kk, or, pt_BR, sh, ug)
+
 libgnomeui 2.24.3
 
 * Enable silent build using AM_SILENT_RULES (Christian Persch)
