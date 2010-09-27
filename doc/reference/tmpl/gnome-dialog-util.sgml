@@ -17,6 +17,9 @@ gnome-dialog-util
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gnome_ok_dialog ##### -->
 <para>
 

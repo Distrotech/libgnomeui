@@ -20,6 +20,9 @@ setting window titles may be added.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gnome_window_toplevel_set_title ##### -->
 <para>
 

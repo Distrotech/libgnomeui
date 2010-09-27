@@ -17,11 +17,15 @@ GnomeAuthentication
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gnome_authentication_manager_init ##### -->
 <para>
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gnome_authentication_manager_dialog_is_visible ##### -->
@@ -29,6 +33,7 @@ GnomeAuthentication
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -37,6 +42,7 @@ GnomeAuthentication
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gnome_authentication_manager_pop_sync ##### -->
@@ -44,6 +50,7 @@ GnomeAuthentication
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gnome_authentication_manager_push_async ##### -->
@@ -51,6 +58,7 @@ GnomeAuthentication
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gnome_authentication_manager_push_sync ##### -->
@@ -58,5 +66,6 @@ GnomeAuthentication
 
 </para>
 
+@void: 
 
 

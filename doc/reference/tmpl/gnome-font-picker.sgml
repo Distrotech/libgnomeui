@@ -17,6 +17,9 @@ GnomeFontPicker
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### ENUM GnomeFontPickerMode ##### -->
 <para>
 
@@ -92,6 +95,7 @@ GnomeFontPicker
 
 </para>
 
+@void: 
 @Returns: 
 
 

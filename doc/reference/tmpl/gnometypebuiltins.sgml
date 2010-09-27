@@ -17,6 +17,9 @@ gnometypebuiltins
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO GNOME_TYPE_UI_INFO_TYPE ##### -->
 <para>
 
@@ -29,6 +32,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -44,6 +48,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -59,6 +64,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -74,6 +80,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -89,6 +96,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -104,6 +112,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -119,6 +128,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -134,6 +144,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -149,6 +160,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -164,6 +176,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -179,6 +192,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -194,6 +208,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -209,6 +224,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -224,6 +240,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -239,6 +256,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -254,6 +272,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -269,6 +288,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -284,6 +304,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -299,6 +320,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -314,6 +336,7 @@ gnometypebuiltins
 
 </para>
 
+@void: 
 @Returns: 
 
 

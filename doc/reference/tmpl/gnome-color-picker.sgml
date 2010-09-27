@@ -17,6 +17,9 @@ GnomeColorPicker
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT GnomeColorPicker ##### -->
 <para>
 
@@ -74,6 +77,7 @@ GnomeColorPicker
 
 </para>
 
+@void: 
 @Returns: 
 
 

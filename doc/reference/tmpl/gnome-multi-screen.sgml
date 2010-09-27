@@ -17,6 +17,9 @@ GnomeMultiScreen
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### FUNCTION gnome_url_show_on_screen ##### -->
 <para>
 

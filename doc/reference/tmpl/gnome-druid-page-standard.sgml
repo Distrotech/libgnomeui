@@ -34,6 +34,9 @@ than just displaying text (which is the common case for edge pages).
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT GnomeDruidPageStandard ##### -->
 <para>
 
@@ -152,6 +155,7 @@ should use that function directly.
 
 </para>
 
+@void: 
 @Returns: 
 
 

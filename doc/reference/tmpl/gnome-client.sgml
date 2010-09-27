@@ -17,6 +17,9 @@ Interactions with the session manager.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO GNOME_CLIENT_CONNECTED ##### -->
 <para>
 Determine if the #GnomeClient instance has connected to the session manager
@@ -177,6 +180,7 @@ connect to the session manager or not. Can be overridden by the user passing
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -203,6 +207,7 @@ connect to the session manager or not. Can be overridden by the user passing
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -413,6 +418,7 @@ gnome_client_set_discard_command (client, 3, argv);
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gnome_client_new ##### -->
@@ -420,6 +426,7 @@ gnome_client_set_discard_command (client, 3, argv);
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -428,6 +435,7 @@ gnome_client_set_discard_command (client, 3, argv);
 
 </para>
 
+@void: 
 @Returns: 
 
 

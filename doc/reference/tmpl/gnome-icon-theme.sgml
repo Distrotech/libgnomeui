@@ -17,6 +17,9 @@ GnomeIconTheme
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT GnomeIconThemeClass ##### -->
 <para>
 
@@ -36,6 +39,7 @@ GnomeIconTheme
 
 </para>
 
+@void: 
 @Returns: 
 
 

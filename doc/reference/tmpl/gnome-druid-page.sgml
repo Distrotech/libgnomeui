@@ -22,6 +22,9 @@ the subsequent pages depend upon the choice made at some point).
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT GnomeDruidPage ##### -->
 <para>
 The widget for a aprticular page in a druid.
@@ -79,6 +82,7 @@ all further emission of the signal), %FALSE otherwise.
 
 </para>
 
+@void: 
 @Returns: 
 
 

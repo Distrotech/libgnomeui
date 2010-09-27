@@ -17,6 +17,9 @@ Create a tabbed dialog for setting properties and preferences.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT GnomePropertyBox ##### -->
 <para>
 
@@ -44,6 +47,7 @@ Create a tabbed dialog for setting properties and preferences.
 
 </para>
 
+@void: 
 @Returns: 
 
 

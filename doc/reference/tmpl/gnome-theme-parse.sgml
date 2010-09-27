@@ -17,6 +17,9 @@ APIs to  parse icon theme files.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT GnomeThemeFile ##### -->
 <para>
 A GnomeThemeFile contains information about the number of sections, pointers to the sections
@@ -165,6 +168,7 @@ and information about the current locale.
 
 </para>
 
+@void: 
 @Returns: 
 
 

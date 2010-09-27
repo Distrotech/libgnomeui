@@ -20,6 +20,9 @@ or tool bars.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### ENUM GnomeUIInfoType ##### -->
 <para>
 
@@ -196,6 +199,7 @@ instance.
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION gnome_app_fill_menu ##### -->

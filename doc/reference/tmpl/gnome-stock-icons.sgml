@@ -17,6 +17,9 @@ Stock icons used across GNOME applications.
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO GNOME_STOCK_TIMER ##### -->
 <para>
 A "timer" icon.
