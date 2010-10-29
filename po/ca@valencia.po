@@ -1,23 +1,21 @@
-# translation of libgnomeui.master.po to catalan
 # Catalan translation of libgnomeui.
-# Copyright © 2002-2008, 2009 Free Software Foundation, Inc.
-#
+# Copyright © 2002-2008 Free Software Foundation, Inc.
 # Dani Vilar <32023dvr@comb.es>, 2002.
 # Jordi Mallach <jordi@sindominio.net>, 2002, 2003, 2004, 2005, 2006, 2007.
 # Gil Forcada <gilforcada@guifi.net>, 2008.
-# Carles Ferrando Garcia <carles.ferrando@gmail.com>, 2009.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: libgnomeui.master\n"
+"Project-Id-Version: libgnomeui 2.11.90\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-14 18:50+0200\n"
-"PO-Revision-Date: 2009-08-08 08:38+0200\n"
-"Last-Translator: Carles Ferrando Garcia <carles.ferrando@gmail.com>\n"
-"Language-Team: catalan <tradgnome@softcatala.org>\n"
+"POT-Creation-Date: 2010-10-29 21:30+0100\n"
+"PO-Revision-Date: 2010-04-02 18:38+0200\n"
+"Last-Translator: Gil Forcada <gilforcada@guifi.net>\n"
+"Language-Team:  Catalan <tradgnome@softcatala.org>\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
 
 #: ../demos/mdi_demo.c:128
 msgid "Child Item 1"
@@ -1107,7 +1105,7 @@ msgstr ""
 "L'aplicació «%s» ha intentat modificar un aspecte de la configuració que "
 "l'administrador del sistema o el proveïdor del sistema operatiu no vos "
 "permet canviar. Alguns dels paràmetres que heu seleccionat no tindran "
-"efecte, o pot ser que no es restauren la propera vegada que utilitzeu esta "
+"efecte, o pot ser que no es restaurin la propera vegada que utilitzeu esta "
 "aplicació."
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
@@ -1431,3 +1429,193 @@ msgstr "No s'ha pogut obrir l'enllaç"
 #: ../test-gnome/testgnome.xml.h:3
 msgid "Exit the test"
 msgstr "Ix del test"
+
+#~ msgid "%s is a link to something that is not a folder"
+#~ msgstr "%s és un enllaç a alguna cosa que no és una carpeta"
+
+#~ msgid "%s is a link without a destination location"
+#~ msgstr "%s és un enllaç sense destinació"
+
+#~ msgid "%s is not a folder"
+#~ msgstr "%s no és una carpeta"
+
+#~ msgid "Could not monitor '%s': %s"
+#~ msgstr "No s'ha pogut fer el seguiment de «%s»: %s"
+
+#~ msgid "Could not get info for '%s': %s"
+#~ msgstr "No s'ha pogut obtenir informació de «%s»: %s"
+
+#~ msgid "Could not create '%s': %s"
+#~ msgstr "No s'ha pogut crear «%s»: %s"
+
+#~ msgid "Network Servers"
+#~ msgstr "Servidors de xarxa"
+
+#~ msgid "File System"
+#~ msgstr "Sistema de fitxers"
+
+#~ msgid "'%s': %s"
+#~ msgstr "«%s»: %s"
+
+#~ msgid "Bookmark saving failed (%s)"
+#~ msgstr "Ha fallat en desar l'adreça d'interès (%s)"
+
+#~ msgid "Error getting information for '%s'"
+#~ msgstr "S'ha produït un error en obtenir informació de «%s»"
+
+#~ msgid "Could not get information for file '%s': %s"
+#~ msgstr "No s'ha pogut obtenir informació del fitxer «%s»: %s"
+
+#~ msgid "Failed to open file '%s': %s"
+#~ msgstr "No s'ha pogut obrir el fitxer «%s»: %s"
+
+#~ msgid ""
+#~ "Failed to load image '%s': reason not known, probably a corrupt image file"
+#~ msgstr ""
+#~ "No s'ha pogut carregar la imatge «%s»: es desconeix la raó, segurament "
+#~ "sigui una imatge malmesa"
+
+#~ msgid "Multiple segmentation faults occurred; can't display error dialog\n"
+#~ msgstr ""
+#~ "S'han produït múltiples violacions de segment; no es pot mostrar el "
+#~ "diàleg d'error\n"
+
+#~ msgid ""
+#~ "Segmentation fault!\n"
+#~ "Cannot display crash dialog\n"
+#~ msgstr ""
+#~ "S'ha produït una violació de segment\n"
+#~ "No es pot mostrar el diàleg d'error\n"
+
+#~ msgid "Usage: gnome_segv2 appname signum\n"
+#~ msgstr "Forma d'ús: gnome_segv2 nomapp numsig\n"
+
+#~ msgid "Debugging %s"
+#~ msgstr "S'està depurant %s"
+
+#~ msgid ""
+#~ "<b>The application %s has crashed.</b>\n"
+#~ "\n"
+#~ "Please install <b>bug-buddy</b>, the\n"
+#~ "GNOME crash report tool, which enables you\n"
+#~ "to send the developers detailed information\n"
+#~ "about the error.\n"
+#~ msgstr ""
+#~ "<b>L'aplicació %s ha fallat.</b>\n"
+#~ "\n"
+#~ "Tanmateix, no teniu instal·lat el <b>bug-buddy</b>,\n"
+#~ "l'eina d'informes d'error del GNOME, que permet\n"
+#~ "enviar informació detallada sobre l'error als\n"
+#~ "desenvolupadors de l'aplicació.\n"
+
+#~ msgid "Save password in _keyring"
+#~ msgstr "Desa la _contrasenya a l'anell de claus"
+
+#~ msgid ""
+#~ "The GNOME Session Manager (process %d) has crashed\n"
+#~ "due to a fatal error (%s).\n"
+#~ "When you close this dialog, all applications will close and your session "
+#~ "will exit.\n"
+#~ "Please save all your files before closing this dialog."
+#~ msgstr ""
+#~ "El gestor de sessió del GNOME (procés %d) ha fallat\n"
+#~ "degut a un error fatal (%s).\n"
+#~ "Quan tanqueu aquest diàleg, totes les aplicacions es tancaran i es "
+#~ "sortirà de la vostra sessió.\n"
+#~ "Deseu tots els vostres fitxers abans de tancar aquest diàleg."
+
+#~ msgid "The Application \"%s\" has quit unexpectedly."
+#~ msgstr "L'aplicació «%s» ha acabat inesperadament."
+
+#~ msgid "process %d: %s"
+#~ msgstr "procés: %d: %s"
+
+#~ msgid ""
+#~ "You can inform the developers of what happened to help them fix it.  Or "
+#~ "you can restart the application right now."
+#~ msgstr ""
+#~ "Podeu informar els desenvolupadors de què ha passat per a ajudar-los a "
+#~ "arreglar-ho. O podeu reiniciar l'aplicació ara mateix."
+
+#~ msgid "_Restart Application"
+#~ msgstr "_Reinicia l'aplicació"
+
+#~ msgid "_Inform Developers"
+#~ msgstr "_Informa els desenvolupadors"
+
+#~ msgid "_Debug"
+#~ msgstr "_Depuració"
+
+#~ msgid "Error reading file '%s': %s"
+#~ msgstr "S'ha produït un error en llegir el fitxer «%s»: %s"
+
+#~ msgid "Error rewinding file '%s': %s"
+#~ msgstr "S'ha produït un error en rebobinar el fitxer «%s»: %s"
+
+#~ msgid "No name"
+#~ msgstr "Sense nom"
+
+#~ msgid "File '%s' is not a regular file or directory."
+#~ msgstr "El fitxer «%s» no és un fitxer o directori regular."
+
+#~ msgid "Error cannot find file id '%s'"
+#~ msgstr "S'ha produït un error: no es trobat l'id del fitxer «%s»"
+
+#~ msgid "No filename to save to"
+#~ msgstr "No hi ha cap nom de fitxer per a desar"
+
+#~ msgid "Starting %s"
+#~ msgstr "S'està iniciant %s"
+
+#~ msgid "No URL to launch"
+#~ msgstr "No hi ha cap URL a llançar"
+
+#~ msgid "Not a launchable item"
+#~ msgstr "No és un element llançable"
+
+#~ msgid "No command (Exec) to launch"
+#~ msgstr "No hi ha una ordre (Exec) a llançar"
+
+#~ msgid "Bad command (Exec) to launch"
+#~ msgstr "L'ordre (Exec) a llançar és incorrecta"
+
+#~ msgid "Unknown encoding of: %s"
+#~ msgstr "Es desconeix la codificació de: %s"
+
+#~ msgid "Error writing file '%s': %s"
+#~ msgstr "S'ha produït un error en escriure el fitxer «%s»: %s"
+
+#~ msgid "History id"
+#~ msgstr "Historial d'identificació"
+
+#~ msgid "Icon selector"
+#~ msgstr "Seleccionador d'icones"
+
+#~ msgid " domain %s"
+#~ msgstr " domini %s"
+
+#~ msgid "Color Selector"
+#~ msgstr "Seleccionador de color"
+
+#~ msgid ""
+#~ "Application \"%s\" (process %d) has crashed\n"
+#~ "due to a fatal error.\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "L'aplicació «%s» (procés %d) ha fallat\n"
+#~ "degut a un error fatal.\n"
+#~ "(%s)"
+
+#~ msgid "Submit a bug report"
+#~ msgstr "Envia un informe d'error"
+
+#~ msgid "http://www.gnome.org/application_crashed.shtml"
+#~ msgstr "http://www.gnome.org/application_crashed.shtml"
+
+#~ msgid "Please visit the GNOME Application Crash page for more information"
+#~ msgstr ""
+#~ "Si us plau, visiteu la pàgina de Fallades d'Aplicació del GNOME per més "
+#~ "informació"
+
+#~ msgid "_Credits"
+#~ msgstr "_Crèdits"
