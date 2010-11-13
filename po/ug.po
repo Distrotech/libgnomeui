@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=libgnomeui&component=general\n"
-"POT-Creation-Date: 2010-09-27 18:33+0000\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=libgnomeui&component=general\n"
+"POT-Creation-Date: 2010-10-16 18:12+0000\n"
 "PO-Revision-Date: 2010-08-31 12:16+0000\n"
 "Last-Translator: Sahran <sahran@live.com>,2010\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -125,9 +124,7 @@ msgstr "تەرجىمانلار تەشەككۈرى"
 #: ../libgnomeui/gnome-about.c:419
 msgid ""
 "Credits to the translators. This string should be marked as translatable"
-msgstr ""
-"تەرجىمانلارغا تەشەككۈر. بۇ ھەرپ-بەلگىلەرنى تەرجىمە قىلىشقا بولىدىغانلىق "
-"بەلگىسى قويۇلىدۇ."
+msgstr "تەرجىمانلارغا تەشەككۈر. بۇ ھەرپ-بەلگىلەرنى تەرجىمە قىلىشقا بولىدىغانلىق بەلگىسى قويۇلىدۇ."
 
 #: ../libgnomeui/gnome-about.c:426
 #: ../libgnomeui/gnome-druid-page-standard.c:123
@@ -151,7 +148,7 @@ msgstr "ھۆججەت(_F)"
 
 #: ../libgnomeui/gnome-app-helper.c:86
 msgid "_File/"
-msgstr "_ھۆججەت/"
+msgstr "ھۆججەت(_F)/"
 
 #: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:554
 msgid "_Edit"
@@ -159,7 +156,7 @@ msgstr "تەھرىر(_E)"
 
 #: ../libgnomeui/gnome-app-helper.c:88
 msgid "_Edit/"
-msgstr "_تەھرىر/"
+msgstr "تەھرىر(_E)/"
 
 #: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:557
 msgid "_View"
@@ -167,7 +164,7 @@ msgstr "كۆرۈنۈش(_V)"
 
 #: ../libgnomeui/gnome-app-helper.c:90
 msgid "_View/"
-msgstr "كۆر_ئۈش/"
+msgstr "كۆرۈش(_V)/"
 
 #: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:560
 msgid "_Settings"
@@ -184,23 +181,23 @@ msgstr "يېڭى(_N)"
 
 #: ../libgnomeui/gnome-app-helper.c:94
 msgid "_New/"
-msgstr "_يېڭى/"
+msgstr "يېڭى(_N)/"
 
 #: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:563
 msgid "Fi_les"
-msgstr "ھۆججەت_لەر"
+msgstr "ھۆججەتلەر(_L)"
 
 #: ../libgnomeui/gnome-app-helper.c:96
 msgid "Fi_les/"
-msgstr "ھۆججەت_لەر/"
+msgstr "ھۆججەتلەر(_L)/"
 
 #: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:566
 msgid "_Windows"
-msgstr "_كۆزنەك"
+msgstr "كۆزنەك(_W)"
 
 #: ../libgnomeui/gnome-app-helper.c:98 ../libgnomeui/gnome-app-helper.h:572
 msgid "_Game"
-msgstr "_ئويۇن"
+msgstr "ئويۇن(_G)"
 
 #: ../libgnomeui/gnome-app-helper.c:99 ../libgnomeui/gnome-app-helper.h:569
 #: ../test-gnome/testgnome.xml.h:6
@@ -209,7 +206,7 @@ msgstr "ياردەم(_H)"
 
 #: ../libgnomeui/gnome-app-helper.c:100
 msgid "_Windows/"
-msgstr "_كۆزنەك/"
+msgstr "كۆزنەك(_W)/"
 
 #. Open
 #: ../libgnomeui/gnome-app-helper.c:112
@@ -259,7 +256,7 @@ msgstr "نۆۋەتتىكى ھۆججەتنى باس"
 #. Print Setup
 #: ../libgnomeui/gnome-app-helper.c:139
 msgid "Print S_etup..."
-msgstr "پرىنتېر تەڭ_شەك..."
+msgstr "پرىنتېر تەڭشەك(_E)..."
 
 #: ../libgnomeui/gnome-app-helper.c:140
 msgid "Setup the page settings for your current printer"
@@ -362,7 +359,7 @@ msgstr "ئوخشاش ھەرپ-بەلگىنى قايتا ئىزدە"
 #. Replace
 #: ../libgnomeui/gnome-app-helper.c:200
 msgid "R_eplace..."
-msgstr "ئالماشتۇر…"
+msgstr "ئالماشتۇر(_E)…"
 
 #: ../libgnomeui/gnome-app-helper.c:200
 msgid "Replace a string"
@@ -415,7 +412,7 @@ msgstr "ھەممىسىنى تاللا"
 #.
 #: ../libgnomeui/gnome-app-helper.c:237
 msgid "Create New _Window"
-msgstr "يېڭى _كۆزنەك قۇر"
+msgstr "يېڭى كۆزنەك قۇر(_W)"
 
 #: ../libgnomeui/gnome-app-helper.c:238
 msgid "Create a new window"
@@ -423,11 +420,11 @@ msgstr "يېڭى بىر كۆزنەك قۇر"
 
 #: ../libgnomeui/gnome-app-helper.c:242
 msgid "_Close This Window"
-msgstr "بۇ كۆزنەكنى يا_پ"
+msgstr "بۇ كۆزنەكنى ياپ(_C)"
 
 #: ../libgnomeui/gnome-app-helper.c:243 ../test-gnome/testgnome.xml.h:2
 msgid "Close the current window"
-msgstr "نۆۋەتتىكى كۆزنەكنى ياپ"
+msgstr "نۆۋەتتىكى كۆزنەكنى ياپىدۇ"
 
 #.
 #. * The "Game" menu
@@ -524,7 +521,7 @@ msgstr "خەتلا"
 #: ../libgnomeui/gnome-app-helper.c:2588
 #, c-format
 msgid "Use Desktop Default (%s)"
-msgstr "ئۈستەلۈستى كۆڭۈلدىكى قىممىتىنى ئىشلەت (%s)"
+msgstr "ئۈستەلئۈستى كۆڭۈلدىكى قىممىتىنى ئىشلەت (%s)"
 
 #: ../libgnomeui/gnome-app-util.c:98
 msgid " (press return)"
@@ -568,7 +565,7 @@ msgstr "سۈرئەت"
 
 #: ../libgnomeui/gnome-app.c:153
 msgid "App ID"
-msgstr "قوللىنىشچان پروگرامما بەلگىسى"
+msgstr "پروگرامما بەلگىسى"
 
 #: ../libgnomeui/gnome-app.c:154
 msgid "The application ID string"
@@ -608,17 +605,16 @@ msgstr "HTTP ۋاكالەتچىڭىز تىزىملاشنى تەلەپ قىلىد
 msgid ""
 "You must log in to access \"%s\".\n"
 "%s"
-msgstr ""
-"سىز تىزىمغا كىرگەندىلا ئاندىن «%s» نى زىيارەت قىلالايسىز.\n"
+msgstr "سىز تىزىمغا كىرگەندىلا ئاندىن «%s» نى زىيارەت قىلالايسىز.\n"
 "%s"
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
 msgid "Your password will be transmitted unencrypted."
-msgstr "پارولىڭىز شىفىرلىنىپ يوللىنىدۇ."
+msgstr "ئىمىڭىز شىفىرلىنىپ يوللىنىدۇ."
 
 #: ../libgnomeui/gnome-authentication-manager.c:89
 msgid "Your password will be transmitted encrypted."
-msgstr "پارولىڭىز شىفىرلىنىپ يوللىنىدۇ."
+msgstr "ئىمىڭىز شىفىرلىنىپ يوللىنىدۇ."
 
 #: ../libgnomeui/gnome-authentication-manager.c:92
 #: ../libgnomeui/gnome-authentication-manager.c:311
@@ -638,7 +634,7 @@ msgstr "سىز تىزىمغا كىرگەندىلا ئاندىن%s نى زىيا�
 
 #: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "Specify session management ID"
-msgstr "ئەڭگىمە باشقۇرغۇچ كىملىكىنى بەلگىلە"
+msgstr "ئەڭگىمە باشقۇرغۇ ID سېنى بەلگىلە"
 
 #: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "ID"
@@ -654,7 +650,7 @@ msgstr "ئالدى قوشۇلغۇچى"
 
 #: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
-msgstr "ئەڭگىمە باشقۇرغۇچقا ئۇلىنىشنى چەكلە"
+msgstr "ئەڭگىمە باشقۇرغۇغا باغلىنىشنى چەكلە"
 
 #: ../libgnomeui/gnome-client.c:1014
 msgid "Session management:"
@@ -662,7 +658,7 @@ msgstr "ئەڭگىمە باشقۇرۇش:"
 
 #: ../libgnomeui/gnome-client.c:1015
 msgid "Show session management options"
-msgstr "ئەڭگىمە باشقۇرغۇچ تاللانمىلىرىنى كۆرسەت"
+msgstr "ئەڭگىمە باشقۇرغۇ تاللانمىلىرى كۆرسەت"
 
 #: ../libgnomeui/gnome-client.c:1046
 msgid "Session management"
@@ -751,13 +747,12 @@ msgstr "تىزىملىكتىن ۋاقىت تاللا"
 
 #: ../libgnomeui/gnome-dateedit.c:1031
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr ""
-"gnome_date_edit_get_date ۋاقتى ئۆتتى، gnome_date_edit_get_time ئىشلىتىڭ"
+msgstr "gnome_date_edit_get_date ۋاقتى ئۆتتى، gnome_date_edit_get_time ئىشلىتىڭ"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:115
 #: ../libgnomeui/gnome-font-picker.c:147
 msgid "Title"
-msgstr "ماۋزۇ"
+msgstr "ماۋزۇ(ئاتى)"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:116
 msgid "Title of the druid"
@@ -895,9 +890,7 @@ msgstr "GTK  تۈرى"
 msgid ""
 "Unique identifier for the file entry.  This will be used to save the history "
 "list."
-msgstr ""
-"ھۆججەت تۈرىنىڭ بىردىنبىر بەلگىسى. ئۇ تارىخ تىزىملىكى ساقلاش ئۈچۈن "
-"ئىشلىتىلىدۇ."
+msgstr "ھۆججەت تۈرىنىڭ بىردىنبىر بەلگىسى. ئۇ تارىخ تىزىملىكى ساقلاش ئۈچۈن ئىشلىتىلىدۇ."
 
 #: ../libgnomeui/gnome-file-entry.c:242 ../libgnomeui/gnome-icon-entry.c:178
 msgid "Browse Dialog Title"
@@ -915,8 +908,7 @@ msgstr "مۇندەرىجە تۈرى"
 msgid ""
 "Whether the file entry is being used to enter directory names or complete "
 "filenames."
-msgstr ""
-"ھۆججەت تۈرى مۇندەرىجە نامى ياكى تولۇق ھۆججەت نامى كىرگۈزۈشكە ئىشلىتىلەمدۇ؟"
+msgstr "ھۆججەت تۈرى مۇندەرىجە نامى ياكى تولۇق ھۆججەت نامى كىرگۈزۈشكە ئىشلىتىلەمدۇ؟"
 
 #: ../libgnomeui/gnome-file-entry.c:259
 msgid "Modal"
@@ -951,10 +943,7 @@ msgid ""
 "GnomeEntry that the file entry uses for entering filenames.  You can use "
 "this property to get the GnomeEntry if you need to modify or query any of "
 "its parameters."
-msgstr ""
-"ھۆججەت تۈرى ھۆججەت ئاتىنىڭ GnomeEntry كىرگۈزۈشكە ئىشلىتىلىدۇ. ئەگەر "
-"GnomeEntry نىڭ ھەر قانداق ئۆزگەرگۈچى مىقدارىنى ئۆزگەرتمەكچى ياكى "
-"سۈرۈشتۈرمەكچى بولسىڭىز مۇشۇ خاسلىقنى ئىشلىتىپ ئېرىشەلەيسىز."
+msgstr "ھۆججەت تۈرى ھۆججەت ئاتىنىڭ GnomeEntry كىرگۈزۈشكە ئىشلىتىلىدۇ. ئەگەر GnomeEntry نىڭ ھەر قانداق ئۆزگەرگۈچى مىقدارىنى ئۆزگەرتمەكچى ياكى سۈرۈشتۈرمەكچى بولسىڭىز مۇشۇ خاسلىقنى ئىشلىتىپ ئېرىشەلەيسىز."
 
 #: ../libgnomeui/gnome-file-entry.c:295
 msgid "GtkEntry"
@@ -965,10 +954,7 @@ msgid ""
 "GtkEntry that the file entry uses for entering filenames.  You can use this "
 "property to get the GtkEntry if you need to modify or query any of its "
 "parameters."
-msgstr ""
-"ھۆججەت تۈرى ھۆججەت ئاتىنىڭ GtkEntry كىرگۈزۈشكە ئىشلىتىلىدۇ. ئەگەر GtkEntry "
-"نىڭ ھەر قانداق ئۆزگەرگۈچى مىقدارىنى ئۆزگەرتمەكچى ياكى سۈرۈشتۈرمەكچى بولسىڭىز "
-"مۇشۇ خاسلىقنى ئىشلىتىپ ئېرىشەلەيسىز."
+msgstr "ھۆججەت تۈرى ھۆججەت ئاتىنىڭ GtkEntry كىرگۈزۈشكە ئىشلىتىلىدۇ. ئەگەر GtkEntry نىڭ ھەر قانداق ئۆزگەرگۈچى مىقدارىنى ئۆزگەرتمەكچى ياكى سۈرۈشتۈرمەكچى بولسىڭىز مۇشۇ خاسلىقنى ئىشلىتىپ ئېرىشەلەيسىز."
 
 #: ../libgnomeui/gnome-file-entry.c:306
 msgid "Use GtkFileChooser"
@@ -978,9 +964,7 @@ msgstr "GtkFileChooser ئىشلەت"
 msgid ""
 "Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
 "to select files."
-msgstr ""
-"يېڭى GtkFileChooser بۆلىكى ئىشلىتىش ياكى GtkFileSelection بۆلىكى ئىشلىتىش "
-"ئارقىلىق ھۆججەت تاللىنىدۇ."
+msgstr "يېڭى GtkFileChooser بۆلىكى ئىشلىتىش ياكى GtkFileSelection بۆلىكى ئىشلىتىش ئارقىلىق ھۆججەت تاللىنىدۇ."
 
 #: ../libgnomeui/gnome-file-entry.c:316
 msgid "GtkFileChooser Action"
@@ -1097,20 +1081,14 @@ msgid ""
 "that your system administrator or operating system vendor does not allow you "
 "to change. Some of the settings you have selected may not take effect, or "
 "may not be restored next time you use the application."
-msgstr ""
-"«%s» پروگرامما بىر قىسىم سەپلىمىڭىزنى ئۆزگەرتمەكچى، سىستېما باشقۇرغۇچى ياكى "
-"مەشغۇلات سىستېما سودىگىرى سىزنىڭ بۇ تەڭشەكلەرنى ئۆزگەرتىشىڭىزگە يول "
-"قويمايدۇ. سىز تاللىغان بىر قىسىم تەڭشەكلەر كۈچكە ئىگە بولماسلىقى مۇمكىن ياكى "
-"مەزكۇر پروگراممىنى كېيىنكى قېتىم قايتا ئىشلەتكەندە ئەسلىگە كەلمەيدۇ."
+msgstr "«%s» پروگرامما بىر قىسىم سەپلىمىڭىزنى ئۆزگەرتمەكچى، سىستېما باشقۇرغۇچى ياكى مەشغۇلات سىستېما سودىگىرى سىزنىڭ بۇ تەڭشەكلەرنى ئۆزگەرتىشىڭىزگە يول قويمايدۇ. سىز تاللىغان بىر قىسىم تەڭشەكلەر كۈچكە ئىگە بولماسلىقى مۇمكىن ياكى مەزكۇر پروگراممىنى كېيىنكى قېتىم قايتا ئىشلەتكەندە ئەسلىگە كەلمەيدۇ."
 
 #: ../libgnomeui/gnome-gconf-ui.c:178
 #, c-format
 msgid ""
 "An error occurred while loading or saving configuration information for %s. "
 "Some of your configuration settings may not work properly."
-msgstr ""
-"سەپلەش ئۇچۇرىنى «%s» ئۈچۈن يۈكلەپ ياكى ساقلاۋاتقاندا خاتالىق يۈز بەردى. "
-"سىزنىڭ بەزى سەپلىمە تەڭشەكلىرىڭىز نورمال خىزمەت قىلماسلىقى مۇمكىن."
+msgstr "سەپلەش ئۇچۇرىنى «%s» ئۈچۈن يۈكلەپ ياكى ساقلاۋاتقاندا خاتالىق يۈز بەردى. سىزنىڭ بەزى سەپلىمە تەڭشەكلىرىڭىز نورمال خىزمەت قىلماسلىقى مۇمكىن."
 
 #: ../libgnomeui/gnome-href.c:102
 msgid "URL"
@@ -1130,7 +1108,7 @@ msgstr "كۇنۇپكىدىكى خەت"
 
 #: ../libgnomeui/gnome-href.c:112
 msgid "End World Hunger"
-msgstr "دۇنيادىكى ئاچلىقنى ئاخىرلاشتۇر"
+msgstr "دۇنيادىكى ئاچلىقنى ئاخىرلاشتۇرۇش"
 
 #: ../libgnomeui/gnome-href.c:118
 msgid "Link color"
@@ -1148,17 +1126,14 @@ msgstr "بۇ كۇنۇپكا ئۇ كۆرسىتىدىغان URI غا قارىتى�
 msgid ""
 "An error has occurred while trying to launch the default web browser.\n"
 "Please check your settings in the 'Preferred Applications' preference tool."
-msgstr ""
-"كۆڭۈلدىكى توركۆرگۈنى ئېچىشتا خاتالىق كۆرۈلدى.\n"
+msgstr "كۆڭۈلدىكى توركۆرگۈنى ئېچىشتا خاتالىق كۆرۈلدى.\n"
 "«پروگرامما تاللانمىسى» دىكى تەڭشەكلەرنىڭ توغرا ياكى ئەمەسلىكىنى تەكشۈرۈڭ."
 
 #: ../libgnomeui/gnome-icon-entry.c:170
 msgid ""
 "Unique identifier for the icon entry.  This will be used to save the history "
 "list."
-msgstr ""
-"سىنبەلگە تۈرىنىڭ بىردىنبىر بەلگىسى. ئۇ تارىخ تىزىملىكى ساقلاش ئۈچۈن "
-"ئىشلىتىلىدۇ."
+msgstr "سىنبەلگە تۈرىنىڭ بىردىنبىر بەلگىسى. ئۇ تارىخ تىزىملىكى ساقلاش ئۈچۈن ئىشلىتىلىدۇ."
 
 #: ../libgnomeui/gnome-icon-entry.c:179
 msgid "Title for the Browse icon dialog."
@@ -1184,10 +1159,7 @@ msgstr "تاللىغۇچ سۆزلەشكۈسى"
 msgid ""
 "Icon picker dialog.  You can use this property to get the GtkDialog if you "
 "need to modify or query any of its properties."
-msgstr ""
-"سىنبەلگە تاللىغۇچ سۆزلەشكۈسى. ئەگەر GtkDialog ۋەزىپىسىنىڭ خاسلىقىنى "
-"ئۆزگەرتمەكچى ياكى سۈرۈشتۈرمەكچى بولسىڭىز مۇشۇ GtkDialog خاسلىقى ئارقىلىق "
-"ئېرىشەلەيسىز."
+msgstr "سىنبەلگە تاللىغۇچ سۆزلەشكۈسى. ئەگەر GtkDialog ۋەزىپىسىنىڭ خاسلىقىنى ئۆزگەرتمەكچى ياكى سۈرۈشتۈرمەكچى بولسىڭىز مۇشۇ GtkDialog خاسلىقى ئارقىلىق ئېرىشەلەيسىز."
 
 #: ../libgnomeui/gnome-icon-entry.c:312 ../libgnomeui/gnome-icon-entry.c:996
 msgid "Choose Icon"
@@ -1279,7 +1251,7 @@ msgstr "يېڭى ئىم(_N):"
 
 #: ../libgnomeui/gnome-password-dialog.c:206
 msgid "Con_firm password:"
-msgstr "جەزملەش پارولى(_F):"
+msgstr "جەزملەش ئىمى(_F):"
 
 #: ../libgnomeui/gnome-password-dialog.c:209
 msgid "Password quality:"
@@ -1287,7 +1259,7 @@ msgstr "ئىم سۈپىتى:"
 
 #: ../libgnomeui/gnome-password-dialog.c:324
 msgid "Co_nnect"
-msgstr "باگلا(_N)"
+msgstr "باغلا(_N)"
 
 #: ../libgnomeui/gnome-password-dialog.c:357
 msgid "Connect _anonymously"
