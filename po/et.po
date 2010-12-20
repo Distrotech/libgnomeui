@@ -12,11 +12,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui MASTER\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-12 07:28+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=libgnomeui&component=general\n"
+"POT-Creation-Date: 2010-12-09 12:30+0000\n"
 "PO-Revision-Date: 2009-11-22 09:26+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
+"Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,62 +35,6 @@ msgstr "Tütarkirje 2"
 
 msgid "Hint for item 2"
 msgstr "Vihje kirjele 2"
-
-#, c-format
-msgid "%s is a link to something that is not a folder"
-msgstr "%s on viit millelegi, mis pole kataloog"
-
-#, c-format
-msgid "%s is a link without a destination location"
-msgstr "%s on ilma sihtkohata viit"
-
-#, c-format
-msgid "%s is not a folder"
-msgstr "%s ei ole kataloog"
-
-#, c-format
-msgid "Could not monitor '%s': %s"
-msgstr "Faili '%s' pole võimalik monitoorida: %s"
-
-#, c-format
-msgid "Could not get info for '%s': %s"
-msgstr "Faili '%s' andmeid pole võimalik hankida: %s"
-
-#, c-format
-msgid "Could not create '%s': %s"
-msgstr "Faili '%s' pole võimalik luua: %s"
-
-msgid "Network Servers"
-msgstr "Võrguserverid"
-
-msgid "File System"
-msgstr "Failisüsteem"
-
-#, c-format
-msgid "'%s': %s"
-msgstr "'%s': %s"
-
-#, c-format
-msgid "Bookmark saving failed (%s)"
-msgstr "Tõrge järjehoidja salvestamisel (%s)"
-
-#, c-format
-msgid "Error getting information for '%s'"
-msgstr "Viga '%s' kohta andmete hankimisel"
-
-#, c-format
-msgid "Could not get information for file '%s': %s"
-msgstr "Faili '%s' kohta pole võimalik teavet hankida: %s"
-
-#, c-format
-msgid "Failed to open file '%s': %s"
-msgstr "Tõrge faili '%s' avamisel: %s"
-
-#, c-format
-msgid ""
-"Failed to load image '%s': reason not known, probably a corrupt image file"
-msgstr ""
-"Tõrge pildi '%s' avamisel: põhjus teadmata, arvatavasti on pildifail rikutud"
 
 msgid "Credits"
 msgstr "Autorid"
@@ -520,6 +466,7 @@ msgstr "Interaktiivne"
 msgid "Level of user activity required."
 msgstr "Kasutajapoolse vajaliku sekkumise tase."
 
+#, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
 msgstr "Sinu HTTP-proksi nõuab sisselogimist.\n"
 
@@ -1144,3 +1091,48 @@ msgstr "Viita pole võimalik avada"
 
 msgid "Exit the test"
 msgstr "Välju testprogrammist"
+
+#~ msgid "%s is a link to something that is not a folder"
+#~ msgstr "%s on viit millelegi, mis pole kataloog"
+
+#~ msgid "%s is a link without a destination location"
+#~ msgstr "%s on ilma sihtkohata viit"
+
+#~ msgid "%s is not a folder"
+#~ msgstr "%s ei ole kataloog"
+
+#~ msgid "Could not monitor '%s': %s"
+#~ msgstr "Faili '%s' pole võimalik monitoorida: %s"
+
+#~ msgid "Could not get info for '%s': %s"
+#~ msgstr "Faili '%s' andmeid pole võimalik hankida: %s"
+
+#~ msgid "Could not create '%s': %s"
+#~ msgstr "Faili '%s' pole võimalik luua: %s"
+
+#~ msgid "Network Servers"
+#~ msgstr "Võrguserverid"
+
+#~ msgid "File System"
+#~ msgstr "Failisüsteem"
+
+#~ msgid "'%s': %s"
+#~ msgstr "'%s': %s"
+
+#~ msgid "Bookmark saving failed (%s)"
+#~ msgstr "Tõrge järjehoidja salvestamisel (%s)"
+
+#~ msgid "Error getting information for '%s'"
+#~ msgstr "Viga '%s' kohta andmete hankimisel"
+
+#~ msgid "Could not get information for file '%s': %s"
+#~ msgstr "Faili '%s' kohta pole võimalik teavet hankida: %s"
+
+#~ msgid "Failed to open file '%s': %s"
+#~ msgstr "Tõrge faili '%s' avamisel: %s"
+
+#~ msgid ""
+#~ "Failed to load image '%s': reason not known, probably a corrupt image file"
+#~ msgstr ""
+#~ "Tõrge pildi '%s' avamisel: põhjus teadmata, arvatavasti on pildifail "
+#~ "rikutud"
