@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=libgnomeui&component=general\n"
-"POT-Creation-Date: 2010-11-13 21:45+0000\n"
+"POT-Creation-Date: 2010-11-20 11:02+0000\n"
 "PO-Revision-Date: 2010-08-31 12:16+0000\n"
 "Last-Translator: Sahran <sahran@live.com>,2010\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -215,7 +215,7 @@ msgstr "ئاچ(_O)…"
 
 #: ../libgnomeui/gnome-app-helper.c:112
 msgid "Open a file"
-msgstr "ھۆججەت ئاچ"
+msgstr "ھۆججەت ئاچىدۇ"
 
 #. Save
 #: ../libgnomeui/gnome-app-helper.c:117
@@ -327,7 +327,7 @@ msgstr "يېنىۋال(_U)"
 
 #: ../libgnomeui/gnome-app-helper.c:179
 msgid "Undo the last action"
-msgstr "ئاخىرقى مەشغۇلاتتىن يېنىۋال"
+msgstr "ئاخىرقى مەشغۇلاتتىن يېنىۋالىدۇ"
 
 #. Redo
 #: ../libgnomeui/gnome-app-helper.c:184
@@ -598,7 +598,7 @@ msgstr "ئىشلەتكۈچىنىڭ زۆرۈر بولغان ئاكتىپچانل�
 #: ../libgnomeui/gnome-authentication-manager.c:84
 #, c-format
 msgid "Your HTTP Proxy requires you to log in.\n"
-msgstr "HTTP ۋاكالەتچىڭىز تىزىملاشنى تەلەپ قىلىدۇ.\n"
+msgstr "HTTP ۋاكالەتچىڭىز تىزىمغا كىرىشىڭىزنى تەلەپ قىلىدۇ.\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:85
 #, c-format
@@ -610,11 +610,11 @@ msgstr "سىز تىزىمغا كىرگەندىلا ئاندىن «%s» نى زى
 
 #: ../libgnomeui/gnome-authentication-manager.c:88
 msgid "Your password will be transmitted unencrypted."
-msgstr "ئىمىڭىز شىفىرلىنىپ يوللىنىدۇ."
+msgstr "ئىم شىفىرلانماي يوللىنىدۇ."
 
 #: ../libgnomeui/gnome-authentication-manager.c:89
 msgid "Your password will be transmitted encrypted."
-msgstr "ئىمىڭىز شىفىرلىنىپ يوللىنىدۇ."
+msgstr "ئىم شىفىرلىنىپ يوللىنىدۇ."
 
 #: ../libgnomeui/gnome-authentication-manager.c:92
 #: ../libgnomeui/gnome-authentication-manager.c:311
@@ -625,12 +625,12 @@ msgstr "سالاھىيەت دەلىللەش"
 #: ../libgnomeui/gnome-authentication-manager.c:303
 #, c-format
 msgid "You must log in to access %s domain %s\n"
-msgstr "سىز چوقۇم تىزىمغا كىرگەندە ئاندىن %s دائىرىنى زىيارەت قىلالايسىز%s\n"
+msgstr "سىز چوقۇم تىزىمغا كىرگەندە ئاندىن %s دائىرىنى زىيارەت قىلالايسىز %s\n"
 
 #: ../libgnomeui/gnome-authentication-manager.c:305
 #, c-format
 msgid "You must log in to access %s\n"
-msgstr "سىز تىزىمغا كىرگەندىلا ئاندىن%s نى زىيارەت قىلالايسىز.\n"
+msgstr "سىز تىزىمغا كىرگەندىلا ئاندىن %s نى زىيارەت قىلالايسىز.\n"
 
 #: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
 msgid "Specify session management ID"
@@ -650,7 +650,7 @@ msgstr "ئالدى قوشۇلغۇچى"
 
 #: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
 msgid "Disable connection to session manager"
-msgstr "ئەڭگىمە باشقۇرغۇغا باغلىنىشنى چەكلە"
+msgstr "ئەڭگىمە باشقۇرغۇچقا باغلىنىشنى چەكلە"
 
 #: ../libgnomeui/gnome-client.c:1014
 msgid "Session management:"
@@ -752,7 +752,7 @@ msgstr "gnome_date_edit_get_date ۋاقتى ئۆتتى، gnome_date_edit_get_tim
 #: ../libgnomeui/gnome-druid-page-standard.c:115
 #: ../libgnomeui/gnome-font-picker.c:147
 msgid "Title"
-msgstr "ماۋزۇ(ئاتى)"
+msgstr "ماۋزۇ"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:116
 msgid "Title of the druid"
