@@ -1,3 +1,10 @@
+libgnomeui 2.24.5
+
+* Fix typo (G_TYPE_INSTANCE_CHECK_TYPE -> G_TYPE_CHECK_INSTANCE_TYPE)
+  (Piotr Eljasiak)
+ 
+* New and updated translations
+  (ca@valencia, et, lu, ug, zh_CN, zh_TW)
 libgnomeui 2.24.4
 
 * New and updated translations
