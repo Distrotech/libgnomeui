@@ -560,7 +560,7 @@ vfs_async_fill_authentication_callback (gconstpointer in, size_t in_size,
 {
 	GnomeVFSModuleCallbackFillAuthenticationIn *in_real;
 	GnomeVFSModuleCallbackFillAuthenticationOut *out_real;
-	gpointer request;
+	gpointer request G_GNUC_UNUSED;
 	FillCallbackInfo *info;
 	
 	g_return_if_fail (sizeof (GnomeVFSModuleCallbackFillAuthenticationIn) == in_size
@@ -580,7 +580,6 @@ vfs_async_fill_authentication_callback (gconstpointer in, size_t in_size,
 	info->out_args = out_real;
 	info->response = response;
 	info->response_data = response_data;
-	/* Check this return? */	
 	request = gnome_keyring_find_network_password (in_real->username,
 						       in_real->domain,
 						       in_real->server,
@@ -673,7 +672,7 @@ vfs_async_save_authentication_callback (gconstpointer in, size_t in_size,
 {
 	GnomeVFSModuleCallbackSaveAuthenticationIn *in_real;
 	GnomeVFSModuleCallbackSaveAuthenticationOut *out_real;
-	gpointer request;
+	gpointer request G_GNUC_UNUSED;
 	SaveCallbackInfo *info;
 	
 	g_return_if_fail (sizeof (GnomeVFSModuleCallbackSaveAuthenticationIn) == in_size
@@ -693,7 +692,6 @@ vfs_async_save_authentication_callback (gconstpointer in, size_t in_size,
 	info->out_args = out_real;
 	info->response = response;
 	info->response_data = response_data;
-	/* Check this return? */	
 	request = gnome_keyring_set_network_password (in_real->keyring,
 						      in_real->username,
 						      in_real->domain,
@@ -715,7 +713,7 @@ vfs_save_authentication_callback (gconstpointer in, size_t in_size,
 				  gpointer user_data)
 {
 	GnomeVFSModuleCallbackSaveAuthenticationIn *in_real;
-	GnomeKeyringResult result;
+	GnomeKeyringResult result G_GNUC_UNUSED;
 	guint32 item;
 	
 	g_return_if_fail (sizeof (GnomeVFSModuleCallbackSaveAuthenticationIn) == in_size
@@ -727,7 +725,6 @@ vfs_save_authentication_callback (gconstpointer in, size_t in_size,
 	in_real = (GnomeVFSModuleCallbackSaveAuthenticationIn *)in;
 
 	DEBUG_MSG (("+%s uri:'%s' \n", G_STRFUNC, in_real->uri));
-	/* Check this return? */
 	result = gnome_keyring_set_network_password_sync (in_real->keyring,
 							  in_real->username,
 							  in_real->domain,
