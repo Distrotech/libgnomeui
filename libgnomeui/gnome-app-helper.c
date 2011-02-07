@@ -2444,7 +2444,6 @@ per_app_toolbar_style_changed_notify(GConfClient            *client,
         GtkToolbarStyle style = GTK_TOOLBAR_BOTH;
         GtkWidget *w = user_data;
         GtkToolbar *toolbar = GTK_TOOLBAR(w);
-        gboolean got_it = FALSE;
 	GConfValue *value = gconf_entry_get_value (entry);
 
         if (value &&
@@ -2454,7 +2453,6 @@ per_app_toolbar_style_changed_notify(GConfClient            *client,
                 if (gconf_string_to_enum(toolbar_styles,
                                          gconf_value_get_string(value),
                                          (gint*)&style)) {
-                        got_it = TRUE;
                         gtk_toolbar_set_style(toolbar, style);
                 }
         }
@@ -2701,7 +2699,6 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                 guint notify_id;
                 gchar *str;
                 gchar *per_app_key;
-                gboolean got_it = FALSE;
 
                 /* Try per-app key */
                 per_app_key = gnome_gconf_get_gnome_libs_settings_relative("toolbar_style");
@@ -2714,7 +2711,6 @@ gnome_app_setup_toolbar (GtkToolbar *toolbar,
                     gconf_string_to_enum(toolbar_styles,
                                          str,
                                          (gint*)&toolbar_style)) {
-                        got_it = TRUE;
                         gtk_toolbar_set_style (toolbar, toolbar_style);
                 }
 
