@@ -219,7 +219,7 @@ static void
 append_an_icon(GnomeIconSelection * gis, const gchar * path)
 {
 	GdkPixbuf *pixbuf;
-	int pos;
+	int pos G_GNUC_UNUSED;
 	int w, h;
 	char *base;
 	
