@@ -42,7 +42,7 @@ main (int argc, char *argv[])
         GdkPixbuf *pixbuf;
         GFile *file;
         GError *error;
-        GnomeGdkPixbufAsyncHandle *handle;
+        GnomeGdkPixbufAsyncHandle *handle G_GNUC_UNUSED;
 
         uri = NULL;
         error = NULL;
