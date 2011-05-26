@@ -1,26 +1,27 @@
-# translation of libgnomeui.po to Esperanto
+# Esperanto translation for libgnomeui.
+# Copyright (C) 2003-2011 Free Software Foundation, Inc.
 # This file is distributed under the same license as the libgnomeui package.
-# Copyright (C) 2003 Free Software Foundation, Inc.
 #
 # Joël BRICH <joel.brich@laposte.net>, 2003
 # Joop EGGEN <joop_eggen@yahoo.de>, 2006
 # Guillaume SAVATON <llumeao@gmail.com>, 2006
-# Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2010.
+# Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libgnomeui 2.3.3\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=libgnomeui&component=general\n"
-"POT-Creation-Date: 2010-04-18 07:29+0000\n"
-"PO-Revision-Date: 2010-07-10 12:53+0200\n"
+"POT-Creation-Date: 2011-02-07 18:28+0000\n"
+"PO-Revision-Date: 2011-05-26 20:51+0200\n"
 "Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
 "Language-Team: Esperanto <ubuntu-l10n-eo@lists.launchpad.net>\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-05 09:52+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-05-25 17:24+0000\n"
+"X-Generator: Launchpad (build 13085)\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: ../demos/mdi_demo.c:128
@@ -41,7 +42,7 @@ msgstr "Helpindiko por ero 2"
 
 #: ../libgnomeui/gnome-about.c:187
 msgid "Credits"
-msgstr "Dankoj"
+msgstr "Dankoj al"
 
 #: ../libgnomeui/gnome-about.c:219
 msgid "Written by"
@@ -507,25 +508,25 @@ msgstr "_Enhavoj"
 
 #: ../libgnomeui/gnome-app-helper.c:1153
 msgid "View help for this application"
-msgstr "Montri helpon pri ĉ tiu aplikaĵo"
+msgstr "Montri helpon pri ĉi tiu aplikaĵo"
 
-#: ../libgnomeui/gnome-app-helper.c:2524
+#: ../libgnomeui/gnome-app-helper.c:2522
 msgid "Text Below Icons"
 msgstr "Teksto sub la piktogramoj"
 
-#: ../libgnomeui/gnome-app-helper.c:2525
+#: ../libgnomeui/gnome-app-helper.c:2523
 msgid "Priority Text Beside Icons"
 msgstr "Prioritata teksto apud piktogramoj"
 
-#: ../libgnomeui/gnome-app-helper.c:2526
+#: ../libgnomeui/gnome-app-helper.c:2524
 msgid "Icons Only"
 msgstr "Nur piktogramoj"
 
-#: ../libgnomeui/gnome-app-helper.c:2527
+#: ../libgnomeui/gnome-app-helper.c:2525
 msgid "Text Only"
 msgstr "Nur teksto"
 
-#: ../libgnomeui/gnome-app-helper.c:2588
+#: ../libgnomeui/gnome-app-helper.c:2586
 #, c-format
 msgid "Use Desktop Default (%s)"
 msgstr "Uzu defaŭltan valoron de tabulo (%s)"
@@ -686,19 +687,19 @@ msgstr "Malfermi dialogfenestron por difini la koloron"
 
 #: ../libgnomeui/gnome-color-picker.c:480
 msgid "Pick a color"
-msgstr "Elekti koloron"
+msgstr "Elektu koloron"
 
 #: ../libgnomeui/gnome-dateedit.c:497 ../libgnomeui/gnome-dateedit.c:804
 msgid "Time"
-msgstr "Tempo"
+msgstr "Horo"
 
 #: ../libgnomeui/gnome-dateedit.c:498
 msgid "The time currently selected"
-msgstr "La tempo elektita"
+msgstr "La nun elektita horo"
 
 #: ../libgnomeui/gnome-dateedit.c:510
 msgid "DateEdit Flags"
-msgstr "DateEdit flagoj"
+msgstr "DateEdit-flagoj"
 
 #: ../libgnomeui/gnome-dateedit.c:511
 msgid "Flags for how DateEdit looks"
@@ -734,11 +735,11 @@ msgstr "Dato"
 
 #: ../libgnomeui/gnome-dateedit.c:780
 msgid "Select Date"
-msgstr "Elektu daton"
+msgstr "Elekti daton"
 
 #: ../libgnomeui/gnome-dateedit.c:780
 msgid "Select the date from a calendar"
-msgstr "Elektu la daton el kalendaro"
+msgstr "Elekti la daton el kalendaro"
 
 #. Calendar label, only shown if the date editor has a time field
 #: ../libgnomeui/gnome-dateedit.c:791
@@ -747,15 +748,15 @@ msgstr "Kalendaro"
 
 #: ../libgnomeui/gnome-dateedit.c:812
 msgid "Select Time"
-msgstr "Elektu tempon"
+msgstr "Elekti horon"
 
 #: ../libgnomeui/gnome-dateedit.c:812
 msgid "Select the time from a list"
-msgstr "Elektu la tempon el listo"
+msgstr "Elekti la horon el listo"
 
 #: ../libgnomeui/gnome-dateedit.c:1031
 msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
-msgstr "gnome_date_edit_get_date evitindas, uzu gnome_date_edit_get_time"
+msgstr "gnome_date_edit_get_date evitindas, uzi gnome_date_edit_get_time"
 
 #: ../libgnomeui/gnome-druid-page-standard.c:115
 #: ../libgnomeui/gnome-font-picker.c:147
@@ -996,7 +997,7 @@ msgstr "La tipo de operacio kiun la dosierelektilo estas plenumanta."
 
 #: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
 msgid "Select file"
-msgstr "Elektu dosieron"
+msgstr "Elekti dosieron"
 
 #: ../libgnomeui/gnome-file-entry.c:814
 msgid "Path"
@@ -1040,7 +1041,7 @@ msgstr "La operacia reĝimo de la tiparelektilo"
 
 #: ../libgnomeui/gnome-font-picker.c:166
 msgid "Font name"
-msgstr "Tiparonomo"
+msgstr "Tiparnomo"
 
 #: ../libgnomeui/gnome-font-picker.c:167
 msgid "Name of the selected font"
@@ -1307,7 +1308,7 @@ msgstr "_Forgesi pasvorton tuj"
 
 #: ../libgnomeui/gnome-password-dialog.c:430
 msgid "_Remember password until you logout"
-msgstr "Memo_rigi pasvorton ĝis kiam vi adiaŭos"
+msgstr "Memo_rigi pasvorton ĝis kiam vi elsalutos"
 
 #: ../libgnomeui/gnome-password-dialog.c:436
 msgid "_Remember forever"
@@ -1383,7 +1384,7 @@ msgstr "Nombrita listo"
 
 #: ../libgnomeui/gnome-stock-icons.c:143
 msgid "Indent"
-msgstr "Deŝovo"
+msgstr "Deŝovi"
 
 #: ../libgnomeui/gnome-stock-icons.c:144
 msgid "Un-Indent"
