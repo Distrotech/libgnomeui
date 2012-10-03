@@ -1,0 +1,1413 @@
+# translation of po_libgnomeui-2.0-km.po to Khmer
+# Khmer translation for libgnomeui
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the libgnomeui package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: po_libgnomeui-2.0-km\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=libgnomeui&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2012-03-24 18:21+0000\n"
+"PO-Revision-Date: 2012-05-03 07:40+0000\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Launchpad (build 15890)\n"
+"X-Launchpad-Export-Date: 2012-09-03 23:42+0000\n"
+"X-Language: km-KH\n"
+
+#: ../demos/mdi_demo.c:128
+msgid "Child Item 1"
+msgstr "ធាតុ​តូច ១"
+
+#: ../demos/mdi_demo.c:129
+msgid "Hint for item 1"
+msgstr "ការ​ណែនាំ​ធាតុ ១"
+
+#: ../demos/mdi_demo.c:131
+msgid "Child Item 2"
+msgstr "ធាតុ​តូច ២"
+
+#: ../demos/mdi_demo.c:132
+msgid "Hint for item 2"
+msgstr "ការ​ណែនាំ​សម្រាប់​ធាតុ ២"
+
+#: ../libgnomeui/gnome-about.c:187
+msgid "Credits"
+msgstr "បញ្ជី​អ្នក​ចូលរួម"
+
+#: ../libgnomeui/gnome-about.c:219
+msgid "Written by"
+msgstr "និពន្ធដោយ"
+
+#: ../libgnomeui/gnome-about.c:234
+msgid "Documented by"
+msgstr "រៀបចំឯកសារដោយ"
+
+#: ../libgnomeui/gnome-about.c:249
+msgid "Translated by"
+msgstr "បកប្រែដោយ"
+
+#: ../libgnomeui/gnome-about.c:312
+msgid "C_redits"
+msgstr "ឥណទាន"
+
+#: ../libgnomeui/gnome-about.c:365
+msgid "Program name"
+msgstr "ឈ្មោះកម្មវិធី"
+
+#: ../libgnomeui/gnome-about.c:366
+msgid "The name of the program"
+msgstr "ឈ្មោះនៃកម្មវិធី"
+
+#: ../libgnomeui/gnome-about.c:373
+msgid "Program version"
+msgstr "កំណែកម្មវិធី"
+
+#: ../libgnomeui/gnome-about.c:374
+msgid "The version of the program"
+msgstr "ជំនាន់នៃកម្មវិធី"
+
+#: ../libgnomeui/gnome-about.c:380
+msgid "Copyright string"
+msgstr "រក្សាសិទ្ធិ​ខ្សែ​អក្សរ"
+
+#: ../libgnomeui/gnome-about.c:381
+msgid "Copyright information for the program"
+msgstr "រក្សាសិទ្ឋិ​ពត៌មាន​នៃ​កម្មវិធី"
+
+#: ../libgnomeui/gnome-about.c:388
+msgid "Comments string"
+msgstr "ខ្សែ​អក្សរ​មតិយោបល់"
+
+#: ../libgnomeui/gnome-about.c:389
+msgid "Comments about the program"
+msgstr "ការ​ផ្តល់​ដល់​កម្មវិធី"
+
+#: ../libgnomeui/gnome-about.c:395
+msgid "Authors"
+msgstr "អ្នកនិពន្ឋ"
+
+#: ../libgnomeui/gnome-about.c:396
+msgid "List of authors of the programs"
+msgstr "បញ្ជី​រាយ​នាម​អ្នក​និពន្ឋ​នៃកម្មវិធី"
+
+#: ../libgnomeui/gnome-about.c:398
+msgid "Author entry"
+msgstr "បញ្ចូល​អ្នកនិពន្ឋ"
+
+#: ../libgnomeui/gnome-about.c:399
+msgid "A single author entry"
+msgstr "បញ្ចូល​អ្នកនិពន្មម្នាក់"
+
+#: ../libgnomeui/gnome-about.c:406
+msgid "Documenters"
+msgstr "អ្នក​រៀប​ឯកសារ"
+
+#: ../libgnomeui/gnome-about.c:407
+msgid "List of people documenting the program"
+msgstr "បញ្ជី​រាយ​នាម​អ្នក​ធ្វើ​ឯកសារ​នៃ​កម្មវិធី"
+
+#: ../libgnomeui/gnome-about.c:409
+msgid "Documenter entry"
+msgstr "អ្នក​បញ្ចូល​ឯកសារ"
+
+#: ../libgnomeui/gnome-about.c:410
+msgid "A single documenter entry"
+msgstr "បញ្ចូល​ឯកសារមួយ"
+
+#: ../libgnomeui/gnome-about.c:418
+msgid "Translator credits"
+msgstr "ខឹម សុខែម, ម៉ន ម៉េត, សេង សុត្ថា, ចាន់ សម្បត្តិរតនៈ, សុខ សុភា"
+
+#: ../libgnomeui/gnome-about.c:419
+msgid ""
+"Credits to the translators. This string should be marked as translatable"
+msgstr "បញ្ជី​ចូលរួម​របស់​អ្នក​បកប្រែ ។ ខ្សែ​អក្សរ​នេះ​គួរ​តែ​ត្រូវ​បាន​សម្គាល់​ថា​អាច​បកប្រែ​បាន"
+
+#: ../libgnomeui/gnome-about.c:426
+#: ../libgnomeui/gnome-druid-page-standard.c:123
+msgid "Logo"
+msgstr "និមិត្តសញ្ញា"
+
+#: ../libgnomeui/gnome-about.c:427
+msgid "A logo for the about box"
+msgstr "និមិត្តសញ្ញានៃប្រអប់មួយ"
+
+#: ../libgnomeui/gnome-about.c:506
+#, c-format
+msgid "About %s"
+msgstr "អំពី %s"
+
+#. Some standard menus
+#: ../libgnomeui/gnome-app-helper.c:85 ../libgnomeui/gnome-app-helper.h:551
+#: ../test-gnome/testgnome.xml.h:5
+msgid "_File"
+msgstr "ឯកសារ"
+
+#: ../libgnomeui/gnome-app-helper.c:86
+msgid "_File/"
+msgstr "_File/"
+
+#: ../libgnomeui/gnome-app-helper.c:87 ../libgnomeui/gnome-app-helper.h:554
+msgid "_Edit"
+msgstr "កែ​តំរូវ"
+
+#: ../libgnomeui/gnome-app-helper.c:88
+msgid "_Edit/"
+msgstr "_Edit/"
+
+#: ../libgnomeui/gnome-app-helper.c:89 ../libgnomeui/gnome-app-helper.h:557
+msgid "_View"
+msgstr "មើល"
+
+#: ../libgnomeui/gnome-app-helper.c:90
+msgid "_View/"
+msgstr "_View/"
+
+#: ../libgnomeui/gnome-app-helper.c:91 ../libgnomeui/gnome-app-helper.h:560
+msgid "_Settings"
+msgstr "ការ​កំណត់"
+
+#: ../libgnomeui/gnome-app-helper.c:92
+msgid "_Settings/"
+msgstr "_Settings/"
+
+#. If you have more then one New type, use this tree
+#: ../libgnomeui/gnome-app-helper.c:93 ../libgnomeui/gnome-app-helper.h:326
+msgid "_New"
+msgstr "ថ្មី"
+
+#: ../libgnomeui/gnome-app-helper.c:94
+msgid "_New/"
+msgstr "_New/"
+
+#: ../libgnomeui/gnome-app-helper.c:95 ../libgnomeui/gnome-app-helper.h:563
+msgid "Fi_les"
+msgstr "ឯកសារ"
+
+#: ../libgnomeui/gnome-app-helper.c:96
+msgid "Fi_les/"
+msgstr "Fi_les/"
+
+#: ../libgnomeui/gnome-app-helper.c:97 ../libgnomeui/gnome-app-helper.h:566
+msgid "_Windows"
+msgstr "វីនដូ"
+
+#: ../libgnomeui/gnome-app-helper.c:98 ../libgnomeui/gnome-app-helper.h:572
+msgid "_Game"
+msgstr "_ល្បែង"
+
+#: ../libgnomeui/gnome-app-helper.c:99 ../libgnomeui/gnome-app-helper.h:569
+#: ../test-gnome/testgnome.xml.h:6
+msgid "_Help"
+msgstr "_ជំនួយ"
+
+#: ../libgnomeui/gnome-app-helper.c:100
+msgid "_Windows/"
+msgstr "_Windows/"
+
+#. Open
+#: ../libgnomeui/gnome-app-helper.c:112
+msgid "_Open..."
+msgstr "បើក"
+
+#: ../libgnomeui/gnome-app-helper.c:112
+msgid "Open a file"
+msgstr "បើកឯកសារមួយ"
+
+#. Save
+#: ../libgnomeui/gnome-app-helper.c:117
+msgid "_Save"
+msgstr "រក្សាទុក"
+
+#: ../libgnomeui/gnome-app-helper.c:117
+msgid "Save the current file"
+msgstr "រក្សា​ឯកសារ​ដែល​កំពុង​សហប្រតិបត្តិការ"
+
+#. Save As
+#: ../libgnomeui/gnome-app-helper.c:122
+msgid "Save _As..."
+msgstr "រក្សាទុកជា"
+
+#: ../libgnomeui/gnome-app-helper.c:123
+msgid "Save the current file with a different name"
+msgstr "រក្សា​ឯកសារ​ដែល​កំពុង​សហប្រតិបត្តិការទៅជាឈ្មោះផ្សេង"
+
+#. Revert
+#: ../libgnomeui/gnome-app-helper.c:128
+msgid "_Revert"
+msgstr "ត្រឡប់​ទៅ​ដើម"
+
+#: ../libgnomeui/gnome-app-helper.c:129
+msgid "Revert to a saved version of the file"
+msgstr "ត្រឡប់​ទៅ​ដើម​ ដើម្បី​រក្សាទុក​កំណែ​ឯកសារ"
+
+#. Print
+#: ../libgnomeui/gnome-app-helper.c:134
+msgid "_Print..."
+msgstr "បោះពុម្ភ"
+
+#: ../libgnomeui/gnome-app-helper.c:134
+msgid "Print the current file"
+msgstr "បោះពុម្ព​ឯកសារ​បច្ចុប្បន្ន"
+
+#. Print Setup
+#: ../libgnomeui/gnome-app-helper.c:139
+msgid "Print S_etup..."
+msgstr "រៀបចំ​ការ​​​បោះពុម្ព..."
+
+#: ../libgnomeui/gnome-app-helper.c:140
+msgid "Setup the page settings for your current printer"
+msgstr "រៀបចំ​ការ​កំណត់​ទំព័រ​សម្រាប់​ម៉ាស៊ីន​បោះពុម្ព​បច្ចុប្បន្ន​របស់​អ្នក"
+
+#. Close
+#: ../libgnomeui/gnome-app-helper.c:145
+msgid "_Close"
+msgstr "បិទ"
+
+#: ../libgnomeui/gnome-app-helper.c:145
+msgid "Close the current file"
+msgstr "បិទ​ឯកសារ​បច្ចុប្បន្ន"
+
+#. Exit
+#: ../libgnomeui/gnome-app-helper.c:150
+msgid "_Quit"
+msgstr "បោះបង់"
+
+#: ../libgnomeui/gnome-app-helper.c:150
+msgid "Quit the application"
+msgstr "បោះបង់​កម្មវិធី"
+
+#.
+#. * The "Edit" menu
+#.
+#. Cut
+#: ../libgnomeui/gnome-app-helper.c:158
+msgid "Cu_t"
+msgstr "កាត់"
+
+#: ../libgnomeui/gnome-app-helper.c:158
+msgid "Cut the selection"
+msgstr "កាត់​ជម្រើស"
+
+#. 10
+#. Copy
+#: ../libgnomeui/gnome-app-helper.c:164
+msgid "_Copy"
+msgstr "ចម្លង"
+
+#: ../libgnomeui/gnome-app-helper.c:164
+msgid "Copy the selection"
+msgstr "ចម្លង​ជម្រើស"
+
+#. Paste
+#: ../libgnomeui/gnome-app-helper.c:169
+msgid "_Paste"
+msgstr "បិទភ្ជាប់"
+
+#: ../libgnomeui/gnome-app-helper.c:169
+msgid "Paste the clipboard"
+msgstr "បិទភ្ជាប់​ក្ដារតម្បៀតខ្ទាស់"
+
+#. Clear
+#: ../libgnomeui/gnome-app-helper.c:174
+msgid "C_lear"
+msgstr "សម្អាត"
+
+#: ../libgnomeui/gnome-app-helper.c:174
+msgid "Clear the selection"
+msgstr "សម្អាត​​ជម្រើស"
+
+#. Undo
+#: ../libgnomeui/gnome-app-helper.c:179
+msgid "_Undo"
+msgstr "មិន​ធ្វើ​វិញ"
+
+#: ../libgnomeui/gnome-app-helper.c:179
+msgid "Undo the last action"
+msgstr "មិន​ធ្វើ​វិញ​​សកម្មភាព​ចុងក្រោយ"
+
+#. Redo
+#: ../libgnomeui/gnome-app-helper.c:184
+msgid "_Redo"
+msgstr "ធ្វើ​វិញ"
+
+#: ../libgnomeui/gnome-app-helper.c:184
+msgid "Redo the undone action"
+msgstr "ធ្វើវិញ មិន​ធ្វើ​វិញ​​សកម្មភាព"
+
+#. Find
+#: ../libgnomeui/gnome-app-helper.c:189
+msgid "_Find..."
+msgstr "រក..."
+
+#: ../libgnomeui/gnome-app-helper.c:189
+msgid "Search for a string"
+msgstr "ស្វែងរក​ខ្សែ​អក្សរ"
+
+#. Find Again
+#: ../libgnomeui/gnome-app-helper.c:194
+msgid "Find Ne_xt"
+msgstr "រក​បន្ទាប់"
+
+#: ../libgnomeui/gnome-app-helper.c:195
+msgid "Search again for the same string"
+msgstr "ស្វែងរក​ម្ដងទៀត​​សម្រាប់​ខ្សែ​អក្សរ​ដូចគ្នា"
+
+#. Replace
+#: ../libgnomeui/gnome-app-helper.c:200
+msgid "R_eplace..."
+msgstr "ជំនួស..."
+
+#: ../libgnomeui/gnome-app-helper.c:200
+msgid "Replace a string"
+msgstr "ជំនួស​ខ្សែ​អក្សរ"
+
+#. Properties
+#: ../libgnomeui/gnome-app-helper.c:205
+msgid "_Properties"
+msgstr "លក្ខណ​សម្បត្តិ"
+
+#: ../libgnomeui/gnome-app-helper.c:206
+msgid "Modify the file's properties"
+msgstr "កែប្រែ​លក្ខណ​សម្បត្តិ​​របស់​ឯកសារ"
+
+#.
+#. * The Settings menu
+#.
+#. Settings
+#: ../libgnomeui/gnome-app-helper.c:214
+msgid "Prefere_nces"
+msgstr "ចំណូលចិត្ត"
+
+#: ../libgnomeui/gnome-app-helper.c:215
+msgid "Configure the application"
+msgstr "កំណត់​រចនាសម្ព័ន្ធ​កម្មវិធី"
+
+#. 20
+#.
+#. * And the "Help" menu
+#.
+#. About
+#: ../libgnomeui/gnome-app-helper.c:224 ../test-gnome/testgnome.xml.h:4
+msgid "_About"
+msgstr "អំពី"
+
+#: ../libgnomeui/gnome-app-helper.c:225 ../test-gnome/testgnome.xml.h:3
+msgid "About this application"
+msgstr "អំពី​កម្មវិធី​នេះ"
+
+#: ../libgnomeui/gnome-app-helper.c:228
+msgid "Select _All"
+msgstr "ជ្រើស​ទាំងអស់"
+
+#: ../libgnomeui/gnome-app-helper.c:229
+msgid "Select everything"
+msgstr "ជ្រើស​អ្វី​គ្រប់យ៉ាង"
+
+#.
+#. * Window menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:237
+msgid "Create New _Window"
+msgstr "បង្កើត​បង្អួច​ថ្មី"
+
+#: ../libgnomeui/gnome-app-helper.c:238
+msgid "Create a new window"
+msgstr "បង្កើត​បង្អួច​ថ្មី"
+
+#: ../libgnomeui/gnome-app-helper.c:242
+msgid "_Close This Window"
+msgstr "បិទ​បង្អួច​នេះ"
+
+#: ../libgnomeui/gnome-app-helper.c:243 ../test-gnome/testgnome.xml.h:1
+msgid "Close the current window"
+msgstr "បិទ​បង្អួច​បច្ចុប្បន្ន"
+
+#.
+#. * The "Game" menu
+#.
+#: ../libgnomeui/gnome-app-helper.c:251
+msgid "_New Game"
+msgstr "ល្បែង​ថ្មី"
+
+#: ../libgnomeui/gnome-app-helper.c:252
+msgid "Start a new game"
+msgstr "ចាប់ផ្ដើម​ល្បែង​ថ្មី"
+
+#: ../libgnomeui/gnome-app-helper.c:256
+msgid "_Pause Game"
+msgstr "ផ្អាក​ល្បែង"
+
+#: ../libgnomeui/gnome-app-helper.c:257
+msgid "Pause the game"
+msgstr "ផ្អាក​ល្បែង"
+
+#: ../libgnomeui/gnome-app-helper.c:261
+msgid "_Restart Game"
+msgstr "ចាប់ផ្ដើម​ល្បែង​​ឡើងវិញ"
+
+#: ../libgnomeui/gnome-app-helper.c:262
+msgid "Restart the game"
+msgstr "ចាប់ផ្ដើម​ល្បែង​​ឡើងវិញ"
+
+#: ../libgnomeui/gnome-app-helper.c:266
+msgid "_Undo Move"
+msgstr "មិន​ធ្វើ​វិញ​ការ​ផ្លាស់ទី"
+
+#: ../libgnomeui/gnome-app-helper.c:267
+msgid "Undo the last move"
+msgstr "មិន​ធ្វើ​វិញ​ការ​ផ្លាស់ទី​ចុងក្រោយ"
+
+#: ../libgnomeui/gnome-app-helper.c:271
+msgid "_Redo Move"
+msgstr "ធ្វើវិញ​ការ​ផ្លាស់ទី"
+
+#: ../libgnomeui/gnome-app-helper.c:272
+msgid "Redo the undone move"
+msgstr "ធ្វើវិញ មិន​ធ្វើ​វិញ​ការ​ផ្លាស់ទី"
+
+#: ../libgnomeui/gnome-app-helper.c:276
+msgid "_Hint"
+msgstr "ការ​ណែនាំ"
+
+#: ../libgnomeui/gnome-app-helper.c:277
+msgid "Get a hint for your next move"
+msgstr "ទទួល​បាន​ការ​ណែនាំ​អំពី​ការ​ផ្លាស់ទី​បន្ទាប់​របស់​អ្នក"
+
+#. 30
+#: ../libgnomeui/gnome-app-helper.c:282
+msgid "_Scores..."
+msgstr "ពិន្ទុ..."
+
+#: ../libgnomeui/gnome-app-helper.c:283
+msgid "View the scores"
+msgstr "មើល​ពិន្ទុ"
+
+#: ../libgnomeui/gnome-app-helper.c:287
+msgid "_End Game"
+msgstr "បញ្ចប់​ល្បែង"
+
+#: ../libgnomeui/gnome-app-helper.c:288
+msgid "End the current game"
+msgstr "បញ្ចប់​ល្បែង​បច្ចុប្បន្ន"
+
+#: ../libgnomeui/gnome-app-helper.c:1150
+msgid "_Contents"
+msgstr "មាតិកា"
+
+#: ../libgnomeui/gnome-app-helper.c:1153
+msgid "View help for this application"
+msgstr "មើល​ជំនួយ​អំពី​កម្មវិធី​នេះ"
+
+#: ../libgnomeui/gnome-app-helper.c:2522
+msgid "Text Below Icons"
+msgstr "រូបតំណាង​ខាងក្រោម​អត្ថបទ"
+
+#: ../libgnomeui/gnome-app-helper.c:2523
+msgid "Priority Text Beside Icons"
+msgstr "រូបតំណាង​ខាងក្រោម​អត្ថបទ​អាទិភាព"
+
+#: ../libgnomeui/gnome-app-helper.c:2524
+msgid "Icons Only"
+msgstr "តែ​រូបតំណាង​ប៉ុណ្ណោះ"
+
+#: ../libgnomeui/gnome-app-helper.c:2525
+msgid "Text Only"
+msgstr "តែ​អត្ថបទ​ប៉ុណ្ណោះ"
+
+#: ../libgnomeui/gnome-app-helper.c:2586
+#, c-format
+msgid "Use Desktop Default (%s)"
+msgstr "ប្រើ​ផ្ទៃ​តុ​លំនាំដើម (%s)"
+
+#: ../libgnomeui/gnome-app-util.c:98
+msgid " (press return)"
+msgstr " (ចុច​ត្រឡប់)"
+
+#: ../libgnomeui/gnome-app-util.c:140
+msgid "ERROR: "
+msgstr "កំហុស ៖ "
+
+#: ../libgnomeui/gnome-app-util.c:177
+msgid "Warning: "
+msgstr "ការ​ព្រមាន ៖ "
+
+#: ../libgnomeui/gnome-app-util.c:315
+msgid "y"
+msgstr "y"
+
+#: ../libgnomeui/gnome-app-util.c:316
+msgid "yes"
+msgstr "បាទ/ចាស"
+
+#: ../libgnomeui/gnome-app-util.c:319
+msgid "n"
+msgstr "n"
+
+#: ../libgnomeui/gnome-app-util.c:320
+msgid "no"
+msgstr "ទេ"
+
+#: ../libgnomeui/gnome-app-util.c:355
+msgid " (yes or no)"
+msgstr " (បាទ/ចាស ឬ​ទេ)"
+
+#: ../libgnomeui/gnome-app-util.c:356
+msgid "  - OK? (yes or no)"
+msgstr "  យល់ព្រម​ឬ ? (បាទ/ចាស ឬ​ទេ)"
+
+#: ../libgnomeui/gnome-app-util.c:684
+msgid "Progress"
+msgstr "វឌ្ឍនភាព"
+
+#: ../libgnomeui/gnome-app.c:153
+msgid "App ID"
+msgstr "លេខ​សម្គាល់​កម្វវិធី"
+
+#: ../libgnomeui/gnome-app.c:154
+msgid "The application ID string"
+msgstr "ខ្សែ​អក្សរ​លេខ​សម្គាល់​កម្មវិធី"
+
+#: ../libgnomeui/gnome-appbar.c:743
+msgid "Has Progress"
+msgstr "មាន​វឌ្ឍនភាព"
+
+#: ../libgnomeui/gnome-appbar.c:744
+msgid "Create a progress widget."
+msgstr "បង្កើត​ធាតុ​ក្រាហ្វិក​វឌ្ឍនភាព ។"
+
+#: ../libgnomeui/gnome-appbar.c:751
+msgid "Has Status"
+msgstr "មាន​ស្ថានភាព"
+
+#: ../libgnomeui/gnome-appbar.c:752
+msgid "Create a status widget."
+msgstr "បង្កើត​ធាតុ​ក្រាហ្វិក​ស្ថានភាព ។"
+
+#: ../libgnomeui/gnome-appbar.c:759
+msgid "Interactivity"
+msgstr "អន្តរ​សកម្មភាព"
+
+#: ../libgnomeui/gnome-appbar.c:760
+msgid "Level of user activity required."
+msgstr "កម្រិត​​សកម្មភាព​ភាព​អ្នក​ប្រើ​ដែល​បាន​ទាមទារ ។"
+
+#: ../libgnomeui/gnome-authentication-manager.c:84
+#, c-format
+msgid "Your HTTP Proxy requires you to log in.\n"
+msgstr "ដើម្បី​ចូល​ទាមទារ​ប្រូកស៊ី HTTP របស់​អ្នក ។\n"
+
+#: ../libgnomeui/gnome-authentication-manager.c:85
+#, c-format
+msgid ""
+"You must log in to access \"%s\".\n"
+"%s"
+msgstr ""
+"អ្នក​ត្រូវ​តែ​ចូល​ ដើម្បី​ដំណើរការ \"%s\" ។\n"
+"%s"
+
+#: ../libgnomeui/gnome-authentication-manager.c:88
+msgid "Your password will be transmitted unencrypted."
+msgstr "ពាក្យ​សម្ងាត់​របស់​អ្នក​នឹង​ត្រូវ​បាន​បញ្ជូន​​​ដែល​មិន​បាន​អ៊ិនគ្រីប ។"
+
+#: ../libgnomeui/gnome-authentication-manager.c:89
+msgid "Your password will be transmitted encrypted."
+msgstr "ពាក្យ​សម្ងាត់​របស់​នឹង​ត្រូវ​បាន​បញ្ជូន​ដែល​បាន​អ៊ីនគ្រីប ។"
+
+#: ../libgnomeui/gnome-authentication-manager.c:92
+#: ../libgnomeui/gnome-authentication-manager.c:311
+msgid "Authentication Required"
+msgstr "បាន​ទាមទារ​ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ"
+
+#. Translators: "You must log in to acces user@server.com/share domain MYWINDOWSDOMAIN."
+#: ../libgnomeui/gnome-authentication-manager.c:303
+#, c-format
+msgid "You must log in to access %s domain %s\n"
+msgstr "អ្នក​ត្រូវ​តែ​ចូល ដើម្បី​ដំណើរការ %s ដែន %s\n"
+
+#: ../libgnomeui/gnome-authentication-manager.c:305
+#, c-format
+msgid "You must log in to access %s\n"
+msgstr "អ្នក​ត្រូវ​តែ​ចូល ដើម្បី​ដំណើរការ %s\n"
+
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
+msgid "Specify session management ID"
+msgstr "បញ្ជាក់​លេខ​សម្គាល់​​ការ​គ្រប់គ្រង​សម័យ"
+
+#: ../libgnomeui/gnome-client.c:1000 ../libgnomeui/gnome-client.c:1034
+msgid "ID"
+msgstr "លេខ​សម្គាល់"
+
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
+msgid "Specify prefix of saved configuration"
+msgstr "បញ្ជាក់​បុព្វបទ​នៃ​ការ​កំណត់​រចនាសម្ព័ន្ធ​ដែល​បាន​រក្សាទុក"
+
+#: ../libgnomeui/gnome-client.c:1003 ../libgnomeui/gnome-client.c:1037
+msgid "PREFIX"
+msgstr "បុព្វបទ"
+
+#: ../libgnomeui/gnome-client.c:1006 ../libgnomeui/gnome-client.c:1040
+msgid "Disable connection to session manager"
+msgstr "បិទ​ការ​ត​ភ្ជាប់​ទៅកាន់​កម្មវិធី​គ្រប់គ្រង​សម័យ"
+
+#: ../libgnomeui/gnome-client.c:1014
+msgid "Session management:"
+msgstr "ការ​គ្រប់គ្រង​សម័យ ៖"
+
+#: ../libgnomeui/gnome-client.c:1015
+msgid "Show session management options"
+msgstr "បង្ហាញ​ជម្រើស​ការ​គ្រប់គ្រង​សម័យ"
+
+#: ../libgnomeui/gnome-client.c:1046
+msgid "Session management"
+msgstr "ការ​គ្រប់គ្រង​សម័យ"
+
+#: ../libgnomeui/gnome-client.c:2580
+msgid "Cancel Logout"
+msgstr "បោះបង់​ការ​ចេញ"
+
+#: ../libgnomeui/gnome-color-picker.c:404
+msgid "Received invalid color data\n"
+msgstr "បាន​ទទួល​ទិន្នន័យ​ពណ៌​មិន​ត្រឹមត្រូវ\n"
+
+#: ../libgnomeui/gnome-color-picker.c:458
+msgid "Open a dialog to specify the color"
+msgstr "បើក​ប្រអប់ ដើម្បី​បញ្ជាក់​ពណ៌"
+
+#: ../libgnomeui/gnome-color-picker.c:480
+msgid "Pick a color"
+msgstr "រើស​ពណ៌"
+
+#: ../libgnomeui/gnome-dateedit.c:497 ../libgnomeui/gnome-dateedit.c:804
+msgid "Time"
+msgstr "ពេលវេលា"
+
+#: ../libgnomeui/gnome-dateedit.c:498
+msgid "The time currently selected"
+msgstr "ពេលវេលា​ដែល​បាន​ជ្រើស​បច្ចុប្បន្ន"
+
+#: ../libgnomeui/gnome-dateedit.c:510
+msgid "DateEdit Flags"
+msgstr "ទង់ជាតិ​ DateEdit"
+
+#: ../libgnomeui/gnome-dateedit.c:511
+msgid "Flags for how DateEdit looks"
+msgstr "ទង់ជាតិ​សម្រាប់​ DateEdit"
+
+#: ../libgnomeui/gnome-dateedit.c:520
+msgid "Lower Hour"
+msgstr "តិច​​ជាង​ម៉ោង"
+
+#: ../libgnomeui/gnome-dateedit.c:521
+msgid "Lower hour in the time popup selector"
+msgstr "តិច​​ជាង​ម៉ោង​​នៅ​​ក្នុង​កម្មវិធី​​​ជ្រើស​ពេលវេលា​លេច​ឡើង"
+
+#: ../libgnomeui/gnome-dateedit.c:531
+msgid "Upper Hour"
+msgstr "ច្រើន​ជាង​ម៉ោង"
+
+#: ../libgnomeui/gnome-dateedit.c:532
+msgid "Upper hour in the time popup selector"
+msgstr "ច្រើន​ជាង​ម៉ោង​នៅ​ក្នុង​​កម្មវិធី​ជ្រើស​​ពេលវេលា​លេចឡើង"
+
+#: ../libgnomeui/gnome-dateedit.c:542
+msgid "Initial Time"
+msgstr "ពេលវេលា​ដំបូង"
+
+#: ../libgnomeui/gnome-dateedit.c:543
+msgid "The initial time"
+msgstr "ពេលវេលា​ដំបូង"
+
+#: ../libgnomeui/gnome-dateedit.c:767 ../libgnomeui/gnome-scores.c:96
+msgid "Date"
+msgstr "កាល​បរិច្ឆេទ"
+
+#: ../libgnomeui/gnome-dateedit.c:780
+msgid "Select Date"
+msgstr "ជ្រើស​កាលបរិច្ឆេទ"
+
+#: ../libgnomeui/gnome-dateedit.c:780
+msgid "Select the date from a calendar"
+msgstr "ជ្រើស​​កាលបរិច្ឆេទ​ពី​ប្រតិទិន"
+
+#. Calendar label, only shown if the date editor has a time field
+#: ../libgnomeui/gnome-dateedit.c:791
+msgid "Calendar"
+msgstr "ប្រតិទិន"
+
+#: ../libgnomeui/gnome-dateedit.c:812
+msgid "Select Time"
+msgstr "ជ្រើស​ពេលវេលា"
+
+#: ../libgnomeui/gnome-dateedit.c:812
+msgid "Select the time from a list"
+msgstr "ជ្រើស​ពេលវេលា​ពី​បញ្ជី"
+
+#: ../libgnomeui/gnome-dateedit.c:1031
+msgid "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+msgstr "gnome_date_edit_get_date deprecated, use gnome_date_edit_get_time"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:115
+#: ../libgnomeui/gnome-font-picker.c:147
+msgid "Title"
+msgstr "ចំណង​ជើង"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:116
+msgid "Title of the druid"
+msgstr "ចំណង​ជើង​របស់ druid"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:124
+msgid "Logo image"
+msgstr "រូបភាព​រូបសញ្ញា"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:131
+msgid "Top Watermark"
+msgstr "Top Watermark"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:132
+msgid "Watermark image for the top"
+msgstr "រូបភាព​​​ព្រាលៗ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:139
+msgid "Title Foreground"
+msgstr "ផ្ទៃ​ខាងមុខ​​ចំណងជើង"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:140
+msgid "Foreground color of the title"
+msgstr "ពណ៌​ផ្ទៃ​ខាងមុខ​របស់​ចំណងជើង"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:147
+msgid "Title Foreground Color"
+msgstr "ពណ៌​ផ្ទៃ​ខាងមុខ​ចំណងជើង"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:148
+msgid "Foreground color of the title as a GdkColor"
+msgstr "ពណ៌​ផ្ទៃ​ខាងមុខ​របស់​ចំណងជើង​ជា GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:155
+msgid "Title Foreground color set"
+msgstr "កំណត់​ពណ៌​ផ្ទៃ​ខាងមុខ​ចំណងជើង"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:156
+msgid "Foreground color of the title is set"
+msgstr "កំណត់​ពណ៌​ផ្ទៃ​ខាងមុខ​របស់​ចំណងជើង"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:163
+#: ../libgnomeui/gnome-druid-page-standard.c:171
+msgid "Background Color"
+msgstr "ពណ៌​ផ្ទៃ​ខាងក្រោយ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:164
+msgid "Background color"
+msgstr "ពណ៌​ផ្ទៃ​ខាងក្រោយ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:172
+msgid "Background color as a GdkColor"
+msgstr "ពណ៌​ផ្ទៃ​ខាងក្រោយ​ជា GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:179
+msgid "Background color set"
+msgstr "កំណត់​ពណ៌​ផ្ទៃ​ខាងក្រោយ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:180
+msgid "Background color is set"
+msgstr "កំណត់​ពណ៌​ផ្ទៃ​ខាងក្រោយ"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:187
+#: ../libgnomeui/gnome-druid-page-standard.c:195
+msgid "Contents Background Color"
+msgstr "ពណ៌​ផ្ទៃ​ខាងក្រោយ​មាតិកា"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:188
+msgid "Contents Background color"
+msgstr "ពណ៌​ផ្ទៃ​ខាងក្រោយ​មាតិកា"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:196
+msgid "Contents Background color as a GdkColor"
+msgstr "ពណ៌​ផ្ទៃ​ខាងក្រោយ​មាតិកា​ជា GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:203
+msgid "Contents Background color set"
+msgstr "កំណត់​ពណ៌​ផ្ទៃខាងក្រោយ​មាតិកា"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:204
+msgid "Contents Background color is set"
+msgstr "កំណត់​ពណ៌​ផ្ទៃ​ខាងក្រោយ​មាតិកា"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:210
+#: ../libgnomeui/gnome-druid-page-standard.c:218
+msgid "Logo Background Color"
+msgstr "ពណ៌​ផ្ទៃ​ខាងក្រោយ​​រូប​សញ្ញា"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:211
+msgid "Logo Background color"
+msgstr "ពណ៌​ផ្ទៃ​ខាងក្រោយ​រូប​សញ្ញា"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:219
+msgid "Logo Background color as a GdkColor"
+msgstr "ពណ៌​ផ្ទៃ​ខាងក្រោយ​រូប​សញ្ញា​ជា GdkColor"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:226
+msgid "Logo Background color set"
+msgstr "កំណត់​ពណ៌​ផ្ទៃ​ខាងក្រោយ​រូប​សញ្ញា"
+
+#: ../libgnomeui/gnome-druid-page-standard.c:227
+msgid "Logo Background color is set"
+msgstr "កំណត់​ពណ៌​ផ្ទៃ​ខាង​ក្រោយ​រូប​សញ្ញា"
+
+#: ../libgnomeui/gnome-druid.c:153
+msgid "Show Finish"
+msgstr "បញ្ចប់​ការ​បង្ហាញ"
+
+#: ../libgnomeui/gnome-druid.c:154
+msgid "Show the 'Finish' button instead of the 'Next' button"
+msgstr "បង្ហាញ​ប៊ូតុង 'បញ្ចប់' ជំនួស​ប៊ូតុង 'បន្ទាប់'"
+
+#: ../libgnomeui/gnome-druid.c:161
+msgid "Show Help"
+msgstr "បង្ហាញ​ជំនួយ"
+
+#: ../libgnomeui/gnome-druid.c:162
+msgid "Show the 'Help' button"
+msgstr "បង្ហាញ​ប៊ូតុង​ 'ជំនួយ'"
+
+#: ../libgnomeui/gnome-entry.c:192 ../libgnomeui/gnome-entry.c:193
+#: ../libgnomeui/gnome-file-entry.c:233 ../libgnomeui/gnome-icon-entry.c:169
+msgid "History ID"
+msgstr "លេខ​សម្គាល់​ប្រវត្តិ"
+
+#: ../libgnomeui/gnome-entry.c:199
+msgid "GTK entry"
+msgstr "ធាតុ GTK"
+
+#: ../libgnomeui/gnome-entry.c:200
+msgid "The GTK entry"
+msgstr "ធាតុ GTK"
+
+#: ../libgnomeui/gnome-file-entry.c:234
+msgid ""
+"Unique identifier for the file entry.  This will be used to save the history "
+"list."
+msgstr "ឧបករណ៍​សម្គាល់​តែមួយ​សម្រាប់​ធាតុ​ឯកសារ ។ វា​នឹង​ត្រូវ​បាន​ប្រើ​ ដើម្បី​រក្សាទុក​បញ្ជី​ប្រវត្តិ ។"
+
+#: ../libgnomeui/gnome-file-entry.c:242 ../libgnomeui/gnome-icon-entry.c:178
+msgid "Browse Dialog Title"
+msgstr "រក​មើល​ចំណងជើង​ប្រអប់"
+
+#: ../libgnomeui/gnome-file-entry.c:243
+msgid "Title for the Browse file dialog."
+msgstr "ចំណងជើង​សម្រាប់​រក​មើល​ប្រអប់​ឯកសារ"
+
+#: ../libgnomeui/gnome-file-entry.c:250
+msgid "Directory Entry"
+msgstr "ធាតុ​ថត"
+
+#: ../libgnomeui/gnome-file-entry.c:251
+msgid ""
+"Whether the file entry is being used to enter directory names or complete "
+"filenames."
+msgstr "ថា​តើ​ធាតុ​ឯកសារ​ត្រូវ​បាន​ប្រើ ដើម្បី​បញ្ចូល​ឈ្មោះ​ថត ឬ​ឈ្មោះ​​ឯកសារ​ដែរ​ឬ​ទេ ។"
+
+#: ../libgnomeui/gnome-file-entry.c:259
+msgid "Modal"
+msgstr "បែបបទ"
+
+#: ../libgnomeui/gnome-file-entry.c:260
+msgid "Whether the Browse file window should be modal."
+msgstr "ថា​តើ​រក​មើល​បង្អួច​ឯកសារ​គួរតែ​ធ្វើ​បែបបទ​ដែរ​ឬ​ទេ ។"
+
+#: ../libgnomeui/gnome-file-entry.c:267 ../libgnomeui/gnome-icon-entry.c:194
+msgid "Filename"
+msgstr "ឈ្មោះ​ឯកសារ"
+
+#: ../libgnomeui/gnome-file-entry.c:268
+msgid "Filename that should be displayed in the file entry."
+msgstr "ឈ្មោះ​ឯកសារ​ដែល​គួរ​ត្រូវ​បាន​បង្ហាញ​នៅ​ក្នុង​ធាតុ​ឯកសារ ។"
+
+#: ../libgnomeui/gnome-file-entry.c:276
+msgid "Default Path"
+msgstr "ផ្លូវ​លំនាំដើម"
+
+#: ../libgnomeui/gnome-file-entry.c:277
+msgid "Default path for the Browse file window."
+msgstr "ផ្លូវ​លំនាំដើម​សម្រាប់​រក​មើល​បង្អួច​ឯកសារ ។"
+
+#: ../libgnomeui/gnome-file-entry.c:284
+msgid "GnomeEntry"
+msgstr "GnomeEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:285
+msgid ""
+"GnomeEntry that the file entry uses for entering filenames.  You can use "
+"this property to get the GnomeEntry if you need to modify or query any of "
+"its parameters."
+msgstr ""
+"GnomeEntry ប្រើ​ធាតុ​ឯកសារ​សម្រាប់​បញ្ចូល​ឈ្មោះ​ឯកសារ ។ អ្នក​អាច​ប្រើ​លក្ខណ​សម្បត្តិ​នេះ ដើម្បី​ទទួល​បាន "
+"GnomeEntry ប្រសិនបើ​អ្នក​ត្រូវ​ការ​កែប្រែ ឬ​សួរ​អំពី​ប៉ារ៉ាម៉ែត្រ​របស់​វា ។"
+
+#: ../libgnomeui/gnome-file-entry.c:295
+msgid "GtkEntry"
+msgstr "GtkEntry"
+
+#: ../libgnomeui/gnome-file-entry.c:296
+msgid ""
+"GtkEntry that the file entry uses for entering filenames.  You can use this "
+"property to get the GtkEntry if you need to modify or query any of its "
+"parameters."
+msgstr ""
+"GtkEntry ប្រើ​ធាតុ​ឯកសារ​សម្រាប់​​បញ្ចូល​ឈ្មោះ​ឯកសារ ។ អ្នក​អាច​​ប្រើ​លក្ខណ​សម្បត្តិ ដើម្បី​ទទួល GtkEntry "
+"ប្រសិនបើ​អ្នក​ត្រូវ​ការ​កែប្រែ ឬ​សួរ​អំពី​ប៉ារ៉ាម៉ែត្រ​របស់​វា ។"
+
+#: ../libgnomeui/gnome-file-entry.c:306
+msgid "Use GtkFileChooser"
+msgstr "ប្រើ GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:307
+msgid ""
+"Whether to use the new GtkFileChooser widget or the GtkFileSelection widget "
+"to select files."
+msgstr ""
+"ថា​តើ​ត្រូវ​ប្រើ​ធាតុ​ក្រាហ្វិក GtkFileChooser ថ្មី ឬ​ធាតុ​ក្រាហ្វិក GtkFileSelection ដើម្បី​ជ្រើស​"
+"ឯកសារ ។"
+
+#: ../libgnomeui/gnome-file-entry.c:316
+msgid "GtkFileChooser Action"
+msgstr "អំពី GtkFileChooser"
+
+#: ../libgnomeui/gnome-file-entry.c:317
+msgid "The type of operation that the file selector is performing."
+msgstr "ប្រភេទ​ប្រតិបត្តិការ​ដែល​កម្មវិធី​ជ្រើស​ឯកសារ​កំពុង​​តែ​ប្រតិបត្តិ ។"
+
+#: ../libgnomeui/gnome-file-entry.c:652 ../libgnomeui/gnome-file-entry.c:689
+msgid "Select file"
+msgstr "ជ្រើស​ឯកសារ"
+
+#: ../libgnomeui/gnome-file-entry.c:814
+msgid "Path"
+msgstr "ផ្លូវ"
+
+#: ../libgnomeui/gnome-file-entry.c:814
+msgid "Path to file"
+msgstr "ផ្លូវ​ទៅកាន់​ឯកសារ"
+
+#: ../libgnomeui/gnome-file-entry.c:843
+msgid "_Browse..."
+msgstr "រក​មើល..."
+
+#: ../libgnomeui/gnome-file-entry.c:844
+msgid "Pop up a file selector to choose a file"
+msgstr "កម្មវិធី​ជ្រើស​ឯកសារ​​លេច​ឡើង ដើម្បី​ជ្រើស​ឯកសារ"
+
+#: ../libgnomeui/gnome-font-picker.c:58
+msgid "sans 12"
+msgstr "sans 12"
+
+#: ../libgnomeui/gnome-font-picker.c:59
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+
+#: ../libgnomeui/gnome-font-picker.c:60
+msgid "Pick a Font"
+msgstr "រើស​ពុម្ព​អ​ក្សរ"
+
+#: ../libgnomeui/gnome-font-picker.c:148
+msgid "The title of the selection dialog box"
+msgstr "ចំណងជើង​ក្នុង​ការ​ជ្រើសរើស​ប្រអប់"
+
+#: ../libgnomeui/gnome-font-picker.c:156
+msgid "Mode"
+msgstr "របៀប"
+
+#: ../libgnomeui/gnome-font-picker.c:157
+msgid "The mode of operation of the font picker"
+msgstr "របៀប​ប្រតិបត្តិការ​កម្មវិធី​រើស​ពុម្ព​អក្សរ"
+
+#: ../libgnomeui/gnome-font-picker.c:166
+msgid "Font name"
+msgstr "ឈ្មោះ​ពុម្ព​អក្សរ"
+
+#: ../libgnomeui/gnome-font-picker.c:167
+msgid "Name of the selected font"
+msgstr "ឈ្មោះ​ពុម្ព​អក្សរ​ដែល​បាន​ជ្រើស"
+
+#: ../libgnomeui/gnome-font-picker.c:176 ../libgnomeui/gnome-font-picker.c:972
+msgid "Font"
+msgstr "ពុម្ព​អក្សរ"
+
+#: ../libgnomeui/gnome-font-picker.c:177
+msgid "The selected GtkFont"
+msgstr "បាន​ជ្រើស GtkFont"
+
+#: ../libgnomeui/gnome-font-picker.c:184
+msgid "Preview text"
+msgstr "មើល​អត្ថបទ​ជាមុន"
+
+#: ../libgnomeui/gnome-font-picker.c:185
+msgid "Preview text shown in the dialog"
+msgstr "មើល​អត្ថបទ​ជាមុន​ដែល​បាន​បង្ហាញ​ក្នុង​ប្រអប់"
+
+#: ../libgnomeui/gnome-font-picker.c:193
+msgid "Use font in label"
+msgstr "ប្រើ​ពុម្ព​អក្សរ​​ជា​ស្លាក"
+
+#: ../libgnomeui/gnome-font-picker.c:194
+msgid "Use font in the label in font info mode"
+msgstr "ប្រើ​ពុម្ព​អក្សរ​​ជា​ស្លាក​នៅ​ក្នុង​​របៀប​ព័ត៌មាន​ពុម្ព​អក្សរ"
+
+#: ../libgnomeui/gnome-font-picker.c:202
+msgid "Font size for label"
+msgstr "ទំហំ​ពុម្ព​អក្សរ​សម្រាប់​ស្លាក"
+
+#: ../libgnomeui/gnome-font-picker.c:203
+msgid "Font size for label in font info mode"
+msgstr "ទំហំ​ពុម្ព​អក្សរ​សម្រាប់​ស្លាក​​ជា​របៀប​ព័ត៌មាន​ពុម្ព​អក្សរ"
+
+#: ../libgnomeui/gnome-font-picker.c:213
+msgid "Show size"
+msgstr "បង្ហាញ​ទំហំ"
+
+#: ../libgnomeui/gnome-font-picker.c:214
+msgid "Show size in font info mode"
+msgstr "បង្ហាញ​ទំហំ​ជា​របៀប​ព័ត៌មាន​ពុម្ព​អក្សរ"
+
+#: ../libgnomeui/gnome-gconf-ui.c:61
+msgid "GNOME GConf UI Support"
+msgstr "គាំទ្រ GNOME GConf UI"
+
+#: ../libgnomeui/gnome-gconf-ui.c:96
+msgid "_Details"
+msgstr "សេចក្ដី​លម្អិត"
+
+#: ../libgnomeui/gnome-gconf-ui.c:171
+#, c-format
+msgid ""
+"The application \"%s\" attempted to change an aspect of your configuration "
+"that your system administrator or operating system vendor does not allow you "
+"to change. Some of the settings you have selected may not take effect, or "
+"may not be restored next time you use the application."
+msgstr ""
+"កម្មវិធី \"%s\" ត្រូវ​ផ្លាស់ប្ដូរ​ទិដ្ឋភាព​នៃ​ការ​កំណត់​រចនាសម្ព័ន្ធ​របស់​អ្នក ដែល​អ្នក​គ្រប់គ្រង​ប្រព័ន្ធ​របស់​អ្នក "
+"ឬ​​ក្រុមហ៊ុន​លក់​ប្រព័ន្ធ​ប្រតិបត្តិការ​មិន​ត្រូវ​បាន​អនុញ្ញាត​ឲ្យ​អ្នក​ផ្លាស់ប្ដូរ​បាន​ទេ ។ ការ​កំណត់​មួយ​ចំនួន​ដែល​អ្នក​បាន​"
+"ជ្រើស​អាច​គ្មាន​ប្រសិទ្ធភាព ឬ​អាច​មិន​ត្រូវ​បាន​ស្ដារ​នៅ​ពេលវេលា​បន្ទាប់ អ្នក​អាច​ប្រើ​កម្មវិធី​​បាន ។"
+
+#: ../libgnomeui/gnome-gconf-ui.c:178
+#, c-format
+msgid ""
+"An error occurred while loading or saving configuration information for %s. "
+"Some of your configuration settings may not work properly."
+msgstr ""
+"កំហុស​បាន​កើត​ឡើង​ខណៈ​ពេល​ផ្ទុក ឬ​រក្សាទុក​ព័ត៌មាន​ការ​កំណត់​រចនាសម្ព័ន្ធ​អំពី %s ។ ចំនួន​ការ​កំណត់​រចនាសម្ព័ន្ធ​"
+"របស់​អ្នក​​អាច​មិន​ដំណើរការ​​ដោយ​ត្រឹមត្រូវ​ឡើយ ។"
+
+#: ../libgnomeui/gnome-href.c:102
+msgid "URL"
+msgstr "URL"
+
+#: ../libgnomeui/gnome-href.c:103
+msgid "The URL that GnomeHRef activates"
+msgstr "URL ដែល​ធ្វើ​ឲ្យ GnomeHRef សកម្ម"
+
+#: ../libgnomeui/gnome-href.c:110
+msgid "Text"
+msgstr "អត្ថបទ"
+
+#: ../libgnomeui/gnome-href.c:111
+msgid "The text on the button"
+msgstr "អត្ថបទ​នៅ​ពេល​ចុច​ប៊ូតុង"
+
+#: ../libgnomeui/gnome-href.c:112
+msgid "End World Hunger"
+msgstr "បញ្ចប់ World Hunger"
+
+#: ../libgnomeui/gnome-href.c:118
+msgid "Link color"
+msgstr "ពណ៌​​តំណ"
+
+#: ../libgnomeui/gnome-href.c:119
+msgid "Color used to draw the link"
+msgstr "ពណ៌​ដែល​បាន​ប្រើ ដើម្បី​គូរ​ភ្ជាប់"
+
+#: ../libgnomeui/gnome-href.c:150
+msgid "This button will take you to the URI that it displays."
+msgstr "ប៊ូតុង​នេះ​នឹង​​នាំ​ឲ្យ​អ្នក​ទៅ​កាន់ URI ដែល​វា​បង្ហាញ​​ ។"
+
+#: ../libgnomeui/gnome-href.c:386
+msgid ""
+"An error has occurred while trying to launch the default web browser.\n"
+"Please check your settings in the 'Preferred Applications' preference tool."
+msgstr ""
+"កំហុស​បាន​កើត​ឡើង ខណៈ​ពេល​សាក​ល្បង​ចាប់ផ្ដើម​កម្មវិធី​រុករក​បណ្ដាញ​លំនាំដើម ។\n"
+"សូម​ពិនិត្យមើល​ការ​កំណត់​របស់​អ្នក​​នៅ​ក្នុង​ឧបករណ៍​ចំណូលចិត្ត 'កម្មវិធី​ដែល​ចូល​ចិត្ត' ។"
+
+#: ../libgnomeui/gnome-icon-entry.c:170
+msgid ""
+"Unique identifier for the icon entry.  This will be used to save the history "
+"list."
+msgstr "កម្មវិធី​សម្គាល់​តែមួយ​សម្រាប់​ធាតុ​រូបតំណាង ។  វា​នឹង​ត្រូវ​បាន​ប្រើ ដើម្បី​រក្សា​ទុក​​បញ្ជី​ប្រវត្តិ ។"
+
+#: ../libgnomeui/gnome-icon-entry.c:179
+msgid "Title for the Browse icon dialog."
+msgstr "ចំណងជើង​សម្រាប់​រកមើល​ប្រអប់​រូបតំណាង ។"
+
+#: ../libgnomeui/gnome-icon-entry.c:186
+msgid "Pixmap Directory"
+msgstr "ថត​ Pixmap"
+
+#: ../libgnomeui/gnome-icon-entry.c:187
+msgid "Directory that will be searched for icons."
+msgstr "ថត​ដែល​នឹង​ត្រូវ​បាន​ស្វែងរក​សម្រាប់​រូបតំណាង ។"
+
+#: ../libgnomeui/gnome-icon-entry.c:195
+msgid "Filename that should be displayed in the icon entry."
+msgstr "ឈ្មោះ​ឯកសារ​ដែល​គួរ​តែ​ត្រូវ​បាន​បង្ហាញ​នៅ​ក្នុង​ធាតុ​រូប​តំណាង ។"
+
+#: ../libgnomeui/gnome-icon-entry.c:203
+msgid "Picker dialog"
+msgstr "ប្រអប់​កម្មវិធី​ជ្រើស"
+
+#: ../libgnomeui/gnome-icon-entry.c:204
+msgid ""
+"Icon picker dialog.  You can use this property to get the GtkDialog if you "
+"need to modify or query any of its properties."
+msgstr ""
+"ប្រអប់​កម្មវិធី​ជ្រើស​រូបតំណាង ។ អ្នក​អាច​​ប្រើ​លក្ខណ​សម្បត្តិ​នេះ ដើម្បី​ទទួល​បាន GtkDialog ប្រសិនបើ​អ្នក​ត្រូវ​"
+"ការ​កែប្រែ ឬ​សួរ​​អំពី​លក្ខណ​សម្បត្តិ​របស់​វា​ ។"
+
+#: ../libgnomeui/gnome-icon-entry.c:312 ../libgnomeui/gnome-icon-entry.c:996
+msgid "Choose Icon"
+msgstr "ជ្រើស​រូបតំណាង"
+
+#: ../libgnomeui/gnome-icon-entry.c:766
+msgid "Icon selection dialog"
+msgstr "ប្រអប់​​ជម្រើស​រូបតំណាង"
+
+#: ../libgnomeui/gnome-icon-entry.c:767
+msgid "This dialog box lets you select an icon."
+msgstr "ប្រអប់​នេះ​​អនុញ្ញាត​ឲ្យ​អ្នក​ជ្រើស​រូបតំណាង ។"
+
+#: ../libgnomeui/gnome-icon-entry.c:773 ../libgnomeui/gnome-icon-entry.c:999
+msgid "Icon Selector"
+msgstr "កម្មវិធី​ជ្រើស​រូបតំណាង"
+
+#: ../libgnomeui/gnome-icon-entry.c:774
+msgid "Please pick the icon you want."
+msgstr "សូម​ជ្រើស​រូបតំណាង​ដែល​អ្នក​ចង់​បាន ។"
+
+#: ../libgnomeui/gnome-icon-entry.c:1000
+msgid "This button will open a window to let you select an icon."
+msgstr "ប៊ូតុង​នេះ​នឹង​បើក​បង្អួច ដែល​អនុញ្ញាត​ឲ្យ​អ្នក​ជ្រើស​រូបតំណាង​ ។"
+
+#: ../libgnomeui/gnome-icon-entry.c:1022
+msgid "Browse"
+msgstr "រក​មើល"
+
+#: ../libgnomeui/gnome-icon-entry.c:1025
+msgid "Icon path"
+msgstr "ផ្លូវ​រូបតំណាង"
+
+#: ../libgnomeui/gnome-icon-entry.c:1026
+msgid ""
+"Here you should enter the name of the directory where icon images are "
+"located."
+msgstr "ទីនេះ​អ្នក​គួរ​តែ​បញ្ចូល​ឈ្មោះ​ថត​ដែល​ដាក់​ទីតាំង​រូបភាព​រូបតំណាង ។"
+
+#: ../libgnomeui/gnome-icon-sel.c:293
+#, c-format
+msgid "GnomeIconSelection: '%s' does not exist or is not a directory"
+msgstr "GnomeIconSelection: '%s' មិន​មាន​ឡើយ ឬ​មិន​មែន​ជា​ថត​ឡើយ"
+
+#: ../libgnomeui/gnome-icon-sel.c:301
+#, c-format
+msgid "GnomeIconSelection: couldn't open directory '%s'"
+msgstr "GnomeIconSelection ៖ មិន​អាច​បើក​ថត​បាន​ទេ '%s'"
+
+#: ../libgnomeui/gnome-icon-sel.c:405
+msgid "Loading Icons..."
+msgstr "កំពុង​ផ្ទុក​រូបតំណាង..."
+
+#: ../libgnomeui/gnome-messagebox.c:107
+msgid "Information"
+msgstr "ព័ត៌មាន"
+
+#: ../libgnomeui/gnome-messagebox.c:112
+msgid "Warning"
+msgstr "ការ​ព្រមាន"
+
+#: ../libgnomeui/gnome-messagebox.c:118
+msgid "Error"
+msgstr "កំហុស"
+
+#: ../libgnomeui/gnome-messagebox.c:124
+msgid "Question"
+msgstr "សំណួរ"
+
+#: ../libgnomeui/gnome-messagebox.c:129
+msgid "Message"
+msgstr "សារ"
+
+#: ../libgnomeui/gnome-password-dialog.c:196
+msgid "_Username:"
+msgstr "ឈ្មោះ​អ្នក​ប្រើ ៖"
+
+#: ../libgnomeui/gnome-password-dialog.c:199
+msgid "_Domain:"
+msgstr "ដែន ៖"
+
+#: ../libgnomeui/gnome-password-dialog.c:202
+msgid "_Password:"
+msgstr "ពាក្យសម្ងាត់"
+
+#: ../libgnomeui/gnome-password-dialog.c:205
+msgid "_New password:"
+msgstr "ពាក្យ​សម្ងាត់​ថ្មី ៖"
+
+#: ../libgnomeui/gnome-password-dialog.c:206
+msgid "Con_firm password:"
+msgstr "អះអាង​ពាក្យ​សម្ងាត់ ៖"
+
+#: ../libgnomeui/gnome-password-dialog.c:209
+msgid "Password quality:"
+msgstr "គុណភាព​ពាក្យ​សម្ងាត់ ៖"
+
+#: ../libgnomeui/gnome-password-dialog.c:324
+msgid "Co_nnect"
+msgstr "តភ្ជាប់"
+
+#: ../libgnomeui/gnome-password-dialog.c:357
+msgid "Connect _anonymously"
+msgstr "តភ្ជាប់​ដោយ​អនាមិក"
+
+#: ../libgnomeui/gnome-password-dialog.c:362
+msgid "Connect as u_ser:"
+msgstr "តភ្ជាប់​ជា​អ្នក​ប្រើ ៖"
+
+#: ../libgnomeui/gnome-password-dialog.c:424
+msgid "_Forget password immediately"
+msgstr "ភ្លេច​ពាក្យ​សម្ងាត់​រំពេច​នេះ"
+
+#: ../libgnomeui/gnome-password-dialog.c:430
+msgid "_Remember password until you logout"
+msgstr "ចងចាំ​ពាក្យ​សម្ងាត់​រហូត​ដល់​អ្នក​ចេញ"
+
+#: ../libgnomeui/gnome-password-dialog.c:436
+msgid "_Remember forever"
+msgstr "ចងចាំ​ពាក្យ​សម្ងាត់​រហូត"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:104
+msgid "Do Preview"
+msgstr "មើល​ជាមុន"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:105
+msgid "Whether the pixmap entry should have a preview."
+msgstr "ថា​តើ​ធាតុ pixmap គួរតែ​​មើល​ជា​មុន​ដែរ​ឬ​ទេ ។"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:179
+#: ../libgnomeui/gnome-pixmap-entry.c:473
+msgid "No Image"
+msgstr "គ្មាន​រូបភាព"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:196
+msgid "Image Preview"
+msgstr "មើល​រូបភាព​ជា​មុន"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:197
+msgid "A preview of the image currently specified"
+msgstr "មើល​រូបភាព​ដែល​បាន​បញ្ជាក់​​ជាមុន"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:408
+msgid "Can't find an hbox, using a normal file selection"
+msgstr "មិន​អាច​ស្វែងរក​ hbox ឃើញ​ឡើយ ប្រើ​ជម្រើស​ឯកសារ​ធម្មតា"
+
+#: ../libgnomeui/gnome-pixmap-entry.c:414
+msgid "Preview"
+msgstr "មើល​ជាមុន"
+
+#: ../libgnomeui/gnome-scores.c:77
+msgid "Top Ten"
+msgstr "Top Ten"
+
+#: ../libgnomeui/gnome-scores.c:90
+msgid "User"
+msgstr "អ្នក​ប្រើ"
+
+#: ../libgnomeui/gnome-scores.c:93
+msgid "Score"
+msgstr "ពិន្ទុ"
+
+#. TRANSLATORS NOTE: Date format used when showing scores in games.
+#. * Please refer to manpage of strftime(3) for complete reference.
+#.
+#: ../libgnomeui/gnome-scores.c:193
+msgid "%a %b %d %T %Y"
+msgstr "%a %b %d %T %Y"
+
+#: ../libgnomeui/gnome-scores.c:394
+msgid "Sans 14"
+msgstr "Sans 14"
+
+#: ../libgnomeui/gnome-stock-icons.c:139
+msgid "Table Borders"
+msgstr "ស៊ុម​តារាង"
+
+#: ../libgnomeui/gnome-stock-icons.c:140
+msgid "Table Fill"
+msgstr "បំពេញ​តារាង"
+
+#: ../libgnomeui/gnome-stock-icons.c:141
+msgid "Bulleted List"
+msgstr "Bulleted List"
+
+#: ../libgnomeui/gnome-stock-icons.c:142
+msgid "Numbered List"
+msgstr "បញ្ជី​ដែល​បាន​បង់​លេខ"
+
+#: ../libgnomeui/gnome-stock-icons.c:143
+msgid "Indent"
+msgstr "ចូល​បន្ទាត់"
+
+#: ../libgnomeui/gnome-stock-icons.c:144
+msgid "Un-Indent"
+msgstr "មិន​ចូល​បន្ទាត់"
+
+#: ../libgnomeui/gnome-stock-icons.c:145
+msgid "About"
+msgstr "អំពី"
+
+#: ../libgnomeui/gnome-ui-init.c:134 ../libgnomeui/gnome-ui-init.c:160
+msgid "Disable Crash Dialog"
+msgstr "បិទ​ប្រអប់​គាំង"
+
+#: ../libgnomeui/gnome-ui-init.c:143
+msgid "GNOME GUI Library:"
+msgstr "បណ្ណាល័យ GNOME GUI ៖"
+
+#: ../libgnomeui/gnome-ui-init.c:144
+msgid "Show GNOME GUI options"
+msgstr "បង្ហាញ​ជម្រើស GNOME GUI"
+
+#: ../libgnomeui/gnome-ui-init.c:162
+msgid "X display to use"
+msgstr "X display ត្រូវ​ប្រើ"
+
+#: ../libgnomeui/gnome-ui-init.c:162
+msgid "DISPLAY"
+msgstr "បង្ហាញ"
+
+#: ../libgnomeui/gnome-ui-init.c:167
+msgid "GNOME GUI Library"
+msgstr "បណ្ណាល័យ GNOME GUI"
+
+#: ../libgnomeui/gnome-ui-init.c:232
+msgid "Could not open link"
+msgstr "មិន​អាច​បើក​តំណ​បាន​ទេ"
+
+#: ../test-gnome/testgnome.xml.h:2
+msgid "Exit the test"
+msgstr "ចេញ​សាកល្បង"
